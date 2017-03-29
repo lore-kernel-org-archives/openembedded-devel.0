@@ -1,49 +1,41 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id F0E7F77BE2
+Return-Path: <twoerner@gmail.com>
+Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 137C371ABB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 14:30:54 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id k6so2253427wre.3
+	Wed, 29 Mar 2017 19:35:22 +0000 (UTC)
+Received: by mail-vk0-f46.google.com with SMTP id z204so30354917vkd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 07:30:56 -0700 (PDT)
+	Wed, 29 Mar 2017 12:35:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=kO+jckMzVks7CDGiQhm5DVcEneNkY7OJr0KmghRyGOM=;
-	b=d/nrxkjRf145rvQBLlT3Z7zSm8kbhAcspNSM8iFz+SUNKYBYyy2DyY/4Vq2z5FpEie
-	yi8RnTCimfLn1bphEysoO/3nitjCSS8pBqKW/c8Tx13COJogdGdTAD0dSuFz9II7idnE
-	G7lHZalv09zcbaoV0QEVhvvG9mO4QqjPFbdD0UpaFLfhNnYjpch33AVE2Omd8eF/GrWu
-	9Ux7KvMaYmtc2HtfNEINxeIdURe2OUNRjXwMCIRHxv4bxRZkoBcddSk97ueq7Fj93Lxw
-	a8EM3MAI0P1T2Wmu0+TogmNeJUl+tQJ4dgTo5aPHcPhY7z9K2K3tgW6vuZ4Plq1fxzDt
-	ZW2g==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=dbt2wAEwnarqSuql9E7SL7OkKp5QontPTT0S4GMia6Q=;
+	b=IAc3TiNeEX/pqa3k2RbTPKKaXjQk1VHUG0ctXSnf32oEPAvwbVjZ8kIRP8MBXobxQz
+	wBa7k19zgm9bvelZEy9dm/ZEGpspak+DP5qLt2gYFUiikARcTSOeq+DtEHmwMFZ7gDv4
+	oNcvh2UwyufER77a4RaKEym4nm/xqfHCBTkv/l5CktU5ICxhtWSJWUPtwebQ8HKOPE5m
+	9rjfKFTZfDUBVVwOGPJf6s8FdC5F0q2ued0OzGnLoHTCvA2S913PDoyfEzIjqJAq9Gsz
+	t4jxE2nSGL3a8CMpbmGHGjKyQoRcv2/RuBei+wEshp+j7IAOeucW6fjV6CZxSFDRje0w
+	kgDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=kO+jckMzVks7CDGiQhm5DVcEneNkY7OJr0KmghRyGOM=;
-	b=R2QL6UdMqCe6/UdJ1FxSMx0yueF4mpJP7CpClnhGDAk8H6YOXdnYxYLxD3+9k1V1I6
-	spqBIEIB8F6+yQzcpYqHK3JT9f1LZ2aq4lMU3ELcmezoVpeuiz6NFTe+fimpapo9zZki
-	en0FE6ni5VcDSAJn0f/V8aw6GG029/6abIIGOtK+vEJN/PnoNrPica8mmq49qCK36FYN
-	xyxZVc84oJ9F8q/+syIpj/xjJzmdeyQERozyFP/ZQN4wrXWLKcEdgwWzn5OajkPsI3Ns
-	59egDISh97GJoQTtjeJMZlvWpv0NMtBz0Y6tMCjEX9qLHzlEUXu455sjkjnHN3hYVElz
-	l5+Q==
-X-Gm-Message-State: AFeK/H1eN5y+IEGOuwqBckD0YDD8K2QWipr9L+CqYvcOZFI6vt8mGyAkXve/8U7oP8tnbhrvWTxImzqN+l1HOg==
-X-Received: by 10.28.199.132 with SMTP id x126mr999158wmf.37.1490797855551;
-	Wed, 29 Mar 2017 07:30:55 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=dbt2wAEwnarqSuql9E7SL7OkKp5QontPTT0S4GMia6Q=;
+	b=Orz5ZkerkxYOJRGph8/FWVV9iLCHEZe7hUg0qQ0zlQTQFaWoiZuyd66PDsAXoUMCx4
+	2uthvr1IbspGHtIEsaD2/axGfs8JF10uxcFW0L0lGNJnjUhuyTx3JXEAAw6HxNonKVXV
+	UwIUbqbvY/TGtygFKFhTdTHXShnNz4pXOjQOLAkroIuBoX1pdzz6ZAeuiKnHdPNqMYtD
+	EnGbxn4fjh3EkXH+aaImR2dM8yutiqKZqTZHZ/TvnA7lk6NnazZ1KqllUtaLQMa3hxVY
+	VTqBmiSwga69UCMKLxWYGwND5nGR5A3+LZg7wbH5+Ns1iAX9dQOvMFYwL215YPI6umWW
+	FF+g==
+X-Gm-Message-State: AFeK/H2L7YCRM1ul16eNy88vX7VyHl/uFEgGkc2OmOtumoLrCam18Whuq9LQ4L2lTrfMEG7F4Zw7CE6lmG9/+A==
+X-Received: by 10.176.84.209 with SMTP id q17mr1193862uaa.129.1490816123356;
+	Wed, 29 Mar 2017 12:35:23 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Wed, 29 Mar 2017 07:30:24 -0700 (PDT)
-In-Reply-To: <20170329142150.GD3298@jama>
-References: <20170307071349.16444-1-raj.khem@gmail.com>
-	<20170307071349.16444-4-raj.khem@gmail.com>
-	<20170329110515.GC3298@jama>
-	<CAMKF1sqMeBHPwBdv3CxsDcLEXTiw-stRdJLq0qV+U0sV+fTVsQ@mail.gmail.com>
-	<20170329142150.GD3298@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 29 Mar 2017 07:30:24 -0700
-Message-ID: <CAMKF1sp=v6p2FhbcoAdZ69-frB_aXBgR4cVMJYX0Q122Ehh4PA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 04/14] gpm: Update to use git src uri
+Received: by 10.103.43.65 with HTTP; Wed, 29 Mar 2017 12:35:22 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Wed, 29 Mar 2017 15:35:22 -0400
+Message-ID: <CAHUNapSj77gK_kExofCWaeREZOqwQoHQei4YZbqE1F5Uh=2CFA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-browser] calling all chromium recipe users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 14:30:55 -0000
+X-List-Received-Date: Wed, 29 Mar 2017 19:35:23 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Mar 29, 2017 at 7:21 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Wed, Mar 29, 2017 at 07:06:44AM -0700, Khem Raj wrote:
->> >> +do_install_append () {
->> >> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
->> >> +        install -d ${D}${systemd_system_unitdir}
->> >> +        sed 's:@bindir@:${bindir}:' < ${WORKDIR}/gpm.service.in >${D}${systemd_system_unitdir}/gpm.service
->> >
->> > Did you forgot to add gpm.service.in in SRC_URI?
->>
->> I sent a V2 for this patch with another series i sent later. So you can drop it.
->> see
->>
->> https://patchwork.openembedded.org/patch/138243/
->
-> I think this is the one I was testing and I still don't see
-> gpm.service.in in SRC_URI, so it doesn't get unpacked in WORKDIR and the
-> sed call fails.
->
+When testing changes to the chromium[-wayland] recipes, it would be
+great to know the layers, configurations, and MACHINEs with which
+people are building.
 
-yes drop this for now. I will send a v3 with next pull request.
+For example I care about chromium running on X11 for minnow
+(meta-intel) and raspberry pi (meta-raspberrypi). How are other people
+running chromium?
 
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Also, are you able to run with accelerated graphics? If so, what
+configuration are you using?
+
+Specifically, I assume the trick is the correct configuration of various
+
+    PREFERRED_PROVIDER_virtual/X = Y
+
+where X is one of {mesa|gl|egl|gles1|gles2} and Y is probably
+something BSP-specific. Is anything else needed to get accelerated
+graphics working with chromium?
 
