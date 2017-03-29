@@ -1,51 +1,46 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
-	[209.85.214.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 81DAC65D00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 08:35:25 +0000 (UTC)
-Received: by mail-it0-f44.google.com with SMTP id y18so49067935itc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 01:35:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:mime-version:content-transfer-encoding;
-	bh=0LIuyGQ/YDB54r08cjDdh+YKAm7vTKGh1OePv61umJo=;
-	b=WsYu2RzhCGBsAYTcIVnplou+eOfF/Wy5/RpV1qd9uPbUt0vc7VfJqJDWP2d8egAlXz
-	Vb3Wotr9a+jETxncvtgDwB6NzL6TIO6eOhhMce2MfVOnCJwneI8/6lbsFJwPVp2Frz/3
-	Gby6M1p5k4zWXcnDXYwI86SFSfF+I8OcGWtpc1GbbcnIB/eS0y615YG8tZ6CAn8+qAPi
-	F6gkUzBehLUmNOXqDgIPSmta6ebQEgRZ0sUTo7OoKCRdZvR2FYLAyd3st2tZrfa6ucaF
-	l0WF1oPCjybfBgo0+MHNwmQpLdNTLSzMfAcWKy9nbE7jk+qowQNnbzxXka+PhgHHvykx
-	qp6w==
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 6431177B6E;
+	Wed, 29 Mar 2017 09:14:45 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id o81so3837421wmb.0;
+	Wed, 29 Mar 2017 02:14:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=ltvUDJJKNtCaEJoq0TyufaJHVJ+TArUXiraiH9MRSbo=;
+	b=F4k4AmE38gnkWdfoOJaB9TVQ2uZuE7B/qkieFnGGCZccTSV5OnDEiU5cXN7ue8p9IA
+	FRYwEdQ+Rx60OVfCa2I0O2F1Q2KlfpiEuf57EbyfhVtvf4Y36+1hFYxbyWNjprinrdcS
+	rpoXkD2Xp0hS7uz3JNbKVfIvBTyYuwZ2Wyw7VzJG6Pqfea6KMx2VjPC4HkGKA+zWAPR9
+	9M8Os8CSraC6ZDLj65AhvWZnJjLet/bAot6urPO8oxpRw2qtOGcC1gb3gknTl30AEgLw
+	bRr6ciV8X4NSY3F6OwGLt+oKpjNMJAHnBLS9efx6cSUAr5edvHtL8ZJGtyTddGQwskmr
+	pNDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=0LIuyGQ/YDB54r08cjDdh+YKAm7vTKGh1OePv61umJo=;
-	b=JBO42bURQH0Cg4dSSEKIwAyhabarxhAeHcT+G9gTwJ5eQpbo+k7YK1uQ5Is6JZmTCQ
-	YNFuW/YLnuYGO3vtwUGjvVpSn5cWOl/Sfp3QKv8a4r8ueGIhLMHlqI89uwKBCv9Kt6Ip
-	40cI+tkunAGGROS8AIgqfJSCfLAPg/VlV4jvC7IMr+3AHePbZvs9QvhvUKryDjMgtfhA
-	LKRmSxvWiG4ObutXrVM1lxFbXiGErBX3uhQy+gxyhBg9mY2LBUU2Iyub9ZgaEUfJKEzh
-	/sDkUWw9kbXJcgSDaR5ZTe9wj/TwSAZSnr5qAScv31VHT6n8bwqno+r1ApNl6lYvCFMl
-	4Pag==
-X-Gm-Message-State: AFeK/H0fSDATeY6sUUG3I1fUnnX1wCVMSljF+Xqpepj4zwJry72RzrKQ1qlOTrME07g/Ivu0
-X-Received: by 10.107.138.14 with SMTP id m14mr34695042iod.235.1490776527296; 
-	Wed, 29 Mar 2017 01:35:27 -0700 (PDT)
-Received: from pohly-mobl1 (p5DE8D6D7.dip0.t-ipconnect.de. [93.232.214.215])
-	by smtp.gmail.com with ESMTPSA id
-	m63sm3402823ioa.15.2017.03.29.01.35.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Mar 2017 01:35:26 -0700 (PDT)
-Message-ID: <1490776523.6396.407.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 29 Mar 2017 10:35:23 +0200
-In-Reply-To: <20170329072316.GA3298@jama>
-References: <20170329072316.GA3298@jama>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=ltvUDJJKNtCaEJoq0TyufaJHVJ+TArUXiraiH9MRSbo=;
+	b=NOU/yai4ZPN3gSkYBNI6aPnPhvxJb0b76+HP0LFhABoSWY5Q4JjYNigrRcz2JIDalS
+	l4L21h0rxHilzP+wAQB4k4/ZbUvjbBwBRaT8Qfi2R47n++ZIdQik7GPvUYaq087CvF+S
+	40sO82PjiHIkRwZlDuAgt1TPYV8+563GEba+fGAvmcee07q6+b/L8k2B9cOUt+HKOsl3
+	M5nTGNJS1ogAf+eXxrwWSDWUvm3KrCJSlY6i3kuP4MrErLyUkfty2B61FESg7sgwcTsd
+	5o4fNYmxhZfrCHVrtDHDqIu+kVQaAotcWpP7jTpQXS1pXatSl+MDp/pbT8KdM81RYqMD
+	PxWA==
+X-Gm-Message-State: AFeK/H1TTv7+lZS7GQfQXFvurWGmObWtKRf42ZTXbGdY8inN7EysqSnowxyqXbJaCsAoAQ==
+X-Received: by 10.28.174.203 with SMTP id x194mr304688wme.85.1490778886818;
+	Wed, 29 Mar 2017 02:14:46 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	n80sm8537729wrb.24.2017.03.29.02.14.45
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 29 Mar 2017 02:14:45 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 29 Mar 2017 11:14:44 +0200
+To: Patrick Ohly <patrick.ohly@intel.com>
+Message-ID: <20170329091444.GB3298@jama>
+References: <20170329072316.GA3298@jama> <1490776523.6396.407.camel@intel.com>
+MIME-Version: 1.0
+In-Reply-To: <1490776523.6396.407.camel@intel.com>
+User-Agent: Mutt/1.8.0 (2017-02-23)
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -62,40 +57,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 08:35:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 29 Mar 2017 09:14:47 -0000
+X-Groupsio-MsgNum: 65948
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="i0/AhcQY5QxfSsSZ"
+Content-Disposition: inline
 
-On Wed, 2017-03-29 at 09:23 +0200, Martin Jansa wrote:
-> INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.report.20170328_014155.log
+--i0/AhcQY5QxfSsSZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-That used OE-core 552bd78, if I read this right:
+On Wed, Mar 29, 2017 at 10:35:23AM +0200, Patrick Ohly wrote:
+> On Wed, 2017-03-29 at 09:23 +0200, Martin Jansa wrote:
+> > INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2=
+-linux.org/buildlogs/oe/world/pyro/log.report.20170328_014155.log
+>=20
+> That used OE-core 552bd78, if I read this right:
+>=20
+>         =3D=3D Tested changes (not included in master yet) - openembedded=
+-core =3D=3D
+>         latest upstream commit:=20
+>         552bd78 wic: use kernel_dir to find systemd-efi bootloader
+>=20
+> >     * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
+>=20
+> http://errors.yoctoproject.org/Errors/Details/135202/
+>=20
+> "gcc-ar: not found" - that should have been fixed by OE-core 23a12d87a6
+> "fix toolchain selection", which is included in OE-core 552bd78 and thus
+> should have been included in the build.
+>=20
+> However, the error above was "Submitted on: 11/03/17 10:13", which was a
+> while ago and in particular before that fix.
+>=20
+> Did ovmf really fail in the latest world build?
 
-        == Tested changes (not included in master yet) - openembedded-core ==
-        latest upstream commit: 
-        552bd78 wic: use kernel_dir to find systemd-efi bootloader
+The report shows:
+http://errors.yoctoproject.org/Errors/Build/34933/
+which leads to:
 
->     * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
+http://errors.yoctoproject.org/Errors/Details/138261/
+Submitted on: 27/03/17 05:31
 
-http://errors.yoctoproject.org/Errors/Details/135202/
-
-"gcc-ar: not found" - that should have been fixed by OE-core 23a12d87a6
-"fix toolchain selection", which is included in OE-core 552bd78 and thus
-should have been included in the build.
-
-However, the error above was "Submitted on: 11/03/17 10:13", which was a
-while ago and in particular before that fix.
-
-Did ovmf really fail in the latest world build?
-
--- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
+So yes it failed again, but this time with different error:
+TOPDIR/tmp-glibc/work/i586-oe-linux/ovmf/git-r0/recipe-sysroot-native/usr/b=
+in/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld:
+internal error in do_layout, at ../../gold/object.cc:1821
 
 
+>=20
+> --=20
+> Best Regards, Patrick Ohly
+>=20
+> The content of this message is my personal opinion only and although
+> I am an employee of Intel, the statements I make here in no way
+> represent Intel's position on the issue, nor am I authorized to speak
+> on behalf of Intel on this matter.
+>=20
+>=20
+>=20
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--i0/AhcQY5QxfSsSZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWNt7AwAKCRA3VSO3ZXaA
+HI9eAJ9xiveMGZGUIPYH8hNMF0gk+/YjQQCgrnPPp/058SBXoqZwKazmfoCThvo=
+=qK0p
+-----END PGP SIGNATURE-----
+
+--i0/AhcQY5QxfSsSZ--
