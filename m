@@ -1,41 +1,36 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 137C371ABB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 19:35:22 +0000 (UTC)
-Received: by mail-vk0-f46.google.com with SMTP id z204so30354917vkd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 12:35:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=dbt2wAEwnarqSuql9E7SL7OkKp5QontPTT0S4GMia6Q=;
-	b=IAc3TiNeEX/pqa3k2RbTPKKaXjQk1VHUG0ctXSnf32oEPAvwbVjZ8kIRP8MBXobxQz
-	wBa7k19zgm9bvelZEy9dm/ZEGpspak+DP5qLt2gYFUiikARcTSOeq+DtEHmwMFZ7gDv4
-	oNcvh2UwyufER77a4RaKEym4nm/xqfHCBTkv/l5CktU5ICxhtWSJWUPtwebQ8HKOPE5m
-	9rjfKFTZfDUBVVwOGPJf6s8FdC5F0q2ued0OzGnLoHTCvA2S913PDoyfEzIjqJAq9Gsz
-	t4jxE2nSGL3a8CMpbmGHGjKyQoRcv2/RuBei+wEshp+j7IAOeucW6fjV6CZxSFDRje0w
-	kgDQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=dbt2wAEwnarqSuql9E7SL7OkKp5QontPTT0S4GMia6Q=;
-	b=Orz5ZkerkxYOJRGph8/FWVV9iLCHEZe7hUg0qQ0zlQTQFaWoiZuyd66PDsAXoUMCx4
-	2uthvr1IbspGHtIEsaD2/axGfs8JF10uxcFW0L0lGNJnjUhuyTx3JXEAAw6HxNonKVXV
-	UwIUbqbvY/TGtygFKFhTdTHXShnNz4pXOjQOLAkroIuBoX1pdzz6ZAeuiKnHdPNqMYtD
-	EnGbxn4fjh3EkXH+aaImR2dM8yutiqKZqTZHZ/TvnA7lk6NnazZ1KqllUtaLQMa3hxVY
-	VTqBmiSwga69UCMKLxWYGwND5nGR5A3+LZg7wbH5+Ns1iAX9dQOvMFYwL215YPI6umWW
-	FF+g==
-X-Gm-Message-State: AFeK/H2L7YCRM1ul16eNy88vX7VyHl/uFEgGkc2OmOtumoLrCam18Whuq9LQ4L2lTrfMEG7F4Zw7CE6lmG9/+A==
-X-Received: by 10.176.84.209 with SMTP id q17mr1193862uaa.129.1490816123356;
-	Wed, 29 Mar 2017 12:35:23 -0700 (PDT)
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id C00CB77BEB;
+	Wed, 29 Mar 2017 21:57:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 0979D20B7A;
+	Wed, 29 Mar 2017 21:57:04 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id z9PeULVJMvwB; Wed, 29 Mar 2017 21:57:03 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 6D98B208B3;
+	Wed, 29 Mar 2017 21:56:59 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id E6464162450; Wed, 29 Mar 2017 17:56:58 -0400 (EDT)
+Date: Wed, 29 Mar 2017 17:56:58 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Marek Vasut <marex@denx.de>
+Message-ID: <20170329215658.GP15664@denix.org>
+References: <20170327142231.21807-1-marex@denx.de>
+	<1490624701.13980.267.camel@linuxfoundation.org>
+	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
 MIME-Version: 1.0
-Received: by 10.103.43.65 with HTTP; Wed, 29 Mar 2017 12:35:22 -0700 (PDT)
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 29 Mar 2017 15:35:22 -0400
-Message-ID: <CAHUNapSj77gK_kExofCWaeREZOqwQoHQei4YZbqE1F5Uh=2CFA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: [meta-browser] calling all chromium recipe users
+In-Reply-To: <5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-core@lists.openembedded.org,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] u-boot: Update to 2017.03 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,25 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 19:35:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 29 Mar 2017 21:57:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-When testing changes to the chromium[-wayland] recipes, it would be
-great to know the layers, configurations, and MACHINEs with which
-people are building.
+On Mon, Mar 27, 2017 at 04:31:16PM +0200, Marek Vasut wrote:
+> On 03/27/2017 04:25 PM, Richard Purdie wrote:
+> > On Mon, 2017-03-27 at 16:22 +0200, Marek Vasut wrote:
+> >> Upgrade U-Boot to the latest version.
+> > 
+> > Wrong list and how does this compare to Ovatio's patch?
+> 
+> I was not CCed on Otavio's patch :(
 
-For example I care about chromium running on X11 for minnow
-(meta-intel) and raspberry pi (meta-raspberrypi). How are other people
-running chromium?
+Yeah, me neither, unfortunately - people just ignore maintainers file now.
 
-Also, are you able to run with accelerated graphics? If so, what
-configuration are you using?
+Good thing Ross copied me on the other discussion!
 
-Specifically, I assume the trick is the correct configuration of various
-
-    PREFERRED_PROVIDER_virtual/X = Y
-
-where X is one of {mesa|gl|egl|gles1|gles2} and Y is probably
-something BSP-specific. Is anything else needed to get accelerated
-graphics working with chromium?
+-- 
+Denys
 
