@@ -1,47 +1,55 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 19C0177BD1
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-it0-f43.google.com (mail-it0-f43.google.com
+	[209.85.214.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 82F5577BF3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 09:16:56 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id t189so19282758wmt.1
+	Wed, 29 Mar 2017 09:38:41 +0000 (UTC)
+Received: by mail-it0-f43.google.com with SMTP id e75so86282508itd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 02:16:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=GHH8uf/uszK39/jlQfG+3OyWC3NJ64OSgsu6amdZsaU=;
-	b=CORHfE3HcwMUDRDOPdpuuUvX8Q4y0htg0bGc5lO4halQlXqwLFbHHyNgWcldmgoW3O
-	uKsQcbR1SqUQGx9ub2tNoflxl9mwuCykhhd1wPu41ThRusvMsDvWwRe87KjskppB4VR8
-	OKSMJDeHVOdQIx1xDcJx8nAsJxJHLkfNJylismJVDfKdp6ws/1QSGWjIuE0qPfo2XT0U
-	pF49rkUyTah+B1NGVlnqBTjILp3jx+Fj3ihbQB1NiNO2nHXrJZjW0Db9NTK1Ptd+SCzz
-	JnwtqkxbKVfLK3gJfhF3DS7Fvd6bqsBTEAZKOTKZLRU8fW7hbHUgZoUD60ClQcW1YJDB
-	W+FQ==
+	Wed, 29 Mar 2017 02:38:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:organization:mime-version:content-transfer-encoding;
+	bh=yFeCwD9Vfbwlu+2Uzlhm7FHxelUi1zFycCklnqXax78=;
+	b=qQcNS76EovLl2ePdu5KypTd/Z+LTmw+tCLOfoq39Fcpl1ckNNPsl0a1eyKV6gkYX15
+	b4r5yD+B1rM6KVpHIkxFxtrhinCLDrg6y1sDpv7xFpD9gMaZ4d8qkO0wy0anBR9ZwwxR
+	NQLeuSKH9xGSxgtUC4YvJaa/4ZybQL6t4AZvLgTHJGrHpGu/d8Zxih9GdumC7QRDlVOP
+	anfv0ewoLebjmZ1c4jE/fmJ2T5bZSayQGYeRU0wB021uyHxgROHlkLDiYOUzXUifoEdy
+	locmWs+y7p0pt2R34Sqzi/66DDbqCZ+5rQDT4M7oGVVVY3tt05XsMv2DgJyBQQEwGrmF
+	n5ew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=GHH8uf/uszK39/jlQfG+3OyWC3NJ64OSgsu6amdZsaU=;
-	b=Yax3AFcT4MYaBnHHzvvIiFwOU8Tvf3n65fE6RPvDQZhgiDZ4u0BOzkOFA9ABv2MyXi
-	/+a8ir9MprACFaVxMylyKrpk9qQyCqG14toHIuvxwDOHC3FWjYDRqgwuHo3W4RNhKzHD
-	DIa+aCsIOZCITfhx84IhkH9GmHlSdeLHrL1IPiXt4cewtJBV+gSqbsyvnnETB/dFtUHC
-	uC3Fdf2H+kzftV6uiMTfqey/PSCDw1NgXpjeVwE2rhZb/mptdpuypg4bbNqmPTkFVDRn
-	By3g1UVnp3j3Iv5H8FeL/bCTd+C5Pzwh8+HsrHkBbu552ZsjykyVsTAkzLnkSFr4um2g
-	rtWA==
-X-Gm-Message-State: AFeK/H31H8GAv4pac4GE0QeY2l3ClgXve5mUNbfVEvMT5l7N5bktbzTHCgkS0zAsiGZlkw==
-X-Received: by 10.28.30.197 with SMTP id e188mr278234wme.99.1490779017547;
-	Wed, 29 Mar 2017 02:16:57 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	l141sm7286674wma.32.2017.03.29.02.16.56
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=yFeCwD9Vfbwlu+2Uzlhm7FHxelUi1zFycCklnqXax78=;
+	b=VcYIjmM5p761DPK1wEL+MCsOzBrU9I83jwsq/VaJ+TmE8upksFdq8nP1CdMR635/xM
+	Dx24idUxurtvNbszrbUMubzy1Jb+wxh/JoZ1luT3ZuF0zMk4VPJrqw9x+O8+YgHhs88z
+	S3lNIGUmREUAReMiAvMlhWIGzEFSPj9iDxJzpoTC8pQPqczK0uim95p5qXTLFjiIxIe8
+	jJdwzwyhmjxMRHxLGtb5k0nxnPsPsigBjEiLePn5tM1LEiTSj1ocqb4HIyz+wTgbqby8
+	YVzEPAw+vpOamzTZRUTuxFkSp/lAidaZ+WHlICgG162y75V3uFuXEA9wKaJ3jj30lPX5
+	9a9w==
+X-Gm-Message-State: AFeK/H2utBeH86urMaI5EiYtSdXs2vJIXOIM9JlJj+gnsAHvXYAcC93Eauo3pd/pJEOYGUmi
+X-Received: by 10.36.33.68 with SMTP id e65mr258313ita.21.1490780322220;
+	Wed, 29 Mar 2017 02:38:42 -0700 (PDT)
+Received: from pohly-mobl1 (p5DE8D6D7.dip0.t-ipconnect.de. [93.232.214.215])
+	by smtp.gmail.com with ESMTPSA id 71sm3468546iof.29.2017.03.29.02.38.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 29 Mar 2017 02:16:56 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Mar 2017 11:16:43 +0200
-Message-Id: <20170329091643.32180-9-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170329091643.32180-1-Martin.Jansa@gmail.com>
-References: <20170329091643.32180-1-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe 9/9] zile: fix do_install
+	Wed, 29 Mar 2017 02:38:41 -0700 (PDT)
+Message-ID: <1490780318.6396.410.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 29 Mar 2017 11:38:38 +0200
+In-Reply-To: <20170329091444.GB3298@jama>
+References: <20170329072316.GA3298@jama>
+	<1490776523.6396.407.camel@intel.com> <20170329091444.GB3298@jama>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-03-27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,33 +62,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 09:16:57 -0000
+X-List-Received-Date: Wed, 29 Mar 2017 09:38:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* --ignore-fail-on-non-empty works when the directory isn't empty, but still reports
-  failure when the directory doesn't exist at all, like in:
-  http://errors.yoctoproject.org/Errors/Details/138248/
+On Wed, 2017-03-29 at 11:14 +0200, Martin Jansa wrote:
+> On Wed, Mar 29, 2017 at 10:35:23AM +0200, Patrick Ohly wrote:
+> > On Wed, 2017-03-29 at 09:23 +0200, Martin Jansa wrote:
+> > > INFO: jenkins-job.sh-1.8.19 Complete log available at http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.report.20170328_014155.log
+> > 
+> > That used OE-core 552bd78, if I read this right:
+> > 
+> >         == Tested changes (not included in master yet) - openembedded-core ==
+> >         latest upstream commit: 
+> >         552bd78 wic: use kernel_dir to find systemd-efi bootloader
+> > 
+> > >     * openembedded-core/meta/recipes-core/ovmf/ovmf_git.bb:do_compile
+> > 
+> > http://errors.yoctoproject.org/Errors/Details/135202/
+> > 
+> > "gcc-ar: not found" - that should have been fixed by OE-core 23a12d87a6
+> > "fix toolchain selection", which is included in OE-core 552bd78 and thus
+> > should have been included in the build.
+> > 
+> > However, the error above was "Submitted on: 11/03/17 10:13", which was a
+> > while ago and in particular before that fix.
+> > 
+> > Did ovmf really fail in the latest world build?
+> 
+> The report shows:
+> http://errors.yoctoproject.org/Errors/Build/34933/
+> which leads to:
+> 
+> http://errors.yoctoproject.org/Errors/Details/138261/
+> Submitted on: 27/03/17 05:31
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-support/zile/zile_2.4.11.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Got it. I followed the wrong link at some point.
 
-diff --git a/meta-oe/recipes-support/zile/zile_2.4.11.bb b/meta-oe/recipes-support/zile/zile_2.4.11.bb
-index 05a6afbe9..d663f44b9 100644
---- a/meta-oe/recipes-support/zile/zile_2.4.11.bb
-+++ b/meta-oe/recipes-support/zile/zile_2.4.11.bb
-@@ -15,8 +15,8 @@ SRC_URI[sha256sum] = "1fd27bbddc61491b1fbb29a345d0d344734aa9e80cfa07b02892eedf83
- inherit autotools pkgconfig
- 
- do_install_append() {
--        rm -rf ${D}${libdir}/charset.alias
--        rmdir --ignore-fail-on-non-empty ${D}${libdir}
-+    rm -rf ${D}${libdir}/charset.alias
-+    rmdir --ignore-fail-on-non-empty ${D}${libdir} || true
- }
- 
- PACKAGECONFIG ??= ""
+> So yes it failed again, but this time with different error:
+> TOPDIR/tmp-glibc/work/i586-oe-linux/ovmf/git-r0/recipe-sysroot-native/usr/bin/i586-oe-linux/../../libexec/i586-oe-linux/gcc/i586-oe-linux/6.3.0/ld:
+> internal error in do_layout, at ../../gold/object.cc:1821
+
+Hmm, internal error in gold. Not sure what to do about that :-/
+
+Can individual recipes choose to be built using the normal ld?
+
 -- 
-2.12.2
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
+
 
 
