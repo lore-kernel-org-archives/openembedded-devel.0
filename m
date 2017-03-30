@@ -1,52 +1,49 @@
 Return-Path: <gordan.markus@pelagicore.com>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 9052060053
+Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
+	[209.85.215.41])
+	by mail.openembedded.org (Postfix) with ESMTP id E403B77CF4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 15:04:05 +0000 (UTC)
-Received: by mail-lf0-f52.google.com with SMTP id x137so29146076lff.3
+	Thu, 30 Mar 2017 15:09:12 +0000 (UTC)
+Received: by mail-lf0-f41.google.com with SMTP id j90so29261242lfk.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 08:04:07 -0700 (PDT)
+	Thu, 30 Mar 2017 08:09:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=KoK78tB+ECB6i7EYfdQ73+GD41ZBzsTGJCLAyXQFoOw=;
-	b=rP5EJ7EqA0Uxmy05BCICC1Sr59F9MVnLV2C3SOWzxxyTx4IK2vAg4Qu0WLlH9a8T2w
-	+Y3rHw58TPH8RZw9lFLET/9MCrfKJjDUR5812OxFYc4x6THwYt4wj31pqpZ4hcAMGd/u
-	2U1ScSEFdpjkm71ZRg8urmrlQWyG2QLy8d6MQu5lFN8mlyMF4MaPubyEZjRG33dkcLwz
-	1TD9MYjosuwE2MAtq/afzbpryLm2WAKWfgV21Y9FN5u2TgMFZDVM+USS9xohDR2Km2+d
-	xcrtCOOqNvBdPFn2CYTjfXICt8QEbFnuZrN0mW66KVTXxk7sudXn4ZiV/9WNRJjalM5N
-	Attw==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=RphhQd0FWe1F61hvdKNt7ghBA26qRMOxllAyMB59uwg=;
+	b=nTD1T9+S7T0in/+zMVoK0jRXqr+kryXoM3AGh7Xn+RyVVpItMxdSEe/azjGYQRkHxy
+	c+AZ1F5LhSlKbZAzXMpeKjs/HhM2UNJOcj8gaFW3/BXiE5R+ILEVc3jSHXpB6T8zqhRb
+	tkwWnuU2yRGU1LPeg4DMwqv8gUevi35pA4C0n0rKOZ9reRi+7a1jxzCPTTRZoxsphJmL
+	Wjsg/rEeefjpNTj8lPqWi9xbzrgvrjSWuIiOVYQ350nDbE2VU3ZxBY3Z5iCsxk4C+FhP
+	RofJ6rMa47mdmf6wUPRbJ61fHoYT8niQhZtzHgzSqDpx9zAS56FLT2R76hlRuolvZd+/
+	YcpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=KoK78tB+ECB6i7EYfdQ73+GD41ZBzsTGJCLAyXQFoOw=;
-	b=oqyagZhH83ceGIIS4gR3YpdyPVukQByJY7DOfHGAypy+zeXo+Dqcucjk6WBlKz/G6o
-	S4jDspQa8MC7f5XCF28FcoozpilbmluxGo13M0lJ8loHITWQeCJVT1ZRhGRDkzMLAPck
-	pjtUBXy2RCoKC/4uOYwTqvktBbVoBqpGaOkKUvO40sKgojUjzrAj8ICmN+29ai8mtHbs
-	g8stmq0FGeR4EDxeFT0iiYKoQjqM43ZcGfQbtvZCBOoZaDtcMXpKRtpvigfrcVKWXPMz
-	l8f8TbLHTU+BXaz81ob0zCYB8zIszAaJgbmoSPawiajWlqXj70m2dfPaYjLwSawfouRC
-	f67A==
-X-Gm-Message-State: AFeK/H2wC8Q5RIadyOcRB0Sg9mQMyupLdy+wQo61oI689z24Kx+yR4xkbCgWhkMCeYToZge0
-X-Received: by 10.25.216.232 with SMTP id r101mr67859lfi.28.1490886245896;
-	Thu, 30 Mar 2017 08:04:05 -0700 (PDT)
-Received: from gordanmarkus-XPS13 ([83.218.80.243])
-	by smtp.googlemail.com with ESMTPSA id
-	2sm418820ljp.36.2017.03.30.08.04.04
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 30 Mar 2017 08:04:05 -0700 (PDT)
-Message-ID: <1490886244.26233.2.camel@pelagicore.com>
-From: Gordan =?UTF-8?Q?Marku=C5=A1?= <gordan.markus@pelagicore.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 30 Mar 2017 17:04:04 +0200
-In-Reply-To: <CA+chaQcbUmnmKN2_sGPyT4AYhb2F6qyiQQt6xOgrXMUe_szAoA@mail.gmail.com>
-References: <20170323094626.6310-2-gordan.markus@pelagicore.com>
-	<CA+chaQcbUmnmKN2_sGPyT4AYhb2F6qyiQQt6xOgrXMUe_szAoA@mail.gmail.com>
-X-Mailer: Evolution 3.22.3-0ubuntu0.1 
-Mime-Version: 1.0
-Subject: Re: [meta-qt5][PATCH] qtbase-native: create empty oe-device-extra.pri
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=RphhQd0FWe1F61hvdKNt7ghBA26qRMOxllAyMB59uwg=;
+	b=iMWeqvaHxWoYvGmyR23RUqaNsVyqpx6QGnzylB/fnjpWJjy/gxP7KphN4D8pFr7CFA
+	25M7Wdza05V8/RUtQ5GdsSOAJ5YFby8ry+bb7OVJ+F6kbHHgqxwXJGoO3SBRBsJ3nGkP
+	w43NmMkstxoeryh8zbVzBs8A1LwVXj2FGlQAeWcYFDqIQNpp9YXJRh4Wdo1P6j7aMQrs
+	zYQ5IqYHFzlVCFeQJPYoKu04PQnEIFuhrINrHZdANg59/1N7NA1f/oDnJZ5BoFxmxV6g
+	F0uwsyu6dvLBhgZGi5NJ7NBPI/b5XAOEf+auCEGg5lpBR+308eqzC2qkT4TsqO4j0U82
+	c7yA==
+X-Gm-Message-State: AFeK/H3nA1SZ3fhipxfE/V3tlHL3ReBhxvDC3+tJUbGrIGGry3KasYLuea/O8ORz7ZjhfutK
+X-Received: by 10.25.23.97 with SMTP id n94mr70966lfi.48.1490886553492;
+	Thu, 30 Mar 2017 08:09:13 -0700 (PDT)
+Received: from gordanmarkus-XPS13.office.pelagicore.net ([83.218.80.243])
+	by smtp.gmail.com with ESMTPSA id 6sm426761ljw.11.2017.03.30.08.09.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 30 Mar 2017 08:09:12 -0700 (PDT)
+From: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 30 Mar 2017 17:09:03 +0200
+Message-Id: <20170330150903.26858-2-gordan.markus@pelagicore.com>
+X-Mailer: git-send-email 2.9.3
+MIME-Version: 1.0
+Cc: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
+Subject: [meta-qt5][PATCH v2] qtbase-native: create empty oe-device-extra.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,60 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 15:04:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 Mar 2017 15:09:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Sorry about that Martin, I've made a copy/paste mistake.
-Will post another version of the patch. 
+Suppress multiple occurrences of the same warning while configuring
+and compiling qtbase-native and nativesdk-qtbase.
 
-On Thu, 2017-03-30 at 11:38 +0200, Martin Jansa wrote:
-> it looks like the directory doesn't exist:
-> 
-> http://errors.yoctoproject.org/Errors/Details/138489/
-> 
-> On Thu, Mar 23, 2017 at 10:46 AM, Gordan Markuš <
-> gordan.markus@pelagicore.com> wrote:
-> 
-> > Suppress multiple occurrences of the same warning while configuring
-> > and compiling qtbase-native and nativesdk-qtbase.
-> > 
-> > WARNING: Unable to find file git/mkspecs/linux-oe-g++/../
-> > oe-device-extra.pri
-> > Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
-> > ---
-> >  recipes-qt/qt5/qtbase-native_git.bb | 3 +++
-> >  1 file changed, 3 insertions(+)
-> > 
-> > diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-
-> > qt/qt5/qtbase-
-> > native_git.bb
-> > index c013029..d40a751 100644
-> > --- a/recipes-qt/qt5/qtbase-native_git.bb
-> > +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> > @@ -83,6 +83,9 @@ PACKAGECONFIG_CONFARGS = " \
-> >  export OE_QMAKE_QTCONF_PATH = "foodummy"
-> > 
-> >  do_configure_prepend() {
-> > +    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-
-> > device-extra.pri:
-> > No such file or directory"
-> > +    touch ${S}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-
-> > extra.pri
-> > +
-> >      MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource
-> > -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt
-> > failed.
-> > PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
-> >  }
-> > 
-> > --
-> > 2.9.3
-> > 
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > 
+WARNING: Unable to find file git/mkspecs/linux-oe-g++/../oe-device-extra.pri
+Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
+---
+ recipes-qt/qt5/qtbase-native_git.bb | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index c013029..da69812 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -83,6 +83,9 @@ PACKAGECONFIG_CONFARGS = " \
+ export OE_QMAKE_QTCONF_PATH = "foodummy"
+ 
+ do_configure_prepend() {
++    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
++    touch ${S}/mkspecs/oe-device-extra.pri
++
+     MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
+ }
+ 
+-- 
+2.9.3
+
 
