@@ -1,40 +1,24 @@
-Return-Path: <marex@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id 10DF377BD9;
-	Thu, 30 Mar 2017 08:24:07 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3vtyMp4LLdz1qqwJ;
-	Thu, 30 Mar 2017 10:24:06 +0200 (CEST)
-Received: from localhost (dynscan01.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 3vtyMp30n2z3hhTM;
-	Thu, 30 Mar 2017 10:24:06 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan01.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id cLOjYaZ__VDO; Thu, 30 Mar 2017 10:24:05 +0200 (CEST)
-X-Auth-Info: /9kZWfeWCKMirrG7yRoe+ihoTAVMvoj1U1DJbgCKW44=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Thu, 30 Mar 2017 10:24:05 +0200 (CEST)
-To: Denys Dmytriyenko <denis@denix.org>
-References: <20170327142231.21807-1-marex@denx.de>
-	<1490624701.13980.267.camel@linuxfoundation.org>
-	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
-	<20170329215658.GP15664@denix.org>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <a5b043f0-b0ee-a74b-fd55-4f8d20669cba@denx.de>
-Date: Thu, 30 Mar 2017 10:21:31 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Icedove/45.4.0
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3795077BDE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Mar 2017 08:49:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v2U8nq02015611
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Mar 2017 01:49:52 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 30 Mar 2017 01:49:52 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 30 Mar 2017 04:49:51 -0400
+Message-ID: <1490863791-130455-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <20170329215658.GP15664@denix.org>
-Cc: openembedded-core@lists.openembedded.org,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] u-boot: Update to 2017.03 release
+Subject: [PATCH][meta-webserver] xdebug: 2.2.6 -> 2.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,27 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 08:24:09 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Mar 2017 08:49:52 -0000
+Content-Type: text/plain
 
-On 03/29/2017 11:56 PM, Denys Dmytriyenko wrote:
-> On Mon, Mar 27, 2017 at 04:31:16PM +0200, Marek Vasut wrote:
->> On 03/27/2017 04:25 PM, Richard Purdie wrote:
->>> On Mon, 2017-03-27 at 16:22 +0200, Marek Vasut wrote:
->>>> Upgrade U-Boot to the latest version.
->>>
->>> Wrong list and how does this compare to Ovatio's patch?
->>
->> I was not CCed on Otavio's patch :(
-> 
-> Yeah, me neither, unfortunately - people just ignore maintainers file now.
-> 
-> Good thing Ross copied me on the other discussion!
-> 
-Which other discussion ? :-(
+Upgrade the xdebug to fix the build failure with php 7.1
 
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
+---
+ .../recipes-php/xdebug/{xdebug_2.2.6.bb => xdebug_2.5.1.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-php/xdebug/{xdebug_2.2.6.bb => xdebug_2.5.1.bb} (85%)
+
+diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
+similarity index 85%
+rename from meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb
+rename to meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
+index 1ecac88..e2a1fb4 100644
+--- a/meta-webserver/recipes-php/xdebug/xdebug_2.2.6.bb
++++ b/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
+@@ -6,8 +6,8 @@ DEPENDS = "php"
+ 
+ SRC_URI = "http://xdebug.org/files/xdebug-${PV}.tgz"
+ 
+-SRC_URI[md5sum] = "f216356861e27284580d0208060ea7fa"
+-SRC_URI[sha256sum] = "6dd1cba0605e75009331aa3625a19ef49ade5a75aa9fe2ff8a818108d2cce84e"
++SRC_URI[md5sum] = "6167b1e104f1108d77f08eb561a12b22"
++SRC_URI[sha256sum] = "7fda9020fd5a2c549ae5a692fcabbb00f74e39dda81d53d25e622bdab4880ec2"
+ 
+ inherit autotools
+ 
 -- 
-Best regards,
-Marek Vasut
+2.8.1
+
 
