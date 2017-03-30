@@ -1,51 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D9B4B77BDE
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id ACF2B77C17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 09:39:53 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id u18so10398861wrc.0
+	Thu, 30 Mar 2017 09:41:00 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id k6so9121486wre.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 02:39:55 -0700 (PDT)
+	Thu, 30 Mar 2017 02:41:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=/COVkMaRWxtfMQ5B4U/D0OpwNKRK5uOtJEUDVL494kE=;
-	b=i6K5ZET75jnzB0a0gi+vv+Deojfc+lCWzYZb0pamduIME5XH0JawdUFcVkv4J7VOJZ
-	dL3qY444OD8L04spHhy0G/CO+nxhWCGGPwIAaROt3fDJNtywgZpN8/SckXIc/HVt+9BJ
-	60g6GIkS6bwUkUm+toXt5Eu7JJqw1p90Uq8uTunGwrMNhRshU4VS0/0JPhi023tq1x8e
-	Ht13bDmgN2H6g18YLoYyuBX/8klhBM5dtCUygGCgssh39rC/c0XF3UwsYQR+0z+GNVxj
-	eRD3bD3GNHsrcY2/7kx73EaWa14Y7IQxFFelWS94FUiDxecexQUHJcteE3SBFF3BIp2b
-	D5mA==
+	bh=m4hWbFJAkIi2Z0Rgc3mPMU8xbUmZ5RbADdsy50fh+d8=;
+	b=JctLvgLXs5XWcmeVPJ3LQXQ+OtTOcTPzY3VzLfk2NpdqRoVkcYUzRYlbvJzjgsPTeF
+	R2hcfqyHSQOXqp/3JPKBK+iw4pUGfiX2S+1sMuvAJe8BrNLHVnC8jOOkRpE0GCx+ZTVW
+	iNRXmQMMydhMpHW2pknbFcnFvETO876w7F5/pSRPpHkoTQTLMxs8HutcfnE1WOFAmDSp
+	WnEqsqSazkUeHHwcGWat/Rk+YBRAUxFkbegtVVznxpgOHcibqI4zkkn+Qmt7cwxUYPOg
+	mSWd/c8VGNkRZCBDSipz/OIrl3/KTvLQDEXKJfLrbgIdsibMzSZnMPhlZyz73+J0JHcJ
+	cV+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=/COVkMaRWxtfMQ5B4U/D0OpwNKRK5uOtJEUDVL494kE=;
-	b=a4btJ9JzGwTXiICbNawgE9MvLEsHPxA1Rj/sSPhAikDZZJwtmq1764chxLR0U9nmGp
-	6S0tSEteJhh1OgVBiNtF6BNofa+W4+Hw6+9dSJkt2B+sxic4bOrsE3vW2YfI4WIcnDpR
-	7RJxEacBcL0FHj/c27wx+ivfFqJG1ANCaq+aPALrE7WOVofH/d7oEUhzQfNVYfZc9y8M
-	vhzG9BjZ7ynk13iTzCidkbAII8ajOT1ikWe/VQIIGm0D49NYQmL8h6ExAEZRBdZNXfSF
-	Tqg2aFaDKVjYzrIRczVLHANeBhedtZz9oDwK+Btt0/KGmv1UM6D0Iu7ZHEUv/oGZXKTd
-	MKAw==
-X-Gm-Message-State: AFeK/H35YH4RyRyA1ylFPkEtVYefxnXz8PKnCDlhAmSIbepcT8tGwAWVDS0p9E7xaUbdeg==
-X-Received: by 10.223.139.196 with SMTP id w4mr4947280wra.172.1490866794751;
-	Thu, 30 Mar 2017 02:39:54 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	z40sm2039513wrz.67.2017.03.30.02.39.53
+	bh=m4hWbFJAkIi2Z0Rgc3mPMU8xbUmZ5RbADdsy50fh+d8=;
+	b=M/MTI18eSz6DYippobgjMd8ae1ZF6WxWOVBw8pthZ2W88SVR5vQ0UFkTyYr3+xOL/6
+	E19524oO1JtSIoNFYIETXS/8Eltdx/k2h2ljlgF5a58wWivSNSVo6XiFb2Ou1/00dISD
+	V6XPm34gS8l3NmydUFL7pvOhTkYnwA1WBlpsXrh+mr6CSJqpxDLjpajoeBR3j+Gahm+8
+	9+NsM/xg17xoFw0iizPt78nQNXFvtx8oyEIW1DZm4d/2GjGLR9eNj0XAaKWAde8IipRP
+	cDZIqi1KEDrTDCXH4clQcCP4tWeNwYlKjFq4+kYhg3a69k9hAtgnCD7fyGY+y5oPq/kz
+	rSMw==
+X-Gm-Message-State: AFeK/H1r2tZvR4BloUC1527fDMcgiGPM2LNCrFDe26asAqsHZF9dbsYS5BJ8d0WcEV6mjQ==
+X-Received: by 10.223.182.133 with SMTP id j5mr4825657wre.19.1490866861270;
+	Thu, 30 Mar 2017 02:41:01 -0700 (PDT)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id q4sm2522606wme.17.2017.03.30.02.41.00
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 30 Mar 2017 02:39:53 -0700 (PDT)
+	Thu, 30 Mar 2017 02:41:00 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 30 Mar 2017 11:39:53 +0200
-To: Ismo Puustinen <ismo.puustinen@intel.com>
-Message-ID: <20170330093953.GA3060@jama>
-References: <20170323104816.22461-1-ismo.puustinen@intel.com>
+Date: Thu, 30 Mar 2017 11:41:00 +0200
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20170330094100.GB3060@jama>
+References: <20170322184533.6501-1-raj.khem@gmail.com>
+	<20170322184533.6501-2-raj.khem@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <20170323104816.22461-1-ismo.puustinen@intel.com>
+In-Reply-To: <20170322184533.6501-2-raj.khem@gmail.com>
 User-Agent: Mutt/1.8.0 (2017-02-23)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] opencv: do not depend on swig.
+Subject: Re: [meta-networking][PATCH 02/10] netcat-openbsd: Fix build and whitelist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,46 +59,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 09:39:54 -0000
-X-Groupsio-MsgNum: 65979
+X-List-Received-Date: Thu, 30 Mar 2017 09:41:01 -0000
+X-Groupsio-MsgNum: 65980
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="T4sUOijqQbZv57TR"
+	protocol="application/pgp-signature"; boundary="JYK4vJDZwFMowpUq"
 Content-Disposition: inline
 
---T4sUOijqQbZv57TR
+--JYK4vJDZwFMowpUq
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Mar 23, 2017 at 12:48:16PM +0200, Ismo Puustinen wrote:
-> Since swig is a code generator, just depend on swig-native.
-
-Seems to cause following failure:
-http://errors.yoctoproject.org/Errors/Details/138491/
-
+On Wed, Mar 22, 2017 at 11:45:25AM -0700, Khem Raj wrote:
+> pkgconfig is used so we need to inherit pkgconfig
+> secondly, base64 support is added for it to work
+> with musl
 >=20
-> Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  meta-oe/recipes-support/opencv/opencv_3.2.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  ...bundle-own-base64-encode-decode-functions.patch | 379 +++++++++++++++=
+++++++
+>  .../recipes-support/netcat/netcat-openbsd_1.105.bb |  22 +-
+>  meta-networking/recipes-support/netcat/netcat.inc  |   2 +-
+>  3 files changed, 395 insertions(+), 8 deletions(-)
+>  create mode 100644 meta-networking/recipes-support/netcat/netcat-openbsd=
+/0001-bundle-own-base64-encode-decode-functions.patch
 >=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/recip=
-es-support/opencv/opencv_3.2.bb
-> index f47347a..cf77fe8 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
-> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2b2f8752cc5edf=
-504d283107d033f544"
->  ARM_INSTRUCTION_SET_armv4 =3D "arm"
->  ARM_INSTRUCTION_SET_armv5 =3D "arm"
+> diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd/0001-b=
+undle-own-base64-encode-decode-functions.patch b/meta-networking/recipes-su=
+pport/netcat/netcat-openbsd/0001-bundle-own-base64-encode-decode-functions.=
+patch
+> new file mode 100644
+> index 000000000..0966b6580
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/netcat/netcat-openbsd/0001-bundle-o=
+wn-base64-encode-decode-functions.patch
+> @@ -0,0 +1,379 @@
+> +From ccd166b73eaae4dd1e1785c63ceb9b303568ed46 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+
+=2E..
+
+> diff --git a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.=
+bb b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+> index bb21e0cfe..bb4e36c0a 100644
+> --- a/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+> +++ b/meta-networking/recipes-support/netcat/netcat-openbsd_1.105.bb
+> @@ -2,20 +2,21 @@ require netcat.inc
+>  SUMMARY =3D "OpenBSD Netcat"
+>  HOMEPAGE =3D "http://ftp.debian.org"
+>  LICENSE =3D "BSD-3-Clause"
+> -LIC_FILES_CHKSUM =3D "file://../debian/copyright;md5=3Dee6bbaacb5db5f297=
+3818f0902c3ae6f"
+> +LIC_FILES_CHKSUM =3D "file://debian/copyright;md5=3Dee6bbaacb5db5f297381=
+8f0902c3ae6f"
 > =20
-> -DEPENDS =3D "libtool swig swig-native python bzip2 zlib glib-2.0 libwebp"
-> +DEPENDS =3D "libtool swig-native python bzip2 zlib glib-2.0 libwebp"
+>  DEPENDS +=3D "glib-2.0 libbsd"
+> +do_patch[depends] =3D "quilt-native:do_populate_sysroot"
 > =20
->  SRCREV_opencv =3D "70bbf17b133496bd7d54d034b0f94bd869e0e810"
->  SRCREV_contrib =3D "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
+>  SRC_URI =3D "${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}=
+=2Eorig.tar.gz;name=3Dnetcat \
+> -           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7=
+=2Edebian.tar.gz;name=3Dnetcat-patch"
+> +           ${DEBIAN_MIRROR}/main/n/netcat-openbsd/netcat-openbsd_${PV}-7=
+=2Edebian.tar.gz;name=3Dnetcat-patch;subdir=3D${PN}-${PV} \
+> +           file://0001-bundle-own-base64-encode-decode-functions.patch \
+> +           "
+> =20
+>  SRC_URI[netcat.md5sum] =3D "7e67b22f1ad41a1b7effbb59ff28fca1"
+>  SRC_URI[netcat.sha256sum] =3D "40653fe66c1516876b61b07e093d826e2a5463c5d=
+994f1b7e6ce328f3edb211e"
+>  SRC_URI[netcat-patch.md5sum] =3D "e914f8eb7eda5c75c679dd77787ac76b"
+>  SRC_URI[netcat-patch.sha256sum] =3D "eee759327ffea293e81d0dde67921b7fcfc=
+ad279ffd7a2c9d037bbc8f882b363"
+> =20
+> -S =3D "${WORKDIR}/${BPN}-${PV}"
+> -
+>  EXTRA_OEMAKE +=3D "'LDFLAGS=3D${LDFLAGS}'"
+> =20
+>  do_configure[noexec] =3D "1"
+> @@ -23,9 +24,18 @@ do_configure[noexec] =3D "1"
+>  netcat_do_patch() {
+>      cd ${S}
+>      quilt pop -a || true
+> -    QUILT_PATCHES=3D${WORKDIR}/debian/patches QUILT_SERIES=3D${WORKDIR}/=
+debian/patches/series quilt push -a
+> +    if [ -d ${S}/.pc-netcat ]; then
+> +            rm -rf ${S}/.pc
+> +            mv ${S}/.pc-netcat ${S}/.pc
+> +            QUILT_PATCHES=3D${S}/debian/patches quilt pop -a
+> +            rm -rf ${S}/.pc ${S}/debian
+> +    fi
+> +    QUILT_PATCHES=3D${S}/debian/patches quilt push -a
+> +    mv ${S}/.pc ${S}/.pc-netcat
+
+Doesn't work here:
+http://errors.yoctoproject.org/Errors/Details/138495/
+
+>  }
+> =20
+> +do_unpack[cleandirs] +=3D "${S}"
+> +
+>  python do_patch() {
+>      bb.build.exec_func('netcat_do_patch', d)
+>      bb.build.exec_func('patch_do_patch', d)
+> @@ -42,5 +52,3 @@ do_install() {
+>      install -m 755 ${S}/nc ${D}${bindir}/nc.${BPN}
+>  }
+>  ALTERNATIVE_PRIORITY =3D "60"
+> -
+> -PNBLACKLIST[netcat-openbsd] ?=3D "Fails to build with RSS http://errors.=
+yoctoproject.org/Errors/Details/130673/"
+> diff --git a/meta-networking/recipes-support/netcat/netcat.inc b/meta-net=
+working/recipes-support/netcat/netcat.inc
+> index 91a24a106..15441645b 100644
+> --- a/meta-networking/recipes-support/netcat/netcat.inc
+> +++ b/meta-networking/recipes-support/netcat/netcat.inc
+> @@ -9,7 +9,7 @@ connection you would need and has several interesting bui=
+lt-in \
+>  capabilities."
+> =20
+>  SECTION =3D "net"
+> -inherit update-alternatives gettext
+> +inherit update-alternatives gettext pkgconfig
+> =20
+>  ALTERNATIVE_${PN} =3D "nc"
+> =20
 > --=20
-> 2.9.3
+> 2.12.0
 >=20
 > --=20
 > _______________________________________________
@@ -108,15 +197,15 @@ es-support/opencv/opencv_3.2.bb
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---T4sUOijqQbZv57TR
+--JYK4vJDZwFMowpUq
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWNzSaAAKCRA3VSO3ZXaA
-HGSvAKCt3VT1VcGsdM1SAnEo3Ckboaxf8wCeOku9m0UjL2QtkkhG188G5+ULsiI=
-=bUqr
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWNzSrAAKCRA3VSO3ZXaA
+HBJNAJ0dH2xKcj7ADcRiSGXXsthSV4nN0QCgmXYVxrJM7w4+20kpLpf5zJl/euU=
+=UIQl
 -----END PGP SIGNATURE-----
 
---T4sUOijqQbZv57TR--
+--JYK4vJDZwFMowpUq--
