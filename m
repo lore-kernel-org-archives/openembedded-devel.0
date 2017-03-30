@@ -1,35 +1,46 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id DFB8D71E12
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8815A77C17
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 23:06:13 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A475D20B7A
+	Thu, 30 Mar 2017 04:51:04 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id k6so7237214wre.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 23:06:14 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id utCz9RfaxHHw
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 23:06:14 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8BDBB2010C
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Mar 2017 23:06:14 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 0F511162450; Wed, 29 Mar 2017 19:06:14 -0400 (EDT)
-Date: Wed, 29 Mar 2017 19:06:14 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170329230613.GS15664@denix.org>
-References: <20170326203053.GH15664@denix.org>
+	Wed, 29 Mar 2017 21:51:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=XH5JgnvPu2MiR2Vpfe0pNCVqqNZdefHk1IN5vmdskhs=;
+	b=eCx2zRE0CevpJ5TKvtcigB6FHRZ2uU8t8Iu5RWdXhP8RLCe+s0NnE53B7wweDRBiOe
+	n8ti4CAPRWDm5F/6LyVWjcpJB2l+nOfjq9y0HVIMmO7I602TQwkH/RHUD40YAPGupsTZ
+	nUC6c5hQuD2+bjNDjQeT/rHEVCoP83mhXqkOIMMACO4erqd003NRr6g7Hbq6JforEh/P
+	27rzWnKNz1anE6lK8xu6dL0Z/tNcO8LBdeAU+zdjB2IhBhuiOIOWY12qoq7FQEKLvJRh
+	caxS7ToUSpQOzpTQA8kHJnRXEq7f4NRBU5FKq4LVFDOzmGp1SO03obNM8kbFS8ULTSp+
+	iRwg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=XH5JgnvPu2MiR2Vpfe0pNCVqqNZdefHk1IN5vmdskhs=;
+	b=CjpgRYiSECmBVYzq6uUw4iOH6ddtC3C3Xn+cAINoGr2RXxB9s48onlfQ6A3AyDXXAi
+	nvW8kRmaWuRh6iJHqqgoD9z9SkJRJijZuk2ssuGYeFWufTrv/9W6cXutg7hq/be63XPB
+	e1zf05kxgN0fWYDcBMtir8dfsE6YjuLKLdT/6AsUcp7Kdz0B8HQXGtFxDbQinVAPCQ/7
+	zwnuJy2BESNKDh/zVucCKpp2wKoyfUU4tbykmj/HLAAo4ob+UAy6bmzlTYFGSCyATHbS
+	Gq8VtwBNW2xrY+aEuZ9+bp/7D49KAQxyeJanizbXTwlIgVC9KVMY21kbEK+8sTAX+DSB
+	Qqsw==
+X-Gm-Message-State: AFeK/H0fQjhqAzm/RRyzwysNSTmxpyb7S3Z03sly0l0WaYtqPZedBLmAQVFDVP6ZRLWAjDrSMiuz0jH/4XlCMQ==
+X-Received: by 10.28.199.132 with SMTP id x126mr1304141wmf.37.1490849466143;
+	Wed, 29 Mar 2017 21:51:06 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20170326203053.GH15664@denix.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
+Received: by 10.80.180.162 with HTTP; Wed, 29 Mar 2017 21:50:35 -0700 (PDT)
+In-Reply-To: <20170329091643.32180-3-Martin.Jansa@gmail.com>
+References: <20170329091643.32180-1-Martin.Jansa@gmail.com>
+	<20170329091643.32180-3-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 29 Mar 2017 21:50:35 -0700
+Message-ID: <CAMKF1sqWGKMXfndgNr3O-zWwBGrzPY5ZNoihPwTnCty-=mSiKg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe 3/9] libqb: use github.com instead of retired fedorahosted.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,41 +53,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Mar 2017 23:06:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 30 Mar 2017 04:51:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:
-> Hi,
-> 
-> I've been having the following build issues lately with qtwebkit 5.8 from 
-> master:
-> 
-> | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
-> | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
-> | linking ../lib/libQt5WebKit.so.5.8.0
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
-> | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
-> | collect2: error: ld returned 1 exit status
-> | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
-> | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
-> | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
-> | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
-> | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
-> 
-> I believe I was able to build 5.8/master before, so I'm suspecting recent 
-> binutils upgrade... But I can be wrong. Would really appreciate some help 
-> here. Thanks.
+I have another patch which upgrades it to 1.0.1
 
-Anyone else see this?
+https://github.com/kraj/meta-openembedded/commit/9778fde842b81991293a3a032d23d41da661210e
 
--- 
-Denys
+I am going to send another request soon which will have this patch
+also fixes build with musl and clang.
+
+On Wed, Mar 29, 2017 at 2:16 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * https://fedoraproject.org/wiki/Infrastructure/Fedorahosted-retirement
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-oe/recipes-extended/libqb/libqb_0.17.2.bb | 15 +++++++--------
+>  1 file changed, 7 insertions(+), 8 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
+> index 40d06f379..2d3278ce8 100644
+> --- a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
+> +++ b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
+> @@ -3,20 +3,19 @@ DESCRIPTION = "libqb is a library with the primary purpose of providing high per
+>  It provides high performance logging, tracing, ipc, and poll."
+>
+>  HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
+> -
+>  SECTION = "libs"
+>
+> -inherit autotools pkgconfig
+> +LICENSE = "LGPL-2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+>
+> -SRC_URI = "https://fedorahosted.org/releases/q/u/quarterback/${BP}.tar.xz \
+> -          "
+> +inherit autotools pkgconfig
+>
+> -SRC_URI[md5sum] = "de1e5d38fa449b4d127940c10d117260"
+> -SRC_URI[sha256sum] = "9a419c649ed51f275dc780da8a15babb8a5d33633567bd9e0cb6193b6e21f4fe"
+> +PV = "0.17.2+git${SRCPV}"
+>
+> -LICENSE = "LGPL-2.1"
+> +SRCREV = "bd2c587f6ccacd8a5644b275d99324d200c2b378"
+> +SRC_URI = "git://github.com/ClusterLabs/${BPN}.git"
+>
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+> +S = "${WORKDIR}/git"
+>
+>  do_configure_prepend() {
+>      ( cd ${S}
+> --
+> 2.12.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
