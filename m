@@ -1,42 +1,52 @@
-Return-Path: <marex@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
-	by mail.openembedded.org (Postfix) with ESMTP id D80C977C17;
-	Thu, 30 Mar 2017 14:12:11 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3vv65Q0RXdz1qql6;
-	Thu, 30 Mar 2017 16:12:10 +0200 (CEST)
-Received: from localhost (dynscan01.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 3vv65P6Ygjz3hhTq;
-	Thu, 30 Mar 2017 16:12:09 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan01.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id jYtN-MeE8lxg; Thu, 30 Mar 2017 16:12:08 +0200 (CEST)
-X-Auth-Info: 3Qp3RjqZ6AuEEyjpQsWfFvDks37eMuR7BhIr0xwk/bc=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Thu, 30 Mar 2017 16:12:08 +0200 (CEST)
-To: Denys Dmytriyenko <denis@denix.org>
-References: <20170327142231.21807-1-marex@denx.de>
-	<1490624701.13980.267.camel@linuxfoundation.org>
-	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
-	<20170329215658.GP15664@denix.org>
-	<a5b043f0-b0ee-a74b-fd55-4f8d20669cba@denx.de>
-	<20170330132447.GU15664@denix.org>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <a8de81ca-4056-ad2c-4e38-1bd1b4c62315@denx.de>
-Date: Thu, 30 Mar 2017 16:12:08 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Icedove/45.4.0
-MIME-Version: 1.0
-In-Reply-To: <20170330132447.GU15664@denix.org>
-Cc: openembedded-core@lists.openembedded.org,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] u-boot: Update to 2017.03 release
+Return-Path: <gordan.markus@pelagicore.com>
+Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
+	[209.85.215.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 9052060053
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Mar 2017 15:04:05 +0000 (UTC)
+Received: by mail-lf0-f52.google.com with SMTP id x137so29146076lff.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Mar 2017 08:04:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:cc:date:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=KoK78tB+ECB6i7EYfdQ73+GD41ZBzsTGJCLAyXQFoOw=;
+	b=rP5EJ7EqA0Uxmy05BCICC1Sr59F9MVnLV2C3SOWzxxyTx4IK2vAg4Qu0WLlH9a8T2w
+	+Y3rHw58TPH8RZw9lFLET/9MCrfKJjDUR5812OxFYc4x6THwYt4wj31pqpZ4hcAMGd/u
+	2U1ScSEFdpjkm71ZRg8urmrlQWyG2QLy8d6MQu5lFN8mlyMF4MaPubyEZjRG33dkcLwz
+	1TD9MYjosuwE2MAtq/afzbpryLm2WAKWfgV21Y9FN5u2TgMFZDVM+USS9xohDR2Km2+d
+	xcrtCOOqNvBdPFn2CYTjfXICt8QEbFnuZrN0mW66KVTXxk7sudXn4ZiV/9WNRJjalM5N
+	Attw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=KoK78tB+ECB6i7EYfdQ73+GD41ZBzsTGJCLAyXQFoOw=;
+	b=oqyagZhH83ceGIIS4gR3YpdyPVukQByJY7DOfHGAypy+zeXo+Dqcucjk6WBlKz/G6o
+	S4jDspQa8MC7f5XCF28FcoozpilbmluxGo13M0lJ8loHITWQeCJVT1ZRhGRDkzMLAPck
+	pjtUBXy2RCoKC/4uOYwTqvktBbVoBqpGaOkKUvO40sKgojUjzrAj8ICmN+29ai8mtHbs
+	g8stmq0FGeR4EDxeFT0iiYKoQjqM43ZcGfQbtvZCBOoZaDtcMXpKRtpvigfrcVKWXPMz
+	l8f8TbLHTU+BXaz81ob0zCYB8zIszAaJgbmoSPawiajWlqXj70m2dfPaYjLwSawfouRC
+	f67A==
+X-Gm-Message-State: AFeK/H2wC8Q5RIadyOcRB0Sg9mQMyupLdy+wQo61oI689z24Kx+yR4xkbCgWhkMCeYToZge0
+X-Received: by 10.25.216.232 with SMTP id r101mr67859lfi.28.1490886245896;
+	Thu, 30 Mar 2017 08:04:05 -0700 (PDT)
+Received: from gordanmarkus-XPS13 ([83.218.80.243])
+	by smtp.googlemail.com with ESMTPSA id
+	2sm418820ljp.36.2017.03.30.08.04.04
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 30 Mar 2017 08:04:05 -0700 (PDT)
+Message-ID: <1490886244.26233.2.camel@pelagicore.com>
+From: Gordan =?UTF-8?Q?Marku=C5=A1?= <gordan.markus@pelagicore.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 30 Mar 2017 17:04:04 +0200
+In-Reply-To: <CA+chaQcbUmnmKN2_sGPyT4AYhb2F6qyiQQt6xOgrXMUe_szAoA@mail.gmail.com>
+References: <20170323094626.6310-2-gordan.markus@pelagicore.com>
+	<CA+chaQcbUmnmKN2_sGPyT4AYhb2F6qyiQQt6xOgrXMUe_szAoA@mail.gmail.com>
+X-Mailer: Evolution 3.22.3-0ubuntu0.1 
+Mime-Version: 1.0
+Subject: Re: [meta-qt5][PATCH] qtbase-native: create empty oe-device-extra.pri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,34 +59,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 14:12:13 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 30 Mar 2017 15:04:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On 03/30/2017 03:24 PM, Denys Dmytriyenko wrote:
-> On Thu, Mar 30, 2017 at 10:21:31AM +0200, Marek Vasut wrote:
->> On 03/29/2017 11:56 PM, Denys Dmytriyenko wrote:
->>> On Mon, Mar 27, 2017 at 04:31:16PM +0200, Marek Vasut wrote:
->>>> On 03/27/2017 04:25 PM, Richard Purdie wrote:
->>>>> On Mon, 2017-03-27 at 16:22 +0200, Marek Vasut wrote:
->>>>>> Upgrade U-Boot to the latest version.
->>>>>
->>>>> Wrong list and how does this compare to Ovatio's patch?
->>>>
->>>> I was not CCed on Otavio's patch :(
->>>
->>> Yeah, me neither, unfortunately - people just ignore maintainers file now.
->>>
->>> Good thing Ross copied me on the other discussion!
->>>
->> Which other discussion ? :-(
-> 
-> http://lists.openembedded.org/pipermail/openembedded-core/2017-March/134682.html
-> 
-I see. I'm all for updating to 2017.03 , since it fixes the OMAP serial
-bug too :)
+Sorry about that Martin, I've made a copy/paste mistake.
+Will post another version of the patch. 
 
--- 
-Best regards,
-Marek Vasut
+On Thu, 2017-03-30 at 11:38 +0200, Martin Jansa wrote:
+> it looks like the directory doesn't exist:
+> 
+> http://errors.yoctoproject.org/Errors/Details/138489/
+> 
+> On Thu, Mar 23, 2017 at 10:46 AM, Gordan Markuš <
+> gordan.markus@pelagicore.com> wrote:
+> 
+> > Suppress multiple occurrences of the same warning while configuring
+> > and compiling qtbase-native and nativesdk-qtbase.
+> > 
+> > WARNING: Unable to find file git/mkspecs/linux-oe-g++/../
+> > oe-device-extra.pri
+> > Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
+> > ---
+> >  recipes-qt/qt5/qtbase-native_git.bb | 3 +++
+> >  1 file changed, 3 insertions(+)
+> > 
+> > diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-
+> > qt/qt5/qtbase-
+> > native_git.bb
+> > index c013029..d40a751 100644
+> > --- a/recipes-qt/qt5/qtbase-native_git.bb
+> > +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> > @@ -83,6 +83,9 @@ PACKAGECONFIG_CONFARGS = " \
+> >  export OE_QMAKE_QTCONF_PATH = "foodummy"
+> > 
+> >  do_configure_prepend() {
+> > +    # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-
+> > device-extra.pri:
+> > No such file or directory"
+> > +    touch ${S}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-
+> > extra.pri
+> > +
+> >      MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource
+> > -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt
+> > failed.
+> > PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
+> >  }
+> > 
+> > --
+> > 2.9.3
+> > 
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > 
 
