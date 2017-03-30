@@ -1,52 +1,52 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F38577D3A
+Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BBAA77D30
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 16:38:25 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id g2so11249529pge.2
+	Thu, 30 Mar 2017 16:42:07 +0000 (UTC)
+Received: by mail-pg0-f51.google.com with SMTP id 81so45039279pgh.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 09:38:27 -0700 (PDT)
+	Thu, 30 Mar 2017 09:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:cc:from:message-id:date:user-agent
 	:mime-version:in-reply-to;
-	bh=4mcCWNtZ3bQKKVGB2ONYS2Y9Sycbnr2UhBryGxYYn7o=;
-	b=Ku+IFk3sCgOiwmvDIf7IAqRf8x6AxU1zKNvu8M3PCBy6HjRK3kcKzs80Y+FD0gVy5x
-	Bcu9RjAAqDDwSKKqYmGtPtmjmWsjpd5qjhgXBvIODGoujk5Xp4313CqndlLkN0XIpd0C
-	5oUuHfqDUk4rMiOrWUqWdvfHReCZPP9zW1rt56GByPkG3LmvQk5ckvIWW+OiYiGmWGNT
-	gp9rHQStFx9JRRqwQpMzrNAYC9JH9He11z4DoRe/fPfFAHjVgfr5aWLAUUYzGsSe1T/A
-	+QiPdMoggsH0qJ+ZfxMTy/9Qocv9YHYBisj0yXOEUig3cJVjGYQa9tIKyAIZOvqEr4mT
-	+Odg==
+	bh=d8q3hbBqLrOlF7bz5hAJw49LNQV8X3BT0A2ymOZy44A=;
+	b=SYwYZFDsphCjzKLDO97giIGT6dqGSGEuHcWWodoWYStNpF1lHcoWt2VYTmlekQ/MMy
+	uoztaDFLtg+tv6RMl8XP/krl4ruIpTdnb6RJKvRXvQVigdx+crTpC2IEE/bPA9YJTsTB
+	bGazH6TozenZJPdCIi6c0pXABWLG9GLpW4SUE3YAl7NdRmGsPKofg1eLNB8EbdAfd0Jj
+	gNi/iaM0wnQFLow9+IiZ7aUAQ2tyVWMQepTCuOJyoiZEU6ZLhAQRnYZF7gmjadja2icW
+	Zflr1J8kxWppFKdbfeq84diN1LOGJeFk0sCPU6IfIIJrvbcjSIewiUCsy7KhazA7v2ZV
+	jLng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
 	:user-agent:mime-version:in-reply-to;
-	bh=4mcCWNtZ3bQKKVGB2ONYS2Y9Sycbnr2UhBryGxYYn7o=;
-	b=qvYt9GefFMlvbtOrQWl2GRDLwaXt6ejDw/QgF/zIGsBM7kXFtXkY2rD6pJKvVQBhDF
-	cqfQsoCG4rt3K5zcJFJaWFfetZ9zexIANa/fHVGoMYAVwSg7AKuyy6Be7oiTAVSxij/Q
-	EeiWYWlA065NOPD8ciKYmDomEHGgBfQZpyq7ObjdP887lO3Ys7Pl3FBKxqfeTVab+kzM
-	Ez9U/QQwfiREfBPSTdk/hHT6y7V3roOs29OKMzOs0zUy3jCkZXFqFyTQLi5+HYDkPhwx
-	qidDcQdlYb7JmcUwIflABSBOO/pH3jMjRsuL7ilZQT2lQ4B9KhrYWUI7EJJCuZql/ffr
-	DOyQ==
-X-Gm-Message-State: AFeK/H31MKqb8mwffhT7VJjlP9DMYnMip7LCeCVuLpmKYMR+JAaRdT0Y6lq/RKQIz6YS8w==
-X-Received: by 10.98.75.28 with SMTP id y28mr566288pfa.157.1490891906770;
-	Thu, 30 Mar 2017 09:38:26 -0700 (PDT)
+	bh=d8q3hbBqLrOlF7bz5hAJw49LNQV8X3BT0A2ymOZy44A=;
+	b=jk0Bz+a9h7nvQUun1D+RqDIvIA6qE6BuPkpo5RKqHzFFAWvTr8TNgQDW8tztE86fPj
+	80dTlqECOb39L0OVWWlLHxwx6JpVkVW29kjQakfO14p1WrS+nyZfZdcbomcxFGkqiM6V
+	+qWfij5WCws1r2ansNc8sIa31f1ulK77zbsqfVm3uLiIYBwwM/AC4pcfZBUxqfcLJWz3
+	yPn5ZZZPr3zsA8tKPXFc7xnrlj2zNIJjRoC1F2wjsmSj2bAyKZ2k511JGPDdMNGB4el1
+	lIbki9b3NbGFj5aKzYEqbYpPw11yR8Arhumce4dG0y8fNRwOYM+h0U2HCIaBApSvJ1QS
+	U1uw==
+X-Gm-Message-State: AFeK/H1lZswiENIeAFAtFp7Zc2+1qZgvyHrEXvtCeVwOSPL2u/cYuKyKEeHqav2TAYVT5g==
+X-Received: by 10.99.167.1 with SMTP id d1mr609056pgf.129.1490892129004;
+	Thu, 30 Mar 2017 09:42:09 -0700 (PDT)
 Received: from CACSVMO-14452.local ([2601:646:8882:b8c:bccd:dd0d:39cd:978e])
-	by smtp.gmail.com with ESMTPSA id z4sm5585098pge.49.2017.03.30.09.38.25
+	by smtp.gmail.com with ESMTPSA id
+	x21sm5641801pgf.15.2017.03.30.09.42.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Mar 2017 09:38:25 -0700 (PDT)
+	Thu, 30 Mar 2017 09:42:07 -0700 (PDT)
 To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170320053152.29352-1-raj.khem@gmail.com>
-	<20170320053152.29352-16-raj.khem@gmail.com>
-	<20170330094607.GD3060@jama>
+References: <20170322184533.6501-1-raj.khem@gmail.com>
+	<20170322184533.6501-2-raj.khem@gmail.com> <20170330094100.GB3060@jama>
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <d80329d8-9944-0d52-ef67-d6fb2e4381e8@gmail.com>
-Date: Thu, 30 Mar 2017 09:38:24 -0700
+Message-ID: <c61173b4-b1ed-0a86-38fa-a71f6639981b@gmail.com>
+Date: Thu, 30 Mar 2017 09:42:06 -0700
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
 	Gecko/20100101 Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <20170330094607.GD3060@jama>
+In-Reply-To: <20170330094100.GB3060@jama>
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH 16/16] libexecinfo: Add recipe
+Subject: Re: [meta-networking][PATCH 02/10] netcat-openbsd: Fix build and whitelist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,45 +59,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 16:38:26 -0000
-X-Groupsio-MsgNum: 65991
+X-List-Received-Date: Thu, 30 Mar 2017 16:42:08 -0000
+X-Groupsio-MsgNum: 65992
 Content-Type: multipart/signed; micalg=pgp-sha1;
 	protocol="application/pgp-signature";
-	boundary="PxqRLngEk4Ces3LOxlDK3aXR9QUU7Dxic"
+	boundary="r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU"
 
---PxqRLngEk4Ces3LOxlDK3aXR9QUU7Dxic
-Content-Type: multipart/mixed; boundary="a3pHKP78x9nVrKVgMjLaR08oaxJSU8tpV";
+--r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU
+Content-Type: multipart/mixed; boundary="28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB";
  protected-headers="v1"
 From: Khem Raj <raj.khem@gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel@lists.openembedded.org
-Message-ID: <d80329d8-9944-0d52-ef67-d6fb2e4381e8@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH 16/16] libexecinfo: Add recipe
-References: <20170320053152.29352-1-raj.khem@gmail.com>
- <20170320053152.29352-16-raj.khem@gmail.com> <20170330094607.GD3060@jama>
-In-Reply-To: <20170330094607.GD3060@jama>
+Message-ID: <c61173b4-b1ed-0a86-38fa-a71f6639981b@gmail.com>
+Subject: Re: [oe] [meta-networking][PATCH 02/10] netcat-openbsd: Fix build and
+ whitelist
+References: <20170322184533.6501-1-raj.khem@gmail.com>
+ <20170322184533.6501-2-raj.khem@gmail.com> <20170330094100.GB3060@jama>
+In-Reply-To: <20170330094100.GB3060@jama>
 
---a3pHKP78x9nVrKVgMjLaR08oaxJSU8tpV
+--28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB
 Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: quoted-printable
 
 
 
-On 3/30/17 2:46 AM, Martin Jansa wrote:
-> On Sun, Mar 19, 2017 at 10:31:52PM -0700, Khem Raj wrote:
->> This package is handy especially with musl to port
->> apps which use glibc backtrace APIs
-> Fails to build here:
-> http://errors.yoctoproject.org/Errors/Details/138496/
+On 3/30/17 2:41 AM, Martin Jansa wrote:
+>> +    fi
+>> +    QUILT_PATCHES=3D${S}/debian/patches quilt push -a
+>> +    mv ${S}/.pc ${S}/.pc-netcat
+> Doesn't work here:
+> http://errors.yoctoproject.org/Errors/Details/138495/
 >=20
+weird.
+works here.
 
-This should be made musl-only package. Fixed locally will
-resend with next pull.
 
+--28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB--
 
---a3pHKP78x9nVrKVgMjLaR08oaxJSU8tpV--
-
---PxqRLngEk4Ces3LOxlDK3aXR9QUU7Dxic
+--r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="signature.asc"
@@ -105,9 +105,9 @@ Content-Disposition: attachment; filename="signature.asc"
 -----BEGIN PGP SIGNATURE-----
 Comment: GPGTools - https://gpgtools.org
 
-iEYEARECAAYFAljdNIAACgkQuwUzVZGdMxT/MwCfQEQcGnNy5DcjZBlngZtpWfiT
-gv0AoIgHRUlXZul+u4fqHReALArcLHp/
-=ab1S
+iEYEARECAAYFAljdNV4ACgkQuwUzVZGdMxSwfACggkEhz+EilunxrXX0CIUGc9eh
+WecAn02aHaBQMWiGhIwovVZ3WBSa/S41
+=I1Vs
 -----END PGP SIGNATURE-----
 
---PxqRLngEk4Ces3LOxlDK3aXR9QUU7Dxic--
+--r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU--
