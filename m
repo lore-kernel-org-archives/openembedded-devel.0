@@ -1,52 +1,40 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f51.google.com (mail-pg0-f51.google.com [74.125.83.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 2BBAA77D30
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 16:42:07 +0000 (UTC)
-Received: by mail-pg0-f51.google.com with SMTP id 81so45039279pgh.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Mar 2017 09:42:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to;
-	bh=d8q3hbBqLrOlF7bz5hAJw49LNQV8X3BT0A2ymOZy44A=;
-	b=SYwYZFDsphCjzKLDO97giIGT6dqGSGEuHcWWodoWYStNpF1lHcoWt2VYTmlekQ/MMy
-	uoztaDFLtg+tv6RMl8XP/krl4ruIpTdnb6RJKvRXvQVigdx+crTpC2IEE/bPA9YJTsTB
-	bGazH6TozenZJPdCIi6c0pXABWLG9GLpW4SUE3YAl7NdRmGsPKofg1eLNB8EbdAfd0Jj
-	gNi/iaM0wnQFLow9+IiZ7aUAQ2tyVWMQepTCuOJyoiZEU6ZLhAQRnYZF7gmjadja2icW
-	Zflr1J8kxWppFKdbfeq84diN1LOGJeFk0sCPU6IfIIJrvbcjSIewiUCsy7KhazA7v2ZV
-	jLng==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to;
-	bh=d8q3hbBqLrOlF7bz5hAJw49LNQV8X3BT0A2ymOZy44A=;
-	b=jk0Bz+a9h7nvQUun1D+RqDIvIA6qE6BuPkpo5RKqHzFFAWvTr8TNgQDW8tztE86fPj
-	80dTlqECOb39L0OVWWlLHxwx6JpVkVW29kjQakfO14p1WrS+nyZfZdcbomcxFGkqiM6V
-	+qWfij5WCws1r2ansNc8sIa31f1ulK77zbsqfVm3uLiIYBwwM/AC4pcfZBUxqfcLJWz3
-	yPn5ZZZPr3zsA8tKPXFc7xnrlj2zNIJjRoC1F2wjsmSj2bAyKZ2k511JGPDdMNGB4el1
-	lIbki9b3NbGFj5aKzYEqbYpPw11yR8Arhumce4dG0y8fNRwOYM+h0U2HCIaBApSvJ1QS
-	U1uw==
-X-Gm-Message-State: AFeK/H1lZswiENIeAFAtFp7Zc2+1qZgvyHrEXvtCeVwOSPL2u/cYuKyKEeHqav2TAYVT5g==
-X-Received: by 10.99.167.1 with SMTP id d1mr609056pgf.129.1490892129004;
-	Thu, 30 Mar 2017 09:42:09 -0700 (PDT)
-Received: from CACSVMO-14452.local ([2601:646:8882:b8c:bccd:dd0d:39cd:978e])
-	by smtp.gmail.com with ESMTPSA id
-	x21sm5641801pgf.15.2017.03.30.09.42.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 30 Mar 2017 09:42:07 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170322184533.6501-1-raj.khem@gmail.com>
-	<20170322184533.6501-2-raj.khem@gmail.com> <20170330094100.GB3060@jama>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <c61173b4-b1ed-0a86-38fa-a71f6639981b@gmail.com>
-Date: Thu, 30 Mar 2017 09:42:06 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.8.0
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id BAEB977CCA;
+	Thu, 30 Mar 2017 18:06:40 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 9EA1420B79;
+	Thu, 30 Mar 2017 18:06:41 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id XGyzofAMsoZx; Thu, 30 Mar 2017 18:06:41 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 252E12010C;
+	Thu, 30 Mar 2017 18:06:37 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 8CCC6162463; Thu, 30 Mar 2017 14:06:36 -0400 (EDT)
+Date: Thu, 30 Mar 2017 14:06:36 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Marek Vasut <marex@denx.de>
+Message-ID: <20170330180636.GV15664@denix.org>
+References: <20170327142231.21807-1-marex@denx.de>
+	<1490624701.13980.267.camel@linuxfoundation.org>
+	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
+	<20170329215658.GP15664@denix.org>
+	<a5b043f0-b0ee-a74b-fd55-4f8d20669cba@denx.de>
+	<20170330132447.GU15664@denix.org>
+	<a8de81ca-4056-ad2c-4e38-1bd1b4c62315@denx.de>
 MIME-Version: 1.0
-In-Reply-To: <20170330094100.GB3060@jama>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH 02/10] netcat-openbsd: Fix build and whitelist
+In-Reply-To: <a8de81ca-4056-ad2c-4e38-1bd1b4c62315@denx.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-core@lists.openembedded.org,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] u-boot: Update to 2017.03 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,55 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Mar 2017 16:42:08 -0000
-X-Groupsio-MsgNum: 65992
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU"
+X-List-Received-Date: Thu, 30 Mar 2017 18:06:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU
-Content-Type: multipart/mixed; boundary="28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Message-ID: <c61173b4-b1ed-0a86-38fa-a71f6639981b@gmail.com>
-Subject: Re: [oe] [meta-networking][PATCH 02/10] netcat-openbsd: Fix build and
- whitelist
-References: <20170322184533.6501-1-raj.khem@gmail.com>
- <20170322184533.6501-2-raj.khem@gmail.com> <20170330094100.GB3060@jama>
-In-Reply-To: <20170330094100.GB3060@jama>
+On Thu, Mar 30, 2017 at 04:12:08PM +0200, Marek Vasut wrote:
+> On 03/30/2017 03:24 PM, Denys Dmytriyenko wrote:
+> > On Thu, Mar 30, 2017 at 10:21:31AM +0200, Marek Vasut wrote:
+> >> On 03/29/2017 11:56 PM, Denys Dmytriyenko wrote:
+> >>> On Mon, Mar 27, 2017 at 04:31:16PM +0200, Marek Vasut wrote:
+> >>>> On 03/27/2017 04:25 PM, Richard Purdie wrote:
+> >>>>> On Mon, 2017-03-27 at 16:22 +0200, Marek Vasut wrote:
+> >>>>>> Upgrade U-Boot to the latest version.
+> >>>>>
+> >>>>> Wrong list and how does this compare to Ovatio's patch?
+> >>>>
+> >>>> I was not CCed on Otavio's patch :(
+> >>>
+> >>> Yeah, me neither, unfortunately - people just ignore maintainers file now.
+> >>>
+> >>> Good thing Ross copied me on the other discussion!
+> >>>
+> >> Which other discussion ? :-(
+> > 
+> > http://lists.openembedded.org/pipermail/openembedded-core/2017-March/134682.html
+> > 
+> I see. I'm all for updating to 2017.03 , since it fixes the OMAP serial
+> bug too :)
 
---28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+"Known devil is better than unknown angel"? :)
 
+-- 
+Denys
 
-
-On 3/30/17 2:41 AM, Martin Jansa wrote:
->> +    fi
->> +    QUILT_PATCHES=3D${S}/debian/patches quilt push -a
->> +    mv ${S}/.pc ${S}/.pc-netcat
-> Doesn't work here:
-> http://errors.yoctoproject.org/Errors/Details/138495/
->=20
-weird.
-works here.
-
-
---28Dxw5NV8nIUPUOftOPMUSt8mf0h02ACB--
-
---r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAljdNV4ACgkQuwUzVZGdMxSwfACggkEhz+EilunxrXX0CIUGc9eh
-WecAn02aHaBQMWiGhIwovVZ3WBSa/S41
-=I1Vs
------END PGP SIGNATURE-----
-
---r3UncdNSaaJ1MralvtXCMEfDESPe8RcrU--
