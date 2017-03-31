@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EAC3177E33
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 18A5777E33
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 16:43:08 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id o123so18540814pga.1
+	Fri, 31 Mar 2017 16:43:11 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id 81so18580515pgh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 09:43:10 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=2WKoRmH6IcvjAhgf9wFxKnF1OHW2/EjOY7Z2ODWriXc=;
-	b=pkAVCfEVYGg+sX/gUKnTORZUnDBxedlYyqTj0+tOJny4SLWMdPSMvOzPfmbrmtOJ9D
-	9T6/BLsA4knk6vl2OMezM+PDnz5iL6yfzmD4vCimXUkoch+BWHa3nT9K2BuLXzPAYW6J
-	SLAmBZV9PBmNX3Z6S5NL872r3UtKJ+bR8Ql0NNLjdfuKp+M16IbRqKnGtDsMM3UnZtei
-	mnMSMXoWauB8MxPcbzCcHAJCQVnfFdO4Ul41Watlm1BlR2nB1a8ghcBHs8vfB/Yx61HM
-	87fV9qANt6UBjUI+4ORBgd3AaSvX1rRH2tZGphyqnD/sWXdpC70MVxbsmJVMq1MaaUvc
-	Cd+g==
+	bh=OalqgXJ3BZMXtYARWzxm5FJ9w6G6EO9jMTZYzjXUNbc=;
+	b=Xnvj0hnam8KMUa1zr8SSgu8UfSRHfuCkL52vtIuSjkmXLXkRNWU/75oAgL/VW1w7jx
+	P0FRilxVvqZLfslS0SNwz8USCKMV3yS/hvjeuFhq97oXGSDpdTRMFPaVATbkqmXbkJa7
+	9EaaNPLg00ilKHHUnHj1J3z0GGqXi+Xzblosk9joZqbKTgby9j+mbyyRsFSVEBSunbsk
+	FN86eatQ3R8vxHfOxai9vD3t9olw659uN4qulAYT07H37QOJO6isJ3QMlqnTVfmbDAWM
+	kPff2y1lYOF/81rTYFpPMNvP06qq8v5rYVzupOizlmCQD28qfUkB+8V3Ro4Eyakoyjll
+	YVqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=2WKoRmH6IcvjAhgf9wFxKnF1OHW2/EjOY7Z2ODWriXc=;
-	b=V3GPQ14g1pf9fcnbx02XaM+2nF2Pfh8atRHAx0lKI8N+lC7KqwGUpEUEUuMCQyI1g9
-	E+JJIyuTWxiEB+OXJmsw/b1ILsHR9dXjQd49lSfajfuyaslwNL5yilDLnGR+Y4AQBEzC
-	MQ7SyFcBNcSMHf1Ao7nn+NLTJuN9TeYsw4Tt/C70hcB5BRdxOsXUvl+oHGuKf9UVusez
-	TrjEWCSNlsqAJzLHx3qufDvUbjby4oeuJz8n3a+RaTSgXFc5KrLSl17e7mdQbI+jck+r
-	Ubr80FoOAG37lN5gFomSBCgF45UnlcjK2RP+IC2PkucuXzLtqqKXsB9d/N8EmTEO9VzD
-	sCCQ==
-X-Gm-Message-State: AFeK/H1pq3hqv2hZjK9c0S4dFk/tuRlv7TCyub723QAKwADcCiaHoDfAnGYGOwax0/0LzA==
-X-Received: by 10.99.137.66 with SMTP id v63mr4169339pgd.183.1490978590296;
-	Fri, 31 Mar 2017 09:43:10 -0700 (PDT)
+	bh=OalqgXJ3BZMXtYARWzxm5FJ9w6G6EO9jMTZYzjXUNbc=;
+	b=AsWpnDrJDbAfbFCghw7cSLuS/onBxhEglt4Qf8mPp0N0ID56PSL3ntH/kHRuUIvwX+
+	JLnLBnHZb32PPu6dBBN8PCDQwKBIQnH27sF2QuVUSaZ9j+PxHPGmAGkYeY7s1JnbswSF
+	OTfU2AZAw+aN4qK6FdLfGFo62uYDn6iGjtFYm+J5IXsYtdcZxK/V9LmwGEaXyG71uML8
+	jcIuWdN3Hs/bvgoe9Ce3dTkzv0nsDYFIFZPmBtkPC3Irjo7JutNtNBiRZW8EI6qifld0
+	XbNr/WENLXeIAhWwDhDW0ehHhwxZQEbj0gE1ZzNzVhtXTcfHSlfUogekbg6dQXan0OG/
+	HqZA==
+X-Gm-Message-State: AFeK/H2ZXvLq7MSvGjr8YG7Sai/TGzcRWrxD40f0TgXp1t8EERF5UI9fByi8Nxd/bwnM0Q==
+X-Received: by 10.84.191.165 with SMTP id a34mr4599307pld.62.1490978592274;
+	Fri, 31 Mar 2017 09:43:12 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	a5sm11569706pfh.124.2017.03.31.09.43.08
+	a5sm11569706pfh.124.2017.03.31.09.43.10
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 09:43:09 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:10 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 09:42:15 -0700
-Message-Id: <20170331164247.5052-11-raj.khem@gmail.com>
+Date: Fri, 31 Mar 2017 09:42:16 -0700
+Message-Id: <20170331164247.5052-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.1
 In-Reply-To: <20170331164247.5052-1-raj.khem@gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 11/43] libnfnetlink: Backport patches to fix musl build
+Subject: [meta-networking][PATCH 12/43] ebtables: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,740 +54,764 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 16:43:09 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 16:43:11 -0000
 
-There are few upstream patches that are required for getting it
-working with musl, backport these patches on top of 1.0.1
+Backport upstream fixes and add fixes to make it work with musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-build-resolve-automake-1.12-warnings.patch |  28 ++
- ...rce-code-license-header-in-sync-with-curr.patch |  49 +++
- .../0003-configure-uclinux-is-also-linux.patch     |  27 ++
- ...k-initialize-attribute-padding-to-resolve.patch |  39 ++
- .../0005-include-Sync-with-kernel-headers.patch    | 110 ++++++
- .../0006-src-Use-stdint-types-everywhere.patch     | 403 +++++++++++++++++++++
- .../libnfnetlink/libnfnetlink_1.0.1.bb             |   9 +-
- 7 files changed, 664 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
- create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
+ .../0001-add-RARP-and-update-iana-url.patch        |  45 +++++
+ .../0002-fix-compilation-warning.patch             |  25 +++
+ .../0003-add-info-about-Wl-no-as-needed.patch      |  25 +++
+ ...for-kernel-regression-bug-IPv6-source-des.patch |  28 +++
+ ...-command-line-support-for-ebtables-restor.patch |  75 +++++++
+ ...-IPv6-mask-if-it-s-all-ones-based-on-patc.patch |  69 +++++++
+ .../0007-extensions-Use-stdint-types.patch         |  67 +++++++
+ ...h-Remove-C-specific-compiler-hint-macro-_.patch |  48 +++++
+ ...low-RETURN-target-rules-in-user-defined-c.patch |  48 +++++
+ .../0010-Adjust-header-include-sequence.patch      | 216 +++++++++++++++++++++
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   |  12 +-
+ 11 files changed, 657 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-add-RARP-and-update-iana-url.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0002-fix-compilation-warning.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0003-add-info-about-Wl-no-as-needed.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0004-workaround-for-kernel-regression-bug-IPv6-source-des.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0005-Add-noflush-command-line-support-for-ebtables-restor.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0006-don-t-print-IPv6-mask-if-it-s-all-ones-based-on-patc.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0007-extensions-Use-stdint-types.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch
+ create mode 100644 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0010-Adjust-header-include-sequence.patch
 
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-add-RARP-and-update-iana-url.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-add-RARP-and-update-iana-url.patch
 new file mode 100644
-index 000000000..00d95cd79
+index 000000000..90b69792b
 --- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
-@@ -0,0 +1,28 @@
-+From 2e5f2b81fb8cbe0d1cd33e58caa19ac308e1f847 Mon Sep 17 00:00:00 2001
-+From: Jan Engelhardt <jengelh@inai.de>
-+Date: Tue, 9 Oct 2012 15:59:48 +0200
-+Subject: [PATCH 1/6] build: resolve automake-1.12 warnings
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0001-add-RARP-and-update-iana-url.patch
+@@ -0,0 +1,45 @@
++From dd35afc9ce1004128a754d5eeb8c5c2cb32ae420 Mon Sep 17 00:00:00 2001
++From: Bart De Schuymer <bdschuym@pandora.be>
++Date: Tue, 3 Jul 2012 18:47:32 +0000
++Subject: [PATCH 01/10] add RARP and update iana url
 +
-+am/ltlibrary.am: warning: 'libnfnetlink.la': linking libtool libraries
-+using a non-POSIX archiver requires 'AM_PROG_AR' in 'configure.ac'
-+
-+Signed-off-by: Jan Engelhardt <jengelh@inai.de>
 +---
-+ configure.ac | 1 +
-+ 1 file changed, 1 insertion(+)
++ ethertypes | 10 ++++++----
++ 1 file changed, 6 insertions(+), 4 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index ed549df..0926a1c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -7,6 +7,7 @@ AC_CANONICAL_HOST
-+ 
-+ AM_INIT_AUTOMAKE([-Wall foreign subdir-objects
-+ 	tar-pax no-dist-gzip dist-bzip2 1.6])
-++m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
-+ 
-+ dnl kernel style compile messages
-+ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
++diff --git a/ethertypes b/ethertypes
++index 5e700f6..813177b 100644
++--- a/ethertypes
+++++ b/ethertypes
++@@ -5,6 +5,7 @@
++ #
++ # This list could be found on:
++ #         http://www.iana.org/assignments/ethernet-numbers
+++#         http://www.iana.org/assignments/ieee-802-numbers
++ #
++ # <name>    <hexnumber> <alias1>...<alias35> #Comment
++ #
++@@ -21,15 +22,16 @@ LAT		6004			# DEC LAT
++ DIAG		6005			# DEC Diagnostics
++ CUST		6006			# DEC Customer use
++ SCA		6007			# DEC Systems Comms Arch
++-TEB		6558             	# Trans Ether Bridging   [RFC1701]
++-RAW_FR  	6559                   	# Raw Frame Relay        [RFC1701]
+++TEB		6558			# Trans Ether Bridging   [RFC1701]
+++RAW_FR  	6559			# Raw Frame Relay        [RFC1701]
+++RARP		8035			# Reverse ARP            [RFC903]
++ AARP		80F3			# Appletalk AARP
++-ATALK		809B                  	# Appletalk
+++ATALK		809B			# Appletalk
++ 802_1Q		8100	8021q 1q 802.1q	dot1q # 802.1Q Virtual LAN tagged frame
++ IPX		8137			# Novell IPX
++ NetBEUI		8191			# NetBEUI
++ IPv6		86DD	ip6 		# IP version 6
++-PPP		880B                    # PPP
+++PPP		880B			# PPP
++ ATMMPOA		884C			# MultiProtocol over ATM
++ PPP_DISC	8863			# PPPoE discovery messages
++ PPP_SES		8864			# PPPoE session messages
 +-- 
 +2.12.1
 +
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0002-fix-compilation-warning.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0002-fix-compilation-warning.patch
 new file mode 100644
-index 000000000..c2fb5e05a
+index 000000000..87b0e9b87
 --- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
-@@ -0,0 +1,49 @@
-+From 5e6b6e23a8b04475c5a9de7eddb4c18103932fe5 Mon Sep 17 00:00:00 2001
-+From: Pablo Neira Ayuso <pablo@netfilter.org>
-+Date: Wed, 7 Aug 2013 20:53:57 +0200
-+Subject: [PATCH 2/6] src: get source code license header in sync with current
-+ licensing terms
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0002-fix-compilation-warning.patch
+@@ -0,0 +1,25 @@
++From 2a5333fc8b4825251adfb717d980d89cefde38d6 Mon Sep 17 00:00:00 2001
++From: Petri Gynther <petri.gynther@gmail.com>
++Date: Sun, 24 Feb 2013 10:56:59 +0100
++Subject: [PATCH 02/10] fix compilation warning
 +
-+Since (3956761 license: upgrade to GPLv2+), we upgraded to GPLv2+,
-+propagate that changes to src/iftable.c and src/rtnl.c
-+
-+Reported-by: Thomas Woerner <twoerner@redhat.com>
-+Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
 +---
-+ src/iftable.c | 2 +-
-+ src/rtnl.c    | 4 ++--
-+ 2 files changed, 3 insertions(+), 3 deletions(-)
-+
-+diff --git a/src/iftable.c b/src/iftable.c
-+index 0325335..5976ed8 100644
-+--- a/src/iftable.c
-++++ b/src/iftable.c
-+@@ -3,7 +3,7 @@
-+  * (C) 2004 by Astaro AG, written by Harald Welte <hwelte@astaro.com>
-+  * (C) 2008 by Pablo Neira Ayuso <pablo@netfilter.org>
-+  *
-+- * This software is Free Software and licensed under GNU GPLv2. 
-++ * This software is Free Software and licensed under GNU GPLv2+.
-+  */
-+ 
-+ /* IFINDEX handling */
-+diff --git a/src/rtnl.c b/src/rtnl.c
-+index 5ccb272..7b4ac7d 100644
-+--- a/src/rtnl.c
-++++ b/src/rtnl.c
-+@@ -1,10 +1,10 @@
-+ /* rtnl - rtnetlink utility functions
-+  *
-+  * (C) 2004 by Astaro AG, written by Harald Welte <hwelte@astaro.com>
-+- * 
-++ *
-+  * Adapted to nfnetlink by Eric Leblond <eric@inl.fr>
-+  *
-+- * This software is free software and licensed under GNU GPLv2. 
-++ * This software is free software and licensed under GNU GPLv2+.
-+  *
-+  */
-+ 
-+-- 
-+2.12.1
-+
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
-new file mode 100644
-index 000000000..6cb7ed6fa
---- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
-@@ -0,0 +1,27 @@
-+From b259fe13826414c1bd5328a25c8d6d60e20e65f2 Mon Sep 17 00:00:00 2001
-+From: Gustavo Zacarias <gustavo@zacarias.com.ar>
-+Date: Tue, 10 Sep 2013 16:23:29 -0300
-+Subject: [PATCH 3/6] configure: uclinux is also linux
-+
-+Signed-off-by: Gustavo Zacarias <gustavo@zacarias.com.ar>
-+Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
-+---
-+ configure.ac | 2 +-
++ communication.c | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index 0926a1c..b979772 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -18,7 +18,7 @@ AC_DISABLE_STATIC
-+ AM_PROG_LIBTOOL
-+ 
-+ case "$host" in 
-+-*-*-linux*) ;;
-++*-*-linux* | *-*-uclinux*) ;;
-+ *) AC_MSG_ERROR([Linux only, dude!]);;
-+ esac
-+ 
-+-- 
-+2.12.1
-+
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
-new file mode 100644
-index 000000000..cf3a84135
---- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
-@@ -0,0 +1,39 @@
-+From b142da8d2c9e2e2dfbe4e89e680dd124f6064ac8 Mon Sep 17 00:00:00 2001
-+From: Pablo Neira Ayuso <pablo@netfilter.org>
-+Date: Mon, 3 Feb 2014 12:09:29 +0100
-+Subject: [PATCH 4/6] libnfnetlink: initialize attribute padding to resolve
-+ valgrind warnings
-+
-+==12195== Syscall param socketcall.sendto(msg) points to uninitialised byte(s)
-+==12195==    at 0x51209C3: __sendto_nocancel (syscall-template.S:81)
-+==12195==    by 0x53E4D12: nfnl_send (libnfnetlink.c:391)
-+==12195==    by 0x53E6952: nfnl_query (libnfnetlink.c:1569)
-+==12195==    by 0x4E344AF: __build_send_cfg_msg.isra.1 (libnetfilter_log.c:143)
-+==12195==    by 0x4E34710: nflog_bind_group (libnetfilter_log.c:413)
-+==12195==    by 0x400CB1: main (nfulnl_test.c:77)
-+==12195==  Address 0x7fefff3e9 is on thread 1's stack
-+
-+This patch sets to zero the padding that is included to align the
-+attribute payload.
-+
-+Reported-by: Ivan Homoliak <xhomol11@gmail.com>
-+Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
-+---
-+ src/libnfnetlink.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/libnfnetlink.c b/src/libnfnetlink.c
-+index 4b2bcd0..398b7d7 100644
-+--- a/src/libnfnetlink.c
-++++ b/src/libnfnetlink.c
-+@@ -809,6 +809,7 @@ int nfnl_addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
-+ 	nfa->nfa_type = type;
-+ 	nfa->nfa_len = len;
-+ 	memcpy(NFA_DATA(nfa), data, alen);
-++	memset((uint8_t *)nfa + nfa->nfa_len, 0, NFA_ALIGN(alen) - alen);
-+ 	n->nlmsg_len = (NLMSG_ALIGN(n->nlmsg_len) + NFA_ALIGN(len));
-+ 	return 0;
++diff --git a/communication.c b/communication.c
++index 62ed667..ba058c0 100644
++--- a/communication.c
+++++ b/communication.c
++@@ -282,7 +282,7 @@ static int store_counters_in_file(char *filename, struct ebt_u_replace *repl)
++ 	}
++ close_file:
++ 	fclose(file);
++-	return 0;
+++	return ret;
 + }
++ 
++ /* Gets executed after ebt_deliver_table. Delivers the counters to the kernel
 +-- 
 +2.12.1
 +
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0003-add-info-about-Wl-no-as-needed.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0003-add-info-about-Wl-no-as-needed.patch
 new file mode 100644
-index 000000000..383f0e8b3
+index 000000000..c8573a464
 --- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
-@@ -0,0 +1,110 @@
-+From b10c90a61a5fc46f2be5aeecb9c96e84178f7717 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0003-add-info-about-Wl-no-as-needed.patch
+@@ -0,0 +1,25 @@
++From a6faf3b50d6af4768b7b853cb536944fb18e1450 Mon Sep 17 00:00:00 2001
++From: Bart De Schuymer <bdschuym@pandora.be>
++Date: Wed, 3 Jul 2013 22:12:47 +0200
++Subject: [PATCH 03/10] add info about -Wl,-no-as-needed
++
++---
++ INSTALL | 2 ++
++ 1 file changed, 2 insertions(+)
++
++diff --git a/INSTALL b/INSTALL
++index 4a05c67..e90d5c1 100644
++--- a/INSTALL
+++++ b/INSTALL
++@@ -39,6 +39,8 @@ That's all
++ You can also use a base directory different from the root directory (/),
++ using the DESTDIR option. See the Makefile for more details.
++ 
+++You might need to set LDFLAGS=-Wl,-no-as-needed to build ebtables correctly
+++on your system.
++ 
++ ADDITIONAL PROGRAMS:
++ ----------------------
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0004-workaround-for-kernel-regression-bug-IPv6-source-des.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0004-workaround-for-kernel-regression-bug-IPv6-source-des.patch
+new file mode 100644
+index 000000000..d8f2795bc
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0004-workaround-for-kernel-regression-bug-IPv6-source-des.patch
+@@ -0,0 +1,28 @@
++From b0617af37b8b1aafb43e8019135bea44c2d94c28 Mon Sep 17 00:00:00 2001
++From: Luis Fernando <tdthp@terra.com.br>
++Date: Wed, 3 Jul 2013 22:19:55 +0200
++Subject: [PATCH 04/10] workaround for kernel regression bug: IPv6
++ source/destination addresses are potentially not matched correctly
++
++---
++ extensions/ebt_ip6.c | 4 ++++
++ 1 file changed, 4 insertions(+)
++
++diff --git a/extensions/ebt_ip6.c b/extensions/ebt_ip6.c
++index 0465e77..bbdc4ae 100644
++--- a/extensions/ebt_ip6.c
+++++ b/extensions/ebt_ip6.c
++@@ -312,6 +312,10 @@ static void init(struct ebt_entry_match *match)
++ 
++ 	ipinfo->invflags = 0;
++ 	ipinfo->bitmask = 0;
+++	memset(ipinfo->saddr.s6_addr, 0, sizeof(ipinfo->saddr.s6_addr));
+++	memset(ipinfo->smsk.s6_addr, 0, sizeof(ipinfo->smsk.s6_addr));
+++	memset(ipinfo->daddr.s6_addr, 0, sizeof(ipinfo->daddr.s6_addr));
+++	memset(ipinfo->dmsk.s6_addr, 0, sizeof(ipinfo->dmsk.s6_addr));
++ }
++ 
++ #define OPT_SOURCE 0x01
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0005-Add-noflush-command-line-support-for-ebtables-restor.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0005-Add-noflush-command-line-support-for-ebtables-restor.patch
+new file mode 100644
+index 000000000..9585fd20e
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0005-Add-noflush-command-line-support-for-ebtables-restor.patch
+@@ -0,0 +1,75 @@
++From 15d3ab8a4a167dc44396b003d2ec01841949972f Mon Sep 17 00:00:00 2001
++From: Sanket Shah <sanket.shah@cyberoam.com>
++Date: Wed, 31 Jul 2013 21:40:08 +0200
++Subject: [PATCH 05/10] Add --noflush command line support for ebtables-restore
++
++---
++ ebtables-restore.c | 29 +++++++++++++++++++++++++----
++ 1 file changed, 25 insertions(+), 4 deletions(-)
++
++diff --git a/ebtables-restore.c b/ebtables-restore.c
++index ea02960..bb4d0cf 100644
++--- a/ebtables-restore.c
+++++ b/ebtables-restore.c
++@@ -22,13 +22,25 @@
++ #include <string.h>
++ #include <errno.h>
++ #include <unistd.h>
+++#include <getopt.h>
++ #include "include/ebtables_u.h"
++ 
+++static const struct option options[] = {
+++	{.name = "noflush", .has_arg = 0, .val = 'n'},
+++	{ 0 }
+++};
+++
++ static struct ebt_u_replace replace[3];
++ void ebt_early_init_once();
++ 
++ #define OPT_KERNELDATA  0x800 /* Also defined in ebtables.c */
++ 
+++static void print_usage()
+++{
+++	fprintf(stderr, "Usage: ebtables-restore [ --noflush ]\n");
+++	exit(1);
+++}
+++
++ static void copy_table_names()
++ {
++ 	strcpy(replace[0].name, "filter");
++@@ -41,11 +53,20 @@ static void copy_table_names()
++ int main(int argc_, char *argv_[])
++ {
++ 	char *argv[EBTD_ARGC_MAX], cmdline[EBTD_CMDLINE_MAXLN];
++-	int i, offset, quotemode = 0, argc, table_nr = -1, line = 0, whitespace;
+++	int i, offset, quotemode = 0, argc, table_nr = -1, line = 0, whitespace, c, flush = 1;
++ 	char ebtables_str[] = "ebtables";
++ 
++-	if (argc_ != 1)
++-		ebtrest_print_error("options are not supported");
+++	while ((c = getopt_long(argc_, argv_, "n", options, NULL)) != -1) {
+++		switch(c) {
+++			case 'n':
+++				flush = 0;
+++				break;
+++			default:
+++				print_usage();
+++				break;
+++		}
+++	}
+++
++ 	ebt_silent = 0;
++ 	copy_table_names();
++ 	ebt_early_init_once();
++@@ -68,7 +89,7 @@ int main(int argc_, char *argv_[])
++ 				ebtrest_print_error("table '%s' was not recognized", cmdline+1);
++ 			table_nr = i;
++ 			replace[table_nr].command = 11;
++-			ebt_get_kernel_table(&replace[table_nr], 1);
+++			ebt_get_kernel_table(&replace[table_nr], flush);
++ 			replace[table_nr].command = 0;
++ 			replace[table_nr].flags = OPT_KERNELDATA; /* Prevent do_command from initialising replace */
++ 			continue;
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0006-don-t-print-IPv6-mask-if-it-s-all-ones-based-on-patc.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0006-don-t-print-IPv6-mask-if-it-s-all-ones-based-on-patc.patch
+new file mode 100644
+index 000000000..21f8e588d
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0006-don-t-print-IPv6-mask-if-it-s-all-ones-based-on-patc.patch
+@@ -0,0 +1,69 @@
++From 85a0f6d77a9d5c0e7ef7948395f0f6b1612dc987 Mon Sep 17 00:00:00 2001
++From: Bart De Schuymer <bdschuym@pandora.be>
++Date: Mon, 14 Apr 2014 22:04:55 +0200
++Subject: [PATCH 06/10] don't print IPv6 mask if it's all ones (based on patch
++ by Mariusz Mazur <mmazur at axeos.com>)
++
++---
++ extensions/ebt_ip6.c |  4 ++--
++ include/ebtables_u.h |  1 +
++ useful_functions.c   | 13 +++++++++++++
++ 3 files changed, 16 insertions(+), 2 deletions(-)
++
++diff --git a/extensions/ebt_ip6.c b/extensions/ebt_ip6.c
++index bbdc4ae..e3e0956 100644
++--- a/extensions/ebt_ip6.c
+++++ b/extensions/ebt_ip6.c
++@@ -449,14 +449,14 @@ static void print(const struct ebt_u_entry *entry,
++ 		if (ipinfo->invflags & EBT_IP6_SOURCE)
++ 			printf("! ");
++ 		printf("%s", ebt_ip6_to_numeric(&ipinfo->saddr));
++-		printf("/%s ", ebt_ip6_to_numeric(&ipinfo->smsk));
+++		printf("%s ", ebt_ip6_mask_to_string(&ipinfo->smsk));
++ 	}
++ 	if (ipinfo->bitmask & EBT_IP6_DEST) {
++ 		printf("--ip6-dst ");
++ 		if (ipinfo->invflags & EBT_IP6_DEST)
++ 			printf("! ");
++ 		printf("%s", ebt_ip6_to_numeric(&ipinfo->daddr));
++-		printf("/%s ", ebt_ip6_to_numeric(&ipinfo->dmsk));
+++		printf("%s ", ebt_ip6_mask_to_string(&ipinfo->dmsk));
++ 	}
++ 	if (ipinfo->bitmask & EBT_IP6_TCLASS) {
++ 		printf("--ip6-tclass ");
++diff --git a/include/ebtables_u.h b/include/ebtables_u.h
++index ab615c1..35a5bcc 100644
++--- a/include/ebtables_u.h
+++++ b/include/ebtables_u.h
++@@ -303,6 +303,7 @@ char *ebt_mask_to_dotted(uint32_t mask);
++ void ebt_parse_ip6_address(char *address, struct in6_addr *addr, 
++ 						   struct in6_addr *msk);
++ char *ebt_ip6_to_numeric(const struct in6_addr *addrp);
+++char *ebt_ip6_mask_to_string(const struct in6_addr *msk);
++ 
++ 
++ int do_command(int argc, char *argv[], int exec_style,
++diff --git a/useful_functions.c b/useful_functions.c
++index d20b68e..d14cbe9 100644
++--- a/useful_functions.c
+++++ b/useful_functions.c
++@@ -411,3 +411,16 @@ char *ebt_ip6_to_numeric(const struct in6_addr *addrp)
++ 	static char buf[50+1];
++ 	return (char *)inet_ntop(AF_INET6, addrp, buf, sizeof(buf));
++ }
+++
+++char *ebt_ip6_mask_to_string(const struct in6_addr *msk)
+++{
+++   	/* /0000:0000:0000:0000:0000:000.000.000.000
+++	 * /0000:0000:0000:0000:0000:0000:0000:0000 */
+++	static char buf[51+1];
+++	if (msk->s6_addr32[0] == 0xFFFFFFFFL && msk->s6_addr32[1] == 0xFFFFFFFFL &&
+++	    msk->s6_addr32[2] == 0xFFFFFFFFL && msk->s6_addr32[3] == 0xFFFFFFFFL)
+++		*buf = '\0';
+++	else
+++		sprintf(buf, "/%s", ebt_ip6_to_numeric(msk));
+++	return buf;
+++}
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0007-extensions-Use-stdint-types.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0007-extensions-Use-stdint-types.patch
+new file mode 100644
+index 000000000..6fbe7df4c
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0007-extensions-Use-stdint-types.patch
+@@ -0,0 +1,67 @@
++From a60c7d4a6d05387aceb8ae9c38390d0f9bae84a2 Mon Sep 17 00:00:00 2001
 +From: Felix Janda <felix.janda@posteo.de>
-+Date: Sat, 16 May 2015 14:49:07 +0200
-+Subject: [PATCH 5/6] include: Sync with kernel headers
++Date: Sat, 16 May 2015 12:22:39 +0200
++Subject: [PATCH 07/10] extensions: Use stdint types
 +
 +Signed-off-by: Felix Janda <felix.janda@posteo.de>
 +Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
 +---
-+ include/libnfnetlink/linux_nfnetlink.h        | 44 ++++-----------------------
-+ include/libnfnetlink/linux_nfnetlink_compat.h | 12 ++++----
-+ 2 files changed, 12 insertions(+), 44 deletions(-)
++ extensions/ebt_ip6.c   |  4 ++--
++ extensions/ebt_limit.c | 10 +++++-----
++ 2 files changed, 7 insertions(+), 7 deletions(-)
 +
-+diff --git a/include/libnfnetlink/linux_nfnetlink.h b/include/libnfnetlink/linux_nfnetlink.h
-+index 76a8550..44a38d6 100644
-+--- a/include/libnfnetlink/linux_nfnetlink.h
-++++ b/include/libnfnetlink/linux_nfnetlink.h
-+@@ -25,9 +25,9 @@ enum nfnetlink_groups {
-+ /* General form of address family dependent message.
-+  */
-+ struct nfgenmsg {
-+-	u_int8_t  nfgen_family;		/* AF_xxx */
-+-	u_int8_t  version;		/* nfnetlink version */
-+-	u_int16_t    res_id;		/* resource id */
-++	__u8  nfgen_family;		/* AF_xxx */
-++	__u8  version;		/* nfnetlink version */
-++	__be16    res_id;		/* resource id */
++diff --git a/extensions/ebt_ip6.c b/extensions/ebt_ip6.c
++index e3e0956..dd48547 100644
++--- a/extensions/ebt_ip6.c
+++++ b/extensions/ebt_ip6.c
++@@ -53,8 +53,8 @@ static const struct option opts[] =
++ 
++ struct icmpv6_names {
++ 	const char *name;
++-	u_int8_t type;
++-	u_int8_t code_min, code_max;
+++	uint8_t type;
+++	uint8_t code_min, code_max;
 + };
 + 
-+ #define NFNETLINK_V0	0
-+@@ -46,40 +46,8 @@ struct nfgenmsg {
-+ #define NFNL_SUBSYS_CTNETLINK_EXP	2
-+ #define NFNL_SUBSYS_QUEUE		3
-+ #define NFNL_SUBSYS_ULOG		4
-+-#define NFNL_SUBSYS_COUNT		5
-++#define NFNL_SUBSYS_OSF			5
-++#define NFNL_SUBSYS_IPSET		6
-++#define NFNL_SUBSYS_COUNT		7
++ static const struct icmpv6_names icmpv6_codes[] = {
++diff --git a/extensions/ebt_limit.c b/extensions/ebt_limit.c
++index ee40e5c..d189a09 100644
++--- a/extensions/ebt_limit.c
+++++ b/extensions/ebt_limit.c
++@@ -59,11 +59,11 @@ static void print_help(void)
++ "                                default %u\n", EBT_LIMIT_BURST);
++ }
 + 
-+-#ifdef __KERNEL__
-+-
-+-#include <linux/netlink.h>
-+-#include <linux/capability.h>
-+-#include <net/netlink.h>
-+-
-+-struct nfnl_callback
-+-{
-+-	int (*call)(struct sock *nl, struct sk_buff *skb, 
-+-		struct nlmsghdr *nlh, struct nlattr *cda[]);
-+-	const struct nla_policy *policy;	/* netlink attribute policy */
-+-	const u_int16_t attr_count;		/* number of nlattr's */
-+-};
-+-
-+-struct nfnetlink_subsystem
-+-{
-+-	const char *name;
-+-	__u8 subsys_id;			/* nfnetlink subsystem ID */
-+-	__u8 cb_count;			/* number of callbacks */
-+-	const struct nfnl_callback *cb;	/* callback for individual types */
-+-};
-+-
-+-extern int nfnetlink_subsys_register(const struct nfnetlink_subsystem *n);
-+-extern int nfnetlink_subsys_unregister(const struct nfnetlink_subsystem *n);
-+-
-+-extern int nfnetlink_has_listeners(unsigned int group);
-+-extern int nfnetlink_send(struct sk_buff *skb, u32 pid, unsigned group, 
-+-			  int echo);
-+-extern int nfnetlink_unicast(struct sk_buff *skb, u_int32_t pid, int flags);
-+-
-+-#define MODULE_ALIAS_NFNL_SUBSYS(subsys) \
-+-	MODULE_ALIAS("nfnetlink-subsys-" __stringify(subsys))
-+-
-+-#endif	/* __KERNEL__ */
-+ #endif	/* _NFNETLINK_H */
-+diff --git a/include/libnfnetlink/linux_nfnetlink_compat.h b/include/libnfnetlink/linux_nfnetlink_compat.h
-+index e145176..74b9e55 100644
-+--- a/include/libnfnetlink/linux_nfnetlink_compat.h
-++++ b/include/libnfnetlink/linux_nfnetlink_compat.h
-+@@ -1,6 +1,8 @@
-+ #ifndef _NFNETLINK_COMPAT_H
-+ #define _NFNETLINK_COMPAT_H
-+-#ifndef __KERNEL__
-++
-++#include <linux/types.h>
-++
-+ /* Old nfnetlink macros for userspace */
++-static int parse_rate(const char *rate, u_int32_t *val)
+++static int parse_rate(const char *rate, uint32_t *val)
++ {
++ 	const char *delim;
++-	u_int32_t r;
++-	u_int32_t mult = 1;  /* Seconds by default. */
+++	uint32_t r;
+++	uint32_t mult = 1;  /* Seconds by default. */
 + 
-+ /* nfnetlink groups: Up to 32 maximum */
-+@@ -18,10 +20,9 @@
-+  * ! nfnetlink use the same attributes methods. - J. Schulist.
-+  */
-+ 
-+-struct nfattr
-+-{
-+-	u_int16_t nfa_len;
-+-	u_int16_t nfa_type;	/* we use 15 bits for the type, and the highest
-++struct nfattr {
-++	__u16 nfa_len;
-++	__u16 nfa_type;	/* we use 15 bits for the type, and the highest
-+ 				 * bit to indicate whether the payload is nested */
++ 	delim = strchr(rate, '/');
++ 	if (delim) {
++@@ -151,7 +151,7 @@ static void final_check(const struct ebt_u_entry *entry,
++ struct rates
++ {
++ 	const char *name;
++-	u_int32_t mult;
+++	uint32_t mult;
 + };
 + 
-+@@ -57,5 +58,4 @@ struct nfattr
-+         + NLMSG_ALIGN(sizeof(struct nfgenmsg))))
-+ #define NFM_PAYLOAD(n)  NLMSG_PAYLOAD(n, sizeof(struct nfgenmsg))
++ static struct rates g_rates[] =
++@@ -162,7 +162,7 @@ static struct rates g_rates[] =
++ 	{ "sec", EBT_LIMIT_SCALE }
++ };
 + 
-+-#endif /* ! __KERNEL__ */
-+ #endif /* _NFNETLINK_COMPAT_H */
++-static void print_rate(u_int32_t period)
+++static void print_rate(uint32_t period)
++ {
++ 	unsigned int i;
++ 
 +-- 
 +2.12.1
 +
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch
 new file mode 100644
-index 000000000..72c9987d1
+index 000000000..df3f52143
 --- /dev/null
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
-@@ -0,0 +1,403 @@
-+From 5cb589e246c91331ee6b3926b15f5e6cfc8ad95e Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch
+@@ -0,0 +1,48 @@
++From 6ed23c8c2bc5efc3956e7bb6155afc8f45e6ae1a Mon Sep 17 00:00:00 2001
 +From: Felix Janda <felix.janda@posteo.de>
-+Date: Sat, 16 May 2015 14:59:57 +0200
-+Subject: [PATCH 6/6] src: Use stdint types everywhere
++Date: Sat, 16 May 2015 12:31:58 +0200
++Subject: [PATCH 08/10] ethernetdb.h: Remove C++ specific compiler hint macro
++ _THROW
++
++Fixes compilation with musl libc
 +
 +Signed-off-by: Felix Janda <felix.janda@posteo.de>
 +Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
 +---
-+ include/libnfnetlink/libnfnetlink.h | 25 ++++++-------
-+ src/iftable.c                       |  8 ++---
-+ src/iftable.h                       |  4 +--
-+ src/libnfnetlink.c                  | 72 ++++++++++++++++++-------------------
-+ src/rtnl.c                          |  4 +--
-+ src/rtnl.h                          |  2 +-
-+ 6 files changed, 58 insertions(+), 57 deletions(-)
++ include/ethernetdb.h | 11 +++++------
++ 1 file changed, 5 insertions(+), 6 deletions(-)
 +
-+diff --git a/include/libnfnetlink/libnfnetlink.h b/include/libnfnetlink/libnfnetlink.h
-+index 1d8c49d..cd0be3d 100644
-+--- a/include/libnfnetlink/libnfnetlink.h
-++++ b/include/libnfnetlink/libnfnetlink.h
-+@@ -15,6 +15,7 @@
-+ #define aligned_u64 unsigned long long __attribute__((aligned(8)))
-+ #endif
++diff --git a/include/ethernetdb.h b/include/ethernetdb.h
++index 46d8bfd..1683abe 100644
++--- a/include/ethernetdb.h
+++++ b/include/ethernetdb.h
++@@ -38,21 +38,20 @@ struct ethertypeent {
 + 
-++#include <stdint.h>
-+ #include <sys/socket.h>	/* for sa_family_t */
-+ #include <linux/netlink.h>
-+ #include <libnfnetlink/linux_nfnetlink.h>
-+@@ -55,7 +56,7 @@ struct nfnlhdr {
-+ struct nfnl_callback {
-+ 	int (*call)(struct nlmsghdr *nlh, struct nfattr *nfa[], void *data);
-+ 	void *data;
-+-	u_int16_t attr_count;
-++	uint16_t attr_count;
-+ };
++ /* Open ethertype data base files and mark them as staying open even
++    after a later search if STAY_OPEN is non-zero.  */
++-extern void setethertypeent(int __stay_open) __THROW;
+++extern void setethertypeent(int __stay_open);
 + 
-+ struct nfnl_handle;
-+@@ -69,7 +70,7 @@ extern struct nfnl_handle *nfnl_open(void);
-+ extern int nfnl_close(struct nfnl_handle *);
++ /* Close ethertype data base files and clear `stay open' flag.  */
++-extern void endethertypeent(void) __THROW;
+++extern void endethertypeent(void);
 + 
-+ extern struct nfnl_subsys_handle *nfnl_subsys_open(struct nfnl_handle *, 
-+-						   u_int8_t, u_int8_t, 
-++						   uint8_t, uint8_t,
-+ 						   unsigned int);
-+ extern void nfnl_subsys_close(struct nfnl_subsys_handle *);
++ /* Get next entry from ethertype data base file.  Open data base if
++    necessary.  */
++-extern struct ethertypeent *getethertypeent(void) __THROW;
+++extern struct ethertypeent *getethertypeent(void);
 + 
-+@@ -88,8 +89,8 @@ extern int nfnl_sendiov(const struct nfnl_handle *nfnlh,
-+ 			const struct iovec *iov, unsigned int num,
-+ 			unsigned int flags);
-+ extern void nfnl_fill_hdr(struct nfnl_subsys_handle *, struct nlmsghdr *,
-+-			  unsigned int, u_int8_t, u_int16_t, u_int16_t,
-+-			  u_int16_t);
-++			  unsigned int, uint8_t, uint16_t, uint16_t,
-++			  uint16_t);
-+ extern __attribute__((deprecated)) int
-+ nfnl_talk(struct nfnl_handle *, struct nlmsghdr *, pid_t,
-+           unsigned, struct nlmsghdr *,
-+@@ -103,8 +104,8 @@ nfnl_listen(struct nfnl_handle *,
-+ /* receiving */
-+ extern ssize_t nfnl_recv(const struct nfnl_handle *h, unsigned char *buf, size_t len);
-+ extern int nfnl_callback_register(struct nfnl_subsys_handle *,
-+-				  u_int8_t type, struct nfnl_callback *cb);
-+-extern int nfnl_callback_unregister(struct nfnl_subsys_handle *, u_int8_t type);
-++				  uint8_t type, struct nfnl_callback *cb);
-++extern int nfnl_callback_unregister(struct nfnl_subsys_handle *, uint8_t type);
-+ extern int nfnl_handle_packet(struct nfnl_handle *, char *buf, int len);
++ /* Return entry from ethertype data base for network with NAME.  */
++-extern struct ethertypeent *getethertypebyname(__const char *__name)
++-    __THROW;
+++extern struct ethertypeent *getethertypebyname(__const char *__name);
 + 
-+ /* parsing */
-+@@ -180,12 +181,12 @@ extern int nfnl_query(struct nfnl_handle *h, struct nlmsghdr *nlh);
++ /* Return entry from ethertype data base which number is PROTO.  */
++-extern struct ethertypeent *getethertypebynumber(int __ethertype) __THROW;
+++extern struct ethertypeent *getethertypebynumber(int __ethertype);
 + 
-+ /* nfnl attribute handling functions */
-+ extern int nfnl_addattr_l(struct nlmsghdr *, int, int, const void *, int);
-+-extern int nfnl_addattr8(struct nlmsghdr *, int, int, u_int8_t);
-+-extern int nfnl_addattr16(struct nlmsghdr *, int, int, u_int16_t);
-+-extern int nfnl_addattr32(struct nlmsghdr *, int, int, u_int32_t);
-++extern int nfnl_addattr8(struct nlmsghdr *, int, int, uint8_t);
-++extern int nfnl_addattr16(struct nlmsghdr *, int, int, uint16_t);
-++extern int nfnl_addattr32(struct nlmsghdr *, int, int, uint32_t);
-+ extern int nfnl_nfa_addattr_l(struct nfattr *, int, int, const void *, int);
-+-extern int nfnl_nfa_addattr16(struct nfattr *, int, int, u_int16_t);
-+-extern int nfnl_nfa_addattr32(struct nfattr *, int, int, u_int32_t);
-++extern int nfnl_nfa_addattr16(struct nfattr *, int, int, uint16_t);
-++extern int nfnl_nfa_addattr32(struct nfattr *, int, int, uint32_t);
-+ extern int nfnl_parse_attr(struct nfattr **, int, struct nfattr *, int);
-+ #define nfnl_parse_nested(tb, max, nfa) \
-+ 	nfnl_parse_attr((tb), (max), NFA_DATA((nfa)), NFA_PAYLOAD((nfa)))
-+@@ -197,7 +198,7 @@ extern int nfnl_parse_attr(struct nfattr **, int, struct nfattr *, int);
-+ ({	(tail)->nfa_len = (void *) NLMSG_TAIL(nlh) - (void *) tail; })
 + 
-+ extern void nfnl_build_nfa_iovec(struct iovec *iov, struct nfattr *nfa, 
-+-				 u_int16_t type, u_int32_t len,
-++				 uint16_t type, uint32_t len,
-+ 				 unsigned char *val);
-+ extern unsigned int nfnl_rcvbufsiz(const struct nfnl_handle *h, 
-+ 				   unsigned int size);
-+diff --git a/src/iftable.c b/src/iftable.c
-+index 5976ed8..157f97b 100644
-+--- a/src/iftable.c
-++++ b/src/iftable.c
-+@@ -27,10 +27,10 @@
-+ struct ifindex_node {
-+ 	struct list_head head;
-+ 
-+-	u_int32_t	index;
-+-	u_int32_t	type;
-+-	u_int32_t	alen;
-+-	u_int32_t	flags;
-++	uint32_t	index;
-++	uint32_t	type;
-++	uint32_t	alen;
-++	uint32_t	flags;
-+ 	char		addr[8];
-+ 	char		name[16];
-+ };
-+diff --git a/src/iftable.h b/src/iftable.h
-+index 8df7f24..655df6b 100644
-+--- a/src/iftable.h
-++++ b/src/iftable.h
-+@@ -1,8 +1,8 @@
-+ #ifndef _IFTABLE_H
-+ #define _IFTABLE_H
-+ 
-+-int iftable_delete(u_int32_t dst, u_int32_t mask, u_int32_t gw, u_int32_t oif);
-+-int iftable_insert(u_int32_t dst, u_int32_t mask, u_int32_t gw, u_int32_t oif);
-++int iftable_delete(uint32_t dst, uint32_t mask, uint32_t gw, uint32_t oif);
-++int iftable_insert(uint32_t dst, uint32_t mask, uint32_t gw, uint32_t oif);
-+ 
-+ int iftable_init(void);
-+ void iftable_fini(void);
-+diff --git a/src/libnfnetlink.c b/src/libnfnetlink.c
-+index 398b7d7..df57533 100644
-+--- a/src/libnfnetlink.c
-++++ b/src/libnfnetlink.c
-+@@ -72,9 +72,9 @@
-+ 
-+ struct nfnl_subsys_handle {
-+ 	struct nfnl_handle 	*nfnlh;
-+-	u_int32_t		subscriptions;
-+-	u_int8_t		subsys_id;
-+-	u_int8_t		cb_count;
-++	uint32_t		subscriptions;
-++	uint8_t			subsys_id;
-++	uint8_t			cb_count;
-+ 	struct nfnl_callback 	*cb;	/* array of callbacks */
-+ };
-+ 
-+@@ -86,11 +86,11 @@ struct nfnl_handle {
-+ 	int			fd;
-+ 	struct sockaddr_nl	local;
-+ 	struct sockaddr_nl	peer;
-+-	u_int32_t		subscriptions;
-+-	u_int32_t		seq;
-+-	u_int32_t		dump;
-+-	u_int32_t		rcv_buffer_size;	/* for nfnl_catch */
-+-	u_int32_t		flags;
-++	uint32_t		subscriptions;
-++	uint32_t		seq;
-++	uint32_t		dump;
-++	uint32_t		rcv_buffer_size;	/* for nfnl_catch */
-++	uint32_t		flags;
-+ 	struct nlmsghdr 	*last_nlhdr;
-+ 	struct nfnl_subsys_handle subsys[NFNL_MAX_SUBSYS+1];
-+ };
-+@@ -145,7 +145,7 @@ unsigned int nfnl_portid(const struct nfnl_handle *h)
-+ static int recalc_rebind_subscriptions(struct nfnl_handle *nfnlh)
-+ {
-+ 	int i, err;
-+-	u_int32_t new_subscriptions = nfnlh->subscriptions;
-++	uint32_t new_subscriptions = nfnlh->subscriptions;
-+ 
-+ 	for (i = 0; i < NFNL_MAX_SUBSYS; i++)
-+ 		new_subscriptions |= nfnlh->subsys[i].subscriptions;
-+@@ -273,8 +273,8 @@ void nfnl_set_rcv_buffer_size(struct nfnl_handle *h, unsigned int size)
-+  * a valid address that points to a nfnl_subsys_handle structure is returned.
-+  */
-+ struct nfnl_subsys_handle *
-+-nfnl_subsys_open(struct nfnl_handle *nfnlh, u_int8_t subsys_id,
-+-		 u_int8_t cb_count, u_int32_t subscriptions)
-++nfnl_subsys_open(struct nfnl_handle *nfnlh, uint8_t subsys_id,
-++		 uint8_t cb_count, uint32_t subscriptions)
-+ {
-+ 	struct nfnl_subsys_handle *ssh;
-+ 
-+@@ -435,10 +435,10 @@ int nfnl_sendiov(const struct nfnl_handle *nfnlh, const struct iovec *iov,
-+  */
-+ void nfnl_fill_hdr(struct nfnl_subsys_handle *ssh,
-+ 		    struct nlmsghdr *nlh, unsigned int len, 
-+-		    u_int8_t family,
-+-		    u_int16_t res_id,
-+-		    u_int16_t msg_type,
-+-		    u_int16_t msg_flags)
-++		    uint8_t family,
-++		    uint16_t res_id,
-++		    uint16_t msg_type,
-++		    uint16_t msg_flags)
-+ {
-+ 	assert(ssh);
-+ 	assert(nlh);
-+@@ -815,7 +815,7 @@ int nfnl_addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
-+ }
-+ 
-+ /**
-+- * nfnl_nfa_addattr_l - Add variable length attribute to struct nfattr 
-++ * nfnl_nfa_addattr_l - Add variable length attribute to struct nfattr
-+  *
-+  * @nfa: struct nfattr
-+  * @maxlen: maximal length of nfattr buffer
-+@@ -849,14 +849,14 @@ int nfnl_nfa_addattr_l(struct nfattr *nfa, int maxlen, int type,
-+ }
-+ 
-+ /**
-+- * nfnl_addattr8 - Add u_int8_t attribute to nlmsghdr
-++ * nfnl_addattr8 - Add uint8_t attribute to nlmsghdr
-+  *
-+  * @n: netlink message header to which attribute is to be added
-+  * @maxlen: maximum length of netlink message header
-+  * @type: type of new attribute
-+  * @data: content of new attribute
-+  */
-+-int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
-++int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, uint8_t data)
-+ {
-+ 	assert(n);
-+ 	assert(maxlen > 0);
-+@@ -866,7 +866,7 @@ int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
-+ }
-+ 
-+ /**
-+- * nfnl_nfa_addattr16 - Add u_int16_t attribute to struct nfattr 
-++ * nfnl_nfa_addattr16 - Add uint16_t attribute to struct nfattr
-+  *
-+  * @nfa: struct nfattr
-+  * @maxlen: maximal length of nfattr buffer
-+@@ -875,7 +875,7 @@ int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
-+  *
-+  */
-+ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type, 
-+-		       u_int16_t data)
-++		       uint16_t data)
-+ {
-+ 	assert(nfa);
-+ 	assert(maxlen > 0);
-+@@ -885,7 +885,7 @@ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type,
-+ }
-+ 
-+ /**
-+- * nfnl_addattr16 - Add u_int16_t attribute to nlmsghdr
-++ * nfnl_addattr16 - Add uint16_t attribute to nlmsghdr
-+  *
-+  * @n: netlink message header to which attribute is to be added
-+  * @maxlen: maximum length of netlink message header
-+@@ -894,7 +894,7 @@ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type,
-+  *
-+  */
-+ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
-+-		   u_int16_t data)
-++		   uint16_t data)
-+ {
-+ 	assert(n);
-+ 	assert(maxlen > 0);
-+@@ -904,7 +904,7 @@ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
-+ }
-+ 
-+ /**
-+- * nfnl_nfa_addattr32 - Add u_int32_t attribute to struct nfattr 
-++ * nfnl_nfa_addattr32 - Add uint32_t attribute to struct nfattr
-+  *
-+  * @nfa: struct nfattr
-+  * @maxlen: maximal length of nfattr buffer
-+@@ -913,7 +913,7 @@ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
-+  *
-+  */
-+ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type, 
-+-		       u_int32_t data)
-++		       uint32_t data)
-+ {
-+ 	assert(nfa);
-+ 	assert(maxlen > 0);
-+@@ -923,7 +923,7 @@ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type,
-+ }
-+ 
-+ /**
-+- * nfnl_addattr32 - Add u_int32_t attribute to nlmsghdr
-++ * nfnl_addattr32 - Add uint32_t attribute to nlmsghdr
-+  *
-+  * @n: netlink message header to which attribute is to be added
-+  * @maxlen: maximum length of netlink message header
-+@@ -932,7 +932,7 @@ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type,
-+  *
-+  */
-+ int nfnl_addattr32(struct nlmsghdr *n, int maxlen, int type,
-+-		   u_int32_t data)
-++		   uint32_t data)
-+ {
-+ 	assert(n);
-+ 	assert(maxlen > 0);
-+@@ -980,7 +980,7 @@ int nfnl_parse_attr(struct nfattr *tb[], int max, struct nfattr *nfa, int len)
-+  *
-+  */ 
-+ void nfnl_build_nfa_iovec(struct iovec *iov, struct nfattr *nfa, 
-+-			  u_int16_t type, u_int32_t len, unsigned char *val)
-++			  uint16_t type, uint32_t len, unsigned char *val)
-+ {
-+ 	assert(iov);
-+ 	assert(nfa);
-+@@ -1115,7 +1115,7 @@ struct nlmsghdr *nfnl_get_msg_next(struct nfnl_handle *h,
-+  * appropiately.
-+  */
-+ int nfnl_callback_register(struct nfnl_subsys_handle *ssh,
-+-			   u_int8_t type, struct nfnl_callback *cb)
-++			   uint8_t type, struct nfnl_callback *cb)
-+ {
-+ 	assert(ssh);
-+ 	assert(cb);
-+@@ -1138,7 +1138,7 @@ int nfnl_callback_register(struct nfnl_subsys_handle *ssh,
-+  * On sucess, 0 is returned. On error, -1 is returned and errno is
-+  * set appropiately.
-+  */
-+-int nfnl_callback_unregister(struct nfnl_subsys_handle *ssh, u_int8_t type)
-++int nfnl_callback_unregister(struct nfnl_subsys_handle *ssh, uint8_t type)
-+ {
-+ 	assert(ssh);
-+ 
-+@@ -1161,8 +1161,8 @@ int nfnl_check_attributes(const struct nfnl_handle *h,
-+ 	assert(nfa);
-+ 
-+ 	int min_len;
-+-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-+-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-+ 	const struct nfnl_subsys_handle *ssh;
-+ 	struct nfnl_callback *cb;
-+ 
-+@@ -1212,8 +1212,8 @@ static int __nfnl_handle_msg(struct nfnl_handle *h, struct nlmsghdr *nlh,
-+ 			     int len)
-+ {
-+ 	struct nfnl_subsys_handle *ssh;
-+-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-+-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-+ 	int err = 0;
-+ 
-+ 	if (subsys_id > NFNL_MAX_SUBSYS)
-+@@ -1243,7 +1243,7 @@ int nfnl_handle_packet(struct nfnl_handle *h, char *buf, int len)
-+ {
-+ 
-+ 	while (len >= NLMSG_SPACE(0)) {
-+-		u_int32_t rlen;
-++		uint32_t rlen;
-+ 		struct nlmsghdr *nlh = (struct nlmsghdr *)buf;
-+ 
-+ 		if (nlh->nlmsg_len < sizeof(struct nlmsghdr)
-+@@ -1285,8 +1285,8 @@ static int nfnl_is_error(struct nfnl_handle *h, struct nlmsghdr *nlh)
-+ static int nfnl_step(struct nfnl_handle *h, struct nlmsghdr *nlh)
-+ {
-+ 	struct nfnl_subsys_handle *ssh;
-+-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-+-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
-++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
-+ 
-+ 	/* Is this an error message? */
-+ 	if (nfnl_is_error(h, nlh)) {
-+diff --git a/src/rtnl.c b/src/rtnl.c
-+index 7b4ac7d..284eecd 100644
-+--- a/src/rtnl.c
-++++ b/src/rtnl.c
-+@@ -30,7 +30,7 @@
-+ #define rtnl_log(x, ...)
-+ 
-+ static inline struct rtnl_handler *
-+-find_handler(struct rtnl_handle *rtnl_handle, u_int16_t type)
-++find_handler(struct rtnl_handle *rtnl_handle, uint16_t type)
-+ {
-+ 	struct rtnl_handler *h;
-+ 	for (h = rtnl_handle->handlers; h; h = h->next) {
-+@@ -41,7 +41,7 @@ find_handler(struct rtnl_handle *rtnl_handle, u_int16_t type)
-+ }
-+ 
-+ static int call_handler(struct rtnl_handle *rtnl_handle,
-+-			u_int16_t type,
-++			uint16_t type,
-+ 			struct nlmsghdr *hdr)
-+ {
-+ 	struct rtnl_handler *h = find_handler(rtnl_handle, type);
-+diff --git a/src/rtnl.h b/src/rtnl.h
-+index 0c403dc..2cb22a8 100644
-+--- a/src/rtnl.h
-++++ b/src/rtnl.h
-+@@ -7,7 +7,7 @@
-+ struct rtnl_handler {
-+ 	struct rtnl_handler *next;
-+ 
-+-	u_int16_t	nlmsg_type;
-++	uint16_t	nlmsg_type;
-+ 	int		(*handlefn)(struct nlmsghdr *h, void *arg);
-+ 	void		*arg;
-+ };
++ #endif				/* ethernetdb.h */
 +-- 
 +2.12.1
 +
-diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
-index edd0f866f..f7951ff8d 100644
---- a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
-+++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
-@@ -11,7 +11,14 @@ LICENSE = "GPLv2+"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
--SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=tar"
-+SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=tar \
-+           file://0001-build-resolve-automake-1.12-warnings.patch \
-+           file://0002-src-get-source-code-license-header-in-sync-with-curr.patch \
-+           file://0003-configure-uclinux-is-also-linux.patch \
-+           file://0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch \
-+           file://0005-include-Sync-with-kernel-headers.patch \
-+           file://0006-src-Use-stdint-types-everywhere.patch \
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch
+new file mode 100644
+index 000000000..248582c18
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch
+@@ -0,0 +1,48 @@
++From e6b367c0c2668341c47242d099f4d2048ae575ef Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?Alin=20N=C4=83stac?= <alin.nastac@gmail.com>
++Date: Thu, 22 Oct 2015 16:41:03 +0200
++Subject: [PATCH 09/10] ebtables: Allow RETURN target rules in user defined
++ chains
++
++During loop checking ebtables marks entries with '1 << NF_BR_NUMHOOKS' if
++they're called from a base chain rather than a user defined chain.
++
++This can be used by ebtables targets that can encode a special return
++value to bail out if e.g. RETURN is used from a base chain.
++
++Unfortunately, this is broken, since the '1 << NF_BR_NUMHOOKS' is also
++copied to called user-defined-chains (i.e., a user defined chain can no
++longer be distinguished from a base chain):
++
++root@OpenWrt:~# ebtables -N foo
++root@OpenWrt:~# ebtables -A OUTPUT -j foo
++root@OpenWrt:~# ebtables -A foo -j mark --mark-or 3 --mark-target RETURN
++--mark-target RETURN not allowed on base chain.
++
++This works if -A OUTPUT -j foo is omitted, but will still appear
++if we try to call foo from OUTPUT afterwards.
++
++After this patch we still reject
++'-A OUTPUT -j mark .. --mark-target RETURN'.
++
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++ libebtc.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/libebtc.c b/libebtc.c
++index 17ba8f2..74830ec 100644
++--- a/libebtc.c
+++++ b/libebtc.c
++@@ -1102,7 +1102,7 @@ void ebt_check_for_loops(struct ebt_u_replace *replace)
++ 			/* check if we've dealt with this chain already */
++ 			if (entries2->hook_mask & (1<<i))
++ 				goto letscontinue;
++-			entries2->hook_mask |= entries->hook_mask;
+++			entries2->hook_mask |= entries->hook_mask & ~(1 << NF_BR_NUMHOOKS);
++ 			/* Jump to the chain, make sure we know how to get back */
++ 			stack[sp].chain_nr = chain_nr;
++ 			stack[sp].n = j;
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0010-Adjust-header-include-sequence.patch b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0010-Adjust-header-include-sequence.patch
+new file mode 100644
+index 000000000..a6ef9cd09
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/0010-Adjust-header-include-sequence.patch
+@@ -0,0 +1,216 @@
++From b7cee37734007fced7a4d5ed586c3a9e5ad92878 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 26 Mar 2017 13:12:21 -0700
++Subject: [PATCH 10/10] Adjust header include sequence
++
++This fixes the build with musl
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ extensions/ebt_among.c    |   2 +-
++ extensions/ebt_arpreply.c |   2 +-
++ extensions/ebt_nat.c      |   2 +-
++ include/linux/if_ether.h  | 126 ----------------------------------------------
++ useful_functions.c        |   4 +-
++ 5 files changed, 5 insertions(+), 131 deletions(-)
++ delete mode 100644 include/linux/if_ether.h
++
++diff --git a/extensions/ebt_among.c b/extensions/ebt_among.c
++index f97d07e..b096847 100644
++--- a/extensions/ebt_among.c
+++++ b/extensions/ebt_among.c
++@@ -12,8 +12,8 @@
++ #include <getopt.h>
++ #include <ctype.h>
++ #include <unistd.h>
++-#include "../include/ebtables_u.h"
++ #include <netinet/ether.h>
+++#include "../include/ebtables_u.h"
++ #include "../include/ethernetdb.h"
++ #include <linux/if_ether.h>
++ #include <linux/netfilter_bridge/ebt_among.h>
++diff --git a/extensions/ebt_arpreply.c b/extensions/ebt_arpreply.c
++index c3757f3..c5102a4 100644
++--- a/extensions/ebt_arpreply.c
+++++ b/extensions/ebt_arpreply.c
++@@ -11,8 +11,8 @@
++ #include <stdlib.h>
++ #include <string.h>
++ #include <getopt.h>
++-#include "../include/ebtables_u.h"
++ #include <netinet/ether.h>
+++#include "../include/ebtables_u.h"
++ #include <linux/netfilter_bridge/ebt_arpreply.h>
++ 
++ static int mac_supplied;
++diff --git a/extensions/ebt_nat.c b/extensions/ebt_nat.c
++index e6afbf8..8d318d1 100644
++--- a/extensions/ebt_nat.c
+++++ b/extensions/ebt_nat.c
++@@ -10,8 +10,8 @@
++ #include <stdlib.h>
++ #include <string.h>
++ #include <getopt.h>
++-#include "../include/ebtables_u.h"
++ #include <netinet/ether.h>
+++#include "../include/ebtables_u.h"
++ #include <linux/netfilter_bridge/ebt_nat.h>
++ 
++ static int to_source_supplied, to_dest_supplied;
++diff --git a/include/linux/if_ether.h b/include/linux/if_ether.h
++deleted file mode 100644
++index 28a15ff..0000000
++--- a/include/linux/if_ether.h
+++++ /dev/null
++@@ -1,126 +0,0 @@
++-/*
++- * INET		An implementation of the TCP/IP protocol suite for the LINUX
++- *		operating system.  INET is implemented using the  BSD Socket
++- *		interface as the means of communication with the user level.
++- *
++- *		Global definitions for the Ethernet IEEE 802.3 interface.
++- *
++- * Version:	@(#)if_ether.h	1.0.1a	02/08/94
++- *
++- * Author:	Fred N. van Kempen, <waltje@uWalt.NL.Mugnet.ORG>
++- *		Donald Becker, <becker@super.org>
++- *		Alan Cox, <alan@lxorguk.ukuu.org.uk>
++- *		Steve Whitehouse, <gw7rrm@eeshack3.swan.ac.uk>
++- *
++- *		This program is free software; you can redistribute it and/or
++- *		modify it under the terms of the GNU General Public License
++- *		as published by the Free Software Foundation; either version
++- *		2 of the License, or (at your option) any later version.
++- */
++-
++-#ifndef _LINUX_IF_ETHER_H
++-#define _LINUX_IF_ETHER_H
++-
++-#include <linux/types.h>
++-
++-/*
++- *	IEEE 802.3 Ethernet magic constants.  The frame sizes omit the preamble
++- *	and FCS/CRC (frame check sequence).
++- */
++-
++-#define ETH_ALEN	6		/* Octets in one ethernet addr	 */
++-#define ETH_HLEN	14		/* Total octets in header.	 */
++-#define ETH_ZLEN	60		/* Min. octets in frame sans FCS */
++-#define ETH_DATA_LEN	1500		/* Max. octets in payload	 */
++-#define ETH_FRAME_LEN	1514		/* Max. octets in frame sans FCS */
++-#define ETH_FCS_LEN	4		/* Octets in the FCS		 */
++-
++-/*
++- *	These are the defined Ethernet Protocol ID's.
++- */
++-
++-#define ETH_P_LOOP	0x0060		/* Ethernet Loopback packet	*/
++-#define ETH_P_PUP	0x0200		/* Xerox PUP packet		*/
++-#define ETH_P_PUPAT	0x0201		/* Xerox PUP Addr Trans packet	*/
++-#define ETH_P_IP	0x0800		/* Internet Protocol packet	*/
++-#define ETH_P_X25	0x0805		/* CCITT X.25			*/
++-#define ETH_P_ARP	0x0806		/* Address Resolution packet	*/
++-#define	ETH_P_BPQ	0x08FF		/* G8BPQ AX.25 Ethernet Packet	[ NOT AN OFFICIALLY REGISTERED ID ] */
++-#define ETH_P_IEEEPUP	0x0a00		/* Xerox IEEE802.3 PUP packet */
++-#define ETH_P_IEEEPUPAT	0x0a01		/* Xerox IEEE802.3 PUP Addr Trans packet */
++-#define ETH_P_DEC       0x6000          /* DEC Assigned proto           */
++-#define ETH_P_DNA_DL    0x6001          /* DEC DNA Dump/Load            */
++-#define ETH_P_DNA_RC    0x6002          /* DEC DNA Remote Console       */
++-#define ETH_P_DNA_RT    0x6003          /* DEC DNA Routing              */
++-#define ETH_P_LAT       0x6004          /* DEC LAT                      */
++-#define ETH_P_DIAG      0x6005          /* DEC Diagnostics              */
++-#define ETH_P_CUST      0x6006          /* DEC Customer use             */
++-#define ETH_P_SCA       0x6007          /* DEC Systems Comms Arch       */
++-#define ETH_P_TEB	0x6558		/* Trans Ether Bridging		*/
++-#define ETH_P_RARP      0x8035		/* Reverse Addr Res packet	*/
++-#define ETH_P_ATALK	0x809B		/* Appletalk DDP		*/
++-#define ETH_P_AARP	0x80F3		/* Appletalk AARP		*/
++-#define ETH_P_8021Q	0x8100          /* 802.1Q VLAN Extended Header  */
++-#define ETH_P_IPX	0x8137		/* IPX over DIX			*/
++-#define ETH_P_IPV6	0x86DD		/* IPv6 over bluebook		*/
++-#define ETH_P_PAUSE	0x8808		/* IEEE Pause frames. See 802.3 31B */
++-#define ETH_P_SLOW	0x8809		/* Slow Protocol. See 802.3ad 43B */
++-#define ETH_P_WCCP	0x883E		/* Web-cache coordination protocol
++-					 * defined in draft-wilson-wrec-wccp-v2-00.txt */
++-#define ETH_P_PPP_DISC	0x8863		/* PPPoE discovery messages     */
++-#define ETH_P_PPP_SES	0x8864		/* PPPoE session messages	*/
++-#define ETH_P_MPLS_UC	0x8847		/* MPLS Unicast traffic		*/
++-#define ETH_P_MPLS_MC	0x8848		/* MPLS Multicast traffic	*/
++-#define ETH_P_ATMMPOA	0x884c		/* MultiProtocol Over ATM	*/
++-#define ETH_P_LINK_CTL	0x886c		/* HPNA, wlan link local tunnel */
++-#define ETH_P_ATMFATE	0x8884		/* Frame-based ATM Transport
++-					 * over Ethernet
++-					 */
++-#define ETH_P_PAE	0x888E		/* Port Access Entity (IEEE 802.1X) */
++-#define ETH_P_AOE	0x88A2		/* ATA over Ethernet		*/
++-#define ETH_P_TIPC	0x88CA		/* TIPC 			*/
++-#define ETH_P_1588	0x88F7		/* IEEE 1588 Timesync */
++-#define ETH_P_FCOE	0x8906		/* Fibre Channel over Ethernet  */
++-#define ETH_P_FIP	0x8914		/* FCoE Initialization Protocol */
++-#define ETH_P_EDSA	0xDADA		/* Ethertype DSA [ NOT AN OFFICIALLY REGISTERED ID ] */
++-
++-/*
++- *	Non DIX types. Won't clash for 1500 types.
++- */
++-
++-#define ETH_P_802_3	0x0001		/* Dummy type for 802.3 frames  */
++-#define ETH_P_AX25	0x0002		/* Dummy protocol id for AX.25  */
++-#define ETH_P_ALL	0x0003		/* Every packet (be careful!!!) */
++-#define ETH_P_802_2	0x0004		/* 802.2 frames 		*/
++-#define ETH_P_SNAP	0x0005		/* Internal only		*/
++-#define ETH_P_DDCMP     0x0006          /* DEC DDCMP: Internal only     */
++-#define ETH_P_WAN_PPP   0x0007          /* Dummy type for WAN PPP frames*/
++-#define ETH_P_PPP_MP    0x0008          /* Dummy type for PPP MP frames */
++-#define ETH_P_LOCALTALK 0x0009		/* Localtalk pseudo type 	*/
++-#define ETH_P_CAN	0x000C		/* Controller Area Network      */
++-#define ETH_P_PPPTALK	0x0010		/* Dummy type for Atalk over PPP*/
++-#define ETH_P_TR_802_2	0x0011		/* 802.2 frames 		*/
++-#define ETH_P_MOBITEX	0x0015		/* Mobitex (kaz@cafe.net)	*/
++-#define ETH_P_CONTROL	0x0016		/* Card specific control frames */
++-#define ETH_P_IRDA	0x0017		/* Linux-IrDA			*/
++-#define ETH_P_ECONET	0x0018		/* Acorn Econet			*/
++-#define ETH_P_HDLC	0x0019		/* HDLC frames			*/
++-#define ETH_P_ARCNET	0x001A		/* 1A for ArcNet :-)            */
++-#define ETH_P_DSA	0x001B		/* Distributed Switch Arch.	*/
++-#define ETH_P_TRAILER	0x001C		/* Trailer switch tagging	*/
++-#define ETH_P_PHONET	0x00F5		/* Nokia Phonet frames          */
++-#define ETH_P_IEEE802154 0x00F6		/* IEEE802.15.4 frame		*/
++-#define ETH_P_CAIF	0x00F7		/* ST-Ericsson CAIF protocol	*/
++-
++-/*
++- *	This is an Ethernet frame header.
++- */
++-
++-struct ethhdr {
++-	unsigned char	h_dest[ETH_ALEN];	/* destination eth addr	*/
++-	unsigned char	h_source[ETH_ALEN];	/* source ether addr	*/
++-	__be16		h_proto;		/* packet type ID field	*/
++-} __attribute__((packed));
++-
++-
++-#endif	/* _LINUX_IF_ETHER_H */
++diff --git a/useful_functions.c b/useful_functions.c
++index d14cbe9..c304f4d 100644
++--- a/useful_functions.c
+++++ b/useful_functions.c
++@@ -22,8 +22,6 @@
++  * along with this program; if not, write to the Free Software
++  * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
++  */
++-#include "include/ebtables_u.h"
++-#include "include/ethernetdb.h"
++ #include <stdio.h>
++ #include <netinet/ether.h>
++ #include <string.h>
++@@ -33,6 +31,8 @@
++ #include <sys/types.h>
++ #include <sys/socket.h>
++ #include <arpa/inet.h>
+++#include "include/ebtables_u.h"
+++#include "include/ethernetdb.h"
++ 
++ const unsigned char mac_type_unicast[ETH_ALEN] =   {0,0,0,0,0,0};
++ const unsigned char msk_type_unicast[ETH_ALEN] =   {1,0,0,0,0,0};
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index f5e28714e..375423d5d 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -18,7 +18,17 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
+            file://ebtables.common \
+            file://ebtables.service \
+            file://no-as-needed.patch \
+-"
++           file://0001-add-RARP-and-update-iana-url.patch \
++           file://0002-fix-compilation-warning.patch \
++           file://0003-add-info-about-Wl-no-as-needed.patch \
++           file://0004-workaround-for-kernel-regression-bug-IPv6-source-des.patch \
++           file://0005-Add-noflush-command-line-support-for-ebtables-restor.patch \
++           file://0006-don-t-print-IPv6-mask-if-it-s-all-ones-based-on-patc.patch \
++           file://0007-extensions-Use-stdint-types.patch \
++           file://0008-ethernetdb.h-Remove-C-specific-compiler-hint-macro-_.patch \
++           file://0009-ebtables-Allow-RETURN-target-rules-in-user-defined-c.patch \
++           file://0010-Adjust-header-include-sequence.patch \
 +           "
- SRC_URI[tar.md5sum] = "98927583d2016a9fb1936fed992e2c5e"
- SRC_URI[tar.sha256sum] = "f270e19de9127642d2a11589ef2ec97ef90a649a74f56cf9a96306b04817b51a"
  
+ SRC_URI[md5sum] = "506742a3d44b9925955425a659c1a8d0"
+ SRC_URI[sha256sum] = "dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9a4455d"
 -- 
 2.12.1
 
