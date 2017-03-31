@@ -1,47 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 827DD77D57
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id B89E277DD6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 15:18:36 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id o81so251266wmb.0
+	Fri, 31 Mar 2017 15:18:37 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id k6so20064251wre.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 08:18:38 -0700 (PDT)
+	Fri, 31 Mar 2017 08:18:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=R+HNraKV2Mfp5r7GU/PAy9f3c8gK76FALgryAzBigac=;
-	b=rYAOFyvm1w7oNA+ObQMyb7BVeEYP1T4O09zBJP0/slQh7WJlcQTtr0JPS2KQoLXh8q
-	Rjj2BCBWpmmm/bSR6XwfhoNeeqCxewO9YPjQTzWfgqAv96iYexq1furwQh1vP1H696JC
-	Y2srVbfnkaYEJyU8QMKiUAUyrklD8aJb1FAtY8Td7bRucbJL6h37QXxpVpH84M1nJAn4
-	M/OlLb9XnrelQMZbmhqosHEWJeDiSYxNlR/HziKkXJG5EtUjdSeq5KHddKsC7Rbeh2/N
-	4xKITCG9S8hDZowrBlLjZfrvCYPZKnVXlwuEPgZP+D8+bOe0dTUIoleDiGPwuyHIyhor
-	/z2g==
+	bh=psGOxyIXDp1xXLLnW1Q8IbCTZqVV4TSs4KGFOa9Lvak=;
+	b=i1ZWQlHUSR7v1v5IxvMziWnLOCZF0wdY27lrGTrVONfSMtp+MLWgazFcuonoYinYEF
+	WPOJyrbRanOt1Eb8fj4hA+XpSA1BFGw9iqu1wKUuzgpTgqK59dsituCPmAFuJn0qZu4b
+	GsJSaBTEJpAShilr4rSve3y4KbE6UmFzpo2S8k6D8WNdpHB5zHNfRJHdhDujLOYXpa63
+	Xo79kbLdIEvl9fAoialeivzk37THZDUFULyA1jWwJ+L5n+reonqgs3WX1Ey3hU2lUxT2
+	FjWIpibIfUj710wD+Oe0CvE4boTi3XxhozjOoM48PdkuVjgdSslE2xDxGMVSQvxxc/SQ
+	hxPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=R+HNraKV2Mfp5r7GU/PAy9f3c8gK76FALgryAzBigac=;
-	b=nOesdex+dq/YKl81Ctj7B/h6BmmAlO6EzLWCmr5ZvlvkCFrNBJHzt2ptQtgW27VLPB
-	/sDxS7sMIWb14AfqIB3NaGBgGaz7hEVpY0HElowG+57JXmcfBE7SgJwuOcke8dZNthZl
-	lexuUQN9CY9PGoRxxBK2krogFm75867MU5BN+RVgSYhypD5A2VV7BuKoUy1owZaSu1Si
-	axP5RmH67+82KZrN3jMHQjl4QeStL2eAqKP5I1Fmy2c3DEyrhWI1ZQB1krvc+9PH4rtq
-	UY+ZO012Ju4cE3fU/5qSkk6u2moly/+rshbAecdVAtnj+wFyn0A9TzP2ICC9YUB4kPpa
-	RoGA==
-X-Gm-Message-State: AFeK/H00tQ/1TLYF1ipWEP+PbuXsrmxI36LaJ80OznQrPSo+WMqWk4Hf6CO4EShBqgJqFg==
-X-Received: by 10.28.11.69 with SMTP id 66mr4023251wml.38.1490973517294;
-	Fri, 31 Mar 2017 08:18:37 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id w4sm3238301wmg.29.2017.03.31.08.18.36
+	bh=psGOxyIXDp1xXLLnW1Q8IbCTZqVV4TSs4KGFOa9Lvak=;
+	b=kCULls28DLstB2HpGEoSyldUayVBDOxdRql4qWD8/W1xDLKD2e0IhElgDkagdBoQ1D
+	hk4Hp/wJVRZciVr6oIY2tB6Mz7PeI6Bcxma6HGZ/sCKtO1yb37o157BnpLXVNUlTWUaI
+	ZEW+8Q7VXhL1TVWa/WRZwvEeOfmkfwimu+/kH46KoClRydzVBn45fGtsV/W/Dh8ns04Q
+	MtwFMxYKXS/r5l5ZoTZy0LIitYU7BVEmd7GAQjdJiY++Ztrxkt9aqGK+TUQQKiRfs15n
+	POrBhbtS/NplAbuwmKGxpGk7HheHDIeJH+Rix6fRiMJhd+8aMv3AY0vIA3+9lorMpWb/
+	+qbA==
+X-Gm-Message-State: AFeK/H1p0RoUGLehV1dT37qbOxJPBa+neeSzz8Klq4goo6e1+g7+RVKbJon6KZI7mROVIA==
+X-Received: by 10.223.179.195 with SMTP id x3mr149930wrd.80.1490973518590;
+	Fri, 31 Mar 2017 08:18:38 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	110sm7045511wra.49.2017.03.31.08.18.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 08:18:36 -0700 (PDT)
+	Fri, 31 Mar 2017 08:18:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 17:18:22 +0200
-Message-Id: <20170331151828.25907-1-Martin.Jansa@gmail.com>
+Date: Fri, 31 Mar 2017 17:18:23 +0200
+Message-Id: <20170331151828.25907-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.12.2
-In-Reply-To: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
+In-Reply-To: <20170331151828.25907-1-Martin.Jansa@gmail.com>
 References: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
-Subject: [meta-oe][morty][PATCHv2 1/7] lftp: change SRC_URI source
+	<20170331151828.25907-1-Martin.Jansa@gmail.com>
+Subject: [meta-oe][morty][PATCHv2 2/7] libqb: use github.com instead of retired fedorahosted.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +56,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 15:18:36 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 15:18:38 -0000
 
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+* https://fedoraproject.org/wiki/Infrastructure/Fedorahosted-retirement
+* cherry picked from master:
+  commit 18893ec9498cbb5bf9259f36c2bee03cedc4b6de
+  Author: Martin Jansa <Martin.Jansa@gmail.com>
+  Date:   Wed Mar 29 10:18:01 2017 +0200
 
-Changed SRC_URI source to official web-site, which keeps tarballs with
-old releases.
+    libqb: use github.com instead of retired fedorahosted.org
 
-Cherry-picked from master, but without the upgrade to 4.7.5.
-
-  commit a2e075ba656a89da58ca4f849c2f08ec6d50a96f
-  Author: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-  Date:   Mon Jan 9 15:34:07 2017 +0100
-
-    lftp: update to 4.7.5 and change SRC_URI source
-
-    Updated lftp to version 4.7.5 and changed SRC_URI source to official
-    web-site, which keeps tarballs with old releases.
-
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/libqb/libqb_0.17.2.bb | 15 +++++++--------
+ 1 file changed, 7 insertions(+), 8 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-index 287821194..d62453745 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-@@ -6,7 +6,7 @@ SECTION = "console/network"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
+index 40d06f379..2d3278ce8 100644
+--- a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
++++ b/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
+@@ -3,20 +3,19 @@ DESCRIPTION = "libqb is a library with the primary purpose of providing high per
+ It provides high performance logging, tracing, ipc, and poll."
  
--SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
-+SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz \
-            file://fix-gcc-6-conflicts-signbit.patch \
-           "
- SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
+ HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
+-
+ SECTION = "libs"
+ 
+-inherit autotools pkgconfig
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+ 
+-SRC_URI = "https://fedorahosted.org/releases/q/u/quarterback/${BP}.tar.xz \
+-          "
++inherit autotools pkgconfig
+ 
+-SRC_URI[md5sum] = "de1e5d38fa449b4d127940c10d117260"
+-SRC_URI[sha256sum] = "9a419c649ed51f275dc780da8a15babb8a5d33633567bd9e0cb6193b6e21f4fe"
++PV = "0.17.2+git${SRCPV}"
+ 
+-LICENSE = "LGPL-2.1"
++SRCREV = "bd2c587f6ccacd8a5644b275d99324d200c2b378"
++SRC_URI = "git://github.com/ClusterLabs/${BPN}.git"
+ 
+-LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
++S = "${WORKDIR}/git"
+ 
+ do_configure_prepend() {
+     ( cd ${S}
 -- 
 2.12.2
 
