@@ -1,49 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 4079477E59
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6405D77E51
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 16:43:16 +0000 (UTC)
-Received: by mail-pg0-f49.google.com with SMTP id 21so76222735pgg.1
+	Fri, 31 Mar 2017 16:43:18 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id o123so18541596pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 09:43:18 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=LxSRdZAUXX2oZJZKBftehABRCC7pVyLUHtNF/s41Xwo=;
-	b=cvUWl3R+mdAHSxNfAPo74wwoQrxQ3EpVdFGBqIAvm92vc3BlANx58m2HSMEjKiD0NH
-	dzy+O00dPlDDr8a1O/6UDZe6XI9ia75W9woejeqZ18BYLlQU4gtgRtmqFTxNQUW3UKMV
-	/m8yuG2isWk3c7ep1W0JYMEogkiF6aJOOCLhUj74ODeoQ637Tx+Au+xt5Zz6GbWzdfnQ
-	0L1ypyaD6bk9L+bg4nTn+4eDs63I5YUKBzWpl9dgCYoDz64k/QkIzDfOh9oy/pJYkl27
-	cgO2Uvs21gRwAnarrqPBDo4iULelKfhRT77wijLV8yC2GcEfPbpNSjjf7RqO444CTCZn
-	ZOyA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=jWOdrk65W02Ms7lxadgD8MFo2raDy+wMA0H9XbxI+64=;
+	b=Hw9L47g1KuSVVmidiAQ6dkeDh9MTOIBDaQyx/ULMEGExdBHhj53k4oajR/hRkSziN5
+	rIsjBO/ggBRD9F1M+K1D9tWHCgRi6lSzoQV2Ga/g9CnLyHnvEV02Rxn9aYRWO5wAAig0
+	FI1FDc6J4NGjO8LFu++G28pNc+AZhn5kozA4/utI7SJQSiNzQRNm6r1xINP705hd0LLV
+	w9yrQsFFKW7bEYZ72eBvUpwjfFiDQjnGjtc82PC27xcbdtR8LTRMtzl4/Mer55N9H119
+	mq+eZBYciqN2gUWvnpXQfIu9y08Y7OluKpmxE+GA/p3HxohmbDH70XJGSJHkz9AMq4L+
+	3Saw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=LxSRdZAUXX2oZJZKBftehABRCC7pVyLUHtNF/s41Xwo=;
-	b=aH7+0HAtgy1nOEJ9RlGFNMMON4kbzEx3BZXOn3LrWJR8qrk7FL6+We3THvjzwlzCr2
-	49/JrNDuYMyGB2HicT/rR/N/2FPqx2FmvHUt4YImXP0epRA5qLBeM2GIwMQ/3hG34gAd
-	835upFWjSWHwXGCDHuLaFTjLwWUkaYvSfvUiM2ooF/MzHkpjTkNF/3nWVuAsfyCp+Xz8
-	/atnneSLD2RmDMCtp4lini6NHJfAh5zdBEvDfYMgq2hVm5VtpJLY8hZt5xHsNd+FCMsQ
-	ehTcsNTcuqGuIEM6bo/p3N/c7KU9hxTkY2XNmlqHPnSQpnA1jX/6NaGVfoLaQmF6OITQ
-	+7Ow==
-X-Gm-Message-State: AFeK/H3Ki5/j3baHVSdYqglg6Foj6qdbhB8G2xi0ErfsD4K549v+1Oktq7ELgI1PQNPgOw==
-X-Received: by 10.99.213.81 with SMTP id v17mr4291008pgi.130.1490978597931;
-	Fri, 31 Mar 2017 09:43:17 -0700 (PDT)
+	:references;
+	bh=jWOdrk65W02Ms7lxadgD8MFo2raDy+wMA0H9XbxI+64=;
+	b=Al2vP7eg/f+YgVGnGWPCN+Tax5p/g7/sMqRIt+vaqOYVPfz3bAy0O9/H6bWIqjIGE4
+	btIrUxkJF2DCcPEEFNdIwkCn7kr0834LayvUg+UY2IBY+qu73uZWadpl61Ui9/hkw85B
+	1EN2a/8WScrWRfO47ZtsVTJe/QUHP/8J7pfblJz3L7TFHVRKeZ8Mmt1uC8RGhZXFsRp7
+	bLfOhPwfoFwj82D6xAlH1DXuE2rs71gBlNyvPsJg100nDDVr/d6s5/bhxWy8jdpPD3aP
+	yMOjDEVSBpv1JXzi44stVOEqpGRpndStGeu0XPQS3USoFk7VeVndFaUrTkK3za57PXc4
+	RkSA==
+X-Gm-Message-State: AFeK/H2JHEbRIQWZdMon3mDT+PVJx88MiOkbHXg6ALLdORoO238tM3AWTJAQGWxtTnexfw==
+X-Received: by 10.99.132.73 with SMTP id k70mr4126651pgd.28.1490978599355;
+	Fri, 31 Mar 2017 09:43:19 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	a5sm11569706pfh.124.2017.03.31.09.43.16
+	a5sm11569706pfh.124.2017.03.31.09.43.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 09:43:16 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 09:42:20 -0700
-Message-Id: <20170331164247.5052-16-raj.khem@gmail.com>
+Date: Fri, 31 Mar 2017 09:42:21 -0700
+Message-Id: <20170331164247.5052-17-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.1
 In-Reply-To: <20170331164247.5052-1-raj.khem@gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 16/43] usb-modeswitch-data: Add dep on native tcl
+Subject: [meta-filesystems][PATCH 17/43] aufs-util: Define HOSTCC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 16:43:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 31 Mar 2017 16:43:18 -0000
 
-it has a tclsh need for executing a script during build
-Fixes
+Fixes errors like below
 
-| ./gen-rules.tcl
-| /usr/bin/env: ‘tclsh’: No such file or directory
-| make: *** [Makefile:26: 40-usb_modeswitch.rules] Error 127
-| WARNING: /mnt/b/build/tmp-musl/work/all-oe-linux/usb-modeswitch-data/20170205-r0/temp/run.do_compile.30695:1 exit 1 from 'exit 1'
+| make: cc: Command not found
+| make: *** [<builtin>: c2sh] Error 127
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb | 2 ++
+ meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
-index 042cd383b..eeed5e275 100644
---- a/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
-+++ b/meta-oe/recipes-support/usb-modeswitch/usb-modeswitch-data_20170205.bb
-@@ -4,6 +4,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+index 7d5352eb4..50d8b909a 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+@@ -18,6 +18,8 @@ PV = "3.14+git${SRCPV}"
  
- inherit allarch
+ S = "${WORKDIR}/git"
  
-+DEPENDS += "tcl-native"
++export HOSTCC = "${BUILD_CC}"
 +
- SRC_URI = "http://www.draisberghof.de/usb_modeswitch/${BP}.tar.bz2"
- SRC_URI[md5sum] = "0cc107cd0c4c83df0d9400c999e21dfd"
- SRC_URI[sha256sum] = "e2dcfd9d28928d8d8f03381571a23442b3c50d48d343bc40a1a07d01662738d1"
+ do_configure_prepend() {
+    # Replace sbin,bin paths with bitbake environment
+    sed -i -e 's;install_sbin: Tgt = ${DESTDIR}/sbin;install_sbin: Tgt = ${DESTDIR}/${base_sbindir};' \
 -- 
 2.12.1
 
