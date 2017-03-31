@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AE8077E49
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id EAC3177E33
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 16:43:07 +0000 (UTC)
-Received: by mail-pg0-f53.google.com with SMTP id 81so76187228pgh.2
+	Fri, 31 Mar 2017 16:43:08 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id o123so18540814pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 09:43:09 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ry/r0q/InedQyIk6HiwDsG/B0qaou75vOh0QMlgI4fU=;
-	b=Np29Fj/Il1ItZJYfnJmOx72DHYKy49fgS12u0TeM0uSnKi1cyW+QzqSvVzhFV8PTzz
-	Eqj5J9QdPNDuzZU82QodC6V4S4ny9xMalll5kDoG7qYC6bbV0gnKPmM8EjJU69yP6SDe
-	Cdj8aRWS96LqGaoXK/zC23tTwGygX+/jmqS08JR90uyxjmlatOtoTa0gNmJdhX/3SHrF
-	VVHnnputf4G9iFGgGlXtqSDGY5NEbt5rbZ+RnFZRZkzgJ8eAaWFcTQvGthJDeKfX4MQJ
-	3IaZQkx9KETvTMo75/mZN7ykPTnHUTNwXCprRYLnDE7ZjSz1JiILzPErsdmdgN0FcBbx
-	4Vkw==
+	bh=2WKoRmH6IcvjAhgf9wFxKnF1OHW2/EjOY7Z2ODWriXc=;
+	b=pkAVCfEVYGg+sX/gUKnTORZUnDBxedlYyqTj0+tOJny4SLWMdPSMvOzPfmbrmtOJ9D
+	9T6/BLsA4knk6vl2OMezM+PDnz5iL6yfzmD4vCimXUkoch+BWHa3nT9K2BuLXzPAYW6J
+	SLAmBZV9PBmNX3Z6S5NL872r3UtKJ+bR8Ql0NNLjdfuKp+M16IbRqKnGtDsMM3UnZtei
+	mnMSMXoWauB8MxPcbzCcHAJCQVnfFdO4Ul41Watlm1BlR2nB1a8ghcBHs8vfB/Yx61HM
+	87fV9qANt6UBjUI+4ORBgd3AaSvX1rRH2tZGphyqnD/sWXdpC70MVxbsmJVMq1MaaUvc
+	Cd+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=ry/r0q/InedQyIk6HiwDsG/B0qaou75vOh0QMlgI4fU=;
-	b=OIPn4PEr6UycZoLDsdokwlZvNnBlBBq19VFfSYd9A9f5TO31d0wACkDf9GHi7iA8Lh
-	ObxLclep/Y7K2nB+ZpYRsda/lSvmS62KWL3OtKGPK1zRkW/iwyn071hNqtkysTg0Azko
-	7tbPFg+Z1nNNO7B32H+pj8VT45Z++mBiej6WnjgqzzT5pyqdlEImuaxotUIOH3gv+Onk
-	qz3bwBbzGuLXzlYRMM1e5smWcJtyz6rrFrdUEqHifllJWEOBwfGpHjKbW6Lr1j+Xj10d
-	samlE7wQtsZodT1upFFvxs1kthvf2XjIldqF5i+JV3tU2MW/kJXY3G0ijPrkkQ0cveaO
-	ohxw==
-X-Gm-Message-State: AFeK/H2J4XTHWRVO+SgXk4yG3+1Rdm7zvHrtJy1b75IIHP0hVrh4k3r51kwiNWGBuf1gUg==
-X-Received: by 10.99.106.138 with SMTP id f132mr4155406pgc.66.1490978588801;
-	Fri, 31 Mar 2017 09:43:08 -0700 (PDT)
+	bh=2WKoRmH6IcvjAhgf9wFxKnF1OHW2/EjOY7Z2ODWriXc=;
+	b=V3GPQ14g1pf9fcnbx02XaM+2nF2Pfh8atRHAx0lKI8N+lC7KqwGUpEUEUuMCQyI1g9
+	E+JJIyuTWxiEB+OXJmsw/b1ILsHR9dXjQd49lSfajfuyaslwNL5yilDLnGR+Y4AQBEzC
+	MQ7SyFcBNcSMHf1Ao7nn+NLTJuN9TeYsw4Tt/C70hcB5BRdxOsXUvl+oHGuKf9UVusez
+	TrjEWCSNlsqAJzLHx3qufDvUbjby4oeuJz8n3a+RaTSgXFc5KrLSl17e7mdQbI+jck+r
+	Ubr80FoOAG37lN5gFomSBCgF45UnlcjK2RP+IC2PkucuXzLtqqKXsB9d/N8EmTEO9VzD
+	sCCQ==
+X-Gm-Message-State: AFeK/H1pq3hqv2hZjK9c0S4dFk/tuRlv7TCyub723QAKwADcCiaHoDfAnGYGOwax0/0LzA==
+X-Received: by 10.99.137.66 with SMTP id v63mr4169339pgd.183.1490978590296;
+	Fri, 31 Mar 2017 09:43:10 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	a5sm11569706pfh.124.2017.03.31.09.43.07
+	a5sm11569706pfh.124.2017.03.31.09.43.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 09:43:07 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:09 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 09:42:14 -0700
-Message-Id: <20170331164247.5052-10-raj.khem@gmail.com>
+Date: Fri, 31 Mar 2017 09:42:15 -0700
+Message-Id: <20170331164247.5052-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.1
 In-Reply-To: <20170331164247.5052-1-raj.khem@gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 10/43] tcsh: Update to 6.20.00 release
+Subject: [meta-networking][PATCH 11/43] libnfnetlink: Backport patches to fix musl build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,529 +54,740 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 16:43:08 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 16:43:09 -0000
 
-Fix segfaults on musl
+There are few upstream patches that are required for getting it
+working with musl, backport these patches on top of 1.0.1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-extended/tcsh/files/01_build.1.patch   | 16 ------
- .../recipes-extended/tcsh/files/01_build.2.patch   | 13 -----
- .../recipes-extended/tcsh/files/01_build.3.patch   | 13 -----
- .../tcsh/files/12_unknown_lscolors.patch           | 24 ---------
- .../recipes-extended/tcsh/files/15_no-strip.patch  | 14 -----
- .../tcsh/files/disable-broken-test.patch           | 14 -----
- .../tcsh/files/disable-lexical.at-31.patch         | 30 -----------
- .../tcsh/files/disable-test-nice.patch             | 23 ---------
- .../tcsh/files/disable-test-notty.patch            | 30 -----------
- .../tcsh/files/fix-gcc6-wait-union.patch           | 11 ----
- .../tcsh/files/tcsh-6.17.02-multibyte.patch        | 18 -------
- .../0001-Enable-system-malloc-on-all-linux.patch   | 30 +++++++++++
- .../tcsh/tcsh/0002-Add-debian-csh-scripts.patch    | 60 ++++++++++++++++++++++
- meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb      | 55 --------------------
- meta-oe/recipes-extended/tcsh/tcsh_6.20.00.bb      | 44 ++++++++++++++++
- 15 files changed, 134 insertions(+), 261 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/01_build.1.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/01_build.2.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/01_build.3.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/12_unknown_lscolors.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/15_no-strip.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/disable-broken-test.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/disable-lexical.at-31.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/disable-test-nice.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/disable-test-notty.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/files/tcsh-6.17.02-multibyte.patch
- create mode 100644 meta-oe/recipes-extended/tcsh/tcsh/0001-Enable-system-malloc-on-all-linux.patch
- create mode 100644 meta-oe/recipes-extended/tcsh/tcsh/0002-Add-debian-csh-scripts.patch
- delete mode 100644 meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
- create mode 100644 meta-oe/recipes-extended/tcsh/tcsh_6.20.00.bb
+ ...0001-build-resolve-automake-1.12-warnings.patch |  28 ++
+ ...rce-code-license-header-in-sync-with-curr.patch |  49 +++
+ .../0003-configure-uclinux-is-also-linux.patch     |  27 ++
+ ...k-initialize-attribute-padding-to-resolve.patch |  39 ++
+ .../0005-include-Sync-with-kernel-headers.patch    | 110 ++++++
+ .../0006-src-Use-stdint-types-everywhere.patch     | 403 +++++++++++++++++++++
+ .../libnfnetlink/libnfnetlink_1.0.1.bb             |   9 +-
+ 7 files changed, 664 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
+ create mode 100644 meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
 
-diff --git a/meta-oe/recipes-extended/tcsh/files/01_build.1.patch b/meta-oe/recipes-extended/tcsh/files/01_build.1.patch
-deleted file mode 100644
-index b9f41ade9..000000000
---- a/meta-oe/recipes-extended/tcsh/files/01_build.1.patch
-+++ /dev/null
-@@ -1,16 +0,0 @@
--Author: Franz Pletz <fpletz@franz-pletz.org>
--Description: Original comment: Fix build
--Not sure why we have this patch. Let's keep it for compatibility.
----- a/pathnames.h
--+++ b/pathnames.h
--@@ -92,6 +92,10 @@
-- # define _PATH_TCSHELL		"/local/bin/tcsh"	/* use ram disk */
-- #endif /* _MINIX && !_PATH_TCSHELL */
-- 
--+#ifndef _PATH_TCSHELL
--+# define _PATH_TCSHELL		"/bin/tcsh"		/* Debian */
--+#endif /* !_PATH_TCSHELL */
--+
-- #if defined(__EMX__) && !defined(_PATH_DEVNULL)
-- # define _PATH_DEVNULL		"nul"
-- #endif /* __EMX__ && !_PATH_DEVNULL */
-diff --git a/meta-oe/recipes-extended/tcsh/files/01_build.2.patch b/meta-oe/recipes-extended/tcsh/files/01_build.2.patch
-deleted file mode 100644
-index ff2753154..000000000
---- a/meta-oe/recipes-extended/tcsh/files/01_build.2.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Author: Franz Pletz <fpletz@franz-pletz.org>
--Description: Update manpage.
----- a/tcsh.man
--+++ b/tcsh.man
--@@ -578,7 +578,7 @@ Repeating \fIdabbrev-expand\fR without a
-- changes to the next previous word etc., skipping identical matches
-- much like \fIhistory-search-backward\fR does.
-- .TP 8
---.B delete-char \fR(not bound)
--+.B delete-char \fR(bound to `Del' if using the standard \fI/etc/csh.cshrc\fR)
-- Deletes the character under the cursor.
-- See also \fIdelete-char-or-list-or-eof\fR.
-- .TP 8
-diff --git a/meta-oe/recipes-extended/tcsh/files/01_build.3.patch b/meta-oe/recipes-extended/tcsh/files/01_build.3.patch
-deleted file mode 100644
-index d36c177af..000000000
---- a/meta-oe/recipes-extended/tcsh/files/01_build.3.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Author: Franz Pletz <fpletz@franz-pletz.org>
--Description: Enable NODOT
----- a/config_f.h
--+++ b/config_f.h
--@@ -98,7 +98,7 @@
-- /*
--  * NODOT	Don't put "." in the default path, for security reasons
--  */
---#undef NODOT
--+#define NODOT
-- 
-- /*
--  * AUTOLOGOUT	tries to determine if it should set autologout depending
-diff --git a/meta-oe/recipes-extended/tcsh/files/12_unknown_lscolors.patch b/meta-oe/recipes-extended/tcsh/files/12_unknown_lscolors.patch
-deleted file mode 100644
-index faa59cc80..000000000
---- a/meta-oe/recipes-extended/tcsh/files/12_unknown_lscolors.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--Author: Franz Pletz <fpletz@franz-pletz.org>
--Description: Don't die on unknown LS_COLORS values
--Removing the patch causes a segfault when dircolors is set by coreutils' dircolors.
--Debian-Bug: #592089
--
----- a/tw.color.c
--+++ b/tw.color.c
--@@ -239,13 +239,10 @@ parseLS_COLORS(const Char *value)
-- 		    if ((Char)variables[i].variable[0] == (v[0] & CHAR) &&
-- 			(Char)variables[i].variable[1] == (v[1] & CHAR))
-- 			break;
---		if (i < nvariables) {
---		    v += 3;
--+		v += 3;
--+		if (i < nvariables)
-- 		    getstring(&c, &v, &variables[i].color, ':');
---		    continue;
---		}
---		else
---		    stderror(ERR_BADCOLORVAR, v[0], v[1]);
--+		continue;
-- 	    }
-- 	    break;
-- 	}
-diff --git a/meta-oe/recipes-extended/tcsh/files/15_no-strip.patch b/meta-oe/recipes-extended/tcsh/files/15_no-strip.patch
-deleted file mode 100644
-index cbc9f65d0..000000000
---- a/meta-oe/recipes-extended/tcsh/files/15_no-strip.patch
-+++ /dev/null
-@@ -1,14 +0,0 @@
--Author: Lucas Nussbaum <lucas@debian.org>
--Description: do not strip binary
-- Stripping should be handled by dh_strip instead, so DEB_BUILD_OPTIONS=nostrip works.
-- Closes: #438109, #411607
----- a/Makefile.in
--+++ b/Makefile.in
--@@ -596,7 +596,6 @@ install: tcsh$(EXEEXT)
-- 	-mkdir -p ${DESTBIN}
-- 	-mv -f ${DESTBIN}/tcsh$(EXEEXT)  ${DESTBIN}/tcsh.old
-- 	cp tcsh$(EXEEXT) ${DESTBIN}/tcsh$(EXEEXT)
---	-strip ${DESTBIN}/tcsh$(EXEEXT)
-- 	chmod 755 ${DESTBIN}/tcsh$(EXEEXT)
-- 
-- install.man: tcsh.man
-diff --git a/meta-oe/recipes-extended/tcsh/files/disable-broken-test.patch b/meta-oe/recipes-extended/tcsh/files/disable-broken-test.patch
-deleted file mode 100644
-index 0bda0ba10..000000000
---- a/meta-oe/recipes-extended/tcsh/files/disable-broken-test.patch
-+++ /dev/null
-@@ -1,14 +0,0 @@
--Author: Lucas Nussbaum <lucas@debian.org>
--Description: disable syntactically incorrect test
----- a/tests/lexical.at
--+++ b/tests/lexical.at
--@@ -172,9 +172,6 @@
-- AT_DATA([nohist.csh],
-- [echo ! space !	tab != "!(" newline !
-- ])
---AT_CHECK([tcsh -f nohist.csh], ,
---[[! space ! tab != !( newline !
---]])
-- 
-- AT_CLEANUP
-- 
-diff --git a/meta-oe/recipes-extended/tcsh/files/disable-lexical.at-31.patch b/meta-oe/recipes-extended/tcsh/files/disable-lexical.at-31.patch
-deleted file mode 100644
-index 98a9b2e1d..000000000
---- a/meta-oe/recipes-extended/tcsh/files/disable-lexical.at-31.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
----- a/tests/lexical.at
--+++ b/tests/lexical.at
--@@ -27,27 +27,6 @@ AT_CHECK([tcsh -f oneword.csh], ,
-- 
-- AT_CLEANUP
-- 
---
---AT_SETUP([Comments])
---
---AT_CHECK([echo 'echo OK@%:@comment' | tcsh -f], , [OK
---])
---
---AT_CHECK([tcsh -f -c 'echo @%:@no comment'], ,
---[@%:@no comment
---])
---
---AT_DATA([comment2.csh],
---[[echo testing...@%:@\
---OK
---]])
---AT_CHECK([tcsh -f comment2.csh], ,
---[testing... OK
---])
---
---AT_CLEANUP
---
---
-- AT_SETUP([Escaping special characters])
-- 
-- AT_DATA([nosplit.csh],
-diff --git a/meta-oe/recipes-extended/tcsh/files/disable-test-nice.patch b/meta-oe/recipes-extended/tcsh/files/disable-test-nice.patch
-deleted file mode 100644
-index 79f918c08..000000000
---- a/meta-oe/recipes-extended/tcsh/files/disable-test-nice.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
--Author: Lucas Nussbaum <lucas@debian.org>
--Description: disable test that fails on the buildd with
--  "setpriority: Permission denied".
----- a/tests/commands.at
--+++ b/tests/commands.at
--@@ -888,17 +888,6 @@ TCSH_UNTESTED([migrate])
-- TCSH_UNTESTED([newgrp])
-- 
-- 
---AT_SETUP([nice])
---
---# Nothing really tested
---AT_CHECK([tcsh -f -c 'nice set var=1; echo $?var'], ,
---[0
---])
---
---
---AT_CLEANUP
---
---
-- AT_SETUP([nohup])
-- 
-- AT_DATA([nohup.csh],
-diff --git a/meta-oe/recipes-extended/tcsh/files/disable-test-notty.patch b/meta-oe/recipes-extended/tcsh/files/disable-test-notty.patch
-deleted file mode 100644
-index 69f0564e8..000000000
---- a/meta-oe/recipes-extended/tcsh/files/disable-test-notty.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
--From: Lucas Nussbaum <lucas@debian.org>
--Description: Those tests fail when running the testsuite without a tty. Disabling them.
--
----- a/tests/commands.at
--+++ b/tests/commands.at
--@@ -1203,11 +1203,6 @@ AT_SETUP([source])
-- AT_DATA([script.csh],
-- [[set var=$1
-- ]])
---AT_CHECK([[tcsh -f -c 'source -h script.csh foo; history' \
---	   | sed 's/	[^	]*	/ TIME /']], ,
---[     1 TIME source -h script.csh foo ; history
---     2 TIME set var=$1
---])
-- 
-- AT_CHECK([tcsh -f -c 'source -h script.csh foo; echo $var'], 1, [],
-- [var: Undefined variable.
----- a/tests/variables.at
--+++ b/tests/variables.at
--@@ -319,10 +319,6 @@ AT_CLEANUP
-- 
-- AT_SETUP([$ edit])
-- 
---AT_CHECK([TERM=something tcsh -f -c 'echo $?edit'], ,
---[1
---])
---
-- AT_CHECK([TERM=dumb tcsh -f -c 'echo $?edit'], ,
-- [0
-- ])
-diff --git a/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch b/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
-deleted file mode 100644
-index acc2ce93d..000000000
---- a/meta-oe/recipes-extended/tcsh/files/fix-gcc6-wait-union.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- tcsh-6.18.01/sh.proc.c.orig	2016-06-08 16:11:02.902326725 +0000
--+++ tcsh-6.18.01/sh.proc.c	2016-06-08 16:38:22.150304901 +0000
--@@ -48,7 +48,7 @@
-- #endif /* aiws */
-- 
-- #if defined(_BSD) || (defined(IRIS4D) && __STDC__) || defined(__lucid) || defined(__linux__) || defined(__GNU__) || defined(__GLIBC__)
---# if !defined(__ANDROID__)
--+# if !defined(__ANDROID__) && !defined(__GLIBC__)
-- #  define BSDWAIT
-- # endif
-- #endif /* _BSD || (IRIS4D && __STDC__) || __lucid || glibc */
-diff --git a/meta-oe/recipes-extended/tcsh/files/tcsh-6.17.02-multibyte.patch b/meta-oe/recipes-extended/tcsh/files/tcsh-6.17.02-multibyte.patch
-deleted file mode 100644
-index 3dd420a0e..000000000
---- a/meta-oe/recipes-extended/tcsh/files/tcsh-6.17.02-multibyte.patch
-+++ /dev/null
-@@ -1,18 +0,0 @@
--Author:  Jean-Luc Leger <reiga@dspnet.fr.eu.org>
--Description: fix broken globbing expansion
--Debian-Bug: #603545
--Index: tcsh-6.18.01/tc.str.c
--===================================================================
----- tcsh-6.18.01.orig/tc.str.c	2012-01-10 13:34:31.000000000 -0800
--+++ tcsh-6.18.01/tc.str.c	2013-02-26 13:12:13.429153489 -0800
--@@ -122,8 +122,9 @@
-- #else
--     ret = mbtowc(&tmp, s, n);
-- #endif
---    if (ret > 0) {
--+    if (ret >= 0)
-- 	*pwc = tmp;
--+    if (ret >= 0) {
-- #if defined(UTF16_STRINGS) && defined(HAVE_MBRTOWC)
-- 	if (tmp >= 0xd800 && tmp <= 0xdbff) {
-- 	    /* UTF-16 surrogate pair.  Fetch second half and compute
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh/0001-Enable-system-malloc-on-all-linux.patch b/meta-oe/recipes-extended/tcsh/tcsh/0001-Enable-system-malloc-on-all-linux.patch
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
 new file mode 100644
-index 000000000..ff2f6a3b6
+index 000000000..00d95cd79
 --- /dev/null
-+++ b/meta-oe/recipes-extended/tcsh/tcsh/0001-Enable-system-malloc-on-all-linux.patch
-@@ -0,0 +1,30 @@
-+From 0553455813a1f717ef50cc911e4db73da3d23c32 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 22 Mar 2017 18:47:40 -0700
-+Subject: [PATCH 1/2] Enable system malloc on all linux
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0001-build-resolve-automake-1.12-warnings.patch
+@@ -0,0 +1,28 @@
++From 2e5f2b81fb8cbe0d1cd33e58caa19ac308e1f847 Mon Sep 17 00:00:00 2001
++From: Jan Engelhardt <jengelh@inai.de>
++Date: Tue, 9 Oct 2012 15:59:48 +0200
++Subject: [PATCH 1/6] build: resolve automake-1.12 warnings
 +
-+Dont trigger on being just android or glibc
-+internal malloc falls flat on musl based systems
-+as well. So switch to using system malloc
++am/ltlibrary.am: warning: 'libnfnetlink.la': linking libtool libraries
++using a non-POSIX archiver requires 'AM_PROG_AR' in 'configure.ac'
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Jan Engelhardt <jengelh@inai.de>
 +---
-+ config_f.h | 2 +-
++ configure.ac | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/configure.ac b/configure.ac
++index ed549df..0926a1c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -7,6 +7,7 @@ AC_CANONICAL_HOST
++ 
++ AM_INIT_AUTOMAKE([-Wall foreign subdir-objects
++ 	tar-pax no-dist-gzip dist-bzip2 1.6])
+++m4_ifdef([AM_PROG_AR], [AM_PROG_AR])
++ 
++ dnl kernel style compile messages
++ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
+new file mode 100644
+index 000000000..c2fb5e05a
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0002-src-get-source-code-license-header-in-sync-with-curr.patch
+@@ -0,0 +1,49 @@
++From 5e6b6e23a8b04475c5a9de7eddb4c18103932fe5 Mon Sep 17 00:00:00 2001
++From: Pablo Neira Ayuso <pablo@netfilter.org>
++Date: Wed, 7 Aug 2013 20:53:57 +0200
++Subject: [PATCH 2/6] src: get source code license header in sync with current
++ licensing terms
++
++Since (3956761 license: upgrade to GPLv2+), we upgraded to GPLv2+,
++propagate that changes to src/iftable.c and src/rtnl.c
++
++Reported-by: Thomas Woerner <twoerner@redhat.com>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ src/iftable.c | 2 +-
++ src/rtnl.c    | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/src/iftable.c b/src/iftable.c
++index 0325335..5976ed8 100644
++--- a/src/iftable.c
+++++ b/src/iftable.c
++@@ -3,7 +3,7 @@
++  * (C) 2004 by Astaro AG, written by Harald Welte <hwelte@astaro.com>
++  * (C) 2008 by Pablo Neira Ayuso <pablo@netfilter.org>
++  *
++- * This software is Free Software and licensed under GNU GPLv2. 
+++ * This software is Free Software and licensed under GNU GPLv2+.
++  */
++ 
++ /* IFINDEX handling */
++diff --git a/src/rtnl.c b/src/rtnl.c
++index 5ccb272..7b4ac7d 100644
++--- a/src/rtnl.c
+++++ b/src/rtnl.c
++@@ -1,10 +1,10 @@
++ /* rtnl - rtnetlink utility functions
++  *
++  * (C) 2004 by Astaro AG, written by Harald Welte <hwelte@astaro.com>
++- * 
+++ *
++  * Adapted to nfnetlink by Eric Leblond <eric@inl.fr>
++  *
++- * This software is free software and licensed under GNU GPLv2. 
+++ * This software is free software and licensed under GNU GPLv2+.
++  *
++  */
++ 
++-- 
++2.12.1
++
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
+new file mode 100644
+index 000000000..6cb7ed6fa
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0003-configure-uclinux-is-also-linux.patch
+@@ -0,0 +1,27 @@
++From b259fe13826414c1bd5328a25c8d6d60e20e65f2 Mon Sep 17 00:00:00 2001
++From: Gustavo Zacarias <gustavo@zacarias.com.ar>
++Date: Tue, 10 Sep 2013 16:23:29 -0300
++Subject: [PATCH 3/6] configure: uclinux is also linux
++
++Signed-off-by: Gustavo Zacarias <gustavo@zacarias.com.ar>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ configure.ac | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/config_f.h b/config_f.h
-+index 6a632a5..0a66960 100644
-+--- a/config_f.h
-++++ b/config_f.h
-+@@ -139,7 +139,7 @@
-+  *		This can be much slower and no memory statistics will be
-+  *		provided.
-+  */
-+-#if defined(__MACHTEN__) || defined(PURIFY) || defined(MALLOC_TRACE) || defined(_OSD_POSIX) || defined(__MVS__) || defined (__CYGWIN__) || defined(__GLIBC__) || defined(__OpenBSD__) || defined(__APPLE__) || defined (__ANDROID__)
-++#if defined(__MACHTEN__) || defined(PURIFY) || defined(MALLOC_TRACE) || defined(_OSD_POSIX) || defined(__MVS__) || defined (__CYGWIN__) || defined(__linux__) || defined(__OpenBSD__) || defined(__APPLE__)
-+ # define SYSMALLOC
-+ #else
-+ # undef SYSMALLOC
++diff --git a/configure.ac b/configure.ac
++index 0926a1c..b979772 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -18,7 +18,7 @@ AC_DISABLE_STATIC
++ AM_PROG_LIBTOOL
++ 
++ case "$host" in 
++-*-*-linux*) ;;
+++*-*-linux* | *-*-uclinux*) ;;
++ *) AC_MSG_ERROR([Linux only, dude!]);;
++ esac
++ 
 +-- 
 +2.12.1
 +
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh/0002-Add-debian-csh-scripts.patch b/meta-oe/recipes-extended/tcsh/tcsh/0002-Add-debian-csh-scripts.patch
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
 new file mode 100644
-index 000000000..e4de6f7fe
+index 000000000..cf3a84135
 --- /dev/null
-+++ b/meta-oe/recipes-extended/tcsh/tcsh/0002-Add-debian-csh-scripts.patch
-@@ -0,0 +1,60 @@
-+From 60271713025f6b17dda29721be012a8428e77185 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 22 Mar 2017 18:56:49 -0700
-+Subject: [PATCH 2/2] Add debian csh scripts
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch
+@@ -0,0 +1,39 @@
++From b142da8d2c9e2e2dfbe4e89e680dd124f6064ac8 Mon Sep 17 00:00:00 2001
++From: Pablo Neira Ayuso <pablo@netfilter.org>
++Date: Mon, 3 Feb 2014 12:09:29 +0100
++Subject: [PATCH 4/6] libnfnetlink: initialize attribute padding to resolve
++ valgrind warnings
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++==12195== Syscall param socketcall.sendto(msg) points to uninitialised byte(s)
++==12195==    at 0x51209C3: __sendto_nocancel (syscall-template.S:81)
++==12195==    by 0x53E4D12: nfnl_send (libnfnetlink.c:391)
++==12195==    by 0x53E6952: nfnl_query (libnfnetlink.c:1569)
++==12195==    by 0x4E344AF: __build_send_cfg_msg.isra.1 (libnetfilter_log.c:143)
++==12195==    by 0x4E34710: nflog_bind_group (libnetfilter_log.c:413)
++==12195==    by 0x400CB1: main (nfulnl_test.c:77)
++==12195==  Address 0x7fefff3e9 is on thread 1's stack
++
++This patch sets to zero the padding that is included to align the
++attribute payload.
++
++Reported-by: Ivan Homoliak <xhomol11@gmail.com>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
 +---
-+ csh.cshrc  | 15 +++++++++++++++
-+ csh.login  |  8 ++++++++
-+ csh.logout |  1 +
-+ 3 files changed, 24 insertions(+)
-+ create mode 100644 csh.cshrc
-+ create mode 100644 csh.login
-+ create mode 100644 csh.logout
++ src/libnfnetlink.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/csh.cshrc b/csh.cshrc
-+new file mode 100644
-+index 0000000..29c934a
-+--- /dev/null
-++++ b/csh.cshrc
-+@@ -0,0 +1,15 @@
-++# /etc/csh.cshrc: system-wide .cshrc file for csh(1) and tcsh(1)
-++
-++if ($?tcsh && $?prompt) then
-++
-++	bindkey "\e[1~" beginning-of-line # Home
-++	bindkey "\e[7~" beginning-of-line # Home rxvt
-++	bindkey "\e[2~" overwrite-mode    # Ins
-++	bindkey "\e[3~" delete-char       # Delete
-++	bindkey "\e[4~" end-of-line       # End
-++	bindkey "\e[8~" end-of-line       # End rxvt
-++
-++	set autoexpand
-++	set autolist
-++	set prompt = "%U%m%u:%B%~%b%# "
-++endif
-+diff --git a/csh.login b/csh.login
-+new file mode 100644
-+index 0000000..2455c3c
-+--- /dev/null
-++++ b/csh.login
-+@@ -0,0 +1,8 @@
-++# /etc/csh.login: system-wide .login file for csh(1) and tcsh(1)
-++
-++# allow for other packages/system admins to customize the shell environment
-++if (-e /etc/csh/login.d && `/bin/ls /etc/csh/login.d` != "") then
-++  foreach FILE (`/bin/ls /etc/csh/login.d/*`)
-++    source $FILE;
-++  end;
-++endif
-+diff --git a/csh.logout b/csh.logout
-+new file mode 100644
-+index 0000000..a207eba
-+--- /dev/null
-++++ b/csh.logout
-+@@ -0,0 +1 @@
-++# /etc/csh.logout: system-wide .logout file for csh(1) and tcsh(1)
++diff --git a/src/libnfnetlink.c b/src/libnfnetlink.c
++index 4b2bcd0..398b7d7 100644
++--- a/src/libnfnetlink.c
+++++ b/src/libnfnetlink.c
++@@ -809,6 +809,7 @@ int nfnl_addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
++ 	nfa->nfa_type = type;
++ 	nfa->nfa_len = len;
++ 	memcpy(NFA_DATA(nfa), data, alen);
+++	memset((uint8_t *)nfa + nfa->nfa_len, 0, NFA_ALIGN(alen) - alen);
++ 	n->nlmsg_len = (NLMSG_ALIGN(n->nlmsg_len) + NFA_ALIGN(len));
++ 	return 0;
++ }
 +-- 
 +2.12.1
 +
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-deleted file mode 100644
-index 1cfd96c54..000000000
---- a/meta-oe/recipes-extended/tcsh/tcsh_6.18.01.bb
-+++ /dev/null
-@@ -1,55 +0,0 @@
--DESCRIPTION = "TENEX C Shell, an enhanced version of Berkeley csh \
--    The TENEX C Shell is an enhanced version of the Berkeley Unix C shell. \
--    It includes all features of 4.4BSD C shell, plus a command-line editor, \
--    programmable word completion, spelling correction and more."
--
--HOMEPAGE = "http://www.tcsh.org/"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://Copyright;md5=1cf29be62df2be1a3763118b25b4c780"
--SECTION = "base"
--DEPENDS = "ncurses gettext-native"
--SRC_URI = " \
--    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}.orig.tar.gz;name=tarball \
--    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-2.diff.gz;name=diffs2 \
--    ${DEBIAN_MIRROR}/main/t/tcsh/tcsh_${PV}-5.diff.gz;name=diffs5 \
--    file://01_build.1.patch \
--    file://01_build.2.patch \
--    file://01_build.3.patch \
--    file://15_no-strip.patch \
--    file://disable-test-notty.patch \
--    file://disable-test-nice.patch \
--    file://disable-lexical.at-31.patch \
--    file://12_unknown_lscolors.patch \
--    file://tcsh-6.17.02-multibyte.patch \
--    file://disable-broken-test.patch \
--    file://fix-gcc6-wait-union.patch \
--"
--SRC_URI[tarball.md5sum] = "6eed09dbd4223ab5b6955378450d228a"
--SRC_URI[tarball.sha256sum] = "d81ca27851f3e8545666399b4bcf25433e602a195113b3f7c73886fef84c9fa8"
--SRC_URI[diffs2.md5sum] = "ea39b818b624aca49ebf2cd2708d6ff9"
--SRC_URI[diffs2.sha256sum] = "95b0c1a339b745c47c5d2f9d02c22a71597462e2e882b51614a9d1f75bd3d16c"
--SRC_URI[diffs5.md5sum] = "d536c12a02dc48c332cc472b86927319"
--SRC_URI[diffs5.sha256sum] = "7548d64bf996548bfbc13f3e0959fd2e8455f8375381a31da67d79554aabc7af"
--
--inherit autotools
--
--do_install_append () {
--    oe_runmake install.man DESTDIR=${D}
--
--    install -d ${D}${base_bindir}
--    ln -s /usr/bin/tcsh ${D}${base_bindir}/tcsh
--
--    install -d ${D}${sysconfdir}/csh/login.d
--    install -m 0644 ${S}/debian/csh.cshrc ${S}/debian/csh.login ${S}/debian/csh.logout ${S}/complete.tcsh ${D}${sysconfdir}
--    install -D -m 0644 ${S}/csh-mode.el ${D}${datadir}/emacs/site-lisp/csh-mode.el
--}
--
--FILES_${PN} += "${datadir}/emacs/site-lisp/csh-mode.el"
--
--
--pkg_postinst_${PN} () {
--#!/bin/sh -e
--echo /usr/bin/tcsh >> $D/etc/shells
--}
--
--PNBLACKLIST[tcsh] ?= "Doesn't respect CC variable and fails with HOSTTOOLS http://errors.yoctoproject.org/Errors/Details/138244/"
-diff --git a/meta-oe/recipes-extended/tcsh/tcsh_6.20.00.bb b/meta-oe/recipes-extended/tcsh/tcsh_6.20.00.bb
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
 new file mode 100644
-index 000000000..b59d88f5d
+index 000000000..383f0e8b3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/tcsh/tcsh_6.20.00.bb
-@@ -0,0 +1,44 @@
-+DESCRIPTION = "TENEX C Shell, an enhanced version of Berkeley csh \
-+    The TENEX C Shell is an enhanced version of the Berkeley Unix C shell. \
-+    It includes all features of 4.4BSD C shell, plus a command-line editor, \
-+    programmable word completion, spelling correction and more."
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0005-include-Sync-with-kernel-headers.patch
+@@ -0,0 +1,110 @@
++From b10c90a61a5fc46f2be5aeecb9c96e84178f7717 Mon Sep 17 00:00:00 2001
++From: Felix Janda <felix.janda@posteo.de>
++Date: Sat, 16 May 2015 14:49:07 +0200
++Subject: [PATCH 5/6] include: Sync with kernel headers
 +
-+HOMEPAGE = "http://www.tcsh.org/"
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://Copyright;md5=575cf2715c3bf894e1f79aec1d4eaaf5"
-+SECTION = "base"
-+DEPENDS = "ncurses gettext-native"
-+SRC_URI = " \
-+    http://ftp.funet.fi/pub/mirrors/ftp.astron.com/pub/tcsh/${BP}.tar.gz \
-+    file://0001-Enable-system-malloc-on-all-linux.patch \
-+    file://0002-Add-debian-csh-scripts.patch \
-+"
-+SRC_URI[md5sum] = "59d40ef40a68e790d95e182069431834"
-+SRC_URI[sha256sum] = "b89de7064ab54dac454a266cfe5d8bf66940cb5ed048d0c30674ea62e7ecef9d"
++Signed-off-by: Felix Janda <felix.janda@posteo.de>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ include/libnfnetlink/linux_nfnetlink.h        | 44 ++++-----------------------
++ include/libnfnetlink/linux_nfnetlink_compat.h | 12 ++++----
++ 2 files changed, 12 insertions(+), 44 deletions(-)
 +
-+EXTRA_OEMAKE += "CC_FOR_GETHOST='${BUILD_CC}'"
-+inherit autotools
++diff --git a/include/libnfnetlink/linux_nfnetlink.h b/include/libnfnetlink/linux_nfnetlink.h
++index 76a8550..44a38d6 100644
++--- a/include/libnfnetlink/linux_nfnetlink.h
+++++ b/include/libnfnetlink/linux_nfnetlink.h
++@@ -25,9 +25,9 @@ enum nfnetlink_groups {
++ /* General form of address family dependent message.
++  */
++ struct nfgenmsg {
++-	u_int8_t  nfgen_family;		/* AF_xxx */
++-	u_int8_t  version;		/* nfnetlink version */
++-	u_int16_t    res_id;		/* resource id */
+++	__u8  nfgen_family;		/* AF_xxx */
+++	__u8  version;		/* nfnetlink version */
+++	__be16    res_id;		/* resource id */
++ };
++ 
++ #define NFNETLINK_V0	0
++@@ -46,40 +46,8 @@ struct nfgenmsg {
++ #define NFNL_SUBSYS_CTNETLINK_EXP	2
++ #define NFNL_SUBSYS_QUEUE		3
++ #define NFNL_SUBSYS_ULOG		4
++-#define NFNL_SUBSYS_COUNT		5
+++#define NFNL_SUBSYS_OSF			5
+++#define NFNL_SUBSYS_IPSET		6
+++#define NFNL_SUBSYS_COUNT		7
++ 
++-#ifdef __KERNEL__
++-
++-#include <linux/netlink.h>
++-#include <linux/capability.h>
++-#include <net/netlink.h>
++-
++-struct nfnl_callback
++-{
++-	int (*call)(struct sock *nl, struct sk_buff *skb, 
++-		struct nlmsghdr *nlh, struct nlattr *cda[]);
++-	const struct nla_policy *policy;	/* netlink attribute policy */
++-	const u_int16_t attr_count;		/* number of nlattr's */
++-};
++-
++-struct nfnetlink_subsystem
++-{
++-	const char *name;
++-	__u8 subsys_id;			/* nfnetlink subsystem ID */
++-	__u8 cb_count;			/* number of callbacks */
++-	const struct nfnl_callback *cb;	/* callback for individual types */
++-};
++-
++-extern int nfnetlink_subsys_register(const struct nfnetlink_subsystem *n);
++-extern int nfnetlink_subsys_unregister(const struct nfnetlink_subsystem *n);
++-
++-extern int nfnetlink_has_listeners(unsigned int group);
++-extern int nfnetlink_send(struct sk_buff *skb, u32 pid, unsigned group, 
++-			  int echo);
++-extern int nfnetlink_unicast(struct sk_buff *skb, u_int32_t pid, int flags);
++-
++-#define MODULE_ALIAS_NFNL_SUBSYS(subsys) \
++-	MODULE_ALIAS("nfnetlink-subsys-" __stringify(subsys))
++-
++-#endif	/* __KERNEL__ */
++ #endif	/* _NFNETLINK_H */
++diff --git a/include/libnfnetlink/linux_nfnetlink_compat.h b/include/libnfnetlink/linux_nfnetlink_compat.h
++index e145176..74b9e55 100644
++--- a/include/libnfnetlink/linux_nfnetlink_compat.h
+++++ b/include/libnfnetlink/linux_nfnetlink_compat.h
++@@ -1,6 +1,8 @@
++ #ifndef _NFNETLINK_COMPAT_H
++ #define _NFNETLINK_COMPAT_H
++-#ifndef __KERNEL__
+++
+++#include <linux/types.h>
+++
++ /* Old nfnetlink macros for userspace */
++ 
++ /* nfnetlink groups: Up to 32 maximum */
++@@ -18,10 +20,9 @@
++  * ! nfnetlink use the same attributes methods. - J. Schulist.
++  */
++ 
++-struct nfattr
++-{
++-	u_int16_t nfa_len;
++-	u_int16_t nfa_type;	/* we use 15 bits for the type, and the highest
+++struct nfattr {
+++	__u16 nfa_len;
+++	__u16 nfa_type;	/* we use 15 bits for the type, and the highest
++ 				 * bit to indicate whether the payload is nested */
++ };
++ 
++@@ -57,5 +58,4 @@ struct nfattr
++         + NLMSG_ALIGN(sizeof(struct nfgenmsg))))
++ #define NFM_PAYLOAD(n)  NLMSG_PAYLOAD(n, sizeof(struct nfgenmsg))
++ 
++-#endif /* ! __KERNEL__ */
++ #endif /* _NFNETLINK_COMPAT_H */
++-- 
++2.12.1
 +
-+do_compile_prepend() {
-+    oe_runmake CC_FOR_GETHOST='${BUILD_CC}' CFLAGS='${BUILD_CFLAGS}' gethost
-+}
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
+new file mode 100644
+index 000000000..72c9987d1
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink/0006-src-Use-stdint-types-everywhere.patch
+@@ -0,0 +1,403 @@
++From 5cb589e246c91331ee6b3926b15f5e6cfc8ad95e Mon Sep 17 00:00:00 2001
++From: Felix Janda <felix.janda@posteo.de>
++Date: Sat, 16 May 2015 14:59:57 +0200
++Subject: [PATCH 6/6] src: Use stdint types everywhere
 +
-+do_install_append () {
-+    oe_runmake install.man DESTDIR=${D}
++Signed-off-by: Felix Janda <felix.janda@posteo.de>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ include/libnfnetlink/libnfnetlink.h | 25 ++++++-------
++ src/iftable.c                       |  8 ++---
++ src/iftable.h                       |  4 +--
++ src/libnfnetlink.c                  | 72 ++++++++++++++++++-------------------
++ src/rtnl.c                          |  4 +--
++ src/rtnl.h                          |  2 +-
++ 6 files changed, 58 insertions(+), 57 deletions(-)
 +
-+    install -d ${D}${base_bindir}
-+    ln -s /usr/bin/tcsh ${D}${base_bindir}/tcsh
-+    ln -s /usr/bin/tcsh ${D}${base_bindir}/csh
-+    install -d ${D}${sysconfdir}/csh/login.d
-+    install -m 0644 ${S}/csh.cshrc ${S}/csh.login ${S}/csh.logout ${S}/complete.tcsh ${D}${sysconfdir}
-+    install -D -m 0644 ${S}/csh-mode.el ${D}${datadir}/emacs/site-lisp/csh-mode.el
-+}
++diff --git a/include/libnfnetlink/libnfnetlink.h b/include/libnfnetlink/libnfnetlink.h
++index 1d8c49d..cd0be3d 100644
++--- a/include/libnfnetlink/libnfnetlink.h
+++++ b/include/libnfnetlink/libnfnetlink.h
++@@ -15,6 +15,7 @@
++ #define aligned_u64 unsigned long long __attribute__((aligned(8)))
++ #endif
++ 
+++#include <stdint.h>
++ #include <sys/socket.h>	/* for sa_family_t */
++ #include <linux/netlink.h>
++ #include <libnfnetlink/linux_nfnetlink.h>
++@@ -55,7 +56,7 @@ struct nfnlhdr {
++ struct nfnl_callback {
++ 	int (*call)(struct nlmsghdr *nlh, struct nfattr *nfa[], void *data);
++ 	void *data;
++-	u_int16_t attr_count;
+++	uint16_t attr_count;
++ };
++ 
++ struct nfnl_handle;
++@@ -69,7 +70,7 @@ extern struct nfnl_handle *nfnl_open(void);
++ extern int nfnl_close(struct nfnl_handle *);
++ 
++ extern struct nfnl_subsys_handle *nfnl_subsys_open(struct nfnl_handle *, 
++-						   u_int8_t, u_int8_t, 
+++						   uint8_t, uint8_t,
++ 						   unsigned int);
++ extern void nfnl_subsys_close(struct nfnl_subsys_handle *);
++ 
++@@ -88,8 +89,8 @@ extern int nfnl_sendiov(const struct nfnl_handle *nfnlh,
++ 			const struct iovec *iov, unsigned int num,
++ 			unsigned int flags);
++ extern void nfnl_fill_hdr(struct nfnl_subsys_handle *, struct nlmsghdr *,
++-			  unsigned int, u_int8_t, u_int16_t, u_int16_t,
++-			  u_int16_t);
+++			  unsigned int, uint8_t, uint16_t, uint16_t,
+++			  uint16_t);
++ extern __attribute__((deprecated)) int
++ nfnl_talk(struct nfnl_handle *, struct nlmsghdr *, pid_t,
++           unsigned, struct nlmsghdr *,
++@@ -103,8 +104,8 @@ nfnl_listen(struct nfnl_handle *,
++ /* receiving */
++ extern ssize_t nfnl_recv(const struct nfnl_handle *h, unsigned char *buf, size_t len);
++ extern int nfnl_callback_register(struct nfnl_subsys_handle *,
++-				  u_int8_t type, struct nfnl_callback *cb);
++-extern int nfnl_callback_unregister(struct nfnl_subsys_handle *, u_int8_t type);
+++				  uint8_t type, struct nfnl_callback *cb);
+++extern int nfnl_callback_unregister(struct nfnl_subsys_handle *, uint8_t type);
++ extern int nfnl_handle_packet(struct nfnl_handle *, char *buf, int len);
++ 
++ /* parsing */
++@@ -180,12 +181,12 @@ extern int nfnl_query(struct nfnl_handle *h, struct nlmsghdr *nlh);
++ 
++ /* nfnl attribute handling functions */
++ extern int nfnl_addattr_l(struct nlmsghdr *, int, int, const void *, int);
++-extern int nfnl_addattr8(struct nlmsghdr *, int, int, u_int8_t);
++-extern int nfnl_addattr16(struct nlmsghdr *, int, int, u_int16_t);
++-extern int nfnl_addattr32(struct nlmsghdr *, int, int, u_int32_t);
+++extern int nfnl_addattr8(struct nlmsghdr *, int, int, uint8_t);
+++extern int nfnl_addattr16(struct nlmsghdr *, int, int, uint16_t);
+++extern int nfnl_addattr32(struct nlmsghdr *, int, int, uint32_t);
++ extern int nfnl_nfa_addattr_l(struct nfattr *, int, int, const void *, int);
++-extern int nfnl_nfa_addattr16(struct nfattr *, int, int, u_int16_t);
++-extern int nfnl_nfa_addattr32(struct nfattr *, int, int, u_int32_t);
+++extern int nfnl_nfa_addattr16(struct nfattr *, int, int, uint16_t);
+++extern int nfnl_nfa_addattr32(struct nfattr *, int, int, uint32_t);
++ extern int nfnl_parse_attr(struct nfattr **, int, struct nfattr *, int);
++ #define nfnl_parse_nested(tb, max, nfa) \
++ 	nfnl_parse_attr((tb), (max), NFA_DATA((nfa)), NFA_PAYLOAD((nfa)))
++@@ -197,7 +198,7 @@ extern int nfnl_parse_attr(struct nfattr **, int, struct nfattr *, int);
++ ({	(tail)->nfa_len = (void *) NLMSG_TAIL(nlh) - (void *) tail; })
++ 
++ extern void nfnl_build_nfa_iovec(struct iovec *iov, struct nfattr *nfa, 
++-				 u_int16_t type, u_int32_t len,
+++				 uint16_t type, uint32_t len,
++ 				 unsigned char *val);
++ extern unsigned int nfnl_rcvbufsiz(const struct nfnl_handle *h, 
++ 				   unsigned int size);
++diff --git a/src/iftable.c b/src/iftable.c
++index 5976ed8..157f97b 100644
++--- a/src/iftable.c
+++++ b/src/iftable.c
++@@ -27,10 +27,10 @@
++ struct ifindex_node {
++ 	struct list_head head;
++ 
++-	u_int32_t	index;
++-	u_int32_t	type;
++-	u_int32_t	alen;
++-	u_int32_t	flags;
+++	uint32_t	index;
+++	uint32_t	type;
+++	uint32_t	alen;
+++	uint32_t	flags;
++ 	char		addr[8];
++ 	char		name[16];
++ };
++diff --git a/src/iftable.h b/src/iftable.h
++index 8df7f24..655df6b 100644
++--- a/src/iftable.h
+++++ b/src/iftable.h
++@@ -1,8 +1,8 @@
++ #ifndef _IFTABLE_H
++ #define _IFTABLE_H
++ 
++-int iftable_delete(u_int32_t dst, u_int32_t mask, u_int32_t gw, u_int32_t oif);
++-int iftable_insert(u_int32_t dst, u_int32_t mask, u_int32_t gw, u_int32_t oif);
+++int iftable_delete(uint32_t dst, uint32_t mask, uint32_t gw, uint32_t oif);
+++int iftable_insert(uint32_t dst, uint32_t mask, uint32_t gw, uint32_t oif);
++ 
++ int iftable_init(void);
++ void iftable_fini(void);
++diff --git a/src/libnfnetlink.c b/src/libnfnetlink.c
++index 398b7d7..df57533 100644
++--- a/src/libnfnetlink.c
+++++ b/src/libnfnetlink.c
++@@ -72,9 +72,9 @@
++ 
++ struct nfnl_subsys_handle {
++ 	struct nfnl_handle 	*nfnlh;
++-	u_int32_t		subscriptions;
++-	u_int8_t		subsys_id;
++-	u_int8_t		cb_count;
+++	uint32_t		subscriptions;
+++	uint8_t			subsys_id;
+++	uint8_t			cb_count;
++ 	struct nfnl_callback 	*cb;	/* array of callbacks */
++ };
++ 
++@@ -86,11 +86,11 @@ struct nfnl_handle {
++ 	int			fd;
++ 	struct sockaddr_nl	local;
++ 	struct sockaddr_nl	peer;
++-	u_int32_t		subscriptions;
++-	u_int32_t		seq;
++-	u_int32_t		dump;
++-	u_int32_t		rcv_buffer_size;	/* for nfnl_catch */
++-	u_int32_t		flags;
+++	uint32_t		subscriptions;
+++	uint32_t		seq;
+++	uint32_t		dump;
+++	uint32_t		rcv_buffer_size;	/* for nfnl_catch */
+++	uint32_t		flags;
++ 	struct nlmsghdr 	*last_nlhdr;
++ 	struct nfnl_subsys_handle subsys[NFNL_MAX_SUBSYS+1];
++ };
++@@ -145,7 +145,7 @@ unsigned int nfnl_portid(const struct nfnl_handle *h)
++ static int recalc_rebind_subscriptions(struct nfnl_handle *nfnlh)
++ {
++ 	int i, err;
++-	u_int32_t new_subscriptions = nfnlh->subscriptions;
+++	uint32_t new_subscriptions = nfnlh->subscriptions;
++ 
++ 	for (i = 0; i < NFNL_MAX_SUBSYS; i++)
++ 		new_subscriptions |= nfnlh->subsys[i].subscriptions;
++@@ -273,8 +273,8 @@ void nfnl_set_rcv_buffer_size(struct nfnl_handle *h, unsigned int size)
++  * a valid address that points to a nfnl_subsys_handle structure is returned.
++  */
++ struct nfnl_subsys_handle *
++-nfnl_subsys_open(struct nfnl_handle *nfnlh, u_int8_t subsys_id,
++-		 u_int8_t cb_count, u_int32_t subscriptions)
+++nfnl_subsys_open(struct nfnl_handle *nfnlh, uint8_t subsys_id,
+++		 uint8_t cb_count, uint32_t subscriptions)
++ {
++ 	struct nfnl_subsys_handle *ssh;
++ 
++@@ -435,10 +435,10 @@ int nfnl_sendiov(const struct nfnl_handle *nfnlh, const struct iovec *iov,
++  */
++ void nfnl_fill_hdr(struct nfnl_subsys_handle *ssh,
++ 		    struct nlmsghdr *nlh, unsigned int len, 
++-		    u_int8_t family,
++-		    u_int16_t res_id,
++-		    u_int16_t msg_type,
++-		    u_int16_t msg_flags)
+++		    uint8_t family,
+++		    uint16_t res_id,
+++		    uint16_t msg_type,
+++		    uint16_t msg_flags)
++ {
++ 	assert(ssh);
++ 	assert(nlh);
++@@ -815,7 +815,7 @@ int nfnl_addattr_l(struct nlmsghdr *n, int maxlen, int type, const void *data,
++ }
++ 
++ /**
++- * nfnl_nfa_addattr_l - Add variable length attribute to struct nfattr 
+++ * nfnl_nfa_addattr_l - Add variable length attribute to struct nfattr
++  *
++  * @nfa: struct nfattr
++  * @maxlen: maximal length of nfattr buffer
++@@ -849,14 +849,14 @@ int nfnl_nfa_addattr_l(struct nfattr *nfa, int maxlen, int type,
++ }
++ 
++ /**
++- * nfnl_addattr8 - Add u_int8_t attribute to nlmsghdr
+++ * nfnl_addattr8 - Add uint8_t attribute to nlmsghdr
++  *
++  * @n: netlink message header to which attribute is to be added
++  * @maxlen: maximum length of netlink message header
++  * @type: type of new attribute
++  * @data: content of new attribute
++  */
++-int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
+++int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, uint8_t data)
++ {
++ 	assert(n);
++ 	assert(maxlen > 0);
++@@ -866,7 +866,7 @@ int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
++ }
++ 
++ /**
++- * nfnl_nfa_addattr16 - Add u_int16_t attribute to struct nfattr 
+++ * nfnl_nfa_addattr16 - Add uint16_t attribute to struct nfattr
++  *
++  * @nfa: struct nfattr
++  * @maxlen: maximal length of nfattr buffer
++@@ -875,7 +875,7 @@ int nfnl_addattr8(struct nlmsghdr *n, int maxlen, int type, u_int8_t data)
++  *
++  */
++ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type, 
++-		       u_int16_t data)
+++		       uint16_t data)
++ {
++ 	assert(nfa);
++ 	assert(maxlen > 0);
++@@ -885,7 +885,7 @@ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type,
++ }
++ 
++ /**
++- * nfnl_addattr16 - Add u_int16_t attribute to nlmsghdr
+++ * nfnl_addattr16 - Add uint16_t attribute to nlmsghdr
++  *
++  * @n: netlink message header to which attribute is to be added
++  * @maxlen: maximum length of netlink message header
++@@ -894,7 +894,7 @@ int nfnl_nfa_addattr16(struct nfattr *nfa, int maxlen, int type,
++  *
++  */
++ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
++-		   u_int16_t data)
+++		   uint16_t data)
++ {
++ 	assert(n);
++ 	assert(maxlen > 0);
++@@ -904,7 +904,7 @@ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
++ }
++ 
++ /**
++- * nfnl_nfa_addattr32 - Add u_int32_t attribute to struct nfattr 
+++ * nfnl_nfa_addattr32 - Add uint32_t attribute to struct nfattr
++  *
++  * @nfa: struct nfattr
++  * @maxlen: maximal length of nfattr buffer
++@@ -913,7 +913,7 @@ int nfnl_addattr16(struct nlmsghdr *n, int maxlen, int type,
++  *
++  */
++ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type, 
++-		       u_int32_t data)
+++		       uint32_t data)
++ {
++ 	assert(nfa);
++ 	assert(maxlen > 0);
++@@ -923,7 +923,7 @@ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type,
++ }
++ 
++ /**
++- * nfnl_addattr32 - Add u_int32_t attribute to nlmsghdr
+++ * nfnl_addattr32 - Add uint32_t attribute to nlmsghdr
++  *
++  * @n: netlink message header to which attribute is to be added
++  * @maxlen: maximum length of netlink message header
++@@ -932,7 +932,7 @@ int nfnl_nfa_addattr32(struct nfattr *nfa, int maxlen, int type,
++  *
++  */
++ int nfnl_addattr32(struct nlmsghdr *n, int maxlen, int type,
++-		   u_int32_t data)
+++		   uint32_t data)
++ {
++ 	assert(n);
++ 	assert(maxlen > 0);
++@@ -980,7 +980,7 @@ int nfnl_parse_attr(struct nfattr *tb[], int max, struct nfattr *nfa, int len)
++  *
++  */ 
++ void nfnl_build_nfa_iovec(struct iovec *iov, struct nfattr *nfa, 
++-			  u_int16_t type, u_int32_t len, unsigned char *val)
+++			  uint16_t type, uint32_t len, unsigned char *val)
++ {
++ 	assert(iov);
++ 	assert(nfa);
++@@ -1115,7 +1115,7 @@ struct nlmsghdr *nfnl_get_msg_next(struct nfnl_handle *h,
++  * appropiately.
++  */
++ int nfnl_callback_register(struct nfnl_subsys_handle *ssh,
++-			   u_int8_t type, struct nfnl_callback *cb)
+++			   uint8_t type, struct nfnl_callback *cb)
++ {
++ 	assert(ssh);
++ 	assert(cb);
++@@ -1138,7 +1138,7 @@ int nfnl_callback_register(struct nfnl_subsys_handle *ssh,
++  * On sucess, 0 is returned. On error, -1 is returned and errno is
++  * set appropiately.
++  */
++-int nfnl_callback_unregister(struct nfnl_subsys_handle *ssh, u_int8_t type)
+++int nfnl_callback_unregister(struct nfnl_subsys_handle *ssh, uint8_t type)
++ {
++ 	assert(ssh);
++ 
++@@ -1161,8 +1161,8 @@ int nfnl_check_attributes(const struct nfnl_handle *h,
++ 	assert(nfa);
++ 
++ 	int min_len;
++-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
++-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
+++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
+++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
++ 	const struct nfnl_subsys_handle *ssh;
++ 	struct nfnl_callback *cb;
++ 
++@@ -1212,8 +1212,8 @@ static int __nfnl_handle_msg(struct nfnl_handle *h, struct nlmsghdr *nlh,
++ 			     int len)
++ {
++ 	struct nfnl_subsys_handle *ssh;
++-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
++-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
+++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
+++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
++ 	int err = 0;
++ 
++ 	if (subsys_id > NFNL_MAX_SUBSYS)
++@@ -1243,7 +1243,7 @@ int nfnl_handle_packet(struct nfnl_handle *h, char *buf, int len)
++ {
++ 
++ 	while (len >= NLMSG_SPACE(0)) {
++-		u_int32_t rlen;
+++		uint32_t rlen;
++ 		struct nlmsghdr *nlh = (struct nlmsghdr *)buf;
++ 
++ 		if (nlh->nlmsg_len < sizeof(struct nlmsghdr)
++@@ -1285,8 +1285,8 @@ static int nfnl_is_error(struct nfnl_handle *h, struct nlmsghdr *nlh)
++ static int nfnl_step(struct nfnl_handle *h, struct nlmsghdr *nlh)
++ {
++ 	struct nfnl_subsys_handle *ssh;
++-	u_int8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
++-	u_int8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
+++	uint8_t type = NFNL_MSG_TYPE(nlh->nlmsg_type);
+++	uint8_t subsys_id = NFNL_SUBSYS_ID(nlh->nlmsg_type);
++ 
++ 	/* Is this an error message? */
++ 	if (nfnl_is_error(h, nlh)) {
++diff --git a/src/rtnl.c b/src/rtnl.c
++index 7b4ac7d..284eecd 100644
++--- a/src/rtnl.c
+++++ b/src/rtnl.c
++@@ -30,7 +30,7 @@
++ #define rtnl_log(x, ...)
++ 
++ static inline struct rtnl_handler *
++-find_handler(struct rtnl_handle *rtnl_handle, u_int16_t type)
+++find_handler(struct rtnl_handle *rtnl_handle, uint16_t type)
++ {
++ 	struct rtnl_handler *h;
++ 	for (h = rtnl_handle->handlers; h; h = h->next) {
++@@ -41,7 +41,7 @@ find_handler(struct rtnl_handle *rtnl_handle, u_int16_t type)
++ }
++ 
++ static int call_handler(struct rtnl_handle *rtnl_handle,
++-			u_int16_t type,
+++			uint16_t type,
++ 			struct nlmsghdr *hdr)
++ {
++ 	struct rtnl_handler *h = find_handler(rtnl_handle, type);
++diff --git a/src/rtnl.h b/src/rtnl.h
++index 0c403dc..2cb22a8 100644
++--- a/src/rtnl.h
+++++ b/src/rtnl.h
++@@ -7,7 +7,7 @@
++ struct rtnl_handler {
++ 	struct rtnl_handler *next;
++ 
++-	u_int16_t	nlmsg_type;
+++	uint16_t	nlmsg_type;
++ 	int		(*handlefn)(struct nlmsghdr *h, void *arg);
++ 	void		*arg;
++ };
++-- 
++2.12.1
 +
-+FILES_${PN} += "${datadir}/emacs/site-lisp/csh-mode.el"
-+
-+
-+pkg_postinst_${PN} () {
-+#!/bin/sh -e
-+echo /usr/bin/tcsh >> $D/etc/shells
-+echo /usr/bin/csh >> $D/etc/shells
-+}
+diff --git a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
+index edd0f866f..f7951ff8d 100644
+--- a/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
++++ b/meta-networking/recipes-filter/libnfnetlink/libnfnetlink_1.0.1.bb
+@@ -11,7 +11,14 @@ LICENSE = "GPLv2+"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+-SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=tar"
++SRC_URI = "http://www.netfilter.org/projects/libnfnetlink/files/libnfnetlink-${PV}.tar.bz2;name=tar \
++           file://0001-build-resolve-automake-1.12-warnings.patch \
++           file://0002-src-get-source-code-license-header-in-sync-with-curr.patch \
++           file://0003-configure-uclinux-is-also-linux.patch \
++           file://0004-libnfnetlink-initialize-attribute-padding-to-resolve.patch \
++           file://0005-include-Sync-with-kernel-headers.patch \
++           file://0006-src-Use-stdint-types-everywhere.patch \
++           "
+ SRC_URI[tar.md5sum] = "98927583d2016a9fb1936fed992e2c5e"
+ SRC_URI[tar.sha256sum] = "f270e19de9127642d2a11589ef2ec97ef90a649a74f56cf9a96306b04817b51a"
+ 
 -- 
 2.12.1
 
