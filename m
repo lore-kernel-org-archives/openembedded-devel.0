@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A9E277DB2
+Return-Path: <ian@boundarydevices.com>
+Received: from mail-qt0-f173.google.com (mail-qt0-f173.google.com
+	[209.85.216.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 446CF71DB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 17:08:17 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g2so18591302pge.2
+	Fri, 31 Mar 2017 18:27:14 +0000 (UTC)
+Received: by mail-qt0-f173.google.com with SMTP id r45so72391159qte.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 10:08:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to; bh=ahAMx0+arPBf11hCXroknDcCex3Cj5N/zLx7EOpZoiU=;
-	b=uaCtbs6rPx0x6ITNyZzc8oh1P/KT3nikYL8GgnoRUotwP4y/ErZ/HVV6q52pIxXXaz
-	Txg8qStddWAvWOE8rs8jtWY6RhlcHpi3Cr73ETbvMNwWUmMh4zDq2LesBya8J7/bgZlx
-	2KspkkUsZhCOIMyo6rnr418DrOMd5lXzNv2V3f6aVm2FEdRZVPTVeSrfMhu9+5AQsDlY
-	8XxSo5YELmjWmWr+VXFrlKSjIbB6+mGr+bjdWEpnG3RootfyaYIHlrJMOjyMa79ReAZv
-	4rL0hecViUJ/gEihKvTiUUK1KC8BgY1Xq/qwTJBZMlrIRZ0B1YEgVescFHjmUZOJgufA
-	Wp+Q==
+	Fri, 31 Mar 2017 11:27:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=RWIU5Ek0kghy4CW5gAsbZ/LPAuzp3ebRiSmPPxYNsg8=;
+	b=0ACNT47AksSKLYlJYran5OfS2bFzdBu5x3hty7RN83Yv0E99xnxCPf+5jLOWXaeCv4
+	9AodgzpXeX0SA78o3V8VLl4RgxEfxOBQFQkruKWAUerWO+2lB9Ljwke1VDUWopPKvAMe
+	VaVX97IJRYZAbsHAWNuWVIMjgbKuTHBv+kBASNIlrUQJUulGN4csCPgLhYZXSe/sgO8u
+	jF7IeqBz4iaKUMp+L9KxHGth145C/XbW1pStdtwaYDYq7RNCY1vtfldjJmQGs51zHy1W
+	J4JI/8dxLs6RQw0iAFccFUthpfTO4ZDqjU7t1sxH6aY4XWok33QGjIFuTUdyICoXpL7t
+	FLTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to;
-	bh=ahAMx0+arPBf11hCXroknDcCex3Cj5N/zLx7EOpZoiU=;
-	b=VnZ5RzQUUJIjw88dvlWTeiZGlTs729d+ZJuCcHQPq4QAY0TydMJIwE+1l92gH5l/Ep
-	6VVYZauvtPcGztEVSW/NKeTr11SZwzva4R5ub9yDjl0+8O9UoIswO+L72JzT1qrTKMv9
-	kFNJMmtW95Qe0Afap1ESO8iXZksbcuDkwd1vFrnqO2y8YPMhci3K46W74WLI7L8aT4i4
-	lyhzTWvErRIWRbwHUOTwtdZXB3GMyoEqAzW1TPuZoMjnzS9TYPUVYM4qhmfOrVqQdmIi
-	DiWx18/MRD6IRpIccnygvs7YxDmE/nZ7p2XNZkFxVcBfhRgDuIylEn7NK8SC1Togp2Sg
-	poZA==
-X-Gm-Message-State: AFeK/H3IU+X2noOfC36hLPgzJFff80efBG2BCMVvuLsZUBVOJqc1IXoVF+y8VN9qB1USeA==
-X-Received: by 10.98.68.82 with SMTP id r79mr3904737pfa.41.1490980098678;
-	Fri, 31 Mar 2017 10:08:18 -0700 (PDT)
-Received: from CACSVMO-14452.local ([2601:646:8882:b8c:dd64:9ebc:182c:f6cf])
-	by smtp.gmail.com with ESMTPSA id
-	c19sm11674828pfd.85.2017.03.31.10.08.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 10:08:17 -0700 (PDT)
-To: Dmitry Rozhkov <dmitry.rozhkov@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20170331111032.6573-1-dmitry.rozhkov@linux.intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <445cc883-ce1a-1aea-58ea-816414b5790b@gmail.com>
-Date: Fri, 31 Mar 2017 10:08:11 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.8.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=RWIU5Ek0kghy4CW5gAsbZ/LPAuzp3ebRiSmPPxYNsg8=;
+	b=Dg2nht3CDHyp1YkSVy3NuHwaVDs0Ro+vnsjTu//i1xDIe7PiktpRRW6MvQCiIdL7mX
+	Nz/NAy7mIOdHRX5GPCiiOXiflaI7FYN9tnSQnM2QMKxTqRVDoPfi3Fg44E1yQD03l1VP
+	3YjRNnejGymyNXFfpjPzNwdbP9wzHw7H8zOWF9XdPkRUaMRiVFALOHjvD5sInsSBzhBX
+	BcwW6GRJaE2Bs+0IXxW6PYn45yL4VuwOoHxCaD+GRc8I98xaIydl8YuXq6O6NYXrctLg
+	Al87fVvAgWUA/HOTYUM9pnWBaoiBaOpnosb5P99p6t4Eyakdby+5Q0PlnBETnCBy45+u
+	353w==
+X-Gm-Message-State: AFeK/H2Y4vTgjoS5Of8jnZVzmG1pAC4XPyfzWLb4SrrSMOPJ16ysob+kTuyPj3AuKVgBe8yc0vX4SFt35mtZCQ==
+X-Received: by 10.237.57.37 with SMTP id l34mr4179285qte.114.1490984835989;
+	Fri, 31 Mar 2017 11:27:15 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20170331111032.6573-1-dmitry.rozhkov@linux.intel.com>
-Subject: Re: [meta-oe][PATCH] opencv: remove redundant build dependency on python2
+Received: by 10.237.55.103 with HTTP; Fri, 31 Mar 2017 11:27:15 -0700 (PDT)
+In-Reply-To: <20170329220401.GQ15664@denix.org>
+References: <CAHUNapSj77gK_kExofCWaeREZOqwQoHQei4YZbqE1F5Uh=2CFA@mail.gmail.com>
+	<20170329220401.GQ15664@denix.org>
+From: Ian Coolidge <ian@boundarydevices.com>
+Date: Fri, 31 Mar 2017 11:27:15 -0700
+Message-ID: <CADseiPkfT8uAF_eeA8Bpa5WtMQh1DFvDOVj++V+7ns3+CWGCnw@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] calling all chromium recipe users
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,81 +55,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 17:08:17 -0000
-X-Groupsio-MsgNum: 66058
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="VPmGowLd8wgNSTqQDpW835xTOUcw74QrG"
+X-List-Received-Date: Fri, 31 Mar 2017 18:27:17 -0000
+Content-Type: text/plain; charset=UTF-8
 
---VPmGowLd8wgNSTqQDpW835xTOUcw74QrG
-Content-Type: multipart/mixed; boundary="hr14WDLpMrFDuIMo3b934UWgk2UVARRka";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Dmitry Rozhkov <dmitry.rozhkov@linux.intel.com>,
- openembedded-devel@lists.openembedded.org
-Message-ID: <445cc883-ce1a-1aea-58ea-816414b5790b@gmail.com>
-Subject: Re: [oe] [meta-oe][PATCH] opencv: remove redundant build dependency
- on python2
-References: <20170331111032.6573-1-dmitry.rozhkov@linux.intel.com>
-In-Reply-To: <20170331111032.6573-1-dmitry.rozhkov@linux.intel.com>
+Chromium and Chromium-Wayland on IMX platform
 
---hr14WDLpMrFDuIMo3b934UWgk2UVARRka
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+Chromium is working great, although chromium-imx hasn't been updated yet
+for the later 53.x versions as the patches for graphics need to be updated.
 
+Chromium-Wayland hasn't worked in any of it's versions, or on wayland on
+IMX in general for some time. Unless i'm doing something wrong... I've been
+trying to get this working on the 48x version for a while now, I just get a
+segfault on startup that looks like this
 
+root@nitrogen6x-lite:~# google-chrome www.google.com
+>
+> [1:1:0327/214358:ERROR:image_metadata_extractor.cc(112)] Couldn't load
+>> libexif. libexif.so.12: cannot open shared object file: No such file or
+>> directory
+>
+> error: XDG_RUNTIME_DIR not set in the environment.
+>
+> error: XDG_RUNTIME_DIR not set in the environment.
+>
+> [512:512:0327/214400:ERROR:display.cc(148)] WaylandDisplay failed to
+>> initialize hardware
+>
+> [512:512:0327/214400:FATAL:ozone_platform_wayland.cc(115)] failed to
+>> initialize display hardware
+>
+> #0 0x00005524860a <unknown>
+>
+> #1 0x000055257dd0 <unknown>
+>
+> #2 0x0000558a506e <unknown>
+>
+> #3 0x000055989104 <unknown>
+>
+> #4 0x000055989a54 <unknown>
+>
+> #5 0x000055989b26 <unknown>
+>
+> #6 0x0000578ca552 <unknown>
+>
+> #7 0x00005521a1d4 <unknown>
+>
+> #8 0x00005521900a <unknown>
+>
+> #9 0x000054f3e4f8 ChromeMain
+>
+> #10 0x0000766e246a __libc_start_main
+>
+>
+>> Received signal 6
+>
+> #0 0x00005524860a <unknown>
+>
+> #1 0x0000552488cc <unknown>
+>
+> #2 0x0000766f1020 <unknown>
+>
+> #3 0x0000766e26b6 <unknown>
+>
+> #4 0x0000766f040c gsignal
+>
+> #5 0x0000766f10fa abort
+>
+> #6 0x00005524842a <unknown>
+>
+> #7 0x000055257e98 <unknown>
+>
+> #8 0x0000558a506e <unknown>
+>
+> #9 0x000055989104 <unknown>
+>
+> #10 0x000055989a54 <unknown>
+>
+> #11 0x000055989b26 <unknown>
+>
+> #12 0x0000578ca552 <unknown>
+>
+> #13 0x00005521a1d4 <unknown>
+>
+> #14 0x00005521900a <unknown>
+>
+> #15 0x000054f3e4f8 ChromeMain
+>
+> #16 0x0000766e246a __libc_start_main
+>
+> [end of stack trace]
+>
+> Segmentation fault
+>
+>
+>
+On Wed, Mar 29, 2017 at 3:04 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-On 3/31/17 4:10 AM, Dmitry Rozhkov wrote:
-> The recipe opencv_3.2.bb inherits to either distutils-base or
-> distutils3-base classes or both which do add appropriate
-> build dependency on python or python3 respectively.
-> There's no need to have python in DEPENDS explicitly.
->=20
-> It can even make things needlessly complicated in case a user
-> wants to build python3-only images.
->=20
+> On Wed, Mar 29, 2017 at 03:35:22PM -0400, Trevor Woerner wrote:
+> > When testing changes to the chromium[-wayland] recipes, it would be
+> > great to know the layers, configurations, and MACHINEs with which
+> > people are building.
+> >
+> > For example I care about chromium running on X11 for minnow
+> > (meta-intel) and raspberry pi (meta-raspberrypi). How are other people
+> > running chromium?
+>
+> chromium-wayland on TI platforms from meta-ti.
+>
+>
+> > Also, are you able to run with accelerated graphics? If so, what
+> > configuration are you using?
+>
+> Full acceleration is still in the works for our platforms.
+> Very basic "hacky" way was to patch wayland.gyp to bypass the configure
+> check
+> for Mesa version:
+> http://arago-project.org/git/?p=meta-arago.git;a=blob;f=
+> meta-arago-distro/recipes-browser/chromium/chromium-
+> wayland/0001-wayland.gyp-adjust-Mesa-version-to-work-
+> with-TI-SGX-.patch;hb=HEAD
+>
+> --
+> Denys
+>
+>
+> > Specifically, I assume the trick is the correct configuration of various
+> >
+> >     PREFERRED_PROVIDER_virtual/X = Y
+> >
+> > where X is one of {mesa|gl|egl|gles1|gles2} and Y is probably
+> > something BSP-specific. Is anything else needed to get accelerated
+> > graphics working with chromium?
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-right. Looks ok.
-
-> The redundant build dependency on python is removed from DEPENDS.
->=20
-> Signed-off-by: Dmitry Rozhkov <dmitry.rozhkov@linux.intel.com>
-> ---
->  meta-oe/recipes-support/opencv/opencv_3.2.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->=20
-> diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/rec=
-ipes-support/opencv/opencv_3.2.bb
-> index f47347a..f50bc05 100644
-> --- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
-> +++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
-> @@ -8,7 +8,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D2b2f8752cc5e=
-df504d283107d033f544"
->  ARM_INSTRUCTION_SET_armv4 =3D "arm"
->  ARM_INSTRUCTION_SET_armv5 =3D "arm"
-> =20
-> -DEPENDS =3D "libtool swig swig-native python bzip2 zlib glib-2.0 libwe=
-bp"
-> +DEPENDS =3D "libtool swig swig-native bzip2 zlib glib-2.0 libwebp"
-> =20
->  SRCREV_opencv =3D "70bbf17b133496bd7d54d034b0f94bd869e0e810"
->  SRCREV_contrib =3D "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
->=20
-
-
---hr14WDLpMrFDuIMo3b934UWgk2UVARRka--
-
---VPmGowLd8wgNSTqQDpW835xTOUcw74QrG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Comment: GPGTools - https://gpgtools.org
-
-iEYEARECAAYFAljejQAACgkQuwUzVZGdMxRE7gCeOdvDOtdQTyhYpNRFNdn+RUK2
-AAoAn1VTUUXiC9mqvej+rx8iF/vXETau
-=OGTr
------END PGP SIGNATURE-----
-
---VPmGowLd8wgNSTqQDpW835xTOUcw74QrG--
