@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 45C8977E39
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D7F377E36
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 16:42:56 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id 81so18579145pgh.3
+	Fri, 31 Mar 2017 16:42:58 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id 79so18583553pgf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 09:42:58 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=vT8ab7dn86XKTGJ2K+3/4yy4ux3GmOQDJywyr3fL3EA=;
-	b=eObag+mlOfeL5u3T78Nvjyyu/0Zk3eYFnMdXrWpkzyjcc+YDJIqtMuK48igmmW9bFd
-	XEKsj9uNyefN4mCJEL8nHndfAyi5sWcjMAb+LJ/MSguzpwg6K2h2p65ky+EyYe2/rN8C
-	y/uqTihsIUzm4MLYZ6AoM+e8qoxzcFbr612dEhNZrCEQVDAAnCeL1MUANp6R3gic67gY
-	d9akdyqf811psNqNxVmzix5tEP6g+yl8DzTUhLbhF9RSfzjPovLd7l7xKHqVYJjmusfz
-	D1SCzHju3r18ikjegP6+bRzqlwOWx7Kv9apvHjeItJDd7kZ5GEqvYMP8L+5PBvWRghua
-	bQ2A==
+	bh=74vSkimhHpWPcEEMbbHHJlmBk5z1B9h6VrmCva5EN9o=;
+	b=QYLwNoWH+tBHQqzM0K2JXDOrlzxuhyCLhOmTKlntX0Ob/h+Tr62wi3Z6IYtSpncMMy
+	/GXpOOkPAbsSJw0Z7zK7ibkQB7L6UQ0Hx2UDcC65mR42YU7/IbF2Q4gbsYWykEX3cQH1
+	zry0Eunw9n+MLE7/Y7QrBejS1g/n/1eCKQv0NWCd6egt22N8t+vLUjDTd8AaxIZdmOfU
+	ia6uZrczE+wIni0qIpKoj3Fq36DSCDBgrFYIOn39GW0AOs5NNL302HwkDBMx0dH0uV6m
+	gshXFzSldyppoRBqp0f6aOK7nTbthA4DKeHGw9Ot8i9Wk9iiE7zNaq1uvqWpblpxZMAM
+	BJ5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=vT8ab7dn86XKTGJ2K+3/4yy4ux3GmOQDJywyr3fL3EA=;
-	b=UOGDNnQbpCyYmSfFV/tKSaMCxGTMY1H33KQxYwmTPmaD9MK7ZeqA2la05nA/2t8LKF
-	3fzR7MPMfAYkdY5WNPufGxZTQKjSnV6zxsxQO7cTaNf1UomIw21aj7wsURBznQUEzYVK
-	8LlwDyj3hVrsTO206TPLUe9BVx6zvByuilL55GAVxFJHcMRHe0euxZ0CkV9TWd+EjuG6
-	kj/FHOShCXpQefQ/kgZWdaTVqooNhM2sRDS6HLRqN5h5mo5NS+lU1jQ6UG5DHjLRjocG
-	9ILYpi0Lq8HcHFBUUSXoJ9pI9qBFT9gNAHii5X1bokkmrD7IyvjLP8//0bw/NZJpU1OJ
-	sDUg==
-X-Gm-Message-State: AFeK/H1YfxNP1K/hfgMDgacJ/0om289yQRkBL93mh9nOwi+5ZDGcOFW/Rj5IV94Gbq6cmw==
-X-Received: by 10.99.132.73 with SMTP id k70mr4125937pgd.28.1490978578484;
-	Fri, 31 Mar 2017 09:42:58 -0700 (PDT)
+	bh=74vSkimhHpWPcEEMbbHHJlmBk5z1B9h6VrmCva5EN9o=;
+	b=OkZNUuSnnQDDgI4vZYc5ojvtikK99Sd8ByB5OPVbBBGPj5Yh67GtNqIel5dO2pfJQs
+	D+rs3vWmvgeBare1C2BRKM/e/EwiBRWqPU0MGKvtXvN8NwMTm1pdIe8pvBZT0VKjkV4q
+	Otc1n5j9Hig1DY+seaJ8sHP/U0aNLPRFsHFvYBt7N74CXD1xHjEVwkhdPc8i4aXnOmL1
+	tgwM0lAqs9r09KdwjhiKbAFI/57TaT5qOlmvLMcKlaeDY9yGnXAY6u2mlbQqzFfReN4n
+	Vuto41JiMVJN+/jLsaRt+e1xWYMUmo+LlJp4/6AxVhNVGsoDkvYXD+fdsZV5zNdjDO7V
+	07+g==
+X-Gm-Message-State: AFeK/H2wDihbs19XKJV5MCgATlvs1lMlrdR51+LLvJd/gdObewPvfuZNuKZOGKvjy6B26g==
+X-Received: by 10.99.101.67 with SMTP id z64mr4297211pgb.78.1490978579888;
+	Fri, 31 Mar 2017 09:42:59 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	a5sm11569706pfh.124.2017.03.31.09.42.57
+	a5sm11569706pfh.124.2017.03.31.09.42.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 09:42:57 -0700 (PDT)
+	Fri, 31 Mar 2017 09:42:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 09:42:07 -0700
-Message-Id: <20170331164247.5052-3-raj.khem@gmail.com>
+Date: Fri, 31 Mar 2017 09:42:08 -0700
+Message-Id: <20170331164247.5052-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.1
 In-Reply-To: <20170331164247.5052-1-raj.khem@gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 03/43] ctdb: Fix build with musl
+Subject: [meta-oe][PATCH 04/43] v4l-utils: Depend on argp-standalone for musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 16:42:57 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 16:42:59 -0000
 
-Fixes
-| ./utils/smnotify/smnotify.h:9:10: fatal error: 'rpc/rpc.h' file not found
-| #include <rpc/rpc.h>
+musl does not bundle libargp like glibc
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-index 7cea0f681..b5a60645c 100644
---- a/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-+++ b/meta-networking/recipes-support/ctdb/ctdb_2.5.6.bb
-@@ -27,6 +27,9 @@ PACKAGECONFIG[libtdb] = "--without-included-tdb,--with-included-tdb,libtdb"
- PARALLEL_MAKE = ""
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+index b9732fedc..4d87b50dc 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.10.1.bb
+@@ -6,6 +6,7 @@ PROVIDES = "libv4l media-ctl"
  
- DEPENDS += "popt libtevent libtalloc libldb"
-+DEPENDS_append_libc-musl = " libtirpc"
-+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-+LDFLAGS_append_libc-musl = " -ltirpc"
+ DEPENDS = "jpeg \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
++DEPENDS_append_libc-musl = " argp-standalone"
  
- # ctdbd_wrapper requires pgrep, hence procps
- RDEPENDS_${PN} += "procps"
+ inherit autotools gettext pkgconfig
+ 
 -- 
 2.12.1
 
