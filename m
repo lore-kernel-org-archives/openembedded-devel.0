@@ -1,48 +1,57 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3289977D3A
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
+	[209.85.220.174])
+	by mail.openembedded.org (Postfix) with ESMTP id AE34F77D89
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 11:38:17 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id w43so19842420wrb.1
+	Fri, 31 Mar 2017 11:55:59 +0000 (UTC)
+Received: by mail-qk0-f174.google.com with SMTP id d201so34554919qkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 04:38:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=rqGTr5dYiOF/+/3/AEpA0VX3ncJQ0sCJncgt2P6gSY0=;
-	b=KAgKWdTFXXEkpmZWLX2h5e/cCA+552tf22JeUKlgPeVdAzI6PisqRWYUJSIsSa8LkX
-	ITVF3qr2Ur/jTps8Fogy94QYu0D+lsWLbnsPY/ruRDyvkj7psYVv5ANVkHD5BSNIRDjj
-	OlQJqJD8KskMYRWd9RPZIzmhy70z0pM1BzF+CbRk2D/CChJx2LRNXZ8Fo+QevcE87jdD
-	WWcRPyFNwYOPDQnhhLmHHat5V1NxymThoAo8paszh+f6sseZwotMlowrFA6/z1+/0Kmp
-	ypy5CPI+AIVPvF6gPv8DZ9jgAV1nnVg2hh3kmlwHKZA0G90fKSe/4qi4S3rLQw1q1WBO
-	rn0w==
+	Fri, 31 Mar 2017 04:56:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=nyc0g7KhpOL7c65kuF0stsU8gRyPInPCp+H9ZaXanWg=;
+	b=ijw4qPr8UpgiRYVWuWfy2dhpV/CSRAXwcfJfy1pttYnXYTGqXsctiBmhrEJAWYiG5k
+	6GEKLooNZdZLFM+/QjaelqVmAf+erxSlbvTzzR906qwXdU1cCJ6okXltmGGCPIyad8MD
+	zapWVbwGBRQ9+f9e7oAExn1v7VeLKpw5XeaiyCjGGwVMiNm6zYkP4B2akOVLjZ8Og5UP
+	re6+2+BLzUt0fMQCcUDpqrZ0Uv/0M1u8HlFB5c4U8+qsS6MOqooFo0BCqyQY+tF6nLwH
+	r+CLRvm7kk8ePhDyL3DY36WP5jbazsDsKdoumS5E6APKZnXCSfBTLJ1jpb5m7wfJ34BO
+	1c/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=rqGTr5dYiOF/+/3/AEpA0VX3ncJQ0sCJncgt2P6gSY0=;
-	b=ZL+d3r4KaZcF6ZhtkB5+XB5PHNDDC4RcxUop34cgYvV6VR+uIt7fyl3o9SQs+/YC3H
-	6nn3a6Rnn6H10JWl9og64L6YhCV2mlXMdkU7zTRvwRgJmLVOFUhqAK+LENhRDikaEF0b
-	ZH/KqzM7XCldmDR95Otuv0mTHPaK4IEQINLjq4LtgyE8Iwc+Jlv/+B6XVtIGiOWFCo8k
-	3wQqPxidwByQHTDo6NGtU38IRTrDPTGNSwZynycXcSNtx07+9JaXj9gwKmzWvUZOMLxS
-	d/OntD2uxRlpJsduqdMzMvNva3De/pveyeqz38RCMZFoHO7ISqnuWM+EKY6zr67Jxu+B
-	926w==
-X-Gm-Message-State: AFeK/H1On733nzd/FSj4hgu5/fzorRM14AYGmh1WVLt0vuYqmZ0uwJO82Sapl23TJjxzXw==
-X-Received: by 10.223.134.50 with SMTP id 47mr2453617wrv.50.1490960298223;
-	Fri, 31 Mar 2017 04:38:18 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	189sm2567191wmm.31.2017.03.31.04.38.15
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 04:38:15 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 13:38:03 +0200
-Message-Id: <20170331113803.31535-7-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170331113803.31535-1-Martin.Jansa@gmail.com>
-References: <20170331113803.31535-1-Martin.Jansa@gmail.com>
-Subject: [PATCH][meta-oe][morty 7/7] alsa-equal: Update SRC_URI to something valid
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=nyc0g7KhpOL7c65kuF0stsU8gRyPInPCp+H9ZaXanWg=;
+	b=ITIQ6iSVc1piWfRydMqH34GKdBujQkEpGws4KG8w7p71ChUbWOnwzXMnMtTSaC1xKy
+	M5doHSUDxGxJq/9GSg1cQPCObIJHoqlLQGZv0pCc+8K6hHo5QPRXqxsp68tFim0MJMvD
+	OOQoIjptT797xbUN03N6nITUpYuC+sjBJR8oOc/e/TNOyFYWvom06FecnbAUFjUnPTj0
+	xp+UpQWVkbJLqaGFZ7U8NFDhN+AvJkc1cwg3ph9+4jBld8bkyNI+WphTSFDTn0HXbtuC
+	zd0+8gW4AwR0o0Ea6hA3fccp4OfclyyEp7jqao2C3c5C1nFoyUWqgPFDJEkcYFhcrfc4
+	dkTA==
+X-Gm-Message-State: AFeK/H3W9GfnxDuIqAJrICEyMm1yqdEy7aAKdKQEmkqrP0g6qqLDxuu0pdwC6x6qYXruqGWkisw4Ozsc2KEv3OhV
+X-Received: by 10.55.20.100 with SMTP id e97mr2446079qkh.3.1490961361311; Fri,
+	31 Mar 2017 04:56:01 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.22.166 with HTTP; Fri, 31 Mar 2017 04:55:40 -0700 (PDT)
+In-Reply-To: <20170330180636.GV15664@denix.org>
+References: <20170327142231.21807-1-marex@denx.de>
+	<1490624701.13980.267.camel@linuxfoundation.org>
+	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
+	<20170329215658.GP15664@denix.org>
+	<a5b043f0-b0ee-a74b-fd55-4f8d20669cba@denx.de>
+	<20170330132447.GU15664@denix.org>
+	<a8de81ca-4056-ad2c-4e38-1bd1b4c62315@denx.de>
+	<20170330180636.GV15664@denix.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 31 Mar 2017 12:55:40 +0100
+Message-ID: <CAJTo0LYtO5P7cUvtcKfiQ1KbsaYFSfzoE1oryCPOx_LMnE6vkw@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Marek Vasut <marex@denx.de>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [PATCH] u-boot: Update to 2017.03 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +64,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 11:38:17 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 11:56:01 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Khem Raj <raj.khem@gmail.com>
+On 30 March 2017 at 19:06, Denys Dmytriyenko <denis@denix.org> wrote:
 
-www.thedigitalmachine.net has disappeared
+> "Known devil is better than unknown angel"? :)
+>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Agreed, fwiw.  It's late and u-boot is quite important: cherry-pick the
+patch for Pyro and master can upgrade once it has branched.
 
-diff --git a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-index 637d029ba..3bed70e1a 100644
---- a/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-+++ b/meta-multimedia/recipes-multimedia/alsa-equal/alsa-equal_0.6.bb
-@@ -1,12 +1,12 @@
- DESCRIPTION = "A real-time adjustable equalizer plugin for ALSA"
--HOMEPAGE = "http://www.thedigitalmachine.net/alsaequal.html"
-+HOMEPAGE = "https://web.archive.org/web/20161105202833/http://thedigitalmachine.net/alsaequal.html"
- LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=243b725d71bb5df4a1e5920b344b86ad"
- 
- DEPENDS = "alsa-lib"
- 
- SRC_URI = " \
--    http://www.thedigitalmachine.net/tools/alsaequal-${PV}.tar.bz2 \
-+    https://launchpad.net/ubuntu/+archive/primary/+files/alsaequal_${PV}.orig.tar.bz2 \
-     file://0001-Fix-asneeded.patch \
-     file://0002-Fix-Eq-CAPS-plugin-name.patch \
-     file://0003-Fix-mixer.patch \
--- 
-2.12.2
-
+Ross
 
