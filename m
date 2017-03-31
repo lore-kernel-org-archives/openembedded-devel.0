@@ -1,57 +1,52 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AE34F77D89
+Return-Path: <akuster808@gmail.com>
+Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
+	[209.85.214.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CED4477D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 11:55:59 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id d201so34554919qkc.0
+	Fri, 31 Mar 2017 13:38:20 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id y18so2038405itc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 04:56:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=nyc0g7KhpOL7c65kuF0stsU8gRyPInPCp+H9ZaXanWg=;
-	b=ijw4qPr8UpgiRYVWuWfy2dhpV/CSRAXwcfJfy1pttYnXYTGqXsctiBmhrEJAWYiG5k
-	6GEKLooNZdZLFM+/QjaelqVmAf+erxSlbvTzzR906qwXdU1cCJ6okXltmGGCPIyad8MD
-	zapWVbwGBRQ9+f9e7oAExn1v7VeLKpw5XeaiyCjGGwVMiNm6zYkP4B2akOVLjZ8Og5UP
-	re6+2+BLzUt0fMQCcUDpqrZ0Uv/0M1u8HlFB5c4U8+qsS6MOqooFo0BCqyQY+tF6nLwH
-	r+CLRvm7kk8ePhDyL3DY36WP5jbazsDsKdoumS5E6APKZnXCSfBTLJ1jpb5m7wfJ34BO
-	1c/A==
+	Fri, 31 Mar 2017 06:38:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=RYCoWb3Xr+bkt+C8B/sRdp6jYOYAep19RXfyT9hedgA=;
+	b=DVAqduk87uCnFEsefozbUNJcq82sVNJKwkOv2RqLJ/ghXW2XOupRixxHPhPG/5IBUE
+	y8HMchrLZcwzAmfon/K4QGU+0kg6YXiiCZm0R8uscWk2MFvDzgjUNUgvN7OVttdjozAg
+	+G9ul1Omxnj0oG+41o2a7Ip0wwI5YBtZumDGPX/ROu1C0rPkCjc0nvj2u1psHze7qU4V
+	pgYPoukbCN8IDXCrn6amoSJA2FUnfkQthXcpw1ROXXZqfwia+lfQcGUitkEc3G3TnykC
+	Xo+Qkoj7e7bKKJDkCoMVzFMtw5ew/2UlQWpmeIpzN0FkUXG2qFtLEC6m7Y7hO/YMmpGI
+	rVTA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=nyc0g7KhpOL7c65kuF0stsU8gRyPInPCp+H9ZaXanWg=;
-	b=ITIQ6iSVc1piWfRydMqH34GKdBujQkEpGws4KG8w7p71ChUbWOnwzXMnMtTSaC1xKy
-	M5doHSUDxGxJq/9GSg1cQPCObIJHoqlLQGZv0pCc+8K6hHo5QPRXqxsp68tFim0MJMvD
-	OOQoIjptT797xbUN03N6nITUpYuC+sjBJR8oOc/e/TNOyFYWvom06FecnbAUFjUnPTj0
-	xp+UpQWVkbJLqaGFZ7U8NFDhN+AvJkc1cwg3ph9+4jBld8bkyNI+WphTSFDTn0HXbtuC
-	zd0+8gW4AwR0o0Ea6hA3fccp4OfclyyEp7jqao2C3c5C1nFoyUWqgPFDJEkcYFhcrfc4
-	dkTA==
-X-Gm-Message-State: AFeK/H3W9GfnxDuIqAJrICEyMm1yqdEy7aAKdKQEmkqrP0g6qqLDxuu0pdwC6x6qYXruqGWkisw4Ozsc2KEv3OhV
-X-Received: by 10.55.20.100 with SMTP id e97mr2446079qkh.3.1490961361311; Fri,
-	31 Mar 2017 04:56:01 -0700 (PDT)
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=RYCoWb3Xr+bkt+C8B/sRdp6jYOYAep19RXfyT9hedgA=;
+	b=BXH70T893gPGLD+VBuCIAls4HkwyRefaPe3xU2HsgnM6EsEgwZRA1zLgGTTBslZYEU
+	m74K3B4pQrX/Uex0vZlVoDB36KcXYc2SIoLgyNp/LlnzoxgJzyQzTGOt26LF8EcdGb0/
+	a9Cofjfn06ODbzUCaEQCZNQTc0CSdvrjcWpZpHjNhBJotlVEyaswve2UyZHDSGCZ2Qj7
+	wn+xkdQyqqhTa4vajnCSRrJx8AqJBeNvHeXJRAF8UMXazOaYCrXyNGUt1tiIfhf0d4wq
+	oyCK6yVQ2AucXoD55ogh69QGOANf10VmyLJ5D9m4GCzvjMYoKZAd43YxPqcb+BfTifpG
+	zmOg==
+X-Gm-Message-State: AFeK/H2WjLRRCRrkplWDamzXrbJq9UfetHQOlqBLpuUVd9Xswa9kXz6LfQhBCAOlDptK5w==
+X-Received: by 10.36.23.86 with SMTP id 83mr2638807ith.30.1490967502197;
+	Fri, 31 Mar 2017 06:38:22 -0700 (PDT)
+Received: from [172.30.15.4] ([67.133.97.100])
+	by smtp.gmail.com with ESMTPSA id
+	y203sm3146362iod.11.2017.03.31.06.38.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 31 Mar 2017 06:38:21 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20170331113803.31535-1-Martin.Jansa@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
+Date: Fri, 31 Mar 2017 06:38:20 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Received: by 10.140.22.166 with HTTP; Fri, 31 Mar 2017 04:55:40 -0700 (PDT)
-In-Reply-To: <20170330180636.GV15664@denix.org>
-References: <20170327142231.21807-1-marex@denx.de>
-	<1490624701.13980.267.camel@linuxfoundation.org>
-	<5c037512-7bf1-8a3c-cb76-fda7230781a0@denx.de>
-	<20170329215658.GP15664@denix.org>
-	<a5b043f0-b0ee-a74b-fd55-4f8d20669cba@denx.de>
-	<20170330132447.GU15664@denix.org>
-	<a8de81ca-4056-ad2c-4e38-1bd1b4c62315@denx.de>
-	<20170330180636.GV15664@denix.org>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Fri, 31 Mar 2017 12:55:40 +0100
-Message-ID: <CAJTo0LYtO5P7cUvtcKfiQ1KbsaYFSfzoE1oryCPOx_LMnE6vkw@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Marek Vasut <marex@denx.de>,
-	Richard Purdie <richard.purdie@linuxfoundation.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [PATCH] u-boot: Update to 2017.03 release
+In-Reply-To: <20170331113803.31535-1-Martin.Jansa@gmail.com>
+Subject: Re: [PATCH][meta-oe][morty 1/7] lftp: change SRC_URI source
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,16 +59,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 11:56:01 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 31 Mar 2017 13:38:22 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On 30 March 2017 at 19:06, Denys Dmytriyenko <denis@denix.org> wrote:
+Martin
 
-> "Known devil is better than unknown angel"? :)
+
+On 03/31/2017 04:37 AM, Martin Jansa wrote:
+> From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
 >
+> Changed SRC_URI source to official web-site, which keeps tarballs with
+> old releases.
+>
+> Cherry-picked from master, but without the upgrade to 4.7.5.
+Missing hash from master.
 
-Agreed, fwiw.  It's late and u-boot is quite important: cherry-pick the
-patch for Pyro and master can upgrade once it has branched.
+- armin
+>
+> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>   meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+> index 287821194..d62453745 100644
+> --- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+> +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+> @@ -6,7 +6,7 @@ SECTION = "console/network"
+>   LICENSE = "GPLv3"
+>   LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+>   
+> -SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
+> +SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz \
+>              file://fix-gcc-6-conflicts-signbit.patch \
+>             "
+>   SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
 
-Ross
 
