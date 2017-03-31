@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 77B5D77E3E
+	by mail.openembedded.org (Postfix) with ESMTP id E408777E51
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 16:43:27 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id g2so18478859pge.2
+	Fri, 31 Mar 2017 16:43:28 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id g2so18478991pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 09:43:29 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SJLBYjI3ZxeQqOlMhLBeX8gITGfWtGAaaH+Pjuug2fM=;
-	b=RuxpwJkuNbGRzF1ToMEt9Xseg4vQY9tA1HtpyOQIDX1QVV15K1ycUnRpNK+hHRxz/B
-	1IAbtJLbslw13O1LKb/U4BNQyOv27sI2PISLQe/tuf98zFt+6ZdxgbiwNjY7Ld+gro/5
-	CsPGWGczzKOTW0QP/kfrH4nzroEYi0Aq+Xg59skqWgXFJRscMHDgFBq7UlryOSvsKy5c
-	vVSCrD+2dqn/cyVyDqTg6p6Z7lYt4fGBBO2ugtZA9nchawPyHzdQEUKrr1sKCLAZBGf4
-	uQgZVV3ZfQ/GpFIgYr0yqwmuDhqdxt++m4Q4IxL/8MbnyMIqiZdmqQYHiAt0S1OdpzVC
-	uTZg==
+	bh=u2PAWm9/M+mp0OYRq8yaMGiGI70eRmIiNkTh71/ov84=;
+	b=LODahxnQAyq6LUMy8wbf614SFpFrf2TCBYgNyYIO5RHXTizkljBhu41GvRO5uzpe9a
+	sPKq7IwzcEu+wMBup15/iTkc/llVAyRYAzYW04eIih53V9ktFL+jHwV6CatZ38ZHsbJM
+	JGODQ19ceTNdM+57ZIuUp1ueRgRoNdcLFaIDNTUfceWarQF8TeriOhAIsW2pampp8StJ
+	k0syyLoib6jcxmu8AMZSd2NK5ttcOa4879TO4743FgIOR52r090+9tHdb+AEU2RNAQI3
+	C+EcMcpNW0v2lJEUtCSyIGGT6oHsUC75HU4pzSQTQ059sZ3Xr4JP45wjjDwJHIL4df9J
+	Y3IQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=SJLBYjI3ZxeQqOlMhLBeX8gITGfWtGAaaH+Pjuug2fM=;
-	b=fAxF9NWu1rAfwCTVSp77yC2W08PVHTopTRtD+N/m45rA2N6KUSWZt7lwXN730L59Nf
-	Kvd2h1VeOTGoPdMU7zo/R0/NgtTALZ78N1NOPkgXgcwYCmrORis3lebAcOdZnohGLs/L
-	Y35qfhEhQ68GsTl2pPB5+J0UE30DnOPFlWdY4UaRADuWN6kMJJDl7gggidoQgoBB08jH
-	FGYhfA71RWvuC8PdCwsf4beLGykEaRrJkaF0bEFdG0+wl0+hBTQTEKRPVbOGWtOOsgro
-	T3q2aYI1IEPrb7+haFTLLz3ETjtzoJqX6EJN/ghCHQVBu6GWfizc2GPzbM9YcftxodBS
-	pZLw==
-X-Gm-Message-State: AFeK/H3nVOFPKmTh9XBb8NeaDqKails49INCShoZs62xaGTC615Xx0Hg9vUXAn5YKAOEzQ==
-X-Received: by 10.98.210.133 with SMTP id c127mr3844430pfg.83.1490978608723;
-	Fri, 31 Mar 2017 09:43:28 -0700 (PDT)
+	bh=u2PAWm9/M+mp0OYRq8yaMGiGI70eRmIiNkTh71/ov84=;
+	b=CcFXNl4x64xuTBwjRMUgCPhh+PGI89frBjyS42lTLxJPUGRvc9YTvVdIupqepXOnMr
+	LrYeqI8EYDAp/gFF8AnGOLLM+ZTPViRKDujPn2+xMIlFKyOBMyX0N7JsnX0fv0WQDvRU
+	vezqKlj0Cxu1A2a2a5QSlDhJNuokQjl5V2RXJCUqcSCmjc143yg29Wj/j1WT3Zdys0bs
+	S7eiNO0pL/vGYH9UT6xI5c6WcnF24g5qdJauyxQ27i5LhD7+56mX8oLjYofHAziIakLf
+	aOt0zeqPkVa6QUPMVCB+qwkFkchhM8zrFYFri0DoDXIr6i9M/yn2ta0rS4+2BYENUu7G
+	5VvA==
+X-Gm-Message-State: AFeK/H1bFk358vG8sk+d3dLWpSfAby6HyH9xTOKxAcOGZgRST3uXfQE7YPV9lIsjPR9pBQ==
+X-Received: by 10.98.47.4 with SMTP id v4mr3218559pfv.86.1490978610178;
+	Fri, 31 Mar 2017 09:43:30 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	a5sm11569706pfh.124.2017.03.31.09.43.27
+	a5sm11569706pfh.124.2017.03.31.09.43.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 31 Mar 2017 09:43:27 -0700 (PDT)
+	Fri, 31 Mar 2017 09:43:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 31 Mar 2017 09:42:27 -0700
-Message-Id: <20170331164247.5052-23-raj.khem@gmail.com>
+Date: Fri, 31 Mar 2017 09:42:28 -0700
+Message-Id: <20170331164247.5052-24-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.1
 In-Reply-To: <20170331164247.5052-1-raj.khem@gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 23/43] rp-pppoe: Fix build with musl
+Subject: [meta-oe][PATCH 24/43] minicoredumper: Update to 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,100 +54,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 16:43:27 -0000
+X-List-Received-Date: Fri, 31 Mar 2017 16:43:29 -0000
+
+Clarify licensing and switch to github for fetching
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-ppoe-Dont-include-linux-if_ether.h.patch  | 30 ++++++++++++++++++++++
- ...0002-Enable-support-for-the-kernel-module.patch | 25 ++++++++++++++++++
- .../recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb    |  5 +++-
- 3 files changed, 59 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch
- create mode 100644 meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch
+ ...inicoredumper_1.0.2.bb => minicoredumper_2.0.0.bb} | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-kernel/minicoredumper/{minicoredumper_1.0.2.bb => minicoredumper_2.0.0.bb} (64%)
 
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch
-new file mode 100644
-index 000000000..11356ce3f
---- /dev/null
-+++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0001-ppoe-Dont-include-linux-if_ether.h.patch
-@@ -0,0 +1,30 @@
-+From 8d4d452d733bac8c5b55a90bddec8cc323cc9fa8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 28 Mar 2017 19:20:07 -0700
-+Subject: [PATCH 1/2] ppoe: Dont include linux/if_ether.h
-+
-+Fixes build with musl
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/pppoe.h | 4 ----
-+ 1 file changed, 4 deletions(-)
-+
-+diff --git a/src/pppoe.h b/src/pppoe.h
-+index ec067a0..281879c 100644
-+--- a/src/pppoe.h
-++++ b/src/pppoe.h
-+@@ -127,10 +127,6 @@ typedef unsigned long UINT32_t;
-+ #error Could not find a 32-bit integer type
-+ #endif
-+ 
-+-#ifdef HAVE_LINUX_IF_ETHER_H
-+-#include <linux/if_ether.h>
-+-#endif
-+-
-+ #include <netinet/in.h>
-+ 
-+ #ifdef HAVE_NETINET_IF_ETHER_H
-+-- 
-+2.12.1
-+
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch
-new file mode 100644
-index 000000000..139d1f089
---- /dev/null
-+++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe-3.12/0002-Enable-support-for-the-kernel-module.patch
-@@ -0,0 +1,25 @@
-+From aca8473a516a8dc013866105da141fe1cd947474 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 28 Mar 2017 19:24:53 -0700
-+Subject: [PATCH 2/2] Enable support for the kernel module
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/configure.in | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/configure.in b/src/configure.in
-+index cae0976..951a042 100644
-+--- a/src/configure.in
-++++ b/src/configure.in
-+@@ -33,6 +33,7 @@ AC_CHECK_HEADERS(linux/if_pppox.h, [], [],
-+ #include<net/ethernet.h>
-+ #include<linux/if.h>
-+ #include<linux/in.h>
-++#include<linux/in6.h>
-+ ])
-+ 
-+ dnl Checks for typedefs, structures, and compiler characteristics.
-+-- 
-+2.12.1
-+
-diff --git a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-index e1ca17fb3..fbe015f5e 100644
---- a/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-+++ b/meta-networking/recipes-protocols/rp-pppoe/rp-pppoe_3.12.bb
-@@ -17,7 +17,10 @@ SRC_URI = "http://www.roaringpenguin.com/files/download/${BP}.tar.gz \
-            file://pppoe-server.default \
-            file://pppoe-server.init \
-            file://configure.in-Error-fix.patch \
--           file://pppoe-server.service"
-+           file://pppoe-server.service \
-+           file://0001-ppoe-Dont-include-linux-if_ether.h.patch \
-+           file://0002-Enable-support-for-the-kernel-module.patch \
-+           "
+diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+similarity index 64%
+rename from meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+rename to meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+index babe54448..f3071e39a 100644
+--- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
++++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+@@ -1,17 +1,24 @@
+ SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
+ to allow minimal and customized crash dumps"
+-LICENSE = " LGPLv2.1 & BSD"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=45445387350de96a0e70410470ee5cab"
+-DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux"
++LICENSE = " LGPLv2.1 & BSD-2-Clause"
++LIC_FILES_CHKSUM = "file://COPYING;md5=709087c2ed0acda54a4d91497a889e42 \
++                    file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
++                    file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
++                   "
++DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
  
- SRC_URI[md5sum] = "216eb52b69062b92a64ee37fd71f4b66"
- SRC_URI[sha256sum] = "00794e04031546b0e9b8cf286f2a6d1ccfc4a621b2a3abb2d7ef2a7ab7cc86c2"
+ inherit autotools pkgconfig systemd update-rc.d
+ 
+-SRC_URI = "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
++SRCREV = "248019446ccf6079926efb54f8b6dd7be769bbae"
++
++PR .= "+git${SRCPV}"
++
++SRC_URI = "git://github.com/Linutronix/minicoredumper-debian;branch=unstable \
+            file://minicoredumper.service \
+            file://minicoredumper.init \
+ "
+-SRC_URI[md5sum] = "5ba9d116b52a8e2fb93456260644e753"
+-SRC_URI[sha256sum] = "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
++
++S = "${WORKDIR}/git"
+ 
+ SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
+ SYSTEMD_AUTO_ENABLE = "enable"
 -- 
 2.12.1
 
