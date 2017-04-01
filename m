@@ -1,48 +1,56 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-qt0-f173.google.com (mail-qt0-f173.google.com
-	[209.85.216.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 446CF71DB8
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 04CA177C29
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 18:27:14 +0000 (UTC)
-Received: by mail-qt0-f173.google.com with SMTP id r45so72391159qte.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 31 Mar 2017 11:27:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=RWIU5Ek0kghy4CW5gAsbZ/LPAuzp3ebRiSmPPxYNsg8=;
-	b=0ACNT47AksSKLYlJYran5OfS2bFzdBu5x3hty7RN83Yv0E99xnxCPf+5jLOWXaeCv4
-	9AodgzpXeX0SA78o3V8VLl4RgxEfxOBQFQkruKWAUerWO+2lB9Ljwke1VDUWopPKvAMe
-	VaVX97IJRYZAbsHAWNuWVIMjgbKuTHBv+kBASNIlrUQJUulGN4csCPgLhYZXSe/sgO8u
-	jF7IeqBz4iaKUMp+L9KxHGth145C/XbW1pStdtwaYDYq7RNCY1vtfldjJmQGs51zHy1W
-	J4JI/8dxLs6RQw0iAFccFUthpfTO4ZDqjU7t1sxH6aY4XWok33QGjIFuTUdyICoXpL7t
-	FLTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=RWIU5Ek0kghy4CW5gAsbZ/LPAuzp3ebRiSmPPxYNsg8=;
-	b=Dg2nht3CDHyp1YkSVy3NuHwaVDs0Ro+vnsjTu//i1xDIe7PiktpRRW6MvQCiIdL7mX
-	Nz/NAy7mIOdHRX5GPCiiOXiflaI7FYN9tnSQnM2QMKxTqRVDoPfi3Fg44E1yQD03l1VP
-	3YjRNnejGymyNXFfpjPzNwdbP9wzHw7H8zOWF9XdPkRUaMRiVFALOHjvD5sInsSBzhBX
-	BcwW6GRJaE2Bs+0IXxW6PYn45yL4VuwOoHxCaD+GRc8I98xaIydl8YuXq6O6NYXrctLg
-	Al87fVvAgWUA/HOTYUM9pnWBaoiBaOpnosb5P99p6t4Eyakdby+5Q0PlnBETnCBy45+u
-	353w==
-X-Gm-Message-State: AFeK/H2Y4vTgjoS5Of8jnZVzmG1pAC4XPyfzWLb4SrrSMOPJ16ysob+kTuyPj3AuKVgBe8yc0vX4SFt35mtZCQ==
-X-Received: by 10.237.57.37 with SMTP id l34mr4179285qte.114.1490984835989;
-	Fri, 31 Mar 2017 11:27:15 -0700 (PDT)
+	Sat,  1 Apr 2017 03:50:19 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id B8BFD182D7;
+	Sat,  1 Apr 2017 05:50:19 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id TIdt2aU8uxae; Sat,  1 Apr 2017 05:50:18 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 0C07E1809C;
+	Sat,  1 Apr 2017 05:50:18 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id ED3D61E080;
+	Sat,  1 Apr 2017 05:50:17 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id E20981E07F;
+	Sat,  1 Apr 2017 05:50:17 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Sat,  1 Apr 2017 05:50:17 +0200 (CEST)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by thoth.se.axis.com (Postfix) with ESMTP id D5E82251A;
+	Sat,  1 Apr 2017 05:50:17 +0200 (CEST)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Sat, 1 Apr 2017 05:50:17 +0200
+Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
+	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
+	15.00.1210.000; Sat, 1 Apr 2017 05:50:17 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-oe][PATCH 06/43] lvm2: Fix patch errors found with
+	musl
+Thread-Index: AQHSqj4FK3H5Xa0l0Ui0pGM9sGxdrqGv32nw
+Date: Sat, 1 Apr 2017 03:50:17 +0000
+Message-ID: <7019a8d36ba240d7969035c877f3171e@XBOX02.axis.com>
+References: <20170331164247.5052-1-raj.khem@gmail.com>
+	<20170331164247.5052-6-raj.khem@gmail.com>
+In-Reply-To: <20170331164247.5052-6-raj.khem@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
 MIME-Version: 1.0
-Received: by 10.237.55.103 with HTTP; Fri, 31 Mar 2017 11:27:15 -0700 (PDT)
-In-Reply-To: <20170329220401.GQ15664@denix.org>
-References: <CAHUNapSj77gK_kExofCWaeREZOqwQoHQei4YZbqE1F5Uh=2CFA@mail.gmail.com>
-	<20170329220401.GQ15664@denix.org>
-From: Ian Coolidge <ian@boundarydevices.com>
-Date: Fri, 31 Mar 2017 11:27:15 -0700
-Message-ID: <CADseiPkfT8uAF_eeA8Bpa5WtMQh1DFvDOVj++V+7ns3+CWGCnw@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] calling all chromium recipe users
+X-TM-AS-GCONF: 00
+Subject: Re: [meta-oe][PATCH 06/43] lvm2: Fix patch errors found with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,146 +63,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 31 Mar 2017 18:27:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 01 Apr 2017 03:50:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Chromium and Chromium-Wayland on IMX platform
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Khem Raj
+> Sent: den 31 mars 2017 18:42
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe][PATCH 06/43] lvm2: Fix patch errors found with
+> musl
+>=20
+> The patches had syntax errors which are only
+> visible when using musl libs
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../lvm2/0001-implement-libc-specific-reopen_stream.patch  | 14 +++++++-=
+------
+>  .../lvm2/0002-Guard-use-of-mallinfo-with-__GLIBC__.patch   | 14 +++++++-=
+------
+>  2 files changed, 14 insertions(+), 14 deletions(-)
+>=20
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2/0001-implement-libc-specif=
+ic-reopen_stream.patch b/meta-oe/recipes-support/lvm2/lvm2/0001-implement-l=
+ibc-specific-reopen_stream.patch
+> index f09fd76b3..b6a7f1a92 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2/0001-implement-libc-specific-reop=
+en_stream.patch
+> +++ b/meta-oe/recipes-support/lvm2/lvm2/0001-implement-libc-specific-reop=
+en_stream.patch
+> @@ -1,7 +1,7 @@
+> -From ede7976da9431573b0104dbcfe91a32c02dbea13 Mon Sep 17 00:00:00 2001
+> +From e3103459416616d3b8508e7176e897b0ae6c90f2 Mon Sep 17 00:00:00 2001
+>  From: Dengke Du <dengke.du@windriver.com>
+>  Date: Tue, 25 Oct 2016 11:49:40 +0000
+> -Subject: [PATCH 1/4] implement libc specific reopen_stream
+> +Subject: [PATCH] implement libc specific reopen_stream
+>=20
+>  musl defines stdin/stdio/stderr as constant types which means
+>  we can not assign to them as we are doing here but works ok with glibc
+> @@ -13,15 +13,15 @@ http://git.alpinelinux.org/cgit/aports/tree/main/lvm2=
+/fix-stdio-usage.patch
+>=20
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  Signed-off-by: Dengke Du <dengke.du@windriver.com>
+> ----
+> -Upstream-Status: Pending
+> +
+> +%% original patch: 0001-implement-libc-specific-reopen_stream.patch
 
-Chromium is working great, although chromium-imx hasn't been updated yet
-for the later 53.x versions as the patches for graphics need to be updated.
+This chunk does not look as it was intended...
 
-Chromium-Wayland hasn't worked in any of it's versions, or on wayland on
-IMX in general for some time. Unless i'm doing something wrong... I've been
-trying to get this working on the 48x version for a while now, I just get a
-segfault on startup that looks like this
+>  ---
+>   lib/log/log.c      | 6 ++++++
+>   tools/lvmcmdline.c | 6 +++---
+>   2 files changed, 9 insertions(+), 3 deletions(-)
+>=20
+>  diff --git a/lib/log/log.c b/lib/log/log.c
+> -index c933154..638839d 100644
+> +index c933154..3581084 100644
+>  --- a/lib/log/log.c
+>  +++ b/lib/log/log.c
+>  @@ -161,6 +161,7 @@ static void _check_and_replace_standard_log_streams(=
+FILE *old_stream, FILE *new_
+> @@ -38,7 +38,7 @@ index c933154..638839d 100644
+>   }
+>  +#else
+>  +{
+> -+	return (freopen(NULL, mode, *stream) !=3D NULL)
+> ++	return (freopen(NULL, mode, *stream) !=3D NULL);
+>  +}
+>  +#endif
+>=20
+> @@ -76,5 +76,5 @@ index 9a4deb7..f1f18e6 100644
+>   		       strerror(errno));
+>   		return 0;
+>  --
+> -2.9.3
+> +2.12.0
+>=20
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2/0002-Guard-use-of-mallinfo=
+-with-__GLIBC__.patch b/meta-oe/recipes-support/lvm2/lvm2/0002-Guard-use-of=
+-mallinfo-with-__GLIBC__.patch
+> index 5baafab3e..ef385099f 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2/0002-Guard-use-of-mallinfo-with-_=
+_GLIBC__.patch
+> +++ b/meta-oe/recipes-support/lvm2/lvm2/0002-Guard-use-of-mallinfo-with-_=
+_GLIBC__.patch
+> @@ -1,20 +1,20 @@
+> -From 8706a6d33753d8b2cf5bb2a12bd6880b371ce337 Mon Sep 17 00:00:00 2001
+> +From 3ae9c0b607ec33fb07f32a41e9d28cc9068dd39a Mon Sep 17 00:00:00 2001
+>  From: Dengke Du <dengke.du@windriver.com>
+>  Date: Tue, 25 Oct 2016 11:52:44 +0000
+> -Subject: [PATCH 2/4] Guard use of mallinfo() with __GLIBC__
+> +Subject: [PATCH] Guard use of mallinfo() with __GLIBC__
+>=20
+>  This API is glibc-only
+>=20
+>  Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>  Signed-off-by: Dengke Du <dengke.du@windriver.com>
+> ----
+> -Upstream-Status: Pending
+> +
+> +%% original patch: 0002-Guard-use-of-mallinfo-with-__GLIBC__.patch
 
-root@nitrogen6x-lite:~# google-chrome www.google.com
->
-> [1:1:0327/214358:ERROR:image_metadata_extractor.cc(112)] Couldn't load
->> libexif. libexif.so.12: cannot open shared object file: No such file or
->> directory
->
-> error: XDG_RUNTIME_DIR not set in the environment.
->
-> error: XDG_RUNTIME_DIR not set in the environment.
->
-> [512:512:0327/214400:ERROR:display.cc(148)] WaylandDisplay failed to
->> initialize hardware
->
-> [512:512:0327/214400:FATAL:ozone_platform_wayland.cc(115)] failed to
->> initialize display hardware
->
-> #0 0x00005524860a <unknown>
->
-> #1 0x000055257dd0 <unknown>
->
-> #2 0x0000558a506e <unknown>
->
-> #3 0x000055989104 <unknown>
->
-> #4 0x000055989a54 <unknown>
->
-> #5 0x000055989b26 <unknown>
->
-> #6 0x0000578ca552 <unknown>
->
-> #7 0x00005521a1d4 <unknown>
->
-> #8 0x00005521900a <unknown>
->
-> #9 0x000054f3e4f8 ChromeMain
->
-> #10 0x0000766e246a __libc_start_main
->
->
->> Received signal 6
->
-> #0 0x00005524860a <unknown>
->
-> #1 0x0000552488cc <unknown>
->
-> #2 0x0000766f1020 <unknown>
->
-> #3 0x0000766e26b6 <unknown>
->
-> #4 0x0000766f040c gsignal
->
-> #5 0x0000766f10fa abort
->
-> #6 0x00005524842a <unknown>
->
-> #7 0x000055257e98 <unknown>
->
-> #8 0x0000558a506e <unknown>
->
-> #9 0x000055989104 <unknown>
->
-> #10 0x000055989a54 <unknown>
->
-> #11 0x000055989b26 <unknown>
->
-> #12 0x0000578ca552 <unknown>
->
-> #13 0x00005521a1d4 <unknown>
->
-> #14 0x00005521900a <unknown>
->
-> #15 0x000054f3e4f8 ChromeMain
->
-> #16 0x0000766e246a __libc_start_main
->
-> [end of stack trace]
->
-> Segmentation fault
->
->
->
-On Wed, Mar 29, 2017 at 3:04 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Same here.
 
-> On Wed, Mar 29, 2017 at 03:35:22PM -0400, Trevor Woerner wrote:
-> > When testing changes to the chromium[-wayland] recipes, it would be
-> > great to know the layers, configurations, and MACHINEs with which
-> > people are building.
-> >
-> > For example I care about chromium running on X11 for minnow
-> > (meta-intel) and raspberry pi (meta-raspberrypi). How are other people
-> > running chromium?
->
-> chromium-wayland on TI platforms from meta-ti.
->
->
-> > Also, are you able to run with accelerated graphics? If so, what
-> > configuration are you using?
->
-> Full acceleration is still in the works for our platforms.
-> Very basic "hacky" way was to patch wayland.gyp to bypass the configure
-> check
-> for Mesa version:
-> http://arago-project.org/git/?p=meta-arago.git;a=blob;f=
-> meta-arago-distro/recipes-browser/chromium/chromium-
-> wayland/0001-wayland.gyp-adjust-Mesa-version-to-work-
-> with-TI-SGX-.patch;hb=HEAD
->
+>  ---
+>   lib/mm/memlock.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
+>=20
+>  diff --git a/lib/mm/memlock.c b/lib/mm/memlock.c
+> -index da90144..c1bf8fb 100644
+> +index da90144..f34f890 100644
+>  --- a/lib/mm/memlock.c
+>  +++ b/lib/mm/memlock.c
+>  @@ -150,7 +150,7 @@ static void _touch_memory(void *mem, size_t size)
+> @@ -22,10 +22,10 @@ index da90144..c1bf8fb 100644
+>   static void _allocate_memory(void)
+>   {
+>  -#ifndef VALGRIND_POOL
+> -+#ifndef VALGRIND_POOL && defined(__GLIBC__)
+> ++#if !defined(VALGRIND_POOL) && defined(__GLIBC__)
+>   	void *stack_mem;
+>   	struct rlimit limit;
+>   	int i, area =3D 0, missing =3D _size_malloc_tmp, max_areas =3D 32, hbl=
+ks;
+>  --
+> -2.9.3
+> +2.12.0
+>=20
 > --
-> Denys
->
->
-> > Specifically, I assume the trick is the correct configuration of various
-> >
-> >     PREFERRED_PROVIDER_virtual/X = Y
-> >
-> > where X is one of {mesa|gl|egl|gles1|gles2} and Y is probably
-> > something BSP-specific. Is anything else needed to get accelerated
-> > graphics working with chromium?
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> 2.12.1
+
+//Peter
+
 
