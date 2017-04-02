@@ -1,47 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C32FD77E23
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 346B97199A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Apr 2017 07:16:01 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id u18so25549285wrc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 Apr 2017 00:16:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=owQfy3UrSoGW+yRXA/t0+Qz2X1TngEQhsP79G4btmoA=;
-	b=qpLlqMjZLrW7MGO6JTtD5FeQvHaVeHZ6GlP7P3hX27ZAldLQT+YOfwNt6PyURN9MdJ
-	xAqpi5O69Zg0C4FrWHbHQ+24z01CdEEDSLWFFQfYU+yVes618g/I7loTSaERHoereZY7
-	ZqK2w8F7PGAhV0HyLS/2mZpAxmJYbRsSb0DRAs0v+v/FcQebWx9xMtjChZOw1yw3RMgl
-	iNwK1gb8QPH50cze9mV+kggZbSqUWDuazgc6K3gowmKe62bXxIZ9sWr2P8kN8OzUtsUm
-	uBqkV9/GhlEvdpkheBIqmo7h21RH8ovl4BQUxSkE3hc9Hnap+QFaAUGySR9nK6lpyHq3
-	KjBQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=owQfy3UrSoGW+yRXA/t0+Qz2X1TngEQhsP79G4btmoA=;
-	b=hC46i0KsoeCoMR4JN+z4vjt9DxFUkgn2jzxSDHSRHxA3s0QXPGwJcKXCmRE528x9Kt
-	Yc5G4B1frWoXcb00gpEk+9JcOCOPa5+JSsusC+F/78H2wAdEQwbjTwmE7TYqVuVZNpie
-	yC5kGNj+T5vYQgOvYxxGMkAiHwRZ1VLnIFxwJ1jdJiSZdsVtZdaTjO5siE/E2kcswRcv
-	qboPKcGS35TluU+LmXfaGyFYkjDQRE7sjLkGSR72jp5G7kdcimsyUAPIsqX+Gh0gGHEQ
-	yMeCCnEXy70NR9f3tXqgNqk246rRT/T6mRsM0rcJbjr16i+OJu9pctvDJ9ELn+88QWWc
-	Fhww==
-X-Gm-Message-State: AFeK/H0h0cyKnyyO3H1wHS9KU1QvmZiNUmfcXwgP2+Xw9oNaSKml1L0Z1nvJ6y2nRwugbdfejGRiZERgkQ1wJg==
-X-Received: by 10.223.160.168 with SMTP id m37mr10277642wrm.196.1491117362847; 
-	Sun, 02 Apr 2017 00:16:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Sun, 2 Apr 2017 00:16:02 -0700 (PDT)
-In-Reply-To: <20170331164247.5052-37-raj.khem@gmail.com>
-References: <20170331164247.5052-1-raj.khem@gmail.com>
-	<20170331164247.5052-37-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 2 Apr 2017 09:16:02 +0200
-Message-ID: <CA+chaQcAuBazrqCgVBwcLspbmkT2q08JvXMmXBUjXnpjK9Teiw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 37/43] xarchiver: Fix build with security flags turned on
+	Sun,  2 Apr 2017 20:33:24 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 5B43B5C0533;
+	Sun,  2 Apr 2017 22:33:21 +0200 (CEST)
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  2 Apr 2017 13:33:09 -0700
+Message-Id: <1491165189-7839-1-git-send-email-stefan@agner.ch>
+X-Mailer: git-send-email 2.7.4
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1491165202; bh=bIxIqe4jxfZ93SZbiQOc2YsgRdpx/zHFZvGvkODQ3wQ=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=Cyi27sXh2bGUOl3JVcUBtQcpAWIl6VJEfKRsq8TDRLLKzcfWRzkYUlvJL7GuAApRPzaL4yrdlQymxnThdCsNgVv0m4i5FfIOFPBQbEXY1chrvT+bb+fSrX+8rADiK7DxEwNq5ETRcTrAinS+mL4O6a/X+IOE+d7SQ5Vp0GB0ihU=
+Subject: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,117 +29,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Apr 2017 07:16:02 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 02 Apr 2017 20:33:28 -0000
 
-../../git/src/window.c:234:52: error: incompatible type for argument 4
-of 'gtk_message_dialog_new'
-  dialog = gtk_message_dialog_new (window,mode,type,"%s",button,message1);
-                                                    ^~~~
+WireGuard is an extremely simple yet fast and modern VPN that utilizes
+state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+and more useful than IPSec, while avoiding the massive headache.
 
-http://errors.yoctoproject.org/Errors/Details/138844/
+The recipes add the current experimental snapshot v0.0.20170324
+out-of-tree kernel module and tools. The kernel module has some kernel
+configuration dependencies such as some configuration part of
+features/netfilter/netfilter.scc, hence netfilter.scc should be part
+of KERNEL_EXTRA_FEATURES (which is the case by default).
 
+Signed-off-by: Stefan Agner <stefan@agner.ch>
+---
+ .../wireguard/wireguard-module_0.0.20170324.bb     |  9 ++++++++
+ .../wireguard/wireguard-tools_0.0.20170324.bb      | 27 ++++++++++++++++++++++
+ .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+ 3 files changed, 54 insertions(+)
+ create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
+ create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
+ create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
 
-On Fri, Mar 31, 2017 at 6:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
+new file mode 100644
+index 0000000..aeb8269
+--- /dev/null
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
+@@ -0,0 +1,9 @@
++require wireguard.inc
++
++inherit module
++
++EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
++MAKE_TARGETS = "module"
++MODULES_INSTALL_TARGET = "module-install"
++
++RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
+new file mode 100644
+index 0000000..79d420f
+--- /dev/null
++++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
+@@ -0,0 +1,27 @@
++require wireguard.inc
++
++inherit bash-completion systemd pkgconfig
++
++DEPENDS = "wireguard-module libmnl"
++
++do_compile_prepend () {
++    cd ${S}/tools
++}
++
++do_install () {
++    cd ${S}/tools
++    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
++        SYSTEMDUNITDIR="${systemd_unitdir}" \
++        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
++        WITH_BASHCOMPLETION=yes \
++        WITH_WGQUICK=yes \
++        install
++}
++
++FILES_${PN} = " \
++    ${sysconfdir} \
++    ${systemd_unitdir} \
++    ${bindir} \
++"
++
++RDEPENDS_${PN} = "wireguard-module"
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+new file mode 100644
+index 0000000..cec7260
+--- /dev/null
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -0,0 +1,18 @@
++SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
++DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
++implemented as a kernel virtual network interface for Linux, which aims to \
++replace both IPsec for most use cases, as well as popular user space and/or \
++TLS-based solutions like OpenVPN, while being more secure, more performant, \
++and easier to use."
++SECTION = "networking"
++HOMEPAGE = "https://www.wireguard.io/"
++LICENSE = "GPLv2"
++
++LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
++
++SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
++SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
++
++S = "${WORKDIR}/WireGuard-${PV}/src/"
+-- 
+2.7.4
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...formatting-string-to-printf-like-function.patch | 43
-> ++++++++++++++++++++++
->  meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb  |  4 +-
->  2 files changed, 46 insertions(+), 1 deletion(-)
->  create mode 100644 meta-xfce/recipes-apps/xarchiver/xarchiver/0001-Add-
-> proper-formatting-string-to-printf-like-function.patch
->
-> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver/0001-Add-
-> proper-formatting-string-to-printf-like-function.patch
-> b/meta-xfce/recipes-apps/xarchiver/xarchiver/0001-Add-
-> proper-formatting-string-to-printf-like-function.patch
-> new file mode 100644
-> index 000000000..2d7eb9a5d
-> --- /dev/null
-> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver/0001-Add-
-> proper-formatting-string-to-printf-like-function.patch
-> @@ -0,0 +1,43 @@
-> +From baf93ea9acf845c5455d577ac19a6f680dac3d2d Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 30 Mar 2017 11:22:42 -0700
-> +Subject: [PATCH] Add proper formatting string to printf-like functions
-> +
-> +Avoids potential security holes and makes compiler happy
-> +
-> +| ../../../../../../../workspace/sources/xarchiver/src/window.c:236:72:
-> error: format string is not a string literal (potentially insecure)
-> [-Werror,-Wformat-security]
-> +|         gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
-> (dialog),message2);
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/window.c | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/src/window.c b/src/window.c
-> +index ca2f69f..3b10e2c 100644
-> +--- a/src/window.c
-> ++++ b/src/window.c
-> +@@ -231,9 +231,9 @@ int xa_show_message_dialog (GtkWindow *window,int
-> mode,int type,int button,const
-> + {
-> +       int response;
-> +
-> +-      dialog = gtk_message_dialog_new (window,mode,type,button,
-> message1);
-> ++      dialog = gtk_message_dialog_new (window,mode,type,"%s",button,
-> message1);
-> +       gtk_dialog_set_default_response (GTK_DIALOG
-> (dialog),GTK_RESPONSE_NO);
-> +-      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
-> (dialog),message2);
-> ++      gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
-> (dialog),"%s",message2);
-> +       response = gtk_dialog_run (GTK_DIALOG (dialog));
-> +       gtk_widget_destroy (GTK_WIDGET (dialog));
-> +       return response;
-> +@@ -511,7 +511,7 @@ void xa_list_archive (GtkMenuItem *menuitem,gpointer
-> data)
-> +                       g_fprintf (stream,_("Comment:\n"));
-> +                       if (bp)
-> +                               g_fprintf(stream,"</b><pre>");
-> +-                      g_fprintf (stream,archive[idx]->comment->str);
-> ++                      g_fprintf (stream,"%s",archive[idx]->
-> comment->str);
-> +                       if (bp)
-> +                               g_fprintf(stream,"</pre>");
-> +                       g_fprintf (stream,"\n");
-> +--
-> +2.12.1
-> +
-> diff --git a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-> b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-> index ca299223d..ea34a52c1 100644
-> --- a/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-> +++ b/meta-xfce/recipes-apps/xarchiver/xarchiver_git.bb
-> @@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
-> 94d55d512a9ba36caa9b7df079bae19f"
->
->  DEPENDS = "gtk+ glib-2.0 xfce4-dev-tools-native intltool-native"
->
-> -SRC_URI = "git://github.com/schnitzeltony/xarchiver.git;branch=master"
-> +SRC_URI = "git://github.com/schnitzeltony/xarchiver.git;branch=master \
-> +           file://0001-Add-proper-formatting-string-to-printf-like-function.patch
-> \
-> +           "
->  SRCREV = "e80e90528c9aab2fe36d9078b945b44c05cc20d3"
->  PV = "0.5.3"
->  S = "${WORKDIR}/git"
-> --
-> 2.12.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
