@@ -1,22 +1,29 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 346B97199A
+Return-Path: <jaap.dejong@nedap.com>
+X-Greylist: delayed 599 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 03 Apr 2017 11:04:48 UTC
+Received: from smtp4.nedap.com (smtp4.nedap.com [213.160.213.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A30771BA1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 Apr 2017 20:33:24 +0000 (UTC)
-Received: from seahawk.toradex.int
-	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 5B43B5C0533;
-	Sun,  2 Apr 2017 22:33:21 +0200 (CEST)
-From: Stefan Agner <stefan@agner.ch>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun,  2 Apr 2017 13:33:09 -0700
-Message-Id: <1491165189-7839-1-git-send-email-stefan@agner.ch>
-X-Mailer: git-send-email 2.7.4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1491165202; bh=bIxIqe4jxfZ93SZbiQOc2YsgRdpx/zHFZvGvkODQ3wQ=;
-	h=From:To:Cc:Subject:Date:Message-Id;
-	b=Cyi27sXh2bGUOl3JVcUBtQcpAWIl6VJEfKRsq8TDRLLKzcfWRzkYUlvJL7GuAApRPzaL4yrdlQymxnThdCsNgVv0m4i5FfIOFPBQbEXY1chrvT+bb+fSrX+8rADiK7DxEwNq5ETRcTrAinS+mL4O6a/X+IOE+d7SQ5Vp0GB0ihU=
-Subject: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
+	Mon,  3 Apr 2017 11:04:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nedap.com; i=@nedap.com; q=dns/txt; s=20161201;
+	t=1491217491; x=1522753491;
+	h=from:subject:to:message-id:date:mime-version;
+	bh=UZMC3YPF4KIRMuZtMhBIcjJ5QKgplJahJ24auhUPALY=;
+	b=BEEfumtD4qHeb31GrSeOQNlq2DMzspzJ8L23EHgnYXRaQnZBCo7Y04Iy
+	Y6XtmcV4oEOxY8NSWraPIlihK+LTHR5uC0bbgEECTX8KoofA4ngm7S5/q
+	ydiZKM6DjF8XAm1abRvzvJd7taptdOmv+U8Uuirgmf0u2y+I9NLWgQuhK w=;
+Received: from nvc2354.nedap.local (HELO [10.2.16.70]) ([10.2.16.70])
+	by smtp4.nedap.com with ESMTP; 03 Apr 2017 12:54:49 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <5822cba9-6a76-4555-a772-d862f216e0cf@nedap.com>
+Date: Mon, 3 Apr 2017 12:54:49 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+Subject: [meta-networking][morty][PATCH] uftp: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,101 +36,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 Apr 2017 20:33:28 -0000
+X-List-Received-Date: Mon, 03 Apr 2017 11:04:49 -0000
+X-Groupsio-MsgNum: 66067
+Content-Type: multipart/mixed; boundary="------------0B84BB2D79B25000E01DD379"
 
-WireGuard is an extremely simple yet fast and modern VPN that utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner,
-and more useful than IPSec, while avoiding the massive headache.
-
-The recipes add the current experimental snapshot v0.0.20170324
-out-of-tree kernel module and tools. The kernel module has some kernel
-configuration dependencies such as some configuration part of
-features/netfilter/netfilter.scc, hence netfilter.scc should be part
-of KERNEL_EXTRA_FEATURES (which is the case by default).
-
-Signed-off-by: Stefan Agner <stefan@agner.ch>
----
- .../wireguard/wireguard-module_0.0.20170324.bb     |  9 ++++++++
- .../wireguard/wireguard-tools_0.0.20170324.bb      | 27 ++++++++++++++++++++++
- .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
- 3 files changed, 54 insertions(+)
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
-
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
-new file mode 100644
-index 0000000..aeb8269
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb
-@@ -0,0 +1,9 @@
-+require wireguard.inc
-+
-+inherit module
-+
-+EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-+MAKE_TARGETS = "module"
-+MODULES_INSTALL_TARGET = "module-install"
-+
-+RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
-new file mode 100644
-index 0000000..79d420f
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb
-@@ -0,0 +1,27 @@
-+require wireguard.inc
-+
-+inherit bash-completion systemd pkgconfig
-+
-+DEPENDS = "wireguard-module libmnl"
-+
-+do_compile_prepend () {
-+    cd ${S}/tools
-+}
-+
-+do_install () {
-+    cd ${S}/tools
-+    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
-+        SYSTEMDUNITDIR="${systemd_unitdir}" \
-+        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
-+        WITH_BASHCOMPLETION=yes \
-+        WITH_WGQUICK=yes \
-+        install
-+}
-+
-+FILES_${PN} = " \
-+    ${sysconfdir} \
-+    ${systemd_unitdir} \
-+    ${bindir} \
-+"
-+
-+RDEPENDS_${PN} = "wireguard-module"
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-new file mode 100644
-index 0000000..cec7260
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
-+DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
-+implemented as a kernel virtual network interface for Linux, which aims to \
-+replace both IPsec for most use cases, as well as popular user space and/or \
-+TLS-based solutions like OpenVPN, while being more secure, more performant, \
-+and easier to use."
-+SECTION = "networking"
-+HOMEPAGE = "https://www.wireguard.io/"
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
-+SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
-+
-+S = "${WORKDIR}/WireGuard-${PV}/src/"
--- 
-2.7.4
+--------------0B84BB2D79B25000E01DD379
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
+
+--------------0B84BB2D79B25000E01DD379
+Content-Type: text/plain; charset=UTF-8;
+ name="0001-uftp-Add-recipe.patch.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-uftp-Add-recipe.patch.txt"
+
+RnJvbSBjYmEyMGMwZGY2NWRjZGQ3MTEwMDljNTU4NzE0MmQyNjA2ZGViMWE5IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBKYWFwIGRlIEpvbmcgPGphYXAuZGVqb25nQG5lZGFwLmNvbT4K
+RGF0ZTogTW9uLCAzIEFwciAyMDE3IDEyOjQ3OjE3ICswMjAwClN1YmplY3Q6IFttZXRhLW5ldHdv
+cmtpbmddW21vcnR5XVtQQVRDSF0gdWZ0cDogQWRkIHJlY2lwZQpUbzogb3BlbmVtYmVkZGVkLWRl
+dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcKCi0tLQogbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
+c3VwcG9ydC91ZnRwL3VmdHBfNC45LjMuYmIgfCAxNSArKysrKysrKysrKysrKysKIDEgZmlsZSBj
+aGFuZ2VkLCAxNSBpbnNlcnRpb25zKCspCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1uZXR3b3Jr
+aW5nL3JlY2lwZXMtc3VwcG9ydC91ZnRwL3VmdHBfNC45LjMuYmIKCmRpZmYgLS1naXQgYS9tZXRh
+LW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L3VmdHAvdWZ0cF80LjkuMy5iYiBiL21ldGEtbmV0
+d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvdWZ0cC91ZnRwXzQuOS4zLmJiCm5ldyBmaWxlIG1vZGUg
+MTAwNjQ0CmluZGV4IDAwMDAwMDAuLmE2ZWVjZWIKLS0tIC9kZXYvbnVsbAorKysgYi9tZXRhLW5l
+dHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0L3VmdHAvdWZ0cF80LjkuMy5iYgpAQCAtMCwwICsxLDE1
+IEBACitERVNDUklQVElPTiA9ICJFbmNyeXB0ZWQgVURQIGJhc2VkIEZUUCB3aXRoIG11bHRpY2Fz
+dCIKK0hPTUVQQUdFID0gImh0dHBzOi8vc291cmNlZm9yZ2UubmV0L3Byb2plY3RzL3VmdHAtbXVs
+dGljYXN0IgorU0VDVElPTiA9ICJsaWJzL25ldHdvcmsiCisKK0xJQ0VOU0UgPSAiR1BMdjMiCitM
+SUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFLnR4dDttZDU9ZDMyMjM5YmNiNjczNDYz
+YWI4NzRlODBkNDdmYWU1MDQiCisKK1NSQ19VUkkgPSAiJHtTT1VSQ0VGT1JHRV9NSVJST1J9L3Vm
+dHAtbXVsdGljYXN0L3NvdXJjZS10YXIvdWZ0cC0ke1BWfS50YXIuZ3oiCisKK1NSQ19VUklbbWQ1
+c3VtXSA9ICIyMzFkNmJhNzgyMGQ4OWE3MTJmZTdkNzI3YWIwZjhlNiIKK1NSQ19VUklbc2hhMjU2
+c3VtXSA9ICI5ZTkyMTVhZjAzMTUyNTdjNmNjNGY0MGZiYzYxNjEwNTdlODYxYmUxZmZmMTBhMzhh
+NTU2NGY2OTllOTljNzhmIgorCitkb19pbnN0YWxsICgpIHsKKwlvZV9ydW5tYWtlIGluc3RhbGwg
+REVTVERJUj0ke0R9Cit9Ci0tIAoyLjcuNAoK
+
+--------------0B84BB2D79B25000E01DD379--
