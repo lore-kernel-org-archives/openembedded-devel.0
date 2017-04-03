@@ -1,59 +1,46 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
-	[209.85.218.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F3B277D04
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 7209477D11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Apr 2017 18:01:49 +0000 (UTC)
-Received: by mail-oi0-f68.google.com with SMTP id d2so13623887oig.2
+	Mon,  3 Apr 2017 18:04:34 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id k6so175335566wre.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 11:01:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=/2g7fgrA43/pZ7+EMRdNfC7Ui/Rh0jN2rrfCzcnhQ4E=;
-	b=ymlk2sWRDpalm92o+4NkhQwa3ZTAj27WOEvBk5nYxl8Ju9Soq71716radtRPtFv6UZ
-	d3boIsDYVphPUOdymaWuq4UFg4MLQ0B1uDBnMsSKoV0GF1N2miCY8neBnPzutSdXdUAM
-	vh3SKqisuHdNIQ7BSb/T/uaBJFmzYRDgXQ4bYsrmE90HXm2sik/Ltjmxmc7QoiIroiYm
-	fvv6V1EAttgQaXMQwy3nzKnrAnPjdHYgokR9E8445a6XpfJFRtAAcyYPSM8n2Lzqy2zC
-	mDxPqIeiTXaPrIY+XyuLmygKPnpCd5Ht0J1k/HoE2wGPVR1oboo2ZAgpnyyfs4Zub213
-	49Cg==
+	Mon, 03 Apr 2017 11:04:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=IW4Oq3SQOPhfsQwmomrcilQQO3h3xBe4xbcQxzcsd3k=;
+	b=T85NweexcTpefsMZ4NsxyPhhBzFzmw56Cs2foTv9+SZDOhQN1QzecTKdl1FV1ptjtC
+	BZIXt5DIGsA76FSusAcZehzbfzQQn9hWhj6fEbrWj2N+cE2cRWWaeKLPrcP/GGFLx2Ji
+	QnxW0zEAQSxaSuCfukNe3A0L8glaDJdKpm8L5kVgbENgTPjnvUL2sqE+BX2zs158eAsj
+	14P5mChw4akuDpCXneTG8Y4+D8691JCWu94PGAblBVM3pCuowfbCFaDG75Y+a9Ymdh4t
+	NzglwlLNSsDgc9P+lVAGGE5IFCpxsrPEbpU4ULOM8JDPevwjQzDqMU4//lf1mZg9hKWX
+	egpw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=/2g7fgrA43/pZ7+EMRdNfC7Ui/Rh0jN2rrfCzcnhQ4E=;
-	b=haA6obOziY9BGQFf/PgfQzJrlf4nKD/+lreue/pnFg1gzvBPq0KulzalgIJWfMk2nj
-	gL0DMXicYlxZ/MDDEzgPQ3AKdvD5Xnzs6014dWGaCFcleUErmomx5L1uMhj8otPk+PUC
-	yMS5xaR9e8Q/SWasvA26nnGAdoFG3wFXTXAOFfHJ+ax2Czr5oskpiA5raukOXLvv8ucP
-	RCJxbDoiApyrlPdqanSCbfkcKrqORimF6nqqn6WpK5CQEtZ9lVIEEzDt57B+xebP+f0t
-	xiAjfwSzYjxwytIV0734/DRUD8Y6okMz6GCDQKycr8vMUE7IR/tzh8M+7HpoOwR0zhXY
-	4B4A==
-X-Gm-Message-State: AFeK/H36nMaSuDlZaU2IoFp4Ydbksaa8ZOf9co7SfypUZz2xx49wJQi9ZZjh2Vi7GxTNwQ==
-X-Received: by 10.202.104.130 with SMTP id o2mr8229890oik.93.1491242511020;
-	Mon, 03 Apr 2017 11:01:51 -0700 (PDT)
-Received: from mail-oi0-f46.google.com (mail-oi0-f46.google.com.
-	[209.85.218.46])
-	by smtp.gmail.com with ESMTPSA id t93sm7052997ota.4.2017.04.03.11.01.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Apr 2017 11:01:50 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f46.google.com with SMTP id f193so135545529oib.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 11:01:49 -0700 (PDT)
-X-Received: by 10.202.206.149 with SMTP id e143mr8555722oig.158.1491242509346; 
-	Mon, 03 Apr 2017 11:01:49 -0700 (PDT)
+	bh=IW4Oq3SQOPhfsQwmomrcilQQO3h3xBe4xbcQxzcsd3k=;
+	b=AFmwdo9d5UAvayYcTFRABi4KRiVA9Wki1HUkEukGfI6IvtfHS4nPA17VvlfFs6FUJb
+	K5uu2uCP6lFJTTiChbD8gLi3oNMiVUmbf5xU3BUipuzzMlv3fUHrtBx48iWXxCowSYMT
+	C7A0LUtECC6d3kkdPtP+q2i0ofd4Qm51hTRVxbLzuUyY8g3PIfLOIycTIK2ENh2M+CwN
+	HDLRUOcQ+CtjDYwDWIRd7Dehh3MKvg3ojGYpmo3E4v/nM9sOJcV/+muvK5DNmAPB/K6D
+	esOSxZA8MW+9ryqEeZUTRlkdUExT0EN6FehzFb7t74TuzZbCvtBzm5ttQbnq1Z3z04ao
+	wkoA==
+X-Gm-Message-State: AFeK/H0c57V9IcI+PNoCqkYveG0sAoPGip2cIgskVAiTxgjt5b5chvjqIcNVP82wV3cn0zE8XbhtNOn4dgOnTA==
+X-Received: by 10.28.19.207 with SMTP id 198mr10256241wmt.49.1491242675082;
+	Mon, 03 Apr 2017 11:04:35 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.74.79.203 with HTTP; Mon, 3 Apr 2017 11:01:48 -0700 (PDT)
-In-Reply-To: <20170403122736.29727-1-ismo.puustinen@intel.com>
-References: <20170403122736.29727-1-ismo.puustinen@intel.com>
-Date: Mon, 3 Apr 2017 15:01:48 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKo6QTocCqF4tucWwXqh3S-7Mbsnx_LhyrJmZdD1vn2F5A@mail.gmail.com>
-Message-ID: <CAP9ODKo6QTocCqF4tucWwXqh3S-7Mbsnx_LhyrJmZdD1vn2F5A@mail.gmail.com>
-To: Ismo Puustinen <ismo.puustinen@intel.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] v4l-utils: update to 1.12.3.
+Received: by 10.80.145.24 with HTTP; Mon, 3 Apr 2017 11:04:34 -0700 (PDT)
+In-Reply-To: <20170403170132.19588-1-zboszor@pr.hu>
+References: <20170403170132.19588-1-zboszor@pr.hu>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 3 Apr 2017 20:04:34 +0200
+Message-ID: <CA+chaQeh0DU630Bp2sd+Mzk+Fq-1=h1oJveKSeSOrsGU0+8Wfg@mail.gmail.com>
+To: Zoltan Boszormenyi <zboszor@pr.hu>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 0/2] Extend to kernel-module-split.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -66,21 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Apr 2017 18:01:50 -0000
+X-List-Received-Date: Mon, 03 Apr 2017 18:04:35 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Apr 3, 2017 at 9:27 AM, Ismo Puustinen <ismo.puustinen@intel.com> wrote:
-> Also add a patch which fixes building outside the source tree.
+This needs to go to openembedded-core ML.
+
+On Mon, Apr 3, 2017 at 7:01 PM, Zoltan Boszormenyi <zboszor@pr.hu> wrote:
+
 >
-> Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
-
-
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
-
-
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+> The changes are in two topics:
+>
+> Support kernel module compression, both gz and xz. It needs
+> the kmod package to be built with zlib and/or lzma support.
+> The space saving is substantial.
+>
+> The kernel-modules meta-package should refer to module subpackages
+> with versions, so if someone upgrades only a limited number of
+> packages at once instead of everything, the kernel upgrade can be
+> done by typing the kernel and kernel-modules package.
+>
+> Signed-off-by: Zoltan Boszormenyi <zboszor@pr.hu>
+>
+>  meta/classes/kernel-module-split.bbclass | 21 ++++++++++++++++++---
+>  1 file changed, 18 insertions(+), 3 deletions
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
