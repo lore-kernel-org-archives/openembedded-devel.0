@@ -1,46 +1,45 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
-	[209.85.128.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 7209477D11
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6D53E77D11
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Apr 2017 18:04:34 +0000 (UTC)
-Received: by mail-wr0-f178.google.com with SMTP id k6so175335566wre.2
+	Mon,  3 Apr 2017 18:37:33 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id w43so35897603wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 11:04:35 -0700 (PDT)
+	Mon, 03 Apr 2017 11:37:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=IW4Oq3SQOPhfsQwmomrcilQQO3h3xBe4xbcQxzcsd3k=;
-	b=T85NweexcTpefsMZ4NsxyPhhBzFzmw56Cs2foTv9+SZDOhQN1QzecTKdl1FV1ptjtC
-	BZIXt5DIGsA76FSusAcZehzbfzQQn9hWhj6fEbrWj2N+cE2cRWWaeKLPrcP/GGFLx2Ji
-	QnxW0zEAQSxaSuCfukNe3A0L8glaDJdKpm8L5kVgbENgTPjnvUL2sqE+BX2zs158eAsj
-	14P5mChw4akuDpCXneTG8Y4+D8691JCWu94PGAblBVM3pCuowfbCFaDG75Y+a9Ymdh4t
-	NzglwlLNSsDgc9P+lVAGGE5IFCpxsrPEbpU4ULOM8JDPevwjQzDqMU4//lf1mZg9hKWX
-	egpw==
+	h=from:to:cc:subject:date:message-id;
+	bh=mLO9LDpQknaOL2RH2RbZntp9CYpr18oxSloT/ZcYorQ=;
+	b=bpAP/XTKxK/s4Vc3QXXtO2ClP2jj6a3EahbGqQfcBHWkRCMAnM50kqxIgC55OW53TJ
+	O4lRKDB7Ub9flqkdDg+r5mxWzVho2aEBC2i+Tm0fMVMfTRcUEPdwjfJkKCoVE6+sfDbU
+	Hxl5FIVNQivJOM9NC9fjePhtrno2tLupVqx8Jv4wK+py2zjn/BHTmW4wR1XfLLZR4ufV
+	DFBg/kuHeDUQD0dOhT3B/ZOIAjSGoW+o2b8vCsZ7X3UYQR1MC5afSn5cJQ1G4F+KDaMQ
+	g+mg4ohsxqbkuzD9r9ZsmR2KfS28kOu4RLrS1c+bhqRtVB1GzolyP2zOqVe7BR3PcMuI
+	IGcg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=IW4Oq3SQOPhfsQwmomrcilQQO3h3xBe4xbcQxzcsd3k=;
-	b=AFmwdo9d5UAvayYcTFRABi4KRiVA9Wki1HUkEukGfI6IvtfHS4nPA17VvlfFs6FUJb
-	K5uu2uCP6lFJTTiChbD8gLi3oNMiVUmbf5xU3BUipuzzMlv3fUHrtBx48iWXxCowSYMT
-	C7A0LUtECC6d3kkdPtP+q2i0ofd4Qm51hTRVxbLzuUyY8g3PIfLOIycTIK2ENh2M+CwN
-	HDLRUOcQ+CtjDYwDWIRd7Dehh3MKvg3ojGYpmo3E4v/nM9sOJcV/+muvK5DNmAPB/K6D
-	esOSxZA8MW+9ryqEeZUTRlkdUExT0EN6FehzFb7t74TuzZbCvtBzm5ttQbnq1Z3z04ao
-	wkoA==
-X-Gm-Message-State: AFeK/H0c57V9IcI+PNoCqkYveG0sAoPGip2cIgskVAiTxgjt5b5chvjqIcNVP82wV3cn0zE8XbhtNOn4dgOnTA==
-X-Received: by 10.28.19.207 with SMTP id 198mr10256241wmt.49.1491242675082;
-	Mon, 03 Apr 2017 11:04:35 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.145.24 with HTTP; Mon, 3 Apr 2017 11:04:34 -0700 (PDT)
-In-Reply-To: <20170403170132.19588-1-zboszor@pr.hu>
-References: <20170403170132.19588-1-zboszor@pr.hu>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=mLO9LDpQknaOL2RH2RbZntp9CYpr18oxSloT/ZcYorQ=;
+	b=ca1i6OdxWiA0Y7i2DaFM5BSb5qyULrrvG5cK/PKShHnXEeeupygc1C4yFax9WHAh9w
+	Ikpy0A9ZkwU2CcSKb2/Jxcv36f7dOWOdWyRCjKDdu/8V2p3wBxgRue5AlydnDyiALzVR
+	gURush5KEg3cYNzX9iF6rXwjC37LhLw7oLq6KWOY9EIsNFCLM/iSqVjBVFcQ28+bZCC2
+	JLCeFOPDd9LDMT3WSkdESI47MP1LhXaAKD46g7R6Mt583HOVJWods6RHW8u0k9h4UV+d
+	lsFA8QWP8y3v7Vi5n2Eu7jSK/Jp5bMVItrdZkTV6KW6z5uKQc1brOyeDlYU6O1JC0LRs
+	DBFw==
+X-Gm-Message-State: AFeK/H0pd3wPyVBlgcBLNLE2jPCEal4pWlMiTe6U3Ey09+VDdYSnn10J2cQkG4P/UEoHFg==
+X-Received: by 10.223.164.141 with SMTP id g13mr5804278wrb.82.1491244654927;
+	Mon, 03 Apr 2017 11:37:34 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	h65sm19212349wrh.32.2017.04.03.11.37.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 03 Apr 2017 11:37:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 3 Apr 2017 20:04:34 +0200
-Message-ID: <CA+chaQeh0DU630Bp2sd+Mzk+Fq-1=h1oJveKSeSOrsGU0+8Wfg@mail.gmail.com>
-To: Zoltan Boszormenyi <zboszor@pr.hu>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 0/2] Extend to kernel-module-split.bbclass
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Apr 2017 20:37:33 +0200
+Message-Id: <20170403183737.14791-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [meta-oe][PATCH 1/5] flite-alsa: Blacklist as old and unmaintained
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Apr 2017 18:04:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 03 Apr 2017 18:37:34 -0000
 
-This needs to go to openembedded-core ML.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-support/flite/flite-alsa_1.3.bb | 9 +++++++++
+ 1 file changed, 9 insertions(+)
 
-On Mon, Apr 3, 2017 at 7:01 PM, Zoltan Boszormenyi <zboszor@pr.hu> wrote:
+diff --git a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+index 51012e673..ca9a99eeb 100644
+--- a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
++++ b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+@@ -10,3 +10,12 @@ SRC_URI = "http://www.speech.cs.cmu.edu/flite/packed/flite-${PV}/flite-${PV}-rel
+ 
+ SRC_URI[md5sum] = "ae0aca1cb7b4801f4372f3a75a9e52b5"
+ SRC_URI[sha256sum] = "922225f7001e57a0fbace8833b0a48790a68f6c7b491f2d47c78ad537ab78a8b"
++
++# Looks like caused by flite-1.3-alsa_support-1.2.diff
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/armv5te-oe-linux-gnueabi/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/lib/libflite_cmu_us_kal16.so.1.3' [ldflags]
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/armv5te-oe-linux-gnueabi/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/lib/libflite_cmu_us_kal.so.1.3' [ldflags]
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/core2-64-oe-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/lib/libflite_cmu_us_kal16.so.1.3' [ldflags]
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/core2-64-oe-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/lib/libflite_cmu_us_kal.so.1.3' [ldflags]
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/i586-oe-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/lib/libflite_cmu_us_kal16.so.1.3' [ldflags]
++# flite-alsa-1.3: No GNU_HASH in the elf binary: '/tmp/work/i586-oe-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/lib/libflite_cmu_us_kal.so.1.3' [ldflags]
++PNBLACKLIST[flite-alsa] ?= "OLD: wasn't updated in over 6 years, only navit was RSUGGESTing it and doesn't respect LDFLAGS"
+-- 
+2.12.2
 
->
-> The changes are in two topics:
->
-> Support kernel module compression, both gz and xz. It needs
-> the kmod package to be built with zlib and/or lzma support.
-> The space saving is substantial.
->
-> The kernel-modules meta-package should refer to module subpackages
-> with versions, so if someone upgrades only a limited number of
-> packages at once instead of everything, the kernel upgrade can be
-> done by typing the kernel and kernel-modules package.
->
-> Signed-off-by: Zoltan Boszormenyi <zboszor@pr.hu>
->
->  meta/classes/kernel-module-split.bbclass | 21 ++++++++++++++++++---
->  1 file changed, 18 insertions(+), 3 deletions
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
