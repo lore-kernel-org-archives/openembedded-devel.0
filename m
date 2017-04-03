@@ -1,53 +1,35 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B46277D17
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1112 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 03 Apr 2017 17:20:24 UTC
+Received: from mail7.pr.hu (mail7.pr.hu [87.242.0.7])
+	by mail.openembedded.org (Postfix) with ESMTP id 29AE371DE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Apr 2017 15:04:36 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id k6so33034176wre.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 08:04:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=rVhY0dwYKOKdjCsbo7vk6jQlohbpwcwwIJGI322gemI=;
-	b=sHGGOCbU22RpjFTHXnSMsU89x8pj+X4fzAR734jm9/l0Fkfx0ptisRrqWeH4V46Ca3
-	q8IllXq/mg92jTat8MFUuXz0+wt4SneK5AG59mpy3WXrj2rbDz1ThWV+ffmOBbR65zGl
-	LVT8e2eNbBSLY8ST34vNmTAtKCW/oFUNSBC3+Vu8REcxtQVTWDLTWsqb8j60nWrNM7IU
-	4OZpTUtFeM/H4C/mI4wkclGvRmLzQvpkk9FZn7OiK+VLO56B0rAhT/OXbqeW3OHGDCZK
-	8ARhlrPKr2sLOJwBU0PFOzDkYF8Wy3tvcd9UlSDuY6mz7d7v0yGmOMkjbvfxWMLp67yx
-	ohQg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=rVhY0dwYKOKdjCsbo7vk6jQlohbpwcwwIJGI322gemI=;
-	b=bRZCXOY9QJBIIPYpYNeJlLR3TX7yr708UWycLRFAsk+ZKvY9zUJqnki/7bK/VXn9+T
-	pYCLjgN7ZZY90/WXiwJxnD5bMUJ0k+F7Q8goyAqcd9tpt9aMtEHeCGQxke97K2VXgEgW
-	seCKWzywPnwGVvZrT+5BuYCZwiMFJYXM2X/SXb8LnJOYg63vWWgG8HHp+lSz/JVMCBq8
-	IbXd+PJ1lgJxCPG6/ZBC7WZfTQj4rBNXqDi1ZUHANvfyw+Y7OOTYlsnanQagrs+rYa13
-	adg29yX7DohGVf+LH1sBnPJh+n9HLlaLDB0fyCr38Jq/JzY2pcV+VYyPUNIv+9ZZx8MF
-	jPJQ==
-X-Gm-Message-State: AFeK/H377KGXtvKWUjQR3Wza3CR7fvqUWrusZ1T74ZH1ttmp1sbrUP4hV5VocJcsx28KiQ==
-X-Received: by 10.223.153.142 with SMTP id y14mr15320899wrb.193.1491231877974; 
-	Mon, 03 Apr 2017 08:04:37 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id d7sm8516524wrc.6.2017.04.03.08.04.36
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 03 Apr 2017 08:04:36 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Mon, 3 Apr 2017 17:04:41 +0200
-To: "Puustinen, Ismo" <ismo.puustinen@intel.com>
-Message-ID: <20170403150441.GE3311@jama>
-References: <20170323104816.22461-1-ismo.puustinen@intel.com>
-	<20170330093953.GA3060@jama> <1491230014.32538.9.camel@intel.com>
-MIME-Version: 1.0
-In-Reply-To: <1491230014.32538.9.camel@intel.com>
-User-Agent: Mutt/1.8.0 (2017-02-23)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] opencv: do not depend on swig.
+	Mon,  3 Apr 2017 17:20:24 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1cv5Mp-0007ce-8l
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 Apr 2017 19:02:11 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; 
+	h=References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From;
+	bh=/eAMeM2bN6fOy69E7w/5ZlNe5/riH48sQ29am3N77Z0=; 
+	b=GVowB3pLUC4anxYhGY+/WcBHfhFBPDK9FDag0nORE/Z+3P61426o7oWntcmbcO6oeGsQ8n/Pcqf/hpCW2cCQ5GQ4JWsNAPhTGY2yubudP9wuca2nMd0gEiUSxWfApcpVnqkoEgl9b2CDqs4TzlQkWKytA//Pj7Pu1LVbssDo1mYy5Msfpwvi6VcktH8ZYuTn8dNe7AoNBrK0k1HgHc9MXsdhmg+A9SWJ+8o3VX+J8ggr8GUo3VX6bASNWF9ZjC9OBdFTa1VU05j07oj3MfvjJ4KJZeR4OMGBt1StpVaOpqsw80bGphefI4UX1qAaKBGuCCAAhHla313adqO05LvjVQ==;
+Received: from host-87-242-51-16.prtelecom.hu ([87.242.51.16]
+	helo=s002.sicom.com) by mail.pr.hu with esmtpa (Exim 4.80)
+	(envelope-from <zboszor@pr.hu>)
+	id 1cv5Mk-0005kg-OU; Mon, 03 Apr 2017 19:02:09 +0200
+From: Zoltan Boszormenyi <zboszor@pr.hu>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Apr 2017 19:01:32 +0200
+Message-Id: <20170403170132.19588-3-zboszor@pr.hu>
+X-Mailer: git-send-email 2.9.3
+In-Reply-To: <20170403170132.19588-1-zboszor@pr.hu>
+References: <20170403170132.19588-1-zboszor@pr.hu>
+X-Spam-Score: 0.8 (/)
+X-Scan-Signature: 9c5e05eb7b369c1b31c27083e129340a
+X-Spam-Tracer: backend.mail.pr.hu 0.8 20170403170209Z
+Subject: [PATCH 2/2] kernel-module-split.bbclass: kernel-modules depend on versioned modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,44 +42,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Apr 2017 15:04:37 -0000
-X-Groupsio-MsgNum: 66075
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="y2zxS2PfCDLh6JVG"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 03 Apr 2017 17:20:25 -0000
 
---y2zxS2PfCDLh6JVG
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+The kernel-modules meta-packages should depend on module subpackages
+with versions to allow upgrading the kernel easier with limiting
+the upgrade to selected packages.
 
-On Mon, Apr 03, 2017 at 02:33:36PM +0000, Puustinen, Ismo wrote:
-> On Thu, 2017-03-30 at 11:39 +0200, Martin Jansa wrote:
-> > On Thu, Mar 23, 2017 at 12:48:16PM +0200, Ismo Puustinen wrote:
-> > > Since swig is a code generator, just depend on swig-native.
-> >=20
-> > Seems to cause following failure:
-> > http://errors.yoctoproject.org/Errors/Details/138491/
->=20
-> This is bit of a mystery to me. Gflags should be unrelated to swig...
-> Was this build done with a special PACKAGECONFIG?
+Signed-off-by: Zoltan Boszormenyi <zboszor@pr.hu>
+---
+ meta/classes/kernel-module-split.bbclass | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-There was another change which caused this issue, send version rebased
-on master-next because one of your colleagues decided to drop target
-python as well.
+diff --git a/meta/classes/kernel-module-split.bbclass b/meta/classes/kernel-module-split.bbclass
+index 8233848..a36a045 100644
+--- a/meta/classes/kernel-module-split.bbclass
++++ b/meta/classes/kernel-module-split.bbclass
+@@ -144,7 +144,8 @@ python split_kernel_module_packages () {
+     modules = do_split_packages(d, root='/lib/modules', file_regex=module_regex, output_pattern=module_pattern, description='%s kernel module', postinst=postinst, postrm=postrm, recursive=True, hook=frob_metadata, extra_depends='kernel-%s' % (d.getVar("KERNEL_VERSION", True)))
+     if modules:
+         metapkg = d.getVar('KERNEL_MODULES_META_PACKAGE', True)
+-        d.appendVar('RDEPENDS_' + metapkg, ' '+' '.join(modules))
++        for mod in modules:
++            d.appendVar('RDEPENDS_' + metapkg, ' ' + mod + ' (>= %s)' % (d.getVar("EXTENDPKGV", True)))
+ 
+     # If modules-load.d and modprobe.d are empty at this point, remove them to
+     # avoid warnings. removedirs only raises an OSError if an empty
+-- 
+1.8.3.1
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---y2zxS2PfCDLh6JVG
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWOJkiAAKCRA3VSO3ZXaA
-HO7yAJ465BU3W6kgTAMVC16i9KY15tp+MQCeIq1l16OcZzGxqmVn/PaiY3tfuvc=
-=6OLL
------END PGP SIGNATURE-----
-
---y2zxS2PfCDLh6JVG--
