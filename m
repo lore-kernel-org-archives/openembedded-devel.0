@@ -1,48 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1B357607F8
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 5D29B601F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Apr 2017 18:37:39 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id k6so34576366wre.3
+	Mon,  3 Apr 2017 18:38:21 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id e75so51863161itd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 11:37:40 -0700 (PDT)
+	Mon, 03 Apr 2017 11:38:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=t4GNc/ppz4xq/4jMlhowp3nrmalma3FeJOLkTRRtDZA=;
-	b=fO8kN6rYVksBh0b/5usX2+Qtrjsfs2e9c/+TMVmNaO2zrb1tUkKRrrefJnnZLF3UXJ
-	LjBQW3A1++25IrwGtmXBsrtitHucMxNG/Regl1RXHGK+Y0fEstHK3XA8EsdUdTkLyfRu
-	6pEBSZMI5NuCz7PuYgWe/23BqRu2XAZnetDeKVHiO+Bngrwa5iOFixeFujCeeqBaHHvV
-	fumJ/2XYBm7YAfzU/QDAl5F+pI5q9PWUkwBODqiQSFLXmNN0rM7MUYf5gd/cM0/ZuftE
-	aN7/Zhh4myBXtXGlmYZO1JLrKjwpHTprqT4vLXcE5GhK6FJlxbTUBIMk2UMod7LpIYZU
-	HFpg==
+	h=from:to:subject:date:message-id;
+	bh=pbFCNhtkBZ5yAnd0dNiOlw/M6iJWoiRehZLx8BSzV64=;
+	b=tgVhbLOH8zUNSB6CFuk3ib8QpKqvtJdH1h84IcBwQsY5eNnsDwtAEWz50jWIZ+cRPs
+	Bf7Oo323H5FmwBYB2e9ZnqdZxmgkMN2QoJUeBrLzIEhFcicTAriGn/5WAFTi4rKQkXEw
+	LxMHvDhy7GwnsF2fRy4zXIywnqiv2s86EP6nJqHAmJMxUJys8Dpz9nU/ORYKQA6mkSsr
+	Y3j/RNZOLrmKNdzWW97KHFN8PoxFVdPHcUlOVP0G/S3K2NmZ+cw9ImkJsXM26A7EJXj8
+	bfD4p++nVX3MmMr5qZx2VbHvuJCxuU/Bm3Th3BdrVr2i01JrRyRJ0Vx1VX5efGSL7YAP
+	cVuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=t4GNc/ppz4xq/4jMlhowp3nrmalma3FeJOLkTRRtDZA=;
-	b=qL9idSny+P35mKW6gO3UczmAXsxFcJcUaC4vh4JvPQ1hY6DlNXZtdkeAw1k71AYUE2
-	6B1NhmqamuE9xCBJo+D4PKB7iaLBRr2md5gfeQ+Cs8dPKotlxBVshNpgryXwo8a4pMX8
-	Bo1SWW9ZvBI0seYrwwbVcttg60s2GK9vqKmRFVK6Y3Bb61hQXWD8264ri1zr81zZWzaw
-	+FH9mzjiC7Sq0leD/48SZV7Ey5+pSPz9AnxV2+JLxN8G0+gBtPB5GdwCcengnoYih8e8
-	7JZ4aIBU0sBwQtULeMR+Rg1kHiM+ATI5TxxNaKQMoc9ARsLW3QbM6nBaPpgE4V7FODyO
-	XGpg==
-X-Gm-Message-State: AFeK/H1QH8cU79s1UqapaZ14ITeoaC62JVw44VgrzTwFzBpsdce2m/HGLvzsMSEKXTcAuQ==
-X-Received: by 10.28.140.19 with SMTP id o19mr11289458wmd.123.1491244660331;
-	Mon, 03 Apr 2017 11:37:40 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	w85sm15295022wmw.1.2017.04.03.11.37.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Apr 2017 11:37:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=pbFCNhtkBZ5yAnd0dNiOlw/M6iJWoiRehZLx8BSzV64=;
+	b=QOr5LtG6ivvB3lJj9P/HaTkosHfKPvRipR7zMpqhUzwSOU6aMvl1Ina1+YhfSXKa1e
+	0hfiE8y7Sf/iJK95NYHGDQ0hyhy+1lNQh/SsSF3zyWoAE8zutvjpY/nDoKWbWksrwi1Y
+	PcXJ5EcKuJbrcVn9LNvDTj25+oeMUaCXrK87TaoqIbDXqCGrIliQul0ngYxWibIuXPjo
+	gM62CDUmsW7FRKZUJ0IwmUhyNWZsFNq+o0VJZQoh8aGkjpXGWnJEqKGnNtIFD7lk2YX4
+	kPiDoaJVcUTzKXcJ5js/b+qjqOijx3sft0e5NlXAlD7dkSmvd5HcXqt0uEt/jh3AUt+e
+	HQLw==
+X-Gm-Message-State: AFeK/H128Mn6RahDBtdhqRRQZOTycSvRePIZENLo1hP6YoCcVGto5Oy8J4LokYz0DMCIEg==
+X-Received: by 10.36.120.199 with SMTP id p190mr11235746itc.119.1491244702144; 
+	Mon, 03 Apr 2017 11:38:22 -0700 (PDT)
+Received: from linux-uys3.suse (104-247-246-30.cpe.teksavvy.com.
+	[104.247.246.30]) by smtp.gmail.com with ESMTPSA id
+	o97sm7986698ioi.53.2017.04.03.11.38.21
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 03 Apr 2017 11:38:21 -0700 (PDT)
+From: Trevor Woerner <twoerner@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Apr 2017 20:37:37 +0200
-Message-Id: <20170403183737.14791-5-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170403183737.14791-1-Martin.Jansa@gmail.com>
-References: <20170403183737.14791-1-Martin.Jansa@gmail.com>
-Subject: [meta-oe][PATCH 5/5] xdotool: prevent compile-host-path QA issues
+Date: Mon,  3 Apr 2017 14:38:15 -0400
+Message-Id: <20170403183815.2997-1-twoerner@gmail.com>
+X-Mailer: git-send-email 2.12.0.rc1.48.g076c053
+Subject: [meta-browser][PATCH] chromium: 52.0.2743.76 -> 54.0.2810.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +53,293 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Apr 2017 18:37:39 -0000
+X-List-Received-Date: Mon, 03 Apr 2017 18:38:21 -0000
 
-* as shown in the log.do_compile:
-  cc1: warning: include location "/usr/local/include" is unsafe for cross-compilation [-Wpoison-system-directories]
+Tested by building for and running on:
+- minnow
+- raspi3 (32-bit)
+- qemux86
+- bbb
 
-* it's caused by Makefile doing:
+On-target testing includes:
+- playing a video from youtube[1]
+- running (and passing) the octane tests (js)[2]
 
-  DEFAULT_LIBS=-L/usr/X11R6/lib -L/usr/local/lib -lX11 -lXtst
-  DEFAULT_INC=-I/usr/X11R6/include -I/usr/local/include
+Verified chromium-wayland still builds.
 
-  LIBS=$(shell pkg-config --libs x11 xtst 2> /dev/null || echo "$(DEFAULT_LIBS)")
-  INC=$(shell pkg-config --cflags x11 xtst 2> /dev/null || echo "$(DEFAULT_INC)")
+[1] http://youtube.com
+[2] http://chromium.github.io/octane
 
-  which always uses the DEFAULT_* since RSS, because there was no
-  pkg-config in the recipe sysroot
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Trevor Woerner <twoerner@gmail.com>
 ---
- meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../chromium/chromium-wayland_53.0.2785.143.bb     |  2 +-
+ .../Remove-hard-coded-values-for-CC-and-CXX.patch  | 42 -----------
+ .../chromium/chromium/chromium/m32.patch           | 87 ++++++++++++++++++++++
+ ...ium_52.0.2743.76.bb => chromium_54.0.2810.2.bb} |  7 +-
+ ...3-Remove-hard-coded-values-for-CC-and-CXX.patch | 11 ++-
+ recipes-browser/chromium/files/i586/x86-m32.patch  | 42 -----------
+ 6 files changed, 96 insertions(+), 95 deletions(-)
+ delete mode 100644 recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
+ create mode 100644 recipes-browser/chromium/chromium/chromium/m32.patch
+ rename recipes-browser/chromium/{chromium_52.0.2743.76.bb => chromium_54.0.2810.2.bb} (85%)
+ delete mode 100644 recipes-browser/chromium/files/i586/x86-m32.patch
 
-diff --git a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-index 474d2986f..b68e994ab 100644
---- a/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-+++ b/meta-oe/recipes-graphics/xdotool/xdotool_1.20100416.2809.bb
-@@ -7,7 +7,7 @@ DEPENDS = "virtual/libx11 libxtst"
+diff --git a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+index ef913a7..ab52bc2 100644
+--- a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
++++ b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+@@ -6,9 +6,9 @@ DEPENDS += "wayland libxkbcommon"
  
- PR = "r1"
+ SRC_URI += "\
+         file://chromium-wayland/add_missing_stat_h_include.patch \
++        file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
+         file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
+         file://0005-Override-root-filesystem-access-restriction.patch \
+-        file://chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch \
+ 	file://chromium-wayland/0007-Workaround-for-glib-related-build-error-with-ozone-w.patch \
+         file://chromium-wayland/0011-Replace-readdir_r-with-readdir.patch \
+         file://chromium-wayland/remove-Werror.patch \
+diff --git a/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
+deleted file mode 100644
+index 63de68a..0000000
+--- a/recipes-browser/chromium/chromium/chromium-wayland/Remove-hard-coded-values-for-CC-and-CXX.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-From 518135b0cd6878e91e5fcf489f3185740ec307c0 Mon Sep 17 00:00:00 2001
+-From: Carlos Rafael Giani <dv@pseudoterminal.org>
+-Date: Sun, 12 Oct 2014 19:31:47 +0200
+-Subject: [PATCH] Remove hard coded values for CC and CXX
+-
+-In spite of what the comment says, the environment variables do *not*
+-override the variables; "which which arm-linux-gnueabihf-gcc" etc. are
+-always called. To undo this, remove the change.
+-
+-Upstream-Status: Pending
+-
+-The default values cannot be overriden without the patch; upstream
+-might be interested in this.
+-
+-Signed-off-by: Carlos Rafael Giani <dv@pseudoterminal.org>
+----
+- build/common.gypi | 10 ----------
+- 1 file changed, 10 deletions(-)
+-
+-diff --git a/build/common.gypi b/build/common.gypi
+-index 7ec5ae2..11e8d1d 100644
+---- a/build/common.gypi
+-+++ b/build/common.gypi
+-@@ -6027,16 +6027,6 @@
+-         ['CXX.host', '<(host_cxx)'],
+-       ],
+-     }],
+--    ['OS=="linux" and target_arch=="arm" and host_arch!="arm" and chromeos==0 and clang==0', {
+--      # Set default ARM cross tools on linux.  These can be overridden
+--      # using CC,CXX,CC.host and CXX.host environment variables.
+--      'make_global_settings': [
+--        ['CC', '<!(which arm-linux-gnueabihf-gcc)'],
+--        ['CXX', '<!(which arm-linux-gnueabihf-g++)'],
+--        ['CC.host', '<(host_cc)'],
+--        ['CXX.host', '<(host_cxx)'],
+--      ],
+--    }],
+-     ['use_goma==1', {
+-       'make_global_settings': [
+-        ['CC_wrapper', '<(gomadir)/gomacc'],
+--- 
+-2.1.4
+diff --git a/recipes-browser/chromium/chromium/chromium/m32.patch b/recipes-browser/chromium/chromium/chromium/m32.patch
+new file mode 100644
+index 0000000..2911cfa
+--- /dev/null
++++ b/recipes-browser/chromium/chromium/chromium/m32.patch
+@@ -0,0 +1,87 @@
++diff -ur chromium-54.0.2810.2__ORIG/build/common.gypi chromium-54.0.2810.2/build/common.gypi
++--- chromium-54.0.2810.2__ORIG/build/common.gypi	2017-03-30 10:05:27.017866621 -0400
+++++ chromium-54.0.2810.2/build/common.gypi	2017-03-30 12:33:15.012788454 -0400
++@@ -3820,10 +3820,6 @@
++                   '-msse2',
++                   '-mfpmath=sse',
++                   '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
++-                  '-m32',
++-                ],
++-                'ldflags': [
++-                  '-m32',
++                 ],
++                 'conditions': [
++                   # Use gold linker for Android ia32 target.
++diff -ur chromium-54.0.2810.2__ORIG/build/config/compiler/BUILD.gn chromium-54.0.2810.2/build/config/compiler/BUILD.gn
++--- chromium-54.0.2810.2__ORIG/build/config/compiler/BUILD.gn	2017-03-30 10:05:27.017866621 -0400
+++++ chromium-54.0.2810.2/build/config/compiler/BUILD.gn	2017-03-30 12:33:15.012788454 -0400
++@@ -508,8 +508,6 @@
++       ]
++       ldflags += [ "-m64" ]
++     } else if (current_cpu == "x86") {
++-      cflags += [ "-m32" ]
++-      ldflags += [ "-m32" ]
++       if (!is_nacl) {
++         cflags += [
++           "-msse2",
++diff -ur chromium-54.0.2810.2__ORIG/third_party/icu/icu.gyp chromium-54.0.2810.2/third_party/icu/icu.gyp
++--- chromium-54.0.2810.2__ORIG/third_party/icu/icu.gyp	2016-07-28 18:17:07.000000000 -0400
+++++ chromium-54.0.2810.2/third_party/icu/icu.gyp	2017-03-30 12:33:15.012788454 -0400
++@@ -48,9 +48,6 @@
++          target_arch=="mipsel")', {
++         'target_conditions': [
++           ['_toolset=="host"', {
++-            'cflags': [ '-m32' ],
++-            'ldflags': [ '-m32' ],
++-            'asflags': [ '-32' ],
++             'xcode_settings': {
++               'ARCHS': [ 'i386' ],
++             },
++diff -ur chromium-54.0.2810.2__ORIG/v8/gypfiles/toolchain.gypi chromium-54.0.2810.2/v8/gypfiles/toolchain.gypi
++--- chromium-54.0.2810.2__ORIG/v8/gypfiles/toolchain.gypi	2017-03-30 10:05:27.017866621 -0400
+++++ chromium-54.0.2810.2/v8/gypfiles/toolchain.gypi	2017-03-30 12:33:15.012788454 -0400
++@@ -1028,9 +1028,6 @@
++                   ['host_arch=="s390" or host_arch=="s390x"', {
++                     'cflags': [ '-m31' ],
++                     'ldflags': [ '-m31' ]
++-                  },{
++-                   'cflags': [ '-m32' ],
++-                   'ldflags': [ '-m32' ]
++                   }],
++                 ],
++               }],
++@@ -1046,9 +1043,6 @@
++                   ['host_arch=="s390" or host_arch=="s390x"', {
++                     'cflags': [ '-m31' ],
++                     'ldflags': [ '-m31' ]
++-                  },{
++-                   'cflags': [ '-m32' ],
++-                   'ldflags': [ '-m32' ],
++                   }],
++                 ],
++               }],
++--- chromium-54.0.2810.2__ORIG/v8/src/base/build_config.h	2017-03-30 18:56:01.370627233 -0400
+++++ chromium-54.0.2810.2/v8/src/base/build_config.h	2017-03-30 20:03:51.563265532 -0400
++@@ -126,9 +126,6 @@
++ #endif
++ 
++ // Check for supported combinations of host and target architectures.
++-#if V8_TARGET_ARCH_IA32 && !V8_HOST_ARCH_IA32
++-#error Target architecture ia32 is only supported on ia32 host
++-#endif
++ #if (V8_TARGET_ARCH_X64 && V8_TARGET_ARCH_64_BIT && \
++      !(V8_HOST_ARCH_X64 && V8_HOST_ARCH_64_BIT))
++ #error Target architecture x64 is only supported on x64 host
++diff -ur chromium-54.0.2810.2__ORIG/v8/src/base/build_config.h chromium-54.0.2810.2/v8/src/base/build_config.h
++--- chromium-54.0.2810.2__ORIG/v8/src/base/build_config.h	2016-07-28 18:17:37.000000000 -0400
+++++ chromium-54.0.2810.2/v8/src/base/build_config.h	2017-03-30 12:39:19.929620843 -0400
++@@ -137,9 +137,6 @@
++      !(V8_HOST_ARCH_X64 && V8_HOST_ARCH_32_BIT))
++ #error Target architecture x32 is only supported on x64 host with x32 support
++ #endif
++-#if (V8_TARGET_ARCH_ARM && !(V8_HOST_ARCH_IA32 || V8_HOST_ARCH_ARM))
++-#error Target architecture arm is only supported on arm and ia32 host
++-#endif
++ #if (V8_TARGET_ARCH_ARM64 && !(V8_HOST_ARCH_X64 || V8_HOST_ARCH_ARM64))
++ #error Target architecture arm64 is only supported on arm64 and x64 host
++ #endif
+diff --git a/recipes-browser/chromium/chromium_52.0.2743.76.bb b/recipes-browser/chromium/chromium_54.0.2810.2.bb
+similarity index 85%
+rename from recipes-browser/chromium/chromium_52.0.2743.76.bb
+rename to recipes-browser/chromium/chromium_54.0.2810.2.bb
+index 613f6ca..9efd88a 100644
+--- a/recipes-browser/chromium/chromium_52.0.2743.76.bb
++++ b/recipes-browser/chromium/chromium_54.0.2810.2.bb
+@@ -15,13 +15,12 @@ SRC_URI += "\
+         file://chromium/Do-not-depend-on-Linux-4.5.patch \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://component-build.gypi', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file://0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '', d)} \
++        file://chromium/m32.patch \
+ "
  
--inherit distro_features_check
-+inherit distro_features_check pkgconfig
- # depends on virtual/libx11
- REQUIRED_DISTRO_FEATURES = "x11"
+-SRC_URI_append_i586 = "file://x86-m32.patch"
+-
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=0fca02217a5d49a14dfe2d11837bb34d"
+-SRC_URI[md5sum] = "0fee71466e1f2dc39ed4549d04b58ee2"
+-SRC_URI[sha256sum] = "c54cdc11c3324152f3d5be98dcb4eae2bda0fc9dac7dd5f9010150458d68c18c"
++SRC_URI[md5sum] = "3f596ecbd6a39d5ada29f11780ec6dcf"
++SRC_URI[sha256sum] = "f038e72cbd8b7383d13c286329623fda8d6d48f45fa2d964e554b5565283ad71"
  
+ # X11 must be available for this flavor of Chromium
+ python() {
+diff --git a/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch b/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
+index 7bc8d14..63de68a 100644
+--- a/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
++++ b/recipes-browser/chromium/files/0003-Remove-hard-coded-values-for-CC-and-CXX.patch
+@@ -21,7 +21,7 @@ diff --git a/build/common.gypi b/build/common.gypi
+ index 7ec5ae2..11e8d1d 100644
+ --- a/build/common.gypi
+ +++ b/build/common.gypi
+-@@ -6047,16 +6047,6 @@
++@@ -6027,16 +6027,6 @@
+          ['CXX.host', '<(host_cxx)'],
+        ],
+      }],
+@@ -35,9 +35,8 @@ index 7ec5ae2..11e8d1d 100644
+ -        ['CXX.host', '<(host_cxx)'],
+ -      ],
+ -    }],
+-     # TODO(yyanagisawa): supports GENERATOR==make
+-     #  make generator doesn't support CC_wrapper without CC
+-     #  in make_global_settings yet.
++     ['use_goma==1', {
++       'make_global_settings': [
++        ['CC_wrapper', '<(gomadir)/gomacc'],
+ -- 
+-1.9.1
+-
++2.1.4
+diff --git a/recipes-browser/chromium/files/i586/x86-m32.patch b/recipes-browser/chromium/files/i586/x86-m32.patch
+deleted file mode 100644
+index be08071..0000000
+--- a/recipes-browser/chromium/files/i586/x86-m32.patch
++++ /dev/null
+@@ -1,42 +0,0 @@
+-Index: chromium-52.0.2743.76/build/common.gypi
+-===================================================================
+---- chromium-52.0.2743.76.orig/build/common.gypi
+-+++ chromium-52.0.2743.76/build/common.gypi
+-@@ -3849,10 +3849,6 @@
+-                   '-msse2',
+-                   '-mfpmath=sse',
+-                   '-mmmx',  # Allows mmintrin.h for MMX intrinsics.
+--                  '-m32',
+--                ],
+--                'ldflags': [
+--                  '-m32',
+-                 ],
+-                 'conditions': [
+-                   # Use gold linker for Android ia32 target.
+-Index: chromium-52.0.2743.76/build/config/compiler/BUILD.gn
+-===================================================================
+---- chromium-52.0.2743.76.orig/build/config/compiler/BUILD.gn
+-+++ chromium-52.0.2743.76/build/config/compiler/BUILD.gn
+-@@ -502,8 +502,6 @@ config("compiler_cpu_abi") {
+-       ]
+-       ldflags += [ "-m64" ]
+-     } else if (current_cpu == "x86") {
+--      cflags += [ "-m32" ]
+--      ldflags += [ "-m32" ]
+-       if (!is_nacl) {
+-         cflags += [
+-           "-msse2",
+-Index: chromium-52.0.2743.76/third_party/icu/icu.gyp
+-===================================================================
+---- chromium-52.0.2743.76.orig/third_party/icu/icu.gyp
+-+++ chromium-52.0.2743.76/third_party/icu/icu.gyp
+-@@ -48,9 +48,6 @@
+-          target_arch=="mipsel")', {
+-         'target_conditions': [
+-           ['_toolset=="host"', {
+--            'cflags': [ '-m32' ],
+--            'ldflags': [ '-m32' ],
+--            'asflags': [ '-32' ],
+-             'xcode_settings': {
+-               'ARCHS': [ 'i386' ],
+-             },
 -- 
-2.12.2
+2.12.0.rc1.48.g076c053
 
 
