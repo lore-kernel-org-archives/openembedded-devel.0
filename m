@@ -1,36 +1,28 @@
-Return-Path: <robert_joslyn@selinc.com>
-X-Greylist: delayed 3015 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 03 Apr 2017 21:08:31 UTC
-Received: from valiant.selinc.com (valiant.selinc.com [74.117.214.141])
-	by mail.openembedded.org (Postfix) with ESMTP id 095F377CE8
+Return-Path: <ismo.puustinen@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 3FF55719FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Apr 2017 21:08:31 +0000 (UTC)
-Received: from pps.filterd (valiant.selinc.com [127.0.0.1])
-	by valiant.selinc.com (8.16.0.17/8.16.0.17) with SMTP id v33KGPpv003581
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 3 Apr 2017 13:18:18 -0700
-Received: from edison2.ad.selinc.com (mail.ad.selinc.com [10.100.0.115])
-	by valiant.selinc.com with ESMTP id 29ja9skmyj-1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Apr 2017 13:18:18 -0700
-Received: from robejoslpc.ad.selinc.com ([10.203.80.174])
-	by edison2.ad.selinc.com (IBM Domino Release 9.0.1FP3 HF515)
-	with ESMTP id 2017040313181776-271748 ;
-	Mon, 3 Apr 2017 13:18:17 -0700 
-From: Robert Joslyn <robert_joslyn@selinc.com>
+	Tue,  4 Apr 2017 07:41:03 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
+	d=intel.com; i=@intel.com; q=dns/txt; s=intel;
+	t=1491291666; x=1522827666;
+	h=from:to:cc:subject:date:message-id;
+	bh=QugTegPhipxIUiymiq8Gt7Le3WxOq7Yz1NO1P1ke5Ws=;
+	b=pNNzai847jhu0f3suVi2qIJVfMc8byiVhFhXx8yB1Xzrode/EqSmcqb0
+	e4GHIOcmWMuudYWHDEindPDtLqQ8ew==;
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	04 Apr 2017 00:41:04 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.36,274,1486454400"; d="scan'208";a="951471696"
+Received: from ipuustin-desk.fi.intel.com ([10.237.72.72])
+	by orsmga003.jf.intel.com with ESMTP; 04 Apr 2017 00:41:03 -0700
+From: Ismo Puustinen <ismo.puustinen@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 3 Apr 2017 13:18:10 -0700
-Message-Id: <20170403201810.4721-1-robert_joslyn@selinc.com>
-X-Mailer: git-send-email 2.10.2
-X-MIMETrack: Itemize by SMTP Server on Edison2/SEL(Release 9.0.1FP3
-	HF515|April 25, 2015) at 04/03/2017 01:18:17 PM,
-	Serialize by Router on Edison2/SEL(Release 9.0.1FP3 HF515|April 25,
-	2015) at 04/03/2017 01:18:18 PM,
-	Serialize complete at 04/03/2017 01:18:18 PM
-X-TNEFEvaluated: 1
-X-Proofpoint-Virus-Version: vendor=nai engine=5800 definitions=8487
-	signatures=668452
-Subject: [meta-oe][PATCH] plymouth: Fix virtual RPROVIDES
+Date: Tue,  4 Apr 2017 10:40:58 +0300
+Message-Id: <20170404074058.1588-1-ismo.puustinen@intel.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [PATCH v2] opencv: do not depend on swig.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,30 +35,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Apr 2017 21:08:32 -0000
+X-List-Received-Date: Tue, 04 Apr 2017 07:41:04 -0000
 
-Runtime package names cannot have slashes in them, so replace "virtual/"
-with "virtual-" in RPROVIDES.
+Since swig is a code generator, just depend on swig-native.
 
-Signed-off-by: Robert Joslyn <robert_joslyn@selinc.com>
+Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
 ---
- meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb | 2 +-
+ meta-oe/recipes-support/opencv/opencv_3.2.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-index 1c1a02d..6163cff 100644
---- a/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-+++ b/meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb
-@@ -14,7 +14,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+index f50bc05..b5b4968 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2b2f8752cc5edf504d283107d033f544"
+ ARM_INSTRUCTION_SET_armv4 = "arm"
+ ARM_INSTRUCTION_SET_armv5 = "arm"
  
- DEPENDS = "libcap libpng cairo dbus udev"
- PROVIDES = "virtual/psplash"
--RPROVIDES_${PN} = "virtual/psplash virtual/psplash-support"
-+RPROVIDES_${PN} = "virtual-psplash virtual-psplash-support"
+-DEPENDS = "libtool swig swig-native bzip2 zlib glib-2.0 libwebp"
++DEPENDS = "libtool swig-native bzip2 zlib glib-2.0 libwebp"
  
- SRC_URI = "http://www.freedesktop.org/software/plymouth/releases/${BPN}-${PV}.tar.bz2"
- SRC_URI[md5sum] = "ff420994deb7ea203df678df92e7ab7d"
+ SRCREV_opencv = "70bbf17b133496bd7d54d034b0f94bd869e0e810"
+ SRCREV_contrib = "86342522b0eb2b16fa851c020cc4e0fef4e010b7"
 -- 
-2.10.2
+2.9.3
 
 
