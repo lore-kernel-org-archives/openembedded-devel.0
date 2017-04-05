@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
 	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D9D9771DF7
+	by mail.openembedded.org (Postfix) with ESMTP id 62AEB71DAE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Apr 2017 16:56:47 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id w43so4367011wrb.1
+	Wed,  5 Apr 2017 17:05:41 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id w43so4436839wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 09:56:48 -0700 (PDT)
+	Wed, 05 Apr 2017 10:05:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=fceEvPiJyYhMv5JaPKL4OK55SpqJM/8jSL/KKQDF+Kw=;
-	b=Fqe51chFlwCe7w0niunlUR6hXxK+g7F7Q1uAgeRa25I7oMaSpvjER97sW/tHxdqPNJ
-	dT24yYQy487FMO+2KCXrTZyS2/6AmYolcZnYuNDUgJnHjYJaDsZCVpXEL+r2mEEjOmPm
-	MHnBCYg90XoJ3rtw+krBK1EYqHOu3dw23xct+biQGRHzvZKn6Ggd15XlGOS6UobNVcAB
-	/ZCAN9B3yiRvhMQEk/hPquYgBoHJAUQYrWg65+DpDQWg7oUHHAYLhTDDOvo2yd31Wc7k
-	Ik84nqCEohehcLd4pdM7pH335mt2l3osN/nYKVk7pW44blrQRfnypKH9nigZBgDByZ9s
-	dF6A==
+	:cc; bh=nYew34BOXxjbfqHVm4Iw2bVW2F2OZ7JPJs2P26cSXXU=;
+	b=pbSorjxOAIKBdbMOPgpxRAd/RQsxwdWnjx1tn4fyC4qQHkG8xKHL9QOZImqbUUDGs4
+	LIQKAwA0ULguyrMvOASjivMtpS/Xd4cbst5eF1mjYzik+JHoftmjw6j9D3sT+glNknVL
+	XBtqS1qg1saR6A1dbPFrGqJ7Sr6v9sC+Ku/N4LlEn9g7W6Vs0KqB0OkHfJyqFiMkLYq5
+	gINXTlSxjnd+1TsIvue1H8yRFRZ5pL1TfmF3WMnYFfWOsMwSLVY8CwLFIuH33AW1MSPX
+	wwzKdfHrfgWVrFs3HTm9KPacxvHBOcKsDjClAhPK7CBKEJGLWogW4L6sNI13JT/jArGr
+	19+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=fceEvPiJyYhMv5JaPKL4OK55SpqJM/8jSL/KKQDF+Kw=;
-	b=tZRZb+gibsR5XMan7DXxwaNnDtJwfDJCeDujYw0TkVF4aVS+0CYdH7ovBKbBRd5Ziq
-	Tt8NlCCIZyw/rnLx4tDWYNbolbbUn3KO3krMZ81hY+SvuLaPj90ygzsq7WsT3eIvkSpe
-	IwmoLIXZij+bjs8OHOQZ4rBpP26tjYisBAOe9rcl903nkekpouk8JvyWmzIYQCmk9sfw
-	WYh9GbKigxnyS6qS5eJ323f7fE7izLIsPwYSb8LlfW6hQZrFOJnhmS+DHsssK7RrKmbM
-	KebldVKmCWXXM4fAN1hm9LjewmhIeeDUu1I4clyJjgiArMRkQ/3le4gbeDkJWTQ5Lcyx
-	Se9A==
-X-Gm-Message-State: AFeK/H1pHZTF48kw62M68wfuigtIloLjk8K4kCtSExbVeUSNdzDS8vTR
-	CmkdL0dp6Mye7UVARN6nodyxhrtHrA==
-X-Received: by 10.28.71.87 with SMTP id u84mr20400228wma.101.1491411408268;
-	Wed, 05 Apr 2017 09:56:48 -0700 (PDT)
+	bh=nYew34BOXxjbfqHVm4Iw2bVW2F2OZ7JPJs2P26cSXXU=;
+	b=uIgjPyuPGdHgrIHyRl9nqltSTsL+hF8dcuOFeJzMhEWvP8vPAQA6XZPoT7cBV635Rl
+	SDvCKpaDNAOGtTUT73/r84WAeScFCQeF9BsHTpMM7PA22ZwMAonRcH6wdplBM5Tr6chh
+	ODlV/tWXL0fXlg2el17zxBwoCc14PCW/dZX5glKzSAPKM7BdZmuL9u4rJ0IwiVuMvJ16
+	W1zP7mO3zDR/BjJWEnNwwY2BgzUXe5XfKhoCHBpWL7TqxAvNbYMO3L9CmSqVMmKAE/nu
+	/KSFp/OvAENUU9A9G4brlhTzar01UvGf8NmnNEKWUPv3mQr8ZofaBjY0v+EJ/tjwk5EX
+	hv/w==
+X-Gm-Message-State: AFeK/H2edW1Z9sciHwbpujFU38ZCAooIxZkyhz5QNLvWoqfqswD2P9EVYZSQQB52NG6x3o/JAx28ygaLdSPLDA==
+X-Received: by 10.223.138.225 with SMTP id z30mr26842010wrz.26.1491411942386; 
+	Wed, 05 Apr 2017 10:05:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 09:56:17 -0700 (PDT)
-In-Reply-To: <CA+chaQcx810httXF=Ypgc9Hei5hS2meva6MRP=TkPpjSGk6OSw@mail.gmail.com>
+Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 10:05:11 -0700 (PDT)
+In-Reply-To: <CA+chaQd0q-zkbt3887iqPszQqf-5TUcsw5c1gPPBrCh6AUBzkQ@mail.gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-	<20170331164247.5052-18-raj.khem@gmail.com>
-	<CA+chaQcx810httXF=Ypgc9Hei5hS2meva6MRP=TkPpjSGk6OSw@mail.gmail.com>
+	<20170331164247.5052-24-raj.khem@gmail.com>
+	<CA+chaQd0q-zkbt3887iqPszQqf-5TUcsw5c1gPPBrCh6AUBzkQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Apr 2017 09:56:17 -0700
-Message-ID: <CAMKF1sp1CNwRJKxSx337JT6DOXeW2MY+Pt0Rgc_uxP4=4mMA_w@mail.gmail.com>
+Date: Wed, 5 Apr 2017 10:05:11 -0700
+Message-ID: <CAMKF1squdKPFDd6G1j44G-s2VLEMBceoKMd4tJBj0hUw-5L2yw@mail.gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 18/43] ttf-inconsolata: Move copying of .otf to .ttf into do_compile
+Subject: Re: [meta-oe][PATCH 24/43] minicoredumper: Update to 2.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,68 +54,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2017 16:56:50 -0000
+X-List-Received-Date: Wed, 05 Apr 2017 17:05:44 -0000
 Content-Type: text/plain; charset=UTF-8
 
-Drop this one, I see same error without this change, since it does not
-fix the problem, I can look into it and send a new version if I find
-the proper fix
-
 On Sun, Apr 2, 2017 at 12:14 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> mv: cannot stat
-> 'TOPDIR/tmp-glibc/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf':
-> No such file or directory
-> WARNING: exit code 1 from a shell command.
+> minicoredumper-2.0.0: minicoredumper: Files/directories were installed but
+> not shipped in any package:
+>   /run
+> Please set FILES such that these items are packaged. Alternatively if they
+> are unneeded, avoid installing them or delete them within do_install.
+> minicoredumper: 1 installed and not shipped files. [installed-vs-shipped]
 >
-> http://errors.yoctoproject.org/Errors/Details/138841/
->
->
+
+Pushed a fix for this here
+https://github.com/kraj/meta-openembedded/commit/0016878d08216270f08bb190afaa7ad14326e4ef
+
 >
 > On Fri, Mar 31, 2017 at 6:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >>
->> Fixes errors like
->>
->> | mv: cannot stat
->> '/mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf':
->> No such file or directory
->> | WARNING:
->> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/temp/run.do_configure.2485:1
->> exit 1 from 'mv
->> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf
->> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/ttf-inconsolata-20100526/Inconsolata.ttf'
+>> Clarify licensing and switch to github for fetching
 >>
 >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >> ---
->>  meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb | 7
->> ++++---
->>  1 file changed, 4 insertions(+), 3 deletions(-)
+>>  ...inicoredumper_1.0.2.bb => minicoredumper_2.0.0.bb} | 19
+>> +++++++++++++------
+>>  1 file changed, 13 insertions(+), 6 deletions(-)
+>>  rename meta-oe/recipes-kernel/minicoredumper/{minicoredumper_1.0.2.bb =>
+>> minicoredumper_2.0.0.bb} (64%)
 >>
->> diff --git
->> a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
->> b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
->> index 20041bb7b..0d6df242a 100644
->> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
->> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
->> @@ -13,13 +13,14 @@ S = "${WORKDIR}/ttf-inconsolata-${PV}"
->>  FILES_${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
->>      ${datadir}/doc/ttf-inconsolata/*"
->>
->> -do_configure() {
->> +deltask do_configure
+>> diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+>> b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+>> similarity index 64%
+>> rename from meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+>> rename to meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+>> index babe54448..f3071e39a 100644
+>> --- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_1.0.2.bb
+>> +++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
+>> @@ -1,17 +1,24 @@
+>>  SUMMARY = "minicoredumper provides an alternate core dump facility for
+>> Linux \
+>>  to allow minimal and customized crash dumps"
+>> -LICENSE = " LGPLv2.1 & BSD"
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=45445387350de96a0e70410470ee5cab"
+>> -DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux"
+>> +LICENSE = " LGPLv2.1 & BSD-2-Clause"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=709087c2ed0acda54a4d91497a889e42 \
 >> +
->> +do_compile_prepend() {
->>      mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
->>  }
+>> file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
+>> +
+>> file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
+>> +                   "
+>> +DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux
+>> json-c"
 >>
->>  do_install_append() {
->> -    install -d ${D}${datadir}/doc/ttf-inconsolata/
->> -    install -m 0644 ${WORKDIR}/OFL.txt
->> ${D}${datadir}/doc/ttf-inconsolata/
->> +    install -D -m 0644 ${WORKDIR}/OFL.txt
->> ${D}${datadir}/doc/ttf-inconsolata/OFL.txt
->>  }
+>>  inherit autotools pkgconfig systemd update-rc.d
 >>
->>  SRC_URI[md5sum] = "0fbe014c1f0fb5e3c71140ff0dc63edf"
+>> -SRC_URI = "https://linutronix.de/${BPN}/files/${BPN}-${PV}.tar.gz \
+>> +SRCREV = "248019446ccf6079926efb54f8b6dd7be769bbae"
+>> +
+>> +PR .= "+git${SRCPV}"
+>> +
+>> +SRC_URI =
+>> "git://github.com/Linutronix/minicoredumper-debian;branch=unstable \
+>>             file://minicoredumper.service \
+>>             file://minicoredumper.init \
+>>  "
+>> -SRC_URI[md5sum] = "5ba9d116b52a8e2fb93456260644e753"
+>> -SRC_URI[sha256sum] =
+>> "1b0eeb3d70dbd2ad6f2f673e4e3446e5dd784e132730e21d8f9dc0977e47dd9a"
+>> +
+>> +S = "${WORKDIR}/git"
+>>
+>>  SYSTEMD_SERVICE_${PN} = "minicoredumper.service"
+>>  SYSTEMD_AUTO_ENABLE = "enable"
 >> --
 >> 2.12.1
 >>
