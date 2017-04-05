@@ -1,45 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id ED10660069
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BB10460069
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Apr 2017 17:57:35 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id g19so4843939wrb.0
+	Wed,  5 Apr 2017 17:59:07 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id g19so4855617wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 10:57:37 -0700 (PDT)
+	Wed, 05 Apr 2017 10:59:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=9sysKSbopS2xmSwuaCcigI7pQtU+bZ8rJ79bmBsbzmU=;
-	b=qPh9R3KdJn7cjkCUXD51Fuh8Z3Kaa6pKUQqi4RO55gx4ezzeVsySgPsg6L10yg4u3i
-	i5xerkR6QGPFnWb7eyao6hprlNNf7uXwW11iC0Z0zHdYqPqAks+43TKvn+bG3Px9O5cy
-	QdRD4KAN+km8Zyu9uIuzh3u82hwO8HZ4DTsGTTl3q+Lm9RQSNN4W6QJmF9KV1SDyjBMh
-	ZzuzVSR9EpV8qiTcbGO0q1ZkOQYQ0pYSYi3EfJCATnyRCY0qax/WIrRA1gwe0z+GnZBd
-	BRdejqgvybuZ38yWYaLH2hyFjJOuerrnWfy42KyGTdCWusAW4Yeyco2FPufG5jxZ3+6j
-	EfeA==
+	:cc; bh=Tve+rrcr0hi+rlcCWkTYWNGUgbqiq/UXegdwbzOozp0=;
+	b=CIsJn9NDheBRNRSfbodZ3yhun0IeD2O/9KhjwUlcL008mQlG4xofeltmEyS36fEUpw
+	8CZ4ONIoh4R7BxYdojQ42Ta42H3MeAIHpp2T2lyiuz3hTD0k9OzJWGzME0E2Uf3YQzmr
+	YUzskw+f0kuOqnDwYKJgiDqt0qSoHcGRRw+niEdzsqJ9T+NiZgrB+JuLkYB1ph3dRunm
+	NQxEBbshker5bEU+NGbxCQhEdPjAFRkgNWXfy512t3/o7l0GtyqJyA34Tv327kleKpFP
+	kTz84nXxqWJqcJ498CR+Msg3wY6Yq/IJ5FY6nzvITojrzJ3IeSsImGgFVBp8EeXG3lD5
+	fA3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=9sysKSbopS2xmSwuaCcigI7pQtU+bZ8rJ79bmBsbzmU=;
-	b=gB6u92c91cmOcCr0W0augoBEOdmZIEQrO1NCPUY6i0O6Ahjah85PvNXiPBvsMupLay
-	g6bMEy50GbG7h1c2EnX0dugIe+YRb9KAfHVy56cd0U1OejzVTu11Rysf0wzlqaGOEPzJ
-	7NU8aNV/5l72iQfXS+igQQTSNlrmysZeaNq83G1gyH0hCpEzEvq8I6oBhO24a+zmA1Dn
-	CRru7pSnjBvxUP7fwSrThJ+SF42vCjMe6BPCvRJ+NBNiKze0AeYhKEcChvh+6TMlBiFR
-	JPFWLYmPd3e6yKPraFAAitUc393Ouk3yU2B+zmLo5+R43Q6I8car9kdrzygThSBqxsh5
-	b3Aw==
-X-Gm-Message-State: AFeK/H0v+1YaKvBPDrUS2cdT5woddRPYpRGA+gze6FXo9UDK6U91JAG+4sEfbUjv/WsY5w50L3ED2Mbq/Po1Mw==
-X-Received: by 10.223.132.129 with SMTP id 1mr27582671wrg.172.1491415055873;
-	Wed, 05 Apr 2017 10:57:35 -0700 (PDT)
+	bh=Tve+rrcr0hi+rlcCWkTYWNGUgbqiq/UXegdwbzOozp0=;
+	b=NUoxPSyQo8vPqZxIrcGafCSDYk84n6nu6EbG/opqtQbXQFFMUebykANAnAaj14w6wh
+	W9JNB9UNPlEbSKpXtveLUwwxRTVPR6HQNEPNfHWKTc/Cvu2RzdaSdIY9dtby0wBOaz3o
+	PbIhW4FcTU9TBJmqQv7XBK8Jgyo4HJ2DWXXR/U5JEsnCPzRlYzFAjCpJeSOONy1e7KIC
+	rA5YLnmE0tdDzWhGB0e8MgGZNt/vpuavKYN3ARpF46t2rjT0N1bEDJiyg0hfplKZTaza
+	BPFLIHlAwR0Q5TGpdHNr9eWlo0+jfTs4yKF0+N6ioWyJnJ5FXiMpJ831h5BMALiwiNcT
+	bdwQ==
+X-Gm-Message-State: AFeK/H0AJFP1DLryuuEqR4qf04UPz089kAYJKgS6WyZ5wPkHd13lsXSuj7p3H1xOZFfWbltlNa+svBnEMJWErg==
+X-Received: by 10.223.128.194 with SMTP id 60mr19470302wrl.175.1491415147955; 
+	Wed, 05 Apr 2017 10:59:07 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 10:57:05 -0700 (PDT)
+Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 10:58:37 -0700 (PDT)
 In-Reply-To: <CA+chaQc3VwgCfecPLG4WopH+RfoEoTRAe6g4N6Ewi3ebZe_hFQ@mail.gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
 	<20170403191914.GF3311@jama>
 	<CAMKF1srfnfc5GBCxq4xOriaznKK6OywX1_6Df_JWF-uXOKZaDQ@mail.gmail.com>
 	<CA+chaQc3VwgCfecPLG4WopH+RfoEoTRAe6g4N6Ewi3ebZe_hFQ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Apr 2017 10:57:05 -0700
-Message-ID: <CAMKF1so-t4u8ZEqSNGNMXC0h-fGwCVLGgXc0Kdrovw2_OmDLNQ@mail.gmail.com>
+Date: Wed, 5 Apr 2017 10:58:37 -0700
+Message-ID: <CAMKF1spExF7mw-SV0uC8x4WzJ1qtCA30--VvLWNNBEOcnVFzZQ@mail.gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 01/43] gpm: Update to use git src uri
@@ -55,8 +55,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2017 17:57:36 -0000
+X-List-Received-Date: Wed, 05 Apr 2017 17:59:08 -0000
 Content-Type: text/plain; charset=UTF-8
+
+I have created a new branch kraj/master-next which has the changes
+rebased on top of upstream master-next
 
 On Wed, Apr 5, 2017 at 10:41 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 > I've merged many changes from master-next today, only the ones for
@@ -65,10 +68,6 @@ On Wed, Apr 5, 2017 at 10:41 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
 > Can you please resend remaining changes (rebased on master-next) and
 > integrate the fixes into them?
 >
-
-I have rebased kraj/master on upstream master and also squashed the
-changed into the original ones since they were not merged yet.
-
 > Thanks
 >
 > On Wed, Apr 5, 2017 at 6:38 PM, Khem Raj <raj.khem@gmail.com> wrote:
