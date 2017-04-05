@@ -1,43 +1,51 @@
-Return-Path: <benjamin.gaignard@linaro.org>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id B660872F56
+Return-Path: <oliver.graute@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2276977B45
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Apr 2017 12:53:33 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id w11so12538787wrc.3
+	Wed,  5 Apr 2017 13:42:02 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id w43so2819792wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 05:53:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=AL9p1eLVIxnvCwqB0LMT8AaAufFMCYn6Rnst72raUQM=;
-	b=D5dRIsjxfKQVPHerODKVtyg3D6+bkszCQbQm7cMtd0alA6uNJJNZlauIjchO979DUy
-	uw2m2axfLhSKmzvBew6R0YTo1Z+YQZZ5dfYVAByDYSdiYH54huy7p4wtgJh7glpDcMcF
-	fyUrX/oBrbQqhai6CpgPAPkbKGDeR/VCuSYCI=
+	Wed, 05 Apr 2017 06:42:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:mail-followup-to:mime-version
+	:content-disposition:user-agent;
+	bh=87rDmhzhqAc0wOfhvcA9PEpHtAOpbnyxSlOYvZIp7P0=;
+	b=X7JVEhcOro9zpBgD05orPQ9+ZzQoLBUHRieCN2N761niRIWvxNlRNPPR7sD/pi8E+B
+	QyxXpVJDXfcBtzr+AckqPermE8PKBA/Fs/1W8jiAiMQaf3b1USgq6Cj5z4c6usesIFKQ
+	mC5S10KTLo5W3rO2JLWzARMUeUZtCS2MhJgg3AYOaEtPU26fY4ifOGgbZ5VkEU3877CZ
+	KbR8EUQUZAtmvMhSeeTG3WtfXRG/koLvOIZ4SXx9jJUvxz7wlTMrlvG62xVGM707g/0U
+	KF7HTNYcDAadEp5buq7aVlQZ/y6YQ9Tzshigl8M4MUzBELV0h8AvVfYHRuF9IuxN3dAv
+	WlyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AL9p1eLVIxnvCwqB0LMT8AaAufFMCYn6Rnst72raUQM=;
-	b=EsUHhQMVWTeNMQ7uG98DT1rHGfE2vyHKkZwyCHaP2lFyEEGOK/kIJU2weiN33jFk3X
-	JwNVtxNAwZrqt9qKZVY8kGvwhH/nTecTK7KYJBfv1U1uCPPDPIif0Bm+yzL8Bi/jWI7Q
-	mo8oWOfBVq45YxT4JQ30Qf5M0d7JKz1V+pjik9F7Qe7znFZGwjPhpk953fb3lFIdV9+e
-	djawptuuVagbzvHD/ngice6f3yOMPYvf8WGBcZOqhvi0tid+wSlaODaYoY0C5VrFvF8N
-	w7Dhkjq9qNQ0Rc9Yn4Arb0N62ro6nmk8lvNc+kwYBc7QvKKS+m3nNLKSKkGs7oONBO9A
-	qWmQ==
-X-Gm-Message-State: AFeK/H1npEhtGtk47UqCkPGpBVEOyQ4KfQ3NJWPZvGArWe8Vgfq8dIR9w0kaRvZFf0a1O0z5
-X-Received: by 10.28.68.66 with SMTP id r63mr19492621wma.74.1491396813525;
-	Wed, 05 Apr 2017 05:53:33 -0700 (PDT)
-Received: from lmenx321.st.com. ([80.214.64.36])
+	h=x-gm-message-state:from:date:to:cc:subject:message-id
+	:mail-followup-to:mime-version:content-disposition:user-agent;
+	bh=87rDmhzhqAc0wOfhvcA9PEpHtAOpbnyxSlOYvZIp7P0=;
+	b=GlnSlmhE8U4dsp8tucqG2gJssdh/VbrU94w+hZ+2piE6L83i6SIvO9jBtnfNbe6hQp
+	wDO8OtqrTC/YbH0dAmpvjP6MnCc2NiQQmbpDY9bWADsEBNvD1a0xqDLwFITvZsfrPJaf
+	6q4TiIzpbtv1DxaUYbUMIjnVD6B2gPGxTBy47NKkN1eckVwc1sPmxNUPYXgUrDnksJel
+	EEtNJb99SA8Qa5JoNKu9t03WWsfam4hSWuqLf+lh+MsBLIyS1+aVA2OjdkXuzllNowgs
+	n6NrQy0b4x4lvSDBMtL3WILdUhRxhoRXX/Ypghu8LVT6mz+8FnG6IfuvUX0exe1bvVsG
+	JF8g==
+X-Gm-Message-State: AFeK/H1XiL3DJETqtQ5+ueI94+UR7gydJZ6qEnvXohy0E9RPyZrV68j4dgG02S9jsjUfkw==
+X-Received: by 10.28.88.129 with SMTP id m123mr20175329wmb.28.1491399723459;
+	Wed, 05 Apr 2017 06:42:03 -0700 (PDT)
+Received: from localhost (x55b0f68b.dyn.telefonica.de. [85.176.246.139])
 	by smtp.gmail.com with ESMTPSA id
-	e23sm17916465wmi.16.2017.04.05.05.53.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 05 Apr 2017 05:53:32 -0700 (PDT)
-From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-To: openembedded-devel@lists.openembedded.org,
+	191sm22473127wmv.25.2017.04.05.06.42.02
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Wed, 05 Apr 2017 06:42:02 -0700 (PDT)
+From: Oliver Graute <oliver.graute@gmail.com>
+X-Google-Original-From: Oliver Graute <oliver.graute@neuhaus.de>
+Date: Wed, 5 Apr 2017 15:38:57 +0200
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170405133857.GA15126@graute-opti>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
 	joe_macdonald@mentor.com
-Date: Wed,  5 Apr 2017 14:53:26 +0200
-Message-Id: <1491396806-3521-1-git-send-email-benjamin.gaignard@linaro.org>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] tinyproxy: Add recipe
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: [meta-networking] [PATCH v2] nfacct: added nfacct recipe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,74 +58,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2017 12:53:34 -0000
+X-List-Received-Date: Wed, 05 Apr 2017 13:42:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+this patch adds nfacct to meta-networking
+
+Signed-off-by: Oliver Graute <oliver.graute@neuhaus.de>
 ---
- .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++++
- .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 32 ++++++++++++++++++++++
- 2 files changed, 46 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+ meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+diff --git a/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
 new file mode 100644
-index 0000000..800d2ad
+index 0000000..d92f7c0
 --- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Tinyproxy, Lightweight http(s) proxy daemon
-+RequiresMountsFor=/var
-+
-+[Service]
-+User=root
-+ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.adm /var/log/tinyproxy
-+ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.adm /var/run/tinyproxy
-+ExecStart=/usr/sbin/tinyproxy -d
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-new file mode 100644
-index 0000000..76cec63
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-@@ -0,0 +1,32 @@
-+SUMMARY = "Lightweight http(s) proxy daemon"
-+HOMEPAGE = "https://tinyproxy.github.io/"
++++ b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "nfacct is the command line tool to create/retrieve/delete accounting objects"
++HOMEPAGE = "http://netfilter.org/projects/nfacct/"
 +LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
 +
-+SRC_URI = "https://github.com/tinyproxy/tinyproxy/releases/download/1.8.4/tinyproxy-${PV}.tar.gz"
-+SRC_URI += "file://tinyproxy.service"
++SRC_URI = "ftp://ftp.netfilter.org/pub/nfacct/nfacct-1.0.2.tar.bz2"
 +
-+SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
-+SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
++SRC_URI[md5sum] = "94faafdaaed85ca9220c5692be8a408e"
++SRC_URI[sha256sum] = "ecff2218754be318bce3c3a5d1775bab93bf4168b2c4aac465785de5655fbd69"
++DEPENDS = "libnfnetlink libmnl libnetfilter-acct"
 +
-+EXTRA_OECONF += " \
-+	--enable-filter \
-+	--enable-transparent \
-+	--disable-regexcheck \
-+	--enable-reverse \
-+	--enable-upstream \
-+	--enable-xtinyproxy \
-+	"
++EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
 +
-+inherit autotools systemd
++S = "${WORKDIR}/nfacct-${PV}"
 +
-+SYSTEMD_PACKAGES += "${PN}"
-+SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "enable"
++inherit autotools pkgconfig
 +
-+do_install_append() {
-+	install -d ${D}${systemd_system_unitdir}
-+	install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unitdir}
-+}
-+
-+FILES_${PN} =+ "${systemd_system_unitdir}/tinyproxy.service"
 -- 
 1.9.1
 
