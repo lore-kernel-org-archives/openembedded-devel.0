@@ -1,47 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C7A871DB8
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D9D9771DF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Apr 2017 16:49:44 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id t20so4328858wra.2
+	Wed,  5 Apr 2017 16:56:47 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id w43so4367011wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 09:49:46 -0700 (PDT)
+	Wed, 05 Apr 2017 09:56:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=VWxLpGBbEsrSleAiJkuvDZ5adBo6Cjo9aYw5BsMLAnc=;
-	b=P3PQg9Ws9ZQfXFYYNjejsypC2RoFcaSGJ4oyjV0OlWOJgsEL3bu0FKclihX97OPiYg
-	tnW5cBrvQ639WQF2KKopuknxhE1AqXCQ9Q/82NHgK68xoMIuBFJXszX2VZKE3XQgMT59
-	OSnPyA7WD401f+T/h3i2oOMVnrie96dCom1/zmYn6zQ8OqTzSRpxjzmKQ1SliOeWeuCy
-	oKNJA0bSrY5cSJFVk2XfyJBxPV4mo3vLUlwqogYPRBQOXOJh5PyB46PWWxrS2JwqBAfQ
-	T27isx2CzWTxL/S+vCuDBomALo24n6a240NEkG4qe6gGD7ixdkZNEUkNTGTiK6p6G2ng
-	OXxQ==
+	:cc; bh=fceEvPiJyYhMv5JaPKL4OK55SpqJM/8jSL/KKQDF+Kw=;
+	b=Fqe51chFlwCe7w0niunlUR6hXxK+g7F7Q1uAgeRa25I7oMaSpvjER97sW/tHxdqPNJ
+	dT24yYQy487FMO+2KCXrTZyS2/6AmYolcZnYuNDUgJnHjYJaDsZCVpXEL+r2mEEjOmPm
+	MHnBCYg90XoJ3rtw+krBK1EYqHOu3dw23xct+biQGRHzvZKn6Ggd15XlGOS6UobNVcAB
+	/ZCAN9B3yiRvhMQEk/hPquYgBoHJAUQYrWg65+DpDQWg7oUHHAYLhTDDOvo2yd31Wc7k
+	Ik84nqCEohehcLd4pdM7pH335mt2l3osN/nYKVk7pW44blrQRfnypKH9nigZBgDByZ9s
+	dF6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=VWxLpGBbEsrSleAiJkuvDZ5adBo6Cjo9aYw5BsMLAnc=;
-	b=CCXda9C0bX7bz9Pg0lDYx8gBz7WCyIBd1B0D9U3XqwZQLJoQH09z+UyDncn0YnTzBo
-	AVAM6KC7YGJ+Q+iUKg1XM9Jk84mxk7Yr6D1jRa65DHcUUmyGQDIjSH98GAuPGZsu4Gbk
-	/aSNQ2qtvhQVHZjtR0A0AlR82K5lqQSKNAqaDEw6jErTxpjA/txWUqHjSt7PsvHkph0p
-	hZAXO/Z9yv46UZSfFUBs1evk7VdREO848B4U4sYSmoggDNmdPIdslho8x43P+aQDWahg
-	zEaSxk9/lES7l9GFD4d28Qac1Fkgyw29DrKIQqH9rXBnLxZK+mHbpR4uzZ7Utop30IEp
-	jD2w==
-X-Gm-Message-State: AFeK/H3bDLup1mjLdAMy6pHT4m4YGuTzpiRFvMZAm8OtP7+6vSqABOQYYJZafUsXHXQaJ7/iUNr/1BGWs06S0g==
-X-Received: by 10.223.138.225 with SMTP id z30mr26781603wrz.26.1491410985141; 
-	Wed, 05 Apr 2017 09:49:45 -0700 (PDT)
+	bh=fceEvPiJyYhMv5JaPKL4OK55SpqJM/8jSL/KKQDF+Kw=;
+	b=tZRZb+gibsR5XMan7DXxwaNnDtJwfDJCeDujYw0TkVF4aVS+0CYdH7ovBKbBRd5Ziq
+	Tt8NlCCIZyw/rnLx4tDWYNbolbbUn3KO3krMZ81hY+SvuLaPj90ygzsq7WsT3eIvkSpe
+	IwmoLIXZij+bjs8OHOQZ4rBpP26tjYisBAOe9rcl903nkekpouk8JvyWmzIYQCmk9sfw
+	WYh9GbKigxnyS6qS5eJ323f7fE7izLIsPwYSb8LlfW6hQZrFOJnhmS+DHsssK7RrKmbM
+	KebldVKmCWXXM4fAN1hm9LjewmhIeeDUu1I4clyJjgiArMRkQ/3le4gbeDkJWTQ5Lcyx
+	Se9A==
+X-Gm-Message-State: AFeK/H1pHZTF48kw62M68wfuigtIloLjk8K4kCtSExbVeUSNdzDS8vTR
+	CmkdL0dp6Mye7UVARN6nodyxhrtHrA==
+X-Received: by 10.28.71.87 with SMTP id u84mr20400228wma.101.1491411408268;
+	Wed, 05 Apr 2017 09:56:48 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 09:49:14 -0700 (PDT)
-In-Reply-To: <20170403141806.GD3311@jama>
+Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 09:56:17 -0700 (PDT)
+In-Reply-To: <CA+chaQcx810httXF=Ypgc9Hei5hS2meva6MRP=TkPpjSGk6OSw@mail.gmail.com>
 References: <20170331164247.5052-1-raj.khem@gmail.com>
-	<20170331164247.5052-29-raj.khem@gmail.com>
-	<20170403141806.GD3311@jama>
+	<20170331164247.5052-18-raj.khem@gmail.com>
+	<CA+chaQcx810httXF=Ypgc9Hei5hS2meva6MRP=TkPpjSGk6OSw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Apr 2017 09:49:14 -0700
-Message-ID: <CAMKF1srGq39nu5h3YAQXNrORFTbYjUP3mxRxdsvG=8+4izZR5g@mail.gmail.com>
+Date: Wed, 5 Apr 2017 09:56:17 -0700
+Message-ID: <CAMKF1sp1CNwRJKxSx337JT6DOXeW2MY+Pt0Rgc_uxP4=4mMA_w@mail.gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 29/43] libqb: Upgrade to 1.0.1 release
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 18/43] ttf-inconsolata: Move copying of .otf to .ttf into do_compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,114 +55,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2017 16:49:44 -0000
+X-List-Received-Date: Wed, 05 Apr 2017 16:56:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Apr 3, 2017 at 7:18 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Fri, Mar 31, 2017 at 09:42:33AM -0700, Khem Raj wrote:
->> Add a patch needed for cross compiling
+Drop this one, I see same error without this change, since it does not
+fix the problem, I can look into it and send a new version if I find
+the proper fix
+
+On Sun, Apr 2, 2017 at 12:14 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> mv: cannot stat
+> 'TOPDIR/tmp-glibc/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf':
+> No such file or directory
+> WARNING: exit code 1 from a shell command.
 >
-> This breaks corosync:
-> http://errors.yoctoproject.org/Errors/Details/138932/
+> http://errors.yoctoproject.org/Errors/Details/138841/
 >
-
-This needed updated too. I have pushed a recipe update for corosync
-https://github.com/kraj/meta-openembedded/commit/6d4e506ecf2ae4effee4e70b3ff0e3d7c1a18542
-
-
+>
+>
+> On Fri, Mar 31, 2017 at 6:42 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> Fixes errors like
+>>
+>> | mv: cannot stat
+>> '/mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf':
+>> No such file or directory
+>> | WARNING:
+>> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/temp/run.do_configure.2485:1
+>> exit 1 from 'mv
+>> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/Inconsolata.otf
+>> /mnt/b/build/tmp-musl/work/all-oe-linux/ttf-inconsolata/20100526-r0/ttf-inconsolata-20100526/Inconsolata.ttf'
+>>
 >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >> ---
->>  ...-Remove-runtime-check-for-CLOCK_MONOTONIC.patch | 43 ++++++++++++++++++++++
->>  .../libqb/{libqb_0.17.2.bb => libqb_1.0.1.bb}      | 14 +++----
->>  2 files changed, 49 insertions(+), 8 deletions(-)
->>  create mode 100644 meta-oe/recipes-extended/libqb/libqb/0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch
->>  rename meta-oe/recipes-extended/libqb/{libqb_0.17.2.bb => libqb_1.0.1.bb} (67%)
+>>  meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb | 7
+>> ++++---
+>>  1 file changed, 4 insertions(+), 3 deletions(-)
 >>
->> diff --git a/meta-oe/recipes-extended/libqb/libqb/0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch b/meta-oe/recipes-extended/libqb/libqb/0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch
->> new file mode 100644
->> index 000000000..28bc5c07d
->> --- /dev/null
->> +++ b/meta-oe/recipes-extended/libqb/libqb/0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch
->> @@ -0,0 +1,43 @@
->> +From e6fbad0c122ba8e87b67a9e2447505adcaafe204 Mon Sep 17 00:00:00 2001
->> +From: Khem Raj <raj.khem@gmail.com>
->> +Date: Wed, 29 Mar 2017 16:31:38 -0700
->> +Subject: [PATCH] Remove runtime check for CLOCK_MONOTONIC
->> +
->> +Does not work during cross compile
->> +
->> +use a compile-time check to detect whether the
->> +monotonic clock is available. This check can run just fine when we are
->> +cross-compiling.
->> +
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> +---
->> + configure.ac | 12 ++++++++++--
->> + 1 file changed, 10 insertions(+), 2 deletions(-)
->> +
->> +diff --git a/configure.ac b/configure.ac
->> +index fa13ae6..f4f0f46 100644
->> +--- a/configure.ac
->> ++++ b/configure.ac
->> +@@ -175,9 +175,17 @@ AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
->> +                  )
->> +
->> + AC_MSG_CHECKING(for a working clock_getres(CLOCK_MONOTONIC, &ts))
->> +-AC_RUN_IFELSE([AC_LANG_PROGRAM(
->> ++AC_COMPILE_IFELSE([AC_LANG_PROGRAM(
->> + [[#include <time.h>]],
->> +-[[struct timespec ts; if(clock_getres(CLOCK_MONOTONIC, &ts)) return -1;]])],
->> ++[[
->> ++#include <unistd.h>
->> ++int main() {
->> ++#if !(defined(_POSIX_MONOTONIC_CLOCK) && _POSIX_MONOTONIC_CLOCK >= 0 && defined(CLOCK_MONOTONIC))
->> ++        #error No monotonic clock
->> ++#endif
->> ++    return 0;
->> ++
->> ++]])],
->> +                     [
->> +                       AC_MSG_RESULT([yes])
->> +                       AC_DEFINE_UNQUOTED([HAVE_CLOCK_GETRES_MONOTONIC], 1, [Define to 1 if clock_getres(CLOCK_MONOTONIC, &ts) works])
->> +--
->> +2.12.1
->> +
->> diff --git a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb b/meta-oe/recipes-extended/libqb/libqb_1.0.1.bb
->> similarity index 67%
->> rename from meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
->> rename to meta-oe/recipes-extended/libqb/libqb_1.0.1.bb
->> index 94030b2ea..e26bb7c19 100644
->> --- a/meta-oe/recipes-extended/libqb/libqb_0.17.2.bb
->> +++ b/meta-oe/recipes-extended/libqb/libqb_1.0.1.bb
->> @@ -4,22 +4,20 @@ It provides high performance logging, tracing, ipc, and poll."
+>> diff --git
+>> a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+>> b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+>> index 20041bb7b..0d6df242a 100644
+>> --- a/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+>> +++ b/meta-oe/recipes-graphics/ttf-fonts/ttf-inconsolata_20100526.bb
+>> @@ -13,13 +13,14 @@ S = "${WORKDIR}/ttf-inconsolata-${PV}"
+>>  FILES_${PN} = "${datadir}/fonts/truetype/Inconsolata.ttf \
+>>      ${datadir}/doc/ttf-inconsolata/*"
 >>
->>  HOMEPAGE = "https://github.com/clusterlabs/libqb/wiki"
->>  SECTION = "libs"
->> -
->>  LICENSE = "LGPL-2.1"
->>  LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
->>
->> -inherit autotools-brokensep pkgconfig
->> -
->> -PV = "0.17.2+git${SRCPV}"
->> +inherit autotools pkgconfig
->>
->> -SRCREV = "bd2c587f6ccacd8a5644b275d99324d200c2b378"
->> -SRC_URI = "git://github.com/ClusterLabs/${BPN}.git"
->> +PV .= "+git${SRCPV}"
->>
->> +SRCREV = "0a329683a76bc6aeb36f20f2bf6b43ba0440c4dc"
->> +SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
->> +           file://0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch \
->> +          "
->>  S = "${WORKDIR}/git"
->>
->>  do_configure_prepend() {
->>      ( cd ${S}
->>      ${S}/autogen.sh )
+>> -do_configure() {
+>> +deltask do_configure
+>> +
+>> +do_compile_prepend() {
+>>      mv ${WORKDIR}/Inconsolata.otf ${S}/Inconsolata.ttf
 >>  }
->> -
->> -
+>>
+>>  do_install_append() {
+>> -    install -d ${D}${datadir}/doc/ttf-inconsolata/
+>> -    install -m 0644 ${WORKDIR}/OFL.txt
+>> ${D}${datadir}/doc/ttf-inconsolata/
+>> +    install -D -m 0644 ${WORKDIR}/OFL.txt
+>> ${D}${datadir}/doc/ttf-inconsolata/OFL.txt
+>>  }
+>>
+>>  SRC_URI[md5sum] = "0fbe014c1f0fb5e3c71140ff0dc63edf"
 >> --
 >> 2.12.1
 >>
@@ -171,6 +126,5 @@ https://github.com/kraj/meta-openembedded/commit/6d4e506ecf2ae4effee4e70b3ff0e3d
 >> Openembedded-devel@lists.openembedded.org
 >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>
 
