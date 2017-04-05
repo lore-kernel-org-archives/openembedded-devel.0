@@ -1,45 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 950E560123
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 63F4560123
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Apr 2017 17:26:05 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id t20so4607368wra.2
+	Wed,  5 Apr 2017 17:28:09 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id k6so24543945wre.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 10:26:06 -0700 (PDT)
+	Wed, 05 Apr 2017 10:28:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=M4qN4JT9cnpc1gPuAITfqns9bBJvoKpcZL23k/K8qJk=;
-	b=nMz8pnxHQaqvA1bDg/R8Lw4ZIw2qNl7EGQNN4cajOUuIl2X6CSxNNxSra6F2nuu/Q7
-	iHkQX3WUgqj9K/PH+DtNb3WQmxEp4HjdRKD274wamKIeWbaNnu+W5FCksDpLr89/duCk
-	TVSnorYO/0TI40Xx78ptowbMEWaCGu4SWUORnwZnAA3RN6IxWEOUChQbiMXBIWh88sa1
-	ygzdLzsbtCexGr8FQQ2I9Zn0c2fbx4LQgSgcGJBzQPpEgaGzOMg0pm8JsJm6NdCJjJ7t
-	wqIj7kAFgji4C5r/4E6lh9+PCJxGWOkNX9UiBYth2NVt8k9Z73Z5G/TnAmk08k+pOAdW
-	3fbg==
+	bh=4ivd6TyWnsMQ3zxGwt7yNrL0PTJXvKc9pD/AMvNVVjs=;
+	b=ZsMKnpctfqCjSWlAAzocoXx/WGdtPNcKhKpgS786o8yYW+Cv+w30uGfKMgAsXtNcjR
+	2sxbbGYCO9T0iUSYyU/8NCnYzY1iz+x8GM/CM0JdDHW52hszB9X71fmoASMWQlD/e/Ma
+	ZqgZVVgcaPYtnPL+roqymXSTrlSl1vbl2gbUL/VzPoXY4GaM35EXTdwQTBfHXdN1JPya
+	DngDztGEQBg2OxVOUALH7XOXnBCE9cB/r8kX4DYu6u2sQg3i7wJ9pCwGtPQN0wudJl8g
+	gRszv8dOlfjVB5SmCMpYcUnOChivrzL5YzCuuE1qWRj6c4W91VWbDf6Yhf6q/0Px/fpv
+	mMQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=M4qN4JT9cnpc1gPuAITfqns9bBJvoKpcZL23k/K8qJk=;
-	b=QqHA/uZp03kbu9kjlPLAxYL7JXlWDA3TgIEcQ25aF2t8aN6EckgC0rYKa89r8YPukW
-	yDBC5KhQlkWueCo9NdA9hPlY8WVMTC9jLtY/tlsk9xqOIAP3nAil8TJ9QvcrAF4Cbyu4
-	1s8Lyi2WisLvPJsNdRyBt+xpfiL+fRMAsEijBBTz0Jq50BwVqAyXfNdBvJ0yxZxLh8pP
-	qJJIUNleCwALfxX7zk9rFdLO0ZdcDzyEVANNXi1WSJFZDFJZEfUXX+ExaWwO3Ksx6/BJ
-	81I9iE5ttwrzK+R0LVC6c2vMf+7Le1LFENyIZQgyRx3IKLY6gjZvmpLqCPx5I3XSIcwS
-	Nd/w==
-X-Gm-Message-State: AFeK/H3DPZsmKIZV+ldvYCUpqVEi188gTqWYMJdMd3O8TFjO2YRxsYgQ26r/qqidmhC9d4YufpKIZIBlIR+Q4w==
-X-Received: by 10.223.128.194 with SMTP id 60mr19372974wrl.175.1491413166165; 
-	Wed, 05 Apr 2017 10:26:06 -0700 (PDT)
+	bh=4ivd6TyWnsMQ3zxGwt7yNrL0PTJXvKc9pD/AMvNVVjs=;
+	b=aiMcuuwH8eVTQ4Ed9xtO9HL6wxdi+li1XQYM8yKrzaNU+E753qTNMPBytftH+lYlH6
+	re7E8yiKCBMaPB8fQx6+3ubhlTJKl4+q0JITw7+oEQlNN3NIZeNBJwfY2uS4+qPSpKoT
+	8RPYAMQUsw4MlHgVAligUxT9hk/wlTekouSGo02ZRL3OVTmErCe4KSvXZr/V6+FzTXzb
+	ciZJeWFmE/b++/Iw+QyhIPdMiF2Y0wKIrgrfxUnm2fs4kq1wOd6MUoKw3Hwjye6yJwhY
+	DrOSev6IoB+ScsF7MiwAMUc9F+f/u5ulgF7jXzw8vIImhbfoZzkF3NbwVUe4UWtVzddE
+	fWaQ==
+X-Gm-Message-State: AFeK/H0mQBttXitR6V7UPJ7vT9wMRCmwmnHkNP/j64i+vgNu06Yx5Ht9ENWnA5PZFq3zXp57cKo/7yJI1Xy19A==
+X-Received: by 10.223.128.194 with SMTP id 60mr19379333wrl.175.1491413290935; 
+	Wed, 05 Apr 2017 10:28:10 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 10:25:35 -0700 (PDT)
-In-Reply-To: <20170405134110.GA20393@graute-opti>
-References: <20170405134110.GA20393@graute-opti>
+Received: by 10.80.180.162 with HTTP; Wed, 5 Apr 2017 10:27:40 -0700 (PDT)
+In-Reply-To: <20170405134010.GA18688@graute-opti>
+References: <20170405134010.GA18688@graute-opti>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 5 Apr 2017 10:25:35 -0700
-Message-ID: <CAMKF1sqQFWhuuhEQ8HJMXan9ReaxAJ00P_fwCTGUNNGa-EhqzQ@mail.gmail.com>
+Date: Wed, 5 Apr 2017 10:27:40 -0700
+Message-ID: <CAMKF1sq7vX1rwFL062BB_8UXeCxzQcdyr=PsZsUvEsfwqs-QjA@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
 	Joe MacDonald <joe_macdonald@mentor.com>
-Subject: Re: [meta-networking] [PATCH] libreswan: this patch adds libreswan to meta-networking
+Subject: Re: [meta-networking] [PATCH] unbound: this patch adds unbound to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,86 +52,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Apr 2017 17:26:06 -0000
+X-List-Received-Date: Wed, 05 Apr 2017 17:28:10 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Wed, Apr 5, 2017 at 6:41 AM, Oliver Graute <oliver.graute@gmail.com> wrote:
-> Libreswan is an IPsec implementation for Linux
+On Wed, Apr 5, 2017 at 6:40 AM, Oliver Graute <oliver.graute@gmail.com> wrote:
+> Unbound is a validating, recursive, and caching DNS resolver
 >
 > Signed-off-by: Oliver Graute <oliver.graute@neuhaus.de>
 > ---
->  .../recipes-support/libreswan/libreswan_3.20.bb    | 48 ++++++++++++++++++++++
->  1 file changed, 48 insertions(+)
->  create mode 100644 meta-networking/recipes-support/libreswan/libreswan_3.20.bb
+>  .../recipes-support/unbound/unbound_1.6.1.bb       | 57 ++++++++++++++++++++++
+>  1 file changed, 57 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/unbound/unbound_1.6.1.bb
 >
-> diff --git a/meta-networking/recipes-support/libreswan/libreswan_3.20.bb b/meta-networking/recipes-support/libreswan/libreswan_3.20.bb
+> diff --git a/meta-networking/recipes-support/unbound/unbound_1.6.1.bb b/meta-networking/recipes-support/unbound/unbound_1.6.1.bb
 > new file mode 100644
-> index 0000000..e291211
+> index 0000000..b6e0a42
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/libreswan/libreswan_3.20.bb
-> @@ -0,0 +1,48 @@
-> +SUMMERY = "Libreswan is an IPsec implementation for Linux."
-> +DESCRIPTION = "IPsec implementation with IKEv1 and IKEv2 keying protocols"
-> +HOMEPAGE = "http://www.libreswan.org"
+> +++ b/meta-networking/recipes-support/unbound/unbound_1.6.1.bb
+> @@ -0,0 +1,57 @@
+> +SUMMARY = "Unbound is a validating, recursive, and caching DNS resolver"
+> +DESCRIPTION = "\ Unbound is designed as a set of modular components, so that \
+> +                also DNSSEC (secure DNS) validation and stub-resolvers \
+> +                (that do not run as a server, but are linked into an applica \
+> +                tion) are easily possible."
+> +
+> +HOMEPAGE = "https://www.unbound.net/"
 > +SECTION = "net"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +DEPENDS = "gmp nss libcap-ng libevent iproute2 iptables unbound flex-native"
-> +RRECOMMENDS_${PN} = "kernel-module-ipsec"
-> +RDEPENDS_${PN} = "python curl libpam"
-> +RDEPENDS_${PN}_nylon = "perl"
+> +LICENSE = "BSD"
 
-call it ${PN}-nylon for naming consistency
+Can you see which clause it is ? it will make it more clear
 
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=5308494bc0590c0cb036afd781d78f06"
+> +DEPENDS = "openssl libtool libevent"
+> +RDEPENDS_${PN} += "bash"
+> +inherit autotools pkgconfig
 > +PR = "r0"
 
-Drop this, its default
+drop it
 
 > +
-> +SRC_URI = "http://download.libreswan.org/libreswan-${PV}.tar.gz"
-> +SRC_URI[md5sum] = "72aecdf8314c0c47546d5ae2cf918191"
-> +SRC_URI[sha256sum] = "2f0931c11ea0b9303ce1e4ee76ffe9db6f3bd70ceead51fe4ec11e2f40a9ae2e"
+> +SRC_URI = "https://www.unbound.net/downloads/${BP}.tar.gz"
+> +SRC_URI[md5sum] = "aa808f33d94a36c9312d1b8ad8805e14"
+> +SRC_URI[sha256sum] = "42df63f743c0fe8424aeafcf003ad4b880b46c14149d696057313f5c1ef51400"
 > +
-> +S = "${WORKDIR}/libreswan-${PV}"
+> +S = "${WORKDIR}/unbound-${PV}"
 > +
-> +EXTRA_OEMAKE = "DESTDIR=${D} \
-> +                FINALCONFDIR=${sysconfdir}/ipsec \
-> +                INC_RCDEFAULT=${sysconfdir}/init.d \
-> +                INC_USRLOCAL=${prefix} \
-> +                INC_MANDIR=/share/man \
-> +                FINALSBINDIR=${bindir} \
-> +                FINALLIBEXECDIR=${libexecdir}/ipsec \
-> +                USE_XAUTH=true \
-> +                USE_LIBCAP_NG=true \
-> +                USE_LEAK_DETECTIVE=false \
-> +                WERROR='' \
-> +                "
+> +EXTRA_OECONF = " \
+> +        --host=${TARGET_SYS} \
+> +        --sysconfdir=/etc/ \
+> +        --localstatedir=/var \
+> +        --sbindir=/usr/bin \
+
+these look redundant.
+
+> +        --with-conf-file=/etc/unbound/unbound.conf \
+> +        --with-pidfile=/run/unbound.pid \
+> +        --with-rootkey-file=/etc/trusted-key.key \
+> +"
+> +
+> +do_configure () {
+> +        ${S}/configure ${EXTRA_OECONF}
+> +}
+
+do we really need it? can't be reconfigure ?
+
 > +
 > +do_compile () {
-> +    export ARCH=${TARGET_ARCH}
-> +    ${S}/CROSSCOMPILE.sh
-> +    make \
-
-can we call oe_runmake here
-
-> +    #programs
-> +    oe_runmake programs
+> +        oe_runmake
 > +}
+
+redundant remove this function
+
 > +
 > +do_install () {
-> +        oe_runmake install
-> +        install -d ${D}${datadir}/doc
+> +        install -d ${D}${bindir}
+> +        install -d ${D}${libdir}
+> +        install -d ${D}${sysconfdir}
+> +        install -m 644 -D ${S}/libunbound/unbound.h ${D}${includedir}/unbound.h
+> +        install -m 644 -D ${S}/doc/example.conf.in ${D}${sysconfdir}/unbound/unbound.conf
+> +        install -m 644 -D ${S}/contrib/unbound.service.in ${D}${libdir}/systemd/unbound.service
+> +        install -m 755 unbound ${D}${bindir}
+> +        install -m 755 unbound-anchor ${D}${bindir}
+> +        install -m 755 unbound-checkconf ${D}${bindir}
+> +        install -m 755 unbound ${D}${bindir}
+> +        install -m 755 unbound-control-setup ${D}${bindir}
+> +        install -m 755 unbound-host ${D}${bindir}
+> +        install -m 755 ${WORKDIR}/build/.libs/libunbound.so* ${D}${libdir}
 > +}
+
+do this in a do_install_append()
+
 > +
-> +FILES_${PN} = "${sysconfdir} ${libdir}/ipsec/* ${sbindir}/* ${bindir}/* ${localstatedir}/* ${libexecdir}/ipsec/* /run"
-
-/run is a generated file. You should not package it instead just
-delete it if empty. If not empty find a way to generate the files in
-/run at runtime.
-
-> +FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libexecdir}/ipsec/.debug"
-> +FILES_${PN}-doc += "${datadir}/libreswan/* ${mandir}/*"
-> +CONFFILES_${PN} = "${sysconfdir}/ipsec/ipsec.conf"
+> +FILES_${PN} ="${sysconfdir}/unbound/unbound.conf ${bindir}/unbound* ${libdir}/systemd/unbound.service ${includedir}/unbound.h ${libdir}/libunbound.so*"
+> +FILES_${PN}-dev = "${includedir}/*"
 > --
 > 1.9.1
 >
