@@ -1,45 +1,52 @@
-Return-Path: <benjamin.gaignard@linaro.org>
-Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
-	[209.85.128.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D12477CD5
+Return-Path: <oliver.graute@gmail.com>
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D14977A87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 13:42:45 +0000 (UTC)
-Received: by mail-wr0-f175.google.com with SMTP id o21so34866525wrb.2
+	Thu,  6 Apr 2017 14:41:04 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id o21so37557011wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Apr 2017 06:42:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=4pJOXeO6X+Yh/iDMZFF5mOvUKwYtlqCqRcicH/NPRzc=;
-	b=d1XEoiSIZdx/iFiSezqei3aT3poWoIaJ12U3jkeGX6sc6RwMralyvlZX4/Ru9wZZtv
-	WFIHV1NLuK5nFltbFQqw23jLpAlB5crkxA2CSlZ5X7K7gI5CcTTwinnKkwIav4/ztwtb
-	nFZQpkmcPJdGRFj5zxVxafGSVCaxepZldvFco=
+	Thu, 06 Apr 2017 07:41:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IkpmcRTeoI4j7NIMGc9mgrnYvY9zQkzuOVEDF71YW9c=;
+	b=NXAQvxZ6ooO9bvN56BAPFqbp2yVCN13sVaFXv4xOGplK1NxyGSm35G7puWYbmmkS0n
+	v211hpcrW8stvzodDibxz8Io3WlB/QFRTthZoc/IuqcbRwhDrXfjPWAjXWmuhhCk2Pne
+	6zIJqfNwX5HpDkqHZrsb7rKUNPaGeetyv/UBaRs4NCSVYzMA57B0/MWjyXCHW87g4cXz
+	tYzaWbsbvgbUlQzFSvbdX1FxutaFOAxODjq80Q91gJKKW/lFpBI6vxliVVnPq6BGPii5
+	RAg4fD8Di3fA8sIiP2tViAdviwXHNCY5TvJtHwZdmAI1dNns9fqqXCNRFaudUirHmsxN
+	F3Tw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4pJOXeO6X+Yh/iDMZFF5mOvUKwYtlqCqRcicH/NPRzc=;
-	b=VLqfrPEVgIZ/TrveLimlt0lb0Wg7ETQMJXk7IdzI6Fx1IJqcaFtnmvGG7V9e+J36r8
-	h+eONJGwd2YAIRMVjNyX+xdqilkrL8yb0X0ut260o2b8iML0B9tm9B+sqWa2hGVwyZhk
-	NbAQpqKBJoFNSVZCe7/Fmj4+IJqnSG5V76YEEYeZQ5ZooQjcy2V0AhbOT6CX1vyYhEyr
-	VqMTRvKoIvgHEoj6IOcYG10A6pJawDaTzXrLHau40xZqjPc+yokUvGP50jEXN8lZwMRP
-	2KtAkFNMmMjxwCrKKVTdYTkSqsAlQ7MbHH3G/Unkc6LbpeGXYpi6PzzdfPCOjL2647CL
-	Xd5g==
-X-Gm-Message-State: AFeK/H2QUD1WKc9L3aou2UPLN3RUz2+3I/g77SMRMEaXDmKBuo8a4ZVL
-	QooY0S0czB+bmxEB
-X-Received: by 10.28.150.145 with SMTP id y139mr23795717wmd.109.1491486152874; 
-	Thu, 06 Apr 2017 06:42:32 -0700 (PDT)
-Received: from lmenx321.st.com. ([80.215.110.236])
+	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
+	:references:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=IkpmcRTeoI4j7NIMGc9mgrnYvY9zQkzuOVEDF71YW9c=;
+	b=NJXIUWB7R8OcVzK7Rz3h69jLB2h0R7A3KH/PHe6sQPISCcaRLcrDlgP/g47/RHZioS
+	YYDe2sZnWtsnKaPDQf70zKnYECGR8WfH1JtnUkAIYK3qPK2ejDJXAyfm/+lNZPN9zTiG
+	V2NisF4zLuyItEGCnNPcThtyDJWPeEbsq7d7cF9GAPlYmWlnsL2eiNmKI1MjcrsbpHVN
+	ESgPoqeI6ZlgaI4WsDys86CUpdysZTdC83EfWClqSv/ok5MUH7sUgsfPFVn1iX2GB6+w
+	SmjvZ8v1UDkznrKsEB2Rv1605YEQUc/8USN1MGWoB6mSPdK6VcATNxo/5GL/bFvVaW59
+	fMpw==
+X-Gm-Message-State: AFeK/H0doXuRFXNFP9ONdpznu2KZxoSZVZjnt0CtSY82ztMQlf/XGUyS0RKtdx/OZOPdEg==
+X-Received: by 10.223.165.85 with SMTP id j21mr28938655wrb.56.1491489665005;
+	Thu, 06 Apr 2017 07:41:05 -0700 (PDT)
+Received: from localhost (x55b0f93f.dyn.telefonica.de. [85.176.249.63])
 	by smtp.gmail.com with ESMTPSA id
-	l41sm2190748wrl.59.2017.04.06.06.42.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 06 Apr 2017 06:42:32 -0700 (PDT)
-From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-To: openembedded-devel@lists.openembedded.org, joe_macdonald@mentor.com,
-	martin.jansa@gmail.com, raj.khem@gmail.com
-Date: Thu,  6 Apr 2017 15:42:25 +0200
-Message-Id: <1491486145-30397-1-git-send-email-benjamin.gaignard@linaro.org>
-X-Mailer: git-send-email 1.9.1
-Cc: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-Subject: [[meta-networking][PATCH v2] tinyproxy: Add recipe
+	y190sm26589623wmy.15.2017.04.06.07.41.04
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Thu, 06 Apr 2017 07:41:04 -0700 (PDT)
+Date: Thu, 6 Apr 2017 16:06:14 +0200
+From: Oliver Graute <oliver.graute@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170406140614.GA17864@graute-opti>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <20170405133857.GA15126@graute-opti> <20170405184218.GD3301@jama>
+MIME-Version: 1.0
+In-Reply-To: <20170405184218.GD3301@jama>
+User-Agent: Mutt/1.5.21 (2010-09-15)
+Subject: Re: [meta-networking] [PATCH v2] nfacct: added nfacct recipe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,88 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 13:42:47 -0000
+X-List-Received-Date: Thu, 06 Apr 2017 14:41:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
----
-version 2:
-- create user and group for tinyproxy
-- only install the service if systemd is present in DISTRO_FEATURE
-- add dependency on asciidoc-native
- .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
- .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 41 ++++++++++++++++++++++
- 2 files changed, 55 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+On 05/04/17, Martin Jansa wrote:
+> On Wed, Apr 05, 2017 at 03:38:57PM +0200, Oliver Graute wrote:
+> > this patch adds nfacct to meta-networking
+> 
+> nfacct -> ${BPN}
+> nfacct-1.0.2 -> ${BP}
+> 
+> > +S = "${WORKDIR}/nfacct-${PV}"
+> 
+> This is the default, drop.
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-new file mode 100644
-index 0000000..ea079f9
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Tinyproxy, Lightweight http(s) proxy daemon
-+RequiresMountsFor=/var
-+
-+[Service]
-+Group=tinyproxy
-+ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
-+ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
-+ExecStart=/usr/sbin/tinyproxy -d
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-new file mode 100644
-index 0000000..ef2a2d8
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-@@ -0,0 +1,41 @@
-+SUMMARY = "Lightweight http(s) proxy daemon"
-+HOMEPAGE = "https://tinyproxy.github.io/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz \
-+		   file://tinyproxy.service"
-+
-+SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
-+SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
-+
-+DEPENDS = "asciidoc-native"
-+
-+EXTRA_OECONF += " \
-+	--enable-filter \
-+	--enable-transparent \
-+	--disable-regexcheck \
-+	--enable-reverse \
-+	--enable-upstream \
-+	--enable-xtinyproxy \
-+	"
-+
-+inherit autotools systemd useradd
-+
-+#User specific
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "nobody"
-+GROUPADD_PARAM_${PN} = "--system tinyproxy"
-+
-+SYSTEMD_PACKAGES += "${BPN}"
-+SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "enable"
-+
-+do_install_append() {
-+	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+		install -d ${D}${systemd_system_unitdir}
-+		install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unitdir}
-+	fi
-+}
-+
-+FILES_${PN} =+ "${systemd_system_unitdir}/tinyproxy.service"
--- 
-1.9.1
+just saw that first version of this patch was already applied. I'll send
+a patch to fix the remarks.
 
+Best Regards,
+
+Oliver
 
