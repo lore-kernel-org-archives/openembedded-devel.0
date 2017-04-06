@@ -1,30 +1,27 @@
-Return-Path: <jonathan.yong@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B57F77A2E
+Return-Path: <jaap.dejong@nedap.com>
+Received: from smtp4.nedap.com (smtp4.nedap.com [213.160.213.85])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BB6377C17
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 08:41:32 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple;
-	d=intel.com; i=@intel.com; q=dns/txt; s=intel;
-	t=1491468094; x=1523004094;
-	h=from:to:cc:subject:date:message-id:in-reply-to: references;
-	bh=9A+ZF6LfKNH4xP9Q7WjZYYqUR6o1O+W2bGp4mO5+Law=;
-	b=vRKH4t3EFJ9LTRBF5FwRw52GhQDewOSa1pQfyVpqF0sraJ3OyFdAyik7
-	esCPq0U6Y1yXiVLs2LnCfnJ3y3lEOw==;
-Received: from orsmga003.jf.intel.com ([10.7.209.27])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	06 Apr 2017 01:41:34 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.37,283,1488873600"; d="scan'208";a="952517265"
-Received: from vanguard-01.png.intel.com ([10.221.118.162])
-	by orsmga003.jf.intel.com with ESMTP; 06 Apr 2017 01:41:32 -0700
-From: "Yong, Jonathan" <jonathan.yong@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Apr 2017 08:41:29 +0000
-Message-Id: <20170406084129.20466-2-jonathan.yong@intel.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20170406084129.20466-1-jonathan.yong@intel.com>
-References: <20170406084129.20466-1-jonathan.yong@intel.com>
-Subject: [PATCH v2] f2fs-tools: Update to Version 1.8.0
+	Thu,  6 Apr 2017 11:06:08 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=nedap.com; i=@nedap.com; q=dns/txt; s=20161201;
+	t=1491476771; x=1523012771;
+	h=to:from:subject:message-id:date:mime-version;
+	bh=8VOIIhJq9YsTDGJ0ppD5xXy3vv36hmYskp/LGwyniRg=;
+	b=WjTFtTXYmz692sph/e1iZSB4QM8Zw9+CbfPbbd2O9u0pIYKtvqn4KIMu
+	vs3I5h+hvl7dyaQLweaxmQKiX6Unv1G/6XIIS+aVmb3VEfbIFhhIwJ71E
+	ZkTLS69HbcyTPH2RNaa9M4REQlHBtaH5cjbVQ2SrH96E+AHub/6deuurB s=;
+Received: from nvc2354.nedap.local (HELO [10.2.16.86]) ([10.2.16.86])
+	by smtp4.nedap.com with ESMTP; 06 Apr 2017 13:06:08 +0200
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+From: Jaap de Jong <jaap.dejong@nedap.com>
+Message-ID: <0b83cb90-55b2-ae9a-7fa4-710ac669688e@nedap.com>
+Date: Thu, 6 Apr 2017 13:06:07 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] uftp: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,80 +34,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 08:41:32 -0000
+X-List-Received-Date: Thu, 06 Apr 2017 11:06:09 -0000
+X-Groupsio-MsgNum: 66146
+Content-Type: multipart/mixed; boundary="------------51D109EC6C7CFDE9EEAAD1C4"
 
-Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
----
- .../0002-Fix-mkfs-out-of-tree-builds.patch         | 37 ++++++++++++++++++++++
- .../{f2fs-tools_1.4.0.bb => f2fs-tools_1.8.0.bb}   |  5 +--
- 2 files changed, 40 insertions(+), 2 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
- rename meta-filesystems/recipes-utils/f2fs-tools/{f2fs-tools_1.4.0.bb => f2fs-tools_1.8.0.bb} (81%)
-
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
-new file mode 100644
-index 0000000..9e561cb
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools/0002-Fix-mkfs-out-of-tree-builds.patch
-@@ -0,0 +1,37 @@
-+From 0731eefd389e01419f78a115e1363ed0c28cfd3a Mon Sep 17 00:00:00 2001
-+From: "Yong, Jonathan" <jonathan.yong@intel.com>
-+Date: Thu, 30 Mar 2017 08:03:37 +0000
-+Subject: [PATCH] Fix mkfs out of tree builds
-+
-+Libraries are built in builddir, not srcdir, fix Makefile.am
-+accordingly.
-+
-+Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
-+Signed-off-by: Jaegeuk Kim <jaegeuk@kernel.org>
-+
-+The patch was imported from the f2fs-tools repo
-+(git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git)
-+commit ID 0731eefd389e01419f78a115e1363ed0c28cfd3a.
-+
-+Upstream-Status: Accepted, expected to be included in 1.9.0.
-+
-+Signed-off-by: Yong, Jonathan <jonathan.yong@intel.com>
-+
-+---
-+ mkfs/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/mkfs/Makefile.am b/mkfs/Makefile.am
-+index 162a0cf..0ea8b49 100644
-+--- a/mkfs/Makefile.am
-++++ b/mkfs/Makefile.am
-+@@ -10,5 +10,5 @@ lib_LTLIBRARIES = libf2fs_format.la
-+ libf2fs_format_la_SOURCES = f2fs_format_main.c f2fs_format.c f2fs_format_utils.c
-+ libf2fs_format_la_CFLAGS = -DWITH_BLKDISCARD
-+ libf2fs_format_la_CPPFLAGS = -I$(top_srcdir)/include
-+-libf2fs_format_la_LDFLAGS = -luuid -L$(top_srcdir)/lib -lf2fs \
-++libf2fs_format_la_LDFLAGS = -luuid -L$(top_builddir)/lib -lf2fs \
-+ 	-version-info $(FMT_CURRENT):$(FMT_REVISION):$(FMT_AGE)
-+-- 
-+2.10.2
-+
-diff --git a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.4.0.bb b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
-similarity index 81%
-rename from meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.4.0.bb
-rename to meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
-index 1a558e7..691cb6e 100644
---- a/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.4.0.bb
-+++ b/meta-filesystems/recipes-utils/f2fs-tools/f2fs-tools_1.8.0.bb
-@@ -7,9 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=362b4b2594cd362b874a97718faa51d3"
- # to provide libuuid
- DEPENDS = "util-linux"
- 
--SRCREV = "baac4b4e6f41ceb02511da49dd3707674f3fea21"
-+SRCREV = "1e7aedf99b85d16f94d1d8ad2fcf846403bb2174"
- SRC_URI = "git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.git \
--    file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch"
-+    file://0001-Remove-AC_CHECK_FILE-for-cross-compilation.patch \
-+    file://0002-Fix-mkfs-out-of-tree-builds.patch"
- S = "${WORKDIR}/git"
- 
- inherit pkgconfig autotools
--- 
-2.10.2
+--------------51D109EC6C7CFDE9EEAAD1C4
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
+
+--------------51D109EC6C7CFDE9EEAAD1C4
+Content-Type: text/plain; charset=UTF-8;
+ name="0001-uftp-Add-recipe.patch.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="0001-uftp-Add-recipe.patch.txt"
+
+RnJvbSAxYTAxMWUxZjFjMmNhNjA3NDkwMTgzOTQxMzBhNzg2MGFlN2VkODE2IE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBKYWFwIGRlIEpvbmcgPGphYXAuZGVqb25nQG5lZGFwLmNvbT4K
+RGF0ZTogVGh1LCA2IEFwciAyMDE3IDEyOjE3OjA5ICswMjAwClN1YmplY3Q6IFttZXRhLW5ldHdv
+cmtpbmddW1BBVENIXSB1ZnRwOiBBZGQgcmVjaXBlClRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZwoKLS0tCiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0
+L3VmdHAvdWZ0cF80LjkuMy5iYiB8IDE2ICsrKysrKysrKysrKysrKysKIDEgZmlsZSBjaGFuZ2Vk
+LCAxNiBpbnNlcnRpb25zKCspCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1uZXR3b3JraW5nL3Jl
+Y2lwZXMtc3VwcG9ydC91ZnRwL3VmdHBfNC45LjMuYmIKCmRpZmYgLS1naXQgYS9tZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1zdXBwb3J0L3VmdHAvdWZ0cF80LjkuMy5iYiBiL21ldGEtbmV0d29ya2lu
+Zy9yZWNpcGVzLXN1cHBvcnQvdWZ0cC91ZnRwXzQuOS4zLmJiCm5ldyBmaWxlIG1vZGUgMTAwNjQ0
+CmluZGV4IDAwMDAwMDAuLjExNjZmOWEKLS0tIC9kZXYvbnVsbAorKysgYi9tZXRhLW5ldHdvcmtp
+bmcvcmVjaXBlcy1zdXBwb3J0L3VmdHAvdWZ0cF80LjkuMy5iYgpAQCAtMCwwICsxLDE2IEBACitE
+RVNDUklQVElPTiA9ICJFbmNyeXB0ZWQgVURQIGJhc2VkIEZUUCB3aXRoIG11bHRpY2FzdCIKK0hP
+TUVQQUdFID0gImh0dHBzOi8vc291cmNlZm9yZ2UubmV0L3Byb2plY3RzL3VmdHAtbXVsdGljYXN0
+IgorU0VDVElPTiA9ICJsaWJzL25ldHdvcmsiCisKK0xJQ0VOU0UgPSAiR1BMdjMiCitMSUNfRklM
+RVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTlNFLnR4dDttZDU9ZDMyMjM5YmNiNjczNDYzYWI4NzRl
+ODBkNDdmYWU1MDQiCisKK1NSQ19VUkkgPSAiJHtTT1VSQ0VGT1JHRV9NSVJST1J9L3VmdHAtbXVs
+dGljYXN0L3NvdXJjZS10YXIvdWZ0cC0ke1BWfS50YXIuZ3oiCitTUkNfVVJJW21kNXN1bV0gPSAi
+MjMxZDZiYTc4MjBkODlhNzEyZmU3ZDcyN2FiMGY4ZTYiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAi
+OWU5MjE1YWYwMzE1MjU3YzZjYzRmNDBmYmM2MTYxMDU3ZTg2MWJlMWZmZjEwYTM4YTU1NjRmNjk5
+ZTk5Yzc4ZiIKKworREVQRU5EUyA9ICJvcGVuc3NsIgorCitkb19pbnN0YWxsICgpIHsKKwlvZV9y
+dW5tYWtlIGluc3RhbGwgREVTVERJUj0ke0R9Cit9Ci0tIAoyLjcuNAoK
+
+--------------51D109EC6C7CFDE9EEAAD1C4--
