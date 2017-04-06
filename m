@@ -1,48 +1,46 @@
 Return-Path: <andrej.rode@ettus.com>
-Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 575E077ACB
+Received: from mail-pg0-f44.google.com (mail-pg0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 199AC71A3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 01:05:45 +0000 (UTC)
-Received: by mail-pg0-f52.google.com with SMTP id x125so20090225pgb.0
+	Thu,  6 Apr 2017 01:12:39 +0000 (UTC)
+Received: by mail-pg0-f44.google.com with SMTP id g2so20034374pge.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 Apr 2017 18:05:46 -0700 (PDT)
+	Wed, 05 Apr 2017 18:12:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=AvXAgcJL/79I/a/xXlQFtYyTu5rJr2UxXuREsioLE4E=;
-	b=xcDg1MW4uSY+iIl5lLPQwPmjEHxLa1wubzvby9JecQHheeGlBkYWDMsU6zhiNQg4rF
-	p1uW6FFSjIxROVzXdb1j/7l+q4iGueX9hoKvj3WcMdN0ZPWddm9zqp+YvdCF5mTZLtV/
-	mp/UfWaPeZ5pcN16XC0TsBtpwWOR8K7+wIJTQ8AE0Y04AzHrO0tnJIMWZxXvcAVBEyvI
-	Yn2SDui5k0VDqS6X+/SHLGyrKQ3AUPeNdptia9GGO/iVuNk4lgPQD7LO9ihRpYUxZn8F
-	5ZW7QG1hMyVU8a732rF3L/bhNDzU3uqrrvs+TObYTkN4J0NMmHEVyn97tzmkqFtHPv6R
-	thvQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=3HiTQo6H9vtIbFMxgoKipMplKaZW2PU6IB0/D+Ea03o=;
+	b=XR5iRnN8XxHlvhiKKrOPuYZXym8oeRsWsddOZuwNOimTF7PCXFp+FSLxBRJPkqFILt
+	453ZSaDtqsO4DKqpnYR6Cm99zXLK7rLxZUbbtbbOC8tUPPar2TGyRrBuDTPatLeZlVmO
+	jU93Sqs5tbpxwrvTt2NbslTdFs4bc8kDyhmsKGFfng0/bvW9QXKBZwUhzQzAcyzx1wBS
+	QrPr6KMXL+stVDcUL8Zgf74VUzByjYRHFjki7fBhsCZKNMf35vHSrdyUAAVR8lRo3tl5
+	sLQTXyC/ZjpYzufQdtdbtfZC+W2+vngd+qAqrh5h3W8cE6Pd16Zhii3b4iTf6Aox6lO+
+	eW5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=AvXAgcJL/79I/a/xXlQFtYyTu5rJr2UxXuREsioLE4E=;
-	b=hY4DSbRhnkJA8iSPjRTZJWx8I0fVdD8oQBV+a/7qbeyGXLPFNrfS4Cugp38H8fM3PY
-	x5PFsmHXmr6W+K+aA9AYr0Lu8qn2Lskia0FnROA4fW1Y32s3t+6Hziq1qdspMMfIFJxw
-	d5sgnU7yKZj17ozaIEYSmrvmNK1e69g/4s7uLHbYLoHltOm9NZt0qvBNxi9fPEokfhfa
-	CvFel3kxUDzG+NrL/jMMf/nI9Ko92IeY0WaNv1I36P57+98UTqoDmsLYJTQmTfFcVA9b
-	DyseDupCFTq3zD7vuccmQzaA7aC0k9Q4JBmWHlKZ5rYCNVRgJEw7CETgjVYrIvhOoI8r
-	n6uQ==
-X-Gm-Message-State: AFeK/H32F2EhtKAj/FuMaDH3MokijpVXXldOEpf5EbOP4SIbQ0CiJ9rLy2XacYcYPUL1LcsI
-X-Received: by 10.98.89.139 with SMTP id k11mr32523945pfj.196.1491440746350;
-	Wed, 05 Apr 2017 18:05:46 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3HiTQo6H9vtIbFMxgoKipMplKaZW2PU6IB0/D+Ea03o=;
+	b=K0kC60Dt3mDaiKyGvfWqk3cY1MEi5+/Ml/D/aEqpS9QefAPKbbdtopoNoeOqkMDHbG
+	jiy7BVt02F7OdU97hxq3LDSIQ14ofb5fCKx/XvG34D5sck/xnCXn0q5R5bfV8xz/nG7G
+	/ztFtOn7eSFDQGdzdg8H+eTV2fM5dXr4wGlhFpq+y73tD9vpDu0oHG848zH8WpouJDNZ
+	uYiTdgcpq8O12Xuy0y6Z6dhwMvssPOfK5yB1IO331GP7YgStZ0YY0zLr4EKdtj53o8FP
+	2aa2Qn25NBBaHG45Bnx6YfpIOjHzWyPfWNIpWebR3TyclRBBe2AkSvigwSUy70dwVg/q
+	I1bA==
+X-Gm-Message-State: AFeK/H1Uhpvl+aM0gU/L82bZM25/gYwaowLbfcrG4R2vWYny3SjrWCaFwCtoEYDZxUYQ8/ad
+X-Received: by 10.99.127.29 with SMTP id a29mr33238341pgd.11.1491441160882;
+	Wed, 05 Apr 2017 18:12:40 -0700 (PDT)
 Received: from FlyingDragon.amer.corp.natinst.com
 	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id y65sm27094pfd.82.2017.04.05.18.05.45
+	by smtp.gmail.com with ESMTPSA id
+	b195sm33588pfb.106.2017.04.05.18.12.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 05 Apr 2017 18:05:45 -0700 (PDT)
+	Wed, 05 Apr 2017 18:12:40 -0700 (PDT)
 From: Andrej Rode <andrej.rode@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  5 Apr 2017 18:04:52 -0700
-Message-Id: <20170406010452.16529-2-andrej.rode@ettus.com>
+Date: Wed,  5 Apr 2017 18:12:25 -0700
+Message-Id: <20170406011225.25591-1-andrej.rode@ettus.com>
 X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20170406010452.16529-1-andrej.rode@ettus.com>
-References: <20170406010452.16529-1-andrej.rode@ettus.com>
-Subject: [meta-python][PATCH v2 2/2] python-mprpc: add new recipe
+Subject: [meta-python][PATCH] systemd-python: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 01:05:45 -0000
+X-List-Received-Date: Thu, 06 Apr 2017 01:12:40 -0000
 
-Add recipe for python-mprpc, a messagepack RPC library for python
+Adds new recipe for systemd-python, python bindings for libsystemd
 
 Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
 ---
- .../python-mprpc/python-mprpc_0.1.13.bb                     | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
+ meta-python/recipes-devtools/python/systemd-python_234.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/systemd-python_234.bb
 
-diff --git a/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb b/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
+diff --git a/meta-python/recipes-devtools/python/systemd-python_234.bb b/meta-python/recipes-devtools/python/systemd-python_234.bb
 new file mode 100644
-index 0000000..88f11b7
+index 0000000..4cfa629
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "A gevent based messagpack rpc library"
-+DESCRIPTION = "mprpc is a fast implementation of the messagepack rpc protocol for python. \
-+It is based on gevent for handling connections and enabling concurrent connections."
-+HOMEPAGE = "https://github.com/studio-ousia/mprpc"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
-+DEPENDS += "python-gevent"
-+RDEPENDS_${PN} += "python-gevent python-msgpack python-gsocketpool"
++++ b/meta-python/recipes-devtools/python/systemd-python_234.bb
+@@ -0,0 +1,11 @@
++SUMMARY = "Python interface for libsystemd"
++HOMEPAGE = "https://github.com/systemd/systemd-python"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
++DEPENDS += "systemd"
++RDEPENDS_${PN} += "systemd"
 +
-+SRC_URI[md5sum] = "449e6239eb5ff07b9cceb86e1ab0c2ee"
-+SRC_URI[sha256sum] = "5881cc7fbb8de814e2b4aa5958bfe147c5c301e46749190f0e6abf373cf56d82"
++SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
++SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
 +
 +inherit pypi setuptools
 -- 
