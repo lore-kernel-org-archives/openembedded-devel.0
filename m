@@ -1,53 +1,50 @@
 Return-Path: <oliver.graute@gmail.com>
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 33DF877A87
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id B619177A87
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 14:41:06 +0000 (UTC)
-Received: by mail-wr0-f172.google.com with SMTP id t20so65659878wra.1
+	Thu,  6 Apr 2017 14:41:09 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id w11so60307209wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Apr 2017 07:41:08 -0700 (PDT)
+	Thu, 06 Apr 2017 07:41:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ZU5KOaoW7MxBQ5iNOOtYRkOFm6GDQcQp8VSiyDtKbCk=;
-	b=TysgVL8WSQTu8vl4DaU73LKtVSQvFFPl/hUSk1z/m2qGmyPle6uBfMmjfhgO7oIuhX
-	/vKmjFgYgiJJ7oZNFOEZKFr8trZSqZATgFiQPKXxfTGpvRt1E1xKOd3UCQYkzk4K/Zwm
-	TBVp1E20sAyTjhB0xUx2XBVtYvHZYiGN9pIF1SVpt8oSmXaHMYqfF0hTFzZ9QNBSBUSH
-	+ijdSwJZeJYbP4qyq9CESGtnI19oA89m0R85S1FnAEnkiinQ/+LbWnJ0hXW+gMOzZ3Wg
-	TdsBPeZCLYTfu0B0PPuHqIkGAxuRnKfROLqhtrTxnJggldMxJn5G86o95pid6ubFhwmQ
-	yaDw==
+	h=from:date:to:cc:subject:message-id:mail-followup-to:mime-version
+	:content-disposition:user-agent;
+	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
+	b=tgCzg3jBQGvizjtfHa9gSKKaCJ8zLA7PC/wN8/0827Wm1/RFVNYv16Jlu+YNa3Xuud
+	VhgpIbqQ6H/SZxQT+QAR2yzBaRwmdfS3DwQiNXnnO9yXKdCS8DND/Yb2a/LPp3h+npCu
+	GBSBPU00ypbUDd51YHRVYc51DLWA31dE7piw3rpcQvbNr7PptpfSbVIB0cmAaNlSkvMX
+	h3dEYMG75zn2UC1gQQy1K4tun/015xbN/AwbyYB8HHLKsFH4C1cl7YImdh5ZylJ7yKPP
+	+IliPk4KOCbvu6hLLE/vmcG4Eq2SLE4+/4+4nrB7A5x0WWUNeyoB7V2vqWyhDlTDQBsu
+	GtgQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=ZU5KOaoW7MxBQ5iNOOtYRkOFm6GDQcQp8VSiyDtKbCk=;
-	b=F21DIHXgerHodSliYTmRKFpE+ROZw3/V4yE6tr9O/Ap94iW8FgfRT8d3Xp2lmJ39wS
-	ZWbKpr6wkYA/zrPN9WiyN6ew9IFKOQPRWBXS/aZ6Q8Jkfk+fRsqCH+oF7kAFpcL6nsNb
-	Fi50DPlOkDGHxtFyzwIwRB0DXA/5QBrxXT0bGpBw7FjenVO/fIEUN53QjZjJyKPkfOSi
-	YKr592jc581jG7qD0m8CEgKpHnJdWrlXJjaWiz2xmiTuiaD6SHJwOoM45M539MG3NqjV
-	EvWSoaS/wR6vTo5N4IgSYYh7ynURPvgbiApRqjhSrcJ4Z91J9y7TOdHTxNULb4pwjmwL
-	uuYw==
-X-Gm-Message-State: AFeK/H3iGrdlyNUo1fLjvXo2lMabREB4Wq5CN6DwxHQ0kGbs5gOslgpJg3iw6Zl2a5BDow==
-X-Received: by 10.223.173.23 with SMTP id p23mr3668460wrc.116.1491489667144;
-	Thu, 06 Apr 2017 07:41:07 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:cc:subject:message-id
+	:mail-followup-to:mime-version:content-disposition:user-agent;
+	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
+	b=R8JQKy7bOeDEwnuTHs70yv+w+cq5H0e/C7wVi7Tsf3Nft4uUGJ/4KM+F724LRJHgZ4
+	ovlbR7BTH4bgOHvtSldPUxn32t7FlwrR61TWpcl1byWQtO9zHmv4KSQ9heXJupC2A6FY
+	4KvA71ize2Lazx/0ITyG6wBExvIMeFaozDP4lSAsQ/U4X/U7ZY/sfBBiXOuoFZR0nGsG
+	3oCujNHRtH3OvCrRpvUV14QzYIhk6ZkPHDPHB5jJrXQjBklFyFdUX+0UPj7piS48UzQ3
+	pN6LtwYFNmIz/MNp3+SNYSd1H6BqR24UHvIC/6A9na0+rb8Ff0Juq4aCAnIceZSg4L6M
+	fI0A==
+X-Gm-Message-State: AFeK/H2AfxK0Q8d+O9lDqJLQxFJDWzG6ietzj6qJjJP5nrn8P72czsYHKhTBhenPJays2g==
+X-Received: by 10.223.151.193 with SMTP id t1mr32341421wrb.149.1491489669073; 
+	Thu, 06 Apr 2017 07:41:09 -0700 (PDT)
 Received: from localhost (x55b0f93f.dyn.telefonica.de. [85.176.249.63])
-	by smtp.gmail.com with ESMTPSA id
-	b66sm2401451wrd.29.2017.04.06.07.41.06
-	for <openembedded-devel@lists.openembedded.org>
+	by smtp.gmail.com with ESMTPSA id p7sm2392946wrc.19.2017.04.06.07.41.08
 	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Thu, 06 Apr 2017 07:41:06 -0700 (PDT)
-Date: Thu, 6 Apr 2017 16:17:30 +0200
+	Thu, 06 Apr 2017 07:41:08 -0700 (PDT)
 From: Oliver Graute <oliver.graute@gmail.com>
+X-Google-Original-From: Oliver Graute <oliver.graute@neuhaus.de>
+Date: Thu, 6 Apr 2017 16:18:36 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170406141730.GB17864@graute-opti>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <20170405134010.GA18688@graute-opti>
-	<CAMKF1sq7vX1rwFL062BB_8UXeCxzQcdyr=PsZsUvEsfwqs-QjA@mail.gmail.com>
+Message-ID: <20170406141836.GA22533@graute-opti>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sq7vX1rwFL062BB_8UXeCxzQcdyr=PsZsUvEsfwqs-QjA@mail.gmail.com>
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: Re: [meta-networking] [PATCH] unbound: this patch adds unbound to meta-networking
+Subject: [PATCH] nfacct: fixed SRC_URI and dropped workdir statement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,105 +57,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 14:41:06 -0000
+X-List-Received-Date: Thu, 06 Apr 2017 14:41:10 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On 05/04/17, Khem Raj wrote:
-> On Wed, Apr 5, 2017 at 6:40 AM, Oliver Graute <oliver.graute@gmail.com> wrote:
-> > +HOMEPAGE = "https://www.unbound.net/"
-> > +SECTION = "net"
-> > +LICENSE = "BSD"
-> 
-> Can you see which clause it is ? it will make it more clear
+Signed-off-by: Oliver Graute <oliver.graute@neuhaus.de>
+---
+ meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-is this BSD-4-Clause?
-https://unbound.nlnetlabs.nl/svn/trunk/LICENSE
+diff --git a/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
+index d92f7c0..8177ebc 100644
+--- a/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
++++ b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://netfilter.org/projects/nfacct/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+-SRC_URI = "ftp://ftp.netfilter.org/pub/nfacct/nfacct-1.0.2.tar.bz2"
++SRC_URI = "ftp://ftp.netfilter.org/pub/${BPN}/${BP}.tar.bz2"
+ 
+ SRC_URI[md5sum] = "94faafdaaed85ca9220c5692be8a408e"
+ SRC_URI[sha256sum] = "ecff2218754be318bce3c3a5d1775bab93bf4168b2c4aac465785de5655fbd69"
+@@ -11,7 +11,5 @@ DEPENDS = "libnfnetlink libmnl libnetfilter-acct"
+ 
+ EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
+ 
+-S = "${WORKDIR}/nfacct-${PV}"
+-
+ inherit autotools pkgconfig
+ 
+-- 
+1.9.1
 
-> > +do_install () {
-> > +        install -d ${D}${bindir}
-> > +        install -d ${D}${libdir}
-> > +        install -d ${D}${sysconfdir}
-> > +        install -m 644 -D ${S}/libunbound/unbound.h ${D}${includedir}/unbound.h
-> > +        install -m 644 -D ${S}/doc/example.conf.in ${D}${sysconfdir}/unbound/unbound.conf
-> > +        install -m 644 -D ${S}/contrib/unbound.service.in ${D}${libdir}/systemd/unbound.service
-> > +        install -m 755 unbound ${D}${bindir}
-> > +        install -m 755 unbound-anchor ${D}${bindir}
-> > +        install -m 755 unbound-checkconf ${D}${bindir}
-> > +        install -m 755 unbound ${D}${bindir}
-> > +        install -m 755 unbound-control-setup ${D}${bindir}
-> > +        install -m 755 unbound-host ${D}${bindir}
-> > +        install -m 755 ${WORKDIR}/build/.libs/libunbound.so* ${D}${libdir}
-> > +}
-> 
-> do this in a do_install_append()
-
-this breaks my packaging. /usr/local/share and /usr/local/lib are not my
-desired dirs. I prefer /usr/share and /usr/lib. I also don't need the
-man pages. How do I put them into extra packacke?
-Some clue to fix this the righty way?
-
-ERROR: QA Issue: unbound: Files/directories were installed but not shipped in any package:
-  /usr/local
-  /usr/local/share
-  /usr/local/lib
-  /usr/local/include
-  /usr/local/share/man
-  /usr/local/share/man/man8
-  /usr/local/share/man/man3
-  /usr/local/share/man/man5
-  /usr/local/share/man/man1
-  /usr/local/share/man/man8/unbound-control-setup.8
-  /usr/local/share/man/man8/unbound-checkconf.8
-  /usr/local/share/man/man8/unbound-control.8
-  /usr/local/share/man/man8/unbound-anchor.8
-  /usr/local/share/man/man8/unbound.8
-  /usr/local/share/man/man3/ub_strerror.3
-  /usr/local/share/man/man3/ub_ctx_set_fwd.3
-  /usr/local/share/man/man3/ub_wait.3
-  /usr/local/share/man/man3/ub_result.3
-  /usr/local/share/man/man3/ub_resolve.3
-  /usr/local/share/man/man3/ub_ctx_create.3
-  /usr/local/share/man/man3/ub_ctx_hosts.3
-  /usr/local/share/man/man3/ub_ctx_data_add.3
-  /usr/local/share/man/man3/ub_ctx_add_ta.3
-  /usr/local/share/man/man3/ub_poll.3
-  /usr/local/share/man/man3/ub_ctx_async.3
-  /usr/local/share/man/man3/ub_ctx_debugout.3
-  /usr/local/share/man/man3/ub_ctx.3
-  /usr/local/share/man/man3/ub_resolve_free.3
-  /usr/local/share/man/man3/ub_ctx_set_option.3
-  /usr/local/share/man/man3/libunbound.3
-  /usr/local/share/man/man3/ub_ctx_add_ta_file.3
-  /usr/local/share/man/man3/ub_ctx_get_option.3
-  /usr/local/share/man/man3/ub_resolve_async.3
-  /usr/local/share/man/man3/ub_ctx_zone_remove.3
-  /usr/local/share/man/man3/ub_ctx_print_local_zones.3
-  /usr/local/share/man/man3/ub_ctx_zone_add.3
-  /usr/local/share/man/man3/ub_ctx_resolvconf.3
-  /usr/local/share/man/man3/ub_ctx_config.3
-  /usr/local/share/man/man3/ub_cancel.3
-  /usr/local/share/man/man3/ub_ctx_delete.3
-  /usr/local/share/man/man3/ub_ctx_debuglevel.3
-  /usr/local/share/man/man3/ub_ctx_data_remove.3
-  /usr/local/share/man/man3/ub_fd.3
-  /usr/local/share/man/man3/ub_ctx_trustedkeys.3
-  /usr/local/share/man/man3/ub_process.3
-  /usr/local/share/man/man5/unbound.conf.5
-  /usr/local/share/man/man1/unbound-host.1
-  /usr/local/lib/libunbound.la
-  /usr/local/lib/libunbound.a
-  /usr/local/lib/libunbound.so
-  /usr/local/lib/libunbound.so.2
-  /usr/local/lib/libunbound.so.2.4.4
-  /usr/local/lib/.debug
-  /usr/local/lib/.debug/libunbound.so.2.4.4
-  /usr/local/include/unbound.h
-Please set FILES such that these items are packaged. Alternatively if they are unneeded, avoid installing them or delete them within do_install.
-unbound: 55 installed and not shipped files. [installed-vs-shipped]
-
-
-Best regards,
-
-Oliver
 
