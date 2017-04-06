@@ -1,50 +1,50 @@
 Return-Path: <oliver.graute@gmail.com>
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
-	[209.85.128.178])
-	by mail.openembedded.org (Postfix) with ESMTP id B619177A87
+Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
+	[209.85.128.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 0153571A8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 14:41:09 +0000 (UTC)
-Received: by mail-wr0-f178.google.com with SMTP id w11so60307209wrc.3
+	Thu,  6 Apr 2017 14:46:02 +0000 (UTC)
+Received: by mail-wr0-f171.google.com with SMTP id t20so65897321wra.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Apr 2017 07:41:11 -0700 (PDT)
+	Thu, 06 Apr 2017 07:46:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:date:to:cc:subject:message-id:mail-followup-to:mime-version
 	:content-disposition:user-agent;
 	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
-	b=tgCzg3jBQGvizjtfHa9gSKKaCJ8zLA7PC/wN8/0827Wm1/RFVNYv16Jlu+YNa3Xuud
-	VhgpIbqQ6H/SZxQT+QAR2yzBaRwmdfS3DwQiNXnnO9yXKdCS8DND/Yb2a/LPp3h+npCu
-	GBSBPU00ypbUDd51YHRVYc51DLWA31dE7piw3rpcQvbNr7PptpfSbVIB0cmAaNlSkvMX
-	h3dEYMG75zn2UC1gQQy1K4tun/015xbN/AwbyYB8HHLKsFH4C1cl7YImdh5ZylJ7yKPP
-	+IliPk4KOCbvu6hLLE/vmcG4Eq2SLE4+/4+4nrB7A5x0WWUNeyoB7V2vqWyhDlTDQBsu
-	GtgQ==
+	b=HivGqoiZqg0Tb4d5UDPkAIC0DgI5LQZA1IPc+OcXQQVfVYjM9z6ltWInhxH65EFWcC
+	ZHMxl+tO4V+zj0bFchyb4oClhgRXJuYnIuXs5qzqx0ceHvexkUW1gV9ePfFsWsavQ1DH
+	6diHFoC0h1CJ2u3vz3M3pr4c7ADS73a5bLZjHENfIyaKSe9QXwCTq2iIo5GbSXo5UX2F
+	NvrkAKitcOquvhchLXwjstegCpCyQylosQfkGo2ZGvsBdSPbJHv40MQFIyRJyZFdmQSK
+	32M6LiTzy4+qIEfvkUEukx2pn/jRUslqGR4g/9U4bdaxCyI2Day9+xa/AkmvcAHGEbYv
+	9Vrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id
 	:mail-followup-to:mime-version:content-disposition:user-agent;
 	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
-	b=R8JQKy7bOeDEwnuTHs70yv+w+cq5H0e/C7wVi7Tsf3Nft4uUGJ/4KM+F724LRJHgZ4
-	ovlbR7BTH4bgOHvtSldPUxn32t7FlwrR61TWpcl1byWQtO9zHmv4KSQ9heXJupC2A6FY
-	4KvA71ize2Lazx/0ITyG6wBExvIMeFaozDP4lSAsQ/U4X/U7ZY/sfBBiXOuoFZR0nGsG
-	3oCujNHRtH3OvCrRpvUV14QzYIhk6ZkPHDPHB5jJrXQjBklFyFdUX+0UPj7piS48UzQ3
-	pN6LtwYFNmIz/MNp3+SNYSd1H6BqR24UHvIC/6A9na0+rb8Ff0Juq4aCAnIceZSg4L6M
-	fI0A==
-X-Gm-Message-State: AFeK/H2AfxK0Q8d+O9lDqJLQxFJDWzG6ietzj6qJjJP5nrn8P72czsYHKhTBhenPJays2g==
-X-Received: by 10.223.151.193 with SMTP id t1mr32341421wrb.149.1491489669073; 
-	Thu, 06 Apr 2017 07:41:09 -0700 (PDT)
+	b=KH0VG/eb10fROuKwg8pzEg/fAk5C4mdXoRCTOxOVEZ5JJnax0SJQu6IaZ8z0dwxAEQ
+	9GXz/BPWW/GPCzEs4puoTs8HlBwrcofSYoQZ9sefhq/Zsub0UdMXrssULmFlCZkni56b
+	NkIVs8KD0j1E9cnksQ7fRSaFF3XiqGSvF5xDWGML/e9wEsOflPe76JQSdDdAydVr+biZ
+	gE+HIdT2JtBo7k1uiitSLgwu1V6ho6qF2rBXP4at7ss61OAyD6C5lJTZaPSuAz6HGBYz
+	HpmN7O0boeM5Kyk66az4D3YLCy37B+iMjMnFQlWxthaGMnJvzQo9xxkVz402oLkVP1v/
+	4KDQ==
+X-Gm-Message-State: AFeK/H3EkO+3y3q0TQ6v5tOAFBF1e1vJPVAGhDL4RgGf3QSvyTyL6tc9/yNmzMTiqWCkqQ==
+X-Received: by 10.223.183.29 with SMTP id l29mr32631782wre.42.1491489963284;
+	Thu, 06 Apr 2017 07:46:03 -0700 (PDT)
 Received: from localhost (x55b0f93f.dyn.telefonica.de. [85.176.249.63])
-	by smtp.gmail.com with ESMTPSA id p7sm2392946wrc.19.2017.04.06.07.41.08
+	by smtp.gmail.com with ESMTPSA id h20sm94470wmd.29.2017.04.06.07.46.02
 	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Thu, 06 Apr 2017 07:41:08 -0700 (PDT)
+	Thu, 06 Apr 2017 07:46:02 -0700 (PDT)
 From: Oliver Graute <oliver.graute@gmail.com>
 X-Google-Original-From: Oliver Graute <oliver.graute@neuhaus.de>
-Date: Thu, 6 Apr 2017 16:18:36 +0200
+Date: Thu, 6 Apr 2017 16:44:51 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170406141836.GA22533@graute-opti>
+Message-ID: <20170406144451.GA6861@graute-opti>
 Mail-Followup-To: openembedded-devel@lists.openembedded.org,
 	joe_macdonald@mentor.com
 MIME-Version: 1.0
 User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [PATCH] nfacct: fixed SRC_URI and dropped workdir statement
+Subject: [meta-networking] [PATCH v2] nfacct: fixed SRC_URI and dropped workdir statement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,7 +57,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 14:41:10 -0000
+X-List-Received-Date: Thu, 06 Apr 2017 14:46:03 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
