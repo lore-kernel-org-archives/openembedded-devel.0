@@ -1,50 +1,28 @@
-Return-Path: <oliver.graute@gmail.com>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 0153571A8E
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id BDD2877CD8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 14:46:02 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id t20so65897321wra.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Apr 2017 07:46:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:mail-followup-to:mime-version
-	:content-disposition:user-agent;
-	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
-	b=HivGqoiZqg0Tb4d5UDPkAIC0DgI5LQZA1IPc+OcXQQVfVYjM9z6ltWInhxH65EFWcC
-	ZHMxl+tO4V+zj0bFchyb4oClhgRXJuYnIuXs5qzqx0ceHvexkUW1gV9ePfFsWsavQ1DH
-	6diHFoC0h1CJ2u3vz3M3pr4c7ADS73a5bLZjHENfIyaKSe9QXwCTq2iIo5GbSXo5UX2F
-	NvrkAKitcOquvhchLXwjstegCpCyQylosQfkGo2ZGvsBdSPbJHv40MQFIyRJyZFdmQSK
-	32M6LiTzy4+qIEfvkUEukx2pn/jRUslqGR4g/9U4bdaxCyI2Day9+xa/AkmvcAHGEbYv
-	9Vrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id
-	:mail-followup-to:mime-version:content-disposition:user-agent;
-	bh=+qpa2MzeDftiNIAHoNCer0zeDVNqJC7ZOENGiNPJtKA=;
-	b=KH0VG/eb10fROuKwg8pzEg/fAk5C4mdXoRCTOxOVEZ5JJnax0SJQu6IaZ8z0dwxAEQ
-	9GXz/BPWW/GPCzEs4puoTs8HlBwrcofSYoQZ9sefhq/Zsub0UdMXrssULmFlCZkni56b
-	NkIVs8KD0j1E9cnksQ7fRSaFF3XiqGSvF5xDWGML/e9wEsOflPe76JQSdDdAydVr+biZ
-	gE+HIdT2JtBo7k1uiitSLgwu1V6ho6qF2rBXP4at7ss61OAyD6C5lJTZaPSuAz6HGBYz
-	HpmN7O0boeM5Kyk66az4D3YLCy37B+iMjMnFQlWxthaGMnJvzQo9xxkVz402oLkVP1v/
-	4KDQ==
-X-Gm-Message-State: AFeK/H3EkO+3y3q0TQ6v5tOAFBF1e1vJPVAGhDL4RgGf3QSvyTyL6tc9/yNmzMTiqWCkqQ==
-X-Received: by 10.223.183.29 with SMTP id l29mr32631782wre.42.1491489963284;
-	Thu, 06 Apr 2017 07:46:03 -0700 (PDT)
-Received: from localhost (x55b0f93f.dyn.telefonica.de. [85.176.249.63])
-	by smtp.gmail.com with ESMTPSA id h20sm94470wmd.29.2017.04.06.07.46.02
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Thu, 06 Apr 2017 07:46:02 -0700 (PDT)
-From: Oliver Graute <oliver.graute@gmail.com>
-X-Google-Original-From: Oliver Graute <oliver.graute@neuhaus.de>
-Date: Thu, 6 Apr 2017 16:44:51 +0200
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170406144451.GA6861@graute-opti>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org,
-	joe_macdonald@mentor.com
+	Thu,  6 Apr 2017 15:08:32 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id D0F8E5C13C6;
+	Thu,  6 Apr 2017 17:08:23 +0200 (CEST)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Subject: [meta-networking] [PATCH v2] nfacct: fixed SRC_URI and dropped workdir statement
+Date: Thu, 06 Apr 2017 08:08:19 -0700
+From: Stefan Agner <stefan@agner.ch>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
+References: <1491165189-7839-1-git-send-email-stefan@agner.ch>
+	<CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
+Message-ID: <0f0cd82fa069c703f185c781e9b7bcc3@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.1.3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1491491303; bh=3zFa+8WH+5Pq4HJlSGGn+GY56804aVcaqSr/pUdvIJA=;
+	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
+	b=a1m10iluoNG27BCo+aSuAihVfrnGzUfA7VlfbWD4Gzopy/0W3Dr+sbShH/7EVazWWEXVdfS3L7omfYhiNVnQn57rvcwGEgt+WGSZGHf1sy9O4g3XQ1S6AiVQadTwASiT5Fklp7vxrEaFqePxNE31y79aXys2PjzWqw2lL7r2AUY=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,37 +35,160 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 14:46:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 Apr 2017 15:08:33 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Oliver Graute <oliver.graute@neuhaus.de>
----
- meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+ 
 
-diff --git a/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
-index d92f7c0..8177ebc 100644
---- a/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
-+++ b/meta-networking/recipes-filter/nfacct/nfacct_1.0.2.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://netfilter.org/projects/nfacct/"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- 
--SRC_URI = "ftp://ftp.netfilter.org/pub/nfacct/nfacct-1.0.2.tar.bz2"
-+SRC_URI = "ftp://ftp.netfilter.org/pub/${BPN}/${BP}.tar.bz2"
- 
- SRC_URI[md5sum] = "94faafdaaed85ca9220c5692be8a408e"
- SRC_URI[sha256sum] = "ecff2218754be318bce3c3a5d1775bab93bf4168b2c4aac465785de5655fbd69"
-@@ -11,7 +11,5 @@ DEPENDS = "libnfnetlink libmnl libnetfilter-acct"
- 
- EXTRA_OEMAKE += 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
- 
--S = "${WORKDIR}/nfacct-${PV}"
--
- inherit autotools pkgconfig
- 
+Hm, is removing sstate signature for the meta-networking layer
+acceptable? 
+
+Is there another solution to resolve that? 
+
+Note sure if it is related, but I use a RDEPENDS to the module package 
+
+RDEPENDS_${PN} = "wireguard-module" 
+
+Instead of: 
+
+RDEPENDS_${PN} = "kernel-module-wireguard" 
+
+With the latter, OE did not install RDEPENDS of wireguard-module
+(kernel-module-xt-hashlimit)... 
+
 -- 
-1.9.1
 
+Stefan 
+
+On 2017-04-06 00:29, Martin Jansa wrote: 
+
+> TUNE_PKGARCH package cannot depend on MACHINE_ARCH module unless you remove this dependency from sstate signature in layer.conf 
+> 
+> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signatures.20170405_114645.log/
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_package_write_ipk.sigdata.log
+> 
+> * ERROR: wireguard-tools different signature for task do_configure.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_configure.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_populate_sysroot.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_package_write_ipk.sigdata.log
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> On Sun, Apr 2, 2017 at 10:33 PM, Stefan Agner <stefan@agner.ch> wrote:
+> 
+>> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+>> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+>> and more useful than IPSec, while avoiding the massive headache.
+>> 
+>> The recipes add the current experimental snapshot v0.0.20170324
+>> out-of-tree kernel module and tools. The kernel module has some kernel
+>> configuration dependencies such as some configuration part of
+>> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+>> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>> 
+>> Signed-off-by: Stefan Agner <stefan@agner.ch>
+>> ---
+>> .../wireguard/wireguard-module_0.0.20170324.bb [1]     |  9 ++++++++
+>> .../wireguard/wireguard-tools_0.0.20170324.bb [2]      | 27 ++++++++++++++++++++++
+>> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>> 3 files changed, 54 insertions(+)
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> 
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> new file mode 100644
+>> index 0000000..aeb8269
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> @@ -0,0 +1,9 @@
+>> +require wireguard.inc
+>> +
+>> +inherit module
+>> +
+>> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+>> +MAKE_TARGETS = "module"
+>> +MODULES_INSTALL_TARGET = "module-install"
+>> +
+>> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> new file mode 100644
+>> index 0000000..79d420f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> @@ -0,0 +1,27 @@
+>> +require wireguard.inc
+>> +
+>> +inherit bash-completion systemd pkgconfig
+>> +
+>> +DEPENDS = "wireguard-module libmnl"
+>> +
+>> +do_compile_prepend () {
+>> +    cd ${S}/tools
+>> +}
+>> +
+>> +do_install () {
+>> +    cd ${S}/tools
+>> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+>> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+>> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+>> +        WITH_BASHCOMPLETION=yes \
+>> +        WITH_WGQUICK=yes \
+>> +        install
+>> +}
+>> +
+>> +FILES_${PN} = " \
+>> +    ${sysconfdir} \
+>> +    ${systemd_unitdir} \
+>> +    ${bindir} \
+>> +"
+>> +
+>> +RDEPENDS_${PN} = "wireguard-module"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> new file mode 100644
+>> index 0000000..cec7260
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> @@ -0,0 +1,18 @@
+>> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+>> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+>> +implemented as a kernel virtual network interface for Linux, which aims to \
+>> +replace both IPsec for most use cases, as well as popular user space and/or \
+>> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+>> +and easier to use."
+>> +SECTION = "networking"
+>> +HOMEPAGE = "https://www.wireguard.io/"
+>> +LICENSE = "GPLv2"
+>> +
+>> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [3]"
+>> +
+>> +SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
+>> +SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
+>> +
+>> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+>> --
+>> 2.7.4
+>> 
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel [4]
+
+  
+
+Links:
+------
+[1] http://wireguard-module_0.0.20170324.bb
+[2] http://wireguard-tools_0.0.20170324.bb
+[3] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
+[4] http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
