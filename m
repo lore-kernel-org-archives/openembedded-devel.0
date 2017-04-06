@@ -1,27 +1,48 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F87977C4D
+Return-Path: <andrej.rode@ettus.com>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 63D1A77C4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 15:53:23 +0000 (UTC)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by orsmga105.jf.intel.com with ESMTP; 06 Apr 2017 08:53:24 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.37,160,1488873600"; d="scan'208,217";a="85384148"
-Received: from acucurul-mobl.ger.corp.intel.com ([10.252.23.88])
-	by fmsmga005.fm.intel.com with ESMTP; 06 Apr 2017 08:53:23 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-Message-Id: <135C9ECC-83BB-47C4-8E41-75879D7797F6@linux.intel.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Date: Thu, 6 Apr 2017 17:53:21 +0200
-In-Reply-To: <CAP9mK5MgaDEeYtGuCfB4o_nhoyHkVW+YiRacb95OKcifK_bL4w@mail.gmail.com>
-To: Andrej Rode <andrej.rode@ettus.com>
-References: <20170406011225.25591-1-andrej.rode@ettus.com>
-	<171FD608-F7C9-4CE8-9401-5E2848728E63@linux.intel.com>
-	<CAP9mK5MgaDEeYtGuCfB4o_nhoyHkVW+YiRacb95OKcifK_bL4w@mail.gmail.com>
-X-Mailer: Apple Mail (2.3273)
+	Thu,  6 Apr 2017 16:05:12 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id b187so56870993oif.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Apr 2017 09:05:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=d1Giq0GuAi/z418+61V1R5mZpr2AmWrJc04ST4Dea2s=;
+	b=BSAjM2B16cylchFVLatBlDrht1I+ABpavJ++oIjaGkxPBfd6Ouag4w7YpTiBRidDQO
+	Q7km4y135DtSUSYQzJs5ij5mPEfgtibOi5cRgkjEY611eensgP4bulW6MSd1DozzpDSS
+	WIoIV5lFGs9MzKkw4jjcUoJsBvwFj7vQqQA+AceXTf2w+53aHCuHnIC9jCx3VcpMFh5u
+	ecIelAQSRLbQfd575u+KtI3pd4DIXLambT8ilRKYeTYnY5l9WW0jWElbd6vUmfhhGM1/
+	DKicm+ftLb+5rIZ7R2hqnvaoS7uBZARWnglOtbp4Li9gUfQLm4oGTquIWL43ehxgguhM
+	H9Jw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=d1Giq0GuAi/z418+61V1R5mZpr2AmWrJc04ST4Dea2s=;
+	b=OvUTZYP2XqT0V7Vd4mygWcMSUAyDYPonbkaF2ULE4WP6mwgVsVgMqcyllr/QV2McF/
+	b4vx7wgbcrElk/SYyEfIrd5GMXc0hEvnJtn0JNS4Rp/LTPrFlNvmajM05/maMLePiAoI
+	BnvH8Azy9Y4VXtuVRVORwBM9yJ6Ft5veCcSF0L7CMH+Mb/+gJBiN5LgtjSETFIBw7XS4
+	wSSSEOV36px6JtjYOsy251QcTYyAO3U05MLRzt3v7f7lNtnSl8C+ZgmGdHuiHd9i8d30
+	wtvd0UWaKSplmptzi0W4zbszEEzvw2yl+AxLGaD5A5EG2mPBv0I26ReBoZD4X/+qOFdD
+	42mw==
+X-Gm-Message-State: AFeK/H2D8u6BwAs08JdNoeyjQnIv0u0prm0mxFYLmTqW9GQTTbWGkECbBGB6r60FCOK0hHpIvBO6vbdWrMAi7+OY
+X-Received: by 10.157.1.22 with SMTP id 22mr17425978otu.221.1491494714066;
+	Thu, 06 Apr 2017 09:05:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.157.42.50 with HTTP; Thu, 6 Apr 2017 09:05:13 -0700 (PDT)
+In-Reply-To: <CA+chaQf7c+MARecNmxYBO8bX4Y1SRxZjedbM1utkD4mq5fKm=Q@mail.gmail.com>
+References: <20170406010452.16529-1-andrej.rode@ettus.com>
+	<CA+chaQf7c+MARecNmxYBO8bX4Y1SRxZjedbM1utkD4mq5fKm=Q@mail.gmail.com>
+From: Andrej Rode <andrej.rode@ettus.com>
+Date: Thu, 6 Apr 2017 09:05:13 -0700
+Message-ID: <CAP9mK5PdNK3n4h2EAabuiAO0wGLp_h-QD1r1MbDi-4AwQoNb8g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] systemd-python: add a new recipe
+Subject: Re: [meta-python][PATCH v2 1/2] python-gsocketpool: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,97 +55,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 15:53:24 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 06 Apr 2017 16:05:13 -0000
+Content-Type: text/plain; charset=UTF-8
 
+Looking at the patches on patchwork they look fine and after applying them
+the commit message looks correct. I think gmail is just displaying these
+mails incorrectly. My first patch series was merely a mistake, I apologize.
 
-> On Apr 6, 2017, at 9:13 AM, Andrej Rode <andrej.rode@ettus.com> wrote:
->=20
->=20
-> On Wed, Apr 5, 2017 at 11:30 PM, Tim Orling =
-<timothy.t.orling@linux.intel.com =
-<mailto:timothy.t.orling@linux.intel.com>> wrote:
->=20
-> > On Apr 6, 2017, at 3:12 AM, Andrej Rode <andrej.rode@ettus.com =
-<mailto:andrej.rode@ettus.com>> wrote:
-> >
-> > Adds new recipe for systemd-python, python bindings for libsystemd
-> >
->=20
-> This is breaking Debian naming for python packages, it should be =
-python-systemd, not systemd-python. We need to be consistent.
-> =20
-> I thought about python-systemd-python, but that looked silly. =
-python-systemd is probably acceptable.
+On Thu, Apr 6, 2017 at 12:22 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-I agree. I=E2=80=99ve had similar issues with naming of perl modules in =
-the past=E2=80=A6
-
-> =20
-> > Signed-off-by: Andrej Rode <andrej.rode@ettus.com =
-<mailto:andrej.rode@ettus.com>>
-> > ---
-> > meta-python/recipes-devtools/python/systemd-python_234.bb =
-<http://systemd-python_234.bb/> | 11 +++++++++++
-> > 1 file changed, 11 insertions(+)
-> > create mode 100644 =
-meta-python/recipes-devtools/python/systemd-python_234.bb =
-<http://systemd-python_234.bb/>
-> >
-> > diff --git =
-a/meta-python/recipes-devtools/python/systemd-python_234.bb =
-<http://systemd-python_234.bb/> =
-b/meta-python/recipes-devtools/python/systemd-python_234.bb =
-<http://systemd-python_234.bb/>
-> > new file mode 100644
-> > index 0000000..4cfa629
-> > --- /dev/null
-> > +++ b/meta-python/recipes-devtools/python/systemd-python_234.bb =
-<http://systemd-python_234.bb/>
-> > @@ -0,0 +1,11 @@
-> > +SUMMARY =3D "Python interface for libsystemd"
-> > +HOMEPAGE =3D "https://github.com/systemd/systemd-python =
-<https://github.com/systemd/systemd-python>=E2=80=9D
-
-This URL 404s for me.
-It looks like it should be:
-https://github.com/systemd/python-systemd
-
-And FWIW, Debian itself uses =E2=80=98python-systemd=E2=80=99 for the =
-package name:
-https://anonscm.debian.org/cgit/pkg-systemd/python-systemd.git
-
-It looks like PyPi is where the confusion comes in:
-https://pypi.python.org/pypi/systemd-python/234
-
-Cheers.
-
-=E2=80=94Tim
-
-> > +LICENSE =3D "LGPLv2+"
-> > +LIC_FILES_CHKSUM =3D =
-"file://LICENSE.txt;md5=3D4fbd65380cdd255951079008b364516c"
-> > +DEPENDS +=3D "systemd"
-> > +RDEPENDS_${PN} +=3D "systemd"
-> > +
-> > +SRC_URI[md5sum] =3D "5071ea5bcb976186e92a3f5e75df221d"
-> > +SRC_URI[sha256sum] =3D =
-"fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
-> > +
-> > +inherit pypi setuptools
-> > --
-> > 2.10.2
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org =
-<mailto:Openembedded-devel@lists.openembedded.org>
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel =
-<http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->=20
->=20
-
+> The Signed-off-by: line should be in commit message, not in separate
+> e-mail, patchwork might include the SOB, but it will still leave empty
+> commit message body, why don't you move your reply there?
+>
+> On Thu, Apr 6, 2017 at 3:04 AM, Andrej Rode <andrej.rode@ettus.com> wrote:
+>
+>> Adds recipe for python-gsocketpool as a dependency for python-mprpc
+>>
+>> Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
+>> ---
+>>  .../python-gsocketpool/python-gsocketpool_0.1.5.bb           | 12
+>> ++++++++++++
+>>  1 file changed, 12 insertions(+)
+>>  create mode 100644 meta-python/recipes-connectivity/python-gsocketpool/
+>> python-gsocketpool_0.1.5.bb
+>>
+>> diff --git a/meta-python/recipes-connectivity/python-gsocketpool/python
+>> -gsocketpool_0.1.5.bb b/meta-python/recipes-connecti
+>> vity/python-gsocketpool/python-gsocketpool_0.1.5.bb
+>> new file mode 100644
+>> index 0000000..ae7f264
+>> --- /dev/null
+>> +++ b/meta-python/recipes-connectivity/python-gsocketpool/python
+>> -gsocketpool_0.1.5.bb
+>> @@ -0,0 +1,12 @@
+>> +SUMMARY = "A simple connection pool for gevent"
+>> +DESCRIPTION = "creates a pool of connections that can be used with
+>> gevent"
+>> +HOMEPAGE = "https://github.com/studio-ousia/gsocketpool"
+>> +LICENSE = "Apache-2.0"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
+>> +DEPENDS += "python-gevent"
+>> +RDEPENDS_${PN} += "python-gevent"
+>> +
+>> +SRC_URI[md5sum] = "04f618864b18d6b06f774994f172ef49"
+>> +SRC_URI[sha256sum] = "b6b73deab9bcbc428d4813697eebe
+>> 5c3b9c40a971f62e13607b881aa749af9d0"
+>> +
+>> +inherit pypi setuptools
+>> --
+>> 2.10.2
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
