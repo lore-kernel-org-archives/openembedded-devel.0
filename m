@@ -1,28 +1,27 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id BDD2877CD8
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F87977C4D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 15:08:32 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id D0F8E5C13C6;
-	Thu,  6 Apr 2017 17:08:23 +0200 (CEST)
-MIME-Version: 1.0
-Date: Thu, 06 Apr 2017 08:08:19 -0700
-From: Stefan Agner <stefan@agner.ch>
-To: Martin Jansa <martin.jansa@gmail.com>
-In-Reply-To: <CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
-References: <1491165189-7839-1-git-send-email-stefan@agner.ch>
-	<CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
-Message-ID: <0f0cd82fa069c703f185c781e9b7bcc3@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.1.3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1491491303; bh=3zFa+8WH+5Pq4HJlSGGn+GY56804aVcaqSr/pUdvIJA=;
-	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
-	b=a1m10iluoNG27BCo+aSuAihVfrnGzUfA7VlfbWD4Gzopy/0W3Dr+sbShH/7EVazWWEXVdfS3L7omfYhiNVnQn57rvcwGEgt+WGSZGHf1sy9O4g3XQ1S6AiVQadTwASiT5Fklp7vxrEaFqePxNE31y79aXys2PjzWqw2lL7r2AUY=
+	Thu,  6 Apr 2017 15:53:23 +0000 (UTC)
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by orsmga105.jf.intel.com with ESMTP; 06 Apr 2017 08:53:24 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.37,160,1488873600"; d="scan'208,217";a="85384148"
+Received: from acucurul-mobl.ger.corp.intel.com ([10.252.23.88])
+	by fmsmga005.fm.intel.com with ESMTP; 06 Apr 2017 08:53:23 -0700
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+Message-Id: <135C9ECC-83BB-47C4-8E41-75879D7797F6@linux.intel.com>
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+Date: Thu, 6 Apr 2017 17:53:21 +0200
+In-Reply-To: <CAP9mK5MgaDEeYtGuCfB4o_nhoyHkVW+YiRacb95OKcifK_bL4w@mail.gmail.com>
+To: Andrej Rode <andrej.rode@ettus.com>
+References: <20170406011225.25591-1-andrej.rode@ettus.com>
+	<171FD608-F7C9-4CE8-9401-5E2848728E63@linux.intel.com>
+	<CAP9mK5MgaDEeYtGuCfB4o_nhoyHkVW+YiRacb95OKcifK_bL4w@mail.gmail.com>
+X-Mailer: Apple Mail (2.3273)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] systemd-python: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,160 +34,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 15:08:33 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 Apr 2017 15:53:24 -0000
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
- 
 
-Hm, is removing sstate signature for the meta-networking layer
-acceptable? 
+> On Apr 6, 2017, at 9:13 AM, Andrej Rode <andrej.rode@ettus.com> wrote:
+>=20
+>=20
+> On Wed, Apr 5, 2017 at 11:30 PM, Tim Orling =
+<timothy.t.orling@linux.intel.com =
+<mailto:timothy.t.orling@linux.intel.com>> wrote:
+>=20
+> > On Apr 6, 2017, at 3:12 AM, Andrej Rode <andrej.rode@ettus.com =
+<mailto:andrej.rode@ettus.com>> wrote:
+> >
+> > Adds new recipe for systemd-python, python bindings for libsystemd
+> >
+>=20
+> This is breaking Debian naming for python packages, it should be =
+python-systemd, not systemd-python. We need to be consistent.
+> =20
+> I thought about python-systemd-python, but that looked silly. =
+python-systemd is probably acceptable.
 
-Is there another solution to resolve that? 
+I agree. I=E2=80=99ve had similar issues with naming of perl modules in =
+the past=E2=80=A6
 
-Note sure if it is related, but I use a RDEPENDS to the module package 
+> =20
+> > Signed-off-by: Andrej Rode <andrej.rode@ettus.com =
+<mailto:andrej.rode@ettus.com>>
+> > ---
+> > meta-python/recipes-devtools/python/systemd-python_234.bb =
+<http://systemd-python_234.bb/> | 11 +++++++++++
+> > 1 file changed, 11 insertions(+)
+> > create mode 100644 =
+meta-python/recipes-devtools/python/systemd-python_234.bb =
+<http://systemd-python_234.bb/>
+> >
+> > diff --git =
+a/meta-python/recipes-devtools/python/systemd-python_234.bb =
+<http://systemd-python_234.bb/> =
+b/meta-python/recipes-devtools/python/systemd-python_234.bb =
+<http://systemd-python_234.bb/>
+> > new file mode 100644
+> > index 0000000..4cfa629
+> > --- /dev/null
+> > +++ b/meta-python/recipes-devtools/python/systemd-python_234.bb =
+<http://systemd-python_234.bb/>
+> > @@ -0,0 +1,11 @@
+> > +SUMMARY =3D "Python interface for libsystemd"
+> > +HOMEPAGE =3D "https://github.com/systemd/systemd-python =
+<https://github.com/systemd/systemd-python>=E2=80=9D
 
-RDEPENDS_${PN} = "wireguard-module" 
+This URL 404s for me.
+It looks like it should be:
+https://github.com/systemd/python-systemd
 
-Instead of: 
+And FWIW, Debian itself uses =E2=80=98python-systemd=E2=80=99 for the =
+package name:
+https://anonscm.debian.org/cgit/pkg-systemd/python-systemd.git
 
-RDEPENDS_${PN} = "kernel-module-wireguard" 
+It looks like PyPi is where the confusion comes in:
+https://pypi.python.org/pypi/systemd-python/234
 
-With the latter, OE did not install RDEPENDS of wireguard-module
-(kernel-module-xt-hashlimit)... 
+Cheers.
 
--- 
+=E2=80=94Tim
 
-Stefan 
+> > +LICENSE =3D "LGPLv2+"
+> > +LIC_FILES_CHKSUM =3D =
+"file://LICENSE.txt;md5=3D4fbd65380cdd255951079008b364516c"
+> > +DEPENDS +=3D "systemd"
+> > +RDEPENDS_${PN} +=3D "systemd"
+> > +
+> > +SRC_URI[md5sum] =3D "5071ea5bcb976186e92a3f5e75df221d"
+> > +SRC_URI[sha256sum] =3D =
+"fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
+> > +
+> > +inherit pypi setuptools
+> > --
+> > 2.10.2
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org =
+<mailto:Openembedded-devel@lists.openembedded.org>
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel =
+<http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>=20
+>=20
 
-On 2017-04-06 00:29, Martin Jansa wrote: 
-
-> TUNE_PKGARCH package cannot depend on MACHINE_ARCH module unless you remove this dependency from sstate signature in layer.conf 
-> 
-> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signatures.20170405_114645.log/
-> * ERROR: 3 issues were found in these recipes: wireguard-tools
-> 
-> * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
-> * ERROR: 1 errors found in signatures.qemux86.do_populate_sysroot.sigdata.log
-> * ERROR: 1 errors found in signatures.qemux86.do_package_write_ipk.sigdata.log
-> 
-> * ERROR: wireguard-tools different signature for task do_configure.sigdata between qemux86copy and qemux86
-> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_configure.sigdata.log
-> * ERROR: wireguard-tools different signature for task do_populate_sysroot.sigdata between qemux86copy and qemux86
-> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_populate_sysroot.sigdata.log
-> * ERROR: wireguard-tools different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
-> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_package_write_ipk.sigdata.log
-> * ERROR: 3 issues were found in these recipes: wireguard-tools
-> 
-> On Sun, Apr 2, 2017 at 10:33 PM, Stefan Agner <stefan@agner.ch> wrote:
-> 
->> WireGuard is an extremely simple yet fast and modern VPN that utilizes
->> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
->> and more useful than IPSec, while avoiding the massive headache.
->> 
->> The recipes add the current experimental snapshot v0.0.20170324
->> out-of-tree kernel module and tools. The kernel module has some kernel
->> configuration dependencies such as some configuration part of
->> features/netfilter/netfilter.scc, hence netfilter.scc should be part
->> of KERNEL_EXTRA_FEATURES (which is the case by default).
->> 
->> Signed-off-by: Stefan Agner <stefan@agner.ch>
->> ---
->> .../wireguard/wireguard-module_0.0.20170324.bb [1]     |  9 ++++++++
->> .../wireguard/wireguard-tools_0.0.20170324.bb [2]      | 27 ++++++++++++++++++++++
->> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
->> 3 files changed, 54 insertions(+)
->> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
->> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
->> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
->> 
->> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
->> new file mode 100644
->> index 0000000..aeb8269
->> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
->> @@ -0,0 +1,9 @@
->> +require wireguard.inc
->> +
->> +inherit module
->> +
->> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
->> +MAKE_TARGETS = "module"
->> +MODULES_INSTALL_TARGET = "module-install"
->> +
->> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
->> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
->> new file mode 100644
->> index 0000000..79d420f
->> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
->> @@ -0,0 +1,27 @@
->> +require wireguard.inc
->> +
->> +inherit bash-completion systemd pkgconfig
->> +
->> +DEPENDS = "wireguard-module libmnl"
->> +
->> +do_compile_prepend () {
->> +    cd ${S}/tools
->> +}
->> +
->> +do_install () {
->> +    cd ${S}/tools
->> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
->> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
->> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
->> +        WITH_BASHCOMPLETION=yes \
->> +        WITH_WGQUICK=yes \
->> +        install
->> +}
->> +
->> +FILES_${PN} = " \
->> +    ${sysconfdir} \
->> +    ${systemd_unitdir} \
->> +    ${bindir} \
->> +"
->> +
->> +RDEPENDS_${PN} = "wireguard-module"
->> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
->> new file mode 100644
->> index 0000000..cec7260
->> --- /dev/null
->> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
->> @@ -0,0 +1,18 @@
->> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
->> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
->> +implemented as a kernel virtual network interface for Linux, which aims to \
->> +replace both IPsec for most use cases, as well as popular user space and/or \
->> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
->> +and easier to use."
->> +SECTION = "networking"
->> +HOMEPAGE = "https://www.wireguard.io/"
->> +LICENSE = "GPLv2"
->> +
->> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->> +
->> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [3]"
->> +
->> +SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
->> +SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
->> +
->> +S = "${WORKDIR}/WireGuard-${PV}/src/"
->> --
->> 2.7.4
->> 
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel [4]
-
-  
-
-Links:
-------
-[1] http://wireguard-module_0.0.20170324.bb
-[2] http://wireguard-tools_0.0.20170324.bb
-[3] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
-[4] http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
