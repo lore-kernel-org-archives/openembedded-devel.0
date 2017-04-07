@@ -1,24 +1,23 @@
-Return-Path: <Catalin.Enache@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A1DAD77DA8
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 657AA77E1C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Apr 2017 10:11:56 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v37ABvTm023886
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 7 Apr 2017 03:11:57 -0700 (PDT)
-Received: from no3.corp.ad.wrs.com (128.224.125.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 7 Apr 2017 03:11:56 -0700
-From: Catalin Enache <catalin.enache@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 7 Apr 2017 13:10:53 +0300
-Message-ID: <1491559853-5493-1-git-send-email-catalin.enache@windriver.com>
+	Fri,  7 Apr 2017 17:32:33 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id D9DB15C1A1C;
+	Fri,  7 Apr 2017 19:32:22 +0200 (CEST)
+From: Stefan Agner <stefan@agner.ch>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Apr 2017 10:32:22 -0700
+Message-Id: <1491586342-32249-1-git-send-email-stefan@agner.ch>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-Subject: [PATCH] gd : CVE-2016-10167, CVE-2016-10168
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1491586343; bh=cW/AFCzjjb0RwzGEISs8rVyUviITyEUrVQt1IyR4nX8=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=HwzwYB/3RvkopLVRFmazNmt5pOlN+3+KnPb67isih2wOdOIv3g5gayOZuV53GMMbXjsl1rf8XREbxSfdewn1WVl78U5OOxNaCtx+OSPkzKFEB0khUrftCR5HO/LjvhjD+FCJOTioqau0RBPGWhRa9Qwa5jCKEvXFKPWuSbYJ3n4=
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-python][PATCH] python-pyalsaaudio: Extend recipe to support Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,148 +30,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Apr 2017 10:12:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 07 Apr 2017 17:32:35 -0000
 
-The gdImageCreateFromGd2Ctx function in gd_gd2.c in the GD Graphics
-Library (aka libgd) before 2.2.4 allows remote attackers to cause a
-denial of service (application crash) via a crafted image file.
+From: Stefan Agner <stefan.agner@toradex.com>
 
-Integer overflow in gd_io.c in the GD Graphics Library (aka libgd) before
-2.2.4 allows remote attackers to have unspecified impact via vectors
-involving the number of horizontal and vertical chunks in an image.
+alsaaudio support Python 3 already, add a Python 3 recipe so we
+can build alsaaudio for Python 3.
 
-References:
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-10167
-http://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2016-10168
-
-Upstream patches:
-https://github.com/libgd/libgd/commit/fe9ed49dafa993e3af96b6a5a589efeea9bfb36f
-https://github.com/libgd/libgd/commit/69d2fd2c597ffc0c217de1238b9bf4d4bceba8e6
-
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- meta-oe/recipes-support/gd/gd/CVE-2016-10167.patch | 48 ++++++++++++++++++++++
- meta-oe/recipes-support/gd/gd/CVE-2016-10168.patch | 38 +++++++++++++++++
- meta-oe/recipes-support/gd/gd_2.2.3.bb             |  4 +-
- 3 files changed, 89 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2016-10167.patch
- create mode 100644 meta-oe/recipes-support/gd/gd/CVE-2016-10168.patch
+ meta-python/recipes-devtools/python/python-pyalsaaudio.inc  | 11 +++++++++++
+ .../recipes-devtools/python/python-pyalsaaudio_0.8.4.bb     | 13 +------------
+ .../recipes-devtools/python/python3-pyalsaaudio_0.8.4.bb    |  2 ++
+ 3 files changed, 14 insertions(+), 12 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyalsaaudio.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyalsaaudio_0.8.4.bb
 
-diff --git a/meta-oe/recipes-support/gd/gd/CVE-2016-10167.patch b/meta-oe/recipes-support/gd/gd/CVE-2016-10167.patch
+diff --git a/meta-python/recipes-devtools/python/python-pyalsaaudio.inc b/meta-python/recipes-devtools/python/python-pyalsaaudio.inc
 new file mode 100644
-index 0000000..54ef22c
+index 0000000..d150409
 --- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd/CVE-2016-10167.patch
-@@ -0,0 +1,48 @@
-+From 6ab531ef0d82efb9e00236ee5ea23928335d221f Mon Sep 17 00:00:00 2001
-+From: Catalin Enache <catalin.enache@windriver.com>
-+Date: Fri, 7 Apr 2017 12:30:22 +0300
-+Subject: [PATCH] Fix DOS vulnerability in gdImageCreateFromGd2Ctx()
++++ b/meta-python/recipes-devtools/python/python-pyalsaaudio.inc
+@@ -0,0 +1,11 @@
++SUMMARY = "Support for the Linux 2.6.x ALSA Sound System"
++SECTION = "devel/python"
++LICENSE = "PSF"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
 +
-+We must not pretend that there are image data if there are none. Instead
-+we fail reading the image file gracefully.
++SRC_URI[md5sum] = "b46f69561bc85fc52e698b2440ca251e"
++SRC_URI[sha256sum] = "84e8f8da544d7f4bd96479ce4a237600077984d9be1d7f16c1d9a492ecf50085"
 +
-+Upstream-Status: Backport
-+CVE: CVE-2016-10167
++DEPENDS += "alsa-lib"
 +
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+---
-+ src/gd_gd2.c | 14 ++++++--------
-+ 1 file changed, 6 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/gd_gd2.c b/src/gd_gd2.c
-+index 8df93c1..bae65ea 100644
-+--- a/src/gd_gd2.c
-++++ b/src/gd_gd2.c
-+@@ -445,18 +445,16 @@ BGD_DECLARE(gdImagePtr) gdImageCreateFromGd2Ctx (gdIOCtxPtr in)
-+ 
-+ 						if (im->trueColor) {
-+ 							if (!gdGetInt (&im->tpixels[y][x], in)) {
-+-								/*printf("EOF while reading\n"); */
-+-								/*gdImageDestroy(im); */
-+-								/*return 0; */
-+-								im->tpixels[y][x] = 0;
-++								gd_error("gd2: EOF while reading\n");
-++								gdImageDestroy(im);
-++								return NULL;
-+ 							}
-+ 						} else {
-+ 							int ch;
-+ 							if (!gdGetByte (&ch, in)) {
-+-								/*printf("EOF while reading\n"); */
-+-								/*gdImageDestroy(im); */
-+-								/*return 0; */
-+-								ch = 0;
-++								gd_error("gd2: EOF while reading\n");
-++								gdImageDestroy(im);
-++								return NULL;
-+ 							}
-+ 							im->pixels[y][x] = ch;
-+ 						}
-+-- 
-+2.10.2
-+
-diff --git a/meta-oe/recipes-support/gd/gd/CVE-2016-10168.patch b/meta-oe/recipes-support/gd/gd/CVE-2016-10168.patch
++RDEPENDS_${PN} += "libasound"
+diff --git a/meta-python/recipes-devtools/python/python-pyalsaaudio_0.8.4.bb b/meta-python/recipes-devtools/python/python-pyalsaaudio_0.8.4.bb
+index b443570..e515342 100644
+--- a/meta-python/recipes-devtools/python/python-pyalsaaudio_0.8.4.bb
++++ b/meta-python/recipes-devtools/python/python-pyalsaaudio_0.8.4.bb
+@@ -1,13 +1,2 @@
+-SUMMARY = "Support for the Linux 2.6.x ALSA Sound System"
+-SECTION = "devel/python"
+-LICENSE = "PSF"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=1a3b161aa0fcec32a0c8907a2219ad9d"
+-
+-SRC_URI[md5sum] = "b46f69561bc85fc52e698b2440ca251e"
+-SRC_URI[sha256sum] = "84e8f8da544d7f4bd96479ce4a237600077984d9be1d7f16c1d9a492ecf50085"
+-
+-DEPENDS += "alsa-lib"
+-
++require python-pyalsaaudio.inc
+ inherit pypi setuptools
+-
+-RDEPENDS_${PN} += "libasound"
+diff --git a/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.8.4.bb b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.8.4.bb
 new file mode 100644
-index 0000000..aef1060
+index 0000000..b7da1a4
 --- /dev/null
-+++ b/meta-oe/recipes-support/gd/gd/CVE-2016-10168.patch
-@@ -0,0 +1,38 @@
-+From 2d37bdc03a6e2b820fe380016f22592a7733e0be Mon Sep 17 00:00:00 2001
-+From: Catalin Enache <catalin.enache@windriver.com>
-+Date: Fri, 7 Apr 2017 12:32:49 +0300
-+Subject: [PATCH] Fix #354: Signed Integer Overflow gd_io.c
-+
-+GD2 stores the number of horizontal and vertical chunks as words (i.e. 2
-+byte unsigned). These values are multiplied and assigned to an int when
-+reading the image, what can cause integer overflows. We have to avoid
-+that, and also make sure that either chunk count is actually greater
-+than zero. If illegal chunk counts are detected, we bail out from
-+reading the image.
-+
-+Upstream-Status: Backport
-+CVE: CVE-2016-10168
-+
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+---
-+ src/gd_gd2.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/gd_gd2.c b/src/gd_gd2.c
-+index bae65ea..9006bd2 100644
-+--- a/src/gd_gd2.c
-++++ b/src/gd_gd2.c
-+@@ -151,6 +151,10 @@ _gd2GetHeader (gdIOCtxPtr in, int *sx, int *sy,
-+ 	GD2_DBG (printf ("%d Chunks vertically\n", *ncy));
-+ 
-+ 	if (gd2_compressed (*fmt)) {
-++		if (*ncx <= 0 || *ncy <= 0 || *ncx > INT_MAX / *ncy) {
-++			GD2_DBG(printf ("Illegal chunk counts: %d * %d\n", *ncx, *ncy));
-++			goto fail1;
-++		}
-+ 		nc = (*ncx) * (*ncy);
-+ 
-+ 		GD2_DBG (printf ("Reading %d chunk index entries\n", nc));
-+-- 
-+2.10.2
-+
-diff --git a/meta-oe/recipes-support/gd/gd_2.2.3.bb b/meta-oe/recipes-support/gd/gd_2.2.3.bb
-index 4ff6b756..4e21d53 100644
---- a/meta-oe/recipes-support/gd/gd_2.2.3.bb
-+++ b/meta-oe/recipes-support/gd/gd_2.2.3.bb
-@@ -14,7 +14,9 @@ DEPENDS = "freetype libpng jpeg zlib tiff"
- 
- SRC_URI = "git://github.com/libgd/libgd.git;branch=GD-2.2 \
-            file://fix-gcc-unused-functions.patch \
--           file://CVE-2016-10166.patch"
-+           file://CVE-2016-10166.patch \
-+           file://CVE-2016-10167.patch \
-+           file://CVE-2016-10168.patch"
- 
- SRCREV = "46ceef5970bf3a847ff61d1bdde7501d66c11d0c"
- 
++++ b/meta-python/recipes-devtools/python/python3-pyalsaaudio_0.8.4.bb
+@@ -0,0 +1,2 @@
++require python-pyalsaaudio.inc
++inherit pypi setuptools3
 -- 
-2.10.2
+2.7.4
 
 
