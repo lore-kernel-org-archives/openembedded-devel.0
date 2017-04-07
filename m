@@ -1,46 +1,47 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id CB73771A37
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7486D77D76
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Apr 2017 20:37:10 +0000 (UTC)
-Received: by mail-vk0-f46.google.com with SMTP id z204so54670421vkd.1
+	Fri,  7 Apr 2017 06:33:50 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id o21so11976435wrb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Apr 2017 13:37:12 -0700 (PDT)
+	Thu, 06 Apr 2017 23:33:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=knNlXBrK36vus3xJfuehv0qIYVZdYZOwo0Gq+Dfp7aE=;
-	b=Rlq2INLKzrNybefsSKr+c9w4E2hIxbdXHhGJqXqUYMei0pBT93EJhuVmN3A4EVDs+e
-	Xv2etxeE685HIC4L+uZQBJh97c3QNswJPKfe9mstz9LNdiCkzDOEKsEtXvCSc6aK6rQ9
-	V9hB7lTTXGD5A3/FFx1fzg0EUqiTFTyXSjlQ0BWiTE1MDGNcDX3htpBEsQDrvViNIQ8c
-	Mf3Y7KER8ScksAd9u2a/nT3Qdi5blal845wvPlc0F8Xrtyrs/wnA/ZrAc+TpHkLBrB2q
-	Jn5f54RyHdBg0j4wFL6ob/HYg8XOYiD+cQESF7+TXMPQiRIYFWpPWtTHF5pV4IvNKWQu
-	Zdkg==
+	h=from:to:cc:subject:date:message-id;
+	bh=ZxpeCaaAlbj6mI9vgeK+L+iJopbXW/pmWcStman7Czg=;
+	b=LeNLFHQ2siqSiQvsqXBu4yAd2NUUrVtVyF+G41B05h90GLve4j4v1H4Tn5RSX/uv7a
+	uzxQ3otW2grZlwAFg+UQ+rcSgsdo0N2WkoXgs4YOOAxYyweq1Cy6lifngTkFg5r7edTV
+	tgcJvKZPll4juJIw5oy6BbR/TedQnB2P0akKWqR5WhBl4K8Kp12sm4C0Iqy+SmjqG35x
+	hqP9grnF/HxOVKYILHIJupWjYCeLVhmfZoWg7atGeJOMWU3OXet+zKioVzWWixAcyOAt
+	cqdK2WOf+j+2ZhluC2bydPpCtgI0Ik4pZG8Ec3H8bjmX7bgUDBi/gmEajYSn/+2Co1N6
+	8ajg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=knNlXBrK36vus3xJfuehv0qIYVZdYZOwo0Gq+Dfp7aE=;
-	b=L2lQtxdQbIY17oGQ/Q5ISK7SMvcJVWPJ8cFHB/PLFRDYwZUgHnvISE6uCtZmBpSDO3
-	eJbHPd5v+62pCRJpj0PFJA13bS94DgUMDy5j6+zbjSNcDNqlaKkHlk5yY3BPzFcq3aMA
-	Qu7hfJXNVp9bgwKwLvmR7TYU79yU82iJpOh1NxcUzNjo+xY1VH4B36zPSwBjfezBwEhQ
-	CSNLcTpbMm0dKoYcMuQ0ZOpcsWqAsbH9HHlbWGNe+cgGfWmSAzS4XMGoczv8FYRxQNMs
-	buKOogYLazZIKquR30NAJznR20NJ34XqN8DF/dPi2iHWDjRipyMQRFhNWTgIRLgv2okL
-	AzJA==
-X-Gm-Message-State: AFeK/H3kOrIeuqtjblYudiidA/jVZROsTZDV2gAx56uikt/h/eKhdS1GD0irckznP+W/LblUeF4doB49tXqpIQ==
-X-Received: by 10.176.84.209 with SMTP id q17mr18813378uaa.129.1491511031390; 
-	Thu, 06 Apr 2017 13:37:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.30.70 with HTTP; Thu, 6 Apr 2017 13:37:10 -0700 (PDT)
-In-Reply-To: <CA+chaQeaHRpRBQ_AEe7GDM2fxHZc81jkYcJbfBsf72XGEu_aeA@mail.gmail.com>
-References: <20170403183815.2997-1-twoerner@gmail.com>
-	<CA+chaQeaHRpRBQ_AEe7GDM2fxHZc81jkYcJbfBsf72XGEu_aeA@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Thu, 6 Apr 2017 16:37:10 -0400
-Message-ID: <CAHUNapR=5Tj+jAF5_hMgZ1MMSaEiGbNRrj36YL12zcETqhzBYA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: 52.0.2743.76 -> 54.0.2810.2
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZxpeCaaAlbj6mI9vgeK+L+iJopbXW/pmWcStman7Czg=;
+	b=Mc8eM235KFEmnLnChVtTPKf9Krwq1HYfTf2zPHHHpeDwV7sjnkVGpskApRPRXkwANJ
+	EPTcBiD9qjsYELk+RxOb5c3UBwn1046FVxHKKWXUpCIBO0uGDGQL2Dsk5qZgYBB594GF
+	4YUJBbz6hkJkpdod0Txr6i7Qpsu0WpkuL0Egprx39n3j2COIUqtqBq/BP8H6J4niWvnO
+	abTyOYNQ7j1riAHrAONXZW46Bk4o1863H1xE8Z2nOuykuG7JBT8KjX83utgBM2boEMjQ
+	wOZitA8a8adbDg7xn/EGMPfCoHff8Sr0NP5eIsL/qYWwXxW2AywXyOwyARm5jlKbNrx/
+	Zq5Q==
+X-Gm-Message-State: AFeK/H1I/o2gGp5dRaLl+fqzQsLiY2uqK0Da9HUJQQudLCmVn5qYfieE
+	zFXMXWPL907eEg==
+X-Received: by 10.28.40.198 with SMTP id o189mr27669725wmo.108.1491546831891; 
+	Thu, 06 Apr 2017 23:33:51 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([106.116.224.167]) by smtp.gmail.com with ESMTPSA id
+	h68sm2466299wmd.19.2017.04.06.23.33.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 06 Apr 2017 23:33:51 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Apr 2017 08:33:43 +0200
+Message-Id: <1491546823-24769-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
+Subject: [meta-oe] [PATCH] librcf: install missing SF headers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Apr 2017 20:37:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 Apr 2017 06:33:51 -0000
 
-On Thu, Apr 6, 2017 at 3:31 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> In my world build it (surprisingly) didn't fail, good job Trevor!
+From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-Sadly, it does fail with one specific PACKAGECONFIG: ignore-lost-context
+A flaw was introduced by commit 414426a3:
+[ librcf: add new recipe ]
 
-I have a fix which I've build-tested both for x11 and wayland with a
-bunch of different targets, which is just waiting for run-testing:
-https://github.com/twoerner/meta-browser/tree/contrib/twoerner/chromium_54_pkgconfig_fix
+in which, the SF headers wasn't installed, this could cause build
+errors in projects that compiling/linking to librcf while librcf
+was built with LIBRCF_USE_SF_SERIALIZATION option enabled.
 
-> Are you willing to check 2 QA issues which might be there in older version
-> as well?
->
-> chromium-54.0.2810.2: ELF binary
-> '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
-> has relocations in .text [textrel]
-> chromium-wayland-53.0.2785.143: ELF binary
-> '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
-> has relocations in .text [textrel]
+Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+---
+ .../librcf/librcf/0001-Add-CMake-build-files.patch                 | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-Yes, I'll have a look.
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
+index 34d0f62..cd0d143 100644
+--- a/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
++++ b/meta-oe/recipes-devtools/librcf/librcf/0001-Add-CMake-build-files.patch
+@@ -10,8 +10,8 @@ Signed-off-by: Peter Liu <peter.x.liu@external.atlascopco.com>
+  CMakeLists.txt     | 147 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+  FindLibRcf.cmake   |  63 +++++++++++++++++++++++
+  VERSION.cmake      |  21 ++++++++
+- src/CMakeLists.txt |  24 +++++++++
+- 4 files changed, 255 insertions(+)
++ src/CMakeLists.txt |  25 +++++++++
++ 4 files changed, 256 insertions(+)
+  create mode 100644 CMakeLists.txt
+  create mode 100644 FindLibRcf.cmake
+  create mode 100644 VERSION.cmake
+@@ -271,7 +271,7 @@ new file mode 100755
+ index 0000000..c227901
+ --- /dev/null
+ +++ b/src/CMakeLists.txt
+-@@ -0,0 +1,24 @@
++@@ -0,0 +1,25 @@
+ +IF (NOT LIBRCF_BUILD_SHARED_LIBS)
+ +  ADD_LIBRARY (rcf STATIC RCF/RCF.cpp)
+ +ELSE (NOT LIBRCF_BUILD_SHARED_LIBS)
+@@ -287,6 +287,7 @@ index 0000000..c227901
+ +SET_TARGET_PROPERTIES (rcf PROPERTIES INSTALL_NAME_DIR ${CMAKE_INSTALL_LIBDIR})
+ +
+ +INSTALL (DIRECTORY "${CMAKE_SOURCE_DIR}/include/RCF" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+++INSTALL (DIRECTORY "${CMAKE_SOURCE_DIR}/include/SF" DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+ +INSTALL (TARGETS rcf LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+ +
+ +IF (LIBRCF_BUILD_STATIC_LIBS AND LIBRCF_BUILD_SHARED_LIBS)
+-- 
+2.7.4
 
-Currently I'm trying to figure out how to move past this version.
-After 53.0.2810.2 the current method OE uses to build chromium starts
-to fail because (as is my understanding) it was around this point that
-the chromium build switched from gyp+ninja (what we're using in OE) to
-gn+ninja (ninja is like "make" and gyp/gn are like the autotools)
-Therefore the gyp support starts to break down due to lack of upstream
-maintainership. I'm starting to be able to do successful chromium
-builds from tarballs on the cmdline (outside of OE) up to
-57.0.2987.133 but I need to figure out how to translate that into a
-recipe.
-
-Oh, and it'd be nice to have an aarch64 build too.
 
