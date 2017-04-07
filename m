@@ -1,48 +1,22 @@
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id D3A2777E44
+Return-Path: <marex@denx.de>
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id 888A677E3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Apr 2017 19:16:01 +0000 (UTC)
-Received: by mail-lf0-f50.google.com with SMTP id s141so11270816lfe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Apr 2017 12:16:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=gTmkj+rpo5WVSblTNercFBGaa0s3ekvdPWROPzNogSQ=;
-	b=bKxuVCLverDnqg4SZwrVxOUz0laHE2FZPQsf+UKG89KnkUJ+9Pr/4GJmxVMnw2owH5
-	+4u88beNrshoYfxcgLpJOs9ppC1Gy0XLVC2tuG4PEy/Ga4POkPnekacG73dSK+/do2th
-	5lUm9TiqJRngHlPJdaLlakuTzq/sfv9OFUhJs=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=gTmkj+rpo5WVSblTNercFBGaa0s3ekvdPWROPzNogSQ=;
-	b=g67HJwlmqyPZ143ez6efSKTASJBIdMo7iMv7tK5yWCcDQcsyNGjjoAZlEmbC2yScVQ
-	aZFl5AJcMIji3NUrQ7aFEjRXWOOs1Rx0yvwVA2zuePxuDvoVY1toY/Mm3SHGITnsxQ4L
-	+1SFmuZNepjjMXjolF88+s/N8NyPxnUq/H3Iyeym6VFMAwK5Yf4dZV/nQZ59MkqYHvey
-	2t/Ug3fZbim/QUxG4BbiYqkHi7vdz9eCgyxRT6bUdIyDiknOEYoRcA7/4UctruauEltP
-	2NmJ+ceOYod1F6gP3Ao0Yfm9tb59PqcbwZWXkW2vayTMo2I1tH9wH2XHQy/hhMSiTnoB
-	nyqA==
-X-Gm-Message-State: AFeK/H1ymZ8qaLyAa7bCdHLiWZjyZ+B4nSohla9kw6KxqTksY7jvkrc+GrH7cMjASD6+Jwz8
-X-Received: by 10.25.77.2 with SMTP id a2mr14836623lfb.143.1491592561975;
-	Fri, 07 Apr 2017 12:16:01 -0700 (PDT)
-Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
-	by smtp.googlemail.com with ESMTPSA id
-	i1sm1129221ljd.47.2017.04.07.12.16.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Apr 2017 12:16:01 -0700 (PDT)
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
-From: Andrey Konovalov <andrey.konovalov@linaro.org>
-Message-ID: <58E7E570.6070406@linaro.org>
-Date: Fri, 7 Apr 2017 22:16:00 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
-Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
+	Fri,  7 Apr 2017 21:36:59 +0000 (UTC)
+Received: from mail.nefkom.net (unknown [192.168.6.184])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3w0Cb00D7vz1qrMj;
+	Fri,  7 Apr 2017 23:37:00 +0200 (CEST)
+X-Auth-Info: 7+ifj5xVCKoJjKSXewCT2xYsFsXYPaSDCL3UgaHqR4o=
+Received: from kurokawa.lan (p578adb1c.dip0.t-ipconnect.de [87.138.219.28])
+	by smtp-auth.mnet-online.de (Postfix) with ESMTPA id 3w0CZz542SzvdWQ;
+	Fri,  7 Apr 2017 23:36:59 +0200 (CEST)
+From: Marek Vasut <marex@denx.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Apr 2017 23:36:46 +0200
+Message-Id: <20170407213646.29455-1-marex@denx.de>
+X-Mailer: git-send-email 2.11.0
+Cc: Marek Vasut <marex@denx.de>
+Subject: [PATCH] fbida: Fix compile-host-path error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,47 +29,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Apr 2017 19:16:02 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Apr 2017 21:37:00 -0000
 
-On 04/07/2017 09:40 PM, Andrey Konovalov wrote:
-> This patch prevents "Aw Snap" error when loading a page with JavaScript.
->
-> Tested by running:
-> - chromium-wayland on Beagle X15
-> - chromium-wayland on HiKey (with a separate patch to enable aarch64 build)
-> - cromium on dragonboard-410c (with a separate patch to enable aarch64 build)
->
-> Based on the fix for Gentoo's bug 588596:
-> https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
->
-> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
-> ---
->   recipes-browser/chromium/chromium.inc | 3 ++-
->   1 file changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-> index 60edccb..7e057ec 100644
-> --- a/recipes-browser/chromium/chromium.inc
-> +++ b/recipes-browser/chromium/chromium.inc
-> @@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
->   inherit gettext pythonnative
->
->   ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
-> -GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
-> +GYP_DEFINES += " ${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
+Remove the explicit reference to /usr/local/* in Variables.mk.
+This is completely bogus and causes failure during cross-compilation.
 
-Oops, by occasion I've added an extra space before ${ARMFPABI}. I updated the pull request in github, and
-can send an updated patch to the list if needed.
+Signed-off-by: Marek Vasut <marex@denx.de>
+---
+ meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |  4 ++-
+ .../fbida/files/0001-Avoid-using-host-path.patch   | 34 ++++++++++++++++++++++
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
 
-Thanks,
-Andrey
-
-> +	${@bb.utils.contains("AVAILTUNES", "mips", "", "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
->   GYP_DEFINES_append_x86 = " generate_character_data=0"
->
->   do_configure() {
->
+diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
+index c14fc9b68..459a1e8d2 100644
+--- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
++++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
+@@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ 
+ DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
+ 
+-SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
++SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
++	   file://0001-Avoid-using-host-path.patch \
++	   "
+ SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
+ SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
+ 
+diff --git a/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch b/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
+new file mode 100644
+index 000000000..cdf2c25d3
+--- /dev/null
++++ b/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
+@@ -0,0 +1,34 @@
++From 8d8fa9f22d9f6a95523bac63ac3af724faf5ff92 Mon Sep 17 00:00:00 2001
++From: Marek Vasut <marex@denx.de>
++Date: Fri, 7 Apr 2017 23:26:09 +0200
++Subject: [PATCH] Avoid using host-path
++
++Remove the explicit reference to /usr/local/* , this is completely
++bogus and causes trouble during cross-compilation.
++
++Signed-off-by: Marek Vasut <marex@denx.de>
++Upstream-Status: Inappropriate [upstream requires this]
++---
++ mk/Variables.mk | 6 ------
++ 1 file changed, 6 deletions(-)
++
++diff --git a/mk/Variables.mk b/mk/Variables.mk
++index 99f787c..3ffd87a 100644
++--- a/mk/Variables.mk
+++++ b/mk/Variables.mk
++@@ -42,12 +42,6 @@ CFLAGS		+= -Wall -Wmissing-prototypes -Wstrict-prototypes \
++ 		   -Wpointer-arith -Wunused
++ CXXFLAGS	+= -Wall -Wpointer-arith -Wunused
++ 
++-# add /usr/local to the search path if something is in there ...
++-ifneq ($(wildcard /usr/local/include/*.h),)
++-  CFLAGS  += -I/usr/local/include
++-  LDFLAGS += -L/usr/local/$(LIB)
++-endif
++-
++ # fixup include path for $(srcdir) != "."
++ ifneq ($(srcdir),.)
++   CFLAGS  += -I. -I$(srcdir)
++-- 
++2.11.0
++
+-- 
+2.11.0
 
 
