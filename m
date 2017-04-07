@@ -1,42 +1,31 @@
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C98C77B41
+Return-Path: <jaragunde@igalia.com>
+X-Greylist: delayed 2250 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 07 Apr 2017 18:46:00 UTC
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id 5022377E3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Apr 2017 18:40:58 +0000 (UTC)
-Received: by mail-lf0-f43.google.com with SMTP id q141so16520975lfe.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Apr 2017 11:41:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=tjINiS997ueYl5MxoTyycSOs7jE1X50mE/QO1o4/wHc=;
-	b=NuJy/DjJKwFRGrQX9Pc9jDiwpQ4xfHP9d1pvQm0KbtLNLJYTdVlSBVh2zXEW9yMUS+
-	2S3fpSwYoTwHao99q4Dw3M7APdY8LqM+7cA46BwIVmf+nzZeXSiELgEYr/C/x7u+q/4U
-	T3J7YnhHhlId3TW5+4sOu60BCS0otBMGdcYWA=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tjINiS997ueYl5MxoTyycSOs7jE1X50mE/QO1o4/wHc=;
-	b=hxmOfagQdUY4fjNgcc57hFbT5r1YGmwfJhTwnUHXfKH4rV2L3qNzeKXWAK4lhxYkaC
-	lCYfByfssNS6ZRLbNfSsPMR9PhlJnlQGTwoeHNlnKy0mtycda9DdDVjC+HXDUAM8tOhM
-	K53A1jH/xdrsXTZCjsGq3QYUmfsh3GjSmTgRUBoGWROYeKRXF/mE3W/XxhixeM0olc07
-	W8meg/9FavGmNH0IGFiMBg7iP6OHCfSMSnlmKppBx5TI1UdUYpquKvjQ30gnmOh6H2E/
-	GT8vk5ubYSI1vmV6/puWv75H8slorI6EWXsnc3mKh9Qoqt0ApMTNzoafqZsNb8iX5Xj8
-	waCA==
-X-Gm-Message-State: AN3rC/4uH+wcqQAW4/xj1dRpV9ljvzhpNJ4C2HrWQmZgZqCEJMwzIG1asWP5m4pke82LdXNU
-X-Received: by 10.25.181.23 with SMTP id e23mr951900lff.98.1491590459621;
-	Fri, 07 Apr 2017 11:40:59 -0700 (PDT)
-Received: from ynk-TM8481.dev.rtsoft.ru (mail.dev.rtsoft.ru. [213.79.90.226])
-	by smtp.googlemail.com with ESMTPSA id
-	r12sm1096625lfr.60.2017.04.07.11.40.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 07 Apr 2017 11:40:58 -0700 (PDT)
-From: Andrey Konovalov <andrey.konovalov@linaro.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Apr 2017 21:40:46 +0300
-Message-Id: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
+	Fri,  7 Apr 2017 18:46:00 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=Content-Transfer-Encoding:Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
+	bh=Fcho22O9OXwa7ekG8JFOwJYULD7j+tb5QrqkieOey0s=; 
+	b=KtNhxBevgQJm4wJ7OpLzSVw5UH4PabmWFXIfqupEhTtB/jxScrFaf2g6Y2Upo3vaZXP/e9EC1eMk8CoA+RXdOMHtPNWumasgUOkNNf693DqOul+cJGuomtNYPYfqW+JgvBa/Cy314IyvySZ1Xhkgc8aC2nyu/U/Wq7WGSFVb3fHFlmqeXpDcKbmDyOtuZqLD2nmVUPHor1ny9ILDeuB6JlcnLWmWD9jvU5aJUNQH3JJw+Txe022U7UEM1qoo35GmZP2zhn6RjALmn8p7XtEhybxDoL7wKuVyvbh7kX334VoDdCWaljSoIyyt2RRrQN4boGW1E1SGEcVquqgV1XGtTA==;
+Received: from [192.168.10.200] by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1cwYJC-0004De-OQ; Fri, 07 Apr 2017 20:08:30 +0200
+To: openembedded-devel@lists.openembedded.org,
+	Trevor Woerner <twoerner@gmail.com>
+References: <20170403183815.2997-1-twoerner@gmail.com>
+	<CA+chaQeaHRpRBQ_AEe7GDM2fxHZc81jkYcJbfBsf72XGEu_aeA@mail.gmail.com>
+	<CAHUNapR=5Tj+jAF5_hMgZ1MMSaEiGbNRrj36YL12zcETqhzBYA@mail.gmail.com>
+From: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>
+Message-ID: <620eadc5-9119-633e-f937-1f906fea1408@igalia.com>
+Date: Fri, 7 Apr 2017 20:08:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAHUNapR=5Tj+jAF5_hMgZ1MMSaEiGbNRrj36YL12zcETqhzBYA@mail.gmail.com>
+Subject: Re: [meta-browser][PATCH] chromium: 52.0.2743.76 -> 54.0.2810.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,38 +38,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Apr 2017 18:40:59 -0000
+X-List-Received-Date: Fri, 07 Apr 2017 18:46:03 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: 7bit
 
-This patch prevents "Aw Snap" error when loading a page with JavaScript.
+Hi Trevor,
 
-Tested by running:
-- chromium-wayland on Beagle X15
-- chromium-wayland on HiKey (with a separate patch to enable aarch64 build)
-- cromium on dragonboard-410c (with a separate patch to enable aarch64 build)
+On 06/04/17 22:37, Trevor Woerner wrote:
+> ...
+> Currently I'm trying to figure out how to move past this version.
+> After 53.0.2810.2 the current method OE uses to build chromium starts
+> to fail because (as is my understanding) it was around this point that
+> the chromium build switched from gyp+ninja (what we're using in OE) to
+> gn+ninja (ninja is like "make" and gyp/gn are like the autotools)
+> Therefore the gyp support starts to break down due to lack of upstream
+> maintainership. I'm starting to be able to do successful chromium
+> builds from tarballs on the cmdline (outside of OE) up to
+> 57.0.2987.133 but I need to figure out how to translate that into a
+> recipe.
+> 
 
-Based on the fix for Gentoo's bug 588596:
-https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
+Some colleagues here have modified the recipe to build Chromium up to
+version 57 using the new GN build system, targeting R-Car Gen.3 boards.
+Unfortunately, the solution would still need a lot of cleanup before
+being able to submit it.
 
-Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
----
- recipes-browser/chromium/chromium.inc | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Still, if you want to take a look and use it as an example, even reuse
+parts of it in your own patch, feel free to do it.
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 60edccb..7e057ec 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
- inherit gettext pythonnative
- 
- ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
--GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
-+GYP_DEFINES += " ${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
-+	${@bb.utils.contains("AVAILTUNES", "mips", "", "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
- GYP_DEFINES_append_x86 = " generate_character_data=0"
- 
- do_configure() {
+Layer is here: https://github.com/Igalia/meta-browser
+
+Best,
 -- 
-2.1.4
-
+Jacobo Aragunde
+Software Engineer at Igalia
 
