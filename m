@@ -1,52 +1,42 @@
 Return-Path: <andrey.konovalov@linaro.org>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D22177B41
+Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 97DE077B41
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 Apr 2017 18:56:19 +0000 (UTC)
-Received: by mail-lf0-f47.google.com with SMTP id h125so46582858lfe.0
+	Fri,  7 Apr 2017 18:57:23 +0000 (UTC)
+Received: by mail-lf0-f42.google.com with SMTP id s141so11053402lfe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Apr 2017 11:56:21 -0700 (PDT)
+	Fri, 07 Apr 2017 11:57:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:references:cc:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=DTgAtqMmr2O9nqtbx8P6KTwkz3yuy4ROse4SC3EPxcw=;
-	b=Y6PP/WfA+EYy8H9T83iCdk6APdpKab5nkEe4Yy9bHKXOh6V2va4Xg5kGTgR9QH9EfG
-	C9NPKWr4ONi/sHKXepstLvViqXVC4Q68/w82hw8nFAnawmBdS9ALPXBIL4dNQ69mXZYu
-	I+BO+ipPCbzWdASkPjgQY+si5L7g1JIxSdVmo=
+	h=from:to:cc:subject:date:message-id;
+	bh=bX1TBR7TuzsLJvcdpI6/0StGXh6+PrWZa+lhQZm1O/s=;
+	b=cYCEQ+rEPhxIX54HbccHtGaeTvJoPARncp4lIzsdzfSFlvKW2DRxXBGCE53sb7hPcY
+	/bxOUVudmSSmbbu4dsxgd9g+QelJwK44w/mwd1ALk5vJzu9gPqz6sAW2hzQ9Ov8XtyI7
+	WLtiaHz6nDD6PqjAPpwU05XZD0xhK+uarSLGs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=DTgAtqMmr2O9nqtbx8P6KTwkz3yuy4ROse4SC3EPxcw=;
-	b=SSh6TYB3FwHYle80+3DpzT9yAqccNiP1P8cf5P2WTY8Vu2THBE5Q8gTLeuHEEkTPNC
-	vevB9kgFo/RXqTU8PkV0qaIafcjN4uM3TLkBpIoagPePUJs0G+fKY32bCXSuTmsSONuN
-	JeVVMX9PnLsOthAJ9TjXHNydz0Tg9RRMRMEG8ik+1swdCTdeX+4Oi/oh+ZfBp3pnwh5g
-	aE7Ky3FoWqxU2DBpxQkFSrxCYcXp3mvB5NKkmej9rauMiK1DIJCevk0U5jNFtIp22Hbj
-	5+/aNKuyMtKnm/+pZrhYtl3WamA5kDuF4xgMwtl7unLHcHvKXxBAROYyFRe/SeZU3JmZ
-	TJYw==
-X-Gm-Message-State: AFeK/H12sGQjTyrMtRwdTCKVOcAMFtxmnmXqrOgUZRYnlXqWZcDlTLbec/Df4r9AZE3cqMtv
-X-Received: by 10.46.22.92 with SMTP id 28mr11980627ljw.55.1491591380784;
-	Fri, 07 Apr 2017 11:56:20 -0700 (PDT)
-Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=bX1TBR7TuzsLJvcdpI6/0StGXh6+PrWZa+lhQZm1O/s=;
+	b=okNip3m2jzeM9tmWG+AGtAcEQzZIZVShO8POOyaqhBTxUUyk2Vpp/dtr+WAaOcBIs/
+	/uNUIA2yUJxowxvNqyHe8YcnvfGlYJ9EjKprb3StmjF6OSljielxsxn5pdqUyVB6Fz5H
+	t4kbt1ABs2/r9oiPiIXaWgbpkWx2PgFXtBpSKffXXV/ne297En20UKrzRYfzARH8SJSW
+	KE8xzk2xjmaj1XDx8q01mLuQTzyV1doOyZm7/iJR3bueLpWre0+2+C/U6LoU3r/C5U87
+	ObBWQw+c2aLrC8ov6FmJiX9USgS4gkz2m0EQF+ITp6Ydsj4uAzfPYT6fjA+x5bunOh/I
+	so6A==
+X-Gm-Message-State: AN3rC/7viHEm0qO/d6A8x7H/WITDq//v5iluKBmQUf9Y6S6XYwwp+cqNIO8crfshYRSTzjep
+X-Received: by 10.25.99.155 with SMTP id v27mr128660lfi.170.1491591444142;
+	Fri, 07 Apr 2017 11:57:24 -0700 (PDT)
+Received: from ynk-TM8481.dev.rtsoft.ru (mail.dev.rtsoft.ru. [213.79.90.226])
 	by smtp.googlemail.com with ESMTPSA id
-	n82sm1121569lje.12.2017.04.07.11.56.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Apr 2017 11:56:19 -0700 (PDT)
-To: Fathi Boudra <fathi.boudra@linaro.org>, Trevor Woerner <twoerner@gmail.com>
-References: <20170403183815.2997-1-twoerner@gmail.com>
-	<CA+chaQeaHRpRBQ_AEe7GDM2fxHZc81jkYcJbfBsf72XGEu_aeA@mail.gmail.com>
-	<CAHUNapR=5Tj+jAF5_hMgZ1MMSaEiGbNRrj36YL12zcETqhzBYA@mail.gmail.com>
-	<CAGNsrLCHkTi903CpRKq5CaWYwMWm1RmkZ9F2v9BMmLLb2UUypg@mail.gmail.com>
+	e124sm1100013lfg.8.2017.04.07.11.57.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 07 Apr 2017 11:57:23 -0700 (PDT)
 From: Andrey Konovalov <andrey.konovalov@linaro.org>
-Message-ID: <58E7E0D3.2070004@linaro.org>
-Date: Fri, 7 Apr 2017 21:56:19 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
-MIME-Version: 1.0
-In-Reply-To: <CAGNsrLCHkTi903CpRKq5CaWYwMWm1RmkZ9F2v9BMmLLb2UUypg@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: 52.0.2743.76 -> 54.0.2810.2
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  7 Apr 2017 21:57:13 +0300
+Message-Id: <1491591433-19590-1-git-send-email-andrey.konovalov@linaro.org>
+X-Mailer: git-send-email 2.1.4
+Subject: [PATCH] chromium: enable aarch64 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,67 +49,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 Apr 2017 18:56:20 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 Apr 2017 18:57:24 -0000
 
-Hi,
+Tested by running:
+- chromium-wayland on HiKey
+- chromium on dragonboard-410c
 
-On 04/07/2017 11:08 AM, Fathi Boudra wrote:
-> Hi Trevor,
->
-> On 6 April 2017 at 23:37, Trevor Woerner <twoerner@gmail.com> wrote:
->> On Thu, Apr 6, 2017 at 3:31 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->>> In my world build it (surprisingly) didn't fail, good job Trevor!
->>
->> Sadly, it does fail with one specific PACKAGECONFIG: ignore-lost-context
->>
->> I have a fix which I've build-tested both for x11 and wayland with a
->> bunch of different targets, which is just waiting for run-testing:
->> https://github.com/twoerner/meta-browser/tree/contrib/twoerner/chromium_54_pkgconfig_fix
->>
->>> Are you willing to check 2 QA issues which might be there in older version
->>> as well?
->>>
->>> chromium-54.0.2810.2: ELF binary
->>> '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
->>> has relocations in .text [textrel]
->>> chromium-wayland-53.0.2785.143: ELF binary
->>> '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
->>> has relocations in .text [textrel]
->>
->> Yes, I'll have a look.
->>
->> Currently I'm trying to figure out how to move past this version.
->> After 53.0.2810.2 the current method OE uses to build chromium starts
->> to fail because (as is my understanding) it was around this point that
->> the chromium build switched from gyp+ninja (what we're using in OE) to
->> gn+ninja (ninja is like "make" and gyp/gn are like the autotools)
->> Therefore the gyp support starts to break down due to lack of upstream
->> maintainership. I'm starting to be able to do successful chromium
->> builds from tarballs on the cmdline (outside of OE) up to
->> 57.0.2987.133 but I need to figure out how to translate that into a
->> recipe.
->
-> I think Zoltan looked into it at some point but I can't remember what
-> was the outcome...
->
->> Oh, and it'd be nice to have an aarch64 build too.
->
-> Andrey in CC is looking at submitting the changes needed to get Aarch64 added.
+Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+---
+ recipes-browser/chromium/chromium.inc                   |  1 +
+ recipes-browser/chromium/files/aarch64/include.gypi     |  6 ++++++
+ recipes-browser/chromium/files/aarch64/oe-defaults.gypi | 15 +++++++++++++++
+ 3 files changed, 22 insertions(+)
+ create mode 100644 recipes-browser/chromium/files/aarch64/include.gypi
+ create mode 100644 recipes-browser/chromium/files/aarch64/oe-defaults.gypi
 
-To my surprise just enabling aarch64 in the current chromium recipes was enough
-to get the browser running (tried playing some videos from youtube and the horse
-example from threejs.org [1]).
-After checking the chromium sources, it looks like at least some of the aarch64
-fixes mentioned in [2] are present in the 53 and 54 versions used in meta-browser.
-
-I'll post my aarch64 patch to the list shortly.
-
-Thanks,
-Andrey
-
-[1] http://threejs.org/examples/#webgl_morphtargets_horse
-[2] https://bugs.chromium.org/p/chromium/issues/detail?id=613452
+diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+index 60edccb..c0c3b94 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE_x86-64 = "(.*)"
+ COMPATIBLE_MACHINE_armv6 = "(.*)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
+ COMPATIBLE_MACHINE_armv7ve = "(.*)"
++COMPATIBLE_MACHINE_aarch64 = "(.*)"
+ 
+ # The build type defaults to Release. If you want a Debug build, you can set
+ # the variable CHROMIUM_BUILD_TYPE to "Debug" in your conf/local.conf file.
+diff --git a/recipes-browser/chromium/files/aarch64/include.gypi b/recipes-browser/chromium/files/aarch64/include.gypi
+new file mode 100644
+index 0000000..ad0347a
+--- /dev/null
++++ b/recipes-browser/chromium/files/aarch64/include.gypi
+@@ -0,0 +1,6 @@
++{
++  'variables': {
++    # Configure for aarch64 compilation
++    'target_arch': 'arm64',
++  }, 
++}
+diff --git a/recipes-browser/chromium/files/aarch64/oe-defaults.gypi b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+new file mode 100644
+index 0000000..27e1cfe
+--- /dev/null
++++ b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+@@ -0,0 +1,15 @@
++{
++  'variables': {
++    'use_system_bzip2': 1,
++    'disable_nacl': 1,
++    'proprietary_codecs': 1,
++    'v8_use_snapshot': 1,
++    'use_system_ffmpeg': 0,
++    'linux_use_tcmalloc': 0,
++    'linux_link_kerberos': 0,
++    'use_kerberos': 0,
++    'use_cups': 0,
++    'use_gnome_keyring': 0,
++    'linux_link_gnome_keyring': 0
++  }, 
++}
+-- 
+2.1.4
 
 
