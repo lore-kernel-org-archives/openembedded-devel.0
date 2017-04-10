@@ -1,24 +1,33 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 509927760E
+Return-Path: <herve.jourdain@neuf.fr>
+X-Greylist: delayed 377 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 10 Apr 2017 05:21:28 UTC
+Received: from smtp26.services.sfr.fr (smtp26.services.sfr.fr [93.17.128.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 41EB977819
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Apr 2017 02:19:54 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3A2JtX1017504
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 9 Apr 2017 19:19:55 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 9 Apr 2017 19:19:54 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 10 Apr 2017 10:18:15 +0800
-Message-ID: <20170410021815.13689-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
+	Mon, 10 Apr 2017 05:21:28 +0000 (UTC)
+Received: from nbhjo (203-69-87-74.HINET-IP.hinet.net [203.69.87.74])
+	by msfrf2620.sfr.fr (SMTP Server) with ESMTP id CD0EE1C000839;
+	Mon, 10 Apr 2017 07:15:11 +0200 (CEST)
+Received: from nbhjo (203-69-87-74.HINET-IP.hinet.net [203.69.87.74])	(using
+	TLSv1.2
+	with cipher ECDHE-RSA-AES256-SHA384 (256/256 bits))	(No client
+	certificate requested)	(Authenticated sender: herve.jourdain@neuf.fr)
+	by msfrf2620.sfr.fr (SMTP Server) with ESMTPSA;
+	Mon, 10 Apr 2017 07:15:10 +0200 (CEST)
+Authentication-Results: sfr.fr; auth=pass (LOGIN)
+	smtp.auth=herve.jourdain@neuf.fr
+From: Herve Jourdain <herve.jourdain@neuf.fr>
+To: 'Andrey Konovalov' <andrey.konovalov@linaro.org>,
+	openembedded-devel@lists.openembedded.org
+References: <1491591433-19590-1-git-send-email-andrey.konovalov@linaro.org>
+In-Reply-To: <1491591433-19590-1-git-send-email-andrey.konovalov@linaro.org>
+Date: Mon, 10 Apr 2017 07:15:04 +0200
+Message-ID: <004901d2b1b9$6cb39420$461abc60$@neuf.fr>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] postfix: do NOT create directory /var/spool/mail
+X-Mailer: Microsoft Outlook 15.0
+Thread-Index: AQIQF3AF58lZYP3cO8fcbc2G7aq4ZaFDQ1+A
+X-sfr-mailing: LEGIT
+Subject: Re: ***SPAM*** [PATCH] chromium: enable aarch64 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,40 +40,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Apr 2017 02:19:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 10 Apr 2017 05:21:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
+Content-Language: fr
 
-From: Kai Kang <kai.kang@windriver.com>
+Hi,
 
-postfix installs directory /var/spool/mail which conflicts with package
-shadow.
+And in more recent / GN based versions of Chromium, no specific patch is
+even needed, as aarch64 is "natively" supported by the codebase.
+I guess recipes for those will come soon, since it seems several different
+persons/groups came with their own flavor of GN build...
 
-| Error: Transaction check error:
-|  file /var/spool/mail conflicts between attempted installs of
-|  postfix-3.1.1-r0.ppc64e6500 and shadow-4.2.1-r0.1.ppc64e6500
+Cheers,
+Herve
 
-Make postfix not create /var/spool/mail that it does NOT create the
-directory on Fedora and Ubuntu either.
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+Andrey Konovalov
+Sent: vendredi 7 avril 2017 20:57
+To: openembedded-devel@lists.openembedded.org
+Subject: ***SPAM*** [oe] [PATCH] chromium: enable aarch64 support
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Tested by running:
+- chromium-wayland on HiKey
+- chromium on dragonboard-410c
+
+Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
 ---
- meta-networking/recipes-daemons/postfix/postfix.inc | 2 --
- 1 file changed, 2 deletions(-)
+ recipes-browser/chromium/chromium.inc                   |  1 +
+ recipes-browser/chromium/files/aarch64/include.gypi     |  6 ++++++
+ recipes-browser/chromium/files/aarch64/oe-defaults.gypi | 15
++++++++++++++++
+ 3 files changed, 22 insertions(+)
+ create mode 100644 recipes-browser/chromium/files/aarch64/include.gypi
+ create mode 100644 recipes-browser/chromium/files/aarch64/oe-defaults.gypi
 
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index 5bb2491..4c794ff 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -164,8 +164,6 @@ do_install () {
-     install -m 770 -d ${D}${localstatedir}/spool/postfix
-     chown postfix:postfix ${D}${localstatedir}/spool/postfix
+diff --git a/recipes-browser/chromium/chromium.inc
+b/recipes-browser/chromium/chromium.inc
+index 60edccb..c0c3b94 100644
+--- a/recipes-browser/chromium/chromium.inc
++++ b/recipes-browser/chromium/chromium.inc
+@@ -7,6 +7,7 @@ COMPATIBLE_MACHINE_x86-64 = "(.*)"
+ COMPATIBLE_MACHINE_armv6 = "(.*)"
+ COMPATIBLE_MACHINE_armv7a = "(.*)"
+ COMPATIBLE_MACHINE_armv7ve = "(.*)"
++COMPATIBLE_MACHINE_aarch64 = "(.*)"
  
--    install -m 2755 -d ${D}${localstatedir}/spool/mail
--    chown postfix:nogroup ${D}${localstatedir}/spool/mail
-     install -m 0755 -d ${D}${localstatedir}/lib/postfix
-     chown postfix:nogroup ${D}${localstatedir}/lib/postfix
-     install -m 0755 -d ${D}${localstatedir}/spool/postfix
--- 
-2.10.1
+ # The build type defaults to Release. If you want a Debug build, you can
+set  # the variable CHROMIUM_BUILD_TYPE to "Debug" in your conf/local.conf
+file.
+diff --git a/recipes-browser/chromium/files/aarch64/include.gypi
+b/recipes-browser/chromium/files/aarch64/include.gypi
+new file mode 100644
+index 0000000..ad0347a
+--- /dev/null
++++ b/recipes-browser/chromium/files/aarch64/include.gypi
+@@ -0,0 +1,6 @@
++{
++  'variables': {
++    # Configure for aarch64 compilation
++    'target_arch': 'arm64',
++  },
++}
+diff --git a/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+new file mode 100644
+index 0000000..27e1cfe
+--- /dev/null
++++ b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+@@ -0,0 +1,15 @@
++{
++  'variables': {
++    'use_system_bzip2': 1,
++    'disable_nacl': 1,
++    'proprietary_codecs': 1,
++    'v8_use_snapshot': 1,
++    'use_system_ffmpeg': 0,
++    'linux_use_tcmalloc': 0,
++    'linux_link_kerberos': 0,
++    'use_kerberos': 0,
++    'use_cups': 0,
++    'use_gnome_keyring': 0,
++    'linux_link_gnome_keyring': 0
++  },
++}
+--
+2.1.4
+
+--
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
