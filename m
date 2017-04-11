@@ -1,45 +1,51 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id ED41777D03
+Return-Path: <andrey.konovalov@linaro.org>
+Received: from mail-lf0-f44.google.com (mail-lf0-f44.google.com
+	[209.85.215.44])
+	by mail.openembedded.org (Postfix) with ESMTP id A855A77CFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 18:51:17 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id x75so2050909wma.1
+	Tue, 11 Apr 2017 19:42:04 +0000 (UTC)
+Received: by mail-lf0-f44.google.com with SMTP id t144so3840732lff.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 11:51:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/l0djt6A6odJiJYrKKPiLF6UxDq+d0K8+BwfCqzS5Ss=;
-	b=ublGbQQa+hbMD3gZNqqadd8jLOQCezPt/uNZpA9k0OJcu8mhQkUHEentAGnPWWkuv7
-	x/D8GSQM5feRdDoOzww7Hwfi6kX55mlC29C8xBGR4IUp+P9HMKUe1Mgf9rXUz4amUOqd
-	d2ls/QQ0OBZ6lJCm0r3hX7DfEWSB3vUgH44cTSRivIVwFI1MToOOlVa58BDHX4RxrN0j
-	hAGTnNrI+Pl4M9tUFgS4J0zUu1pbQkaK3bVkrH9YDKccz5lml63oNiV6WSvFyhe3I2iq
-	EdSP1uXXv44PAAAaFJfBRyEFT/wPb+2pjviEJBG47h6or11NCHXpfRtvQY1Bi6EyBcwd
-	d84Q==
+	Tue, 11 Apr 2017 12:42:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:references:from:cc:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=AIyFb940kFjrLBywSOKebtewVDQ4+XNC6D1BrOYzcGY=;
+	b=fHX9ChoSdt5zE2W1/3FCAqY4tX5loF8fJ6+goLTQPC7K+RpRsAHpxtc+eFc0hxjKFc
+	OJMJO3ebgsLWyiHEYI+NCccehyndlNiMA0vqnZCpaJBiDCl34vRVNNECpbwTAVniOiVe
+	5ekJlSfTDboPAmR4zDQGuhUE7wmpKOtHrv5P0=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/l0djt6A6odJiJYrKKPiLF6UxDq+d0K8+BwfCqzS5Ss=;
-	b=A8kEd/SFsy4AQFOFXGNNPJ/QFhWoTtwJ2Yuf8Y+hcQC8foGbDrs+uHhIIgotLXQnJP
-	/wb2CAC5pBUx31V+J06q1xTp+P7Ij04hF2y9FTOx+uySZwq4SqldoDYp49lwQw4bCLpp
-	1ISdIC+rwI7GOES0cW88OUCdw26hVM1e4RHtf9NJhcj3xJ99RR5KZK4t9m1iEyD8ISgT
-	YCojkbpOIg3YooKOD4s84I4seB4reQOkxW4QK/VCR+pnPp9QYIpBii4Zf+P+p4F2f3ve
-	l5XWDQhff8Pd49MciDHwYMphbXlnDiVsMhPvb9Ve/RieaFqeKGS6ZIqUBonYd8m+GhUK
-	5UJA==
-X-Gm-Message-State: AN3rC/7hlAqjn4vxss+sZ7vK3zhhEiao5po9yifbMkPvNWMIyq95Vwn24ggKIxWj0hxkkvLLlgw2LdDfeD4X6A==
-X-Received: by 10.28.199.65 with SMTP id x62mr9095430wmf.20.1491936678665;
-	Tue, 11 Apr 2017 11:51:18 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.153.248 with HTTP; Tue, 11 Apr 2017 11:51:17 -0700 (PDT)
-In-Reply-To: <58ECD3E2.1090601@linaro.org>
+	h=x-gm-message-state:subject:to:references:from:cc:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=AIyFb940kFjrLBywSOKebtewVDQ4+XNC6D1BrOYzcGY=;
+	b=tLQ3Sqxpg3VaHXBhFSsAYw/vBBzsQMgtTMd2b+VdKOMTHoQGxXnFtn9TBad6175ImW
+	nelOYu4zUdf1OTt31nkQJF9bEdy5hEVPtT/zai3wWHhhDB+lCeYZdgC1EGsTs3uScCy2
+	4BxCqhBPzBBWCEzAmgk/eQPZyn0Nr48BR2KaX3zbQ0tUKlt0gH6DN59AQaf2l2c8/HDX
+	U1HXEnKJrHgo5c6J6KnqH8XSvGhSRum9tOpl0VgZpGZbYkyKe40rVIFGEmNmyWqwOWsH
+	xti9Azad4LtZcTLlwmAELpT6AJk/vvbqemdY1kLciSMY4kFlIObWna/OY4jSGN5etSD0
+	wCdg==
+X-Gm-Message-State: AFeK/H0tFGFeNKuEHOESvxkayCub/4hrOObxWa+0WDV5+ADn0GrpVP51baBaD56oHSutNXRm
+X-Received: by 10.25.102.2 with SMTP id a2mr17160303lfc.3.1491939725062;
+	Tue, 11 Apr 2017 12:42:05 -0700 (PDT)
+Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
+	by smtp.googlemail.com with ESMTPSA id
+	h18sm3713106ljh.5.2017.04.11.12.42.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Apr 2017 12:42:04 -0700 (PDT)
+To: Andre McCurdy <armccurdy@gmail.com>
 References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
 	<CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
 	<58ECD3E2.1090601@linaro.org>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 11 Apr 2017 11:51:17 -0700
-Message-ID: <CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
-To: Andrey Konovalov <andrey.konovalov@linaro.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
+From: Andrey Konovalov <andrey.konovalov@linaro.org>
+Message-ID: <58ED318B.6090702@linaro.org>
+Date: Tue, 11 Apr 2017 22:42:03 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -53,80 +59,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 18:51:18 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 11 Apr 2017 19:42:07 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 11, 2017 at 6:02 AM, Andrey Konovalov
-<andrey.konovalov@linaro.org> wrote:
-> On 04/11/2017 03:40 AM, Andre McCurdy wrote:
->>
->> On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
->> <andrey.konovalov@linaro.org> wrote:
+On 04/11/2017 09:51 PM, Andre McCurdy wrote:
+> On Tue, Apr 11, 2017 at 6:02 AM, Andrey Konovalov
+> <andrey.konovalov@linaro.org> wrote:
+>> On 04/11/2017 03:40 AM, Andre McCurdy wrote:
 >>>
->>> This patch prevents "Aw Snap" error when loading a page with JavaScript.
+>>> On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
+>>> <andrey.konovalov@linaro.org> wrote:
+<snip>
+>>>> -GYP_DEFINES += "${ARMFPABI}
+>>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+>>>> +GYP_DEFINES += " ${ARMFPABI}
+>>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
+>>>> +       ${@bb.utils.contains("AVAILTUNES", "mips", "",
+>>>> "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
 >>>
->>> Tested by running:
->>> - chromium-wayland on Beagle X15
->>> - chromium-wayland on HiKey (with a separate patch to enable aarch64
->>> build)
->>> - cromium on dragonboard-410c (with a separate patch to enable aarch64
->>> build)
 >>>
->>> Based on the fix for Gentoo's bug 588596:
->>> https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
->>>
->>> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
->>> ---
->>>   recipes-browser/chromium/chromium.inc | 3 ++-
->>>   1 file changed, 2 insertions(+), 1 deletion(-)
->>>
->>> diff --git a/recipes-browser/chromium/chromium.inc
->>> b/recipes-browser/chromium/chromium.inc
->>> index 60edccb..7e057ec 100644
->>> --- a/recipes-browser/chromium/chromium.inc
->>> +++ b/recipes-browser/chromium/chromium.inc
->>> @@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
->>>   inherit gettext pythonnative
->>>
->>>   ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES',
->>> 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+>>> What's the significance of skipping the workaround if AVAILTUNES
+>>> contains "mips" ?
 >>
 >>
->> Not related to the patch, but this over-ride should be duplicated for
->> _armv7ve
->>
->>> -GYP_DEFINES += "${ARMFPABI}
->>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
->>> +GYP_DEFINES += " ${ARMFPABI}
->>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
->>> +       ${@bb.utils.contains("AVAILTUNES", "mips", "",
->>> "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
->>
->>
->> What's the significance of skipping the workaround if AVAILTUNES
->> contains "mips" ?
+>> This change (to add '-fno-delete-null-pointer-checks' to gcc flags) was
+>> initially merged into chromium directly,
+>> but soon reverted as it broke mips somehow:
+>> https://bugs.chromium.org/p/v8/issues/detail?id=3782#c10
 >
->
-> This change (to add '-fno-delete-null-pointer-checks' to gcc flags) was
-> initially merged into chromium directly,
-> but soon reverted as it broke mips somehow:
-> https://bugs.chromium.org/p/v8/issues/detail?id=3782#c10
+> OK, thanks. Note that building for MIPS isn't currently supported at
+> all according to the COMPATIBLE_MACHINE definitions at the top of the
+> recipe.
 
-OK, thanks. Note that building for MIPS isn't currently supported at
-all according to the COMPATIBLE_MACHINE definitions at the top of the
-recipe.
-
->>>   GYP_DEFINES_append_x86 = " generate_character_data=0"
->>>
->>>   do_configure() {
->>> --
->>> 2.1.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+Indeed.
+So my check for "mips" in AVAILTUNES is a NOP until someone enables building for MIPS.
+Thanks for pointing that out!
 
