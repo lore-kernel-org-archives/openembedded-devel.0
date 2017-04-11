@@ -1,25 +1,25 @@
 Return-Path: <stefan@agner.ch>
 Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F93C77D01
+	by mail.openembedded.org (Postfix) with ESMTP id 7D43977D04
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 21:05:08 +0000 (UTC)
+	Tue, 11 Apr 2017 21:12:24 +0000 (UTC)
 Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 46E685C1B18;
-	Tue, 11 Apr 2017 23:04:52 +0200 (CEST)
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id A79DF5C1B28;
+	Tue, 11 Apr 2017 23:12:09 +0200 (CEST)
 MIME-Version: 1.0
-Date: Tue, 11 Apr 2017 14:04:55 -0700
+Date: Tue, 11 Apr 2017 14:12:12 -0700
 From: Stefan Agner <stefan@agner.ch>
 To: Martin Jansa <martin.jansa@gmail.com>
 In-Reply-To: <CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
 References: <1491165189-7839-1-git-send-email-stefan@agner.ch>
 	<CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
-Message-ID: <a50d975def43c43f49936d9638369585@agner.ch>
+Message-ID: <d1d64c365d12a2cc039b3202e018e92d@agner.ch>
 X-Sender: stefan@agner.ch
 User-Agent: Roundcube Webmail/1.1.3
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1491944692; bh=cqssgbHNoW0KqNd5hYJ98jwKlsWKstv80tPJRIm+pTY=;
+	t=1491945129; bh=0wDG/ij8F+8NS2usRUJ2ODh9+hruWl7EgvpGyaU++yE=;
 	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
-	b=Qm8uzklsZhyyqr3KqpgujWGLi0QbgqVX/QTY9d1Mkv3A7Ar2xQg5c+v0ABZCRamtixpnLOyxCupqlZWfSREvZJhcdF0w/ma7686b4DCiHQbwWGufV+jvuvk7V98Z3J9lSZDHcbm3GCsZTnrR0/5/AMQ0nYDmBjE8fIAXo9ZZTDE=
+	b=zjfXNk+bWUUf8mYwpdwmQbZBBq4otZACTMy95nAQrHDuGv1+BrKIVbpqI0qdoKoyMgeQ6IIkptAlP6kJ9c/pDcUrsKHq1HLpHUHCpDBzjGoJLz4EyWzPD+FGZbCaoHFEkFMPKnmXfMIhbZlbKpGsODUuU8MVACaYF9NxgckXJoI=
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
@@ -35,115 +35,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 21:05:10 -0000
+X-List-Received-Date: Tue, 11 Apr 2017 21:12:25 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
  
 
-Hi Martin, 
+I guess one solution would be adding  
 
-I tried to reproduce your findings, unfortunately building qemux86copy
-fails for me with this: 
+PACKAGE_ARCH = "${MACHINE_ARCH}" 
 
-Parsing recipes: 100%
-|######################################################################################################|
-Time: 0:00:20
-Parsing of 1865 .bb files complete (0 cached, 1865 parsed). 2607
-targets, 168 skipped, 0 masked, 0 errors.
-NOTE: Resolving any missing task queue dependencies 
+to the wireguard-tools recipe, but that seems wrong to me since we can
+reuse wireguard-tools for all TUNE_PKGARCH's... Any hint/help
+appreciated. 
 
-Build Configuration:
-BB_VERSION = "1.33.4"
-BUILD_SYS = "x86_64-linux"
-NATIVELSBSTRING = "ubuntu-16.04"
-TARGET_SYS = "i586-oe-linux"
-MACHINE = "qemux86copy"
-DISTRO = "nodistro"
-DISTRO_VERSION = "nodistro.0"
-TUNE_FEATURES = "m32 i586"
-TARGET_FPU = ""
-meta = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593"
-meta-oe 
-meta-python 
-meta-networking = "master-next:c323b775e45e48c70ffe841a6b7addbd39183980"
-meta-selftest = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593" 
-
-Initialising tasks: 100%
-|###################################################################################################|
-Time: 0:00:00
-NOTE: Executing SetScene Tasks
-NOTE: Executing RunQueue Tasks
-WARNING: linux-yocto-4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0
-do_kernel_configcheck: [kernel config]: specified values did not make it
-int
-o the kernel's final configuration: 
-
----------- CONFIG_AEABI -----------------
-Config: CONFIG_AEABI
-From:
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/.kernel-meta/configs/standard/arch/arm/arm.cfg
-Requested value: CONFIG_AEABI=y
-Actual value: 
-
-.... 
-
-| WRAP arch/x86/include/generated/asm/mm-arch-hooks.h
-| WRAP arch/x86/include/generated/asm/early_ioremap.h
-| WRAP arch/x86/include/generated/asm/mcs_spinlock.h
-| CHK include/generated/uapi/linux/version.h
-| UPD include/generated/uapi/linux/version.h
-| CHK include/generated/utsrelease.h
-| UPD include/generated/utsrelease.h
-| HOSTCC scripts/kallsyms
-| HOSTCC scripts/conmakehash
-| HOSTCC scripts/recordmcount
-| HOSTCC scripts/sortextable
-| CC scripts/mod/empty.o
-| HOSTCC scripts/mod/mk_elfconfig
-|
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0:
-error: code model 'kernel' not supported in the 32 bit mode
-| /* empty file to figure out endianness / word size */
-| 
-|
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0:
-sorry, unimplemented: 64-bit mode not compiled in
-|
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:294:
-recipe for target 'scripts/mod/empty.o' failed
-| make[4]: *** [scripts/mod/empty.o] Error 1
-| make[4]: *** Waiting for unfinished jobs....
-|
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:553:
-recipe for target 'scripts/mod' failed
-| make[3]: *** [scripts/mod] Error 2
-| make[3]: *** Waiting for unfinished jobs....
-|
-/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/Makefile:560:
-recipe for target 'scripts' failed
-| make[2]: *** [scripts] Error 2
-| make[2]: *** Waiting for unfinished jobs....
-| Makefile:150: recipe for target 'sub-make' failed
-| make[1]: *** [sub-make] Error 2
-| Makefile:24: recipe for target '__sub-make' failed
-| make: *** [__sub-make] Error 2
-| WARNING: exit code 1 from a shell command.
-| ERROR: Function failed: do_compile (log file is located at
-/build/ags/oe-core/build/tmp-glibc/work/qemux86copy-oe-linux/linux-yocto/4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0/temp/log.do_compile.29158)
-
-
-What is going on here? Somehow OE tries to configure the kernel for
-arm?! The qemux86 machine built just fine, not sure what difference
-causes this error when building the qemux86copy machine. 
-
-Sorry, I did do not understand how I can "remove this dependency from
-sstate signature in layer.conf", do you have any hints how to do this? 
-
-Also, meta-networking/recipes-connectivity/ufw/ufw_0.33.bb seems to me
-to do pretty much the same as I do, shouldn't have that the same issue? 
-
-Best regards, 
+-- 
 
 Stefan 
 
