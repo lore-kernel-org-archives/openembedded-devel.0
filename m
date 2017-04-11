@@ -1,50 +1,46 @@
-Return-Path: <gordan.markus@pelagicore.com>
-Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
-	[209.85.215.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 856DB77BD5
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id ED41777D03
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 14:04:37 +0000 (UTC)
-Received: by mail-lf0-f50.google.com with SMTP id h125so87456703lfe.0
+	Tue, 11 Apr 2017 18:51:17 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id x75so2050909wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 07:04:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Oro/qwd1HbWcQ/EEhQDfvSwq4G1hHdgPJ04BVxDjc4s=;
-	b=e46yDrFTiKjGI/2oBrZXuTzLxLFF4RNx/VoJvugdU5T/4Hgy5TRPCUDBKLErWdDEhp
-	xKyh8cLY5gdMZ+OLdnYuj9ouxqiJm0431k425/mHeD2UG39NdRnVv/az0rYBqFB1hkvk
-	LwwiPBTXqVjRAqWwzzXXW8bOQ9lJKcbEfFMgSWt3YdhhokbhsNKAUVerK62vxUcciYvm
-	bLqg8OfKBvWqRgO6jLEZ0O/viD7F9rw9FIedPKXsCegE1+g0swM+Rfy2RY6iaB82uMo4
-	G3u7bbS1Kd3N04jjWzsAJ6H9tmW1w2JAzAa6+RBMCNU1AvlDpBRz/qUktF5EK0hPdiFk
-	Zxvw==
+	Tue, 11 Apr 2017 11:51:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/l0djt6A6odJiJYrKKPiLF6UxDq+d0K8+BwfCqzS5Ss=;
+	b=ublGbQQa+hbMD3gZNqqadd8jLOQCezPt/uNZpA9k0OJcu8mhQkUHEentAGnPWWkuv7
+	x/D8GSQM5feRdDoOzww7Hwfi6kX55mlC29C8xBGR4IUp+P9HMKUe1Mgf9rXUz4amUOqd
+	d2ls/QQ0OBZ6lJCm0r3hX7DfEWSB3vUgH44cTSRivIVwFI1MToOOlVa58BDHX4RxrN0j
+	hAGTnNrI+Pl4M9tUFgS4J0zUu1pbQkaK3bVkrH9YDKccz5lml63oNiV6WSvFyhe3I2iq
+	EdSP1uXXv44PAAAaFJfBRyEFT/wPb+2pjviEJBG47h6or11NCHXpfRtvQY1Bi6EyBcwd
+	d84Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=Oro/qwd1HbWcQ/EEhQDfvSwq4G1hHdgPJ04BVxDjc4s=;
-	b=aov1jc+D6cx83llD80qzlwbn5M3Y+blYKebnHlbxZN+xVYuM5t+fVjdL4N3bMv6FwR
-	Up/XzPLFqxX51MWOyndzxhFRIemotO07xilBJX8IrGKO1IL5oH6KS9tqadyq+HlRVG49
-	txc/Ro2umBuhO+pzk2/nXpHNOoNTAq+98Lv+yS5yeXx7G6NRR7DIx29U5z9iUTuUUTRC
-	ms23oAA5yMiI10d2xr9Pf0To8X9uh9CLnglbZ6Jn+IO7gEy/3ppM4/TQcswP/j7+eCH5
-	xJDX43svsxKjTnOpqAeLE6k86RlaR4CH5yB42nH7+R8KRjAFiS1NrX01fH3lnME029J8
-	5fRg==
-X-Gm-Message-State: AN3rC/7hXMBA0TOhTkApJ7G1TPKVj8xe5Us0/l2J4mqP/EFFmq6eUVDP5vfEKSPhuax1r+sj
-X-Received: by 10.25.213.12 with SMTP id m12mr4745154lfg.145.1491919478592;
-	Tue, 11 Apr 2017 07:04:38 -0700 (PDT)
-Received: from gordanmarkus-XPS13.luxoft.com
-	(static-212-247-53-108.cust.tele2.se. [212.247.53.108])
-	by smtp.gmail.com with ESMTPSA id c66sm3437412lfg.9.2017.04.11.07.04.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Apr 2017 07:04:37 -0700 (PDT)
-From: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Apr 2017 16:04:33 +0200
-Message-Id: <20170411140433.3792-2-gordan.markus@pelagicore.com>
-X-Mailer: git-send-email 2.9.3
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/l0djt6A6odJiJYrKKPiLF6UxDq+d0K8+BwfCqzS5Ss=;
+	b=A8kEd/SFsy4AQFOFXGNNPJ/QFhWoTtwJ2Yuf8Y+hcQC8foGbDrs+uHhIIgotLXQnJP
+	/wb2CAC5pBUx31V+J06q1xTp+P7Ij04hF2y9FTOx+uySZwq4SqldoDYp49lwQw4bCLpp
+	1ISdIC+rwI7GOES0cW88OUCdw26hVM1e4RHtf9NJhcj3xJ99RR5KZK4t9m1iEyD8ISgT
+	YCojkbpOIg3YooKOD4s84I4seB4reQOkxW4QK/VCR+pnPp9QYIpBii4Zf+P+p4F2f3ve
+	l5XWDQhff8Pd49MciDHwYMphbXlnDiVsMhPvb9Ve/RieaFqeKGS6ZIqUBonYd8m+GhUK
+	5UJA==
+X-Gm-Message-State: AN3rC/7hlAqjn4vxss+sZ7vK3zhhEiao5po9yifbMkPvNWMIyq95Vwn24ggKIxWj0hxkkvLLlgw2LdDfeD4X6A==
+X-Received: by 10.28.199.65 with SMTP id x62mr9095430wmf.20.1491936678665;
+	Tue, 11 Apr 2017 11:51:18 -0700 (PDT)
 MIME-Version: 1.0
-Cc: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
-Subject: [meta-qt5][PATCH] qtwayland: fix initial window property values
+Received: by 10.223.153.248 with HTTP; Tue, 11 Apr 2017 11:51:17 -0700 (PDT)
+In-Reply-To: <58ECD3E2.1090601@linaro.org>
+References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
+	<CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
+	<58ECD3E2.1090601@linaro.org>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 11 Apr 2017 11:51:17 -0700
+Message-ID: <CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,77 +53,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 14:04:39 -0000
+X-List-Received-Date: Tue, 11 Apr 2017 18:51:18 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-This fixes a bug where there is nothing rendered on the
-QtWayland surface due to missing window properties.
+On Tue, Apr 11, 2017 at 6:02 AM, Andrey Konovalov
+<andrey.konovalov@linaro.org> wrote:
+> On 04/11/2017 03:40 AM, Andre McCurdy wrote:
+>>
+>> On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
+>> <andrey.konovalov@linaro.org> wrote:
+>>>
+>>> This patch prevents "Aw Snap" error when loading a page with JavaScript.
+>>>
+>>> Tested by running:
+>>> - chromium-wayland on Beagle X15
+>>> - chromium-wayland on HiKey (with a separate patch to enable aarch64
+>>> build)
+>>> - cromium on dragonboard-410c (with a separate patch to enable aarch64
+>>> build)
+>>>
+>>> Based on the fix for Gentoo's bug 588596:
+>>> https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
+>>>
+>>> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+>>> ---
+>>>   recipes-browser/chromium/chromium.inc | 3 ++-
+>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>
+>>> diff --git a/recipes-browser/chromium/chromium.inc
+>>> b/recipes-browser/chromium/chromium.inc
+>>> index 60edccb..7e057ec 100644
+>>> --- a/recipes-browser/chromium/chromium.inc
+>>> +++ b/recipes-browser/chromium/chromium.inc
+>>> @@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
+>>>   inherit gettext pythonnative
+>>>
+>>>   ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES',
+>>> 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+>>
+>>
+>> Not related to the patch, but this over-ride should be duplicated for
+>> _armv7ve
+>>
+>>> -GYP_DEFINES += "${ARMFPABI}
+>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+>>> +GYP_DEFINES += " ${ARMFPABI}
+>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
+>>> +       ${@bb.utils.contains("AVAILTUNES", "mips", "",
+>>> "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
+>>
+>>
+>> What's the significance of skipping the workaround if AVAILTUNES
+>> contains "mips" ?
+>
+>
+> This change (to add '-fno-delete-null-pointer-checks' to gcc flags) was
+> initially merged into chromium directly,
+> but soon reverted as it broke mips somehow:
+> https://bugs.chromium.org/p/v8/issues/detail?id=3782#c10
 
-Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
----
- ...l-window-property-values-being-propagated.patch | 35 ++++++++++++++++++++++
- recipes-qt/qt5/qtwayland_git.bb                    |  5 +++-
- 2 files changed, 39 insertions(+), 1 deletion(-)
- create mode 100644 recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
+OK, thanks. Note that building for MIPS isn't currently supported at
+all according to the COMPATIBLE_MACHINE definitions at the top of the
+recipe.
 
-diff --git a/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch b/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
-new file mode 100644
-index 0000000..29c9180
---- /dev/null
-+++ b/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
-@@ -0,0 +1,35 @@
-+From 3d30fd8df9b55449844207295ad3d51cc8bb44b1 Mon Sep 17 00:00:00 2001
-+From: Robert Griebl <robert.griebl@pelagicore.com>
-+Date: Thu, 15 Dec 2016 17:43:00 +0100
-+Subject: [PATCH 2/2] Fix initial window property values being propagated
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+This was broken since the the shell-surface refactoring.
-+
-+Change-Id: I130b7396e85c570a9d11d609af6b3016e3f706f0
-+Reviewed-by: Dominik Holland <dominik.holland@pelagicore.com>
-+Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
-+Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
-+---
-+ src/client/qwaylandwindow.cpp | 3 +++
-+ 1 file changed, 3 insertions(+)
-+
-+diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
-+index c8be9c1..b6f16f0 100644
-+--- a/src/client/qwaylandwindow.cpp
-++++ b/src/client/qwaylandwindow.cpp
-+@@ -176,6 +176,9 @@ void QWaylandWindow::initWindow()
-+                 mShellSurface->setAppId(appId);
-+             }
-+         }
-++        // the user may have already set some window properties, so make sure to send them out
-++        for (auto it = m_properties.cbegin(); it != m_properties.cend(); ++it)
-++            mShellSurface->sendProperty(it.key(), it.value());
-+     }
-+ 
-+     // Enable high-dpi rendering. Scale() returns the screen scale factor and will
-+-- 
-+2.9.3
-+
-diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
-index d42d80a..bcddb32 100644
---- a/recipes-qt/qt5/qtwayland_git.bb
-+++ b/recipes-qt/qt5/qtwayland_git.bb
-@@ -44,6 +44,9 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
- SRCREV = "0e2a950895805457a45abe860bc91a7cc4ba405e"
- 
- # From https://bugreports.qt.io/browse/QTBUG-57767
--SRC_URI += "file://0001-fix-build-without-xkbcommon-evdev.patch"
-+SRC_URI += " \
-+    file://0001-fix-build-without-xkbcommon-evdev.patch \
-+    file://0002-Fix-initial-window-property-values-being-propagated.patch \
-+"
- 
- BBCLASSEXTEND =+ "native nativesdk"
--- 
-2.9.3
-
+>>>   GYP_DEFINES_append_x86 = " generate_character_data=0"
+>>>
+>>>   do_configure() {
+>>> --
+>>> 2.1.4
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
