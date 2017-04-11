@@ -1,46 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DDB277BD9
+Return-Path: <gordan.markus@pelagicore.com>
+Received: from mail-lf0-f50.google.com (mail-lf0-f50.google.com
+	[209.85.215.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 856DB77BD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 13:05:20 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id d79so82916wmi.2
+	Tue, 11 Apr 2017 14:04:37 +0000 (UTC)
+Received: by mail-lf0-f50.google.com with SMTP id h125so87456703lfe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 06:05:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=QZN9HkoVXh9hP81Ao9/1jie04duqiqe8fTBjA4qIRNo=;
-	b=E0RyJvHxdIywTfnOzgLISnXfO25DT+pMR+r25cRIdldEnVvPtOoW5NrbNNX2dmszUc
-	+9s5oPUwEerjLQTGCoTaGM7G19WLR9kH689pPGrBswQPUHAdtD3QeXQnUcCJ/wyDaWk8
-	FPxl9eSQ27CcpCVMpVAA8ifCK4hNE8kIETMSXKZhPgrAz8AGdVcuX0dIHD4ba1KUdbtF
-	ke0v/fjl3qVjjb+rKk5bAxy7yAf2V05V6Qnnczg0sZ9MRookOtHsGbk4OcFl5175JXha
-	a6QuoaaJIIow5HsAj4NX8sgViTNHUNRke0r94Lu4ILqYeni2M8P5PgUiAxE4Af6kNhBq
-	pBUg==
+	Tue, 11 Apr 2017 07:04:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=pelagicore-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Oro/qwd1HbWcQ/EEhQDfvSwq4G1hHdgPJ04BVxDjc4s=;
+	b=e46yDrFTiKjGI/2oBrZXuTzLxLFF4RNx/VoJvugdU5T/4Hgy5TRPCUDBKLErWdDEhp
+	xKyh8cLY5gdMZ+OLdnYuj9ouxqiJm0431k425/mHeD2UG39NdRnVv/az0rYBqFB1hkvk
+	LwwiPBTXqVjRAqWwzzXXW8bOQ9lJKcbEfFMgSWt3YdhhokbhsNKAUVerK62vxUcciYvm
+	bLqg8OfKBvWqRgO6jLEZ0O/viD7F9rw9FIedPKXsCegE1+g0swM+Rfy2RY6iaB82uMo4
+	G3u7bbS1Kd3N04jjWzsAJ6H9tmW1w2JAzAa6+RBMCNU1AvlDpBRz/qUktF5EK0hPdiFk
+	Zxvw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=QZN9HkoVXh9hP81Ao9/1jie04duqiqe8fTBjA4qIRNo=;
-	b=FPSyG0Y3XAWk/ZMDWfoAlRbFSTf5kpNaHbxuGZPE8LZ1cxSvS8SCsywLvCc2s8fxPr
-	hL/fuy8QsnX5LijuUUVxCx6DO00FqDyV8Yh6H1kUawWVP6EvegEIfkmuqrfxh685eBVk
-	3I3pLgOPXQ+euKZ4DoPkOtyoekpPlASBDv2+wB522kZuy7dP2U0SAN5WNEHHxfZrzPkq
-	ZwLpCK44fYQdP1efm8moVaUm/rwK/KakzcZftA6YWdfkGste4btwXZn2bk+PmojSyCf4
-	BiwH6kPpn3NU1clc5X4E0ixbnOC99gmjQ0dDw/jqcT8SRAP7QCSOIKQ2PL/qzYgjvnjz
-	MQ6Q==
-X-Gm-Message-State: AN3rC/4Xvc29wJhbJ74Vzea9BWZu3z0PPGCvZetFbmZM97oApXikuvGr
-	dEafzVcy+i8A6NIQmYnKi6tsTGYmrw==
-X-Received: by 10.28.175.209 with SMTP id y200mr7751126wme.81.1491915921769;
-	Tue, 11 Apr 2017 06:05:21 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Oro/qwd1HbWcQ/EEhQDfvSwq4G1hHdgPJ04BVxDjc4s=;
+	b=aov1jc+D6cx83llD80qzlwbn5M3Y+blYKebnHlbxZN+xVYuM5t+fVjdL4N3bMv6FwR
+	Up/XzPLFqxX51MWOyndzxhFRIemotO07xilBJX8IrGKO1IL5oH6KS9tqadyq+HlRVG49
+	txc/Ro2umBuhO+pzk2/nXpHNOoNTAq+98Lv+yS5yeXx7G6NRR7DIx29U5z9iUTuUUTRC
+	ms23oAA5yMiI10d2xr9Pf0To8X9uh9CLnglbZ6Jn+IO7gEy/3ppM4/TQcswP/j7+eCH5
+	xJDX43svsxKjTnOpqAeLE6k86RlaR4CH5yB42nH7+R8KRjAFiS1NrX01fH3lnME029J8
+	5fRg==
+X-Gm-Message-State: AN3rC/7hXMBA0TOhTkApJ7G1TPKVj8xe5Us0/l2J4mqP/EFFmq6eUVDP5vfEKSPhuax1r+sj
+X-Received: by 10.25.213.12 with SMTP id m12mr4745154lfg.145.1491919478592;
+	Tue, 11 Apr 2017 07:04:38 -0700 (PDT)
+Received: from gordanmarkus-XPS13.luxoft.com
+	(static-212-247-53-108.cust.tele2.se. [212.247.53.108])
+	by smtp.gmail.com with ESMTPSA id c66sm3437412lfg.9.2017.04.11.07.04.37
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Apr 2017 07:04:37 -0700 (PDT)
+From: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Apr 2017 16:04:33 +0200
+Message-Id: <20170411140433.3792-2-gordan.markus@pelagicore.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Tue, 11 Apr 2017 06:05:20 -0700 (PDT)
-In-Reply-To: <20170411124642.12647-1-fgiovanardi@aragnet.com>
-References: <20170411124642.12647-1-fgiovanardi@aragnet.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 11 Apr 2017 15:05:20 +0200
-Message-ID: <CA+chaQd8smC4BTwCKSFyJnxU1c+CDmCukiTRTL3qqPC7CqDDXA@mail.gmail.com>
-To: Federico Giovanardi <fgiovanardi@aragnet.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] picocom: Fix incorrect handling of ldflags
+Cc: =?UTF-8?q?Gordan=20Marku=C5=A1?= <gordan.markus@pelagicore.com>
+Subject: [meta-qt5][PATCH] qtwayland: fix initial window property values
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,44 +57,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 13:05:22 -0000
+X-List-Received-Date: Tue, 11 Apr 2017 14:04:39 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-I think It's already fixed in Khem's upgrade to 2.2 version.
+This fixes a bug where there is nothing rendered on the
+QtWayland surface due to missing window properties.
 
-On Tue, Apr 11, 2017 at 2:46 PM, Federico Giovanardi <
-fgiovanardi@aragnet.com> wrote:
+Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
+---
+ ...l-window-property-values-being-propagated.patch | 35 ++++++++++++++++++++++
+ recipes-qt/qt5/qtwayland_git.bb                    |  5 +++-
+ 2 files changed, 39 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
 
-> The previous version reports QA issue: no GNU_HASH in elf binary
-> during build
->
-> Signed-off-by: Federico Giovanardi <fgiovanardi@aragnet.com>
-> ---
->  meta-oe/recipes-support/picocom/picocom_1.7.bb | 1 +
->  1 file changed, 1 insertion(+)
->
-> diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> index dbee65609..c85c344e3 100644
-> --- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> +++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-> @@ -10,6 +10,7 @@ SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
->  SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9
-> a2348c89e02a84935517002b3bc2c1129e"
->
->  CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\"
-> -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
-> +TARGET_CC_ARCH += "${LDFLAGS}"
->
->  do_install () {
->      install -d ${D}${bindir}
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch b/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
+new file mode 100644
+index 0000000..29c9180
+--- /dev/null
++++ b/recipes-qt/qt5/qtwayland/0002-Fix-initial-window-property-values-being-propagated.patch
+@@ -0,0 +1,35 @@
++From 3d30fd8df9b55449844207295ad3d51cc8bb44b1 Mon Sep 17 00:00:00 2001
++From: Robert Griebl <robert.griebl@pelagicore.com>
++Date: Thu, 15 Dec 2016 17:43:00 +0100
++Subject: [PATCH 2/2] Fix initial window property values being propagated
++MIME-Version: 1.0
++Content-Type: text/plain; charset=UTF-8
++Content-Transfer-Encoding: 8bit
++
++This was broken since the the shell-surface refactoring.
++
++Change-Id: I130b7396e85c570a9d11d609af6b3016e3f706f0
++Reviewed-by: Dominik Holland <dominik.holland@pelagicore.com>
++Reviewed-by: Paul Olav Tvete <paul.tvete@qt.io>
++Signed-off-by: Gordan Markuš <gordan.markus@pelagicore.com>
++---
++ src/client/qwaylandwindow.cpp | 3 +++
++ 1 file changed, 3 insertions(+)
++
++diff --git a/src/client/qwaylandwindow.cpp b/src/client/qwaylandwindow.cpp
++index c8be9c1..b6f16f0 100644
++--- a/src/client/qwaylandwindow.cpp
+++++ b/src/client/qwaylandwindow.cpp
++@@ -176,6 +176,9 @@ void QWaylandWindow::initWindow()
++                 mShellSurface->setAppId(appId);
++             }
++         }
+++        // the user may have already set some window properties, so make sure to send them out
+++        for (auto it = m_properties.cbegin(); it != m_properties.cend(); ++it)
+++            mShellSurface->sendProperty(it.key(), it.value());
++     }
++ 
++     // Enable high-dpi rendering. Scale() returns the screen scale factor and will
++-- 
++2.9.3
++
+diff --git a/recipes-qt/qt5/qtwayland_git.bb b/recipes-qt/qt5/qtwayland_git.bb
+index d42d80a..bcddb32 100644
+--- a/recipes-qt/qt5/qtwayland_git.bb
++++ b/recipes-qt/qt5/qtwayland_git.bb
+@@ -44,6 +44,9 @@ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
+ SRCREV = "0e2a950895805457a45abe860bc91a7cc4ba405e"
+ 
+ # From https://bugreports.qt.io/browse/QTBUG-57767
+-SRC_URI += "file://0001-fix-build-without-xkbcommon-evdev.patch"
++SRC_URI += " \
++    file://0001-fix-build-without-xkbcommon-evdev.patch \
++    file://0002-Fix-initial-window-property-values-being-propagated.patch \
++"
+ 
+ BBCLASSEXTEND =+ "native nativesdk"
+-- 
+2.9.3
+
 
