@@ -1,51 +1,50 @@
-Return-Path: <btv1==2746b3a4bf2==fgiovanardi@aragnet.com>
-Received: from ess.meadinformatica.it (ess.meadinformatica.it [83.139.208.7])
-	by mail.openembedded.org (Postfix) with ESMTP id AB09B77BDB
+Return-Path: <andrey.konovalov@linaro.org>
+Received: from mail-lf0-f44.google.com (mail-lf0-f44.google.com
+	[209.85.215.44])
+	by mail.openembedded.org (Postfix) with ESMTP id CDAF277BD9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 12:44:54 +0000 (UTC)
-X-ASG-Debug-ID: 1491914693-06cfaf6eced8500001-aWHRdb
-Received: from mail.aragnet.com (mail.aragnet.com [87.241.1.10]) by
-	ess.meadinformatica.it with ESMTP id HMF6U6xhslRaCPqG for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 14:44:53 +0200 (CEST)
-X-Barracuda-Envelope-From: fgiovanardi@aragnet.com
-X-Barracuda-RBL-Trusted-Forwarder: 87.241.1.10
-Received: from arag-domino-mail.aragnet.lan (unknown [172.30.0.142])
-	by mail.aragnet.com (Postfix) with ESMTP id 526D711406E
+	Tue, 11 Apr 2017 13:02:28 +0000 (UTC)
+Received: by mail-lf0-f44.google.com with SMTP id 75so26858149lfs.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 14:49:04 +0200 (CEST)
-Received: from pcfedericog.aragnet.lan ([172.31.0.4])
-	by arag-domino-mail.aragnet.lan (IBM Domino Release 9.0.1FP2)
-	with ESMTP id 2017041114445309-905 ; Tue, 11 Apr 2017 14:44:53 +0200 
-X-Barracuda-RBL-IP: 172.30.0.142
-From: Federico Giovanardi <fgiovanardi@aragnet.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Apr 2017 14:46:42 +0200
-X-ASG-Orig-Subj: [PATCH] picocom: Fix incorrect handling of ldflags
-Message-Id: <20170411124642.12647-1-fgiovanardi@aragnet.com>
-X-Mailer: git-send-email 2.11.0
-X-MIMETrack: Itemize by SMTP Server on N02_Rubiera/ARAG/IT(Release
-	9.0.1FP2|August 03, 2014) at 11/04/2017 14.44.53,
-	Serialize by Router on N02_Rubiera/ARAG/IT(Release 9.0.1FP2|August  03,
-	2014) at 11/04/2017 14.44.53,
-	Serialize complete at 11/04/2017 14.44.53
-X-TNEFEvaluated: 1
-X-Barracuda-Connect: mail.aragnet.com[87.241.1.10]
-X-Barracuda-Start-Time: 1491914693
-X-Barracuda-URL: https://83.139.208.7:443/cgi-mod/mark.cgi
-X-Barracuda-Scan-Msg-Size: 849
-X-Virus-Scanned: by bsmtpd at meadinformatica.it
-X-Barracuda-BRTS-Status: 1
-X-Barracuda-Spam-Score: 0.50
-X-Barracuda-Spam-Status: No, SCORE=0.50 using global scores of TAG_LEVEL=1000.0
-	QUARANTINE_LEVEL=1000.0 KILL_LEVEL=8.0 tests=BSF_RULE7568M
-X-Barracuda-Spam-Report: Code version 3.2, rules version 3.2.3.37987
-	Rule breakdown below
-	pts rule name              description
-	---- ----------------------
-	--------------------------------------------------
-	0.50 BSF_RULE7568M          Custom Rule 7568M
-Subject: [PATCH] picocom: Fix incorrect handling of ldflags
+	Tue, 11 Apr 2017 06:02:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=subject:to:references:cc:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding;
+	bh=TPIeBq08SXoBdw1yC1C9NyqHqvG7B/Q/G+7CMhb9WOg=;
+	b=Fluq2JteRzjxCmO5Ticu6Q5BWioYKSSELfvQHf17uCf0NK9eZpspKUt7SLIGnxKrdE
+	goM/xR4Dwi6w/jsQXs9vginzM+Tcme4O+mrPPThqjWU0J0tkT/Aoxu53f02NW8epvq7w
+	uKB7KzEF9zn8thjXFaOQBuzLSZykUQ5C8lx/U=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:cc:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=TPIeBq08SXoBdw1yC1C9NyqHqvG7B/Q/G+7CMhb9WOg=;
+	b=Q1jxfdrrt6SP3xCzpbH7XwUADOYAW3iGmGaT7xImr0Y1KDjY6+4BULc2U1hcM5xMx4
+	rWHk+J37yoyL9BNLvVITgHWFjux4CzxWMNBqtQEHLI8abYcyUwrtJMCeZcuAZ/nb2AQ2
+	bTmazSclaUXNU5B7W9d1/lCwtSbMcyUPeVlG7yJB0MZXl9jPE73SbkgqZJIfkEGH5cME
+	r4/OuCniXeJhA/WMsHiBx/FEwASxSskKuR8qN5zuqFjrwzk8wh6TJiGtg1L8Oa6ZDeVo
+	g8pg4bRtkBtl403uwVwAQ0ZbjzaxSEWSohQjOBBXQWAslSpPX5jF0fuk9sjg8d9/tob4
+	Tklg==
+X-Gm-Message-State: AFeK/H1Or9flJS7YXJzoBjgfIqYAU6Kn1oSWtIqdcnHfvLUgU60UlWYNKYNTLQugBr20Ttc7
+X-Received: by 10.46.32.17 with SMTP id g17mr16671432ljg.37.1491915749111;
+	Tue, 11 Apr 2017 06:02:29 -0700 (PDT)
+Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
+	by smtp.googlemail.com with ESMTPSA id
+	c5sm3445918lfk.51.2017.04.11.06.02.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Apr 2017 06:02:28 -0700 (PDT)
+To: Andre McCurdy <armccurdy@gmail.com>
+References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
+	<CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
+From: Andrey Konovalov <andrey.konovalov@linaro.org>
+Message-ID: <58ECD3E2.1090601@linaro.org>
+Date: Tue, 11 Apr 2017 16:02:26 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+In-Reply-To: <CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,29 +57,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 12:44:54 -0000
+X-List-Received-Date: Tue, 11 Apr 2017 13:02:29 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The previous version reports QA issue: no GNU_HASH in elf binary
-during build
+On 04/11/2017 03:40 AM, Andre McCurdy wrote:
+> On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
+> <andrey.konovalov@linaro.org> wrote:
+>> This patch prevents "Aw Snap" error when loading a page with JavaScript.
+>>
+>> Tested by running:
+>> - chromium-wayland on Beagle X15
+>> - chromium-wayland on HiKey (with a separate patch to enable aarch64 build)
+>> - cromium on dragonboard-410c (with a separate patch to enable aarch64 build)
+>>
+>> Based on the fix for Gentoo's bug 588596:
+>> https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
+>>
+>> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+>> ---
+>>   recipes-browser/chromium/chromium.inc | 3 ++-
+>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+>> index 60edccb..7e057ec 100644
+>> --- a/recipes-browser/chromium/chromium.inc
+>> +++ b/recipes-browser/chromium/chromium.inc
+>> @@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
+>>   inherit gettext pythonnative
+>>
+>>   ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
+>
+> Not related to the patch, but this over-ride should be duplicated for _armv7ve
+>
+>> -GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+>> +GYP_DEFINES += " ${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
+>> +       ${@bb.utils.contains("AVAILTUNES", "mips", "", "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
+>
+> What's the significance of skipping the workaround if AVAILTUNES
+> contains "mips" ?
 
-Signed-off-by: Federico Giovanardi <fgiovanardi@aragnet.com>
----
- meta-oe/recipes-support/picocom/picocom_1.7.bb | 1 +
- 1 file changed, 1 insertion(+)
+This change (to add '-fno-delete-null-pointer-checks' to gcc flags) was initially merged into chromium directly,
+but soon reverted as it broke mips somehow:
+https://bugs.chromium.org/p/v8/issues/detail?id=3782#c10
 
-diff --git a/meta-oe/recipes-support/picocom/picocom_1.7.bb b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-index dbee65609..c85c344e3 100644
---- a/meta-oe/recipes-support/picocom/picocom_1.7.bb
-+++ b/meta-oe/recipes-support/picocom/picocom_1.7.bb
-@@ -10,6 +10,7 @@ SRC_URI[md5sum] = "8eaba1d31407e8408674d6e57af447ef"
- SRC_URI[sha256sum] = "d0f31c8f7a215a76922d30c81a52b9a2348c89e02a84935517002b3bc2c1129e"
- 
- CPPFLAGS_append = '-DVERSION_STR=\\"${PV}\\" -DUUCP_LOCK_DIR=\\"/var/lock\\" -DHIGH_BAUD'
-+TARGET_CC_ARCH += "${LDFLAGS}"
- 
- do_install () {
-     install -d ${D}${bindir}
--- 
-2.11.0
+>>   GYP_DEFINES_append_x86 = " generate_character_data=0"
+>>
+>>   do_configure() {
+>> --
+>> 2.1.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
