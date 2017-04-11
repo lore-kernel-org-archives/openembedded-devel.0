@@ -1,46 +1,45 @@
-Return-Path: <andrej.rode@ettus.com>
-Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
-	[209.85.192.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CF0B6607A5
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 5523977CE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Apr 2017 21:31:31 +0000 (UTC)
-Received: by mail-pf0-f173.google.com with SMTP id c198so27856092pfc.1
+	Tue, 11 Apr 2017 00:40:13 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id d79so12305912wmi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Apr 2017 14:31:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=kqIZPRdFgPtlf2jMH9WwbJtm23ZMUMrt4daxZ1G9Ld4=;
-	b=XdwWUk/KuW74DhlgJEiCCiubjzeewIuNsW3xnae8Rj2Ur2J6AjVj8ghDYTosLO8jBJ
-	UABddPp0dUBjv/hKXlWu+V/kCNGBrs2rn6qyW+XsSlTJtWhQeRe5ZLwvMOgGqiCvojp8
-	3yZnLwgxA7LeOU1td250Cen1gseKpEmqgCKR+ALiIRUiZe1/GIenvG2sj1ZMaa8w+SWr
-	XKfxhdWxHzgrHWuilqVtebTvM6D1CjwEdNBqYDmGuPaudBbonx48a3T8utCorhY4fQKN
-	OpOX7tpa2SGmmpK1FDHDOdjMWgcn7uffyx7fGDYB2wyU+NK/MCjP5xPHPNbObR8C46jN
-	l1FA==
+	Mon, 10 Apr 2017 17:40:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=d+Ru1VGrBAKeptn/IL2cahDdEgCf9gtqCTH8Fn80oUM=;
+	b=BtJPcDkx/rwULDqqKVt09hNI23g+Aa1wwwkKtUwYpzd5n+2WKnXCsJU9c5AhbLAxAS
+	Kb18ovq+y8FmRMMcIV/CY7+4P5WA9oM/vFvqpRxJXCKsPXt/KdVRJFNgrNJWa13KqBiu
+	1KLiDJEXd9EPGsPDUQntv/+NXOKSTj5WhT84r+J0JXDqr0m3DRzZnvQS47pSXF4IIQBu
+	Qu3uzu6+/c+NtgNFKGDwsKXTe0DHpmzBtzixyIVymouf1ngZX6+Ws4Y/1b6seigi04Ma
+	kjl1kMy+hEh1KJxkXBrNCMnG+ZUWUzrypPlBiKBCUplpk3CuqMWZoM5WE9007hE7u/Jk
+	rqzA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kqIZPRdFgPtlf2jMH9WwbJtm23ZMUMrt4daxZ1G9Ld4=;
-	b=NvUBkFctChrNeNQ/te2D/+83l2M5qN6YDt4aneR+ubhju7D5WOS3k+3KSEPT1QmXIO
-	af5H3423vT8xBVjASs0dBB45F57W/8FpD53mMgQcSQMw++pcmd8hl/KCmz3WllyP09aQ
-	eZa38ZNPislft85WHlutukNrockLOX7hooUE5EdjN9ut6VQEXWjShl//0xGZDzANLGw5
-	TLrWcODZvpDhTva7YqLZkO1OKv4rZtPnFuhazB5S56CbrjN1S2Q1g617ynWMxmkXnHmk
-	Sa4RV0Yl+4I810S5SVTzBRzyKo48RGq4Rzxy9ZBzz86QAsQScBLb/vLkGyR0xPq3Wn8/
-	eMzQ==
-X-Gm-Message-State: AN3rC/51yDD6Tywc744POk/9ZlVky9LUokkxWMGSJq2CzzmtxVmcttlisJh1ayi1sRd+w4ga
-X-Received: by 10.99.148.26 with SMTP id m26mr834846pge.92.1491859892846;
-	Mon, 10 Apr 2017 14:31:32 -0700 (PDT)
-Received: from FlyingDragon.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id d1sm26395336pfa.5.2017.04.10.14.31.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 10 Apr 2017 14:31:32 -0700 (PDT)
-From: Andrej Rode <andrej.rode@ettus.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Apr 2017 14:31:19 -0700
-Message-Id: <20170410213119.18504-1-andrej.rode@ettus.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-python][PATCH v2] systemd-python: add a new recipe
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=d+Ru1VGrBAKeptn/IL2cahDdEgCf9gtqCTH8Fn80oUM=;
+	b=FkS+MZj1tp4tg/UYiyHashkzMf2EwHRA26sKqPTsHVp9NK3r/HwgtE/ENcrkQ0pPc7
+	9X4a1RnQmc4ja3+gCj2PskMyKghv6HTqD0cMA7tjnVSVkdoY5uLduivTFeGoqdDo8DTU
+	MZa2D2P51r5LTZ1R+8KtaezQ64icnp12Lg+NPiB6Pfz5ek7wLfDGOIEhKFSc636Kazw5
+	HcfpBbLj+mWBQcYUQYXWRMqptZn7IQxedwH1iibaM64rnrpBfNakhm43v8BbHY2fD6Q3
+	JAUnxzIfx/ihX9gr+fHiY7Hv74cinixDfpsLO+8mMcQILXlobCXNQcX7XBoY33tmuuS5
+	sPaA==
+X-Gm-Message-State: AN3rC/58bD+Z0W/i/g65e41W5Gh8Hl6d+ULh3PcbjwMQHYPkcOI7xdE/
+	DeiCi/4Uh/FFzGSqwBjBz6nf+EEmKQ==
+X-Received: by 10.28.129.147 with SMTP id c141mr7866488wmd.98.1491871214537;
+	Mon, 10 Apr 2017 17:40:14 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.153.248 with HTTP; Mon, 10 Apr 2017 17:40:14 -0700 (PDT)
+In-Reply-To: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
+References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Mon, 10 Apr 2017 17:40:14 -0700
+Message-ID: <CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,35 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Apr 2017 21:31:32 -0000
+X-List-Received-Date: Tue, 11 Apr 2017 00:40:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Adds new recipe for python-systemd, python bindings for libsystemd
+On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
+<andrey.konovalov@linaro.org> wrote:
+> This patch prevents "Aw Snap" error when loading a page with JavaScript.
+>
+> Tested by running:
+> - chromium-wayland on Beagle X15
+> - chromium-wayland on HiKey (with a separate patch to enable aarch64 build)
+> - cromium on dragonboard-410c (with a separate patch to enable aarch64 build)
+>
+> Based on the fix for Gentoo's bug 588596:
+> https://bugs.gentoo.org/show_bug.cgi?id=588596#c10
+>
+> Signed-off-by: Andrey Konovalov <andrey.konovalov@linaro.org>
+> ---
+>  recipes-browser/chromium/chromium.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
+> index 60edccb..7e057ec 100644
+> --- a/recipes-browser/chromium/chromium.inc
+> +++ b/recipes-browser/chromium/chromium.inc
+> @@ -15,7 +15,8 @@ CHROMIUM_BUILD_TYPE ??= "Release"
+>  inherit gettext pythonnative
+>
+>  ARMFPABI_armv7a = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'arm_float_abi=hard', 'arm_float_abi=softfp', d)}"
 
-Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
----
- meta-python/recipes-devtools/python/python-systemd_234.bb | 12 ++++++++++++
- 1 file changed, 12 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-systemd_234.bb
+Not related to the patch, but this over-ride should be duplicated for _armv7ve
 
-diff --git a/meta-python/recipes-devtools/python/python-systemd_234.bb b/meta-python/recipes-devtools/python/python-systemd_234.bb
-new file mode 100644
-index 0000000..4eb2170
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-systemd_234.bb
-@@ -0,0 +1,12 @@
-+SUMMARY = "Python interface for libsystemd"
-+HOMEPAGE = "https://github.com/systemd/python-systemd"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
-+
-+PYPI_PACKAGE = "systemd-python"
-+DEPENDS += "systemd"
-+RDEPENDS_${PN} += "systemd"
-+inherit pypi setuptools
-+
-+SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
-+SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
--- 
-2.10.2
+> -GYP_DEFINES += "${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
+> +GYP_DEFINES += " ${ARMFPABI} release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
+> +       ${@bb.utils.contains("AVAILTUNES", "mips", "", "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
 
+What's the significance of skipping the workaround if AVAILTUNES
+contains "mips" ?
+
+>  GYP_DEFINES_append_x86 = " generate_character_data=0"
+>
+>  do_configure() {
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
