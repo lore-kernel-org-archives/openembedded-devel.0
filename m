@@ -1,52 +1,28 @@
-Return-Path: <andrey.konovalov@linaro.org>
-Received: from mail-lf0-f44.google.com (mail-lf0-f44.google.com
-	[209.85.215.44])
-	by mail.openembedded.org (Postfix) with ESMTP id A855A77CFB
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F93C77D01
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 19:42:04 +0000 (UTC)
-Received: by mail-lf0-f44.google.com with SMTP id t144so3840732lff.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Apr 2017 12:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=subject:to:references:from:cc:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding;
-	bh=AIyFb940kFjrLBywSOKebtewVDQ4+XNC6D1BrOYzcGY=;
-	b=fHX9ChoSdt5zE2W1/3FCAqY4tX5loF8fJ6+goLTQPC7K+RpRsAHpxtc+eFc0hxjKFc
-	OJMJO3ebgsLWyiHEYI+NCccehyndlNiMA0vqnZCpaJBiDCl34vRVNNECpbwTAVniOiVe
-	5ekJlSfTDboPAmR4zDQGuhUE7wmpKOtHrv5P0=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:cc:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=AIyFb940kFjrLBywSOKebtewVDQ4+XNC6D1BrOYzcGY=;
-	b=tLQ3Sqxpg3VaHXBhFSsAYw/vBBzsQMgtTMd2b+VdKOMTHoQGxXnFtn9TBad6175ImW
-	nelOYu4zUdf1OTt31nkQJF9bEdy5hEVPtT/zai3wWHhhDB+lCeYZdgC1EGsTs3uScCy2
-	4BxCqhBPzBBWCEzAmgk/eQPZyn0Nr48BR2KaX3zbQ0tUKlt0gH6DN59AQaf2l2c8/HDX
-	U1HXEnKJrHgo5c6J6KnqH8XSvGhSRum9tOpl0VgZpGZbYkyKe40rVIFGEmNmyWqwOWsH
-	xti9Azad4LtZcTLlwmAELpT6AJk/vvbqemdY1kLciSMY4kFlIObWna/OY4jSGN5etSD0
-	wCdg==
-X-Gm-Message-State: AFeK/H0tFGFeNKuEHOESvxkayCub/4hrOObxWa+0WDV5+ADn0GrpVP51baBaD56oHSutNXRm
-X-Received: by 10.25.102.2 with SMTP id a2mr17160303lfc.3.1491939725062;
-	Tue, 11 Apr 2017 12:42:05 -0700 (PDT)
-Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
-	by smtp.googlemail.com with ESMTPSA id
-	h18sm3713106ljh.5.2017.04.11.12.42.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Apr 2017 12:42:04 -0700 (PDT)
-To: Andre McCurdy <armccurdy@gmail.com>
-References: <1491590447-19476-1-git-send-email-andrey.konovalov@linaro.org>
-	<CAJ86T=US2yATN4uK55O2vjoY-aJvU6Q-mJrkDuGOPEwsueHYug@mail.gmail.com>
-	<58ECD3E2.1090601@linaro.org>
-	<CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
-From: Andrey Konovalov <andrey.konovalov@linaro.org>
-Message-ID: <58ED318B.6090702@linaro.org>
-Date: Tue, 11 Apr 2017 22:42:03 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.5.1
+	Tue, 11 Apr 2017 21:05:08 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 46E685C1B18;
+	Tue, 11 Apr 2017 23:04:52 +0200 (CEST)
 MIME-Version: 1.0
-In-Reply-To: <CAJ86T=WWRhgpONcfvJRGSyARzFS4pkmWrnx2BenOZKasv9Y7MQ@mail.gmail.com>
+Date: Tue, 11 Apr 2017 14:04:55 -0700
+From: Stefan Agner <stefan@agner.ch>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
+References: <1491165189-7839-1-git-send-email-stefan@agner.ch>
+	<CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
+Message-ID: <a50d975def43c43f49936d9638369585@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.1.3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1491944692; bh=cqssgbHNoW0KqNd5hYJ98jwKlsWKstv80tPJRIm+pTY=;
+	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
+	b=Qm8uzklsZhyyqr3KqpgujWGLi0QbgqVX/QTY9d1Mkv3A7Ar2xQg5c+v0ABZCRamtixpnLOyxCupqlZWfSREvZJhcdF0w/ma7686b4DCiHQbwWGufV+jvuvk7V98Z3J9lSZDHcbm3GCsZTnrR0/5/AMQ0nYDmBjE8fIAXo9ZZTDE=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] [PATCH] chromium: fix null pointer dereference in V8 with gcc-6
+Subject: Re: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,40 +35,246 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Apr 2017 19:42:07 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Tue, 11 Apr 2017 21:05:10 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 04/11/2017 09:51 PM, Andre McCurdy wrote:
-> On Tue, Apr 11, 2017 at 6:02 AM, Andrey Konovalov
-> <andrey.konovalov@linaro.org> wrote:
->> On 04/11/2017 03:40 AM, Andre McCurdy wrote:
->>>
->>> On Fri, Apr 7, 2017 at 11:40 AM, Andrey Konovalov
->>> <andrey.konovalov@linaro.org> wrote:
-<snip>
->>>> -GYP_DEFINES += "${ARMFPABI}
->>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot=''"
->>>> +GYP_DEFINES += " ${ARMFPABI}
->>>> release_extra_cflags='-Wno-error=unused-local-typedefs' sysroot='' \
->>>> +       ${@bb.utils.contains("AVAILTUNES", "mips", "",
->>>> "release_extra_cflags='-fno-delete-null-pointer-checks'", d)}"
->>>
->>>
->>> What's the significance of skipping the workaround if AVAILTUNES
->>> contains "mips" ?
->>
->>
->> This change (to add '-fno-delete-null-pointer-checks' to gcc flags) was
->> initially merged into chromium directly,
->> but soon reverted as it broke mips somehow:
->> https://bugs.chromium.org/p/v8/issues/detail?id=3782#c10
->
-> OK, thanks. Note that building for MIPS isn't currently supported at
-> all according to the COMPATIBLE_MACHINE definitions at the top of the
-> recipe.
+ 
 
-Indeed.
-So my check for "mips" in AVAILTUNES is a NOP until someone enables building for MIPS.
-Thanks for pointing that out!
+Hi Martin, 
+
+I tried to reproduce your findings, unfortunately building qemux86copy
+fails for me with this: 
+
+Parsing recipes: 100%
+|######################################################################################################|
+Time: 0:00:20
+Parsing of 1865 .bb files complete (0 cached, 1865 parsed). 2607
+targets, 168 skipped, 0 masked, 0 errors.
+NOTE: Resolving any missing task queue dependencies 
+
+Build Configuration:
+BB_VERSION = "1.33.4"
+BUILD_SYS = "x86_64-linux"
+NATIVELSBSTRING = "ubuntu-16.04"
+TARGET_SYS = "i586-oe-linux"
+MACHINE = "qemux86copy"
+DISTRO = "nodistro"
+DISTRO_VERSION = "nodistro.0"
+TUNE_FEATURES = "m32 i586"
+TARGET_FPU = ""
+meta = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593"
+meta-oe 
+meta-python 
+meta-networking = "master-next:c323b775e45e48c70ffe841a6b7addbd39183980"
+meta-selftest = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593" 
+
+Initialising tasks: 100%
+|###################################################################################################|
+Time: 0:00:00
+NOTE: Executing SetScene Tasks
+NOTE: Executing RunQueue Tasks
+WARNING: linux-yocto-4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0
+do_kernel_configcheck: [kernel config]: specified values did not make it
+int
+o the kernel's final configuration: 
+
+---------- CONFIG_AEABI -----------------
+Config: CONFIG_AEABI
+From:
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/.kernel-meta/configs/standard/arch/arm/arm.cfg
+Requested value: CONFIG_AEABI=y
+Actual value: 
+
+.... 
+
+| WRAP arch/x86/include/generated/asm/mm-arch-hooks.h
+| WRAP arch/x86/include/generated/asm/early_ioremap.h
+| WRAP arch/x86/include/generated/asm/mcs_spinlock.h
+| CHK include/generated/uapi/linux/version.h
+| UPD include/generated/uapi/linux/version.h
+| CHK include/generated/utsrelease.h
+| UPD include/generated/utsrelease.h
+| HOSTCC scripts/kallsyms
+| HOSTCC scripts/conmakehash
+| HOSTCC scripts/recordmcount
+| HOSTCC scripts/sortextable
+| CC scripts/mod/empty.o
+| HOSTCC scripts/mod/mk_elfconfig
+|
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0:
+error: code model 'kernel' not supported in the 32 bit mode
+| /* empty file to figure out endianness / word size */
+| 
+|
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0:
+sorry, unimplemented: 64-bit mode not compiled in
+|
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:294:
+recipe for target 'scripts/mod/empty.o' failed
+| make[4]: *** [scripts/mod/empty.o] Error 1
+| make[4]: *** Waiting for unfinished jobs....
+|
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:553:
+recipe for target 'scripts/mod' failed
+| make[3]: *** [scripts/mod] Error 2
+| make[3]: *** Waiting for unfinished jobs....
+|
+/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/Makefile:560:
+recipe for target 'scripts' failed
+| make[2]: *** [scripts] Error 2
+| make[2]: *** Waiting for unfinished jobs....
+| Makefile:150: recipe for target 'sub-make' failed
+| make[1]: *** [sub-make] Error 2
+| Makefile:24: recipe for target '__sub-make' failed
+| make: *** [__sub-make] Error 2
+| WARNING: exit code 1 from a shell command.
+| ERROR: Function failed: do_compile (log file is located at
+/build/ags/oe-core/build/tmp-glibc/work/qemux86copy-oe-linux/linux-yocto/4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0/temp/log.do_compile.29158)
+
+
+What is going on here? Somehow OE tries to configure the kernel for
+arm?! The qemux86 machine built just fine, not sure what difference
+causes this error when building the qemux86copy machine. 
+
+Sorry, I did do not understand how I can "remove this dependency from
+sstate signature in layer.conf", do you have any hints how to do this? 
+
+Also, meta-networking/recipes-connectivity/ufw/ufw_0.33.bb seems to me
+to do pretty much the same as I do, shouldn't have that the same issue? 
+
+Best regards, 
+
+Stefan 
+
+On 2017-04-06 00:29, Martin Jansa wrote: 
+
+> TUNE_PKGARCH package cannot depend on MACHINE_ARCH module unless you remove this dependency from sstate signature in layer.conf 
+> 
+> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signatures.20170405_114645.log/
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_package_write_ipk.sigdata.log
+> 
+> * ERROR: wireguard-tools different signature for task do_configure.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_configure.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_populate_sysroot.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_package_write_ipk.sigdata.log
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> On Sun, Apr 2, 2017 at 10:33 PM, Stefan Agner <stefan@agner.ch> wrote:
+> 
+>> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+>> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+>> and more useful than IPSec, while avoiding the massive headache.
+>> 
+>> The recipes add the current experimental snapshot v0.0.20170324
+>> out-of-tree kernel module and tools. The kernel module has some kernel
+>> configuration dependencies such as some configuration part of
+>> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+>> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>> 
+>> Signed-off-by: Stefan Agner <stefan@agner.ch>
+>> ---
+>> .../wireguard/wireguard-module_0.0.20170324.bb [1]     |  9 ++++++++
+>> .../wireguard/wireguard-tools_0.0.20170324.bb [2]      | 27 ++++++++++++++++++++++
+>> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>> 3 files changed, 54 insertions(+)
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> 
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> new file mode 100644
+>> index 0000000..aeb8269
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [1]
+>> @@ -0,0 +1,9 @@
+>> +require wireguard.inc
+>> +
+>> +inherit module
+>> +
+>> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+>> +MAKE_TARGETS = "module"
+>> +MODULES_INSTALL_TARGET = "module-install"
+>> +
+>> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> new file mode 100644
+>> index 0000000..79d420f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [2]
+>> @@ -0,0 +1,27 @@
+>> +require wireguard.inc
+>> +
+>> +inherit bash-completion systemd pkgconfig
+>> +
+>> +DEPENDS = "wireguard-module libmnl"
+>> +
+>> +do_compile_prepend () {
+>> +    cd ${S}/tools
+>> +}
+>> +
+>> +do_install () {
+>> +    cd ${S}/tools
+>> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+>> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+>> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+>> +        WITH_BASHCOMPLETION=yes \
+>> +        WITH_WGQUICK=yes \
+>> +        install
+>> +}
+>> +
+>> +FILES_${PN} = " \
+>> +    ${sysconfdir} \
+>> +    ${systemd_unitdir} \
+>> +    ${bindir} \
+>> +"
+>> +
+>> +RDEPENDS_${PN} = "wireguard-module"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> new file mode 100644
+>> index 0000000..cec7260
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> @@ -0,0 +1,18 @@
+>> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+>> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+>> +implemented as a kernel virtual network interface for Linux, which aims to \
+>> +replace both IPsec for most use cases, as well as popular user space and/or \
+>> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+>> +and easier to use."
+>> +SECTION = "networking"
+>> +HOMEPAGE = "https://www.wireguard.io/"
+>> +LICENSE = "GPLv2"
+>> +
+>> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [3]"
+>> +
+>> +SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
+>> +SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
+>> +
+>> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+>> --
+>> 2.7.4
+>> 
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel [4]
+
+  
+
+Links:
+------
+[1] http://wireguard-module_0.0.20170324.bb
+[2] http://wireguard-tools_0.0.20170324.bb
+[3] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
+[4] http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
