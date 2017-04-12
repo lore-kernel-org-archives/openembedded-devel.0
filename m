@@ -1,30 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 745F071A36
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5233977C81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 10:21:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="17654966"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2017 18:21:07 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id EAA8B47CE241
+	Wed, 12 Apr 2017 10:52:34 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3CAqZ19016529
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 18:21:02 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Wed, 12 Apr 2017 18:21:02 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Wed, 12 Apr 2017 03:52:36 -0700
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 12 Apr 2017 03:52:34 -0700
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Apr 2017 18:20:44 +0800
-Message-ID: <1491992444-1300-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Date: Wed, 12 Apr 2017 18:52:00 +0800
+Message-ID: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: EAA8B47CE241.A9413
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5] [PATCH] qttools: add ptest
+Subject: [meta-oe][PATCH] autoconf-archive: Upgrade to 2016.09.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,66 +31,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 10:21:13 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 10:52:35 -0000
 Content-Type: text/plain
 
-Add ptest for qttools by using provided testsuite.
-
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
 ---
- recipes-qt/qt5/qttools/run-ptest |  4 ++++
- recipes-qt/qt5/qttools_git.bb    | 17 +++++++++++++++++
- 2 files changed, 21 insertions(+)
- create mode 100644 recipes-qt/qt5/qttools/run-ptest
+ .../recipes-devtools/autoconf-archive/autoconf-archive.inc  |  2 +-
+ .../autoconf-archive/autoconf-archive_2012.04.07.bb         | 13 -------------
+ .../autoconf-archive/autoconf-archive_2016.09.16.bb         | 13 +++++++++++++
+ 3 files changed, 14 insertions(+), 14 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+ create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
 
-diff --git a/recipes-qt/qt5/qttools/run-ptest b/recipes-qt/qt5/qttools/run-ptest
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+index 9399363..779115a 100644
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+@@ -10,6 +10,6 @@ RDEPENDS_${PN} = "m4 gnu-config"
+ RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
+ RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+ 
+-SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
++SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+ 
+ inherit autotools
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+deleted file mode 100644
+index 5baaecc..0000000
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
++++ /dev/null
+@@ -1,13 +0,0 @@
+-require autoconf-archive.inc
+-
+-
+-PARALLEL_MAKE = ""
+-
+-LICENSE = "GPLv2 & GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+-
+-SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
+-SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
+-
+-EXTRA_OECONF += "ac_cv_path_M4=m4"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
 new file mode 100644
-index 0000000..5cd5e27
+index 0000000..0a1a771
 --- /dev/null
-+++ b/recipes-qt/qt5/qttools/run-ptest
-@@ -0,0 +1,4 @@
-+#!/bin/sh
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+@@ -0,0 +1,13 @@
++require autoconf-archive.inc
 +
-+./tst_qtdiag
-+./tst_qtattributionsscanner
-diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index a2b01be..5c0f51c 100644
---- a/recipes-qt/qt5/qttools_git.bb
-+++ b/recipes-qt/qt5/qttools_git.bb
-@@ -14,9 +14,12 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
- 
-+inherit ptest
 +
- DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
- 
- SRC_URI += " \
-+    file://run-ptest \
-     file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
-     file://0003-add-noqtwebkit-configuration.patch \
-     file://0004-linguist-tools-cmake-allow-overriding-the-location-f.patch \
-@@ -33,3 +36,17 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtwebkit', '', 'C
- SRCREV = "30c10900adecca55faa1d59c2f0caac74b1f9df6"
- 
- BBCLASSEXTEND = "native nativesdk"
++PARALLEL_MAKE = ""
 +
-+do_compile_ptest() {
-+    export PATH=${STAGING_DIR_NATIVE}/usr/include/qt5:$PATH
-+    cd ${S}/tests
-+    qmake -o Makefile tests.pro
-+    oe_runmake
-+}
++LICENSE = "GPLv2 & GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 +
-+do_install_ptest() {
-+    mkdir -p ${D}${PTEST_PATH}
-+    t=${D}${PTEST_PATH}
-+    cp ${S}/tests/auto/qtdiag/tst_tdiag $t
-+    cp ${S}/tests/auto/qtattributionsscanner/tst_qtattributionsscanner $t
-+}
++SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
++SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
++
++EXTRA_OECONF += "ac_cv_path_M4=m4"
++BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
-
-
+1.9.1
 
 
