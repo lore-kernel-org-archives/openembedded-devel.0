@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
-	[209.85.128.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B89D77CE4
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BAFAA77CEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:56:59 +0000 (UTC)
-Received: by mail-wr0-f176.google.com with SMTP id o21so23924525wrb.2
+	Wed, 12 Apr 2017 19:57:00 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id o21so5800399wrb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 12:57:01 -0700 (PDT)
+	Wed, 12 Apr 2017 12:57:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=yJfuxiLID5xm49xycUXpxkBftxyYdMoPac1KjSHjouU=;
-	b=WixLJ+nUz5sPtdW3SWsuE8pCLke2puaE+uSGPAD9+pCadBQrJD3NmuUBgJtuLgMjx1
-	5gegohf6/fjVww6G3teMfUYp95mlHptxa8yYimCTHe8KmtHFZF1EmC2mnzne0wt07y+Q
-	JYKx+qH2ev56WnoA7PopzrTJVGRfIXyfEBpF8AUm51se8CkayFrUvcr0L4c0YGK/eH9n
-	AvFupVVCNNFMSIphO/Oj4nRhHG0WKp+nlvWOevtjD+yfR1xgjfXBuZ07MmsLxTACIzUV
-	7a+lE8iYoxEiFiwFuGWinfFheDnmaY3cvjhlhILfyBeVV5p7hT2qY1UnssZutqWoLBcd
-	tS4Q==
+	bh=t/jxxtkWazXAfgo4BnAa9okQ1MuTQpAu6srO1F5l7E4=;
+	b=nZ5Qj0B8BeqwkymgLPwJTlMrpiMlbXvod87BzWmqVHeojHDmV/SCBMSHIjXgtJ3VYs
+	CZa3JrQ5HVzgvINSr4jqLz/iOOOIc34rZoEC7NhmI00P2b1EFo8oJotlM0f5Q2Q8xWE7
+	S+Cl8+2tRs0JzvUP2A46HM+VAiFIp3qXasnNyRdbfDT/aNOtgRhZ/jwMoOzpQ2ihSGsU
+	7Owmg+6HRT/rGCsL3Ynyuyx2GR75v7CVBWXRW2U0jzEolcKh7mC60SZvV2NfVIH27riW
+	mzxUnI1d6Ye48I88aoV4sermVdni8aYtAcDTI2C2vOXBIx6kT7GQ4uBP/qldAqW7KCyM
+	dnlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=yJfuxiLID5xm49xycUXpxkBftxyYdMoPac1KjSHjouU=;
-	b=qyZQrW2KCGVX3nyAVYHsssFGzXVHlKypSn1APkEQzlwmF2p4jbeyOt1fNCrjWBywTR
-	3upJtKZg0tWbICPJ89FDlGvW/UxChCSjYcdN+5oGiMPHZMU7lv+lCNQFiEtdvN0yOQXC
-	mBGmxiXstO6SPSgLIg5Pw0xk6xovlYeumJY1YGbT0/C2y3xXBBe+L8PKNBEbHciCPAW6
-	ZyChY6z09H82sBxujQ9CarUYzvKfVjhQD78YHm1tyFuWZSCSRLgdPfDs1Y1vmoWrp9Xb
-	T7WMH299vUpLC0SaCRKBECcp1Zr/WfsVHtFoULve+onEe4R7wojdIaOOw3mMZaGtLLRw
-	xVFQ==
-X-Gm-Message-State: AN3rC/6TrBkfUCsQfxOUQhJPP0NUQ3K0jG/UMusekR31OJEBckgp2OkM5QiaTbr7Cq2mEw==
-X-Received: by 10.223.163.204 with SMTP id m12mr3803230wrb.107.1492027020684; 
-	Wed, 12 Apr 2017 12:57:00 -0700 (PDT)
+	bh=t/jxxtkWazXAfgo4BnAa9okQ1MuTQpAu6srO1F5l7E4=;
+	b=lrRRcAzWEOjqnXQFZpLW8ZgiKGIi7RWehYkWaP6hqIlVIiWW6lX8oq8f/fPe531xtU
+	O4yjJneIwjUSwZCc7g5N4z19Nel4BxKiGtwQqbk+9ebqFkL9YL+cWsciNrRnla7RcD4+
+	43G5/Qyv2iLwXuRI4v+pBWLAAtawxpu2JZW9qF3sZH285ZW5zl0RYM3/DJRnLyfZEZZ/
+	6nMxHREQCm9aCkf1E8RsIgN/K0Tuw4NOYIhf87fFrydkOVltiIsKXkwmFeLHJDQyjg1K
+	aCD7iISPBqOgoVSuBc7cjrj7jVHea2qjxwx0DD+M+ouirbNAy0ahSaaQHjSyRYXLLBHe
+	kOvw==
+X-Gm-Message-State: AN3rC/5Wp2YaKU6kiWQ9uYgR20UeWXE1w4tUwES3YAV6S2g39gFan57UiFqn+grmpXFrhw==
+X-Received: by 10.223.147.197 with SMTP id 63mr4454347wrp.135.1492027021412;
+	Wed, 12 Apr 2017 12:57:01 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911F1781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:f178:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	t100sm3522637wrc.24.2017.04.12.12.56.59
+	t100sm3522637wrc.24.2017.04.12.12.57.00
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Apr 2017 12:57:00 -0700 (PDT)
+	Wed, 12 Apr 2017 12:57:01 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 21:56:19 +0200
-Message-Id: <20170412195638.3243-11-schnitzeltony@googlemail.com>
+Date: Wed, 12 Apr 2017 21:56:20 +0200
+Message-Id: <20170412195638.3243-12-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 10/29] xfwm4: 4.12.3 -> 4.12.4
+Subject: [PATCH 11/29] xfce4-weather-plugin: update 0.8.8 -> 0.8.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,78 +61,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:57:00 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 19:57:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-After ages my patch was finally applied
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...-display-events-when-time-is-set-backward.patch | 33 ----------------------
- .../xfwm4/{xfwm4_4.12.3.bb => xfwm4_4.12.4.bb}     |  5 ++--
- 2 files changed, 2 insertions(+), 36 deletions(-)
- delete mode 100644 meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
- rename meta-xfce/recipes-xfce/xfwm4/{xfwm4_4.12.3.bb => xfwm4_4.12.4.bb} (80%)
+ .../{xfce4-weather-plugin_0.8.8.bb => xfce4-weather-plugin_0.8.9.bb}  | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.8.bb => xfce4-weather-plugin_0.8.9.bb} (72%)
 
-diff --git a/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch b/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
-deleted file mode 100644
-index 08fd76b..0000000
---- a/meta-xfce/recipes-xfce/xfwm4/files/0001-don-t-block-display-events-when-time-is-set-backward.patch
-+++ /dev/null
-@@ -1,33 +0,0 @@
--From e87977696f03b0c9f72884f8e3e3ec3248dfd80a Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Tue, 18 Jun 2013 12:46:42 +0200
--Subject: [PATCH] don't block display events when time is set backwards
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
--
--Upstream-Status: Submitted [1]
--
--[1] https://bugzilla.xfce.org/show_bug.cgi?id=10184
--
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-----
-- src/display.c |    2 +-
-- 1 files changed, 1 insertions(+), 1 deletions(-)
--
--diff --git a/src/display.c b/src/display.c
--index 00318d5..651bc7a 100644
----- a/src/display.c
--+++ b/src/display.c
--@@ -733,7 +733,7 @@ myDisplayUpdateCurrentTime (DisplayInfo *display, XEvent *ev)
--             break;
--     }
-- 
---    if ((timestamp != (guint32) CurrentTime) && TIMESTAMP_IS_BEFORE(display->current_time, timestamp))
--+    if ((timestamp != (guint32) CurrentTime) /*&& TIMESTAMP_IS_BEFORE(display->current_time, timestamp)*/)
--     {
--         display->current_time = timestamp;
--     }
---- 
--1.7.6.5
--
-diff --git a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.4.bb
-similarity index 80%
-rename from meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb
-rename to meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.4.bb
-index ad70860..2aa68e3 100644
---- a/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.3.bb
-+++ b/meta-xfce/recipes-xfce/xfwm4/xfwm4_4.12.4.bb
-@@ -8,9 +8,8 @@ inherit xfce update-alternatives distro_features_check
+diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.8.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb
+similarity index 72%
+rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.8.bb
+rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb
+index 28d3bda..d9ed2ce 100644
+--- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.8.bb
++++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb
+@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
  
- REQUIRED_DISTRO_FEATURES = "x11"
+ DEPENDS += "libsoup-2.4 dbus-glib upower"
  
--SRC_URI += "file://0001-don-t-block-display-events-when-time-is-set-backward.patch"
--SRC_URI[md5sum] = "197ef087ca6a263627f1bea6d5a79d6f"
--SRC_URI[sha256sum] = "f4a988fbc4e0df7e8583c781d271559e56fd28696092f94ae052e9e6edb09eac"
-+SRC_URI[md5sum] = "3ec136efc5387fd3b53cd66b684f52d7"
-+SRC_URI[sha256sum] = "fa74048a75649a6e92df763a3cfb706d3fed1e1a6adf567f6693325a5a6efb36"
+-SRC_URI[md5sum] = "29fe8892bb4c6b1e639862a63110618e"
+-SRC_URI[sha256sum] = "651b722714fdafde3f548f183958c34e1539cf563193d7e51f28bfb6933d6d3f"
++SRC_URI[md5sum] = "0c56c057e1c354b30409b7871ab6f314"
++SRC_URI[sha256sum] = "0e15d14b3e18c3da46ad23ee3158a25220f1474a48b611de96edb56221aecee5"
  
- python populate_packages_prepend () {
-     themedir = d.expand('${datadir}/themes')
+ FILES_${PN} += "${datadir}/xfce4/weather"
 -- 
 2.9.3
 
