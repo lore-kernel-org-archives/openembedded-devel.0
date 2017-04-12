@@ -1,32 +1,24 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A8FB777C81
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DD9C377B38
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 04:29:48 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3C4TiIt014339
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 11 Apr 2017 21:29:44 -0700 (PDT)
-Received: from [128.224.162.189] (128.224.162.189) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Tue, 11 Apr 2017 21:29:43 -0700
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <1491962624-152617-1-git-send-email-dengke.du@windriver.com>
-	<0f0d1e28-d0b2-ef82-53b7-868c3d1dc534@windriver.com>
-	<bec3152746cc44c18098f5a5c7ffa528@XBOX02.axis.com>
-From: Dengke Du <dengke.du@windriver.com>
-Message-ID: <28bdac6c-9a8b-d5c5-0177-22ed5bb4a96c@windriver.com>
-Date: Wed, 12 Apr 2017 12:29:40 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+	Wed, 12 Apr 2017 05:06:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3C56hco008453
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Apr 2017 22:06:44 -0700
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.201) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 11 Apr 2017 22:06:43 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 12 Apr 2017 13:08:20 +0800
+Message-ID: <1491973700-5621-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <bec3152746cc44c18098f5a5c7ffa528@XBOX02.axis.com>
-X-Originating-IP: [128.224.162.189]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH] crash: 7.1.5 -> 7.1.8
+Subject: [meta-perl][PATCH] libnet-ssleay-perl: add openssl-native to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,77 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 04:29:50 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Apr 2017 05:06:48 -0000
+Content-Type: text/plain
 
+From: Chen Qi <Qi.Chen@windriver.com>
 
+Add 'openssl-native' to DEPENDS to fix the following do_configure error.
 
-On 2017年04月12日 12:03, Peter Kjellerstedt wrote:
->> This patch need to add the "id cc" to HOSTTOOLS in bitbake.conf in
->> oe-core, I will send the patch to oe-core later.
-> I doubt you will get either "id" or "cc" accepted into HOSTTOOLS
-> in OE-Core. Definitely not "cc" as recipes are expected to use
-> ${BUILD_CC} (which uses "gcc") for the host compiler. And probably
-Thanks, I find the "cc" come from patch:
-     0001-cross_add_configure_option.patch
-in ./meta-openembedded/meta-oe/recipes-kernel/crash/crash
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- From cbaaa42933bb27b1bcff4c7d71d54c913201ee88 Mon Sep 17 00:00:00 2001
-From: Lei Maohui <leimaohui@cn.fujitsu.com>
-Date: Fri, 9 Jan 2015 11:51:18 +0900
-Subject: [PATCH] cross_add_configure_option
+  *** Could not find OpenSSL
 
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
-  Makefile | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.80.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/Makefile b/Makefile
-index 9c44633..39bebd0 100644
---- a/Makefile
-+++ b/Makefile
-@@ -232,7 +232,7 @@ gdb_merge: force
-         @echo "../../${PROGRAM} ../../${PROGRAM}lib.a" > 
-${GDB}/gdb/mergeobj
-         @rm -f ${PROGRAM}
-         @if [ ! -f ${GDB}/config.status ]; then \
--         (cd ${GDB}; ./configure ${GDB_CONF_FLAGS} 
---with-separate-debug-dir=/usr/lib/debug \
-+         (cd ${GDB}; ./configure --host=${GDB_TARGET} 
---build=${GDB_HOST} --with-separate-debug-dir=/usr/lib/debug \
-             --with-bugurl="" --with-expat=no --with-python=no 
---disable-sim; \
-           make --no-print-directory CRASH_TARGET=${TARGET}; echo 
-${TARGET} > crash.target) \
-         else make --no-print-directory rebuild; fi
-@@ -277,7 +277,7 @@ force:
-
-  make_configure: force
-         @rm -f configure
--       @${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} 
-${WARNING_OPTIONS}
-+       @cc ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} 
-${WARNING_OPTIONS}
-
-  clean: make_configure
-         @./configure ${CONF_TARGET_FLAG} -q -b
+diff --git a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.80.bb b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.80.bb
+index 32d92ba..cf621aa 100644
+--- a/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.80.bb
++++ b/meta-perl/recipes-perl/libnet/libnet-ssleay-perl_1.80.bb
+@@ -10,7 +10,7 @@ SECTION = "libs"
+ LICENSE = "Artistic-1.0 | GPL-1.0+"
+ LIC_FILES_CHKSUM = "file://README;beginline=274;endline=294;md5=67d67095d83e339da538a082fad5f38e"
+ 
+-DEPENDS = "openssl zlib"
++DEPENDS = "openssl zlib openssl-native"
+ RDEPENDS_${PN} += "perl-module-carp \
+                    perl-module-errno \
+                    perl-module-extutils-makemaker \
 -- 
-1.8.4.2
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-I will check the above patch now.
-
-The "id" is here:
-     https://github.com/crash-utility/crash/blob/master/Makefile#L567
-
-> not "id" unless you have a very good explanation for why it is
-> needed. The problem with "id" is that it is typically used to get
-> information about the running user, which makes it a problem from
-> a deterministic view. Also, since nothing in OE-Core requires "id",
-> there is no reason to add it there. It could be added to layer.conf
-> in meta-oe, but the concerns about determinism still stands.
->
-> //Peter
->
->
+1.9.1
 
 
