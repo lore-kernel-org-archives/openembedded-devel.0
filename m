@@ -1,53 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 0615877D82
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D976277D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:57:10 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id d79so8686365wmi.2
+	Wed, 12 Apr 2017 19:57:11 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id o81so8667900wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 12:57:12 -0700 (PDT)
+	Wed, 12 Apr 2017 12:57:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=SPGqSEpcOXgHcyouJlQG/iQEYcjyjCiURhIGDDWs59U=;
-	b=W7xs60u7f9WD9EpRLxiHr9d4Gx4tdq24kPNmFoF88FJxx7oDfxGPmoSfefffep1C0v
-	hDjVXF0QPzaNWbqyn6mPiErBA+ApTDyykG1fKm4TQ7KVHS59zufQoyq8ebvhEZFukIlb
-	jcmJ4px9lDaLQ7zC2uTIs9hcz3dn8YI+yWDLZS0rGNE+14XIDNp5dP4YFLHbOHK800or
-	uP2PB+Cl8We5ZM2KHrSlX6vYOZCoYDWvAk2Cd/8UQf2FIHKOpJwEuwZAwSnI87o/5jEo
-	b6p1XtbP0zzMVSgCbxaB9hjd+CqVp1FWxGyY4ks7uj5VLDZ+6qq2tqD6e8m8k6d2NmUp
-	HIZw==
+	bh=H6/N8Wrvg7r3Mm1s2D0IHvm3y/nhpBrgwyobq27y47Q=;
+	b=DWS0ByaOC0SdlvRy9qTfa54RVZL1EgOz9eOhjil8HGtYY6vyJMf893vZ9wU2yudjiA
+	lkSjAaD7ZU2B/oY2YlAoQi2YnUnq5WoG4MJIb8YbwJzqfQfROZhL6yUBxZcfT7eZW0Vu
+	IV+FoNLuCNkH/lSUs7CTgY22v1HH8xUFVnNnT8gXp91Y4DVEoBfb2aVIv2x4iFqYgNYU
+	Sb1QOb9b4gC1YjFxM15RT35eMHjJ09SguqzNP+peX1GE4CgPlBmudQMimhGvY8/afp3N
+	vwf+UfiNNIb2h3BZN4X1ATpnlgy2Xf8FQwFv89KqghDep/KnSJz3X1TVt86bA30d2Oks
+	+arA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=SPGqSEpcOXgHcyouJlQG/iQEYcjyjCiURhIGDDWs59U=;
-	b=gyBfZTsylxgB+JBvObugBIN+GdhbRUgGgSIoPgqPypZK+YVnt1tm8+sFFLlzH1B+Nm
-	PwKNbH0hpixIRPA6RylBSV7F/AOoYhvcgC8/rXiuq5Nu6p1yYaVsW7sqH58bokrLZLmp
-	8tP52fX6lJZAUmnjFVuQAZ7D4gnmdSZJxxds1EoD6IfdbLKP+rO2GjVHubx0Frg9ViZU
-	+WGIhZ1AekioQwUlYjnaI90jfeou1L/VsoQXreLxnJNGscrwleJjg2jO/1tUiZFx0qKa
-	mvePvgHLsx/8bHOOWtSKl9APlxUwMbnxjozoQ2kqYj5jV4VUT4YjUTcOKOD68OUnnukv
-	6sWA==
-X-Gm-Message-State: AN3rC/5q9eXefEEVwIWnvwmBZmD5emJ598zfa7SL3VplH9nZMiCNdIcjqTTKo1CyAG//jw==
-X-Received: by 10.28.209.204 with SMTP id i195mr4424638wmg.113.1492027031892; 
-	Wed, 12 Apr 2017 12:57:11 -0700 (PDT)
+	bh=H6/N8Wrvg7r3Mm1s2D0IHvm3y/nhpBrgwyobq27y47Q=;
+	b=LJRMbzRyRWOqirL1vAv1EatU9Obg9fahj0Oh/Otehr7t6gHL2QlvCwyaYAxtDL1R2D
+	S3MX0h3TwAT6EZMlSYLIiQZrUz+4fevDNkqvey6axHk08dDMOUVWTi5pKvKrv44vDoWq
+	DXDyIxAA8zlcfEUqOUr4m7gg9CevNZwnn5z27NWT+kKeSZiyshdv945goykvDXjzbybQ
+	9X6mEl/M3ESxc6Ka5z5LptrszULL3Cn8ps+3Zi8473sCg8HRrttpJ5voUJRCCQDjwRUr
+	2zN4wSSDIjIZQJKOGEcbAL/HfBpmDhU6hiR787UE3vmjMdoMRoeApln2jG8FY3OYy8Mf
+	wZRQ==
+X-Gm-Message-State: AN3rC/5g8DZM1upR4rXE71H1XmSADQ63upnDkqGg9jQZdHHXjOfnBK/J
+	peouTbde4XZZ4133
+X-Received: by 10.28.16.149 with SMTP id 143mr144wmq.42.1492027032826;
+	Wed, 12 Apr 2017 12:57:12 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911F1781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:f178:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	t100sm3522637wrc.24.2017.04.12.12.57.10
+	t100sm3522637wrc.24.2017.04.12.12.57.11
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Apr 2017 12:57:11 -0700 (PDT)
+	Wed, 12 Apr 2017 12:57:12 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 21:56:31 +0200
-Message-Id: <20170412195638.3243-23-schnitzeltony@googlemail.com>
+Date: Wed, 12 Apr 2017 21:56:32 +0200
+Message-Id: <20170412195638.3243-24-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 22/29] xfce4-mount-plugin: update 0.6.4 -> 1.1.2
+Subject: [PATCH 23/29] poppler: update 0.51.0 -> 0.53.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,143 +61,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:57:11 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 19:57:12 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-I've given my best to port musl-patch but did not test build with musl.
+c++ is now set by poppler itself [1]
+
+[1] https://lists.freedesktop.org/archives/poppler/2017-March/012106.html
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../0001-check-for-fstab.h-during-configure.patch  | 50 +++++++++++-----------
- ...plugin_0.6.4.bb => xfce4-mount-plugin_1.1.2.bb} |  7 ++-
- 2 files changed, 29 insertions(+), 28 deletions(-)
- rename meta-xfce/recipes-panel-plugins/mount/{xfce4-mount-plugin_0.6.4.bb => xfce4-mount-plugin_1.1.2.bb} (68%)
+ .../poppler/{poppler_0.51.0.bb => poppler_0.53.0.bb}          | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-support/poppler/{poppler_0.51.0.bb => poppler_0.53.0.bb} (78%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-index dcc2a37..e2165c2 100644
---- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-+++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin/0001-check-for-fstab.h-during-configure.patch
-@@ -10,16 +10,19 @@ plugin
- Makes it compile/build with musl
+diff --git a/meta-oe/recipes-support/poppler/poppler_0.51.0.bb b/meta-oe/recipes-support/poppler/poppler_0.53.0.bb
+similarity index 78%
+rename from meta-oe/recipes-support/poppler/poppler_0.51.0.bb
+rename to meta-oe/recipes-support/poppler/poppler_0.53.0.bb
+index f683a3a..c1bfb31 100644
+--- a/meta-oe/recipes-support/poppler/poppler_0.51.0.bb
++++ b/meta-oe/recipes-support/poppler/poppler_0.53.0.bb
+@@ -7,8 +7,8 @@ SRC_URI = " \
+     file://0001-add-manadatory-options-to-find-qt4-qt5-moc.patch \
+     file://0002-fix-gcc-6-math-ambiguous-errors.patch \
+ "
+-SRC_URI[md5sum] = "342452b9dfd16f3c9912eb029fe0d4e2"
+-SRC_URI[sha256sum] = "e997c9ad81a8372f2dd03a02b00692b8cc479c220340c8881edaca540f402c1f"
++SRC_URI[md5sum] = "943679f1030b9bc19a989f24121a282a"
++SRC_URI[sha256sum] = "592bf72960c6b5948b67657594b05e72d9a278daf7613c9f3cdff9a5b73096a8"
  
- Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
-+Patch Reworked for xfce4-mount-plugin 0.6.4->1.1.2
-+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
-  configure.ac           |  1 +
-- panel-plugin/devices.c | 22 ++++++++++++++++++----
-- 2 files changed, 19 insertions(+), 4 deletions(-)
-+ panel-plugin/devices.c | 22 +++++++++++++++++++---
-+ 2 files changed, 20 insertions(+), 3 deletions(-)
+ DEPENDS = "fontconfig zlib cairo lcms"
  
- diff --git a/configure.ac b/configure.ac
--index 34d6f7f..52ecc4a 100644
-+index b131117..c633fef 100644
- --- a/configure.ac
- +++ b/configure.ac
--@@ -67,6 +67,7 @@ AC_CHECK_HEADERS([sys/socket.h])
-+@@ -69,6 +69,7 @@ AC_CHECK_HEADERS([sys/socket.h])
-  AC_CHECK_HEADERS([sys/time.h])
-  AC_CHECK_HEADERS([unistd.h])
-  AC_CHECK_HEADERS([sys/sockio.h])
-@@ -28,10 +31,10 @@ index 34d6f7f..52ecc4a 100644
-  AC_PROG_GCC_TRADITIONAL
-  AC_TYPE_SIZE_T
- diff --git a/panel-plugin/devices.c b/panel-plugin/devices.c
--index afa954e..345b603 100644
-+index 797b079..d29df56 100644
- --- a/panel-plugin/devices.c
- +++ b/panel-plugin/devices.c
--@@ -24,8 +24,9 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-+@@ -24,8 +24,10 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-  #ifdef HAVE_CONFIG_H
-  #include <config.h>
-  #endif
-@@ -39,41 +42,40 @@ index afa954e..345b603 100644
- +#if HAVE_FSTAB_H
-  #include <fstab.h>
- +#endif
-++
-  #include <glib.h>
-  #include <stdio.h>
-  #include <string.h>
--@@ -370,14 +371,15 @@ out:
-- GPtrArray *
-- disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
-+@@ -468,11 +470,12 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
-  {
---    GPtrArray * pdisks; /* to be returned */
--+    GtkWidget *dialog;
-+     GPtrArray * pdisks; /* to be returned */
-      t_disk * pdisk;
- -    struct fstab *pfstab;
--+    GPtrArray * pdisks; /* to be returned */
-      gboolean has_valid_mount_device;
---    GtkWidget *dialog;
-  
-      pdisks = g_ptr_array_new();
--+#if HAVE_FSTAB_H
-  
-++#if HAVE_FSTAB_H
- +    struct fstab *pfstab;
-      /* open fstab */
-      if (setfsent()!=1)
-      {
--@@ -422,6 +424,18 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
-+@@ -526,7 +529,20 @@ disks_new (gboolean include_NFSs, gboolean *showed_fstab_dialog, gint length)
-+     } /* end for */
-  
-      endfsent(); /* close file */
-- 
-+-
- +#else
-++        /* popup notification dialog */
- +        if (! (*showed_fstab_dialog) ) {
--+            dialog = gtk_message_dialog_new (NULL, GTK_DIALOG_DESTROY_WITH_PARENT,
--+                                                GTK_MESSAGE_INFO, GTK_BUTTONS_OK,
--+    "Your /etc/fstab could not be read because fstab is not supported. This will severely degrade the plugin's abilities.");
--+            /* gtk_dialog_run (GTK_DIALOG (dialog)); */
--+            g_signal_connect (dialog, "response",
--+                    G_CALLBACK (gtk_widget_destroy), dialog);
--+             gtk_widget_show (dialog);
-++            xfce_message_dialog (NULL,
-++                               _("Xfce 4 Mount Plugin"),
-++                               "dialog-info",
-++                               _("Your /etc/fstab could not be read because fstab is not supported. This will severely degrade the plugin's abilities."),
-++                               NULL,
-++                               "gtk-ok",
-++                               GTK_RESPONSE_OK,
-++                               NULL);
- +             *showed_fstab_dialog = TRUE;
- +         }
- +#endif
-@@ -81,5 +83,5 @@ index afa954e..345b603 100644
-  }
-  
- -- 
--2.12.0
-+2.9.3
+@@ -24,13 +24,6 @@ PACKAGECONFIG[qt5] = "--enable-poppler-qt5 --with-moc-qt5=${STAGING_BINDIR_NATIV
+ PACKAGECONFIG[qt4e] = "--enable-poppler-qt4 --with-moc-qt4=${STAGING_BINDIR_NATIVE}/moc4,--disable-poppler-qt4,qt4-embedded"
+ PACKAGECONFIG[nss] = "--enable-libnss,--disable-libnss,nss"
  
-diff --git a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_0.6.4.bb b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.2.bb
-similarity index 68%
-rename from meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_0.6.4.bb
-rename to meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.2.bb
-index 2a646eb..6700937 100644
---- a/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_0.6.4.bb
-+++ b/meta-xfce/recipes-panel-plugins/mount/xfce4-mount-plugin_1.1.2.bb
-@@ -6,7 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-# Needed for qt5
+-CXXFLAGS += "--std=c++11"
+-
+-#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_end'
+-#| /usr/src/debug/glibc/2.25-r0/git/csu/elf-init.c:87: undefined reference to `__init_array_start'
+-#| /mnt/a/build/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/6.2.0/ld: .libs/libpoppler.so.65.0.0: hidden symbol `__init_array_end' isn't defined 
+-
+ SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
  
- inherit xfce-panel-plugin
- 
--SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch \
--           "
--SRC_URI[md5sum] = "f5917e9aa2a06bc6a872cc10d2ee4f6f"
--SRC_URI[sha256sum] = "541d7af84d7d0b00ae547aa1f438e2fac51ee4195c4d0a17173c4f72accb227d"
-+SRC_URI += "file://0001-check-for-fstab.h-during-configure.patch"
-+SRC_URI[md5sum] = "7eba9696d82433a5577741214d34b588"
-+SRC_URI[sha256sum] = "54578447abaf9da630a750d64acdc37d4fd20dda6460208d6d1ffaa9e43ee1a6"
+ EXTRA_OECONF = "\
 -- 
 2.9.3
 
