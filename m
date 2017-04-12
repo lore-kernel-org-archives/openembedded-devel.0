@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 678FA77CFE
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id BBC0177D0E
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 12 Apr 2017 19:56:55 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id q125so8652057wmd.3
+Received: by mail-wm0-f66.google.com with SMTP id q125so8652127wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 12:56:56 -0700 (PDT)
+	Wed, 12 Apr 2017 12:56:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=p4AbHGxOFIZp9USV4INhJ2hRpOBY4lFIu+V2nsuTO/I=;
-	b=VH7/BBdPICv/dueWA3gRn84rEp1dVTKbRgQD6CBohWL40QfbXRBwdFmRfJqI50itOu
-	U59sEjwUiCieouKBscDaC8xwyeB9AxIQ6KNmAOei+3EsOqMYc3s0oX19g8wb/Jx5TEvh
-	IsXcmHzPinPfnunoLwV2AOH3JAkKgkVuBB402CKLKehSuszHYg9T3eCgXHdfih4kN1X8
-	8lQieXICJDG7OOlpeptSyB+rBkJPjBhhULA5mfCwZDb5qMiKOJUwyTUaUwCeQ3BcH5Q3
-	1YLdJB/hZORVP2+10xFWtQmxs6OpD89D+FPideljanr7lWcUEPpkuSCQMj6/NpSOGQpD
-	PbJQ==
+	bh=8elJ+x5+6YJpWtptdlo/gW6nuuIOMZ5x5b681Sa6kTY=;
+	b=qeaRiuCj8rgue9693Bgv4c6bWAq6QUHx98wqTGjoDZAXc/QKzdxs5mB4LXNc54q9os
+	C7DfEYrwN+Z2hHUAPEpvENRcu9VvvMvkjhCDeNAuGJQzOZcJyMLBZHnDcx0QECRkTXC9
+	dUtpKnPvkg24PQ2Htn5tNVaQ/oozOcfpEe4JRNIDrSn8IifKi22bLazvdIPGC41BH1Wp
+	t2HRjKeSNdX9nt4jJx6tAd+hwpd02r56iglpeDBYlWlj7uJR8TSJoOQ3etdOgoHo/wAc
+	1xUc53vYooCVlq226Ms+/ydubxUG5QcjfXx5MHNzdF8UHhZNTJPPadz7d4+hdnw+VTvH
+	TbeA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=p4AbHGxOFIZp9USV4INhJ2hRpOBY4lFIu+V2nsuTO/I=;
-	b=V4f/MoBdZScvEAXeaq6ht+TXz8s9klgvEaewAuxqsKZqOoE3m+duwJigY9x989SU3C
-	ccP+fp8GLnlCn3uojNnf00O3SPF906dPwD4Il87aPQVgPMzeGCp1X7JSoDdHmkKAAmWU
-	lHpvvNLwzTnAYVNN7y9y38rzRvRlPTZkzy2N3aUU64UsfgvjR1Lih4f9CQJbgTtEcobK
-	NqslkrZN2k++9iRZZ+sxflox0r95WJH0oLXdxVz+xdc3W+X5W0jWeXfcYUxaEp9Hc22X
-	/0Y4ZUuelK8w/9sz5hGB5pw5xZZcbgoPed148TF7HWM3NLxns2hcn1yp96NAjxIAdkAO
-	k0pA==
-X-Gm-Message-State: AN3rC/7T4qt1n5Wvc9HsoHtZTn0xNlcrFCNvGjI3SaFshwGAwjtbrjl+
-	hfwxNBkN0xCzH+bV
-X-Received: by 10.28.150.145 with SMTP id y139mr20899570wmd.109.1492027016012; 
+	bh=8elJ+x5+6YJpWtptdlo/gW6nuuIOMZ5x5b681Sa6kTY=;
+	b=kzq5tgEM58czEmvg/wicJkdA7vZgzFatzzh1npU/djja6wlgok6+O6w/jK2aLtiwG8
+	vYbSrcFdb3how3KnOly1LLnBlIuBMF79ovsl4WHyJLaEU1rxoqDHpceA1oig11dEoX3y
+	V6X9zfMGfRWX9WJkRv5OYNBO6NzIHppiMDpLgqFmQsOWUkFqy9cFDdxJhMnGge72D1kF
+	gY/Eyi6sGsWQXDT0nfVBtLszcFJmRCvdHJ8zSf7x++vU/cGzTaWNK0eiLIr+rNp38c66
+	fGvsdBUp59qMdMrgNOpPm/etUxOB7V3heiJ4rgtqUcEZjCikLfEvFDQf7mbZTyhLaiyl
+	u5JA==
+X-Gm-Message-State: AN3rC/5G2a5/Q5WB+LOCpxiecI3ixQ6crPuAIh0dRyliuacqpQ6HRg2V
+	PL0uX/ptybucB9HO
+X-Received: by 10.28.32.193 with SMTP id g184mr8750985wmg.56.1492027016812;
 	Wed, 12 Apr 2017 12:56:56 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911F1781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:f178:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	t100sm3522637wrc.24.2017.04.12.12.56.55
+	t100sm3522637wrc.24.2017.04.12.12.56.56
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Apr 2017 12:56:55 -0700 (PDT)
+	Wed, 12 Apr 2017 12:56:56 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 21:56:13 +0200
-Message-Id: <20170412195638.3243-5-schnitzeltony@googlemail.com>
+Date: Wed, 12 Apr 2017 21:56:14 +0200
+Message-Id: <20170412195638.3243-6-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 04/29] geany: update 1.29 -> 1.30.1
+Subject: [PATCH 05/29] geany-plugins: update 1.29 -> 1.30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,34 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:56:55 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 19:56:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-devtools/geany/{geany_1.29.bb => geany_1.30.1.bb} | 4 ++--
+ .../geany/{geany-plugins_1.29.bb => geany-plugins_1.30.bb}            | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/geany/{geany_1.29.bb => geany_1.30.1.bb} (75%)
+ rename meta-oe/recipes-devtools/geany/{geany-plugins_1.29.bb => geany-plugins_1.30.bb} (98%)
 
-diff --git a/meta-oe/recipes-devtools/geany/geany_1.29.bb b/meta-oe/recipes-devtools/geany/geany_1.30.1.bb
-similarity index 75%
-rename from meta-oe/recipes-devtools/geany/geany_1.29.bb
-rename to meta-oe/recipes-devtools/geany/geany_1.30.1.bb
-index fa1c244..e316ea7 100644
---- a/meta-oe/recipes-devtools/geany/geany_1.29.bb
-+++ b/meta-oe/recipes-devtools/geany/geany_1.30.1.bb
-@@ -8,8 +8,8 @@ DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native intltool-nativ
- inherit autotools pkgconfig perlnative pythonnative gettext
+diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb
+similarity index 98%
+rename from meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb
+rename to meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb
+index 89bb966..f01dda8 100644
+--- a/meta-oe/recipes-devtools/geany/geany-plugins_1.29.bb
++++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb
+@@ -25,8 +25,8 @@ DEPENDS = " \
+ inherit autotools pkgconfig gtk-icon-cache
  
- SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
--SRC_URI[md5sum] = "9b62a443461cc917b41c94fa7d58fdb1"
--SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a4fb20f"
-+SRC_URI[md5sum] = "75081b600560c5c8366eda0e1b8cc531"
-+SRC_URI[sha256sum] = "0ac360f1f3d6c28790a81d570252a7d40421f6e1d8e5a8d653756bd041d88491"
+ SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "2059c63ac0ec29d2da66b6243ae792e1"
+-SRC_URI[sha256sum] = "2827e0cf8f58a45759c82b690af5401dbd3ea0ec8dac310e4caea55547637bd7"
++SRC_URI[md5sum] = "13f8e5d900b4911059385649b8dde887"
++SRC_URI[sha256sum] = "8adb90645d273d9549e1fa99b69ea87dc1fd612f7467eb18eee11a6b30c9ba5b"
  
- FILES_${PN} += "${datadir}/icons"
- 
+ do_configure_prepend() {
+     rm -f ${S}/build/cache/glib-gettext.m4
 -- 
 2.9.3
 
