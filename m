@@ -1,24 +1,46 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5233977C81
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id F23CE60589
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 10:52:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3CAqZ19016529
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed, 12 Apr 2017 12:45:37 +0000 (UTC)
+Received: by mail-wr0-f169.google.com with SMTP id z109so16711804wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 03:52:36 -0700
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 12 Apr 2017 03:52:34 -0700
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 12 Apr 2017 18:52:00 +0800
-Message-ID: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Wed, 12 Apr 2017 05:45:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=kwZBwOFWWtJbQsVZmwny1Kn19PPcLJvd7M4yFzc9tJk=;
+	b=XXyLy5BAHRVhxqG0FFP3VA2erPybkPCy8H36pcgvXfS1XgLYScouJavLE78QV0reaY
+	YbE0PoLgdM+/4BTGvNI3Yy1X83QzaYkcN5H/8D9gHkMxyNS3AJveIOagC/MNHctqTTVc
+	Twp4VJBH8l1NpzhduWL1531/8b0mbL28VE7KLgfP8RF8yhBZLQy0QaReQEl+/QiUp4ae
+	QGC9xhcqeB4Tymywhg/ZJqDRzMpGf6K3YBPPojeFtIDcrjflvIEQOgxnnksIRKWQQdjO
+	tqMHilw9iZOTC5OHTP91uvJKE2RODqLtY5hzXbhA/XLE8wa9OmWEFWIEqwXd0Y41Ertc
+	yOBA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=kwZBwOFWWtJbQsVZmwny1Kn19PPcLJvd7M4yFzc9tJk=;
+	b=lV/Dt8ZveB7zNBbsD7Ab399d/v1gZQ/b0VibJw1hcshBrnY1isjz+ZRsdV1rroSSL8
+	lmfuy7j/PfbzeqeEKpLk5mwJCYJXx4dBsSVNgtVJ3BcisXnmHv4t+dr0EhoIaEi0RDj3
+	qVFAMkvojUgBcU860an4Z601da3XsQ/88z6SuLl3KXyfaffS6T3e836zRjpEivl4CQzh
+	nzYJneig854geyjSe3GaOiZF0xYCzkF9BAZdLrk3kq26GtmRU+to2uM9F2SVoJQnXVbS
+	ys40RYSFb7WXaPzLT87TlCbDmCDbU3i43/pom56t9brHC4uPxt7HRM35vJNIN6uBllwW
+	kDlA==
+X-Gm-Message-State: AN3rC/5NKEdCq7W8gRRtjokWWVIRczDyN29it+v+IUYoRzkVYZalLxFF9At5UEZfD9r5vShwKO6Il2A5j+HUPw==
+X-Received: by 10.223.136.66 with SMTP id e2mr2969267wre.14.1492001138295;
+	Wed, 12 Apr 2017 05:45:38 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] autoconf-archive: Upgrade to 2016.09.16
+Received: by 10.80.148.54 with HTTP; Wed, 12 Apr 2017 05:45:37 -0700 (PDT)
+In-Reply-To: <1491486145-30397-1-git-send-email-benjamin.gaignard@linaro.org>
+References: <1491486145-30397-1-git-send-email-benjamin.gaignard@linaro.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 12 Apr 2017 14:45:37 +0200
+Message-ID: <CA+chaQfVWLdyBnf8ewW3OFV=tmFT6D-5YZDJnrvihSEpAdGmiQ@mail.gmail.com>
+To: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [[meta-networking][PATCH v2] tinyproxy: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,69 +53,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 10:52:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 12 Apr 2017 12:45:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
----
- .../recipes-devtools/autoconf-archive/autoconf-archive.inc  |  2 +-
- .../autoconf-archive/autoconf-archive_2012.04.07.bb         | 13 -------------
- .../autoconf-archive/autoconf-archive_2016.09.16.bb         | 13 +++++++++++++
- 3 files changed, 14 insertions(+), 14 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
- create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+Still fails to build:
+http://errors.yoctoproject.org/Errors/Details/140323/
 
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-index 9399363..779115a 100644
---- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-@@ -10,6 +10,6 @@ RDEPENDS_${PN} = "m4 gnu-config"
- RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
- RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
- 
--SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
- 
- inherit autotools
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-deleted file mode 100644
-index 5baaecc..0000000
---- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-+++ /dev/null
-@@ -1,13 +0,0 @@
--require autoconf-archive.inc
--
--
--PARALLEL_MAKE = ""
--
--LICENSE = "GPLv2 & GPLv3"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
--
--SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
--SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
--
--EXTRA_OECONF += "ac_cv_path_M4=m4"
--BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-new file mode 100644
-index 0000000..0a1a771
---- /dev/null
-+++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-@@ -0,0 +1,13 @@
-+require autoconf-archive.inc
-+
-+
-+PARALLEL_MAKE = ""
-+
-+LICENSE = "GPLv2 & GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
-+SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
-+
-+EXTRA_OECONF += "ac_cv_path_M4=m4"
-+BBCLASSEXTEND = "native nativesdk"
--- 
-1.9.1
+On Thu, Apr 6, 2017 at 3:42 PM, Benjamin Gaignard <
+benjamin.gaignard@linaro.org> wrote:
 
+> Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+> ---
+> version 2:
+> - create user and group for tinyproxy
+> - only install the service if systemd is present in DISTRO_FEATURE
+> - add dependency on asciidoc-native
+>  .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
+>  .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 41
+> ++++++++++++++++++++++
+>  2 files changed, 55 insertions(+)
+>  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/
+> tinyproxy.service
+>  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1.
+> 8.4.bb
+>
+> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+> b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+> new file mode 100644
+> index 0000000..ea079f9
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/
+> tinyproxy.service
+> @@ -0,0 +1,14 @@
+> +[Unit]
+> +Description=Tinyproxy, Lightweight http(s) proxy daemon
+> +RequiresMountsFor=/var
+> +
+> +[Service]
+> +Group=tinyproxy
+> +ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
+> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
+> +ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
+> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
+> +ExecStart=/usr/sbin/tinyproxy -d
+> +
+> +[Install]
+> +WantedBy=multi-user.target
+> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+> b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+> new file mode 100644
+> index 0000000..ef2a2d8
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+> @@ -0,0 +1,41 @@
+> +SUMMARY = "Lightweight http(s) proxy daemon"
+> +HOMEPAGE = "https://tinyproxy.github.io/"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+> +
+> +SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/$
+> {BP}.tar.gz \
+> +                  file://tinyproxy.service"
+> +
+> +SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
+> +SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1
+> a3e46e5cf08f01696a216940872aa70faf"
+> +
+> +DEPENDS = "asciidoc-native"
+> +
+> +EXTRA_OECONF += " \
+> +       --enable-filter \
+> +       --enable-transparent \
+> +       --disable-regexcheck \
+> +       --enable-reverse \
+> +       --enable-upstream \
+> +       --enable-xtinyproxy \
+> +       "
+> +
+> +inherit autotools systemd useradd
+> +
+> +#User specific
+> +USERADD_PACKAGES = "${PN}"
+> +USERADD_PARAM_${PN} = "nobody"
+> +GROUPADD_PARAM_${PN} = "--system tinyproxy"
+> +
+> +SYSTEMD_PACKAGES += "${BPN}"
+> +SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
+> +SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+> +
+> +do_install_append() {
+> +       if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
+> 'false', d)}; then
+> +               install -d ${D}${systemd_system_unitdir}
+> +               install -m 0644 ${WORKDIR}/tinyproxy.service
+> ${D}${systemd_system_unitdir}
+> +       fi
+> +}
+> +
+> +FILES_${PN} =+ "${systemd_system_unitdir}/tinyproxy.service"
+> --
+> 1.9.1
+>
+>
 
