@@ -1,23 +1,30 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id C79D277C9F
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 745F071A36
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 06:00:15 +0000 (UTC)
-Received: from seahawk.toradex.int
-	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id BB2735C1AE4;
-	Wed, 12 Apr 2017 07:59:58 +0200 (CEST)
-From: Stefan Agner <stefan@agner.ch>
-To: openembedded-devel@lists.openembedded.org,
-	martin.jansa@gmail.com
-Date: Tue, 11 Apr 2017 23:00:09 -0700
-Message-Id: <1491976809-2701-1-git-send-email-stefan@agner.ch>
+	Wed, 12 Apr 2017 10:21:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="17654966"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Apr 2017 18:21:07 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id EAA8B47CE241
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 Apr 2017 18:21:02 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Wed, 12 Apr 2017 18:21:02 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 12 Apr 2017 18:20:44 +0800
+Message-ID: <1491992444-1300-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1491976799; bh=RgXbciWI3E62c/HnLDawu7n+/XBtWRpxs1MPh0IpGNU=;
-	h=From:To:Cc:Subject:Date:Message-Id;
-	b=sphtOlo11spYeyor1kILnOzFSf+ZhAkF+O5zwMSH2lrFloYL34VsuEgGD/dq9NOmTLH4UBT0GDX1vnvK8uGalqS+rUqCBTH4L+1j+6TkRyKIFfXN0ulS5ddm69pVCV4xIbTJqUuRgn1b5zmQnCkIlYDSDjy+2N/l24Gw2AuOprA=
-Subject: [meta-networking][PATCH v2] wireguard: add WireGuard kernel module and tools
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: EAA8B47CE241.A9413
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5] [PATCH] qttools: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,123 +37,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 06:00:16 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 10:21:13 -0000
+Content-Type: text/plain
 
-WireGuard is an extremely simple yet fast and modern VPN that utilizes
-state-of-the-art cryptography. It aims to be faster, simpler, leaner,
-and more useful than IPSec, while avoiding the massive headache.
+Add ptest for qttools by using provided testsuite.
 
-The recipes add the current experimental snapshot v0.0.20170409
-out-of-tree kernel module and tools. The kernel module has some kernel
-configuration dependencies such as some configuration part of
-features/netfilter/netfilter.scc, hence netfilter.scc should be part
-of KERNEL_EXTRA_FEATURES (which is the case by default).
-
-Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
-which is MACHINE_ARCH (like all kernel modules) we need to add this
-dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
-
-Signed-off-by: Stefan Agner <stefan@agner.ch>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
-Changes since v1:
-- Upgrade to v0.0.20170409
-- Add wireguard-tools -> wireguard-module dependency to
-  SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+ recipes-qt/qt5/qttools/run-ptest |  4 ++++
+ recipes-qt/qt5/qttools_git.bb    | 17 +++++++++++++++++
+ 2 files changed, 21 insertions(+)
+ create mode 100644 recipes-qt/qt5/qttools/run-ptest
 
- meta-networking/conf/layer.conf                    |  4 ++++
- .../wireguard/wireguard-module_0.0.20170409.bb     |  9 ++++++++
- .../wireguard/wireguard-tools_0.0.20170409.bb      | 27 ++++++++++++++++++++++
- .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
- 4 files changed, 58 insertions(+)
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170409.bb
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170409.bb
- create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
-
-diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
-index 85ad93b..b5aa159 100644
---- a/meta-networking/conf/layer.conf
-+++ b/meta-networking/conf/layer.conf
-@@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+diff --git a/recipes-qt/qt5/qttools/run-ptest b/recipes-qt/qt5/qttools/run-ptest
+new file mode 100644
+index 0000000..5cd5e27
+--- /dev/null
++++ b/recipes-qt/qt5/qttools/run-ptest
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++./tst_qtdiag
++./tst_qtattributionsscanner
+diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
+index a2b01be..5c0f51c 100644
+--- a/recipes-qt/qt5/qttools_git.bb
++++ b/recipes-qt/qt5/qttools_git.bb
+@@ -14,9 +14,12 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
  
- # Override security flags
- require conf/distro/include/meta_networking_security_flags.inc
++inherit ptest
 +
-+SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-+  wireguard-tools->wireguard-module \
-+"
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170409.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170409.bb
-new file mode 100644
-index 0000000..aeb8269
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170409.bb
-@@ -0,0 +1,9 @@
-+require wireguard.inc
+ DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
+ 
+ SRC_URI += " \
++    file://run-ptest \
+     file://0002-assistant-help-fix-linking-of-dependent-libraries.patch \
+     file://0003-add-noqtwebkit-configuration.patch \
+     file://0004-linguist-tools-cmake-allow-overriding-the-location-f.patch \
+@@ -33,3 +36,17 @@ EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'qtwebkit', '', 'C
+ SRCREV = "30c10900adecca55faa1d59c2f0caac74b1f9df6"
+ 
+ BBCLASSEXTEND = "native nativesdk"
 +
-+inherit module
-+
-+EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-+MAKE_TARGETS = "module"
-+MODULES_INSTALL_TARGET = "module-install"
-+
-+RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170409.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170409.bb
-new file mode 100644
-index 0000000..79d420f
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170409.bb
-@@ -0,0 +1,27 @@
-+require wireguard.inc
-+
-+inherit bash-completion systemd pkgconfig
-+
-+DEPENDS = "wireguard-module libmnl"
-+
-+do_compile_prepend () {
-+    cd ${S}/tools
++do_compile_ptest() {
++    export PATH=${STAGING_DIR_NATIVE}/usr/include/qt5:$PATH
++    cd ${S}/tests
++    qmake -o Makefile tests.pro
++    oe_runmake
 +}
 +
-+do_install () {
-+    cd ${S}/tools
-+    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
-+        SYSTEMDUNITDIR="${systemd_unitdir}" \
-+        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
-+        WITH_BASHCOMPLETION=yes \
-+        WITH_WGQUICK=yes \
-+        install
++do_install_ptest() {
++    mkdir -p ${D}${PTEST_PATH}
++    t=${D}${PTEST_PATH}
++    cp ${S}/tests/auto/qtdiag/tst_tdiag $t
++    cp ${S}/tests/auto/qtattributionsscanner/tst_qtattributionsscanner $t
 +}
-+
-+FILES_${PN} = " \
-+    ${sysconfdir} \
-+    ${systemd_unitdir} \
-+    ${bindir} \
-+"
-+
-+RDEPENDS_${PN} = "wireguard-module"
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-new file mode 100644
-index 0000000..db98517
---- /dev/null
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
-+DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
-+implemented as a kernel virtual network interface for Linux, which aims to \
-+replace both IPsec for most use cases, as well as popular user space and/or \
-+TLS-based solutions like OpenVPN, while being more secure, more performant, \
-+and easier to use."
-+SECTION = "networking"
-+HOMEPAGE = "https://www.wireguard.io/"
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
-+
-+SRC_URI[md5sum] = "5d3146bbd38c534386eb4a0c026780ff"
-+SRC_URI[sha256sum] = "31473b4d14178f82d6ff46df019d57982c210c03d1a985d54db35bdd76efbb18"
-+
-+S = "${WORKDIR}/WireGuard-${PV}/src/"
 -- 
 2.7.4
+
+
 
 
