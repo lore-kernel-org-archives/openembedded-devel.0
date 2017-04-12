@@ -1,53 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CFD677CD4
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 678FA77CFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:56:54 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id q125so8652002wmd.3
+	Wed, 12 Apr 2017 19:56:55 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id q125so8652057wmd.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 12 Apr 2017 12:56:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=urmdV5Q9Rt4owhQOfpw3glcX3SQoiWCby5YKG9hN2r8=;
-	b=iQNgVkEjYCWb78/f/BkLD/Tye/ZYMsI3JUh/a4IjrpJMynlrKNGcyAoSqZQT8fT3lb
-	fpPKz+GPDjIcuidmOvEGiz44UZw7ZH0aEK4sMNd19509xilFrgc9w1sjI6zBcUAISq+Q
-	T2ben/Y8nZX1i0DLNorGsY/647nU0pFbef0y6H9kZHm5EVLLJRNKIZkrzJZFbz2vMoPG
-	/S8XLs9qFz/SKjmWFCL3qbGeJRcENcLWvFFeZWqNVdj81U58tNluUHIULkUpIHa7hbWx
-	h5jKPNq24gwuFcaFccGK0JQcPO+oSWmYXaRNIelCv3GlfmSiHcVIY/KKIGZEVZN0nLVL
-	mSyQ==
+	bh=p4AbHGxOFIZp9USV4INhJ2hRpOBY4lFIu+V2nsuTO/I=;
+	b=VH7/BBdPICv/dueWA3gRn84rEp1dVTKbRgQD6CBohWL40QfbXRBwdFmRfJqI50itOu
+	U59sEjwUiCieouKBscDaC8xwyeB9AxIQ6KNmAOei+3EsOqMYc3s0oX19g8wb/Jx5TEvh
+	IsXcmHzPinPfnunoLwV2AOH3JAkKgkVuBB402CKLKehSuszHYg9T3eCgXHdfih4kN1X8
+	8lQieXICJDG7OOlpeptSyB+rBkJPjBhhULA5mfCwZDb5qMiKOJUwyTUaUwCeQ3BcH5Q3
+	1YLdJB/hZORVP2+10xFWtQmxs6OpD89D+FPideljanr7lWcUEPpkuSCQMj6/NpSOGQpD
+	PbJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=urmdV5Q9Rt4owhQOfpw3glcX3SQoiWCby5YKG9hN2r8=;
-	b=n+RWWWmLRSUYnu5/tqQzSLdJFlS2SW7ukq/ttM1/Sje6T5ROObJVkzDpuDEbOe9zSQ
-	IJDBLfigWQqskagxevsiVIo6vGfki2iSkBjRMuj861J1zFrYjO55IT9hBvXkiVYqh2Ju
-	XY7zZub5PdDL1eI1DLcqa0VbtPUaY9yAKwVBljimSWXfts2wZaMom9I9qATr5kEB6Avj
-	ZmVBiRi9eGv9Ka+U0BxPDeZE/4MVbsKoPfBoAs6wGnpbM5ZnLRC0RtwQrUPt2Ac/27nv
-	0Kd+Q9/+N+6UuRvJEoxZ8LptTWxm5UdF09pPtZ9Q30VBpeh4jER2HJLPlwOZUZBKxcHI
-	RNjw==
-X-Gm-Message-State: AN3rC/53YbTvsgBDu0VTahczOVQxrm091IYU+m+KOU0ENj5ApmxkXS5PbrpeGRJqKL/H2A==
-X-Received: by 10.28.174.16 with SMTP id x16mr4277943wme.11.1492027015212;
-	Wed, 12 Apr 2017 12:56:55 -0700 (PDT)
+	bh=p4AbHGxOFIZp9USV4INhJ2hRpOBY4lFIu+V2nsuTO/I=;
+	b=V4f/MoBdZScvEAXeaq6ht+TXz8s9klgvEaewAuxqsKZqOoE3m+duwJigY9x989SU3C
+	ccP+fp8GLnlCn3uojNnf00O3SPF906dPwD4Il87aPQVgPMzeGCp1X7JSoDdHmkKAAmWU
+	lHpvvNLwzTnAYVNN7y9y38rzRvRlPTZkzy2N3aUU64UsfgvjR1Lih4f9CQJbgTtEcobK
+	NqslkrZN2k++9iRZZ+sxflox0r95WJH0oLXdxVz+xdc3W+X5W0jWeXfcYUxaEp9Hc22X
+	/0Y4ZUuelK8w/9sz5hGB5pw5xZZcbgoPed148TF7HWM3NLxns2hcn1yp96NAjxIAdkAO
+	k0pA==
+X-Gm-Message-State: AN3rC/7T4qt1n5Wvc9HsoHtZTn0xNlcrFCNvGjI3SaFshwGAwjtbrjl+
+	hfwxNBkN0xCzH+bV
+X-Received: by 10.28.150.145 with SMTP id y139mr20899570wmd.109.1492027016012; 
+	Wed, 12 Apr 2017 12:56:56 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911F1781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:f178:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	t100sm3522637wrc.24.2017.04.12.12.56.54
+	t100sm3522637wrc.24.2017.04.12.12.56.55
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Apr 2017 12:56:54 -0700 (PDT)
+	Wed, 12 Apr 2017 12:56:55 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 21:56:12 +0200
-Message-Id: <20170412195638.3243-4-schnitzeltony@googlemail.com>
+Date: Wed, 12 Apr 2017 21:56:13 +0200
+Message-Id: <20170412195638.3243-5-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
 In-Reply-To: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 03/29] thunar: update 1.6.10 -> 1.6.11
+Subject: [PATCH 04/29] geany: update 1.29 -> 1.30.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,33 +61,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:56:54 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 19:56:55 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/thunar/{thunar_1.6.10.bb => thunar_1.6.11.bb} | 4 ++--
+ meta-oe/recipes-devtools/geany/{geany_1.29.bb => geany_1.30.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.10.bb => thunar_1.6.11.bb} (88%)
+ rename meta-oe/recipes-devtools/geany/{geany_1.29.bb => geany_1.30.1.bb} (75%)
 
-diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.10.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb
-similarity index 88%
-rename from meta-xfce/recipes-xfce/thunar/thunar_1.6.10.bb
-rename to meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb
-index 90fd788..c750e8c 100644
---- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.10.bb
-+++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb
-@@ -9,8 +9,8 @@ inherit xfce distro_features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.29.bb b/meta-oe/recipes-devtools/geany/geany_1.30.1.bb
+similarity index 75%
+rename from meta-oe/recipes-devtools/geany/geany_1.29.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.30.1.bb
+index fa1c244..e316ea7 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.29.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.30.1.bb
+@@ -8,8 +8,8 @@ DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native intltool-nativ
+ inherit autotools pkgconfig perlnative pythonnative gettext
  
- SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
--SRC_URI[md5sum] = "3089e1dca6e408641b07cd9c759dea5e"
--SRC_URI[sha256sum] = "7e9d24067268900e5e44d3325e60a1a2b2f8f556ec238ec12574fbea15fdee8a"
-+SRC_URI[md5sum] = "9749be8247cb19ed0fd36e4118c6236a"
-+SRC_URI[sha256sum] = "b1c7c3121827f59610900ef1cc19aa10a50ab2cc3ae38eee15181b64256e8b42"
+ SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "9b62a443461cc917b41c94fa7d58fdb1"
+-SRC_URI[sha256sum] = "394307596bc908419617e4c33e93eae8b5b733dfc8d01161677b8cbd3a4fb20f"
++SRC_URI[md5sum] = "75081b600560c5c8366eda0e1b8cc531"
++SRC_URI[sha256sum] = "0ac360f1f3d6c28790a81d570252a7d40421f6e1d8e5a8d653756bd041d88491"
  
- S = "${WORKDIR}/Thunar-${PV}/"
+ FILES_${PN} += "${datadir}/icons"
  
 -- 
 2.9.3
