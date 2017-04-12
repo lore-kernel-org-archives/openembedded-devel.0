@@ -1,24 +1,30 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A85477C98
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CA8177C98
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 05:42:34 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3C5gSja014503
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 11 Apr 2017 22:42:28 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 11 Apr 2017 22:42:27 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <peter.kjellerstedt@axis.com>
-Date: Wed, 12 Apr 2017 01:42:26 -0400
-Message-ID: <1491975746-68414-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Wed, 12 Apr 2017 05:50:26 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 44FFF5C1AE4;
+	Wed, 12 Apr 2017 07:50:10 +0200 (CEST)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH V2] crash: 7.1.5 -> 7.1.8
+Date: Tue, 11 Apr 2017 22:50:13 -0700
+From: Stefan Agner <stefan@agner.ch>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <CA+chaQfG1kKovNSDxTskkE4kJiqWbKQhpeM5NG2w0n9FfHiaWQ@mail.gmail.com>
+References: <1491165189-7839-1-git-send-email-stefan@agner.ch>
+	<CA+chaQciaE02KqyA6LT6CmzBcqDuke+iL5ThpUdiCpY94T8B_A@mail.gmail.com>
+	<a50d975def43c43f49936d9638369585@agner.ch>
+	<CA+chaQfG1kKovNSDxTskkE4kJiqWbKQhpeM5NG2w0n9FfHiaWQ@mail.gmail.com>
+Message-ID: <3b81f61052205d31ee59943878313632@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.1.3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1491976210; bh=lXzfpPt0GAE/j+0g/VwR5xMbJlHVq2J0W2vhHVpj620=;
+	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
+	b=ZITTScRavsy2wcJ05tZl88Nj61TWjY4FRXYoBjbf2VwWdX0J9cWP/GPfFDtg6IpnC88aD4TuJwi1CoeLM3ACrfgdYCJDFV9vYQ5ur1XPchwnSZdDdq9fDgQGqvAKpb+Zs+jdBMxQrUelBT7VvJiLHvRj0DIaWntNjKy0riHHLn8=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,316 +37,251 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 05:42:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 12 Apr 2017 05:50:27 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-1. Upgrade crash to fix build failure with glibc 2.25.
-2. Add the "id" to HOSTTOOLS in meta-oe/layer.conf
+ 
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
----
- meta-oe/conf/layer.conf                            |   2 +
- ...ompilation-error-if-glibc-2.25-or-later-h.patch | 112 +++++++++++++++++++++
- .../crash/0001-cross_add_configure_option.patch    |  13 +--
- ...uild-error-unknown-type-name-gdb_fpregset.patch |  36 +++++++
- ...sh-detect-the-sysroot-s-glibc-header-file.patch |  33 ++++++
- .../crash/{crash_7.1.5.bb => crash_7.1.8.bb}       |  11 +-
- 6 files changed, 196 insertions(+), 11 deletions(-)
- create mode 100644 meta-oe/recipes-kernel/crash/crash/0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
- create mode 100644 meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
- rename meta-oe/recipes-kernel/crash/{crash_7.1.5.bb => crash_7.1.8.bb} (91%)
+On 2017-04-11 14:18, Martin Jansa wrote: 
 
-diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
-index bdc8210..54425c6 100644
---- a/meta-oe/conf/layer.conf
-+++ b/meta-oe/conf/layer.conf
-@@ -79,3 +79,5 @@ FREESMARTPHONE_GIT = "git://git.freesmartphone.org"
- 
- # Override security flags
- require conf/distro/include/meta_oe_security_flags.inc
-+
-+HOSTTOOLS += "id"
-diff --git a/meta-oe/recipes-kernel/crash/crash/0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch b/meta-oe/recipes-kernel/crash/crash/0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch
-new file mode 100644
-index 0000000..9434815
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch
-@@ -0,0 +1,112 @@
-+From b8c8fbe0a2481e97fc57dd596346827a692a5768 Mon Sep 17 00:00:00 2001
-+From: Dave Anderson <anderson@redhat.com>
-+Date: Tue, 28 Mar 2017 15:44:40 -0400
-+Subject: [PATCH 1/3] Fix for a compilation error if glibc-2.25 or later has
-+ been installed on the host build machine.  Without the patch, the build fails
-+ with the error message "amd64-linux-nat.c:496:1: error: conflicting types for
-+ 'ps_get_thread_area'". (anderson@redhat.com)
-+
-+Upstream-Status: Backport
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ Makefile                     |  6 +++++
-+ configure.c                  |  2 +-
-+ gdb-7.6-proc_service.h.patch | 55 ++++++++++++++++++++++++++++++++++++++++++++
-+ 3 files changed, 62 insertions(+), 1 deletion(-)
-+ create mode 100644 gdb-7.6-proc_service.h.patch
-+
-+diff --git a/Makefile b/Makefile
-+index 202ef8b..b6b7e80 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -264,6 +264,12 @@ gdb_patch:
-+ 	if [ "${ARCH}" = "x86_64" ] && [ "${TARGET}" = "PPC64" ] && [ -f ${GDB}-ppc64le-support.patch ]; then \
-+ 		patch -d ${GDB} -p1 -F0 < ${GDB}-ppc64le-support.patch ; \
-+ 	fi
-++	if [ -f /usr/include/proc_service.h ]; then \
-++		grep 'extern ps_err_e ps_get_thread_area (struct' /usr/include/proc_service.h; \
-++		if [ $$? -eq 0 ]; then \
-++			patch -p0 < ${GDB}-proc_service.h.patch; \
-++		fi; \
-++	fi
-+ 
-+ library: make_build_data ${OBJECT_FILES}
-+ 	ar -rs ${PROGRAM}lib.a ${OBJECT_FILES}
-+diff --git a/configure.c b/configure.c
-+index d63cdd7..776defe 100644
-+--- a/configure.c
-++++ b/configure.c
-+@@ -240,7 +240,7 @@ struct supported_gdb_version {
-+ 	    "7.6",
-+ 	    "GDB_FILES=${GDB_7.6_FILES}",
-+ 	    "GDB_OFILES=${GDB_7.6_OFILES}",
-+-	    "GDB_PATCH_FILES=gdb-7.6.patch gdb-7.6-ppc64le-support.patch",
-++	    "GDB_PATCH_FILES=gdb-7.6.patch gdb-7.6-ppc64le-support.patch gdb-7.6-proc_service.h.patch",
-+ 	    "GDB_FLAGS=-DGDB_7_6",
-+ 	    "GPLv3"
-+ 	},
-+diff --git a/gdb-7.6-proc_service.h.patch b/gdb-7.6-proc_service.h.patch
-+new file mode 100644
-+index 0000000..49d18bb
-+--- /dev/null
-++++ b/gdb-7.6-proc_service.h.patch
-+@@ -0,0 +1,55 @@
-++--- gdb-7.6/gdb/gdb_proc_service.h.orig
-+++++ gdb-7.6/gdb/gdb_proc_service.h
-++@@ -115,7 +115,7 @@ extern pid_t ps_getpid (struct ps_procha
-++ /* Fetch the special per-thread address associated with the given LWP.
-++    This call is only used on a few platforms (most use a normal register).
-++    The meaning of the `int' parameter is machine-dependent.  */
-++-extern ps_err_e ps_get_thread_area (const struct ps_prochandle *,
-+++extern ps_err_e ps_get_thread_area (struct ps_prochandle *,
-++ 				    lwpid_t, int, psaddr_t *);
-++ 
-++ 
-++--- gdb-7.6/gdb/amd64-linux-nat.c.orig
-+++++ gdb-7.6/gdb/amd64-linux-nat.c
-++@@ -493,7 +493,7 @@ amd64_linux_new_fork (struct lwp_info *p
-++    a request for a thread's local storage address.  */
-++ 
-++ ps_err_e
-++-ps_get_thread_area (const struct ps_prochandle *ph,
-+++ps_get_thread_area (struct ps_prochandle *ph,
-++                     lwpid_t lwpid, int idx, void **base)
-++ {
-++   if (gdbarch_bfd_arch_info (target_gdbarch ())->bits_per_word == 32)
-++--- gdb-7.6/gdb/aarch64-linux-nat.c.orig
-+++++ gdb-7.6/gdb/aarch64-linux-nat.c
-++@@ -750,7 +750,7 @@ aarch64_linux_new_fork (struct lwp_info
-++    storage (or its descriptor).  */
-++ 
-++ ps_err_e
-++-ps_get_thread_area (const struct ps_prochandle *ph,
-+++ps_get_thread_area (struct ps_prochandle *ph,
-++ 		    lwpid_t lwpid, int idx, void **base)
-++ {
-++   struct iovec iovec;
-++--- gdb-7.6/gdb/arm-linux-nat.c.orig
-+++++ gdb-7.6/gdb/arm-linux-nat.c
-++@@ -613,7 +613,7 @@ supply_fpregset (struct regcache *regcac
-++ /* Fetch the thread-local storage pointer for libthread_db.  */
-++ 
-++ ps_err_e
-++-ps_get_thread_area (const struct ps_prochandle *ph,
-+++ps_get_thread_area (struct ps_prochandle *ph,
-++                     lwpid_t lwpid, int idx, void **base)
-++ {
-++   if (ptrace (PTRACE_GET_THREAD_AREA, lwpid, NULL, base) != 0)
-++--- gdb-7.6/gdb/i386-linux-nat.c.orig
-+++++ gdb-7.6/gdb/i386-linux-nat.c
-++@@ -849,7 +849,7 @@ i386_linux_new_fork (struct lwp_info *pa
-++    storage (or its descriptor).  */
-++ 
-++ ps_err_e
-++-ps_get_thread_area (const struct ps_prochandle *ph, 
-+++ps_get_thread_area (struct ps_prochandle *ph, 
-++ 		    lwpid_t lwpid, int idx, void **base)
-++ {
-++   /* NOTE: cagney/2003-08-26: The definition of this buffer is found
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch b/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
-index 39732a9..26a34e5 100644
---- a/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
-+++ b/meta-oe/recipes-kernel/crash/crash/0001-cross_add_configure_option.patch
-@@ -1,14 +1,15 @@
--From cbaaa42933bb27b1bcff4c7d71d54c913201ee88 Mon Sep 17 00:00:00 2001
-+From 73269df4d8196abe81112acaa2613155b308a8b8 Mon Sep 17 00:00:00 2001
- From: Lei Maohui <leimaohui@cn.fujitsu.com>
- Date: Fri, 9 Jan 2015 11:51:18 +0900
--Subject: [PATCH] cross_add_configure_option
-+Subject: [PATCH 1/9] cross_add_configure_option
- 
-+%% original patch: 0001-cross_add_configure_option.patch
- ---
-  Makefile | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
- 
- diff --git a/Makefile b/Makefile
--index 9c44633..39bebd0 100644
-+index a2baec1..f1972c8 100644
- --- a/Makefile
- +++ b/Makefile
- @@ -232,7 +232,7 @@ gdb_merge: force
-@@ -20,15 +21,15 @@ index 9c44633..39bebd0 100644
-  	    --with-bugurl="" --with-expat=no --with-python=no --disable-sim; \
-  	  make --no-print-directory CRASH_TARGET=${TARGET}; echo ${TARGET} > crash.target) \
-  	else make --no-print-directory rebuild; fi
--@@ -277,7 +277,7 @@ force:
-+@@ -283,7 +283,7 @@ force:
-  
-  make_configure: force
-  	@rm -f configure
- -	@${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
--+	@cc ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
-++	@${BUILD_CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} ${WARNING_OPTIONS}
-  
-  clean: make_configure
-  	@./configure ${CONF_TARGET_FLAG} -q -b
- -- 
--1.8.4.2
-+2.8.1
- 
-diff --git a/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch b/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
-new file mode 100644
-index 0000000..8355fe4
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch
-@@ -0,0 +1,36 @@
-+From 52fc1a7c17768fd52c3577d21dad84e8babb94b5 Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Thu, 6 Apr 2017 23:01:14 -0400
-+Subject: [PATCH 2/3] crash: fix build error unknown type name 'gdb_fpregset_t'
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ gdb-7.6/gdb/gdb_proc_service.h | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/gdb-7.6/gdb/gdb_proc_service.h b/gdb-7.6/gdb/gdb_proc_service.h
-+index 8bc6088..99c6496 100644
-+--- a/gdb-7.6/gdb/gdb_proc_service.h
-++++ b/gdb-7.6/gdb/gdb_proc_service.h
-+@@ -20,6 +20,7 @@
-+ #define GDB_PROC_SERVICE_H
-+ 
-+ #include <sys/types.h>
-++#include "gregset.h"
-+ 
-+ #ifdef HAVE_PROC_SERVICE_H
-+ #include <proc_service.h>
-+@@ -53,8 +54,6 @@
-+ #include <sys/procfs.h>
-+ #endif
-+ 
-+-#include "gregset.h"
-+-
-+ /* Functions in this interface return one of these status codes.  */
-+ typedef enum
-+ {
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch b/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
-new file mode 100644
-index 0000000..1f4bd01
---- /dev/null
-+++ b/meta-oe/recipes-kernel/crash/crash/0003-crash-detect-the-sysroot-s-glibc-header-file.patch
-@@ -0,0 +1,33 @@
-+From c7950ef5228adc52a500b4fc67d7e48c3c09c1df Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Thu, 6 Apr 2017 23:02:44 -0400
-+Subject: [PATCH 3/3] crash: detect the sysroot's glibc header file
-+
-+This is cross compile, so let the Makefile detect the sysroot's glibc
-+header file, not the host's glibc header file.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ Makefile | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index b6b7e80..94f21a5 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -264,8 +264,8 @@ gdb_patch:
-+ 	if [ "${ARCH}" = "x86_64" ] && [ "${TARGET}" = "PPC64" ] && [ -f ${GDB}-ppc64le-support.patch ]; then \
-+ 		patch -d ${GDB} -p1 -F0 < ${GDB}-ppc64le-support.patch ; \
-+ 	fi
-+-	if [ -f /usr/include/proc_service.h ]; then \
-+-		grep 'extern ps_err_e ps_get_thread_area (struct' /usr/include/proc_service.h; \
-++	if [ -f ${RECIPE_SYSROOT}/usr/include/proc_service.h ]; then \
-++		grep 'extern ps_err_e ps_get_thread_area (struct' ${RECIPE_SYSROOT}/usr/include/proc_service.h; \
-+ 		if [ $$? -eq 0 ]; then \
-+ 			patch -p0 < ${GDB}-proc_service.h.patch; \
-+ 		fi; \
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-kernel/crash/crash_7.1.5.bb b/meta-oe/recipes-kernel/crash/crash_7.1.8.bb
-similarity index 91%
-rename from meta-oe/recipes-kernel/crash/crash_7.1.5.bb
-rename to meta-oe/recipes-kernel/crash/crash_7.1.8.bb
-index fbd89c3..012ef1a 100644
---- a/meta-oe/recipes-kernel/crash/crash_7.1.5.bb
-+++ b/meta-oe/recipes-kernel/crash/crash_7.1.8.bb
-@@ -22,10 +22,13 @@ SRC_URI = "https://github.com/crash-utility/${BPN}/archive/${PV}.tar.gz;download
-            file://donnot-extract-gdb-during-do-compile.patch \
-            file://gdb_build_jobs_and_not_write_crash_target.patch \
-            file://remove-unrecognized-gcc-option-m32-for-mips.patch \
-+           file://0001-Fix-for-a-compilation-error-if-glibc-2.25-or-later-h.patch \
-+           file://0002-crash-fix-build-error-unknown-type-name-gdb_fpregset.patch \
-+           file://0003-crash-detect-the-sysroot-s-glibc-header-file.patch \
-            "
- 
--SRC_URI[md5sum] = "7bd06eaec6827d4fac636b2b592d3056"
--SRC_URI[sha256sum] = "c3954412c8557614a0d50092c007aa96b4e3e6e97453dfbb60241ab680caf7b2"
-+SRC_URI[md5sum] = "31787074f267a3536eebff008a0652ec"
-+SRC_URI[sha256sum] = "9965dee9199d7e39764fbee7f21c7c45b1f7b6d17c8e92ad62f468f062876478"
- 
- SRC_URI[gdb.md5sum] = "a9836707337e5f7bf76a009a8904f470"
- SRC_URI[gdb.sha256sum] = "8070389a5dcc104eb0be483d582729f98ed4d761ad19cedd3f17b5d2502faa36"
-@@ -80,7 +83,7 @@ do_compile_prepend() {
- }
- 
- do_compile() {
--    oe_runmake ${EXTRA_OEMAKE}
-+    oe_runmake ${EXTRA_OEMAKE} RECIPE_SYSROOT=${RECIPE_SYSROOT}
- }
- 
- do_install_prepend () {
-@@ -111,5 +114,3 @@ RDEPENDS_${PN}_class-cross = ""
- # Causes gcc to get stuck and eat all available memory in qemuarm builds
- # jenkins  15161  100 12.5 10389596 10321284 ?   R    11:40  28:17 /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/x86_64-linux/usr/libexec/arm-oe-linux-gnueabi/gcc/arm-oe-linux-gnueabi/4.9.2/cc1 -quiet -I . -I . -I ./common -I ./config -I ./../include/opcode -I ./../opcodes/.. -I ./../readline/.. -I ../bfd -I ./../bfd -I ./../include -I ../libdecnumber -I ./../libdecnumber -I ./gnulib/import -I build-gnulib/import -isysroot /home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemuarm -MMD eval.d -MF .deps/eval.Tpo -MP -MT eval.o -D LOCALEDIR="/usr/local/share/locale" -D CRASH_MERGE -D HAVE_CONFIG_H -D TUI=1 eval.c -quiet -dumpbase eval.c -march=armv5te -mthumb -mthumb-interwork -mtls-dialect=gnu -auxbase-strip eval.o -g -O2 -Wall -Wpointer-arith -Wformat-nonliteral -Wno-pointer-sign -Wno-unused -Wunused-value -Wunused-function -Wno-switch -Wno-char-subscripts -Wmissing-prototypes -Wdeclaration-after-statement -Wempty-body -feliminate-unused-debug-types -o -
- ARM_INSTRUCTION_SET = "arm"
--
--PNBLACKLIST[crash] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130678/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+> Hi, 
+> 
+> you don't need to build anything for qemux86copy just use sstate-diff-machines.sh script from oe-core to compare sstate signatures.
+
+Oh ok, got it, with that call I could reproduce it: 
+../scripts/sstate-diff-machines.sh --tmpdir=tmp-glibc/
+--machines="qemux86 qemux86copy qemuarm" --analyze 
+
+> You can see some SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS examples in: 
+> http://git.openembedded.org/meta-openembedded/tree/meta-oe/conf/layer.conf 
+> http://git.openembedded.org/openembedded-core/tree/meta/conf/layer.conf
+
+Ok that helps, will send a v2. 
+
+> I cannot check it now, but my guess is that ufw issue wasn't detected in my jenkins jobs, because it has: 
+> 
+> REQUIRED_DISTRO_FEATURES = "ipv6"
+
+> and nodistro config probably doesn't have ipv6 in DISTRO_FEATURES.
+
+Hm, there is ipv6 in DISTRO_FEATURES_LIBC_DEFAULT which gets dumped into
+DISTRO_FEATURES even with nodistro, so it seems that should be
+fulfilled... 
+
 -- 
-2.8.1
+Stefan 
 
+> On Tue, Apr 11, 2017 at 11:04 PM, Stefan Agner <stefan@agner.ch> wrote:
+> 
+> Hi Martin, 
+> 
+> I tried to reproduce your findings, unfortunately building qemux86copy fails for me with this: 
+> 
+> Parsing recipes: 100% |######################################################################################################| Time: 0:00:20
+> Parsing of 1865 .bb files complete (0 cached, 1865 parsed). 2607 targets, 168 skipped, 0 masked, 0 errors.
+> NOTE: Resolving any missing task queue dependencies 
+> 
+> Build Configuration:
+> BB_VERSION = "1.33.4"
+> BUILD_SYS = "x86_64-linux"
+> NATIVELSBSTRING = "ubuntu-16.04"
+> TARGET_SYS = "i586-oe-linux"
+> MACHINE = "qemux86copy"
+> DISTRO = "nodistro"
+> DISTRO_VERSION = "nodistro.0"
+> TUNE_FEATURES = "m32 i586"
+> TARGET_FPU = ""
+> meta = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593"
+> meta-oe 
+> meta-python 
+> meta-networking = "master-next:c323b775e45e48c70ffe841a6b7addbd39183980"
+> meta-selftest = "master:210c518ba8f8d6ec6e9d34e0df8b963a3b2e0593" 
+> 
+> Initialising tasks: 100% |###################################################################################################| Time: 0:00:00
+> NOTE: Executing SetScene Tasks
+> NOTE: Executing RunQueue Tasks
+> WARNING: linux-yocto-4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0 do_kernel_configcheck: [kernel config]: specified values did not make it int
+> o the kernel's final configuration: 
+> 
+> ---------- CONFIG_AEABI -----------------
+> Config: CONFIG_AEABI
+> From: /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/.kernel-meta/configs/standard/arch/arm/arm.cfg
+> Requested value: CONFIG_AEABI=y
+> Actual value: 
+> 
+> .... 
+> 
+> | WRAP arch/x86/include/generated/asm/mm-arch-hooks.h
+> | WRAP arch/x86/include/generated/asm/early_ioremap.h
+> | WRAP arch/x86/include/generated/asm/mcs_spinlock.h
+> | CHK include/generated/uapi/linux/version.h
+> | UPD include/generated/uapi/linux/version.h
+> | CHK include/generated/utsrelease.h
+> | UPD include/generated/utsrelease.h
+> | HOSTCC scripts/kallsyms
+> | HOSTCC scripts/conmakehash
+> | HOSTCC scripts/recordmcount
+> | HOSTCC scripts/sortextable
+> | CC scripts/mod/empty.o
+> | HOSTCC scripts/mod/mk_elfconfig
+> | /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0: error: code model 'kernel' not supported in the 32 bit mode
+> | /* empty file to figure out endianness / word size */
+> | 
+> | /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/mod/empty.c:1:0: sorry, unimplemented: 64-bit mode not compiled in
+> | /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:294: recipe for target 'scripts/mod/empty.o' failed
+> | make[4]: *** [scripts/mod/empty.o] Error 1
+> | make[4]: *** Waiting for unfinished jobs....
+> | /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/scripts/Makefile.build:553: recipe for target 'scripts/mod' failed
+> | make[3]: *** [scripts/mod] Error 2
+> | make[3]: *** Waiting for unfinished jobs....
+> | /build/ags/oe-core/build/tmp-glibc/work-shared/qemux86copy/kernel-source/Makefile:560: recipe for target 'scripts' failed
+> | make[2]: *** [scripts] Error 2
+> | make[2]: *** Waiting for unfinished jobs....
+> | Makefile:150: recipe for target 'sub-make' failed
+> | make[1]: *** [sub-make] Error 2
+> | Makefile:24: recipe for target '__sub-make' failed
+> | make: *** [__sub-make] Error 2
+> | WARNING: exit code 1 from a shell command.
+> | ERROR: Function failed: do_compile (log file is located at /build/ags/oe-core/build/tmp-glibc/work/qemux86copy-oe-linux/linux-yocto/4.10.5+gitAUTOINC+01f18cba44_53be19cad6-r0/temp/log.do_compile.29158) 
+> 
+> What is going on here? Somehow OE tries to configure the kernel for arm?! The qemux86 machine built just fine, not sure what difference causes this error when building the qemux86copy machine. 
+> 
+> Sorry, I did do not understand how I can "remove this dependency from sstate signature in layer.conf", do you have any hints how to do this? 
+> 
+> Also, meta-networking/recipes-connectivity/ufw/ufw_0.33.bb [1] seems to me to do pretty much the same as I do, shouldn't have that the same issue? 
+> 
+> Best regards, 
+> 
+> Stefan 
+> 
+> On 2017-04-06 00:29, Martin Jansa wrote: 
+> 
+> TUNE_PKGARCH package cannot depend on MACHINE_ARCH module unless you remove this dependency from sstate signature in layer.conf 
+> 
+> Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signatures.20170405_114645.log/
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: 1 errors found in signatures.qemux86.do_package_write_ipk.sigdata.log
+> 
+> * ERROR: wireguard-tools different signature for task do_configure.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_configure.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_populate_sysroot.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_populate_sysroot.sigdata.log
+> * ERROR: wireguard-tools different signature for task do_package_write_ipk.sigdata between qemux86copy and qemux86
+> * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1491428805/signatures.qemux86.do_package_write_ipk.sigdata.log
+> * ERROR: 3 issues were found in these recipes: wireguard-tools
+> 
+> On Sun, Apr 2, 2017 at 10:33 PM, Stefan Agner <stefan@agner.ch> wrote:
+> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+> and more useful than IPSec, while avoiding the massive headache.
+> 
+> The recipes add the current experimental snapshot v0.0.20170324
+> out-of-tree kernel module and tools. The kernel module has some kernel
+> configuration dependencies such as some configuration part of
+> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+> of KERNEL_EXTRA_FEATURES (which is the case by default).
+> 
+> Signed-off-by: Stefan Agner <stefan@agner.ch>
+> ---
+> .../wireguard/wireguard-module_0.0.20170324.bb [2]     |  9 ++++++++
+> .../wireguard/wireguard-tools_0.0.20170324.bb [3]      | 27 ++++++++++++++++++++++
+> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+> 3 files changed, 54 insertions(+)
+> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [2]
+> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [3]
+> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+> 
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [2]
+> new file mode 100644
+> index 0000000..aeb8269
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170324.bb [2]
+> @@ -0,0 +1,9 @@
+> +require wireguard.inc
+> +
+> +inherit module
+> +
+> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+> +MAKE_TARGETS = "module"
+> +MODULES_INSTALL_TARGET = "module-install"
+> +
+> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [3] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [3]
+> new file mode 100644
+> index 0000000..79d420f
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170324.bb [3]
+> @@ -0,0 +1,27 @@
+> +require wireguard.inc
+> +
+> +inherit bash-completion systemd pkgconfig
+> +
+> +DEPENDS = "wireguard-module libmnl"
+> +
+> +do_compile_prepend () {
+> +    cd ${S}/tools
+> +}
+> +
+> +do_install () {
+> +    cd ${S}/tools
+> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+> +        WITH_BASHCOMPLETION=yes \
+> +        WITH_WGQUICK=yes \
+> +        install
+> +}
+> +
+> +FILES_${PN} = " \
+> +    ${sysconfdir} \
+> +    ${systemd_unitdir} \
+> +    ${bindir} \
+> +"
+> +
+> +RDEPENDS_${PN} = "wireguard-module"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+> new file mode 100644
+> index 0000000..cec7260
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+> +implemented as a kernel virtual network interface for Linux, which aims to \
+> +replace both IPsec for most use cases, as well as popular user space and/or \
+> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+> +and easier to use."
+> +SECTION = "networking"
+> +HOMEPAGE = "https://www.wireguard.io/"
+> +LICENSE = "GPLv2"
+> +
+> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [4]"
+> +
+> +SRC_URI[md5sum] = "fead9ae2d7c6729e39f529913584494a"
+> +SRC_URI[sha256sum] = "2ec08a5d74cb3a63576f06d3cae695b6b8995acd9665e2fa4da91927b467ca51"
+> +
+> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+> --
+> 2.7.4
+> 
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+  
+
+Links:
+------
+[1] http://ufw_0.33.bb
+[2] http://wireguard-module_0.0.20170324.bb
+[3] http://wireguard-tools_0.0.20170324.bb
+[4] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-$%7BPV%7D.tar.xz
 
