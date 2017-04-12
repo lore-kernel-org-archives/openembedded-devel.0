@@ -1,54 +1,37 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 059F177DF1
+Return-Path: <obi@opendreambox.org>
+X-Greylist: delayed 436 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 12 Apr 2017 22:52:26 UTC
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id A66B077BFF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:57:17 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id l28so5818584wre.0
+	Wed, 12 Apr 2017 22:52:26 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mail.dream-property.net (Postfix) with ESMTP id 032CF31E5650
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 12:57:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=TLTPX2eA7dUT/aps5MRuhthd1ANS9jO78Jn/I4w0GmM=;
-	b=BQpvwGK3GOWsxb12KR1C3IhJ8sWio7mjqJqEMUGiJD8rjVFCYShkMMyigEwcGnTClK
-	Gtdefn0hYmSTkB4VhwBlK5Gm3mLado+fi9AbGog6K7TKDeG+4329FGjQM/+Bbs99x4bV
-	XgGWdcjiRR3NslpIaBy0J0cY8X+V4TcnmlHrdnrt1SMCtlljv9nbu5HF/PS9sVCXMDhf
-	EHfITQkAwmdLn4EbPPDTcbBV2sqgIboCyl4H9U5T/kMruYjQkJC5424jOcxmOBuKqbUq
-	AVi8Is8qxeF26GO5KfjFkzH3wV2a/i69Oz+8ehYObn0UW2vbI32mcxCYCvXAzguo1tfU
-	7qnQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=TLTPX2eA7dUT/aps5MRuhthd1ANS9jO78Jn/I4w0GmM=;
-	b=cEJ/QN+OUIG02seB1TpbcaKF+744qascBAukxqZTr4ELfO4L6G9rPKAa2O37J/E5T7
-	lxQU4Mg+f73KEToOaYzo/DgXvuPXs+WR+Dg3COGPRq0S8Qb2ONe6ahi1KdC88JLVb7Wl
-	HtXhYAg5oi2Qa1UJsmubMVOCfh3PebEX02j17kszkFqZSo1vIra2gAbD/mUkg8fzxwTN
-	4XwtyI5U4aryPUkYoJwSUxVNZNgqaDZ7is/h2t88VqncTBfL/mZPu+8D4klc2fdvUN6E
-	cZDA7F2ksXVoqi8w8P1CKUEA8VOqjyusfQu93jUY8wuAickT7rstGyOcdGO0qrG31E18
-	1hfQ==
-X-Gm-Message-State: AN3rC/4ZphzjrdO0AQjIV6cSH6bcGCH8EN/Icy4Odbz+Bo+kjxEbORg2aH1BFIVjckYHfA==
-X-Received: by 10.223.144.8 with SMTP id h8mr4289374wrh.45.1492027037980;
-	Wed, 12 Apr 2017 12:57:17 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E911F1781E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e911:f178:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	t100sm3522637wrc.24.2017.04.12.12.57.17
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Apr 2017 12:57:17 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+	Thu, 13 Apr 2017 00:45:10 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id SI8HzDjt6eej
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Apr 2017 00:45:05 +0200 (CEST)
+Received: from t510.zcs.saftware.de (p57A6179E.dip0.t-ipconnect.de
+	[87.166.23.158])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-GCM-SHA256 (128/128 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id 82D3F31E52A5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 Apr 2017 00:45:05 +0200 (CEST)
+Date: Thu, 13 Apr 2017 00:45:04 +0200
+From: Andreas Oberritter <obi@opendreambox.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 21:56:38 +0200
-Message-Id: <20170412195638.3243-30-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20170412195638.3243-1-schnitzeltony@googlemail.com>
-References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
+Message-ID: <20170413004504.2cae0270@t510.zcs.saftware.de>
+In-Reply-To: <20170329230613.GS15664@denix.org>
+References: <20170326203053.GH15664@denix.org>
+	<20170329230613.GS15664@denix.org>
 MIME-Version: 1.0
-Subject: [PATCH 29/29] xfce4-sensors-plugin: update 1.2.6 -> 1.2.97
+Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,35 +44,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:57:17 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Apr 2017 22:52:27 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../{xfce4-sensors-plugin_1.2.6.bb => xfce4-sensors-plugin_1.2.97.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/sensors/{xfce4-sensors-plugin_1.2.6.bb => xfce4-sensors-plugin_1.2.97.bb} (86%)
+On Wed, 29 Mar 2017 19:06:14 -0400
+Denys Dmytriyenko <denis@denix.org> wrote:
 
-diff --git a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.97.bb
-similarity index 86%
-rename from meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb
-rename to meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.97.bb
-index c2e0ed9..4d78bb2 100644
---- a/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.6.bb
-+++ b/meta-xfce/recipes-panel-plugins/sensors/xfce4-sensors-plugin_1.2.97.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b94789bed9aec03b9656a9cc5398c706"
- 
- inherit xfce-panel-plugin
- 
--SRC_URI[md5sum] = "33c2e343c1224d9c4ae757a70cbe08eb"
--SRC_URI[sha256sum] = "235ef842bd45e701bceebb21a384ab09f21afceea8ed95f91bb4c6cf3abe1bc0"
-+SRC_URI[md5sum] = "0c74c3112c5e6e07647c116cd43ff5a7"
-+SRC_URI[sha256sum] = "7524ec4534de9ef7f676de2895a41bf70b73b94da5a27fd4a022b16eda56d0f4"
- 
- EXTRA_OECONF = " \
-     --disable-procacpi \
--- 
-2.9.3
+> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:
+> > Hi,
+> > 
+> > I've been having the following build issues lately with qtwebkit 5.8 from 
+> > master:
+> > 
+> > | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
+> > | linking ../lib/libQt5WebKit.so.5.8.0
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
+> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
+> > | collect2: error: ld returned 1 exit status
+> > | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
+> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
+> > | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> > | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
+> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
+> > 
+> > I believe I was able to build 5.8/master before, so I'm suspecting recent 
+> > binutils upgrade... But I can be wrong. Would really appreciate some help 
+> > here. Thanks.  
+> 
+> Anyone else see this?
+> 
 
+I do. Have you been able to solve it in the meantime?
+
+Regards,
+Andreas
 
