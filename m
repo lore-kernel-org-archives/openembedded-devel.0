@@ -1,55 +1,31 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8268A77C84
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A8FB777C81
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 04:03:51 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 1C0A11842B;
-	Wed, 12 Apr 2017 06:03:51 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id YxTIIa6VtPMA; Wed, 12 Apr 2017 06:03:50 +0200 (CEST)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 150C418420;
-	Wed, 12 Apr 2017 06:03:50 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 0002D1E08D;
-	Wed, 12 Apr 2017 06:03:49 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id E93521E08C;
-	Wed, 12 Apr 2017 06:03:49 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder03.se.axis.com (Postfix) with ESMTP;
-	Wed, 12 Apr 2017 06:03:49 +0200 (CEST)
-Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
-	by thoth.se.axis.com (Postfix) with ESMTP id DCEF53090;
-	Wed, 12 Apr 2017 06:03:49 +0200 (CEST)
-Received: from XBOX02.axis.com (10.0.5.16) by XBOX01.axis.com (10.0.5.15) with
-	Microsoft SMTP Server (TLS) id 15.0.1210.3;
-	Wed, 12 Apr 2017 06:03:49 +0200
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1210.000; Wed, 12 Apr 2017 06:03:49 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: Dengke Du <dengke.du@windriver.com>,
+	Wed, 12 Apr 2017 04:29:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3C4TiIt014339
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 11 Apr 2017 21:29:44 -0700 (PDT)
+Received: from [128.224.162.189] (128.224.162.189) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
+	Tue, 11 Apr 2017 21:29:43 -0700
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>,
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] crash: 7.1.5 -> 7.1.8
-Thread-Index: AQHSszEM/JBKZfxQd0qiZv51WRl1DKHA9CGAgAAkskA=
-Date: Wed, 12 Apr 2017 04:03:49 +0000
-Message-ID: <bec3152746cc44c18098f5a5c7ffa528@XBOX02.axis.com>
 References: <1491962624-152617-1-git-send-email-dengke.du@windriver.com>
 	<0f0d1e28-d0b2-ef82-53b7-868c3d1dc534@windriver.com>
-In-Reply-To: <0f0d1e28-d0b2-ef82-53b7-868c3d1dc534@windriver.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	<bec3152746cc44c18098f5a5c7ffa528@XBOX02.axis.com>
+From: Dengke Du <dengke.du@windriver.com>
+Message-ID: <28bdac6c-9a8b-d5c5-0177-22ed5bb4a96c@windriver.com>
+Date: Wed, 12 Apr 2017 12:29:40 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
+In-Reply-To: <bec3152746cc44c18098f5a5c7ffa528@XBOX02.axis.com>
+X-Originating-IP: [128.224.162.189]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [PATCH] crash: 7.1.5 -> 7.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -63,28 +39,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 04:03:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 12 Apr 2017 04:29:50 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IERlbmdr
-ZSBEdQ0KPiBTZW50OiBkZW4gMTIgYXByaWwgMjAxNyAwNTozNw0KPiBUbzogb3BlbmVtYmVkZGVk
-LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gW1BBVENI
-XSBjcmFzaDogNy4xLjUgLT4gNy4xLjgNCj4gDQo+IFRoaXMgcGF0Y2ggbmVlZCB0byBhZGQgdGhl
-ICJpZCBjYyIgdG8gSE9TVFRPT0xTIGluIGJpdGJha2UuY29uZiBpbg0KPiBvZS1jb3JlLCBJIHdp
-bGwgc2VuZCB0aGUgcGF0Y2ggdG8gb2UtY29yZSBsYXRlci4NCg0KSSBkb3VidCB5b3Ugd2lsbCBn
-ZXQgZWl0aGVyICJpZCIgb3IgImNjIiBhY2NlcHRlZCBpbnRvIEhPU1RUT09MUyANCmluIE9FLUNv
-cmUuIERlZmluaXRlbHkgbm90ICJjYyIgYXMgcmVjaXBlcyBhcmUgZXhwZWN0ZWQgdG8gdXNlIA0K
-JHtCVUlMRF9DQ30gKHdoaWNoIHVzZXMgImdjYyIpIGZvciB0aGUgaG9zdCBjb21waWxlci4gQW5k
-IHByb2JhYmx5IA0Kbm90ICJpZCIgdW5sZXNzIHlvdSBoYXZlIGEgdmVyeSBnb29kIGV4cGxhbmF0
-aW9uIGZvciB3aHkgaXQgaXMgDQpuZWVkZWQuIFRoZSBwcm9ibGVtIHdpdGggImlkIiBpcyB0aGF0
-IGl0IGlzIHR5cGljYWxseSB1c2VkIHRvIGdldCANCmluZm9ybWF0aW9uIGFib3V0IHRoZSBydW5u
-aW5nIHVzZXIsIHdoaWNoIG1ha2VzIGl0IGEgcHJvYmxlbSBmcm9tIA0KYSBkZXRlcm1pbmlzdGlj
-IHZpZXcuIEFsc28sIHNpbmNlIG5vdGhpbmcgaW4gT0UtQ29yZSByZXF1aXJlcyAiaWQiLCANCnRo
-ZXJlIGlzIG5vIHJlYXNvbiB0byBhZGQgaXQgdGhlcmUuIEl0IGNvdWxkIGJlIGFkZGVkIHRvIGxh
-eWVyLmNvbmYgDQppbiBtZXRhLW9lLCBidXQgdGhlIGNvbmNlcm5zIGFib3V0IGRldGVybWluaXNt
-IHN0aWxsIHN0YW5kcy4NCg0KLy9QZXRlcg0KDQoNCg==
+
+
+On 2017年04月12日 12:03, Peter Kjellerstedt wrote:
+>> This patch need to add the "id cc" to HOSTTOOLS in bitbake.conf in
+>> oe-core, I will send the patch to oe-core later.
+> I doubt you will get either "id" or "cc" accepted into HOSTTOOLS
+> in OE-Core. Definitely not "cc" as recipes are expected to use
+> ${BUILD_CC} (which uses "gcc") for the host compiler. And probably
+Thanks, I find the "cc" come from patch:
+     0001-cross_add_configure_option.patch
+in ./meta-openembedded/meta-oe/recipes-kernel/crash/crash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ From cbaaa42933bb27b1bcff4c7d71d54c913201ee88 Mon Sep 17 00:00:00 2001
+From: Lei Maohui <leimaohui@cn.fujitsu.com>
+Date: Fri, 9 Jan 2015 11:51:18 +0900
+Subject: [PATCH] cross_add_configure_option
+
+---
+  Makefile | 4 ++--
+  1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 9c44633..39bebd0 100644
+--- a/Makefile
++++ b/Makefile
+@@ -232,7 +232,7 @@ gdb_merge: force
+         @echo "../../${PROGRAM} ../../${PROGRAM}lib.a" > 
+${GDB}/gdb/mergeobj
+         @rm -f ${PROGRAM}
+         @if [ ! -f ${GDB}/config.status ]; then \
+-         (cd ${GDB}; ./configure ${GDB_CONF_FLAGS} 
+--with-separate-debug-dir=/usr/lib/debug \
++         (cd ${GDB}; ./configure --host=${GDB_TARGET} 
+--build=${GDB_HOST} --with-separate-debug-dir=/usr/lib/debug \
+             --with-bugurl="" --with-expat=no --with-python=no 
+--disable-sim; \
+           make --no-print-directory CRASH_TARGET=${TARGET}; echo 
+${TARGET} > crash.target) \
+         else make --no-print-directory rebuild; fi
+@@ -277,7 +277,7 @@ force:
+
+  make_configure: force
+         @rm -f configure
+-       @${CC} ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} 
+${WARNING_OPTIONS}
++       @cc ${CONF_FLAGS} -o configure configure.c ${WARNING_ERROR} 
+${WARNING_OPTIONS}
+
+  clean: make_configure
+         @./configure ${CONF_TARGET_FLAG} -q -b
+-- 
+1.8.4.2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+I will check the above patch now.
+
+The "id" is here:
+     https://github.com/crash-utility/crash/blob/master/Makefile#L567
+
+> not "id" unless you have a very good explanation for why it is
+> needed. The problem with "id" is that it is typically used to get
+> information about the running user, which makes it a problem from
+> a deterministic view. Also, since nothing in OE-Core requires "id",
+> there is no reason to add it there. It could be added to layer.conf
+> in meta-oe, but the concerns about determinism still stands.
+>
+> //Peter
+>
+>
+
 
