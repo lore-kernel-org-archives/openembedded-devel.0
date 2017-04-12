@@ -1,49 +1,45 @@
-Return-Path: <gizero@gmail.com>
+Return-Path: <raj.khem@gmail.com>
 Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
 	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CB2077C39
+	by mail.openembedded.org (Postfix) with ESMTP id 67B8077D04
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 13:26:07 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id l28so4202515wre.0
+	Wed, 12 Apr 2017 15:28:36 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id o21so4730063wrb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 06:26:08 -0700 (PDT)
+	Wed, 12 Apr 2017 08:28:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=sZxD6Mazk1W7a80/x5iZiOotP+28Eme+2Iq1vX9Sn5o=;
-	b=pejtCIa6Q5XyqkgcnLDME9kFIJxYHur9uJuyxWyvT0aBNTQ198Ac6JR6qL+s2qn/xF
-	Oe57akH6bSE84axw76e+xtApEnVYKWGVqK6IOrJUlFuk6sJ+WezaL3E/unoVC3VJL/nT
-	Blzzn51Jcg18oIH5t+WTZhvnAuf+W+Joaimv5+aY8FbpAiZgFJzPqQcq4AwiRg0MPIg3
-	vOBrFNTpKmPgG0V8EvTA5tza4aEvwvVUAz0WFk/vYU3AJmxKapHCwx/ZXOqCSEi9qw+B
-	3TSnkxXQkeWxTHL/+XVMuPa+CBhK2FzyL3cI3OYGR1/NkdHZ4TwRA4FQATTU0zYklkGJ
-	DXQw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=TuMHPns3ixtCHd56zPqK88jEDRjQrXU5bzWr3O+Dbmk=;
+	b=MpZK8AHBp9cQbzD23YK97p4LEtBh0m4I3UrhGT35ZtH0BY98+bvJqIh1sBDwvCE4kB
+	x4Ah48bmyYpgv5h4YFDVcisRSp6mq13W5Lgh01r0djjx4+wK6hY0gA6tqcLrCDhOovKc
+	d4snXGkAVpcPOoI1+NfkxhsRmIiBLyYy88p69qoxDRdoq0yYS4dLbHZHxl9wpdlqZKSy
+	K2Z+gHS1gUExitt0jSydcubJlg20R6n1WdEo6VqSSJGcyC30+eagM1kIIykLEjFh/aTR
+	IwRE8DnOrVqa//gBndYmIDS157e2Kjy8FpqdJ3Uc4O7dVkhTQf+KkWIlU/wzCKzgZSCJ
+	FRlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=sZxD6Mazk1W7a80/x5iZiOotP+28Eme+2Iq1vX9Sn5o=;
-	b=WmUfuT9b53yOFkbdXeV38Dzsq1MYAhBxEyxfIHfN9XMreGYJCRnk99Hbfbiwtx1ecr
-	xPQ5ofpzn5uT3IqY1KlG74+LY5cwMx8np42qbCGWDTHo0gDn7xsQRzFrEuBNtUeizBmv
-	f7pAHNv7HFSelbu1nChbGWbIZxL029A73zq+MuiQMOdHozAToUHVX/tmSYTg/Qp5fb6L
-	veCj1Rd03HEcn0KzWsOjm80VcM6RYcgfORZVFqS5iu0AAm3BM/qA1ZqdEYXyWDCZC2hK
-	VAkIZ4DLcas2CWPwk5Micb+gFFLRqlAFWqU+lUaTTDEWCJxdh1Ppe4QeqH7iY0y9psZd
-	e2Iw==
-X-Gm-Message-State: AN3rC/555GQx8enl7bsQ5Z2ROWMh29Bh+kcd+JLQjFhjAxFWU6jtPfXqIA8JIVEJCAMkWw==
-X-Received: by 10.223.144.8 with SMTP id h8mr2878504wrh.45.1492003568294;
-	Wed, 12 Apr 2017 06:26:08 -0700 (PDT)
-Received: from gizero-desktop.tw.it
-	(host193-245-static.58-79-b.business.telecomitalia.it.
-	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
-	e129sm6606102wma.13.2017.04.12.06.26.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 12 Apr 2017 06:26:07 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Apr 2017 15:25:58 +0200
-Message-Id: <1492003558-8647-3-git-send-email-gizero@gmail.com>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=TuMHPns3ixtCHd56zPqK88jEDRjQrXU5bzWr3O+Dbmk=;
+	b=lTEnQWttcVssVtz++Res6vtxR19sePgTkA+RwR0MHjsZx4kB7QHiopK5X68ax3PwrE
+	0qXOCn+VJBtUqnHTab4LWsWdRtsoAm5V8zDjzf5fjAd3VNbB1EjKnh0UBCmEvzb0JYy7
+	irUKzzn1nTyL2wvd4hfy4KRQakRl6V5r8sH/BkLBSAF0A0eBB1t/2qNdeZc9spwC8aLn
+	Tge+6FPAisDaViALPAjcb/JHLTCoG+HI1dkTyrClV7l6WQoi01tvy+tpZC76zVK1m8MI
+	hqZ3GFRVLUGJcCGRlA5qDU6B0gaGaCVqIEix/UdI24TgpM+3SR0ST/A2UGAdiA7qS+rF
+	h5pA==
+X-Gm-Message-State: AN3rC/7Gl1oAvu+97MofXaS6XDEq+B3b71fXYbStrvHjxXIDgL7DtnlSAQJiky5m4Xs+BiMJ0C1CdiMW/i7/9Q==
+X-Received: by 10.223.179.24 with SMTP id j24mr3759650wrd.172.1492010918126;
+	Wed, 12 Apr 2017 08:28:38 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.180.141 with HTTP; Wed, 12 Apr 2017 08:28:07 -0700 (PDT)
 In-Reply-To: <1492003558-8647-1-git-send-email-gizero@gmail.com>
 References: <1492003558-8647-1-git-send-email-gizero@gmail.com>
-Subject: [meta-networking][PATCH 3/3] openvpn: openvpn-volatile.conf: avoid hardcoded localstatedir
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 12 Apr 2017 08:28:07 -0700
+Message-ID: <CAMKF1sqLquD6GkV+4sTxdsL7ccypCdGtcUEnrQDK+y=Nz7JEhg@mail.gmail.com>
+To: Andrea Galbusera <gizero@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 1/3] openvpn: ensure ${sysconfdir}/tmpfiles.d is packaged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 13:26:07 -0000
+X-List-Received-Date: Wed, 12 Apr 2017 15:28:39 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
----
- meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf | 2 +-
- meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb              | 1 +
- 2 files changed, 2 insertions(+), 1 deletion(-)
+On Wed, Apr 12, 2017 at 6:25 AM, Andrea Galbusera <gizero@gmail.com> wrote:
+> The file was installed but never packaged, ending up in no systemd-tmpfiles
+> configuration on the final rootfs.
+>
+> Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+> ---
+>  meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+> index a3ef765..5fd714a 100644
+> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+> @@ -61,6 +61,7 @@ RRECOMMENDS_${PN} = "kernel-module-tun"
+>
+>  FILES_${PN}-dbg += "${libdir}/openvpn/plugins/.debug"
+>  FILES_${PN} += "${systemd_unitdir}/system/openvpn@.service \
+> +                ${sysconfdir}/tmpfiles.d \
+>                  /run"
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf b/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
-index 4a3dc4a..1205806 100644
---- a/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
-+++ b/meta-networking/recipes-support/openvpn/openvpn/openvpn-volatile.conf
-@@ -1 +1 @@
--d /var/run/openvpn 0755 root root -
-+d @LOCALSTATEDIR@/run/openvpn 0755 root root -
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-index 8dd4566..8892a9e 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-@@ -50,6 +50,7 @@ do_install_append() {
- 
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         install -m 0644 ${WORKDIR}/openvpn-volatile.conf ${D}${sysconfdir}/tmpfiles.d/openvpn.conf
-+        sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${sysconfdir}/tmpfiles.d/openvpn.conf
-     fi
- }
- 
--- 
-2.7.4
+This change is fine but packaging /run seems suspicious to me.
 
+>  FILES_${PN}-sample += "${systemd_unitdir}/system/openvpn@loopback-server.service \
+>                         ${systemd_unitdir}/system/openvpn@loopback-client.service \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
