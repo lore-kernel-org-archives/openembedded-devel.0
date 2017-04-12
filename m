@@ -1,28 +1,49 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id DDDDE77CC6
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id BC4F777C73
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:32:02 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3CJW34n021880
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 12 Apr 2017 19:53:44 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id l44so5783911wrc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 12:32:03 -0700 (PDT)
-Received: from soho-mhatle-m.local (172.25.36.229) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 12 Apr 2017 12:32:03 -0700
-To: <kai.kang@windriver.com>, <openembedded-devel@lists.openembedded.org>
-References: <20170410021815.13689-1-kai.kang@windriver.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <ec89de92-7b7e-ee75-e398-35bb5d715b42@windriver.com>
-Date: Wed, 12 Apr 2017 14:32:02 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.8.0
+	Wed, 12 Apr 2017 12:53:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=l6NV6a0cf3Em4RqiWOWeR+g5OtMJm4SJqQsRt1kKut4=;
+	b=FUMI1IZ0gGUzj1x6uSdipFLOhaa50cGkBI0LyurBhMVxFJJ34+TR2x+Fk7NgkyTOy3
+	J1hq6o31tlg9g4w1pgNg89kJ8BtshAbwLb5MkZ+jD+fN/+RoXsgASCTKIEMtyE9E90n8
+	bAAW5B8tMM6ZYUv/tq3ctgJ5jtMYn53HobC+qAlNiADxu7FlpduVFhNH4Q4MKHWEVirN
+	gZAh5sp6vi2D+4iTfmH9uIV9KADZIBaptm7xD9cKNP07QXOHjT50M/mlWqonSnSaf57l
+	hm+/4RauJWgxGMJfdbXJWcQ9iNurMUcD63xx7x9u71JY6G3+27bri943DI9RBcMAfplA
+	OElQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=l6NV6a0cf3Em4RqiWOWeR+g5OtMJm4SJqQsRt1kKut4=;
+	b=ZE9psjQu3iT0z1MV+Zv8gHZPSRkpYrsiPi9bQXPiUxFlu01ZYTcqLmm3N4A3wtrH0W
+	lRHIezGjaKK2QQrOojBMkeOnqP/l6C8Msc5JW9ue2T6kxhxpcr7j0Bc8WFg1DATC31Eo
+	4/4eLJhrULPV3bkuTCk9Slav2tQAVHDjjn9zsYvui+232InF4ooVnCBwZXdPAepiQ9PI
+	r8/k2d1CmC18OMR43rkb+qruXKW/YsHEMeGRG99gEqxpquGVAUhIYG85d77jb3HjsEFC
+	8YWF2Tsvak5ElEMUq88PUMHz3ec7ny7YukxlI1ioHukQ4H2UCvNbAzy9L+er7D56Nq8o
+	tZ6g==
+X-Gm-Message-State: AN3rC/5XP6Pxw6j+uvRdoo5WZK7jbUXbGryv25F6FMrTzRfo7bexl7thAZDNe+5ry2X+UxNGTLHrjlNR+jRT1g==
+X-Received: by 10.223.181.135 with SMTP id c7mr4964756wre.19.1492026825452;
+	Wed, 12 Apr 2017 12:53:45 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20170410021815.13689-1-kai.kang@windriver.com>
-Subject: Re: [meta-networking][PATCH] postfix: do NOT create directory /var/spool/mail
+Received: by 10.223.153.248 with HTTP; Wed, 12 Apr 2017 12:53:44 -0700 (PDT)
+In-Reply-To: <CA+chaQes5kzcF8X8U=E_n_Yc=cOX0jPUr26ospPT01MzBpG0bQ@mail.gmail.com>
+References: <1491486145-30397-1-git-send-email-benjamin.gaignard@linaro.org>
+	<CA+chaQfVWLdyBnf8ewW3OFV=tmFT6D-5YZDJnrvihSEpAdGmiQ@mail.gmail.com>
+	<CA+M3ks7GBnLNO4BXHGPwdr9wL29_-B-v6=Vk5h0=1JeQaJ2hpw@mail.gmail.com>
+	<CA+chaQes5kzcF8X8U=E_n_Yc=cOX0jPUr26ospPT01MzBpG0bQ@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Wed, 12 Apr 2017 12:53:44 -0700
+Message-ID: <CAJ86T=WH=meYS5TPOTv8uq4B2D-ytBC4QVenwLaB1Yw377cMUw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Benjamin Gaignard <benjamin.gaignard@linaro.org>
+Subject: Re: [[meta-networking][PATCH v2] tinyproxy: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,55 +56,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Apr 2017 19:32:06 -0000
-Content-Type: text/plain; charset="windows-1252"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 Apr 2017 19:53:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On 4/9/17 9:18 PM, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
-> 
-> postfix installs directory /var/spool/mail which conflicts with package
-> shadow.
-> 
-> | Error: Transaction check error:
-> |  file /var/spool/mail conflicts between attempted installs of
-> |  postfix-3.1.1-r0.ppc64e6500 and shadow-4.2.1-r0.1.ppc64e6500
-> 
-> Make postfix not create /var/spool/mail that it does NOT create the
-> directory on Fedora and Ubuntu either.
+On Wed, Apr 12, 2017 at 12:04 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> If you're testing it with master, then the xmllint from host cannot be used
+> because of HOSTPATH filtering recently merged.
+>
+> For other configuration you can see:
+> http://www.openembedded.org/wiki/Bitbake_World_Status_Setup
+>
+> On Wed, Apr 12, 2017 at 8:46 PM, Benjamin Gaignard <
+> benjamin.gaignard@linaro.org> wrote:
+>
+>> 2017-04-12 14:45 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
+>> > Still fails to build:
+>> > http://errors.yoctoproject.org/Errors/Details/140323/
+>>
+>> That is an error I never had in my setup.
+>> I guess that libxml2 native is missing but I have way to reproduce the
+>> problem.
+>> How is it possible to perform the same build then you ?
 
-I am not sure this is correct.
+You need to make the configure tests for xsltproc, asciidoc and
+xmllint deterministic. e.g. to remove dependencies on all three, add:
 
-The two packages have (according to DNF/RPM) different permissions, owner or
-group assigned to that particular directory.
+  ac_cv_path_XSLTPROC=no
+  ac_cv_path_A2X=no
+  ac_cv_path_XMLLINT=no
 
-I think it's reasonable for both of the packages to create the directory,
-however they must match in perms/owner/group.  I would defer to shadow as the
-correct source for this information.
+to EXTRA_OECONF (which would allow you to remove asciidoc-native from DEPENDS).
 
-It may be necessary though to change shadow's default to something more
-reasonable if 'root:root' is not right.
+>> >
+>> > On Thu, Apr 6, 2017 at 3:42 PM, Benjamin Gaignard
+>> > <benjamin.gaignard@linaro.org> wrote:
+>> >>
+>> >> Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
+>> >> ---
+>> >> version 2:
+>> >> - create user and group for tinyproxy
+>> >> - only install the service if systemd is present in DISTRO_FEATURE
+>> >> - add dependency on asciidoc-native
+>> >>  .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
+>> >>  .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 41
+>> >> ++++++++++++++++++++++
+>> >>  2 files changed, 55 insertions(+)
+>> >>  create mode 100644
+>> >> meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+>> >>  create mode 100644
+>> >> meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+>> >>
+>> >> diff --git
+>> >> a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+>> >> b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+>> >> new file mode 100644
+>> >> index 0000000..ea079f9
+>> >> --- /dev/null
+>> >> +++
+>> >> b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
+>> >> @@ -0,0 +1,14 @@
+>> >> +[Unit]
+>> >> +Description=Tinyproxy, Lightweight http(s) proxy daemon
+>> >> +RequiresMountsFor=/var
+>> >> +
+>> >> +[Service]
+>> >> +Group=tinyproxy
+>> >> +ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
+>> >> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
+>> >> +ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
+>> >> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
+>> >> +ExecStart=/usr/sbin/tinyproxy -d
+>> >> +
+>> >> +[Install]
+>> >> +WantedBy=multi-user.target
+>> >> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.
+>> 8.4.bb
+>> >> b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+>> >> new file mode 100644
+>> >> index 0000000..ef2a2d8
+>> >> --- /dev/null
+>> >> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+>> >> @@ -0,0 +1,41 @@
+>> >> +SUMMARY = "Lightweight http(s) proxy daemon"
+>> >> +HOMEPAGE = "https://tinyproxy.github.io/"
+>> >> +LICENSE = "GPLv2"
+>> >> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882b
+>> be"
+>> >> +
+>> >> +SRC_URI =
+>> >> "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz
+>> \
+>> >> +                  file://tinyproxy.service"
+>> >> +
+>> >> +SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
+>> >> +SRC_URI[sha256sum] =
+>> >> "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
+>> >> +
+>> >> +DEPENDS = "asciidoc-native"
+>> >> +
+>> >> +EXTRA_OECONF += " \
+>> >> +       --enable-filter \
+>> >> +       --enable-transparent \
+>> >> +       --disable-regexcheck \
+>> >> +       --enable-reverse \
+>> >> +       --enable-upstream \
+>> >> +       --enable-xtinyproxy \
+>> >> +       "
+>> >> +
+>> >> +inherit autotools systemd useradd
+>> >> +
+>> >> +#User specific
+>> >> +USERADD_PACKAGES = "${PN}"
+>> >> +USERADD_PARAM_${PN} = "nobody"
+>> >> +GROUPADD_PARAM_${PN} = "--system tinyproxy"
+>> >> +
+>> >> +SYSTEMD_PACKAGES += "${BPN}"
+>> >> +SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
+>> >> +SYSTEMD_AUTO_ENABLE_${PN} = "enable"
+>> >> +
+>> >> +do_install_append() {
+>> >> +       if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
+>> >> 'false', d)}; then
+>> >> +               install -d ${D}${systemd_system_unitdir}
+>> >> +               install -m 0644 ${WORKDIR}/tinyproxy.service
+>> >> ${D}${systemd_system_unitdir}
+>> >> +       fi
+>> >> +}
+>> >> +
+>> >> +FILES_${PN} =+ "${systemd_system_unitdir}/tinyproxy.service"
 
---Mark
+This shouldn't be required if SYSTEMD_SERVICE_${PN} includes
+"tinyproxy.service".
 
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-networking/recipes-daemons/postfix/postfix.inc | 2 --
->  1 file changed, 2 deletions(-)
-> 
-> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-> index 5bb2491..4c794ff 100644
-> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
-> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-> @@ -164,8 +164,6 @@ do_install () {
->      install -m 770 -d ${D}${localstatedir}/spool/postfix
->      chown postfix:postfix ${D}${localstatedir}/spool/postfix
->  
-> -    install -m 2755 -d ${D}${localstatedir}/spool/mail
-> -    chown postfix:nogroup ${D}${localstatedir}/spool/mail
->      install -m 0755 -d ${D}${localstatedir}/lib/postfix
->      chown postfix:nogroup ${D}${localstatedir}/lib/postfix
->      install -m 0755 -d ${D}${localstatedir}/spool/postfix
-> 
-
+>> >> --
+>> >> 1.9.1
+>> >>
+>> >
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
