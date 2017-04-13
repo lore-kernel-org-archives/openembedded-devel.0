@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CF85D77E7C
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8233477E77
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:18 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id o126so12676331pfb.1
+	Thu, 13 Apr 2017 20:41:16 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c198so12686173pfc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:19 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7+IU/lK9BgM/kdo/M9P+6PNh2VIvkxB7PAOK1CzbsFw=;
-	b=k2EsGEoxDzXJGWaFaJMxGr2CVjVTtWdl+56Q6oEsHDyv3KL2AUjrBY1LZivJNBmCtD
-	E+inqSz65a+mH6aaTtq7hYyBXNjiL71nAa9OXDmeFIjd3CQEVTzLEfR3xiP/sdI3p9aq
-	lOrWbIdGbIEft+qGgoX9dMoE2SkC1Lojhr0v57XnZMWSxDIT4eLVDW30eNFLbNd6qj63
-	4yX/Tzx6hO40Z0rAFt+wb332xNWdKq+NNld2LwHFAhIq5I/y7ChX8uX29INZDrlnvnRl
-	Chqw9ZYV88+/7n9IydjSGVlFAMJ9H5t+kVN+jbSF7oE5O061MAnKRQzGSEFxvu3wM4eM
-	FVsA==
+	h=from:to:cc:subject:date:message-id;
+	bh=YdTt7xUOD9wtwYRg5EB6f11H5SyzrTOt+OELPzKyI0w=;
+	b=B44rXZGDME1mHnF59atsswM3yA5P+iFH7rrSp20obWgZSTPoypQQve9G73SnoWg7eq
+	qgNzvKcV8s5SYHb11t7GXmMMc3SG5n/Peg3+5HgFC/UIC/x3vOvlKtrbfDR8XmYvTL0N
+	ruO/7aKWwO2rYCGVQ1iSs54lGNLkI2XgUwAU69DKxxq+VOY9u92rZBcpr8frR3FfESIY
+	Kd14KTeuglMyL7WDP0EUinAt+FHXHOGSGfbLbeypYPxlAAPE2OjvJvmpOd1SYYPizn4F
+	9jB7qn6R9xUybYGkeovv1GZGN1QtcS9iRih8AzTjfX6J41hdgr8T4JKXNcYLvB21RUfR
+	k7Mw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=7+IU/lK9BgM/kdo/M9P+6PNh2VIvkxB7PAOK1CzbsFw=;
-	b=Q3m0ErbERNTJyUISO36E/W6dLUXuNnNRu8vaD8BnVRI5jFWOWxZDSq1FNj6TsTjxv0
-	/LtnjF2QbJLjjurA6bKLlMwzuqriFKkLA6PvkBIHwk9ZN8mQtLynZ16Ts7wtg0v7bTvX
-	ck+6uPQY3jY8dpnFnIbcxZAYIZTuDiEv/exaVNuuVZZRLDptAooDRMIpiZiRVc2UYBc2
-	+/0YZQnE4KDLewvtSXCgovrUk4+i8WvSuoshQ7H0MzHdJvwkD66BCDZCxfuwHq1sb2Lx
-	Jj4hxcbGCaNgt7IclZ6mMneVP/KMNApgSEwWhc0UP4cvdX/sk/qkI8aDxkVmTXf+o5+6
-	U+ug==
-X-Gm-Message-State: AN3rC/6zuT1F4NXpVA0+fMMBTXUh4FLi+zeejbuvcbT0RThSKz5G7imY
-	j+q/Zqxic7YYmg==
-X-Received: by 10.98.70.139 with SMTP id o11mr4287418pfi.0.1492116079606;
-	Thu, 13 Apr 2017 13:41:19 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=YdTt7xUOD9wtwYRg5EB6f11H5SyzrTOt+OELPzKyI0w=;
+	b=rdFD+DfMkUsAlvfeeHmkd2zr7AN3Xli+TQOZ/buigtEOepqM3hBZmAUovzGPfxirn9
+	+xHS2TW4j6RShkaxWk3YEkDo/fXsx15U13hltAh2S9cBa5J+OXkm1XVWOWrRB+QdtzBk
+	UGOxHo3wLcyQRZ0eOigkLWGhiSVyzTqXWU/WTj08zL+qWFvm0JfdLEfHqdK4Vnx9GiyA
+	XiI/cp5G8AmZI11CNMkLtnfB1mu1Eh23yxoTloaeg3+onqD7bLVdjY417cqdqbOl2Yr8
+	MwvjrhmyelLYTWUm53U6AkAdGIYhK6fBVXFSPIExpb3fc3dK+jwzUh0SWCSdqmiUX4k1
+	sSuw==
+X-Gm-Message-State: AN3rC/5sSPxTtNduX6/ywQ79saX2i4NLRp+1e/g7yzuDKlYGa2aCl4G3
+	NHSnVkfbAuZ5Og==
+X-Received: by 10.98.7.140 with SMTP id 12mr4199104pfh.202.1492116077899;
+	Thu, 13 Apr 2017 13:41:17 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.17
+	u29sm44033332pfa.123.2017.04.13.13.41.16
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:18 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:39 -0700
-Message-Id: <20170413204106.30679-2-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:38 -0700
+Message-Id: <20170413204106.30679-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
-References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-networking][ 02/29] ez-ipupdate: Fix formatting security warnings
+Subject: [meta-networking][ 01/29] lowpan-tools: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +53,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:23 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:24 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb                     |  1 +
- .../recipes-connectivity/ez-ipupdate/files/wformat.patch    | 13 +++++++++++++
- 2 files changed, 14 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
+ ...-src-iz.c-Undef-dprintf-before-redefining.patch | 27 ++++++++++++++++++++++
+ .../lowpan-tools/lowpan-tools_git.bb               |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-src-iz.c-Undef-dprintf-before-redefining.patch
 
-diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-index cb5375c1f..51e220c9e 100644
---- a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-+++ b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
-@@ -8,6 +8,7 @@ SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}
-     file://Makefile.am.patch \
-     file://cache_file.c.patch \
-     file://conf_file.c.patch \
-+    file://wformat.patch \
-     "
- SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
- SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
-diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-src-iz.c-Undef-dprintf-before-redefining.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-src-iz.c-Undef-dprintf-before-redefining.patch
 new file mode 100644
-index 000000000..1de267f08
+index 000000000..68393067d
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
-@@ -0,0 +1,13 @@
-+Index: ez-ipupdate-3.0.11b7/ez-ipupdate.c
-+===================================================================
-+--- ez-ipupdate-3.0.11b7.orig/ez-ipupdate.c
-++++ ez-ipupdate-3.0.11b7/ez-ipupdate.c
-+@@ -798,7 +798,7 @@ void show_message(char *fmt, ...)
-+     sprintf(buf, "message incomplete because your OS sucks: %s\n", fmt);
-+ #endif
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-src-iz.c-Undef-dprintf-before-redefining.patch
+@@ -0,0 +1,27 @@
++From ad088233608ba2205511da4f270f8ba29844b84c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 8 Apr 2017 09:02:02 -0700
++Subject: [PATCH] src/iz.c: Undef dprintf before redefining
++
++Clang is picky and warns about macros redefinition
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/iz.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/iz.c b/src/iz.c
++index 32be1a8..886f0a5 100644
++--- a/src/iz.c
+++++ b/src/iz.c
++@@ -60,6 +60,7 @@ static int iz_seq = 0;
++ /* Parsed options */
++ static int iz_debug = 0;
 + 
-+-    syslog(LOG_NOTICE, buf);
-++    syslog(LOG_NOTICE, "%s", buf);
-+   }
-+   else
-+   {
+++#undef dprintf
++ #define dprintf(lvl, fmt...)			\
++ 	do {					\
++ 		if (iz_debug >= lvl)		\
++-- 
++2.12.2
++
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index 139eb788f..0dcc6a785 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
+            file://no-help2man.patch \
+            file://0001-Fix-build-errors-with-clang.patch \
+            file://0001-addrdb-coord-config-parse.y-add-missing-time.h-inclu.patch \
++           file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
+            "
+ SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
+ 
 -- 
 2.12.2
 
