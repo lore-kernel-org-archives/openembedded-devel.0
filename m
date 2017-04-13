@@ -1,27 +1,47 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DF07277D0A
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id BBE5A77C3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 02:31:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3D2VdjW026176
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 13 Apr 2017 02:56:34 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id 79so8566495pgf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 19:31:39 -0700 (PDT)
-Received: from [128.224.162.239] (128.224.162.239) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 12 Apr 2017 19:31:38 -0700
-To: <openembedded-devel@lists.openembedded.org>
-References: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-Message-ID: <58EEE309.9000501@windriver.com>
-Date: Thu, 13 Apr 2017 10:31:37 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
-MIME-Version: 1.0
-In-Reply-To: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
-Subject: Re: [meta-oe][PATCH] autoconf-archive: Upgrade to 2016.09.16
+	Wed, 12 Apr 2017 19:56:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=epZrfKnu340czrVOzkWbp3uCBCrCP67oOOdKgC6xeN0=;
+	b=YkVWsPlDelOYkTZewjGUli0Odp72PkjGqv+mG/KjFG11UvZ6HLWzJe8Xf4U5uOd64S
+	RNpIql5qFyxsh9GEVl4islej8YEL2d9jaXEUNGBfqIvkWnWvlEAXMr4Xs/75h6qSufdc
+	fHBJpMCl8MRQttdkbOJ+j7VCLGnWMjewaGa/70noIDtyQ3PfFSZm3r60P2RKigfrlDmw
+	X20d8ZWmBNhWwJqvJb5dQNmsF0qX2SQAfEvytcJg4JYQ+3P0yZWQZs4+ZE4lkJ6V0yuZ
+	A8tTn7GFDXO7CyNyyp8Z5i1Hw6IKqlD8JWh2XotGITIE2+t8oxKTe0q2cZLO1sdqzZ3Q
+	9W4A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=epZrfKnu340czrVOzkWbp3uCBCrCP67oOOdKgC6xeN0=;
+	b=Z+i9sAgHNLj7swrlIuEY/O8ANv6LYxnOt9eLQ03x7g9z//TPVvx1YinYFZyU3f9ds/
+	bQkUetu6D+N4dUiAO/Qpm+iRzXD0meS3a3Fhw2pm9Ug7cxACNHlF6fUJC/ruO4/um9c6
+	w7jCgNOWxfpiRVpymHjL/PXpHyKyXtdPboS+1ielEyAzRAt12nYb41ySkSpa4xPJ8CdS
+	h6XA82utowf43HmX/amRoC9N4Rxd3y7xwce7v2CLNd/XQXd1vq4PtnyteVL+lPLwyC8Z
+	Lxdk16YaXaKQW3o/RS6hTD9xuPYc1UwQJJGJqKZnFZGYPsChaLf+/A6QQomT8KgCCAsw
+	MiuA==
+X-Gm-Message-State: AN3rC/4u/twOnjyCGc49GEwzeLtldWWmf24fezxLr/Hw9I7C0rmAyx92
+	Ope+5j0/ISFInQ==
+X-Received: by 10.84.218.130 with SMTP id r2mr1180851pli.79.1492052195733;
+	Wed, 12 Apr 2017 19:56:35 -0700 (PDT)
+Received: from akuster-ThinkPad-X240.mvista.com
+	([2601:202:4001:9ea0:e3df:bf0a:9f90:498e])
+	by smtp.gmail.com with ESMTPSA id
+	f87sm27680880pfd.87.2017.04.12.19.56.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 12 Apr 2017 19:56:35 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	akuster@mvista.com
+Date: Wed, 12 Apr 2017 19:56:32 -0700
+Message-Id: <1492052192-31483-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] netmap: Update to tip and fix misc build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,91 +54,279 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 02:31:40 -0000
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 Apr 2017 02:56:34 -0000
 
-Please suspend to check in this patch.
-Because if we upgrade it, there will be something macros(ax_*.m4) 
-conflictions between autoconf-archive
-and gnome-common. even if we can use the option 
-'--with-autoconf-archive' for gnome-common then set
-it depend on autoconf-archive, unfortunately the gnome-common is from 
-oe-core and autoconf-archive is
-from meta-oe.
-As the same time, the lvm2 depends on autoconf-archive in meta-oe, so we 
-can't only move autoconf-archive
-into oe-core.
+Update to pick up 4.10 and below kernel patches.
+Change LICENSE to reflect changes noted by the maintainer
+adapt to makefile changes for module install dest location
+fix compile issues do to gcc 6.x
+remove unneeded patches
 
-Any thoughts on that?
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-kernel/netmap/files/gcc_6_fix.patch    | 170 +++++++++++++++++++++
+ .../recipes-kernel/netmap/netmap-modules_git.bb    |   9 +-
+ meta-networking/recipes-kernel/netmap/netmap.inc   |   8 +-
+ .../recipes-kernel/netmap/netmap_git.bb            |   8 +-
+ 4 files changed, 182 insertions(+), 13 deletions(-)
+ create mode 100644 meta-networking/recipes-kernel/netmap/files/gcc_6_fix.patch
 
-Thanks.
-
-On 2017年04月12日 18:52, Zhixiong Chi wrote:
-> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-> ---
->   .../recipes-devtools/autoconf-archive/autoconf-archive.inc  |  2 +-
->   .../autoconf-archive/autoconf-archive_2012.04.07.bb         | 13 -------------
->   .../autoconf-archive/autoconf-archive_2016.09.16.bb         | 13 +++++++++++++
->   3 files changed, 14 insertions(+), 14 deletions(-)
->   delete mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
->   create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
->
-> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> index 9399363..779115a 100644
-> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
-> @@ -10,6 +10,6 @@ RDEPENDS_${PN} = "m4 gnu-config"
->   RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
->   RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
->   
-> -SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
-> +SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
->   
->   inherit autotools
-> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-> deleted file mode 100644
-> index 5baaecc..0000000
-> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -require autoconf-archive.inc
-> -
-> -
-> -PARALLEL_MAKE = ""
-> -
-> -LICENSE = "GPLv2 & GPLv3"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> -
-> -SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
-> -SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
-> -
-> -EXTRA_OECONF += "ac_cv_path_M4=m4"
-> -BBCLASSEXTEND = "native nativesdk"
-> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-> new file mode 100644
-> index 0000000..0a1a771
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
-> @@ -0,0 +1,13 @@
-> +require autoconf-archive.inc
-> +
-> +
-> +PARALLEL_MAKE = ""
-> +
-> +LICENSE = "GPLv2 & GPLv3"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-> +
-> +SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
-> +SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
-> +
-> +EXTRA_OECONF += "ac_cv_path_M4=m4"
-> +BBCLASSEXTEND = "native nativesdk"
-
+diff --git a/meta-networking/recipes-kernel/netmap/files/gcc_6_fix.patch b/meta-networking/recipes-kernel/netmap/files/gcc_6_fix.patch
+new file mode 100644
+index 0000000..5065225
+--- /dev/null
++++ b/meta-networking/recipes-kernel/netmap/files/gcc_6_fix.patch
+@@ -0,0 +1,170 @@
++Fix build issues do to gcc 6.x
++
++Upstream-Status: Pending
++
++loads of error: format '%lu' expects argument of type 'long unsigned int', but argument 7 has type 'long long unsigned int'
++
++and  error: left shift count >= width of type [-Werror=shift-count-overflow]
++
++Signed-off-by: Armin Kuster <akuster808@gmail.com>
++
++Index: git/apps/lb/lb.c
++===================================================================
++--- git.orig/apps/lb/lb.c
+++++ git/apps/lb/lb.c
++@@ -935,7 +935,7 @@ run:
++ 				if (hash == 0) {
++ 					non_ip++; // XXX ??
++ 				}
++-				rs->ptr = hash | (1UL << 32);
+++				rs->ptr = hash | (1ULL << 32);
++ 				// prefetch the buffer for the next round
++ 				next_cur = nm_ring_next(rxring, next_cur);
++ 				next_slot = &rxring->slot[next_cur];
++Index: git/apps/tlem/tlem.c
++===================================================================
++--- git.orig/apps/tlem/tlem.c
+++++ git/apps/tlem/tlem.c
++@@ -513,7 +513,7 @@ no_room(struct _qs *q)
++ 	q_reclaim(q);
++ 	if (q->prod_queued > q->qsize) {
++ 	    q->prod_drop++;
++-	    RD(1, "too many bytes queued %lu, drop %lu",
+++	    RD(1, "too many bytes queued %llu, drop %llu",
++ 		(_P64)q->prod_queued, (_P64)q->prod_drop);
++ 	    return 1;
++ 	}
++@@ -523,7 +523,7 @@ no_room(struct _qs *q)
++ 	h = q->prod_head = q->head; /* re-read head, just in case */
++ 	/* repeat the test */
++ 	if ((h <= t && new_t == 0 && h == 0) || (h > t && (new_t == 0 || new_t >= h)) ) {
++-	    ND(1, "no room for insert h %ld t %ld new_t %ld",
+++	    ND(1, "no room for insert h %lld t %lld new_t %lld",
++ 		(_P64)h, (_P64)t, (_P64)new_t);
++ 	    return 1; /* no room for insert */
++ 	}
++@@ -906,14 +906,14 @@ tlem_main(void *_a)
++ 
++     q->buf = calloc(1, need);
++     if (q->buf == NULL) {
++-	ED("alloc %ld bytes for queue failed, exiting", (_P64)need);
+++	ED("alloc %lld bytes for queue failed, exiting", (_P64)need);
++ 	nm_close(a->pa);
++ 	nm_close(a->pb);
++ 	return(NULL);
++     }
++     q->buflen = need;
++-    ED("----\n\t%s -> %s :  bps %ld delay %s loss %s queue %ld bytes"
++-	"\n\tbuffer %lu bytes",
+++    ED("----\n\t%s -> %s :  bps %lld delay %s loss %s queue %lld bytes"
+++	"\n\tbuffer %llu bytes",
++ 	q->prod_ifname, q->cons_ifname,
++ 	(_P64)q->max_bps, q->c_delay.optarg, q->c_loss.optarg, (_P64)q->qsize,
++ 	(_P64)q->buflen);
++@@ -1258,7 +1258,7 @@ main(int argc, char **argv)
++ 	    struct _qs *q0 = &bp[0].q, *q1 = &bp[1].q;
++ 
++ 	    sleep(1);
++-	    ED("%ld -> %ld maxq %d round %ld, %ld <- %ld maxq %d round %ld",
+++	    ED("%lld -> %lld maxq %d round %lld, %lld <- %lld maxq %d round %lld",
++ 		(_P64)(q0->rx - olda.rx), (_P64)(q0->tx - olda.tx),
++ 		q0->rx_qmax, (_P64)q0->prod_max_gap,
++ 		(_P64)(q1->rx - oldb.rx), (_P64)(q1->tx - oldb.tx),
++@@ -1553,7 +1553,7 @@ uniform_delay_parse(struct _qs *q, struc
++ 	dmax = parse_time(av[2]);
++ 	if (dmin == U_PARSE_ERR || dmax == U_PARSE_ERR || dmin > dmax)
++ 		return 1;
++-	D("dmin %ld dmax %ld", (_P64)dmin, (_P64)dmax);
+++	D("dmin %lld dmax %lld", (_P64)dmin, (_P64)dmax);
++ 	dst->d[0] = dmin;
++ 	dst->d[1] = dmax;
++ 	dst->d[2] = dmax - dmin;
++@@ -1618,7 +1618,7 @@ exp_delay_run(struct _qs *q, struct _cfg
++ {
++ 	uint64_t *t = (uint64_t *)arg->arg;
++         q->cur_delay = t[my_random24() & (PTS_D_EXP - 1)];
++-	RD(5, "delay %lu", (_P64)q->cur_delay);
+++	RD(5, "delay %llu", (_P64)q->cur_delay);
++         return 0;
++ }
++ 
++@@ -1777,7 +1777,7 @@ const_ber_parse(struct _qs *q, struct _c
++ 			plr[i] = mask;
++ #if 0
++ 		if (i>= 60) //  && plr[i] < mask/2)
++-			RD(50,"%4d: %le %ld", i, 1.0 - cur, (_P64)plr[i]);
+++			RD(50,"%4d: %le %lld", i, 1.0 - cur, (_P64)plr[i]);
++ #endif
++ 	}
++ 	dst->d[0] = ber * (mask + 1);
++Index: git/apps/nmreplay/nmreplay.c
++===================================================================
++--- git.orig/apps/nmreplay/nmreplay.c
+++++ git/apps/nmreplay/nmreplay.c
++@@ -771,7 +771,7 @@ pcap_prod(void *_pa)
++     need = loops * pf->tot_bytes_rounded + sizeof(struct q_pkt);
++     q->buf = calloc(1, need);
++     if (q->buf == NULL) {
++-	D("alloc %ld bytes for queue failed, exiting",(_P64)need);
+++	D("alloc %lld bytes for queue failed, exiting",(_P64)need);
++ 	goto fail;
++     }
++     q->prod_head = q->prod_tail = 0;
++@@ -1261,7 +1261,7 @@ main(int argc, char **argv)
++ 	    struct _qs *q0 = &bp[0].q;
++ 
++ 	    sleep(1);
++-	    ED("%ld -> %ld maxq %d round %ld",
+++	    ED("%lld -> %lld maxq %d round %lld",
++ 		(_P64)(q0->rx - olda.rx), (_P64)(q0->tx - olda.tx),
++ 		q0->rx_qmax, (_P64)q0->prod_max_gap
++ 		);
++@@ -1529,7 +1529,7 @@ uniform_delay_parse(struct _qs *q, struc
++ 	dmax = parse_time(av[2]);
++ 	if (dmin == U_PARSE_ERR || dmax == U_PARSE_ERR || dmin > dmax)
++ 		return 1;
++-	D("dmin %ld dmax %ld", (_P64)dmin, (_P64)dmax);
+++	D("dmin %lld dmax %lld", (_P64)dmin, (_P64)dmax);
++ 	dst->d[0] = dmin;
++ 	dst->d[1] = dmax;
++ 	dst->d[2] = dmax - dmin;
++@@ -1592,7 +1592,7 @@ exp_delay_run(struct _qs *q, struct _cfg
++ {
++ 	uint64_t *t = (uint64_t *)arg->arg;
++         q->cur_delay = t[my_random24() & (PTS_D_EXP - 1)];
++-	RD(5, "delay %lu", (_P64)q->cur_delay);
+++	RD(5, "delay %llu", (_P64)q->cur_delay);
++         return 0;
++ }
++ 
++@@ -1783,7 +1783,7 @@ const_ber_parse(struct _qs *q, struct _c
++ 			plr[i] = mask;
++ #if 0
++ 		if (i>= 60) //  && plr[i] < mask/2)
++-			RD(50,"%4d: %le %ld", i, 1.0 - cur, (_P64)plr[i]);
+++			RD(50,"%4d: %le %lld", i, 1.0 - cur, (_P64)plr[i]);
++ #endif
++ 	}
++ 	dst->d[0] = ber * (mask + 1);
++Index: git/apps/pkt-gen/pkt-gen.c
++===================================================================
++--- git.orig/apps/pkt-gen/pkt-gen.c
+++++ git/apps/pkt-gen/pkt-gen.c
++@@ -1319,7 +1319,7 @@ ping_body(void *data)
++ 					ts.tv_nsec += 1000000000;
++ 					ts.tv_sec--;
++ 				}
++-				if (0) D("seq %d/%lu delta %d.%09d", seq, sent,
+++				if (0) D("seq %d/%llu delta %d.%09d", seq, sent,
++ 					(int)ts.tv_sec, (int)ts.tv_nsec);
++ 				t_cur = ts.tv_sec * 1000000000UL + ts.tv_nsec;
++ 				if (t_cur < t_min)
++@@ -1401,7 +1401,7 @@ pong_body(void *data)
++ 		return NULL;
++ 	}
++ 	if (n > 0)
++-		D("understood ponger %lu but don't know how to do it", n);
+++		D("understood ponger %llu but don't know how to do it", n);
++ 	while (!targ->cancel && (n == 0 || sent < n)) {
++ 		uint32_t txcur, txavail;
++ //#define BUSYWAIT
+diff --git a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+index 82b9b05..6f05ac7 100644
+--- a/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
++++ b/meta-networking/recipes-kernel/netmap/netmap-modules_git.bb
+@@ -13,6 +13,9 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
+                 --kernel-sources=${STAGING_KERNEL_DIR} \
+                 --install-mod-path=${D} \
+                 --driver-suffix="-netmap" \
++                --cc='${CC}' \
++                --ld='${LD}' \
++                --no-apps \
+                 "
+ 
+ # The driver builds are optional, but for deterministic builds,
+@@ -85,8 +88,8 @@ do_compile () {
+ 
+ do_install () {
+     cd ${S}/LINUX
+-    oe_runmake install
++    oe_runmake install DESTDIR=${D}
+ }
+ 
+-# http://errors.yoctoproject.org/Errors/Details/83335/
+-PNBLACKLIST[netmap-modules] ?= "BROKEN: not compatible with default kernel version 4.8"
++FILES_${PN}-doc += "${prefix}/local/share" 
++FILES_${PN}-dev += "${prefix}/local/include"
+diff --git a/meta-networking/recipes-kernel/netmap/netmap.inc b/meta-networking/recipes-kernel/netmap/netmap.inc
+index ab33e76..665c11d 100644
+--- a/meta-networking/recipes-kernel/netmap/netmap.inc
++++ b/meta-networking/recipes-kernel/netmap/netmap.inc
+@@ -2,15 +2,15 @@ SUMMARY = "netmap and VALE - very fast packet I/O from userspace (FreeBSD/Linux)
+ DESCRIPTION= "NETMAP is a framework for very fast packet I/O from userspace.  VALE is an equally fast in-kernel software switch using the netmap API.  Both are implemented as a single kernel module for FreeBSD and Linux, and can deal with line rate on real or emulated 10 Gbit ports."
+ SECTION = "networking"
+ HOMEPAGE = "http://code.google.com/p/netmap/"
+-LICENSE = "GPLv2+"
++LICENSE = "BSD-2-Clause"
+ 
+-LIC_FILES_CHKSUM = "file://README;beginline=13;endline=14;md5=56ae0b9c7ba0476ab9098de94c2714d6"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=388c13686fc84f281413c82fa325965f"
+ 
+-SRCREV = "da9e19e69b84e4f6f8ae125f8d01b42a4abade6a"
++SRCREV = "86312f06626f33f150514eaab42a2d2a8432c4ed"
+ PV = "master+git${SRCPV}"
+ 
+ SRC_URI = "git://github.com/luigirizzo/netmap.git"
+-SRC_URI += "file://makefile_fixup.patch"
++SRC_URI += "file://gcc_6_fix.patch"
+ 
+ S = "${WORKDIR}/git"
+ 
+diff --git a/meta-networking/recipes-kernel/netmap/netmap_git.bb b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+index 667e7cc..7eb5148 100644
+--- a/meta-networking/recipes-kernel/netmap/netmap_git.bb
++++ b/meta-networking/recipes-kernel/netmap/netmap_git.bb
+@@ -7,12 +7,10 @@ EXTRA_OECONF = "--kernel-dir=${STAGING_KERNEL_BUILDDIR} \
+                 --kernel-sources=${STAGING_KERNEL_DIR} \
+                 --no-drivers \
+                 --disable-generic \
+-                --prefix=${prefix} \
+                 --destdir=${D} \
+                 --cc='${CC}' \
+                 --ld='${LD}' \
+                 "
+-SRC_URI += "file://0001-testmmap-fix-compile-issue-with-gcc-5.x.patch"
+ 
+ do_configure () {
+     cd ${S}/LINUX
+@@ -29,9 +27,7 @@ do_install () {
+     make install-apps DESTDIR=${D}
+ }
+ 
+-FILES_${PN} += "${bindir}"
++FILES_${PN} += "${prefix}/local/bin"
++FILES_${PN}-doc  += "${prefix}/local/share"
+ RDEPENDS_${PN} = "kernel-module-netmap"
+ RRECOMMENDS_${PN} = "kernel-module-netmap"
+-
+-# http://errors.yoctoproject.org/Errors/Details/69733/
+-PNBLACKLIST[netmap] ?= "BROKEN: Tries to build kernel module and fails, either it should be disabled or there should be dependency on kernel like in netmap-modules"
 -- 
----------------------
-Thanks,
-Zhixiong Chi
-Tel: +86-10-8477-7036
+2.7.4
 
 
