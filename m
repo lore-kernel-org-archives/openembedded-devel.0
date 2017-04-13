@@ -1,49 +1,29 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id D359277D3A
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 58CE377D28
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 00:53:21 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id t189so35980368wmt.1
+	Thu, 13 Apr 2017 01:47:28 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3D1lTX7013394
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 17:53:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=SqaJA/8Nhp/qD8/hpWCODImVzEw8A2JQ4zEcYEmUOwI=;
-	b=t+waIwYK4TvACPSExjQcPtTYh1OYTNKMQnzUX7EwT/GFqxJzUBf3B/dz7+JmVJDN8G
-	xl6LHKsDCmdhHFCN3T6/bNplPkZysvj4HKJHSYsm1XOf0qyHFZedp5QRz7NKOY/e7kI1
-	mzPsYgLGfWAzJ4UaFe3EmERlu08qJW+CC0IuP2mMIvcS9piBBPjP38Zw0fM/m78aQdv1
-	CKhc5moDsTs4DPK+0dF2/VAibG0dX3YfE+CPkhLeEqVB1xYRTaT4E9+k0ajsgnSJGKC2
-	y9eoq8o1D6gGi/hjgzongb7ym5HPJFQbxaRFOflkyAns2fHez6d3n2D/fTb/0ZhfssxD
-	8JGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=SqaJA/8Nhp/qD8/hpWCODImVzEw8A2JQ4zEcYEmUOwI=;
-	b=uHuP6ju095rw/Dc26Jss5btRmvNIGV41cam9KiuYz+wKqyLfhQ8oipvmrjhp8qBUO7
-	QmyKeJeYynP9rRiGwHn5/EOg5Q9+qXL4Fzo1jOMqwqkq1AGNZDcfKqo6F///VXI7eC+G
-	kTiZmCczyRBivqOUy5ffvGBbQJpzhgyHUULOsqvQ0k+Uied334vrb9ctwq+0fsJzCu6F
-	CCl+ODAcdvqd+QV1uHti30qWUKWwyLu+FzU0s8ZuZSiOUr1VtlU66Z+8QG+lM74PLCBx
-	yhv6SYKhaVafc1+iKWGj9Gw8L2lWSPxZgl/fKupOcPkFkhlo9ZyXSLL/nQNBB4CLPCCb
-	+HEQ==
-X-Gm-Message-State: AN3rC/6bX47JXoPVe/WOq7EtsL72lZkHWPY5GSt3N30DFIdJGA5aIgHK
-	b2HB5AShFri9TBSDPk/M1Cb2TwuRfQ==
-X-Received: by 10.28.70.129 with SMTP id t123mr743460wma.98.1492044802435;
-	Wed, 12 Apr 2017 17:53:22 -0700 (PDT)
+	Wed, 12 Apr 2017 18:47:29 -0700
+Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 12 Apr 2017 18:47:28 -0700
+To: Mark Hatle <mark.hatle@windriver.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20170410021815.13689-1-kai.kang@windriver.com>
+	<ec89de92-7b7e-ee75-e398-35bb5d715b42@windriver.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <9037463a-4d33-c26e-d2a3-335973e12deb@windriver.com>
+Date: Thu, 13 Apr 2017 09:46:47 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Received: by 10.223.153.248 with HTTP; Wed, 12 Apr 2017 17:53:21 -0700 (PDT)
-In-Reply-To: <20170413021127.47ff6bc7@t510.zcs.saftware.de>
-References: <20170326203053.GH15664@denix.org>
-	<20170329230613.GS15664@denix.org>
-	<20170413004504.2cae0270@t510.zcs.saftware.de>
-	<CAJ86T=X2379-ZvEVS-AYku6NENYC48+t11T0GpOic-xyYAPzKQ@mail.gmail.com>
-	<20170413021127.47ff6bc7@t510.zcs.saftware.de>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Wed, 12 Apr 2017 17:53:21 -0700
-Message-ID: <CAJ86T=W3YBoLXH+J16XhJ+FO_ZtW17hPX8+djgqrgVNFXkeBkg@mail.gmail.com>
-To: Andreas Oberritter <obi@opendreambox.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
+In-Reply-To: <ec89de92-7b7e-ee75-e398-35bb5d715b42@windriver.com>
+Subject: Re: [meta-networking][PATCH] postfix: do NOT create directory /var/spool/mail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,69 +36,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 00:53:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 13 Apr 2017 01:47:29 -0000
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Wed, Apr 12, 2017 at 5:11 PM, Andreas Oberritter
-<obi@opendreambox.org> wrote:
-> On Wed, 12 Apr 2017 16:38:58 -0700
-> Andre McCurdy <armccurdy@gmail.com> wrote:
->
->> On Wed, Apr 12, 2017 at 3:45 PM, Andreas Oberritter
->> <obi@opendreambox.org> wrote:
->> > On Wed, 29 Mar 2017 19:06:14 -0400
->> > Denys Dmytriyenko <denis@denix.org> wrote:
->> >
->> >> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:
->> >> > Hi,
->> >> >
->> >> > I've been having the following build issues lately with qtwebkit 5.8 from
->> >> > master:
->> >> >
->> >> > | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
->> >> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
->> >> > | linking ../lib/libQt5WebKit.so.5.8.0
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
->> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
->> >> > | collect2: error: ld returned 1 exit status
->> >> > | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
->> >> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
->> >> > | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
->> >> > | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
->> >> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
->> >> >
->> >> > I believe I was able to build 5.8/master before, so I'm suspecting recent
->> >> > binutils upgrade... But I can be wrong. Would really appreciate some help
->> >> > here. Thanks.
->> >>
->> >> Anyone else see this?
->> >>
->> >
->> > I do. Have you been able to solve it in the meantime?
+On 2017年04月13日 03:32, Mark Hatle wrote:
+> On 4/9/17 9:18 PM, kai.kang@windriver.com wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
 >>
->> Do you both have gold enabled?
+>> postfix installs directory /var/spool/mail which conflicts with package
+>> shadow.
 >>
->>   https://bugs.launchpad.net/ubuntu/+source/qtwebkit-opensource-src/+bug/1653529
+>> | Error: Transaction check error:
+>> |  file /var/spool/mail conflicts between attempted installs of
+>> |  postfix-3.1.1-r0.ppc64e6500 and shadow-4.2.1-r0.1.ppc64e6500
+>>
+>> Make postfix not create /var/spool/mail that it does NOT create the
+>> directory on Fedora and Ubuntu either.
+> I am not sure this is correct.
 >
-> I don't use the ld-is-gold flag, but gold gets built nevertheless. It's just not
-> the default linker. I guess qtwebkit forces its use. So the question becomes whether
-> I should set ld-is-gold or teach qtwebkit not to use gold, in order not to mix both
-> linkers.
+> The two packages have (according to DNF/RPM) different permissions, owner or
+> group assigned to that particular directory.
+>
+> I think it's reasonable for both of the packages to create the directory,
+> however they must match in perms/owner/group.  I would defer to shadow as the
+> correct source for this information.
 
-Assuming qtwebkit has a configure option to explicitly enable/disable
-gold, I'd say add a PACKAGECONFIG option.
+Do you mean use to update-alternative to keep them both?
 
-In the short term keep the PACKAGECONFIG option disabled and in the
-longer term (once qtwebkit builds successfully with gold enabled) set
-the PACKAGECONFIG option based on the testing the distro feature.
+>
+> It may be necessary though to change shadow's default to something more
+> reasonable if 'root:root' is not right.
 
-> Regards,
-> Andreas
+I checked on both Fedora and Ubuntu that /var/spool/mail is set with 
+'root:mail'.  I will update it in recipe shadow.
+And it also set with  'setgid' on Ubuntu, do we need 'setgid' too?
+
+Thanks.
+
+
+
+--Kai
+
+
+>
+> --Mark
+>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   meta-networking/recipes-daemons/postfix/postfix.inc | 2 --
+>>   1 file changed, 2 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> index 5bb2491..4c794ff 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> @@ -164,8 +164,6 @@ do_install () {
+>>       install -m 770 -d ${D}${localstatedir}/spool/postfix
+>>       chown postfix:postfix ${D}${localstatedir}/spool/postfix
+>>   
+>> -    install -m 2755 -d ${D}${localstatedir}/spool/mail
+>> -    chown postfix:nogroup ${D}${localstatedir}/spool/mail
+>>       install -m 0755 -d ${D}${localstatedir}/lib/postfix
+>>       chown postfix:nogroup ${D}${localstatedir}/lib/postfix
+>>       install -m 0755 -d ${D}${localstatedir}/spool/postfix
+>>
+>
+
+
+-- 
+Regards,
+Neil | Kai Kang
+
 
