@@ -1,47 +1,52 @@
-Return-Path: <andrej.rode@ettus.com>
-Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 4801E77E77
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id AE4BB77E1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:47:47 +0000 (UTC)
-Received: by mail-pg0-f43.google.com with SMTP id g2so35336538pge.3
+	Thu, 13 Apr 2017 22:58:28 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id o81so15351173wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:47:49 -0700 (PDT)
+	Thu, 13 Apr 2017 15:58:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=O4TcrZuawC/KN3zII0akj5UWdfVOHDuHVIPaFBb6u9I=;
-	b=uUafvM7j4qExsd54ij2Kjn/3JdFl5Eg8bOZ5lot5XzX8mxPt3YrnzjnWBBYwW1P40k
-	Y/9hAwkKfPF+WoNxVO2vyvpmTraU8kO4JG8q/4F84VOhq+hGCxuhMefjrf+aIQLCChCo
-	ox5gX1gQXHz9wxkjJ04q62b/T5xe36qe+3FLd3AgLptySV8YgK0/iTR5r2c4mhiFGwg8
-	I3E34OkE7Q4nBlnllyzUgWG+jc3sIf3fD9xolnhRsbd9Ooej8OKbPCrTif8MqdQqShcv
-	QiqYg4NCBfstxpI5nO8vBhrey7SWDk0Br6ZifojwmddTD547MnR8E2vO04HtgaCsstzN
-	JPEA==
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qARfHzdYjnZBZt9RMK6lJB0FhuYrYsEAqVSLO2bglWI=;
+	b=cwxka0T3mhxdIYsrmXuEOccgeQJmVfCgTNodzCaEbo2PPXKtGKN+9LG0EA58RB2qS5
+	BKWfBPCdIqIAFvj7ZJf2N3C6HQVhWzbNS9ZFlEEz0w48eNRxX0Ylz3x58kwfr0d5mXHa
+	hpX+JmV9jDWH/PXTilO6n39cRR//M1Aa+a+Xi7M7X+k3vR41XSmkY0J/4E9hQseirGDz
+	UkB4+fxoDnTY8BIxMhx0UUD9OWNJIed9xkiSVMWEjSUN/U/Jf1BSfT8+zxh4Iv0kSeec
+	IMTtFZpW8BLXcG/M9WyMWDZ1VW9vBrCTD/mEpeV/xu0m5/48L0xNErNnB1xbMfrFdgwf
+	hy6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O4TcrZuawC/KN3zII0akj5UWdfVOHDuHVIPaFBb6u9I=;
-	b=FGSz60CxZt7s4oosMQ0UwMm4FV5kqDimAqVsvdocJ+VKGd6Ld17vCQhNlJUshXkQPw
-	uPeqvci7l0v+CKJH9NgobpoFMuwXfGzc6gTjg6uGb1W5AflBc9BlMBB++JW3AlBusMnf
-	gUF6PBMAe5r3iS9hXHaDgps8QYVzRIsVgx32J6ELziD8Cqq9LqgGHF1WRuvad5cKoWzZ
-	+Pmys6Rf9omYTtucINSWTbljS5Jcd/OaWPt0Mh/Rx7TOeDB2qG/8ZjkrF3Pjr/y4w46e
-	4IhhVwAj6/oG+TQz9m5yA38XY25gUoUEgOUnMEgTwGCejGmXjYWMEIrvRZgEbyWKYUb1
-	r1Mw==
-X-Gm-Message-State: AN3rC/7uN0vNTMbzAo0TBh2HohoE9+xeJoO/e5ezrubAr1jC3F2cO+dO
-	OGNIEtEGJkOH9k94
-X-Received: by 10.99.115.16 with SMTP id o16mr4333855pgc.4.1492116469214;
-	Thu, 13 Apr 2017 13:47:49 -0700 (PDT)
-Received: from FlyingDragon.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id
-	t69sm44121483pfa.81.2017.04.13.13.47.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Apr 2017 13:47:48 -0700 (PDT)
-From: Andrej Rode <andrej.rode@ettus.com>
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=qARfHzdYjnZBZt9RMK6lJB0FhuYrYsEAqVSLO2bglWI=;
+	b=V9wFsjdbESBpXOwo/U3B/4wC/VoGvyZ/cSCg67Zw7lOK/YKEGySgzyQuHhxCNYDPF9
+	+DjAvp/RJtMClMKrtRigKmspmyq53qIHpzgN5hVrfGKlApDBEP0vfSu2/sFnOyl7bVl7
+	D4duJQpksnzVuH5X2N+6Xkj0jS5Sqe2E9WOHzOtYOzCS+c/eTAcWcMws1QRpKQV2zqep
+	5kj+2lLyxZCuXgGVot6SkcA5AxXPXwzGD4s0mt0Dif2x6OTE+TaPm2jA1S/A9/IKHAYP
+	pYwLELXTMVrbkgzwpjDGnp+oXWN1cO4QF16RsX1IIiu06n8HPIf7xZpJleVGDf2tGLpj
+	W3AQ==
+X-Gm-Message-State: AN3rC/5gKqxdLpkJaqUjzFK8eq11pOi/+YDgkpZZX42AAvIbrl1/bk75
+	bqDSUuxqgi5Pbaw6
+X-Received: by 10.28.71.153 with SMTP id m25mr10235216wmi.83.1492124308742;
+	Thu, 13 Apr 2017 15:58:28 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030046E911F1051E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:46:e911:f105:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	32sm155689wrq.25.2017.04.13.15.58.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Apr 2017 15:58:28 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:47:14 -0700
-Message-Id: <20170413204714.20110-1-andrej.rode@ettus.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-python][PATCH v3] python-systemd, python3-systemd: add a new recipes
+Date: Fri, 14 Apr 2017 00:58:14 +0200
+Message-Id: <20170413225816.10153-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
+MIME-Version: 1.0
+Subject: [PATCH 1/3] florence: unblacklist - gstreamer is fine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,58 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:47:48 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 22:58:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Adds new recipe for python-systemd and python3-systemd
-which provide python bindings for libsystemd
-
-Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-python/recipes-devtools/python/python-systemd_234.bb  | 13 +++++++++++++
- meta-python/recipes-devtools/python/python3-systemd_234.bb | 13 +++++++++++++
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-systemd_234.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-systemd_234.bb
+ meta-gnome/recipes-support/florence/florence_0.5.4.bb | 2 --
+ 1 file changed, 2 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-systemd_234.bb b/meta-python/recipes-devtools/python/python-systemd_234.bb
-new file mode 100644
-index 0000000..ef11831
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-systemd_234.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Python interface for libsystemd"
-+HOMEPAGE = "https://github.com/systemd/python-systemd"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
-+
-+PYPI_PACKAGE = "systemd-python"
-+DEPENDS += "systemd (<=234)"
-+RDEPENDS_${PN} += "systemd"
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+inherit pypi setuptools distro_features_check
-+
-+SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
-+SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
-diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb b/meta-python/recipes-devtools/python/python3-systemd_234.bb
-new file mode 100644
-index 0000000..845b7d9
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
-@@ -0,0 +1,13 @@
-+SUMMARY = "Python interface for libsystemd"
-+HOMEPAGE = "https://github.com/systemd/python-systemd"
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
-+
-+PYPI_PACKAGE = "systemd-python"
-+DEPENDS += "systemd (<=234)"
-+RDEPENDS_${PN} += "systemd"
-+REQUIRED_DISTRO_FEATURES = "systemd"
-+inherit pypi setuptools3 distro_features_check
-+
-+SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
-+SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
+diff --git a/meta-gnome/recipes-support/florence/florence_0.5.4.bb b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+index efc5532..8ce85c9 100644
+--- a/meta-gnome/recipes-support/florence/florence_0.5.4.bb
++++ b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
+@@ -18,5 +18,3 @@ SRC_URI[sha256sum] = "26d33aa20d5fbf34ceeded4c41cb922d2988b6082e33d9acc46dd7bfe5
+ inherit gettext autotools gconf pkgconfig
+ 
+ EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
+-
+-PNBLACKLIST[florence] ?= "Depends on blacklisted gstreamer - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
-2.10.2
+2.9.3
 
 
