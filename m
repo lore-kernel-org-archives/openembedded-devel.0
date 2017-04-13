@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id DC40977E78
+Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 5791477E89
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:39 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id s16so33295941pfs.0
+	Thu, 13 Apr 2017 20:41:40 +0000 (UTC)
+Received: by mail-pg0-f43.google.com with SMTP id x125so35483699pgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:41 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=KaPqMLo0HDMB9SInYFHj+M4MDAHC7qq0pvjkIOSWtVQ=;
-	b=bNAZ3QNftHJ03R5nO/s3GfRFXBMQF6AJXotH6CDU2WubFuRmogbfavyQalwBSB6/SJ
-	4g/0jCHzw9kMNphrOcSHWWLSl4pn5VDet0uhQV+EcjJHgzuoueIVzoMDSlKDevJMfst1
-	ZtX4Lwhq4qfzss+lOpx4pC79u3ju3DDE7kRu+Yojz3296X5GKkX5vXhNvvUqLjeCi81u
-	x60m4QS0cr/N22C7n0SrNUYNWltsAAjV5FPU3QUMWEGsMyr3Sgqdlav9o+JxFLWam2UD
-	+WtU0JFWYadve6wi7OH/RYVsGvZqug59Q7Heiq9KrcQMw6AiiWyZS9E5lChAReXjjYc7
-	qVyg==
+	bh=NBUv4HSpAy78eHutYM8u58gUBMvhOgEfrJMMBFdhVYs=;
+	b=uaX0EgZSWBxcdFTeowEtKmG8/JjnZAsvVMc5VpwDviYZlZ1DCv9deS28FKv2PilKKu
+	8kGZepBaom/D8VlQL5G/2u+6ZUqmTdYlUmGQDOOSPz74efgY6U3627Foz0M5c6ff9Jgx
+	Y4ROLEugn2DMu3Bt5uGJtwAzlRZPqim8scoQWlcNFblDYaGNolNp/o+SHSzrKi+FvJlK
+	9KW32+DJsJw3WT5yoS9J85Ch9T20r+vIWdtqHpzJnrCnCwnMClG2BVENoOcvDTSURaXV
+	bhB97AtFSnkIAWKEfdCggqeeIFvhPNE0rx351iikAkkTo8HBuFwgrFBRI6rBZ0KRYOsp
+	n6mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=KaPqMLo0HDMB9SInYFHj+M4MDAHC7qq0pvjkIOSWtVQ=;
-	b=jjd3S9t50abyCasB02+UgLI4braRhf34gSFVy+lY4/2uY70sqUKmukLFAAYixCWZoB
-	uWxKUJgvsdl9BaWDS63BV5fRLQxdSg58Gdkl8/DC9pZXakKvjDFKweFMv+8Fo7IYurrq
-	kw+d+mRQfyhT6gbu683Y9VF34x3pMPNZXX2thU57JetcDBEiXtYjPihnKG72jM8naxVF
-	jHlhpW8pXE6HpmqcC1KSk8bYEfnRKl+1vl3sDT747UibRqPSCGni7ibrnGjewUhWG2y6
-	1qZoroP+Q2ne1JDHaMGFHXytQf16K4WjmrHAawL8qs31FBUEJBlxKUdPxG/qcnR8oOeC
-	5bWA==
-X-Gm-Message-State: AN3rC/656kzr8txeM7UvSBQYtP1Gyt4VeAtHOM7tZ1pHUEWpcH9ZZZkr
-	F3YzZyzrvehvGhqn
-X-Received: by 10.84.160.226 with SMTP id v31mr5387006plg.122.1492116100330;
-	Thu, 13 Apr 2017 13:41:40 -0700 (PDT)
+	bh=NBUv4HSpAy78eHutYM8u58gUBMvhOgEfrJMMBFdhVYs=;
+	b=HFgmnm2HU1Awo5v9B+7E7n2rOpNnIq3aaB2t0+4Ou7JwMLf3eVIl1nwjJtxMIhpiLV
+	pPYp/YcKIelGM2X15VIyvm+UB/d6qZIImCGdJANP70S2FqfrQ8VLHQ1uoufKOcKXKPpq
+	CAbMnREOtNUDLmBJutVZ/dJUfxInFPi2GSKPgEkrCLKNzbh4uT4rlvAtO4iMnUpc9hfi
+	GWeSDtKYfU/RrCv8/HdyRmx+W3Zh8/wW3+OhyZsPsdPZ5ol48sUWyuW/bDLUbtmuD4Ol
+	kbUQjn7iQZVzyz+RPEKBOg71cHgVvU08nrG6XeWYxBxjAk9HKhv6bvnnCYbeh3Ux/pui
+	B9JQ==
+X-Gm-Message-State: AN3rC/7agiQt9K8+5RGPaHVbRtEa2k59WV/7ljfl89BrMIl7AlFEl2kv
+	EO+7hoOOS4rSCA==
+X-Received: by 10.98.88.130 with SMTP id m124mr4270964pfb.76.1492116101886;
+	Thu, 13 Apr 2017 13:41:41 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.39
+	u29sm44033332pfa.123.2017.04.13.13.41.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:39 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:52 -0700
-Message-Id: <20170413204106.30679-15-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:53 -0700
+Message-Id: <20170413204106.30679-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-gnome][ 15/29] evince: Upgrade to 3.24.0
+Subject: [meta-oe][ 16/29] sharutils: Upgrade to 4.15.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,166 +55,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:40 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:42 -0000
 
-Fix build with security flags
+Fix format error warnings with clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...1-Add-format-attribute-to-_synctex_malloc.patch | 27 +++++++++++++++
- .../evince/evince/0002-fix-gcc6-errors.patch       | 39 ----------------------
- .../evince/{evince_3.18.2.bb => evince_3.24.0.bb}  | 29 +++++++++++-----
- 3 files changed, 48 insertions(+), 47 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
- delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
- rename meta-gnome/recipes-gnome/evince/{evince_3.18.2.bb => evince_3.24.0.bb} (60%)
+ .../sharutils-4.14/fix-for-cross-compiling.patch   | 29 ----------------------
+ .../sharutils/0001-Fix-build-with-clang.patch      | 29 ++++++++++++++++++++++
+ .../recipes-support/sharutils/sharutils_4.14.bb    | 18 --------------
+ .../recipes-support/sharutils/sharutils_4.15.2.bb  | 21 ++++++++++++++++
+ 4 files changed, 50 insertions(+), 47 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
+ create mode 100644 meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
+ delete mode 100644 meta-oe/recipes-support/sharutils/sharutils_4.14.bb
+ create mode 100644 meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
 
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
+diff --git a/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch b/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
+deleted file mode 100644
+index 86a7da63c..000000000
+--- a/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-From 990234af84a5399017d1c4fe03c5c756a8e51e23 Mon Sep 17 00:00:00 2001
+-From: Hongjun Yang <Hongjun.Yang@windriver.com>
+-Date: Tue, 20 Aug 2013 09:41:43 +0800
+-Subject: [PATCH] fix cross compiling issue
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
+-
+----
+- configure | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure b/configure
+-index 6ee98e0..8067f54 100755
+---- a/configure
+-+++ b/configure
+-@@ -26965,7 +26965,7 @@ fi
+- if test "$cross_compiling" = yes; then :
+-   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+- $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
+--as_fn_error $? "cannot run test program while cross compiling
+-+$as_echo "cannot run test program while cross compiling
+- See \`config.log' for more details" "$LINENO" 5; }
+- else
+-   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+--- 
+-1.8.1.4
+-
+diff --git a/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch b/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
 new file mode 100644
-index 000000000..de739c5b3
+index 000000000..7b627c16d
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
-@@ -0,0 +1,27 @@
-+From 3776fd0b42e473fe51d3678bf26cdaa37e1d8e0d Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
+@@ -0,0 +1,29 @@
++From fa8371d348f6a8b0799b2e6c38247dd1399d85e3 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 8 Apr 2017 13:36:12 -0700
-+Subject: [PATCH] Add format attribute to _synctex_malloc
++Date: Sat, 8 Apr 2017 08:49:48 -0700
++Subject: [PATCH] Fix build with clang
 +
-+Helps in avoiding compile errors about formating with clang
++ATTRIBUTE_FORMAT_ARG macro gets computed to be empty with clang
++whereas it does support format attribute, we hard code it
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ cut-n-paste/synctex/synctex_parser_utils.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ src/shar-opts.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/cut-n-paste/synctex/synctex_parser_utils.c b/cut-n-paste/synctex/synctex_parser_utils.c
-+index f8a9f6f..9459b2d 100644
-+--- a/cut-n-paste/synctex/synctex_parser_utils.c
-++++ b/cut-n-paste/synctex/synctex_parser_utils.c
-+@@ -78,6 +78,7 @@ void *_synctex_malloc(size_t size) {
-+ 	return (void *)ptr;
-+ }
++diff --git a/src/shar-opts.h b/src/shar-opts.h
++index a287046..172676f 100644
++--- a/src/shar-opts.h
+++++ b/src/shar-opts.h
++@@ -377,7 +377,7 @@ extern tOptions sharOptions;
++ #   define ATTRIBUTE_FORMAT_ARG(_a)
++ # endif
 + 
-++__attribute__((__format__ (__printf__, 1, 0)))
-+ int _synctex_error(const char * reason,...) {
-+ 	va_list arg;
-+ 	int result;
++-static inline char* aoGetsText(char const* pz) ATTRIBUTE_FORMAT_ARG(1);
+++static inline char* aoGetsText(char const* pz) __attribute__ ((format_arg(1)));
++ static inline char* aoGetsText(char const* pz) {
++     if (pz == NULL) return NULL;
++     return (char*)gettext(pz);
 +-- 
 +2.12.2
 +
-diff --git a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.14.bb b/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
 deleted file mode 100644
-index b8e30f7d9..000000000
---- a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+index d69e6ecbd..000000000
+--- a/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
 +++ /dev/null
-@@ -1,39 +0,0 @@
----- evince-3.18.2/backend/comics/comics-document.c.orig	2016-06-22 20:08:01.789805750 +0000
--+++ evince-3.18.2/backend/comics/comics-document.c	2016-06-22 20:07:00.817804688 +0000
--@@ -241,6 +241,8 @@
-- /* This function shows how to use the choosen command for decompressing a
--  * comic book file. It modifies fields of the ComicsDocument struct with 
--  * this information */
--+#pragma GCC diagnostic push
--+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
-- static gboolean 
-- comics_generate_command_lines (ComicsDocument *comics_document, 
-- 			       GError         **error)
--@@ -296,6 +298,7 @@
-- 	}
-- 
-- }
--+#pragma GCC diagnostic pop
-- 
-- /* This function chooses an external command for decompressing a comic 
--  * book based on its mime tipe. */
----- evince-3.18.2/libdocument/ev-document-misc.c.orig	2016-06-22 20:01:49.205799262 +0000
--+++ evince-3.18.2/libdocument/ev-document-misc.c	2016-06-22 20:02:27.233799924 +0000
--@@ -519,7 +519,8 @@
-- 
-- 	return (dp / di);
-- }
---
--+#pragma GCC diagnostic push
--+#pragma GCC diagnostic ignored "-Wformat-y2k"
-- /* Returns a locale specific date and time representation */
-- gchar *
-- ev_document_misc_format_date (GTime utime)
--@@ -542,6 +543,7 @@
-- 
-- 	return g_locale_to_utf8 (s, -1, NULL, NULL, NULL);
-- }
--+#pragma GCC diagnostic pop
-- 
-- void
-- ev_document_misc_get_pointer_position (GtkWidget *widget,
-diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
-similarity index 60%
-rename from meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-rename to meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
-index 4e3e0f05c..2b75244fe 100644
---- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
-+++ b/meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
-@@ -5,16 +5,16 @@ SECTION = "x11/office"
- DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
- PR = "r5"
- 
--inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check
-+inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
--SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
--SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
+@@ -1,18 +0,0 @@
+-SUMMARY = "This is the set of GNU shar utilities."
+-HOMEPAGE = "http://www.gnu.org/software/sharutils/"
+-SECTION = "console/utils"
+-LICENSE="GPLv3+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 -
--SRC_URI += "file://0001-help-remove-YELP-macro.patch \
--            file://0002-fix-gcc6-errors.patch \
+-inherit gettext autotools-brokensep
+-
+-SRC_URI = "ftp://ftp.gnu.org/gnu/sharutils/sharutils-4.14.tar.gz \
+-    file://fix-for-cross-compiling.patch \
 -"
-+SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
-+           file://0001-help-remove-YELP-macro.patch \
-+           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
-+           "
-+SRC_URI[archive.md5sum] = "3fb65ff46de191dc49c481f1fc66201c"
-+SRC_URI[archive.sha256sum] = "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
- 
- EXTRA_OECONF = " --enable-thumbnailer \
- "
-@@ -25,22 +25,35 @@ do_compile_prepend() {
- 
- 
- do_install_append() {
--    install -d install -d ${D}${datadir}/pixmaps
-+    install -d ${D}${datadir}/pixmaps
-     install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}
+-
+-SRC_URI[md5sum] = "5686c11131b4c4c0841f8f3ef34d136a"
+-SRC_URI[sha256sum] = "90f5107c167cfd1b299bb211828d2586471087863dbed698f53109cd5f717208"
+-
+-do_configure () {
+-    oe_runconf
+-}
+diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+new file mode 100644
+index 000000000..812fee955
+--- /dev/null
++++ b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "This is the set of GNU shar utilities."
++HOMEPAGE = "http://www.gnu.org/software/sharutils/"
++SECTION = "console/utils"
++LICENSE="GPLv3+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++
++inherit gettext autotools
++
++SRC_URI = "ftp://ftp.gnu.org/gnu/${BPN}/${BP}.tar.gz \
++           file://0001-Fix-build-with-clang.patch \
++"
++SRC_URI[md5sum] = "32a51b23e25ad5e6af4b89f228be1800"
++SRC_URI[sha256sum] = "ee336e68549664e7a19b117adf02edfdeac6307f22e5ba78baca457116914637"
++
++do_install_append() {
++    if [ -e ${D}${libdir}/charset.alias ]
 +    then
-+        install -d ${D}${systemd_unitdir}/system
-+        mv ${D}${libdir}/systemd/user/evince.service ${D}${systemd_unitdir}/system/evince.service
-+    else
-+        rm -rf ${D}${libdir}/systemd/user/evince.service
++        rm -rf ${D}${libdir}/charset.alias
++        rmdir --ignore-fail-on-non-empty ${D}${libdir}
 +    fi
-+    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd/user
-+    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd
- }
- 
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
- PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
- 
-+SYSTEMD_SERVICE_${PN} = "evince.service"
-+
- RDEPENDS_${PN} += "glib-2.0-utils"
- RRECOMMMENDS_${PN} = "adwaita-icon-theme"
- 
- PACKAGES =+ "${PN}-nautilus-extension"
- PACKAGES =+ "${PN}-browser-plugin"
-+
- FILES_${PN} += "${datadir}/dbus-1 \
-                 ${datadir}/appdata \
-                 ${datadir}/thumbnailers \
-+                ${systemd_unitdir}/systemd/user/evince.service \
-                "
- FILES_${PN}-dbg += "${libdir}/*/*/.debug \
-                     ${libdir}/*/*/*/.debug"
++}
 -- 
 2.12.2
 
