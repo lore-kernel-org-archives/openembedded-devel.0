@@ -1,45 +1,52 @@
-Return-Path: <benjamin.gaignard@linaro.org>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id E49AA77DFF
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id CC39B77E1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 12:34:32 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id o21so34815818wrb.2
+	Thu, 13 Apr 2017 12:43:48 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id o21so34968709wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 05:34:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=from:to:cc:subject:date:message-id;
-	bh=3k1b5pZM8zLr1SoyikCNngvDPB6FS9ga6FF2Hh5sBPs=;
-	b=kOBLwY41nVM8VTo+adwS+TXd9y9XM9Mr8Opjg/3/5MjEAkwqPYGHuDQvEr/uGfhTFw
-	VDqPMEHk9NCPu7zzB2eAb3ysr00uiA7nfBOtDjR3mPV/GKOPHmIReOnqcC2vlRVSyLSp
-	E1SFBVu2Sk3NiNBR8AmaOgXCaYsrTBMTxK1bM=
+	Thu, 13 Apr 2017 05:43:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AwLKq55Bytkm67U1PSglstxFCliMDQjiskHpak0ttlU=;
+	b=Hbq5jtseyW5asNf2juo0VRLFjRdC5gQ3hakZT/szOFomqZUOEj8HXNfIKX3jNZQ2Ph
+	nibpKbfvBDoKXxJZz/vOy1BiCr1b9YJuwCL3UexObrhOVWZOIYMvbNycGQdbdzYRgKzV
+	n+rPw7bKjrycfH4MG9mfr8HREy8YpnNupCKY/djVZyVgHV7Asa3t4PlFAovYlag1Lgbm
+	Lur3dq99gcCigXNxpaN3sOGIO2TXdDpR3b1wzv9n9uMFT/zIBTuarC/3FpU6fOgIdsCn
+	gJNQmW/P+bLpCrnW/IPrNmqWGbWVN3YPRgB7YiVu8eOIMMuQ4ivcrQczfTYNtJKc9mh4
+	LiQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3k1b5pZM8zLr1SoyikCNngvDPB6FS9ga6FF2Hh5sBPs=;
-	b=E6ITbpJsL2IdfRUmai1dGJYeIVQe148D24+PHzlZoG7iS0hSwbKd5KacwxXK/aTuzd
-	j81innwH3Z8HUJ5qOtPlwkaJvE+wbPfVXLb8Je5Sy5zrSiOKvX8LTHDtr/0DG0bCDTxr
-	U73J/Wad1wcn2HnzGN3ylAxTVpMQwlNk0plDNQZgJNpphTeLMcKX049QUNdPPKWYBp/p
-	K7NiDnoP7gw4FyBOercEexy03E48xZ/BESuwO5UdDme93nfHVMZ6vgmO+GjeMHs5lG4M
-	KhN8A3Z020Oaf72eCNm3a9xGX0NxRrn2fZWuomKqj3TLy+XcLLiMEImXq4m8JPw36hHs
-	SHRA==
-X-Gm-Message-State: AN3rC/7VzUwL5PZPUo7rtEUgVKZpknDwB9W8b3kBaSjlNLyaQKnZS4ay
-	h0DDTeO0labTfdqN
-X-Received: by 10.223.141.140 with SMTP id o12mr2983726wrb.69.1492086873121;
-	Thu, 13 Apr 2017 05:34:33 -0700 (PDT)
-Received: from lmenx321.st.com. (lya72-2-88-175-155-153.fbx.proxad.net.
-	[88.175.155.153]) by smtp.gmail.com with ESMTPSA id
-	u36sm25246274wrc.20.2017.04.13.05.34.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Apr 2017 05:34:32 -0700 (PDT)
-From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-To: openembedded-devel@lists.openembedded.org, joe_macdonald@mentor.com,
-	armccurdy@gmail.com, martin.jansa@gmail.com
-Date: Thu, 13 Apr 2017 14:34:27 +0200
-Message-Id: <1492086867-15041-1-git-send-email-benjamin.gaignard@linaro.org>
-X-Mailer: git-send-email 1.9.1
-Cc: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-Subject: [meta-networking][PATCH v3] tinyproxy: Add recipe
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=AwLKq55Bytkm67U1PSglstxFCliMDQjiskHpak0ttlU=;
+	b=nIl/5NmFFHyTzZKf+Xu7ISDRjBSZrOrLuRNIQlSB7YzSnc2t+o35DeFn+JUzZos5GY
+	5aqHvPLFsbDjiOcydlDyU2SRILfd3zZrG2m7x2dNWYcH0y8Cl6+febwP5le5RiSuYb6i
+	FK9u6EMpW6SYKh0BXGwoGbVP26iM3C/zfDfMU39XdDFnZhrOaq2OU9EIkAPw/b02eUCl
+	NcUaFYQ9tghycdFoRHZRdhMzPH4o4SrpVOLUjd8kx5KTbDenghj5piyyQzq4mc52Vst3
+	NT0MtNbFKvnew6hHxzfciGmxXlGv1pGZdyoAiGb373rpTz5M25k7wkXAuyDtN4ggvc/a
+	cQUg==
+X-Gm-Message-State: AN3rC/7dK3dhn73v4MQvD/FkU/47mZLXaK/PSgrjh0+B5Foow5kex67W
+	8DTn/4oh5ORm4MFZ
+X-Received: by 10.223.168.23 with SMTP id l23mr2696066wrc.185.1492087428982;
+	Thu, 13 Apr 2017 05:43:48 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	([2003:46:e911:f105:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	t24sm1842834wra.44.2017.04.13.05.43.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Apr 2017 05:43:48 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Apr 2017 14:43:21 +0200
+Message-Id: <20170413124323.22507-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.3
+MIME-Version: 1.0
+Subject: [PATCH 0/2] further fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,82 +59,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 12:34:33 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 12:43:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
----
- .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
- .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 39 ++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
- create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
+0001: slipped through
+0002: Fix on top of master-next see [1]
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-new file mode 100644
-index 0000000..ea079f9
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
-@@ -0,0 +1,14 @@
-+[Unit]
-+Description=Tinyproxy, Lightweight http(s) proxy daemon
-+RequiresMountsFor=/var
-+
-+[Service]
-+Group=tinyproxy
-+ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
-+ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
-+ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
-+ExecStart=/usr/sbin/tinyproxy -d
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-new file mode 100644
-index 0000000..f0374b8
---- /dev/null
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-@@ -0,0 +1,39 @@
-+SUMMARY = "Lightweight http(s) proxy daemon"
-+HOMEPAGE = "https://tinyproxy.github.io/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+
-+SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz \
-+		   file://tinyproxy.service"
-+
-+SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
-+SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
-+
-+DEPENDS = "asciidoc-native libxml2-native libxslt-native"
-+
-+EXTRA_OECONF += " \
-+	--enable-filter \
-+	--enable-transparent \
-+	--disable-regexcheck \
-+	--enable-reverse \
-+	--enable-upstream \
-+	--enable-xtinyproxy \
-+	"
-+
-+inherit autotools systemd useradd
-+
-+#User specific
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "nobody"
-+GROUPADD_PARAM_${PN} = "--system tinyproxy"
-+
-+SYSTEMD_PACKAGES += "${BPN}"
-+SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
-+SYSTEMD_AUTO_ENABLE_${PN} = "enable"
-+
-+do_install_append() {
-+	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+		install -d ${D}${systemd_system_unitdir}
-+		install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unitdir}
-+	fi
-+}
+[1] http://lists.openembedded.org/pipermail/openembedded-devel/2017-April/112283.html
+
+Andreas Müller (2):
+  openzone: make build and unblacklist
+  mpv: fix typo in wayland PACKAGECONFIG
+
+ meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb      | 2 +-
+ meta-xfce/recipes-art/cursor-themes/openzone_1.2.3.bb | 8 ++++----
+ 2 files changed, 5 insertions(+), 5 deletions(-)
+
 -- 
-1.9.1
+2.9.3
 
 
