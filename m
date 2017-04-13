@@ -1,49 +1,24 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id EFA9877B14
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 124DC71DAD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 06:44:50 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id o81so103569394wmb.1
+	Thu, 13 Apr 2017 07:37:32 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3D7bVkl028032
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 23:44:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Rx8ta4tvmPX3hgaZsgF9UBL2xZmW8v6OSExlCK4bLYI=;
-	b=pv8Ey1QpJlTQ/GkbvIl3Mg3jNui9XknlGiRC4vhM1RflMCmnaDBNLPx77foCd7n9G/
-	ndK773FvxyMbW6uw9Z/qVdx6dYuO9P6dTO9FrGfdLLt9ygCgqEYOni24u8ngkjpQuNUA
-	o9BjDWH5cSif7Fq9o94FokvimftjSufG9ge7UMpNJBrpmxkUxbCNIteST/glFwKwFsZu
-	6AX4zZ/I7oHYVEFPxgnttKHxsfAjjwMiAXpc8ZfusgpV9Dhxs549ZdlBa6QemPh1YuVw
-	jvvSF5hxNGVJgp64OHmRt0QcNdHTg6ZivqTlwiNvgEAheslvcreXtnSdvmLNbAgGEtdD
-	Kfxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Rx8ta4tvmPX3hgaZsgF9UBL2xZmW8v6OSExlCK4bLYI=;
-	b=C5FvKmyJFdYZd7V27yzcfLxX3O8NB0hHzLjB2wVFs88b9PKm+2FWoG3mSXBpFSbpiy
-	xtFZM4eMy5P0hN9CVTf//OZLjbanAUvs4mnyS3x5AqMMUefitVwDAZfcf0mRzu5r88VW
-	mVumelyKUlgpEG4lOwlx0ABCHM4pxX5e5knPqBq2uhm979VfyLj71hJ/UuaVxGyCwFoS
-	dwhkFZPCwVP+Dw1R3V+JVML5l6XOB7sSI6lO5qqKB5J+PASf6IimdYfIqav7jAK50p7W
-	WX+yuAls4isunQ9RIGSxY+NNlwqm+gdyePsi78JXPD/MrVcNqLZWP+dtshyK6W3sC2b1
-	/USQ==
-X-Gm-Message-State: AN3rC/7YpoUtdnRnBC5bb/o/F5/wAFTLa+TaP9fDMV2itrzjvTAiZSS6
-	8v4GJZj4de9k1g==
-X-Received: by 10.28.24.8 with SMTP id 8mr229797wmy.133.1492065891387;
-	Wed, 12 Apr 2017 23:44:51 -0700 (PDT)
-Received: from gizero-desktop.tw.it
-	(host168-65-static.12-87-b.business.telecomitalia.it. [87.12.65.168])
-	by smtp.gmail.com with ESMTPSA id
-	r52sm6983323wrb.37.2017.04.12.23.44.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 12 Apr 2017 23:44:50 -0700 (PDT)
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 08:44:41 +0200
-Message-Id: <1492065881-31167-2-git-send-email-gizero@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1492065881-31167-1-git-send-email-gizero@gmail.com>
-References: <1492065881-31167-1-git-send-email-gizero@gmail.com>
-Subject: [meta-networking][PATCH 2/2] openvpn: avoid hardcoded path
+	Thu, 13 Apr 2017 00:37:31 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 13 Apr 2017 00:37:30 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 13 Apr 2017 03:37:29 -0400
+Message-ID: <1492069049-164706-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [PATCH] php: fix install error for libphp*.so
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +31,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 06:44:51 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 07:37:33 -0000
+Content-Type: text/plain
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+Different version php have different libphp*.so, so we need to install its
+corresponding libphp*.so, for example:
+
+    php-7.1.0  libphp7.so
+    php-5.6.26 libphp5.so
+
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/php/php.inc       | 6 +++++-
+ meta-oe/recipes-devtools/php/php_5.6.26.bb | 2 --
+ meta-oe/recipes-devtools/php/php_7.1.0.bb  | 2 --
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-index b6bd69f..db510de 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-@@ -25,7 +25,7 @@ EXTRA_OECONF += "--enable-iproute2"
- EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '', '--disable-plugin-auth-pam', d)}"
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index d3ec9de..7f37daa 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -176,7 +176,11 @@ do_install_append_class-target() {
+         install -d ${D}${libdir}/apache2/modules
+         install -d ${D}${sysconfdir}/apache2/modules.d
+         install -d ${D}${sysconfdir}/php/apache2-php5
+-        install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
++        if [[ ${PV} == 7* ]]; then
++            install -m 755  libs/libphp7.so ${D}${libdir}/apache2/modules
++        elif [[ ${PV} == 5* ]]; then
++            install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
++        fi
+         install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
+         sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php5.conf
+         cat ${S}/php.ini-production | \
+diff --git a/meta-oe/recipes-devtools/php/php_5.6.26.bb b/meta-oe/recipes-devtools/php/php_5.6.26.bb
+index c5698f8..ddc7ce3 100644
+--- a/meta-oe/recipes-devtools/php/php_5.6.26.bb
++++ b/meta-oe/recipes-devtools/php/php_5.6.26.bb
+@@ -7,5 +7,3 @@ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+            "
+ SRC_URI[md5sum] = "cb424b705cfb715fc04f499f8a8cf52e"
+ SRC_URI[sha256sum] = "d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236"
+-
+-PNBLACKLIST[php] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/131630/"
+diff --git a/meta-oe/recipes-devtools/php/php_7.1.0.bb b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+index ee8155c..210d91f 100644
+--- a/meta-oe/recipes-devtools/php/php_7.1.0.bb
++++ b/meta-oe/recipes-devtools/php/php_7.1.0.bb
+@@ -12,5 +12,3 @@ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
+                         ,mysql5"
  
- # Explicitly specify IPROUTE to bypass the configure-time check for /sbin/ip on the host.
--EXTRA_OECONF += "IPROUTE=/sbin/ip"
-+EXTRA_OECONF += "IPROUTE=${base_sbindir}/ip"
- 
- do_install_append() {
-     install -d ${D}/${sysconfdir}/init.d
+ FILES_${PN}-fpm += "${sysconfdir}/php-fpm.d/www.conf.default"
+-
+-PNBLACKLIST[php] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130601/"
 -- 
-2.7.4
+2.8.1
 
 
