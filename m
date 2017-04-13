@@ -1,53 +1,52 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 95E6377E26
+Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
+	[209.85.217.193])
+	by mail.openembedded.org (Postfix) with ESMTP id DC31F77E1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 12:43:49 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id q125so12340082wmd.3
+	Thu, 13 Apr 2017 12:45:00 +0000 (UTC)
+Received: by mail-ua0-f193.google.com with SMTP id g30so4019588uab.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 05:43:51 -0700 (PDT)
+	Thu, 13 Apr 2017 05:45:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=LfUhoRZL5wLkGRw+uxNFNels07fKXfxTHMSuYjZyjYI=;
-	b=K5IzIRuIl23/RUGK7DDk6fU/us2XRaetyl5ouFghcZWetmo5kTsyLJYeiahJTZGziR
-	vFkp0o7a0KERR7CJ4qG/x0F+wfPmYjG6uNi/J2riqna2QCRO+cyXGop6qloOHLWkvNXt
-	jpWKFMvxFOKdommWtgqB3psmS68MhYD0vEXoN8GRb7PpUB3EcUuhqWsHE/g4kIOAKzbL
-	L7SizMM/zUtBSeVIFIUmslJHAjmPDrxqtqLwcOj1VaFGnovskxZPSYKK4nwuKqjbpo/I
-	U2v6ngc4EKpVYkYZs1t+/dYnYW8VHVJNAYz6D4kVSXdJGXMpAQCmlIejrTjGB58C2sEq
-	aNzg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=dEWBa5i6osf4OyfxNk0KK5AOit0q0ybh0kuRzUv4eWk=;
+	b=BFZduYu+VEP8sbam0CDy6kpDI0GA4Tnq8WHd3004kg12FxtfL5jRzHBdrRbVjRKEcy
+	LQh7MXLx0DgY5BXvJr8e/XlV+zyQqPBo1n4+ucMkdjZQeGQWX75S3M2K77nfnJ8VoRKY
+	D7XhNlFr6QLERndGvvcjUp2O6/4Vr2kGdkuK3KCZu8xiUHd9X1Hlh0nBM04y1k7fpqwm
+	mYZjJJW+Ln3DrqY/fBlbEwzCjnht9nRcllN8Zbh/blvs/AyXKL3o8A3pMehqcvANU26i
+	48IGV6oOlA5ulLAxp1EUm6+TWx77L0l2w47NGhblSlTZahFUmEOsC/MJbP8cg6WZlQWK
+	sk3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=LfUhoRZL5wLkGRw+uxNFNels07fKXfxTHMSuYjZyjYI=;
-	b=XbZZnNZZgce6KotZpzqglkca08OjbxwSsdb2a490+Ardk9cr4iIMRe4JbHTDnPAnEc
-	0C0XMlJxSOuNuATaQb8Db40+mvkFjNJbdrCIdaRXRs+I1V3jRaldcI7zEYxJe9YjCaor
-	IO4APf0DpnfZqLCE1dpMN/XQ95UW0IgQLHDVx4pFia+8XhMGfF/9Lk6YIiU/4ozd4SX8
-	FydFMow3fvGUlXl62yngb0HPK6dYHhhC89N8hOE4KZw0YDPyOsKQE5KNKSuSwt+nDFYV
-	vfAyjRCLinPP46u2pdyu7NvWig7EstLu9RB7aiaHiJEDQJiHnOyBm+S8QUbAUuWPcoR2
-	erPg==
-X-Gm-Message-State: AN3rC/5ZPbKEN6V68gpNy14LyHU5oVyZEs0WiYzLh9K6AmeE6ODIGTm5
-	OZpQ3bFDvLnT7o2N
-X-Received: by 10.28.19.6 with SMTP id 6mr24241154wmt.96.1492087430395;
-	Thu, 13 Apr 2017 05:43:50 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	([2003:46:e911:f105:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	t24sm1842834wra.44.2017.04.13.05.43.49
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 05:43:49 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 14:43:23 +0200
-Message-Id: <20170413124323.22507-3-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20170413124323.22507-1-schnitzeltony@googlemail.com>
-References: <20170413124323.22507-1-schnitzeltony@googlemail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=dEWBa5i6osf4OyfxNk0KK5AOit0q0ybh0kuRzUv4eWk=;
+	b=n/2jo2xsyBbRyqRCYQXQlLAERoDhfmNQPmF/xiynyCC5azyaRhq8xUzlMpXWTYW+8p
+	ZEkrRHBb1veJG4KRMYkO2LX8/PBErHwRnYPUw+vI7wTJV9tWcvdiNwyaZyFj8Q+2DMlt
+	HgeOiKO2ZyxpPU0pSBnoJj1QDUwMB0sxnJ5mu9nXVSbw3duIImKuaMXFTcaB1f1UJ4tl
+	hMJiL8TWG6Q8uNKyp/mPwU33HuLSITcTsv1ZRYwhnhslWsm2HwfchyFRD0wsiwx7Z1za
+	PXxSsedGkLMcy0EBNhby1CKplGz4BxmGQYalZxn+aLGE2Mc51N+JFcnYzwqqVYzhkeZf
+	HutQ==
+X-Gm-Message-State: AN3rC/5q+5oyyBAD4z1DHSbgrwl4SZvN5QgZw/XKN00kpNEe1FGUNHKw
+	7amdv7cNhZxiJeyCqCY1DY7RxwrYmw==
+X-Received: by 10.176.24.134 with SMTP id t6mr1331340uag.79.1492087501751;
+	Thu, 13 Apr 2017 05:45:01 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 2/2] mpv: fix typo in wayland PACKAGECONFIG
+Received: by 10.176.81.53 with HTTP; Thu, 13 Apr 2017 05:45:01 -0700 (PDT)
+In-Reply-To: <CALbNGRR0K_YiR-OF+x2_0VTgWdMDRCq-wuhsj4CjFr4RHA2VTw@mail.gmail.com>
+References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
+	<20170412195638.3243-27-schnitzeltony@googlemail.com>
+	<58EF4902.2090906@linaro.org>
+	<CALbNGRR0K_YiR-OF+x2_0VTgWdMDRCq-wuhsj4CjFr4RHA2VTw@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 13 Apr 2017 14:45:01 +0200
+Message-ID: <CALbNGRSB8VrWzs5+BRVEPZYq48pf0322OR1X4Fg-Yk3ZA5jqug@mail.gmail.com>
+To: Andrey Konovalov <andrey.konovalov@linaro.org>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 26/29] mpv: add PACKAGECONFIG for drm/gbm/vdpau/wayland
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,31 +59,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 12:43:50 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 12:45:01 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Thanks to Andrey Konovalov for pointer
+On Thu, Apr 13, 2017 at 11:52 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Thu, Apr 13, 2017 at 11:46 AM, Andrey Konovalov
+> <andrey.konovalov@linaro.org> wrote:
+>> On 04/12/2017 10:56 PM, Andreas M=C3=BCller wrote:
+>>>
+>>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>>> ---
+>>>   meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb | 13 +++++++++++--
+>>>   1 file changed, 11 insertions(+), 2 deletions(-)
+>>>
+>>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+>>> b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+>>> index 3f46dc1..60f653a 100644
+>>> --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+>>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+>>> @@ -3,7 +3,7 @@ DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer.=
+ It
+>>> shares some features wi
+>>>   SECTION =3D "multimedia"
+>>>   HOMEPAGE =3D "http://www.mpv.io/"
+>>>   DEPENDS =3D "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
+>>> -           libxscrnsaver libv4l libxinerama libvdpau \
+>>> +           libxscrnsaver libv4l libxinerama \
+>>>   "
+>>>
+>>>   REQUIRED_DISTRO_FEATURES =3D "x11"
+>>> @@ -24,14 +24,23 @@ SRC_URI[waf.sha256sum] =3D
+>>> "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f2
+>>>   inherit waf pkgconfig pythonnative distro_features_check
+>>>
+>>>   # Note: both lua and libass are required to get on-screen-display
+>>> (controls)
+>>> -PACKAGECONFIG ??=3D "lua libass"
+>>> +PACKAGECONFIG ??=3D " \
+>>> +    lua \
+>>> +    libass \
+>>> +    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
+>>> +"
+>>> +PACKAGECONFIG[drm] =3D "--enable-drm,--disable-drm,libdrm"
+>>> +PACKAGECONFIG[gbm] =3D "--enable-gbm,--disable-gbm,virtual/mesa"
+>>>   PACKAGECONFIG[lua] =3D "--enable-lua,--disable-lua,lua luajit"
+>>>   PACKAGECONFIG[libass] =3D "--enable-libass,--disable-libass,libass"
+>>>   PACKAGECONFIG[libarchive] =3D
+>>> "--enable-libarchive,--disable-libarchive,libarchive"
+>>>   PACKAGECONFIG[jack] =3D "--enable-jack, --disable-jack, jack"
+>>>   PACKAGECONFIG[vaapi] =3D "--enable-vaapi, --disable-vaapi,libva"
+>>> +PACKAGECONFIG[vdpau] =3D "--enable-vdpau, --disable-vdpau,libvdpau"
+>>> +PACKAGECONFIG[wayland] =3D "--enable-wayland, --enable-wayland,wayland=
+"
+>>
+>>
+>> Should it be:
+>> PACKAGECONFIG[wayland] =3D "--enable-wayland, --disable-wayland,wayland"
+>> ?
+> Yes - Thanks - needs V2
+>
+Saw that Martin already applied and sent out a fix on top.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-index 60f653a..ce7b3d1 100644
---- a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-+++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-@@ -37,7 +37,7 @@ PACKAGECONFIG[libarchive] = "--enable-libarchive,--disable-libarchive,libarchive
- PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
- PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
- PACKAGECONFIG[vdpau] = "--enable-vdpau, --disable-vdpau,libvdpau"
--PACKAGECONFIG[wayland] = "--enable-wayland, --enable-wayland,wayland"
-+PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland"
- 
- SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
- 
--- 
-2.9.3
-
+Andreas
 
