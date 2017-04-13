@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 5EE3277E92
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id CE9F277D5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:42 +0000 (UTC)
-Received: by mail-pg0-f49.google.com with SMTP id 72so27021867pge.2
+	Thu, 13 Apr 2017 20:41:43 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id c198so33255096pfc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:43 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=xVoI4YNd7IHbQHleUUiCw8X7BbROX5TTMyq3BhiufMk=;
-	b=SqJoYT4hfoDdiXiUj6tS3AsHMFzpkHnhMIAKBNvZdnkelUgDBGfcqkdZxOGj6/FgSN
-	wgGxk1W72usEbplnCOUff8aSCqj2rUoZwPEHbOUbCMFYYLUhhFLVQeuKTaRQDiWyrDVH
-	D/QnU94fLOFr/tC+Qva+nycWxz9C5o/AECm6o9damvSSEoHLjOczrnSEMY2q7tAU9OkC
-	F1zxoWzemFr+YeaoOlIF9Y1h1hLmL0+kKI8AgEYNH05QzbzkQZrZit++87Uq53ePMoGz
-	3yrXjkwbePpjoGEggOlFN+thk0L+b9/HQ78pKiOEJfdcMU0NDkd1xLHwagE353FxiSoL
-	+eUA==
+	bh=9WDauMw7pcKwXeZkjwbNT2B/wxbtXpz+H15EJo3OoFY=;
+	b=LxCmLATZKfIbyGHQR3+ZHguu1WmLdJOp/t2P5QOuj5I0m+s3wNQOY14ID7bT0s0D7Y
+	6habqNTEvCMYg1Zlhojp7YX7aH6Z2DpqtY6e8AAQ0xKuMFgVzp6UJjVGKz0NEHDZ+A+j
+	JHVdHTtoCjo3gza3vIoqm4xhiv1X969wxsFmm8CkS1u9QJ3VNLz+GPkIPwQJZnFnN3Rp
+	SxdUipPyK5eUSBU8SQjkRMKvikEt9Pa/WPufCK4KXFsWtetU3CZaZ1Is5+hPURWRxXyT
+	gzbctFHrBbEwBefF7FkCyySXjPX8Lev1FiMGlMCHPk0Qlppt5EWGFM2DqEk7N4aKatav
+	5EJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=xVoI4YNd7IHbQHleUUiCw8X7BbROX5TTMyq3BhiufMk=;
-	b=Z4qPiZ+qhOQQGKDbG0TuDgqYSqUnGRyy+yMgD2R+MAItijXOU3oUiibqUX4G6lOAzC
-	SNz0Js1HbZWGV6eR1yNYapcf3NykzCWS/uI4xMODAMWwE4tukMskHvq7kDpWbhdhOqpO
-	H2SDOFRPOcQBY4e51XVHar8XUnCU5tyGbpPhSDV7sFs5kax8t9uhvTAV0MVO5KNhr7p8
-	XIK+h0Sc9CpS//sDLkUSMG2QpkDHvA/TlWvr/VxzPzTbCm/YtBv4ZGT8iS5rrnWtZkxI
-	YWfyplMISm7VervNn4JyZK4yZ+D73kcjov3rwA01O3L/+eauHeaRO+NSSflH4j/Uhh8G
-	xOQA==
-X-Gm-Message-State: AN3rC/5fXf8mOqbRo36pClIC9jEbXoWvL0funjHBMRJVv/PeWWRoQvzJ
-	32T0aVSdJ9MLWiNO
-X-Received: by 10.98.83.4 with SMTP id h4mr4188938pfb.122.1492116103259;
-	Thu, 13 Apr 2017 13:41:43 -0700 (PDT)
+	bh=9WDauMw7pcKwXeZkjwbNT2B/wxbtXpz+H15EJo3OoFY=;
+	b=IymrwqRZevrxeAbc/MQAcNWZPzHoepeYoGDd+QU6XkTq+JvHQgEr5w3L3p6GMGemWm
+	taVH2XzUj7jE4IuSTe7xtyaSxebII6G7Lhf9SxBZJMVGaNVaLcrpkmw2QJxH5KJajEbR
+	0f3hx17WQb1BNNls5LRAdMHhlD7NtSD+135F37EHn2EKHtCOrimGEJuguypb6xeMvBr1
+	0LW97xYFxHFcE3tkn+C3CpKJfIhZvxBfzoZ5U3yErrYh/WD1EgojeHnXCbf/8m1O+c6G
+	7IURr0Gr7N1NaXWlrHdEHO1NVjObmXB9xznMYHUid89CFSdisxsO8hgAvI5r0E5NarD5
+	a5Ow==
+X-Gm-Message-State: AN3rC/5JuR4lHyHpLw4aEeyXnBIchbKjk1Ev3O74EPrz1Vna8AZiUsrJ
+	CMoh4ImfydkB+CEv
+X-Received: by 10.98.64.88 with SMTP id n85mr4263953pfa.211.1492116104779;
+	Thu, 13 Apr 2017 13:41:44 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.41
+	u29sm44033332pfa.123.2017.04.13.13.41.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:42 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:43 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:54 -0700
-Message-Id: <20170413204106.30679-17-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:55 -0700
+Message-Id: <20170413204106.30679-18-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 17/29] avro-c: Fix build with clang
+Subject: [meta-oe][ 18/29] dash: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,87 +56,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:43 -0000
-
-Update SRC_URI to point to github mirror
-Add a patch to fix build with clang
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:44 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-avro-c-Fix-build-with-clang-compiler.patch | 37 ++++++++++++++++++++++
- meta-oe/recipes-support/avro/avro-c_1.8.1.bb       | 10 +++---
- 2 files changed, 43 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+ .../0001-Fix-printf-format-errors-with-clang.patch | 28 ++++++++++++++++++++++
+ meta-oe/recipes-extended/dash/dash_0.5.8.bb        |  4 +++-
+ 2 files changed, 31 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/dash/dash/0001-Fix-printf-format-errors-with-clang.patch
 
-diff --git a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+diff --git a/meta-oe/recipes-extended/dash/dash/0001-Fix-printf-format-errors-with-clang.patch b/meta-oe/recipes-extended/dash/dash/0001-Fix-printf-format-errors-with-clang.patch
 new file mode 100644
-index 000000000..01235d8ef
+index 000000000..b3991faa8
 --- /dev/null
-+++ b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
-@@ -0,0 +1,37 @@
-+From 518bb8ccfb3f3fc143fbd571782f3e40573d01b5 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/dash/dash/0001-Fix-printf-format-errors-with-clang.patch
+@@ -0,0 +1,28 @@
++From 3ddf397febf47f8de9ca2805e92355ecb3ba0e9f Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 10 Apr 2017 09:15:04 -0700
-+Subject: [PATCH] avro-c: Fix build with clang compiler
++Date: Sat, 8 Apr 2017 12:37:54 -0700
++Subject: [PATCH] Fix printf format errors with clang
 +
-+Clang advertizes itself to be compatible with gcc 4.2.1
-+while that was true several years ago, it now supports
-+a lot more newer features, the test to just check gcc
-+version should be supplanted with clang check as well
-+so atomic support in clang can be asserted as well
-+
-+Fixes
-+
-+lang/c/src/avro/refcount.h:301:2: error: "No atomic implementation!"
++error: format string is not a string literal (potentially insecure)
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ lang/c/src/avro/refcount.h | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
++ src/jobs.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/lang/c/src/avro/refcount.h b/lang/c/src/avro/refcount.h
-+index 69afa4fc..d76ba057 100644
-+--- a/lang/c/src/avro/refcount.h
-++++ b/lang/c/src/avro/refcount.h
-+@@ -118,7 +118,8 @@ avro_refcount_dec(volatile int *refcount)
-+  * GCC intrinsics
-+  */
-+ 
-+-#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500
-++#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500 \
-++|| defined(__clang__)
-+ 
-+ static inline void
-+ avro_refcount_set(volatile int *refcount, int value)
++diff --git a/src/jobs.c b/src/jobs.c
++index c2c2332..dcb81c1 100644
++--- a/src/jobs.c
+++++ b/src/jobs.c
++@@ -427,7 +427,7 @@ sprint_status(char *s, int status, int sigonly)
++ 				goto out;
++ #endif
++ 		}
++-		col = fmtstr(s, 32, strsignal(st));
+++		col = fmtstr(s, 32, "%s", strsignal(st));
++ #ifdef WCOREDUMP
++ 		if (WCOREDUMP(status)) {
++ 			col += fmtstr(s + col, 16, " (core dumped)");
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-index 8deee4b23..276fe2b5a 100644
---- a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-+++ b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
-@@ -2,16 +2,18 @@ SUMMARY = "Apache Avro data serialization system."
- HOMEPAGE = "http://apr.apache.org/"
- SECTION = "libs"
+diff --git a/meta-oe/recipes-extended/dash/dash_0.5.8.bb b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+index 4961d7b83..78ca60d6f 100644
+--- a/meta-oe/recipes-extended/dash/dash_0.5.8.bb
++++ b/meta-oe/recipes-extended/dash/dash_0.5.8.bb
+@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b5262b4a1a1bff72b48e935531976d2e"
  
--
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
+ inherit autotools update-alternatives
  
- DEPENDS = "jansson zlib xz"
-+PV .= "+git${SRCPV}"
- 
--SRC_URI = "${APACHE_MIRROR}/avro/avro-${PV}/c/avro-c-${PV}.tar.gz"
-+SRCREV = "4b3677c32b879e0e7f717eb95f9135ac654da760"
-+SRC_URI = "git://github.com/apache/avro \
-+           file://0001-avro-c-Fix-build-with-clang-compiler.patch;patchdir=../../ \
-+"
- 
--SRC_URI[md5sum] = "b268348536714541e10411823a1b59b0"
--SRC_URI[sha256sum] = "e5042088fa47e1aa2860c5cfed0bd061d81f9e96628f8b4d87a24d9b8c5e4ecc"
-+S = "${WORKDIR}/git/lang/c"
- 
- LDFLAGS_append_libc-uclibc = " -lm"
+-SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz"
++SRC_URI = "http://gondor.apana.org.au/~herbert/${BPN}/files/${BP}.tar.gz \
++           file://0001-Fix-printf-format-errors-with-clang.patch \
++           "
+ SRC_URI[md5sum] = "5c152209680dab3c319e8923f6c51378"
+ SRC_URI[sha256sum] = "c6db3a237747b02d20382a761397563d813b306c020ae28ce25a1c3915fac60f"
  
 -- 
 2.12.2
