@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F81877E79
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F54F77E78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:21 +0000 (UTC)
-Received: by mail-pf0-f179.google.com with SMTP id c198so33251759pfc.1
+	Thu, 13 Apr 2017 20:41:23 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id c198so12686498pfc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:22 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eMnBqqC3ptGOOKI9HjBR3FuhsmYNZZhi9Sd3Zw4ggzs=;
-	b=FbzPo8q4PTnpH4a7PjVgG56BU6jdeWhQR9yfLOOSjMWLQ4HXpR0c+kRrcPYoeJu4hZ
-	QozPCU7sZ9ZIK87VyJQMgwjVzKom6peV5SH4+8dIsR2GifmNoZEea1yLKPZ6U7Zr7cV6
-	pw3xbGbqk1haamb/qPsJeZUdPiz+88xU0l1sDQtoVfUXfWjgAtrwU6MT94rEnLaXSycV
-	SolEhuHXO4eWqrYLU7GEM4sTPCYN4vy0GpTKyYzXediyjbA5blquxAE0BQAJrlQEdRo+
-	dmbaDw5Cqct3F0Hg2Nxw+GNC7Kqc2qluUr6H2y/5IG4V/a+uoKXXBFi659cELro5mPVr
-	4WZw==
+	bh=r8QPxVHS25nh9d0b0JpCYu5UFOl2lSYcgMgUp9mAdss=;
+	b=aIvQDGbseLg1TGE/paEe3nUYEaRHGLIgt/r3kAf0Txhd9Ieyr/ZStS3wIUc46OwFRU
+	GZQ1ETXv/MFYHJiYf82Nn0dTX41PqWRKa2ZJ9rJlD9DSpdM7iYlF9Sq6zPbiwveQOti9
+	HQg6rr9OTv3dRPXWsggb5ewZAHhZMuC2/gv2sKMCmkdNDEqezJy/KVFZE3lKsArkzQDk
+	TcIcQfEiWffO8ILrL57DT1sZuXB7pbOvGlpZ+uO1/66HEQWi2YkatZLpkGhb4y6hMzAT
+	SB2ATZ7XABIr2ZMn5iIUmbEdp21jdNu0Rb6Ac0hxwBd3DZOqg95G02I37h0+fLE2vMqN
+	nS2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=eMnBqqC3ptGOOKI9HjBR3FuhsmYNZZhi9Sd3Zw4ggzs=;
-	b=IgbBxRh22j8zwkEiLT2yr4vTU96/CEvKUFkNhi5F2LKB1lCMP0FWTWp9HqZGrehjaZ
-	ziMIg6FVs+P5WPHq15AiXylE5i3qiuVi4G7xLOucszkbnsCxOMRRsnSvMTFnJdfedp66
-	ORpMEVTYDnKV93qlS7BOHrAddSUu6035Zn4zpj3xHnxrOziDyKse3D3N7e7FMJPz9kqf
-	0riF2c2Srtf+oQxPzH2A5tdiJV2mX0dc8onlwLNAiA1yAUIJ/TCV1Fy6AowjKMQKKgnS
-	6qZp0+6tbzB2mPtXs+chOxgAUR1G+fv3txpzP5Ijfa62Jfo8f3OvZPK0Gk6QK+J9Nc48
-	KLRg==
-X-Gm-Message-State: AN3rC/7/FfQSelz/vUxaVL4uuO5cCBiyFePy2eVQ5GN+iqOBFXCWCeGI
-	zK+q8YqnNhqz3g==
-X-Received: by 10.84.135.3 with SMTP id 3mr5304372pli.65.1492116082595;
-	Thu, 13 Apr 2017 13:41:22 -0700 (PDT)
+	bh=r8QPxVHS25nh9d0b0JpCYu5UFOl2lSYcgMgUp9mAdss=;
+	b=q23LHRoHQv19jZ5WikEp2jDz5iGXeZfL1P/hUbMHvEYM9fh+gn0niyybD6hQ06Nwau
+	Pdlc5XeVDUPCGxEAHZiMZdcltar/INaSDUEwUkZggojq5D3JNfm8u6oyMN3vsJuiKoaH
+	zFERwj3eSFR8H1dBDcqQh9LcF6Ynzy66S8TmCzRJXBd38wpdk4R9GFBmpvLRx0GXunkx
+	WOHy2akNf+oAkuazpkFXXFOmkgwUr6VzxI4J3zCYe8YPyfkWUsa036YEJsFKy5p25IKn
+	AaqItfkfLHs1jxiW8MGJI1bhJE9QWnvNjn8S5T8sQnmYubThiOAOJ+bDbj0m7awKVmQk
+	LD6g==
+X-Gm-Message-State: AN3rC/70mA0+Scfo6QLqZLOIOuE37NrvOWpdYLSO/zy90PeUc6RR9D0o
+	/tcsjf8iqYwMmA==
+X-Received: by 10.98.133.78 with SMTP id u75mr4170119pfd.261.1492116084074;
+	Thu, 13 Apr 2017 13:41:24 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.21
+	u29sm44033332pfa.123.2017.04.13.13.41.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:21 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:23 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:41 -0700
-Message-Id: <20170413204106.30679-4-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:42 -0700
+Message-Id: <20170413204106.30679-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-networking][ 04/29] conntrack-tools: Upgrade to 1.4.4
+Subject: [meta-networking][ 05/29] libnetfilter-acct: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,151 +56,291 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:24 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:25 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ack-tools_1.4.2.bb => conntrack-tools_1.4.4.bb} | 17 +++--
- ...build-fix-crash-when-optional-kernel-modu.patch | 85 ----------------------
- 2 files changed, 10 insertions(+), 92 deletions(-)
- rename meta-networking/recipes-filter/conntrack-tools/{conntrack-tools_1.4.2.bb => conntrack-tools_1.4.4.bb} (70%)
- delete mode 100644 meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
+ ...-the-define-visivility-attribute-together.patch | 255 +++++++++++++++++++++
+ .../libnetfilter/libnetfilter-acct_1.0.3.bb        |   4 +-
+ 2 files changed, 258 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-acct-Declare-the-define-visivility-attribute-together.patch
 
-diff --git a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-similarity index 70%
-rename from meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb
-rename to meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-index 7b11d206c..8b3490d7c 100644
---- a/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.2.bb
-+++ b/meta-networking/recipes-filter/conntrack-tools/conntrack-tools_1.4.4.bb
-@@ -2,26 +2,29 @@ SUMMARY = "Connection tracking userspace tools for Linux"
- SECTION = "net"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+diff --git a/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-acct-Declare-the-define-visivility-attribute-together.patch b/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-acct-Declare-the-define-visivility-attribute-together.patch
+new file mode 100644
+index 000000000..9e0b420e0
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-acct-Declare-the-define-visivility-attribute-together.patch
+@@ -0,0 +1,255 @@
++From f3e3e8fa703e88b76b22c5486277dfca3c85a24b Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 10 Apr 2017 14:56:18 -0700
++Subject: [PATCH] Declare the define visivility attribute together
 +
- DEPENDS = "libnfnetlink libnetfilter-conntrack libnetfilter-cttimeout \
-            libnetfilter-cthelper libnetfilter-queue bison-native"
- 
--SRC_URI = " \
--    http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
-+DEPENDS_append_libc-musl = " libtirpc"
-+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-+LDFLAGS_append_libc-musl = " -ltirpc"
++clang ignores the visibility attribute if its not
++defined before the definition. As a result these
++symbols become hidden and consumers of this library
++fail to link due to these missing symbols
 +
-+SRC_URI = "http://www.netfilter.org/projects/conntrack-tools/files/conntrack-tools-${PV}.tar.bz2;name=tar \
-     file://conntrack-failover \
-     file://init \
--    file://0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch \
- "
--SRC_URI[tar.md5sum] = "b1f9d006e7bf000a77395ff7cd3fac16"
--SRC_URI[tar.sha256sum] = "e5c423dc077f9ca8767eaa6cf40446943905711c6a8fe27f9cc1977d4d6aa11e"
-+SRC_URI[tar.md5sum] = "acd9e0b27cf16ae3092ba900e4d7560e"
-+SRC_URI[tar.sha256sum] = "b7caf4fcc4c03575df57d25e5216584d597fd916c891f191dac616ce68bdba6c"
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ doxygen.cfg.in          |  2 +-
++ src/internal.h          |  5 ++---
++ src/libnetfilter_acct.c | 41 ++++++++++++++---------------------------
++ 3 files changed, 17 insertions(+), 31 deletions(-)
++
++diff --git a/doxygen.cfg.in b/doxygen.cfg.in
++index 7f4bd04..fe64d48 100644
++--- a/doxygen.cfg.in
+++++ b/doxygen.cfg.in
++@@ -72,7 +72,7 @@ RECURSIVE              = YES
++ EXCLUDE                = 
++ EXCLUDE_SYMLINKS       = NO
++ EXCLUDE_PATTERNS       = */.git/* .*.d
++-EXCLUDE_SYMBOLS        = EXPORT_SYMBOL nfacct
+++EXCLUDE_SYMBOLS        = nfacct
++ EXAMPLE_PATH           = 
++ EXAMPLE_PATTERNS       = 
++ EXAMPLE_RECURSIVE      = NO
++diff --git a/src/internal.h b/src/internal.h
++index f0cc2e1..e5c5ffd 100644
++--- a/src/internal.h
+++++ b/src/internal.h
++@@ -3,10 +3,9 @@
++ 
++ #include "config.h"
++ #ifdef HAVE_VISIBILITY_HIDDEN
++-#	define __visible	__attribute__((visibility("default")))
++-#	define EXPORT_SYMBOL(x)	typeof(x) (x) __visible
+++#	define __EXPORT	__attribute__((visibility("default")))
++ #else
++-#	define EXPORT_SYMBOL
+++#	define __EXPORT
++ #endif
++ 
++ #include <endian.h>
++diff --git a/src/libnetfilter_acct.c b/src/libnetfilter_acct.c
++index b0bcf67..0220d14 100644
++--- a/src/libnetfilter_acct.c
+++++ b/src/libnetfilter_acct.c
++@@ -76,21 +76,19 @@ struct nfacct {
++  * In case of success, this function returns a valid pointer, otherwise NULL
++  * s returned and errno is appropriately set.
++  */
++-struct nfacct *nfacct_alloc(void)
+++struct nfacct __EXPORT *nfacct_alloc(void)
++ {
++ 	return calloc(1, sizeof(struct nfacct));
++ }
++-EXPORT_SYMBOL(nfacct_alloc);
++ 
++ /**
++  * nfacct_free - release one accounting object
++  * \param nfacct pointer to the accounting object
++  */
++-void nfacct_free(struct nfacct *nfacct)
+++void __EXPORT nfacct_free(struct nfacct *nfacct)
++ {
++ 	free(nfacct);
++ }
++-EXPORT_SYMBOL(nfacct_free);
++ 
++ /**
++  * nfacct_attr_set - set one attribute of the accounting object
++@@ -98,7 +96,7 @@ EXPORT_SYMBOL(nfacct_free);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
++  */
++-void
+++void __EXPORT
++ nfacct_attr_set(struct nfacct *nfacct, enum nfacct_attr_type type,
++ 		const void *data)
++ {
++@@ -126,7 +124,6 @@ nfacct_attr_set(struct nfacct *nfacct, enum nfacct_attr_type type,
++ 		break;
++ 	}
++ }
++-EXPORT_SYMBOL(nfacct_attr_set);
++ 
++ /**
++  * nfacct_attr_set_str - set one attribute the accounting object
++@@ -134,13 +131,12 @@ EXPORT_SYMBOL(nfacct_attr_set);
++  * \param type attribute type you want to set
++  * \param name string that will be used to set this attribute
++  */
++-void
+++void __EXPORT
++ nfacct_attr_set_str(struct nfacct *nfacct, enum nfacct_attr_type type,
++ 		    const char *name)
++ {
++ 	nfacct_attr_set(nfacct, type, name);
++ }
++-EXPORT_SYMBOL(nfacct_attr_set_str);
++ 
++ /**
++  * nfacct_attr_set_u64 - set one attribute the accounting object
++@@ -148,20 +144,19 @@ EXPORT_SYMBOL(nfacct_attr_set_str);
++  * \param type attribute type you want to set
++  * \param value unsigned 64-bits integer
++  */
++-void
+++void __EXPORT
++ nfacct_attr_set_u64(struct nfacct *nfacct, enum nfacct_attr_type type,
++ 		    uint64_t value)
++ {
++ 	nfacct_attr_set(nfacct, type, &value);
++ }
++-EXPORT_SYMBOL(nfacct_attr_set_u64);
++ 
++ /**
++  * nfacct_attr_unset - unset one attribute the accounting object
++  * \param nfacct pointer to the accounting object
++  * \param type attribute type you want to set
++  */
++-void
+++void __EXPORT
++ nfacct_attr_unset(struct nfacct *nfacct, enum nfacct_attr_type type)
++ {
++ 	switch(type) {
++@@ -182,7 +177,6 @@ nfacct_attr_unset(struct nfacct *nfacct, enum nfacct_attr_type type)
++ 		break;
++ 	}
++ }
++-EXPORT_SYMBOL(nfacct_attr_unset);
++ 
++ /**
++  * nfacct_attr_get - get one attribute the accounting object
++@@ -192,7 +186,7 @@ EXPORT_SYMBOL(nfacct_attr_unset);
++  * This function returns a valid pointer to the attribute data. If a
++  * unsupported attribute is used, this returns NULL.
++  */
++-const void *nfacct_attr_get(struct nfacct *nfacct, enum nfacct_attr_type type)
+++const void __EXPORT *nfacct_attr_get(struct nfacct *nfacct, enum nfacct_attr_type type)
++ {
++ 	const void *ret = NULL;
++ 
++@@ -220,7 +214,6 @@ const void *nfacct_attr_get(struct nfacct *nfacct, enum nfacct_attr_type type)
++ 	}
++ 	return ret;
++ }
++-EXPORT_SYMBOL(nfacct_attr_get);
++ 
++ /**
++  * nfacct_attr_get_str - get one attribute the accounting object
++@@ -230,12 +223,11 @@ EXPORT_SYMBOL(nfacct_attr_get);
++  * This function returns a valid pointer to the beginning of the string.
++  * If the attribute is unsupported, this returns NULL.
++  */
++-const char *
+++const char __EXPORT *
++ nfacct_attr_get_str(struct nfacct *nfacct, enum nfacct_attr_type type)
++ {
++ 	return nfacct_attr_get(nfacct, type);
++ }
++-EXPORT_SYMBOL(nfacct_attr_get_str);
++ 
++ /**
++  * nfacct_attr_get_u64 - get one attribute the accounting object
++@@ -245,12 +237,11 @@ EXPORT_SYMBOL(nfacct_attr_get_str);
++  * This function returns a unsigned 64-bits integer. If the attribute is
++  * unsupported, this returns NULL.
++  */
++-uint64_t nfacct_attr_get_u64(struct nfacct *nfacct, enum nfacct_attr_type type)
+++uint64_t __EXPORT nfacct_attr_get_u64(struct nfacct *nfacct, enum nfacct_attr_type type)
++ {
++ 	const void *ret = nfacct_attr_get(nfacct, type);
++ 	return ret ? *((uint64_t *)ret) : 0;
++ }
++-EXPORT_SYMBOL(nfacct_attr_get_u64);
++ 
++ static int
++ nfacct_snprintf_plain(char *buf, size_t rem, struct nfacct *nfacct,
++@@ -424,8 +415,8 @@ err:
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int nfacct_snprintf(char *buf, size_t size, struct nfacct *nfacct,
++-		    uint16_t type, uint16_t flags)
+++int __EXPORT nfacct_snprintf(char *buf, size_t size, struct nfacct *nfacct,
+++		             uint16_t type, uint16_t flags)
++ {
++ 	int ret = 0;
++ 
++@@ -445,7 +436,6 @@ int nfacct_snprintf(char *buf, size_t size, struct nfacct *nfacct,
++ 	}
++ 	return ret;
++ }
++-EXPORT_SYMBOL(nfacct_snprintf);
++ 
++ /**
++  * @}
++@@ -484,7 +474,7 @@ EXPORT_SYMBOL(nfacct_snprintf);
++  * - Command NFNL_MSG_ACCT_DEL, to delete one specific nfacct object (if
++  *   unused, otherwise you hit EBUSY).
++  */
++-struct nlmsghdr *
+++struct nlmsghdr __EXPORT *
++ nfacct_nlmsg_build_hdr(char *buf, uint8_t cmd, uint16_t flags, uint32_t seq)
++ {
++ 	struct nlmsghdr *nlh;
++@@ -502,14 +492,13 @@ nfacct_nlmsg_build_hdr(char *buf, uint8_t cmd, uint16_t flags, uint32_t seq)
++ 
++ 	return nlh;
++ }
++-EXPORT_SYMBOL(nfacct_nlmsg_build_hdr);
++ 
++ /**
++  * nfacct_nlmsg_build_payload - build payload from accounting object
++  * \param nlh: netlink message that you want to use to add the payload.
++  * \param nfacct: pointer to a accounting object
++  */
++-void nfacct_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfacct *nfacct)
+++void __EXPORT nfacct_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfacct *nfacct)
++ {
++ 	if (nfacct->bitset & (1 << NFACCT_ATTR_NAME))
++ 		mnl_attr_put_strz(nlh, NFACCT_NAME, nfacct->name);
++@@ -526,7 +515,6 @@ void nfacct_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfacct *nfacct)
++ 	if (nfacct->bitset & (1 << NFACCT_ATTR_QUOTA))
++ 		mnl_attr_put_u64(nlh, NFACCT_QUOTA, htobe64(nfacct->quota));
++ }
++-EXPORT_SYMBOL(nfacct_nlmsg_build_payload);
++ 
++ static int nfacct_nlmsg_parse_attr_cb(const struct nlattr *attr, void *data)
++ {
++@@ -563,7 +551,7 @@ static int nfacct_nlmsg_parse_attr_cb(const struct nlattr *attr, void *data)
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int
+++int __EXPORT
++ nfacct_nlmsg_parse_payload(const struct nlmsghdr *nlh, struct nfacct *nfacct)
++ {
++ 	struct nlattr *tb[NFACCT_MAX+1] = {};
++@@ -589,7 +577,6 @@ nfacct_nlmsg_parse_payload(const struct nlmsghdr *nlh, struct nfacct *nfacct)
++ 
++ 	return 0;
++ }
++-EXPORT_SYMBOL(nfacct_nlmsg_parse_payload);
++ 
++ /**
++  * @}
++-- 
++2.12.2
++
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
+index 0d713033c..974035ccc 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-acct_1.0.3.bb
+@@ -6,7 +6,9 @@ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ DEPENDS = "libnfnetlink libmnl"
  
--inherit autotools-brokensep update-rc.d pkgconfig
-+inherit autotools update-rc.d pkgconfig
+-SRC_URI = "http://ftp.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.3.tar.bz2"
++SRC_URI = "http://ftp.netfilter.org/pub/libnetfilter_acct/libnetfilter_acct-1.0.3.tar.bz2 \
++           file://0001-libnetfilter-acct-Declare-the-define-visivility-attribute-together.patch \
++"
+ SRC_URI[md5sum] = "814b2972b2f5c740ff87510bc109168b"
+ SRC_URI[sha256sum] = "4250ceef3efe2034f4ac05906c3ee427db31b9b0a2df41b2744f4bf79a959a1a"
  
- INITSCRIPT_NAME = "conntrackd"
- 
- do_install_append() {
-     install -d ${D}/${sysconfdir}/conntrackd
-     install -d ${D}/${sysconfdir}/init.d
--    install -m 0644 doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-+    install -m 0644 ${S}/doc/sync/ftfw/conntrackd.conf ${D}/${sysconfdir}/conntrackd/conntrackd.conf.sample
-     install -m 0755 ${WORKDIR}/conntrack-failover ${D}/${sysconfdir}/init.d/conntrack-failover
-     install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/conntrackd
- 
-diff --git a/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch b/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
-deleted file mode 100644
-index a7ab6d687..000000000
---- a/meta-networking/recipes-filter/conntrack-tools/files/0001-conntrackd-build-fix-crash-when-optional-kernel-modu.patch
-+++ /dev/null
-@@ -1,85 +0,0 @@
--From c392c159605956c7bd4a264ab4490e2b2704c0cd Mon Sep 17 00:00:00 2001
--From: Pablo Neira Ayuso <pablo@netfilter.org>
--Date: Fri, 13 Jun 2014 12:53:17 +0200
--Subject: [PATCH] conntrackd: build: fix crash when optional kernel modules are
-- not loaded
--
--Upstream-Status: Backport
--
--Fix a possible crash if conntrackd sees DCCP, SCTP and ICMPv6 traffic
--and the corresponding kernel modules that track this traffic are not
--available.
--
--Fixes: http://bugzilla.netfilter.org/show_bug.cgi?id=910
--Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
-----
-- src/build.c | 22 +++++++++++++---------
-- 1 file changed, 13 insertions(+), 9 deletions(-)
--
--diff --git a/src/build.c b/src/build.c
--index 5799b51..9ba8b57 100644
----- a/src/build.c
--+++ b/src/build.c
--@@ -105,14 +105,14 @@ static enum nf_conntrack_attr nat_type[] =
-- 	  ATTR_ORIG_NAT_SEQ_OFFSET_AFTER, ATTR_REPL_NAT_SEQ_CORRECTION_POS,
-- 	  ATTR_REPL_NAT_SEQ_OFFSET_BEFORE, ATTR_REPL_NAT_SEQ_OFFSET_AFTER };
-- 
--+/* ICMP, UDP and TCP are always loaded with nf_conntrack_ipv4 */
-- static void build_l4proto_tcp(const struct nf_conntrack *ct, struct nethdr *n)
-- {
---	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
---		      sizeof(struct nfct_attr_grp_port));
---
-- 	if (!nfct_attr_is_set(ct, ATTR_TCP_STATE))
-- 		return;
-- 
--+	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
--+		      sizeof(struct nfct_attr_grp_port));
-- 	ct_build_u8(ct, ATTR_TCP_STATE, n, NTA_TCP_STATE);
-- 	if (CONFIG(sync).tcp_window_tracking) {
-- 		ct_build_u8(ct, ATTR_TCP_WSCALE_ORIG, n, NTA_TCP_WSCALE_ORIG);
--@@ -122,12 +122,12 @@ static void build_l4proto_tcp(const struct nf_conntrack *ct, struct nethdr *n)
-- 
-- static void build_l4proto_sctp(const struct nf_conntrack *ct, struct nethdr *n)
-- {
---	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
---		      sizeof(struct nfct_attr_grp_port));
---
--+	/* SCTP is optional, make sure nf_conntrack_sctp is loaded */
-- 	if (!nfct_attr_is_set(ct, ATTR_SCTP_STATE))
-- 		return;
-- 
--+	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
--+		      sizeof(struct nfct_attr_grp_port));
-- 	ct_build_u8(ct, ATTR_SCTP_STATE, n, NTA_SCTP_STATE);
-- 	ct_build_u32(ct, ATTR_SCTP_VTAG_ORIG, n, NTA_SCTP_VTAG_ORIG);
-- 	ct_build_u32(ct, ATTR_SCTP_VTAG_REPL, n, NTA_SCTP_VTAG_REPL);
--@@ -135,18 +135,22 @@ static void build_l4proto_sctp(const struct nf_conntrack *ct, struct nethdr *n)
-- 
-- static void build_l4proto_dccp(const struct nf_conntrack *ct, struct nethdr *n)
-- {
---	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
---		      sizeof(struct nfct_attr_grp_port));
---
--+	/* DCCP is optional, make sure nf_conntrack_dccp is loaded */
-- 	if (!nfct_attr_is_set(ct, ATTR_DCCP_STATE))
-- 		return;
-- 
--+	ct_build_group(ct, ATTR_GRP_ORIG_PORT, n, NTA_PORT,
--+		      sizeof(struct nfct_attr_grp_port));
-- 	ct_build_u8(ct, ATTR_DCCP_STATE, n, NTA_DCCP_STATE);
-- 	ct_build_u8(ct, ATTR_DCCP_ROLE, n, NTA_DCCP_ROLE);
-- }
-- 
-- static void build_l4proto_icmp(const struct nf_conntrack *ct, struct nethdr *n)
-- {
--+	/* This is also used by ICMPv6 and nf_conntrack_ipv6 is optional */
--+	if (!nfct_attr_is_set(ct, ATTR_ICMP_TYPE))
--+		return;
--+
-- 	ct_build_u8(ct, ATTR_ICMP_TYPE, n, NTA_ICMP_TYPE);
-- 	ct_build_u8(ct, ATTR_ICMP_CODE, n, NTA_ICMP_CODE);
-- 	ct_build_u16(ct, ATTR_ICMP_ID, n, NTA_ICMP_ID);
---- 
--1.9.1
--
 -- 
 2.12.2
 
