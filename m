@@ -1,37 +1,37 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AE4BB77E1B
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E08E877E5B
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 13 Apr 2017 22:58:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id o81so15351173wmb.0
+Received: by mail-wm0-f65.google.com with SMTP id o81so15351196wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 13 Apr 2017 15:58:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=qARfHzdYjnZBZt9RMK6lJB0FhuYrYsEAqVSLO2bglWI=;
-	b=cwxka0T3mhxdIYsrmXuEOccgeQJmVfCgTNodzCaEbo2PPXKtGKN+9LG0EA58RB2qS5
-	BKWfBPCdIqIAFvj7ZJf2N3C6HQVhWzbNS9ZFlEEz0w48eNRxX0Ylz3x58kwfr0d5mXHa
-	hpX+JmV9jDWH/PXTilO6n39cRR//M1Aa+a+Xi7M7X+k3vR41XSmkY0J/4E9hQseirGDz
-	UkB4+fxoDnTY8BIxMhx0UUD9OWNJIed9xkiSVMWEjSUN/U/Jf1BSfT8+zxh4Iv0kSeec
-	IMTtFZpW8BLXcG/M9WyMWDZ1VW9vBrCTD/mEpeV/xu0m5/48L0xNErNnB1xbMfrFdgwf
-	hy6w==
+	bh=8wZ9Fcmlc+4xJ0CFeEJbQ5cgn4OCT488nzdWxbgf7F4=;
+	b=qDddjsrhnI4IGpb0dZA8dFGbQfhRGbdFc6x859WpYBT2k4wACWxJ6iZTLAJd7U5UAS
+	8gzlC54DJf4kInKNBQbucbLjdf3Rmx6GssCpm2GVIDWK/U6zkH0Q35bVpu0lXCSPnzXn
+	YQuuZnubpGK4m12x82ATKJo8XJE6xjegAgo2FyEWN+niULwRanJbWB0IzbqNqg9o4LrC
+	EmqO2xA0xfrhg7nS3s0AYcPLGHBled7aExOcossDZRVYEdnsOcyUxxcrG2+1seil5RM8
+	IvhlR1O3Z+RLM1ekVwSEo8I/5Tpjdn2Ep+qxUTn0wHLxtjMTmNPT6C/r5OrrRpSKtZpR
+	eleg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=qARfHzdYjnZBZt9RMK6lJB0FhuYrYsEAqVSLO2bglWI=;
-	b=V9wFsjdbESBpXOwo/U3B/4wC/VoGvyZ/cSCg67Zw7lOK/YKEGySgzyQuHhxCNYDPF9
-	+DjAvp/RJtMClMKrtRigKmspmyq53qIHpzgN5hVrfGKlApDBEP0vfSu2/sFnOyl7bVl7
-	D4duJQpksnzVuH5X2N+6Xkj0jS5Sqe2E9WOHzOtYOzCS+c/eTAcWcMws1QRpKQV2zqep
-	5kj+2lLyxZCuXgGVot6SkcA5AxXPXwzGD4s0mt0Dif2x6OTE+TaPm2jA1S/A9/IKHAYP
-	pYwLELXTMVrbkgzwpjDGnp+oXWN1cO4QF16RsX1IIiu06n8HPIf7xZpJleVGDf2tGLpj
-	W3AQ==
-X-Gm-Message-State: AN3rC/5gKqxdLpkJaqUjzFK8eq11pOi/+YDgkpZZX42AAvIbrl1/bk75
-	bqDSUuxqgi5Pbaw6
-X-Received: by 10.28.71.153 with SMTP id m25mr10235216wmi.83.1492124308742;
-	Thu, 13 Apr 2017 15:58:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=8wZ9Fcmlc+4xJ0CFeEJbQ5cgn4OCT488nzdWxbgf7F4=;
+	b=Bh/u9c7pFeXBj5hVkFRDfuS0PSKsGoC2wC5TYSicF6CK8HxMYK6oX8Kqv9mJQPj0eg
+	ngqtcn0B/xToAova9WvLZY4ghF/k35Son6hoWWfJKLuk9yltafyLDEW8RbAOMYSJR1Vg
+	EAQQedUBjQhqYlalXFGgwu6j6a0sNtTZ1sfqyQpWKVPRmTZe6ncXM9grzoloxN33N8xv
+	tL/5IulKonZCCaebDclHJxGNO5WCXiIBikR1DnnbspJoBmDMIBb8Rfj/ZkWRAlJWtdxo
+	hshT3+7kqAkf5SCCdmWNY4bvyL8ioXNK/ZxpxgdtJ0iQnEFsQNgcMaaoTZwtwLpM5Eol
+	sHwg==
+X-Gm-Message-State: AN3rC/4hMp+s61oAbeDSHitYGTSypO8IS8ULIYYD8ouPVyJyB9CV5ekM
+	U1g6sOYgKeowi0OA
+X-Received: by 10.28.176.5 with SMTP id z5mr12664189wme.3.1492124309443;
+	Thu, 13 Apr 2017 15:58:29 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E911F1051E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e911:f105:1e6f:65ff:fe3e:7f61])
@@ -39,14 +39,16 @@ Received: from PC192-168-2-116.speedport.ip
 	32sm155689wrq.25.2017.04.13.15.58.28
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 15:58:28 -0700 (PDT)
+	Thu, 13 Apr 2017 15:58:29 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Apr 2017 00:58:14 +0200
-Message-Id: <20170413225816.10153-1-schnitzeltony@googlemail.com>
+Date: Fri, 14 Apr 2017 00:58:15 +0200
+Message-Id: <20170413225816.10153-2-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.3
+In-Reply-To: <20170413225816.10153-1-schnitzeltony@googlemail.com>
+References: <20170413225816.10153-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] florence: unblacklist - gstreamer is fine
+Subject: [PATCH 2/3] devilspie2: add gettext to inherit and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,19 +67,28 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-gnome/recipes-support/florence/florence_0.5.4.bb | 2 --
- 1 file changed, 2 deletions(-)
+ meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-gnome/recipes-support/florence/florence_0.5.4.bb b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
-index efc5532..8ce85c9 100644
---- a/meta-gnome/recipes-support/florence/florence_0.5.4.bb
-+++ b/meta-gnome/recipes-support/florence/florence_0.5.4.bb
-@@ -18,5 +18,3 @@ SRC_URI[sha256sum] = "26d33aa20d5fbf34ceeded4c41cb922d2988b6082e33d9acc46dd7bfe5
- inherit gettext autotools gconf pkgconfig
+diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
+index 48dd489..3c31c1b 100644
+--- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
++++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
+@@ -14,7 +14,7 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "99c88f702e134d2b2f2f8caad4b1ef03"
+ SRC_URI[sha256sum] = "01a2ebcece14065c9a2e47decd81341e2a6f63e3bf43ff446103686718748356"
  
- EXTRA_OECONF = "--disable-scrollkeeper --without-docs --without-at-spi --without-panelapplet --without-xrecord"
+-inherit pkgconfig
++inherit pkgconfig gettext
+ 
+ do_compile() {
+     export GTK2=1
+@@ -28,5 +28,3 @@ do_install() {
+     install -d ${D}/${sysconfdir}/xdg/autostart
+     install -m 644 ${WORKDIR}/devilspie2.desktop ${D}/${sysconfdir}/xdg/autostart
+ }
 -
--PNBLACKLIST[florence] ?= "Depends on blacklisted gstreamer - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-PNBLACKLIST[devilspie2] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130666/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
 2.9.3
 
