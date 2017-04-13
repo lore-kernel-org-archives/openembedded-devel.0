@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id B260C77E7C
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 21FF477E78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:29 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id a188so12673345pfa.2
+	Thu, 13 Apr 2017 20:41:31 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c198so12686902pfc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:31 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=nHqvy+lDBqBX4LzgTzCHmZKGlaa+2a682k0XCO72hlg=;
-	b=r9R17tcqAkkM9X2XfWXhgqeyzM0/Val0Yzdxktn4eoj/3qHFQYbF0tcDKp/Zma/JMA
-	zEb5q45tmVzXHPKm+C7wBj6g9Lo8ClrR+voBrgdUo/E3bmDpmH3gcMw0POVtHr6kpvZK
-	t5XcmKPKepzmEL388Z9o+GiiS2hz1wx9ZwxymGxcAt01EoGsARbGs9tnjB8rV325jUC1
-	t00LxMKitmril/1BJ/UVpMYXZLbH0DWPqnVbsTJMy+AsCPWWNrHDO6tECSUAZ1bLanW8
-	IOo89TNVGKrmGqlT0O+nwveebtqqQabfCsv1iWYqZ5v9NLXktr+JP9rmxFNTU4Q/H3L4
-	N7lg==
+	bh=0aWktUxpJZ3aSdh1XFqDW9sjkUnS6mRiWE+dqajN8ko=;
+	b=gfDK7fRAkLlV9Y2j6Qd82TGHwwH5SeNNgr3T4yvrM6qIsxfDJnoLwzgarzNFn3pGyk
+	cIiNrtuVtDR4oLGVz+/4IQGmrB/b1CC6z5eGLGzv5kqZeVWeP2/AZaeRny4qRIxunJqS
+	cjgN6v/TFbr7dKC5jDpqqQHqjxFErPboXKL1LGFPkQKmPU1fP9mH0WpiOGHnk2LKZlQ6
+	/ysrDq3cWDmdrCGYR5LYIwngauybDLiftW7gpM4nms3x8XggLZan7w1H4x9jCblKIYwB
+	x8GJEP2THTbZh16X3G38lLvj7oXLikqwwGC3gvBUeqnO/NA4g9einqhGSPaA0U9gj/Lm
+	fV5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=nHqvy+lDBqBX4LzgTzCHmZKGlaa+2a682k0XCO72hlg=;
-	b=cFlPVUcgEAygmnHY8Q+Aih2qBGIEjb3K8M5JFvCkl7hLK8NtywfpoVewgeubsUruFT
-	9z9c/narAff87fNSxi0UPjmccughjUVfE80TJUxjhHZd9iuK9TAtH4uL5xhdAvCwXwoQ
-	0qYwQKs9fzypA1P7iiB85jEVHV2N16KK9mgGDNEURXUGJA+fLpb1+FkYQK1yvwQJmVzV
-	LBqMPzbBp6p0p+t3TeqB6Km6w19S2c2BkUvoLP6c2Aan6h84iHvGnRpNWhKnjYOYkul9
-	yNtxH7veq8ki0yRzWYiZ3E5ylxOKG/+G08Nk0wnPHYAWxZireSMYEEkzf0d+BY09R30A
-	LR0w==
-X-Gm-Message-State: AN3rC/6QkZpDPobkzkrMl9H8Rfh1cK/9SgWmgE29YLYzRS18c+KyHmgX
-	MEVjHf2ZhN3STRhl
-X-Received: by 10.99.173.6 with SMTP id g6mr4315836pgf.75.1492116090789;
-	Thu, 13 Apr 2017 13:41:30 -0700 (PDT)
+	bh=0aWktUxpJZ3aSdh1XFqDW9sjkUnS6mRiWE+dqajN8ko=;
+	b=RXKCKAC+H+rNf473Y6Uc9JG8BLG+Wl7eL7b/9ZUSHfBXe5hxbkHmkUs19kl3BvloKe
+	oPNgnD5P6riiVgTh5Y+k6uKIak/WDiyHRkaYulv3YddbNfnwUP040rTLy7D8WjQSGEDR
+	T/D/oSmJuOK5UNLwzrfuJBjxWOwGnX43V/i3JJjLG7TpPfXu9HfGIbmDajM13/Irj2Fc
+	/TXCFEvzAmUOS2lpeI48/3GtM+LqGoTqFC7bmXNHL3Ab/zvo8rjyN7F+ryCloxyvAlfq
+	AZRMK0jXTaKaPqkE4U7v+2XcnWnO9tSB1aMXmG6g0RTUKXctgByXfUmD9cneRvSE+BM1
+	wY4w==
+X-Gm-Message-State: AN3rC/61Rq+FfKdS1MQD1PPoYfkBcDLxXN/JbaLDbbz8rWlkX/wKWonR
+	sD+/cZIQkowf18YN
+X-Received: by 10.84.224.70 with SMTP id a6mr5402548plt.25.1492116092438;
+	Thu, 13 Apr 2017 13:41:32 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.29
+	u29sm44033332pfa.123.2017.04.13.13.41.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:29 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:46 -0700
-Message-Id: <20170413204106.30679-9-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:47 -0700
+Message-Id: <20170413204106.30679-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-networking][ 09/29] nftables: Upgrade to 0.7
+Subject: [meta-networking][ 10/29] mtr: Upgrade 0.87+git
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +56,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:29 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:31 -0000
+
+Fixes for musl build are not in a release yet
+until then switch to using git for SRC_URI
+
+License file changes are here
+
+https://github.com/traviscross/mtr/commit/dd42b2305a94dcbf80847410be0288df29d6a5ef
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-filter/nftables/{nftables_0.6.bb => nftables_0.7.bb}    | 6 ++++--
- 1 file changed, 4 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-filter/nftables/{nftables_0.6.bb => nftables_0.7.bb} (72%)
+ meta-networking/recipes-support/mtr/mtr_0.86.bb | 21 -------------------
+ meta-networking/recipes-support/mtr/mtr_0.87.bb | 27 +++++++++++++++++++++++++
+ 2 files changed, 27 insertions(+), 21 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/mtr/mtr_0.86.bb
+ create mode 100644 meta-networking/recipes-support/mtr/mtr_0.87.bb
 
-diff --git a/meta-networking/recipes-filter/nftables/nftables_0.6.bb b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
-similarity index 72%
-rename from meta-networking/recipes-filter/nftables/nftables_0.6.bb
-rename to meta-networking/recipes-filter/nftables/nftables_0.7.bb
-index 5dd93627a..3a3a94665 100644
---- a/meta-networking/recipes-filter/nftables/nftables_0.6.bb
-+++ b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
-@@ -10,7 +10,9 @@ RRECOMMENDS_${PN} += "kernel-module-nf-tables \
- SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
-            file://fix-to-generate-ntf.8.patch \
-           "
--SRC_URI[md5sum] = "fd320e35fdf14b7be795492189b13dae"
--SRC_URI[sha256sum] = "dede62655f1c56f2bc9f9be12d103d930dcef6d5f9e0855854ad9c6f93cd6c2d"
-+SRC_URI[md5sum] = "4c005e76a15a029afaba71d7db21d065"
-+SRC_URI[sha256sum] = "fe639239d801ce5890397f6f4391c58a934bfc27d8b7d5ef922692de5ec4ed43"
+diff --git a/meta-networking/recipes-support/mtr/mtr_0.86.bb b/meta-networking/recipes-support/mtr/mtr_0.86.bb
+deleted file mode 100644
+index 92f4f3c0b..000000000
+--- a/meta-networking/recipes-support/mtr/mtr_0.86.bb
++++ /dev/null
+@@ -1,21 +0,0 @@
+-SUMMARY = "Combined traceroute and ping utility"
+-DESCRIPTION = "mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool."
+-HOMEPAGE = "http://www.bitwizard.nl/mtr/"
+-SECTION = "net"
+-DEPENDS = "ncurses"
+-
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
+-                    file://mtr.c;beginline=5;endline=16;md5=af1fafbbfa1bfd48af839f4bb3221106"
+-
+-SRC_URI = "ftp://ftp.bitwizard.nl/mtr/mtr-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "8d63592c9d4579ef20cf491b41843eb2"
+-SRC_URI[sha256sum] = "c5d948920b641cc35f8b380fc356ddfe07cce6a9c6474afe242fc58113f28c06"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "--without-gtk"
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+-PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
+diff --git a/meta-networking/recipes-support/mtr/mtr_0.87.bb b/meta-networking/recipes-support/mtr/mtr_0.87.bb
+new file mode 100644
+index 000000000..9d3275e2d
+--- /dev/null
++++ b/meta-networking/recipes-support/mtr/mtr_0.87.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "Combined traceroute and ping utility"
++DESCRIPTION = "mtr combines the functionality of the 'traceroute' and 'ping' programs in a single network diagnostic tool."
++HOMEPAGE = "http://www.bitwizard.nl/mtr/"
++SECTION = "net"
++DEPENDS = "ncurses"
 +
-+ASNEEDED = ""
- 
- inherit autotools pkgconfig
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://ui/mtr.c;beginline=5;endline=16;md5=af1fafbbfa1bfd48af839f4bb3221106"
++
++PV .= "+git${SRCPV}"
++
++SRCREV = "e6d0a7e93129e8023654ebf58dfa8135d1b1af56"
++SRC_URI = "git://github.com/traviscross/mtr"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++EXTRA_OECONF = "--without-gtk"
++
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
++PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
++
++PACKAGES += "${PN}-bash-completions"
++
++FILES_${PN}-bash-completions = "${datadir}/bash-completion/"
 -- 
 2.12.2
 
