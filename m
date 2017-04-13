@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 70F1777E79
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CF85D77E7C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:19 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id 34so10611872pgx.3
+	Thu, 13 Apr 2017 20:41:18 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id o126so12676331pfb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:21 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ZEfrAM80b0LQXXJ6Ek8J4COnOc9uzhdW4TJgyDX9XqM=;
-	b=tr/3RmTYMWLqRPrsNfVxK88m0zSYmDqPnJa2kxH4P2kISFRyUwO7yuVTHkPQT2bTOc
-	2iHbmwHl60/MhCvtcojb6zJP5ZdZoMIyQOLfXOU1GBgfyfzcPcb9FQLpFx4D4e5lEoFc
-	QXSJy48oZcGLAjZputjH5RldTVzWj/X+HWfYv1H28ZAGJLNqLogQzwea9NxYOcB0E+/m
-	pjjes55sj2tdvOqNTvbJzVupI8K2XZoA0SiOiAXUmlAYEmHGAKfsCP5IzjmbO/+JzWp/
-	l7knFPZEjgKQVycvn9N04FmVyepdM8RZ7VfnrtU2Bx+wBQ4lBEqifhXL1ec64zZfUBtC
-	CN4w==
+	bh=7+IU/lK9BgM/kdo/M9P+6PNh2VIvkxB7PAOK1CzbsFw=;
+	b=k2EsGEoxDzXJGWaFaJMxGr2CVjVTtWdl+56Q6oEsHDyv3KL2AUjrBY1LZivJNBmCtD
+	E+inqSz65a+mH6aaTtq7hYyBXNjiL71nAa9OXDmeFIjd3CQEVTzLEfR3xiP/sdI3p9aq
+	lOrWbIdGbIEft+qGgoX9dMoE2SkC1Lojhr0v57XnZMWSxDIT4eLVDW30eNFLbNd6qj63
+	4yX/Tzx6hO40Z0rAFt+wb332xNWdKq+NNld2LwHFAhIq5I/y7ChX8uX29INZDrlnvnRl
+	Chqw9ZYV88+/7n9IydjSGVlFAMJ9H5t+kVN+jbSF7oE5O061MAnKRQzGSEFxvu3wM4eM
+	FVsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=ZEfrAM80b0LQXXJ6Ek8J4COnOc9uzhdW4TJgyDX9XqM=;
-	b=HR99t6V8RGxtpaPA72zou7YLSy0Wq0HuVssTmcWqVzafRwScjT0YPpZWhVrGlCLXF1
-	Jep1LkIb2N2B+Zw9ZvFlORG8kEB57KPvfyDPoD4lQtN95CuAz0signA1DA0pZo34UGzx
-	VamTXJzbVaEGCanetSBNmoWEHeH6mujww/5SSGgbkoUELbydcAZvi9iUb1QvHykL6CEC
-	UUCSkX34Cp7tlxoQOiwr9wKqV7/2+38VPGX7iZr+J+VEN7VjJ2It0XWokWm6AlCWLFv6
-	pz91CFesyUv49J2QaTCjWYbQOiIyyyBJlkqPmps5ekBfz9ljU9nVODoutUnFkf+PO4SA
-	HrlA==
-X-Gm-Message-State: AN3rC/4q0CQ4sg4KeIYtcEwnH2f03+UBaw+qjwBOGryc1ghHCWUqZKWo
-	92VhIipalZrzw8ws
-X-Received: by 10.98.40.5 with SMTP id o5mr4276959pfo.262.1492116081047;
-	Thu, 13 Apr 2017 13:41:21 -0700 (PDT)
+	bh=7+IU/lK9BgM/kdo/M9P+6PNh2VIvkxB7PAOK1CzbsFw=;
+	b=Q3m0ErbERNTJyUISO36E/W6dLUXuNnNRu8vaD8BnVRI5jFWOWxZDSq1FNj6TsTjxv0
+	/LtnjF2QbJLjjurA6bKLlMwzuqriFKkLA6PvkBIHwk9ZN8mQtLynZ16Ts7wtg0v7bTvX
+	ck+6uPQY3jY8dpnFnIbcxZAYIZTuDiEv/exaVNuuVZZRLDptAooDRMIpiZiRVc2UYBc2
+	+/0YZQnE4KDLewvtSXCgovrUk4+i8WvSuoshQ7H0MzHdJvwkD66BCDZCxfuwHq1sb2Lx
+	Jj4hxcbGCaNgt7IclZ6mMneVP/KMNApgSEwWhc0UP4cvdX/sk/qkI8aDxkVmTXf+o5+6
+	U+ug==
+X-Gm-Message-State: AN3rC/6zuT1F4NXpVA0+fMMBTXUh4FLi+zeejbuvcbT0RThSKz5G7imY
+	j+q/Zqxic7YYmg==
+X-Received: by 10.98.70.139 with SMTP id o11mr4287418pfi.0.1492116079606;
+	Thu, 13 Apr 2017 13:41:19 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.19
+	u29sm44033332pfa.123.2017.04.13.13.41.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:20 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:40 -0700
-Message-Id: <20170413204106.30679-3-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:39 -0700
+Message-Id: <20170413204106.30679-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-networking][ 03/29] libnetfilter-conntrack: Upgrade to 1.0.6
+Subject: [meta-networking][ 02/29] ez-ipupdate: Fix formatting security warnings
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,127 +60,42 @@ X-List-Received-Date: Thu, 13 Apr 2017 20:41:23 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../libnetfilter/files/replace-VLAs-in-union.patch | 89 ----------------------
- ...ck_1.0.4.bb => libnetfilter-conntrack_1.0.6.bb} |  5 +-
- 2 files changed, 2 insertions(+), 92 deletions(-)
- delete mode 100644 meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
- rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.4.bb => libnetfilter-conntrack_1.0.6.bb} (75%)
+ .../ez-ipupdate/ez-ipupdate_3.0.11b7.bb                     |  1 +
+ .../recipes-connectivity/ez-ipupdate/files/wformat.patch    | 13 +++++++++++++
+ 2 files changed, 14 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
-deleted file mode 100644
-index 16e4af405..000000000
---- a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
-+++ /dev/null
-@@ -1,89 +0,0 @@
--VLAs in structs and unions (non-PODs) is unsupported in non-gcc compilers
--therefore convert it to not use VLAs instead use fixed arrays
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--Upstream-Status: Pending
--Index: libnetfilter_conntrack-1.0.4/src/conntrack/api.c
--===================================================================
----- libnetfilter_conntrack-1.0.4.orig/src/conntrack/api.c
--+++ libnetfilter_conntrack-1.0.4/src/conntrack/api.c
--@@ -954,16 +954,15 @@ int nfct_query(struct nfct_handle *h,
-- 	       const enum nf_conntrack_query qt,
-- 	       const void *data)
-- {
---	size_t size = 4096;	/* enough for now */
-- 	union {
---		char buffer[size];
--+		char buffer[4096];
-- 		struct nfnlhdr req;
-- 	} u;
-- 
-- 	assert(h != NULL);
-- 	assert(data != NULL);
-- 
---	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
--+	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
-- 		return -1;
-- 
-- 	return nfnl_query(h->nfnlh, &u.req.nlh);
--@@ -986,16 +985,15 @@ int nfct_send(struct nfct_handle *h,
-- 	      const enum nf_conntrack_query qt,
-- 	      const void *data)
-- {
---	size_t size = 4096;	/* enough for now */
-- 	union {
---		char buffer[size];
--+		char buffer[4096];
-- 		struct nfnlhdr req;
-- 	} u;
-- 
-- 	assert(h != NULL);
-- 	assert(data != NULL);
-- 
---	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
--+	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
-- 		return -1;
-- 
-- 	return nfnl_send(h->nfnlh, &u.req.nlh);
--Index: libnetfilter_conntrack-1.0.4/src/expect/api.c
--===================================================================
----- libnetfilter_conntrack-1.0.4.orig/src/expect/api.c
--+++ libnetfilter_conntrack-1.0.4/src/expect/api.c
--@@ -669,16 +669,15 @@ int nfexp_query(struct nfct_handle *h,
-- 	        const enum nf_conntrack_query qt,
-- 	        const void *data)
-- {
---	size_t size = 4096;	/* enough for now */
-- 	union {
---		char buffer[size];
--+		char buffer[4096];
-- 		struct nfnlhdr req;
-- 	} u;
-- 
-- 	assert(h != NULL);
-- 	assert(data != NULL);
-- 
---	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
--+	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
-- 		return -1;
-- 
-- 	return nfnl_query(h->nfnlh, &u.req.nlh);
--@@ -701,16 +700,15 @@ int nfexp_send(struct nfct_handle *h,
-- 	       const enum nf_conntrack_query qt,
-- 	       const void *data)
-- {
---	size_t size = 4096;	/* enough for now */
-- 	union {
---		char buffer[size];
--+		char buffer[4096];
-- 		struct nfnlhdr req;
-- 	} u;
-- 
-- 	assert(h != NULL);
-- 	assert(data != NULL);
-- 
---	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
--+	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
-- 		return -1;
-- 
-- 	return nfnl_send(h->nfnlh, &u.req.nlh);
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-similarity index 75%
-rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-index ecbc86ba7..e4e186bdb 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
-@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
- DEPENDS = "libnfnetlink libmnl"
- 
- SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
--           file://replace-VLAs-in-union.patch \
- "
--SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
--SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
-+SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
-+SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
- 
- S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
- 
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
+index cb5375c1f..51e220c9e 100644
+--- a/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/ez-ipupdate_3.0.11b7.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://sourceforge.net/projects/ez-ipupdate/files/${BPN}/${PV}/${BPN}
+     file://Makefile.am.patch \
+     file://cache_file.c.patch \
+     file://conf_file.c.patch \
++    file://wformat.patch \
+     "
+ SRC_URI[md5sum] = "525be4550b4461fdf105aed8e753b020"
+ SRC_URI[sha256sum] = "a15ec0dc0b78ec7578360987c68e43a67bc8d3591cbf528a323588830ae22c20"
+diff --git a/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch b/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
+new file mode 100644
+index 000000000..1de267f08
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/ez-ipupdate/files/wformat.patch
+@@ -0,0 +1,13 @@
++Index: ez-ipupdate-3.0.11b7/ez-ipupdate.c
++===================================================================
++--- ez-ipupdate-3.0.11b7.orig/ez-ipupdate.c
+++++ ez-ipupdate-3.0.11b7/ez-ipupdate.c
++@@ -798,7 +798,7 @@ void show_message(char *fmt, ...)
++     sprintf(buf, "message incomplete because your OS sucks: %s\n", fmt);
++ #endif
++ 
++-    syslog(LOG_NOTICE, buf);
+++    syslog(LOG_NOTICE, "%s", buf);
++   }
++   else
++   {
 -- 
 2.12.2
 
