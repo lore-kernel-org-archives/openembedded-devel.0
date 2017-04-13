@@ -1,48 +1,48 @@
-Return-Path: <andrej.rode@ettus.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 8927377E6E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 70F1777E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 19:20:17 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id i5so32490899pfc.2
+	Thu, 13 Apr 2017 20:41:19 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id 34so10611872pgx.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 12:20:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=6TOFe0Wy1btw5GWkml0/x3U6dTZRYIPyNHk7CuzXbxE=;
-	b=qsVO5fxIy8N5dP63LvQykb5dAcPWGVu5YZFRd6t13ubLpDJEEEtEKO8upvvbbPy0uI
-	AjdgKXnubK+v8vFWYCroyY/kPZe0p3k7m47qxECkda9uwgsoLZJH3hZOOcq3NGIgUXsR
-	fT7lzSB4XjGnDgxkUMcBcJY71L3/zPSryqTcHR70uHaFsc3IUVxqMBcK1D+lJjI/KAtQ
-	0pPVxypcSwuuy0zt53krWL0tnGExTOnpPsCA+9tJfQEeuL7END+w/4SlnSFGnPuDbmUL
-	gkbhjjnxE32pj+EfiaoRgeZ8a+T64wvL0k6jpBXCUzePX2a70emnocEP5HFs0Sg/xSlC
-	/sdA==
+	Thu, 13 Apr 2017 13:41:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=ZEfrAM80b0LQXXJ6Ek8J4COnOc9uzhdW4TJgyDX9XqM=;
+	b=tr/3RmTYMWLqRPrsNfVxK88m0zSYmDqPnJa2kxH4P2kISFRyUwO7yuVTHkPQT2bTOc
+	2iHbmwHl60/MhCvtcojb6zJP5ZdZoMIyQOLfXOU1GBgfyfzcPcb9FQLpFx4D4e5lEoFc
+	QXSJy48oZcGLAjZputjH5RldTVzWj/X+HWfYv1H28ZAGJLNqLogQzwea9NxYOcB0E+/m
+	pjjes55sj2tdvOqNTvbJzVupI8K2XZoA0SiOiAXUmlAYEmHGAKfsCP5IzjmbO/+JzWp/
+	l7knFPZEjgKQVycvn9N04FmVyepdM8RZ7VfnrtU2Bx+wBQ4lBEqifhXL1ec64zZfUBtC
+	CN4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6TOFe0Wy1btw5GWkml0/x3U6dTZRYIPyNHk7CuzXbxE=;
-	b=eVp7rnGUMvlV4FDT+M0lGCpGc0Y1pKRjMmZYydo87loIf1rY+s71L/xu+pV4/vEFlb
-	8qYqR4n2806oXpeqbk/+Lx68LTSggGJMuAsaEY++zEp7GkFk1MxsWeDRIGkhe8wfiXrW
-	qbD6YjxM1VXW3BCO/b/kOYZf7ZojUpajNFfJMpHVcfyxQgNf/e2oI7pNuA1upBtLk5rf
-	GTMt8MZtR0ARYDMjGZN2HryfxVtZGCSliTiuPjXw5+SoThwAmrwtWGCzMdRutR/vbYcv
-	J/Ox2jl5eVZk2hPLTbION9ofU50RsITxtJPVlCPmKfUe+RXrm6f9wJcNx1HJDV67YD0L
-	w3mw==
-X-Gm-Message-State: AN3rC/47NVn45qwyigGK6aOVUx0cWaNgLgNYdOr5cWaXm0J+i9v78ecO
-	bbe9zLASOeXDluAg
-X-Received: by 10.84.224.198 with SMTP id k6mr5260016pln.15.1492111218595;
-	Thu, 13 Apr 2017 12:20:18 -0700 (PDT)
-Received: from FlyingDragon.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id
-	z185sm43905133pfb.6.2017.04.13.12.20.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 13 Apr 2017 12:20:18 -0700 (PDT)
-From: Andrej Rode <andrej.rode@ettus.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=ZEfrAM80b0LQXXJ6Ek8J4COnOc9uzhdW4TJgyDX9XqM=;
+	b=HR99t6V8RGxtpaPA72zou7YLSy0Wq0HuVssTmcWqVzafRwScjT0YPpZWhVrGlCLXF1
+	Jep1LkIb2N2B+Zw9ZvFlORG8kEB57KPvfyDPoD4lQtN95CuAz0signA1DA0pZo34UGzx
+	VamTXJzbVaEGCanetSBNmoWEHeH6mujww/5SSGgbkoUELbydcAZvi9iUb1QvHykL6CEC
+	UUCSkX34Cp7tlxoQOiwr9wKqV7/2+38VPGX7iZr+J+VEN7VjJ2It0XWokWm6AlCWLFv6
+	pz91CFesyUv49J2QaTCjWYbQOiIyyyBJlkqPmps5ekBfz9ljU9nVODoutUnFkf+PO4SA
+	HrlA==
+X-Gm-Message-State: AN3rC/4q0CQ4sg4KeIYtcEwnH2f03+UBaw+qjwBOGryc1ghHCWUqZKWo
+	92VhIipalZrzw8ws
+X-Received: by 10.98.40.5 with SMTP id o5mr4276959pfo.262.1492116081047;
+	Thu, 13 Apr 2017 13:41:21 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	u29sm44033332pfa.123.2017.04.13.13.41.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 13 Apr 2017 13:41:20 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 12:20:00 -0700
-Message-Id: <20170413192000.2326-1-andrej.rode@ettus.com>
-X-Mailer: git-send-email 2.10.2
-Subject: [meta-python][PATCH] gevent: update 0.13.8 -> 1.2.1
+Date: Thu, 13 Apr 2017 13:40:40 -0700
+Message-Id: <20170413204106.30679-3-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
+References: <20170413204106.30679-1-raj.khem@gmail.com>
+Subject: [meta-networking][ 03/29] libnetfilter-conntrack: Upgrade to 1.0.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,106 +55,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 19:20:17 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:23 -0000
 
-Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../python/python-gevent/libev-conf.patch          | 26 ++++++++++++++++++++
- .../python/python-gevent_0.13.8.bb                 | 15 ------------
- .../recipes-devtools/python/python-gevent_1.2.1.bb | 28 ++++++++++++++++++++++
- 3 files changed, 54 insertions(+), 15 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
- delete mode 100644 meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
- create mode 100644 meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
+ .../libnetfilter/files/replace-VLAs-in-union.patch | 89 ----------------------
+ ...ck_1.0.4.bb => libnetfilter-conntrack_1.0.6.bb} |  5 +-
+ 2 files changed, 2 insertions(+), 92 deletions(-)
+ delete mode 100644 meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
+ rename meta-networking/recipes-filter/libnetfilter/{libnetfilter-conntrack_1.0.4.bb => libnetfilter-conntrack_1.0.6.bb} (75%)
 
-diff --git a/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch b/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
-new file mode 100644
-index 0000000..79c1867
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
-@@ -0,0 +1,26 @@
-+From 2294734ef9d5e2efb05820e9759a1635799bdea9 Mon Sep 17 00:00:00 2001
-+From: Andrej Rode <andrej.rode@ettus.com>
-+Date: Mon, 10 Apr 2017 19:25:18 -0700
-+Subject: [PATCH] libev: make configure crosscompile compatible
-+
-+Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
-+---
-+ deps/libev/configure | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/deps/libev/configure b/deps/libev/configure
-+index 743817e..96c2366 100755
-+--- a/deps/libev/configure
-++++ b/deps/libev/configure
-+@@ -2208,7 +2208,7 @@ fi
-+ ac_ext=c
-+ ac_cpp='$CPP $CPPFLAGS'
-+ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
-+-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-++ac_link='$CC -static -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
-+ ac_compiler_gnu=$ac_cv_c_compiler_gnu
-+ 
-+ 
-+-- 
-+2.10.2
-+
-diff --git a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb b/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
+diff --git a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch b/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
 deleted file mode 100644
-index d1c0a3c..0000000
---- a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
+index 16e4af405..000000000
+--- a/meta-networking/recipes-filter/libnetfilter/files/replace-VLAs-in-union.patch
 +++ /dev/null
-@@ -1,15 +0,0 @@
--SUMMARY = "A coroutine-based Python networking library"
--DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
--a high-level synchronous API on top of the libevent event loop."
--HOMEPAGE = "http://www.gevent.org"
--LICENSE = "MIT & BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
--                    file://LICENSE.pyevent;md5=718070c63de243053e2c616268b00fdd"
--DEPENDS += "python-greenlet libevent"
--RDEPENDS_${PN} += "python-greenlet python-mime python-pprint python-re"
+@@ -1,89 +0,0 @@
+-VLAs in structs and unions (non-PODs) is unsupported in non-gcc compilers
+-therefore convert it to not use VLAs instead use fixed arrays
 -
--SRC_URI[md5sum] = "ca9dcaa7880762d8ebbc266b11252960"
--SRC_URI[sha256sum] = "54b8d26300ce408c0916a3e63ef6cd3e6aca76230833558deb7de15196ed955e"
--
--inherit pypi setuptools
--
-diff --git a/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb b/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
-new file mode 100644
-index 0000000..953f48f
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "A coroutine-based Python networking library"
-+DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
-+a high-level synchronous API on top of the libevent event loop."
-+HOMEPAGE = "http://www.gevent.org"
-+LICENSE = "MIT & Python-2.0 & BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
-+                    file://NOTICE;md5=5966cd2c6582656d28ab3c33da3860f8 \
-+                    file://deps/libev/LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
-+DEPENDS += "python-greenlet libevent"
-+RDEPENDS_${PN} += "python-greenlet python-mime python-pprint python-re"
-+
-+SRC_URI_append = " \
-+    file://libev-conf.patch;patch=1;pnum=1 \
-+"
-+
-+SRC_URI[md5sum] = "6700a2433c8e0635425e6798760efc81"
-+SRC_URI[sha256sum] = "3de300d0e32c31311e426e4d5d73b36777ed99c2bac3f8fbad939eeb2c29fa7c"
-+
-+# The python-gevent has no autoreconf ability
-+# and the logic for detecting a cross compile is flawed
-+# so always force a cross compile
-+do_configure_append() {
-+	sed -i -e 's/^cross_compiling=no/cross_compiling=yes/' ${S}/deps/libev/configure
-+	sed -i -e 's/^cross_compiling=no/cross_compiling=yes/' ${S}/deps/c-ares/configure
-+}
-+
-+inherit pypi setuptools
-+
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-Upstream-Status: Pending
+-Index: libnetfilter_conntrack-1.0.4/src/conntrack/api.c
+-===================================================================
+---- libnetfilter_conntrack-1.0.4.orig/src/conntrack/api.c
+-+++ libnetfilter_conntrack-1.0.4/src/conntrack/api.c
+-@@ -954,16 +954,15 @@ int nfct_query(struct nfct_handle *h,
+- 	       const enum nf_conntrack_query qt,
+- 	       const void *data)
+- {
+--	size_t size = 4096;	/* enough for now */
+- 	union {
+--		char buffer[size];
+-+		char buffer[4096];
+- 		struct nfnlhdr req;
+- 	} u;
+- 
+- 	assert(h != NULL);
+- 	assert(data != NULL);
+- 
+--	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
+-+	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
+- 		return -1;
+- 
+- 	return nfnl_query(h->nfnlh, &u.req.nlh);
+-@@ -986,16 +985,15 @@ int nfct_send(struct nfct_handle *h,
+- 	      const enum nf_conntrack_query qt,
+- 	      const void *data)
+- {
+--	size_t size = 4096;	/* enough for now */
+- 	union {
+--		char buffer[size];
+-+		char buffer[4096];
+- 		struct nfnlhdr req;
+- 	} u;
+- 
+- 	assert(h != NULL);
+- 	assert(data != NULL);
+- 
+--	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, size) == -1)
+-+	if (__build_query_ct(h->nfnlssh_ct, qt, data, &u.req, 4096) == -1)
+- 		return -1;
+- 
+- 	return nfnl_send(h->nfnlh, &u.req.nlh);
+-Index: libnetfilter_conntrack-1.0.4/src/expect/api.c
+-===================================================================
+---- libnetfilter_conntrack-1.0.4.orig/src/expect/api.c
+-+++ libnetfilter_conntrack-1.0.4/src/expect/api.c
+-@@ -669,16 +669,15 @@ int nfexp_query(struct nfct_handle *h,
+- 	        const enum nf_conntrack_query qt,
+- 	        const void *data)
+- {
+--	size_t size = 4096;	/* enough for now */
+- 	union {
+--		char buffer[size];
+-+		char buffer[4096];
+- 		struct nfnlhdr req;
+- 	} u;
+- 
+- 	assert(h != NULL);
+- 	assert(data != NULL);
+- 
+--	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
+-+	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
+- 		return -1;
+- 
+- 	return nfnl_query(h->nfnlh, &u.req.nlh);
+-@@ -701,16 +700,15 @@ int nfexp_send(struct nfct_handle *h,
+- 	       const enum nf_conntrack_query qt,
+- 	       const void *data)
+- {
+--	size_t size = 4096;	/* enough for now */
+- 	union {
+--		char buffer[size];
+-+		char buffer[4096];
+- 		struct nfnlhdr req;
+- 	} u;
+- 
+- 	assert(h != NULL);
+- 	assert(data != NULL);
+- 
+--	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, size) == -1)
+-+	if (__build_query_exp(h->nfnlssh_exp, qt, data, &u.req, 4096) == -1)
+- 		return -1;
+- 
+- 	return nfnl_send(h->nfnlh, &u.req.nlh);
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
+similarity index 75%
+rename from meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
+rename to meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
+index ecbc86ba7..e4e186bdb 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.4.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-conntrack_1.0.6.bb
+@@ -7,10 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "libnfnetlink libmnl"
+ 
+ SRC_URI = "http://www.netfilter.org/projects/libnetfilter_conntrack/files/libnetfilter_conntrack-${PV}.tar.bz2;name=tar \
+-           file://replace-VLAs-in-union.patch \
+ "
+-SRC_URI[tar.md5sum] = "18cf80c4b339a3285e78822dbd4f08d7"
+-SRC_URI[tar.sha256sum] = "d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d"
++SRC_URI[tar.md5sum] = "7139c5f408dd9606ffecfd5dcda8175b"
++SRC_URI[tar.sha256sum] = "efcc08021284e75f4d96d3581c5155a11f08fd63316b1938cbcb269c87f37feb"
+ 
+ S = "${WORKDIR}/libnetfilter_conntrack-${PV}"
+ 
 -- 
-2.10.2
+2.12.2
 
 
