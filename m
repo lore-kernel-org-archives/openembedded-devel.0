@@ -1,52 +1,48 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f193.google.com (mail-ua0-f193.google.com
-	[209.85.217.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DC31F77E1D
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CE29577E0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 12:45:00 +0000 (UTC)
-Received: by mail-ua0-f193.google.com with SMTP id g30so4019588uab.2
+	Thu, 13 Apr 2017 14:30:02 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id c45so8101298qtb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 05:45:02 -0700 (PDT)
+	Thu, 13 Apr 2017 07:30:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=dEWBa5i6osf4OyfxNk0KK5AOit0q0ybh0kuRzUv4eWk=;
-	b=BFZduYu+VEP8sbam0CDy6kpDI0GA4Tnq8WHd3004kg12FxtfL5jRzHBdrRbVjRKEcy
-	LQh7MXLx0DgY5BXvJr8e/XlV+zyQqPBo1n4+ucMkdjZQeGQWX75S3M2K77nfnJ8VoRKY
-	D7XhNlFr6QLERndGvvcjUp2O6/4Vr2kGdkuK3KCZu8xiUHd9X1Hlh0nBM04y1k7fpqwm
-	mYZjJJW+Ln3DrqY/fBlbEwzCjnht9nRcllN8Zbh/blvs/AyXKL3o8A3pMehqcvANU26i
-	48IGV6oOlA5ulLAxp1EUm6+TWx77L0l2w47NGhblSlTZahFUmEOsC/MJbP8cg6WZlQWK
-	sk3g==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=iHl7tcQLARH9oUxGPTACqdI20b/ZltMhyEQ34IqrfvE=;
+	b=f7NSW8HzEWqnka7r9/SbFF7hc+VzbTlcNHQGI8qfYWxacXbDesPuNW57rRQ0B4RVRu
+	uCnZ5cWJT9TNyKiWjy6+pQW8BOpzPVU5Dgzp3KpbSolw0Lxs+j336Fa2qhfcnRUawYsa
+	u6QYhg/TwIkN05l5+ZsTaVodeOGNd8n3biz4Qd4BjzO5PMWReHUBjYuVNnBfCVn6A5Ht
+	Fq8djHWcvAERD7YNylJD9JqRwEHQVLDbuTwO9zx2pSGVxEr7ajJ7qil8F4pkn5hZoeJP
+	RX7fmQzudspuduZpMXIH29xIG6eM+OsrNp4qieTWSPxcNofZkaiuIb/I6ImUNHafVlh7
+	x3Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=dEWBa5i6osf4OyfxNk0KK5AOit0q0ybh0kuRzUv4eWk=;
-	b=n/2jo2xsyBbRyqRCYQXQlLAERoDhfmNQPmF/xiynyCC5azyaRhq8xUzlMpXWTYW+8p
-	ZEkrRHBb1veJG4KRMYkO2LX8/PBErHwRnYPUw+vI7wTJV9tWcvdiNwyaZyFj8Q+2DMlt
-	HgeOiKO2ZyxpPU0pSBnoJj1QDUwMB0sxnJ5mu9nXVSbw3duIImKuaMXFTcaB1f1UJ4tl
-	hMJiL8TWG6Q8uNKyp/mPwU33HuLSITcTsv1ZRYwhnhslWsm2HwfchyFRD0wsiwx7Z1za
-	PXxSsedGkLMcy0EBNhby1CKplGz4BxmGQYalZxn+aLGE2Mc51N+JFcnYzwqqVYzhkeZf
-	HutQ==
-X-Gm-Message-State: AN3rC/5q+5oyyBAD4z1DHSbgrwl4SZvN5QgZw/XKN00kpNEe1FGUNHKw
-	7amdv7cNhZxiJeyCqCY1DY7RxwrYmw==
-X-Received: by 10.176.24.134 with SMTP id t6mr1331340uag.79.1492087501751;
-	Thu, 13 Apr 2017 05:45:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.81.53 with HTTP; Thu, 13 Apr 2017 05:45:01 -0700 (PDT)
-In-Reply-To: <CALbNGRR0K_YiR-OF+x2_0VTgWdMDRCq-wuhsj4CjFr4RHA2VTw@mail.gmail.com>
-References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
-	<20170412195638.3243-27-schnitzeltony@googlemail.com>
-	<58EF4902.2090906@linaro.org>
-	<CALbNGRR0K_YiR-OF+x2_0VTgWdMDRCq-wuhsj4CjFr4RHA2VTw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Thu, 13 Apr 2017 14:45:01 +0200
-Message-ID: <CALbNGRSB8VrWzs5+BRVEPZYq48pf0322OR1X4Fg-Yk3ZA5jqug@mail.gmail.com>
-To: Andrey Konovalov <andrey.konovalov@linaro.org>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 26/29] mpv: add PACKAGECONFIG for drm/gbm/vdpau/wayland
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=iHl7tcQLARH9oUxGPTACqdI20b/ZltMhyEQ34IqrfvE=;
+	b=NBOYZNLkZXRmNyZxoxf7bvzEE2kXfI9YLCW+X5IWBCuhMusdzZot4NXAqGjsxC3W31
+	3n8qTJCN6m0p0vXSWhnd18eLapXSQAWFvbT46J50rMvCQeor0r0NbOajmTF/I1RZ4s4h
+	Sn8i+kAPsYDASfh1m8sZNJfrazRr0blnB6pIhtl/K9+SXZKfjUTZ1C1vYYV0oMFTaufU
+	3VRAkf8HMGsph8mv2iPEB4wS4duoQLVLj/yJ15U1C/m118AyeGQA4UBR/BEm5mL+fhTE
+	ImpoNIG0vV9QY7QxjUgr5v4W9IGZX8tcgAhIeJ75C0i44yBYFmrDyKfEkngL5qBE7a/l
+	J/mQ==
+X-Gm-Message-State: AN3rC/5AD7vmQonP1iCIFbalpFFuyzvQUd6YPaxYY9Vj1RDya0AxHudQ
+	yS4rJh02T3KKeQ==
+X-Received: by 10.237.53.218 with SMTP id d26mr2756975qte.149.1492093803634;
+	Thu, 13 Apr 2017 07:30:03 -0700 (PDT)
+Received: from centrium.lab.ossystems ([189.114.111.135])
+	by smtp.gmail.com with ESMTPSA id
+	c189sm3086775qkg.6.2017.04.13.07.30.00
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 13 Apr 2017 07:30:02 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 13 Apr 2017 11:29:43 -0300
+Message-Id: <20170413142943.13749-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.11.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe][PATCH] libsodium: Extend recipe for native and nativesdk usage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 12:45:01 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 13 Apr 2017 14:30:03 -0000
 
-On Thu, Apr 13, 2017 at 11:52 AM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> On Thu, Apr 13, 2017 at 11:46 AM, Andrey Konovalov
-> <andrey.konovalov@linaro.org> wrote:
->> On 04/12/2017 10:56 PM, Andreas M=C3=BCller wrote:
->>>
->>> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->>> ---
->>>   meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb | 13 +++++++++++--
->>>   1 file changed, 11 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
->>> b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
->>> index 3f46dc1..60f653a 100644
->>> --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
->>> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
->>> @@ -3,7 +3,7 @@ DESCRIPTION =3D "mpv is a fork of mplayer2 and MPlayer.=
- It
->>> shares some features wi
->>>   SECTION =3D "multimedia"
->>>   HOMEPAGE =3D "http://www.mpv.io/"
->>>   DEPENDS =3D "zlib ffmpeg jpeg virtual/libx11 xsp libxv \
->>> -           libxscrnsaver libv4l libxinerama libvdpau \
->>> +           libxscrnsaver libv4l libxinerama \
->>>   "
->>>
->>>   REQUIRED_DISTRO_FEATURES =3D "x11"
->>> @@ -24,14 +24,23 @@ SRC_URI[waf.sha256sum] =3D
->>> "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca343fe091f2
->>>   inherit waf pkgconfig pythonnative distro_features_check
->>>
->>>   # Note: both lua and libass are required to get on-screen-display
->>> (controls)
->>> -PACKAGECONFIG ??=3D "lua libass"
->>> +PACKAGECONFIG ??=3D " \
->>> +    lua \
->>> +    libass \
->>> +    ${@bb.utils.filter('DISTRO_FEATURES', 'wayland', d)} \
->>> +"
->>> +PACKAGECONFIG[drm] =3D "--enable-drm,--disable-drm,libdrm"
->>> +PACKAGECONFIG[gbm] =3D "--enable-gbm,--disable-gbm,virtual/mesa"
->>>   PACKAGECONFIG[lua] =3D "--enable-lua,--disable-lua,lua luajit"
->>>   PACKAGECONFIG[libass] =3D "--enable-libass,--disable-libass,libass"
->>>   PACKAGECONFIG[libarchive] =3D
->>> "--enable-libarchive,--disable-libarchive,libarchive"
->>>   PACKAGECONFIG[jack] =3D "--enable-jack, --disable-jack, jack"
->>>   PACKAGECONFIG[vaapi] =3D "--enable-vaapi, --disable-vaapi,libva"
->>> +PACKAGECONFIG[vdpau] =3D "--enable-vdpau, --disable-vdpau,libvdpau"
->>> +PACKAGECONFIG[wayland] =3D "--enable-wayland, --enable-wayland,wayland=
-"
->>
->>
->> Should it be:
->> PACKAGECONFIG[wayland] =3D "--enable-wayland, --disable-wayland,wayland"
->> ?
-> Yes - Thanks - needs V2
->
-Saw that Martin already applied and sent out a fix on top.
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Andreas
+diff --git a/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb b/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
+index 22d315504..cbcbe96cd 100644
+--- a/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
++++ b/meta-oe/recipes-support/libsodium/libsodium_1.0.11.bb
+@@ -8,3 +8,5 @@ SRC_URI[md5sum] = "b58928d035064b2a46fb564937b83540"
+ SRC_URI[sha256sum] = "a14549db3c49f6ae2170cbbf4664bd48ace50681045e8dbea7c8d9fb96f9c765"
+ 
+ inherit autotools
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.11.0
+
 
