@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C61477E8C
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 72B5477D5F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:49 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id a188so12674438pfa.2
+	Thu, 13 Apr 2017 20:41:51 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id o123so13477680pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:51 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=30+rwIux9bsXPLG93cKnv87D6uMUSbknPZGZKFVVkBw=;
-	b=UtrehJeVzvLaluxV6xHdJMESksF//8HETzn0QhR/VsyXbsDwe8cfdVwlZI2I5EzJmO
-	3esMBKDCYeFZdp8HkfM2z/rpJeub1V21pave9gf7CdcuGt6o7VpiHuCrTeQ6cg2rQ9gX
-	O5LonPIng2OFHC50pNiinR4ENTgh8wg0z4jcQZ1AL8pr4yB1o8dzrVy9CAawgqquLVgg
-	1gpp91nZCmbJhS2g7iBXg+uQ778NllPW7K2lmndn9cneHhiMJ5QfL3C0qSBcG0ozPR8L
-	k3ei37IlaNH+qKutih5WyNMkilEprHwE9jSEMWaltt7nRQBWa02bZwJ13YhijbiF1Wxb
-	hjwA==
+	bh=AZXmCYH8g/8W/bYF42iaNPNasjrg78CUU3QVjqmzrIc=;
+	b=fF6mNzrKW7ulyVLRaD2vFpztNbXGuuzU4aiGPUcih8Hl87GX6H/H2+TRXwWF4595fw
+	OgJuwAuxLKyuCIA43LfB2uKMTUNIHVmPxlBgpYtnCJQrzYbP1SUxqRvU+Kn4aOXVT+/+
+	dnD1i0KOj8xvloRKyKOTPY72MHneA8lS2cm0oo9wDzdBrcYxLlQ0v8t2mJGMmy4NaFsR
+	kNxp4lSagRcgzSm5qZe01Pu9yltDubjWQetKTuDjDXYH6kxV9u1Ta6cHSRJQjTnZrKzA
+	q7EwQQT8RhUuNWVHTsvnlxF45t0j69LF82nMm9z4Xf7AslACFIwd895SYuyJ4NbDtxiX
+	N3kA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=30+rwIux9bsXPLG93cKnv87D6uMUSbknPZGZKFVVkBw=;
-	b=hQ7nMyaXmk7sKUz6QDxDy6DwzrQUtGmG5pU9PLQcv1haLTLgBi8pRRLgwxc6L5AmSK
-	QOgH/Rf5ZHX7/s52ULP79rFoX1rR2EDG7jw2EEQ5z7ERoP6zpxq9gqBIYZLxlVR50ztW
-	NnF8SQds9HTZaB4Mb6bp88H/MD1ClWgIdg/TFZ20Zt70UnLJCbfgTE/EXT664iSLLBP9
-	Pa1XGh0nuCfh7dnvFSPP/8nrkozhxuuxrusucF1iUMQ4S5+E8vel9YLXvNPCe8QOKorH
-	Uq8WviGqt8jJcuTftGZMyDFDBYwf1VnwrGpxHJb/JAlzefTJPkw8YvRePqdolJGcH1ne
-	GaSg==
-X-Gm-Message-State: AN3rC/6cU2XeOtzzayStetFRQLYL+HCUQQ+yzzDqjyKipYqUFeJzmqOg
-	CpKmuTAKi6tmgw==
-X-Received: by 10.99.157.6 with SMTP id i6mr4370175pgd.87.1492116111009;
-	Thu, 13 Apr 2017 13:41:51 -0700 (PDT)
+	bh=AZXmCYH8g/8W/bYF42iaNPNasjrg78CUU3QVjqmzrIc=;
+	b=YLhQjBlc30QLvevAhuMiSJ8yZDqP/NepssFmEqYekP8aG1pNKgr6UbjAG250hAAVpD
+	KK+ban5milAXV0CGJ++/m5I4BN8ptWQJWoTl/8a/lUWkTj5y1iexRw6mtoL5EedKZX+b
+	8ZdfYonCcsBWUfTKDbIu3ZyM/wAostRNTvjoy7aZhBF24OcZEUdlsppMqPubW4t46SIJ
+	D/tP4dlfmsScjZwvO5eWsN06Th3A9xzC9cHzIPa0KURJ2XAXnlpNoAKzN7QSLla6Gdh6
+	7RIXdSnaxq0L/1i320+Vjk1tr/1H8viDovtDCMeF2gHIhimDWN3Xu5VnS+C1/Cyku8HI
+	2M2Q==
+X-Gm-Message-State: AN3rC/5O8FbA/wnUKkCaY6tKUbncHeG3eJmXW7qw9aJlxxWWgO/j37er
+	FWwyrwvjHgp4LA==
+X-Received: by 10.84.135.3 with SMTP id 3mr5304761pli.65.1492116113094;
+	Thu, 13 Apr 2017 13:41:53 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.49
+	u29sm44033332pfa.123.2017.04.13.13.41.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:49 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:51 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:59 -0700
-Message-Id: <20170413204106.30679-22-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:41:00 -0700
+Message-Id: <20170413204106.30679-23-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 22/29] cdparanoia: Fix autoconf do it builds on new arches like aarch64
+Subject: [meta-oe][ 23/29] pngcheck: Fix cross build and format string errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,124 +55,202 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:49 -0000
-
-Also build out of tree builds while here
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:51 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../cdparanoia/cdparanoia_10.2.bb                  |  6 +++-
- .../files/dont-use-internal-configs.patch          | 30 ++++++++++++++++
- .../cdparanoia/files/out-of-tree-build.patch       | 42 ++++++++++++++++++++++
- 3 files changed, 77 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
- create mode 100644 meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
+ ...-make-Respect-variables-from-environement.patch | 60 ++++++++++++++++++++++
+ ...T-windowsize-Fix-format-string-errors-in-.patch | 36 +++++++++++++
+ .../pngcheck/10-pngsplit-format-strings.patch      | 40 +++++++++++++++
+ meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb | 12 +++--
+ 4 files changed, 145 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
+ create mode 100644 meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
+ create mode 100644 meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
-index ba368a27f..e846e3a97 100644
---- a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
-@@ -11,6 +11,8 @@ SRC_URI = "http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-${PV}.sr
-            file://0001-Use-DESTDIR-in-install-Makefile-rule.patch \
-            file://0002-interface-remove-C-reserved-keyword.patch \
-            file://0003-Fix-missing-shared-object-LDFLAGS.patch \
-+           file://dont-use-internal-configs.patch \
-+           file://out-of-tree-build.patch \
- "
- SRC_URI[md5sum] = "b304bbe8ab63373924a744eac9ebc652"
- SRC_URI[sha256sum] = "005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55fe64df"
-@@ -24,4 +26,6 @@ S = "${WORKDIR}/cdparanoia-III-${PV}"
- # between the compilation of those two targets)
- PARALLEL_MAKE = ""
- 
--inherit autotools-brokensep
-+EXTRA_OECONF = "CC='${CC}' CFLAGS='${CFLAGS}'"
+diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch b/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
+new file mode 100644
+index 000000000..2d0ea0252
+--- /dev/null
++++ b/meta-oe/recipes-support/pngcheck/pngcheck/0001-make-Respect-variables-from-environement.patch
+@@ -0,0 +1,60 @@
++From 6245f18091cad11520c159248c1cf7a84f12857c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 5 Apr 2017 13:15:43 -0700
++Subject: [PATCH] make: Respect variables from environement
 +
-+inherit autotools
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
-new file mode 100644
-index 000000000..9b268b7ed
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/dont-use-internal-configs.patch
-@@ -0,0 +1,30 @@
-+Index: cdparanoia-III-10.2/configure.in
-+===================================================================
-+--- cdparanoia-III-10.2.orig/configure.in
-++++ cdparanoia-III-10.2/configure.in
-+@@ -1,13 +1,8 @@
-+ AC_INIT(interface/interface.c)
++link with shared zlib
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Makefile.unx | 18 ++++++++----------
++ 1 file changed, 8 insertions(+), 10 deletions(-)
++
++diff --git a/Makefile.unx b/Makefile.unx
++index 772da46..4ae7061 100644
++--- a/Makefile.unx
+++++ b/Makefile.unx
++@@ -24,18 +24,16 @@ ZINC = -I$(ZPATH)
++ ZLIB = $(ZPATH)/libz.a
 + 
-+-cp $srcdir/configure.guess $srcdir/config.guess
-+-cp $srcdir/configure.sub $srcdir/config.sub
++ INCS = $(ZINC)
++-LIBS = $(ZLIB)
+++LIBS = -lz
++ 
++-CC = gcc
++-LD = gcc
++-RM = rm
++-CFLAGS = -O -Wall $(INCS) -DUSE_ZLIB
+++CC ?= gcc
+++LD ?= gcc
+++RM ?= rm
+++CFLAGS += -O -Wall $(INCS) -DUSE_ZLIB
++ # [note that -Wall is a gcc-specific compilation flag ("all warnings on")]
++ O = .o
++ E =
++ 
++-LDFLAGS =
 +-
-+ AC_CANONICAL_HOST
++ PROG = pngcheck
++ PROG2 = pngsplit
++ PROG3 = png-fix-IDAT-windowsize
++@@ -57,13 +55,13 @@ EXES = $(PROG)$(E) $(PROG2)$(E) $(PROG3)$(E)
++ all:  $(EXES)
 + 
-+-if test -z "$CC"; then
-+-	AC_PROG_CC	
-+-fi
-++AC_PROG_CC
-+ AC_PROG_RANLIB
-+ AC_CHECK_PROG(AR,ar,ar)
-+ AC_CHECK_PROG(INSTALL,install,install)
-+@@ -44,8 +39,8 @@ case 4 in
-+ 	$ac_cv_sizeof_long) SIZE32="long";;
-+ esac
++ $(PROG)$(E): $(PROG).c
++-	$(CC) $(CFLAGS) -o $@ $(PROG).c $(LIBS)
+++	$(CC) $(CFLAGS) -o $@ $(PROG).c $(LDFLAGS) $(LIBS)
 + 
-+-AC_CHECK_TYPE(int16_t,SIZE16="int16_t",,)
-+-AC_CHECK_TYPE(int32_t,SIZE32="size32_t",,)
-++AC_CHECK_TYPES([int16_t], [SIZE16="int16_t"], [], [[#include <stdint.h>]])
-++AC_CHECK_TYPES([int32_t], [SIZE32="int32_t"], [], [[#include <stdint.h>]])
++ $(PROG2)$(E): gpl/$(PROG2).c
++-	$(CC) $(CFLAGS) -o $@ gpl/$(PROG2).c $(LIBS)
+++	$(CC) $(CFLAGS) -o $@ gpl/$(PROG2).c $(LDFLAGS) $(LIBS)
 + 
-+ if test -z "$SIZE16"; then
-+ 	AC_MSG_ERROR(No 16 bit type found on this platform!)
-diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
++ $(PROG3)$(E): gpl/$(PROG3).c
++-	$(CC) $(CFLAGS) -o $@ gpl/$(PROG3).c $(LIBS)
+++	$(CC) $(CFLAGS) -o $@ gpl/$(PROG3).c $(LDFLAGS) $(LIBS)
++ 
++ 
++ # maintenance ---------------------------------------------------------------
++-- 
++2.12.2
++
+diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch b/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
 new file mode 100644
-index 000000000..06ee82099
+index 000000000..6d4465fbe
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/out-of-tree-build.patch
-@@ -0,0 +1,42 @@
-+Index: cdparanoia-III-10.2/Makefile.in
-+===================================================================
-+--- cdparanoia-III-10.2.orig/Makefile.in
-++++ cdparanoia-III-10.2/Makefile.in
-+@@ -6,6 +6,8 @@
-+ VERSION=10.2
-+ VPATH=@srcdir@
-+ srcdir=@srcdir@
-++top_srcdir=@top_srcdir@
-++top_builddir=@top_builddir@
++++ b/meta-oe/recipes-support/pngcheck/pngcheck/0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch
+@@ -0,0 +1,36 @@
++From d4d8257953bd1e7be167aed24c0578362cc5f675 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 5 Apr 2017 13:12:30 -0700
++Subject: [PATCH 1/2] png-fix-IDAT-windowsize: Fix format string errors in
++ fprintf
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ gpl/png-fix-IDAT-windowsize.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/gpl/png-fix-IDAT-windowsize.c b/gpl/png-fix-IDAT-windowsize.c
++index 6d4ef9c..d212017 100644
++--- a/gpl/png-fix-IDAT-windowsize.c
+++++ b/gpl/png-fix-IDAT-windowsize.c
++@@ -127,7 +127,7 @@ int main(int argc, char *argv[])
++             fprintf(stderr, "  Compiled with zlib %s; using zlib %s.\n",
++               ZLIB_VERSION, zlib_version);
++             fprintf(stderr, "\n");
++-            fprintf(stderr, png_fix_IDAT_windowsize_usage);
+++            fprintf(stderr, "%s", png_fix_IDAT_windowsize_usage);
++             fflush(stderr);
++             return 1;
++         }
++@@ -143,7 +143,7 @@ int main(int argc, char *argv[])
++     fflush(stdout);
 + 
-+ @SET_MAKE@
-+ FLAGS=@TYPESIZES@ @CFLAGS@
-+@@ -64,19 +66,19 @@ slib:
++     if ( argn == argc ) {
++-        fprintf(stderr, png_fix_IDAT_windowsize_usage);
+++        fprintf(stderr, "%s", png_fix_IDAT_windowsize_usage);
++         fflush(stderr);
++         return 5;
++     } else {
++-- 
++2.12.2
++
+diff --git a/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch b/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
+new file mode 100644
+index 000000000..f2c86689e
+--- /dev/null
++++ b/meta-oe/recipes-support/pngcheck/pngcheck/10-pngsplit-format-strings.patch
+@@ -0,0 +1,40 @@
++From: Jari Aalto <jari.aalto@cante.net>
++Subject: Correct fomat strings fro hardened build flags
++
++---
++ gpl/pngsplit.c |   10 +++++-----
++ 1 file changed, 5 insertions(+), 5 deletions(-)
++
++--- a/gpl/pngsplit.c
+++++ b/gpl/pngsplit.c
++@@ -141,8 +141,8 @@
++                   0 == strncmp( argv[argn], "-quiet", 2 ) )
++             verbose = 0;
++         else {
++-            fprintf(stderr, pngsplit_hdr);
++-            fprintf(stderr, pngsplit_usage);
+++            fprintf(stderr, "%s", pngsplit_hdr);
+++            fprintf(stderr, "%s", pngsplit_usage);
++             fflush(stderr);
++             return 1;
++         }
++@@ -150,8 +150,8 @@
++     }
 + 
-+ install:
-+ 	$(INSTALL) -d -m 0755 $(DESTDIR)$(BINDIR)
-+-	$(INSTALL) -m 755 $(srcdir)/cdparanoia $(DESTDIR)$(BINDIR)
-++	$(INSTALL) -m 755 $(top_builddir)/cdparanoia $(DESTDIR)$(BINDIR)
-+ 	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)
-+ 	$(INSTALL) -d -m 0755 $(DESTDIR)$(MANDIR)/man1
-+-	$(INSTALL) -m 0644 $(srcdir)/cdparanoia.1 $(DESTDIR)$(MANDIR)/man1
-++	$(INSTALL) -m 0644 $(top_srcdir)/cdparanoia.1 $(DESTDIR)$(MANDIR)/man1
-+ 	$(INSTALL) -d -m 0755 $(DESTDIR)$(INCLUDEDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/paranoia/cdda_paranoia.h $(DESTDIR)$(INCLUDEDIR)
-++	$(INSTALL) -m 0644 $(top_srcdir)/paranoia/cdda_paranoia.h $(DESTDIR)$(INCLUDEDIR)
-+ 	$(INSTALL) -d -m 0755 $(DESTDIR)$(LIBDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/paranoia/libcdda_paranoia.a $(DESTDIR)$(LIBDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/interface/cdda_interface.h $(DESTDIR)$(INCLUDEDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/interface/libcdda_interface.a $(DESTDIR)$(LIBDIR)
-+-	$(INSTALL) -m 0644 $(srcdir)/utils.h $(DESTDIR)$(INCLUDEDIR)
-++	$(INSTALL) -m 0644 $(top_builddir)/paranoia/libcdda_paranoia.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
-++	$(INSTALL) -m 0644 $(top_builddir)/paranoia/libcdda_paranoia.a $(DESTDIR)$(LIBDIR)
-++	$(INSTALL) -m 0644 $(top_srcdir)/interface/cdda_interface.h $(DESTDIR)$(INCLUDEDIR)
-++	$(INSTALL) -m 0644 $(top_builddir)/interface/libcdda_interface.so.0.$(VERSION) $(DESTDIR)$(LIBDIR)
-++	$(INSTALL) -m 0644 $(top_builddir)/interface/libcdda_interface.a $(DESTDIR)$(LIBDIR)
-++	$(INSTALL) -m 0644 $(top_srcdir)/utils.h $(DESTDIR)$(INCLUDEDIR)
-+ 	ln -fs libcdda_interface.so.0.$(VERSION) \
-+ 		$(DESTDIR)$(LIBDIR)/libcdda_interface.so.0
-+ 	ln -fs libcdda_interface.so.0.$(VERSION) \
++     if ( argn == argc ) {
++-        fprintf(stderr, pngsplit_hdr);
++-        fprintf(stderr, pngsplit_usage);
+++        fprintf(stderr, "%s", pngsplit_hdr);
+++        fprintf(stderr, "%s", pngsplit_usage);
++         fflush(stderr);
++         return 5;
++     } else {
++@@ -162,7 +162,7 @@
++ 
++     /*=============================  MAIN LOOP  =============================*/
++ 
++-    fprintf(stdout, pngsplit_hdr);
+++    fprintf(stdout, "%s", pngsplit_hdr);
++     fflush(stdout);
++ 
++     while (argn <= argc) {
+diff --git a/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb b/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb
+index 6d0dfff93..9f617ecda 100644
+--- a/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb
++++ b/meta-oe/recipes-support/pngcheck/pngcheck_2.3.0.bb
+@@ -4,15 +4,21 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://gpl/COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ DEPENDS = "zlib libpng"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/png-mng/${BPN}/${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/png-mng/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
++           file://10-pngsplit-format-strings.patch \
++           file://0001-png-fix-IDAT-windowsize-Fix-format-string-errors-in-.patch \
++           file://0001-make-Respect-variables-from-environement.patch \
++           "
+ 
+ SRC_URI[md5sum] = "980bd6d9a3830fdce746d7fe3c9166ee"
+ SRC_URI[sha256sum] = "77f0a039ac64df55fbd06af6f872fdbad4f639d009bbb5cd5cbe4db25690f35f"
+ 
+-EXTRA_OEMAKE = "-e MAKEFLAGS="
++CFLAGS += "-DUSE_ZLIB"
++
++EXTRA_OEMAKE = "-f ${S}/Makefile.unx"
+ 
+ do_compile() {
+-    oe_runmake -f Makefile.unx INCS=-I${STAGING_DIR_HOST}${incdir} LIBS='${STAGING_DIR_HOST}${libdir}/libz.a ${LDFLAGS}'
++    oe_runmake
+ }
+ 
+ do_install() {
 -- 
 2.12.2
 
