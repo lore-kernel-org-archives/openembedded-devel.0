@@ -1,29 +1,27 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 58CE377D28
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DF07277D0A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 01:47:28 +0000 (UTC)
+	Thu, 13 Apr 2017 02:31:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3D1lTX7013394
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3D2VdjW026176
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Apr 2017 18:47:29 -0700
-Received: from [128.224.162.185] (128.224.162.185) by ALA-HCA.corp.ad.wrs.com
+	Wed, 12 Apr 2017 19:31:39 -0700 (PDT)
+Received: from [128.224.162.239] (128.224.162.239) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 12 Apr 2017 18:47:28 -0700
-To: Mark Hatle <mark.hatle@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20170410021815.13689-1-kai.kang@windriver.com>
-	<ec89de92-7b7e-ee75-e398-35bb5d715b42@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <9037463a-4d33-c26e-d2a3-335973e12deb@windriver.com>
-Date: Thu, 13 Apr 2017 09:46:47 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+	Wed, 12 Apr 2017 19:31:38 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+Message-ID: <58EEE309.9000501@windriver.com>
+Date: Thu, 13 Apr 2017 10:31:37 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.6.0
 MIME-Version: 1.0
-In-Reply-To: <ec89de92-7b7e-ee75-e398-35bb5d715b42@windriver.com>
-Subject: Re: [meta-networking][PATCH] postfix: do NOT create directory /var/spool/mail
+In-Reply-To: <1491994320-28617-1-git-send-email-zhixiong.chi@windriver.com>
+Subject: Re: [meta-oe][PATCH] autoconf-archive: Upgrade to 2016.09.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,76 +34,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 01:47:29 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 02:31:40 -0000
 Content-Type: text/plain; charset="UTF-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 2017年04月13日 03:32, Mark Hatle wrote:
-> On 4/9/17 9:18 PM, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> postfix installs directory /var/spool/mail which conflicts with package
->> shadow.
->>
->> | Error: Transaction check error:
->> |  file /var/spool/mail conflicts between attempted installs of
->> |  postfix-3.1.1-r0.ppc64e6500 and shadow-4.2.1-r0.1.ppc64e6500
->>
->> Make postfix not create /var/spool/mail that it does NOT create the
->> directory on Fedora and Ubuntu either.
-> I am not sure this is correct.
->
-> The two packages have (according to DNF/RPM) different permissions, owner or
-> group assigned to that particular directory.
->
-> I think it's reasonable for both of the packages to create the directory,
-> however they must match in perms/owner/group.  I would defer to shadow as the
-> correct source for this information.
+Please suspend to check in this patch.
+Because if we upgrade it, there will be something macros(ax_*.m4) 
+conflictions between autoconf-archive
+and gnome-common. even if we can use the option 
+'--with-autoconf-archive' for gnome-common then set
+it depend on autoconf-archive, unfortunately the gnome-common is from 
+oe-core and autoconf-archive is
+from meta-oe.
+As the same time, the lvm2 depends on autoconf-archive in meta-oe, so we 
+can't only move autoconf-archive
+into oe-core.
 
-Do you mean use to update-alternative to keep them both?
-
->
-> It may be necessary though to change shadow's default to something more
-> reasonable if 'root:root' is not right.
-
-I checked on both Fedora and Ubuntu that /var/spool/mail is set with 
-'root:mail'.  I will update it in recipe shadow.
-And it also set with  'setgid' on Ubuntu, do we need 'setgid' too?
+Any thoughts on that?
 
 Thanks.
 
-
-
---Kai
-
-
+On 2017年04月12日 18:52, Zhixiong Chi wrote:
+> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+> ---
+>   .../recipes-devtools/autoconf-archive/autoconf-archive.inc  |  2 +-
+>   .../autoconf-archive/autoconf-archive_2012.04.07.bb         | 13 -------------
+>   .../autoconf-archive/autoconf-archive_2016.09.16.bb         | 13 +++++++++++++
+>   3 files changed, 14 insertions(+), 14 deletions(-)
+>   delete mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+>   create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
 >
-> --Mark
->
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   meta-networking/recipes-daemons/postfix/postfix.inc | 2 --
->>   1 file changed, 2 deletions(-)
->>
->> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
->> index 5bb2491..4c794ff 100644
->> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
->> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
->> @@ -164,8 +164,6 @@ do_install () {
->>       install -m 770 -d ${D}${localstatedir}/spool/postfix
->>       chown postfix:postfix ${D}${localstatedir}/spool/postfix
->>   
->> -    install -m 2755 -d ${D}${localstatedir}/spool/mail
->> -    chown postfix:nogroup ${D}${localstatedir}/spool/mail
->>       install -m 0755 -d ${D}${localstatedir}/lib/postfix
->>       chown postfix:nogroup ${D}${localstatedir}/lib/postfix
->>       install -m 0755 -d ${D}${localstatedir}/spool/postfix
->>
->
-
+> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> index 9399363..779115a 100644
+> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+> @@ -10,6 +10,6 @@ RDEPENDS_${PN} = "m4 gnu-config"
+>   RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
+>   RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+>   
+> -SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.bz2"
+> +SRC_URI = "${GNU_MIRROR}/${BPN}/${BPN}-${PV}.tar.xz"
+>   
+>   inherit autotools
+> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+> deleted file mode 100644
+> index 5baaecc..0000000
+> --- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2012.04.07.bb
+> +++ /dev/null
+> @@ -1,13 +0,0 @@
+> -require autoconf-archive.inc
+> -
+> -
+> -PARALLEL_MAKE = ""
+> -
+> -LICENSE = "GPLv2 & GPLv3"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> -
+> -SRC_URI[md5sum] = "e842c5b9fae021007bd70550362e5e80"
+> -SRC_URI[sha256sum] = "040b443bf68efd52fbfcb294b556bfbbbfe432db78445ca25e0cfe2e88f96a14"
+> -
+> -EXTRA_OECONF += "ac_cv_path_M4=m4"
+> -BBCLASSEXTEND = "native nativesdk"
+> diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+> new file mode 100644
+> index 0000000..0a1a771
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+> @@ -0,0 +1,13 @@
+> +require autoconf-archive.inc
+> +
+> +
+> +PARALLEL_MAKE = ""
+> +
+> +LICENSE = "GPLv2 & GPLv3"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +
+> +SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
+> +SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+> +
+> +EXTRA_OECONF += "ac_cv_path_M4=m4"
+> +BBCLASSEXTEND = "native nativesdk"
 
 -- 
-Regards,
-Neil | Kai Kang
+---------------------
+Thanks,
+Zhixiong Chi
+Tel: +86-10-8477-7036
 
 
