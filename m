@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8080A77E78
+Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
+	[209.85.192.175])
+	by mail.openembedded.org (Postfix) with ESMTP id DC40977E78
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 20:41:37 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g2so13465165pge.2
+	Thu, 13 Apr 2017 20:41:39 +0000 (UTC)
+Received: by mail-pf0-f175.google.com with SMTP id s16so33295941pfs.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 13:41:39 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=7FmhtNtTooyDm+assupmhyLvAmZaaZUkWgVe7OnSAKY=;
-	b=j9z3z9fZ+qH7DJaopqH5TBw3RWlzBxJmxyAELHSXJvyMV2TphwFtAVvn19PsKX3lyp
-	iMbxT8SFBdi7R9Gthzl2YUhpbNlPdKe3SEfLcg9WcXbh0Bnm8F/dtTuLqCKS5VtBrN0D
-	dUxKnxTzNXu5uclR4HendaQ8mIfbiprgxgk5xbtxOR3E/saAcvcr0YnBGm+L7B7hkhjH
-	wGu2DKblsglGIvRkqk9eP8i0OiKP801EBFJatrD/D5KzisCvW+/KddjhxveeIuynNFuh
-	fgLNJ94FYgAS+Gdisivsy1jOmynKl9wHuudMvYm8I585YgpHCfYqEwzcnQR8/+llmEVx
-	1u3Q==
+	bh=KaPqMLo0HDMB9SInYFHj+M4MDAHC7qq0pvjkIOSWtVQ=;
+	b=bNAZ3QNftHJ03R5nO/s3GfRFXBMQF6AJXotH6CDU2WubFuRmogbfavyQalwBSB6/SJ
+	4g/0jCHzw9kMNphrOcSHWWLSl4pn5VDet0uhQV+EcjJHgzuoueIVzoMDSlKDevJMfst1
+	ZtX4Lwhq4qfzss+lOpx4pC79u3ju3DDE7kRu+Yojz3296X5GKkX5vXhNvvUqLjeCi81u
+	x60m4QS0cr/N22C7n0SrNUYNWltsAAjV5FPU3QUMWEGsMyr3Sgqdlav9o+JxFLWam2UD
+	+WtU0JFWYadve6wi7OH/RYVsGvZqug59Q7Heiq9KrcQMw6AiiWyZS9E5lChAReXjjYc7
+	qVyg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=7FmhtNtTooyDm+assupmhyLvAmZaaZUkWgVe7OnSAKY=;
-	b=f2U8PXMMe7i3Llch8iVFyWCjZmgCvqp0KA7ZKgcdy5NxlJzlS65usioqLjqQK/2BHV
-	Msi8E4b1qYDGSwaXZO6pTqq3TZA7O/4DEghQ1uf29EDHZl1jRFfu3YXX4ks7ZNFkSB93
-	ibQkQCKvEcHFaMo8KLY430srXsqoAEqXBR8HTY2lbNm0Up9DVX0UN132tgei99tnhf/H
-	rzJS7MaLtoBv+PdI6gC7BLopxBRKN2x6728cZouAJmxdOcz9BHPTzynS8yhk6EzUg1S5
-	5/D9aTUA2I/VW7ejU6ebPWw6bo22HXnbWF9fxqULDXvWBncbcNpf+qWqZ3A5XA8Kpo5z
-	JSsQ==
-X-Gm-Message-State: AN3rC/7ssRvOwWGSQej3kfMdgmx8w90LazuGY8mHRXNyxr+u5SR5gOJX
-	b4Klr1GTXWrKIQ==
-X-Received: by 10.84.193.129 with SMTP id f1mr5408076pld.97.1492116099007;
-	Thu, 13 Apr 2017 13:41:39 -0700 (PDT)
+	bh=KaPqMLo0HDMB9SInYFHj+M4MDAHC7qq0pvjkIOSWtVQ=;
+	b=jjd3S9t50abyCasB02+UgLI4braRhf34gSFVy+lY4/2uY70sqUKmukLFAAYixCWZoB
+	uWxKUJgvsdl9BaWDS63BV5fRLQxdSg58Gdkl8/DC9pZXakKvjDFKweFMv+8Fo7IYurrq
+	kw+d+mRQfyhT6gbu683Y9VF34x3pMPNZXX2thU57JetcDBEiXtYjPihnKG72jM8naxVF
+	jHlhpW8pXE6HpmqcC1KSk8bYEfnRKl+1vl3sDT747UibRqPSCGni7ibrnGjewUhWG2y6
+	1qZoroP+Q2ne1JDHaMGFHXytQf16K4WjmrHAawL8qs31FBUEJBlxKUdPxG/qcnR8oOeC
+	5bWA==
+X-Gm-Message-State: AN3rC/656kzr8txeM7UvSBQYtP1Gyt4VeAtHOM7tZ1pHUEWpcH9ZZZkr
+	F3YzZyzrvehvGhqn
+X-Received: by 10.84.160.226 with SMTP id v31mr5387006plg.122.1492116100330;
+	Thu, 13 Apr 2017 13:41:40 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	u29sm44033332pfa.123.2017.04.13.13.41.37
+	u29sm44033332pfa.123.2017.04.13.13.41.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 13:41:38 -0700 (PDT)
+	Thu, 13 Apr 2017 13:41:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Apr 2017 13:40:51 -0700
-Message-Id: <20170413204106.30679-14-raj.khem@gmail.com>
+Date: Thu, 13 Apr 2017 13:40:52 -0700
+Message-Id: <20170413204106.30679-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170413204106.30679-1-raj.khem@gmail.com>
 References: <20170413204106.30679-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 14/29] lcdproc: Upgrade to 0.5.8
+Subject: [meta-gnome][ 15/29] evince: Upgrade to 3.24.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,175 +56,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 20:41:37 -0000
+X-List-Received-Date: Thu, 13 Apr 2017 20:41:40 -0000
 
-Use github to fetch from
-Unify inc file back into main recipe
-README is now called README.md so adjust the lic checksum
+Fix build with security flags
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-include-asm-ioctl.h-explicitly.patch      | 43 ++++++++++++++++++++++
- meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb  | 23 ------------
- .../lcdproc/{lcdproc5.inc => lcdproc_git.bb}       | 32 ++++++++++++----
- 3 files changed, 68 insertions(+), 30 deletions(-)
- create mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
- delete mode 100644 meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
- rename meta-oe/recipes-extended/lcdproc/{lcdproc5.inc => lcdproc_git.bb} (70%)
+ ...1-Add-format-attribute-to-_synctex_malloc.patch | 27 +++++++++++++++
+ .../evince/evince/0002-fix-gcc6-errors.patch       | 39 ----------------------
+ .../evince/{evince_3.18.2.bb => evince_3.24.0.bb}  | 29 +++++++++++-----
+ 3 files changed, 48 insertions(+), 47 deletions(-)
+ create mode 100644 meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
+ delete mode 100644 meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
+ rename meta-gnome/recipes-gnome/evince/{evince_3.18.2.bb => evince_3.24.0.bb} (60%)
 
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch b/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
 new file mode 100644
-index 000000000..abdedad5d
+index 000000000..de739c5b3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/lcdproc/lcdproc/0001-include-asm-ioctl.h-explicitly.patch
-@@ -0,0 +1,43 @@
-+From b5ca64c7398d516e9845d849e8306df7ac024bc4 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gnome/evince/evince/0001-Add-format-attribute-to-_synctex_malloc.patch
+@@ -0,0 +1,27 @@
++From 3776fd0b42e473fe51d3678bf26cdaa37e1d8e0d Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 11 Apr 2017 13:59:34 -0700
-+Subject: [PATCH] include asm/ioctl.h explicitly
++Date: Sat, 8 Apr 2017 13:36:12 -0700
++Subject: [PATCH] Add format attribute to _synctex_malloc
 +
-+Needed for _IOC* defines
-+
-+helps compiling with musl where this file is
-+not included indirectly
++Helps in avoiding compile errors about formating with clang
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ server/drivers/hd44780-pifacecad.c | 1 +
-+ server/drivers/hd44780-spi.c       | 1 +
-+ 2 files changed, 2 insertions(+)
++ cut-n-paste/synctex/synctex_parser_utils.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
-+diff --git a/server/drivers/hd44780-pifacecad.c b/server/drivers/hd44780-pifacecad.c
-+index 43db19c..e2798ad 100644
-+--- a/server/drivers/hd44780-pifacecad.c
-++++ b/server/drivers/hd44780-pifacecad.c
-+@@ -54,6 +54,7 @@
-+ #include <unistd.h>
-+ #include <fcntl.h>
-+ #include <sys/ioctl.h>
-++#include <asm/ioctl.h>
-+ #include <stdint.h>
-+ #include <linux/spi/spidev.h>
++diff --git a/cut-n-paste/synctex/synctex_parser_utils.c b/cut-n-paste/synctex/synctex_parser_utils.c
++index f8a9f6f..9459b2d 100644
++--- a/cut-n-paste/synctex/synctex_parser_utils.c
+++++ b/cut-n-paste/synctex/synctex_parser_utils.c
++@@ -78,6 +78,7 @@ void *_synctex_malloc(size_t size) {
++ 	return (void *)ptr;
++ }
 + 
-+diff --git a/server/drivers/hd44780-spi.c b/server/drivers/hd44780-spi.c
-+index 5f94333..8a4015b 100644
-+--- a/server/drivers/hd44780-spi.c
-++++ b/server/drivers/hd44780-spi.c
-+@@ -29,6 +29,7 @@
-+ #include <unistd.h>
-+ #include <fcntl.h>
-+ #include <sys/ioctl.h>
-++#include <asm/ioctl.h>
-+ #include <stdint.h>
-+ #include <linux/spi/spidev.h>
-+ 
+++__attribute__((__format__ (__printf__, 1, 0)))
++ int _synctex_error(const char * reason,...) {
++ 	va_list arg;
++ 	int result;
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb b/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
+diff --git a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch b/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
 deleted file mode 100644
-index f57e9dfc6..000000000
---- a/meta-oe/recipes-extended/lcdproc/lcdproc_0.5.6.bb
+index b8e30f7d9..000000000
+--- a/meta-gnome/recipes-gnome/evince/evince/0002-fix-gcc6-errors.patch
 +++ /dev/null
-@@ -1,23 +0,0 @@
--require lcdproc5.inc
--
--SRC_URI[md5sum] = "df4f5c2c7285eaf6979b9c7768b4877f"
--SRC_URI[sha256sum] = "bd2f43c30ff43b30f43110abe6b4a5bc8e0267cb9f57fa97cc5e5ef9488b984a"
--
--PACKAGECONFIG ?= ""
--PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
--PACKAGECONFIG[hid] = "--enable-libhid,--disable-libhid,libhid"
--
--LCD_DRIVERS_append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
--
--do_install_append () {
--    # binaries
--    install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
--
--    # configuration files
--    install -D -m 0644 ${S}/clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
--}
--
--PACKAGES =+ "lcdvc"
--CONFFILES_lcdvc = "${sysconfdir}/lcdvc.conf"
--FILES_lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
--
-diff --git a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc b/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
-similarity index 70%
-rename from meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-rename to meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
-index 680f558fa..96bc826fd 100644
---- a/meta-oe/recipes-extended/lcdproc/lcdproc5.inc
-+++ b/meta-oe/recipes-extended/lcdproc/lcdproc_git.bb
-@@ -7,20 +7,32 @@ LICENSE = "GPLv2+"
- DEPENDS = "ncurses lirc"
+@@ -1,39 +0,0 @@
+---- evince-3.18.2/backend/comics/comics-document.c.orig	2016-06-22 20:08:01.789805750 +0000
+-+++ evince-3.18.2/backend/comics/comics-document.c	2016-06-22 20:07:00.817804688 +0000
+-@@ -241,6 +241,8 @@
+- /* This function shows how to use the choosen command for decompressing a
+-  * comic book file. It modifies fields of the ComicsDocument struct with 
+-  * this information */
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+- static gboolean 
+- comics_generate_command_lines (ComicsDocument *comics_document, 
+- 			       GError         **error)
+-@@ -296,6 +298,7 @@
+- 	}
+- 
+- }
+-+#pragma GCC diagnostic pop
+- 
+- /* This function chooses an external command for decompressing a comic 
+-  * book based on its mime tipe. */
+---- evince-3.18.2/libdocument/ev-document-misc.c.orig	2016-06-22 20:01:49.205799262 +0000
+-+++ evince-3.18.2/libdocument/ev-document-misc.c	2016-06-22 20:02:27.233799924 +0000
+-@@ -519,7 +519,8 @@
+- 
+- 	return (dp / di);
+- }
+--
+-+#pragma GCC diagnostic push
+-+#pragma GCC diagnostic ignored "-Wformat-y2k"
+- /* Returns a locale specific date and time representation */
+- gchar *
+- ev_document_misc_format_date (GTime utime)
+-@@ -542,6 +543,7 @@
+- 
+- 	return g_locale_to_utf8 (s, -1, NULL, NULL, NULL);
+- }
+-+#pragma GCC diagnostic pop
+- 
+- void
+- ev_document_misc_get_pointer_position (GtkWidget *widget,
+diff --git a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb b/meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
+similarity index 60%
+rename from meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
+rename to meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
+index 4e3e0f05c..2b75244fe 100644
+--- a/meta-gnome/recipes-gnome/evince/evince_3.18.2.bb
++++ b/meta-gnome/recipes-gnome/evince/evince_3.24.0.bb
+@@ -5,16 +5,16 @@ SECTION = "x11/office"
+ DEPENDS = "gtk+3 libsecret gnome-desktop3 poppler gstreamer1.0-plugins-base orc adwaita-icon-theme intltool-native gnome-common-native"
+ PR = "r5"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=18810669f13b87348459e611d31ab760 \
--                    file://README;beginline=60;md5=637e042cdd3671ba00e78b58ede45d3b"
-+                    file://README.md;beginline=107;md5=5c927ce1742d6d5cddc45b7ad6230f75"
+-inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check
++inherit gnome pkgconfig gtk-icon-cache gsettings gobject-introspection distro_features_check systemd
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/lcdproc/${BP}.tar.gz"
-+BASEPV = "0.5.8"
-+PV = "${BASEPV}+git${SRCPV}"
-+SRCREV = "f5156e2e41bb418f14761afea22eee8efb49fb85"
-+SRC_URI = "git://github.com/lcdproc/lcdproc;branch=lcdproc-${BASEPV} \
-+           file://0001-include-asm-ioctl.h-explicitly.patch \
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI[archive.md5sum] = "c39af6b8b1c44d4393ef8ac9dab99c0b"
+-SRC_URI[archive.sha256sum] = "42ad6c7354d881a9ecab136ea84ff867acb942605bcfac48b6c12e1c2d8ecb17"
+-
+-SRC_URI += "file://0001-help-remove-YELP-macro.patch \
+-            file://0002-fix-gcc6-errors.patch \
+-"
++SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
++           file://0001-help-remove-YELP-macro.patch \
++           file://0001-Add-format-attribute-to-_synctex_malloc.patch \
 +           "
++SRC_URI[archive.md5sum] = "3fb65ff46de191dc49c481f1fc66201c"
++SRC_URI[archive.sha256sum] = "043895af7bbd6f1b57f9ab8778e78cf9c0af5dfcc347eaa94a17bf864c04dc8f"
  
--inherit autotools update-rc.d
-+S = "${WORKDIR}/git"
+ EXTRA_OECONF = " --enable-thumbnailer \
+ "
+@@ -25,22 +25,35 @@ do_compile_prepend() {
  
--LCD_DRIVERS ?= "all"
-+inherit autotools pkgconfig update-rc.d
-+
-+LCD_DRIVERS ?= "all,!irman,!svga"
- LCD_DEFAULT_DRIVER ?= "curses"
  
- PACKAGECONFIG ??= "usb"
- PACKAGECONFIG[usb] = "--enable-libusb,--disable-libusb,virtual/libusb0"
- PACKAGECONFIG[ftdi] = "--enable-libftdi,--disable-libftdi,libftdi"
-+PACKAGECONFIG[g15] = ",,libg15 g15daemon libg15render,"
-+PACKAGECONFIG[hid] = "--enable-libhid,--disable-libhid,libhid"
-+PACKAGECONFIG[png] = "--enable-libpng,--disable-libpng,libpng"
-+
-+LCD_DRIVERS_append = "${@bb.utils.contains('PACKAGECONFIG', 'g15', '', ',!g15', d)}"
- 
--EXTRA_OECONF = "--enable-drivers=${LCD_DRIVERS}"
-+EXTRA_OECONF = "--enable-drivers='${LCD_DRIVERS}'"
- 
- do_install () {
-     # binaries
-@@ -46,9 +58,14 @@ do_install () {
-     for i in server/drivers/*.so; do
-         install -m 0644 $i ${D}${libdir}/lcdproc/
-     done
-+    # binaries
-+    install -D -m 0755 clients/lcdvc/lcdvc ${D}${sbindir}/lcdvc
-+
-+    # configuration files
-+    install -D -m 0644 ${S}/clients/lcdvc/lcdvc.conf ${D}${sysconfdir}/lcdvc.conf
+ do_install_append() {
+-    install -d install -d ${D}${datadir}/pixmaps
++    install -d ${D}${datadir}/pixmaps
+     install -m 0755 ${S}/data/icons/48x48/apps/evince.png ${D}${datadir}/pixmaps/
++    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}
++    then
++        install -d ${D}${systemd_unitdir}/system
++        mv ${D}${libdir}/systemd/user/evince.service ${D}${systemd_unitdir}/system/evince.service
++    else
++        rm -rf ${D}${libdir}/systemd/user/evince.service
++    fi
++    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd/user
++    rmdir --ignore-fail-on-non-empty ${D}${libdir}/systemd
  }
  
--PACKAGES =+ "lcdd"
-+PACKAGES =+ "lcdd lcdvc"
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[nautilus] = "--enable-nautilus,--disable-nautilus,nautilus"
+ PACKAGECONFIG[browser-plugin] = "--enable-browser-plugin,--disable-browser-plugin,"
  
- RRECOMMENDS_${PN} = "lcdd"
++SYSTEMD_SERVICE_${PN} = "evince.service"
++
+ RDEPENDS_${PN} += "glib-2.0-utils"
+ RRECOMMMENDS_${PN} = "adwaita-icon-theme"
  
-@@ -58,6 +75,8 @@ FILES_lcdd = "${sysconfdir}/LCDd.conf \
- 
- CONFFILES_lcdd = "${sysconfdir}/LCDd.conf"
- CONFFILES_${PN} = "${sysconfdir}/lcdproc.conf"
-+CONFFILES_lcdvc = "${sysconfdir}/lcdvc.conf"
-+FILES_lcdvc = "${sysconfdir}/lcdvc.conf ${sbindir}/lcdvc"
- 
- # Driver packages
- 
-@@ -78,4 +97,3 @@ python populate_packages_prepend() {
- }
- 
- PACKAGES_DYNAMIC += "^lcdd-driver-.*"
--
+ PACKAGES =+ "${PN}-nautilus-extension"
+ PACKAGES =+ "${PN}-browser-plugin"
++
+ FILES_${PN} += "${datadir}/dbus-1 \
+                 ${datadir}/appdata \
+                 ${datadir}/thumbnailers \
++                ${systemd_unitdir}/systemd/user/evince.service \
+                "
+ FILES_${PN}-dbg += "${libdir}/*/*/.debug \
+                     ${libdir}/*/*/*/.debug"
 -- 
 2.12.2
 
