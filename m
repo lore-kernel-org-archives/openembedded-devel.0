@@ -1,37 +1,41 @@
-Return-Path: <robert_joslyn@selinc.com>
-Received: from scamp.selinc.com (scamp.selinc.com [74.117.214.142])
-	by mail.openembedded.org (Postfix) with ESMTP id 72C5577D7A
+Return-Path: <prvs=4277b21ae4=michael.davis@essvote.com>
+X-Greylist: delayed 902 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 14 Apr 2017 19:29:16 UTC
+Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D011601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Apr 2017 16:45:20 +0000 (UTC)
-Received: from pps.filterd (scamp.selinc.com [127.0.0.1])
-	by scamp.selinc.com (8.16.0.17/8.16.0.17) with SMTP id v3EGWDet017303
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Apr 2017 09:45:22 -0700
-Received: from edison.ad.selinc.com (edison.ad.selinc.com [10.100.0.15])
-	by scamp.selinc.com with ESMTP id 29pwu1vm9d-1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Apr 2017 09:45:22 -0700
-To: <openembedded-devel@lists.openembedded.org>
+	Fri, 14 Apr 2017 19:29:16 +0000 (UTC)
+X-AuditID: 0a000213-b95ff70000000cd7-ae-58f11f83b007
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
+	BD.FC.03287.38F11F85; Fri, 14 Apr 2017 14:14:14 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Fri, 14 Apr 2017 14:14:11 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-browser][PATCH] chromium: Remove duplicate patch
+Thread-Index: AQHStVNMusM97E7UNEuVfY1BYm3khQ==
+Date: Fri, 14 Apr 2017 19:14:10 +0000
+Message-ID: <20170414191406.25345-1-michael.davis@essvote.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.20.66]
 MIME-Version: 1.0
-X-KeepSent: 950B2909:9FEAD04C-88258101:006C9468;
- type=4; name=$KeepSent
-X-Mailer: Lotus Notes Release 8.5.3FP4 SHF39 May 13, 2013
-Message-ID: <OF950B2909.9FEAD04C-ON88258101.006C9468-88258102.005C094F@selinc.com>
-From: robert_joslyn@selinc.com
-Date: Fri, 14 Apr 2017 09:45:17 -0700
-X-MIMETrack: S/MIME Sign by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
-	SHF39|May 13, 2013) at 04/14/2017 09:45:17 AM,
-	Serialize by Notes Client on Robert Joslyn/SEL(Release 8.5.3FP4
-	SHF39|May 13, 2013) at 04/14/2017 09:45:17 AM,
-	Serialize complete at 04/14/2017 09:45:17 AM,
-	S/MIME Sign failed at 04/14/2017 09:45:17 AM: The cryptographic key was
-	not found,
-	Serialize by Router on Edison/SEL(Release 9.0.1FP3 HF515|April 25,
-	2015) at 04/14/2017 09:45:22 AM,
-	Serialize complete at 04/14/2017 09:45:22 AM
-X-Proofpoint-Virus-Version: vendor=nai engine=5800 definitions=8498
-	signatures=668452
-Subject: virtualenv Problems when Updating mozjs
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOLMWRmVeSWpSXmKPExsWyRiBPQ7dN/mOEwd3LBhYXDy9ldmD0OLdx
+	BWMAYxS3TVJiSVlwZnqevl0Cd0bLovCCTqGK9+cfszUwPuPvYuTkkBAwkTjXsY2li5GLQ0jg
+	BKNEz4lrUM4sRonbN+Yxg1SxCRhJnLu+iRHEFhGIlZi3aSYTiM0sYCDxbvNGVhBbWMBe4tzS
+	FcwQNS4Sx+5dhqrXk/gy/xkLiM0ioCpx7uNlsBpeATuJh19XsoHYjAJiEt9PrYGaKS5x68l8
+	JojrBCSW7DnPDGGLSrx8/I8VwpaTWPfuJFS9nsSNqVPYIGxtiWULX0PNF5Q4OfMJywRG4VlI
+	xs5C0jILScssJC0LGFlWMQrmJmbmGOqlFheX5Zek6iXn525iBAY3FwOT8A7GOVNsDzEKcDAq
+	8fBeOP4hQog1say4MvcQozQHi5I471mO4AghgfTEktTs1NSC1KL4otKc1OJDjEwcnIcYJTi4
+	pESKU/NSUosSS0sy4kExFF8MjCKpBsaUh1+nJnJ3bmbzduHzbHDjeHbAWlXHNYt7o1hy/9bH
+	wht0l0tznGw7KKs4mVHYXDVh4gFnpUCXSxMnZMdNPj5nzv/p/Smxz2fZtC48q2UpeEOUT+jh
+	jS0V50oqVN9qNjEePv/m+oTTs2K9u75qZkfXqt7i3Sy/fKL1+7fzV/F2OqWsPCe8crESS3FG
+	oqEWc1FxIgDgg5l/agIAAA==
+Subject: [meta-browser][PATCH] chromium: Remove duplicate patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,163 +48,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Apr 2017 16:45:21 -0000
-Content-Type: text/plain; charset="US-ASCII"
+X-List-Received-Date: Fri, 14 Apr 2017 19:29:17 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-I'm attempting to write a recipe for mozjs 24.2.0, but I've run into some 
-problems. I'm using the morty branch and building for qemux86-64. The 
-recipe I'm using is just a simplified and lightly modified version of the 
-mozjs 17.0.0 recipe presently in meta-oe:
+unset-madv-free.patch and Do-not-depend-on-Linux-4.5.patch apply the
+same fix.
 
-SUMMARY = "SpiderMonkey is Mozilla's JavaScript engine written in C/C++"
-LICENSE = "MPL-2.0"
-LIC_FILES_CHKSUM = "
-file://../../LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+Signed-off-by: Michael Davis <michael.davis@essvote.com>
+---
+ .../chromium/chromium/chromium/unset-madv-free.patch      | 15 -----------=
+----
+ recipes-browser/chromium/chromium_54.0.2810.2.bb          |  1 -
+ 2 files changed, 16 deletions(-)
+ delete mode 100644 recipes-browser/chromium/chromium/chromium/unset-madv-f=
+ree.patch
 
-DEPENDS = "nspr zlib"
-
-SRC_URI = "http://ftp.mozilla.org/pub/js/${BP}.tar.bz2"
-
-SRC_URI[md5sum] = "5db79c10e049a2dc117a6e6a3bc78a8e"
-SRC_URI[sha256sum] = 
-"e62f3f331ddd90df1e238c09d61a505c516fe9fd8c5c95336611d191d18437d8"
-
-S = "${WORKDIR}/${BP}/js/src"
-
-inherit autotools pkgconfig perlnative pythonnative
-
-# nspr's package-config is ignored so set libs manually
-EXTRA_OECONF = " \
-    --target=${TARGET_SYS} \
-    --host=${BUILD_SYS} \
-    --build=${BUILD_SYS} \
-    --prefix=${prefix} \
-    --libdir=${libdir} \
-    --with-nspr-libs='-lplds4 -lplc4 -lnspr4' \
-    --enable-threadsafe \
-    --disable-static"
-
-PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', 
-'', d)}"
-PACKAGECONFIG[x11] = "--with-x --x-includes=${STAGING_INCDIR} 
---x-libraries=${STAGING_LIBDIR},--without-x,virtual/libx11"
-
-# mozjs requires autoreconf 2.13
-do_configure() {
-    ( cd ${S}
-      gnu-configize --force
-      mv config.guess config.sub build/autoconf )
-    ${S}/configure ${EXTRA_OECONF}
-}
-
-
-I removed the patches and a few other things from the existing mozjs 
-17.0.0 recipe just to simplify this since almost all of them need to be 
-refreshed (the patches do not seem to have an impact on the build issues 
-I'm seeing here). The abridged output from do_configure is:
-
-
-| Using Python from environment variable $PYTHON
-| Creating Python environment
-| Traceback (most recent call last):
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/python/virtualenv/virtualenv.py", 
-line 2563, in <module>
-|     main()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/python/virtualenv/virtualenv.py", 
-line 964, in main
-|     never_download=options.never_download)
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/python/virtualenv/virtualenv.py", 
-line 1065, in create_environment
-|     site_packages=site_packages, clear=clear))
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/python/virtualenv/virtualenv.py", 
-line 1237, in install_python
-|     fix_lib64(lib_dir)
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/python/virtualenv/virtualenv.py", 
-line 1625, in fix_lib64
-|     if [p for p in distutils.sysconfig.get_config_vars().values()
-|   File 
-"/home/robert/Documents/poky/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/sysconfig.py", 
-line 515, in get_config_vars
-|     func()
-|   File 
-"/home/robert/Documents/poky/build/tmp/sysroots/x86_64-linux/usr/lib/python2.7/distutils/sysconfig.py", 
-line 414, in _init_posix
-|     raise DistutilsPlatformError(my_msg)
-| distutils.errors.DistutilsPlatformError: invalid Python installation: 
-unable to open 
-/home/robert/Documents/poky/build/tmp/sysroots/qemux86-64/usr/lib/python2.7/config/Makefile 
-(No such file or directory)
-| Traceback (most recent call last):
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 384, in <module>
-|     manager.ensure()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 103, in ensure
-|     return self.build()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 315, in build
-|     self.create()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 122, in create
-|     raise Exception('Error creating virtualenv.')
-| Exception: Error creating virtualenv.
-
-
-It looks like it is trying to find a version of python in the target 
-sysroot, when I think it should be using the native sysroot. If I add 
-python to DEPENDS, the error changes:
-
-
-| Using Python from environment variable $PYTHON
-| Creating Python environment
-| New python executable in 
-/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/build/_virtualenv/bin/python
-| ERROR: The executable 
-/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/build/_virtualenv/bin/python 
-is not functioning
-| ERROR: It thinks sys.prefix is u'/usr' (should be 
-u'/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/build/_virtualenv')
-| ERROR: virtualenv is not compatible with this system or executable
-| Traceback (most recent call last):
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 384, in <module>
-|     manager.ensure()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 103, in ensure
-|     return self.build()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 315, in build
-|     self.create()
-|   File 
-"/home/robert/Documents/poky/build/tmp/work/core2-64-poky-linux/mozjs/24.2.0-r0/mozjs-24.2.0/js/src/build/virtualenv/populate_virtualenv.py", 
-line 122, in create
-|     raise Exception('Error creating virtualenv.')
-| Exception: Error creating virtualenv.
-
-
-My guess is that it's trying to use the target python when it should be 
-using the native python when setting up the virtualenv. Any thoughts on 
-what's going on here or how to fix this? I'm not very familiar with either 
-mozjs or python, and the mozjs build system seems to be a bit over my 
-head.
-
-Thanks,
-
---
-Robert Joslyn
-Software Engineer, R&D - Automation
-Schweitzer Engineering Laboratories
-509-332-1890 ext. 3214
+diff --git a/recipes-browser/chromium/chromium/chromium/unset-madv-free.pat=
+ch b/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
+deleted file mode 100644
+index 15d4982..0000000
+--- a/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
++++ /dev/null
+@@ -1,15 +0,0 @@
+-diff -Naur chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/P=
+ageAllocator.cpp chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/alloc=
+ator/PageAllocator.cpp
+---- chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/PageAllo=
+cator.cpp	2016-07-15 17:02:49.000000000 -0500
+-+++ chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/allocator/PageAll=
+ocator.cpp	2016-11-18 09:13:01.109731385 -0600
+-@@ -41,6 +41,11 @@
+- #include <errno.h>
+- #include <sys/mman.h>
+-=20
+-+#if OS(LINUX) && defined(MADV_FREE)
+-+// Added in Linux 4.5, but it breaks the sandbox.
+-+#undef MADV_FREE
+-+#endif
+-+
+- #ifndef MADV_FREE
+- #define MADV_FREE MADV_DONTNEED
+- #endif
+diff --git a/recipes-browser/chromium/chromium_54.0.2810.2.bb b/recipes-bro=
+wser/chromium/chromium_54.0.2810.2.bb
+index 2af662c..94ce59b 100644
+--- a/recipes-browser/chromium/chromium_54.0.2810.2.bb
++++ b/recipes-browser/chromium/chromium_54.0.2810.2.bb
+@@ -11,7 +11,6 @@ SRC_URI +=3D "\
+         file://0005-Override-root-filesystem-access-restriction.patch \
+         file://chromium/0011-Replace-readdir_r-with-readdir.patch \
+         file://chromium/remove-Werror.patch \
+-        file://chromium/unset-madv-free.patch \
+         file://chromium/Do-not-depend-on-Linux-4.5.patch \
+         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://c=
+omponent-build.gypi', '', d)} \
+         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file=
+://chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '=
+', d)} \
+--=20
+2.9.3
 
