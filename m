@@ -1,54 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DE5777E5F
+Return-Path: <Liwei.Song@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3016F77E41
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 22:58:29 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id x75so15347237wma.1
+	Fri, 14 Apr 2017 09:28:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3E9SIa9010813
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Apr 2017 15:58:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=Y4kBjZ34MqPoq8/cKbJlsmWjxrXjfFxB2Av70q4JkCE=;
-	b=Go1TxOzjbVEWXYd4tOKyv6MYbuVLHaU4Gbh7oBTFCLE3OKoI9MWCvavuHfPGMWMJWS
-	21VPLd/4lkvLk6Nykt+W9gR2ZG1j/rTDIfFtyMSpue+F7ZJeuUi754kZDEQTFj0B5kw8
-	lJRp7delJX+LLX65N7N/quHVB5GB4pg7fNZfh6tZSrWggiTtawdKJISjrDl+f2lCIJKO
-	609byElx5hx6f+SpqCtcVgzlv3WS8cAlaB8LRsNSvygakWYtYEgDu+dn8xGIXyXbx70R
-	DIfwaZIr/PT1TwuDrmyYmR4sZjrZHAQ4PjMoiiEysyGbagLmZxA4MdUbmT6AwnqtfPYY
-	CZWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=Y4kBjZ34MqPoq8/cKbJlsmWjxrXjfFxB2Av70q4JkCE=;
-	b=CRRBYut/SRJDZY4HlFK7N/FdhRQbHv8EJPs+QwAetp2wwgI2ploSYZ1EFSJ4Tsafd/
-	aYJVjomLqPjX8UsK1MVcjsuTgsg9UkJ3KjXaEMUuWlJrGJR85ArWGnuhTM/Aw8RZALO8
-	HV2OXA2CQCMjJmLqm1C3MLnfC0g/GiwrgDpsQq40A2p021lhOoHSecJ7rZB2ln+ZDz2H
-	4OGXVx3WwWt80QffowMcbrSjAiQhTXKWMOIGYXptaJfDD49JC25e/M9ufh90/Vm8D1sc
-	6+j0WPEf2POMfYup7x+eFhIhS5RoFaSc6ewQ+Vnbkeutwi/SGd1dQ1LJpnpoiFT1fRHq
-	nbwA==
-X-Gm-Message-State: AN3rC/68DOTyJxv3mxYzGWxdOddR1SkhySfYQYLPYY+ELuJ4EawVu2D3
-	RxqDjapUoaZq8UzY
-X-Received: by 10.28.95.67 with SMTP id t64mr15427309wmb.140.1492124310220;
-	Thu, 13 Apr 2017 15:58:30 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E911F1051E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e911:f105:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	32sm155689wrq.25.2017.04.13.15.58.29
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Apr 2017 15:58:29 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Apr 2017 00:58:16 +0200
-Message-Id: <20170413225816.10153-3-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
-In-Reply-To: <20170413225816.10153-1-schnitzeltony@googlemail.com>
-References: <20170413225816.10153-1-schnitzeltony@googlemail.com>
+	Fri, 14 Apr 2017 02:28:18 -0700 (PDT)
+Received: from pek-lpggp3.wrs.com (128.224.153.76) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 14 Apr 2017 02:28:17 -0700
+From: Liwei Song <liwei.song@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 14 Apr 2017 05:28:15 -0400
+Message-ID: <20170414092815.217632-1-liwei.song@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Subject: [PATCH 3/3] devilspie2: update 0.33 -> 0.42
+Subject: [meta-oe][PATCH] mcelog: upgrade to 1.49 to support Denverton SoC
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,42 +31,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 Apr 2017 22:58:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 14 Apr 2017 09:28:17 -0000
+Content-Type: text/plain
 
-Sources have moved
+Update mcelog to 1.49 to support Denverton SoC, and delete the additional
+patches which are already involved in v1.49.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Liwei Song <liwei.song@windriver.com>
 ---
- .../devilspie/{devilspie2_0.33.bb => devilspie2_0.42.bb}            | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-gnome/recipes-gnome/devilspie/{devilspie2_0.33.bb => devilspie2_0.42.bb} (81%)
+ .../mcelog/0001-Add-Kabylake-client-support.patch  | 96 ----------------------
+ .../mcelog/mcelog/mcelog-debash.patch              | 36 --------
+ .../mcelog/{mcelog_1.40.bb => mcelog_1.49.bb}      |  6 +-
+ 3 files changed, 2 insertions(+), 136 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+ delete mode 100644 meta-oe/recipes-support/mcelog/mcelog/mcelog-debash.patch
+ rename meta-oe/recipes-support/mcelog/{mcelog_1.40.bb => mcelog_1.49.bb} (83%)
 
-diff --git a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-similarity index 81%
-rename from meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-rename to meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-index 3c31c1b..ae2ec5a 100644
---- a/meta-gnome/recipes-gnome/devilspie/devilspie2_0.33.bb
-+++ b/meta-gnome/recipes-gnome/devilspie/devilspie2_0.42.bb
-@@ -7,12 +7,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=00aefaa50aad75c21367df66102d542c \
- DEPENDS = "gtk+ glib-2.0 libwnck lua virtual/libx11"
+diff --git a/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch b/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
+deleted file mode 100644
+index f9dfbcab5..000000000
+--- a/meta-oe/recipes-support/mcelog/mcelog/0001-Add-Kabylake-client-support.patch
++++ /dev/null
+@@ -1,96 +0,0 @@
+-From 11bfbb446116c8313728157148a6bb15625031e8 Mon Sep 17 00:00:00 2001
+-From: Tony Luck <tony.luck@intel.com>
+-Date: Tue, 30 Aug 2016 09:37:02 -0700
+-Subject: [PATCH] Add Kabylake client support
+-
+-CPU models 0x8E and 0x9E denote kabylake client processor
+-
+-Upstream-Status: Backport [A little modification on context]
+-https://github.com/andikleen/mcelog/commit/11bfbb446116c8313728157148a6bb15625031e8
+-
+-Signed-off-by: Tony Luck <tony.luck@intel.com>
+-Signed-off-by: Andi Kleen <ak@linux.intel.com>
+-Signed-off-by: Quanyang Wang <quanyang.wang@windriver.com>
+----
+- intel.c  | 5 ++++-
+- intel.h  | 3 ++-
+- mcelog.c | 4 +++-
+- mcelog.h | 1 +
+- 4 files changed, 10 insertions(+), 3 deletions(-)
+-
+-diff --git a/intel.c b/intel.c
+-index f4ef9f6..33a99a8 100644
+---- a/intel.c
+-+++ b/intel.c
+-@@ -35,7 +35,8 @@ void intel_cpu_init(enum cputype cpu)
+- 	    cpu == CPU_IVY_BRIDGE || cpu == CPU_IVY_BRIDGE_EPEX ||
+- 	    cpu == CPU_HASWELL || cpu == CPU_HASWELL_EPEX || cpu == CPU_BROADWELL ||
+- 	    cpu == CPU_BROADWELL_DE || cpu == CPU_BROADWELL_EPEX ||
+--	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON)
+-+	    cpu == CPU_KNIGHTS_LANDING || cpu == CPU_SKYLAKE || cpu == CPU_SKYLAKE_XEON ||
+-+	    cpu == CPU_KABYLAKE)
+- 		memory_error_support = 1;
+- }
+- 
+-@@ -90,6 +91,8 @@ enum cputype select_intel_cputype(int family, int model)
+- 			return CPU_SKYLAKE;
+- 		else if (model == 0x55)
+- 			return CPU_SKYLAKE_XEON;
+-+		else if (model == 0x8E || model == 0x9E)
+-+			return CPU_KABYLAKE;
+- 		if (model > 0x1a) {
+- 			Eprintf("Family 6 Model %u CPU: only decoding architectural errors\n",
+- 				model);
+-diff --git a/intel.h b/intel.h
+-index d22895b..c231925 100644
+---- a/intel.h
+-+++ b/intel.h
+-@@ -26,5 +26,6 @@ extern int memory_error_support;
+- 	case CPU_ATOM:	\
+- 	case CPU_KNIGHTS_LANDING: \
+- 	case CPU_SKYLAKE: \
+--	case CPU_SKYLAKE_XEON
+-+	case CPU_SKYLAKE_XEON: \
+-+	case CPU_KABYLAKE
+- 
+-diff --git a/mcelog.c b/mcelog.c
+-index 1d79fa1..7214a0d 100644
+---- a/mcelog.c
+-+++ b/mcelog.c
+-@@ -238,6 +238,7 @@ static char *cputype_name[] = {
+- 	[CPU_ATOM] = "ATOM",
+- 	[CPU_SKYLAKE] = "Skylake",
+- 	[CPU_SKYLAKE_XEON] = "Skylake server",
+-+	[CPU_KABYLAKE] = "Kabylake",
+- };
+- 
+- static struct config_choice cpu_choices[] = {
+-@@ -287,6 +288,7 @@ static struct config_choice cpu_choices[] = {
+- 	{ "atom", CPU_ATOM },
+- 	{ "skylake", CPU_SKYLAKE },
+- 	{ "skylake_server", CPU_SKYLAKE_XEON },
+-+	{ "kabylake", CPU_KABYLAKE },
+- 	{ NULL }
+- };
+- 
+-@@ -451,7 +453,7 @@ static void dump_mce(struct mce *m, unsigned recordlen)
+- 	    cputype != CPU_HASWELL_EPEX && cputype != CPU_BROADWELL &&
+- 	    cputype != CPU_BROADWELL_DE && cputype != CPU_BROADWELL_EPEX &&
+- 	    cputype != CPU_KNIGHTS_LANDING && cputype != CPU_SKYLAKE &&
+--	    cputype != CPU_SKYLAKE_XEON)
+-+	    cputype != CPU_SKYLAKE_XEON && cputype != CPU_KABYLAKE)
+- 		resolveaddr(m->addr);
+- 	if (!ascii_mode && ismemerr && (m->status & MCI_STATUS_ADDRV)) {
+- 		diskdb_resolve_addr(m->addr);
+-diff --git a/mcelog.h b/mcelog.h
+-index abc8bc9..254b3a0 100644
+---- a/mcelog.h
+-+++ b/mcelog.h
+-@@ -130,6 +130,7 @@ enum cputype {
+- 	CPU_ATOM,
+- 	CPU_SKYLAKE,
+- 	CPU_SKYLAKE_XEON,
+-+	CPU_KABYLAKE,
+- };
+- 
+- enum option_ranges {
+diff --git a/meta-oe/recipes-support/mcelog/mcelog/mcelog-debash.patch b/meta-oe/recipes-support/mcelog/mcelog/mcelog-debash.patch
+deleted file mode 100644
+index bea2f6293..000000000
+--- a/meta-oe/recipes-support/mcelog/mcelog/mcelog-debash.patch
++++ /dev/null
+@@ -1,36 +0,0 @@
+-From 8f57d35747a3b3fabc33466563077373090f869c Mon Sep 17 00:00:00 2001
+-From: Robert Yang <liezhi.yang@windriver.com>
+-Date: Tue, 2 Sep 2014 07:05:15 -0700
+-Subject: [PATCH] cache-error-trigger: remove bashism
+-
+-Use "$(cat $F)" to instead of "$(< $F)" to debash.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+----
+- triggers/cache-error-trigger |    4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/triggers/cache-error-trigger b/triggers/cache-error-trigger
+-index e32bfd6..785526f 100755
+---- a/triggers/cache-error-trigger
+-+++ b/triggers/cache-error-trigger
+-@@ -1,4 +1,4 @@
+--#!/bin/bash
+-+#!/bin/sh
+- # cache error trigger. This shell script is executed by mcelog in daemon mode
+- # when a CPU reports excessive corrected cache errors. This could be a indication
+- # for future uncorrected errors.
+-@@ -28,7 +28,7 @@ for i in $AFFECTED_CPUS ; do
+- 	logger -s -p daemon.crit -t mcelog "Offlining CPU $i due to cache error threshold"
+- 	F=$(printf "/sys/devices/system/cpu/cpu%d/online" $i)
+- 	echo 0 > $F
+--	if [ "$(< $F)" != "0" ] ; then
+-+	if [ "$(cat $F)" != "0" ] ; then
+- 		logger -s -p daemon.warn -t mcelog "Offlining CPU $i failed"
+- 		EXIT=1
+- 	fi
+--- 
+-1.7.9.5
+-
+diff --git a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb b/meta-oe/recipes-support/mcelog/mcelog_1.49.bb
+similarity index 83%
+rename from meta-oe/recipes-support/mcelog/mcelog_1.40.bb
+rename to meta-oe/recipes-support/mcelog/mcelog_1.49.bb
+index 0d359fc4b..84633a76c 100644
+--- a/meta-oe/recipes-support/mcelog/mcelog_1.40.bb
++++ b/meta-oe/recipes-support/mcelog/mcelog_1.49.bb
+@@ -6,15 +6,13 @@ HOMEPAGE = "http://mcelog.org/"
+ SECTION = "System Environment/Base"
  
- SRC_URI = " \
--    http://www.gusnan.se/devilspie2/download/devilspie2_${PV}-src.tar.gz \
-+    http://download.savannah.gnu.org/releases/${BPN}/${BPN}_${PV}-src.tar.gz \
-     file://default.lua \
-     file://devilspie2.desktop \
+ SRC_URI = "git://git.kernel.org/pub/scm/utils/cpu/mce/mcelog.git;protocol=http; \
+-    file://mcelog-debash.patch \
+-    file://0001-Add-Kabylake-client-support.patch \
+     file://run-ptest \
  "
--SRC_URI[md5sum] = "99c88f702e134d2b2f2f8caad4b1ef03"
--SRC_URI[sha256sum] = "01a2ebcece14065c9a2e47decd81341e2a6f63e3bf43ff446103686718748356"
-+SRC_URI[md5sum] = "f205409e921aa2d86481f1b8d518da45"
-+SRC_URI[sha256sum] = "11f5bc310fba4df404c057461ffb3fadac8ef51d211008c665c48f587a5a3f85"
  
- inherit pkgconfig gettext
+-SRCREV = "008c73e6de3a4bf969d1627e695d4efc807aed92"
++SRCREV = "2cfdf29b2ef98ccd5ed42cdde8bbe437e0d6412f"
+ 
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://README;md5=3d12dd2a10bdd22379cc4c0fc6949a88"
++LIC_FILES_CHKSUM = "file://README.md;md5=279840fabb191e6cd9150492d31b0e20"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
-2.9.3
+2.11.0
 
 
