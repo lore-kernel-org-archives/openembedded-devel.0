@@ -1,41 +1,48 @@
-Return-Path: <prvs=4277b21ae4=michael.davis@essvote.com>
-X-Greylist: delayed 902 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 14 Apr 2017 19:29:16 UTC
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D011601D3
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
+	[209.85.128.174])
+	by mail.openembedded.org (Postfix) with ESMTP id C5FD477E93
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Apr 2017 19:29:16 +0000 (UTC)
-X-AuditID: 0a000213-b95ff70000000cd7-ae-58f11f83b007
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	BD.FC.03287.38F11F85; Fri, 14 Apr 2017 14:14:14 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Fri, 14 Apr 2017 14:14:11 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-browser][PATCH] chromium: Remove duplicate patch
-Thread-Index: AQHStVNMusM97E7UNEuVfY1BYm3khQ==
-Date: Fri, 14 Apr 2017 19:14:10 +0000
-Message-ID: <20170414191406.25345-1-michael.davis@essvote.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.20.66]
+	Fri, 14 Apr 2017 19:34:23 +0000 (UTC)
+Received: by mail-wr0-f174.google.com with SMTP id o21so55178224wrb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 Apr 2017 12:34:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=rZYkZCNPU59NQw/cmvgPK2qKhy824ohUHWDdEc2EoZQ=;
+	b=aeTzxWMI7Ic5DEDTsioUjdIW0/ig5ODcvaXOPAMK8sdNV+62/BGfa4dH+TLzPYmJ8r
+	QHYHqBBToJ8tYSGmxPohtuDAvcWB5EcyCblrAcZ5d0QVAAHcQI0jDEQGVeBb2ZNkIdC0
+	5OWWvx228aLc1vZ/T25s+wWggPm8XTUo3UmNmJBesIMgF4fc5ZcaFYY4Q6ijpkdLG7QY
+	rwAEta88wFM8Nhw3etssM5pSY02gEcnNLLGml7iY47IqnTfC56zQU5ZnwGZDQnoBNWmc
+	HNLPP90gYRReHgKqp3dndC2GqEhx5+aqGciflpNEL7OHnphfbQ6yQAx2/7UQDKzN29kW
+	l1ig==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=rZYkZCNPU59NQw/cmvgPK2qKhy824ohUHWDdEc2EoZQ=;
+	b=WVd33Skf6HhPeRP3d1PZptYtcYLJSP0fFPTGS5er1x8W6npe6AFZfPG3vonygII93D
+	6AZYKpACBnB3f/g+xcwXt6lCQa/WooVnlOx73ccuOrCzgSpucCczI41Za0WeV8V6frfO
+	8/0B2tioWcJcoEpsQyScTnh3WT+9HiulnhkIn2JaUBc6KeQdVMfbxzxsgrGlkAQrSyq2
+	w8rrjxioflVVhj7uA0McyQvqN2vXuolSvgvwi4YYAlBStx3WlhyYDIbNcBOI3ZOn1ed2
+	nsx3+tMQ3gNtIphxJNBr0dbi3anPfynuTyHS6Cafi5ZZuQMLKVE4Z44JiHMGpDplf51Q
+	30uw==
+X-Gm-Message-State: AN3rC/5i/XWpwprzPhfo4sX2dUk3X4G0FvNrkLLX6U+/lkV0dxrevzeb
+	aVoQIN9dnNw1Rn2Edv4NT7v2L5wZXw==
+X-Received: by 10.223.136.165 with SMTP id f34mr8444543wrf.145.1492198464079; 
+	Fri, 14 Apr 2017 12:34:24 -0700 (PDT)
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrOLMWRmVeSWpSXmKPExsWyRiBPQ7dN/mOEwd3LBhYXDy9ldmD0OLdx
-	BWMAYxS3TVJiSVlwZnqevl0Cd0bLovCCTqGK9+cfszUwPuPvYuTkkBAwkTjXsY2li5GLQ0jg
-	BKNEz4lrUM4sRonbN+Yxg1SxCRhJnLu+iRHEFhGIlZi3aSYTiM0sYCDxbvNGVhBbWMBe4tzS
-	FcwQNS4Sx+5dhqrXk/gy/xkLiM0ioCpx7uNlsBpeATuJh19XsoHYjAJiEt9PrYGaKS5x68l8
-	JojrBCSW7DnPDGGLSrx8/I8VwpaTWPfuJFS9nsSNqVPYIGxtiWULX0PNF5Q4OfMJywRG4VlI
-	xs5C0jILScssJC0LGFlWMQrmJmbmGOqlFheX5Zek6iXn525iBAY3FwOT8A7GOVNsDzEKcDAq
-	8fBeOP4hQog1say4MvcQozQHi5I471mO4AghgfTEktTs1NSC1KL4otKc1OJDjEwcnIcYJTi4
-	pESKU/NSUosSS0sy4kExFF8MjCKpBsaUh1+nJnJ3bmbzduHzbHDjeHbAWlXHNYt7o1hy/9bH
-	wht0l0tznGw7KKs4mVHYXDVh4gFnpUCXSxMnZMdNPj5nzv/p/Smxz2fZtC48q2UpeEOUT+jh
-	jS0V50oqVN9qNjEePv/m+oTTs2K9u75qZkfXqt7i3Sy/fKL1+7fzV/F2OqWsPCe8crESS3FG
-	oqEWc1FxIgDgg5l/agIAAA==
-Subject: [meta-browser][PATCH] chromium: Remove duplicate patch
+Received: by 10.80.148.54 with HTTP; Fri, 14 Apr 2017 12:34:23 -0700 (PDT)
+In-Reply-To: <20170412195638.3243-8-schnitzeltony@googlemail.com>
+References: <20170412195638.3243-1-schnitzeltony@googlemail.com>
+	<20170412195638.3243-8-schnitzeltony@googlemail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 14 Apr 2017 21:34:23 +0200
+Message-ID: <CA+chaQeO9+92rCxVyQzvtq3d5zGyQO2ohjm2+mZafqt_t4b6ig@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 07/29] xfce4-taskmanager: update 1.1.0 -> 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,65 +55,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Apr 2017 19:29:17 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Fri, 14 Apr 2017 19:34:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-unset-madv-free.patch and Do-not-depend-on-Linux-4.5.patch apply the
-same fix.
+Fails to fetch here, might be only temporary (lets see tomorrow):
+http://errors.yoctoproject.org/Errors/Details/140439/
 
-Signed-off-by: Michael Davis <michael.davis@essvote.com>
----
- .../chromium/chromium/chromium/unset-madv-free.patch      | 15 -----------=
-----
- recipes-browser/chromium/chromium_54.0.2810.2.bb          |  1 -
- 2 files changed, 16 deletions(-)
- delete mode 100644 recipes-browser/chromium/chromium/chromium/unset-madv-f=
-ree.patch
+On Wed, Apr 12, 2017 at 9:56 PM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
 
-diff --git a/recipes-browser/chromium/chromium/chromium/unset-madv-free.pat=
-ch b/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
-deleted file mode 100644
-index 15d4982..0000000
---- a/recipes-browser/chromium/chromium/chromium/unset-madv-free.patch
-+++ /dev/null
-@@ -1,15 +0,0 @@
--diff -Naur chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/P=
-ageAllocator.cpp chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/alloc=
-ator/PageAllocator.cpp
----- chromium-52.0.2743.76/third_party/WebKit/Source/wtf/allocator/PageAllo=
-cator.cpp	2016-07-15 17:02:49.000000000 -0500
--+++ chromium-52.0.2743.76b/third_party/WebKit/Source/wtf/allocator/PageAll=
-ocator.cpp	2016-11-18 09:13:01.109731385 -0600
--@@ -41,6 +41,11 @@
-- #include <errno.h>
-- #include <sys/mman.h>
--=20
--+#if OS(LINUX) && defined(MADV_FREE)
--+// Added in Linux 4.5, but it breaks the sandbox.
--+#undef MADV_FREE
--+#endif
--+
-- #ifndef MADV_FREE
-- #define MADV_FREE MADV_DONTNEED
-- #endif
-diff --git a/recipes-browser/chromium/chromium_54.0.2810.2.bb b/recipes-bro=
-wser/chromium/chromium_54.0.2810.2.bb
-index 2af662c..94ce59b 100644
---- a/recipes-browser/chromium/chromium_54.0.2810.2.bb
-+++ b/recipes-browser/chromium/chromium_54.0.2810.2.bb
-@@ -11,7 +11,6 @@ SRC_URI +=3D "\
-         file://0005-Override-root-filesystem-access-restriction.patch \
-         file://chromium/0011-Replace-readdir_r-with-readdir.patch \
-         file://chromium/remove-Werror.patch \
--        file://chromium/unset-madv-free.patch \
-         file://chromium/Do-not-depend-on-Linux-4.5.patch \
-         ${@bb.utils.contains('PACKAGECONFIG', 'component-build', 'file://c=
-omponent-build.gypi', '', d)} \
-         ${@bb.utils.contains('PACKAGECONFIG', 'ignore-lost-context', 'file=
-://chromium/0001-Remove-accelerated-Canvas-support-from-blacklist.patch', '=
-', d)} \
---=20
-2.9.3
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  .../recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.1.0.bb  | 10
+> ----------
+>  .../recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.0.bb  | 10
+> ++++++++++
+>  2 files changed, 10 insertions(+), 10 deletions(-)
+>  delete mode 100644 meta-xfce/recipes-apps/xfce4-taskmanager/
+> xfce4-taskmanager_1.1.0.bb
+>  create mode 100644 meta-xfce/recipes-apps/xfce4-taskmanager/
+> xfce4-taskmanager_1.2.0.bb
+>
+> diff --git a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-
+> taskmanager_1.1.0.bb b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-
+> taskmanager_1.1.0.bb
+> deleted file mode 100644
+> index cb1be67..0000000
+> --- a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.1.0.bb
+> +++ /dev/null
+> @@ -1,10 +0,0 @@
+> -SUMMARY =3D "Easy to use task manager"
+> -LICENSE =3D "GPLv2"
+> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> -
+> -inherit xfce-app
+> -
+> -DEPENDS +=3D "gtk+ cairo libwnck xfce4-dev-tools-native exo-native"
+> -
+> -SRC_URI[md5sum] =3D "7da465a4798629ebd8650fef62770ab7"
+> -SRC_URI[sha256sum] =3D "2e1eb161f966cbfbd68bd029fb5911
+> 5bc5ab0c0704cb500d20e7d73967e59ecb"
+> diff --git a/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-
+> taskmanager_1.2.0.bb b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-
+> taskmanager_1.2.0.bb
+> new file mode 100644
+> index 0000000..f955585
+> --- /dev/null
+> +++ b/meta-xfce/recipes-apps/xfce4-taskmanager/xfce4-taskmanager_1.2.0.bb
+> @@ -0,0 +1,10 @@
+> +SUMMARY =3D "Easy to use task manager"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D94d55d512a9ba36caa9b7df079bae=
+19f"
+> +
+> +inherit xfce-app
+> +
+> +DEPENDS +=3D "gtk+ cairo libwnck libxmu xfce4-dev-tools-native exo-nativ=
+e"
+> +
+> +SRC_URI[md5sum] =3D "6f30ce3c688454812008281065a6e05c"
+> +SRC_URI[sha256sum] =3D "5746d473ad428b13db7c05cfcbc809
+> 9fbea13da6be26d3a9359bcb4de971ba69"
+> --
+> 2.9.3
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
