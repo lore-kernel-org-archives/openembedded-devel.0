@@ -1,23 +1,44 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id 9814071B57
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id E9F22719DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Apr 2017 01:09:18 +0000 (UTC)
-Received: from seahawk.toradex.int
-	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 66BEE5C0648;
-	Sat, 15 Apr 2017 03:09:15 +0200 (CEST)
-From: Stefan Agner <stefan@agner.ch>
+	Sat, 15 Apr 2017 13:15:24 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id d79so2414973wmi.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 Apr 2017 06:15:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=fnMV89qcVy2ET6iwzTTgkODM9aglioyGS22125WSjnU=;
+	b=SLH37GBYmQ3bCL9OmV5SVuayPO3usVhNDi3ci636Ur9coD76mcbhFHJOgUTam72D1m
+	96PQMOkAp7ucViBEKwVrj4hIstMpEPnhKG/jFHszhxZXlz+odhOa+XnCUbzKz7wezkQh
+	woYzhct0YP/Smkn4aqIkby6zVt/tB3JWvxVhQCWFdyAnfIMAdFyAI3ZgNmuuQr/v94f5
+	i9glL2/n312f0uxX8cUYqoZ7CG9ehgbWRN+vXsswDAvx+RRcyzbEK/vzvqZGgR5pOSnG
+	ZJjfn9c7nOLM04eL5ZEYPRFTBVh86lVL2johZGQUWgYrWoKZY4n8vK8vlDn9RornTP7m
+	Jv6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fnMV89qcVy2ET6iwzTTgkODM9aglioyGS22125WSjnU=;
+	b=ZvVU0BWss2JOUIcLN1SM4ZPNytQ4ZrSnemrbSmv/DdQpMfed3sCNu3rBJDk4kwVNWZ
+	iVJ6Kr7h73hU4CoU3UmHrQQXwwRKp7uYyB1aRV+DZpc+Jg9nKTJYzrN8gEYI7vwp3Fpn
+	VAGt3I7k+nQ43ZFvRQPk1f2SHa9+paLKWd6R1eo2ddpVrM3MkJF8WLVF3VBxmcbZfd4v
+	o6ETkMC8z7tY3lTScjcp1fWnNqPROZthcfhQEn01leu5yvK4riN4LiIUwUGQg3ILugIn
+	vCsUnjeBYwJqDnunbpZhNZiVVd0QF6jbeViVPKQolSOyNjrLAbp7UzLjQdOwb3xeuOlg
+	KJhg==
+X-Gm-Message-State: AN3rC/52bWf1kVQE8orC/xaJe5Hvf70r69QLCXV2iULPU3Lgkt/bZM25
+	EqARgqWC/+0SiA==
+X-Received: by 10.28.71.88 with SMTP id u85mr2489551wma.24.1492262124317;
+	Sat, 15 Apr 2017 06:15:24 -0700 (PDT)
+Received: from ThinkPad-T520.homenet.telecomitalia.it ([95.236.249.99])
+	by smtp.gmail.com with ESMTPSA id x65sm2582047wmg.3.2017.04.15.06.15.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 15 Apr 2017 06:15:23 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Apr 2017 18:09:08 -0700
-Message-Id: <1492218548-22881-1-git-send-email-stefan@agner.ch>
+Date: Sat, 15 Apr 2017 15:15:14 +0200
+Message-Id: <1492262114-20052-1-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1492218556; bh=WFveskMhuh26wrwSNuh2McVAFedeY86TCshsBK42vzs=;
-	h=From:To:Cc:Subject:Date:Message-Id;
-	b=DqkjQMaNeUiY6A2peBWcCZHzfLat4N9L7cwApzirahhpSOYqZVqcTU5OJ3imqSHwyHyxrXrCY5tBuuSzqTANZCgHw5ACV5K6nPsR7QBjnaJtIRPREa9LbBB6WJ5cQqaa8PZgxWN2vnx9filSnumKYnWOutPlkkxh4R1bvjyxXFE=
-Cc: Stefan Agner <stefan.agner@toradex.com>
-Subject: [meta-python][PATCH] python-can: add initial recipe for version 1.5.2
+Subject: [meta-initramfs][PATCH] klibc: disable PARALLEL_MAKE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,58 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Apr 2017 01:09:19 -0000
+X-List-Received-Date: Sat, 15 Apr 2017 13:15:25 -0000
 
-From: Stefan Agner <stefan.agner@toradex.com>
+On modern buidsystems with many cores there are sporadic build failures.
+The issue is known and a fix in the sources is awaited (new Kbuild).
 
-Add initial recipe for python-can library which provides controller
-area network support for Python 2/3.
+http://www.zytor.com/pipermail/klibc/2013-May/003420.html
 
-Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
+For the moment, disable PARALLEL_MAKE.
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-can.inc       | 9 +++++++++
- meta-python/recipes-devtools/python/python-can_1.5.2.bb  | 4 ++++
- meta-python/recipes-devtools/python/python3-can_1.5.2.bb | 4 ++++
- 3 files changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-can.inc
- create mode 100644 meta-python/recipes-devtools/python/python-can_1.5.2.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-can_1.5.2.bb
+ meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-can.inc b/meta-python/recipes-devtools/python/python-can.inc
-new file mode 100644
-index 0000000..1878f31
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-can.inc
-@@ -0,0 +1,9 @@
-+SUMMARY = "Controller Area Network (CAN) interface module for Python"
-+SECTION = "devel/python"
-+LICENSE = "LGPLv3"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=38138baa100d7259934590850bc0406e"
-+
-+SRC_URI[md5sum] = "f653aecf8b9034bbba32cc04ca6a7b6d"
-+SRC_URI[sha256sum] = "edabb426e6cd11c2dc7a98980340135aa0eb02143b0d51bf14e3e6178c131cc3"
-+
-+PYPI_PACKAGE="python-can"
-diff --git a/meta-python/recipes-devtools/python/python-can_1.5.2.bb b/meta-python/recipes-devtools/python/python-can_1.5.2.bb
-new file mode 100644
-index 0000000..ec81a9e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-can_1.5.2.bb
-@@ -0,0 +1,4 @@
-+require python-can.inc
-+inherit pypi setuptools
-+
-+RDEPENDS_${PN} += "python-sqlite3"
-diff --git a/meta-python/recipes-devtools/python/python3-can_1.5.2.bb b/meta-python/recipes-devtools/python/python3-can_1.5.2.bb
-new file mode 100644
-index 0000000..a1d45b8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-can_1.5.2.bb
-@@ -0,0 +1,4 @@
-+require python-can.inc
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} += "python3-sqlite3"
+diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+index f00e31a..e039cb2 100644
+--- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
++++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+@@ -21,6 +21,7 @@ SRC_URI += "file://klibc-linux-libc-dev.patch \
+ 
+ S = "${WORKDIR}/git"
+ 
++PARALLEL_MAKE = ""
+ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+                 'CROSS_COMPILE=${TARGET_PREFIX}' \
+                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
 -- 
 2.7.4
 
