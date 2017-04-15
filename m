@@ -1,44 +1,42 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id E9F22719DD
+Return-Path: <sadlife1990@gmail.com>
+Received: from mail-ua0-f181.google.com (mail-ua0-f181.google.com
+	[209.85.217.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7416177357
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Apr 2017 13:15:24 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id d79so2414973wmi.2
+	Sat, 15 Apr 2017 14:24:04 +0000 (UTC)
+Received: by mail-ua0-f181.google.com with SMTP id q26so57306164uaa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Apr 2017 06:15:26 -0700 (PDT)
+	Sat, 15 Apr 2017 07:24:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=fnMV89qcVy2ET6iwzTTgkODM9aglioyGS22125WSjnU=;
-	b=SLH37GBYmQ3bCL9OmV5SVuayPO3usVhNDi3ci636Ur9coD76mcbhFHJOgUTam72D1m
-	96PQMOkAp7ucViBEKwVrj4hIstMpEPnhKG/jFHszhxZXlz+odhOa+XnCUbzKz7wezkQh
-	woYzhct0YP/Smkn4aqIkby6zVt/tB3JWvxVhQCWFdyAnfIMAdFyAI3ZgNmuuQr/v94f5
-	i9glL2/n312f0uxX8cUYqoZ7CG9ehgbWRN+vXsswDAvx+RRcyzbEK/vzvqZGgR5pOSnG
-	ZJjfn9c7nOLM04eL5ZEYPRFTBVh86lVL2johZGQUWgYrWoKZY4n8vK8vlDn9RornTP7m
-	Jv6g==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=8D7BjNr/F86U1kAy94xsdYA+L1jDVz/4V+aMKHzak+s=;
+	b=UebAm6lqdcVBIhxAFnYyg5GOfuJe5DMIDX3bE1r/oX4sbrscLUXafpesMF0+zOlnvw
+	J0P7CbB86c9qxpeOtxbzgG/NUIzymEjGxfOxFij2gFh4/CTvm0j7TNJ5DCkRi2REvmPw
+	PIcw7h4fvSAh+B0f+JWRXoCn9m2m/oIHPMICOjlk68I/xKmfYKxdd/YdzR4yNQF9+T41
+	JI9KwENzirEoUZupLQtcNIhI12R9OMV86p7fG+H+sduhJ6T+DoHqA5ULhuRHhXWAdYWN
+	hp+i+0UDvsVa2g49epiAmSPHJemc8mPvSfaa6+hmUGoRsC8sEv3fEEE09LWQRjlQ1wHk
+	cdgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fnMV89qcVy2ET6iwzTTgkODM9aglioyGS22125WSjnU=;
-	b=ZvVU0BWss2JOUIcLN1SM4ZPNytQ4ZrSnemrbSmv/DdQpMfed3sCNu3rBJDk4kwVNWZ
-	iVJ6Kr7h73hU4CoU3UmHrQQXwwRKp7uYyB1aRV+DZpc+Jg9nKTJYzrN8gEYI7vwp3Fpn
-	VAGt3I7k+nQ43ZFvRQPk1f2SHa9+paLKWd6R1eo2ddpVrM3MkJF8WLVF3VBxmcbZfd4v
-	o6ETkMC8z7tY3lTScjcp1fWnNqPROZthcfhQEn01leu5yvK4riN4LiIUwUGQg3ILugIn
-	vCsUnjeBYwJqDnunbpZhNZiVVd0QF6jbeViVPKQolSOyNjrLAbp7UzLjQdOwb3xeuOlg
-	KJhg==
-X-Gm-Message-State: AN3rC/52bWf1kVQE8orC/xaJe5Hvf70r69QLCXV2iULPU3Lgkt/bZM25
-	EqARgqWC/+0SiA==
-X-Received: by 10.28.71.88 with SMTP id u85mr2489551wma.24.1492262124317;
-	Sat, 15 Apr 2017 06:15:24 -0700 (PDT)
-Received: from ThinkPad-T520.homenet.telecomitalia.it ([95.236.249.99])
-	by smtp.gmail.com with ESMTPSA id x65sm2582047wmg.3.2017.04.15.06.15.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 15 Apr 2017 06:15:23 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Apr 2017 15:15:14 +0200
-Message-Id: <1492262114-20052-1-git-send-email-andrea.adami@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH] klibc: disable PARALLEL_MAKE
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=8D7BjNr/F86U1kAy94xsdYA+L1jDVz/4V+aMKHzak+s=;
+	b=gqW7KGjaC3mX9N7pbXEZ4F5ZmWMsK5iytpKJwguSJST3g6Sqcb3d41Pe4Igdh8O04/
+	xn36XHir3g04FZrrCGJQFjaajwG1o3MceNXKUZKStr+yr6QGlb0wOELhKl1NIBUzS/sL
+	4LEVVeQx3xvMzK7Rt3C+AuO3rw/j2QCCwBjTEwWkn5A3g1IxWqQDLQhAgGJpSjBi+Umz
+	ccEUXmPEqYWyqWZHJa8mrI7vFo7bEK2BEaoFad7RGkFKMsKB+hSYkoAAS+WAIg1jAtDg
+	fPiu1QMlrhxRmvP5ROKkr9t/XVuXaRZJmKUiekW8r681PouqxMoXU/n5lraYoqU22NTR
+	ogWA==
+X-Gm-Message-State: AN3rC/54sptdOOBb4uUNYqGi5G7lBk8Db0CyO6dTCDL15HRaDGPQq9jz
+	jq+iA0Cf9l4lAeVXXwXTTvPd12P/Fw==
+X-Received: by 10.176.67.97 with SMTP id k88mr6243599uak.5.1492266246088; Sat,
+	15 Apr 2017 07:24:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.32.105 with HTTP; Sat, 15 Apr 2017 07:24:05 -0700 (PDT)
+From: Life Life <sadlife1990@gmail.com>
+Date: Sat, 15 Apr 2017 17:24:05 +0300
+Message-ID: <CAAHuHfxQbRCgC6fRJo1R=oM11duYh+zzWTZ=J-NTUQ7W_yhCzg@mail.gmail.com>
+To: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
+Subject: Static Lib build.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,33 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Apr 2017 13:15:25 -0000
+X-List-Received-Date: Sat, 15 Apr 2017 14:24:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On modern buidsystems with many cores there are sporadic build failures.
-The issue is known and a fix in the sources is awaited (new Kbuild).
+Hello,
 
-http://www.zytor.com/pipermail/klibc/2013-May/003420.html
+I'm try to build static library for SDK.
 
-For the moment, disable PARALLEL_MAKE.
+Update the build/local.conf file with the following information
 
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/klibc/klibc.inc | 1 +
- 1 file changed, 1 insertion(+)
+SDKIMAGE_FEATURES = "staticdev-pkgs dev-pkgs"
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index f00e31a..e039cb2 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -21,6 +21,7 @@ SRC_URI += "file://klibc-linux-libc-dev.patch \
- 
- S = "${WORKDIR}/git"
- 
-+PARALLEL_MAKE = ""
- EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
-                 'CROSS_COMPILE=${TARGET_PREFIX}' \
-                 'KLIBCKERNELSRC=${STAGING_DIR_TARGET}${exec_prefix}' \
--- 
-2.7.4
+INHERIT += "buildhistory"
+BUILDHISTORY_COMMIT = "0"
+ BUILDHISTORY_FEATURES = "sdk"
 
+But cannot create static library for SDK.
+
+
+Thanks.
 
