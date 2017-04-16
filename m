@@ -1,52 +1,42 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F7C671DEE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Apr 2017 14:49:46 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id t189so9747712wmt.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Apr 2017 07:49:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=oWd9fdfo4cwAWzJhnz/QyzK8I9bFIyFreidYbg81Uxw=;
-	b=Zoxs271z8x/TX/nvGZn0LjrQeyJ+WF3uiRk6B4BSAJ6mdap/RyVPA88PFatI6NtUZ1
-	T4qlrCYSaDjo3ZktfzttXx/8StgVsMo5wiJPVTenRmXf7ENCoKpwRcDns/ljgQ3JAPIs
-	2kF2qLpoapvcjVaBvHuMSNYZAqFWjs8Tyr05FZ8Y7/LzNo+qL1XgcG4QIfrKTFs01xpB
-	WGvha+fZRVuf4bSCQNTJ6MlPKtoHEqtaZoM5Pr1Lzct3kMj4pdwIoBQTjqDnbF8QFOJn
-	BIs8LT0JJLxTEH7ss/3f2XgwS2ItSlc6buXuAsV8VSYAzv8s661opQYHsP5iLvEurTM5
-	gjUw==
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 044EC719E2;
+	Sun, 16 Apr 2017 15:50:31 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id u2so20322360wmu.0;
+	Sun, 16 Apr 2017 08:50:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=QEZ38AeGrYkkudOXGnXcvl7HKGC8rGUq2bApDEreXCI=;
+	b=qhoZLEbDgbdvSiLMxmXKe8EcWVth8sXQxENtpftpzIkG9m7V86WdUvL0K1n+ipy75W
+	HoZyi7gFuDkJ9R4mjN3XYsTL/8MQZ0b0otyilvNBpKC9ne5a2wEG2xGBUh21aL+7Jg1g
+	502mEHjGma8vm4eeIDhS8evyCbdT4/HfuRlw7jaP1u/JnOwukytkZZN81RiNXcwD3qz0
+	2nle6fXvTOrWS9YpIB78TMm2ZOLsIezAULwWwiQMb2hAmOeDGiUkZ4FANZdqO59acoQz
+	cc6KXjgTyDl/7kCM2BEmJfH2NVlW6U9kuEl1HTSqYqIMWhXarTZwCpwOFM8MtBzs0Ahx
+	JevQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=oWd9fdfo4cwAWzJhnz/QyzK8I9bFIyFreidYbg81Uxw=;
-	b=O1Of3hBt8AXBuT6mIToh+VmQMDcR0DO/XKnq+JKpQ5g81NFL7HWhdMZjK28WLUbynO
-	4m/ZQiazcgvK0sIhuUW925KlpNLRXUpjabJ/6e54XkWtl2XO8onBoachOyVFQmRpCMuS
-	J8THYSGm7wdlhb1j6QiAdjtr2Ee4xqf2eEpBayqdOOukcBvAVFr1ZdE1p9FeS9hpfphG
-	KMvQ7gxl6iGKcoxCtTNv8XJcSjOZedW6+lPdSOcQGPjcoroR6yZRYWOVeHkPaPrKG1Cd
-	CVIj21YTxBTmBMsslzXSoohG8GqtJhpzIdKRky7fj164CLa6w4NMhq9TUwuo3kNJSqp/
-	KQ6Q==
-X-Gm-Message-State: AN3rC/5n8Md43jyewSsVeRd7id/a3QjkDADVef6hk7y0CVf1UFl0YqNs
-	VpbnLrzI1YgiNKw0
-X-Received: by 10.28.157.84 with SMTP id g81mr2526860wme.120.1492267787143;
-	Sat, 15 Apr 2017 07:49:47 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E91387451E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e913:8745:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	v14sm6615281wra.65.2017.04.15.07.49.46
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 15 Apr 2017 07:49:46 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 15 Apr 2017 16:49:28 +0200
-Message-Id: <20170415144929.24871-1-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.3
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=QEZ38AeGrYkkudOXGnXcvl7HKGC8rGUq2bApDEreXCI=;
+	b=hjoCIuOzfklRCHNkFWQPC3ouO3f+JItphicHNzEH3Z4NxBuRMKyCsUJ/0Pwb0564At
+	VfL/T25X+NORkGTr4CJHbZ+jzADzdmA7i76bXEg7X/kGdc14LwTb5cRZL/A4Xo/Cm8iM
+	NeIN+/QJ0UAahu/NBBxTUkuj3NmtFGQnsrj6hdQ3U0ZCavvWvJOvi8HeoT4nHzx5wPVy
+	K2+Y2N1CCm+nzPO3Pcd6OIqNwGDRKkS9OCuKZkFDBTNLdp3PgrLwNmJBKyumLp6z97Y8
+	1tQSw74+EqwBAFc0YjYja2snZjcebc4j3alIjf3Bhb94nILUV3xwswtUDrqwV+h6X3ja
+	iTlg==
+X-Gm-Message-State: AN3rC/7XMDEkzP6iHKo78fTrz22P04ATLOolkSqRz9/YM5GtuZkMhbFu
+	//Pe50iLHaLZo1z4/MXxh9j6X0CB9A==
+X-Received: by 10.28.153.194 with SMTP id b185mr5804592wme.101.1492357832446; 
+	Sun, 16 Apr 2017 08:50:32 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH 1/2] hunspell: update 1.3.3 -> 1.6.1
+Received: by 10.80.180.141 with HTTP; Sun, 16 Apr 2017 08:50:01 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 16 Apr 2017 08:50:01 -0700
+Message-ID: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
+Subject: [RFT] gcc7 and glibc-2.26 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 Apr 2017 14:49:48 -0000
+X-List-Received-Date: Sun, 16 Apr 2017 15:50:32 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
 
-hunspell moved to github and changed licence
+Hello All
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-support/hunspell/hunspell_1.3.3.bb | 18 ------------------
- meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb | 17 +++++++++++++++++
- 2 files changed, 17 insertions(+), 18 deletions(-)
- delete mode 100644 meta-oe/recipes-support/hunspell/hunspell_1.3.3.bb
- create mode 100644 meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
+I have put together recipes for upcoming gcc-7 major release as well
+as glibc 2.26 release, which we would target for next release ( 2.4 )
 
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.3.3.bb b/meta-oe/recipes-support/hunspell/hunspell_1.3.3.bb
-deleted file mode 100644
-index 9e6f774..0000000
---- a/meta-oe/recipes-support/hunspell/hunspell_1.3.3.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "A spell checker and morphological analyzer library"
--HOMEPAGE = "http://hunspell.sourceforge.net/"
--LICENSE = "LGPLv2.1 | GPLv2 | MPLv1.1"
--LIC_FILES_CHKSUM = " \
--    file://COPYING;md5=ed3a37b3ba6d6be3e08ab45987cf1b88 \
--    file://COPYING.LGPL;md5=d8045f3b8f929c1cb29a1e3fd737b499 \
--    file://COPYING.MPL;md5=bfe1f75d606912a4111c90743d6c7325 \
--"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/Hunspell/${PV}/${BPN}-${PV}.tar.gz"
--SRC_URI[md5sum] = "4967da60b23413604c9e563beacc63b4"
--SRC_URI[sha256sum] = "a7b2c0de0e2ce17426821dc1ac8eb115029959b3ada9d80a81739fa19373246c"
--
--inherit autotools pkgconfig gettext
--
--RDEPENDS_${PN} = "perl"
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb b/meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
-new file mode 100644
-index 0000000..125729f
---- /dev/null
-+++ b/meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "A spell checker and morphological analyzer library"
-+HOMEPAGE = "http://hunspell.github.io/"
-+LICENSE = "GPLv3 | LGPLv3"
-+LIC_FILES_CHKSUM = " \
-+    file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-+    file://COPYING.LESSER;md5=e6a600fd5e1d9cbde2d983680233ad02 \
-+"
-+
-+SRC_URI = "https://github.com/${BPN}/${BPN}/archive/v${PV}.tar.gz"
-+SRC_URI[md5sum] = "0df1c18c1284f8625af5ae5a8d5c4cef"
-+SRC_URI[sha256sum] = "30f593733c50b794016bb03d31fd2a2071e4610c6fa4708e33edad2335102c49"
-+
-+inherit autotools pkgconfig gettext
-+
-+RDEPENDS_${PN} = "perl"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.9.3
+There are several changes in gcc-7 which will need fixing packages. If you have
+time to spare feel free to give it a shot and send fixes for the packages or bug
+reports. Below are commits you can cherry-pick independently.
 
+gcc7 -  http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/gcc7&id=9562231d6a37ea9c59086927bf0c854fd40b29cd
+
+glib-2.26 - http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/glibc-2.26&id=6e91059d3f6ca0f4468ff59a2c7449be301ee100
+
+Refer to
+
+https://gcc.gnu.org/gcc-7/porting_to.html
+
+For porting issues with gcc7
+
+Cheers
+-Khem
 
