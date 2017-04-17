@@ -1,42 +1,25 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 044EC719E2;
-	Sun, 16 Apr 2017 15:50:31 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id u2so20322360wmu.0;
-	Sun, 16 Apr 2017 08:50:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=QEZ38AeGrYkkudOXGnXcvl7HKGC8rGUq2bApDEreXCI=;
-	b=qhoZLEbDgbdvSiLMxmXKe8EcWVth8sXQxENtpftpzIkG9m7V86WdUvL0K1n+ipy75W
-	HoZyi7gFuDkJ9R4mjN3XYsTL/8MQZ0b0otyilvNBpKC9ne5a2wEG2xGBUh21aL+7Jg1g
-	502mEHjGma8vm4eeIDhS8evyCbdT4/HfuRlw7jaP1u/JnOwukytkZZN81RiNXcwD3qz0
-	2nle6fXvTOrWS9YpIB78TMm2ZOLsIezAULwWwiQMb2hAmOeDGiUkZ4FANZdqO59acoQz
-	cc6KXjgTyDl/7kCM2BEmJfH2NVlW6U9kuEl1HTSqYqIMWhXarTZwCpwOFM8MtBzs0Ahx
-	JevQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=QEZ38AeGrYkkudOXGnXcvl7HKGC8rGUq2bApDEreXCI=;
-	b=hjoCIuOzfklRCHNkFWQPC3ouO3f+JItphicHNzEH3Z4NxBuRMKyCsUJ/0Pwb0564At
-	VfL/T25X+NORkGTr4CJHbZ+jzADzdmA7i76bXEg7X/kGdc14LwTb5cRZL/A4Xo/Cm8iM
-	NeIN+/QJ0UAahu/NBBxTUkuj3NmtFGQnsrj6hdQ3U0ZCavvWvJOvi8HeoT4nHzx5wPVy
-	K2+Y2N1CCm+nzPO3Pcd6OIqNwGDRKkS9OCuKZkFDBTNLdp3PgrLwNmJBKyumLp6z97Y8
-	1tQSw74+EqwBAFc0YjYja2snZjcebc4j3alIjf3Bhb94nILUV3xwswtUDrqwV+h6X3ja
-	iTlg==
-X-Gm-Message-State: AN3rC/7XMDEkzP6iHKo78fTrz22P04ATLOolkSqRz9/YM5GtuZkMhbFu
-	//Pe50iLHaLZo1z4/MXxh9j6X0CB9A==
-X-Received: by 10.28.153.194 with SMTP id b185mr5804592wme.101.1492357832446; 
-	Sun, 16 Apr 2017 08:50:32 -0700 (PDT)
+Return-Path: <Yadi.Hu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9601A60069
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Apr 2017 08:04:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3H84JTg018743
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Apr 2017 01:04:19 -0700 (PDT)
+Received: from pek-yhu2-d1.wrs.com (128.224.162.195) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.294.0; Mon, 17 Apr 2017 01:04:18 -0700
+From: Yadi Hu <yadi.hu@windriver.com>
+To: <yadi.hu@windriver.com>, <openembedded-devel@lists.openembedded.org>
+Date: Mon, 17 Apr 2017 16:04:09 +0800
+Message-ID: <1492416250-15487-1-git-send-email-yadi.hu@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.80.180.141 with HTTP; Sun, 16 Apr 2017 08:50:01 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 16 Apr 2017 08:50:01 -0700
-Message-ID: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>, 
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	"yocto@yoctoproject.org" <yocto@yoctoproject.org>
-Subject: [RFT] gcc7 and glibc-2.26 recipes
+X-Originating-IP: [128.224.162.195]
+Subject: meta-networking: drbd-utils:drbd-overview fails to run
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,28 +32,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 Apr 2017 15:50:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 17 Apr 2017 08:04:18 -0000
+Content-Type: text/plain
 
-Hello All
+drbd-utils:add denpendency for perl-module-strict
+and perl-module-warnings.
 
-I have put together recipes for upcoming gcc-7 major release as well
-as glibc 2.26 release, which we would target for next release ( 2.4 )
+Perl script drbd-overview fails to run due to perl noexists
+under small rootfs,fix it with definitions both perl-module-strict
+and perl-module-warnings.
 
-There are several changes in gcc-7 which will need fixing packages. If you have
-time to spare feel free to give it a shot and send fixes for the packages or bug
-reports. Below are commits you can cherry-pick independently.
+meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb |    2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-gcc7 -  http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/gcc7&id=9562231d6a37ea9c59086927bf0c854fd40b29cd
-
-glib-2.26 - http://git.openembedded.org/openembedded-core-contrib/commit/?h=kraj/glibc-2.26&id=6e91059d3f6ca0f4468ff59a2c7449be301ee100
-
-Refer to
-
-https://gcc.gnu.org/gcc-7/porting_to.html
-
-For porting issues with gcc7
-
-Cheers
--Khem
 
