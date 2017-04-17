@@ -1,27 +1,27 @@
-Return-Path: <Yadi.Hu@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 89DE460069
+Return-Path: <gyurco@freemail.hu>
+X-Greylist: delayed 306 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 17 Apr 2017 21:27:33 UTC
+Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
+	by mail.openembedded.org (Postfix) with ESMTP id F1744605C2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Apr 2017 08:04:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3H84L3t009090
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Apr 2017 01:04:21 -0700 (PDT)
-Received: from pek-yhu2-d1.wrs.com (128.224.162.195) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
-	(TLS) id 14.3.294.0; Mon, 17 Apr 2017 01:04:20 -0700
-From: Yadi Hu <yadi.hu@windriver.com>
-To: <yadi.hu@windriver.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Apr 2017 16:04:10 +0800
-Message-ID: <1492416250-15487-2-git-send-email-yadi.hu@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1492416250-15487-1-git-send-email-yadi.hu@windriver.com>
-References: <1492416250-15487-1-git-send-email-yadi.hu@windriver.com>
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.195]
-Subject: [PATCH] drbd-utils:add denpendency for perl.
+	Mon, 17 Apr 2017 21:27:33 +0000 (UTC)
+Received: from localhost (primary [127.0.0.1])
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 46CD680570;
+	Mon, 17 Apr 2017 23:22:27 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at htm-hungary.com
+Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
+	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id UdepttWyMQOw; Mon, 17 Apr 2017 23:22:26 +0200 (CEST)
+Received: from gyurco.lan (unknown [10.8.0.14])
+	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id DF12A80523;
+	Mon, 17 Apr 2017 23:22:25 +0200 (CEST)
+From: Gyorgy Szombathelyi <gyurco@freemail.hu>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 17 Apr 2017 23:22:07 +0200
+Message-Id: <20170417212207.4753-1-gyurco@freemail.hu>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-networking][PATCH] samba: fix conflict between samba and sudo packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2017 08:04:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 17 Apr 2017 21:27:35 -0000
 
-From: "Yadi.hu" <yadi.hu@windriver.com>
+Use the same permissions for sudoers.d as in the sudo package.
 
-Perl script drbd-overview fails to run due to perl noexists
-under small rootfs,fixing it through adding definitions both
-perl-module-strict and perl-module-warnings.
-
-Signed-off-by: Yadi.hu <yadi.hu@windriver.com>
+Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
 ---
- meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
-index 1d691cd1f..5aa8a88cd 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
-@@ -30,7 +30,7 @@ EXTRA_OECONF = " \
-                 --with-systemdunitdir=${systemd_unitdir}/system \
-                "
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+index d0235c1..f2d52a2 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
+@@ -154,6 +154,7 @@ do_install_append() {
+         sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
+     fi
  
--RDEPENDS_${PN} += "bash perl"
-+RDEPENDS_${PN} += "bash perl perl-module-strict perl-module-warnings"
++    chmod 0750 ${D}${sysconfdir}/sudoers.d
+     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
+ }
  
- # The drbd items are explicitly put under /lib when installed.
- #
 -- 
-2.11.0
+2.9.3
 
 
