@@ -1,49 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id DE4337736C
+Return-Path: <andrey.konovalov@linaro.org>
+Received: from mail-lf0-f48.google.com (mail-lf0-f48.google.com
+	[209.85.215.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 750AF601A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 18:22:41 +0000 (UTC)
-Received: by mail-pf0-f181.google.com with SMTP id i5so451532pfc.2
+	Tue, 18 Apr 2017 19:38:34 +0000 (UTC)
+Received: by mail-lf0-f48.google.com with SMTP id 88so1594714lfr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 11:22:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=athpzUIYUIa/tuAF1sPzwqzPD+AgqMIugW59y30fMt8=;
-	b=nYAx+poPcd06vr78I/bBaFtmuN5T25Q6USm07FKfCO4+xvAaTIUOXSHEkO75MTmdR+
-	9d5AKzK02Leh1YCadGih476+BBUyD95z/dHCV2NUwC0510KlL7mE6a4HZfmozQkLMrwJ
-	0Iv1JKDCIlvowFKCO8USJmH0CGNZuz/Ll3i8sWW2NlWt2pbvTQAU55Uq4dFqXLmb0CLQ
-	Ju0k1jw8p8WYN0T00tiolMYkqL2pMz18ohbQvTHDiRP4fdXh1+jeFrWxyvMLC57Vy5z8
-	g4M0BynzIG6gF2Yos1xNkpuWF4K1cY2qLQtQkckXmy2y7ghimLuAJvB3NlOMW/zV8sv/
-	mBMg==
+	Tue, 18 Apr 2017 12:38:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=to:from:subject:message-id:date:user-agent:mime-version
+	:content-transfer-encoding;
+	bh=+TZg4/OIe85t8NE9+of02RzUyYAROm8UsxnFiJtfhuY=;
+	b=EzKwHW3Xo20RADVZnWjA7pxFA6+qlcX8+uAvcwfqXx2ANTLE4sec6eP14B6MOLkPwq
+	AxjU1ZnoWqKdUOQiItrVST7qkRCPwu0CgUsNzHZcJ4FstPgu7aJMdLQs/OJ1PTcXNsZu
+	q5evwAfKHXQJJ5EdYGXKW1seZ2pQZedRCC/Bw=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=athpzUIYUIa/tuAF1sPzwqzPD+AgqMIugW59y30fMt8=;
-	b=sxL0aAgHrOSu7U8OrWYw3h7wrTzREhEdJWvUVvK6BCcQwBW6nB+FEQFXPHK+iyE6ei
-	jq19k7CmKy/lnHVPFQ4/Xs26m0KaJLD0x1zry0h22RQ4CtnvNoIwSBVUmO0I1gWI9TYz
-	VDbcf9KB5GQGCTi6lDWHUMFSX9mejTWstRLe+Y6DAd37H8i8vmi9y1SynF8rWxtrfMH/
-	w8dxpCtgzx7zaYlCujoeUaM47zxtOkrU1Ce2XlSLPDev63DY3bQhSv9FbEnmj2N42VD3
-	Ftb1lj6qdQrsSHMcHvosHxYn5835fZkQVOIE0sUE0E2l4vnvDL1e7J6v4poYmHLmBy5v
-	mrpg==
-X-Gm-Message-State: AN3rC/4iB2VVC4OSBYCT2dosl3XYgGNIth1NtWPbNY5ZAQP1jQGJlfVP
-	qKxlJhJmeTW6PmMQ
-X-Received: by 10.99.24.86 with SMTP id 22mr19314284pgy.238.1492539762788;
-	Tue, 18 Apr 2017 11:22:42 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	m29sm25402101pfj.32.2017.04.18.11.22.41
+	h=x-gm-message-state:to:from:subject:message-id:date:user-agent
+	:mime-version:content-transfer-encoding;
+	bh=+TZg4/OIe85t8NE9+of02RzUyYAROm8UsxnFiJtfhuY=;
+	b=meeGf1ky/gNUIB0OshG7+Dx5QcjCEBDaVe+FLH/6u/F6jCPUgSOyLMZ4o2ARMxCsw/
+	N5O/6f54VFU5O/b5zt0OAN7hVUWgg49Fb3zHwdI64Wua2a9Uf4yBfdrzF/Y0NtXmdUqr
+	5AAJIAzXF0ZVPKq5N92TZlgO+MwdtKUoBc23kxj5oIO/nAmQO5z/9CTDIYaATHQXXW7l
+	Q+oMFt5gdMJor/VGfMBefHzajB3vRu7tE0KMjctGvjs3xUCSBssndWDjcRAm7OkrtdOe
+	Mb/FYH1JC+GhL2UzERlEBWGwgGIQb5BV6RfImxcRLNmcUjARrIDsQ40GX+FmybOJvdGe
+	jP+w==
+X-Gm-Message-State: AN3rC/6WjBOHo3CeeEsQy9NXr6V5KI4PRTWqVnsXATmiTWWFTqF48/Rc
+	deg63ITjPhO6MqjO
+X-Received: by 10.46.84.90 with SMTP id y26mr2517139ljd.20.1492544315780;
+	Tue, 18 Apr 2017 12:38:35 -0700 (PDT)
+Received: from [192.168.11.27] (mail.dev.rtsoft.ru. [213.79.90.226])
+	by smtp.googlemail.com with ESMTPSA id
+	t23sm19050ljd.30.2017.04.18.12.38.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Apr 2017 11:22:41 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 18 Apr 2017 12:38:34 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Apr 2017 11:21:42 -0700
-Message-Id: <20170418182142.27253-32-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170418182142.27253-1-raj.khem@gmail.com>
-References: <20170418182142.27253-1-raj.khem@gmail.com>
-Subject: [meta-python][ 32/32] python-lxml, python3-lxml: Fix libxslt format warnings
+From: Andrey Konovalov <andrey.konovalov@linaro.org>
+Message-ID: <58F66B39.2060104@linaro.org>
+Date: Tue, 18 Apr 2017 22:38:33 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
+	Thunderbird/38.5.1
+MIME-Version: 1.0
+Subject: [meta-browser] chromium: update chromium in morty to match what is currently in the master branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,135 +54,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 18:22:42 -0000
+X-List-Received-Date: Tue, 18 Apr 2017 19:38:37 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Found with clang
+To make it visible in the mailing list too:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...01-lxml.etree-Add-empty-variadic-argument.patch | 40 ++++++++++++++++++++++
- .../recipes-devtools/python/python-lxml_3.7.3.bb   |  4 +++
- ...01-lxml.etree-Add-empty-variadic-argument.patch | 40 ++++++++++++++++++++++
- .../recipes-devtools/python/python3-lxml_3.7.3.bb  |  4 +++
- 4 files changed, 88 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
+https://github.com/OSSystems/meta-browser/pull/33
 
-diff --git a/meta-python/recipes-devtools/python/python-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch b/meta-python/recipes-devtools/python/python-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
-new file mode 100644
-index 000000000..efaecd69c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
-@@ -0,0 +1,40 @@
-+From f8d2c3394767025b3b27b71248b3ecb50480cde7 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Apr 2017 17:10:45 -0700
-+Subject: [PATCH] lxml.etree: Add empty variadic argument
-+
-+format checker says that argument 4 is a printf formatted argument
-+but there is no more arguments to follow
-+
-+Fixes libxslt format warnings
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lxml/lxml.etree.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lxml/lxml.etree.c b/src/lxml/lxml.etree.c
-+index d482091..faab06c 100644
-+--- a/src/lxml/lxml.etree.c
-++++ b/src/lxml/lxml.etree.c
-+@@ -186086,7 +186086,7 @@ static void __pyx_f_4lxml_5etree__callExtensionElement(xsltTransformContext *__p
-+  *         except:
-+  */
-+             __pyx_t_26 = __Pyx_PyObject_AsString(__pyx_v_message); if (unlikely((!__pyx_t_26) && PyErr_Occurred())) __PYX_ERR(19, 228, __pyx_L18_except_error)
-+-            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26);
-++            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26, "");
-+ 
-+             /* "src/lxml/xsltext.pxi":229
-+  *                 c_inst_node.name, _cstr(e))
-+@@ -186136,7 +186136,7 @@ static void __pyx_f_4lxml_5etree__callExtensionElement(xsltTransformContext *__p
-+  *     except:
-+  */
-+             __pyx_t_26 = __Pyx_PyObject_AsString(__pyx_v_message); if (unlikely((!__pyx_t_26) && PyErr_Occurred())) __PYX_ERR(19, 234, __pyx_L18_except_error)
-+-            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26);
-++            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26, "");
-+ 
-+             /* "src/lxml/xsltext.pxi":235
-+  *                 "Error executing extension element '%s'", c_inst_node.name)
-+-- 
-+2.12.2
-+
-diff --git a/meta-python/recipes-devtools/python/python-lxml_3.7.3.bb b/meta-python/recipes-devtools/python/python-lxml_3.7.3.bb
-index 81ccb12d8..5c93a3f84 100644
---- a/meta-python/recipes-devtools/python/python-lxml_3.7.3.bb
-+++ b/meta-python/recipes-devtools/python/python-lxml_3.7.3.bb
-@@ -1,2 +1,6 @@
- inherit setuptools
- require python-lxml.inc
-+
-+SRC_URI = "${PYPI_SRC_URI} \
-+           file://0001-lxml.etree-Add-empty-variadic-argument.patch \
-+           "
-diff --git a/meta-python/recipes-devtools/python/python3-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch b/meta-python/recipes-devtools/python/python3-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
-new file mode 100644
-index 000000000..bb012dc44
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-lxml/0001-lxml.etree-Add-empty-variadic-argument.patch
-@@ -0,0 +1,40 @@
-+From 36e64cf2f0676ee422c1fd41456967f3015b2fa3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Apr 2017 17:10:45 -0700
-+Subject: [PATCH] lxml.etree: Add empty variadic argument
-+
-+format checker says that argument 4 is a printf formatted argument
-+but there is no more arguments to follow
-+
-+Fixes libxslt format warnings
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lxml/lxml.etree.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lxml/lxml.etree.c b/src/lxml/lxml.etree.c
-+index d482091..faab06c 100644
-+--- a/src/lxml/lxml.etree.c
-++++ b/src/lxml/lxml.etree.c
-+@@ -186086,7 +186086,7 @@ static void __pyx_f_4lxml_5etree__callExtensionElement(xsltTransformContext *__p
-+  *         except:
-+  */
-+             __pyx_t_26 = __Pyx_PyObject_AsString(__pyx_v_message); if (unlikely((!__pyx_t_26) && PyErr_Occurred())) __PYX_ERR(19, 228, __pyx_L18_except_error)
-+-            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26);
-++            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26, "");
-+ 
-+             /* "src/lxml/xsltext.pxi":229
-+  *                 c_inst_node.name, _cstr(e))
-+@@ -186136,7 +186136,7 @@ static void __pyx_f_4lxml_5etree__callExtensionElement(xsltTransformContext *__p
-+  *     except:
-+  */
-+             __pyx_t_26 = __Pyx_PyObject_AsString(__pyx_v_message); if (unlikely((!__pyx_t_26) && PyErr_Occurred())) __PYX_ERR(19, 234, __pyx_L18_except_error)
-+-            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26);
-++            xsltTransformError(__pyx_v_c_ctxt, NULL, __pyx_v_c_inst_node, __pyx_t_26, "");
-+ 
-+             /* "src/lxml/xsltext.pxi":235
-+  *                 "Error executing extension element '%s'", c_inst_node.name)
-+-- 
-+2.12.2
-+
-diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb b/meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb
-index ff4bc7faa..8b13d2dd2 100644
---- a/meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb
-+++ b/meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb
-@@ -1,2 +1,6 @@
- inherit setuptools3
- require python-lxml.inc
-+
-+SRC_URI = "${PYPI_SRC_URI} \
-+           file://0001-lxml.etree-Add-empty-variadic-argument.patch \
-+           "
--- 
-2.12.2
-
+Thanks,
+Andrey
 
