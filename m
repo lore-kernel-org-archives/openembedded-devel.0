@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0082771CCB
+	by mail.openembedded.org (Postfix) with ESMTP id 5691A7311B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 18:22:36 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id o123so164683pga.1
+	Tue, 18 Apr 2017 18:22:38 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id o123so164757pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 11:22:38 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=q2WbYrSJJoboa34wGeUkHD0MWosvGpzHRie3bqGKrdY=;
-	b=K/971SXrX1lMi0u4TLldiu8oi0OVbR7lTgOKQrMsPFyLcjyObreCqserbeMUZ8XHL+
-	ovEfRisWW5rRLcodhjEUihenQlw8Sj1E4Tl5mKj76LQGDZbPvfNUQidYgd78YLlCt1xK
-	Uch8dr10z6PveADyn3TA67wYFiVXleM0aWK2eZ+cuI6iXu9r4QA0FA98Xs+OZK8ZIU4A
-	2wqTROpm1ylD0d/mFA2JUVcwNphmi3Mrp9DGcmEfJJ6oUGbSQDI+sW0jRrEI8f8H0zr8
-	uAaI/fYHLaKO+m52yjSJbn38pgNjHJYHTioBh8FTynNHmcmREppureWOOZidS9WrM1Aa
-	m+Hg==
+	bh=eiPU2q+W32MdmtlqTo59LKaCAO4HNFuOA3/dY5u0E9A=;
+	b=etD5NJ5tq0qaHlxc7XnM8MP6jjHZyGJsYTcF/T+uEdITMTEWZbcVAkRyCpSOiWFqft
+	IWnUGJxudjpQwU9hIYXga+Pex571XfdBQdXpMuRo/4MOu7DHav51jxjDVckOJPtGeq4H
+	eOdVy8V1EZ01DtuF8PskA7mrrKRSrKeuhqI388+Fv8akSqT5Q3Z4VD92C6J7eTEazegZ
+	jP7m+3Te6IJYVpagd3Lazlk5n62mV0LetGYbGdHk4sm4crqcUbiFcV4O0MyIMIQsU8Qf
+	NJhEuFGonNEkr6lwniAzCwU/CvI0IN7QizAuK+NGtdW7xBHMsvpJ5vMblnIkD9Ou/cCE
+	XUog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=q2WbYrSJJoboa34wGeUkHD0MWosvGpzHRie3bqGKrdY=;
-	b=MtNlMcbxGp4G9WbHpjtbzwE6yJ8p+MBoiTotHEsoaXurSrVJmicgwwXDwvzuAe0Lwe
-	lM7txxcD/G52QivHeWNcOow/hcEUV1+uBboZN9Qk734sZJ9vZ/WFLO2Gzr7XF8uGQRf7
-	3TsSnxtsDwbLHu71Z9m6w6Xd1Kr/EDU24a9XEGUEsg8qwuGs1fewszaErzEvZH/BiM1g
-	IvpDrS5/JMMe5YOvC6ylvi4nTcHgM7v+aTqIEFznijD5vTUxgm1NLYUZoHVjwbChLHxH
-	0gvIBmFhMTruNFQMsRAqWJpNsEy2CJM1+/1aVb+q3/tFvY7fjnkxObv5myjgfjlSDAf6
-	65ow==
-X-Gm-Message-State: AN3rC/6ZlmLfA4Hcwnptn4S6y3hzpYpyXcoYFgch9uDuCuaxi23PfHmW
-	cZ46NVierio1VQ==
-X-Received: by 10.99.153.9 with SMTP id d9mr19412263pge.214.1492539758296;
-	Tue, 18 Apr 2017 11:22:38 -0700 (PDT)
+	bh=eiPU2q+W32MdmtlqTo59LKaCAO4HNFuOA3/dY5u0E9A=;
+	b=NTscF0FvMkVosoglKZ+7kieDlVr7CT3IXi0H0mEJUeJfRI+bMYx6WG7bRdtZo+STCz
+	0LBqvIpbgWmUTMEnBJZr+jPx9LTPa3wgI+wME4+mHtMeV9kKlrfIv7ToSectnJdZL55E
+	tyqsI4mTTXVOe6EN/vFSHFLG2PBPAnx+ei4wec6Iq25ljyjV9Lofm7g07FBpo2LR5K2I
+	Dxm9rjQRde6zDWB0ZIokjwfgOsM5EhNz8fRhttiAAg+89KghAXKBF2xa8Qg3u0yWA82C
+	uKUHvgX178c2XcMt3qUueV5Rq/LQUC8HM/Hf82Y/cVEOWUIqBx1PX6RpYg1T3hgexSF0
+	wp1g==
+X-Gm-Message-State: AN3rC/4Qq/eZAFNPkTHRuSGdGnE60HJUOeEW4CvrKixC7mJrhsehdFnK
+	1/hYZRAqwYLPXg==
+X-Received: by 10.99.143.11 with SMTP id n11mr5124437pgd.232.1492539759919;
+	Tue, 18 Apr 2017 11:22:39 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	m29sm25402101pfj.32.2017.04.18.11.22.36
+	m29sm25402101pfj.32.2017.04.18.11.22.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Apr 2017 11:22:37 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:38 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Apr 2017 11:21:39 -0700
-Message-Id: <20170418182142.27253-29-raj.khem@gmail.com>
+Date: Tue, 18 Apr 2017 11:21:40 -0700
+Message-Id: <20170418182142.27253-30-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170418182142.27253-1-raj.khem@gmail.com>
 References: <20170418182142.27253-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 29/32] mg: Upgrade to 20170401 release
+Subject: [meta-oe][ 30/32] lirc: update to 0.9.4d
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,158 +55,229 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 18:22:37 -0000
-
-Fix musl build along the way
+X-List-Received-Date: Tue, 18 Apr 2017 18:22:38 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...001-Undefine-REGEX-for-musl-based-systems.patch | 39 ++++++++++++++++++++++
- ...-fileio-Include-sys-param.h-for-MAXNAMLEN.patch | 25 ++++++++++++++
- ...Define-DEFFILEMODE-if-platform-is-missing.patch | 28 ++++++++++++++++
- .../mg/{mg_20161005.bb => mg_20170401.bb}          | 12 +++++--
- 4 files changed, 101 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
- create mode 100644 meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
- create mode 100644 meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
- rename meta-oe/recipes-support/mg/{mg_20161005.bb => mg_20170401.bb} (63%)
+ meta-oe/recipes-connectivity/lirc/lirc.inc         |   2 +-
+ ...crcd-Mark-local-inline-funtions-as-static.patch |  49 ----------
+ .../recipes-connectivity/lirc/lirc/pollfd.patch    | 101 +++++++++++++++++++++
+ .../lirc/{lirc_0.9.2.bb => lirc_0.9.4d.bb}         |   7 +-
+ 4 files changed, 106 insertions(+), 53 deletions(-)
+ delete mode 100644 meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
+ create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
+ rename meta-oe/recipes-connectivity/lirc/{lirc_0.9.2.bb => lirc_0.9.4d.bb} (92%)
 
-diff --git a/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch b/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc.inc b/meta-oe/recipes-connectivity/lirc/lirc.inc
+index 6ff8e0160..ef79885a0 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc.inc
++++ b/meta-oe/recipes-connectivity/lirc/lirc.inc
+@@ -6,7 +6,7 @@ DESCRIPTION_append_lirc-nslu2example = " This package contains a working config
+ HOMEPAGE = "http://www.lirc.org"
+ SECTION = "console/network"
+ LICENSE = "GPLv2"
+-DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
++DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
+ 
+ SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2"
+ 
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch b/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
+deleted file mode 100644
+index e19d27671..000000000
+--- a/meta-oe/recipes-connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
++++ /dev/null
+@@ -1,49 +0,0 @@
+-From c2be4543e4777c9e3d74b30326ba37b01917b0a9 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Thu, 25 Aug 2016 03:02:37 +0000
+-Subject: [PATCH] lircrcd: Mark local inline funtions as static
+-
+-These functions are not used anywhere outside
+-this file, so they should be converted into static
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+-Upstream-Status: Pending
+-
+- daemons/lircrcd.c | 6 +++---
+- 1 file changed, 3 insertions(+), 3 deletions(-)
+-
+-diff --git a/daemons/lircrcd.c b/daemons/lircrcd.c
+-index 55777cd..5ddc94d 100644
+---- a/daemons/lircrcd.c
+-+++ b/daemons/lircrcd.c
+-@@ -153,7 +153,7 @@ char *s;
+- /* A safer write(), since sockets might not write all but only some of the
+-    bytes requested */
+- 
+--inline int write_socket(int fd, char *buf, int len)
+-+static inline int write_socket(int fd, char *buf, int len)
+- {
+- 	int done, todo = len;
+- 
+-@@ -167,7 +167,7 @@ inline int write_socket(int fd, char *buf, int len)
+- 	return (len);
+- }
+- 
+--inline int write_socket_len(int fd, char *buf)
+-+static inline int write_socket_len(int fd, char *buf)
+- {
+- 	int len;
+- 
+-@@ -177,7 +177,7 @@ inline int write_socket_len(int fd, char *buf)
+- 	return (1);
+- }
+- 
+--inline int read_timeout(int fd, char *buf, int len, int timeout)
+-+static inline int read_timeout(int fd, char *buf, int len, int timeout)
+- {
+- 	fd_set fds;
+- 	struct timeval tv;
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch b/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
 new file mode 100644
-index 000000000..130267931
+index 000000000..4feea8034
 --- /dev/null
-+++ b/meta-oe/recipes-support/mg/mg/0001-Undefine-REGEX-for-musl-based-systems.patch
-@@ -0,0 +1,39 @@
-+From a370ccd9447752c555aeca04f64021efedde4db3 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 7 Apr 2017 17:16:19 -0700
-+Subject: [PATCH] Undefine REGEX for musl based systems
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ GNUmakefile | 1 -
-+ Makefile    | 2 +-
-+ 2 files changed, 1 insertion(+), 2 deletions(-)
-+
-+diff --git a/GNUmakefile b/GNUmakefile
-+index 7bf7dca..0e10030 100644
-+--- a/GNUmakefile
-++++ b/GNUmakefile
-+@@ -41,7 +41,6 @@ endif
-+ CC?=		gcc
-+ CFLAGS?=	-O2 -pipe
-+ CFLAGS+=	-g -Wall
-+-CPPFLAGS=	-DREGEX
-+ CPPFLAGS+=	-D_GNU_SOURCE
-+ CPPFLAGS+=	$(BSD_CPPFLAGS) -D__dead=__dead2
-+ LIBS=		$(CURSES_LIBS) $(BSD_LIBS)
-+diff --git a/Makefile b/Makefile
-+index 94ce340..d516bbc 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -10,7 +10,7 @@ DPADD+=	${LIBCURSES} ${LIBUTIL}
-+ #	REGEX		-- create regular expression functions.
-+ #	STARTUPFILE	-- look for and handle initialization file.
-+ #
-+-CFLAGS+=-Wall -DREGEX
-++CFLAGS+=-Wall
++++ b/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
+@@ -0,0 +1,101 @@
++Index: lirc-0.9.4d/daemons/lircrcd.cpp
++===================================================================
++--- lirc-0.9.4d.orig/daemons/lircrcd.cpp
+++++ lirc-0.9.4d/daemons/lircrcd.cpp
++@@ -29,10 +29,12 @@
++ #include <sys/un.h>
++ #include <sys/stat.h>
++ #include <sys/types.h>
+++#include <poll.h>
++ #include <syslog.h>
 + 
-+ SRCS=	autoexec.c basic.c bell.c buffer.c cinfo.c dir.c display.c \
-+ 	echo.c extend.c file.c fileio.c funmap.c help.c kbd.c keymap.c \
-+-- 
-+2.12.2
-+
-diff --git a/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch b/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
-new file mode 100644
-index 000000000..551f1df16
---- /dev/null
-+++ b/meta-oe/recipes-support/mg/mg/0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch
-@@ -0,0 +1,25 @@
-+From 51539bcd2ee9f765595c0be16eebc1daee112b27 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 7 Apr 2017 16:52:59 -0700
-+Subject: [PATCH 1/2] fileio: Include sys/param.h for MAXNAMLEN
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ fileio.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/fileio.c b/fileio.c
-+index 48a67a2..9b69665 100644
-+--- a/fileio.c
-++++ b/fileio.c
-+@@ -12,6 +12,7 @@
++ #include "lirc_client.h"
++ #include "lirc/lirc_log.h"
+++#include "lirc/curl_poll.h"
++ 
++ #define MAX_CLIENTS 100
++ #define WHITE_SPACE " \t"
++Index: lirc-0.9.4d/lib/curl_poll.c
++===================================================================
++--- lirc-0.9.4d.orig/lib/curl_poll.c
+++++ lirc-0.9.4d/lib/curl_poll.c
++@@ -36,6 +36,7 @@
++ #include <stdlib.h>
 + #include <sys/time.h>
 + #include <sys/types.h>
-+ #include <sys/wait.h>
-++#include <sys/param.h>
-+ #include <dirent.h>
-+ #include <errno.h>
-+ #include <fcntl.h>
-+-- 
-+2.12.2
-+
-diff --git a/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch b/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
-new file mode 100644
-index 000000000..907d67064
---- /dev/null
-+++ b/meta-oe/recipes-support/mg/mg/0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch
-@@ -0,0 +1,28 @@
-+From ce24a29cabb8f1774d262e120e5764a2afeb3825 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 7 Apr 2017 16:53:49 -0700
-+Subject: [PATCH 2/2] fileio: Define DEFFILEMODE if platform is missing
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ fileio.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/fileio.c b/fileio.c
-+index 9b69665..a852fd2 100644
-+--- a/fileio.c
-++++ b/fileio.c
-+@@ -28,6 +28,10 @@
-+ #include "kbd.h"
-+ #include "pathnames.h"
+++#include <sys/poll.h>
 + 
-++#if !defined(DEFFILEMODE)
-++# define DEFFILEMODE (S_IRUSR|S_IWUSR|S_IRGRP|S_IWGRP|S_IROTH|S_IWOTH)/* 0666*/
-++#endif
-++
-+ static char *bkuplocation(const char *);
-+ static int   bkupleavetmp(const char *);
++ #include "lirc_log.h"
++ #include "curl_poll.h"
++@@ -67,7 +68,7 @@ static const logchannel_t logchannel = L
 + 
-+-- 
-+2.12.2
-+
-diff --git a/meta-oe/recipes-support/mg/mg_20161005.bb b/meta-oe/recipes-support/mg/mg_20170401.bb
-similarity index 63%
-rename from meta-oe/recipes-support/mg/mg_20161005.bb
-rename to meta-oe/recipes-support/mg/mg_20170401.bb
-index f9ceb4665..dad1d008b 100644
---- a/meta-oe/recipes-support/mg/mg_20161005.bb
-+++ b/meta-oe/recipes-support/mg/mg_20170401.bb
-@@ -5,9 +5,15 @@ LIC_FILES_CHKSUM = "file://version.c;md5=1895eb37bf6bd79cdc5c89d8166fabfb"
- DEPENDS = "ncurses libbsd"
- SECTION = "console/editors"
++ #ifdef HAVE_POLL_FINE
++ 
++-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
+++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
++ {
++ 	return poll(ufds, nfds, timeout_ms);
++ }
++@@ -112,7 +113,7 @@ static int verify_sock(int s)
++ }
++ 
++ 
++-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
+++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
++ {
++ 	struct timeval pending_tv;
++ 	struct timeval* ptimeout;
++Index: lirc-0.9.4d/lib/curl_poll.h
++===================================================================
++--- lirc-0.9.4d.orig/lib/curl_poll.h
+++++ lirc-0.9.4d/lib/curl_poll.h
++@@ -1,5 +1,5 @@
++-#ifndef _POLL_H
++-#define _POLL_H
+++#ifndef _LIB_CURL_POLL_H
+++#define _LIB_CURL_POLL_H
++ /***************************************************************************
++  *                                  _   _ ____  _
++  *  Project                     ___| | | |  _ \| |
++@@ -29,13 +29,9 @@
++ extern "C" {
++ #endif
++ 
++-#ifdef HAVE_SYS_POLL_H
++-#include <sys/poll.h>
++-#else
++ #include <poll.h>
++-#endif
++ 
++-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
+++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
++ 
++ #ifdef __cplusplus
++ }
++Index: lirc-0.9.4d/lib/lirc/curl_poll.h
++===================================================================
++--- lirc-0.9.4d.orig/lib/lirc/curl_poll.h
+++++ lirc-0.9.4d/lib/lirc/curl_poll.h
++@@ -1,5 +1,5 @@
++-#ifndef _POLL_H
++-#define _POLL_H
+++#ifndef _LIRC_CURL_POLL_H
+++#define _LIRC_CURL_POLL_H
++ /***************************************************************************
++  *                                  _   _ ____  _
++  *  Project                     ___| | | |  _ \| |
++@@ -29,13 +29,9 @@
++ extern "C" {
++ #endif
++ 
++-#ifdef HAVE_SYS_POLL_H
++-#include <sys/poll.h>
++-#else
++ #include <poll.h>
++-#endif
++ 
++-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
+++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
++ 
++ #ifdef __cplusplus
++ }
+diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
+similarity index 92%
+rename from meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
+rename to meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
+index 17261921f..a9bcb760c 100644
+--- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
++++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
+@@ -1,7 +1,7 @@
+ require lirc.inc
  
--SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz"
--SRC_URI[md5sum] = "fc6faeeee7308bb46f3512b75867ed51"
--SRC_URI[sha256sum] = "b7fcb5136a6783ca24c8463ab0852fc1f26bdb2bb1c24759b2c51ccfc46c5e61"
-+SRC_URI = "http://homepage.boetes.org/software/mg/mg-${PV}.tar.gz \
-+           file://0001-fileio-Include-sys-param.h-for-MAXNAMLEN.patch \
-+           file://0002-fileio-Define-DEFFILEMODE-if-platform-is-missing.patch \
-+           "
-+SRC_URI_append_libc-musl = "\
-+           file://0001-Undefine-REGEX-for-musl-based-systems.patch \
-+           "
-+SRC_URI[md5sum] = "884388589fb38c2109ad9fed328be20a"
-+SRC_URI[sha256sum] = "0a3608b17c153960cb1d954ca3b62445a77c0c1a18aa5c8c58aba9f6b8d62aab"
+ SRC_URI += " \
+-    file://0001-lircrcd-Mark-local-inline-funtions-as-static.patch \
++    file://pollfd.patch \
+     file://lircd.service \
+     file://lircd.init \
+     file://lircexec.init \
+@@ -11,8 +11,8 @@ SRC_URI += " \
+ "
+ #file://0001-Adaptation-for-STM-configuration.patch \
+ #
+-SRC_URI[md5sum] = "3afc84e79c0839823cc20e7a710dd06d"
+-SRC_URI[sha256sum] = "4e3f948fcdee6dce009171143f0cb7cd7be48593dd58138db4101a41f651a1dd"
++SRC_URI[md5sum] = "0d11679cbdd94a5a6da00a8e7231b4bf"
++SRC_URI[sha256sum] = "c68f18c35b489b865c0a741d119b136e8702191538cd3551b977a7af6c4e41ab"
  
- # CFLAGS isn't in EXTRA_OEMAKE, as the makefile picks it up via ?=
- EXTRA_OEMAKE = "\
+ SYSTEMD_PACKAGES = "lirc"
+ SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service"
+@@ -27,6 +27,7 @@ PACKAGECONFIG ?= " \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} \
+ "
++CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
+ 
+ #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
+ do_install_append() {
 -- 
 2.12.2
 
