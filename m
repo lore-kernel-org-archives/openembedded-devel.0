@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 54AC271BEE
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 2812C71BEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 18:22:01 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id g2so158077pge.2
+	Tue, 18 Apr 2017 18:22:02 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id c198so144358pfc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 11:22:03 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=gudBkx53o4ktFc65dWYjK/O8O+P208J6WqpMFe2UDAU=;
-	b=lr4uqodo4Lk92azTvEjAYPOEEMmWlGcTq/YoL0F+4hmnERxgpfO/hFZYfcOnTqsDR/
-	tuPNqIDfiZHtKORmMrpchVet3SIA8JsY9Y2kZ/KoZFyOuhkdtrZ8MrGLFpIV+o1/r0Ip
-	+CfoRPfkY3kH8chHuO7deGgtYPg/QX2NMuSe4BorSLjBKnVKWm8WpGaMfQ6pB8twTMKC
-	5UYz54X4LIJA2oZI1AifPGxPpZ9mskSwAeq69SlC3A9XKtJDJmNR/Ruz/K6DNH7l4ZlS
-	uch+6QSBTeVFeYMe6Zm5RV37E2nq3SCmMuWiej/co1jzYYwpm6LqjgkP/9uDFpIY8mPF
-	uSog==
+	bh=MWQoaHMCX4IO46V4Cvp1F4sEuy7wrLw5/ViOA/QEVbQ=;
+	b=OgHnV/gcyNQrA9Hd4c9pRCm9q97XE3joKWM/dmWr1u/HyzHVHMWzYeJAMgdfXSgSrk
+	gL6vBiNrPt+9M02YwFDoD1G1VSPordN/tnko7NF4Q7qf2+TKNeimyM2GbKs0s+OjFMvE
+	08cpPrlNZ208fa1V265tNhkpQDPGbg5XnNgph3ZbAO2gCJBP7IsNs5zAd8pu1PZZ8UNy
+	WlB0FAm8ZedI6Im43Ejz2YTlvUGjvosHWWvuj/Kv3xTIB1wL8QPImHWvv56IybhCUNRG
+	LsZW1Td8imN43wgzPi+A9sBgzFk23YlyOPkctHzuZqXqAelpYBRHoPS3vzJHv89vfZga
+	pvZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=gudBkx53o4ktFc65dWYjK/O8O+P208J6WqpMFe2UDAU=;
-	b=JLbebpije12sgt0BXhLAFdpr0SfhDCwIcqmAD7Go08IklRGbR4eQ3L7BNfMYJQTp2c
-	y0qiJN+YxMKMvCaoMUgHpFYpixWoJXSLbicVjJS+FmwmPEY197hIZWkmGKN0OI3ayfsp
-	wgwv80dWEpXXk8RnF9RFQm05eG0WV6fF/IHkBbGpspCGVhSDPMrC8qMzDdAESgYNqOMv
-	SzFZct63zmlb/2LYi8chOptt0ZbxQhbStQZZtsHxqyiw3p2qbEZ+GjKCAQw/WCUHiUi/
-	agD4zcuepHBNG2HSNCj7pzECkX6yw8K5MBkMj6dagOmOw6QiTuboKPP2YzR44OXFLoIM
-	zBlw==
-X-Gm-Message-State: AN3rC/5bOnw+FBZI5yHBYoIgSRCsm4Mtc/Q7plSytmV1bS8x496xd+7U
-	RgGhkFWkTayzuw==
-X-Received: by 10.99.127.26 with SMTP id a26mr11434808pgd.196.1492539722138;
-	Tue, 18 Apr 2017 11:22:02 -0700 (PDT)
+	bh=MWQoaHMCX4IO46V4Cvp1F4sEuy7wrLw5/ViOA/QEVbQ=;
+	b=ty3886jyQNlzlbwAXpZQU8cDfb2BN+5GidV4Bo6emnDURcLxLbHOJ4mCcyWynGiUAK
+	gDJS8IkOTg09rcLnOb2uMBxtCkyvV9fPyP7sO7wNKjwOEmI3aI7OXG/LZHyihio6wRCp
+	AB/N+fWraoESXsOxMvOJrJ7vBhQYgEu+ydrguuhL7tOk9CACiBWL6Pg/0pGU73yYIqgC
+	q8Ueyehgtx0hByczRm7o+jMJnXXr3PX0Pel6ALehXl+/n5Pis4r8CSLb6eweIeUgOAOX
+	sekrRRK8Gt1mLLboUX2T2I8wPi64UZAslpE1rv0yhCrbdgZykbn8kaLvwYipNxTBHyCx
+	hzcw==
+X-Gm-Message-State: AN3rC/4hBq6XknsOLaATyI6XvJPRIfa47M49vfKGeM+L0a9C9Zk1uUHA
+	vmRiHwL/xQQBmw==
+X-Received: by 10.99.54.72 with SMTP id d69mr19305503pga.24.1492539723810;
+	Tue, 18 Apr 2017 11:22:03 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	m29sm25402101pfj.32.2017.04.18.11.22.00
+	m29sm25402101pfj.32.2017.04.18.11.22.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Apr 2017 11:22:00 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Apr 2017 11:21:17 -0700
-Message-Id: <20170418182142.27253-7-raj.khem@gmail.com>
+Date: Tue, 18 Apr 2017 11:21:18 -0700
+Message-Id: <20170418182142.27253-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170418182142.27253-1-raj.khem@gmail.com>
 References: <20170418182142.27253-1-raj.khem@gmail.com>
-Subject: [meta-networking][ 07/32] libnetfilter-queue: Fix symbol visibility bug found with clang
+Subject: [meta-networking][ 08/32] libnetfilter-cthelper, libnetfilter-cttimeout: Backport patches to fix symbol visibility
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,604 +56,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 18:22:02 -0000
+X-List-Received-Date: Tue, 18 Apr 2017 18:22:03 -0000
+
+These are needed for building it with clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-the-define-visivility-attribute-together.patch | 1229 ++++++++++++++++++++
- .../libnetfilter/libnetfilter-queue_1.0.2.bb       |    1 +
- 2 files changed, 1230 insertions(+)
- create mode 100644 meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch
+ .../libnetfilter-cthelper-visibility-hidden.patch  | 385 +++++++++++++++++++++
+ .../libnetfilter-cttimeout-visibility-hidden.patch | 264 ++++++++++++++
+ .../libnetfilter/libnetfilter-cthelper_1.0.0.bb    |   4 +-
+ .../libnetfilter/libnetfilter-cttimeout_1.0.0.bb   |   4 +-
+ 4 files changed, 655 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
+ create mode 100644 meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cttimeout-visibility-hidden.patch
 
-diff --git a/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch b/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch
+diff --git a/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
 new file mode 100644
-index 000000000..946f1b71d
+index 000000000..9377f57cb
 --- /dev/null
-+++ b/meta-networking/recipes-filter/libnetfilter/files/0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch
-@@ -0,0 +1,1229 @@
-+From 06562244ac4a1a61e1a2c6b219a517658f7349bf Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 10 Apr 2017 12:09:41 -0700
-+Subject: [PATCH] Declare the define visivility attribute together
++++ b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cthelper-visibility-hidden.patch
+@@ -0,0 +1,385 @@
++From f58c5b09fb59baf07c942d373fc4d522b27e73c6 Mon Sep 17 00:00:00 2001
++From: Kevin Cernekee <cernekee@chromium.org>
++Date: Wed, 4 Jan 2017 14:30:26 -0800
++Subject: Use __EXPORTED rather than EXPORT_SYMBOL
 +
-+clang ignores the visibility attribute if its not
-+defined before the definition. As a result these
-+symbols become hidden and consumers of this library
-+fail to link due to these missing symbols
++clang is sensitive to the ordering of
++__attribute__((visibility("default"))) relative to the function
++body.  gcc is not.  So if we try to re-declare an existing function
++with default visibility, clang prints a warning and generates
++a broken .so file in which nfct_helper_* are not exported to library
++callers.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Move the attribute up into the function definition to make clang happy.
++
++Signed-off-by: Kevin Cernekee <cernekee@chromium.org>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
 +---
-+ doxygen.cfg.in           |   2 +-
-+ src/extra/ipv4.c         |  15 +++----
-+ src/extra/ipv6.c         |   9 ++--
-+ src/extra/pktbuff.c      |  42 ++++++------------
-+ src/extra/tcp.c          |  21 +++------
-+ src/extra/udp.c          |  21 +++------
-+ src/internal.h           |   5 +--
-+ src/libnetfilter_queue.c | 108 ++++++++++++++++-------------------------------
-+ src/nlmsg.c              |  21 +++------
-+ 9 files changed, 82 insertions(+), 162 deletions(-)
++ doxygen.cfg.in              |  2 +-
++ src/internal.h              |  5 ++-
++ src/libnetfilter_cthelper.c | 83 ++++++++++++++++++---------------------------
++ 3 files changed, 36 insertions(+), 54 deletions(-)
 +
 +diff --git a/doxygen.cfg.in b/doxygen.cfg.in
-+index a7378ca..659abee 100644
++index cac9b05..190b7cd 100644
 +--- a/doxygen.cfg.in
 ++++ b/doxygen.cfg.in
 +@@ -72,7 +72,7 @@ RECURSIVE              = YES
 + EXCLUDE                = 
 + EXCLUDE_SYMLINKS       = NO
-+ EXCLUDE_PATTERNS       = 
++ EXCLUDE_PATTERNS       = */.git/* .*.d
 +-EXCLUDE_SYMBOLS        = EXPORT_SYMBOL
-++EXCLUDE_SYMBOLS        =
+++EXCLUDE_SYMBOLS        = 
 + EXAMPLE_PATH           = 
 + EXAMPLE_PATTERNS       = 
 + EXAMPLE_RECURSIVE      = NO
-+diff --git a/src/extra/ipv4.c b/src/extra/ipv4.c
-+index a93d113..56d5dc7 100644
-+--- a/src/extra/ipv4.c
-++++ b/src/extra/ipv4.c
-+@@ -32,7 +32,7 @@
-+  * This funcion returns NULL if the IPv4 is malformed or the protocol version
-+  * is not 4. On success, it returns a valid pointer to the IPv4 header.
-+  */
-+-struct iphdr *nfq_ip_get_hdr(struct pkt_buff *pktb)
-++struct iphdr __EXPORTED *nfq_ip_get_hdr(struct pkt_buff *pktb)
-+ {
-+ 	struct iphdr *iph;
-+ 	unsigned int pktlen = pktb->tail - pktb->network_header;
-+@@ -53,14 +53,13 @@ struct iphdr *nfq_ip_get_hdr(struct pkt_buff *pktb)
-+ 
-+ 	return iph;
-+ }
-+-EXPORT_SYMBOL(nfq_ip_get_hdr);
-+ 
-+ /**
-+  * nfq_ip_set_transport_header - set transport header
-+  * \param pktb: pointer to network packet buffer
-+  * \param iph: pointer to the IPv4 header
-+  */
-+-int nfq_ip_set_transport_header(struct pkt_buff *pktb, struct iphdr *iph)
-++int __EXPORTED nfq_ip_set_transport_header(struct pkt_buff *pktb, struct iphdr *iph)
-+ {
-+ 	int doff = iph->ihl * 4;
-+ 
-+@@ -71,7 +70,6 @@ int nfq_ip_set_transport_header(struct pkt_buff *pktb, struct iphdr *iph)
-+ 	pktb->transport_header = pktb->network_header + doff;
-+ 	return 0;
-+ }
-+-EXPORT_SYMBOL(nfq_ip_set_transport_header);
-+ 
-+ /**
-+  * nfq_ip_set_checksum - set IPv4 checksum
-+@@ -80,14 +78,13 @@ EXPORT_SYMBOL(nfq_ip_set_transport_header);
-+  * \note Call to this function if you modified the IPv4 header to update the
-+  * checksum.
-+  */
-+-void nfq_ip_set_checksum(struct iphdr *iph)
-++void __EXPORTED nfq_ip_set_checksum(struct iphdr *iph)
-+ {
-+ 	uint32_t iph_len = iph->ihl * 4;
-+ 
-+ 	iph->check = 0;
-+ 	iph->check = nfq_checksum(0, (uint16_t *)iph, iph_len);
-+ }
-+-EXPORT_SYMBOL(nfq_ip_set_checksum);
-+ 
-+ /**
-+  * nfq_ip_mangle - mangle IPv4 packet buffer
-+@@ -100,7 +97,7 @@ EXPORT_SYMBOL(nfq_ip_set_checksum);
-+  *
-+  * \note This function recalculates the IPv4 checksum (if needed).
-+  */
-+-int nfq_ip_mangle(struct pkt_buff *pkt, unsigned int dataoff,
-++int __EXPORTED nfq_ip_mangle(struct pkt_buff *pkt, unsigned int dataoff,
-+ 		  unsigned int match_offset, unsigned int match_len,
-+ 		  const char *rep_buffer, unsigned int rep_len)
-+ {
-+@@ -116,7 +113,6 @@ int nfq_ip_mangle(struct pkt_buff *pkt, unsigned int dataoff,
-+ 
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(nfq_ip_mangle);
-+ 
-+ /**
-+  * nfq_pkt_snprintf_ip - print IPv4 header into buffer in iptables LOG format
-+@@ -128,7 +124,7 @@ EXPORT_SYMBOL(nfq_ip_mangle);
-+  * case that there is enough room in the buffer. Read snprintf manpage for more
-+  * information to know more about this strange behaviour.
-+  */
-+-int nfq_ip_snprintf(char *buf, size_t size, const struct iphdr *iph)
-++int __EXPORTED nfq_ip_snprintf(char *buf, size_t size, const struct iphdr *iph)
-+ {
-+ 	int ret;
-+ 	struct in_addr src = { iph->saddr };
-+@@ -147,7 +143,6 @@ int nfq_ip_snprintf(char *buf, size_t size, const struct iphdr *iph)
-+ 
-+ 	return ret;
-+ }
-+-EXPORT_SYMBOL(nfq_ip_snprintf);
-+ 
-+ /**
-+  * @}
-+diff --git a/src/extra/ipv6.c b/src/extra/ipv6.c
-+index 7c5dc9b..6641c6b 100644
-+--- a/src/extra/ipv6.c
-++++ b/src/extra/ipv6.c
-+@@ -33,7 +33,7 @@
-+  * This funcion returns NULL if an invalid header is found. On sucess, it
-+  * returns a valid pointer to the header.
-+  */
-+-struct ip6_hdr *nfq_ip6_get_hdr(struct pkt_buff *pktb)
-++struct ip6_hdr __EXPORTED *nfq_ip6_get_hdr(struct pkt_buff *pktb)
-+ {
-+ 	struct ip6_hdr *ip6h;
-+ 	unsigned int pktlen = pktb->tail - pktb->network_header;
-+@@ -50,7 +50,6 @@ struct ip6_hdr *nfq_ip6_get_hdr(struct pkt_buff *pktb)
-+ 
-+ 	return ip6h;
-+ }
-+-EXPORT_SYMBOL(nfq_ip6_get_hdr);
-+ 
-+ /**
-+  * nfq_ip6_set_transport_header - set transport header pointer for IPv6 packet
-+@@ -61,7 +60,7 @@ EXPORT_SYMBOL(nfq_ip6_get_hdr);
-+  * This function returns 1 if the protocol has been found and the transport
-+  * header has been set. Otherwise, it returns 0.
-+  */
-+-int nfq_ip6_set_transport_header(struct pkt_buff *pktb, struct ip6_hdr *ip6h,
-++int __EXPORTED nfq_ip6_set_transport_header(struct pkt_buff *pktb, struct ip6_hdr *ip6h,
-+ 				 uint8_t target)
-+ {
-+ 	uint8_t nexthdr = ip6h->ip6_nxt;
-+@@ -115,7 +114,6 @@ int nfq_ip6_set_transport_header(struct pkt_buff *pktb, struct ip6_hdr *ip6h,
-+ 	pktb->transport_header = cur;
-+ 	return cur ? 1 : 0;
-+ }
-+-EXPORT_SYMBOL(nfq_ip6_set_transport_header);
-+ 
-+ /**
-+  * nfq_ip6_snprintf - print IPv6 header into one buffer in iptables LOG format
-+@@ -124,7 +122,7 @@ EXPORT_SYMBOL(nfq_ip6_set_transport_header);
-+  * \param ip6_hdr: pointer to a valid IPv6 header.
-+  *
-+  */
-+-int nfq_ip6_snprintf(char *buf, size_t size, const struct ip6_hdr *ip6h)
-++int __EXPORTED nfq_ip6_snprintf(char *buf, size_t size, const struct ip6_hdr *ip6h)
-+ {
-+ 	int ret;
-+ 	char src[INET6_ADDRSTRLEN];
-+@@ -143,7 +141,6 @@ int nfq_ip6_snprintf(char *buf, size_t size, const struct ip6_hdr *ip6h)
-+ 
-+ 	return ret;
-+ }
-+-EXPORT_SYMBOL(nfq_ip6_snprintf);
-+ 
-+ /**
-+  * @}
-+diff --git a/src/extra/pktbuff.c b/src/extra/pktbuff.c
-+index 1c15a00..54d8244 100644
-+--- a/src/extra/pktbuff.c
-++++ b/src/extra/pktbuff.c
-+@@ -40,7 +40,7 @@
-+  *
-+  * \return a pointer to a new queue handle or NULL on failure.
-+  */
-+-struct pkt_buff *
-++struct pkt_buff __EXPORTED *
-+ pktb_alloc(int family, void *data, size_t len, size_t extra)
-+ {
-+ 	struct pkt_buff *pktb;
-+@@ -84,120 +84,108 @@ pktb_alloc(int family, void *data, size_t len, size_t extra)
-+ 	}
-+ 	return pktb;
-+ }
-+-EXPORT_SYMBOL(pktb_alloc);
-+ 
-+ /**
-+  * pktb_data - return pointer to the beginning of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-uint8_t *pktb_data(struct pkt_buff *pktb)
-++uint8_t __EXPORTED *pktb_data(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->data;
-+ }
-+-EXPORT_SYMBOL(pktb_data);
-+ 
-+ /**
-+  * pktb_len - return length of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-uint32_t pktb_len(struct pkt_buff *pktb)
-++uint32_t __EXPORTED pktb_len(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->len;
-+ }
-+-EXPORT_SYMBOL(pktb_len);
-+ 
-+ /**
-+  * pktb_free - release packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-void pktb_free(struct pkt_buff *pktb)
-++void __EXPORTED pktb_free(struct pkt_buff *pktb)
-+ {
-+ 	free(pktb);
-+ }
-+-EXPORT_SYMBOL(pktb_free);
-+ 
-+ /**
-+  * pktb_push - update pointer to the beginning of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-void pktb_push(struct pkt_buff *pktb, unsigned int len)
-++void __EXPORTED pktb_push(struct pkt_buff *pktb, unsigned int len)
-+ {
-+ 	pktb->data -= len;
-+ 	pktb->len += len;
-+ }
-+-EXPORT_SYMBOL(pktb_push);
-+ 
-+ /**
-+  * pktb_pull - update pointer to the beginning of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-void pktb_pull(struct pkt_buff *pktb, unsigned int len)
-++void __EXPORTED pktb_pull(struct pkt_buff *pktb, unsigned int len)
-+ {
-+ 	pktb->data += len;
-+ 	pktb->len -= len;
-+ }
-+-EXPORT_SYMBOL(pktb_pull);
-+ 
-+ /**
-+  * pktb_put - add extra bytes to the tail of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-void pktb_put(struct pkt_buff *pktb, unsigned int len)
-++void __EXPORTED pktb_put(struct pkt_buff *pktb, unsigned int len)
-+ {
-+ 	pktb->tail += len;
-+ 	pktb->len += len;
-+ }
-+-EXPORT_SYMBOL(pktb_put);
-+ 
-+ /**
-+  * pktb_trim - set new length for this packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-void pktb_trim(struct pkt_buff *pktb, unsigned int len)
-++void __EXPORTED pktb_trim(struct pkt_buff *pktb, unsigned int len)
-+ {
-+ 	pktb->len = len;
-+ }
-+-EXPORT_SYMBOL(pktb_trim);
-+ 
-+ /**
-+  * pktb_tailroom - get room in bytes in the tail of the packet buffer
-+  * \param pktb Pointer to packet buffer
-+  */
-+-unsigned int pktb_tailroom(struct pkt_buff *pktb)
-++unsigned int __EXPORTED pktb_tailroom(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->data_len - pktb->len;
-+ }
-+-EXPORT_SYMBOL(pktb_tailroom);
-+ 
-+ /**
-+  * pktb_mac_header - return pointer to layer 2 header (if any)
-+  * \param pktb Pointer to packet buffer
-+  */
-+-uint8_t *pktb_mac_header(struct pkt_buff *pktb)
-++uint8_t __EXPORTED *pktb_mac_header(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->mac_header;
-+ }
-+-EXPORT_SYMBOL(pktb_mac_header);
-+ 
-+ /**
-+  * pktb_network_header - return pointer to layer 3 header
-+  * \param pktb Pointer to packet buffer
-+  */
-+-uint8_t *pktb_network_header(struct pkt_buff *pktb)
-++uint8_t __EXPORTED *pktb_network_header(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->network_header;
-+ }
-+-EXPORT_SYMBOL(pktb_network_header);
-+ 
-+ /**
-+  * pktb_transport_header - return pointer to layer 4 header (if any)
-+  * \param pktb Pointer to packet buffer
-+  */
-+-uint8_t *pktb_transport_header(struct pkt_buff *pktb)
-++uint8_t __EXPORTED *pktb_transport_header(struct pkt_buff *pktb)
-+ {
-+ 	return pktb->transport_header;
-+ }
-+-EXPORT_SYMBOL(pktb_transport_header);
-+ 
-+ static int pktb_expand_tail(struct pkt_buff *pkt, int extra)
-+ {
-+@@ -224,7 +212,7 @@ static int enlarge_pkt(struct pkt_buff *pkt, unsigned int extra)
-+ 	return 1;
-+ }
-+ 
-+-int pktb_mangle(struct pkt_buff *pkt,
-++int __EXPORTED pktb_mangle(struct pkt_buff *pkt,
-+ 		 unsigned int dataoff,
-+ 		 unsigned int match_offset,
-+ 		 unsigned int match_len,
-+@@ -258,17 +246,15 @@ int pktb_mangle(struct pkt_buff *pkt,
-+ 	pkt->mangled = true;
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(pktb_mangle);
-+ 
-+ /**
-+  * pktb_mangled - return true if packet has been mangled
-+  * \param pktb Pointer to packet buffer
-+  */
-+-bool pktb_mangled(const struct pkt_buff *pkt)
-++bool __EXPORTED pktb_mangled(const struct pkt_buff *pkt)
-+ {
-+ 	return pkt->mangled;
-+ }
-+-EXPORT_SYMBOL(pktb_mangled);
-+ 
-+ /**
-+  * @}
-+diff --git a/src/extra/tcp.c b/src/extra/tcp.c
-+index d1cd79d..8038ce5 100644
-+--- a/src/extra/tcp.c
-++++ b/src/extra/tcp.c
-+@@ -40,7 +40,7 @@
-+  * \note You have to call nfq_ip_set_transport_header or
-+  * nfq_ip6_set_transport_header first to access the TCP header.
-+  */
-+-struct tcphdr *nfq_tcp_get_hdr(struct pkt_buff *pktb)
-++struct tcphdr __EXPORTED *nfq_tcp_get_hdr(struct pkt_buff *pktb)
-+ {
-+ 	if (pktb->transport_header == NULL)
-+ 		return NULL;
-+@@ -51,14 +51,13 @@ struct tcphdr *nfq_tcp_get_hdr(struct pkt_buff *pktb)
-+ 
-+ 	return (struct tcphdr *)pktb->transport_header;
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_get_hdr);
-+ 
-+ /**
-+  * nfq_tcp_get_payload - get the TCP packet payload
-+  * \param tcph: pointer to the TCP header
-+  * \param pktb: pointer to user-space network packet buffer
-+  */
-+-void *nfq_tcp_get_payload(struct tcphdr *tcph, struct pkt_buff *pktb)
-++void __EXPORTED *nfq_tcp_get_payload(struct tcphdr *tcph, struct pkt_buff *pktb)
-+ {
-+ 	unsigned int len = tcph->doff * 4;
-+ 
-+@@ -72,47 +71,43 @@ void *nfq_tcp_get_payload(struct tcphdr *tcph, struct pkt_buff *pktb)
-+ 
-+ 	return pktb->transport_header + len;
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_get_payload);
-+ 
-+ /**
-+  * nfq_tcp_get_payload_len - get the tcp packet payload
-+  * \param tcph: pointer to the TCP header
-+  * \param pktb: pointer to user-space network packet buffer
-+  */
-+-unsigned int
-++unsigned int __EXPORTED
-+ nfq_tcp_get_payload_len(struct tcphdr *tcph, struct pkt_buff *pktb)
-+ {
-+ 	return pktb->tail - pktb->transport_header;
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_get_payload_len);
-+ 
-+ /**
-+  * nfq_tcp_set_checksum_ipv4 - computes IPv4/TCP packet checksum
-+  * \param tcph: pointer to the TCP header
-+  * \param iph: pointer to the IPv4 header
-+  */
-+-void
-++void __EXPORTED
-+ nfq_tcp_compute_checksum_ipv4(struct tcphdr *tcph, struct iphdr *iph)
-+ {
-+ 	/* checksum field in header needs to be zero for calculation. */
-+ 	tcph->check = 0;
-+ 	tcph->check = nfq_checksum_tcpudp_ipv4(iph);
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_compute_checksum_ipv4);
-+ 
-+ /**
-+  * nfq_tcp_set_checksum_ipv6 - computes IPv6/TCP packet checksum
-+  * \param tcph: pointer to the TCP header
-+  * \param iph: pointer to the IPv6 header
-+  */
-+-void
-++void __EXPORTED
-+ nfq_tcp_compute_checksum_ipv6(struct tcphdr *tcph, struct ip6_hdr *ip6h)
-+ {
-+ 	/* checksum field in header needs to be zero for calculation. */
-+ 	tcph->check = 0;
-+ 	tcph->check = nfq_checksum_tcpudp_ipv6(ip6h, tcph);
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_compute_checksum_ipv6);
-+ 
-+ /*
-+  *	The union cast uses a gcc extension to avoid aliasing problems
-+@@ -134,7 +129,7 @@ union tcp_word_hdr {
-+  * \param tcp: pointer to a valid tcp header.
-+  *
-+  */
-+-int nfq_tcp_snprintf(char *buf, size_t size, const struct tcphdr *tcph)
-++int __EXPORTED nfq_tcp_snprintf(char *buf, size_t size, const struct tcphdr *tcph)
-+ {
-+ 	int ret, len = 0;
-+ 
-+@@ -177,7 +172,6 @@ int nfq_tcp_snprintf(char *buf, size_t size, const struct tcphdr *tcph)
-+ 
-+ 	return ret;
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_snprintf);
-+ 
-+ /**
-+  * nfq_tcp_mangle_ipv4 - mangle TCP/IPv4 packet buffer
-+@@ -189,7 +183,7 @@ EXPORT_SYMBOL(nfq_tcp_snprintf);
-+  *
-+  * \note This function recalculates the IPv4 and TCP checksums for you.
-+  */
-+-int
-++int __EXPORTED
-+ nfq_tcp_mangle_ipv4(struct pkt_buff *pkt,
-+ 		    unsigned int match_offset, unsigned int match_len,
-+ 		    const char *rep_buffer, unsigned int rep_len)
-+@@ -208,7 +202,6 @@ nfq_tcp_mangle_ipv4(struct pkt_buff *pkt,
-+ 
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(nfq_tcp_mangle_ipv4);
-+ 
-+ /**
-+  * @}
-+diff --git a/src/extra/udp.c b/src/extra/udp.c
-+index 8c44a66..99c8faa 100644
-+--- a/src/extra/udp.c
-++++ b/src/extra/udp.c
-+@@ -37,7 +37,7 @@
-+  * This function returns NULL if invalid UDP header is found. On success,
-+  * it returns the UDP header.
-+  */
-+-struct udphdr *nfq_udp_get_hdr(struct pkt_buff *pktb)
-++struct udphdr __EXPORTED *nfq_udp_get_hdr(struct pkt_buff *pktb)
-+ {
-+ 	if (pktb->transport_header == NULL)
-+ 		return NULL;
-+@@ -48,14 +48,13 @@ struct udphdr *nfq_udp_get_hdr(struct pkt_buff *pktb)
-+ 
-+ 	return (struct udphdr *)pktb->transport_header;
-+ }
-+-EXPORT_SYMBOL(nfq_udp_get_hdr);
-+ 
-+ /**
-+  * nfq_udp_get_payload - get the UDP packet payload.
-+  * \param udph: the pointer to the UDP header.
-+  * \param tail: pointer to the tail of the packet
-+  */
-+-void *nfq_udp_get_payload(struct udphdr *udph, struct pkt_buff *pktb)
-++void __EXPORTED *nfq_udp_get_payload(struct udphdr *udph, struct pkt_buff *pktb)
-+ {
-+ 	uint16_t len = ntohs(udph->len);
-+ 
-+@@ -69,17 +68,15 @@ void *nfq_udp_get_payload(struct udphdr *udph, struct pkt_buff *pktb)
-+ 
-+ 	return pktb->transport_header + sizeof(struct udphdr);
-+ }
-+-EXPORT_SYMBOL(nfq_udp_get_payload);
-+ 
-+ /**
-+  * nfq_udp_get_payload_len - get the udp packet payload.
-+  * \param udp: the pointer to the udp header.
-+  */
-+-unsigned int nfq_udp_get_payload_len(struct udphdr *udph, struct pkt_buff *pktb)
-++unsigned int __EXPORTED nfq_udp_get_payload_len(struct udphdr *udph, struct pkt_buff *pktb)
-+ {
-+ 	return pktb->tail - pktb->transport_header;
-+ }
-+-EXPORT_SYMBOL(nfq_udp_get_payload_len);
-+ 
-+ /**
-+  * nfq_udp_set_checksum_ipv4 - computes a IPv4/TCP packet's segment
-+@@ -91,14 +88,13 @@ EXPORT_SYMBOL(nfq_udp_get_payload_len);
-+  * \see nfq_pkt_compute_ip_checksum
-+  * \see nfq_pkt_compute_udp_checksum
-+  */
-+-void
-++void __EXPORTED
-+ nfq_udp_compute_checksum_ipv4(struct udphdr *udph, struct iphdr *iph)
-+ {
-+ 	/* checksum field in header needs to be zero for calculation. */
-+ 	udph->check = 0;
-+ 	udph->check = nfq_checksum_tcpudp_ipv4(iph);
-+ }
-+-EXPORT_SYMBOL(nfq_udp_compute_checksum_ipv4);
-+ 
-+ /**
-+  * nfq_udp_set_checksum_ipv6 - computes a IPv6/TCP packet's segment
-+@@ -110,14 +106,13 @@ EXPORT_SYMBOL(nfq_udp_compute_checksum_ipv4);
-+  * \see nfq_pkt_compute_ip_checksum
-+  * \see nfq_pkt_compute_udp_checksum
-+  */
-+-void
-++void __EXPORTED
-+ nfq_udp_compute_checksum_ipv6(struct udphdr *udph, struct ip6_hdr *ip6h)
-+ {
-+ 	/* checksum field in header needs to be zero for calculation. */
-+ 	udph->check = 0;
-+ 	udph->check = nfq_checksum_tcpudp_ipv6(ip6h, udph);
-+ }
-+-EXPORT_SYMBOL(nfq_udp_compute_checksum_ipv6);
-+ 
-+ /**
-+  * nfq_tcp_mangle_ipv4 - mangle TCP/IPv4 packet buffer
-+@@ -129,7 +124,7 @@ EXPORT_SYMBOL(nfq_udp_compute_checksum_ipv6);
-+  *
-+  * \note This function recalculates the IPv4 and TCP checksums for you.
-+  */
-+-int
-++int __EXPORTED
-+ nfq_udp_mangle_ipv4(struct pkt_buff *pkt,
-+ 		    unsigned int match_offset, unsigned int match_len,
-+ 		    const char *rep_buffer, unsigned int rep_len)
-+@@ -148,7 +143,6 @@ nfq_udp_mangle_ipv4(struct pkt_buff *pkt,
-+ 
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(nfq_udp_mangle_ipv4);
-+ 
-+ /**
-+  * nfq_pkt_snprintf_udp_hdr - print udp header into one buffer in a humnan
-+@@ -158,12 +152,11 @@ EXPORT_SYMBOL(nfq_udp_mangle_ipv4);
-+  * \param udp: pointer to a valid udp header.
-+  *
-+  */
-+-int nfq_udp_snprintf(char *buf, size_t size, const struct udphdr *udph)
-++int __EXPORTED nfq_udp_snprintf(char *buf, size_t size, const struct udphdr *udph)
-+ {
-+ 	return snprintf(buf, size, "SPT=%u DPT=%u ",
-+ 			htons(udph->source), htons(udph->dest));
-+ }
-+-EXPORT_SYMBOL(nfq_udp_snprintf);
-+ 
-+ /**
-+  * @}
 +diff --git a/src/internal.h b/src/internal.h
-+index 558d267..79b0752 100644
++index 3a88d1a..5d78171 100644
 +--- a/src/internal.h
 ++++ b/src/internal.h
-+@@ -5,10 +5,9 @@
-+ #include <stdint.h>
-+ #include <stdbool.h>
++@@ -3,10 +3,9 @@
++ 
++ #include "config.h"
 + #ifdef HAVE_VISIBILITY_HIDDEN
 +-#	define __visible	__attribute__((visibility("default")))
 +-#	define EXPORT_SYMBOL(x)	typeof(x) (x) __visible
@@ -662,655 +127,640 @@ index 000000000..946f1b71d
 ++#	define __EXPORTED
 + #endif
 + 
-+ struct iphdr;
-+diff --git a/src/libnetfilter_queue.c b/src/libnetfilter_queue.c
-+index 065d618..ab0b66b 100644
-+--- a/src/libnetfilter_queue.c
-++++ b/src/libnetfilter_queue.c
-+@@ -133,8 +133,7 @@ struct nfq_data {
-+ 	struct nfattr **data;
-+ };
-+ 
-+-int nfq_errno;
-+-EXPORT_SYMBOL(nfq_errno);
-++int __EXPORTED nfq_errno;
-+ 
-+ /***********************************************************************
-+  * low level stuff 
-+@@ -218,11 +217,10 @@ static int __nfq_rcv_pkt(struct nlmsghdr *nlh, struct nfattr *nfa[],
-+ 
-+ /* public interface */
-+ 
-+-struct nfnl_handle *nfq_nfnlh(struct nfq_handle *h)
-++struct nfnl_handle __EXPORTED *nfq_nfnlh(struct nfq_handle *h)
++ #endif
++diff --git a/src/libnetfilter_cthelper.c b/src/libnetfilter_cthelper.c
++index f8f58e6..af543a1 100644
++--- a/src/libnetfilter_cthelper.c
+++++ b/src/libnetfilter_cthelper.c
++@@ -99,17 +99,16 @@ struct nfct_helper {
++  * In case of success, this function returns a valid pointer, otherwise NULL
++  * s returned and errno is appropriately set.
++  */
++-struct nfct_helper *nfct_helper_alloc(void)
+++struct nfct_helper __EXPORTED *nfct_helper_alloc(void)
 + {
-+ 	return h->nfnlh;
++ 	return calloc(1, sizeof(struct nfct_helper));
 + }
-+-EXPORT_SYMBOL(nfq_nfnlh);
++-EXPORT_SYMBOL(nfct_helper_alloc);
 + 
 + /**
-+  *
-+@@ -294,11 +292,10 @@ EXPORT_SYMBOL(nfq_nfnlh);
-+  * over the netlink connection associated with the given queue connection
-+  * handle.
++  * nfct_helper_free - release one helper object
++  * \param nfct_helper pointer to the helper object
 +  */
-+-int nfq_fd(struct nfq_handle *h)
-++int __EXPORTED nfq_fd(struct nfq_handle *h)
++-void nfct_helper_free(struct nfct_helper *h)
+++void __EXPORTED nfct_helper_free(struct nfct_helper *h)
 + {
-+ 	return nfnl_fd(nfq_nfnlh(h));
-+ }
-+-EXPORT_SYMBOL(nfq_fd);
-+ /**
-+  * @}
-+  */
-+@@ -349,7 +346,7 @@ EXPORT_SYMBOL(nfq_fd);
-+  *
-+  * \return a pointer to a new queue handle or NULL on failure.
-+  */
-+-struct nfq_handle *nfq_open(void)
-++struct nfq_handle __EXPORTED *nfq_open(void)
-+ {
-+ 	struct nfnl_handle *nfnlh = nfnl_open();
-+ 	struct nfq_handle *qh;
-+@@ -366,7 +363,6 @@ struct nfq_handle *nfq_open(void)
++ 	int i;
 + 
-+ 	return qh;
-+ }
-+-EXPORT_SYMBOL(nfq_open);
-+ 
-+ /**
-+  * @}
-+@@ -382,7 +378,7 @@ EXPORT_SYMBOL(nfq_open);
-+  *
-+  * \return a pointer to a new queue handle or NULL on failure.
-+  */
-+-struct nfq_handle *nfq_open_nfnl(struct nfnl_handle *nfnlh)
-++struct nfq_handle __EXPORTED *nfq_open_nfnl(struct nfnl_handle *nfnlh)
-+ {
-+ 	struct nfnl_callback pkt_cb = {
-+ 		.call		= __nfq_rcv_pkt,
-+@@ -419,7 +415,6 @@ out_free:
++@@ -119,7 +118,6 @@ void nfct_helper_free(struct nfct_helper *h)
++ 	}
 + 	free(h);
-+ 	return NULL;
 + }
-+-EXPORT_SYMBOL(nfq_open_nfnl);
++-EXPORT_SYMBOL(nfct_helper_free);
 + 
 + /**
-+  * \addtogroup LibrarySetup
-+@@ -438,7 +433,7 @@ EXPORT_SYMBOL(nfq_open_nfnl);
-+  *
-+  * \return 0 on success, non-zero on failure. 
++  * nfct_helper_policy_alloc - allocate a new helper policy object
++@@ -127,21 +125,19 @@ EXPORT_SYMBOL(nfct_helper_free);
++  * In case of success, this function returns a valid pointer, otherwise NULL
++  * s returned and errno is appropriately set.
 +  */
-+-int nfq_close(struct nfq_handle *h)
-++int __EXPORTED nfq_close(struct nfq_handle *h)
++-struct nfct_helper_policy *nfct_helper_policy_alloc(void)
+++struct nfct_helper_policy __EXPORTED *nfct_helper_policy_alloc(void)
 + {
-+ 	int ret;
-+ 	
-+@@ -447,7 +442,6 @@ int nfq_close(struct nfq_handle *h)
-+ 		free(h);
-+ 	return ret;
++ 	return calloc(1, sizeof(struct nfct_helper_policy));
 + }
-+-EXPORT_SYMBOL(nfq_close);
++-EXPORT_SYMBOL(nfct_helper_policy_alloc);
 + 
 + /**
-+  * nfq_bind_pf - bind a nfqueue handler to a given protocol family
-+@@ -460,11 +454,10 @@ EXPORT_SYMBOL(nfq_close);
-+  *
-+  * \return integer inferior to 0 in case of failure
++  * nfct_helper_free - release one helper policy object
++  * \param nfct_helper pointer to the helper object
 +  */
-+-int nfq_bind_pf(struct nfq_handle *h, uint16_t pf)
-++int __EXPORTED nfq_bind_pf(struct nfq_handle *h, uint16_t pf)
++-void nfct_helper_policy_free(struct nfct_helper_policy *p)
+++void __EXPORTED nfct_helper_policy_free(struct nfct_helper_policy *p)
 + {
-+ 	return __build_send_cfg_msg(h, NFQNL_CFG_CMD_PF_BIND, 0, pf);
++ 	free(p);
 + }
-+-EXPORT_SYMBOL(nfq_bind_pf);
++-EXPORT_SYMBOL(nfct_helper_policy_free);
 + 
 + /**
-+  * nfq_unbind_pf - unbind nfqueue handler from a protocol family
-+@@ -476,11 +469,10 @@ EXPORT_SYMBOL(nfq_bind_pf);
-+  *
-+  * This call is obsolete, Linux kernels from 3.8 onwards ignore it.
++  * nfct_helper_policy_attr_set - set one attribute of the helper object
++@@ -149,7 +145,7 @@ EXPORT_SYMBOL(nfct_helper_policy_free);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
 +  */
-+-int nfq_unbind_pf(struct nfq_handle *h, uint16_t pf)
-++int __EXPORTED nfq_unbind_pf(struct nfq_handle *h, uint16_t pf)
-+ {
-+ 	return __build_send_cfg_msg(h, NFQNL_CFG_CMD_PF_UNBIND, 0, pf);
++-void
+++void __EXPORTED
++ nfct_helper_policy_attr_set(struct nfct_helper_policy *p,
++ 			    enum nfct_helper_policy_attr_type type,
++ 			    const void *data)
++@@ -170,7 +166,6 @@ nfct_helper_policy_attr_set(struct nfct_helper_policy *p,
++ 		break;
++ 	}
 + }
-+-EXPORT_SYMBOL(nfq_unbind_pf);
-+ 
++-EXPORT_SYMBOL(nfct_helper_policy_attr_set);
 + 
 + /**
-+@@ -524,7 +516,7 @@ typedef int nfq_callback(struct nfq_q_handle *qh,
-+  * The callback should return < 0 to stop processing.
++  * nfct_helper_attr_set_str - set one attribute the helper object
++@@ -178,23 +173,21 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_set);
++  * \param type attribute type you want to set
++  * \param name string that will be used to set this attribute
 +  */
-+ 
-+-struct nfq_q_handle *nfq_create_queue(struct nfq_handle *h, 
-++struct nfq_q_handle __EXPORTED *nfq_create_queue(struct nfq_handle *h, 
-+ 		uint16_t num,
-+ 		nfq_callback *cb,
-+ 		void *data)
-+@@ -555,7 +547,6 @@ struct nfq_q_handle *nfq_create_queue(struct nfq_handle *h,
-+ 	add_qh(qh);
-+ 	return qh;
-+ }
-+-EXPORT_SYMBOL(nfq_create_queue);
-+ 
-+ /**
-+  * @}
-+@@ -573,7 +564,7 @@ EXPORT_SYMBOL(nfq_create_queue);
-+  * Removes the binding for the specified queue handle. This call also unbind
-+  * from the nfqueue handler, so you don't have to call nfq_unbind_pf.
-+  */
-+-int nfq_destroy_queue(struct nfq_q_handle *qh)
-++int __EXPORTED nfq_destroy_queue(struct nfq_q_handle *qh)
++-void
+++void __EXPORTED
++ nfct_helper_policy_attr_set_str(struct nfct_helper_policy *p,
++ 				enum nfct_helper_policy_attr_type type,
++ 				const char *name)
 + {
-+ 	int ret = __build_send_cfg_msg(qh->h, NFQNL_CFG_CMD_UNBIND, qh->id, 0);
-+ 	if (ret == 0) {
-+@@ -583,7 +574,6 @@ int nfq_destroy_queue(struct nfq_q_handle *qh)
-+ 
-+ 	return ret;
++ 	nfct_helper_policy_attr_set(p, type, name);
 + }
-+-EXPORT_SYMBOL(nfq_destroy_queue);
-+ 
-+ /**
-+  * nfq_handle_packet - handle a packet received from the nfqueue subsystem
-+@@ -597,11 +587,10 @@ EXPORT_SYMBOL(nfq_destroy_queue);
-+  *
-+  * \return 0 on success, non-zero on failure.
-+  */
-+-int nfq_handle_packet(struct nfq_handle *h, char *buf, int len)
-++int __EXPORTED nfq_handle_packet(struct nfq_handle *h, char *buf, int len)
-+ {
-+ 	return nfnl_handle_packet(h->nfnlh, buf, len);
-+ }
-+-EXPORT_SYMBOL(nfq_handle_packet);
-+ 
-+ /**
-+  * nfq_set_mode - set the amount of packet data that nfqueue copies to userspace
-+@@ -618,7 +607,7 @@ EXPORT_SYMBOL(nfq_handle_packet);
-+  *
-+  * \return -1 on error; >=0 otherwise.
-+  */
-+-int nfq_set_mode(struct nfq_q_handle *qh,
-++int __EXPORTED nfq_set_mode(struct nfq_q_handle *qh,
-+ 		uint8_t mode, uint32_t range)
-+ {
-+ 	union {
-+@@ -638,7 +627,6 @@ int nfq_set_mode(struct nfq_q_handle *qh,
-+ 
-+ 	return nfnl_query(qh->h->nfnlh, &u.nmh);
-+ }
-+-EXPORT_SYMBOL(nfq_set_mode);
-+ 
-+ /**
-+  * nfq_set_queue_flags - set flags (options) for the kernel queue
-+@@ -690,7 +678,7 @@ EXPORT_SYMBOL(nfq_set_mode);
-+  *
-+  * \return -1 on error with errno set appropriately; =0 otherwise.
-+  */
-+-int nfq_set_queue_flags(struct nfq_q_handle *qh,
-++int __EXPORTED nfq_set_queue_flags(struct nfq_q_handle *qh,
-+ 			uint32_t mask, uint32_t flags)
-+ {
-+ 	union {
-+@@ -711,7 +699,6 @@ int nfq_set_queue_flags(struct nfq_q_handle *qh,
-+ 
-+ 	return nfnl_query(qh->h->nfnlh, &u.nmh);
-+ }
-+-EXPORT_SYMBOL(nfq_set_queue_flags);
-+ 
-+ /**
-+  * nfq_set_queue_maxlen - Set kernel queue maximum length parameter
-+@@ -724,7 +711,7 @@ EXPORT_SYMBOL(nfq_set_queue_flags);
-+  *
-+  * \return -1 on error; >=0 otherwise.
-+  */
-+-int nfq_set_queue_maxlen(struct nfq_q_handle *qh,
-++int __EXPORTED nfq_set_queue_maxlen(struct nfq_q_handle *qh,
-+ 				uint32_t queuelen)
-+ {
-+ 	union {
-+@@ -742,7 +729,6 @@ int nfq_set_queue_maxlen(struct nfq_q_handle *qh,
-+ 
-+ 	return nfnl_query(qh->h->nfnlh, &u.nmh);
-+ }
-+-EXPORT_SYMBOL(nfq_set_queue_maxlen);
-+ 
-+ /**
-+  * @}
-+@@ -829,14 +815,13 @@ static int __set_verdict(struct nfq_q_handle *qh, uint32_t id,
-+  *
-+  * \return -1 on error; >= 0 otherwise.
-+  */
-+-int nfq_set_verdict(struct nfq_q_handle *qh, uint32_t id,
-++int __EXPORTED nfq_set_verdict(struct nfq_q_handle *qh, uint32_t id,
-+ 		uint32_t verdict, uint32_t data_len,
-+ 		const unsigned char *buf)
-+ {
-+ 	return __set_verdict(qh, id, verdict, 0, 0, data_len, buf,
-+ 						NFQNL_MSG_VERDICT);
-+ }
-+-EXPORT_SYMBOL(nfq_set_verdict);
-+ 
-+ /**
-+  * nfq_set_verdict2 - like nfq_set_verdict, but you can set the mark.
-+@@ -847,14 +832,13 @@ EXPORT_SYMBOL(nfq_set_verdict);
-+  * \param data_len number of bytes of data pointed to by #buf
-+  * \param buf the buffer that contains the packet data
-+  */
-+-int nfq_set_verdict2(struct nfq_q_handle *qh, uint32_t id,
-++int __EXPORTED nfq_set_verdict2(struct nfq_q_handle *qh, uint32_t id,
-+ 		     uint32_t verdict, uint32_t mark,
-+ 		     uint32_t data_len, const unsigned char *buf)
-+ {
-+ 	return __set_verdict(qh, id, verdict, htonl(mark), 1, data_len,
-+ 						buf, NFQNL_MSG_VERDICT);
-+ }
-+-EXPORT_SYMBOL(nfq_set_verdict2);
-+ 
-+ /**
-+  * nfq_set_verdict_batch - issue verdicts on several packets at once
-+@@ -868,13 +852,12 @@ EXPORT_SYMBOL(nfq_set_verdict2);
-+  * batch support was added in Linux 3.1.
-+  * These functions will fail silently on older kernels.
-+  */
-+-int nfq_set_verdict_batch(struct nfq_q_handle *qh, uint32_t id,
-++int __EXPORTED nfq_set_verdict_batch(struct nfq_q_handle *qh, uint32_t id,
-+ 					  uint32_t verdict)
-+ {
-+ 	return __set_verdict(qh, id, verdict, 0, 0, 0, NULL,
-+ 					NFQNL_MSG_VERDICT_BATCH);
-+ }
-+-EXPORT_SYMBOL(nfq_set_verdict_batch);
-+ 
-+ /**
-+  * nfq_set_verdict_batch2 - like nfq_set_verdict_batch, but you can set a mark.
-+@@ -883,13 +866,12 @@ EXPORT_SYMBOL(nfq_set_verdict_batch);
-+  * \param verdict verdict to return to netfilter (NF_ACCEPT, NF_DROP)
-+  * \param mark mark to put on packet
-+  */
-+-int nfq_set_verdict_batch2(struct nfq_q_handle *qh, uint32_t id,
-++int __EXPORTED nfq_set_verdict_batch2(struct nfq_q_handle *qh, uint32_t id,
-+ 		     uint32_t verdict, uint32_t mark)
-+ {
-+ 	return __set_verdict(qh, id, verdict, htonl(mark), 1, 0,
-+ 				NULL, NFQNL_MSG_VERDICT_BATCH);
-+ }
-+-EXPORT_SYMBOL(nfq_set_verdict_batch2);
-+ 
-+ /**
-+  * nfq_set_verdict_mark - like nfq_set_verdict, but you can set the mark.
-+@@ -905,14 +887,13 @@ EXPORT_SYMBOL(nfq_set_verdict_batch2);
-+  * This function is deprecated since it is broken, its use is highly
-+  * discouraged. Please, use nfq_set_verdict2 instead.
-+  */
-+-int nfq_set_verdict_mark(struct nfq_q_handle *qh, uint32_t id,
-++int __EXPORTED nfq_set_verdict_mark(struct nfq_q_handle *qh, uint32_t id,
-+ 		uint32_t verdict, uint32_t mark,
-+ 		uint32_t data_len, const unsigned char *buf)
-+ {
-+ 	return __set_verdict(qh, id, verdict, mark, 1, data_len, buf,
-+ 						NFQNL_MSG_VERDICT);
-+ }
-+-EXPORT_SYMBOL(nfq_set_verdict_mark);
-+ 
-+ /**
-+  * @}
-+@@ -947,12 +928,11 @@ EXPORT_SYMBOL(nfq_set_verdict_mark);
-+ 	} __attribute__ ((packed));
-+ \endverbatim
-+  */
-+-struct nfqnl_msg_packet_hdr *nfq_get_msg_packet_hdr(struct nfq_data *nfad)
-++struct nfqnl_msg_packet_hdr __EXPORTED *nfq_get_msg_packet_hdr(struct nfq_data *nfad)
-+ {
-+ 	return nfnl_get_pointer_to_data(nfad->data, NFQA_PACKET_HDR,
-+ 					struct nfqnl_msg_packet_hdr);
-+ }
-+-EXPORT_SYMBOL(nfq_get_msg_packet_hdr);
-+ 
-+ /**
-+  * nfq_get_nfmark - get the packet mark
-+@@ -960,11 +940,10 @@ EXPORT_SYMBOL(nfq_get_msg_packet_hdr);
-+  *
-+  * \return the netfilter mark currently assigned to the given queued packet.
-+  */
-+-uint32_t nfq_get_nfmark(struct nfq_data *nfad)
-++uint32_t __EXPORTED nfq_get_nfmark(struct nfq_data *nfad)
-+ {
-+ 	return ntohl(nfnl_get_data(nfad->data, NFQA_MARK, uint32_t));
-+ }
-+-EXPORT_SYMBOL(nfq_get_nfmark);
-+ 
-+ /**
-+  * nfq_get_timestamp - get the packet timestamp
-+@@ -975,7 +954,7 @@ EXPORT_SYMBOL(nfq_get_nfmark);
-+  *
-+  * \return 0 on success, non-zero on failure.
-+  */
-+-int nfq_get_timestamp(struct nfq_data *nfad, struct timeval *tv)
-++int __EXPORTED nfq_get_timestamp(struct nfq_data *nfad, struct timeval *tv)
-+ {
-+ 	struct nfqnl_msg_packet_timestamp *qpt;
-+ 	qpt = nfnl_get_pointer_to_data(nfad->data, NFQA_TIMESTAMP,
-+@@ -988,7 +967,6 @@ int nfq_get_timestamp(struct nfq_data *nfad, struct timeval *tv)
-+ 
-+ 	return 0;
-+ }
-+-EXPORT_SYMBOL(nfq_get_timestamp);
-+ 
-+ /**
-+  * nfq_get_indev - get the interface that the packet was received through
-+@@ -1001,11 +979,10 @@ EXPORT_SYMBOL(nfq_get_timestamp);
-+  * \warning all nfq_get_dev() functions return 0 if not set, since linux
-+  * only allows ifindex >= 1, see net/core/dev.c:2600  (in 2.6.13.1)
-+  */
-+-uint32_t nfq_get_indev(struct nfq_data *nfad)
-++uint32_t __EXPORTED nfq_get_indev(struct nfq_data *nfad)
-+ {
-+ 	return ntohl(nfnl_get_data(nfad->data, NFQA_IFINDEX_INDEV, uint32_t));
-+ }
-+-EXPORT_SYMBOL(nfq_get_indev);
-+ 
-+ /**
-+  * nfq_get_physindev - get the physical interface that the packet was received
-+@@ -1015,11 +992,10 @@ EXPORT_SYMBOL(nfq_get_indev);
-+  * If the returned index is 0, the packet was locally generated or the
-+  * physical input interface is no longer known (ie. POSTROUTING?).
-+  */
-+-uint32_t nfq_get_physindev(struct nfq_data *nfad)
-++uint32_t __EXPORTED nfq_get_physindev(struct nfq_data *nfad)
-+ {
-+ 	return ntohl(nfnl_get_data(nfad->data, NFQA_IFINDEX_PHYSINDEV, uint32_t));
-+ }
-+-EXPORT_SYMBOL(nfq_get_physindev);
-+ 
-+ /**
-+  * nfq_get_outdev - gets the interface that the packet will be routed out
-+@@ -1029,11 +1005,10 @@ EXPORT_SYMBOL(nfq_get_physindev);
-+  * returned index is 0, the packet is destined for localhost or the output
-+  * interface is not yet known (ie. PREROUTING?).
-+  */
-+-uint32_t nfq_get_outdev(struct nfq_data *nfad)
-++uint32_t __EXPORTED nfq_get_outdev(struct nfq_data *nfad)
-+ {
-+ 	return ntohl(nfnl_get_data(nfad->data, NFQA_IFINDEX_OUTDEV, uint32_t));
-+ }
-+-EXPORT_SYMBOL(nfq_get_outdev);
-+ 
-+ /**
-+  * nfq_get_physoutdev - get the physical interface that the packet output
-+@@ -1045,11 +1020,10 @@ EXPORT_SYMBOL(nfq_get_outdev);
-+  * 
-+  * \return The index of physical interface that the packet output will be routed out.
-+  */
-+-uint32_t nfq_get_physoutdev(struct nfq_data *nfad)
-++uint32_t __EXPORTED nfq_get_physoutdev(struct nfq_data *nfad)
-+ {
-+ 	return ntohl(nfnl_get_data(nfad->data, NFQA_IFINDEX_PHYSOUTDEV, uint32_t));
-+ }
-+-EXPORT_SYMBOL(nfq_get_physoutdev);
-+ 
-+ /**
-+  * nfq_get_indev_name - get the name of the interface the packet
-+@@ -1089,13 +1063,12 @@ EXPORT_SYMBOL(nfq_get_physoutdev);
-+ \endverbatim
-+  *
-+  */
-+-int nfq_get_indev_name(struct nlif_handle *nlif_handle,
-++int __EXPORTED nfq_get_indev_name(struct nlif_handle *nlif_handle,
-+ 			struct nfq_data *nfad, char *name)
-+ {
-+ 	uint32_t ifindex = nfq_get_indev(nfad);
-+ 	return nlif_index2name(nlif_handle, ifindex, name);
-+ }
-+-EXPORT_SYMBOL(nfq_get_indev_name);
-+ 
-+ /**
-+  * nfq_get_physindev_name - get the name of the physical interface the
-+@@ -1109,13 +1082,12 @@ EXPORT_SYMBOL(nfq_get_indev_name);
-+  *
-+  * \return  -1 in case of error, > 0 if it succeed. 
-+  */
-+-int nfq_get_physindev_name(struct nlif_handle *nlif_handle,
-++int __EXPORTED nfq_get_physindev_name(struct nlif_handle *nlif_handle,
-+ 			   struct nfq_data *nfad, char *name)
-+ {
-+ 	uint32_t ifindex = nfq_get_physindev(nfad);
-+ 	return nlif_index2name(nlif_handle, ifindex, name);
-+ }
-+-EXPORT_SYMBOL(nfq_get_physindev_name);
-+ 
-+ /**
-+  * nfq_get_outdev_name - get the name of the physical interface the
-+@@ -1129,13 +1101,12 @@ EXPORT_SYMBOL(nfq_get_physindev_name);
-+  *
-+  * \return  -1 in case of error, > 0 if it succeed. 
-+  */
-+-int nfq_get_outdev_name(struct nlif_handle *nlif_handle,
-++int __EXPORTED nfq_get_outdev_name(struct nlif_handle *nlif_handle,
-+ 			struct nfq_data *nfad, char *name)
-+ {
-+ 	uint32_t ifindex = nfq_get_outdev(nfad);
-+ 	return nlif_index2name(nlif_handle, ifindex, name);
-+ }
-+-EXPORT_SYMBOL(nfq_get_outdev_name);
-+ 
-+ /**
-+  * nfq_get_physoutdev_name - get the name of the interface the
-+@@ -1150,13 +1121,12 @@ EXPORT_SYMBOL(nfq_get_outdev_name);
-+  * \return  -1 in case of error, > 0 if it succeed. 
-+  */
-+ 
-+-int nfq_get_physoutdev_name(struct nlif_handle *nlif_handle,
-++int __EXPORTED nfq_get_physoutdev_name(struct nlif_handle *nlif_handle,
-+ 			    struct nfq_data *nfad, char *name)
-+ {
-+ 	uint32_t ifindex = nfq_get_physoutdev(nfad);
-+ 	return nlif_index2name(nlif_handle, ifindex, name);
-+ }
-+-EXPORT_SYMBOL(nfq_get_physoutdev_name);
-+ 
-+ /**
-+  * nfq_get_packet_hw
-+@@ -1180,12 +1150,11 @@ EXPORT_SYMBOL(nfq_get_physoutdev_name);
-+ 	} __attribute__ ((packed));
-+ \endverbatim
-+  */
-+-struct nfqnl_msg_packet_hw *nfq_get_packet_hw(struct nfq_data *nfad)
-++struct nfqnl_msg_packet_hw __EXPORTED *nfq_get_packet_hw(struct nfq_data *nfad)
-+ {
-+ 	return nfnl_get_pointer_to_data(nfad->data, NFQA_HWADDR,
-+ 					struct nfqnl_msg_packet_hw);
-+ }
-+-EXPORT_SYMBOL(nfq_get_packet_hw);
-+ 
-+ /**
-+  * nfq_get_uid - get the UID of the user the packet belongs to
-+@@ -1193,7 +1162,7 @@ EXPORT_SYMBOL(nfq_get_packet_hw);
-+  *
-+  * \return 1 if there is a UID available, 0 otherwise.
-+  */
-+-int nfq_get_uid(struct nfq_data *nfad, uint32_t *uid)
-++int __EXPORTED nfq_get_uid(struct nfq_data *nfad, uint32_t *uid)
-+ {
-+ 	if (!nfnl_attr_present(nfad->data, NFQA_UID))
-+ 		return 0;
-+@@ -1201,7 +1170,6 @@ int nfq_get_uid(struct nfq_data *nfad, uint32_t *uid)
-+ 	*uid = ntohl(nfnl_get_data(nfad->data, NFQA_UID, uint32_t));
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(nfq_get_uid);
-+ 
-+ /**
-+  * nfq_get_gid - get the GID of the user the packet belongs to
-+@@ -1209,7 +1177,7 @@ EXPORT_SYMBOL(nfq_get_uid);
-+  *
-+  * \return 1 if there is a GID available, 0 otherwise.
-+  */
-+-int nfq_get_gid(struct nfq_data *nfad, uint32_t *gid)
-++int __EXPORTED nfq_get_gid(struct nfq_data *nfad, uint32_t *gid)
-+ {
-+ 	if (!nfnl_attr_present(nfad->data, NFQA_GID))
-+ 		return 0;
-+@@ -1217,7 +1185,6 @@ int nfq_get_gid(struct nfq_data *nfad, uint32_t *gid)
-+ 	*gid = ntohl(nfnl_get_data(nfad->data, NFQA_GID, uint32_t));
-+ 	return 1;
-+ }
-+-EXPORT_SYMBOL(nfq_get_gid);
-+ 
-+ 
-+ /**
-+@@ -1227,7 +1194,7 @@ EXPORT_SYMBOL(nfq_get_gid);
-+  *
-+  * \return -1 on error, otherwise > 0
-+  */
-+-int nfq_get_secctx(struct nfq_data *nfad, unsigned char **secdata)
-++int __EXPORTED nfq_get_secctx(struct nfq_data *nfad, unsigned char **secdata)
-+ {
-+ 	if (!nfnl_attr_present(nfad->data, NFQA_SECCTX))
-+ 		return -1;
-+@@ -1240,7 +1207,6 @@ int nfq_get_secctx(struct nfq_data *nfad, unsigned char **secdata)
-+ 
-+ 	return 0;
-+ }
-+-EXPORT_SYMBOL(nfq_get_secctx);
-+ 
-+ /**
-+  * nfq_get_payload - get payload 
-+@@ -1253,7 +1219,7 @@ EXPORT_SYMBOL(nfq_get_secctx);
-+  *
-+  * \return -1 on error, otherwise > 0.
-+  */
-+-int nfq_get_payload(struct nfq_data *nfad, unsigned char **data)
-++int __EXPORTED nfq_get_payload(struct nfq_data *nfad, unsigned char **data)
-+ {
-+ 	*data = (unsigned char *)
-+ 		nfnl_get_pointer_to_data(nfad->data, NFQA_PAYLOAD, char);
-+@@ -1262,7 +1228,6 @@ int nfq_get_payload(struct nfq_data *nfad, unsigned char **data)
-+ 
-+ 	return -1;
-+ }
-+-EXPORT_SYMBOL(nfq_get_payload);
-+ 
-+ /**
-+  * @}
-+@@ -1307,7 +1272,7 @@ do {								\
-+  * would have been printed into the buffer (in case that there is enough
-+  * room in it). See snprintf() return value for more information.
-+  */
-+-int nfq_snprintf_xml(char *buf, size_t rem, struct nfq_data *tb, int flags)
-++int __EXPORTED nfq_snprintf_xml(char *buf, size_t rem, struct nfq_data *tb, int flags)
-+ {
-+ 	struct nfqnl_msg_packet_hdr *ph;
-+ 	struct nfqnl_msg_packet_hw *hwph;
-+@@ -1460,7 +1425,6 @@ int nfq_snprintf_xml(char *buf, size_t rem, struct nfq_data *tb, int flags)
-+ 
-+ 	return len;
-+ }
-+-EXPORT_SYMBOL(nfq_snprintf_xml);
-+ 
-+ /**
-+  * @}
-+diff --git a/src/nlmsg.c b/src/nlmsg.c
-+index ba28c77..5582407 100644
-+--- a/src/nlmsg.c
-++++ b/src/nlmsg.c
-+@@ -30,7 +30,7 @@
-+  * @{
-+  */
-+ 
-+-void nfq_nlmsg_verdict_put(struct nlmsghdr *nlh, int id, int verdict)
-++void __EXPORTED nfq_nlmsg_verdict_put(struct nlmsghdr *nlh, int id, int verdict)
-+ {
-+ 	struct nfqnl_msg_verdict_hdr vh = {
-+ 		.verdict	= htonl(verdict),
-+@@ -38,20 +38,17 @@ void nfq_nlmsg_verdict_put(struct nlmsghdr *nlh, int id, int verdict)
-+ 	};
-+ 	mnl_attr_put(nlh, NFQA_VERDICT_HDR, sizeof(vh), &vh);
-+ }
-+-EXPORT_SYMBOL(nfq_nlmsg_verdict_put);
-+ 
-+-void nfq_nlmsg_verdict_put_mark(struct nlmsghdr *nlh, uint32_t mark)
-++void __EXPORTED nfq_nlmsg_verdict_put_mark(struct nlmsghdr *nlh, uint32_t mark)
-+ {
-+ 	mnl_attr_put_u32(nlh, NFQA_MARK, htonl(mark));
-+ }
-+-EXPORT_SYMBOL(nfq_nlmsg_verdict_put_mark);
++-EXPORT_SYMBOL(nfct_helper_policy_attr_set_str);
 + 
 +-void
 ++void __EXPORTED
-+ nfq_nlmsg_verdict_put_pkt(struct nlmsghdr *nlh, const void *pkt, uint32_t plen)
++ nfct_helper_policy_attr_set_u32(struct nfct_helper_policy *p,
++ 				enum nfct_helper_policy_attr_type type,
++ 				uint32_t value)
 + {
-+ 	mnl_attr_put(nlh, NFQA_PAYLOAD, plen, pkt);
++ 	nfct_helper_policy_attr_set(p, type, &value);
 + }
-+-EXPORT_SYMBOL(nfq_nlmsg_verdict_put_pkt);
++-EXPORT_SYMBOL(nfct_helper_policy_attr_set_u32);
++ 
++ /**
++  * nfct_helper_attr_set - set one attribute of the helper object
++@@ -202,7 +195,7 @@ EXPORT_SYMBOL(nfct_helper_policy_attr_set_u32);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
++  */
++-void
+++void __EXPORTED
++ nfct_helper_attr_set(struct nfct_helper *h,
++ 		     enum nfct_helper_attr_type type, const void *data)
++ {
++@@ -250,7 +243,6 @@ nfct_helper_attr_set(struct nfct_helper *h,
++ 		break;
++ 	}
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_set);
++ 
++ /**
++  * nfct_helper_attr_set_str - set one attribute the helper object
++@@ -258,44 +250,40 @@ EXPORT_SYMBOL(nfct_helper_attr_set);
++  * \param type attribute type you want to set
++  * \param name string that will be used to set this attribute
++  */
++-void
+++void __EXPORTED
++ nfct_helper_attr_set_str(struct nfct_helper *nfct_helper, enum nfct_helper_attr_type type,
++ 		    const char *name)
++ {
++ 	nfct_helper_attr_set(nfct_helper, type, name);
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_set_str);
++ 
++-void
+++void __EXPORTED
++ nfct_helper_attr_set_u8(struct nfct_helper *nfct_helper,
++ 			 enum nfct_helper_attr_type type, uint8_t value)
++ {
++ 	nfct_helper_attr_set(nfct_helper, type, &value);
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_set_u8);
++ 
++-void
+++void __EXPORTED
++ nfct_helper_attr_set_u16(struct nfct_helper *nfct_helper,
++ 			 enum nfct_helper_attr_type type, uint16_t value)
++ {
++ 	nfct_helper_attr_set(nfct_helper, type, &value);
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_set_u16);
++ 
++-void
+++void __EXPORTED
++ nfct_helper_attr_set_u32(struct nfct_helper *nfct_helper,
++ 			 enum nfct_helper_attr_type type, uint32_t value)
++ {
++ 	nfct_helper_attr_set(nfct_helper, type, &value);
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_set_u32);
++ 
++ /**
++  * nfct_helper_attr_unset - unset one attribute the helper object
++  * \param nfct_helper pointer to the helper object
++  * \param type attribute type you want to set
++  */
++-void
+++void __EXPORTED
++ nfct_helper_attr_unset(struct nfct_helper *nfct_helper, enum nfct_helper_attr_type type)
++ {
++ 	switch(type) {
++@@ -307,7 +295,6 @@ nfct_helper_attr_unset(struct nfct_helper *nfct_helper, enum nfct_helper_attr_ty
++ 		break;
++ 	}
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_unset);
++ 
++ /**
++  * nfct_helper_attr_get - get one attribute the helper object
++@@ -317,8 +304,9 @@ EXPORT_SYMBOL(nfct_helper_attr_unset);
++  * This function returns a valid pointer to the attribute data. If a
++  * unsupported attribute is used, this returns NULL.
++  */
++-const void *nfct_helper_attr_get(struct nfct_helper *helper,
++-				 enum nfct_helper_attr_type type)
+++const void __EXPORTED *
+++nfct_helper_attr_get(struct nfct_helper *helper,
+++		     enum nfct_helper_attr_type type)
++ {
++ 	const void *ret = NULL;
++ 
++@@ -358,7 +346,6 @@ const void *nfct_helper_attr_get(struct nfct_helper *helper,
++ 	}
++ 	return ret;
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_get);
++ 
++ /**
++  * nfct_helper_attr_get_str - get one attribute the helper object
++@@ -368,13 +355,12 @@ EXPORT_SYMBOL(nfct_helper_attr_get);
++  * This function returns a valid pointer to the beginning of the string.
++  * If the attribute is unsupported, this returns NULL.
++  */
++-const char *
+++const char __EXPORTED *
++ nfct_helper_attr_get_str(struct nfct_helper *nfct_helper,
++ 			 enum nfct_helper_attr_type type)
++ {
++ 	return (const char *)nfct_helper_attr_get(nfct_helper, type);
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_get_str);
++ 
++ /**
++  * nfct_helper_attr_get_u8 - get one attribute the helper object
++@@ -384,12 +370,12 @@ EXPORT_SYMBOL(nfct_helper_attr_get_str);
++  * This function returns a unsigned 8-bits integer. If the attribute is
++  * unsupported, this returns NULL.
++  */
++-uint8_t nfct_helper_attr_get_u8(struct nfct_helper *nfct_helper,
++-				  enum nfct_helper_attr_type type)
+++uint8_t __EXPORTED
+++nfct_helper_attr_get_u8(struct nfct_helper *nfct_helper,
+++			enum nfct_helper_attr_type type)
++ {
++ 	return *((uint8_t *)nfct_helper_attr_get(nfct_helper, type));
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_get_u8);
++ 
++ /**
++  * nfct_helper_attr_get_u16 - get one attribute the helper object
++@@ -399,12 +385,12 @@ EXPORT_SYMBOL(nfct_helper_attr_get_u8);
++  * This function returns a unsigned 16-bits integer. If the attribute is
++  * unsupported, this returns NULL.
++  */
++-uint16_t nfct_helper_attr_get_u16(struct nfct_helper *nfct_helper,
++-				  enum nfct_helper_attr_type type)
+++uint16_t __EXPORTED
+++nfct_helper_attr_get_u16(struct nfct_helper *nfct_helper,
+++			 enum nfct_helper_attr_type type)
++ {
++ 	return *((uint16_t *)nfct_helper_attr_get(nfct_helper, type));
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_get_u16);
++ 
++ /**
++  * nfct_helper_attr_get_u32 - get one attribute the helper object
++@@ -414,12 +400,12 @@ EXPORT_SYMBOL(nfct_helper_attr_get_u16);
++  * This function returns a unsigned 32-bits integer. If the attribute is
++  * unsupported, this returns NULL.
++  */
++-uint32_t nfct_helper_attr_get_u32(struct nfct_helper *nfct_helper,
++-				  enum nfct_helper_attr_type type)
+++uint32_t __EXPORTED
+++nfct_helper_attr_get_u32(struct nfct_helper *nfct_helper,
+++			 enum nfct_helper_attr_type type)
++ {
++ 	return *((uint32_t *)nfct_helper_attr_get(nfct_helper, type));
++ }
++-EXPORT_SYMBOL(nfct_helper_attr_get_u32);
++ 
++ /**
++  * nfct_helper_snprintf - print helper object into one buffer
++@@ -431,9 +417,10 @@ EXPORT_SYMBOL(nfct_helper_attr_get_u32);
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int nfct_helper_snprintf(char *buf, size_t size,
++-			 struct nfct_helper *helper,
++-			 unsigned int type, unsigned int flags)
+++int __EXPORTED
+++nfct_helper_snprintf(char *buf, size_t size,
+++		     struct nfct_helper *helper,
+++		     unsigned int type, unsigned int flags)
++ {
++ 	int ret;
++ 
++@@ -454,7 +441,6 @@ int nfct_helper_snprintf(char *buf, size_t size,
++ 
++ 	return ret;
++ }
++-EXPORT_SYMBOL(nfct_helper_snprintf);
 + 
 + /**
 +  * @}
-+@@ -85,7 +82,7 @@ EXPORT_SYMBOL(nfq_nlmsg_verdict_put_pkt);
-+  *   given protocol family.  Both commands are ignored by Linux kernel 3.8 and
-+  *   later versions.
++@@ -490,7 +476,7 @@ EXPORT_SYMBOL(nfct_helper_snprintf);
++  * - Command NFNL_MSG_ACCT_DEL, to delete one specific nfct_helper object (if
++  *   unused, otherwise you hit EBUSY).
 +  */
-+-void nfq_nlmsg_cfg_put_cmd(struct nlmsghdr *nlh, uint16_t pf, uint8_t cmd)
-++void __EXPORTED nfq_nlmsg_cfg_put_cmd(struct nlmsghdr *nlh, uint16_t pf, uint8_t cmd)
++-struct nlmsghdr *
+++struct nlmsghdr __EXPORTED *
++ nfct_helper_nlmsg_build_hdr(char *buf, uint8_t cmd,
++ 			    uint16_t flags, uint32_t seq)
 + {
-+ 	struct nfqnl_msg_config_cmd command = {
-+ 		.command = cmd,
-+@@ -93,9 +90,8 @@ void nfq_nlmsg_cfg_put_cmd(struct nlmsghdr *nlh, uint16_t pf, uint8_t cmd)
-+ 	};
-+ 	mnl_attr_put(nlh, NFQA_CFG_CMD, sizeof(command), &command);
-+ }
-+-EXPORT_SYMBOL(nfq_nlmsg_cfg_put_cmd);
++@@ -509,7 +495,6 @@ nfct_helper_nlmsg_build_hdr(char *buf, uint8_t cmd,
 + 
-+-void nfq_nlmsg_cfg_put_params(struct nlmsghdr *nlh, uint8_t mode, int range)
-++void __EXPORTED nfq_nlmsg_cfg_put_params(struct nlmsghdr *nlh, uint8_t mode, int range)
-+ {
-+ 	struct nfqnl_msg_config_params params = {
-+ 		.copy_range = htonl(range),
-+@@ -103,13 +99,11 @@ void nfq_nlmsg_cfg_put_params(struct nlmsghdr *nlh, uint8_t mode, int range)
-+ 	};
-+ 	mnl_attr_put(nlh, NFQA_CFG_PARAMS, sizeof(params), &params);
++ 	return nlh;
 + }
-+-EXPORT_SYMBOL(nfq_nlmsg_cfg_put_params);
++-EXPORT_SYMBOL(nfct_helper_nlmsg_build_hdr);
 + 
-+-void nfq_nlmsg_cfg_put_qmaxlen(struct nlmsghdr *nlh, uint32_t queue_maxlen)
-++void __EXPORTED nfq_nlmsg_cfg_put_qmaxlen(struct nlmsghdr *nlh, uint32_t queue_maxlen)
-+ {
-+ 	mnl_attr_put_u32(nlh, NFQA_CFG_QUEUE_MAXLEN, htonl(queue_maxlen));
-+ }
-+-EXPORT_SYMBOL(nfq_nlmsg_cfg_put_qmaxlen);
-+ 
-+ /**
-+  * @}
-+@@ -179,12 +173,11 @@ static int nfq_pkt_parse_attr_cb(const struct nlattr *attr, void *data)
-+  * This function returns MNL_CB_ERROR if any error occurs, or MNL_CB_OK on
-+  * success.
++ static void
++ nfct_helper_nlmsg_build_policy(struct nlmsghdr *nlh,
++@@ -530,7 +515,7 @@ nfct_helper_nlmsg_build_policy(struct nlmsghdr *nlh,
++  * \param nlh: netlink message that you want to use to add the payload.
++  * \param nfct_helper: pointer to a helper object
 +  */
-+-int nfq_nlmsg_parse(const struct nlmsghdr *nlh, struct nlattr **attr)
-++int __EXPORTED nfq_nlmsg_parse(const struct nlmsghdr *nlh, struct nlattr **attr)
++-void
+++void __EXPORTED
++ nfct_helper_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfct_helper *h)
 + {
-+ 	return mnl_attr_parse(nlh, sizeof(struct nfgenmsg),
-+ 			      nfq_pkt_parse_attr_cb, attr);
++ 	struct nlattr *nest;
++@@ -593,7 +578,6 @@ nfct_helper_nlmsg_build_payload(struct nlmsghdr *nlh, struct nfct_helper *h)
++ 	if (h->bitset & (1 << NFCTH_ATTR_STATUS))
++ 		mnl_attr_put_u32(nlh, NFCTH_STATUS, ntohl(h->status));
 + }
-+-EXPORT_SYMBOL(nfq_nlmsg_parse);
++-EXPORT_SYMBOL(nfct_helper_nlmsg_build_payload);
++ 
++ static int
++ nfct_helper_nlmsg_parse_tuple_cb(const struct nlattr *attr, void *data)
++@@ -795,7 +779,7 @@ nfct_helper_nlmsg_parse_attr_cb(const struct nlattr *attr, void *data)
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int
+++int __EXPORTED
++ nfct_helper_nlmsg_parse_payload(const struct nlmsghdr *nlh,
++ 				struct nfct_helper *h)
++ {
++@@ -832,7 +816,6 @@ nfct_helper_nlmsg_parse_payload(const struct nlmsghdr *nlh,
++ 	}
++ 	return 0;
++ }
++-EXPORT_SYMBOL(nfct_helper_nlmsg_parse_payload);
 + 
 + /**
 +  * @}
 +-- 
-+2.12.2
++cgit v1.1
 +
-diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb
-index 0ca074ca3..754e11d99 100644
---- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb
-+++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-queue_1.0.2.bb
-@@ -11,6 +11,7 @@ SRCREV = "981025e103d887fb6a9c9bb49c74ec323108d098"
+diff --git a/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cttimeout-visibility-hidden.patch b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cttimeout-visibility-hidden.patch
+new file mode 100644
+index 000000000..2c606c832
+--- /dev/null
++++ b/meta-networking/recipes-filter/libnetfilter/files/libnetfilter-cttimeout-visibility-hidden.patch
+@@ -0,0 +1,264 @@
++From d0c4e39d12f903e06db262656cff2e24d267bed7 Mon Sep 17 00:00:00 2001
++From: Kevin Cernekee <cernekee@chromium.org>
++Date: Wed, 4 Jan 2017 14:30:25 -0800
++Subject: Use __EXPORTED rather than EXPORT_SYMBOL
++
++clang is sensitive to the ordering of
++__attribute__((visibility("default"))) relative to the function
++body.  gcc is not.  So if we try to re-declare an existing function
++with default visibility, clang prints a warning and generates
++a broken .so file in which nfct_timeout_* are not exported to library
++callers.
++
++Move the attribute up into the function definition to make clang happy.
++
++Signed-off-by: Kevin Cernekee <cernekee@chromium.org>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++ doxygen.cfg.in               |  2 +-
++ src/internal.h               |  5 ++---
++ src/libnetfilter_cttimeout.c | 44 +++++++++++++++++---------------------------
++ 3 files changed, 20 insertions(+), 31 deletions(-)
++
++diff --git a/doxygen.cfg.in b/doxygen.cfg.in
++index 8e5d449..09c3ce0 100644
++--- a/doxygen.cfg.in
+++++ b/doxygen.cfg.in
++@@ -72,7 +72,7 @@ RECURSIVE              = YES
++ EXCLUDE                = 
++ EXCLUDE_SYMLINKS       = NO
++ EXCLUDE_PATTERNS       = */.git/* .*.d
++-EXCLUDE_SYMBOLS        = EXPORT_SYMBOL nfct_timeout _container_policy_cb
+++EXCLUDE_SYMBOLS        = nfct_timeout _container_policy_cb
++ EXAMPLE_PATH           = 
++ EXAMPLE_PATTERNS       = 
++ EXAMPLE_RECURSIVE      = NO
++diff --git a/src/internal.h b/src/internal.h
++index 3a88d1a..5d78171 100644
++--- a/src/internal.h
+++++ b/src/internal.h
++@@ -3,10 +3,9 @@
++ 
++ #include "config.h"
++ #ifdef HAVE_VISIBILITY_HIDDEN
++-#	define __visible	__attribute__((visibility("default")))
++-#	define EXPORT_SYMBOL(x)	typeof(x) (x) __visible
+++#	define __EXPORTED	__attribute__((visibility("default")))
++ #else
++-#	define EXPORT_SYMBOL
+++#	define __EXPORTED
++ #endif
++ 
++ #endif
++diff --git a/src/libnetfilter_cttimeout.c b/src/libnetfilter_cttimeout.c
++index 7844a1f..a0a7185 100644
++--- a/src/libnetfilter_cttimeout.c
+++++ b/src/libnetfilter_cttimeout.c
++@@ -187,7 +187,7 @@ struct nfct_timeout {
++  * In case of success, this function returns a valid pointer, otherwise NULL
++  * s returned and errno is appropriately set.
++  */
++-struct nfct_timeout *nfct_timeout_alloc(void)
+++struct nfct_timeout __EXPORTED *nfct_timeout_alloc(void)
++ {
++ 	struct nfct_timeout *t;
++ 
++@@ -197,19 +197,17 @@ struct nfct_timeout *nfct_timeout_alloc(void)
++ 
++ 	return t;
++ }
++-EXPORT_SYMBOL(nfct_timeout_alloc);
++ 
++ /**
++  * nfct_timeout_free - release one conntrack timeout object
++  * \param t pointer to the conntrack timeout object
++  */
++-void nfct_timeout_free(struct nfct_timeout *t)
+++void __EXPORTED nfct_timeout_free(struct nfct_timeout *t)
++ {
++ 	if (t->timeout)
++ 		free(t->timeout);
++ 	free(t);
++ }
++-EXPORT_SYMBOL(nfct_timeout_free);
++ 
++ /**
++  * nfct_timeout_attr_set - set one attribute of the conntrack timeout object
++@@ -217,7 +215,7 @@ EXPORT_SYMBOL(nfct_timeout_free);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
++  */
++-int
+++int __EXPORTED
++ nfct_timeout_attr_set(struct nfct_timeout *t, uint32_t type, const void *data)
++ {
++ 	switch(type) {
++@@ -236,7 +234,6 @@ nfct_timeout_attr_set(struct nfct_timeout *t, uint32_t type, const void *data)
++ 	t->attrset |= (1 << type);
++ 	return 0;
++ }
++-EXPORT_SYMBOL(nfct_timeout_attr_set);
++ 
++ /**
++  * nfct_timeout_attr_set_u8 - set one attribute of the conntrack timeout object
++@@ -244,12 +241,11 @@ EXPORT_SYMBOL(nfct_timeout_attr_set);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
++  */
++-int
+++int __EXPORTED
++ nfct_timeout_attr_set_u8(struct nfct_timeout *t, uint32_t type, uint8_t data)
++ {
++ 	return nfct_timeout_attr_set(t, type, &data);
++ }
++-EXPORT_SYMBOL(nfct_timeout_attr_set_u8);
++ 
++ /**
++  * nfct_timeout_attr_set_u16 - set one attribute of the conntrack timeout object
++@@ -257,23 +253,21 @@ EXPORT_SYMBOL(nfct_timeout_attr_set_u8);
++  * \param type attribute type you want to set
++  * \param data pointer to data that will be used to set this attribute
++  */
++-int
+++int __EXPORTED
++ nfct_timeout_attr_set_u16(struct nfct_timeout *t, uint32_t type, uint16_t data)
++ {
++ 	return nfct_timeout_attr_set(t, type, &data);
++ }
++-EXPORT_SYMBOL(nfct_timeout_attr_set_u16);
++ 
++ /**
++  * nfct_timeout_attr_unset - unset one attribute of the conntrack timeout object
++  * \param t pointer to the conntrack timeout object
++  * \param type attribute type you want to set
++  */
++-void nfct_timeout_attr_unset(struct nfct_timeout *t, uint32_t type)
+++void __EXPORTED nfct_timeout_attr_unset(struct nfct_timeout *t, uint32_t type)
++ {
++ 	t->attrset &= ~(1 << type);
++ }
++-EXPORT_SYMBOL(nfct_timeout_attr_unset);
++ 
++ /**
++  * nfct_timeout_policy_attr_set_u32 - set one attribute of the policy
++@@ -281,7 +275,7 @@ EXPORT_SYMBOL(nfct_timeout_attr_unset);
++  * \param type attribute type you want to set
++  * \param data data that will be used to set this attribute
++  */
++-int
+++int __EXPORTED
++ nfct_timeout_policy_attr_set_u32(struct nfct_timeout *t,
++ 				 uint32_t type, uint32_t data)
++ {
++@@ -319,18 +313,17 @@ nfct_timeout_policy_attr_set_u32(struct nfct_timeout *t,
++ 
++ 	return 0;
++ }
++-EXPORT_SYMBOL(nfct_timeout_policy_attr_set_u32);
++ 
++ /**
++  * nfct_timeout_policy_attr_unset - unset one attribute of the policy
++  * \param t pointer to the conntrack timeout object
++  * \param type attribute type you want to set
++  */
++-void nfct_timeout_policy_attr_unset(struct nfct_timeout *t, uint32_t type)
+++void __EXPORTED
+++nfct_timeout_policy_attr_unset(struct nfct_timeout *t, uint32_t type)
++ {
++ 	t->attrset &= ~(1 << type);
++ }
++-EXPORT_SYMBOL(nfct_timeout_policy_attr_unset);
++ 
++ /**
++  * nfct_timeout_policy_attr_to_name - get state name from protocol state number
++@@ -340,7 +333,8 @@ EXPORT_SYMBOL(nfct_timeout_policy_attr_unset);
++  * This function returns NULL if unsupported protocol or state number is passed.
++  * Otherwise, a pointer to valid string is returned.
++  */
++-const char *nfct_timeout_policy_attr_to_name(uint8_t l4proto, uint32_t state)
+++const char __EXPORTED *
+++nfct_timeout_policy_attr_to_name(uint8_t l4proto, uint32_t state)
++ {
++ 	if (timeout_protocol[l4proto].state_to_name == NULL) {
++ 		printf("no array state name\n");
++@@ -354,7 +348,6 @@ const char *nfct_timeout_policy_attr_to_name(uint8_t l4proto, uint32_t state)
++ 
++ 	return timeout_protocol[l4proto].state_to_name[state];
++ }
++-EXPORT_SYMBOL(nfct_timeout_policy_attr_to_name);
++ 
++ /**
++  * @}
++@@ -438,8 +431,9 @@ nfct_timeout_snprintf_default(char *buf, size_t size,
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int nfct_timeout_snprintf(char *buf, size_t size, const struct nfct_timeout *t,
++-			  unsigned int type, unsigned int flags)
+++int __EXPORTED
+++nfct_timeout_snprintf(char *buf, size_t size, const struct nfct_timeout *t,
+++		      unsigned int type, unsigned int flags)
++ {
++ 	int ret = 0;
++ 
++@@ -454,7 +448,6 @@ int nfct_timeout_snprintf(char *buf, size_t size, const struct nfct_timeout *t,
++ 
++ 	return ret;
++ }
++-EXPORT_SYMBOL(nfct_timeout_snprintf);
++ 
++ /**
++  * @}
++@@ -477,7 +470,7 @@ EXPORT_SYMBOL(nfct_timeout_snprintf);
++  * - CTNL_MSG_TIMEOUT_GET: get conntrack timeout object.
++  * - CTNL_MSG_TIMEOUT_DEL: delete conntrack timeout object.
++  */
++-struct nlmsghdr *
+++struct nlmsghdr __EXPORTED *
++ nfct_timeout_nlmsg_build_hdr(char *buf, uint8_t cmd,
++ 			     uint16_t flags, uint32_t seq)
++ {
++@@ -496,14 +489,13 @@ nfct_timeout_nlmsg_build_hdr(char *buf, uint8_t cmd,
++ 
++ 	return nlh;
++ }
++-EXPORT_SYMBOL(nfct_timeout_nlmsg_build_hdr);
++ 
++ /**
++  * nfct_timeout_nlmsg_build_payload - build payload from ct timeout object
++  * \param nlh: netlink message that you want to use to add the payload.
++  * \param t: pointer to a conntrack timeout object
++  */
++-void
+++void __EXPORTED
++ nfct_timeout_nlmsg_build_payload(struct nlmsghdr *nlh,
++ 				 const struct nfct_timeout *t)
++ {
++@@ -532,7 +524,6 @@ nfct_timeout_nlmsg_build_payload(struct nlmsghdr *nlh,
++ 	}
++ 
++ }
++-EXPORT_SYMBOL(nfct_timeout_nlmsg_build_payload);
++ 
++ static int
++ timeout_nlmsg_parse_attr_cb(const struct nlattr *attr, void *data)
++@@ -629,7 +620,7 @@ timeout_parse_attr_data(struct nfct_timeout *t, const struct nlattr *nest)
++  * This function returns -1 in case that some mandatory attributes are
++  * missing. On sucess, it returns 0.
++  */
++-int
+++int __EXPORTED
++ nfct_timeout_nlmsg_parse_payload(const struct nlmsghdr *nlh,
++ 				 struct nfct_timeout *t)
++ {
++@@ -654,7 +645,6 @@ nfct_timeout_nlmsg_parse_payload(const struct nlmsghdr *nlh,
++ 	}
++ 	return 0;
++ }
++-EXPORT_SYMBOL(nfct_timeout_nlmsg_parse_payload);
++ 
++ /**
++  * @}
++-- 
++cgit v1.1
++
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb
+index 3d3799726..92cb23d6e 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cthelper_1.0.0.bb
+@@ -6,7 +6,9 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "libmnl"
  
- SRC_URI = "git://git.netfilter.org/libnetfilter_queue \
-            file://0001-Correct-typo-in-the-location-of-internal.h-in-includ.patch \
-+           file://0001-libnetfilter-queue-Declare-the-define-visivility-attribute-together.patch \
-            "
+-SRC_URI = "http://www.netfilter.org/projects/libnetfilter_cthelper/files/libnetfilter_cthelper-${PV}.tar.bz2;name=tar"
++SRC_URI = "http://www.netfilter.org/projects/libnetfilter_cthelper/files/libnetfilter_cthelper-${PV}.tar.bz2;name=tar \
++           file://libnetfilter-cthelper-visibility-hidden.patch \
++"
+ SRC_URI[tar.md5sum] = "b2efab1a3a198a5add448960ba011acd"
+ SRC_URI[tar.sha256sum] = "07618e71c4d9a6b6b3dc1986540486ee310a9838ba754926c7d14a17d8fccf3d"
  
- S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb
+index dcf748562..ff32f3409 100644
+--- a/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb
++++ b/meta-networking/recipes-filter/libnetfilter/libnetfilter-cttimeout_1.0.0.bb
+@@ -5,7 +5,9 @@ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
+ DEPENDS = "libmnl"
+ 
+-SRC_URI = "http://www.netfilter.org/projects/libnetfilter_cttimeout/files/libnetfilter_cttimeout-${PV}.tar.bz2;name=tar"
++SRC_URI = "http://www.netfilter.org/projects/libnetfilter_cttimeout/files/libnetfilter_cttimeout-${PV}.tar.bz2;name=tar \
++           file://libnetfilter-cttimeout-visibility-hidden.patch \
++"
+ SRC_URI[tar.md5sum] = "7697437fc9ebb6f6b83df56a633db7f9"
+ SRC_URI[tar.sha256sum] = "aeab12754f557cba3ce2950a2029963d817490df7edb49880008b34d7ff8feba"
+ 
 -- 
 2.12.2
 
