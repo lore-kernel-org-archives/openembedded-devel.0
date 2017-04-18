@@ -1,60 +1,47 @@
-Return-Path: <anders@chargestorm.se>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 7414C71A2D
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 79F0F71A54
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 12:20:34 +0000 (UTC)
-Received: by mail-lf0-f47.google.com with SMTP id 88so32915542lfr.0
+	Tue, 18 Apr 2017 12:20:54 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id u2so53316302wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 05:20:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=chargestorm-se.20150623.gappssmtp.com; s=20150623;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-disposition:in-reply-to:organization
-	:user-agent; bh=mlv00Aa+IniYzFCC8EbcpYgZ4b2/YtOqyzJwOC1eUiI=;
-	b=KyzN01TJad0IWUyUqmz2UvSZNjbv8sc4RliU5RkXTyVRckQl8uMWiVDaHeqllk7vj9
-	6BVA5vnfPkSUr0lYJD33VShJwH9SI/+osKeE1DxfjScLip4Q++uqipz+r1z3S99ZFLCd
-	EEI6Kj9NX/6fuwaySD8fKMf2eY8w51vgiDCLj9D1GRNgWbNG7xXvx9/DfDT23S8iGL9+
-	qbukE66mUcthhHwwW+oxMOWgEToEX5lnSzysr3kxe/frtizwwbRrWbDKAJi+iXgAYUy5
-	SIZXsEXohJrQ7EyzBNuJ82gBA8ay9PBH1ItoQkHISNFCbx44meUMhxCVtqH99DKRkhYx
-	zAkg==
+	Tue, 18 Apr 2017 05:20:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=HbltXsmy94Fy/lv5H7e4HmqPXKKWX54lYAaTMv/SOjw=;
+	b=qIfYMO1Tf3AmxPn0D91Or/WI56AHi9JZGt4TfYfOh1Uoqxyjhef9DJux2Et1JU8agY
+	AbRmYMgpDK0iFbUyIRujCXhMbrP3m94zBvSSZgLKdbfG8SSilg7gsZMLH1izVJoUKEMN
+	7Hpu19dwX7XrZ27doHvQjEyqjgWy6Z2E8FvdC0PQErnOiaWM+aBQC9J1Qja+8M1YzWI8
+	mkumQ5PeLUXi4Hbw1E7r20gH5r+23ig1jxG44Y/WNSLeZvDPO+Zz3d3Q/Xl1jSD8yXCp
+	kUv8FGyGqk3eED0T0z5B5ls1p/kie0YSnv4jlgdLf5l69fR1XK3tBAJuw/Sn+86dHT36
+	tWkQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:subject:message-id:mail-followup-to
-	:references:mime-version:content-disposition:in-reply-to
-	:organization:user-agent;
-	bh=mlv00Aa+IniYzFCC8EbcpYgZ4b2/YtOqyzJwOC1eUiI=;
-	b=mxhRTftWA+BgfLujfCpCE2MPKdxQiEVqEPlNUVX6FlFVe8wbgl12NLTebjmYRUO3RU
-	a4dQyxol/yU0iaqzzan3g0CXExM0hw/HS8M2sMdXQ7J/hAZCDIiXDvRzV/bARU+HynKx
-	rd59MFdrC44ob1xbSuVLRoB0fHtlTwo982VP8aMbx0mZkCleybUCeEKvpn7p+Kxr1cac
-	r3ZT8aHU3Ua1HRHbDYWxlhAaHXEAOfrjtcjF5f+ELPp4s5AnTehYJXhXo1EfLY5JUshu
-	9B1TT/8hvd1uLvaFdPno9qAr9Qx2FpFTNfVAxOkuu6jltH3SjnrZTL/3JET6W7RbO8hy
-	vyoA==
-X-Gm-Message-State: AN3rC/6luq9PgAcujc7Ux/vfV5kmFLkRsThAfm/2kNEVOhKPSk64N979
-	9/TEX+Ea+fG5k/p344o=
-X-Received: by 10.46.7.18 with SMTP id 18mr3712375ljh.5.1492518034534;
-	Tue, 18 Apr 2017 05:20:34 -0700 (PDT)
-Received: from ad.chargestorm.se (194-237-220-218.customer.telia.com.
-	[194.237.220.218]) by smtp.gmail.com with ESMTPSA id
-	q123sm2414756ljb.18.2017.04.18.05.20.32
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 18 Apr 2017 05:20:33 -0700 (PDT)
-Date: Tue, 18 Apr 2017 14:20:31 +0200
-From: Anders Darander <anders@chargestorm.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170418122031.pizafzlv7zjy5p22@ad.chargestorm.se>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <1491975746-68414-1-git-send-email-dengke.du@windriver.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=HbltXsmy94Fy/lv5H7e4HmqPXKKWX54lYAaTMv/SOjw=;
+	b=nTPSpibOnKDs8eOepsVqOseolC3AMZtKmu5zLOydAUvkvYKFZLxF3kfO/8ye4InI1b
+	9yZVvIECZdxZTYlYsJKHE4ESRK/63ui9p5MH70SeXzLiU3Gom5sWaHRCc7ZNtp1TEnPj
+	L+uQCW+epGvwCeDmIPZMQqEkA5+FiQL3uO6UpiJ96d23/PbQQUrQLuav6O/1L63spF57
+	iis4aS8gybVtT+zWQcxOpxArbnM4JbWnsXk6y2sB5FNwJFS06Blfs/VDcNr2ASluatkH
+	epqZSjCkuBt5VAQ1WoQWirpjCG+GNbVtxszvyLeZcXKw6VmtE+ap/d0yWsirxzX5qNqY
+	QjLw==
+X-Gm-Message-State: AN3rC/7iRKP99l8OWg5tQyTpfbUOuyjB5Gv8WenNTbR55aPgrfatyF+T
+	XL6v0zM9lN3z372IVPyLEs2Grvt0bA==
+X-Received: by 10.28.175.209 with SMTP id y200mr13645976wme.81.1492518055889; 
+	Tue, 18 Apr 2017 05:20:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1491975746-68414-1-git-send-email-dengke.du@windriver.com>
-X-Accept-Language: sv, en, de
-X-GPG-Fingerprint: 5AF0 B2E9 78FE 9D75 D110  6F8F 3E31 84D7 920E 938C
-X-GPG-Key-Id: 0x920E938C
-X-GPG-Keyserver: hkp://keys.gnupg.net
-Organization: ChargeStorm AB
-User-Agent: NeoMutt/20170306 (1.8.0)
-Subject: Re: [PATCH V2] crash: 7.1.5 -> 7.1.8
+Received: by 10.80.148.54 with HTTP; Tue, 18 Apr 2017 05:20:55 -0700 (PDT)
+In-Reply-To: <1492416250-15487-2-git-send-email-yadi.hu@windriver.com>
+References: <1492416250-15487-1-git-send-email-yadi.hu@windriver.com>
+	<1492416250-15487-2-git-send-email-yadi.hu@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 18 Apr 2017 14:20:55 +0200
+Message-ID: <CA+chaQfsCJ1DH14kADKuM+_xico2crP19D3MdJrMB8ZVLLntzA@mail.gmail.com>
+To: Yadi Hu <yadi.hu@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] drbd-utils:add denpendency for perl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,22 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 12:20:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 Apr 2017 12:20:55 -0000
+Content-Type: text/plain; charset=UTF-8
 
-* Dengke Du <dengke.du@windriver.com> [170412 07:42]:
+drbd-utils_8.9.3.bb was removed some 4 months ago with:
 
-> 2. Add the "id" to HOSTTOOLS in meta-oe/layer.conf
+commit 8151702b66825504f9a5f076fd98d7538910830b
+Author:     Wang Xin <wangxin2015.fnst@cn.fujitsu.com>
+AuthorDate: Wed Sep 14 00:51:57 2016 -0400
+Commit:     Joe MacDonald <joe_macdonald@mentor.com>
+CommitDate: Thu Dec 15 11:01:54 2016 -0500
 
-Why do you need to add `id` to HOSTTOOLS?
-We're normally trying to _increase_ determinism in builds, not reduce
-it...
+    drbd-utils: 8.9.3 -> 8.9.6
 
-Cheers,
-Anders
+You should test your changes in recent master.
 
--- 
-Anders Darander, Senior System Architect
-ChargeStorm AB / eStorm AB
+On Mon, Apr 17, 2017 at 10:04 AM, Yadi Hu <yadi.hu@windriver.com> wrote:
+
+> From: "Yadi.hu" <yadi.hu@windriver.com>
+>
+> Perl script drbd-overview fails to run due to perl noexists
+> under small rootfs,fixing it through adding definitions both
+> perl-module-strict and perl-module-warnings.
+>
+> Signed-off-by: Yadi.hu <yadi.hu@windriver.com>
+> ---
+>  meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>
+> diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+> b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+> index 1d691cd1f..5aa8a88cd 100644
+> --- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+> +++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.3.bb
+> @@ -30,7 +30,7 @@ EXTRA_OECONF = " \
+>                  --with-systemdunitdir=${systemd_unitdir}/system \
+>                 "
+>
+> -RDEPENDS_${PN} += "bash perl"
+> +RDEPENDS_${PN} += "bash perl perl-module-strict perl-module-warnings"
+>
+>  # The drbd items are explicitly put under /lib when installed.
+>  #
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
