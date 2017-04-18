@@ -1,27 +1,43 @@
-Return-Path: <gyurco@freemail.hu>
-X-Greylist: delayed 306 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 17 Apr 2017 21:27:33 UTC
-Received: from primary.intra.htm-hungary.hu (mail.htm-hungary.hu [80.98.98.89])
-	by mail.openembedded.org (Postfix) with ESMTP id F1744605C2
+Return-Path: <sadlife1990@gmail.com>
+Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
+	[209.85.213.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 55C66719C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Apr 2017 21:27:33 +0000 (UTC)
-Received: from localhost (primary [127.0.0.1])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTP id 46CD680570;
-	Mon, 17 Apr 2017 23:22:27 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at htm-hungary.com
-Received: from primary.intra.htm-hungary.hu ([127.0.0.1])
-	by localhost (primary.intra.htm-hungary.hu [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id UdepttWyMQOw; Mon, 17 Apr 2017 23:22:26 +0200 (CEST)
-Received: from gyurco.lan (unknown [10.8.0.14])
-	by primary.intra.htm-hungary.hu (Postfix) with ESMTPA id DF12A80523;
-	Mon, 17 Apr 2017 23:22:25 +0200 (CEST)
-From: Gyorgy Szombathelyi <gyurco@freemail.hu>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Apr 2017 23:22:07 +0200
-Message-Id: <20170417212207.4753-1-gyurco@freemail.hu>
-X-Mailer: git-send-email 2.9.3
-Subject: [meta-networking][PATCH] samba: fix conflict between samba and sudo packages
+	Tue, 18 Apr 2017 05:41:32 +0000 (UTC)
+Received: by mail-vk0-f47.google.com with SMTP id j127so63573902vkh.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 Apr 2017 22:41:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to:cc;
+	bh=YliBhGvmhHbwPODHwoh+xBekl3XkydE6p087QYFJ92Y=;
+	b=TY8aSxsRpYsu8AuOamW6fUWs+0aE34yMRQLXpJ050zrwV5Lb4JdOjeuiROXba1BjJH
+	3MAve6+YBBQ13/abPzTBVcJ0w/bSPP5g0xhlGkR1rIeLGJyYEzTsluZrHROa4hBST1bZ
+	uyKLPYxGVuDS9omwTTuXwnnTdupGWx7vKLPyfs0kx/Ac5cXVEJfl9dAi+XRUYwlAuPRT
+	hXBuYjHCxLSuihrhyiMsJIQNgOrU0Z0PkkDsh86cucHI8wCl9jJy8w3KwITppIdgiNCZ
+	p2peq8ZfK/QGE4uYB1BcJN7/cfIfPFCoOiNTEP31WMU5vo2u6xX6Eu3hTKBpGWWj8L67
+	5RJw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to:cc;
+	bh=YliBhGvmhHbwPODHwoh+xBekl3XkydE6p087QYFJ92Y=;
+	b=n8ysIHibKKWPfXcUwVFjkLwSwpSo+rj5WxMz0kBQGwcbR2HcPOkyih3743Alvrmrwh
+	o1XM6TXr24Vup0zAW8M/SWuGzMWQBWAiSi1H3f6233Ue1PvJ8Te8Gf0OirWF3JHegLF0
+	GwJIsdF5kuSvP4vLtbYAm2eHiwFDF4nmiVEZNTeOLfVALTw5Y52vTL1mblwBFjZ5VlDO
+	c+M5Y3hSDovayrcxojp8gRsGrYAMPM7E24amli4I4GavDiDcvNaBTK3+cBMiXqTw4W7t
+	dhHlxRCGptAMyxzxTwBOGnBMRtuR6eqWrN+BvKtfNsNOsX2hV7f2CnQH/cp8Q/llcODx
+	4DYA==
+X-Gm-Message-State: AN3rC/7BH6pTqTaNSkKxowziZwX8Q0rj2yDJjI0nQsOw9oB3d4QEj2bb
+	JtTZQHnMnyjFlCPRDRIFZS/XS1y5lw==
+X-Received: by 10.31.124.138 with SMTP id x132mr8213829vkc.120.1492494094195; 
+	Mon, 17 Apr 2017 22:41:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.32.105 with HTTP; Mon, 17 Apr 2017 22:41:33 -0700 (PDT)
+From: Weng Josn <sadlife1990@gmail.com>
+Date: Tue, 18 Apr 2017 08:41:33 +0300
+Message-ID: <CAAHuHfziqOC7STraEL91kXudDUy5zc4GEGhnM9vEPAXiSUVXxg@mail.gmail.com>
+To: yocto@yoctoproject.org, openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: cups: 2.1.4 cups-filter build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,28 +50,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Apr 2017 21:27:35 -0000
+X-List-Received-Date: Tue, 18 Apr 2017 05:41:33 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Use the same permissions for sudoers.d as in the sudo package.
+Hello,
 
-Signed-off-by: Gyorgy Szombathelyi <gyurco@freemail.hu>
----
- meta-networking/recipes-connectivity/samba/samba_4.4.5.bb | 1 +
- 1 file changed, 1 insertion(+)
+I'm testing cups: 2.1.4 I need to serial backend support. How to compile or
+enable serial backend support ?
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-index d0235c1..f2d52a2 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.4.5.bb
-@@ -154,6 +154,7 @@ do_install_append() {
-         sed -i 's:\(#!/bin/\)bash:\1sh:' ${D}${bindir}/onnode
-     fi
- 
-+    chmod 0750 ${D}${sysconfdir}/sudoers.d
-     rm -rf ${D}/run ${D}${localstatedir}/run ${D}${localstatedir}/log
- }
- 
--- 
-2.9.3
-
+Thanks.
 
