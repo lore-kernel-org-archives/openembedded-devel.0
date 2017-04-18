@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6F5D372F56
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 574B571CAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 18:22:32 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id c198so146278pfc.0
+	Tue, 18 Apr 2017 18:22:34 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id i5so130341pfc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 11:22:34 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=yS6JnvUJCNZ8L5D+kdTbl0T2/cSjMgi3mYXgJe3RWYE=;
-	b=UUmWOHLKSfmstoMGl9iwcOcL9CIY6hT79GB6g8Ar1Ff5Fb/5tEM/JSnNkywWY4XLBN
-	jiyF68tg1k1nzU5+3anhK8M6wPOreSfPlBGmORcZKc7QXrMSoW3GLxwuIkrUtxHrlCFZ
-	kZAKb6vyucojBWmt+zmzxFXT93w08aR+z7De3fJgnCxmaiHv6HHYSoH/UFGAwbbsOwZx
-	sUn7l3qYF3KQV8XFTHDRXiIInx1W5FBpnIyl48D03t1cySRJrjhYXuEY8Io64aGlu5Mm
-	7ZtmRUUnPr84QfSLYCRph42m/f01WfdMe9L4sDgn1vRpJ/uutFhLqsQvftqO/SOexxQ0
-	KnOA==
+	bh=u4M/6hBl8yG4WgYIpd6f633ip8+xCOcbofCtRH+G1LA=;
+	b=SscvF6sqp4BAOxncxeEKd0lHQolErfbxgM63pjgJ9umWT7lH2eV0QCbyoYEfIMpcoI
+	qK4NDMzKUEtwW8D4hqsNwrT/ZX/UE8gHe274IY/rjl0mRmOPk7rg83EJOsevXWzSXsQM
+	ZG2rY3i3javo1Szeq/e4WnSVyGBKwLH9RjIbN86lJfmn6NKxsNObY7ewzo94LMTRjJ6c
+	z39cpo/J8xy1wVH/EdkD5EvqoXl4P8xIDhVzuA6nB1FCpvtZzl7+OuUVbgR1CbGyNuD5
+	auYmxBzkCiKCfTad1Y9US3hMM2fg8ATE97uV0nQfW6dOYY9xSceKt+685u447QMJWjJP
+	5hmw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=yS6JnvUJCNZ8L5D+kdTbl0T2/cSjMgi3mYXgJe3RWYE=;
-	b=byFPgConW0itaS5sX3lqqOEwyvjcd8tgpfU0YM4CWnWabuXRSwLsX9KN0iE2zEbqST
-	fEcdKWhQW9q5/serjS/8si90jAFv6kQ/SbpfcGLeHT5c/dRGew4L61EC/taXhEJpAqcp
-	0yNSaaYmm5UYDTNdAq/xlTaPeZRoro86LlyJpUarcLsFgZ3jZTpZJ8FjAvzr0aVeQtYd
-	BtHPUbShWXo3OZMhzrM9uttj1cYoPQ7oMKa+Xf9CrZOajAaLF2EofyjiT6C5xSqhwNZ3
-	koJaGjnDORkxCpBx+1Sf05un7hqNbNYHl4VoaxqPQYfOArZ4ZPToX/8047UaMXFcLj70
-	Jswg==
-X-Gm-Message-State: AN3rC/74RwD5tfo/1ilo8cSPrm+hJ8kWL//GBE/Eb797KZe3xQ6edqm/
-	yDHdezrpmU/eWw==
-X-Received: by 10.98.141.216 with SMTP id p85mr18975259pfk.195.1492539753975; 
-	Tue, 18 Apr 2017 11:22:33 -0700 (PDT)
+	bh=u4M/6hBl8yG4WgYIpd6f633ip8+xCOcbofCtRH+G1LA=;
+	b=DoobnMmzlho2V7zL344egL0U+iadqu1zMH5pDbnfGsW1UK5yccHYW+1HaVZN3ncd5+
+	woMQ9libn4OXc136GYBaocvSO/VaCop9dbkSzn7k9xJws9M7IMhAhYjiljqXs6dvkq1T
+	Jwrbz1/vh8tIvOnP8hjgWK+J7dv/Dox/r1+65HixTUlmauwjoUCIMhbQ6tNjKuONJCX6
+	Fd9OOA6p2ofV4hLZSIfN5JTjZ3tI0SOSbr31qcf7oLPQCIsDBV81fCBoi33/0/YBmWDS
+	rwfTUuoOONuTOHFNHy7Lso4QAdxl7H0ZdaHPZQDQUhnd2htlnHfGAfR5pt1ZOGC78gDC
+	K8mA==
+X-Gm-Message-State: AN3rC/46UC1q309uXiMepnGPmC2ensISGQsyZpruSvPXYeTDggUzaPJ9
+	zl2hzVxSKDZ5OWN4
+X-Received: by 10.98.87.203 with SMTP id i72mr9019790pfj.151.1492539755343;
+	Tue, 18 Apr 2017 11:22:35 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	m29sm25402101pfj.32.2017.04.18.11.22.32
+	m29sm25402101pfj.32.2017.04.18.11.22.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Apr 2017 11:22:33 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Apr 2017 11:21:36 -0700
-Message-Id: <20170418182142.27253-26-raj.khem@gmail.com>
+Date: Tue, 18 Apr 2017 11:21:37 -0700
+Message-Id: <20170418182142.27253-27-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170418182142.27253-1-raj.khem@gmail.com>
 References: <20170418182142.27253-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 26/32] libutempter: Fix build with musl
+Subject: [meta-oe][ 27/32] mosh: Upgrade to 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,117 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 18:22:32 -0000
+X-List-Received-Date: Tue, 18 Apr 2017 18:22:34 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-support/libutempter/libutempter.bb |  4 +-
- .../libutempter-remove-glibc-assumption.patch      | 81 ++++++++++++++++++++++
- 2 files changed, 84 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
+ meta-oe/recipes-connectivity/mosh/{mosh_1.2.4.bb => mosh_1.3.0.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-connectivity/mosh/{mosh_1.2.4.bb => mosh_1.3.0.bb} (93%)
 
-diff --git a/meta-oe/recipes-support/libutempter/libutempter.bb b/meta-oe/recipes-support/libutempter/libutempter.bb
-index 0282ba500..8c84cb376 100644
---- a/meta-oe/recipes-support/libutempter/libutempter.bb
-+++ b/meta-oe/recipes-support/libutempter/libutempter.bb
-@@ -11,7 +11,9 @@ SRCREV = "3ef74fff310f09e2601e241b9f042cd39d591018"
- PV = "1.1.6-alt2+git${SRCPV}"
+diff --git a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb b/meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+similarity index 93%
+rename from meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+rename to meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+index e4d5b69bc..9fc8435ee 100644
+--- a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
++++ b/meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+@@ -15,9 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl libutempter"
  
- SRC_URI = "git://git.altlinux.org/people/ldv/packages/libutempter.git \
--    file://0001-Fix-macro-error.patch"
-+           file://0001-Fix-macro-error.patch \
-+           file://libutempter-remove-glibc-assumption.patch \
-+          "
+ SRC_URI = "http://mosh.mit.edu/mosh-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "c2d918f4d91fdc32546e2e089f9281b2"
+-SRC_URI[sha256sum] = "e74d0d323226046e402dd469a176075fc2013b69b0e67cea49762c957175df46"
++SRC_URI[md5sum] = "d961276995936953bf2d5a794068b076"
++SRC_URI[sha256sum] = "320e12f461e55d71566597976bd9440ba6c5265fa68fbf614c6f1c8401f93376"
  
- S = "${WORKDIR}/git/${BPN}"
+ inherit autotools pkgconfig
  
-diff --git a/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch b/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
-new file mode 100644
-index 000000000..6ed93355b
---- /dev/null
-+++ b/meta-oe/recipes-support/libutempter/libutempter/libutempter-remove-glibc-assumption.patch
-@@ -0,0 +1,81 @@
-+diff -Naur libutempter-1.1.6.orig/utempter.c libutempter-1.1.6/utempter.c
-+--- libutempter-1.1.6.orig/utempter.c	2010-11-04 13:14:53.000000000 -0400
-++++ libutempter-1.1.6/utempter.c	2014-06-20 16:37:09.762403323 -0400
-+@@ -34,13 +34,7 @@
-+ #include <sys/stat.h>
-+ #include <utmp.h>
-+ 
-+-#ifdef __GLIBC__
-+ # include <pty.h>
-+-#elif defined(__FreeBSD__)
-+-# include <libutil.h>
-+-#else
-+-# error Unsupported platform
-+-#endif /* __GLIBC__ || __FreeBSD__ */
-+ 
-+ #define	DEV_PREFIX	"/dev/"
-+ #define	DEV_PREFIX_LEN	(sizeof(DEV_PREFIX)-1)
-+@@ -106,17 +100,12 @@
-+ 
-+ static int
-+ write_uwtmp_record(const char *user, const char *term, const char *host,
-+-#ifdef __GLIBC__
-+ 		   pid_t pid,
-+-#endif
-+ 		   int add)
-+ {
-+ 	struct utmp ut;
-+ 	struct timeval tv;
-+-
-+-#ifdef __GLIBC__
-+ 	size_t offset;
-+-#endif
-+ 
-+ 	memset(&ut, 0, sizeof(ut));
-+ 
-+@@ -128,8 +117,6 @@
-+ 	if (host)
-+ 		strncpy(ut.ut_host, host, sizeof(ut.ut_host));
-+ 
-+-#ifdef __GLIBC__
-+-
-+ 	offset = (strlen(term) <= sizeof(ut.ut_id)) ? 0 :
-+ 			strlen(term) - sizeof(ut.ut_id);
-+ 	strncpy(ut.ut_id, term + offset, sizeof(ut.ut_id));
-+@@ -156,27 +143,6 @@
-+ 
-+ 	(void) updwtmp(_PATH_WTMP, &ut);
-+ 
-+-#elif defined(__FreeBSD__)
-+-
-+-	ut.ut_time = tv.tv_sec;
-+-
-+-	if (add)
-+-	{
-+-		login(&ut);
-+-	} else
-+-	{
-+-		if (logout(term) != 1)
-+-		{
-+-#ifdef	UTEMPTER_DEBUG
-+-			fprintf(stderr, "utempter: logout: %s\n",
-+-				strerror(errno));
-+-#endif
-+-			exit(EXIT_FAILURE);
-+-		}
-+-	}
-+-
-+-#endif /* __GLIBC__ || __FreeBSD__ */
-+-
-+ #ifdef	UTEMPTER_DEBUG
-+ 	fprintf(stderr,
-+ 		"utempter: DEBUG: utmp/wtmp record %s for terminal '%s'\n",
-+@@ -255,8 +221,6 @@
-+ 	validate_device(device);
-+ 
-+ 	return write_uwtmp_record(pw->pw_name, device + DEV_PREFIX_LEN, host,
-+-#ifdef __GLIBC__
-+ 				  pid,
-+-#endif
-+ 				  add);
-+ }
 -- 
 2.12.2
 
