@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F2F071CB8
+Received: from mail-pg0-f48.google.com (mail-pg0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 7527371B50
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 18:22:17 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id c198so467768pfc.1
+	Tue, 18 Apr 2017 18:22:18 +0000 (UTC)
+Received: by mail-pg0-f48.google.com with SMTP id g2so479979pge.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 11:22:19 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=NBUv4HSpAy78eHutYM8u58gUBMvhOgEfrJMMBFdhVYs=;
-	b=Fz6105RpzO8DZvX0RUzRWCGVHQdYRcunl+g4K2Wa75NL5omyTJdZyPYPqObN2w0P7v
-	KTDPWzyVhr04oKnOS/vs25J9Gj7GitGTS7tbcLM7F/SDMzCQElkINW2MwmP/oXSloojX
-	I4mG9jHu0G5qhFOqBHt/BGcRFGL/rGKpAFt03pHRfGKJH5VsvVCPJvenemZG+/Ba0kh6
-	LyvZhXiKdPIUkDfAtg4DG2gMj/PozTon4eainMPxn1gs3yQfsYLNveMGe4n5IRDBbrko
-	z3ac7vMzY3Uhwu14B4py6FYxyxWrBhVhlcrKcbaUDjyPWqmzXlpEALOwwK53p6OKpnYx
-	/zww==
+	bh=xVoI4YNd7IHbQHleUUiCw8X7BbROX5TTMyq3BhiufMk=;
+	b=YABtNC4vP6xLDD5fDSihVY6acaVTpQC3nEIPrZ4SekbXmSECdO7Bjfb83QXYXu3VOn
+	r3RKu+5eQVu5paO7yj0Phla57JUEz1U4NcOW2N2aa/DmCx3Vxi8hkjVF8+MvqGlMZhDY
+	3Ez4sfeaAjDbldsGb9Tb04r8RE5woZJVIc+VY8ieuecKtkDEb8JOcYqmOs5Hn/ykW0bd
+	X/gS7tiW6vpENKUSCT8GoSh3PDS4xfuTVvweDDqsaYBvhxtsfhPVUS1TzGprQzhm4+wB
+	69pS5SFfi5eW/98fNj3+dl0+DiWUmwgBhY6T265VCHBKc5gqwE2NT3E9R353OyER/vD7
+	WIWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=NBUv4HSpAy78eHutYM8u58gUBMvhOgEfrJMMBFdhVYs=;
-	b=iC7bglgb5EXh15bCfXWvJYjWjO0f/SVah2DznetImv/cKMD0A2MaGKPeLXLv5fibAJ
-	RzXSDTBPancVQlbJyQUyLrze0JgCRQcW6IduqIWg8vwD4lrFRcjvOXh3rOj2nVuqBAS9
-	Mkzvw9joOpGCVAtJ2qB/JgRjlw8e/RY8djuApFYfJe9WcxEfK9Zp86HT3wUfZPWcYo4L
-	19SnfY1fsztnz+FTy2m86RHJVoXY2N92JG/9XrvJDFidba8l+bLoU3bDR4U4gHfVyJQG
-	NxL5ZOJP/cyAtZWPsbDv/AdIqGYNz/q3R/a09KQwGlWCx79H9k+8s8SaO8hH6hwNgqb7
-	i5/A==
-X-Gm-Message-State: AN3rC/7KVU9qPiRvJINuXAgalyAvCTgtSU49rUaG2gUjLCg1HmwXDc0a
-	Yx9cH/JN5+pOg8Lo
-X-Received: by 10.99.157.138 with SMTP id i132mr18935982pgd.87.1492539738498; 
-	Tue, 18 Apr 2017 11:22:18 -0700 (PDT)
+	bh=xVoI4YNd7IHbQHleUUiCw8X7BbROX5TTMyq3BhiufMk=;
+	b=XFDzDjCGZk4pqjUESsNlvJ/0Gq+Ewv0o/wkd422A1laqrqZw1lruG0nc33crKxkEo/
+	gpcoRysfS+xVFsUNgzizQ6oqUYl/hwlyamDVw8crgb8Yx02h5hFOOvwbPtz6ymz7OCig
+	oTKCE7K/3opYdxQOLemYTBS2WbmRW2PlpqxcG9yEdiIULZnvbENWqgTEHkTwH5T+tcqh
+	/Ttu0+zzggVYc4w99J7BBUNc+OIlhlPb7Eo395/svIuWIvC3WZkzOxUhZKMajlsztxod
+	Y8Lu9fmZjQFKhAf541qLQjJLeygesRohc5Zdux+970z+xZpR4VdbJaUCgliIx2piQ9VM
+	V9rw==
+X-Gm-Message-State: AN3rC/7a34YxytUAJQDQajJFQOMLb0rtWqlIskcEIx5qP5Y6CR/+weIf
+	oOwDiR2y0dltFJ2m
+X-Received: by 10.99.152.87 with SMTP id l23mr18292724pgo.59.1492539740188;
+	Tue, 18 Apr 2017 11:22:20 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	m29sm25402101pfj.32.2017.04.18.11.22.16
+	m29sm25402101pfj.32.2017.04.18.11.22.18
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Apr 2017 11:22:17 -0700 (PDT)
+	Tue, 18 Apr 2017 11:22:19 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Apr 2017 11:21:27 -0700
-Message-Id: <20170418182142.27253-17-raj.khem@gmail.com>
+Date: Tue, 18 Apr 2017 11:21:28 -0700
+Message-Id: <20170418182142.27253-18-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170418182142.27253-1-raj.khem@gmail.com>
 References: <20170418182142.27253-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 17/32] sharutils: Upgrade to 4.15.2
+Subject: [meta-oe][ 18/32] avro-c: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,143 +55,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Apr 2017 18:22:17 -0000
+X-List-Received-Date: Tue, 18 Apr 2017 18:22:19 -0000
 
-Fix format error warnings with clang
+Update SRC_URI to point to github mirror
+Add a patch to fix build with clang
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../sharutils-4.14/fix-for-cross-compiling.patch   | 29 ----------------------
- .../sharutils/0001-Fix-build-with-clang.patch      | 29 ++++++++++++++++++++++
- .../recipes-support/sharutils/sharutils_4.14.bb    | 18 --------------
- .../recipes-support/sharutils/sharutils_4.15.2.bb  | 21 ++++++++++++++++
- 4 files changed, 50 insertions(+), 47 deletions(-)
- delete mode 100644 meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
- create mode 100644 meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
- delete mode 100644 meta-oe/recipes-support/sharutils/sharutils_4.14.bb
- create mode 100644 meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
+ ...0001-avro-c-Fix-build-with-clang-compiler.patch | 37 ++++++++++++++++++++++
+ meta-oe/recipes-support/avro/avro-c_1.8.1.bb       | 10 +++---
+ 2 files changed, 43 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
 
-diff --git a/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch b/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
-deleted file mode 100644
-index 86a7da63c..000000000
---- a/meta-oe/recipes-support/sharutils/sharutils-4.14/fix-for-cross-compiling.patch
-+++ /dev/null
-@@ -1,29 +0,0 @@
--From 990234af84a5399017d1c4fe03c5c756a8e51e23 Mon Sep 17 00:00:00 2001
--From: Hongjun Yang <Hongjun.Yang@windriver.com>
--Date: Tue, 20 Aug 2013 09:41:43 +0800
--Subject: [PATCH] fix cross compiling issue
--
--Upstream-Status: Pending
--
--Signed-off-by: Hongjun.Yang <hongjun.yang@windriver.com>
--
-----
-- configure | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/configure b/configure
--index 6ee98e0..8067f54 100755
----- a/configure
--+++ b/configure
--@@ -26965,7 +26965,7 @@ fi
-- if test "$cross_compiling" = yes; then :
--   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
-- $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
---as_fn_error $? "cannot run test program while cross compiling
--+$as_echo "cannot run test program while cross compiling
-- See \`config.log' for more details" "$LINENO" 5; }
-- else
--   cat confdefs.h - <<_ACEOF >conftest.$ac_ext
---- 
--1.8.1.4
--
-diff --git a/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch b/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
+diff --git a/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
 new file mode 100644
-index 000000000..7b627c16d
+index 000000000..01235d8ef
 --- /dev/null
-+++ b/meta-oe/recipes-support/sharutils/sharutils/0001-Fix-build-with-clang.patch
-@@ -0,0 +1,29 @@
-+From fa8371d348f6a8b0799b2e6c38247dd1399d85e3 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/avro/avro-c/0001-avro-c-Fix-build-with-clang-compiler.patch
+@@ -0,0 +1,37 @@
++From 518bb8ccfb3f3fc143fbd571782f3e40573d01b5 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 8 Apr 2017 08:49:48 -0700
-+Subject: [PATCH] Fix build with clang
++Date: Mon, 10 Apr 2017 09:15:04 -0700
++Subject: [PATCH] avro-c: Fix build with clang compiler
 +
-+ATTRIBUTE_FORMAT_ARG macro gets computed to be empty with clang
-+whereas it does support format attribute, we hard code it
++Clang advertizes itself to be compatible with gcc 4.2.1
++while that was true several years ago, it now supports
++a lot more newer features, the test to just check gcc
++version should be supplanted with clang check as well
++so atomic support in clang can be asserted as well
++
++Fixes
++
++lang/c/src/avro/refcount.h:301:2: error: "No atomic implementation!"
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/shar-opts.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ lang/c/src/avro/refcount.h | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
-+diff --git a/src/shar-opts.h b/src/shar-opts.h
-+index a287046..172676f 100644
-+--- a/src/shar-opts.h
-++++ b/src/shar-opts.h
-+@@ -377,7 +377,7 @@ extern tOptions sharOptions;
-+ #   define ATTRIBUTE_FORMAT_ARG(_a)
-+ # endif
++diff --git a/lang/c/src/avro/refcount.h b/lang/c/src/avro/refcount.h
++index 69afa4fc..d76ba057 100644
++--- a/lang/c/src/avro/refcount.h
+++++ b/lang/c/src/avro/refcount.h
++@@ -118,7 +118,8 @@ avro_refcount_dec(volatile int *refcount)
++  * GCC intrinsics
++  */
 + 
-+-static inline char* aoGetsText(char const* pz) ATTRIBUTE_FORMAT_ARG(1);
-++static inline char* aoGetsText(char const* pz) __attribute__ ((format_arg(1)));
-+ static inline char* aoGetsText(char const* pz) {
-+     if (pz == NULL) return NULL;
-+     return (char*)gettext(pz);
++-#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500
+++#elif (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__) > 40500 \
+++|| defined(__clang__)
++ 
++ static inline void
++ avro_refcount_set(volatile int *refcount, int value)
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.14.bb b/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
-deleted file mode 100644
-index d69e6ecbd..000000000
---- a/meta-oe/recipes-support/sharutils/sharutils_4.14.bb
-+++ /dev/null
-@@ -1,18 +0,0 @@
--SUMMARY = "This is the set of GNU shar utilities."
--HOMEPAGE = "http://www.gnu.org/software/sharutils/"
--SECTION = "console/utils"
--LICENSE="GPLv3+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+index 8deee4b23..276fe2b5a 100644
+--- a/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
++++ b/meta-oe/recipes-support/avro/avro-c_1.8.1.bb
+@@ -2,16 +2,18 @@ SUMMARY = "Apache Avro data serialization system."
+ HOMEPAGE = "http://apr.apache.org/"
+ SECTION = "libs"
+ 
 -
--inherit gettext autotools-brokensep
--
--SRC_URI = "ftp://ftp.gnu.org/gnu/sharutils/sharutils-4.14.tar.gz \
--    file://fix-for-cross-compiling.patch \
--"
--
--SRC_URI[md5sum] = "5686c11131b4c4c0841f8f3ef34d136a"
--SRC_URI[sha256sum] = "90f5107c167cfd1b299bb211828d2586471087863dbed698f53109cd5f717208"
--
--do_configure () {
--    oe_runconf
--}
-diff --git a/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
-new file mode 100644
-index 000000000..812fee955
---- /dev/null
-+++ b/meta-oe/recipes-support/sharutils/sharutils_4.15.2.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "This is the set of GNU shar utilities."
-+HOMEPAGE = "http://www.gnu.org/software/sharutils/"
-+SECTION = "console/utils"
-+LICENSE="GPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
-+
-+inherit gettext autotools
-+
-+SRC_URI = "ftp://ftp.gnu.org/gnu/${BPN}/${BP}.tar.gz \
-+           file://0001-Fix-build-with-clang.patch \
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=73bdf70f268f0b3b9c5a83dd7a6f3324"
+ 
+ DEPENDS = "jansson zlib xz"
++PV .= "+git${SRCPV}"
+ 
+-SRC_URI = "${APACHE_MIRROR}/avro/avro-${PV}/c/avro-c-${PV}.tar.gz"
++SRCREV = "4b3677c32b879e0e7f717eb95f9135ac654da760"
++SRC_URI = "git://github.com/apache/avro \
++           file://0001-avro-c-Fix-build-with-clang-compiler.patch;patchdir=../../ \
 +"
-+SRC_URI[md5sum] = "32a51b23e25ad5e6af4b89f228be1800"
-+SRC_URI[sha256sum] = "ee336e68549664e7a19b117adf02edfdeac6307f22e5ba78baca457116914637"
-+
-+do_install_append() {
-+    if [ -e ${D}${libdir}/charset.alias ]
-+    then
-+        rm -rf ${D}${libdir}/charset.alias
-+        rmdir --ignore-fail-on-non-empty ${D}${libdir}
-+    fi
-+}
+ 
+-SRC_URI[md5sum] = "b268348536714541e10411823a1b59b0"
+-SRC_URI[sha256sum] = "e5042088fa47e1aa2860c5cfed0bd061d81f9e96628f8b4d87a24d9b8c5e4ecc"
++S = "${WORKDIR}/git/lang/c"
+ 
+ LDFLAGS_append_libc-uclibc = " -lm"
+ 
 -- 
 2.12.2
 
