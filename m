@@ -1,46 +1,24 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 34CE371A8D
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B250D71A3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Apr 2017 03:59:59 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id d79so2669138wmi.2
+	Wed, 19 Apr 2017 06:29:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3J6TANw007958
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Apr 2017 21:00:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=TTExXXbmffv7MONgB0qUvIw6Q9c6GwCP98UqCujo1pw=;
-	b=nuBOSTMGdAiwjwmjwGBTRwNord0fGv+IC5zDR47J+87ykfKZZ/3trdC/UPpHXr0DGw
-	3Q7SIf7AAgsyat/pTl90Ru+ntQ5YUhAqegCOSRc2qyRzQ6PgDNY5eM1L5etd3K40xVlV
-	6C36G97u8B4H/1MA9KGYNovBZfgxghbRVkkGugPP52ylOa7OZpjv4Mh84N5MQPRojneY
-	f9CyAKD02yB80tXk+twbsX1nrqFEY0vc+ykE0ktMH/Q0AFVU8oEgZuxp85NVxVz4FmuS
-	LuOYMCijTUiuI6MXtVz3IbC1OaLgLGzwWS7GzVm1Y2QfnREpD1zq3Z5+1ZFCrrGT1zly
-	uKKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TTExXXbmffv7MONgB0qUvIw6Q9c6GwCP98UqCujo1pw=;
-	b=YHh3NoUsP1yeCDeh1RWmBTOV/XmJyH4Q7CbgUfkSd8UjpNcWwtIr4sareS+EUsOB6v
-	wEeMbr4bOmQFC9xyLWNSWqf3g8zuRmM13Fj+SGwiR4fVS55Ct1jHS8lGUuMs2iJc1SHP
-	S5+2lvCuMhemCY8pFT61kkiyfurLuVDn1ZbAgPb9INYeLZmQr8XEgu8+d8Dvs2LXpKAR
-	Pti3qtc4ld48pO02EWrN+Wwp0klnw7IQT/G1wpPXSMarFlQJXf5IIqqAzq8o5aOPO4Hw
-	8N/GKXNhMBzt/5j2/2oCQZykZxZO0LI+ABK2nCnhC6xdntaDaL7/X8DJP+p3lpdHyNcU
-	2Gyw==
-X-Gm-Message-State: AN3rC/6kY56MypbEFHytAIu9bu0ChXs7/DfLBG/Y8eqbpjgJKdLyyom9
-	Y/9VeMhq2IqsoA==
-X-Received: by 10.28.143.71 with SMTP id r68mr16468121wmd.61.1492574400557;
-	Tue, 18 Apr 2017 21:00:00 -0700 (PDT)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([106.116.228.133]) by smtp.gmail.com with ESMTPSA id
-	i21sm1422970wrc.50.2017.04.18.20.59.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 18 Apr 2017 20:59:59 -0700 (PDT)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Apr 2017 05:59:34 +0200
-Message-Id: <1492574374-9290-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-java][PATCH] openjdk-8-cross.inc: tweak PACKAGECONFIG default value
+	Tue, 18 Apr 2017 23:29:10 -0700 (PDT)
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 18 Apr 2017 23:29:09 -0700
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 19 Apr 2017 14:28:35 +0800
+Message-ID: <1492583315-67555-1-git-send-email-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 1.9.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] autoconf-archive: drop m4files confliction with gnome-common
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,42 +31,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2017 04:00:01 -0000
+X-List-Received-Date: Wed, 19 Apr 2017 06:29:13 -0000
+Content-Type: text/plain
 
-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+Delete the conflicting m4files with gnome-common to avoid the confliction,
+and the two m4 files will be installed by gnome-common that comes from
+oe-core, then set rdepends to gnome-common.
 
-When x11, cups, alsa is being set in DISTRO_FEATURES, the users might
-expect openjdk build with the related options as well. For instance,
-they might be confused when the openjdk is still built as headless but
-x11 is actually enabled from system aspect.
-
-With this patch, the end users still can choose build openjdk without
-these options by overriding PACKAGECONFIG.
-
-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
 ---
- recipes-core/openjdk/openjdk-8-cross.inc | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .../autoconf-archive/autoconf-archive.inc          |  2 +-
+ .../autoconf-archive/delete-some-m4-files.patch    | 23 ++++++++++++++++++++++
+ .../autoconf-archive_2016.09.16.bb                 |  4 ++++
+ 3 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/autoconf-archive/autoconf-archive/delete-some-m4-files.patch
 
-diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-index 47fe35d..34e1de4 100644
---- a/recipes-core/openjdk/openjdk-8-cross.inc
-+++ b/recipes-core/openjdk/openjdk-8-cross.inc
-@@ -16,6 +16,13 @@ PRIVATE_LIBS = "\
- "
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+index 779115a..9684d1f 100644
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive.inc
+@@ -6,7 +6,7 @@ DEPENDS += "m4-native"
+ DEPENDS_class-native = "m4-native gnu-config-native"
+ DEPENDS_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
  
- PACKAGECONFIG ??= "repack"
-+PACKAGECONFIG ?? = " \
-+    repack \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'cups', 'cups', '', d)} \
-+    ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
+-RDEPENDS_${PN} = "m4 gnu-config"
++RDEPENDS_${PN} = "m4 gnu-config gnome-common"
+ RDEPENDS_${PN}_class-native = "m4-native gnu-config-native"
+ RDEPENDS_${PN}_class-nativesdk = "m4-nativesdk gnu-config-nativesdk"
+ 
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive/delete-some-m4-files.patch b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive/delete-some-m4-files.patch
+new file mode 100644
+index 0000000..2aa788b
+--- /dev/null
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive/delete-some-m4-files.patch
+@@ -0,0 +1,23 @@
++Delete two m4files ax_code_coverage.m4 and ax_check_enable_debug.m4
++to avoid installing conflicts. These two files can be installed by
++gnome-common from oe-core, even if the files in gnmoe-common is
++copied from autoconf-archive(the reason is that the old version
++autoconf-archive don't provide the two files).
++After upgrading to the new version, we need to drop them in meta-oe
++and then set rdepends to gnome-common(oe-core)
++
++Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
++
++Index: a/configure.ac
++===================================================================
++--- a/configure.ac     2016-09-16 06:00:00.000000000 +0800
+++++ b/configure.ac     2017-04-18 17:43:05.946290554 +0800
++@@ -19,7 +19,7 @@
++ 
++ AC_PROG_SED
++ 
++-M4FILES="m4_esyscmd([echo -n m4/*.m4])"
+++M4FILES="m4_esyscmd([echo -n m4/*.m4 | sed -e 's:m4/ax_code_coverage.m4 ::g'|sed -e 's:m4/ax_check_enable_debug.m4 ::g'])"
++ AC_SUBST([M4FILES])
++ 
++ TEXIFILES="m4_esyscmd([cd m4 && echo -n *.m4 | sed -e 's/\.m4/.texi/g'])"
+diff --git a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+index 0a1a771..561b57b 100644
+--- a/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
++++ b/meta-oe/recipes-devtools/autoconf-archive/autoconf-archive_2016.09.16.bb
+@@ -9,5 +9,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SRC_URI[md5sum] = "bf19d4cddce260b3c3e1d51d42509071"
+ SRC_URI[sha256sum] = "e8f2efd235f842bad2f6938bf4a72240a5e5fcd248e8444335e63beb60fabd82"
+ 
++SRC_URI += "\
++        file://delete-some-m4-files.patch \
 +"
 +
- PACKAGECONFIG[x11] = "--with-x,,libx11 xproto libxt libxext libxrender"
- PACKAGECONFIG[cups] = "--with-cups,,cups"
- PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib-native"
+ EXTRA_OECONF += "ac_cv_path_M4=m4"
+ BBCLASSEXTEND = "native nativesdk"
 -- 
-2.7.4
+1.9.1
 
 
