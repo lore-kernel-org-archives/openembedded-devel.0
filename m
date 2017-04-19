@@ -1,30 +1,53 @@
-Return-Path: <Sean_Hudson@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FB5F719B3;
-	Wed, 19 Apr 2017 20:48:42 +0000 (UTC)
-Received: from svr-orw-mbx-01.mgc.mentorg.com ([147.34.90.201])
-	by relay1.mentorg.com with esmtp 
-	id 1d0wWp-0000MS-FA from Sean_Hudson@mentor.com ;
-	Wed, 19 Apr 2017 13:48:43 -0700
-Received: from [172.30.13.86] (147.34.91.1) by svr-orw-mbx-01.mgc.mentorg.com
-	(147.34.90.201) with Microsoft SMTP Server (TLS) id 15.0.1210.3;
-	Wed, 19 Apr 2017 13:48:40 -0700
-From: Sean Hudson <sean_hudson@mentor.com>
-Organization: Mentor Graphics - Embedded Software Division
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, openembedded-core
-	<openembedded-core@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>
-Message-ID: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
-Date: Wed, 19 Apr 2017 15:48:25 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+Return-Path: <jefro.net@gmail.com>
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id C261E71CAA;
+	Wed, 19 Apr 2017 21:45:09 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id w50so697483wrc.0;
+	Wed, 19 Apr 2017 14:45:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=9j0cNPj6wGPY9jpLI6t6syG5DXahuq2XHmnEU8r6kNM=;
+	b=VcrpPDT5nxqiJsQhzNe/+eGKwJm55r6XHDgPr3C5/Pyqb46OcGIJqGWMeegZ659Le+
+	dKdjLy6ED+q4yb7JvbMJMwmpN1exUjUGQiyEkeBdmucxt9kK9iDiEg1ABSzcAuEbJQB0
+	iq1rsZ9uZud5LiRouX1CLW9Yvc3wo4MJZSbPbyuLUFFHUkqzgsbGf2JhIue8C8nwo++e
+	MwQCOVfs+20oqZ9Aaoy4HXDfKrIIjfNhdzqr0arUOOgGl4VkTrviQ31U6K6ibDqv60FX
+	iqQwcgLnW+uGx1KjmSnSJTvz9GtAIKH3Eib4pX9FWSO5LHovVYwKpRpkTdVWmmzqSgty
+	6u2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=9j0cNPj6wGPY9jpLI6t6syG5DXahuq2XHmnEU8r6kNM=;
+	b=Dk8eHLA2uiByjnTZLevgutS0JrWnPXRCO/HujuZTtFI6TqzSJ5Lo6E1ORGpYccrZ3F
+	TzHnytA1jc8BH7F98GASQfSpb5A/iWdZ5cb7xXekAxdWL790yYsMGoM4cxBYgaBkANfa
+	g9bdNjbfGVip2d8N8wfPB2/zB36iOWEgs/lq3JDdU7lNY1QE8AtkAs/F6oOfnAVpC4lE
+	dy5ZX2wHdsFVBb1JJgO5HEZJFKnuA4/4d6LMAl84tYcsfdQmbTCOl003SYy7FFdBFah0
+	cM78A3/DRqIURsccn1Z2Lirhhp1T2Uw86+Yq2JIbknt3RRfM3keOlyOoWvk5riJb6uDN
+	ZIIg==
+X-Gm-Message-State: AN3rC/6iyp5cjCLuOGZ74alOWZxH9SVOcZvK59g7Fep1y1okvCfv7jV6
+	Fpkc4FRKC7NB8uVF8UamqHWwozWrQg==
+X-Received: by 10.223.173.143 with SMTP id w15mr4655349wrc.125.1492638310432; 
+	Wed, 19 Apr 2017 14:45:10 -0700 (PDT)
 MIME-Version: 1.0
-X-ClientProxiedBy: SVR-ORW-MBX-07.mgc.mentorg.com (147.34.90.207) To
-	svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201)
-Subject: OpenEmbedded 2017 General Meeting
+Sender: jefro.net@gmail.com
+Received: by 10.28.170.196 with HTTP; Wed, 19 Apr 2017 14:44:49 -0700 (PDT)
+In-Reply-To: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+From: Jeff Osier-Mixon <jefro@jefro.net>
+Date: Wed, 19 Apr 2017 14:44:49 -0700
+X-Google-Sender-Auth: m9n2grUSwlLXWr4BupCLsv35zW4
+Message-ID: <CA+YB3raLVTqo7m9XRe4S8spJh7Cm7cp+EwU78PpQbSPUW8676g@mail.gmail.com>
+To: Sean Hudson <sean_hudson@mentor.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: OpenEmbedded 2017 General Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,70 +60,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Apr 2017 20:48:44 -0000
-X-Groupsio-MsgNum: 66393
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="0JSI0f2vim94MGuwKDOCQo6TsC4vIB1uD"
+X-List-Received-Date: Wed, 19 Apr 2017 21:45:10 -0000
+Content-Type: text/plain; charset=UTF-8
 
---0JSI0f2vim94MGuwKDOCQo6TsC4vIB1uD
-Content-Type: multipart/mixed; boundary="3VIfSHOmJmBSjNafiEMro7aam0mAWkrS5";
- protected-headers="v1"
-From: Sean Hudson <sean_hudson@mentor.com>
-To: "openembedded-members@lists.openembedded.org"
- <openembedded-members@lists.openembedded.org>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- openembedded-core <openembedded-core@lists.openembedded.org>,
- openembedded-architecture <openembedded-architecture@lists.openembedded.org>
-Message-ID: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
-Subject: OpenEmbedded 2017 General Meeting
+All - please note the time zone carefully when planning to attend.
 
---3VIfSHOmJmBSjNafiEMro7aam0mAWkrS5
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On Wed, Apr 19, 2017 at 1:48 PM, Sean Hudson <sean_hudson@mentor.com> wrote:
 
-The board would like to hold a general meeting with all members.  Under
-the new by-laws of the OpenEmbedded organization, we can meet
-electronically.  This will also fulfill the requirement for an annual,
-general meeting.
-
-Planned Date/Time:
-Wednesday, May 3rd, at 8am US-CDT(UTC-06:00)/3pm CET(UTC+01:00)
-
-Wiki page with full details, including teleconference information here:
-http://www.openembedded.org/wiki/2017_General_Meeting
-
-Please take a moment to add your name to the list if you are planning to
-attend and any agenda items you would like to discuss.
-
---=20
-Sean
+> The board would like to hold a general meeting with all members.  Under
+> the new by-laws of the OpenEmbedded organization, we can meet
+> electronically.  This will also fulfill the requirement for an annual,
+> general meeting.
+>
+> Planned Date/Time:
+> Wednesday, May 3rd, at 8am US-CDT(UTC-06:00)/3pm CET(UTC+01:00)
+>
+> Wiki page with full details, including teleconference information here:
+> http://www.openembedded.org/wiki/2017_General_Meeting
+>
+> Please take a moment to add your name to the list if you are planning to
+> attend and any agenda items you would like to discuss.
+>
+> --
+> Sean
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
 
---3VIfSHOmJmBSjNafiEMro7aam0mAWkrS5--
+-- 
+Jeff Osier-Mixon - Open Source Community Engineer, Intel Corporation
 
---0JSI0f2vim94MGuwKDOCQo6TsC4vIB1uD
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQIcBAEBCAAGBQJY980mAAoJEC2KalNZVFwRLWcQAIfKCC3idYrUymwWC+Fs7fRe
-S5ygQQa/ys7XXERPj12DvraWzlkj5ZLZFnBh5D2KEPPB1wIVG1rR5TErvYZCtYXs
-2AEG4hE7EfhJBPFivTYIdJ6Excts2kesjVgKHkE+UGaTE8VH/Suny/seHPUvXRvB
-dutRamQxdeC3hCd9TUqWJdvyUdN77Rl1mYoHTW6PEPN2WFJn8BphDZSy9LS4rX79
-ZKELYDisHHOOoQ3qFPF3kUsRepgUglEV8y54McFOtx/yzfXefJV8kL0bGACeSekX
-9o02L+aB02Q5/clSQyBMbA+EFkb+o+IPn17itDS5chBY3GM96N9RsCgGvY0Oz1qf
-0rqFfGhS+jmif8nN558VvVEaxGyyiIqUPpxBHbO5VYm5C5kEHwn3cIzIFRdO7zlj
-ftiymOE1XmxJ50Yr37VbIexFs7Y7OMjs/t9Ppzk8wgWPX1erW7jXNLNKvvKCWeVn
-RrAlT+9atCs/7IPLGCwL8VpezaxXx2Gzqa6zFRp1F+cNktk1YY3jdDpp25i+bK11
-C0Z9i3I7uqkKC2TQEOYFV76TJTxK5Mll3s4GFObRNb/JWwLDYSGTvarDjHX7cGT4
-QKD3N6y0lmqFklZE6zmEdNE0WpgeAe6p2QlfD/amAjnlaVqdbPwnGXHxmJ04Rdui
-JKG138WTN7WmZqjJCn2K
-=OsPR
------END PGP SIGNATURE-----
-
---0JSI0f2vim94MGuwKDOCQo6TsC4vIB1uD--
