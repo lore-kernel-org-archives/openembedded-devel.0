@@ -1,44 +1,45 @@
-Return-Path: <benjamin.gaignard@linaro.org>
-Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
-	[209.85.220.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 061B072F18
+Return-Path: <freesilicon@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A93772F2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 12:29:06 +0000 (UTC)
-Received: by mail-qk0-f175.google.com with SMTP id f133so44534849qke.2
+	Thu, 20 Apr 2017 13:58:12 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id l44so7660250wrc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 05:29:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=BS9QagG6kc0G/4x40bxlsTunb82duqm+1C2qa+PmqQo=;
-	b=eXwhvF5JMBP193IO+/3zWdEADNfQvyC1fVXyADFuvRQaxu6EXjpgvTVF84mZQ77EnI
-	0+ISu10KskL7owIHRHlMp5AfTWzTp1NbWuF8seGqTyQc38HSHJ+JWVJiEhXT5/J5tYJU
-	EEzX0WwQYkTLZawATXouUxPJ/V4yCoyIpOsLk=
+	Thu, 20 Apr 2017 06:58:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=6hp3FHKh2GvuF39TriVBeliRtFacnrk63ecmWYoZIEE=;
+	b=B76ugtYryj+6mI2yTbR60rOA56E3wpbdpBukqom2c5BiJk3+6tOpzay3acRoNUP2xG
+	G93/bw7QxqBhVkjOmPX5DGh6euckTxmn8pNtHIWxyp8JbSm7qtBNkwWu2QWtNXkh7DfD
+	zMNfzBQpAAqD6OQ8AHNbUvQKe5c2t9kxbu4oJFgPnnSAJkjDqnzRSpLZqp/W6DSLuWmS
+	qw1/Iv8XWSNdnXhmJY5E7F0BUuvCJdO76+PMrbuwvNMcciiK+xR3e9Q8KACe1sNGvAjK
+	9H3KobY42N5kw9nYIsoOdxlUvO19BSS+ebnY9efb/WgbJ/wwbLpK7LicFdP/1ygi5iMX
+	YkSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=BS9QagG6kc0G/4x40bxlsTunb82duqm+1C2qa+PmqQo=;
-	b=mGHN4jl27Yj6Ud/6fz8ETXQaPsbzzOCmrynNf2YmIpRjGRDF+GoALHoSKqWOpiOO++
-	7sBEC1frDO8U7E/TpVoQeq1rCVZtShTUynjnuuFqcDSM+e/AfmwtSfDVie32i+Ip0PGE
-	I4pQBxTunAaMDkNGNO2q4RR50Z5V9mPNFMueX5mn80RS010c2R+V5YwhyV0xz7HSBaP2
-	S5guDIytUNG8aMiuR+AjOsXRGQgwfCOWn5348c6WEPI82rD/6+66YpCPsnVuT4vOH9Ds
-	qKId2Ef2cBwmJqJcaYQUIAtRuu9s+OllGo4PtwIR+2c3YWdAzZGPgaLOtDZsRx1obTo+
-	if8A==
-X-Gm-Message-State: AN3rC/7lCBNItloJR5JgI5eDmr4zQeqImZeG09RKkziK4e+LBHfKUUIM
-	ZH5W7sqzncp3XA9P8RuqSX6u4wDWlu+Y
-X-Received: by 10.55.42.220 with SMTP id q89mr1389553qkq.211.1492691348006;
-	Thu, 20 Apr 2017 05:29:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.81.16 with HTTP; Thu, 20 Apr 2017 05:29:07 -0700 (PDT)
-In-Reply-To: <20170420070908.GB3059@jama>
-References: <1492086867-15041-1-git-send-email-benjamin.gaignard@linaro.org>
-	<20170420070908.GB3059@jama>
-From: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-Date: Thu, 20 Apr 2017 14:29:07 +0200
-Message-ID: <CA+M3ks54Y=XNxR5aR80=GdWOFzYj+mrztHBuR=-qTyUOeMjYnA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v3] tinyproxy: Add recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6hp3FHKh2GvuF39TriVBeliRtFacnrk63ecmWYoZIEE=;
+	b=GAjK3xT64bpB4bsGXcO5Jg3w4igVhKkgG2WqoKEmU55aRaFTHzWTiLNUeY0mAtp2sT
+	wc2OZHJY/OYU/npXtuosr41rW0+B4iGThB8hZoqNfLwxvdR9848LN2xBMfLbY/2Gmdwl
+	+X8dpItIaIbet8dceo+5oU3gZRMysBjK+OFwlJmpXhJPcATDGGzT/rKe5gmibEpcNC0F
+	UvElXXtJMXaZFohTeqPOeTkVmuB4CfOckm6Is116nd0G14IQqdGirZp5zKjPU/OaSDAO
+	k/bhiUfF8WurU5oiIFynPsm54VY/FJxidVwRId2OgK/NxB2wwZKZwtvzFI/v1wIyXPvD
+	gd5A==
+X-Gm-Message-State: AN3rC/7o6zmbA//k3YCLHl4Wyvps/0kCaQq7ygrXyOmK0Mc1cHcmg6I/
+	sZPJoK1FFKPyRs+i
+X-Received: by 10.223.138.178 with SMTP id y47mr8458518wry.22.1492696693701;
+	Thu, 20 Apr 2017 06:58:13 -0700 (PDT)
+Received: from crde-port-20.cahors.local ([185.47.80.46])
+	by smtp.gmail.com with ESMTPSA id k26sm7699900wre.9.2017.04.20.06.58.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 20 Apr 2017 06:58:13 -0700 (PDT)
+From: David Vincent <freesilicon@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Apr 2017 15:57:35 +0200
+Message-Id: <20170420135735.25958-1-freesilicon@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [meta-networking][PATCH] strongswan: Split plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,98 +52,146 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2017 12:29:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Apr 2017 13:58:13 -0000
 
-2017-04-20 9:09 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
-> On Thu, Apr 13, 2017 at 02:34:27PM +0200, Benjamin Gaignard wrote:
->> Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
->> ---
->>  .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
->>  .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 39 ++++++++++++++++++++++
->>  2 files changed, 53 insertions(+)
->>  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
->>  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
->
-> Still fails:
-> http://errors.yoctoproject.org/Errors/Details/140513/
+strongSwan offers a plugin mechanism therefore it should not be
+mandatory to install all of them when installing the package. Each
+plugin is now a self-contained package with the library and its
+configuration.
 
-ok, v4 will be more simple with just a patch to remove documentation generation.
+To remain compatible with the current configuration, a default set of
+plugins has been selected as RDEPENDS of the main package. This default
+list is based on the default strongSwan list minus some plugins enabled
+via PACKAGECONFIG
+(see https://wiki.strongswan.org/projects/strongswan/PluginList).
 
-Thanks for your time
+Signed-off-by: David Vincent <freesilicon@gmail.com>
+---
+ .../recipes-support/strongswan/strongswan_5.5.1.bb | 101 ++++++++++++++++++---
+ 1 file changed, 88 insertions(+), 13 deletions(-)
 
-Benjamin
->
->>
->> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
->> new file mode 100644
->> index 0000000..ea079f9
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.service
->> @@ -0,0 +1,14 @@
->> +[Unit]
->> +Description=Tinyproxy, Lightweight http(s) proxy daemon
->> +RequiresMountsFor=/var
->> +
->> +[Service]
->> +Group=tinyproxy
->> +ExecStartPre=/bin/mkdir -p /var/log/tinyproxy
->> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
->> +ExecStartPre=/bin/mkdir -p /var/run/tinyproxy
->> +ExecStartPre=/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
->> +ExecStart=/usr/sbin/tinyproxy -d
->> +
->> +[Install]
->> +WantedBy=multi-user.target
->> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
->> new file mode 100644
->> index 0000000..f0374b8
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
->> @@ -0,0 +1,39 @@
->> +SUMMARY = "Lightweight http(s) proxy daemon"
->> +HOMEPAGE = "https://tinyproxy.github.io/"
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->> +
->> +SRC_URI = "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BP}.tar.gz \
->> +                file://tinyproxy.service"
->> +
->> +SRC_URI[md5sum] = "3b60f7d08e0821ed1a3e2cf1e5778cac"
->> +SRC_URI[sha256sum] = "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a216940872aa70faf"
->> +
->> +DEPENDS = "asciidoc-native libxml2-native libxslt-native"
->> +
->> +EXTRA_OECONF += " \
->> +     --enable-filter \
->> +     --enable-transparent \
->> +     --disable-regexcheck \
->> +     --enable-reverse \
->> +     --enable-upstream \
->> +     --enable-xtinyproxy \
->> +     "
->> +
->> +inherit autotools systemd useradd
->> +
->> +#User specific
->> +USERADD_PACKAGES = "${PN}"
->> +USERADD_PARAM_${PN} = "nobody"
->> +GROUPADD_PARAM_${PN} = "--system tinyproxy"
->> +
->> +SYSTEMD_PACKAGES += "${BPN}"
->> +SYSTEMD_SERVICE_${PN} = "tinyproxy.service"
->> +SYSTEMD_AUTO_ENABLE_${PN} = "enable"
->> +
->> +do_install_append() {
->> +     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
->> +             install -d ${D}${systemd_system_unitdir}
->> +             install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unitdir}
->> +     fi
->> +}
->> --
->> 1.9.1
->>
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
+index f9e7ae3c1..d63214ba4 100644
+--- a/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
++++ b/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
+@@ -24,17 +24,17 @@ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', '--with-syst
+ PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
+         ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
+ "
+-PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
++PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,,${PN}-plugin-aesni"
+ PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
+-PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
+-PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,"
+-PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
+-PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
+-PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
++PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,${PN}-plugin-curl"
++PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
++PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,${PN}-plugin-ldap"
++PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,${PN}-plugin-mysql"
++PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,${PN}-plugin-openssl"
+ PACKAGECONFIG[scep] = "--enable-scepclient,--disable-scepclient,"
+-PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
+-PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
+-PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,"
++PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,${PN}-plugin-soup"
++PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,${PN}-plugin-sqlite"
++PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,,${PN}-plugin-stroke"
+ PACKAGECONFIG[swanctl] = "--enable-swanctl,--disable-swanctl,,libgcc"
+ 
+ # requires swanctl
+@@ -44,10 +44,85 @@ inherit autotools systemd pkgconfig
+ 
+ RRECOMMENDS_${PN} = "kernel-module-ipsec"
+ 
+-FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS} ${libdir}/ipsec/plugins/*.so"
+-FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libdir}/ipsec/plugins/.debug ${libexecdir}/ipsec/.debug"
+-FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV} ${libdir}/ipsec/*.la ${libdir}/ipsec/plugins/*.la"
+-FILES_${PN}-staticdev += "${libdir}/ipsec/*.a ${libdir}/ipsec/plugins/*.a"
++FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS}"
++FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/ipsec/.debug ${libexecdir}/ipsec/.debug"
++FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV} ${libdir}/ipsec/*.la"
++FILES_${PN}-staticdev += "${libdir}/ipsec/*.a"
++
++CONFFILES_${PN} = "${sysconfdir}/*.conf ${sysconfdir}/ipsec.d/*.conf ${sysconfdir}/strongswan.d/*.conf"
++
++PACKAGES += "${PN}-plugins"
++ALLOW_EMPTY_${PN}-plugins = "1"
++
++PACKAGES_DYNAMIC += "^${PN}-plugin-.*$"
++NOAUTOPACKAGEDEBUG = "1"
++
++python split_strongswan_plugins () {
++    sysconfdir = d.expand('${sysconfdir}/strongswan.d/charon')
++    libdir = d.expand('${libdir}/ipsec/plugins')
++    dbglibdir = os.path.join(libdir, '.debug')
++
++    def add_plugin_conf(f, pkg, file_regex, output_pattern, modulename):
++        dvar = d.getVar('PKGD', True)
++        oldfiles = d.getVar('CONFFILES_' + pkg, True)
++        newfile = '/' + os.path.relpath(f, dvar)
++
++        if not oldfiles:
++            d.setVar('CONFFILES_' + pkg, newfile)
++        else:
++            d.setVar('CONFFILES_' + pkg, oldfiles + " " + newfile)
++
++    split_packages = do_split_packages(d, libdir, 'libstrongswan-(.*)\.so', '${PN}-plugin-%s', 'strongSwan %s plugin', prepend=True)
++    do_split_packages(d, sysconfdir, '(.*)\.conf', '${PN}-plugin-%s', 'strongSwan %s plugin', prepend=True, hook=add_plugin_conf)
++
++    split_dbg_packages = do_split_packages(d, dbglibdir, 'libstrongswan-(.*)\.so', '${PN}-plugin-%s-dbg', 'strongSwan %s plugin - Debugging files', prepend=True, extra_depends='${PN}-dbg')
++    split_dev_packages = do_split_packages(d, libdir, 'libstrongswan-(.*)\.la', '${PN}-plugin-%s-dev', 'strongSwan %s plugin - Development files', prepend=True, extra_depends='${PN}-dev')
++    split_staticdev_packages = do_split_packages(d, libdir, 'libstrongswan-(.*)\.a', '${PN}-plugin-%s-staticdev', 'strongSwan %s plugin - Development files (Static Libraries)', prepend=True, extra_depends='${PN}-staticdev')
++
++    if split_packages:
++        pn = d.getVar('PN', True)
++        d.setVar('RRECOMMENDS_' + pn + '-plugins', ' '.join(split_packages))
++        d.appendVar('RRECOMMENDS_' + pn + '-dbg', ' ' + ' '.join(split_dbg_packages))
++        d.appendVar('RRECOMMENDS_' + pn + '-dev', ' ' + ' '.join(split_dev_packages))
++        d.appendVar('RRECOMMENDS_' + pn + '-staticdev', ' ' + ' '.join(split_staticdev_packages))
++}
++
++PACKAGESPLITFUNCS_prepend = "split_strongswan_plugins "
++
++# Install some default plugins based on default strongSwan ./configure options
++# See https://wiki.strongswan.org/projects/strongswan/wiki/Pluginlist
++RDEPENDS_${PN} += "\
++    ${PN}-plugin-aes \
++    ${PN}-plugin-attr \
++    ${PN}-plugin-cmac \
++    ${PN}-plugin-constraints \
++    ${PN}-plugin-des \
++    ${PN}-plugin-dnskey \
++    ${PN}-plugin-hmac \
++    ${PN}-plugin-kernel-netlink \
++    ${PN}-plugin-md5 \
++    ${PN}-plugin-nonce \
++    ${PN}-plugin-pem \
++    ${PN}-plugin-pgp \
++    ${PN}-plugin-pkcs1 \
++    ${PN}-plugin-pkcs7 \
++    ${PN}-plugin-pkcs8 \
++    ${PN}-plugin-pkcs12 \
++    ${PN}-plugin-pubkey \
++    ${PN}-plugin-random \
++    ${PN}-plugin-rc2 \
++    ${PN}-plugin-resolve \
++    ${PN}-plugin-revocation \
++    ${PN}-plugin-sha1 \
++    ${PN}-plugin-sha2 \
++    ${PN}-plugin-socket-default \
++    ${PN}-plugin-sshkey \
++    ${PN}-plugin-updown \
++    ${PN}-plugin-vici \
++    ${PN}-plugin-x509 \
++    ${PN}-plugin-xauth-generic \
++    ${PN}-plugin-xcbc \
++    "
+ 
+ RPROVIDES_${PN} += "${PN}-systemd"
+ RREPLACES_${PN} += "${PN}-systemd"
+-- 
+2.12.2
+
 
