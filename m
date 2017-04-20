@@ -1,47 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D63BF71C70
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 14:36:02 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id 6so3447755wra.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 07:36:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=c01tbkrZA07Az01JjrFFfXtL11qA0PPqPLgsqw5WnDg=;
-	b=hfX6zhtQDqm9hjswA8vEnL7L1R544JyVDqCAMV2rgx7J3JThGcXQedDgVsHi8UbNyO
-	DpC6XMvZOFmPyFOblzPyIhqOtDLb2ZUPwruBka62P2VqUeGweHPqQ1w4sKFtPZNKm3Pm
-	hrweA1ogFdV8QOlg6zl9THdRK+I9HB36L8St2lUYm2s9SevNju7FLLZjxWNrG0q5j6am
-	Ec2g8hdLsgHiodKhr7ZCs8ePVmgcqtke40wbEbz534Fn8MzetDBEvT4z1yg8AxoMXRYj
-	GitM9R7svkMuH6+thW2mwovxeDQJuD8xj7538/mcLwzwHje7bPpfePd4ZpdT5juluUlZ
-	Jx/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=c01tbkrZA07Az01JjrFFfXtL11qA0PPqPLgsqw5WnDg=;
-	b=eFzAYnq3kYAUp2vY8gu9xy/mX1TKNGAHmh/QEMfJOS5trvNbNXvzd7KfQMwaqenwE8
-	2GTN6b8dcIQ3MslKeIlOuoTO9vwrh6+8a7Mlo+MebSUhX75MF6Gig4mF8488lScCbl+t
-	zPmEreQyVU6O0nFzhzHgV/AoVZiILPi1pjVBmNuNDdzF/4RK72efa6xnDPTZ5z+fvOmA
-	SdB3uUtlV0bZ8NO5XN8aui2pLdPMeCOPDbQKEYdSwfeUS+b0XBsJVKIGLH2vCbk3a06j
-	Q0qkCA4/xlZCV/J8lZVddJfqMHv7sHe9pBHCGq/HhveD+76EzMU2GFKDz3a+vJ2S3M/W
-	28tw==
-X-Gm-Message-State: AN3rC/4VWcMbWU7lUKdPtucuSFz9PvZrsV+xqHx8dIu+pfPFi7SE0zwC
-	dIyxTa+UZMKZ/8vNRGP8K++68OodrA==
-X-Received: by 10.223.136.75 with SMTP id e11mr1475909wre.14.1492698963865;
-	Thu, 20 Apr 2017 07:36:03 -0700 (PDT)
+Return-Path: <Sean_Hudson@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id 9366072F24;
+	Thu, 20 Apr 2017 14:58:29 +0000 (UTC)
+Received: from svr-orw-mbx-01.mgc.mentorg.com ([147.34.90.201])
+	by relay1.mentorg.com with esmtp 
+	id 1d1DXS-0000IC-Aw from Sean_Hudson@mentor.com ;
+	Thu, 20 Apr 2017 07:58:30 -0700
+Received: from [172.30.13.86] (147.34.91.1) by svr-orw-mbx-01.mgc.mentorg.com
+	(147.34.90.201) with Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Thu, 20 Apr 2017 07:58:27 -0700
+To: "openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, openembedded-core
+	<openembedded-core@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>
+References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+From: Sean Hudson <sean_hudson@mentor.com>
+Organization: Mentor Graphics - Embedded Software Division
+Message-ID: <51e8d1d4-d6cb-dcb0-32f0-42df0738ce70@mentor.com>
+Date: Thu, 20 Apr 2017 09:58:17 -0500
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Thu, 20 Apr 2017 07:36:03 -0700 (PDT)
-In-Reply-To: <20170420135735.25958-1-freesilicon@gmail.com>
-References: <20170420135735.25958-1-freesilicon@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 20 Apr 2017 16:36:03 +0200
-Message-ID: <CA+chaQcHQvssOS6gjeTWfKF2o0h+6gvxxrDEEk-N2jh7AYJoCA@mail.gmail.com>
-To: David Vincent <freesilicon@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] strongswan: Split plugins
+In-Reply-To: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+X-ClientProxiedBy: svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) To
+	svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201)
+Subject: Re: OpenEmbedded 2017 General Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,197 +39,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2017 14:36:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 20 Apr 2017 14:58:29 -0000
+X-Groupsio-MsgNum: 66405
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="aitrGtWrX2Sk6amTRrFFEP0o0BgpbCsV4"
 
-I think currently the preferred way is only one -dev/-dbg/-staticdev
-package per recipe.
+--aitrGtWrX2Sk6amTRrFFEP0o0BgpbCsV4
+Content-Type: multipart/mixed; boundary="b58L4InUNw4dsqwPcbwXP5dBouc8k0EEh";
+ protected-headers="v1"
+From: Sean Hudson <sean_hudson@mentor.com>
+To: "openembedded-members@lists.openembedded.org"
+ <openembedded-members@lists.openembedded.org>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ openembedded-core <openembedded-core@lists.openembedded.org>,
+ openembedded-architecture <openembedded-architecture@lists.openembedded.org>
+Message-ID: <51e8d1d4-d6cb-dcb0-32f0-42df0738ce70@mentor.com>
+Subject: Re: OpenEmbedded 2017 General Meeting
+References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+In-Reply-To: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
 
-Why not set RDEPENDS_${PN} based on plugins packaged in first do_split_packages
-call?
+--b58L4InUNw4dsqwPcbwXP5dBouc8k0EEh
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-Just my 2c - I'm not using strongswan and Joe has last word for
-meta-networking.
+On 2017-04-19 03:48 PM, Sean Hudson wrote:
+> The board would like to hold a general meeting with all members.  Under=
 
-On Thu, Apr 20, 2017 at 3:57 PM, David Vincent <freesilicon@gmail.com>
-wrote:
+> the new by-laws of the OpenEmbedded organization, we can meet
+> electronically.  This will also fulfill the requirement for an annual,
+> general meeting.
+>=20
+> Planned Date/Time:
+> Wednesday, May 3rd, at 8am US-CDT(UTC-06:00)/3pm CET(UTC+01:00)
+>=20
+> Wiki page with full details, including teleconference information here:=
 
-> strongSwan offers a plugin mechanism therefore it should not be
-> mandatory to install all of them when installing the package. Each
-> plugin is now a self-contained package with the library and its
-> configuration.
->
-> To remain compatible with the current configuration, a default set of
-> plugins has been selected as RDEPENDS of the main package. This default
-> list is based on the default strongSwan list minus some plugins enabled
-> via PACKAGECONFIG
-> (see https://wiki.strongswan.org/projects/strongswan/PluginList).
->
-> Signed-off-by: David Vincent <freesilicon@gmail.com>
-> ---
->  .../recipes-support/strongswan/strongswan_5.5.1.bb | 101
-> ++++++++++++++++++---
->  1 file changed, 88 insertions(+), 13 deletions(-)
->
-> diff --git a/meta-networking/recipes-support/strongswan/strongswan_
-> 5.5.1.bb b/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
-> index f9e7ae3c1..d63214ba4 100644
-> --- a/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
-> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.5.1.bb
-> @@ -24,17 +24,17 @@ EXTRA_OECONF += "${@bb.utils.contains('DISTRO_FEATURES',
-> 'systemd', '--with-syst
->  PACKAGECONFIG ??= "charon curl gmp openssl stroke sqlite3 \
->          ${@bb.utils.filter('DISTRO_FEATURES', 'ldap', d)} \
->  "
-> -PACKAGECONFIG[aesni] = "--enable-aesni,--disable-aesni,"
-> +PACKAGECONFIG[aesni] = "--enable-aesni,--disable-
-> aesni,,${PN}-plugin-aesni"
->  PACKAGECONFIG[charon] = "--enable-charon,--disable-charon,"
-> -PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,curl,"
-> -PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,"
-> -PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,openldap,"
-> -PACKAGECONFIG[mysql] = "--enable-mysql,--disable-mysql,mysql5,"
-> -PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl,"
-> +PACKAGECONFIG[curl] = "--enable-curl,--disable-curl,
-> curl,${PN}-plugin-curl"
-> +PACKAGECONFIG[gmp] = "--enable-gmp,--disable-gmp,gmp,${PN}-plugin-gmp"
-> +PACKAGECONFIG[ldap] = "--enable-ldap,--disable-ldap,
-> openldap,${PN}-plugin-ldap"
-> +PACKAGECONFIG[mysql] = "--enable-mysql,--disable-
-> mysql,mysql5,${PN}-plugin-mysql"
-> +PACKAGECONFIG[openssl] = "--enable-openssl,--disable-
-> openssl,openssl,${PN}-plugin-openssl"
->  PACKAGECONFIG[scep] = "--enable-scepclient,--disable-scepclient,"
-> -PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,libsoup-2.4,"
-> -PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-sqlite,sqlite3,"
-> -PACKAGECONFIG[stroke] = "--enable-stroke,--disable-stroke,"
-> +PACKAGECONFIG[soup] = "--enable-soup,--disable-soup,
-> libsoup-2.4,${PN}-plugin-soup"
-> +PACKAGECONFIG[sqlite3] = "--enable-sqlite,--disable-
-> sqlite,sqlite3,${PN}-plugin-sqlite"
-> +PACKAGECONFIG[stroke] = "--enable-stroke,--disable-
-> stroke,,${PN}-plugin-stroke"
->  PACKAGECONFIG[swanctl] = "--enable-swanctl,--disable-swanctl,,libgcc"
->
->  # requires swanctl
-> @@ -44,10 +44,85 @@ inherit autotools systemd pkgconfig
->
->  RRECOMMENDS_${PN} = "kernel-module-ipsec"
->
-> -FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS}
-> ${libdir}/ipsec/plugins/*.so"
-> -FILES_${PN}-dbg += "${libdir}/ipsec/.debug ${libdir}/ipsec/plugins/.debug
-> ${libexecdir}/ipsec/.debug"
-> -FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV}
-> ${libdir}/ipsec/*.la ${libdir}/ipsec/plugins/*.la"
-> -FILES_${PN}-staticdev += "${libdir}/ipsec/*.a ${libdir}/ipsec/plugins/*.a"
-> +FILES_${PN} += "${libdir}/ipsec/lib*${SOLIBS}"
-> +FILES_${PN}-dbg += "${bindir}/.debug ${libdir}/ipsec/.debug
-> ${libexecdir}/ipsec/.debug"
-> +FILES_${PN}-dev += "${libdir}/ipsec/lib*${SOLIBSDEV}
-> ${libdir}/ipsec/*.la"
-> +FILES_${PN}-staticdev += "${libdir}/ipsec/*.a"
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/*.conf ${sysconfdir}/ipsec.d/*.conf
-> ${sysconfdir}/strongswan.d/*.conf"
-> +
-> +PACKAGES += "${PN}-plugins"
-> +ALLOW_EMPTY_${PN}-plugins = "1"
-> +
-> +PACKAGES_DYNAMIC += "^${PN}-plugin-.*$"
-> +NOAUTOPACKAGEDEBUG = "1"
-> +
-> +python split_strongswan_plugins () {
-> +    sysconfdir = d.expand('${sysconfdir}/strongswan.d/charon')
-> +    libdir = d.expand('${libdir}/ipsec/plugins')
-> +    dbglibdir = os.path.join(libdir, '.debug')
-> +
-> +    def add_plugin_conf(f, pkg, file_regex, output_pattern, modulename):
-> +        dvar = d.getVar('PKGD', True)
-> +        oldfiles = d.getVar('CONFFILES_' + pkg, True)
-> +        newfile = '/' + os.path.relpath(f, dvar)
-> +
-> +        if not oldfiles:
-> +            d.setVar('CONFFILES_' + pkg, newfile)
-> +        else:
-> +            d.setVar('CONFFILES_' + pkg, oldfiles + " " + newfile)
-> +
-> +    split_packages = do_split_packages(d, libdir,
-> 'libstrongswan-(.*)\.so', '${PN}-plugin-%s', 'strongSwan %s plugin',
-> prepend=True)
-> +    do_split_packages(d, sysconfdir, '(.*)\.conf', '${PN}-plugin-%s',
-> 'strongSwan %s plugin', prepend=True, hook=add_plugin_conf)
-> +
-> +    split_dbg_packages = do_split_packages(d, dbglibdir,
-> 'libstrongswan-(.*)\.so', '${PN}-plugin-%s-dbg', 'strongSwan %s plugin -
-> Debugging files', prepend=True, extra_depends='${PN}-dbg')
-> +    split_dev_packages = do_split_packages(d, libdir,
-> 'libstrongswan-(.*)\.la', '${PN}-plugin-%s-dev', 'strongSwan %s plugin -
-> Development files', prepend=True, extra_depends='${PN}-dev')
-> +    split_staticdev_packages = do_split_packages(d, libdir,
-> 'libstrongswan-(.*)\.a', '${PN}-plugin-%s-staticdev', 'strongSwan %s plugin
-> - Development files (Static Libraries)', prepend=True, extra_depends='${PN}-
-> staticdev')
-> +
-> +    if split_packages:
-> +        pn = d.getVar('PN', True)
-> +        d.setVar('RRECOMMENDS_' + pn + '-plugins', '
-> '.join(split_packages))
-> +        d.appendVar('RRECOMMENDS_' + pn + '-dbg', ' ' + '
-> '.join(split_dbg_packages))
-> +        d.appendVar('RRECOMMENDS_' + pn + '-dev', ' ' + '
-> '.join(split_dev_packages))
-> +        d.appendVar('RRECOMMENDS_' + pn + '-staticdev', ' ' + '
-> '.join(split_staticdev_packages))
-> +}
-> +
-> +PACKAGESPLITFUNCS_prepend = "split_strongswan_plugins "
-> +
-> +# Install some default plugins based on default strongSwan ./configure
-> options
-> +# See https://wiki.strongswan.org/projects/strongswan/wiki/Pluginlist
-> +RDEPENDS_${PN} += "\
-> +    ${PN}-plugin-aes \
-> +    ${PN}-plugin-attr \
-> +    ${PN}-plugin-cmac \
-> +    ${PN}-plugin-constraints \
-> +    ${PN}-plugin-des \
-> +    ${PN}-plugin-dnskey \
-> +    ${PN}-plugin-hmac \
-> +    ${PN}-plugin-kernel-netlink \
-> +    ${PN}-plugin-md5 \
-> +    ${PN}-plugin-nonce \
-> +    ${PN}-plugin-pem \
-> +    ${PN}-plugin-pgp \
-> +    ${PN}-plugin-pkcs1 \
-> +    ${PN}-plugin-pkcs7 \
-> +    ${PN}-plugin-pkcs8 \
-> +    ${PN}-plugin-pkcs12 \
-> +    ${PN}-plugin-pubkey \
-> +    ${PN}-plugin-random \
-> +    ${PN}-plugin-rc2 \
-> +    ${PN}-plugin-resolve \
-> +    ${PN}-plugin-revocation \
-> +    ${PN}-plugin-sha1 \
-> +    ${PN}-plugin-sha2 \
-> +    ${PN}-plugin-socket-default \
-> +    ${PN}-plugin-sshkey \
-> +    ${PN}-plugin-updown \
-> +    ${PN}-plugin-vici \
-> +    ${PN}-plugin-x509 \
-> +    ${PN}-plugin-xauth-generic \
-> +    ${PN}-plugin-xcbc \
-> +    "
->
->  RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
-> --
-> 2.12.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+> http://www.openembedded.org/wiki/2017_General_Meeting
+>=20
+> Please take a moment to add your name to the list if you are planning t=
+o
+> attend and any agenda items you would like to discuss.
+>=20
 
+I found an updated list of access numbers that include several country
+specific toll-free numbers for the teleconference.  I've updated the
+wiki page with the details.  I also setup a #oe-meeting IRC channel that
+we can use as a back channel before and during the meeting.
+
+--=20
+Sean
+
+
+--b58L4InUNw4dsqwPcbwXP5dBouc8k0EEh--
+
+--aitrGtWrX2Sk6amTRrFFEP0o0BgpbCsV4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQIcBAEBCAAGBQJY+MyQAAoJEC2KalNZVFwRKKYQAICK3KsBYY2dOHnAhdD9rRfE
+NaJ5Tar03Zn4EIzBbPmUhMYju+iqlAr1xG8h2mGACqsJ8MQ3FvrRI/8U1XkumR1L
+EwJGJqCm/eSQO44cHJbDqoASSSTBqB/x0hRxzh8S1CyGq2DMvdxoNRb3QYmaU2e/
+8vm1lLaDoL4nnCtUaPnGAeKfjEpGLW1XFl7GWgeiYmGRJs2f9tgJxXJkRPZ1wKuu
+SbF8Rf6NtLezeWd2OZDy6sn2Z8aYaW2vPH3R7WsCRUtyFaVxK7m9vCaCB+SDpKEz
+64/LqQv9hqA0cD/9eAMAIizpyVXXsrQkZc3ITTGS+2LvIlONoJ7f3rEvZWnVSFxd
+bSUDpyMNgHFBlETIrH/AUN6PKxpKPDKWk0jZLvsIdy3cxazS+GdcQYqoRqV207pG
+C46DTawI1oMiCSIPE6mYoRc+xyECXT46PWGl3/essnL14bu706b8+4PyXAkQHPm+
+rvNegug/ygrJkCDBv/vNaFa4nFHskfX5lGn0XaYn9GkyyzbNUwv+/pF1G/ZSnhpS
+i0Bhw7t4KKDWYn+EZzVjaTQy45JLgPpmK7cvuqdRmWo1rYRxMJvZzvwxpcgIjyh2
+iOsXZD0CLaaYUXiTT3R3e2m61fjQfA0K0fWEmlIiFa88osGhBG8ShfbqcjEbWLqq
+pMzzmiCSt/OZc3xe3qkG
+=SEjJ
+-----END PGP SIGNATURE-----
+
+--aitrGtWrX2Sk6amTRrFFEP0o0BgpbCsV4--
