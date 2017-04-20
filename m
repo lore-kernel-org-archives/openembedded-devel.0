@@ -1,51 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 917F171DD9
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id E6B786007A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 07:09:00 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id z129so8951397wmb.1
+	Thu, 20 Apr 2017 07:16:01 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id r190so39766896wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Apr 2017 00:09:02 -0700 (PDT)
+	Thu, 20 Apr 2017 00:16:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=KFihbIqFYyCO+zwL9CTbe0zrRXvlnCzO6Y9U3g5IqkQ=;
-	b=PK+kauYkMmU2YfyfY9ahuakIxPS2O7CwnkoGvni2N40c09M0Y43Ylf183eqEwaroNr
-	DrH0QcQFZz93AMpdQNix3kFq+5fQCyPYy0KpmxQPfs14aEZtMmkIzWA+HOTMyNFYYTdg
-	YepXKCgzCYpH6ujMYSPtuEcI1xzgJlKykNchqUS0UmhuJW1wRCqcG3QsxI9IP7EmUU30
-	LA2ULOxx4FzWJQZnptJgNccRMPZDBc47lKnzNw5oOMIPNnsL1LJ5pMGd7vvbqg3IMJ0K
-	jl2y8snl6GU+YtOtf0M5wBtOkD3Wq8zXsmYOC96MbWyAsasqu2MjLmBANqQCJVHpDgKX
-	jP+g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=YtErB2OlMAW25WAjuxmI8KKxwh0BDzghPhKveIc+RyE=;
+	b=Br7h1TEQghNXQiJL30xJDSTNbOPP7P7cfl751xkIS07Re5HTLVR9/C9MiUzBgBilqH
+	spqqljdFMwO0v5t1TNW6yi+DeXm7SrZkgstNIUO+IUda8SzWV4vLYjma2S8s9Wi3+GNB
+	VmWVDGk72L4j5bM2Bg76dM+u2xyvip2ZPgmmO7xkGvhM9xl0jIZGoMP0r7VTf+4hz3ZH
+	MpYTOsWSsCjAB7PmLscvNoJdqrkwbRmVEZE/EtEyR6tfCzDjypRvAREWQVJNPiIzGMEv
+	6o5TUx9E8aCT6nfsY3cwFKARfdpt2vB4md+Ns/VE4dT82RSNI29o2jXElMH/iaJIeigf
+	wPtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=KFihbIqFYyCO+zwL9CTbe0zrRXvlnCzO6Y9U3g5IqkQ=;
-	b=d9fR5QI6Wm1hEa+3031Ui43qfyNFZHo9Slsu3b9OWVCKUAFRQChl4HPDmHUDITWTqh
-	S9xDRpmB69FvAxsHt3+MeXFxcLLx00wR4NHC6DcAOPuiuAzWzCZT78Iyefh03QlkIhfC
-	pnPsDRxctgTN9nNEXhphka4FcT4jg098ybsB/zQj01yflLjex87iD4cMeVfWIDuJyD8O
-	AH1rJTX8GC3Qb4LQ79+tBFCOPuyCjlYprdkfNZZP+lGz99PR428un6c+jeuFheG9G8yn
-	0/u5NbQBL2iY8IuEkbNoLj6gvBuSLU6gEx7/e9kRXyVStJUVUKFp2zUoSLraohjeo3u+
-	riow==
-X-Gm-Message-State: AN3rC/7rpfsEv0M4vRHToS2DzIYbzVwTisKsvDuIo6mpusBQdncPkG94
-	gs8oaiCV1iyIyK3S
-X-Received: by 10.28.30.23 with SMTP id e23mr1616181wme.94.1492672141777;
-	Thu, 20 Apr 2017 00:09:01 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id x70sm6833360wmf.1.2017.04.20.00.09.00
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 20 Apr 2017 00:09:00 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 20 Apr 2017 09:09:08 +0200
-To: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-Message-ID: <20170420070908.GB3059@jama>
-References: <1492086867-15041-1-git-send-email-benjamin.gaignard@linaro.org>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=YtErB2OlMAW25WAjuxmI8KKxwh0BDzghPhKveIc+RyE=;
+	b=NpEqMgqXOO5waBWv2SBHExNSodQ95D9yqyIVWsxVrLyWluF8I1DdhExBxiicAyQtCa
+	1dHZyQrJPrZI/a52t07bMOx7TC+vw4b0phKIOMFnsBSSecc3ofpha9F/VeHjtjbQUrJO
+	chy+3T4woCShvwRFpOveEBAGXdwJM97h5TsN5BkwyUOfSSC1lWq2+9QioNc0uCzoRdyP
+	v+dgsGvkQbBsYNF9fnHighrCKjy5eibLP7WW0ubiT/AmNriKYkhVFV+KAm1vE6NTAEkt
+	3tFEAiBJaNzgMVpAv2PyN3by9rqox47l3PUoAY4J9/+U3bApAfr8Huu3t0kbaYx7j8Zp
+	Rm0w==
+X-Gm-Message-State: AN3rC/752sj+653SaJGxaN7xkghUbIu98dlaQ7Gcu7VTIZfEvRiREyKe
+	fg1QgHO7nlUuEykAYhT+WN++bh7p2g==
+X-Received: by 10.28.146.11 with SMTP id u11mr1533738wmd.124.1492672562426;
+	Thu, 20 Apr 2017 00:16:02 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <1492086867-15041-1-git-send-email-benjamin.gaignard@linaro.org>
-User-Agent: Mutt/1.8.1 (2017-04-11)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH v3] tinyproxy: Add recipe
+Received: by 10.80.148.54 with HTTP; Thu, 20 Apr 2017 00:16:01 -0700 (PDT)
+In-Reply-To: <CAMKF1sqP-mQDReWq=Ttt5+RHB01DHHjdDTPKhuk4tSRT=S4qSA@mail.gmail.com>
+References: <20170418182142.27253-1-raj.khem@gmail.com>
+	<20170418182142.27253-27-raj.khem@gmail.com>
+	<CAMKF1sqP-mQDReWq=Ttt5+RHB01DHHjdDTPKhuk4tSRT=S4qSA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 20 Apr 2017 09:16:01 +0200
+Message-ID: <CA+chaQfS27T2RuU4Wj-zGd7msSOrpuxysTxys6mocPFy+tLW1w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>, Jose Lamego <jose.a.lamego@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][ 27/32] mosh: Upgrade to 1.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,123 +55,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Apr 2017 07:09:00 -0000
-X-Groupsio-MsgNum: 66399
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="JYK4vJDZwFMowpUq"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 20 Apr 2017 07:16:09 -0000
+Content-Type: text/plain; charset=UTF-8
 
---JYK4vJDZwFMowpUq
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+OK, I took it from there. There were 2 more patches in that branch:
+pick 58ec00043 ne10: Fix build errors on cortex-a7 cpus
+pick 49de0a778 live555: Update from 20130430  to 20170410
+which I haven't seen on ML, will keep them for next build, but if you want
+them to be applied send them to ML as well.
 
-On Thu, Apr 13, 2017 at 02:34:27PM +0200, Benjamin Gaignard wrote:
-> Signed-off-by: Benjamin Gaignard <benjamin.gaignard@linaro.org>
-> ---
->  .../tinyproxy/tinyproxy/tinyproxy.service          | 14 ++++++++
->  .../recipes-support/tinyproxy/tinyproxy_1.8.4.bb   | 39 ++++++++++++++++=
-++++++
->  2 files changed, 53 insertions(+)
->  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy/t=
-inyproxy.service
->  create mode 100644 meta-networking/recipes-support/tinyproxy/tinyproxy_1=
-=2E8.4.bb
+Jose: can you please check why patchwork didn't pick this series (twice)?
 
-Still fails:
-http://errors.yoctoproject.org/Errors/Details/140513/
+Thanks
 
->=20
-> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyprox=
-y.service b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.s=
-ervice
-> new file mode 100644
-> index 0000000..ea079f9
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy/tinyproxy.servi=
-ce
-> @@ -0,0 +1,14 @@
-> +[Unit]
-> +Description=3DTinyproxy, Lightweight http(s) proxy daemon
-> +RequiresMountsFor=3D/var
-> +
-> +[Service]
-> +Group=3Dtinyproxy
-> +ExecStartPre=3D/bin/mkdir -p /var/log/tinyproxy
-> +ExecStartPre=3D/bin/chown -R nobody.tinyproxy /var/log/tinyproxy
-> +ExecStartPre=3D/bin/mkdir -p /var/run/tinyproxy
-> +ExecStartPre=3D/bin/chown -R nobody.tinyproxy /var/run/tinyproxy
-> +ExecStart=3D/usr/sbin/tinyproxy -d
-> +
-> +[Install]
-> +WantedBy=3Dmulti-user.target
-> diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb=
- b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-> new file mode 100644
-> index 0000000..f0374b8
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-> @@ -0,0 +1,39 @@
-> +SUMMARY =3D "Lightweight http(s) proxy daemon"
-> +HOMEPAGE =3D "https://tinyproxy.github.io/"
-> +LICENSE =3D "GPLv2"
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260aa954499f7abaabaa882=
-bbe"
-> +
-> +SRC_URI =3D "https://github.com/${BPN}/${BPN}/releases/download/${PV}/${=
-BP}.tar.gz \
-> +		   file://tinyproxy.service"
-> +
-> +SRC_URI[md5sum] =3D "3b60f7d08e0821ed1a3e2cf1e5778cac"
-> +SRC_URI[sha256sum] =3D "8234c879a129feee61efa98bac14a1a3e46e5cf08f01696a=
-216940872aa70faf"
-> +
-> +DEPENDS =3D "asciidoc-native libxml2-native libxslt-native"
-> +
-> +EXTRA_OECONF +=3D " \
-> +	--enable-filter \
-> +	--enable-transparent \
-> +	--disable-regexcheck \
-> +	--enable-reverse \
-> +	--enable-upstream \
-> +	--enable-xtinyproxy \
-> +	"
-> +
-> +inherit autotools systemd useradd
-> +
-> +#User specific
-> +USERADD_PACKAGES =3D "${PN}"
-> +USERADD_PARAM_${PN} =3D "nobody"
-> +GROUPADD_PARAM_${PN} =3D "--system tinyproxy"
-> +
-> +SYSTEMD_PACKAGES +=3D "${BPN}"
-> +SYSTEMD_SERVICE_${PN} =3D "tinyproxy.service"
-> +SYSTEMD_AUTO_ENABLE_${PN} =3D "enable"
-> +
-> +do_install_append() {
-> +	if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', =
-d)}; then
-> +		install -d ${D}${systemd_system_unitdir}
-> +		install -m 0644 ${WORKDIR}/tinyproxy.service ${D}${systemd_system_unit=
-dir}
-> +	fi
-> +}
-> --=20
-> 1.9.1
->=20
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+On Wed, Apr 19, 2017 at 6:51 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
---JYK4vJDZwFMowpUq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+> I sent the series but its not showing up in patchwork again, I have no
+> idea whats going on. Meanwhile you can cherry-pick them from
+>
+> https://github.com/kraj/meta-openembedded/tree/kraj/master
+>
+> On Tue, Apr 18, 2017 at 11:21 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-oe/recipes-connectivity/mosh/{mosh_1.2.4.bb => mosh_1.3.0.bb} | 5
+> ++---
+> >  1 file changed, 2 insertions(+), 3 deletions(-)
+> >  rename meta-oe/recipes-connectivity/mosh/{mosh_1.2.4.bb =>
+> mosh_1.3.0.bb} (93%)
+> >
+> > diff --git a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+> b/meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+> > similarity index 93%
+> > rename from meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+> > rename to meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+> > index e4d5b69bc..9fc8435ee 100644
+> > --- a/meta-oe/recipes-connectivity/mosh/mosh_1.2.4.bb
+> > +++ b/meta-oe/recipes-connectivity/mosh/mosh_1.3.0.bb
+> > @@ -15,9 +15,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
+> d32239bcb673463ab874e80d47fae504"
+> >  DEPENDS = "protobuf-native protobuf ncurses zlib libio-pty-perl openssl
+> libutempter"
+> >
+> >  SRC_URI = "http://mosh.mit.edu/mosh-${PV}.tar.gz"
+> > -
+> > -SRC_URI[md5sum] = "c2d918f4d91fdc32546e2e089f9281b2"
+> > -SRC_URI[sha256sum] = "e74d0d323226046e402dd469a17607
+> 5fc2013b69b0e67cea49762c957175df46"
+> > +SRC_URI[md5sum] = "d961276995936953bf2d5a794068b076"
+> > +SRC_URI[sha256sum] = "320e12f461e55d71566597976bd944
+> 0ba6c5265fa68fbf614c6f1c8401f93376"
+> >
+> >  inherit autotools pkgconfig
+> >
+> > --
+> > 2.12.2
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWPhekwAKCRA3VSO3ZXaA
-HHztAJ9dI1PTnUJ523rg/qUpgkq7q9P15QCgoAy6eat61Esc64Yme/lhnEaYHC8=
-=+cUL
------END PGP SIGNATURE-----
-
---JYK4vJDZwFMowpUq--
