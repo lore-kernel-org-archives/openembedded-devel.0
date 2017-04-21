@@ -1,48 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B190B77A45
+Return-Path: <andrej.rode@ettus.com>
+Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
+	[209.85.214.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B11B6093F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Apr 2017 18:23:16 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id l44so13345834wrc.2
+	Fri, 21 Apr 2017 21:04:02 +0000 (UTC)
+Received: by mail-it0-f54.google.com with SMTP id g66so767327ite.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Apr 2017 11:23:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=UHjl1EWZVl36oAw2nWqJ5m3Mp/AAdkDc4jL/TDFxVhw=;
-	b=kzk8V2uWpGxhKdnbldlC8kKcildY2Tg7pcGIHaCRWhmi43ApanronWBI6Gk2n77o+v
-	PhHr+r/71oG4igC+4x7F5N7KahhRvmI9UXtH4C40Bfr8lVWtOASvwgziQ1tUtCWX0nMq
-	VqraoqitePo1Tcwb9Acq3slefImA/2njWxUZaW6oJ1/qoD2xGl0mu1ggSnAf5ehCjeVY
-	HXCQ+0+dMrKi8LS4x590I2zx4B8UNKHHVrzr/fq0ge//bHw7EKw+gnfYVJ7nFfFOcBtA
-	9bfp854Mme1tso/3kq7knChRRdvhm2jijPKXCa39IsyY98dRO3LN3QAubDjZNIWubApR
-	uS3g==
+	Fri, 21 Apr 2017 14:04:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=6TOFe0Wy1btw5GWkml0/x3U6dTZRYIPyNHk7CuzXbxE=;
+	b=RVY2gfVTNcMxpu95Z8s3eUe0HkW2eey/bD2c4MmAF7FQaTZIoja/WAOkjB4RT0oit7
+	G5vF2rPn8i6RRtfIMALfOAQyhlWQaRSJeCWX2EF+7qVhrRqH52j0QBgoNS3yMDbv8Bs9
+	QeK6Qc6DpG76O6FYK4dQWholqB3RmboEzGkNk4jzIPdvfdknDsaeljm4J4oE6k8+quFC
+	VS8CH4wq9NYQxs0bNoEj/3T9+qFOjyNMtXji3CTwCFxehqvQKGZegbQnRCy1fTNWtGrj
+	/PIJeGleQF/2uOljegBA9/yiP+2M6R0RW91YXxsnvRq6Fr6bXrDAH0BUEX55CPTjD5Kp
+	paGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=UHjl1EWZVl36oAw2nWqJ5m3Mp/AAdkDc4jL/TDFxVhw=;
-	b=kkaQypvUq3jeZsJafEtNyVO+XXGWrtJbUiKW92qwKzK+8zkRJkqJ3fr8xDjlb8oRkf
-	xILGwq/Zw6wTMPjfj78p3eNEFyU1S3f4ON87pnGDrc+uZRPCNS7LqDozW08c/MbQ8gJM
-	EYGR0ZjqYpbmMXsiAC0+ypsYWfzF1SoontsMGcqRyyZUBo6Ifkl0K25H1GNASNGBSJFT
-	zFOt6k5oPYSaWgbOCaic8030kS+Uh2sgOjhf77ApRsn0TCd05HGp9M859sLECFg+mH3W
-	fWIOgU3FQQ4RUpvzizEXJ6B4kDkwvL3JSDY2rdse6eWLPEQcIt8ooZE5dOZZ6CC5IGIk
-	Yiew==
-X-Gm-Message-State: AN3rC/5RjeeeBAi1H3Q1f4UUhelxnv9u6BmqDBQA2M7SQkFvm3J5J6a0
-	vtDdj361jpMH/HBWipQnyqAHwjWFqA==
-X-Received: by 10.223.174.131 with SMTP id y3mr14575619wrc.196.1492798997204; 
-	Fri, 21 Apr 2017 11:23:17 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Fri, 21 Apr 2017 11:23:16 -0700 (PDT)
-In-Reply-To: <20170418182142.27253-30-raj.khem@gmail.com>
-References: <20170418182142.27253-1-raj.khem@gmail.com>
-	<20170418182142.27253-30-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 21 Apr 2017 20:23:16 +0200
-Message-ID: <CA+chaQdQog3J7nNnpMAY66TobRr8ckSNVB6WeoD4sapyyTDuUw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][ 30/32] lirc: update to 0.9.4d
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6TOFe0Wy1btw5GWkml0/x3U6dTZRYIPyNHk7CuzXbxE=;
+	b=UbpwlWgTzH9XZ7mZI6AT9s2kbT98dFazl9Uf9seBbHghon+9g6281/wbeGnMQcPMr9
+	kPMrLYAdTMf6+Rm+/Y4wA7ExPWGEao660tL6wov4jVvPZ5nwsTNjhlgFRC6yaosFGM8U
+	oIJsc4mGiUdoHL9NePyQ38MgLr5WAnSJ5g6DHjvLSipw9Ap7m86bFCv7y632FiyMVDUQ
+	XMj/WDmLjOGJXLXOxcwGB+9yLWibxirnNWAYTqR8tJTFFiFF0GWDqFXBoWeJDq19mViA
+	GnZrRI+jXOnBbU1hjdrofhKeLQR079zDd4n8+SwcRUN1Ilo61qVdqIhz8bZ7tF5KLSi3
+	OJIw==
+X-Gm-Message-State: AN3rC/6G8+d84nvhUV0lUz8PtUUVeRgs1lewzu2yTTsHfrF8VtzJUcZn
+	X0C5P3fK/VR/2ipa
+X-Received: by 10.84.241.65 with SMTP id u1mr18132910plm.28.1492808643206;
+	Fri, 21 Apr 2017 14:04:03 -0700 (PDT)
+Received: from FlyingDragon.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	i189sm17571486pgd.61.2017.04.21.14.04.02
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 21 Apr 2017 14:04:02 -0700 (PDT)
+From: Andrej Rode <andrej.rode@ettus.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Apr 2017 14:03:16 -0700
+Message-Id: <20170421210316.12798-1-andrej.rode@ettus.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-python][PATCH] gevent: update 0.13.8 -> 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,326 +55,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Apr 2017 18:23:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 21 Apr 2017 21:04:03 -0000
 
-lirc-0.9.4d: lirc: Files/directories were installed but not shipped in
-any package:
-  /lib/systemd/system/lircd-setup.service
-  /lib/systemd/system/lircd-uinput.service
-  /lib/systemd/system/irexec.service
-Please set FILES such that these items are packaged. Alternatively if
-they are unneeded, avoid installing them or delete them within
-do_install.
-lirc: 3 installed and not shipped files. [installed-vs-shipped]
-lirc-0.9.4d: lirc:
-/lirc-contrib/usr/share/lirc/contrib/99-remote-control-lirc.rules is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/97-lircd-uinput.rules is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/61-lirc.blacklist-all.conf
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircmd.conf is owned by uid
-3004, which is the same as the user running bitbake. This may be due
-to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/irexec.desktop is owned by
-uid 3004, which is the same as the user running bitbake. This may be
-due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/98-lirc-stable-link.rules
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircd.conf is owned by uid
-3004, which is the same as the user running bitbake. This may be due
-to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/irman2lirc is owned by uid
-3004, which is the same as the user running bitbake. This may be due
-to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/60-usb-generic-perms.rules
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/release-process.txt is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/60-lirc.rules is owned by
-uid 3004, which is the same as the user running bitbake. This may be
-due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/volume_pulse.lircrc
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/mplayer.lircrc is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/volume_mythtv.lircrc
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/vlc.lircrc is owned
-by uid 3004, which is the same as the user running bitbake. This may
-be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/mythtv.lircrc is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/lircmap.xml is owned
-by uid 3004, which is the same as the user running bitbake. This may
-be due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/lircrc is owned by
-uid 3004, which is the same as the user running bitbake. This may be
-due to host contamination
-lirc: /lirc-contrib/usr/share/lirc/contrib/lircrc/volume_alsa.lircrc
-is owned by uid 3004, which is the same as the user running bitbake.
-This may be due to host contamination [host-user-contaminated]
+Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
+---
+ .../python/python-gevent/libev-conf.patch          | 26 ++++++++++++++++++++
+ .../python/python-gevent_0.13.8.bb                 | 15 ------------
+ .../recipes-devtools/python/python-gevent_1.2.1.bb | 28 ++++++++++++++++++++++
+ 3 files changed, 54 insertions(+), 15 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
+ delete mode 100644 meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
 
+diff --git a/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch b/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
+new file mode 100644
+index 0000000..79c1867
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-gevent/libev-conf.patch
+@@ -0,0 +1,26 @@
++From 2294734ef9d5e2efb05820e9759a1635799bdea9 Mon Sep 17 00:00:00 2001
++From: Andrej Rode <andrej.rode@ettus.com>
++Date: Mon, 10 Apr 2017 19:25:18 -0700
++Subject: [PATCH] libev: make configure crosscompile compatible
++
++Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
++---
++ deps/libev/configure | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/deps/libev/configure b/deps/libev/configure
++index 743817e..96c2366 100755
++--- a/deps/libev/configure
+++++ b/deps/libev/configure
++@@ -2208,7 +2208,7 @@ fi
++ ac_ext=c
++ ac_cpp='$CPP $CPPFLAGS'
++ ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
++-ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+++ac_link='$CC -static -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
++ ac_compiler_gnu=$ac_cv_c_compiler_gnu
++ 
++ 
++-- 
++2.10.2
++
+diff --git a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb b/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
+deleted file mode 100644
+index d1c0a3c..0000000
+--- a/meta-python/recipes-devtools/python/python-gevent_0.13.8.bb
++++ /dev/null
+@@ -1,15 +0,0 @@
+-SUMMARY = "A coroutine-based Python networking library"
+-DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
+-a high-level synchronous API on top of the libevent event loop."
+-HOMEPAGE = "http://www.gevent.org"
+-LICENSE = "MIT & BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
+-                    file://LICENSE.pyevent;md5=718070c63de243053e2c616268b00fdd"
+-DEPENDS += "python-greenlet libevent"
+-RDEPENDS_${PN} += "python-greenlet python-mime python-pprint python-re"
+-
+-SRC_URI[md5sum] = "ca9dcaa7880762d8ebbc266b11252960"
+-SRC_URI[sha256sum] = "54b8d26300ce408c0916a3e63ef6cd3e6aca76230833558deb7de15196ed955e"
+-
+-inherit pypi setuptools
+-
+diff --git a/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb b/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
+new file mode 100644
+index 0000000..953f48f
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "A coroutine-based Python networking library"
++DESCRIPTION = "gevent is a coroutine-based Python networking library that uses greenlet to provide \
++a high-level synchronous API on top of the libevent event loop."
++HOMEPAGE = "http://www.gevent.org"
++LICENSE = "MIT & Python-2.0 & BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
++                    file://NOTICE;md5=5966cd2c6582656d28ab3c33da3860f8 \
++                    file://deps/libev/LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
++DEPENDS += "python-greenlet libevent"
++RDEPENDS_${PN} += "python-greenlet python-mime python-pprint python-re"
++
++SRC_URI_append = " \
++    file://libev-conf.patch;patch=1;pnum=1 \
++"
++
++SRC_URI[md5sum] = "6700a2433c8e0635425e6798760efc81"
++SRC_URI[sha256sum] = "3de300d0e32c31311e426e4d5d73b36777ed99c2bac3f8fbad939eeb2c29fa7c"
++
++# The python-gevent has no autoreconf ability
++# and the logic for detecting a cross compile is flawed
++# so always force a cross compile
++do_configure_append() {
++	sed -i -e 's/^cross_compiling=no/cross_compiling=yes/' ${S}/deps/libev/configure
++	sed -i -e 's/^cross_compiling=no/cross_compiling=yes/' ${S}/deps/c-ares/configure
++}
++
++inherit pypi setuptools
++
+-- 
+2.10.2
 
-On Tue, Apr 18, 2017 at 8:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-connectivity/lirc/lirc.inc         |   2 +-
->  ...crcd-Mark-local-inline-funtions-as-static.patch |  49 ----------
->  .../recipes-connectivity/lirc/lirc/pollfd.patch    | 101
-> +++++++++++++++++++++
->  .../lirc/{lirc_0.9.2.bb => lirc_0.9.4d.bb}         |   7 +-
->  4 files changed, 106 insertions(+), 53 deletions(-)
->  delete mode 100644 meta-oe/recipes-connectivity/
-> lirc/lirc/0001-lircrcd-Mark-local-inline-funtions-as-static.patch
->  create mode 100644 meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
->  rename meta-oe/recipes-connectivity/lirc/{lirc_0.9.2.bb => lirc_0.9.4d.bb}
-> (92%)
->
-> diff --git a/meta-oe/recipes-connectivity/lirc/lirc.inc b/meta-oe/recipes-
-> connectivity/lirc/lirc.inc
-> index 6ff8e0160..ef79885a0 100644
-> --- a/meta-oe/recipes-connectivity/lirc/lirc.inc
-> +++ b/meta-oe/recipes-connectivity/lirc/lirc.inc
-> @@ -6,7 +6,7 @@ DESCRIPTION_append_lirc-nslu2example = " This package
-> contains a working config
->  HOMEPAGE = "http://www.lirc.org"
->  SECTION = "console/network"
->  LICENSE = "GPLv2"
-> -DEPENDS = "alsa-lib libftdi libusb1 libusb-compat jack portaudio-v19"
-> +DEPENDS = "libxslt-native alsa-lib libftdi libusb1 libusb-compat jack
-> portaudio-v19"
->
->  SRC_URI = "http://prdownloads.sourceforge.net/lirc/lirc-${PV}.tar.bz2"
->
-> diff --git a/meta-oe/recipes-connectivity/lirc/lirc/0001-
-> lircrcd-Mark-local-inline-funtions-as-static.patch b/meta-oe/recipes-
-> connectivity/lirc/lirc/0001-lircrcd-Mark-local-inline-
-> funtions-as-static.patch
-> deleted file mode 100644
-> index e19d27671..000000000
-> --- a/meta-oe/recipes-connectivity/lirc/lirc/0001-
-> lircrcd-Mark-local-inline-funtions-as-static.patch
-> +++ /dev/null
-> @@ -1,49 +0,0 @@
-> -From c2be4543e4777c9e3d74b30326ba37b01917b0a9 Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Thu, 25 Aug 2016 03:02:37 +0000
-> -Subject: [PATCH] lircrcd: Mark local inline funtions as static
-> -
-> -These functions are not used anywhere outside
-> -this file, so they should be converted into static
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> -Upstream-Status: Pending
-> -
-> - daemons/lircrcd.c | 6 +++---
-> - 1 file changed, 3 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/daemons/lircrcd.c b/daemons/lircrcd.c
-> -index 55777cd..5ddc94d 100644
-> ---- a/daemons/lircrcd.c
-> -+++ b/daemons/lircrcd.c
-> -@@ -153,7 +153,7 @@ char *s;
-> - /* A safer write(), since sockets might not write all but only some of
-> the
-> -    bytes requested */
-> -
-> --inline int write_socket(int fd, char *buf, int len)
-> -+static inline int write_socket(int fd, char *buf, int len)
-> - {
-> -       int done, todo = len;
-> -
-> -@@ -167,7 +167,7 @@ inline int write_socket(int fd, char *buf, int len)
-> -       return (len);
-> - }
-> -
-> --inline int write_socket_len(int fd, char *buf)
-> -+static inline int write_socket_len(int fd, char *buf)
-> - {
-> -       int len;
-> -
-> -@@ -177,7 +177,7 @@ inline int write_socket_len(int fd, char *buf)
-> -       return (1);
-> - }
-> -
-> --inline int read_timeout(int fd, char *buf, int len, int timeout)
-> -+static inline int read_timeout(int fd, char *buf, int len, int timeout)
-> - {
-> -       fd_set fds;
-> -       struct timeval tv;
-> ---
-> -1.9.1
-> -
-> diff --git a/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
-> b/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
-> new file mode 100644
-> index 000000000..4feea8034
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/lirc/lirc/pollfd.patch
-> @@ -0,0 +1,101 @@
-> +Index: lirc-0.9.4d/daemons/lircrcd.cpp
-> +===================================================================
-> +--- lirc-0.9.4d.orig/daemons/lircrcd.cpp
-> ++++ lirc-0.9.4d/daemons/lircrcd.cpp
-> +@@ -29,10 +29,12 @@
-> + #include <sys/un.h>
-> + #include <sys/stat.h>
-> + #include <sys/types.h>
-> ++#include <poll.h>
-> + #include <syslog.h>
-> +
-> + #include "lirc_client.h"
-> + #include "lirc/lirc_log.h"
-> ++#include "lirc/curl_poll.h"
-> +
-> + #define MAX_CLIENTS 100
-> + #define WHITE_SPACE " \t"
-> +Index: lirc-0.9.4d/lib/curl_poll.c
-> +===================================================================
-> +--- lirc-0.9.4d.orig/lib/curl_poll.c
-> ++++ lirc-0.9.4d/lib/curl_poll.c
-> +@@ -36,6 +36,7 @@
-> + #include <stdlib.h>
-> + #include <sys/time.h>
-> + #include <sys/types.h>
-> ++#include <sys/poll.h>
-> +
-> + #include "lirc_log.h"
-> + #include "curl_poll.h"
-> +@@ -67,7 +68,7 @@ static const logchannel_t logchannel = L
-> +
-> + #ifdef HAVE_POLL_FINE
-> +
-> +-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
-> ++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
-> + {
-> +       return poll(ufds, nfds, timeout_ms);
-> + }
-> +@@ -112,7 +113,7 @@ static int verify_sock(int s)
-> + }
-> +
-> +
-> +-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms)
-> ++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms)
-> + {
-> +       struct timeval pending_tv;
-> +       struct timeval* ptimeout;
-> +Index: lirc-0.9.4d/lib/curl_poll.h
-> +===================================================================
-> +--- lirc-0.9.4d.orig/lib/curl_poll.h
-> ++++ lirc-0.9.4d/lib/curl_poll.h
-> +@@ -1,5 +1,5 @@
-> +-#ifndef _POLL_H
-> +-#define _POLL_H
-> ++#ifndef _LIB_CURL_POLL_H
-> ++#define _LIB_CURL_POLL_H
-> + /***********************************************************
-> ****************
-> +  *                                  _   _ ____  _
-> +  *  Project                     ___| | | |  _ \| |
-> +@@ -29,13 +29,9 @@
-> + extern "C" {
-> + #endif
-> +
-> +-#ifdef HAVE_SYS_POLL_H
-> +-#include <sys/poll.h>
-> +-#else
-> + #include <poll.h>
-> +-#endif
-> +
-> +-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
-> ++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
-> +
-> + #ifdef __cplusplus
-> + }
-> +Index: lirc-0.9.4d/lib/lirc/curl_poll.h
-> +===================================================================
-> +--- lirc-0.9.4d.orig/lib/lirc/curl_poll.h
-> ++++ lirc-0.9.4d/lib/lirc/curl_poll.h
-> +@@ -1,5 +1,5 @@
-> +-#ifndef _POLL_H
-> +-#define _POLL_H
-> ++#ifndef _LIRC_CURL_POLL_H
-> ++#define _LIRC_CURL_POLL_H
-> + /***********************************************************
-> ****************
-> +  *                                  _   _ ____  _
-> +  *  Project                     ___| | | |  _ \| |
-> +@@ -29,13 +29,9 @@
-> + extern "C" {
-> + #endif
-> +
-> +-#ifdef HAVE_SYS_POLL_H
-> +-#include <sys/poll.h>
-> +-#else
-> + #include <poll.h>
-> +-#endif
-> +
-> +-int curl_poll(struct pollfd ufds[], unsigned int nfds, int timeout_ms);
-> ++int curl_poll(struct pollfd *ufds, unsigned int nfds, int timeout_ms);
-> +
-> + #ifdef __cplusplus
-> + }
-> diff --git a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-> b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
-> similarity index 92%
-> rename from meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-> rename to meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
-> index 17261921f..a9bcb760c 100644
-> --- a/meta-oe/recipes-connectivity/lirc/lirc_0.9.2.bb
-> +++ b/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb
-> @@ -1,7 +1,7 @@
->  require lirc.inc
->
->  SRC_URI += " \
-> -    file://0001-lircrcd-Mark-local-inline-funtions-as-static.patch \
-> +    file://pollfd.patch \
->      file://lircd.service \
->      file://lircd.init \
->      file://lircexec.init \
-> @@ -11,8 +11,8 @@ SRC_URI += " \
->  "
->  #file://0001-Adaptation-for-STM-configuration.patch \
->  #
-> -SRC_URI[md5sum] = "3afc84e79c0839823cc20e7a710dd06d"
-> -SRC_URI[sha256sum] = "4e3f948fcdee6dce009171143f0cb7
-> cd7be48593dd58138db4101a41f651a1dd"
-> +SRC_URI[md5sum] = "0d11679cbdd94a5a6da00a8e7231b4bf"
-> +SRC_URI[sha256sum] = "c68f18c35b489b865c0a741d119b13
-> 6e8702191538cd3551b977a7af6c4e41ab"
->
->  SYSTEMD_PACKAGES = "lirc"
->  SYSTEMD_SERVICE_${PN} = "lircd.service lircmd.service"
-> @@ -27,6 +27,7 @@ PACKAGECONFIG ?= " \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', ' systemd', '',
-> d)} \
->      ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)} \
->  "
-> +CACHED_CONFIGUREVARS = "HAVE_WORKING_POLL=yes"
->
->  #EXTRA_OEMAKE = 'SUBDIRS="lib daemons tools"'
->  do_install_append() {
-> --
-> 2.12.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
