@@ -1,24 +1,48 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E64777B96
+Return-Path: <andrej.rode@ettus.com>
+Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
+	[209.85.218.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2128A6E671
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Apr 2017 13:20:24 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v3LDKOo4003861
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Fri, 21 Apr 2017 18:02:42 +0000 (UTC)
+Received: by mail-oi0-f53.google.com with SMTP id j201so105746651oih.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Apr 2017 15:20:25 +0200
-Received: from dev.sbt.siemens.com ([139.16.73.59])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v3LDKMxO029767;
-	Fri, 21 Apr 2017 15:20:24 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Fri, 21 Apr 2017 11:02:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=O4TcrZuawC/KN3zII0akj5UWdfVOHDuHVIPaFBb6u9I=;
+	b=RlVBM5VzKLpj+r+aioqpY/rkWjO+wlcY2M0V43naLHdNLPnh6PVw7YtViPFH9A+547
+	b261ztg4MoZKEc/sUNuAaMR/Kq49RdlZ0GuNOi/s/G0dXbN92aJl/3O37ZptE5hrPfpE
+	67yQJkLgiwLkkS6ZWd1oo9uEc4o+yhmQc1Tl+KtgCvU/MIiTa2+8+kTlXphaWG2DhH8u
+	+0TttNk548WX6JoPnqg5B5e4bizViCpU6fr3FuB+DQPi4qkdvowuDOt/75FW1qSfcPaO
+	SOx9tT6YxPXjGhAOQea6TLxhw/hMWmBLrhIq+PgBlUC1pSNPGQp+2zMEc2nJsXVjNNu/
+	I5Yg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=O4TcrZuawC/KN3zII0akj5UWdfVOHDuHVIPaFBb6u9I=;
+	b=EPPGaIxHxb8nc1w6TFDLIQAzXxDUA8uYqVJn3nF9MU3TU/js1330rQ30ySIkf0FGGb
+	aFeoNuSs3uuI1/nLaohUcXHtbNJ5m/H7/tF5l7dO4CKib+DZHp6ApEXFfQmDAd0cRFHI
+	eIX80CslvVXwOU0xi8rVb43/RPLG5zzIRD2CfFrIxxb4Y6piVcoxqP1VFvLVtkJ2pyDU
+	G2LHxufFscrbVReW6L1MCFj6cpFnH3Mxa1Y+Et3XSdkwCEXvD97vX1VO/kK4JxPp4Y6Q
+	55QOmzyEIa7kukcoD89iqYBGPImyPhniVupEscyiLRzkSr6xI00Ptn0RwzhMpd501gOV
+	CQmg==
+X-Gm-Message-State: AN3rC/665L8YjxeTJwRM2wdNUN+q9CjFtLb6Hs+159D+eg+RdE8cLJGk
+	6z0LK1H2XQ2R9SaX
+X-Received: by 10.84.194.195 with SMTP id h61mr17693817pld.182.1492797763282; 
+	Fri, 21 Apr 2017 11:02:43 -0700 (PDT)
+Received: from FlyingDragon.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	o23sm17284007pfi.100.2017.04.21.11.02.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 21 Apr 2017 11:02:42 -0700 (PDT)
+From: Andrej Rode <andrej.rode@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Apr 2017 15:20:16 +0200
-Message-Id: <1492780816-20242-2-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1492780816-20242-1-git-send-email-pascal.bach@siemens.com>
-References: <1492780816-20242-1-git-send-email-pascal.bach@siemens.com>
-Subject: [meta-python][PATCH 2/2] python3-pytest-runner: make available for both Python 2 & 3
+Date: Fri, 21 Apr 2017 11:02:35 -0700
+Message-Id: <20170421180235.8389-1-andrej.rode@ettus.com>
+X-Mailer: git-send-email 2.10.2
+Subject: [meta-python][PATCH v3] python-systemd, python3-systemd: add a new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Apr 2017 13:20:25 -0000
+X-List-Received-Date: Fri, 21 Apr 2017 18:02:44 -0000
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Adds new recipe for python-systemd and python3-systemd
+which provide python bindings for libsystemd
+
+Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
 ---
- .../recipes-devtools/python/python-pytest-runner.inc    | 17 +++++++++++++++++
- .../python/python-pytest-runner_2.11.1.bb               | 17 ++++-------------
- .../python/python3-pytest-runner_2.11.1.bb              |  2 ++
- 3 files changed, 23 insertions(+), 13 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pytest-runner.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb
+ meta-python/recipes-devtools/python/python-systemd_234.bb  | 13 +++++++++++++
+ meta-python/recipes-devtools/python/python3-systemd_234.bb | 13 +++++++++++++
+ 2 files changed, 26 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-systemd_234.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-systemd_234.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-runner.inc b/meta-python/recipes-devtools/python/python-pytest-runner.inc
+diff --git a/meta-python/recipes-devtools/python/python-systemd_234.bb b/meta-python/recipes-devtools/python/python-systemd_234.bb
 new file mode 100644
-index 0000000..85a8de1
+index 0000000..ef11831
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pytest-runner.inc
-@@ -0,0 +1,17 @@
-+SUMMARY = "Invoke py.test as distutils command with dependency resolution"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
++++ b/meta-python/recipes-devtools/python/python-systemd_234.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Python interface for libsystemd"
++HOMEPAGE = "https://github.com/systemd/python-systemd"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
 +
-+SRC_URI[md5sum] = "bdb73eb18eca2727944a2dcf963c5a81"
-+SRC_URI[sha256sum] = "983a31eab45e375240e250161a556163bc8d250edaba97960909338c273a89b3"
++PYPI_PACKAGE = "systemd-python"
++DEPENDS += "systemd (<=234)"
++RDEPENDS_${PN} += "systemd"
++REQUIRED_DISTRO_FEATURES = "systemd"
++inherit pypi setuptools distro_features_check
 +
-+
-+inherit pypi
-+
-+DEPENDS += " \
-+    ${PYTHON_PN}-setuptools-scm-native"
-+
-+RDEPENDS_${PN} = "${PYTHON_PN}-py ${PYTHON_PN}-setuptools ${PYTHON_PN}-argparse ${PYTHON_PN}-debugger ${PYTHON_PN}-json \
-+                  ${PYTHON_PN}-io"
-+
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb b/meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb
-index 188ef2b..0a5055c 100644
---- a/meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb
-+++ b/meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb
-@@ -1,14 +1,5 @@
--SUMMARY = "Invoke py.test as distutils command with dependency resolution"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
-+inherit setuptools
-+require python-pytest-runner.inc
- 
--SRC_URI[md5sum] = "bdb73eb18eca2727944a2dcf963c5a81"
--SRC_URI[sha256sum] = "983a31eab45e375240e250161a556163bc8d250edaba97960909338c273a89b3"
--
--DEPENDS += " \
--    python-setuptools-scm"
--
--RDEPENDS_${PN} = "python-py python-setuptools python-argparse python-debugger python-json \
--                  python-compiler python-io"
--
--inherit pypi setuptools
-+# Dependency only exists for python2
-+RDEPENDS_${PN} += "python-compiler"
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb b/meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb
++SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
++SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
+diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb b/meta-python/recipes-devtools/python/python3-systemd_234.bb
 new file mode 100644
-index 0000000..df56ba6
+index 0000000..845b7d9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-pytest-runner.inc
++++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+@@ -0,0 +1,13 @@
++SUMMARY = "Python interface for libsystemd"
++HOMEPAGE = "https://github.com/systemd/python-systemd"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b364516c"
++
++PYPI_PACKAGE = "systemd-python"
++DEPENDS += "systemd (<=234)"
++RDEPENDS_${PN} += "systemd"
++REQUIRED_DISTRO_FEATURES = "systemd"
++inherit pypi setuptools3 distro_features_check
++
++SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
++SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7eb5b0b6372cd1b391228047d33895db83e7"
 -- 
-2.1.4
+2.10.2
 
 
