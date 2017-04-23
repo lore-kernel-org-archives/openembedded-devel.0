@@ -1,49 +1,50 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 159B177BB4
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 65AD377BB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 06:55:30 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u65so11652563wmu.3
+	Sun, 23 Apr 2017 06:55:37 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id w50so12328077wrc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Apr 2017 23:55:32 -0700 (PDT)
+	Sat, 22 Apr 2017 23:55:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=TLusmp4Lb6kuGr54Ez9Le+kitLBzZiCB08iX4YluiuU=;
-	b=Y0xgM7y9/DxdQu4WTY0wHVDB57Z0csEhfhdV6UlIU23eLn9pCXD6sHpJ4oNLiWtnUj
-	tU+oeLMlWnp4D9RW1HhApLyP8yjQPGF9tKEIhmvcX/puuLihY8jijBjZ+/C8wKRD2YIb
-	/YJyJ8vRDS5i6JvEKUXfVGFfbRynqcII8nGyyRk+ptrrFzxQJpJa0iblu8eAaXrSancB
-	TzAsdA5AZEMOv4COlsy1BlQ1StUhPvkycMHpoLIvaGQvd/JN9+iJBLs+QZ0lvClgfLjO
-	lMM886PXAf5vHiD/qVT9QXv2lapm/+PP2FYJs16dXw17awQfmaoaLm7VTOwJthDJ4tH1
-	X0qA==
+	bh=s/z8JneRcIcC6XdjnOdXcKkuYu95/wsG6RbzkLD9zkw=;
+	b=qVxNIexTvQf3MJ3l4rRugBpjGfMleM1J3Fw6rc5h5YnuPjnWsMbt9HFnaHNl5rTtCh
+	Im6R+PKA1fdluWG2wQSkMIu0iPnc02TCJf8vgfq1q5+QSlM0B3OElkhQ/o0MZ7xKLs3K
+	AnQ35RLrmyvh2s1GEBde//rY0Go6FdOCgJoxAj3qp8llJrgj7R2ReuwzGqlSyjdVF5ir
+	WHVugN8VKJhk8lJl2Rl6WETWoE0oBOuQ2geiFcG9b3K0x4a/E9oP452z8sMziDX7+BNI
+	AKAcnUygwX2PdQuspiPedZSc9JnxCNueLfAc8Au90wKc2rgxNcsb6FcfEStq7Vp/t8rN
+	w0QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=TLusmp4Lb6kuGr54Ez9Le+kitLBzZiCB08iX4YluiuU=;
-	b=SqoIzKEtJVAjHsVldtsexgyrNqUW3nMf9q4hV5iH49ummYVUhgQ4hGd6+IrbrmymPf
-	D7B+cGT6DqkSuwj67oZloEE6chEX6Q6kyrJhs9wkTdNIenSwsmialSfhK0qT0q/aByn5
-	X09AWFvuSurZCTh95GOWWheMK+qqA1a71L3GRBXf/w+sfi/dc9RFbK9yZDcxpDJuQEnk
-	sQsqMe6HGJT/5cMEYCPsd8mCEbgVqUHf0CbnNkmIpL2R7yV7L02ChPjgaQyUZT4Gtu3P
-	JA71IuPxCIfG+XU/D4ZLZcCjW/KwKqK4LOfFeN9jlu9eucWrvHPVVWgprCxNZndZXUx3
-	uv3g==
-X-Gm-Message-State: AN3rC/7VzXddEmlAqFjawrO86311k/cM1ptpUNgwf1WCr2qN4Y76Wk1w
-	6Be+6/NqUkVbXA==
-X-Received: by 10.28.128.197 with SMTP id b188mr4907674wmd.115.1492930531865; 
-	Sat, 22 Apr 2017 23:55:31 -0700 (PDT)
+	bh=s/z8JneRcIcC6XdjnOdXcKkuYu95/wsG6RbzkLD9zkw=;
+	b=Nj59URpFRSSKs3nZWLkhkJoK2admusvKBZtN5+uCRnmOlcLDDUNhkpjdjZio4BcmSh
+	TSmbslsy2Ld9Yg52omZhpbcomxOsteXrYpo9XIbJ28nbzMgP99rLqELO1zkHBBryAE7y
+	EIpSV4GugrKRmpf860BqGpdsbWiNrq3gk7vlodt3woW3Vpi3nn0Dl3cpppRPD3vXWj4/
+	rbUotMjCfExVG1v3DmgDiTue3LoZpQs6o5HD4xQLqwGJAfU2CLKXverO4h/TQTMelj2w
+	6sd60q58QQvwqdT546MzVpypabG9LbJZ29QyUOEh0l6vws6UfCV7oJP0dpRc1zGg6afL
+	OeHQ==
+X-Gm-Message-State: AN3rC/5sMccX4ksA1aw6Ymfk3/f7qRUTW8WgX276wL8RA9oB2AjOs0D1
+	qU9pGhlYjHJGTQ==
+X-Received: by 10.223.172.105 with SMTP id v96mr860231wrc.1.1492930538263;
+	Sat, 22 Apr 2017 23:55:38 -0700 (PDT)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([106.116.223.154])
-	by smtp.gmail.com with ESMTPSA id 81sm8059503wmj.9.2017.04.22.23.55.27
+	by smtp.gmail.com with ESMTPSA id 81sm8059503wmj.9.2017.04.22.23.55.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 22 Apr 2017 23:55:31 -0700 (PDT)
+	Sat, 22 Apr 2017 23:55:37 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 08:54:55 +0200
-Message-Id: <1492930496-6082-5-git-send-email-liu.ming50@gmail.com>
+Date: Sun, 23 Apr 2017 08:54:56 +0200
+Message-Id: <1492930496-6082-6-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1492930496-6082-1-git-send-email-liu.ming50@gmail.com>
 References: <1492930496-6082-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-java][PATCH 4/5] openjdk-8/openjre-8: merge some redundant code
+Subject: [meta-java][PATCH 5/5] openjdk-8-cross.inc: fix a libpng build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,95 +57,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Apr 2017 06:55:31 -0000
+X-List-Received-Date: Sun, 23 Apr 2017 06:55:37 -0000
 
 From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-A identical PATCHES_URI_append is being set both in openjdk-8 and
-openjre-8, merge them into openjdk-8-cross.inc.
+JDK/JRE fails to build for ARM NEON machines, due to a undefined symbol
+in libpng, as follows:
+| build/jdk/objs/libsplashscreen/pngrutil.o: In function `png_init_filter_functions':
+| jdk/src/share/native/sun/awt/libpng/pngrutil.c:4002: undefined reference to `png_init_filter_functions_neon'
+
+This is a known issue already fixed in openjdk upstream, back-port the fix.
 
 Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
 ---
- recipes-core/openjdk/openjdk-8-cross.inc | 14 ++++++++++++++
- recipes-core/openjdk/openjdk-8_102b14.bb | 14 --------------
- recipes-core/openjdk/openjre-8_102b14.bb | 14 --------------
- 3 files changed, 14 insertions(+), 28 deletions(-)
+ recipes-core/openjdk/openjdk-8-cross.inc           |  1 +
+ .../openjdk8-fix-libpng-neon-build.patch           | 29 ++++++++++++++++++++++
+ 2 files changed, 30 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch
 
 diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-index 3973fcf..247438f 100644
+index 247438f..ad3a44d 100644
 --- a/recipes-core/openjdk/openjdk-8-cross.inc
 +++ b/recipes-core/openjdk/openjdk-8-cross.inc
-@@ -1,6 +1,20 @@
- JDK_HOME = "${libdir_jvm}/openjdk-8"
- JRE_HOME = "${libdir_jvm}/openjre-8"
+@@ -13,6 +13,7 @@ PATCHES_URI_append = "\
+     file://openjdk8-silence-d_fortify_source-warning.patch;apply=no \
+     file://openjdk8-fix-zero-mode-crash.patch;apply=no \
+     file://openjdk8-add-missing-linker-flags.patch;apply=no \
++    file://openjdk8-fix-libpng-neon-build.patch;apply=no \
+ "
  
-+# some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
-+# reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
-+# by Roman Kennke (rkennke at redhat.com)
-+PATCHES_URI_append = "\
-+    file://openjdk8-restrict-to-staging-dir.patch;apply=no \
-+    file://openjdk8-fix-shark-build.patch;apply=no \
-+    file://openjdk8-fix-shark-stdc++11.patch;apply=no \
-+    file://openjdk8-fix-assembler-flag-handling-in-makefile.patch;apply=no \
-+    file://openjdk8-fix-adlc-flags.patch;apply=no \
-+    file://openjdk8-silence-d_fortify_source-warning.patch;apply=no \
-+    file://openjdk8-fix-zero-mode-crash.patch;apply=no \
-+    file://openjdk8-add-missing-linker-flags.patch;apply=no \
-+"
-+
  DEPENDS = "\
-     openjdk-8-native zip-native ant-native libxslt \
-     jpeg libpng krb5 libffi fontconfig freetype \
-diff --git a/recipes-core/openjdk/openjdk-8_102b14.bb b/recipes-core/openjdk/openjdk-8_102b14.bb
-index 210c897..efed329 100644
---- a/recipes-core/openjdk/openjdk-8_102b14.bb
-+++ b/recipes-core/openjdk/openjdk-8_102b14.bb
-@@ -1,20 +1,6 @@
- require openjdk-8-release-102b14.inc
- require openjdk-8-cross.inc
- 
--# some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
--# reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
--# by Roman Kennke (rkennke at redhat.com)
--PATCHES_URI_append = "\
--    file://openjdk8-restrict-to-staging-dir.patch;apply=no \
--    file://openjdk8-fix-shark-build.patch;apply=no \
--    file://openjdk8-fix-shark-stdc++11.patch;apply=no \
--    file://openjdk8-fix-assembler-flag-handling-in-makefile.patch;apply=no \
--    file://openjdk8-fix-adlc-flags.patch;apply=no \
--    file://openjdk8-silence-d_fortify_source-warning.patch;apply=no \
--    file://openjdk8-fix-zero-mode-crash.patch;apply=no \
--    file://openjdk8-add-missing-linker-flags.patch;apply=no \
--"
--
- do_install() {
-     rm -rf ${D}${JDK_HOME}
-     mkdir -p ${D}${JDK_HOME}
-diff --git a/recipes-core/openjdk/openjre-8_102b14.bb b/recipes-core/openjdk/openjre-8_102b14.bb
-index 88160e1..f47c62c 100644
---- a/recipes-core/openjdk/openjre-8_102b14.bb
-+++ b/recipes-core/openjdk/openjre-8_102b14.bb
-@@ -1,20 +1,6 @@
- require openjdk-8-release-102b14.inc
- require openjdk-8-cross.inc
- 
--# some patches extracted from http://cr.openjdk.java.net/~rkennke/shark-build-hotspot/webrev.01/hotspot.patch
--# reported via http://mail.openjdk.java.net/pipermail/build-dev/2015-January/013972.html
--# by Roman Kennke (rkennke at redhat.com)
--PATCHES_URI_append = "\
--    file://openjdk8-restrict-to-staging-dir.patch;apply=no \
--    file://openjdk8-fix-shark-build.patch;apply=no \
--    file://openjdk8-fix-shark-stdc++11.patch;apply=no \
--    file://openjdk8-fix-assembler-flag-handling-in-makefile.patch;apply=no \
--    file://openjdk8-fix-adlc-flags.patch;apply=no \
--    file://openjdk8-silence-d_fortify_source-warning.patch;apply=no \
--    file://openjdk8-fix-zero-mode-crash.patch;apply=no \
--    file://openjdk8-add-missing-linker-flags.patch;apply=no \
--"
--
- do_install() {
-     rm -rf ${D}${JRE_HOME}
-     mkdir -p ${D}${JRE_HOME}
+diff --git a/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch
+new file mode 100644
+index 0000000..dd6d8e3
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch
+@@ -0,0 +1,29 @@
++# HG changeset patch
++# User enevill
++# Date 1430816900 0
++#      Tue May 05 09:08:20 2015 +0000
++# Node ID 88d2b7d7285281d41bcff45af0dd983b0f72811e
++# Parent  51f5501a54a62aceed6342e7ea3a9a3c67f3885d
++8078245: AARCH64: JDK fails to build due to undefined symbol in libpng
++Summary: Add -DPNG_ARM_NEON_OPT=0 to LIBSPLASHSCREEN_CFLAGS flags
++Reviewed-by: dholmes, ihse, erikj
++
++Upstream-Status: Backport
++
++Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
++---
++ jdk/make/lib/Awt2dLibraries.gmk |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git jdk/make/lib/Awt2dLibraries.gmk jdk/make/lib/Awt2dLibraries.gmk
++--- jdk/make/lib/Awt2dLibraries.gmk
+++++ jdk/make/lib/Awt2dLibraries.gmk
++@@ -1205,7 +1205,7 @@ ifndef BUILD_HEADLESS_ONLY
++     LIBSPLASHSCREEN_DIRS += $(JDK_TOPDIR)/src/macosx/native/sun/awt/splashscreen
++   endif
++
++-  LIBSPLASHSCREEN_CFLAGS := -DSPLASHSCREEN -DPNG_NO_MMX_CODE \
+++  LIBSPLASHSCREEN_CFLAGS := -DSPLASHSCREEN -DPNG_NO_MMX_CODE -DPNG_ARM_NEON_OPT=0 \
++       $(foreach dir, $(LIBSPLASHSCREEN_DIRS), -I$(dir))
++
++   ifeq ($(OPENJDK_TARGET_OS), macosx)
 -- 
 2.7.4
 
