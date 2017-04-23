@@ -1,46 +1,46 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 4469D60125
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BC75A71D31
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 02:32:22 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id k4so23425000vki.1
+	Sun, 23 Apr 2017 06:55:06 +0000 (UTC)
+Received: by mail-wm0-f45.google.com with SMTP id w64so41054968wma.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Apr 2017 19:32:24 -0700 (PDT)
+	Sat, 22 Apr 2017 23:55:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=r1NE4Zzkg+E5Obhlhq+mZHv8Sc7dO1+Eibw9IRw5EXs=;
-	b=VArFAFrwpc2qy2EHp+P026pXT6iVieYqoXOqtP8Fx+jWWYw+YVAZsIuKQxDLMpY/84
-	LtETniSO6Ufo95QjeBmt3WD/00kzPEJuHU1SlxG6A6Qw47rdH852W6sNQutQiAQZ5R6E
-	7X+zbI1RFxAdSLy/SAyz597LCPmRG4Pyfk5yapYC+ZHGlAUfDnZ7/nbSQP09S9hjLBz6
-	EVy312hny2dTqJcZ3NCYn1FY8A4dbfB9FoY2rP7MqDyvisONa7WMhA8xqShI83+CNqiA
-	iLLlThWWwf6vR1w6ObBcwTsn/wmxX2k3uQ85uEIMaLlkAhBw1XJbzLi8ITpOQKwFWKLg
-	xsuA==
+	h=from:to:cc:subject:date:message-id;
+	bh=WmG/eZhkvaloZgcoD7HagGSWB/V9aOYUiF7qnxDA2b4=;
+	b=D4b3L4WmaBUqVlPkJ+5qcB3Vlh+7fmL1JBeSPWrHbgi+VxkenbNTdoHH+DjDZZ0Khd
+	izMR//7aW1vCDBrz1KLjf47kVwCO7atZmBedIUZ02ih1SwZJQR5/3jPA6YVujFz9JFa2
+	wtrd9w9nDvGRnnRtUMijmwhgb5zs2W/UDrvi65B9adMpRSEB5vYKgAbCBvbN7ZQ057w9
+	mfj8uiafpeuMm54t5iyg0OtFoUkk0BZ489ILSzbZLeiX4odwV1lXKiDfhce3y5xuJHbb
+	C7dMoDXlymaEMhsKnHBXFyFjrsrkItAAeJll5Ek1UMduQq2CuKFUG05CWB3wHISc0jqh
+	UdIw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=r1NE4Zzkg+E5Obhlhq+mZHv8Sc7dO1+Eibw9IRw5EXs=;
-	b=Xg9fYWtnoTv3pendLBH991DFLUS/2LHiROHsGTNzlt4qjTn7OTxq/MjL0oT2EV2+Ke
-	XTJyjwSwZjkQ9ooOrsqb3c79nyr8mh6i+9YyddUDB9UCNC8qL1AKSekJoNue9pBkfjuV
-	iSVZewMC+GNpeZHl6+/M8OiaZNoi0HxnBfaTopDXG38dzlLUVnuyR7LiqtwpgwGkjuUI
-	Ntt4mxMlNEeG11yU5487y0M9mLDrZMnQXjuZ6y4ATkAScJHEvA5coE8JfqPErExvYVbf
-	uMkwGDAWlvbzzqo3OBOK2iYA+5wjZm/5n254GEyGQTJ5+TN1MFFZszBBTocNRIs0Krvk
-	UYTA==
-X-Gm-Message-State: AN3rC/4xjWFdV3hEAN9P5WWCUMvJN3zJknOSgifcnyIlBCh9cxVahhlM
-	wc4XbesLmASxumWhbZTcHd2xWW5Paw==
-X-Received: by 10.31.235.198 with SMTP id j189mr11164vkh.75.1492914743971;
-	Sat, 22 Apr 2017 19:32:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.30.70 with HTTP; Sat, 22 Apr 2017 19:32:23 -0700 (PDT)
-In-Reply-To: <20170422211821.6015-1-schnitzeltony@googlemail.com>
-References: <20170422211821.6015-1-schnitzeltony@googlemail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sat, 22 Apr 2017 22:32:23 -0400
-Message-ID: <CAHUNapSfyH++CAThH7Yb69=xe-Btf8-eNJbBHnkn1-_H2W2-nw@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser][PATCH] chromium: show progress for do_compile
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=WmG/eZhkvaloZgcoD7HagGSWB/V9aOYUiF7qnxDA2b4=;
+	b=hB6o5QV6uXcF1vnQ0yEX2bjdq+4r3uN4SGjN0TXcg2rPY/QtGSGaOYcZXzSiGe3Q/v
+	p50rHIlyxJ39Bgjbcsze61HhYEdTMtcHrVQxXpBSU7f41m5dBcak4rxEU2Mk3r5CyJSV
+	r7jKqOr62fMmcwQ7/oqyoNYQ88+JtphqWn9sV2k62d7a+aXSwfvKSEKrjQBzWP/I2e/c
+	fflBVvWFJm7t1wTmnSdgGf2TZ7lrYaTWZ0gumeq/jCk16svHjrdz41At5ZHrAbCcNXsd
+	4PCb3Myauxm+EjP039SqRyC6xZE+A401uJ/kvjKVfY+Ngx4hVV97YdX4byDyLunGVALs
+	dDww==
+X-Gm-Message-State: AN3rC/48vZQfaYVZTreH3Jojj9kquMct+2m862u+XCIgm6JAqpbHeFde
+	2NELamswl77BbA==
+X-Received: by 10.28.111.134 with SMTP id c6mr5005651wmi.128.1492930507236;
+	Sat, 22 Apr 2017 23:55:07 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([106.116.223.154])
+	by smtp.gmail.com with ESMTPSA id 81sm8059503wmj.9.2017.04.22.23.55.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 22 Apr 2017 23:55:05 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 23 Apr 2017 08:54:51 +0200
+Message-Id: <1492930496-6082-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-java][PATCH 0/5] Fix some issues of openjdk-8/openjre-8 headful build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,8 +53,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 Apr 2017 02:32:23 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 23 Apr 2017 06:55:07 -0000
 
-Sweet!
+From: Ming Liu <liu.ming50@gmail.com>
+
+This patch series fix some issues, so the openjdk-8/openjre-8 now can build
+with X11 system (headful).
+
+Ming Liu (5):
+  openjdk-8-cross.inc: change a dependency alsa-lib-native to alsa-lib
+  openjdk-8-cross.inc: fix wrong sysroot path
+  openjdk-8-cross.inc: tweak PACKAGECONFIG default value
+  openjdk-8/openjre-8: merge some redundant code
+  openjdk-8-cross.inc: fix a libpng build issue
+
+ recipes-core/openjdk/openjdk-8-cross.inc           | 32 +++++++++++++++++++---
+ recipes-core/openjdk/openjdk-8_102b14.bb           | 14 ----------
+ recipes-core/openjdk/openjre-8_102b14.bb           | 14 ----------
+ .../openjdk8-fix-libpng-neon-build.patch           | 29 ++++++++++++++++++++
+ 4 files changed, 57 insertions(+), 32 deletions(-)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-libpng-neon-build.patch
+
+-- 
+2.7.4
+
 
