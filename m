@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
-	[209.85.214.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 3DFA271D8C
+Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
+	[209.85.214.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1161571D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:29 +0000 (UTC)
-Received: by mail-it0-f66.google.com with SMTP id e132so13852199ite.2
+	Mon, 24 Apr 2017 05:21:31 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id z67so13856685itb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:31 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=j196NGk8mXpCkjc8P1h2YB+ThdelHacmNnN4z6o+7KU=;
-	b=vZPRB/qH5ANyNQQwEaCbNJ8V8ZYGi9PEl2kpuMDOl1exBTnGu6fFtB6P55JgTwu8hC
-	NW9I5e49RMmUtQ3SSiNJe/6YctvYcXNiqrnq34yb8uJK3rnYtGc2qr8POUkr5Gtys6oh
-	ZlxhlQpbxljmA/8j0br5YHxrA21ApyyoypLxOljYSPFeYJUMbluhXI5BPHmYq6z/c5DM
-	uF+4kUCHviG20Gn0tIxz4AmjT6ms4CSvhbPCQzZwJwa0IkztVsuOZA3mThYdC5hp4DUc
-	EQ1K5KrYuwihOU86SDlGSnSR1btKrbXB3CmKSUrRHQKFy/6yWSngWOFzmmmfslVa5pxp
-	803g==
+	bh=S9hSQdjnPRIJgpCWpDY+8VOI+cny9mNRq1m6k/f7LTE=;
+	b=d4B2W9pqgzXVHYrpdMlnk96U1ZNfufmLnRrewLc9rF1ACUKSmVQoC7bOg4bJYpwVHi
+	9MvPVrvMgZKIFiNTulhcbqa5fmdkCPQpC1X8gNnjZ0kauobA9ljJDkwBgAVTtSoXIWH6
+	Vy23Ab1bmnfKWP6oXdmCIOgjZFhdnTp7Vp5qiBUmAwW1Z68KxjRTKyZzOIy3PRdTYlv0
+	BeiprT8Y+ychK7lWw0AxjmI521xIGI69tyWjeFt/ss+Q+Cinrvmh9imgArbBZYN444OH
+	1yX9ucahR+IpwozVN4E2S9GUZdQvbkOqeOj/98p8WsvUsYRsVwKIF3b/nHy5SpFTAHjC
+	ryFg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=j196NGk8mXpCkjc8P1h2YB+ThdelHacmNnN4z6o+7KU=;
-	b=dzniyGTy5HZQAfrfkM7kCX8MDqyCk4cNTDYP42SdlkVKwr/zoHz30UTaDSvXv40CU5
-	TtEI4Jtz2+sRtdYXgIKX1eNOFS2kmcuYYvAN8FMJO+POv6aUXKMniDmavrLTHMOZRmRy
-	L1wLSkQkTsCLyLbhYTVUFWnvbvrT2UCSIKcO2Zbw5DL1GlTBTF6nybPOUj3ER1FIXeiY
-	bIyb+FEFAbwtXrQojaJzojqHiZzJu7LrKR8AzBDCup0eCt5+lKLaWqAd5WO8DSeE9C1f
-	kQFKJ+U/XdwXz0PpTzalUoz6z5CE6KMeKTRitNqijhAvol0DQZc48ph2VK01iYbaGal/
-	GgWQ==
-X-Gm-Message-State: AN3rC/6orr1wwCceJANjZuuNK+lXzxFOdSTMu8/+tBXrdKuDu9rxQzX5
-	UsT9JIz0Fxk25w==
-X-Received: by 10.99.1.198 with SMTP id 189mr22858731pgb.229.1493011291183;
-	Sun, 23 Apr 2017 22:21:31 -0700 (PDT)
+	bh=S9hSQdjnPRIJgpCWpDY+8VOI+cny9mNRq1m6k/f7LTE=;
+	b=dhtZEItfnzjBn9wQhgBpFJsobkldPJ6LRfgeKyAIupwL7O5lPRpzMOD8v805qJcyFG
+	8q/kzI7CzYjahYgW+TixSggRzM7MzPUQ1iB7uAFOhwLGP8OL0ODmfh7ClN7laIO5J4vv
+	4tJg0iKY7LhvvUDXdva/QpE2eMWKGm2SLXGFo3YT3MKM0K/HHxf4Fh+N97do1+vApGTv
+	iTMOCfZFpA9N6afJgLhF63FC+z6N2hXMJ0V9U2uIwdqHq9Mbd1WzF2R0Zd/ffO2s+oCO
+	yVWODgC4Ar36ZXG+oUE+bsBUqKCqmfvnDox/6eC6DsFwYxJZHhAu2T+O8XR1RxGLrKXn
+	JQTw==
+X-Gm-Message-State: AN3rC/7+FZD/PDntg5innDbBv0anGxOvdICa31If56F5a38UOlcJBYF8
+	uLi8usDoH/8yyg==
+X-Received: by 10.84.230.131 with SMTP id e3mr31130069plk.100.1493011293025;
+	Sun, 23 Apr 2017 22:21:33 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.29
+	v13sm24001176pgo.44.2017.04.23.22.21.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:30 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:53 -0700
-Message-Id: <20170424052058.4952-12-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:54 -0700
+Message-Id: <20170424052058.4952-13-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 12/17] squid: Upgrade to 3.5.25
+Subject: [meta-oe][PATCH 13/17] glcompbench: Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,98 +56,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:30 -0000
-
-Add patch to fix throw() errors with gcc7
-Update copyright year to 2017
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:32 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...e-noexcept-instead-of-throw-for-C-11-comp.patch | 48 ++++++++++++++++++++++
- .../squid/{squid_3.5.23.bb => squid_3.5.25.bb}     |  9 ++--
- 2 files changed, 53 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
- rename meta-networking/recipes-daemons/squid/{squid_3.5.23.bb => squid_3.5.25.bb} (92%)
+ ...001-waf-Disable-errors-due-to-Wdeprecated.patch | 31 ++++++++++++++++++++++
+ .../glcompbench/glcompbench_2012.08.bb             |  3 ++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-graphics/glcompbench/glcompbench/0001-waf-Disable-errors-due-to-Wdeprecated.patch
 
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch b/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench/0001-waf-Disable-errors-due-to-Wdeprecated.patch b/meta-oe/recipes-graphics/glcompbench/glcompbench/0001-waf-Disable-errors-due-to-Wdeprecated.patch
 new file mode 100644
-index 000000000..48674c3c5
+index 000000000..deb60161c
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
-@@ -0,0 +1,48 @@
-+From f9150a0dc092ab2cbd47ee428436b747dce323a9 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench/0001-waf-Disable-errors-due-to-Wdeprecated.patch
+@@ -0,0 +1,31 @@
++From 49297e2fbe0420a255cbe67989d0ec539125412c Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 23 Apr 2017 10:28:28 -0700
-+Subject: [PATCH] SquidNew: use noexcept instead of throw for C++11 compilers
++Date: Sun, 23 Apr 2017 10:38:24 -0700
++Subject: [PATCH] waf: Disable errors due to -Wdeprecated
 +
-+Fixes errors with gcc7 which is more pedantic about c++11
-+conformance regarding deprecated features
-+
-+include/SquidNew.h:21:51: error: dynamic exception specifications are deprecated in C++11
-+_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
-+                                                       ^~~~~
++throw() has been deprecated in c++11 and removed
++from c++17, gcc7 is more pedandic about this warning
++we therefore add a workaround to ignore this warning
++for now.
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/SquidNew.h | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
++ wscript | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/include/SquidNew.h b/include/SquidNew.h
-+index 39fcee0..c960347 100644
-+--- a/include/SquidNew.h
-++++ b/include/SquidNew.h
-+@@ -18,19 +18,19 @@
-+  */
-+ #include <new>
++diff --git a/wscript b/wscript
++index 485a9fb..7f59761 100644
++--- a/wscript
+++++ b/wscript
++@@ -79,7 +79,7 @@ def configure(ctx):
++             ctx.check_cfg(package = pkg, uselib_store = uselib, args = '--cflags --libs',
++                           mandatory = True)
 + 
-+-_SQUID_EXTERNNEW_ void *operator new(size_t size) throw (std::bad_alloc)
-++_SQUID_EXTERNNEW_ void *operator new(size_t size) noexcept(false)
-+ {
-+     return xmalloc(size);
-+ }
-+-_SQUID_EXTERNNEW_ void operator delete (void *address) throw()
-++_SQUID_EXTERNNEW_ void operator delete (void *address) noexcept(true)
-+ {
-+     xfree(address);
-+ }
-+-_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
-++_SQUID_EXTERNNEW_ void *operator new[] (size_t size) noexcept(false)
-+ {
-+     return xmalloc(size);
-+ }
-+-_SQUID_EXTERNNEW_ void operator delete[] (void *address) throw()
-++_SQUID_EXTERNNEW_ void operator delete[] (void *address) noexcept(true)
-+ {
-+     xfree(address);
-+ }
++-    ctx.env.append_unique('CXXFLAGS', '-Wall -Werror -std=c++11 -Wextra'.split(' '))
+++    ctx.env.append_unique('CXXFLAGS', '-Wall -Werror -std=c++11 -Wextra -Wno-error=deprecated'.split(' '))
++ 
++     # Prepend -O# and -g flags so that they can be overriden by the CFLAGS environment variable
++     if Options.options.opt:
 +-- 
 +2.12.2
 +
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.23.bb b/meta-networking/recipes-daemons/squid/squid_3.5.25.bb
-similarity index 92%
-rename from meta-networking/recipes-daemons/squid/squid_3.5.23.bb
-rename to meta-networking/recipes-daemons/squid/squid_3.5.25.bb
-index 0fe9673af..5116383b8 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.23.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.25.bb
-@@ -21,12 +21,13 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
-            file://volatiles.03_squid \
-            file://set_sysroot_patch.patch \
-            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
+diff --git a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+index 7cf9692f6..e8465855d 100755
+--- a/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
++++ b/meta-oe/recipes-graphics/glcompbench/glcompbench_2012.08.bb
+@@ -11,7 +11,8 @@ SRC_URI = "https://launchpad.net/glcompbench/trunk/${PV}/+download/${BPN}-${PV}.
+            file://Fix_space_issues.patch \
+            file://Fix_auto_ptr_deprecated.patch \
+            file://0001-build-Specify-std-c-11-on-cmdline.patch \
 -"
--SRC_URI[md5sum] = "b9e5603f00b0c40109610667d8693b22"
--SRC_URI[sha256sum] = "4384564e6227fbb4c18626d663e1b47912d3507b596ed997f2149f10dd8d70bd"
-+           file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
++           file://0001-waf-Disable-errors-due-to-Wdeprecated.patch \
 +           "
-+SRC_URI[md5sum] = "c34b228129a755f363367c45c46287ba"
-+SRC_URI[sha256sum] = "0bfd6182154b7f29574d71c659f1cfd1b7d9be9356895dac70dc0f3696a0639b"
  
- LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
--                    file://errors/COPYRIGHT;md5=0d98c4448c368d146f31a970bb0ced21 \
-+                    file://errors/COPYRIGHT;md5=8861130fae91400bcf99b66f133172b3 \
-                    "
- DEPENDS = "libtool krb5 openldap db cyrus-sasl"
- 
+ SRC_URI[md5sum] = "c939d9156fe940960098f38707fea827"
+ SRC_URI[sha256sum] = "b04b738cec06c6786ceafa86e4735fd8b971c078265754854ef356b0379542ee"
 -- 
 2.12.2
 
