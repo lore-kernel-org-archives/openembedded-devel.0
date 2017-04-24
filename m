@@ -1,50 +1,46 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
-	[209.85.216.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 51D0E779C9
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 15:54:45 +0000 (UTC)
-Received: by mail-qt0-f178.google.com with SMTP id c45so117223243qtb.1
-	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 08:54:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B27AB77ACB;
+	Mon, 24 Apr 2017 16:10:41 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id y10so7382225wmh.0;
+	Mon, 24 Apr 2017 09:10:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=lMahNAxLvL2TYgy0fW6XJxtIUkOicu+q92hldmsbRco=;
-	b=mDZigjGapeGcRtPOFCPu1+fJI0EKoSiQoe3KbqKHeIPM/dkahdrbxsxhKedA7ckkiP
-	3Tm4OzaLRcK/HEAwCrHlZLiv6raa/FEWNIoXS/qkPguOeec1gmKjQM4pRT57WVXY4vo7
-	WuGUUsC2Q5vwpVdWsS3KYDBpoV12EuJvthcbkx+Fe6gdMkJ7X+dTXnzC6MUKjdJhQ9mZ
-	TmoYuApa84SK2npNcpXoofsyjVbSRI4BePrHuKNUAk0m3LDQFULmJfINuTS5SzreuPc+
-	ybRb81Fie9qeYy6fnqQtM8T5vvFovXTnWjLi18jKRiCDIcOpBcPXD/LOuWPnV9C7Ct5c
-	45ng==
+	:cc; bh=3lTFvUMUkRxYYPIvTjWkm5ncz01s6svRETXIlx9LZvE=;
+	b=sbd1zSqvGMU0230B3GbDzDuJMGpbLhSrLGyoopjgc+m48TY7oioOzOj9ODzRsqsPh+
+	OIslTXTxWbEoLRsUZKkTREMzN7IZcBVtVAHzsddg5u5Ree6gbLIcD76XIyeArzaXZvpE
+	/okzz5++R4Jb8vRF5p5+HFEasl4NBc9ZFNPt/D8h1yT1VGu97rSFYT7ZODg9Y1qi4Uvt
+	emqjJ2fzHWlUUM7D+dJhL5W2QCqtxTos4nbVC+AD7vYNn6Sl6AyvkkdKV9diyEZQPfPS
+	5Eu1ynOlTMKuG971EZ31ZMnHRScZBmE6URX8xqYJ7I+/WO+r1uyIK2Fvf6pw5acKtgnL
+	kp6g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=lMahNAxLvL2TYgy0fW6XJxtIUkOicu+q92hldmsbRco=;
-	b=pcNa2x8quxYkfTANM8MG4JaEQD3B0g/+dfjJ6VrYaAlIcqI30h2i08l3e2+dWKKbLu
-	vjMZewPrgPMOwqKCact0CD4Pvq85LWY3FhzYBNIpT1VSHuhdY//EG6KmNEMo82J3Rtrk
-	nWLMUK910ICO/d1i3W2bZxXmMm3TH+nQx9weTNPiaB3DS8k7W2euFy8bAjWPt9kdrcds
-	k/xMBE+xMw6L1aIYbzGTYLBROBJ2ebS67XPPeCxi4IkLBeurfjN/9UErRBG7Di1BbUAg
-	r0Nmz98fzC6gDqzJnf0pAjeJccA+267TnFzHqsqciho5j0ZHx41xvp3HQqQVR46xM0tN
-	7dKA==
-X-Gm-Message-State: AN3rC/7UXG7dqKHz8+WyQr1jA2TUvc5YJiJ+1nH4dU4vSnAe0RnMS/E4
-	SDXqQtqSAfDESB42e3bOJ2JEhqcwoEip
-X-Received: by 10.200.34.242 with SMTP id g47mr25803914qta.109.1493049287100; 
-	Mon, 24 Apr 2017 08:54:47 -0700 (PDT)
+	bh=3lTFvUMUkRxYYPIvTjWkm5ncz01s6svRETXIlx9LZvE=;
+	b=rGOvq93oJ2H2B2h/mEjUCY70uLNa1Gd0oElNFZE4Vs5pYqUiJvwE27aRTx06inENCt
+	C54gFQ6Z5cVY0DqspZkNQvDfinL6/x6yilxmJOiAVJASFMLbIDdc5Gj1Zvb6NWpvVsAx
+	YvyPmhEt7nSMFkYYCTxbLqVqFy2YYr27EPKidAPUpgZXlG0ApZFFuY3wuZoO8AG/oFz5
+	hOyYmsiXMxqWWP3t1y311tiRB4TFMUIdhAjSJmtxnedI+qRpPqgwT7O3VyzABshRMvh6
+	h8igcsf7OqGNxltLAP/G4appPuR2gBPEsghdANxJ91w3EHb375+NRwR9fDTJXeA1VBjl
+	gvjg==
+X-Gm-Message-State: AN3rC/52SZVJKKqJ4tb79hrhCJvx9ind6hhOjsTidnVK1214NnS5M6/n
+	YfBwzLGH5ezMI9nt/EcWLEbsknsFsQ==
+X-Received: by 10.80.178.228 with SMTP id p91mr1654343edd.131.1493050242763;
+	Mon, 24 Apr 2017 09:10:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 08:54:26 -0700 (PDT)
-In-Reply-To: <CAJTo0LaWkRxjaF4j1HHhUqFDYYTmGADTuiLo8zqPwR+wKSbY2A@mail.gmail.com>
+Received: by 10.80.180.141 with HTTP; Mon, 24 Apr 2017 09:10:12 -0700 (PDT)
+In-Reply-To: <CAJTo0LZJSZ-UJc7zTyYNf3YYKFD3mu=-zprQroZwxB1SZBQ+Bg@mail.gmail.com>
 References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
 	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
 	<CAMKF1sqfvtQPWN5Yuz3RPYkXpneS+XWcYmit_=bcvKGo3_hx8w@mail.gmail.com>
 	<CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
 	<CAJTo0LaWkRxjaF4j1HHhUqFDYYTmGADTuiLo8zqPwR+wKSbY2A@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 24 Apr 2017 16:54:26 +0100
-Message-ID: <CAJTo0LZJSZ-UJc7zTyYNf3YYKFD3mu=-zprQroZwxB1SZBQ+Bg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CAJTo0LZJSZ-UJc7zTyYNf3YYKFD3mu=-zprQroZwxB1SZBQ+Bg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Apr 2017 09:10:12 -0700
+Message-ID: <CAMKF1spRYm9yYhOVzOcA+5BPjATW_gLZfKmBCkZgj0MKZX=YmA@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
 	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
@@ -62,18 +58,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 15:54:46 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 16:10:50 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 24 April 2017 at 10:47, Burton, Ross <ross.burton@intel.com> wrote:
-
-> The updated glibc recipe doesn't appear to be very happy:
-> https://autobuilder.yocto.io/builders/buildtools/
-> builds/240/steps/BuildImages/logs/stdio
+On Mon, Apr 24, 2017 at 8:54 AM, Burton, Ross <ross.burton@intel.com> wrote:
 >
+> On 24 April 2017 at 10:47, Burton, Ross <ross.burton@intel.com> wrote:
+>>
+>> The updated glibc recipe doesn't appear to be very happy:
+>> https://autobuilder.yocto.io/builders/buildtools/builds/240/steps/BuildImages/logs/stdio
+>
+>
+> Note that every nativesdk-glibc build is failing like this, so that's SDKs
+> broken.
 
-Note that every nativesdk-glibc build is failing like this, so that's SDKs
-broken.
+thanks, yes I haven't been testing SDK yet, whats the gcc version on
+your build host ?
 
-Ross
+>
+> Ross
 
