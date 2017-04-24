@@ -1,26 +1,22 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C9BE72F38
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 80E3971DDA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 08:04:53 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3O84sZ7029785
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 24 Apr 2017 08:27:09 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v3O8R8DW025898
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 01:04:55 -0700 (PDT)
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.201) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 24 Apr 2017 01:04:54 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Apr 2017 16:06:43 +0800
-Message-ID: <1493021203-30755-3-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1493021203-30755-1-git-send-email-Qi.Chen@windriver.com>
-References: <1493021203-30755-1-git-send-email-Qi.Chen@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/3] multipath-tools: depend on libdevmapper instead of lvm2
+	Mon, 24 Apr 2017 10:27:08 +0200
+Received: from dev.sbt.siemens.com ([139.16.73.49])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v3O8R8lX031056;
+	Mon, 24 Apr 2017 10:27:08 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 24 Apr 2017 10:11:00 +0200
+Message-Id: <1493021460-13502-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] nodejs: update to 4.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,35 +29,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 08:04:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Apr 2017 08:27:12 -0000
 
-From: Chen Qi <Qi.Chen@windriver.com>
-
-Now we've separted libdevmapper out of lvm2 recipe, we need to change
-multipath-tools to depend on libdevmapper instead of lvm2 to avoid
-build error like below.
-
-  fatal error: libdevmapper.h: No such file or directory
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-devtools/nodejs/{nodejs_4.7.3.bb => nodejs_4.8.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/nodejs/{nodejs_4.7.3.bb => nodejs_4.8.2.bb} (96%)
 
-diff --git a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-index a63982e..ebe47cc 100644
---- a/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-+++ b/meta-oe/recipes-support/multipath-tools/multipath-tools_git.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "The upstream project used to drive the Device Mapper multipathing driver"
+diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_4.8.2.bb
+similarity index 96%
+rename from meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb
+rename to meta-oe/recipes-devtools/nodejs/nodejs_4.8.2.bb
+index d4166f5..ae84ad3 100644
+--- a/meta-oe/recipes-devtools/nodejs/nodejs_4.7.3.bb
++++ b/meta-oe/recipes-devtools/nodejs/nodejs_4.8.2.bb
+@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+ SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
+     file://no-registry.patch \
+ "
+-SRC_URI[md5sum] = "80db1fad0224f6f44a630ef4abea333a"
+-SRC_URI[sha256sum] = "7f35dc7adf0b348857b98e543a54c2b2cafb92c27d9d32799a81ac66cbf035f0"
++SRC_URI[md5sum] = "aea6139f952bb7e1d66f76afedee813c"
++SRC_URI[sha256sum] = "b961350b8490c791bdd3663925662ba0fbe01e004b43f1c2779baffcc816b930"
  
--DEPENDS = "lvm2 libaio liburcu readline udev"
-+DEPENDS = "libdevmapper libaio liburcu readline udev"
- 
- LICENSE = "LGPLv2"
+ S = "${WORKDIR}/node-v${PV}"
  
 -- 
-2.1.0
+2.1.4
 
 
