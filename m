@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DE3771D8C
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DFA271D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:28 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id x188so13076400itb.3
+	Mon, 24 Apr 2017 05:21:29 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id e132so13852199ite.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:30 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=A/007H3gXydtS23wEbyqBhuz8RYX0evYYUGXpXTBXMQ=;
-	b=iyacM4+DFVVZQTKgyYgmMYodObY20m3JckGFoWUpMS2FG7WVUfU9GwvushrAHL73UI
-	c6MwzJfzF/09UhBfSzX7BvVPtqGDi5gseYcWjrtrQj/dPU0qLe/j8E2wg5IrAiybrfjf
-	1r0FjI3kDGZZgl1Ycafbq8tXwZaBVVYBM8JznOZ0CKmygH4W/Tiau6GccMe/BRKbREHB
-	/wCpSWPaTmF9NUQBs2XVHgGR106ZjLsN5v3lx+cm9MhX64h9jlvNKqAkxXrUjrBWNBRK
-	wlIjdcpT/Th7HyuwFlA1S0rGYKAGJWw0ObjtyWK4NzD08cxpKNRWnNzEaA/3RZmruSPz
-	q7Eg==
+	bh=j196NGk8mXpCkjc8P1h2YB+ThdelHacmNnN4z6o+7KU=;
+	b=vZPRB/qH5ANyNQQwEaCbNJ8V8ZYGi9PEl2kpuMDOl1exBTnGu6fFtB6P55JgTwu8hC
+	NW9I5e49RMmUtQ3SSiNJe/6YctvYcXNiqrnq34yb8uJK3rnYtGc2qr8POUkr5Gtys6oh
+	ZlxhlQpbxljmA/8j0br5YHxrA21ApyyoypLxOljYSPFeYJUMbluhXI5BPHmYq6z/c5DM
+	uF+4kUCHviG20Gn0tIxz4AmjT6ms4CSvhbPCQzZwJwa0IkztVsuOZA3mThYdC5hp4DUc
+	EQ1K5KrYuwihOU86SDlGSnSR1btKrbXB3CmKSUrRHQKFy/6yWSngWOFzmmmfslVa5pxp
+	803g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=A/007H3gXydtS23wEbyqBhuz8RYX0evYYUGXpXTBXMQ=;
-	b=toY2YeqcUcmwym6fwNFGMzLh0IXP8+e4VZAUtdkPLnFN+G8/eEDzYwTafiww5ZK5+k
-	qTvp/wDzKkox1Qs+q3MIQ1ZgRqK6C60lExbhmwXpIvdeFd3UzZAboD7PPMNylY/HTGdQ
-	gE4m0vY81wzNXdwk/UXOP5Gq4wgdh/mQr0gW9Rv3JVpUhiYdmKkQEZo72t37p/5ryA2P
-	Y2Lpb3+WiSPTLPzzMUYbkohFoeJpvN6eHiAhflN+oH0yb14EGb2pKLAzqTHkE5AwzTya
-	2wXPkrsELz2l1/wDbAMxL7vG7i67wJAZPH7Jeugbm2R9iNztg8jm1aSQLesK88QPCV4G
-	Z0HA==
-X-Gm-Message-State: AN3rC/5si32rI5EsoxjssDh1Iy51Vf30v4qPzXGv50aoyHPfV0XhxrO0
-	+yY9iTKo1sVYA6OD
-X-Received: by 10.84.130.36 with SMTP id 33mr30450854plc.111.1493011289568;
-	Sun, 23 Apr 2017 22:21:29 -0700 (PDT)
+	bh=j196NGk8mXpCkjc8P1h2YB+ThdelHacmNnN4z6o+7KU=;
+	b=dzniyGTy5HZQAfrfkM7kCX8MDqyCk4cNTDYP42SdlkVKwr/zoHz30UTaDSvXv40CU5
+	TtEI4Jtz2+sRtdYXgIKX1eNOFS2kmcuYYvAN8FMJO+POv6aUXKMniDmavrLTHMOZRmRy
+	L1wLSkQkTsCLyLbhYTVUFWnvbvrT2UCSIKcO2Zbw5DL1GlTBTF6nybPOUj3ER1FIXeiY
+	bIyb+FEFAbwtXrQojaJzojqHiZzJu7LrKR8AzBDCup0eCt5+lKLaWqAd5WO8DSeE9C1f
+	kQFKJ+U/XdwXz0PpTzalUoz6z5CE6KMeKTRitNqijhAvol0DQZc48ph2VK01iYbaGal/
+	GgWQ==
+X-Gm-Message-State: AN3rC/6orr1wwCceJANjZuuNK+lXzxFOdSTMu8/+tBXrdKuDu9rxQzX5
+	UsT9JIz0Fxk25w==
+X-Received: by 10.99.1.198 with SMTP id 189mr22858731pgb.229.1493011291183;
+	Sun, 23 Apr 2017 22:21:31 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.28
+	v13sm24001176pgo.44.2017.04.23.22.21.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:52 -0700
-Message-Id: <20170424052058.4952-11-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:53 -0700
+Message-Id: <20170424052058.4952-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 11/17] lowpan-tools: Fix build with gcc7
+Subject: [meta-networking][PATCH 12/17] squid: Upgrade to 3.5.25
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,64 +56,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:28 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:30 -0000
+
+Add patch to fix throw() errors with gcc7
+Update copyright year to 2017
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Remove-newline-from-format-line.patch     | 32 ++++++++++++++++++++++
- .../lowpan-tools/lowpan-tools_git.bb               |  1 +
- 2 files changed, 33 insertions(+)
- create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
+ ...e-noexcept-instead-of-throw-for-C-11-comp.patch | 48 ++++++++++++++++++++++
+ .../squid/{squid_3.5.23.bb => squid_3.5.25.bb}     |  9 ++--
+ 2 files changed, 53 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
+ rename meta-networking/recipes-daemons/squid/{squid_3.5.23.bb => squid_3.5.25.bb} (92%)
 
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
+diff --git a/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch b/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
 new file mode 100644
-index 000000000..1453b75d5
+index 000000000..48674c3c5
 --- /dev/null
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
-@@ -0,0 +1,32 @@
-+From a36afac485745cf980fba1809526f2025cb4d101 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
+@@ -0,0 +1,48 @@
++From f9150a0dc092ab2cbd47ee428436b747dce323a9 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 23 Apr 2017 00:16:45 -0700
-+Subject: [PATCH] Remove newline from format line
++Date: Sun, 23 Apr 2017 10:28:28 -0700
++Subject: [PATCH] SquidNew: use noexcept instead of throw for C++11 compilers
 +
-+Fixes
++Fixes errors with gcc7 which is more pedantic about c++11
++conformance regarding deprecated features
 +
-+error: '__builtin___snprintf_chk' output truncated before the last format character [-Werror=format-truncation=]
-+     "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x\n",
-+                                               ^
++include/SquidNew.h:21:51: error: dynamic exception specifications are deprecated in C++11
++_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
++                                                       ^~~~~
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ addrdb/addrdb.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ include/SquidNew.h | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/addrdb/addrdb.c b/addrdb/addrdb.c
-+index 4bb7f79..05d53f3 100644
-+--- a/addrdb/addrdb.c
-++++ b/addrdb/addrdb.c
-+@@ -178,7 +178,7 @@ int addrdb_dump_leases(const char *lease_file)
-+ 			continue;
-+ 		}
-+ 		snprintf(hwaddr_buf, sizeof(hwaddr_buf),
-+-				"%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x\n",
-++				"%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x",
-+ 				lease->hwaddr[0], lease->hwaddr[1],
-+ 				lease->hwaddr[2], lease->hwaddr[3],
-+ 				lease->hwaddr[4], lease->hwaddr[5],
++diff --git a/include/SquidNew.h b/include/SquidNew.h
++index 39fcee0..c960347 100644
++--- a/include/SquidNew.h
+++++ b/include/SquidNew.h
++@@ -18,19 +18,19 @@
++  */
++ #include <new>
++ 
++-_SQUID_EXTERNNEW_ void *operator new(size_t size) throw (std::bad_alloc)
+++_SQUID_EXTERNNEW_ void *operator new(size_t size) noexcept(false)
++ {
++     return xmalloc(size);
++ }
++-_SQUID_EXTERNNEW_ void operator delete (void *address) throw()
+++_SQUID_EXTERNNEW_ void operator delete (void *address) noexcept(true)
++ {
++     xfree(address);
++ }
++-_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
+++_SQUID_EXTERNNEW_ void *operator new[] (size_t size) noexcept(false)
++ {
++     return xmalloc(size);
++ }
++-_SQUID_EXTERNNEW_ void operator delete[] (void *address) throw()
+++_SQUID_EXTERNNEW_ void operator delete[] (void *address) noexcept(true)
++ {
++     xfree(address);
++ }
 +-- 
 +2.12.2
 +
-diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-index 0dcc6a785..be73f8ae4 100644
---- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-+++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
-@@ -13,6 +13,7 @@ SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
-            file://0001-Fix-build-errors-with-clang.patch \
-            file://0001-addrdb-coord-config-parse.y-add-missing-time.h-inclu.patch \
-            file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
-+           file://0001-Remove-newline-from-format-line.patch \
-            "
- SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
+diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.23.bb b/meta-networking/recipes-daemons/squid/squid_3.5.25.bb
+similarity index 92%
+rename from meta-networking/recipes-daemons/squid/squid_3.5.23.bb
+rename to meta-networking/recipes-daemons/squid/squid_3.5.25.bb
+index 0fe9673af..5116383b8 100644
+--- a/meta-networking/recipes-daemons/squid/squid_3.5.23.bb
++++ b/meta-networking/recipes-daemons/squid/squid_3.5.25.bb
+@@ -21,12 +21,13 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
+            file://volatiles.03_squid \
+            file://set_sysroot_patch.patch \
+            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
+-"
+-SRC_URI[md5sum] = "b9e5603f00b0c40109610667d8693b22"
+-SRC_URI[sha256sum] = "4384564e6227fbb4c18626d663e1b47912d3507b596ed997f2149f10dd8d70bd"
++           file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
++           "
++SRC_URI[md5sum] = "c34b228129a755f363367c45c46287ba"
++SRC_URI[sha256sum] = "0bfd6182154b7f29574d71c659f1cfd1b7d9be9356895dac70dc0f3696a0639b"
+ 
+ LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
+-                    file://errors/COPYRIGHT;md5=0d98c4448c368d146f31a970bb0ced21 \
++                    file://errors/COPYRIGHT;md5=8861130fae91400bcf99b66f133172b3 \
+                    "
+ DEPENDS = "libtool krb5 openldap db cyrus-sasl"
  
 -- 
 2.12.2
