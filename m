@@ -1,22 +1,24 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id BFB8971D9E
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E6E5972F18
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 08:36:19 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v3O8aKbT014953
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Mon, 24 Apr 2017 10:36:20 +0200
-Received: from dev.sbt.siemens.com ([139.16.73.49])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v3O8aKns022212;
-	Mon, 24 Apr 2017 10:36:20 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Apr 2017 10:36:15 +0200
-Message-Id: <1493022975-20228-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Cc: Pascal Bach <pascal.bach@nextrem.ch>
-Subject: [meta-python][PATCH] python-pytz, python3-pytz: update to 2017.2
+	Mon, 24 Apr 2017 08:38:17 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3O8cI0x013286
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Apr 2017 01:38:19 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 24 Apr 2017 01:38:18 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 24 Apr 2017 04:38:17 -0400
+Message-ID: <1493023097-80545-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
+MIME-Version: 1.0
+Subject: [meta-filesystems][PATCH] ntfs-3g-ntfsprogs: fix install failed while host dir not exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,52 +31,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 08:36:22 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 08:38:18 -0000
+Content-Type: text/plain
 
-From: Pascal Bach <pascal.bach@nextrem.ch>
+While cross compiling, if the dir of "$(rootlibdir)" and "$(libdir)"
+(such as "/usr/lib64") do not exist on host system, the do_instal failed.
+-----------------------
+make[3]: Entering directory `tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/build/libntfs-3g'
+if [ ! "/usr/lib64" -ef "/usr/lib64" ]; then \
+    mv -f "tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/image//usr/lib64"/libntfs-3g.so* \
+        "tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/image//usr/lib64";  \
+fi
+mv:...are the same file
+-----------------------
 
-- License checksum changed due to copyright year update to 2017.
-- Source package extension changed form to zip.
+Use `=' rather than `-ef' to compare them, the cross compile does not
+care about host dir.
 
-Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-pytz.inc                | 7 ++++---
- .../python/{python-pytz_2016.10.bb => python-pytz_2017.2.bb}       | 0
- .../python/{python3-pytz_2016.10.bb => python3-pytz_2017.2.bb}     | 0
- 3 files changed, 4 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytz_2016.10.bb => python-pytz_2017.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytz_2016.10.bb => python3-pytz_2017.2.bb} (100%)
+ ...Makefile.am-fix-install-failed-while-host.patch | 52 ++++++++++++++++++++++
+ .../ntfs-3g-ntfsprogs_2017.3.23.bb                 |  4 +-
+ 2 files changed, 55 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-pytz.inc b/meta-python/recipes-devtools/python/python-pytz.inc
-index 17ffbfd..1c6564b 100644
---- a/meta-python/recipes-devtools/python/python-pytz.inc
-+++ b/meta-python/recipes-devtools/python/python-pytz.inc
-@@ -1,12 +1,13 @@
- SUMMARY = "World timezone definitions, modern and historical"
- HOMEPAGE = "http://pythonhosted.org/pytz"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=22b38951eb857cf285a4560a914b7cd6"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=39ea92752a35cf67d8a885d8e3af3c69"
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch
+new file mode 100644
+index 0000000..7b8eec7
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/files/0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch
+@@ -0,0 +1,52 @@
++From 575591caf1e8972f765885679b76787ef92de77b Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Mon, 24 Apr 2017 04:24:10 -0400
++Subject: [PATCH] libntfs-3g/Makefile.am: fix install failed while host dir not exist
++
++While cross compiling, if the dir of "$(rootlibdir)" and "$(libdir)"
++(such as "/usr/lib64") do not exist on host system, the do_instal failed.
++-----------------------
++make[3]: Entering directory `tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/build/libntfs-3g'
++if [ ! "/usr/lib64" -ef "/usr/lib64" ]; then \
++    mv -f "tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/image//usr/lib64"/libntfs-3g.so* \
++        "tmp/work/core2-64-wrs-linux/ntfs-3g-ntfsprogs/2017.3.23-r0/image//usr/lib64";  \
++fi
++mv:...are the same file
++-----------------------
++
++Use `=' rather than `-ef' to compare them, the cross compile does not
++care about host dir.
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ libntfs-3g/Makefile.am | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/libntfs-3g/Makefile.am b/libntfs-3g/Makefile.am
++index d6b150e..806109d 100644
++--- a/libntfs-3g/Makefile.am
+++++ b/libntfs-3g/Makefile.am
++@@ -59,15 +59,15 @@ endif
++ # And create ldscript or symbolic link from /usr
++ install-exec-hook: install-rootlibLTLIBRARIES
++ if INSTALL_LIBRARY
++-	if [ ! "$(rootlibdir)" -ef "$(libdir)" ]; then \
+++	if [ "$(rootlibdir)" != "$(libdir)" ]; then \
++ 		$(MV) -f "$(DESTDIR)/$(libdir)"/libntfs-3g.so* "$(DESTDIR)/$(rootlibdir)";  \
++ 	fi
++ if GENERATE_LDSCRIPT
++-	if [ ! "$(rootlibdir)" -ef "$(libdir)" ]; then \
+++	if [ "$(rootlibdir)" != "$(libdir)" ]; then \
++ 		$(install_sh_PROGRAM) "libntfs-3g.script.so" "$(DESTDIR)/$(libdir)/libntfs-3g.so"; \
++ 	fi
++ else
++-	if [ ! "$(rootlibdir)" -ef "$(libdir)" ]; then \
+++	if [ "$(rootlibdir)" != "$(libdir)" ]; then \
++ 		$(LN_S) "$(rootlibdir)/libntfs-3g.so" "$(DESTDIR)/$(libdir)/libntfs-3g.so"; \
++ 	fi
++ endif
++-- 
++2.8.1
++
+diff --git a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
+index 63627de..9e77766 100644
+--- a/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
++++ b/meta-filesystems/recipes-filesystems/ntfs-3g-ntfsprogs/ntfs-3g-ntfsprogs_2017.3.23.bb
+@@ -6,7 +6,9 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552 \
+                     file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
  
- inherit pypi
-+PYPI_PACKAGE_EXT = "zip"
- 
--SRC_URI[md5sum] = "cc9f16ba436efabdcef3c4d32ae4919c"
--SRC_URI[sha256sum] = "9a43e20aa537cfad8fe7a1715165c91cb4a6935d40947f2d070e4c80f2dcd22b"
-+SRC_URI[md5sum] = "f89bde8a811c8a1a5bac17eaaa94383c"
-+SRC_URI[sha256sum] = "f5c056e8f62d45ba8215e5cb8f50dfccb198b4b9fbea8500674f3443e4689589"
- 
- RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-datetime \
-diff --git a/meta-python/recipes-devtools/python/python-pytz_2016.10.bb b/meta-python/recipes-devtools/python/python-pytz_2017.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytz_2016.10.bb
-rename to meta-python/recipes-devtools/python/python-pytz_2017.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytz_2016.10.bb b/meta-python/recipes-devtools/python/python3-pytz_2017.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytz_2016.10.bb
-rename to meta-python/recipes-devtools/python/python3-pytz_2017.2.bb
+-SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz"
++SRC_URI = "http://tuxera.com/opensource/ntfs-3g_ntfsprogs-${PV}.tgz \
++           file://0001-libntfs-3g-Makefile.am-fix-install-failed-while-host.patch \
++"
+ S = "${WORKDIR}/ntfs-3g_ntfsprogs-${PV}"
+ SRC_URI[md5sum] = "d97474ae1954f772c6d2fa386a6f462c"
+ SRC_URI[sha256sum] = "3e5a021d7b761261836dcb305370af299793eedbded731df3d6943802e1262d5"
 -- 
-2.1.4
+2.8.1
 
 
