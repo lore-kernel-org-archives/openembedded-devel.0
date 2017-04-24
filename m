@@ -1,45 +1,46 @@
 Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DADC779DC;
-	Mon, 24 Apr 2017 12:26:39 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id c45so111415311qtb.1;
-	Mon, 24 Apr 2017 05:26:41 -0700 (PDT)
+Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9696B77A4F;
+	Mon, 24 Apr 2017 12:27:15 +0000 (UTC)
+Received: by mail-qt0-f177.google.com with SMTP id g60so111734161qtd.3;
+	Mon, 24 Apr 2017 05:27:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+Tqx8r17HzutWFonJ5rY1yVUAJOhQbSpRKn8t5nX+dc=;
-	b=S+51i03POUcP/N7snT1Tv91Y28Dp8n+Vy6aYo2E1jg8i78UE1l6oPDtO7PVPFhSxw8
-	60XNP05JWhbI0SzIB/9GQ6qUKalrlnGztI6HJpqaDp7Jv7GeicRFjOpF8MHxPzQ6eAHt
-	QKxhc3kia3CUL2L8WY4jWeVEln7Op6LGv38XLcib091jEDUwqAOPgIN/xdL683LUH2/C
-	3E/T+F2pB43/y5ThyYD1yVdR6nCfBKMA5DBeKhUiY1k2Rai/iyexVc+WmTWKEPuNCXij
-	GU+HQ/xKy4IJhGhFX62y+fES5O+oNLBM4+BRUUchwmQFydqzQPbNOagp5KLtfZaJziuA
-	RDMQ==
+	:cc; bh=+hKqVGjXYtlnHq2NRWbFWwWB1DYMCSB36FF+9EyOhd0=;
+	b=V5f6aLbU37/tQlmBpJEMzns5amNpjaYGN9GXpOjDC9vEuBTUdwePqqQXuI/m0X5i0m
+	6fJmPWwKBVQIOndrZFZh6yOaBLklv3Xa2C/Od2k8ByjHGAAm5hEIXY8sPUZ9ZLTkwe5K
+	xKcMd2mK4zTZLtCo+lBm3geSZfSXd7gAEfuZg9c8D9Ux+IDGnHQIlaQzbta8vJMIH2zo
+	oKeF2574cd8c2J1CNy+Bajw9rsMuOcNovhVoAswR+KdoElSnrUoVp1+AcRdnYBj3CsDG
+	g6kAWbFscgLBNTffVj5S62cD3qJjDt3fw7UQ2JFnxWS+/4luOU78yectyg/MbL1QuYZs
+	myTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=+Tqx8r17HzutWFonJ5rY1yVUAJOhQbSpRKn8t5nX+dc=;
-	b=W1QgSMJtDZ5N3AWZpWHpt7YMKCJ5/dp06wt/8Z3jYrGUtw0BpEhgCwwPA3xxNYFXlq
-	Ufjw/OEp7QypgGSRUuu5XKM0YkEGiWUf/Q5NcjDXytq5IiUupXg/I169nvT6/Db1PLbV
-	nBUa4bk0TyKLKJE8svgPs8wEqPm2ZWGXsVgmMCJ0Fx9gH+JZ+j1+TCXjLH2V0ebZx+h8
-	CAgjulKUfbywOs0Rht7gS27xs+CxxY5baFfcKTNtrzwt8Rqz/x6mlv8CaOJxxsvenJMl
-	UR5gyWCA9ypFilxIUfZ18NhI9Y59nkI7aLJyFxnLZOAUE2mEBdC1CfykFrT9ykldqhiq
-	EKkg==
-X-Gm-Message-State: AN3rC/4+Mst1bQlmRMx0PTbD3IByfR9sPlm7Yp8LlOnVptTNrHgNN3c7
-	Vp+7Y3QZBxJTC5U5T+6XZooA3Qmm+g==
-X-Received: by 10.237.34.136 with SMTP id p8mr26824535qtc.282.1493036801225;
-	Mon, 24 Apr 2017 05:26:41 -0700 (PDT)
+	bh=+hKqVGjXYtlnHq2NRWbFWwWB1DYMCSB36FF+9EyOhd0=;
+	b=H8U788ciDOz+kTP7A0oJ4px5HV8e432vj28RBW5E/O2Y/EFkUpDLrvsatShwwKreJh
+	1QQcfa7jx3Ix9B+p3xNSqnYeo/kHKw7YbbIbQsPYDUjwMcT2QsMNxqpjxOUvtcMyK5bH
+	AX9ctgVrLVM6iE+DJ0fSScEDf+7vdylWhmjifJGpGBLwc9/QdfRzxN+XC2lhNsfhMqjz
+	PiM3aAS2Gb5SMmQPmX6olqnFJd3exIiiZb3zGwnTMHJ7iQuIeO2vVzUrgI7Inz9QA4d0
+	RoyFZaKahtAwfZRJkCuek8oR6fucb9orC3FHCEZcVwtY6rrNn2lXzN9sSNi8zsbV/GX1
+	JR0Q==
+X-Gm-Message-State: AN3rC/4bjDpt6eepdc1Ipz78nofYwknGDFFEaYZ9FznT8H1cPZ7sZZz4
+	c1one7j3NAmRAq3aPD1m/n4908CdSQ==
+X-Received: by 10.237.36.105 with SMTP id s38mr27229173qtc.185.1493036836436; 
+	Mon, 24 Apr 2017 05:27:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.12.145.143 with HTTP; Mon, 24 Apr 2017 05:26:40 -0700 (PDT)
-In-Reply-To: <CAJTo0LYc7nRX2zsPJkP3ZdmnenBxP=fCNUbc_H6L1vePDHjn_g@mail.gmail.com>
+Received: by 10.12.145.143 with HTTP; Mon, 24 Apr 2017 05:27:15 -0700 (PDT)
+In-Reply-To: <CAJTo0LZxsyHC7zjc7Z=wdS5_7NizgnCh=qkPM5munBkGWOmyGg@mail.gmail.com>
 References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
 	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
 	<CADkTA4MjffrJ13GxaEAQusEU10jj0dUcUsyea36Y2gCy7HCVmA@mail.gmail.com>
 	<CADkTA4OgpwhRtmR4+4kurnhBUQoap3E3kKoRTe4fNMBFOEp8hw@mail.gmail.com>
 	<CAJTo0LYc7nRX2zsPJkP3ZdmnenBxP=fCNUbc_H6L1vePDHjn_g@mail.gmail.com>
+	<CAJTo0LZxsyHC7zjc7Z=wdS5_7NizgnCh=qkPM5munBkGWOmyGg@mail.gmail.com>
 From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Mon, 24 Apr 2017 08:26:40 -0400
-Message-ID: <CADkTA4No0hpHXr2BtC9BCXQaUU_HPHAtCWKUUUVD7pE-enjgAg@mail.gmail.com>
+Date: Mon, 24 Apr 2017 08:27:15 -0400
+Message-ID: <CADkTA4MeBY2+=A_jZCEgmp2x2co6Q09WM97RFFnyxz2QNWr0gg@mail.gmail.com>
 To: "Burton, Ross" <ross.burton@intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
@@ -59,47 +60,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 12:26:40 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 12:27:15 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Mon, Apr 24, 2017 at 6:29 AM, Burton, Ross <ross.burton@intel.com> wrote:
+On Mon, Apr 24, 2017 at 7:11 AM, Burton, Ross <ross.burton@intel.com> wrote:
 
 >
-> On 24 April 2017 at 01:31, Bruce Ashfield <bruce.ashfield@gmail.com>
-> wrote:
+> On 24 April 2017 at 11:29, Burton, Ross <ross.burton@intel.com> wrote:
 >
->> I wasn't able to bring up the linux-yocto one .. but the 4.10 linux Yocto
->>> should be at a high enough stable
->>> release to build with gcc7. So if there's a direct link to that error,
->>> I can take a closer look.
->>>
->>
->> And sure enough, after I sent that the error page with linux-yocto
->> finally wheezed in.
->>
->> I see that it was the 4.1 kernel, which is expected to fail. I haven't
->> looked into backporting gcc7 fixes
->> that far, but if there's demand, it is something we can consider/look
->> into.
+>> I'm getting that with 4.9.15 from meta-intel, should I be telling Saul to
+>> update the BSP with some fixes you've made?
 >>
 >
-> | kernel/built-in.o: In function `update_wall_time':
-> | (.text+0x65ecc): undefined reference to `____ilog2_NaN'
->
-> I'm getting that with 4.9.15 from meta-intel, should I be telling Saul to
-> update the BSP with some fixes you've made?
+> Or ideally telling myself to update meta-intel for the fixes that Saul has
+> already merged...
 >
 
-
-4.9 would need fixes as well, or be on a -stable that contains the fix:
-
-% git tag --contains 85f687708c811563df33c70c9cec9b5c2733acf8
-v4.9.18
-v4.9.19
-v4.9.20
-v4.9.21
-
-Cheers,
+ooops. I should read all the way to the bottom of the thread :D
 
 Bruce
 
@@ -107,7 +84,7 @@ Bruce
 >
 > Ross
 >
-
+>
 
 
 -- 
