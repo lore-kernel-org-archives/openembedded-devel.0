@@ -1,53 +1,53 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id A9B2A77A3B
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 234FF77A41
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 10:18:52 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id g60so109368919qtd.3
+	Mon, 24 Apr 2017 10:30:10 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id m36so109304937qtb.0
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 03:18:53 -0700 (PDT)
+	Mon, 24 Apr 2017 03:30:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=6vESzVvag/Vkglr+WZjCeVTqF4aPQ6ouNkWfMYuZ1Rs=;
-	b=sRIA8/VbPdNXGvU8KZh+/jSLwAr8UuBekdKFS0Fw00T5LZBs8XTwPGZRUADWv4mmVb
-	RIcdlg21yaaclYo+It1Gb2bxXSgJuVIb3FTrPwDOTrURGREkndThMtwi7f4T9hmJccJE
-	H0gaKHffhXkKaFgClqCvTIV2gSFqhgJjt45H8MqKJZNVjgNA742pYjKyg5V2J9b3nicg
-	wwTgF4bP/GbabOWKbmmc7DXWxxa37dBrR3pwyp+oN+LQLKAIDYsJlWDpA/15+jGu2zBY
-	3LOuURtCGEqObMsO703SYQTuWnsu6Sjabx9aY7WVB/PB7i5k4ymkFiY1LsaFE2vp1YhY
-	Jgpw==
+	:cc; bh=6NPDTeYnyjeA9YlrLlavO24zaAu3u+RJqxKQfuRfDKE=;
+	b=Quxj4+zxKQEyVNlDsRUOjigNluGZ2aaLf0sIoVUXlDcJ34Y9433jDoNEceJEXZIWvk
+	J4LHoUrqmdCpcvr4Rj8JUIc7WGflNlGnEm+c8HcOcCnOgTqY9IAQQF5B0geuKB0IRTFE
+	yk0OkkXyFBWQ3iubumYswNTjrfk/QrCrqCZiM2yl8vLXumlm923uVm/VSTVfWnvkwYEG
+	uZCS7Ki3+ykafdFQDmnmAcaP779FKLSrhumlofN8zdbWXzrJDuyr21suqhh0ROE2Jimc
+	Hqt2iODMnWEYRfIQl7wffAJediuf6I93qXjVL7NT/QI8tgCaTSpkXYf9bXkFgnyHPPL3
+	BxlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=6vESzVvag/Vkglr+WZjCeVTqF4aPQ6ouNkWfMYuZ1Rs=;
-	b=ti/G3P3YKv9rCkSmP4Wg05Wy9S7D4Agb1EUDUMX6+1PGpU96GhB2Qvb/wQNkfp9kQ1
-	DTV3OuvaO6gksMeaF54kUk9O+s1Dy08s9soFjQWCwiesb0MnqRAdMIfFdGtA6ZYympdE
-	LoIuX0F4Vzt3KWuD+7UkKouJR649LRhYhQlZguYXk9qECosWLFdAE04GJsRXDqvCWlF6
-	C+TBLHlE6wZ2tAxa3YO0sCGpDZFcob6buovvJibPHqW3/MMHk3iyJ7uwxImIfDmN1mkz
-	a7+4Ibm1ebKSYHzyERUnyxoFnwX8G+WE0/tPNIkzucuzNA7Zb/G5GZP02bKF7o9dntTh
-	g5cw==
-X-Gm-Message-State: AN3rC/56rnpuzbloMMu9yH85WH5RsDWofPkda1AgF1WK0FjE9Lw1RoCU
-	pBaL8wotn8+r03/dL9tb2WJaL9AWOBAI
-X-Received: by 10.200.34.242 with SMTP id g47mr24266089qta.109.1493029133479; 
-	Mon, 24 Apr 2017 03:18:53 -0700 (PDT)
+	bh=6NPDTeYnyjeA9YlrLlavO24zaAu3u+RJqxKQfuRfDKE=;
+	b=PMbEjj3BW+PCchJnzAcdBQJhjisDG53QzU8cM1hI60GIcmQRhbinLOmOj8FquCe0WT
+	Bx7hdF0h5CHAc59F/TpDIxmUyA206p/Dk+LUEfT29vUmAJMyh0aoPSckzJnCRYiAIL/2
+	m6ITIuUYezCt252vAuTgIY1Lh0fFoG2MEY1rQi5iO4RS34OmB4IKnAzevWWn4NE1JRKJ
+	skow4MoQIcnnG1oFDmX9G5phWtXWK9qiEsLzCMvIReGouXu2C06JYPUPP7v/Dv4v9x+I
+	XyZcVY5IgG96cacovVV21OpLP0cziObnt7TKriB482MV5itWU7l0xcsMhVHVV5RslVaG
+	GibQ==
+X-Gm-Message-State: AN3rC/7Jw1AjzHHDcMjXaiuylSJ8fGWmUPCT7VPRN9r6ED/TaI3+mOg1
+	nRqG63CWjjdy4bTuLxGoU1dN7gSFN4OL
+X-Received: by 10.200.34.242 with SMTP id g47mr24297300qta.109.1493029811817; 
+	Mon, 24 Apr 2017 03:30:11 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 03:18:32 -0700 (PDT)
-In-Reply-To: <CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
+Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 03:29:51 -0700 (PDT)
+In-Reply-To: <CADkTA4OgpwhRtmR4+4kurnhBUQoap3E3kKoRTe4fNMBFOEp8hw@mail.gmail.com>
 References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
 	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
-	<CAMKF1sqfvtQPWN5Yuz3RPYkXpneS+XWcYmit_=bcvKGo3_hx8w@mail.gmail.com>
-	<CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
+	<CADkTA4MjffrJ13GxaEAQusEU10jj0dUcUsyea36Y2gCy7HCVmA@mail.gmail.com>
+	<CADkTA4OgpwhRtmR4+4kurnhBUQoap3E3kKoRTe4fNMBFOEp8hw@mail.gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 24 Apr 2017 11:18:32 +0100
-Message-ID: <CAJTo0LbHfg3ra7ugc8Q9zq-dyf35pyocuBDEe9uVh09ZaNnr7w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 24 Apr 2017 11:29:51 +0100
+Message-ID: <CAJTo0LYc7nRX2zsPJkP3ZdmnenBxP=fCNUbc_H6L1vePDHjn_g@mail.gmail.com>
+To: Bruce Ashfield <bruce.ashfield@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
+	<openembedded-core@lists.openembedded.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>
 Subject: Re: [OE-core] [RFT] gcc7 and glibc-2.26 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -61,16 +61,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 10:18:53 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 10:30:11 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 24 April 2017 at 10:09, Burton, Ross <ross.burton@intel.com> wrote:
+On 24 April 2017 at 01:31, Bruce Ashfield <bruce.ashfield@gmail.com> wrote:
 
-> All merged, I'll fire in a moment.
+> I wasn't able to bring up the linux-yocto one .. but the 4.10 linux Yocto
+>> should be at a high enough stable
+>> release to build with gcc7. So if there's a direct link to that error, I
+>> can take a closer look.
+>>
+>
+> And sure enough, after I sent that the error page with linux-yocto finally
+> wheezed in.
+>
+> I see that it was the 4.1 kernel, which is expected to fail. I haven't
+> looked into backporting gcc7 fixes
+> that far, but if there's demand, it is something we can consider/look into.
 >
 
-https://autobuilder.yocto.io/builders/nightly-non-gpl3/builds/237/steps/BuildImages/logs/stdio
-shows that the old elfutils in meta-gpl2 doesn't like gcc7 either.
+| kernel/built-in.o: In function `update_wall_time':
+| (.text+0x65ecc): undefined reference to `____ilog2_NaN'
+
+I'm getting that with 4.9.15 from meta-intel, should I be telling Saul to
+update the BSP with some fixes you've made?
 
 Ross
 
