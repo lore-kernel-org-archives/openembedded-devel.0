@@ -1,24 +1,45 @@
-Return-Path: <gcho-openembedded-devel@m.gmane.org>
-Received: from blaine.gmane.org (unknown [195.159.176.226])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D12A60053
+Return-Path: <sbabic@denx.de>
+X-Greylist: delayed 316 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 24 Apr 2017 07:08:02 UTC
+Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.10])
+	by mail.openembedded.org (Postfix) with ESMTP id C434071E01
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 06:32:27 +0000 (UTC)
-Received: from list by blaine.gmane.org with local (Exim 4.84_2)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1d2XXq-0006lG-5R for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Apr 2017 08:32:22 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <koen@dominion.thruhere.net>
-Date: Mon, 24 Apr 2017 08:32:20 +0200
-Message-ID: <odk65f$55t$1@blaine.gmane.org>
+	Mon, 24 Apr 2017 07:08:02 +0000 (UTC)
+Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
+	by mail-out.m-online.net (Postfix) with ESMTP id 3wBHNR2nLXz1qtYC;
+	Mon, 24 Apr 2017 09:02:47 +0200 (CEST)
+Received: from localhost (dynscan01.mnet-online.de [192.168.6.70])
+	by mail.m-online.net (Postfix) with ESMTP id 3wBHNR2G2qz3jgY4;
+	Mon, 24 Apr 2017 09:02:47 +0200 (CEST)
+X-Virus-Scanned: amavisd-new at mnet-online.de
+Received: from mail.mnet-online.de ([192.168.8.182])
+	by localhost (dynscan01.mail.m-online.net [192.168.6.70]) (amavisd-new,
+	port 10024)
+	with ESMTP id BHGKfIG7NiiS; Mon, 24 Apr 2017 09:02:46 +0200 (CEST)
+Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net
+	[88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
+	Mon, 24 Apr 2017 09:02:46 +0200 (CEST)
+Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
+	by babic.homelinux.org (Postfix) with ESMTP id 0083F454055D;
+	Mon, 24 Apr 2017 09:02:46 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
+Received: from babic.homelinux.org ([127.0.0.1])
+	by localhost (mail.babic.homelinux.org [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id eLwYfit8DPMn; Mon, 24 Apr 2017 09:02:42 +0200 (CEST)
+Received: from [192.168.178.132] (papero.fritz.box [192.168.178.132])
+	by babic.homelinux.org (Postfix) with ESMTP id B94504540441;
+	Mon, 24 Apr 2017 09:02:42 +0200 (CEST)
+To: Steven Osborn <osborn.steven@gmail.com>,
+	openembedded-devel@lists.openembedded.org
 References: <CAA0Zw-x0XYPf4WS+KHj_90xkCuNaNZYysmaBZNryEq8genRUCA@mail.gmail.com>
-	<odeu5s$qr7$1@blaine.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@blaine.gmane.org
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.8.0
-In-Reply-To: <odeu5s$qr7$1@blaine.gmane.org>
+From: Stefano Babic <sbabic@denx.de>
+Message-ID: <67ed839c-53ba-4b8b-2e9f-a40655e25e98@denx.de>
+Date: Mon, 24 Apr 2017 09:02:42 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+In-Reply-To: <CAA0Zw-x0XYPf4WS+KHj_90xkCuNaNZYysmaBZNryEq8genRUCA@mail.gmail.com>
 Subject: Re: State of Java on OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -32,34 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 06:32:28 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 24 Apr 2017 07:08:05 -0000
+Content-Type: text/plain; charset=windows-1252
 Content-Transfer-Encoding: 7bit
 
-Op 22-04-17 om 08:45 schreef Koen Kooi:
-> Op 22-04-17 om 00:25 schreef Steven Osborn:
->> Is anyone using Java on OE devices right now?
+On 22/04/2017 00:25, Steven Osborn wrote:
+> Is anyone using Java on OE devices right now?
 > 
-> Me!
+> meta-java - no release branches.  Seems to only be focused on master.
+> I've had trouble even finding a revision that will compile on Morty.
 > 
->> meta-java - no release branches.  Seems to only be focused on master. 
->> I've had trouble even finding a revision that will compile on Morty.
+> meta-oracle-java has a Morty branch, but the URI for the binaries is
+> bad so it fails to install.
 > 
-> koen@beast:/build/v2016.12$ cat .repo/manifests/default.xml  | grep java 
-> <project name="meta-java" path="layers/meta-java" remote="yocto" 
-> revision="a265b31ec7d022be254abdf959360a7624208585" upstream="master"/>
+> Overall it seems like Java is not a very favored or platform at the moment.
 > 
-> That generates an openjdk-8 good enough to run jenkins on x86-64, no
-> idea about other archs.
 
-I forgot to mention a annoying and stupid bug: if host and target match it
-will use host g++ to compile, which breaks in my case because that's gcc 4.9
-which doesn't understand the dse flags the recipe is passing in.
+I have got the same problems - the missing of release branches in
+meta-java is quite confusing. -master does not work with last releases,
+and everybody have to find working commit id for each release. And after
+that, cherry-picking something from -master to fix global issue (it was
+for me dependency's issue with classpath).
 
+Maybe we have to try to propose the maintainers to set release branches
+as usual.
 
-regards,
+Regards,
+Stefano
 
-Koen
-
-
+-- 
+=====================================================================
+DENX Software Engineering GmbH,      Managing Director: Wolfgang Denk
+HRB 165235 Munich, Office: Kirchenstr.5, D-82194 Groebenzell, Germany
+Phone: +49-8142-66989-53 Fax: +49-8142-66989-80 Email: sbabic@denx.de
+=====================================================================
 
