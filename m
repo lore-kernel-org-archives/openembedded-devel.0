@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1504B71D8C
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D7A4C71D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:25 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id z67so13856268itb.0
+	Mon, 24 Apr 2017 05:21:26 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id x188so13076284itb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:27 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=DmZEJA5rLqxczMZN13FUsCmCOIUh3xLfArssSKnCerg=;
-	b=hUlwIaX49/uAbIhEbZc4OaPU10mLyOehoOhNsKSoPUd7f1PwgKC/bZkns7y394B5A7
-	3sGzR3WtVhg2WVHtuTB3LYJDzDfme3qEdTcXNZRek/cNlG5AeFG15giUXlcRLJxfZjCC
-	QmCMSWR3XUx1NM7dBRCdmEfOWyftlJz1jAIiNBiaUQZXiWA2bikaC40s/ELJtI3luX9s
-	jklsl7k2YqZUqmSiqxRugS9shVGEtvbMyYFEcS6R62L/kSby4mGbqzOySZnQluszrpl/
-	XIg9mxZz0XeiaangMMPs6gLXEWR+AbvnhhQ6NUmJ4nF1QMdEeZcVPLo1805ccw28kX1n
-	9i7Q==
+	bh=zMANIstmrrXFmdg17AgGAlzNaU0VmVsh12vuCQhS84E=;
+	b=bKUXv/dY7Qe4Y9cEuMIb8WmiUStSqhmZFD5QxtkE9TNx8z1yDVrz4u2Pxq1vYJCkKl
+	0iic2K/MdvKkNSREDSQcNtExR6WIeUDhKzFtt8p7bGNie+R5/cAL3hw1lD39cd/Fobkj
+	9G9Q8ADYOR49SlMxJN0YhLFGbwIDSWctqz20aqFN6DRSLFcb4kvcLxDwUinpMfr761c+
+	itS2EgqypbZFUOJtF3QkK93CjoOthTQ7fhGokkEoE3+tYN836HibhjrRjO15sjbV1uqU
+	/aUfSSdm108G9IS97NpqO3QCvOY+VfQr7BO3pwdOeaLzOYgW4EnnkT9v2V6dsmo4n3P9
+	CrZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=DmZEJA5rLqxczMZN13FUsCmCOIUh3xLfArssSKnCerg=;
-	b=nY+i2Yx4QeMPBUIbV/DESKrjqnJdu/4VhAm2rIKl9cehVGLUn5tskUMULJa2gusGWj
-	A2OxjmBZki/0Czs1JNG3nsYJwk8CBdgpQUomv0LGc7tqq/PJ/nSPE5h3ojFUh+7/B+C6
-	h2J2snGCXe3P33nyGUYfmVDWMxLrDpAjgRv/+BOAvPlDRrWr8+qSPRmPinIAWXuEuz6+
-	E1uU4eYjkfo2GLl9N2nl5BtOabrAC2RauYtYKruuVOVeJfPgwoHQ9/09ZcldmXAfZhAj
-	VXW1FET1vpjg1ec30fnuVgHNHSgGhKc7s1Lftm7jgtQQwVxdsWpY1J8dK/7aBwofQZp/
-	FfFA==
-X-Gm-Message-State: AN3rC/6OE8x8qPC36+xxP0ADOB+XPBJiUyFwBEYNrAizn9/meegnPl/n
-	52Bd3vmtOt6+DQ==
-X-Received: by 10.99.95.134 with SMTP id t128mr22314070pgb.84.1493011286794;
-	Sun, 23 Apr 2017 22:21:26 -0700 (PDT)
+	bh=zMANIstmrrXFmdg17AgGAlzNaU0VmVsh12vuCQhS84E=;
+	b=OKPLwVaIzyT6+AFOa4gs17cLq+dxKJx1MbgeN0SYC3GPJwvd3cR/7VzuztAKVwOPdJ
+	/pIvHLb4F16jeg83hCyo9U3cpR928VcJT/iqSHYE2xHX2Keww0RifzCM+eXY+Wq9wtEh
+	i45b6A489XFjULlDXmkaYV/qlgdrFQxEBhdw1PfSViXTCRpV1S1wv5pR+eXNX5qKj8EO
+	FH1Xfa40SNG4COTGYYz8089nk/LYB2icVodGYthhsN+QdFQkxKsaLjeaqlA1XSIMSf5s
+	eIrZf3B0EaYgZP1URHnyZvR6QLIkheXxVzlnITKwiWUr+j6P2s12UfR3G8zKIPXyHc/r
+	lANA==
+X-Gm-Message-State: AN3rC/77EQAy51mtiDwQfDCMoAS3gDR84zuvqSVPF/AfIq+MdvyGkg4k
+	vec/6V2P96SyQA==
+X-Received: by 10.84.129.4 with SMTP id 4mr30758997plb.37.1493011288072;
+	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.25
+	v13sm24001176pgo.44.2017.04.23.22.21.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:25 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:50 -0700
-Message-Id: <20170424052058.4952-9-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:51 -0700
+Message-Id: <20170424052058.4952-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 09/17] opensaf: Upgrade to 5.2.0
+Subject: [meta-networking][PATCH 10/17] memcached: Upgrade to 1.4.36
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,381 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:26 -0000
-
-Fix build with gcc7
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:27 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../opensaf/0001-Remove-unused-variables.patch     |  43 +++++++
- ...isable-format-overflow-if-supported-by-gc.patch | 127 +++++++++++++++++++++
- ...gure-Pass-linker-specific-options-with-Wl.patch |  29 +++++
- .../opensaf/opensaf/0001-plmcd-error-fix.patch     |  43 -------
- .../opensaf/install-samples-from-srcdir.patch      |  11 --
- .../opensaf/{opensaf_5.0.0.bb => opensaf_5.2.0.bb} |  35 +++---
- 6 files changed, 214 insertions(+), 74 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-Remove-unused-variables.patch
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
- create mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
- delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-error-fix.patch
- delete mode 100644 meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
- rename meta-networking/recipes-daemons/opensaf/{opensaf_5.0.0.bb => opensaf_5.2.0.bb} (69%)
+ .../memcached/memcached/redundant_comparison.patch          | 13 -------------
+ .../memcached/{memcached_1.4.33.bb => memcached_1.4.36.bb}  |  8 ++++----
+ 2 files changed, 4 insertions(+), 17 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
+ rename meta-networking/recipes-support/memcached/{memcached_1.4.33.bb => memcached_1.4.36.bb} (87%)
 
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-Remove-unused-variables.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Remove-unused-variables.patch
-new file mode 100644
-index 000000000..1c88b81cd
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-Remove-unused-variables.patch
-@@ -0,0 +1,43 @@
-+From a441a75fbb8451268a8a57616c7158cddc1823aa Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 22 Apr 2017 12:40:19 -0700
-+Subject: [PATCH] Remove unused variables
-+
-+Fixes build errors with gcc7 e.g.
-+
-+../opensaf-5.2.0/src/amf/amfd/imm.cc: In member function 'bool ImmObjCreate::immobj_update_required()':
-+../opensaf-5.2.0/src/amf/amfd/imm.cc:2174:28: error: unused variable 'pos' [-Werror=unused-variable]
-+     std::string::size_type pos;
-+                            ^~~
-+../opensaf-5.2.0/src/amf/amfd/imm.cc:2215:28: error: unused variable 'pos' [-Werror=unused-variable]
-+     std::string::size_type pos;
-+                            ^~~
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/amf/amfd/imm.cc | 2 --
-+ 1 file changed, 2 deletions(-)
-+
-+diff --git a/src/amf/amfd/imm.cc b/src/amf/amfd/imm.cc
-+index 7932364..4f47b65 100644
-+--- a/src/amf/amfd/imm.cc
-++++ b/src/amf/amfd/imm.cc
-+@@ -2171,7 +2171,6 @@ bool ImmObjCreate::immobj_update_required() {
-+   if (class_type == AVSV_SA_AMF_SI_ASSIGNMENT) {
-+     std::string su_name;
-+     std::string sisu_name;
-+-    std::string::size_type pos;
-+     while ((attribute = attrValues_[i++]) != nullptr) {
-+       if (!strcmp(attribute->attrName, "safSISU")) {
-+         sisu_name = Amf::to_string(
-+@@ -2212,7 +2211,6 @@ bool ImmObjCreate::immobj_update_required() {
-+   } else if (class_type == AVSV_SA_AMF_CSI_ASSIGNMENT) {
-+     std::string comp_name;
-+     std::string csicomp_name;
-+-    std::string::size_type pos;
-+     AVD_CSI *csi = nullptr;
-+     AVD_COMP *comp = nullptr;
-+     AVD_COMP_CSI_REL *compcsi = nullptr;
-+-- 
-+2.12.2
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
-new file mode 100644
-index 000000000..512e246c5
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Disable-format-overflow-if-supported-by-gc.patch
-@@ -0,0 +1,127 @@
-+From ab00d6f5793b2d850f975bcb6d5d0aa6d7a9eaa4 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 22 Apr 2017 12:34:37 -0700
-+Subject: [PATCH] configure: Disable format-overflow if supported by gcc
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile.am                 |  6 ++--
-+ configure.ac                |  2 ++
-+ m4/ax_check_compile_flag.m4 | 74 +++++++++++++++++++++++++++++++++++++++++++++
-+ 3 files changed, 79 insertions(+), 3 deletions(-)
-+ create mode 100644 m4/ax_check_compile_flag.m4
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index d63fbbb..1012a2c 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -52,10 +52,10 @@ AM_CPPFLAGS = \
-+ 	-pthread \
-+ 	-D_GNU_SOURCE -DINTERNAL_VERSION_ID='"@INTERNAL_VERSION_ID@"' \
-+ 	$(CORE_INCLUDES) \
-+-	$(all_includes)
-++	$(all_includes) @NOWARNINGS@
-+ 
-+-AM_CFLAGS = -pipe -std=gnu11 @OSAF_HARDEN_FLAGS@ -Wall -Wformat=2 -Werror
-+-AM_CXXFLAGS = -pipe -std=gnu++11 @OSAF_HARDEN_FLAGS@ -Wall -Wformat=2 -Werror
-++AM_CFLAGS = -pipe -std=gnu11 @OSAF_HARDEN_FLAGS@ -Wall -Wformat=2 -Werror @NOWARNINGS@
-++AM_CXXFLAGS = -pipe -std=gnu++11 @OSAF_HARDEN_FLAGS@ -Wall -Wformat=2 -Werror @NOWARNINGS@
-+ AM_LDFLAGS = @OSAF_HARDEN_FLAGS@ -Wl,--as-needed -ldl -lrt -pthread -rdynamic
-+ ACLOCAL_AMFLAGS = -I m4
-+ OSAF_LIB_FLAGS =
-+diff --git a/configure.ac b/configure.ac
-+index 02771c6..b76b0fe 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -557,6 +557,8 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-+ fi
-+ AC_SUBST(OSAF_HARDEN_FLAGS)
-+ 
-++AX_CHECK_COMPILE_FLAG([-Werror=format-overflow],[NOWARNINGS=-Wno-error=format-overflow])
-++AC_SUBST(NOWARNINGS)
-+ #############################################
-+ # List the output Makefiles
-+ #############################################
-+diff --git a/m4/ax_check_compile_flag.m4 b/m4/ax_check_compile_flag.m4
-+new file mode 100644
-+index 0000000..dcabb92
-+--- /dev/null
-++++ b/m4/ax_check_compile_flag.m4
-+@@ -0,0 +1,74 @@
-++# ===========================================================================
-++#  https://www.gnu.org/software/autoconf-archive/ax_check_compile_flag.html
-++# ===========================================================================
-++#
-++# SYNOPSIS
-++#
-++#   AX_CHECK_COMPILE_FLAG(FLAG, [ACTION-SUCCESS], [ACTION-FAILURE], [EXTRA-FLAGS], [INPUT])
-++#
-++# DESCRIPTION
-++#
-++#   Check whether the given FLAG works with the current language's compiler
-++#   or gives an error.  (Warnings, however, are ignored)
-++#
-++#   ACTION-SUCCESS/ACTION-FAILURE are shell commands to execute on
-++#   success/failure.
-++#
-++#   If EXTRA-FLAGS is defined, it is added to the current language's default
-++#   flags (e.g. CFLAGS) when the check is done.  The check is thus made with
-++#   the flags: "CFLAGS EXTRA-FLAGS FLAG".  This can for example be used to
-++#   force the compiler to issue an error when a bad flag is given.
-++#
-++#   INPUT gives an alternative input source to AC_COMPILE_IFELSE.
-++#
-++#   NOTE: Implementation based on AX_CFLAGS_GCC_OPTION. Please keep this
-++#   macro in sync with AX_CHECK_{PREPROC,LINK}_FLAG.
-++#
-++# LICENSE
-++#
-++#   Copyright (c) 2008 Guido U. Draheim <guidod@gmx.de>
-++#   Copyright (c) 2011 Maarten Bosmans <mkbosmans@gmail.com>
-++#
-++#   This program is free software: you can redistribute it and/or modify it
-++#   under the terms of the GNU General Public License as published by the
-++#   Free Software Foundation, either version 3 of the License, or (at your
-++#   option) any later version.
-++#
-++#   This program is distributed in the hope that it will be useful, but
-++#   WITHOUT ANY WARRANTY; without even the implied warranty of
-++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
-++#   Public License for more details.
-++#
-++#   You should have received a copy of the GNU General Public License along
-++#   with this program. If not, see <https://www.gnu.org/licenses/>.
-++#
-++#   As a special exception, the respective Autoconf Macro's copyright owner
-++#   gives unlimited permission to copy, distribute and modify the configure
-++#   scripts that are the output of Autoconf when processing the Macro. You
-++#   need not follow the terms of the GNU General Public License when using
-++#   or distributing such scripts, even though portions of the text of the
-++#   Macro appear in them. The GNU General Public License (GPL) does govern
-++#   all other use of the material that constitutes the Autoconf Macro.
-++#
-++#   This special exception to the GPL applies to versions of the Autoconf
-++#   Macro released by the Autoconf Archive. When you make and distribute a
-++#   modified version of the Autoconf Macro, you may extend this special
-++#   exception to the GPL to apply to your modified version as well.
-++
-++#serial 5
-++
-++AC_DEFUN([AX_CHECK_COMPILE_FLAG],
-++[AC_PREREQ(2.64)dnl for _AC_LANG_PREFIX and AS_VAR_IF
-++AS_VAR_PUSHDEF([CACHEVAR],[ax_cv_check_[]_AC_LANG_ABBREV[]flags_$4_$1])dnl
-++AC_CACHE_CHECK([whether _AC_LANG compiler accepts $1], CACHEVAR, [
-++  ax_check_save_flags=$[]_AC_LANG_PREFIX[]FLAGS
-++  _AC_LANG_PREFIX[]FLAGS="$[]_AC_LANG_PREFIX[]FLAGS $4 $1"
-++  AC_COMPILE_IFELSE([m4_default([$5],[AC_LANG_PROGRAM()])],
-++    [AS_VAR_SET(CACHEVAR,[yes])],
-++    [AS_VAR_SET(CACHEVAR,[no])])
-++  _AC_LANG_PREFIX[]FLAGS=$ax_check_save_flags])
-++AS_VAR_IF(CACHEVAR,yes,
-++  [m4_default([$2], :)],
-++  [m4_default([$3], :)])
-++AS_VAR_POPDEF([CACHEVAR])dnl
-++])dnl AX_CHECK_COMPILE_FLAGS
-+-- 
-+2.12.2
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
-new file mode 100644
-index 000000000..5756a027b
---- /dev/null
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf/0001-configure-Pass-linker-specific-options-with-Wl.patch
-@@ -0,0 +1,29 @@
-+From 6248b717b4861d16b80235fd8e57d64e4f636428 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Apr 2017 17:39:07 -0700
-+Subject: [PATCH] configure: Pass linker specific options with -Wl
-+
-+This helps make it pass the options to linker correctly
-+and we can use non-gcc compilers
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index df4fc58..02771c6 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -553,7 +553,7 @@ if test -z "$OSAF_HARDEN_FLAGS"; then
-+ 	if echo "${CFLAGS} ${CXXFLAGS}" | grep -q -- -O0; then
-+ 		OSAF_HARDEN_FLAGS=""
-+ 	fi
-+-	OSAF_HARDEN_FLAGS="${OSAF_HARDEN_FLAGS} -fstack-protector --param ssp-buffer-size=4 -fPIE -pie -zrelro -znow"
-++	OSAF_HARDEN_FLAGS="${OSAF_HARDEN_FLAGS} -fstack-protector --param ssp-buffer-size=4 -fPIE -pie -Wl,-z,relro,-z,now"
-+ fi
-+ AC_SUBST(OSAF_HARDEN_FLAGS)
-+ 
-+-- 
-+2.12.2
-+
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-error-fix.patch b/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-error-fix.patch
+diff --git a/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch b/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
 deleted file mode 100644
-index 624cd2d7b..000000000
---- a/meta-networking/recipes-daemons/opensaf/opensaf/0001-plmcd-error-fix.patch
+index ed86ffae4..000000000
+--- a/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
 +++ /dev/null
-@@ -1,43 +0,0 @@
--From f1813af4c154fb1d3950abbdf678c3a5a67222fc Mon Sep 17 00:00:00 2001
--From: Li xin <lixin.fnst@cn.fujitsu.com>
--Date: Thu, 25 Jun 2015 11:44:27 +0900
--Subject: [PATCH] plmcd: error fix
--
--ld: cannot find -lsystemd-daemon
--collect2: error: ld returned 1 exit status
--
--Signed-off-by: Li Xin <lixin.fnst@cn.fujitsu.com>
-----
-- contrib/plmc/plmcd/Makefile.am | 2 +-
-- contrib/plmc/plmcd/Makefile.in | 2 +-
-- 2 files changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/contrib/plmc/plmcd/Makefile.am b/contrib/plmc/plmcd/Makefile.am
--index 8d847f2..dd7913a 100644
----- a/contrib/plmc/plmcd/Makefile.am
--+++ b/contrib/plmc/plmcd/Makefile.am
--@@ -32,7 +32,7 @@ plmcd_SOURCES = \
-- plmcd_LDFLAGS = -lpthread
+@@ -1,13 +0,0 @@
+-Index: memcached-1.4.33/items.c
+-===================================================================
+---- memcached-1.4.33.orig/items.c
+-+++ memcached-1.4.33/items.c
+-@@ -148,7 +148,7 @@ item *do_item_alloc(char *key, const siz
+-     uint8_t nsuffix;
+-     item *it = NULL;
+-     char suffix[40];
+--    if (nbytes < 2 || nkey < 0)
+-+    if (nbytes < 2)
+-         return 0;
 - 
-- if ENABLE_SYSTEMD
---plmcd_LDFLAGS += -lsystemd-daemon
--+plmcd_LDFLAGS += -lsystemd
-- endif
-- 
-- plmcd_LDADD = \
--diff --git a/contrib/plmc/plmcd/Makefile.in b/contrib/plmc/plmcd/Makefile.in
--index 0185dc4..e40513a 100644
----- a/contrib/plmc/plmcd/Makefile.in
--+++ b/contrib/plmc/plmcd/Makefile.in
--@@ -106,7 +106,7 @@ build_triplet = @build@
-- host_triplet = @host@
-- target_triplet = @target@
-- sbin_PROGRAMS = plmcd$(EXEEXT)
---@ENABLE_SYSTEMD_TRUE@am__append_1 = -lsystemd-daemon
--+@ENABLE_SYSTEMD_TRUE@am__append_1 = -lsystemd
-- subdir = plmcd
-- ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-- am__aclocal_m4_deps = $(top_srcdir)/configure.ac
---- 
--1.8.4.2
--
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch b/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
-deleted file mode 100644
-index 016b64f2e..000000000
---- a/meta-networking/recipes-daemons/opensaf/opensaf/install-samples-from-srcdir.patch
-+++ /dev/null
-@@ -1,11 +0,0 @@
----- opensaf-4.5.0.orig/Makefile.am	2014-12-31 14:45:54.088797989 +0800
--+++ opensaf-4.5.0/Makefile.am	2014-12-31 14:45:08.328796688 +0800
--@@ -219,7 +219,7 @@ install-data-local:
-- 	$(mkinstalldirs) $(DESTDIR)$(pkgpiddir)
-- 	$(mkinstalldirs) $(DESTDIR)$(lockdir)
-- 	$(mkinstalldirs) $(DESTDIR)$(pkglocalstatedir)
---	cp -R samples/ $(DESTDIR)$(pkgdatadir)
--+	cp -R $(srcdir)/samples/ $(DESTDIR)$(pkgdatadir)
-- 
-- install-data-hook:
-- 	@for i in $$(grep -lr -e 'xxLIBDIRxx' -e 'xxLOGDIRxx' -e 'xxCLCCLIDIRxx' $(DESTDIR)$(pkgimmxml_svcdir)/*.xml) ; do \
-diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.2.0.bb
-similarity index 69%
-rename from meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
-rename to meta-networking/recipes-daemons/opensaf/opensaf_5.2.0.bb
-index 6ceb225e9..5abd560f0 100644
---- a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
-+++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.2.0.bb
-@@ -15,14 +15,17 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=a916467b91076e631dd8edb7424769c7"
+-     size_t ntotal = item_make_header(nkey + 1, flags, nbytes, suffix, &nsuffix);
+diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.33.bb b/meta-networking/recipes-support/memcached/memcached_1.4.36.bb
+similarity index 87%
+rename from meta-networking/recipes-support/memcached/memcached_1.4.33.bb
+rename to meta-networking/recipes-support/memcached/memcached_1.4.36.bb
+index da9a693ac..48c3c9ee2 100644
+--- a/meta-networking/recipes-support/memcached/memcached_1.4.33.bb
++++ b/meta-networking/recipes-support/memcached/memcached_1.4.36.bb
+@@ -20,10 +20,10 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
+     "
  
- DEPENDS = "libxml2 python"
-+TOOLCHAIN = "gcc"
+ SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
+-           file://redundant_comparison.patch \
+-           file://memcached-add-hugetlbfs-check.patch"
+-SRC_URI[md5sum] = "2d7f6476283cd36e21e521d901d37a8f"
+-SRC_URI[sha256sum] = "83726c8d68258c56712373072abb25a449c257398075a39ec0867fd8ba69771d"
++           file://memcached-add-hugetlbfs-check.patch \
++           "
++SRC_URI[md5sum] = "1e028fbab7288911fcaa5ed2a21817fe"
++SRC_URI[sha256sum] = "773b6bb20bf80223ca6a15d75f570fbab346ad11ec98595e5af5e33f54bd82d8"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
--           file://install-samples-from-srcdir.patch \
--           file://0001-plmcd-error-fix.patch \
--           "
-+SECURITY_CFLAGS = "${SECURITY_NO_PIE_CFLAGS}"
- 
--SRC_URI[md5sum] = "94cd1a4c0406e6a45bb04c003f8690e7"
--SRC_URI[sha256sum] = "4b4188a0f3d0ed1ed0e3d77de27c45e2c96b437401de08e7df2ed9ecd54bb999"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/releases/${BPN}-${PV}.tar.gz \
-+           file://0001-configure-Pass-linker-specific-options-with-Wl.patch \
-+           file://0001-configure-Disable-format-overflow-if-supported-by-gc.patch \
-+           file://0001-Remove-unused-variables.patch \
-+"
-+SRC_URI[md5sum] = "08991fd467ae9dcea3c8747be8e3981e"
-+SRC_URI[sha256sum] = "903478244afe37e329be93050f1d48fa18c84ea17862134c4217b920e267a04a"
- 
- inherit autotools useradd systemd pkgconfig
- 
-@@ -33,34 +36,26 @@ USERADD_PARAM_${PN} =  "-r -g opensaf -d ${datadir}/opensaf/ -s ${sbindir}/nolog
- SYSTEMD_SERVICE_${PN} += "opensafd.service plmcboot.service plmcd.service"
- SYSTEMD_AUTO_ENABLE = "disable"
- 
--PACKAGECONFIG[systemd] = "--enable-systemd-daemon"
-+PACKAGECONFIG[systemd] = ",,systemd"
- PACKAGECONFIG[openhpi] = "--with-hpi-interface=B03 --enable-ais-plm,,openhpi"
- 
--EXTRA_OECONF += " --libdir=${libdir}/opensaf "
--EXTRA_OEMAKE += " -Wl,-rpath,${libdir}/opensaf "
-+PACKAGECONFIG_append = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'systemd', '', d)}"
- 
--PKGLIBDIR="${libdir}/opensaf/opensaf"
--
--do_configure_prepend () {
--        ( cd ${S}; autoreconf -f -i -s )
--}
-+PKGLIBDIR="${libdir}"
- 
- do_install_append() {
-+    cp -av --no-preserve=ownership ${B}/lib/.libs/*.so* ${D}${libdir}
-     rm -fr "${D}${localstatedir}/lock"
-     rm -fr "${D}${localstatedir}/run"
-     rmdir --ignore-fail-on-non-empty "${D}${localstatedir}"
--    install -d ${D}${systemd_unitdir}/system
--    install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
--        ${D}${systemd_unitdir}/system
--    install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
--
-+    rmdir --ignore-fail-on-non-empty "${D}${datadir}/java"
-     if [ ! -d "${D}${sysconfdir}/init.d" ]; then
-         install -d ${D}${sysconfdir}/init.d
-         install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
-     fi
- }
- 
--FILES_${PN} += "${localstatedir}/run ${systemd_unitdir}/system/*.service"
-+FILES_${PN} += "${systemd_unitdir}/system/*.service"
- FILES_${PN}-staticdev += "${PKGLIBDIR}/*.a"
- 
- INSANE_SKIP_${PN} = "dev-so"
+ # set the same COMPATIBLE_HOST as libhugetlbfs
+ COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
 -- 
 2.12.2
 
