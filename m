@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D7A4C71D8C
+Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
+	[209.85.214.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DE3771D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:26 +0000 (UTC)
-Received: by mail-it0-f65.google.com with SMTP id x188so13076284itb.3
+	Mon, 24 Apr 2017 05:21:28 +0000 (UTC)
+Received: by mail-it0-f67.google.com with SMTP id x188so13076400itb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=zMANIstmrrXFmdg17AgGAlzNaU0VmVsh12vuCQhS84E=;
-	b=bKUXv/dY7Qe4Y9cEuMIb8WmiUStSqhmZFD5QxtkE9TNx8z1yDVrz4u2Pxq1vYJCkKl
-	0iic2K/MdvKkNSREDSQcNtExR6WIeUDhKzFtt8p7bGNie+R5/cAL3hw1lD39cd/Fobkj
-	9G9Q8ADYOR49SlMxJN0YhLFGbwIDSWctqz20aqFN6DRSLFcb4kvcLxDwUinpMfr761c+
-	itS2EgqypbZFUOJtF3QkK93CjoOthTQ7fhGokkEoE3+tYN836HibhjrRjO15sjbV1uqU
-	/aUfSSdm108G9IS97NpqO3QCvOY+VfQr7BO3pwdOeaLzOYgW4EnnkT9v2V6dsmo4n3P9
-	CrZQ==
+	bh=A/007H3gXydtS23wEbyqBhuz8RYX0evYYUGXpXTBXMQ=;
+	b=iyacM4+DFVVZQTKgyYgmMYodObY20m3JckGFoWUpMS2FG7WVUfU9GwvushrAHL73UI
+	c6MwzJfzF/09UhBfSzX7BvVPtqGDi5gseYcWjrtrQj/dPU0qLe/j8E2wg5IrAiybrfjf
+	1r0FjI3kDGZZgl1Ycafbq8tXwZaBVVYBM8JznOZ0CKmygH4W/Tiau6GccMe/BRKbREHB
+	/wCpSWPaTmF9NUQBs2XVHgGR106ZjLsN5v3lx+cm9MhX64h9jlvNKqAkxXrUjrBWNBRK
+	wlIjdcpT/Th7HyuwFlA1S0rGYKAGJWw0ObjtyWK4NzD08cxpKNRWnNzEaA/3RZmruSPz
+	q7Eg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=zMANIstmrrXFmdg17AgGAlzNaU0VmVsh12vuCQhS84E=;
-	b=OKPLwVaIzyT6+AFOa4gs17cLq+dxKJx1MbgeN0SYC3GPJwvd3cR/7VzuztAKVwOPdJ
-	/pIvHLb4F16jeg83hCyo9U3cpR928VcJT/iqSHYE2xHX2Keww0RifzCM+eXY+Wq9wtEh
-	i45b6A489XFjULlDXmkaYV/qlgdrFQxEBhdw1PfSViXTCRpV1S1wv5pR+eXNX5qKj8EO
-	FH1Xfa40SNG4COTGYYz8089nk/LYB2icVodGYthhsN+QdFQkxKsaLjeaqlA1XSIMSf5s
-	eIrZf3B0EaYgZP1URHnyZvR6QLIkheXxVzlnITKwiWUr+j6P2s12UfR3G8zKIPXyHc/r
-	lANA==
-X-Gm-Message-State: AN3rC/77EQAy51mtiDwQfDCMoAS3gDR84zuvqSVPF/AfIq+MdvyGkg4k
-	vec/6V2P96SyQA==
-X-Received: by 10.84.129.4 with SMTP id 4mr30758997plb.37.1493011288072;
-	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
+	bh=A/007H3gXydtS23wEbyqBhuz8RYX0evYYUGXpXTBXMQ=;
+	b=toY2YeqcUcmwym6fwNFGMzLh0IXP8+e4VZAUtdkPLnFN+G8/eEDzYwTafiww5ZK5+k
+	qTvp/wDzKkox1Qs+q3MIQ1ZgRqK6C60lExbhmwXpIvdeFd3UzZAboD7PPMNylY/HTGdQ
+	gE4m0vY81wzNXdwk/UXOP5Gq4wgdh/mQr0gW9Rv3JVpUhiYdmKkQEZo72t37p/5ryA2P
+	Y2Lpb3+WiSPTLPzzMUYbkohFoeJpvN6eHiAhflN+oH0yb14EGb2pKLAzqTHkE5AwzTya
+	2wXPkrsELz2l1/wDbAMxL7vG7i67wJAZPH7Jeugbm2R9iNztg8jm1aSQLesK88QPCV4G
+	Z0HA==
+X-Gm-Message-State: AN3rC/5si32rI5EsoxjssDh1Iy51Vf30v4qPzXGv50aoyHPfV0XhxrO0
+	+yY9iTKo1sVYA6OD
+X-Received: by 10.84.130.36 with SMTP id 33mr30450854plc.111.1493011289568;
+	Sun, 23 Apr 2017 22:21:29 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.26
+	v13sm24001176pgo.44.2017.04.23.22.21.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:27 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:51 -0700
-Message-Id: <20170424052058.4952-10-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:52 -0700
+Message-Id: <20170424052058.4952-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 10/17] memcached: Upgrade to 1.4.36
+Subject: [meta-networking][PATCH 11/17] lowpan-tools: Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:27 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:28 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../memcached/memcached/redundant_comparison.patch          | 13 -------------
- .../memcached/{memcached_1.4.33.bb => memcached_1.4.36.bb}  |  8 ++++----
- 2 files changed, 4 insertions(+), 17 deletions(-)
- delete mode 100644 meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
- rename meta-networking/recipes-support/memcached/{memcached_1.4.33.bb => memcached_1.4.36.bb} (87%)
+ .../0001-Remove-newline-from-format-line.patch     | 32 ++++++++++++++++++++++
+ .../lowpan-tools/lowpan-tools_git.bb               |  1 +
+ 2 files changed, 33 insertions(+)
+ create mode 100644 meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
 
-diff --git a/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch b/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
-deleted file mode 100644
-index ed86ffae4..000000000
---- a/meta-networking/recipes-support/memcached/memcached/redundant_comparison.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: memcached-1.4.33/items.c
--===================================================================
----- memcached-1.4.33.orig/items.c
--+++ memcached-1.4.33/items.c
--@@ -148,7 +148,7 @@ item *do_item_alloc(char *key, const siz
--     uint8_t nsuffix;
--     item *it = NULL;
--     char suffix[40];
---    if (nbytes < 2 || nkey < 0)
--+    if (nbytes < 2)
--         return 0;
-- 
--     size_t ntotal = item_make_header(nkey + 1, flags, nbytes, suffix, &nsuffix);
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.33.bb b/meta-networking/recipes-support/memcached/memcached_1.4.36.bb
-similarity index 87%
-rename from meta-networking/recipes-support/memcached/memcached_1.4.33.bb
-rename to meta-networking/recipes-support/memcached/memcached_1.4.36.bb
-index da9a693ac..48c3c9ee2 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.4.33.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.4.36.bb
-@@ -20,10 +20,10 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
-     "
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
+new file mode 100644
+index 000000000..1453b75d5
+--- /dev/null
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools/0001-Remove-newline-from-format-line.patch
+@@ -0,0 +1,32 @@
++From a36afac485745cf980fba1809526f2025cb4d101 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sun, 23 Apr 2017 00:16:45 -0700
++Subject: [PATCH] Remove newline from format line
++
++Fixes
++
++error: '__builtin___snprintf_chk' output truncated before the last format character [-Werror=format-truncation=]
++     "%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x\n",
++                                               ^
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ addrdb/addrdb.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/addrdb/addrdb.c b/addrdb/addrdb.c
++index 4bb7f79..05d53f3 100644
++--- a/addrdb/addrdb.c
+++++ b/addrdb/addrdb.c
++@@ -178,7 +178,7 @@ int addrdb_dump_leases(const char *lease_file)
++ 			continue;
++ 		}
++ 		snprintf(hwaddr_buf, sizeof(hwaddr_buf),
++-				"%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x\n",
+++				"%02x:%02x:%02x:%02x:%02x:%02x:%02x:%02x",
++ 				lease->hwaddr[0], lease->hwaddr[1],
++ 				lease->hwaddr[2], lease->hwaddr[3],
++ 				lease->hwaddr[4], lease->hwaddr[5],
++-- 
++2.12.2
++
+diff --git a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+index 0dcc6a785..be73f8ae4 100644
+--- a/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
++++ b/meta-networking/recipes-support/lowpan-tools/lowpan-tools_git.bb
+@@ -13,6 +13,7 @@ SRC_URI = "git://git.code.sf.net/p/linux-zigbee/linux-zigbee \
+            file://0001-Fix-build-errors-with-clang.patch \
+            file://0001-addrdb-coord-config-parse.y-add-missing-time.h-inclu.patch \
+            file://0001-src-iz.c-Undef-dprintf-before-redefining.patch \
++           file://0001-Remove-newline-from-format-line.patch \
+            "
+ SRCREV = "38f42dbfce9e13629263db3bd3b81f14c69bb733"
  
- SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
--           file://redundant_comparison.patch \
--           file://memcached-add-hugetlbfs-check.patch"
--SRC_URI[md5sum] = "2d7f6476283cd36e21e521d901d37a8f"
--SRC_URI[sha256sum] = "83726c8d68258c56712373072abb25a449c257398075a39ec0867fd8ba69771d"
-+           file://memcached-add-hugetlbfs-check.patch \
-+           "
-+SRC_URI[md5sum] = "1e028fbab7288911fcaa5ed2a21817fe"
-+SRC_URI[sha256sum] = "773b6bb20bf80223ca6a15d75f570fbab346ad11ec98595e5af5e33f54bd82d8"
- 
- # set the same COMPATIBLE_HOST as libhugetlbfs
- COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
 -- 
 2.12.2
 
