@@ -1,48 +1,51 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id D283777AF0
+Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 17A5477AA8
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 19:13:40 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id c45so122351510qtb.1
+	Mon, 24 Apr 2017 19:15:46 +0000 (UTC)
+Received: by mail-qk0-f182.google.com with SMTP id h123so41076798qke.0
 	for <Openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 12:13:42 -0700 (PDT)
+	Mon, 24 Apr 2017 12:15:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Y6icM+6XYgYxNBu1hn9z5l9MbZxOCAe+0o7E4Yf2XG4=;
-	b=AXu7Ue3nUsjvVIRxonCIHD0D8wwnA5HeBtmi6Y6JvB4Kucv/SUrPjcf5NrY+Z/eiyN
-	782ENf3YuBnhg4Rbn+md57sJRs6AsU0d1vycArUDJNHdKFVNxPJTKDJ/Pp8w91ievMHY
-	0K2YbwirnfJA+1mUkNImDGBDBCZNAP3vd1mT5xwSdqR1HsiryNEPmYV5lARKL1KXKi7Y
-	uSNtEERqDpV206nAB178SNzGYJwPFIQkEbJKIpxZsB7OdPajqrVILo2E26ShFtuDH99z
-	9w4llQHhUilq9/joFO/gvp5yAc+iHs4iEHf2WvRW0mV9dZU3mWwr2/WiOHAoFsuzTOPm
-	YQTA==
+	:cc; bh=4JifzCGxE+8Q6ZohpPNp3pWmu6O1liY1eSxcE7tqXng=;
+	b=aK1RUQJftg/3i8zOpSiKWfexqZe6eiYQVALWBBAMcmSgdHbG1aJTQWqn4NjfGY8yIJ
+	o839vIIaTiII2rZvdbxUyjoFoDJtvITzvq6jwJBIfPbu5LPunLzgtSvgDF8GXuNLSdcv
+	b1E1arzZwIwD3p9q66zne+ODz1UlX3eNy1KZd07lL93rcdOTJfSjFS8LDzR0ZTLCcZDt
+	iVwhIKkal5bbmG4mt4V65hT4fIsoJYmo3mjFk4O4G5SydY8lJGJ+2Er+5k13pg4J2syV
+	CIVuu0PZ8bLPodZJASqN1cY/AlAIlSIMlmoejiuEcVvpsTXZYHroL0lzjkAjDHPiwaHN
+	gqdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Y6icM+6XYgYxNBu1hn9z5l9MbZxOCAe+0o7E4Yf2XG4=;
-	b=Ps/KrKrXJSd+yzK8f0rJIu+tLIq/wDSnDc8a1F4qPZk1jIHz9w9lqeqrClktCdPxV3
-	r6rWFRLy+sQ8ko87Uv7rMREsy4xgqgxOnyFYZFkG/SCKE2JifuXelW5pC9bxLDzXMxN6
-	l2ZXzkcWXyNY8lncmNHCk65BmyjYsTYgPK2MGcKW7Jj3gDX2kGQFW8tl8jXQqwtbbxRg
-	4UgnrnXgMrxLmDNCBoPnxDvQFjm779QyKiUypAgameAqSMyM6BDp6P0NcRnBNroaFg2k
-	LCE8GeaYq6bfS0rdzvLvCkDftl5pX+xhbvbhvl23sVfP+ykKE55lxcsXn+mqpenopLCl
-	Nq/A==
-X-Gm-Message-State: AN3rC/5q5Ojv425ITVwKCSvomDhIcVN12PM3lglJ7TxDUmC1qTqVkRGN
-	BbNg8HRuRStZIgTbPJZBKemPvoWkcWDn
-X-Received: by 10.200.3.105 with SMTP id w41mr26145901qtg.188.1493061221376;
-	Mon, 24 Apr 2017 12:13:41 -0700 (PDT)
+	bh=4JifzCGxE+8Q6ZohpPNp3pWmu6O1liY1eSxcE7tqXng=;
+	b=OwT7oWbByp1idAA0BIoK6RHbO4PTthZofF6Fv2m1uLPUdIj6n5mP1olHH9us7fbLCg
+	sEoLaWgwz6MGKgdR6EP7qKSyijhsYmXPybYLCHIRT+WDr72CWhwptKVLYduxdRprCPwd
+	UToG3oz+L4Nu1LRdjUp0H5kvwO7t7g9iZZsehNzNq5IsgdgqNNTS/kK6gSgwXAoxQWP2
+	n5V38SIiE3t2r7INHkLU8OeSukqSJwt+TDx5ZhXFngkO9PBlaueAFQqUZT+oKjY3UGhn
+	KFwl5Tq8GJ409wvAVXpxWafgHjLrR8WD6MJGyiEM8UIVHLghP7UuYYElEmnyf2fwkGDM
+	9Xyw==
+X-Gm-Message-State: AN3rC/6HBofwgjE9waxQZO4/Cr7WRs8STZYppkWnxTZ1KYLXgEFgVlZH
+	2sBcmMPuqkhnJ3JQGK5g/WzWHlpBT6Zp
+X-Received: by 10.55.115.65 with SMTP id o62mr26095676qkc.26.1493061348027;
+	Mon, 24 Apr 2017 12:15:48 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 12:13:20 -0700 (PDT)
-In-Reply-To: <CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
+Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 12:15:27 -0700 (PDT)
+In-Reply-To: <CAMKF1spRYm9yYhOVzOcA+5BPjATW_gLZfKmBCkZgj0MKZX=YmA@mail.gmail.com>
 References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
 	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
 	<CAMKF1sqfvtQPWN5Yuz3RPYkXpneS+XWcYmit_=bcvKGo3_hx8w@mail.gmail.com>
 	<CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
+	<CAJTo0LaWkRxjaF4j1HHhUqFDYYTmGADTuiLo8zqPwR+wKSbY2A@mail.gmail.com>
+	<CAJTo0LZJSZ-UJc7zTyYNf3YYKFD3mu=-zprQroZwxB1SZBQ+Bg@mail.gmail.com>
+	<CAMKF1spRYm9yYhOVzOcA+5BPjATW_gLZfKmBCkZgj0MKZX=YmA@mail.gmail.com>
 From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 24 Apr 2017 20:13:20 +0100
-Message-ID: <CAJTo0La+bGDBuJ42yVy79hW2iN3ZhpeyjXrhUApLn-PAi6PYBw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>, Bruce Ashfield <bruce.ashfield@gmail.com>
+Date: Mon, 24 Apr 2017 20:15:27 +0100
+Message-ID: <CAJTo0LbEu_PZ0WRTMK__8gjF-JVULoAA_qfLQXLCwSJpMksbPg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
 	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
@@ -61,31 +64,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 19:13:41 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 19:15:47 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On 24 April 2017 at 10:09, Burton, Ross <ross.burton@intel.com> wrote:
+On 24 April 2017 at 17:10, Khem Raj <raj.khem@gmail.com> wrote:
 
-> All merged, I'll fire in a moment.
+> thanks, yes I haven't been testing SDK yet, whats the gcc version on
+> your build host ?
 >
 
-lttng-modules fails:
+It's failing across the autobuilder so I'd suggest it's not specific to a
+gcc version.
 
-In function 'lib_ring_buffer_align',
-    inlined from 'lib_ring_buffer_try_reserve' at
-TOPDIR/tmp/work/qemumips-poky-linux/lttng-modules/2.9.1-r0/lttng-modules-2.9.1/lib/ringbuffer/frontend_api.h:118:3,
-    inlined from 'lib_ring_buffer_reserve' at
-TOPDIR/tmp/work/qemumips-poky-linux/lttng-modules/2.9.1-r0/lttng-modules-2.9.1/lib/ringbuffer/frontend_api.h:179:6,
-    inlined from 'lttng_event_reserve' at
-TOPDIR/tmp/work/qemumips-poky-linux/lttng-modules/2.9.1-r0/lttng-modules-2.9.1/lttng-ring-buffer-metadata-client.h:317:6:
-TOPDIR/tmp/work-shared/qemumips/kernel-source/include/linux/compiler.h:518:38:
-error: call to '__compiletime_assert_269' declared with attribute error:
-BUILD_BUG_ON failed: (size_of_type) == 0 || ((size_of_type) &
-((size_of_type) - 1))
-  _compiletime_assert(condition, msg, __compiletime_assert_, __LINE__)
-                                      ^
-
-Suggestions welcome :)
+It also breaks on my personal machine, which is Debian Jessie(ish) with gcc
+4.9.2
 
 Ross
 
