@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AC8071DDD
+Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
+	[209.85.214.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 768D271D8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:33 +0000 (UTC)
-Received: by mail-it0-f65.google.com with SMTP id e132so13852453ite.2
+	Mon, 24 Apr 2017 05:21:34 +0000 (UTC)
+Received: by mail-it0-f68.google.com with SMTP id x188so13076814itb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:35 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=DyftTWdBdGYaM6PiS3I5lFJ70UFUBTsMRouN+yJHw78=;
-	b=U/pSgvohGr71VgcQvkWs4KSOpip1cUggtY68TA1oSxyoWAlneSYrY6bKZXt1V/RhiG
-	IdewxHcH2WDLT8p906s04juDOnqG74mxUaBEFVFtYjOoS4Ha5VjNrqWIamEOP9d4omHA
-	WVFzOJCKxPxb2JkEr9UUSaYmTH+EmsMNTB9WbAWxR+livdHrLC5uERO33ZStoKDW9iy3
-	u8qATJwdbJn+yO0/bRjSYdLmMAkwriCCM5xZYQmq2R4aB0wptvj6X4VSE8fv6SC16Z7A
-	mMNwygMG5NbfHM7Imnf07jd6z2XgmXkGwy1rw8HKvtZXwyvJhLidlq7jiyzYznefHUOb
-	8yxA==
+	bh=rk2CIB2hxGqMQ8kHZ1DXnbXOtJjYfZoGcYtN8laX39U=;
+	b=cx7mQuDlcedFSjzr+E+NznQ6VZNWz4keSR3HbtdokqwMxl4AuzgdsvNdtTu4JrNhaE
+	BZ5FpBSVxH2jH8Ky2uyYg1nR275H/Hz72epe5dk/Sj4qeXYBxtGTLNXn0ryPsOElSqfY
+	KNX1lz8t6mF0caVx97T4+GyLxad6NuwuYOx/3gQDQYfcnxi3LDqLYYHrgZe585miDroZ
+	tqc946O/h0qadYTBS1J5uqCiKgMRQ9rLEBWDB+A3Yq938/jHsf9fMeBo43KCuHTBr9kb
+	DsWeEe+PNVDE9mSFx1NOywSpOx+9z+zIOaIw2I+6wGSVvPreyiFwFGjsRon2Hj9amd54
+	5jDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=DyftTWdBdGYaM6PiS3I5lFJ70UFUBTsMRouN+yJHw78=;
-	b=NqYme6RJzdKlpdrwyAL15Kx9TopAPQuWbuaOopjIENRcM7QtqQfyjqgxrsQCqPsdf8
-	XJi/oIYBvcx5dqkeuZhhb90L/TMbeblm9s9VMC1oNMlCNxXFmlaA59ETLzp515/syME/
-	6NSPkcGg6k1l2J0G6K3eM9NMNDtSFT2Qi9MFYNpj/lsEWAddpIFyoEG1N6y0MCfTJYPQ
-	iutukudFVoTZzjz3Bb18CRf0Zird8K4eIjyy3XJduBbsZewIGc9QhvaMAdmhK2NxeImI
-	bSVG/OYYVfYpLMWlHaer5uVQEZwpelMzQMBxIDVW9QRadKq50FNcxsFnPfkL7gRHtsMs
-	hCsA==
-X-Gm-Message-State: AN3rC/6O3ftt+6VfE06vzlBZ+Pv2AcL0tm8MJFRyNzzA+Aj5tm/iyeOo
-	LmA1/+swXBx0db7p
-X-Received: by 10.84.135.34 with SMTP id 31mr30002368pli.99.1493011294447;
-	Sun, 23 Apr 2017 22:21:34 -0700 (PDT)
+	bh=rk2CIB2hxGqMQ8kHZ1DXnbXOtJjYfZoGcYtN8laX39U=;
+	b=dGq5JJGLOBCgQ3YGACJXFx+zk16qYGdjkuqgnrq8iq+eYVykpMnlZTOWOK+iNk7oQi
+	PqrBfTNO9cVBO63ERcvDPV0BYyGEihykr1x35Db7qbCc9/iPCTcUipmubjSA2wOPlJLE
+	8V5olejWcQtB/6Mquf3Zn1swl3dObBv1NEN1ay7cKN9EM951Z8x942HChHP1BfEMGS3h
+	nVCtXcgA5WEVAJNUwqXXJwuIMApoP+lJptd4VOISwYnkTWeDba1+pmWVgyYl5jDLJHsw
+	hWR0Y2y7fxTeRYlf1+j7QucYtcZeR37PYoDTeMWG8A6dT+pL0F+MliueimGW4JWjECSE
+	FLxA==
+X-Gm-Message-State: AN3rC/5cyM2/S5S5MlKuHbJCgIrG8UK5vYpLa0J96V27sehG7ytkWxiu
+	2lcPravDAciZ3A==
+X-Received: by 10.84.237.8 with SMTP id s8mr17593967plk.163.1493011296042;
+	Sun, 23 Apr 2017 22:21:36 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.33
+	v13sm24001176pgo.44.2017.04.23.22.21.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:33 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:55 -0700
-Message-Id: <20170424052058.4952-14-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:56 -0700
+Message-Id: <20170424052058.4952-15-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/17] mariadb: Upgrade to 5.5.55
+Subject: [meta-oe][PATCH 15/17] efivar: Fix multiple definition of `efi_set_variable'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:33 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:34 -0000
 
-Fix build with gcc7
+This patch is needed across all efivar when using gcc7 for target
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../{mariadb-native_5.5.52.bb => mariadb-native_5.5.55.bb}  |  0
- meta-oe/recipes-support/mysql/mariadb.inc                   |  5 +++--
- meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13 +++++++++++++
- .../mysql/{mariadb_5.5.52.bb => mariadb_5.5.55.bb}          |  0
- 4 files changed, 16 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.52.bb => mariadb-native_5.5.55.bb} (100%)
- create mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.52.bb => mariadb_5.5.55.bb} (100%)
+ meta-oe/recipes-extended/efivar/efivar_0.24.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.52.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.52.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 401907251..fd9dcbd1a 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -17,9 +17,10 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
-            file://fix-a-building-failure.patch \
-            file://change-cc-to-cc-version.patch \
-            file://0001-disable-ucontext-on-musl.patch \
-+           file://gcc7.patch \
-           "
--SRC_URI[md5sum] = "fca86f1eaed2163b4bdce4f98f472324"
--SRC_URI[sha256sum] = "e142f9459507b97c5848042863b313ce70750118446bb4e35e5c07fe66007293"
-+SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
-+SRC_URI[sha256sum] = "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
+diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+index be04defea..602fd81b4 100644
+--- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
++++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
+@@ -15,13 +15,13 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
+ SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
+ SRC_URI = "git://github.com/rhinstaller/efivar.git \
+            file://0002-disable-static-build.patch \
++           file://allow-multi-definitions-for-native.patch \
+ "
+ SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
+                                 file://0003-efivar-fix-for-cross-compile.patch \
+                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
+                               "
+ SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
+-                                file://allow-multi-definitions-for-native.patch \
+                               "
  
- S = "${WORKDIR}/mariadb-${PV}"
- 
-diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-new file mode 100644
-index 000000000..3e75b26c7
---- /dev/null
-+++ b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-@@ -0,0 +1,13 @@
-+Index: mariadb-5.5.55/client/mysql.cc
-+===================================================================
-+--- mariadb-5.5.55.orig/client/mysql.cc
-++++ mariadb-5.5.55/client/mysql.cc
-+@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
-+         mysql_free_result(fields);
-+         break;
-+       }
-+-      field_names[i][num_fields*2]= '\0';
-++      field_names[i][num_fields*2][0]= '\0';
-+       j=0;
-+       while ((sql_field=mysql_fetch_field(fields)))
-+       {
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.52.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.52.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+ S = "${WORKDIR}/git"
 -- 
 2.12.2
 
