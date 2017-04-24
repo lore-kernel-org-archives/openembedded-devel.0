@@ -1,47 +1,47 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-it0-f54.google.com (mail-it0-f54.google.com
-	[209.85.214.54])
-	by mail.openembedded.org (Postfix) with ESMTP id DE00F71E30
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:41:07 +0000 (UTC)
-Received: by mail-it0-f54.google.com with SMTP id e132so40632328ite.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:41:09 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id B629F60778;
+	Mon, 24 Apr 2017 05:45:42 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id i137so3158631wmf.0;
+	Sun, 23 Apr 2017 22:45:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=C14LrQqyovIgrF8XPqaPsMQJzxkAoawcP7DQKvIdevE=;
-	b=urCJJzvZ6lpto0CZadQoZQJN/Gf0xIAcn6aDFq53fdZMGL/RimmilS43mEWMmB4jgK
-	WjmbFkuSre7bKFZeXzi4eXd4NfV2Tihq9CZnDZ8h1xhg+avhykHbR/1ytrwPr9ev1ZmK
-	fjkoZQo6aQ8EuKr4MrUBBTCvJ4XOteCcRxRemp6yuNhXVqRA4T3YFk74/dKkuogaFnyL
-	bTHrBl2fsPS2vGJYDZ2C955xdHMFb8jzm+WwagjfnepQVUmBO/K4IHhkmQrYoe80VDUQ
-	70kxqedS//rz9mNeDKlZ4Wa/hw4OVv/lp5WLlBRwrZ/gTue/CKDYxduf+M6tVEHez2gi
-	Ttlw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=sMoOcsFgGEzi8V8g9fTTsgv4IEzNPa6OZSH9sffXFUU=;
+	b=KusfLEsO+SJwDAqMun+pHL79+p4Nvy88SuP2sPJURkuHfA9QJloD8VnkSCTboWzQjc
+	IwhH28hqQn/xP5+iBqiRsO/SIApsy3E4i1/QSWP2si3RpDcs3WPK7uGrn1iWHEEdsO2q
+	kP6h71caf8hst5o9gy+pLpQhCmMVvtiu8ChbgFQuaAa84H2mTA+JR5o/urLsuNFMvgw6
+	V6+PwjOqxDp5crKx8mEP4xViedR32NggAWnaqQBkzN/JmknY1NEMeP3mbrNiRzBXl1SL
+	6OnST7KutTVssqMMKp4G912EiMy8H6tcWQUTMnWizp+arGVBUiQpBpjPRmejneQ8ZIX9
+	bNsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=C14LrQqyovIgrF8XPqaPsMQJzxkAoawcP7DQKvIdevE=;
-	b=nqgIE11vbvE/UqUuz5P5mgWpVCKHQLwB0GxZnOF8zS4tmINGYLDXzTJFGh4cC3nL4Q
-	zWQOLoC01QWtxswJ0IfEMYBjddIZestLCmRKOWm+PvjlTrQbZ071xx8M5etERH3SL/8o
-	Uz0N5DNX/MSkznlDk6Iau2pK6Zl+48ArsYqb5K3OI7Qj6/mhDqImPSl/7GXHdZR/fY11
-	GdMlLJ+RwSAf/30Zicahgl/J7l1euSkRyfAr/sdGsMCI2DWFTws4rsyE7KpiBmiYthqu
-	VgHXdZLeVHVIEVdpdNE6iezWQ3TnLFI8Vg/NDhFHMv8M5R2K6a0BGw3g5SR8Rf5Cw/As
-	wDbQ==
-X-Gm-Message-State: AN3rC/4Dj/7bVzT4NFc2AaeewhfPs9YXKAdgI+se8J4veb/x19yv6E7o
-	j3WJmgh4Bam24Q==
-X-Received: by 10.98.215.94 with SMTP id v30mr22717813pfl.121.1493012468735;
-	Sun, 23 Apr 2017 22:41:08 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	c64sm28100770pfa.110.2017.04.23.22.41.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:41:07 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Apr 2017 15:41:14 +1000
-Message-Id: <20170424054114.11487-1-net147@gmail.com>
-X-Mailer: git-send-email 2.12.2
-Subject: [meta-oe][morty][PATCH] devmem2: Update SRC_URI
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=sMoOcsFgGEzi8V8g9fTTsgv4IEzNPa6OZSH9sffXFUU=;
+	b=SxvUyeu97bSjNCceZeNjWPcDWHXDeA+GaGX/XkDUfBiMuPfoIPn06iZoQ5lqmPPioN
+	C1iSxmt/h3T7nF/cNJKObO88d91tJUjSDWiBDnWts2P0RmSSAR43m2++fSqAsxNUsz+9
+	tXAAT/GWXojg2StzXpCOdyBBCn7j1e//oy2U9pvUfjSA4wnhvWRCnpkgy+xan/BT2RBP
+	ZCJ3oEpcYTeimx1nQTrCi1LMwRRYhgFWIJ2W6YfdyX9HRpQmWzB038w8q4vAj+cSiK1h
+	oeHhvVB4bcfl02XlupGlENwXcP/Z0hDtJIIolz1fnnvBfogcSoPtdOk2t4CN64RaoHFf
+	gz1g==
+X-Gm-Message-State: AN3rC/53Yqxel3gTUKe/INlADuZCcRKD5wEExouN81RwoKkxMIJxPXzd
+	LnrX0lrKbPpFguqYsTsuKlObcDr97w==
+X-Received: by 10.28.206.195 with SMTP id e186mr7557571wmg.37.1493012743294;
+	Sun, 23 Apr 2017 22:45:43 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.180.141 with HTTP; Sun, 23 Apr 2017 22:45:12 -0700 (PDT)
+In-Reply-To: <CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
+References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
+	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:45:12 -0700
+Message-ID: <CAMKF1sqfvtQPWN5Yuz3RPYkXpneS+XWcYmit_=bcvKGo3_hx8w@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] gcc7 and glibc-2.26 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:41:08 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 05:45:43 -0000
+Content-Type: text/plain; charset=UTF-8
 
-The original URL no longer exists.
+On Sun, Apr 23, 2017 at 3:04 PM, Burton, Ross <ross.burton@intel.com> wrote:
+>
+> On 16 April 2017 at 16:50, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> I have put together recipes for upcoming gcc-7 major release as well
+>> as glibc 2.26 release, which we would target for next release ( 2.4 )
+>
+>
+> I threw these at the autobuilder and the errors are starting to appear:
+>
+> http://errors.yoctoproject.org/Errors/Latest/?filter=eddf6362e17899113f10cf53ed0db8a4b13ff3fc&type=commit
+>
+> Repeated diffutils and rpcbind failures, but linux-yocto and grub too (I
+> have your grub fix already).
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- meta-oe/recipes-support/devmem2/devmem2.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+There are few other fixes that needs to be in there. glibc and gcc recipes
+also needed some fixes. I have pushed the whole series to kraj/master
+branch on contrib repo
 
-diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb b/meta-oe/recipes-support/devmem2/devmem2.bb
-index e48cc9210..5e244f74b 100644
---- a/meta-oe/recipes-support/devmem2/devmem2.bb
-+++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-@@ -3,7 +3,7 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://devmem2.c;endline=28;md5=dd68f2b0a5184b3db3dc25c99e0bd0cd"
- PR = "r7"
- 
--SRC_URI = "http://www.lartmaker.nl/lartware/port/devmem2.c \
-+SRC_URI = "http://free-electrons.com/pub/mirror/devmem2.c \
-            file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
- S = "${WORKDIR}"
- 
--- 
-2.12.2
+http://git.openembedded.org/openembedded-core-contrib/log/?h=kraj/master
 
+give it a whirl again.
+
+>
+> Ross
 
