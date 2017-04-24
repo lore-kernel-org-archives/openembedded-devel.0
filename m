@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1475971D8C
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id ECEF66E668
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:14 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id a103so178090897ioj.1
+	Mon, 24 Apr 2017 05:21:12 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id z67so13855283itb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:16 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=unCkJlscsKvxVGKLdp90nvmgEOhLlnV0v4Y45/JD2TE=;
-	b=qsDuASNTGxmMcbRNG1ZWnawwYrP920E0Rj7TKjiHrda6KNuYTkxJOTacxLkPPccy8z
-	C5Yhy+WUXWZXqJdtatAvzPS9ayaEJnvCp4FGbYfnug84HtSH9KNRuuKUjTaLXNuwSJ7g
-	qoJcYrUFmUXXts5HYf0K6KyZAkS+/68a8q0ArSVTAJiqS+QAlNjwSDzAsh87FX5DExnZ
-	P6F28dmrZUNgsddIy2aKDy1RXCtn0T1r5LYn+Qm8KyCBKp40cbx/dqqZjNTxAtsRnjyh
-	KwDiuJh66FKQggJxkG1uPjNg6z1QHcvJYNd4uQJrOzmtKPXTEgCRKEOhPkx2fig1CElP
-	Isqg==
+	h=from:to:cc:subject:date:message-id;
+	bh=Gj7/I0xigbKwiz6HAWgWh+1Usv7DClcBv6cFbHnsTWw=;
+	b=ktvAvr/a8Ja4R6IA03H7bFZF1xQ8uYceOJCWmkh68LNiQYAGLuDRD2Nfaw2cVvG/9e
+	cts7sqk7ezJ7W28H7VBl2dsV/Zdcme2gz4Qfq31XhkNJwH69F2OMbG5WCHyBLzazLJRo
+	MHNku3Lru9Sz6fquG9QdkdvTenZLU3m0ab5oyZLdL1Jva3QFEw7WPd1YYNSoQsnX0UXG
+	/Un99oD/sq6+m2efe0cqnINI4mvPcczmILuoWeJRKNPD5KUNMbwm4biXxj3RzqjX6XJz
+	cmQIblSoSRssQM8qE3s3Ol1Xvtknhm71Fgy1WXiaSX3QT5rB3+kl8EtVDLxCjVvlXqXB
+	1lhw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=unCkJlscsKvxVGKLdp90nvmgEOhLlnV0v4Y45/JD2TE=;
-	b=rESa++920xoamGnXpwj1x75/sIz4ltuwHUhdosuh3UN9ayJLfcuXtg2QWf3/0yKqF3
-	Wtqvc4wVYfwTIxxJk/ptu7r3hzMHuuThCMBYSKR9RVetD1ky1FhMmSdFAB7LYQpc/4/A
-	Iv9XKtYXWu7MeRKhKCIBwyncZ+OYQAmGgfdedoO+0n/umoj3piihwi6KY/gEK59G5bv9
-	64iL1O3Trhg5Yv9Omd2339p0FhrhGH4vldOAe1zKwfj/HwZEX0Cw+ZX0KRd4mXPI7cyt
-	XeKH2g0REbjLvjdGW70jjxLha7BnUHh3iXrTc5/DkjJtdDZJPics4cLTkhUQ4Yja41Lh
-	vGaw==
-X-Gm-Message-State: AN3rC/6hNmbLZQBDBWppqEpyw01Y6y9awd+syUK0dU/y1yVSofASnPbe
-	N9kvfAqe7rA4Bg==
-X-Received: by 10.98.152.215 with SMTP id d84mr22764165pfk.7.1493011275270;
-	Sun, 23 Apr 2017 22:21:15 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Gj7/I0xigbKwiz6HAWgWh+1Usv7DClcBv6cFbHnsTWw=;
+	b=WISQrGDTaAKR01Oe4peIMAF1l8RrHjoJi0LEQVSw8ceBPAs8yND9D4nlz+K6mM8LeK
+	Txe23xNkTt22ttKz3UNO/DSGjYYm9CMGVaKfAuA0cEuAWapGHC8uJK6ieYi2t37usYm+
+	cSLsazrKdytlxZYLgwnGw4L8c7uDqwbuMZmWDaLtHiZQiT+bYhmblOZsS979fhdB+aqv
+	YP/CvE11h4ntjLvZkwx3xd/wj1NNbY5s6Qn1zzAXgLZjhM+Vtz99WYRIVGGiNSPOhCQg
+	/epNJc2IWfLGoMWzd1AUAGUjNEEYqYCeAp3JqgK+aEplKDYNrt3NZLQVHkUfCu2S2R11
+	aAhQ==
+X-Gm-Message-State: AN3rC/76pk54dPP2x0Lor30JrXCSUM+Dd3hrlP4ayM8IQYTjmZWl5y9P
+	kX/IkQkVKocgmA==
+X-Received: by 10.84.135.34 with SMTP id 31mr30001072pli.99.1493011273750;
+	Sun, 23 Apr 2017 22:21:13 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.13
+	v13sm24001176pgo.44.2017.04.23.22.21.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:14 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:43 -0700
-Message-Id: <20170424052058.4952-2-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:42 -0700
+Message-Id: <20170424052058.4952-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
-References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 02/17] ltrace: Fix FTBFS due to invalid code in ARM support
+Subject: [meta-multimedia][PATCH 01/17] musicbrainz: Upgrade to 5.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,75 +55,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Mon, 24 Apr 2017 05:21:16 -0000
 
-Found with gcc7
+Drop uclibc specific flags
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...s-unreachable-code-after-switch-statement.patch | 40 ++++++++++++++++++++++
- meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  3 +-
- 2 files changed, 42 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
+ .../recipes-multimedia/musicbrainz/libmusicbrainz_git.bb           | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
-new file mode 100644
-index 000000000..4d0e0392f
---- /dev/null
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
-@@ -0,0 +1,40 @@
-+From 95ff340a74af16cca89fd5c5ca99890821053209 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 22 Apr 2017 00:47:16 -0700
-+Subject: [PATCH] ARM code has unreachable code after switch statement move
-+ initialization
-+
-+Fixed
-+sysdeps/linux-gnu/arm/trace.c:173:33: error: statement will never be executed [-Werror=switch-unreachable]
-+    uint32_t operand1, operand2, result = 0;
-+                                 ^~~~~~
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ sysdeps/linux-gnu/arm/trace.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/sysdeps/linux-gnu/arm/trace.c b/sysdeps/linux-gnu/arm/trace.c
-+index 5e51e91..f974d1f 100644
-+--- a/sysdeps/linux-gnu/arm/trace.c
-++++ b/sysdeps/linux-gnu/arm/trace.c
-+@@ -155,6 +155,8 @@ arm_get_next_pcs(struct process *proc,
-+ 	const unsigned cond = BITS(this_instr, 28, 31);
-+ 	const unsigned opcode = BITS(this_instr, 24, 27);
-+ 
-++	uint32_t operand1, operand2, result = 0;
-++
-+ 	if (cond == COND_NV)
-+ 		switch (opcode) {
-+ 			arch_addr_t addr;
-+@@ -170,7 +172,6 @@ arm_get_next_pcs(struct process *proc,
-+ 		}
-+ 	else
-+ 		switch (opcode) {
-+-			uint32_t operand1, operand2, result = 0;
-+ 		case 0x0:
-+ 		case 0x1:			/* data processing */
-+ 		case 0x2:
-+-- 
-+2.12.2
-+
-diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-index a5960f5b0..60af5425e 100644
---- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-+++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
-@@ -20,7 +20,8 @@ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
-            file://0001-replace-readdir_r-with-readdir.patch \
-            file://0001-Use-correct-enum-type.patch \
-            file://0002-Fix-const-qualifier-error.patch \
--          "
-+           file://0001-ARM-code-has-unreachable-code-after-switch-statement.patch \
-+           "
+diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+index a6a4f6a8a..250c5f14e 100644
+--- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
++++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+@@ -5,17 +5,14 @@ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
+ DEPENDS = "expat neon neon-native"
+ 
+-PV = "5.0.1+git${SRCPV}"
+-PR = "r1"
++PV = "5.1.0+git${SRCPV}"
+ 
+-SRCREV = "0749dd0a35b4a54316da064475863a4ac6e28e7e"
++SRCREV = "44c05779dd996035758f5ec426766aeedce29cc3"
+ SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
+            file://allow-libdir-override.patch "
+ 
  S = "${WORKDIR}/git"
  
- inherit autotools
+-LDFLAGS_prepend_libc-uclibc = " -lpthread "
+-
+ inherit cmake pkgconfig
+ 
+ do_configure_prepend() {
 -- 
 2.12.2
 
