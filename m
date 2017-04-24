@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f68.google.com (mail-it0-f68.google.com
-	[209.85.214.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 768D271D8C
+Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
+	[209.85.223.194])
+	by mail.openembedded.org (Postfix) with ESMTP id AF7B772F1B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:34 +0000 (UTC)
-Received: by mail-it0-f68.google.com with SMTP id x188so13076814itb.3
+	Mon, 24 Apr 2017 05:21:36 +0000 (UTC)
+Received: by mail-io0-f194.google.com with SMTP id x86so45540435ioe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:36 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=rk2CIB2hxGqMQ8kHZ1DXnbXOtJjYfZoGcYtN8laX39U=;
-	b=cx7mQuDlcedFSjzr+E+NznQ6VZNWz4keSR3HbtdokqwMxl4AuzgdsvNdtTu4JrNhaE
-	BZ5FpBSVxH2jH8Ky2uyYg1nR275H/Hz72epe5dk/Sj4qeXYBxtGTLNXn0ryPsOElSqfY
-	KNX1lz8t6mF0caVx97T4+GyLxad6NuwuYOx/3gQDQYfcnxi3LDqLYYHrgZe585miDroZ
-	tqc946O/h0qadYTBS1J5uqCiKgMRQ9rLEBWDB+A3Yq938/jHsf9fMeBo43KCuHTBr9kb
-	DsWeEe+PNVDE9mSFx1NOywSpOx+9z+zIOaIw2I+6wGSVvPreyiFwFGjsRon2Hj9amd54
-	5jDQ==
+	bh=QdZUp71FV6FXqZpR8xJ4bUl83R8U023B9r6ww2r8giU=;
+	b=kBA/xfdvmmxh+WXFNmwvBjZSepgdTlxArEdgzEBApws6KTeptM3HxVGCz+RrfSFFcU
+	oSSaKp4KT4pYie6hq+BC2tq6Ged7bnl7tjQHL4toRIdQAdhwWkKqxtbIgbLJOFnLD2JO
+	4pmiaBRPVO/aqR8IfEe44DFh5H1zaLbn2Q6qzqVwQaguLfFH2x8ckWHkQ3n/yUwxgz52
+	Fgrb83NDtfxeAHzk1nglItVq3GveNMmgV8R/ikycBMJVd4VUyGTvrBpg3YKRpkTNLcAN
+	snw9e0dXBS5a3k2O2Q04VYAfYUsFD5MbrJGmVLXmk4oyp1MYRIE1a7KxHdnPnvV+5Cgx
+	ywow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=rk2CIB2hxGqMQ8kHZ1DXnbXOtJjYfZoGcYtN8laX39U=;
-	b=dGq5JJGLOBCgQ3YGACJXFx+zk16qYGdjkuqgnrq8iq+eYVykpMnlZTOWOK+iNk7oQi
-	PqrBfTNO9cVBO63ERcvDPV0BYyGEihykr1x35Db7qbCc9/iPCTcUipmubjSA2wOPlJLE
-	8V5olejWcQtB/6Mquf3Zn1swl3dObBv1NEN1ay7cKN9EM951Z8x942HChHP1BfEMGS3h
-	nVCtXcgA5WEVAJNUwqXXJwuIMApoP+lJptd4VOISwYnkTWeDba1+pmWVgyYl5jDLJHsw
-	hWR0Y2y7fxTeRYlf1+j7QucYtcZeR37PYoDTeMWG8A6dT+pL0F+MliueimGW4JWjECSE
-	FLxA==
-X-Gm-Message-State: AN3rC/5cyM2/S5S5MlKuHbJCgIrG8UK5vYpLa0J96V27sehG7ytkWxiu
-	2lcPravDAciZ3A==
-X-Received: by 10.84.237.8 with SMTP id s8mr17593967plk.163.1493011296042;
-	Sun, 23 Apr 2017 22:21:36 -0700 (PDT)
+	bh=QdZUp71FV6FXqZpR8xJ4bUl83R8U023B9r6ww2r8giU=;
+	b=TzNk1SEsFlGrg/Ub+iQEL6Ga8mYH12Xwfe536ElEXrOQ8tP/gMhjQGox2c2PAwddQ3
+	HHLOuc46Na1N6Qdyhn/wfb2E7ANzNf2pjKzZ4dbCRaHnHr004afR47NYKB6adJlq9RSS
+	3s3CH6+OXTS+ubZlk2mtd7o/pcsGn6yC8d4kpHvg/DbMZ63or4BS7x3KZCZfgjxBj2eI
+	GDegRWbjBeW5dcVmhco0lvnkUobQ3tiJhfg1YSBfyrCpyg8GPOuWOZDIRfLllENngT7q
+	f521SyRiJRVshq9Pgt5PQQE1VATj3S8bgIn2tXmfN0Yo7PEnEPVjKgBtg/3yLyeHD0Sq
+	KDXA==
+X-Gm-Message-State: AN3rC/4sNmKQw/2OF3nzO8WMqKHdX5Ag8IAsysuvLbIJS6mVBPpz2Nje
+	UJ77pif0YiVMQ5dU
+X-Received: by 10.98.54.68 with SMTP id d65mr2287242pfa.90.1493011297543;
+	Sun, 23 Apr 2017 22:21:37 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.34
+	v13sm24001176pgo.44.2017.04.23.22.21.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:34 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:36 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:56 -0700
-Message-Id: <20170424052058.4952-15-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:57 -0700
+Message-Id: <20170424052058.4952-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 15/17] efivar: Fix multiple definition of `efi_set_variable'
+Subject: [meta-networking][PATCH 16/17] libtalloc: Upgrade to 2.1.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:34 -0000
-
-This patch is needed across all efivar when using gcc7 for target
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:36 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-extended/efivar/efivar_0.24.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../libtalloc/{libtalloc_2.1.8.bb => libtalloc_2.1.9.bb}      | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+ rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.8.bb => libtalloc_2.1.9.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-index be04defea..602fd81b4 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-@@ -15,13 +15,13 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
- SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
- SRC_URI = "git://github.com/rhinstaller/efivar.git \
-            file://0002-disable-static-build.patch \
-+           file://allow-multi-definitions-for-native.patch \
- "
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                 file://0003-efivar-fix-for-cross-compile.patch \
-                                 ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '', d)} \
-                               "
- SRC_URI_append_class-native = " file://fix-compile-failure-with-host-gcc-4.6.patch \
--                                file://allow-multi-definitions-for-native.patch \
-                               "
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb
+similarity index 93%
+rename from meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
+rename to meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb
+index 0283088ff..d80af50d2 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.8.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb
+@@ -2,16 +2,15 @@ SUMMARY = "Hierarchical, reference counted memory pool system with destructors"
+ HOMEPAGE = "http://talloc.samba.org"
+ SECTION = "libs"
+ LICENSE = "LGPL-3.0+ & GPL-3.0+"
+-
+-SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
+-           file://talloc-Add-configure-options-for-packages.patch \
+-"
+ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6d5228bfa7825249 \
+                     file://pytalloc.h;beginline=1;endline=18;md5=2c498cc6f2263672483237b20f46b43d"
  
- S = "${WORKDIR}/git"
+-SRC_URI[md5sum] = "6fb70af4174330e4cc139ea63b07c9e9"
+-SRC_URI[sha256sum] = "22d14911164d4de67ff76b5269fa5250d01f78c955bc77e28615350996877130"
+ 
++SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
++           file://talloc-Add-configure-options-for-packages.patch \
++"
++SRC_URI[md5sum] = "19ba14eba97d79a169fa92ea824d2b9e"
++SRC_URI[sha256sum] = "f0aad4cb88a3322207c82136ddc07bed48a37c2c21f82962d6c5ccb422711062"
+ 
+ inherit waf-samba
+ 
 -- 
 2.12.2
 
