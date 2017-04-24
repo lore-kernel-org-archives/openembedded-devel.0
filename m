@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
 	[209.85.223.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 9DCB56E668
+	by mail.openembedded.org (Postfix) with ESMTP id 4ED5A6E668
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 05:21:16 +0000 (UTC)
-Received: by mail-io0-f195.google.com with SMTP id d203so45662813iof.2
+	Mon, 24 Apr 2017 05:21:17 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id k87so45322537ioi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Apr 2017 22:21:18 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9uEItmBZ3lXQO4q7KQDruXXPZXnp3N+BZcCNR3ASyuU=;
-	b=Wl3DLcWzJJLM1T5q23lgKNvNT33kI9ngrStxnfAaA7I1ohgMWzUUvKKzf6XnW1cHp0
-	RiNWj93raSkG+HtnyN88/BEuhjn+OlgXcPNIvD5VSWhDpSyS8wF+QTfCvvqfirY33ORM
-	IAFtp5uVImsYPfZOJjkASUoK+w//QKoB5jKuUBH3yoyWE65jQ0se8Z862OtodopojVA5
-	FPl2rPjyHEAM7BCsWH288vO5pTMT04q2faOvLj2PmyLFlReOLTPDFuJ4+Pf9ACzPlYnC
-	c+wDe2TJsrxjoC+xElMVhn2asKVUPFInVq6NIgToIFXL5N7WQyk+gCRoUtqspdTZvRr0
-	Vcjw==
+	bh=TO4cZ+igOxAg9o3mzAVGiVufzSYRfLXgLJVqMAiyMn4=;
+	b=FenDWRd5yF3f4zrHjOODvPAH0PG3w1h6ssAxKCIMMB7I14JU5UBE6JjBCBYU/0K+Pe
+	NHJotBNTiCzFo53Oj2ynC4uoNgXx9UZ14riVjOP3bAjaBIb67MbuxTKfuBOXFeRUuOE7
+	R8Tww6+9sBI5is5zXdJLcHOSCHf0T8ij1rTXkXdUfIQ/UimeSUortc6EOl9DM5DHFvZP
+	GSHk+nWEGyZZ6abHmfUH5NZudA+GyJcWoX9rJftDbzgtFe/03tEN4AECwJIkspupseGr
+	YnVGIXQmXJWXcXeMvIm65f83sij3glaVGDAwepfA79nReFXQ8zkxcPGQaUnX10jUyH+s
+	73pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9uEItmBZ3lXQO4q7KQDruXXPZXnp3N+BZcCNR3ASyuU=;
-	b=YXDw2TlupAhsA38k6EojT/rE7+zu4LbP/Lj8rVtdg81gUBxt85RlbxVRZ6B1eXMRz2
-	LsBUMd9g3KLDtyC8BxofGWhwGcx/+iqpzbLiSnpDKssXAwGWZh2U+qj9pvDZJclmN8bA
-	bv1dn7kIJ2lMhosqtKGwUynG0MbeeMc3oM+P85PipMqSRf287/IFN+eZRIx7TaVLk4OH
-	dX+ytEfM0VYEc7jx69nyVteUuGIpmduegKXj8xKw0zhXn2HtN+oUmJkxbj6vM5d4LZ2B
-	b8X8KZPBvGrtV3Q3JA6EGHvhcMo7Klmh9IKlAFahSTjaJYx2EDlkn5d70bTI+1m37AQD
-	hZgw==
-X-Gm-Message-State: AN3rC/4gPhJX8kuhN3W9Ty/jF28uuXl6HlhEHuLESpYkcMne88yF95OK
-	bDwhqBzSLKVjkQ==
-X-Received: by 10.98.202.80 with SMTP id n77mr23307748pfg.158.1493011277057;
-	Sun, 23 Apr 2017 22:21:17 -0700 (PDT)
+	bh=TO4cZ+igOxAg9o3mzAVGiVufzSYRfLXgLJVqMAiyMn4=;
+	b=OfUVpJo2G19QpYLDrHjzcHdSUNn6q5C8DCw+ohBoG+NGviseDQ7sMguuw5jjmju/vf
+	3/sinGrxqVKikEMJUl0VQYvbz2OmH+ycu46ONW3bYUCbvsI/yIMj2VZ841xFbutK9S5U
+	yfhjcaGOZg2QPlz0AOXsu3K6l0c9G7HtUUVZ5Ib3eLOOmey6woaYNhaypJItZpNmmD+I
+	vZi3qORYIUunWDAnRg+mmdEArrQya9IUe1hNwYcfuVUfi0xBSm9sdfq2rzZEBom05cyR
+	lDsSe0Xlqa0pQUUkN5uLiYtwvicXf0mFS20RicG2DfJCygRZtJhqvsDCdDPrMz42G+vQ
+	1nmg==
+X-Gm-Message-State: AN3rC/7cP4JrAkqc4Kt85POW4whR6N8RSEh/deXV+WiEWnBhW6cuAMb2
+	RpBo8xhLjMLMgg==
+X-Received: by 10.98.211.27 with SMTP id q27mr23330853pfg.126.1493011278548;
+	Sun, 23 Apr 2017 22:21:18 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
-	v13sm24001176pgo.44.2017.04.23.22.21.15
+	v13sm24001176pgo.44.2017.04.23.22.21.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 23 Apr 2017 22:21:15 -0700 (PDT)
+	Sun, 23 Apr 2017 22:21:17 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 Apr 2017 22:20:44 -0700
-Message-Id: <20170424052058.4952-3-raj.khem@gmail.com>
+Date: Sun, 23 Apr 2017 22:20:45 -0700
+Message-Id: <20170424052058.4952-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
 References: <20170424052058.4952-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 03/17] msgpack-c: Upgrade to 2.1.1
+Subject: [meta-oe][PATCH 04/17] fluentbit: Upgrade to 0.11.3 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,140 +56,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 05:21:16 -0000
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:17 -0000
 
+Fix cross compiling for external modules
 Fix build with gcc7
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ntentional-fallthrough-in-case-statements.patch | 39 +++++++++++++++++++++
- .../304ff96d04599401172568d042723ff507e78cc3.patch | 40 ++++++++++++++++++++++
- .../{msgpack-c_2.0.0.bb => msgpack-c_2.1.1.bb}     | 15 +++++---
- 3 files changed, 90 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
- create mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/304ff96d04599401172568d042723ff507e78cc3.patch
- rename meta-oe/recipes-devtools/msgpack/{msgpack-c_2.0.0.bb => msgpack-c_2.1.1.bb} (62%)
+ ...txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch | 52 ++++++++++++++++++++++
+ ...pack-Add-comment-for-intended-fallthrough.patch | 28 ++++++++++++
+ .../recipes-extended/fluentbit/fluentbit_0.11.3.bb | 24 ++++++++++
+ .../recipes-extended/fluentbit/fluentbit_0.7.2.bb  | 16 -------
+ 4 files changed, 104 insertions(+), 16 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0002-msgpack-Add-comment-for-intended-fallthrough.patch
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
+ delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
 new file mode 100644
-index 000000000..a388297a8
+index 000000000..539a42a7d
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
-@@ -0,0 +1,39 @@
-+From 15d8bb6792c9639d85a9ffe2ac81431f1b986c21 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
+@@ -0,0 +1,52 @@
++From ceb47f37582a055bb7f253f813c435ad55c5b6eb Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 22 Apr 2017 08:53:50 -0700
-+Subject: [PATCH] Comment intentional fallthrough in case statements
++Date: Sat, 22 Apr 2017 10:02:50 -0700
++Subject: [PATCH 1/2] CMakeLists.txt: Add AUTOCONF_HOST_OPT to help cross
++ compiling
 +
-+Fixes build with gcc7
++This helps in doing cross compiles for modules which are using
++GNU autoconf for build system
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp | 4 ++++
-+ 1 file changed, 4 insertions(+)
++ CMakeLists.txt | 10 ++++++++--
++ 1 file changed, 8 insertions(+), 2 deletions(-)
 +
-+diff --git a/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp b/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
-+index b35c21a7..4c463a90 100644
-+--- a/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
-++++ b/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
-+@@ -105,6 +105,7 @@ struct define_array<A0, A1> {
-+             switch(size) {
-+             default:
-+             case 2: ptr[1].convert(a1);
-++            //fallthrough
-+             case 1: ptr[0].convert(a0);
-+             }
-+         }
-+@@ -193,8 +194,11 @@ struct define_array<A0, A1, A2, A3> {
-+             switch(size) {
-+             default:
-+             case 4: ptr[3].convert(a3);
-++            //fallthrough
-+             case 3: ptr[2].convert(a2);
-++            //fallthrough
-+             case 2: ptr[1].convert(a1);
-++            //fallthrough
-+             case 1: ptr[0].convert(a0);
-+             }
-+         }
++diff --git a/CMakeLists.txt b/CMakeLists.txt
++index b093f9a..ebf0cd7 100644
++--- a/CMakeLists.txt
+++++ b/CMakeLists.txt
++@@ -290,6 +290,12 @@ else()
++   endif()
++ endif()
++ 
+++if("${GNU_HOST}" STREQUAL "")
+++    set(AUTOCONF_HOST_OPT "")
+++else()
+++    set(AUTOCONF_HOST_OPT "--host=${GNU_HOST}")
+++endif()
+++
++ # Memory Allocator
++ # ================
++ if(FLB_JEMALLOC AND ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++@@ -299,7 +305,7 @@ if(FLB_JEMALLOC AND ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
++   # Link to Jemalloc as an external dependency
++   ExternalProject_Add(jemalloc
++     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc
++-    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc/configure --with-lg-quantum=3 --enable-cc-silence --prefix=<INSTALL_DIR>
+++    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc/configure ${AUTOCONF_HOST_OPT} --with-lg-quantum=3 --enable-cc-silence --prefix=<INSTALL_DIR>
++     CFLAGS=-std=gnu99\ -Wall\ -pipe\ -g3\ -O3\ -funroll-loops
++     BUILD_COMMAND ${MAKE}
++     INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/
++@@ -317,7 +323,7 @@ endif()
++ if(FLB_REGEX)
++   ExternalProject_Add(onigmo
++     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo
++-    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo/configure --with-pic --disable-shared --enable-static --prefix=<INSTALL_DIR>
+++    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo/configure ${AUTOCONF_HOST_OPT} --with-pic --disable-shared --enable-static --prefix=<INSTALL_DIR>
++     CFLAGS=-std=gnu99\ -Wall\ -pipe\ -g3\ -O3\ -funroll-loops
++     BUILD_COMMAND ${MAKE}
++     INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/304ff96d04599401172568d042723ff507e78cc3.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/304ff96d04599401172568d042723ff507e78cc3.patch
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0002-msgpack-Add-comment-for-intended-fallthrough.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-msgpack-Add-comment-for-intended-fallthrough.patch
 new file mode 100644
-index 000000000..b8b3d3187
+index 000000000..35cdb18ad
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c/304ff96d04599401172568d042723ff507e78cc3.patch
-@@ -0,0 +1,40 @@
-+From 304ff96d04599401172568d042723ff507e78cc3 Mon Sep 17 00:00:00 2001
-+From: James McCoy <jamessan@debian.org>
-+Date: Thu, 13 Apr 2017 11:38:45 -0400
-+Subject: [PATCH] Comment the intentional fallthrough to default from
-+ _fixed_trail_again
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0002-msgpack-Add-comment-for-intended-fallthrough.patch
+@@ -0,0 +1,28 @@
++From d95c2977da074be0d3913e94fb8fb5ed1c64404a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 22 Apr 2017 10:04:03 -0700
++Subject: [PATCH 2/2] msgpack: Add comment for intended fallthrough
 +
-+GCC 7 added a new diagnostic, -Wimplicit-fallthrough, which is enabled
-+with -Wextra that warns about implicitly falling through a case
-+statement.
++Helps fixing build with gcc7
 +
-+    [  4%] Building C object CMakeFiles/msgpackc-static.dir/src/unpack.c.o
-+    /usr/lib/gcc-snapshot/bin/gcc   -I/home/jamessan/src/msgpack-c/. -I/home/jamessan/src/msgpack-c/include -I/home/jamessan/src/msgpack-c/build/include  -g -O2 -fdebug-prefix-map=/home/jamessan/src/msgpack-c=. -specs=/usr/share/dpkg/no-pie-compile.specs -fstack-protector-strong -Wformat -Werror=format-security -Wdate-time -D_FORTIFY_SOURCE=2   -Wall -Wextra -Werror -g -O3 -o CMakeFiles/msgpackc-static.dir/src/unpack.c.o   -c /home/jamessan/src/msgpack-c/src/unpack.c
-+    In file included from /home/jamessan/src/msgpack-c/src/unpack.c:283:0:
-+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h: In function 'template_execute':
-+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h:238:17: error: this statement may fall through [-Werror=implicit-fallthrough=]
-+                     ++p;
-+                     ^~~
-+    /home/jamessan/src/msgpack-c/include/msgpack/unpack_template.h:240:13: note: here
-+                 default:
-+                 ^~~~~~~
-+    cc1: all warnings being treated as errors
-+
-+Adding the comment makes it explicit that the fallthrough is
-+intentional, so gcc doesn't complain.
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ include/msgpack/unpack_template.h | 1 +
-+ 1 file changed, 1 insertion(+)
++ lib/msgpack-c-0b7cabd/include/msgpack/unpack_template.h | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/include/msgpack/unpack_template.h b/include/msgpack/unpack_template.h
-+index 8450442..e557bb6 100644
-+--- a/include/msgpack/unpack_template.h
-++++ b/include/msgpack/unpack_template.h
-+@@ -236,6 +236,7 @@ msgpack_unpack_func(int, _execute)(msgpack_unpack_struct(_context)* ctx, const c
++diff --git a/lib/msgpack-c-0b7cabd/include/msgpack/unpack_template.h b/lib/msgpack-c-0b7cabd/include/msgpack/unpack_template.h
++index a6dae6f..651e6c2 100644
++--- a/lib/msgpack-c-0b7cabd/include/msgpack/unpack_template.h
+++++ b/lib/msgpack-c-0b7cabd/include/msgpack/unpack_template.h
++@@ -248,7 +248,7 @@ msgpack_unpack_func(int, _execute)(msgpack_unpack_struct(_context)* ctx, const c
 + 
 +             _fixed_trail_again:
 +                 ++p;
-++                // fallthrough
-+ 
++-
+++            // fallthrough
 +             default:
 +                 if((size_t)(pe - p) < trail) { goto _out; }
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.0.0.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb
-similarity index 62%
-rename from meta-oe/recipes-devtools/msgpack/msgpack-c_2.0.0.bb
-rename to meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb
-index 14e860d6a..7655d9469 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.0.0.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb
-@@ -6,10 +6,17 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
-                     file://COPYING;md5=0639c4209b6f2abf1437c813b208f2d3 \
-                     file://LICENSE_1_0.txt;md5=e4224ccaecb14d942c71d31bef20d78c \
-                    "
--SRC_URI = "https://github.com/msgpack/msgpack-c/releases/download/cpp-${PV}/msgpack-${PV}.tar.gz"
--SRC_URI[md5sum] = "55148cd856c72f954a6eb9cc889a7d2a"
--SRC_URI[sha256sum] = "41de0989a3385061ab7307a1005655e780def6fc9c89af0ec942616aa787e136"
++                 n = p;  p += trail - 1;
++-- 
++2.12.2
 +
-+PV .= "+git${SRCPV}"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
+new file mode 100644
+index 000000000..8d756e6a4
+--- /dev/null
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
+@@ -0,0 +1,24 @@
++SUMMARY = "Fast data collector for Embedded Linux"
++HOMEPAGE = "http://fluentbit.io"
++BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
 +
-+SRCREV = "20ef1f925b007f170ab1c257e4aa61fdd0927773"
-+
-+SRC_URI = "git://github.com/msgpack/msgpack-c \
-+           file://0001-Comment-intentional-fallthrough-in-case-statements.patch \
++SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
++           file://0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch \
++           file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
 +           "
- 
- inherit cmake pkgconfig
- 
--S = "${WORKDIR}/msgpack-${PV}"
-+S = "${WORKDIR}/git"
++SRC_URI[md5sum] = "9383262339412782b80cc49e7ad15609"
++SRC_URI[sha256sum] = "eb8a85c656fa60682b0bf8dd1ad58d848cd251dab4f35a6777acd552c65b0511"
 +
-+FILES_${PN}-dev += "${libdir}/cmake/msgpack/*.cmake"
++S = "${WORKDIR}/fluent-bit-${PV}"
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
++
++DEPENDS = "zlib"
++INSANE_SKIP_${PN}-dev += "dev-elf"
++
++inherit cmake systemd
++
++EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS}"
++
++SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
+deleted file mode 100644
+index c75f446e1..000000000
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.7.2.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "Fast data collector for Embedded Linux"
+-HOMEPAGE = "http://fluentbit.io"
+-BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
+-
+-SRC_URI = "http://fluentbit.io/releases/0.7/fluent-bit-${PV}.tar.gz"
+-SRC_URI[md5sum] = "6df9d676e1d2d782a243e655e144e8ae"
+-SRC_URI[sha256sum] = "695b56ce378f56855c9554f88f5d8e4f7b11ba7691284903870f779912af4ebe"
+-S = "${WORKDIR}/fluent-bit-${PV}"
+-
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+-
+-DEPENDS = "zlib"
+-INSANE_SKIP_${PN}-dev += "dev-elf"
+-
+-inherit cmake
 -- 
 2.12.2
 
