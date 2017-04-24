@@ -1,32 +1,55 @@
-Return-Path: <tim.jaacks@garz-fricke.com>
-X-Greylist: delayed 859 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 24 Apr 2017 14:35:49 UTC
-Received: from mailout-afa69.mailout.artfiles.de
-	(mailout-afa69.mailout.artfiles.de [212.72.176.69])
-	by mail.openembedded.org (Postfix) with ESMTP id A0551779F9
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 14:35:49 +0000 (UTC)
-Received: from [89.27.136.47] (helo=mail.garz-fricke.com)
-	auth=mx@garz-fricke.com by mailout.artfiles.de with esmtpsa
-	(TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256) (Exim 4.80.1)
-	id 1d2erp-0005Dw-Lb for openembedded-devel@lists.openembedded.org;
-	Mon, 24 Apr 2017 16:21:29 +0200
-Received: from SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188]) by
-	SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188%12]) with mapi
-	id 14.03.0319.002; Mon, 24 Apr 2017 16:21:26 +0200
-From: Tim Jaacks <tim.jaacks@garz-fricke.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5] Qt 5.8 examples are not built
-Thread-Index: AdK9BboCXHR82hCsR7qalqtqTTLVIg==
-Date: Mon, 24 Apr 2017 14:21:25 +0000
-Message-ID: <32EA6B79577EEF4C84CB32305D45A05958E22AEA@SRV24.hamburg.garz-fricke.de>
-Accept-Language: de-DE, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.20.8.59]
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 51D0E779C9
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Apr 2017 15:54:45 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id c45so117223243qtb.1
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Apr 2017 08:54:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=lMahNAxLvL2TYgy0fW6XJxtIUkOicu+q92hldmsbRco=;
+	b=mDZigjGapeGcRtPOFCPu1+fJI0EKoSiQoe3KbqKHeIPM/dkahdrbxsxhKedA7ckkiP
+	3Tm4OzaLRcK/HEAwCrHlZLiv6raa/FEWNIoXS/qkPguOeec1gmKjQM4pRT57WVXY4vo7
+	WuGUUsC2Q5vwpVdWsS3KYDBpoV12EuJvthcbkx+Fe6gdMkJ7X+dTXnzC6MUKjdJhQ9mZ
+	TmoYuApa84SK2npNcpXoofsyjVbSRI4BePrHuKNUAk0m3LDQFULmJfINuTS5SzreuPc+
+	ybRb81Fie9qeYy6fnqQtM8T5vvFovXTnWjLi18jKRiCDIcOpBcPXD/LOuWPnV9C7Ct5c
+	45ng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=lMahNAxLvL2TYgy0fW6XJxtIUkOicu+q92hldmsbRco=;
+	b=pcNa2x8quxYkfTANM8MG4JaEQD3B0g/+dfjJ6VrYaAlIcqI30h2i08l3e2+dWKKbLu
+	vjMZewPrgPMOwqKCact0CD4Pvq85LWY3FhzYBNIpT1VSHuhdY//EG6KmNEMo82J3Rtrk
+	nWLMUK910ICO/d1i3W2bZxXmMm3TH+nQx9weTNPiaB3DS8k7W2euFy8bAjWPt9kdrcds
+	k/xMBE+xMw6L1aIYbzGTYLBROBJ2ebS67XPPeCxi4IkLBeurfjN/9UErRBG7Di1BbUAg
+	r0Nmz98fzC6gDqzJnf0pAjeJccA+267TnFzHqsqciho5j0ZHx41xvp3HQqQVR46xM0tN
+	7dKA==
+X-Gm-Message-State: AN3rC/7UXG7dqKHz8+WyQr1jA2TUvc5YJiJ+1nH4dU4vSnAe0RnMS/E4
+	SDXqQtqSAfDESB42e3bOJ2JEhqcwoEip
+X-Received: by 10.200.34.242 with SMTP id g47mr25803914qta.109.1493049287100; 
+	Mon, 24 Apr 2017 08:54:47 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-qt5] Qt 5.8 examples are not built
+Received: by 10.140.22.166 with HTTP; Mon, 24 Apr 2017 08:54:26 -0700 (PDT)
+In-Reply-To: <CAJTo0LaWkRxjaF4j1HHhUqFDYYTmGADTuiLo8zqPwR+wKSbY2A@mail.gmail.com>
+References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
+	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
+	<CAMKF1sqfvtQPWN5Yuz3RPYkXpneS+XWcYmit_=bcvKGo3_hx8w@mail.gmail.com>
+	<CAJTo0LakaSZhJodT2KQx6u0TEaBL5Ruig3oOdfrtCzQUf1cxXg@mail.gmail.com>
+	<CAJTo0LaWkRxjaF4j1HHhUqFDYYTmGADTuiLo8zqPwR+wKSbY2A@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 24 Apr 2017 16:54:26 +0100
+Message-ID: <CAJTo0LZJSZ-UJc7zTyYNf3YYKFD3mu=-zprQroZwxB1SZBQ+Bg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembeded-devel <Openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [RFT] gcc7 and glibc-2.26 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,72 +62,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 14:35:50 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 Apr 2017 15:54:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello,
+On 24 April 2017 at 10:47, Burton, Ross <ross.burton@intel.com> wrote:
 
-I recently updated my meta-qt5 layer to the current head version (https://g=
-ithub.com/meta-qt5/meta-qt5/commit/9927aacfc3b341eb36764fbe7d5a929d4f05f327=
-) resulting in an upgrade to Qt 5.8. Since this upgrade, the Qt examples ar=
-e not built anymore, even though I added them to PACKAGECONFIG of qtbase. I=
-s this a known issue?
+> The updated glibc recipe doesn't appear to be very happy:
+> https://autobuilder.yocto.io/builders/buildtools/
+> builds/240/steps/BuildImages/logs/stdio
+>
 
-In Qt 5.7 the examples were built correctly. As far as I understand, the li=
-ne that used to make this work in versions before Qt 5.8 is in meta-qt5/rec=
-ipes-qt/qt5/qt5.inc:
+Note that every nativesdk-glibc build is failing like this, so that's SDKs
+broken.
 
-| EXTRA_QMAKEVARS_PRE +=3D "${@bb.utils.contains('PACKAGECONFIG', 'examples=
-', 'QT_BUILD_PARTS+=3Dexamples', '', d)}"=20
-
-The qmake5_base_do_configure function in meta-qt5/classes/qmake5_base.bbcla=
-ss evaluates this variable:
-
-| if [ ! -z "${EXTRA_QMAKEVARS_PRE}" ]; then
-|     QMAKE_VARSUBST_PRE=3D"${EXTRA_QMAKEVARS_PRE}"=20
-|     bbnote "qmake prevar substitution: '${EXTRA_QMAKEVARS_PRE}'"=20
-| fi
-
-This leads to the following note in log.do_configure of qtbase:
-
-| NOTE: qmake prevar substitution: ' QT_BUILD_PARTS+=3Dexamples'
-
-However, this note is missing in Qt 5.8 because the call to qmake5_base_do_=
-configure has been removed from the do_configure task of qtbase here:
-
-https://github.com/meta-qt5/meta-qt5/commit/333949a8239dfa7788b35f105961473=
-3e11a6a25#diff-1120c73503f9288cc8a8c2b984fe4038L202
-
-There is no comment on why this has been removed. I tried re-adding it, whi=
-ch resulted in a duplicate configure run. Obviously this is caused by this =
-change in qtbase:
-
-https://code.qt.io/cgit/qt/qtbase.git/commit/mkspecs/features/qt_parts.prf?=
-id=3D60e5a1c8effd4099f7b1414107b5cbb67c266210
-
-Does anybody know whether this change was the reason for removing the qmake=
-5_base_do_configure call?
-
-However, the removal breaks the mechanism via EXTRA_QMAKEVARS_PRE, because =
-this variable is no longer evaluated. As far as I can see, there is no opti=
-on of building the Qt examples at the moment. Or am I missing anything? Any=
- clue would be helpful.
-
-=A0
-Mit freundlichen Gr=FC=DFen / Best regards
-i.A. Tim Jaacks
-
-Software Engineering
-Garz & Fricke GmbH
-Tempowerkring 2, 21079 Hamburg - Germany
-Amtsgericht Hamburg HRB 60514
-Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
-Phone: +49 40 791899 - 55
-Fax:=A0=A0=A0=A0 +49 40 791899 - 39
-tim.jaacks@garz-fricke.com
-www.garz-fricke.com
-
-
+Ross
 
