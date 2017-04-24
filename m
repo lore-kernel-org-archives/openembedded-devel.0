@@ -1,50 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
-	[209.85.128.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D26C6FF7F;
-	Mon, 24 Apr 2017 02:52:35 +0000 (UTC)
-Received: by mail-wr0-f178.google.com with SMTP id z52so41930016wrc.2;
-	Sun, 23 Apr 2017 19:52:37 -0700 (PDT)
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1475971D8C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Apr 2017 05:21:14 +0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id a103so178090897ioj.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 Apr 2017 22:21:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=s67uu77a0t16WgqUDQmX20U0LEfcYsxoqeA1J6G2dSI=;
-	b=Yr6J1rJumD8bt5yPJ9sbHCbHGUnhn75WfySI1Cau3ypKJFmuYTTDvcN5shQikjyYZD
-	06wuRuzkj4UPCSV50bPClpCbA6E9db3SXRw2F/ZlcDsTAFvlSB+kWqQEhRC7VtkDzeQN
-	hYdAJ58Lu7gDqqQzhfz3cxH9VyuhTa1KovvhMMMkCqUKvo1rsHiAMfW+mKUSdw9/KksW
-	9+YnJx4ArEu1CemXunFUmIx51IPWCTQDi7ATWOVmKSHlZbtnuVTN+muKgFyopULd1TkB
-	eBp3jnR/k7vmHCGyhBmb7+rcYNGLCeEqcd/1lqGGJMf3m7tCj0m9J9wjy0ZNlrRrysrM
-	MgfQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=unCkJlscsKvxVGKLdp90nvmgEOhLlnV0v4Y45/JD2TE=;
+	b=qsDuASNTGxmMcbRNG1ZWnawwYrP920E0Rj7TKjiHrda6KNuYTkxJOTacxLkPPccy8z
+	C5Yhy+WUXWZXqJdtatAvzPS9ayaEJnvCp4FGbYfnug84HtSH9KNRuuKUjTaLXNuwSJ7g
+	qoJcYrUFmUXXts5HYf0K6KyZAkS+/68a8q0ArSVTAJiqS+QAlNjwSDzAsh87FX5DExnZ
+	P6F28dmrZUNgsddIy2aKDy1RXCtn0T1r5LYn+Qm8KyCBKp40cbx/dqqZjNTxAtsRnjyh
+	KwDiuJh66FKQggJxkG1uPjNg6z1QHcvJYNd4uQJrOzmtKPXTEgCRKEOhPkx2fig1CElP
+	Isqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=s67uu77a0t16WgqUDQmX20U0LEfcYsxoqeA1J6G2dSI=;
-	b=MEr8HfqObJny0kULsUfpKlgH2yUvEEB10a9thFaFr4t4wcrrv0ywEvcPN/CPSns46z
-	G6Vc4ZIwUH+OOTFz6bwNQZiLPoBVPEApCTZs/EKZjDYqz97I/T0RLjfLD14uHVRW5Jh8
-	xvblHB8YRp79J7+SMkst/fwUCIK5hkVca2LwEPz/VOdNpcBLxRJzW5AXBhPO9nlX+zeX
-	eQeg9YkVIY9Tq0ZsMs8+xK+TWtFpY+VoaaSlPCrThGTKOiDR4uaPsDAR+A0dj3vmpVJO
-	xay4DfZECAnFzLSIZbOl9TQckVX74LPDZRbBNRdChBGwwYXD9hxm3qe5TKLOF6ywHcGP
-	6WQA==
-X-Gm-Message-State: AN3rC/6dltYegKNLuWvWh5puJT2GyzoMv35mZkF0aDLwjqs/8BUh70TA
-	MqPsCvnZkcQOn0XY4UuCzebUnrPBVw==
-X-Received: by 10.223.139.146 with SMTP id o18mr3646891wra.175.1493002356349; 
-	Sun, 23 Apr 2017 19:52:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.180.141 with HTTP; Sun, 23 Apr 2017 19:52:05 -0700 (PDT)
-In-Reply-To: <CADkTA4OgpwhRtmR4+4kurnhBUQoap3E3kKoRTe4fNMBFOEp8hw@mail.gmail.com>
-References: <CAMKF1spGM+kugUDOB4kF7NAgSCt9vCw8GFT0nLKFRd2tHei=pw@mail.gmail.com>
-	<CAJTo0La0mtVGyLysCnqi9EQmT+4L1eYRxgE-TV=3Va45jnt=Xg@mail.gmail.com>
-	<CADkTA4MjffrJ13GxaEAQusEU10jj0dUcUsyea36Y2gCy7HCVmA@mail.gmail.com>
-	<CADkTA4OgpwhRtmR4+4kurnhBUQoap3E3kKoRTe4fNMBFOEp8hw@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=unCkJlscsKvxVGKLdp90nvmgEOhLlnV0v4Y45/JD2TE=;
+	b=rESa++920xoamGnXpwj1x75/sIz4ltuwHUhdosuh3UN9ayJLfcuXtg2QWf3/0yKqF3
+	Wtqvc4wVYfwTIxxJk/ptu7r3hzMHuuThCMBYSKR9RVetD1ky1FhMmSdFAB7LYQpc/4/A
+	Iv9XKtYXWu7MeRKhKCIBwyncZ+OYQAmGgfdedoO+0n/umoj3piihwi6KY/gEK59G5bv9
+	64iL1O3Trhg5Yv9Omd2339p0FhrhGH4vldOAe1zKwfj/HwZEX0Cw+ZX0KRd4mXPI7cyt
+	XeKH2g0REbjLvjdGW70jjxLha7BnUHh3iXrTc5/DkjJtdDZJPics4cLTkhUQ4Yja41Lh
+	vGaw==
+X-Gm-Message-State: AN3rC/6hNmbLZQBDBWppqEpyw01Y6y9awd+syUK0dU/y1yVSofASnPbe
+	N9kvfAqe7rA4Bg==
+X-Received: by 10.98.152.215 with SMTP id d84mr22764165pfk.7.1493011275270;
+	Sun, 23 Apr 2017 22:21:15 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	v13sm24001176pgo.44.2017.04.23.22.21.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 23 Apr 2017 22:21:14 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 23 Apr 2017 19:52:05 -0700
-Message-ID: <CAMKF1spOfQgu0qish5uwBfFeX7t1b=11DvfiKBfrYEG2zvJxsw@mail.gmail.com>
-To: Bruce Ashfield <bruce.ashfield@gmail.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [OE-core] [RFT] gcc7 and glibc-2.26 recipes
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 23 Apr 2017 22:20:43 -0700
+Message-Id: <20170424052058.4952-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.2
+In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
+References: <20170424052058.4952-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 02/17] ltrace: Fix FTBFS due to invalid code in ARM support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,49 +56,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Apr 2017 02:52:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 24 Apr 2017 05:21:16 -0000
 
-On Sun, Apr 23, 2017 at 5:31 PM, Bruce Ashfield
-<bruce.ashfield@gmail.com> wrote:
->
->
-> On Sun, Apr 23, 2017 at 8:30 PM, Bruce Ashfield <bruce.ashfield@gmail.com>
-> wrote:
->>
->>
->>
->> On Sun, Apr 23, 2017 at 6:04 PM, Burton, Ross <ross.burton@intel.com>
->> wrote:
->>>
->>> On 16 April 2017 at 16:50, Khem Raj <raj.khem@gmail.com> wrote:
->>>
->>> > I have put together recipes for upcoming gcc-7 major release as well
->>> > as glibc 2.26 release, which we would target for next release ( 2.4 )
->>> >
->>>
->>> I threw these at the autobuilder and the errors are starting to appear:
->>>
->>> http://errors.yoctoproject.org/Errors/Latest/?filter=
->>> eddf6362e17899113f10cf53ed0db8a4b13ff3fc&type=commit
->>>
->>> Repeated diffutils and rpcbind failures, but linux-yocto and grub too (I
->>> have your grub fix already).
->>
->>
->> I wasn't able to bring up the linux-yocto one .. but the 4.10 linux Yocto
->> should be at a high enough stable
->> release to build with gcc7. So if there's a direct link to that error, I
->> can take a closer look.
->
->
-> And sure enough, after I sent that the error page with linux-yocto finally
-> wheezed in.
->
-> I see that it was the 4.1 kernel, which is expected to fail. I haven't
-> looked into backporting gcc7 fixes
-> that far, but if there's demand, it is something we can consider/look into.
->
+Found with gcc7
 
-I think we will need them on 4.1 too but lets wait for gkh to apply them first.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...s-unreachable-code-after-switch-statement.patch | 40 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  3 +-
+ 2 files changed, 42 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
+
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
+new file mode 100644
+index 000000000..4d0e0392f
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-ARM-code-has-unreachable-code-after-switch-statement.patch
+@@ -0,0 +1,40 @@
++From 95ff340a74af16cca89fd5c5ca99890821053209 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 22 Apr 2017 00:47:16 -0700
++Subject: [PATCH] ARM code has unreachable code after switch statement move
++ initialization
++
++Fixed
++sysdeps/linux-gnu/arm/trace.c:173:33: error: statement will never be executed [-Werror=switch-unreachable]
++    uint32_t operand1, operand2, result = 0;
++                                 ^~~~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ sysdeps/linux-gnu/arm/trace.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/sysdeps/linux-gnu/arm/trace.c b/sysdeps/linux-gnu/arm/trace.c
++index 5e51e91..f974d1f 100644
++--- a/sysdeps/linux-gnu/arm/trace.c
+++++ b/sysdeps/linux-gnu/arm/trace.c
++@@ -155,6 +155,8 @@ arm_get_next_pcs(struct process *proc,
++ 	const unsigned cond = BITS(this_instr, 28, 31);
++ 	const unsigned opcode = BITS(this_instr, 24, 27);
++ 
+++	uint32_t operand1, operand2, result = 0;
+++
++ 	if (cond == COND_NV)
++ 		switch (opcode) {
++ 			arch_addr_t addr;
++@@ -170,7 +172,6 @@ arm_get_next_pcs(struct process *proc,
++ 		}
++ 	else
++ 		switch (opcode) {
++-			uint32_t operand1, operand2, result = 0;
++ 		case 0x0:
++ 		case 0x1:			/* data processing */
++ 		case 0x2:
++-- 
++2.12.2
++
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index a5960f5b0..60af5425e 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -20,7 +20,8 @@ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
+            file://0001-replace-readdir_r-with-readdir.patch \
+            file://0001-Use-correct-enum-type.patch \
+            file://0002-Fix-const-qualifier-error.patch \
+-          "
++           file://0001-ARM-code-has-unreachable-code-after-switch-statement.patch \
++           "
+ S = "${WORKDIR}/git"
+ 
+ inherit autotools
+-- 
+2.12.2
+
 
