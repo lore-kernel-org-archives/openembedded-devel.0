@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id CEE6D77AA9
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id C3D4B77ABF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 03:47:43 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id a103so206922761ioj.1
+	Tue, 25 Apr 2017 03:47:45 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id d203so52528165iof.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 20:47:45 -0700 (PDT)
+	Mon, 24 Apr 2017 20:47:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=aI9u3lpEM1GMFqjwcfZcYCvkAcUSCYWNpaV/BUt/Qgs=;
-	b=dxSrc4atV77dad5LUpkfQQ/+2CRl6XfULol+QE27wcrRKUU7vfnT9+7OPA6c7OtoqQ
-	/dLccF/31J6vORPM5pnHFejOZc3dUQwGm21dNeq15ubJ2HWfL2iwV+hcHi7zB0KJ4XXm
-	jgaQy8eSb1kRmbOUU2ADXMS7ZXFtynF8306G7JKGmY9UmfIJRky29xxdbd8Q2w3k7qQ+
-	rVct6dxJJ9Pryyk6b+26y60lEbJa0Z3xdSMvUDZihdXwRPF3yDVlQJY+AWil+SbntJd9
-	Zc5x4CinJZZEGdCLEDV/LMMx8kYj9w/+fOtGOfmhYMqhRfTTOv7lfdQMNqtFi8kEUdU+
-	d6Nw==
+	bh=1NrcSME4hOM6sz7kTxh3WBFvN1JDDPs/ij/g5gnjWeE=;
+	b=UqdjLSNC2Uqu2SBu9ZHbM52UtkKwwdXeYeoRG1tfmKXIaP5ef4RzoPgNLN6Jhv6vkh
+	sfkP5Zb34bD5ftnawC2Ti4HWFNvbgpb31YeYEWFI8tl63VZDtCcM9+2P2JFDFyq2fI65
+	I8UPGYh9SXqjfp81z+sW4GNsn0PCOD4d0nwB7Ubj+26YbwacmKTk8CsqAiBC8bZyH4eP
+	KUS8DvU09hv3hBKHI3VE/V5ms3GXrzacnn064Ji1fzn4Ik+xf6r1hwiUP/DWYGvo+WYI
+	D4p6r27TrCyCkuL1i8R6kPXyVT8RY8wnul+Pg02F6LUktVSy0ULHo9q0TnZMnoDPslB3
+	TBpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=aI9u3lpEM1GMFqjwcfZcYCvkAcUSCYWNpaV/BUt/Qgs=;
-	b=KeSpbxcoHCYYOLLIIf9yIzHeOK4cVtPxSuRPq1y162lYNr6ypRgfXQnxT9ZvjPLCOf
-	IxR5q+w0GJ/IIz/dsKLS1q3QBs12b61wyrQqQLCjjH0YcfuaPiSfqPUoWr50nJ276cI7
-	4G8BvSF015ccNtGz0UdsdS0szh+ZBdONP1rm96LZhv+EpmAuDBO8BwRUHMm33TigI1CI
-	OJbP1DJZWjiYDXXCRerbx9loQlPcfaw3qkmHeONDlA3Kr3KmJwbhE/acgbsbb+nr55Mc
-	vdTInwfHKlK9UIimo+NpE5drCjUuYgoxM4dPVZoYz+UPEHm/5EZ0xz0S6dY6mLtizLVY
-	5LkQ==
-X-Gm-Message-State: AN3rC/5DusRxaRr2PLA6AYzWhVkyoavixDwIjKIPqhG2ipDKW7PTRJ08
-	Wr/dHP5IdlZdEw==
-X-Received: by 10.107.19.224 with SMTP id 93mr10985014iot.188.1493092064916;
-	Mon, 24 Apr 2017 20:47:44 -0700 (PDT)
+	bh=1NrcSME4hOM6sz7kTxh3WBFvN1JDDPs/ij/g5gnjWeE=;
+	b=KtKwx5Z50E7UGABQXwFzwDeO1ob3osfG0H7SICqr+rCaV/931s7A+qMnl8s20+1Gek
+	eAI2c8mHfKbs9zF91j4t22Mu4bVJm1T/y1tRklmSSGk/W6sWfqi81wOVBtW9LS7t/u+n
+	1GTazTC+VRKbEBdwrmkOFjFXvNaDrnjCH7Qd8/J+q+TsAYtVM6IpfT0sOvwiRI4wPqVd
+	RZY3QerPTpfoL8d19s4gAz+zjpTL3XBl6t5RgixB2IuXC6MKMtyYJ2sit5OxaQL27BsL
+	EZXzLR5SXBUF7an9bY4y5Db3IBHibv8ig93kpwO6zwc5pnZMs5aqqRjgZC+s+qXm13Zu
+	9nwg==
+X-Gm-Message-State: AN3rC/5q9b/lDWvb/QwYePCyQoIILE/99u87PtfhcNv+LnQY/GEEYNCa
+	NxvUWCEQRc9s1bqa
+X-Received: by 10.107.173.136 with SMTP id m8mr11586646ioo.190.1493092066477; 
+	Mon, 24 Apr 2017 20:47:46 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id 9sm1244118itm.6.2017.04.24.20.47.43
+	by smtp.gmail.com with ESMTPSA id 9sm1244118itm.6.2017.04.24.20.47.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Apr 2017 20:47:43 -0700 (PDT)
+	Mon, 24 Apr 2017 20:47:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Apr 2017 20:47:16 -0700
-Message-Id: <20170425034719.8630-8-raj.khem@gmail.com>
+Date: Mon, 24 Apr 2017 20:47:17 -0700
+Message-Id: <20170425034719.8630-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170425034719.8630-1-raj.khem@gmail.com>
 References: <20170425034719.8630-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 08/11] mozjs: Fix build with gcc7
+Subject: [meta-oe][ 09/11] geis: Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,127 +56,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2017 03:47:44 -0000
+X-List-Received-Date: Tue, 25 Apr 2017 03:47:46 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...0001-add-support-for-big-endian-32bit-ARM.patch | 26 ------------------
- ...-first-character-of-string-to-be-null-or-.patch | 32 ++++++++++++++++++++++
- meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb     | 29 ++++++++++----------
- 3 files changed, 46 insertions(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
- create mode 100644 meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
+ ...pare-the-first-character-of-string-to-nul.patch | 43 ++++++++++++++++++++++
+ .../canonical-multitouch/geis_2.2.17.bb            |  5 ++-
+ 2 files changed, 46 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/canonical-multitouch/geis/0001-libgeis-Compare-the-first-character-of-string-to-nul.patch
 
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
-deleted file mode 100644
-index 7b7038f6f..000000000
---- a/meta-oe/recipes-extended/mozjs/mozjs/0001-add-support-for-big-endian-32bit-ARM.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--From 07830cbc409f8e998fa839275470031fc83d6eb6 Mon Sep 17 00:00:00 2001
--From: Koen Kooi <koen.kooi@linaro.org>
--Date: Thu, 21 Apr 2016 14:10:54 +0200
--Subject: [PATCH] add support for big endian 32bit ARM
--
--Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-----
-- mfbt/double-conversion/utils.h | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/mfbt/double-conversion/utils.h b/mfbt/double-conversion/utils.h
--index fe26dab..78a19cb 100644
----- a/mfbt/double-conversion/utils.h
--+++ b/mfbt/double-conversion/utils.h
--@@ -58,7 +58,7 @@
--     defined(__mips__) || defined(__powerpc__) || \
--     defined(__sparc__) || defined(__sparc) || defined(__s390__) || \
--     defined(__SH4__) || defined(__alpha__) || \
---    defined(__aarch64__) || \
--+    defined(__aarch64__) || defined(__ARMEB__) || \
--     defined(_MIPS_ARCH_MIPS32R2)
-- #define DOUBLE_CONVERSION_CORRECT_DOUBLE_OPERATIONS 1
-- #elif defined(_M_IX86) || defined(__i386__) || defined(__i386)
---- 
--2.4.3
--
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch b/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
+diff --git a/meta-oe/recipes-support/canonical-multitouch/geis/0001-libgeis-Compare-the-first-character-of-string-to-nul.patch b/meta-oe/recipes-support/canonical-multitouch/geis/0001-libgeis-Compare-the-first-character-of-string-to-nul.patch
 new file mode 100644
-index 000000000..40d646c7d
+index 000000000..3b3acab24
 --- /dev/null
-+++ b/meta-oe/recipes-extended/mozjs/mozjs/0001-compare-the-first-character-of-string-to-be-null-or-.patch
-@@ -0,0 +1,32 @@
-+From f36c9476d2816e0d3e61c9e13c22ed73883cb54a Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/canonical-multitouch/geis/0001-libgeis-Compare-the-first-character-of-string-to-nul.patch
+@@ -0,0 +1,43 @@
++From 1e48821ba109b00e9c2931f12aa206c4ef54fd71 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Mon, 24 Apr 2017 12:13:43 -0700
-+Subject: [PATCH] compare the first character of string to be null or not
++Date: Mon, 24 Apr 2017 12:34:55 -0700
++Subject: [PATCH] libgeis: Compare the first character of string to null
 +
-+Fixes
++gcc7 wants to be specific when it comes to comparing characters
++and strings
 +
-+error: ISO C++ forbids comparison between pointer and integer [-fpermissive]
-+|          if (value[0] == '\0')
-+|                          ^~~~
++fixes
++
++| ../../../../../../../workspace/sources/geis/libgeis/geis_v1.c: In function '_v1_subscribe_device':
++| ../../../../../../../workspace/sources/geis/libgeis/geis_v1.c:613:20: error: comparison between pointer and zero character constant [-Werror=pointer-compare]
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ js/src/shell/jsoptparse.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ libgeis/geis_v1.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
 +
-+diff --git a/js/src/shell/jsoptparse.cpp b/js/src/shell/jsoptparse.cpp
-+index b49d0a5..612aa00 100644
-+--- a/js/src/shell/jsoptparse.cpp
-++++ b/js/src/shell/jsoptparse.cpp
-+@@ -243,7 +243,7 @@ OptionParser::extractValue(size_t argc, char **argv, size_t *i, char **value)
-+     char *eq = strchr(argv[*i], '=');
-+     if (eq) {
-+         *value = eq + 1;
-+-        if (value[0] == '\0')
-++        if (value[0][0] == '\0')
-+             return error("A value is required for option %.*s", eq - argv[*i], argv[*i]);
-+         return Okay;
-+     }
++diff --git a/libgeis/geis_v1.c b/libgeis/geis_v1.c
++index 67045ee..07c0851 100644
++--- a/libgeis/geis_v1.c
+++++ b/libgeis/geis_v1.c
++@@ -610,7 +610,7 @@ _v1_subscribe_device(GeisInstance instance,
++                      const char **gesture_list)
++ {
++   GeisStatus result = GEIS_UNKNOWN_ERROR;
++-  if (gesture_list == GEIS_ALL_GESTURES)
+++  if (gesture_list[0][0] == GEIS_ALL_GESTURES)
++   {
++     geis_debug("subscribing device %d for all gestures", device_id);
++   }
++@@ -757,7 +757,7 @@ geis_unsubscribe(GeisInstance     instance,
++                  GeisGestureType *gesture_list)
++ {
++   GeisStatus status = GEIS_STATUS_NOT_SUPPORTED;
++-  if (gesture_list == GEIS_ALL_GESTURES)
+++  if (gesture_list[0] == GEIS_ALL_GESTURES)
++   {
++     status = geis_subscription_deactivate(instance->subscription);
++   }
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-index 3424669b8..6c9920ef4 100644
---- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-+++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
-@@ -2,21 +2,20 @@ SUMMARY = "SpiderMonkey is Mozilla's JavaScript engine written in C/C++"
- LICENSE = "MPL-2.0"
- LIC_FILES_CHKSUM = "file://../../LICENSE;md5=815ca599c9df247a0c7f619bab123dad"
+diff --git a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+index 281dc3d42..976aafb4f 100644
+--- a/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
++++ b/meta-oe/recipes-support/canonical-multitouch/geis_2.2.17.bb
+@@ -19,9 +19,10 @@ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI = " \
--    http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
--    file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
--    file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
--    file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../../ \
--    file://0003-Add-AArch64-support.patch;patchdir=../../ \
--    file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
--    file://0005-aarch64-64k-page.patch;patchdir=../../ \
--    file://0001-regenerate-configure.patch;patchdir=../../ \
--    file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
--    file://fix_milestone_compile_issue.patch \
--    file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
--    file://0001-add-support-for-big-endian-32bit-ARM.patch;patchdir=../../ \
--    file://Manually_mmap_heap_memory_esr17.patch;patchdir=../../ \
--  "
-+SRC_URI = "http://ftp.mozilla.org/pub/mozilla.org/js/${BPN}${PV}.tar.gz \
-+           file://0001-mozjs17.0.0-fix-the-compile-bug-of-powerpc.patch \
-+           file://0001-js.pc.in-do-not-include-RequiredDefines.h-for-depend.patch \
-+           file://0002-Move-JS_BYTES_PER_WORD-out-of-config.h.patch;patchdir=../../ \
-+           file://0003-Add-AArch64-support.patch;patchdir=../../ \
-+           file://0004-mozbug746112-no-decommit-on-large-pages.patch;patchdir=../../ \
-+           file://0005-aarch64-64k-page.patch;patchdir=../../ \
-+           file://0001-regenerate-configure.patch;patchdir=../../ \
-+           file://fix-the-compile-error-of-powerpc64.patch;patchdir=../../ \
-+           file://fix_milestone_compile_issue.patch \
-+           file://0010-fix-cross-compilation-on-i586-targets.patch;patchdir=../../ \
-+           file://Manually_mmap_heap_memory_esr17.patch;patchdir=../../ \
-+           file://0001-compare-the-first-character-of-string-to-be-null-or-.patch;patchdir=../../ \
+ DEPENDS += "grail dbus-glib python3 virtual/libx11 libxext libxi libxcb dbus frame"
+ 
+-SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-${PV}.tar.xz\
++SRC_URI = "https://launchpad.net/${BPN}/trunk/${PV}/+download/${BPN}-${PV}.tar.xz \
+            file://fix-indentation-for-gcc6.patch \
+-"
++           file://0001-libgeis-Compare-the-first-character-of-string-to-nul.patch \
 +           "
+ SRC_URI[md5sum] = "2ff9d76a3ea5794516bb02c9d1924faf"
+ SRC_URI[sha256sum] = "8a60f5683852094038904e690d23cc5a90a980fc52da67f0f28890baa25c70eb"
  
- SRC_URI[md5sum] = "20b6f8f1140ef6e47daa3b16965c9202"
- SRC_URI[sha256sum] = "321e964fe9386785d3bf80870640f2fa1c683e32fe988eeb201b04471c172fba"
 -- 
 2.12.2
 
