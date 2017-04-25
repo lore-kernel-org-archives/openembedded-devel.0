@@ -1,31 +1,46 @@
-Return-Path: <tim.jaacks@garz-fricke.com>
-X-Greylist: delayed 1120 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 25 Apr 2017 13:04:00 UTC
-Received: from mailout-i1.artfiles.de (mailout-i1.artfiles.de [80.252.97.82])
-	by mail.openembedded.org (Postfix) with ESMTP id 37F9A77A0F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id D7FB572FA7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 13:04:00 +0000 (UTC)
-Received: from [89.27.136.47] (helo=mail.garz-fricke.com)
-	auth=mx@garz-fricke.com by mailout.artfiles.de with esmtpsa
-	(TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256) (Exim 4.80.1)
-	id 1d2zqI-0005JK-PT; Tue, 25 Apr 2017 14:45:18 +0200
-Received: from SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188]) by
-	SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188%12]) with mapi
-	id 14.03.0319.002; Tue, 25 Apr 2017 14:45:18 +0200
-From: Tim Jaacks <tim.jaacks@garz-fricke.com>
-To: Heikki Sarkanen <heikki.sarkanen@tamtron.fi>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5] Qt 5.8 examples are not built
-Thread-Index: AdK9wcoDzIm0pmSuSU2lpb9c718fAA==
-Date: Tue, 25 Apr 2017 12:45:16 +0000
-Message-ID: <32EA6B79577EEF4C84CB32305D45A05958E23EDA@SRV24.hamburg.garz-fricke.de>
-Accept-Language: de-DE, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [172.20.8.59]
+	Tue, 25 Apr 2017 13:32:34 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id u65so25009185wmu.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Apr 2017 06:32:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=0u8QiK4j/6hsR05yiZRvrq6NmpdoZfX4uONg1Y1j8bM=;
+	b=VHlhs7LEDMPOpfMAOR4eLqyOCbDqvpCKDhxzeaJPch6nJfXb2dfNjVgz1DgV1l7vm9
+	zbTwVeKfvuE1Kit+4OjlWOFCbF6Z0s07C5PJ1piPHhrB8i29P8pTIzNCLdIftGT0YSmJ
+	6WokjCpxyCvaCIavwnCLexIw64ehG2Q7j+kGsiToJ7dCUWX0ZKm4bKlkOxbTU8f7Tfhl
+	hSRHmZIgAKkBIoYPQiL4Kbf8pF8ObfXcqNig1ep02lfdg3Fl8rR3tSPsKnEBlj+/7T5i
+	24bOPk5VoKY2hMssBvc2ZtNgXrbWzbIqIM87SSF/TJebpl1rXML0nB8IlPMbSl7pqbOt
+	5PVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=0u8QiK4j/6hsR05yiZRvrq6NmpdoZfX4uONg1Y1j8bM=;
+	b=YbwM/nV19WOct5n+3yW3LZWVvletzn1flFEM70voC5WDwVH1y9ghvz+2GQM6GQuxcT
+	6datJlFNhc0pIpuIwt1fyjZNEhf8EGa9G3J3vA6i1h0HNI8y2Vw0uo8woT3ICCJ4yD9I
+	EHignAdmlDUNmSVH6JPhA0sF6sgQ0RG1282km84x30uSu8zzoeEOfTf3Xz73zQ+yAs89
+	cTqU1iK2KIJ93jaYIZl5W59sdqPkNQ8gnH3pF3ki37KsgqCE//0AeCk+1g+cv6fJmEK/
+	3225x1fMn9xptu9iOkwAPGO6y2PAYJUHbrjYvjyUhIXjJbyI+YAPmXYfuXKKr+suam9X
+	pgHg==
+X-Gm-Message-State: AN3rC/4A1vpWjGpHjLf1OV9i8PClsYSC+/vsjGeZn9OkbQffn+JjGdVq
+	LHAR9hAqcJhqFW5M4AqimTD/lH7JNySL
+X-Received: by 10.80.182.50 with SMTP id b47mr5352985ede.123.1493127155248;
+	Tue, 25 Apr 2017 06:32:35 -0700 (PDT)
 MIME-Version: 1.0
-Subject: Re: [meta-qt5] Qt 5.8 examples are not built
+Received: by 10.80.180.141 with HTTP; Tue, 25 Apr 2017 06:32:04 -0700 (PDT)
+In-Reply-To: <20170425121114.GA28641@jama>
+References: <20170424052058.4952-1-raj.khem@gmail.com>
+	<20170425121114.GA28641@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 Apr 2017 06:32:04 -0700
+Message-ID: <CAMKF1srVm+Db5KJnJj6Z16JhM83t1=KhWhJ_9JWJ+Ef+CZFvng@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH 01/17] musicbrainz: Upgrade to 5.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,211 +53,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2017 13:04:01 -0000
-Content-Language: de-DE
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 Apr 2017 13:32:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello Heikki,
+On Tue, Apr 25, 2017 at 5:11 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> On Sun, Apr 23, 2017 at 10:20:42PM -0700, Khem Raj wrote:
+>> Drop uclibc specific flags
+>
+> http://errors.yoctoproject.org/Errors/Details/141292/
+>
 
-thanks again. Of course I have tried a clean build. We have nightly builds =
-set up here, running from a completely fresh checked out tree.
+The patchset I sent yesterday has a fix for it.
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-April/112514.html
 
-I see the examples packages for the Qt modules, and there is one for qtbase=
- as well. But as I said, it is empty. There are no files in qtbase-examples=
- (build/tmp/work/<platform>/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/packages-=
-split/qtbase-examples is an empty directory).
-
-The build of the qtbase package is successful, though. But I cannot install=
- qtbase-examples to an image, because empty packages cannot be installed. A=
-nd the package is empty because the examples are not built in the qtbase co=
-mpile step. That's the problem.
-
-=A0
-Mit freundlichen Gr=FC=DFen / Best regards
-i.A. Tim Jaacks
-
-Software Engineering
-Garz & Fricke GmbH
-Tempowerkring 2, 21079 Hamburg - Germany
-Amtsgericht Hamburg HRB 60514
-Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
-Phone: +49 40 791899 - 55
-Fax:=A0=A0=A0=A0 +49 40 791899 - 39
-tim.jaacks@garz-fricke.com
-www.garz-fricke.com
-
-
-
-> -----Urspr=FCngliche Nachricht-----
-> Von: Heikki Sarkanen [mailto:heikki.sarkanen@tamtron.fi]
-> Gesendet: Dienstag, 25. April 2017 14:15
-> An: Tim Jaacks; openembedded-devel@lists.openembedded.org
-> Betreff: Re: [meta-qt5] Qt 5.8 examples are not built
->=20
-> Hello Tim,
->=20
-> Sorry for my partially incorrect answer. Actually you cannot build those =
-"-
-> examples" recipes like "qtquickcontrols2-examples" because those are just
-> packages [1] provided by the "qtquickcontrols2" recipe. Do you see the
-> examples packages with "bitbake -e qtquickcontrols2 | grep ^PACKAGES=3D" =
-?
-> In any case you should still be able to install the "-examples" packages.=
- One
-> more possible solution may be to properly clean your environment when
-> upgrading from Qt 5.7 to 5.8. I think you could achieve that by creating =
-a
-> completely new build folder by sourcing the init script or by removing th=
-e
-> tmp under the current one.
->=20
-> [1] https://github.com/meta-qt5/meta-
-> qt5/blob/9927aacfc3b341eb36764fbe7d5a929d4f05f327/recipes-
-> qt/qt5/qt5.inc#L52
->=20
-> BR,
-> Heikki Sarkanen
-> ________________________________________
-> From: Tim Jaacks <tim.jaacks@garz-fricke.com>
-> Sent: 25 April 2017 12:23
-> To: Heikki Sarkanen; openembedded-devel@lists.openembedded.org
-> Subject: Re: [meta-qt5] Qt 5.8 examples are not built
->=20
-> Hello Hekki,
->=20
-> thanks for your reply. I cannot use sub-packages as a parameter to bitbak=
-e, it
-> accepts recipe names only. Is this a new feature? I am on Yocto Jethro.
->=20
-> However, adding the qtbase-examples package to IMAGE_INSTALL does not
-> make any difference. Maybe this works for other Qt packages (which use th=
-e
-> qmake5_base_do_configure function just like before), but it doesn't work
-> for qtbase, because the qtbase-examples packages is empty. As I said, the
-> examples are not compiled at all, so they cannot be installed either.
->=20
->=20
-> Mit freundlichen Gr=FC=DFen / Best regards
-> i.A. Tim Jaacks
->=20
-> Software Engineering
-> Garz & Fricke GmbH
-> Tempowerkring 2, 21079 Hamburg - Germany Amtsgericht Hamburg HRB
-> 60514
-> Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
-> Phone: +49 40 791899 - 55
-> Fax:     +49 40 791899 - 39
-> tim.jaacks@garz-fricke.com
-> www.garz-fricke.com
->=20
->=20
-> > -----Urspr=FCngliche Nachricht-----
-> > Von: Heikki Sarkanen [mailto:heikki.sarkanen@tamtron.fi]
-> > Gesendet: Montag, 24. April 2017 18:55
-> > An: Tim Jaacks; openembedded-devel@lists.openembedded.org
-> > Betreff: Re: [meta-qt5] Qt 5.8 examples are not built
-> >
-> > Hi,
-> >
-> > I don't know how the PACKAGECONFIG in qtbase has worked but I have
-> > built Qt examples with meta-qt5 on both Qt 5.7 and 5.8 by using the
-> > "<qtrecipe>- examples" packages like in Wandboard wiki [1]. So if you
-> > want to build examples for qtquickcontrols2 you should build that
-> > package: "bitbake qtquickcontrols2-examples". If you want to include
-> > some examples to your image you could use 'IMAGE_INSTALL_append =3D
-> > "qtquickcontrols2-examples qtlocation-examples"'.
-> >
-> > [1]
-> >
-> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wand
-> > board
-> >
-> > BR,
-> > Heikki Sarkanen
-> >
-> > ________________________________________
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > <openembedded-devel-bounces@lists.openembedded.org> on behalf of
-> Tim
-> > Jaacks <tim.jaacks@garz-fricke.com>
-> > Sent: 24 April 2017 17:21
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-qt5] Qt 5.8 examples are not built
-> >
-> > Hello,
-> >
-> > I recently updated my meta-qt5 layer to the current head version
-> > (https://github.com/meta-qt5/meta-
-> > qt5/commit/9927aacfc3b341eb36764fbe7d5a929d4f05f327) resulting in an
-> > upgrade to Qt 5.8. Since this upgrade, the Qt examples are not built
-> > anymore, even though I added them to PACKAGECONFIG of qtbase. Is this
-> > a known issue?
-> >
-> > In Qt 5.7 the examples were built correctly. As far as I understand,
-> > the line that used to make this work in versions before Qt 5.8 is in
-> > meta-qt5/recipes-
-> > qt/qt5/qt5.inc:
-> >
-> > | EXTRA_QMAKEVARS_PRE +=3D "${@bb.utils.contains('PACKAGECONFIG',
-> > 'examples', 'QT_BUILD_PARTS+=3Dexamples', '', d)}"
-> >
-> > The qmake5_base_do_configure function in meta-
-> > qt5/classes/qmake5_base.bbclass evaluates this variable:
-> >
-> > | if [ ! -z "${EXTRA_QMAKEVARS_PRE}" ]; then
-> > |     QMAKE_VARSUBST_PRE=3D"${EXTRA_QMAKEVARS_PRE}"
-> > |     bbnote "qmake prevar substitution: '${EXTRA_QMAKEVARS_PRE}'"
-> > | fi
-> >
-> > This leads to the following note in log.do_configure of qtbase:
-> >
-> > | NOTE: qmake prevar substitution: ' QT_BUILD_PARTS+=3Dexamples'
-> >
-> > However, this note is missing in Qt 5.8 because the call to
-> > qmake5_base_do_configure has been removed from the do_configure
-> task
-> > of qtbase here:
-> >
-> > https://github.com/meta-qt5/meta-
-> > qt5/commit/333949a8239dfa7788b35f1059614733e11a6a25#diff-
-> > 1120c73503f9288cc8a8c2b984fe4038L202
-> >
-> > There is no comment on why this has been removed. I tried re-adding
-> > it, which resulted in a duplicate configure run. Obviously this is
-> > caused by this change in qtbase:
-> >
-> > https://code.qt.io/cgit/qt/qtbase.git/commit/mkspecs/features/qt_parts
-> > .pr
-> > f?id=3D60e5a1c8effd4099f7b1414107b5cbb67c266210
-> >
-> > Does anybody know whether this change was the reason for removing the
-> > qmake5_base_do_configure call?
-> >
-> > However, the removal breaks the mechanism via
-> EXTRA_QMAKEVARS_PRE,
-> > because this variable is no longer evaluated. As far as I can see,
-> > there is no option of building the Qt examples at the moment. Or am I
-> missing anything?
-> > Any clue would be helpful.
-> >
-> >
-> > Mit freundlichen Gr=FC=DFen / Best regards i.A. Tim Jaacks
-> >
-> > Software Engineering
-> > Garz & Fricke GmbH
-> > Tempowerkring 2, 21079 Hamburg - Germany Amtsgericht Hamburg HRB
-> > 60514
-> > Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
-> > Phone: +49 40 791899 - 55
-> > Fax:     +49 40 791899 - 39
-> > tim.jaacks@garz-fricke.com
-> > www.garz-fricke.com
-> >
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  .../recipes-multimedia/musicbrainz/libmusicbrainz_git.bb           | 7 ++-----
+>>  1 file changed, 2 insertions(+), 5 deletions(-)
+>>
+>> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+>> index a6a4f6a8a..250c5f14e 100644
+>> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+>> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+>> @@ -5,17 +5,14 @@ LICENSE = "LGPLv2.1+"
+>>  LIC_FILES_CHKSUM = "file://COPYING.txt;md5=fbc093901857fcd118f065f900982c24"
+>>  DEPENDS = "expat neon neon-native"
+>>
+>> -PV = "5.0.1+git${SRCPV}"
+>> -PR = "r1"
+>> +PV = "5.1.0+git${SRCPV}"
+>>
+>> -SRCREV = "0749dd0a35b4a54316da064475863a4ac6e28e7e"
+>> +SRCREV = "44c05779dd996035758f5ec426766aeedce29cc3"
+>>  SRC_URI = "git://github.com/metabrainz/libmusicbrainz.git \
+>>             file://allow-libdir-override.patch "
+>>
+>>  S = "${WORKDIR}/git"
+>>
+>> -LDFLAGS_prepend_libc-uclibc = " -lpthread "
+>> -
+>>  inherit cmake pkgconfig
+>>
+>>  do_configure_prepend() {
+>> --
+>> 2.12.2
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
