@@ -1,46 +1,31 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 63DC871CAF
+Return-Path: <tim.jaacks@garz-fricke.com>
+X-Greylist: delayed 1120 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 25 Apr 2017 13:04:00 UTC
+Received: from mailout-i1.artfiles.de (mailout-i1.artfiles.de [80.252.97.82])
+	by mail.openembedded.org (Postfix) with ESMTP id 37F9A77A0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 12:15:54 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id u65so20947916wmu.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 05:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=oOS2pKm4CvcDYx+qJcm5WK928i8ijaLSBvj1BegkVxo=;
-	b=ih32TmZ0lIAOnwI/FKKKtII1/xfnIo50MlxVRLH9Cumx3W8DsSwGX4aN3JSyRyMBJE
-	aFkFG++5S6KAMu+VRMj0LxXJedHtRirMR3gbpecWV5/wJRjHUvox9HnVBGjloxALORoo
-	sv+9PXmIiHpYXMGrKvsifuYBrECpxYp8fusoi/EDT5sAw6vLFu0z2UwZPUGR2yWHKgYR
-	33AN/jQBvoCJUHriAKmp9V3e5XHGC87KmB4rebLwSbNpRh9bkWgEzJ8RuLJvu5H7G+w1
-	1vKD0N/Y7dagXsRhkZKOlCvt0G/5u7CD4nF21xts2F3WSNNgO05KZpJs/Vo1Fjbbx52f
-	Znbw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=oOS2pKm4CvcDYx+qJcm5WK928i8ijaLSBvj1BegkVxo=;
-	b=oQqQF7Kb9XPPZz4SnYt2NpaSJS3s0jq0N3cgB6IOs27vRw9MpjyXGzdgR/S97s/MAC
-	ljWjOSot9+54Q9cxnwMCDjAfLR8An7LxK565OA3K7fa7uYny6N3pLg7cDN0hWb5ZmQnt
-	9388aV4up2olXbMhc3EFc+/4X30EiP6is6tvXli2Eo6HGxgsxZ2m0f7oc4Iv2Gg/B9sn
-	5WAlO9SPP8WDRhBDyhK/erRPhAtotDoeAnts+Y0MUC3M7B1NY1Fn7LW0Cv1aKlb/DduN
-	C0PwdLoVtWwachAWhglbQrNqDkoClzZaqMQxTieCBendTaPm+IjAAD9ENYxLi1hFv6hZ
-	qEgA==
-X-Gm-Message-State: AN3rC/6GyNGEmuRbv0frsjMx7H+dU2TCaD9wrUwKCEqnUUvZ9GA+TaWW
-	mJxp772tPCVsvxjmcX0Oqdsq/XxTBQ==
-X-Received: by 10.80.149.203 with SMTP id x11mr4899968eda.181.1493122556078;
-	Tue, 25 Apr 2017 05:15:56 -0700 (PDT)
+	Tue, 25 Apr 2017 13:04:00 +0000 (UTC)
+Received: from [89.27.136.47] (helo=mail.garz-fricke.com)
+	auth=mx@garz-fricke.com by mailout.artfiles.de with esmtpsa
+	(TLS1.2:DHE_RSA_AES_256_CBC_SHA1:256) (Exim 4.80.1)
+	id 1d2zqI-0005JK-PT; Tue, 25 Apr 2017 14:45:18 +0200
+Received: from SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188]) by
+	SRV24.hamburg.garz-fricke.de ([fe80::91bd:d629:787:188%12]) with mapi
+	id 14.03.0319.002; Tue, 25 Apr 2017 14:45:18 +0200
+From: Tim Jaacks <tim.jaacks@garz-fricke.com>
+To: Heikki Sarkanen <heikki.sarkanen@tamtron.fi>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-qt5] Qt 5.8 examples are not built
+Thread-Index: AdK9wcoDzIm0pmSuSU2lpb9c718fAA==
+Date: Tue, 25 Apr 2017 12:45:16 +0000
+Message-ID: <32EA6B79577EEF4C84CB32305D45A05958E23EDA@SRV24.hamburg.garz-fricke.de>
+Accept-Language: de-DE, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.20.8.59]
 MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Tue, 25 Apr 2017 05:15:55 -0700 (PDT)
-In-Reply-To: <20170425034719.8630-1-raj.khem@gmail.com>
-References: <20170425034719.8630-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 25 Apr 2017 14:15:55 +0200
-Message-ID: <CA+chaQfBtntyaOinCNoQ-dNe3KFJBG6Uk8iuqa29KN+UUGTNhg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>, Jose Lamego <jose.a.lamego@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][ 01/11] mpv: Add libxkbcommon when configuring with wayland
+Subject: Re: [meta-qt5] Qt 5.8 examples are not built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,52 +38,211 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2017 12:15:55 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 Apr 2017 13:04:01 -0000
+Content-Language: de-DE
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Patchwork really doesn't like you, another set of patches completely
-ignored by patchwork.
+Hello Heikki,
 
-Jose: PING2, can you check the patchwork changes which were integrated in
-last few weeks?
+thanks again. Of course I have tried a clean build. We have nightly builds =
+set up here, running from a completely fresh checked out tree.
 
-On Tue, Apr 25, 2017 at 5:47 AM, Khem Raj <raj.khem@gmail.com> wrote:
+I see the examples packages for the Qt modules, and there is one for qtbase=
+ as well. But as I said, it is empty. There are no files in qtbase-examples=
+ (build/tmp/work/<platform>/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/packages-=
+split/qtbase-examples is an empty directory).
 
-> Fixes
->
-> Package xkbcommon was not found in the pkg-config search path.
-> Perhaps you should add the directory containing `xkbcommon.pc'
-> to the PKG_CONFIG_PATH environment variable
-> No package 'xkbcommon' found
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-> b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-> index ce7b3d1e1..b1da2175d 100644
-> --- a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-> +++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
-> @@ -37,7 +37,7 @@ PACKAGECONFIG[libarchive] = "--enable-libarchive,--
-> disable-libarchive,libarchive
->  PACKAGECONFIG[jack] = "--enable-jack, --disable-jack, jack"
->  PACKAGECONFIG[vaapi] = "--enable-vaapi, --disable-vaapi,libva"
->  PACKAGECONFIG[vdpau] = "--enable-vdpau, --disable-vdpau,libvdpau"
-> -PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland"
-> +PACKAGECONFIG[wayland] = "--enable-wayland, --disable-wayland,wayland
-> libxkbcommon"
->
->  SIMPLE_TARGET_SYS = "${@'${TARGET_SYS}'.replace('${TARGET_VENDOR}', '')}"
->
-> --
-> 2.12.2
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+The build of the qtbase package is successful, though. But I cannot install=
+ qtbase-examples to an image, because empty packages cannot be installed. A=
+nd the package is empty because the examples are not built in the qtbase co=
+mpile step. That's the problem.
+
+=A0
+Mit freundlichen Gr=FC=DFen / Best regards
+i.A. Tim Jaacks
+
+Software Engineering
+Garz & Fricke GmbH
+Tempowerkring 2, 21079 Hamburg - Germany
+Amtsgericht Hamburg HRB 60514
+Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
+Phone: +49 40 791899 - 55
+Fax:=A0=A0=A0=A0 +49 40 791899 - 39
+tim.jaacks@garz-fricke.com
+www.garz-fricke.com
+
+
+
+> -----Urspr=FCngliche Nachricht-----
+> Von: Heikki Sarkanen [mailto:heikki.sarkanen@tamtron.fi]
+> Gesendet: Dienstag, 25. April 2017 14:15
+> An: Tim Jaacks; openembedded-devel@lists.openembedded.org
+> Betreff: Re: [meta-qt5] Qt 5.8 examples are not built
+>=20
+> Hello Tim,
+>=20
+> Sorry for my partially incorrect answer. Actually you cannot build those =
+"-
+> examples" recipes like "qtquickcontrols2-examples" because those are just
+> packages [1] provided by the "qtquickcontrols2" recipe. Do you see the
+> examples packages with "bitbake -e qtquickcontrols2 | grep ^PACKAGES=3D" =
+?
+> In any case you should still be able to install the "-examples" packages.=
+ One
+> more possible solution may be to properly clean your environment when
+> upgrading from Qt 5.7 to 5.8. I think you could achieve that by creating =
+a
+> completely new build folder by sourcing the init script or by removing th=
+e
+> tmp under the current one.
+>=20
+> [1] https://github.com/meta-qt5/meta-
+> qt5/blob/9927aacfc3b341eb36764fbe7d5a929d4f05f327/recipes-
+> qt/qt5/qt5.inc#L52
+>=20
+> BR,
+> Heikki Sarkanen
+> ________________________________________
+> From: Tim Jaacks <tim.jaacks@garz-fricke.com>
+> Sent: 25 April 2017 12:23
+> To: Heikki Sarkanen; openembedded-devel@lists.openembedded.org
+> Subject: Re: [meta-qt5] Qt 5.8 examples are not built
+>=20
+> Hello Hekki,
+>=20
+> thanks for your reply. I cannot use sub-packages as a parameter to bitbak=
+e, it
+> accepts recipe names only. Is this a new feature? I am on Yocto Jethro.
+>=20
+> However, adding the qtbase-examples package to IMAGE_INSTALL does not
+> make any difference. Maybe this works for other Qt packages (which use th=
+e
+> qmake5_base_do_configure function just like before), but it doesn't work
+> for qtbase, because the qtbase-examples packages is empty. As I said, the
+> examples are not compiled at all, so they cannot be installed either.
+>=20
+>=20
+> Mit freundlichen Gr=FC=DFen / Best regards
+> i.A. Tim Jaacks
+>=20
+> Software Engineering
+> Garz & Fricke GmbH
+> Tempowerkring 2, 21079 Hamburg - Germany Amtsgericht Hamburg HRB
+> 60514
+> Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
+> Phone: +49 40 791899 - 55
+> Fax:     +49 40 791899 - 39
+> tim.jaacks@garz-fricke.com
+> www.garz-fricke.com
+>=20
+>=20
+> > -----Urspr=FCngliche Nachricht-----
+> > Von: Heikki Sarkanen [mailto:heikki.sarkanen@tamtron.fi]
+> > Gesendet: Montag, 24. April 2017 18:55
+> > An: Tim Jaacks; openembedded-devel@lists.openembedded.org
+> > Betreff: Re: [meta-qt5] Qt 5.8 examples are not built
+> >
+> > Hi,
+> >
+> > I don't know how the PACKAGECONFIG in qtbase has worked but I have
+> > built Qt examples with meta-qt5 on both Qt 5.7 and 5.8 by using the
+> > "<qtrecipe>- examples" packages like in Wandboard wiki [1]. So if you
+> > want to build examples for qtquickcontrols2 you should build that
+> > package: "bitbake qtquickcontrols2-examples". If you want to include
+> > some examples to your image you could use 'IMAGE_INSTALL_append =3D
+> > "qtquickcontrols2-examples qtlocation-examples"'.
+> >
+> > [1]
+> >
+> http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wand
+> > board
+> >
+> > BR,
+> > Heikki Sarkanen
+> >
+> > ________________________________________
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > <openembedded-devel-bounces@lists.openembedded.org> on behalf of
+> Tim
+> > Jaacks <tim.jaacks@garz-fricke.com>
+> > Sent: 24 April 2017 17:21
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [meta-qt5] Qt 5.8 examples are not built
+> >
+> > Hello,
+> >
+> > I recently updated my meta-qt5 layer to the current head version
+> > (https://github.com/meta-qt5/meta-
+> > qt5/commit/9927aacfc3b341eb36764fbe7d5a929d4f05f327) resulting in an
+> > upgrade to Qt 5.8. Since this upgrade, the Qt examples are not built
+> > anymore, even though I added them to PACKAGECONFIG of qtbase. Is this
+> > a known issue?
+> >
+> > In Qt 5.7 the examples were built correctly. As far as I understand,
+> > the line that used to make this work in versions before Qt 5.8 is in
+> > meta-qt5/recipes-
+> > qt/qt5/qt5.inc:
+> >
+> > | EXTRA_QMAKEVARS_PRE +=3D "${@bb.utils.contains('PACKAGECONFIG',
+> > 'examples', 'QT_BUILD_PARTS+=3Dexamples', '', d)}"
+> >
+> > The qmake5_base_do_configure function in meta-
+> > qt5/classes/qmake5_base.bbclass evaluates this variable:
+> >
+> > | if [ ! -z "${EXTRA_QMAKEVARS_PRE}" ]; then
+> > |     QMAKE_VARSUBST_PRE=3D"${EXTRA_QMAKEVARS_PRE}"
+> > |     bbnote "qmake prevar substitution: '${EXTRA_QMAKEVARS_PRE}'"
+> > | fi
+> >
+> > This leads to the following note in log.do_configure of qtbase:
+> >
+> > | NOTE: qmake prevar substitution: ' QT_BUILD_PARTS+=3Dexamples'
+> >
+> > However, this note is missing in Qt 5.8 because the call to
+> > qmake5_base_do_configure has been removed from the do_configure
+> task
+> > of qtbase here:
+> >
+> > https://github.com/meta-qt5/meta-
+> > qt5/commit/333949a8239dfa7788b35f1059614733e11a6a25#diff-
+> > 1120c73503f9288cc8a8c2b984fe4038L202
+> >
+> > There is no comment on why this has been removed. I tried re-adding
+> > it, which resulted in a duplicate configure run. Obviously this is
+> > caused by this change in qtbase:
+> >
+> > https://code.qt.io/cgit/qt/qtbase.git/commit/mkspecs/features/qt_parts
+> > .pr
+> > f?id=3D60e5a1c8effd4099f7b1414107b5cbb67c266210
+> >
+> > Does anybody know whether this change was the reason for removing the
+> > qmake5_base_do_configure call?
+> >
+> > However, the removal breaks the mechanism via
+> EXTRA_QMAKEVARS_PRE,
+> > because this variable is no longer evaluated. As far as I can see,
+> > there is no option of building the Qt examples at the moment. Or am I
+> missing anything?
+> > Any clue would be helpful.
+> >
+> >
+> > Mit freundlichen Gr=FC=DFen / Best regards i.A. Tim Jaacks
+> >
+> > Software Engineering
+> > Garz & Fricke GmbH
+> > Tempowerkring 2, 21079 Hamburg - Germany Amtsgericht Hamburg HRB
+> > 60514
+> > Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
+> > Phone: +49 40 791899 - 55
+> > Fax:     +49 40 791899 - 39
+> > tim.jaacks@garz-fricke.com
+> > www.garz-fricke.com
+> >
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
