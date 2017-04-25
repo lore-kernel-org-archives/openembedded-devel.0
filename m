@@ -1,68 +1,51 @@
-Return-Path: <heikki.sarkanen@tamtron.fi>
-X-Greylist: delayed 43131 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 25 Apr 2017 11:26:12 UTC
-Received: from EUR03-VE1-obe.outbound.protection.outlook.com
-	(mail-eopbgr50115.outbound.protection.outlook.com [40.107.5.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 9952E6E630
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id EAA3C71CAF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 11:26:12 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=TamtronGroup.onmicrosoft.com; s=selector1-tamtron-fi;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=HtlNIqlmDT1KxgXDHgVVwFZfoQUoKQkqbUJSVfrqnQ4=;
-	b=d2RugN58boukod3u0AxF1ajYl01+dT9xFQn88KzEZJN7OcNwWUkI7NnhrAlRHVfIdJw+QGH+5d5s3chnSHxUVkgu0TBatHR1IrlFJsDgLI3H9I08G/G4p8RCv/ekHgcSviawxXejx5UgTBTrhkpWkMka/UjqKPiRn7NwN5U/8Ic=
-Received: from HE1PR0301MB2201.eurprd03.prod.outlook.com (10.168.31.136) by
-	HE1PR0301MB2201.eurprd03.prod.outlook.com (10.168.31.136) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1047.13; Mon, 24 Apr 2017 16:54:45 +0000
-Received: from HE1PR0301MB2201.eurprd03.prod.outlook.com ([10.168.31.136]) by
-	HE1PR0301MB2201.eurprd03.prod.outlook.com ([10.168.31.136]) with
-	mapi id 15.01.1047.019; Mon, 24 Apr 2017 16:54:45 +0000
-From: Heikki Sarkanen <heikki.sarkanen@tamtron.fi>
-To: Tim Jaacks <tim.jaacks@garz-fricke.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5] Qt 5.8 examples are not built
-Thread-Index: AdK9BboCXHR82hCsR7qalqtqTTLVIgAExs53
-Date: Mon, 24 Apr 2017 16:54:44 +0000
-Message-ID: <HE1PR0301MB22018DA3B0F9114052C339B5881F0@HE1PR0301MB2201.eurprd03.prod.outlook.com>
-References: <32EA6B79577EEF4C84CB32305D45A05958E22AEA@SRV24.hamburg.garz-fricke.de>
-In-Reply-To: <32EA6B79577EEF4C84CB32305D45A05958E22AEA@SRV24.hamburg.garz-fricke.de>
-Accept-Language: en-GB, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: garz-fricke.com; dkim=none (message not signed)
-	header.d=none; garz-fricke.com;
-	dmarc=none action=none header.from=tamtron.fi; 
-x-originating-ip: [25.162.181.4]
-x-microsoft-exchange-diagnostics: 1; HE1PR0301MB2201;
-	7:ubNUei4ERCT0l1gb0Xxv3oZdx+Rj0wjYL8aGbLpwwcFQJxB7oazwAh9dq9cLIIce7MnGlNFwAmIFJH5A8Kz3QVVDkoASqlYu2aHMTWg+zmrs/IA0xXzWMqh+xYNYXgosgG58lEaHG5J5mIj8IcrJCGPlvOQP84Eczham8EX0vayMDNhLR4/1b56jmwKPG1pxe9+5wFviga7Wy/L+Jr6zHfKZ+N/8/pjcS/c8r9iuOPhiE98K6jfesqUgpWK0MTPvHfpufhwEq5d5o7tMgIbESzi/XufrcK4Ux/qMtbJkMtK61Wbzr/oP7rsw36yhJ5karH2XpmMaBou8mrKEAdrJlQ==
-x-ms-office365-filtering-correlation-id: 9c43dc5b-1efa-41e9-6885-08d48b329c4d
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(22001)(2017030254075)(201703131423075);
-	SRVR:HE1PR0301MB2201; 
-x-microsoft-antispam-prvs: <HE1PR0301MB22012E6A41DA805FC51791AA881F0@HE1PR0301MB2201.eurprd03.prod.outlook.com>
-x-exchange-antispam-report-test: UriScan:(166708455590820)(264703809997249);
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(6040450)(601004)(2401047)(8121501046)(5005006)(3002001)(93006095)(93001095)(10201501046)(6041248)(201703131423075)(201702281528075)(201703061421075)(2016111802025)(20161123564025)(20161123560025)(20161123555025)(20161123562025)(6043046)(6072148);
-	SRVR:HE1PR0301MB2201; BCL:0; PCL:0; RULEID:;
-	SRVR:HE1PR0301MB2201; 
-x-forefront-prvs: 0287BBA78D
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(39400400002)(39410400002)(39840400002)(39450400003)(2900100001)(6506006)(7696004)(2950100002)(74316002)(74482002)(1720100001)(305945005)(7736002)(15974865002)(81166006)(5660300001)(8676002)(55016002)(8936002)(99286003)(53546009)(9686003)(6306002)(77096006)(86362001)(25786009)(122556002)(53936002)(2501003)(6436002)(2906002)(189998001)(229853002)(16799955002)(33656002)(6246003)(102836003)(6116002)(66066001)(3280700002)(3660700001)(76176999)(54356999)(38730400002)(50986999)(3846002)(966004);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR0301MB2201;
-	H:HE1PR0301MB2201.eurprd03.prod.outlook.com; FPR:; SPF:None;
-	MLV:sfv; LANG:en; 
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Tue, 25 Apr 2017 12:10:58 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id d79so24532849wmi.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Apr 2017 05:11:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=lePwKqVS/FpTxhyqPKexm114lXIJ0KvtCMRYeLTBEFI=;
+	b=X+qzWbQpeHf9hTDaXEZvFj1xYsuyD3VlEedR5EdPLm/S3D5RqSk1cy3prK1wfcrbnp
+	IgzRZGKDSXnk/ZQVoxG6iJYJfzMl9YlE5UKViRJjn5m4MZMggns6UiiPfkgzZe83ehcA
+	4+Fan/1h/7Taw2LZW5p06GNc/gE4jqgFgpdT4O5VbAH941Uw77QbrnhzzhirfrUQ7HZE
+	WRamHLHAxOAJcFfXZvY1COoR+5Q3Ytm70y7HCcfPNFz+6zuhvVMC/UQQKeDaAFIFJZ7D
+	gVgte6ZMClhIorhksAVAloZYdKgQbtrrFNPu6qGl5a2sXFtTD+XtR/sbwPHN77qOliBB
+	g10Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=lePwKqVS/FpTxhyqPKexm114lXIJ0KvtCMRYeLTBEFI=;
+	b=I4vnzhHEMBSYKHBDvduCDmCWlA5+XtYgj56U9usX2FHhMgj25zqqiNuAMEHQJpFkNg
+	3fSJ2YD4zCzpywTStHOmH2+jOOIjB12/p6KgzdHwK52nCm+5fGel2OSgQNEPCH8EsgAY
+	TtvFOz7k1cQrd+p1bMxjfjVUaHXP+F+gCotFG7f8WsfU31mz2e3V0XLCXFPx6Jh/CiN5
+	X4k3D8/t+D86VV9Dyz6lf+4hcpvx5IXnBVVOSVKhX6oN3CoCb1zbnP5CI36JRhXhZoRv
+	ipl4+/7GylrNh7id2+FWa8nvN3i3fx4TVtONV2xwHkyKYlEhLK2NB+/yaFwsXD2laQkU
+	6kvA==
+X-Gm-Message-State: AN3rC/6ywrjys/6AywGjpfr7c+mUnsiXnIYEAaJMVTgoXbjpbM6eu8Wu
+	PAW6DNTqTI3Edw==
+X-Received: by 10.28.230.84 with SMTP id d81mr1748953wmh.58.1493122259422;
+	Tue, 25 Apr 2017 05:10:59 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	w96sm14354195wrc.14.2017.04.25.05.10.58
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Tue, 25 Apr 2017 05:10:58 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Tue, 25 Apr 2017 14:11:14 +0200
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20170425121114.GA28641@jama>
+References: <20170424052058.4952-1-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-OriginatorOrg: tamtron.fi
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Apr 2017 16:54:44.9624 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5b3efc15-2af9-4b23-b6be-9514abe422fb
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0301MB2201
-Subject: Re: [meta-qt5] Qt 5.8 examples are not built
+In-Reply-To: <20170424052058.4952-1-raj.khem@gmail.com>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-multimedia][PATCH 01/17] musicbrainz: Upgrade to 5.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -75,101 +58,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Apr 2017 11:26:14 -0000
-Content-Language: en-GB
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 25 Apr 2017 12:10:59 -0000
+X-Groupsio-MsgNum: 66515
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="VbJkn9YxBvnuCH5J"
+Content-Disposition: inline
+
+--VbJkn9YxBvnuCH5J
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Sun, Apr 23, 2017 at 10:20:42PM -0700, Khem Raj wrote:
+> Drop uclibc specific flags
 
-I don't know how the PACKAGECONFIG in qtbase has worked but I have built Qt=
- examples with meta-qt5 on both Qt 5.7 and 5.8 by using the "<qtrecipe>-exa=
-mples" packages like in Wandboard wiki [1]. So if you want to build example=
-s for qtquickcontrols2 you should build that package: "bitbake qtquickcontr=
-ols2-examples". If you want to include some examples to your image you coul=
-d use 'IMAGE_INSTALL_append =3D "qtquickcontrols2-examples qtlocation-examp=
-les"'.
+http://errors.yoctoproject.org/Errors/Details/141292/
 
-[1] http://wiki.wandboard.org/index.php/Building_Qt5_using_yocto_on_Wandboa=
-rd
+>=20
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  .../recipes-multimedia/musicbrainz/libmusicbrainz_git.bb           | 7 +=
++-----
+>  1 file changed, 2 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrain=
+z_git.bb b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_gi=
+t.bb
+> index a6a4f6a8a..250c5f14e 100644
+> --- a/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> +++ b/meta-multimedia/recipes-multimedia/musicbrainz/libmusicbrainz_git.bb
+> @@ -5,17 +5,14 @@ LICENSE =3D "LGPLv2.1+"
+>  LIC_FILES_CHKSUM =3D "file://COPYING.txt;md5=3Dfbc093901857fcd118f065f90=
+0982c24"
+>  DEPENDS =3D "expat neon neon-native"
+> =20
+> -PV =3D "5.0.1+git${SRCPV}"
+> -PR =3D "r1"
+> +PV =3D "5.1.0+git${SRCPV}"
+> =20
+> -SRCREV =3D "0749dd0a35b4a54316da064475863a4ac6e28e7e"
+> +SRCREV =3D "44c05779dd996035758f5ec426766aeedce29cc3"
+>  SRC_URI =3D "git://github.com/metabrainz/libmusicbrainz.git \
+>             file://allow-libdir-override.patch "
+> =20
+>  S =3D "${WORKDIR}/git"
+> =20
+> -LDFLAGS_prepend_libc-uclibc =3D " -lpthread "
+> -
+>  inherit cmake pkgconfig
+> =20
+>  do_configure_prepend() {
+> --=20
+> 2.12.2
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-BR,
-Heikki Sarkanen
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
-________________________________________
-From: openembedded-devel-bounces@lists.openembedded.org <openembedded-devel=
--bounces@lists.openembedded.org> on behalf of Tim Jaacks <tim.jaacks@garz-f=
-ricke.com>
-Sent: 24 April 2017 17:21
-To: openembedded-devel@lists.openembedded.org
-Subject: [oe] [meta-qt5] Qt 5.8 examples are not built
+--VbJkn9YxBvnuCH5J
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
 
-Hello,
+-----BEGIN PGP SIGNATURE-----
 
-I recently updated my meta-qt5 layer to the current head version (https://g=
-ithub.com/meta-qt5/meta-qt5/commit/9927aacfc3b341eb36764fbe7d5a929d4f05f327=
-) resulting in an upgrade to Qt 5.8. Since this upgrade, the Qt examples ar=
-e not built anymore, even though I added them to PACKAGECONFIG of qtbase. I=
-s this a known issue?
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWP884QAKCRA3VSO3ZXaA
+HJ4FAKCLtcEFTRqJLWhb/yxr0pMLiqw+KwCfd8vHn9jxF8S/y2K+VTr+5hCMaEU=
+=3LKd
+-----END PGP SIGNATURE-----
 
-In Qt 5.7 the examples were built correctly. As far as I understand, the li=
-ne that used to make this work in versions before Qt 5.8 is in meta-qt5/rec=
-ipes-qt/qt5/qt5.inc:
-
-| EXTRA_QMAKEVARS_PRE +=3D "${@bb.utils.contains('PACKAGECONFIG', 'examples=
-', 'QT_BUILD_PARTS+=3Dexamples', '', d)}"
-
-The qmake5_base_do_configure function in meta-qt5/classes/qmake5_base.bbcla=
-ss evaluates this variable:
-
-| if [ ! -z "${EXTRA_QMAKEVARS_PRE}" ]; then
-|     QMAKE_VARSUBST_PRE=3D"${EXTRA_QMAKEVARS_PRE}"
-|     bbnote "qmake prevar substitution: '${EXTRA_QMAKEVARS_PRE}'"
-| fi
-
-This leads to the following note in log.do_configure of qtbase:
-
-| NOTE: qmake prevar substitution: ' QT_BUILD_PARTS+=3Dexamples'
-
-However, this note is missing in Qt 5.8 because the call to qmake5_base_do_=
-configure has been removed from the do_configure task of qtbase here:
-
-https://github.com/meta-qt5/meta-qt5/commit/333949a8239dfa7788b35f105961473=
-3e11a6a25#diff-1120c73503f9288cc8a8c2b984fe4038L202
-
-There is no comment on why this has been removed. I tried re-adding it, whi=
-ch resulted in a duplicate configure run. Obviously this is caused by this =
-change in qtbase:
-
-https://code.qt.io/cgit/qt/qtbase.git/commit/mkspecs/features/qt_parts.prf?=
-id=3D60e5a1c8effd4099f7b1414107b5cbb67c266210
-
-Does anybody know whether this change was the reason for removing the qmake=
-5_base_do_configure call?
-
-However, the removal breaks the mechanism via EXTRA_QMAKEVARS_PRE, because =
-this variable is no longer evaluated. As far as I can see, there is no opti=
-on of building the Qt examples at the moment. Or am I missing anything? Any=
- clue would be helpful.
-
-
-Mit freundlichen Gr=FC=DFen / Best regards
-i.A. Tim Jaacks
-
-Software Engineering
-Garz & Fricke GmbH
-Tempowerkring 2, 21079 Hamburg - Germany
-Amtsgericht Hamburg HRB 60514
-Gesch=E4ftsf=FChrer: Manfred Garz, Matthias Fricke
-Phone: +49 40 791899 - 55
-Fax:     +49 40 791899 - 39
-tim.jaacks@garz-fricke.com
-www.garz-fricke.com
-
-
---
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+--VbJkn9YxBvnuCH5J--
