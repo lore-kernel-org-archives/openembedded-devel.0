@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-it0-f67.google.com (mail-it0-f67.google.com
-	[209.85.214.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7622F77A50
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A9F8977A50
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Apr 2017 03:47:39 +0000 (UTC)
-Received: by mail-it0-f67.google.com with SMTP id z67so20166438itb.0
+	Tue, 25 Apr 2017 03:47:40 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id 70so1438410ita.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Apr 2017 20:47:40 -0700 (PDT)
+	Mon, 24 Apr 2017 20:47:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Iki3NCO4/nI5cRyNJV1Xjc+wvL71hh5QKfuS38xbPGY=;
-	b=UhG+qNrD6r5372SSQ4pRl5UDp5gwcA42VpdmuIWbcJTVkQW+UounSolEkikiistaGw
-	glxuz5OMQMlgZhN+l4YkDULdjKgs3zn80C4ShnPFb1VYii22qCXXkRmVAiuGBhRaMABD
-	3HAzQm1jDl1rCLYqtZre8+IzmIaaobosKkkkN97nWpZaW40bDitQnJ1b1ksY1mD748NF
-	9/QI3gc41XLiHV2WrfR5EE3os6Tt5ruNFNgPH+K6VBpS6p6tqA8DH4lNuwhUZHZQFT0G
-	YfsjAIm4CKPzfD3Rz1kAMf9wlmTMiiJZyg3mN2PF/mRdq/tjTjE0stX2C+kirP+SYay6
-	+Z4w==
+	bh=l8MbRmByXQJEBnm4u1AQhyk3Ar4oOo1c6SyZLWxjM9w=;
+	b=cUjvm1brmLIOiwR0U1LUk99iIxX5H45ncHEaDVgYYVMEGMxnVLikwtwGza6HDqOfMj
+	zFCM2Nzy9AeoDQSz7pQhCllnBexmj3OgJ+yaHGTsyMs+8qeVKP/IeinekPQVgISKywWc
+	pKDFiRxbrfHxXKdFsqs4v+MJMMwIlaKt1t1eC9L6p2eAaQap4a8ZkhF+t7UpbSMHaQT5
+	TgmMmr7qMzdcIKhQsXVr3eEbHs2ovU+MqNhXWHUGBKwRfxeEBOxqVts0DMCRQZ8XkT3n
+	ie3UkhzeYhMbmNyRgv55Rd/HYq+opP4lpu1ukMu2u3Cfyz39uFv+BG+Wkt/sLrlVEr0k
+	s3bA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=Iki3NCO4/nI5cRyNJV1Xjc+wvL71hh5QKfuS38xbPGY=;
-	b=PsWWh+b1KDBL2V5ewwrSK6FS58op3KvbXoOx6wpTaWo5H7hmxM6sE5Tcu+TtINRAYd
-	T95gOUF9ZO5YTQuVnrgkVfgbAVB3UgIGizTWcGmdwPXzn3GmY8JE84hZyV0lMjNlPuSJ
-	zCZCzItM6pyRaeSUry73U00iLtGkARuYwhK/Q9aQJPZiz9MbiIVfxNs3HWrovRV2xH31
-	JE87Otn/EKi7hlrDkHlIa101Er9KMLzcEKgbhFPc38pUJdfwNLSmBfD8C2F8yfH0QpF5
-	TQIh+GJf8dHiRwr7+KI62mzz+ll49wL7Cxn6P2W2EjvEznKlCShEKlvF9d7p6cKIQnpO
-	yH/w==
-X-Gm-Message-State: AN3rC/59FUwxscx/9rvJiDAvrC+d1UkSuB/R6eBZajt94VEK4bvd3VHP
-	2CCWyIEKO20Bvkzi
-X-Received: by 10.36.246.72 with SMTP id u69mr17753963ith.79.1493092060229;
-	Mon, 24 Apr 2017 20:47:40 -0700 (PDT)
+	bh=l8MbRmByXQJEBnm4u1AQhyk3Ar4oOo1c6SyZLWxjM9w=;
+	b=oeFuG7Ei8cZU3krvYG8KAUI8sGEBmQP1LAj6VHtk+Zqyedw1KKPgM4I8WT/z0mNzdh
+	mvbyiBEv3tS81ffvC8iluxvtPPf8QoWVFT7vb5KuMqhHXIh77afgZuEpmSDn/zXGASMv
+	FjYyxSifeVW3f5jDABALNoGwTwAgi6pV/6G3JClt461e1LqMWNb2WEoPH82yjrpd9UqL
+	9YH1qoHyf7irDlHgcSSJ0RNsiDfnZ+okuETzlnYVCFFua4BrYwGuD60FMdct3kQK/MUv
+	8F0AbV0hz1/qOZI7Ugz3f9DO9YpsskaE0f+VWW3hgxfz7JSZi1QA7rkAUWnXLsCxu4tP
+	pkcw==
+X-Gm-Message-State: AN3rC/6mrKOHCC3lklWmHGj8zSAZjKsfxAfI4hDT258F8QHprFyyWx3v
+	5xXxNCpHVciJQg==
+X-Received: by 10.36.101.210 with SMTP id u201mr19029410itb.118.1493092061794; 
+	Mon, 24 Apr 2017 20:47:41 -0700 (PDT)
 Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
 	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id 9sm1244118itm.6.2017.04.24.20.47.38
+	by smtp.gmail.com with ESMTPSA id 9sm1244118itm.6.2017.04.24.20.47.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 24 Apr 2017 20:47:39 -0700 (PDT)
+	Mon, 24 Apr 2017 20:47:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Apr 2017 20:47:13 -0700
-Message-Id: <20170425034719.8630-5-raj.khem@gmail.com>
+Date: Mon, 24 Apr 2017 20:47:14 -0700
+Message-Id: <20170425034719.8630-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170425034719.8630-1-raj.khem@gmail.com>
 References: <20170425034719.8630-1-raj.khem@gmail.com>
-Subject: [meta-oe][ 05/11] efivar: Backport patches to remove double const decls
+Subject: [meta-oe][ 06/11] efibootmgr: Fix build with gcc 7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,152 +58,82 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Tue, 25 Apr 2017 03:47:40 -0000
 
-Helps fixing build with gcc 7
+backport patch to remove double const in decls
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...some-extra-const-that-gcc-complains-about.patch | 44 +++++++++++++++
- ...-version-new-way-symbol-versioning-breaks.patch | 66 ++++++++++++++++++++++
- meta-oe/recipes-extended/efivar/efivar_0.24.bb     |  2 +
- 3 files changed, 112 insertions(+)
- create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-Remove-some-extra-const-that-gcc-complains-about.patch
- create mode 100644 meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-version-new-way-symbol-versioning-breaks.patch
+ ...e-extra-const-keywords-gcc-7-gripes-about.patch | 49 ++++++++++++++++++++++
+ .../recipes-extended/efibootmgr/efibootmgr_0.12.bb |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/efibootmgr/efibootmgr/0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-Remove-some-extra-const-that-gcc-complains-about.patch b/meta-oe/recipes-extended/efivar/efivar/0001-Remove-some-extra-const-that-gcc-complains-about.patch
+diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr/0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch b/meta-oe/recipes-extended/efibootmgr/efibootmgr/0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch
 new file mode 100644
-index 000000000..4ae8cb90f
+index 000000000..b6211c28a
 --- /dev/null
-+++ b/meta-oe/recipes-extended/efivar/efivar/0001-Remove-some-extra-const-that-gcc-complains-about.patch
-@@ -0,0 +1,44 @@
-+From 29a2dea16113b5a8e51de46437c6a9f7426c5867 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr/0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch
+@@ -0,0 +1,49 @@
++From a9f8d414972b0b7c963d7efe38b5cfdcb6413c46 Mon Sep 17 00:00:00 2001
 +From: Peter Jones <pjones@redhat.com>
-+Date: Mon, 6 Feb 2017 14:28:19 -0500
-+Subject: [PATCH 1/2] Remove some extra "const" that gcc complains about.
-+
-+One of these days I'll get these right.
++Date: Mon, 6 Feb 2017 16:34:54 -0500
++Subject: [PATCH] Remove extra const keywords gcc 7 gripes about.
 +
 +Signed-off-by: Peter Jones <pjones@redhat.com>
 +---
-+ src/include/efivar/efiboot-loadopt.h | 4 ++--
-+ src/loadopt.c                        | 2 +-
++ src/efibootdump.c | 2 +-
++ src/efibootmgr.c  | 4 ++--
 + 2 files changed, 3 insertions(+), 3 deletions(-)
 +
-+diff --git a/src/include/efivar/efiboot-loadopt.h b/src/include/efivar/efiboot-loadopt.h
-+index 07db5c4..efc29c6 100644
-+--- a/src/include/efivar/efiboot-loadopt.h
-++++ b/src/include/efivar/efiboot-loadopt.h
-+@@ -32,8 +32,8 @@ extern ssize_t efi_loadopt_create(uint8_t *buf, ssize_t size,
++diff --git a/src/efibootdump.c b/src/efibootdump.c
++index 3e448c2..5a9b681 100644
++--- a/src/efibootdump.c
+++++ b/src/efibootdump.c
++@@ -36,7 +36,7 @@ print_boot_entry(efi_load_option *loadopt, size_t data_size)
++ 	uint8_t *optional_data = NULL;
++ 	size_t optional_data_len = 0;
++ 	uint16_t pathlen;
++-	const unsigned char const *desc;
+++	const unsigned char *desc;
++ 	char *raw;
++ 	size_t raw_len;
 + 
-+ extern efidp efi_loadopt_path(efi_load_option *opt, ssize_t limit)
-+ 	__attribute__((__nonnull__ (1)));
-+-extern const unsigned char const * efi_loadopt_desc(efi_load_option *opt,
-+-						    ssize_t limit)
-++extern const unsigned char * efi_loadopt_desc(efi_load_option *opt,
-++					      ssize_t limit)
-+ 	__attribute__((__visibility__ ("default")))
-+ 	__attribute__((__nonnull__ (1)));
-+ extern uint32_t efi_loadopt_attrs(efi_load_option *opt)
-+diff --git a/src/loadopt.c b/src/loadopt.c
-+index 64e333f..ec50722 100644
-+--- a/src/loadopt.c
-++++ b/src/loadopt.c
-+@@ -336,7 +336,7 @@ teardown(void)
++diff --git a/src/efibootmgr.c b/src/efibootmgr.c
++index baefa68..683623b 100644
++--- a/src/efibootmgr.c
+++++ b/src/efibootmgr.c
++@@ -214,7 +214,7 @@ warn_duplicate_name(list_t *boot_list)
++ 	list_t *pos;
++ 	var_entry_t *boot;
++ 	efi_load_option *load_option;
++-	const unsigned char const *desc;
+++	const unsigned char *desc;
 + 
-+ __attribute__((__nonnull__ (1)))
-+ __attribute__((__visibility__ ("default")))
-+-const unsigned char const *
-++const unsigned char *
-+ efi_loadopt_desc(efi_load_option *opt, ssize_t limit)
++ 	list_for_each(pos, boot_list) {
++ 		boot = list_entry(pos, var_entry_t, list);
++@@ -821,7 +821,7 @@ show_boot_vars()
 + {
-+ 	if (last_desc) {
++ 	list_t *pos;
++ 	var_entry_t *boot;
++-	const unsigned char const *description;
+++	const unsigned char *description;
++ 	efi_load_option *load_option;
++ 	efidp dp = NULL;
++ 	unsigned char *optional_data = NULL;
 +-- 
 +2.12.2
 +
-diff --git a/meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-version-new-way-symbol-versioning-breaks.patch b/meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-version-new-way-symbol-versioning-breaks.patch
-new file mode 100644
-index 000000000..737b78b01
---- /dev/null
-+++ b/meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-version-new-way-symbol-versioning-breaks.patch
-@@ -0,0 +1,66 @@
-+From 31e655d2b5f66e772d9714422b7332bbaa60d2e6 Mon Sep 17 00:00:00 2001
-+From: Peter Jones <pjones@redhat.com>
-+Date: Mon, 6 Feb 2017 14:41:58 -0500
-+Subject: [PATCH 2/2] New gcc version, new way symbol versioning breaks.
-+
-+Apparently I get to redo this every time there's a compiler release.
-+Yaaaaaay.
-+
-+Anyway, the current method is to define the two compat things from the
-+land before time as @libefivar.so.0 symbols and list them there in the
-+link map.  Then we have the real one defined with another name, and set
-+as efi_set_variable@@LIBEFIVAR_0.24.  Then to make there actually be a
-+efi_set_variable symbol to link against, we create it as a weak alias.
-+
-+This is all completely absurd.
-+
-+Signed-off-by: Peter Jones <pjones@redhat.com>
-+---
-+ src/lib.c | 17 ++++++++++++-----
-+ 1 file changed, 12 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lib.c b/src/lib.c
-+index 6a9b392..afa7d94 100644
-+--- a/src/lib.c
-++++ b/src/lib.c
-+@@ -49,7 +49,7 @@ _efi_set_variable(efi_guid_t guid, const char *name, uint8_t *data,
-+ {
-+ 	return ops->set_variable(guid, name, data, data_size, attributes, 0600);
-+ }
-+-__asm__(".symver _efi_set_variable,_efi_set_variable@");
-++__asm__(".symver _efi_set_variable,_efi_set_variable@libefivar.so.0");
-+ 
-+ int
-+ __attribute__((__nonnull__ (2, 3)))
-+@@ -59,17 +59,24 @@ _efi_set_variable_variadic(efi_guid_t guid, const char *name, uint8_t *data,
-+ {
-+ 	return ops->set_variable(guid, name, data, data_size, attributes, 0600);
-+ }
-+-__asm__(".symver _efi_set_variable_variadic,efi_set_variable@");
-++__asm__(".symver _efi_set_variable_variadic,efi_set_variable@libefivar.so.0");
-+ 
-+ int
-+ __attribute__((__nonnull__ (2, 3)))
-+ __attribute__((__visibility__ ("default")))
-+-efi_set_variable(efi_guid_t guid, const char *name, uint8_t *data,
-+-		 size_t data_size, uint32_t attributes, mode_t mode)
-++_efi_set_variable_mode(efi_guid_t guid, const char *name, uint8_t *data,
-++		       size_t data_size, uint32_t attributes, mode_t mode)
-+ {
-+ 	return ops->set_variable(guid, name, data, data_size, attributes, mode);
-+ }
-+-__asm__(".symver efi_set_variable,efi_set_variable@@LIBEFIVAR_0.24");
-++__asm__(".symver _efi_set_variable_mode,efi_set_variable@@LIBEFIVAR_0.24");
-++
-++int
-++__attribute__((__nonnull__ (2, 3)))
-++__attribute__((__visibility__ ("default")))
-++efi_set_variable(efi_guid_t guid, const char *name, uint8_t *data,
-++		 size_t data_size, uint32_t attributes, mode_t mode)
-++	__attribute((weak, alias ("_efi_set_variable_mode")));
-+ 
-+ int
-+ __attribute__((__nonnull__ (2, 3)))
-+-- 
-+2.12.2
-+
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-index 602fd81b4..877ca9045 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-@@ -16,6 +16,8 @@ SRCREV = "963cb2e5adc145fe00717f94e382f2973f80e753"
- SRC_URI = "git://github.com/rhinstaller/efivar.git \
-            file://0002-disable-static-build.patch \
-            file://allow-multi-definitions-for-native.patch \
-+           file://0001-Remove-some-extra-const-that-gcc-complains-about.patch \
-+           file://0002-New-gcc-version-new-way-symbol-versioning-breaks.patch \
- "
- SRC_URI_append_class-target = " file://0001-efivar-fix-for-cross-compile.patch \
-                                 file://0003-efivar-fix-for-cross-compile.patch \
+diff --git a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+index b25cfcabd..193150bb9 100644
+--- a/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
++++ b/meta-oe/recipes-extended/efibootmgr/efibootmgr_0.12.bb
+@@ -12,6 +12,7 @@ COMPATIBLE_HOST = "(i.86|x86_64|arm|aarch64).*-linux"
+ 
+ SRCREV = "75d25807ba81cb724964c989012611272c8f1f5d"
+ SRC_URI = "git://github.com/rhinstaller/efibootmgr.git;protocol=https \
++           file://0001-Remove-extra-const-keywords-gcc-7-gripes-about.patch \
+           "
+ 
+ S = "${WORKDIR}/git"
 -- 
 2.12.2
 
