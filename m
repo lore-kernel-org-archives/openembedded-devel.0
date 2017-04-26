@@ -1,34 +1,24 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BA7416FF0E
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 21D4D77C8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 07:53:12 +0000 (UTC)
+	Wed, 26 Apr 2017 08:22:08 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3Q7rB5O023187
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 26 Apr 2017 00:53:11 -0700
-Received: from ALA-MBC.corp.ad.wrs.com ([fe80::fcbe:9b7:1141:89a1]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0294.000;
-	Wed, 26 Apr 2017 00:53:10 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-networking][PATCH 1/8] openhpi: add new recipe
-Thread-Index: AQHSvl+FoKZ7o/oxE0yLaCFBDrqGwaHXRrXw
-Date: Wed, 26 Apr 2017 07:53:09 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B72EFE9@ALA-MBC.corp.ad.wrs.com>
-References: <cover.1493189113.git.jackie.huang@windriver.com>
-	<961f0ad87d1db56db58b4e3f3196d6ba1ff8238d.1493189113.git.jackie.huang@windriver.com>
-	<20170426073427.GA3258@jama>
-In-Reply-To: <20170426073427.GA3258@jama>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.117]
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3Q8M95a026705
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 Apr 2017 01:22:09 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Wed, 26 Apr 2017 01:22:08 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Apr 2017 16:21:59 +0800
+Message-ID: <cover.1493194374.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/8] openhpi: add new recipe
+Subject: [PATCH 0/8 v2] ipmi/hpi/radius: add new recipes and related packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,37 +31,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 07:53:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 Apr 2017 08:22:09 -0000
+Content-Type: text/plain
 
-> > +
-> > +SRC_URI =3D "${SOURCEFORGE_MIRROR}/openhpi/openhpi-${PV}.tar.gz \
->=20
-> Use BPN and BP
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Sure, fixed.
+v2 comments:
+For PATCH 1/8: use BPN and BP instead and remove the definition for S.
 
->=20
-> > +S =3D "${WORKDIR}/openhpi-${PV}"
->=20
-> Isn't this the default?
+---
+The following changes since commit 444e1fb198076f34a0fa66e83f3eec76efba2e6c:
 
-Yes, this line is removed.
+  php: remove PNBLACKLIST (2017-04-18 14:21:53 +0200)
 
-And I will send v2 for these changes.
+are available in the git repository at:
 
-Thanks,
-Jackie
+  git://git.pokylinux.org/poky-contrib.git jhuang0/r_upstream-perl-ipmi-hpi_170426-1
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_upstream-perl-ipmi-hpi_170426-1
 
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->=20
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Jackie Huang (8):
+  openhpi: add new recipe
+  freeradius: add new recipe
+  libnet-ldap-perl: add new recipe
+  libdata-hexdump-perl: add new recipe
+  libnet-telnet-perl: add new recipe
+  libauthen-radius-perl: add new recipe
+  openipmi: add new recipe
+  ipmitool: add new recipe
+
+ .../freeradius/files/freeradius                    | 110 +++++
+ .../freeradius-avoid-searching-host-dirs.patch     | 194 ++++++++
+ ...radius-configure.ac-add-option-for-libcap.patch |  70 +++
+ ...dius-configure.ac-allow-cross-compilation.patch |  31 ++
+ .../files/freeradius-enble-user-in-conf.patch      |  28 ++
+ ...eeradius-fix-error-for-expansion-of-macro.patch |  61 +++
+ ...ius-fix-issues-related-to-m4-include-path.patch | 236 ++++++++++
+ .../freeradius-fix-quoting-for-BUILT_WITH.patch    |  55 +++
+ .../files/freeradius-libtool-detection.patch       |  89 ++++
+ .../freeradius-libtool-do-not-use-jlibtool.patch   | 160 +++++++
+ .../freeradius-rlm_python-add-PY_INC_DIR.patch     |  33 ++
+ .../freeradius/files/radiusd-volatiles.conf        |   2 +
+ .../freeradius/files/radiusd.service               |  16 +
+ .../freeradius/files/volatiles.58_radiusd          |   3 +
+ .../freeradius/freeradius_3.0.12.bb                | 223 +++++++++
+ .../files/openhpi-add-libnetsnmp-when-link.patch   |  25 +
+ .../files/openhpi-fix-alignment-issue.patch        |  23 +
+ .../openhpi/files/openhpi-fix-host-gcc.patch       |  24 +
+ .../files/openhpi-fix-testfail-errors.patch        |  31 ++
+ .../openhpi/files/openhpi-glib-cross-compile.patch |  33 ++
+ .../files/openhpi-hpi-shell-thread-fix.patch       |  29 ++
+ .../openhpi/files/openhpi-invalide-session.patch   |  21 +
+ .../files/openhpi-libxml2-cross-compile.patch      |  21 +
+ .../openhpi/files/openhpi-linkfix.patch            |  33 ++
+ .../files/openhpi-netsnmp-cross-compile.patch      |  48 ++
+ .../files/openhpi-sysfs-cross-compile.patch        |  23 +
+ ...i-use-serial-tests-config-needed-by-ptest.patch |  31 ++
+ .../recipes-daemons/openhpi/files/openhpi.init     | 230 +++++++++
+ .../recipes-daemons/openhpi/files/openhpid.service |  11 +
+ .../recipes-daemons/openhpi/files/run-ptest        |   5 +
+ .../recipes-daemons/openhpi/openhpi_3.6.1.bb       | 109 +++++
+ .../recipes-support/ipmitool/ipmitool_1.8.18.bb    |  36 ++
+ .../files/do-not-install-pyc-and-pyo.patch         |  25 +
+ .../fix-symlink-install-error-in-cmdlang.patch     |  22 +
+ .../files/ipmi-init-fix-the-arguments.patch        |  41 ++
+ .../recipes-support/openipmi/files/ipmi.service    |  12 +
+ .../openipmi/files/makefile-add-ldflags.patch      |  19 +
+ .../openipmi/files/openipmi-don-t-rm-.libs.patch   |  32 ++
+ .../recipes-support/openipmi/files/openipmi-helper | 512 +++++++++++++++++++++
+ .../files/openipmi-no-openipmigui-man.patch        |  26 ++
+ ...openipmi-remove-host-path-from-la_LDFLAGS.patch |  85 ++++
+ .../recipes-support/openipmi/openipmi_2.0.22.bb    | 111 +++++
+ .../libauthen/libauthen-radius-perl/run-ptest      |  21 +
+ .../test.pl-adjust-for-ptest.patch                 |  90 ++++
+ .../libauthen/libauthen-radius-perl_0.22.bb        |  39 ++
+ meta-perl/recipes-perl/libdata/files/run-ptest     |  16 +
+ .../libdata/libdata-hexdump-perl_0.02.bb           |  33 ++
+ .../recipes-perl/libnet/libnet-ldap-perl_0.65.bb   |  29 ++
+ .../recipes-perl/libnet/libnet-telnet-perl_3.04.bb |  25 +
+ 49 files changed, 3182 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-avoid-searching-host-dirs.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-add-option-for-libcap.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-configure.ac-allow-cross-compilation.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-enble-user-in-conf.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-error-for-expansion-of-macro.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-issues-related-to-m4-include-path.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-fix-quoting-for-BUILT_WITH.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-detection.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-libtool-do-not-use-jlibtool.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/freeradius-rlm_python-add-PY_INC_DIR.patch
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/radiusd-volatiles.conf
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/radiusd.service
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/files/volatiles.58_radiusd
+ create mode 100644 meta-networking/recipes-connectivity/freeradius/freeradius_3.0.12.bb
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-add-libnetsnmp-when-link.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-alignment-issue.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-host-gcc.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-fix-testfail-errors.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-glib-cross-compile.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-hpi-shell-thread-fix.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-invalide-session.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-libxml2-cross-compile.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-linkfix.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-netsnmp-cross-compile.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-sysfs-cross-compile.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpi-use-serial-tests-config-needed-by-ptest.patch
+ create mode 100755 meta-networking/recipes-daemons/openhpi/files/openhpi.init
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/openhpid.service
+ create mode 100755 meta-networking/recipes-daemons/openhpi/files/run-ptest
+ create mode 100644 meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+ create mode 100644 meta-oe/recipes-support/ipmitool/ipmitool_1.8.18.bb
+ create mode 100644 meta-oe/recipes-support/openipmi/files/do-not-install-pyc-and-pyo.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/files/fix-symlink-install-error-in-cmdlang.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/files/ipmi-init-fix-the-arguments.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/files/ipmi.service
+ create mode 100644 meta-oe/recipes-support/openipmi/files/makefile-add-ldflags.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/files/openipmi-don-t-rm-.libs.patch
+ create mode 100755 meta-oe/recipes-support/openipmi/files/openipmi-helper
+ create mode 100644 meta-oe/recipes-support/openipmi/files/openipmi-no-openipmigui-man.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/files/openipmi-remove-host-path-from-la_LDFLAGS.patch
+ create mode 100644 meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb
+ create mode 100644 meta-perl/recipes-perl/libauthen/libauthen-radius-perl/run-ptest
+ create mode 100644 meta-perl/recipes-perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
+ create mode 100644 meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+ create mode 100644 meta-perl/recipes-perl/libdata/files/run-ptest
+ create mode 100644 meta-perl/recipes-perl/libdata/libdata-hexdump-perl_0.02.bb
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-ldap-perl_0.65.bb
+ create mode 100644 meta-perl/recipes-perl/libnet/libnet-telnet-perl_3.04.bb
+
+-- 
+2.11.0
+
 
