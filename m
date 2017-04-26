@@ -1,30 +1,45 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DF95B77B41
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 21C89719DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 02:21:54 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18161677"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Apr 2017 10:21:55 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5132247E6343
+	Wed, 26 Apr 2017 05:56:27 +0000 (UTC)
+Received: by mail-pg0-f49.google.com with SMTP id 68so3698452pgj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 10:21:50 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Wed, 26 Apr 2017 10:21:50 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Apr 2017 10:22:03 +0800
-Message-ID: <1493173324-7172-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 5132247E6343.A229B
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] hostapd: 2.5 -> 2.6
+	Tue, 25 Apr 2017 22:56:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=6AERLOv4ZW1TZL/VuC5ekiDKmot4CqOu5WNwl3MeN+U=;
+	b=UyYSV+zKvhmcvQUXJO/eDrEtLwL/zpxxnqVuCYvUSGMLOpI/+v3FFMAlS9Q6tZrFBz
+	uKs+MQ/07aS8w2Gom3yIeFGaz9PvFBBt2voX82NkMW+jqskDWBlsc+b+/BvY5iUGpSkn
+	SlzARUz5jBOsHz6rtl+B0HjW5ouTQMLWN1YwJwR9rWbv+JXzIU4F65AFhjOSzoT3bC6j
+	mXyxWDYk79zkqwG8J92VTfTKdqHjXhTZeqOzY7yk7hYcROIoPjSfUlvP31+b8aNqtBpG
+	wMlzUORl9k73EShop6rlvaNgeFS6vAhLUKepXqF0a/6+PN+M6smYSTqSMa8h2dcgH/3S
+	803w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=6AERLOv4ZW1TZL/VuC5ekiDKmot4CqOu5WNwl3MeN+U=;
+	b=tGfdaaWVr7UgH/LzdXXWkaVO5Bi1na5CyMiPMOL84DLpY/vcG9jrRBWAPNSS17bUIo
+	uDo1jbvygDvr18LmLeQhRrtHpKfmeeTjOuqnL73sEB+9QwDWTrMWK3Pr0nOxbTnwHpdh
+	uOMBVhy08gUwUTnvlZTB1dD8grgq2r3lhXoFRWWPiFis/MnkiTSfxen9LxlModKun5r0
+	gI1ZYczDu7s/gpqOp14lqlb8rulAfjjLQIFOsQFeKa1ZeiXE7Wk8tYirckUMF7OBOJuG
+	9NXxi7hbQx3DmRL/ArvVnVRz/n5c2QmMdtc1kKhvjEFNfgCOCqCEZlGecVbGo9yZEzP/
+	62eg==
+X-Gm-Message-State: AN3rC/7LQxMZXoGvr2swRNl7bbaon3aox1MyWLSgc3T5EFPpW573CzMv
+	N/dqnI2IdLzO0g==
+X-Received: by 10.98.10.147 with SMTP id 19mr31307897pfk.193.1493186188839;
+	Tue, 25 Apr 2017 22:56:28 -0700 (PDT)
+Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
+	[76.102.32.192]) by smtp.gmail.com with ESMTPSA id
+	e22sm39796113pgn.11.2017.04.25.22.56.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 25 Apr 2017 22:56:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 Apr 2017 22:56:07 -0700
+Message-Id: <20170426055607.23262-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [meta-multimedia][PATCH] kodi: Make it build again and upgrade to 17.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,150 +52,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 02:21:56 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Apr 2017 05:56:28 -0000
 
-1) Upgrade hostapd from 2.5 to 2.6.
-2) License checksum changed,since the copyright years were updated.
-2) Delete patch "0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch", since it is integrated upstream.
-
-
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ject-a-Credential-with-invalid-passphrase.patch | 86 ----------------------
- .../hostapd/{hostapd_2.5.bb => hostapd_2.6.bb}     |  8 +-
- 2 files changed, 4 insertions(+), 90 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch
- rename meta-oe/recipes-connectivity/hostapd/{hostapd_2.5.bb => hostapd_2.6.bb} (81%)
+ .../kodi/jsonschemabuilder-native.bb                 |  6 +++---
+ meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb  | 20 ++++++++++++++------
+ 2 files changed, 17 insertions(+), 9 deletions(-)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch b/meta-oe/recipes-connectivity/hostapd/hostapd/0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch
-deleted file mode 100644
-index 2fc7896..0000000
---- a/meta-oe/recipes-connectivity/hostapd/hostapd/0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch
-+++ /dev/null
-@@ -1,86 +0,0 @@
--From ecbb0b3dc122b0d290987cf9c84010bbe53e1022 Mon Sep 17 00:00:00 2001
--From: Jouni Malinen <jouni@qca.qualcomm.com>
--Date: Fri, 4 Mar 2016 17:20:18 +0200
--Subject: [PATCH 1/1] WPS: Reject a Credential with invalid passphrase
--
--WPA/WPA2-Personal passphrase is not allowed to include control
--characters. Reject a Credential received from a WPS Registrar both as
--STA (Credential) and AP (AP Settings) if the credential is for WPAPSK or
--WPA2PSK authentication type and includes an invalid passphrase.
--
--This fixes an issue where hostapd or wpa_supplicant could have updated
--the configuration file PSK/passphrase parameter with arbitrary data from
--an external device (Registrar) that may not be fully trusted. Should
--such data include a newline character, the resulting configuration file
--could become invalid and fail to be parsed.
--
--Upstream-Status: Backport
--
--CVE: CVE-2016-4476
--
--Signed-off-by: Jouni Malinen <jouni@qca.qualcomm.com>
--Signed-off-by: Zhixiong Chi <Zhixiong.Chi@windriver.com>
-----
-- src/utils/common.c         | 12 ++++++++++++
-- src/utils/common.h         |  1 +
-- src/wps/wps_attr_process.c | 10 ++++++++++
-- 3 files changed, 23 insertions(+)
--
--diff --git a/src/utils/common.c b/src/utils/common.c
--index 450e2c6..27b7c02 100644
----- a/src/utils/common.c
--+++ b/src/utils/common.c
--@@ -697,6 +697,18 @@ int is_hex(const u8 *data, size_t len)
-- }
-- 
-- 
--+int has_ctrl_char(const u8 *data, size_t len)
--+{
--+	size_t i;
--+
--+	for (i = 0; i < len; i++) {
--+		if (data[i] < 32 || data[i] == 127)
--+			return 1;
--+	}
--+	return 0;
--+}
--+
--+
-- size_t merge_byte_arrays(u8 *res, size_t res_len,
-- 			 const u8 *src1, size_t src1_len,
-- 			 const u8 *src2, size_t src2_len)
--diff --git a/src/utils/common.h b/src/utils/common.h
--index 701dbb2..a972240 100644
----- a/src/utils/common.h
--+++ b/src/utils/common.h
--@@ -488,6 +488,7 @@ const char * wpa_ssid_txt(const u8 *ssid, size_t ssid_len);
-- 
-- char * wpa_config_parse_string(const char *value, size_t *len);
-- int is_hex(const u8 *data, size_t len);
--+int has_ctrl_char(const u8 *data, size_t len);
-- size_t merge_byte_arrays(u8 *res, size_t res_len,
-- 			 const u8 *src1, size_t src1_len,
-- 			 const u8 *src2, size_t src2_len);
--diff --git a/src/wps/wps_attr_process.c b/src/wps/wps_attr_process.c
--index eadb22f..e8c4579 100644
----- a/src/wps/wps_attr_process.c
--+++ b/src/wps/wps_attr_process.c
--@@ -229,6 +229,16 @@ static int wps_workaround_cred_key(struct wps_credential *cred)
-- 		cred->key_len--;
-- #endif /* CONFIG_WPS_STRICT */
-- 	}
--+
--+
--+	if (cred->auth_type & (WPS_AUTH_WPAPSK | WPS_AUTH_WPA2PSK) &&
--+	    (cred->key_len < 8 || has_ctrl_char(cred->key, cred->key_len))) {
--+		wpa_printf(MSG_INFO, "WPS: Reject credential with invalid WPA/WPA2-Personal passphrase");
--+		wpa_hexdump_ascii_key(MSG_INFO, "WPS: Network Key",
--+				      cred->key, cred->key_len);
--+		return -1;
--+	}
--+
-- 	return 0;
-- }
-- 
----
--1.9.1
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-similarity index 81%
-rename from meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-rename to meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-index ab01235..3b74f48 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.5.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-@@ -1,7 +1,7 @@
- HOMEPAGE = "http://w1.fi/hostapd/"
- SECTION = "kernel/userland"
- LICENSE = "GPLv2 | BSD"
--LIC_FILES_CHKSUM = "file://${B}/README;md5=4d53178f44d4b38418a4fa8de365e11c"
-+LIC_FILES_CHKSUM = "file://${B}/README;md5=8aa4e8c78b59b12016c4cb2d0a8db350"
- DEPENDS = "libnl openssl"
- SUMMARY = "User space daemon for extended IEEE 802.11 management"
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb b/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
+index 094ccff98..fdb769943 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
+@@ -3,10 +3,10 @@ SUMMARY = "Kodi Media Center"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://JsonSchemaBuilder.cpp;beginline=2;endline=18;md5=1f67721215c03f66545390f6e45b99c7"
  
-@@ -16,7 +16,6 @@ SRC_URI = " \
-     file://defconfig \
-     file://init \
-     file://hostapd.service \
--    file://0001-WPS-Reject-a-Credential-with-invalid-passphrase.patch \
+-SRCREV = "b587e98911fcedc4b800cd923a882c7aeeaa2146"
++SRCREV = "661dd08d221f5b2bf509a696a6aca5ee7d45bb27"
+ 
+-PV = "16.0+gitr${SRCPV}"
+-SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Jarvis"
++PV = "17.1+gitr${SRCPV}"
++SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton"
+ 
+ inherit autotools-brokensep gettext native
+ 
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+index d6e19617d..b34bba56e 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+@@ -12,6 +12,7 @@ DEPENDS = " \
+             jsonschemabuilder-native \
+             nasm-native \
+             swig-native \
++            unzip-native \
+             yasm-native \
+             zip-native \
+             avahi \
+@@ -61,9 +62,11 @@ DEPENDS = " \
+ 
+ PROVIDES = "xbmc"
+ 
+-SRCREV = "a10c5048f2487bd9b2dc1f35d2fee48a25945a70"
+-PV = "17.0+gitr${SRCPV}"
++SRCREV = "661dd08d221f5b2bf509a696a6aca5ee7d45bb27"
++BASEPV = "17.1"
++PV = "${BASEPV}+gitr${SRCPV}"
+ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton \
++           https://repo.voidlinux.eu/distfiles/${BPN}-${BASEPV}-generated-addons.tar.xz;name=addons;unpack=0 \
+            file://0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
+            file://0004-handle-SIGTERM.patch \
+            file://0005-add-support-to-read-frequency-output-if-using-intel-.patch \
+@@ -80,6 +83,8 @@ SRC_URI_append_libc-musl = " \
+            file://0001-Fix-file_Emu-on-musl.patch \
+            file://0002-Remove-FILEWRAP.patch \
+ "
++SRC_URI[addons.md5sum] = "719614fa764011a18665d08af5c8c92f"
++SRC_URI[addons.sha256sum] = "350da57408c27473eaf40e7f544bc94841bf101dc4346085260c5c4af0adac97"
+ 
+ inherit autotools-brokensep gettext pythonnative
+ 
+@@ -116,6 +121,7 @@ EXTRA_OECONF = " \
+     --disable-optical-drive \
+     --with-ffmpeg=shared \
+     --enable-texturepacker=no \
++    ac_cv_path_JAVA_EXE=/bin/true \
  "
  
- S = "${WORKDIR}/hostapd-${PV}"
-@@ -43,5 +42,6 @@ do_install() {
+ FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
+@@ -137,13 +143,18 @@ def enable_glew(bb, d):
+     return ""
  
- CONFFILES_${PN} += "${sysconfdir}/hostapd.conf"
- 
--SRC_URI[md5sum] = "69f9cec3f76d74f402864a43e4f8624f"
--SRC_URI[sha256sum] = "8e272d954dc0d7026c264b79b15389ec2b2c555b32970de39f506b9f463ec74a"
-+SRC_URI[md5sum] = "eaa56dce9bd8f1d195eb62596eab34c7"
-+SRC_URI[sha256sum] = "01526b90c1d23bec4b0f052039cc4456c2fd19347b4d830d1d58a0a6aea7117d"
+ do_configure() {
++    tar xf ${WORKDIR}/${BPN}-${BASEPV}-generated-addons.tar.xz -C ${S}/
 +
+     ( for i in $(find ${S} -name "configure.*" ) ; do
+        cd $(dirname $i) && gnu-configize --force || true
+     done )
++    ( for f in ${S}/xbmc/interfaces/python/generated/*.cpp; do
++       touch ${f/.cpp/.xml}
++    done )
+     make -C tools/depends/target/crossguid PREFIX=${STAGING_DIR_HOST}${prefix}
+ 
+     BOOTSTRAP_STANDALONE=1 make -f bootstrap.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
+-    BOOTSTRAP_STANDALONE=1 make -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
++    BOOTSTRAP_STANDALONE=1 make JAVA=/bin/true -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
+     oe_runconf
+ }
+ 
+@@ -191,6 +202,3 @@ RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
+ RPROVIDES_${PN} += "xbmc"
+ 
+ TOOLCHAIN = "gcc"
+-
+-
+-PNBLACKLIST[kodi] ?= "Depends on blacklisted libsdl-mixer - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
-2.7.4
-
-
+2.12.2
 
 
