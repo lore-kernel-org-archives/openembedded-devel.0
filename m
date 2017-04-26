@@ -1,45 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E7880779DC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D575D77C85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 18:09:33 +0000 (UTC)
-Received: by mail-pg0-f46.google.com with SMTP id t7so3743448pgt.3
+	Wed, 26 Apr 2017 18:10:10 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id y10so3305103wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 11:09:35 -0700 (PDT)
+	Wed, 26 Apr 2017 11:10:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=3GERQp0bFaE/OKhkSYa2umQUdFtctSAl4eoVH5Dx0PQ=;
-	b=Q/qfnDIfc9dQHZYoQwBW1DT9olXFNgMyIlzqR30eSu2Xe4DwWwHM/mcQV37ZYT9XYZ
-	hvA76EkPcrUA797fntLvaeDxDWF8jwvGm0M3CpkA8qiHC1FZqqItMfWv47ovXiutwj4z
-	UkaDsHoF6GPQHM9q/RpUN8phsCrb2mTNDJN7vPtpsgxrzFVNxOoq0k5mebVlTTc5YkZh
-	ZfmOTuhbCzKxPf+RgKV79kwU6n5gzQtuUjqoUfMuXcfp6JtKDNSeiJhvv/n2ZF3HwqgQ
-	ZKYl9oelyatTgGgK7nIH22hVX2w6Rb05Szw7f0d8bYeRc+rzXjLr0m1tB7vC8obwhi1z
-	5/Jg==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=w/ZgCesBIazO2+DqpZE1nx8CWkOFyENVyhaGnAc/pZg=;
+	b=VcpmTKI/OuEvGvyMgBlVXWCsBxUXBV+yw6Azi6WtB2LVSyRzAdCpbLKbaHnYZMEb1x
+	LEigBfhAy/JkraVSLy4CstRfDEzCeErTuWIrkVMnB8h4zRZ09q9wdNcvq5czno75oLz+
+	LAXDeJduMvw0j9Z4AeFFBZA5MNUzgA94u2md7YTMdsq+Wh+wFFc7Kpzi4/HQwba/nH5q
+	WWlns84ev7E1o/K7ZDEGwVrvY4rDzXmKLFqMyFKxNPgGdIGsjRnEZCVv8rj//Q12mhOI
+	GahXjW33dtU8u+oZ6W4BzJVuPlgelb16cKZ28tIfQdNbVodvWXmBaoXo9mXoIDpCNUMH
+	zXUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3GERQp0bFaE/OKhkSYa2umQUdFtctSAl4eoVH5Dx0PQ=;
-	b=dcIrKrDM42RjqfM3lXjc6LNSZ21tgePAQNmDbVYbvXXDbyaiXD7WRtodexPKpfH/TF
-	Rcf0FKhTTz5WGD/rUoI3yNOz1xTuAL4gLfMZYbj3eyGuFp+c24LtzUympuwvJKlRQtkN
-	va9wCkQqguCn1xEhhBTKeZyJSrGr+oVQ19CqC9DULuJFTHDEtmkltEwfMkzPPw/ZKaNa
-	i0t7BT+qwklt/YqraCK7ezOxL3ZXsfB6jjIN43hJcXbaJUyAyLifc6Hv5+kRiI+smLGS
-	YU/WSM7gCJTp5z0DNoT2mP6I8ozGHpB8RO4RkNUTKZpM07rf94PZWt0ujhK4Dr0hsL4Y
-	uz/Q==
-X-Gm-Message-State: AN3rC/5b6sfSOE4bN61OWEXT0sMZ+sb1PHaSfCtZ0NCigYJhmgq0wdIB
-	L0jmI4djcBfe0A==
-X-Received: by 10.99.115.6 with SMTP id o6mr1118438pgc.216.1493230175009;
-	Wed, 26 Apr 2017 11:09:35 -0700 (PDT)
-Received: from localhost.localdomain (c-76-102-32-192.hsd1.ca.comcast.net.
-	[76.102.32.192])
-	by smtp.gmail.com with ESMTPSA id x5sm1565451pfd.94.2017.04.26.11.09.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Apr 2017 11:09:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Apr 2017 11:09:25 -0700
-Message-Id: <20170426180925.8260-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.12.2
-Subject: [meta-multimedia][PATCH V2] kodi: Make it build again and upgrade to 17.1
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=w/ZgCesBIazO2+DqpZE1nx8CWkOFyENVyhaGnAc/pZg=;
+	b=gjIS4Jibm0TnlU4gQ2wVwzuEkuGBUyu6VOYS3d/Z9pW07MIJLJZ9c4OBbifs5WFfvH
+	EJiruNN3K4mQLeQzYufiJuTG7DJ2qImwW0hEmIChZ3jkOknTCjYlf87B7R4QrCCqZpcv
+	Z3Kz7NyormJhGsIBbCFE0bftfAoW1r7/PFsZxCs8NxRV3N4nApPvP1AZIvgI3TceGdju
+	UcMVR/LZK4qlciHKN3eFP4FK3DdpLbcCVyeLHeS3LAsKVmxhZlurGaXymGqnooDy2Bv1
+	rgx1eSBHz6NZRVG/iS/JEUVgRP68ADf+1j8I/HET/ysb8dm2gFbB6QmieL+UUeVIiRHB
+	pEgw==
+X-Gm-Message-State: AN3rC/4KMIPPg3m50iWsWREUykKO1E+yjqdaEZsaZ9KJ+kz/suTZlhJb
+	uYOSSKtmneZ0yw==
+X-Received: by 10.28.91.77 with SMTP id p74mr6796516wmb.123.1493230211154;
+	Wed, 26 Apr 2017 11:10:11 -0700 (PDT)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id y31sm963151wrd.23.2017.04.26.11.10.09
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 26 Apr 2017 11:10:09 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 26 Apr 2017 20:10:28 +0200
+To: Stefan Agner <stefan@agner.ch>
+Message-ID: <20170426181028.GE3258@jama>
+References: <1491976809-2701-1-git-send-email-stefan@agner.ch>
+MIME-Version: 1.0
+In-Reply-To: <1491976809-2701-1-git-send-email-stefan@agner.ch>
+User-Agent: Mutt/1.8.2 (2017-04-18)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH v2] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,106 +58,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 18:09:34 -0000
+X-List-Received-Date: Wed, 26 Apr 2017 18:10:11 -0000
+X-Groupsio-MsgNum: 66556
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="HeFlAV5LIbMFYYuh"
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
-v1 -> v2
-- Fix bashishm
+--HeFlAV5LIbMFYYuh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
- .../kodi/jsonschemabuilder-native.bb                 |  6 +++---
- meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb  | 20 ++++++++++++++------
- 2 files changed, 17 insertions(+), 9 deletions(-)
+On Tue, Apr 11, 2017 at 11:00:09PM -0700, Stefan Agner wrote:
+> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+> and more useful than IPSec, while avoiding the massive headache.
+>=20
+> The recipes add the current experimental snapshot v0.0.20170409
+> out-of-tree kernel module and tools. The kernel module has some kernel
+> configuration dependencies such as some configuration part of
+> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>=20
+> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
+> which is MACHINE_ARCH (like all kernel modules) we need to add this
+> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb b/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
-index 094ccff98..fdb769943 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/jsonschemabuilder-native.bb
-@@ -3,10 +3,10 @@ SUMMARY = "Kodi Media Center"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://JsonSchemaBuilder.cpp;beginline=2;endline=18;md5=1f67721215c03f66545390f6e45b99c7"
- 
--SRCREV = "b587e98911fcedc4b800cd923a882c7aeeaa2146"
-+SRCREV = "661dd08d221f5b2bf509a696a6aca5ee7d45bb27"
- 
--PV = "16.0+gitr${SRCPV}"
--SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Jarvis"
-+PV = "17.1+gitr${SRCPV}"
-+SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton"
- 
- inherit autotools-brokensep gettext native
- 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-index d6e19617d..8f75bb48d 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-@@ -12,6 +12,7 @@ DEPENDS = " \
-             jsonschemabuilder-native \
-             nasm-native \
-             swig-native \
-+            unzip-native \
-             yasm-native \
-             zip-native \
-             avahi \
-@@ -61,9 +62,11 @@ DEPENDS = " \
- 
- PROVIDES = "xbmc"
- 
--SRCREV = "a10c5048f2487bd9b2dc1f35d2fee48a25945a70"
--PV = "17.0+gitr${SRCPV}"
-+SRCREV = "661dd08d221f5b2bf509a696a6aca5ee7d45bb27"
-+BASEPV = "17.1"
-+PV = "${BASEPV}+gitr${SRCPV}"
- SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton \
-+           https://repo.voidlinux.eu/distfiles/${BPN}-${BASEPV}-generated-addons.tar.xz;name=addons;unpack=0 \
-            file://0003-configure-don-t-try-to-run-stuff-to-find-tinyxml.patch \
-            file://0004-handle-SIGTERM.patch \
-            file://0005-add-support-to-read-frequency-output-if-using-intel-.patch \
-@@ -80,6 +83,8 @@ SRC_URI_append_libc-musl = " \
-            file://0001-Fix-file_Emu-on-musl.patch \
-            file://0002-Remove-FILEWRAP.patch \
- "
-+SRC_URI[addons.md5sum] = "719614fa764011a18665d08af5c8c92f"
-+SRC_URI[addons.sha256sum] = "350da57408c27473eaf40e7f544bc94841bf101dc4346085260c5c4af0adac97"
- 
- inherit autotools-brokensep gettext pythonnative
- 
-@@ -116,6 +121,7 @@ EXTRA_OECONF = " \
-     --disable-optical-drive \
-     --with-ffmpeg=shared \
-     --enable-texturepacker=no \
-+    ac_cv_path_JAVA_EXE=/bin/true \
- "
- 
- FULL_OPTIMIZATION_armv7a = "-fexpensive-optimizations -fomit-frame-pointer -O3 -ffast-math"
-@@ -137,13 +143,18 @@ def enable_glew(bb, d):
-     return ""
- 
- do_configure() {
-+    tar xf ${WORKDIR}/${BPN}-${BASEPV}-generated-addons.tar.xz -C ${S}/
-+
-     ( for i in $(find ${S} -name "configure.*" ) ; do
-        cd $(dirname $i) && gnu-configize --force || true
-     done )
-+    ( for f in ${S}/xbmc/interfaces/python/generated/*.cpp; do
-+       touch `echo $f|sed -e 's/.cpp$/.xml/g'`
-+    done )
-     make -C tools/depends/target/crossguid PREFIX=${STAGING_DIR_HOST}${prefix}
- 
-     BOOTSTRAP_STANDALONE=1 make -f bootstrap.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
--    BOOTSTRAP_STANDALONE=1 make -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
-+    BOOTSTRAP_STANDALONE=1 make JAVA=/bin/true -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
-     oe_runconf
- }
- 
-@@ -191,6 +202,3 @@ RRECOMMENDS_${PN}_append_libc-glibc = " glibc-charmap-ibm850 \
- RPROVIDES_${PN} += "xbmc"
- 
- TOOLCHAIN = "gcc"
--
--
--PNBLACKLIST[kodi] ?= "Depends on blacklisted libsdl-mixer - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.12.2
+I know it's not possible to check it from recipe, but it might be useful
+to mention which kernel options this requires, one of my builds failed
+with:
 
+wireguard-module/0.0.20170409-r0/WireGuard-0.0.20170409/src/Kbuild:30:
+*** "WireGuard requires CONFIG_NETFILTER_XT_MATCH_HASHLIMIT to be
+configured in your kernel. See
+https://www.wireguard.io/install/#kernel-requirements for more info".
+Stop.
 
+So the error message is quite good, but still might be useful to mention
+this URL in the recipe as well.
+
+>=20
+> Signed-off-by: Stefan Agner <stefan@agner.ch>
+> ---
+> Changes since v1:
+> - Upgrade to v0.0.20170409
+> - Add wireguard-tools -> wireguard-module dependency to
+>   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>=20
+>  meta-networking/conf/layer.conf                    |  4 ++++
+>  .../wireguard/wireguard-module_0.0.20170409.bb     |  9 ++++++++
+>  .../wireguard/wireguard-tools_0.0.20170409.bb      | 27 ++++++++++++++++=
+++++++
+>  .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>  4 files changed, 58 insertions(+)
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-mo=
+dule_0.0.20170409.bb
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-to=
+ols_0.0.20170409.bb
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>=20
+> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer=
+=2Econf
+> index 85ad93b..b5aa159 100644
+> --- a/meta-networking/conf/layer.conf
+> +++ b/meta-networking/conf/layer.conf
+> @@ -21,3 +21,7 @@ LICENSE_PATH +=3D "${LAYERDIR}/licenses"
+> =20
+>  # Override security flags
+>  require conf/distro/include/meta_networking_security_flags.inc
+> +
+> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS +=3D " \
+> +  wireguard-tools->wireguard-module \
+> +"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.=
+0.20170409.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0=
+=2E0.20170409.bb
+> new file mode 100644
+> index 0000000..aeb8269
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170=
+409.bb
+> @@ -0,0 +1,9 @@
+> +require wireguard.inc
+> +
+> +inherit module
+> +
+> +EXTRA_OEMAKE +=3D "KERNELDIR=3D${STAGING_KERNEL_DIR}"
+> +MAKE_TARGETS =3D "module"
+> +MODULES_INSTALL_TARGET =3D "module-install"
+> +
+> +RRECOMMENDS_${PN} =3D "kernel-module-xt-hashlimit"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0=
+=2E20170409.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0=
+=2E0.20170409.bb
+> new file mode 100644
+> index 0000000..79d420f
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.201704=
+09.bb
+> @@ -0,0 +1,27 @@
+> +require wireguard.inc
+> +
+> +inherit bash-completion systemd pkgconfig
+> +
+> +DEPENDS =3D "wireguard-module libmnl"
+> +
+> +do_compile_prepend () {
+> +    cd ${S}/tools
+> +}
+> +
+> +do_install () {
+> +    cd ${S}/tools
+> +    oe_runmake DESTDIR=3D"${D}" PREFIX=3D"${prefix}" SYSCONFDIR=3D"${sys=
+confdir}" \
+> +        SYSTEMDUNITDIR=3D"${systemd_unitdir}" \
+> +        WITH_SYSTEMDUNITS=3D${@bb.utils.contains('DISTRO_FEATURES', 'sys=
+temd', 'yes', '', d)} \
+> +        WITH_BASHCOMPLETION=3Dyes \
+> +        WITH_WGQUICK=3Dyes \
+> +        install
+> +}
+> +
+> +FILES_${PN} =3D " \
+> +    ${sysconfdir} \
+> +    ${systemd_unitdir} \
+> +    ${bindir} \
+> +"
+> +
+> +RDEPENDS_${PN} =3D "wireguard-module"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/met=
+a-networking/recipes-kernel/wireguard/wireguard.inc
+> new file mode 100644
+> index 0000000..db98517
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "WireGuard is an extremely simple yet fast and modern VPN"
+> +DESCRIPTION=3D"WireGuard is a secure network tunnel, operating at layer =
+3, \
+> +implemented as a kernel virtual network interface for Linux, which aims =
+to \
+> +replace both IPsec for most use cases, as well as popular user space and=
+/or \
+> +TLS-based solutions like OpenVPN, while being more secure, more performa=
+nt, \
+> +and easier to use."
+> +SECTION =3D "networking"
+> +HOMEPAGE =3D "https://www.wireguard.io/"
+> +LICENSE =3D "GPLv2"
+> +
+> +LIC_FILES_CHKSUM =3D "file://../COPYING;md5=3Db234ee4d69f5fce4486a80fdaf=
+4a4263"
+> +
+> +SRC_URI =3D "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.ta=
+r.xz"
+> +
+> +SRC_URI[md5sum] =3D "5d3146bbd38c534386eb4a0c026780ff"
+> +SRC_URI[sha256sum] =3D "31473b4d14178f82d6ff46df019d57982c210c03d1a985d5=
+4db35bdd76efbb18"
+> +
+> +S =3D "${WORKDIR}/WireGuard-${PV}/src/"
+> --=20
+> 2.7.4
+>=20
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--HeFlAV5LIbMFYYuh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWQDikwAKCRA3VSO3ZXaA
+HKYoAJ9jS7z7+uW+NXJwfA1ZCLfY7XVniACgrtUDnLYsQl6V1pUO5ZsdivTlbXg=
+=9RjK
+-----END PGP SIGNATURE-----
+
+--HeFlAV5LIbMFYYuh--
