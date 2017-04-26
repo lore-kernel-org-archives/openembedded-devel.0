@@ -1,26 +1,25 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B0EE77CD1
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 22A6C77C9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 08:22:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v3Q8MarX029772
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 01:22:36 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 26 Apr 2017 01:22:35 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 26 Apr 2017 16:22:07 +0800
-Message-ID: <76fdc4b05a9159d681cee97abd136e21a54f8395.1493194374.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.1493194374.git.jackie.huang@windriver.com>
-References: <cover.1493194374.git.jackie.huang@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 8/8 v2] ipmitool: add new recipe
+	Wed, 26 Apr 2017 09:09:27 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1d3Iwr-0005ii-Dh for openembedded-devel@lists.openembedded.org;
+	Wed, 26 Apr 2017 11:09:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 26 Apr 2017 11:09:19 +0200
+Message-ID: <odpo3p$f4m$1@blaine.gmane.org>
+References: <CAA0Zw-x0XYPf4WS+KHj_90xkCuNaNZYysmaBZNryEq8genRUCA@mail.gmail.com>
+	<67ed839c-53ba-4b8b-2e9f-a40655e25e98@denx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.8.0
+In-Reply-To: <67ed839c-53ba-4b8b-2e9f-a40655e25e98@denx.de>
+Subject: Re: State of Java on OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,64 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 08:22:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 26 Apr 2017 09:09:29 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Op 24-04-17 om 09:02 schreef Stefano Babic:
+> On 22/04/2017 00:25, Steven Osborn wrote:
+>> Is anyone using Java on OE devices right now?
+>> 
+>> meta-java - no release branches.  Seems to only be focused on master. 
+>> I've had trouble even finding a revision that will compile on Morty.
+>> 
+>> meta-oracle-java has a Morty branch, but the URI for the binaries is 
+>> bad so it fails to install.
+>> 
+>> Overall it seems like Java is not a very favored or platform at the
+>> moment.
+>> 
+> 
+> I have got the same problems - the missing of release branches in 
+> meta-java is quite confusing. -master does not work with last releases, 
+> and everybody have to find working commit id for each release. And after 
+> that, cherry-picking something from -master to fix global issue (it was 
+> for me dependency's issue with classpath).
+> 
+> Maybe we have to try to propose the maintainers to set release branches 
+> as usual.
 
-Utility for IPMI control which is for interfacing with
-devices that support the Intelligent Platform Management
-Interface specification.
+You can add an empty class to make 'master' work with 'morty':
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../recipes-support/ipmitool/ipmitool_1.8.18.bb    | 36 ++++++++++++++++++++++
- 1 file changed, 36 insertions(+)
- create mode 100644 meta-oe/recipes-support/ipmitool/ipmitool_1.8.18.bb
+https://github.com/Angstrom-distribution/meta-angstrom/commit/2eca0f1c932f098eb7fd877c5b00225408b2e42d
 
-diff --git a/meta-oe/recipes-support/ipmitool/ipmitool_1.8.18.bb b/meta-oe/recipes-support/ipmitool/ipmitool_1.8.18.bb
-new file mode 100644
-index 000000000..9f73d2799
---- /dev/null
-+++ b/meta-oe/recipes-support/ipmitool/ipmitool_1.8.18.bb
-@@ -0,0 +1,36 @@
-+SUMMARY = "Utility for IPMI control"
-+DESCRIPTION = "This package contains a utility for interfacing with devices that support \
-+the Intelligent Platform Management Interface specification. IPMI is \
-+an open standard for machine health, inventory, and remote power control. \
-+\
-+This utility can communicate with IPMI-enabled devices through either a \
-+kernel driver such as OpenIPMI or over the RMCP LAN protocol defined in \
-+the IPMI specification. IPMIv2 adds support for encrypted LAN \
-+communications and remote Serial-over-LAN functionality. \
-+\
-+It provides commands for reading the Sensor Data Repository (SDR) and \
-+displaying sensor values, displaying the contents of the System Event \
-+Log (SEL), printing Field Replaceable Unit (FRU) information, reading and \
-+setting LAN configuration, and chassis power control. \
-+"
-+
-+HOMEPAGE = "http://ipmitool.sourceforge.net/"
-+SECTION = "kernel/userland"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=9aa91e13d644326bf281924212862184"
-+
-+DEPENDS = "openssl readline ncurses"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/ipmitool/ipmitool-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "bab7ea104c7b85529c3ef65c54427aa3"
-+SRC_URI[sha256sum] = "0c1ba3b1555edefb7c32ae8cd6a3e04322056bc087918f07189eeedfc8b81e01"
-+
-+inherit autotools
-+
-+# --disable-dependency-tracking speeds up the build
-+# --enable-file-security adds some security checks
-+# --disable-intf-free disables FreeIPMI support - we don't want to depend on
-+#   FreeIPMI libraries, FreeIPMI has its own ipmitoool-like utility.
-+#
-+EXTRA_OECONF = "--disable-dependency-tracking --enable-file-security --disable-intf-free"
--- 
-2.11.0
+And I had to do this to make it build:
+
+https://github.com/Angstrom-distribution/meta-angstrom/blob/709abee819ee349dab873f6abb02c404b2c65331/recipes-tweaks/ecj/ecj-initial-native.bbappend
+
+With this I can build 'openjre-8' on debian and fedora hosts for armv7 and
+x86_64. It even runs jenkins, but it used 4x the amount of memory openjdk-7
+did :(
+
+regards,
+
+Koen
 
 
