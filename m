@@ -1,22 +1,51 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id BB12F71A82
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 12:30:54 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v3RCUsNV008024
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 14:30:54 +0200
-Received: from dev.sbt.siemens.com ([139.16.73.49])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v3RCUspD022092;
-	Thu, 27 Apr 2017 14:30:54 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Apr 2017 14:30:41 +0200
-Message-Id: <1493296241-22050-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] thrift: refactor recipe
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 350C9773C0
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 13:06:11 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id r16so22104540ioi.2
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 06:06:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=8KIYmbY1ZFVNNXr1aP8Q69fwb8UjPqHVquw26mhciHk=;
+	b=c/iOoUJMBQ1nGKdtpiMyL8VOwxKFH/inVlyttMJaUk3QyB2SxZKgDMf3R2i6qkOyER
+	je4aL85ZZfZfTrIJpRLWuAIXmW1mUIhgaaNxYOcs7rIsO/3PAykkU7oeeaRBC3rqkMHp
+	ku8IuD8POmNBmb5dU5fmauBGJuPtuaLQWFbr2S5+zV4/M06o3FJ3+oDBpP2dFhZW+Gw9
+	dU4IzUHyxth/eZv5Gx+vWqQxR2L02rGurO23kWsZbKuEmdyv7/bAgsW5MCldEbLf51ji
+	bTEwC+G+zGwpAszO5j4Yh2Bhmu1Pif6HGi4TduhEzrrA75Ig53SFwW6eWwkLtFIvNvkb
+	MGAA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=8KIYmbY1ZFVNNXr1aP8Q69fwb8UjPqHVquw26mhciHk=;
+	b=CxOwKu7DnHXLqBvfXJqBDElRz0tpEG6cbHG4PgKNmpYMP2/9XESBNBzhIvndB6mPr/
+	zX7c01VhKaFlnG7b3BcDP23fqV1mB2UPGN34/zpPsw5r/9tJpe8/iH7p8UbaRhv9BoZJ
+	6E+w7Z84PpvButXhp5jwb/u9RSDIXdSi4X/Hr1wl7DOaRPx/YRWbR5ZEn70BaAZfnbD3
+	FVj9wY7YLGkmCWnbD7Uwv1URvgod3VJg9tX9cQ1Nd1BKAbdeyQrBZ/8LJnAGG/0Dpsap
+	acyongCSrb0ocowxq1Inqr18aSTG+RNxSMChw9vgefxS/6xIntZSn0gTqOKCavt81/En
+	Oktw==
+X-Gm-Message-State: AN3rC/7xDuyixI9buaHQgcgypJCU34Ir23PDS/h8RykApi+kn5L2sB8E
+	6VnMv2qhQDtrIj9yCdg=
+X-Received: by 10.107.159.74 with SMTP id i71mr4513844ioe.143.1493298372983;
+	Thu, 27 Apr 2017 06:06:12 -0700 (PDT)
+Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
+	v23sm1009542ioi.61.2017.04.27.06.06.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Apr 2017 06:06:12 -0700 (PDT)
+Date: Thu, 27 Apr 2017 09:06:09 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: cshored@cshore.thecshore.com
+Message-ID: <20170427130608.GA15538@linux-uys3>
+References: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
+MIME-Version: 1.0
+In-Reply-To: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: Openembedded-devel@lists.openembedded.org
+Subject: Re: Some experimental layers and conclusions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,98 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2017 12:30:56 -0000
+X-List-Received-Date: Thu, 27 Apr 2017 13:06:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-- use release tarball instead of git
-- move libevent, python and glib into PACKAGECONFIG
-- add NOTICE file to copyright check
-- split into multiple packages
-  - libthrift for libaries
-  - thrift-compiler for compiler
-  - thrift pulls in everything as before
+Hi Daniel,
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- .../recipes-connectivity/thrift/thrift_0.9.3.bb    | 47 ++++++++++++++++++----
- 1 file changed, 40 insertions(+), 7 deletions(-)
+Very interesting report, thanks for the info!
 
-diff --git a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-index 905e561..9baeed1 100644
---- a/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-+++ b/meta-oe/recipes-connectivity/thrift/thrift_0.9.3.bb
-@@ -3,18 +3,19 @@ DESCRIPTION =  "A software framework, for scalable cross-language services devel
- HOMEPAGE = "https://thrift.apache.org/"
- 
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e4ed21f679b2aafef26eac82ab0c2cbf"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e4ed21f679b2aafef26eac82ab0c2cbf \
-+                    file://NOTICE;md5=115f49498b66b494b0472658f2bfe80b"
- 
--DEPENDS = "thrift-native boost python libevent flex-native bison-native \
--           glib-2.0 openssl"
-+DEPENDS = "thrift-native boost flex-native bison-native openssl"
- 
--SRC_URI = "git://git-wip-us.apache.org/repos/asf/thrift.git;protocol=https \
-+SRC_URI = "http://mirror.switch.ch/mirror/apache/dist/thrift/${PV}/${BPN}-${PV}.tar.gz \
-            file://0001-Forcibly-disable-check-for-Qt5.patch \
-            file://0001-THRIFT-3828-In-cmake-avoid-use-of-both-quoted-paths-.patch \
-            file://0002-THRIFT-3831-in-test-cpp-explicitly-use-signed-char.patch \
- "
--SRCREV = "61b8a29b0704ccd81b520f2300f5d1bb261fea3e"
--S = "${WORKDIR}/git"
-+
-+SRC_URI[md5sum] = "88d667a8ae870d5adeca8cb7d6795442"
-+SRC_URI[sha256sum] = "b0740a070ac09adde04d43e852ce4c320564a292f26521c46b78e0641564969e"
- 
- BBCLASSEXTEND = "native nativesdk"
- 
-@@ -25,12 +26,44 @@ export STAGING_LIBDIR
- export BUILD_SYS
- export HOST_SYS
- 
--EXTRA_OECMAKE = "-DWITH_QT4=OFF -DWITH_QT5=OFF -DBUILD_JAVA=OFF"
-+EXTRA_OECMAKE = " \
-+    -DBUILD_LIBRARIES=ON \
-+    -DBUILD_COMPILER=ON \
-+    -DBUILD_TESTING=OFF \
-+    -DBUILD_EXAMPLES=OFF \
-+    -DBUILD_TUTORIALS=OFF \
-+    -DWITH_CPP=ON \
-+    -DWITH_JAVA=OFF \
-+    -DWITH_STATIC_LIB=ON \
-+    -DWITH_SHARED_LIB=ON \
-+    -DWITH_OPENSSL=ON \
-+    -DWITH_QT4=OFF \
-+    -DWITH_QT5=OFF \
-+"
-+
- EXTRA_OECMAKE_append_class-native = "\
-              -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DWITH_CPP=OFF"
- EXTRA_OECMAKE_append_class-nativesdk = "\
-              -DBUILD_TESTING=OFF -DBUILD_EXAMPLES=OFF -DWITH_PYTHON=OFF"
- 
-+PACKAGECONFIG ??= "libevent glib python"
-+PACKAGECONFIG[libevent] = "-DWITH_LIBEVENT=ON,-DWITH_LIBEVENT=OFF,libevent,"
-+PACKAGECONFIG[python] = "-DWITH_PYTHON=ON,-DWITH_PYTHON=OFF,python,"
-+PACKAGECONFIG[glib] = "-DWITH_C_GLIB=ON,-DWITH_C_GLIB=OFF,glib-2.0 ,"
-+
- do_install_append () {
-     ln -sf thrift ${D}/${bindir}/thrift-compiler
- }
-+
-+LEAD_SONAME = "libthrift.so.${PV}"
-+
-+# thrift packages
-+PACKAGE_BEFORE_PN = "${PN}-compiler lib${BPN}"
-+FILES_lib${BPN} = "${libdir}/*.so.*"
-+FILES_${PN}-compiler = "${bindir}/*"
-+
-+# The thrift packages just pulls in some default dependencies but is otherwise empty
-+RRECOMMENDS_${PN} = "${PN}-compiler lib${BPN}"
-+ALLOW_EMPTY_${PN} = "1"
-+RRECOMMENDS_${PN}_class-native = ""
-+RRECOMMENDS_${PN}_class-nativesdk = ""
--- 
-2.1.4
+On Thu 2017-04-27 @ 02:46:24 AM, cshored@cshore.thecshore.com wrote:
+> * OE doesn't have good *router* networking support (i.e. nothing like
+> OpenWrt/LEDE's netifd and friends for a headless system, that one can
+> configure by editing a text file, or by using a WebUI for handling multiple
+> interfaces and VLANs and bridged (or not) wireless and wired networks, with
+> easy firewall configuration).
 
+I wonder Khem's if meta-openwrt could have helped here? It looks like it has a
+recipe for netifd and friends:
+
+	https://layers.openembedded.org/layerindex/branch/master/layer/meta-openwrt/
+
+Out of curiosity, did you try using musl? You don't mention which C library
+you're using. I'd be curious to know if musl can help with size reduction.
+
+Is toybox mature enough to be used in these situations?
+
+	http://layers.openembedded.org/layerindex/recipe/28902/
+
+Best regards,
+	Trevor
 
