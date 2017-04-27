@@ -1,24 +1,16 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C43977ABA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 06:35:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v3R6ZiKd024265
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 23:35:45 -0700
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.201) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 26 Apr 2017 23:35:44 -0700
-From: <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Apr 2017 14:37:44 +0800
-Message-ID: <1493275064-7998-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Return-Path: <cshore@cshore.thecshore.com>
+Received: from s2.neomailbox.net (s2.neomailbox.net [5.148.176.60])
+	by mail.openembedded.org (Postfix) with ESMTP id AB12360939
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 06:46:26 +0000 (UTC)
+From: <cshored@cshore.thecshore.com>
+Sender: "Daniel Dickinson" <cshore@cshore.thecshore.com>
+To: <Openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Apr 2017 02:46:24 -0400
+Message-ID: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH] xfsdump: upgrade to 3.1.6 and remove from blacklist
+Thread-Index: AdK/HX5utxMUPetlQlWKh5RsQ1R2uQ==
+Subject: Some experimental layers and conclusions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,56 +23,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2017 06:35:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 27 Apr 2017 06:46:34 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-ca
 
-From: Robert Yang <liezhi.yang@windriver.com>
+Hi all,
 
-The 3.1.4 doesn't work with xfsprogs 4.7:
-| inv_files.o: In function `inv_dirpath':
-|xfsdump-3.1.4/invutil/inv_files.c:53: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_fstab':
-|xfsdump-3.1.4/invutil/inv_files.c:60: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_lockfile':
-|xfsdump-3.1.4/invutil/inv_files.c:67: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_basepath':
-|xfsdump-3.1.4/invutil/inv_files.c:74: undefined reference to `ASSERT'
-| collect2: error: ld returned 1 exit status
-| make[2]: *** [../include/buildrules:33: xfsinvutil] Error 1
+I've done some prototyping of some ideas I was working on with OpenEmbedded,
+what I learned from the efforts (which I'm posting here for the benefit of
+someone who might be interested in this or similar concepts).
 
-Upgrade to 3.1.6, and remove it from blacklist.
+I was initially interested in OE as a possible replacement for OpenWrt/LEDE
+on my router.  I quickly discovered there are some issue with that, however:
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
----
- .../recipes-utils/xfsdump/{xfsdump_3.1.4.bb => xfsdump_3.1.6.bb}    | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
- rename meta-filesystems/recipes-utils/xfsdump/{xfsdump_3.1.4.bb => xfsdump_3.1.6.bb} (79%)
+* OE doesn't have good *router* networking support (i.e. nothing like
+OpenWrt/LEDE's netifd and friends for a headless system, that one can
+configure by editing a text file, or by using a WebUI for handling multiple
+interfaces and VLANs and bridged (or not) wireless and wired networks, with
+easy firewall configuration).
+* The routers (ar71xx) I was interested in have a lot of OpenWrt/LEDE
+technical debt and have drivers and BSP that has never been upstreamed.
+* OE's default build can quickly exceed 16MB flash, which is the larger of
+the flash sizes on the devices I was interested in.
 
-diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-similarity index 79%
-rename from meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
-rename to meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-index d5ad0b0b2..fac9d47e8 100644
---- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
-+++ b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-@@ -13,8 +13,8 @@ DEPENDS = "xfsprogs attr"
- SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BPN}-${PV}.tar.gz \
-     file://remove-install-as-user.patch \
- "
--SRC_URI[md5sum] = "a8b1761be5feb363131e7b506639ad4c"
--SRC_URI[sha256sum] = "570eafd0721515bdd79cb0e295b701d49cdf81e71a0a0ff0df6d4c5cc1960943"
-+SRC_URI[md5sum] = "50353cd4f4b435685955363e6044f4d1"
-+SRC_URI[sha256sum] = "7f78c11ca527477d90e5e62b0778f3ad96f2b71c19173044e9aca9515fff42d0"
- 
- inherit autotools-brokensep
- 
-@@ -34,5 +34,3 @@ do_install () {
-     oe_runmake install
-     oe_runmake install-dev
- }
--
--PNBLACKLIST[xfsdump] ?= "Depends on broken xfsprogs - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.11.0
+I started on the latter by creating a poky-tiny inspired distro which called
+CShore Embedded Device -- CShorED (cshore is a nick I've been using for a
+while).  That layer can be viewed at
+https://layers.openembedded.org/layerindex/branch/master/layer/meta-cshored/
+.  In the process I created meta-runit-init
+https://layers.openembedded.org/layerindex/branch/master/layer/meta-runit-in
+it/ (which uses busybox's runit/daemontools-style applets a the main init
+system, because systemd was clearly too large for my use case and I wanted
+something more resilient to daemon failure than sysvinit or busybox-init)
+and meta-earlyinit
+(https://layers.openembedded.org/layerindex/branch/master/layer/meta-earlyin
+it/) which allows initramfs like pre-init setup when not using an initramfs
+and also adds what I think is a lot better support for read-only-rootfs that
+doesn't require special handling after earlyinit.
+
+Oh and cshored uses squashfs-xz read-only-rootfs with the objective of
+having an easy 'factory-reset' capbability, however it doesn't take the
+overlay approach to the entire filesystem, but only overlays a subset of
+files, and uses a lot of symlinks for data that is either volatile (not kept
+across boots) or which is persistent (and with earlyinit has handling of
+auto-setup of persistent storage).
+
+I was successful with cshored in getting build sizes into potentially useful
+range (~8 MB which my smaller devices have for flash) while still having
+useful commands/capabilities, but it compared to OpenWrt/LEDE OE is always
+going to be bigger.  The lack of device support got me looking at x86/Pi
+etc, but I discovered that when going that route there are already a
+significant number of good players who take advantage of the power and
+usually available storage on x86 to create high-grade
+routers/firewalls/gateways/VPN gateways/switches/etc, so not much point in
+being a latecomer to that party (as a new entry).
+
+runit-init was an interesting experiment but the ultimately systemd is much
+better on systems that are large enough (which is even most embedded devices
+these days), or procd for smaller devices (from OpenWrt/LEDE).  The problem
+with run-it is that it doesn't have meaningful dependency support one ends
+up with a lot attempting to start, fail and restart during the boot process
+and a lot of delay while trying to figure out of the dependency was actually
+up or just hasn't reported down yet.
+
+Earlyinit seems to me to be the most useful of these, but I've heard systemd
+is wanting to take over the boot process too, so I'm not sure that earlyinit
+is a useful road to go down for further development.
+
+If anyone has comments on the layers, or wishes to see further work on any
+of them, please ping me, otherwise at this point I consider it feasibility
+research that led to no-go conclusion.
+
+Regards,
+
+Daniel
+
+
+
+
 
 
