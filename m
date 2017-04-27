@@ -1,16 +1,52 @@
-Return-Path: <cshore@cshore.thecshore.com>
-Received: from s2.neomailbox.net (s2.neomailbox.net [5.148.176.60])
-	by mail.openembedded.org (Postfix) with ESMTP id AB12360939
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 06:46:26 +0000 (UTC)
-From: <cshored@cshore.thecshore.com>
-Sender: "Daniel Dickinson" <cshore@cshore.thecshore.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Apr 2017 02:46:24 -0400
-Message-ID: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
+Return-Path: <freesilicon@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 774D877A0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 07:45:15 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id y10so2698509wmh.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 00:45:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=7Nl91RDYlpdh4VeEZmVfQPVn9JOZ2H/jWi0dL5PbZBk=;
+	b=ITdYC2qxkpG/+munKholCTyzTQQTR+JDx/wbulDzINKr/RRtGW//vvdxTkv/zvP25j
+	ZafndT6QxxUfMEdjKlGM7O7H2Nh53JaFGdal6MXwai6NBlUkKm8r5DQxWAyh7DtlZepF
+	brNfXtW8vhQYy/LEMdaQfQYVW0YoDiFW1B2vpLofHwe7dFX2CsPrA9WRaqHfPXaxUh0a
+	Xq/H8wHKFMqriJrKtdG38QDN1nZiFY+bYoK/Fxsa/AZbbZ1FHcS8UdJ0KaW1tzfS6m0u
+	0comEkwDFPaZxHOqNt1b29yR6QswKEqB0EntDQ7zHqH1x2vbcZ70ObziZdXkrB87ISCg
+	vlmg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=7Nl91RDYlpdh4VeEZmVfQPVn9JOZ2H/jWi0dL5PbZBk=;
+	b=Jpho01sRsNz6Su/3vwxZ+u8zOVYlfaFTPUCpu+LjLKLgdFRWQJs1DNfkFhUhVeDR8j
+	68Qz7YAdgqIWDBBy8N7EL4KEaNbNlSditKgKuC9ssxCjlp8ZpSLE9Xpku/fJjYCvgAx7
+	J0+BZbHa4fyF+aXXyQtA6SGYeDxJ6i5LCe28MLKA71kLouJhcs9uhXFN72En8fxqpsgj
+	J48nWCqaGXhaDwyw2nZRIWFoi95KVRexcbakRTq7tbaAjznm9me2fXdSVLbNaY14BeYJ
+	ilLKOwK+AKskjjA7Kjg0B4Chc5NOzkuuqf/tGYkdZjH7nmZ+uiZEdQShxcXqFF7yg6H6
+	SkXA==
+X-Gm-Message-State: AN3rC/5idXtFbvS2qxtYCeAvHU96Wcyx/o1Zq555P9orKlpfiqOrX3jc
+	f8On6+qpR5laPw==
+X-Received: by 10.28.142.4 with SMTP id q4mr487553wmd.112.1493279116125;
+	Thu, 27 Apr 2017 00:45:16 -0700 (PDT)
+Received: from crde-port-20.cahors.local ([185.47.80.46])
+	by smtp.gmail.com with ESMTPSA id
+	d25sm2795668wrd.54.2017.04.27.00.45.15
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 27 Apr 2017 00:45:15 -0700 (PDT)
+From: David Vincent <freesilicon@gmail.com>
+To: Joe MacDonald <Joe_MacDonald@mentor.com>
+Date: Thu, 27 Apr 2017 09:45:12 +0200
+Message-ID: <2744086.6XG6jR0gtt@crde-port-20.cahors.local>
+In-Reply-To: <20170426145729.GF11025@mentor.com>
+References: <20170420135735.25958-1-freesilicon@gmail.com>
+	<CA+chaQcHQvssOS6gjeTWfKF2o0h+6gvxxrDEEk-N2jh7AYJoCA@mail.gmail.com>
+	<20170426145729.GF11025@mentor.com>
 MIME-Version: 1.0
-Thread-Index: AdK/HX5utxMUPetlQlWKh5RsQ1R2uQ==
-Subject: Some experimental layers and conclusions
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] strongswan: Split plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,85 +59,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2017 06:46:34 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-ca
+X-List-Received-Date: Thu, 27 Apr 2017 07:45:15 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="UTF-8"
 
-Hi all,
+Sorry for the late reply, I've seen the patch has been merged into master-next 
+but I let this thread unanswered. Here are some thoughts to explain it.
 
-I've done some prototyping of some ideas I was working on with OpenEmbedded,
-what I learned from the efforts (which I'm posting here for the benefit of
-someone who might be interested in this or similar concepts).
+On mercredi 26 avril 2017 16:57:29 CEST Joe MacDonald wrote:
+> [Re: [oe] [meta-networking][PATCH] strongswan: Split plugins] On 17.04.20 
+(Thu 16:36) Martin Jansa wrote:
+> > I think currently the preferred way is only one -dev/-dbg/-staticdev
+> > package per recipe.
+OK, I didn't know about this rule but I can send a v2 to remove the -dev/-
+dbg/-staticdev split if it is preferred.
+> > 
+> > Why not set RDEPENDS_${PN} based on plugins packaged in first
+> > do_split_packages call?
+> > 
+> > Just my 2c - I'm not using strongswan and Joe has last word for
+> > meta-networking.
+> 
+> Yeah, I've been giving this some thought and I'm inclined to agree.  The
+> RDEPENDS_${PN} being set with a canned list that doesn't reflect what
+> was configured for the build seems non-intuitive.
+The list comes from strongswan default configuration. I agree the RDEPENDS 
+seems to come out of nowhere and for now it just looks like the same list as 
+the result of the first do_split_packages call.
 
-I was initially interested in OE as a possible replacement for OpenWrt/LEDE
-on my router.  I quickly discovered there are some issue with that, however:
+My main reasoning was to not break compatibility with existing use cases while 
+still offering the possibility to refine it in the near future if some plugins 
+are not required.
+There is also the possibility to enable the compilation of all plugins with 
+'--enable-all' and only install the default set. Therefore, it will be up to 
+the user to select its own set through IMAGE_INSTALL (or like perl does)
+One last possibility will be to use PACKAGECONFIGs for all plugins and build 
+the RDEPENDS list automatically.
+> 
+> As for not breaking compatibility with the current configuration, if
+> RDEPENDS_${PN} is set based on the build, won't that come essentially
+> for free?
+> 
+> -J.
+> 
+Please, let me know if modifications are required.
 
-* OE doesn't have good *router* networking support (i.e. nothing like
-OpenWrt/LEDE's netifd and friends for a headless system, that one can
-configure by editing a text file, or by using a WebUI for handling multiple
-interfaces and VLANs and bridged (or not) wireless and wired networks, with
-easy firewall configuration).
-* The routers (ar71xx) I was interested in have a lot of OpenWrt/LEDE
-technical debt and have drivers and BSP that has never been upstreamed.
-* OE's default build can quickly exceed 16MB flash, which is the larger of
-the flash sizes on the devices I was interested in.
-
-I started on the latter by creating a poky-tiny inspired distro which called
-CShore Embedded Device -- CShorED (cshore is a nick I've been using for a
-while).  That layer can be viewed at
-https://layers.openembedded.org/layerindex/branch/master/layer/meta-cshored/
-.  In the process I created meta-runit-init
-https://layers.openembedded.org/layerindex/branch/master/layer/meta-runit-in
-it/ (which uses busybox's runit/daemontools-style applets a the main init
-system, because systemd was clearly too large for my use case and I wanted
-something more resilient to daemon failure than sysvinit or busybox-init)
-and meta-earlyinit
-(https://layers.openembedded.org/layerindex/branch/master/layer/meta-earlyin
-it/) which allows initramfs like pre-init setup when not using an initramfs
-and also adds what I think is a lot better support for read-only-rootfs that
-doesn't require special handling after earlyinit.
-
-Oh and cshored uses squashfs-xz read-only-rootfs with the objective of
-having an easy 'factory-reset' capbability, however it doesn't take the
-overlay approach to the entire filesystem, but only overlays a subset of
-files, and uses a lot of symlinks for data that is either volatile (not kept
-across boots) or which is persistent (and with earlyinit has handling of
-auto-setup of persistent storage).
-
-I was successful with cshored in getting build sizes into potentially useful
-range (~8 MB which my smaller devices have for flash) while still having
-useful commands/capabilities, but it compared to OpenWrt/LEDE OE is always
-going to be bigger.  The lack of device support got me looking at x86/Pi
-etc, but I discovered that when going that route there are already a
-significant number of good players who take advantage of the power and
-usually available storage on x86 to create high-grade
-routers/firewalls/gateways/VPN gateways/switches/etc, so not much point in
-being a latecomer to that party (as a new entry).
-
-runit-init was an interesting experiment but the ultimately systemd is much
-better on systems that are large enough (which is even most embedded devices
-these days), or procd for smaller devices (from OpenWrt/LEDE).  The problem
-with run-it is that it doesn't have meaningful dependency support one ends
-up with a lot attempting to start, fail and restart during the boot process
-and a lot of delay while trying to figure out of the dependency was actually
-up or just hasn't reported down yet.
-
-Earlyinit seems to me to be the most useful of these, but I've heard systemd
-is wanting to take over the boot process too, so I'm not sure that earlyinit
-is a useful road to go down for further development.
-
-If anyone has comments on the layers, or wishes to see further work on any
-of them, please ping me, otherwise at this point I consider it feasibility
-research that led to no-go conclusion.
-
-Regards,
-
-Daniel
-
-
-
-
-
+--
+David
 
