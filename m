@@ -1,50 +1,46 @@
-Return-Path: <andrej.rode@ettus.com>
-Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
-	[209.85.192.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 1819777E0E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D861F77DCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 21:19:52 +0000 (UTC)
-Received: by mail-pf0-f176.google.com with SMTP id 194so38117610pfv.3
+	Thu, 27 Apr 2017 22:08:04 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id y10so7493669wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 14:19:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YnbxikANATpz83r4e9i3ZGykWBRkpC55ON/XkSMMIMA=;
-	b=eKa/ok7m9Y8qhKdHLWibHWxeBA4kCJBityr14AA7mx59V52fVW1YYRiyEtA6R1Mamh
-	3a+ORosfLCXeB1BBxWlVGc3SMgr/qIfx5ETOt9KvZ8/G4YHu5IbvlrVFFvcF4Tyw4rND
-	v3MDCmNl/Aw60U/BAWP5YrEtBqzH//gCAgyJ/NuDFgnJrAC9H3T48oLE7p/LAZerkftF
-	bP+t6iU5Urmuc7tmJm2YcnD+O7AAzYven7js+NXyqZUgYaBq/jx41AsDV40zmucHyOxU
-	pjPBf6pIW8HczKWakgdIIoo7jbihA/BTRI0el4ULNWY2CrLjoxuKv6Tbkfe4F83Xwxjd
-	/jIQ==
+	Thu, 27 Apr 2017 15:08:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=pNVaE8UwTKxjMw+Nzn4ZzQ6roctu0d0ld/WEqwuI0a8=;
+	b=tZ2JqH+J72FvfWvM44v8BKr7SMEl3zO9Zv9d4CTiENUANtV4EhQVGiosjHgQo126Ut
+	hyW540bUgr3LyihfeWOwaGk6dR4IlsABMNjorbLi7/CMX0yaxnGCeF4dPaTHeHf37xRK
+	oz6i92f+L08O0d6e3/bWp8WWsgtHQhtTe1Ni8awC4uN0aLh3OkRomIgYS3lTSwbpuYFB
+	b0Rbhbj+FNJH9FTuTZ2v2PC3bRMZ8cgOtPvTA4y0LFPOHsvvxfLdq9qnKAACNW4DCio4
+	YHi6pPmwEN/t87UObWekEFsjlc0gRq2EkHaubOOxvMGynxI1MaIR6bAwKrB+0rohidTm
+	szIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=YnbxikANATpz83r4e9i3ZGykWBRkpC55ON/XkSMMIMA=;
-	b=iJMLrPCYsxmkGe74DISf1p0TUlVWFAQeBY6kmjYJPjG3hkHLCIvqT9vSjsJ/3QG/Wl
-	ttUXtBjYHIIoFZxvtiFHgzKHP9BU/1NKHlyoH0+DpxnYTi/0qUHtUk2r1ynPQY9VgZ3b
-	K6ZKZfvVHlCT8qTd4My+Kzm64iCyxwgYq+9e5n9HA5cOAuH2RlmZSyywn94JN0Aft8ka
-	YsB5XnoA9AKVZleYv/aP4bT/5ZrM5TDkq+ILhn80ihv6gFwcE4aJbTBnRe0EMBRbj0uk
-	9ajwkZY063c4pxvQC/l2tIUnRTp2HUu3iDVlMEZz6GZJeC6GwDscb56ZgVDll6+PEeqs
-	rv0Q==
-X-Gm-Message-State: AN3rC/6mKvH8N/cTPkPgEFZp/uYHmDwG1GJIZhfwfyPot/MsdRuNKSb7
-	d/qdRfGnqGjdASR1
-X-Received: by 10.99.167.71 with SMTP id w7mr8351321pgo.138.1493327994234;
-	Thu, 27 Apr 2017 14:19:54 -0700 (PDT)
-Received: from FlyingDragon.amer.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id 65sm7765933pgc.1.2017.04.27.14.19.53
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 27 Apr 2017 14:19:53 -0700 (PDT)
-From: Andrej Rode <andrej.rode@ettus.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 Apr 2017 14:19:48 -0700
-Message-Id: <20170427211948.12255-2-andrej.rode@ettus.com>
-X-Mailer: git-send-email 2.10.2
-In-Reply-To: <20170427211948.12255-1-andrej.rode@ettus.com>
-References: <20170427211948.12255-1-andrej.rode@ettus.com>
-Subject: [meta-python][PATCH v3 2/2] python-mprpc: add new recipe
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=pNVaE8UwTKxjMw+Nzn4ZzQ6roctu0d0ld/WEqwuI0a8=;
+	b=buY+sE2blIHkUEwuAcrof/eC3nvx16YBM0Ci9JBgrv99GgQJ5MFY4OIZrmecnnuRxz
+	Ils1cIPcoiW9fqy242toPmUnAo9vQyMx1yAwIZT5pL6bSCeRx5+DVN7r5qO8/yKkZ9Cp
+	hhTBi48JG8YZQdQ/qwTylW0e02hkAhnMx+eTAIPWbrPC6vRA8IAVWUBRr0wYgIfPE9pE
+	VngIIDf605xJjTtCSr5mbCAF+jb5/9paUCuAMYlHcrPV1CjOAY4ZbRi/DYTX/32rpZ5E
+	H+xL6vXkU3iFioy5cRHkohHU4l4SBj4Ntff2g2D568iQ9XtqwTcvZD92kPCoUUhG0nKS
+	1PLQ==
+X-Gm-Message-State: AN3rC/4FjpkttwoiW/aZjFA3MUjquv5HzVmOzU7dLlbQVzGBjv3btV1Z
+	E3C48CD6uyB75kzGNBf6jzV48LvRjw==
+X-Received: by 10.80.144.206 with SMTP id d14mr6507971eda.9.1493330885500;
+	Thu, 27 Apr 2017 15:08:05 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.148.54 with HTTP; Thu, 27 Apr 2017 15:08:05 -0700 (PDT)
+In-Reply-To: <20170427211851.10351-1-andrej.rode@ettus.com>
+References: <20170427211851.10351-1-andrej.rode@ettus.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 28 Apr 2017 00:08:05 +0200
+Message-ID: <CA+chaQc63KW_k+bcTj0pNL_2ztH=aHzPh4SwkbXO4y44ijhvOg@mail.gmail.com>
+To: Andrej Rode <andrej.rode@ettus.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH v3] python-systemd, python3-systemd: add a new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,82 +53,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2017 21:19:53 -0000
+X-List-Received-Date: Thu, 27 Apr 2017 22:08:05 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Add recipe for python-mprpc, a messagepack RPC library for python
+All 4 changes were already merged, please rebase and send what's left as
+follow-up patch.
 
-Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
----
- .../python-mprpc/files/0001-fix_setup_py.patch     | 34 ++++++++++++++++++++++
- .../python-mprpc/python-mprpc_0.1.13.bb            | 17 +++++++++++
- 2 files changed, 51 insertions(+)
- create mode 100644 meta-python/recipes-connectivity/python-mprpc/files/0001-fix_setup_py.patch
- create mode 100644 meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
+On Thu, Apr 27, 2017 at 11:18 PM, Andrej Rode <andrej.rode@ettus.com> wrote:
 
-diff --git a/meta-python/recipes-connectivity/python-mprpc/files/0001-fix_setup_py.patch b/meta-python/recipes-connectivity/python-mprpc/files/0001-fix_setup_py.patch
-new file mode 100644
-index 0000000..f5df9b9
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-mprpc/files/0001-fix_setup_py.patch
-@@ -0,0 +1,34 @@
-+From bda99eab9036d46e7bb06b446d11cab0b1dd8093 Mon Sep 17 00:00:00 2001
-+From: Andrej Rode <andrej.rode@ettus.com>
-+Date: Mon, 10 Apr 2017 16:49:50 -0700
-+Subject: [PATCH] setup: remove find_packages and only install mprpc
-+
-+Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
-+---
-+ setup.py | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index 5001d0c..4c0ba75 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -1,6 +1,6 @@
-+ # -*- coding: utf-8 -*-
-+ 
-+-from setuptools import setup, Extension, find_packages
-++from setuptools import setup, Extension
-+ 
-+ setup(
-+     name='mprpc',
-+@@ -10,7 +10,7 @@ setup(
-+     author='Studio Ousia',
-+     author_email='ikuya@ousia.jp',
-+     url='http://github.com/studio-ousia/mprpc',
-+-    packages=find_packages(),
-++    packages=['mprpc'],
-+     ext_modules=[
-+         Extension('mprpc.client', ['mprpc/client.c']),
-+         Extension('mprpc.server', ['mprpc/server.c'])
-+-- 
-+2.10.2
-+
-diff --git a/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb b/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
-new file mode 100644
-index 0000000..78df00a
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.13.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "A gevent based messagpack rpc library"
-+DESCRIPTION = "mprpc is a fast implementation of the messagepack rpc protocol for python. \
-+It is based on gevent for handling connections and enabling concurrent connections."
-+HOMEPAGE = "https://github.com/studio-ousia/mprpc"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
-+DEPENDS += "python-gevent"
-+RDEPENDS_${PN} += "python-gevent python-msgpack python-gsocketpool"
-+
-+SRC_URI_append = " \
-+    file://0001-fix_setup_py.patch;patch=1;pnum=1 \
-+"
-+
-+SRC_URI[md5sum] = "449e6239eb5ff07b9cceb86e1ab0c2ee"
-+SRC_URI[sha256sum] = "5881cc7fbb8de814e2b4aa5958bfe147c5c301e46749190f0e6abf373cf56d82"
-+
-+inherit pypi setuptools
--- 
-2.10.2
-
+> Adds new recipe for python-systemd and python3-systemd
+> which provide python bindings for libsystemd
+>
+> Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
+> ---
+>  meta-python/recipes-devtools/python/python-systemd_234.bb  | 13
+> +++++++++++++
+>  meta-python/recipes-devtools/python/python3-systemd_234.bb | 13
+> +++++++++++++
+>  2 files changed, 26 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python-systemd_234.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-systemd_234.bb
+>
+> diff --git a/meta-python/recipes-devtools/python/python-systemd_234.bb
+> b/meta-python/recipes-devtools/python/python-systemd_234.bb
+> new file mode 100644
+> index 0000000..ef11831
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-systemd_234.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY = "Python interface for libsystemd"
+> +HOMEPAGE = "https://github.com/systemd/python-systemd"
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b36451
+> 6c"
+> +
+> +PYPI_PACKAGE = "systemd-python"
+> +DEPENDS += "systemd (<=234)"
+> +RDEPENDS_${PN} += "systemd"
+> +REQUIRED_DISTRO_FEATURES = "systemd"
+> +inherit pypi setuptools distro_features_check
+> +
+> +SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
+> +SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7e
+> b5b0b6372cd1b391228047d33895db83e7"
+> diff --git a/meta-python/recipes-devtools/python/python3-systemd_234.bb
+> b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+> new file mode 100644
+> index 0000000..845b7d9
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-systemd_234.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY = "Python interface for libsystemd"
+> +HOMEPAGE = "https://github.com/systemd/python-systemd"
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=4fbd65380cdd255951079008b36451
+> 6c"
+> +
+> +PYPI_PACKAGE = "systemd-python"
+> +DEPENDS += "systemd (<=234)"
+> +RDEPENDS_${PN} += "systemd"
+> +REQUIRED_DISTRO_FEATURES = "systemd"
+> +inherit pypi setuptools3 distro_features_check
+> +
+> +SRC_URI[md5sum] = "5071ea5bcb976186e92a3f5e75df221d"
+> +SRC_URI[sha256sum] = "fd0e44bf70eadae45aadc292cb0a7e
+> b5b0b6372cd1b391228047d33895db83e7"
+> --
+> 2.10.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
