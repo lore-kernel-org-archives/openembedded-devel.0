@@ -1,53 +1,24 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 28C7F77D20
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AC4DC77CB4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 20:24:51 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id a188so5206557pfa.0
+	Thu, 27 Apr 2017 01:33:33 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3R1XXRY007033
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Apr 2017 13:24:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding;
-	bh=ZlKhrMsqabiXR8pKaHlryW3sgI8m260p+dxH6pMZdz8=;
-	b=FPXkjxWpD3++oLjgrKG7xTBOvgAfnQU68zFk//BUiV/D9Jlp41dTGVxy+tUziJF4Cp
-	QQzCeQIf7rXzy7AaablxyEV/bVV/LqthSgPTthM+qjoYy32r1/7VThLbzoUQIl7Fa/yg
-	rMCMPWrq0vg0TLvV97LbwEG4azFvHv92BJKlrWKpKBza/LoBPX+DMKyte7/ZEU7QspWQ
-	NuXCefuMlSyWr+ldx053GQvzPefLjjXiC3g0OV3q/QhrhgoFrrSk9JlmHu4E5qPGHbFg
-	yT6mUI1TO/rV/170Ab4R/ArsNeHfpAnkgu8LNbgnSnUfazgwq1VA7zf+MEXQ5lVhaQ1Y
-	ogeA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
-	bh=ZlKhrMsqabiXR8pKaHlryW3sgI8m260p+dxH6pMZdz8=;
-	b=CToZt04GmBK0c4X+8uDoFpwGjOVlc81lZKGcbdgfoqKkORaghD6aSB0FSZUNKMMKZF
-	vdGl0Mmd9zJucz3ZdenbE/YOcIWMlGaF/tY+sJrj/l2Cp4KTV/j3osZ3R3KDSVwajaO5
-	oz2VD2HbXsZAuIRAbLcKWpGiuJ7Qf+tZt0P/qNhsGmp/lf18Pi6b/a4gCgePQhuZB26q
-	QY4+d6cxbafikHs2icDFD11jb1tAKiHqqzrEs4r8gcFhZm2N9RXbtQgqN9b9OMeZFzLR
-	vcUtJ8RKN+u827EtBkiDdvJbw0H9ccdrGxNf4zSn+xx90svVr2mKFmt7akEAUSZxHmuT
-	i2LQ==
-X-Gm-Message-State: AN3rC/4gn+qd7KSXx4iWcsiqF+G7LhX6iGW2z09K9ZxMDzn169V3+mm9
-	QTswUcVh2E/2dw==
-X-Received: by 10.99.152.87 with SMTP id l23mr1749939pgo.59.1493238293336;
-	Wed, 26 Apr 2017 13:24:53 -0700 (PDT)
-Received: from Akusters-laptop.local ([2601:202:4001:9ea0:8483:ff95:723b:6318])
-	by smtp.googlemail.com with ESMTPSA id
-	x9sm262267pff.98.2017.04.26.13.24.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Apr 2017 13:24:52 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20170426184422.GG3258@jama>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <a05fd59e-cbf1-291c-c2fa-63d3ba5b1d6e@gmail.com>
-Date: Wed, 26 Apr 2017 13:24:51 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
-	Gecko/20100101 Thunderbird/45.8.0
+	Wed, 26 Apr 2017 18:33:34 -0700 (PDT)
+Received: from fidler.wrs.com (172.25.44.11) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Wed, 26 Apr 2017 18:33:32 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Apr 2017 21:33:29 -0400
+Message-ID: <20170427013329.7827-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.9.3
 MIME-Version: 1.0
-In-Reply-To: <20170426184422.GG3258@jama>
-Subject: Re: pyro branch for meta-openembedded, meta-qt5 / maintainer wanted
+Subject: [meta-oe][PATCH] opencv: disable broken Intel FP16 detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,38 +31,332 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Apr 2017 20:24:52 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 Apr 2017 01:33:35 -0000
+Content-Type: text/plain
 
-On 4/26/17 11:44 AM, Martin Jansa wrote:
-> Hello,
->
-> as every 6 months I'm looking for some volunteer(s) to step-up and
-> maintain "pyro" release branch.
-put me down. I will be sending patches shortly.
--armin
->
-> You can sign-up by replying to this thread and then one of you need to
-> send README update like this:
-> https://github.com/openembedded/meta-openembedded/commit/3082e30da58df0711182cf114c71a8c6a093aeae
->
-> More details in thread searching for daisy maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-April/095601.html
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-May/095694.html
-> or dizzy maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2014-October/098441.html
-> or fido maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2015-March/100901.html
-> or jethro maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2015-October/103810.html
-> or krogoth maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2016-April/106952.html
-> or morty maintainer:
-> http://lists.openembedded.org/pipermail/openembedded-devel/2016-October/109452.html
->
-> Regards,
->
->
+With opencv-3.2, the configuration detects if the target supports
+half-precision floating-point format. This fails to compile for some
+Intel targets such as skylake with an error such as:
+   error: '_mm_cvtph_ps' was not declared in this scope
+
+The configuration worked in opencv-3.1 so revert two commits to
+drop the FP16 detection even though it may make opencv slower.
+The only change in the configure log is:
+--- FP16: Compiler support is available
++-- FP16: Compiler support is not available
+
+The patch should be dropped when a newer version of opencv that includes commit:
+   https://github.com/opencv/opencv/commit/e5d9b608c47d54e43496041595025fa282fa9de5
+is available. Backporting that fix was involved many files and
+a cherry-picking explosion so it's not worthwhile.
+
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ .../0001-Revert-cuda-fix-fp16-compilation.patch    |  27 +++
+ ...vert-check-FP16-build-condition-correctly.patch | 245 +++++++++++++++++++++
+ meta-oe/recipes-support/opencv/opencv_3.2.bb       |   2 +
+ 3 files changed, 274 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-Revert-cuda-fix-fp16-compilation.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0002-Revert-check-FP16-build-condition-correctly.patch
+
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-Revert-cuda-fix-fp16-compilation.patch b/meta-oe/recipes-support/opencv/opencv/0001-Revert-cuda-fix-fp16-compilation.patch
+new file mode 100644
+index 0000000..507d796
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0001-Revert-cuda-fix-fp16-compilation.patch
+@@ -0,0 +1,27 @@
++From 69f9707678190f6a0948a547dce948251f972676 Mon Sep 17 00:00:00 2001
++From: Randy MacLeod <Randy.MacLeod@windriver.com>
++Date: Wed, 26 Apr 2017 14:57:30 -0400
++Subject: [PATCH 1/2] Revert "cuda: fix fp16 compilation"
++
++This reverts commit 12e00827be40576b686ea4438a6e6ef85208743d.
++---
++ modules/core/include/opencv2/core/cvdef.h | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/modules/core/include/opencv2/core/cvdef.h b/modules/core/include/opencv2/core/cvdef.h
++index 699b166..efc24ca 100644
++--- a/modules/core/include/opencv2/core/cvdef.h
+++++ b/modules/core/include/opencv2/core/cvdef.h
++@@ -303,8 +303,7 @@ enum CpuFeatures {
++ #define CV_2PI 6.283185307179586476925286766559
++ #define CV_LOG2 0.69314718055994530941723212145818
++ 
++-#if defined __ARM_FP16_FORMAT_IEEE \
++-    && !defined __CUDACC__
+++#if defined (__ARM_FP16_FORMAT_IEEE)
++ #  define CV_FP16_TYPE 1
++ #else
++ #  define CV_FP16_TYPE 0
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-support/opencv/opencv/0002-Revert-check-FP16-build-condition-correctly.patch b/meta-oe/recipes-support/opencv/opencv/0002-Revert-check-FP16-build-condition-correctly.patch
+new file mode 100644
+index 0000000..d1950a9
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0002-Revert-check-FP16-build-condition-correctly.patch
+@@ -0,0 +1,245 @@
++From 9108e39e5584ef9b41f80751639b4ec72b3e9538 Mon Sep 17 00:00:00 2001
++From: Randy MacLeod <Randy.MacLeod@windriver.com>
++Date: Wed, 26 Apr 2017 15:00:32 -0400
++Subject: [PATCH 2/2] Revert "check FP16 build condition correctly"
++
++This reverts commit c7cb116dc08441fe56cf82d5b21f929e5b674c13.
++
++Fix up revert conflicts to take previous behaviour.
++---
++ cmake/OpenCVCompilerOptions.cmake         | 45 +++++++++--------------
++ modules/core/include/opencv2/core/cvdef.h |  2 +-
++ modules/core/src/convert.cpp              | 11 +++---
++ modules/core/test/test_intrin.cpp         | 60 ++++++++++++++-----------------
++ 4 files changed, 48 insertions(+), 70 deletions(-)
++
++diff --git a/cmake/OpenCVCompilerOptions.cmake b/cmake/OpenCVCompilerOptions.cmake
++index 5bb0479..4b19fdb 100644
++--- a/cmake/OpenCVCompilerOptions.cmake
+++++ b/cmake/OpenCVCompilerOptions.cmake
++@@ -185,7 +185,7 @@ if(CMAKE_COMPILER_IS_GNUCXX)
++     add_extra_compiler_option("-mfp16-format=ieee")
++   endif(ARM)
++   if(ENABLE_NEON)
++-    add_extra_compiler_option("-mfpu=neon")
+++    add_extra_compiler_option("-mfpu=neon-fp16")
++   endif()
++   if(ENABLE_VFPV3 AND NOT ENABLE_NEON)
++     add_extra_compiler_option("-mfpu=vfpv3")
++@@ -370,34 +370,6 @@ if(CMAKE_COMPILER_IS_GNUCXX AND CMAKE_OPENCV_GCC_VERSION_NUM GREATER 399)
++   add_extra_compiler_option(-fvisibility-inlines-hidden)
++ endif()
++ 
++-if(NOT OPENCV_FP16_DISABLE AND NOT IOS)
++-  if(ARM AND ENABLE_NEON)
++-    set(FP16_OPTION "-mfpu=neon-fp16")
++-  elseif((X86 OR X86_64) AND NOT MSVC AND ENABLE_AVX)
++-    set(FP16_OPTION "-mf16c")
++-  endif()
++-  try_compile(__VALID_FP16
++-    "${OpenCV_BINARY_DIR}"
++-    "${OpenCV_SOURCE_DIR}/cmake/checks/fp16.cpp"
++-    COMPILE_DEFINITIONS "-DCHECK_FP16" "${FP16_OPTION}"
++-    OUTPUT_VARIABLE TRY_OUT
++-    )
++-  if(NOT __VALID_FP16)
++-    if((X86 OR X86_64) AND NOT MSVC AND NOT ENABLE_AVX)
++-      # GCC enables AVX when mf16c is passed
++-      message(STATUS "FP16: Feature disabled")
++-    else()
++-      message(STATUS "FP16: Compiler support is not available")
++-    endif()
++-  else()
++-    message(STATUS "FP16: Compiler support is available")
++-    set(HAVE_FP16 1)
++-    if(NOT ${FP16_OPTION} STREQUAL "")
++-      add_extra_compiler_option(${FP16_OPTION})
++-    endif()
++-  endif()
++-endif()
++-
++ #combine all "extra" options
++ set(CMAKE_C_FLAGS           "${CMAKE_C_FLAGS} ${OPENCV_EXTRA_FLAGS} ${OPENCV_EXTRA_C_FLAGS}")
++ set(CMAKE_CXX_FLAGS         "${CMAKE_CXX_FLAGS} ${OPENCV_EXTRA_FLAGS} ${OPENCV_EXTRA_CXX_FLAGS}")
++@@ -450,6 +422,21 @@ if(MSVC)
++   endif()
++ endif()
++ 
+++if(NOT OPENCV_FP16_DISABLE)
+++  try_compile(__VALID_FP16
+++    "${OpenCV_BINARY_DIR}"
+++    "${OpenCV_SOURCE_DIR}/cmake/checks/fp16.cpp"
+++    COMPILE_DEFINITIONS "-DCHECK_FP16"
+++    OUTPUT_VARIABLE TRY_OUT
+++    )
+++  if(NOT __VALID_FP16)
+++    message(STATUS "FP16: Compiler support is not available")
+++  else()
+++    message(STATUS "FP16: Compiler support is available")
+++    set(HAVE_FP16 1)
+++  endif()
+++endif()
+++
++ if(APPLE AND NOT CMAKE_CROSSCOMPILING AND NOT DEFINED ENV{LDFLAGS} AND EXISTS "/usr/local/lib")
++   link_directories("/usr/local/lib")
++ endif()
++diff --git a/modules/core/include/opencv2/core/cvdef.h b/modules/core/include/opencv2/core/cvdef.h
++index efc24ca..a10936b 100644
++--- a/modules/core/include/opencv2/core/cvdef.h
+++++ b/modules/core/include/opencv2/core/cvdef.h
++@@ -312,7 +312,7 @@ enum CpuFeatures {
++ typedef union Cv16suf
++ {
++     short i;
++-#if CV_FP16_TYPE
+++#if ( defined (__arm__) || defined (__aarch64__) ) && !defined (__CUDACC__) && ( defined (__GNUC__) && ( ( ( 4 <= __GNUC__ ) && ( 7 <= __GNUC__ ) ) || ( 5 <= __GNUC__ ) ) )
++     __fp16 h;
++ #endif
++     struct _fp16Format
++diff --git a/modules/core/src/convert.cpp b/modules/core/src/convert.cpp
++index e04d89e..46db26f 100644
++--- a/modules/core/src/convert.cpp
+++++ b/modules/core/src/convert.cpp
++@@ -44,7 +44,6 @@
++ #include "precomp.hpp"
++ 
++ #include "opencl_kernels_core.hpp"
++-#include "opencv2/core/hal/intrin.hpp"
++ 
++ #include "opencv2/core/openvx/ovx_defs.hpp"
++ 
++@@ -4382,7 +4381,7 @@ struct Cvt_SIMD<float, int>
++ 
++ #endif
++ 
++-#if !CV_FP16_TYPE
+++#if !( ( defined (__arm__) || defined (__aarch64__) ) && ( defined (__GNUC__) && ( ( ( 4 <= __GNUC__ ) && ( 7 <= __GNUC__ ) ) || ( 5 <= __GNUC__ ) ) ) )
++ // const numbers for floating points format
++ const unsigned int kShiftSignificand    = 13;
++ const unsigned int kMaskFp16Significand = 0x3ff;
++@@ -4390,7 +4389,7 @@ const unsigned int kBiasFp16Exponent    = 15;
++ const unsigned int kBiasFp32Exponent    = 127;
++ #endif
++ 
++-#if CV_FP16_TYPE
+++#if ( defined (__arm__) || defined (__aarch64__) ) && ( defined (__GNUC__) && ( ( ( 4 <= __GNUC__ ) && ( 7 <= __GNUC__ ) ) || ( 5 <= __GNUC__ ) ) )
++ static float convertFp16SW(short fp16)
++ {
++     // Fp16 -> Fp32
++@@ -4452,7 +4451,7 @@ static float convertFp16SW(short fp16)
++ }
++ #endif
++ 
++-#if CV_FP16_TYPE
+++#if ( defined (__arm__) || defined (__aarch64__) ) && ( defined (__GNUC__) && ( ( ( 4 <= __GNUC__ ) && ( 7 <= __GNUC__ ) ) || ( 5 <= __GNUC__ ) ) )
++ static short convertFp16SW(float fp32)
++ {
++     // Fp32 -> Fp16
++@@ -4560,7 +4559,7 @@ cvtScaleHalf_<float, short>( const float* src, size_t sstep, short* dst, size_t
++             if ( ( (intptr_t)dst & 0xf ) == 0 )
++ #endif
++             {
++-#if CV_FP16 && CV_SIMD128
+++#if CV_FP16
++                 for ( ; x <= size.width - 4; x += 4)
++                 {
++                     v_float32x4 v_src = v_load(src + x);
++@@ -4606,7 +4605,7 @@ cvtScaleHalf_<short, float>( const short* src, size_t sstep, float* dst, size_t
++             if ( ( (intptr_t)src & 0xf ) == 0 )
++ #endif
++             {
++-#if CV_FP16 && CV_SIMD128
+++#if CV_FP16
++                 for ( ; x <= size.width - 4; x += 4)
++                 {
++                     v_float16x4 v_src = v_load_f16(src + x);
++diff --git a/modules/core/test/test_intrin.cpp b/modules/core/test/test_intrin.cpp
++index 66b2083..7349d48 100644
++--- a/modules/core/test/test_intrin.cpp
+++++ b/modules/core/test/test_intrin.cpp
++@@ -729,56 +729,48 @@ template<typename R> struct TheTest
++         return *this;
++     }
++ 
+++#if CV_FP16
++     TheTest & test_loadstore_fp16()
++     {
++-#if CV_FP16
++         AlignedData<R> data;
++         AlignedData<R> out;
++ 
++-        if(checkHardwareSupport(CV_CPU_FP16))
++-        {
++-            // check if addresses are aligned and unaligned respectively
++-            EXPECT_EQ((size_t)0, (size_t)&data.a.d % 16);
++-            EXPECT_NE((size_t)0, (size_t)&data.u.d % 16);
++-            EXPECT_EQ((size_t)0, (size_t)&out.a.d % 16);
++-            EXPECT_NE((size_t)0, (size_t)&out.u.d % 16);
++-
++-            // check some initialization methods
++-            R r1 = data.u;
++-            R r2 = v_load_f16(data.a.d);
++-            R r3(r2);
++-            EXPECT_EQ(data.u[0], r1.get0());
++-            EXPECT_EQ(data.a[0], r2.get0());
++-            EXPECT_EQ(data.a[0], r3.get0());
++-
++-            // check some store methods
++-            out.a.clear();
++-            v_store_f16(out.a.d, r1);
++-            EXPECT_EQ(data.a, out.a);
++-        }
+++        // check if addresses are aligned and unaligned respectively
+++        EXPECT_EQ((size_t)0, (size_t)&data.a.d % 16);
+++        EXPECT_NE((size_t)0, (size_t)&data.u.d % 16);
+++        EXPECT_EQ((size_t)0, (size_t)&out.a.d % 16);
+++        EXPECT_NE((size_t)0, (size_t)&out.u.d % 16);
+++
+++        // check some initialization methods
+++        R r1 = data.u;
+++        R r2 = v_load_f16(data.a.d);
+++        R r3(r2);
+++        EXPECT_EQ(data.u[0], r1.get0());
+++        EXPECT_EQ(data.a[0], r2.get0());
+++        EXPECT_EQ(data.a[0], r3.get0());
+++
+++        // check some store methods
+++        out.a.clear();
+++        v_store_f16(out.a.d, r1);
+++        EXPECT_EQ(data.a, out.a);
++ 
++         return *this;
++-#endif
++     }
++ 
++     TheTest & test_float_cvt_fp16()
++     {
++-#if CV_FP16
++         AlignedData<v_float32x4> data;
++ 
++-        if(checkHardwareSupport(CV_CPU_FP16))
++-        {
++-            // check conversion
++-            v_float32x4 r1 = v_load(data.a.d);
++-            v_float16x4 r2 = v_cvt_f16(r1);
++-            v_float32x4 r3 = v_cvt_f32(r2);
++-            EXPECT_EQ(0x3c00, r2.get0());
++-            EXPECT_EQ(r3.get0(), r1.get0());
++-        }
+++        // check conversion
+++        v_float32x4 r1 = v_load(data.a.d);
+++        v_float16x4 r2 = v_cvt_f16(r1);
+++        v_float32x4 r3 = v_cvt_f32(r2);
+++        EXPECT_EQ(0x3c00, r2.get0());
+++        EXPECT_EQ(r3.get0(), r1.get0());
++ 
++         return *this;
++-#endif
++     }
+++#endif
++ 
++ };
++ 
++-- 
++2.9.3
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.2.bb b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+index 2cff212..98b6b06 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.2.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.2.bb
+@@ -27,6 +27,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+     file://fixpkgconfig.patch \
+     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+     file://useoeprotobuf.patch;patchdir=../contrib/ \
++    file://0001-Revert-cuda-fix-fp16-compilation.patch \
++    file://0002-Revert-check-FP16-build-condition-correctly.patch \
+ "
+ 
+ PV = "3.2+git${SRCPV}"
+-- 
+2.9.3
 
 
