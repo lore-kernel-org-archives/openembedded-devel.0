@@ -1,51 +1,46 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 350C9773C0
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 13:06:11 +0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id r16so22104540ioi.2
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Apr 2017 06:06:13 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 497C477D20
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 14:44:49 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id z129so5063569wmb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 Apr 2017 07:44:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=8KIYmbY1ZFVNNXr1aP8Q69fwb8UjPqHVquw26mhciHk=;
-	b=c/iOoUJMBQ1nGKdtpiMyL8VOwxKFH/inVlyttMJaUk3QyB2SxZKgDMf3R2i6qkOyER
-	je4aL85ZZfZfTrIJpRLWuAIXmW1mUIhgaaNxYOcs7rIsO/3PAykkU7oeeaRBC3rqkMHp
-	ku8IuD8POmNBmb5dU5fmauBGJuPtuaLQWFbr2S5+zV4/M06o3FJ3+oDBpP2dFhZW+Gw9
-	dU4IzUHyxth/eZv5Gx+vWqQxR2L02rGurO23kWsZbKuEmdyv7/bAgsW5MCldEbLf51ji
-	bTEwC+G+zGwpAszO5j4Yh2Bhmu1Pif6HGi4TduhEzrrA75Ig53SFwW6eWwkLtFIvNvkb
-	MGAA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=X7NxdSP9LUnp9CDCGxiv8iyjW6obEUnsgNJpEBWaozg=;
+	b=fIQiC26yHnx8H1C4tNnEcn7WOSIUj21ljJ7Nvk6IpgxVQdPaA+sXn9FUcCfoGcPvcU
+	lDhj4y3fPhqUDYLinIRQ3VrxxvoDbzPkGiiW229PT+9jtmg6CmsAdnFWZtHlO8Y2XRxJ
+	IiHKtW5NdYfIINXSE795U32FktJVQhi5wF4PBDhnf31pV4Gxdp+StNClEErZkyBWqyF9
+	LF9bgJbTAwnMmBsmZem7/eAiaGVQXxxYhqlRqjqhEssCog60ftrFcrTH4IVnHdmQKLHG
+	/+pTK1Glex8JLuPijrhYcFgcp7+gGC505vIJgfL5WMzQiN3BAQpmKuAT5Y8iMgknA//u
+	uPSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=8KIYmbY1ZFVNNXr1aP8Q69fwb8UjPqHVquw26mhciHk=;
-	b=CxOwKu7DnHXLqBvfXJqBDElRz0tpEG6cbHG4PgKNmpYMP2/9XESBNBzhIvndB6mPr/
-	zX7c01VhKaFlnG7b3BcDP23fqV1mB2UPGN34/zpPsw5r/9tJpe8/iH7p8UbaRhv9BoZJ
-	6E+w7Z84PpvButXhp5jwb/u9RSDIXdSi4X/Hr1wl7DOaRPx/YRWbR5ZEn70BaAZfnbD3
-	FVj9wY7YLGkmCWnbD7Uwv1URvgod3VJg9tX9cQ1Nd1BKAbdeyQrBZ/8LJnAGG/0Dpsap
-	acyongCSrb0ocowxq1Inqr18aSTG+RNxSMChw9vgefxS/6xIntZSn0gTqOKCavt81/En
-	Oktw==
-X-Gm-Message-State: AN3rC/7xDuyixI9buaHQgcgypJCU34Ir23PDS/h8RykApi+kn5L2sB8E
-	6VnMv2qhQDtrIj9yCdg=
-X-Received: by 10.107.159.74 with SMTP id i71mr4513844ioe.143.1493298372983;
-	Thu, 27 Apr 2017 06:06:12 -0700 (PDT)
-Received: from linux-uys3 ([206.248.190.95]) by smtp.gmail.com with ESMTPSA id
-	v23sm1009542ioi.61.2017.04.27.06.06.11
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 27 Apr 2017 06:06:12 -0700 (PDT)
-Date: Thu, 27 Apr 2017 09:06:09 -0400
-From: Trevor Woerner <twoerner@gmail.com>
-To: cshored@cshore.thecshore.com
-Message-ID: <20170427130608.GA15538@linux-uys3>
-References: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=X7NxdSP9LUnp9CDCGxiv8iyjW6obEUnsgNJpEBWaozg=;
+	b=FgEdT8CmuEiBRrEu9x8ngk78oWyw7SpjDSy0w3BWt7rmf43KWabrconq4CpnPqiRQH
+	EiKStNQdX5fc757qbPJstXQDdOC6OsKfiG8wlQU/zmzDETSx/JmzxfAUk9QmqUsXG6WY
+	jmtjtsD9o15AB8n4qKcg9RC1DWlekR0dwbXDJMI3Y/czVWlkBTuaJlCeI1aIdNSZYLxo
+	hntGJkwPHdALP4wFDAEjKRZw10eDRsRJ4nZJUQed1kDjx+gtx9uuIna5ugiDSsb6kEBh
+	MlFbXB8r3Yb9vEtphD0elmbxr72KPQyXU/140iKuJG+GjVZueoMjCFH2EO6feJv0Yipz
+	7YPQ==
+X-Gm-Message-State: AN3rC/5Bqm5cV905D7Q02COebVbXEaHupZUBGnopyL81BAb+zEzHHqUz
+	8iWNDQmmjASxLkJXU/yJJb6QEEDjw8S7
+X-Received: by 10.80.136.74 with SMTP id c10mr4969356edc.168.1493304289903;
+	Thu, 27 Apr 2017 07:44:49 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
-User-Agent: Mutt/1.6.0 (2016-04-01)
-Cc: Openembedded-devel@lists.openembedded.org
-Subject: Re: Some experimental layers and conclusions
+Received: by 10.80.148.54 with HTTP; Thu, 27 Apr 2017 07:44:49 -0700 (PDT)
+In-Reply-To: <1493275064-7998-1-git-send-email-Qi.Chen@windriver.com>
+References: <1493275064-7998-1-git-send-email-Qi.Chen@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 27 Apr 2017 16:44:49 +0200
+Message-ID: <CA+chaQeF3pcN7N1JzvKDJG+b3v8pcyQiHn42hpTWhtZYF+eVZg@mail.gmail.com>
+To: ChenQi <Qi.Chen@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH] xfsdump: upgrade to 3.1.6 and remove from blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,33 +53,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Apr 2017 13:06:12 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+X-List-Received-Date: Thu, 27 Apr 2017 14:44:49 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Daniel,
+And it still fails:
+http://errors.yoctoproject.org/Errors/Details/141368/
 
-Very interesting report, thanks for the info!
+On Thu, Apr 27, 2017 at 8:37 AM, <Qi.Chen@windriver.com> wrote:
 
-On Thu 2017-04-27 @ 02:46:24 AM, cshored@cshore.thecshore.com wrote:
-> * OE doesn't have good *router* networking support (i.e. nothing like
-> OpenWrt/LEDE's netifd and friends for a headless system, that one can
-> configure by editing a text file, or by using a WebUI for handling multiple
-> interfaces and VLANs and bridged (or not) wireless and wired networks, with
-> easy firewall configuration).
-
-I wonder Khem's if meta-openwrt could have helped here? It looks like it has a
-recipe for netifd and friends:
-
-	https://layers.openembedded.org/layerindex/branch/master/layer/meta-openwrt/
-
-Out of curiosity, did you try using musl? You don't mention which C library
-you're using. I'd be curious to know if musl can help with size reduction.
-
-Is toybox mature enough to be used in these situations?
-
-	http://layers.openembedded.org/layerindex/recipe/28902/
-
-Best regards,
-	Trevor
+> From: Robert Yang <liezhi.yang@windriver.com>
+>
+> The 3.1.4 doesn't work with xfsprogs 4.7:
+> | inv_files.o: In function `inv_dirpath':
+> |xfsdump-3.1.4/invutil/inv_files.c:53: undefined reference to `ASSERT'
+> | inv_files.o: In function `inv_fstab':
+> |xfsdump-3.1.4/invutil/inv_files.c:60: undefined reference to `ASSERT'
+> | inv_files.o: In function `inv_lockfile':
+> |xfsdump-3.1.4/invutil/inv_files.c:67: undefined reference to `ASSERT'
+> | inv_files.o: In function `inv_basepath':
+> |xfsdump-3.1.4/invutil/inv_files.c:74: undefined reference to `ASSERT'
+> | collect2: error: ld returned 1 exit status
+> | make[2]: *** [../include/buildrules:33: xfsinvutil] Error 1
+>
+> Upgrade to 3.1.6, and remove it from blacklist.
+>
+> Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+> ---
+>  .../recipes-utils/xfsdump/{xfsdump_3.1.4.bb => xfsdump_3.1.6.bb}    | 6
+> ++----
+>  1 file changed, 2 insertions(+), 4 deletions(-)
+>  rename meta-filesystems/recipes-utils/xfsdump/{xfsdump_3.1.4.bb =>
+> xfsdump_3.1.6.bb} (79%)
+>
+> diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
+> b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
+> similarity index 79%
+> rename from meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
+> rename to meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
+> index d5ad0b0b2..fac9d47e8 100644
+> --- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
+> +++ b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
+> @@ -13,8 +13,8 @@ DEPENDS = "xfsprogs attr"
+>  SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BPN}-${PV}.tar.gz \
+>      file://remove-install-as-user.patch \
+>  "
+> -SRC_URI[md5sum] = "a8b1761be5feb363131e7b506639ad4c"
+> -SRC_URI[sha256sum] = "570eafd0721515bdd79cb0e295b701
+> d49cdf81e71a0a0ff0df6d4c5cc1960943"
+> +SRC_URI[md5sum] = "50353cd4f4b435685955363e6044f4d1"
+> +SRC_URI[sha256sum] = "7f78c11ca527477d90e5e62b0778f3
+> ad96f2b71c19173044e9aca9515fff42d0"
+>
+>  inherit autotools-brokensep
+>
+> @@ -34,5 +34,3 @@ do_install () {
+>      oe_runmake install
+>      oe_runmake install-dev
+>  }
+> -
+> -PNBLACKLIST[xfsdump] ?= "Depends on broken xfsprogs - the recipe will be
+> removed on 2017-09-01 unless the issue is fixed"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
