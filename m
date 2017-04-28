@@ -1,30 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A75AB77E11
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8106371E50
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 04:58:33 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18264986"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2017 12:58:34 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 60FBB47E98A8
+	Fri, 28 Apr 2017 05:58:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v3S5wFS9021263
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 12:58:34 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Fri, 28 Apr 2017 12:58:35 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Thu, 27 Apr 2017 22:58:16 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 27 Apr 2017 22:58:15 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Apr 2017 12:58:14 +0800
-Message-ID: <1493355494-33909-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Date: Fri, 28 Apr 2017 13:58:14 +0800
+Message-ID: <20170428055814.8696-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 60FBB47E98A8.A886D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH v2] cryptsetup: 1.7.2 -> 1.7.4
+Subject: [meta-oe][PATCH] python-pygobject: remove the empty pkgconfig directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,38 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 04:58:34 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 05:58:15 -0000
 Content-Type: text/plain
 
-Upgrade cryptsetup from 1.7.2 to 1.7.4.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+The empty pkgconfif directory causes error when run
+relocatable_native_pcfiles:
+
+| sed: can't read /path/to/recipe-sysroot-native/usr/lib/pkgconfig/*.pc: No such file or directory
+
+So remove the directory instead of removing the pc file
+but left an empty pkgconfig diretory.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../cryptsetup/{cryptsetup_1.7.2.bb => cryptsetup_1.7.4.bb}           | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/cryptsetup/{cryptsetup_1.7.2.bb => cryptsetup_1.7.4.bb} (90%)
+ meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.4.bb
-similarity index 90%
-rename from meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb
-rename to meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.4.bb
-index 9075127..c13b764 100644
---- a/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.2.bb
-+++ b/meta-oe/recipes-support/cryptsetup/cryptsetup_1.7.4.bb
-@@ -12,8 +12,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32107dd283b1dfeb66c9b3e6be312326"
- DEPENDS = "util-linux libdevmapper popt libgcrypt"
+diff --git a/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb b/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
+index 952145f1e..acc2f5b7a 100644
+--- a/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
++++ b/meta-oe/recipes-devtools/python/python-pygobject_3.22.0.bb
+@@ -30,5 +30,5 @@ RDEPENDS_${PN}_class-native = ""
  
- SRC_URI = "${KERNELORG_MIRROR}/linux/utils/${BPN}/v1.7/${BP}.tar.xz"
--SRC_URI[md5sum] = "a11a140cea496961222170944db01fc1"
--SRC_URI[sha256sum] = "dbb35dbf5f0c1749168c86c913fe98e872247bfc8425314b494c2423e7e43342"
-+SRC_URI[md5sum] = "058ed35c5b776032c2a036838f9e22a7"
-+SRC_URI[sha256sum] = "7ccf893ef79a38fb92d61f03c17b964982119f5319cdaa85a1335b8558cca016"
- 
- inherit autotools gettext pkgconfig
- 
+ do_install_append() {
+     # Remove files that clash with python3-pygobject; their content is same
+-    rm ${D}${includedir}/pygobject-3.0/pygobject.h ${D}${libdir}/pkgconfig/pygobject-3.0.pc
++    rm -rf ${D}${includedir}/pygobject-3.0//pygobject.h ${D}${libdir}/pkgconfig
+ }
 -- 
-2.7.4
-
-
+2.11.0
 
 
