@@ -1,46 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 255D2605BE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 12:24:16 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id z129so10630880wmb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 05:24:18 -0700 (PDT)
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 0067271B45;
+	Fri, 28 Apr 2017 12:28:03 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id r190so11123023wme.1;
+	Fri, 28 Apr 2017 05:28:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=PhxLikMOizxD597S0kLl1NAp1UgETbeumTj7GwzaiJQ=;
-	b=Tlhawj4t25aY0hHDaUy/J9YaBpd1DQkjnDRV20u3Fl+H2MOLB7FJeouUAR37nnXEpT
-	Nm1L8RSeLcjTcU6LDQypjxELCHLpIXd1lUO7JiWaqbtq4lvFSq4vc9EnHDJattwO6Whj
-	aGXXlXNU5VQ9cJQSX7rF7LoeQcSO2xP2tvaPfhY1raXeKMYIRmy/uo+sxwCHk5H3rxLB
-	vCgqjzRDrK1+OhsqUzscaWoq9fp1hBwkwAAK4PbS8ppWuK0Vrz9Y8IBCj88Se4AJb350
-	pzwCiEtHbek7QC/TSVccTmYB393A3Qli5uDJNW2RiioeeOG4Lu9R+L6jX916z/F133Sk
-	KsQg==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=4DqIgqgS/018oZHHLeDSuGHNXtaE8uzbpIu9I85Zttk=;
+	b=Oqgxa9cT1CUUBLjcGjo/peRk3MCjMHC5Ie9nCtjB5m3/OqR4KOH7vyEHMjd7UaNv9A
+	kCoKfYdsd0FSCur2/PN94GUHKiWO14dhgW+QT6oI7e51k56+Uh+40wZuj8WR7NYuv1sG
+	6H47f9A1iC5h1vLAJMmsrTyMiOm6p8z3DrjF5h/oZFC4ca9vgH3Rj+O7RTbojlntNV+3
+	cFj9HjnOfcZIcU/GVZckSP7/FKJfHL/eyhDFouBHuoFVtqjPqG/3WqfLuFF4gyNnLpO4
+	aBD7V5FwNKnZGAnYptx0+6gaDlipxno7xz4XrYJAXW2qk4Sd8eNLE6s6DJ5K6GUwqICM
+	ltAQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=PhxLikMOizxD597S0kLl1NAp1UgETbeumTj7GwzaiJQ=;
-	b=cfEAjeSjeJy5tWWH+HUM1w4j4YnL2DVTwJmEuOVYHs08ZLPsGpG+DBvZ9gkRB9Q/KY
-	k/VGjri2zQ9Ls6lU14NGemFvsmY/eW/l94Y3r5LGacZLbwJx2AXOdKeTj35r7Wn6oNfK
-	1qfPreHqlPctBa4CoPg4Fx8wV/m7pAIMHEYoPj5bFhosnRUNcpss6c+EFiBw5hcjeFza
-	GTS+wSLhRP5m/9fuFUTYjN1xK3tlN468U1ub+XG30KvDrcSRCZnAJtkfp/xNZV8Ql7dV
-	MDB93eBVQ/xdCBKZ/1XPXqCsggHJVIotlNnbhOw8O8g9KJ9wRFvec75RZHlxhShJXDH6
-	Twyg==
-X-Gm-Message-State: AN3rC/5eWx5caK1xv0fpKXs9HmWcd/Z6zDffAhbOiEe77t4PrfDZkQYe
-	NkEyacw+VUDF/ffcXGxKBdIsGV+MTKm8
-X-Received: by 10.80.149.203 with SMTP id x11mr8776100eda.181.1493382257745;
-	Fri, 28 Apr 2017 05:24:17 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Fri, 28 Apr 2017 05:24:17 -0700 (PDT)
-In-Reply-To: <1493271021-15875-1-git-send-email-stefan@agner.ch>
-References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=4DqIgqgS/018oZHHLeDSuGHNXtaE8uzbpIu9I85Zttk=;
+	b=ufww9SOJOFh7ZnBGKPKtPmP8n8V4gzPv91PVH3YwX/xpG05HX3oQXlDhyO+2CvaBZw
+	66CpDfiPflUXAEsWZonAN6qnd4FErSQfaW3u41OsisCvVG+EiJB9lsptTCqNW9qNVtFe
+	MSpDNBz1IC5Y4LWUG+mphMSJe99Y/pYe32nqT8M9aCizrmJjplwwwQ+A3PS8+d5OM/YK
+	yN84HUv4dj/ZKf9B7180dUI7tAsGN7aZcFkq0k13wQzj6HsFA+inCIcKWeQdH6QVnvhR
+	Dvbto9P1dWK02a91odg0TnK6bhYjQMpHxPpZvXaOjYljcHg7CVdDlZejtqU6I4ZG1IvY
+	lltA==
+X-Gm-Message-State: AN3rC/5/lK12+myKntjb1xdWm/vLcVTAzAefT5FIpVmTe3xNorurJoj5
+	lnddlps+j1pUH6iL
+X-Received: by 10.28.58.21 with SMTP id h21mr5527230wma.9.1493382484165;
+	Fri, 28 Apr 2017 05:28:04 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	l81sm3101647wmi.22.2017.04.28.05.28.02
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 28 Apr 2017 05:28:03 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 28 Apr 2017 14:24:17 +0200
-Message-ID: <CA+chaQcfurLMso=4B57=PwkP4=hSDd0FmDHWeZR2fADe8tC3cg@mail.gmail.com>
-To: Stefan Agner <stefan@agner.ch>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 28 Apr 2017 14:28:23 +0200
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20170428122823.GA3265@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.8.2 (2017-04-18)
+Subject: State of bitbake world, Failed tasks 2017-04-29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,158 +54,284 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 12:24:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 28 Apr 2017 12:28:04 -0000
+X-Groupsio-MsgNum: 66591
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="NzB8fVQJ5HfG6fxh"
+Content-Disposition: inline
 
-This latest version (which was merged to master yesterday) fails to build:
+--NzB8fVQJ5HfG6fxh
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-http://errors.yoctoproject.org/Errors/Details/141421/
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!colspan=3D'6'|Failed depe=
+ncencies			 !!|Signatures		  !!colspan=3D'14'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||qemuarm||max||min	||qemux86||max||mi=
+n	||all 	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||=
+version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||u=
+nknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	=
+||ldflags	||compile-host-path	||=09
+|-
+||2017-04-28	||1	||1	||1	||N/A	||N/A	||N/A	||N/A	||N/A	||N/A	||0	||0		||0		=
+||0		||0		||0		||0		||0		||0		||0		||0		||0		||0		||0		||0		||=09
+|}
 
-On Thu, Apr 27, 2017 at 7:30 AM, Stefan Agner <stefan@agner.ch> wrote:
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-> WireGuard is an extremely simple yet fast and modern VPN that utilizes
-> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
-> and more useful than IPSec, while avoiding the massive headache.
->
-> The recipes add the current experimental snapshot v0.0.20170421
-> out-of-tree kernel module and tools. The kernel module has some kernel
-> configuration dependencies such as some configuration part of
-> features/netfilter/netfilter.scc, hence netfilter.scc should be part
-> of KERNEL_EXTRA_FEATURES (which is the case by default).
->
-> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
-> which is MACHINE_ARCH (like all kernel modules) we need to add this
-> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
->
-> Signed-off-by: Stefan Agner <stefan@agner.ch>
-> ---
-> Changes since v2:
-> - Upgrade to v0.0.20170421
-> - Add comment about Linux kernel requirement
->
-> Changes since v1:
-> - Upgrade to v0.0.20170409
-> - Add wireguard-tools -> wireguard-module dependency to
->   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
->
->  meta-networking/conf/layer.conf                    |  4 ++++
->  .../wireguard/wireguard-module_0.0.20170421.bb     | 13 +++++++++++
->  .../wireguard/wireguard-tools_0.0.20170421.bb      | 27
-> ++++++++++++++++++++++
->  .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
->  4 files changed, 62 insertions(+)
->  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-
-> module_0.0.20170421.bb
->  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-
-> tools_0.0.20170421.bb
->  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
->
-> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.
-> conf
-> index 85ad93b..b5aa159 100644
-> --- a/meta-networking/conf/layer.conf
-> +++ b/meta-networking/conf/layer.conf
-> @@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
->
->  # Override security flags
->  require conf/distro/include/meta_networking_security_flags.inc
-> +
-> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
-> +  wireguard-tools->wireguard-module \
-> +"
-> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-
-> module_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/
-> wireguard-module_0.0.20170421.bb
-> new file mode 100644
-> index 0000000..cb21bda
-> --- /dev/null
-> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-
-> module_0.0.20170421.bb
-> @@ -0,0 +1,13 @@
-> +require wireguard.inc
-> +
-> +inherit module
-> +
-> +# This module requires Linux 3.10 higher and several networking related
-> +# configuration options. For exact kernel requirements visit:
-> +# https://www.wireguard.io/install/#kernel-requirements
-> +
-> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
-> +MAKE_TARGETS = "module"
-> +MODULES_INSTALL_TARGET = "module-install"
-> +
-> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
-> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-
-> tools_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/
-> wireguard-tools_0.0.20170421.bb
-> new file mode 100644
-> index 0000000..79d420f
-> --- /dev/null
-> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-
-> tools_0.0.20170421.bb
-> @@ -0,0 +1,27 @@
-> +require wireguard.inc
-> +
-> +inherit bash-completion systemd pkgconfig
-> +
-> +DEPENDS = "wireguard-module libmnl"
-> +
-> +do_compile_prepend () {
-> +    cd ${S}/tools
-> +}
-> +
-> +do_install () {
-> +    cd ${S}/tools
-> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}"
-> SYSCONFDIR="${sysconfdir}" \
-> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
-> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES',
-> 'systemd', 'yes', '', d)} \
-> +        WITH_BASHCOMPLETION=yes \
-> +        WITH_WGQUICK=yes \
-> +        install
-> +}
-> +
-> +FILES_${PN} = " \
-> +    ${sysconfdir} \
-> +    ${systemd_unitdir} \
-> +    ${bindir} \
-> +"
-> +
-> +RDEPENDS_${PN} = "wireguard-module"
-> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc
-> b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-> new file mode 100644
-> index 0000000..46a9971
-> --- /dev/null
-> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
-> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
-> +implemented as a kernel virtual network interface for Linux, which aims
-> to \
-> +replace both IPsec for most use cases, as well as popular user space
-> and/or \
-> +TLS-based solutions like OpenVPN, while being more secure, more
-> performant, \
-> +and easier to use."
-> +SECTION = "networking"
-> +HOMEPAGE = "https://www.wireguard.io/"
-> +LICENSE = "GPLv2"
-> +
-> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a42
-> 63"
-> +
-> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-$
-> {PV}.tar.xz"
-> +
-> +SRC_URI[md5sum] = "8e559f4fd672b15c38a15eb4d88cc84d"
-> +SRC_URI[sha256sum] = "03c82af774224cd171d000ee4a519b
-> 5e474cc6842ac04967773cf77b26750000"
-> +
-> +S = "${WORKDIR}/WireGuard-${PV}/src/"
-> --
-> 2.7.4
->
->
+=3D=3D Failed tasks 2017-04-28 =3D=3D
 
+INFO: jenkins-job.sh-1.8.20 Complete log available at http://logs.nslu2-lin=
+ux.org/buildlogs/oe/world/pyro/log.report.20170428_022633.log
+
+=3D=3D=3D common (1) =3D=3D=3D
+    * meta-openembedded/meta-networking/recipes-kernel/wireguard/wireguard-=
+module_0.0.20170421.bb:do_compile
+
+=3D=3D=3D common-x86 (0) =3D=3D=3D
+
+=3D=3D=3D qemuarm (0) =3D=3D=3D
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
+
+=3D=3D=3D Number of failed tasks (3) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 1	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.world.qemuarm.20170427_221315.log/ || http://errors.yoctoproject.org/Erro=
+rs/Build/36810/
+|-
+|| qemux86 	|| 1	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/lo=
+g.world.qemux86.20170427_221320.log/ || http://errors.yoctoproject.org/Erro=
+rs/Build/36811/
+|-
+|| qemux86_64 	|| 1	 || http://logs.nslu2-linux.org/buildlogs/oe/world/pyro=
+/log.world.qemux86-64.20170428_001059.log/ || http://errors.yoctoproject.or=
+g/Errors/Build/36812/
+|}
+
+=3D=3D=3D PNBLACKLISTs (12) =3D=3D=3D
+
+=3D=3D=3D QA issues (0) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||host-user-contaminated
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||textrel
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|}
+
+
+
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/pyro/log.signa=
+tures.20170427_235158.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+recipes-browser/chromium/cef3_280796.bb:PNBLACKLIST[cef3] ?=3D "BROKEN: fai=
+ls to build with gcc-6"
+meta-openembedded:
+meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb:PNBLACKLIST[xfsdump=
+] ?=3D "Depends on broken xfsprogs - the recipe will be removed on 2017-09-=
+01 unless the issue is fixed"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gol=
+d', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb:PNBLACKLIST[bluez-h=
+cidump] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 con=
+flicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb:PNBLACKLIST[bluez4] ?=3D=
+ "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with =
+bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb:PNBLACKLIS=
+T[gst-plugin-bluetooth] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'blue=
+z5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURE=
+S', '', d)}"
+meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb:PNBLACKLIST[foxtr=
+otgps] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conf=
+licts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/gypsy/gypsy.inc:PNBLACKLIST[gypsy] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/navit/navit.inc:PNBLACKLIST[navit] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb:PNBLACKLIST[libsyncml] =
+?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts w=
+ith bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-qt5:
+meta-smartphone:
+meta-webos-ports:
+meta-luneos/recipes-luneos/luna-webappmanager/luna-webappmanager.bb:PNBLACK=
+LIST[luna-webappmanager] ?=3D "BROKEN: needs to be adapted to new qt-5.7"
+meta-luneui/recipes-luneui/luna-next/luna-next.bb:PNBLACKLIST[luna-next] ?=
+=3D "BROKEN: needs to be adapted to new qtwayland-5.7"
+PNBLACKLIST[android-system] =3D "depends on lxc from meta-virtualiazation w=
+hich isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[build-appliance-image] =3D "tries to include whole downloads di=
+rectory in /home/builder/poky :/"
+PNBLACKLIST[linux-yocto-tiny-kexecboot] =3D "does weird sh!t breaking other=
+ kernels and modules - broken for years"
+PNBLACKLIST[linux-yocto-tiny] =3D "does weird sh!t breaking other kernels a=
+nd modules - broken for years"
+
+
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 0	issue: libdir
+
+
+count: 0	issue: textrel
+
+
+count: 0	issue: build-deps
+
+
+count: 0	issue: file-rdeps
+
+
+count: 0	issue: version-going-backwards
+
+
+count: 0	issue: host-user-contaminated
+
+
+count: 0	issue: installed-vs-shipped
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+count: 0	issue: ldflags
+
+
+count: 0	issue: compile-host-path
+
+
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+latest upstream commit:=20
+21d9631 toaster: move release lookup from morty to pyro
+not included in master yet:=20
+c4b1613 world-image: add extra target
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+latest upstream commit:=20
+e584be7 build-appliance-image: Update to master head revision
+not included in master yet:=20
+67114ad qemux86: Add identical qemux86copy variant for tests
+63e9e9d sstate-sysroot-cruft.sh: Extend the whitelist
+fe744e8 recipes: Replace "cp -a" with "cp -R --no-dereference --preserve=3D=
+mode,links"
+1b4ca51 buildhistory.bbclass: metadata-revs show repo parent
+0b100a7 metadata-revs: provide more information
+ef84c55 report-error: Allow to upload reports automatically
+a43df23 Revert "mesa: Contain configure search for llvm"
+d559619 sstate-diff-machines.sh: Replace MACHINE_ARCH only at the beginning=
+ and separated with dash
+fe46c11 kernel-yocto/kern-tools: fix do_validate_branches clean stage
+99a602b v86d,qemuboot-x86.inc: use KERNEL_MODULE_AUTOLOAD+KERNEL_MODULE_PRO=
+BECONF for uvesafb instead of fbsetup init script
+28c0239 runqemu-gen-tapdevs: fix runqemu-ifup script call
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+latest upstream commit:=20
+e7ad92d evince: fix do_install problem
+not included in master yet:=20
+a4d905f dnsmasq: disable the service by default
+fa1f548 freeradius: add new recipe
+8b8125b recipes: remove blacklisted recipes
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+latest upstream commit:=20
+5f837b4 qttools: add ptest
+not included in master yet:=20
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+latest upstream commit:=20
+4ed7feb Merge pull request #35 from schnitzeltony/chrome-progress
+not included in master yet:=20
+08c4293 gnome-settings-daemon: remove the bbappend for removed recipe
+
+=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
+latest upstream commit:=20
+c325204 packagegroup-luneos-extended: drop qtscenegraph-adaptation
+not included in master yet:=20
+
+=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
+latest upstream commit:=20
+d150b0a meta-openmoko: remove fbreader bbappend to drop meta-gpe dependency
+not included in master yet:=20
+582db78 libshr-glib: blacklist because of random failures
+a08ea69 meta-shr, meta-fso: remove blacklisted recipes
+
+--NzB8fVQJ5HfG6fxh
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWQM1ZgAKCRA3VSO3ZXaA
+HOpEAJwM5c9gWescK34LWSB4YTMBciRn/wCgq0uMXWsVsGMRFHFgMc0uyJRv3R0=
+=/+Mq
+-----END PGP SIGNATURE-----
+
+--NzB8fVQJ5HfG6fxh--
