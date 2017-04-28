@@ -1,30 +1,30 @@
 Return-Path: <huangqy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 155AA77E1F
+	by mail.openembedded.org (Postfix) with ESMTP id A75AB77E11
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 04:56:41 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18264933"
+	Fri, 28 Apr 2017 04:58:33 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18264986"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2017 12:56:43 +0800
+	by heian.cn.fujitsu.com with ESMTP; 28 Apr 2017 12:58:34 +0800
 Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2E2D547E98A8
+	by cn.fujitsu.com (Postfix) with ESMTP id 60FBB47E98A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 12:56:41 +0800 (CST)
+	Fri, 28 Apr 2017 12:58:34 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.81) by
 	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Fri, 28 Apr 2017 12:56:42 +0800
+	Server (TLS) id 14.3.319.2; Fri, 28 Apr 2017 12:58:35 +0800
 From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 28 Apr 2017 12:56:21 +0800
-Message-ID: <1493355381-33865-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Fri, 28 Apr 2017 12:58:14 +0800
+Message-ID: <1493355494-33909-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 2E2D547E98A8.A7432
+X-yoursite-MailScanner-ID: 60FBB47E98A8.A886D
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [PATCH] cryptsetup: 1.7.2 -> 1.7.4
+Subject: [meta-oe] [PATCH v2] cryptsetup: 1.7.2 -> 1.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,7 +37,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 04:56:42 -0000
+X-List-Received-Date: Fri, 28 Apr 2017 04:58:34 -0000
 Content-Type: text/plain
 
 Upgrade cryptsetup from 1.7.2 to 1.7.4.
