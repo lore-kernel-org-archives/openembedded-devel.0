@@ -1,35 +1,28 @@
-Return-Path: <marex@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 4652877EBB
+Return-Path: <stefan@agner.ch>
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 4D1886FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 Apr 2017 15:28:40 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3wDyQK3wPtz1r26D;
-	Fri, 28 Apr 2017 17:28:41 +0200 (CEST)
-Received: from localhost (dynscan01.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 3wDyQK3P2vz3hjk9;
-	Fri, 28 Apr 2017 17:28:41 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan01.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id dd3Psg8p0Ky5; Fri, 28 Apr 2017 17:28:38 +0200 (CEST)
-X-Auth-Info: TltGVtPWG9TeRY8gsMUhBC+7fut0f/9KrRBsFPtgm00=
-Received: from [IPv6:::1] (unknown [195.140.253.167])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mail.mnet-online.de (Postfix) with ESMTPSA;
-	Fri, 28 Apr 2017 17:28:37 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-References: <20170407213646.29455-1-marex@denx.de>
-From: Marek Vasut <marex@denx.de>
-Message-ID: <b5cfca0f-b88b-47dc-3379-9b4a0fe5429a@denx.de>
-Date: Fri, 28 Apr 2017 17:28:33 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+	Sat, 29 Apr 2017 01:18:31 +0000 (UTC)
+Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 13F035C0281;
+	Sat, 29 Apr 2017 03:18:09 +0200 (CEST)
 MIME-Version: 1.0
-In-Reply-To: <20170407213646.29455-1-marex@denx.de>
-Subject: Re: [PATCH] fbida: Fix compile-host-path error
+Date: Fri, 28 Apr 2017 18:18:12 -0700
+From: Stefan Agner <stefan@agner.ch>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <CA+chaQcfurLMso=4B57=PwkP4=hSDd0FmDHWeZR2fADe8tC3cg@mail.gmail.com>
+References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
+	<CA+chaQcfurLMso=4B57=PwkP4=hSDd0FmDHWeZR2fADe8tC3cg@mail.gmail.com>
+Message-ID: <1ecbee2142b8a1dffc16834e0c4a0d24@agner.ch>
+X-Sender: stefan@agner.ch
+User-Agent: Roundcube Webmail/1.1.3
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1493428689; bh=EqFHGo+AdaHbsupp10obWCZZwdizuqxa1sbaPwMkIK0=;
+	h=MIME-Version:Content-Type:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
+	b=iC67zrn3KIR5IR34VcNdT5ZRoJapbm2Fbsz68DRCM2ODGW7/9wc62MaFVQOsblCjmPS899qAvcmDD7GcjleyazHrImqsMAKSrsop+3ofGRWiWRiSdIbxDxB9VBdH2prwJXhwN+cxyJM6rc0pcVd84yuYR9vv7nwB7LNzs5It1Co=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,83 +35,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 Apr 2017 15:28:42 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Sat, 29 Apr 2017 01:18:32 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On 04/07/2017 11:36 PM, Marek Vasut wrote:
-> Remove the explicit reference to /usr/local/* in Variables.mk.
-> This is completely bogus and causes failure during cross-compilation.
+ 
+
+Hm, I can not reproduce here. It looks like module has not been
+included, the module make arguments are missing... 
+
+Here it looks like this: 
+
+NOTE: make -j 8
+KERNEL_SRC=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
+KERNELDIR=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
+KERNEL_PATH=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
+KERNEL_VERSION=4.10.5-yocto-standard CC=x86_64-oe-linux-gcc 
+-fuse-ld=bfd LD=x86_64-oe-linux-ld.bfd  AR=x86_64-oe-linux-ar 
+O=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-build-artifacts
+KBUILD_EXTRA_SYMBOLS= module 
+
+Do you have an idea what is going on? 
+
+On 2017-04-28 05:24, Martin Jansa wrote: 
+
+> This latest version (which was merged to master yesterday) fails to build: 
 > 
-> Signed-off-by: Marek Vasut <marex@denx.de>
-
-Can we have this applied so that the package stops failing to build ? Thanks
-
-> ---
->  meta-oe/recipes-graphics/fbida/fbida_2.10.bb       |  4 ++-
->  .../fbida/files/0001-Avoid-using-host-path.patch   | 34 ++++++++++++++++++++++
->  2 files changed, 37 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
+> http://errors.yoctoproject.org/Errors/Details/141421/ 
 > 
-> diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-> index c14fc9b68..459a1e8d2 100644
-> --- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-> +++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-> @@ -10,7 +10,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b"
->  
->  DEPENDS = "virtual/libiconv jpeg fontconfig freetype libexif"
->  
-> -SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz"
-> +SRC_URI = "https://www.kraxel.org/releases/fbida/fbida-${PV}.tar.gz \
-> +	   file://0001-Avoid-using-host-path.patch \
-> +	   "
->  SRC_URI[md5sum] = "09460b964b58c2e39b665498eca29018"
->  SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d0b6cb6"
->  
-> diff --git a/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch b/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
-> new file mode 100644
-> index 000000000..cdf2c25d3
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/fbida/files/0001-Avoid-using-host-path.patch
-> @@ -0,0 +1,34 @@
-> +From 8d8fa9f22d9f6a95523bac63ac3af724faf5ff92 Mon Sep 17 00:00:00 2001
-> +From: Marek Vasut <marex@denx.de>
-> +Date: Fri, 7 Apr 2017 23:26:09 +0200
-> +Subject: [PATCH] Avoid using host-path
-> +
-> +Remove the explicit reference to /usr/local/* , this is completely
-> +bogus and causes trouble during cross-compilation.
-> +
-> +Signed-off-by: Marek Vasut <marex@denx.de>
-> +Upstream-Status: Inappropriate [upstream requires this]
-> +---
-> + mk/Variables.mk | 6 ------
-> + 1 file changed, 6 deletions(-)
-> +
-> +diff --git a/mk/Variables.mk b/mk/Variables.mk
-> +index 99f787c..3ffd87a 100644
-> +--- a/mk/Variables.mk
-> ++++ b/mk/Variables.mk
-> +@@ -42,12 +42,6 @@ CFLAGS		+= -Wall -Wmissing-prototypes -Wstrict-prototypes \
-> + 		   -Wpointer-arith -Wunused
-> + CXXFLAGS	+= -Wall -Wpointer-arith -Wunused
-> + 
-> +-# add /usr/local to the search path if something is in there ...
-> +-ifneq ($(wildcard /usr/local/include/*.h),)
-> +-  CFLAGS  += -I/usr/local/include
-> +-  LDFLAGS += -L/usr/local/$(LIB)
-> +-endif
-> +-
-> + # fixup include path for $(srcdir) != "."
-> + ifneq ($(srcdir),.)
-> +   CFLAGS  += -I. -I$(srcdir)
-> +-- 
-> +2.11.0
-> +
+> On Thu, Apr 27, 2017 at 7:30 AM, Stefan Agner <stefan@agner.ch> wrote:
 > 
+>> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+>> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+>> and more useful than IPSec, while avoiding the massive headache.
+>> 
+>> The recipes add the current experimental snapshot v0.0.20170421
+>> out-of-tree kernel module and tools. The kernel module has some kernel
+>> configuration dependencies such as some configuration part of
+>> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+>> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>> 
+>> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
+>> which is MACHINE_ARCH (like all kernel modules) we need to add this
+>> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>> 
+>> Signed-off-by: Stefan Agner <stefan@agner.ch>
+>> ---
+>> Changes since v2:
+>> - Upgrade to v0.0.20170421
+>> - Add comment about Linux kernel requirement
+>> 
+>> Changes since v1:
+>> - Upgrade to v0.0.20170409
+>> - Add wireguard-tools -> wireguard-module dependency to
+>> SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>> 
+>> meta-networking/conf/layer.conf                    |  4 ++++
+>> .../wireguard/wireguard-module_0.0.20170421.bb [1]     | 13 +++++++++++
+>> .../wireguard/wireguard-tools_0.0.20170421.bb [2]      | 27 ++++++++++++++++++++++
+>> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>> 4 files changed, 62 insertions(+)
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
+>> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> 
+>> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+>> index 85ad93b..b5aa159 100644
+>> --- a/meta-networking/conf/layer.conf
+>> +++ b/meta-networking/conf/layer.conf
+>> @@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>> 
+>> # Override security flags
+>> require conf/distro/include/meta_networking_security_flags.inc
+>> +
+>> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+>> +  wireguard-tools->wireguard-module \
+>> +"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
+>> new file mode 100644
+>> index 0000000..cb21bda
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
+>> @@ -0,0 +1,13 @@
+>> +require wireguard.inc
+>> +
+>> +inherit module
+>> +
+>> +# This module requires Linux 3.10 higher and several networking related
+>> +# configuration options. For exact kernel requirements visit:
+>> +# https://www.wireguard.io/install/#kernel-requirements [3]
+>> +
+>> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+>> +MAKE_TARGETS = "module"
+>> +MODULES_INSTALL_TARGET = "module-install"
+>> +
+>> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
+>> new file mode 100644
+>> index 0000000..79d420f
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
+>> 
+>> @@ -0,0 +1,27 @@
+>> +require wireguard.inc
+>> +
+>> +inherit bash-completion systemd pkgconfig
+>> +
+>> +DEPENDS = "wireguard-module libmnl"
+>> +
+>> +do_compile_prepend () {
+>> +    cd ${S}/tools
+>> +}
+>> +
+>> +do_install () {
+>> +    cd ${S}/tools
+>> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+>> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+>> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+>> +        WITH_BASHCOMPLETION=yes \
+>> +        WITH_WGQUICK=yes \
+>> +        install
+>> +}
+>> +
+>> +FILES_${PN} = " \
+>> +    ${sysconfdir} \
+>> +    ${systemd_unitdir} \
+>> +    ${bindir} \
+>> +"
+>> +
+>> +RDEPENDS_${PN} = "wireguard-module"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> new file mode 100644 index 0000000..46a9971
+>> --- /dev/null
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> @@ -0,0 +1,18 @@
+>> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+>> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+>> +implemented as a kernel virtual network interface for Linux, which aims to \
+>> +replace both IPsec for most use cases, as well as popular user space and/or \
+>> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+>> +and easier to use."
+>> +SECTION = "networking"
+>> +HOMEPAGE = "https://www.wireguard.io/"
+>> +LICENSE = "GPLv2"
+>> +
+>> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>> +
+>> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [4]"
+>> +
+>> +SRC_URI[md5sum] = "8e559f4fd672b15c38a15eb4d88cc84d"
+>> +SRC_URI[sha256sum] = "03c82af774224cd171d000ee4a519b5e474cc6842ac04967773cf77b26750000"
+>> 
+>> +
+>> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+>> --
+>> 2.7.4
 
+  
 
--- 
-Best regards,
-Marek Vasut
+Links:
+------
+[1] http://wireguard-module_0.0.20170421.bb
+[2] http://wireguard-tools_0.0.20170421.bb
+[3] https://www.wireguard.io/install/#kernel-requirements
+[4] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
 
