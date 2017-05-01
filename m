@@ -1,22 +1,39 @@
-Return-Path: <list@xenhideout.nl>
-Received: from smtp1.signet.nl (smtp1.signet.nl [83.96.147.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 568336FFA1
+Return-Path: <philip@balister.org>
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id C68CB71DCE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 May 2017 16:01:09 +0000 (UTC)
-Received: from webmail.dds.nl (app1.dds.nl [81.21.136.61])
-	by smtp1.signet.nl (Postfix) with ESMTP id 39DA61F10C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 May 2017 18:01:11 +0200 (CEST)
+	Mon,  1 May 2017 19:30:40 +0000 (UTC)
+Received: (qmail 32272 invoked by uid 1003); 1 May 2017 19:30:41 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@71.171.14.190)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	1 May 2017 19:30:41 -0000
+To: Martin Jansa <martin.jansa@gmail.com>,
+	Richard Purdie <richard.purdie@linuxfoundation.org>
+References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+	<CAK18fxHF1dPOAXSwFwtS0s_vaMo5--t4QS2dq8pBwbDPdFDmbw@mail.gmail.com>
+	<CAC+thW0rVtEFKKoJChwLjK-2=aMmZuW5vRufJ9iaFXJt6JiEAg@mail.gmail.com>
+	<1493635218.23535.34.camel@linuxfoundation.org>
+	<CAP71Wjwwp9ca=4_V-U1NpnX+=5x1V82DS18FkxPAaL9qYknVow@mail.gmail.com>
+	<1493638943.23535.36.camel@linuxfoundation.org>
+	<2b56f841-8c90-64b7-b6d3-cf0c157451be@balister.org>
+	<CA+chaQfvm5xdNEhF=v05VnUPiLZFea2pZkZakgmAF_mCF4v07w@mail.gmail.com>
+	<1493643311.23535.40.camel@linuxfoundation.org>
+	<20170501140706.GA2694@jama>
+From: Philip Balister <philip@balister.org>
+Message-ID: <8fc013aa-6e69-897d-6ceb-6a0735660627@balister.org>
+Date: Mon, 1 May 2017 15:30:36 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Date: Mon, 01 May 2017 18:01:11 +0200
-From: Xen <list@xenhideout.nl>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <8abc320ccb1265aac68072693427f8eb@xenhideout.nl>
-References: <8abc320ccb1265aac68072693427f8eb@xenhideout.nl>
-Message-ID: <60efb2f4be96b3eba98acf834cb98556@xenhideout.nl>
-X-Sender: list@xenhideout.nl
-User-Agent: Roundcube Webmail/1.2.4
-Subject: Re: cacao-native 1.6.1 failing because compiler not produced?
+In-Reply-To: <20170501140706.GA2694@jama>
+Cc: openembedded-members@lists.openembedded.org, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] [Openembedded-architecture] OpenEmbedded 2017 General Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,55 +46,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 16:01:10 -0000
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 01 May 2017 19:30:41 -0000
+X-Groupsio-MsgNum: 66613
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="SlDTmo3f4E3iM2uC3tDR4CQ26FDrg6Up4"
 
-Forgot to mention that:
+--SlDTmo3f4E3iM2uC3tDR4CQ26FDrg6Up4
+Content-Type: multipart/mixed; boundary="hP63HilcQ46H2aOLUeor6pKQV9DBUEoJw";
+ protected-headers="v1"
+From: Philip Balister <philip@balister.org>
+To: Martin Jansa <martin.jansa@gmail.com>,
+ Richard Purdie <richard.purdie@linuxfoundation.org>
+Cc: openembedded-members@lists.openembedded.org,
+ openembedded-architecture
+ <openembedded-architecture@lists.openembedded.org>,
+ "openembedded-devel@lists.openembedded.org"
+ <openembedded-devel@lists.openembedded.org>,
+ openembedded-core <openembedded-core@lists.openembedded.org>
+Message-ID: <8fc013aa-6e69-897d-6ceb-6a0735660627@balister.org>
+Subject: Re: [oe] [OE-core] [Openembedded-architecture] OpenEmbedded 2017
+ General Meeting
+References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
+ <CAK18fxHF1dPOAXSwFwtS0s_vaMo5--t4QS2dq8pBwbDPdFDmbw@mail.gmail.com>
+ <CAC+thW0rVtEFKKoJChwLjK-2=aMmZuW5vRufJ9iaFXJt6JiEAg@mail.gmail.com>
+ <1493635218.23535.34.camel@linuxfoundation.org>
+ <CAP71Wjwwp9ca=4_V-U1NpnX+=5x1V82DS18FkxPAaL9qYknVow@mail.gmail.com>
+ <1493638943.23535.36.camel@linuxfoundation.org>
+ <2b56f841-8c90-64b7-b6d3-cf0c157451be@balister.org>
+ <CA+chaQfvm5xdNEhF=v05VnUPiLZFea2pZkZakgmAF_mCF4v07w@mail.gmail.com>
+ <1493643311.23535.40.camel@linuxfoundation.org> <20170501140706.GA2694@jama>
+In-Reply-To: <20170501140706.GA2694@jama>
 
-Loading cache: 100% | --- | Time: 0:00:00
-Loaded 1 entries from dependency cache.
-Parsing recipes: 100% | --- | Time: 0:01:54
-Parsing of 1551 .bb files complete (1 cached, 1550 parsed). 2178 
-targets, 196 skipped, 0 masked, 0 errors.
-WARNING: No bb files matched BBFILE_PATTERN_meta-kirkwood 
-'^/store/projects/embedded-java/meta-kirkwood/'
-NOTE: Resolving any missing task queue dependencies
+--hP63HilcQ46H2aOLUeor6pKQV9DBUEoJw
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-Build Configuration:
-BB_VERSION        = "1.34.0"
-BUILD_SYS         = "x86_64-linux"
-NATIVELSBSTRING   = "ubuntu-16.04"
-TARGET_SYS        = "arm-oe-linux-gnueabi"
-MACHINE           = "qemuarm"
-DISTRO            = "nodistro"
-DISTRO_VERSION    = "nodistro.0"
-TUNE_FEATURES     = "arm armv5 thumb dsp"
-TARGET_FPU        = "soft"
-meta              = "master:123962018251dfb1d6ca5aa5c0d02534007de3ab"
-meta-oe           = "master:e7ad92decb7025d76e2e8b2bc15349d548c8ad14"
-meta-java         = "master:6eed0bbfa831f736bbab4d285c57deeec8f5d562"
-meta-kirkwood     = "master:e06973b85716a1cf920dc3d27beccecf3de12bf3"
+On 05/01/2017 10:07 AM, Martin Jansa wrote:
+> On Mon, May 01, 2017 at 01:55:11PM +0100, Richard Purdie wrote:
+>> On Mon, 2017-05-01 at 13:59 +0200, Martin Jansa wrote:
+>>> I had to change the password on the login, but then it worked for me.=
 
-Is the main start output.
+>>
+>> I think someone promoted you to an admin which is why its working for
+>> you...
+>=20
+> Yes I was after:
+> http://lists.openembedded.org/pipermail/openembedded-core/2017-April/13=
+6119.html
+>=20
+> but there were some more changes after that (which forced me to change
+> password to longer on today's login).
+>=20
+> Regards,
+>=20
 
-And the command I use is just bitbake openjdk-7 or bitbake openjdk-8, 
-same result.
+Things should be back to normal now.
 
-Regards.
+Philip
 
 
+--hP63HilcQ46H2aOLUeor6pKQV9DBUEoJw--
 
+--SlDTmo3f4E3iM2uC3tDR4CQ26FDrg6Up4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
 
-Xen schreef op 01-05-2017 17:49:
-> I am trying to compile openjdk with cacao for Armv5.
+iQExBAEBCAAbBQJZB4zcFBxwaGlsaXBAYmFsaXN0ZXIub3JnAAoJEMDJd4rr0mer
+l7cH/2YUuIkj0OIskSWsX/hHtlIWK7giON+V299zZcXZ6PKLdVIuf2VQBsawJuXA
+FPtz4q7vTfZoBQndY2B2JzIhuqprhBwjsq8R5DgbA8JLfDOMkifVkkGP8g/U1hQ9
+fCO6KvhfAxCHaCifBEjxjqCX3p7HsVN/3s/LxpLi/weZaFjVAf98mjLLTdqLTyuD
+hYJuS339gcbEjV6AjyShuZTfXn3WOsrlj/3GyKmNC65F/VBNPH9pgP7mz3CC6vHP
+Wkr92G6MdgmsPHy00A+B503TEU6X5KXo97S8dBwOSfuTmjGJIV00SRqoP/sJOAHk
+y9AZpJKhoJ7EulxZZzb2c3M6sXE=
+=BJsm
+-----END PGP SIGNATURE-----
 
-
-
-> build/tmp-glibc/work/x86_64-linux/cacao-native/1.6.1-r0/recipe-sysroot-native/usr/bin/ecj-initial
-> 
-> could not find java-initial which, when present, would not be able to
-> find cacao-initial.
-
+--SlDTmo3f4E3iM2uC3tDR4CQ26FDrg6Up4--
