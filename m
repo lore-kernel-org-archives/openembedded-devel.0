@@ -1,32 +1,38 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D29173122
+Return-Path: <marc.ferland@gmail.com>
+Received: from mail-it0-f52.google.com (mail-it0-f52.google.com
+	[209.85.214.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 0810F6E5FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 May 2017 15:18:03 +0000 (UTC)
-Received: from svr-orw-fem-03.mgc.mentorg.com ([147.34.97.39])
-	by relay1.mentorg.com with esmtp 
-	id 1d5D5P-0005NN-90 from Joe_MacDonald@mentor.com ;
-	Mon, 01 May 2017 08:18:03 -0700
-Received: from burninator (147.34.91.1) by svr-orw-fem-03.mgc.mentorg.com
-	(147.34.97.39) with Microsoft SMTP Server id 14.3.224.2; Mon, 1 May 2017
-	08:18:02 -0700
-Received: by burninator (Postfix, from userid 1000)	id 8C4F9581A06; Mon,  1
-	May 2017 11:18:01 -0400 (EDT)
-Date: Mon, 1 May 2017 11:18:01 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Stefan Agner <stefan@agner.ch>
-Message-ID: <20170501151800.GA22386@mentor.com>
-References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
-	<CA+chaQcfurLMso=4B57=PwkP4=hSDd0FmDHWeZR2fADe8tC3cg@mail.gmail.com>
-	<1ecbee2142b8a1dffc16834e0c4a0d24@agner.ch>
-MIME-Version: 1.0
-In-Reply-To: <1ecbee2142b8a1dffc16834e0c4a0d24@agner.ch>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-704 http://www.vim.org
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
+	Mon,  1 May 2017 15:32:20 +0000 (UTC)
+Received: by mail-it0-f52.google.com with SMTP id r185so29965652itd.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 May 2017 08:32:22 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ngQFEdb+ayxSOS4KIgQUIlR1NjHKniwiPDmV8QQxXU4=;
+	b=frseLujioikhC1qZbZHrm1Yio7PaMp3jVD+zUpKdHpSbBmtigEwxK4wTJYiNJZ1whf
+	Be5D9uuo82BwGpAVw2dEWO729hSDD88KUZhbncsFLlZ8iT5+dfnxSA0SVWaI9V885j4Y
+	aiMJMWoDK7lvgs2mqXRspa6GjuS2ifhaF3PzY5AuJLrPN7gdJpzE9T82T7RoxjB9gnud
+	j3n18xE2gUCcLiDtqtf8ilhudMHXimgGeC3j13aBtY1OnLTuTNLOPbSCZouUwUHTCUSI
+	abo+40TeOEi9MQN/Os0Vby4LoEKRPqHBoJH+kQiTD0drkQFBq5GBtxPuTNeq3gBpqdBd
+	Kafw==
+X-Gm-Message-State: AN3rC/4IM5DwrkPVkJpqUEydIodelnv3LbZpgmed2VjQ7K7tvTemgPnq
+	ciYAPlVsmWf72w==
+X-Received: by 10.36.124.85 with SMTP id a82mr6030787itd.90.1493652741809;
+	Mon, 01 May 2017 08:32:21 -0700 (PDT)
+Received: from marc-desktop.AMOTUS.local
+	(modemcable182.194-37-24.static.videotron.ca. [24.37.194.182])
+	by smtp.gmail.com with ESMTPSA id
+	a141sm3906313itc.28.2017.05.01.08.32.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 01 May 2017 08:32:21 -0700 (PDT)
+From: Marc Ferland <ferlandm@amotus.ca>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 May 2017 11:32:08 -0400
+Message-Id: <1493652728-13236-1-git-send-email-ferlandm@amotus.ca>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-prettytable: fix files permissions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,236 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 15:18:04 -0000
-X-Groupsio-MsgNum: 66609
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="7JfCtLOvnd9MIVvH"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 01 May 2017 15:32:21 -0000
 
---7JfCtLOvnd9MIVvH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Got this runtime error:
 
-[Re: [oe] [meta-networking][PATCH v3] wireguard: add WireGuard kernel modul=
-e and tools] On 17.04.28 (Fri 18:18) Stefan Agner wrote:
+IOError: [Errno 13] Permission denied: '/usr/lib/python2.7/site-packages/prettytable-0.7.2-py2.7.egg-info/PKG-INFO'
 
-> =20
->=20
-> Hm, I can not reproduce here. It looks like module has not been
-> included, the module make arguments are missing...=20
->=20
-> Here it looks like this:=20
->=20
-> NOTE: make -j 8
-> KERNEL_SRC=3D/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/ke=
-rnel-source
-> KERNELDIR=3D/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/ker=
-nel-source
-> KERNEL_PATH=3D/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/k=
-ernel-source
-> KERNEL_VERSION=3D4.10.5-yocto-standard CC=3Dx86_64-oe-linux-gcc=20
-> -fuse-ld=3Dbfd LD=3Dx86_64-oe-linux-ld.bfd  AR=3Dx86_64-oe-linux-ar=20
-> O=3D/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-buil=
-d-artifacts
-> KBUILD_EXTRA_SYMBOLS=3D module=20
->=20
-> Do you have an idea what is going on?=20
+After some investigation, it looks like the pypi package is the culprit
+as almost all the files in the tar.gz are set to 600 instead of 644.
 
-I don't off hand, but since I merged it, I'll try to investigate it.
-It's been somewhat complicated by the fact that this configuration
-builds for me but fails for the world builds as Martin notes.  But the
-configuration that last passed for the world builds failed to build for
-my ARM target builds during a do_install step because it was clearly
-trying to look at my host system.  For now I've just blacklisted the
-recipe in master.
+Signed-off-by: Marc Ferland <ferlandm@amotus.ca>
+---
+ meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
--J.
+diff --git a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
+index f63457e..6f4390e 100644
+--- a/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
++++ b/meta-python/recipes-devtools/python/python-prettytable_0.7.2.bb
+@@ -15,7 +15,7 @@ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ inherit setuptools
+ 
+ do_install_append() {
+-    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "top_level.txt"`
++    perm_files=`find "${D}${PYTHON_SITEPACKAGES_DIR}/" -name "*.txt" -o -name "PKG-INFO"`
+     for f in $perm_files; do
+         chmod 644 "${f}"
+     done
+-- 
+2.7.4
 
->=20
-> On 2017-04-28 05:24, Martin Jansa wrote:=20
->=20
-> > This latest version (which was merged to master yesterday) fails to bui=
-ld:=20
-> >=20
-> > http://errors.yoctoproject.org/Errors/Details/141421/=20
-> >=20
-> > On Thu, Apr 27, 2017 at 7:30 AM, Stefan Agner <stefan@agner.ch> wrote:
-> >=20
-> >> WireGuard is an extremely simple yet fast and modern VPN that utilizes
-> >> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
-> >> and more useful than IPSec, while avoiding the massive headache.
-> >>=20
-> >> The recipes add the current experimental snapshot v0.0.20170421
-> >> out-of-tree kernel module and tools. The kernel module has some kernel
-> >> configuration dependencies such as some configuration part of
-> >> features/netfilter/netfilter.scc, hence netfilter.scc should be part
-> >> of KERNEL_EXTRA_FEATURES (which is the case by default).
-> >>=20
-> >> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
-> >> which is MACHINE_ARCH (like all kernel modules) we need to add this
-> >> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
-> >>=20
-> >> Signed-off-by: Stefan Agner <stefan@agner.ch>
-> >> ---
-> >> Changes since v2:
-> >> - Upgrade to v0.0.20170421
-> >> - Add comment about Linux kernel requirement
-> >>=20
-> >> Changes since v1:
-> >> - Upgrade to v0.0.20170409
-> >> - Add wireguard-tools -> wireguard-module dependency to
-> >> SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
-> >>=20
-> >> meta-networking/conf/layer.conf                    |  4 ++++
-> >> .../wireguard/wireguard-module_0.0.20170421.bb [1]     | 13 +++++++++++
-> >> .../wireguard/wireguard-tools_0.0.20170421.bb [2]      | 27 ++++++++++=
-++++++++++++
-> >> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
-> >> 4 files changed, 62 insertions(+)
-> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-=
-module_0.0.20170421.bb [1]
-> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-=
-tools_0.0.20170421.bb [2]
-> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.=
-inc
-> >>=20
-> >> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/la=
-yer.conf
-> >> index 85ad93b..b5aa159 100644
-> >> --- a/meta-networking/conf/layer.conf
-> >> +++ b/meta-networking/conf/layer.conf
-> >> @@ -21,3 +21,7 @@ LICENSE_PATH +=3D "${LAYERDIR}/licenses"
-> >>=20
-> >> # Override security flags
-> >> require conf/distro/include/meta_networking_security_flags.inc
-> >> +
-> >> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS +=3D " \
-> >> +  wireguard-tools->wireguard-module \
-> >> +"
-> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module=
-_0.0.20170421.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-m=
-odule_0.0.20170421.bb [1]
-> >> new file mode 100644
-> >> index 0000000..cb21bda
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20=
-170421.bb [1]
-> >> @@ -0,0 +1,13 @@
-> >> +require wireguard.inc
-> >> +
-> >> +inherit module
-> >> +
-> >> +# This module requires Linux 3.10 higher and several networking relat=
-ed
-> >> +# configuration options. For exact kernel requirements visit:
-> >> +# https://www.wireguard.io/install/#kernel-requirements [3]
-> >> +
-> >> +EXTRA_OEMAKE +=3D "KERNELDIR=3D${STAGING_KERNEL_DIR}"
-> >> +MAKE_TARGETS =3D "module"
-> >> +MODULES_INSTALL_TARGET =3D "module-install"
-> >> +
-> >> +RRECOMMENDS_${PN} =3D "kernel-module-xt-hashlimit"
-> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_=
-0.0.20170421.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-to=
-ols_0.0.20170421.bb [2]
-> >> new file mode 100644
-> >> index 0000000..79d420f
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.201=
-70421.bb [2]
-> >>=20
-> >> @@ -0,0 +1,27 @@
-> >> +require wireguard.inc
-> >> +
-> >> +inherit bash-completion systemd pkgconfig
-> >> +
-> >> +DEPENDS =3D "wireguard-module libmnl"
-> >> +
-> >> +do_compile_prepend () {
-> >> +    cd ${S}/tools
-> >> +}
-> >> +
-> >> +do_install () {
-> >> +    cd ${S}/tools
-> >> +    oe_runmake DESTDIR=3D"${D}" PREFIX=3D"${prefix}" SYSCONFDIR=3D"${=
-sysconfdir}" \
-> >> +        SYSTEMDUNITDIR=3D"${systemd_unitdir}" \
-> >> +        WITH_SYSTEMDUNITS=3D${@bb.utils.contains('DISTRO_FEATURES', '=
-systemd', 'yes', '', d)} \
-> >> +        WITH_BASHCOMPLETION=3Dyes \
-> >> +        WITH_WGQUICK=3Dyes \
-> >> +        install
-> >> +}
-> >> +
-> >> +FILES_${PN} =3D " \
-> >> +    ${sysconfdir} \
-> >> +    ${systemd_unitdir} \
-> >> +    ${bindir} \
-> >> +"
-> >> +
-> >> +RDEPENDS_${PN} =3D "wireguard-module"
-> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/=
-meta-networking/recipes-kernel/wireguard/wireguard.inc
-> >> new file mode 100644 index 0000000..46a9971
-> >> --- /dev/null
-> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
-> >> @@ -0,0 +1,18 @@
-> >> +SUMMARY =3D "WireGuard is an extremely simple yet fast and modern VPN"
-> >> +DESCRIPTION=3D"WireGuard is a secure network tunnel, operating at lay=
-er 3, \
-> >> +implemented as a kernel virtual network interface for Linux, which ai=
-ms to \
-> >> +replace both IPsec for most use cases, as well as popular user space =
-and/or \
-> >> +TLS-based solutions like OpenVPN, while being more secure, more perfo=
-rmant, \
-> >> +and easier to use."
-> >> +SECTION =3D "networking"
-> >> +HOMEPAGE =3D "https://www.wireguard.io/"
-> >> +LICENSE =3D "GPLv2"
-> >> +
-> >> +LIC_FILES_CHKSUM =3D "file://../COPYING;md5=3Db234ee4d69f5fce4486a80f=
-daf4a4263"
-> >> +
-> >> +SRC_URI =3D "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}=
-=2Etar.xz [4]"
-> >> +
-> >> +SRC_URI[md5sum] =3D "8e559f4fd672b15c38a15eb4d88cc84d"
-> >> +SRC_URI[sha256sum] =3D "03c82af774224cd171d000ee4a519b5e474cc6842ac04=
-967773cf77b26750000"
-> >>=20
-> >> +
-> >> +S =3D "${WORKDIR}/WireGuard-${PV}/src/"
-> >> --
-> >> 2.7.4
->=20
->  =20
->=20
-> Links:
-> ------
-> [1] http://wireguard-module_0.0.20170421.bb
-> [2] http://wireguard-tools_0.0.20170421.bb
-> [3] https://www.wireguard.io/install/#kernel-requirements
-> [4] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
---=20
--Joe MacDonald.
-:wq
 
---7JfCtLOvnd9MIVvH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1
-
-iQEcBAEBAgAGBQJZB1GmAAoJEEn8ffcsOfaWKzgH/jq+0/+L5WbTA7QtN3IxhFBj
-3rfoovjH7bHhGS2GFg8K4Mmcnc7ve9bnOlyz935N5LGQK9GaiKHpDOUXKTP6dgEb
-kDa2cSzKYhta5fO4UqfbwF3L+8RRfhlUVyiN9zYkeorwVi8G8DjicoP2OIUwojBq
-PvtQA+59fEgCiorlOudI0mU0GhGhJIyGLbPhcGFtJp0wpeRte4/8cXaXo/i2Jp/R
-RTFmkv/mO14W9gNJLKMCYL162vfOUA72Tzk+5x5rtIh/vAVt2HBjnPIcn8ezYHl1
-9eEovRf7HfmKwQ9lwNj6jJpIwLzOjQiQGUOfO/aaW5gQt+zwgjVKRlFXkqm739M=
-=7f62
------END PGP SIGNATURE-----
-
---7JfCtLOvnd9MIVvH--
