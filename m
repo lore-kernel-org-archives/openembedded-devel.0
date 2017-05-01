@@ -1,36 +1,41 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id DF98971DE8;
-	Mon,  1 May 2017 11:59:48 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id u65so86437122wmu.1;
-	Mon, 01 May 2017 04:59:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+Return-Path: <andrei@gherzan.ro>
+Received: from mail-io0-f177.google.com (mail-io0-f177.google.com
+	[209.85.223.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 2157971DEF
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  1 May 2017 12:03:12 +0000 (UTC)
+Received: by mail-io0-f177.google.com with SMTP id r16so115071604ioi.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 May 2017 05:03:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gherzan-ro.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=nxuTkMqGDE5q9V/AmyJUUMzEs+8a9CL59KDI4xSidig=;
-	b=Cvvkh1g6zS/mkLUUies7lzrBRfGrjvDiA3we2FpSoSEQn8X0qIb3RWPmyUhmV28cuu
-	I9krAIDI0P+lhVM0res8g8M4mpbnl15D4b4GRvZIk/WLmwJ+D5OzWKprq6/4W/pOcL5h
-	5nOEH+rK0gU5FjFeVSuhr5xVjX9m0EXEiMppYZmmoEBeucUZ1NChde7QeNo9jMWgqXOW
-	/vX78iuAoA3hI40AADtNQKe3Y6fwG6/6GXoDw89Xi5sybwMI1q9Pk9DR6FH7YI0R7h2R
-	hnOiw+Je4HM7qxxWgVAxpW+CHJpbrYZIxLUKCavNU2p52iLY389KaUOEGmUVue7FqWy+
-	Y3CA==
+	:cc; bh=eBr7lfbki1g4Zbj9k+uK1mmwp+Z7jiNDWen2TXnuOU8=;
+	b=mVCx8pc4GQOQ0xnKTrH2KSyOMj/F2mOusuHUIEXVeYx8hayWRA/BrBooq1Ekna2qVP
+	E4wRXWgS2U2/h7436cyp2n/e6wia9xEpKHerGTa5W0vvXpQFYAEHCiMF2B+etKhKpstp
+	1g+I3t7C5zio4cEAg9xt92rfcN+VSvPHtHabwYJUIDzYJDgb4bDDLOS65Qzr1pJ2UR3B
+	zXZaSZaTOy1ZNC8KHP+K1JQcCBnbZEPgnvRmA7gwa6hQwtnFydgY6JtrJDv5fLbjVAx6
+	j7xPboOX5EUnte7/auyVsGIpv18kFl2Kpimjs5VCaCFW3+/R2lOu+pmwkE9KRHuUhIFw
+	bchg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=nxuTkMqGDE5q9V/AmyJUUMzEs+8a9CL59KDI4xSidig=;
-	b=fAXXCPCdN5F6GJaTj30ZHFIriPGRci77j3mbGJWxBOkJ3iJIzFvd/c/fF4cvPGM8nD
-	Vd3ReN+R9PuCRTLQz+EKKQIP9zF+1PTwG6yQjywYl+8xbI119EBjKhhIyhTNYgvD9tfu
-	KeDGXA0mACWctIgrClWNAZn29nST51qBJ+WGedqKdBOeA1gsBl/zMovYxe5p7zUyqBXp
-	u/UifC1GlE+ZPc8LuqS2NoMXOFjR65+WFA1Yhu4U742tw4xauZl9fnMIk0C+HW3qsh+0
-	UqOtYnLTTvjjlWX+eBrYTFVn0kVJccrCbRxK+ilz3nuiwi3bg+2uBc3UKxWRpR7Sz38I
-	gH+w==
-X-Gm-Message-State: AN3rC/4KoHgtscVZLrgW0McAn/VRrpwzC2YQhVPfHHncYbm9RE7vJOQd
-	nELU71sTrg7Nq671pS1IE8aelXg+uA==
-X-Received: by 10.80.165.16 with SMTP id y16mr19142607edb.64.1493639989176;
-	Mon, 01 May 2017 04:59:49 -0700 (PDT)
+	bh=eBr7lfbki1g4Zbj9k+uK1mmwp+Z7jiNDWen2TXnuOU8=;
+	b=a68mcxU0ykOCDDln8YtWkhU9UFJMpXkgzpsNASvmkAaHXg2EISNT2HM9oDcbnNEyPG
+	vMuTPfBY+b4BgnmWjQKgj1UYPwdJEmptc9tIlsroVOsMdiv0s8f0Nkc8fTkcSeHiRRav
+	dQtmiXEDrh7yHYELwzak+EMPyr+8nv2pBEHJ5TrvlLVF+bJBIH4NxT1lhfZi6Y9apbX7
+	5bdrCSxn4U9gMOVAu/QTET5kcUxxIqNTetjJEk4GscHV/FaPkbGW/jl6MkVA1xU7trpe
+	6xk9N1RMSzKylnC3yTmkzcHRvKDqV/DKsgobsEb0dGdWdHGQOLonf0wIywhcGlWH+VPu
+	lAtQ==
+X-Gm-Message-State: AN3rC/7i2A9EMw9zIAmHebL0Lu2aTipLIqNTpuAdVdqMyBqEjJBfxbr3
+	Tnvkqlj3u+2Tkdf59fee7voZyHjMpA==
+X-Received: by 10.107.167.19 with SMTP id q19mr6787063ioe.110.1493640194191;
+	Mon, 01 May 2017 05:03:14 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.148.54 with HTTP; Mon, 1 May 2017 04:59:48 -0700 (PDT)
-In-Reply-To: <2b56f841-8c90-64b7-b6d3-cf0c157451be@balister.org>
+Received: by 10.79.27.207 with HTTP; Mon, 1 May 2017 05:02:33 -0700 (PDT)
+X-Originating-IP: [31.52.113.35]
+In-Reply-To: <CA+chaQfvm5xdNEhF=v05VnUPiLZFea2pZkZakgmAF_mCF4v07w@mail.gmail.com>
 References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
 	<CAK18fxHF1dPOAXSwFwtS0s_vaMo5--t4QS2dq8pBwbDPdFDmbw@mail.gmail.com>
 	<CAC+thW0rVtEFKKoJChwLjK-2=aMmZuW5vRufJ9iaFXJt6JiEAg@mail.gmail.com>
@@ -38,16 +43,16 @@ References: <527be78e-ad75-2221-06e8-18814bf55857@mentor.com>
 	<CAP71Wjwwp9ca=4_V-U1NpnX+=5x1V82DS18FkxPAaL9qYknVow@mail.gmail.com>
 	<1493638943.23535.36.camel@linuxfoundation.org>
 	<2b56f841-8c90-64b7-b6d3-cf0c157451be@balister.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 1 May 2017 13:59:48 +0200
-Message-ID: <CA+chaQfvm5xdNEhF=v05VnUPiLZFea2pZkZakgmAF_mCF4v07w@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-members@lists.openembedded.org,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
+	<CA+chaQfvm5xdNEhF=v05VnUPiLZFea2pZkZakgmAF_mCF4v07w@mail.gmail.com>
+From: Andrei Gherzan <andrei@gherzan.ro>
+Date: Mon, 1 May 2017 13:02:33 +0100
+Message-ID: <CAK18fxHA0p6x7pwU_WAnpv7bvOCX6XXFP-QWLkAJhxQfVuKczQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-members@lists.openembedded.org, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
 	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>
+	<openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] [Openembedded-architecture] OpenEmbedded 2017 General Meeting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -61,52 +66,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 11:59:49 -0000
+X-List-Received-Date: Mon, 01 May 2017 12:03:13 -0000
 Content-Type: text/plain; charset=UTF-8
 
-I had to change the password on the login, but then it worked for me.
+On Mon, May 1, 2017 at 12:59 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> I had to change the password on the login, but then it worked for me.
+>
+> I've added Andrea and Andrei to the list.
 
-I've added Andrea and Andrei to the list.
+Thanks Martin.
 
-On Mon, May 1, 2017 at 1:46 PM, Philip Balister <philip@balister.org> wrote:
-
-> On 05/01/2017 07:42 AM, Richard Purdie wrote:
-> > On Mon, 2017-05-01 at 13:07 +0200, Nicolas Dechesne wrote:
-> >> well, it's the same for me. In the 'view source' page, i can see
-> >> this:
-> >>
-> >> ==
-> >> You do not have permission to edit this page, for the following
-> >> reason:
-> >> The action you have requested is limited to users in the group:
-> >> Administrators.
-> >
-> > Right, it is totally broken.
-> >
-> > Someone has messed up the group access permissions, likely related to
-> > spam protection. Right now it appears only the admins can change
-> > anything. I could try and fix it but I should probably understand who
-> > did what and why to cause this first.
-> >
-> > Who has changed the group permissions recently?
->
-> I'll check with Bill Traynor.
->
-> Philip
->
-> >
-> > Cheers,
-> >
-> > Richard
-> > _______________________________________________
-> > Openembedded-architecture mailing list
-> > Openembedded-architecture@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-architecture
-> >
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
+--
+Andrei Gherzan
 
