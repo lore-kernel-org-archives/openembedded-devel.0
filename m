@@ -1,29 +1,44 @@
-Return-Path: <stefan@agner.ch>
-Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
-	by mail.openembedded.org (Postfix) with ESMTP id C8A077197E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E678572F47
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  1 May 2017 21:38:06 +0000 (UTC)
-Received: from webmail.kmu-office.ch (unknown [178.209.48.103])
-	by mail.kmu-office.ch (Postfix) with ESMTPSA id 0E6C25C1500;
-	Mon,  1 May 2017 23:37:40 +0200 (CEST)
-MIME-Version: 1.0
-Date: Mon, 01 May 2017 14:37:44 -0700
-From: Stefan Agner <stefan@agner.ch>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
-In-Reply-To: <20170501151800.GA22386@mentor.com>
-References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
-	<CA+chaQcfurLMso=4B57=PwkP4=hSDd0FmDHWeZR2fADe8tC3cg@mail.gmail.com>
-	<1ecbee2142b8a1dffc16834e0c4a0d24@agner.ch>
-	<20170501151800.GA22386@mentor.com>
-Message-ID: <8fe593023ab0ba46b283531a809a0f60@agner.ch>
-X-Sender: stefan@agner.ch
-User-Agent: Roundcube Webmail/1.1.3
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
-	t=1493674660; bh=aLA0M08+df7ZvAfL8a+MlO2HNWh0F+hnFXyJwn/+Kws=;
-	h=MIME-Version:Content-Type:Content-Transfer-Encoding:Date:From:To:Cc:Subject:In-Reply-To:References:Message-ID;
-	b=RDCw4q8YdczgHfwKlYzM5UXuLjcBtKjWipKZQYVXwtKjTATSlnf9TgMKqtxC+bwlbEBduIHPUMaHZnHQU17kki6yzv3zbCn1TdEk21Qll97D4ifRYUgkAjmrmm0yq5q1Mn/vgXmYrOXk20KxAi1gUetyVhiauQP9GLnk4BbiJuQ=
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
+	Tue,  2 May 2017 00:04:48 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id v1so18195254pgv.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 01 May 2017 17:04:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=hMA09CEowo5t9dM6cJZAV4NrcqBztPQj/OKd2SE5E/8=;
+	b=qv7tE9nf4yu17Kg2iUujK37nkJgjbu9kn0kHkiSHrl5fqescqjikjYl0FcR50yxfjh
+	lUU0gN4BAsqD+9hnWmuuFTlG3gFzBFGyotR1v7SsQ96gPgSi+mk8XaZOPckNIEv38e5m
+	vtjrb1nYtL1dcAQQXXwZXvcjG5H3i40o6rSSwGsyRRpjez8WofpQ0ak0KeG5vRE4hJXz
+	ZdfAfQ/kUWiLRc53an5X6M3iKk53YTj4kr2CgoN5rhDWgfZWDubrJxUnoGD/CUsuZWYK
+	+VcXoh0yAs9TSpgxu9+euWQDSrk0bNE1nTGIcRP/F+a/JRq+t1FdD5NMtg0XtDHJVNcL
+	01ew==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=hMA09CEowo5t9dM6cJZAV4NrcqBztPQj/OKd2SE5E/8=;
+	b=W0u5X+TSOfS48eJTql/xTUklQ/QJpxKWONsczXOP+AeZbVD2ZeDeqP9LhlytLKAxde
+	t8yzS5/9y4dP7nV33aCg6EeBPjyq/k0GdsBovoqjZMd+LcyJXUimx6FmiD+wQcuiqN4W
+	nFc3QALPcjkHky+JPOltOG6OwosaklaJ3GAM2TRgXjV+A6CrKCvxJRjtgc5JVFsyR1mw
+	+Ne4hTc08kZ0ua6Q3trT2PO3vdTqJI8GzCQyJncrAkBI/wIm126NWVAfQ2jEk98apqA7
+	a1V2jZQoWsPD7oh48SYRX3VADgnNyQ+L0tnG3ICSsFIa9WpCsybJ04r/svx7ym+IW5X6
+	YY2Q==
+X-Gm-Message-State: AN3rC/47QVZOhxBbhGx5JCxuEDyw3zxCs/D1brFtbOFPPnnYs55s5YoV
+	hPnmRA/4PwE6oQ==
+X-Received: by 10.99.123.81 with SMTP id k17mr7520464pgn.125.1493683489492;
+	Mon, 01 May 2017 17:04:49 -0700 (PDT)
+Received: from apollo.hsd1.ca.comcast.net ([2601:646:8882:b8c::d586])
+	by smtp.gmail.com with ESMTPSA id l62sm30886pfb.91.2017.05.01.17.04.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 01 May 2017 17:04:48 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  1 May 2017 17:04:31 -0700
+Message-Id: <20170502000431.28568-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [meta-networking][PATCH] openhpi: Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,196 +51,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 01 May 2017 21:38:07 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 02 May 2017 00:04:49 -0000
 
-On 2017-05-01 08:18, Joe MacDonald wrote:
-> [Re: [oe] [meta-networking][PATCH v3] wireguard: add WireGuard kernel
-> module and tools] On 17.04.28 (Fri 18:18) Stefan Agner wrote:
-> 
->>
->>
->> Hm, I can not reproduce here. It looks like module has not been
->> included, the module make arguments are missing...
->>
->> Here it looks like this:
->>
->> NOTE: make -j 8
->> KERNEL_SRC=skins/larry/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
->> KERNELDIR=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
->> KERNEL_PATH=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-source
->> KERNEL_VERSION=4.10.5-yocto-standard CC=x86_64-oe-linux-gcc
->> -fuse-ld=bfd LD=x86_64-oe-linux-ld.bfd  AR=x86_64-oe-linux-ar
->> O=/build/ags/oe-core/build/tmp-glibc/work-shared/qemux86-64/kernel-build-artifacts
->> KBUILD_EXTRA_SYMBOLS= module
->>
->> Do you have an idea what is going on?
-> 
-> I don't off hand, but since I merged it, I'll try to investigate it.
-> It's been somewhat complicated by the fact that this configuration
-> builds for me but fails for the world builds as Martin notes.  But the
-> configuration that last passed for the world builds failed to build for
-> my ARM target builds during a do_install step because it was clearly
-> trying to look at my host system.  For now I've just blacklisted the
-> recipe in master.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../files/0001-Fix-build-failures-with-gcc7.patch  | 49 ++++++++++++++++++++++
+ .../recipes-daemons/openhpi/openhpi_3.6.1.bb       |  1 +
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
 
-Yeah it really seems that inherit module failed for some reason, which
-avoids a whole bunch of make arguments to be missing. Quite likely that
-in this case the build system starts to look at default paths.
+diff --git a/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch b/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
+new file mode 100644
+index 000000000..4f493f7b8
+--- /dev/null
++++ b/meta-networking/recipes-daemons/openhpi/files/0001-Fix-build-failures-with-gcc7.patch
+@@ -0,0 +1,49 @@
++From 398c6db66c643ed6133cc2b028ab1e27a17c5295 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 1 May 2017 19:10:09 +0000
++Subject: [PATCH] Fix build failures with gcc7
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ plugins/ipmidirect/ipmi_mc_vendor.cpp | 2 +-
++ plugins/ipmidirect/ipmi_resource.cpp  | 4 ++--
++ 2 files changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/plugins/ipmidirect/ipmi_mc_vendor.cpp b/plugins/ipmidirect/ipmi_mc_vendor.cpp
++index 2c6c090..557771c 100644
++--- a/plugins/ipmidirect/ipmi_mc_vendor.cpp
+++++ b/plugins/ipmidirect/ipmi_mc_vendor.cpp
++@@ -322,7 +322,7 @@ cIpmiMcVendor::CreateResources( cIpmiDomain *domain, cIpmiMc *source_mc, cIpmiSd
++       if ( addr.m_channel != source_mc->GetChannel() ) 
++           stdlog << "WARNING : SDR channel " << addr.m_channel << " NOT equal to MC channel " << source_mc->GetChannel() << "\n";
++ 
++-       if ( FindOrCreateResource( domain, source_mc, fru_id, sdr, sdrs ) == false ) {
+++       if ( !FindOrCreateResource( domain, source_mc, fru_id, sdr, sdrs ) ) {
++ 	    return false;
++ 	}
++      }
++diff --git a/plugins/ipmidirect/ipmi_resource.cpp b/plugins/ipmidirect/ipmi_resource.cpp
++index c438e74..2552673 100644
++--- a/plugins/ipmidirect/ipmi_resource.cpp
+++++ b/plugins/ipmidirect/ipmi_resource.cpp
++@@ -73,7 +73,7 @@ cIpmiResource::SendCommandReadLock( const cIpmiMsg &msg, cIpmiMsg &rsp,
++ 
++   domain->ReadLock();
++ 
++-  if ( domain->VerifyResource( resource ) == false )
+++  if ( !domain->VerifyResource( resource ) )
++        return SA_ERR_HPI_NOT_PRESENT;
++ 
++   return rv;
++@@ -91,7 +91,7 @@ cIpmiResource::SendCommandReadLock( cIpmiRdr *rdr, const cIpmiMsg &msg, cIpmiMsg
++   
++   domain->ReadLock();
++   
++-  if ( domain->VerifyRdr( rdr ) == false )
+++  if ( !domain->VerifyRdr( rdr ) )
++        return SA_ERR_HPI_NOT_PRESENT;
++ 
++   return rv;
++-- 
++1.9.1
++
+diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+index b9b0437b2..db2a24a9b 100644
+--- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
++++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+@@ -35,6 +35,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://openhpi-invalide-session.patch \
+            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
+            file://openhpi-fix-alignment-issue.patch \
++           file://0001-Fix-build-failures-with-gcc7.patch \
+            \
+            file://openhpi.init \
+            file://openhpid.service \
+-- 
+2.12.2
 
-But this recipe inherits module the same way as others do. It seems to
-me if this recipe fails, then others such as netmap-modules should fail
-too...
-
---
-Stefan
-
-
-> 
-> -J.
-> 
->>
->> On 2017-04-28 05:24, Martin Jansa wrote:
->>
->> > This latest version (which was merged to master yesterday) fails to build:
->> >
->> > http://errors.yoctoproject.org/Errors/Details/141421/
->> >
->> > On Thu, Apr 27, 2017 at 7:30 AM, Stefan Agner <stefan@agner.ch> wrote:
->> >
->> >> WireGuard is an extremely simple yet fast and modern VPN that utilizes
->> >> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
->> >> and more useful than IPSec, while avoiding the massive headache.
->> >>
->> >> The recipes add the current experimental snapshot v0.0.20170421
->> >> out-of-tree kernel module and tools. The kernel module has some kernel
->> >> configuration dependencies such as some configuration part of
->> >> features/netfilter/netfilter.scc, hence netfilter.scc should be part
->> >> of KERNEL_EXTRA_FEATURES (which is the case by default).
->> >>
->> >> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
->> >> which is MACHINE_ARCH (like all kernel modules) we need to add this
->> >> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
->> >>
->> >> Signed-off-by: Stefan Agner <stefan@agner.ch>
->> >> ---
->> >> Changes since v2:
->> >> - Upgrade to v0.0.20170421
->> >> - Add comment about Linux kernel requirement
->> >>
->> >> Changes since v1:
->> >> - Upgrade to v0.0.20170409
->> >> - Add wireguard-tools -> wireguard-module dependency to
->> >> SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
->> >>
->> >> meta-networking/conf/layer.conf                    |  4 ++++
->> >> .../wireguard/wireguard-module_0.0.20170421.bb [1]     | 13 +++++++++++
->> >> .../wireguard/wireguard-tools_0.0.20170421.bb [2]      | 27 ++++++++++++++++++++++
->> >> .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
->> >> 4 files changed, 62 insertions(+)
->> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
->> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
->> >> create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
->> >>
->> >> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
->> >> index 85ad93b..b5aa159 100644
->> >> --- a/meta-networking/conf/layer.conf
->> >> +++ b/meta-networking/conf/layer.conf
->> >> @@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
->> >>
->> >> # Override security flags
->> >> require conf/distro/include/meta_networking_security_flags.inc
->> >> +
->> >> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
->> >> +  wireguard-tools->wireguard-module \
->> >> +"
->> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1] b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
->> >> new file mode 100644
->> >> index 0000000..cb21bda
->> >> --- /dev/null
->> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb [1]
->> >> @@ -0,0 +1,13 @@
->> >> +require wireguard.inc
->> >> +
->> >> +inherit module
->> >> +
->> >> +# This module requires Linux 3.10 higher and several networking related
->> >> +# configuration options. For exact kernel requirements visit:
->> >> +# https://www.wireguard.io/install/#kernel-requirements [3]
->> >> +
->> >> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
->> >> +MAKE_TARGETS = "module"
->> >> +MODULES_INSTALL_TARGET = "module-install"
->> >> +
->> >> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
->> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2] b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
->> >> new file mode 100644
->> >> index 0000000..79d420f
->> >> --- /dev/null
->> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb [2]
->> >>
->> >> @@ -0,0 +1,27 @@
->> >> +require wireguard.inc
->> >> +
->> >> +inherit bash-completion systemd pkgconfig
->> >> +
->> >> +DEPENDS = "wireguard-module libmnl"
->> >> +
->> >> +do_compile_prepend () {
->> >> +    cd ${S}/tools
->> >> +}
->> >> +
->> >> +do_install () {
->> >> +    cd ${S}/tools
->> >> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
->> >> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
->> >> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
->> >> +        WITH_BASHCOMPLETION=yes \
->> >> +        WITH_WGQUICK=yes \
->> >> +        install
->> >> +}
->> >> +
->> >> +FILES_${PN} = " \
->> >> +    ${sysconfdir} \
->> >> +    ${systemd_unitdir} \
->> >> +    ${bindir} \
->> >> +"
->> >> +
->> >> +RDEPENDS_${PN} = "wireguard-module"
->> >> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
->> >> new file mode 100644 index 0000000..46a9971
->> >> --- /dev/null
->> >> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
->> >> @@ -0,0 +1,18 @@
->> >> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
->> >> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
->> >> +implemented as a kernel virtual network interface for Linux, which aims to \
->> >> +replace both IPsec for most use cases, as well as popular user space and/or \
->> >> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
->> >> +and easier to use."
->> >> +SECTION = "networking"
->> >> +HOMEPAGE = "https://www.wireguard.io/"
->> >> +LICENSE = "GPLv2"
->> >> +
->> >> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->> >> +
->> >> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz [4]"
->> >> +
->> >> +SRC_URI[md5sum] = "8e559f4fd672b15c38a15eb4d88cc84d"
->> >> +SRC_URI[sha256sum] = "03c82af774224cd171d000ee4a519b5e474cc6842ac04967773cf77b26750000"
->> >>
->> >> +
->> >> +S = "${WORKDIR}/WireGuard-${PV}/src/"
->> >> --
->> >> 2.7.4
->>
->>
->>
->> Links:
->> ------
->> [1] http://wireguard-module_0.0.20170421.bb
->> [2] http://wireguard-tools_0.0.20170421.bb
->> [3] https://www.wireguard.io/install/#kernel-requirements
->> [4] https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz
 
