@@ -1,48 +1,28 @@
-Return-Path: <joe@deserted.net>
-Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
-	[209.85.214.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1795171D4E
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 3486572F5E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  2 May 2017 12:48:12 +0000 (UTC)
-Received: by mail-it0-f66.google.com with SMTP id c26so2050943itd.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 May 2017 05:48:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=deserted-net.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:subject:date:message-id;
-	bh=m1euO5Bq8pBQ8Sqt+NQeux6TJv3fOf0OCC5fa01UkEQ=;
-	b=voEFF/tVlrp5abWpG2LafxPMb0KysnpEs2xzpFLNDDs6xOvG69V9idgJDV5eiXQejp
-	jTaPkgsQwYUsqwiRdBcOHCaS+RMpXtBGwakk3Qfgywq420eeYZuqXb6I5YNJ3QpKwZnd
-	edjjVeuZT9/qm6IIjJ7vhZummPXielLuzTAQGntGtTF01rS4jc20leRpWYNDBBHe71Ai
-	qDTW2jtmtU5MbnGJ0iHWE/1GZDhR6NyHrxHADBBxQksyDk1bKe64nSVm14lTtoUOkTGA
-	Y3S8TLkCNpwnmLUqEKm8hf6wUwRNfAtbZrgVcE0UzhQbNLg5fqkY4R+PgL1wwoMzXHHG
-	d0pg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=m1euO5Bq8pBQ8Sqt+NQeux6TJv3fOf0OCC5fa01UkEQ=;
-	b=HnBi7IrR4sf8xWLMjOgkZtic4NJuu+JwXN7mXn+142sPi7gsL5Y2oyYgL9KniiIPbM
-	he5jhrrjGmtdxmmSbLN1ghoDbVA+z1sGVQy17JcrjXWJARvSBIiB7BP80JkgS2Pd/bwy
-	z4IXy4siJQOwCQvQ3B4G++8QGSae3cgPDrcLsC/ZizZbhn7UvFzwGam4JvBz5Q0loiFb
-	/Qnyduq2x694QlxlY1ejJpX82lJndN+C5ZJO2dKMMrD+dJkQd9AEzurAmeBmizqjZg95
-	ecBEUfVBpXjLYzWwK6JB8qqBSjb6h/DM+o/2O4w9W6BRZvGqRU4vfJJyQwaKr3kSgoG4
-	fBBw==
-X-Gm-Message-State: AN3rC/4h44kSr3iIcR7FwxA44qqoWXTUv6XkNbrUjaPlp/lcZu1SvGNz
-	ZeTPVAsRO1gJnX5h
-X-Received: by 10.36.150.193 with SMTP id z184mr2873529itd.89.1493729293686;
-	Tue, 02 May 2017 05:48:13 -0700 (PDT)
-Received: from mir.deserted.net (23-233-24-42.cpe.pppoe.ca. [23.233.24.42])
-	by smtp.gmail.com with ESMTPSA id f16sm799588itc.29.2017.05.02.05.48.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 May 2017 05:48:12 -0700 (PDT)
-Sender: Joe MacDonald <joe@deserted.net>
-From: Joe MacDonald <joe_macdonald@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  2 May 2017 08:48:36 -0400
-Message-Id: <1493729316-28212-1-git-send-email-joe_macdonald@mentor.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] wireguard: module install cleanup
+	Tue,  2 May 2017 14:57:39 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v42EvdmJ029795
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Tue, 2 May 2017 07:57:39 -0700
+Received: from [172.25.44.11] (172.25.44.11) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 2 May 2017 07:57:38 -0700
+To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <20170427013329.7827-1-Randy.MacLeod@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <d7748196-b2a1-c5fd-c350-315ee1628c66@windriver.com>
+Date: Tue, 2 May 2017 10:57:37 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+In-Reply-To: <20170427013329.7827-1-Randy.MacLeod@windriver.com>
+X-Originating-IP: [172.25.44.11]
+Subject: Re: [meta-oe][PATCH] opencv: disable broken Intel FP16 detection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,57 +35,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 02 May 2017 12:48:13 -0000
+X-List-Received-Date: Tue, 02 May 2017 14:57:42 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The module_install target shouldn't be used, just installing the module to
-the sysroot directly seems more appropriate.
+On 2017-04-26 09:33 PM, Randy MacLeod wrote:
+> The configuration worked in opencv-3.1 so revert two commits to
+> drop the FP16 detection even though it may make opencv slower.
+> The only change in the configure log is:
+> --- FP16: Compiler support is available
+> +-- FP16: Compiler support is not available
+ > ...
 
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- .../wireguard/wireguard-module_0.0.20170421.bb       | 20 ++++++++++++++------
- 1 file changed, 14 insertions(+), 6 deletions(-)
+Martin,
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
-index e3d4210..2c69c58 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
-@@ -1,6 +1,6 @@
- require wireguard.inc
- 
--inherit module-base kernel-module-split
-+inherit module kernel-module-split
- 
- DEPENDS = "virtual/kernel libmnl"
- 
-@@ -10,14 +10,22 @@ DEPENDS = "virtual/kernel libmnl"
- 
- EXTRA_OEMAKE_append = " \
-     KERNELDIR=${STAGING_KERNEL_DIR} \
--    CC='${CC}' \
--    KERNEL_CC='${KERNEL_CC}' \
-     "
--KERNEL_MODULES_META_PACKAGE = "${PN}"
- 
- MAKE_TARGETS = "module"
--MODULES_INSTALL_TARGET = "module-install"
- 
- RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
-+MODULE_NAME = "wireguard"
- 
--PNBLACKLIST[wireguard-module] ?= "BROKEN: Kernel configuration invalid (http://errors.yoctoproject.org/Errors/Details/141421/) - the recipe will be removed on 2017-07-01 unless the issue is fixed"
-+# Kernel module packages MUST begin with 'kernel-module-', otherwise
-+# multilib image generation can fail.
-+#
-+# The following line is only necessary if the recipe name does not begin
-+# with kernel-module-.
-+PKG_${PN} = "kernel-module-${MODULE_NAME}"
-+
-+module_do_install() {
-+    install -d ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}
-+    install -m 0644 ${MODULE_NAME}.ko \
-+    ${D}/lib/modules/${KERNEL_VERSION}/kernel/${MODULE_NAME}/${MODULE_NAME}.ko
-+}
+Thanks for merging this fix.
+
+My long log was truncated by the line beginning with "---" above
+but the code changes are fine.
+
+It seems that either I need to learn how to format my email
+or you have a bug in your patch handling tools or both. :)
+I suspect that indenting those lines would work-around
+the problem.
+
+Should I send a fix that reverts the truncated commit log
+and then modifies the log formatting?
 -- 
-1.9.1
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
