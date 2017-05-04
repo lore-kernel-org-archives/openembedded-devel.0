@@ -1,24 +1,26 @@
 Return-Path: <Qi.Chen@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AFD1777B6E
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AA4A77B96
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 May 2017 10:05:32 +0000 (UTC)
+	Thu,  4 May 2017 10:05:33 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v44A5XRg015667
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v44A5ZsC029738
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 4 May 2017 03:05:33 -0700 (PDT)
+	Thu, 4 May 2017 03:05:35 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 4 May 2017 03:05:32 -0700
+	14.3.294.0; Thu, 4 May 2017 03:05:34 -0700
 From: Chen Qi <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 May 2017 18:05:30 +0800
-Message-ID: <20170504100531.21451-1-Qi.Chen@windriver.com>
+Date: Thu, 4 May 2017 18:05:31 +0800
+Message-ID: <20170504100531.21451-2-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <20170504100531.21451-1-Qi.Chen@windriver.com>
+References: <20170504100531.21451-1-Qi.Chen@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-filesystems][PATCH V2 1/2] xfsdump: 3.1.4 -> 3.1.6
+Subject: [meta-filesystems][PATCH V2 2/2] xfsdump: fix do_configure failure and remove from blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,47 +33,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 May 2017 10:05:32 -0000
+X-List-Received-Date: Thu, 04 May 2017 10:05:34 -0000
 Content-Type: text/plain
 
-From: Robert Yang <liezhi.yang@windriver.com>
+Add '-D_FILE_OFFSET_BITS=64' to CFLAGS to fix the following do_configure
+error.
 
-The 3.1.4 doesn't work with xfsprogs 4.7:
-| inv_files.o: In function `inv_dirpath':
-|xfsdump-3.1.4/invutil/inv_files.c:53: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_fstab':
-|xfsdump-3.1.4/invutil/inv_files.c:60: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_lockfile':
-|xfsdump-3.1.4/invutil/inv_files.c:67: undefined reference to `ASSERT'
-| inv_files.o: In function `inv_basepath':
-|xfsdump-3.1.4/invutil/inv_files.c:74: undefined reference to `ASSERT'
-| collect2: error: ld returned 1 exit status
-| make[2]: *** [../include/buildrules:33: xfsinvutil] Error 1
+  FATAL ERROR: cannot find a valid <xfs/xfs.h> header file.
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Although -D_FILE_OFFSET_BITS=64 has already been defined in
+include/builddefs.in, it only affects the compile process, leaving configure
+process unaware of this value.
+
+Remove from blacklist as the configure failure has been fixed by this patch.
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-utils/xfsdump/{xfsdump_3.1.4.bb => xfsdump_3.1.6.bb}      | 4 ++--
+ meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-filesystems/recipes-utils/xfsdump/{xfsdump_3.1.4.bb => xfsdump_3.1.6.bb} (89%)
 
-diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-similarity index 89%
-rename from meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
-rename to meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-index d5ad0b0b2..8f942ba7c 100644
---- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.4.bb
+diff --git a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
+index 8f942ba7c..ecc746829 100644
+--- a/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
 +++ b/meta-filesystems/recipes-utils/xfsdump/xfsdump_3.1.6.bb
-@@ -13,8 +13,8 @@ DEPENDS = "xfsprogs attr"
- SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/${BPN}-${PV}.tar.gz \
-     file://remove-install-as-user.patch \
- "
--SRC_URI[md5sum] = "a8b1761be5feb363131e7b506639ad4c"
--SRC_URI[sha256sum] = "570eafd0721515bdd79cb0e295b701d49cdf81e71a0a0ff0df6d4c5cc1960943"
-+SRC_URI[md5sum] = "50353cd4f4b435685955363e6044f4d1"
-+SRC_URI[sha256sum] = "7f78c11ca527477d90e5e62b0778f3ad96f2b71c19173044e9aca9515fff42d0"
+@@ -22,6 +22,8 @@ PARALLEL_MAKE = ""
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[gettext] = "--enable-gettext=yes,--enable-gettext=no,gettext"
  
- inherit autotools-brokensep
++CFLAGS += "-D_FILE_OFFSET_BITS=64"
++
+ EXTRA_OEMAKE += "'LIBTOOL=${HOST_SYS}-libtool' V=1"
  
+ do_configure () {
+@@ -34,5 +36,3 @@ do_install () {
+     oe_runmake install
+     oe_runmake install-dev
+ }
+-
+-PNBLACKLIST[xfsdump] ?= "Depends on broken xfsprogs - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
 2.11.0
 
