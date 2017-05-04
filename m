@@ -1,38 +1,48 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id D542A77BB4
+Return-Path: <eu@felipetonello.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4412877C6F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 May 2017 14:04:51 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga105.jf.intel.com with ESMTP; 04 May 2017 07:04:52 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,287,1491289200"; d="scan'208";a="1164549080"
-Received: from irsmsx110.ger.corp.intel.com ([163.33.3.25])
-	by fmsmga002.fm.intel.com with ESMTP; 04 May 2017 07:04:51 -0700
-Received: from irsmsx103.ger.corp.intel.com ([169.254.3.241]) by
-	irsmsx110.ger.corp.intel.com ([169.254.15.151]) with mapi id
-	14.03.0319.002; Thu, 4 May 2017 15:04:40 +0100
-From: "John, Maxin" <maxin.john@intel.com>
-To: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] State of Java on OE
-Thread-Index: AQHSuu5PobBJDeGiT0SQaMQUHokRj6HjIzkAgAEkSNA=
-Date: Thu, 4 May 2017 14:04:39 +0000
-Message-ID: <61C0517EAD808B429A1DE2DD9164D40030F8FE34@IRSMSX103.ger.corp.intel.com>
-References: <CAA0Zw-x0XYPf4WS+KHj_90xkCuNaNZYysmaBZNryEq8genRUCA@mail.gmail.com>
-	<4199013.DMSEEGMUmM@peggleto-mobl.ger.corp.intel.com>
-In-Reply-To: <4199013.DMSEEGMUmM@peggleto-mobl.ger.corp.intel.com>
-Accept-Language: fi-FI, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 10.0.102.7
-dlp-reaction: no-action
-x-originating-ip: [163.33.239.180]
-MIME-Version: 1.0
-Cc: Steven Osborn <osborn.steven@gmail.com>
-Subject: Re: State of Java on OE
+	Thu,  4 May 2017 16:03:06 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id g12so1898327wrg.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 May 2017 09:03:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=gChE9wnw8I8k4Wlc4pEXTRnRoctg6p+HOfPuMlx92/8=;
+	b=TIFOC3UcQpZbdjCqknuNJPHR90bKKRoj8pwbp7yKTDmkBFjpWJU8/MWuDCFANQHkph
+	trs70XcwIp0T4kUjVHA3ZS9KReESJVSRlkI3zltXO1e7/dqBVcKr1RlwoMOmR9JJ557R
+	+mblrL4pc3v6PrpPOTZMzz285fE6a3sIJQbKd/Hp+Of+0vFE1c1dAHyCVOqFotLv71rM
+	icHOH3MMXuWvprN5IJzdU4/5AWleAuhwc3w5Qr0h0UaadBsye+dgowuy3T2dl9rAduMp
+	gEXa0heLTikUeVYD3I0uiK2EtjIWBN5J14AvoNdXtmwLz5btVGFv60qSKkHSzHfRcLet
+	xKxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=gChE9wnw8I8k4Wlc4pEXTRnRoctg6p+HOfPuMlx92/8=;
+	b=DUwEkSi8HDOyqmtU+vwex4DHXWNVe3MTLbESNTjzGP7z3rC0QnrcNWIXDOv87ksSd5
+	kaQD46nfF621bbC6UcK7idP6xWVLIHAiUoZLF4Q92JwPs4GNjLSRRZBvZRwy8YSj6qOl
+	y9/+RxKUVsnRixL2+NwAv2gHORAwdFvm2Fj6yT+wZz/KCsXfsbU9k1GsP6lWWD7wS5s8
+	SLCOmh6ydT1K/WSzVyCGccs3FV6arzn9hYRB1NI8sR6f2o9dRZTw2TPiZe5/MZ2GAutO
+	64DpglLQvlhurFUkAWsaMX9P6FJrakZFbQL4fJKQm5RTZg1d5p/FCaYSP+0wxdpwwQFS
+	hV2g==
+X-Gm-Message-State: AN3rC/6Q0e9wgTvwDQsP3ivF6KDB1kU6LcBTl53gzMOsCOTjd9XOTRqS
+	S/F/lmE2FwaOO0Uh/lA=
+X-Received: by 10.223.139.150 with SMTP id o22mr27608846wra.118.1493913787235; 
+	Thu, 04 May 2017 09:03:07 -0700 (PDT)
+Received: from localhost.localdomain ([81.145.202.106])
+	by smtp.gmail.com with ESMTPSA id
+	n49sm4406450wrn.30.2017.05.04.09.03.06
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 May 2017 09:03:06 -0700 (PDT)
+From: "Felipe F. Tonello" <eu@felipetonello.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 May 2017 17:02:44 +0100
+Message-Id: <20170504160244.30690-1-eu@felipetonello.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [PATCH] juce: Updated JUCE to 5.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +55,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 May 2017 14:04:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 04 May 2017 16:03:07 -0000
 
-Hi Paul,
+JUCE 5 doesn't require juce_events to have x11 dependency anymore. Also
+there were many improvements on Projucer.
 
-Updated the morty branch today. Sorry for this mess-up.
-=09
-Thanks and Regards,
-Maxin
+Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+---
+ meta-multimedia/classes/juce.bbclass                 |  3 +--
+ meta-multimedia/recipes-multimedia/juce/projucer.inc | 12 ++++++------
+ 2 files changed, 7 insertions(+), 8 deletions(-)
 
------Original Message-----
-From: Paul Eggleton [mailto:paul.eggleton@linux.intel.com]=20
-Sent: Thursday, May 4, 2017 12:34 AM
-To: openembedded-devel@lists.openembedded.org
-Cc: Steven Osborn <osborn.steven@gmail.com>; John, Maxin <maxin.john@intel.=
-com>
-Subject: Re: [oe] State of Java on OE
+diff --git a/meta-multimedia/classes/juce.bbclass b/meta-multimedia/classes/juce.bbclass
+index 715282fd15c1..3927235ef13f 100644
+--- a/meta-multimedia/classes/juce.bbclass
++++ b/meta-multimedia/classes/juce.bbclass
+@@ -1,8 +1,8 @@
+ inherit pkgconfig
+ 
++# List of JUCE modules that requires external dependencies
+ JUCE_MODULES ??= " \
+   juce_core \
+-  juce_events \
+   ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'juce_audio_devices', '', d)} \
+   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'juce_graphics juce_gui_basics', '', d)} \
+   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'juce_opengl', '', d)} \
+@@ -11,7 +11,6 @@ JUCE_X11_DEPS = "libx11 libxext libxinerama libxrandr libxcursor"
+ 
+ PACKAGECONFIG_prepend= "${JUCE_MODULES} "
+ PACKAGECONFIG[juce_core] = ",,curl,"
+-PACKAGECONFIG[juce_events] = ",,libx11,"
+ PACKAGECONFIG[juce_audio_devices] = ",,alsa-lib,"
+ PACKAGECONFIG[juce_graphics] = ",,${JUCE_X11_DEPS} freetype,"
+ PACKAGECONFIG[juce_gui_basics] = ",,${JUCE_X11_DEPS},"
+diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+index 6f696e26f928..41297f868865 100644
+--- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
++++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
+@@ -3,19 +3,19 @@ DESCRIPTION = "Projucer is used to build and generate support files and build in
+ JUCE supported platforms, including Linux and Embedded Linux."
+ SECTION = "utils"
+ HOMEPAGE = "http://juce.com/"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://README.txt;md5=9ab765ccda8890efc753f287911a1958"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://README.txt;md5=65c50b4ff3522b99436da100536ccd1c"
+ 
+ inherit pkgconfig
+ 
+ DEPENDS = "libx11 libxext libxinerama libxrandr libxcursor freetype alsa-lib curl"
+ 
+-SRCREV = "a8a7fa28e2e9cb19db6a27fcccb567a8ccfe6109"
+-BRANCH = "develop"
+-SRC_URI = "git://github.com/julianstorer/JUCE.git;protocol=https;branch=${BRANCH}"
++SRCREV = "4f41f28b47d01b939559123d145b4e5860528bb7"
++BRANCH = "master"
++SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH}"
+ 
+ S = "${WORKDIR}/git"
+-PV = "4.2.3+git${SRCPV}"
++PV = "5.0.1"
+ 
+ JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"
+ JUCE_PROJUCER_MAKEFILE_PATH = "${JUCE_PROJUCER_BUILD_PATH}/LinuxMakefile"
+-- 
+2.12.2
 
-On Saturday, 22 April 2017 10:25:55 AM NZST Steven Osborn wrote:
-> Is anyone using Java on OE devices right now?
->=20
-> meta-java - no release branches.  Seems to only be focused on master.
-> I've had trouble even finding a revision that will compile on Morty.
-
-So it looks like there is a morty branch now, but it includes a commit that=
- only works with master due to inheriting relative_symlinks (as also noted =
-by Koen).=20
-
-Maxin (or someone else with push access), could you please fix the morty br=
-anch?
-
-Thanks,
-Paul
-
---=20
-
-Paul Eggleton
-Intel Open Source Technology Centre
 
