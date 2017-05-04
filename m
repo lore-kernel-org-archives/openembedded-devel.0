@@ -1,46 +1,47 @@
-Return-Path: <eu@felipetonello.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 81B5077C9C
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id A20567199F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 May 2017 16:28:28 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id u65so4446505wmu.3
+	Thu,  4 May 2017 22:50:54 +0000 (UTC)
+Received: by mail-pg0-f50.google.com with SMTP id q4so7884946pga.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 May 2017 09:28:29 -0700 (PDT)
+	Thu, 04 May 2017 15:50:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=felipetonello-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id;
-	bh=AMju/IK5S69htCVGjUA8DZ5Cd0bv3Ph5oWyxkRjz8iE=;
-	b=Wav6mEtTIy/+A46XguDfam35zH7X1TIRbcwecTs0YnxJNfaUq8SEYw/H36K0BSJVUN
-	BHBc65a0fnwuaIYVdL/bl3CMcVt5JahhB/hGzAzESJNsRIjn4NqHnxs9JJ1lY7wnNCgJ
-	AmC0A2jhKbihgXHcxWYKRxM7DeuEu2UvvkJiMmQ6Nl19XIXizip0RXagRPNm7mIEzdeu
-	EiVjIrJm2BRyowUgKvfYphLGRqied2mT9/F87l/4PvYdSHHs41qD9RwO2O8DwMzEE2VT
-	hpXO876izuWYlskE7HS+s36PIn/5jm5UfRZGLnemx0BO78Gvj/gVcHmlVmr2pKTr+UzU
-	TazQ==
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=joGKH4trDn2fWHn0D8+u/zJ/H/rsJOIXj+auMxz/GF4=;
+	b=vfnAPGhsVe7M2QHGFnNnN6J36yUw0sXYy+T2R2K08MdC3IZ4hoaYMGbCotEshG1Jt/
+	E4vRfwOY29roZSqHvUvl+JgFInChJeQXQhuaawVsLaGw84y6n0OIP62WF1e3VoWcOt6R
+	5dggX4o6/LZSU05EQ4856mXR603jtpjye+xYpM8ZN7H9zjWl7vi3n8bmZ3R1M4WvsF/J
+	q3wk9SJ1/DQBxyukT8eMMCK4TVuhCl0S+Xe5Js/XUDalLxmtC52vhAvPvz/A4ELFqOi7
+	8QAZw97fpJ/k9+O9InzseW9AHjdIRwXEmKgigMM/Bt9OJGA522rCcFUbaHm27iq7ULrU
+	twhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=AMju/IK5S69htCVGjUA8DZ5Cd0bv3Ph5oWyxkRjz8iE=;
-	b=YX7oYrwKD+E1A/bx+ohIzJCqcRMgGSSnZgsdzwqgVXxN/AjrjqrNwLOcerdmuUm3AE
-	99ziu1MFrU6xAws4HDmYo/ltpx7wz+m/oJ9Hv+/yVfO6byiUj0J0y/H9a5MD37Xl5G3/
-	GMEOPpsDbwi++iR7xP+LFcM4T5TkWoesHNxutpOW6/HjWKtFR2+9byqM0FsmTpkXXxko
-	LVhiS+U5kekiUtU8DfGQR7RxoI9vN2O1FLSgcdVeBAJyKPUrQqnnJ//sLoqb2UfsSobN
-	KQ1ddTQttaAbkDdyEwTrkhVDOKU6VzI2Uu/c9alQSMjY3gxott3yObGfYYW0Qx1oNfbH
-	JaMw==
-X-Gm-Message-State: AN3rC/5acA7z/aUMz8sRzFy/1xILhZmXf3n64Lgwjxw59p9g0Tjs6tJs
-	NiMPcR7bMhbrykleLLQ=
-X-Received: by 10.28.94.194 with SMTP id s185mr2444982wmb.103.1493915308945;
-	Thu, 04 May 2017 09:28:28 -0700 (PDT)
-Received: from localhost.localdomain ([81.145.202.106])
-	by smtp.gmail.com with ESMTPSA id f64sm1349742wmg.2.2017.05.04.09.28.28
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=joGKH4trDn2fWHn0D8+u/zJ/H/rsJOIXj+auMxz/GF4=;
+	b=V/gbLZ9f9jRO/s/m00a5rqKe2GWku2EzkxDQsfUUVlMv10fNHhDgP+A+6dxsCPb8BI
+	KJ9j4E0+lUswNYFuxt5PMc4kws8/f2gLxOEchGsQ5AUYQbNjEX09M7QWgv5UUjv6vf3d
+	YL2Bk8lw8NAUeXFPPvlLxkHbSl2Pfdp+mY/2neXwlqU1TUsKeZSkaVnKNJd43aSqeWCu
+	kYvnLyEOiEsiuR3ENDZfNuiZbou/R3LmBihndR2/38rRU4zSgfabSrLdJBzyffbP+eoW
+	7ikQmE2420vRNO6cOb4TLICAcFjr2bDsWHa5yfe1v/oGjx7VgkR8juo+RRMuZg4Eeyq8
+	Fqfg==
+X-Gm-Message-State: AN3rC/6DjZCDuSDbhiWe25EBy8ibhuvgqI9i+FZqXi0h498lQOZrx2pS
+	h2QyxwY3iEPUYhIK
+X-Received: by 10.84.248.8 with SMTP id p8mr61107041pll.32.1493938255958;
+	Thu, 04 May 2017 15:50:55 -0700 (PDT)
+Received: from tyrael.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	u15sm5550398pgc.66.2017.05.04.15.50.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 04 May 2017 09:28:28 -0700 (PDT)
-From: "Felipe F. Tonello" <eu@felipetonello.com>
+	Thu, 04 May 2017 15:50:54 -0700 (PDT)
+From: Moritz Fischer <moritz.fischer@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 May 2017 17:28:07 +0100
-Message-Id: <20170504162807.8852-1-eu@felipetonello.com>
-X-Mailer: git-send-email 2.12.2
-Subject: [PATCH v2] juce: Updated JUCE to 5.0.1
+Date: Thu,  4 May 2017 15:50:37 -0700
+Message-Id: <1493938237-12242-1-git-send-email-moritz.fischer@ettus.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] openocd: Add recipe for openocd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,70 +54,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 May 2017 16:28:28 -0000
+X-List-Received-Date: Thu, 04 May 2017 22:50:56 -0000
 
-JUCE 5 doesn't require juce_events to have x11 dependency anymore. Also
-there were many improvements on Projucer.
+Adds a recipe for openocd. Based on recipe found in meta-zephyr.
 
-Signed-off-by: Felipe F. Tonello <eu@felipetonello.com>
+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- meta-multimedia/classes/juce.bbclass                 |  3 +--
- meta-multimedia/recipes-multimedia/juce/projucer.inc | 12 ++++++------
- 2 files changed, 7 insertions(+), 8 deletions(-)
+ meta-oe/recipes-devtools/openocd/openocd_git.bb | 44 +++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/openocd/openocd_git.bb
 
-diff --git a/meta-multimedia/classes/juce.bbclass b/meta-multimedia/classes/juce.bbclass
-index 715282fd15c1..3927235ef13f 100644
---- a/meta-multimedia/classes/juce.bbclass
-+++ b/meta-multimedia/classes/juce.bbclass
-@@ -1,8 +1,8 @@
- inherit pkgconfig
- 
-+# List of JUCE modules that requires external dependencies
- JUCE_MODULES ??= " \
-   juce_core \
--  juce_events \
-   ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'juce_audio_devices', '', d)} \
-   ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'juce_graphics juce_gui_basics', '', d)} \
-   ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'juce_opengl', '', d)} \
-@@ -11,7 +11,6 @@ JUCE_X11_DEPS = "libx11 libxext libxinerama libxrandr libxcursor"
- 
- PACKAGECONFIG_prepend= "${JUCE_MODULES} "
- PACKAGECONFIG[juce_core] = ",,curl,"
--PACKAGECONFIG[juce_events] = ",,libx11,"
- PACKAGECONFIG[juce_audio_devices] = ",,alsa-lib,"
- PACKAGECONFIG[juce_graphics] = ",,${JUCE_X11_DEPS} freetype,"
- PACKAGECONFIG[juce_gui_basics] = ",,${JUCE_X11_DEPS},"
-diff --git a/meta-multimedia/recipes-multimedia/juce/projucer.inc b/meta-multimedia/recipes-multimedia/juce/projucer.inc
-index 6f696e26f928..63ed9e90e08a 100644
---- a/meta-multimedia/recipes-multimedia/juce/projucer.inc
-+++ b/meta-multimedia/recipes-multimedia/juce/projucer.inc
-@@ -3,19 +3,19 @@ DESCRIPTION = "Projucer is used to build and generate support files and build in
- JUCE supported platforms, including Linux and Embedded Linux."
- SECTION = "utils"
- HOMEPAGE = "http://juce.com/"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://README.txt;md5=9ab765ccda8890efc753f287911a1958"
-+LICENSE = "GPLv3"
-+LIC_FILES_CHKSUM = "file://README.md;md5=65c50b4ff3522b99436da100536ccd1c"
- 
- inherit pkgconfig
- 
- DEPENDS = "libx11 libxext libxinerama libxrandr libxcursor freetype alsa-lib curl"
- 
--SRCREV = "a8a7fa28e2e9cb19db6a27fcccb567a8ccfe6109"
--BRANCH = "develop"
--SRC_URI = "git://github.com/julianstorer/JUCE.git;protocol=https;branch=${BRANCH}"
-+SRCREV = "4f41f28b47d01b939559123d145b4e5860528bb7"
-+BRANCH = "master"
-+SRC_URI = "git://github.com/WeAreROLI/JUCE.git;protocol=https;branch=${BRANCH}"
- 
- S = "${WORKDIR}/git"
--PV = "4.2.3+git${SRCPV}"
-+PV = "5.0.1"
- 
- JUCE_PROJUCER_BUILD_PATH = "${B}/extras/Projucer/Builds"
- JUCE_PROJUCER_MAKEFILE_PATH = "${JUCE_PROJUCER_BUILD_PATH}/LinuxMakefile"
+diff --git a/meta-oe/recipes-devtools/openocd/openocd_git.bb b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+new file mode 100644
+index 0000000..783a6c7
+--- /dev/null
++++ b/meta-oe/recipes-devtools/openocd/openocd_git.bb
+@@ -0,0 +1,44 @@
++SUMMARY = "Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "libusb-compat libftdi"
++RDEPENDS_${PN} = "libusb1"
++
++SRC_URI = "git://repo.or.cz/openocd.git \
++	"
++SRCREV = "cb317eabf2d162365467aeb89b564828e5e6d6f3"
++
++PV = "0.10+gitr${SRCPV}"
++S = "${WORKDIR}/git"
++
++inherit pkgconfig autotools-brokensep gettext
++
++BBCLASSEXTEND += "nativesdk"
++
++EXTRA_OECONF = "--enable-ftdi --disable-doxygen-html "
++
++do_configure() {
++    ./bootstrap
++    oe_runconf ${EXTRA_OECONF}
++}
++
++do_install() {
++    oe_runmake DESTDIR=${D} install
++    if [ -e "${D}${infodir}" ]; then
++      rm -Rf ${D}${infodir}
++    fi
++    if [ -e "${D}${mandir}" ]; then
++      rm -Rf ${D}${mandir}
++    fi
++    if [ -e "${D}${bindir}/.debug" ]; then
++      rm -Rf ${D}${bindir}/.debug
++    fi
++}
++
++FILES_${PN} = " \
++  ${datadir}/openocd/* \
++  ${bindir}/openocd \
++  "
++
++PACKAGECONFIG[sysfsgpio] = "--enable-sysfsgpio,--disable-sysfsgpio"
++PACKAGECONFIG ??= "sysfsgpio"
 -- 
-2.12.2
+2.7.4
 
 
