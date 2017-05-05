@@ -1,31 +1,21 @@
-Return-Path: <jobol@nonadev.net>
-Received: from erza.lautre.net (erza.lautre.net [80.67.160.89])
-	by mail.openembedded.org (Postfix) with ESMTP id 9937B77D19
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 01B7F77DCB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 May 2017 08:26:21 +0000 (UTC)
-Received: from d-jobol.iot.bzh (por56-1-78-229-206-229.fbx.proxad.net
-	[78.229.206.229])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by erza.lautre.net (Postfix) with ESMTPSA id 3DE87FBBBE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 May 2017 10:26:06 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nonadev.net;
-	s=alternc; t=1493972767;
-	bh=rHcjxLqq+RYzG3yZVgaGyGi5E7Zp75T+4PaV1sh6sBE=;
-	h=Date:From:To:Subject:In-Reply-To:References;
-	b=uTcbRI1TyP8Ovkp8mB203nQLByZqgvyfZmxK0YhwnwVlyZKdWdUlTcpMnxt5lzoTZ
-	Gg9bC7J00VY3k7DX61XvPQm48ZMDTjd7jq6WPtlfMr7C8RS/8XapPZsQvSvq3Ydn3F
-	6FtAoCWY072HeLEex1FQR4tyhsHAYg4DrhRFVbyI=
-Date: Fri, 5 May 2017 10:26:20 +0200
-From: =?UTF-8?B?Sm9zw6k=?= Bollo <jobol@nonadev.net>
+	Fri,  5 May 2017 14:09:14 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	05 May 2017 07:09:15 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.38,292,1491289200"; d="scan'208";a="1165061506"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
+	by fmsmga002.fm.intel.com with ESMTP; 05 May 2017 07:09:13 -0700
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170505102620.2aaafa18@d-jobol.iot.bzh>
-In-Reply-To: <20170505080718.6774-1-jobol@nonadev.net>
-References: <20170505080718.6774-1-jobol@nonadev.net>
-X-Mailer: Claws Mail 3.14.1 (GTK+ 2.24.31; x86_64-redhat-linux-gnu)
-MIME-Version: 1.0
-Subject: Re: [PATCH] libmicrohttpd: Fix a segmentation fault on upgrade error
+Date: Fri,  5 May 2017 17:09:07 +0300
+Message-Id: <20170505140912.8205-1-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH 1/6] lzip: remove recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,115 +28,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2017 08:26:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 05 May 2017 14:09:15 -0000
 
-On Fri,  5 May 2017 10:07:18 +0200
+It has been moved to oe-core.
 
-A backport to pyro is a very good idea because this fixes a
-vulnerability.
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+---
+ meta-oe/recipes-support/lzip/lzip_1.16.bb | 41 -------------------------------
+ 1 file changed, 41 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/lzip/lzip_1.16.bb
 
-I don't know the procedure, maybe this simple mail is enough ?
-
-Best regards
-Jos=C3=A9 Bollo
-
-jobol@nonadev.net wrote:
-
-> When a connection upgrade is requested and when the
-> request sent an error reply, it happened most often
-> that a segmentation fault occured.
->=20
-> The patch applied here is a backport from the
-> upstream (see https://gnunet.org/git/libmicrohttpd.git/
-> commit b4216c60fdb5b48f6cfec416301fc63a1167e6cd).
->=20
-> Change-Id: I6847550ba2c4fc24d5caf8912ac6d5ac89ae01fb
-> Signed-off-by: Jos=C3=A9 Bollo <jose.bollo@iot.bzh>
-> ---
->  .../Check-response-existence-on-upgrade.patch      | 49
-> ++++++++++++++++++++++ .../libmicrohttpd/libmicrohttpd_0.9.53.bb
-> |  3 ++ 2 files changed, 52 insertions(+)
->  create mode 100644
-> meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-existe=
-nce-on-upgrade.patch
->=20
-> diff --git
-> a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-exis=
-tence-on-upgrade.patch
-> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-exis=
-tence-on-upgrade.patch
-> new file mode 100644 index 0000000..a02bbd4 --- /dev/null
-> +++
-> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-exis=
-tence-on-upgrade.patch
-> @@ -0,0 +1,49 @@ +From: jose.bollo@iot.bzh
-> +Date: Thu, 4 May 2017 21:47:38 +0200
-> +Subject: [PATCH] Check response existence on upgrade
-> +MIME-Version: 1.0
-> +Content-Type: text/plain; charset=3DUTF-8
-> +Content-Transfer-Encoding: 8bit
-> +
-> +When a connection upgrade is requested and when the
-> +request sent an error reply, the response is most of
-> +the time already sent when the test on
-> +connection->response->upgrade_handler is made, leading
-> +to dereferencing NULL.
-> +
-> +Two possibilities exist:
-> +
-> +  NULL =3D=3D connection->response || NULL =3D=3D
-> connection->response->upgrade_handler +
-> +or
-> +
-> +  NULL !=3D connection->response && NULL =3D=3D
-> connection->response->upgrade_handler +
-> +The first is prefered because it is probably safer to close the
-> connection +in that case.
-> +
-> +Upstream-Status: Accepted
-> [https://gnunet.org/git/libmicrohttpd.git/commit/?id=3Db4216c60fdb5b48f6c=
-fec416301fc63a1167e6cd]
-> + +Change-Id: Ie6e7fc165f7fe3635ade0952bb34a0b937d38716
-> +Signed-off-by: Jos=C3=A9 Bollo <jobol@nonadev.net>
-> +Signed-off-by: Jos=C3=A9 Bollo <jose.bollo@iot.bzh>
-> +---
-> + src/microhttpd/connection.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/src/microhttpd/connection.c
-> b/src/microhttpd/connection.c +index a495524..d39c110 100644
-> +--- a/src/microhttpd/connection.c
-> ++++ b/src/microhttpd/connection.c
-> +@@ -882,7 +882,7 @@ keepalive_possible (struct MHD_Connection
-> *connection)
-> + #ifdef UPGRADE_SUPPORT
-> +     if ( (MHD_str_equal_caseless_ (end,
-> +                                    "upgrade")) &&
-> +-         (NULL =3D=3D connection->response->upgrade_handler) )
-> ++         (NULL =3D=3D connection->response || NULL =3D=3D
-> connection->response->upgrade_handler) )
-> +       return MHD_NO;
-> + #endif /* UPGRADE_SUPPORT */
-> +=20
-> +--=20
-> +2.9.3
-> +
-> diff --git
-> a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb
-> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb index
-> a7f032a..45f2460 100644 ---
-> a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb +++
-> b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb @@
-> -9,6 +9,9 @@ SRC_URI =3D
-> "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
-> SRC_URI[md5sum] =3D "5a425e993a0f5295aecb5d6607a1c242"
-> SRC_URI[sha256sum] =3D
-> "9b15ec2d381f44936323adfd4f989fa35add517cccbbfa581896b02a393c2cc4"
-> +FILESEXTRAPATHS_append :=3D ":${THISDIR}/${PN}" +SRC_URI +=3D "
-> file://Check-response-existence-on-upgrade.patch" + inherit autotools
-> lib_package pkgconfig gettext EXTRA_OECONF +=3D "--disable-static
-> --with-gnutls=3D${STAGING_LIBDIR}/../"
+diff --git a/meta-oe/recipes-support/lzip/lzip_1.16.bb b/meta-oe/recipes-support/lzip/lzip_1.16.bb
+deleted file mode 100644
+index a5d99625a..000000000
+--- a/meta-oe/recipes-support/lzip/lzip_1.16.bb
++++ /dev/null
+@@ -1,41 +0,0 @@
+-SUMMARY = "Lossless data compressor based on the LZMA algorithm"
+-HOMEPAGE = "http://lzip.nongnu.org/lzip.html"
+-SECTION = "console/utils"
+-LICENSE = "GPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=76d6e300ffd8fb9d18bd9b136a9bba13 \
+-                    file://decoder.cc;endline=16;md5=0809128ac32163252846e09a70c8b80b"
+-
+-SRC_URI = "${SAVANNAH_GNU_MIRROR}/lzip/lzip-${PV}.tar.gz"
+-
+-SRC_URI[md5sum] = "716a9876dc595ec52d4f3bda81e42471"
+-SRC_URI[sha256sum] = "128cc25baf92c8b69700831e6f984d954016318cc78edca87870d0c033112751"
+-
+-CONFIGUREOPTS = "\
+-    '--srcdir=${S}' \
+-    '--prefix=${prefix}' \
+-    '--exec-prefix=${exec_prefix}' \
+-    '--bindir=${bindir}' \
+-    '--datadir=${datadir}' \
+-    '--infodir=${infodir}' \
+-    '--sysconfdir=${sysconfdir}' \
+-    'CXX=${CXX}' \
+-    'CPPFLAGS=${CPPFLAGS}' \
+-    'CXXFLAGS=${CXXFLAGS}' \
+-    'LDFLAGS=${LDFLAGS}' \
+-"
+-EXTRA_OEMAKE = ""
+-
+-B = "${S}/obj"
+-do_configure () {
+-    ${S}/configure ${CONFIGUREOPTS}
+-}
+-
+-do_install () {
+-    oe_runmake 'DESTDIR=${D}' install
+-    # Info dir listing isn't interesting at this point so remove it if it exists.
+-    if [ -e "${D}${infodir}/dir" ]; then
+-        rm -f ${D}${infodir}/dir
+-    fi
+-}
+-
+-BBCLASSEXTEND = "native nativesdk"
+-- 
+2.11.0
 
 
