@@ -1,47 +1,37 @@
-Return-Path: <jobol@nonadev.net>
-Received: from edna.lautre.net (edna.lautre.net [80.67.160.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 05F7E7017B
+Return-Path: <cshore@thecshore.com>
+X-Greylist: delayed 317 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 05 May 2017 08:11:39 UTC
+Received: from smtp73.ord1c.emailsrvr.com (smtp73.ord1c.emailsrvr.com
+	[108.166.43.73])
+	by mail.openembedded.org (Postfix) with ESMTP id B941A77D4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 May 2017 08:07:36 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by edna.lautre.net (Postfix) with ESMTP id 414D511B24E;
-	Fri,  5 May 2017 10:07:34 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nonadev.net;
-	s=alternc; t=1493971654;
-	bh=Qu5RfKsyoBIiHmGjLHkAn9TU3QeiuGQ3gZlhf3835Ps=;
-	h=From:To:Cc:Subject:Date;
-	b=GHquwvbGpN4lPjcEvDGy2THAI3guAyhgWS/xnjTb1s0L/nxZVzArQrL6GDzQ1ed4j
-	ebG0w4/Y9eqdg/0O7a00Dq4JmEeKx88QPW7XBcu8rTjtK16bk0T19PpcnVaOFxqsr+
-	/Q2LAZQz6pRo9hY5FMKiEKdkmJSZ1J9/4W7CEQ84=
-X-Virus-Scanned: Debian amavisd-new at edna.lautre.net
-X-Spam-Flag: NO
-X-Spam-Score: -3
-X-Spam-Level: 
-X-Spam-Status: No, score=-3 tagged_above=-10 required=5.31
-	tests=[ALL_TRUSTED=-1, BAYES_00=-1.9, DKIM_SIGNED=0.1,
-	DKIM_VALID=-0.1, DKIM_VALID_AU=-0.1] autolearn=ham autolearn_force=no
-Received: from edna.lautre.net ([127.0.0.1])
-	by localhost (edna.admin.lautre.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 27rIccHzjmLC; Fri,  5 May 2017 10:07:32 +0200 (CEST)
-Received: from d-jobol.iot.bzh (por56-1-78-229-206-229.fbx.proxad.net
-	[78.229.206.229])
-	by edna.lautre.net (Postfix) with ESMTPA id 948CB11ABC0;
-	Fri,  5 May 2017 10:07:30 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nonadev.net;
-	s=alternc; t=1493971651;
-	bh=Qu5RfKsyoBIiHmGjLHkAn9TU3QeiuGQ3gZlhf3835Ps=;
-	h=From:To:Cc:Subject:Date;
-	b=JwRJFJGRPki/S4MtCbYCHX8lGxr/d1/fO/Ctr7kjb+fCkzMr1mutQ06ZLqTp2N+Dv
-	MRYShlLAlAF7n8413vVZ5JKFFtN4AtePxWQodcaF4BIG2XWiFRkNoFZJorGkt5hCws
-	QQilKFN8QjLEH598oBZDh1rHZVgwRXVDlNitDr5M=
-From: jobol@nonadev.net
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 May 2017 10:07:18 +0200
-Message-Id: <20170505080718.6774-1-jobol@nonadev.net>
-X-Mailer: git-send-email 2.9.3
+	Fri,  5 May 2017 08:11:39 +0000 (UTC)
+Received: from smtp26.relay.ord1c.emailsrvr.com (localhost [127.0.0.1])
+	by smtp26.relay.ord1c.emailsrvr.com (SMTP Server) with ESMTP id
+	3217AE02FE for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 May 2017 04:06:24 -0400 (EDT)
+X-Auth-ID: cshore@thecshore.com
+Received: by smtp26.relay.ord1c.emailsrvr.com (Authenticated sender:
+	cshore-AT-thecshore.com) with ESMTPSA id 01065E02FC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  5 May 2017 04:06:23 -0400 (EDT)
+X-Sender-Id: cshore@thecshore.com
+Received: from DanielW (135-23-246-254.cpe.pppoe.ca [135.23.246.254])
+	(using TLSv1.2 with cipher DHE-RSA-AES256-GCM-SHA384)
+	by 0.0.0.0:465 (trex/5.7.12); Fri, 05 May 2017 04:06:24 -0400
+From: <cshored@cshore.thecshore.com>
+Sender: "Daniel Dickinson" <cshore@thecshore.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <093b01d2bf21$fdcb22a0$f96167e0$@cshore.thecshore.com>
+	<20170427130608.GA15538@linux-uys3>
+	<006e01d2c147$48974e40$d9c5eac0$@cshore.thecshore.com> 
+In-Reply-To: 
+Date: Fri, 5 May 2017 04:06:23 -0400
+Message-ID: <1a2ac01d2c576$7ca9eed0$75fdcc70$@cshore.thecshore.com>
 MIME-Version: 1.0
-Subject: [PATCH] libmicrohttpd: Fix a segmentation fault on upgrade error
+X-Mailer: Microsoft Outlook 16.0
+Thread-Index: AQJER+JJ3hDcRBpWps2femoNEHH/sQMWyh1cAiXhILoCc6HWLaDE2nzw
+Subject: Some experimental layers and conclusions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,96 +44,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 May 2017 08:07:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 05 May 2017 08:11:40 -0000
+Content-Type: text/plain;
+	charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Language: en-ca
 
-When a connection upgrade is requested and when the
-request sent an error reply, it happened most often
-that a segmentation fault occured.
 
-The patch applied here is a backport from the
-upstream (see https://gnunet.org/git/libmicrohttpd.git/
-commit b4216c60fdb5b48f6cfec416301fc63a1167e6cd).
 
-Change-Id: I6847550ba2c4fc24d5caf8912ac6d5ac89ae01fb
-Signed-off-by: José Bollo <jose.bollo@iot.bzh>
----
- .../Check-response-existence-on-upgrade.patch      | 49 ++++++++++++++++++++++
- .../libmicrohttpd/libmicrohttpd_0.9.53.bb          |  3 ++
- 2 files changed, 52 insertions(+)
- create mode 100644 meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-existence-on-upgrade.patch
+-----Original Message-----
+From: Daniel Dickinson [mailto:cshore@thecshore.com]=20
+Sent: May 5, 2017 3:52 AM
+To: 'openembedded-devel@lists.openembeeded.org' =
+<openembedded-devel@lists.openembeeded.org>
+Subject: [oe] Some experimental layers and conclusions
 
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-existence-on-upgrade.patch b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-existence-on-upgrade.patch
-new file mode 100644
-index 0000000..a02bbd4
---- /dev/null
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd/Check-response-existence-on-upgrade.patch
-@@ -0,0 +1,49 @@
-+From: jose.bollo@iot.bzh
-+Date: Thu, 4 May 2017 21:47:38 +0200
-+Subject: [PATCH] Check response existence on upgrade
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+When a connection upgrade is requested and when the
-+request sent an error reply, the response is most of
-+the time already sent when the test on
-+connection->response->upgrade_handler is made, leading
-+to dereferencing NULL.
-+
-+Two possibilities exist:
-+
-+  NULL == connection->response || NULL == connection->response->upgrade_handler
-+
-+or
-+
-+  NULL != connection->response && NULL == connection->response->upgrade_handler
-+
-+The first is prefered because it is probably safer to close the connection
-+in that case.
-+
-+Upstream-Status: Accepted [https://gnunet.org/git/libmicrohttpd.git/commit/?id=b4216c60fdb5b48f6cfec416301fc63a1167e6cd]
-+
-+Change-Id: Ie6e7fc165f7fe3635ade0952bb34a0b937d38716
-+Signed-off-by: José Bollo <jobol@nonadev.net>
-+Signed-off-by: José Bollo <jose.bollo@iot.bzh>
-+---
-+ src/microhttpd/connection.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/microhttpd/connection.c b/src/microhttpd/connection.c
-+index a495524..d39c110 100644
-+--- a/src/microhttpd/connection.c
-++++ b/src/microhttpd/connection.c
-+@@ -882,7 +882,7 @@ keepalive_possible (struct MHD_Connection *connection)
-+ #ifdef UPGRADE_SUPPORT
-+     if ( (MHD_str_equal_caseless_ (end,
-+                                    "upgrade")) &&
-+-         (NULL == connection->response->upgrade_handler) )
-++         (NULL == connection->response || NULL == connection->response->upgrade_handler) )
-+       return MHD_NO;
-+ #endif /* UPGRADE_SUPPORT */
-+ 
-+-- 
-+2.9.3
-+
-diff --git a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb
-index a7f032a..45f2460 100644
---- a/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb
-+++ b/meta-oe/recipes-support/libmicrohttpd/libmicrohttpd_0.9.53.bb
-@@ -9,6 +9,9 @@ SRC_URI = "http://ftp.gnu.org/gnu/libmicrohttpd/${BPN}-${PV}.tar.gz"
- SRC_URI[md5sum] = "5a425e993a0f5295aecb5d6607a1c242"
- SRC_URI[sha256sum] = "9b15ec2d381f44936323adfd4f989fa35add517cccbbfa581896b02a393c2cc4"
- 
-+FILESEXTRAPATHS_append := ":${THISDIR}/${PN}"
-+SRC_URI += " file://Check-response-existence-on-upgrade.patch"
-+
- inherit autotools lib_package pkgconfig gettext
- 
- EXTRA_OECONF += "--disable-static --with-gnutls=${STAGING_LIBDIR}/../"
--- 
-2.9.3
+Apologies if you get this twice; I got a bounce due to sending with =
+wrong email address.
+
+> -----Original Message-----
+> From: Trevor Woerner [mailto:twoerner@gmail.com]
+> Sent: April 27, 2017 9:06 AM
+> To: cshored@cshore.thecshore.com
+> Cc: Openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Some experimental layers and conclusions
+>
+> Hi Daniel,
+>
+> Very interesting report, thanks for the info!
+>
+> On Thu 2017-04-27 @ 02:46:24 AM, cshored@cshore.thecshore.com wrote:
+> > * OE doesn't have good *router* networking support (i.e. nothing=20
+> > like OpenWrt/LEDE's netifd and friends for a headless system, that=20
+> > one can configure by editing a text file, or by using a WebUI for=20
+> > handling multiple interfaces and VLANs and bridged (or not) wireless =
+
+> > and wired networks, with easy firewall configuration).
+>
+> I wonder Khem's if meta-openwrt could have helped here? It looks like=20
+> it has a recipe for netifd and friends:
+
+I hadn't actually gotten to the point of needing to worry about the =
+networking yet. I was trying to avoid procd because of too many =
+hard-coded openwrtisms (assumptions about how the system should loo) in =
+a niche C project, and systemd for being too large.  From what I saw in =
+the changelog the meta-openwrt is not working yet, and my guess it has =
+to do with a lot assumptions about how the system is set up that are not =
+well documented, and are openwrt-specific (I have some knowledge of how =
+this setup works, so I can make it work, but I'm not sure it's worth =
+it).
+
+The real showstoppers where the lack of kernel (especially wireless =
+support) without getting into e.g. wireless development which I don't =
+have facilities to do legally and hence is off the table.
+
+>
+> 	https://layers.openembedded.org/layerindex/branch/master/layer/
+> meta-openwrt/
+>
+> Out of curiosity, did you try using musl? You don't mention which C=20
+> library you're using. I'd be curious to know if musl can help with=20
+> size reduction.
+
+Yes, using musl, that's part of how I managed to get the size down as =
+far as I did without getting into major patches for debloating.
+
+>
+> Is toybox mature enough to be used in these situations?
+>
+> 	http://layers.openembedded.org/layerindex/recipe/28902/
+>
+
+Last I checked (about three months ago) it is not (I've peeked at it =
+from time to time, but there are some important things like POSIX shell =
+and working dhcpc that would have to come from busybox or a larger =
+traditional sources.
+
+I'm not sure how much size difference toybox will make over busybox, =
+although I am interested for other reasons.
+
+The biggest size challenge compared to openwrt is that openwrt has a lot =
+of custom stuf to cut things down, mostly by excluding not needed =
+functionality, or as with netifd, odhcd, uhttpd, etc, by writing =
+minimalist versions of things that are needed.
+
+Regards,
+
+Daniel
 
 
