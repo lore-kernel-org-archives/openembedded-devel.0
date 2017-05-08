@@ -1,49 +1,43 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 06759779CA
+Return-Path: <prvs=9301115377=michael.davis@essvote.com>
+Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 731F771988
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  7 May 2017 08:19:34 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id j135so2379320vka.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 May 2017 01:19:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=O3MJ3Go+sPmbYhP46rqKBPnuVH7zJhEjgokYt1V/Izk=;
-	b=mdVJgY1A2sG/0Oymvhr2bl/dvGEiE4Jqz23sOVKo941JbrGyNl4VCnk84mM/3o4mUJ
-	7mnojWqYVUla5dgO9FpM9rn6KlFQz1/e64g9eWh4hfiQelZahaiNnEZRty32BCMmDFwU
-	0fhuldFd4dJchm1hvvlWSqSAzKzEj4IH9O8qm4Ud/lP9IaL2CpHibVW0q3wZNl88fuuf
-	Z4Taq/yjr3VjYPaRGEBUUJZu4ogzUaq4KQ8kE9uI9rtxyZ2kwosdHV/fINS8Q8dXkwK6
-	i+sJZ5UChHPRGVNdH6f56yw+NUGDn1bEg3cbxHaTJsDoK/ycW4gX2+m1Q8MPPOsQ01yf
-	R/QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=O3MJ3Go+sPmbYhP46rqKBPnuVH7zJhEjgokYt1V/Izk=;
-	b=nxSMv6PTzmplbp232Un5kR6DYQ8Q2I3K8d80tdY6bOkLHPN+CJmT829rsbA71U2Qmx
-	RQXvixcS/8TJ3tytdawUJdr2qCQ65jdmSKFYcVzY99TxOM0tqi3eFw17l/yoZNKX6SVF
-	BQ4cTEFs4qWLNhlLu8mLWF26fGmLO8oyHWsU9stRFBOFhNuoaBFl4T6XPwKSvU0TSxJ3
-	pGXMQN6dE6eIdjOyEIYFCnyeet1C8SKepLepaMufK0afVYag+hlZV5oqVY4VQuXPJCy8
-	3Sy9Y9VgVvh2oN6eLaqF5k6QStBHynjmPZIZM1dkwn6b32Skyr+le7mhxwDrjLrRff38
-	uUbg==
-X-Gm-Message-State: AN3rC/4jhnnore8ezJGwEs1GvHi4xeqzCAVb4oY6+nGwWY0yiiT3qoI4
-	r0jRLlG/UVI2cz6cYblvoPbw9J5/9g==
-X-Received: by 10.31.185.66 with SMTP id j63mr21509656vkf.19.1494145175562;
-	Sun, 07 May 2017 01:19:35 -0700 (PDT)
+	Mon,  8 May 2017 21:00:06 +0000 (UTC)
+X-AuditID: 0a000213-db7ff7000000261c-1f-5910dc564d19
+Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
+	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
+	0A.2B.09756.65CD0195; Mon,  8 May 2017 16:00:07 -0500 (CDT)
+Received: from ESS-EX01.essvote.corp.local ([::1]) by
+	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
+	Mon, 8 May 2017 16:00:06 -0500
+From: "Davis, Michael" <michael.davis@essvote.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-browser]Chromium and libav
+Thread-Index: AdLIPhFDLfL75GfsQuWH6w7ukrHHKw==
+Date: Mon, 8 May 2017 21:00:06 +0000
+Message-ID: <655290B7709079438B7932553958E60D16D2B56C@ESS-EX01.essvote.corp.local>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.1.20.77]
 MIME-Version: 1.0
-Received: by 10.103.67.199 with HTTP; Sun, 7 May 2017 01:19:35 -0700 (PDT)
-In-Reply-To: <e827e9a5-cbee-5eea-33a5-0e32ef3ac111@gmail.com>
-References: <20170426184422.GG3258@jama>
-	<a05fd59e-cbf1-291c-c2fa-63d3ba5b1d6e@gmail.com>
-	<CA+chaQfO+UJ9rm5u20hi9+68qafdnwhJ9Q0WXMnZC7XfLUbNMA@mail.gmail.com>
-	<e827e9a5-cbee-5eea-33a5-0e32ef3ac111@gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Sun, 7 May 2017 04:19:35 -0400
-Message-ID: <CAHUNapSNATvH3rgy4pLfqaKN-=hQV=ZeWVbn2HJg3VE1NyAKjQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: pyro branch for meta-openembedded, meta-qt5 / maintainer wanted
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBLMWRmVeSWpSXmKPExsWyRiBPQzf8jkCkwdSZfBbzVk1ktrjw/Q67
+	xcXDS5ktulesYHVg8Zix5AWjx7mNKxg9Gvp7GAOYo7htkhJLyoIz0/P07RK4M1bfbWMpaBOt
+	aPzynbWBcYdQFyMnh4SAicS6s3sZuxi5OIQETjBKbN19jQXCmckocXHRUiaQKjYBI4lz1zcx
+	gtgiArES8zbNZAIpYhZoZZS4/WkdWJGwgKbE/babLBBFehLPds1hh7Gfd9wDs1kEVCT+zVkI
+	Vs8rECQxq/8kWJxRQEzi+6k1YHFmAXGJW0/mM0GcJyCxZM95ZghbVOLl43+sELacxLumNiCb
+	A6g+X+L3zUyIkYISJ2c+YZnAKDQLyaRZCFWzkFQtYGRexSiYm5iZY6iXWlxcll+Sqpecn7uJ
+	ERjeXAxMwjsY50yxPcQowMGoxMN7oYs/Uog1say4MvcQozQHi5I477OVzJFCAumJJanZqakF
+	qUXxRaU5qcWHGJk4OA8xSnBwSYkUp+alpBYllpZkxINiIr4YGBVSDYzJMqyHpiddnihQuXy6
+	nbns0qZp04Ivr3wzRXuH57mV8ov7J3MK7eY977Lhyd/6vkc7VVoX3c5UXrrTMTWa2/9O7vrz
+	E755rlCpdlzyZ4tDWoX6wlCuKxxdf/K6yvj+mPqW+UQ+W1cY/9Ln3D4HvY1vv9vNVfdkvx6m
+	ITD//Ba7rNd7XlgbznZXYinOSDTUYi4qTgQAIQ/YmGsCAAA=
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "denis@eukrea.com" <denis@eukrea.com>,
+	"otavio@ossystems.com.br" <otavio@ossystems.com.br>,
+	"eric@eukrea.com" <eric@eukrea.com>
+Subject: [meta-browser]Chromium and libav
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,19 +50,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 07 May 2017 08:19:35 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 08 May 2017 21:00:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 5, 2017 at 6:52 PM, akuster808 <akuster808@gmail.com> wrote:
-> On 5/4/17 7:02 AM, Martin Jansa wrote:
->> As always, thanks armin!
-> You are welcome.
->
-> I believe we all owe you a big thanks for level of care taking you have
-> been providing on the entire meta-openembedded mega layer.
->
-> "Thanks Martin"
+Just wanted to ask a hopefully simple question.  Is there a reason chromium=
+ depends upon libav?
+Chromium seems to build its own ffmpeg internally and doesn't use the exter=
+nal one at all.
 
-+1
-absolutely! :-)
+Thanks,
+Mike
+
 
