@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C26E771A9D
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A9B9C71A91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 07:57:23 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id w69so7078607pfk.1
+	Tue,  9 May 2017 07:57:25 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id 64so6492851pgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 May 2017 00:57:25 -0700 (PDT)
+	Tue, 09 May 2017 00:57:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=M/yzeWRT5MYspjwR/E/EGhd5UGf4DPdtwBccmLYFcbw=;
-	b=gLLfrEtmADCzpC4O577IlisItONAu8Manft1c5Jn8mmZ0a1BO1K+f7CWt87RrKGYng
-	mxvz2qHgTwBji9URVYqgw+kvZWB6p3OFvcnfq7h8Y/yeXoZtR6ZycCf6+Udcx28OuoA+
-	cyVyjZK8KR/BbrYTFHePEQUmxKZDTy8fHGNaWkMj1aeJ7CgM/P5hKmpyHf/fsL9QiZMC
-	0SObP5ldmLtccX1DlH7Q6TNMJyxInSbkHJ0rhprKHp8GjOh0/ECv8pe9ukqeNkuqLX7J
-	SdlEHJiZe+L+vJkH39gXF776zfL+THkHUSXteqsdwcLpGXrcj3mm/HD7FULRO+6/6hBZ
-	54mQ==
+	bh=NP0A8+AzW8w8JfyoSj9EXszU7g+dQWgKR0ec+dh96GI=;
+	b=BYvpKHFmF2SyrJsvQg2+QjPjwDPvC9tRaMWZux3wr83kUDeZDxb4Q7H+lAzZfVEe1A
+	zVOdoWrQoIh/IkKYLnaB1DwTKnLErSTTwm2Uh9H4N+gLpn5s+ybkvVZi9YgWZdq5v2ZO
+	xFjBm+hWEBfU8VIhYouFRERaZlHn2wlQ4jnbu6t2Sn5+T2PHDjNYjG3WFlpdx9OgD38a
+	M96s0wICQvC11ISqcy+AnoNKtVOfKLSqgr7NzgHN/UPk4lz+IMbytQt+jpOqmUBJDt15
+	hy+Q24/A0/8tr3obBlp9ke1oXOcLZz8PBqxGDIPOVp1k15nrr2enY3R6hFQL7BXdOqqJ
+	h6vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=M/yzeWRT5MYspjwR/E/EGhd5UGf4DPdtwBccmLYFcbw=;
-	b=XG1Y67BDOB7ikc3OMY1Ms6N775vUpIc4gnplpqHfcuNCq7+19PgsLqIz2CplnFDh5c
-	q4EIe5lkTdJSMFYbAPfHiJNRc+9ByWnftuRP4lEizKAznfR32S06rAxgQ8/8LXDml3dN
-	ZvG2ruoPg1sBWGfd7ma9ksV7gv46X5WwqcXzqtVoa28p5jSTYkFVxw70luilQf37to1R
-	fjlLDLuEDtV8OTTesWos9FjGrlN8PaIjoIFzYjcf2KLQe4hBvxopPSmoRbtxqoFsWmXA
-	oLH5tGYHROqaEiI95iKGN+lYy27+fi/KiJlwawTXj3zEDRGBRjBGJl6oFjH1IpFZq2do
-	URiw==
-X-Gm-Message-State: AN3rC/7k+zM0GIdoXe+T5zN3rOeE0Q3Y4MtrGbxocKOUc8MadwkIu20a
-	5QHD5mmfWsSy0w==
-X-Received: by 10.84.237.1 with SMTP id s1mr91008582plk.157.1494316645118;
-	Tue, 09 May 2017 00:57:25 -0700 (PDT)
+	bh=NP0A8+AzW8w8JfyoSj9EXszU7g+dQWgKR0ec+dh96GI=;
+	b=mR6E96ELL9DdvAYeCnkhJQCxQJaHMtnQyRLHsIbKC27GAUdoFbjV5HYJGhQvxIcSiY
+	9yGhF9ozBfxfjiRhmVebCIQWX6Wz2anlBg1eo0Kt+WfPSlUfjkw35JwtPUS1FPbbd9iX
+	WKAUBP/CgTGHzVNQl+zWzpADr49pr273nrCsSxk7gjfFXfv9X55YuH/swW1zrhnoi2VM
+	gm62GkUQ5wZHX9aPJgbhNxd7GaRq0Lgz6J/BM3cVAeyyLsDsyRLRUkpFkSxt4/Ajw/eO
+	qMeMHg2TKGTxZ1LhHt5s3s1UVvY8apAuo7swPQ2SEuXkqrKZvKcNuV8iwGvR2Cr4jjYT
+	wR8g==
+X-Gm-Message-State: AN3rC/5+FBdL8mjQNoMyUfMoL1N98Cn0ERB3FcilbLlEZqxm4Felz7iV
+	72EgUp54GgkizWUD
+X-Received: by 10.99.119.141 with SMTP id s135mr23155420pgc.133.1494316646531; 
+	Tue, 09 May 2017 00:57:26 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::c232])
 	by smtp.gmail.com with ESMTPSA id
-	i67sm20250916pfk.87.2017.05.09.00.57.23
+	i67sm20250916pfk.87.2017.05.09.00.57.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 May 2017 00:57:24 -0700 (PDT)
+	Tue, 09 May 2017 00:57:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 May 2017 00:57:06 -0700
-Message-Id: <20170509075711.1575-4-raj.khem@gmail.com>
+Date: Tue,  9 May 2017 00:57:07 -0700
+Message-Id: <20170509075711.1575-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.12.2
 In-Reply-To: <20170509075711.1575-1-raj.khem@gmail.com>
 References: <20170509075711.1575-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 4/9] gssdp: Upgrade to 1.0.2
+Subject: [meta-multimedia][PATCH 5/9] gupnp: Update to 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +55,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 07:57:23 -0000
+X-List-Received-Date: Tue, 09 May 2017 07:57:25 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-multimedia/recipes-connectivity/gupnp/gssdp_0.14.8.bb | 9 ---------
- meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb  | 9 +++++++++
- 2 files changed, 9 insertions(+), 9 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_0.14.8.bb
- create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
+ meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb | 8 --------
+ meta-multimedia/recipes-connectivity/gupnp/gupnp_1.0.2.bb   | 8 ++++++++
+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
+ create mode 100644 meta-multimedia/recipes-connectivity/gupnp/gupnp_1.0.2.bb
 
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.14.8.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.14.8.bb
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
 deleted file mode 100644
-index 9457abc5c..000000000
---- a/meta-multimedia/recipes-connectivity/gupnp/gssdp_0.14.8.bb
+index ed0717593..000000000
+--- a/meta-multimedia/recipes-connectivity/gupnp/gupnp_0.20.14.bb
 +++ /dev/null
-@@ -1,9 +0,0 @@
--require gssdp.inc
+@@ -1,8 +0,0 @@
+-require gupnp.inc
 -
--inherit gtk-doc
+-SRC_URI = "${GNOME_MIRROR}/${BPN}/0.20/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "63346ef90ac5cd925c3a941f51d8bca6"
+-SRC_URI[sha256sum] = "77ffb940ba77c4a6426d09d41004c75d92652dcbde86c84ac1c847dbd9ad59bd"
 -
--PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+3"
--
--SRC_URI = "${GNOME_MIRROR}/${BPN}/0.14/${BPN}-${PV}.tar.xz"
--SRC_URI[md5sum] = "b8658e480d047caf2d92baa4a51b9ae7"
--SRC_URI[sha256sum] = "4c3ffa01435e84dc31c954e669e1ca0749b962f76a333e74f5c2cb0de5803a13"
-diff --git a/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+-                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
+diff --git a/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.0.2.bb b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.0.2.bb
 new file mode 100644
-index 000000000..b60d1ea44
+index 000000000..1bdf7d79b
 --- /dev/null
-+++ b/meta-multimedia/recipes-connectivity/gupnp/gssdp_1.0.2.bb
-@@ -0,0 +1,9 @@
-+require gssdp.inc
-+
-+inherit gtk-doc
-+
-+PACKAGECONFIG[gtk] = "--with-gtk,--without-gtk,gtk+3"
++++ b/meta-multimedia/recipes-connectivity/gupnp/gupnp_1.0.2.bb
+@@ -0,0 +1,8 @@
++require gupnp.inc
 +
 +SRC_URI = "${GNOME_MIRROR}/${BPN}/1.0/${BPN}-${PV}.tar.xz"
-+SRC_URI[md5sum] = "b30c9a406853c6a3a012d151d6e7ad2c"
-+SRC_URI[sha256sum] = "a1e17c09c7e1a185b0bd84fd6ff3794045a3cd729b707c23e422ff66471535dc"
++SRC_URI[md5sum] = "afd96fe73856b38aaf1baf7526e08edd"
++SRC_URI[sha256sum] = "5173fda779111c6b01cd4a5e41b594322be9d04f8c74d3361f0a0c2069c77610"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
++                    file://libgupnp/gupnp.h;beginline=1;endline=20;md5=d78a69d9b6e63ee2dc72e7b674d97520"
 -- 
 2.12.2
 
