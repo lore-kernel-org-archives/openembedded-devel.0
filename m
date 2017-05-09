@@ -1,47 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C854E6FFEF
+Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 81F0F71A75
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 16:41:50 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id v42so1515864wrc.3
+	Tue,  9 May 2017 16:42:08 +0000 (UTC)
+Received: by mail-lf0-f53.google.com with SMTP id h4so5518100lfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 May 2017 09:41:51 -0700 (PDT)
+	Tue, 09 May 2017 09:42:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=P2z6LZZhIsH1kDF1MS67+Cy3lIzLEIUm8bN9su6oZmM=;
-	b=MZ40uLox6hNXOaSRuzw+NYWjZOy6tlU4o1ssbA8Wl+HMv3Qt9L3dtbxA2ovOKsCf/N
-	x5U+u4koFoSA3uk2UR3Z7Xo1alUny7IZ1umKN2x4SRoqJCAJK+yUo2s3S2n4RTz+4qzo
-	GXRK64Hj0qk/yCJpZhUOyXWRms9C/T5THuEEDvgI21dAKErXr71wb/J6yGBvn/ycI50w
-	kEoQ5DsU+A2c4qfXZoLm2XMj/OS8kI8KA1Mm6ndfYtyf9txt8bSrxi4Nzh7pY81sujz3
-	4sFIhlZVBwBOywNEU5+XUXfBSEHpIY7e3NKbzTAW0sTz7vUUtxOgqRrU4xhrecTWRod6
-	+AmA==
+	:cc; bh=uJ5FBClDsdKYODzKHqQ5raJSMNPIm63B6eTF99dIbl0=;
+	b=vVutBdeUGP709vbNplI6BeCRJamgdMLetdh9Adgl2gn4DXnGvPUFAxEIz1xKDMjCc1
+	vJH2DNKwym4cRMrH+oKPF+GQ0dptq6aUDoqvLsvRnQbZGBonajw5tkNmprdrgvkBDbN1
+	tO2nj23plxlBzBY+WMC4KwzAJGiMvl4qnFLVEuBbwvyOqeAYi7Q15WpfZuC/ujkf1wEg
+	SYofMaWFWMzTEoMb0wAywUKL3jJAwvUt11S8fo1VNAx2O0mq0JuihRX2/ov7IHNJ0mXL
+	f5NeNai3J5WPagI/qEHUJTlKRfTq+66ULXjq7rLJr8unVpXha6PoTtNL4HtrN1dzE+XS
+	QHPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=P2z6LZZhIsH1kDF1MS67+Cy3lIzLEIUm8bN9su6oZmM=;
-	b=KBHojEBba7Ss0+/yfSoLUzRq4BmU+NtbuV9MUJUWwZvP6JDomyjEZ0XSsFMLR35syv
-	7fE94aQCwPELkq/e/cBmLKq3i+4zkakLhrZ0b8HO9EVMlgOu1iZizQANjfJcqa7BUVQc
-	t/VOfK4M+EhqxXTGEA7Nthw8JzUqcyooFhewnNM6X+mXXvF+QnuH3vaXPQR5JHlq8FNP
-	HeqxIyDwD0+RzjKRe58cGZKf+DDr+rWi5SDozvLLwvfo2qRcpSiRHMSZXUaGb3j8ISRt
-	y861msUk0jpzMyenZaR5pmjopeut5mi4Law6yNdhovZ5f8PT6rVcgicGMYJNgG+mRmoj
-	ijrQ==
-X-Gm-Message-State: AODbwcBUV3W750CkrERimu53HO8C71yCvSWm4R7J9JXSsSryEX2hhDry
-	mjo+LWtAf6RGhq5hYVzDUPNRvGq/1A==
-X-Received: by 10.80.195.17 with SMTP id a17mr808498edb.9.1494348110940; Tue,
-	09 May 2017 09:41:50 -0700 (PDT)
+	bh=uJ5FBClDsdKYODzKHqQ5raJSMNPIm63B6eTF99dIbl0=;
+	b=T8SPW8OQ+uvrEVug24TrFJdnnwZTsJuu6D76EBoyMz7WhiUxTD9CiEwxR0zl1K6rq/
+	Q1WxcOYFKvF72R3rYJI1J41WMTADUDWu3nJZ81cyEZFPHMHYUz55mrN016cNG0Asz9av
+	r2OUMwGKXLGBCnLJHNeLK+Px4k6icLOUaqMmi9iBSigg+W7ibF3ycVVnWY0Bm/45sq+9
+	s5WqOXxIzPdWvALRbnaiZFpX045YGTG+2Jy3c878cbSVIsC/9VUj1AYh9KPNJkBZPR7w
+	k44XMBeb0TjfFJu/zgiAODdL5b8J/rUkeomxIRdrmUES3uaTgdd9wrXF0WvdoW3Luodk
+	0WpQ==
+X-Gm-Message-State: AODbwcAwQs+zrn7qoO2mRuAy3m+a/LMnYf1SBi7pjCVFn8d3gVOiR+ve
+	cCssb64IwFDf2P7cIOojqiLoWcm0/A==
+X-Received: by 10.80.149.209 with SMTP id x17mr758941eda.175.1494348129069;
+	Tue, 09 May 2017 09:42:09 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.213.154 with HTTP; Tue, 9 May 2017 09:41:50 -0700 (PDT)
-In-Reply-To: <20170509163755.13614-1-martin.sjobeck@multiq.com>
-References: <20170509163755.13614-1-martin.sjobeck@multiq.com>
+Received: by 10.80.213.154 with HTTP; Tue, 9 May 2017 09:42:08 -0700 (PDT)
+In-Reply-To: <1493820995-9072-1-git-send-email-ntlm-jofr@foss.dk>
+References: <1493820995-9072-1-git-send-email-ntlm-jofr@foss.dk>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 9 May 2017 18:41:50 +0200
-Message-ID: <CA+chaQexioba-1sv_SW3nnfaBKSuY7wtqs+SeDUzps16C=9ZKg@mail.gmail.com>
-To: =?UTF-8?Q?Martin_Sj=C3=B6beck?= <martin.sjobeck@multiq.com>
+Date: Tue, 9 May 2017 18:42:08 +0200
+Message-ID: <CA+chaQeGY1eiDDBkyjOW_bkC+4yh6r9SaxFk2+nCyM=4itzXVw@mail.gmail.com>
+To: Johann Fridriksson <jofr@foss.dk>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][morty][PATCH] Removed blacklist for wvstream.
+Subject: Re: [meta-python][PATCH] python-networkmanager: Recipe for python-networkmanager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,78 +54,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 16:41:52 -0000
+X-List-Received-Date: Tue, 09 May 2017 16:42:09 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
-It needs to be merged in master and pyro branches first before it's
-backported to morty and it's missing your Signed-off-by line.
+missing your Signed-off-by line.
 
-On Tue, May 9, 2017 at 6:37 PM, Martin Sj=C3=B6beck <martin.sjobeck@multiq.=
-com>
-wrote:
+On Wed, May 3, 2017 at 4:16 PM, Johann Fridriksson <jofr@foss.dk> wrote:
 
-> Added patch to make wvstream compile with gcc6.
+> Created a new recipe for python-networkmanager 2.0.1. Depends on
+> python-dbus, python-six and networkmanager.
 > ---
->  meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb               | 1 -
->  .../recipes-connectivity/wvdial/wvstreams/gcc6-compilefix.patch  | 9
-> +++++++++
->  meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb           | 3 +--
->  3 files changed, 10 insertions(+), 3 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/gcc6-
-> compilefix.patch
+>  .../python-networkmanager/python-networkmanager_2.0.1.bb    | 13
+> +++++++++++++
+>  1 file changed, 13 insertions(+)
+>  create mode 100644 meta-python/recipes-connectivity/python-
+> networkmanager/python-networkmanager_2.0.1.bb
 >
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> index 65617fa3b..47fbf0ac8 100644
-> --- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> @@ -29,4 +29,3 @@ do_install() {
->      oe_runmake prefix=3D${D}/usr PPPDIR=3D${D}/etc/ppp/peers install
->  }
->
-> -PNBLACKLIST[wvdial] ?=3D "Depends on broken wvstreams"
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/gcc6-compilefi=
-x.patch
-> b/meta-oe/recipes-connectivity/wvdial/wvstreams/gcc6-compilefix.patch
+> diff --git a/meta-python/recipes-connectivity/python-networkmanager/
+> python-networkmanager_2.0.1.bb b/meta-python/recipes-connectivity/python-
+> networkmanager/python-networkmanager_2.0.1.bb
 > new file mode 100644
-> index 000000000..87dca49c5
+> index 0000000..4e41aa5
 > --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/gcc6-compilefix.patch
-> @@ -0,0 +1,9 @@
-> +--- a/wvrules.mk 2017-01-11 09:53:36.764897285 +0100
-> ++++ b/wvrules.mk 2017-01-11 09:56:24.227454405 +0100
-> +@@ -83,7 +83,7 @@
-> + INCFLAGS=3D$(addprefix -I,$(WVSTREAMS_INC) $(XPATH))
-> + CPPFLAGS+=3D$(INCFLAGS) \
-> +-      -D_BSD_SOURCE -D_GNU_SOURCE $(OSDEFINE) \
-> ++      -D_BSD_SOURCE -D_DEFAULT_SOURCE -D_GNU_SOURCE -std=3Dgnu++98
-> $(OSDEFINE) \
-> +       -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=3D64 \
-> +       -DUNSTABLE
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> index 8d864484a..cc0023a7b 100644
-> --- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> @@ -11,6 +11,7 @@ SRC_URI =3D "http://${BPN}.googlecode.com/
-> files/${BP}.tar.gz \
->             file://05_gcc.diff \
->             file://06_gcc-4.7.diff \
->             file://07_buildflags.diff \
-> +           file://gcc6-compilefix.patch \
->            "
->
->  SRC_URI[md5sum] =3D "2760dac31a43d452a19a3147bfde571c"
-> @@ -47,5 +48,3 @@ FILES_libwvstreams-extras-dbg =3D
-> "${libdir}/.debug/libwvbase.so.* ${libdir}/.debu
->  FILES_${PN}-valgrind =3D "${libdir}/valgrind/wvstreams.supp"
->  RDEPENDS_${PN} +=3D "perl"
->
-> -# http://errors.yoctoproject.org/Errors/Details/68614/
-> -PNBLACKLIST[wvstreams] ?=3D "BROKEN: fails to build with gcc-6"
+> +++ b/meta-python/recipes-connectivity/python-networkmanager/python-
+> networkmanager_2.0.1.bb
+> @@ -0,0 +1,13 @@
+> +SUMMARY = "Easy communication with NetworkManager from Python"
+> +HOMEPAGE = "https://github.com/seveas/python-networkmanager"
+> +LICENSE = "Zlib"
+> +
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=8d8bac174bf8422b151200e6cc78ebe4"
+> +
+> +SRC_URI[md5sum] = "5fc644a65463031295c6b7dd51a0f1bd"
+> +SRC_URI[sha256sum] = "bc36507506ad29bfdac941b0987ebd
+> 1cc9633c9a9291d7378e229e4515a0a517"
+> +
+> +PYPI_PACKAGE = "python-networkmanager"
+> +inherit pypi setuptools
+> +
+> +RDEPENDS_${PN} = "networkmanager python-dbus python-six"
 > --
-> 2.11.0
+> 2.7.4
 >
 > --
 > _______________________________________________
