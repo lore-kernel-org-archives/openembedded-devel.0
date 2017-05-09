@@ -1,43 +1,24 @@
-Return-Path: <prvs=9301115377=michael.davis@essvote.com>
-Received: from mail1.essvote.com (mail1.essvote.com [66.37.226.19])
-	by mail.openembedded.org (Postfix) with ESMTP id 731F771988
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 334CF60069
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 May 2017 21:00:06 +0000 (UTC)
-X-AuditID: 0a000213-db7ff7000000261c-1f-5910dc564d19
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by mail1.essvote.com (Symantec Messaging Gateway) with SMTP id
-	0A.2B.09756.65CD0195; Mon,  8 May 2017 16:00:07 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Mon, 8 May 2017 16:00:06 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-browser]Chromium and libav
-Thread-Index: AdLIPhFDLfL75GfsQuWH6w7ukrHHKw==
-Date: Mon, 8 May 2017 21:00:06 +0000
-Message-ID: <655290B7709079438B7932553958E60D16D2B56C@ESS-EX01.essvote.corp.local>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.20.77]
+	Tue,  9 May 2017 07:43:56 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v497hve4022807
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 9 May 2017 00:43:58 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Tue, 9 May 2017 00:43:57 -0700
+From: Dengke Du <dengke.du@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 9 May 2017 03:43:56 -0400
+Message-ID: <1494315836-230826-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFrrBLMWRmVeSWpSXmKPExsWyRiBPQzf8jkCkwdSZfBbzVk1ktrjw/Q67
-	xcXDS5ktulesYHVg8Zix5AWjx7mNKxg9Gvp7GAOYo7htkhJLyoIz0/P07RK4M1bfbWMpaBOt
-	aPzynbWBcYdQFyMnh4SAicS6s3sZuxi5OIQETjBKbN19jQXCmckocXHRUiaQKjYBI4lz1zcx
-	gtgiArES8zbNZAIpYhZoZZS4/WkdWJGwgKbE/babLBBFehLPds1hh7Gfd9wDs1kEVCT+zVkI
-	Vs8rECQxq/8kWJxRQEzi+6k1YHFmAXGJW0/mM0GcJyCxZM95ZghbVOLl43+sELacxLumNiCb
-	A6g+X+L3zUyIkYISJ2c+YZnAKDQLyaRZCFWzkFQtYGRexSiYm5iZY6iXWlxcll+Sqpecn7uJ
-	ERjeXAxMwjsY50yxPcQowMGoxMN7oYs/Uog1say4MvcQozQHi5I477OVzJFCAumJJanZqakF
-	qUXxRaU5qcWHGJk4OA8xSnBwSYkUp+alpBYllpZkxINiIr4YGBVSDYzJMqyHpiddnihQuXy6
-	nbns0qZp04Ivr3wzRXuH57mV8ov7J3MK7eY977Lhyd/6vkc7VVoX3c5UXrrTMTWa2/9O7vrz
-	E755rlCpdlzyZ4tDWoX6wlCuKxxdf/K6yvj+mPqW+UQ+W1cY/9Ln3D4HvY1vv9vNVfdkvx6m
-	ITD//Ba7rNd7XlgbznZXYinOSDTUYi4qTgQAIQ/YmGsCAAA=
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "denis@eukrea.com" <denis@eukrea.com>,
-	"otavio@ossystems.com.br" <otavio@ossystems.com.br>,
-	"eric@eukrea.com" <eric@eukrea.com>
-Subject: [meta-browser]Chromium and libav
+Subject: [meta-oe][PATCH] phoronix-test-suite: remove it from blacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,17 +31,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 May 2017 21:00:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 09 May 2017 07:43:57 -0000
+Content-Type: text/plain
 
-Just wanted to ask a hopefully simple question.  Is there a reason chromium=
- depends upon libav?
-Chromium seems to build its own ffmpeg internally and doesn't use the exter=
-nal one at all.
+The phoronix-test-suite was in blacklist, because the php-cli can't work,
+the php-cli can work now, so remove it from blacklist.
 
-Thanks,
-Mike
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
+---
+ .../recipes-benchmark/phoronix-test-suite/phoronix-test-suite_6.6.1.bb  | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_6.6.1.bb b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_6.6.1.bb
+index e2df4e8..fd244b4 100644
+--- a/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_6.6.1.bb
++++ b/meta-oe/recipes-benchmark/phoronix-test-suite/phoronix-test-suite_6.6.1.bb
+@@ -34,5 +34,3 @@ FILES_${PN} += " \
+     ${datadir}/mime/packages/openbenchmarking-mime.xml \
+     ${systemd_unitdir}/* \
+ "
+-
+-PNBLACKLIST[phoronix-test-suite] ?= "Runtime depends on blacklisted php-cli - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-- 
+2.8.1
 
 
