@@ -1,49 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 452FE71A91
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E286871B9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 07:57:31 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id a23so28181pfe.0
+	Tue,  9 May 2017 09:23:06 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18639872"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 May 2017 17:23:02 +0800
+Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
+	by cn.fujitsu.com (Postfix) with ESMTP id 7B81147C6770
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 May 2017 00:57:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=/mTl+ug02QmXoA35u9RV6kKd+YvgZXHqvZW20GCz3rI=;
-	b=i7W4yC2lP5nTVP+orAIzkucvW2ScH1v4s4YNnKxsLsyr+cDb1ZWAW0+wnIAF6J4zD5
-	HAhcW/tT1s11khIhqcgGZiQfpOVkMJWz/+XAywUvMM4vaYfz1TKnYl8DH8/36ponAXuQ
-	4BggIyKtj2/RaWH6e9xcP3F5fWTRgzJqYAQkfJO//45pafAS9aEPWhqqrsBb6SzkM4gy
-	7+k+1Io7rMFq0bxaO7tJV4+Gyyv1Wfv4k2uizi7468sCay7H8HwNgKw2xclRYr04HJq4
-	arWkTlSoZh52Xn0Qst9nBfrTIkfbYl1KCpQJnspqY+gPfAGQcbBeizDEaRMzyIKjK+TG
-	Nn6Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=/mTl+ug02QmXoA35u9RV6kKd+YvgZXHqvZW20GCz3rI=;
-	b=qT5Y6elB4tdHnf87wgP0nyBy45fc3C7hPuabvrCZ0hHh7Jo/sDh7KAEeXpYPpFFREr
-	pNQnpMJ1c023QUwOoeiTWXTXYKGmq4xJkbniO11h4J7WaF0mhr/AK+iTf0dXMvjPMx6K
-	EyCx88GIYtUSaM/Xr8oVce3vQVfIgq3+FHUwujatyPzgb7t4HUO06A1Wwbs7Xru7jfb9
-	UDl6t8+d+aBvPE9k+Mv+cWTEyo7VbHBDKNm1TW/CI+spMfIEUahwhxcmeE5yXbbPZUAL
-	ETen5bJzFBVagu+5vxLox4LKsO1dMXuFOi4KclyivVjXqip2uvl//rYSDxcNpOzfAYk8
-	h6ww==
-X-Gm-Message-State: AN3rC/5X5E4/DF6Pvbc9gFYU8OPxZLOXCl2TLeMg5EDp3MwvS0sun7fm
-	LN6AuPBphcfYjA==
-X-Received: by 10.84.224.77 with SMTP id a13mr70348758plt.132.1494316652908;
-	Tue, 09 May 2017 00:57:32 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::c232])
-	by smtp.gmail.com with ESMTPSA id
-	i67sm20250916pfk.87.2017.05.09.00.57.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 09 May 2017 00:57:31 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 May 2017 00:57:11 -0700
-Message-Id: <20170509075711.1575-9-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.12.2
-In-Reply-To: <20170509075711.1575-1-raj.khem@gmail.com>
-References: <20170509075711.1575-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 9/9] kodi: Fix build when x11 is disabled
+	Tue,  9 May 2017 17:23:00 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Tue, 9 May 2017 17:23:00 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 9 May 2017 17:22:51 +0800
+Message-ID: <1494321771-7251-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 7B81147C6770.A4FF1
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] luajit: 2.0.4 -> 2.0.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,89 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 07:57:31 -0000
+X-List-Received-Date: Tue, 09 May 2017 09:23:07 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+1) Upgrade luajit from 2.0.4 to 2.0.5.
+2) License checksum changed,since the copyright years were updated.
+
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- ...ge-order-of-detecting-libegl-and-libgles2.patch | 32 ++++++++++++++++++++++
- .../recipes-mediacenter/kodi/kodi_17.bb            | 10 ++++---
- 2 files changed, 38 insertions(+), 4 deletions(-)
- create mode 100644 meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-change-order-of-detecting-libegl-and-libgles2.patch
+ .../recipes-devtools/luajit/{luajit_2.0.4.bb => luajit_2.0.5.bb}    | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-devtools/luajit/{luajit_2.0.4.bb => luajit_2.0.5.bb} (92%)
 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-change-order-of-detecting-libegl-and-libgles2.patch b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-change-order-of-detecting-libegl-and-libgles2.patch
-new file mode 100644
-index 000000000..12a6c06e8
---- /dev/null
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi-17/0001-change-order-of-detecting-libegl-and-libgles2.patch
-@@ -0,0 +1,32 @@
-+From 21524598110e7a55113205dda4bc1a6d5987111c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 9 May 2017 06:41:33 +0000
-+Subject: [PATCH] change order of detecting libegl and libgles2
-+
-+This actually helps building it on rpi/userland
-+where libEGL depends on few functions from libGLESv2
-+see
-+https://www.raspberrypi.org/forums/viewtopic.php?t=7090
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index b9e4240..1ca0297 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -951,8 +951,8 @@ if test "$use_gles" = "yes"; then
-+       AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)
-+       LIBS="$LIBS -lEGL -lGLESv2 -lbcm_host -lvcos -lvchiq_arm -lmmal -lmmal_core -lmmal_util -lvcsm"
-+     else
-+-      AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
-+       AC_CHECK_LIB([GLESv2],[main],, AC_MSG_ERROR($missing_library))
-++      AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
-+     fi
-+   fi
-+ else
-+-- 
-+1.9.1
-+
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-index 8f75bb48d..23f09af51 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-@@ -77,6 +77,7 @@ SRC_URI = "git://github.com/xbmc/xbmc.git;branch=Krypton \
-            file://0010-RssReader-Fix-compiler-warning-comparing-pointer-to-.patch \
-            file://0011-Let-configure-pass-on-unknown-architectures-setting-.patch \
-            file://0012-Revert-droid-fix-builds-with-AML-disabled.patch \
-+           file://0001-change-order-of-detecting-libegl-and-libgles2.patch \
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+similarity index 92%
+rename from meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
+rename to meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+index cee9cc4..d7477ed 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+@@ -1,13 +1,13 @@
+ SUMMARY = "Just-In-Time Compiler for Lua"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3992f1fbae3b8b061f9056b7fcda8cc6"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
+ HOMEPAGE = "http://luajit.org"
+ 
+ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
  "
+-SRC_URI[md5sum] = "dd9c38307f2223a504cbfb96e477eca0"
+-SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
++SRC_URI[md5sum] = "48353202cbcacab84ee41a5a70ea0a2c"
++SRC_URI[sha256sum] = "874b1f8297c697821f561f9b73b57ffd419ed8f4278c82e05b48806d30c1e979"
  
- SRC_URI_append_libc-musl = " \
-@@ -86,7 +87,9 @@ SRC_URI_append_libc-musl = " \
- SRC_URI[addons.md5sum] = "719614fa764011a18665d08af5c8c92f"
- SRC_URI[addons.sha256sum] = "350da57408c27473eaf40e7f544bc94841bf101dc4346085260c5c4af0adac97"
+ S = "${WORKDIR}/LuaJIT-${PV}"
  
--inherit autotools-brokensep gettext pythonnative
-+inherit autotools-brokensep gettext pythonnative distro_features_check
-+
-+REQUIRED_DISTRO_FEATURES += "opengl"
- 
- S = "${WORKDIR}/git"
- 
-@@ -97,9 +100,8 @@ ACCEL ?= ""
- ACCEL_x86 = "vaapi vdpau"
- ACCEL_x86-64 = "vaapi vdpau"
- 
--PACKAGECONFIG ??= "${ACCEL}"
--PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', '', d)}"
--PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', ' opengl', ' openglesv2', d)}"
-+PACKAGECONFIG ??= "${ACCEL} opengl"
-+PACKAGECONFIG_append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', ' x11', ' openglesv2', d)}"
- 
- PACKAGECONFIG[opengl] = "--enable-gl,--enable-gles,"
- PACKAGECONFIG[openglesv2] = "--enable-gles,--enable-gl,virtual/egl"
 -- 
-2.12.2
+2.7.4
+
+
 
 
