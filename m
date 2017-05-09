@@ -1,24 +1,24 @@
 Return-Path: <Dengke.Du@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ACC5E71A1A
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 06F9671A1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 07:52:44 +0000 (UTC)
+	Tue,  9 May 2017 07:54:34 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v497qhxw024341
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v497sZZa022860
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 May 2017 00:52:43 -0700
+	Tue, 9 May 2017 00:54:36 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 9 May 2017 00:52:42 -0700
+	Tue, 9 May 2017 00:54:34 -0700
 From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 May 2017 03:52:41 -0400
-Message-ID: <1494316361-47734-1-git-send-email-dengke.du@windriver.com>
+Date: Tue, 9 May 2017 03:54:33 -0400
+Message-ID: <1494316473-48451-1-git-send-email-dengke.du@windriver.com>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [PATCH V3] php: fix install error for libphp*.so
+Subject: [meta-oe][PATCH V4] php: fix install error for libphp*.so
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,8 +31,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 07:52:44 -0000
+X-List-Received-Date: Tue, 09 May 2017 07:54:35 -0000
 Content-Type: text/plain
+
+Changed in V4:
+	Add the tag: meta-oe
 
 1. Different version php have different libphp*.so, so we need to install its
    corresponding libphp*.so, for example:
