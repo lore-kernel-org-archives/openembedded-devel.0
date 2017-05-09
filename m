@@ -1,24 +1,46 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 06F9671A1A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1180271A1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 07:54:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v497sZZa022860
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  9 May 2017 07:57:19 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id u26so12840388pfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 9 May 2017 00:54:36 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 9 May 2017 00:54:34 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 May 2017 03:54:33 -0400
-Message-ID: <1494316473-48451-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V4] php: fix install error for libphp*.so
+	Tue, 09 May 2017 00:57:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=g8yKXOhRfmlx4BppVZPClSHdOgv60ZnhynswEWC339U=;
+	b=eg/Y0GB3fhrFJfM/pixPFm/SQvDp5NbSPUEqNvNH3+YSM7/rl3gbPevuarnnIUG8K3
+	+k6FymKaU8lr67FPrqVO4Fanw/6SA84+HwV4lSoFQLuZs474hSoEBRrvcJJrZ1rr/PcI
+	5K9NIF515F/MKIcgRBvFxKmNDZ1aNbbUXYFDYV+vREeLkYPAGCEk3oBu9gou5bo5H8wT
+	a039PYIfigXM1bvSnPGQlKR3U6VMIZshMyKKMGToPwcsOAdR4vnGf4vVk7t5JjChgi3G
+	ARDAeDyI1gYOOsLZOZRL77MVGqUFyLbvFq5zcqNTCpvmZSx47PhFu8YxdU/Hq4/oi0zc
+	R5xw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=g8yKXOhRfmlx4BppVZPClSHdOgv60ZnhynswEWC339U=;
+	b=RoNW/hhfgSHkLXJemUa/5XGXgmefiwFfz4Wyf2o9kL0vVd3vvqhJzW+fVYYQhbKn5Z
+	qiNnWveHtpLejnlMBPHKpuJOGW8D6DmdWIP+CO7IQXrmqZWfMe/bqdhjGVLS5i+ikjd6
+	5iX4BKgSUI3rSUH+h7MWAbehqsBPTCrrEQ34iPP7Ilfh+XW7/E/KvkF3N3aAgRQ9wg07
+	B9IwmsnEpJqiDPaf0upO8LezYHMQdjpGhZbyYhFAJRg69t3QEVprjmJ4MhTqKOSPqbqT
+	RaHiaECxY911smrgUXOAprDKkywqqbrG/Jedk6vMmh1n62+MUVVjQRz8++PCZ5wjCZIi
+	5R4w==
+X-Gm-Message-State: AN3rC/53s6A7VDZDF5A8X6qt4C4VM9M4P5TNrLBg+JMClg4eeU56EF+H
+	PZy5qx8WDyP5DQ==
+X-Received: by 10.84.216.26 with SMTP id m26mr72047007pli.79.1494316640730;
+	Tue, 09 May 2017 00:57:20 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::c232])
+	by smtp.gmail.com with ESMTPSA id
+	i67sm20250916pfk.87.2017.05.09.00.57.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 09 May 2017 00:57:19 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 May 2017 00:57:03 -0700
+Message-Id: <20170509075711.1575-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.12.2
+Subject: [meta-multimedia][PATCH 1/9] dleyna-server: Update to 0.6.0 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,182 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 07:54:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 May 2017 07:57:20 -0000
 
-Changed in V4:
-	Add the tag: meta-oe
+License checksum changed due to copyright year update in 2017
 
-1. Different version php have different libphp*.so, so we need to install its
-   corresponding libphp*.so, for example:
-
-    php-7.1.0  libphp7.so
-    php-5.6.26 libphp5.so
-
-2. Fix php-5.6.26 compiling errors:
-
-    ld: TSRM/.libs/TSRM.o: undefined reference to symbol
-    'pthread_sigmask@@GLIBC_2.2.5'
-    error adding symbols: DSO missing from command line
-
-3. Create a configure script like 70_mod_php5, we name it 70_mod_php7, this
-   file connect the php7 and the apache2, so they work together to let the
-   LAMP works correctly.
-
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../php/php-5.6.26/0001-Add-lpthread-to-link.patch | 38 ++++++++++++++++++++++
- meta-oe/recipes-devtools/php/php.inc               | 18 +++++-----
- meta-oe/recipes-devtools/php/php/70_mod_php7.conf  |  9 +++++
- meta-oe/recipes-devtools/php/php_5.6.26.bb         |  1 +
- meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb  |  4 +--
- 5 files changed, 60 insertions(+), 10 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/php/php-5.6.26/0001-Add-lpthread-to-link.patch
- create mode 100644 meta-oe/recipes-devtools/php/php/70_mod_php7.conf
+ meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/php/php-5.6.26/0001-Add-lpthread-to-link.patch b/meta-oe/recipes-devtools/php/php-5.6.26/0001-Add-lpthread-to-link.patch
-new file mode 100644
-index 0000000..f70e550
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php-5.6.26/0001-Add-lpthread-to-link.patch
-@@ -0,0 +1,38 @@
-+From ed0a954983d50267c2fc0bc13aba929ea0cad971 Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Tue, 2 May 2017 06:34:40 +0000
-+Subject: [PATCH] Add -lpthread to link
-+
-+When building the php-5.6.26, the following errors occured:
-+
-+    ld: TSRM/.libs/TSRM.o: undefined reference to symbol
-+    'pthread_sigmask@@GLIBC_2.2.5'
-+
-+    error adding symbols: DSO missing from command line
-+
-+This is because no pthread to link, so we should add it.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ configure.in | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.in b/configure.in
-+index a467dff1..9afef652 100644
-+--- a/configure.in
-++++ b/configure.in
-+@@ -1058,7 +1058,8 @@ case $php_sapi_module in
-+     ;;
-+ esac
-+ 
-+-EXTRA_LIBS="$EXTRA_LIBS $DLIBS $LIBS"
-++PTHREAD_LIBS="-lpthread"
-++EXTRA_LIBS="$EXTRA_LIBS $DLIBS $LIBS $PTHREAD_LIBS"
-+ 
-+ dnl this has to be here to prevent the openssl crypt() from
-+ dnl overriding the system provided crypt().
-+-- 
-+2.11.0
-+
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index d3ec9de..0e55020 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -9,6 +9,8 @@ DEPENDS = "zlib bzip2 libxml2 virtual/libiconv php-native lemon-native \
-            openssl libmcrypt"
- DEPENDS_class-native = "zlib-native libxml2-native"
+diff --git a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+index ae167650f..a8e5406d0 100644
+--- a/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
++++ b/meta-multimedia/recipes-multimedia/dleyna/dleyna-server_0.6.0.bb
+@@ -6,13 +6,13 @@ HOMEPAGE = "https://01.org/dleyna/"
  
-+PHP_MAJOR_VERSION = "${@d.getVar('PV', True).split('.')[0]}"
-+
- SRC_URI = "http://php.net/distributions/php-${PV}.tar.bz2 \
-            file://acinclude-xml2-config.patch \
-            file://0001-php-don-t-use-broken-wrapper-for-mkdir.patch \
-@@ -24,7 +26,7 @@ SRC_URI_append_class-target = " \
-             file://php-fpm.conf \
-             file://php-fpm-apache.conf \
-             file://configure.patch \
--            file://70_mod_php5.conf \
-+            file://70_mod_php${PHP_MAJOR_VERSION}.conf \
-             file://php-fpm.service \
-           "
- S = "${WORKDIR}/php-${PV}"
-@@ -36,7 +38,7 @@ inherit autotools pkgconfig pythonnative gettext
- SSTATE_SCAN_FILES += "phpize"
- SSTATE_SCAN_FILES += "build-defs.h"
+ LICENSE = "LGPLv2.1+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c \
+-                    file://libdleyna/server/server.c;endline=22;md5=dfa6dc3f914206c2408c0510c234f8c8"
++                    file://libdleyna/server/server.c;endline=22;md5=437455d8aeff69ebd0996a76c67397bb"
  
--PHP_LIBDIR = "${libdir}/php5"
-+PHP_LIBDIR = "${libdir}/php${PHP_MAJOR_VERSION}"
+ DEPENDS = "glib-2.0 gssdp gupnp gupnp-av gupnp-dlna libsoup-2.4 libxml2 dleyna-core"
+ RDEPENDS_${PN} = "dleyna-connector-dbus"
  
- # Common EXTRA_OECONF
- COMMON_EXTRA_OECONF = "--enable-sockets \
-@@ -57,7 +59,7 @@ EXTRA_OECONF = "--enable-mbstring \
-                 --with-iconv=${STAGING_LIBDIR}/.. \
-                 --with-mcrypt=${STAGING_DIR_TARGET}${exec_prefix} \
-                 --with-bz2=${STAGING_DIR_TARGET}${exec_prefix} \
--                --with-config-file-path=${sysconfdir}/php/apache2-php5 \
-+                --with-config-file-path=${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION} \
-                 ${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'ac_cv_c_bigendian_php=no', 'ac_cv_c_bigendian_php=yes', d)} \
-                 ${@bb.utils.contains('PACKAGECONFIG', 'pam', '', 'ac_cv_lib_pam_pam_start=no', d)} \
-                 ${COMMON_EXTRA_OECONF} \
-@@ -175,13 +177,13 @@ do_install_append_class-target() {
-     if ${@bb.utils.contains('PACKAGECONFIG', 'apache2', 'true', 'false', d)}; then
-         install -d ${D}${libdir}/apache2/modules
-         install -d ${D}${sysconfdir}/apache2/modules.d
--        install -d ${D}${sysconfdir}/php/apache2-php5
--        install -m 755  libs/libphp5.so ${D}${libdir}/apache2/modules
--        install -m 644  ${WORKDIR}/70_mod_php5.conf ${D}${sysconfdir}/apache2/modules.d
--        sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php5.conf
-+        install -d ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}
-+        install -m 755  libs/libphp${PHP_MAJOR_VERSION}.so ${D}${libdir}/apache2/modules
-+        install -m 644  ${WORKDIR}/70_mod_php${PHP_MAJOR_VERSION}.conf ${D}${sysconfdir}/apache2/modules.d
-+        sed -i s,lib/,${libdir}/, ${D}${sysconfdir}/apache2/modules.d/70_mod_php${PHP_MAJOR_VERSION}.conf
-         cat ${S}/php.ini-production | \
-             sed -e 's,extension_dir = \"\./\",extension_dir = \"/usr/lib/extensions\",' \
--            > ${D}${sysconfdir}/php/apache2-php5/php.ini
-+            > ${D}${sysconfdir}/php/apache2-php${PHP_MAJOR_VERSION}/php.ini
-         rm -f ${D}${sysconfdir}/apache2/httpd.conf*
-     fi
- }
-diff --git a/meta-oe/recipes-devtools/php/php/70_mod_php7.conf b/meta-oe/recipes-devtools/php/php/70_mod_php7.conf
-new file mode 100644
-index 0000000..d206265
---- /dev/null
-+++ b/meta-oe/recipes-devtools/php/php/70_mod_php7.conf
-@@ -0,0 +1,9 @@
-+LoadModule php7_module lib/apache2/modules/libphp7.so
-+
-+<FilesMatch "\.ph(p[2-7]?|tml)$">
-+	SetHandler application/x-httpd-php
-+</FilesMatch>
-+
-+<FilesMatch "\.phps$">
-+	SetHandler application/x-httpd-php-source
-+</FilesMatch>
-diff --git a/meta-oe/recipes-devtools/php/php_5.6.26.bb b/meta-oe/recipes-devtools/php/php_5.6.26.bb
-index ddc7ce3..dfce949 100644
---- a/meta-oe/recipes-devtools/php/php_5.6.26.bb
-+++ b/meta-oe/recipes-devtools/php/php_5.6.26.bb
-@@ -4,6 +4,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=b602636d46a61c0ac0432bbf5c078fe4"
+ SRC_URI = "git://github.com/01org/${BPN}.git"
+-SRCREV = "38651783914c76bd861f7fe8651b25e3986d7be8"
++SRCREV = "776950d5d96ac9dbf5c5c47bde8ac06f50a3cf46"
+ S = "${WORKDIR}/git"
  
- SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-             file://pthread-check-threads-m4.patch \
-+            file://0001-Add-lpthread-to-link.patch \
-            "
- SRC_URI[md5sum] = "cb424b705cfb715fc04f499f8a8cf52e"
- SRC_URI[sha256sum] = "d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236"
-diff --git a/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb b/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
-index 077bdc8..7741378 100644
---- a/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
-+++ b/meta-webserver/recipes-php/xdebug/xdebug_2.5.1.bb
-@@ -29,5 +29,5 @@ do_install() {
-     oe_runmake install INSTALL_ROOT=${D}
- }
- 
--FILES_${PN} += "${libdir}/php5/extensions/*/*.so"
--FILES_${PN}-dbg += "${libdir}/php5/extensions/*/.debug"
-+FILES_${PN} += "${libdir}/php*/extensions/*/*.so"
-+FILES_${PN}-dbg += "${libdir}/php*/extensions/*/.debug"
+ inherit autotools pkgconfig
 -- 
-2.8.1
+2.12.2
 
 
