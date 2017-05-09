@@ -1,30 +1,29 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id E286871B9E
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id CD6D66FFEF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 09:23:06 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18639872"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 May 2017 17:23:02 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7B81147C6770
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 May 2017 17:23:00 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Tue, 9 May 2017 17:23:00 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 9 May 2017 17:22:51 +0800
-Message-ID: <1494321771-7251-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Tue,  9 May 2017 16:36:30 +0000 (UTC)
+Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
+	by relay1.mentorg.com with esmtp 
+	id 1d887j-0006WD-O2 from Joe_MacDonald@mentor.com ;
+	Tue, 09 May 2017 09:36:31 -0700
+Received: from burninator (147.34.91.1) by SVR-ORW-FEM-06.mgc.mentorg.com
+	(147.34.97.120) with Microsoft SMTP Server id 14.3.224.2;
+	Tue, 9 May 2017 09:36:31 -0700
+Received: by burninator (Postfix, from userid 1000)	id 6AB48580BC5; Tue,  9
+	May 2017 12:36:30 -0400 (EDT)
+Date: Tue, 9 May 2017 12:36:30 -0400
+From: Joe MacDonald <Joe_MacDonald@mentor.com>
+To: <jackie.huang@windriver.com>
+Message-ID: <20170509163629.GA24456@mentor.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 7B81147C6770.A4FF1
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe] [PATCH] luajit: 2.0.4 -> 2.0.5
+In-Reply-To: <7107637a8dd9779404a39e2cc586ff132cbf5309.1493194374.git.jackie.huang@windriver.com>
+X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
+X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
+X-Editor: Vim-704 http://www.vim.org
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH 2/8] freeradius: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,45 +36,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 May 2017 09:23:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 09 May 2017 16:36:31 -0000
+X-Groupsio-MsgNum: 66684
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="lrZ03NoBR/3+SXJZ"
+Content-Disposition: inline
 
-1) Upgrade luajit from 2.0.4 to 2.0.5.
-2) License checksum changed,since the copyright years were updated.
+--lrZ03NoBR/3+SXJZ
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- .../recipes-devtools/luajit/{luajit_2.0.4.bb => luajit_2.0.5.bb}    | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/luajit/{luajit_2.0.4.bb => luajit_2.0.5.bb} (92%)
+Sorry to resurrect a v1 patch but I've lost the v2 and the list seems
+to have eaten my original reply to that one.  Here's my comments from it
+(and the reason why the current patch has been marked rejected in
+patchwork: https://patchwork.openembedded.org/patch/139452/)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-rename to meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-index cee9cc4..d7477ed 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
-@@ -1,13 +1,13 @@
- SUMMARY = "Just-In-Time Compiler for Lua"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3992f1fbae3b8b061f9056b7fcda8cc6"
-+LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=10a96c93403affcc34765f4c2612bc22"
- HOMEPAGE = "http://luajit.org"
- 
- SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
-            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
- "
--SRC_URI[md5sum] = "dd9c38307f2223a504cbfb96e477eca0"
--SRC_URI[sha256sum] = "620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d"
-+SRC_URI[md5sum] = "48353202cbcacab84ee41a5a70ea0a2c"
-+SRC_URI[sha256sum] = "874b1f8297c697821f561f9b73b57ffd419ed8f4278c82e05b48806d30c1e979"
- 
- S = "${WORKDIR}/LuaJIT-${PV}"
- 
--- 
-2.7.4
+[[oe] [meta-networking][PATCH 2/8 v2] freeradius: add new recipe] On 17.04.=
+26 (Wed 16:22) jackie.huang@windriver.com wrote:
 
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> FreeRADIUS is an Internet authentication daemon,
+> which implements the RADIUS protocol, as defined
+> in RFC 2865 (and others).
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../freeradius/files/freeradius                    | 110 ++++++++++
+>  .../freeradius-avoid-searching-host-dirs.patch     | 194 +++++++++++++++=
+++
+>  ...radius-configure.ac-add-option-for-libcap.patch |  70 ++++++
+>  ...dius-configure.ac-allow-cross-compilation.patch |  31 +++
+>  .../files/freeradius-enble-user-in-conf.patch      |  28 +++
+>  ...eeradius-fix-error-for-expansion-of-macro.patch |  61 ++++++
+>  ...ius-fix-issues-related-to-m4-include-path.patch | 236 +++++++++++++++=
+++++++
+>  .../freeradius-fix-quoting-for-BUILT_WITH.patch    |  55 +++++
+>  .../files/freeradius-libtool-detection.patch       |  89 ++++++++
+>  .../freeradius-libtool-do-not-use-jlibtool.patch   | 160 ++++++++++++++
+>  .../freeradius-rlm_python-add-PY_INC_DIR.patch     |  33 +++
+>  .../freeradius/files/radiusd-volatiles.conf        |   2 +
+>  .../freeradius/files/radiusd.service               |  16 ++
+>  .../freeradius/files/volatiles.58_radiusd          |   3 +
+>  .../freeradius/freeradius_3.0.12.bb                | 223 +++++++++++++++=
+++++
 
+This is an old version of freeradius, as evinced by your SRC_URI:
 
+> +SRC_URI =3D "ftp://ftp.freeradius.org/pub/freeradius/old/freeradius-serv=
+er-${PV}.tar.bz2 \
 
+Why not bring the current version (3.0.13) in since it's a new recipe
+and save a later update?
+
+> diff --git a/meta-networking/recipes-connectivity/freeradius/files/freera=
+dius-avoid-searching-host-dirs.patch b/meta-networking/recipes-connectivity=
+/freeradius/files/freeradius-avoid-searching-host-dirs.patch
+> new file mode 100644
+> index 000000000..8ab23d3ef
+> --- /dev/null
+> +++ b/meta-networking/recipes-connectivity/freeradius/files/freeradius-av=
+oid-searching-host-dirs.patch
+> @@ -0,0 +1,194 @@
+> +From dc41591d5ceb18900ec85894f8f7b7bb44bb3bd9 Mon Sep 17 00:00:00 2001
+> +From: Jackie Huang <jackie.huang@windriver.com>
+> +Date: Mon, 4 Jan 2016 01:44:04 -0500
+> +Subject: [PATCH] avoid searching host dirs
+> +
+> +Upstream-Status: Inappropriate [cross-compile specific]
+
+I don't know if that's specifically a reason to be inappropriate for
+upstream.  :-)
+
+Anyway, given that some of the patches were submitted upstream, as you
+noted elsewhere, it may be that the current version won't need them at
+all.
+
+--=20
+-Joe MacDonald.
+:wq
+
+--lrZ03NoBR/3+SXJZ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1
+
+iQEcBAEBAgAGBQJZEfANAAoJEEn8ffcsOfaWcn8IAK0RJDk7UEmk576iRVKilM5i
+y5B3Zk0Rq8wtK+QsJd2uUgG3XC6JPudQzSGPBupH2RQlArlz9guoqukhWxwg/gSW
+GsCjhTVycC9jqidGvnyoqBPJLtz69X7acAuJIqh7BBbFkIclIIwGtMRkYBcmwJId
+IjLR0TxgRVy634g0dXPD1OJCe2vahCga9kKhWYZ7m0qfHG0+U7MOEVg2/jxxXDpJ
+3e+G6yWmMkPtrk4+/bKUWuK0SBFpRaogAmrar/J3HGBLZjFxAea7YwtFVqqMc1VO
+CjeR5zIK7IQggNUuZLS1NOI3NgXEMNoMvhR4M5uTpaFSk8aEvI1w8cXMNau8Tf0=
+=aO4D
+-----END PGP SIGNATURE-----
+
+--lrZ03NoBR/3+SXJZ--
