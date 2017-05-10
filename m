@@ -1,30 +1,30 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2250560557
+Return-Path: <Joe_MacDonald@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id F210B6FFA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 May 2017 01:18:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4A1IVvH003707
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 9 May 2017 18:18:31 -0700 (PDT)
-Received: from ALA-MBC.corp.ad.wrs.com ([fe80::fcbe:9b7:1141:89a1]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0294.000;
-	Tue, 9 May 2017 18:18:31 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>
+	Wed, 10 May 2017 01:32:01 +0000 (UTC)
+Received: from svr-orw-mbx-03.mgc.mentorg.com ([147.34.90.203])
+	by relay1.mentorg.com with esmtp 
+	id 1d8GTy-0007Nx-BT from Joe_MacDonald@mentor.com ;
+	Tue, 09 May 2017 18:32:02 -0700
+Received: from svr-orw-mbx-04.mgc.mentorg.com (147.34.90.204) by
+	svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) with Microsoft SMTP
+	Server (TLS) id 15.0.1210.3; Tue, 9 May 2017 18:31:59 -0700
+Received: from svr-orw-mbx-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4]) by
+	SVR-ORW-MBX-04.mgc.mentorg.com ([fe80::4967:8f7f:4a15:68a4%22]) with
+	mapi id 15.00.1210.000; Tue, 9 May 2017 18:31:59 -0700
+From: "MacDonald, Joe" <Joe_MacDonald@mentor.com>
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
 Thread-Topic: [oe] [meta-networking][PATCH 2/8] freeradius: add new recipe
-Thread-Index: AQHSyOJvL4i9IKCHyESDjO7i0D0XIKHswj1w
-Date: Wed, 10 May 2017 01:18:30 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B766CB2@ALA-MBC.corp.ad.wrs.com>
-References: <7107637a8dd9779404a39e2cc586ff132cbf5309.1493194374.git.jackie.huang@windriver.com>
-	<20170509163629.GA24456@mentor.com>
-In-Reply-To: <20170509163629.GA24456@mentor.com>
-Accept-Language: en-US, zh-CN
+Thread-Index: AQHSyS04Od8ke1iX5UO72f9dvYTbJg==
+Date: Wed, 10 May 2017 01:31:59 +0000
+Message-ID: <03a9bea5-06e8-4af5-a864-178d24d95147@email.android.com>
+Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.94]
+x-ms-exchange-transport-fromentityheader: Hosted
 MIME-Version: 1.0
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-networking][PATCH 2/8] freeradius: add new recipe
@@ -40,101 +40,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 May 2017 01:18:32 -0000
+X-List-Received-Date: Wed, 10 May 2017 01:32:04 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-
-
-> -----Original Message-----
-> From: Joe MacDonald [mailto:Joe_MacDonald@mentor.com]
-> Sent: Wednesday, May 10, 2017 00:37
-> To: Huang, Jie (Jackie)
-> Cc: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-networking][PATCH 2/8] freeradius: add new recipe
->=20
-> Sorry to resurrect a v1 patch but I've lost the v2 and the list seems
-> to have eaten my original reply to that one.  Here's my comments from it
-> (and the reason why the current patch has been marked rejected in
-> patchwork: https://patchwork.openembedded.org/patch/139452/)
->=20
-> [[oe] [meta-networking][PATCH 2/8 v2] freeradius: add new recipe] On 17.0=
-4.26
-> (Wed 16:22) jackie.huang@windriver.com wrote:
->=20
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > FreeRADIUS is an Internet authentication daemon,
-> > which implements the RADIUS protocol, as defined
-> > in RFC 2865 (and others).
-> >
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  .../freeradius/files/freeradius                    | 110 ++++++++++
-> >  .../freeradius-avoid-searching-host-dirs.patch     | 194 +++++++++++++=
-++++
-> >  ...radius-configure.ac-add-option-for-libcap.patch |  70 ++++++
-> >  ...dius-configure.ac-allow-cross-compilation.patch |  31 +++
-> >  .../files/freeradius-enble-user-in-conf.patch      |  28 +++
-> >  ...eeradius-fix-error-for-expansion-of-macro.patch |  61 ++++++
-> >  ...ius-fix-issues-related-to-m4-include-path.patch | 236
-> +++++++++++++++++++++
-> >  .../freeradius-fix-quoting-for-BUILT_WITH.patch    |  55 +++++
-> >  .../files/freeradius-libtool-detection.patch       |  89 ++++++++
-> >  .../freeradius-libtool-do-not-use-jlibtool.patch   | 160 +++++++++++++=
-+
-> >  .../freeradius-rlm_python-add-PY_INC_DIR.patch     |  33 +++
-> >  .../freeradius/files/radiusd-volatiles.conf        |   2 +
-> >  .../freeradius/files/radiusd.service               |  16 ++
-> >  .../freeradius/files/volatiles.58_radiusd          |   3 +
-> >  .../freeradius/freeradius_3.0.12.bb                | 223 +++++++++++++=
-++++++
->=20
-> This is an old version of freeradius, as evinced by your SRC_URI:
->=20
-> > +SRC_URI =3D "ftp://ftp.freeradius.org/pub/freeradius/old/freeradius-se=
-rver-
-> ${PV}.tar.bz2 \
->=20
-> Why not bring the current version (3.0.13) in since it's a new recipe
-> and save a later update?
-
-Sorry I missed checking this one, I will update it to 3.0.13 and re-send.
-
->=20
-> > diff --git a/meta-networking/recipes-connectivity/freeradius/files/free=
-radius-
-> avoid-searching-host-dirs.patch b/meta-networking/recipes-
-> connectivity/freeradius/files/freeradius-avoid-searching-host-dirs.patch
-> > new file mode 100644
-> > index 000000000..8ab23d3ef
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-connectivity/freeradius/files/freeradius-
-> avoid-searching-host-dirs.patch
-> > @@ -0,0 +1,194 @@
-> > +From dc41591d5ceb18900ec85894f8f7b7bb44bb3bd9 Mon Sep 17 00:00:00
-> 2001
-> > +From: Jackie Huang <jackie.huang@windriver.com>
-> > +Date: Mon, 4 Jan 2016 01:44:04 -0500
-> > +Subject: [PATCH] avoid searching host dirs
-> > +
-> > +Upstream-Status: Inappropriate [cross-compile specific]
->=20
-> I don't know if that's specifically a reason to be inappropriate for
-> upstream.  :-)
->=20
-> Anyway, given that some of the patches were submitted upstream, as you
-> noted elsewhere, it may be that the current version won't need them at
-> all.
-
-I will check with the current version.
-
-Thanks,
-Jackie
-
->=20
-> --
-> -Joe MacDonald.
-> :wq
+VGhhbmtzLCBKYWNraWUuICBTb3JyeSBhYm91dCB0aGUgY29uZnVzaW9uIG9uIG15IHBhcnQuDQoN
+Ci1KLg0KDQpPbiBNYXkgOSwgMjAxNyA5OjE5IFBNLCAiSHVhbmcsIEppZSAoSmFja2llKSIgPEph
+Y2tpZS5IdWFuZ0B3aW5kcml2ZXIuY29tPiB3cm90ZToNCg0KDQo+IC0tLS0tT3JpZ2luYWwgTWVz
+c2FnZS0tLS0tDQo+IEZyb206IEpvZSBNYWNEb25hbGQgW21haWx0bzpKb2VfTWFjRG9uYWxkQG1l
+bnRvci5jb21dDQo+IFNlbnQ6IFdlZG5lc2RheSwgTWF5IDEwLCAyMDE3IDAwOjM3DQo+IFRvOiBI
+dWFuZywgSmllIChKYWNraWUpDQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVt
+YmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1uZXR3b3JraW5nXVtQQVRDSCAy
+LzhdIGZyZWVyYWRpdXM6IGFkZCBuZXcgcmVjaXBlDQo+DQo+IFNvcnJ5IHRvIHJlc3VycmVjdCBh
+IHYxIHBhdGNoIGJ1dCBJJ3ZlIGxvc3QgdGhlIHYyIGFuZCB0aGUgbGlzdCBzZWVtcw0KPiB0byBo
+YXZlIGVhdGVuIG15IG9yaWdpbmFsIHJlcGx5IHRvIHRoYXQgb25lLiAgSGVyZSdzIG15IGNvbW1l
+bnRzIGZyb20gaXQNCj4gKGFuZCB0aGUgcmVhc29uIHdoeSB0aGUgY3VycmVudCBwYXRjaCBoYXMg
+YmVlbiBtYXJrZWQgcmVqZWN0ZWQgaW4NCj4gcGF0Y2h3b3JrOiBodHRwczovL3BhdGNod29yay5v
+cGVuZW1iZWRkZWQub3JnL3BhdGNoLzEzOTQ1Mi8pDQo+DQo+IFtbb2VdIFttZXRhLW5ldHdvcmtp
+bmddW1BBVENIIDIvOCB2Ml0gZnJlZXJhZGl1czogYWRkIG5ldyByZWNpcGVdIE9uIDE3LjA0LjI2
+DQo+IChXZWQgMTY6MjIpIGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tIHdyb3RlOg0KPg0KPiA+
+IEZyb206IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+DQo+ID4NCj4g
+PiBGcmVlUkFESVVTIGlzIGFuIEludGVybmV0IGF1dGhlbnRpY2F0aW9uIGRhZW1vbiwNCj4gPiB3
+aGljaCBpbXBsZW1lbnRzIHRoZSBSQURJVVMgcHJvdG9jb2wsIGFzIGRlZmluZWQNCj4gPiBpbiBS
+RkMgMjg2NSAoYW5kIG90aGVycykuDQo+ID4NCj4gPiBTaWduZWQtb2ZmLWJ5OiBKYWNraWUgSHVh
+bmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0KPiA+IC0tLQ0KPiA+ICAuLi4vZnJlZXJh
+ZGl1cy9maWxlcy9mcmVlcmFkaXVzICAgICAgICAgICAgICAgICAgICB8IDExMCArKysrKysrKysr
+DQo+ID4gIC4uLi9mcmVlcmFkaXVzLWF2b2lkLXNlYXJjaGluZy1ob3N0LWRpcnMucGF0Y2ggICAg
+IHwgMTk0ICsrKysrKysrKysrKysrKysrDQo+ID4gIC4uLnJhZGl1cy1jb25maWd1cmUuYWMtYWRk
+LW9wdGlvbi1mb3ItbGliY2FwLnBhdGNoIHwgIDcwICsrKysrKw0KPiA+ICAuLi5kaXVzLWNvbmZp
+Z3VyZS5hYy1hbGxvdy1jcm9zcy1jb21waWxhdGlvbi5wYXRjaCB8ICAzMSArKysNCj4gPiAgLi4u
+L2ZpbGVzL2ZyZWVyYWRpdXMtZW5ibGUtdXNlci1pbi1jb25mLnBhdGNoICAgICAgfCAgMjggKysr
+DQo+ID4gIC4uLmVlcmFkaXVzLWZpeC1lcnJvci1mb3ItZXhwYW5zaW9uLW9mLW1hY3JvLnBhdGNo
+IHwgIDYxICsrKysrKw0KPiA+ICAuLi5pdXMtZml4LWlzc3Vlcy1yZWxhdGVkLXRvLW00LWluY2x1
+ZGUtcGF0aC5wYXRjaCB8IDIzNg0KPiArKysrKysrKysrKysrKysrKysrKysNCj4gPiAgLi4uL2Zy
+ZWVyYWRpdXMtZml4LXF1b3RpbmctZm9yLUJVSUxUX1dJVEgucGF0Y2ggICAgfCAgNTUgKysrKysN
+Cj4gPiAgLi4uL2ZpbGVzL2ZyZWVyYWRpdXMtbGlidG9vbC1kZXRlY3Rpb24ucGF0Y2ggICAgICAg
+fCAgODkgKysrKysrKysNCj4gPiAgLi4uL2ZyZWVyYWRpdXMtbGlidG9vbC1kby1ub3QtdXNlLWps
+aWJ0b29sLnBhdGNoICAgfCAxNjAgKysrKysrKysrKysrKysNCj4gPiAgLi4uL2ZyZWVyYWRpdXMt
+cmxtX3B5dGhvbi1hZGQtUFlfSU5DX0RJUi5wYXRjaCAgICAgfCAgMzMgKysrDQo+ID4gIC4uLi9m
+cmVlcmFkaXVzL2ZpbGVzL3JhZGl1c2Qtdm9sYXRpbGVzLmNvbmYgICAgICAgIHwgICAyICsNCj4g
+PiAgLi4uL2ZyZWVyYWRpdXMvZmlsZXMvcmFkaXVzZC5zZXJ2aWNlICAgICAgICAgICAgICAgfCAg
+MTYgKysNCj4gPiAgLi4uL2ZyZWVyYWRpdXMvZmlsZXMvdm9sYXRpbGVzLjU4X3JhZGl1c2QgICAg
+ICAgICAgfCAgIDMgKw0KPiA+ICAuLi4vZnJlZXJhZGl1cy9mcmVlcmFkaXVzXzMuMC4xMi5iYiAg
+ICAgICAgICAgICAgICB8IDIyMyArKysrKysrKysrKysrKysrKysrDQo+DQo+IFRoaXMgaXMgYW4g
+b2xkIHZlcnNpb24gb2YgZnJlZXJhZGl1cywgYXMgZXZpbmNlZCBieSB5b3VyIFNSQ19VUkk6DQo+
+DQo+ID4gK1NSQ19VUkkgPSAiZnRwOi8vZnRwLmZyZWVyYWRpdXMub3JnL3B1Yi9mcmVlcmFkaXVz
+L29sZC9mcmVlcmFkaXVzLXNlcnZlci0NCj4gJHtQVn0udGFyLmJ6MiBcDQo+DQo+IFdoeSBub3Qg
+YnJpbmcgdGhlIGN1cnJlbnQgdmVyc2lvbiAoMy4wLjEzKSBpbiBzaW5jZSBpdCdzIGEgbmV3IHJl
+Y2lwZQ0KPiBhbmQgc2F2ZSBhIGxhdGVyIHVwZGF0ZT8NCg0KU29ycnkgSSBtaXNzZWQgY2hlY2tp
+bmcgdGhpcyBvbmUsIEkgd2lsbCB1cGRhdGUgaXQgdG8gMy4wLjEzIGFuZCByZS1zZW5kLg0KDQo+
+DQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLWNvbm5lY3Rpdml0eS9m
+cmVlcmFkaXVzL2ZpbGVzL2ZyZWVyYWRpdXMtDQo+IGF2b2lkLXNlYXJjaGluZy1ob3N0LWRpcnMu
+cGF0Y2ggYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy0NCj4gY29ubmVjdGl2aXR5L2ZyZWVyYWRp
+dXMvZmlsZXMvZnJlZXJhZGl1cy1hdm9pZC1zZWFyY2hpbmctaG9zdC1kaXJzLnBhdGNoDQo+ID4g
+bmV3IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLjhhYjIzZDNlZg0KPiA+
+IC0tLSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25uZWN0
+aXZpdHkvZnJlZXJhZGl1cy9maWxlcy9mcmVlcmFkaXVzLQ0KPiBhdm9pZC1zZWFyY2hpbmctaG9z
+dC1kaXJzLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwxOTQgQEANCj4gPiArRnJvbSBkYzQxNTkxZDVj
+ZWIxODkwMGVjODU4OTRmOGY3YjdiYjQ0YmIzYmQ5IE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gMjAw
+MQ0KPiA+ICtGcm9tOiBKYWNraWUgSHVhbmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPg0K
+PiA+ICtEYXRlOiBNb24sIDQgSmFuIDIwMTYgMDE6NDQ6MDQgLTA1MDANCj4gPiArU3ViamVjdDog
+W1BBVENIXSBhdm9pZCBzZWFyY2hpbmcgaG9zdCBkaXJzDQo+ID4gKw0KPiA+ICtVcHN0cmVhbS1T
+dGF0dXM6IEluYXBwcm9wcmlhdGUgW2Nyb3NzLWNvbXBpbGUgc3BlY2lmaWNdDQo+DQo+IEkgZG9u
+J3Qga25vdyBpZiB0aGF0J3Mgc3BlY2lmaWNhbGx5IGEgcmVhc29uIHRvIGJlIGluYXBwcm9wcmlh
+dGUgZm9yDQo+IHVwc3RyZWFtLiAgOi0pDQo+DQo+IEFueXdheSwgZ2l2ZW4gdGhhdCBzb21lIG9m
+IHRoZSBwYXRjaGVzIHdlcmUgc3VibWl0dGVkIHVwc3RyZWFtLCBhcyB5b3UNCj4gbm90ZWQgZWxz
+ZXdoZXJlLCBpdCBtYXkgYmUgdGhhdCB0aGUgY3VycmVudCB2ZXJzaW9uIHdvbid0IG5lZWQgdGhl
+bSBhdA0KPiBhbGwuDQoNCkkgd2lsbCBjaGVjayB3aXRoIHRoZSBjdXJyZW50IHZlcnNpb24uDQoN
+ClRoYW5rcywNCkphY2tpZQ0KDQo+DQo+IC0tDQo+IC1Kb2UgTWFjRG9uYWxkLg0KPiA6d3ENCg0K
 
