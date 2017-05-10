@@ -1,48 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 07A1E6FEFE
+Return-Path: <ilialin@codeaurora.org>
+X-Greylist: delayed 516 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 10 May 2017 06:12:23 UTC
+Received: from smtp.codeaurora.org (smtp.codeaurora.org [198.145.29.96])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D23171A8D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 May 2017 05:56:51 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id l50so27693746wrc.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 09 May 2017 22:56:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=J6939zF6UFZQuXPMYQJKGoCjIENzrPy6hs2ierjTeTY=;
-	b=N/VhP8QJo1skCNbUOxt95KlCG/qTyq4ZM1jpxkMGZwldbF2IsRCA6++0ogxptOScH/
-	K4x3ns+eHK9vFifb++AJ10zTo+DggM55wYPUr53aSl18xjKRTHMknEDHaHZ78rIZiBnD
-	rc67nIv+/uapBZTxhJT60e8QFPzlmGeZRhNqJJb+FbOj0xOgxU4nYG4/BhamWeXarvyG
-	n1x4ti3ss8Bze00Cn3m9sgkNJzuY+tl4RdtOVp2+uB0MzSXUUwLVAsFdjd4wDeNF4qia
-	XHi1eHZ0K/wWWWhgJ0SDvPeYRsH4QR30GQpTAUCkB17yy0ClJRgF53KWFjWswhMhOapW
-	5l4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=J6939zF6UFZQuXPMYQJKGoCjIENzrPy6hs2ierjTeTY=;
-	b=aBy/z3tEMaPltr5W+ZPl3Cp7nXp6xZUWPpcVBVj9xfjrOsVoxykuhSHBt52h+IhyaO
-	4fxvKycy9yC9IyYWwmwF6sKUesa5MZLMx0TFf9XJOKikdX82DjL/AF8q1/n+u2iONwV4
-	jKMd71jdDLqbWIHyMT2Qr4dVpO2zuMdZ23Ok0CjYgmz2STEQXN6VR27SvnvZdXZkVtAd
-	x3UK40ldCXMpIGL+Z/Kpnnoo9NREslO8/ln3B3BRXyzPUNQfbnqWCEFUzZcgj25edgR8
-	vBEefC5iwAqpZmwPYU2MUaUaoRaI7WpobRVifY92U7v4okwDoOogWA9j5XJS3DZPV0WQ
-	Cbfw==
-X-Gm-Message-State: AODbwcDGGamodqHPw2cNk13uEY3RjqGkLW5UpMzsIGBkff1f9527qpYE
-	8MYgO4CbweswbetZppg2kV+xuuYKGA==
-X-Received: by 10.80.178.228 with SMTP id p91mr2809141edd.131.1494395812202;
-	Tue, 09 May 2017 22:56:52 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.195.143 with HTTP; Tue, 9 May 2017 22:56:21 -0700 (PDT)
-In-Reply-To: <20e4f085-fa4f-bc37-9133-fcf3891fd9b3@siemens.com>
-References: <e9ec2489-e51f-222b-a4e0-2f537eff1e7d@siemens.com>
-	<CAMKF1sqbD4106u6rkQUTkAyzhqXyR6yMMByrLqFVyZGAS9KeNQ@mail.gmail.com>
-	<20e4f085-fa4f-bc37-9133-fcf3891fd9b3@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 9 May 2017 22:56:21 -0700
-Message-ID: <CAMKF1soeDgDRj737nWY3hHQwTHdQoVHugr4fCJLtqN_pJjLkWg@mail.gmail.com>
-To: Jan Kiszka <jan.kiszka@siemens.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-java: Building openjre-8 on a non-gcc-6 host
+	Wed, 10 May 2017 06:12:23 +0000 (UTC)
+Received: by smtp.codeaurora.org (Postfix, from userid 1000)
+	id D1C6F6071C; Wed, 10 May 2017 06:03:48 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+	s=default; t=1494396228;
+	bh=Hs8Kz/t0LItoXq+BUz/0ZsqWDDQ1wQZ2Wm2gB1nPXHQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=SR7A8l63LrvxhwxRyn272MeVyxI9UGeoQEZR04oYakZ9Yn52YLK8MoGAMVpduqoD/
+	dhnsR6YDWMxw72Aws1rAxKtFYw/Bv+GeX18uNoWoWVs7Vthhhr9LceFPrwXWfIGHlk
+	3g5naAgyvEprlQ9PcJ8GJnEp2RK77CF42ETJt4c0=
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
+	pdx-caf-mail.web.codeaurora.org
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.8 required=2.0 tests=ALL_TRUSTED,BAYES_00,
+	DKIM_SIGNED,
+	T_DKIM_INVALID autolearn=no autolearn_force=no version=3.4.0
+Received: from lx-ilial1.mea.qualcomm.com (unknown [185.23.60.4])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES128-SHA256 (128/128 bits))
+	(No client certificate requested)
+	(Authenticated sender: ilialin@smtp.codeaurora.org)
+	by smtp.codeaurora.org (Postfix) with ESMTPSA id E8B6260719;
+	Wed, 10 May 2017 06:03:43 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=codeaurora.org;
+	s=default; t=1494396225;
+	bh=Hs8Kz/t0LItoXq+BUz/0ZsqWDDQ1wQZ2Wm2gB1nPXHQ=;
+	h=From:To:Cc:Subject:Date:From;
+	b=iIHTts2zeW/4BtUoWbyDU6y29ke5f/PgLIIISF4mBqARp6z6GrIg4wdoPml3VpeCM
+	gdrxzGZRBaNiU8OYkN9cxNZIui7yqlnb1WgOd+DnG7iClGYWuSCwiiFRVpC6PWmWB9
+	V8lTRzZYApXulKEZTuQDNpiVzi8F6NTFZadp6Z3k=
+DMARC-Filter: OpenDMARC Filter v1.3.2 smtp.codeaurora.org E8B6260719
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+	dmarc=none (p=none dis=none) header.from=codeaurora.org
+Authentication-Results: pdx-caf-mail.web.codeaurora.org;
+	spf=none smtp.mailfrom=ilialin@codeaurora.org
+From: Ilia Lin <ilialin@codeaurora.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 May 2017 09:03:14 +0300
+Message-Id: <1494396194-23666-1-git-send-email-ilialin@codeaurora.org>
+X-Mailer: git-send-email 1.9.1
+Cc: celster@codeaurora.org
+Subject: [meta-oe][PATCH] libndp: Add mirror sites
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +57,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 May 2017 05:56:59 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 10 May 2017 06:12:25 -0000
 
-On Tue, May 9, 2017 at 10:53 PM, Jan Kiszka <jan.kiszka@siemens.com> wrote:
-> On 2017-05-10 07:46, Khem Raj wrote:
->> On Tue, May 9, 2017 at 10:34 PM, Jan Kiszka <jan.kiszka@siemens.com> wrote:
->>> Hi all,
->>>
->>> seems like the current cross rules for openjre-8 at least break if the
->>> host compiler < gcc-6: -fno-lifetime-dse gets injected based on the
->>> cross compiler version, which is 6, but is also used for the few native
->>> pieces of that build.
->>>
->>> Any suggestions how to fix that properly? I had to temporarily redirect
->>> my default gcc from 4.8 to gcc-6.
->>>
->>
->> see if you can check  -fno-lifetime-dse options is supported in
->> Makefiles before using the option, that way you can ensure that its
->> only used with
->> compilers which support it
->
-> OK, that means another patch to openjdk, right? OTH, the injection comes
-> from the recipes. Are you synchronizing with upstream on the those
-> cross-build issues?
+The main download location is inaccessible. Adding mirrors.
 
-yes it should be handled in the jdk build system., no I am not doing
-this upstream
+Signed-off-by: Ilia Lin <ilialin@codeaurora.org>
+---
+ meta-oe/recipes-connectivity/libndp/libndp_1.6.bb | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
->
-> Jan
->
-> --
-> Siemens AG, Corporate Technology, CT RDA ITP SES-DE
-> Corporate Competence Center Embedded Linux
+diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+index a35dff8..f3011e6 100644
+--- a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
++++ b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+@@ -4,6 +4,13 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+ 
+ SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz"
++
++MIRRORS += "\
++http://libndp.org/files/ http://www.go-parts.com/mirrors-usa/blfs/conglomeration/libndp/ \n \
++http://libndp.org/files/ http://ftp.osuosl.org/pub/blfs/conglomeration/libndp/ \n \
++http://libndp.org/files/ http://ftp.cc.uoc.gr/mirrors/linux/lfs/LFS/svn/l/ \n \
++http://libndp.org/files/ https://www.jabawok.net/gentoo/distfiles/ \n "
++
+ SRC_URI[md5sum] = "1e54d26bcb4a4110bc3f90c5dd04f1a7"
+ SRC_URI[sha256sum] = "0c7dfa84e013bd5e569ef2c6292a6f72cfaf14f4ff77a77425e52edc33ffac0e"
+ 
+-- 
+1.9.1
+
 
