@@ -1,50 +1,49 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 4E9BE71C56
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id BDE4A71AD5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 12:28:30 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id 6so3347889wrb.1
+	Thu, 11 May 2017 12:28:35 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id v4so6656873wmb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 05:28:32 -0700 (PDT)
+	Thu, 11 May 2017 05:28:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
 	bh=eHJqJjlbxTjTeA7qnDVu8dr7C/+qvDDeinPsMseEOaY=;
-	b=cKyrhkVhVtcyR6C+kFJyyFDGcTI3xGrrRd4FmS3Xcie6ZupehQ6UqDhSsWWlnEwMXU
-	dNasZtkD8/p08JmWYAv/GmwoH6vSI/DPuNrXYuoPD0489WpAxoHIT0nAYZ/JxuYqbR65
-	OnFH4li4h+cp2ZeQVeI6Cv8PpUk59DTwvV3+qiAG5LbKHqSG/R+81epkPmrlabUxi3v2
-	K0l1a90lNU+198JiKg4fBm8DAFcI1GulX8cOvcF381zaXLbQREBPuA+eT5MZGkYcLXmT
-	fbHlJqnOBzgVlctR2UsmsNpaaQY/h5VwOeyJeyUQAhIw75L8Tyn7mxtLBfY3OOUjRLTn
-	GRcQ==
+	b=rvvTOnvegcWyKEEUfro3vWFon9hDHWSNak/5c1NXtcE7qxzPkg3Sh4WsiJGbJsqt0d
+	dEfPBse+cP3yzYX3MBCsh3wfLodTrLs36OUTB0TC3A7tPE119lZjdJ8J8zOLDdG3hTC5
+	XACwhAwzv2WeDhF8XZR7GtzYUsLlvK96edE1FBqtESRCJArDMcP0l4zBQb4qvGJEw3eY
+	L5glHcJ/cTyUtTvvPDOei9M9iAp2jPx25pSpT1NAOBr9qvnkgQy2JZaJi60oGUw47zSg
+	Crd6LfFSrae7/2L4QpWT+J4N6R3NPQE2Dh4CEDOnqTpgr6gLrmZuu2+FqfS8iXrWDxpn
+	fUKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
 	bh=eHJqJjlbxTjTeA7qnDVu8dr7C/+qvDDeinPsMseEOaY=;
-	b=YHk/RZPf6daBY6WggEo+kQPay/luiSkTn58ZlwQWNGzZ61WJzU8Y7mCt71zNpXMFYm
-	5w2aF8vAFbelEUpc5xo97ME+SOOu+DZvrLhqMWd5oJaWfbN2M7Uoh3jf269la0TBI4Gv
-	MHbdk5cS4NI3EU++zdmVnXWjc3tTWndSkYchfQb73TgMl+vkCrTpJ20sxU3+Xs1u2AcQ
-	lPJYzpHwhg1Je2M04DkxP/MiupqqsToWr8pg+rmjX5A8xRcfJDUQxMIOz9Kc3ZvGrbYZ
-	oSoCjcdcnlSpAzAsZcra8Zsuqc1IVooNzLiEg0ufaOUOHWuknWCfiwL0FheVKf2Vlkka
-	Z2nw==
-X-Gm-Message-State: AODbwcAhauPH9Cr7XVS9sykVpOb58HEDjm4LlyQD4rs3ce2VXBUhKQJD
-	QnwfsAjWGPrfQw==
-X-Received: by 10.223.134.80 with SMTP id 16mr70291wrw.62.1494505712009;
-	Thu, 11 May 2017 05:28:32 -0700 (PDT)
+	b=SgpEM9xVeuC5fgg+a0l5Mp2BXOLkzAq6W+E/dnJIDIXOsIQDk2dfViYJ9tTVhmfgFZ
+	nasQ6DyZuwLKHDNoiCcMsNhKnSSFDswjILTs2kdm2kA6EFOz1BNY8q8IjyKm/7/HIUPO
+	CTamI1KDnFFkfNmyl6jf1aR8izvkump6SEmFOQq7wfsbMaGJQVUUnvSeGuPBr76IWBZL
+	+UvVLdzAn9o+oJLJ7gln3nmSOSCKcvGA+YWypLBRZmrrmDXQxtQOHZoCXgfeTABNtO9O
+	rpDjACZzlfE00cZcHLvd2ovVU9XIsVnOa3QoqEpzuDvRTDMpfoiqDrvYaXxTE+t6IouR
+	xCgw==
+X-Gm-Message-State: AODbwcAcXE1KaelcExmyFVNOaF7q+CZy0Q5BSbw3dMzqqxRdaTgKcy6r
+	iVgZH1qFEfjSSw==
+X-Received: by 10.28.26.8 with SMTP id a8mr4147611wma.120.1494505716600;
+	Thu, 11 May 2017 05:28:36 -0700 (PDT)
 Received: from localhost.localdomain ([151.68.54.167])
-	by smtp.gmail.com with ESMTPSA id t26sm28347wra.43.2017.05.11.05.28.30
+	by smtp.gmail.com with ESMTPSA id t26sm28347wra.43.2017.05.11.05.28.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 11 May 2017 05:28:30 -0700 (PDT)
+	Thu, 11 May 2017 05:28:35 -0700 (PDT)
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
 X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 May 2017 14:28:13 +0200
-Message-Id: <1494505694-28118-3-git-send-email-costamagnagianfranco@yahoo.it>
+Date: Thu, 11 May 2017 14:28:14 +0200
+Message-Id: <1494505694-28118-4-git-send-email-costamagnagianfranco@yahoo.it>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
 References: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
 Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
-Subject: [PATCH 3/3] libndp: Update patch with upstream version.
+Subject: [meta-oe][PATCH] libndp: Update patch with upstream version.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 May 2017 12:28:31 -0000
+X-List-Received-Date: Thu, 11 May 2017 12:28:36 -0000
 
 From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
 
