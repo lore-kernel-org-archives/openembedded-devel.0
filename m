@@ -1,22 +1,48 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CD3860017
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
+	[209.85.220.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B92371B9E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 08:30:35 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v4B8Uao5028061
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Thu, 11 May 2017 09:02:18 +0000 (UTC)
+Received: by mail-qk0-f182.google.com with SMTP id a72so16748974qkj.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 10:30:36 +0200
-Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.79.78])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v4B8UaTZ027752;
-	Thu, 11 May 2017 10:30:36 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 May 2017 10:30:30 +0200
-Message-Id: <1494491430-22799-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] protobuf: update to 3.3.0
+	Thu, 11 May 2017 02:02:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=XhXUJPPB7Pdx23QTuNeicL4uQUsH/NNTOCDUyRl7IGA=;
+	b=R7rwl/C+RkNr15tjSrLmJoQRidoZDPC2+NkBls/7AWypUMgcUC8dc450Bxf9/MQpic
+	+ZPBqUMBrj4wYH/Cux6ibcx5akGYiWQL76F8WzC7aWBxmk0I4v+Ha0hlZMWJW8m6MOh+
+	RPG5zaebR0nbFwPN/40oAdZ2YWRSqxsw9cHq/PgO6cNa9NCN/lnbAjL/Hh0cFaHD6aRU
+	rYbXTheYJGHKRGX6BUWx1FszwSaoMzSr+k8vtNq/iPb0tsfVKZ/SbY/H7tplThPkFxPK
+	Xa1coOkUMJkqLAhyA8RqNNJ0dQf9Xyjo0VXW61e7+BPjiv57K1zE95PmKPPeGRJGiUpD
+	/lWw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=XhXUJPPB7Pdx23QTuNeicL4uQUsH/NNTOCDUyRl7IGA=;
+	b=KCwRt2mPLz08HL+uOuESyQyikGwMZL1+M89n4qBY/lSIL8IH2dUFJRtC/swMZ33DDs
+	1KegqOo/TyI2sEkON3EI6zAm6dW9jejpDCCPSdhxMPqXi3T0Kyk5zsd+zfTPZLQFjqiB
+	Nvp1+xCYEdt02POggUxpnDg1f+p7flH+l04trfhuBrjSHoHLMO72GVEgI9RRijyubJUX
+	vKQC5PL5zTrxt/Tk8R7DoZOq8Yl+xGEjyvokiW078oRhgVFQV774hu9+s5XvpX0FrXzD
+	M+gJ+U8vMsxgIdbqBm0G2sqgRx5VFosFZ9LCKX3Jr20r1gnOJezs2FyT5cy7l/rNYnIF
+	i1ug==
+X-Gm-Message-State: AODbwcC/UMmrosjil4ii6YTK53ZgLJthrFsY9r0j263tIDibyBADPeuQ
+	/iCw/KTQzMSks1QN0FksabpAFf5GWLfW
+X-Received: by 10.55.146.68 with SMTP id u65mr9525807qkd.77.1494493339584;
+	Thu, 11 May 2017 02:02:19 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.34.136 with HTTP; Thu, 11 May 2017 02:01:59 -0700 (PDT)
+In-Reply-To: <2fe15965-3372-3e2e-1d77-3c46ea397527@pr.hu>
+References: <2fe15965-3372-3e2e-1d77-3c46ea397527@pr.hu>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 11 May 2017 10:01:59 +0100
+Message-ID: <CAJTo0Lb3pTp4Jjv=e2mE4CTaJdLsMMmFYxzE9861vJTgkkj7Pg@mail.gmail.com>
+To: Boszormenyi Zoltan <zboszor@pr.hu>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: Cairo egl / glesv2 PACKAGECONFIG dependency hell
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,43 +55,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 May 2017 08:30:41 -0000
+X-List-Received-Date: Thu, 11 May 2017 09:02:19 -0000
+Content-Type: text/plain; charset=UTF-8
 
-With the latest version out of tree builds are broken.
+On 11 May 2017 at 09:08, Boszormenyi Zoltan <zboszor@pr.hu> wrote:
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- .../protobuf/{protobuf_3.1.0.bb => protobuf_3.3.0.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.1.0.bb => protobuf_3.3.0.bb} (88%)
+> Please fix it either way: remove PACKAGECONFIG[egl] from cairo
+> or add native build to mesa.
+>
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.3.0.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.3.0.bb
-index 18210b1..ce64a88 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.1.0.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.3.0.bb
-@@ -14,15 +14,15 @@ RDEPENDS_${PN}-dev += "${PN}-compiler"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
- 
--SRCREV = "a428e42072765993ff674fda72863c9f1aa2d268"
-+SRCREV = "a6189acd18b00611c1dc7042299ad75486f08a1a"
- 
--PV = "3.1.0+git${SRCPV}"
-+PV = "3.3.0+git${SRCPV}"
- 
- SRC_URI = "git://github.com/google/protobuf.git"
- 
- EXTRA_OECONF += " --with-protoc=echo"
- 
--inherit autotools
-+inherit autotools-brokensep
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.1.4
+Or only enable egl in target builds (using a class override), which is the
+easier, simpler, and correct fix.
 
+Ross
 
