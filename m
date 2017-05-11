@@ -1,48 +1,57 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f180.google.com (mail-wr0-f180.google.com
-	[209.85.128.180])
-	by mail.openembedded.org (Postfix) with ESMTP id BFF3A71AB4
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1264 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 11 May 2017 08:29:44 UTC
+Received: from mail9.pr.hu (mail9.pr.hu [87.242.0.9])
+	by mail.openembedded.org (Postfix) with ESMTP id DA0F260017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 May 2017 14:09:26 +0000 (UTC)
-Received: by mail-wr0-f180.google.com with SMTP id z52so45810798wrc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 May 2017 07:09:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=qi2CMj5PvvS0n2Vrr3jA75ko2UMRNANLvtyqyqFth5Y=;
-	b=SbX1UavXIHU2tvnb2bQW8Fsw0KvP1qbNwxTpy26KFU8zlMh+buZJcGWeJx2ykj1oMN
-	xAD1CPE48rS/kgZaA1TFBKgMTPEf5zbPb4jLumk5csC8zwdPti0G5clPh+tmiEvkMj3p
-	jHiZaNDkUS02YPOODZ0bEy1V94S1pC/B479i3RlCa5vEPfvATCSojIZScxMC0szeCWtI
-	4TC1Jc7ug6XpuZZ7QG1D3OU1dWFSdnjmABamo6aqi75VxLDsBa/qiPxWWU6NwPa+eAFW
-	DYYS6XhJ98EHKcIohNp6aH0A8OObLP6T6T/FOTGzIl56HZBJpe/egUhITWL6UrRKj+BA
-	Lf/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=qi2CMj5PvvS0n2Vrr3jA75ko2UMRNANLvtyqyqFth5Y=;
-	b=kjjHHm0dqKTA2b3JrtQ0RPX0AXmR27YI7HgtYWQ7lI4sizX8ixscBwl2ejDIUwspAZ
-	1irF6O/ejbUBEA/SGIzMSn9torqmtB2IVeguSOFR7R4hnxwtT2BsZ5SFJvu5flLOi1+Y
-	FV4EP9PJOzOpBKg49N6E7ge6PabZshRXwYV6qrgjCeAMbda3j6lAJfwjlkuMRgkwnOwX
-	nNjUdkWy2FMYZtwZfHNbyKm46uPIB1jsNR1W2ws2ExTrGYTU5ilOoTvCQOa45OjNu/6B
-	w3Sc/tUzH0Pr1zijykYdPHfRdLzsKsuAA7Ay5tejxHs9BFEZhK2uFBCkjsWrzE51yh9I
-	c/5Q==
-X-Gm-Message-State: AODbwcDvzEP6pvz/ELS6CqgeZPVHqah9mhB8GQ1gjZliwnFKlcB+Nki1
-	FLzSvsS1MiqXzh+QCb2MYYsobtVwg3Y6
-X-Received: by 10.80.149.209 with SMTP id x17mr4375302eda.175.1494425367178;
-	Wed, 10 May 2017 07:09:27 -0700 (PDT)
+	Thu, 11 May 2017 08:29:44 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1d8j9M-0000sa-Ou
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 May 2017 10:08:40 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203; 
+	h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:Message-ID:Subject:From:To;
+	bh=r4P55txbM49saCIwB8Y0SbFU4UxH1Aofsu6OWgTyjaQ=; 
+	b=EVdejTXFFL3I7OMUHjr9GsLPzfrpOosFytob2uY5j+DovuXI6Y83XDQb0WlTAXZqQaJxP67forIgvXB7Ah64vS5SbbXOsgDEcmwOvY7a4190/7xUlwFfuByYZs2kU7oFbXsTpj0lD8/xuzem7bsymuP2TSPCP0ht79ad7WLDdxRGDPCZ3U1J9pyebwK7YdvwyJV8pNqG2eb6D2pAoEb2nqsw9EIeIj6Z6EWKuQ/xON2WK983o4UyuCrQ6gsdFss6FvN7d/sH09N1uG6tgv1tRNXM/cuw5HHQ6SNFykP4B0mGdvEp+1hvvcg/Ww+ymZAeMozS+moPFQ/pgZJyWHgxzA==;
+Received: from host-87-242-51-16.prtelecom.hu ([87.242.51.16]
+	helo=s002.sicom.com)
+	by mail.pr.hu with esmtpsa (TLS1.2:DHE_RSA_AES_128_CBC_SHA1:128)
+	(Exim 4.80) (envelope-from <zboszor@pr.hu>) id 1d8j9F-00019y-EZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 May 2017 10:08:38 +0200
+To: openembedded-devel@lists.openembedded.org
+From: Boszormenyi Zoltan <zboszor@pr.hu>
+Message-ID: <2fe15965-3372-3e2e-1d77-3c46ea397527@pr.hu>
+Date: Thu, 11 May 2017 10:08:30 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.0
 MIME-Version: 1.0
-Received: by 10.80.213.154 with HTTP; Wed, 10 May 2017 07:09:26 -0700 (PDT)
-In-Reply-To: <42E26C7E-8B61-464E-9473-3A901588EF9A@titv.se>
-References: <42E26C7E-8B61-464E-9473-3A901588EF9A@titv.se>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 10 May 2017 16:09:26 +0200
-Message-ID: <CA+chaQdY=sGZBFzrqSbm4hEndiMUi=Bd8--1Y1dhv9uqyRZ+cg@mail.gmail.com>
-To: =?UTF-8?Q?Jens_B=C3=A4ckman?= <jens@titv.se>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5] Configure error when enabling SQlite
+X-Spam-Score: 3.5 (+++)
+X-Spam-Report: Spam detection software, running on the system "prspamd3.pr.hu",
+	has NOT identified this incoming email as spam.  The original
+	message has been attached to this so you can view it or label
+	similar future email.  If you have any questions, see
+	the administrator of that system for details.
+	Content preview:  Hi,
+	the cairo recipe exposes PACKAGECONFIG[egl] and PACKAGECONFIG[glesv2].
+	I tried to enable them for genericx86-64 and a build error occors
+	because
+	now mesa is a dependency of cairo but mesa doesn't contain
+	BBCLASSEXTEND="native". [...] 
+	Content analysis details:   (3.5 points, 5.0 required)
+	pts rule name              description
+	---- ----------------------
+	--------------------------------------------------
+	-0.2 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	3.5 BAYES_99               BODY: Bayes spam probability is 99 to 100%
+	[score: 1.0000]
+	0.2 BAYES_999 BODY: Bayes spam probability is 99.9 to 100%
+	[score: 1.0000]
+X-Scan-Signature: 590f427944e86919b339bef1bc8dcd47
+X-Spam-Tracer: backend.mail.pr.hu 3.5 20170511080838Z
+Subject: Cairo egl / glesv2 PACKAGECONFIG dependency hell
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +64,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 May 2017 14:09:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 11 May 2017 08:29:46 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
 Hi,
 
-use openembedded-devel ML for generic questions like this.
+the cairo recipe exposes PACKAGECONFIG[egl] and PACKAGECONFIG[glesv2].
 
-The error you're seeing isn't even related to SQlite, but caused by the way
-how you modify PACKAGECONFIG, read the manual about how the overrides work.=
-.
+I tried to enable them for genericx86-64 and a build error occors
+because now mesa is a dependency of cairo but mesa doesn't contain
+BBCLASSEXTEND="native".
 
-What you wanted to do is:
-PACKAGECONFIG_append_pn-qtbase =3D " sql-sqlite"
+This applies to Morty and the morty branch of meta-backports.
 
-You can use bitbake -e qtbase to compare what's the difference in these 2.
+Please fix it either way: remove PACKAGECONFIG[egl] from cairo
+or add native build to mesa.
 
-Regards,
+If you go the second route, then all the dependencies of mesa also
+need the same BBCLASSEXTEND="native" treatment. Maybe better adding
+it to xorg-proto.inc and xorg-lib-common.inc is better. Then the LLVM
+recipe, possibly not a nice fallout.
 
-On Wed, May 10, 2017 at 2:20 PM, Jens B=C3=A4ckman <jens@titv.se> wrote:
+Maybe it's easier to just remove PACKAGECONFIG[egl] and
+PACKAGECONFIG[glesv2] from cairo.
 
-> Hi!
->
-> I'm trying to build a Morty version of qtbase with SQlite support
-> enabled, and can't make it past the configure step. SQlite was
-> enabled in local.conf like this:
->
-> local.conf:
-> PACKAGECONFIG_pn-qtbase_append =3D " sql-sqlite"
->
-> Attached the configure log.
-> --
-> Jens
->
->
+Best regards,
+Zoltan Boszormenyi
 
