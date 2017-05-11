@@ -1,49 +1,47 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D51971CBF
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id CCA0C71C9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 12:54:05 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id v4so6817099wmb.2
+	Thu, 11 May 2017 12:57:31 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id d127so6853060wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 05:54:07 -0700 (PDT)
+	Thu, 11 May 2017 05:57:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eHJqJjlbxTjTeA7qnDVu8dr7C/+qvDDeinPsMseEOaY=;
-	b=ZKzDa5UQ6XobuTrF21mHDdjaQVLOhWN5iOnUNXzR/sHqktbDCgtBsRFyUmK5p/XqLJ
-	o/dyKCnAKkLaQKpp/IQhHgGhy99WogH5fX6pGdRLA1/G2IVyWPPsLsXkLBLhY/5i00Oz
-	+rtsgglScx0i48trsfEt3dN64r32zs65hI9bQ2RR21qaJR9ZbYDJn9XhzJYy+Uitggl7
-	TyGFnEahfJNR8hjWy2ARgnZ2L2TmUxjgEGxI0L6ae0tXmOaJN59i18zhA3SjYiUCLLGM
-	KAd+sXRy8fF6P8XQXzQfq20r7a3VJPujN+ugQCUjra/jEfKJN2Wv03LkovYen9fJxRnU
-	N8Pg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=2B/KrFwnZIto+IHqkmJss2ozDeeUa+YY4Do9Sgq6ts0=;
+	b=qgCer08QlmtWAcRKLcNbQOQPeOHpvFsyDxoEdpY+jqknwIyQoyk/cpnZeAhGu2ZlH9
+	7nEGhAK3y3VQWswkpcRcrHZn+BGL85pXMTYFYO+6dkbys3kJUnig/OCXa2YVOKnUWMEN
+	UcnFIPGcG6PWwH3KtmL7OfjtkJiBN3HXC0s30V5HVj5SzmvSYtqPSQ02lBWx6k2BmlPQ
+	QTp+ZLPQokqkbJ6+I6HLCehut/VZ2DjtCaZ6XgMNE7+clBC7V8u+71UmtQbfxRDGUUSb
+	Ifxzxf40HDZUD8o12V9VJAiEzQXF989+IxNPrFp2E0zrZsZADqfTz+lqg5vqxBhQPFzX
+	Oc1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=eHJqJjlbxTjTeA7qnDVu8dr7C/+qvDDeinPsMseEOaY=;
-	b=YiFdwpUSD7tNRM5FDvgoRxC8vKPlb/RB9Ul45MpHmPqf/C++adDtkntdNa2XgZ857A
-	jwkxWNxt4OoR8RK2iUuQH27cvqrDIHLmeXF1S6iMI03ARvLohIXPofg3hu/nzkDgpw2R
-	B1vRNIM7N0fnuCEj8NN23KS4SZa/9ah4X5cATP2e0C0Dvx/7AM/nuEZaV9q76mLvgEbV
-	gTaozw0KMKOAB3WHMPC8tlguZpGHcFNt3aGLTuB9hd6IIWhuxyw9/0RLVSkTy1UzEs1n
-	MBignOoVjuqLm3zpXSVlwv3+MQJizAS1fskovmDr3UY92KPNko53ANqYodS631l+7BGA
-	o/2Q==
-X-Gm-Message-State: AODbwcC4MS2QkWxeCJ2Nhji9ld8U1fSEHsb7UGWDpB0sg8WVItcbEzHH
-	NCE3xacDX2ccaQ==
-X-Received: by 10.28.113.4 with SMTP id m4mr4310843wmc.42.1494507246963;
-	Thu, 11 May 2017 05:54:06 -0700 (PDT)
-Received: from localhost.localdomain ([151.68.54.167])
-	by smtp.gmail.com with ESMTPSA id n99sm73028wrb.62.2017.05.11.05.54.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 11 May 2017 05:54:05 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 May 2017 14:53:59 +0200
-Message-Id: <1494507239-32152-2-git-send-email-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.7.4
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=2B/KrFwnZIto+IHqkmJss2ozDeeUa+YY4Do9Sgq6ts0=;
+	b=Y0cElwbDqDqqKEeAreH2+7bWmNhwShLnu/fuabWlXoaRUara2NFVBgJCPIF2euNuIi
+	B0BD5LvOcwrc3nGCCxO3+yRhRPCmgNzMhb7FYYYKktaNl0yJ0uT90quH7ktC1yN4JoI3
+	c+i4x+WDTB8j8K13rZyKxW0Lj82u3M2n0ckUT/xBoYLXaVoiZouZsv8vs8zy36GF5NGn
+	3SYz8yADz4kmzABX6sRl3pp3f7/LnO4ypbb2IdDVD9XXzeZOj8/DHiS4jpPzqJfM0Ti2
+	BPhmFDOQVRA34FBkLxEnB1dSIYEEsuPBCzR2V3UnGD3mc7m6QEMOxFsJXeVcg77v384g
+	bVLw==
+X-Gm-Message-State: AODbwcBLLnPfGPaHa7wHGjLSvyuevmyr5pJYe8MP4JbQ9jlZ+Tv5gIO2
+	68M3LdsEV56rOJDDxyTKEkhvqtd/lg==
+X-Received: by 10.80.165.23 with SMTP id y23mr771020edb.64.1494507452746; Thu,
+	11 May 2017 05:57:32 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.213.154 with HTTP; Thu, 11 May 2017 05:57:32 -0700 (PDT)
 In-Reply-To: <1494507239-32152-1-git-send-email-costamagnagianfranco@yahoo.it>
 References: <1494507239-32152-1-git-send-email-costamagnagianfranco@yahoo.it>
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
-Subject: [meta-oe][PATCH] libndp: Update patch with upstream version.
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 11 May 2017 14:57:32 +0200
+Message-ID: <CA+chaQfbC6H5ruV6qbdZjJ0-kqP=OJCmc1+vL9kxiipowUaDrg@mail.gmail.com>
+To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/2] libndp: switch to github uri. libndp.org is unstable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,62 +54,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 May 2017 12:54:06 -0000
+X-List-Received-Date: Thu, 11 May 2017 12:57:32 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+;branch=master is default and you can drop it.
 
-Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
----
- ...-include-sys-select.h-for-fd_-definitions.patch | 32 +++++++++++-----------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+Don't use tag names (bitbake will have to reach the git repository to
+convert the name to fixed SRCREV every time it parses the recipe), use
+fixed SRCREV which is matching the tag.
 
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp/0001-include-sys-select.h-for-fd_-definitions.patch b/meta-oe/recipes-connectivity/libndp/libndp/0001-include-sys-select.h-for-fd_-definitions.patch
-index bafd916..15aa94e 100644
---- a/meta-oe/recipes-connectivity/libndp/libndp/0001-include-sys-select.h-for-fd_-definitions.patch
-+++ b/meta-oe/recipes-connectivity/libndp/libndp/0001-include-sys-select.h-for-fd_-definitions.patch
-@@ -1,25 +1,25 @@
--From 33150de2d77ffb645da1a043933b12ddc0143cea Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Tue, 21 Mar 2017 18:59:03 -0700
--Subject: [PATCH] include sys/select.h for fd_* definitions
-+From 94e9a082d76414f82794b0c9817d0c24e3868275 Mon Sep 17 00:00:00 2001
-+From: Kylie McClain <somasis@exherbo.org>
-+Date: Sat, 21 May 2016 21:24:36 -0400
-+Subject: [PATCH] ndptool: Fix compilation on musl libc
- 
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+FD_ZERO, fd_set, etc are defined within sys/select.h on musl.
-+
-+Signed-off-by: Kylie McClain <somasis@exherbo.org>
-+Signed-off-by: Jiri Pirko <jiri@mellanox.com>
- ---
-  utils/ndptool.c | 1 +
-  1 file changed, 1 insertion(+)
- 
- diff --git a/utils/ndptool.c b/utils/ndptool.c
--index 1d96f4c..0fd4c4d 100644
-+index 1d96f4c..96479fa 100644
- --- a/utils/ndptool.c
- +++ b/utils/ndptool.c
--@@ -23,6 +23,7 @@
-- #include <string.h>
-- #include <signal.h>
-- #include <getopt.h>
--+#include <sys/select.h>
-- #include <net/if.h>
-- #include <netinet/in.h>
-+@@ -28,6 +28,7 @@
-  #include <arpa/inet.h>
---- 
--2.12.0
--
-+ #include <errno.h>
-+ #include <ndp.h>
-++#include <sys/select.h>
-+ 
-+ enum verbosity_level {
-+ 	VERB1,
--- 
-2.7.4
+On Thu, May 11, 2017 at 2:53 PM, Gianfranco Costamagna <
+costamagna.gianfranco@gmail.com> wrote:
 
+> From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+>
+> Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+> ---
+>  meta-oe/recipes-connectivity/libndp/libndp_1.6.bb | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+> b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+> index e06ff7f..7a8ba60 100644
+> --- a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+> +++ b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
+> @@ -3,10 +3,10 @@ SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
+>  LICENSE = "LGPLv2.1"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+>
+> -SRC_URI = "http://libndp.org/files/${BPN}-${PV}.tar.gz \
+> +SRC_URI = "git://github.com/jpirko/libndp;branch=master;tag=v${PV} \
+>             file://0001-include-sys-select.h-for-fd_-definitions.patch \
+>             "
+> -SRC_URI[md5sum] = "1e54d26bcb4a4110bc3f90c5dd04f1a7"
+> -SRC_URI[sha256sum] = "0c7dfa84e013bd5e569ef2c6292a6f
+> 72cfaf14f4ff77a77425e52edc33ffac0e"
+> +
+> +S = "${WORKDIR}/git"
+>
+>  inherit autotools
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
