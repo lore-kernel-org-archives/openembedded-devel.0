@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4065F719B7
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2935A71A75
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 May 2017 07:09:06 +0000 (UTC)
+	Fri, 12 May 2017 07:09:08 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4C797vV019400
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4C799DU029497
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 May 2017 00:09:07 -0700 (PDT)
+	Fri, 12 May 2017 00:09:09 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 12 May 2017 00:09:07 -0700
+	14.3.294.0; Fri, 12 May 2017 00:09:08 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 12 May 2017 15:09:01 +0800
-Message-ID: <1740ba75071e18af3d95966ac84e8c959397b83e.1494572274.git.jackie.huang@windriver.com>
+Date: Fri, 12 May 2017 15:09:02 +0800
+Message-ID: <20170512070908.14356-1-jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1494572274.git.jackie.huang@windriver.com>
 References: <cover.1494572274.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 2/3] freediameter: add new recipe
+Subject: [meta-networking][PATCH 3/3] vblade: update to version 22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,600 +33,320 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 May 2017 07:09:07 -0000
+X-List-Received-Date: Fri, 12 May 2017 07:09:08 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-freeDiameter is an open source Diameter protocol
-implementation. It provides an extensible platform
-for deploying a Diameter network for your Authentication,
-Authorization and Accounting needs.
+Update to version 22 and add support for systemd
+and sysvinit, the scripts and conf files are taken
+from Fedora.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- ...murhash-algorithm-with-Robert-Jenkin-s-ha.patch | 223 +++++++++++++++++++++
- .../freediameter/files/freediameter.init           |  72 +++++++
- .../freediameter/files/freediameter.service        |  11 +
- .../freediameter/files/install_test.patch          |  22 ++
- .../freediameter/files/pass-ptest-env.patch        |  72 +++++++
- .../recipes-protocols/freediameter/files/run-ptest |  11 +
- .../freediameter/freediameter.inc                  |  98 +++++++++
- .../freediameter/freediameter_1.2.1.bb             |   7 +
- 8 files changed, 516 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
- create mode 100755 meta-networking/recipes-protocols/freediameter/files/freediameter.init
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/freediameter.service
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/install_test.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/run-ptest
- create mode 100644 meta-networking/recipes-protocols/freediameter/freediameter.inc
- create mode 100644 meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
+ .../recipes-daemons/vblade/files/vblade.conf       |   2 +
+ .../recipes-daemons/vblade/files/vblade.init       | 193 +++++++++++++++++++++
+ .../recipes-daemons/vblade/files/vblade.service    |  11 ++
+ .../vblade/files/volatiles.99_vblade               |   1 +
+ .../vblade/{vblade_20.bb => vblade_22.bb}          |  37 +++-
+ 5 files changed, 240 insertions(+), 4 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/vblade.conf
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/vblade.init
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/vblade.service
+ create mode 100644 meta-networking/recipes-daemons/vblade/files/volatiles.99_vblade
+ rename meta-networking/recipes-daemons/vblade/{vblade_20.bb => vblade_22.bb} (23%)
 
-diff --git a/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch b/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
+diff --git a/meta-networking/recipes-daemons/vblade/files/vblade.conf b/meta-networking/recipes-daemons/vblade/files/vblade.conf
 new file mode 100644
-index 000000000..71a5a1ae4
+index 000000000..e8b93ec37
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
-@@ -0,0 +1,223 @@
-+Replace murmurhash algorithm with Robert Jenkin's hash algorithm
-+
-+Upstream-Status: Pending
-+
-+From test result, murmurhash algorithm does not work in big endian
-+processor, so replace it with Robert Jenkin's hash which has worked
-+in linux kernel for many years and has more adaptability.
-+
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
-+---
-+ libfdproto/ostr.c |  192 +++++++++++++++++++++--------------------------------
-+ 1 file changed, 74 insertions(+), 118 deletions(-)
-+
-+diff --git a/libfdproto/ostr.c b/libfdproto/ostr.c
-+index 8f29b48..ce1f4dd 100644
-+--- a/libfdproto/ostr.c
-++++ b/libfdproto/ostr.c
-+@@ -430,128 +430,84 @@ after_proto:
-+ 
-+ 
-+ /********************************************************************************************************/
-+-/* Hash function -- credits to Austin Appleby, thank you ^^ */
-+-/* See http://murmurhash.googlepages.com for more information on this function */
-+-
-+-/* the strings are NOT always aligned properly (ex: received in RADIUS message), so we use the aligned MurmurHash2 function as needed */
-+-#define _HASH_MIX(h,k,m) { k *= m; k ^= k >> r; k *= m; h *= m; h ^= k; }
-+-uint32_t fd_os_hash ( uint8_t * string, size_t len )
-++/*
-++ * Robert Jenkin's hash function.
-++ * http://burtleburtle.net/bob/hash/evahash.html
-++ * This is in the public domain.
-++ */
-++#define mix(a, b, c)						\
-++	do {							\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 13);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 8);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 13);	\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 12);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 16);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 5);	\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 3);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 10);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 15);	\
-++	} while (0)
-++
-++unsigned hash_rjenkins(const char *str, unsigned length)
-+ {
-+-	uint32_t hash = len;
-+-	uint8_t * data = string;
-+-	
-+-	const unsigned int m = 0x5bd1e995;
-+-	const int r = 24;
-+-	int align = (long)string & 3;
-+-	
-+-	if (!align || (len < 4)) {
-+-		/* In case data is aligned, MurmurHash2 function */
-+-		while(len >= 4)
-+-		{
-+-			/* Mix 4 bytes at a time into the hash */
-+-			uint32_t k = *(uint32_t *)data;	/* We don't care about the byte order */
-+-
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			data += 4;
-+-			len -= 4;
-+-		}
-+-
-+-		/* Handle the last few bytes of the input */
-+-		switch(len) {
-+-			case 3: hash ^= data[2] << 16;
-+-			case 2: hash ^= data[1] << 8;
-+-			case 1: hash ^= data[0];
-+-	        		hash *= m;
-+-		}
-+-		
-+-	} else {
-+-		/* Unaligned data, use alignment-safe slower version */
-+-		
-+-		/* Pre-load the temp registers */
-+-		uint32_t t = 0, d = 0;
-+-		switch(align)
-+-		{
-+-			case 1: t |= data[2] << 16;
-+-			case 2: t |= data[1] << 8;
-+-			case 3: t |= data[0];
-+-		}
-+-		t <<= (8 * align);
-+-
-+-		data += 4-align;
-+-		len -= 4-align;
-+-		
-+-		/* From this point, "data" can be read by chunks of 4 bytes */
-+-		
-+-		int sl = 8 * (4-align);
-+-		int sr = 8 * align;
-+-
-+-		/* Mix */
-+-		while(len >= 4)
-+-		{
-+-			uint32_t k;
-+-			
-+-			d = *(unsigned int *)data;
-+-			k = (t >> sr) | (d << sl);
-+-
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			t = d;
-+-
-+-			data += 4;
-+-			len -= 4;
-+-		}
-+-
-+-		/* Handle leftover data in temp registers */
-+-		d = 0;
-+-		if(len >= align)
-+-		{
-+-			uint32_t k;
-+-			
-+-			switch(align)
-+-			{
-+-			case 3: d |= data[2] << 16;
-+-			case 2: d |= data[1] << 8;
-+-			case 1: d |= data[0];
-+-			}
-+-
-+-			k = (t >> sr) | (d << sl);
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			data += align;
-+-			len -= align;
-+-
-+-			/* Handle tail bytes */
-+-
-+-			switch(len)
-+-			{
-+-			case 3: hash ^= data[2] << 16;
-+-			case 2: hash ^= data[1] << 8;
-+-			case 1: hash ^= data[0];
-+-					hash *= m;
-+-			};
-+-		}
-+-		else
-+-		{
-+-			switch(len)
-+-			{
-+-			case 3: d |= data[2] << 16;
-+-			case 2: d |= data[1] << 8;
-+-			case 1: d |= data[0];
-+-			case 0: hash ^= (t >> sr) | (d << sl);
-+-					hash *= m;
-+-			}
-+-		}
-+-
-++	const unsigned char *k = (const unsigned char *)str;
-++	uint32_t a, b, c;  /* the internal state */
-++	uint32_t len;      /* how many key bytes still need mixing */
-++
-++	/* Set up the internal state */
-++	len = length;
-++	a = 0x9e3779b9;      /* the golden ratio; an arbitrary value */
-++	b = a;
-++	c = 0;               /* variable initialization of internal state */
-++
-++	/* handle most of the key */
-++	while (len >= 12) {
-++		a = a + (k[0] + ((uint32_t)k[1] << 8) + ((uint32_t)k[2] << 16) +
-++			 ((uint32_t)k[3] << 24));
-++		b = b + (k[4] + ((uint32_t)k[5] << 8) + ((uint32_t)k[6] << 16) +
-++			 ((uint32_t)k[7] << 24));
-++		c = c + (k[8] + ((uint32_t)k[9] << 8) + ((uint32_t)k[10] << 16) +
-++			 ((uint32_t)k[11] << 24));
-++		mix(a, b, c);
-++		k = k + 12;
-++		len = len - 12;
-++	}
-+ 
-++	/* handle the last 11 bytes */
-++	c = c + length;
-++	switch (len) {            /* all the case statements fall through */
-++	case 11:
-++		c = c + ((uint32_t)k[10] << 24);
-++	case 10:
-++		c = c + ((uint32_t)k[9] << 16);
-++	case 9:
-++		c = c + ((uint32_t)k[8] << 8);
-++		/* the first byte of c is reserved for the length */
-++	case 8:
-++		b = b + ((uint32_t)k[7] << 24);
-++	case 7:
-++		b = b + ((uint32_t)k[6] << 16);
-++	case 6:
-++		b = b + ((uint32_t)k[5] << 8);
-++	case 5:
-++		b = b + k[4];
-++	case 4:
-++		a = a + ((uint32_t)k[3] << 24);
-++	case 3:
-++		a = a + ((uint32_t)k[2] << 16);
-++	case 2:
-++		a = a + ((uint32_t)k[1] << 8);
-++	case 1:
-++		a = a + k[0];
-++		/* case 0: nothing left to add */
-+ 	}
-++	mix(a, b, c);
-+ 
-+-	/* Do a few final mixes of the hash to ensure the last few
-+-	   bytes are well-incorporated. */
-+-	hash ^= hash >> 13;
-+-	hash *= m;
-+-	hash ^= hash >> 15;
-++	return c;
-++}
-+ 
-+-	return hash;
-++uint32_t fd_os_hash ( uint8_t * string, size_t len )
-++{
-++	return hash_rjenkins(string, len); 
-+ } 
-+ 
-+-- 
-+1.7.10.4
-+
-diff --git a/meta-networking/recipes-protocols/freediameter/files/freediameter.init b/meta-networking/recipes-protocols/freediameter/files/freediameter.init
-new file mode 100755
-index 000000000..e63a42a7c
++++ b/meta-networking/recipes-daemons/vblade/files/vblade.conf
+@@ -0,0 +1,2 @@
++# network_device shelf slot file/disk/partition mac[,mac[,mac]]
++#eth0 0 0 /dev/sdb 00:11:22:33:44:55
+diff --git a/meta-networking/recipes-daemons/vblade/files/vblade.init b/meta-networking/recipes-daemons/vblade/files/vblade.init
+new file mode 100644
+index 000000000..0298c8001
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/freediameter.init
-@@ -0,0 +1,72 @@
++++ b/meta-networking/recipes-daemons/vblade/files/vblade.init
+@@ -0,0 +1,193 @@
 +#!/bin/sh
-+#
-+### BEGIN INIT INFO
-+# Provides:          freediameter
-+# Default-Start:     2 3 4 5
-+# Default-Stop:      0 1 6
-+# Required-Start:    $remote_fs $syslog
-+# Required-Stop:     $remote_fs $syslog
-+# Short-Description: Start freeDiameter daemon at boot time
-+# Description:       Start the freeDiameter daemon at boot time.
-+#       freeDiameter is an extensible implementation of the Diameter protocol,
-+#       designed for Authentication, Authorization and Accounting. Diameter is
-+#       an evolution of the RADIUS protocol.
-+### END INIT INFO#
-+DAEMON=/usr/bin/freeDiameterd
-+CONF=/etc/freeDiameter/freeDiameter.conf
-+NAME=freediameter
-+DESC="freeDiameter daemon"
++# 
++# Init script for vblade (ATA over Ethernet daemon)
++# 
++# chkconfig: - 30 70
++# description: vblade AoE daemon
++# 
++# processname: vblade
++# config: /etc/vblade.conf
++# 
++# Shamelessly hacked together from other init scripts (sshd, mostly)
++# integrate vblade.init from Fedora's vblade-14-6.fc12.src.rpm
++# 
 +
-+. /etc/init.d/functions
++RETVAL=0
++prog=vblade
++
++spawn_vblade() {
++  ALLOWMACS=""
++  [ -n "$5" ] && ALLOWMACS="-m $5"
++  ID="$1-e$2.$3"
++  if [ ! -d "/var/run/$prog" ]; then
++    mkdir /var/run/$prog
++  fi
++  PID_FILE=/var/run/$prog/${ID}.pid
++  $prog $ALLOWMACS $2 $3 $1 $4 >> /var/log/$prog.log 2>&1 &
++  pid=$!
++  RETVAL=$?
++  echo $pid > $PID_FILE
++  echo -n $"$4 (e$2.$3@$1) [pid $pid]"
++  [ "$RETVAL" = 0 ] && echo "success" || echo "failure"
++  echo
++}
++
 +start() {
-+	[ -x $DAEMON ] || exit 5
-+	echo -n $"Starting $DAEMON: "
-+	start-stop-daemon -S -b -x ${DAEMON} && success || failure
-+	retval=$?
-+	echo ""
-+	return $retval
++  local ret
++
++  echo $"Starting up $prog: "
++  
++  #/var/lock/subsys/$prog exists?
++  status $prog 2>&1 > /dev/null
++  ret=$?
++
++  if [ "$ret" = "2" ]; then
++    echo "$prog dead but subsys locked"
++    echo
++    return 2
++  else 
++    if [ "$ret" = "0" ]; then
++      #is running
++      echo "already running"
++      return 0
++    fi
++  fi
++
++  if [ 0 -ne `grep -vc '^#\|^$' /etc/$prog.conf` ]
++  then
++    grep -v '^#' /etc/$prog.conf | sed -e 's/	/ /g' -e 's/  / /g' | while read line
++    do
++      spawn_vblade $line
++    done
++    touch /var/lock/subsys/$prog
++  else
++    echo -n "empty $prog.conf?"
++    echo " passed"
++    echo
++  fi
 +}
 +
 +stop() {
-+	echo -n $"Stopping $prog: "
-+	start-stop-daemon -K -x $DAEMON
-+	retval=$?
-+	echo ""
-+	return $retval
++  echo -n $"Shutting down $prog: "
++  for pidfile in `ls /var/run/$prog/*.pid 2>/dev/null`
++  do
++    kill -TERM `cat $pidfile`
++    rm -f $pidfile
++  done
++  echo "success"
++  echo
++  rm -f /var/lock/subsys/$prog
 +}
 +
-+restart() {
-+	stop
-+	sleep 3
-+	start
++__pids_var_run() {
++        local base=${1##*/}
++        local pid_file=${2:-/var/run/$base.pid}
++
++        pid=
++        if [ -f "$pid_file" ] ; then
++                local line p
++
++                while : ; do
++                        read line
++                        [ -z "$line" ] && break
++                        for p in $line ; do
++                                [ -z "${p//[0-9]/}" -a -d "/proc/$p" ] && pid="$pid $p"
++                        done
++                done < "$pid_file"
++
++                if [ -n "$pid" ]; then
++                        return 0
++                fi
++                return 1 # "Program is dead and /var/run pid file exists"
++        fi
++        return 3 # "Program is not running"
 +}
 +
-+rh_status() {
-+	status $DAEMON
++__pids_pidof() {
++        pidof "$1" || pidof "${1##*/}"
 +}
 +
-+rh_status_q() {
-+	rh_status > /dev/null 2>&1
++status() {
++        local base pid lock_file= pid_file=
++
++        # Test syntax.
++        if [ "$#" = 0 ] ; then
++                echo $"Usage: status [-p pidfile] {program}"
++                return 1
++        fi
++        if [ "$1" = "-p" ]; then
++                pid_file=$2
++                shift 2
++        fi
++        if [ "$1" = "-l" ]; then
++                lock_file=$2
++                shift 2
++        fi
++        base=${1##*/}
++
++        # First try "pidof"
++        __pids_var_run "$1" "$pid_file"
++        RC=$?
++        if [ -z "$pid_file" -a -z "$pid" ]; then
++                pid="$(__pids_pidof "$1")"
++        fi
++        if [ -n "$pid" ]; then
++                echo $"${base} (pid $pid) is running..."
++                return 0
++        fi
++
++        case "$RC" in
++                0)
++                        echo $"${base} (pid $pid) is running..."
++                        return 0
++                        ;;
++                1)
++                        echo $"${base} dead but pid file exists"
++                        return 1
++                        ;;
++        esac
++        if [ -z "${lock_file}" ]; then
++                lock_file=${base}
++        fi
++        # See if /var/lock/subsys/${lock_file} exists
++        if [ -f /var/lock/subsys/${lock_file} ]; then
++                echo $"${base} dead but subsys locked"
++                return 2
++        fi
++        echo $"${base} is stopped"
++        return 3
 +}
 +
 +case "$1" in
-+  start)
-+	rh_status_q && exit 0
-+	start
-+	;;
-+  stop)
-+	rh_status_q || exit 0
-+	stop
-+	;;
-+  restart)
-+	restart
-+	;;
-+  status)
-+	rh_status
-+	;;
-+  *)
-+	echo $"Usage: $prog {start|stop|status|restart}"
-+	exit 2
++	start)
++		start
++		;;
++	stop)
++		stop
++		;;
++	restart)
++		stop
++		start
++		;;
++	reload)
++		# yes, this sucks, but the vblade processes die on SIGHUP
++		stop
++		start
++		;;
++	condrestart)
++		if [ -f /var/lock/subsys/$prog ]; then
++			stop
++			# avoid race
++			sleep 3
++			start
++		fi
++		;;
++	status)
++		status $prog
++		RETVAL=$?
++		;;
++	*)
++		echo $"Usage: $0 {start|stop|restart|reload|condrestart|status}"
++		RETVAL=1
 +esac
-+
-+exit $?
-diff --git a/meta-networking/recipes-protocols/freediameter/files/freediameter.service b/meta-networking/recipes-protocols/freediameter/files/freediameter.service
++exit $RETVAL
+diff --git a/meta-networking/recipes-daemons/vblade/files/vblade.service b/meta-networking/recipes-daemons/vblade/files/vblade.service
 new file mode 100644
-index 000000000..514481b43
+index 000000000..83a4d5dcb
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/freediameter.service
++++ b/meta-networking/recipes-daemons/vblade/files/vblade.service
 @@ -0,0 +1,11 @@
 +[Unit]
-+Description=freediameter daemon
-+After=network.target
++Description=Virtual EtherDrive blade AoE target
++After=syslog.target network.target
 +
 +[Service]
-+Type=simple
-+PIDFile=/var/run/freediameter.pid
-+ExecStart=@BINDIR@/freeDiameterd
++Type=forking
++ExecStart=@BINDIR@/vblade.init start
++ExecStop=@BINDIR@/vblade.init stop
 +
 +[Install]
 +WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/freediameter/files/install_test.patch b/meta-networking/recipes-protocols/freediameter/files/install_test.patch
+diff --git a/meta-networking/recipes-daemons/vblade/files/volatiles.99_vblade b/meta-networking/recipes-daemons/vblade/files/volatiles.99_vblade
 new file mode 100644
-index 000000000..151037d69
+index 000000000..64a5881c0
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/install_test.patch
-@@ -0,0 +1,22 @@
-+CMakeLists: add an option to install tests
++++ b/meta-networking/recipes-daemons/vblade/files/volatiles.99_vblade
+@@ -0,0 +1 @@
++d root root 0755 /var/run/vblade none
+diff --git a/meta-networking/recipes-daemons/vblade/vblade_20.bb b/meta-networking/recipes-daemons/vblade/vblade_22.bb
+similarity index 23%
+rename from meta-networking/recipes-daemons/vblade/vblade_20.bb
+rename to meta-networking/recipes-daemons/vblade/vblade_22.bb
+index 344c7462c..d7b1dfaad 100644
+--- a/meta-networking/recipes-daemons/vblade/vblade_20.bb
++++ b/meta-networking/recipes-daemons/vblade/vblade_22.bb
+@@ -4,19 +4,48 @@ SECTION = "admin"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BPN}-${PV}.tgz \
++SRC_URI = "${SOURCEFORGE_MIRROR}/aoetools/${BP}.tar.gz \
+            file://cross.patch \
+            file://makefile-add-ldflags.patch \
++           file://${BPN}.conf \
++           file://${BPN}.init \
++           file://${BPN}.service \
++           file://volatiles.99_vblade \
+           "
+ 
+-SRC_URI[md5sum] = "3c80e4a6bc7d66ae0c235b88cb44bd59"
+-SRC_URI[sha256sum] = "c8fe2fc4f2fba8e07e5cfdf17335982584eef2cd5c78bf8b1db93f2b56e7121d"
++SRC_URI[md5sum] = "510d98ba0f231284a5fbe2da11cb2d6e"
++SRC_URI[sha256sum] = "a990378f273f10eb431e42954a871aed52714035bbab28c54cef600c458356bb"
+ 
+-inherit autotools-brokensep
++inherit autotools-brokensep update-rc.d systemd
+ 
+ do_install() {
+     install -D -m 0755 ${S}/vblade ${D}/${sbindir}/vblade
+     install -D -m 0755 ${S}/vbladed ${D}/${sbindir}/vbladed
+     install -D -m 0644 ${S}/vblade.8 ${D}/${mandir}/man8/vblade.8
 +
-+Upstream-Status: Inappropriate [OE ptest specific]
++    install -D -m 0644 ${WORKDIR}/${BPN}.conf ${D}/${sysconfdir}/${BPN}.conf
++    install -D -m 0755 ${WORKDIR}/${BPN}.init ${D}/${sysconfdir}/init.d/${BPN}
 +
-+Original author: Yao Zhao <yao.zhao@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
++        install -d ${D}/${sysconfdir}/default/volatiles
++        install -m 0755 ${WORKDIR}/volatiles.99_vblade ${D}/${sysconfdir}/default/volatiles/99_vblade
++    fi
 +
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index da8da1b..de04059 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -113,4 +113,9 @@ ENDFOREACH( TEST )
-+ ####
-+ ## INSTALL section ##
-+ 
-+-# we do not install the tests
-++# install the tests
-++SET(INSTALL_TEST_SUFFIX       /opt/${FD_PROJECT_NAME}-tests   CACHE PATH "Directory where the test binary is installed.")
-++
-++INSTALL(TARGETS ${TEST_LIST}
-++        RUNTIME DESTINATION ${INSTALL_TEST_SUFFIX}
-++        COMPONENT freeDiameter-common)
-diff --git a/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch b/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
-new file mode 100644
-index 000000000..ea857af7d
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
-@@ -0,0 +1,72 @@
-+freediameter ptest cases testmesg_stress.c and testloadext.c need load
-+extensions both build time and runtime. Then they search extensions with
-+build directory that causes runtime failures.
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}/${bindir}
++        install -m 0755 ${WORKDIR}/${BPN}.init ${D}/${bindir}/
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /var/run/${BPN} 0755 root root -" > ${D}${sysconfdir}/tmpfiles.d/${BPN}.conf
 +
-+Pass an environment variable to define runtime extension path.
++        install -d ${D}${systemd_system_unitdir}
++        install -m 0644 ${WORKDIR}/vblade.service ${D}${systemd_system_unitdir}
++        sed -e 's,@BINDIR@,${bindir},g' -i ${D}${systemd_system_unitdir}/*.service
++    fi
 +
-+Upstream-Status: Inappropriate [OE ptest specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+diff -Nur freeDiameter-1.2.0.orig/tests/testloadext.c freeDiameter-1.2.0/tests/testloadext.c
-+--- freeDiameter-1.2.0.orig/tests/testloadext.c	2014-02-19 17:33:24.785405032 +0800
-++++ freeDiameter-1.2.0/tests/testloadext.c	2014-02-19 20:08:03.871403924 +0800
-+@@ -49,7 +49,7 @@
-+ {
-+ 	DIR *dir;
-+ 	struct dirent *dp;
-+-	char fullname[512];
-++	char fullname[1024];
-+ 	int pathlen;
-+ 
-+ 	/* First, initialize the daemon modules */
-+@@ -57,11 +57,16 @@
-+ 	CHECK( 0, fd_queues_init()  );
-+ 	CHECK( 0, fd_msg_init()  );
-+ 	CHECK( 0, fd_rtdisp_init()  );
-+-	
-++
-++	char *ext_dir = getenv("EXTENSIONS_DIR");
-++	if (ext_dir)
-++		pathlen = snprintf(fullname, sizeof(fullname), "%s", ext_dir);
-++	else
-++		pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++
-+ 	/* Find all extensions which have been compiled along the test */
-+-	TRACE_DEBUG(INFO, "Loading from: '%s'", BUILD_DIR "/extensions");
-+-	CHECK( 0, (dir = opendir (BUILD_DIR "/extensions")) == NULL ? 1 : 0 );
-+-	pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++	TRACE_DEBUG(INFO, "Loading from: '%s'", fullname);
-++	CHECK( 0, (dir = opendir (fullname)) == NULL ? 1 : 0 );
-+ 	
-+ 	while ((dp = readdir (dir)) != NULL) {
-+ 		char * dot = strrchr(dp->d_name, '.');
-+diff -Nur freeDiameter-1.2.0.orig/tests/testmesg_stress.c freeDiameter-1.2.0/tests/testmesg_stress.c
-+--- freeDiameter-1.2.0.orig/tests/testmesg_stress.c	2014-02-19 17:33:24.785405032 +0800
-++++ freeDiameter-1.2.0/tests/testmesg_stress.c	2014-02-19 20:08:03.928403924 +0800
-+@@ -67,15 +67,20 @@
-+ {
-+ 	DIR *dir;
-+ 	struct dirent *dp;
-+-	char fullname[512];
-++	char fullname[1024];
-+ 	int pathlen;
-+ 	struct fd_list all_extensions = FD_LIST_INITIALIZER(all_extensions);
-+ 	struct fd_list ext_with_depends = FD_LIST_INITIALIZER(ext_with_depends);
-+ 
-++	char *ext_dir = getenv("EXTENSIONS_DIR");
-++	if (ext_dir)
-++		pathlen = snprintf(fullname, sizeof(fullname), "%s", ext_dir);
-++	else
-++		pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++
-+ 	/* Find all extensions which have been compiled along the test */
-+-	LOG_D("Loading %s*.fdx from: '%s'", BUILD_DIR "/extensions", prefix ?: "");
-+-	CHECK( 0, (dir = opendir (BUILD_DIR "/extensions")) == NULL ? 1 : 0 );
-+-	pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++	TRACE_DEBUG(INFO, "Loading from: '%s'", fullname);
-++	CHECK( 0, (dir = opendir (fullname)) == NULL ? 1 : 0 );
-+ 	
-+ 	while ((dp = readdir (dir)) != NULL) {
-+ 		char * dot = strrchr(dp->d_name, '.');
-diff --git a/meta-networking/recipes-protocols/freediameter/files/run-ptest b/meta-networking/recipes-protocols/freediameter/files/run-ptest
-new file mode 100644
-index 000000000..d0ca8d962
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/run-ptest
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+
-+if ! lsmod | grep -q sctp && ! modprobe sctp 2>/dev/null; then
-+        echo "Couldn't load kernel module sctp."
-+        echo "Test cases testsctp and testcnx will fail."
-+        echo
-+fi
-+
-+export EXTENSIONS_DIR=$EXTENSIONS_DIR
-+cmake  -E cmake_echo_color --cyan "Running tests..."
-+ctest --force-new-ctest-process
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter.inc b/meta-networking/recipes-protocols/freediameter/freediameter.inc
-new file mode 100644
-index 000000000..6880d26f2
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter.inc
-@@ -0,0 +1,98 @@
-+SUMMARY = "An open source implementation of the diameter protocol"
-+DESCRIPTION = "\
-+freeDiameter is an open source Diameter protocol implementation. It \
-+provides an extensible platform for deploying a Diameter network for \
-+your Authentication, Authorization and Accounting needs."
-+
-+HOMEPAGE = "http://www.freediameter.net"
-+
-+DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn lksctp-tools"
-+
-+pkgname = "freeDiameter"
-+
-+SRC_URI = "http://www.freediameter.net/hg/${pkgname}/archive/${PV}.tar.gz;downloadfilename=${pkgname}-${PV}.tar.gz \
-+           file://Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch \
-+           file://freediameter.service \
-+           file://freediameter.init \
-+           \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-+           'file://install_test.patch \
-+            file://run-ptest \
-+            file://pass-ptest-env.patch', '', d)} \
-+           "
-+
-+S = "${WORKDIR}/${pkgname}-${PV}"
-+
-+PTEST_PATH = "${libdir}/${pkgname}/ptest"
-+
-+inherit cmake update-rc.d ptest systemd
-+
-+EXTRA_OECMAKE = " \
-+    -DDEFAULT_CONF_PATH:PATH=${sysconfdir}/${pkgname} \
-+    -DBUILD_DBG_MONITOR:BOOL=ON  \
-+    -DBUILD_TEST_APP:BOOL=ON \
-+    -DBUILD_TESTING:BOOL=ON \
-+    -DBUILD_APP_RADGW:BOOL=ON \
-+    -DBUILD_APP_REDIRECT:BOOL=ON \
-+    -DBUILD_TEST_ACCT:BOOL=ON \
-+    -DBUILD_TEST_NETEMUL:BOOL=ON \
-+    -DBUILD_TEST_RT_ANY:BOOL=ON \
-+    -DINSTALL_LIBRARY_SUFFIX:PATH=${baselib} \
-+    -DINSTALL_EXTENSIONS_SUFFIX:PATH=${baselib}/${pkgname} \
-+    -DINSTALL_TEST_SUFFIX:PATH=${PTEST_PATH}-tests \
-+    -DCMAKE_SKIP_RPATH:BOOL=ON \
-+"
-+# INSTALL_LIBRARY_SUFFIX is relative to CMAKE_INSTALL_PREFIX
-+# specify it on cmd line will fix the SET bug in CMakeList.txt
-+
-+# -DBUILD_APP_ACCT:BOOL=ON This needs POSTGRESQL support
-+
-+# -DBUILD_APP_DIAMEAP:BOOL=ON  -DBUILD_APP_SIP:BOOL=ON -DBUILD_TEST_SIP:BOOL=ON
-+# These need MySQL support
-+
-+# -DBUILD_DBG_INTERACTIVE:BOOL=ON This needs SWIG support
-+
-+# -DALL_EXTENSIONS=ON will enable all
-+
-+do_install_append() {
-+    # install the sample configuration file
-+    install -d -m 0755 ${D}${sysconfdir}/${pkgname}
-+    for i in ${S}/doc/*.conf.sample; do
-+        install -m 0644 $i ${D}${sysconfdir}/${pkgname}/
-+    done
-+    mv ${D}${sysconfdir}/${pkgname}/freediameter.conf.sample \
-+      ${D}${sysconfdir}/${pkgname}/freeDiameter.conf.sample
-+
-+    # install daemon init related files
-+    install -d -m 0755 ${D}${sysconfdir}/default
-+    install -d -m 0755 ${D}${sysconfdir}/init.d
-+    install -m 0644 ${S}/contrib/debian/freediameter-daemon.default \
-+      ${D}${sysconfdir}/default/${BPN}
-+    install -m 0755 ${WORKDIR}/freediameter.init ${D}${sysconfdir}/init.d/${BPN}
-+
-+    # install for systemd
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 ${WORKDIR}/freediameter.service ${D}${systemd_system_unitdir}
-+    sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/*.service
-+}
-+
-+do_install_ptest() {
-+    sed -i "s#\(EXTENSIONS_DIR=\).*\$#\1${libdir}/${pkgname}/#" ${D}${PTEST_PATH}/run-ptest
-+    mv ${D}${PTEST_PATH}-tests/* ${D}${PTEST_PATH}/
-+    rmdir ${D}${PTEST_PATH}-tests
-+    install -m 0644 ${B}/tests/CTestTestfile.cmake ${D}${PTEST_PATH}/
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/${pkgname}/.debug/*"
-+
-+# include the extensions in main package
-+FILES_${PN} += "${libdir}/${pkgname}/*"
-+
-+RDEPENDS_${PN} = "glib-2.0 gnutls libidn"
-+RDEPENDS_${PN}-ptest = "cmake"
-+
-+INITSCRIPT_NAME = "${BPN}"
+ }
+ 
++INITSCRIPT_NAME = "vblade"
 +INITSCRIPT_PARAMS = "start 30 . stop 70 0 1 2 3 4 5 6 ."
 +
-+SYSTEMD_SERVICE_${PN} = "freediameter.service"
++SYSTEMD_SERVICE_${PN} = "vblade.service"
 +SYSTEMD_AUTO_ENABLE = "disable"
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-new file mode 100644
-index 000000000..3fb929aa0
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-@@ -0,0 +1,7 @@
-+include freediameter.inc
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=892b2ed6ae815488a08416ff7ee74a35"
-+
-+SRC_URI[md5sum] = "61b1062aa144b5f12eed514611e6d697"
-+SRC_URI[sha256sum] = "bd7f105542e9903e776aa006c6931c1f5d3d477cb59af33a9162422efa477097"
 -- 
 2.11.0
 
