@@ -1,47 +1,30 @@
-Return-Path: <philip.balister@gmail.com>
-Received: from mail-yb0-f195.google.com (mail-yb0-f195.google.com
-	[209.85.213.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DE71871B9C
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 46A6960125
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 20:13:31 +0000 (UTC)
-Received: by mail-yb0-f195.google.com with SMTP id b2so1302683yba.3
+	Fri, 12 May 2017 05:49:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18776698"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 May 2017 13:49:09 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 81FC847B0CB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 May 2017 13:13:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=6n19D72NtL3+tff9KpCmC+zVHU0k4XrgBemrYNiP6+0=;
-	b=rQZnxD8h5pAQjf92AtcYgNhEZVSFtT6Azc/Sy5zGAo3H2x/CyXYyIBMrsWjIFfIh3U
-	jHh5CW1/bcRrujUttYWSUU6+HpQz3S5REKNciHciJuSJHZ/fT5nuJxlL68ucJ18gPGJc
-	HL6EJ1I4rk2AEVPoQUmQ86+CaOIO47qyVMmObBwYQbXNRHG5hSUndZvXLcyaX50AA7t2
-	qnXYs2fdgtCjecsJVtOdlZBG/q83DgXg+COCyS0eyBoKNSV5rBgM1Vauk+pRWShxwm4G
-	sXV1gTPBzgQbeeRxVcVjTVRwLjcIwVc4vG1iBx7Lqekja+DYpk7RY2NTuI/0rkyq1J02
-	fygA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=6n19D72NtL3+tff9KpCmC+zVHU0k4XrgBemrYNiP6+0=;
-	b=VCpp30UyKr6DRRP5QuD7tdYwFVJKmty1MsAuYG9iJYKjdz9sJdAQkcht104S2KIxDh
-	Jxj8uSRETJUezKj9Q9D8+kg0pivlGEzzD63Ogpm7bP3mf9PxJTGJRqc9PL6GjhwDDFd3
-	yHmdmsVF3ya/6K/JbhcvMOkR+jR4XCjAPv23mTz7UtBz3vYJOs5FJDd/vX4Xyr4ZohMB
-	gr20+hsUDoSKbXbl5PuaU0f9A1oQykrx801GJm/DynEyZ5dLBRWqUVZ4mrU28YFo/1G7
-	pjBQkrC2yN9kJaBzZXyLz9uV9pMjwVaxEJXMqchlSEe0Gf43aHIS9oF2LFG1pffyn5W4
-	RVTw==
-X-Gm-Message-State: AODbwcD3jyZg0MXaRgWUChgbeohasFXzuyD0cDtfLv7vpxF14Bi3E6eh
-	d1N/PdY+nOeXkg==
-X-Received: by 10.37.5.209 with SMTP id 200mr272557ybf.139.1494533612611;
-	Thu, 11 May 2017 13:13:32 -0700 (PDT)
-Received: from thuvia.localdomain (pool-71-171-14-165.ronkva.east.verizon.net.
-	[71.171.14.165]) by smtp.gmail.com with ESMTPSA id
-	q129sm198986ywb.53.2017.05.11.13.13.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 11 May 2017 13:13:31 -0700 (PDT)
-Sender: Philip Balister <philip.balister@gmail.com>
-From: Philip Balister <philip@balister.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 11 May 2017 16:13:15 -0400
-Message-Id: <1494533595-30956-1-git-send-email-philip@balister.org>
+	Fri, 12 May 2017 13:49:09 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Fri, 12 May 2017 13:49:07 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 12 May 2017 13:48:47 +0800
+Message-ID: <1494568127-60598-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] sip: update recipe to 4.19.2.
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 81FC847B0CB7.A9D51
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe] [PATCH] lua: 5.3.3 -> 5.3.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,35 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 May 2017 20:13:32 -0000
+X-List-Received-Date: Fri, 12 May 2017 05:49:18 -0000
+Content-Type: text/plain
 
- * Needed for PyQt-5.8.2, a recipe I am looking at again.
+1) Upgrade lua from 5.3.3 to 5.3.4.
+2) License checksum changed,since the copyright years were updated.
 
-Signed-off-by: Philip Balister <philip@balister.org>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-devtools/sip/{sip_4.19.bb => sip_4.19.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/sip/{sip_4.19.bb => sip_4.19.2.bb} (92%)
+ meta-oe/recipes-devtools/lua/{lua_5.3.3.bb => lua_5.3.4.bb} | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-devtools/lua/{lua_5.3.3.bb => lua_5.3.4.bb} (81%)
 
-diff --git a/meta-oe/recipes-devtools/sip/sip_4.19.bb b/meta-oe/recipes-devtools/sip/sip_4.19.2.bb
-similarity index 92%
-rename from meta-oe/recipes-devtools/sip/sip_4.19.bb
-rename to meta-oe/recipes-devtools/sip/sip_4.19.2.bb
-index 82feebb..1d837c5 100644
---- a/meta-oe/recipes-devtools/sip/sip_4.19.bb
-+++ b/meta-oe/recipes-devtools/sip/sip_4.19.2.bb
-@@ -9,8 +9,8 @@ inherit python-dir
- DEPENDS = "python"
+diff --git a/meta-oe/recipes-devtools/lua/lua_5.3.3.bb b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+similarity index 81%
+rename from meta-oe/recipes-devtools/lua/lua_5.3.3.bb
+rename to meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+index b7995c2..28d71fa 100644
+--- a/meta-oe/recipes-devtools/lua/lua_5.3.3.bb
++++ b/meta-oe/recipes-devtools/lua/lua_5.3.4.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Lua is a powerful light-weight programming language designed \
+ for extending applications."
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=10ffd57d574c60d5b4d6189544e205a9"
++LIC_FILES_CHKSUM = "file://doc/readme.html;beginline=318;endline=352;md5=60aa5cfdbd40086501778d9b6ebf29ee"
+ HOMEPAGE = "http://www.lua.org/"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/pyqt/sip/sip-${PV}/sip-${PV}.tar.gz"
--SRC_URI[md5sum] = "be51a05065c9323b98a2ec2966c64e6a"
--SRC_URI[sha256sum] = "014bf55f653e0d8bcc582705ef4fbd61e0859a36e959ab46d8fa060cdf0b5e27"
-+SRC_URI[md5sum] = "4f48e212890ebe584e8d804cfbcfc61e"
-+SRC_URI[sha256sum] = "432b4aad25254e6997913e33b1ca3cf5fd21d5729a50a3ce2edccbea82c80533"
+ DEPENDS = "readline"
+@@ -13,10 +13,10 @@ SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
+             file://run-ptest \
+            ', '', d)}"
  
- BBCLASSEXTEND = "native"
+-SRC_URI[tarballsrc.md5sum] = "703f75caa4fdf4a911c1a72e67a27498"
+-SRC_URI[tarballsrc.sha256sum] = "5113c06884f7de453ce57702abaac1d618307f33f6789fa870e87a59d772aca2"
+-SRC_URI[tarballtest.md5sum] = "76f4fb07f2a4970d554645ac26df86df"
+-SRC_URI[tarballtest.sha256sum] = "13154abc20976196119db531b4169ce1ce511755879d40b4192e4173291287e5"
++SRC_URI[tarballsrc.md5sum] = "53a9c68bcc0eda58bdc2095ad5cdfc63"
++SRC_URI[tarballsrc.sha256sum] = "f681aa518233bc407e23acf0f5887c884f17436f000d453b2491a9f11a52400c"
++SRC_URI[tarballtest.md5sum] = "b14fe3748c1cb2d74e3acd1943629ba3"
++SRC_URI[tarballtest.sha256sum] = "b80771238271c72565e5a1183292ef31bd7166414cd0d43a8eb79845fa7f599f"
+ 
+ inherit pkgconfig binconfig ptest
  
 -- 
 2.7.4
+
+
 
 
