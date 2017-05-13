@@ -1,39 +1,21 @@
-Return-Path: <sbabic@denx.de>
-Received: from mail-out.m-online.net (mail-out.m-online.net [212.18.0.9])
-	by mail.openembedded.org (Postfix) with ESMTP id 8062071AB9
+Return-Path: <sjl@vctlabs.com>
+X-Greylist: delayed 525 seconds by postgrey-1.34 at layers.openembedded.org;
+	Sat, 13 May 2017 06:42:37 UTC
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AA5B60684
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 May 2017 16:17:22 +0000 (UTC)
-Received: from frontend01.mail.m-online.net (unknown [192.168.8.182])
-	by mail-out.m-online.net (Postfix) with ESMTP id 3wPZr31yV7z1qrsx;
-	Fri, 12 May 2017 18:17:23 +0200 (CEST)
-Received: from localhost (dynscan01.mnet-online.de [192.168.6.70])
-	by mail.m-online.net (Postfix) with ESMTP id 3wPZr31cFZz3jgYJ;
-	Fri, 12 May 2017 18:17:23 +0200 (CEST)
-X-Virus-Scanned: amavisd-new at mnet-online.de
-Received: from mail.mnet-online.de ([192.168.8.182])
-	by localhost (dynscan01.mail.m-online.net [192.168.6.70]) (amavisd-new,
-	port 10024)
-	with ESMTP id S0GgFkGXR3fr; Fri, 12 May 2017 18:17:22 +0200 (CEST)
-Received: from babic.homelinux.org (host-88-217-136-221.customer.m-online.net
-	[88.217.136.221]) by mail.mnet-online.de (Postfix) with ESMTP;
-	Fri, 12 May 2017 18:17:22 +0200 (CEST)
-Received: from localhost (mail.babic.homelinux.org [127.0.0.1])
-	by babic.homelinux.org (Postfix) with ESMTP id C722F45406B4;
-	Fri, 12 May 2017 18:17:21 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at babic.homelinux.org
-Received: from babic.homelinux.org ([127.0.0.1])
-	by localhost (mail.babic.homelinux.org [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id nD-glslvhzg7; Fri, 12 May 2017 18:17:18 +0200 (CEST)
-Received: from papero.fritz.box (papero.fritz.box [192.168.178.132])
-	by babic.homelinux.org (Postfix) with ESMTP id C1C7C4540399;
-	Fri, 12 May 2017 18:17:18 +0200 (CEST)
-From: Stefano Babic <sbabic@denx.de>
+	Sat, 13 May 2017 06:42:37 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id DF15C28019E; Fri, 12 May 2017 23:34:15 -0700 (PDT)
+Date: Fri, 12 May 2017 23:34:15 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 May 2017 18:17:10 +0200
-Message-Id: <1494605830-18765-1-git-send-email-sbabic@denx.de>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] Fix broken package fbida
+Message-ID: <20170513063415.GQ9767@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: meta-python: outrageously long cython shebang with pyro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,38 +28,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 May 2017 16:17:25 -0000
+X-List-Received-Date: Sat, 13 May 2017 06:42:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Missing pkgconfig does not let build the package.
+The recipe-specific sysroots in pyro are a wonderful thing for uncovering 
+missing dependencies, but they also make it easier than ever to break
+the cython scripts by exceeding the measly 128-byte limit on shebang lines. 
 
-Signed-off-by: Stefano Babic <sbabic@denx.de>
----
+The cython recipe builds fine -- this is runtime breakage from recipes that
+depend on cython. This was always a danger when using lengthy toplevel
+directory names (e.g. as tends to happen in jenkins auto-builds), but
+now I managed to get the dreaded "bad interpreter: No such file or directory"
+failure from cython despite a not-ridiculously-long toplevel path:
 
-Tested on current master, i.MX6 ARM target
+#!/var/data/sjl/poky/build/tmp/work/armv7a-neon-oe-linux-gnueabi/libplist/git-r0/recipe-sysroot-native/usr/bin/python-native/python
 
- meta-oe/recipes-graphics/fbida/fbida_2.10.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
-
-diff --git a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-index eb31f7b..1febac8 100644
---- a/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-+++ b/meta-oe/recipes-graphics/fbida/fbida_2.10.bb
-@@ -18,6 +18,8 @@ SRC_URI[sha256sum] = "7a5a3aac61b40a6a2bbf716d270a46e2f8e8d5c97e314e927d41398a4d
- 
- B = "${WORKDIR}/build"
- 
-+inherit pkgconfig
-+
- EXTRA_OEMAKE = "STRIP= 'srcdir=${S}' -f ${S}/GNUmakefile"
- 
- PACKAGECONFIG ??= "gif png curl"
-@@ -66,5 +68,3 @@ do_install() {
- }
- 
- RDEPENDS_${PN} = "ttf-dejavu-sans-mono bash"
--
--PNBLACKLIST[fbida] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130677/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.7.4
-
+Does anybody know of a recommended strategy for solving the shebang problem,
+now that it has been exacerbated by the sysroot move? I'll be happy to submit a
+corresponding cython patch if so. 
 
