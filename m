@@ -1,47 +1,50 @@
 Return-Path: <philip.balister@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 79BA7606B2
+Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
+	[209.85.161.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1749F6B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 May 2017 19:24:53 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id 203so3474662ywe.0
+	Sat, 13 May 2017 19:24:55 +0000 (UTC)
+Received: by mail-yw0-f195.google.com with SMTP id 17so3473736ywk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 May 2017 12:24:55 -0700 (PDT)
+	Sat, 13 May 2017 12:24:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=cvL6/4vUcGBHiBCj11QA0AutfeB/c8vqE5WgGHmiR4M=;
-	b=u9ZZ5xyxDAqnW35WRz7tJFVtWeu6KMuLKLEcp+/HivPW36qCdwCxDxQNJll7WVJZ5B
-	5MtukWmtOH27B6xPp9su+xnqv6nyeA6/LKrZ2swq7+a8zuGFEyYxqqUydOLZ7dXHdqrx
-	Q9auwQShjnMm+fRJBi250knpoQZwj80lOZr0sZFumeKbPTj2huozhUAow3HrYq548AM+
-	5jDdW/6iKQzuchTHa2vs5FpyfTUdZ3kfWG89nrVA1NOrwWwVqqHF33eSK7pO5bCkXsp6
-	rzM4vPVlsECAmIcTmPz063qwmxB4J5ZUC16aElzUhmmVlbJWuc37XS0o6Zsa6EXjSVXK
-	/DMA==
+	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=GOmxU8ZSwRN54Bz3lB/cSTIEo1e24STPsbsAkPUTZio=;
+	b=eGu6V9YZVpEM0WLCAmtqUB7Y26sYA+hI7ScApaVrOkfqSU2BpfTkBTXStkX6QJuOfy
+	Sb9bTsupwvBc2ncufxAi1uHSt0g8qLzjWnwEz1oGPxO2kBMjS0I91PuidA8KJyAVRyRP
+	IqPel+Ky9KTHLC1tGFj5j4mtoomTncCRh8cBUwfcPGCOeIBIfwTyZtdFl1II2+9g9Kwn
+	wmOJQZ9DcnNBMNYUlUD8RlgkpF9LjBHfG1xqVhid9ZCKT3WjsirsJGlhSHFJDldPy9pW
+	8sqQeKS42R5U7br+Pd7ZA8xIaQzdZiCsP8hzCgKQeWJ+dudozeevIS6DdYDq3XeFlFWw
+	hZhg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=cvL6/4vUcGBHiBCj11QA0AutfeB/c8vqE5WgGHmiR4M=;
-	b=k4xugmaSOW++JbxtFmzdE8vuHHmPyXzHHLAgK76TPV2E34tD6nWyWqVeKkfiDtvVRl
-	ujsPO5pYEe+pYdgnIim/gmizYuD6u8FVK6hYC0BW7yUnbh9JgKDCSYKXTq0KbeEgha4v
-	4IEK1Zf5SC1KBYOTrNbw46BfkplNQHtkYSHV1Is/g/sDwksZjZ/b35hxxPnIoT068WHt
-	XeFz8gYBgSxTZa3t9I17PTEFAY5DD3E2CtvTpw60PtTu+AWABMsVCXMZV4TBX56XEj+Q
-	ltnyCNqx1HkXPrGqGLWIerX5IhSk1yuMeEqsTzbZtzBeIzi82jIyhDU5WsOPsMtcjH9C
-	4bEw==
-X-Gm-Message-State: AODbwcCMmSshBWgIiim/DkN3pI/gNgLxmvOMrTRxquatN+bY7I1YtgBt
-	uvRQSmejRc+IUA==
-X-Received: by 10.129.77.7 with SMTP id a7mr8376837ywb.104.1494703494378;
-	Sat, 13 May 2017 12:24:54 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
+	:in-reply-to:references;
+	bh=GOmxU8ZSwRN54Bz3lB/cSTIEo1e24STPsbsAkPUTZio=;
+	b=Agi7YUhrd8An2aQsBhRqzbo/kd8KRjJz+Vgkjv85ZLJmf4INFyPCaZkRc1mCCbKirh
+	nWnonxgqM8tRMXQyNA5JIwRl1IRvg5UdrLR0jLzX2p0ta+FQQMO2pqG14j+07bNpo7uw
+	4GJ5nmvuAvA//TsSga0Osb5Kjdax49HX2e9/U/UeyrdgeUtidtaazHXtSOEDqw1Kc+RO
+	MwE8gzV0bP2ZqgY2cFzdmREYsSgIwLN/r9gS3dc1ixz77WiSx+KmqHsH4dqPlD9/o6h2
+	nPzUkdpxCAlR0Gklk2v89/Dks044OYSh1SRxYvrdAvl4WXrxbopgdRmuGPIhsoNAdHsk
+	eDUw==
+X-Gm-Message-State: AODbwcAVl6iGlGqLVlcV3BYK8Q3BcHgfE6F2QPPr1s3iZnWhOLUS+IVz
+	zqbfeZEiAU6QpqVu
+X-Received: by 10.129.156.76 with SMTP id t73mr8379366ywg.262.1494703496614;
+	Sat, 13 May 2017 12:24:56 -0700 (PDT)
 Received: from thuvia.localdomain (pool-71-171-14-165.ronkva.east.verizon.net.
 	[71.171.14.165]) by smtp.gmail.com with ESMTPSA id
-	w192sm3321511yww.56.2017.05.13.12.24.51
+	w192sm3321511yww.56.2017.05.13.12.24.55
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 13 May 2017 12:24:52 -0700 (PDT)
+	Sat, 13 May 2017 12:24:55 -0700 (PDT)
 Sender: Philip Balister <philip.balister@gmail.com>
 From: Philip Balister <philip@balister.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 13 May 2017 15:24:48 -0400
-Message-Id: <1494703489-23588-1-git-send-email-philip@balister.org>
+Date: Sat, 13 May 2017 15:24:49 -0400
+Message-Id: <1494703489-23588-2-git-send-email-philip@balister.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-qt5][PATCH 1/2] qwt: Add recipe.
+In-Reply-To: <1494703489-23588-1-git-send-email-philip@balister.org>
+References: <1494703489-23588-1-git-send-email-philip@balister.org>
+Subject: [meta-qt5][PATCH 2/2] python-pyqt5: Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,85 +57,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 May 2017 19:24:54 -0000
+X-List-Received-Date: Sat, 13 May 2017 19:24:56 -0000
 
- * Build tested for raspberrypi3.
+ * Build tested on raspberrypi3
+ * I promise to chase the patch upstream.
 
 Signed-off-by: Philip Balister <philip@balister.org>
 ---
- recipes-qt/qwt/qwt-qt5.inc      | 47 +++++++++++++++++++++++++++++++++++++++++
- recipes-qt/qwt/qwt-qt5_6.1.3.bb |  8 +++++++
- 2 files changed, 55 insertions(+)
- create mode 100644 recipes-qt/qwt/qwt-qt5.inc
- create mode 100644 recipes-qt/qwt/qwt-qt5_6.1.3.bb
+ recipes-python/pyqt5/files/fix-sm.patch    | 17 ++++++++
+ recipes-python/pyqt5/python-pyqt5_5.8.2.bb | 68 ++++++++++++++++++++++++++++++
+ 2 files changed, 85 insertions(+)
+ create mode 100644 recipes-python/pyqt5/files/fix-sm.patch
+ create mode 100644 recipes-python/pyqt5/python-pyqt5_5.8.2.bb
 
-diff --git a/recipes-qt/qwt/qwt-qt5.inc b/recipes-qt/qwt/qwt-qt5.inc
+diff --git a/recipes-python/pyqt5/files/fix-sm.patch b/recipes-python/pyqt5/files/fix-sm.patch
 new file mode 100644
-index 0000000..ee4fbd7
+index 0000000..f2936a2
 --- /dev/null
-+++ b/recipes-qt/qwt/qwt-qt5.inc
-@@ -0,0 +1,47 @@
-+DESCRIPTION = "Qt Widget Extension for Technical Applications"
-+SECTION = "libs"
++++ b/recipes-python/pyqt5/files/fix-sm.patch
+@@ -0,0 +1,17 @@
++--- PyQt5_gpl-5.8.2/sip/QtGui/qguiapplication.sip.orig	2017-05-13 13:28:42.523392315 -0400
+++++ PyQt5_gpl-5.8.2/sip/QtGui/qguiapplication.sip	2017-05-13 13:30:08.081207211 -0400
++@@ -270,12 +270,14 @@
++ %End
++ 
++ public:
+++%If (PyQt_SessionManager)
++ %If (Qt_5_6_0 -)
++     static bool isFallbackSessionManagementEnabled();
++ %End
++ %If (Qt_5_6_0 -)
++     static void setFallbackSessionManagementEnabled(bool);
++ %End
+++%End
++ 
++ signals:
++ %If (Qt_5_6_0 -)
+diff --git a/recipes-python/pyqt5/python-pyqt5_5.8.2.bb b/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
+new file mode 100644
+index 0000000..b4c0a8d
+--- /dev/null
++++ b/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
+@@ -0,0 +1,68 @@
++SUMMARY = "Python Qt5 Bindings"
++AUTHOR = "Phil Thomson @ riverbank.co.uk"
++HOMEPAGE = "http://riverbankcomputing.co.uk"
++SECTION = "devel/python"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "\
++    file://LICENSE;md5=d32239bcb673463ab874e80d47fae504 \
++"
++DEPENDS = "sip sip-native qtbase python"
 +
-+# LGPLv2.1 + some exceptions
-+LICENSE = "QWTv1.0"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=dac2743472b0462ff3cfb4af42051c88"
++SRC_URI = "\
++    ${SOURCEFORGE_MIRROR}/pyqt/PyQt5_gpl-${PV}.tar.gz \
++    file://fix-sm.patch \
++"
++SRC_URI[md5sum] = "c3048e9d242f3e72fd393630da1d971a"
++SRC_URI[sha256sum] = "ebd70515b30bbd6098fee29e6271a6696b1183c5530ee30e6ba9aaab195536e8"
 +
-+DEPENDS = "qtbase qtsvg qttools"
++S = "${WORKDIR}/PyQt5_gpl-${PV}"
 +
-+SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt \
-+          "
-+#           file://qwt6.patch 
-+#           file://qwt6-fix-linking-with-ld-gold.patch"
 +
-+S = "${WORKDIR}/qwt-${PV}"
++inherit qmake5 pythonnative python-dir distro_features_check
++# depends on qt4-x11-free
++REQUIRED_DISTRO_FEATURES = "x11"
++
++export BUILD_SYS
++export HOST_SYS
++export STAGING_INCDIR
++export STAGING_LIBDIR
++
++DISABLED_FEATURES = "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_SessionManager"
++
++DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
++
++PYQT_MODULES = "QtCore QtGui QtNetwork"
++PYQT_MODULES_aarch64 = "QtCore QtGui QtNetwork"
 +
 +do_configure_prepend() {
 +    cd ${S}
-+    sed -i -e 's:RELEASE_SUFFIX      = :RELEASE_SUFFIX      = ${QT_LIBINFIX}:' *.pri
-+    sed -i -e 's:qtAddLibrary(qwt:qtAddLibrary(qwt)${QT_LIBINFIX}:g' *.prf
-+    sed -e 's/# QWT_CONFIG     += QwtExamples/QWT_CONFIG     += QwtExamples/g' -i qwtconfig.pri
-+    sed -i -e 's:/usr/local/qwt-$$QWT_VERSION:${D}${prefix}:g' ${S}/*.pri
++    echo "py_platform = linux" > pyqt.cfg
++    echo "py_inc_dir = %(sysroot)/$includedir/python%(py_major).%(py_minor)" >> pyqt.cfg
++    echo "py_pylib_dir = %(sysroot)/${libdir}/python%(py_major).%(py_minor)" >> pyqt.cfg
++    echo "py_pylib_lib = python%(py_major).%(py_minor)mu" >> pyqt.cfg
++    echo "pyqt_module_dir = ${D}/${libdir}/python%(py_major).%(py_minor)/site-packages" >> pyqt.cfg
++    echo "pyqt_bin_dir = ${D}/${bindir}" >> pyqt.cfg
++    echo "pyqt_sip_dir = ${D}/${datadir}/sip/PyQt5" >> pyqt.cfg
++    echo "pyuic_interpreter = ${D}/${bindir}/python%(py_major).%(py_minor)" >> pyqt.cfg
++    echo "pyqt_disabled_features = ${DISABLED_FEATURES}" >> pyqt.cfg
++    echo "qt_shared = True" >> pyqt.cfg
++    echo "[Qt 5.7]" >> pyqt.cfg
++    echo "pyqt_modules = ${PYQT_MODULES}" >> pyqt.cfg
++    echo yes | python configure.py --verbose --qmake  ${STAGING_BINDIR_NATIVE}/qt5/qmake --configuration pyqt.cfg --sysroot ${STAGING_DIR_HOST}
++}
++
++do_compile() {
++    cd ${S}
++    oe_runmake
 +}
 +
 +do_install() {
 +    cd ${S}
-+    oe_runmake -e install
-+#    install -d ${D}${datadir}/doc/${PN}
-+#    mv ${D}${prefix}/doc/* ${D}${datadir}/doc/${PN}/
-+#    rmdir ${D}${prefix}/doc
-+#    cd ${S}/examples
-+#    install -d ${D}/${bindir}
-+#    cd bin${QT_LIBINFIX}/
-+#    for i in * ; do
-+#        cp -pPR ${i} ${D}/${bindir}/${i}${QT_LIBINFIX}
-+#    done
-+#    install -d ${D}${libdir}/${QT_DIR_NAME}
-+#    mv ${D}${prefix}/plugins ${D}${libdir}/${QT_DIR_NAME}
++    oe_runmake install
 +}
 +
-+PACKAGES_prepend = "${PN}-examples ${PN}-features ${PN}-plugins "
-+FILES_${PN}-examples = "${bindir}/*"
-+FILES_${PN}-features = "${prefix}/features"
-+FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
-+FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
-+FILES_${PN}-doc += "${prefix}/doc"
++RDEPENDS_${PN} = "python-core python-sip"
 +
-diff --git a/recipes-qt/qwt/qwt-qt5_6.1.3.bb b/recipes-qt/qwt/qwt-qt5_6.1.3.bb
-new file mode 100644
-index 0000000..626bd0a
---- /dev/null
-+++ b/recipes-qt/qwt/qwt-qt5_6.1.3.bb
-@@ -0,0 +1,8 @@
-+inherit qmake5
++FILES_${PN} += "${libdir}/${PYTHON_DIR}/site-packages ${datadir}/sip/PyQt5/"
++FILES_${PN}-dbg += "${libdir}/${PYTHON_DIR}/site-packages/*/.debug/"
 +
-+require qwt-qt5.inc
-+
-+SRC_URI[qwt.md5sum] = "19d1f5fa5e22054d22ee3accc37c54ba"
-+SRC_URI[qwt.sha256sum] = "f3ecd34e72a9a2b08422fb6c8e909ca76f4ce5fa77acad7a2883b701f4309733"
-+
-+RPROVIDES_${PN}-dev = "libqwt-qt5-dev"
 -- 
 2.7.4
 
