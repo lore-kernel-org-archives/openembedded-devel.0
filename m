@@ -1,21 +1,21 @@
-Return-Path: <sjl@vctlabs.com>
-X-Greylist: delayed 525 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 13 May 2017 06:42:37 UTC
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AA5B60684
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id BDD276B6EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 May 2017 06:42:37 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id DF15C28019E; Fri, 12 May 2017 23:34:15 -0700 (PDT)
-Date: Fri, 12 May 2017 23:34:15 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+	Sat, 13 May 2017 18:37:59 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	13 May 2017 11:38:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.38,336,1491289200"; d="scan'208";a="100052098"
+Received: from chiron.jf.intel.com ([10.7.159.56])
+	by orsmga005.jf.intel.com with ESMTP; 13 May 2017 11:38:00 -0700
+From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170513063415.GQ9767@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembedded-devel@lists.openembedded.org
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: meta-python: outrageously long cython shebang with pyro
+Date: Sat, 13 May 2017 11:37:47 -0700
+Message-Id: <20170513183748.20479-1-timothy.t.orling@linux.intel.com>
+X-Mailer: git-send-email 2.9.3
+Subject: [meta-java][master][pyro][PATCH 1/2] cacao-native: fix configure RSS regression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,23 +28,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 May 2017 06:42:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 13 May 2017 18:38:01 -0000
 
-The recipe-specific sysroots in pyro are a wonderful thing for uncovering 
-missing dependencies, but they also make it easier than ever to break
-the cython scripts by exceeding the measly 128-byte limit on shebang lines. 
+Add virtual/java-initial-native and classpath-initial-native
+to DEPENDS_class-native
 
-The cython recipe builds fine -- this is runtime breakage from recipes that
-depend on cython. This was always a danger when using lengthy toplevel
-directory names (e.g. as tends to happen in jenkins auto-builds), but
-now I managed to get the dreaded "bad interpreter: No such file or directory"
-failure from cython despite a not-ridiculously-long toplevel path:
+Recipe Specific Sysroots uncovered the following chain:
+* ecj-initial fails because java-initial is command not found
+* java-initial core dumps:
+      "java/lang/NoClassDefFoundError: java/lang/Object"
+* strace shows missing .../usr/share/classpath-initial/glibj.zip
 
-#!/var/data/sjl/poky/build/tmp/work/armv7a-neon-oe-linux-gnueabi/libplist/git-r0/recipe-sysroot-native/usr/bin/python-native/python
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+---
+ recipes-core/cacao/cacao_1.6.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Does anybody know of a recommended strategy for solving the shebang problem,
-now that it has been exacerbated by the sysroot move? I'll be happy to submit a
-corresponding cython patch if so. 
+diff --git a/recipes-core/cacao/cacao_1.6.1.bb b/recipes-core/cacao/cacao_1.6.1.bb
+index ec13cc5..c380f56 100644
+--- a/recipes-core/cacao/cacao_1.6.1.bb
++++ b/recipes-core/cacao/cacao_1.6.1.bb
+@@ -4,7 +4,7 @@ LICENSE  = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+ SECTION  = "interpreters"
+ 
+-DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-native bdwgc-native"
++DEPENDS_class-native = "zlib-native libtool-native ecj-initial-native fastjar-native classpath-initial-native classpath-native bdwgc-native virtual/java-initial-native"
+ PROVIDES_class-native = "virtual/java-native"
+ 
+ DEPENDS = "zlib libtool classpath virtual/javac-native bdwgc"
+-- 
+2.9.3
+
 
