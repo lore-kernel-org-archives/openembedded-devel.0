@@ -1,31 +1,43 @@
-Return-Path: <clement.perrochaud@openmailbox.org>
-X-Greylist: delayed 327 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 15 May 2017 16:35:51 UTC
-Received: from mail.openmailbox.org (lb1.openmailbox.org [5.79.108.160])
-	by mail.openembedded.org (Postfix) with ESMTP id B3D3872F28
+Return-Path: <tharvey@gateworks.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id D7BB371D79
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 May 2017 16:35:51 +0000 (UTC)
-Received: by mail.openmailbox.org (Postfix, from userid 20002)
-	id 5C26F5001B5; Mon, 15 May 2017 18:30:24 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=openmailbox.org;
-	s=openmailbox; t=1494865825;
-	bh=7BFo7vT8jRHcjW9R+gUerX4VmbegyjYzkhUZIa9o6PE=;
-	h=Date:From:To:Subject:From;
-	b=FTiGH/gdLVI+UzFPEZ7O1KiSbH4cNPqNXJ1rDhdp2iSn7aYklGXBgNKAu9V/h1T2W
-	9WwKgdJ2LC9G1nQHZTc19xs41UenUn9KjBp1ivmVQqFkCAJDJ/g/8tdLOSNrCBolbT
-	WH3lSimwroMBSzLd6Thiloq7TW8FuCHRv9YFi0jo=
-Received: from www.openmailbox.org (unknown [10.0.0.3])
-	by mail.openmailbox.org (Postfix) with ESMTP id 99A7150EF94
+	Mon, 15 May 2017 18:00:14 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id b84so95012087wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 May 2017 18:30:23 +0200 (CEST)
+	Mon, 15 May 2017 11:00:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=gateworks-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=gWO5siGq0tr2y6gE/MYExLgi1nEwiPMO8c6h+pX0Wqc=;
+	b=netGIuvKLbBNsmTQZjXe8wPdbPMyqxAew7nM7i4UvhHh2uiuf6m4DFC5pHPN0i/y5Z
+	1KbK8I4lB6eYniZ50olx2VBo009CZDYk++GxrOAeR1lJ+avxvxHMO2+bH7aNN5Cu6qaW
+	9swQYhBQYTjukatUHx3nJ9Emw2N7xIRlzD0aMFLFYrud0qfhk2/MNqRWp1RTjWkz5aQ6
+	R2/kMSk7q2DgF8qhOuWtdSSqHAZ6ckHbmydBazDOsaqc69y2G2h9DQjNNWMji+Jo99A1
+	Sv6fgEcOcfnrSp6zB2YHAOPWW/Seg2otzr4IIRtZbDnvnvBhI2v6Yx20Mj2mkwISHp23
+	Npww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=gWO5siGq0tr2y6gE/MYExLgi1nEwiPMO8c6h+pX0Wqc=;
+	b=rydjizIP3lSkBKABpD6hmcvG2aVznXa5fs4UUWKFqLD48v2hGAiJcDTnYMn2t45yMN
+	wLhVK5i7q58aBzjQhEP0F5T9xGbgoBOJ4gM2oiNI9HJhmAhGaNPQXxWTeBgC1IjUAxUR
+	Y+gsWSmk6vs62YVzG10lDUn8bcqkSbyPcWGx8Zt9ZWCmKGEE2t5GfHNia8+cwXgoGCIk
+	KU/U9cetnjfdT13Cp/edRdlfLhguRPidedIVFv82K8UHQoU87lLDn02oliB82eP7Vt2i
+	cdFqWgwIeFQEkMNdChsYcw/GCUv2AVQbkkiGRh6jAvxjZ0MyzVPNbe/pL1aoajabzFjd
+	ZG2w==
+X-Gm-Message-State: AODbwcB8R3kGhQycMrAz/BTQdBhFtcp3ZELT+uM3dLV6KLHX6vbQILxL
+	2oh1nORA2MTbPo/BRXvKuVrzT4S7Jtig574=
+X-Received: by 10.28.137.201 with SMTP id l192mr4479613wmd.27.1494871214958;
+	Mon, 15 May 2017 11:00:14 -0700 (PDT)
 MIME-Version: 1.0
-Date: Mon, 15 May 2017 18:30:23 +0200
-From: clement.perrochaud@openmailbox.org
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <b6a126b1859da5f97b77cdf15d26bf0a@openmailbox.org>
-X-Sender: clement.perrochaud@openmailbox.org
-User-Agent: Roundcube Webmail/1.0.6
-Subject: [meta-oe][PATCH] xf86-video-geode: Update to 2.11.18
+Received: by 10.28.212.21 with HTTP; Mon, 15 May 2017 11:00:14 -0700 (PDT)
+From: Tim Harvey <tharvey@gateworks.com>
+Date: Mon, 15 May 2017 11:00:14 -0700
+Message-ID: <CAJ+vNU25j=OtN+vvzO1_kbFOKRYWaaJA-yfKB8pJ8cdxu5fw=g@mail.gmail.com>
+To: "meta-freescale@yoctoproject.org" <meta-freescale@yoctoproject.org>, 
+	openembedded-devel@lists.openembedded.org
+Subject: kernel modules failing to load because of missing symbols
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,138 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 May 2017 16:35:52 -0000
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 15 May 2017 18:00:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This release includes the patch required for 2.11.16 and fixes the
-build issue.
-Removed from blacklist.
+Greetings,
 
-Signed-off-by: Clément Perrochaud <clement.perrochaud@openmailbox.org>
----
-  ...1-Add-config.h-include-to-src-lx_memory.c.patch | 41 
-----------------------
-  .../xorg-driver/xf86-video-geode_2.11.16.bb        | 16 ---------
-  .../xorg-driver/xf86-video-geode_2.11.18.bb        | 12 +++++++
-  3 files changed, 12 insertions(+), 57 deletions(-)
-  delete mode 100644 
-meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/0001-Add-config.h-include-to-src-lx_memory.c.patch
-  delete mode 100644 
-meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb
-  create mode 100644 
-meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.18.bb
+I've got a kernel recipe that builds several kernel modules which get
+build and packaged as kernel-module-<modname>. I'm finding that while
+most of these modules appear to load properly into the kernel at
+runtime, several of them do not because of missing symbols:
 
-diff --git 
-a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/0001-Add-config.h-include-to-src-lx_memory.c.patch 
-b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/0001-Add-config.h-include-to-src-lx_memory.c.patch
-deleted file mode 100644
-index fcd2f684b..000000000
---- 
-a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode/0001-Add-config.h-include-to-src-lx_memory.c.patch
-+++ /dev/null
-@@ -1,41 +0,0 @@
--From 621d946e56efac2c779b83b1a5c6b645169c4ebd Mon Sep 17 00:00:00 2001
--From: "Brian A. Lloyd" <brian.lloyd@familyhonor.net>
--Date: Wed, 1 Oct 2014 12:35:18 +0300
--Subject: [PATCH] Add config.h include to src/lx_memory.c
--
--The src/lx_memory.c file uses the xf86.h header file.  This file must 
-have
--HAVE_STRNDUP defined before calling it when the building platform has a 
-strndup
--function.  When using config.h, this file doesn't have that define and 
-so fails
--to compile.
--
--The attached patch adds the conditional config.h to this file so it may 
-compile
--on the affected platforms.
--
--The patch is trivial and may be included and used under whatever 
-licensing
--desired.
--
--Closes: Free Desktop Bug #84541
--
--Signed-off-by: Brian A. Lloyd <brian.lloyd@familyhonor.net>
--Upstream-Status: Backport
-----
-- src/lx_memory.c | 3 +++
-- 1 file changed, 3 insertions(+)
--
--diff --git a/src/lx_memory.c b/src/lx_memory.c
--index f26d280..992446f 100644
----- a/src/lx_memory.c
--+++ b/src/lx_memory.c
--@@ -22,6 +22,9 @@
--  * contributors may be used to endorse or promote products derived 
-from this
--  * software without specific prior written permission.
--  */
--+#if HAVE_CONFIG_H
--+#include "config.h"
--+#endif
--
-- #include "xf86.h"
-- #include "geode.h"
----
--2.1.1
--
-diff --git 
-a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb 
-b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb
-deleted file mode 100644
-index e543413ad..000000000
---- a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require recipes-graphics/xorg-driver/xorg-driver-video.inc
--LIC_FILES_CHKSUM = 
-"file://COPYING;md5=e7f3e39474aeea5af381a8e103dafc36"
--
--SUMMARY = "X.org server -- Geode GX2/LX display driver"
--PR = "${INC_PR}.0"
--
--SRC_URI += "file://0001-Add-config.h-include-to-src-lx_memory.c.patch"
--SRC_URI[md5sum] = "35fa387f6a33f6b22a56ce4bda424392"
--SRC_URI[sha256sum] = 
-"38fc1f55e29fb7985b90c9021a4b7e5295d42888bd669174f42f3b7f681fc1a7"
--
--COMPATIBLE_HOST = "i.86.*-linux"
--
--RDEPENDS_${PN} += "xserver-xorg-module-exa"
--
--# 2_2.11.16-r21.0/xf86-video-geode-2.11.16/src/gx_driver.c:376:20: 
-error: implicit declaration of function 'xf86MapVidMem' 
-[-Werror=implicit-function-declaration]
--PNBLACKLIST[xf86-video-geode] ?= "BROKEN, fails to build - the recipe 
-will be removed on 2017-09-01 unless the issue is fixed"
-diff --git 
-a/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.18.bb 
-b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.18.bb
-new file mode 100644
-index 000000000..0c338c5f3
---- /dev/null
-+++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.18.bb
-@@ -0,0 +1,12 @@
-+require recipes-graphics/xorg-driver/xorg-driver-video.inc
-+LIC_FILES_CHKSUM = 
-"file://COPYING;md5=e7f3e39474aeea5af381a8e103dafc36"
-+
-+SUMMARY = "X.org server -- Geode GX2/LX display driver"
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[md5sum] = "7d049187ee3640087e99f4267de6baf1"
-+SRC_URI[sha256sum] = 
-"d6ece9a862a68be3cdf86a87e0e1ba5e199168b8d075129646638f53649ba9e8"
-+
-+COMPATIBLE_HOST = "i.86.*-linux"
-+
-+RDEPENDS_${PN} += "xserver-xorg-module-exa"
--- 
-2.12.2
+# modprobe bluetooth
+[  782.848396] bluetooth: no symbol version for sock_register
+[  782.854315] bluetooth: Unknown symbol sock_register (err -22)
+# modprobe ip_tables
+[  893.675147] ip_tables: no symbol version for ns_capable
+[  893.680385] ip_tables: Unknown symbol ns_capable (err -22)
+modprobe: ERROR: could not insert 'ip_tables': Invalid argument
 
+The symbols do appear to be in the kernel's System.map:
+# grep " ns_capable" /boot/System.map*
+80033cfc T ns_capable
+# grep sock_register /boot/System.map*
+805337a8 T sock_register
+8084fb0c R __ksymtab_sock_register
+8085ab64 r __kcrctab_sock_register
+8087abaf r __kstrtab_sock_register
 
+I'm seeing this on Yocto master, Yocto pyro 2.3, Yocto morty 2.2 but
+surprisingly not on Yocto krogoth 2.1.
+
+Any ideas what could be going on here or how best to troubleshoot this?
+
+Best Regards,
+
+Tim
+
+Tim Harvey - Principal Software Engineer
+Gateworks Corporation - http://www.gateworks.com/
+3026 S. Higuera St. San Luis Obispo CA 93401
+805-781-2000
 
