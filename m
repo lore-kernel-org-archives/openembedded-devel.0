@@ -1,21 +1,27 @@
-Return-Path: <wei.tee.ng@intel.com>
+Return-Path: <alexander.kanavin@linux.intel.com>
 Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 2909571AB9
+	by mail.openembedded.org (Postfix) with ESMTP id 30DAC71CBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 May 2017 06:20:00 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	Mon, 15 May 2017 12:00:38 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
 	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	14 May 2017 23:20:02 -0700
+	15 May 2017 05:00:39 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,343,1491289200"; d="scan'208";a="1147805462"
-Received: from platypus.jf.intel.com ([10.54.77.139])
-	by fmsmga001.fm.intel.com with ESMTP; 14 May 2017 23:20:02 -0700
-From: wei.tee.ng@intel.com
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 14 May 2017 16:09:06 -0700
-Message-Id: <1494803346-189821-1-git-send-email-wei.tee.ng@intel.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] dbus-daemon-proxy: inherit pkgconfig and unblacklist
+X-IronPort-AV: E=Sophos;i="5.38,344,1491289200"; d="scan'208";a="100749795"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga005.jf.intel.com with ESMTP; 15 May 2017 05:00:38 -0700
+To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20170513063415.GQ9767@vctlabs.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <4bbb34e6-8970-8b4e-7d2f-03d0b9a7b549@linux.intel.com>
+Date: Mon, 15 May 2017 14:58:33 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+In-Reply-To: <20170513063415.GQ9767@vctlabs.com>
+Subject: Re: meta-python: outrageously long cython shebang with pyro
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,39 +34,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 May 2017 06:20:01 -0000
+X-List-Received-Date: Mon, 15 May 2017 12:00:45 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-From: "Ng, Wei Tee" <wei.tee.ng@intel.com>
+On 05/13/2017 09:34 AM, S. Lockwood-Childs wrote:
+> The cython recipe builds fine -- this is runtime breakage from recipes that
+> depend on cython. This was always a danger when using lengthy toplevel
+> directory names (e.g. as tends to happen in jenkins auto-builds), but
+> now I managed to get the dreaded "bad interpreter: No such file or directory"
+> failure from cython despite a not-ridiculously-long toplevel path:
+>
+> #!/var/data/sjl/poky/build/tmp/work/armv7a-neon-oe-linux-gnueabi/libplist/git-r0/recipe-sysroot-native/usr/bin/python-native/python
 
-The pkgconfig is not found in recipes specific sysroot. Therefore
-inherit pkgconfig is added to fix it.
+We typically patch the upstream code to use
 
-Signed-off-by: Ng, Wei Tee <wei.tee.ng@intel.com>
----
- meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+#!/usr/bin/env python
 
-diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-index a953ebc..b216410 100644
---- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-+++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-@@ -11,6 +11,8 @@ ASNEEDED_pn-dbus-daemon-proxy = ""
- SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy"
- S = "${WORKDIR}/git"
- 
-+inherit pkgconfig
-+
- do_compile() {
-     ${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o dbus-daemon-proxy dbus-daemon-proxy.c
- }
-@@ -19,6 +21,3 @@ do_install() {
-     install -d ${D}${bindir}
-     install -m 0755 dbus-daemon-proxy ${D}${bindir}
- }
--
--
--PNBLACKLIST[dbus-daemon-proxy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130613/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.7.4
+There is some PATH environment variable magic that will ensure that the 
+correct version of python will come first in the PATH, so it should be 
+safe to do. There's a ton of examples in oe-core.
+
+
+Alex
 
 
