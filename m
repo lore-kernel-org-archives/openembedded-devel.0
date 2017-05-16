@@ -1,49 +1,49 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9865777D2F
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id F0F7772F62
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 May 2017 11:15:06 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id y10so37375772wmh.0
+	Tue, 16 May 2017 11:16:46 +0000 (UTC)
+Received: by mail-ua0-f182.google.com with SMTP id g49so97123209uaa.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 May 2017 04:15:08 -0700 (PDT)
+	Tue, 16 May 2017 04:16:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=393RtdMohVvx8I3YvipLUCetbg0AN1KZXpWzPGPRUhg=;
-	b=a0c5gcafKWiCQqYQZ1HN/6YldKooD/MiFoh6tHoj+5ZtvCzLVOhZUzwkH+q5l+iwz/
-	xiIvfJnWH088CWIAB16pKHO4ItNeR8AXwBfXyGzuueSqRBYcqovTShleumFG0f7oSSOR
-	jyURy+yEGaUk7g2GRQYKKU18N4LBdorerlK8Yju6BNFgR/1+QvHFYuvTImk1bP7nKE6x
-	oP0w0D4Gv8dCSQ0NiLMU6tDs8jUPWos3TuJfWT9kjCHzHgl9V2d1B4J0EH71PBeVp6KP
-	dgft4Wub+I0J1Ld2L94ylPFRrcc5rZ1A1t8QXCNMLvtDWJPIHNxv0anMoDR8M0o8/FKu
-	lSYw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=RzE5oCY+uJUmOHXAog7JC5txk1b6Ca5AwwSRM1xzBAk=;
+	b=dg4mrv3PwVUOfBuu4vULnGale+Bdiy/jHyMe5R28J5SC5DdSGxdEzhnBXLJhPczeHW
+	NYoOK3+s72HVIupkJwKbq6M89hRKupeYyur+t0Gq0+hZGPJsqT+PdwA8DQaoVwJF89pC
+	XDMDejDRuTSZsk5QYncBDbZIp4nye1rFezeS/Fri9XcobEolcvF5eLOvaVbmXgIVK4d6
+	JmN34WTCesT1/kjRbrFp/eez/x55s2Et/Fy0Cg1rh+36SJmeIM3ch7PwfCP/8LJEQ5Sk
+	b0okVXwEhot00YYLFj8A2i41RQZNviAcdZQqeVle2D6u0/D+hKngbDl8l4/VccJXmLMf
+	DtFA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=393RtdMohVvx8I3YvipLUCetbg0AN1KZXpWzPGPRUhg=;
-	b=ugB84OyES6iVCaIRRl+t4U39pvMXPnp5L1/krAzhZzA+0h/fG7Tdy7btD1TkKGMaaA
-	UpFxTw97YRg1zGna9j8stdKgfb/0LYFgbl7C1oY1Ba6ySq+hjsoROnQ4LsBU/KVY1XmB
-	UU4JEhKuQvyylNVE5Tb0gcad6NcmSyg+n6BDVdFEC0rk6CsiF7h+7L22owSZD5Qz7/IH
-	KXirWs/L0VKeVd1qEq7L1mox7sPhm7S9Y1Lee0JK65bfrHko7bvDBPMJyq6xtaNxL0jw
-	n+T6z3dj1rF9ullj7Cl8lrzX5LM9ZNCzGF+PuYQotKFR6rdMiEuUgPGUJ5kEM1A8rblg
-	gp4w==
-X-Gm-Message-State: AODbwcBYdJ9NB9+Dtl4iO8c6oNyJu7eRi5DnNXpuEFWJ5wNn378rwsP2
-	8ONPxUdVTVDdu/8ULpQ=
-X-Received: by 10.28.238.20 with SMTP id m20mr6710088wmh.121.1494933307176;
-	Tue, 16 May 2017 04:15:07 -0700 (PDT)
-Received: from localhost.localdomain ([37.177.79.194])
-	by smtp.gmail.com with ESMTPSA id u13sm1353764wmu.3.2017.05.16.04.15.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 16 May 2017 04:15:06 -0700 (PDT)
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 May 2017 13:15:00 +0200
-Message-Id: <1494933300-31618-2-git-send-email-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1494933300-31618-1-git-send-email-costamagnagianfranco@yahoo.it>
-References: <1494933300-31618-1-git-send-email-costamagnagianfranco@yahoo.it>
-Cc: Marius Tiplea <marius.tiplea@windriver.com>
-Subject: [meta-oe][PATCH] drbd-utils: fix dependency for perl under small-fs
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=RzE5oCY+uJUmOHXAog7JC5txk1b6Ca5AwwSRM1xzBAk=;
+	b=hYgQXd7SOSSIxo/7/f1vslooF+uVhaVykZ01G5aCGHXG1l1vVWHqMP3109O/KzCmxx
+	i6V4X9xcTWDGV/LY2YuEP9SGEsxUyeEkNxD2bkT6hYjAHiXwfPI6d9pN3EFtBRrcmqKf
+	Ji3G2K84j5vwkQnCkbT0DGT8WY+5knnqRWt6i0FTiWCxfc6OPKG+Kwjwv3qy41aGRnOB
+	QMiQveWWuLNaeglITYiyW36XL77ETVz06Ku0AwnJu0/IgMLzL1KFx/NsZZVo4QBdK3Yu
+	kji2SznUuHsJybG/FhDU65Y4774Cd0Hd5ic956hOXrYdYK3UZWOFsVwEEJqXM9AgQ8ml
+	Ft8w==
+X-Gm-Message-State: AODbwcD/UfGhVJs7gv59S+4GZbtmAt8ofjpWyKkFNpwIbVlgXEZ+SOSi
+	loh4x5JHLf7RP26BuS0gtbJC3oEU7g==
+X-Received: by 10.159.38.54 with SMTP id 51mr5565705uag.0.1494933407571; Tue,
+	16 May 2017 04:16:47 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.103.47.74 with HTTP; Tue, 16 May 2017 04:16:47 -0700 (PDT)
+In-Reply-To: <CA+chaQcV9VeDHj5TLFzibJyVNHDLOR7AdW4vM=KR_adAPTs1rw@mail.gmail.com>
+References: <1494931796-11721-1-git-send-email-liu.ming50@gmail.com>
+	<CA+chaQcV9VeDHj5TLFzibJyVNHDLOR7AdW4vM=KR_adAPTs1rw@mail.gmail.com>
+From: Ming Liu <liu.ming50@gmail.com>
+Date: Tue, 16 May 2017 13:16:47 +0200
+Message-ID: <CALatG=7qve-xez_Ahedq0i5K_jv3hBrt+ysiGmFGLQmVBSni1g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Ming Liu <peter.x.liu@external.atlascopco.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe] [PATCH] xerces-c: fix a wrong PACKAGECONFIG option
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +56,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 May 2017 11:15:07 -0000
+X-List-Received-Date: Tue, 16 May 2017 11:16:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: "Yadi.hu" <yadi.hu@windriver.com>
+Hi, Martin:
 
-Perl script drbd-overview fails to run due to some of
-perl's lib noexists under small rootfs,fixing it through
-adding explicit definitions
+Arha, thanks for the review, will send a V2.
 
-Signed-off-by: Marius Tiplea <marius.tiplea@windriver.com>
-Signed-off-by: Yadi.hu <yadi.hu@windriver.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
----
- meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+//Ming Liu
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-index 3d6f5b2..67ed8e5 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-@@ -30,7 +30,7 @@ EXTRA_OECONF = " \
-                 --without-manual\
-                "
- 
--RDEPENDS_${PN} += "bash perl"
-+RDEPENDS_${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
- 
- # The drbd items are explicitly put under /lib when installed.
- #
--- 
-2.7.4
+2017-05-16 13:12 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
 
+> You should use ${prefix} if there isn't better variable instead of
+> hardcoding /usr
+>
+> On Tue, May 16, 2017 at 12:49 PM, <liu.ming50@gmail.com> wrote:
+>
+>> From: Ming Liu <peter.x.liu@external.atlascopco.com>
+>>
+>> In xerces-c's configure, these options is being referred as follows:
+>> ......
+>>     curl_flags="-I$with_curl/include"
+>>     curl_libs="-L$with_curl/lib -lcurl"
+>>
+>>     icu_flags="-I$with_icu/include"
+>>     icu_libs="-L$with_icu/lib -licuuc -licudata"
+>> ......
+>>
+>> so they shouldn't be set to ${STAGING_DIR}, use
+>> ${STAGING_DIR_TARGET}/usr instead.
+>>
+>> Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+>> ---
+>>  meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb | 4 ++--
+>>  1 file changed, 2 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+>> b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+>> index b848b06..3bcedd7 100644
+>> --- a/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+>> +++ b/meta-oe/recipes-devtools/xerces-c/xerces-c_3.1.4.bb
+>> @@ -16,8 +16,8 @@ SRC_URI[sha256sum] = "9408f12c1628ecf80730bedbe8b2c
+>> aad810edd01bb4c66f77b60c873e8
+>>  inherit autotools
+>>
+>>  PACKAGECONFIG ??= "curl icu"
+>> -PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR},--with-curl=no,curl"
+>> -PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR},--with-icu=no,icu"
+>> +PACKAGECONFIG[curl] = "--with-curl=${STAGING_DIR_TAR
+>> GET}/usr,--with-curl=no,curl"
+>> +PACKAGECONFIG[icu] = "--with-icu=${STAGING_DIR_TARG
+>> ET}/usr,--with-icu=no,icu"
+>>
+>>  do_install_prepend () {
+>>      sed -i -e 's:-L${STAGING_DIR}/lib:-L\$\{libdir\}:g' ${B}/xerces-c.pc
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
