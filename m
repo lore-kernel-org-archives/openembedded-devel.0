@@ -1,47 +1,55 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id DC64B71BEE
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E026E77DE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 May 2017 19:56:57 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id d127so40382472wmf.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 16 May 2017 12:56:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=aiYXLRnh6foFgzEsbnf+qVJ1EtNL14NdSkQqMnWWujE=;
-	b=uDc5y1gu1H1SYRdLHdNEykY8VxtHZ8n21nslh9kA7RxJsE/xF4saZNYNaeTztbAL+5
-	kO9SdIc0JeIUEJd1YrtqoQ0NRftCwSb9uSMq9fcDTonahad0JTzlJtHpMoWKAgUup8/b
-	9/MJmvq8LGe1hHVCmjifgxdAEVpsXe1IVgTVUihwy3twALHfiKpgUL/rG3A76kTjvrS8
-	hAOpkQ/1zNpnK4vubZY2ttLjVJbVpjHIVZuO2lbxVPVmJGh/Ar5d5N0lYyTTZqHz4dPx
-	ypmr+eJtty22MqEO4gi5qoewlZoYhCIx2M63nFgIP4gZFB1WP/ZwJZiKicqoMwRDB4l/
-	DPjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=aiYXLRnh6foFgzEsbnf+qVJ1EtNL14NdSkQqMnWWujE=;
-	b=GDeK+yPrUeCDEf/XZZklMiqXS07v9EDqPxoEPif8Pb1Z9ujz9XTpoqNTSz8DdcziKC
-	Rg4aWfQuyNsk7yjShxnrEOZMO+UEdn3B+516J7fPf1slHEIK++RF3JUex964qb8hvBwE
-	2czSL0Nn6/TrFmzBdZbfy2KQng+K7sedR+3Eqh9LqyunWJ5pp4i/IFnfomr4769yvKYo
-	xJfSGzmpRvbQDUMuq4h8bJ9QIptLfgnHNenRb41yu/FUPCIJF3WAL/+lsjgLFAUR7lKT
-	+ZMgaU4W/wLuQgAGYbkcV3TMJpXJ03H14iZDGrNzZmQVso6dY3yBUjGWrH658zIciU4F
-	DCyw==
-X-Gm-Message-State: AODbwcAfvoeu20C/DMLHbZAAncguRJtEaNbgWSAEHsenpftUJQK/8ojy
-	J2FAZhQDpXfVGFhi
-X-Received: by 10.28.29.6 with SMTP id d6mr8777600wmd.71.1494964618453;
-	Tue, 16 May 2017 12:56:58 -0700 (PDT)
-Received: from localhost.localdomain (109-230-21-223.static.orange.sk.
-	[109.230.21.223]) by smtp.gmail.com with ESMTPSA id
-	x64sm3251418wrb.10.2017.05.16.12.56.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 16 May 2017 12:56:57 -0700 (PDT)
-Sender: Belisko Marek <marek.belisko@gmail.com>
-From: Marek Belisko <marek.belisko@open-nandra.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 16 May 2017 21:56:55 +0200
-Message-Id: <1494964615-15539-1-git-send-email-marek.belisko@open-nandra.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Marek Belisko <marek.belisko@open-nandra.com>
-Subject: [meta-oe][PATCH] recipes-support: Add handling for libgpiod
+	Tue, 16 May 2017 20:07:45 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id AC43518284;
+	Tue, 16 May 2017 22:07:45 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id gQtEtagPf95D; Tue, 16 May 2017 22:07:39 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 2E072184B2;
+	Tue, 16 May 2017 22:07:39 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id CAAC71E08D;
+	Tue, 16 May 2017 22:07:38 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id BE4F41E08A;
+	Tue, 16 May 2017 22:07:38 +0200 (CEST)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Tue, 16 May 2017 22:07:38 +0200 (CEST)
+Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
+	by seth.se.axis.com (Postfix) with ESMTP id B149810F;
+	Tue, 16 May 2017 22:07:38 +0200 (CEST)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX01.axis.com (10.0.5.15) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Tue, 16 May 2017 22:07:38 +0200
+Received: from XBOX02.axis.com ([fe80::d00f:cb52:1b56:20d]) by XBOX02.axis.com
+	([fe80::d00f:cb52:1b56:20d%21]) with mapi id 15.00.1210.000;
+	Tue, 16 May 2017 22:07:39 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe]  [meta-oe] [PATCH] lvm2: 2.02.166 -> 2.02.171
+Thread-Index: AQHSzRlYg2+CXkM2/0OHvtQr6ev7Z6H3ZVgw
+Date: Tue, 16 May 2017 20:07:39 +0000
+Message-ID: <d89815ec842945d692902e605bc6e7fd@XBOX02.axis.com>
+References: <1494811117-755-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+In-Reply-To: <1494811117-755-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
+Subject: Re: [meta-oe] [PATCH] lvm2: 2.02.166 -> 2.02.171
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,54 +62,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 16 May 2017 19:56:58 -0000
+X-List-Received-Date: Tue, 16 May 2017 20:07:47 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-libgpiod - C library and tools for interacting with the linux GPIO
-character device
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Huang Qiyu
+> Sent: den 15 maj 2017 03:19
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-oe] [PATCH] lvm2: 2.02.166 -> 2.02.171
+>=20
+> Upgrade lvm2 from 2.02.166 to 2.02.171.
+>=20
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-support/lvm2/{lvm2_2.02.166.bb =3D> lvm2_2.02.171.bb} |
+> 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>  rename meta-oe/recipes-support/lvm2/{lvm2_2.02.166.bb =3D>
+> lvm2_2.02.171.bb} (95%)
+>=20
+> diff --git a/meta-oe/recipes-support/lvm2/lvm2_2.02.166.bb b/meta-
+> oe/recipes-support/lvm2/lvm2_2.02.171.bb
+> similarity index 95%
+> rename from meta-oe/recipes-support/lvm2/lvm2_2.02.166.bb
+> rename to meta-oe/recipes-support/lvm2/lvm2_2.02.171.bb
+> index 7939f05..38c4414 100644
+> --- a/meta-oe/recipes-support/lvm2/lvm2_2.02.166.bb
+> +++ b/meta-oe/recipes-support/lvm2/lvm2_2.02.171.bb
+> @@ -1,7 +1,7 @@
+>  require lvm2.inc
+>=20
+> -SRC_URI[md5sum] =3D "c5a54ee0b86703daaad6e856439e115a"
+> -SRC_URI[sha256sum] =3D
+> "e120b066b85b224552efda40204488c5123de068725676fd6e5c8bc655051b94"
+> +SRC_URI[md5sum] =3D "153b7bb643eb26073274968e9026fa8f"
+> +SRC_URI[sha256sum] =3D
+> "b815a711a2fabaa5c3dc1a4a284df0268bf0f325f0fc0f5c9530c9bbb54b9964"
+>=20
+>  DEPENDS +=3D "autoconf-archive-native"
+>=20
+> --
+> 2.7.4
 
-Since linux 4.8 the GPIO sysfs interface is deprecated.
-User space should use the character device instead.
-This library encapsulates the ioctl calls and data structures behind a
-straightforward API.
+You forgot to update libdevmapper... (It was recently broken out from=20
+the lvm2 recipe.)
 
-Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
----
- meta-oe/recipes-support/libgpiod/libgpiod_0.2.bb | 25 ++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod_0.2.bb
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod_0.2.bb b/meta-oe/recipes-support/libgpiod/libgpiod_0.2.bb
-new file mode 100644
-index 0000000..fe2cd80
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod_0.2.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "C library and tools for interacting with the linux GPIO character device"
-+HOMEPAGE = "https://github.com/brgl/libgpiod"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
-+
-+UPSTREAM_CHECK_URI = "https://github.com/brgl/libgpiod/releases"
-+
-+SRC_URI = "https://github.com/brgl/libgpiod/archive/v${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "e3430f35b6efa842693d659c0bfb7ad5"
-+SRC_URI[sha256sum] = "de1947f3cb2cc4174364af430309fe6238976658575655bdbd76c60cffa7df92"
-+
-+inherit autotools pkgconfig
-+
-+# enable tools
-+PACKAGECONFIG ?= "tools"
-+
-+PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
-+PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
-+
-+PACKAGES += " ${PN}-tools"
-+
-+FILES_${PN} = "${libdir}/*"
-+FILES_${PN}-tools = "${bindir}/*"
--- 
-2.7.4
+//Peter
 
 
