@@ -1,23 +1,20 @@
-Return-Path: <Randy.MacLeod@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 82C0871A71
+Return-Path: <stanley.cheong.kwan.phoong@intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 730D371A8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 02:13:44 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4I2Dib4025682
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 17 May 2017 19:13:44 -0700
-Received: from yow-rmacleod-lx3.wrs.com (128.224.56.85) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 17 May 2017 19:13:44 -0700
-From: Randy MacLeod <Randy.MacLeod@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 May 2017 22:07:01 -0400
-Message-ID: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [meta-oe][V2 patch] rrdtool: allow configuration to disable nls
+	Thu, 18 May 2017 03:08:06 +0000 (UTC)
+Received: from fmsmga005.fm.intel.com ([10.253.24.32])
+	by orsmga105.jf.intel.com with ESMTP; 17 May 2017 20:08:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.38,356,1491289200"; d="scan'208";a="103291121"
+Received: from platypus.jf.intel.com ([10.54.77.139])
+	by fmsmga005.fm.intel.com with ESMTP; 17 May 2017 20:08:07 -0700
+From: Phoong Stanley Cheong Kwan <stanley.cheong.kwan.phoong@intel.com>
+To: OpenEmbedded Devel Mailing List <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 May 2017 12:57:11 -0700
+Message-Id: <1495051031-10963-1-git-send-email-stanley.cheong.kwan.phoong@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe] [PATCH] libsexy: Added glib-2.0-native dependency and removed PNBLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,48 +27,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 May 2017 02:13:46 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 May 2017 03:08:06 -0000
 
-When building rrdtool for a 'tiny' distro, that does not have native
-language support (NLS) in glibc, configure fails with the error:
-   autoreconf: failed to run autopoint: No such file or directory
-Autopoint is part of gettext but without NLS support we populate the
-sysroot with gettext-minimal-native rather then the full set of
-gettext executables. This version does not install autopoint, nor
-should it.
+From: "Stanley Cheong Kwan, Phoong" <stanley.cheong.kwan.phoong@intel.com>
 
-Tell autoreconf to skip the check for the autopoint script
-regardless of NLS support and use the USE_NLS varible
-to conditionally enable NLS support.
+Found out that libsexy is missing the dependency for glib-2.0-native.
 
-Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+Added glib-2.0-native into DEPENDS and unblacklist libsexy by
+removing PNBLACKLIST.
+
+Signed-off-by: Stanley Cheong Kwan, Phoong <stanley.cheong.kwan.phoong@intel.com>
 ---
- meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-graphics/libsexy/libsexy.inc       | 2 +-
+ meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb | 2 --
+ 2 files changed, 1 insertion(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-index db2df28a0..3ccefb995 100644
---- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-+++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
-@@ -22,7 +22,7 @@ BBCLASSEXTEND = "native"
- SYSTEMD_PACKAGES = "rrdcached"
- SYSTEMD_SERVICE_rrdcached = "rrdcached.socket rrdcached.service"
+diff --git a/meta-oe/recipes-graphics/libsexy/libsexy.inc b/meta-oe/recipes-graphics/libsexy/libsexy.inc
+index 5a11ca0..d8c41d7 100644
+--- a/meta-oe/recipes-graphics/libsexy/libsexy.inc
++++ b/meta-oe/recipes-graphics/libsexy/libsexy.inc
+@@ -6,7 +6,7 @@ SECTION = "x11/libs"
+ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
  
--EXTRA_AUTORECONF = "-I m4"
-+EXTRA_AUTORECONF = "-I m4 --exclude=autopoint"
+-DEPENDS = "gtk+ enchant libxml2"
++DEPENDS = "gtk+ enchant libxml2 glib-2.0-native"
  
- PACKAGECONFIG ??= "python perl ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ SRC_URI = "http://releases.chipx86.com/libsexy/${BPN}/${BP}.tar.gz \
+            file://libsexy-pkgconfig-fixes.patch"
+diff --git a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
+index 2ba1ebb..86b4958 100644
+--- a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
++++ b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
+@@ -4,5 +4,3 @@ PR = "r2"
  
-@@ -49,6 +49,7 @@ EXTRA_OECONF = " \
-     --disable-lua \
-     --disable-tcl \
-     --disable-rpath \
-+    --enable-nls=${USE_NLS} \
- "
- 
- export STAGING_LIBDIR
+ SRC_URI[md5sum] = "33c079a253270ec8bfb9508e4bb30754"
+ SRC_URI[sha256sum] = "8c4101a8cda5fccbba85ba1a15f46f2cf75deaa8b3c525ce5b135b9e1a8fe49e"
+-
+-PNBLACKLIST[libsexy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130607/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
-2.11.0
+2.7.4
 
 
