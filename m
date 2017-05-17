@@ -1,50 +1,47 @@
 Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B6D777E13
+Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 10A2E77E14
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 15:16:33 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id d127so4317286wmf.1
+	Wed, 17 May 2017 15:19:18 +0000 (UTC)
+Received: by mail-yb0-f193.google.com with SMTP id c207so536514ybf.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 08:16:35 -0700 (PDT)
+	Wed, 17 May 2017 08:19:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=fX9ljYDPTeK3lvL6MXl2qswZ/dlRQnI2EkKq0+agCRw=;
-	b=YJ+FrU66V9u0X3VLTWTdLOk2K0g+Qn01c7ls86N4hmbG5W21wXbogMMJci9km2TroJ
-	oBkWEN2PHKuwafTFubXTn2IDgnDl5HCIRFOBtLif0dNiNwrmzWrjkn9q7+IrllKC5UvL
-	DsR4d+XU88Y9M85ZtXQLsbZnhFdRrlG2nw/bI/EDrNVqOC+6v97mL3nqx5CQX9JcA2mv
-	9qVso8MHorSpjokW+a7mkSToITGKDAOP6dP3xb0V197aIYFB8vkwY9cWWweb3yCc2kiy
-	lZRNnU0oi9IDPWGrQRomBZ5ya8qNRTV4voV7DdVW/ppiS4zwqJzun8urvLxc9lK9SNEF
-	6Y7w==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=Yhvh0XAzE4BqFagRkBlv6U9keMFKtCrL6XDTEAWRY6Y=;
+	b=uLJR8isPZiZmWwiD0gtFq8MmOhr8MNe6siCFQaAdFOk8jcwXlLj/j+OwVjFX5KHVBr
+	iK3fugJERE/WxjZg1hB5OsXNmM9gH+t7WKeumRjOTV6c99DSRQVLmX/CJLxYuqnVPq6Y
+	BGcqpEqqq3v4RK4bBH2eyqzKingwDtRAH6272BnD1COZaOpPbrOkCZigx0TqZZMEQAhW
+	ygKVAQWfxDHYbc+s7l1QruDgsfrpH7Vv68Kdjv4Hy6fUCNlsE+ca1YdTB1Rn9FkflGGU
+	tPjfMF56S6FMdoJU1GfYawA7M7k07fqrZAydF4LOSHrd6XFTE/3s036rughaFsKNrgBS
+	i7Nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=fX9ljYDPTeK3lvL6MXl2qswZ/dlRQnI2EkKq0+agCRw=;
-	b=WY/oXRX0ZPceEEY0odMn64nkkxLqIsU8lC/18OG5DBDajBnd6MtrPduwafdU/y7GrM
-	ZENwuIAwgPPsx+1haB9rjiYB4uPHt0THKn1J86Fkys/sspO5m6ngxEcnJz5WUtBhJ7XI
-	5LQTewVFtTRvkuNYYaS0Lh1CHA03MtvP5hw78WrL2xkGcrAVmLAETU5Et/q5cuOil6w+
-	kHNf3a6voY+ssKiJr2CQH660gcxKh3OJQp1QQy3H2+Ihs39OLSrO9vnnb6sQ01ZcIsxF
-	LBZ89Necd3ejbOjTJZkUSzxSb2gkmGu3lcC0VqBTVMhqFAnOfdj4pbi3hOgbLpvjj0J8
-	b4Uw==
-X-Gm-Message-State: AODbwcBqvxik5q89OA5eki5/3cMbTyssjlM6ASTXp2WVzXvXger69J6G
-	s85EJWn7VD0+6g==
-X-Received: by 10.28.84.67 with SMTP id p3mr2725174wmi.40.1495034194282;
-	Wed, 17 May 2017 08:16:34 -0700 (PDT)
-Received: from localhost.localdomain ([37.159.50.168])
-	by smtp.gmail.com with ESMTPSA id q16sm3374094wmg.2.2017.05.17.08.16.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 17 May 2017 08:16:33 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=Yhvh0XAzE4BqFagRkBlv6U9keMFKtCrL6XDTEAWRY6Y=;
+	b=P12WClUejI1komYrAWdjdyjsnMRMYfyKIg5u8TM/etNcsaheS0tfbmPpCvUvwZ23C5
+	aDczF8mKW2WkpcL6wNZSDg6jbdrm+w5Rk7+D9CkMBDdSlCri7QJqB/Ad6xtB5Bjc6+E4
+	+PeAw6SqF8EIS+a48htgJm9mnZ9kpL1knNl1+X7dbizhPMK8aSzbm77ULcRuYNRgmysK
+	3MpVLJts+V34gW1sVZNrxJLmYuQs1ThJP1d5pMShSLAjJ67kulFX9BZ6b1DMaP7LV4YU
+	+R3JpRgLtkh+ONUIP5RPfHcLWK6lXVc+qNvQDfiNZIvRaQJav+rgpUqKK9WuzZ1ztzfv
+	tWqg==
+X-Gm-Message-State: AODbwcAvDwl/Vn4GH8WsYX6SonUPFwW3XPHwSeBY6nXNa6uycZrWFUwj
+	2L+zMlVg24e0NZaV5OGuYSwnROrZC56CX0s=
+X-Received: by 10.37.122.199 with SMTP id v190mr3281295ybc.40.1495034359495;
+	Wed, 17 May 2017 08:19:19 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.129.81.199 with HTTP; Wed, 17 May 2017 08:18:59 -0700 (PDT)
+In-Reply-To: <20170517085858.GB3086@jama>
+References: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
+	<20170517085858.GB3086@jama>
 From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-X-Google-Original-From: Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 17 May 2017 17:16:28 +0200
-Message-Id: <1495034188-28333-2-git-send-email-costamagnagianfranco@yahoo.it>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1495034188-28333-1-git-send-email-costamagnagianfranco@yahoo.it>
-References: <1495034188-28333-1-git-send-email-costamagnagianfranco@yahoo.it>
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
-	Gianfranco Costamagna <costamagnagianfranco@yahoo.it>
-Subject: [meta-oe][PATCH] wvdial: inherit pkgconfig Missing pkgconfig does not let build the package.
+Date: Wed, 17 May 2017 17:18:59 +0200
+Message-ID: <CAATN8PUphvRa8VWz8yAmiysA1aV5dBpMnPgZPSvB9YHVNnjjiA@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH 1/3] wxstreams: fix build with gcc-6 (patch from Debian). Remove blacklists for wvstreams and wvdial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +54,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 May 2017 15:16:39 -0000
+X-List-Received-Date: Wed, 17 May 2017 15:19:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
----
- meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb | 2 ++
- 1 file changed, 2 insertions(+)
+Hello Martin,
+(resending with the correct email)
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-index f7adf4c..3a71fb9 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-@@ -4,6 +4,8 @@ DESCRIPTION = "WvDial is a program that makes it easy to connect your Linux work
- LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=55ca817ccb7d5b5b66355690e9abc605"
- 
-+inherit pkgconfig
-+
- DEPENDS = "wvstreams"
- RDEPENDS_${PN} = "ppp"
- 
--- 
-2.7.4
 
+> Was wvdial build tested? wvdial fails to build because it's missing
+> pkgconfig
+> inherit:
+>
+> http://errors.yoctoproject.org/Errors/Details/142780/
+>
+
+I think I tested it against morty or pyro, not against master, neither
+master-next (I should probably need to go back with git history
+on the date I committed that to reproduce the success).
+
+I'm pretty sure I did test it, otherwise I wouldn't have sent that email.
+
+Anyhow, I did setup a master-next build and added the missing pkgconfig
+inherit.
+I'll send the patch in some seconds
+(sorry, I'm still a n00b with git send-email, please forgive me if you
+receive it twice or badly formatted)
+
+thanks!
+>
+> .Jansa@gmail.com <Martin.Jansa@gmail.com>
+>
 
