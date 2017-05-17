@@ -1,52 +1,51 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 10A9771B04
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 57B4577D70
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 08:58:06 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id y10so1886660wmh.0
+	Wed, 17 May 2017 08:58:47 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id y10so1890515wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 01:58:08 -0700 (PDT)
+	Wed, 17 May 2017 01:58:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:date:to:cc:subject:message-id:references:mime-version
 	:content-disposition:in-reply-to:user-agent;
-	bh=UYeFfDOiiPKdl3APi8CVb8KBJ+tkbVptj8QCti0Tgj0=;
-	b=MbrRyxgNWxFxCj6NdYTkjewgVWMxoveJZ2qVk38KIPJWqljE/bvhSk21vtOLqZpycw
-	t8CyHWi4clPdB5Rx35nqI+qSFU+jY0XIXgsXg8oFo9abgRIXHC273LTElADOiV+NPP0C
-	L4urjq/OoBQ4nvG6w61r2pHzGigRdlv69ReUW6d/ChmYDMC6fn8YK3AV1LzmOQ3HylZv
-	UrGq3LtntWJ4jcQqtAAXXUChTqvgcE2QHUfgxZakVGLlOJhnblproFFpDivaubXRriaN
-	BDo73rJpbmASM87SmBTviFVO/1Kkj2qE7Z7fpHYsXLjIrFtJ56B8CHbZn/cWtl0MIXgV
-	D+cQ==
+	bh=Sma7dej2TAHI/KBtONRwiKS+hFr5lY4HemH+RDUkucs=;
+	b=hFSm5EZkzy3B0vp2JFTp5SQix4Rh8gfWODCKzUwpjND7KhhHUoPCjQYxQIia6ZJx/3
+	Q6P77Q1MtaoMR7uDcCgINPtOhEmpP4T5++CEgj45wVwQGsAEP78m/JE9GGRdbpn/ln+u
+	XGfbU4xC4VkSMQmdkruCzUFhzcql3fzqHzfjp3arHyuQRHGB8dsPR3KontY+p7WnLXkQ
+	YstvrkUjuJp01tP90ezDXxboMO1hI6T9uxxyaLnsTrnnGMrNxbxSjRcfQ3knb9LQtLNJ
+	OcFQ6yFAb2dRmxX8L6DLnK9KPtOBcZkWjr3NwJuvI1XgdmEScvDMBB2i9zWL/3qLsgW3
+	AZXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
 	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=UYeFfDOiiPKdl3APi8CVb8KBJ+tkbVptj8QCti0Tgj0=;
-	b=Qm/tMyYzGes4i5whhZTW3qIosD59T2+28PGnuOVFSWDR15Ji2/sgBDqN6TJgpT9MQO
-	myVirctgnLZPq9otyAADnustcBFp8QcK7u+Jdo3Uxc2IBAdt7Nl01BE7gllk4j6pIhSb
-	+qv+rpc4VEq95dZEH6ShD+ik+zepotByeK9f1yKCDcU3AR20mzU3eUDZ/uQ7iy7SHkPk
-	9DcIJz/nm6HPcPyLqbVZb1X3H4gMhLuneecNScqxNsr9ylz32D5C/5p0inyDmIgtG0qx
-	45q/UPapxPPx58exv7+cuNT2p4STxc9Gy42tJYjQyII5jcPrcJ95QqAbZRRgpizjaZbu
-	ZjZg==
-X-Gm-Message-State: AODbwcDW5MzVgiYD7uKkB/bJaT0JiN4zyWt20J0mzuIZMne9dYOSqgXf
-	2h60O+hEO2Oh0g==
-X-Received: by 10.28.166.12 with SMTP id p12mr1544395wme.23.1495011487305;
-	Wed, 17 May 2017 01:58:07 -0700 (PDT)
+	bh=Sma7dej2TAHI/KBtONRwiKS+hFr5lY4HemH+RDUkucs=;
+	b=oob0fmUIGXqJEXkTxa9aJnMugsKxDdn18GvB3btrT6mip1b41EUtcExaCZ5QjknIQp
+	HUtV4erSQfrquuGNuyBXmaydbwtwK1uRZtj27qBf6dzTP+Qq6ou7sCY613FXISs0z0rt
+	LH/fm1z1LRm0+hspb7QpYTbzYFW2KXmiePVAnF0HMsZLjpWSQXxvQ2xMOtq/SafDmuw7
+	6i1D7fDYqs3k4IiXi2HY+nNAMpUwYCicJaHgh/9WAnY/YVvnclM6XW/+XqLdN5hTGXms
+	RcERhEW4rhnrHKKOTjzf99gTfZ1x+HzM5NaeCOxobXIIIBVO+CJyow46gPkw3JC8wnT+
+	LOfQ==
+X-Gm-Message-State: AODbwcABYSXk8/vkvtItXw9MiFRFgX8J0xfkCpJgdQFfv6X7e7aLSiaq
+	MWrvbJ4n+ZwMck8e
+X-Received: by 10.28.193.198 with SMTP id r189mr8981542wmf.82.1495011528614;
+	Wed, 17 May 2017 01:58:48 -0700 (PDT)
 Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 17sm19283021wmn.7.2017.05.17.01.58.06
+	by smtp.gmail.com with ESMTPSA id v52sm998110wrc.53.2017.05.17.01.58.47
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 17 May 2017 01:58:06 -0700 (PDT)
+	Wed, 17 May 2017 01:58:47 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 17 May 2017 10:58:58 +0200
-To: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Message-ID: <20170517085858.GB3086@jama>
-References: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
+Date: Wed, 17 May 2017 10:59:39 +0200
+To: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
+Message-ID: <20170517085939.GC3086@jama>
+References: <1494743864-167898-1-git-send-email-rebecca.swee.fun.chang@intel.com>
 MIME-Version: 1.0
-In-Reply-To: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
+In-Reply-To: <1494743864-167898-1-git-send-email-rebecca.swee.fun.chang@intel.com>
 User-Agent: Mutt/1.8.2 (2017-04-18)
-Cc: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 1/3] wxstreams: fix build with gcc-6 (patch from Debian). Remove blacklists for wvstreams and wvdial
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe] [PATCH] libdbus-c++: remove PNBLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,122 +58,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 May 2017 08:58:08 -0000
-X-Groupsio-MsgNum: 66778
+X-List-Received-Date: Wed, 17 May 2017 08:58:48 -0000
+X-Groupsio-MsgNum: 66779
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="0ntfKIWw70PvrIHh"
+	protocol="application/pgp-signature"; boundary="MnLPg7ZWsaic7Fhd"
 Content-Disposition: inline
 
---0ntfKIWw70PvrIHh
+--MnLPg7ZWsaic7Fhd
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 11, 2017 at 02:28:11PM +0200, Gianfranco Costamagna wrote:
-> From: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+On Sun, May 14, 2017 at 02:37:44PM +0800, Chang Rebecca Swee Fun wrote:
+> This recipe has been tested against meta-openembedded master branch
+> and the build failure was unable to reproduce.
 >=20
-> Signed-off-by: Gianfranco Costamagna <gianfranco.costamagna@abinsula.com>
+> The build issues encountered earlier could have been fixed by
+> some other dependencies.
 
-Was wvdial build tested? wvdial fails to build because it's missing pkgconf=
-ig
-inherit:
+Try with gold, I can still reproduce it here:
+http://errors.yoctoproject.org/Errors/Details/142781/
 
-http://errors.yoctoproject.org/Errors/Details/142780/
 
+>=20
+> Signed-off-by: Chang Rebecca Swee Fun <rebecca.swee.fun.chang@intel.com>
 > ---
->  meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb |  2 --
->  .../wvdial/wvstreams/gcc-6.patch                   | 42 ++++++++++++++++=
-++++++
->  .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |  4 +--
->  3 files changed, 43 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/gcc-6.p=
-atch
+>  meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb | 2 --
+>  1 file changed, 2 deletions(-)
 >=20
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb b/meta-oe=
-/recipes-connectivity/wvdial/wvdial_1.61.bb
-> index 80e72bd..f7adf4c 100644
-> --- a/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvdial_1.61.bb
-> @@ -28,5 +28,3 @@ do_configure() {
->  do_install() {
->      oe_runmake prefix=3D${D}/usr PPPDIR=3D${D}/etc/ppp/peers install
->  }
-> -
-> -PNBLACKLIST[wvdial] ?=3D "Depends on broken wvstreams - the recipe will =
-be removed on 2017-09-01 unless the issue is fixed"
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/gcc-6.patch b/=
-meta-oe/recipes-connectivity/wvdial/wvstreams/gcc-6.patch
-> new file mode 100644
-> index 0000000..b084887
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/gcc-6.patch
-> @@ -0,0 +1,42 @@
-> +Description: Fix compilation with gcc-6
-> +Author: Gert Wollny <gw.fossdev@gmail.com>
-> +Last-Updated: 2016-07-26
-> +Forwarded: No
-> +Bug-Debian: https://bugs.debian.org/811659
-> +Bug-Debian: https://bugs.debian.org/831146
-> +
-> +--- a/streams/wvstream.cc
-> ++++ b/streams/wvstream.cc
-> +@@ -907,9 +907,9 @@
-> +    =20
-> +     if (forceable)
-> +     {
-> +-	si.wants.readable =3D readcb;
-> +-	si.wants.writable =3D writecb;
-> +-	si.wants.isexception =3D exceptcb;
-> ++	si.wants.readable =3D static_cast<bool>(readcb);
-> ++	si.wants.writable =3D static_cast<bool>(writecb);
-> ++	si.wants.isexception =3D static_cast<bool>(exceptcb);
-> +     }
-> +     else
-> +     {
-> +@@ -1019,7 +1019,8 @@
-> +=20
-> + IWvStream::SelectRequest WvStream::get_select_request()
-> + {
-> +-    return IWvStream::SelectRequest(readcb, writecb, exceptcb);
-> ++    return IWvStream::SelectRequest(static_cast<bool>(readcb), static_c=
-ast<bool>(writecb),
-> ++				    static_cast<bool>(exceptcb));
-> + }
-> +=20
-> +=20
-> +@@ -1107,7 +1108,8 @@
-> +     // inefficient, because if the alarm was expired then pre_select()
-> +     // returned true anyway and short-circuited the previous select().
-> +     TRACE("hello-%p\n", this);
-> +-    return !alarm_was_ticking || select(0, readcb, writecb, exceptcb);
-> ++    return !alarm_was_ticking || select(0, static_cast<bool>(readcb),
-> ++					static_cast<bool>(writecb), static_cast<bool>(exceptcb));
-> + }
-> +=20
-> +=20
-> diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/met=
-a-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> index fe79dc1..607a617 100644
-> --- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> +++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-> @@ -11,6 +11,7 @@ SRC_URI =3D "http://${BPN}.googlecode.com/files/${BP}.t=
-ar.gz \
->             file://05_gcc.diff \
->             file://06_gcc-4.7.diff \
->             file://07_buildflags.diff \
-> +           file://gcc-6.patch \
->            "
+> diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/rec=
+ipes-core/dbus/libdbus-c++_0.9.0.bb
+> index 4412716..9b053fe 100644
+> --- a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+> +++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+> @@ -27,5 +27,3 @@ PACKAGE_BEFORE_PN =3D "${PN}-tools"
+>  FILES_${PN}-tools =3D "${bindir}"
 > =20
->  SRC_URI[md5sum] =3D "2760dac31a43d452a19a3147bfde571c"
-> @@ -46,6 +47,3 @@ FILES_libwvstreams-extras-dbg =3D "${libdir}/.debug/lib=
-wvbase.so.* ${libdir}/.debu
-> =20
->  FILES_${PN}-valgrind =3D "${libdir}/valgrind/wvstreams.supp"
->  RDEPENDS_${PN} +=3D "perl"
+>  BBCLASSEXTEND =3D "native"
 > -
-> -# http://errors.yoctoproject.org/Errors/Details/68614/
-> -PNBLACKLIST[wvstreams] ?=3D "BROKEN: fails to build with gcc-6 - the rec=
-ipe will be removed on 2017-09-01 unless the issue is fixed"
+> -PNBLACKLIST[libdbus-c++] ?=3D "Fails to build with RSS http://errors.yoc=
+toproject.org/Errors/Details/130644/ - the recipe will be removed on 2017-0=
+9-01 unless the issue is fixed"
 > --=20
 > 2.7.4
 >=20
@@ -187,15 +111,15 @@ ipe will be removed on 2017-09-01 unless the issue is fixed"
 --=20
 Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
---0ntfKIWw70PvrIHh
+--MnLPg7ZWsaic7Fhd
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWRwQ0QAKCRA3VSO3ZXaA
-HF3BAKC1Vc/MxEKv2w/BxKyczeKuMZ41AQCgpXBa6F/PQvLEfwJM1gj6tSG+/7o=
-=IQk9
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWRwQ+gAKCRA3VSO3ZXaA
+HOcSAJ9NhMw7gBpy4l3tDePLOetgtP0WowCbBsbSXJcI2XGXb1FKis15ztg+w0w=
+=EVrr
 -----END PGP SIGNATURE-----
 
---0ntfKIWw70PvrIHh--
+--MnLPg7ZWsaic7Fhd--
