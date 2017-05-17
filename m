@@ -1,47 +1,24 @@
-Return-Path: <costamagna.gianfranco@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 10A2E77E14
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 910FA77E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 15:19:18 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id c207so536514ybf.2
+	Wed, 17 May 2017 18:21:44 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4HILj3A013876
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 08:19:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=Yhvh0XAzE4BqFagRkBlv6U9keMFKtCrL6XDTEAWRY6Y=;
-	b=uLJR8isPZiZmWwiD0gtFq8MmOhr8MNe6siCFQaAdFOk8jcwXlLj/j+OwVjFX5KHVBr
-	iK3fugJERE/WxjZg1hB5OsXNmM9gH+t7WKeumRjOTV6c99DSRQVLmX/CJLxYuqnVPq6Y
-	BGcqpEqqq3v4RK4bBH2eyqzKingwDtRAH6272BnD1COZaOpPbrOkCZigx0TqZZMEQAhW
-	ygKVAQWfxDHYbc+s7l1QruDgsfrpH7Vv68Kdjv4Hy6fUCNlsE+ca1YdTB1Rn9FkflGGU
-	tPjfMF56S6FMdoJU1GfYawA7M7k07fqrZAydF4LOSHrd6XFTE/3s036rughaFsKNrgBS
-	i7Nw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=Yhvh0XAzE4BqFagRkBlv6U9keMFKtCrL6XDTEAWRY6Y=;
-	b=P12WClUejI1komYrAWdjdyjsnMRMYfyKIg5u8TM/etNcsaheS0tfbmPpCvUvwZ23C5
-	aDczF8mKW2WkpcL6wNZSDg6jbdrm+w5Rk7+D9CkMBDdSlCri7QJqB/Ad6xtB5Bjc6+E4
-	+PeAw6SqF8EIS+a48htgJm9mnZ9kpL1knNl1+X7dbizhPMK8aSzbm77ULcRuYNRgmysK
-	3MpVLJts+V34gW1sVZNrxJLmYuQs1ThJP1d5pMShSLAjJ67kulFX9BZ6b1DMaP7LV4YU
-	+R3JpRgLtkh+ONUIP5RPfHcLWK6lXVc+qNvQDfiNZIvRaQJav+rgpUqKK9WuzZ1ztzfv
-	tWqg==
-X-Gm-Message-State: AODbwcAvDwl/Vn4GH8WsYX6SonUPFwW3XPHwSeBY6nXNa6uycZrWFUwj
-	2L+zMlVg24e0NZaV5OGuYSwnROrZC56CX0s=
-X-Received: by 10.37.122.199 with SMTP id v190mr3281295ybc.40.1495034359495;
-	Wed, 17 May 2017 08:19:19 -0700 (PDT)
+	Wed, 17 May 2017 11:21:45 -0700
+Received: from yow-rmacleod-lx3.wrs.com (128.224.56.85) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Wed, 17 May 2017 11:21:44 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 17 May 2017 14:15:02 -0400
+Message-ID: <20170517181502.20574-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 10.129.81.199 with HTTP; Wed, 17 May 2017 08:18:59 -0700 (PDT)
-In-Reply-To: <20170517085858.GB3086@jama>
-References: <1494505694-28118-1-git-send-email-costamagnagianfranco@yahoo.it>
-	<20170517085858.GB3086@jama>
-From: Gianfranco Costamagna <costamagna.gianfranco@gmail.com>
-Date: Wed, 17 May 2017 17:18:59 +0200
-Message-ID: <CAATN8PUphvRa8VWz8yAmiysA1aV5dBpMnPgZPSvB9YHVNnjjiA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/3] wxstreams: fix build with gcc-6 (patch from Debian). Remove blacklists for wvstreams and wvdial
+Subject: [meta-oe][PATCH] rrdtool: add gettext-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 May 2017 15:19:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 17 May 2017 18:21:45 -0000
+Content-Type: text/plain
 
-Hello Martin,
-(resending with the correct email)
+Add gettext-native dependency to use autopoint.
 
+When building rrdtool for a 'tiny' distro, ie one that does
+not have internationalization support in glibc, configure
+fails with the error:
+   autoreconf: failed to run autopoint: No such file or directory
+autopoint is part of gettext so add that native dependency.
+This must happen transitively for builds using a regular configuration
+of glibc.
 
-> Was wvdial build tested? wvdial fails to build because it's missing
-> pkgconfig
-> inherit:
->
-> http://errors.yoctoproject.org/Errors/Details/142780/
->
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+---
+ meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-I think I tested it against morty or pyro, not against master, neither
-master-next (I should probably need to go back with git history
-on the date I committed that to reproduce the success).
+diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+index db2df28a0..160dea58d 100644
+--- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
++++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+@@ -4,7 +4,7 @@ HOMEPAGE = "http://oss.oetiker.ch/rrdtool/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=3349111ed0533471494beec99715bc9d"
+ 
+-DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native"
++DEPENDS = "libpng zlib cairo pango glib-2.0 libxml2 groff-native gettext-native"
+ 
+ SRCREV = "61f116744262c4c18922dcf806e496715f199669"
+ PV = "1.6.0"
+-- 
+2.11.0
 
-I'm pretty sure I did test it, otherwise I wouldn't have sent that email.
-
-Anyhow, I did setup a master-next build and added the missing pkgconfig
-inherit.
-I'll send the patch in some seconds
-(sorry, I'm still a n00b with git send-email, please forgive me if you
-receive it twice or badly formatted)
-
-thanks!
->
-> .Jansa@gmail.com <Martin.Jansa@gmail.com>
->
 
