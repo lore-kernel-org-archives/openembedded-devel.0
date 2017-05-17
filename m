@@ -1,48 +1,46 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 968AC6093C
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CDFA77D4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 12:26:16 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id z52so8115920wrc.2
+	Wed, 17 May 2017 12:27:41 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id d127so3199711wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 05:26:17 -0700 (PDT)
+	Wed, 17 May 2017 05:27:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=MTKQUUnf3TQ1ii8X9yBlv0oUhEyjgUoIbAgeiQ0gtuA=;
-	b=OHYGO4LN5mST0VIKz8aW5syS5jUTd3Y1ow/MWsg7nbg7qXNTaxsJde51Wda9qAo3RK
-	QNKnVNqOAvGrbfuxMtx7s5Ck5r6Mws5DwMz2sykB8zVZE8u0w4B5D6/IY3JbUzkaFPRk
-	U+ovgK9+6p/ejNCA4xow9vdQCfkzm6VF2WVUAW3U0Aid6xDj0pUlCoXEE76o580kaDtD
-	T0QCydhEJaznjbWrNZ5qKXW+PM10BS6gfhjStGqZWHK19v3WFZyKaThG8kQ2VSwsztsq
-	zBqsMubwB83h4Bhytb8J8x87Eah4S7Sgdf+oOoTrzTWvsYiN1ZD8G/2YQ7EVi1KYe43A
-	RRdQ==
+	:cc; bh=67F6o4FXB/QFGrfBjvLKVD2X6uTCm/SLI8MHKjXhCRE=;
+	b=gWLKp/kEqhALqDqm8ybGTmH0cB4eMzH/ol8G/x3Qv2G/V88w1ttB0kJsUoRysARkeO
+	Y75VxldvShv78p/cols1BJg+wXeSgX5feZWhV4LeeEvou976ncEgBC0X8tO0zU31KY89
+	3+nhb2WyyYWHkO+ELgEsPcd9ki5LBRaTW8zeuzHPp4oUZU58vuNAwzA3aBpmn0QwOjnt
+	/ZW5nQGwIHhvMfI/5ZW7s2u7ZLmZkXbwtilrz0HSKnWndVzrRLWRrQe72FpcPZ/YseDp
+	kzQgMkH/E6j6QJ3W/4qtRRsadkx+r5+/ezM4dlHTtdFXIjjsp36CKNLnOkncsgvNgTcg
+	Clrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=MTKQUUnf3TQ1ii8X9yBlv0oUhEyjgUoIbAgeiQ0gtuA=;
-	b=Bm/DBVjy3ZR9/MWI9xzviLeiV5dsYbodK3iVYUnw2Wqdh2Xoy1WruRRmO3gxt+r2vq
-	nrCl+BSvgrIwKiIMADlCFLl8L1U0Pjk1E7VTTHgTwRQVO8VHpEIgEB3JSTsQssnOYWrC
-	kGpK0mOyzFOrc2PIT+fxhQ4DPEtiNut3Dos4RhTmAN5YaDYN3uHDBn/E2q3WM0gGDLam
-	kbbFBakRBY8Iq4jOf8MMgR4a7i8kjHSqlzusg1q2b0LTQA9UhX3RmHYnt4eELxEEEqa9
-	JllX/YJ3cWjQtaaRAhmYfJFgw3fN1zL2+iD77THLW4LKTP0WgtvLsoTvZqQBxAK1bEsl
-	LhQQ==
-X-Gm-Message-State: AODbwcBJhMhEKvMLcyiZPmGpt8V1GDwj0L++Goj3WcoLloPYIcHgt01t
-	+Me2ukYkKZqdS79VNrUh2w03lbtWpA==
-X-Received: by 10.80.165.23 with SMTP id y23mr2861846edb.64.1495023977265;
-	Wed, 17 May 2017 05:26:17 -0700 (PDT)
+	bh=67F6o4FXB/QFGrfBjvLKVD2X6uTCm/SLI8MHKjXhCRE=;
+	b=sUY6ryYqx2cPScd1N+EMT8fRzzhIreREEUY4PvzEteXZPseecH7YbANE50lfF0mRqV
+	X3FN5wVfWYLX57JdaeJSxCD5KRERCxH8Zo2JlNAhCXWp/adbrq9Ivr8dkuGgKfRxXGPM
+	/eLLOg6jzfY4eR7hP75j2OwcdWkd55aX2nEBbLQHufy/APM4ZIeEXPYkl3qRcHKgchpl
+	V/I8TSshe4TwHpUTudMd0B+V6sUR0Upr6ZgkXiL72lwezAba23gsAWHrJ0pgTwZc38QC
+	RLJpi56zVZIm9zIl5x5PXIb8C0X3oyZC65nGTbNIfLFQfZYnIOZcZ4z91lUNPNQ2kCZY
+	lIhw==
+X-Gm-Message-State: AODbwcC1KW70GiZVsYlIafW3m6CW0hEgjMMKvBKfgsWOeOqIfM5aHhkM
+	zIL4xo06nsGlDcZ7nrvUSL322Cujtg==
+X-Received: by 10.80.149.209 with SMTP id x17mr2844289eda.175.1495024062521;
+	Wed, 17 May 2017 05:27:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.213.154 with HTTP; Wed, 17 May 2017 05:26:16 -0700 (PDT)
-In-Reply-To: <20170506191840.26070-2-raj.khem@gmail.com>
-References: <20170506191840.26070-1-raj.khem@gmail.com>
-	<20170506191840.26070-2-raj.khem@gmail.com>
+Received: by 10.80.213.154 with HTTP; Wed, 17 May 2017 05:27:41 -0700 (PDT)
+In-Reply-To: <1494803346-189821-1-git-send-email-wei.tee.ng@intel.com>
+References: <1494803346-189821-1-git-send-email-wei.tee.ng@intel.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 17 May 2017 14:26:16 +0200
-Message-ID: <CA+chaQc-igmSCje4h2XC7Urcq=yE1JJTfcQR3L1J2vbLdM_0fQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 17 May 2017 14:27:41 +0200
+Message-ID: <CA+chaQd+TZgZOSFaaRchKrekYB3KiV66jOfxuqCkVSi-P=4QTg@mail.gmail.com>
+To: wei.tee.ng@intel.com
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH 2/4] rygel: Update to 0.34.0
+Subject: Re: [meta-oe][PATCH] dbus-daemon-proxy: inherit pkgconfig and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,91 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 May 2017 12:26:17 -0000
+X-List-Received-Date: Wed, 17 May 2017 12:27:41 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Causes:
+Can you set some better version in the recipe while you're at it?
 
-rygel-0.34.0: rygel: Files/directories were installed but not shipped in
-any package:
-  /usr/lib/systemd
-  /usr/lib/systemd/user
-  /usr/lib/systemd/user/rygel.service
+dbus-daemon-proxy-0.0.0+gitrAUTOINC+1226a0a137: Package version for
+package dbus-daemon-proxy-dbg went backwards which would break package
+feeds from (0:0.0.0+gitr0+1226a0a137-r1.56 to
+0:0.0.0+gitr0+1226a0a137-r1.0) [version-going-backwards]
 
-On Sat, May 6, 2017 at 9:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> Fix build without X
-> Licence is more consistent now see
+On Mon, May 15, 2017 at 1:09 AM, <wei.tee.ng@intel.com> wrote:
+
+> From: "Ng, Wei Tee" <wei.tee.ng@intel.com>
 >
-> https://github.com/GNOME/rygel/commit/cdcb6bd55efd0c3b7a2fd4ae5c3d85
-> 56f69f8402
+> The pkgconfig is not found in recipes specific sysroot. Therefore
+> inherit pkgconfig is added to fix it.
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Ng, Wei Tee <wei.tee.ng@intel.com>
 > ---
->  .../rygel/{rygel_0.28.2.bb => rygel_0.34.0.bb}          | 17
-> +++++++++--------
->  1 file changed, 9 insertions(+), 8 deletions(-)
->  rename meta-multimedia/recipes-connectivity/rygel/{rygel_0.28.2.bb =>
-> rygel_0.34.0.bb} (80%)
+>  meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb | 5 ++---
+>  1 file changed, 2 insertions(+), 3 deletions(-)
 >
-> diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-> b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-> similarity index 80%
-> rename from meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-> rename to meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-> index 38fac65d5..798ecea9d 100644
-> --- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-> +++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-> @@ -5,26 +5,27 @@ Additionally, media player software may use Rygel to
-> become a MediaRenderer \
->  that may be controlled remotely by a UPnP or DLNA Controller."
->  HOMEPAGE = "http://live.gnome.org/Rygel"
+> diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+> b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+> index a953ebc..b216410 100644
+> --- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+> +++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+> @@ -11,6 +11,8 @@ ASNEEDED_pn-dbus-daemon-proxy = ""
+>  SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy"
+>  S = "${WORKDIR}/git"
 >
-> -LICENSE = "LGPLv2+"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
-> -                    file://src/rygel/rygel-main.vala;endline=27;md5=
-> 99324118da4c012d25edae2f779ae9b3"
-> +LICENSE = "LGPL-2.1+"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
->
->  DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0
-> gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0
-> libunistring sqlite3 intltool-native"
->  RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
->  RRECOMMENDS_${PN} = "rygel-plugin-media-export"
->
->  GNOME_COMPRESS_TYPE = "xz"
-> -SRC_URI[archive.md5sum] = "9fbe4fb53b6cfa2f3f3723b7649a2215"
-> -SRC_URI[archive.sha256sum] = "9ea23df7186caac5f1aad3137edf6d
-> 507d339b9a469fc3133df4043fa66b61f5"
-> +SRC_URI[archive.md5sum] = "7d8923324b280cd5452803d61176a34a"
-> +SRC_URI[archive.sha256sum] = "fbb2d46cbe4e750df6610b4c66b227
-> 8f06d1f71a257c7903e676ccb394dad418"
->
-> -inherit gnomebase vala gobject-introspection
-> +inherit gnomebase vala gobject-introspection gettext
->
->  EXTRA_OECONF = "--disable-tracker-plugin --with-media-engine=gstreamer"
->
-> -PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch
-> gtk+3"
-> +PACKAGECONFIG ?= "external mpris ruih media-export gst-launch"
+> +inherit pkgconfig
 > +
-> +PACKAGECONFIG_append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", "
-> gtk+3", "", d)}"
-> +
->  PACKAGECONFIG[external] = "--enable-external-plugin,--
-> disable-external-plugin"
->  PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
-> -PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--
-> disable-mediathek-plugin"
->  PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
->  PACKAGECONFIG[media-export] = "--enable-media-export-plugin,
-> --disable-media-export-plugin"
->  PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--
-> disable-gst-launch-plugin"
+>  do_compile() {
+>      ${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o
+> dbus-daemon-proxy dbus-daemon-proxy.c
+>  }
+> @@ -19,6 +21,3 @@ do_install() {
+>      install -d ${D}${bindir}
+>      install -m 0755 dbus-daemon-proxy ${D}${bindir}
+>  }
+> -
+> -
+> -PNBLACKLIST[dbus-daemon-proxy] ?= "Fails to build with RSS
+> http://errors.yoctoproject.org/Errors/Details/130613/ - the recipe will
+> be removed on 2017-09-01 unless the issue is fixed"
 > --
-> 2.12.2
+> 2.7.4
 >
 > --
 > _______________________________________________
