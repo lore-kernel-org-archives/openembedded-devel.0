@@ -1,30 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 5421971C3D
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 6C32372F63
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 02:50:27 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="18945281"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 May 2017 10:50:24 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id A8DBE47C6527
+	Wed, 17 May 2017 03:20:55 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v4H3Kt29006933
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 17 May 2017 10:50:24 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Wed, 17 May 2017 10:50:24 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Tue, 16 May 2017 20:20:56 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 16 May 2017 20:20:55 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 May 2017 10:50:25 +0800
-Message-ID: <1494989425-25411-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Date: Wed, 17 May 2017 11:20:53 +0800
+Message-ID: <20170517032053.417-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: A8DBE47C6527.A95C4
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [PATCH] ifenslave: 2.7 -> 2.9
+Subject: [meta-networking][PATCH] drbd-utils: remove /var/lock to avoid conflict
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,43 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 17 May 2017 02:50:28 -0000
+X-List-Received-Date: Wed, 17 May 2017 03:20:55 -0000
 Content-Type: text/plain
 
-1) Upgrade ifenslave from 2.7 to 2.9.
-2) License checksum changed,since the copyright's Format were changed.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Remove the empty /var/lock to avoid conflict with base-files:
+| Error: Transaction check error:
+  file /var/lock conflicts between attempted installs of
+  drbd-utils-8.9.6-r0.core2_64 and base-files-3.0.14-r89.qemux86_64
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-support/ifenslave/{ifenslave_2.7.bb => ifenslave_2.9.bb} | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/ifenslave/{ifenslave_2.7.bb => ifenslave_2.9.bb} (86%)
+ meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb | 5 +++++
+ 1 file changed, 5 insertions(+)
 
-diff --git a/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb b/meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb
-similarity index 86%
-rename from meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
-rename to meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb
-index 5028921..ea28b34 100644
---- a/meta-networking/recipes-support/ifenslave/ifenslave_2.7.bb
-+++ b/meta-networking/recipes-support/ifenslave/ifenslave_2.9.bb
-@@ -3,9 +3,10 @@ HOMEPAGE = "http://www.linuxfoundation.org/collaborate/workgroups/networking/bon
- SECTION = "net"
+diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
+index 67ed8e5c0..5f6c43f7e 100644
+--- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
++++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
+@@ -30,6 +30,11 @@ EXTRA_OECONF = " \
+                 --without-manual\
+                "
  
- LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=6807ba81c0744ab50d735c94628c3f64"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=acc89812938cf9ad6b1debc37cea0253"
- 
--SRCREV = "400c490d52acb31f1064e1bf4fc9fcaf3791888f"
++do_install_append() {
++    # don't install empty /var/lock to avoid conflict with base-files
++    rm -rf ${D}${localstatedir}/lock
++}
 +
-+SRCREV = "42bfbb9beb924672ca86b86e9679ac3d6b87d992"
- SRC_URI = "git://anonscm.debian.org/collab-maint/ifenslave.git"
+ RDEPENDS_${PN} += "bash perl-module-getopt-long perl-module-exporter perl-module-constant perl-module-overloading perl-module-exporter-heavy"
  
- S = "${WORKDIR}/git"
+ # The drbd items are explicitly put under /lib when installed.
 -- 
-2.7.4
-
-
+2.11.0
 
 
