@@ -1,30 +1,27 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C2E336FFED
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A47571AFC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 06:49:33 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19004971"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 May 2017 14:49:29 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 861CE47C7C63
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 14:49:29 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Thu, 18 May 2017 14:49:30 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 18 May 2017 14:49:11 +0800
-Message-ID: <1495090151-7610-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 18 May 2017 07:29:51 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4I7Tj2l032675
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 18 May 2017 00:29:46 -0700
+Received: from [128.224.162.160] (128.224.162.160) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 18 May 2017 00:29:45 -0700
+To: Stefan Agner <stefan@agner.ch>, <martin.jansa@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <e9f275c5-533f-2066-e773-eecc1a89cb46@windriver.com>
+Date: Thu, 18 May 2017 15:29:43 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 861CE47C7C63.A95BA
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5] [PATCH] qtquick1: add ptest
+In-Reply-To: <1493271021-15875-1-git-send-email-stefan@agner.ch>
+Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,79 +34,139 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 May 2017 06:49:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 18 May 2017 07:29:52 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add ptest for qtquick1 by using provided testsuite.
+Hi Stefan,
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- recipes-qt/qt5/qtquick1/run-ptest |  5 +++++
- recipes-qt/qt5/qtquick1_git.bb    | 26 ++++++++++++++++++++++++++
- 2 files changed, 31 insertions(+)
- create mode 100644 recipes-qt/qt5/qtquick1/run-ptest
+On 04/27/2017 01:30 PM, Stefan Agner wrote:
+> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+> and more useful than IPSec, while avoiding the massive headache.
+>
+> The recipes add the current experimental snapshot v0.0.20170421
+> out-of-tree kernel module and tools. The kernel module has some kernel
+> configuration dependencies such as some configuration part of
+> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>
+> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
+> which is MACHINE_ARCH (like all kernel modules) we need to add this
+> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>
+> Signed-off-by: Stefan Agner <stefan@agner.ch>
+> ---
+> Changes since v2:
+> - Upgrade to v0.0.20170421
+> - Add comment about Linux kernel requirement
+>
+> Changes since v1:
+> - Upgrade to v0.0.20170409
+> - Add wireguard-tools -> wireguard-module dependency to
+>   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>
+>  meta-networking/conf/layer.conf                    |  4 ++++
+>  .../wireguard/wireguard-module_0.0.20170421.bb     | 13 +++++++++++
+>  .../wireguard/wireguard-tools_0.0.20170421.bb      | 27 ++++++++++++++++++++++
+>  .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>  4 files changed, 62 insertions(+)
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>
+> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+> index 85ad93b..b5aa159 100644
+> --- a/meta-networking/conf/layer.conf
+> +++ b/meta-networking/conf/layer.conf
+> @@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>
+>  # Override security flags
+>  require conf/distro/include/meta_networking_security_flags.inc
+> +
+> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+> +  wireguard-tools->wireguard-module \
+> +"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+> new file mode 100644
+> index 0000000..cb21bda
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+> @@ -0,0 +1,13 @@
+> +require wireguard.inc
+> +
+> +inherit module
+> +
+> +# This module requires Linux 3.10 higher and several networking related
+> +# configuration options. For exact kernel requirements visit:
+> +# https://www.wireguard.io/install/#kernel-requirements
+> +
+> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+> +MAKE_TARGETS = "module"
+> +MODULES_INSTALL_TARGET = "module-install"
+> +
+> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+> new file mode 100644
+> index 0000000..79d420f
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+> @@ -0,0 +1,27 @@
+> +require wireguard.inc
+> +
+> +inherit bash-completion systemd pkgconfig
+> +
+> +DEPENDS = "wireguard-module libmnl"
+> +
+> +do_compile_prepend () {
+> +    cd ${S}/tools
+> +}
+> +
+> +do_install () {
+> +    cd ${S}/tools
+> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+> +        WITH_BASHCOMPLETION=yes \
+> +        WITH_WGQUICK=yes \
+> +        install
+> +}
+> +
+> +FILES_${PN} = " \
+> +    ${sysconfdir} \
+> +    ${systemd_unitdir} \
+> +    ${bindir} \
+> +"
+> +
+> +RDEPENDS_${PN} = "wireguard-module"
+> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+> new file mode 100644
+> index 0000000..46a9971
+> --- /dev/null
+> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+> @@ -0,0 +1,18 @@
+> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+> +implemented as a kernel virtual network interface for Linux, which aims to \
+> +replace both IPsec for most use cases, as well as popular user space and/or \
+> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+> +and easier to use."
+> +SECTION = "networking"
+> +HOMEPAGE = "https://www.wireguard.io/"
+> +LICENSE = "GPLv2"
+> +
+> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +
+> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
 
-diff --git a/recipes-qt/qt5/qtquick1/run-ptest b/recipes-qt/qt5/qtquick1/run-ptest
-new file mode 100644
-index 0000000..6c3f522
---- /dev/null
-+++ b/recipes-qt/qt5/qtquick1/run-ptest
-@@ -0,0 +1,5 @@
-+#!/bin/sh
-+
-+for x in ` awk '{print $1}' tst_list `;do
-+    ./${x};
-+done
-diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
-index e9b6185..bbf9980 100644
---- a/recipes-qt/qt5/qtquick1_git.bb
-+++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -10,6 +10,10 @@ LIC_FILES_CHKSUM = " \
-     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
- "
- 
-+SRC_URI += "file://run-ptest"
-+
-+inherit ptest
-+
- DEPENDS += "qtscript qtsvg qtxmlpatterns"
- # qttools
- 
-@@ -18,9 +22,31 @@ PACKAGECONFIG[webkit] = ",,qtwebkit"
- 
- EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'webkit', '', 'CONFIG+=noqtwebkit', d)}"
- 
-+addtask do_populate_sysroot after do_install before do_compile_ptest_base
-+deltask do_compile_ptest_base
-+addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest
-+addtask do_install_ptest after do_compile_ptest_base before do_package
-+
- do_configure_prepend() {
-     sed -i 's#^qtHaveModule(webkitwidgets):#qtHaveModule(webkitwidgets):!contains(CONFIG, noqtwebkit):#g' ${S}/src/imports/imports.pro
- }
- 
-+do_compile_ptest() {
-+    cd ${S}/tests
-+    qmake -o Makefile tests.pro
-+    oe_runmake
-+}
-+
-+fakeroot do_install_ptest() {
-+    mkdir -p ${D}${PTEST_PATH}
-+    t=${D}${PTEST_PATH}
-+    for var in ` find ${S}/tests/auto/ -name tst_*`; do
-+        if [ not ` echo ${var##*/} | grep '\.'` ]; then
-+            echo ${var##*/} >> ${t}/tst_list
-+            install -m 0644 ${var} ${t}
-+        fi
-+    done
-+}
-+
- QT_MODULE_BRANCH = "dev"
- SRCREV = "64faeb0d8003e699a4d09e7dcee1ef6eb10302ad"
--- 
-2.7.4
+This SRC_URI is gone, maybe it's just a temp location ?
 
+// Robert
 
-
+> +
+> +SRC_URI[md5sum] = "8e559f4fd672b15c38a15eb4d88cc84d"
+> +SRC_URI[sha256sum] = "03c82af774224cd171d000ee4a519b5e474cc6842ac04967773cf77b26750000"
+> +
+> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+>
 
