@@ -1,50 +1,46 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id CF56D77FC0
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 73CEC71A50
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 19:22:41 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id v4so13409310wmb.2
+	Thu, 18 May 2017 20:32:22 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id w69so6935555pfk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 12:22:43 -0700 (PDT)
+	Thu, 18 May 2017 13:32:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Eqs9u78J+LbkXfuSqXGDz0B4b+9+ZevuIBsHbjOaGII=;
-	b=gWnNmCP4MIoTxYrkN4S+p3+Ra9OMgGaVJX29P0LbR4d7/xbH/lX6IJLLaLS52w+zba
-	sTDvcaAAkeJmiMya5FKWHhZQv5AMzQus+LJpE1VGyhU7FomgZRXPESS4LSL1bdRinVa7
-	LNIYUuxAm4ga1o215zhuUa/QOxLH446R58C28I/mZbDMutzUKblzH17IzqKxWdxFf7pK
-	hJmrxmcMWL1d0d6Kyl1oas8hTZhdB1etPS1mHX4dlEXjbVpHVOKfqAOnmaZ4SE5iYrvZ
-	zmkxpoIyPr0QLUOfCL6agtMULwiBfLUEjzAQ6+5HnvZ5+FTRKqphpWFQNCpDmNA1hrn9
-	qpXg==
+	h=from:to:cc:subject:date:message-id;
+	bh=QL6jIGTQdvTocV5pdpntgxbJpWsaqiiZHSQI+yVKNzQ=;
+	b=EStqcK78mNZnABAYu98TH6F5m6Kwxii67BDjBIvoDuSgdziKe8zJJ2++u3viPJvzSY
+	fRxhiaSD4qQ2Tp1uQ29hPnNgXspX52IkWcKvsKyOVF1XBnP3KCahHeFl5I3M5wbJqmMm
+	Uf8HACxwzF+9kZvjGoVZhMCC3gYHrPrHihzX1b0Wg01LAMIHRuUrb0JzRAJm0meiRvgc
+	ebG+swUbXnsKoIN//mcx9K6WxGT2DW8tzCRhyVhftlBoj92Yylx3MfDEVgU82QrGdlBs
+	MvZCjMtx8YJR/xGPXbRxGuZpPRoWuAgy1jALsrx9719xzcUej6uYMWaJnU4LwCNLVH7E
+	lWWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id
-	:in-reply-to:references;
-	bh=Eqs9u78J+LbkXfuSqXGDz0B4b+9+ZevuIBsHbjOaGII=;
-	b=TaBlom60XDUc/H3kxI5dA0pzYisi55zOirDp4yhKn1npm4Y5FdIeHVW4OiDGQ665oP
-	Q6FEZTO85dUZHL1YpKD53BIs4ZqDjPYUoxRGkwal9Cq5OSlRQ9dSac5XMaY3Va1uHRaQ
-	o4/sdGczd3/mCIWN545xeVsQmmubUymFaWRaOtU2RXMElqZrWOr6hRvyD02Nsh+FGcS4
-	yPEZUQZtt4VDmW1vdnSDW9HQD2mbAZmq27SRkp/BSnji0sFIYd28IuRX9b6z3tlJDxIN
-	pptCeIujgNE5q5mQQABy9RjXIsLNfyYfQHxfOZPtZxzppril7T2Y0BUn2D5bdwxDPeJK
-	Bmmg==
-X-Gm-Message-State: AODbwcBXDUHu0BdqInV9gB0CBXUlTA86x/z/7KNUW9/cdeSrjwRcbvTH
-	QY2rbp74cgu64A==
-X-Received: by 10.28.6.82 with SMTP id 79mr3719900wmg.124.1495135362101;
-	Thu, 18 May 2017 12:22:42 -0700 (PDT)
-Received: from localhost.localdomain (109-230-21-223.static.orange.sk.
-	[109.230.21.223])
-	by smtp.gmail.com with ESMTPSA id 17sm8407703wml.32.2017.05.18.12.22.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 18 May 2017 12:22:41 -0700 (PDT)
-Sender: Belisko Marek <marek.belisko@gmail.com>
-From: Marek Belisko <marek.belisko@open-nandra.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=QL6jIGTQdvTocV5pdpntgxbJpWsaqiiZHSQI+yVKNzQ=;
+	b=ktD4DVXdxzjt3UcYXFctxQr4CF7hiHOWuqUXKoV4BqK2PtI3Uaqlb0FwcHneza9Sjx
+	BuEcCZ8YbWTCMsgOTnrUlRyVh/bn7U8DYmU2u4a+t+5AMvvWBbtJImbNuFWdFLKAwAFZ
+	RxWUBXeQ8KjlJQeTl0+G5471cpk3/AZM+9/yeQqCiPQKoVFePFBiZLpdNRIBY5/1dyTu
+	NHh0vCTfOY3EjFE8zhA617QQ70EQoNvZdk1L9iFtbLUDTzkUgiVmuVVOXxAlOioB0l3O
+	WW7Z8BHMFz91KTDHr4oEnihmGZ6sNKrX/96xBj7AEzC32tUE74vlHMndFgp81F6kBO0/
+	YgjA==
+X-Gm-Message-State: AODbwcAE+pIA+5OSJz7MDDtQKks53RovkAUOs9M9cNYZ2N1s4eF5Jq/E
+	4q/DLn4hPredcA==
+X-Received: by 10.98.138.150 with SMTP id o22mr6496464pfk.120.1495139543895;
+	Thu, 18 May 2017 13:32:23 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::c232])
+	by smtp.gmail.com with ESMTPSA id
+	n7sm10733593pfk.74.2017.05.18.13.32.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 18 May 2017 13:32:22 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 May 2017 21:22:39 +0200
-Message-Id: <1495135359-4880-1-git-send-email-marek.belisko@open-nandra.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1494964615-15539-1-git-send-email-marek.belisko@open-nandra.com>
-References: <1494964615-15539-1-git-send-email-marek.belisko@open-nandra.com>
-Cc: Marek Belisko <marek.belisko@open-nandra.com>
-Subject: [meta-oe][PATCH v2] recipes-support: Add handling for libgpiod
+Date: Thu, 18 May 2017 13:32:12 -0700
+Message-Id: <20170518203214.34947-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.0
+Subject: [meta-oe][PATCH 1/3] fwts: Bump SRCREV to latest past 17.03.00 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,61 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 May 2017 19:22:43 -0000
+X-List-Received-Date: Thu, 18 May 2017 20:32:23 -0000
 
-libgpiod - C library and tools for interacting with the linux GPIO
-character device
+Helps fixing build issues with gcc7
 
-Since linux 4.8 the GPIO sysfs interface is deprecated.
-User space should use the character device instead.
-This library encapsulates the ioctl calls and data structures behind a
-straightforward API.
-
-Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-V2: Fixed comments from Martin Jansa
+ meta-oe/recipes-test/fwts/fwts_git.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
- meta/recipes-support/libgpiod/libgpiod.bb | 30 ++++++++++++++++++++++++++++++
- 1 file changed, 30 insertions(+)
- create mode 100644 meta/recipes-support/libgpiod/libgpiod.bb
-
-diff --git a/meta/recipes-support/libgpiod/libgpiod.bb b/meta/recipes-support/libgpiod/libgpiod.bb
-new file mode 100644
-index 0000000..fe56f7b
---- /dev/null
-+++ b/meta/recipes-support/libgpiod/libgpiod.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "C library and tools for interacting with the linux GPIO character device"
-+HOMEPAGE = "https://github.com/brgl/libgpiod"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
-+
-+UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
-+
-+SRC_URI = "git://github.com/brgl/libgpiod.git"
-+
-+SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
-+
-+PV = "0.2+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
-+SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458067efaeaa8abc23968d2e3c56bcc2d2ef8"
-+
-+inherit autotools pkgconfig
-+
-+# enable tools
-+PACKAGECONFIG ?= "tools"
-+
-+PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
-+PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
-+
-+PACKAGES += " ${PN}-tools"
-+
-+FILES_${PN}-tools = "${bindir}/*"
+diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+index 4c4ae66d6..7c8deb3ed 100644
+--- a/meta-oe/recipes-test/fwts/fwts_git.bb
++++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+@@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+ LICENSE = "GPLv2+"
+ LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+ 
+-PV = "17.03.00"
++PV = "17.03.00+git${SRCPV}"
+ 
+-SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
++SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
+ SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
+            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
+            "
 -- 
-2.7.4
+2.13.0
 
 
