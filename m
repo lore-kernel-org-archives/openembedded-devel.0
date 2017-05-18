@@ -1,20 +1,30 @@
-Return-Path: <stanley.cheong.kwan.phoong@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 730D371A8C
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D51B56FFD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 03:08:06 +0000 (UTC)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by orsmga105.jf.intel.com with ESMTP; 17 May 2017 20:08:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,356,1491289200"; d="scan'208";a="103291121"
-Received: from platypus.jf.intel.com ([10.54.77.139])
-	by fmsmga005.fm.intel.com with ESMTP; 17 May 2017 20:08:07 -0700
-From: Phoong Stanley Cheong Kwan <stanley.cheong.kwan.phoong@intel.com>
-To: OpenEmbedded Devel Mailing List <openembedded-devel@lists.openembedded.org>
-Date: Wed, 17 May 2017 12:57:11 -0700
-Message-Id: <1495051031-10963-1-git-send-email-stanley.cheong.kwan.phoong@intel.com>
+	Thu, 18 May 2017 05:41:25 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19001520"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 May 2017 13:41:20 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id DEA9D47C6106
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 18 May 2017 13:41:20 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Thu, 18 May 2017 13:41:21 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 18 May 2017 13:41:02 +0800
+Message-ID: <1495086062-62765-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe] [PATCH] libsexy: Added glib-2.0-native dependency and removed PNBLACKLIST
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: DEA9D47C6106.A8B7D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5] [PATCH] qtdeclarative: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,45 +37,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 May 2017 03:08:06 -0000
+X-List-Received-Date: Thu, 18 May 2017 05:41:33 -0000
+Content-Type: text/plain
 
-From: "Stanley Cheong Kwan, Phoong" <stanley.cheong.kwan.phoong@intel.com>
+Add ptest for qtdeclarative by using provided testsuite.
 
-Found out that libsexy is missing the dependency for glib-2.0-native.
-
-Added glib-2.0-native into DEPENDS and unblacklist libsexy by
-removing PNBLACKLIST.
-
-Signed-off-by: Stanley Cheong Kwan, Phoong <stanley.cheong.kwan.phoong@intel.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-graphics/libsexy/libsexy.inc       | 2 +-
- meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb | 2 --
- 2 files changed, 1 insertion(+), 3 deletions(-)
+ recipes-qt/qt5/qtdeclarative/run-ptest |  6 ++++++
+ recipes-qt/qt5/qtdeclarative_git.bb    | 26 ++++++++++++++++++++++++++
+ 2 files changed, 32 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtdeclarative/run-ptest
 
-diff --git a/meta-oe/recipes-graphics/libsexy/libsexy.inc b/meta-oe/recipes-graphics/libsexy/libsexy.inc
-index 5a11ca0..d8c41d7 100644
---- a/meta-oe/recipes-graphics/libsexy/libsexy.inc
-+++ b/meta-oe/recipes-graphics/libsexy/libsexy.inc
-@@ -6,7 +6,7 @@ SECTION = "x11/libs"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+diff --git a/recipes-qt/qt5/qtdeclarative/run-ptest b/recipes-qt/qt5/qtdeclarative/run-ptest
+new file mode 100644
+index 0000000..044f834
+--- /dev/null
++++ b/recipes-qt/qt5/qtdeclarative/run-ptest
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++for x in ` awk '{print $1}' tst_list `;do
++    ./${x};
++done
++
+diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
+index a620a00..b296e18 100644
+--- a/recipes-qt/qt5/qtdeclarative_git.bb
++++ b/recipes-qt/qt5/qtdeclarative_git.bb
+@@ -14,6 +14,10 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
  
--DEPENDS = "gtk+ enchant libxml2"
-+DEPENDS = "gtk+ enchant libxml2 glib-2.0-native"
++SRC_URI += "file://run-ptest"
++
++inherit ptest
++
+ DEPENDS += "qtbase"
  
- SRC_URI = "http://releases.chipx86.com/libsexy/${BPN}/${BP}.tar.gz \
-            file://libsexy-pkgconfig-fixes.patch"
-diff --git a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-index 2ba1ebb..86b4958 100644
---- a/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-+++ b/meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb
-@@ -4,5 +4,3 @@ PR = "r2"
+ PACKAGECONFIG ??= "qtxmlpatterns"
+@@ -25,6 +29,28 @@ do_configure_prepend() {
+     sed -e 's/^\(!qtHaveModule(xmlpatterns)\)/!OE_QTXMLPATTERNS_ENABLED|\1/' -i ${S}/tests/auto/quick/quick.pro
+ }
  
- SRC_URI[md5sum] = "33c079a253270ec8bfb9508e4bb30754"
- SRC_URI[sha256sum] = "8c4101a8cda5fccbba85ba1a15f46f2cf75deaa8b3c525ce5b135b9e1a8fe49e"
--
--PNBLACKLIST[libsexy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130607/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
++addtask do_populate_sysroot after do_install before do_compile_ptest_base
++deltask do_compile_ptest_base
++addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest
++addtask do_install_ptest after do_compile_ptest_base before do_package
++
++do_compile_ptest() {
++    cd ${S}/tests
++    qmake -o Makefile tests.pro
++    oe_runmake
++}
++
++fakeroot do_install_ptest() {
++    mkdir -p ${D}${PTEST_PATH}
++    t=${D}${PTEST_PATH}
++    for var in ` find ${S}/tests/auto/ -name tst_*`; do
++        if [ not ` echo ${var##*/} | grep '\.'` ]; then
++            echo ${var##*/} >> ${t}/tst_list
++            install -m 0644  ${var} ${t}
++        fi
++    done
++}
++
+ do_install_append_class-nativesdk() {
+     # qml files not needed in nativesdk
+     rm -rf ${D}${OE_QMAKE_PATH_QML}
 -- 
 2.7.4
+
+
 
 
