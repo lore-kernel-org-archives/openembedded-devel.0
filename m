@@ -1,48 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 79ABF7805E
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 160737197E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 20:32:25 +0000 (UTC)
-Received: by mail-pg0-f52.google.com with SMTP id q125so27871276pgq.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 18 May 2017 13:32:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=PIsBF/qvWJuIrwPkGgDgmaUuOMl5059znvG6MN+K2cw=;
-	b=V6ViEpXDLCwmbF+B2QhnodfsnY2wjcNs4j4oFgrKUdwSKjDuqW8ENS0+Q2At6FXZ0e
-	/X/wbujozLspP7PxAnZhP/z7ebW3E9/LyT/6/SyNE4tYvahqUbETnDfkqTAO9AoQojVL
-	SCm96Nad6IVS39nprKHauwvHAJVcsYiakVLJ/R6bauypkMXvo997TrCsaZTiuO9JlXJt
-	oiLNRnH8L2NsJBUKApnE21TXErzfUP86yspCygUlE8c9usAhr/iRQ6SreptrmRbOEX1n
-	B36eNYp90sSJJtWCyXbBvvCP/Ag38fL7VieNZiZofEbz/W78z7WFgrzC/d21DijXRcv7
-	5AGA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=PIsBF/qvWJuIrwPkGgDgmaUuOMl5059znvG6MN+K2cw=;
-	b=lKMOjW2sQoc2+xkcAZh88xjL+C0nphxZfObtgieCyA8Baeld7lMSwXnCU//xyAzy46
-	yEuhjE3kN8bUVV6vxAPFmaWKCqboWK91t3GOv1Tf9sU6hk2vXt9ueKPeeCZzqaZdfHnt
-	VbXNdXjA4do/QHG1K2tx4KPbrLpPdcZwjLOgaiY/cnG3KkaPmFVo+dnmRkjViRWRlQtm
-	G1zfzPNdeerMRY9xuwDL34dROwKITO5ULhDW4bacu6lU6fA4lQ3dDSKfvk8n5KyQqt4n
-	3T+U6FMwcPtD7QEzfOyWYQJDX15aA1Hreb/xffpy/L4LsC4Ewp4jbgi78Bnia4ZtgSee
-	GOJQ==
-X-Gm-Message-State: AODbwcDyIaQLN6+hECydXm8FQSk0hn9jQ7bkiWo74Ufy3RqnD9h1/sZ1
-	mZkrAqGJfzfmeuZC
-X-Received: by 10.98.69.193 with SMTP id n62mr6620797pfi.216.1495139546887;
-	Thu, 18 May 2017 13:32:26 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::c232])
-	by smtp.gmail.com with ESMTPSA id
-	n7sm10733593pfk.74.2017.05.18.13.32.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 18 May 2017 13:32:25 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 18 May 2017 13:32:14 -0700
-Message-Id: <20170518203214.34947-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <20170518203214.34947-1-raj.khem@gmail.com>
-References: <20170518203214.34947-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH V2 3/3] rygel: Update to 0.34.0
+	Fri, 19 May 2017 01:26:18 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v4J1QFgj016105
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 18 May 2017 18:26:15 -0700 (PDT)
+Received: from [128.224.162.160] (128.224.162.160) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 18 May 2017 18:26:14 -0700
+To: Stefan Agner <stefan@agner.ch>, Joe MacDonald <Joe_MacDonald@mentor.com>
+References: <1493271021-15875-1-git-send-email-stefan@agner.ch>
+	<e9f275c5-533f-2066-e773-eecc1a89cb46@windriver.com>
+	<d04b319717d0ce642f47a4c2a75b1dc5@agner.ch>
+	<20170518181923.GC32192@mentor.com>
+	<4873b0143f076a00d4a1f4455e06c308@agner.ch>
+From: Robert Yang <liezhi.yang@windriver.com>
+Message-ID: <a79d011e-01c8-3fd8-ecf8-703f0f075e5c@windriver.com>
+Date: Fri, 19 May 2017 09:26:12 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
+MIME-Version: 1.0
+In-Reply-To: <4873b0143f076a00d4a1f4455e06c308@agner.ch>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-networking][PATCH v3] wireguard: add WireGuard kernel module and tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,85 +38,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 18 May 2017 20:32:26 -0000
+X-List-Received-Date: Fri, 19 May 2017 01:26:19 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Fix build without X
-Licence is more consistent now see
 
-https://github.com/GNOME/rygel/commit/cdcb6bd55efd0c3b7a2fd4ae5c3d8556f69f8402
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../rygel/{rygel_0.28.2.bb => rygel_0.34.0.bb}     | 24 ++++++++++++++--------
- 1 file changed, 16 insertions(+), 8 deletions(-)
- rename meta-multimedia/recipes-connectivity/rygel/{rygel_0.28.2.bb => rygel_0.34.0.bb} (74%)
+On 05/19/2017 02:26 AM, Stefan Agner wrote:
+> On 2017-05-18 11:19, Joe MacDonald wrote:
+>> [Re: [oe] [meta-networking][PATCH v3] wireguard: add WireGuard kernel
+>> module and tools] On 17.05.18 (Thu 10:55) Stefan Agner wrote:
+>>
+>>> On 2017-05-18 00:29, Robert Yang wrote:
+>>>> Hi Stefan,
+>>>>
+>>>> On 04/27/2017 01:30 PM, Stefan Agner wrote:
+>>>>> WireGuard is an extremely simple yet fast and modern VPN that utilizes
+>>>>> state-of-the-art cryptography. It aims to be faster, simpler, leaner,
+>>>>> and more useful than IPSec, while avoiding the massive headache.
+>>>>>
+>>>>> The recipes add the current experimental snapshot v0.0.20170421
+>>>>> out-of-tree kernel module and tools. The kernel module has some kernel
+>>>>> configuration dependencies such as some configuration part of
+>>>>> features/netfilter/netfilter.scc, hence netfilter.scc should be part
+>>>>> of KERNEL_EXTRA_FEATURES (which is the case by default).
+>>>>>
+>>>>> Since wireguard-tools is TUNE_PKGARCH and depends on wireguard-module
+>>>>> which is MACHINE_ARCH (like all kernel modules) we need to add this
+>>>>> dependency to SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>>>>>
+>>>>> Signed-off-by: Stefan Agner <stefan@agner.ch>
+>>>>> ---
+>>>>> Changes since v2:
+>>>>> - Upgrade to v0.0.20170421
+>>>>> - Add comment about Linux kernel requirement
+>>>>>
+>>>>> Changes since v1:
+>>>>> - Upgrade to v0.0.20170409
+>>>>> - Add wireguard-tools -> wireguard-module dependency to
+>>>>>   SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS.
+>>>>>
+>>>>>  meta-networking/conf/layer.conf                    |  4 ++++
+>>>>>  .../wireguard/wireguard-module_0.0.20170421.bb     | 13 +++++++++++
+>>>>>  .../wireguard/wireguard-tools_0.0.20170421.bb      | 27 ++++++++++++++++++++++
+>>>>>  .../recipes-kernel/wireguard/wireguard.inc         | 18 +++++++++++++++
+>>>>>  4 files changed, 62 insertions(+)
+>>>>>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+>>>>>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+>>>>>  create mode 100644 meta-networking/recipes-kernel/wireguard/wireguard.inc
+>>>>>
+>>>>> diff --git a/meta-networking/conf/layer.conf b/meta-networking/conf/layer.conf
+>>>>> index 85ad93b..b5aa159 100644
+>>>>> --- a/meta-networking/conf/layer.conf
+>>>>> +++ b/meta-networking/conf/layer.conf
+>>>>> @@ -21,3 +21,7 @@ LICENSE_PATH += "${LAYERDIR}/licenses"
+>>>>>
+>>>>>  # Override security flags
+>>>>>  require conf/distro/include/meta_networking_security_flags.inc
+>>>>> +
+>>>>> +SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
+>>>>> +  wireguard-tools->wireguard-module \
+>>>>> +"
+>>>>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+>>>>> new file mode 100644
+>>>>> index 0000000..cb21bda
+>>>>> --- /dev/null
+>>>>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170421.bb
+>>>>> @@ -0,0 +1,13 @@
+>>>>> +require wireguard.inc
+>>>>> +
+>>>>> +inherit module
+>>>>> +
+>>>>> +# This module requires Linux 3.10 higher and several networking related
+>>>>> +# configuration options. For exact kernel requirements visit:
+>>>>> +# https://www.wireguard.io/install/#kernel-requirements
+>>>>> +
+>>>>> +EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+>>>>> +MAKE_TARGETS = "module"
+>>>>> +MODULES_INSTALL_TARGET = "module-install"
+>>>>> +
+>>>>> +RRECOMMENDS_${PN} = "kernel-module-xt-hashlimit"
+>>>>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+>>>>> new file mode 100644
+>>>>> index 0000000..79d420f
+>>>>> --- /dev/null
+>>>>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170421.bb
+>>>>> @@ -0,0 +1,27 @@
+>>>>> +require wireguard.inc
+>>>>> +
+>>>>> +inherit bash-completion systemd pkgconfig
+>>>>> +
+>>>>> +DEPENDS = "wireguard-module libmnl"
+>>>>> +
+>>>>> +do_compile_prepend () {
+>>>>> +    cd ${S}/tools
+>>>>> +}
+>>>>> +
+>>>>> +do_install () {
+>>>>> +    cd ${S}/tools
+>>>>> +    oe_runmake DESTDIR="${D}" PREFIX="${prefix}" SYSCONFDIR="${sysconfdir}" \
+>>>>> +        SYSTEMDUNITDIR="${systemd_unitdir}" \
+>>>>> +        WITH_SYSTEMDUNITS=${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', '', d)} \
+>>>>> +        WITH_BASHCOMPLETION=yes \
+>>>>> +        WITH_WGQUICK=yes \
+>>>>> +        install
+>>>>> +}
+>>>>> +
+>>>>> +FILES_${PN} = " \
+>>>>> +    ${sysconfdir} \
+>>>>> +    ${systemd_unitdir} \
+>>>>> +    ${bindir} \
+>>>>> +"
+>>>>> +
+>>>>> +RDEPENDS_${PN} = "wireguard-module"
+>>>>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>>>>> new file mode 100644
+>>>>> index 0000000..46a9971
+>>>>> --- /dev/null
+>>>>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>>>>> @@ -0,0 +1,18 @@
+>>>>> +SUMMARY = "WireGuard is an extremely simple yet fast and modern VPN"
+>>>>> +DESCRIPTION="WireGuard is a secure network tunnel, operating at layer 3, \
+>>>>> +implemented as a kernel virtual network interface for Linux, which aims to \
+>>>>> +replace both IPsec for most use cases, as well as popular user space and/or \
+>>>>> +TLS-based solutions like OpenVPN, while being more secure, more performant, \
+>>>>> +and easier to use."
+>>>>> +SECTION = "networking"
+>>>>> +HOMEPAGE = "https://www.wireguard.io/"
+>>>>> +LICENSE = "GPLv2"
+>>>>> +
+>>>>> +LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+>>>>> +
+>>>>> +SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+>>>>
+>>>> This SRC_URI is gone, maybe it's just a temp location ?
+>>>
+>>> Hm, yeah Jason released a new snapshot, 0.0.20170517. He seems not to
+>>> keep the old snapshots around, I guess he wants to avoid having stale
+>>> versions floating around.
+>>>
+>>> Either we keep bumping the version everytime a new snapshot is available
+>>> or we should just switch to git for OE, what do you think?
+>>
+>> I think that given he's not just removing old tarballs from an FTP
+>> server somewhere but removing tags from the git history, it'd be best to
+>> go with a git recipe with a fixed SRCREV.
+>
+> According to the snapshot announcement the new snapshot made breaking
+> changes to the protocol. It might be the reason they removed the old
+> snapshots, I am not sure how that has been handled in the past...
+>
+> I guess the snapshots are slightly better tested and have a somewhat
+> more consistent state than git, so I would have preferred snapshots...
+>
+> Just sent out a patch to move to the latest snapshot, lets see how
+> things move from this point, if the snapshots disappear I can switch to
+> git, does that sound ok?
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-similarity index 74%
-rename from meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-rename to meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-index 38fac65d5..d2eda6bf9 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.28.2.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-@@ -5,26 +5,27 @@ Additionally, media player software may use Rygel to become a MediaRenderer \
- that may be controlled remotely by a UPnP or DLNA Controller."
- HOMEPAGE = "http://live.gnome.org/Rygel"
- 
--LICENSE = "LGPLv2+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5f30f0716dfdd0d91eb439ebec522ec2 \
--                    file://src/rygel/rygel-main.vala;endline=27;md5=99324118da4c012d25edae2f779ae9b3"
-+LICENSE = "LGPL1.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
- 
- DEPENDS = "libxml2 glib-2.0 gssdp gupnp gupnp-av gupnp-dlna gstreamer1.0 gstreamer1.0-plugins-base ossp-uuid libgee libsoup-2.4 libmediaart-2.0 libunistring sqlite3 intltool-native"
- RDEPENDS_${PN} = "gstreamer1.0-plugins-base-playback shared-mime-info"
- RRECOMMENDS_${PN} = "rygel-plugin-media-export"
- 
- GNOME_COMPRESS_TYPE = "xz"
--SRC_URI[archive.md5sum] = "9fbe4fb53b6cfa2f3f3723b7649a2215"
--SRC_URI[archive.sha256sum] = "9ea23df7186caac5f1aad3137edf6d507d339b9a469fc3133df4043fa66b61f5"
-+SRC_URI[archive.md5sum] = "7d8923324b280cd5452803d61176a34a"
-+SRC_URI[archive.sha256sum] = "fbb2d46cbe4e750df6610b4c66b2278f06d1f71a257c7903e676ccb394dad418"
- 
--inherit gnomebase vala gobject-introspection
-+inherit gnomebase vala gobject-introspection gettext systemd
- 
- EXTRA_OECONF = "--disable-tracker-plugin --with-media-engine=gstreamer"
- 
--PACKAGECONFIG ?= "external mpris mediathek ruih media-export gst-launch gtk+3"
-+PACKAGECONFIG ?= "external mpris ruih media-export gst-launch"
-+
-+PACKAGECONFIG_append = "${@bb.utils.contains("DISTRO_FEATURES", "x11", " gtk+3", "", d)}"
-+
- PACKAGECONFIG[external] = "--enable-external-plugin,--disable-external-plugin"
- PACKAGECONFIG[mpris] = "--enable-mpris-plugin,--disable-mpris-plugin"
--PACKAGECONFIG[mediathek] = "--enable-mediathek-plugin,--disable-mediathek-plugin"
- PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
- PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin"
- PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
-@@ -36,6 +37,11 @@ do_install_append() {
-        # Remove .la files for loadable modules
-        rm -f ${D}/${libdir}/rygel-${LIBV}/engines/*.la
-        rm -f ${D}/${libdir}/rygel-${LIBV}/plugins/*.la
-+       if [ -e ${D}${libdir}/systemd/user/rygel.service ]; then
-+               mkdir -p ${D}${systemd_unitdir}/system
-+               mv ${D}${libdir}/systemd/user/rygel.service ${D}${systemd_unitdir}/system
-+               rmdir ${D}${libdir}/systemd/user ${D}${libdir}/systemd
-+       fi
- }
- 
- FILES_${PN} += "${libdir}/rygel-${LIBV}/engines ${datadir}/dbus-1 ${datadir}/icons"
-@@ -46,6 +52,8 @@ ALLOW_EMPTY_${PN}-meta = "1"
- 
- PACKAGES_DYNAMIC = "${PN}-plugin-*"
- 
-+SYSTEMD_SERVICE_${PN} = "rygel.service"
-+
- python populate_packages_prepend () {
-     rygel_libdir = d.expand('${libdir}/rygel-${LIBV}')
-     postinst = d.getVar('plugin_postinst')
--- 
-2.13.0
+I prefer git in this case rather than may break again.
 
+// Robert
+
+>
+> --
+> Stefan
+>
+>>
+>> -J.
+>>
+>>>
+>>> --
+>>> Stefan
+>>>
+>>>>
+>>>> // Robert
+>>>>
+>>>>> +
+>>>>> +SRC_URI[md5sum] = "8e559f4fd672b15c38a15eb4d88cc84d"
+>>>>> +SRC_URI[sha256sum] = "03c82af774224cd171d000ee4a519b5e474cc6842ac04967773cf77b26750000"
+>>>>> +
+>>>>> +S = "${WORKDIR}/WireGuard-${PV}/src/"
+>>>>>
+>
 
