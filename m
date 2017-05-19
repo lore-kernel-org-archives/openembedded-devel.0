@@ -1,54 +1,37 @@
-Return-Path: <haris.okanovic@ni.com>
-X-Greylist: delayed 2620 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 19 May 2017 17:01:10 UTC
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 4EAD47809D
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id CE1D272F62
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 17:01:10 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.20/8.16.0.20) with SMTP id
-	v4JGFmWL023157; Fri, 19 May 2017 11:17:29 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2aj3he84dv-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT); Fri, 19 May 2017 11:17:29 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com
-	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
-	by us-aus-skprod3.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
-	v4JGHRnh018485
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-	Fri, 19 May 2017 11:17:28 -0500
-Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 19 May 2017 11:17:25 -0500
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Fri, 19 May 2017 11:17:25 -0500
-Received: from harisdt.amer.corp.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Fri, 19 May 2017 11:17:25 -0500
-From: Haris Okanovic <haris.okanovic@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 19 May 2017 11:17:23 -0500
-Message-ID: <20170519161723.32426-1-haris.okanovic@ni.com>
-X-Mailer: git-send-email 2.12.1
-In-Reply-To: <20161222200250.23273-1-haris.okanovic@ni.com>
-References: <20161222200250.23273-1-haris.okanovic@ni.com>
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-05-19_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1011 lowpriorityscore=0 impostorscore=0
-	adultscore=0
-	classifier=spam adjust=30 reason=mlx scancount=1
-	engine=8.0.1-1703280000 definitions=main-1705190102
-Cc: haris.okanovic@ni.com, clarson@kergoth.com
-Subject: [PATCH v4] hwloc: Add
+	Fri, 19 May 2017 17:19:29 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id r58so10458790qtb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 May 2017 10:19:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VqODhToU5dMUu/BOwq3GXhesNKTCyt/ltBX4uvio/Y4=;
+	b=DsMEtzBShzEAvXL5jFVXMANBypTRZzUTocKdatt/r3nqS9vhv5stqmnrTR4iN6ZVxZ
+	8w8RmozHAqfQfVNck7WsRLtif2cYezEC5lB3l0YAhS31P0eeD5Yru/Aq8cFzgSSv/sqE
+	l9go2E1s++vOSVMOv9rzaWxoz/b86CznvtTAwH9R+cmQI64DH3yQ/qIOmK6TS3qLXMMp
+	1wZlog0xmFgyX6DvA2/4GFQ1JXHolp9Zk2mPLjbbfZhCakS5Au/FjAX80FuaBU3aWCpQ
+	mvqTDNjw8U2Cb8qM+bpO5mQbnjPw9Bzm76lRKxLe5eDfDYgk1Ucd4isrseisYSKY0R+M
+	UGKQ==
+X-Gm-Message-State: AODbwcB0dWD7vhN7rQsZoxosr+r7S6/Q8bQ63NNxq3vxFTABy7fpog7n
+	ACl2ih1PI7W+bA==
+X-Received: by 10.200.55.145 with SMTP id d17mr10719367qtc.57.1495214370829;
+	Fri, 19 May 2017 10:19:30 -0700 (PDT)
+Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
+	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
+	k86sm6674736qkh.12.2017.05.19.10.19.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 19 May 2017 10:19:30 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 19 May 2017 13:19:22 -0400
+Message-Id: <1495214362-30544-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-jinja: update to version 2.9.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,63 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 May 2017 17:01:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 19 May 2017 17:19:30 -0000
 
-https://www.open-mpi.org/projects/hwloc/
-
-"The Portable Hardware Locality (hwloc) software package provides a
-portable abstraction (across OS, versions, architectures, ...) of the
-hierarchical topology of modern architectures, including NUMA memory
-nodes, sockets, shared caches, cores and simultaneous multithreading.
-It also gathers various system attributes such as cache and memory
-information as well as the locality of I/O devices such as network
-interfaces, InfiniBand HCAs or GPUs."
-
-This recipe adds libhwloc and lstopo utility as two packages.
-
-Testing: Built in OE/Krogoth. Installed to x86_64 machine. Successfully
-ran `lstopo` and verified it printed correct CPU and cache info.
-
-Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 26 ++++++++++++++++++++++++++
- 1 file changed, 26 insertions(+)
- create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+ meta-python/recipes-devtools/python/python-jinja2.inc                 | 4 ++--
+ .../python/{python-jinja2_2.9.5.bb => python-jinja2_2.9.6.bb}         | 0
+ .../python/{python3-jinja2_2.9.5.bb => python3-jinja2_2.9.6.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-jinja2_2.9.5.bb => python-jinja2_2.9.6.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-jinja2_2.9.5.bb => python3-jinja2_2.9.6.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-new file mode 100644
-index 000000000..e067f2799
---- /dev/null
-+++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-@@ -0,0 +1,26 @@
-+SUMMARY = "Portable Hardware Locality (hwloc) software package"
-+DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
-+ provides a portable abstraction of the hierarchical topology of modern \
-+ architectures."
-+HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
-+SECTION = "base"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
-+
-+SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2"
-+SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
-+SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
-+
-+inherit autotools
-+
-+DEPENDS += "cairo ncurses udev libxml2 zlib libpciaccess"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
-+DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
-+
-+# Split hwloc library into separate subpackage
-+PACKAGES_prepend = " lib${PN} "
-+FILES_lib${PN} += "${libdir}/lib${PN}.so*"
-+RDEPENDS_${PN} += "lib${PN} (= ${EXTENDPKGV})"
-+
-+# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
-+INSANE_SKIP_lib${PN} += "dev-so"
+diff --git a/meta-python/recipes-devtools/python/python-jinja2.inc b/meta-python/recipes-devtools/python/python-jinja2.inc
+index cf8010e..35cbb0b 100644
+--- a/meta-python/recipes-devtools/python/python-jinja2.inc
++++ b/meta-python/recipes-devtools/python/python-jinja2.inc
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=20c831f91dd3bd486020f672ba2be386"
+ 
+ PYPI_PACKAGE = "Jinja2"
+ 
+-SRC_URI[md5sum] = "9e55f0db6620dd99a1b366183a94270d"
+-SRC_URI[sha256sum] = "702a24d992f856fa8d5a7a36db6128198d0c21e1da34448ca236c42e92384825"
++SRC_URI[md5sum] = "6411537324b4dba0956aaa8109f3c77b"
++SRC_URI[sha256sum] = "ddaa01a212cd6d641401cb01b605f4a4d9f37bfc93043d7f760ec70fb99ff9ff"
+ 
+ RDEPENDS_${PN} += "${PYTHON_PN}-io ${PYTHON_PN}-pickle ${PYTHON_PN}-crypt \
+     ${PYTHON_PN}-math ${PYTHON_PN}-netclient ${PYTHON_PN}-re ${PYTHON_PN}-textutils \
+diff --git a/meta-python/recipes-devtools/python/python-jinja2_2.9.5.bb b/meta-python/recipes-devtools/python/python-jinja2_2.9.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-jinja2_2.9.5.bb
+rename to meta-python/recipes-devtools/python/python-jinja2_2.9.6.bb
+diff --git a/meta-python/recipes-devtools/python/python3-jinja2_2.9.5.bb b/meta-python/recipes-devtools/python/python3-jinja2_2.9.6.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-jinja2_2.9.5.bb
+rename to meta-python/recipes-devtools/python/python3-jinja2_2.9.6.bb
 -- 
-2.12.1
+2.7.4
 
 
