@@ -1,37 +1,23 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AEF7780BE
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B8B5777DB8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 16:42:23 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id r58so10335904qtb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 09:42:25 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=D0W43ug8ny2gkSr7eCfwwYLBQDUifFzB31McK9a60X4=;
-	b=pDBHGWkYPdhz0YrWYoB3p38aagKndtMRmo21cy08ZKNiZT1o0biVvPpR8EUDFVe64m
-	2pHDXHbn6WOCEi1yz+N4+LT0aoeLdsyBjsLORTtzf7u/ZSY4wzugHB/V3K8EaodKfKrG
-	wIKLNfPLc4krUcnRVLHHgAyYIJYoQ2dPYMZ0Nkes3uUPg+mhnSLpDVSDSOBQNZnMmISH
-	i1EyXV9Fejyt/4rznTE2Hvtc0CdIhf/DAkoU135fPF0B7UZHIo8QJlRmpUvKSD0Y2UPu
-	SN3o246zce4nitl0WpEGF6UKG7KofclFez2iety9FtWUFJ7JyO90Sdwfne7BCJX5ILj4
-	l/eQ==
-X-Gm-Message-State: AODbwcBpH3P12beuTcvRX0zaavKKWvYxHrxadtVyFyB1OozoFOlsdQFa
-	fvVzDr9x3deAjQ==
-X-Received: by 10.237.63.168 with SMTP id s37mr10543301qth.61.1495212145215;
-	Fri, 19 May 2017 09:42:25 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	r19sm6195536qkl.54.2017.05.19.09.42.24
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 May 2017 09:42:24 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 May 2017 12:42:17 -0400
-Message-Id: <1495212137-32248-1-git-send-email-derek@asterius.io>
+	Fri, 19 May 2017 16:52:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4JGqwnX016295
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 19 May 2017 09:52:59 -0700 (PDT)
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 19 May 2017 09:52:58 -0700
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <derek@asterius.io>, <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 May 2017 12:52:55 -0400
+Message-ID: <1495212776-27436-1-git-send-email-mark.asselstine@windriver.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pbr: update to version 3.0.0
+MIME-Version: 1.0
+Subject: [meta-python][PATCH 1/2] python-zopeinterface: fixup test package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +30,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 May 2017 16:42:24 -0000
+X-List-Received-Date: Fri, 19 May 2017 16:53:00 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+The recipe seems to have the intent of creating a 'tests' package but
+doesn't follow through on this intent. Rename 'tests' to 'test' to
+match other python test packages and follow through on the intent to
+actually produce a 'test' package.
+
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
 ---
- .../python/{python-pbr_2.0.0.bb => python-pbr_3.0.0.bb}               | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pbr_2.0.0.bb => python-pbr_3.0.0.bb} (75%)
+ meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pbr_2.0.0.bb b/meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
-similarity index 75%
-rename from meta-python/recipes-devtools/python/python-pbr_2.0.0.bb
-rename to meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
-index a044a9e..f1660ea 100644
---- a/meta-python/recipes-devtools/python/python-pbr_2.0.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
- 
--SRC_URI[md5sum] = "dfc1c3788eff06acfaade6f1655fa490"
--SRC_URI[sha256sum] = "0ccd2db529afd070df815b1521f01401d43de03941170f8a800e7531faba265d"
-+SRC_URI[md5sum] = "b9ef99a98350a57bbe55b1142807f224"
-+SRC_URI[sha256sum] = "568f988af109114fbfa0525dcb6836b069838360d11732736ecc82e4c15d5c12"
- 
+diff --git a/meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb b/meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb
+index 7596394..8ad1250 100644
+--- a/meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb
++++ b/meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb
+@@ -8,11 +8,16 @@ SRC_URI[sha256sum] = "8780ef68ca8c3fe1abb30c058a59015129d6e04a6b02c2e56b9c7de607
+ PYPI_PACKAGE = "zope.interface"
  inherit pypi setuptools
  
++PACKAGES =. "${PN}-test "
++
+ RPROVIDES_${PN} += "zope-interfaces"
++
++RDEPENDS_${PN}-test += "python-unittest python-doctest"
++
+ FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*.egg/*/*/.debug"
+ FILES_${PN}-dev += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.c"
+ FILES_${PN}-doc += "${PYTHON_SITEPACKAGES_DIR}/zope/interface/*.txt"
+-FILES_${PN}-tests = " \
++FILES_${PN}-test += " \
+         ${PYTHON_SITEPACKAGES_DIR}/zope/interface/tests \
+         ${PYTHON_SITEPACKAGES_DIR}/zope/interface/common/tests \
+ "
 -- 
 2.7.4
 
