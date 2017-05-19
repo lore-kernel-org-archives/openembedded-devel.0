@@ -1,37 +1,54 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f173.google.com (mail-qk0-f173.google.com
-	[209.85.220.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 838F0780C2
+Return-Path: <haris.okanovic@ni.com>
+X-Greylist: delayed 2620 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 19 May 2017 17:01:10 UTC
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 4EAD47809D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 16:53:03 +0000 (UTC)
-Received: by mail-qk0-f173.google.com with SMTP id a72so65659023qkj.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 09:53:04 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ucaarbkVcD2CKW7u7tTRi8VXSLd/559wXyu1KzU1spY=;
-	b=pRmLt2gnJAThG8MuqjMJPuPlVsArJeBCZlmj+s8dd6MvVpi7WeBMHcQ3kXBazEpj7I
-	QZN3j2HYtEC6yczWr+3myFUlccJY/WfZyI37FggkYxwgkU3lyUMZg66S4pIgaelItz7e
-	h8XCUmlaBtViV5goHX2gi8n9PH3wV9T+nVOLkSIOwDRDdatJQu7f6QtLkwFjIIzjuYBo
-	xfiiaXAwczGddNTTHi8Op1qpa59bHKtzI8lpO8QmqJZ98HFZ+ZimbLk0wfe/zOfEboOy
-	o2NhYAy8maYU+F7ndODSnjC/3sTYsaziNZqxC5kdnqlTW7dxoMUZxk7rjB/LOKa3/dWc
-	/Cwg==
-X-Gm-Message-State: AODbwcCEa/cllZJzpSGw0eFtEl5+vn81Ckwq9G77HGhsklZcQ9wzTKm8
-	aL+f3caHG+0TNg==
-X-Received: by 10.55.141.67 with SMTP id p64mr10007630qkd.164.1495212784553;
-	Fri, 19 May 2017 09:53:04 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
-	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	o128sm6232328qkd.6.2017.05.19.09.53.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 May 2017 09:53:03 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 May 2017 12:52:55 -0400
-Message-Id: <1495212775-15285-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-werkzeug: update to version 0.12.2
+	Fri, 19 May 2017 17:01:10 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.20/8.16.0.20) with SMTP id
+	v4JGFmWL023157; Fri, 19 May 2017 11:17:29 -0500
+Received: from ni.com (skprod3.natinst.com [130.164.80.24])
+	by mx0a-00010702.pphosted.com with ESMTP id 2aj3he84dv-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Fri, 19 May 2017 11:17:29 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com
+	(us-aus-exhub2.ni.corp.natinst.com [130.164.68.32])
+	by us-aus-skprod3.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
+	v4JGHRnh018485
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Fri, 19 May 2017 11:17:28 -0500
+Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 19 May 2017 11:17:25 -0500
+Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
+	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Fri, 19 May 2017 11:17:25 -0500
+Received: from harisdt.amer.corp.natinst.com (130.164.49.7) by
+	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Fri, 19 May 2017 11:17:25 -0500
+From: Haris Okanovic <haris.okanovic@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 19 May 2017 11:17:23 -0500
+Message-ID: <20170519161723.32426-1-haris.okanovic@ni.com>
+X-Mailer: git-send-email 2.12.1
+In-Reply-To: <20161222200250.23273-1-haris.okanovic@ni.com>
+References: <20161222200250.23273-1-haris.okanovic@ni.com>
+MIME-Version: 1.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-05-19_10:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1011 lowpriorityscore=0 impostorscore=0
+	adultscore=0
+	classifier=spam adjust=30 reason=mlx scancount=1
+	engine=8.0.1-1703280000 definitions=main-1705190102
+Cc: haris.okanovic@ni.com, clarson@kergoth.com
+Subject: [PATCH v4] hwloc: Add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +61,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 May 2017 16:53:03 -0000
+X-List-Received-Date: Fri, 19 May 2017 17:01:11 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+https://www.open-mpi.org/projects/hwloc/
+
+"The Portable Hardware Locality (hwloc) software package provides a
+portable abstraction (across OS, versions, architectures, ...) of the
+hierarchical topology of modern architectures, including NUMA memory
+nodes, sockets, shared caches, cores and simultaneous multithreading.
+It also gathers various system attributes such as cache and memory
+information as well as the locality of I/O devices such as network
+interfaces, InfiniBand HCAs or GPUs."
+
+This recipe adds libhwloc and lstopo utility as two packages.
+
+Testing: Built in OE/Krogoth. Installed to x86_64 machine. Successfully
+ran `lstopo` and verified it printed correct CPU and cache info.
+
+Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
 ---
- meta-python/recipes-devtools/python/python-werkzeug.inc               | 4 ++--
- .../python/{python-werkzeug_0.11.15.bb => python-werkzeug_0.12.2.bb}  | 0
- .../{python3-werkzeug_0.11.15.bb => python3-werkzeug_0.12.2.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-werkzeug_0.11.15.bb => python-werkzeug_0.12.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-werkzeug_0.11.15.bb => python3-werkzeug_0.12.2.bb} (100%)
+ meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta-python/recipes-devtools/python/python-werkzeug.inc
-index e55f56d..b2949a3 100644
---- a/meta-python/recipes-devtools/python/python-werkzeug.inc
-+++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
-@@ -10,8 +10,8 @@ HOMEPAGE = "http://werkzeug.pocoo.org/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a68f5361a2b2ca9fdf26b38aaecb6faa"
- 
--SRC_URI[md5sum] = "cb4010478dd33905f95920e4880204a2"
--SRC_URI[sha256sum] = "455d7798ac263266dbd38d4841f7534dd35ca9c3da4a8df303f8488f38f3bcc0"
-+SRC_URI[md5sum] = "e385b2c5a7193cff24c689b31e1124dc"
-+SRC_URI[sha256sum] = "903a7b87b74635244548b30d30db4c8947fe64c5198f58899ddcd3a13c23bb26"
- 
- PYPI_PACKAGE = "Werkzeug"
- 
-diff --git a/meta-python/recipes-devtools/python/python-werkzeug_0.11.15.bb b/meta-python/recipes-devtools/python/python-werkzeug_0.12.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-werkzeug_0.11.15.bb
-rename to meta-python/recipes-devtools/python/python-werkzeug_0.12.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-werkzeug_0.11.15.bb b/meta-python/recipes-devtools/python/python3-werkzeug_0.12.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-werkzeug_0.11.15.bb
-rename to meta-python/recipes-devtools/python/python3-werkzeug_0.12.2.bb
+diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+new file mode 100644
+index 000000000..e067f2799
+--- /dev/null
++++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Portable Hardware Locality (hwloc) software package"
++DESCRIPTION = "The Portable Hardware Locality (hwloc) software package \
++ provides a portable abstraction of the hierarchical topology of modern \
++ architectures."
++HOMEPAGE = "https://www.open-mpi.org/software/hwloc/"
++SECTION = "base"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3282e20dc3cec311deda3c6d4b1f990b"
++
++SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2"
++SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
++SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
++
++inherit autotools
++
++DEPENDS += "cairo ncurses udev libxml2 zlib libpciaccess"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
++DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
++
++# Split hwloc library into separate subpackage
++PACKAGES_prepend = " lib${PN} "
++FILES_lib${PN} += "${libdir}/lib${PN}.so*"
++RDEPENDS_${PN} += "lib${PN} (= ${EXTENDPKGV})"
++
++# XXX dev-so QA check doesn't like soname symlinks in non-dev packages
++INSANE_SKIP_lib${PN} += "dev-so"
 -- 
-2.7.4
+2.12.1
 
 
