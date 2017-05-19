@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CD0DA780BA
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AEF7780BE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 16:35:09 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id a46so10317879qte.0
+	Fri, 19 May 2017 16:42:23 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id r58so10335904qtb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 19 May 2017 09:35:11 -0700 (PDT)
+	Fri, 19 May 2017 09:42:25 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=aPZjYzwAwtiCmhZPvOCDeHqbU6rzRMCEAGIfe0oto9Y=;
-	b=ak4R8HYnwlKu8HHGRzATFBsHS0K5s9ve3dqcKA0PFXw9FM26cXiR+ZEsK3+6JqN9gj
-	qqxD7jAk/ESv0oTDsNTCvFjz/p1PSFLjrkD+R9gvWB/rG58uT4qEiobaIX4T0l3G7P9R
-	O2pfx6Pa5kjHyJJyJc0mo9BuhjtfFVx992b8sfHXn/8oPnV2h4FRDyrsPZilOYOkNbOy
-	ix4HOt5rCWfVFB/kjNT7GtmrkVTXzmkzEX8Z09jcK3BZUzH6UXQSkeLO6fvyJjp/dOoA
-	7M4fwgKJhn1mWU1eDQcQ/4BmUxK93y+kfVgX/uaOquHhuNwRtNNxXp15y0uDNiAHNCuG
-	MyFw==
-X-Gm-Message-State: AODbwcDdNPfedjnJoDfswlHDljqRZwR0eava1UUYwfit3/tVXPZyWnP9
-	HAU1meFd3FsiNg==
-X-Received: by 10.200.40.46 with SMTP id 43mr10566046qtq.132.1495211710700;
-	Fri, 19 May 2017 09:35:10 -0700 (PDT)
+	bh=D0W43ug8ny2gkSr7eCfwwYLBQDUifFzB31McK9a60X4=;
+	b=pDBHGWkYPdhz0YrWYoB3p38aagKndtMRmo21cy08ZKNiZT1o0biVvPpR8EUDFVe64m
+	2pHDXHbn6WOCEi1yz+N4+LT0aoeLdsyBjsLORTtzf7u/ZSY4wzugHB/V3K8EaodKfKrG
+	wIKLNfPLc4krUcnRVLHHgAyYIJYoQ2dPYMZ0Nkes3uUPg+mhnSLpDVSDSOBQNZnMmISH
+	i1EyXV9Fejyt/4rznTE2Hvtc0CdIhf/DAkoU135fPF0B7UZHIo8QJlRmpUvKSD0Y2UPu
+	SN3o246zce4nitl0WpEGF6UKG7KofclFez2iety9FtWUFJ7JyO90Sdwfne7BCJX5ILj4
+	l/eQ==
+X-Gm-Message-State: AODbwcBpH3P12beuTcvRX0zaavKKWvYxHrxadtVyFyB1OozoFOlsdQFa
+	fvVzDr9x3deAjQ==
+X-Received: by 10.237.63.168 with SMTP id s37mr10543301qth.61.1495212145215;
+	Fri, 19 May 2017 09:42:25 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-435561e0.dyn.optonline.net.
 	[67.85.97.224]) by smtp.gmail.com with ESMTPSA id
-	135sm2418922qkh.29.2017.05.19.09.35.10
+	r19sm6195536qkl.54.2017.05.19.09.42.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 19 May 2017 09:35:10 -0700 (PDT)
+	Fri, 19 May 2017 09:42:24 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 19 May 2017 12:35:01 -0400
-Message-Id: <1495211701-23452-1-git-send-email-derek@asterius.io>
+Date: Fri, 19 May 2017 12:42:17 -0400
+Message-Id: <1495212137-32248-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] nginx: update stable version to 1.12.0
+Subject: [meta-python][PATCH] python-pbr: update to version 3.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 19 May 2017 16:35:10 -0000
+X-List-Received-Date: Fri, 19 May 2017 16:42:24 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-httpd/nginx/nginx_1.10.3.bb | 6 ------
- meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb | 6 ++++++
- 2 files changed, 6 insertions(+), 6 deletions(-)
- delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.10.3.bb
- create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
+ .../python/{python-pbr_2.0.0.bb => python-pbr_3.0.0.bb}               | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pbr_2.0.0.bb => python-pbr_3.0.0.bb} (75%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.10.3.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.10.3.bb
-deleted file mode 100644
-index b62fd4c..0000000
---- a/meta-webserver/recipes-httpd/nginx/nginx_1.10.3.bb
-+++ /dev/null
-@@ -1,6 +0,0 @@
--require nginx.inc
--
--LIC_FILES_CHKSUM = "file://LICENSE;md5=0bb58ed0dfd4f5dbece3b52aba79f023"
--
--SRC_URI[md5sum] = "204a20cb4f0b0c9db746c630d89ff4ea"
--SRC_URI[sha256sum] = "75020f1364cac459cb733c4e1caed2d00376e40ea05588fb8793076a4c69dd90"
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
-new file mode 100644
-index 0000000..d3e15a8
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
-@@ -0,0 +1,6 @@
-+require nginx.inc
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
-+
-+SRC_URI[md5sum] = "995eb0a140455cf0cfc497e5bd7f94b3"
-+SRC_URI[sha256sum] = "b4222e26fdb620a8d3c3a3a8b955e08b713672e1bc5198d1e4f462308a795b30"
+diff --git a/meta-python/recipes-devtools/python/python-pbr_2.0.0.bb b/meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
+similarity index 75%
+rename from meta-python/recipes-devtools/python/python-pbr_2.0.0.bb
+rename to meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
+index a044a9e..f1660ea 100644
+--- a/meta-python/recipes-devtools/python/python-pbr_2.0.0.bb
++++ b/meta-python/recipes-devtools/python/python-pbr_3.0.0.bb
+@@ -4,8 +4,8 @@ SECTION = "devel/python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1dece7821bf3fd70fe1309eaa37d52a2"
+ 
+-SRC_URI[md5sum] = "dfc1c3788eff06acfaade6f1655fa490"
+-SRC_URI[sha256sum] = "0ccd2db529afd070df815b1521f01401d43de03941170f8a800e7531faba265d"
++SRC_URI[md5sum] = "b9ef99a98350a57bbe55b1142807f224"
++SRC_URI[sha256sum] = "568f988af109114fbfa0525dcb6836b069838360d11732736ecc82e4c15d5c12"
+ 
+ inherit pypi setuptools
+ 
 -- 
 2.7.4
 
