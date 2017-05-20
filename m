@@ -1,22 +1,48 @@
-Return-Path: <sjl@vctlabs.com>
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id E551860620
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-pg0-f54.google.com (mail-pg0-f54.google.com [74.125.83.54])
+	by mail.openembedded.org (Postfix) with ESMTP id 499EA71B2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 20 May 2017 00:12:42 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 403C5280347; Fri, 19 May 2017 17:13:07 -0700 (PDT)
-Date: Fri, 19 May 2017 17:13:07 -0700
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+	Sat, 20 May 2017 00:40:31 +0000 (UTC)
+Received: by mail-pg0-f54.google.com with SMTP id x64so44719977pgd.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 19 May 2017 17:40:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=DanITqHEsLs9JMjoHL773BWN+V7+PBR1u7Sa9LSeFsE=;
+	b=VVXdC3MWq5/dbP4qv9zrH6q6FaUJ38VOXftmn0GTmrIH1avGdWvkFDlRk1STryaQVQ
+	nbjKhs7MuCbUl4kC1CEbNJV2Sp1upJ8tvvm0QWfvX2XNhLnpw0KVwO5r6SBSN1Io4hO5
+	O/MTwF7VXKD7fl5I1S2QDdxYPmWmBXnMnx0kx2kiDrn7R8EMwtWPWCv2Z4+FypdYbhmJ
+	T+g7lgdnXEO9sxxssAZMpQaAHU8H1Yt7u/fwY0KhDG3F6TEFQXzBGm9Pd44ZGKeoskwh
+	BmVnjE4yxc+qgONB9iCHvzkwWSgEohLZWKNWIWFpNQ2G2Uc8by/QcNRpCvCTzlUGsdis
+	f7Sg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=DanITqHEsLs9JMjoHL773BWN+V7+PBR1u7Sa9LSeFsE=;
+	b=Iqa30os9RBdjDEATDU+ZAfn6fIDoeclYmVVBm1Eb8ES/mM0bIp7oAZe2yxx5muz/x1
+	nxTT8/mV82bVZzFk3dzWvzvSyEGJ+Giln2BrpRgDgqUPR9nTRmpgS6syFp8J4159pxam
+	rpOkVnfA/govAsHi7UNSaUFRDM0BDw7l90mqyLjp3jsDn90DdxZ8znbNyxgBTteTYOMj
+	6YtstsfoTXFHjixH1VMLUdImtepvzI74E0jnN/Qj6tY4NhpHb7OuwzRfJbqaWOCbKtgo
+	/EmHIqQdf03p86GZr0oPZF+TNEW12dX7LS44+P4hhoc05RIDBcpxUFy5i4AhgEEUCzMO
+	OGuQ==
+X-Gm-Message-State: AODbwcDAaIwxt61506gqRhaaSM6i2yxZhZsj3/E8OkhVF6lQytyoTkvi
+	dULOtXfStdwBMJMH
+X-Received: by 10.99.95.88 with SMTP id t85mr13276390pgb.50.1495240833002;
+	Fri, 19 May 2017 17:40:33 -0700 (PDT)
+Received: from tyrael.amer.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	r73sm16232198pfa.65.2017.05.19.17.40.30
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 19 May 2017 17:40:31 -0700 (PDT)
+From: Moritz Fischer <moritz.fischer@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170520001307.GD22446@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20170513063415.GQ9767@vctlabs.com>
-	<20170519222757.GA22446@vctlabs.com>
-MIME-Version: 1.0
-In-Reply-To: <20170519222757.GA22446@vctlabs.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-python][master][pyro][PATCH, v3] python-cython: mangle scripts to use /usr/bin/env python
+Date: Fri, 19 May 2017 17:40:19 -0700
+Message-Id: <1495240819-6409-1-git-send-email-moritz.fischer@ettus.com>
+X-Mailer: git-send-email 2.7.4
+Cc: tico.timo@gmail.com
+Subject: [meta-python][PATCH v3] python-sdnotify/python3-sdnotify: Add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,35 +55,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 May 2017 00:12:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 20 May 2017 00:40:32 -0000
 
-This prevents runtime failure "bad interpreter: No such file or directory"
-from running native cython when the native python is installed
-at a long path, exceeding the 128-character limit for shebang lines
-on linux. Exceeding the limit was already possible when using a long
-path for topdir, but it got easier to exceed after the switch to per-recipe
-sysroots.
+python-sdnotify/python3-sdnotify is a pure python implementation for
+systemd's sd_notify mechanism.
+
+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- meta-python/recipes-devtools/python/python-cython.inc | 7 +++++++
- 1 file changed, 7 insertions(+)
+ .../recipes-devtools/python/python-sdnotify.inc      | 20 ++++++++++++++++++++
+ .../recipes-devtools/python/python-sdnotify_0.3.1.bb |  2 ++
+ .../python/python3-sdnotify_0.3.1.bb                 |  2 ++
+ 3 files changed, 24 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-sdnotify.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-sdnotify_0.3.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-sdnotify_0.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 1ecdcc9..da39d14 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -17,3 +17,10 @@ RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-subprocess \
-     ${PYTHON_PN}-shell \
- "
+diff --git a/meta-python/recipes-devtools/python/python-sdnotify.inc b/meta-python/recipes-devtools/python/python-sdnotify.inc
+new file mode 100644
+index 0000000..661ee6d
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-sdnotify.inc
+@@ -0,0 +1,20 @@
++HOMEPAGE = "https://github.com/bb4242/sdnotify"
++SUMMARY = "A pure Python implementation of systemd's service notification protocol (sd_notify)"
++
++DESCRIPTION = "\
++  sdnotify is a pure Python implementation of the systemd sd_notify protocol. \
++  This protocol can be used to inform systemd about service start-up completion, \
++  watchdog events, and other service status changes. \
++  Thus, this package can be used to write system services in Python that play nicely with systemd. \
++  "
++
++SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=cc572ccc4b18a4b7d13be5d01bc8213e"
++
++SRC_URI[md5sum] = "a182c1ef47e1c6c965771aa3029da16f"
++SRC_URI[sha256sum] = "e69220d4f6cbb02130f43f929350a80cf51033fde47dcb056fbda71e2dff2d5a"
 +
 +do_install_append() {
-+	# Make sure we use /usr/bin/env python
-+	for PYTHSCRIPT in `grep -rIl '^#!.*python' ${D}`; do
-+		sed -i -e '1s|^#!.*|#!/usr/bin/env ${PYTHON_PN}|' $PYTHSCRIPT
-+	done
++	rm -r ${D}/${datadir}
 +}
+diff --git a/meta-python/recipes-devtools/python/python-sdnotify_0.3.1.bb b/meta-python/recipes-devtools/python/python-sdnotify_0.3.1.bb
+new file mode 100644
+index 0000000..39ae3fb
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-sdnotify_0.3.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools pypi
++require python-sdnotify.inc
+diff --git a/meta-python/recipes-devtools/python/python3-sdnotify_0.3.1.bb b/meta-python/recipes-devtools/python/python3-sdnotify_0.3.1.bb
+new file mode 100644
+index 0000000..377af12
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-sdnotify_0.3.1.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3 pypi
++require python-sdnotify.inc
 -- 
-1.9.4
+2.7.4
+
 
