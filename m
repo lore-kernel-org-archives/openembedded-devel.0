@@ -1,23 +1,23 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
 Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BA5BA77F73
+	by mail.openembedded.org (Postfix) with ESMTP id D3B1B77F70
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 May 2017 23:26:07 +0000 (UTC)
+	Sun, 21 May 2017 23:26:10 +0000 (UTC)
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
 	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 May 2017 16:26:09 -0700
+	21 May 2017 16:26:12 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172470292"
+X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172470303"
 Received: from wrath.jf.intel.com ([10.54.70.7])
-	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 16:26:09 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 16:26:12 -0700
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 May 2017 16:25:53 -0700
-Message-Id: <20170521232555.30221-3-timothy.t.orling@linux.intel.com>
+Date: Sun, 21 May 2017 16:25:54 -0700
+Message-Id: <20170521232555.30221-4-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.9.4
 In-Reply-To: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
 References: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-java][master][pyro][PATCH 2/4] jaxen: unblacklist and update to v1.1.6
+Subject: [meta-java][master][pyro][PATCH 3/4] dom4j: unblacklist and fix build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,109 +30,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 May 2017 23:26:08 -0000
+X-List-Received-Date: Sun, 21 May 2017 23:26:10 -0000
 
 - Add SUMMARY and expand DESCRIPTION
-- Upstream moved to github, use git not ephemeral archive tarball
+- Update HOMEPAGE
+- Update URI for jaxme
+- Add LIC_FILE_CHECKSUM
 - Fix path for 'find org ...'
 - Move SRC_URI checksums to recommended location in recipe
 - Add virtual/javac-native to DEPENDS for RSS
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- recipes-core/xml-commons/jaxen_1.1.1.bb | 35 -----------------------------
- recipes-core/xml-commons/jaxen_1.1.6.bb | 40 +++++++++++++++++++++++++++++++++
- 2 files changed, 40 insertions(+), 35 deletions(-)
- delete mode 100644 recipes-core/xml-commons/jaxen_1.1.1.bb
- create mode 100644 recipes-core/xml-commons/jaxen_1.1.6.bb
+ recipes-core/xml-commons/dom4j_1.6.1.bb | 29 ++++++++++++++---------------
+ recipes-core/xml-commons/jaxen_1.1.6.bb |  2 +-
+ 2 files changed, 15 insertions(+), 16 deletions(-)
 
-diff --git a/recipes-core/xml-commons/jaxen_1.1.1.bb b/recipes-core/xml-commons/jaxen_1.1.1.bb
-deleted file mode 100644
-index 4853683..0000000
---- a/recipes-core/xml-commons/jaxen_1.1.1.bb
-+++ /dev/null
-@@ -1,35 +0,0 @@
--DESCRIPTION = "XPath library written in Java"
--LICENSE = "BSD"
--
--HOMEPAGE = "http://jaxen.codehaus.org/"
--
--DEPENDS = "fastjar-native xerces-j xom"
--
--SRC_URI = "\
--	http://dist.codehaus.org/jaxen/distributions/jaxen-${PV}-src.tar.gz;name=archive \
--	http://www.jdom.org/dist/binary/archive/jdom-1.1.tar.gz;name=jdom \
+diff --git a/recipes-core/xml-commons/dom4j_1.6.1.bb b/recipes-core/xml-commons/dom4j_1.6.1.bb
+index 19dca74..97c9947 100644
+--- a/recipes-core/xml-commons/dom4j_1.6.1.bb
++++ b/recipes-core/xml-commons/dom4j_1.6.1.bb
+@@ -1,17 +1,22 @@
++SUMMARY = "A simple and flexible library for working with XML, XPath and XSLT"
+ DESCRIPTION = "dom4j is a simple and flexible Java library for working with XML, XPath and XSLT"
+ LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f752b663f2a821c3b32482fc6aece3c"
+ 
+-HOMEPAGE = "http://dom4j.org"
++HOMEPAGE = "http://dom4j.github.io"
+ 
+-DEPENDS = "fastjar-native xerces-j xalan-j xpp2 xpp3 jaxen"
++DEPENDS = "fastjar-native virtual/javac-native \
++           xerces-j xalan-j xpp2 xpp3 jaxen"
+ 
+ SRC_URI = "\
+-	${SOURCEFORGE_MIRROR}/dom4j/${P}.tar.gz;name=archive \
+-	http://apache.org/dist/ws/jaxme/source/ws-jaxme-0.5.2-src.tar.gz;name=jaxme \
+-	file://debian.patch \
 -	"
 -
--PNBLACKLIST[jaxen] ?= "BROKEN: depends on broken 'xom'"
--
--inherit java-library
--
--do_compile() {
--  mkdir -p build
--
--  oe_makeclasspath cp -s xercesImpl xom
--	scp="src/java/main:${WORKDIR}/jdom-1.1/src/java"
--
--  javac -sourcepath $scp -cp $cp -d build `find src/java/main -name "*.java" -and -not -wholename "*dom4j*"`
+-PNBLACKLIST[dom4j] ?= "BROKEN: indirectly depends on broken 'xom'"
++        ${SOURCEFORGE_MIRROR}/dom4j/${P}.tar.gz;name=archive \
++        http://archive.apache.org/dist/ws/jaxme/source/ws-jaxme-0.5.2-src.tar.gz;name=jaxme \
++        file://debian.patch \
++"
++SRC_URI[archive.md5sum] = "1e7ef6d20939315714de4a8502f27b2d"
++SRC_URI[archive.sha256sum] = "01b4abf86bce337a2a900bf121b3107320ba63b4c0f352e1922fbec6e0736c6f"
++SRC_URI[jaxme.md5sum] = "084ebfe4a816058f8ff6bd731fa70df4"
++SRC_URI[jaxme.sha256sum] = "0415d721259acf95c564fb84606bb17f6227c1cc444e89b78d1cd9903c1c88dc"
+ 
+ inherit java-library
+ 
+@@ -22,16 +27,10 @@ do_compile() {
+ 	scp="src/java:${WORKDIR}/ws-jaxme-0.5.2/src/api"
+ 
+   javac -sourcepath $scp -cp $cp -d build `find src/java -name "*.java" -and -not -wholename "*datatype*"`
 -  (cd src && find org -name "*.properties" -exec cp {} ../build/{} \;)
++  (cd src/java && find org -name "*.properties" -exec cp {} ../../build/{} \;)
+ 
+ 	rm -rf build/org/w3c
+ 	rm -rf build/javax
+ 
+   fastjar -C build -c -f ${JARFILENAME} .
+ }
 -
--	rm -rf build/org/jdom
 -
--  fastjar -C build -c -f ${JARFILENAME} .
--}
--
--
--SRC_URI[archive.md5sum] = "b598ae6b7e765a92e13667b0a80392f4"
--SRC_URI[archive.sha256sum] = "f24ae604a20da87e3716bb1d441c483e56479eaef4e99888f41be06059790bca"
--SRC_URI[jdom.md5sum] = "22745cbaaddb12884ed8ee09083d8fe2"
--SRC_URI[jdom.sha256sum] = "a13549087141be24ad176b659afdc2c675f1ffa5288ff999a193d6d44a282056"
+-SRC_URI[archive.md5sum] = "1e7ef6d20939315714de4a8502f27b2d"
+-SRC_URI[archive.sha256sum] = "01b4abf86bce337a2a900bf121b3107320ba63b4c0f352e1922fbec6e0736c6f"
+-SRC_URI[jaxme.md5sum] = "084ebfe4a816058f8ff6bd731fa70df4"
+-SRC_URI[jaxme.sha256sum] = "0415d721259acf95c564fb84606bb17f6227c1cc444e89b78d1cd9903c1c88dc"
 diff --git a/recipes-core/xml-commons/jaxen_1.1.6.bb b/recipes-core/xml-commons/jaxen_1.1.6.bb
-new file mode 100644
-index 0000000..2e313fa
---- /dev/null
+index 2e313fa..d75ce75 100644
+--- a/recipes-core/xml-commons/jaxen_1.1.6.bb
 +++ b/recipes-core/xml-commons/jaxen_1.1.6.bb
-@@ -0,0 +1,40 @@
-+SUMMARY = "XPath library written in Java"
-+DESCRIPTION = "Adaptable to many different object models, including \
-+DOM, XOM, dom4j, and JDOM. Is it also possible to write adapters that \
-+treat non-XML trees such as compiled Java byte code or Java beans as XML, \
-+thus enabling you to query these trees with XPath too.\
-+"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a2e66c2e2482aa23c11342f1469fa3b6"
-+
-+HOMEPAGE = "http://jaxen.org/"
-+
-+DEPENDS = "fastjar-native xerces-j xom"
-+
-+# upstream has moved to github, do not rely on ephemeral tarball, use git
-+SRCREV = "7d7755ac8b19daa2ff6f319f432b864cc72d89b6"
-+
-+SRC_URI = "\
-+        git://github.com/codehaus/${BPN} \
-+        http://www.jdom.org/dist/binary/archive/jdom-1.1.tar.gz;name=jdom \
-+"
-+SRC_URI[jdom.md5sum] = "22745cbaaddb12884ed8ee09083d8fe2"
-+SRC_URI[jdom.sha256sum] = "a13549087141be24ad176b659afdc2c675f1ffa5288ff999a193d6d44a282056"
-+
-+S = "${WORKDIR}/git/jaxen"
-+
-+inherit java-library
-+
-+do_compile() {
-+  mkdir -p build
-+
-+  oe_makeclasspath cp -s xercesImpl xom
-+	scp="src/java/main:${WORKDIR}/jdom-1.1/src/java"
-+
-+  javac -sourcepath $scp -cp $cp -d build `find src/java/main -name "*.java" -and -not -wholename "*dom4j*"`
-+  (cd src/java/main && find org -name "*.properties" -exec cp {} ../../../build/{} \;)
-+
-+	rm -rf build/org/jdom
-+
-+  fastjar -C build -c -f ${JARFILENAME} .
-+}
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a2e66c2e2482aa23c11342f1469fa3b6"
+ 
+ HOMEPAGE = "http://jaxen.org/"
+ 
+-DEPENDS = "fastjar-native xerces-j xom"
++DEPENDS = "fastjar-native virtual/javac-native xerces-j xom"
+ 
+ # upstream has moved to github, do not rely on ephemeral tarball, use git
+ SRCREV = "7d7755ac8b19daa2ff6f319f432b864cc72d89b6"
 -- 
 2.9.4
 
