@@ -1,45 +1,21 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DA8C377F74
+Return-Path: <wei.tee.ng@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 05A366E5FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 May 2017 01:48:51 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id b84so13794504wmh.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 May 2017 18:48:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/4B5JFx312kFjHFvuQjf9YYKnHBgZahYyKkj828Bh0I=;
-	b=mOkE6AXAZGmjzUGRgF6QcEMlNVsZrKqxFnOXOVocUrrXlGGVgKZcTQOtbpTv0v0jGR
-	tIPM9OLJYbyCMhu4rtZhDdBQF9i81wJjdlVwqoybzuKBqlVr+N0f0lbTqWV1AgIL0Z5s
-	KBdaLqOQkwwFYhROcBUbvsbha8tK4/CF8BKlNSpAlI+Ou1ybdwDZhinCjyS0xUzbkjwn
-	rVIaLBjENbaAFUzQwqs3eeQ/d7XfsDbPLWav6gziaVM6KId93odHJwELRpyVUzOCHo4g
-	Xs9iaThxPYwqdlQGq3PWhrmBLaKchzKwnYFDZ6JFE7K1kNVad3IovrQkaPIMLPTdkBiJ
-	DKOQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/4B5JFx312kFjHFvuQjf9YYKnHBgZahYyKkj828Bh0I=;
-	b=b1aU81CzhOVDFzJxpE5lAn90HCl54vjKhcqBjGYaoRPKxZZgMZRk2IITiHHEYky/Vg
-	Xs0bOASRPpi5qOXuUk5lyTgvKMu60oHFJUPAA3L/19ffD8Qn0ibcVz+/A0AqAdxPxiDS
-	p8wTmRibmpK3sCytR3jXgd7Q1kcY5bZDmrxm9yzWbRpklPbbblCwsxtvcoQF7MtWTMlw
-	4YoAUfvlgvlTG/QJpPGAd9aqhyYjYZyGmSBv5yQSQq/mBEqPKrTaIlt4x9/9+CTWt3Ky
-	DQ8I9+yPsN6q6fg9+BTMsM7XJqff5j6KfFCKFijpNEJylQCatbx+vfPfCpM+ZD4oFSfl
-	Wuvw==
-X-Gm-Message-State: AODbwcDvCA1GCmoIVYeiZ5WC1XhWOaacDc6vB12EbKJ/99Gd0t4l7jWr
-	IJ6lIuei7ncoOieuFaFrd4X1k4vaKw==
-X-Received: by 10.80.147.195 with SMTP id o61mr15337928eda.178.1495417732251; 
-	Sun, 21 May 2017 18:48:52 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.195.143 with HTTP; Sun, 21 May 2017 18:48:21 -0700 (PDT)
-In-Reply-To: <1495390919-25435-1-git-send-email-maryan.pricak@gmail.com>
-References: <1495390919-25435-1-git-send-email-maryan.pricak@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 21 May 2017 18:48:21 -0700
-Message-ID: <CAMKF1spDgUYVyRGcBKNmJhb35H5_VjGi0JkLyGboKeU8YkPb-g@mail.gmail.com>
-To: Marian Pritsak <maryan.pricak@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libteam: Initial support
+	Mon, 22 May 2017 02:26:15 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 May 2017 19:26:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172508467"
+Received: from platypus.jf.intel.com ([10.54.77.139])
+	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 19:26:16 -0700
+From: wei.tee.ng@intel.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 21 May 2017 12:15:23 -0700
+Message-Id: <1495394123-59799-1-git-send-email-wei.tee.ng@intel.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] dbus-daemon-proxy: inherit pkgconfig, unblacklist and set package version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,74 +28,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 May 2017 01:48:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 22 May 2017 02:26:17 -0000
 
-On Sun, May 21, 2017 at 11:21 AM, Marian Pritsak
-<maryan.pricak@gmail.com> wrote:
-> libteam is a library for controlling team network device.
-> Provides utils package for network device configuration.
->
-> Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
-> ---
->  meta-oe/recipes-support/libteam/libteam_1.26.bb | 33 +++++++++++++++++++++++++
->  1 file changed, 33 insertions(+)
->  create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
->
-> diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
-> new file mode 100644
-> index 0000000..db1e4a9
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
-> @@ -0,0 +1,33 @@
-> +SUMMARY = "Library for controlling team network device"
-> +HOMEPAGE = "http://www.libteam.org/"
-> +SECTION = "libs/network"
-> +
-> +PE = "1"
+From: "Ng, Wei Tee" <wei.tee.ng@intel.com>
 
-Drop this if this package is new.
+The pkgconfig is not found in recipes specific sysroot. Therefore
+inherit pkgconfig is added to fix it. Package version is updated
+to avoid package dbus-daemon-proxy-dbg went backwards which would
+break package feeds.
 
-> +
-> +LICENSE = "LGPLv2.1"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-> +
-> +DEPENDS = "libnl libdaemon jansson"
-> +${PN}-utils_RDEPENDS = "bash"
+Signed-off-by: Ng, Wei Tee <wei.tee.ng@intel.com>
+---
+ meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb | 7 +++----
+ 1 file changed, 3 insertions(+), 4 deletions(-)
 
-this looks reversed may be you meant RDEPENDS_${PN}-utils
+diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+index a953ebc..4571b44 100644
+--- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
++++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
+@@ -4,13 +4,15 @@ LIC_FILES_CHKSUM = "file://dbus-daemon-proxy.c;endline=19;md5=41df6d21fe1c97d6a1
+ DEPENDS = "dbus dbus-glib"
+ SRCREV = "1226a0a1374628ff191f6d8a56000be5e53e7608"
+ PV = "0.0.0+gitr${SRCPV}"
+-PR = "r1"
++PR = "r1.59"
+ 
+ ASNEEDED_pn-dbus-daemon-proxy = ""
+ 
+ SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy"
+ S = "${WORKDIR}/git"
+ 
++inherit pkgconfig
++
+ do_compile() {
+     ${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o dbus-daemon-proxy dbus-daemon-proxy.c
+ }
+@@ -19,6 +21,3 @@ do_install() {
+     install -d ${D}${bindir}
+     install -m 0755 dbus-daemon-proxy ${D}${bindir}
+ }
+-
+-
+-PNBLACKLIST[dbus-daemon-proxy] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130613/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-- 
+2.7.4
 
-> +
-> +SRC_URI = "git://github.com/jpirko/libteam"
-> +SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
-> +
-> +SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
-> +SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit autotools pkgconfig
-> +
-> +FILES_${PN} = "${libdir}/libteam.so.*"
-> +
-> +PACKAGES += "${PN}dctl ${PN}-utils"
-
-calling it ${PN}-dctl will make it more readable,
-
-> +FILES_${PN}dctl = "${libdir}/libteamdctl.so.* \
-> +"
-> +FILES_${PN}-utils = "${bindir}/bond2team \
-> +                     ${bindir}/teamd \
-> +                     ${bindir}/teamdctl \
-> +                     ${bindir}/teamnl \
-> +"
-> +
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
