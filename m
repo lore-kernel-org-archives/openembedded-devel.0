@@ -1,26 +1,45 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 4919F6FEFA;
-	Sat, 20 May 2017 16:57:38 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	20 May 2017 09:57:39 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,370,1491289200"; d="scan'208";a="1132902881"
-Received: from mbstephe-mobl1.amr.corp.intel.com ([10.254.187.130])
-	by orsmga001.jf.intel.com with ESMTP; 20 May 2017 09:57:39 -0700
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-In-Reply-To: <20170519191339.GA11044@jama>
-Date: Sat, 20 May 2017 09:57:39 -0700
-Message-Id: <938DFEF8-6CF3-4868-A052-C9217B619FDC@linux.intel.com>
-References: <20170519191339.GA11044@jama>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.3273)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: State of bitbake world, Failed tasks 2017-05-17
+Return-Path: <maryan.pricak@gmail.com>
+Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
+	[209.85.215.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 322C777F38
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 May 2017 18:22:18 +0000 (UTC)
+Received: by mail-lf0-f67.google.com with SMTP id q24so3575419lfb.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 May 2017 11:22:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=tZdBa388axMz0h6LWYRdIefrI0Z3E0NeOCNJaZAKQ04=;
+	b=MR3jojnG0lCgIF/dsWtoEazk3xpOAfTfpyk37/zIs8J0MvE2hhyJ9wujlC+X4DBw6J
+	ednykXkcFGaETXa9gOAWHpVS6Ikn6X3iRHXyVBIo0tLo4yCmwliz83uNEqqx0o0eswfA
+	g1bGNmh8fBmmNrw7Zok6fepoVwK2TTJ0b6ePj5peB/NccVcLgm1rWSEGUp9IFtRcT2I/
+	YyHT0o1/0BK3v7YqMadP7Tp600PMlaxg1M3ro43nSmZ3wej1OELLEVuF8f7ToBmVIX6q
+	GqHRoeMJNmy1btZUjsHjH5wBIU88WSwf53y+YAmcjDWjXaKtiNbJwxNxxaO7ybZiN1Bo
+	MSkg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tZdBa388axMz0h6LWYRdIefrI0Z3E0NeOCNJaZAKQ04=;
+	b=aIWC8aWiGThb772tA4oA1AY5zHiTrd/26z2mYQzhsxcmJ7XMuqjBH+qx7TFUnBZmHb
+	fXe3XfOKNZxBSMvf/6c6egCplakp+wI8S+XmYEbNs21+y0jkJMjAbX2jv/eJglaz0EbU
+	mpup0YouChtJRox7lpW3SLK3zdCHfs4Si03HVSYBpxCh682xoFVrb4CDv6buS8/SkiNS
+	Cf8kmdPZhtl/HV0NrDhmR4bCEfIHbxbUuzt0Q0cBngjRqRu5xjH9evfGk0bfzHNOFqmI
+	6x/4DrHuaJEiz7GVceqqh3HazmdbYm7viPn4b6O2Px0nJJ/5Nx/Sinc5dlXQgSKm6hIf
+	qHEA==
+X-Gm-Message-State: AODbwcCZSLuSH7RHrbAI7k+9Sw84wlr37Yp8t7et5jm+ix579bBvci6b
+	w8B5pFfI1CjDhQ==
+X-Received: by 10.46.8.18 with SMTP id 18mr4863248lji.90.1495390939230;
+	Sun, 21 May 2017 11:22:19 -0700 (PDT)
+Received: from localhost.localdomain ([93.75.94.160])
+	by smtp.gmail.com with ESMTPSA id u6sm2694403ljd.42.2017.05.21.11.22.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 21 May 2017 11:22:18 -0700 (PDT)
+From: Marian Pritsak <maryan.pricak@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 21 May 2017 21:21:59 +0300
+Message-Id: <1495390919-25435-1-git-send-email-maryan.pricak@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libteam: Initial support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,34 +52,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 20 May 2017 16:57:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 21 May 2017 18:22:20 -0000
 
+libteam is a library for controlling team network device.
+Provides utils package for network device configuration.
 
-> On May 19, 2017, at 12:13 PM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> http://www.openembedded.org/wiki/Bitbake_World_Status
+Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
+---
+ meta-oe/recipes-support/libteam/libteam_1.26.bb | 33 +++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
 
-</snip>
-
-> =3D=3D=3D common (4) =3D=3D=3D
->    * =
-meta-browser/recipes-mozilla/firefox/firefox_45.6.0esr.bb:do_compile
->    * =
-meta-openembedded/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb:=
-do_configure
->    * =
-meta-openembedded/meta-xfce/recipes-bindings/vala/xfce4-vala_4.10.3.bb:do_=
-configure
-
-I sent a patch to ML for this. vala api 0.34 -> 0.36, easy fix :)
-
->    * =
-meta-smartphone/meta-shr/recipes-shr/3rdparty/libsensmon_git.bb:do_compile=
-
->=20
-</snip>
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+new file mode 100644
+index 0000000..db1e4a9
+--- /dev/null
++++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "Library for controlling team network device"
++HOMEPAGE = "http://www.libteam.org/"
++SECTION = "libs/network"
++
++PE = "1"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++DEPENDS = "libnl libdaemon jansson"
++${PN}-utils_RDEPENDS = "bash"
++
++SRC_URI = "git://github.com/jpirko/libteam"
++SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
++
++SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
++SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++FILES_${PN} = "${libdir}/libteam.so.*"
++
++PACKAGES += "${PN}dctl ${PN}-utils"
++FILES_${PN}dctl = "${libdir}/libteamdctl.so.* \
++"
++FILES_${PN}-utils = "${bindir}/bond2team \
++                     ${bindir}/teamd \
++                     ${bindir}/teamdctl \
++                     ${bindir}/teamnl \
++"
++
+-- 
+2.7.4
 
 
