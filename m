@@ -1,23 +1,23 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
 Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 21ACE77F70
+	by mail.openembedded.org (Postfix) with ESMTP id BA5BA77F73
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 May 2017 23:26:04 +0000 (UTC)
+	Sun, 21 May 2017 23:26:07 +0000 (UTC)
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
 	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 May 2017 16:26:06 -0700
+	21 May 2017 16:26:09 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172470278"
+X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172470292"
 Received: from wrath.jf.intel.com ([10.54.70.7])
-	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 16:26:06 -0700
+	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 16:26:09 -0700
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 May 2017 16:25:52 -0700
-Message-Id: <20170521232555.30221-2-timothy.t.orling@linux.intel.com>
+Date: Sun, 21 May 2017 16:25:53 -0700
+Message-Id: <20170521232555.30221-3-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.9.4
 In-Reply-To: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
 References: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-java][master][pyro][PATCH 1/4] xom: unblacklist and update to v1.2.10
+Subject: [meta-java][master][pyro][PATCH 2/4] jaxen: unblacklist and update to v1.1.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,141 +32,106 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 21 May 2017 23:26:08 -0000
 
-- License checksum changed (updated year)
 - Add SUMMARY and expand DESCRIPTION
-- Clone jaxen dependency from github, update to v1.1.6
+- Upstream moved to github, use git not ephemeral archive tarball
+- Fix path for 'find org ...'
 - Move SRC_URI checksums to recommended location in recipe
 - Add virtual/javac-native to DEPENDS for RSS
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- .../04_remove_sun_import.patch                     |  0
- recipes-core/xml-commons/xom_1.1.bb                | 54 ----------------------
- recipes-core/xml-commons/xom_1.2.10.bb             | 50 ++++++++++++++++++++
- 3 files changed, 50 insertions(+), 54 deletions(-)
- rename recipes-core/xml-commons/{xom-1.1 => xom-1.2.10}/04_remove_sun_import.patch (100%)
- delete mode 100644 recipes-core/xml-commons/xom_1.1.bb
- create mode 100644 recipes-core/xml-commons/xom_1.2.10.bb
+ recipes-core/xml-commons/jaxen_1.1.1.bb | 35 -----------------------------
+ recipes-core/xml-commons/jaxen_1.1.6.bb | 40 +++++++++++++++++++++++++++++++++
+ 2 files changed, 40 insertions(+), 35 deletions(-)
+ delete mode 100644 recipes-core/xml-commons/jaxen_1.1.1.bb
+ create mode 100644 recipes-core/xml-commons/jaxen_1.1.6.bb
 
-diff --git a/recipes-core/xml-commons/xom-1.1/04_remove_sun_import.patch b/recipes-core/xml-commons/xom-1.2.10/04_remove_sun_import.patch
-similarity index 100%
-rename from recipes-core/xml-commons/xom-1.1/04_remove_sun_import.patch
-rename to recipes-core/xml-commons/xom-1.2.10/04_remove_sun_import.patch
-diff --git a/recipes-core/xml-commons/xom_1.1.bb b/recipes-core/xml-commons/xom_1.1.bb
+diff --git a/recipes-core/xml-commons/jaxen_1.1.1.bb b/recipes-core/xml-commons/jaxen_1.1.1.bb
 deleted file mode 100644
-index c37965b..0000000
---- a/recipes-core/xml-commons/xom_1.1.bb
+index 4853683..0000000
+--- a/recipes-core/xml-commons/jaxen_1.1.1.bb
 +++ /dev/null
-@@ -1,54 +0,0 @@
--DESCRIPTION = "Tree-based API for processing XML with Java"
--LICENSE = "LGPL-2.1"
--LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=456080cf80cd56d4d58118c1d10d824f"
+@@ -1,35 +0,0 @@
+-DESCRIPTION = "XPath library written in Java"
+-LICENSE = "BSD"
 -
--HOMEPAGE = "http://xom.nu"
+-HOMEPAGE = "http://jaxen.codehaus.org/"
+-
+-DEPENDS = "fastjar-native xerces-j xom"
 -
 -SRC_URI = "\
--	http://www.cafeconleche.org/XOM/${P}-src.tar.gz;name=archive \
--	http://dist.codehaus.org/jaxen/distributions/jaxen-1.1.1-src.tar.gz;name=jaxen \
--	file://04_remove_sun_import.patch \
+-	http://dist.codehaus.org/jaxen/distributions/jaxen-${PV}-src.tar.gz;name=archive \
+-	http://www.jdom.org/dist/binary/archive/jdom-1.1.tar.gz;name=jdom \
 -	"
 -
--# DEBUG: Executing shell function do_compile
--# ----------
--# 1. ERROR in src/nu/xom/UnicodeUtil.java (at line 0)
--# 	/* Copyright 2005 Elliotte Rusty Harold
--# 	^
--# Internal compiler error: java.lang.StackOverflowError at org.eclipse.jdt.internal.compiler.ast.Expression.checkNPE(Expression.java:511)
--# ----------
--# Exception in thread "main" java.lang.StackOverflowError
--#    at org.eclipse.jdt.internal.compiler.ast.Expression.checkNPE(Expression.java:511)
--PNBLACKLIST[xom] ?= "BROKEN: do_compile fails with internal javac error"
--
--S = "${WORKDIR}/XOM"
+-PNBLACKLIST[jaxen] ?= "BROKEN: depends on broken 'xom'"
 -
 -inherit java-library
 -
--DEPENDS = "fastjar-native xerces-j xalan-j"
--
 -do_compile() {
--    mkdir -p build
+-  mkdir -p build
 -
--    oe_makeclasspath cp -s xercesImpl xalan2
--    cp=build:$cp
+-  oe_makeclasspath cp -s xercesImpl xom
+-	scp="src/java/main:${WORKDIR}/jdom-1.1/src/java"
 -
--    scp="${WORKDIR}/jaxen-1.1.1/src/java/main"
+-  javac -sourcepath $scp -cp $cp -d build `find src/java/main -name "*.java" -and -not -wholename "*dom4j*"`
+-  (cd src && find org -name "*.properties" -exec cp {} ../build/{} \;)
 -
--    javac -sourcepath src:$scp -cp $cp -d build `find src -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
--    javac -sourcepath fatsrc:$scp -cp $cp -d build `find fatsrc -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
--    javac -sourcepath src15:$scp -cp $cp -d build `find src15 -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
+-	rm -rf build/org/jdom
 -
--    (cd src && find . -name "*.properties" -exec cp {} ../build/{} \;)
--
--    # Remove Jaxen classes from build
--    rm -rf build/org/jaxen
--    rm -rf build/org/w3c
--
--    fastjar -C build -c -f ${JARFILENAME} .
+-  fastjar -C build -c -f ${JARFILENAME} .
 -}
 -
--SRC_URI[archive.md5sum] = "e5ae82568d7b1faeb950140c34fbbcb1"
--SRC_URI[archive.sha256sum] = "d648fd1f7b7437123afa63df06f6a6409a0487c99ca8f8beba75aaa474d65818"
--SRC_URI[jaxen.md5sum] = "b598ae6b7e765a92e13667b0a80392f4"
--SRC_URI[jaxen.sha256sum] = "f24ae604a20da87e3716bb1d441c483e56479eaef4e99888f41be06059790bca"
-diff --git a/recipes-core/xml-commons/xom_1.2.10.bb b/recipes-core/xml-commons/xom_1.2.10.bb
+-
+-SRC_URI[archive.md5sum] = "b598ae6b7e765a92e13667b0a80392f4"
+-SRC_URI[archive.sha256sum] = "f24ae604a20da87e3716bb1d441c483e56479eaef4e99888f41be06059790bca"
+-SRC_URI[jdom.md5sum] = "22745cbaaddb12884ed8ee09083d8fe2"
+-SRC_URI[jdom.sha256sum] = "a13549087141be24ad176b659afdc2c675f1ffa5288ff999a193d6d44a282056"
+diff --git a/recipes-core/xml-commons/jaxen_1.1.6.bb b/recipes-core/xml-commons/jaxen_1.1.6.bb
 new file mode 100644
-index 0000000..0e923d4
+index 0000000..2e313fa
 --- /dev/null
-+++ b/recipes-core/xml-commons/xom_1.2.10.bb
-@@ -0,0 +1,50 @@
-+SUMMARY = "Tree-based API for processing XML with Java"
-+DESCRIPTION = "XML object model which is a tree-based API for processing XML \
-+with Java that strives for correctness, simplicity, and performance."
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=3f18f166096348ef9d457214a2484816"
++++ b/recipes-core/xml-commons/jaxen_1.1.6.bb
+@@ -0,0 +1,40 @@
++SUMMARY = "XPath library written in Java"
++DESCRIPTION = "Adaptable to many different object models, including \
++DOM, XOM, dom4j, and JDOM. Is it also possible to write adapters that \
++treat non-XML trees such as compiled Java byte code or Java beans as XML, \
++thus enabling you to query these trees with XPath too.\
++"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a2e66c2e2482aa23c11342f1469fa3b6"
 +
-+HOMEPAGE = "http://xom.nu"
++HOMEPAGE = "http://jaxen.org/"
 +
-+# jaxen recipe depends on xom, avoid circular dependency
-+# upstream jaxen moved to github, do not count on ephemeral github archives
-+SRCNAME_jaxen = "jaxen"
-+SRCREV_jaxen = "7d7755ac8b19daa2ff6f319f432b864cc72d89b6"
-+PV_jaxen = "1.1.6"
++DEPENDS = "fastjar-native xerces-j xom"
++
++# upstream has moved to github, do not rely on ephemeral tarball, use git
++SRCREV = "7d7755ac8b19daa2ff6f319f432b864cc72d89b6"
 +
 +SRC_URI = "\
-+	http://www.cafeconleche.org/XOM/${P}-src.tar.gz;name=archive \
-+	git://github.com/codehaus/${SRCNAME_jaxen};name=jaxen \
-+	file://04_remove_sun_import.patch \
++        git://github.com/codehaus/${BPN} \
++        http://www.jdom.org/dist/binary/archive/jdom-1.1.tar.gz;name=jdom \
 +"
-+SRC_URI[archive.md5sum] = "9f3a2ae827a9f6826fe76e4b7b0c22b3"
-+SRC_URI[archive.sha256sum] = "39985c2debb8044005fd07b09cb06f10e75652b3c048c9b4431434215332bc85"
++SRC_URI[jdom.md5sum] = "22745cbaaddb12884ed8ee09083d8fe2"
++SRC_URI[jdom.sha256sum] = "a13549087141be24ad176b659afdc2c675f1ffa5288ff999a193d6d44a282056"
 +
-+S = "${WORKDIR}/XOM"
++S = "${WORKDIR}/git/jaxen"
 +
 +inherit java-library
 +
-+DEPENDS = "fastjar-native virtual/javac-native xerces-j xalan-j"
-+
 +do_compile() {
-+    mkdir -p build
++  mkdir -p build
 +
-+    oe_makeclasspath cp -s xercesImpl xalan2
-+    cp=build:$cp
++  oe_makeclasspath cp -s xercesImpl xom
++	scp="src/java/main:${WORKDIR}/jdom-1.1/src/java"
 +
-+    mv ${WORKDIR}/git/jaxen ${WORKDIR}/jaxen-${PV_jaxen}
-+    rm -rf ${WORKDIR}/git
-+    scp="${WORKDIR}/jaxen-${PV_jaxen}/src/java/main"
++  javac -sourcepath $scp -cp $cp -d build `find src/java/main -name "*.java" -and -not -wholename "*dom4j*"`
++  (cd src/java/main && find org -name "*.properties" -exec cp {} ../../../build/{} \;)
 +
-+    javac -sourcepath src:$scp -cp $cp -d build `find src -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
-+    javac -sourcepath fatsrc:$scp -cp $cp -d build `find fatsrc -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
-+    javac -sourcepath src15:$scp -cp $cp -d build `find src15 -name "*.java" -and -not \( -wholename "*tests*" -or -wholename "*samples*" -or -wholename "*tools*" \)`
++	rm -rf build/org/jdom
 +
-+    (cd src && find . -name "*.properties" -exec cp {} ../build/{} \;)
-+
-+    # Remove Jaxen classes from build
-+    rm -rf build/org/jaxen
-+    rm -rf build/org/w3c
-+
-+    fastjar -C build -c -f ${JARFILENAME} .
++  fastjar -C build -c -f ${JARFILENAME} .
 +}
 -- 
 2.9.4
