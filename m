@@ -1,44 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 17B4F60248
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id CBC0277F7A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 22 May 2017 03:51:37 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id k15so28781058wmh.3
+	Mon, 22 May 2017 05:26:19 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19141396"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 22 May 2017 13:26:04 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 4EB2D47C654F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 May 2017 20:51:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=gOESIjZLW6IRLZqi30E9GecPM4I9s9OjQoEViEoutTM=;
-	b=kHgdTqapu7zpZoSF074n5TxmDY+nYavoTJ9eWsM4o9+9Jurttn7XaUB9shnx7yhr32
-	1V815h64Kc+N6a0e3s8Kn3u8H+WEGbZMI1sG8K8fPXlLHCM48ZxHZoa7RiVK+7x6lWZH
-	/uMS7/5C+ofqjOxLSm2piVWegr2DeIjMFlkd74cB4GuPrCAMBe7lH3UoaEMwmIYRdNQ/
-	YEMeIb6QiRoGd7rWsHoMASLaN5W0hAlLKnFdbeqjXsT5L6XCC488Uy1eRW7gXSNg0eC+
-	iFWe3Brw+mJl/NZBakh60wTxebhclHVqgmt5AlHs7fn6dxO1qHQtiOlNTGI4fpPQKqcZ
-	aeTg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=gOESIjZLW6IRLZqi30E9GecPM4I9s9OjQoEViEoutTM=;
-	b=KIdr1ZKWE9Wr+1st66yJiX9XGz19DykP93mdHjfRmR2hY02ryIFWRMTVa1vSlxu4vj
-	vKYtienp0YYkX8NypZhfWuMSnP0DcLuXd1PLBRdIQReObeDEnh85xCTXu4AtTsoNMAOV
-	rxEfIS0QLw7Wu6chlAQf1x1jYhdyuQgfotv2zokCa8AowHYlfU2DNJzUOoy7EeZ+IG/k
-	9cmwvnAykYzPgyaRlDdrJa6y2Zro5kfh6HrkZgh38klLAC3P9N07Hm5JvnaCEB7Svd6o
-	10hrtdr1dyo5Q7XRXoeC1WI8srqfCWDmWAsG57ZCg2SDLqlncawKhTwqoJtpWD+8h2t3
-	OKew==
-X-Gm-Message-State: AODbwcCPWVmOkYfaLJDcSiLHiMOojs5spn7uFEmY1YPVR269S4awaOde
-	MsCqfEvdvnHHIWZxInvJXLG1Os6g/g==
-X-Received: by 10.80.143.227 with SMTP id y90mr8865417edy.131.1495425098214;
-	Sun, 21 May 2017 20:51:38 -0700 (PDT)
+	Mon, 22 May 2017 13:26:01 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Mon, 22 May 2017 13:26:05 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 22 May 2017 13:25:48 +0800
+Message-ID: <1495430748-34054-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <1495394123-59799-1-git-send-email-wei.tee.ng@intel.com>
-In-Reply-To: <1495394123-59799-1-git-send-email-wei.tee.ng@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 22 May 2017 03:51:27 +0000
-Message-ID: <CAMKF1so2vsban_5NxSnN4mfzHPeiNk30fQQbMfnWHHM7SPBLag@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org, wei.tee.ng@intel.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-oe][PATCH] dbus-daemon-proxy: inherit pkgconfig, unblacklist and set package version
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 4EB2D47C654F.A7075
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5] [PATCH] qtxmlpatterns: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,67 +37,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 22 May 2017 03:51:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 22 May 2017 05:26:21 -0000
+Content-Type: text/plain
 
-On Sun, May 21, 2017 at 7:26 PM <wei.tee.ng@intel.com> wrote:
+Add ptest for qtxmlpatterns by using provided testsuite.
 
-> From: "Ng, Wei Tee" <wei.tee.ng@intel.com>
->
-> The pkgconfig is not found in recipes specific sysroot. Therefore
-> inherit pkgconfig is added to fix it. Package version is updated
-> to avoid package dbus-daemon-proxy-dbg went backwards which would
-> break package feeds.
->
-> Signed-off-by: Ng, Wei Tee <wei.tee.ng@intel.com>
-> ---
->  meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb | 7 +++----
->  1 file changed, 3 insertions(+), 4 deletions(-)
->
-> diff --git a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-> b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-> index a953ebc..4571b44 100644
-> --- a/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-> +++ b/meta-oe/recipes-core/dbus/dbus-daemon-proxy_git.bb
-> @@ -4,13 +4,15 @@ LIC_FILES_CHKSUM =
-> "file://dbus-daemon-proxy.c;endline=19;md5=41df6d21fe1c97d6a1
->  DEPENDS = "dbus dbus-glib"
->  SRCREV = "1226a0a1374628ff191f6d8a56000be5e53e7608"
->  PV = "0.0.0+gitr${SRCPV}"
-> -PR = "r1"
-> +PR = "r1.59"
->
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+---
+ recipes-qt/qt5/qtxmlpatterns/run-ptest |  5 +++++
+ recipes-qt/qt5/qtxmlpatterns_git.bb    | 24 ++++++++++++++++++++++++
+ 2 files changed, 29 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtxmlpatterns/run-ptest
 
-Why not r2
+diff --git a/recipes-qt/qt5/qtxmlpatterns/run-ptest b/recipes-qt/qt5/qtxmlpatterns/run-ptest
+new file mode 100644
+index 0000000..6c3f522
+--- /dev/null
++++ b/recipes-qt/qt5/qtxmlpatterns/run-ptest
+@@ -0,0 +1,5 @@
++#!/bin/sh
++
++for x in ` awk '{print $1}' tst_list `;do
++    ./${x};
++done
+diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
+index c7efaf3..bc863de 100644
+--- a/recipes-qt/qt5/qtxmlpatterns_git.bb
++++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
+@@ -14,8 +14,32 @@ LIC_FILES_CHKSUM = " \
+     file://LICENSE.FDL;md5=6d9f2a9af4c8b8c3c769f6cc1b6aaf7e \
+ "
+ 
++inherit ptest
++
+ DEPENDS += "qtbase"
+ 
+ SRCREV = "9f7e01b582b1bd83cc6b8a854c510871335e2e74"
+ 
+ BBCLASSEXTEND =+ "native nativesdk"
++
++addtask do_populate_sysroot after do_install before do_compile_ptest_base
++deltask do_compile_ptest_base
++addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest
++addtask do_install_ptest after do_compile_ptest_base before do_package
++
++do_compile_ptest() {
++    cd ${S}/tests
++    qmake -o Makefile tests.pro
++    oe_runmake
++}
++
++fakeroot do_install_ptest() {
++    mkdir -p ${D}${PTEST_PATH}
++    t=${D}${PTEST_PATH}
++    for var in ` find ${S}/tests/auto/ -name tst_*`; do
++        if [ not ` echo ${var##*/} | grep '\.'` ]; then
++            echo ${var##*/} >> ${t}/tst_list
++            install -m 0644 ${var} ${t}
++        fi
++    done
++}
+-- 
+2.7.4
 
->
->  ASNEEDED_pn-dbus-daemon-proxy = ""
->
->  SRC_URI = "git://git.collabora.co.uk/git/user/alban/dbus-daemon-proxy"
->  S = "${WORKDIR}/git"
->
-> +inherit pkgconfig
-> +
->  do_compile() {
->      ${CC} ${LDFLAGS} `pkg-config --cflags --libs dbus-glib-1` -o
-> dbus-daemon-proxy dbus-daemon-proxy.c
->  }
-> @@ -19,6 +21,3 @@ do_install() {
->      install -d ${D}${bindir}
->      install -m 0755 dbus-daemon-proxy ${D}${bindir}
->  }
-> -
-> -
-> -PNBLACKLIST[dbus-daemon-proxy] ?= "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/130613/ - the recipe will
-> be removed on 2017-09-01 unless the issue is fixed"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
+
 
