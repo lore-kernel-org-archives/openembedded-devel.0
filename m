@@ -1,23 +1,45 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 349F377F70
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id DA8C377F74
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 21 May 2017 23:26:14 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	21 May 2017 16:26:15 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.38,377,1491289200"; d="scan'208";a="1172470308"
-Received: from wrath.jf.intel.com ([10.54.70.7])
-	by fmsmga002.fm.intel.com with ESMTP; 21 May 2017 16:26:15 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 21 May 2017 16:25:55 -0700
-Message-Id: <20170521232555.30221-5-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.9.4
-In-Reply-To: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
-References: <20170521232555.30221-1-timothy.t.orling@linux.intel.com>
-Subject: [meta-java][master][pyro][PATCH 4/4] jdom: unblacklist and update to v1.1.3
+	Mon, 22 May 2017 01:48:51 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id b84so13794504wmh.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 21 May 2017 18:48:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/4B5JFx312kFjHFvuQjf9YYKnHBgZahYyKkj828Bh0I=;
+	b=mOkE6AXAZGmjzUGRgF6QcEMlNVsZrKqxFnOXOVocUrrXlGGVgKZcTQOtbpTv0v0jGR
+	tIPM9OLJYbyCMhu4rtZhDdBQF9i81wJjdlVwqoybzuKBqlVr+N0f0lbTqWV1AgIL0Z5s
+	KBdaLqOQkwwFYhROcBUbvsbha8tK4/CF8BKlNSpAlI+Ou1ybdwDZhinCjyS0xUzbkjwn
+	rVIaLBjENbaAFUzQwqs3eeQ/d7XfsDbPLWav6gziaVM6KId93odHJwELRpyVUzOCHo4g
+	Xs9iaThxPYwqdlQGq3PWhrmBLaKchzKwnYFDZ6JFE7K1kNVad3IovrQkaPIMLPTdkBiJ
+	DKOQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/4B5JFx312kFjHFvuQjf9YYKnHBgZahYyKkj828Bh0I=;
+	b=b1aU81CzhOVDFzJxpE5lAn90HCl54vjKhcqBjGYaoRPKxZZgMZRk2IITiHHEYky/Vg
+	Xs0bOASRPpi5qOXuUk5lyTgvKMu60oHFJUPAA3L/19ffD8Qn0ibcVz+/A0AqAdxPxiDS
+	p8wTmRibmpK3sCytR3jXgd7Q1kcY5bZDmrxm9yzWbRpklPbbblCwsxtvcoQF7MtWTMlw
+	4YoAUfvlgvlTG/QJpPGAd9aqhyYjYZyGmSBv5yQSQq/mBEqPKrTaIlt4x9/9+CTWt3Ky
+	DQ8I9+yPsN6q6fg9+BTMsM7XJqff5j6KfFCKFijpNEJylQCatbx+vfPfCpM+ZD4oFSfl
+	Wuvw==
+X-Gm-Message-State: AODbwcDvCA1GCmoIVYeiZ5WC1XhWOaacDc6vB12EbKJ/99Gd0t4l7jWr
+	IJ6lIuei7ncoOieuFaFrd4X1k4vaKw==
+X-Received: by 10.80.147.195 with SMTP id o61mr15337928eda.178.1495417732251; 
+	Sun, 21 May 2017 18:48:52 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.195.143 with HTTP; Sun, 21 May 2017 18:48:21 -0700 (PDT)
+In-Reply-To: <1495390919-25435-1-git-send-email-maryan.pricak@gmail.com>
+References: <1495390919-25435-1-git-send-email-maryan.pricak@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 21 May 2017 18:48:21 -0700
+Message-ID: <CAMKF1spDgUYVyRGcBKNmJhb35H5_VjGi0JkLyGboKeU8YkPb-g@mail.gmail.com>
+To: Marian Pritsak <maryan.pricak@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libteam: Initial support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,87 +52,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 21 May 2017 23:26:14 -0000
+X-List-Received-Date: Mon, 22 May 2017 01:48:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-    - Add SUMMARY and expand DESCRIPTION
-    - Add LIC_FILES_CHECKSUM
-    - Move SRC_URI checksums to recommended location in recipe
-    - Add virtual/javac-native to DEPENDS for RSS
+On Sun, May 21, 2017 at 11:21 AM, Marian Pritsak
+<maryan.pricak@gmail.com> wrote:
+> libteam is a library for controlling team network device.
+> Provides utils package for network device configuration.
+>
+> Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
+> ---
+>  meta-oe/recipes-support/libteam/libteam_1.26.bb | 33 +++++++++++++++++++++++++
+>  1 file changed, 33 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
+>
+> diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+> new file mode 100644
+> index 0000000..db1e4a9
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+> @@ -0,0 +1,33 @@
+> +SUMMARY = "Library for controlling team network device"
+> +HOMEPAGE = "http://www.libteam.org/"
+> +SECTION = "libs/network"
+> +
+> +PE = "1"
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- recipes-core/xml-commons/jdom_1.1.3.bb | 25 +++++++++++++++++++++++++
- recipes-core/xml-commons/jdom_1.1.bb   | 28 ----------------------------
- 2 files changed, 25 insertions(+), 28 deletions(-)
- create mode 100644 recipes-core/xml-commons/jdom_1.1.3.bb
- delete mode 100644 recipes-core/xml-commons/jdom_1.1.bb
+Drop this if this package is new.
 
-diff --git a/recipes-core/xml-commons/jdom_1.1.3.bb b/recipes-core/xml-commons/jdom_1.1.3.bb
-new file mode 100644
-index 0000000..80b836a
---- /dev/null
-+++ b/recipes-core/xml-commons/jdom_1.1.3.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Parses, manipulates, and outputs XML using standard Java constructs"
-+DESCRIPTION = "JDOM aims to provide a complete, Java-based solution for \
-+accessing, manipulating, and outputting XML data from Java code."
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=897c700e4c122d8f4ef8f6d253a6f744"
-+
-+HOMEPAGE = "http://jdom.org/"
-+
-+DEPENDS = "fastjar-native virtual/javac-native jaxen"
-+
-+SRC_URI = "http://www.jdom.org/dist/source/archive/jdom-${PV}.tar.gz" 
-+SRC_URI[md5sum] = "dc8391e84cfdb170fcd8279aa370019f"
-+SRC_URI[sha256sum] = "d471718c4ac7a1a2f10715b93cb3fcd2ecbab60384b73ad1c089712e47bd8d1f"
-+
-+inherit java-library
-+
-+do_compile() {
-+  mkdir -p build
-+
-+  oe_makeclasspath cp -s jaxen
-+
-+  javac -sourcepath src/java -cp $cp -d build `find src/java -name "*.java"`
-+
-+  fastjar -C build -c -f ${JARFILENAME} .
-+}
-diff --git a/recipes-core/xml-commons/jdom_1.1.bb b/recipes-core/xml-commons/jdom_1.1.bb
-deleted file mode 100644
-index 4867e82..0000000
---- a/recipes-core/xml-commons/jdom_1.1.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--DESCRIPTION = "Parses, manipulates, and outputs XML using standard Java constructs"
--LICENSE = "BSD"
--
--HOMEPAGE = "http://jdom.org/"
--
--DEPENDS = "fastjar-native jaxen"
--
--SRC_URI = "\
--	http://www.jdom.org/dist/binary/archive/jdom-${PV}.tar.gz \
--	"
--
--PNBLACKLIST[jdom] ?= "BROKEN: indirectly depends on broken 'xom'"
--
--inherit java-library
--
--do_compile() {
--  mkdir -p build
--
--  oe_makeclasspath cp -s jaxen
--
--  javac -sourcepath src/java -cp $cp -d build `find src/java -name "*.java"`
--
--  fastjar -C build -c -f ${JARFILENAME} .
--}
--
--
--SRC_URI[md5sum] = "22745cbaaddb12884ed8ee09083d8fe2"
--SRC_URI[sha256sum] = "a13549087141be24ad176b659afdc2c675f1ffa5288ff999a193d6d44a282056"
--- 
-2.9.4
+> +
+> +LICENSE = "LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+> +
+> +DEPENDS = "libnl libdaemon jansson"
+> +${PN}-utils_RDEPENDS = "bash"
 
+this looks reversed may be you meant RDEPENDS_${PN}-utils
+
+> +
+> +SRC_URI = "git://github.com/jpirko/libteam"
+> +SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
+> +
+> +SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
+> +SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +inherit autotools pkgconfig
+> +
+> +FILES_${PN} = "${libdir}/libteam.so.*"
+> +
+> +PACKAGES += "${PN}dctl ${PN}-utils"
+
+calling it ${PN}-dctl will make it more readable,
+
+> +FILES_${PN}dctl = "${libdir}/libteamdctl.so.* \
+> +"
+> +FILES_${PN}-utils = "${bindir}/bond2team \
+> +                     ${bindir}/teamd \
+> +                     ${bindir}/teamdctl \
+> +                     ${bindir}/teamnl \
+> +"
+> +
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
