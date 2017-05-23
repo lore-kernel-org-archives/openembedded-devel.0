@@ -1,24 +1,24 @@
-Return-Path: <daniel@zonque.org>
-Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
-	by mail.openembedded.org (Postfix) with ESMTP id CACE477E89
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D92FD71AB7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 04:51:01 +0000 (UTC)
-Received: from [192.168.178.170] (p5DDC48A9.dip0.t-ipconnect.de
-	[93.220.72.169])
-	by mail.bugwerft.de (Postfix) with ESMTPSA id C29CF280482;
-	Tue, 23 May 2017 04:50:34 +0000 (UTC)
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-References: <a884c6ab-8723-d322-30ec-52a67573ac28@zonque.org>
-	<CAP9ODKpZ+45VOfj-OwhHsCxi+ku5ZfQrGJSsAtgMP41UZi_waQ@mail.gmail.com>
-From: Daniel Mack <daniel@zonque.org>
-Message-ID: <a91bb6aa-e8ae-0164-725d-b1a4d1a14224@zonque.org>
-Date: Tue, 23 May 2017 06:50:57 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.1.0
+	Tue, 23 May 2017 07:01:44 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4N71huo025790
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 23 May 2017 00:01:44 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 23 May 2017 00:01:43 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 23 May 2017 15:01:40 +0800
+Message-ID: <cover.1495522368.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <CAP9ODKpZ+45VOfj-OwhHsCxi+ku5ZfQrGJSsAtgMP41UZi_waQ@mail.gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Support for v4l cameras in QtWebEngine
+Subject: [meta-oe][PATCH 0/2] add new recipe for xf86-video-mga and ssiapi
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,29 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 May 2017 04:51:05 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 23 May 2017 07:01:45 -0000
+Content-Type: text/plain
 
-On 05/23/2017 03:30 AM, Otavio Salvador wrote:
-> On Mon, May 22, 2017 at 2:00 PM, Daniel Mack <daniel@zonque.org> wrote:
->> Is anyone aware of any specific requirements or PACKAGECONFIG settings
->> needed to add V4L support to web applications running inside a
->> QtWebEngine widget?
-> 
-> The webrtc support is disabled for embedded-linux profile. I did not
-> look further on it yet.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-I see, thanks for the pointer! What would be the best way to enable it?
-Could we override GYP_CONFIG setting through new PACKAGECONFIG
-directives in qtwebengine_git.bb? I'd also like to enable plugins, for
-instance.
+--
+The following changes since commit fc03b3d9382dd5b6a8fff5f84e4c86a1acc9a73a:
 
-Then again, where is this embedded_linux.pri profile actually selected
-in the Yocto builds?
+  drbd-utils: fix dependency for perl under small-fs (2017-05-09 12:29:15 -0400)
 
+are available in the git repository at:
 
-Thanks,
-Daniel
+  git://git.pokylinux.org/poky-contrib.git jhuang0/r_upstream-xf86-video-mga-ssiapi_170523_0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_upstream-xf86-video-mga-ssiapi_170523_0
+
+Jackie Huang (2):
+  xf86-video-mga: add new recipe
+  ssiapi: add new recipe
+
+ .../xorg-driver/xf86-video-mga/checkfile.patch     | 68 ++++++++++++++++++++++
+ .../xorg-driver/xf86-video-mga_1.6.5.bb            | 21 +++++++
+ meta-oe/recipes-support/ssiapi/ssiapi_1.0.1.bb     | 25 ++++++++
+ 3 files changed, 114 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-mga/checkfile.patch
+ create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
+ create mode 100644 meta-oe/recipes-support/ssiapi/ssiapi_1.0.1.bb
+
+-- 
+2.11.0
+
 
