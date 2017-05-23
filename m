@@ -1,23 +1,18 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C90C7017B
+Return-Path: <daniel@zonque.org>
+Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
+	by mail.openembedded.org (Postfix) with ESMTP id AC2607199E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 10:24:25 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4NAOPs0028385
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 23 May 2017 03:24:25 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Tue, 23 May 2017 03:24:24 -0700
-From: Chen Qi <Qi.Chen@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Tue, 23 May 2017 18:24:23 +0800
-Message-ID: <20170523102423.6607-1-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] dante: fix unknown-configure-option QA issue
+	Tue, 23 May 2017 12:34:56 +0000 (UTC)
+Received: from localhost.localdomain (pd95c9a6f.dip0.t-ipconnect.de
+	[217.92.154.111])
+	by mail.bugwerft.de (Postfix) with ESMTPSA id EDA79280417;
+	Tue, 23 May 2017 12:34:31 +0000 (UTC)
+From: Daniel Mack <daniel@zonque.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 May 2017 14:34:48 +0200
+Message-Id: <20170523123448.5051-1-daniel@zonque.org>
+X-Mailer: git-send-email 2.9.4
+Subject: [meta-oe][PATCH] meson: update to version 0.40.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,32 +25,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 May 2017 10:24:26 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 23 May 2017 12:34:58 -0000
 
-Fix the following QA issue.
-
-  dante-1.4.1: dante: configure was passed unrecognised options: --disable-krb5 [unknown-configure-option]
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Daniel Mack <daniel@zonque.org>
 ---
- meta-networking/recipes-protocols/dante/dante_1.4.1.bb | 2 +-
+ meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} (87%)
 
-diff --git a/meta-networking/recipes-protocols/dante/dante_1.4.1.bb b/meta-networking/recipes-protocols/dante/dante_1.4.1.bb
-index 3b07ffe43..ffdab22cf 100644
---- a/meta-networking/recipes-protocols/dante/dante_1.4.1.bb
-+++ b/meta-networking/recipes-protocols/dante/dante_1.4.1.bb
-@@ -32,7 +32,7 @@ REQUIRED_DISTRO_FEATURES = "pam"
- EXTRA_AUTORECONF = "-I ${S}"
+diff --git a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+similarity index 87%
+rename from meta-oe/recipes-devtools/meson/meson_0.37.1.bb
+rename to meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+index a83af77..2ba2fc8 100644
+--- a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb
++++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+@@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- PACKAGECONFIG[libwrap] = ",--disable-libwrap,tcp-wrappers,libwrap"
--PACKAGECONFIG[krb5] = ",--disable-krb5,krb5"
-+PACKAGECONFIG[krb5] = ",--without-krb5,krb5"
+ SRC_URI = "git://github.com/mesonbuild/meson.git"
  
- PACKAGECONFIG ??= ""
+-SRCREV = "3d4bfdcb22314ea7db45a5b075f8b2a9c1498aab"
++SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
-2.11.0
+2.9.4
 
 
