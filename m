@@ -1,46 +1,45 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B78077D24
+Return-Path: <maryan.pricak@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8958277F9A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 14:55:28 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id b84so24186572wmh.0
+	Tue, 23 May 2017 19:17:18 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id h4so9101783lfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 07:55:29 -0700 (PDT)
+	Tue, 23 May 2017 12:17:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=rrbr4wXvfpsWMSZOVu7vdvr0uvO7t8nwb88iM7cXzUE=;
-	b=p//mjcVJ5kRQgED/mnvPgSbe3RbSGaX3wHTTXYDFhWRXE9DR8BVR9sN5Dmt/mP+XpX
-	dY3fVwP3rruJAK6/4wpzN6Y7lteZsQBata1JoVx5OLPgazWbiz3boR/memTXP6c/Wqj5
-	fr8AasG5yvqTjkqIIIlxcksEceyOwDJJkUQwFJuJ1DmdsKMlFwGdZfiAIhpiTy83CzL4
-	p/yw2lR+bJ3P0VE4bi78A8bOniQ1IsFYTzdGIWTBndZaABkKsLk7xNMsMgjH/Qq6zIVX
-	na9RVf6ulwttH3u8PehUeDKwtKm6pxnDMG+2I7CmspP6GzDsjFo9xT8qOOwuFbzxajjc
-	VxOg==
+	h=from:to:cc:subject:date:message-id;
+	bh=rAlXpOC78Srp1UqNg5CuyFlZeIet550zJ4acQ6+diAA=;
+	b=g6qOZD29yNWCQt5yoogJybGbbgCy+gh1dvX1DqgfrYA0JfgUliij24oR4LPqhF4xxY
+	7SN3wfe6m8Gn77BobPdF1HAUYtd+qQa7zMt6cyiV9RZDOdWNARv3fcjjbKlyhsdcg4Qn
+	vd6IDdUSvRou+75wAhIj2bpqc5RmDdbbQ+83Y5FLrDD6J4SKT/UplYVJfz/n+p702csF
+	UzQcFzVvFxfHLy9TDidqlfEsxeN7jt6ijhlIbLxVYNMcG/SOm8WbPee0a0+ntjXf3fFe
+	BvZXIE8KuMEKUjYVSTQKGkm+55IqoZxei2PWdgJYY4fPcLp5YAwuJz8PRaq+gWrwy3t9
+	97eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=rrbr4wXvfpsWMSZOVu7vdvr0uvO7t8nwb88iM7cXzUE=;
-	b=Xre7tjg0ExjTNecSEueKKEuRQWWgvgPS4+vb41Vq7fKqT6B+VmOD95e0tmIaIz6CgW
-	ASDioQ42XobkFTPmvqbrjJ9HY/5PkNaFoEMxY/VHqtCj2DXNnBkKOxCU4JP47jc3RtdE
-	c6gXjX0I1288wUl41dkLUtSFRP9PdV+iUAtRvI7u1Jd9wulOolNDA6iP5aLN++vOUOSe
-	PzQPhkkrTOr26bpGBVtQelqIn03+tJ8NNflQKO3/FTyZW2SzQQ+w73seVDmFoNQbnRFT
-	02xs8D2DhN+Eje4TjZjHFi+qTubNwAassK16PtgZ9j+/NMmT9YlAs0V7TK8yhytzsCWK
-	MTwg==
-X-Gm-Message-State: AODbwcCzLorLJ+Fab7tUmbiR1oayN6sM8zP8zn+MeNvdn5dQBduYJgkU
-	2EC5abzN/ZISIOQZ28BgwipGkna7SA==
-X-Received: by 10.80.182.35 with SMTP id b32mr21799516ede.123.1495551329235;
-	Tue, 23 May 2017 07:55:29 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.195.143 with HTTP; Tue, 23 May 2017 07:54:58 -0700 (PDT)
-In-Reply-To: <611cb040503a0616ea4127228c9237b1d5f7a834.1495522368.git.jackie.huang@windriver.com>
-References: <cover.1495522368.git.jackie.huang@windriver.com>
-	<611cb040503a0616ea4127228c9237b1d5f7a834.1495522368.git.jackie.huang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 23 May 2017 07:54:58 -0700
-Message-ID: <CAMKF1spojsKhYPor8OpLYhZfeFN0fMbyHM-3x+JQbdYqBjY0ZA@mail.gmail.com>
-To: jhuang0 <jackie.huang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] xf86-video-mga: add new recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rAlXpOC78Srp1UqNg5CuyFlZeIet550zJ4acQ6+diAA=;
+	b=J19CGO0BuCTrfFxW640dFzq1zYwI7BI8CeyHB0Vz5OwZdzydnJzywtywceC7JlQa9r
+	FUQL0WGp8oaWny9TFpsIw9BglV9FfPKnvqfDqsQxw27ecQ1A+3c9+BMjP2MUUYn+G0MQ
+	hETV6kxDvWeHLWOah0BZLoGCSHwAjTtGdPnFvBM+FxkA6N3JqDS4kELXUtKrECRnB5Lc
+	hH5gho9c4N4hkdc3qop9YF8qivd4X7/r/pfsi6e6pI5ZiybWFpJ6sBmZMlvAuoyKt9JI
+	an8zdS4r2NXZA+ZGqgv2IkI1/E9YHTRxkZ0ilFZaDbhhqf/W/P5QMbJa0e+Fx5eoVQ3Z
+	LPcw==
+X-Gm-Message-State: AODbwcAQjmkvx9GjWHZw9ctIVonDUESZGsBAt7HBrTd4ncoa6wmkjQUG
+	iH5kIa3r7AbIDQ==
+X-Received: by 10.25.22.209 with SMTP id 78mr7808709lfw.17.1495567039862;
+	Tue, 23 May 2017 12:17:19 -0700 (PDT)
+Received: from localhost.localdomain ([93.75.94.160])
+	by smtp.gmail.com with ESMTPSA id w69sm329679lff.45.2017.05.23.12.17.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 23 May 2017 12:17:19 -0700 (PDT)
+From: Marian Pritsak <maryan.pricak@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 23 May 2017 22:17:11 +0300
+Message-Id: <1495567031-12494-1-git-send-email-maryan.pricak@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libteam: Initial support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,134 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 May 2017 14:55:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 23 May 2017 19:17:21 -0000
 
-On Tue, May 23, 2017 at 12:01 AM,  <jackie.huang@windriver.com> wrote:
-> From: Jackie Huang <jackie.huang@windriver.com>
->
-> mga is an Xorg driver for Matrox video cards
->
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../xorg-driver/xf86-video-mga/checkfile.patch     | 68 ++++++++++++++++++++++
->  .../xorg-driver/xf86-video-mga_1.6.5.bb            | 21 +++++++
->  2 files changed, 89 insertions(+)
->  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-mga/checkfile.patch
->  create mode 100644 meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
->
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga/checkfile.patch b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga/checkfile.patch
-> new file mode 100644
-> index 000000000..ceae6dfba
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga/checkfile.patch
-> @@ -0,0 +1,68 @@
-> +Upstream-Status: Submitted [https://bugs.freedesktop.org/show_bug.cgi?id=57606]
-> +Signed-off-by: Ross Burton <ross.burton@intel.com>
-> +
-> +From c9014a8f3c9b691b5aa7b1f3ec66cf7c84b8211b Mon Sep 17 00:00:00 2001
-> +From: Ross Burton <ross.burton@intel.com>
-> +Date: Thu, 29 Nov 2012 11:00:43 +0000
-> +Subject: [PATCH] build: dont use AC_CHECK_FILE when enabling DRI
-> +
-> +Automatically enabling or disabling a feature based on installed files isn't
-> +deterministic, and AC_CHECK_FILE returns an error when cross-compiling.
-> +
-> +Fix this by enabling DRI by default, and removing the explicit file checks as
-> +pkg-config is good enough.
-> +
-> +(#57606)
-> +
-> +Signed-off-by: Ross Burton <ross.burton@intel.com>
-> +---
-> + configure.ac |   25 ++-----------------------
-> + 1 file changed, 2 insertions(+), 23 deletions(-)
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index fca1a9c..d2aa2ed 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -55,9 +55,9 @@ AC_ARG_WITH(xorg-module-dir,
-> +             [moduledir="$libdir/xorg/modules"])
-> +
-> + AC_ARG_ENABLE(dri, AS_HELP_STRING([--disable-dri],
-> +-                                  [Disable DRI support [[default=auto]]]),
-> ++                                  [Disable DRI support [[default=enabled]]]),
-> +               [DRI="$enableval"],
-> +-              [DRI=auto])
-> ++              [DRI=yes])
-> + AC_ARG_ENABLE(exa,
-> +               AS_HELP_STRING([--disable-exa],
-> +                              [Disable EXA support [[default=enabled]]]),
-> +@@ -76,27 +76,6 @@ sdkdir=`$PKG_CONFIG --variable=sdkdir xorg-server`
-> +
-> + # Checks for libraries.
-> +
-> +-if test "x$DRI" != xno; then
-> +-        AC_CHECK_FILE([${sdkdir}/dri.h],
-> +-                      [have_dri_h="yes"], [have_dri_h="no"])
-> +-        AC_CHECK_FILE([${sdkdir}/sarea.h],
-> +-                      [have_sarea_h="yes"], [have_sarea_h="no"])
-> +-        AC_CHECK_FILE([${sdkdir}/dristruct.h],
-> +-                      [have_dristruct_h="yes"], [have_dristruct_h="no"])
-> +-fi
-> +-
-> +-AC_MSG_CHECKING([whether to include DRI support])
-> +-if test "x$DRI" = xauto; then
-> +-        if test "x$have_dri_h" = xyes && \
-> +-           test "x$have_sarea_h" = xyes && \
-> +-           test "x$have_dristruct_h" = xyes; then
-> +-                DRI="yes"
-> +-        else
-> +-                DRI="no"
-> +-        fi
-> +-fi
-> +-AC_MSG_RESULT([$DRI])
-> +-
-> + AM_CONDITIONAL(DRI, test "x$DRI" = xyes)
-> + if test "x$DRI" = xyes; then
-> +         PKG_CHECK_MODULES(DRI, [libdrm >= 2.0 xf86driproto])
-> +--
-> +1.7.10.4
-> +
-> diff --git a/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
-> new file mode 100644
-> index 000000000..cd680597c
-> --- /dev/null
-> +++ b/meta-oe/recipes-graphics/xorg-driver/xf86-video-mga_1.6.5.bb
-> @@ -0,0 +1,21 @@
-> +require recipes-graphics/xorg-driver/xorg-driver-video.inc
-> +
-> +SUMMARY = "X.Org X server -- Matrox MGA display driver"
-> +
-> +DESCRIPTION = "mga is an Xorg driver for Matrox video cards"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=bc1395d2cd32dfc5d6c57d2d8f83d3fc"
-> +
-> +SRC_URI += "file://checkfile.patch"
-> +
-> +DEPENDS += "virtual/libx11 libpciaccess"
-> +
-> +COMPATIBLE_HOST = '(i.86.*-linux|x86_64.*-linux)'
+libteam is a library for controlling team network device.
+Provides utils package for network device configuration.
 
-can this also include musl ? if yes then use linux*
-and I think it could be a good thing to check for x11 as required
-distro features may be
+Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
+---
+ meta-oe/recipes-support/libteam/libteam_1.26.bb | 32 +++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
 
-> +
-> +SRC_URI[md5sum] = "3ee2549247e01de3e7bce52c27483118"
-> +SRC_URI[sha256sum] = "b663cd8e6364f7c4e2637b9fcab9861d0e3971518c73b00d213f6545a1289422"
-> +
-> +PACKAGECONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'dri', '', d)}"
-> +PACKAGECONFIG[dri] = "--enable-dri,--disable-dri,drm xf86driproto,xserver-xorg-extension-dri"
-> +
-> +RDEPENDS_${PN} = "xserver-xorg-module-exa"
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+new file mode 100644
+index 0000000..f4a4572
+--- /dev/null
++++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+@@ -0,0 +1,32 @@
++SUMMARY = "Library for controlling team network device"
++HOMEPAGE = "http://www.libteam.org/"
++SECTION = "libs/network"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++DEPENDS = "libnl libdaemon jansson"
++
++SRC_URI = "git://github.com/jpirko/libteam"
++SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
++
++SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
++SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++FILES_${PN} = "${libdir}/libteam.so.*"
++
++PACKAGES += "${PN}-dctl ${PN}-utils"
++FILES_${PN}-dctl = "${libdir}/libteamdctl.so.* \
++"
++FILES_${PN}-utils = "${bindir}/bond2team \
++                     ${bindir}/teamd \
++                     ${bindir}/teamdctl \
++                     ${bindir}/teamnl \
++"
++
++RDEPENDS_${PN}-utils = "bash"
++
+-- 
+2.7.4
+
 
