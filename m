@@ -1,37 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EC41777FB9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f176.google.com (mail-yb0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 122CC77FB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 21:40:36 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id r58so23968911qtb.2
+	Tue, 23 May 2017 21:43:15 +0000 (UTC)
+Received: by mail-yb0-f176.google.com with SMTP id 132so41263170ybq.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 14:40:38 -0700 (PDT)
+	Tue, 23 May 2017 14:43:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=h6erPBy5KUu4kMSWnbCazsCkvFF/BqD7mfL2wAfh7PQ=;
+	b=VJuaf+YdmRDA/LP/kBLeCfk+5JUurqRqCXW+nuFH4YjtTCve8ekwK9zX+52vn6enTe
+	llXR6DjTm4TjWf1nqQAOD/I08gBrayWfhNuFssuZF/2gmgnFY/b75FYfDECm+RGDh9NR
+	imvMBPUDDDGNCQ92o8gxYkaCbrhS1QdAF/HXZM5SqrfF5shfkp6e6wvOXP1NRV8JU08Z
+	3xmN2Un4u1jVED+beNOMUIwoGaTEZtwUoiDAmre0uARnwvIX7AXa86aLkaxteDFOd10v
+	iEV31oL6yLYihqp3GjPfFt9d+pwHHlFqdjQxSSIj49q4aplHH2N7rORHI2iC+n5N0VXj
+	NNqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=rG6YF8BAJCxu7Izs52NIVfiixZBI/Ku4SC8bq+CeXTc=;
-	b=nTyzOY9z5REPDG6ggeV/ZUoo+wAdnD7+3TO2UrrQAluMpVqrMAnyWlpsZQ3GRRH3Of
-	CEWhItxrVyYqKK1AlRHojIL9jpNFxfulj84qKV0Vaq8v2AOrInbjFwaL8eCFKRtgIGQb
-	YLCtQOsPz8MLz8zdJL6mRcYShalTFjLeSWE1MX9ECGPNUOvaP+ZnmrW1Lxejt98wXIwg
-	WJMC4X171Vk/6+N3hzxxVwktrxV94+g5ojpqXJdv/+uWZskujDRr7FmmdWkXMfVBskPS
-	HTVlAuHpmmNlS2sGot//LxQuKTzIC1iBCKy9gOilSs1Y/wVppG0ovZ+Nsi2NUNDONHr0
-	wRxg==
-X-Gm-Message-State: AODbwcCKV/y3O1f+yD9dhL7nGFDkYgjFhwMznMZBRXvOaUMok8o+lvrF
-	d89/ICoh6gCFkg==
-X-Received: by 10.237.37.154 with SMTP id x26mr32155334qtc.133.1495575637702; 
-	Tue, 23 May 2017 14:40:37 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
-	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id r24sm1289881qtc.1.2017.05.23.14.40.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 23 May 2017 14:40:37 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 23 May 2017 17:40:30 -0400
-Message-Id: <1495575630-29645-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-perl][PATCH] libxml-libxml-perl: update to version 2.0129
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=h6erPBy5KUu4kMSWnbCazsCkvFF/BqD7mfL2wAfh7PQ=;
+	b=r5H0lsPzw6wy4wuQhVU6quOgcmrL9ZHeDIvQywz/DWeeObp1fMdpMeHL2H98l+kxVq
+	Fuqntp/dg59opVQiMEbNfYGWoIjSy+BWMFp21TFrLJdjltDn1erwXgAmGbrZibFU38Td
+	FbOzuy4pQBhGwU0nRIRbbQARWzx9z4IdBP5GY4AJF8fYPJT5VE+8elSCStJxWmqq+mn0
+	vyxLwrMVbCP/tGg+/Y0vajhuZITIFwJ3/HpQnRDWD6iFX/DH7UoKx+8/KFduzft7S9p8
+	Y6HZTcjSUg/WBqbD4IDyVmLJnYCeNe7pfwgoJsGn2EfmG8rwKiuFjPnRB/Eac8E8nhb/
+	8mLQ==
+X-Gm-Message-State: AODbwcAgGgYwOW/QTortO+0r6VVmFAx8cO7Pa8/cXyrJB+oqk9bxBWVa
+	Y685jxu9KzVg5V3SbtFSSL7AR5Q9MaZJ
+X-Received: by 10.37.224.215 with SMTP id x206mr25473739ybg.101.1495575796926; 
+	Tue, 23 May 2017 14:43:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.162.38 with HTTP; Tue, 23 May 2017 14:43:16 -0700 (PDT)
+In-Reply-To: <20170523123448.5051-1-daniel@zonque.org>
+References: <20170523123448.5051-1-daniel@zonque.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 23 May 2017 23:43:16 +0200
+Message-ID: <CA+chaQdXu3XRfDz0ALkaMZnZsunnm-nrH6+m2q1SyK_iTia9=A@mail.gmail.com>
+To: Daniel Mack <daniel@zonque.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] meson: update to version 0.40.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,39 +54,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 May 2017 21:40:37 -0000
+X-List-Received-Date: Tue, 23 May 2017 21:43:16 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update debian packaging license checksum with latest upstream author contact info
+Please check 2 meson changes from Ricardo Ribalda Delgado sent few days
+before yours and rebase your change on top of it.
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../{libxml-libxml-perl_2.0121.bb => libxml-libxml-perl_2.0129.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-perl/recipes-perl/libxml/{libxml-libxml-perl_2.0121.bb => libxml-libxml-perl_2.0129.bb} (84%)
+One of those patches don't apply now on this version:
+http://errors.yoctoproject.org/Errors/Details/143049/
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb
-similarity index 84%
-rename from meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
-rename to meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb
-index 8bc00c4..a8cc269 100644
---- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0121.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb
-@@ -24,11 +24,11 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
-     file://fix-CATALOG-conditional-compile.patch \
-     file://using-DOCB-conditional.patch \
- "
--LIC_FILES_CHKSUM = "file://debian/copyright;md5=75e021e35a906347f46c9ff163653e2a \
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
-     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
- "
--SRC_URI[libxml.md5sum] = "1544ab9ac110f5da296015346561ce02"
--SRC_URI[libxml.sha256sum] = "ec431011cb37a04640fd2316f64d0405a274eece2c6f3847f7fbd336eb1c0dc9"
-+SRC_URI[libxml.md5sum] = "5806b69d54a2d7884b8d22b395888436"
-+SRC_URI[libxml.sha256sum] = "5ca0269ba06800c84061a7f3333c85fab5584d69cd7b4e0641963da7fd36b366"
- 
- S = "${WORKDIR}/XML-LibXML-${PV}"
- 
--- 
-2.7.4
+On Tue, May 23, 2017 at 2:34 PM, Daniel Mack <daniel@zonque.org> wrote:
 
+> Signed-off-by: Daniel Mack <daniel@zonque.org>
+> ---
+>  meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} | 2
+> +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+>  rename meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb}
+> (87%)
+>
+> diff --git a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb
+> b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> similarity index 87%
+> rename from meta-oe/recipes-devtools/meson/meson_0.37.1.bb
+> rename to meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> index a83af77..2ba2fc8 100644
+> --- a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb
+> +++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> @@ -6,7 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
+> 3b83ef96387f14655fc854ddc3c6bd57"
+>
+>  SRC_URI = "git://github.com/mesonbuild/meson.git"
+>
+> -SRCREV = "3d4bfdcb22314ea7db45a5b075f8b2a9c1498aab"
+> +SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
+>
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.9.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
