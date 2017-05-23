@@ -1,47 +1,23 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F4FA6FF78
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 790D76FF78
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 08:48:33 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id q24so7371249lfb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 23 May 2017 01:48:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=SUHmAB6R9eMaMoYjXDobajDoxt2hBnLuNf2riGp0Dy8=;
-	b=FfW4AIuG5I5xcj/NeDLtnNRczP6cCFQBOHy4Y57YrtYtv3IbiapTfz0UC/T/bDUW/X
-	H7kd+Eof9phtscM9P9p6UA1h2Er9CEC8m6UZLw+U5DMBwVQAtOnS2RMbiXmGdSFL6ukG
-	qU4MSwiW0pfEP8gKP1AeJO0jB40qIaPnCEpklX7mEqebYe4s/eiL+peh2yoxI7Z5goVT
-	h7G4sf+Ss1m4x/ToqzDMv+UkP32kwu0f8MFjVmImwLA1rPoKgpVoR/1+YBGCZoQ2pJnv
-	HynTcrOVooQfL/kiWI+AjQ1KFqvml9R2dNyhKg/HTtK+4uF7moqQaBbYM1PtN7a7ZXxK
-	bkDw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SUHmAB6R9eMaMoYjXDobajDoxt2hBnLuNf2riGp0Dy8=;
-	b=SzJVUplBhQUzNT2JYAjxYyilCQboZB6YVToOL09zPzWo7x0KTn7hN/LkleqxVPDUpE
-	oecFRHvKOaeO0yewhPVCcurCUFkoifHtqAihGvFaKpejbn7ArMnmMg8o9slQA8peHTX1
-	O4Eu9dCjuXNkQ0HjlnYd8bRh/lg4DP5ZLXPO2hqoZZwFw67AB14b+vP7FHsa+bGG/bbu
-	X7FQ/tcH4ONqW4P4/U4pbF35ucEMYfSBkDribUJKB/1YK49gOK5tgTRCSEtTY+aS2BfO
-	lnKFDQ4nJETHEbNDrbhEssAPGNB+FnPYZKM7MWX/nnZZgw/xE770IylToGH7GEJFIgDe
-	CdmQ==
-X-Gm-Message-State: AODbwcAV3yTbYkZxwC0WDLYQ3Yqs9WfKs1r0bZujGkbICCRGPORVgr18
-	zDCU4GmaO2x5jQ==
-X-Received: by 10.25.23.210 with SMTP id 79mr7767544lfx.158.1495529314267;
-	Tue, 23 May 2017 01:48:34 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id s26sm24117ljd.27.2017.05.23.01.48.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 23 May 2017 01:48:33 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org, peter.kjellerstedt@axis.com,
-	linussn@axis.com
-Date: Tue, 23 May 2017 10:48:30 +0200
-Message-Id: <20170523084831.12243-1-ricardo.ribalda@gmail.com>
+	Tue, 23 May 2017 09:05:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4N95pQV026913
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 23 May 2017 02:05:51 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 23 May 2017 02:05:50 -0700
+From: Chen Qi <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
+Date: Tue, 23 May 2017 17:05:49 +0800
+Message-ID: <20170523090549.19700-1-Qi.Chen@windriver.com>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-oe][PATCH 1/2] meson: Suport for c++ cross-compilation
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH] open-isns: fix QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +30,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 23 May 2017 08:48:36 -0000
+X-List-Received-Date: Tue, 23 May 2017 09:05:52 -0000
+Content-Type: text/plain
 
-cpp_args and cpp_link_args must be set on the meson.cross file to
-compile c++ applications. Otherwise variables such as the sysroot
-are not set correctly and libraries/headers are not found.
+Fix the following QA issue.
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+ERROR: open-isns-0.97-r0 do_package: QA Issue: open-isns: Files/directories were installed but not shipped in any package:
+  /usr/lib
+  /usr/lib/systemd
+  /usr/lib/systemd/system
+  /usr/lib/systemd/system/isnsd.socket
+  /usr/lib/systemd/system/isnsd.service
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- meta-oe/classes/meson.bbclass | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-networking/recipes-support/open-isns/open-isns_0.97.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
-index e27ed3906e41..c33174a21821 100644
---- a/meta-oe/classes/meson.bbclass
-+++ b/meta-oe/classes/meson.bbclass
-@@ -61,7 +61,9 @@ pkgconfig = 'pkg-config'
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+index 828d1166d..420ef5be0 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+@@ -26,10 +26,11 @@ inherit systemd autotools-brokensep distro_features_check
+ REQUIRED_DISTRO_FEATURES = "systemd"
  
- [properties]
- c_args = [${@meson_array('MESON_C_ARGS', d)}]
-+cpp_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
- c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
-+cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+ EXTRA_OECONF = " --prefix=${prefix} --enable-shared"
++EXTRA_OEMAKE += "SYSTEMDDIR=${D}${systemd_unitdir}/system"
  
- [host_machine]
- system = '${HOST_OS}'
+ do_install_append () {
+     oe_runmake INCDIR=${D}${includedir}/libisns/ install_hdrs
+     oe_runmake LIBDIR=${D}${libdir} install_lib
+ }
+ 
+-FILES_${PN} += "${libdir}"
++FILES_${PN} += "${libdir} ${systemd_unitdir}"
 -- 
 2.11.0
 
