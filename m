@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C7C0780F4
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id BEDD1780F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 21:27:52 +0000 (UTC)
-Received: by mail-qk0-f178.google.com with SMTP id k74so164792762qke.1
+	Wed, 24 May 2017 21:34:22 +0000 (UTC)
+Received: by mail-qk0-f176.google.com with SMTP id k74so164904817qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 14:27:53 -0700 (PDT)
+	Wed, 24 May 2017 14:34:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8Hsw3lbtWNnSIo5SBkam4Qe+ctYjK/NGe0uBLl9wGyQ=;
-	b=mBKbnr1pWnpY8SACWwGCojbV7CuyBXrJduzrEvXTbvrwD0i25I6/ILAOgGXdtqG/Sy
-	w29nFjf/dCUBiC/4/R+5xRjkO6bDCA/pM2zI888NJSbrLHdulWjN3bg8NOHHq/UWpId2
-	nzoX0Tl9RYjGTZescj8zv/MsVNrXB/1GVx1qYcB+TqCDnwuPozurlf3aArbB32P09C30
-	5XVEPMQN+1kolxJl3KL3TK7U7UPRFJMyAHG9L8nYzz+TnDK/bz8JtRppncBhAvxSE9J6
-	fVg1HLtfilJnbaBW940wK9OFjbaQWUyFVzgx1ljiMPjv7DdPtbwP/jhNT9gv4Poaq1Am
-	XOFQ==
-X-Gm-Message-State: AODbwcBqlliamlK6k/p4xBrwgMj3IGANmZs3iFREshVSSrOrghWWgLQD
-	eT/UkkW5W+x9ZQ==
-X-Received: by 10.55.121.196 with SMTP id u187mr34153893qkc.91.1495661273466; 
-	Wed, 24 May 2017 14:27:53 -0700 (PDT)
+	bh=L0Xjj/P4iQ6EXFWkpAbBIB8HhYaUb02gUX2b52a4Hv4=;
+	b=oTmCqkhe61EmMrq2xCeCZVybkJ/HeXp0Hlu0MGx6s0EAhoPTuGeSTKhj6ZwfxYKNUg
+	QjVLU0ACu0MDWphOg7T6Ihy1tGK7V+zvQd7LlTCvLWPlXtZf64FdcqjOyxB0DbYv9dDA
+	T76tHk0p9rOnsQKGo0UtvjtmF95ACxAvcyN3P5tKRq4/Y1uK/QVwTGUcVCUIgH+saYfm
+	xTX7BNFlCdC8nBmiLUYMY7EzfxVxVVVcbrlXbl4kefN0+jfG0HEG7C/ms8BYGPQ1BBFs
+	zKEkfqRT39CHGn7+KNuhfu88MhHy/WfURQqoytheq2zf3OWZKKEhLBPIaM9hinslQfT7
+	8Ggw==
+X-Gm-Message-State: AODbwcAc7nX0fSTchQ64mB1GSuvHA8pF5Z9wo2SXkyTyrUmFwBFj2P8G
+	pbE4ZGIYGle3Sg==
+X-Received: by 10.233.216.194 with SMTP id u185mr35136373qkf.105.1495661663605;
+	Wed, 24 May 2017 14:34:23 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
-	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id t5sm3315505qkd.4.2017.05.24.14.27.52
+	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
+	y188sm3293073qkb.49.2017.05.24.14.34.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 24 May 2017 14:27:52 -0700 (PDT)
+	Wed, 24 May 2017 14:34:23 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 May 2017 17:27:43 -0400
-Message-Id: <1495661263-9873-1-git-send-email-derek@asterius.io>
+Date: Wed, 24 May 2017 17:34:15 -0400
+Message-Id: <1495661655-17020-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pysocks: update to version 1.6.7
+Subject: [meta-python][PATCH] python-typing: update to version 3.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 21:27:53 -0000
+X-List-Received-Date: Wed, 24 May 2017 21:34:23 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pysocks.inc                | 4 ++--
- .../python/{python-pysocks_1.6.6.bb => python-pysocks_1.6.7.bb}       | 0
- .../python/{python3-pysocks_1.6.6.bb => python3-pysocks_1.6.7.bb}     | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pysocks_1.6.6.bb => python-pysocks_1.6.7.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pysocks_1.6.6.bb => python3-pysocks_1.6.7.bb} (100%)
+ meta-python/recipes-devtools/python/python-typing.inc                 | 4 ++--
+ .../python/{python-typing_3.5.3.0.bb => python-typing_3.6.1.bb}       | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-typing_3.5.3.0.bb => python-typing_3.6.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pysocks.inc b/meta-python/recipes-devtools/python/python-pysocks.inc
-index 5aec6fc..cf9509a 100644
---- a/meta-python/recipes-devtools/python/python-pysocks.inc
-+++ b/meta-python/recipes-devtools/python/python-pysocks.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1d457bcffb9661b45f799d4efee72f16"
+diff --git a/meta-python/recipes-devtools/python/python-typing.inc b/meta-python/recipes-devtools/python/python-typing.inc
+index 49da4fe..12b7d15 100644
+--- a/meta-python/recipes-devtools/python/python-typing.inc
++++ b/meta-python/recipes-devtools/python/python-typing.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/python/typing"
+ LICENSE = "PSF"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=64fc2b30b67d0a8423c250e0386ed72f"
  
--SRC_URI[md5sum] = "571f4c23982fa86bf0e7a441f1b6c881"
--SRC_URI[sha256sum] = "02419a225ff5dcfc3c9695ef8fc9b4d8cc99658e650c6d4718d4c8f451e63f41"
-+SRC_URI[md5sum] = "07007ec7ed46292dab06013f2e3af365"
-+SRC_URI[sha256sum] = "d00329f27efa157db7efe3ca26fcd69033cd61f83822461ee3f8a353b48e33cf"
+-SRC_URI[md5sum] = "3996a747158e5591abf689c1c5f8f9db"
+-SRC_URI[sha256sum] = "ca2daac7e393e8ee86e9140cd0cf0172ff6bb50ebdf0b06281770f98f31bff21"
++SRC_URI[md5sum] = "3fec97415bae6f742fb3c3013dedeb89"
++SRC_URI[sha256sum] = "c36dec260238e7464213dcd50d4b5ef63a507972f5780652e835d0228d0edace"
  
- PYPI_PACKAGE = "PySocks"
- 
-diff --git a/meta-python/recipes-devtools/python/python-pysocks_1.6.6.bb b/meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-typing_3.5.3.0.bb b/meta-python/recipes-devtools/python/python-typing_3.6.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pysocks_1.6.6.bb
-rename to meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.6.6.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pysocks_1.6.6.bb
-rename to meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb
+rename from meta-python/recipes-devtools/python/python-typing_3.5.3.0.bb
+rename to meta-python/recipes-devtools/python/python-typing_3.6.1.bb
 -- 
 2.7.4
 
