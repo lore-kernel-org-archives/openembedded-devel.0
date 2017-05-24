@@ -1,44 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 1131C7805C
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
+	[209.85.161.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D17247805C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 15:42:12 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id b84so32232425wmh.0
+	Wed, 24 May 2017 15:45:09 +0000 (UTC)
+Received: by mail-yw0-f194.google.com with SMTP id y64so11643866ywe.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 08:42:14 -0700 (PDT)
+	Wed, 24 May 2017 08:45:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=d20/pDHk/+cNZ0eHlxz7MG56v9o72pqp3HKWjx/FUJk=;
-	b=thnaX2/iAc9EqjDgtEFMyZEdnOPxXbOg3lmltG7AO/zloGwLIz+w62ZDaKQOR0KhP6
-	RcChtEMFjv5pcTrxgvsHDJpVbvOuv5ajZiznFNzNqwlCWSIdx2B6RTbvtMcIfHJLuWil
-	Y8SrCOU1bvSHXW12xBdAM/fAQLhuxoo3q6/xynDgcshxqXncsqn/yLYWeZoqtcfPiuPL
-	I8TeHMKP7Cn/NVZitluGEGr1b+YHH7bkBd20xio4JcGDXdxev7zpjaLwBV3kuJ3JhaZK
-	h+aDUAWcKy5Spf1JXJyFVoPfI9RK+BWZNauA84dv29EpKlSpoIpfPfEBjiO9PqxO3n+3
-	IuKw==
+	:cc; bh=RT4i67bXOsNI2+Kh+FPLNWhk5f4au+X8yYhk51SotIA=;
+	b=loGxv5C8VJVKHsKVfr8YwnCuorN7+ucukMJgE+1hOHAup0I4K+O5zDp7heV98Z50lb
+	dydG4bFOUyMSkOl+KNMSy2b1Uct7HxhwjXhMc/aM4D1m2caEXU8GK3OGAQrgGhPXNYwU
+	syokaJ1OznPk8dKpa3dc84rw08Iwcb+4oPb7e5o19Zzzi04iUqYPtN1/hdm/6Havfxxn
+	qzCSuj9C2yn9xKIqMmsE2HwKlCEDlHZammbNA0UgGYkcyEu8/7GfG86YIVwkdKtcveqQ
+	T8AHHpVvh41YR88iLICveTknUNP2Kcvwp6ElWblHhLxdk205m/wIsJ3b8id++yz0khOE
+	li+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=d20/pDHk/+cNZ0eHlxz7MG56v9o72pqp3HKWjx/FUJk=;
-	b=UCNBkXFmdR1kIEp71Sit2tnWrqNd0ifNpLEwyz+f36p6ACB0n44XxJe2TphkqOG3Z0
-	yPZuCJKq2/hU+wTYGmDyt3SlhhJIo4FkBwiD6g/6UNpXmpFFKqJhDXoOQd/IgAyBuHAO
-	PqlPGKRwgHLkg7ByN7vwlW6HHLgjQr+Tw5UzosIeDYxlG0Dgt36aQ7GjU+UWMiaJOr3V
-	zX4tbLF09GXVa2AqhRwurIjOUfB7we01kl6ZpWAc/8QybimyRuII9bNpWBEfWt7mORS5
-	yE4gJ76M1Vu7QSz17uz3K6BNKSzImutGvvat5FAlN0H4xjzvZU+Mu1ZTQc5oqVxXUpZj
-	IR3w==
-X-Gm-Message-State: AODbwcAX01ecgUzs3+wDg5yO3p+rszWiRGkQoK1Q8KNV4BgZcMoGwHae
-	DiESFnnSezqVFT+hNrNsn53znpdmFQ==
-X-Received: by 10.80.151.5 with SMTP id c5mr25989427edb.30.1495640533428; Wed,
-	24 May 2017 08:42:13 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=RT4i67bXOsNI2+Kh+FPLNWhk5f4au+X8yYhk51SotIA=;
+	b=Y55YfrH0lsI6Zw8lXO7IXGq486+mDC7zFIdQj5vvieGfXeHhc8TagJJqMJ5wqKEMTP
+	2mshCiSTsElAOGtEN/gEfiF9ljapmXrgI/CEdFLga5pLARP16rfmlEgQOGf8TZRp822g
+	758+7f1U5c5joAzpzkj067Ddy13kbFi6Nj4iGdkWwEYWlAtxL1FYa2XwrMfaUbr//VNj
+	g4O5070ZtFgSKvwbtYCiQkfg+PkrZ+dkZf6HyG2YyGvmh+4MCsM2BnbLo7SmnVnN7BSZ
+	c/xTbIfYiVhizqG8UzsvIZQM1rdbsxRvX57+t/ktLaxNNmxen6aDElozHYTGVzOJ9//E
+	3xqg==
+X-Gm-Message-State: AODbwcBxBwgaAAptHate74uJZSp9sxl0VUCX+BkHEIzcrPitgx+ApJQg
+	x9pSOP+6Rv63CaNJ8adpG0GyEmwJCQ==
+X-Received: by 10.129.44.196 with SMTP id s187mr28053423yws.259.1495640710733; 
+	Wed, 24 May 2017 08:45:10 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.195.143 with HTTP; Wed, 24 May 2017 08:41:42 -0700 (PDT)
-In-Reply-To: <20170524153407.22969-1-dl9pf@gmx.de>
+Received: by 10.37.162.38 with HTTP; Wed, 24 May 2017 08:45:10 -0700 (PDT)
+In-Reply-To: <CAMKF1spe_4B86YGpY-SmNw6K-deJqnT5j1mDDSn7bqtiB1SpLg@mail.gmail.com>
 References: <20170524153407.22969-1-dl9pf@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 24 May 2017 08:41:42 -0700
-Message-ID: <CAMKF1spe_4B86YGpY-SmNw6K-deJqnT5j1mDDSn7bqtiB1SpLg@mail.gmail.com>
-To: =?UTF-8?Q?Jan=2DSimon_M=C3=B6ller?= <dl9pf@gmx.de>
+	<CAMKF1spe_4B86YGpY-SmNw6K-deJqnT5j1mDDSn7bqtiB1SpLg@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 24 May 2017 17:45:10 +0200
+Message-ID: <CA+chaQc+Lzfkx0=0r_2cwLcRT3CuFhAqgq46Kdn7wh0_moE6BA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] [meta-oe][master, morty] sg3-utils upstream SRC_URI unavailable
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -53,42 +55,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 15:42:13 -0000
+X-List-Received-Date: Wed, 24 May 2017 15:45:10 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 24, 2017 at 8:34 AM,  <dl9pf@gmx.de> wrote:
-> From: Jan-Simon M=C3=B6ller <dl9pf@gmx.de>
->
-> This patch temporarily fixes the unavailable upstream URL for sg3-utils
-> with an bbappend that redirects the SRC_URI to a mirror.
-> Checksums match.
->
-> Signed-off-by: Jan-Simon M=C3=B6ller <dl9pf@gmx.de>
-> ---
->  meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend | 2 ++
->  1 file changed, 2 insertions(+)
->  create mode 100644 meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbap=
-pend
->
-> diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend b/=
-meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend
-> new file mode 100644
-> index 000000000..aeef696cf
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend
-> @@ -0,0 +1,2 @@
-> +# Upstream URL currently unavailable. Use mirror:
-> +SRC_URI =3D "https://fossies.org/linux/misc/sg3_utils-${PV}.tgz"
+Why do you introduce the bbappend instead of fixing it in
+./meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bb ?
 
-Can we also host it on sources.openembedded.org please ?
+It should be on sources.openembedded.org (everything built in my bitbake
+world should be rsynced there, will check where it got broken this time).
 
-> --
-> 2.12.0
+On Wed, May 24, 2017 at 5:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Wed, May 24, 2017 at 8:34 AM,  <dl9pf@gmx.de> wrote:
+> > From: Jan-Simon M=C3=B6ller <dl9pf@gmx.de>
+> >
+> > This patch temporarily fixes the unavailable upstream URL for sg3-utils
+> > with an bbappend that redirects the SRC_URI to a mirror.
+> > Checksums match.
+> >
+> > Signed-off-by: Jan-Simon M=C3=B6ller <dl9pf@gmx.de>
+> > ---
+> >  meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend | 2 ++
+> >  1 file changed, 2 insertions(+)
+> >  create mode 100644 meta-oe/recipes-support/sg3-
+> utils/sg3-utils_1.42.bbappend
+> >
+> > diff --git a/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend
+> b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend
+> > new file mode 100644
+> > index 000000000..aeef696cf
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-support/sg3-utils/sg3-utils_1.42.bbappend
+> > @@ -0,0 +1,2 @@
+> > +# Upstream URL currently unavailable. Use mirror:
+> > +SRC_URI =3D "https://fossies.org/linux/misc/sg3_utils-${PV}.tgz"
 >
+> Can we also host it on sources.openembedded.org please ?
+>
+> > --
+> > 2.12.0
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
