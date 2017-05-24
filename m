@@ -1,46 +1,66 @@
-Return-Path: <maryan.pricak@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id F3A48780E4
+Return-Path: <gmane@reliableembeddedsystems.com>
+X-Greylist: delayed 5019 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 24 May 2017 21:02:07 UTC
+Received: from delivery.mailspamprotection.com
+	(delivery.mailspamprotection.com [198.143.161.19])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F078780F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 20:54:13 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id 99so11823129lfu.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 13:54:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Kn/sPdzx5uzBsGHmIxzUEDOpmeNEMO0v+3TGSBGuINA=;
-	b=Xjk1um9wLSQUnpRMkXcLpQtkc0Y8rq5n1eRPZ1hjSerYQM/TaFSoaThCp9z5ij9++M
-	QLbV3NQneChSK2mSZVNVM/LbJtKNxOXPrtIe+Zho20IjR8JWXfVbN9tTI4Cw7vfehdS8
-	eeYCPKBGAy8rU+ZK0hniBu2R0rQPkwFFdaIQ0QyfhsC3Fn4Pu2QEq+561LJpT11aGKZv
-	46TMe//e7sAAq2FJ5IR8aVUueG4nniy+j/TskTM8m5V2QRuPf0pW6DWFbzKS4YmNXA/B
-	erjl8Nc0s+Y5IFTuHJIskR9qnyEeodJHNk5I913gaVp1G8JUQ4OtlbYUlhSbY95zdFYq
-	/tVg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Kn/sPdzx5uzBsGHmIxzUEDOpmeNEMO0v+3TGSBGuINA=;
-	b=pqWDxHiAZxn6d1TYKzbKpZuL3b+15uMvFwMeEdaTqNa5KPh/guEZz+eJ+OMaCMht47
-	05zFM07VkEwedtFibnhfWk+0mpw0/QAsyR+8c4+bEtX/K+nFwC1Sm1dekBrragLBdnUr
-	wUV2raXK/lXENgZ7alpHY8rxwUEYSh7cao3VGT41ncz9155HGFBAJbJPzQG1JclzBPBb
-	3dNuojQSUBXbfzcIXDZy3Y8+BxaMKsl78l7gD+AiBBeDCvBHrLg6mUHLa0iA7OBS1dNC
-	gf6N8KlRWRZhb1Hbw8CDIP/dADxXoUcWMMluTMSfUuKCoov5cdSNZHz/75Wd6ezD/vXm
-	/zsw==
-X-Gm-Message-State: AODbwcCxzewCb4NMX1EK/OI9ETdCP2eBaW0VmD6QF7J60K9IR0IR7SPY
-	3XXG3tOzGClY5w==
-X-Received: by 10.25.202.93 with SMTP id h29mr10102289lfj.139.1495659254245;
-	Wed, 24 May 2017 13:54:14 -0700 (PDT)
-Received: from localhost.localdomain ([93.75.94.160])
-	by smtp.gmail.com with ESMTPSA id
-	x13sm1017245ljd.64.2017.05.24.13.54.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 24 May 2017 13:54:13 -0700 (PDT)
-From: Marian Pritsak <maryan.pricak@gmail.com>
+	Wed, 24 May 2017 21:02:07 +0000 (UTC)
+Received: from ns1.siteground282.com ([184.154.233.8] helo=siteground282.com)
+	by se2.mailspamprotection.com with esmtps
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.86)
+	(envelope-from <gmane@reliableembeddedsystems.com>)
+	id 1dDc71-0004Vq-5s for openembedded-devel@lists.openembedded.org;
+	Wed, 24 May 2017 14:38:28 -0500
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=reliableembeddedsystems.com; s=dkim;
+	h=Message-ID:Subject:Cc:To:From:Date:
+	Content-Transfer-Encoding:Content-Type:MIME-Version;
+	bh=+aVs8y8TXwbw1pujCv7fFSVhDvu6b9WXZla7459NIxk=;
+	b=Z3eROGJvJUscw17DyJxxmHgf9/
+	augUl18VO8tLiq7yV2egALddaba+2nOOEX+nKx9/irBEeFmQgDkwB2v+cNYvp9ba65IrAAv5BrsTk
+	5nC4dykKsxjEm6b9AX7TeQ6y5PWOANfEH/lwaW9fD023GueHD3WsYd18IQTVv+v5U7Kk=; 
+Received: from [127.0.0.1] (port=38372 helo=secure282.sgcpanel.com)
+	by siteground282.com with esmtpa (Exim 4.86_2)
+	(envelope-from <gmane@reliableembeddedsystems.com>)
+	id 1dDc71-0007pW-1K; Wed, 24 May 2017 14:38:27 -0500
+MIME-Version: 1.0
+Date: Wed, 24 May 2017 14:38:26 -0500
+From: gmane@reliableembeddedsystems.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 May 2017 23:54:10 +0300
-Message-Id: <1495659250-20595-1-git-send-email-maryan.pricak@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] libteam: Initial support
+Message-ID: <699dad9dcbac38153aa5fbdc1cff0176@reliableembeddedsystems.com>
+X-Sender: gmane@reliableembeddedsystems.com
+User-Agent: Roundcube Webmail/1.2.3
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - siteground282.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - reliableembeddedsystems.com
+X-Originating-IP: 184.154.233.8
+X-SpamExperts-Domain: siteground282.com
+X-SpamExperts-Username: 184.154.233.8
+Authentication-Results: mailspamprotection.com;
+	auth=pass smtp.auth=184.154.233.8@siteground282.com
+X-SpamExperts-Outgoing-Class: ham
+X-SpamExperts-Outgoing-Evidence: Combined (0.10)
+X-Recommended-Action: accept
+X-Filter-ID: s0sct1PQhAABKnZB5plbIWEcM0d9a2K3OcfFeaASvaIT05e+4t99MpEggFbXzbnhJWdbsu/PGngF
+	sP6QHv82uiZTaFCDa9A7C/jInU0NPk5o9qUFE8XEupMgL9lQhc5MhXE3Kd6zku9YzkFh73wKYPbj
+	aPZXen3YvWHScRpGw7A40pIiLcKdagK+IDwjGrwSdcZlLYnU0OVurAn1C092Z+fHzJ6mVE7ewsip
+	SVIfs4b8lqiX/iYk2i0LFY+7WTlyYb30GV/LTTOHpImWPCex54onRWlBmDnjzYnePIvOXJvlgTl6
+	fJxyntEfhZCKje4ZpF5GFn0VGJE1yVv3RLa3Fi7/+fOTvqVqTiiM4NskccT/51HuFxEGlQ85t+9R
+	s1HAWpqH02ENgZUUUrBwtgAspuoAEMCxBXuH+MlsW5Hvjb1aa40DxZPJuLUk3zkVKd8p5Y7I2CWT
+	8Blyjv8ff7POYMlPrwhaptjM6mDbrQoWHhR9Xvup00ykaCetGbgwh6w19yu3PsN6rObOy/Hw4klu
+	yN2tI4ORboLLJ1/iZb6eaQlxyGe8Oo3j1g27BsRrIsZRZ6VZsjZEXqWgl88PYDZKsoPAgTtUp75u
+	qlx0KezvZHWCmTc9uT9DMs6SMEjVZA0kg5n8VBio8m6UFbwbb/Mty7VMVgat3TQaaU1HqyTxak55
+	nzL4YRLClWuMPFGDl2tB9/wyR8kiMkUYmQJ8RxdH4tckr4+35XlktvqF0fzELcfjXtI7t2T/AtVl
+	zJte3A6IpxTlxEqgu5dCqW6kT6qTaBlY6LuKU4f4Yig/3kYZbLOQrqWhTVyw0Qc//Mvvck6HHEJb
+	wmE7KWCXRpeuK5vYscWCUrx9bsMxqV8qbl871PlU78MduaDOYP/ZNL0YgQxZW40Lnw+i0mPpggwU
+	UEl4Ndju3sWbN1p4gT8cuSYPG+mDFdkT0m/caJZKYJATsKOe
+X-Report-Abuse-To: spam@quarantine1.mailspamprotection.com
+Cc: robert.berger@reliableembeddedsystems.com
+Subject: Re: [meta-oe] [PATCH v4] add php 7.1.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,57 +73,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 20:54:14 -0000
+X-List-Received-Date: Wed, 24 May 2017 21:02:07 -0000
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
 
-libteam is a library for controlling team network device.
-Provides utils package for network device configuration.
+Hi,
 
-Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
----
- meta-oe/recipes-support/libteam/libteam_1.26.bb | 33 +++++++++++++++++++++++++
- 1 file changed, 33 insertions(+)
- create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
+On 2016-12-26 16:39, Huang Qiyu wrote:
+> 1)Add php_7.1.0.bb
+> 2)Delete php_5.5.38.bb,since it is Replaced by php_5.6.26.bb.
+> 3)Move pthread-check-threads-m4.patch out of 7.1.0, since it is 
+> integrated upstream.
+> 
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 
-diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
-new file mode 100644
-index 0000000..2cb9e8f
---- /dev/null
-+++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
-@@ -0,0 +1,33 @@
-+SUMMARY = "Library for controlling team network device"
-+HOMEPAGE = "http://www.libteam.org/"
-+SECTION = "libs/network"
-+
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
-+
-+DEPENDS = "libnl libdaemon jansson"
-+
-+SRC_URI = "git://github.com/jpirko/libteam"
-+SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
-+
-+SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
-+SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig
-+
-+FILES_${PN} = "${libdir}/libteam${SOLIBS} \
-+"
-+
-+PACKAGES += "${PN}-dctl ${PN}-utils"
-+FILES_${PN}-dctl = "${libdir}/libteamdctl${SOLIBS} \
-+"
-+FILES_${PN}-utils = "${bindir}/bond2team \
-+                     ${bindir}/teamd \
-+                     ${bindir}/teamdctl \
-+                     ${bindir}/teamnl \
-+"
-+
-+RDEPENDS_${PN}-utils = "bash"
-+
--- 
-2.7.4
+I took the latest and greatest php 7.1.0 from master 
+http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/recipes-devtools/php
 
+And added php (among other things) to a poky/pyro core-image-sato-sdk 
+and built an extensible SDK
+
+bitbake core-image-sato-sdk -c populate_sdk_ext
+
+When I try to install the SDK
+
+./poky-glibc-x86_64-core-image-sato-sdk-armv7a-neon-toolchain-ext-2.3.sh
+
+I get:
+
+Extracting 
+SDK................................................................................................................................done
+Setting it up...
+Extracting buildtools...
+Preparing build system...
+Parsing recipes: 100% 
+|#########################################################################################################################| 
+Time: 0:00:41
+Initialising tasks: 100% 
+|######################################################################################################################| 
+Time: 0:00:15
+Checking sstate mirror object availability: 100% 
+|##############################################################################################| 
+Time: 0:00:00
+WARNING: Logfile for failed setscene task is 
+/opt/ext-sdk/poky/2.3/tmp/work/x86_64-linux/php-native/7.1.0-r0/temp/log.do_populate_sysroot_setscene.24207
+WARNING: Setscene task 
+(virtual:native:/opt/ext-sdk/poky/2.3/layers/multi-v7-ml/recipes-devtools/php.ori/php_7.1.0.bb:do_populate_sysroot_setscene) 
+failed with exit code '1' - real task will be run instead
+ERROR: Task php-native.do_populate_sysroot_setscene failed
+ERROR: SDK preparation failed: error log written to 
+/opt/ext-sdk/poky/2.3/preparing_build_system.log
+
+I believe the problem is in:
+
+php_sstate_postinst
+
+In cooker mode I am able to see related warnings like this:
+
+bitbake php-native -c clean && bitbake php-native
+
+you might need to run it twize
+
+NOTE: Executing SetScene Tasks
+WARNING: Logfile for failed setscene task is 
+/tmp/yocto-autobuilder/yocto-autobuilder/yocto-worker/res-custom-pyro-multi-v7-core-image-minimal-sato-sdk-ext/build/build/tmp/work/x86_64-linux/php-native/7.1.0-r1/temp/log.do_populate_sysroot_setscene.6285
+WARNING: Setscene task 
+(virtual:native:/tmp/yocto-autobuilder/yocto-autobuilder/yocto-worker/res-custom-pyro-multi-v7-core-image-minimal-sato-sdk-ext/build/meta-mainline/multi-v7-ml/recipes-devtools/php/php_7.1.0.bb:do_populate_sysroot_setscene) 
+failed with exit code '1' - real task will be run instead
+NOTE: Executing RunQueue Tasks
+
+Note that with -c cleansstate or -c cleanall you won't see the warning
+
+I hacked this to make it compile without a warning - not sure it is 
+correct:
+
+php_sstate_postinst() {
+     if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
+     then
+        head -n1 ${SYSROOT_DESTDIR}${sysconfdir}/pear.conf > 
+${SYSROOT_DESTDIR}${sysconfdir}/pear.tmp.conf
+        for p in `tail -n1  ${SYSROOT_DESTDIR}${sysconfdir}/pear.conf | 
+sed -s 's/;/ /g'`; do
+             echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = 
+";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print 
+$0}}';
+         done >> ${SYSROOT_DESTDIR}${sysconfdir}/pear.tmp.conf
+         mv -f ${SYSROOT_DESTDIR}${sysconfdir}/pear.tmp.conf 
+${SYSROOT_DESTDIR}/${sysconfdir}/pear.conf
+     fi
+}
+
+Can you please have a look?
+
+Regards,
+
+Robert
 
