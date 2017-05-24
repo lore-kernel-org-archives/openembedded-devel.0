@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f181.google.com (mail-qk0-f181.google.com
-	[209.85.220.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A9EA780F4
+Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
+	[209.85.220.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C7C0780F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 21:19:53 +0000 (UTC)
-Received: by mail-qk0-f181.google.com with SMTP id u75so163965373qka.3
+	Wed, 24 May 2017 21:27:52 +0000 (UTC)
+Received: by mail-qk0-f178.google.com with SMTP id k74so164792762qke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 14:19:55 -0700 (PDT)
+	Wed, 24 May 2017 14:27:53 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=FM1C9Ii8tXRPdWqEnfvfwlMA3YgTTKbiy1EDfNIQK7c=;
-	b=COag9Cdw9rQIC/5ecTLkPPH6ztE94BWIT85JjlasI9u5QTs71tiaWBMZ0IS0Tj+0Ea
-	ddkPhwqcYXOps06f7nMyhEKbBaiEh1RM+nWBBv4aWHVE23B2gYnOZU3HIaJp92qUAJaw
-	NdQiYgz+pQU/SRzK05AGx2YqfDDUwklHT7Gw1NJ4nySlJRq6BF1cbZzL0N+H389ASOIP
-	veO+LxSqZ1HchXeOwBdEow7a0sis+w9Q/I08PL/gIvZJJsUI0bRtAF4DfJVM8MXfiA7G
-	OtfDb/XZ6FMK5KQPcl2Sp8rqvuxf+nzzLffBI1phlAl7IE5+XuLvMSD095I2qsCF+Hqn
-	zLxg==
-X-Gm-Message-State: AODbwcB4PzsQVGkpRZUmnU2m8YvmQb8+6Xf8fG04Y5C4Is5IqTJ3wfK0
-	j+xktjPYTcKhNTG7WKo=
-X-Received: by 10.55.15.143 with SMTP id 15mr33827138qkp.44.1495660794848;
-	Wed, 24 May 2017 14:19:54 -0700 (PDT)
+	bh=8Hsw3lbtWNnSIo5SBkam4Qe+ctYjK/NGe0uBLl9wGyQ=;
+	b=mBKbnr1pWnpY8SACWwGCojbV7CuyBXrJduzrEvXTbvrwD0i25I6/ILAOgGXdtqG/Sy
+	w29nFjf/dCUBiC/4/R+5xRjkO6bDCA/pM2zI888NJSbrLHdulWjN3bg8NOHHq/UWpId2
+	nzoX0Tl9RYjGTZescj8zv/MsVNrXB/1GVx1qYcB+TqCDnwuPozurlf3aArbB32P09C30
+	5XVEPMQN+1kolxJl3KL3TK7U7UPRFJMyAHG9L8nYzz+TnDK/bz8JtRppncBhAvxSE9J6
+	fVg1HLtfilJnbaBW940wK9OFjbaQWUyFVzgx1ljiMPjv7DdPtbwP/jhNT9gv4Poaq1Am
+	XOFQ==
+X-Gm-Message-State: AODbwcBqlliamlK6k/p4xBrwgMj3IGANmZs3iFREshVSSrOrghWWgLQD
+	eT/UkkW5W+x9ZQ==
+X-Received: by 10.55.121.196 with SMTP id u187mr34153893qkc.91.1495661273466; 
+	Wed, 24 May 2017 14:27:53 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
-	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
-	b136sm3292970qkc.41.2017.05.24.14.19.53
+	[67.85.98.4])
+	by smtp.gmail.com with ESMTPSA id t5sm3315505qkd.4.2017.05.24.14.27.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 24 May 2017 14:19:54 -0700 (PDT)
+	Wed, 24 May 2017 14:27:52 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 24 May 2017 17:19:46 -0400
-Message-Id: <1495660786-28190-1-git-send-email-derek@asterius.io>
+Date: Wed, 24 May 2017 17:27:43 -0400
+Message-Id: <1495661263-9873-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-progress: update to version 1.3 and add RDEPENDS
+Subject: [meta-python][PATCH] python-pysocks: update to version 1.6.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,44 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 21:19:55 -0000
+X-List-Received-Date: Wed, 24 May 2017 21:27:53 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-progress.inc          | 9 +++++++--
- .../python/{python-progress_1.2.bb => python-progress_1.3.bb}    | 0
- .../python/{python3-progress_1.2.bb => python3-progress_1.3.bb}  | 0
- 3 files changed, 7 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-progress_1.2.bb => python-progress_1.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-progress_1.2.bb => python3-progress_1.3.bb} (100%)
+ meta-python/recipes-devtools/python/python-pysocks.inc                | 4 ++--
+ .../python/{python-pysocks_1.6.6.bb => python-pysocks_1.6.7.bb}       | 0
+ .../python/{python3-pysocks_1.6.6.bb => python3-pysocks_1.6.7.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pysocks_1.6.6.bb => python-pysocks_1.6.7.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pysocks_1.6.6.bb => python3-pysocks_1.6.7.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-progress.inc b/meta-python/recipes-devtools/python/python-progress.inc
-index 80d0a58..297c0d3 100644
---- a/meta-python/recipes-devtools/python/python-progress.inc
-+++ b/meta-python/recipes-devtools/python/python-progress.inc
-@@ -3,7 +3,12 @@ HOMEPAGE = "http://github.com/verigak/progress/"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=aef5566ac4fede9815eccf124c281317"
+diff --git a/meta-python/recipes-devtools/python/python-pysocks.inc b/meta-python/recipes-devtools/python/python-pysocks.inc
+index 5aec6fc..cf9509a 100644
+--- a/meta-python/recipes-devtools/python/python-pysocks.inc
++++ b/meta-python/recipes-devtools/python/python-pysocks.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1d457bcffb9661b45f799d4efee72f16"
  
--SRC_URI[md5sum] = "c1dbf49a41e80408d3874d976ba894cc"
--SRC_URI[sha256sum] = "5b6a50f9ac76820f619d7789b5354881c8c10060a64047e415868d8f503cc2eb"
-+SRC_URI[md5sum] = "f65ccfcc2339d522b2dd5801aaa40dc7"
-+SRC_URI[sha256sum] = "c88d89ee3bd06716a0b8b5504d9c3bcb3c1c0ab98f96dc7f1dc5f56812a4f60a"
-+
-+RDEPENDS_${PN}_class-target += " \
-+    ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-math \
-+"
+-SRC_URI[md5sum] = "571f4c23982fa86bf0e7a441f1b6c881"
+-SRC_URI[sha256sum] = "02419a225ff5dcfc3c9695ef8fc9b4d8cc99658e650c6d4718d4c8f451e63f41"
++SRC_URI[md5sum] = "07007ec7ed46292dab06013f2e3af365"
++SRC_URI[sha256sum] = "d00329f27efa157db7efe3ca26fcd69033cd61f83822461ee3f8a353b48e33cf"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-progress_1.2.bb b/meta-python/recipes-devtools/python/python-progress_1.3.bb
+ PYPI_PACKAGE = "PySocks"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pysocks_1.6.6.bb b/meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-progress_1.2.bb
-rename to meta-python/recipes-devtools/python/python-progress_1.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-progress_1.2.bb b/meta-python/recipes-devtools/python/python3-progress_1.3.bb
+rename from meta-python/recipes-devtools/python/python-pysocks_1.6.6.bb
+rename to meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.6.6.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-progress_1.2.bb
-rename to meta-python/recipes-devtools/python/python3-progress_1.3.bb
+rename from meta-python/recipes-devtools/python/python3-pysocks_1.6.6.bb
+rename to meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb
 -- 
 2.7.4
 
