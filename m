@@ -1,32 +1,32 @@
 Return-Path: <huangqy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 528D477E71
+	by mail.openembedded.org (Postfix) with ESMTP id 410D077FE9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 01:03:15 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19229521"
+	Wed, 24 May 2017 01:03:17 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19229522"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
 	by heian.cn.fujitsu.com with ESMTP; 24 May 2017 09:03:16 +0800
 Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 87F2747C6D2A
+	by cn.fujitsu.com (Postfix) with ESMTP id 19C4147C6D2D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 09:03:14 +0800 (CST)
+	Wed, 24 May 2017 09:03:16 +0800 (CST)
 Received: from localhost.localdomain (10.167.226.81) by
 	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Wed, 24 May 2017 09:03:14 +0800
+	Server (TLS) id 14.3.319.2; Wed, 24 May 2017 09:03:16 +0800
 From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 24 May 2017 09:02:48 +0800
-Message-ID: <1495587769-60248-4-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Wed, 24 May 2017 09:02:49 +0800
+Message-ID: <1495587769-60248-5-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1495587769-60248-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 References: <1495587769-60248-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 87F2747C6D2A.A891D
+X-yoursite-MailScanner-ID: 19C4147C6D2D.A7737
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-qt5] [PATCH v2 3/4] qtxmlpatterns: Add ptest
+Subject: [meta-qt5] [PATCH v2 4/4] qtquick1: Add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,23 +39,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 01:03:16 -0000
+X-List-Received-Date: Wed, 24 May 2017 01:03:17 -0000
 Content-Type: text/plain
 
-Add ptest for qtxmlpatterns by using provided testsuite.
+Add ptest for qtquick1 by using provided testsuite.
 
 Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- recipes-qt/qt5/qtxmlpatterns/run-ptest | 6 ++++++
- recipes-qt/qt5/qtxmlpatterns_git.bb    | 1 +
+ recipes-qt/qt5/qtquick1/run-ptest | 6 ++++++
+ recipes-qt/qt5/qtquick1_git.bb    | 1 +
  2 files changed, 7 insertions(+)
- create mode 100644 recipes-qt/qt5/qtxmlpatterns/run-ptest
+ create mode 100644 recipes-qt/qt5/qtquick1/run-ptest
 
-diff --git a/recipes-qt/qt5/qtxmlpatterns/run-ptest b/recipes-qt/qt5/qtxmlpatterns/run-ptest
+diff --git a/recipes-qt/qt5/qtquick1/run-ptest b/recipes-qt/qt5/qtquick1/run-ptest
 new file mode 100644
 index 0000000..044f834
 --- /dev/null
-+++ b/recipes-qt/qt5/qtxmlpatterns/run-ptest
++++ b/recipes-qt/qt5/qtquick1/run-ptest
 @@ -0,0 +1,6 @@
 +#!/bin/sh
 +
@@ -63,10 +63,10 @@ index 0000000..044f834
 +    ./${x};
 +done
 +
-diff --git a/recipes-qt/qt5/qtxmlpatterns_git.bb b/recipes-qt/qt5/qtxmlpatterns_git.bb
-index c7efaf3..26d76f6 100644
---- a/recipes-qt/qt5/qtxmlpatterns_git.bb
-+++ b/recipes-qt/qt5/qtxmlpatterns_git.bb
+diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
+index e9b6185..d41b838 100644
+--- a/recipes-qt/qt5/qtquick1_git.bb
++++ b/recipes-qt/qt5/qtquick1_git.bb
 @@ -1,5 +1,6 @@
  require qt5.inc
  require qt5-git.inc
