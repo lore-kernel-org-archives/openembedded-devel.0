@@ -1,42 +1,46 @@
-Return-Path: <dl9pf@gmx.de>
-Received: from mout.gmx.net (mout.gmx.net [212.227.17.20])
-	by mail.openembedded.org (Postfix) with ESMTP id CFF59780C1
+Return-Path: <maryan.pricak@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id F3A48780E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 24 May 2017 18:25:57 +0000 (UTC)
-Received: from samweis.auenland.lan ([91.0.195.130]) by mail.gmx.com (mrgmx102
-	[212.227.17.168]) with ESMTPSA (Nemesis) id 0LaJWs-1dfYXD2ag2-00m37p;
-	Wed, 24 May 2017 20:25:57 +0200
-From: Jan-Simon =?ISO-8859-1?Q?M=F6ller?= <dl9pf@gmx.de>
-To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 24 May 2017 20:25:56 +0200
-Message-ID: <2523274.kYxtVammkO@samweis.auenland.lan>
-User-Agent: KMail/4.14.10
-	(Linux/4.9.0-rc1-jsm-cowfix-20161020-2241-00145-gf4814e6;
-	KDE/4.14.25; x86_64; ; )
-In-Reply-To: <CA+chaQfowifcBP9sdzCLh3pw7LUswyu9ZPKFJ7puz1JXjjg58g@mail.gmail.com>
-References: <20170524153407.22969-1-dl9pf@gmx.de>
-	<53440828.3Sg9Fezlrp@samweis.auenland.lan>
-	<CA+chaQfowifcBP9sdzCLh3pw7LUswyu9ZPKFJ7puz1JXjjg58g@mail.gmail.com>
-MIME-Version: 1.0
-X-Provags-ID: V03:K0:G2+DyXK5WRp+hofaiS66qfklKIS2dqKdfzI5tQlpUcrVypXCXqB
-	XxDft6hL0R5sktS8Rx+M+ooy5CJzaUV0M3l8OZ7BmE62D+qx+XiztKgLHz54yzlml/J78XL
-	N0X7CbYVlJ+TviHkUPuvVj6l0fKsrEQYRc8ZsNzpto5qxqcDUsMVQK1kva2UoQiDyWFqt76
-	V1wcxA8gCpc0LfI6qtEqA==
-X-UI-Out-Filterresults: notjunk:1;V01:K0:OQdMN3aQBQY=:/Gz7xBBwV9aLOrvtg4qAxQ
-	I5xUJZk/a3bsyFl2mPD/AD2BsXM3zLQB9+LdIIxb60AFxzM/3ewNcBiEP3qR9ufCcgFVGd7rr
-	4V0Y31azRRKtLySEB2NfTMsnQwUibQQsRRBcMonEvFk9O5lUXF/rtq1cOVhlJ49tBvZtN7aS8
-	jKDIw+6zx8++lcCfjoikNAPfFopAMzWTLsC81T9f9ooZhVyrhwtr92IwuNJjoX3uQ717dY5Fx
-	y1IoOA2gb2bPk+UELD74GOVYRIszz8gD5RrlgYaKHlMo1EeWEsL/70TGpEpsIWLMrtA4PaLLw
-	KMCPOawJv5k8l7CbTnLxJmXaboy++LMMWDGdNE+Em6szLBEWAjrHgnQMC3sxtDl4mbgQK+KPd
-	Y/3iH5x16hHRTd9LikuRA7G8kINbDxbDSH/b3BSX605EVqENc/wjyKfparM/ZWvPWhF3f2gem
-	4/ApSoYFUbNuQvVLVYDhF0LywMeGkX2YTgnu47gKK2fejwoODmO2u4LXb6Ee2Ovg80VSWWJl9
-	MXTVV2RV9XQqrglly738d3CnITI/Le8gwRf7TSfjVA5ELPto8uotHUXF+yih2eZil/VkYIG0I
-	ZlEM6kVlJb3evpXMql7dOyT1Gki3MgNhk4uEZos9Bk33eM6afzfIuBtd5wHkS7bNbLuYoIn3q
-	QNAXJY//WCEaq6LYCPX7P6o0Zu713Q6hDUoMgRf7zlVKRN4oq9Kcvphr97bpnAef/UgT6QiNV
-	3oeA4lquq0tZ6qNyUw4jJxsP2atVm4nV9zzKIO4T/cj6n1QrCRm6pAatjpCf5sqeCx5IfcArK
-	CzODO2E
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] [meta-oe][master, morty] sg3-utils upstream SRC_URI unavailable
+	Wed, 24 May 2017 20:54:13 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id 99so11823129lfu.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 24 May 2017 13:54:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Kn/sPdzx5uzBsGHmIxzUEDOpmeNEMO0v+3TGSBGuINA=;
+	b=Xjk1um9wLSQUnpRMkXcLpQtkc0Y8rq5n1eRPZ1hjSerYQM/TaFSoaThCp9z5ij9++M
+	QLbV3NQneChSK2mSZVNVM/LbJtKNxOXPrtIe+Zho20IjR8JWXfVbN9tTI4Cw7vfehdS8
+	eeYCPKBGAy8rU+ZK0hniBu2R0rQPkwFFdaIQ0QyfhsC3Fn4Pu2QEq+561LJpT11aGKZv
+	46TMe//e7sAAq2FJ5IR8aVUueG4nniy+j/TskTM8m5V2QRuPf0pW6DWFbzKS4YmNXA/B
+	erjl8Nc0s+Y5IFTuHJIskR9qnyEeodJHNk5I913gaVp1G8JUQ4OtlbYUlhSbY95zdFYq
+	/tVg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Kn/sPdzx5uzBsGHmIxzUEDOpmeNEMO0v+3TGSBGuINA=;
+	b=pqWDxHiAZxn6d1TYKzbKpZuL3b+15uMvFwMeEdaTqNa5KPh/guEZz+eJ+OMaCMht47
+	05zFM07VkEwedtFibnhfWk+0mpw0/QAsyR+8c4+bEtX/K+nFwC1Sm1dekBrragLBdnUr
+	wUV2raXK/lXENgZ7alpHY8rxwUEYSh7cao3VGT41ncz9155HGFBAJbJPzQG1JclzBPBb
+	3dNuojQSUBXbfzcIXDZy3Y8+BxaMKsl78l7gD+AiBBeDCvBHrLg6mUHLa0iA7OBS1dNC
+	gf6N8KlRWRZhb1Hbw8CDIP/dADxXoUcWMMluTMSfUuKCoov5cdSNZHz/75Wd6ezD/vXm
+	/zsw==
+X-Gm-Message-State: AODbwcCxzewCb4NMX1EK/OI9ETdCP2eBaW0VmD6QF7J60K9IR0IR7SPY
+	3XXG3tOzGClY5w==
+X-Received: by 10.25.202.93 with SMTP id h29mr10102289lfj.139.1495659254245;
+	Wed, 24 May 2017 13:54:14 -0700 (PDT)
+Received: from localhost.localdomain ([93.75.94.160])
+	by smtp.gmail.com with ESMTPSA id
+	x13sm1017245ljd.64.2017.05.24.13.54.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 24 May 2017 13:54:13 -0700 (PDT)
+From: Marian Pritsak <maryan.pricak@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 24 May 2017 23:54:10 +0300
+Message-Id: <1495659250-20595-1-git-send-email-maryan.pricak@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] libteam: Initial support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,17 +53,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 24 May 2017 18:26:01 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 24 May 2017 20:54:14 -0000
 
-On Wednesday 24 May 2017 20:07:55 Martin Jansa wrote:
-> http://sources.openembedded.org/sg3_utils-1.42.tgz -> 200 OK This is what
-> counts
+libteam is a library for controlling team network device.
+Provides utils package for network device configuration.
 
-+1
+Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
+---
+ meta-oe/recipes-support/libteam/libteam_1.26.bb | 33 +++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 meta-oe/recipes-support/libteam/libteam_1.26.bb
 
-Best,
-Jan-Simon
+diff --git a/meta-oe/recipes-support/libteam/libteam_1.26.bb b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+new file mode 100644
+index 0000000..2cb9e8f
+--- /dev/null
++++ b/meta-oe/recipes-support/libteam/libteam_1.26.bb
+@@ -0,0 +1,33 @@
++SUMMARY = "Library for controlling team network device"
++HOMEPAGE = "http://www.libteam.org/"
++SECTION = "libs/network"
++
++LICENSE = "LGPLv2.1"
++LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
++
++DEPENDS = "libnl libdaemon jansson"
++
++SRC_URI = "git://github.com/jpirko/libteam"
++SRCREV = "8c1cea00a21950089058e4e33ea1f7bf4deaddeb"
++
++SRC_URI[md5sum] = "565114d70c41bff6093d8e57be284e8a"
++SRC_URI[sha256sum] = "d65286379141db141bea33424ec0507bb0f827a0bf03d9c65004bb593e3d5545"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++FILES_${PN} = "${libdir}/libteam${SOLIBS} \
++"
++
++PACKAGES += "${PN}-dctl ${PN}-utils"
++FILES_${PN}-dctl = "${libdir}/libteamdctl${SOLIBS} \
++"
++FILES_${PN}-utils = "${bindir}/bond2team \
++                     ${bindir}/teamd \
++                     ${bindir}/teamdctl \
++                     ${bindir}/teamnl \
++"
++
++RDEPENDS_${PN}-utils = "bash"
++
+-- 
+2.7.4
 
 
