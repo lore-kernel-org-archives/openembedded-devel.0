@@ -1,25 +1,25 @@
 Return-Path: <Li.Zhou@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 10693780A1
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D0D4F78063
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 08:22:16 +0000 (UTC)
+	Thu, 25 May 2017 08:27:58 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4P8MDDG030335
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4P8RxMK022693
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 01:22:16 -0700
+	Thu, 25 May 2017 01:27:59 -0700 (PDT)
 Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Thu, 25 May 2017 01:22:11 -0700
+	Thu, 25 May 2017 01:27:58 -0700
 From: Li Zhou <li.zhou@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 May 2017 16:21:26 +0800
-Message-ID: <1495700486-136828-1-git-send-email-li.zhou@windriver.com>
+Date: Thu, 25 May 2017 16:27:13 +0800
+Message-ID: <1495700833-136502-1-git-send-email-li.zhou@windriver.com>
 X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
 X-Originating-IP: [128.224.153.75]
-Subject: [meta-oe][PATCH] traceroute: Move manual pages from mandir to man8 under it
+Subject: [meta-networking][PATCH] traceroute: Move manual pages from mandir to man8 under it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 May 2017 08:22:17 -0000
+X-List-Received-Date: Thu, 25 May 2017 08:27:59 -0000
 Content-Type: text/plain
 
 Traceroute's manual pages are installed in /usr/share/man,
