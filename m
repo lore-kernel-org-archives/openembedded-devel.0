@@ -1,46 +1,47 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-lf0-f52.google.com (mail-lf0-f52.google.com
-	[209.85.215.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 2A2DD77FD0
+Return-Path: <twoerner@gmail.com>
+Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com
+	[209.85.213.49])
+	by mail.openembedded.org (Postfix) with ESMTP id C026278211
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 20:44:33 +0000 (UTC)
-Received: by mail-lf0-f52.google.com with SMTP id m18so90148652lfj.0
+	Thu, 25 May 2017 23:46:44 +0000 (UTC)
+Received: by mail-vk0-f49.google.com with SMTP id y190so99818433vkc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 13:44:35 -0700 (PDT)
+	Thu, 25 May 2017 16:46:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=qfA7zoGtLOkCMpIoepMrdeOFkRxjWbpuki5SlSn/sc0=;
-	b=VJodHrcd+yNEapxOf7vKYoLPlZbYP9xkYWY+er/4XlcQdz5AAnrVSUS/X3k+HOejk0
-	dCUxBMscIPCdILEyGMheMfseA2lB1zEJQqctp9fEH1Sjla/oUlVDaw7VSYEBUZgCReEK
-	mTix+KmWr7CL+WLsRRNV+aI1+qrbhmCkIAj4HsjpeYFvTcsyToPNUmNUUBxf9ArALYkc
-	PG0nOzkGUgpM0TnceC1+bRd5LBEHDewyoDMJYTpP8nw/K02BlJRDtEmNpJn8utI+xPl0
-	7HP3P40hZYqTzYaGIqKlrPovgVdLOlem3i7x7ioyEellw+dXFNVLCr7yaV72Ai+/1L/P
-	WNyQ==
+	:cc; bh=mA/jB6UiKXSW+ZnFAtVseQ9MxlLp2dZfdp1lln+Z65E=;
+	b=vGL/kcvF0/M2SGisMeR/szgGIcNplP65ki53EaGKw8pIGDUsLPSs9qNecdWMLjxktO
+	smhdH+QhHqqUz/bNJjXBwnFmxsjtcu3LUg76798t6a/Y1kdm47ZCmVowaucdFhwgW4fx
+	eCrdkG3dlM37jHsHhW9sbVTTN7xec7s6N9Fdjmo65knykam2rbEPmwUMAZdpnceXt27l
+	JELK9FmLu3QfVn8un2/Q4NtJt1KpifV1+cK3vLj4kT4+kApj2LqCnvslisxTdEhorT28
+	+B4M/CwaqikU49wylODfH1pOzurbBSqN2kv+3K43jaEA2prltiOUPcIY37ThwSIdqxic
+	TduA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=qfA7zoGtLOkCMpIoepMrdeOFkRxjWbpuki5SlSn/sc0=;
-	b=XwMY1AHJT6pkvvBhQ7USTlm53yiiXIEoRG0lnPEntoP+vSgj0oKst06938gujDR/KR
-	oKzrx/30NL+z5GsnMiM4aQwz3Fiscl0EXeKo/GuJb5lyt79TUe3364/wBMhbwYP77aC/
-	3bcMJIP4LHlMGqX2yLrbbhgqqgC9LwIZ2BkIAnzK5nenPYZOC/KuzfTLzv1c+B4VDagm
-	BFkVKB8QwO1VRusyHsZBRGKPQ91RCIZnyvh3pyZbXKPEAn0PHWdHOMT45IFnDHZH4+xu
-	M+A5QKIQtr9HfwWwQtrL1az1zsXfx7vXq8OOjyKiDe5HNPtzASp3OMh0usLgPcOidGpp
-	yW2w==
-X-Gm-Message-State: AODbwcAhAWrbZigmSW+Bzg+qyhUwd5FVIYWQwRN74SE0/sNMweMfnsrP
-	qIgkJTvnqO/cNiWc7AfhrsKebtn9mA==
-X-Received: by 10.25.196.207 with SMTP id u198mr11732664lff.20.1495745074652; 
-	Thu, 25 May 2017 13:44:34 -0700 (PDT)
+	bh=mA/jB6UiKXSW+ZnFAtVseQ9MxlLp2dZfdp1lln+Z65E=;
+	b=rm3ye3zSem72TIPwVflfUdc+TBc9/KZ2+wIlnXnQF5DiRTjNAHYa6RvY2n4A1Q0TnZ
+	rYb3c3hs50Wmwb0y8yrHVM9FEVGebzTQQ6GfTb0eQAqnM0rKHQQLBgc2LGHWffFN2xxG
+	dqqwZV2ONFxBD/NsbBnHG5bEJOOhC5ycJuOddhPaNh4ICtVtU1Ijgq6qTOGz2dH6tYxZ
+	3Sqj1DqByCPJ9q/X7l4FO2u+o/WGGALMpCBJ8ULWW9lXiDwtDktEaYmdyH5N6oZwVPIm
+	nqQJ2dVHrv80LVPhySATUUh5x2nL/8qTedATms517CzgHp8l98rnR5waFxiz/7pX13qj
+	NWEw==
+X-Gm-Message-State: AODbwcBpqk8OXvqUoVyqzKvQzs5UDSqgXLpQSs+vVYUvr0dN+6Wi61hD
+	vS2V1fDf5Ol/Xq6jlu595/FvLLs7uA==
+X-Received: by 10.31.89.68 with SMTP id n65mr15764030vkb.71.1495756005592;
+	Thu, 25 May 2017 16:46:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.141.202 with HTTP; Thu, 25 May 2017 13:44:33 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.20.1705251637150.5533@localhost.localdomain>
+Received: by 10.103.67.199 with HTTP; Thu, 25 May 2017 16:46:45 -0700 (PDT)
+In-Reply-To: <CAAfyv34V=J2dHaF35QUFASGP=-QWS8V8zj_Oe4cv7CKWpx6SZw@mail.gmail.com>
 References: <alpine.LFD.2.20.1705250847490.19265@localhost.localdomain>
 	<CAAfyv3517VgOHsPWRRHs2vdTr3hBt-dp+u=UGmwHZ+jdNh3sMw@mail.gmail.com>
 	<alpine.LFD.2.20.1705251637150.5533@localhost.localdomain>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Thu, 25 May 2017 22:44:33 +0200
-Message-ID: <CAAfyv34V=J2dHaF35QUFASGP=-QWS8V8zj_Oe4cv7CKWpx6SZw@mail.gmail.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+	<CAAfyv34V=J2dHaF35QUFASGP=-QWS8V8zj_Oe4cv7CKWpx6SZw@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Thu, 25 May 2017 19:46:45 -0400
+Message-ID: <CAHUNapTdb6oKtL9fd6CVXzSR5egPHWax7r9ZLc3o1UbmGh-xWw@mail.gmail.com>
+To: Belisko Marek <marek.belisko@gmail.com>
 Cc: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: is there a reason meta-openembedded/meta contains a lonely libgpiod.bb recipe?
@@ -56,56 +57,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 May 2017 20:44:34 -0000
+X-List-Received-Date: Thu, 25 May 2017 23:46:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Robert,
+>>> On Thu, May 25, 2017 at 9:10 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+>>> >   is there some rationale for libgpiod.bb to be the lone recipe
+>>> > under meta-openembedded/meta? would that recipe not fit into some
+>>> > other layer?
 
-On Thu, May 25, 2017 at 10:38 PM, Robert P. J. Day
-<rpjday@crashcourse.ca> wrote:
-> On Thu, 25 May 2017, Belisko Marek wrote:
->
->> On Thu, May 25, 2017 at 9:10 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
->> >
->> >   is there some rationale for libgpiod.bb to be the lone recipe
->> > under meta-openembedded/meta? would that recipe not fit into some
->> > other layer?
->
->> I posted few days ago recipe for libgpiod. Please look at:
->> http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112810.html
->
->   but that doesn't really answer the question as to why that recipe
-> went into meta-openembedded/meta and not meta-openembedded/meta-oe.
-> even the subject refers to "meta-oe", so why was that recipe placed in
-> a directory named "meta"? was that perhaps a typo?
-Yes probably type. First version of patch was placed in meta-oe. My
-bad. I'll fix that but didn't get any feedback on patch yet. Thanks.
->
-> rday
->
-> --
->
-> ========================================================================
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                         http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> ========================================================================
+meta/meta/meta/meta/meta/meta/meta/meta...
 
-BR,
-
-marek
-
--- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
-
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
+someday that word is going to stop meaning anything ;-)
 
