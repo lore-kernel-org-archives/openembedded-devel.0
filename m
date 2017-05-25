@@ -1,25 +1,27 @@
 Return-Path: <Li.Zhou@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D0D4F78063
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 810CA78063
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 08:27:58 +0000 (UTC)
+	Thu, 25 May 2017 08:30:02 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4P8RxMK022693
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4P8Tr24030452
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 01:27:59 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Thu, 25 May 2017 01:27:58 -0700
-From: Li Zhou <li.zhou@windriver.com>
+	Thu, 25 May 2017 01:30:02 -0700
+Received: from [128.224.162.243] (128.224.162.243) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 25 May 2017 01:29:55 -0700
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 25 May 2017 16:27:13 +0800
-Message-ID: <1495700833-136502-1-git-send-email-li.zhou@windriver.com>
-X-Mailer: git-send-email 1.9.1
+References: <1495700486-136828-1-git-send-email-li.zhou@windriver.com>
+From: "Zhou, Li" <li.zhou@windriver.com>
+Message-ID: <2266f9ac-4976-2dcb-4918-10a5205863e0@windriver.com>
+Date: Thu, 25 May 2017 16:29:47 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.2.0
 MIME-Version: 1.0
-X-Originating-IP: [128.224.153.75]
-Subject: [meta-networking][PATCH] traceroute: Move manual pages from mandir to man8 under it
+In-Reply-To: <1495700486-136828-1-git-send-email-li.zhou@windriver.com>
+Subject: Re: [meta-oe][PATCH] traceroute: Move manual pages from mandir to man8 under it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,38 +34,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 May 2017 08:27:59 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 25 May 2017 08:30:02 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Traceroute's manual pages are installed in /usr/share/man,
-which should be placed in /usr/share/man/man8.
-Correct this.
+Recall this mail because of the wrong mail subject. Sorry.
 
-Signed-off-by: Li Zhou <li.zhou@windriver.com>
----
- meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
-index 48a0c12..8f17d3f 100644
---- a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
-+++ b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
-@@ -33,10 +33,10 @@ do_install() {
- 
-     install -m755 wrappers/tcptraceroute ${D}${bindir}
- 
--    install -d ${D}${mandir}
--    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
--    ln -s ${BPN}.8 ${D}${mandir}/${BPN}6.8
--    ln -s ${BPN}.8 ${D}${mandir}/tcptraceroute.8
-+    install -d ${D}${mandir}/man8
-+    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}/man8
-+    ln -s ${BPN}.8 ${D}${mandir}/man8/${BPN}6.8
-+    ln -s ${BPN}.8 ${D}${mandir}/man8/tcptraceroute.8
- 
- }
- 
+On 05/25/2017 04:21 PM, Li Zhou wrote:
+> Traceroute's manual pages are installed in /usr/share/man,
+> which should be placed in /usr/share/man/man8.
+> Correct this.
+>
+> Signed-off-by: Li Zhou <li.zhou@windriver.com>
+> ---
+>   meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb | 8 ++++----
+>   1 file changed, 4 insertions(+), 4 deletions(-)
+>
+> diff --git a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+> index 48a0c12..8f17d3f 100644
+> --- a/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+> +++ b/meta-networking/recipes-support/traceroute/traceroute_2.1.0.bb
+> @@ -33,10 +33,10 @@ do_install() {
+>   
+>       install -m755 wrappers/tcptraceroute ${D}${bindir}
+>   
+> -    install -d ${D}${mandir}
+> -    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}
+> -    ln -s ${BPN}.8 ${D}${mandir}/${BPN}6.8
+> -    ln -s ${BPN}.8 ${D}${mandir}/tcptraceroute.8
+> +    install -d ${D}${mandir}/man8
+> +    install -p -m644 ${BPN}/${BPN}.8 ${D}${mandir}/man8
+> +    ln -s ${BPN}.8 ${D}${mandir}/man8/${BPN}6.8
+> +    ln -s ${BPN}.8 ${D}${mandir}/man8/tcptraceroute.8
+>   
+>   }
+>   
+
 -- 
-1.9.1
+Best Regards!
+Zhou Li
+Phone number: 86-10-84778511
 
 
