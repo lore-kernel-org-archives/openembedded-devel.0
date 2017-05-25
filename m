@@ -1,44 +1,37 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
-	[209.85.215.41])
-	by mail.openembedded.org (Postfix) with ESMTP id C4ECC6006E
+Return-Path: <rpjday@crashcourse.ca>
+Received: from cpanel2.indieserve.net (cpanel2.indieserve.net [199.212.143.6])
+	by mail.openembedded.org (Postfix) with ESMTP id C82EE77FD0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 20:21:32 +0000 (UTC)
-Received: by mail-lf0-f41.google.com with SMTP id h4so89886278lfj.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 13:21:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=FMzC/G/bo4qCmY0+cCcVWB/HucEQmjPp8AZEuVontHo=;
-	b=IPOhaTLrCq6vFKtCNdTW0q7b47xNAF4IE6FOv7U5zptdE2WaqJTTczeGUCjlKNKxNt
-	aklAKAd4MyAa48hOjOtwFu6/OXteQBq1ybisaD/BXg0lIommX9CZZs0ISN3Qj2rfEbmn
-	jYzZfDd1VU5jO/xyW0dA2CjXOjCRhhWWh/MB7AFMSjQsnUNxpSUI9lRWMwILuzntSo0/
-	MpoAF+i8QpZnVsX+U260Vcl012aNZ1NMNMa48VqjHdPvucONizCJn/8d9SyOSwcAh4xR
-	4BRfj76KlCJLOp+1NKjE4LToH+wCqKhZaj+CfeI7n3P24wXKEGmHFb4LAVpTNaYRnzFf
-	cYEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=FMzC/G/bo4qCmY0+cCcVWB/HucEQmjPp8AZEuVontHo=;
-	b=draViR1B7Hq2wd9/5cPDEGN4dunLKzWtjqGn6rCCFcTW6TqNdt3dRJMD8WIcS2NxcI
-	IkZQOqwu2cMNtNhEclm5iv2Ee1LNAKgxDdXok5a8+lrrACbldtjKyWNutWPHk7nTMK0+
-	n0ZZzVecf88N1y3pxzh/S9jMEgsaKsMoABJl74IJ3VU6kVRLEhUwkKHVFh19coZP844p
-	wXNWRpkAhNg9wx+rRKtVZoQqGnNrYq5EnN52YQnSHYtwoXrT24nqezznpLXZLPEhAyHl
-	VxdiCjOGtRpk2pNA/AIwJzYJNqgYU28s69C1NTHERpsfqxNDt2bXntGTRh63E4kbMm4D
-	UsKA==
-X-Gm-Message-State: AODbwcAiAZxbdtHQGs8AZuJTw9j/+ElLYraKqyKq5qOWC4ZzbENXIxFC
-	SPw9icPbIZ9uawf6cqMAXBzz/QQk3BXi
-X-Received: by 10.46.84.92 with SMTP id y28mr12510949ljd.63.1495743693087;
-	Thu, 25 May 2017 13:21:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.141.202 with HTTP; Thu, 25 May 2017 13:21:32 -0700 (PDT)
-In-Reply-To: <alpine.LFD.2.20.1705250847490.19265@localhost.localdomain>
+	Thu, 25 May 2017 20:38:46 +0000 (UTC)
+Received: from cpec03f0ed08c7f-cm68b6fcf980b0.cpe.net.cable.rogers.com
+	([174.118.92.171]:43270 helo=localhost.localdomain)
+	by cpanel2.indieserve.net with esmtpsa
+	(TLSv1.2:ECDHE-RSA-AES256-GCM-SHA384:256) (Exim 4.89)
+	(envelope-from <rpjday@crashcourse.ca>)
+	id 1dDzWx-0003Il-Vz; Thu, 25 May 2017 16:38:48 -0400
+Date: Thu, 25 May 2017 16:38:46 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@localhost.localdomain
+To: Belisko Marek <marek.belisko@gmail.com>
+In-Reply-To: <CAAfyv3517VgOHsPWRRHs2vdTr3hBt-dp+u=UGmwHZ+jdNh3sMw@mail.gmail.com>
+Message-ID: <alpine.LFD.2.20.1705251637150.5533@localhost.localdomain>
 References: <alpine.LFD.2.20.1705250847490.19265@localhost.localdomain>
-From: Belisko Marek <marek.belisko@gmail.com>
-Date: Thu, 25 May 2017 22:21:32 +0200
-Message-ID: <CAAfyv3517VgOHsPWRRHs2vdTr3hBt-dp+u=UGmwHZ+jdNh3sMw@mail.gmail.com>
-To: "Robert P. J. Day" <rpjday@crashcourse.ca>
+	<CAAfyv3517VgOHsPWRRHs2vdTr3hBt-dp+u=UGmwHZ+jdNh3sMw@mail.gmail.com>
+User-Agent: Alpine 2.20 (LFD 67 2015-01-07)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - cpanel2.indieserve.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Get-Message-Sender-Via: cpanel2.indieserve.net: authenticated_id:
+	rpjday+crashcourse.ca/only user confirmed/virtual account not
+	confirmed
+X-Authenticated-Sender: cpanel2.indieserve.net: rpjday@crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
 Cc: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: is there a reason meta-openembedded/meta contains a lonely libgpiod.bb recipe?
@@ -54,47 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 25 May 2017 20:21:33 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 25 May 2017 20:38:48 -0000
+Content-Type: text/plain; charset=US-ASCII
 
-On Thu, May 25, 2017 at 9:10 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
->
->   is there some rationale for libgpiod.bb to be the lone recipe under
-> meta-openembedded/meta? would that recipe not fit into some other
-> layer?
-I posted few days ago recipe for libgpiod. Please look at:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112810.html
->
-> rday
->
-> --
->
-> ========================================================================
-> Robert P. J. Day                                 Ottawa, Ontario, CANADA
->                         http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> ========================================================================
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On Thu, 25 May 2017, Belisko Marek wrote:
 
-BR,
+> On Thu, May 25, 2017 at 9:10 PM, Robert P. J. Day <rpjday@crashcourse.ca> wrote:
+> >
+> >   is there some rationale for libgpiod.bb to be the lone recipe
+> > under meta-openembedded/meta? would that recipe not fit into some
+> > other layer?
 
-marek
+> I posted few days ago recipe for libgpiod. Please look at:
+> http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112810.html
+
+  but that doesn't really answer the question as to why that recipe
+went into meta-openembedded/meta and not meta-openembedded/meta-oe.
+even the subject refers to "meta-oe", so why was that recipe placed in
+a directory named "meta"? was that perhaps a typo?
+
+rday
 
 -- 
-as simple and primitive as possible
--------------------------------------------------
-Marek Belisko - OPEN-NANDRA
-Freelance Developer
 
-Ruska Nova Ves 219 | Presov, 08005 Slovak Republic
-Tel: +421 915 052 184
-skype: marekwhite
-twitter: #opennandra
-web: http://open-nandra.com
+========================================================================
+Robert P. J. Day                                 Ottawa, Ontario, CANADA
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
