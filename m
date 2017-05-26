@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 775257822F
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E33AD7826B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 07:37:37 +0000 (UTC)
+	Fri, 26 May 2017 07:37:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4Q7bblH030644
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Fri, 26 May 2017 00:37:37 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v4Q7bdY0022210
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 26 May 2017 00:37:39 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 26 May 2017 00:37:37 -0700
+	Fri, 26 May 2017 00:37:39 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 May 2017 03:37:30 -0400
-Message-ID: <984d28cf4309eba71fe7950d3b709f8d9e579b93.1495783956.git.hongxu.jia@windriver.com>
+Date: Fri, 26 May 2017 03:37:31 -0400
+Message-ID: <fe84640a1a0b883c0c07c25b9b75f0fab3d9a9c9.1495783956.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1495783956.git.hongxu.jia@windriver.com>
 References: <cover.1495783956.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 2/4] python3-pyparted: add a python3 recipe
+Subject: [meta-python][PATCH 3/4] python3-pyudev: add a python3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,154 +32,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 May 2017 07:37:38 -0000
+X-List-Received-Date: Fri, 26 May 2017 07:37:39 -0000
 Content-Type: text/plain
 
-- Split to a common python-pyparted.inc for python2 and python3
+- Split to a common python-pyudev.inc for python2 and python3
 
-- Tweak 0001-fix-version-float-check.patch for python3 to fix
-  do_compile errror
-----
-| ERROR: python3 setup.py build_ext execution failed.
-| Traceback (most recent call last):
-|   File "setup.py", line 62, in <module>
-|     check_mod_version('libparted', need_libparted_version)
-|   File "setup.py", line 55, in check_mod_version
-|     match = re.search('([0-9]+\.[0-9]+)', modversion)
-|   File "work/core2-64-wrs-linux/python3-pyparted/3.10.7+gitAU
-TOINC+69c4a478e4-r0/recipe-sysroot-native/usr/lib/python3.5/re.py",
-line 173, in search
-|     return _compile(pattern, flags).search(string)
-| TypeError: cannot use a string pattern on a bytes-like object
-----
-
-The reason is the return of subprocess.check_output is byte in python3,
-but string in python2
+- The contextlib module is moved to python3-lang.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../python-pyparted/python-pyparted.inc            | 21 +++++++++++++++++
- .../python-pyparted/python-pyparted_3.10.7.bb      | 23 ++++---------------
- .../0001-fix-version-float-check.patch             | 26 ++++++++++++++++++++++
- .../python-pyparted/python3-pyparted_3.10.7.bb     | 12 ++++++++++
- 4 files changed, 63 insertions(+), 19 deletions(-)
- create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted.inc
- create mode 100644 meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
- create mode 100644 meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb
+ .../recipes-devtools/python/python-pyudev.inc      | 19 +++++++++++++++++++
+ .../python/python-pyudev_0.21.0.bb                 | 22 ++++------------------
+ .../python/python3-pyudev_0.21.0.bb                |  8 ++++++++
+ 3 files changed, 31 insertions(+), 18 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyudev.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
 
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
+diff --git a/meta-python/recipes-devtools/python/python-pyudev.inc b/meta-python/recipes-devtools/python/python-pyudev.inc
 new file mode 100644
-index 0000000..65f8ca1
+index 0000000..ab4c5fd
 --- /dev/null
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
-+an interface to libparted, the GNU parted library for disk partitioning and \
-+filesystem manipulation."
-+SUMMARY = "Python bindings for libparted"
-+HOMEPAGE = "https://github.com/rhinstaller/pyparted"
-+LICENSE = "GPL-2.0+"
-+LIC_FILES_CHKSUM = "\
-+    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
-+    file://src/_pedmodule.c;startline=10;endline=22;md5=ebcb25dde1ac9c46e986dec79b404e7e \
++++ b/meta-python/recipes-devtools/python/python-pyudev.inc
+@@ -0,0 +1,19 @@
++SUMMARY = "A libudev binding"
++LICENSE = "LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++
++SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
++SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
++
++do_configure_prepend() {
++    sed -i "/import pyudev/d" ${S}/setup.py
++    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
++}
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-ctypes \
++    ${PYTHON_PN}-misc \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-subprocess \
++    ${PYTHON_PN}-threading \
 +"
-+DEPENDS += "parted"
+diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
+index b0a1acb..32573b7 100644
+--- a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
+@@ -1,22 +1,8 @@
+-SUMMARY = "A libudev binding"
+-LICENSE = "LGPLv2.1+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+-
+-SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
+-SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
+-
+-inherit pypi setuptools
+-
+-do_configure_prepend() {
+-    sed -i "/import pyudev/d" ${S}/setup.py
+-    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
+-}
++require python-pyudev.inc
+ 
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-contextlib \
+-    ${PYTHON_PN}-ctypes \
+-    ${PYTHON_PN}-misc \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-subprocess \
+-    ${PYTHON_PN}-threading \
+ "
 +
-+# upstream only publishes releases in github archives which are discouraged
-+SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
-+SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
-+           file://0001-fix-version-float-check.patch \
++inherit pypi setuptools
++
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+new file mode 100644
+index 0000000..0292555
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+@@ -0,0 +1,8 @@
++require python-pyudev.inc
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-lang \
 +"
-+S = "${WORKDIR}/git"
 +
-+RDEPENDS_${PN} += "parted (>= 2.3)"
-+RDEPENDS_${PN}_class-native = ""
-diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-index 8335d08..8a15a89 100644
---- a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-+++ b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
-@@ -1,27 +1,12 @@
--DESCRIPTION = "pyparted is a set of Python modules that provide Python programmers \
--an interface to libparted, the GNU parted library for disk partitioning and \
--filesystem manipulation."
--SUMMARY = "Python bindings for libparted"
--HOMEPAGE = "https://github.com/rhinstaller/pyparted"
--LICENSE = "GPL-2.0+"
--LIC_FILES_CHKSUM = "\
--    file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
--    file://src/_pedmodule.c;startline=10;endline=22;md5=ebcb25dde1ac9c46e986dec79b404e7e \
--"
--DEPENDS += "parted python-re"
-+require python-pyparted.inc
- 
--PV = "3.10.7+git${SRCPV}"
-+DEPENDS += "python-re"
- 
--# upstream only publishes releases in github archives which are discouraged
--SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
--SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
--           file://0001-fix-version-float-check.patch \
--"
--S = "${WORKDIR}/git"
-+PV = "3.10.7+git${SRCPV}"
- 
- inherit distutils
- 
--RDEPENDS_${PN} += "python-stringold python-codecs python-math parted (>= 2.3)"
-+RDEPENDS_${PN} += "python-stringold python-codecs python-math"
- RDEPENDS_${PN}_class-native = ""
- 
- BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch b/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
-new file mode 100644
-index 0000000..14fb0bb
---- /dev/null
-+++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
-@@ -0,0 +1,26 @@
-+check_mod_version breaks if module version is of x.y.z form
-+use a regex to help cast x.y.z version to a float
++inherit pypi setuptools3
 +
-+Upstream-Status: Pending
-+
-+Index: git/setup.py
-+===================================================================
-+--- git.orig/setup.py
-++++ git/setup.py
-+@@ -25,6 +25,7 @@ import glob
-+ import os
-+ import platform
-+ import sys
-++import re
-+ from distutils.ccompiler import new_compiler
-+ from distutils.errors import CompileError
-+ from distutils.errors import LinkError
-+@@ -51,6 +52,8 @@ def pkgconfig(*packages, **kwargs):
-+ 
-+ def check_mod_version(module, version):
-+     modversion = subprocess.check_output(["pkg-config", "--modversion", module])
-++    match = re.search(b'([0-9]+\.[0-9]+)', modversion)
-++    modversion = match.group(0)
-+     if not float(modversion) >= float(version):
-+         sys.stderr.write("*** Minimum required %s version: %s, found: %s\n" % (module, version, modversion,))
-+         sys.exit(1)
-diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb
-new file mode 100644
-index 0000000..ff72c2a
---- /dev/null
-+++ b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb
-@@ -0,0 +1,12 @@
-+require python-pyparted.inc
-+
-+DEPENDS += "python3-re"
-+
-+PV = "3.10.7+git${SRCPV}"
-+
-+inherit distutils3
-+
-+RDEPENDS_${PN} += "python3-stringold python3-codecs python3-math"
-+RDEPENDS_${PN}_class-native = ""
-+
-+BBCLASSEXTEND = "native"
 -- 
 2.8.1
 
