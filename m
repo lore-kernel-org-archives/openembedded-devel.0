@@ -1,63 +1,27 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 340D878229
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 06D517822D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 00:28:45 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id k15so344006wmh.3
+	Fri, 26 May 2017 01:27:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4Q1Rx4A022152
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 17:28:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=GWH+dUmsQGWWn7htBh407AiU0Mmb5nqg5Bltj9hbV0Y=;
-	b=Z+VtMueSmqHhtQtqrIFauL8+2uVqCeMqnslPdgtHxwqQF0DKQUmILcKYRh8zVxcerB
-	UJ3gLixY5Q5RaIPOTUHvg7VOhSKgr05QoDntN8NqAeJiwltBGiiTSNVi8qA0YHzkhH8/
-	7LaJa0sJWG7PgjWDAQkV0ZJlep8zV2VJp/9gJsVHHv8KBLL99k2/L+egUErJx1pSoiwB
-	GEfGi6wFV2qpFW3b/FaDXbjv0QHtfKHy4jzi1DXP2im8wf7TZUW1ncMiAwdQZALJIMMC
-	wiySmaJrt5SSRRXYJRX0FPVPmUQ9PkSWqMuCwHIvWBlheGZ4ROFxMp4p9edB3WjY/8Ws
-	Uaog==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=GWH+dUmsQGWWn7htBh407AiU0Mmb5nqg5Bltj9hbV0Y=;
-	b=S+1E80OslArJjjxCMAPLjJburAapsH5Z6T+Ui7AioIGJ66G4EBZI8xi98PVtETdbnL
-	Ce9wn2VcGVifhuRH57+kqpRSY9oTB+uTfO5xlGqu3j2tqMZZg9abQf45hzpONrwdDlt1
-	SbkmG4Oo5FBr9WlsxS1j3eoWGdBhg1fXBgXvk0EbN19T43ppiGbh63rk3DovfNBPZqVV
-	G9aT6nHacrW626V2UGcyj3AUbGmCMhfdouHmAPgt1GdlehIgnwRBg/z0ywZIRrNjRwmZ
-	chlkA3XwQX6uODYSJYidarH+p0RmyXj9aMBAdsDASe0+Ro40nllcFpe1RAJXvxeRvubr
-	Q2tA==
-X-Gm-Message-State: AODbwcCCSmF3fiPKBvBcpg1PmHmkkxOLNyjhyEqcepq+forinlpGkISl
-	fgzaa91FJySVjmB4i/k=
-X-Received: by 10.28.154.133 with SMTP id c127mr150700wme.42.1495758526875;
-	Thu, 25 May 2017 17:28:46 -0700 (PDT)
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com.
-	[74.125.82.46]) by smtp.gmail.com with ESMTPSA id
-	b93sm12195405wrd.29.2017.05.25.17.28.45
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 25 May 2017 17:28:45 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-wm0-f46.google.com with SMTP id e127so2064794wmg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 17:28:45 -0700 (PDT)
-X-Received: by 10.223.163.137 with SMTP id l9mr24491706wrb.128.1495758525523; 
-	Thu, 25 May 2017 17:28:45 -0700 (PDT)
+	Thu, 25 May 2017 18:28:00 -0700
+Received: from [128.224.162.212] (128.224.162.212) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 25 May 2017 18:27:59 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <20170524093853.12828-1-kai.kang@windriver.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <e5b4bad4-56a8-114b-cd8c-0c28da332b94@windriver.com>
+Date: Fri, 26 May 2017 09:26:26 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
 MIME-Version: 1.0
-Received: by 10.28.236.75 with HTTP; Thu, 25 May 2017 17:28:43 -0700 (PDT)
-Received: by 10.28.236.75 with HTTP; Thu, 25 May 2017 17:28:43 -0700 (PDT)
-In-Reply-To: <a91bb6aa-e8ae-0164-725d-b1a4d1a14224@zonque.org>
-References: <a884c6ab-8723-d322-30ec-52a67573ac28@zonque.org>
-	<CAP9ODKpZ+45VOfj-OwhHsCxi+ku5ZfQrGJSsAtgMP41UZi_waQ@mail.gmail.com>
-	<a91bb6aa-e8ae-0164-725d-b1a4d1a14224@zonque.org>
-Date: Thu, 25 May 2017 21:28:43 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKpq9x0dzikkp5K9dmL7nj-uTfpNhuGgMpySOGpn+2UjtA@mail.gmail.com>
-Message-ID: <CAP9ODKpq9x0dzikkp5K9dmL7nj-uTfpNhuGgMpySOGpn+2UjtA@mail.gmail.com>
-To: Daniel Mack <daniel@zonque.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Support for v4l cameras in QtWebEngine
+In-Reply-To: <20170524093853.12828-1-kai.kang@windriver.com>
+Subject: Re: [meta-networking][PATCH] Fix snort start error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,28 +34,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 May 2017 00:28:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 26 May 2017 01:28:01 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Em 23 de mai de 2017 1:51 AM, "Daniel Mack" <daniel@zonque.org> escreveu:
-
-On 05/23/2017 03:30 AM, Otavio Salvador wrote:
-> On Mon, May 22, 2017 at 2:00 PM, Daniel Mack <daniel@zonque.org> wrote:
->> Is anyone aware of any specific requirements or PACKAGECONFIG settings
->> needed to add V4L support to web applications running inside a
->> QtWebEngine widget?
+On 2017年05月24日 17:38, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
 >
-> The webrtc support is disabled for embedded-linux profile. I did not
-> look further on it yet.
+> Please merge the patch after commit for oe-core "libpcap: add native package" is merged. Thanks.
 
-I see, thanks for the pointer! What would be the best way to enable it?
-Could we override GYP_CONFIG setting through new PACKAGECONFIG
-directives in qtwebengine_git.bb? I'd also like to enable plugins, for
-instance.
-
-Then again, where is this embedded_linux.pri profile actually selected
-in the Yocto builds?
+The patch for oe-core has been merged. Please help to review this 
+commit, thanks.
 
 
-We didn't finish the changes, but we were patching the source to enable it.
+Regards,
+Kai
+
+>
+> Kai Kang (1):
+>    snort: enable static daq
+>
+>   .../recipes-connectivity/daq/daq_2.0.6.bb           |  4 ++++
+>   .../recipes-connectivity/libdnet/libdnet_1.12.bb    |  1 +
+>   ...-host-contamination-when-enable-static-daq.patch | 21 +++++++++++++++++++++
+>   .../recipes-connectivity/snort/snort_2.9.7.5.bb     |  5 +++--
+>   4 files changed, 29 insertions(+), 2 deletions(-)
+>   create mode 100644 meta-networking/recipes-connectivity/snort/snort/fix-host-contamination-when-enable-static-daq.patch
+>
+
+-- 
+Regards,
+Neil | Kai Kang
+
 
