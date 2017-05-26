@@ -1,47 +1,47 @@
-Return-Path: <marek.belisko@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id EB79E78247
+Return-Path: <gizero@gmail.com>
+Received: from mail-oi0-f68.google.com (mail-oi0-f68.google.com
+	[209.85.218.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C17D7825A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 06:21:33 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id k15so1591371wmh.3
+	Fri, 26 May 2017 06:29:41 +0000 (UTC)
+Received: by mail-oi0-f68.google.com with SMTP id w10so348183oif.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 25 May 2017 23:21:35 -0700 (PDT)
+	Thu, 25 May 2017 23:29:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=sender:from:to:cc:subject:date:message-id;
-	bh=EStDaW6pdlNCmn7YtYvngkUjOrffzo5cHIdgyuiV1N4=;
-	b=bKmCLdsPqH3b5xxXJQVFWK7HmmwJpE1uv8YN3/LylZkPkmCpRQBMrx8R4lwhEf16iB
-	y2tB41CG3EtZxP79D6HyIb2lWR8xC3EV6727eo1Ty7wmmxPm1Nh40orFshVyx4+BqkXb
-	sHB/vVE3yYRElU4GxbEpM462yiMemM5vJW95CnYxTcPZWPUObWcRx4Hk+f5OBBmP3lfM
-	On67q/GlQRPVrxE4vEbQ7bk0oCGxjOs6dx7ZKU0GatghRnuVzJt5dVfs/0h5XjOGGvz+
-	ZUcVk7JGUXJbkN8OJeTHduGO3fsztfkNq/XfOlsNI33rlKL7jKD8OShKnb4EhHG1dlLC
-	bRKg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=BWkIMg7p5qR7qImOmoN08YLqcO64feYcbElCLWWrpGQ=;
+	b=t0F/AkznSx55gc8uLMu0WCN1AuBiN97Ky7NrAJochxktQqFiFJStgFytK018U4bfLL
+	+uq8BQMee2svmItD3h5QrCwLONQxlcNlWz1pfxhA/aKLVw0PxQuwwuIB8Z0mInqfk/HK
+	baievs8FveY+52BXuv/7stQeQ0+onXA8+N4vgUFZesXhBCVaLTtgz9xYYhOha3pBiux/
+	jg2MX/dL6L7B8YfE+DPln/SFFYmjDKoh6+Sj5VWjRjdf6A3tgQpkFW1hSthsBc7BxmX5
+	BGaINk+2lt4p2NyHnNr7j0gzOAFhJ3pIoeCbAlCIpHjqWja89o+NKnlGW/oPgaWaOhg/
+	C3Uw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:cc:subject:date:message-id;
-	bh=EStDaW6pdlNCmn7YtYvngkUjOrffzo5cHIdgyuiV1N4=;
-	b=cu8mzZGpoIqJBpriBfyv4nVDAihOWyg+9V16+ReAfJ2MDWhBUKDBolnXKsIkXqFjHr
-	cMAAOXkL1FqUSDR1XCvrDz8tpwVa6HayHHfYpLs7gXdsBOceMAqGMQU6cnwr2BfwR/ai
-	5BJnURJJ2lZ2VR/DnGy4Mp/fSI8irESVxcV/wVgdojDiZHVul4oVQENdCCT3rFQW781d
-	crbsLo+CN/YCHRExS6Bz5Ed7Qao9Mr5e7YhyG7Oog42oFtsG/gAV5d2l4M3j95u7JglI
-	aVqvhE2CoPn+ChSZB00Nx0/IYFx5sJ80L+Tmta1tiuOWn03yFBkZ0+qLxOIyoQ7yGHG8
-	3wNA==
-X-Gm-Message-State: AODbwcCxyiagw/DQid5JCGlBLhI27AGhh1nWQQxrrWgUaUo13C7xALQM
-	1wzlxCo90NWpa/Gf
-X-Received: by 10.28.65.213 with SMTP id o204mr11464822wma.43.1495779693942;
-	Thu, 25 May 2017 23:21:33 -0700 (PDT)
-Received: from mbuntu.sueba (81.89.61.168.host.vnet.sk. [81.89.61.168])
-	by smtp.gmail.com with ESMTPSA id
-	c34sm13444963wrc.7.2017.05.25.23.21.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 25 May 2017 23:21:32 -0700 (PDT)
-Sender: Belisko Marek <marek.belisko@gmail.com>
-From: Marek Belisko <marek.belisko@open-nandra.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 May 2017 08:21:19 +0200
-Message-Id: <1495779679-26874-1-git-send-email-marek.belisko@open-nandra.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Marek Belisko <marek.belisko@open-nandra.com>
-Subject: [PATCH][meta-oe] recipes-support: Move libgpiod to meta-oe directory
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=BWkIMg7p5qR7qImOmoN08YLqcO64feYcbElCLWWrpGQ=;
+	b=EqvNUXeG9nUBgbthFuP9eV62AQKk/ysu0qMmIgIXFGWNRAUmuJ0fjztQq1VkoSbTY+
+	hH38PiO69O0NBQq54xbOuB6qQP/s32myTofP5tRodlYadino9tEbbttSiwxuUABaHKLV
+	1bOLNDKDpOpG2poqCQWQgptxkEn5+4e3d34dBZGc0glstvql3NDImi+FMXtwc7KD+5aV
+	2hveSIwR5Kr0htaBfQibUc5zezQh1fQn5d9YrmcbX+KzJmC7ATKYcTf4qfLmLKOAsKAB
+	KcegZUjPWy2dy97eigKSSbPHl0Hg2nYIZ8OqBq7n/USlA6sCTWX+CE65s8Ptx9Y1Y0u9
+	a6LA==
+X-Gm-Message-State: AODbwcB3wNR1m6R3U3irM4QXJj+fkwOIa+H+wuOlWMxhPCACzsE82en4
+	9KWf3wzc8IjFM16rDaubmW0wTZjNEEjc75Q=
+X-Received: by 10.202.84.86 with SMTP id i83mr168433oib.69.1495780183305; Thu,
+	25 May 2017 23:29:43 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.157.24.107 with HTTP; Thu, 25 May 2017 23:29:42 -0700 (PDT)
+In-Reply-To: <1495779679-26874-1-git-send-email-marek.belisko@open-nandra.com>
+References: <1495779679-26874-1-git-send-email-marek.belisko@open-nandra.com>
+From: Andrea Galbusera <gizero@gmail.com>
+Date: Fri, 26 May 2017 08:29:42 +0200
+Message-ID: <CAC+thW0ENBbO+TAG7G5cMLSLryj1V00iU1+bC+zRPbvN0dJpig@mail.gmail.com>
+To: Marek Belisko <marek.belisko@open-nandra.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-oe] recipes-support: Move libgpiod to meta-oe directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,92 +54,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 May 2017 06:21:35 -0000
+X-List-Received-Date: Fri, 26 May 2017 06:29:43 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Previously it was placed in meta directory which is
-wrong. Move to meta-oe.
+On Fri, May 26, 2017 at 8:21 AM, Marek Belisko <
+marek.belisko@open-nandra.com> wrote:
 
-Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
----
- meta-oe/recipes-support/libgpiod/libgpiod.bb | 30 ++++++++++++++++++++++++++++
- meta/recipes-support/libgpiod/libgpiod.bb    | 30 ----------------------------
- 2 files changed, 30 insertions(+), 30 deletions(-)
- create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod.bb
- delete mode 100644 meta/recipes-support/libgpiod/libgpiod.bb
-
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-new file mode 100644
-index 0000000..fe56f7b
---- /dev/null
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "C library and tools for interacting with the linux GPIO character device"
-+HOMEPAGE = "https://github.com/brgl/libgpiod"
-+
-+LICENSE = "LGPLv2.1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
-+
-+UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
-+
-+SRC_URI = "git://github.com/brgl/libgpiod.git"
-+
-+SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
-+
-+PV = "0.2+git${SRCPV}"
-+
-+S = "${WORKDIR}/git"
-+
-+SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
-+SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458067efaeaa8abc23968d2e3c56bcc2d2ef8"
-+
-+inherit autotools pkgconfig
-+
-+# enable tools
-+PACKAGECONFIG ?= "tools"
-+
-+PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
-+PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
-+
-+PACKAGES += " ${PN}-tools"
-+
-+FILES_${PN}-tools = "${bindir}/*"
-diff --git a/meta/recipes-support/libgpiod/libgpiod.bb b/meta/recipes-support/libgpiod/libgpiod.bb
-deleted file mode 100644
-index fe56f7b..0000000
---- a/meta/recipes-support/libgpiod/libgpiod.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--SUMMARY = "C library and tools for interacting with the linux GPIO character device"
--HOMEPAGE = "https://github.com/brgl/libgpiod"
--
--LICENSE = "LGPLv2.1+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
--
--UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
--
--SRC_URI = "git://github.com/brgl/libgpiod.git"
--
--SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
--
--PV = "0.2+git${SRCPV}"
--
--S = "${WORKDIR}/git"
--
--SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
--SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458067efaeaa8abc23968d2e3c56bcc2d2ef8"
--
--inherit autotools pkgconfig
--
--# enable tools
--PACKAGECONFIG ?= "tools"
--
--PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
--PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
--
--PACKAGES += " ${PN}-tools"
--
--FILES_${PN}-tools = "${bindir}/*"
--- 
-2.7.4
-
+> Previously it was placed in meta directory which is
+> wrong. Move to meta-oe.
+>
+> Signed-off-by: Marek Belisko <marek.belisko@open-nandra.com>
+> ---
+>  meta-oe/recipes-support/libgpiod/libgpiod.bb | 30
+> ++++++++++++++++++++++++++++
+>  meta/recipes-support/libgpiod/libgpiod.bb    | 30
+> ----------------------------
+>  2 files changed, 30 insertions(+), 30 deletions(-)
+>  create mode 100644 meta-oe/recipes-support/libgpiod/libgpiod.bb
+>  delete mode 100644 meta/recipes-support/libgpiod/libgpiod.bb
+>
+> diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb
+> b/meta-oe/recipes-support/libgpiod/libgpiod.bb
+> new file mode 100644
+> index 0000000..fe56f7b
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
+> @@ -0,0 +1,30 @@
+> +SUMMARY = "C library and tools for interacting with the linux GPIO
+> character device"
+> +HOMEPAGE = "https://github.com/brgl/libgpiod"
+> +
+> +LICENSE = "LGPLv2.1+"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+> +
+> +UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
+> +
+> +SRC_URI = "git://github.com/brgl/libgpiod.git"
+> +
+> +SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
+> +
+> +PV = "0.2+git${SRCPV}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
+> +SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458
+> 067efaeaa8abc23968d2e3c56bcc2d2ef8"
+> +
+> +inherit autotools pkgconfig
+> +
+> +# enable tools
+> +PACKAGECONFIG ?= "tools"
+> +
+> +PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> +PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
+> +
+> +PACKAGES += " ${PN}-tools"
+> +
+> +FILES_${PN}-tools = "${bindir}/*"
+> diff --git a/meta/recipes-support/libgpiod/libgpiod.bb
+> b/meta/recipes-support/libgpiod/libgpiod.bb
+> deleted file mode 100644
+> index fe56f7b..0000000
+> --- a/meta/recipes-support/libgpiod/libgpiod.bb
+> +++ /dev/null
+> @@ -1,30 +0,0 @@
+> -SUMMARY = "C library and tools for interacting with the linux GPIO
+> character device"
+> -HOMEPAGE = "https://github.com/brgl/libgpiod"
+> -
+> -LICENSE = "LGPLv2.1+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+> -
+> -UPSTREAM_CHECK_URI = "git://github.com/brgl/libgpiod/releases"
+> -
+> -SRC_URI = "git://github.com/brgl/libgpiod.git"
+> -
+> -SRCREV = "7ab5e53b69cce313ba87033a442cabd417f5d895"
+> -
+> -PV = "0.2+git${SRCPV}"
+> -
+> -S = "${WORKDIR}/git"
+> -
+> -SRC_URI[md5sum] = "68f039487e940c15bbfc50a10ab4715b"
+> -SRC_URI[sha256sum] = "7d7085d4e9cb811742ca8c5fe03458
+> 067efaeaa8abc23968d2e3c56bcc2d2ef8"
+> -
+> -inherit autotools pkgconfig
+> -
+> -# enable tools
+> -PACKAGECONFIG ?= "tools"
+> -
+> -PACKAGECONFIG[tests] = "--enable-tests,--disable-tests,kmod udev"
+> -PACKAGECONFIG[tools] = "--enable-tools,--disable-tools,"
+> -
+> -PACKAGES += " ${PN}-tools"
+> -
+> -FILES_${PN}-tools = "${bindir}/*"
+> --
+> 2.7.4
+>
+>
+I'm not a maintainer here, but you should probably send v2 with -M to
+detect renames (see
+http://cgit.openembedded.org/meta-openembedded/tree/meta-oe/README)
 
