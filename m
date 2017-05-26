@@ -1,23 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 565DC78273
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F4257822F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 07:37:34 +0000 (UTC)
+	Fri, 26 May 2017 07:37:36 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v4Q7bYMX022203
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v4Q7baj7004377
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 26 May 2017 00:37:34 -0700 (PDT)
+	Fri, 26 May 2017 00:37:36 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 26 May 2017 00:37:34 -0700
+	Fri, 26 May 2017 00:37:36 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 26 May 2017 03:37:28 -0400
-Message-ID: <cover.1495783956.git.hongxu.jia@windriver.com>
+Date: Fri, 26 May 2017 03:37:29 -0400
+Message-ID: <e05067141edbcdba4d0e7559d6de3a4eae8f620f.1495783956.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <cover.1495783956.git.hongxu.jia@windriver.com>
+References: <cover.1495783956.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/4] fix lvm2 invoking lvcreate failed && add python3-pyparted && add python3-pyudev
+Subject: [meta-gnome][PATCH 1/4] gnome-themes: remove PNBLACKLIST
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +35,37 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Fri, 26 May 2017 07:37:38 -0000
 Content-Type: text/plain
 
-The following changes since commit b063789560bfb9c60a7a15277b5b3a9839b5ba74:
+- Since gtk-engines was removed from PNBLACKLIST,
+  so we could build gnome-themes
 
-  libgpiod: add new recipe (2017-05-23 15:59:31 +0200)
+- Add glib-2.0-native to DEPENDS.
 
-are available in the git repository at:
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+---
+ meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-  git://git.openembedded.org/openembedded-core-contrib hongxu/fix-lvm2
-  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/fix-lvm2
-
-Hongxu Jia (4):
-  gnome-themes: remove PNBLACKLIST
-  python3-pyparted: add a python3 recipe
-  python3-pyudev: add a python3 recipe
-  lvm2/libdevmapper: fix invoking lvcreate failed
-
- .../recipes-gnome/themes/gnome-themes_2.32.1.bb    |  6 ++--
- .../recipes-support/lvm2/libdevmapper_2.02.166.bb  | 21 ++-----------
- meta-oe/recipes-support/lvm2/lvm2.inc              | 26 +++++++++++++++-
- .../0001-explicitly-do-not-install-libdm.patch     | 36 ++++++++++++++++++++++
- meta-oe/recipes-support/lvm2/lvm2_2.02.171.bb      | 31 ++-----------------
- .../recipes-devtools/python/python-pyudev.inc      | 19 ++++++++++++
- .../python/python-pyudev_0.21.0.bb                 | 22 +++----------
- .../python/python3-pyudev_0.21.0.bb                |  8 +++++
- .../python-pyparted/python-pyparted.inc            | 21 +++++++++++++
- .../python-pyparted/python-pyparted_3.10.7.bb      | 23 +++-----------
- .../0001-fix-version-float-check.patch             | 26 ++++++++++++++++
- .../python-pyparted/python3-pyparted_3.10.7.bb     | 12 ++++++++
- 12 files changed, 163 insertions(+), 88 deletions(-)
- create mode 100644 meta-oe/recipes-support/lvm2/lvm2/0001-explicitly-do-not-install-libdm.patch
- create mode 100644 meta-python/recipes-devtools/python/python-pyudev.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
- create mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted.inc
- create mode 100644 meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
- create mode 100644 meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb
-
+diff --git a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+index e8f8314..1a89f48 100644
+--- a/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/themes/gnome-themes_2.32.1.bb
+@@ -5,7 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2b543dc97eb7594d026af39d9b54204b"
+ PR = "r3"
+ 
+ SECTION = "x11/gnome"
+-DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native glib-2.0 intltool-native libxml-simple-perl-native"
++DEPENDS = "gtk-engines icon-naming-utils icon-naming-utils-native \
++           glib-2.0 intltool-native libxml-simple-perl-native \
++           glib-2.0-native \
++"
+ RDEPENDS_${PN} = "adwaita-icon-theme"
+ 
+ EXTRA_OECONF += "--enable-all-themes \
+@@ -32,4 +35,3 @@ SRC_URI[archive.md5sum] = "41db9e3cb25d35af2675c599e67944d1"
+ SRC_URI[archive.sha256sum] = "8601ee24c2e096593221cbd6ebdb6686042225a03c02a01c0d67c163f9febd1a"
+ GNOME_COMPRESS_TYPE="bz2"
+ 
+-PNBLACKLIST[gnome-themes] ?= "Depends on blacklisted gtk-engines - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
 2.8.1
 
