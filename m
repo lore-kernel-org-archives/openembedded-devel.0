@@ -1,46 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id B259D78246
+Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
+	[209.85.192.172])
+	by mail.openembedded.org (Postfix) with ESMTP id B5FC678246
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 14:45:38 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id 9so13664982pfj.1
+	Fri, 26 May 2017 14:45:40 +0000 (UTC)
+Received: by mail-pf0-f172.google.com with SMTP id n23so13628348pfb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 07:45:40 -0700 (PDT)
+	Fri, 26 May 2017 07:45:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=8y6TS+EcNpDaiTSbRkgf0f+KCOnSr8eo4qFg1xsngT8=;
-	b=VI7CIHsBpptFwr1urgvsDJap7p6EdxcItq2SiSw0qN5lIT9mCwPxk7pCvD7y+V6H3T
-	Ifh7wmhpqUOZXtvmWApdVtRnLpEm56+pFJtd1byR8iUSj/3z0AjPZTueD2uux1HoeGpD
-	P4xBxcsAhQsy7paPFjtcdeDnp9GQhiDz+we8kjSWOXiodLz5ox+wMuIPuousGTdYQdaY
-	KVh7jjCapwvUKwremCVaECFsG2rPxFNZDWa5XpxDEdSp1dZ3cLAmhix2NTSoBuydd3u6
-	Y3Jb4tkwKfRYhN7NuSkAmuYuqraPgjEWjtCYV1ewhtmPNTmFivYKSreOqEw4ZeI64/c0
-	JQJg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=/HyZfR05RZyKWvPnSvqceFJTvkGd8Fhze8TRdKk1dR4=;
+	b=YeA0ycbVbVFvcZ7ueuOPquA4xBwGPjfH56/Em8Nr5qUI6g1bbDSAqXqxf+4bk0mKmZ
+	iHWi9egV/THM8cjs3Bag+sJy4WHa/6ViLbTpv6RzfqLK3cuFa7K0t7MsH2aiKEA7U0J9
+	j0esr0lmYUU3NBJLJwi4eWmJRZ+KjdeAfFJ3sXYO0RJ01o/GgoEInzJzIEdGDVBN0vD4
+	KQIW3N1BxVzazcmAB3Y57OmDbPxGqIysiuvNdDKPhrkIbZqzSGiPjQdbM740Hau9LrdD
+	KmgFomiohHIXb1YeWpvIH9cyIExA7pY9eNvLxdBWFUGYOmZRVDXsntPxejwFIhHT3Mnb
+	0YMQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8y6TS+EcNpDaiTSbRkgf0f+KCOnSr8eo4qFg1xsngT8=;
-	b=iY4Mw5wDARqj0cn4gBV9E1osuxQXtlZPDas2CgcRK62tCAFM4eSBNwslYKy58G7eWj
-	Aq1mVnSo4bc8+sq+1NzU/tQb/ekaE67KjGs8UdiciiLsu6pOHUPOKfGCXJd936cT4KnF
-	MVq3apaQK9Eaa5Oy2ARxNQh8RsmahOYjsZRcYwNqJMW2/lBvjW8OgsawSrhlhqgCCVhN
-	+KbwqeuCXKU4Cvztm20ucXmmQTAsOF4QyrS58q0AhG9HkzAyGxBi3Pj43hP0EjWT+LNB
-	yMgfWuCBl/CLTXIC4eZp2StCoEPBYm5dHdaRGbY9x7vOPXBNVi2STP5j4IScVBVYW25b
-	EyEg==
-X-Gm-Message-State: AODbwcCQE7rACaRe+b8qd5t8rw6bba7pxVMkq5Rb59dlYJR9Mvofi3eD
-	LfeDw3eiG20ur/Po
-X-Received: by 10.98.106.199 with SMTP id f190mr2857920pfc.41.1495809939920;
-	Fri, 26 May 2017 07:45:39 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=/HyZfR05RZyKWvPnSvqceFJTvkGd8Fhze8TRdKk1dR4=;
+	b=BrSgAU6RaDdR1jdjBfxBn2llaFUvFOsl00F8gfpdnvxL36+aQ9roePLj9NzK/aMDPg
+	Y72aamF6JkxQWk8tu50fnDsghw5HFAkEjvFV46C/oSy94+i7b14vYH1ithUvAw7n/GOJ
+	MOpswNubZuYRm3x2nlALUhp/+tu3cE6cNZMcACwqXf42pvytHl/QO6a9FUgfqpnxydT9
+	v7asYvg+xt4Rm23E7DAM/cVqMYbpMIFyL9bd1Z9YFwlzOphrBn+RcSmxxvDaykL+Efa/
+	FYexPGrscprRzD/5tPw6PV1JfHAjSM1DxsEaZY0vz0Oi7CAC2wSCFQaqNlSZ7WtCzGyq
+	150w==
+X-Gm-Message-State: AODbwcA2WesM5eo10G1WJ0y79GBAZY8xf3/YIEy+vYPU1wTiU4eNQZBT
+	zaoRG6U3I6MWNZOL
+X-Received: by 10.99.97.68 with SMTP id v65mr2928542pgb.76.1495809941516;
+	Fri, 26 May 2017 07:45:41 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::63fb])
 	by smtp.gmail.com with ESMTPSA id
-	y78sm2399183pfd.32.2017.05.26.07.45.38
+	y78sm2399183pfd.32.2017.05.26.07.45.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 26 May 2017 07:45:39 -0700 (PDT)
+	Fri, 26 May 2017 07:45:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 May 2017 07:45:29 -0700
-Message-Id: <20170526144530.7471-1-raj.khem@gmail.com>
+Date: Fri, 26 May 2017 07:45:30 -0700
+Message-Id: <20170526144530.7471-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.0
-Subject: [meta-perl][PATCH 1/2] meta-perl: Make glibc-gconv deps apply for glibc based systems alone
+In-Reply-To: <20170526144530.7471-1-raj.khem@gmail.com>
+References: <20170526144530.7471-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/2] nopoll: Disable doc generation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,40 +58,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 26 May 2017 14:45:40 -0000
 
-musl does not provide separate gconv packages
+This also fixes installed-vs-shipped build QA errors like
+ERROR: nopoll-0.4.2.b297-r0 do_package: QA Issue: nopoll: Files/directories were installed but not shipped in any package:
+  /usr/bin
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb | 2 +-
- meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb | 2 +-
- 2 files changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-index 0c53b6a27..1ef9f0bc3 100644
---- a/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-+++ b/meta-perl/recipes-perl/libnet/libnet-libidn-perl_0.12.bb
-@@ -10,7 +10,7 @@ HOMEPAGE = "http://search.cpan.org/dist/Net-LibIDN/"
- DEPENDS += "libidn"
- # We must need glibc-gconvs to enable charset related functions,
- # such as Net::LibIDN::idn_to_ascii().
--RDEPENDS_${PN} += "glibc-gconvs"
-+RDEPENDS_${PN}_append_libc-glibc = " glibc-gconvs"
+diff --git a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
+index 611374cab..1d77891d4 100644
+--- a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
++++ b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
+@@ -18,4 +18,6 @@ SRC_URI[sha256sum] = "f5fbf8aaa16a77b0f265d8c847eb06cb3e68f2b1a50737466dae811816
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/T/TH/THOR/Net-LibIDN-${PV}.tar.gz"
- SRC_URI[md5sum] = "c3e4de2065009d67bcb1df0afb473e12"
-diff --git a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-index 934be0399..275ccb8c9 100644
---- a/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-+++ b/meta-perl/recipes-perl/libtext/libtext-iconv-perl_1.7.bb
-@@ -10,7 +10,7 @@ documentation."
- SECTION = "libs"
- LICENSE = "Artistic-1.0 | GPL-1.0+"
- LIC_FILES_CHKSUM = "file://README;beginline=3;endline=6;md5=fadf2919c7128e887d26b4d905f90649"
--RRECOMMENDS_${PN} += "glibc-gconvs"
-+RRECOMMENDS_${PN}_append_libc-glibc = " glibc-gconvs"
+ inherit autotools pkgconfig
  
- SRC_URI = "http://search.cpan.org/CPAN/authors/id/M/MP/MPIOTR/Text-Iconv-${PV}.tar.gz"
- 
++EXTRA_OECONF += "--disable-nopoll-doc"
++
+ LDFLAGS += "-lpthread"
 -- 
 2.13.0
 
