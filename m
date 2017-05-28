@@ -1,49 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id B5FC678246
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E476671A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 14:45:40 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id n23so13628348pfb.2
+	Sun, 28 May 2017 11:11:28 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id d127so10971499wmf.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 26 May 2017 07:45:42 -0700 (PDT)
+	Sun, 28 May 2017 04:11:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=/HyZfR05RZyKWvPnSvqceFJTvkGd8Fhze8TRdKk1dR4=;
-	b=YeA0ycbVbVFvcZ7ueuOPquA4xBwGPjfH56/Em8Nr5qUI6g1bbDSAqXqxf+4bk0mKmZ
-	iHWi9egV/THM8cjs3Bag+sJy4WHa/6ViLbTpv6RzfqLK3cuFa7K0t7MsH2aiKEA7U0J9
-	j0esr0lmYUU3NBJLJwi4eWmJRZ+KjdeAfFJ3sXYO0RJ01o/GgoEInzJzIEdGDVBN0vD4
-	KQIW3N1BxVzazcmAB3Y57OmDbPxGqIysiuvNdDKPhrkIbZqzSGiPjQdbM740Hau9LrdD
-	KmgFomiohHIXb1YeWpvIH9cyIExA7pY9eNvLxdBWFUGYOmZRVDXsntPxejwFIhHT3Mnb
-	0YMQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=OpcuL4rqwftbzPri/sxGA5WsnVq74JJILHe8uKVPEeE=;
+	b=fmghOMAOakBdED2q3zzDlAek2s8VWjeviRSdBoiKb1PTAvzYx+NYxBvIIM8VBKSFn6
+	iLLMQ8nQRk2CVd07BXtSIFy04yKZQyh/gPLctkRdIQNWtEsQCWfqjjAFfju1+TkZ+YMZ
+	QfWgR0IKz8HxRYs/kgyXcecQR72ucA8G2jHtiz/pzD2YaKy1CkgZ6atrcdnUYdA3lVdq
+	iYlsrz7/5FCkWCswwl0dojjj4LpMrApTguDNP99TINk+P0ATbzl+2rv0HARWs7qDUVkv
+	RSD12zpeyFOT5C8Vjr5q4rn4fC+o45D3r8P4BiscZIdMuFkqr5H4H+YaLAOuT3ZzijQt
+	ws6Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=/HyZfR05RZyKWvPnSvqceFJTvkGd8Fhze8TRdKk1dR4=;
-	b=BrSgAU6RaDdR1jdjBfxBn2llaFUvFOsl00F8gfpdnvxL36+aQ9roePLj9NzK/aMDPg
-	Y72aamF6JkxQWk8tu50fnDsghw5HFAkEjvFV46C/oSy94+i7b14vYH1ithUvAw7n/GOJ
-	MOpswNubZuYRm3x2nlALUhp/+tu3cE6cNZMcACwqXf42pvytHl/QO6a9FUgfqpnxydT9
-	v7asYvg+xt4Rm23E7DAM/cVqMYbpMIFyL9bd1Z9YFwlzOphrBn+RcSmxxvDaykL+Efa/
-	FYexPGrscprRzD/5tPw6PV1JfHAjSM1DxsEaZY0vz0Oi7CAC2wSCFQaqNlSZ7WtCzGyq
-	150w==
-X-Gm-Message-State: AODbwcA2WesM5eo10G1WJ0y79GBAZY8xf3/YIEy+vYPU1wTiU4eNQZBT
-	zaoRG6U3I6MWNZOL
-X-Received: by 10.99.97.68 with SMTP id v65mr2928542pgb.76.1495809941516;
-	Fri, 26 May 2017 07:45:41 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::63fb])
-	by smtp.gmail.com with ESMTPSA id
-	y78sm2399183pfd.32.2017.05.26.07.45.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 26 May 2017 07:45:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OpcuL4rqwftbzPri/sxGA5WsnVq74JJILHe8uKVPEeE=;
+	b=Fon4HCPC0Hp5xTA1EvBl88eD5rD6ix6C3BLATcXDOVPe/I/duIGo1e0xsEQXHuO/xn
+	jl43w74ryGDyRsThd0V1P7Scc1OVhZPHCPiLhDneYfspy1G12KH+e9K0FUMX8jFcgKuY
+	JBcRIXfcoiSM3VOwFKlvPICnl4X/JQ+wqWABjxJEP+OtPNGuEoUAyxITDUkMS9XfjnJT
+	tJoXAGzTSBPhRSe/LBv5PPHR5zFpTp0xXJbculEBlzn4CaP/73q+WU0OfD4xHsGL8wmL
+	j1lhs1JmvQunB5420h0KG05HanWMpqBeIuHO/SFgyJLU3RRchMtC+ne1dJaVsbJSnIgz
+	pemw==
+X-Gm-Message-State: AODbwcBLsOZ8phaEhHHi4N0GWYTB528MDxquXVehCs5lUg36O4IImjUV
+	XBDb8hBMh9CT1pSE
+X-Received: by 10.80.159.3 with SMTP id b3mr8952768edf.5.1495969889262;
+	Sun, 28 May 2017 04:11:29 -0700 (PDT)
+Received: from Saturn.local.all (138-14-48-195.pool.dsl-net.ch.
+	[195.48.14.138])
+	by smtp.gmail.com with ESMTPSA id l4sm7210385edd.69.2017.05.28.04.11.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 28 May 2017 04:11:28 -0700 (PDT)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 26 May 2017 07:45:30 -0700
-Message-Id: <20170526144530.7471-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <20170526144530.7471-1-raj.khem@gmail.com>
-References: <20170526144530.7471-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/2] nopoll: Disable doc generation
+Date: Sun, 28 May 2017 13:10:39 +0200
+Message-Id: <20170528111040.22809-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.12.0
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-oe][PATCH 1/2] gpsd: don't compile with gold
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +54,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 26 May 2017 14:45:40 -0000
+X-List-Received-Date: Sun, 28 May 2017 11:11:41 -0000
 
-This also fixes installed-vs-shipped build QA errors like
-ERROR: nopoll-0.4.2.b297-r0 do_package: QA Issue: nopoll: Files/directories were installed but not shipped in any package:
-  /usr/bin
+When linking with gold libgps and libgpsd error out with:
+ | ./libgpsd.so: error: undefined reference to 'atan2'
+ | ./libgpsd.so: error: undefined reference to 'pow'
+ | ./libgpsd.so: error: undefined reference to 'sqrt'
+ | ./libgpsd.so: error: undefined reference to 'sin'
+ | ./libgpsd.so: error: undefined reference to 'cos'
+ | collect2: error: ld returned 1 exit status
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Using the bfd linker fixes the issue.
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb | 2 ++
+ meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
-index 611374cab..1d77891d4 100644
---- a/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
-+++ b/meta-networking/recipes-protocols/nopoll/nopoll_0.4.2.b297.bb
-@@ -18,4 +18,6 @@ SRC_URI[sha256sum] = "f5fbf8aaa16a77b0f265d8c847eb06cb3e68f2b1a50737466dae811816
+diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+index 4d00fea6d..fb02f9598 100644
+--- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
++++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
+@@ -36,6 +36,8 @@ SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'f
+ export STAGING_INCDIR
+ export STAGING_LIBDIR
  
- inherit autotools pkgconfig
- 
-+EXTRA_OECONF += "--disable-nopoll-doc"
++LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
 +
- LDFLAGS += "-lpthread"
+ PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
+ PACKAGECONFIG[bluez] = "bluez='true',bluez='false',${BLUEZ}"
+ PACKAGECONFIG[qt] = "qt='yes',qt='no',qt4-x11-free"
 -- 
-2.13.0
+2.12.0
 
 
