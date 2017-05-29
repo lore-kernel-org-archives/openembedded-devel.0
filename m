@@ -1,48 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id B43C060191
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E70C70178
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 May 2017 19:11:55 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id g15so12882558wmc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 28 May 2017 12:11:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ADUrtJscqNC7+pF2mS819qbUox51kdxcmiIWsCqon28=;
-	b=DphjKlCIaogwlCr2H5tBpoJwL61VharCGLSn/m9pmKZBjRdLsgHBO3QfHHif72iK+6
-	/fYEKi+OTGgZ8hU+JPJBT8TYoz5KTiHHV9JSPG0auraEVgdSwjTDvdXO8WTE8ly6AbtY
-	zvX4NqT/ojyfbN3Imu6IRrmaMidv/qJ6rFfaJaw6zgSKvN2BrKyjQ1i3qQ0FngWodbRZ
-	FGtKguXzS1W6KUq0hD4EEK8p3N0AF+6tz+k+zOw2ZCZZSHOQ6tqo17zZ/HqFY8NBC4iL
-	xZvLQiXDKTLUnH4i7sg37drvjKGm3QfsGSO+hnLbRwH3YPRUy3QQ3eAflM1hdqNoK0b7
-	w9Bg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ADUrtJscqNC7+pF2mS819qbUox51kdxcmiIWsCqon28=;
-	b=LU/HTZnHuIOooWg628noIZx9/BpT6E/iIPEAba+2SFGORMt0kSHMHT7kKLWTiigsi7
-	Lc982Bv2CRs/It1owYcKscKaMzU0nV3UVHtuEhHZcyrcohuI/G4TKKMG5ZgXNstB/lsd
-	tikasTUGQ+cCSnW9XA1tOlr7Sl6gfWn1FY5vV2Ozb9D/twF0L4DenUzSafEQAI0LTvTK
-	CZnjcamSrmm9SSWU0Y5zl9r8AaRQbP541oJQs5wyppUQujtVOVC54/HAIP/NshfqZtNk
-	5pqDzzdN2No4ciTFT7S1RTqn0ukqBNZFjr/yQrLftMBcMQeF0nThW6TQc32v8OQOgORH
-	3IVw==
-X-Gm-Message-State: AODbwcBFBBncjud6cxcHglSimORwbnQW5kIPHQJ2MuQd+gUuTBwUUCJk
-	l5C9Tof8rWOlla949PaosKH0+Sav7p8i
-X-Received: by 10.80.180.155 with SMTP id w27mr10113303edd.42.1495998716777;
-	Sun, 28 May 2017 12:11:56 -0700 (PDT)
+	Mon, 29 May 2017 01:12:41 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v4T1CeJH018197
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Sun, 28 May 2017 18:12:41 -0700
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Sun, 28 May 2017 18:12:38 -0700
+To: <openembedded-devel@lists.openembedded.org>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <2c4c974d-6831-f5c3-bf9a-a9c801192ccb@windriver.com>
+Date: Sun, 28 May 2017 21:12:19 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
 MIME-Version: 1.0
-Received: by 10.80.195.143 with HTTP; Sun, 28 May 2017 12:11:26 -0700 (PDT)
-In-Reply-To: <1495995096.3000.8.camel@gmail.com>
-References: <20170528111040.22809-1-max.krummenacher@toradex.com>
-	<CAMKF1sptWiD9vH0CVB86mFhaQMpiSY+3sAGd8E-B+hT2O08O9Q@mail.gmail.com>
-	<1495995096.3000.8.camel@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 28 May 2017 12:11:26 -0700
-Message-ID: <CAMKF1spk821vLwfV_4GMEVZnVnNazEJqPwkA9FuHNcXJUt5m4A@mail.gmail.com>
-To: Max Krummenacher <max.oss.09@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Max Krummenacher <max.krummenacher@toradex.com>
-Subject: Re: [meta-oe][PATCH 1/2] gpsd: don't compile with gold
+In-Reply-To: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
+X-Originating-IP: [172.25.44.7]
+Subject: Re: [meta-oe][V2 patch] rrdtool: allow configuration to disable nls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,88 +35,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 28 May 2017 19:11:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 29 May 2017 01:12:42 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 28, 2017 at 11:11 AM, Max Krummenacher <max.oss.09@gmail.com> wrote:
-> Am Sonntag, den 28.05.2017, 09:04 -0700 schrieb Khem Raj:
->> On Sun, May 28, 2017 at 4:10 AM, Max Krummenacher <max.oss.09@gmail.com> wrote:
->> > When linking with gold libgps and libgpsd error out with:
->> >  | ./libgpsd.so: error: undefined reference to 'atan2'
->> >  | ./libgpsd.so: error: undefined reference to 'pow'
->> >  | ./libgpsd.so: error: undefined reference to 'sqrt'
->> >  | ./libgpsd.so: error: undefined reference to 'sin'
->> >  | ./libgpsd.so: error: undefined reference to 'cos'
->> >  | collect2: error: ld returned 1 exit status
->> >
->> > Using the bfd linker fixes the issue.
->>
->> It seems packages dont have proper linker rules.
->> perhaps a better fix is to add -lm to linker cmdline.
-> -lm is part of the linker cmdline.
->
->  | arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mthumb -mfpu=neon -mfloat-abi=hard -
-> -sysroot=/home/res/develop/oe-core/build/tmp-glibc/sysroots/apalis-imx6 -o gpsd -Wl,-O1 -Wl,--hash
-> -style=gnu -Wl,--as-needed --sysroot=/home/res/develop/oe-core/build/tmp-glibc/sysroots/apalis-imx6
-> -pthread -Wl,-rpath=/home/res/develop/oe-core/build/tmp-glibc/work/armv7at2hf-neon-angstrom-linux
-> -gnueabi/gpsd/3.14-r0/gpsd-3.14 gpsd.o timehint.o shmexport.o dbusexport.o sd_socket.o -L.
-> -L/home/res/develop/oe-core/build/tmp-glibc/sysroots/apalis-imx6/usr/lib -lrt -lbluetooth -ldbus-1
-> -lgpsd -lusb-1.0 -lbluetooth -lgps -lm -ldbus-1
->
-> One can get this link by linking the two shared objects '-lgps -lm' swapped '-lm -lgps', however I
-> do not understand why that order matters.
-> It does not help to add -lm when linking libgps.so.
->
-> gpsd 3.16 seems do not be affected, the scons file however has been given quite same change.
->
-> So, IMHO I'd rather use the linker which we now produces working binaries than to add yet one more
-> patch to the scons file. That gives a commit we can use to backport for pyro and morty.
-> Going forward we can use the update to 3.16 which allows to drop the majority of the patches we have
-> now and builds also with gold.
 
-its fine to use a workaround if there is no better solution. Lets try
-to understand the root cause too while here before resorting to
-shunning gold here. Since if we do it once issue will go latent.
+Martin,
 
-gold warns about undefined symbols in shared libraries for which gold
-has seen all the DT_NEEDED entries.  So if  shared libraries rely on
-picking up symbols from other shared libraries that they do not
-explicitly depend on, you will get an undefined symbol error. Which
-could be the case with libgps.so here and if so that should be fixed
-by correcting the linker cmd of libgps.so. alternatively that can be
-avoided by using the --allow-shlib-undefined option.
+You've merged v1:
+    [oe] [meta-oe][PATCH] rrdtool: add gettext-native dependency
+Could you drop that for this fix since it's a somewhat better approach.
 
->
-> Max
->
->> >
->> > Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
->> > ---
->> >  meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb | 2 ++
->> >  1 file changed, 2 insertions(+)
->> >
->> > diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb b/meta-oe/recipes
->> > -navigation/gpsd/gpsd_3.14.bb
->> > index 4d00fea6d..fb02f9598 100644
->> > --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
->> > +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.14.bb
->> > @@ -36,6 +36,8 @@ SYSTEMD_OESCONS = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
->> > 'f
->> >  export STAGING_INCDIR
->> >  export STAGING_LIBDIR
->> >
->> > +LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '',
->> > d)}"
->> > +
->> >  PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'bluetooth', 'bluez', '', d)}"
->> >  PACKAGECONFIG[bluez] = "bluez='true',bluez='false',${BLUEZ}"
->> >  PACKAGECONFIG[qt] = "qt='yes',qt='no',qt4-x11-free"
->> > --
->> > 2.12.0
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+../Randy
+
+On 2017-05-17 10:07 PM, Randy MacLeod wrote:
+> When building rrdtool for a 'tiny' distro, that does not have native
+> language support (NLS) in glibc, configure fails with the error:
+>     autoreconf: failed to run autopoint: No such file or directory
+> Autopoint is part of gettext but without NLS support we populate the
+> sysroot with gettext-minimal-native rather then the full set of
+> gettext executables. This version does not install autopoint, nor
+> should it.
+> 
+> Tell autoreconf to skip the check for the autopoint script
+> regardless of NLS support and use the USE_NLS varible
+> to conditionally enable NLS support.
+> 
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> ---
+>   meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 3 ++-
+>   1 file changed, 2 insertions(+), 1 deletion(-)
+> 
+> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+> index db2df28a0..3ccefb995 100644
+> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+> @@ -22,7 +22,7 @@ BBCLASSEXTEND = "native"
+>   SYSTEMD_PACKAGES = "rrdcached"
+>   SYSTEMD_SERVICE_rrdcached = "rrdcached.socket rrdcached.service"
+>   
+> -EXTRA_AUTORECONF = "-I m4"
+> +EXTRA_AUTORECONF = "-I m4 --exclude=autopoint"
+>   
+>   PACKAGECONFIG ??= "python perl ${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+>   
+> @@ -49,6 +49,7 @@ EXTRA_OECONF = " \
+>       --disable-lua \
+>       --disable-tcl \
+>       --disable-rpath \
+> +    --enable-nls=${USE_NLS} \
+>   "
+>   
+>   export STAGING_LIBDIR
+> 
+
+
+-- 
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
