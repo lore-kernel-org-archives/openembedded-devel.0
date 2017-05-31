@@ -1,22 +1,21 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id DCB65719B8
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 145B277E17
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 May 2017 10:20:18 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v4TAKHaq029840
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 29 May 2017 12:20:18 +0200
-Received: from dev.sbt.siemens.com ([139.16.116.48])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v4TAK8Um005309;
-	Mon, 29 May 2017 12:20:08 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Wed, 31 May 2017 01:42:17 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	30 May 2017 18:42:18 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.38,420,1491289200"; d="scan'208";a="1176311112"
+Received: from wrath.jf.intel.com ([10.54.70.7])
+	by fmsmga002.fm.intel.com with ESMTP; 30 May 2017 18:42:18 -0700
+From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 29 May 2017 12:20:00 +0200
-Message-Id: <1496053200-6249-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-webserver][PATCH] nginx: depend on zlib instead of gzip
+Date: Tue, 30 May 2017 18:41:41 -0700
+Message-Id: <20170531014141.3765-1-timothy.t.orling@linux.intel.com>
+X-Mailer: git-send-email 2.9.4
+Subject: [meta-java][master][pyro][PATCH] java-test-image: drop ROOTFS_PKGMANAGE_BOOTSTRAP var
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,29 +28,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 29 May 2017 10:20:19 -0000
+X-List-Received-Date: Wed, 31 May 2017 01:42:20 -0000
 
-nginx requires zlib not gzip for compression.
+oe-core has dropped this variable
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 2 +-
+ recipes-images/images/java-test-image.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index f98f299..77d1b32 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -9,7 +9,7 @@ LICENSE = "BSD-2-Clause"
+diff --git a/recipes-images/images/java-test-image.bb b/recipes-images/images/java-test-image.bb
+index 005e7a1..30eb2ea 100644
+--- a/recipes-images/images/java-test-image.bb
++++ b/recipes-images/images/java-test-image.bb
+@@ -6,7 +6,7 @@ IMAGE_LINGUAS = " "
  
- SECTION = "net"
  
--DEPENDS = "libpcre gzip openssl"
-+DEPENDS = "libpcre zlib openssl"
- 
- SRC_URI = " \
-     http://nginx.org/download/nginx-${PV}.tar.gz \
+ IMAGE_INSTALL = "busybox modutils-initscripts initscripts opkg udev sysvinit netbase base-files base-passwd \
+-                 ${ROOTFS_PKGMANAGE_BOOTSTRAP} ${CORE_IMAGE_EXTRA_INSTALL} \
++                 ${CORE_IMAGE_EXTRA_INSTALL} \
+                  openjdk-7-jre openjdk-7-vm-zero \
+                  strace dropbear binutils \
+                  classpath \
 -- 
-2.1.4
+2.9.4
 
 
