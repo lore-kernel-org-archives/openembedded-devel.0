@@ -1,22 +1,55 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 793526E660
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id D417D77D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 08:10:43 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v518AgfN029641
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Thu,  1 Jun 2017 12:35:30 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id h4so3983353lfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 1 Jun 2017 10:10:42 +0200
-Received: from dev.sbt.siemens.com ([139.16.117.158])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v518Af1X001966;
-	Thu, 1 Jun 2017 10:10:42 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Thu, 01 Jun 2017 05:35:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=WMFdcOGNq5JiOk1XASQPtXyXTpPWFDy0Sd9ZCY4USV8=;
+	b=YwkZAmgXBClTT0iF8pHXX3VSK0bqPRmcAco4pZ+SW2loCaEuM8fEXVVDl+ZJ5eLyBT
+	s2TsQP4SyeR68RZA3zAld7+GE8q9hqvyovt4kAvylWolvI1uH9FRLD5JIaKdP84Kw6OO
+	Zd9geGcbYXarqbEBho5f4ZKIKXJpq5TihODj6ixusNjlc0CC2PSBhLus0EIzQkY4n7QR
+	cDM2xv4s3VHr7iBoY5BNbT5zAUva/ohNBF+jrAbeb6rCeE/pewi2mxoLF6nVY2syKu5c
+	gccka1pKFsmHVxB7pmGzq27EcyDHhzbmNUAyFGA7uXw+e+A4+9dxfTAS8vZ3p8UnPX/z
+	aeMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=WMFdcOGNq5JiOk1XASQPtXyXTpPWFDy0Sd9ZCY4USV8=;
+	b=cqMDZUoCKxIQOQZSkaQ3m9KtaXgHevyjkNUjkHX54YVIqzjSLJ/WPoiE1LaZGv5Hlw
+	8sw5I1z2Jtg6NFe0VxgjnRrodNYdAJSEYCkeVWyj4ST8bqBMxWFmO3ShhuUYpcOAH/Pq
+	b1NY/QyBj3ZZiiUW+ACsI6TCo/PqQQ8RchRXIEtiaNSofLfoA3D4ZAw/FGrH68v2BJql
+	56fJMbwQNSdAQMr2GDK9Vu0DcFjK46fRgOo0H3mDujqMZu6gaS4BBP6AgD0Avqnu2dKH
+	AiezbuhI3HRkw27cvJvWBjj4g2KTNBDWPnRfDR8hfM5k7qfYBWj6CSg7ahuxB3gB/fWP
+	c2bw==
+X-Gm-Message-State: AODbwcD2HCE1r1T3Ia0duJIQmxkxXV5iWg6XlDPQJE4bLDGV6Qd63TS4
+	huD4YFKvpOiiNlzw
+X-Received: by 10.46.82.144 with SMTP id n16mr499348lje.0.1496320531286;
+	Thu, 01 Jun 2017 05:35:31 -0700 (PDT)
+Received: from [10.9.21.51] ([192.89.120.53])
+	by smtp.googlemail.com with ESMTPSA id
+	r38sm4415226lfi.4.2017.06.01.05.35.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 01 Jun 2017 05:35:30 -0700 (PDT)
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Jun 2017 10:10:37 +0200
-Message-Id: <1496304637-23866-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] poco: make cmake packages relocatable
+References: <1496212846-21304-1-git-send-email-samuli.piippo@qt.io>
+	<6780201c-a87e-730f-4cb2-9545d6ffe782@zonque.org>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <a57704de-9be3-0182-dc47-201117ab41b0@gmail.com>
+Date: Thu, 1 Jun 2017 15:35:29 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
+MIME-Version: 1.0
+In-Reply-To: <6780201c-a87e-730f-4cb2-9545d6ffe782@zonque.org>
+Subject: Re: [meta-qt5][PATCH] Upgrade to Qt 5.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,62 +62,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 08:10:45 -0000
+X-List-Received-Date: Thu, 01 Jun 2017 12:35:31 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Before the path to the dependencies was hard coded into the generated
-PocoConfig.cmake file. This causes issues with sstate.
+On 01.06.2017 10:30, Daniel Mack wrote:
+> On 05/31/2017 08:40 AM, Samuli Piippo wrote:
+>> * adapt QtWebEngine recipe to use GN instead of GYP
+>> * add QtRemoteObjects as a new Qt module
+>> * update available QtBase configure arguments
+>> * remove obsolete patches
+>> * patch all .pc files to remove build paths
+>> * include generated QML cache files in packages
+>> * the patch "configure paths for target qmake properly" could not
+>>    be applied anymore and support must be done differently
+> 
+> When trying to build qtwebengine, I get the following:
+> 
+> | [1/330] CC base/third_party/libevent/buffer.o
+> | FAILED: base/third_party/libevent/buffer.o
+> | cc -MMD -MF base/third_party/libevent/buffer.o.d
+> -I/home/daniel/src/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtwebengine/5.9.0+gitAUTOINC+73f7be5b2a_aa2fdd6be3-r0/build/src/3rdparty/chromium/tools/gn/out/Release/gen
+> -I/home/daniel/src/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtwebengine/5.9.0+gitAUTOINC+73f7be5b2a_aa2fdd6be3-r0/git/src/3rdparty/chromium
+> -I/home/daniel/src/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtwebengine/5.9.0+gitAUTOINC+73f7be5b2a_aa2fdd6be3-r0/git/src/3rdparty/chromium/base/third_party/libevent/linux
+> -DNO_TCMALLOC -D__STDC_FORMAT_MACROS -O2 -g0 -D_FILE_OFFSET_BITS=64
+> -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -pthread -pipe
+> -fno-exceptions -D__STDC_FORMAT_MACROS -DNO_TCMALLOC
+> -D__STDC_FORMAT_MACROS -O2 -g0 -D_FILE_OFFSET_BITS=64
+> -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -pthread -pipe
+> -fno-exceptions -D__STDC_FORMAT_MACROS -DHAVE_CONFIG_H  -c
+> /home/daniel/src/poky/build/tmp-glibc/work/aarch64-nepos-linux/qtwebengine/5.9.0+gitAUTOINC+73f7be5b2a_aa2fdd6be3-r0/git/src/3rdparty/chromium/base/third_party/libevent/buffer.c
+> -o base/third_party/libevent/buffer.o
+> | /bin/sh: cc: command not found
+> 
 
-This change overrides the libraries with just the library names and thus
-let's the linker take care of finding them.
+Parts of the chromium is built for the host and requires gcc-multilib to 
+be installed when building on a x64 host. I should have noted that in 
+commit message.
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- meta-oe/recipes-support/poco/poco_1.7.8.bb | 11 ++++++-----
- 1 file changed, 6 insertions(+), 5 deletions(-)
-
-diff --git a/meta-oe/recipes-support/poco/poco_1.7.8.bb b/meta-oe/recipes-support/poco/poco_1.7.8.bb
-index 0fd6a8b..1b83735 100644
---- a/meta-oe/recipes-support/poco/poco_1.7.8.bb
-+++ b/meta-oe/recipes-support/poco/poco_1.7.8.bb
-@@ -21,6 +21,7 @@ SRC_URI = " \
- S = "${WORKDIR}/git"
- 
- EXTRA_OECMAKE = "-DCMAKE_BUILD_TYPE=RelWithDebInfo -DPOCO_UNBUNDLED=ON \
-+                  -DZLIB_LIBRARY_RELEASE:STRING=z -DPCRE_LIBRARY:STRING=pcre \
-                  ${@bb.utils.contains('PTEST_ENABLED', '1', '-DENABLE_TESTS=ON ', '', d)}"
- 
- # For the native build we want to use the bundled version
-@@ -34,16 +35,16 @@ EXTRA_OECMAKE_append = " -DCMAKE_SKIP_RPATH=ON"
- # these don't have dependencies outside oe-core
- PACKAGECONFIG ??= "XML JSON MongoDB PDF Util Net NetSSL Crypto Data DataSQLite Zip"
- 
--PACKAGECONFIG[XML] = "-DENABLE_XML=ON,-DENABLE_XML=OFF,expat"
-+PACKAGECONFIG[XML] = "-DENABLE_XML=ON -DEXPAT_LIBRARY:STRING=expat,-DENABLE_XML=OFF,expat"
- PACKAGECONFIG[JSON] = "-DENABLE_JSON=ON,-DENABLE_JSON=OFF"
- PACKAGECONFIG[MongoDB] = "-DENABLE_MONGODB=ON,-DENABLE_MONGODB=OFF"
- PACKAGECONFIG[PDF] = "-DENABLE_PDF=ON,-DENABLE_PDF=OFF,zlib"
- PACKAGECONFIG[Util] = "-DENABLE_UTIL=ON,-DENABLE_UTIL=OFF"
- PACKAGECONFIG[Net] = "-DENABLE_NET=ON,-DENABLE_NET=OFF"
--PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON,-DENABLE_NETSSL=OFF,openssl"
--PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON,-DENABLE_CRYPTO=OFF,openssl"
-+PACKAGECONFIG[NetSSL] = "-DENABLE_NETSSL=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DOPENSSL_CRYPTO_LIBRARY:STRING=crypto,-DENABLE_NETSSL=OFF,openssl"
-+PACKAGECONFIG[Crypto] = "-DENABLE_CRYPTO=ON -DOPENSSL_SSL_LIBRARY:STRING=ssl -DOPENSSL_CRYPTO_LIBRARY:STRING=crypto,-DENABLE_CRYPTO=OFF,openssl"
- PACKAGECONFIG[Data] = "-DENABLE_DATA=ON,-DENABLE_DATA=OFF"
--PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON,-DENABLE_DATA_SQLITE=OFF,sqlite3"
-+PACKAGECONFIG[DataSQLite] = "-DENABLE_DATA_SQLITE=ON -DSQLITE3_LIBRARY:STRING=sqlite3,-DENABLE_DATA_SQLITE=OFF,sqlite3"
- PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
- 
- # Additional components not build by default,
-@@ -51,7 +52,7 @@ PACKAGECONFIG[Zip] = "-DENABLE_ZIP=ON,-DENABLE_ZIP=OFF"
- # or they don't work on all architectures
- PACKAGECONFIG[mod_poco] = "-DENABLE_APACHECONNECTOR=ON,-DENABLE_APACHECONNECTOR=OFF,apr apache2"
- PACKAGECONFIG[CppParser] = "-DENABLE_CPPPARSER=ON,-DENABLE_CPPPARSER=OFF"
--PACKAGECONFIG[DataMySQL] = "-DENABLE_DATA_MYSQL=ON,-DENABLE_DATA_MYSQL=OFF,mariadb"
-+PACKAGECONFIG[DataMySQL] = "-DENABLE_DATA_MYSQL=ON -DMYSQL_LIB:STRING=mysqlclient_r,-DENABLE_DATA_MYSQL=OFF,mariadb"
- PACKAGECONFIG[DataODBC] = "-DENABLE_DATA_ODBC=ON,-DENABLE_DATA_ODBC=OFF,libiodbc"
- PACKAGECONFIG[PageCompiler] = "-DENABLE_PAGECOMPILER=ON,-DENABLE_PAGECOMPILER=OFF"
- PACKAGECONFIG[PageCompilerFile2Page] = "-DENABLE_PAGECOMPILER_FILE2PAGE=ON,-DENABLE_PAGECOMPILER_FILE2PAGE=OFF"
--- 
-2.1.4
-
+My /usr/bin/cc is a symlink to gcc
 
