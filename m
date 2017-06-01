@@ -1,43 +1,52 @@
-Return-Path: <brarcher@lexmark.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 7225277D2F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
+	[209.85.161.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 1697D77D01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 17:00:09 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id d127so68182341wmf.0
+	Thu,  1 Jun 2017 18:19:32 +0000 (UTC)
+Received: by mail-yw0-f171.google.com with SMTP id l14so23739921ywk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 10:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lexmark-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=YxUnbOoEEOc84E1jvO58ZAhr8gxGUElbmAFgWkP6WtE=;
-	b=wyO8CQXBb9cx28hAqpVmB1cAGXwtmaJHAuNwamQLJnyjxJ1Ev2CdNgUQBbSlh079mN
-	Tz5U6xn5bmkPwIzxRK+13J1EwukWS9rsM+4r74ifaUQ3fK84fNIfZRBQxlQSY8FaFkKH
-	DqmOh8AlIpXlAVwqafnB+kHfA5WKv1mCBnXlhG9YEvvpT97ODW3SU+tlaugl93cGbgBs
-	IsALYNPbJJUOb3/rb0m6Hsf1fuOm7GhKXrc0lBMIHR7Zhgc0lWP3xQKamCxaDWj2XPEz
-	YTnyweV1uvqp8ZNQzW/LE1nSf6yB4ZMgTOiPlTeAm6qquCfkcm52ic9HbyRHqBTp2cC+
-	wG9A==
+	Thu, 01 Jun 2017 11:19:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=srVdaJIGMC9V1XGyznj/tRBGDaQHmFqu+JyLD9ejajc=;
+	b=Sxrn6cv7whJBKSoSuNxCMKMoxNWqFfnQ5N94FKx3Sf2BgHjOfXXmcPqwRPmAmusEx1
+	VP0H3AHBdchLx1EhMq0U7FyRDZCmLF45p03egdGpsPsLeDY4dj48JsgMXJtVctoJ6ntz
+	p+X5E9G6moHiOHP4yReQYyHJrMqHhCHt8KaNCMR/OUPTedOr0iz6aw4mwb8mOjoWeLgT
+	mbvdYatogSLf4CtWhP55UTo2fhARTKwNcXiwdhVOEUGpBwIQaxpPbqENC807mhNpm5gv
+	iu+2y1/9Xm+wRSMn6fkGjQlKtEPsH5uHaSGjyH7CcJg8HANq4Wp40yO3e7BzXNxbdrxx
+	yjVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=YxUnbOoEEOc84E1jvO58ZAhr8gxGUElbmAFgWkP6WtE=;
-	b=eh8u2PnBSa2nIuRLefBCLLstxc+U7lPD9ZDNO+rBMRtJAeX+cTSyFiYqqjyoSv7xb4
-	QzCPFVQnAjNFSodM8X++MSrJPc63Li+KVa7qGk2CGm5IcC0B9TqrZttcZU3PloO2Omii
-	m09RyuVNthuJ9G4H5kNuXjfpCS+x92J9ijBZ0k4GNVruyR7YAlgBHDaGDBtxMBFV2fHB
-	tQwfTtmMUzuH0VsCkXlGi9iyVYiWwsg3djiBa64XWhIScEA7xLaIIS+ociDGYxQUqm4e
-	yCMOTygQeA/oY246Jx51XGu9nCXdqmXtKRxcxMbee8+XrtgudE4Xh95Al6dQyO3slWPg
-	DzKw==
-X-Gm-Message-State: AODbwcD1sT8zEpKL4Hq2GqtUcOyff6oktmNkuiUM0zrzqZZmZ1hQ2rGJ
-	KERtF5tIU6qB2pcsqyRy4PY4RkNcX3tAeoU=
-X-Received: by 10.28.138.209 with SMTP id m200mr131444wmd.8.1496336410658;
-	Thu, 01 Jun 2017 10:00:10 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=srVdaJIGMC9V1XGyznj/tRBGDaQHmFqu+JyLD9ejajc=;
+	b=A092A6JAlqF6svaNJNn9NJ9YyrmWinl3fDamORZJrMFyKrcOOmjGGfeWVMnA5PVyEl
+	2ti/T3LNsZgiQfwr+NfF9bmY5ONzrHWkEcG/eiNERwP8kIAFtpOsrYmxZZKFLjBVDsLf
+	IIjFYlEVg7Q2PIOYYiSu1rOm3VWvukaGGyikEh3Hnc57JcFsdj58jUFajSEuSqbjvMwf
+	kn2Ju4mNu6EjCswI1gO4FB4KDMx1wG6J4UYFgcyk4e6ERMnIydfrisLc+/wMPLyqnPmX
+	O+HO+TiExxgeGq12Lo1Pw1J7mh4bpELQhPVZI7BBe2LJQ7Ksym7kq/mAYIvXlJAdqI9v
+	9j0Q==
+X-Gm-Message-State: AODbwcDZdWPZrPlhowDMuMnZHBTdaLD3cOQNydVl1YHt7fYN+ZzbA4wD
+	b03o0c+7vQckPP5WAdxNRsdpDsCJFA==
+X-Received: by 10.129.44.196 with SMTP id s187mr2399711yws.259.1496341173777; 
+	Thu, 01 Jun 2017 11:19:33 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.145.79 with HTTP; Thu, 1 Jun 2017 09:59:29 -0700 (PDT)
-From: Branden Archer <brarcher@lexmark.com>
-Date: Thu, 1 Jun 2017 12:59:29 -0400
-Message-ID: <CAADoZg08aEjHeFb30CHjicODL2OMzJtq3XnwyGHFnRG-p7EEdQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.37.162.38 with HTTP; Thu, 1 Jun 2017 11:19:33 -0700 (PDT)
+In-Reply-To: <CAMKF1sqzX+NBRvP9pCURo5cUPadVmngNpTv2RCv=BBs8bzNzmQ@mail.gmail.com>
+References: <1496212846-21304-1-git-send-email-samuli.piippo@qt.io>
+	<6780201c-a87e-730f-4cb2-9545d6ffe782@zonque.org>
+	<a57704de-9be3-0182-dc47-201117ab41b0@gmail.com>
+	<5b8de782-d675-642e-2622-ef4f93bbb3e4@zonque.org>
+	<79f414a2-00db-068d-962a-a25b23c97190@gmail.com>
+	<CAMKF1sqzX+NBRvP9pCURo5cUPadVmngNpTv2RCv=BBs8bzNzmQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 1 Jun 2017 20:19:33 +0200
+Message-ID: <CA+chaQeiXjtLBqOhnrBvQWohJj7A=WGxmNMJBhgJft6Nigmoww@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][PATCH] Upgrade zsh to 5.3.1
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] Upgrade to Qt 5.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,115 +59,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 17:00:13 -0000
-X-Groupsio-MsgNum: 66983
-Content-Type: multipart/mixed; boundary="001a114717fa3928e60550e8f8f5"
-
---001a114717fa3928e60550e8f8f5
+X-List-Received-Date: Thu, 01 Jun 2017 18:19:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Attached please find a patch to consider for the zsh recipe which upgrades
-zsh from 5.0.5 to 5.3.1.
+${BUILD_CC} for host's CC
 
-The rationale for upgrading the recipe is in part to pick up a potential
-security related fix in 5.0.7 from 2014 as well as pick up additional
-features and bug fixes.
+On Thu, Jun 1, 2017 at 6:30 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Thanks,
+> Export cc=${CC} or some such in recipe
+>
+> On Thu, Jun 1, 2017 at 6:17 AM Samuli Piippo <samuli.piippo@gmail.com>
+> wrote:
+>
+> > On 01.06.2017 15:57, Daniel Mack wrote:
+> > > On 06/01/2017 02:35 PM, Samuli Piippo wrote:
+> > >> Parts of the chromium is built for the host and requires gcc-multilib
+> to
+> > >> be installed when building on a x64 host. I should have noted that in
+> > >> commit message.
+> > >>
+> > >> My /usr/bin/cc is a symlink to gcc
+> > >
+> > > Hmm, same here, but that's not the case when when bitbake is executing
+> > > it, as it modifies the PATH.
+> > >
+> >
+> > OK found it. I didn't have new enough poky, so the HOSTTOOL filtering
+> > was not used.
+> >
+> > We need to find proper place to add HOSTTOOLS += "cc c++" to whitelist
+> > the needed tools for webengine.
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
-- Branden
-
---001a114717fa3928e60550e8f8f5
-Content-Type: text/x-patch; charset="US-ASCII"; name="0001-zsh-update-to-5.3.1.patch"
-Content-Disposition: attachment; filename="0001-zsh-update-to-5.3.1.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_j3elcu0a0
-
-RnJvbSBmYTE0NGFkMjViMWY0ZDViOTFmMjI1NWYxMDU1YjgwYTQ3NzY1ZjZmIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBCcmFuZGVuIEFyY2hlciA8YnJhcmNoZXJAbGV4bWFyay5jb20+
-CkRhdGU6IFRodSwgMSBKdW4gMjAxNyAxMTo0Mzo1MSAtMDQwMApTdWJqZWN0OiBbUEFUQ0hdIHpz
-aDogdXBkYXRlIHRvIDUuMy4xCgotLS0KIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNo
-XzUuMC41LmJiIHwgNjEgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogbWV0YS1vZS9y
-ZWNpcGVzLWV4dGVuZGVkL3pzaC96c2hfNS4zLjEuYmIgfCA2MSArKysrKysrKysrKysrKysrKysr
-KysrKysrKysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDYxIGluc2VydGlvbnMoKyksIDYxIGRlbGV0
-aW9ucygtKQogZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gv
-enNoXzUuMC41LmJiCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
-L3pzaC96c2hfNS4zLjEuYmIKCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
-enNoL3pzaF81LjAuNS5iYiBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMC41
-LmJiCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAzOWIyZDk1Li4wMDAwMDAwCi0tLSBh
-L21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMC41LmJiCisrKyAvZGV2L251bGwK
-QEAgLTEsNjEgKzAsMCBAQAotU1VNTUFSWSA9ICJVTklYIFNoZWxsIHNpbWlsYXIgdG8gdGhlIEtv
-cm4gc2hlbGwiCi1ERVNDUklQVElPTiA9ICJac2ggaXMgYSBzaGVsbCBkZXNpZ25lZCBmb3IgaW50
-ZXJhY3RpdmUgdXNlLCBhbHRob3VnaCBpdCBpcyBhbHNvIGEgXAotICAgICAgICAgICAgICAgcG93
-ZXJmdWwgc2NyaXB0aW5nIGxhbmd1YWdlLiBNYW55IG9mIHRoZSB1c2VmdWwgZmVhdHVyZXMgb2Yg
-YmFzaCwgXAotICAgICAgICAgICAgICAga3NoLCBhbmQgdGNzaCB3ZXJlIGluY29ycG9yYXRlZCBp
-bnRvIHpzaDsgbWFueSBvcmlnaW5hbCBmZWF0dXJlcyB3ZXJlIGFkZGVkLiIKLUhPTUVQQUdFID0g
-Imh0dHA6Ly93d3cuenNoLm9yZyIKLVNFQ1RJT04gPSAiYmFzZS9zaGVsbCIKLQotTElDRU5TRSA9
-ICJ6c2giCi1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTkNFO21kNT1iN2JjODUzODk0
-NjY0YmU0NTVhOTIyZGI5ODA1Mjg4ZSIKLQotREVQRU5EUyA9ICJuY3Vyc2VzIGJpc29uLW5hdGl2
-ZSBsaWJjYXAgbGlicGNyZSBnZGJtIGdyb2ZmLW5hdGl2ZSIKLQotU1JDX1VSSSA9ICIke1NPVVJD
-RUZPUkdFX01JUlJPUn0vJHtCUE59LyR7QlB9LnRhci5neiIKLVNSQ19VUklbbWQ1c3VtXSA9ICI2
-ZmIwZTNlNTJhMGY4ZGU1Y2E2MzEzODM5MWI4MWNlMCIKLVNSQ19VUklbc2hhMjU2c3VtXSA9ICJi
-MzVjZjE5ZTRhNmJhMzlmZDAzYzYzNzJiOGE4NzYwYTQ5MWNjMmUyZTRhYmEzZDE1MDIzZmYyOTFj
-Mjg5NGI0IgotCi1pbmhlcml0IGF1dG90b29scyBnZXR0ZXh0IHVwZGF0ZS1hbHRlcm5hdGl2ZXMK
-LQotRVhUUkFfT0VDT05GID0gIiBcCi0gICAgLS1iaW5kaXI9JHtiYXNlX2JpbmRpcn0gXAotICAg
-IC0tZW5hYmxlLWV0Y2Rpcj0ke3N5c2NvbmZkaXJ9IFwKLSAgICAtLWVuYWJsZS1mbmRpcj0ke2Rh
-dGFkaXJ9LyR7UE59LyR7UFZ9L2Z1bmN0aW9ucyBcCi0gICAgLS1lbmFibGUtc2l0ZS1mbmRpcj0k
-e2RhdGFkaXJ9LyR7UE59L3NpdGUtZnVuY3Rpb25zIFwKLSAgICAtLXdpdGgtdGVybS1saWI9J25j
-dXJzZXN3IG5jdXJzZXMnIFwKLSAgICAtLXdpdGgtdGNzZXRwZ3JwIFwKLSAgICAtLWVuYWJsZS1j
-YXAgXAotICAgIC0tZW5hYmxlLW11bHRpYnl0ZSBcCi0gICAgLS1kaXNhYmxlLWdkYm0gXAotICAg
-IC0tZGlzYWJsZS1keW5hbWljIFwKLSAgICB6c2hfY3Zfc2hhcmVkX2Vudmlyb249eWVzIFwKLSIK
-LQotRVhUUkFfT0VNQUtFID0gIi1lIE1BS0VGTEFHUz0iCi0KLUFMVEVSTkFUSVZFXyR7UE59ID0g
-InNoIgotQUxURVJOQVRJVkVfTElOS19OQU1FW3NoXSA9ICIke2Jhc2VfYmluZGlyfS9zaCIKLUFM
-VEVSTkFUSVZFX1RBUkdFVFtzaF0gPSAiJHtiYXNlX2JpbmRpcn0vJHtCUE59IgotQUxURVJOQVRJ
-VkVfUFJJT1JJVFkgPSAiMTAwIgotCi1leHBvcnQgQVVUT0hFQURFUiA9ICJ0cnVlIgotCi1kb19j
-b25maWd1cmUgKCkgewotICAgIGdudS1jb25maWdpemUgLS1mb3JjZSAke1N9Ci0gICAgb2VfcnVu
-Y29uZgotfQotCi1kb19pbnN0YWxsX2FwcGVuZCAoKSB7Ci0gICAgcm0gLWZyICR7RH0vdXNyL3No
-YXJlCi19Ci0KLXBrZ19wb3N0aW5zdF8ke1BOfSAoKSB7Ci0gICAgdG91Y2ggJEQke3N5c2NvbmZk
-aXJ9L3NoZWxscwotICAgIGdyZXAgLXEgImJpbi96c2giICREJHtzeXNjb25mZGlyfS9zaGVsbHMg
-fHwgZWNobyAvYmluL3pzaCA+PiAkRCR7c3lzY29uZmRpcn0vc2hlbGxzCi0gICAgZ3JlcCAtcSAi
-YmluL3NoIiAkRCR7c3lzY29uZmRpcn0vc2hlbGxzIHx8IGVjaG8gL2Jpbi9zaCA+PiAkRCR7c3lz
-Y29uZmRpcn0vc2hlbGxzCi19Ci0KLUZJTEVTXyR7UE59LWRiZyArPSAiXAotICAgICR7bGliZGly
-fS8ke1BOfS8ke1BWfS8ke1BOfS8uZGVidWcvKi5zbyBcCi0gICAgJHtsaWJkaXJ9LyR7UE59LyR7
-UFZ9LyR7UE59L2RiLy5kZWJ1Zy8qLnNvIFwKLSAgICAke2xpYmRpcn0vJHtQTn0vJHtQVn0vJHtQ
-Tn0vbmV0Ly5kZWJ1Zy8qLnNvIFwKLSIKZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1leHRl
-bmRlZC96c2gvenNoXzUuMy4xLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3pzaC96c2hf
-NS4zLjEuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMWY1ZTM5MAotLS0g
-L2Rldi9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMy4xLmJi
-CkBAIC0wLDAgKzEsNjEgQEAKK1NVTU1BUlkgPSAiVU5JWCBTaGVsbCBzaW1pbGFyIHRvIHRoZSBL
-b3JuIHNoZWxsIgorREVTQ1JJUFRJT04gPSAiWnNoIGlzIGEgc2hlbGwgZGVzaWduZWQgZm9yIGlu
-dGVyYWN0aXZlIHVzZSwgYWx0aG91Z2ggaXQgaXMgYWxzbyBhIFwKKyAgICAgICAgICAgICAgIHBv
-d2VyZnVsIHNjcmlwdGluZyBsYW5ndWFnZS4gTWFueSBvZiB0aGUgdXNlZnVsIGZlYXR1cmVzIG9m
-IGJhc2gsIFwKKyAgICAgICAgICAgICAgIGtzaCwgYW5kIHRjc2ggd2VyZSBpbmNvcnBvcmF0ZWQg
-aW50byB6c2g7IG1hbnkgb3JpZ2luYWwgZmVhdHVyZXMgd2VyZSBhZGRlZC4iCitIT01FUEFHRSA9
-ICJodHRwOi8vd3d3LnpzaC5vcmciCitTRUNUSU9OID0gImJhc2Uvc2hlbGwiCisKK0xJQ0VOU0Ug
-PSAienNoIgorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5DRTttZDU9YjdiYzg1Mzg5
-NDY2NGJlNDU1YTkyMmRiOTgwNTI4OGUiCisKK0RFUEVORFMgPSAibmN1cnNlcyBiaXNvbi1uYXRp
-dmUgbGliY2FwIGxpYnBjcmUgZ2RibSBncm9mZi1uYXRpdmUiCisKK1NSQ19VUkkgPSAiJHtTT1VS
-Q0VGT1JHRV9NSVJST1J9LyR7QlBOfS8ke0JQfS50YXIuZ3oiCitTUkNfVVJJW21kNXN1bV0gPSAi
-ZDU4M2ZiY2EwYzI0MTBiZjk1NDJjZThhNjUxYzI2Y2EiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAi
-M2Q5NGE1OTBmZjNjNTYyZWNmMzg3ZGE3OGFjMzU2ZDZiZWE3OWIwNTBhOWVmODFlM2VjYjlmOGVl
-NTEzMDQwZSIKKworaW5oZXJpdCBhdXRvdG9vbHMgZ2V0dGV4dCB1cGRhdGUtYWx0ZXJuYXRpdmVz
-CisKK0VYVFJBX09FQ09ORiA9ICIgXAorICAgIC0tYmluZGlyPSR7YmFzZV9iaW5kaXJ9IFwKKyAg
-ICAtLWVuYWJsZS1ldGNkaXI9JHtzeXNjb25mZGlyfSBcCisgICAgLS1lbmFibGUtZm5kaXI9JHtk
-YXRhZGlyfS8ke1BOfS8ke1BWfS9mdW5jdGlvbnMgXAorICAgIC0tZW5hYmxlLXNpdGUtZm5kaXI9
-JHtkYXRhZGlyfS8ke1BOfS9zaXRlLWZ1bmN0aW9ucyBcCisgICAgLS13aXRoLXRlcm0tbGliPSdu
-Y3Vyc2VzdyBuY3Vyc2VzJyBcCisgICAgLS13aXRoLXRjc2V0cGdycCBcCisgICAgLS1lbmFibGUt
-Y2FwIFwKKyAgICAtLWVuYWJsZS1tdWx0aWJ5dGUgXAorICAgIC0tZGlzYWJsZS1nZGJtIFwKKyAg
-ICAtLWRpc2FibGUtZHluYW1pYyBcCisgICAgenNoX2N2X3NoYXJlZF9lbnZpcm9uPXllcyBcCisi
-CisKK0VYVFJBX09FTUFLRSA9ICItZSBNQUtFRkxBR1M9IgorCitBTFRFUk5BVElWRV8ke1BOfSA9
-ICJzaCIKK0FMVEVSTkFUSVZFX0xJTktfTkFNRVtzaF0gPSAiJHtiYXNlX2JpbmRpcn0vc2giCitB
-TFRFUk5BVElWRV9UQVJHRVRbc2hdID0gIiR7YmFzZV9iaW5kaXJ9LyR7QlBOfSIKK0FMVEVSTkFU
-SVZFX1BSSU9SSVRZID0gIjEwMCIKKworZXhwb3J0IEFVVE9IRUFERVIgPSAidHJ1ZSIKKworZG9f
-Y29uZmlndXJlICgpIHsKKyAgICBnbnUtY29uZmlnaXplIC0tZm9yY2UgJHtTfQorICAgIG9lX3J1
-bmNvbmYKK30KKworZG9faW5zdGFsbF9hcHBlbmQgKCkgeworICAgIHJtIC1mciAke0R9L3Vzci9z
-aGFyZQorfQorCitwa2dfcG9zdGluc3RfJHtQTn0gKCkgeworICAgIHRvdWNoICREJHtzeXNjb25m
-ZGlyfS9zaGVsbHMKKyAgICBncmVwIC1xICJiaW4venNoIiAkRCR7c3lzY29uZmRpcn0vc2hlbGxz
-IHx8IGVjaG8gL2Jpbi96c2ggPj4gJEQke3N5c2NvbmZkaXJ9L3NoZWxscworICAgIGdyZXAgLXEg
-ImJpbi9zaCIgJEQke3N5c2NvbmZkaXJ9L3NoZWxscyB8fCBlY2hvIC9iaW4vc2ggPj4gJEQke3N5
-c2NvbmZkaXJ9L3NoZWxscworfQorCitGSUxFU18ke1BOfS1kYmcgKz0gIlwKKyAgICAke2xpYmRp
-cn0vJHtQTn0vJHtQVn0vJHtQTn0vLmRlYnVnLyouc28gXAorICAgICR7bGliZGlyfS8ke1BOfS8k
-e1BWfS8ke1BOfS9kYi8uZGVidWcvKi5zbyBcCisgICAgJHtsaWJkaXJ9LyR7UE59LyR7UFZ9LyR7
-UE59L25ldC8uZGVidWcvKi5zbyBcCisiCi0tIAoxLjkuMwoK
-
---001a114717fa3928e60550e8f8f5--
