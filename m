@@ -1,52 +1,52 @@
 Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1125677D1A
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 4387C77D2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 16:43:07 +0000 (UTC)
-Received: by mail-pf0-f170.google.com with SMTP id m17so31956804pfg.3
+	Thu,  1 Jun 2017 16:43:09 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id 9so31957570pfj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 09:43:09 -0700 (PDT)
+	Thu, 01 Jun 2017 09:43:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ettus-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=CfNHJ/wRojwX97cBDerhbhUqCCrUGelqyD78CQAQzns=;
-	b=aLq6zg25Np3U4F6ytihVTFBsxp9ZEaLuI7QgG85k0A50LJm34L794ilRgWI+lPn1Xv
-	5LRO8z67tOrWS5lzr9Q7LAKa6rPwPK49ur19N8Ir21HYyEpX5gzdZ6i+Z46luqfYgumC
-	WoZZh3gVNaSW9A8cIWzDV5HbW73crkFcpGYnrj7szkyfGPTBGMtEE0+QKuGqXX/akarS
-	LxLKNebBxW7FXupDBPdlYSERaggbo2wd0J2nLLb3V3InEochW5hVKqgveVChasACjHEt
-	QeWEsPk3ccvR0Qjm0+IZ4V3B/4QWV2YrCYBY3uwUGmK+XeGvZHSBGwQtKcv3VJ9XMrY1
-	hrWQ==
+	bh=KOfidlRA4CduCMXghZfWYlj17ZbrNWsuVB5QRhg872I=;
+	b=uUyKvvAM4gqHH1xRrtN6Aqz6pigBklloPIAErO4WMX7pUqOivYT1C8SVoAaAdfPJBh
+	kY8KxmqNmM06Tc4wBWB4E/API5QhsouxclJlzwkHHMa771fZKdiSa1lcK36xKTAch3Dt
+	31MRGzSak24ZTGeaXEc/mGDJEVPrVpGKf0ZX78SV0zbaeBCD/jVYlU2O7VFYzKaWuBQa
+	36gbbRFuoc0IZ8B/fKNySi9/knD8TdStZPm8ahmPK7NAqX5PK8CDnDgVVN3hz2ROMbX1
+	f6x8ff1mkoa7SBH7R0CchlqQ1zRb6XBpmxOJyyKFCqOeOaN8bXMsri18OhK8te+cT6tM
+	Gl2Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=CfNHJ/wRojwX97cBDerhbhUqCCrUGelqyD78CQAQzns=;
-	b=ZjqmSmJgIf4usRIFyBl6/Ct4DmV4xEoMloRVfPyV9eiJcwuGwkHmppk9YBodlgFh/O
-	E8IVUwQk6paI1e2U1X2N9E7hjzg4SKqgqtO/C6JTWhsQJ5Z+cJF9nQTpFefWpbKtLUq5
-	B2+ZV+lEMehuo56yPND5qDY0RepT0HzmWcmFAO8tqMhWXAaeyLOePLH0xOWucRZUkPPC
-	lB7ASufxNokel8B2big1RrnZ8MZ/yHz3iUUjDY8Y0NcdRix1too9qFBRUPfpoF5cpqFg
-	ovozev8E+JNj/6ySSXiqtQ0+mlkRtgtGQR7406Kyxcd8JTDOHxbhSy9i7bIHYFaHWhkb
-	wSNQ==
-X-Gm-Message-State: AODbwcColBp+NAdFdn6rlBqgL/U4qZEkpZdtED/WKYtITJrde8BQTXFq
-	SU/RYMeJBHO5pbMzpaO38g==
-X-Received: by 10.98.150.12 with SMTP id c12mr1842070pfe.201.1496335388995;
-	Thu, 01 Jun 2017 09:43:08 -0700 (PDT)
+	bh=KOfidlRA4CduCMXghZfWYlj17ZbrNWsuVB5QRhg872I=;
+	b=THmCXxwOKH8agXCxsyXJE1C/J5CC4wMktJpkMvr9t6BlszhRb4Zdg1MrqEONL66QEe
+	XSsC3shPHF0w9KnbsyhD9TINqrKsdvm9Dt53ZKx2eaPq+/70/qdBX1R++0fvHlZseh6/
+	awEW8BXNpj+XHmzOaOc5E039W7sh8Iymwp0DtQ0CbatILc3D2FsBL29LK9BuYxHG+7On
+	hovWoEZ2bCaq8XPr7yeWl04zHI1b4U8Wgo8eA2hCLOJ8OSctqqE+A87norcoyfqmdVYO
+	Jy6tRcve9wIpCyMoc/qUlMYPp0s6v6OV+kK54z1/tGm7P6q4wWKlKtWgdQ4Erhmsge+x
+	bWhw==
+X-Gm-Message-State: AODbwcAKA5kpRB9fQOXPRkl6TWxADQIg2PQiWKP57kfYg3HV5WxfHc5+
+	57aBwyqq5neEBXFZmLfw7Q==
+X-Received: by 10.98.201.15 with SMTP id k15mr1913195pfg.14.1496335390496;
+	Thu, 01 Jun 2017 09:43:10 -0700 (PDT)
 Received: from tyrael.ni.corp.natinst.com
 	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
 	by smtp.gmail.com with ESMTPSA id
-	19sm30635779pfz.39.2017.06.01.09.43.07
+	19sm30635779pfz.39.2017.06.01.09.43.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 01 Jun 2017 09:43:07 -0700 (PDT)
+	Thu, 01 Jun 2017 09:43:09 -0700 (PDT)
 From: Moritz Fischer <moritz.fischer@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Jun 2017 09:42:48 -0700
-Message-Id: <1496335374-25575-2-git-send-email-moritz.fischer@ettus.com>
+Date: Thu,  1 Jun 2017 09:42:49 -0700
+Message-Id: <1496335374-25575-3-git-send-email-moritz.fischer@ettus.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
 References: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
 Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 2/8] python-greenlet: Add support for python3
+Subject: [meta-python][PATCH 3/8] python-msgpack: Add support for python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,59 +59,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 16:43:08 -0000
+X-List-Received-Date: Thu, 01 Jun 2017 16:43:09 -0000
 
-Extend recipe to support python3 as well
+Extend recipe to support python3
 
 Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- meta-python/recipes-devtools/python/python-greenlet.inc      |  9 +++++++++
- .../recipes-devtools/python/python-greenlet_0.4.12.bb        | 12 ++----------
- .../recipes-devtools/python/python3-greenlet_0.4.12.bb       |  2 ++
- 3 files changed, 13 insertions(+), 10 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-greenlet.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
+ meta-python/recipes-devtools/python/python-msgpack.inc       |  9 +++++++++
+ meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb  | 11 ++---------
+ meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb |  2 ++
+ 3 files changed, 13 insertions(+), 9 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-msgpack.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-greenlet.inc b/meta-python/recipes-devtools/python/python-greenlet.inc
+diff --git a/meta-python/recipes-devtools/python/python-msgpack.inc b/meta-python/recipes-devtools/python/python-msgpack.inc
 new file mode 100644
-index 0000000..35820db
+index 0000000..228ce59
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-greenlet.inc
++++ b/meta-python/recipes-devtools/python/python-msgpack.inc
 @@ -0,0 +1,9 @@
-+SUMMARY = "Python lightweight in-process concurrent programming"
-+LICENSE = "MIT & PSF"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
-+                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
++SUMMARY = "MessagePack (de)serializer"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
 +
-+SRC_URI[md5sum] = "e8637647d58a26c4a1f51ca393e53c00"
-+SRC_URI[sha256sum] = "e4c99c6010a5d153d481fdaf63b8a0782825c0721506d880403a3b9b82ae347e"
++SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
++SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
 +
++PYPI_PACKAGE = "msgpack-python"
 +inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
-index 4fc2c1d..c14976e 100644
---- a/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
-+++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
-@@ -1,10 +1,2 @@
--SUMMARY = "Python lightweight in-process concurrent programming"
--LICENSE = "MIT & PSF"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
--                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
+diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
+index 8a0ad8f..2c2c8f2 100644
+--- a/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
++++ b/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
+@@ -1,9 +1,2 @@
+-SUMMARY = "MessagePack (de)serializer"
+-LICENSE = "Apache-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
 -
--SRC_URI[md5sum] = "e8637647d58a26c4a1f51ca393e53c00"
--SRC_URI[sha256sum] = "e4c99c6010a5d153d481fdaf63b8a0782825c0721506d880403a3b9b82ae347e"
+-SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
+-SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
 -
--inherit pypi distutils
--
-+inherit distutils
-+require python-greenlet.inc
-diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
+-PYPI_PACKAGE = "msgpack-python"
+-inherit pypi setuptools
++require python-msgpack.inc
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb
 new file mode 100644
-index 0000000..1aedf7f
+index 0000000..096d7dd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
++++ b/meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb
 @@ -0,0 +1,2 @@
-+inherit distutils3
-+require python-greenlet.inc
++require python-msgpack.inc
++inherit setuptools3
 -- 
 2.7.4
 
