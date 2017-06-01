@@ -1,52 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
-	[209.85.161.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 1697D77D01
+Return-Path: <bkylerussell@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id E147177CFB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 18:19:32 +0000 (UTC)
-Received: by mail-yw0-f171.google.com with SMTP id l14so23739921ywk.1
+	Thu,  1 Jun 2017 18:43:24 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id v195so6839533qka.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 11:19:34 -0700 (PDT)
+	Thu, 01 Jun 2017 11:43:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=srVdaJIGMC9V1XGyznj/tRBGDaQHmFqu+JyLD9ejajc=;
-	b=Sxrn6cv7whJBKSoSuNxCMKMoxNWqFfnQ5N94FKx3Sf2BgHjOfXXmcPqwRPmAmusEx1
-	VP0H3AHBdchLx1EhMq0U7FyRDZCmLF45p03egdGpsPsLeDY4dj48JsgMXJtVctoJ6ntz
-	p+X5E9G6moHiOHP4yReQYyHJrMqHhCHt8KaNCMR/OUPTedOr0iz6aw4mwb8mOjoWeLgT
-	mbvdYatogSLf4CtWhP55UTo2fhARTKwNcXiwdhVOEUGpBwIQaxpPbqENC807mhNpm5gv
-	iu+2y1/9Xm+wRSMn6fkGjQlKtEPsH5uHaSGjyH7CcJg8HANq4Wp40yO3e7BzXNxbdrxx
-	yjVg==
+	h=from:to:cc:subject:date:message-id;
+	bh=j6TJBRfGLv0N8w95KQpFLUXMMl+DVUe4Wr2NLNyqdm4=;
+	b=TQ8WFUqjsKxyfu0E4VkDeKRNAbhCGsjEtqnLhgfGl8oFDZ5dAznOFWpausw5f1eAdk
+	NQZXaO/ZTCRBYFZBXyWwPz7/vVzgax3DCtnt1iRdwXp67Qe2NlW8/J1biS/PB6ioJzh5
+	QSeGMKHnq91m73A8C4mfWnBpf0RlpUNIFVuNTwoCAgbjE1sANVsd0mLvyxljeUjGfLGM
+	xIKmSg3UizeMZpWUBGO/cpdZ7AGtMyJmOrKpeY7IHTBxzulTwldN345TcQ2WVE9iHPzS
+	cR4BskaVhIWWMNVNOU7+LihCyfDeoSvI/uqA5snF2gY0dZUonKVeIWPbpTSYEGP9OTFp
+	2mlA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=srVdaJIGMC9V1XGyznj/tRBGDaQHmFqu+JyLD9ejajc=;
-	b=A092A6JAlqF6svaNJNn9NJ9YyrmWinl3fDamORZJrMFyKrcOOmjGGfeWVMnA5PVyEl
-	2ti/T3LNsZgiQfwr+NfF9bmY5ONzrHWkEcG/eiNERwP8kIAFtpOsrYmxZZKFLjBVDsLf
-	IIjFYlEVg7Q2PIOYYiSu1rOm3VWvukaGGyikEh3Hnc57JcFsdj58jUFajSEuSqbjvMwf
-	kn2Ju4mNu6EjCswI1gO4FB4KDMx1wG6J4UYFgcyk4e6ERMnIydfrisLc+/wMPLyqnPmX
-	O+HO+TiExxgeGq12Lo1Pw1J7mh4bpELQhPVZI7BBe2LJQ7Ksym7kq/mAYIvXlJAdqI9v
-	9j0Q==
-X-Gm-Message-State: AODbwcDZdWPZrPlhowDMuMnZHBTdaLD3cOQNydVl1YHt7fYN+ZzbA4wD
-	b03o0c+7vQckPP5WAdxNRsdpDsCJFA==
-X-Received: by 10.129.44.196 with SMTP id s187mr2399711yws.259.1496341173777; 
-	Thu, 01 Jun 2017 11:19:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.37.162.38 with HTTP; Thu, 1 Jun 2017 11:19:33 -0700 (PDT)
-In-Reply-To: <CAMKF1sqzX+NBRvP9pCURo5cUPadVmngNpTv2RCv=BBs8bzNzmQ@mail.gmail.com>
-References: <1496212846-21304-1-git-send-email-samuli.piippo@qt.io>
-	<6780201c-a87e-730f-4cb2-9545d6ffe782@zonque.org>
-	<a57704de-9be3-0182-dc47-201117ab41b0@gmail.com>
-	<5b8de782-d675-642e-2622-ef4f93bbb3e4@zonque.org>
-	<79f414a2-00db-068d-962a-a25b23c97190@gmail.com>
-	<CAMKF1sqzX+NBRvP9pCURo5cUPadVmngNpTv2RCv=BBs8bzNzmQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 1 Jun 2017 20:19:33 +0200
-Message-ID: <CA+chaQeiXjtLBqOhnrBvQWohJj7A=WGxmNMJBhgJft6Nigmoww@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] Upgrade to Qt 5.9.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=j6TJBRfGLv0N8w95KQpFLUXMMl+DVUe4Wr2NLNyqdm4=;
+	b=lR5ihHW6ldCszUWgfgije+UjjNrI6gxDD2nXgo+OJAbwOfMukk2vcEiGNMRsm/62iu
+	IY+D5IgZwKZ42kWVnkylQfmzLULFrQ1Ug9tIWplM6JU2sqjyfPYd7LnAqXsOkLdeO0lp
+	19IXOCQuel4zSSfnAbBWF1NqGAQZYqQ31qfprypuwAwhtQpkZybAL5IcHxWCX8UWoo8i
+	EVsjWOXMBzg9G0zQSYDmkFSddznUK6RfG/RUfd4X0Yv37qjFtzU42XrhWrcUL7BTOJ9k
+	qpvUeL4oPbpFk5w6hSDPCkwgrFwhtwtBrFxQYOBzRFxPTIwl6/7hRQuH6KI+2twKpC32
+	McIA==
+X-Gm-Message-State: AODbwcAUqbFECj/P/fPXRKpeQR0n/GJT/2WBpC7G1Oq29cfoieuu55j1
+	4TbGnTsJI/IAtPzps5Q=
+X-Received: by 10.55.105.2 with SMTP id e2mr3488541qkc.48.1496342605468;
+	Thu, 01 Jun 2017 11:43:25 -0700 (PDT)
+Received: from localhost.localdomain ([172.56.13.112])
+	by smtp.gmail.com with ESMTPSA id t9sm33785qth.46.2017.06.01.11.43.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 01 Jun 2017 11:43:24 -0700 (PDT)
+From: Kyle Russell <bkylerussell@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Jun 2017 14:43:15 -0400
+Message-Id: <1496342595-24185-1-git-send-email-bkylerussell@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-filesystems][PATCH] fuse: update 2.9.4 to 2.9.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,47 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 18:19:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Jun 2017 18:43:26 -0000
 
-${BUILD_CC} for host's CC
+---
+ .../recipes-support/fuse/{fuse_2.9.4.bb => fuse_2.9.7.bb}         | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+ rename meta-filesystems/recipes-support/fuse/{fuse_2.9.4.bb => fuse_2.9.7.bb} (89%)
 
-On Thu, Jun 1, 2017 at 6:30 PM, Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+similarity index 89%
+rename from meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
+rename to meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+index 153fcb4..e66f3cd 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.4.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+@@ -4,20 +4,20 @@ DESCRIPTION = "FUSE (Filesystem in Userspace) is a simple interface for userspac
+                also aims to provide a secure method for non privileged users to \
+                create and mount their own filesystem implementations. \
+               "
+-HOMEPAGE = "http://fuse.sf.net"
++HOMEPAGE = "https://github.com/libfuse/libfuse"
+ SECTION = "libs"
+ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/fuse/fuse-${PV}.tar.gz \
++SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz \
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+            file://0001-fuse-fix-the-return-value-of-help-option.patch \
+            file://fuse.conf \
+ "
+-SRC_URI[md5sum] = "ecb712b5ffc6dffd54f4a405c9b372d8"
+-SRC_URI[sha256sum] = "6be9c0bff6af8c677414935f31699ea5a7f8f5f791cfa5205be02ea186b97ce1"
++SRC_URI[md5sum] = "9bd4ce8184745fd3d000ca2692adacdb"
++SRC_URI[sha256sum] = "832432d1ad4f833c20e13b57cf40ce5277a9d33e483205fc63c78111b3358874"
+ 
+ inherit autotools pkgconfig update-rc.d systemd
+ 
+-- 
+2.7.4
 
-> Export cc=${CC} or some such in recipe
->
-> On Thu, Jun 1, 2017 at 6:17 AM Samuli Piippo <samuli.piippo@gmail.com>
-> wrote:
->
-> > On 01.06.2017 15:57, Daniel Mack wrote:
-> > > On 06/01/2017 02:35 PM, Samuli Piippo wrote:
-> > >> Parts of the chromium is built for the host and requires gcc-multilib
-> to
-> > >> be installed when building on a x64 host. I should have noted that in
-> > >> commit message.
-> > >>
-> > >> My /usr/bin/cc is a symlink to gcc
-> > >
-> > > Hmm, same here, but that's not the case when when bitbake is executing
-> > > it, as it modifies the PATH.
-> > >
-> >
-> > OK found it. I didn't have new enough poky, so the HOSTTOOL filtering
-> > was not used.
-> >
-> > We need to find proper place to add HOSTTOOLS += "cc c++" to whitelist
-> > the needed tools for webengine.
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
