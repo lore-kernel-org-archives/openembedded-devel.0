@@ -1,49 +1,49 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id D2CF677D11
+Return-Path: <moritz.fischer@ettus.com>
+Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
+	[209.85.192.174])
+	by mail.openembedded.org (Postfix) with ESMTP id CCAD677D1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 16:30:24 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id 7so164373518wmo.1
+	Thu,  1 Jun 2017 16:43:06 +0000 (UTC)
+Received: by mail-pf0-f174.google.com with SMTP id n23so31978449pfb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 09:30:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=TvCE300diEWG9Sv6VULUTF6bvZzSnn5U9fbmS4nHEig=;
-	b=c/wDPNTXM65HvBdkWfzNR3hLUxnJXzlXzk4Lco0cPPva7GfBhVbExqDGVt2nvDDfVf
-	7QIF9wXDthM7+WlVt6PAN3S1zASLtZfIj9uVp/OHyQjLiG6N/pZusauXnZJQw/nr5Gjn
-	Ms/kPORzVDRh6pp525KPuaVT7osH2riWbCwkWU+UPVDbay/UOHHO4C94ypJL/gcDbxam
-	SZhqgyf5Hk1mMrnRZMFB/t44Hexviu2drG+8cl7AS+fplWQNgSQwXkuzc+ujZF8es30/
-	e9iGZVt+ujAswCwGCA0OL9Nl8IQAtvErNGzBjtUba8NMnK4bppa2vLcwcmDsFC+QvnZB
-	hCsQ==
+	Thu, 01 Jun 2017 09:43:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ettus-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZpPQV/0K55q8ec1Zs07rih49/3absHerraommC7VAfk=;
+	b=ioEFj4MMxGkMj89YchWYxgbVh9GGSdXuAZsa6aQG4/h/k3GkeCeK770mqgXzfmX6Nv
+	Tvz0Ll5VJMb8/MBIprg0Pwm5/ZL+ylLmCr6Kkg3QzFXk3BXnKFtrxO7C0nZpVQ/XMT4b
+	bRIbBTvYF/PnP0Ajq+9jekIchQTNofjN56weQs6DMUBCfdGsHt5WWQZQEYvjWhgy0YXb
+	iTx0qF6KSHUEAPPZ+XEbMWpD/v55WGTslX7fCnbPZr6U4SCgy1YRvrWPSVjVMDYqDzk+
+	ujdxz15vFT9P6MrmUY8Li5xJ1Up6dPW9muBUXBc3OR7lKPu84dD2XOzHalH+/Z9Zd3HL
+	P9DQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=TvCE300diEWG9Sv6VULUTF6bvZzSnn5U9fbmS4nHEig=;
-	b=OIOl1H8C9xvb6ZD9+2QJUGAO/0HPaxaMUrE8Sri2PpEsLQyTArpMmpjHVhMO1o4ADD
-	rOOTMtRCiSFZrjY+8lcD4f9+6X/a+yH5ieEza53xL6sSbXfJpi2ulPfB1kOfQNG0MpSK
-	qX5BPptZdgaLPhXuvQlFTELzk9SlIL/FI2OY0NM8DPQs7MFoq6ChrbZtAb7mbF1E+juX
-	7PZUzU4a7Fnr4ej0Mqp6yewbXp/WVWVBi7ZHyDzT96Pr3eJ05VjG+7DSDDi/H7B+wEwn
-	Cvs92rvg0hXq2TjFJyc6j0UmO0YmFkhx0RGGcQrXqBS8VWfRasC0xndZ6J1xtFL6uDH0
-	Jdyg==
-X-Gm-Message-State: AODbwcBe9b1Mrx/DCUuoQiW6RYuaOI/Vrg3xqiBq2rJGq8y81oun2Ph1
-	ZkhuTGX8+tEXs+d/RKFYdLmLWXNieA==
-X-Received: by 10.80.182.35 with SMTP id b32mr2569325ede.123.1496334625556;
-	Thu, 01 Jun 2017 09:30:25 -0700 (PDT)
-MIME-Version: 1.0
-References: <1496212846-21304-1-git-send-email-samuli.piippo@qt.io>
-	<6780201c-a87e-730f-4cb2-9545d6ffe782@zonque.org>
-	<a57704de-9be3-0182-dc47-201117ab41b0@gmail.com>
-	<5b8de782-d675-642e-2622-ef4f93bbb3e4@zonque.org>
-	<79f414a2-00db-068d-962a-a25b23c97190@gmail.com>
-In-Reply-To: <79f414a2-00db-068d-962a-a25b23c97190@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 01 Jun 2017 16:30:15 +0000
-Message-ID: <CAMKF1sqzX+NBRvP9pCURo5cUPadVmngNpTv2RCv=BBs8bzNzmQ@mail.gmail.com>
-To: Daniel Mack <daniel@zonque.org>, Samuli Piippo <samuli.piippo@gmail.com>, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] Upgrade to Qt 5.9.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZpPQV/0K55q8ec1Zs07rih49/3absHerraommC7VAfk=;
+	b=kxjb1wY/5el8EnYbuiKo2iCsDVGqqcZKWQyzuk8bdFNT+HcuPHDWaNnBW7LQwErPSF
+	KxIpZo4VixbfwSJs/wfriMXgaFsVFq7JPd+CBiXXZ1hiQ489UbD6ggrRdLwSm+VUt/7n
+	4NycKAMiorXC9/iQOarF0tEjJjyAFLVuyu9ncAdA74SWP03WkvpwC5oR+hYyVsjqxOcP
+	KeU+cAAZxiBbGOYZpsAz9ZOnLcULXYkl7kDGvEhZlwwHjUWjOeZssIJoQOignQV8hlj1
+	KaIMXyHXvQ1eeqcBcMugAj2pSxwxbPACYckpprO6f4uwxhPSl2ecJoKMU6yctn0C8hEF
+	k2Tw==
+X-Gm-Message-State: AODbwcC9+Z5p9MAY9LtDKnV/d5Q1e8RXmmiT6mQpw59DOkIGsmQrRJB3
+	ok30EJ6tSTDN0Qruixm35w==
+X-Received: by 10.99.127.26 with SMTP id a26mr1897355pgd.75.1496335387503;
+	Thu, 01 Jun 2017 09:43:07 -0700 (PDT)
+Received: from tyrael.ni.corp.natinst.com
+	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
+	by smtp.gmail.com with ESMTPSA id
+	19sm30635779pfz.39.2017.06.01.09.43.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 01 Jun 2017 09:43:06 -0700 (PDT)
+From: Moritz Fischer <moritz.fischer@ettus.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Jun 2017 09:42:47 -0700
+Message-Id: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
+X-Mailer: git-send-email 2.7.4
+Cc: paul.eggleton@linux.intel.com
+Subject: [meta-python][PATCH 1/8] python-pyudev: Add possibility to build python3-pyudev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,36 +56,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 16:30:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Jun 2017 16:43:07 -0000
 
-Export cc=${CC} or some such in recipe
+Extend recipe to support python3 as well.
 
-On Thu, Jun 1, 2017 at 6:17 AM Samuli Piippo <samuli.piippo@gmail.com>
-wrote:
+Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
+---
+ .../recipes-devtools/python/python-pyudev.inc      | 22 ++++++++++++++++++++
+ .../python/python-pyudev_0.21.0.bb                 | 24 ++--------------------
+ .../python/python3-pyudev_0.21.0.bb                |  2 ++
+ 3 files changed, 26 insertions(+), 22 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyudev.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
 
-> On 01.06.2017 15:57, Daniel Mack wrote:
-> > On 06/01/2017 02:35 PM, Samuli Piippo wrote:
-> >> Parts of the chromium is built for the host and requires gcc-multilib to
-> >> be installed when building on a x64 host. I should have noted that in
-> >> commit message.
-> >>
-> >> My /usr/bin/cc is a symlink to gcc
-> >
-> > Hmm, same here, but that's not the case when when bitbake is executing
-> > it, as it modifies the PATH.
-> >
->
-> OK found it. I didn't have new enough poky, so the HOSTTOOL filtering
-> was not used.
->
-> We need to find proper place to add HOSTTOOLS += "cc c++" to whitelist
-> the needed tools for webengine.
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-python/recipes-devtools/python/python-pyudev.inc b/meta-python/recipes-devtools/python/python-pyudev.inc
+new file mode 100644
+index 0000000..7103e1b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyudev.inc
+@@ -0,0 +1,22 @@
++SUMMARY = "A libudev binding"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++
++SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
++SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
++
++inherit pypi
++
++do_configure_prepend() {
++    sed -i "/import pyudev/d" ${S}/setup.py
++    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
++}
++
++RDEPENDS_${PN} = "\
++    ${PYTHON_PN}-ctypes \
++    ${PYTHON_PN}-contextlib \
++    ${PYTHON_PN}-misc \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-subprocess \
++    ${PYTHON_PN}-threading \
++"
+diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
+index 7253f88..1ce7c44 100644
+--- a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
+@@ -1,22 +1,2 @@
+-SUMMARY = "A libudev binding"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+-
+-SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
+-SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
+-
+-inherit pypi setuptools
+-
+-do_configure_prepend() {
+-    sed -i "/import pyudev/d" ${S}/setup.py
+-    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
+-}
+-
+-RDEPENDS_${PN} = "\
+-    ${PYTHON_PN}-contextlib \
+-    ${PYTHON_PN}-ctypes \
+-    ${PYTHON_PN}-misc \
+-    ${PYTHON_PN}-six \
+-    ${PYTHON_PN}-subprocess \
+-    ${PYTHON_PN}-threading \
+-"
++require python-pyudev.inc
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+new file mode 100644
+index 0000000..1474ffa
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+@@ -0,0 +1,2 @@
++require python-pyudev.inc
++inherit setuptools3
+-- 
+2.7.4
+
 
