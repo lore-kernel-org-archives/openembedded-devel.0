@@ -1,49 +1,52 @@
 Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pf0-f174.google.com (mail-pf0-f174.google.com
-	[209.85.192.174])
-	by mail.openembedded.org (Postfix) with ESMTP id CCAD677D1A
+Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 1125677D1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 16:43:06 +0000 (UTC)
-Received: by mail-pf0-f174.google.com with SMTP id n23so31978449pfb.2
+	Thu,  1 Jun 2017 16:43:07 +0000 (UTC)
+Received: by mail-pf0-f170.google.com with SMTP id m17so31956804pfg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 09:43:08 -0700 (PDT)
+	Thu, 01 Jun 2017 09:43:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=ZpPQV/0K55q8ec1Zs07rih49/3absHerraommC7VAfk=;
-	b=ioEFj4MMxGkMj89YchWYxgbVh9GGSdXuAZsa6aQG4/h/k3GkeCeK770mqgXzfmX6Nv
-	Tvz0Ll5VJMb8/MBIprg0Pwm5/ZL+ylLmCr6Kkg3QzFXk3BXnKFtrxO7C0nZpVQ/XMT4b
-	bRIbBTvYF/PnP0Ajq+9jekIchQTNofjN56weQs6DMUBCfdGsHt5WWQZQEYvjWhgy0YXb
-	iTx0qF6KSHUEAPPZ+XEbMWpD/v55WGTslX7fCnbPZr6U4SCgy1YRvrWPSVjVMDYqDzk+
-	ujdxz15vFT9P6MrmUY8Li5xJ1Up6dPW9muBUXBc3OR7lKPu84dD2XOzHalH+/Z9Zd3HL
-	P9DQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=CfNHJ/wRojwX97cBDerhbhUqCCrUGelqyD78CQAQzns=;
+	b=aLq6zg25Np3U4F6ytihVTFBsxp9ZEaLuI7QgG85k0A50LJm34L794ilRgWI+lPn1Xv
+	5LRO8z67tOrWS5lzr9Q7LAKa6rPwPK49ur19N8Ir21HYyEpX5gzdZ6i+Z46luqfYgumC
+	WoZZh3gVNaSW9A8cIWzDV5HbW73crkFcpGYnrj7szkyfGPTBGMtEE0+QKuGqXX/akarS
+	LxLKNebBxW7FXupDBPdlYSERaggbo2wd0J2nLLb3V3InEochW5hVKqgveVChasACjHEt
+	QeWEsPk3ccvR0Qjm0+IZ4V3B/4QWV2YrCYBY3uwUGmK+XeGvZHSBGwQtKcv3VJ9XMrY1
+	hrWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZpPQV/0K55q8ec1Zs07rih49/3absHerraommC7VAfk=;
-	b=kxjb1wY/5el8EnYbuiKo2iCsDVGqqcZKWQyzuk8bdFNT+HcuPHDWaNnBW7LQwErPSF
-	KxIpZo4VixbfwSJs/wfriMXgaFsVFq7JPd+CBiXXZ1hiQ489UbD6ggrRdLwSm+VUt/7n
-	4NycKAMiorXC9/iQOarF0tEjJjyAFLVuyu9ncAdA74SWP03WkvpwC5oR+hYyVsjqxOcP
-	KeU+cAAZxiBbGOYZpsAz9ZOnLcULXYkl7kDGvEhZlwwHjUWjOeZssIJoQOignQV8hlj1
-	KaIMXyHXvQ1eeqcBcMugAj2pSxwxbPACYckpprO6f4uwxhPSl2ecJoKMU6yctn0C8hEF
-	k2Tw==
-X-Gm-Message-State: AODbwcC9+Z5p9MAY9LtDKnV/d5Q1e8RXmmiT6mQpw59DOkIGsmQrRJB3
-	ok30EJ6tSTDN0Qruixm35w==
-X-Received: by 10.99.127.26 with SMTP id a26mr1897355pgd.75.1496335387503;
-	Thu, 01 Jun 2017 09:43:07 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=CfNHJ/wRojwX97cBDerhbhUqCCrUGelqyD78CQAQzns=;
+	b=ZjqmSmJgIf4usRIFyBl6/Ct4DmV4xEoMloRVfPyV9eiJcwuGwkHmppk9YBodlgFh/O
+	E8IVUwQk6paI1e2U1X2N9E7hjzg4SKqgqtO/C6JTWhsQJ5Z+cJF9nQTpFefWpbKtLUq5
+	B2+ZV+lEMehuo56yPND5qDY0RepT0HzmWcmFAO8tqMhWXAaeyLOePLH0xOWucRZUkPPC
+	lB7ASufxNokel8B2big1RrnZ8MZ/yHz3iUUjDY8Y0NcdRix1too9qFBRUPfpoF5cpqFg
+	ovozev8E+JNj/6ySSXiqtQ0+mlkRtgtGQR7406Kyxcd8JTDOHxbhSy9i7bIHYFaHWhkb
+	wSNQ==
+X-Gm-Message-State: AODbwcColBp+NAdFdn6rlBqgL/U4qZEkpZdtED/WKYtITJrde8BQTXFq
+	SU/RYMeJBHO5pbMzpaO38g==
+X-Received: by 10.98.150.12 with SMTP id c12mr1842070pfe.201.1496335388995;
+	Thu, 01 Jun 2017 09:43:08 -0700 (PDT)
 Received: from tyrael.ni.corp.natinst.com
 	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
 	by smtp.gmail.com with ESMTPSA id
-	19sm30635779pfz.39.2017.06.01.09.43.06
+	19sm30635779pfz.39.2017.06.01.09.43.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 01 Jun 2017 09:43:06 -0700 (PDT)
+	Thu, 01 Jun 2017 09:43:07 -0700 (PDT)
 From: Moritz Fischer <moritz.fischer@ettus.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Jun 2017 09:42:47 -0700
-Message-Id: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
+Date: Thu,  1 Jun 2017 09:42:48 -0700
+Message-Id: <1496335374-25575-2-git-send-email-moritz.fischer@ettus.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
+References: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
 Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 1/8] python-pyudev: Add possibility to build python3-pyudev
+Subject: [meta-python][PATCH 2/8] python-greenlet: Add support for python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,84 +59,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 16:43:07 -0000
+X-List-Received-Date: Thu, 01 Jun 2017 16:43:08 -0000
 
-Extend recipe to support python3 as well.
+Extend recipe to support python3 as well
 
 Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
 ---
- .../recipes-devtools/python/python-pyudev.inc      | 22 ++++++++++++++++++++
- .../python/python-pyudev_0.21.0.bb                 | 24 ++--------------------
- .../python/python3-pyudev_0.21.0.bb                |  2 ++
- 3 files changed, 26 insertions(+), 22 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pyudev.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
+ meta-python/recipes-devtools/python/python-greenlet.inc      |  9 +++++++++
+ .../recipes-devtools/python/python-greenlet_0.4.12.bb        | 12 ++----------
+ .../recipes-devtools/python/python3-greenlet_0.4.12.bb       |  2 ++
+ 3 files changed, 13 insertions(+), 10 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-greenlet.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pyudev.inc b/meta-python/recipes-devtools/python/python-pyudev.inc
+diff --git a/meta-python/recipes-devtools/python/python-greenlet.inc b/meta-python/recipes-devtools/python/python-greenlet.inc
 new file mode 100644
-index 0000000..7103e1b
+index 0000000..35820db
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyudev.inc
-@@ -0,0 +1,22 @@
-+SUMMARY = "A libudev binding"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
++++ b/meta-python/recipes-devtools/python/python-greenlet.inc
+@@ -0,0 +1,9 @@
++SUMMARY = "Python lightweight in-process concurrent programming"
++LICENSE = "MIT & PSF"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
++                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
 +
-+SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
-+SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
++SRC_URI[md5sum] = "e8637647d58a26c4a1f51ca393e53c00"
++SRC_URI[sha256sum] = "e4c99c6010a5d153d481fdaf63b8a0782825c0721506d880403a3b9b82ae347e"
 +
 +inherit pypi
-+
-+do_configure_prepend() {
-+    sed -i "/import pyudev/d" ${S}/setup.py
-+    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
-+}
-+
-+RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-contextlib \
-+    ${PYTHON_PN}-misc \
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-subprocess \
-+    ${PYTHON_PN}-threading \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-index 7253f88..1ce7c44 100644
---- a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-@@ -1,22 +1,2 @@
--SUMMARY = "A libudev binding"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
+diff --git a/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb b/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
+index 4fc2c1d..c14976e 100644
+--- a/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
++++ b/meta-python/recipes-devtools/python/python-greenlet_0.4.12.bb
+@@ -1,10 +1,2 @@
+-SUMMARY = "Python lightweight in-process concurrent programming"
+-LICENSE = "MIT & PSF"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=03143d7a1a9f5d8a0fee825f24ca9c36 \
+-                    file://LICENSE.PSF;md5=c106931d9429eda0492617f037b8f69a"
 -
--SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
--SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
+-SRC_URI[md5sum] = "e8637647d58a26c4a1f51ca393e53c00"
+-SRC_URI[sha256sum] = "e4c99c6010a5d153d481fdaf63b8a0782825c0721506d880403a3b9b82ae347e"
 -
--inherit pypi setuptools
+-inherit pypi distutils
 -
--do_configure_prepend() {
--    sed -i "/import pyudev/d" ${S}/setup.py
--    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
--}
--
--RDEPENDS_${PN} = "\
--    ${PYTHON_PN}-contextlib \
--    ${PYTHON_PN}-ctypes \
--    ${PYTHON_PN}-misc \
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-subprocess \
--    ${PYTHON_PN}-threading \
--"
-+require python-pyudev.inc
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
++inherit distutils
++require python-greenlet.inc
+diff --git a/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb b/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
 new file mode 100644
-index 0000000..1474ffa
+index 0000000..1aedf7f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
++++ b/meta-python/recipes-devtools/python/python3-greenlet_0.4.12.bb
 @@ -0,0 +1,2 @@
-+require python-pyudev.inc
-+inherit setuptools3
++inherit distutils3
++require python-greenlet.inc
 -- 
 2.7.4
 
