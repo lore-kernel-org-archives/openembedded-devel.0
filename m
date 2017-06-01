@@ -1,52 +1,43 @@
-Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 482EE77D2F
+Return-Path: <brarcher@lexmark.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 7225277D2F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jun 2017 16:43:16 +0000 (UTC)
-Received: by mail-pf0-f171.google.com with SMTP id 9so31960529pfj.1
+	Thu,  1 Jun 2017 17:00:09 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id d127so68182341wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 09:43:18 -0700 (PDT)
+	Thu, 01 Jun 2017 10:00:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=zJy3LMPkjrGKPidFLoQvOz/+r3k4p2vQvIX6hSlT2n0=;
-	b=OHTRHowLfSCgoX96LXZ2wJkKfRdVvcdA0GNlG2MACSi6KAhRBXhoddgt8f9Hn1JOsE
-	2o3U/o+R7kQovKhGW88Tb6O7+5ejjZycOZqXHdosGmXF+TRAlOK0eyBUWa3U9Es42M/5
-	hdUJZFydfkD/vxOJR6kB7OIkZCpng9klYKaC0gQKXy+yCPbgt5vp3i9bPQ9QbUZHpl3P
-	RMiow/vRbslcOR1Ej7VjK5GhtSVKxwXfgIDPDR8it8QTZy0RdixELYlqAVQESNDGyFhf
-	RNQBDiM/NPsPW70K6jtFmkukjPN4O/jxR5X382pgFyUgMcMPgepwqQ17LP5cqcv7JubI
-	pr7w==
+	d=lexmark-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=YxUnbOoEEOc84E1jvO58ZAhr8gxGUElbmAFgWkP6WtE=;
+	b=wyO8CQXBb9cx28hAqpVmB1cAGXwtmaJHAuNwamQLJnyjxJ1Ev2CdNgUQBbSlh079mN
+	Tz5U6xn5bmkPwIzxRK+13J1EwukWS9rsM+4r74ifaUQ3fK84fNIfZRBQxlQSY8FaFkKH
+	DqmOh8AlIpXlAVwqafnB+kHfA5WKv1mCBnXlhG9YEvvpT97ODW3SU+tlaugl93cGbgBs
+	IsALYNPbJJUOb3/rb0m6Hsf1fuOm7GhKXrc0lBMIHR7Zhgc0lWP3xQKamCxaDWj2XPEz
+	YTnyweV1uvqp8ZNQzW/LE1nSf6yB4ZMgTOiPlTeAm6qquCfkcm52ic9HbyRHqBTp2cC+
+	wG9A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=zJy3LMPkjrGKPidFLoQvOz/+r3k4p2vQvIX6hSlT2n0=;
-	b=pfxuqjjnVOlke8CPfHoQW3IWFnpNqhJnyxH55LH6dPpGGI16RMdh5o16IypRn22MVM
-	YgPnC9m/uJZpHEPCFDvm0Hlc1W8b7/zxvWlztca308+jL6DnQdj0Vz3qVXiJod95Fh1Q
-	xDUL8T/OkXyoauu135lS80fLqPsEpgUnZm1jmkqzc3lN9bZ3X/s0vWuwWFw0KjPG9TcA
-	aEfHhxyViY16cEvV/BIlxe0mXhjOV/kzzQLcJyygOsx7r7JeX3pt+fmuJrOdOjVUPJr8
-	FxRsKMLqvke+O0HoXaUTNhAggKCF74Fy3ZgdKy2eAtg7MLZL/ZDtlgDgW8DyR7LCsHFL
-	Jz0A==
-X-Gm-Message-State: AODbwcBQdyvjjUbQ1MSqjxYelxOGQuURsut8iZ0lYivbC9WCfBuFWeZS
-	WDqCIf2OyYWvcwwrFsuiCg==
-X-Received: by 10.98.89.201 with SMTP id k70mr1880028pfj.196.1496335398065;
-	Thu, 01 Jun 2017 09:43:18 -0700 (PDT)
-Received: from tyrael.ni.corp.natinst.com
-	(207-114-172-147.static.twtelecom.net. [207.114.172.147])
-	by smtp.gmail.com with ESMTPSA id
-	19sm30635779pfz.39.2017.06.01.09.43.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 01 Jun 2017 09:43:17 -0700 (PDT)
-From: Moritz Fischer <moritz.fischer@ettus.com>
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=YxUnbOoEEOc84E1jvO58ZAhr8gxGUElbmAFgWkP6WtE=;
+	b=eh8u2PnBSa2nIuRLefBCLLstxc+U7lPD9ZDNO+rBMRtJAeX+cTSyFiYqqjyoSv7xb4
+	QzCPFVQnAjNFSodM8X++MSrJPc63Li+KVa7qGk2CGm5IcC0B9TqrZttcZU3PloO2Omii
+	m09RyuVNthuJ9G4H5kNuXjfpCS+x92J9ijBZ0k4GNVruyR7YAlgBHDaGDBtxMBFV2fHB
+	tQwfTtmMUzuH0VsCkXlGi9iyVYiWwsg3djiBa64XWhIScEA7xLaIIS+ociDGYxQUqm4e
+	yCMOTygQeA/oY246Jx51XGu9nCXdqmXtKRxcxMbee8+XrtgudE4Xh95Al6dQyO3slWPg
+	DzKw==
+X-Gm-Message-State: AODbwcD1sT8zEpKL4Hq2GqtUcOyff6oktmNkuiUM0zrzqZZmZ1hQ2rGJ
+	KERtF5tIU6qB2pcsqyRy4PY4RkNcX3tAeoU=
+X-Received: by 10.28.138.209 with SMTP id m200mr131444wmd.8.1496336410658;
+	Thu, 01 Jun 2017 10:00:10 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.145.79 with HTTP; Thu, 1 Jun 2017 09:59:29 -0700 (PDT)
+From: Branden Archer <brarcher@lexmark.com>
+Date: Thu, 1 Jun 2017 12:59:29 -0400
+Message-ID: <CAADoZg08aEjHeFb30CHjicODL2OMzJtq3XnwyGHFnRG-p7EEdQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Jun 2017 09:42:54 -0700
-Message-Id: <1496335374-25575-8-git-send-email-moritz.fischer@ettus.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
-References: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
-Cc: paul.eggleton@linux.intel.com
-Subject: [meta-python][PATCH 8/8] python-pyroute: Add support for python3
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: [meta-oe][PATCH] Upgrade zsh to 5.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,91 +50,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jun 2017 16:43:17 -0000
+X-List-Received-Date: Thu, 01 Jun 2017 17:00:13 -0000
+X-Groupsio-MsgNum: 66983
+Content-Type: multipart/mixed; boundary="001a114717fa3928e60550e8f8f5"
 
-Extend recipe to support python3
+--001a114717fa3928e60550e8f8f5
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
----
- .../recipes-devtools/python/python-pyroute2.inc    | 26 ++++++++++++++++++++++
- .../python/python-pyroute2_0.3.22.bb               | 26 ++--------------------
- .../python/python3-pyroute2_0.3.22.bb              |  2 ++
- 3 files changed, 30 insertions(+), 24 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-pyroute2.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-pyroute2_0.3.22.bb
+Attached please find a patch to consider for the zsh recipe which upgrades
+zsh from 5.0.5 to 5.3.1.
 
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc b/meta-python/recipes-devtools/python/python-pyroute2.inc
-new file mode 100644
-index 0000000..da1d4cd
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pyroute2.inc
-@@ -0,0 +1,26 @@
-+SUMMARY = "A pure Python netlink and Linux network configuration library"
-+LICENSE = "GPLv2 & Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://LICENSE.Apache.v2;md5=3b83ef96387f14655fc854ddc3c6bd57"
-+
-+SRC_URI[md5sum] = "733adb362b6603c7269c0b3df3045a55"
-+SRC_URI[sha256sum] = "5cdf44656cf623369f0cbf183d9d14a1a50ebdffbd50d4e30ffda62c0a05d7b3"
-+
-+SRC_URI += "file://import-simplejson-as-json.patch"
-+
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyroute2:"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN} += "\
-+  ${PYTHON_PN}-distutils \
-+  ${PYTHON_PN}-simplejson \
-+  ${PYTHON_PN}-multiprocessing \
-+  ${PYTHON_PN}-io ${PYTHON_PN}-pprint \
-+  ${PYTHON_PN}-pickle \
-+  ${PYTHON_PN}-logging \
-+  ${PYTHON_PN}-threading \
-+  ${PYTHON_PN}-textutils \
-+  ${PYTHON_PN}-subprocess \
-+  ${PYTHON_PN}-netclient \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb b/meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb
-index 79d3bdd..7b9c8e0 100644
---- a/meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb
-+++ b/meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb
-@@ -1,24 +1,2 @@
--SUMMARY = "A pure Python netlink and Linux network configuration library"
--LICENSE = "GPLv2 & Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
--                    file://LICENSE.Apache.v2;md5=3b83ef96387f14655fc854ddc3c6bd57"
--
--SRC_URI[md5sum] = "733adb362b6603c7269c0b3df3045a55"
--SRC_URI[sha256sum] = "5cdf44656cf623369f0cbf183d9d14a1a50ebdffbd50d4e30ffda62c0a05d7b3"
--
--SRC_URI += "file://import-simplejson-as-json.patch"
--
--inherit pypi setuptools
--
--RDEPENDS_${PN} += "\
--  python-distutils \
--  python-simplejson \
--  python-multiprocessing \
--  python-io python-pprint \
--  python-pickle \
--  python-logging \
--  python-threading \
--  python-textutils \
--  python-subprocess \
--  python-netclient \
--"
-+require python-pyroute2.inc
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python3-pyroute2_0.3.22.bb b/meta-python/recipes-devtools/python/python3-pyroute2_0.3.22.bb
-new file mode 100644
-index 0000000..a23e72c
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pyroute2_0.3.22.bb
-@@ -0,0 +1,2 @@
-+require python-pyroute2.inc
-+inherit setuptools3
--- 
-2.7.4
+The rationale for upgrading the recipe is in part to pick up a potential
+security related fix in 5.0.7 from 2014 as well as pick up additional
+features and bug fixes.
 
+Thanks,
 
+- Branden
+
+--001a114717fa3928e60550e8f8f5
+Content-Type: text/x-patch; charset="US-ASCII"; name="0001-zsh-update-to-5.3.1.patch"
+Content-Disposition: attachment; filename="0001-zsh-update-to-5.3.1.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_j3elcu0a0
+
+RnJvbSBmYTE0NGFkMjViMWY0ZDViOTFmMjI1NWYxMDU1YjgwYTQ3NzY1ZjZmIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBCcmFuZGVuIEFyY2hlciA8YnJhcmNoZXJAbGV4bWFyay5jb20+
+CkRhdGU6IFRodSwgMSBKdW4gMjAxNyAxMTo0Mzo1MSAtMDQwMApTdWJqZWN0OiBbUEFUQ0hdIHpz
+aDogdXBkYXRlIHRvIDUuMy4xCgotLS0KIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNo
+XzUuMC41LmJiIHwgNjEgLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQogbWV0YS1vZS9y
+ZWNpcGVzLWV4dGVuZGVkL3pzaC96c2hfNS4zLjEuYmIgfCA2MSArKysrKysrKysrKysrKysrKysr
+KysrKysrKysrKysrCiAyIGZpbGVzIGNoYW5nZWQsIDYxIGluc2VydGlvbnMoKyksIDYxIGRlbGV0
+aW9ucygtKQogZGVsZXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gv
+enNoXzUuMC41LmJiCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVk
+L3pzaC96c2hfNS4zLjEuYmIKCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
+enNoL3pzaF81LjAuNS5iYiBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMC41
+LmJiCmRlbGV0ZWQgZmlsZSBtb2RlIDEwMDY0NAppbmRleCAzOWIyZDk1Li4wMDAwMDAwCi0tLSBh
+L21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMC41LmJiCisrKyAvZGV2L251bGwK
+QEAgLTEsNjEgKzAsMCBAQAotU1VNTUFSWSA9ICJVTklYIFNoZWxsIHNpbWlsYXIgdG8gdGhlIEtv
+cm4gc2hlbGwiCi1ERVNDUklQVElPTiA9ICJac2ggaXMgYSBzaGVsbCBkZXNpZ25lZCBmb3IgaW50
+ZXJhY3RpdmUgdXNlLCBhbHRob3VnaCBpdCBpcyBhbHNvIGEgXAotICAgICAgICAgICAgICAgcG93
+ZXJmdWwgc2NyaXB0aW5nIGxhbmd1YWdlLiBNYW55IG9mIHRoZSB1c2VmdWwgZmVhdHVyZXMgb2Yg
+YmFzaCwgXAotICAgICAgICAgICAgICAga3NoLCBhbmQgdGNzaCB3ZXJlIGluY29ycG9yYXRlZCBp
+bnRvIHpzaDsgbWFueSBvcmlnaW5hbCBmZWF0dXJlcyB3ZXJlIGFkZGVkLiIKLUhPTUVQQUdFID0g
+Imh0dHA6Ly93d3cuenNoLm9yZyIKLVNFQ1RJT04gPSAiYmFzZS9zaGVsbCIKLQotTElDRU5TRSA9
+ICJ6c2giCi1MSUNfRklMRVNfQ0hLU1VNID0gImZpbGU6Ly9MSUNFTkNFO21kNT1iN2JjODUzODk0
+NjY0YmU0NTVhOTIyZGI5ODA1Mjg4ZSIKLQotREVQRU5EUyA9ICJuY3Vyc2VzIGJpc29uLW5hdGl2
+ZSBsaWJjYXAgbGlicGNyZSBnZGJtIGdyb2ZmLW5hdGl2ZSIKLQotU1JDX1VSSSA9ICIke1NPVVJD
+RUZPUkdFX01JUlJPUn0vJHtCUE59LyR7QlB9LnRhci5neiIKLVNSQ19VUklbbWQ1c3VtXSA9ICI2
+ZmIwZTNlNTJhMGY4ZGU1Y2E2MzEzODM5MWI4MWNlMCIKLVNSQ19VUklbc2hhMjU2c3VtXSA9ICJi
+MzVjZjE5ZTRhNmJhMzlmZDAzYzYzNzJiOGE4NzYwYTQ5MWNjMmUyZTRhYmEzZDE1MDIzZmYyOTFj
+Mjg5NGI0IgotCi1pbmhlcml0IGF1dG90b29scyBnZXR0ZXh0IHVwZGF0ZS1hbHRlcm5hdGl2ZXMK
+LQotRVhUUkFfT0VDT05GID0gIiBcCi0gICAgLS1iaW5kaXI9JHtiYXNlX2JpbmRpcn0gXAotICAg
+IC0tZW5hYmxlLWV0Y2Rpcj0ke3N5c2NvbmZkaXJ9IFwKLSAgICAtLWVuYWJsZS1mbmRpcj0ke2Rh
+dGFkaXJ9LyR7UE59LyR7UFZ9L2Z1bmN0aW9ucyBcCi0gICAgLS1lbmFibGUtc2l0ZS1mbmRpcj0k
+e2RhdGFkaXJ9LyR7UE59L3NpdGUtZnVuY3Rpb25zIFwKLSAgICAtLXdpdGgtdGVybS1saWI9J25j
+dXJzZXN3IG5jdXJzZXMnIFwKLSAgICAtLXdpdGgtdGNzZXRwZ3JwIFwKLSAgICAtLWVuYWJsZS1j
+YXAgXAotICAgIC0tZW5hYmxlLW11bHRpYnl0ZSBcCi0gICAgLS1kaXNhYmxlLWdkYm0gXAotICAg
+IC0tZGlzYWJsZS1keW5hbWljIFwKLSAgICB6c2hfY3Zfc2hhcmVkX2Vudmlyb249eWVzIFwKLSIK
+LQotRVhUUkFfT0VNQUtFID0gIi1lIE1BS0VGTEFHUz0iCi0KLUFMVEVSTkFUSVZFXyR7UE59ID0g
+InNoIgotQUxURVJOQVRJVkVfTElOS19OQU1FW3NoXSA9ICIke2Jhc2VfYmluZGlyfS9zaCIKLUFM
+VEVSTkFUSVZFX1RBUkdFVFtzaF0gPSAiJHtiYXNlX2JpbmRpcn0vJHtCUE59IgotQUxURVJOQVRJ
+VkVfUFJJT1JJVFkgPSAiMTAwIgotCi1leHBvcnQgQVVUT0hFQURFUiA9ICJ0cnVlIgotCi1kb19j
+b25maWd1cmUgKCkgewotICAgIGdudS1jb25maWdpemUgLS1mb3JjZSAke1N9Ci0gICAgb2VfcnVu
+Y29uZgotfQotCi1kb19pbnN0YWxsX2FwcGVuZCAoKSB7Ci0gICAgcm0gLWZyICR7RH0vdXNyL3No
+YXJlCi19Ci0KLXBrZ19wb3N0aW5zdF8ke1BOfSAoKSB7Ci0gICAgdG91Y2ggJEQke3N5c2NvbmZk
+aXJ9L3NoZWxscwotICAgIGdyZXAgLXEgImJpbi96c2giICREJHtzeXNjb25mZGlyfS9zaGVsbHMg
+fHwgZWNobyAvYmluL3pzaCA+PiAkRCR7c3lzY29uZmRpcn0vc2hlbGxzCi0gICAgZ3JlcCAtcSAi
+YmluL3NoIiAkRCR7c3lzY29uZmRpcn0vc2hlbGxzIHx8IGVjaG8gL2Jpbi9zaCA+PiAkRCR7c3lz
+Y29uZmRpcn0vc2hlbGxzCi19Ci0KLUZJTEVTXyR7UE59LWRiZyArPSAiXAotICAgICR7bGliZGly
+fS8ke1BOfS8ke1BWfS8ke1BOfS8uZGVidWcvKi5zbyBcCi0gICAgJHtsaWJkaXJ9LyR7UE59LyR7
+UFZ9LyR7UE59L2RiLy5kZWJ1Zy8qLnNvIFwKLSAgICAke2xpYmRpcn0vJHtQTn0vJHtQVn0vJHtQ
+Tn0vbmV0Ly5kZWJ1Zy8qLnNvIFwKLSIKZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1leHRl
+bmRlZC96c2gvenNoXzUuMy4xLmJiIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3pzaC96c2hf
+NS4zLjEuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uMWY1ZTM5MAotLS0g
+L2Rldi9udWxsCisrKyBiL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC96c2gvenNoXzUuMy4xLmJi
+CkBAIC0wLDAgKzEsNjEgQEAKK1NVTU1BUlkgPSAiVU5JWCBTaGVsbCBzaW1pbGFyIHRvIHRoZSBL
+b3JuIHNoZWxsIgorREVTQ1JJUFRJT04gPSAiWnNoIGlzIGEgc2hlbGwgZGVzaWduZWQgZm9yIGlu
+dGVyYWN0aXZlIHVzZSwgYWx0aG91Z2ggaXQgaXMgYWxzbyBhIFwKKyAgICAgICAgICAgICAgIHBv
+d2VyZnVsIHNjcmlwdGluZyBsYW5ndWFnZS4gTWFueSBvZiB0aGUgdXNlZnVsIGZlYXR1cmVzIG9m
+IGJhc2gsIFwKKyAgICAgICAgICAgICAgIGtzaCwgYW5kIHRjc2ggd2VyZSBpbmNvcnBvcmF0ZWQg
+aW50byB6c2g7IG1hbnkgb3JpZ2luYWwgZmVhdHVyZXMgd2VyZSBhZGRlZC4iCitIT01FUEFHRSA9
+ICJodHRwOi8vd3d3LnpzaC5vcmciCitTRUNUSU9OID0gImJhc2Uvc2hlbGwiCisKK0xJQ0VOU0Ug
+PSAienNoIgorTElDX0ZJTEVTX0NIS1NVTSA9ICJmaWxlOi8vTElDRU5DRTttZDU9YjdiYzg1Mzg5
+NDY2NGJlNDU1YTkyMmRiOTgwNTI4OGUiCisKK0RFUEVORFMgPSAibmN1cnNlcyBiaXNvbi1uYXRp
+dmUgbGliY2FwIGxpYnBjcmUgZ2RibSBncm9mZi1uYXRpdmUiCisKK1NSQ19VUkkgPSAiJHtTT1VS
+Q0VGT1JHRV9NSVJST1J9LyR7QlBOfS8ke0JQfS50YXIuZ3oiCitTUkNfVVJJW21kNXN1bV0gPSAi
+ZDU4M2ZiY2EwYzI0MTBiZjk1NDJjZThhNjUxYzI2Y2EiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAi
+M2Q5NGE1OTBmZjNjNTYyZWNmMzg3ZGE3OGFjMzU2ZDZiZWE3OWIwNTBhOWVmODFlM2VjYjlmOGVl
+NTEzMDQwZSIKKworaW5oZXJpdCBhdXRvdG9vbHMgZ2V0dGV4dCB1cGRhdGUtYWx0ZXJuYXRpdmVz
+CisKK0VYVFJBX09FQ09ORiA9ICIgXAorICAgIC0tYmluZGlyPSR7YmFzZV9iaW5kaXJ9IFwKKyAg
+ICAtLWVuYWJsZS1ldGNkaXI9JHtzeXNjb25mZGlyfSBcCisgICAgLS1lbmFibGUtZm5kaXI9JHtk
+YXRhZGlyfS8ke1BOfS8ke1BWfS9mdW5jdGlvbnMgXAorICAgIC0tZW5hYmxlLXNpdGUtZm5kaXI9
+JHtkYXRhZGlyfS8ke1BOfS9zaXRlLWZ1bmN0aW9ucyBcCisgICAgLS13aXRoLXRlcm0tbGliPSdu
+Y3Vyc2VzdyBuY3Vyc2VzJyBcCisgICAgLS13aXRoLXRjc2V0cGdycCBcCisgICAgLS1lbmFibGUt
+Y2FwIFwKKyAgICAtLWVuYWJsZS1tdWx0aWJ5dGUgXAorICAgIC0tZGlzYWJsZS1nZGJtIFwKKyAg
+ICAtLWRpc2FibGUtZHluYW1pYyBcCisgICAgenNoX2N2X3NoYXJlZF9lbnZpcm9uPXllcyBcCisi
+CisKK0VYVFJBX09FTUFLRSA9ICItZSBNQUtFRkxBR1M9IgorCitBTFRFUk5BVElWRV8ke1BOfSA9
+ICJzaCIKK0FMVEVSTkFUSVZFX0xJTktfTkFNRVtzaF0gPSAiJHtiYXNlX2JpbmRpcn0vc2giCitB
+TFRFUk5BVElWRV9UQVJHRVRbc2hdID0gIiR7YmFzZV9iaW5kaXJ9LyR7QlBOfSIKK0FMVEVSTkFU
+SVZFX1BSSU9SSVRZID0gIjEwMCIKKworZXhwb3J0IEFVVE9IRUFERVIgPSAidHJ1ZSIKKworZG9f
+Y29uZmlndXJlICgpIHsKKyAgICBnbnUtY29uZmlnaXplIC0tZm9yY2UgJHtTfQorICAgIG9lX3J1
+bmNvbmYKK30KKworZG9faW5zdGFsbF9hcHBlbmQgKCkgeworICAgIHJtIC1mciAke0R9L3Vzci9z
+aGFyZQorfQorCitwa2dfcG9zdGluc3RfJHtQTn0gKCkgeworICAgIHRvdWNoICREJHtzeXNjb25m
+ZGlyfS9zaGVsbHMKKyAgICBncmVwIC1xICJiaW4venNoIiAkRCR7c3lzY29uZmRpcn0vc2hlbGxz
+IHx8IGVjaG8gL2Jpbi96c2ggPj4gJEQke3N5c2NvbmZkaXJ9L3NoZWxscworICAgIGdyZXAgLXEg
+ImJpbi9zaCIgJEQke3N5c2NvbmZkaXJ9L3NoZWxscyB8fCBlY2hvIC9iaW4vc2ggPj4gJEQke3N5
+c2NvbmZkaXJ9L3NoZWxscworfQorCitGSUxFU18ke1BOfS1kYmcgKz0gIlwKKyAgICAke2xpYmRp
+cn0vJHtQTn0vJHtQVn0vJHtQTn0vLmRlYnVnLyouc28gXAorICAgICR7bGliZGlyfS8ke1BOfS8k
+e1BWfS8ke1BOfS9kYi8uZGVidWcvKi5zbyBcCisgICAgJHtsaWJkaXJ9LyR7UE59LyR7UFZ9LyR7
+UE59L25ldC8uZGVidWcvKi5zbyBcCisiCi0tIAoxLjkuMwoK
+
+--001a114717fa3928e60550e8f8f5--
