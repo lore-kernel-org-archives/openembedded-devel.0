@@ -1,22 +1,26 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 7933E77E7A
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EF3A877E88
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 08:05:03 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v5284xTT012639
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Fri,  2 Jun 2017 08:05:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v52852TV001227
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Jun 2017 10:04:59 +0200
-Received: from dev.sbt.siemens.com ([139.16.116.248])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v5284xiw017049;
-	Fri, 2 Jun 2017 10:04:59 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jun 2017 10:04:53 +0200
-Message-Id: <1496390693-8675-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] leveldb: update to 1.20
+	Fri, 2 Jun 2017 01:05:06 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Fri, 2 Jun 2017 01:05:05 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Jun 2017 16:04:57 +0800
+Message-ID: <5a2df0a943307252298ea8d2d6d6ba47882f3a45.1496390474.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.1496390474.git.jackie.huang@windriver.com>
+References: <cover.1496390474.git.jackie.huang@windriver.com>
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 2/3] umip: add systemd and sysvinit support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,92 +33,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 08:05:04 -0000
+X-List-Received-Date: Fri, 02 Jun 2017 08:05:05 -0000
+Content-Type: text/plain
 
-The tmalloc patch went upstream in the meantime
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+Add systemd service and and sysvinit script
+so it's easy to manage the mip6d daemon.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../leveldb/0001-Explicitly-disable-tcmalloc.patch | 48 ----------------------
- meta-oe/recipes-extended/leveldb/leveldb_git.bb    |  8 ++--
- 2 files changed, 3 insertions(+), 53 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
+ meta-oe/recipes-connectivity/umip/files/mip6d      | 112 +++++++++++++++++++++
+ .../recipes-connectivity/umip/files/mip6d.service  |  10 ++
+ meta-oe/recipes-connectivity/umip/umip_1.0.bb      |  18 +++-
+ 3 files changed, 139 insertions(+), 1 deletion(-)
+ create mode 100755 meta-oe/recipes-connectivity/umip/files/mip6d
+ create mode 100644 meta-oe/recipes-connectivity/umip/files/mip6d.service
 
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch b/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
-deleted file mode 100644
-index 4b76dd0..0000000
---- a/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From d6daac04dab4b3acf4b88f16742d1b402cdc3d83 Mon Sep 17 00:00:00 2001
--From: Martin Jansa <Martin.Jansa@gmail.com>
--Date: Wed, 1 Oct 2014 18:54:04 +0200
--Subject: [PATCH] Explicitly disable tcmalloc
--
--Without this change leveldb autodetects tcmalloc from sysroot and
--sometimes became dependant on gperftools
--
--Disable autodetection without TCMALLOC_ENABLED=true pased to make
--
--Upstream-Status: Pending
--Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-----
-- build_detect_platform | 16 +++++++++-------
-- 1 file changed, 9 insertions(+), 7 deletions(-)
--
--diff --git a/build_detect_platform b/build_detect_platform
--index bb76c4f..a586364 100755
----- a/build_detect_platform
--+++ b/build_detect_platform
--@@ -201,15 +201,17 @@ EOF
--         PLATFORM_LIBS="$PLATFORM_LIBS -lsnappy"
--     fi
-- 
---    # Test whether tcmalloc is available
---    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -ltcmalloc 2>/dev/null  <<EOF
---      int main() {}
--+    if [ "$TCMALLOC_ENABLED" = "true" ]; then
--+        # Test whether tcmalloc is available
--+        $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -ltcmalloc 2>/dev/null  <<EOF
--+          int main() {}
-- EOF
---    if [ "$?" = 0 ]; then
---        PLATFORM_LIBS="$PLATFORM_LIBS -ltcmalloc"
---    fi
--+        if [ "$?" = 0 ]; then
--+            PLATFORM_LIBS="$PLATFORM_LIBS -ltcmalloc"
--+        fi
-- 
---    rm -f $CXXOUTPUT 2>/dev/null
--+        rm -f $CXXOUTPUT 2>/dev/null
--+    fi
-- fi
-- 
-- PLATFORM_CCFLAGS="$PLATFORM_CCFLAGS $COMMON_FLAGS"
---- 
--2.1.1
--
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb_git.bb b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-index a6a3024..8c66055 100644
---- a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-+++ b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-@@ -4,12 +4,10 @@ HOMEPAGE = "http://leveldb.googlecode.com"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=92d1b128950b11ba8495b64938fc164d"
+diff --git a/meta-oe/recipes-connectivity/umip/files/mip6d b/meta-oe/recipes-connectivity/umip/files/mip6d
+new file mode 100755
+index 000000000..ebd70a6cc
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/umip/files/mip6d
+@@ -0,0 +1,112 @@
++#!/bin/sh
++#
++# mip6d		Start script for the Mobile IPv6 daemon
++#
++# chkconfig:	- 55 25
++# description:	The mobile IPv6 daemon allows nodes to remain \
++#		reachable while moving around in the IPv6 Internet.
++# processname:	mip6d
++# config:	/etc/mip6d.conf
++# config:	/etc/sysconfig/mip6d
++#
++### BEGIN INIT INFO
++# Provides: mipv6-daemon
++# Required-Start: $local_fs $remote_fs $network $named
++# Required-Stop: $local_fs $remote_fs $network
++# Should-Start: $syslog
++# Should-Stop: $network $syslog
++# Default-Start:
++# Default-Stop: 0 1 6
++# Short-Description: Start and stop Mobile IPV6 daemon
++# Description:	The mobile IPv6 daemon allows nodes to remain
++#		reachable while moving around in the IPv6 Internet.
++### END INIT INFO
++
++# Source function library.
++. /etc/init.d/functions
++
++if [ -f /etc/sysconfig/mip6d ]; then
++	. /etc/sysconfig/mip6d
++fi
++
++mip6d=/usr/sbin/mip6d
++prog="mip6d"
++lockfile=/var/lock/subsys/$prog
++
++start() {
++	[ -x $mip6d ] || exit 5
++	echo -n $"Starting $prog: "
++	start-stop-daemon -S -x ${mip6d} && success || failure
++	retval=$?
++	echo
++	[ $retval -eq 0 ] && touch ${lockfile}
++	return $retval
++}
++
++stop() {
++	echo -n $"Stopping $prog: "
++	start-stop-daemon -K -x $mip6d
++	retval=$?
++	echo
++	[ $retval -eq 0 ] && rm -f ${lockfile}
++	return $retval
++}
++
++restart() {
++	stop
++	start
++}
++
++reload()
++{
++	echo -n $"Reloading $prog configuration: "
++	killproc $mip6d -HUP
++	retval=$?
++	echo
++	return $retval
++}
++
++force_reload() {
++	restart
++}
++
++rh_status() {
++	status $prog
++}
++
++rh_status_q() {
++	rh_status > /dev/null 2>&1
++}
++
++case "$1" in
++  start)
++	rh_status_q && exit 0
++	$1
++	;;
++  stop)
++	rh_status_q || exit 0
++	$1
++	;;
++  restart)
++	$1
++	;;
++  reload)
++	rh_status_q || exit 7
++	$1
++	;;
++  force-reload)
++	force_reload
++	;;
++  status)
++	rh_status
++	;;
++  condrestart|try-restart)
++	rh_status_q || exit 0
++	restart
++	;;
++  *)
++	echo $"Usage: $prog {start|stop|status|restart|condrestart|try-restart|reload|force-reload}"
++	exit 2
++esac
++
++exit $?
+diff --git a/meta-oe/recipes-connectivity/umip/files/mip6d.service b/meta-oe/recipes-connectivity/umip/files/mip6d.service
+new file mode 100644
+index 000000000..2b5a5b9f1
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/umip/files/mip6d.service
+@@ -0,0 +1,10 @@
++[Unit]
++Description=MIPL Mobile IPv6
++After=network.target
++
++[Service]
++EnvironmentFile=-@SYSCONFDIR@/sysconfig/mip6d
++ExecStart=@SBINDIR@/mip6d $ARGS
++
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+index e97dd48f6..b8b90eb81 100644
+--- a/meta-oe/recipes-connectivity/umip/umip_1.0.bb
++++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
+@@ -11,10 +11,26 @@ DEPENDS = "rpm indent-native"
  
--SRCREV = "803d69203a62faf50f1b77897310a3a1fcae712b"
--PV = "1.18+git${SRCPV}"
-+SRCREV = "a53934a3ae1244679f812d998a4f16f2c7f309a6"
-+PV = "1.20+git${SRCPV}"
- 
--SRC_URI = "git://github.com/google/${BPN}.git \
--    file://0001-Explicitly-disable-tcmalloc.patch \
--"
-+SRC_URI = "git://github.com/google/${BPN}.git"
+ SRC_URI = "git://git.umip.org/umip.git \
+     file://add-dependency-to-support-parallel-compilation.patch \
++    file://mip6d \
++    file://mip6d.service \
+ "
+ SRCREV = "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
  
  S = "${WORKDIR}/git"
+ EXTRA_OE_CONF = "--enable-vt"
  
+-inherit autotools-brokensep
++inherit autotools-brokensep systemd update-rc.d
++
++INITSCRIPT_NAME = "mip6d"
++INITSCRIPT_PARAMS = "start 64 . stop 36 0 1 2 3 4 5 6 ."
++
++SYSTEMD_SERVICE_${PN} = "mip6d.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++do_install_append() {
++	install -D -m 0755 ${WORKDIR}/mip6d ${D}${sysconfdir}/init.d/mip6d
++	install -D -m 0644 ${WORKDIR}/mip6d.service ${D}${systemd_system_unitdir}/mip6d.service
++	sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++	    -e 's,@SBINDIR@,${sbindir},g' \
++	    ${D}${systemd_system_unitdir}/mip6d.service
++}
 -- 
-2.1.4
+2.11.0
 
 
