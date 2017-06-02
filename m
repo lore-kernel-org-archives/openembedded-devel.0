@@ -1,51 +1,25 @@
-Return-Path: <brarcher@lexmark.com>
-Received: from mail-qt0-f225.google.com (mail-qt0-f225.google.com
-	[209.85.216.225])
-	by mail.openembedded.org (Postfix) with ESMTP id 0892B77E8D
+Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id CCEE271B27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 13:25:06 +0000 (UTC)
-Received: by mail-qt0-f225.google.com with SMTP id r58so7395036qtb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jun 2017 06:25:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=lexmark-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=XI3ypV4GJv7eN7WPmFToZyfE8lBA6TaFkUY3awkUQkA=;
-	b=wXecpCjJKCvAy/kR50+H+9gluA4O9o5KYIWIYTaprhE3HjCGG6poZyR430U1bgoNx1
-	FCcgboC11RyTNcMmeWOphm4u7RZl6x8mpUoVGFh4Rxlowvu9uB+7TaQJWItPgib2TUJf
-	pK8WY0qHG4iytjCZAiwbFEw/E55A7fjiQF13+cZd9hT+Dcv2d/bh0i8WDiWmGLqTHKRi
-	REIgGazQi5HDNxCGChUkefyAi8DuoZAicpZhEoeKGe2GLWi+iq+XT1FzL+M9PBx6GaYj
-	x1bNfa5QpwAiktKhcRz2Px0IoMLZ+SP8i+nVaYg+HlfWzuLN23fS85ajU5gL3jytccj7
-	bRiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=XI3ypV4GJv7eN7WPmFToZyfE8lBA6TaFkUY3awkUQkA=;
-	b=XqTM+hS8K7r9VvSqNu7yn2rvmo5Fntc398XWGVL9gSZKVHAG9lFsm9OY67q/giZGrl
-	bYQacCK5VeNsbW25s5hcgEM37d+RrUyiO1I/w9adS+Toq8hHufdqsPDoWsBjNNB+2kNY
-	JAAjOf5hznr2ynALwNiQuIUyikyYCASkpiecMS46tMjnvXODU5tG5fYICfcEteE+pIBj
-	IXnuQj1CQIOz4X2g8a8jvm6dGZbi5P5I/oDp1Dif5Oo76YPoHEx8+vhrQjohCMWClXkD
-	1SePiIO4kuheKiesmGfj7ED6u+NyGn4aA/nQ5YlEVdN/VOoPkWh6B32D+hqi0Hy8vReX
-	hhbQ==
-X-Gm-Message-State: AODbwcBsRUqa5ZklN6HOJMg7eFpVA1ddyTZfKIwxB5FtOzn7Bvxq4axL
-	750YP+/j1Pf9zcSL/KEmHRYXi/mpMvKsNBuXu+w=
-X-Received: by 10.107.130.25 with SMTP id e25mr7348962iod.31.1496409908169;
-	Fri, 02 Jun 2017 06:25:08 -0700 (PDT)
-Received: from smtp02a.notes.lexmark.com ([192.146.101.90])
-	by smtp-relay.gmail.com with ESMTP id
-	e74sm826331itd.4.2017.06.02.06.25.07; 
-	Fri, 02 Jun 2017 06:25:08 -0700 (PDT)
-X-Relaying-Domain: lexmark.com
-Received: from brarcher-OptiPlex-780.dhcp.ad.rds.lexmark.com (unknown
-	[10.199.110.65])
-	by smtp02a.notes.lexmark.com (Postfix) with ESMTP id C1779139C0B;
-	Fri,  2 Jun 2017 09:25:07 -0400 (EDT)
-From: Branden Archer <brarcher@lexmark.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jun 2017 09:25:00 -0400
-Message-Id: <1496409900-15381-1-git-send-email-brarcher@lexmark.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] zsh: update to 5.3.1
+	Fri,  2 Jun 2017 14:28:27 +0000 (UTC)
+Received: from fmsmga001.fm.intel.com ([10.253.24.23])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	02 Jun 2017 07:28:29 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,285,1493708400"; d="scan'208";a="1155842552"
+Received: from lsandov1-mobl2.zpn.intel.com ([10.219.128.119])
+	by fmsmga001.fm.intel.com with ESMTP; 02 Jun 2017 07:28:28 -0700
+Message-ID: <1496414228.26945.94.camel@linux.intel.com>
+From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
+To: Fan Xin <fan.xin@jp.fujitsu.com>
+Date: Fri, 02 Jun 2017 09:37:08 -0500
+In-Reply-To: <1496366490-28223-1-git-send-email-fan.xin@jp.fujitsu.com>
+References: <1496366490-28223-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: Evolution 3.12.9-1+b1 
+Mime-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] openvpn: Upgrade 2.3.9 -> 2.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +32,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 13:25:08 -0000
+X-List-Received-Date: Fri, 02 Jun 2017 14:28:29 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
----
- meta-oe/recipes-extended/zsh/{zsh_5.0.5.bb => zsh_5.3.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-extended/zsh/{zsh_5.0.5.bb => zsh_5.3.1.bb} (92%)
+On Fri, 2017-06-02 at 10:21 +0900, Fan Xin wrote:
+> Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+> ---
+>  .../recipes-support/openvpn/{openvpn_2.3.9.bb => openvpn_2.4.2.bb}  | 6 +++---
+>  1 file changed, 3 insertions(+), 3 deletions(-)
+>  rename meta-networking/recipes-support/openvpn/{openvpn_2.3.9.bb => openvpn_2.4.2.bb} (93%)
+> 
+> diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
+> similarity index 93%
+> rename from meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+> rename to meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
+> index db510de..ae72671 100644
+> --- a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
+> +++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
+> @@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
+>  HOMEPAGE = "http://openvpn.sourceforge.net"
+>  SECTION = "net"
+>  LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=e9b64491ec98eb6c6493ac5e4118f107"
 
-diff --git a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
-similarity index 92%
-rename from meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-rename to meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
-index 39b2d95..1f5e390 100644
---- a/meta-oe/recipes-extended/zsh/zsh_5.0.5.bb
-+++ b/meta-oe/recipes-extended/zsh/zsh_5.3.1.bb
-@@ -11,8 +11,8 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b7bc853894664be455a922db9805288e"
- DEPENDS = "ncurses bison-native libcap libpcre gdbm groff-native"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
--SRC_URI[md5sum] = "6fb0e3e52a0f8de5ca63138391b81ce0"
--SRC_URI[sha256sum] = "b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4"
-+SRC_URI[md5sum] = "d583fbca0c2410bf9542ce8a651c26ca"
-+SRC_URI[sha256sum] = "3d94a590ff3c562ecf387da78ac356d6bea79b050a9ef81e3ecb9f8ee513040e"
- 
- inherit autotools gettext update-alternatives
- 
--- 
-2.7.4
+reason for the above chksum change? 
+
+>  DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+>  
+>  inherit autotools systemd
+> @@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
+>             file://openvpn@.service \
+>             file://openvpn-volatile.conf"
+>  
+> -SRC_URI[md5sum] = "265755044ae88f9249d509f6d061f7e5"
+> -SRC_URI[sha256sum] = "2c12fe9ea641ac1291e70322cc500641c84e5903dd4f40bf2eda7e9f209b2f9c"
+> +SRC_URI[md5sum] = "0714019e109a043e858278c9e2ca18e0"
+> +SRC_URI[sha256sum] = "b24740c9d44a81eaf2befc4846d51445a520104321e32aaf0c135ed2e098a624"
+>  
+>  SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+>  SYSTEMD_AUTO_ENABLE = "disable"
+> -- 
+> 1.9.1
+> 
+
 
 
