@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id D873B77E55
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0CA8D77E76
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 06:50:30 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id u26so11734167pfd.2
+	Fri,  2 Jun 2017 06:50:31 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id u26so11734264pfd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jun 2017 23:50:32 -0700 (PDT)
+	Thu, 01 Jun 2017 23:50:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=HFicugR7mOo4QbE1SPu4YUYiUyHt1bpLt8tv+mW7lik=;
-	b=s10rGlCbpxo5e2T8efwMC3O0oUdQ8Bwk3YjSH4uEfZwJk5Ak8/0cKJjHbhQfEZxrLo
-	HabQuGR2mOvt6Lm4QWRFOonuiuN4TR4u/kIekMYrXHNjFpICn4pH9kVHwImGn/fLxGRr
-	sHSY1xsNhe+aeY+xUoOYdVQbdGnr8ia6q+ay6lr6KSEwpQLGxFw/HLL1RKqUbG6LO2N5
-	weQCku9dfizrw31E8HzWa9dSLIaZi8NXw1KqqZEHspgInrKiYJ+psZwputqepctor1eJ
-	aAyx/Wp4ETltqLjL99aWMx2cnKthdHCx6DztR3MJhoI7uQfqo+oLwSyg/qNP5YIWjR37
-	yB4g==
+	bh=bddmCpugLOqf2yeQr9I89DwjyWZtBYaVXCRrK/h0diM=;
+	b=YQ4CIH2tJTH6OauusRKrQeoucZsn0mD5EYXQmibhAy4UsYoF/CqY37rL6kAx+RVjqs
+	VyS5fdKYjP010u57D6OFWVR3aFJCmWHc3SjdklaqzO7+hb89DYhxCormFh4rr6UDXwtX
+	gEU8kQk4C7oMdkjYdyDFMyv+aoWYbbQXt4qRTIq/vPnxGZBYNmSlfTMSwnl6YOQZ4yqc
+	jCLqb/pk8VjuK1kpM/+KLJeEPSZnnAWhmDo8hYXG15WI8nwnp4hG9opCeofN9/c5rYEn
+	X4EU2Y3z3+r8MkO+1s6frD/qAUn7py4AV5VW8qO/9sHayAhQClm61LbnGnod8HhkoVd5
+	Zang==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=HFicugR7mOo4QbE1SPu4YUYiUyHt1bpLt8tv+mW7lik=;
-	b=ObJWYCBEHmj68epsz9I1wJTroMVTkqh5nVD0dVeoY7fMrAXZo6oQX5m3NLpfUEPWqz
-	y8htcYmQy/Pab8BIwvUd3vTrUnH2EetUBlsT8W/kLepNeUwqRC+1wSF5xqua66eYwONj
-	tuTK01KVIiUJffbC/3+yZsIn39GuZlQ2SbJJXT5V4tBepsOd2eX2WVU4s6w590nER9ek
-	bgwPZU8cX1GLoZV6xrmOTESWh/EjM69iH2ag62sZDRF70SoFIstWPOwgz2QKKnZkaGqx
-	cmCsfWsDfSwwwHKVEnrWBDheL8HxSHsdt7brygw80lIPB1uo2kWYMahI9d2Jexp7umeG
-	xj4Q==
-X-Gm-Message-State: AODbwcCQJ0mm+7xxaNUZgTi5JoGlQ8sLScf/EOZ0RL7CaDdLXLwtqn+z
-	YCaAGkX+zkOxxAjn
-X-Received: by 10.98.192.80 with SMTP id x77mr5398639pff.1.1496386231656;
-	Thu, 01 Jun 2017 23:50:31 -0700 (PDT)
+	bh=bddmCpugLOqf2yeQr9I89DwjyWZtBYaVXCRrK/h0diM=;
+	b=TMbrpYZxCzQbMWY6V55+nSDbSDCbPYpijBE/azulErDmTAccve58X/RDMpAiXn1Yb7
+	OIYAQGtVUsjUeGF1gMOzLc2AUWqKNgumkl7W1oa+605dsXowcX8+BD1FIwC+I6tS53Tw
+	8cxF7GPCadFwek6AIIGezEC+phxlmpT4MqotiEZgn91hLh3uHLIBwHACZFgtJ0tIS7T1
+	rnetEuQYoAGcnoz2Tn8C91hgnW9CVKdZd1M2ckLWoBQP8Mj5WmzsXxrdFrcYJNlHDbhd
+	/zBOWFA63fKCCo3w/oDOmmVotYW+5/8q7ebqujtzBrCqXoN3thYMkp5mlcfQcHYJ47A2
+	EDOg==
+X-Gm-Message-State: AODbwcDtsiIf4UCq1GQDHhmqPAG2kVfG21bP7KMW6kSsjAcVe0wLDi/D
+	9hmXMbjrUQyHzaKZ
+X-Received: by 10.98.16.215 with SMTP id 84mr5292652pfq.210.1496386232940;
+	Thu, 01 Jun 2017 23:50:32 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::cf4])
 	by smtp.gmail.com with ESMTPSA id
-	a78sm43177369pfk.122.2017.06.01.23.50.30
+	a78sm43177369pfk.122.2017.06.01.23.50.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 01 Jun 2017 23:50:30 -0700 (PDT)
+	Thu, 01 Jun 2017 23:50:32 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  1 Jun 2017 23:50:15 -0700
-Message-Id: <20170602065016.27954-3-raj.khem@gmail.com>
+Date: Thu,  1 Jun 2017 23:50:16 -0700
+Message-Id: <20170602065016.27954-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.0
 In-Reply-To: <20170602065016.27954-1-raj.khem@gmail.com>
 References: <20170602065016.27954-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/4] konkretcmpi: Update and fix build with latest oe-core
+Subject: [meta-networking][PATCH 4/4] proftpd: Update to 1.3.6 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,125 +56,147 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 06:50:31 -0000
+X-List-Received-Date: Fri, 02 Jun 2017 06:50:32 -0000
 
-Drop already upstreamed patch
+Use the new gnu-config files for musl support
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-drop-including-rpath-cmake-module.patch   | 38 ++++++++++++++++++++++
- ...-0.9.2-fix-returning-instance-from-method.patch | 38 ----------------------
- .../konkretcmpi/konkretcmpi_0.9.2.bb               |  4 +--
- 3 files changed, 40 insertions(+), 40 deletions(-)
- create mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-drop-including-rpath-cmake-module.patch
- delete mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
+ .../proftpd/files/build_fixup.patch                | 54 +++++++++++-----------
+ .../{proftpd_1.3.5b.bb => proftpd_1.3.6.bb}        |  7 +--
+ 2 files changed, 31 insertions(+), 30 deletions(-)
+ rename meta-networking/recipes-daemons/proftpd/{proftpd_1.3.5b.bb => proftpd_1.3.6.bb} (94%)
 
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-drop-including-rpath-cmake-module.patch b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-drop-including-rpath-cmake-module.patch
-new file mode 100644
-index 000000000..342017bed
---- /dev/null
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/0001-drop-including-rpath-cmake-module.patch
-@@ -0,0 +1,38 @@
-+From 45e1c4c04a126d2386446775f99084bd603016af Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 1 Jun 2017 23:10:59 -0700
-+Subject: [PATCH] drop including rpath cmake module
-+
-+Fixes cross compilation QA errors e.g.
-+/usr/lib/libkonkret.so.0.0.1 contains probably-redundant RPATH /usr/lib [useless-rpaths]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/konkret/CMakeLists.txt | 1 -
-+ src/program/CMakeLists.txt | 1 -
-+ 2 files changed, 2 deletions(-)
-+
-+diff --git a/src/konkret/CMakeLists.txt b/src/konkret/CMakeLists.txt
-+index c2faa40..df49e11 100644
-+--- a/src/konkret/CMakeLists.txt
-++++ b/src/konkret/CMakeLists.txt
-+@@ -8,7 +8,6 @@ set(konkret_SRCS
-+     kstr.c
-+     print.c
-+ )
-+-include(rpath)
-+ include_directories(${CMPI_INCLUDE_DIR})
-+ 
-+ add_library(libkonkret SHARED ${konkret_SRCS})
-+diff --git a/src/program/CMakeLists.txt b/src/program/CMakeLists.txt
-+index afcefe5..8a4646c 100644
-+--- a/src/program/CMakeLists.txt
-++++ b/src/program/CMakeLists.txt
-+@@ -1,4 +1,3 @@
-+-include (rpath)
-+ include_directories(${CMPI_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
-+ 
-+ add_executable(konkret main.cpp)
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
-deleted file mode 100644
-index b54d09159..000000000
---- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi/konkretcmpi-0.9.2-fix-returning-instance-from-method.patch
-+++ /dev/null
-@@ -1,38 +0,0 @@
--Port from Fedora20
--
--    | commit aca6c7f910ffe9930b5789969f0adfadd668bb46
--    | Author: Michal Minar <miminar@redhat.com>
--    | Date:   Fri Jun 20 10:50:45 2014 +0200
--    | 
--    |     Fix returning instance as an output argument from method
--    |     
--    |     Submitted By: Radek Novacek <rnovacek@redhat.com>
--
--Upstream-Status: Pending
--Signed-off-by: Qian Lei <qianl.fnst@cn.fujitsu.com>
--
--diff --git a/src/program/main.cpp b/src/program/main.cpp
--index 885dc12..9e7108a 100644
----- a/src/program/main.cpp
--+++ b/src/program/main.cpp
--@@ -506,7 +506,11 @@ static void gen_feature_decls(
-- 
--             // Add sig entry [type][length][name][zero-terminator]
-- 
---            KTag tag = _ktag(pd->data_type, pd->array_index, key, false, false);
--+            KTag tag;
--+            if (pd->qualifiers->has_key("EmbeddedInstance"))
--+                tag = _ktag(TOK_INSTANCE, pd->array_index, key, false, false);
--+            else
--+                tag = _ktag(pd->data_type, pd->array_index, key, false, false);
--             pack_tag(sig, tag);
--             pack_name(sig, pd->name);
--             count++;
--@@ -640,6 +644,7 @@ static void gen_param(FILE* os, MOF_Parameter* p, vector<unsigned char>& sig)
--         const char* ktn = _ktype_name(p->data_type);
-- 
--         if (p->qualifiers->has_key("EmbeddedInstance")) {
--+            tag = _ktag(TOK_INSTANCE, p->array_index, false, in, out);
--             if (p->array_index)
--                 put(os, "    KInstanceA $0;\n", p->name, NULL);
--             else
-diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-index 1d8b0dbd4..4e4aa6cde 100644
---- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-+++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
-@@ -9,11 +9,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
- DEPENDS = "swig-native sblim-cmpi-devel python"
+diff --git a/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
+index 19617a6bb..9816d4d22 100644
+--- a/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
++++ b/meta-networking/recipes-daemons/proftpd/files/build_fixup.patch
+@@ -9,11 +9,11 @@ redefine PR_RUN_DIR as ${localstatedir}/run
+ Signed-off-By: Armin Kuster <akuster808@gmail.com>
  
- SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
--           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
-            file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch \
-+           file://0001-drop-including-rpath-cmake-module.patch \
+ 
+-Index: proftpd-1.3.5/Make.rules.in
++Index: proftpd-1.3.6/Make.rules.in
+ ===================================================================
+---- proftpd-1.3.5.orig/Make.rules.in
+-+++ proftpd-1.3.5/Make.rules.in
+-@@ -29,9 +29,9 @@ INSTALL=@INSTALL@
++--- proftpd-1.3.6.orig/Make.rules.in
+++++ proftpd-1.3.6/Make.rules.in
++@@ -30,9 +30,9 @@ INSTALL=@INSTALL@
+  INSTALL_STRIP=@INSTALL_STRIP@
+  INSTALL_USER=@install_user@
+  INSTALL_GROUP=@install_group@
+@@ -26,10 +26,10 @@ Index: proftpd-1.3.5/Make.rules.in
+  
+  RM=rm -f
+  SHELL=@CONFIG_SHELL@
+-Index: proftpd-1.3.5/Makefile.in
++Index: proftpd-1.3.6/Makefile.in
+ ===================================================================
+---- proftpd-1.3.5.orig/Makefile.in
+-+++ proftpd-1.3.5/Makefile.in
++--- proftpd-1.3.6.orig/Makefile.in
+++++ proftpd-1.3.6/Makefile.in
+ @@ -105,7 +105,6 @@ check: proftpd$(EXEEXT)
+  $(DESTDIR)$(localedir) $(DESTDIR)$(includedir) $(DESTDIR)$(includedir)/proftpd $(DESTDIR)$(libdir) $(DESTDIR)$(pkgconfigdir) $(DESTDIR)$(libdir)/proftpd $(DESTDIR)$(libexecdir) $(DESTDIR)$(localstatedir) $(DESTDIR)$(sysconfdir) $(DESTDIR)$(bindir) $(DESTDIR)$(sbindir) $(DESTDIR)$(mandir) $(DESTDIR)$(mandir)/man1 $(DESTDIR)$(mandir)/man5 $(DESTDIR)$(mandir)/man8:
+  	@if [ ! -d $@ ]; then \
+@@ -60,11 +60,11 @@ Index: proftpd-1.3.5/Makefile.in
+  		           $(top_srcdir)/sample-configurations/basic.conf \
+  	       	           $(DESTDIR)$(sysconfdir)/proftpd.conf ; \
+  	fi
+-Index: proftpd-1.3.5/configure
++Index: proftpd-1.3.6/configure
+ ===================================================================
+---- proftpd-1.3.5.orig/configure
+-+++ proftpd-1.3.5/configure
+-@@ -38255,7 +38255,7 @@ _ACEOF
++--- proftpd-1.3.6.orig/configure
+++++ proftpd-1.3.6/configure
++@@ -41777,7 +41777,7 @@ _ACEOF
+  
+  
+  cat >>confdefs.h <<_ACEOF
+@@ -72,9 +72,9 @@ Index: proftpd-1.3.5/configure
+ +#define PR_RUN_DIR "`eval echo "${localstatedir}"/run/`"
+  _ACEOF
+  
+- cat >>confdefs.h <<_ACEOF
+-@@ -38263,7 +38263,7 @@ cat >>confdefs.h <<_ACEOF
+- _ACEOF
++ 
++@@ -41787,7 +41787,7 @@ _ACEOF
++ 
+  
+  cat >>confdefs.h <<_ACEOF
+ -#define PR_PID_FILE_PATH "`eval echo "${localstatedir}/proftpd.pid"`"
+@@ -82,25 +82,25 @@ Index: proftpd-1.3.5/configure
+  _ACEOF
+  
+  
+-Index: proftpd-1.3.5/configure.in
++Index: proftpd-1.3.6/configure.in
+ ===================================================================
+---- proftpd-1.3.5.orig/configure.in
+-+++ proftpd-1.3.5/configure.in
+-@@ -2971,8 +2971,8 @@ locale_dir="`eval echo ${locale_dir}`"
+- AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`")
++--- proftpd-1.3.6.orig/configure.in
+++++ proftpd-1.3.6/configure.in
++@@ -3833,8 +3833,8 @@ locale_dir="`eval echo ${locale_dir}`"
++ AC_DEFINE_UNQUOTED(PR_LOCALE_DIR, "`eval echo "${locale_dir}"`", [Define the locale directory])
+  
+- AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`")
+--AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`")
+--AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`")
+-+AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/run/proftpd.conf"`")
+-+AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`")
++ AC_DEFINE_UNQUOTED(PR_RUN_DIR, "`eval echo "${localstatedir}"`", [Define the run directory])
++-AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/proftpd.conf"`", [Define the configuration file path])
++-AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/proftpd.pid"`", [Define the PID file path])
+++AC_DEFINE_UNQUOTED(PR_CONFIG_FILE_PATH, "`eval echo "${sysconfdir}/run/proftpd.conf"`", [Define the configuration file path])
+++AC_DEFINE_UNQUOTED(PR_PID_FILE_PATH, "`eval echo "${localstatedir}/run/proftpd.pid"`", [Define the PID file path])
+  
+  prefix="$pr_saved_prefix"
+  exec_prefix="$pr_saved_exec_prefix"
+-Index: proftpd-1.3.5/lib/libcap/Makefile
++Index: proftpd-1.3.6/lib/libcap/Makefile
+ ===================================================================
+---- proftpd-1.3.5.orig/lib/libcap/Makefile
+-+++ proftpd-1.3.5/lib/libcap/Makefile
++--- proftpd-1.3.6.orig/lib/libcap/Makefile
+++++ proftpd-1.3.6/lib/libcap/Makefile
+ @@ -26,7 +26,7 @@ OBJS=$(addsuffix .o, $(FILES))
+  all: $(LIBNAME)
+  
+diff --git a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+similarity index 94%
+rename from meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb
+rename to meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+index 73efac2fb..409947265 100644
+--- a/meta-networking/recipes-daemons/proftpd/proftpd_1.3.5b.bb
++++ b/meta-networking/recipes-daemons/proftpd/proftpd_1.3.6.bb
+@@ -13,9 +13,8 @@ SRC_URI = "ftp://ftp.proftpd.org/distrib/source/${BPN}-${PV}.tar.gz \
+            file://build_fixup.patch \
+            file://proftpd.service \
             "
+-
+-SRC_URI[md5sum] = "f7b8e3a383b34a894c2502db74ccccde"
+-SRC_URI[sha256sum] = "afc1789f2478acf88dfdc7d70da90a4fa2786d628218e9574273295d044b4fc8"
++iSRC_URI[md5sum] = "13270911c42aac842435f18205546a1b"
++SRC_URI[sha256sum] = "91ef74b143495d5ff97c4d4770c6804072a8c8eb1ad1ecc8cc541b40e152ecaf"
  
--SRCREV = "460e6421c16a8216d29ccd1b7490f814dab8b769"
-+SRCREV = "ad28225e6eceff88417a60c1ba8896c8e40f21a7"
- S = "${WORKDIR}/git"
+ inherit autotools-brokensep useradd update-rc.d systemd
  
- inherit cmake
+@@ -63,6 +62,8 @@ PACKAGECONFIG[auth] = "--enable-auth-file, --disable-auth-file"
+ # proftpd uses libltdl which currently makes configuring using
+ # autotools.bbclass a pain...
+ do_configure () {
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
+     oe_runconf
+     cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}/libtool
+ }
 -- 
 2.13.0
 
