@@ -1,26 +1,22 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EF4C77E76
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 7933E77E7A
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri,  2 Jun 2017 08:05:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v52852TS001227
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v5284xTT012639
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 2 Jun 2017 01:05:04 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Fri, 2 Jun 2017 01:05:01 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Jun 2017 16:04:56 +0800
-Message-ID: <9b7e73276796febe9ff831e6376cbb20d160c298.1496390474.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.1496390474.git.jackie.huang@windriver.com>
-References: <cover.1496390474.git.jackie.huang@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/3] umip: fix for parallel compilation
+	Fri, 2 Jun 2017 10:04:59 +0200
+Received: from dev.sbt.siemens.com ([139.16.116.248])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v5284xiw017049;
+	Fri, 2 Jun 2017 10:04:59 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Jun 2017 10:04:53 +0200
+Message-Id: <1496390693-8675-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] leveldb: update to 1.20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,71 +29,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 08:05:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 02 Jun 2017 08:05:04 -0000
 
-From: Jackie Huang <jackie.huang@windriver.com>
+The tmalloc patch went upstream in the meantime
 
-Add missing dependency in Makefile to fix the
-parallel compile issue and re-enable PARALLEL_MAKE
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- ...ependency-to-support-parallel-compilation.patch | 23 ++++++++++++++++++++++
- meta-oe/recipes-connectivity/umip/umip_1.0.bb      |  6 +++---
- 2 files changed, 26 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch
+ .../leveldb/0001-Explicitly-disable-tcmalloc.patch | 48 ----------------------
+ meta-oe/recipes-extended/leveldb/leveldb_git.bb    |  8 ++--
+ 2 files changed, 3 insertions(+), 53 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
 
-diff --git a/meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch b/meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch
-new file mode 100644
-index 000000000..dbf008264
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/umip/files/add-dependency-to-support-parallel-compilation.patch
-@@ -0,0 +1,23 @@
-+When "make -j10", the compilation will fail,
-+because scan.c has included gram.h, but gram.h was produced
-+after scan.c was compiled
-+
-+So add this dependency to ensure that gram.h is produced
-+before scan.c is produced.
-+
-+Upstream-Status: Inappropriate [upstream is not active]
-+
-+Signed-off-by: Roy.Li <RongQing.Li@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+---
-+ src/Makefile.am |    2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -81,3 +81,5 @@ CLEANFILES = gram.c gram.h \
-+ 
-+ DISTCLEANFILES = $(BUILT_SOURCES)
-+ MAINTAINERCLEANFILES = Makefile.in
-++
-++scan.c: gram.h
-diff --git a/meta-oe/recipes-connectivity/umip/umip_1.0.bb b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-index e80c1b130..e97dd48f6 100644
---- a/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-+++ b/meta-oe/recipes-connectivity/umip/umip_1.0.bb
-@@ -9,12 +9,12 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=073dc31ccb2ebed70db54f1e8aeb4c33"
- DEPENDS = "rpm indent-native"
+diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch b/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
+deleted file mode 100644
+index 4b76dd0..0000000
+--- a/meta-oe/recipes-extended/leveldb/leveldb/0001-Explicitly-disable-tcmalloc.patch
++++ /dev/null
+@@ -1,48 +0,0 @@
+-From d6daac04dab4b3acf4b88f16742d1b402cdc3d83 Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Wed, 1 Oct 2014 18:54:04 +0200
+-Subject: [PATCH] Explicitly disable tcmalloc
+-
+-Without this change leveldb autodetects tcmalloc from sysroot and
+-sometimes became dependant on gperftools
+-
+-Disable autodetection without TCMALLOC_ENABLED=true pased to make
+-
+-Upstream-Status: Pending
+-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+----
+- build_detect_platform | 16 +++++++++-------
+- 1 file changed, 9 insertions(+), 7 deletions(-)
+-
+-diff --git a/build_detect_platform b/build_detect_platform
+-index bb76c4f..a586364 100755
+---- a/build_detect_platform
+-+++ b/build_detect_platform
+-@@ -201,15 +201,17 @@ EOF
+-         PLATFORM_LIBS="$PLATFORM_LIBS -lsnappy"
+-     fi
+- 
+--    # Test whether tcmalloc is available
+--    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -ltcmalloc 2>/dev/null  <<EOF
+--      int main() {}
+-+    if [ "$TCMALLOC_ENABLED" = "true" ]; then
+-+        # Test whether tcmalloc is available
+-+        $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -ltcmalloc 2>/dev/null  <<EOF
+-+          int main() {}
+- EOF
+--    if [ "$?" = 0 ]; then
+--        PLATFORM_LIBS="$PLATFORM_LIBS -ltcmalloc"
+--    fi
+-+        if [ "$?" = 0 ]; then
+-+            PLATFORM_LIBS="$PLATFORM_LIBS -ltcmalloc"
+-+        fi
+- 
+--    rm -f $CXXOUTPUT 2>/dev/null
+-+        rm -f $CXXOUTPUT 2>/dev/null
+-+    fi
+- fi
+- 
+- PLATFORM_CCFLAGS="$PLATFORM_CCFLAGS $COMMON_FLAGS"
+--- 
+-2.1.1
+-
+diff --git a/meta-oe/recipes-extended/leveldb/leveldb_git.bb b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+index a6a3024..8c66055 100644
+--- a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
++++ b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+@@ -4,12 +4,10 @@ HOMEPAGE = "http://leveldb.googlecode.com"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=92d1b128950b11ba8495b64938fc164d"
  
--SRC_URI = "git://git.umip.org/umip.git"
-+SRC_URI = "git://git.umip.org/umip.git \
-+    file://add-dependency-to-support-parallel-compilation.patch \
-+"
- SRCREV = "428974c2d0d8e75a2750a3ab0488708c5dfdd8e3"
+-SRCREV = "803d69203a62faf50f1b77897310a3a1fcae712b"
+-PV = "1.18+git${SRCPV}"
++SRCREV = "a53934a3ae1244679f812d998a4f16f2c7f309a6"
++PV = "1.20+git${SRCPV}"
+ 
+-SRC_URI = "git://github.com/google/${BPN}.git \
+-    file://0001-Explicitly-disable-tcmalloc.patch \
+-"
++SRC_URI = "git://github.com/google/${BPN}.git"
  
  S = "${WORKDIR}/git"
- EXTRA_OE_CONF = "--enable-vt"
  
- inherit autotools-brokensep
--
--PARALLEL_MAKE = ""
 -- 
-2.11.0
+2.1.4
 
 
