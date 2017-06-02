@@ -1,35 +1,46 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym01.jp.fujitsu.com (mgwym01.jp.fujitsu.com [211.128.242.40])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D49071ADA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EB1277E31
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 01:20:17 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
-	mgwym01.jp.fujitsu.com with smtp
-	id 27d3_e291_62724181_98d6_40ab_96e3_ba571e2c382e;
-	Fri, 02 Jun 2017 10:20:15 +0900
-Received: from g01jpfmpwkw03.exch.g01.fujitsu.local
-	(g01jpfmpwkw03.exch.g01.fujitsu.local [10.0.193.57])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 7BD8BAC0145
+	Fri,  2 Jun 2017 04:41:16 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id w69so11062524pfk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 10:20:14 +0900 (JST)
-Received: from G01JPEXCHKW16.g01.fujitsu.local
-	(G01JPEXCHKW16.g01.fujitsu.local [10.0.194.55])
-	by g01jpfmpwkw03.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	6AFBDBD67A3 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 10:20:13 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	G01JPEXCHKW16.g01.fujitsu.local (10.0.194.55) with Microsoft SMTP
-	Server id 14.3.266.1; Fri, 2 Jun 2017 10:20:12 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 2 Jun 2017 10:21:30 +0900
-Message-ID: <1496366490-28223-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
-X-TM-AS-MML: disable
-Subject: [PATCH] openvpn: Upgrade 2.3.9 -> 2.4.2
+	Thu, 01 Jun 2017 21:41:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=AQ4qok9QnjaFmu2kU/0tXhrjELjK8IhB4SjV45GZt7k=;
+	b=I8kTuInT1WBOm+X4uTuVbxUrRPLt6XyrJnXrjRkBaof0bpMgUxydi56/XnIqYwg/Gm
+	l7hmCoza0mso6inKDZEKWP2K6Yqyz+mtICAz4fvtWoiDNxH01PeSV6Twu5oZSF8tJS6J
+	YRYIe/T/A7ONQB9ViSa9/wGK1M12/m5WPiqNduWad29HtWgyPJQTXDC4boJ4e5DxuYoG
+	9PiekQQJ+kC2hy1RpsJ8Qg9PXvfogcyY2HRrSc0U4ITO5qBQ1X+BJu3npV48JzKIY9Gi
+	rAND303ZdeNm7vxNH6SDhZmQvFdBgKVlKkyJJHPantrNZfNsBiz6oRylxA/KJjzg/0Zd
+	UWZg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AQ4qok9QnjaFmu2kU/0tXhrjELjK8IhB4SjV45GZt7k=;
+	b=UxOTVuDQxvuAn3sps1bXAZy+4TY38LeE8NpKRT0XMmnPhD8c3t6/oTXX+7srmPVuao
+	t44I+nZEKK7XRoKt1zEBfBNqjSJ1zSAuovUmd9TYwuB3ofo9VAMpDT2SmFmjgpMB1MGG
+	fusuhCjI4U9Jay3SqKM7uRY6yj+vHDQvMcX6DjbU/PJCKIoSJ0IBh+JPvruf+jzgnNlh
+	SmZUAPEs9NGmKPhhe2v9c5jqUh+MZmvBoe3zJIC2RT+xxalxt5M9hutyxALDRNjG3tA3
+	mlqU90CBnwf+ACNSl/TjtgvmbxiTN/qIZHNs1SGfUXyamhCfefk/1FnvHQ8w8hMVnfD7
+	nrZQ==
+X-Gm-Message-State: AODbwcDCdydqXb2Bu+vAAzEQYT7qFalVnmMhP0b4JTo5+kMyOQsoQBlz
+	R020u6N/6TBvBF+9
+X-Received: by 10.98.74.211 with SMTP id c80mr4807841pfj.58.1496378477797;
+	Thu, 01 Jun 2017 21:41:17 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::cf4])
+	by smtp.gmail.com with ESMTPSA id
+	e20sm38502792pfd.34.2017.06.01.21.41.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 01 Jun 2017 21:41:16 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  1 Jun 2017 21:41:05 -0700
+Message-Id: <20170602044106.9484-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.0
+Subject: [meta-oe][PATCH 1/2] audiofile: Inherit pkgconfig instead of binconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,43 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 01:20:18 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 02 Jun 2017 04:41:17 -0000
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+Fixes build with musl
+../audiofile-0.3.6/configure: line 16964: PKG_PROG_PKG_CONFIG: command not found
+../audiofile-0.3.6/configure: line 16971: syntax error near unexpected token `FLAC,'
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-support/openvpn/{openvpn_2.3.9.bb => openvpn_2.4.2.bb}  | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.3.9.bb => openvpn_2.4.2.bb} (93%)
+ meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
-similarity index 93%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
-index db510de..ae72671 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.3.9.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.2.bb
-@@ -2,7 +2,7 @@ SUMMARY = "A full-featured SSL VPN solution via tun device."
- HOMEPAGE = "http://openvpn.sourceforge.net"
- SECTION = "net"
- LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5aac200199fde47501876cba7263cb0c"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e9b64491ec98eb6c6493ac5e4118f107"
- DEPENDS = "lzo openssl iproute2 ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
+diff --git a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+index b23bfed58..f4e19e4ad 100644
+--- a/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
++++ b/meta-oe/recipes-multimedia/audiofile/audiofile_0.3.6.bb
+@@ -17,7 +17,7 @@ SRC_URI = " \
+ SRC_URI[md5sum] = "235dde14742317328f0109e9866a8008"
+ SRC_URI[sha256sum] = "ea2449ad3f201ec590d811db9da6d02ffc5e87a677d06b92ab15363d8cb59782"
  
- inherit autotools systemd
-@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/openvpn-${PV}.tar.gz \
-            file://openvpn@.service \
-            file://openvpn-volatile.conf"
+-inherit autotools lib_package binconfig
++inherit autotools lib_package pkgconfig
  
--SRC_URI[md5sum] = "265755044ae88f9249d509f6d061f7e5"
--SRC_URI[sha256sum] = "2c12fe9ea641ac1291e70322cc500641c84e5903dd4f40bf2eda7e9f209b2f9c"
-+SRC_URI[md5sum] = "0714019e109a043e858278c9e2ca18e0"
-+SRC_URI[sha256sum] = "b24740c9d44a81eaf2befc4846d51445a520104321e32aaf0c135ed2e098a624"
- 
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
+ DEPENDS = " \
+     asciidoc-native \
 -- 
-1.9.1
+2.13.0
 
 
