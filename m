@@ -1,47 +1,37 @@
-Return-Path: <moritz.fischer@ettus.com>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 8567F77E79
+Return-Path: <ulf.hofemeier@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C1FD77F98
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 19:01:30 +0000 (UTC)
-Received: by mail-lf0-f46.google.com with SMTP id c184so42870858lfe.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jun 2017 12:01:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ettus-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=7FsXVzUp5vk0kLaIDEnQutWvFNhE3pfhFFcFtwPRhh8=;
-	b=HBMlMXbFjM95/itANNqEhuM9tNlCC4GkdVjXZTMdZm0X9jXJiv9EfMVqaJSWrFt0Vm
-	S4q4hEJIVtkKswjlDQybzRu95PBa6++LNC+TGRjbO0givE0LH+z7XkpR8wqhH63jo9a9
-	oQxFDgn62eD/zkcYXnRwVCP8ppa8DLkV4NnzaOSU3Gw+KkSB6ySe/cV8GLxJStkS5py9
-	tZhB4m/lsQf24JKKYMaFWFaMhmEF5YZfEOu2idJDRXBC4WcgD/HubXWQgTZ+fhLSn6kL
-	BQcJ+4jZf/728gkp0vDJzH2f8Q6MJicND2Fcl/kZnGyF9a4L9+A+JLinWKCDb2C7gkwf
-	NqQA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=7FsXVzUp5vk0kLaIDEnQutWvFNhE3pfhFFcFtwPRhh8=;
-	b=WHXB1GJZ4B5Pd8Mn/kHoB2ekIzk0rvykoN9ffJBUvzqCFkP710whkPruAvE1o1MIx1
-	dUkUw7YxbyratzPAH+Jy8+LxJZ4Gz044Q8mzRZYP0e1iKrzXF0HowdEjhCVsy7c525hc
-	WwOJgIPg1F/4ezQ+UGOoy0NaurBBNyouNOBnv64B0gqLkT86jeb0uDOKyy1OH3iYYERs
-	ITI5JYmORFXdhDfXPI00UX657N0EhTfB1v1pffvnkUtIKM6RXF9ulphCA/Dg1sMqazZ1
-	rzHy24ovQjt9Tjr/Y2Tj8Xv49jb4SeZ3LIbOq2juyk7umY0hRMODTnyu65+mpZcVIldG
-	kyVg==
-X-Gm-Message-State: AODbwcAkwdx3Ri7/PpwEEvNodrsLfcoiL25i20qIr2vkBWqA9kWifBYI
-	VCDqECj7EmQL6CASc0KbMB7IRnPZF+ctxFHdMw==
-X-Received: by 10.25.207.67 with SMTP id f64mr1211152lfg.95.1496430089893;
-	Fri, 02 Jun 2017 12:01:29 -0700 (PDT)
+	Fri,  2 Jun 2017 19:56:26 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	02 Jun 2017 12:56:27 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,286,1493708400"; 
+	d="scan'208,217";a="864021432"
+Received: from orsmsx102.amr.corp.intel.com ([10.22.225.129])
+	by FMSMGA003.fm.intel.com with ESMTP; 02 Jun 2017 12:56:27 -0700
+Received: from orsmsx114.amr.corp.intel.com (10.22.240.10) by
+	ORSMSX102.amr.corp.intel.com (10.22.225.129) with Microsoft SMTP Server
+	(TLS) id 14.3.319.2; Fri, 2 Jun 2017 12:56:27 -0700
+Received: from orsmsx115.amr.corp.intel.com ([169.254.4.151]) by
+	ORSMSX114.amr.corp.intel.com ([169.254.8.165]) with mapi id
+	14.03.0319.002; Fri, 2 Jun 2017 12:56:27 -0700
+From: "Hofemeier, Ulf" <ulf.hofemeier@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: PATCH] Update quagga to version 1.2.1
+Thread-Index: AQHS29pR8D/13JRocUqPhqSvmZ/eHw==
+Date: Fri, 2 Jun 2017 19:56:26 +0000
+Message-ID: <6D1DB749-93AC-4C31-A185-6D906C42F4B6@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+user-agent: Microsoft-MacOutlook/f.21.0.170409
+x-originating-ip: [10.241.226.35]
 MIME-Version: 1.0
-Received: by 10.46.82.141 with HTTP; Fri, 2 Jun 2017 12:01:29 -0700 (PDT)
-In-Reply-To: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
-References: <1496335374-25575-1-git-send-email-moritz.fischer@ettus.com>
-From: Moritz Fischer <moritz.fischer@ettus.com>
-Date: Fri, 2 Jun 2017 12:01:29 -0700
-Message-ID: <CAAtXAHcLHiNV+74BbvMLkm1nxgQka1ybPfDgF7cxgNJ8h-jrxA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Cc: paul.eggleton@linux.intel.com
-Subject: Re: [meta-python][PATCH 1/8] python-pyudev: Add possibility to build python3-pyudev
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: PATCH] Update quagga to version 1.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,96 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 19:01:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 02 Jun 2017 19:56:28 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Hi all,
-
-On Thu, Jun 1, 2017 at 9:42 AM, Moritz Fischer <moritz.fischer@ettus.com> wrote:
-> Extend recipe to support python3 as well.
->
-> Signed-off-by: Moritz Fischer <moritz.fischer@ettus.com>
-> ---
->  .../recipes-devtools/python/python-pyudev.inc      | 22 ++++++++++++++++++++
->  .../python/python-pyudev_0.21.0.bb                 | 24 ++--------------------
->  .../python/python3-pyudev_0.21.0.bb                |  2 ++
->  3 files changed, 26 insertions(+), 22 deletions(-)
->  create mode 100644 meta-python/recipes-devtools/python/python-pyudev.inc
->  create mode 100644 meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
->
-> diff --git a/meta-python/recipes-devtools/python/python-pyudev.inc b/meta-python/recipes-devtools/python/python-pyudev.inc
-> new file mode 100644
-> index 0000000..7103e1b
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pyudev.inc
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "A libudev binding"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-> +
-> +SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
-> +SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
-> +
-> +inherit pypi
-> +
-> +do_configure_prepend() {
-> +    sed -i "/import pyudev/d" ${S}/setup.py
-> +    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
-> +}
-> +
-> +RDEPENDS_${PN} = "\
-> +    ${PYTHON_PN}-ctypes \
-> +    ${PYTHON_PN}-contextlib \
-> +    ${PYTHON_PN}-misc \
-> +    ${PYTHON_PN}-six \
-> +    ${PYTHON_PN}-subprocess \
-> +    ${PYTHON_PN}-threading \
-> +"
-> diff --git a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-> index 7253f88..1ce7c44 100644
-> --- a/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-> +++ b/meta-python/recipes-devtools/python/python-pyudev_0.21.0.bb
-> @@ -1,22 +1,2 @@
-> -SUMMARY = "A libudev binding"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=a6f89e2100d9b6cdffcea4f398e37343"
-> -
-> -SRC_URI[md5sum] = "cf4d9db7d772622144ca1be6b5d9353b"
-> -SRC_URI[sha256sum] = "094b7a100150114748aaa3b70663485dd360457a709bfaaafe5a977371033f2b"
-> -
-> -inherit pypi setuptools
-> -
-> -do_configure_prepend() {
-> -    sed -i "/import pyudev/d" ${S}/setup.py
-> -    sed -i "s/str(pyudev.__version__)/'${PV}'/g" ${S}/setup.py
-> -}
-> -
-> -RDEPENDS_${PN} = "\
-> -    ${PYTHON_PN}-contextlib \
-> -    ${PYTHON_PN}-ctypes \
-> -    ${PYTHON_PN}-misc \
-> -    ${PYTHON_PN}-six \
-> -    ${PYTHON_PN}-subprocess \
-> -    ${PYTHON_PN}-threading \
-> -"
-> +require python-pyudev.inc
-> +inherit setuptools
-> diff --git a/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-> new file mode 100644
-> index 0000000..1474ffa
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pyudev_0.21.0.bb
-> @@ -0,0 +1,2 @@
-> +require python-pyudev.inc
-> +inherit setuptools3
-> --
-> 2.7.4
->
-
-Ok, seems there was a better patch for this one earlier.
-Please ignore [1/8].
-
-Thanks,
-
-Moritz
+SGksDQoNCkhlcmXigJlzIGEgcmVjaXBlIHRvIHVwZGF0ZSBxdWFnZ2EgaW4gT0UgbWV0YS1uZXR3
+b3JraW5nIHRvIHRoZSBsYXRlc3QgdmVyc2lvbi4NCg0KU3ViamVjdDogW1BBVENIXSBVcGRhdGVk
+IHF1YWdnYSB0byB2ZXJzaW9uIDEuMi4xLiBBZGRlZCBjLWFyZXMgZGVwZW5kZW5jeSBhcw0KIHRo
+aXMgaXMgbm93IG5lZWRlZCBieSBidWlsZCB0aW1lIGNvbmZpZ3VyZSBzZXR1cC4NCg0KU2lnbmVk
+LW9mZi1ieTogVWxmIEhvZmVtZWllciA8dWxmLmhvZmVtZWllckBpbnRlbC5jb20+DQotLS0NCiBt
+ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYS5pbmMgICAgICB8
+IDIgKy0NCiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYV8x
+LjEuMC5iYiB8IDYgLS0tLS0tDQogbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL3F1
+YWdnYS9xdWFnZ2FfMS4yLjEuYmIgfCA2ICsrKysrKw0KIDMgZmlsZXMgY2hhbmdlZCwgNyBpbnNl
+cnRpb25zKCspLCA3IGRlbGV0aW9ucygtKQ0KIGRlbGV0ZSBtb2RlIDEwMDY0NCBtZXRhLW5ldHdv
+cmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYV8xLjEuMC5iYg0KIGNyZWF0ZSBt
+b2RlIDEwMDY0NCBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdn
+YV8xLjIuMS5iYg0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9j
+b2xzL3F1YWdnYS9xdWFnZ2EuaW5jIGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xz
+L3F1YWdnYS9xdWFnZ2EuaW5jDQppbmRleCA0ZmI2NzIzLi45NjQwNTEzIDEwMDY0NA0KLS0tIGEv
+bWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL3F1YWdnYS9xdWFnZ2EuaW5jDQorKysg
+Yi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYS5pbmMNCkBA
+IC04LDcgKzgsNyBAQCBhcm91bmQgUXVhZ2dhIHRoYW4gdGhlIGN1cnJlbnQgY2VudHJhbGlzZWQg
+bW9kZWwgb2YgR05VIFplYnJhLiINCiBIT01FUEFHRSA9ICJodHRwOi8vd3d3Lm5vbmdudS5vcmcv
+cXVhZ2dhLyINCiBTRUNUSU9OID0gIm5ldCINCiBMSUNFTlNFID0gIkdQTC0yLjAgJiBMR1BMLTIu
+MCINCi1ERVBFTkRTID0gInJlYWRsaW5lIG5jdXJzZXMgcGVybC1uYXRpdmUiDQorREVQRU5EUyA9
+ICJyZWFkbGluZSBuY3Vyc2VzIHBlcmwtbmF0aXZlIGMtYXJlcyINCiBERVBFTkRTICs9ICIke0Bi
+Yi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywgJ3NubXAnLCAnbmV0LXNubXAnLCAn
+JywgZCl9Ig0KIFNOTVBfQ09ORj0iJHtAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RST19GRUFUVVJF
+UycsICdzbm1wJywgJy0tZW5hYmxlLXNubXAnLCAnJywgZCl9Ig0KDQpkaWZmIC0tZ2l0IGEvbWV0
+YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL3F1YWdnYS9xdWFnZ2FfMS4xLjAuYmIgYi9t
+ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYV8xLjEuMC5iYg0K
+ZGVsZXRlZCBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAxYjVjMzRjLi4wMDAwMDAwDQotLS0gYS9t
+ZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdnYV8xLjEuMC5iYg0K
+KysrIC9kZXYvbnVsbA0KQEAgLTEsNiArMCwwIEBADQotcmVxdWlyZSBxdWFnZ2EuaW5jDQotDQot
+U1JDX1VSSVttZDVzdW1dID0gImRhYTMwMzg3MWUwN2VhNTg1NmFhZTZmZDc5ZTg5NzIyIg0KLVNS
+Q19VUklbc2hhMjU2c3VtXSA9ICJmN2E0M2E5YzU5YmZkMzcyMjAwMjIxMDUzMGIyNTUzYzhkNWNj
+MDViZmVhNWFjZDU2ZDRmMTAyYjlmNTVkYzYzIg0KLQ0KLVFVQUdHQVNVQkRJUiA9ICIiDQpkaWZm
+IC0tZ2l0IGEvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMtcHJvdG9jb2xzL3F1YWdnYS9xdWFnZ2Ff
+MS4yLjEuYmIgYi9tZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1wcm90b2NvbHMvcXVhZ2dhL3F1YWdn
+YV8xLjIuMS5iYg0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAuLjM3NTg5NmIN
+Ci0tLSAvZGV2L251bGwNCisrKyBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXByb3RvY29scy9x
+dWFnZ2EvcXVhZ2dhXzEuMi4xLmJiDQpAQCAtMCwwICsxLDYgQEANCityZXF1aXJlIHF1YWdnYS5p
+bmMNCisNCitTUkNfVVJJW21kNXN1bV0gPSAiYjE1NDZkZTg5MDYyZjcwNzBkNTZlNzgwYjMwYmU0
+YjEiDQorU1JDX1VSSVtzaGEyNTZzdW1dID0gImFhZGRiYTVkNGY0MWVkOGU0YzJmMTU1ZjQ1ODRj
+OTkzNDY1ZDEyMmM5MDk2YjViNTJhZGEzZmM3NTI2NmZiY2QiDQorDQorUVVBR0dBU1VCRElSID0g
+IiINCi0tDQoyLjcuNA0KDQo=
 
