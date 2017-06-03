@@ -1,44 +1,46 @@
-Return-Path: <acfoltzer@galois.com>
-Received: from mail-yb0-f170.google.com (mail-yb0-f170.google.com
-	[209.85.213.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1059760111
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id EA45E606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jun 2017 20:34:54 +0000 (UTC)
-Received: by mail-yb0-f170.google.com with SMTP id 132so20937534ybq.1
+	Sat,  3 Jun 2017 04:58:42 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id n23so14633443pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jun 2017 13:34:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=galois-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=ytKCCpaiWm53d4fWO7Hb+5/VpQUuxcfcEYYkacZnFwA=;
-	b=PRo0BXF9ezpdZQUEY9r0dVrK4EIWMjZzZLJWK2RIf+7ARHPToh5IFg0LCA9l0McEZb
-	HdDkKZX1YD/GZdsdTjDwDS9ZsANCZNV7OZj82kOIqZBdNCPgs9maNXfRJkS+LeFkMZSH
-	VKnShYubtp+pzozkE+/76VAZutu7TgOWgxN5s2Gn8LyWdXUfqa0R3tiyICbN08CHgRyG
-	tZufJNk96W5BdYvmD4isVO2hrHMi39NWJCBq6PB22ENTyPaLMCyvIF9z02+0pvd7rgvC
-	N3S43SSPktM6jam1quKHHY/UbIXbP0qA3TEfra3lyS/8IjFENFSrbWckBd63tAuGY3Xg
-	zg3A==
+	Fri, 02 Jun 2017 21:58:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=KyWMd7P/WDhfuGAjHwz7d3ZefVg+cOC9Y163hTqYMOQ=;
+	b=VaP/UmJ4yHBAM0FZD4yv7/LwfxnLi1FI48gJ1Yjo323IxrP7ZxO0myMlhukbfEQAjO
+	tpTlmeBBNLURYdw2q5gjsg8pZrSdJXqZEKNqR8cypE6CQl7njwAM9+eAzmtoSYaMfMcG
+	xu4Y9QFeXgXglPTwCK9qDNlzFyzepe9kUS90uNC3LSNNslHKjnUI/D8HyWZkEltbGOuZ
+	kkThm1Y/Zky4y5fCy6J+yykmUMQAkkZ3mMGjW2baQagA5NRuMN3I6eG1IO8Ma6anhi8y
+	FLUXa4/Ec0Y7moh+a/2fjX/jcJseRKSuK486lSGzj/A50PLs9EeOWHdVXF6O2EwH8TVa
+	GTcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=ytKCCpaiWm53d4fWO7Hb+5/VpQUuxcfcEYYkacZnFwA=;
-	b=umbwX79rojkRXBPIOVtFJa2qdakgWJ2W53QpNTjNtvnUOnCk1nJGZb423mNuKH/RNz
-	2kEUuRnQwjmJnyc3f+sIsl7//ac9Fvm8Wbmn9WCZRfBZN4Fwn5J/UFDkDQqAq6so4SFA
-	v0n8M02mRtRQq0PEyOpUTYq42DBxOOhT5pE74dNbDJ2ELFW6gOOuSTBAiLM+Ne8BjBrU
-	OTG4CZ+7gjYUld9aIs8KM0DKDh19WrRyT8+/OhymZ64HstXaA/LE8IhcN2F2iNkRbdlm
-	/c7DyJM76MlEUAW10PfPVB8W+cPK9DUB50c9hUqni8m+olDiJJnrutV/DGwW1d48ck+q
-	2qbA==
-X-Gm-Message-State: AODbwcCNTxx/MNs8li9ZNcTLlSqPdXmDN6FUnAY8TOPPcKTaQTwUxWpH
-	TpjM5SIeS5G3B2T72cY1Sb7REP0YbugE7pc=
-X-Received: by 10.37.85.198 with SMTP id j189mr1341593ybb.170.1496435695116;
-	Fri, 02 Jun 2017 13:34:55 -0700 (PDT)
-MIME-Version: 1.0
-From: Adam Foltzer <acfoltzer@galois.com>
-Date: Fri, 02 Jun 2017 20:34:44 +0000
-Message-ID: <CADnrctF66h_p+DnajWstF=Du-uXwNP_Rpe40ZpzR8RUMN_=Cxw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-oe][PATCH] Meson update and fix
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=KyWMd7P/WDhfuGAjHwz7d3ZefVg+cOC9Y163hTqYMOQ=;
+	b=jG1n7kaOnBzXP8JYIsiE/ehrKUYXDrfKMY7ALSksvJFS8uRebX2LDR36nsELiAJ4Mt
+	K46m2GfWTY5gjMLtEhf4OmWwXs3OSnBI7nR7JGuxPm49UvCmSdAfoGChnC6+55AyHQiU
+	Tx5S0L0Q8MvL9RxjKgEtyDBTI5o+QMZjF9hiomfg3teq8hGpZ0y+/PBxB4xoFP7umpn3
+	ZZFwW0xtVNPKc70W8B5qEu7Dqc3L9UwmVWcXuySAluYRQAiYKZtoKZgQhDRFMDlCH/87
+	7wbG0if7VmKxOKUqW9ITYcGIyC7Xz5Hvg7KP5NL90iSIkh0MUbNwSy6Y4UNFSeAM54AB
+	qNjQ==
+X-Gm-Message-State: AODbwcAcKRBO/nYIg20KIeFHEtL07h/BoHLFjnaCIDRxYwEYC3bQkbf6
+	5opLg16cG7Qjc5Mu
+X-Received: by 10.101.85.196 with SMTP id k4mr10358312pgs.172.1496465923778;
+	Fri, 02 Jun 2017 21:58:43 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::cf4])
+	by smtp.gmail.com with ESMTPSA id
+	o29sm40732836pgc.27.2017.06.02.21.58.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 02 Jun 2017 21:58:42 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  2 Jun 2017 21:58:30 -0700
+Message-Id: <20170603045833.8120-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.0
+Subject: [meta-multimedia][PATCH 1/4] caps: Fix buld with -pie
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,22 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jun 2017 20:34:55 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 03 Jun 2017 04:58:43 -0000
 
-Hi everyone,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../recipes-multimedia/caps/caps/append_ldflags.patch  | 18 ++++++++++++++++++
+ meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb |  1 +
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
 
-These patches respectively fix some issues with the Meson bitbake class,
-and update the devtool recipe to the latest version. These issues arose
-when creating a new recipe for a C++ project that uses Meson, but the
-additional linker flags should help with C recipes as well.
+diff --git a/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
+new file mode 100644
+index 000000000..3abd38189
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
+@@ -0,0 +1,18 @@
++Change the order of linker flags such that -shared is appearig after -pie/-fpie
++this helps in building the package when secuiry flags are enabled
++
++-Khem
++
++Index: caps-0.9.24/Makefile
++===================================================================
++--- caps-0.9.24.orig/Makefile
+++++ caps-0.9.24/Makefile
++@@ -14,7 +14,7 @@ STRIP = strip
++ -include defines.make
++ 
++ CFLAGS += $(OPTS) $(_CFLAGS)
++-LDFLAGS += $(_LDFLAGS) $(CFLAGS)
+++LDFLAGS += $(CFLAGS) $(_LDFLAGS)
++ 
++ PLUG = caps
++ 
+diff --git a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb b/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
+index 90a28360c..d7887635e 100644
+--- a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
++++ b/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
+@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ SRC_URI = "http://quitte.de/dsp/${PN}_${PV}.tar.bz2 \
+            file://Avoid-ambiguity-in-div-invocation.patch \
+            file://0001-basic.h-Use-c99-supported-stdint-types.patch \
++           file://append_ldflags.patch \
+            "
+ 
+ SRC_URI[md5sum] = "c1d634038dcb54702306c0e30cb1c626"
+-- 
+2.13.0
 
-The diffs are available here:
-https://github.com/openembedded/meta-openembedded/compare/master...acfoltzer:meson-updates
-
-Regards,
-Adam
-
-PS. I hope this is the right way to submit a patch like this; I'm happy to
-submit it in other forms as well if it'd be useful.
 
