@@ -1,48 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 489BC77EE4
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 92C447198D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jun 2017 04:58:47 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id v18so489442pgb.3
+	Sat,  3 Jun 2017 15:18:39 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id n23so15785225pfb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jun 2017 21:58:49 -0700 (PDT)
+	Sat, 03 Jun 2017 08:18:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=yCEJW+9x+EEH1dcgcq+9Q93U6Nh4VtO9txCPICDbNEM=;
-	b=h4rzus64U0BTAKQ/wZikPnEgBJq4PIOWg3f7x/L53kOFgPbmry1hAXXZGxk0rzhtG9
-	t7xbIqNzXw2W8nSWGEm8eUF89EZq/yKV5sJuIU8Wf+oj8AKycirxRTzeX8e6tugGiypk
-	+wrWQayHSeFtaMeo+OGMRWr+pJHSyJsxLOg0Vmd99HWW3FmPxlYD3JLD2++Rlrrg51cV
-	bkYs7seZifAoZbo2u+gIrpvnJYk3T6BTBiz+J1Rpw7vtzkATD6YYFGtgQyDQ2DBhbJmm
-	RfTLk9uQUcllfeGfoKixK8qAIT7TcsUtqFZV41MTswdNJ/3s0WFs0ZONC8PyvpgSar7D
-	V5QQ==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding;
+	bh=M3ap/MAnYRzy3mDM6DaHRoDhZS1UQ8+iGBeo7X1IYj4=;
+	b=rr1rzlcnMgZJ3QQD+LQvdO+4yNqEssd8O2DO0/5uKeGRoRITlaNQiIE7G4C4J048Cm
+	cQe3GsFDBoYGa0V0sY/ypbbCdUlan0cAxwHq5npdF09I+eZ/s9SN/G7SeM4K4OkRpE4M
+	wOceYzH1w+opIIZoAd8HGm2bcbxvl3r3aR0yOQp6J89QPe18PWr515IdBf0Fc4y1zRJX
+	ZvLdtZKIxEAeb9Zt+GL8ZdCoOnta2802ArYKMEEJ9W8itmdq+saVwiVvIzDPtpxPtnpJ
+	0LmyolhaY4Pqzg+QXT37NQknN0C4CwS1Nw2wIE9CHBBo2lvo71P+zX6JciBIEkgN3kpr
+	j3KA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=yCEJW+9x+EEH1dcgcq+9Q93U6Nh4VtO9txCPICDbNEM=;
-	b=F31uNEBIqOaqIdyzj5mMSTfp2tgh/j0wtpVh8vkhuBcuGj9zrCX1pjj+P4ynZ99Ym8
-	E7RlkzwjmXL/alswNqnKIUh1gWi8TRdrVSZj3n0TWSKXwCURvJaGpOuq/yIGEk08OF4+
-	cztffp8UtzGFzVQTGVZhj46P+DB28+YHWbiso3zrM5Sl/ay7oEVH6ZxhAWSbBGliZEE4
-	q9KOLovM2mHHEYZ27IeV5ogOw4d3wc8j0Qs4X//zplVul/NO7hHs3jDMoBjnIKnvwXWj
-	DDaFDh1Hf9vC3Y6MF8XXJL1YozN7feOX6mDwJaoI/eKv6x4StOBIKxEOrAhdxc0rkV8W
-	EiEQ==
-X-Gm-Message-State: AODbwcA60O6dLddZUeZQpnem3MfKZpCAk9rFk6Y2sGcoS2pM5wTiPzhQ
-	VqfGyEzsh2GpNdOe
-X-Received: by 10.84.129.65 with SMTP id 59mr3450943plb.166.1496465929025;
-	Fri, 02 Jun 2017 21:58:49 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::cf4])
-	by smtp.gmail.com with ESMTPSA id
-	o29sm40732836pgc.27.2017.06.02.21.58.47
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding;
+	bh=M3ap/MAnYRzy3mDM6DaHRoDhZS1UQ8+iGBeo7X1IYj4=;
+	b=HkqEQpnU0rrhNH/G56UmH6EzOk9pLWZK8P2p/R1LVhRnBcjI4ribrLcRRyflwo93gx
+	OedBw4c6YNNicViXLXCuZLQzHEutm2xD24YfhgTENt+JQ+5VF3cFoiriESMeKL0w2KZ/
+	vITPw2WLb9+sJAcjqLpQD6u3oWuqiTeIm6F05bHR13H3b0WgAh2sGJAWkM0o5X+/OV89
+	UTH3A/r1HENcgmwfuF/i3QHd7Gv/LCkXs6A0FGT/yAMaoqHZmbL1AE3X6WgRHj9+fvan
+	00i2Uz2Z/p8xxuGU7H9WA9GKe5VPFkx0bNg97cUb4kNc2UIEhg675bCBbH3zNBXx1Yhk
+	AzEA==
+X-Gm-Message-State: AODbwcCx4T4Up7TEzobk+v3H7QQUWcllINSSQpltUrygeItS4oar4Q55
+	pDY524blLNTYJRiNuwo=
+X-Received: by 10.99.96.81 with SMTP id u78mr5902353pgb.101.1496503120908;
+	Sat, 03 Jun 2017 08:18:40 -0700 (PDT)
+Received: from ?IPv6:2601:202:4001:9ea0:b844:8676:377:81ac?
+	([2601:202:4001:9ea0:b844:8676:377:81ac])
+	by smtp.gmail.com with ESMTPSA id b1sm6027554pfl.70.2017.06.03.08.18.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Jun 2017 21:58:47 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jun 2017 21:58:33 -0700
-Message-Id: <20170603045833.8120-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <20170603045833.8120-1-raj.khem@gmail.com>
+	Sat, 03 Jun 2017 08:18:40 -0700 (PDT)
+To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
 References: <20170603045833.8120-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/4] samba: Fix build with musl
+	<20170603045833.8120-3-raj.khem@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <65800ef8-cd22-49bf-92ae-164339fc0179@gmail.com>
+Date: Sat, 3 Jun 2017 08:18:38 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
+MIME-Version: 1.0
+In-Reply-To: <20170603045833.8120-3-raj.khem@gmail.com>
+Subject: Re: [meta-oe][PATCH 3/4] openipmi: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,77 +60,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Jun 2017 04:58:48 -0000
+X-List-Received-Date: Sat, 03 Jun 2017 15:18:40 -0000
+Content-Type: text/plain; charset=windows-1252; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../recipes-connectivity/samba/samba/glibc_only.patch | 15 +++++++++++++++
- .../samba/samba/netdb_defines.patch                   | 19 +++++++++++++++++++
- .../recipes-connectivity/samba/samba_4.6.2.bb         |  2 ++
- 3 files changed, 36 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/glibc_only.patch
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/netdb_defines.patch
+Khem,
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba/glibc_only.patch b/meta-networking/recipes-connectivity/samba/samba/glibc_only.patch
-new file mode 100644
-index 000000000..894bc8bb2
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/glibc_only.patch
-@@ -0,0 +1,15 @@
-+Index: samba-4.6.2/ctdb/tests/src/test_mutex_raw.c
-+===================================================================
-+--- samba-4.6.2.orig/ctdb/tests/src/test_mutex_raw.c
-++++ samba-4.6.2/ctdb/tests/src/test_mutex_raw.c
-+@@ -166,8 +166,10 @@ int main(int argc, const char **argv)
-+ 			if (ret == 0) {
-+ 				pthread_mutex_unlock(mutex);
-+ 			}
-++#ifdef __GLIBC__
-+ 		} else if (ret == EBUSY) {
-+ 			printf("pid=%u\n", mutex->__data.__owner);
-++#endif
-+ 		} else if (ret == 0) {
-+ 			pthread_mutex_unlock(mutex);
-+ 		}
-diff --git a/meta-networking/recipes-connectivity/samba/samba/netdb_defines.patch b/meta-networking/recipes-connectivity/samba/samba/netdb_defines.patch
-new file mode 100644
-index 000000000..eb06866f4
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/samba/samba/netdb_defines.patch
-@@ -0,0 +1,19 @@
-+Index: samba-4.6.2/nsswitch/wins.c
-+===================================================================
-+--- samba-4.6.2.orig/nsswitch/wins.c
-++++ samba-4.6.2/nsswitch/wins.c
-+@@ -39,6 +39,14 @@ static pthread_mutex_t wins_nss_mutex =
-+ #define INADDRSZ 4
-+ #endif
-+ 
-++#ifndef NETDB_INTERNAL
-++#define NETDB_INTERNAL (-1)
-++#endif
-++
-++#ifndef NETDB_SUCCESS
-++#define NETDB_SUCCESS  0
-++#endif
-++
-+ NSS_STATUS _nss_wins_gethostbyname_r(const char *hostname,
-+ 				     struct hostent *he,
-+ 				     char *buffer,
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.2.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.2.bb
-index 38876c2c3..7574aefb4 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.6.2.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.6.2.bb
-@@ -18,6 +18,8 @@ SRC_URI = "${SAMBA_MIRROR}/stable/samba-${PV}.tar.gz \
-            file://21-add-config-option-without-valgrind.patch \
-            file://0001-packaging-Avoid-timeout-for-nmbd-if-started-offline-.patch \
-            file://0006-avoid-using-colon-in-the-checking-msg.patch \
-+           file://netdb_defines.patch \
-+           file://glibc_only.patch \
-            file://volatiles.03_samba \
-           "
- SRC_URI_append_libc-musl = " \
--- 
-2.13.0
+
+On 06/02/2017 09:58 PM, Khem Raj wrote:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>   .../openipmi/files/include_sys_types.patch              | 17 +++++++++++++++++
+>   meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb     |  1 +
+>   2 files changed, 18 insertions(+)
+>   create mode 100644 meta-oe/recipes-support/openipmi/files/include_sys_types.patch
+>
+> diff --git a/meta-oe/recipes-support/openipmi/files/include_sys_types.patch b/meta-oe/recipes-support/openipmi/files/include_sys_types.patch
+> new file mode 100644
+> index 000000000..58ec5d883
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/openipmi/files/include_sys_types.patch
+isn't this missing Upstream-Status and Signed-off-by?
+
+- armin
+> @@ -0,0 +1,17 @@
+> +include sys/types.h for u_int32_t
+> +
+> +ui.c:340:5: error: unknown type name 'u_int32_t'; did you mean 'uint32_t'?
+> +     u_int32_t     addr;
+> +     ^~~~~~~~~
+> +Index: OpenIPMI-2.0.22/ui/ui.c
+> +===================================================================
+> +--- OpenIPMI-2.0.22.orig/ui/ui.c
+> ++++ OpenIPMI-2.0.22/ui/ui.c
+> +@@ -42,6 +42,7 @@
+> + #include <fcntl.h>
+> + #include <time.h>
+> + #include <sys/time.h>
+> ++#include <sys/types.h>
+> + #include <ctype.h>
+> +
+> + #include <OpenIPMI/selector.h>
+> diff --git a/meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb b/meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb
+> index 82e8cac3e..9f4b0ff26 100644
+> --- a/meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb
+> +++ b/meta-oe/recipes-support/openipmi/openipmi_2.0.22.bb
+> @@ -30,6 +30,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+>              file://ipmi-init-fix-the-arguments.patch \
+>              file://makefile-add-ldflags.patch \
+>              file://do-not-install-pyc-and-pyo.patch \
+> +           file://include_sys_types.patch \
+>              file://openipmi-helper \
+>              file://ipmi.service \
+>              "
 
 
