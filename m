@@ -1,46 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EA45E606A8
+Received: from mail-pg0-f42.google.com (mail-pg0-f42.google.com [74.125.83.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BE604606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jun 2017 04:58:42 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id n23so14633443pfb.3
+	Sat,  3 Jun 2017 04:58:44 +0000 (UTC)
+Received: by mail-pg0-f42.google.com with SMTP id x64so15147157pgd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jun 2017 21:58:44 -0700 (PDT)
+	Fri, 02 Jun 2017 21:58:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=KyWMd7P/WDhfuGAjHwz7d3ZefVg+cOC9Y163hTqYMOQ=;
-	b=VaP/UmJ4yHBAM0FZD4yv7/LwfxnLi1FI48gJ1Yjo323IxrP7ZxO0myMlhukbfEQAjO
-	tpTlmeBBNLURYdw2q5gjsg8pZrSdJXqZEKNqR8cypE6CQl7njwAM9+eAzmtoSYaMfMcG
-	xu4Y9QFeXgXglPTwCK9qDNlzFyzepe9kUS90uNC3LSNNslHKjnUI/D8HyWZkEltbGOuZ
-	kkThm1Y/Zky4y5fCy6J+yykmUMQAkkZ3mMGjW2baQagA5NRuMN3I6eG1IO8Ma6anhi8y
-	FLUXa4/Ec0Y7moh+a/2fjX/jcJseRKSuK486lSGzj/A50PLs9EeOWHdVXF6O2EwH8TVa
-	GTcQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=nJ+OTnecX/7lip1NIUN39/xwCHw0coSKWGc04tRyGIk=;
+	b=gaHEdQGQE9KZcx2LA90V9xfdTQCy8R3mWTdXq8/tssQdGlRBPfM/X2KdiPZQjuXNEd
+	5PsKuaaiRJSJbWqTAy65WMAekhkbCe8jhVyt1l9APz58cPeGby+/GeTqsc2aegUhVIzd
+	AMjB4abQs53LyUL/rnO8hYUfxc+D19ylHl4GyhyNXo0nj+nkl5OaIpQmpuLnvsPaQXxv
+	abSpJAvBvlUIPkdYl7us3G35TCsgKpKAuWFb949mIXWJuvbBkZOoR0Wweb3Z1pNhiLzz
+	Kndv3tRccQSABzXvO4XG0xgnsc1LYxKUOB7YMq+FJoVLJ51TMG7G8COIQzWm6o69P8Ua
+	Jd/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=KyWMd7P/WDhfuGAjHwz7d3ZefVg+cOC9Y163hTqYMOQ=;
-	b=jG1n7kaOnBzXP8JYIsiE/ehrKUYXDrfKMY7ALSksvJFS8uRebX2LDR36nsELiAJ4Mt
-	K46m2GfWTY5gjMLtEhf4OmWwXs3OSnBI7nR7JGuxPm49UvCmSdAfoGChnC6+55AyHQiU
-	Tx5S0L0Q8MvL9RxjKgEtyDBTI5o+QMZjF9hiomfg3teq8hGpZ0y+/PBxB4xoFP7umpn3
-	ZZFwW0xtVNPKc70W8B5qEu7Dqc3L9UwmVWcXuySAluYRQAiYKZtoKZgQhDRFMDlCH/87
-	7wbG0if7VmKxOKUqW9ITYcGIyC7Xz5Hvg7KP5NL90iSIkh0MUbNwSy6Y4UNFSeAM54AB
-	qNjQ==
-X-Gm-Message-State: AODbwcAcKRBO/nYIg20KIeFHEtL07h/BoHLFjnaCIDRxYwEYC3bQkbf6
-	5opLg16cG7Qjc5Mu
-X-Received: by 10.101.85.196 with SMTP id k4mr10358312pgs.172.1496465923778;
-	Fri, 02 Jun 2017 21:58:43 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=nJ+OTnecX/7lip1NIUN39/xwCHw0coSKWGc04tRyGIk=;
+	b=WzwB1wdc9u84X+1KY7nW3/MkwSvLgHVUUBhg8fKsSgJ1uNs7+k2cuvNKraGwC5bV6+
+	FwfVTLPjTFyGAf9DVJa4sTluFrrKHxdiwMcZHkbbzWtY/CpswLr72ZbegtxGZDbDt0EE
+	4sOWHI2D2KwiMvzIzI5XW9o94/Luk41+aqZtVvT0kI5qTo1PVeOR54MHCldgDbhRS1iM
+	HemGlHPQdhG8rKoPUEeRq7rt2/AifohAVT+GX4g49lPm3JbrSe+3GtrlglUI9dokZ5WM
+	6FAwm+ffO54mTUqCsHj0RnmuO1uRzcPqb6cxe7ZgIqINMx0vZ4lUxGEyoeNtxgg5ZF/c
+	eToA==
+X-Gm-Message-State: AODbwcA5tFjPph9pngZtXOg0s7LR36w+lDM9e/lm1taXrFHmIBDs0xOv
+	VgCgwyyWLAB+I1cL
+X-Received: by 10.99.107.136 with SMTP id g130mr10245242pgc.3.1496465925669;
+	Fri, 02 Jun 2017 21:58:45 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::cf4])
 	by smtp.gmail.com with ESMTPSA id
-	o29sm40732836pgc.27.2017.06.02.21.58.42
+	o29sm40732836pgc.27.2017.06.02.21.58.43
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 02 Jun 2017 21:58:42 -0700 (PDT)
+	Fri, 02 Jun 2017 21:58:44 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  2 Jun 2017 21:58:30 -0700
-Message-Id: <20170603045833.8120-1-raj.khem@gmail.com>
+Date: Fri,  2 Jun 2017 21:58:31 -0700
+Message-Id: <20170603045833.8120-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.0
-Subject: [meta-multimedia][PATCH 1/4] caps: Fix buld with -pie
+In-Reply-To: <20170603045833.8120-1-raj.khem@gmail.com>
+References: <20170603045833.8120-1-raj.khem@gmail.com>
+Subject: [meta-python][PATCH 2/4] python-numeric: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,51 +55,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Jun 2017 04:58:43 -0000
+X-List-Received-Date: Sat, 03 Jun 2017 04:58:44 -0000
+
+Use gettimeofday() definition from system
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-multimedia/caps/caps/append_ldflags.patch  | 18 ++++++++++++++++++
- meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb |  1 +
- 2 files changed, 19 insertions(+)
- create mode 100644 meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
+ ...-define-this-function-differently-than-it.patch | 30 ++++++++++++++++++++++
+ .../recipes-devtools/python/python-numeric_24.2.bb |  4 ++-
+ 2 files changed, 33 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
 
-diff --git a/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
+diff --git a/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch b/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
 new file mode 100644
-index 000000000..3abd38189
+index 000000000..81ed744cb
 --- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/caps/caps/append_ldflags.patch
-@@ -0,0 +1,18 @@
-+Change the order of linker flags such that -shared is appearig after -pie/-fpie
-+this helps in building the package when secuiry flags are enabled
++++ b/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
+@@ -0,0 +1,30 @@
++From 322e781c67d7a78fc2cfc3d377f50b825fc64abb Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Fri, 2 Jun 2017 20:21:01 -0700
++Subject: [PATCH] it tries to define this function differently than it is
++ defined in sys/time.h.
 +
-+-Khem
++Use the definition from system
 +
-+Index: caps-0.9.24/Makefile
-+===================================================================
-+--- caps-0.9.24.orig/Makefile
-++++ caps-0.9.24/Makefile
-+@@ -14,7 +14,7 @@ STRIP = strip
-+ -include defines.make
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ Packages/RNG/Src/ranf.c | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/Packages/RNG/Src/ranf.c b/Packages/RNG/Src/ranf.c
++index 5ca7dc5..e669fa8 100644
++--- a/Packages/RNG/Src/ranf.c
+++++ b/Packages/RNG/Src/ranf.c
++@@ -149,9 +149,6 @@ void Mixranf(int *s,u32 s48[2])
++ #else
++ 	struct timeval tv;
++ 	struct timezone tz;
++-#if !defined(__sgi)
++-	int gettimeofday(struct timeval *, struct timezone *);
++-#endif
 + 
-+ CFLAGS += $(OPTS) $(_CFLAGS)
-+-LDFLAGS += $(_LDFLAGS) $(CFLAGS)
-++LDFLAGS += $(CFLAGS) $(_LDFLAGS)
-+ 
-+ PLUG = caps
-+ 
-diff --git a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb b/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
-index 90a28360c..d7887635e 100644
---- a/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
-+++ b/meta-multimedia/recipes-multimedia/caps/caps_0.9.24.bb
-@@ -6,6 +6,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- SRC_URI = "http://quitte.de/dsp/${PN}_${PV}.tar.bz2 \
-            file://Avoid-ambiguity-in-div-invocation.patch \
-            file://0001-basic.h-Use-c99-supported-stdint-types.patch \
-+           file://append_ldflags.patch \
-            "
++ 	(void)gettimeofday(&tv,&tz);
++ 	s48[0] = (u32)tv.tv_sec;
++-- 
++2.13.0
++
+diff --git a/meta-python/recipes-devtools/python/python-numeric_24.2.bb b/meta-python/recipes-devtools/python/python-numeric_24.2.bb
+index c0b04e144..c91d77c81 100644
+--- a/meta-python/recipes-devtools/python/python-numeric_24.2.bb
++++ b/meta-python/recipes-devtools/python/python-numeric_24.2.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://Legal.htm;md5=e3ce75dedd4043918d15979ae43e312e"
  
- SRC_URI[md5sum] = "c1d634038dcb54702306c0e30cb1c626"
+ PR = "ml3"
+ 
+-SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/Numeric-${PV}.tar.gz"
++SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/Numeric-${PV}.tar.gz \
++           file://0001-it-tries-to-define-this-function-differently-than-it.patch \
++"
+ S = "${WORKDIR}/Numeric-${PV}"
+ 
+ inherit distutils
 -- 
 2.13.0
 
