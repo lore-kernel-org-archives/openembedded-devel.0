@@ -1,31 +1,48 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 91F3E600EB
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id F0BA0779FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 03:17:01 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19646491"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Jun 2017 11:17:00 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id BFBAB47C6D36
+	Mon,  5 Jun 2017 09:44:28 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id v104so35210832wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 11:16:58 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Mon, 5 Jun 2017 11:17:03 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 5 Jun 2017 11:17:04 +0800
-Message-ID: <1496632624-16009-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: BFBAB47C6D36.AAE09
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Cc: susanbian <bianyq@cn.fujitsu.com>
-Subject: [meta-oe] [PATCH] xterm: 325 -> 327
+	Mon, 05 Jun 2017 02:44:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=K0MDL5MP1gnyfbM3g5Jxf4fuBDzqsgsoontm8nin1q4=;
+	b=QY/mJI2UTwSn9FDDqED5Kj2E1kzkmAX9qGAm5txbhdDOUtnYSCkVmspcvvKmFKldo8
+	Lyi2XRi3lY7NCgEMpGqLJquJ9gYr0kq3wsr60cmIRMSx1qK2S6D9pDTtgyd6JMjlSRK1
+	oHwrhbBb4IsEU75ypahGVKlLkHbqluYppX76O7zWE9QMW/cyM7y2YVgHI/gkrLIGsKuw
+	jFrMyGuNQUzPmEEiB8Yx1vqynzefGJz1ltD1a3NvQVUffZjN7Fp5xa/Kk4/1Rm0vlMri
+	Oq3M5/R1yrXb6s19gn8Ct7Lt+0lRZQvF+0x7B/58UeDXveAj61IvJg59EGmTJYK9onPe
+	HjQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=K0MDL5MP1gnyfbM3g5Jxf4fuBDzqsgsoontm8nin1q4=;
+	b=EI1balPUE7WAoPR9oUte92u/NtgQ1jlEMHhme1xvJuJVhTO7nvFtwytqKDebp0TNYG
+	4wtOmbWFZmsnIS4naqJ11tE79KTPSgDNMETRYeAmsCxenVyHu/T5YLj+gKwt8xx0ph4z
+	nthoOuAO21OS2CwrYJ94lTimOGEooZ5BFu3oW6oYP0LlQ0PV6XyHkpDXHZdyx6i3E+vI
+	TrkyzlBNCmHaO2L5Ek+7NOWulRgtCgR2ojC7pimPONm+xe7dQmRGR+7N5UdNKXKWBmjh
+	2F+/E5Y4SMbk2G6MjoV4nmv4kKpcLLFI03lkaCD9W6PQr/2ATjpfkQpL3b6q05iBW7Gi
+	a28Q==
+X-Gm-Message-State: AODbwcBsthv9Hn78qN7WR9LsTNNQEMBbwXPOB+2VykgaHrhjpj1QwgCo
+	I596M+bxTVZO8WUF/XM=
+X-Received: by 10.223.175.204 with SMTP id y12mr2330240wrd.113.1496655869573; 
+	Mon, 05 Jun 2017 02:44:29 -0700 (PDT)
+Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id
+	m141sm6008358wma.7.2017.06.05.02.44.28
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 05 Jun 2017 02:44:28 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Jun 2017 10:44:25 +0100
+Message-Id: <1496655865-1292-1-git-send-email-ross.burton@intel.com>
+X-Mailer: git-send-email 2.8.1
+Subject: [PATCH] meson: upgrade to 0.40.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,41 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 03:17:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 05 Jun 2017 09:44:29 -0000
 
-From: susanbian <bianyq@cn.fujitsu.com>
-
-Upgrade xterm from 325 to 327.
-
-Signed-off-by: susanbian <bianyq@cn.fujitsu.com>
+Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- meta-oe/recipes-graphics/xorg-app/{xterm_325.bb => xterm_327.bb} | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-graphics/xorg-app/{xterm_325.bb => xterm_327.bb} (86%)
+ .../recipes-devtools/meson/{meson_0.36.0.bb => meson_0.40.1.bb}  | 9 +++------
+ 1 file changed, 3 insertions(+), 6 deletions(-)
+ rename meta-oe/recipes-devtools/meson/{meson_0.36.0.bb => meson_0.40.1.bb} (55%)
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb b/meta-oe/recipes-graphics/xorg-app/xterm_327.bb
-similarity index 86%
-rename from meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-rename to meta-oe/recipes-graphics/xorg-app/xterm_327.bb
-index a627af0..0e11662 100644
---- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/xterm_327.bb
-@@ -6,9 +6,8 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=842e945c46c43e05c4
+diff --git a/meta-oe/recipes-devtools/meson/meson_0.36.0.bb b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+similarity index 55%
+rename from meta-oe/recipes-devtools/meson/meson_0.36.0.bb
+rename to meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+index 9349fcb..f33256a 100644
+--- a/meta-oe/recipes-devtools/meson/meson_0.36.0.bb
++++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+@@ -4,12 +4,9 @@ SUMMARY = "A high performance build system"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
  
- SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
- 
--SRC_URI[md5sum] = "e78a0bbc4d5fa3780917e447ae8ebc6b"
--SRC_URI[sha256sum] = "3b31b07a0c40427e9330ec3be9d1a748c72808f945953cea9e526e48be315f1b"
+-SRC_URI = "git://github.com/mesonbuild/meson.git"
 -
-+SRC_URI[md5sum] = "3c32e931adcad44e64e57892e75d9e02"
-+SRC_URI[sha256sum] = "66fb2f6c35b342148f549c276b12a3aa3fb408e27ab6360ddec513e14376150b"
- PACKAGECONFIG ?= ""
- PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+-SRCREV = "4e3073f90a7b4f225ce7d89034d61cd978399eba"
+-PV = "0.36.0"
+-
+-S = "${WORKDIR}/git"
++SRC_URI = "https://github.com/mesonbuild/meson/releases/download/${PV}/${BP}.tar.gz"
++SRC_URI[md5sum] = "8475b19d5f5f3bd5c40f4bb1f31b93f3"
++SRC_URI[sha256sum] = "890ce46e713ea0d061f8203c99fa7d38645354a62e4c207c38ade18db852cbf5"
+ 
+ inherit setuptools3
  
 -- 
-2.7.4
-
-
+2.8.1
 
 
