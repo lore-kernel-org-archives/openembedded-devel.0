@@ -1,47 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
-	[209.85.161.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1E29B7780A
+Return-Path: <andrej.valek@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F81A77B6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 11:20:50 +0000 (UTC)
-Received: by mail-yw0-f195.google.com with SMTP id p144so7877631ywp.2
+	Mon,  5 Jun 2017 11:25:26 +0000 (UTC)
+Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v55BPRLY022163
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jun 2017 04:20:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=CdI02XRkNYoNr0/jkikNE4bNXzb9+sakYd79ZBtRLeA=;
-	b=r/NmxEkqDVhYt8JFig2rZOHSpP9LC1hjEMpkBGGaORuGOzX/A1LZZIVupMp7H19Yt/
-	cl5494PH0cKJoBQIt/oaKQ+CP7QURfEHvSPVXH1+Grtt80o6MNtdwJHNp6nGf92UbQtZ
-	+HZa0fjnYetiPCg+v8m54Mw3xp2KWq3hx/kJ/XUG1QpnilfHB5BVL269mEeda6EpwhC4
-	0Viq0tW7c8bc+ovRA+KWFHXjLwRNH/XwdFZOsUwVpHaEF6mMcmpo2GucAxl9O4838h0/
-	EfdVajiH5n3r57TomRbhFNmKhKTZ0lWPSc03dmGsBOgqHGPRQieVG8OCIujO4IHhh6d8
-	28IQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=CdI02XRkNYoNr0/jkikNE4bNXzb9+sakYd79ZBtRLeA=;
-	b=o+kSAPNxAx2LGr/AFWDk8onvm/5mOqRL/0Tzdo8nwHktnQoVkbq4H/6v+Wev1MxVsf
-	b+kVfVgD6yEkjwKwigH8sz6qi1UhSW4gT4dCxp4zAsz3mBAlZ2AJP0NN3WPeRyD++T7N
-	ExoJXSyYjQG+Lpj6s0+b/CFsqA2g8PNwf3CjEdosjvTPCO+zyyTvgKuMd5E4Y+WABN1U
-	v9y/EKsngV5Qc1SdRmd9n7/vMsORKiLmLnZy37Lf97PIQLp3J68DHMDNaC8/ePJumkve
-	+ZTS7ccMg0SxoOHa/Zt1LuesswiRc3SkPR2oXvWwcnZsFmk8wuohCuo5w/fXNS18WJG6
-	8oOw==
-X-Gm-Message-State: AODbwcBASBfWCLGDM34N/izRiYGsa9SOeUgY5X8A9nN7HksmRDzVndjt
-	ujTxv+xhJctMHvk2umzISH/8wUQC3w==
-X-Received: by 10.13.196.4 with SMTP id g4mr14353452ywd.193.1496661652047;
-	Mon, 05 Jun 2017 04:20:52 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.37.162.38 with HTTP; Mon, 5 Jun 2017 04:20:51 -0700 (PDT)
-In-Reply-To: <20170518203214.34947-1-raj.khem@gmail.com>
-References: <20170518203214.34947-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 5 Jun 2017 13:20:51 +0200
-Message-ID: <CA+chaQdeQiU1vrjG+gUWmayEHMn4-x+7Urr-k0LKM5UEMH-vyg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/3] fwts: Bump SRCREV to latest past 17.03.00 release
+	Mon, 5 Jun 2017 13:25:28 +0200
+Received: from dev.sbt.siemens.com ([163.242.56.100])
+	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v55BPRcl005345;
+	Mon, 5 Jun 2017 13:25:27 +0200
+Received: from dev.sbt.siemens.com (localhost [127.0.0.1])
+	by dev.sbt.siemens.com (Postfix) with ESMTP id B6E064F2DD;
+	Mon,  5 Jun 2017 13:25:27 +0200 (CEST)
+From: Andrej Valek <andrej.valek@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  5 Jun 2017 13:25:01 +0200
+Message-Id: <1496661901-26738-1-git-send-email-andrej.valek@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCH] srecord: add collection of tools for manipulating EPROM load files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +32,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 11:20:51 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 05 Jun 2017 11:25:28 -0000
 
-Fails to build for qemux86 now:
-http://errors.yoctoproject.org/Errors/Details/143592/
+This collection of tools is used for EPROM data manipulation.
+More info could be found on page: http://srecord.sourceforge.net/
 
-On Thu, May 18, 2017 at 10:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
+---
+ .../srecord/files/add-option-to-remove-docs.patch  | 57 ++++++++++++++++++++++
+ meta-oe/recipes-support/srecord/srecord_1.64.bb    | 23 +++++++++
+ 2 files changed, 80 insertions(+)
+ create mode 100644 meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
+ create mode 100644 meta-oe/recipes-support/srecord/srecord_1.64.bb
 
-> Helps fixing build issues with gcc7
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-test/fwts/fwts_git.bb | 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->
-> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb
-> b/meta-oe/recipes-test/fwts/fwts_git.bb
-> index 4c4ae66d6..7c8deb3ed 100644
-> --- a/meta-oe/recipes-test/fwts/fwts_git.bb
-> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-> @@ -5,9 +5,9 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
->  LICENSE = "GPLv2+"
->  LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=
-> 31da590f3e9f3bd34dcdb9e4db568519"
->
-> -PV = "17.03.00"
-> +PV = "17.03.00+git${SRCPV}"
->
-> -SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
-> +SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
->  SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
->             file://0001-ignore-constant-logical-operand-warning-with-clang.patch
-> \
->             "
-> --
-> 2.13.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch b/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
+new file mode 100644
+index 0000000..9b2bd99
+--- /dev/null
++++ b/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
+@@ -0,0 +1,57 @@
++Add option to build this utility without a documentation.
++
++For full documentation building are necessary utilities like
++groff and ps2pdf. Full documentation can takes a lot of space.
++So it can be disabled by overloading makefile variable WITHOUT_DOC.
++
++Upstream-Status: Inappropriate [Other]
++Workaround specific to our build system.
++
++Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
++
++diff --git a/Makefile.in b/Makefile.in
++index 9bdd8f1..a2b5494 100644
++--- a/Makefile.in
+++++ b/Makefile.in
++@@ -141,6 +141,14 @@ GROFF = @GROFF@
++ #
++ SOELIM = @SOELIM@
++ 
+++# Option to build this utility without building and installing the documentation.
+++WITHOUT_DOC ?= 0
+++ifeq ($(WITHOUT_DOC),0)
+++	BUILD_DOC = all-doc
+++	INST_DOC = install-doc
+++	CLR_DOC = clean-doc
+++endif
+++
++ # ---------------------------------------------------------
++ # You should not need to change anything below this line.
++ 
++@@ -4090,7 +4098,7 @@ bin/test_url_decode: $(test_url_decode_obj) .bin srecord/libsrecord.la
++ 	$(LIBTOOL) --mode=link --tag=CXX $(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ \
++ 		$(test_url_decode_obj) srecord/libsrecord.la $(LDFLAGS) $(LIBS)
++ 
++-all: all-bin all-doc
+++all: all-bin $(BUILD_DOC)
++ 
++ all-bin: bin/srec_cat bin/srec_cmp bin/srec_info bin/test_arglex_ambiguous \
++ 		bin/test_crc16 bin/test_fletcher16 bin/test_gecos \
++@@ -4156,7 +4164,7 @@ test_files = t0001a t0002a t0003a t0004a t0005a t0006a t0007a t0008a t0009a \
++ sure: $(test_files)
++ 	@echo Passed All Tests
++ 
++-clean: clean-bin clean-doc clean-misc clean-obj
+++clean: clean-bin $(CLR_DOC) clean-misc clean-obj
++ 
++ clean-bin:
++ 	rm -f bin/srec_cat bin/srec_cmp bin/srec_info bin/test_arglex_ambiguous
++@@ -4443,7 +4451,7 @@ distclean-directories:
++ 	rm -rf test/fletcher16/.libs test/gecos/.libs test/hyphen/.libs
++ 	rm -rf test/url_decode/.libs
++ 
++-install: install-bin install-doc install-include install-libdir install-man
+++install: install-bin $(INST_DOC) install-include install-libdir install-man
++ 
++ install-bin: $(bindir)/srec_cat $(bindir)/srec_cmp $(bindir)/srec_info
++ 
+diff --git a/meta-oe/recipes-support/srecord/srecord_1.64.bb b/meta-oe/recipes-support/srecord/srecord_1.64.bb
+new file mode 100644
+index 0000000..fe1af47
+--- /dev/null
++++ b/meta-oe/recipes-support/srecord/srecord_1.64.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "A collection of powerful tools for manipulating EPROM load files."
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=8dfcbf2f0a144b97f0931b6394debea7"
++
++SRC_URI = " \
++    http://srecord.sourceforge.net/srecord-${PV}.tar.gz \
++    file://add-option-to-remove-docs.patch \
++"
++
++SRC_URI[md5sum] = "4de4a7497472d7972645c2af91313769"
++SRC_URI[sha256sum] = "49a4418733c508c03ad79a29e95acec9a2fbc4c7306131d2a8f5ef32012e67e2"
++
++DEPENDS = "libtool-native boost groff-native"
++
++inherit autotools-brokensep
++
++EXTRA_OECONF = "--without-gcrypt LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
++
++# Set variable WITHOUT_DOC=0 to enable documentation generation
++EXTRA_OEMAKE = "WITHOUT_DOC=1"
++
++BBCLASSEXTEND = "native"
+-- 
+2.1.4
+
 
