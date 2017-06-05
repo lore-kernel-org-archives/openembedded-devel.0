@@ -1,30 +1,46 @@
-Return-Path: <jose.a.lamego@linux.intel.com>
-Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 332AD77F69
+Return-Path: <acfoltzer@galois.com>
+Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 582E078062
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 14:02:38 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Jun 2017 07:02:25 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.39,300,1493708400"; 
-	d="asc'?scan'208";a="1178468995"
-Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.128.138])
-	([10.219.128.138])
-	by fmsmga002.fm.intel.com with ESMTP; 05 Jun 2017 07:02:24 -0700
+	Mon,  5 Jun 2017 17:23:27 +0000 (UTC)
+Received: by mail-pg0-f43.google.com with SMTP id a70so16079651pge.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 05 Jun 2017 10:23:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=galois-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=Yey9clQtbdgpJeGNTHynIou9JcOW3zP7tI48z6K74x0=;
+	b=UE1cYJsS8puoV34/Y9rjIraSAmSdwjjWZxtdGqTxt+GW0A4AnD6JD8oW9dBdBcVRp/
+	Ux8/simBFWuV74oHvS6DxNMy02xvUw/FTAf913afGro+mMKGHyCQV+gvOhlJn2lyI0Q/
+	3VduH+GG7kMv7NCIRESdJFm25rui72hn9gt4dJoR3fUcUm1wM8/rAY4bUZtGey3RqCdu
+	ulRKHQpclwVz7c/KWkYYdlZnoJ4RI8x0nyzOBpeSty8d3Xsj2TXNRVlVenwyMMZcUtFF
+	30AN1bXcvEcFx30hYmi+dGpIwm6vYaUF6urDF0s0sAlGsfltA8YB999nm01y3DIbqOP0
+	MFuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Yey9clQtbdgpJeGNTHynIou9JcOW3zP7tI48z6K74x0=;
+	b=h/i6LHtr2s65gm7yKwP6GXjpesM7ggLwX21BXclV3x3hx2ZzJYLVnE6ar3oS1qK6fZ
+	NZw8Hw6KLS+ml2HRDJf37ls1KSdggXCunfAJQ0jWTSgDyKDB8DLOQJH9omAoED12jVWW
+	l09CtuLpHY8emtq5PeptUdgwrhN5LhwqG0a/a1NTq7wmDm13vgjoMpP2dhrKcpodvuCJ
+	NuwunKc1zBRHgTO7GaO1VtnQ7MP9n7iXDEq4SoxVO4aRWFC6yDbYOpVUVHBHQHEBGmkK
+	Dy9Tv9u0QUiBHQOqVb50LrXctNUCeuGmZv1CunZobPFJE9FdQphnPmJSY2ZJC3pEogQS
+	O3Tg==
+X-Gm-Message-State: AODbwcCoOPzeNB3j63DWOTcuogpsWPnY9nGy9qNVYGixGEKl/8TZU4bu
+	c9srBxsB+AZqsr9O2rdNuw==
+X-Received: by 10.84.215.158 with SMTP id l30mr16166584pli.266.1496683409107; 
+	Mon, 05 Jun 2017 10:23:29 -0700 (PDT)
+Received: from svarog.galois.com ([2001:428:6002:405:8055:63c1:97d2:1da1])
+	by smtp.gmail.com with ESMTPSA id
+	71sm35220907pgd.57.2017.06.05.10.23.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 05 Jun 2017 10:23:28 -0700 (PDT)
+From: "Adam C. Foltzer" <acfoltzer@galois.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
-	<2c4c974d-6831-f5c3-bf9a-a9c801192ccb@windriver.com>
-	<545cc9b3-26f9-1a41-1f84-fb6d74a8d097@windriver.com>
-	<CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <f9a29bf1-9b75-85ae-82df-6c7aaaf4b04e@linux.intel.com>
-Date: Mon, 5 Jun 2017 09:02:35 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.1.1
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
-Subject: Re: [meta-oe][V2 patch] rrdtool: allow configuration to disable nls
+Date: Mon,  5 Jun 2017 10:23:19 -0700
+Message-Id: <20170605172321.12557-1-acfoltzer@galois.com>
+X-Mailer: git-send-email 2.9.4
+Subject: [meta-oe][PATCH 1/3] meson: update Meson devtool to 0.40.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,157 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 14:02:40 -0000
-X-Groupsio-MsgNum: 67033
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7"
+X-List-Received-Date: Mon, 05 Jun 2017 17:23:28 -0000
 
---M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7
-Content-Type: multipart/mixed; boundary="23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb";
- protected-headers="v1"
-From: Jose Lamego <jose.a.lamego@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <f9a29bf1-9b75-85ae-82df-6c7aaaf4b04e@linux.intel.com>
-Subject: Re: [oe] [meta-oe][V2 patch] rrdtool: allow configuration to disable
- nls
-References: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
- <2c4c974d-6831-f5c3-bf9a-a9c801192ccb@windriver.com>
- <545cc9b3-26f9-1a41-1f84-fb6d74a8d097@windriver.com>
- <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
-In-Reply-To: <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
+Signed-off-by: Adam C. Foltzer <acfoltzer@galois.com>
+---
+ meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} (88%)
 
---23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
-
-
-
-On 06/05/2017 06:14 AM, Martin Jansa wrote:
-> This v2 didn't make it to patchwork and it was too late when I've notic=
-ed
-> it and found this e-mail.
->=20
-> So I've merged v1 to master and immediately reverted it.
->=20
-> Resend v2 again, this time patchwork might do its job.
-
-Randy, to ensure patchwork to identify your patch as such, please use
-the appropriate prefix (you may use --subject-prefix=3D"meta-oe][PATCH v2=
-"
-when creating your patch) as described in
-
-  http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
-
-optionally, you can also include
-
-  --in-reply-to=3D20170518020701.2773-1-Randy.MacLeod@windriver.com
-
-which adds your first patch's message id as reference in patch v2,
-ensuring patchwork to display it as revision 2 of the series. This is
-only required in cases where the patch name changes between revisions to
-keep thread continuity.
-
-Regards
-
->=20
-> On Mon, May 29, 2017 at 3:14 AM, Randy MacLeod <randy.macleod@windriver=
-=2Ecom>
-> wrote:
->=20
->> On 2017-05-28 09:12 PM, Randy MacLeod wrote:
->>
->>>
->>> Martin,
->>>
->>> You've merged v1:
->>>     [oe] [meta-oe][PATCH] rrdtool: add gettext-native dependency
->>>
->>
->> err I mean, you've merged v1 to master-next to be clear.
->> ../Randy
->>
->>
->> Could you drop that for this fix since it's a somewhat better approach=
-=2E
->>>
->>> ../Randy
->>>
->>> On 2017-05-17 10:07 PM, Randy MacLeod wrote:
->>>
->>>> When building rrdtool for a 'tiny' distro, that does not have native=
-
->>>> language support (NLS) in glibc, configure fails with the error:
->>>>     autoreconf: failed to run autopoint: No such file or directory
->>>> Autopoint is part of gettext but without NLS support we populate the=
-
->>>> sysroot with gettext-minimal-native rather then the full set of
->>>> gettext executables. This version does not install autopoint, nor
->>>> should it.
->>>>
->>>> Tell autoreconf to skip the check for the autopoint script
->>>> regardless of NLS support and use the USE_NLS varible
->>>> to conditionally enable NLS support.
->>>>
->>>> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
->>>> ---
->>>>   meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 3 ++-
->>>>   1 file changed, 2 insertions(+), 1 deletion(-)
->>>>
->>>> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
->>>> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
->>>> index db2df28a0..3ccefb995 100644
->>>> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
->>>> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
->>>> @@ -22,7 +22,7 @@ BBCLASSEXTEND =3D "native"
->>>>   SYSTEMD_PACKAGES =3D "rrdcached"
->>>>   SYSTEMD_SERVICE_rrdcached =3D "rrdcached.socket rrdcached.service"=
-
->>>> -EXTRA_AUTORECONF =3D "-I m4"
->>>> +EXTRA_AUTORECONF =3D "-I m4 --exclude=3Dautopoint"
->>>>   PACKAGECONFIG ??=3D "python perl ${@bb.utils.filter('DISTRO_FEATUR=
-ES',
->>>> 'systemd', d)}"
->>>> @@ -49,6 +49,7 @@ EXTRA_OECONF =3D " \
->>>>       --disable-lua \
->>>>       --disable-tcl \
->>>>       --disable-rpath \
->>>> +    --enable-nls=3D${USE_NLS} \
->>>>   "
->>>>   export STAGING_LIBDIR
->>>>
->>>>
->>>
->>>
->>
->> --
->> # Randy MacLeod. SMTS, Linux, Wind River
->> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON,
->> Canada, K2K 2W5
->>
-
---=20
-Jose Lamego | OTC Embedded Platforms & Tools | GDC
+diff --git a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+similarity index 88%
+rename from meta-oe/recipes-devtools/meson/meson_0.37.1.bb
+rename to meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+index dbbea64..fd96b42 100644
+--- a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb
++++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+@@ -9,7 +9,7 @@ SRC_URI = " \
+     file://native_bindir.patch \
+ "
+ 
+-SRCREV = "3d4bfdcb22314ea7db45a5b075f8b2a9c1498aab"
++SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.9.4
 
 
---23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb--
-
---M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQEcBAEBCAAGBQJZNWR7AAoJEFJAtowlSEbnyIoH/Aopp3FYJ0fKKb0lppR1ygXC
-Vmtn6r/eePH9bYIJI/peZi3N37WRBKDkLnSrgYHpLOuC3qpGMR1nrfncwyBbYeLX
-NmugblEa08b+0nDQdJuoDOdF6ybjJhHnKlGMy+t2qS5p0zosY6SB5zmt5/VDtW+K
-bTsiHi78N8PbMup62IkKrk5yp+QoKOR3/JOIAt3wUPY0Z4QtEhr+h9EK0jdyuF5h
-D1TlY5dm3ypor7+2lWllG+ziujXY71VUrrdIm5Nd1FN2+TT2OYDVxA8MgKKPyhPR
-Wp+ZkNbinTToQHAUZlghiHACPT1/EIsSJC5GMovYuNthoFToCSsMCxr+baZg25Q=
-=dGA5
------END PGP SIGNATURE-----
-
---M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7--
