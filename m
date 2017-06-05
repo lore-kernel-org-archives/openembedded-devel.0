@@ -1,38 +1,30 @@
-Return-Path: <denis@denix.org>
-X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 05 Jun 2017 13:32:25 UTC
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 102EB7780A
+Return-Path: <jose.a.lamego@linux.intel.com>
+Received: from mga03.intel.com (mga03.intel.com [134.134.136.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 332AD77F69
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 13:32:24 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 30F5620BD4;
-	Mon,  5 Jun 2017 13:23:00 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 2xt-CknYKkiK; Mon,  5 Jun 2017 13:23:00 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E9C5A20072;
-	Mon,  5 Jun 2017 13:22:56 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 80AA81624E2; Mon,  5 Jun 2017 09:22:56 -0400 (EDT)
-Date: Mon, 5 Jun 2017 09:22:56 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170605132256.GH28053@denix.org>
-References: <20170602055545.20448-1-mns@gomspace.com>
-	<20170602055545.20448-2-mns@gomspace.com>
-	<CA+chaQdFmNp71fVfgRn=X7QyzP5mAgqcP6_ZMz_5+EvX8ioELQ@mail.gmail.com>
+	Mon,  5 Jun 2017 14:02:38 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga103.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	05 Jun 2017 07:02:25 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,300,1493708400"; 
+	d="asc'?scan'208";a="1178468995"
+Received: from jalamego-mobl2.zpn.intel.com (HELO [10.219.128.138])
+	([10.219.128.138])
+	by fmsmga002.fm.intel.com with ESMTP; 05 Jun 2017 07:02:24 -0700
+To: openembedded-devel@lists.openembedded.org
+References: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
+	<2c4c974d-6831-f5c3-bf9a-a9c801192ccb@windriver.com>
+	<545cc9b3-26f9-1a41-1f84-fb6d74a8d097@windriver.com>
+	<CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+Message-ID: <f9a29bf1-9b75-85ae-82df-6c7aaaf4b04e@linux.intel.com>
+Date: Mon, 5 Jun 2017 09:02:35 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQdFmNp71fVfgRn=X7QyzP5mAgqcP6_ZMz_5+EvX8ioELQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-oe][PATCH 2/2] devmem2: use different filename to avoid checksum conflicts
+In-Reply-To: <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
+Subject: Re: [meta-oe][V2 patch] rrdtool: allow configuration to disable nls
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,101 +37,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 13:32:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 05 Jun 2017 14:02:40 -0000
+X-Groupsio-MsgNum: 67033
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature";
+	boundary="M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7"
 
-On Mon, Jun 05, 2017 at 01:11:09PM +0200, Martin Jansa wrote:
-> You should mention to which branch you want this to be applied and CC the
-> maintainer of that branch.
-> 
-> I can move it to correct bundle in patchwork, but that can still easily
-> slip release maintainer attention.
-> 
-> Also I wonder why Denys added do_unpack_append() instead of just changing
-> do_compile to:
-> 
-> ${CC} -o devmem2 devmem2-new.c ${CFLAGS} ${LDFLAGS}
+--M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7
+Content-Type: multipart/mixed; boundary="23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb";
+ protected-headers="v1"
+From: Jose Lamego <jose.a.lamego@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <f9a29bf1-9b75-85ae-82df-6c7aaaf4b04e@linux.intel.com>
+Subject: Re: [oe] [meta-oe][V2 patch] rrdtool: allow configuration to disable
+ nls
+References: <20170518020701.2773-1-Randy.MacLeod@windriver.com>
+ <2c4c974d-6831-f5c3-bf9a-a9c801192ccb@windriver.com>
+ <545cc9b3-26f9-1a41-1f84-fb6d74a8d097@windriver.com>
+ <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
+In-Reply-To: <CA+chaQcxby9yBFVvRqG5ho5RkJyRDre5_Y74+TBF-1PKDn_hkA@mail.gmail.com>
 
-Because the patch won't apply - it expects devmem2.c:
+--23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-March/111799.html
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-March/111807.html
 
 
-> but that should be improved in master first to keep your backport request
-> identical with what we got in master.
-> 
-> On Fri, Jun 2, 2017 at 7:55 AM, Martin Siegumfeldt <mns@gomspace.com> wrote:
-> 
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > The newly resurrected devmem2.c file besides having a new location, also
-> > updates its header, producing different checksums, which would conflict
-> > with any previously cached or mirrored instances. To avoid such conflicts,
-> > use a different filename in fetch(). Rename it back to original name at
-> > unpack() for devmem2-fixups-2.patch to succeed w/o modifications.
-> >
-> > WARNING: devmem2-1.0-r7 do_fetch: Fetcher failure for URL: '
-> > http://www.free-electrons.com/pub/mirror/devmem2.c'. Checksum mismatch!
-> > File: '/OE/master/downloads/devmem2.c' has md5 checksum
-> > be12c0132a1ae118cbf5e79d98427c1d when e23f236e94be4c429aa1ceac0f01544b
-> > was expected
-> > File: '/OE/master/downloads/devmem2.c' has sha256 checksum
-> > ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191 when
-> > 3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639 was
-> > expected
-> > If this change is expected (e.g. you have upgraded to a new version
-> > without updating the checksums) then you can use these lines within the
-> > recipe:
-> > SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
-> > SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
-> > 1e58ac482c4e29d6c9ebca8768f699c191"
-> > Otherwise you should retry the download and/or check with upstream to
-> > determine if the file has become corrupted or otherwise unexpectedly
-> > modified.
-> >
-> > WARNING: devmem2-1.0-r7 do_fetch: Renaming /OE/sources/devmem2.c to
-> > /OE/sources/devmem2.c_bad-checksum_be12c0132a1ae118cbf5e79d98427c1d
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> > ---
-> >  meta-oe/recipes-support/devmem2/devmem2.bb | 6 +++++-
-> >  1 file changed, 5 insertions(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > index c42eb5e..c86eb2e 100644
-> > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
-> > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
-> > @@ -3,12 +3,16 @@ LICENSE = "GPLv2+"
-> >  LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
-> > a9eb9f3890384519f435aedf986297cf"
-> >  PR = "r7"
-> >
-> > -SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
-> > +SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;
-> > downloadfilename=devmem2-new.c \
-> >             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
-> >  S = "${WORKDIR}"
-> >
-> >  CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
-> >
-> > +python do_unpack_append() {
-> > +    os.rename("devmem2-new.c", "devmem2.c")
-> > +}
-> > +
-> >  do_compile() {
-> >      ${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
-> >  }
-> > --
-> > 2.9.3
-> >
-> >
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+On 06/05/2017 06:14 AM, Martin Jansa wrote:
+> This v2 didn't make it to patchwork and it was too late when I've notic=
+ed
+> it and found this e-mail.
+>=20
+> So I've merged v1 to master and immediately reverted it.
+>=20
+> Resend v2 again, this time patchwork might do its job.
 
+Randy, to ensure patchwork to identify your patch as such, please use
+the appropriate prefix (you may use --subject-prefix=3D"meta-oe][PATCH v2=
+"
+when creating your patch) as described in
+
+  http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+
+optionally, you can also include
+
+  --in-reply-to=3D20170518020701.2773-1-Randy.MacLeod@windriver.com
+
+which adds your first patch's message id as reference in patch v2,
+ensuring patchwork to display it as revision 2 of the series. This is
+only required in cases where the patch name changes between revisions to
+keep thread continuity.
+
+Regards
+
+>=20
+> On Mon, May 29, 2017 at 3:14 AM, Randy MacLeod <randy.macleod@windriver=
+=2Ecom>
+> wrote:
+>=20
+>> On 2017-05-28 09:12 PM, Randy MacLeod wrote:
+>>
+>>>
+>>> Martin,
+>>>
+>>> You've merged v1:
+>>>     [oe] [meta-oe][PATCH] rrdtool: add gettext-native dependency
+>>>
+>>
+>> err I mean, you've merged v1 to master-next to be clear.
+>> ../Randy
+>>
+>>
+>> Could you drop that for this fix since it's a somewhat better approach=
+=2E
+>>>
+>>> ../Randy
+>>>
+>>> On 2017-05-17 10:07 PM, Randy MacLeod wrote:
+>>>
+>>>> When building rrdtool for a 'tiny' distro, that does not have native=
+
+>>>> language support (NLS) in glibc, configure fails with the error:
+>>>>     autoreconf: failed to run autopoint: No such file or directory
+>>>> Autopoint is part of gettext but without NLS support we populate the=
+
+>>>> sysroot with gettext-minimal-native rather then the full set of
+>>>> gettext executables. This version does not install autopoint, nor
+>>>> should it.
+>>>>
+>>>> Tell autoreconf to skip the check for the autopoint script
+>>>> regardless of NLS support and use the USE_NLS varible
+>>>> to conditionally enable NLS support.
+>>>>
+>>>> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+>>>> ---
+>>>>   meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb | 3 ++-
+>>>>   1 file changed, 2 insertions(+), 1 deletion(-)
+>>>>
+>>>> diff --git a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+>>>> b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+>>>> index db2df28a0..3ccefb995 100644
+>>>> --- a/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+>>>> +++ b/meta-oe/recipes-extended/rrdtool/rrdtool_1.6.0.bb
+>>>> @@ -22,7 +22,7 @@ BBCLASSEXTEND =3D "native"
+>>>>   SYSTEMD_PACKAGES =3D "rrdcached"
+>>>>   SYSTEMD_SERVICE_rrdcached =3D "rrdcached.socket rrdcached.service"=
+
+>>>> -EXTRA_AUTORECONF =3D "-I m4"
+>>>> +EXTRA_AUTORECONF =3D "-I m4 --exclude=3Dautopoint"
+>>>>   PACKAGECONFIG ??=3D "python perl ${@bb.utils.filter('DISTRO_FEATUR=
+ES',
+>>>> 'systemd', d)}"
+>>>> @@ -49,6 +49,7 @@ EXTRA_OECONF =3D " \
+>>>>       --disable-lua \
+>>>>       --disable-tcl \
+>>>>       --disable-rpath \
+>>>> +    --enable-nls=3D${USE_NLS} \
+>>>>   "
+>>>>   export STAGING_LIBDIR
+>>>>
+>>>>
+>>>
+>>>
+>>
+>> --
+>> # Randy MacLeod. SMTS, Linux, Wind River
+>> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON,
+>> Canada, K2K 2W5
+>>
+
+--=20
+Jose Lamego | OTC Embedded Platforms & Tools | GDC
+
+
+--23fT9fVG6Cp4iT8cDXP5LlIGNruvHwQLb--
+
+--M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2
+
+iQEcBAEBCAAGBQJZNWR7AAoJEFJAtowlSEbnyIoH/Aopp3FYJ0fKKb0lppR1ygXC
+Vmtn6r/eePH9bYIJI/peZi3N37WRBKDkLnSrgYHpLOuC3qpGMR1nrfncwyBbYeLX
+NmugblEa08b+0nDQdJuoDOdF6ybjJhHnKlGMy+t2qS5p0zosY6SB5zmt5/VDtW+K
+bTsiHi78N8PbMup62IkKrk5yp+QoKOR3/JOIAt3wUPY0Z4QtEhr+h9EK0jdyuF5h
+D1TlY5dm3ypor7+2lWllG+ziujXY71VUrrdIm5Nd1FN2+TT2OYDVxA8MgKKPyhPR
+Wp+ZkNbinTToQHAUZlghiHACPT1/EIsSJC5GMovYuNthoFToCSsMCxr+baZg25Q=
+=dGA5
+-----END PGP SIGNATURE-----
+
+--M4LW0wFXIUPuFpcxTEc8dD3pFh3XvSag7--
