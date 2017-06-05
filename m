@@ -1,47 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9516171D97
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 91F3E600EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  3 Jun 2017 16:22:27 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id k15so23448221wmh.3
+	Mon,  5 Jun 2017 03:17:01 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19646491"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 05 Jun 2017 11:17:00 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id BFBAB47C6D36
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 03 Jun 2017 09:22:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=YEVpMD+EUXHpehNiBAwojBoP26F4HIFfRyKECJSzHEU=;
-	b=c0UDeS/01H7/Su0emfRxOzcxJj4v+nYFP90eVKYPe6rKXjCFi3HMLu1csLK36PUokb
-	j9XvLqLmxHKA2g3CCmcoEFIpC+he6Q1TSifLz1EYSe7z5rTWcxInbl3a3L22a+7cVsZ7
-	Aqj/ofJB+bF+efTgIU6UTs6SrLfo5DuAhWZjHkD4Uhq3RE7KEJeImRGskqR27zNzMvzR
-	LDr2RW8wpTEmOyQFp3ntQBqxv3V2dxn8tes0ruA363fREOz14kePxQf0CytEn4nKnAbR
-	veuPcARTq76Xko63YJW2ag29UIduSSr7094PNuZet2o/EuXTexwMrREQyTM5yDT7MeYR
-	WPag==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=YEVpMD+EUXHpehNiBAwojBoP26F4HIFfRyKECJSzHEU=;
-	b=clr/VtItCe5XY2rkS9hpEOzB7+vo57PL1lc50jog9CRkAcMYIuKeA4b5Yrdbh2CAgS
-	IPvwx94BtacJJOdzRktsWsNiwpYZs9pwkER8840v2S9VgcqICRk6lx/uPKhzjeHcr3Xg
-	oNR2YKqAXZ8K7iB73Bn/ch0GHABVlSpp63tlAGJUHKT84URpdO0fqV7mCn4Xr5RWyWar
-	EKoQ6N4ka1+6qoE7zItK70QLhk2zAu6y5aYaokfL9a5zr9hTFoary/C9NV6Q0UXIfVls
-	dly+8KHEpApXN7NlQCF0ExfZ3i55UVRH/VdCgBd0Lm3dzvUCraVqs4Sq+woaFiN96f+q
-	HZAw==
-X-Gm-Message-State: AODbwcAGZC7Txdva/I//LX94TH+xRmPBfqUu0AmU8jPyrcdgI1KmY0Oc
-	fsKviALVLb3kxvRf4f2GGaYQmmvcHQ==
-X-Received: by 10.80.144.118 with SMTP id z51mr9951110edz.143.1496506949104;
-	Sat, 03 Jun 2017 09:22:29 -0700 (PDT)
+	Mon,  5 Jun 2017 11:16:58 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Mon, 5 Jun 2017 11:17:03 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 5 Jun 2017 11:17:04 +0800
+Message-ID: <1496632624-16009-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-References: <20170603045833.8120-1-raj.khem@gmail.com>
-	<20170603045833.8120-2-raj.khem@gmail.com>
-	<4987dca7-1d4e-983e-acb7-6c398b9a0dda@gmail.com>
-In-Reply-To: <4987dca7-1d4e-983e-acb7-6c398b9a0dda@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 03 Jun 2017 16:22:17 +0000
-Message-ID: <CAMKF1sr6YJv=LR=Nuiw9-EJ-hFbSBggOeKW8kAnDsZOaY1S4LQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH 2/4] python-numeric: Fix build with musl
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: BFBAB47C6D36.AAE09
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Cc: susanbian <bianyq@cn.fujitsu.com>
+Subject: [meta-oe] [PATCH] xterm: 325 -> 327
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,91 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Jun 2017 16:22:29 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 05 Jun 2017 03:17:03 -0000
+Content-Type: text/plain
 
-On Sat, Jun 3, 2017 at 8:22 AM akuster808 <akuster808@gmail.com> wrote:
+From: susanbian <bianyq@cn.fujitsu.com>
 
->
->
-> On 06/02/2017 09:58 PM, Khem Raj wrote:
-> > Use gettimeofday() definition from system
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >   ...-define-this-function-differently-than-it.patch | 30
-> ++++++++++++++++++++++
-> >   .../recipes-devtools/python/python-numeric_24.2.bb |  4 ++-
-> >   2 files changed, 33 insertions(+), 1 deletion(-)
-> >   create mode 100644
-> meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
-> >
-> > diff --git
-> a/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
-> b/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
-> > new file mode 100644
-> > index 000000000..81ed744cb
-> > --- /dev/null
-> > +++
-> b/meta-python/recipes-devtools/python/python-numeric/0001-it-tries-to-define-this-function-differently-than-it.patch
-> > @@ -0,0 +1,30 @@
-> > +From 322e781c67d7a78fc2cfc3d377f50b825fc64abb Mon Sep 17 00:00:00 2001
-> > +From: Khem Raj <raj.khem@gmail.com>
-> > +Date: Fri, 2 Jun 2017 20:21:01 -0700
-> > +Subject: [PATCH] it tries to define this function differently than it is
-> > + defined in sys/time.h.
-> > +
-> > +Use the definition from system
-> missing Upstream-Status
+Upgrade xterm from 325 to 327.
+
+Signed-off-by: susanbian <bianyq@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/xorg-app/{xterm_325.bb => xterm_327.bb} | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-graphics/xorg-app/{xterm_325.bb => xterm_327.bb} (86%)
+
+diff --git a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb b/meta-oe/recipes-graphics/xorg-app/xterm_327.bb
+similarity index 86%
+rename from meta-oe/recipes-graphics/xorg-app/xterm_325.bb
+rename to meta-oe/recipes-graphics/xorg-app/xterm_327.bb
+index a627af0..0e11662 100644
+--- a/meta-oe/recipes-graphics/xorg-app/xterm_325.bb
++++ b/meta-oe/recipes-graphics/xorg-app/xterm_327.bb
+@@ -6,9 +6,8 @@ LIC_FILES_CHKSUM = "file://xterm.h;beginline=3;endline=31;md5=842e945c46c43e05c4
+ 
+ SRC_URI = "http://invisible-mirror.net/archives/${BPN}/${BP}.tgz"
+ 
+-SRC_URI[md5sum] = "e78a0bbc4d5fa3780917e447ae8ebc6b"
+-SRC_URI[sha256sum] = "3b31b07a0c40427e9330ec3be9d1a748c72808f945953cea9e526e48be315f1b"
+-
++SRC_URI[md5sum] = "3c32e931adcad44e64e57892e75d9e02"
++SRC_URI[sha256sum] = "66fb2f6c35b342148f549c276b12a3aa3fb408e27ab6360ddec513e14376150b"
+ PACKAGECONFIG ?= ""
+ PACKAGECONFIG[xft] = "--enable-freetype,--disable-freetype,libxft fontconfig freetype-native"
+ 
+-- 
+2.7.4
 
 
-It's Pending
-I don't think we do that meticulously on meta-oe but it's a good info
-nevertheless I will add it
 
->
->
-> > +
-> > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > +---
-> > + Packages/RNG/Src/ranf.c | 3 ---
-> > + 1 file changed, 3 deletions(-)
-> > +
-> > +diff --git a/Packages/RNG/Src/ranf.c b/Packages/RNG/Src/ranf.c
-> > +index 5ca7dc5..e669fa8 100644
-> > +--- a/Packages/RNG/Src/ranf.c
-> > ++++ b/Packages/RNG/Src/ranf.c
-> > +@@ -149,9 +149,6 @@ void Mixranf(int *s,u32 s48[2])
-> > + #else
-> > +     struct timeval tv;
-> > +     struct timezone tz;
-> > +-#if !defined(__sgi)
-> > +-    int gettimeofday(struct timeval *, struct timezone *);
-> > +-#endif
-> > +
-> > +     (void)gettimeofday(&tv,&tz);
-> > +     s48[0] = (u32)tv.tv_sec;
-> > +--
-> > +2.13.0
-> > +
-> > diff --git a/meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> b/meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> > index c0b04e144..c91d77c81 100644
-> > --- a/meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> > +++ b/meta-python/recipes-devtools/python/python-numeric_24.2.bb
-> > @@ -5,7 +5,9 @@ LIC_FILES_CHKSUM =
-> "file://Legal.htm;md5=e3ce75dedd4043918d15979ae43e312e"
-> >
-> >   PR = "ml3"
-> >
-> > -SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/Numeric-${PV}.tar.gz"
-> > +SRC_URI = "${SOURCEFORGE_MIRROR}/numpy/Numeric-${PV}.tar.gz \
-> > +
->  file://0001-it-tries-to-define-this-function-differently-than-it.patch \
-> > +"
-> >   S = "${WORKDIR}/Numeric-${PV}"
-> >
-> >   inherit distutils
->
->
 
