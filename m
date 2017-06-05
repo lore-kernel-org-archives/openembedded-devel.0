@@ -1,50 +1,50 @@
 Return-Path: <acfoltzer@galois.com>
-Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
-	[209.85.192.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E1BE780D3
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id F2ED3780D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 17:23:41 +0000 (UTC)
-Received: by mail-pf0-f177.google.com with SMTP id 9so85868836pfj.1
+	Mon,  5 Jun 2017 17:23:46 +0000 (UTC)
+Received: by mail-pf0-f181.google.com with SMTP id 83so28318227pfr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jun 2017 10:23:42 -0700 (PDT)
+	Mon, 05 Jun 2017 10:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=galois-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=hnC/ZeoUYKGeiJ567Plrc/IRxiTnZgREF0i1QLLMH3I=;
-	b=jA1OtDOu5m5PiNzsLpbjYVNs2a6E7+wg/nK5BqEkD9YUElLbhDuXGNRCAzLJAVQyWY
-	YWTaBoLj4PCyRgJqzHUt4Gnhj6Khszt/WoDunfO7RpRsbNiNUBUe7NPq3YMtOrmlWI3v
-	h9nDZr4kSZrEP0u0vpEedcdlw9S3Eai6Ye9RO+4HkIS5ORMw984Bw0mnEDVzoXUT+AIC
-	4bVb70IXAAXKVJ8/qzHYWuitMjoHPEgU/XyPGB69HELhvDM7gLGaGqqoIo5QR7rxcqE6
-	0yOEUQ7U1RvMsz0UfueCMhbf5WDumJuycG3jSZmjIAg0r7/w3Tx+vLqq2ipCd4D+qYtZ
-	k7gA==
+	bh=6BXMdMXagPZCSGO4wTCT3FW31k7RTLlajJj8+F+6AMc=;
+	b=lBzltPqqS/bK4l+UX2JvN6LEHLSxph9nF5KYuutfODfo0GMWvjVPXAoXDOCfumNMPe
+	E9d5FUuYhCjuvMmPPwQmvmweNHTJ/LHRMnVmNeCB+OdHFIOOoAYAfLp+CqoNH6IJtxuF
+	ZlU65E2NgwP+cV40r2jPgM+C4vAUeOKuJIDl05qhtxOgFWFWD/emKls6VOWgEgTR/wSg
+	7lVJyTk7/xgTJCOWfBDMtvqiYNDi8L252lpU6K9cKtgzosqWdKiji0suzUs0LQriFEZR
+	9ZJChjbd0F0lKmgblt0uiDbT+rhfaNBUB2KrxF2A17iF4xRLsi9Mm/41iybZCFKBbJbf
+	+6Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=hnC/ZeoUYKGeiJ567Plrc/IRxiTnZgREF0i1QLLMH3I=;
-	b=Iru91Mr1hY5trAiiOyBUvsa9aXqDyqlDwvCtFk9GWNhHwjC6x1ym3p2jcVQqxeJDSP
-	XSuWTtpVnqchTkII5TgMKWQ8zbrIfr0Pdvg4AtY560dboAz+U5dwA5o+wuloJ7QltxEE
-	nQ8llu44PDYkkzTY1S+/LOGVutqOE2StIiZ9vCEsLSX4MoEVsYv+dzwCa+nnEiFpRlh6
-	ebbPsMoyjrgFeRjd0EUbNZu1SpYao8jzYiTYT9X2pQSWYnJguPm6d0HrjYbksU0ESi/N
-	9mmnbzYe3Gdm4AJTIXyFe57U8asxQAN45+i2yl+rLfXC275fx8JOztObAO0qcCkDB6e2
-	JXIw==
-X-Gm-Message-State: AODbwcBpkhv7OLMfPhj7KwFNwxPxlc2vNQ08RZ/TVC+3az8GGrYaQI0m
-	NEdDxiFBwO53qmqkhkkZqA==
-X-Received: by 10.84.130.33 with SMTP id 30mr3762602plc.240.1496683422375;
-	Mon, 05 Jun 2017 10:23:42 -0700 (PDT)
+	bh=6BXMdMXagPZCSGO4wTCT3FW31k7RTLlajJj8+F+6AMc=;
+	b=hh/H2FZzOpQgQTjtvpmMtyKAx4oK0OATMO3imliL4AlONsmGTOoRi44dpVL37w5Khr
+	kiraPvXfzhR0FVIGQ1YI8dAvIABlejRc9WOT7ovD0NVgvy4DhY22aPd7Uyu5qGFvCe3T
+	YQMop6LH3whDG99DqHxIs4rhvYMAPBLcr5GkxTtz3IHviOF3Q47WxREU+cGoQO5aozRO
+	ElTYrAIeUWIwSA2Vl9GEzu97PkrP9oeSCOOErpoIUFY1N9z7G8kglksMt4mO0lnnQEI0
+	5XEAPP2g8u78u/Obo2bfgo5Kut9pmIn9rhhCAP11yPIC41NHNYTciejb+ehQ1ypjsU4p
+	f71w==
+X-Gm-Message-State: AODbwcASLQahNcjwD3wWEJBzFhysI6neyoxe0MrKBnkWsyxFrOUFpLJv
+	ji3wFEi46IsKYv+WJCxTyA==
+X-Received: by 10.84.229.70 with SMTP id d6mr16283502pln.263.1496683427862;
+	Mon, 05 Jun 2017 10:23:47 -0700 (PDT)
 Received: from svarog.galois.com ([2001:428:6002:405:8055:63c1:97d2:1da1])
 	by smtp.gmail.com with ESMTPSA id
-	71sm35220907pgd.57.2017.06.05.10.23.41
+	71sm35220907pgd.57.2017.06.05.10.23.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Jun 2017 10:23:41 -0700 (PDT)
+	Mon, 05 Jun 2017 10:23:47 -0700 (PDT)
 From: "Adam C. Foltzer" <acfoltzer@galois.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jun 2017 10:23:20 -0700
-Message-Id: <20170605172321.12557-2-acfoltzer@galois.com>
+Date: Mon,  5 Jun 2017 10:23:21 -0700
+Message-Id: <20170605172321.12557-3-acfoltzer@galois.com>
 X-Mailer: git-send-email 2.9.4
 In-Reply-To: <20170605172321.12557-1-acfoltzer@galois.com>
 References: <20170605172321.12557-1-acfoltzer@galois.com>
-Subject: [meta-oe][PATCH 2/3] meson: fix build/host confusion for bbclass
+Subject: [meta-oe][PATCH 3/3] meson: add LDFLAGS to bbclass C/C++ link arguments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,33 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 17:23:41 -0000
+X-List-Received-Date: Mon, 05 Jun 2017 17:23:47 -0000
 
-Meson and Bitbake use different terminology for the build and host;
-this provides the correct build machine info to Meson.
+This adds compiler flags for C++ projects, and fixes the linker
+arguments for both C and C++ to avoid the GNU_HASH qa failure
 
 Signed-off-by: Adam C. Foltzer <acfoltzer@galois.com>
 ---
- meta-oe/classes/meson.bbclass | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+ meta-oe/classes/meson.bbclass | 9 +++++----
+ 1 file changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
-index c33174a..d2ae626 100644
+index d2ae626..11c8d34 100644
 --- a/meta-oe/classes/meson.bbclass
 +++ b/meta-oe/classes/meson.bbclass
-@@ -66,9 +66,9 @@ c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
- cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+@@ -32,7 +32,8 @@ MESONOPTS = " --prefix ${prefix} \
+               --localstatedir ${localstatedir} \
+               --sharedstatedir ${sharedstatedir}"
+ 
+-MESON_C_ARGS = "${HOST_CC_ARCH}${TOOLCHAIN_OPTIONS}"
++MESON_C_ARGS = "${TARGET_CC_ARCH}${TOOLCHAIN_OPTIONS}"
++MESON_LINK_ARGS = "${TOOLCHAIN_OPTIONS} ${LDFLAGS}"
+ 
+ MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
+ MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
+@@ -61,9 +62,9 @@ pkgconfig = 'pkg-config'
+ 
+ [properties]
+ c_args = [${@meson_array('MESON_C_ARGS', d)}]
+-cpp_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+-c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+-cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
++c_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
++cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
++cpp_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
  
  [host_machine]
--system = '${HOST_OS}'
--cpu_family = '${HOST_ARCH}'
--cpu = '${HOST_ARCH}'
-+system = '${BUILD_OS}'
-+cpu_family = '${BUILD_ARCH}'
-+cpu = '${BUILD_ARCH}'
- endian = '${MESON_HOST_ENDIAN}'
- 
- [target_machine]
+ system = '${BUILD_OS}'
 -- 
 2.9.4
 
