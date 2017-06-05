@@ -1,25 +1,51 @@
-Return-Path: <andrej.valek@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F81A77B6E
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
+	[209.85.161.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2356D77F76
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 11:25:26 +0000 (UTC)
-Received: from mail2.siemens.de (mail2.siemens.de [139.25.208.11])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v55BPRLY022163
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Mon,  5 Jun 2017 12:48:04 +0000 (UTC)
+Received: by mail-yw0-f178.google.com with SMTP id 63so40442764ywr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Jun 2017 13:25:28 +0200
-Received: from dev.sbt.siemens.com ([163.242.56.100])
-	by mail2.siemens.de (8.15.2/8.15.2) with ESMTP id v55BPRcl005345;
-	Mon, 5 Jun 2017 13:25:27 +0200
-Received: from dev.sbt.siemens.com (localhost [127.0.0.1])
-	by dev.sbt.siemens.com (Postfix) with ESMTP id B6E064F2DD;
-	Mon,  5 Jun 2017 13:25:27 +0200 (CEST)
-From: Andrej Valek <andrej.valek@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jun 2017 13:25:01 +0200
-Message-Id: <1496661901-26738-1-git-send-email-andrej.valek@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] srecord: add collection of tools for manipulating EPROM load files
+	Mon, 05 Jun 2017 05:48:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=++tKKnFcqhc70qMmph0HzU7ubJR75HvS46oQjrVPGu4=;
+	b=VjntGQi7aVDyrhRmvZlGp2tHn/liek+p0dcgVpYg/q/4yjBS3mYvx8ee1ZtBxfSVbE
+	IzrleWZ+rIgdqEaSGqZcSo6F9P6bquuYzA9g8TeT1fsygiRJAz4t+FuhBd+Y2bBGiGDe
+	1BmrCUjIO2/H3YO5SMUKIHuHJXcQp161mdBICDGXPvB/7y7O+S1z+adJyR1+HUpbKAr3
+	OsCVxVpAnoPdDc8IV41GSFEyV1OsqRTs8sGWyVLBEvHylhIfdcXMZ0rvUVN2Sv85lR6n
+	pFEZMn37m9ADS0md+F0q86NR9wCmEu0jvqAP3hsI2xNjaeMoIhqFKNwHmNPk1yB6j1hA
+	hldg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=++tKKnFcqhc70qMmph0HzU7ubJR75HvS46oQjrVPGu4=;
+	b=HH5VaPW++achD1OQSI4XeS/UVRKAUpt1+AzIefwo593vbcUd/opYu1gr7LC++5CHa7
+	CkDfrdJlCI+/2UV407aFxDON1It0bXPQpbIzeBy3B9XnSSkJQp5uPRf1x0k8yZbvY0ZZ
+	QHEAupENX5f5DfVdcPCZXqo6uSV3tCIODDg1wNJYlJsc9yxpy8IlUNSdiPocGHnINzu1
+	YrBzYuUwRollvZQyNHIH+kQUvXAH9eykz0n7xAwAMLfgFxGPI9qMRowznVGsA6TmGK0F
+	hlA9XNPXJEs1Z3fIiLTpdkXY3Qetq6ZeTWw1qzLOkYc3GbOyL8WMVveyeGG7p6dFLyIE
+	vUyw==
+X-Gm-Message-State: AODbwcBt4rSi4IapE2N5ottuboYG8u1GQGu6zLXOQ9EOrk91frInyFsb
+	h85k0xIzL4nmNrnKD4xWeNGHFPMGpg==
+X-Received: by 10.129.55.14 with SMTP id e14mr6656913ywa.33.1496666886172;
+	Mon, 05 Jun 2017 05:48:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.162.38 with HTTP; Mon, 5 Jun 2017 05:48:05 -0700 (PDT)
+In-Reply-To: <CAL2S=Ku1-Ycwo9FhJhnr=_D9UuQYS6WC=841pu8A20YDR8x+-g@mail.gmail.com>
+References: <AM5PR0402MB2769D2B8C27E4DDADE64D7CEC4F00@AM5PR0402MB2769.eurprd04.prod.outlook.com>
+	<1496243833.26945.66.camel@linux.intel.com>
+	<CAL2S=Ku1-Ycwo9FhJhnr=_D9UuQYS6WC=841pu8A20YDR8x+-g@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 5 Jun 2017 14:48:05 +0200
+Message-ID: <CA+chaQfSfrAcYyJ_0vh52E8gzAgGzDs8yEhwrg7hPgtExOiZbA@mail.gmail.com>
+To: Greg Hwang <greghwang@gmail.com>, akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: URL of devmem2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,112 +58,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 11:25:28 -0000
+X-List-Received-Date: Mon, 05 Jun 2017 12:48:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This collection of tools is used for EPROM data manipulation.
-More info could be found on page: http://srecord.sourceforge.net/
+I've moved requested backports to morty bundle in patchwork (and added
+armin to improve the chance he will notice them and include them in next
+pull request).
 
-Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
----
- .../srecord/files/add-option-to-remove-docs.patch  | 57 ++++++++++++++++++++++
- meta-oe/recipes-support/srecord/srecord_1.64.bb    | 23 +++++++++
- 2 files changed, 80 insertions(+)
- create mode 100644 meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
- create mode 100644 meta-oe/recipes-support/srecord/srecord_1.64.bb
+I have restored the old version of devmem2.c on sources.openembedded.org
+(there was still copy of it under the name
+devmem2.c_bad-checksum_be12c0132a1ae118cbf5e79d98427c1d)
 
-diff --git a/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch b/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
-new file mode 100644
-index 0000000..9b2bd99
---- /dev/null
-+++ b/meta-oe/recipes-support/srecord/files/add-option-to-remove-docs.patch
-@@ -0,0 +1,57 @@
-+Add option to build this utility without a documentation.
-+
-+For full documentation building are necessary utilities like
-+groff and ps2pdf. Full documentation can takes a lot of space.
-+So it can be disabled by overloading makefile variable WITHOUT_DOC.
-+
-+Upstream-Status: Inappropriate [Other]
-+Workaround specific to our build system.
-+
-+Signed-off-by: Andrej Valek <andrej.valek@siemens.com>
-+
-+diff --git a/Makefile.in b/Makefile.in
-+index 9bdd8f1..a2b5494 100644
-+--- a/Makefile.in
-++++ b/Makefile.in
-+@@ -141,6 +141,14 @@ GROFF = @GROFF@
-+ #
-+ SOELIM = @SOELIM@
-+ 
-++# Option to build this utility without building and installing the documentation.
-++WITHOUT_DOC ?= 0
-++ifeq ($(WITHOUT_DOC),0)
-++	BUILD_DOC = all-doc
-++	INST_DOC = install-doc
-++	CLR_DOC = clean-doc
-++endif
-++
-+ # ---------------------------------------------------------
-+ # You should not need to change anything below this line.
-+ 
-+@@ -4090,7 +4098,7 @@ bin/test_url_decode: $(test_url_decode_obj) .bin srecord/libsrecord.la
-+ 	$(LIBTOOL) --mode=link --tag=CXX $(CXX) $(CPPFLAGS) $(CXXFLAGS) -o $@ \
-+ 		$(test_url_decode_obj) srecord/libsrecord.la $(LDFLAGS) $(LIBS)
-+ 
-+-all: all-bin all-doc
-++all: all-bin $(BUILD_DOC)
-+ 
-+ all-bin: bin/srec_cat bin/srec_cmp bin/srec_info bin/test_arglex_ambiguous \
-+ 		bin/test_crc16 bin/test_fletcher16 bin/test_gecos \
-+@@ -4156,7 +4164,7 @@ test_files = t0001a t0002a t0003a t0004a t0005a t0006a t0007a t0008a t0009a \
-+ sure: $(test_files)
-+ 	@echo Passed All Tests
-+ 
-+-clean: clean-bin clean-doc clean-misc clean-obj
-++clean: clean-bin $(CLR_DOC) clean-misc clean-obj
-+ 
-+ clean-bin:
-+ 	rm -f bin/srec_cat bin/srec_cmp bin/srec_info bin/test_arglex_ambiguous
-+@@ -4443,7 +4451,7 @@ distclean-directories:
-+ 	rm -rf test/fletcher16/.libs test/gecos/.libs test/hyphen/.libs
-+ 	rm -rf test/url_decode/.libs
-+ 
-+-install: install-bin install-doc install-include install-libdir install-man
-++install: install-bin $(INST_DOC) install-include install-libdir install-man
-+ 
-+ install-bin: $(bindir)/srec_cat $(bindir)/srec_cmp $(bindir)/srec_info
-+ 
-diff --git a/meta-oe/recipes-support/srecord/srecord_1.64.bb b/meta-oe/recipes-support/srecord/srecord_1.64.bb
-new file mode 100644
-index 0000000..fe1af47
---- /dev/null
-+++ b/meta-oe/recipes-support/srecord/srecord_1.64.bb
-@@ -0,0 +1,23 @@
-+SUMMARY = "A collection of powerful tools for manipulating EPROM load files."
-+SECTION = "devel"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=8dfcbf2f0a144b97f0931b6394debea7"
-+
-+SRC_URI = " \
-+    http://srecord.sourceforge.net/srecord-${PV}.tar.gz \
-+    file://add-option-to-remove-docs.patch \
-+"
-+
-+SRC_URI[md5sum] = "4de4a7497472d7972645c2af91313769"
-+SRC_URI[sha256sum] = "49a4418733c508c03ad79a29e95acec9a2fbc4c7306131d2a8f5ef32012e67e2"
-+
-+DEPENDS = "libtool-native boost groff-native"
-+
-+inherit autotools-brokensep
-+
-+EXTRA_OECONF = "--without-gcrypt LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
-+
-+# Set variable WITHOUT_DOC=0 to enable documentation generation
-+EXTRA_OEMAKE = "WITHOUT_DOC=1"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.1.4
+The sources.openembedded.org is updated automatically from my "bitbake
+world" builds, the only reason why this "old/new" devmem2.c appeared again
+recently is that sources.openembedded.org syncing was broken for some time
+as explained in:
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112917.html
 
+So the first change changed the devmem2.c content, was built in my "bitbake
+world" builds and updated on the sources.openembedded.org, but in wrong
+directory so nobody noticed the issue, then Denys sent the fix and
+devmem2-new.c was added to the same folder, but the old filename was
+already updated. Now when I've fixed rsyncing both versions of this file
+became the same and older releases got broken.
+
+> What is the recommendation for developers who need to stay on older
+branches such as Jethro for development cycle reasons?
+
+I would recommend to maintain local source mirror as PREMIRROR, so that
+most of the network traffic is contained within the company and the builds
+continue to build correctly independently on outside world.
+
+>   Is it as easy as
+contacting the maintainer of the open embedded source mirror to check if
+devmem2.c has been modified lately?
+
+It was modified long time ago, when the first change was tested on my
+"bitbake world" and merged to master (before the 2nd change was tested and
+merged as well). But it wasn't visible to other people because the rsyncing
+issue which got fixed only recently.
+
+
+On Wed, May 31, 2017 at 6:15 PM, Greg Hwang <greghwang@gmail.com> wrote:
+
+> Martin,
+>
+> I noticed this issue with devmem2 as well.  I did some digging and I found
+> this post on the mailing list from Dec 2106
+>
+> http://lists.openembedded.org/pipermail/openembedded-devel/2
+> 016-December/110568.html.
+>
+> Its possible that lartmarker domain has been down for some time.
+>
+> It looks like the version of devmem2 on sources.openembedded.org has
+> changed and is now identical to the the updated devmem2.c on free-electrons
+> mirror, AND it is the same as the updated version in
+> http://sources.openembedded.org/devmem2-new.c.  This means the checksum on
+> the open embedded mirror doesn't match the checksum called out in the
+> devmem2 recipes older than pyro.
+>
+>  What is the recommendation for developers who need to stay on older
+> branches such as Jethro for development cycle reasons?  Is it as easy as
+> contacting the maintainer of the open embedded source mirror to check if
+> devmem2.c has been modified lately?
+>
+> Greg
+>
+>
+>
+> On Wed, May 31, 2017 at 11:17 AM, Leonardo Sandoval <
+> leonardo.sandoval.gonzalez@linux.intel.com> wrote:
+>
+> > On Tue, 2017-05-30 at 20:10 +0000, Martin Siegumfeldt wrote:
+> > > Hi,
+> > >
+> > >
+> > > Is there any chance that http://git.openembedded.org/
+> > meta-openembedded/commit/?id=fc801961457fe2fbb24973bb43b302ad46044cb8
+> and
+> > http://git.openembedded.org/meta-openembedded/commit/?id=
+> > 6c584374a599f6f8d3607f20ecfc13a67ccf1da1 will be backported to release
+> > branches? lartmaker domain seems no longer available - AFAICS all
+> branches
+> > older than pyro is affected.
+> > >
+> >
+> > without much contexts on these two patches, send the backported patches
+> > with proper stable releases names as prefixes to the mailing list.
+> >
+> > >
+> > > Thanks,
+> > >
+> > > Martin
+> >
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
