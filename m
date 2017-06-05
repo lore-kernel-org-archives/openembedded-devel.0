@@ -1,46 +1,50 @@
 Return-Path: <acfoltzer@galois.com>
-Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 582E078062
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 7E1BE780D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 17:23:27 +0000 (UTC)
-Received: by mail-pg0-f43.google.com with SMTP id a70so16079651pge.3
+	Mon,  5 Jun 2017 17:23:41 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id 9so85868836pfj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jun 2017 10:23:29 -0700 (PDT)
+	Mon, 05 Jun 2017 10:23:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=galois-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=Yey9clQtbdgpJeGNTHynIou9JcOW3zP7tI48z6K74x0=;
-	b=UE1cYJsS8puoV34/Y9rjIraSAmSdwjjWZxtdGqTxt+GW0A4AnD6JD8oW9dBdBcVRp/
-	Ux8/simBFWuV74oHvS6DxNMy02xvUw/FTAf913afGro+mMKGHyCQV+gvOhlJn2lyI0Q/
-	3VduH+GG7kMv7NCIRESdJFm25rui72hn9gt4dJoR3fUcUm1wM8/rAY4bUZtGey3RqCdu
-	ulRKHQpclwVz7c/KWkYYdlZnoJ4RI8x0nyzOBpeSty8d3Xsj2TXNRVlVenwyMMZcUtFF
-	30AN1bXcvEcFx30hYmi+dGpIwm6vYaUF6urDF0s0sAlGsfltA8YB999nm01y3DIbqOP0
-	MFuA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=hnC/ZeoUYKGeiJ567Plrc/IRxiTnZgREF0i1QLLMH3I=;
+	b=jA1OtDOu5m5PiNzsLpbjYVNs2a6E7+wg/nK5BqEkD9YUElLbhDuXGNRCAzLJAVQyWY
+	YWTaBoLj4PCyRgJqzHUt4Gnhj6Khszt/WoDunfO7RpRsbNiNUBUe7NPq3YMtOrmlWI3v
+	h9nDZr4kSZrEP0u0vpEedcdlw9S3Eai6Ye9RO+4HkIS5ORMw984Bw0mnEDVzoXUT+AIC
+	4bVb70IXAAXKVJ8/qzHYWuitMjoHPEgU/XyPGB69HELhvDM7gLGaGqqoIo5QR7rxcqE6
+	0yOEUQ7U1RvMsz0UfueCMhbf5WDumJuycG3jSZmjIAg0r7/w3Tx+vLqq2ipCd4D+qYtZ
+	k7gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Yey9clQtbdgpJeGNTHynIou9JcOW3zP7tI48z6K74x0=;
-	b=h/i6LHtr2s65gm7yKwP6GXjpesM7ggLwX21BXclV3x3hx2ZzJYLVnE6ar3oS1qK6fZ
-	NZw8Hw6KLS+ml2HRDJf37ls1KSdggXCunfAJQ0jWTSgDyKDB8DLOQJH9omAoED12jVWW
-	l09CtuLpHY8emtq5PeptUdgwrhN5LhwqG0a/a1NTq7wmDm13vgjoMpP2dhrKcpodvuCJ
-	NuwunKc1zBRHgTO7GaO1VtnQ7MP9n7iXDEq4SoxVO4aRWFC6yDbYOpVUVHBHQHEBGmkK
-	Dy9Tv9u0QUiBHQOqVb50LrXctNUCeuGmZv1CunZobPFJE9FdQphnPmJSY2ZJC3pEogQS
-	O3Tg==
-X-Gm-Message-State: AODbwcCoOPzeNB3j63DWOTcuogpsWPnY9nGy9qNVYGixGEKl/8TZU4bu
-	c9srBxsB+AZqsr9O2rdNuw==
-X-Received: by 10.84.215.158 with SMTP id l30mr16166584pli.266.1496683409107; 
-	Mon, 05 Jun 2017 10:23:29 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=hnC/ZeoUYKGeiJ567Plrc/IRxiTnZgREF0i1QLLMH3I=;
+	b=Iru91Mr1hY5trAiiOyBUvsa9aXqDyqlDwvCtFk9GWNhHwjC6x1ym3p2jcVQqxeJDSP
+	XSuWTtpVnqchTkII5TgMKWQ8zbrIfr0Pdvg4AtY560dboAz+U5dwA5o+wuloJ7QltxEE
+	nQ8llu44PDYkkzTY1S+/LOGVutqOE2StIiZ9vCEsLSX4MoEVsYv+dzwCa+nnEiFpRlh6
+	ebbPsMoyjrgFeRjd0EUbNZu1SpYao8jzYiTYT9X2pQSWYnJguPm6d0HrjYbksU0ESi/N
+	9mmnbzYe3Gdm4AJTIXyFe57U8asxQAN45+i2yl+rLfXC275fx8JOztObAO0qcCkDB6e2
+	JXIw==
+X-Gm-Message-State: AODbwcBpkhv7OLMfPhj7KwFNwxPxlc2vNQ08RZ/TVC+3az8GGrYaQI0m
+	NEdDxiFBwO53qmqkhkkZqA==
+X-Received: by 10.84.130.33 with SMTP id 30mr3762602plc.240.1496683422375;
+	Mon, 05 Jun 2017 10:23:42 -0700 (PDT)
 Received: from svarog.galois.com ([2001:428:6002:405:8055:63c1:97d2:1da1])
 	by smtp.gmail.com with ESMTPSA id
-	71sm35220907pgd.57.2017.06.05.10.23.28
+	71sm35220907pgd.57.2017.06.05.10.23.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 05 Jun 2017 10:23:28 -0700 (PDT)
+	Mon, 05 Jun 2017 10:23:41 -0700 (PDT)
 From: "Adam C. Foltzer" <acfoltzer@galois.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  5 Jun 2017 10:23:19 -0700
-Message-Id: <20170605172321.12557-1-acfoltzer@galois.com>
+Date: Mon,  5 Jun 2017 10:23:20 -0700
+Message-Id: <20170605172321.12557-2-acfoltzer@galois.com>
 X-Mailer: git-send-email 2.9.4
-Subject: [meta-oe][PATCH 1/3] meson: update Meson devtool to 0.40.1
+In-Reply-To: <20170605172321.12557-1-acfoltzer@galois.com>
+References: <20170605172321.12557-1-acfoltzer@galois.com>
+Subject: [meta-oe][PATCH 2/3] meson: fix build/host confusion for bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,30 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 17:23:28 -0000
+X-List-Received-Date: Mon, 05 Jun 2017 17:23:41 -0000
+
+Meson and Bitbake use different terminology for the build and host;
+this provides the correct build machine info to Meson.
 
 Signed-off-by: Adam C. Foltzer <acfoltzer@galois.com>
 ---
- meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/recipes-devtools/meson/{meson_0.37.1.bb => meson_0.40.1.bb} (88%)
+ meta-oe/classes/meson.bbclass | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/meson/meson_0.37.1.bb
-rename to meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-index dbbea64..fd96b42 100644
---- a/meta-oe/recipes-devtools/meson/meson_0.37.1.bb
-+++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-@@ -9,7 +9,7 @@ SRC_URI = " \
-     file://native_bindir.patch \
- "
+diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
+index c33174a..d2ae626 100644
+--- a/meta-oe/classes/meson.bbclass
++++ b/meta-oe/classes/meson.bbclass
+@@ -66,9 +66,9 @@ c_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
+ cpp_link_args = [${@meson_array('TOOLCHAIN_OPTIONS', d)}]
  
--SRCREV = "3d4bfdcb22314ea7db45a5b075f8b2a9c1498aab"
-+SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
+ [host_machine]
+-system = '${HOST_OS}'
+-cpu_family = '${HOST_ARCH}'
+-cpu = '${HOST_ARCH}'
++system = '${BUILD_OS}'
++cpu_family = '${BUILD_ARCH}'
++cpu = '${BUILD_ARCH}'
+ endian = '${MESON_HOST_ENDIAN}'
  
- S = "${WORKDIR}/git"
- 
+ [target_machine]
 -- 
 2.9.4
 
