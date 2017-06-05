@@ -1,51 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
-	[209.85.161.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 2356D77F76
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 566 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 05 Jun 2017 13:32:25 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 102EB7780A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  5 Jun 2017 12:48:04 +0000 (UTC)
-Received: by mail-yw0-f178.google.com with SMTP id 63so40442764ywr.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jun 2017 05:48:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=++tKKnFcqhc70qMmph0HzU7ubJR75HvS46oQjrVPGu4=;
-	b=VjntGQi7aVDyrhRmvZlGp2tHn/liek+p0dcgVpYg/q/4yjBS3mYvx8ee1ZtBxfSVbE
-	IzrleWZ+rIgdqEaSGqZcSo6F9P6bquuYzA9g8TeT1fsygiRJAz4t+FuhBd+Y2bBGiGDe
-	1BmrCUjIO2/H3YO5SMUKIHuHJXcQp161mdBICDGXPvB/7y7O+S1z+adJyR1+HUpbKAr3
-	OsCVxVpAnoPdDc8IV41GSFEyV1OsqRTs8sGWyVLBEvHylhIfdcXMZ0rvUVN2Sv85lR6n
-	pFEZMn37m9ADS0md+F0q86NR9wCmEu0jvqAP3hsI2xNjaeMoIhqFKNwHmNPk1yB6j1hA
-	hldg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=++tKKnFcqhc70qMmph0HzU7ubJR75HvS46oQjrVPGu4=;
-	b=HH5VaPW++achD1OQSI4XeS/UVRKAUpt1+AzIefwo593vbcUd/opYu1gr7LC++5CHa7
-	CkDfrdJlCI+/2UV407aFxDON1It0bXPQpbIzeBy3B9XnSSkJQp5uPRf1x0k8yZbvY0ZZ
-	QHEAupENX5f5DfVdcPCZXqo6uSV3tCIODDg1wNJYlJsc9yxpy8IlUNSdiPocGHnINzu1
-	YrBzYuUwRollvZQyNHIH+kQUvXAH9eykz0n7xAwAMLfgFxGPI9qMRowznVGsA6TmGK0F
-	hlA9XNPXJEs1Z3fIiLTpdkXY3Qetq6ZeTWw1qzLOkYc3GbOyL8WMVveyeGG7p6dFLyIE
-	vUyw==
-X-Gm-Message-State: AODbwcBt4rSi4IapE2N5ottuboYG8u1GQGu6zLXOQ9EOrk91frInyFsb
-	h85k0xIzL4nmNrnKD4xWeNGHFPMGpg==
-X-Received: by 10.129.55.14 with SMTP id e14mr6656913ywa.33.1496666886172;
-	Mon, 05 Jun 2017 05:48:06 -0700 (PDT)
+	Mon,  5 Jun 2017 13:32:24 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 30F5620BD4;
+	Mon,  5 Jun 2017 13:23:00 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id 2xt-CknYKkiK; Mon,  5 Jun 2017 13:23:00 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id E9C5A20072;
+	Mon,  5 Jun 2017 13:22:56 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 80AA81624E2; Mon,  5 Jun 2017 09:22:56 -0400 (EDT)
+Date: Mon, 5 Jun 2017 09:22:56 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20170605132256.GH28053@denix.org>
+References: <20170602055545.20448-1-mns@gomspace.com>
+	<20170602055545.20448-2-mns@gomspace.com>
+	<CA+chaQdFmNp71fVfgRn=X7QyzP5mAgqcP6_ZMz_5+EvX8ioELQ@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.37.162.38 with HTTP; Mon, 5 Jun 2017 05:48:05 -0700 (PDT)
-In-Reply-To: <CAL2S=Ku1-Ycwo9FhJhnr=_D9UuQYS6WC=841pu8A20YDR8x+-g@mail.gmail.com>
-References: <AM5PR0402MB2769D2B8C27E4DDADE64D7CEC4F00@AM5PR0402MB2769.eurprd04.prod.outlook.com>
-	<1496243833.26945.66.camel@linux.intel.com>
-	<CAL2S=Ku1-Ycwo9FhJhnr=_D9UuQYS6WC=841pu8A20YDR8x+-g@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 5 Jun 2017 14:48:05 +0200
-Message-ID: <CA+chaQfSfrAcYyJ_0vh52E8gzAgGzDs8yEhwrg7hPgtExOiZbA@mail.gmail.com>
-To: Greg Hwang <greghwang@gmail.com>, akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: URL of devmem2
+In-Reply-To: <CA+chaQdFmNp71fVfgRn=X7QyzP5mAgqcP6_ZMz_5+EvX8ioELQ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-oe][PATCH 2/2] devmem2: use different filename to avoid checksum conflicts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,111 +45,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jun 2017 12:48:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 05 Jun 2017 13:32:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I've moved requested backports to morty bundle in patchwork (and added
-armin to improve the chance he will notice them and include them in next
-pull request).
+On Mon, Jun 05, 2017 at 01:11:09PM +0200, Martin Jansa wrote:
+> You should mention to which branch you want this to be applied and CC the
+> maintainer of that branch.
+> 
+> I can move it to correct bundle in patchwork, but that can still easily
+> slip release maintainer attention.
+> 
+> Also I wonder why Denys added do_unpack_append() instead of just changing
+> do_compile to:
+> 
+> ${CC} -o devmem2 devmem2-new.c ${CFLAGS} ${LDFLAGS}
 
-I have restored the old version of devmem2.c on sources.openembedded.org
-(there was still copy of it under the name
-devmem2.c_bad-checksum_be12c0132a1ae118cbf5e79d98427c1d)
+Because the patch won't apply - it expects devmem2.c:
 
-The sources.openembedded.org is updated automatically from my "bitbake
-world" builds, the only reason why this "old/new" devmem2.c appeared again
-recently is that sources.openembedded.org syncing was broken for some time
-as explained in:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-May/112917.html
-
-So the first change changed the devmem2.c content, was built in my "bitbake
-world" builds and updated on the sources.openembedded.org, but in wrong
-directory so nobody noticed the issue, then Denys sent the fix and
-devmem2-new.c was added to the same folder, but the old filename was
-already updated. Now when I've fixed rsyncing both versions of this file
-became the same and older releases got broken.
-
-> What is the recommendation for developers who need to stay on older
-branches such as Jethro for development cycle reasons?
-
-I would recommend to maintain local source mirror as PREMIRROR, so that
-most of the network traffic is contained within the company and the builds
-continue to build correctly independently on outside world.
-
->   Is it as easy as
-contacting the maintainer of the open embedded source mirror to check if
-devmem2.c has been modified lately?
-
-It was modified long time ago, when the first change was tested on my
-"bitbake world" and merged to master (before the 2nd change was tested and
-merged as well). But it wasn't visible to other people because the rsyncing
-issue which got fixed only recently.
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-March/111799.html
+http://lists.openembedded.org/pipermail/openembedded-devel/2017-March/111807.html
 
 
-On Wed, May 31, 2017 at 6:15 PM, Greg Hwang <greghwang@gmail.com> wrote:
-
-> Martin,
->
-> I noticed this issue with devmem2 as well.  I did some digging and I found
-> this post on the mailing list from Dec 2106
->
-> http://lists.openembedded.org/pipermail/openembedded-devel/2
-> 016-December/110568.html.
->
-> Its possible that lartmarker domain has been down for some time.
->
-> It looks like the version of devmem2 on sources.openembedded.org has
-> changed and is now identical to the the updated devmem2.c on free-electrons
-> mirror, AND it is the same as the updated version in
-> http://sources.openembedded.org/devmem2-new.c.  This means the checksum on
-> the open embedded mirror doesn't match the checksum called out in the
-> devmem2 recipes older than pyro.
->
->  What is the recommendation for developers who need to stay on older
-> branches such as Jethro for development cycle reasons?  Is it as easy as
-> contacting the maintainer of the open embedded source mirror to check if
-> devmem2.c has been modified lately?
->
-> Greg
->
->
->
-> On Wed, May 31, 2017 at 11:17 AM, Leonardo Sandoval <
-> leonardo.sandoval.gonzalez@linux.intel.com> wrote:
->
-> > On Tue, 2017-05-30 at 20:10 +0000, Martin Siegumfeldt wrote:
-> > > Hi,
-> > >
-> > >
-> > > Is there any chance that http://git.openembedded.org/
-> > meta-openembedded/commit/?id=fc801961457fe2fbb24973bb43b302ad46044cb8
-> and
-> > http://git.openembedded.org/meta-openembedded/commit/?id=
-> > 6c584374a599f6f8d3607f20ecfc13a67ccf1da1 will be backported to release
-> > branches? lartmaker domain seems no longer available - AFAICS all
-> branches
-> > older than pyro is affected.
-> > >
+> but that should be improved in master first to keep your backport request
+> identical with what we got in master.
+> 
+> On Fri, Jun 2, 2017 at 7:55 AM, Martin Siegumfeldt <mns@gomspace.com> wrote:
+> 
+> > From: Denys Dmytriyenko <denys@ti.com>
 > >
-> > without much contexts on these two patches, send the backported patches
-> > with proper stable releases names as prefixes to the mailing list.
+> > The newly resurrected devmem2.c file besides having a new location, also
+> > updates its header, producing different checksums, which would conflict
+> > with any previously cached or mirrored instances. To avoid such conflicts,
+> > use a different filename in fetch(). Rename it back to original name at
+> > unpack() for devmem2-fixups-2.patch to succeed w/o modifications.
 > >
-> > >
-> > > Thanks,
-> > >
-> > > Martin
+> > WARNING: devmem2-1.0-r7 do_fetch: Fetcher failure for URL: '
+> > http://www.free-electrons.com/pub/mirror/devmem2.c'. Checksum mismatch!
+> > File: '/OE/master/downloads/devmem2.c' has md5 checksum
+> > be12c0132a1ae118cbf5e79d98427c1d when e23f236e94be4c429aa1ceac0f01544b
+> > was expected
+> > File: '/OE/master/downloads/devmem2.c' has sha256 checksum
+> > ec382c90af3ef2f49695ff14a4d6521e58ac482c4e29d6c9ebca8768f699c191 when
+> > 3b15515693bae1ebd14d914e46d388edfec2175829ea1576a7a0c8606ebbe639 was
+> > expected
+> > If this change is expected (e.g. you have upgraded to a new version
+> > without updating the checksums) then you can use these lines within the
+> > recipe:
+> > SRC_URI[md5sum] = "be12c0132a1ae118cbf5e79d98427c1d"
+> > SRC_URI[sha256sum] = "ec382c90af3ef2f49695ff14a4d652
+> > 1e58ac482c4e29d6c9ebca8768f699c191"
+> > Otherwise you should retry the download and/or check with upstream to
+> > determine if the file has become corrupted or otherwise unexpectedly
+> > modified.
 > >
+> > WARNING: devmem2-1.0-r7 do_fetch: Renaming /OE/sources/devmem2.c to
+> > /OE/sources/devmem2.c_bad-checksum_be12c0132a1ae118cbf5e79d98427c1d
 > >
+> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> > ---
+> >  meta-oe/recipes-support/devmem2/devmem2.bb | 6 +++++-
+> >  1 file changed, 5 insertions(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-support/devmem2/devmem2.bb
+> > b/meta-oe/recipes-support/devmem2/devmem2.bb
+> > index c42eb5e..c86eb2e 100644
+> > --- a/meta-oe/recipes-support/devmem2/devmem2.bb
+> > +++ b/meta-oe/recipes-support/devmem2/devmem2.bb
+> > @@ -3,12 +3,16 @@ LICENSE = "GPLv2+"
+> >  LIC_FILES_CHKSUM = "file://devmem2.c;endline=38;md5=
+> > a9eb9f3890384519f435aedf986297cf"
+> >  PR = "r7"
+> >
+> > -SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c \
+> > +SRC_URI = "http://www.free-electrons.com/pub/mirror/devmem2.c;
+> > downloadfilename=devmem2-new.c \
+> >             file://devmem2-fixups-2.patch;apply=yes;striplevel=0"
+> >  S = "${WORKDIR}"
+> >
+> >  CFLAGS += "-DFORCE_STRICT_ALIGNMENT"
+> >
+> > +python do_unpack_append() {
+> > +    os.rename("devmem2-new.c", "devmem2.c")
+> > +}
+> > +
+> >  do_compile() {
+> >      ${CC} -o devmem2 devmem2.c ${CFLAGS} ${LDFLAGS}
+> >  }
 > > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > 2.9.3
 > >
-> --
+> >
+> -- 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
