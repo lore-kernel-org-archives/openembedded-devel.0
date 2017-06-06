@@ -1,46 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A5EDA71BD4
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3502B78071
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  6 Jun 2017 14:50:38 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id u26so24584681pfd.2
+	Tue,  6 Jun 2017 14:50:39 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id a70so4994515pge.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jun 2017 07:50:40 -0700 (PDT)
+	Tue, 06 Jun 2017 07:50:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Edxpxcxq3VY3SsZtb++54lUd2omGNk4zJ2G1pbfIPAU=;
-	b=cHdjMhHd1V5bh16qxb3W3HP5FCbPOrNCtxgkHojmK25G3kE325pOb2rSt7z2oSvxfF
-	bTKFWnWg8xyjrf6689LmNIxlrYGMJWDsT130qUrNFa/LJMocQIQ+7MSwLKM4sAag6vIV
-	V/wz5W1j+tHzsFF0gZus5+R8r45Lch7DPG+6ndZJKRo3v5UDn1iEaF9T3T5k2vlHdlg8
-	8wANJElHRUG764Uq882dGn3NLEUeCeTpAvPS4c8wko1YbJoS+hWxb1z7SkuZVDerlsRA
-	oAYAILQIYU77XTnMlkNz7cQU/RyAg8e0/Fa8vGqQ/QihTrPOFCWUrn1sth2Rmpx76fMa
-	Dgtg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=paUisDBY63U94anT0fwf6c6HSmbklUWfTOTyCwvANEY=;
+	b=qh/fqUXYN++oYE3x1sIDO2t0BV16ogUacxbKGDO1yKP3QMMDMijoZTuo7F2+z7cIDZ
+	wHWk5EX51229UiBxEaG5dPfRCED6rtfzp/tGouxx4D4xzmKjr68ZLTRx/NC7GX9D5E9I
+	SdtjsNtDYEekTBcamm36sU4h4/IDKySrCC7GQsKywGBH0vHXW1zzfxkQQ3cu73XnV7jl
+	6DuccsxOiVOrKbmWKkoSH1QT9tx+9FE8BRkuTd3fSp1HHmRUqG2I2+A920hHIpDmUyd4
+	J95DESwxBxLHcNXJk9dboGIQW1RxFIb1IQi4nbwVmLS8DtAVjlJ2STfXERN6489ttAut
+	gWlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Edxpxcxq3VY3SsZtb++54lUd2omGNk4zJ2G1pbfIPAU=;
-	b=pjqEnUMdMXgyIbH4/S9YzT9Yrnb13OgX6S0IqZRXMfA3t3W2nIsYGx19onYrePlzZi
-	Vg5Vl+I/rPEAUOzL1ZfQfXMHpzzqkfdD6ORSw1M1BAAopm3TukoiqfQ5M7Wwfz68Utpr
-	fBtDLifDtCQwszAde4X218APGtRLyH9xJDe2u/ZAoujDdP1ogau/dN1ItKsDxljeezZk
-	+yjsvcKF2cM3gPN35Nt1ru97MdCa1Eu9g9FedCruXykKdPIV2lEL3Ec2d3346GwxIrMc
-	ZfSe8GGsIh4o2nX/ZcRNl+z5xB9sdI3FbZ7/s6EXSeAZo+Dqsgw3Me1FBiFF9RzJqIsI
-	i0qw==
-X-Gm-Message-State: AODbwcB6HG98WEhf66tQKJ/toMw6mCtZ62n8cUs3jU5fJW47Rvg/uNhK
-	ZM7Sj4N/APs/jAFX
-X-Received: by 10.84.233.193 with SMTP id m1mr21678389pln.236.1496760639349;
-	Tue, 06 Jun 2017 07:50:39 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=paUisDBY63U94anT0fwf6c6HSmbklUWfTOTyCwvANEY=;
+	b=X8UCZNv+PbeuzRKo5hsU1EQAW1FtaPw5xzd3Jryqoz5W5dfBd8706Fs5w06/UeU7JD
+	y2uxXeS9SBZA9j/4LyPrcRype2HnSiaGdgRiJSWNpfCnVwX3oBbGqqu9OwgGF7jXbHVU
+	TxnB/VX9cNrfm+9B1wt+7FjqjIk76JaVK+3dNzMpIU2lV09hrTD518ZqxGHUu9es417P
+	L7Js+xPwe7orCUa3RIp5mN971+leoZhELtIwPO9pGGkJRPiyw75aBd8pKD8RAhGUgtRS
+	XfOkoDXdrb/2JMP+VT6z1+1+Q9pOjuoCJTz0BedfILT4pAElGqmJKSgFw4lhsKHfLaTH
+	ubJg==
+X-Gm-Message-State: AODbwcA3CX0zd0c4iwAA89xIZivsHXMxWh/3BXuCzD62bccMmeuV0SgT
+	yjRlf01jyAu0jIFH
+X-Received: by 10.99.165.78 with SMTP id r14mr5559927pgu.74.1496760640754;
+	Tue, 06 Jun 2017 07:50:40 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::748])
 	by smtp.gmail.com with ESMTPSA id
-	p89sm64412683pfk.67.2017.06.06.07.50.38
+	p89sm64412683pfk.67.2017.06.06.07.50.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 06 Jun 2017 07:50:38 -0700 (PDT)
+	Tue, 06 Jun 2017 07:50:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  6 Jun 2017 07:50:24 -0700
-Message-Id: <20170606145026.4204-1-raj.khem@gmail.com>
+Date: Tue,  6 Jun 2017 07:50:25 -0700
+Message-Id: <20170606145026.4204-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.0
-Subject: [meta-oe][PATCH V2 1/3] fwts: Bump SRCREV to latest past 17.03.00 release
+In-Reply-To: <20170606145026.4204-1-raj.khem@gmail.com>
+References: <20170606145026.4204-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/3] konkretcmpi: Update and fix build with latest oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,181 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jun 2017 14:50:38 -0000
+X-List-Received-Date: Tue, 06 Jun 2017 14:50:40 -0000
 
-Helps fixing build issues with gcc7
+Drop already upstreamed patch
+Use bbclassextend for deriving native recipe
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...e-poll.h-instead-of-deprecated-sys-poll.h.patch | 48 ++++++++++++++++++++++
- ...efine-__SWORD_TYPE-if-not-defined-by-libc.patch | 33 +++++++++++++++
- .../fwts/fwts/0003-Undefine-PAGE_SIZE.patch        | 30 ++++++++++++++
- meta-oe/recipes-test/fwts/fwts_git.bb              |  9 +++-
- 4 files changed, 118 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
+ .../konkretcmpi/konkretcmpi-native_0.9.2.bb        | 28 ----------------------
+ .../konkretcmpi/konkretcmpi_0.9.2.bb               |  6 ++++-
+ 2 files changed, 5 insertions(+), 29 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
 
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-new file mode 100644
-index 000000000..8ad078936
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-@@ -0,0 +1,48 @@
-+From 100a107a53d5dc9b0554252ac5dbf2c9330615e9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:25:09 -0700
-+Subject: [PATCH 1/3] Include poll.h instead of deprecated sys/poll.h
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_ipmi.c   | 3 ++-
-+ src/lib/src/fwts_pipeio.c | 2 +-
-+ 2 files changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lib/src/fwts_ipmi.c b/src/lib/src/fwts_ipmi.c
-+index cbb27611..70d11cfa 100644
-+--- a/src/lib/src/fwts_ipmi.c
-++++ b/src/lib/src/fwts_ipmi.c
-+@@ -18,10 +18,11 @@
-+  *
-+  */
-+ 
-++#include <poll.h>
-++
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #include <fcntl.h>
-+-#include <sys/poll.h>
-+ #include <sys/ioctl.h>
-+ #include <linux/ipmi.h>
-+ 
-+diff --git a/src/lib/src/fwts_pipeio.c b/src/lib/src/fwts_pipeio.c
-+index fd719640..bdc5b2ea 100644
-+--- a/src/lib/src/fwts_pipeio.c
-++++ b/src/lib/src/fwts_pipeio.c
-+@@ -30,9 +30,9 @@
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <paths.h>
-++#include <poll.h>
-+ 
-+ #include <sys/param.h>
-+-#include <sys/poll.h>
-+ #include <sys/types.h>
-+ #include <sys/wait.h>
-+ #include <errno.h>
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-new file mode 100644
-index 000000000..3b83ca57c
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-@@ -0,0 +1,33 @@
-+From 0e89127cd02ecd5ea4506b935cb2b59eb94107d2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:37:20 -0700
-+Subject: [PATCH 2/3] Define __SWORD_TYPE if not defined by libc
-+
-+__SWORD_TYPE is internal to glibc, therefore
-+check and define it if needed e.g. on musl
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_uefi.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/lib/src/fwts_uefi.c b/src/lib/src/fwts_uefi.c
-+index 1f9d31fa..2d925f8d 100644
-+--- a/src/lib/src/fwts_uefi.c
-++++ b/src/lib/src/fwts_uefi.c
-+@@ -59,6 +59,10 @@ typedef struct {
-+ #define UEFI_IFACE_SYSFS		(2)	/* sysfs */
-+ #define UEFI_IFACE_EFIVARS		(3)	/* efivar fs */
-+ 
-++#ifndef __SWORD_TYPE
-++typedef __typeof__( ((struct statfs *)0)->f_type )	__SWORD_TYPE;
-++#endif
-++
-+ /* File system magic numbers */
-+ #define PSTOREFS_MAGIC          ((__SWORD_TYPE)0x6165676C)
-+ #define EFIVARFS_MAGIC          ((__SWORD_TYPE)0xde5e81e4)
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
-new file mode 100644
-index 000000000..f84fbffd8
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
-@@ -0,0 +1,30 @@
-+From 0857269d5a053b5b4c31cfa01b6501526b24035f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:39:28 -0700
-+Subject: [PATCH 3/3] Undefine PAGE_SIZE
-+
-+musl defines PAGE_SIZE and build complains
-+of multiple definitions
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_acpi_tables.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 1d4fc705..71023ad2 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -42,6 +42,7 @@
-+ #define BIOS_START	(0x000e0000)		/* Start of BIOS memory */
-+ #define BIOS_END  	(0x000fffff)		/* End of BIOS memory */
-+ #define BIOS_LENGTH	(BIOS_END - BIOS_START)	/* Length of BIOS memory */
-++#undef PAGE_SIZE
-+ #define PAGE_SIZE	(4096)
-+ 
-+ static fwts_acpi_table_info	tables[ACPI_MAX_TABLES];
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 4c4ae66d6..6e83c3a20 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,11 +5,14 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
+deleted file mode 100644
+index 9b2ace9c4..000000000
+--- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi-native_0.9.2.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY = "Tool for rapid CMPI providers development"
+-DESCRIPTION = "\
+-KonkretCMPI makes CMPI provider development easier by generating type-safe \
+-concrete CIM interfaces from MOF definitions and by providing default \
+-implementations for many of the provider operations."
+-HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
+-DEPENDS = "cmake-native cmpi-bindings-native"
+-
+-SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
+-           file://konkretcmpi-0.9.2-fix-returning-instance-from-method.patch \
+-           file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch "
+-
+-SRCREV = "460e6421c16a8216d29ccd1b7490f814dab8b769"
+-S = "${WORKDIR}/git"
+-
+-inherit native cmake
+-LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
+-
+-EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
+-                 ${@base_conditional("libdir", "/usr/lib64", "-DLIB_SUFFIX=64", "", d)} \
+-                 ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+-                "
+-
+-do_install_append() {
+-    rm -rf ${D}${datadir}
+-}
+diff --git a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+index 4e4aa6cde..cbf04734e 100644
+--- a/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
++++ b/meta-oe/recipes-extended/konkretcmpi/konkretcmpi_0.9.2.bb
+@@ -6,7 +6,8 @@ implementations for many of the provider operations."
+ HOMEPAGE = "https://github.com/rnovacek/konkretcmpi"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=f673270bfc350d9ce1efc8724c6c1873"
+-DEPENDS = "swig-native sblim-cmpi-devel python"
++DEPENDS_append_class-target = " swig-native sblim-cmpi-devel python"
++DEPENDS_append_class-native = " cmpi-bindings-native"
  
--PV = "17.03.00"
-+PV = "17.03.00+git${SRCPV}"
+ SRC_URI = "git://github.com/rnovacek/konkretcmpi.git \
+            file://0001-CMakeLists.txt-fix-lib64-can-not-be-shiped-in-64bit-.patch \
+@@ -23,6 +24,8 @@ EXTRA_OECMAKE = "-DWITH_PYTHON=ON \
+                  ${@base_conditional("libdir", "/usr/lib32", "-DLIB_SUFFIX=32", "", d)} \
+                 "
  
--SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
-+SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-+           file://0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch \
-+           file://0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
-+           file://0003-Undefine-PAGE_SIZE.patch \
-            "
++LDFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
++
+ do_install_append() {
+     rm -rf ${D}${datadir}
+ }
+@@ -32,3 +35,4 @@ PACKAGES =+ "${PN}-python ${PN}-python-dbg"
+ FILES_${PN}-python = "${libdir}/python2.7/site-packages/konkretmof.py* ${libdir}/python2.7/site-packages/_konkretmof.so"
+ FILES_${PN}-python-dbg = "${libdir}/python2.7/site-packages/.debug/*"
  
- S = "${WORKDIR}/git"
-@@ -17,6 +20,8 @@ S = "${WORKDIR}/git"
- COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
- 
- DEPENDS = "libpcre json-c glib-2.0 dtc"
-+DEPENDS_append_libc-musl = " libexecinfo"
-+LDFLAGS_append_libc-musl = " -lexecinfo"
- 
- inherit autotools pkgconfig
- 
++BBCLASSEXTEND = "native"
 -- 
 2.13.0
 
