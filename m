@@ -1,24 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D2BD71A18
+Return-Path: <gcho-openembedded-devel@m.gmane.org>
+Received: from blaine.gmane.org (unknown [195.159.176.226])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE7371A8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jun 2017 05:42:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v575graZ004610
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 6 Jun 2017 22:42:54 -0700 (PDT)
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.294.0;
-	Tue, 6 Jun 2017 22:42:53 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 7 Jun 2017 13:42:51 +0800
-Message-ID: <1496814171-19938-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-networking][PATCH] ippool: add new recipe
+	Wed,  7 Jun 2017 06:55:33 +0000 (UTC)
+Received: from list by blaine.gmane.org with local (Exim 4.84_2)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1dIUsK-00045S-3N for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jun 2017 08:55:28 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <koen@dominion.thruhere.net>
+Date: Wed, 7 Jun 2017 08:55:25 +0200
+Message-ID: <oh880o$dpo$1@blaine.gmane.org>
+References: <20170606145026.4204-1-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@blaine.gmane.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:45.0)
+	Gecko/20100101 Thunderbird/45.8.0
+In-Reply-To: <20170606145026.4204-1-raj.khem@gmail.com>
+Subject: Re: [meta-oe][PATCH V2 1/3] fwts: Bump SRCREV to latest past 17.03.00 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,478 +31,183 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jun 2017 05:42:55 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 07 Jun 2017 06:55:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
-IpPool is a userspace daemon for managing one or more pools of IP
-addresses. It was developed as part of the OpenL2TP project but has
-since been repackaged so that it may be used independently of OpenL2TP.
+Op 06-06-17 om 16:50 schreef Khem Raj:
+> Helps fixing build issues with gcc7
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  ...e-poll.h-instead-of-deprecated-sys-poll.h.patch | 48 ++++++++++++++++++++++
+>  ...efine-__SWORD_TYPE-if-not-defined-by-libc.patch | 33 +++++++++++++++
+>  .../fwts/fwts/0003-Undefine-PAGE_SIZE.patch        | 30 ++++++++++++++
+>  meta-oe/recipes-test/fwts/fwts_git.bb              |  9 +++-
+>  4 files changed, 118 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
+>  create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
+>  create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
+> 
+> diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
+> new file mode 100644
+> index 000000000..8ad078936
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
+> @@ -0,0 +1,48 @@
+> +From 100a107a53d5dc9b0554252ac5dbf2c9330615e9 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Tue, 6 Jun 2017 07:25:09 -0700
+> +Subject: [PATCH 1/3] Include poll.h instead of deprecated sys/poll.h
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/lib/src/fwts_ipmi.c   | 3 ++-
+> + src/lib/src/fwts_pipeio.c | 2 +-
+> + 2 files changed, 3 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/src/lib/src/fwts_ipmi.c b/src/lib/src/fwts_ipmi.c
+> +index cbb27611..70d11cfa 100644
+> +--- a/src/lib/src/fwts_ipmi.c
+> ++++ b/src/lib/src/fwts_ipmi.c
+> +@@ -18,10 +18,11 @@
+> +  *
+> +  */
+> + 
+> ++#include <poll.h>
+> ++
+> + #include <sys/types.h>
+> + #include <sys/stat.h>
+> + #include <fcntl.h>
+> +-#include <sys/poll.h>
+> + #include <sys/ioctl.h>
+> + #include <linux/ipmi.h>
+> + 
+> +diff --git a/src/lib/src/fwts_pipeio.c b/src/lib/src/fwts_pipeio.c
+> +index fd719640..bdc5b2ea 100644
+> +--- a/src/lib/src/fwts_pipeio.c
+> ++++ b/src/lib/src/fwts_pipeio.c
+> +@@ -30,9 +30,9 @@
+> + #include <stdlib.h>
+> + #include <string.h>
+> + #include <paths.h>
+> ++#include <poll.h>
+> + 
+> + #include <sys/param.h>
+> +-#include <sys/poll.h>
+> + #include <sys/types.h>
+> + #include <sys/wait.h>
+> + #include <errno.h>
+> +-- 
+> +2.13.0
+> +
+> diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
+> new file mode 100644
+> index 000000000..3b83ca57c
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
+> @@ -0,0 +1,33 @@
+> +From 0e89127cd02ecd5ea4506b935cb2b59eb94107d2 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Tue, 6 Jun 2017 07:37:20 -0700
+> +Subject: [PATCH 2/3] Define __SWORD_TYPE if not defined by libc
+> +
+> +__SWORD_TYPE is internal to glibc, therefore
+> +check and define it if needed e.g. on musl
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/lib/src/fwts_uefi.c | 4 ++++
+> + 1 file changed, 4 insertions(+)
+> +
+> +diff --git a/src/lib/src/fwts_uefi.c b/src/lib/src/fwts_uefi.c
+> +index 1f9d31fa..2d925f8d 100644
+> +--- a/src/lib/src/fwts_uefi.c
+> ++++ b/src/lib/src/fwts_uefi.c
+> +@@ -59,6 +59,10 @@ typedef struct {
+> + #define UEFI_IFACE_SYSFS		(2)	/* sysfs */
+> + #define UEFI_IFACE_EFIVARS		(3)	/* efivar fs */
+> + 
+> ++#ifndef __SWORD_TYPE
+> ++typedef __typeof__( ((struct statfs *)0)->f_type )	__SWORD_TYPE;
+> ++#endif
+> ++
+> + /* File system magic numbers */
+> + #define PSTOREFS_MAGIC          ((__SWORD_TYPE)0x6165676C)
+> + #define EFIVARFS_MAGIC          ((__SWORD_TYPE)0xde5e81e4)
+> +-- 
+> +2.13.0
+> +
+> diff --git a/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
+> new file mode 100644
+> index 000000000..f84fbffd8
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
+> @@ -0,0 +1,30 @@
+> +From 0857269d5a053b5b4c31cfa01b6501526b24035f Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Tue, 6 Jun 2017 07:39:28 -0700
+> +Subject: [PATCH 3/3] Undefine PAGE_SIZE
+> +
+> +musl defines PAGE_SIZE and build complains
+> +of multiple definitions
+> +
+> +Upstream-Status: Pending
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/lib/src/fwts_acpi_tables.c | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
+> +index 1d4fc705..71023ad2 100644
+> +--- a/src/lib/src/fwts_acpi_tables.c
+> ++++ b/src/lib/src/fwts_acpi_tables.c
+> +@@ -42,6 +42,7 @@
+> + #define BIOS_START	(0x000e0000)		/* Start of BIOS memory */
+> + #define BIOS_END  	(0x000fffff)		/* End of BIOS memory */
+> + #define BIOS_LENGTH	(BIOS_END - BIOS_START)	/* Length of BIOS memory */
+> ++#undef PAGE_SIZE
+> + #define PAGE_SIZE	(4096)
+> + 
+> + static fwts_acpi_table_info	tables[ACPI_MAX_TABLES];
+> +-- 
+> +2.13.0
+> +
+> diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
+> index 4c4ae66d6..6e83c3a20 100644
+> --- a/meta-oe/recipes-test/fwts/fwts_git.bb
+> +++ b/meta-oe/recipes-test/fwts/fwts_git.bb
+> @@ -5,11 +5,14 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
+>  LICENSE = "GPLv2+"
+>  LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
+>  
+> -PV = "17.03.00"
+> +PV = "17.03.00+git${SRCPV}"
+>  
+> -SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
+> +SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
+>  SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
+>             file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
+> +           file://0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch \
+> +           file://0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
+> +           file://0003-Undefine-PAGE_SIZE.patch \
+>             "
+>  
+>  S = "${WORKDIR}/git"
+> @@ -17,6 +20,8 @@ S = "${WORKDIR}/git"
+>  COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
+>  
+>  DEPENDS = "libpcre json-c glib-2.0 dtc"
+> +DEPENDS_append_libc-musl = " libexecinfo"
+> +LDFLAGS_append_libc-musl = " -lexecinfo"
 
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
----
- .../ippool/ippool/always_syslog.patch              |  22 +++++
- .../recipes-daemons/ippool/ippool/ippool.service   |  19 ++++
- .../ippool/ippool/ippool_init.d.patch              |  65 +++++++++++++
- .../ippool/ippool_parallel_make_and_pic.patch      |  89 +++++++++++++++++
- .../ippool/ippool/ippool_usl_timer.patch           |  49 ++++++++++
- .../ippool/ippool/makefile-add-ldflags.patch       |  21 +++++
- .../recipes-daemons/ippool/ippool/runtest.sh       |  26 +++++
- .../recipes-daemons/ippool/ippool_1.3.bb           | 105 +++++++++++++++++++++
- 8 files changed, 396 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/always_syslog.patch
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/ippool.service
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/ippool_init.d.patch
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/ippool_parallel_make_and_pic.patch
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/ippool_usl_timer.patch
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/makefile-add-ldflags.patch
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool/runtest.sh
- create mode 100644 meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+Can you move the LDFLAGS to a more obvious like, like next to do_compile?
 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/always_syslog.patch b/meta-networking/recipes-daemons/ippool/ippool/always_syslog.patch
-new file mode 100644
-index 0000000..e475276
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/always_syslog.patch
-@@ -0,0 +1,22 @@
-+ippool: always log to syslog
-+
-+Even when running in the foreground, send log messages to syslog.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Joe Slater <jslater@windriver.com>
-+
-+
-+--- a/ippool_main.c
-++++ b/ippool_main.c
-+@@ -251,9 +251,8 @@ void ippool_vlog(int level, const char *
-+ 	if (ippool_opt_nodaemon) {
-+ 		vprintf(fmt, ap);
-+ 		printf("\n");
-+-	} else {
-+-		vsyslog(level, fmt, ap);
-+ 	}
-++	vsyslog(level, fmt, ap);
-+ 	DMALLOC_VMESSAGE(fmt, ap);
-+ }
-+ 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool.service b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
-new file mode 100644
-index 0000000..e5917fc
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/ippool.service
-@@ -0,0 +1,19 @@
-+[Unit]
-+Description=ip address pool allocator
-+Requires=rpcbind.service
-+After=rpcbind.service
-+
-+[Service]
-+Type=simple
-+# Start ippoold in the foreground!
-+ExecStart=@SBINDIR@/ippoold -f
-+# Normal output will go to syslog, so suppress stdout.
-+StandardOutput=null
-+StandardError=syslog
-+# ExecStop is not needed. systemd will send SIGTERM
-+# and ippoold will exit status 1.
-+SuccessExitStatus=1
-+
-+[Install]
-+WantedBy=multi-user.target
-+
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool_init.d.patch b/meta-networking/recipes-daemons/ippool/ippool/ippool_init.d.patch
-new file mode 100644
-index 0000000..14a768d
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/ippool_init.d.patch
-@@ -0,0 +1,65 @@
-+Fix start error if lsb init-functions doesn't exist
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
-+diff --git a/debian/init.d b/debian/init.d
-+index 363ba89..0327fec 100644
-+--- a/debian/init.d
-++++ b/debian/init.d
-+@@ -10,6 +10,9 @@
-+ # Description:       Start ippool daemon
-+ ### END INIT INFO
-+ 
-++# Source function library.
-++. /etc/init.d/functions
-++
-+ DAEMON=/usr/sbin/ippoold
-+ NAME=ippoold
-+ MODULE=pppol2tp
-+@@ -18,7 +21,23 @@ MODULE=pppol2tp
-+ test -x $DAEMON || exit 0
-+ 
-+ # Get lsb functions
-+-. /lib/lsb/init-functions
-++if [ -f /lib/lsb/init-functions ]
-++then
-++  . /lib/lsb/init-functions
-++else
-++  log_begin_msg() {
-++    echo -n $*
-++  }
-++
-++  log_end_msg() {
-++    if [ $1 -eq 0 ]; then
-++      echo "done"
-++    else
-++      echo "failed"
-++    fi
-++  }
-++fi
-++
-+ . /etc/default/rcS
-+ 
-+ case "$1" in
-+@@ -35,6 +54,10 @@ case "$1" in
-+     fi
-+     log_end_msg $?
-+     ;;
-++  status)
-++    status /usr/sbin/ippoold;
-++    exit $?
-++    ;;
-+   restart)
-+     $0 stop
-+     sleep 1
-+@@ -46,7 +69,7 @@ case "$1" in
-+     log_end_msg $?
-+     ;;
-+   *)
-+-    log_success_msg "Usage: /etc/init.d/ippoold {start|stop|restart|reload|force-reload}"
-++    log_success_msg "Usage: /etc/init.d/ippoold {start|stop|status|restart|reload|force-reload}"
-+     exit 1
-+ esac
-+ 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool_parallel_make_and_pic.patch b/meta-networking/recipes-daemons/ippool/ippool/ippool_parallel_make_and_pic.patch
-new file mode 100644
-index 0000000..1ebd95e
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/ippool_parallel_make_and_pic.patch
-@@ -0,0 +1,89 @@
-+1)add -fPIC for $(IPPOOL_RPC_STEM)_xdr.o, $(IPPOOL_RPC_STEM)_client.o
-+2)add sub target for subdirs-all, and those dependencies below
-+  pppd plugin directory build depends on $(IPPOOL_RPC_STEM)_xdr.o 
-+$(IPPOOL_RPC_STEM)_client.o ippool_rpc.h
-+
-+  ippoold depends on libusl
-+  ippoolconfig depends on libcli
-+
-+  $(IPPOOL_RPC_STEM)_xdr.o, $(IPPOOL_RPC_STEM)_client.o 
-+$(IPPOOL_RPC_STEM)_server.o *.o in main directory depends on ippool_rpc.h
-+as those all directly or indirectly include ippool_rpc.h which is 
-+dynamically generated by rpcgen
-+
-+to make parallel make working.
-+3)include dependency files for pppd.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-+---
-+diff --git a/Makefile b/Makefile
-+index 73aa72f..4f7af1d 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -106,14 +106,14 @@ all:			generated-files $(IPPOOL_RPC_STEM)_xdr.o $(IPPOOL_RPC_STEM)_client.o \
-+ 			subdirs-all $(PROGS.sbin) $(PROGS.bin)
-+ 
-+ # Compile without -Wall because rpcgen-generated code is full of warnings
-+-$(IPPOOL_RPC_STEM)_xdr.o:	$(IPPOOL_RPC_STEM)_xdr.c
-+-			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $<
-++$(IPPOOL_RPC_STEM)_xdr.o:	$(IPPOOL_RPC_STEM)_xdr.c $(IPPOOL_RPC_STEM).h
-++			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $< -fPIC
-+ 
-+-$(IPPOOL_RPC_STEM)_client.o:	$(IPPOOL_RPC_STEM)_client.c
-+-			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $<
-++$(IPPOOL_RPC_STEM)_client.o:	$(IPPOOL_RPC_STEM)_client.c $(IPPOOL_RPC_STEM).h
-++			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $< -fPIC
-+ 
-+-$(IPPOOL_RPC_STEM)_server.o:	$(IPPOOL_RPC_STEM)_server.c
-+-			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $<
-++$(IPPOOL_RPC_STEM)_server.o:	$(IPPOOL_RPC_STEM)_server.c $(IPPOOL_RPC_STEM).h
-++			$(CC) -I. -MMD -g -c -w $(CPPFLAGS) $(CFLAGS.optimize) $< -fPIC
-+ 
-+ $(IPPOOL_RPC_STEM)_xdr.c:	$(IPPOOL_RPC_STEM).x
-+ 			-$(RM) $@
-+@@ -136,8 +136,12 @@ $(IPPOOL_RPC_STEM).h:	$(IPPOOL_RPC_STEM).x
-+ 
-+ generated-files:	$(RPC_FILES)
-+ 
-+-subdirs-all:
-+-			@for d in $(SUBDIRS); do $(MAKE) -C $$d $(MFLAGS) EXTRA_CFLAGS="$(CPPFLAGS)" all; if [ $$? -ne 0 ]; then exit 1; fi; done
-++subdirs-all:	$(patsubst %,%-dir, $(SUBDIRS))
-++
-++pppd-dir: $(IPPOOL_RPC_STEM)_xdr.o $(IPPOOL_RPC_STEM)_client.o $(IPPOOL_RPC_STEM).h
-++
-++$(patsubst %,%-dir,$(SUBDIRS)):
-++			@for d in $(patsubst %-dir,%,$@); do $(MAKE) -C $$d $(MFLAGS) EXTRA_CFLAGS="$(CPPFLAGS)" all; if [ $$? -ne 0 ]; then exit 1; fi; done
-+ 
-+ clean:
-+ 			@for d in $(SUBDIRS); do $(MAKE) -C $$d $(MFLAGS) $@; if [ $$? -ne 0 ]; then exit 1; fi; done
-+@@ -151,13 +155,13 @@ TAGS:
-+ 			@for d in $(SUBDIRS); do $(MAKE) -C $$d $(MFLAGS) $@; done
-+ 			etags -t $(wildcard *.c) $(wildcard *.h)
-+ 
-+-ippoold:		$(IPPOOLD_SRCS.o)
-+-			$(CC) -o $@ $^ $(LDFLAGS.ippoold)
-++ippoold:		$(IPPOOLD_SRCS.o) usl-dir
-++			$(CC) -o $@ $(IPPOOLD_SRCS.o) $(LDFLAGS.ippoold)
-+ 
-+-ippoolconfig:		$(IPPOOLCONFIG_SRCS.o)
-+-			$(CC) -o $@ $^ $(LDFLAGS.ippoolconfig)
-++ippoolconfig:		$(IPPOOLCONFIG_SRCS.o) cli-dir
-++			$(CC) -o $@ $(IPPOOLCONFIG_SRCS.o) $(LDFLAGS.ippoolconfig)
-+ 
-+-%.o:	%.c
-++%.o:	%.c $(IPPOOL_RPC_STEM).h
-+ 			$(CC) -c $(CFLAGS) $< -o $@
-+ 
-+ install:		all
-+diff --git a/pppd/Makefile b/pppd/Makefile
-+index 78d9b33..106deca 100644
-+--- a/pppd/Makefile
-++++ b/pppd/Makefile
-+@@ -24,3 +24,5 @@ install: ippool.so
-+ 
-+ clean:
-+ 	-rm -rf *.o *.so
-++
-++include $(wildcard *.d /dev/null)
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/ippool_usl_timer.patch b/meta-networking/recipes-daemons/ippool/ippool/ippool_usl_timer.patch
-new file mode 100644
-index 0000000..ca0e332
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/ippool_usl_timer.patch
-@@ -0,0 +1,49 @@
-+include limits.h to avoid UINT_MAX undefined compiling error.
-+remove the unused assign which caused compiling error with -Werror.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yao Zhao <yao.zhao@windriver.com>
-+---
-+
-+diff --git a/usl/usl_timer.c b/usl/usl_timer.c
-+index 734b820..fda752b 100644
-+--- a/usl/usl_timer.c
-++++ b/usl/usl_timer.c
-+@@ -42,6 +42,7 @@
-+ #include <signal.h>
-+ #include <string.h>
-+ #include <sys/time.h>
-++#include <limits.h>
-+ 
-+ #include "usl.h"
-+ 
-+@@ -87,14 +88,13 @@ void (*usl_timer_tick_hook)(void);
-+  */
-+ void usl_timer_tick(void)
-+ {
-+-	int result;
-+ 	char msg = '\0';
-+ 
-+ 	usl_tick++;
-+ 
-+ 	if (!usl_tick_pending) {
-+ 		usl_tick_pending = 1;
-+-		result = write(usl_tick_pipe[1], &msg, sizeof(msg));
-++		write(usl_tick_pipe[1], &msg, sizeof(msg));
-+ 	}
-+ }
-+ 
-+@@ -111,11 +111,10 @@ static void usl_timer_tick_handler(int fd, void *arg)
-+ 	struct usl_ord_list_head *tmp;
-+ 	struct usl_list_head *iwalk;
-+ 	struct usl_list_head *itmp;
-+-	int result;
-+ 	char msg;
-+ 	USL_LIST_HEAD(expire_list);
-+ 
-+-	result = usl_fd_read(usl_tick_pipe[0], &msg, sizeof(msg));
-++	usl_fd_read(usl_tick_pipe[0], &msg, sizeof(msg));
-+ 	usl_tick_pending = 0;
-+ 
-+ 	usl_list_for_each(walk, tmp, &usl_timer_list) {
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/makefile-add-ldflags.patch b/meta-networking/recipes-daemons/ippool/ippool/makefile-add-ldflags.patch
-new file mode 100644
-index 0000000..7d5b715
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/makefile-add-ldflags.patch
-@@ -0,0 +1,21 @@
-+Add LDFLAGS variable to Makefile so that extra linker flags can be sent via this variable.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-+
-+diff --git a/Makefile b/Makefile
-+index 4f7af1d..a05a000 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -83,8 +83,8 @@ endif
-+ 
-+ CPPFLAGS=		$(CPPFLAGS.ippooltest)
-+ CFLAGS=			-I. -Iusl -Icli -MMD -Wall -g $(CPPFLAGS) $(CPPFLAGS.dmalloc)
-+-LDFLAGS.ippoold=	-Wl,-E -L. -Lusl -lusl -lnsl -ldl $(LIBS.dmalloc) -lc
-+-LDFLAGS.ippoolconfig=	-Lcli -lcli -lreadline -lcurses -lnsl $(LIBS.dmalloc) -lc
-++LDFLAGS.ippoold=	$(LDFLAGS) -Wl,-E -L. -Lusl -lusl -lnsl -ldl $(LIBS.dmalloc) -lc
-++LDFLAGS.ippoolconfig=	$(LDFLAGS) -Lcli -lcli -lreadline -lcurses -lnsl $(LIBS.dmalloc) -lc
-+ 
-+ OPT_CFLAGS?=		-O
-+ 
-diff --git a/meta-networking/recipes-daemons/ippool/ippool/runtest.sh b/meta-networking/recipes-daemons/ippool/ippool/runtest.sh
-new file mode 100644
-index 0000000..f91f582
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool/runtest.sh
-@@ -0,0 +1,26 @@
-+#!/bin/sh
-+BANNER="----------------------------------------------------------------------------"
-+TCLSH="tclsh all.tcl -preservecore 3 -verbose bps -tmpdir ./results -outfile test-ippool.result"
-+
-+test_setup() {
-+        if [ -d ./results ]; then rm -fr ./results; fi
-+        mkdir ./results
-+}
-+
-+test_ippool() {
-+        echo "${BANNER}"
-+        eval $TCLSH -constraints "ipPool"
-+}
-+test_postprocess() {
-+        echo "${BANNER}"
-+        (failed=`grep FAILED results/*.result | wc -l`; \
-+        let failed2=failed/2 ;\
-+        passed=`grep PASSED results/*.result | wc -l`; \
-+        echo "TEST SUMMARY: $passed tests PASSED, $failed2 tests FAILED" ;\
-+        exit $failed2)
-+}
-+
-+test_setup
-+test_ippool
-+test_postprocess
-+
-diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-new file mode 100644
-index 0000000..969f434
---- /dev/null
-+++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
-@@ -0,0 +1,105 @@
-+SUMMARY = "An IP address pool manager"
-+DESCRIPTION = "IpPool is implemented as a separate server daemon \
-+to allow any application to use its address pools. This makes it possible \
-+to define address pools that are shared by PPP, L2TP, PPTP etc. It may be \
-+useful in some VPN server setups. IpPool comes with a command line \
-+management application, ippoolconfig to manage and query address pool \
-+status. A pppd plugin is supplied which allows pppd to request IP \
-+addresses from ippoold. \
-+"
-+HOMEPAGE = "http://www.openl2tp.org/"
-+SECTION = "console/network"
-+LICENSE = "GPLv2+"
-+
-+SRC_URI = "\
-+        https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
-+        file://ippool_usl_timer.patch \
-+        file://ippool_parallel_make_and_pic.patch \
-+        file://ippool_init.d.patch \
-+        file://always_syslog.patch \
-+        file://makefile-add-ldflags.patch \
-+        file://runtest.sh \
-+        file://ippool.service \
-+        "
-+
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
-+SRC_URI[md5sum] = "e2401e65db26a3764585b97212888fae"
-+SRC_URI[sha256sum] = "d3eab7d6cad5da8ccc9d1e31d5303e27a39622c07bdb8fa3618eea314412075b"
-+
-+inherit systemd
-+
-+DEPENDS = "readline ppp ncurses gzip-native"
-+RDEPENDS_${PN} = "rpcbind"
-+
-+EXTRA_OEMAKE = "CC='${CC}' AS='${AS}' LD='${LD}' AR='${AR}' NM='${NM}' STRIP='${STRIP}'"
-+EXTRA_OEMAKE += "PPPD_VERSION=${PPPD_VERSION} SYS_LIBDIR=${libdir}"
-+# enable self tests
-+EXTRA_OEMAKE += "IPPOOL_TEST=y"
-+
-+
-+SYSTEMD_SERVICE_${PN} = "ippool.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-+
-+
-+do_compile_prepend() {
-+    # fix the CFLAGS= and CPPFLAGS= in main Makefile, to have the extra CFLAGS in env
-+    sed -i -e "s/^CFLAGS=/CFLAGS+=/" ${S}/Makefile
-+    sed -i -e "s/^CPPFLAGS=/CPPFLAGS+=/" ${S}/Makefile
-+
-+    sed -i -e "s:-I/usr/include/pppd:-I=/usr/include/pppd:" ${S}/pppd/Makefile
-+
-+    # ignore the OPT_CFLAGS?= in Makefile,
-+    # it should be in CFLAGS from env
-+    export OPT_CFLAGS=
-+}
-+
-+
-+do_install() {
-+    oe_runmake DESTDIR=${D} install
-+
-+    install -D -m 0755 ${S}/debian/init.d ${D}${sysconfdir}/init.d/ippoold
-+    install -D -m 0644 ${WORKDIR}/ippool.service ${D}${systemd_system_unitdir}/ippool.service
-+    sed -i -e 's:@SBINDIR@:${sbindir}:g' ${D}${systemd_system_unitdir}/ippool.service
-+
-+    # install self test
-+    install -d ${D}/opt/${BPN}
-+    install ${S}/test/all.tcl  ${S}/test/ippool.test \
-+        ${S}/test/test_procs.tcl ${D}/opt/${BPN}
-+    install ${WORKDIR}/runtest.sh ${D}/opt/${BPN}
-+    # fix the ../ippoolconfig in test_procs.tcl
-+    sed -i -e "s:../ippoolconfig:ippoolconfig:" \
-+        ${D}/opt/${BPN}/test_procs.tcl
-+}
-+
-+
-+PACKAGES =+ "${PN}-test"
-+
-+FILES_${PN} += "${libdir}/pppd/${PPPD_VERSION}/ippool.so"
-+FILES_${PN}-dbg += "${libdir}/pppd/${PPPD_VERSION}/.debug/ippool.so"
-+FILES_${PN}-test = "/opt/${BPN}"
-+
-+# needs tcl to run tests
-+RDEPENDS_${PN}-test += "tcl ${BPN}"
-+
-+PPPD_VERSION="${@get_ppp_version(d)}"
-+
-+def get_ppp_version(d):
-+    import re
-+
-+    pppd_plugin = d.expand('${STAGING_LIBDIR}/pppd')
-+    if not os.path.isdir(pppd_plugin):
-+        return None
-+
-+    bb.debug(1, "pppd plugin dir %s" % pppd_plugin)
-+    r = re.compile("\d*\.\d*\.\d*")
-+    for f in os.listdir(pppd_plugin):
-+        if os.path.isdir(os.path.join(pppd_plugin, f)):
-+            ma = r.match(f)
-+            if ma:
-+                bb.debug(1, "pppd version dir %s" % f)
-+                return f
-+            else:
-+                bb.debug(1, "under pppd plugin dir %s" % f)
-+
-+    return None
-+
--- 
-2.7.4
 
 
