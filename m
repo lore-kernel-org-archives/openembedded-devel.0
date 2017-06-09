@@ -1,30 +1,34 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C63977309A
+Return-Path: <fan.xin@jp.fujitsu.com>
+Received: from mgwym04.jp.fujitsu.com (mgwym04.jp.fujitsu.com [211.128.242.43])
+	by mail.openembedded.org (Postfix) with ESMTP id B273277D24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 01:06:47 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19831336"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jun 2017 09:06:42 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 81AFC47C7C69
+	Fri,  9 Jun 2017 05:44:35 +0000 (UTC)
+Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
+	mgwym04.jp.fujitsu.com with smtp
+	id 3f89_5153_4a3b9bbb_58da_42ca_b52e_9d510736f356;
+	Fri, 09 Jun 2017 14:44:30 +0900
+Received: from g01jpfmpwkw03.exch.g01.fujitsu.local
+	(g01jpfmpwkw03.exch.g01.fujitsu.local [10.0.193.57])
+	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 5E45EAC00F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 09:06:39 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Fri, 9 Jun 2017 09:06:40 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Fri,  9 Jun 2017 14:44:29 +0900 (JST)
+Received: from g01jpexchkw37.g01.fujitsu.local (unknown [10.0.193.4])
+	by g01jpfmpwkw03.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	4636DBD646B for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Jun 2017 14:44:28 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	g01jpexchkw37.g01.fujitsu.local (10.0.193.67) with Microsoft SMTP
+	Server id 14.3.266.1; Fri, 9 Jun 2017 14:44:28 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Jun 2017 09:06:25 +0800
-Message-ID: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Date: Fri, 9 Jun 2017 14:45:49 +0900
+Message-ID: <1496987149-7987-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 81AFC47C7C69.AAC78
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5] [PATCH] qtbase: add ptest
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-Encrypted: FENCE-Mail/3.1.1
+X-TM-AS-MML: disable
+Subject: [PATCH] openldap: Fix CVE-2017-9287
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,113 +41,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 01:06:50 -0000
+X-List-Received-Date: Fri, 09 Jun 2017 05:44:37 -0000
 Content-Type: text/plain
 
-Add ptest for qtbase  by using provided testsuite.
+servers/slapd/back-mdb/search.c in OpenLDAP through 2.4.44 is
+prone to a double free vulnerability. A user with access to
+search the directory can crash slapd by issuing a search including the
+Paged Results control with a page size of 0.
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Patch reference:
+http://www.openldap.org/its/?findid=8655
+
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
 ---
- .../0001-Delete-qlonglong-and-qulonglong.patch     | 28 ++++++++++++++++++++++
- recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
- recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
- 3 files changed, 50 insertions(+), 1 deletion(-)
- create mode 100644 recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
- create mode 100644 recipes-qt/qt5/qtbase/run-ptest
+ .../openldap/openldap/openldap-CVE-2017-9287.patch | 30 ++++++++++++++++++++++
+ .../recipes-support/openldap/openldap_2.4.44.bb    |  1 +
+ 2 files changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
 
-diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
 new file mode 100644
-index 0000000..975cd28
+index 0000000..93e9243
 --- /dev/null
-+++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-@@ -0,0 +1,28 @@
-+From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00 2001
-+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-+Date: Wed, 7 Jun 2017 21:00:49 +0900
-+Subject: [PATCH] Delete qlonglong and qulonglong
++++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
+@@ -0,0 +1,30 @@
++From e0e65f309dc0eb5582387acf1b2c2b5b3955f6b6 Mon Sep 17 00:00:00 2001
++From: Ryan Tandy <ryan@nardis.ca>
++Date: Wed, 17 May 2017 20:07:39 -0700
++Subject: [PATCH] Fix double free of search base with page size 0
 +
-+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
++CVE: CVE-2017-9287
++Upstream-Status: Submitted
++
++Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
 +---
-+ tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
-+ 1 file changed, 2 deletions(-)
++ servers/slapd/back-mdb/search.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
 +
-+diff --git a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-+index 09458bd..59a120e 100644
-+--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-+@@ -5,10 +5,8 @@ SUBDIRS=\
-+     char32_t \
-+     int \
-+     long \
-+-    qlonglong \
-+     qptrdiff \
-+     quintptr \
-+-    qulonglong \
-+     schar \
-+     short \
-+     uchar \
++diff --git a/servers/slapd/back-mdb/search.c b/servers/slapd/back-mdb/search.c
++index 009939d..d0db918 100644
++--- a/servers/slapd/back-mdb/search.c
+++++ b/servers/slapd/back-mdb/search.c
++@@ -1066,7 +1066,8 @@ notfound:
++ 			/* check size limit */
++ 			if ( get_pagedresults(op) > SLAP_CONTROL_IGNORED ) {
++ 				if ( rs->sr_nentries >= ((PagedResultsState *)op->o_pagedresults_state)->ps_size ) {
++-					mdb_entry_return( op, e );
+++					if (e != base)
+++						mdb_entry_return( op, e );
++ 					e = NULL;
++ 					send_paged_response( op, rs, &lastid, tentries );
++ 					goto done;
 +-- 
-+2.7.4
++2.1.4
 +
-diff --git a/recipes-qt/qt5/qtbase/run-ptest b/recipes-qt/qt5/qtbase/run-ptest
-new file mode 100644
-index 0000000..044f834
---- /dev/null
-+++ b/recipes-qt/qt5/qtbase/run-ptest
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+
-+for x in ` awk '{print $1}' tst_list `;do
-+    ./${x};
-+done
-+
-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 27d0de1..39fc272 100644
---- a/recipes-qt/qt5/qtbase_git.bb
-+++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -23,8 +23,12 @@ SRC_URI += "\
-     file://0005-configure-bump-path-length-from-256-to-512-character.patch \
-     file://0009-Disable-all-unknown-features-instead-of-erroring-out.patch \
-     file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
-+    file://0001-Delete-qlonglong-and-qulonglong.patch \
-+    file://run-ptest \
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
+index 4b7ed35..2d3cfc0 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
+@@ -25,6 +25,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
+     file://slapd.service \
+     file://thread_stub.patch \
+     file://openldap-CVE-2015-3276.patch \
++    file://openldap-CVE-2017-9287.patch \
  "
  
-+inherit ptest
-+
- # only for target qtbase
- SRC_URI += "\
-     file://0008-configure-paths-for-target-qmake-properly.patch \
-@@ -48,7 +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
- PACKAGECONFIG_RELEASE ?= "release"
- # This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
- # PACKAGECONFIG_OPENSSL ?= "openssl"
--PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype"
-+PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests"
- 
- PACKAGECONFIG ?= " \
-     ${PACKAGECONFIG_RELEASE} \
-@@ -170,6 +174,17 @@ do_configure() {
-         ${QT_CONFIG_FLAGS}
- }
- 
-+fakeroot do_install_ptest() {
-+    mkdir -p ${D}${PTEST_PATH}
-+    t=${D}${PTEST_PATH}
-+    for var in ` find ${B}/tests/auto/ -name tst_*`; do
-+        if [ not ` echo ${var##*/} | grep '\.'` ]; then
-+            echo ${var##*/} >> ${t}/tst_list
-+            install -m 0644 ${var} ${t}
-+        fi
-+    done
-+}
-+
- do_install_append() {
-     # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
-     touch ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
+ SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
 -- 
-2.7.4
-
-
+1.9.1
 
 
