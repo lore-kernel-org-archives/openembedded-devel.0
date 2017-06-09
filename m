@@ -1,51 +1,52 @@
 Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 38305782B0
+Received: from mail-it0-f45.google.com (mail-it0-f45.google.com
+	[209.85.214.45])
+	by mail.openembedded.org (Postfix) with ESMTP id BF33871951
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 14:34:04 +0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id i7so33837427ioe.1
+	Fri,  9 Jun 2017 17:32:06 +0000 (UTC)
+Received: by mail-it0-f45.google.com with SMTP id m47so2187847iti.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jun 2017 07:34:06 -0700 (PDT)
+	Fri, 09 Jun 2017 10:32:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=message-id:subject:from:to:cc:date:in-reply-to:references
 	:organization:mime-version:content-transfer-encoding;
-	bh=dhgEFg17in2gqwtRzgwa9l7DOkl2QG6Vxvj9uxI0YLg=;
-	b=Hk8imsKYZ2DzxjbOyOFdcqDVsr4rso4Hqzes6QxQEOBBjwIEW/LjDEW1rw7RgMhKnF
-	Wvylh4vjacyoSR6mm+LDCzocnSa1DlLIfIJ4z90gSyLIhZT/0jZYFZRjuRTt0N5TNM/P
-	oYhdWtnzo09uyq1ERiNeyGBZyCf6WooQW2WnpGrHJK+oE8B0pcT9Kv7bFTH0FVEv/oGK
-	GHtrYjPTc/oY0GlpbwuTWWfEG50qDBYTj/ErrGUhriIV00k1C8xpazkU4sVbSqYZ8fq0
-	UHuV+J55IXwTcuCr1I8lPIrVKOjTpabAwjrMIOVfK2NVS5ZeHePy/IVHqKsX55/k4wiR
-	V6FA==
+	bh=SEUQw/RFp5JuHgLKJ56kPPu01usS7D2DpbJyY17BBAY=;
+	b=YH56TfoRqoqnNHhxqoh6XUqetqCpTN30tWwyuyk+C2QGTSMxLX9KbwmyGkeTMD7/PT
+	YrFG+zZ9LK9L2FIakLPKRNO2Y3mW/O0XzQ14xNKuMwAy/2i1t5sKezENB4QNYCXum2cJ
+	eQ7yOLapljNLhzC0AAT0EONa1JI3cxI7xgY3lIWmqaczC8wjGkQw3jfE56D8GAHvoHUa
+	wj6ncvyr/luQVFBhlZ7SvgobjnENyv+SZ1bWzhxiaVDeqnZFiUMCtmrBqVleUXN8KzuO
+	QiojaHDx/JQ4AP7F8schKjTvDAE7LSE0jtH+XBooTPTCfeqqNTgE8M8BEDIojEqUfmFn
+	bRyQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
 	:references:organization:mime-version:content-transfer-encoding;
-	bh=dhgEFg17in2gqwtRzgwa9l7DOkl2QG6Vxvj9uxI0YLg=;
-	b=M9MVq9qR65bQjUoM8mo5MadC6XIC8ldzTM3oCoEFpisgLE3ae34JPasXXplY+5Ffke
-	Y/z5nHGi8xuy/qCgFNHxtUoJGb7/ncgmvSD+7cJHBJSGk78a18W0Zmh7Vq1ENOiCJeVV
-	sfVK3W+9T5jGapfmSAnIYmnGm5VV5x8/MzujJ3Da2IASnP38o2n1ttfMJDAJV2qHAo9G
-	WEDrnrpNN1Vi584YDoKNtzCD50/vvqyRSZsAUQJHmArv9OkF3IaK+45uZ5bEe4/2DNL5
-	asgykpiZVpB00+VZWfOZhQ23YyFYCziqbaDj64obNgAiE/+d1KLfFRS7GAcKroRdDnhY
-	GZBQ==
-X-Gm-Message-State: AODbwcDzxvJeWP6mmr8UaZ2KnMHSyAB27C/EzbO4tI0XgG6YjqtwaFiS
-	6LIfCY7uzTxUkjvH
-X-Received: by 10.107.170.103 with SMTP id t100mr34096231ioe.187.1497018845589;
-	Fri, 09 Jun 2017 07:34:05 -0700 (PDT)
+	bh=SEUQw/RFp5JuHgLKJ56kPPu01usS7D2DpbJyY17BBAY=;
+	b=WCz9hyIw5eHd1Gm8xJ1uXXC20/3qaTdKLXamJk8M2Mx6SINZv5Kci7F5Mw1tBbehq4
+	L1syoWfGRONfko1wDVRDS3h14gwfYQqrNnXfYV2u9K8B4wN2C0tv2ePmcYIWZ5ZaNxeB
+	qpL/WUc4jxUn2c9jGmVaENp6/erYcMDcGicsrDZD6u7dZ0pjuzBjtbc7IwzQoBW7LY20
+	5/jUrGCrqHm4rMR9ITzi/IFPoJECLMNTzg4QwCPGurK98IQgaQ41l1bojn5i95F2rOxZ
+	To+UjgrBom2oSVN5NdyulNL7FHvaBis+PNKXDXL06b6Ijb74fRp0HbQG/lTgjDu/3NNr
+	E8Sg==
+X-Gm-Message-State: AODbwcAG2JH6bSMXTtCY5uT0hsha9lHVTnbfHfRcVCi6bmrhB4h1dz9+
+	3KaKsvXzsGMR6XNd
+X-Received: by 10.36.123.5 with SMTP id q5mr699555itc.16.1497029528200;
+	Fri, 09 Jun 2017 10:32:08 -0700 (PDT)
 Received: from pohly-mobl1 (p5DE8C0DE.dip0.t-ipconnect.de. [93.232.192.222])
-	by smtp.gmail.com with ESMTPSA id e31sm513468ioi.51.2017.06.09.07.34.03
+	by smtp.gmail.com with ESMTPSA id w70sm131267itb.18.2017.06.09.10.32.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 09 Jun 2017 07:34:04 -0700 (PDT)
-Message-ID: <1497018842.30163.203.camel@intel.com>
+	Fri, 09 Jun 2017 10:32:06 -0700 (PDT)
+Message-ID: <1497029524.30163.219.camel@intel.com>
 From: Patrick Ohly <patrick.ohly@intel.com>
 To: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 09 Jun 2017 16:34:02 +0200
-In-Reply-To: <CAMKF1srK2nyrbJ8P_jzgAwHabhvMKWswxvAHm79xc+cEyaG0sA@mail.gmail.com>
+Date: Fri, 09 Jun 2017 19:32:04 +0200
+In-Reply-To: <1497018842.30163.203.camel@intel.com>
 References: <20170605172321.12557-1-acfoltzer@galois.com>
 	<8806ffa9be8f4516b3f29cc1be0ceaf3@XBOX02.axis.com>
 	<1496997797.30163.181.camel@intel.com>
 	<CAMKF1srK2nyrbJ8P_jzgAwHabhvMKWswxvAHm79xc+cEyaG0sA@mail.gmail.com>
+	<1497018842.30163.203.camel@intel.com>
 Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
 X-Mailer: Evolution 3.12.9-1+b1 
 Mime-Version: 1.0
@@ -65,80 +66,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 14:34:05 -0000
+X-List-Received-Date: Fri, 09 Jun 2017 17:32:08 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2017-06-09 at 13:24 +0000, Khem Raj wrote:
+On Fri, 2017-06-09 at 16:34 +0200, Patrick Ohly wrote:
+> On Fri, 2017-06-09 at 13:24 +0000, Khem Raj wrote:
+> > 
+> > On Fri, Jun 9, 2017 at 1:43 AM Patrick Ohly <patrick.ohly@intel.com>
+> > wrote:
+> > 
+> >         On Wed, 2017-06-07 at 21:44 +0000, Peter Kjellerstedt wrote:
+> >         > My guess is that the problem stems from the fact that
+> >         security_flags.inc
+> >         > adds -pie (which is a linker flag) to SECURITY_CFLAGS rather
+> >         than
+> >         > SECURITY_LDFLAGS...
+> >         
+> >         I think I've seen that cause problems elsewhere when the
+> >         CFLAGS came
+> >         after -shared, because then the compiler ended up trying to
+> >         produce a
+> >         pie executable instead of a shared library.
+> >         
+> >         Perhaps we should finally address that in security_flags.inc
+> >         instead of
+> >         working around it?
+> > 
+> > 
+> > This patch is removing -pie from compiler and linker flags which does
+> > not result in intended behavior for executable when linked they will
+> > not be using -pie
 > 
-> On Fri, Jun 9, 2017 at 1:43 AM Patrick Ohly <patrick.ohly@intel.com>
-> wrote:
+> The patch had some syntax errors (fixed version below), but it had the
+> code which adds -pie to TARGET_LDFLAGS when it is in SECURITY_CFLAGS, so
+> conceptually the flag shouldn't get lost entirely.
 > 
->         On Wed, 2017-06-07 at 21:44 +0000, Peter Kjellerstedt wrote:
->         > My guess is that the problem stems from the fact that
->         security_flags.inc
->         > adds -pie (which is a linker flag) to SECURITY_CFLAGS rather
->         than
->         > SECURITY_LDFLAGS...
->         
->         I think I've seen that cause problems elsewhere when the
->         CFLAGS came
->         after -shared, because then the compiler ended up trying to
->         produce a
->         pie executable instead of a shared library.
->         
->         Perhaps we should finally address that in security_flags.inc
->         instead of
->         working around it?
+> Are you saying that one cannot rely on TARGET_LDFLAGS being used during
+> linking?
 > 
+> I've tested with m4, and it seems to work okay:
 > 
-> This patch is removing -pie from compiler and linker flags which does
-> not result in intended behavior for executable when linked they will
-> not be using -pie
+> $ grep -w -e -pie tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/temp/log.do_compile
+> x86_64-refkit-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2 --sysroot=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot   -O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0=/usr/src/debug/m4/1.4.18-r0 -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot-native= -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot=  -fstack-protector-strong -fpie -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -pie -fstack-protector-strong -Wl,-z,relro,-z,now -o m4 m4.o builtin.o debug.o eval.o format.o freeze.o input.o macro.o output.o path.o symtab.o ../lib/libm4.a    
+> 
+> $ file tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-split/m4/usr/bin/m4 
+> tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-split/m4/usr/bin/m4: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=f10d0a26299dcb8c5bd0f1c82ed492aea2d8f0ac, stripped
+> 
+> I assume "ELF 64-bit LSB shared object" instead of "ELF 64-bit LSB
+> executable" means "pie executable"?
 
-The patch had some syntax errors (fixed version below), but it had the
-code which adds -pie to TARGET_LDFLAGS when it is in SECURITY_CFLAGS, so
-conceptually the flag shouldn't get lost entirely.
+While I don't think my patch caused -pie to get lost, unfortunately I
+now know that it still doesn't go into the right place in all cases. For
+example, ncurses puts LDFLAGS after -shared, thus triggering the "main
+undefined" error.
 
-Are you saying that one cannot rely on TARGET_LDFLAGS being used during
-linking?
+The TOOLCHAIN_OPTIONS that Khem mentioned get appended directly after
+the command, so that seems like a better place for -pie than LDFLAGS.
+It's still a bit odd to pass a linker flag to all compiler invocations,
+including those that do not link, but it might be a pragmatic solution
+that is better than what we have now.
 
-I've tested with m4, and it seems to work okay:
+However, my patch below now causes /usr/lib/libstdc++.a-gdb.py to be
+built for gcc-runtime, which triggers an error:
 
-$ grep -w -e -pie tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/temp/log.do_compile
-x86_64-refkit-linux-gcc  -m64 -march=corei7 -mtune=corei7 -mfpmath=sse -msse4.2 --sysroot=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot   -O2 -pipe -g -feliminate-unused-debug-types -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0=/usr/src/debug/m4/1.4.18-r0 -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot-native= -fdebug-prefix-map=/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot=  -fstack-protector-strong -fpie -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security  -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -pie -fstack-protector-strong -Wl,-z,relro,-z,now -o m4 m4.o builtin.o debug.o eval.o format.o freeze.o input.o macro.o output.o path.o symtab.o ../lib/libm4.a    
+ERROR: gcc-runtime-6.3.0-r0 do_package: QA Issue: gcc-runtime:
+Files/directories were installed but not shipped in any package:
+  /usr/lib/libstdc++.a-gdb.py
 
-$ file tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-split/m4/usr/bin/m4 
-tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-split/m4/usr/bin/m4: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=f10d0a26299dcb8c5bd0f1c82ed492aea2d8f0ac, stripped
-
-I assume "ELF 64-bit LSB shared object" instead of "ELF 64-bit LSB
-executable" means "pie executable"?
-
-diff --git a/meta/conf/distro/include/security_flags.inc b/meta/conf/distro/include/security_flags.inc
-index e162abeb3d9..b1781ceab42 100644
---- a/meta/conf/distro/include/security_flags.inc
-+++ b/meta/conf/distro/include/security_flags.inc
-@@ -12,6 +12,9 @@ lcl_maybe_fortify = "${@base_conditional('DEBUG_BUILD','1','','-D_FORTIFY_SOURCE
- # Error on use of format strings that represent possible security problems
- SECURITY_STRINGFORMAT ?= "-Wformat -Wformat-security -Werror=format-security"
- 
-+# For history reasons and simplicity, -pie is listed here as part of CFLAGS.
-+# In practice, it ends up getting used as part of LDFLAGS, as it should
-+# be because it is a linker flag.
- SECURITY_CFLAGS ?= "-fstack-protector-strong -pie -fpie ${lcl_maybe_fortify} ${SECURITY_STRINGFORMAT}"
- SECURITY_NO_PIE_CFLAGS ?= "-fstack-protector-strong ${lcl_maybe_fortify} ${SECURITY_STRINGFORMAT}"
- 
-@@ -94,8 +97,8 @@ SECURITY_STRINGFORMAT_pn-busybox = ""
- SECURITY_STRINGFORMAT_pn-gcc = ""
- SECURITY_STRINGFORMAT_pn-oh-puzzles = ""
- 
--TARGET_CFLAGS_append_class-target = " ${SECURITY_CFLAGS}"
--TARGET_LDFLAGS_append_class-target = " ${SECURITY_LDFLAGS}"
-+TARGET_CFLAGS_append_class-target = " ${@ oe.utils.str_filter_out('-pie', '${SECURITY_CFLAGS}', d) }"
-+TARGET_LDFLAGS_append_class-target = " ${@ oe.utils.str_filter('-pie', '${SECURITY_CFLAGS}', d) } ${SECURITY_LDFLAGS}"
- 
- SECURITY_LDFLAGS_remove_pn-gcc-runtime = "-fstack-protector-strong"
- SECURITY_LDFLAGS_remove_pn-glibc = "-fstack-protector-strong"
+That file is not present at all without the patch. If anyone has a clue
+about what might be causing that, I'm all ears...
 
 -- 
 Best Regards, Patrick Ohly
