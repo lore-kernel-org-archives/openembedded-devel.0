@@ -1,45 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 7125678259
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C63977309A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 00:31:13 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id a70so6089949pge.0
+	Fri,  9 Jun 2017 01:06:47 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="19831336"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Jun 2017 09:06:42 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 81AFC47C7C69
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jun 2017 17:31:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=t8WSDJnhYuqOZR2sRm5puDdVhi9uU1qULjjvK30RPn8=;
-	b=aUuHYt7dFdp1qZSWdzoH6wswZVezJWrkArUZDnSFXwG6zdLSQ0QBACrTOIeUhhcCl8
-	GnWnVI5tYDeQHFWscHGlSiQEhUeahbB7eV3FEqIfRzLrFKkj541c6WINO1FHGxMzOKxA
-	OVMU+gTsHXmdb5gyC9zQyQ5QO4Vh82KI2IPHogyIDYng+TX3zkRdZOFTUG8IYIBjZNch
-	BBxa6s79n48jkpFTM6gPlKRDLqidq28xPlHYBATm0VuD+Krd7htg71PflXN1OvTGLLZY
-	11neMBocVJRarloAqJ051nJq6iHjEHScpusQD/qrRw0sKQuW3nWLUr6b3Q0fwrB4O+St
-	4tqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=t8WSDJnhYuqOZR2sRm5puDdVhi9uU1qULjjvK30RPn8=;
-	b=Tfys5nhdKjwwdUeXJ3kl7bkanW0wxh6NG1AEE2pdsTOtyANkCPmQFcBoNCCom7lhCl
-	CFcAd2iWSDTGG2nroy5q9k50lEUc3vUMls9MdYqCYm8VZ7SanS5FHxyYV8YJ/OzfdekE
-	e7QEPhOVk5zgJvf/e8A7AqHusQWCRItBL4k/O7GpN0uNl6gg7BMXjaxjUEV8PjY9HNSo
-	Xmxu5qzo+Id2kjP2KJbGKEAlq7PbmCfsna/pWBnMhLU4fafFq7r31AlLuOLIMC78jsBg
-	xQ/t9KwL7b9XtHjsQV2djKhzu2rklHlJjXt85uRBaK6rktN1ucmCSuqcUxGIRXidyq5F
-	wL+w==
-X-Gm-Message-State: AODbwcBqcxkbAH4l6wNvjIOzoqNJB+uY/mpQ7Uv/GIp7dfov5s7XzE5m
-	7yH42J7tFxpwEJe8
-X-Received: by 10.84.231.130 with SMTP id g2mr38199989plk.2.1496968275179;
-	Thu, 08 Jun 2017 17:31:15 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::264a])
-	by smtp.gmail.com with ESMTPSA id
-	v3sm14804744pgn.56.2017.06.08.17.31.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Jun 2017 17:31:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Jun 2017 17:31:05 -0700
-Message-Id: <20170609003105.27828-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-oe][PATCH] espeak: Fix FTBFS due to narrowing warnings on 32bit x86
+	Fri,  9 Jun 2017 09:06:39 +0800 (CST)
+Received: from localhost.localdomain (10.167.226.81) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Fri, 9 Jun 2017 09:06:40 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 9 Jun 2017 09:06:25 +0800
+Message-ID: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [10.167.226.81]
+X-yoursite-MailScanner-ID: 81AFC47C7C69.AAC78
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-qt5] [PATCH] qtbase: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,90 +37,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 00:31:15 -0000
+X-List-Received-Date: Fri, 09 Jun 2017 01:06:50 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Add ptest for qtbase  by using provided testsuite.
+
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/espeak/espeak.inc          |  1 +
- .../espeak/files/gcc-narrowing-warning-fix.patch   | 56 ++++++++++++++++++++++
- 2 files changed, 57 insertions(+)
- create mode 100644 meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
+ .../0001-Delete-qlonglong-and-qulonglong.patch     | 28 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
+ recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
+ 3 files changed, 50 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+ create mode 100644 recipes-qt/qt5/qtbase/run-ptest
 
-diff --git a/meta-oe/recipes-support/espeak/espeak.inc b/meta-oe/recipes-support/espeak/espeak.inc
-index 97873f22e..60b3f73c8 100644
---- a/meta-oe/recipes-support/espeak/espeak.inc
-+++ b/meta-oe/recipes-support/espeak/espeak.inc
-@@ -4,6 +4,7 @@ LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
- 
- SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
-+           file://gcc-narrowing-warning-fix.patch \
- "
- SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
- SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
-diff --git a/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch b/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
+diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
 new file mode 100644
-index 000000000..2a9b4607d
+index 0000000..975cd28
 --- /dev/null
-+++ b/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
-@@ -0,0 +1,56 @@
-+From f09c83640b9173552fd9277c3a48619b903fa436 Mon Sep 17 00:00:00 2001
-+From: "Reece H. Dunn" <msclrhd@gmail.com>
-+Date: Wed, 20 Jan 2016 20:48:29 +0000
-+Subject: [PATCH] Fix GCC -Wnarrowing warnings.
++++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+@@ -0,0 +1,28 @@
++From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00 2001
++From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
++Date: Wed, 7 Jun 2017 21:00:49 +0900
++Subject: [PATCH] Delete qlonglong and qulonglong
 +
++Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 +---
-+ src/tr_languages.cpp | 7 ++++---
-+ src/translate.h    | 2 +-
-+ 2 files changed, 5 insertions(+), 4 deletions(-)
++ tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
++ 1 file changed, 2 deletions(-)
 +
-+Index: espeak-1.48.04-source/src/tr_languages.cpp
-+===================================================================
-+--- espeak-1.48.04-source.orig/src/tr_languages.cpp
-++++ espeak-1.48.04-source/src/tr_languages.cpp
-+@@ -198,8 +198,8 @@ static const unsigned short chars_ignore
-+ 	0x200d,  1, // zero width joiner
-+ 	0, 0 };
-+ 
-+-const char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
-+-
-++const unsigned char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
-++const unsigned char utf8_null[] = { 0 }; // null string, UTF-8
-+ 
-+ static Translator* NewTranslator(void)
-+ {//===================================
-+@@ -296,7 +296,7 @@ static const char transpose_map_latin[]
-+ 	tr->langopts.replace_chars = NULL;
-+ 	tr->langopts.ascii_language[0] = 0;    // Non-Latin alphabet languages, use this language to speak Latin words, default is English
-+ 	tr->langopts.alt_alphabet_lang = L('e','n');
-+-	tr->langopts.roman_suffix = "";
-++	tr->langopts.roman_suffix = utf8_null;
-+ 
-+ 	SetLengthMods(tr,201);
-+ //	tr->langopts.length_mods = length_mods_en;
-+@@ -758,7 +758,7 @@ Translator *SelectTranslator(const char
-+ 				tr->langopts.stress_flags = S_FINAL_SPANISH | S_FINAL_DIM_ONLY | S_FINAL_NO_2;
-+ 				tr->langopts.numbers = NUM_SINGLE_STRESS | NUM_DECIMAL_COMMA | NUM_AND_UNITS | NUM_OMIT_1_HUNDRED | NUM_OMIT_1_THOUSAND | NUM_ROMAN | NUM_ROMAN_ORDINAL;
-+ 				tr->langopts.numbers2 = NUM2_ORDINAL_NO_AND;
-+-				tr->langopts.roman_suffix = string_ordinal;
-++				tr->langopts.roman_suffix = utf8_null;
-+ 			}
-+ 			else
-+ 			if(name2 == L_pap)
-+Index: espeak-1.48.04-source/src/translate.h
-+===================================================================
-+--- espeak-1.48.04-source.orig/src/translate.h
-++++ espeak-1.48.04-source/src/translate.h
-+@@ -545,7 +545,7 @@ typedef struct {
-+ 	int decimal_sep;
-+ 	int max_digits;    // max number of digits which can be spoken as an integer number (rather than individual digits)
-+ 	const char *ordinal_indicator;   // UTF-8 string
-+-	const char *roman_suffix;    // add this (ordinal) suffix to Roman numbers (LANG=an)
-++	const unsigned char *roman_suffix;    // add this (ordinal) suffix to Roman numbers (LANG=an)
-+ 
-+ 	// bit 0, accent name before the letter name, bit 1 "capital" after letter name
-+ 	int accents;
++diff --git a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
++index 09458bd..59a120e 100644
++--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
++@@ -5,10 +5,8 @@ SUBDIRS=\
++     char32_t \
++     int \
++     long \
++-    qlonglong \
++     qptrdiff \
++     quintptr \
++-    qulonglong \
++     schar \
++     short \
++     uchar \
++-- 
++2.7.4
++
+diff --git a/recipes-qt/qt5/qtbase/run-ptest b/recipes-qt/qt5/qtbase/run-ptest
+new file mode 100644
+index 0000000..044f834
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/run-ptest
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++for x in ` awk '{print $1}' tst_list `;do
++    ./${x};
++done
++
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 27d0de1..39fc272 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -23,8 +23,12 @@ SRC_URI += "\
+     file://0005-configure-bump-path-length-from-256-to-512-character.patch \
+     file://0009-Disable-all-unknown-features-instead-of-erroring-out.patch \
+     file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0001-Delete-qlonglong-and-qulonglong.patch \
++    file://run-ptest \
+ "
+ 
++inherit ptest
++
+ # only for target qtbase
+ SRC_URI += "\
+     file://0008-configure-paths-for-target-qmake-properly.patch \
+@@ -48,7 +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
+ PACKAGECONFIG_RELEASE ?= "release"
+ # This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
+ # PACKAGECONFIG_OPENSSL ?= "openssl"
+-PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype"
++PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests"
+ 
+ PACKAGECONFIG ?= " \
+     ${PACKAGECONFIG_RELEASE} \
+@@ -170,6 +174,17 @@ do_configure() {
+         ${QT_CONFIG_FLAGS}
+ }
+ 
++fakeroot do_install_ptest() {
++    mkdir -p ${D}${PTEST_PATH}
++    t=${D}${PTEST_PATH}
++    for var in ` find ${B}/tests/auto/ -name tst_*`; do
++        if [ not ` echo ${var##*/} | grep '\.'` ]; then
++            echo ${var##*/} >> ${t}/tst_list
++            install -m 0644 ${var} ${t}
++        fi
++    done
++}
++
+ do_install_append() {
+     # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
+     touch ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
 -- 
-2.13.1
+2.7.4
+
+
 
 
