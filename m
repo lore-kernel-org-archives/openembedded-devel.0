@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 627267827F
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EAD47827F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 06:40:37 +0000 (UTC)
+	Fri,  9 Jun 2017 06:40:38 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v596ec2Y017993
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v596ed9c009197
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 8 Jun 2017 23:40:38 -0700 (PDT)
+	Thu, 8 Jun 2017 23:40:39 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 8 Jun 2017 23:40:37 -0700
+	14.3.294.0; Thu, 8 Jun 2017 23:40:39 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Jun 2017 14:40:31 +0800
-Message-ID: <c60989ac852737f86aa0ad3230496cd4384e86f4.1496990155.git.jackie.huang@windriver.com>
+Date: Fri, 9 Jun 2017 14:40:32 +0800
+Message-ID: <81051bc0f9cc4463b655fe177256ab9cdd84b438.1496990155.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1496990155.git.jackie.huang@windriver.com>
 References: <cover.1496990155.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/4] enscript: add new recipe
+Subject: [meta-oe][PATCH 3/4] logwarn: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,173 +33,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 06:40:40 -0000
+X-List-Received-Date: Fri, 09 Jun 2017 06:40:42 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-enscript is a plain ASCII to PostScript converter.
+logwarn is a utility for finding interesting messages
+in log files.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../enscript/enscript/enscript-autoconf.patch      | 118 +++++++++++++++++++++
- .../recipes-extended/enscript/enscript_1.6.6.bb    |  22 ++++
- 2 files changed, 140 insertions(+)
- create mode 100644 meta-oe/recipes-extended/enscript/enscript/enscript-autoconf.patch
- create mode 100644 meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+ meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb | 46 +++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+ create mode 100644 meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
 
-diff --git a/meta-oe/recipes-extended/enscript/enscript/enscript-autoconf.patch b/meta-oe/recipes-extended/enscript/enscript/enscript-autoconf.patch
+diff --git a/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb b/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
 new file mode 100644
-index 000000000..d3bb5c03a
+index 000000000..00e5d497b
 --- /dev/null
-+++ b/meta-oe/recipes-extended/enscript/enscript/enscript-autoconf.patch
-@@ -0,0 +1,118 @@
-+autoconf no longer supports AM_C_PROTOTYPES
-+
-+| configure.ac:14: error: automatic de-ANSI-fication support has been removed
-+| /bitbake_build/tmp/sysroots/x86_64-linux/usr/share/aclocal-1.12/protos.m4:10: AM_C_PROTOTYPES is expanded from...
-+
-+Upstream-Status: Pending
-+
-+Author: Mark Hatle <mark.hatle@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+Index: enscript-1.6.6/configure.ac
-+===================================================================
-+--- enscript-1.6.6.orig/configure.ac
-++++ enscript-1.6.6/configure.ac
-+@@ -11,7 +11,6 @@ AC_PROG_INSTALL
-+ AC_PROG_CC
-+ 
-+ AC_USE_SYSTEM_EXTENSIONS
-+-AM_C_PROTOTYPES
-+ 
-+ AC_C_CONST
-+ AC_FUNC_ALLOCA
-+Index: enscript-1.6.6/afmlib/afm.h
-+===================================================================
-+--- enscript-1.6.6.orig/afmlib/afm.h
-++++ enscript-1.6.6/afmlib/afm.h
-+@@ -24,11 +24,7 @@
-+ #define AFM_H
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ /**********************************************************************
-+Index: enscript-1.6.6/afmlib/afmint.h
-+===================================================================
-+--- enscript-1.6.6.orig/afmlib/afmint.h
-++++ enscript-1.6.6/afmlib/afmint.h
-+@@ -34,11 +34,7 @@
-+ #include <stdio.h>
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ #if STDC_HEADERS
-+Index: enscript-1.6.6/afmlib/strhash.h
-+===================================================================
-+--- enscript-1.6.6.orig/afmlib/strhash.h
-++++ enscript-1.6.6/afmlib/strhash.h
-+@@ -24,11 +24,7 @@
-+ #define STRHASH_H
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ typedef struct stringhash_st *StringHashPtr;
-+Index: enscript-1.6.6/compat/xalloc.h
-+===================================================================
-+--- enscript-1.6.6.orig/compat/xalloc.h
-++++ enscript-1.6.6/compat/xalloc.h
-+@@ -28,11 +28,7 @@
-+ #define XALLOC_H
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ void *xmalloc ___P ((size_t size));
-+Index: enscript-1.6.6/src/gsint.h
-+===================================================================
-+--- enscript-1.6.6.orig/src/gsint.h
-++++ enscript-1.6.6/src/gsint.h
-+@@ -39,11 +39,7 @@
-+ #include <sys/stat.h>
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ #if STDC_HEADERS
-+Index: enscript-1.6.6/states/defs.h
-+===================================================================
-+--- enscript-1.6.6.orig/states/defs.h
-++++ enscript-1.6.6/states/defs.h
-+@@ -37,11 +37,7 @@
-+ #include <ctype.h>
-+ 
-+ #ifndef ___P
-+-#if PROTOTYPES
-+ #define ___P(protos) protos
-+-#else /* no PROTOTYPES */
-+-#define ___P(protos) ()
-+-#endif /* no PROTOTYPES */
-+ #endif
-+ 
-+ #if STDC_HEADERS
-diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-new file mode 100644
-index 000000000..96129880a
---- /dev/null
-+++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "A plain ASCII to PostScript converter"
-+DESCRIPTION = "GNU enscript is a free replacement for Adobe''s Enscript \
-+program. Enscript converts ASCII files to PostScript(TM) and spools generated \
-+PostScript output to the specified printer or saves it to a file. Enscript can \
-+be extended to handle different output media and includes many options for \
-+customizing printouts."
-+HOMEPAGE = "http://www.gnu.org/software/enscript/"
++++ b/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
+@@ -0,0 +1,46 @@
++SUMMARY = "A utility for finding interesting messages in log files"
++DESCRIPTION = "Logwarn searches for interesting messages in log files, \
++  where 'interesting' is defined by a user-supplied list of positive and \
++  negative extended regular expressions. \
++"
++HOMEPAGE = "https://github.com/archiecobbs/logwarn/wiki"
 +SECTION = "console/utils"
 +
-+LICENSE = "GPLv3+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=f27defe1e96c2e1ecd4e0c9be8967949"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
 +
-+SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
-+           file://enscript-autoconf.patch \
-+"
++SRC_URI = "https://s3.amazonaws.com/archie-public/${BPN}/${BP}.tar.gz"
 +
-+inherit autotools gettext
++SRC_URI[md5sum] = "e544a6230673ea54f7430bf817bb39d8"
++SRC_URI[sha256sum] = "8dbfcf9b28c782ab3bddd6a620d4fb95d1b0ffcbe93276996cdc4800aa9aebd1"
 +
-+SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
-+SRC_URI[sha256sum] = "6d56bada6934d055b34b6c90399aa85975e66457ac5bf513427ae7fc77f5c0bb"
++inherit autotools-brokensep
 +
-+RDEPENDS_${PN} = "perl"
++# This directory is NOT volatile.
++#
++lcl_default_state_dir = "${localstatedir}/lib/logwarn"
++
++CFLAGS += '-DDEFAULT_STATE_DIR=\""${lcl_default_state_dir}\""'
++
++
++# Make sure some files exist for autoreconf.
++#
++do_configure_prepend () {
++    touch ${S}/NEWS
++    touch ${S}/ChangeLog
++    touch ${S}/README
++}
++
++# Create a directory for logfile state info, usually under /var/lib.
++#
++do_install_append () {
++    install -d ${D}${lcl_default_state_dir}
++}
++
++# Make a package for the nagios plug-in (script).
++#
++PACKAGES += "${PN}-nagios"
++
++FILES_${PN}-nagios = "${nonarch_libdir}/nagios"
++
++RDEPENDS_${PN}-nagios += "bash"
 -- 
 2.11.0
 
