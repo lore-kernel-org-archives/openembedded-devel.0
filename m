@@ -1,55 +1,59 @@
-Return-Path: <patrick.ohly@intel.com>
-Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
-	[209.85.223.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 36D6E7827E
+Return-Path: <samuli.piippo@gmail.com>
+Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
+	[209.85.215.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 74B0678289
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 08:43:21 +0000 (UTC)
-Received: by mail-io0-f181.google.com with SMTP id i7so30356769ioe.1
+	Fri,  9 Jun 2017 09:58:30 +0000 (UTC)
+Received: by mail-lf0-f47.google.com with SMTP id o83so27786327lff.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jun 2017 01:43:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=message-id:subject:from:to:cc:date:in-reply-to:references
-	:organization:mime-version:content-transfer-encoding;
-	bh=LBzuQ1O09iIhjW1ir6qwdU4dxaUgke4BUs6kCn7LPhY=;
-	b=1oEtC72qwIv0QMjVjUaQ9QCPUgVFv5jZSW6myiXeEhz9UNKeUclCGO/3mmMJBbBrEF
-	t2paVmcdX8DDfvONvhZfJbz0xtaTNAvDGXKxAO0rSxFZRGlT6E2a2ffZSbNhdOq3Z4NJ
-	fNfsgxo3k8i6QyLeTmWvrNlwlSCgbJmoS+V/4VvbNn3bGPZV9pLv+c4PvVrISGEY30G1
-	p4jWDkU1yuVVPykeimu+0txWHhtxxKZbpgXXXz721YnMSpxnSSbmVVhKd5nWb+uPlwpr
-	0k8HNT18O7L2OKFy8gLxr4+oOeBXicr4pSgKTJBMo9wxL2HArqKZ+vWsT22dG8b+JaWI
-	S4/Q==
+	Fri, 09 Jun 2017 02:58:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:cc:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-language:content-transfer-encoding;
+	bh=y3fdfaVi7EfRVFR1ZVnsgZgUM9h3YN5OtJScN92tkAw=;
+	b=tK+4VhI94/db9Tgr+sfxRFWKd0odWDoMHQv48mOFrXrVNk9QBpV8oyuNkkkXFkPyUA
+	k5LkugKkcjb6IXnX5jZcj5corplif6vl/Q67cUxDwvb/LkdfVZw8swai0CUSysKcTRFT
+	rojHahW8ZasU1vLk9Ji+0PexKzWDNTdAKkJU6Q72CiZmvALbgRMS+28q7UKMcZ+Ip5bG
+	qBe54gpB0QthJMiBXeDAWBQ/lDNcJMDvnjr/hlaD8gz6GVJs3g3Q/NTWiPHjtLV5IXkP
+	nhgltGnV7Oym5jGHmfxBtADmteSKkEYIIZLkQFLiNmWunuICVzw8oqAlNPAnaJphSojG
+	8lEw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:message-id:subject:from:to:cc:date:in-reply-to
-	:references:organization:mime-version:content-transfer-encoding;
-	bh=LBzuQ1O09iIhjW1ir6qwdU4dxaUgke4BUs6kCn7LPhY=;
-	b=jqsPuu4JAP51dRog8YsuMf1DZreNDsj/kr2rkQL7zQwIgWSXDwjaZ77zZ+FBpXUhVA
-	BEdb2n7HHHWvOUZJPuPidzrNNxEhQC7FPqTSB5n8zBPjktYh00Ar+I8XZnQXZxvzqYgU
-	h7lI3iaSLNuVJm+4HpwOy9Zfpn7jp0/1dWB8soFWbSu2YGYZaGJMLTPzHiESIXpzEvWi
-	4fjKfIxHfhGGa4NVU9ycRHWEiEyFHjMh5j8VyZgxpovR0YgfSl4CxEQAJ9oweUCvICst
-	Fy8usbJv1OZ1AMGeLIWycLEDL9aNE1JMWLrHihs/rTOi1Yx1tDzmAbkN1Y86XXd+4Zg1
-	G8Cw==
-X-Gm-Message-State: AODbwcDEnz6tsak90a6yKxAUJTXKwJiWhquzxSdoV3aimANISFmQyzb5
-	0UQaQq1h7P3IBwJl
-X-Received: by 10.107.142.82 with SMTP id q79mr12534811iod.99.1496997802982;
-	Fri, 09 Jun 2017 01:43:22 -0700 (PDT)
-Received: from pohly-mobl1 (p5DE8C0DE.dip0.t-ipconnect.de. [93.232.192.222])
-	by smtp.gmail.com with ESMTPSA id e32sm615024itd.18.2017.06.09.01.43.20
+	h=x-gm-message-state:subject:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=y3fdfaVi7EfRVFR1ZVnsgZgUM9h3YN5OtJScN92tkAw=;
+	b=Ofl7MRyn7obxnm1l0//B9WkBqvYcZHfO9viz9i91o2XCuVeGOEGgpXfsy7t/oTCa96
+	T/Jk7A70b7yKSbHK6KUemF9BxNGRUd+rFWZJUnC8jrBSTYGhpRLYN5EXFUH5gZMB9th6
+	4oQeDhKmb1K6uSyZxRxECdGPZ5yl+/2c1+71kst4Q6B9X1bzE6WoQxWod8ZaLKyambRo
+	LhyAeqaQCrS6UOplLlFGVG+ZYpaznZFoU9Hg4BRFV6zLrQnl38T09ZUdeEvBSgWkSPzq
+	D0Y048q/J9X27MTAb6tSkliMhWN0cU8DIFvkg39ZIJpXX3mPsBVHcWbK3njBMMzu+1H6
+	EGFA==
+X-Gm-Message-State: AODbwcDqUssX1Q+eQzjXl1TwY8SHmaSvbrGnW9deJb4qAxyVP4yIbABx
+	KZsfrUA8wbisCNmW
+X-Received: by 10.46.0.77 with SMTP id 74mr5907973lja.109.1497002310556;
+	Fri, 09 Jun 2017 02:58:30 -0700 (PDT)
+Received: from [10.9.21.51] ([192.89.120.53])
+	by smtp.googlemail.com with ESMTPSA id
+	r15sm154199ljd.44.2017.06.09.02.58.29
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 09 Jun 2017 01:43:22 -0700 (PDT)
-Message-ID: <1496997797.30163.181.camel@intel.com>
-From: Patrick Ohly <patrick.ohly@intel.com>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Date: Fri, 09 Jun 2017 10:43:17 +0200
-In-Reply-To: <8806ffa9be8f4516b3f29cc1be0ceaf3@XBOX02.axis.com>
-References: <20170605172321.12557-1-acfoltzer@galois.com>
-	<8806ffa9be8f4516b3f29cc1be0ceaf3@XBOX02.axis.com>
-Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: -pie in SECURITY_CFLAGS (was: Re: [meta-oe][PATCH 1/3] meson: update Meson devtool to 0.40.1)
+	Fri, 09 Jun 2017 02:58:29 -0700 (PDT)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <1496925018-5300-1-git-send-email-samuli.piippo@qt.io>
+	<91dc3ff5-ad3a-ff4c-163a-4b82bb721422@gmail.com>
+	<CA+chaQe9JFMTrZ8HcOPyVqj7VDvg4N_8VKGRf3X3vDuwC37f8w@mail.gmail.com>
+	<CA+chaQe=8hRDdymjoqn0wRo03XUF0cTdvNiLQTUuvqzLsL2Q2w@mail.gmail.com>
+	<CABXoSoWZBLfn4K2DcHED90U3Bvcj8GRLX9Qa5XL844hZB0+Tzg@mail.gmail.com>
+	<CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
+From: Samuli Piippo <samuli.piippo@gmail.com>
+Message-ID: <68f3ba42-b21d-9745-646a-258490464584@gmail.com>
+Date: Fri, 9 Jun 2017 12:58:28 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
+Subject: Re: [meta-qt5][PATCH v3] Upgrade to Qt 5.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,59 +66,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 08:43:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 09 Jun 2017 09:58:31 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2017-06-07 at 21:44 +0000, Peter Kjellerstedt wrote:
-> My guess is that the problem stems from the fact that security_flags.inc 
-> adds -pie (which is a linker flag) to SECURITY_CFLAGS rather than 
-> SECURITY_LDFLAGS...
+I could not say.
+The origin bugreport that changed this for QtWebEngine was 
+https://bugreports.qt.io/browse/QTBUG-59504
 
-I think I've seen that cause problems elsewhere when the CFLAGS came
-after -shared, because then the compiler ended up trying to produce a
-pie executable instead of a shared library.
-
-Perhaps we should finally address that in security_flags.inc instead of
-working around it?
-
-Here's an untested patch which puts -pie where it belongs in the final
-variables, without changing the pie/no pie API:
-
-diff --git a/meta/conf/distro/include/security_flags.inc b/meta/conf/distro/include/security_flags.inc
-index e162abeb3d9..b7b19355806 100644
---- a/meta/conf/distro/include/security_flags.inc
-+++ b/meta/conf/distro/include/security_flags.inc
-@@ -12,6 +12,9 @@ lcl_maybe_fortify = "${@base_conditional('DEBUG_BUILD','1','','-D_FORTIFY_SOURCE
- # Error on use of format strings that represent possible security problems
- SECURITY_STRINGFORMAT ?= "-Wformat -Wformat-security -Werror=format-security"
- 
-+# For history reasons and simplicity, -pie is listed here as part of CFLAGS.
-+# In practice, it ends up getting used as part of LDFLAGS, as it should
-+# be because it is a linker flag.
- SECURITY_CFLAGS ?= "-fstack-protector-strong -pie -fpie ${lcl_maybe_fortify} ${SECURITY_STRINGFORMAT}"
- SECURITY_NO_PIE_CFLAGS ?= "-fstack-protector-strong ${lcl_maybe_fortify} ${SECURITY_STRINGFORMAT}"
- 
-@@ -94,8 +97,8 @@ SECURITY_STRINGFORMAT_pn-busybox = ""
- SECURITY_STRINGFORMAT_pn-gcc = ""
- SECURITY_STRINGFORMAT_pn-oh-puzzles = ""
- 
--TARGET_CFLAGS_append_class-target = " ${SECURITY_CFLAGS}"
--TARGET_LDFLAGS_append_class-target = " ${SECURITY_LDFLAGS}"
-+TARGET_CFLAGS_append_class-target = " ${@ oe.utils.filter_out('-pie', '${SECURITY_CFLAGS}') }"
-+TARGET_LDFLAGS_append_class-target = " ${@ oe.utils.filter('-pie', '${SECURITY_CFLAGS}') } ${SECURITY_LDFLAGS}"
- 
- SECURITY_LDFLAGS_remove_pn-gcc-runtime = "-fstack-protector-strong"
- SECURITY_LDFLAGS_remove_pn-glibc = "-fstack-protector-strong"
-
--- 
-Best Regards, Patrick Ohly
-
-The content of this message is my personal opinion only and although
-I am an employee of Intel, the statements I make here in no way
-represent Intel's position on the issue, nor am I authorized to speak
-on behalf of Intel on this matter.
-
-
+On 09.06.2017 11:16, Martin Jansa wrote:
+> Then why does it work for chromium which used to have the same issue?
+> 
+> On Fri, Jun 9, 2017 at 7:15 AM, Samuli Piippo <samuli.piippo@gmail.com 
+> <mailto:samuli.piippo@gmail.com>> wrote:
+> 
+>     That's done on purpose, the tools are built with same bitness as the
+>     target.
+>     This is why you need to have gcc-multilib available on the build host.
+> 
+>     On Thu, Jun 8, 2017 at 10:50 PM, Martin Jansa
+>     <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>> wrote:
+>      > Still passes incorrect -m32 when building host tools on 64bit
+>     when the
+>      > target is 32bit e.g. qemux86
+>      >
+>      > http://errors.yoctoproject.org/Errors/Details/144181/
+>     <http://errors.yoctoproject.org/Errors/Details/144181/>
+>      >
+>      > On Thu, Jun 8, 2017 at 2:53 PM, Martin Jansa
+>     <martin.jansa@gmail.com <mailto:martin.jansa@gmail.com>> wrote:
+>      >>
+>      >> Thanks, will include v3 in next build.
+>      >>
+>      >> Full report with v2 included:
+>      >>
+>      >>
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2017-June/113073.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2017-June/113073.html>
+>      >>
+>      >> There is another issue in qtwebview, which should have the same
+>      >> restriction as qtwebengine otherwise for qemuarm it causes:
+>      >>
+>      >>     * ERROR: Nothing PROVIDES 'qtwebengine' (but
+>      >>
+>     /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtwebview_git.bb
+>     <http://qtwebview_git.bb>
+>      >> DEPENDS on or otherwise requires it)
+>      >>     * ERROR: qtwebengine was skipped: incompatible with machine
+>     qemuarm
+>      >> (not in COMPATIBLE_MACHINE)
+>      >>     * ERROR: Required build target 'meta-world-pkgdata' has no
+>     buildable
+>      >> providers.
+>      >>
+>      >>
+>      >>
+>      >> On Thu, Jun 8, 2017 at 2:47 PM, Samuli Piippo
+>     <samuli.piippo@gmail.com <mailto:samuli.piippo@gmail.com>>
+>      >> wrote:
+>      >>>
+>      >>> Patch updated to fix build issues with qtlocation and
+>     qtremoteobjects
+>      >>>
+>      >>> On 08.06.2017 15:30, Samuli Piippo wrote:
+>      >>>>
+>      >>>> * adapt QtWebEngine recipe to use GN instead of GYP
+>      >>>> * add QtRemoteObjects and QtWebView as a new Qt modules
+>      >>>> * update available QtBase configure arguments
+>      >>>> * remove obsolete patches
+>      >>>> * patch all .pc files to remove build paths
+>      >>>> * include generated QML cache files in packages
+>      >>>> * the patch "configure paths for target qmake properly" could not
+>      >>>>    be applied anymore and support must be done differently
+>      >>>>
+>      >>>> * QtWebEngine now requires gcc-multilib to be installed
+>      >>>>    on the host system
+>      >>>>
+>      >>>> Signed-off-by: Samuli Piippo <samuli.piippo@qt.io
+>     <mailto:samuli.piippo@qt.io>>
+>      >>>> ---
+>      >>>
+>      >>>
+>      >>> --
+>      >>> _______________________________________________
+>      >>> Openembedded-devel mailing list
+>      >>> Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>      >>>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>      >>
+>      >>
+>      >
+> 
+> 
 
 
