@@ -1,34 +1,24 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym04.jp.fujitsu.com (mgwym04.jp.fujitsu.com [211.128.242.43])
-	by mail.openembedded.org (Postfix) with ESMTP id B273277D24
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D4FFE71AE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 05:44:35 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
-	mgwym04.jp.fujitsu.com with smtp
-	id 3f89_5153_4a3b9bbb_58da_42ca_b52e_9d510736f356;
-	Fri, 09 Jun 2017 14:44:30 +0900
-Received: from g01jpfmpwkw03.exch.g01.fujitsu.local
-	(g01jpfmpwkw03.exch.g01.fujitsu.local [10.0.193.57])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 5E45EAC00F1
+	Fri,  9 Jun 2017 06:28:47 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v596Sl07009150
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 14:44:29 +0900 (JST)
-Received: from g01jpexchkw37.g01.fujitsu.local (unknown [10.0.193.4])
-	by g01jpfmpwkw03.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	4636DBD646B for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jun 2017 14:44:28 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	g01jpexchkw37.g01.fujitsu.local (10.0.193.67) with Microsoft SMTP
-	Server id 14.3.266.1; Fri, 9 Jun 2017 14:44:28 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
+	Thu, 8 Jun 2017 23:28:48 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 8 Jun 2017 23:28:47 -0700
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 9 Jun 2017 14:45:49 +0900
-Message-ID: <1496987149-7987-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Fri, 9 Jun 2017 14:28:44 +0800
+Message-ID: <cover.1496989437.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
-X-TM-AS-MML: disable
-Subject: [PATCH] openldap: Fix CVE-2017-9287
+Subject: [meta-python][PATCH 0/2] python3-django: add python3 recipes and update
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,73 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jun 2017 05:44:37 -0000
+X-List-Received-Date: Fri, 09 Jun 2017 06:28:48 -0000
 Content-Type: text/plain
 
-servers/slapd/back-mdb/search.c in OpenLDAP through 2.4.44 is
-prone to a double free vulnerability. A user with access to
-search the directory can crash slapd by issuing a search including the
-Paged Results control with a page size of 0.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Patch reference:
-http://www.openldap.org/its/?findid=8655
+--
+The following changes since commit 41cf832cc9abd6f2293a6d612463a34a53a9a52a:
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
----
- .../openldap/openldap/openldap-CVE-2017-9287.patch | 30 ++++++++++++++++++++++
- .../recipes-support/openldap/openldap_2.4.44.bb    |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
+  Revert "rrdtool: add gettext-native dependency" (2017-06-05 11:13:09 +0200)
 
-diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
-new file mode 100644
-index 0000000..93e9243
---- /dev/null
-+++ b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
-@@ -0,0 +1,30 @@
-+From e0e65f309dc0eb5582387acf1b2c2b5b3955f6b6 Mon Sep 17 00:00:00 2001
-+From: Ryan Tandy <ryan@nardis.ca>
-+Date: Wed, 17 May 2017 20:07:39 -0700
-+Subject: [PATCH] Fix double free of search base with page size 0
-+
-+CVE: CVE-2017-9287
-+Upstream-Status: Submitted
-+
-+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
-+---
-+ servers/slapd/back-mdb/search.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/servers/slapd/back-mdb/search.c b/servers/slapd/back-mdb/search.c
-+index 009939d..d0db918 100644
-+--- a/servers/slapd/back-mdb/search.c
-++++ b/servers/slapd/back-mdb/search.c
-+@@ -1066,7 +1066,8 @@ notfound:
-+ 			/* check size limit */
-+ 			if ( get_pagedresults(op) > SLAP_CONTROL_IGNORED ) {
-+ 				if ( rs->sr_nentries >= ((PagedResultsState *)op->o_pagedresults_state)->ps_size ) {
-+-					mdb_entry_return( op, e );
-++					if (e != base)
-++						mdb_entry_return( op, e );
-+ 					e = NULL;
-+ 					send_paged_response( op, rs, &lastid, tentries );
-+ 					goto done;
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-index 4b7ed35..2d3cfc0 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
-@@ -25,6 +25,7 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
-     file://slapd.service \
-     file://thread_stub.patch \
-     file://openldap-CVE-2015-3276.patch \
-+    file://openldap-CVE-2017-9287.patch \
- "
- 
- SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/r_up_python-django_170609_0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/r_up_python-django_170609_0
+
+Jackie Huang (2):
+  python3-django-south: add new recipe
+  python3-django: add python3 recipe and update to 1.11.2
+
+ .../recipes-devtools/python/python-django-south.inc   | 17 +++++++++++++++++
+ .../python/python-django-south_1.0.2.bb               | 19 ++-----------------
+ .../{python-django_1.10.5.bb => python-django.inc}    |  6 +++---
+ .../recipes-devtools/python/python-django_1.11.2.bb   |  2 ++
+ .../python/python3-django-south_1.0.2.bb              |  2 ++
+ .../recipes-devtools/python/python3-django_1.11.2.bb  |  2 ++
+ 6 files changed, 28 insertions(+), 20 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-django-south.inc
+ rename meta-python/recipes-devtools/python/{python-django_1.10.5.bb => python-django.inc} (75%)
+ create mode 100644 meta-python/recipes-devtools/python/python-django_1.11.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django-south_1.0.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_1.11.2.bb
+
 -- 
-1.9.1
+2.11.0
 
 
