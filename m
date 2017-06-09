@@ -1,45 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6850770016
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 7125678259
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jun 2017 23:56:56 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id f127so6026959pgc.2
+	Fri,  9 Jun 2017 00:31:13 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id a70so6089949pge.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jun 2017 16:56:58 -0700 (PDT)
+	Thu, 08 Jun 2017 17:31:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=aDZDX/omsAwEYutAoXI1p+bP+/oJbeSHSjTEQ/MdRE8=;
-	b=bWsPP06o1WoKBy25k8rNUGLWmS+h4CVAO8dyM3LgqPe5/S1iZl5sZ/XoT9x/hN6y+l
-	w7xTfwWhRTFk1aCLUKH/bM2qB4UdVi6xW/cY+kCj82U4L/wHh+GvTzKiR+jAvV6k5Vzk
-	ULK/roPdNtnR6ALxBBFrTgWAccTQKOoCMkCOgFv190yGg+rJbQgmhewnlBaDOIXMl0Lf
-	BZ8vomp+HICFIQ/ryJtIXGKI6+K0Sd07FoiRIhjnb49aSKt+JCTg1c+aVWszQKnSIrR+
-	fuplTWqQKVVelO+NZHhhcbTcHQiLqlJ+Km2iNFKto1qJqKXqJ9OAw9xfyASSl0lNoM2z
-	tAQQ==
+	bh=t8WSDJnhYuqOZR2sRm5puDdVhi9uU1qULjjvK30RPn8=;
+	b=aUuHYt7dFdp1qZSWdzoH6wswZVezJWrkArUZDnSFXwG6zdLSQ0QBACrTOIeUhhcCl8
+	GnWnVI5tYDeQHFWscHGlSiQEhUeahbB7eV3FEqIfRzLrFKkj541c6WINO1FHGxMzOKxA
+	OVMU+gTsHXmdb5gyC9zQyQ5QO4Vh82KI2IPHogyIDYng+TX3zkRdZOFTUG8IYIBjZNch
+	BBxa6s79n48jkpFTM6gPlKRDLqidq28xPlHYBATm0VuD+Krd7htg71PflXN1OvTGLLZY
+	11neMBocVJRarloAqJ051nJq6iHjEHScpusQD/qrRw0sKQuW3nWLUr6b3Q0fwrB4O+St
+	4tqw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=aDZDX/omsAwEYutAoXI1p+bP+/oJbeSHSjTEQ/MdRE8=;
-	b=s+fPUbTbBBFwBR+deK2fszPDyxla9ONrbqW79jGgEGq+unqDhyB98sWr0Hl+mIC4ar
-	vEKsn4nCMMhXYDfvhPSBVw+YQ9kJXy2gWHP8Gy0qeFj+VZPen1TKMOF/asy2yNJUNX8v
-	MV/Qhw5rQQdCAGN9OFVyB1O8lQFSwIY+CPCSgb2SBdeKEtYHNwD+p9B1lr6OY0nHe30x
-	t6akX7L/N5n90/TluMVdnkMv8WxYRzP2iVMtL7C6YQ5Sz50jJ74Npd7MR0VfDvDYQS2n
-	SqJ3XsdiIRXjrqKgSytXAWJklsJ0qlzjaDzwKk3dI3tWLEoRBrtHbYXmxmblIWDhtUNe
-	EUqQ==
-X-Gm-Message-State: AODbwcACdUm6/RElRnQPkKnepdGgDvF2qZOxSrTGqf8UsBEbanPaWAIz
-	hTVBBYT3G4L1T5jr
-X-Received: by 10.98.98.6 with SMTP id w6mr39464292pfb.67.1496966217762;
-	Thu, 08 Jun 2017 16:56:57 -0700 (PDT)
+	bh=t8WSDJnhYuqOZR2sRm5puDdVhi9uU1qULjjvK30RPn8=;
+	b=Tfys5nhdKjwwdUeXJ3kl7bkanW0wxh6NG1AEE2pdsTOtyANkCPmQFcBoNCCom7lhCl
+	CFcAd2iWSDTGG2nroy5q9k50lEUc3vUMls9MdYqCYm8VZ7SanS5FHxyYV8YJ/OzfdekE
+	e7QEPhOVk5zgJvf/e8A7AqHusQWCRItBL4k/O7GpN0uNl6gg7BMXjaxjUEV8PjY9HNSo
+	Xmxu5qzo+Id2kjP2KJbGKEAlq7PbmCfsna/pWBnMhLU4fafFq7r31AlLuOLIMC78jsBg
+	xQ/t9KwL7b9XtHjsQV2djKhzu2rklHlJjXt85uRBaK6rktN1ucmCSuqcUxGIRXidyq5F
+	wL+w==
+X-Gm-Message-State: AODbwcBqcxkbAH4l6wNvjIOzoqNJB+uY/mpQ7Uv/GIp7dfov5s7XzE5m
+	7yH42J7tFxpwEJe8
+X-Received: by 10.84.231.130 with SMTP id g2mr38199989plk.2.1496968275179;
+	Thu, 08 Jun 2017 17:31:15 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::264a])
 	by smtp.gmail.com with ESMTPSA id
-	p23sm12604298pfi.52.2017.06.08.16.56.56
+	v3sm14804744pgn.56.2017.06.08.17.31.13
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 08 Jun 2017 16:56:56 -0700 (PDT)
+	Thu, 08 Jun 2017 17:31:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  8 Jun 2017 16:56:41 -0700
-Message-Id: <20170608235641.16251-1-raj.khem@gmail.com>
+Date: Thu,  8 Jun 2017 17:31:05 -0700
+Message-Id: <20170609003105.27828-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.1
-Subject: [meta-oe][PATCH V4] fwts: Bump SRCREV to latest past 17.03.00 release
+Subject: [meta-oe][PATCH] espeak: Fix FTBFS due to narrowing warnings on 32bit x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,384 +52,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jun 2017 23:56:59 -0000
-
-Helps fixing build issues with gcc7
+X-List-Received-Date: Fri, 09 Jun 2017 00:31:15 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Koen Kooi <koen.kooi@linaro.org>
-Acked-by: Fathi Boudra <fathi.boudra@linaro.org>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
-v2 -> v3
-- move the LDFLAGS after CFLAGS
-v3 -> v4
-- Fix point-to-int incompatibilities seen on x86 with off_t being 64bit
-- Fix printf formatting issues
+ meta-oe/recipes-support/espeak/espeak.inc          |  1 +
+ .../espeak/files/gcc-narrowing-warning-fix.patch   | 56 ++++++++++++++++++++++
+ 2 files changed, 57 insertions(+)
+ create mode 100644 meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
 
- ...01-Add-correct-printf-qualifier-for-off_t.patch | 35 ++++++++++
- ...e-poll.h-instead-of-deprecated-sys-poll.h.patch | 48 ++++++++++++++
- ...-C99-defined-format-for-printing-uint64_t.patch | 53 +++++++++++++++
- ...efine-__SWORD_TYPE-if-not-defined-by-libc.patch | 33 ++++++++++
- .../fwts/fwts/0003-Undefine-PAGE_SIZE.patch        | 30 +++++++++
- ...ntptr_t-to-fix-pointer-to-int-cast-issues.patch | 76 ++++++++++++++++++++++
- meta-oe/recipes-test/fwts/fwts_git.bb              | 12 +++-
- 7 files changed, 285 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch b/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
+diff --git a/meta-oe/recipes-support/espeak/espeak.inc b/meta-oe/recipes-support/espeak/espeak.inc
+index 97873f22e..60b3f73c8 100644
+--- a/meta-oe/recipes-support/espeak/espeak.inc
++++ b/meta-oe/recipes-support/espeak/espeak.inc
+@@ -4,6 +4,7 @@ LICENSE = "GPLv3"
+ LIC_FILES_CHKSUM = "file://License.txt;md5=cb7a20edb4c9f5f478de6523dcd7362c"
+ 
+ SRC_URI = "http://downloads.sourceforge.net/espeak/espeak-1.48.04-source.zip \
++           file://gcc-narrowing-warning-fix.patch \
+ "
+ SRC_URI[md5sum] = "cadd7482eaafe9239546bdc09fa244c3"
+ SRC_URI[sha256sum] = "bf9a17673adffcc28ff7ea18764f06136547e97bbd9edf2ec612f09b207f0659"
+diff --git a/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch b/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
 new file mode 100644
-index 000000000..891185de6
+index 000000000..2a9b4607d
 --- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
-@@ -0,0 +1,35 @@
-+From 232daf5fca6fb52cced5e810f2601fe1a71b96d8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:49:50 -0700
-+Subject: [PATCH 1/3] Add correct printf qualifier for off_t
++++ b/meta-oe/recipes-support/espeak/files/gcc-narrowing-warning-fix.patch
+@@ -0,0 +1,56 @@
++From f09c83640b9173552fd9277c3a48619b903fa436 Mon Sep 17 00:00:00 2001
++From: "Reece H. Dunn" <msclrhd@gmail.com>
++Date: Wed, 20 Jan 2016 20:48:29 +0000
++Subject: [PATCH] Fix GCC -Wnarrowing warnings.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/bios/ebda_region/ebda_region.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/tr_languages.cpp | 7 ++++---
++ src/translate.h    | 2 +-
++ 2 files changed, 5 insertions(+), 4 deletions(-)
 +
-+diff --git a/src/bios/ebda_region/ebda_region.c b/src/bios/ebda_region/ebda_region.c
-+index 54768a95..fec04445 100644
-+--- a/src/bios/ebda_region/ebda_region.c
-++++ b/src/bios/ebda_region/ebda_region.c
-+@@ -83,7 +83,7 @@ static int ebda_test1(fwts_framework *fw)
-+ 	if ((entry != NULL) &&
-+ 	    (entry->type == FWTS_MEMORY_MAP_RESERVED ||
-+ 	     entry->type == FWTS_MEMORY_MAP_ACPI)) {
-+-		fwts_passed(fw, "EBDA region mapped at 0x%lx and reserved as a %" PRId64
-++		fwts_passed(fw, "EBDA region mapped at 0x%jdx and reserved as a %" PRId64
-+ 			"K region in the %s table at 0x%" PRIx64 "..0x%" PRIx64 ".",
-+ 			ebda_addr,
-+ 			(entry->end_address - entry->start_address) / 1024,
-+@@ -93,7 +93,7 @@ static int ebda_test1(fwts_framework *fw)
-+ 	} else
-+ 		fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 			"EBDAMappedNotReserved",
-+-			"EBDA region mapped at 0x%lx but not reserved in the %s table.",
-++			"EBDA region mapped at 0x%jdx but not reserved in the %s table.",
-+ 			ebda_addr, memory_map_name);
-+ 		
-+ 	return FWTS_OK;
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-new file mode 100644
-index 000000000..8ad078936
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-@@ -0,0 +1,48 @@
-+From 100a107a53d5dc9b0554252ac5dbf2c9330615e9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:25:09 -0700
-+Subject: [PATCH 1/3] Include poll.h instead of deprecated sys/poll.h
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_ipmi.c   | 3 ++-
-+ src/lib/src/fwts_pipeio.c | 2 +-
-+ 2 files changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lib/src/fwts_ipmi.c b/src/lib/src/fwts_ipmi.c
-+index cbb27611..70d11cfa 100644
-+--- a/src/lib/src/fwts_ipmi.c
-++++ b/src/lib/src/fwts_ipmi.c
-+@@ -18,10 +18,11 @@
-+  *
-+  */
++Index: espeak-1.48.04-source/src/tr_languages.cpp
++===================================================================
++--- espeak-1.48.04-source.orig/src/tr_languages.cpp
+++++ espeak-1.48.04-source/src/tr_languages.cpp
++@@ -198,8 +198,8 @@ static const unsigned short chars_ignore
++ 	0x200d,  1, // zero width joiner
++ 	0, 0 };
 + 
-++#include <poll.h>
-++
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #include <fcntl.h>
-+-#include <sys/poll.h>
-+ #include <sys/ioctl.h>
-+ #include <linux/ipmi.h>
++-const char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
++-
+++const unsigned char string_ordinal[] = {0xc2,0xba,0};  // masculine ordinal character, UTF-8
+++const unsigned char utf8_null[] = { 0 }; // null string, UTF-8
 + 
-+diff --git a/src/lib/src/fwts_pipeio.c b/src/lib/src/fwts_pipeio.c
-+index fd719640..bdc5b2ea 100644
-+--- a/src/lib/src/fwts_pipeio.c
-++++ b/src/lib/src/fwts_pipeio.c
-+@@ -30,9 +30,9 @@
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <paths.h>
-++#include <poll.h>
++ static Translator* NewTranslator(void)
++ {//===================================
++@@ -296,7 +296,7 @@ static const char transpose_map_latin[]
++ 	tr->langopts.replace_chars = NULL;
++ 	tr->langopts.ascii_language[0] = 0;    // Non-Latin alphabet languages, use this language to speak Latin words, default is English
++ 	tr->langopts.alt_alphabet_lang = L('e','n');
++-	tr->langopts.roman_suffix = "";
+++	tr->langopts.roman_suffix = utf8_null;
 + 
-+ #include <sys/param.h>
-+-#include <sys/poll.h>
-+ #include <sys/types.h>
-+ #include <sys/wait.h>
-+ #include <errno.h>
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch b/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
-new file mode 100644
-index 000000000..35ce883a2
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
-@@ -0,0 +1,53 @@
-+From 25f18b9ac37960dc12a3b648a5c866bd56ef2cbe Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:50:23 -0700
-+Subject: [PATCH 2/3] Add C99 defined format for printing uint64_t
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/opal/reserv_mem.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/opal/reserv_mem.c b/src/opal/reserv_mem.c
-+index eeec2947..f0672e05 100644
-+--- a/src/opal/reserv_mem.c
-++++ b/src/opal/reserv_mem.c
-+@@ -185,7 +185,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 		regions[j].start = (uint64_t)be64toh(ranges[2 * j]);
-+ 		regions[j].len = (uint64_t)be64toh(ranges[2 * j + 1]);
-+ 		fwts_log_info(fw, "Region name %80s"
-+-			" start: 0x%08lx, len: 0x%08lx\n",
-++			" start: 0x%08" PRIx64 ", len: 0x%08" PRIx64 "\n",
-+ 			regions[j].name, regions[j].start, regions[j].len);
-+ 	}
++ 	SetLengthMods(tr,201);
++ //	tr->langopts.length_mods = length_mods_en;
++@@ -758,7 +758,7 @@ Translator *SelectTranslator(const char
++ 				tr->langopts.stress_flags = S_FINAL_SPANISH | S_FINAL_DIM_ONLY | S_FINAL_NO_2;
++ 				tr->langopts.numbers = NUM_SINGLE_STRESS | NUM_DECIMAL_COMMA | NUM_AND_UNITS | NUM_OMIT_1_HUNDRED | NUM_OMIT_1_THOUSAND | NUM_ROMAN | NUM_ROMAN_ORDINAL;
++ 				tr->langopts.numbers2 = NUM2_ORDINAL_NO_AND;
++-				tr->langopts.roman_suffix = string_ordinal;
+++				tr->langopts.roman_suffix = utf8_null;
++ 			}
++ 			else
++ 			if(name2 == L_pap)
++Index: espeak-1.48.04-source/src/translate.h
++===================================================================
++--- espeak-1.48.04-source.orig/src/translate.h
+++++ espeak-1.48.04-source/src/translate.h
++@@ -545,7 +545,7 @@ typedef struct {
++ 	int decimal_sep;
++ 	int max_digits;    // max number of digits which can be spoken as an integer number (rather than individual digits)
++ 	const char *ordinal_indicator;   // UTF-8 string
++-	const char *roman_suffix;    // add this (ordinal) suffix to Roman numbers (LANG=an)
+++	const unsigned char *roman_suffix;    // add this (ordinal) suffix to Roman numbers (LANG=an)
 + 
-+@@ -248,7 +248,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in homer-image size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64 ", actual: 0x%" PRIx64 "",
-+ 					configstruct.homer, regions[j].len);
-+ 				ok = false;
-+ 			} else
-+@@ -261,7 +261,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in slw-image size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64 ", actual: 0x%" PRIx64 "",
-+ 					configstruct.slw, regions[j].len);
-+ 				ok = false;
-+ 			} else
-+@@ -274,7 +274,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in occ-common-area size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64", actual: 0x%" PRIx64"",
-+ 					configstruct.occ_common,
-+ 					regions[j].len);
-+ 				ok = false;
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-new file mode 100644
-index 000000000..3b83ca57c
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-@@ -0,0 +1,33 @@
-+From 0e89127cd02ecd5ea4506b935cb2b59eb94107d2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:37:20 -0700
-+Subject: [PATCH 2/3] Define __SWORD_TYPE if not defined by libc
-+
-+__SWORD_TYPE is internal to glibc, therefore
-+check and define it if needed e.g. on musl
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_uefi.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/lib/src/fwts_uefi.c b/src/lib/src/fwts_uefi.c
-+index 1f9d31fa..2d925f8d 100644
-+--- a/src/lib/src/fwts_uefi.c
-++++ b/src/lib/src/fwts_uefi.c
-+@@ -59,6 +59,10 @@ typedef struct {
-+ #define UEFI_IFACE_SYSFS		(2)	/* sysfs */
-+ #define UEFI_IFACE_EFIVARS		(3)	/* efivar fs */
-+ 
-++#ifndef __SWORD_TYPE
-++typedef __typeof__( ((struct statfs *)0)->f_type )	__SWORD_TYPE;
-++#endif
-++
-+ /* File system magic numbers */
-+ #define PSTOREFS_MAGIC          ((__SWORD_TYPE)0x6165676C)
-+ #define EFIVARFS_MAGIC          ((__SWORD_TYPE)0xde5e81e4)
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
-new file mode 100644
-index 000000000..f84fbffd8
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
-@@ -0,0 +1,30 @@
-+From 0857269d5a053b5b4c31cfa01b6501526b24035f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:39:28 -0700
-+Subject: [PATCH 3/3] Undefine PAGE_SIZE
-+
-+musl defines PAGE_SIZE and build complains
-+of multiple definitions
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_acpi_tables.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 1d4fc705..71023ad2 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -42,6 +42,7 @@
-+ #define BIOS_START	(0x000e0000)		/* Start of BIOS memory */
-+ #define BIOS_END  	(0x000fffff)		/* End of BIOS memory */
-+ #define BIOS_LENGTH	(BIOS_END - BIOS_START)	/* Length of BIOS memory */
-++#undef PAGE_SIZE
-+ #define PAGE_SIZE	(4096)
-+ 
-+ static fwts_acpi_table_info	tables[ACPI_MAX_TABLES];
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch b/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-new file mode 100644
-index 000000000..3cd3fbbc1
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-@@ -0,0 +1,76 @@
-+From d0d76820efe51dd404d381fc4c46544008e757dd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:50:59 -0700
-+Subject: [PATCH 3/3] use intptr_t to fix pointer-to-int-cast issues
-+
-+uintptr_t is guaranteed to be wide enough that
-+converting a void* to uintptr_t and back again
-+will yield the original pointer value
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_acpi_tables.c | 4 ++--
-+ src/lib/src/fwts_mmap.c        | 2 +-
-+ src/lib/src/fwts_smbios.c      | 4 ++--
-+ 3 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 832f8d66..d0006529 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -150,7 +150,7 @@ static fwts_acpi_table_rsdp *fwts_acpi_get_rsdp(fwts_framework *fw, void *addr,
-+ 	fwts_acpi_table_rsdp *rsdp = NULL;
-+ 	*rsdp_len = 0;
-+ 
-+-	if ((mem = fwts_mmap((off_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
-++	if ((mem = fwts_mmap((uintptr_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
-+ 		return NULL;
-+ 
-+ 	if (fwts_safe_memread(mem, sizeof(fwts_acpi_table_rsdp)) != FWTS_OK) {
-+@@ -456,7 +456,7 @@ static int fwts_acpi_load_tables_from_firmware(fwts_framework *fw)
-+ 	if ((rsdp = fwts_acpi_get_rsdp(fw, rsdp_addr, &rsdp_len)) == NULL)
-+ 		return FWTS_ERROR;
-+ 
-+-	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(off_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
-++	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(uintptr_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
-+ 
-+ 	/* Load any tables from XSDT if it's valid */
-+ 	if (rsdp->xsdt_address) {
-+diff --git a/src/lib/src/fwts_mmap.c b/src/lib/src/fwts_mmap.c
-+index a09f688e..9fe6329a 100644
-+--- a/src/lib/src/fwts_mmap.c
-++++ b/src/lib/src/fwts_mmap.c
-+@@ -81,7 +81,7 @@ int fwts_munmap(void *mem, const size_t size)
-+ 	off_t offset;
-+ 
-+ 	page_size = fwts_page_size();
-+-	offset = ((off_t)(mem)) & (page_size - 1);
-++	offset = ((uintptr_t)(mem)) & (page_size - 1);
-+ 
-+ 	if (munmap((void *)((uint8_t *)mem - offset), size + offset) < 0)
-+ 		return FWTS_ERROR;
-+diff --git a/src/lib/src/fwts_smbios.c b/src/lib/src/fwts_smbios.c
-+index 8d0ea39b..63b4bf25 100644
-+--- a/src/lib/src/fwts_smbios.c
-++++ b/src/lib/src/fwts_smbios.c
-+@@ -54,7 +54,7 @@ static void *fwts_smbios_find_entry_uefi(fwts_framework *fw, fwts_smbios_entry *
-+ 	if ((addr = fwts_scan_efi_systab("SMBIOS")) != NULL) {
-+ 		fwts_smbios_entry *mapped_entry;
-+ 
-+-		if ((mapped_entry = fwts_mmap((off_t)addr, sizeof(fwts_smbios_entry))) != FWTS_MAP_FAILED) {
-++		if ((mapped_entry = fwts_mmap((uintptr_t)addr, sizeof(fwts_smbios_entry))) != FWTS_MAP_FAILED) {
-+ 			*entry = *mapped_entry;
-+ 			(void)fwts_munmap(mapped_entry, sizeof(fwts_smbios_entry));
-+ 			*type  = FWTS_SMBIOS;
-+@@ -84,7 +84,7 @@ static void *fwts_smbios30_find_entry_uefi(fwts_framework *fw, fwts_smbios30_ent
-+ 	if ((addr = fwts_scan_efi_systab("SMBIOS3")) != NULL) {
-+ 		fwts_smbios30_entry *mapped_entry;
-+ 
-+-		if ((mapped_entry = fwts_mmap((off_t)addr, sizeof(fwts_smbios30_entry))) != FWTS_MAP_FAILED) {
-++		if ((mapped_entry = fwts_mmap((uintptr_t)addr, sizeof(fwts_smbios30_entry))) != FWTS_MAP_FAILED) {
-+ 			*entry = *mapped_entry;
-+ 			(void)fwts_munmap(mapped_entry, sizeof(fwts_smbios30_entry));
-+ 			return addr;
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 4c4ae66d6..87a23af19 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,11 +5,17 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "17.03.00"
-+PV = "17.03.00+git${SRCPV}"
- 
--SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
-+SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-+           file://0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch \
-+           file://0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
-+           file://0003-Undefine-PAGE_SIZE.patch \
-+           file://0001-Add-correct-printf-qualifier-for-off_t.patch \
-+           file://0002-Add-C99-defined-format-for-printing-uint64_t.patch \
-+           file://0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
-            "
- 
- S = "${WORKDIR}/git"
-@@ -17,10 +23,12 @@ S = "${WORKDIR}/git"
- COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
- 
- DEPENDS = "libpcre json-c glib-2.0 dtc"
-+DEPENDS_append_libc-musl = " libexecinfo"
- 
- inherit autotools pkgconfig
- 
- CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=unknown-pragmas"
-+LDFLAGS_append_libc-musl = " -lexecinfo"
- 
- FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
- FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
++ 	// bit 0, accent name before the letter name, bit 1 "capital" after letter name
++ 	int accents;
 -- 
 2.13.1
 
