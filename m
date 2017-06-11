@@ -1,49 +1,53 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 86D2C78204
+Return-Path: <trini@konsulko.com>
+Received: from mail-yb0-f181.google.com (mail-yb0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 7149D781F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 17:21:55 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id g76so17313384wrd.2
+	Sun, 11 Jun 2017 19:05:25 +0000 (UTC)
+Received: by mail-yb0-f181.google.com with SMTP id 202so23332288ybd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 10:21:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=h3X3FuhPNltm/XJE7UmAXrLk0oB5+KBaeyERfhZqCMM=;
-	b=AkQqwjBkBC1GnZPLpLJ/B0jwvfxMrjOy1dUb2TOL6Dn/qFVPr4S+k6uSnCO0TTuA1U
-	zJSWpJD4HHJ4tvzUXNI+L20OpNNC8Bvw/hH2EQd2Pk38nVWzIRe+z7dcKeAYGq3hEAqD
-	ZSWw7+Ikk8T0nVRjPqlopbAOTYCauJqmQriJGZCiiFQNlUG9abl6tMYLYP4Xsf5YZ1qI
-	xcdVjLUvS7GvF7EA8BbJcFTZh+pkv1BxAn/cAQbnLvtokvrps66nZKMXJHjgXwAUtzBj
-	0HiJRTUA342stpgzpBmZVL6lCQjt0WFbq6dm0UtNbvKJf8hS2JxaopAXywzyj/dna0vg
-	p3XQ==
+	Sun, 11 Jun 2017 12:05:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=8ZoZOP90ATu2RW8n0qxVFpCwFHxUu3zFK5HoW39U3ts=;
+	b=PlkH3L5a4HjnDWxu5RC8765tCIlhyntiMytiyaIpGCOJuf5MzjXoYGLrzWwvJ6u0Zo
+	hLFiXytS7+bPlNfvTUhmoLenUsNlo7NQo9fp04mYKKc7dp3O2y4xNbahz0FLmf88RSVw
+	kM/K26yRy9UVmuJFtZ2GrPU4YdLGEVOKKkYxU=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=h3X3FuhPNltm/XJE7UmAXrLk0oB5+KBaeyERfhZqCMM=;
-	b=Ej2uNW9D4RM+pwjEA4wXaw8WDs7WE1F1v+iwmd7nOTT5ntJauzOMiRNDg0jvZhvTl8
-	86MCQt8fF14uikOvokK47YDAeCkRv8nek4wsO718ygsTkuXVBEMtGbHfYggb/OAU2Y3c
-	n2KoPpm5EykXxGZMkhEp4driejIsTAyaD23hIS5pfH8Wk8Lzcs88ovQ0a0bheXNI4NHt
-	iWJWNdkQinH/Rx4EY0lAuDs+MBSYjTvsfVc/uVmI8lbjc7dGrdcVZwBiT0RSBltB3Uxr
-	8p/39qgxB6iatJ0LyPaevRiB+SNwH9iKi5WY9PV5A5eQiXW7L+QNDb147kynlo7iDglc
-	c6Mw==
-X-Gm-Message-State: AODbwcDRm0LIoVBYYEgjyysT6UGHS9+jz5FD6KiY61mnpx49pn7lMPBp
-	Oq9EsTfLj25Jl6OBw58ndh7Iuc2GIw==
-X-Received: by 10.80.137.36 with SMTP id e33mr26380644ede.67.1497201716356;
-	Sun, 11 Jun 2017 10:21:56 -0700 (PDT)
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=8ZoZOP90ATu2RW8n0qxVFpCwFHxUu3zFK5HoW39U3ts=;
+	b=hSE8KbiMXJyYppsGY430zDKuXyKdJcaA/5dhFJ7TD80t3n9rB30CJiGRXKOMdDBxdl
+	FfiBFz7e9KHWkmlcCCORChl2+9ykckAo8c5+yVxhMi1XKpjo0f1dQTqNIrDDifcK9FTU
+	gLPubxoKjgcLe6p9N+PfVtvVB01TCwxKbfq0njX0tnGZhE5LXRhqI0AWVeq39UiP1BwM
+	GBoJegi004NVRDkapmXh/VVlF20LfmQN48NS0ZzjPXb0ZVDcbES2rKSLTPe9Eb1Bgxq4
+	aZKzS4fNtzzmq1L9ERPdxFDVhBpNiIBlUf0ide9q8FHzEkvzlgxZ27Nmlqf5wCh33+8S
+	Kl/A==
+X-Gm-Message-State: AODbwcAkIbKjbfwD3cYMsTMrIk77qSkYlNoGqkKA3yXnUHrMU9ozJUo2
+	8u4R08zZ6h+LIOQ4
+X-Received: by 10.37.206.198 with SMTP id x189mr21273131ybe.46.1497207927240; 
+	Sun, 11 Jun 2017 12:05:27 -0700 (PDT)
+Received: from bill-the-cat (cpe-75-180-228-133.ec.res.rr.com.
+	[75.180.228.133]) by smtp.gmail.com with ESMTPSA id
+	y195sm1839925ywg.65.2017.06.11.12.05.26
+	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
+	Sun, 11 Jun 2017 12:05:26 -0700 (PDT)
+Date: Sun, 11 Jun 2017 15:05:46 -0400
+From: Tom Rini <trini@konsulko.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20170611190546.GV10782@bill-the-cat>
+References: <1497193576-3774-1-git-send-email-trini@konsulko.com>
+	<1497193576-3774-2-git-send-email-trini@konsulko.com>
+	<CAMKF1soYoKjRue_y6w=yjZRP5ByOkLcrtZ=RwBTfopammubT1w@mail.gmail.com>
+	<20170611165939.GT10782@bill-the-cat>
+	<CAMKF1sqCTT0qV0naEXPn=U+GRxaOR=oQb8euPruXOAr89FDxXA@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.80.153.222 with HTTP; Sun, 11 Jun 2017 10:21:25 -0700 (PDT)
-In-Reply-To: <CAGyDALkuRNgu-+JmUuSSKJ-H3pDXs1XiE43q5FJF-bAVhRDZ+Q@mail.gmail.com>
-References: <1497194825-16654-1-git-send-email-maryan.pricak@gmail.com>
-	<CAMKF1soPKfwffcWP2F72xt1JCtZ+iuUwSwEZ_ka+g0Un54xh-g@mail.gmail.com>
-	<CAGyDALkuRNgu-+JmUuSSKJ-H3pDXs1XiE43q5FJF-bAVhRDZ+Q@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Jun 2017 10:21:25 -0700
-Message-ID: <CAMKF1spmvg4Xz=X+ZRFPA68K0p9_ZgM=xMLPXOMQDF1Q-3E5Mw@mail.gmail.com>
-To: =?UTF-8?B?0JzQsNGAJ9GP0L0g0J/RgNGW0YbQsNC6?= <maryan.pricak@gmail.com>
+In-Reply-To: <CAMKF1sqCTT0qV0naEXPn=U+GRxaOR=oQb8euPruXOAr89FDxXA@mail.gmail.com>
+User-Agent: Mutt/1.5.21 (2010-09-15)
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] hiredis: Add recipe
+Subject: Re: [meta-oe][PATCH 2/2] debsums: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,31 +60,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 17:21:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 11 Jun 2017 19:05:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, Jun 11, 2017 at 9:21 AM, =D0=9C=D0=B0=D1=80'=D1=8F=D0=BD =D0=9F=D1=
-=80=D1=96=D1=86=D0=B0=D0=BA <maryan.pricak@gmail.com> wrote:
->
->
-> On Sun, Jun 11, 2017 at 7:01 PM Khem Raj <raj.khem@gmail.com> wrote:
->>
->> On Sun, Jun 11, 2017 at 8:27 AM, Marian Pritsak <maryan.pricak@gmail.com=
->
->> wrote:
->> > +do_install_prepend() {
->> > +  export PREFIX=3D/usr
->> > +  export INSTALL=3D'cp -r'
->> > +}
->>
->> can you explain why these changes are needed ?
->
->
-> By default INSTALL variable in Makefile is equal to 'cp -a', which preser=
-ves
-> ownership and causes host-user-contamination QA issue.
-> And PREFIX defaults to /usr/local.
+On Sun, Jun 11, 2017 at 10:20:38AM -0700, Khem Raj wrote:
+> On Sun, Jun 11, 2017 at 9:59 AM, Tom Rini <trini@konsulko.com> wrote:
+> >> order of directives seems a bit displaced, may be running
+> >> meta-openembedded/contrib/oe-stylize.py
+> >> will be good.
+> >
+> > I'm not sure about that, I copied the order here from prelink_git.bb in
+> > oe-core.  Unless you're referring to something outside of the -cron
+> > part?  Thanks!
+> 
+> prelink_git.bb might not be a perfect template for new recipes too. Since
+> this patch is adding a new recipe, I think its probably good to have known
+> structure for it. I am thinking PACKAGES and FILES variables should be
+> after do_install
 
-Thank you. Can you add this information to commit msg and send a new rev ?
+But with the rest up to still?
+
+-- 
+Tom
 
