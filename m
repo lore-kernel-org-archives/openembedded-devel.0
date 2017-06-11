@@ -1,47 +1,47 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wr0-f173.google.com (mail-wr0-f173.google.com
-	[209.85.128.173])
-	by mail.openembedded.org (Postfix) with ESMTP id 68CE078207
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D861C781EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 12:54:09 +0000 (UTC)
-Received: by mail-wr0-f173.google.com with SMTP id v104so71115935wrb.0
+	Sun, 11 Jun 2017 12:54:27 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id g76so16368608wrd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 05:54:10 -0700 (PDT)
+	Sun, 11 Jun 2017 05:54:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=Mx3jJKTM/5Yty5vWI/ZLKYtzSTKgzsKkEXl3RIm5+fk=;
-	b=SU+FhiMH5CGoDPHs5DNfk9MNcn06G40yJe4OSE8RPiNzN6hHaWXd+zFM3V4UX7+sJI
-	isZm8MWHouYrXZXE9nNR6N6Gen1ebmD3QuGdDb246zh/8b05AUw6LDssPC1Z+klgBWFX
-	ohTQaP8g3tUG2eAWLGUCHtm0JOdIQJQ6E0zD1Y07Lx78lLHoCeDTMhjDZUvzKRKZVTw+
-	pd4UwnaTutmUJEX/D/4qD7D2lAUhi9IxAa0ybMarnWkZqwD+T6KOWfDCBBieNHWMra/L
-	PaMumAQVyRCr0Zbk0J+fkZuwWdCSOXHRgJi31ga0fNht9SqK8LFhoDz2Ml5K9zSH6FZH
-	HqOQ==
+	bh=pQ4u7nrNDlV61D6lby/V0GRft/mFpyiBmX+q2RQjiOE=;
+	b=tOhxEljr+VAEtJ8HNPSA/RaFZRLu/Rx0JK4rak8goydbBnO+aJc8wf6M6IbzptIOrS
+	9vjpUnaeZjbRVr/W4czomjbkReNmvDzhhm8HOgLs4AMH0313NqCMJH3iDqXuZ8E3jwnk
+	xXNUvkTd5UiZFC8ISD50r7NRnjgQd4ui75lykWrz4YI3PqL3Q/fb0WnA1aSJ8nLw4yqr
+	L9A7emJdzmh43hV1abNnDwmkxrnB/6gX5aAfISOijzDqUE5MFohdZFcRsdjoiUifDT2t
+	GE3pJufFeWwP6dic6WXtUcdj1dPsXaReG1kyRQDNepYJBXljOugom67kkicjnLgG08Om
+	2mfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Mx3jJKTM/5Yty5vWI/ZLKYtzSTKgzsKkEXl3RIm5+fk=;
-	b=U20mrCMWBeItsf6PFmCjPnvL2Rn20BlsF6vi0iqViXI+EBph1Tk4HL+c6NMNX3byl9
-	/5NJ0it6wxwDkgQnEDmIs+0jDY28q/gdaGlP+SfbUEMeuvX6fVAfWzFei283G0Jdbg7g
-	b4cECIV0GdPlLdM5alCZcb3XbjYfaYwiXiSp6UWj1OGu1/yiOTmTyCKxEvWgIao6z0N6
-	9qLD4U7Rjh3WuD1nXCJDUYpsdqq916+/P1KtnEdnCnFlKouM7adbMVGoqORP0hI5APCT
-	jAeoX3U+YUJRq7TvZktm6ejsdtbnHFjgKzCyOnQvYS6h5CBbALQYtqenwV7MjT6Ih4aS
-	EtqA==
-X-Gm-Message-State: AODbwcAFouJ0z4sC8B4EPe5yJm/LrrnCJ23FT47ETYLSF7pTKrXKznMZ
-	Er+HQcqPSL7jLWSAqqk=
-X-Received: by 10.80.164.89 with SMTP id v25mr31027515edb.49.1497185649968;
-	Sun, 11 Jun 2017 05:54:09 -0700 (PDT)
+	bh=pQ4u7nrNDlV61D6lby/V0GRft/mFpyiBmX+q2RQjiOE=;
+	b=nZbCeCI5b1XJDx7HptV0WMWKEMItHv/ZRsfVpSRzSwYy2QcRHfbYuZeNKeKyAS2dCm
+	GJx1hkISrVAAVdbFaQwxK7+CV6nacaudhbH4rS4UMqCHNea5S2kDTLsavzYaiYvyrx/h
+	Yqp3ZxTYU0wAMLlkpVaHVlm9YcWAmpPzvDaNSwfmhxY8lB0XIqkDe3gbdFG8fTH5z5t9
+	Mt0UPDE7WibwGmAcfLtmRWBOv8hh1ufV4dvi0fyxibGuC+DImYjVhnqnzA5/OL7PFIFM
+	J9Vpp8yYrV54ICx8aHGcXeklX7ocf2gEeyRjJmHI5BYcQg4DQ2UzfMsALW4/gFMHGxpW
+	/O7g==
+X-Gm-Message-State: AODbwcCtiE5tk+PrNvuKdEOYR83stcjMgZhPXmcfJmCrgOZ2Aahl1ur7
+	supiwsMgJSmdBYXSvSA=
+X-Received: by 10.80.137.97 with SMTP id f30mr19722561edf.152.1497185668132;
+	Sun, 11 Jun 2017 05:54:28 -0700 (PDT)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([27.191.206.46]) by smtp.gmail.com with ESMTPSA id
-	j29sm3650235eda.26.2017.06.11.05.54.07
+	e17sm3785130ede.14.2017.06.11.05.54.26
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Jun 2017 05:54:09 -0700 (PDT)
+	Sun, 11 Jun 2017 05:54:27 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Jun 2017 14:54:02 +0200
-Message-Id: <1497185642-1678-1-git-send-email-liu.ming50@gmail.com>
+Date: Sun, 11 Jun 2017 14:54:20 +0200
+Message-Id: <1497185660-1837-1-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-oe] [PATCH] dos2unix: add recipe
+Subject: [meta-oe] [PATCH] dos2unix.bbclass: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 12:54:09 -0000
+X-List-Received-Date: Sun, 11 Jun 2017 12:54:28 -0000
 
 From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-The Dos2unix package includes utilities dos2unix and unix2dos to
-convert plain text files in DOS or Mac format to Unix format and
-vice versa.
+Class for use to convert all CRLF line terminators to LF provided
+that some projects are being developed/maintained on Windows so they
+have different line terminators(CRLF) vs on Linux(LF), which can
+cause annoying patching errors during git push/checkout processes.
 
 Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
 ---
- meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb | 34 ++++++++++++++++++++++
- 1 file changed, 34 insertions(+)
- create mode 100644 meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb
+ meta-oe/classes/dos2unix.bbclass | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
+ create mode 100644 meta-oe/classes/dos2unix.bbclass
 
-diff --git a/meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb b/meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb
+diff --git a/meta-oe/classes/dos2unix.bbclass b/meta-oe/classes/dos2unix.bbclass
 new file mode 100644
-index 0000000..f3d5173
+index 0000000..1bad998
 --- /dev/null
-+++ b/meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Convert text file line endings between CRLF and LF"
-+DESCRIPTION = "The Dos2unix package includes utilities dos2unix and \
-+unix2dos to convert plain text files in DOS or Mac format to Unix \
-+format and vice versa."
-+HOMEPAGE = "http://waterlan.home.xs4all.nl/dos2unix.html"
-+SECTION = "support"
++++ b/meta-oe/classes/dos2unix.bbclass
+@@ -0,0 +1,14 @@
++# Class for use to convert all CRLF line terminators to LF
++# provided that some projects are being developed/maintained
++# on Windows so they have different line terminators(CRLF) vs
++# on Linux(LF), which can cause annoying patching errors during
++# git push/checkout processes.
 +
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1b78fca784db24f4a40e30b300787f3f"
++do_convert_crlf_to_lf[depends] += "dos2unix-native:do_populate_sysroot"
 +
-+SRC_URI = "git://git.code.sf.net/p/dos2unix/dos2unix"
-+
-+# Release 7.3.4
-+SRCREV = "8381ba4e1c4cd5ce98ebd9c24726d51cb203cde0"
-+
-+S = "${WORKDIR}/git/dos2unix"
-+
-+inherit gettext perlnative
-+
-+# The dos2unix NLS relies on po4a-native, while po4a recipe is
-+# provided by meta-perl layer, so make it optional here, you
-+# need have meta-perl in bblayers.conf before enabling nls in
-+# PACKAGECONFIG.
-+PACKAGECONFIG ??= ""
-+PACKAGECONFIG[nls] = "ENABLE_NLS=1,ENABLE_NLS=,po4a-native"
-+
-+EXTRA_OEMAKE = "${PACKAGECONFIG_CONFARGS}"
-+EXTRA_OEMAKE_class-native = "ENABLE_NLS="
-+
-+do_install () {
-+    oe_runmake DESTDIR="${D}${base_prefix}" install
++# Convert CRLF line terminators to LF
++do_convert_crlf_to_lf () {
++    find ${S} -type f -exec dos2unix {} \;
 +}
 +
-+BBCLASSEXTEND = "native nativesdk"
++addtask convert_crlf_to_lf after do_unpack before do_patch
 -- 
 2.7.4
 
