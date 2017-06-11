@@ -1,41 +1,38 @@
 Return-Path: <tom.rini@gmail.com>
-Received: from mail-yb0-f174.google.com (mail-yb0-f174.google.com
-	[209.85.213.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 5BC947803F
+Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
+	[209.85.161.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 04DD87803F
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 11 Jun 2017 15:05:59 +0000 (UTC)
-Received: by mail-yb0-f174.google.com with SMTP id 202so22856836ybd.0
+Received: by mail-yw0-f196.google.com with SMTP id s127so33118ywg.3
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 11 Jun 2017 08:06:01 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=clK0On/Uk/1ZYSSpU6uk8aTIjHsy1GNseObLF23E3sw=;
-	b=rgQG4rL2oMAxsTtbZhPhJzRxmhBH08dtCjfsHn4auZacoJhFwi542de3HgPJ93J40K
-	Mq/Dld5lyA9WekRyAhYrmf69iLi65nQHbdZNouJZ/NGPyFu0WXHAXVLTZTSj6UBvl+YT
-	2lMTbNH3axZX5FhElBjUD6LJyYkoKRMzT+uB2DuZTKIyzEfagehONJdkdMJKVUVdAVPC
-	WeipVY3SQ3baRv8gx8u4mjL4hKvhdauO4qycMEUAhZs98zzXA2JUbBOKsHOCK1mm3fq8
-	xwtBVfAjLdhXOssbvQGg0mHnP/kM3nEYziLQ/CJklBhoMdk/xcbmsqMV/C0sopjKZj3H
-	upQQ==
-X-Gm-Message-State: AODbwcChTglSbsxebHnZvnqVbZ/itSm6dYyGQQtS+vDYc05jsMB2pPYQ
-	zIFhKbJje91GBgg1
-X-Received: by 10.37.174.65 with SMTP id g1mr21929554ybe.137.1497193561092;
-	Sun, 11 Jun 2017 08:06:01 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=gWa2CvHyygNKgBvXFoGeZ52kmDlQlET48tg34yOVkd4=;
+	b=omZa45dV2OeDnJGndxQsLvXRWD3J0N7Ck43xwd6iq5xhblyJAmAWXiu3NmnZHH3izK
+	z73qC+L5lKoVvDhOu+hCZlDOFRb74SNZcAdQslLwG5T8Fo5fmpj9OACzoN/2enN0kL9F
+	c9ecc15wknWAtwfpDrqNxDkBtAOZgISTZBDe2lC38N+QgpaNwET31i/ijLbQTNo3ta65
+	LHMnDq44y9TJ3HmrslwRk4wqGG/Py/xEaNBn8rpC7VhX86YGAIHLPE/ozoAvJyTlldzM
+	r7g4pPpt2nqxVElmLEu21dOw16kUqx1KncsYlHfno2zyf3lYdou0ru5t8zy4aZHReEKr
+	60eQ==
+X-Gm-Message-State: AODbwcAHWLSs8WcJqNneWWUlKyaX8Mj5pqpPI7pLcOj9iK5l7VBMa8Ex
+	0GyGgnBXAoI6yi1q
+X-Received: by 10.129.174.81 with SMTP id g17mr16534745ywk.53.1497193560305;
+	Sun, 11 Jun 2017 08:06:00 -0700 (PDT)
 Received: from localhost.localdomain (cpe-75-180-228-133.ec.res.rr.com.
 	[75.180.228.133]) by smtp.gmail.com with ESMTPSA id
-	b187sm2818097ywd.2.2017.06.11.08.06.00
+	b187sm2818097ywd.2.2017.06.11.08.05.59
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Jun 2017 08:06:00 -0700 (PDT)
+	Sun, 11 Jun 2017 08:05:59 -0700 (PDT)
 From: Tom Rini <trini@konsulko.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Jun 2017 11:06:16 -0400
-Message-Id: <1497193576-3774-2-git-send-email-trini@konsulko.com>
+Date: Sun, 11 Jun 2017 11:06:15 -0400
+Message-Id: <1497193576-3774-1-git-send-email-trini@konsulko.com>
 X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1497193576-3774-1-git-send-email-trini@konsulko.com>
-References: <1497193576-3774-1-git-send-email-trini@konsulko.com>
-Subject: [meta-oe][PATCH 2/2] debsums: New recipe
+Subject: [meta-oe][PATCH 1/2] libfile-fnmatch-perl: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,77 +45,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 15:06:00 -0000
+X-List-Received-Date: Sun, 11 Jun 2017 15:06:02 -0000
 
-A tool for verification of installed package files against MD5 checksums
-debsums can verify the integrity of installed package files against MD5
-checksums installed by the package, or generated from a .deb archive.
+File::FnMatch::fnmatch() provides simple, shell-like pattern matching.
+
+Though considerably less powerful than regular expressions, shell patterns
+are nonetheless useful and familiar to a large audience of end-users.
 
 Signed-off-by: Tom Rini <trini@konsulko.com>
 ---
- meta-oe/recipes-support/debsums/debsums_2.2.2.bb | 53 ++++++++++++++++++++++++
- 1 file changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/debsums/debsums_2.2.2.bb
+ .../perl/libfile-fnmatch-perl_0.02.bb              | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
 
-diff --git a/meta-oe/recipes-support/debsums/debsums_2.2.2.bb b/meta-oe/recipes-support/debsums/debsums_2.2.2.bb
+diff --git a/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
 new file mode 100644
-index 000000000000..9713ae22784e
+index 000000000000..035fe9f654e9
 --- /dev/null
-+++ b/meta-oe/recipes-support/debsums/debsums_2.2.2.bb
-@@ -0,0 +1,53 @@
-+SUMMARY = "Miscellaneous utilities specific to Debian"
-+DESCRIPTION = "A tool for verification of installed package files against \
-+MD5 checksums debsums can verify the integrity of installed package files \
-+against MD5 checksums installed by the package, or generated from a .deb \
-+archive."
++++ b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Perl module that provides simple filename and pathname matching"
++DESCRIPTION = "File::FnMatch::fnmatch() provides simple, shell-like pattern \
++matching. \
++Though considerably less powerful than regular expressions, shell patterns \
++are nonetheless useful and familiar to a large audience of end-users."
 +
-+SECTION = "base"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://debian/copyright;md5=770d751553e6559e9eaefd2e11ccf7e9"
++HOMEPAGE = "http://search.cpan.org/dist/File-FnMatch/"
++SECTION = "libs"
++LICENSE = "Artistic-1.0 | GPL-1.0+"
 +
-+SUMMARY_${PN}-cron = "Cron scripts to control automatic prelinking"
-+DESCRIPTION_${PN}-cron = "Cron scripts to control automatic checking."
-+FILES_${PN}-cron = "${sysconfdir}/cron.*"
++LIC_FILES_CHKSUM = "file://README;beginline=34;endline=37;md5=54fdfac62963b7cece5583ab38f2cf0d"
 +
-+PACKAGES =+ "${PN}-cron"
++SRC_URI = "https://cpan.metacpan.org/authors/id/M/MJ/MJP/File-FnMatch-${PV}.tar.gz"
 +
-+SRC_URI = "http://snapshot.debian.org/archive/debian/20170530T212108Z/pool/main/d/debsums/debsums_2.2.2.tar.xz"
-+# the package is taken from snapshots.debian.org; that source is static and goes stale
-+# so we check the latest upstream from a directory that does get updated
-+UPSTREAM_CHECK_URI = "${DEBIAN_MIRROR}/main/d/${BPN}/"
++SRC_URI[md5sum] = "22f77c20d0fb5af01a3165e2df2fe34c"
++SRC_URI[sha256sum] = "962454b8e86bea8b132bf8af35757d0c6a8f5d599015bd6a5d68cb7ae7a9e916"
 +
-+SRC_URI[md5sum] = "82b0710855a7e5212d4358163a269e79"
-+SRC_URI[sha256sum] = "aa61896f93a6bbfe0161c21dcd67529ae8e1ec8c3ccf244523c52c4ad8253d97"
++S = "${WORKDIR}/File-FnMatch-${PV}"
 +
-+RDEPENDS_${PN} = "dpkg dpkg-perl libfile-fnmatch-perl perl \
-+                  perl-module-constant perl-module-digest-md5 \
-+                  perl-module-errno perl-module-fcntl \
-+                  perl-module-file-basename perl-module-file-copy \
-+                  perl-module-file-find perl-module-file-glob \
-+                  perl-module-file-path perl-module-file-spec \
-+                  perl-module-file-temp perl-module-getopt-long \
-+                  perl-module-posix"
++inherit cpan
 +
-+do_install() {
-+	install -d ${D}/${sysconfdir}/cron.daily ${D}/${sysconfdir}/cron.weekly
-+	install -d ${D}/${sysconfdir}/cron.monthly ${D}${sbindir} ${D}${bindir}
-+	install -d ${D}${mandir}/man1 ${D}${mandir}/man8
-+	install -m 0755 debsums ${D}${bindir}/
-+	install -m 0755 rdebsums ${D}${bindir}/
-+	install -m 0755 debsums_init ${D}${sbindir}
-+	install -m 0644 man/debsums.1 ${D}${mandir}/man1/
-+	install -m 0644 man/rdebsums.1 ${D}${mandir}/man1/
-+	install -m 0644 man/debsums_init.8 ${D}${mandir}/man8/
-+	install -m 0644 debian/cron.daily \
-+		${D}/${sysconfdir}/cron.daily/debsums
-+	install -m 0644 debian/cron.weekly \
-+		${D}/${sysconfdir}/cron.weekly/debsums
-+	install -m 0644 debian/cron.monthly \
-+		${D}/${sysconfdir}/cron.monthly/debsums
-+
-+	# Must exist, defaults to empty.
-+	touch ${D}/${sysconfdir}/debsums-ignore
-+}
++BBCLASSEXTEND = "native"
 -- 
 1.9.1
 
