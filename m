@@ -1,38 +1,46 @@
-Return-Path: <tom.rini@gmail.com>
-Received: from mail-yw0-f196.google.com (mail-yw0-f196.google.com
-	[209.85.161.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 04DD87803F
+Return-Path: <maryan.pricak@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CD3166E5FB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 15:05:59 +0000 (UTC)
-Received: by mail-yw0-f196.google.com with SMTP id s127so33118ywg.3
+	Sun, 11 Jun 2017 15:27:12 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id v20so8006790lfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 08:06:01 -0700 (PDT)
+	Sun, 11 Jun 2017 08:27:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=HWmMPvybVNfracvzHcx12E35COSrcqP/IytLeM4E+o0=;
+	b=ehewrJbS6ytXmY7svqJa6ubYzTwcvr2z5J+Bz1bGO2DQuW5hMnMs5jIzyD24H2xffb
+	4K/X/TNY0bZ700bIpEDecIh22D22EnepZB7DwUKLwfMR/WIdzHISS8o6rjLqNsRh5dxG
+	gK6j79qGsH3ZsssqIM4JITvLZtAdEqVZxvwfZ/Tdq/8GyCHgeGBWxYdFpC8VpmXRwVNv
+	kbTbKvD20HL5GAhOsId2wxYytx4C4Kp3mwvNK4UWSV45Z+rs3L/qvb5FtV3+iA3XJzIz
+	4DEGIDvEicMrpkRdBnviQdhmlKqy+Df7WRbBA3KJxhED0eiGXiYhJNmx4lOZm9bIjm9f
+	pyMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=gWa2CvHyygNKgBvXFoGeZ52kmDlQlET48tg34yOVkd4=;
-	b=omZa45dV2OeDnJGndxQsLvXRWD3J0N7Ck43xwd6iq5xhblyJAmAWXiu3NmnZHH3izK
-	z73qC+L5lKoVvDhOu+hCZlDOFRb74SNZcAdQslLwG5T8Fo5fmpj9OACzoN/2enN0kL9F
-	c9ecc15wknWAtwfpDrqNxDkBtAOZgISTZBDe2lC38N+QgpaNwET31i/ijLbQTNo3ta65
-	LHMnDq44y9TJ3HmrslwRk4wqGG/Py/xEaNBn8rpC7VhX86YGAIHLPE/ozoAvJyTlldzM
-	r7g4pPpt2nqxVElmLEu21dOw16kUqx1KncsYlHfno2zyf3lYdou0ru5t8zy4aZHReEKr
-	60eQ==
-X-Gm-Message-State: AODbwcAHWLSs8WcJqNneWWUlKyaX8Mj5pqpPI7pLcOj9iK5l7VBMa8Ex
-	0GyGgnBXAoI6yi1q
-X-Received: by 10.129.174.81 with SMTP id g17mr16534745ywk.53.1497193560305;
-	Sun, 11 Jun 2017 08:06:00 -0700 (PDT)
-Received: from localhost.localdomain (cpe-75-180-228-133.ec.res.rr.com.
-	[75.180.228.133]) by smtp.gmail.com with ESMTPSA id
-	b187sm2818097ywd.2.2017.06.11.08.05.59
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HWmMPvybVNfracvzHcx12E35COSrcqP/IytLeM4E+o0=;
+	b=Rc9zboBqO3NP8deIoJIsm8jJLT15CLXZ/LlBD+sxn/SbVgwLqJaDrfP5X0syjjRKd1
+	NOm2IPf/g/9hcO37eRpKamRVOJimFNzS0xvLs0ktUbMKs0/hjTSI21603+6FZzzRg9+h
+	V+dkJPloc4gTgY2rAsfHLAEeC8pJME9HFzYd+GzCwVaQVbGgUP14L59MA3xAbRMCZZyz
+	zGwzDulw6RDW9tiKvGMbFbHJtiZzmeOwy8yKLeOJAPk2X6LL9INL9AIfETLWQEsxZnGz
+	FhJmWnEaKpKhUlnDDzaodD/QB5oQcefRJVKQAcztQ6O7/LLrs5MFC16YkYoAJIDVP5xe
+	ppCg==
+X-Gm-Message-State: AODbwcCEyBk3rsojtmS1m2sZuYL6yltb/q9emW9Ocr5gRe7UG7BVyW63
+	pKum6aY4ekkgQK+KRhQ=
+X-Received: by 10.25.86.10 with SMTP id k10mr12985175lfb.113.1497194832747;
+	Sun, 11 Jun 2017 08:27:12 -0700 (PDT)
+Received: from localhost.localdomain ([77.123.173.169])
+	by smtp.gmail.com with ESMTPSA id
+	i127sm1920817lfg.40.2017.06.11.08.27.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 11 Jun 2017 08:05:59 -0700 (PDT)
-From: Tom Rini <trini@konsulko.com>
+	Sun, 11 Jun 2017 08:27:12 -0700 (PDT)
+From: Marian Pritsak <maryan.pricak@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 11 Jun 2017 11:06:15 -0400
-Message-Id: <1497193576-3774-1-git-send-email-trini@konsulko.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH 1/2] libfile-fnmatch-perl: New recipe
+Date: Sun, 11 Jun 2017 18:27:05 +0300
+Message-Id: <1497194825-16654-1-git-send-email-maryan.pricak@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] hiredis: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +53,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 15:06:02 -0000
+X-List-Received-Date: Sun, 11 Jun 2017 15:27:13 -0000
 
-File::FnMatch::fnmatch() provides simple, shell-like pattern matching.
+Hiredis is a C client library for Redis database.
 
-Though considerably less powerful than regular expressions, shell patterns
-are nonetheless useful and familiar to a large audience of end-users.
-
-Signed-off-by: Tom Rini <trini@konsulko.com>
+Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
 ---
- .../perl/libfile-fnmatch-perl_0.02.bb              | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
+ .../0001-Makefile-remove-hardcoding-of-CC.patch    | 32 ++++++++++++++++++++++
+ meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb | 18 ++++++++++++
+ 2 files changed, 50 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+ create mode 100644 meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
 
-diff --git a/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
+diff --git a/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch b/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
 new file mode 100644
-index 000000000000..035fe9f654e9
+index 0000000..fef2bc7
 --- /dev/null
-+++ b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
-@@ -0,0 +1,22 @@
-+SUMMARY = "Perl module that provides simple filename and pathname matching"
-+DESCRIPTION = "File::FnMatch::fnmatch() provides simple, shell-like pattern \
-+matching. \
-+Though considerably less powerful than regular expressions, shell patterns \
-+are nonetheless useful and familiar to a large audience of end-users."
++++ b/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+@@ -0,0 +1,32 @@
++From d13b918a3ff8b0ebfd1e7b18b198b4b45841d720 Mon Sep 17 00:00:00 2001
++From: Andrea Galbusera <gizero@gmail.com>
++Date: Fri, 31 Jul 2015 16:42:08 +0200
++Subject: [PATCH] Makefile: remove hardcoding of CC
 +
-+HOMEPAGE = "http://search.cpan.org/dist/File-FnMatch/"
++* upgrade previous patch to avoid wiping CFLAGS. This fixes build on arm
++platforms which previously caused and issue due to -fPIC being lost
++
++Signed-off-by: Andrea Galbusera <gizero@gmail.com>
++---
++ Makefile | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 8b0f0c2..66a4317 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -34,11 +34,6 @@ define REDIS_TEST_CONFIG
++ endef
++ export REDIS_TEST_CONFIG
++ 
++-# Fallback to gcc when $CC is not in $PATH.
++-CC:=$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
++-OPTIMIZATION?=-O3
++-WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings
++-DEBUG?= -g -ggdb
++ REAL_CFLAGS=$(OPTIMIZATION) -fPIC $(CFLAGS) $(WARNINGS) $(DEBUG) $(ARCH)
++ REAL_LDFLAGS=$(LDFLAGS) $(ARCH)
++ 
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+new file mode 100644
+index 0000000..68ba90f
+--- /dev/null
++++ b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Minimalistic C client library for Redis"
++HOMEPAGE = "http://github.com/redis/hiredis"
++LICENSE = "BSD-3-Clause"
 +SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
++DEPENDS = "redis"
 +
-+LIC_FILES_CHKSUM = "file://README;beginline=34;endline=37;md5=54fdfac62963b7cece5583ab38f2cf0d"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
++SRC_URI = "git://github.com/redis/hiredis;protocol=git;rev=f58dd249d6ed47a7e835463c3b04722972281dbb \
++           file://0001-Makefile-remove-hardcoding-of-CC.patch"
 +
-+SRC_URI = "https://cpan.metacpan.org/authors/id/M/MJ/MJP/File-FnMatch-${PV}.tar.gz"
++S = "${WORKDIR}/git"
 +
-+SRC_URI[md5sum] = "22f77c20d0fb5af01a3165e2df2fe34c"
-+SRC_URI[sha256sum] = "962454b8e86bea8b132bf8af35757d0c6a8f5d599015bd6a5d68cb7ae7a9e916"
++inherit autotools-brokensep pkgconfig
 +
-+S = "${WORKDIR}/File-FnMatch-${PV}"
-+
-+inherit cpan
-+
-+BBCLASSEXTEND = "native"
++do_install_prepend() {
++  export PREFIX=/usr
++  export INSTALL='cp -r'
++}
 -- 
-1.9.1
+2.7.4
 
 
