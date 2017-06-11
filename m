@@ -1,53 +1,46 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yb0-f181.google.com (mail-yb0-f181.google.com
-	[209.85.213.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 7149D781F2
+Return-Path: <maryan.pricak@gmail.com>
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 07E4377DB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 19:05:25 +0000 (UTC)
-Received: by mail-yb0-f181.google.com with SMTP id 202so23332288ybd.0
+	Sun, 11 Jun 2017 20:36:15 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id v20so8325693lfa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 12:05:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=8ZoZOP90ATu2RW8n0qxVFpCwFHxUu3zFK5HoW39U3ts=;
-	b=PlkH3L5a4HjnDWxu5RC8765tCIlhyntiMytiyaIpGCOJuf5MzjXoYGLrzWwvJ6u0Zo
-	hLFiXytS7+bPlNfvTUhmoLenUsNlo7NQo9fp04mYKKc7dp3O2y4xNbahz0FLmf88RSVw
-	kM/K26yRy9UVmuJFtZ2GrPU4YdLGEVOKKkYxU=
+	Sun, 11 Jun 2017 13:36:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=Re3xxyHKSiPN5hD68YcTL5yH2r+mj9KAPZZqUDNg7pI=;
+	b=qxaetoMFm2DS9k4j2vWnyqxnVwbYToZMlRCj3nTotX6SCp/1ysatV6cjI/dIZCNAjw
+	+tJv6pfD9DCdI8E/kSjQ/pk1O6s77DCnDaLca4h6cqrcfgUOe+XEFDVCBR6w5p+WqN/V
+	h7B+zvjL8yQ9Y5vZyeaAvh7zJsTe6BGnRUy9bEy34B6pmANcpIudunK1hJD2O1aLYOqm
+	gmPQu29s8t0ZBduBnh1DI2eH0i4jSuuzCCMRlG4VakRgWshGUXDOr3eyODqrleWItuO4
+	Czdev4VJ3CCjmxUsh9FY1GPgN1tfbYqQciBzM8QKy6HLn1JhPMPw74IVHU9iLt1NGCso
+	zfLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=8ZoZOP90ATu2RW8n0qxVFpCwFHxUu3zFK5HoW39U3ts=;
-	b=hSE8KbiMXJyYppsGY430zDKuXyKdJcaA/5dhFJ7TD80t3n9rB30CJiGRXKOMdDBxdl
-	FfiBFz7e9KHWkmlcCCORChl2+9ykckAo8c5+yVxhMi1XKpjo0f1dQTqNIrDDifcK9FTU
-	gLPubxoKjgcLe6p9N+PfVtvVB01TCwxKbfq0njX0tnGZhE5LXRhqI0AWVeq39UiP1BwM
-	GBoJegi004NVRDkapmXh/VVlF20LfmQN48NS0ZzjPXb0ZVDcbES2rKSLTPe9Eb1Bgxq4
-	aZKzS4fNtzzmq1L9ERPdxFDVhBpNiIBlUf0ide9q8FHzEkvzlgxZ27Nmlqf5wCh33+8S
-	Kl/A==
-X-Gm-Message-State: AODbwcAkIbKjbfwD3cYMsTMrIk77qSkYlNoGqkKA3yXnUHrMU9ozJUo2
-	8u4R08zZ6h+LIOQ4
-X-Received: by 10.37.206.198 with SMTP id x189mr21273131ybe.46.1497207927240; 
-	Sun, 11 Jun 2017 12:05:27 -0700 (PDT)
-Received: from bill-the-cat (cpe-75-180-228-133.ec.res.rr.com.
-	[75.180.228.133]) by smtp.gmail.com with ESMTPSA id
-	y195sm1839925ywg.65.2017.06.11.12.05.26
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Sun, 11 Jun 2017 12:05:26 -0700 (PDT)
-Date: Sun, 11 Jun 2017 15:05:46 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20170611190546.GV10782@bill-the-cat>
-References: <1497193576-3774-1-git-send-email-trini@konsulko.com>
-	<1497193576-3774-2-git-send-email-trini@konsulko.com>
-	<CAMKF1soYoKjRue_y6w=yjZRP5ByOkLcrtZ=RwBTfopammubT1w@mail.gmail.com>
-	<20170611165939.GT10782@bill-the-cat>
-	<CAMKF1sqCTT0qV0naEXPn=U+GRxaOR=oQb8euPruXOAr89FDxXA@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqCTT0qV0naEXPn=U+GRxaOR=oQb8euPruXOAr89FDxXA@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] debsums: New recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Re3xxyHKSiPN5hD68YcTL5yH2r+mj9KAPZZqUDNg7pI=;
+	b=QkfFQHeQm+P42Upl82Z0wVLmReMEtDLYfRt7J5Pn9sepHGtMsIMVumInId361KRg+p
+	ny7Gn4XpB/8INZiExyuzDBqtrJtpojr+PgrvHxVPVkt3IzcZeNvmnbycaxZlVdXjtl49
+	xST0wHt47JkilfiUiGj40ibXGVMaXuki++ayXc8RJRCqcLRkWBZoOw6/nU8alKXg36X1
+	oksNPmzmLwNcpKXw9dXMueiMOfkcLs1ux4wz2gYp/pTv3IC3pUppXDwbgRFDUFg/qMG8
+	5tdmqDbDYDDVa5isNhw+qjNQTxiuzeD6tFeHXy8bot7AXXKbdjkF5ZaKyyTnHldGRdUA
+	pilw==
+X-Gm-Message-State: AODbwcBxFzzWRGFTHnLXjJCR4ktKsXwZjbz+9Ssqcxl0i+puS9S9E0F7
+	/t6mRmftSSujuIHkKvQ=
+X-Received: by 10.46.77.10 with SMTP id a10mr14269303ljb.73.1497213376227;
+	Sun, 11 Jun 2017 13:36:16 -0700 (PDT)
+Received: from localhost.localdomain ([77.123.173.169])
+	by smtp.gmail.com with ESMTPSA id
+	n132sm2116510lfn.61.2017.06.11.13.36.14
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 11 Jun 2017 13:36:15 -0700 (PDT)
+From: Marian Pritsak <maryan.pricak@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 11 Jun 2017 23:36:07 +0300
+Message-Id: <1497213367-24044-1-git-send-email-maryan.pricak@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] hiredis: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,27 +53,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 19:05:27 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 11 Jun 2017 20:36:18 -0000
 
-On Sun, Jun 11, 2017 at 10:20:38AM -0700, Khem Raj wrote:
-> On Sun, Jun 11, 2017 at 9:59 AM, Tom Rini <trini@konsulko.com> wrote:
-> >> order of directives seems a bit displaced, may be running
-> >> meta-openembedded/contrib/oe-stylize.py
-> >> will be good.
-> >
-> > I'm not sure about that, I copied the order here from prelink_git.bb in
-> > oe-core.  Unless you're referring to something outside of the -cron
-> > part?  Thanks!
-> 
-> prelink_git.bb might not be a perfect template for new recipes too. Since
-> this patch is adding a new recipe, I think its probably good to have known
-> structure for it. I am thinking PACKAGES and FILES variables should be
-> after do_install
+Hiredis is a C client library for Redis database.
+Hiredis does not use autotools, but plane Makefile instead,
+so few changes had to be made, including removing hard coded
+compiler, setting INSTALL to 'cp -r' to to avoid host user
+comtamination QA issue, and setting PREFIX to /usr instead of
+default /usr/local.
 
-But with the rest up to still?
+Signed-off-by: Marian Pritsak <maryan.pricak@gmail.com>
+---
+ .../0001-Makefile-remove-hardcoding-of-CC.patch    | 32 ++++++++++++++++++++++
+ meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb | 21 ++++++++++++++
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+ create mode 100644 meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
 
+diff --git a/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch b/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+new file mode 100644
+index 0000000..fef2bc7
+--- /dev/null
++++ b/meta-oe/recipes-extended/hiredis/files/0001-Makefile-remove-hardcoding-of-CC.patch
+@@ -0,0 +1,32 @@
++From d13b918a3ff8b0ebfd1e7b18b198b4b45841d720 Mon Sep 17 00:00:00 2001
++From: Andrea Galbusera <gizero@gmail.com>
++Date: Fri, 31 Jul 2015 16:42:08 +0200
++Subject: [PATCH] Makefile: remove hardcoding of CC
++
++* upgrade previous patch to avoid wiping CFLAGS. This fixes build on arm
++platforms which previously caused and issue due to -fPIC being lost
++
++Signed-off-by: Andrea Galbusera <gizero@gmail.com>
++---
++ Makefile | 5 -----
++ 1 file changed, 5 deletions(-)
++
++diff --git a/Makefile b/Makefile
++index 8b0f0c2..66a4317 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -34,11 +34,6 @@ define REDIS_TEST_CONFIG
++ endef
++ export REDIS_TEST_CONFIG
++ 
++-# Fallback to gcc when $CC is not in $PATH.
++-CC:=$(shell sh -c 'type $(CC) >/dev/null 2>/dev/null && echo $(CC) || echo gcc')
++-OPTIMIZATION?=-O3
++-WARNINGS=-Wall -W -Wstrict-prototypes -Wwrite-strings
++-DEBUG?= -g -ggdb
++ REAL_CFLAGS=$(OPTIMIZATION) -fPIC $(CFLAGS) $(WARNINGS) $(DEBUG) $(ARCH)
++ REAL_LDFLAGS=$(LDFLAGS) $(ARCH)
++ 
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+new file mode 100644
+index 0000000..b2e8be8
+--- /dev/null
++++ b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Minimalistic C client library for Redis"
++HOMEPAGE = "http://github.com/redis/hiredis"
++LICENSE = "BSD-3-Clause"
++SECTION = "libs"
++DEPENDS = "redis"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=d84d659a35c666d23233e54503aaea51"
++SRC_URI = "git://github.com/redis/hiredis;protocol=git;rev=f58dd249d6ed47a7e835463c3b04722972281dbb \
++           file://0001-Makefile-remove-hardcoding-of-CC.patch"
++
++S = "${WORKDIR}/git"
++
++inherit autotools-brokensep pkgconfig
++
++# By default INSTALL variable in Makefile is equal to 'cp -a', which preserves
++# ownership and causes host-user-contamination QA issue.
++# And PREFIX defaults to /usr/local.
++do_install_prepend() {
++  export PREFIX=/usr
++  export INSTALL='cp -r'
++}
 -- 
-Tom
+2.7.4
+
 
