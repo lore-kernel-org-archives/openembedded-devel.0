@@ -1,50 +1,49 @@
-Return-Path: <trini@konsulko.com>
-Received: from mail-yb0-f179.google.com (mail-yb0-f179.google.com
-	[209.85.213.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 2328971A8D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AD92781FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 17:01:44 +0000 (UTC)
-Received: by mail-yb0-f179.google.com with SMTP id o9so23056784yba.3
+	Sun, 11 Jun 2017 17:21:08 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id v111so74760780wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jun 2017 10:01:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=konsulko.com; s=google;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=uW0Jp5YCRjRXDmkxHJ18iMoEuMaPB7MrlhzapspWkhU=;
-	b=dlgSGm7F8XG8CvkiXOaDFtA7xgXlcseGk2zHc6O7lDn4bxeR4W6/q+R64spj5y9ew6
-	MGdNhN9gBwyw73RZddYEGFucC8SijTKeUgDoAhHaMiTh3qYQ1P64e3wmliDfa76R9eYr
-	TVBT9t/nyCGcIenVz+G/jpr6h/sFpDwspCqeE=
+	Sun, 11 Jun 2017 10:21:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=7jFKGAl3RaXFz/13a1f9Gj7D/3oNYAeD8k6snHozNdk=;
+	b=GdB8SgxR0uk27WXX7M6JNbrqv6liXtN9IXioF5yw1lBKfeBUMiMeMdWOIXR0yj+6VI
+	5VC1OySCGAhal7mVsEcBLJdgmN61ihcoTAnGVCRCJv+puIFRbb9uYuoMwK0S3evG3GWF
+	90X78y5q6/5Ph3P0lFQ2gyN+vBGTkLYLdqpF9UkqEhRTy6q29LXFC03sqN3bBoqfMbXV
+	GNyaYVFoMSMMHLdxINRS4jNA45x9ssfOXegjFAhhP8xVx8aSwBE1xhX97P+vaEpVsN2g
+	AXZynYScw2addKKywwd5CfHiQV1TMZpHpTOssT3d7k1JDfOeBxDNYD916+3YX1AiKy6O
+	sjug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=uW0Jp5YCRjRXDmkxHJ18iMoEuMaPB7MrlhzapspWkhU=;
-	b=NSfW/ZAQJ73+IlQqZ4dAVI8hRWsDa91y5bzOccGsd6BZ8HetD+tTkd5wyH5bzjcM0v
-	CEcI0YD0WVdZjkbeEpvnokExyiaKBSd5QKvVPay0xRBGju9gLCcKq3EdAQHDvKc98xol
-	w3Kyfo23vKjM1enu+cMajrnlYV6/tx0/gDI9vWWNrzdkU+JPuIg1miVjpubKk5KjyXUs
-	qYb1WcSjItDz1UloDrUZ0z9cSoaxlzMUox6aiqb0x9/ggEfQErvkGgOBakg6uv5x9rl4
-	Dir6twYml8/6iotxGAWX8uxGmx6w7xgvIl+JWrMuXPRrvNRcT7COJNR7wT5sOtxLKvbD
-	y+rg==
-X-Gm-Message-State: AODbwcDzbOKPIET68OnPM0xogMwDobAetQkSIkt6X2XOR5BhI4f4PPOH
-	2TbxZRy6LVQtELkP
-X-Received: by 10.37.183.6 with SMTP id t6mr11208518ybj.221.1497200505351;
-	Sun, 11 Jun 2017 10:01:45 -0700 (PDT)
-Received: from bill-the-cat (cpe-75-180-228-133.ec.res.rr.com.
-	[75.180.228.133])
-	by smtp.gmail.com with ESMTPSA id m4sm2867133ywh.36.2017.06.11.10.01.44
-	(version=TLS1_2 cipher=AES128-SHA bits=128/128);
-	Sun, 11 Jun 2017 10:01:44 -0700 (PDT)
-Date: Sun, 11 Jun 2017 13:02:04 -0400
-From: Tom Rini <trini@konsulko.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20170611170204.GU10782@bill-the-cat>
-References: <1497193576-3774-1-git-send-email-trini@konsulko.com>
-	<CAMKF1srsu4Aq=aPVwCCCQynDNz5uPe1MsaasP7Mrx4oXm=MS4A@mail.gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=7jFKGAl3RaXFz/13a1f9Gj7D/3oNYAeD8k6snHozNdk=;
+	b=SEUtYoh/R0cXpQQqenEFNNwR610jgx31RIKsJcIlq3Pb5NcPthuZlq6kkg6hzEMmdA
+	imOoBf/T9ndeQIiv1A0tGDkdtXFsZqqeurQfEXjXAPpTMKvG0Q8eobJ9MrZmPV284yQx
+	wcRU4iQlUS2q5KmsAIpYdsRsngHuJF8jb6a6DZR69lqAlsZesC8FHEuNmyF5Oer7gzWt
+	/ZJrSyr9xLU1Y+xHtRKD3+suKSHUb5pcOstWdaiLEhaxU50MOZAF2yZGXRP3Q7EIF5KI
+	pEln5anyVG4EBEm2zw+zGE2Y4paAluWDucrZca81mDZiwZqtz21d/RARA/KK/TXxUwZC
+	R4rA==
+X-Gm-Message-State: AODbwcBeEzszZgnxyGDiEPXtty4Ru9Nh4+kHlkXOs0kflyD0kDDNzBiz
+	huLJ9o9r+MuyEN5ukN1H1ul7r0tA0Q==
+X-Received: by 10.80.131.6 with SMTP id 6mr6511411edh.178.1497201669023; Sun,
+	11 Jun 2017 10:21:09 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srsu4Aq=aPVwCCCQynDNz5uPe1MsaasP7Mrx4oXm=MS4A@mail.gmail.com>
-User-Agent: Mutt/1.5.21 (2010-09-15)
+Received: by 10.80.153.222 with HTTP; Sun, 11 Jun 2017 10:20:38 -0700 (PDT)
+In-Reply-To: <20170611165939.GT10782@bill-the-cat>
+References: <1497193576-3774-1-git-send-email-trini@konsulko.com>
+	<1497193576-3774-2-git-send-email-trini@konsulko.com>
+	<CAMKF1soYoKjRue_y6w=yjZRP5ByOkLcrtZ=RwBTfopammubT1w@mail.gmail.com>
+	<20170611165939.GT10782@bill-the-cat>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Jun 2017 10:20:38 -0700
+Message-ID: <CAMKF1sqCTT0qV0naEXPn=U+GRxaOR=oQb8euPruXOAr89FDxXA@mail.gmail.com>
+To: Tom Rini <trini@konsulko.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/2] libfile-fnmatch-perl: New recipe
+Subject: Re: [meta-oe][PATCH 2/2] debsums: New recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,31 +56,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jun 2017 17:01:45 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 11 Jun 2017 17:21:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Sun, Jun 11, 2017 at 08:59:49AM -0700, Khem Raj wrote:
-> On Sun, Jun 11, 2017 at 8:06 AM, Tom Rini <trini@konsulko.com> wrote:
-> > File::FnMatch::fnmatch() provides simple, shell-like pattern matching.
-> >
-> > Though considerably less powerful than regular expressions, shell patterns
-> > are nonetheless useful and familiar to a large audience of end-users.
-> >
-> > Signed-off-by: Tom Rini <trini@konsulko.com>
-> > ---
-> >  .../perl/libfile-fnmatch-perl_0.02.bb              | 22 ++++++++++++++++++++++
-> >  1 file changed, 22 insertions(+)
-> >  create mode 100644 meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
-> >
-> > diff --git a/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb b/meta-oe/recipes-extended/perl/libfile-fnmatch-perl_0.02.bb
-> 
-> may be meta-perl is better suited for this
+On Sun, Jun 11, 2017 at 9:59 AM, Tom Rini <trini@konsulko.com> wrote:
+>> order of directives seems a bit displaced, may be running
+>> meta-openembedded/contrib/oe-stylize.py
+>> will be good.
+>
+> I'm not sure about that, I copied the order here from prelink_git.bb in
+> oe-core.  Unless you're referring to something outside of the -cron
+> part?  Thanks!
 
-I only hesitate because I don't think debsums then belongs in meta-perl.
-I took the existing example of a few other libfoo-perl recipes as being
-appropriate for here.  Thanks!
-
--- 
-Tom
+prelink_git.bb might not be a perfect template for new recipes too. Since
+this patch is adding a new recipe, I think its probably good to have known
+structure for it. I am thinking PACKAGES and FILES variables should be
+after do_install
 
