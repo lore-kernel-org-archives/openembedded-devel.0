@@ -1,46 +1,38 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AF645782C3
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 0664D78262
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jun 2017 19:01:57 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id d5so5126931pfe.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jun 2017 12:01:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=O+d2P+qDmbTmsYt7z/gafromCM9juu2zyPxtx35YKYk=;
-	b=dzLqSJxgfcZOiTz589q5hKeG1rOPjOh1yIcgogyOl6xV33ssq7Xh57JNroU0mkxdJU
-	2N5BWJpSG5maFYTulEh/AoZ5nSLYnlSJZ9cWrN3ktHm/AIecRr8dNqnDLQJ315P0kFz7
-	+s4bYd0jhw5xuO8rsQXueNgLp9NZUCn52/NhS95tQKuYdYnAz6+tiFYZ3y9/jsEnAIGI
-	vuRjS8Se4vzqHQXHRsjWt8kr9f29KHDlrVVms2t9k9MTCetI43ADcy7uLZVY/OzFwfte
-	GlCR1la3+YzLmIpCoE3bhFturW2Z5TW2s/tPsCXPCZ1aiJT7+PA7+q1Z3q8FUHSFcNxJ
-	TMcQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=O+d2P+qDmbTmsYt7z/gafromCM9juu2zyPxtx35YKYk=;
-	b=j+i6dlozWzS+MkuS/DFYFwQWRkdoVxxe+pwOpNT+PYf3Pqq2DXDeWW7CFnwWPn/MpU
-	Sb1F8XEvJywTe8RzywYk4ERLdqLdMn5047e2AmHAO9wVtviNKo3izOfH47fZf+6OeHMF
-	gq3CM6Ma4BnzWaQzJ9+tSqI3C2rIV8EnDjg8mlvyfv3n5yAdOBFreR/rq8cq5+q+Vltp
-	Oq+CmpCZCEOJBn1UsCKJTN5QEpM3C2JXsZEIs3XZcx1C7cqc52cueVjDR2V0PsrBn8ZP
-	IqoF4RPlVoDizg8tNRVg42nbGCq4I+k2W5NwpPiKVhtp3/f0xd3AxmZ9FW2HRepgnDvy
-	Vzcw==
-X-Gm-Message-State: AODbwcABkZLdzGSVd85UFsWLEZUdUPXCCvEOG2bjngYfxktRKjtQ7npm
-	cTsdDm2Is0Afs459
-X-Received: by 10.84.210.194 with SMTP id a60mr49212337pli.17.1497294118403;
-	Mon, 12 Jun 2017 12:01:58 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::264a])
-	by smtp.gmail.com with ESMTPSA id
-	z79sm16726508pfi.43.2017.06.12.12.01.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 12 Jun 2017 12:01:57 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Jun 2017 12:01:46 -0700
-Message-Id: <20170612190146.4028-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-multimedia][PATCH] libdc1394: Add X11 and opengl deps if distro has them in policy
+	Mon, 12 Jun 2017 19:04:25 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 3663220B84;
+	Mon, 12 Jun 2017 19:04:27 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id MyL7I4SbVKFP; Mon, 12 Jun 2017 19:04:27 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0736220156;
+	Mon, 12 Jun 2017 19:04:24 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id C2CC01624F4; Mon, 12 Jun 2017 15:04:24 -0400 (EDT)
+Date: Mon, 12 Jun 2017 15:04:24 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Andre McCurdy <armccurdy@gmail.com>
+Message-ID: <20170612190424.GW28053@denix.org>
+References: <20170326203053.GH15664@denix.org>
+	<20170329230613.GS15664@denix.org>
+	<20170413004504.2cae0270@t510.zcs.saftware.de>
+	<CAJ86T=X2379-ZvEVS-AYku6NENYC48+t11T0GpOic-xyYAPzKQ@mail.gmail.com>
+	<20170413021127.47ff6bc7@t510.zcs.saftware.de>
+	<CAJ86T=W3YBoLXH+J16XhJ+FO_ZtW17hPX8+djgqrgVNFXkeBkg@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CAJ86T=W3YBoLXH+J16XhJ+FO_ZtW17hPX8+djgqrgVNFXkeBkg@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,30 +45,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jun 2017 19:01:57 -0000
+X-List-Received-Date: Mon, 12 Jun 2017 19:04:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+On Wed, Apr 12, 2017 at 05:53:21PM -0700, Andre McCurdy wrote:
+> On Wed, Apr 12, 2017 at 5:11 PM, Andreas Oberritter
+> <obi@opendreambox.org> wrote:
+> > On Wed, 12 Apr 2017 16:38:58 -0700
+> > Andre McCurdy <armccurdy@gmail.com> wrote:
+> >
+> >> On Wed, Apr 12, 2017 at 3:45 PM, Andreas Oberritter
+> >> <obi@opendreambox.org> wrote:
+> >> > On Wed, 29 Mar 2017 19:06:14 -0400
+> >> > Denys Dmytriyenko <denis@denix.org> wrote:
+> >> >
+> >> >> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:
+> >> >> > Hi,
+> >> >> >
+> >> >> > I've been having the following build issues lately with qtwebkit 5.8 from
+> >> >> > master:
+> >> >> >
+> >> >> > | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> >> >> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
+> >> >> > | linking ../lib/libQt5WebKit.so.5.8.0
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
+> >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
+> >> >> > | collect2: error: ld returned 1 exit status
+> >> >> > | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
+> >> >> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
+> >> >> > | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> >> >> > | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
+> >> >> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
+> >> >> >
+> >> >> > I believe I was able to build 5.8/master before, so I'm suspecting recent
+> >> >> > binutils upgrade... But I can be wrong. Would really appreciate some help
+> >> >> > here. Thanks.
+> >> >>
+> >> >> Anyone else see this?
+> >> >>
+> >> >
+> >> > I do. Have you been able to solve it in the meantime?
+> >>
+> >> Do you both have gold enabled?
+> >>
+> >>   https://bugs.launchpad.net/ubuntu/+source/qtwebkit-opensource-src/+bug/1653529
+> >
+> > I don't use the ld-is-gold flag, but gold gets built nevertheless. It's just not
+> > the default linker. I guess qtwebkit forces its use. So the question becomes whether
+> > I should set ld-is-gold or teach qtwebkit not to use gold, in order not to mix both
+> > linkers.
+> 
+> Assuming qtwebkit has a configure option to explicitly enable/disable
+> gold, I'd say add a PACKAGECONFIG option.
+> 
+> In the short term keep the PACKAGECONFIG option disabled and in the
+> longer term (once qtwebkit builds successfully with gold enabled) set
+> the PACKAGECONFIG option based on the testing the distro feature.
 
-diff --git a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-index 8318385b6..8a9e9a1d7 100755
---- a/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-+++ b/meta-multimedia/recipes-multimedia/libdc1394/libdc1394_git.bb
-@@ -5,7 +5,10 @@ LICENSE = "LGPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=c848e78d9a4a5cc69906178e4d6fbd64"
- 
- # libsdl to provide sdl.m4 with AM_PATH_SDL
--DEPENDS += "libusb1 libraw1394 libsdl"
-+DEPENDS += "libusb1 libraw1394 libsdl \
-+            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxv virtual/libx11', '', d)} \
-+            ${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'virtual/libgl libglu', '', d)} \
-+"
- 
- PV = "2.2.5+gitr${SRCPV}"
- 
+Has there been any progress on this? Is anybody looking at adding this 
+PACKAGECONFIG flag?
+
 -- 
-2.13.1
-
+Denys
 
