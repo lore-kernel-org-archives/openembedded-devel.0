@@ -1,40 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E10877E06
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 9990E782C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jun 2017 14:47:35 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id x81so9639659lfb.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jun 2017 07:47:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=HoleINymNU/Sa1LnHL54uwvwF78d/DQ/OFGnpumZtZ4=;
-	b=n5HUjDhjFZvZvP4ElwY3AUZcNbsbO2bV6xadU6J2haKadM+24KNmZ1OwnFPRFfHme1
-	nn0Uwc5Z4YZj/aZzqABbvmeoXNnGkYTNU+xYJVOIoYAncjduYliHujL4y1Q+g7Mhns9H
-	X6MRtHfGnYoaDn8+FptwsqDV8Sof2CO5MCoqJ795UBbh7n8/RHfGg19rDglUXwT4vPz/
-	9HGm/ugkypWzNbS5eRmcAwrKisxXoKgcp5/IC+fdgJvdSHvfgI2Q/J8m/blZhKEMX+UJ
-	J4WM7qWfI84nIISnz38ARqaENSjOqaJnVqmhznJZQvO9pseqdry1bATmZ2Wzxyj+NC2Q
-	8fiw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=HoleINymNU/Sa1LnHL54uwvwF78d/DQ/OFGnpumZtZ4=;
-	b=Ayjbn4twnNhqeVn8QTj0qUdPhXBObJQr+UajUL7GYT5RUOcV/oOM6NyRaNd1TJBMFI
-	F+SPbie2wg2saqTTUdBdziH857cIwC8t9bA3R1GGX5nVUiAkwd5ZZsl7n2G4qqJ0znER
-	KhD5rfznCuZkOc9WDl22+Wfj84CcIbFFSu22jIWzf18etOtNZbQskxArvUMx/Vi4ahph
-	k4U1osMU5s2zDCnuuKnjmv4Od2MQF58mfOez/0X2FNwzTcD6nYF3DosXtzxlnK4H7HsT
-	joY8HjniwUjN5M14Jf1UDPcbeK7AuR0rgPxNPIv7Y/22bTjl5UtbXueb9ij9FP0jA3mm
-	5InA==
-X-Gm-Message-State: AODbwcDoSwqroc2n1a/ztULF1h+Ecuarx7mgqbGmImC/Q/pXdtMy7IeZ
-	d7JsSmwKGYRxeL9QNWkPrOsbJjQl4A==
-X-Received: by 10.80.137.36 with SMTP id e33mr29463391ede.67.1497278856610;
-	Mon, 12 Jun 2017 07:47:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.153.222 with HTTP; Mon, 12 Jun 2017 07:47:06 -0700 (PDT)
-In-Reply-To: <1497251079.30163.233.camel@intel.com>
+	Mon, 12 Jun 2017 18:23:52 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id BE3C92E329;
+	Mon, 12 Jun 2017 20:23:52 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id K2XVUp-yBVCa; Mon, 12 Jun 2017 20:23:49 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bes.se.axis.com (Postfix) with ESMTPS id CA4EB2E5A4;
+	Mon, 12 Jun 2017 20:23:48 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 84FCB1E09B;
+	Mon, 12 Jun 2017 20:23:48 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 7985B1E06E;
+	Mon, 12 Jun 2017 20:23:48 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP;
+	Mon, 12 Jun 2017 20:23:48 +0200 (CEST)
+Received: from XBOX01.axis.com (xbox01.axis.com [10.0.5.15])
+	by thoth.se.axis.com (Postfix) with ESMTP id 6D3EE2FD5;
+	Mon, 12 Jun 2017 20:23:48 +0200 (CEST)
+Received: from XBOX02.axis.com (10.0.5.16) by XBOX01.axis.com (10.0.5.15) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Mon, 12 Jun 2017 20:23:48 +0200
+Received: from XBOX02.axis.com ([fe80::d00f:cb52:1b56:20d]) by XBOX02.axis.com
+	([fe80::d00f:cb52:1b56:20d%21]) with mapi id 15.00.1210.000;
+	Mon, 12 Jun 2017 20:23:48 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: Khem Raj <raj.khem@gmail.com>, Patrick Ohly <patrick.ohly@intel.com>
+Thread-Topic: [oe] -pie in SECURITY_CFLAGS (was: Re: [meta-oe][PATCH 1/3]
+	meson: update Meson devtool to 0.40.1)
+Thread-Index: AQHS4SPLZuLjN0WfFkCiAHo7Iw3/RaIcdxEAgAAxvgCABAeygIAAgTUAgABRZ1A=
+Date: Mon, 12 Jun 2017 18:23:48 +0000
+Message-ID: <667bcd0040224328aa002e61b1fb8fb6@XBOX02.axis.com>
 References: <20170605172321.12557-1-acfoltzer@galois.com>
 	<8806ffa9be8f4516b3f29cc1be0ceaf3@XBOX02.axis.com>
 	<1496997797.30163.181.camel@intel.com>
@@ -42,13 +46,17 @@ References: <20170605172321.12557-1-acfoltzer@galois.com>
 	<1497018842.30163.203.camel@intel.com>
 	<1497029524.30163.219.camel@intel.com>
 	<1497251079.30163.233.camel@intel.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Jun 2017 07:47:06 -0700
-Message-ID: <CAMKF1sp4vc10QhxkUENz2it0W5=0q+OhynG5n=rqW5iL269PpQ@mail.gmail.com>
-To: Patrick Ohly <patrick.ohly@intel.com>
+	<CAMKF1sp4vc10QhxkUENz2it0W5=0q+OhynG5n=rqW5iL269PpQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sp4vc10QhxkUENz2it0W5=0q+OhynG5n=rqW5iL269PpQ@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-ms-exchange-transport-fromentityheader: Hosted
+x-originating-ip: [10.0.5.60]
+MIME-Version: 1.0
+X-TM-AS-GCONF: 00
 Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: -pie in SECURITY_CFLAGS (was: Re: [meta-oe][PATCH 1/3] meson: update Meson devtool to 0.40.1)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -62,152 +70,172 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jun 2017 14:47:38 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Jun 2017 18:23:53 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-Patrick
-
-I have a patchset that is redoing the PIE hardening with using some help
-from gcc configuration itself. with this patch almost all of the NOPIE entr=
-ies
-in secuity.inc are fixed and we get gcc to take care of -pie passing to com=
-piler
-and linker when needed
-
-This patches are done after gcc7 recipes so I will propose them after gcc7 =
-but
-if you are interested here is the branch
-
-Top 6 patches are what you want from
-http://git.openembedded.org/openembedded-core-contrib/log/?h=3Dkraj/master
-
-
-On Mon, Jun 12, 2017 at 12:04 AM, Patrick Ohly <patrick.ohly@intel.com> wro=
-te:
-> On Fri, 2017-06-09 at 19:32 +0200, Patrick Ohly wrote:
->> On Fri, 2017-06-09 at 16:34 +0200, Patrick Ohly wrote:
->> > On Fri, 2017-06-09 at 13:24 +0000, Khem Raj wrote:
->> > >
->> > > On Fri, Jun 9, 2017 at 1:43 AM Patrick Ohly <patrick.ohly@intel.com>
->> > > wrote:
->> > >
->> > >         On Wed, 2017-06-07 at 21:44 +0000, Peter Kjellerstedt wrote:
->> > >         > My guess is that the problem stems from the fact that
->> > >         security_flags.inc
->> > >         > adds -pie (which is a linker flag) to SECURITY_CFLAGS rath=
-er
->> > >         than
->> > >         > SECURITY_LDFLAGS...
->> > >
->> > >         I think I've seen that cause problems elsewhere when the
->> > >         CFLAGS came
->> > >         after -shared, because then the compiler ended up trying to
->> > >         produce a
->> > >         pie executable instead of a shared library.
->> > >
->> > >         Perhaps we should finally address that in security_flags.inc
->> > >         instead of
->> > >         working around it?
->> > >
->> > >
->> > > This patch is removing -pie from compiler and linker flags which doe=
-s
->> > > not result in intended behavior for executable when linked they will
->> > > not be using -pie
->> >
->> > The patch had some syntax errors (fixed version below), but it had the
->> > code which adds -pie to TARGET_LDFLAGS when it is in SECURITY_CFLAGS, =
-so
->> > conceptually the flag shouldn't get lost entirely.
->> >
->> > Are you saying that one cannot rely on TARGET_LDFLAGS being used durin=
-g
->> > linking?
->> >
->> > I've tested with m4, and it seems to work okay:
->> >
->> > $ grep -w -e -pie tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/t=
-emp/log.do_compile
->> > x86_64-refkit-linux-gcc  -m64 -march=3Dcorei7 -mtune=3Dcorei7 -mfpmath=
-=3Dsse -msse4.2 --sysroot=3D/fast/build/refkit/intel-corei7-64/tmp-glibc/wo=
-rk/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot   -O2 -pipe -g -felim=
-inate-unused-debug-types -fdebug-prefix-map=3D/fast/build/refkit/intel-core=
-i7-64/tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0=3D/usr/src/debug/m=
-4/1.4.18-r0 -fdebug-prefix-map=3D/fast/build/refkit/intel-corei7-64/tmp-gli=
-bc/work/corei7-64-refkit-linux/m4/1.4.18-r0/recipe-sysroot-native=3D -fdebu=
-g-prefix-map=3D/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-=
-refkit-linux/m4/1.4.18-r0/recipe-sysroot=3D  -fstack-protector-strong -fpie=
- -D_FORTIFY_SOURCE=3D2 -Wformat -Wformat-security -Werror=3Dformat-security=
-  -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-needed -pie -fstack-protector-str=
-ong -Wl,-z,relro,-z,now -o m4 m4.o builtin.o debug.o eval.o format.o freeze=
-.o input.o macro.o output.o path.o symtab.o ../lib/libm4.a
->> >
->> > $ file tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-spl=
-it/m4/usr/bin/m4
->> > tmp-glibc/work/corei7-64-refkit-linux/m4/1.4.18-r0/packages-split/m4/u=
-sr/bin/m4: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), dynamica=
-lly linked, interpreter /lib/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, Bui=
-ldID[sha1]=3Df10d0a26299dcb8c5bd0f1c82ed492aea2d8f0ac, stripped
->> >
->> > I assume "ELF 64-bit LSB shared object" instead of "ELF 64-bit LSB
->> > executable" means "pie executable"?
->>
->> While I don't think my patch caused -pie to get lost, unfortunately I
->> now know that it still doesn't go into the right place in all cases. For
->> example, ncurses puts LDFLAGS after -shared, thus triggering the "main
->> undefined" error.
->>
->> The TOOLCHAIN_OPTIONS that Khem mentioned get appended directly after
->> the command, so that seems like a better place for -pie than LDFLAGS.
->> It's still a bit odd to pass a linker flag to all compiler invocations,
->> including those that do not link, but it might be a pragmatic solution
->> that is better than what we have now.
->>
->> However, my patch below now causes /usr/lib/libstdc++.a-gdb.py to be
->> built for gcc-runtime, which triggers an error:
->>
->> ERROR: gcc-runtime-6.3.0-r0 do_package: QA Issue: gcc-runtime:
->> Files/directories were installed but not shipped in any package:
->>   /usr/lib/libstdc++.a-gdb.py
->
-> That's just a minor follow-up error. The real problem is that libstdc
-> ++.so.6.0.22 was not getting built anymore. The expect .py file then is
-> libstdc++.so.6.0.22-gdb.py.
->
-> I'm still unsure about the root cause. Something seems to have gone
-> wrong when building the toolchain, because gcc-runtime doesn't even have
-> -pie in the compiler flags. From log.do_configure:
->
-> checking whether the x86_64-refkit-linux-gcc  -m64 -march=3Dcorei7
-> -mtune=3Dcorei7 -mfpmath=3Dsse -msse4.2
-> --sysroot=3D/fast/build/refkit/intel-corei7-64/tmp-glibc/work/corei7-64-r=
-efkit-linux/gcc-runtime/6.3.0-r0/recipe-sysroot  -Wl,-z,relro,-z,now linker=
- (x86_64-refkit-linux-ld --sysroot=3D/fast/build/refkit/intel-corei7-64/tmp=
--glibc/work/corei7-64-refkit-linux/gcc-runtime/6.3.0-r0/recipe-sysroot  -Wl=
-,-z,relro,-z,now   -m elf_x86_64) supports shared libraries... no
-> checking dynamic linker characteristics... GNU/Linux ld.so
-> checking how to hardcode library paths into programs... unsupported
-> checking whether stripping libraries is possible... yes
-> checking if libtool supports shared libraries... no
->
-> I'm going to put this aside for now, but I remain unhappy about how we
-> currently pass -pie in CFLAGS and the workarounds that are getting used
-> as a result of that, like disabling -pie for Python distutils. I
-> understand that that particular change probably only affected very few
-> binaries, but it still looks like a workaround and not a proper solution
-> to me.
->
-> What do others thing about the current status quo regarding -pie?
->
-> --
-> Best Regards, Patrick Ohly
->
-> The content of this message is my personal opinion only and although
-> I am an employee of Intel, the statements I make here in no way
-> represent Intel's position on the issue, nor am I authorized to speak
-> on behalf of Intel on this matter.
->
->
->
+VGhpcyBsb29rcyBncmVhdCwgZXhjZXB0IGZvciBvbmUgdGhpbmcuIFdoYXQgYWJvdXQgZXh0ZXJu
+YWwgdG9vbGNoYWlucz8NCg0KV2UgdXNlIFBva3kncyBjb21waWxlciB3aGVuIGJ1aWxkaW5nIGZv
+ciBBUk0sIGJ1dCB3aGVuIGJ1aWxkaW5nIGZvciANCk1JUFMgd2UgbmVlZCB0byB1c2Ugb3VyIG93
+biwgd2hpY2ggaXMgYmFzZWQgb24gZ2NjIDQuNy4yIGFuZCBub3QgDQpsaWtlbHkgdG8gYmUgdXBk
+YXRlZC4gV2l0aCB0aGUgc3VnZ2VzdGVkIGNoYW5nZXMgdG8gc2VjdXJpdHlfZmxhZ3MuaW5jIA0K
+d2Ugd2lsbCBubyBsb25nZXIgYmUgYWJsZSB0byBidWlsZCB3aXRoIGhhcmRlbmluZyBlbmFibGVk
+IGZvciBNSVBTLi4uDQoNClJlZ2FyZGluZyB5b3VyIGNoYW5nZXM6DQoqIFdvdWxkbid0IGl0IGJl
+IGJldHRlciB0byBkZWZpbmUgR0NDUElFIGFzOg0KICAgIEdDQ1BJRSA/Pz0gIiINCiAgaW4gbWV0
+YS9yZWNpcGVzLWRldnRvb2xzL2djYy9nY2MtY29uZmlndXJlLWNvbW1vbi5pbmMgYW5kIGFzOg0K
+ICAgIEdDQ1BJRSA/PSAiLS1lbmFibGUtZGVmYXVsdC1waWUiDQogIGluIG1ldGEvY29uZi9kaXN0
+cm8vaW5jbHVkZS9zZWN1cml0eV9mbGFncy5pbmM/IFRoYXQgd2F5IGl0IGlzIGVhc3kgDQogIHRv
+IGRpc2FibGUgUElFIGJ5IHNldHRpbmcgR0NDUElFID0gIiIgaW4gbG9jYWwuY29uZiBldmVuIGlm
+IG90aGVyIA0KICBoYXJkZW5pbmdzIGFyZSBlbmFibGVkIGJ5IGluY2x1ZGluZyBzZWN1cml0eV9m
+bGFncy5pbmMuDQoqIEl0IGlzIHByb2JhYmx5IGEgYmFkIGlkZWEgdG8gY2hhbmdlIHRoZSBkZWZp
+bml0aW9uIG9mIA0KICBTRUNVUklUWV9OT19QSUVfQ0ZMQUdTIHRvOg0KICAgIFNFQ1VSSVRZX05P
+X1BJRV9DRkxBR1MgPz0gIiR7U0VDVVJJVFlfQ0ZMQUdTfSINCiAgc2luY2UgaXQgaXMgbW9zdCBs
+aWtlbHkgdXNlZCB0byBkZWZpbmUgU0VDVVJJVFlfQ0ZMQUdTIGluIG90aGVyIA0KICBleGlzdGlu
+ZyBsYXllcnMgdmlhIHRoZSB0eXBpY2FsOg0KICAgIFNFQ1VSSVRZX0NGTEFHU19wbi1mb28gPSAi
+JHtTRUNVUklUWV9OT19QSUVfQ0ZMQUdTfSINCiAgYW5kIHlvdSB3aWxsIHRoZW4gZW5kIHVwIHdp
+dGggYSBjaXJjdWxhciBkZWZpbml0aW9uLi4uDQoNCkZvciBiYWNrd2FyZHMgY29tcGF0aWJpbGl0
+eSBpdCBtaWdodCBiZSBhbiBpZGVhIHRvIGRvIHRoZSBmb2xsb3dpbmcgDQppbiBzZWN1cml0eV9m
+bGFncy5pbmM6DQoNCkdDQ1BJRSA/PSAiLS1lbmFibGUtZGVmYXVsdC1waWUiDQoNCiMgU0VDVVJJ
+VFlfUElFX0NGTEFHUyBpcyB1c2VkIHRvIG1haW50YWluIGJhY2t3YXJkcyBjb21wYXRpYmlsaXR5
+IGZvciANCiMgdGhlIGRlZmluaXRpb25zIG9mIFNFQ1VSSVRZX0NGTEFHUyBhbmQgU0VDVVJJVFlf
+Tk9fUElFX0NGTEFHUyBhZnRlciANCiMgdGhlIGludHJvZHVjdGlvbiBvZiBHQ0NQSUUuDQpTRUNV
+UklUWV9QSUVfQ0ZMQUdTID89ICIke0AnJyBpZiAnJHtHQ0NQSUV9JyBlbHNlICctcGllIC1mcGll
+J30iDQpTRUNVUklUWV9DRkxBR1MgPz0gIi1mc3RhY2stcHJvdGVjdG9yLXN0cm9uZyAke1NFQ1VS
+SVRZX1BJRV9DRkxBR1N9ICR7bGNsX21heWJlX2ZvcnRpZnl9ICR7U0VDVVJJVFlfU1RSSU5HRk9S
+TUFUfSINClNFQ1VSSVRZX05PX1BJRV9DRkxBR1MgPz0gIi1mc3RhY2stcHJvdGVjdG9yLXN0cm9u
+ZyAke2xjbF9tYXliZV9mb3J0aWZ5fSAke1NFQ1VSSVRZX1NUUklOR0ZPUk1BVH0iDQoNClRoYXQg
+d2F5IHRoZSBTRUNVUklUWV9DRkxBR1MgYW5kIFNFQ1VSSVRZX05PX1BJRV9DRkxBR1MgdmFyaWFi
+bGVzIA0Kd291bGQga2VlcCB0aGVpciBvbGQgdmFsdWVzIHVubGVzcyBHQ0NQSUUgaXMgc2V0IHRv
+IHNvbWV0aGluZywgd2hpY2ggDQppdCBpcyBieSBkZWZhdWx0Lg0KDQpFbmFibGluZyBoYXJkZW5p
+bmcgYnV0IHdpdGhvdXQgUElFIHdvdWxkIHRoZW4gYmVjb21lOg0KDQpHQ0NQSUUgPSAiIg0KU0VD
+VVJJVFlfUElFX0NGTEFHUyA9ICIiDQoNCi8vUGV0ZXINCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3Nh
+Z2UtLS0tLQ0KPiBGcm9tOiBLaGVtIFJhaiBbbWFpbHRvOnJhai5raGVtQGdtYWlsLmNvbV0NCj4g
+U2VudDogZGVuIDEyIGp1bmkgMjAxNyAxNjo0Nw0KPiBUbzogUGF0cmljayBPaGx5IDxwYXRyaWNr
+Lm9obHlAaW50ZWwuY29tPg0KPiBDYzogUGV0ZXIgS2plbGxlcnN0ZWR0IDxwZXRlci5ramVsbGVy
+c3RlZHRAYXhpcy5jb20+OyBvcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
+ZC5vcmcNCj4gU3ViamVjdDogUmU6IFtvZV0gLXBpZSBpbiBTRUNVUklUWV9DRkxBR1MgKHdhczog
+UmU6IFttZXRhLW9lXVtQQVRDSA0KPiAxLzNdIG1lc29uOiB1cGRhdGUgTWVzb24gZGV2dG9vbCB0
+byAwLjQwLjEpDQo+IA0KPiBQYXRyaWNrDQo+IA0KPiBJIGhhdmUgYSBwYXRjaHNldCB0aGF0IGlz
+IHJlZG9pbmcgdGhlIFBJRSBoYXJkZW5pbmcgd2l0aCB1c2luZyBzb21lDQo+IGhlbHAgZnJvbSBn
+Y2MgY29uZmlndXJhdGlvbiBpdHNlbGYuIHdpdGggdGhpcyBwYXRjaCBhbG1vc3QgYWxsIG9mIHRo
+ZSANCj4gTk9QSUUgZW50cmllcyBpbiBzZWN1aXR5LmluYyBhcmUgZml4ZWQgYW5kIHdlIGdldCBn
+Y2MgdG8gdGFrZSBjYXJlIG9mIA0KPiAtcGllIHBhc3NpbmcgdG8gY29tcGlsZXIgYW5kIGxpbmtl
+ciB3aGVuIG5lZWRlZA0KPiANCj4gVGhpcyBwYXRjaGVzIGFyZSBkb25lIGFmdGVyIGdjYzcgcmVj
+aXBlcyBzbyBJIHdpbGwgcHJvcG9zZSB0aGVtIGFmdGVyDQo+IGdjYzcgYnV0IGlmIHlvdSBhcmUg
+aW50ZXJlc3RlZCBoZXJlIGlzIHRoZSBicmFuY2gNCj4gDQo+IFRvcCA2IHBhdGNoZXMgYXJlIHdo
+YXQgeW91IHdhbnQgZnJvbQ0KPiBodHRwOi8vZ2l0Lm9wZW5lbWJlZGRlZC5vcmcvb3BlbmVtYmVk
+ZGVkLWNvcmUtY29udHJpYi9sb2cvP2g9a3Jhai9tYXN0ZXINCj4gDQo+IA0KPiBPbiBNb24sIEp1
+biAxMiwgMjAxNyBhdCAxMjowNCBBTSwgUGF0cmljayBPaGx5IDxwYXRyaWNrLm9obHlAaW50ZWwu
+Y29tPg0KPiB3cm90ZToNCj4gPiBPbiBGcmksIDIwMTctMDYtMDkgYXQgMTk6MzIgKzAyMDAsIFBh
+dHJpY2sgT2hseSB3cm90ZToNCj4gPj4gT24gRnJpLCAyMDE3LTA2LTA5IGF0IDE2OjM0ICswMjAw
+LCBQYXRyaWNrIE9obHkgd3JvdGU6DQo+ID4+ID4gT24gRnJpLCAyMDE3LTA2LTA5IGF0IDEzOjI0
+ICswMDAwLCBLaGVtIFJhaiB3cm90ZToNCj4gPj4gPiA+DQo+ID4+ID4gPiBPbiBGcmksIEp1biA5
+LCAyMDE3IGF0IDE6NDMgQU0gUGF0cmljayBPaGx5DQo+IDxwYXRyaWNrLm9obHlAaW50ZWwuY29t
+Pg0KPiA+PiA+ID4gd3JvdGU6DQo+ID4+ID4gPg0KPiA+PiA+ID4gICAgICAgICBPbiBXZWQsIDIw
+MTctMDYtMDcgYXQgMjE6NDQgKzAwMDAsIFBldGVyIEtqZWxsZXJzdGVkdA0KPiB3cm90ZToNCj4g
+Pj4gPiA+ICAgICAgICAgPiBNeSBndWVzcyBpcyB0aGF0IHRoZSBwcm9ibGVtIHN0ZW1zIGZyb20g
+dGhlIGZhY3QgdGhhdA0KPiA+PiA+ID4gICAgICAgICBzZWN1cml0eV9mbGFncy5pbmMNCj4gPj4g
+PiA+ICAgICAgICAgPiBhZGRzIC1waWUgKHdoaWNoIGlzIGEgbGlua2VyIGZsYWcpIHRvIFNFQ1VS
+SVRZX0NGTEFHUw0KPiByYXRoZXINCj4gPj4gPiA+ICAgICAgICAgdGhhbg0KPiA+PiA+ID4gICAg
+ICAgICA+IFNFQ1VSSVRZX0xERkxBR1MuLi4NCj4gPj4gPiA+DQo+ID4+ID4gPiAgICAgICAgIEkg
+dGhpbmsgSSd2ZSBzZWVuIHRoYXQgY2F1c2UgcHJvYmxlbXMgZWxzZXdoZXJlIHdoZW4gdGhlDQo+
+ID4+ID4gPiAgICAgICAgIENGTEFHUyBjYW1lDQo+ID4+ID4gPiAgICAgICAgIGFmdGVyIC1zaGFy
+ZWQsIGJlY2F1c2UgdGhlbiB0aGUgY29tcGlsZXIgZW5kZWQgdXAgdHJ5aW5nDQo+IHRvDQo+ID4+
+ID4gPiAgICAgICAgIHByb2R1Y2UgYQ0KPiA+PiA+ID4gICAgICAgICBwaWUgZXhlY3V0YWJsZSBp
+bnN0ZWFkIG9mIGEgc2hhcmVkIGxpYnJhcnkuDQo+ID4+ID4gPg0KPiA+PiA+ID4gICAgICAgICBQ
+ZXJoYXBzIHdlIHNob3VsZCBmaW5hbGx5IGFkZHJlc3MgdGhhdCBpbg0KPiBzZWN1cml0eV9mbGFn
+cy5pbmMNCj4gPj4gPiA+ICAgICAgICAgaW5zdGVhZCBvZg0KPiA+PiA+ID4gICAgICAgICB3b3Jr
+aW5nIGFyb3VuZCBpdD8NCj4gPj4gPiA+DQo+ID4+ID4gPg0KPiA+PiA+ID4gVGhpcyBwYXRjaCBp
+cyByZW1vdmluZyAtcGllIGZyb20gY29tcGlsZXIgYW5kIGxpbmtlciBmbGFncyB3aGljaA0KPiBk
+b2VzDQo+ID4+ID4gPiBub3QgcmVzdWx0IGluIGludGVuZGVkIGJlaGF2aW9yIGZvciBleGVjdXRh
+YmxlIHdoZW4gbGlua2VkIHRoZXkNCj4gd2lsbA0KPiA+PiA+ID4gbm90IGJlIHVzaW5nIC1waWUN
+Cj4gPj4gPg0KPiA+PiA+IFRoZSBwYXRjaCBoYWQgc29tZSBzeW50YXggZXJyb3JzIChmaXhlZCB2
+ZXJzaW9uIGJlbG93KSwgYnV0IGl0IGhhZA0KPiB0aGUNCj4gPj4gPiBjb2RlIHdoaWNoIGFkZHMg
+LXBpZSB0byBUQVJHRVRfTERGTEFHUyB3aGVuIGl0IGlzIGluDQo+IFNFQ1VSSVRZX0NGTEFHUywg
+c28NCj4gPj4gPiBjb25jZXB0dWFsbHkgdGhlIGZsYWcgc2hvdWxkbid0IGdldCBsb3N0IGVudGly
+ZWx5Lg0KPiA+PiA+DQo+ID4+ID4gQXJlIHlvdSBzYXlpbmcgdGhhdCBvbmUgY2Fubm90IHJlbHkg
+b24gVEFSR0VUX0xERkxBR1MgYmVpbmcgdXNlZA0KPiBkdXJpbmcNCj4gPj4gPiBsaW5raW5nPw0K
+PiA+PiA+DQo+ID4+ID4gSSd2ZSB0ZXN0ZWQgd2l0aCBtNCwgYW5kIGl0IHNlZW1zIHRvIHdvcmsg
+b2theToNCj4gPj4gPg0KPiA+PiA+ICQgZ3JlcCAtdyAtZSAtcGllIHRtcC1nbGliYy93b3JrL2Nv
+cmVpNy02NC1yZWZraXQtbGludXgvbTQvMS40LjE4LQ0KPiByMC90ZW1wL2xvZy5kb19jb21waWxl
+DQo+ID4+ID4geDg2XzY0LXJlZmtpdC1saW51eC1nY2MgIC1tNjQgLW1hcmNoPWNvcmVpNyAtbXR1
+bmU9Y29yZWk3IC0NCj4gbWZwbWF0aD1zc2UgLW1zc2U0LjIgLS1zeXNyb290PS9mYXN0L2J1aWxk
+L3JlZmtpdC9pbnRlbC1jb3JlaTctNjQvdG1wLQ0KPiBnbGliYy93b3JrL2NvcmVpNy02NC1yZWZr
+aXQtbGludXgvbTQvMS40LjE4LXIwL3JlY2lwZS1zeXNyb290ICAgLU8yIC0NCj4gcGlwZSAtZyAt
+ZmVsaW1pbmF0ZS11bnVzZWQtZGVidWctdHlwZXMgLWZkZWJ1Zy1wcmVmaXgtDQo+IG1hcD0vZmFz
+dC9idWlsZC9yZWZraXQvaW50ZWwtY29yZWk3LTY0L3RtcC1nbGliYy93b3JrL2NvcmVpNy02NC1y
+ZWZraXQtDQo+IGxpbnV4L200LzEuNC4xOC1yMD0vdXNyL3NyYy9kZWJ1Zy9tNC8xLjQuMTgtcjAg
+LWZkZWJ1Zy1wcmVmaXgtDQo+IG1hcD0vZmFzdC9idWlsZC9yZWZraXQvaW50ZWwtY29yZWk3LTY0
+L3RtcC1nbGliYy93b3JrL2NvcmVpNy02NC1yZWZraXQtDQo+IGxpbnV4L200LzEuNC4xOC1yMC9y
+ZWNpcGUtc3lzcm9vdC1uYXRpdmU9IC1mZGVidWctcHJlZml4LQ0KPiBtYXA9L2Zhc3QvYnVpbGQv
+cmVma2l0L2ludGVsLWNvcmVpNy02NC90bXAtZ2xpYmMvd29yay9jb3JlaTctNjQtcmVma2l0LQ0K
+PiBsaW51eC9tNC8xLjQuMTgtcjAvcmVjaXBlLXN5c3Jvb3Q9ICAtZnN0YWNrLXByb3RlY3Rvci1z
+dHJvbmcgLWZwaWUgLQ0KPiBEX0ZPUlRJRllfU09VUkNFPTIgLVdmb3JtYXQgLVdmb3JtYXQtc2Vj
+dXJpdHkgLVdlcnJvcj1mb3JtYXQtc2VjdXJpdHkNCj4gLVdsLC1PMSAtV2wsLS1oYXNoLXN0eWxl
+PWdudSAtV2wsLS1hcy1uZWVkZWQgLXBpZSAtZnN0YWNrLXByb3RlY3Rvci0NCj4gc3Ryb25nIC1X
+bCwteixyZWxybywteixub3cgLW8gbTQgbTQubyBidWlsdGluLm8gZGVidWcubyBldmFsLm8gZm9y
+bWF0Lm8NCj4gZnJlZXplLm8gaW5wdXQubyBtYWNyby5vIG91dHB1dC5vIHBhdGgubyBzeW10YWIu
+byAuLi9saWIvbGlibTQuYQ0KPiA+PiA+DQo+ID4+ID4gJCBmaWxlIHRtcC1nbGliYy93b3JrL2Nv
+cmVpNy02NC1yZWZraXQtbGludXgvbTQvMS40LjE4LQ0KPiByMC9wYWNrYWdlcy1zcGxpdC9tNC91
+c3IvYmluL200DQo+ID4+ID4gdG1wLWdsaWJjL3dvcmsvY29yZWk3LTY0LXJlZmtpdC1saW51eC9t
+NC8xLjQuMTgtcjAvcGFja2FnZXMtDQo+IHNwbGl0L200L3Vzci9iaW4vbTQ6IEVMRiA2NC1iaXQg
+TFNCIHNoYXJlZCBvYmplY3QsIHg4Ni02NCwgdmVyc2lvbiAxDQo+IChTWVNWKSwgZHluYW1pY2Fs
+bHkgbGlua2VkLCBpbnRlcnByZXRlciAvbGliL2xkLWxpbnV4LXg4Ni02NC5zby4yLCBmb3INCj4g
+R05VL0xpbnV4IDMuMi4wLA0KPiBCdWlsZElEW3NoYTFdPWYxMGQwYTI2Mjk5ZGNiOGM1YmQwZjFj
+ODJlZDQ5MmFlYTJkOGYwYWMsIHN0cmlwcGVkDQo+ID4+ID4NCj4gPj4gPiBJIGFzc3VtZSAiRUxG
+IDY0LWJpdCBMU0Igc2hhcmVkIG9iamVjdCIgaW5zdGVhZCBvZiAiRUxGIDY0LWJpdCBMU0INCj4g
+Pj4gPiBleGVjdXRhYmxlIiBtZWFucyAicGllIGV4ZWN1dGFibGUiPw0KPiA+Pg0KPiA+PiBXaGls
+ZSBJIGRvbid0IHRoaW5rIG15IHBhdGNoIGNhdXNlZCAtcGllIHRvIGdldCBsb3N0LCB1bmZvcnR1
+bmF0ZWx5DQo+IEkNCj4gPj4gbm93IGtub3cgdGhhdCBpdCBzdGlsbCBkb2Vzbid0IGdvIGludG8g
+dGhlIHJpZ2h0IHBsYWNlIGluIGFsbCBjYXNlcy4NCj4gRm9yDQo+ID4+IGV4YW1wbGUsIG5jdXJz
+ZXMgcHV0cyBMREZMQUdTIGFmdGVyIC1zaGFyZWQsIHRodXMgdHJpZ2dlcmluZyB0aGUNCj4gIm1h
+aW4NCj4gPj4gdW5kZWZpbmVkIiBlcnJvci4NCj4gPj4NCj4gPj4gVGhlIFRPT0xDSEFJTl9PUFRJ
+T05TIHRoYXQgS2hlbSBtZW50aW9uZWQgZ2V0IGFwcGVuZGVkIGRpcmVjdGx5DQo+IGFmdGVyDQo+
+ID4+IHRoZSBjb21tYW5kLCBzbyB0aGF0IHNlZW1zIGxpa2UgYSBiZXR0ZXIgcGxhY2UgZm9yIC1w
+aWUgdGhhbg0KPiBMREZMQUdTLg0KPiA+PiBJdCdzIHN0aWxsIGEgYml0IG9kZCB0byBwYXNzIGEg
+bGlua2VyIGZsYWcgdG8gYWxsIGNvbXBpbGVyDQo+IGludm9jYXRpb25zLA0KPiA+PiBpbmNsdWRp
+bmcgdGhvc2UgdGhhdCBkbyBub3QgbGluaywgYnV0IGl0IG1pZ2h0IGJlIGEgcHJhZ21hdGljDQo+
+IHNvbHV0aW9uDQo+ID4+IHRoYXQgaXMgYmV0dGVyIHRoYW4gd2hhdCB3ZSBoYXZlIG5vdy4NCj4g
+Pj4NCj4gPj4gSG93ZXZlciwgbXkgcGF0Y2ggYmVsb3cgbm93IGNhdXNlcyAvdXNyL2xpYi9saWJz
+dGRjKysuYS1nZGIucHkgdG8gYmUNCj4gPj4gYnVpbHQgZm9yIGdjYy1ydW50aW1lLCB3aGljaCB0
+cmlnZ2VycyBhbiBlcnJvcjoNCj4gPj4NCj4gPj4gRVJST1I6IGdjYy1ydW50aW1lLTYuMy4wLXIw
+IGRvX3BhY2thZ2U6IFFBIElzc3VlOiBnY2MtcnVudGltZToNCj4gPj4gRmlsZXMvZGlyZWN0b3Jp
+ZXMgd2VyZSBpbnN0YWxsZWQgYnV0IG5vdCBzaGlwcGVkIGluIGFueSBwYWNrYWdlOg0KPiA+PiAg
+IC91c3IvbGliL2xpYnN0ZGMrKy5hLWdkYi5weQ0KPiA+DQo+ID4gVGhhdCdzIGp1c3QgYSBtaW5v
+ciBmb2xsb3ctdXAgZXJyb3IuIFRoZSByZWFsIHByb2JsZW0gaXMgdGhhdCBsaWJzdGRjDQo+ID4g
+Kysuc28uNi4wLjIyIHdhcyBub3QgZ2V0dGluZyBidWlsdCBhbnltb3JlLiBUaGUgZXhwZWN0IC5w
+eSBmaWxlIHRoZW4NCj4gaXMNCj4gPiBsaWJzdGRjKysuc28uNi4wLjIyLWdkYi5weS4NCj4gPg0K
+PiA+IEknbSBzdGlsbCB1bnN1cmUgYWJvdXQgdGhlIHJvb3QgY2F1c2UuIFNvbWV0aGluZyBzZWVt
+cyB0byBoYXZlIGdvbmUNCj4gPiB3cm9uZyB3aGVuIGJ1aWxkaW5nIHRoZSB0b29sY2hhaW4sIGJl
+Y2F1c2UgZ2NjLXJ1bnRpbWUgZG9lc24ndCBldmVuDQo+IGhhdmUNCj4gPiAtcGllIGluIHRoZSBj
+b21waWxlciBmbGFncy4gRnJvbSBsb2cuZG9fY29uZmlndXJlOg0KPiA+DQo+ID4gY2hlY2tpbmcg
+d2hldGhlciB0aGUgeDg2XzY0LXJlZmtpdC1saW51eC1nY2MgIC1tNjQgLW1hcmNoPWNvcmVpNw0K
+PiA+IC1tdHVuZT1jb3JlaTcgLW1mcG1hdGg9c3NlIC1tc3NlNC4yDQo+ID4gLS1zeXNyb290PS9m
+YXN0L2J1aWxkL3JlZmtpdC9pbnRlbC1jb3JlaTctNjQvdG1wLWdsaWJjL3dvcmsvY29yZWk3LQ0K
+PiA2NC1yZWZraXQtbGludXgvZ2NjLXJ1bnRpbWUvNi4zLjAtcjAvcmVjaXBlLXN5c3Jvb3QgIC1X
+bCwteixyZWxybywtDQo+IHosbm93IGxpbmtlciAoeDg2XzY0LXJlZmtpdC1saW51eC1sZCAtLQ0K
+PiBzeXNyb290PS9mYXN0L2J1aWxkL3JlZmtpdC9pbnRlbC1jb3JlaTctNjQvdG1wLWdsaWJjL3dv
+cmsvY29yZWk3LTY0LQ0KPiByZWZraXQtbGludXgvZ2NjLXJ1bnRpbWUvNi4zLjAtcjAvcmVjaXBl
+LXN5c3Jvb3QgIC1XbCwteixyZWxybywteixub3cNCj4gLW0gZWxmX3g4Nl82NCkgc3VwcG9ydHMg
+c2hhcmVkIGxpYnJhcmllcy4uLiBubw0KPiA+IGNoZWNraW5nIGR5bmFtaWMgbGlua2VyIGNoYXJh
+Y3RlcmlzdGljcy4uLiBHTlUvTGludXggbGQuc28NCj4gPiBjaGVja2luZyBob3cgdG8gaGFyZGNv
+ZGUgbGlicmFyeSBwYXRocyBpbnRvIHByb2dyYW1zLi4uIHVuc3VwcG9ydGVkDQo+ID4gY2hlY2tp
+bmcgd2hldGhlciBzdHJpcHBpbmcgbGlicmFyaWVzIGlzIHBvc3NpYmxlLi4uIHllcw0KPiA+IGNo
+ZWNraW5nIGlmIGxpYnRvb2wgc3VwcG9ydHMgc2hhcmVkIGxpYnJhcmllcy4uLiBubw0KPiA+DQo+
+ID4gSSdtIGdvaW5nIHRvIHB1dCB0aGlzIGFzaWRlIGZvciBub3csIGJ1dCBJIHJlbWFpbiB1bmhh
+cHB5IGFib3V0IGhvdw0KPiB3ZQ0KPiA+IGN1cnJlbnRseSBwYXNzIC1waWUgaW4gQ0ZMQUdTIGFu
+ZCB0aGUgd29ya2Fyb3VuZHMgdGhhdCBhcmUgZ2V0dGluZw0KPiB1c2VkDQo+ID4gYXMgYSByZXN1
+bHQgb2YgdGhhdCwgbGlrZSBkaXNhYmxpbmcgLXBpZSBmb3IgUHl0aG9uIGRpc3R1dGlscy4gSQ0K
+PiA+IHVuZGVyc3RhbmQgdGhhdCB0aGF0IHBhcnRpY3VsYXIgY2hhbmdlIHByb2JhYmx5IG9ubHkg
+YWZmZWN0ZWQgdmVyeQ0KPiBmZXcNCj4gPiBiaW5hcmllcywgYnV0IGl0IHN0aWxsIGxvb2tzIGxp
+a2UgYSB3b3JrYXJvdW5kIGFuZCBub3QgYSBwcm9wZXINCj4gc29sdXRpb24NCj4gPiB0byBtZS4N
+Cj4gPg0KPiA+IFdoYXQgZG8gb3RoZXJzIHRoaW5nIGFib3V0IHRoZSBjdXJyZW50IHN0YXR1cyBx
+dW8gcmVnYXJkaW5nIC1waWU/DQo+ID4NCj4gPiAtLQ0KPiA+IEJlc3QgUmVnYXJkcywgUGF0cmlj
+ayBPaGx5DQo+ID4NCj4gPiBUaGUgY29udGVudCBvZiB0aGlzIG1lc3NhZ2UgaXMgbXkgcGVyc29u
+YWwgb3BpbmlvbiBvbmx5IGFuZCBhbHRob3VnaA0KPiA+IEkgYW0gYW4gZW1wbG95ZWUgb2YgSW50
+ZWwsIHRoZSBzdGF0ZW1lbnRzIEkgbWFrZSBoZXJlIGluIG5vIHdheQ0KPiA+IHJlcHJlc2VudCBJ
+bnRlbCdzIHBvc2l0aW9uIG9uIHRoZSBpc3N1ZSwgbm9yIGFtIEkgYXV0aG9yaXplZCB0byBzcGVh
+aw0KPiA+IG9uIGJlaGFsZiBvZiBJbnRlbCBvbiB0aGlzIG1hdHRlci4NCj4gPg0KPiA+DQo+ID4N
+Cg==
 
