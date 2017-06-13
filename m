@@ -1,29 +1,27 @@
 Return-Path: <obi@opendreambox.org>
-X-Greylist: delayed 628 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 13 Jun 2017 12:44:42 UTC
 Received: from mail.dream-property.net (mail.dream-property.net
 	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id DCD8F7835D
+	by mail.openembedded.org (Postfix) with ESMTP id DDCB17835E
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 13 Jun 2017 12:44:42 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id B0C6E3203266;
-	Tue, 13 Jun 2017 14:36:21 +0200 (CEST)
+	by mail.dream-property.net (Postfix) with ESMTP id D620B3203252;
+	Tue, 13 Jun 2017 14:34:14 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
 Received: from mail.dream-property.net ([127.0.0.1])
 	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with LMTP id lqL3oywlC-CF; Tue, 13 Jun 2017 14:36:19 +0200 (CEST)
+	with LMTP id KcVvh-D5skzB; Tue, 13 Jun 2017 14:34:12 +0200 (CEST)
 Received: from t460p (p57A610EC.dip0.t-ipconnect.de [87.166.16.236])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id 4E84A3203143;
-	Tue, 13 Jun 2017 14:36:19 +0200 (CEST)
-Date: Tue, 13 Jun 2017 14:36:18 +0200
+	by mail.dream-property.net (Postfix) with ESMTPSA id 625BC32023C8;
+	Tue, 13 Jun 2017 14:34:12 +0200 (CEST)
+Date: Tue, 13 Jun 2017 14:34:11 +0200
 From: Andreas Oberritter <obi@opendreambox.org>
 To: Denys Dmytriyenko <denis@denix.org>
-Message-ID: <20170613143618.4017bde7@t460p>
-In-Reply-To: <20170612231027.GZ28053@denix.org>
+Message-ID: <20170613143411.67399672@t460p>
+In-Reply-To: <20170612190424.GW28053@denix.org>
 References: <20170326203053.GH15664@denix.org>
 	<20170329230613.GS15664@denix.org>
 	<20170413004504.2cae0270@t510.zcs.saftware.de>
@@ -31,7 +29,6 @@ References: <20170326203053.GH15664@denix.org>
 	<20170413021127.47ff6bc7@t510.zcs.saftware.de>
 	<CAJ86T=W3YBoLXH+J16XhJ+FO_ZtW17hPX8+djgqrgVNFXkeBkg@mail.gmail.com>
 	<20170612190424.GW28053@denix.org>
-	<20170612231027.GZ28053@denix.org>
 MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
@@ -51,81 +48,76 @@ X-List-Received-Date: Tue, 13 Jun 2017 12:44:44 -0000
 Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-On Mon, 12 Jun 2017 19:10:27 -0400
+On Mon, 12 Jun 2017 15:04:24 -0400
 Denys Dmytriyenko <denis@denix.org> wrote:
 
-> On Mon, Jun 12, 2017 at 03:04:24PM -0400, Denys Dmytriyenko wrote:
-> > On Wed, Apr 12, 2017 at 05:53:21PM -0700, Andre McCurdy wrote:  
-> > > On Wed, Apr 12, 2017 at 5:11 PM, Andreas Oberritter
-> > > <obi@opendreambox.org> wrote:  
-> > > > On Wed, 12 Apr 2017 16:38:58 -0700
-> > > > Andre McCurdy <armccurdy@gmail.com> wrote:
-> > > >  
-> > > >> On Wed, Apr 12, 2017 at 3:45 PM, Andreas Oberritter
-> > > >> <obi@opendreambox.org> wrote:  
-> > > >> > On Wed, 29 Mar 2017 19:06:14 -0400
-> > > >> > Denys Dmytriyenko <denis@denix.org> wrote:
-> > > >> >  
-> > > >> >> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:  
-> > > >> >> > Hi,
-> > > >> >> >
-> > > >> >> > I've been having the following build issues lately with qtwebkit 5.8 from
-> > > >> >> > master:
-> > > >> >> >
-> > > >> >> > | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
-> > > >> >> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
-> > > >> >> > | linking ../lib/libQt5WebKit.so.5.8.0
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
-> > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
-> > > >> >> > | collect2: error: ld returned 1 exit status
-> > > >> >> > | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
-> > > >> >> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
-> > > >> >> > | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
-> > > >> >> > | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
-> > > >> >> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
-> > > >> >> >
-> > > >> >> > I believe I was able to build 5.8/master before, so I'm suspecting recent
-> > > >> >> > binutils upgrade... But I can be wrong. Would really appreciate some help
-> > > >> >> > here. Thanks.  
-> > > >> >>
-> > > >> >> Anyone else see this?
-> > > >> >>  
-> > > >> >
-> > > >> > I do. Have you been able to solve it in the meantime?  
-> > > >>
-> > > >> Do you both have gold enabled?
-> > > >>
-> > > >>   https://bugs.launchpad.net/ubuntu/+source/qtwebkit-opensource-src/+bug/1653529  
-> > > >
-> > > > I don't use the ld-is-gold flag, but gold gets built nevertheless. It's just not
-> > > > the default linker. I guess qtwebkit forces its use. So the question becomes whether
-> > > > I should set ld-is-gold or teach qtwebkit not to use gold, in order not to mix both
-> > > > linkers.  
-> > > 
-> > > Assuming qtwebkit has a configure option to explicitly enable/disable
-> > > gold, I'd say add a PACKAGECONFIG option.
-> > > 
-> > > In the short term keep the PACKAGECONFIG option disabled and in the
-> > > longer term (once qtwebkit builds successfully with gold enabled) set
-> > > the PACKAGECONFIG option based on the testing the distro feature.  
+> On Wed, Apr 12, 2017 at 05:53:21PM -0700, Andre McCurdy wrote:
+> > On Wed, Apr 12, 2017 at 5:11 PM, Andreas Oberritter
+> > <obi@opendreambox.org> wrote:  
+> > > On Wed, 12 Apr 2017 16:38:58 -0700
+> > > Andre McCurdy <armccurdy@gmail.com> wrote:
+> > >  
+> > >> On Wed, Apr 12, 2017 at 3:45 PM, Andreas Oberritter
+> > >> <obi@opendreambox.org> wrote:  
+> > >> > On Wed, 29 Mar 2017 19:06:14 -0400
+> > >> > Denys Dmytriyenko <denis@denix.org> wrote:
+> > >> >  
+> > >> >> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko wrote:  
+> > >> >> > Hi,
+> > >> >> >
+> > >> >> > I've been having the following build issues lately with qtwebkit 5.8 from
+> > >> >> > master:
+> > >> >> >
+> > >> >> > | make[2]: Entering directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> > >> >> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so libQt5WebKit.so.5 libQt5WebKit.so.5.8
+> > >> >> > | linking ../lib/libQt5WebKit.so.5.8.0
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_edata'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0): multiple definition of `_end'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `__bss_start'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_edata'
+> > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0): multiple definition of `_end'
+> > >> >> > | collect2: error: ld returned 1 exit status
+> > >> >> > | Makefile.api:92: recipe for target '../lib/libQt5WebKit.so.5.8.0' failed
+> > >> >> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
+> > >> >> > | make[2]: Leaving directory '/OE/master/build/tmp/work/armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/build/Source'
+> > >> >> > | Makefile.QtWebKit:44: recipe for target 'sub-api-pri-make_first-ordered' failed
+> > >> >> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
+> > >> >> >
+> > >> >> > I believe I was able to build 5.8/master before, so I'm suspecting recent
+> > >> >> > binutils upgrade... But I can be wrong. Would really appreciate some help
+> > >> >> > here. Thanks.  
+> > >> >>
+> > >> >> Anyone else see this?
+> > >> >>  
+> > >> >
+> > >> > I do. Have you been able to solve it in the meantime?  
+> > >>
+> > >> Do you both have gold enabled?
+> > >>
+> > >>   https://bugs.launchpad.net/ubuntu/+source/qtwebkit-opensource-src/+bug/1653529  
+> > >
+> > > I don't use the ld-is-gold flag, but gold gets built nevertheless. It's just not
+> > > the default linker. I guess qtwebkit forces its use. So the question becomes whether
+> > > I should set ld-is-gold or teach qtwebkit not to use gold, in order not to mix both
+> > > linkers.  
 > > 
-> > Has there been any progress on this? Is anybody looking at adding this 
-> > PACKAGECONFIG flag?  
+> > Assuming qtwebkit has a configure option to explicitly enable/disable
+> > gold, I'd say add a PACKAGECONFIG option.
+> > 
+> > In the short term keep the PACKAGECONFIG option disabled and in the
+> > longer term (once qtwebkit builds successfully with gold enabled) set
+> > the PACKAGECONFIG option based on the testing the distro feature.  
 > 
-> Ok, patch is submitted. I don't believe there's a need for PACKAGECONFIG.
-> 
-> http://lists.openembedded.org/pipermail/openembedded-devel/2017-June/113141.html
-> 
-> Validated with QtWebKit and QtQuick1 when there's no "ld-is-gold" set in 
-> DISTRO_FEATURES and once it's set.
+> Has there been any progress on this? Is anybody looking at adding this 
+> PACKAGECONFIG flag?
 > 
 
-Thanks!
+IIRC, setting ld-is-gold globally didn't help. I didn't investigate any further.
+
+Regards,
+Andreas
 
