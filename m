@@ -1,38 +1,41 @@
-Return-Path: <obi@opendreambox.org>
-Received: from mail.dream-property.net (mail.dream-property.net
-	[82.149.226.172])
-	by mail.openembedded.org (Postfix) with ESMTP id F3117782DA
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B949578217
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jun 2017 08:55:17 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mail.dream-property.net (Postfix) with ESMTP id 8A03032033A0;
-	Wed, 14 Jun 2017 10:55:18 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
-Received: from mail.dream-property.net ([127.0.0.1])
-	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with LMTP id 0M-_IpXRYrUn; Wed, 14 Jun 2017 10:55:12 +0200 (CEST)
-Received: from t460p (p57A610EC.dip0.t-ipconnect.de [87.166.16.236])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
-	(No client certificate requested)
-	by mail.dream-property.net (Postfix) with ESMTPSA id BAA5D320326A;
-	Wed, 14 Jun 2017 10:55:10 +0200 (CEST)
-Date: Wed, 14 Jun 2017 10:55:09 +0200
-From: Andreas Oberritter <obi@opendreambox.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170614105509.4c53d25d@t460p>
-In-Reply-To: <CA+chaQeTEGocMJ5oZNFBKu18Rkh-DNm885JC=5vCY9uy=rkBkQ@mail.gmail.com>
-References: <20170326203053.GH15664@denix.org>
-	<20170329230613.GS15664@denix.org>
-	<20170413004504.2cae0270@t510.zcs.saftware.de>
-	<CAJ86T=X2379-ZvEVS-AYku6NENYC48+t11T0GpOic-xyYAPzKQ@mail.gmail.com>
-	<20170413021127.47ff6bc7@t510.zcs.saftware.de>
-	<CAJ86T=W3YBoLXH+J16XhJ+FO_ZtW17hPX8+djgqrgVNFXkeBkg@mail.gmail.com>
-	<20170612190424.GW28053@denix.org> <20170613143411.67399672@t460p>
-	<CA+chaQeTEGocMJ5oZNFBKu18Rkh-DNm885JC=5vCY9uy=rkBkQ@mail.gmail.com>
-MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qtwebkit 5.8 build issues?
+	Wed, 14 Jun 2017 09:05:38 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id u101so37756568wrc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jun 2017 02:05:40 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=A/9FyY96XLGr38hgrk6XAq74DNaoxOkAjZUcQWXdPo0=;
+	b=eUc6JH+qCOFVHefTDiPq2US5abtzFVe6UkEwLZl53nyhK0mG0+COaPc90Lv9bp0/HB
+	AUyiIcOvgyzCTWi40rLO7MEfLRdU2V8ZQVvfFVoKrFavJf2O9fU6299AWkQAZ3+6RUJ8
+	b6+Mts+c6zZqEZ1jrb3z26MnzHlKqe4/lKYZ0jx1PgI8idofb+Pe651Rsieyr8MxJx78
+	wioWCXfe031cdytZ47Z4qUS14FwDvAo4YikQb4jauXH9JkfS75jdD0Ej3ESjMm9cncVw
+	vQqOz45Hs7hnOPhH64nbwTqdJpSSz0wWRQpGlQva4HZIUd3vwRzscmACkrMYQ2xniEf8
+	ymUA==
+X-Gm-Message-State: AKS2vOwkCQH1xFZz7mbRzQLiwqZDHv7/EchNulOAQ25mwRk+g43NlLCV
+	+iGrhfFfm3B0bg/6ei4=
+X-Received: by 10.223.141.138 with SMTP id o10mr552500wrb.69.1497431139115;
+	Wed, 14 Jun 2017 02:05:39 -0700 (PDT)
+Received: from tfsielt31850 ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id k56sm431189wrk.45.2017.06.14.02.05.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 14 Jun 2017 02:05:38 -0700 (PDT)
+Message-ID: <1497431137.19546.1.camel@andred.net>
+From: =?ISO-8859-1?Q?Andr=E9?= Draszik <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Jun 2017 10:05:37 +0100
+In-Reply-To: <20170614082721.7902-1-ismo.puustinen@intel.com>
+References: <20170614082721.7902-1-ismo.puustinen@intel.com>
+X-Mailer: Evolution 3.22.6-1 
+Mime-Version: 1.0
+Subject: Re: [PATCH] fuse: fix fetcher error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,135 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jun 2017 08:55:18 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 14 Jun 2017 09:05:43 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Tue, 13 Jun 2017 16:36:38 +0200
-Martin Jansa <martin.jansa@gmail.com> wrote:
+Hi,
 
-> Is it happening only for arm?
-
-It happened trying to build for mips32el.
-
-> I don't build it for qemuarm (because of armv5 isn't supported anymore),
-> but it builds fine in my world builds for qemux86(-64) where I use
-> ld-is-gold globally.
+On Wed, 2017-06-14 at 11:27 +0300, Ismo Puustinen wrote:
+> The recent fuse recipe update broke fetching the sources when building
+> fuse-native (it tried to fetch non-existent package
+> fuse-native-2.9.7.tar.gz).
 > 
-> On Tue, Jun 13, 2017 at 2:34 PM, Andreas Oberritter <obi@opendreambox.org>
-> wrote:
+> Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
+> ---
+>  meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> > On Mon, 12 Jun 2017 15:04:24 -0400
-> > Denys Dmytriyenko <denis@denix.org> wrote:
-> >  
-> > > On Wed, Apr 12, 2017 at 05:53:21PM -0700, Andre McCurdy wrote:  
-> > > > On Wed, Apr 12, 2017 at 5:11 PM, Andreas Oberritter
-> > > > <obi@opendreambox.org> wrote:  
-> > > > > On Wed, 12 Apr 2017 16:38:58 -0700
-> > > > > Andre McCurdy <armccurdy@gmail.com> wrote:
-> > > > >  
-> > > > >> On Wed, Apr 12, 2017 at 3:45 PM, Andreas Oberritter
-> > > > >> <obi@opendreambox.org> wrote:  
-> > > > >> > On Wed, 29 Mar 2017 19:06:14 -0400
-> > > > >> > Denys Dmytriyenko <denis@denix.org> wrote:
-> > > > >> >  
-> > > > >> >> On Sun, Mar 26, 2017 at 04:30:53PM -0400, Denys Dmytriyenko  
-> > wrote:  
-> > > > >> >> > Hi,
-> > > > >> >> >
-> > > > >> >> > I've been having the following build issues lately with  
-> > qtwebkit 5.8 from  
-> > > > >> >> > master:
-> > > > >> >> >
-> > > > >> >> > | make[2]: Entering directory '/OE/master/build/tmp/work/  
-> > armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/
-> > build/Source'  
-> > > > >> >> > | rm -f libQt5WebKit.so.5.8.0 libQt5WebKit.so  
-> > libQt5WebKit.so.5 libQt5WebKit.so.5.8  
-> > > > >> >> > | linking ../lib/libQt5WebKit.so.5.8.0
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `__bss_start'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `__bss_start'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `_edata'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `_edata'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `_end'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Core.so:(*IND*+0x0):
-> > multiple definition of `_end'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0):
-> > multiple definition of `__bss_start'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0):
-> > multiple definition of `_edata'  
-> > > > >> >> > | /OE/master/build/tmp/work/armv7ahf-neon-oe-linux-  
-> > gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/recipe-sysroot/usr/lib/libQt5Gui.so:(*IND*+0x0):
-> > multiple definition of `_end'  
-> > > > >> >> > | collect2: error: ld returned 1 exit status
-> > > > >> >> > | Makefile.api:92: recipe for target  
-> > '../lib/libQt5WebKit.so.5.8.0' failed  
-> > > > >> >> > | make[2]: *** [../lib/libQt5WebKit.so.5.8.0] Error 1
-> > > > >> >> > | make[2]: Leaving directory '/OE/master/build/tmp/work/  
-> > armv7ahf-neon-oe-linux-gnueabi/qtwebkit/5.8.0+gitAUTOINC+74ac5b0f34-r0/
-> > build/Source'  
-> > > > >> >> > | Makefile.QtWebKit:44: recipe for target  
-> > 'sub-api-pri-make_first-ordered' failed  
-> > > > >> >> > | make[1]: *** [sub-api-pri-make_first-ordered] Error 2
-> > > > >> >> >
-> > > > >> >> > I believe I was able to build 5.8/master before, so I'm  
-> > suspecting recent  
-> > > > >> >> > binutils upgrade... But I can be wrong. Would really  
-> > appreciate some help  
-> > > > >> >> > here. Thanks.  
-> > > > >> >>
-> > > > >> >> Anyone else see this?
-> > > > >> >>  
-> > > > >> >
-> > > > >> > I do. Have you been able to solve it in the meantime?  
-> > > > >>
-> > > > >> Do you both have gold enabled?
-> > > > >>
-> > > > >>   https://bugs.launchpad.net/ubuntu/+source/qtwebkit-  
-> > opensource-src/+bug/1653529  
-> > > > >
-> > > > > I don't use the ld-is-gold flag, but gold gets built nevertheless.  
-> > It's just not  
-> > > > > the default linker. I guess qtwebkit forces its use. So the question  
-> > becomes whether  
-> > > > > I should set ld-is-gold or teach qtwebkit not to use gold, in order  
-> > not to mix both  
-> > > > > linkers.  
-> > > >
-> > > > Assuming qtwebkit has a configure option to explicitly enable/disable
-> > > > gold, I'd say add a PACKAGECONFIG option.
-> > > >
-> > > > In the short term keep the PACKAGECONFIG option disabled and in the
-> > > > longer term (once qtwebkit builds successfully with gold enabled) set
-> > > > the PACKAGECONFIG option based on the testing the distro feature.  
-> > >
-> > > Has there been any progress on this? Is anybody looking at adding this
-> > > PACKAGECONFIG flag?
-> > >  
-> >
-> > IIRC, setting ld-is-gold globally didn't help. I didn't investigate any
-> > further.
-> >
-> > Regards,
-> > Andreas
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >  
+> diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb b/meta-
+> filesystems/recipes-support/fuse/fuse_2.9.7.bb
+> index e66f3cd..ed353c7 100644
+> --- a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+> +++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+> @@ -10,7 +10,7 @@ LICENSE = "GPLv2 & LGPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>                      file://COPYING.LIB;md5=4fbd65380cdd255951079008b36451
+> 6c"
+>  
+> -SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${P}/${P}
+> .tar.gz \
+> +SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-
+> ${PV}/fuse-${PV}.tar.gz \
 
+You can use ${BP} rather than ${P} or fuse-${PV}
+
+Cheers,
+Andre'
+
+
+>             file://gold-unversioned-symbol.patch \
+>             file://aarch64.patch \
+>             file://0001-fuse-fix-the-return-value-of-help-option.patch \
+> -- 
+> 2.9.4
+> 
 
