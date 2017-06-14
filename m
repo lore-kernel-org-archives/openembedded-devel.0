@@ -1,23 +1,21 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 96EC96B6EA
+Return-Path: <ismo.puustinen@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id CBBE671A3A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jun 2017 00:58:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v5E0wX2l001517
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 13 Jun 2017 17:58:34 -0700 (PDT)
-Received: from pek-lpggp4.wrs.com (128.224.153.77) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Tue, 13 Jun 2017 17:58:33 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Jun 2017 08:58:31 +0800
-Message-ID: <20170614005831.14549-1-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.9.3
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] libdevmapper: sync with lvm2 2.02.171
+	Wed, 14 Jun 2017 08:28:24 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	14 Jun 2017 01:28:25 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,340,1493708400"; d="scan'208";a="867814257"
+Received: from ipuustin-desk.fi.intel.com ([10.237.72.72])
+	by FMSMGA003.fm.intel.com with ESMTP; 14 Jun 2017 01:28:24 -0700
+From: Ismo Puustinen <ismo.puustinen@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Jun 2017 11:27:21 +0300
+Message-Id: <20170614082721.7902-1-ismo.puustinen@intel.com>
+X-Mailer: git-send-email 2.9.4
+Subject: [PATCH] fuse: fix fetcher error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,35 +28,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jun 2017 00:58:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 14 Jun 2017 08:28:26 -0000
 
-Both of libdevmapper and lvm2 should have the same version.
+The recent fuse recipe update broke fetching the sources when building
+fuse-native (it tried to fetch non-existent package
+fuse-native-2.9.7.tar.gz).
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Ismo Puustinen <ismo.puustinen@intel.com>
 ---
- .../lvm2/{libdevmapper_2.02.166.bb => libdevmapper_2.02.171.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/lvm2/{libdevmapper_2.02.166.bb => libdevmapper_2.02.171.bb} (63%)
+ meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.166.bb b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.171.bb
-similarity index 63%
-rename from meta-oe/recipes-support/lvm2/libdevmapper_2.02.166.bb
-rename to meta-oe/recipes-support/lvm2/libdevmapper_2.02.171.bb
-index 3cf939d..b6ae902 100644
---- a/meta-oe/recipes-support/lvm2/libdevmapper_2.02.166.bb
-+++ b/meta-oe/recipes-support/lvm2/libdevmapper_2.02.171.bb
-@@ -1,7 +1,7 @@
- require lvm2.inc
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+index e66f3cd..ed353c7 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+@@ -10,7 +10,7 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
  
--SRC_URI[md5sum] = "c5a54ee0b86703daaad6e856439e115a"
--SRC_URI[sha256sum] = "e120b066b85b224552efda40204488c5123de068725676fd6e5c8bc655051b94"
-+SRC_URI[md5sum] = "153b7bb643eb26073274968e9026fa8f"
-+SRC_URI[sha256sum] = "b815a711a2fabaa5c3dc1a4a284df0268bf0f325f0fc0f5c9530c9bbb54b9964"
- 
- DEPENDS += "autoconf-archive-native"
- 
+-SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz \
++SRC_URI = "https://github.com/libfuse/libfuse/releases/download/fuse-${PV}/fuse-${PV}.tar.gz \
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+            file://0001-fuse-fix-the-return-value-of-help-option.patch \
 -- 
-2.9.3
+2.9.4
 
 
