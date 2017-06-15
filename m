@@ -1,44 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D5167837E
+Return-Path: <rsalveti@rsalveti.net>
+Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
+	[209.85.217.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 808E37836A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 14:14:36 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id f127so1838394pgc.2
+	Thu, 15 Jun 2017 14:16:01 +0000 (UTC)
+Received: by mail-ua0-f174.google.com with SMTP id q15so9063900uaa.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 07:14:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=fjYHQ6e2/2hxYJIReimC2JRfUwVyUaNtFAEIENylqL8=;
-	b=lvmNoB4aN+sL9wUCkYzPAmAdg3n96Y7o9yCT1nbHB9+q4F+EzDh5THGWU5ILYiS5KH
-	P9845+N8rlruxG2mP4tF8jqThp2JQQfuVjjrcxri23u55M6J5O79abxaCV/RXMq58R2W
-	oBG8D856OSfZ3YbRvqw6sFH2+Lc3P0WaOXTtz8xaBIuGj+QZ9qCBZB12/+Y5lpP/AKI8
-	q52mR7MNMCaxw1iqp3Ko4w+pC51uuXeIJoYxQdo8ZjmbyDQ4i5DzHELDZsC21yeKoHwR
-	K5YIlAPHTHulAjGnKTe1+kHdxsTbRIIHW6G4klSc6/MWp746GxDtbDMNsVa9813t9CLA
-	Csew==
+	Thu, 15 Jun 2017 07:16:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=rsalveti-net.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=izvcAEnrbndQipRC+E3aDERtVDSdBb8/lr6l6gzzXgw=;
+	b=SVaGa/au66qsDzLnUXUJd/BJj3Y9bh0VteXoumUbiVD6quR3SwmQQz8e9iw93Xqrcb
+	qJ8ckLYKPjcx2ca0kluq8ZMcurnYsEL8+ucHtUuj4WIyHCd5XMIX9EJzeY3Hd5k7dJmE
+	5i34KI9DjyPYHdU13g5RgVV7EtuN1S6aJnesxdvRROb3OsArjmE4nRjXCPIrVHCnHqL0
+	wSUrbKYBNE/mJT5Q0jVY5l4Hcco4XnZ59yYKWINMcejgJ+5+apeQ1fxFHM53ONjGL9sv
+	lNMkBx3383jKwgmQzCHdNEUhT57jREJ3EwQgYtWnyIErN7asMkv2NBgQW4CLaaAcpi2W
+	KneQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fjYHQ6e2/2hxYJIReimC2JRfUwVyUaNtFAEIENylqL8=;
-	b=HsBCyDoa/sllPO3PkObf3k4bVU3kOjUa9ZZarGuUL8Im4uydY3kLoulJF5XY8F8I5g
-	RGSvi1TelnkdHsMJUvKskqVPGc+DB+hAS0+gLBdXRgVsSFHN308IpLQjJGqxfi/Mc+DC
-	Crc/aDyGQGUpQzB7Xv2SzaFpxb9Qb0nurMrlUendLU0FCTRYy48WnR/BA8/4Q86Jl+mn
-	73yKx/Nxln3KOadcxiFa5WzF5y1uVA0LsomKC1FsUsqJxglyku2ZwzMDMQfek+jVne73
-	i3nVrVeOBaoena/lsHLubnUyereSeEnijf8ZvOTjhK7wOkcNOXeOtYwObQF1u+c1StJM
-	EaEQ==
-X-Gm-Message-State: AKS2vOwsccYbT8C7WQn44FkJdKEdX+fRWnhY75XIL6Ec8po56YNQXL9E
-	shjKU9YH30IQSoEy
-X-Received: by 10.98.21.9 with SMTP id 9mr5397002pfv.46.1497536076464;
-	Thu, 15 Jun 2017 07:14:36 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
-	by smtp.gmail.com with ESMTPSA id n15sm443362pgs.61.2017.06.15.07.14.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 15 Jun 2017 07:14:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=izvcAEnrbndQipRC+E3aDERtVDSdBb8/lr6l6gzzXgw=;
+	b=sWO4D66UypUJ+be2UGf47B9VddB90qQ/+KVjMwN2avn9zsW8xGkCef4y928zenIN8u
+	2M1SrF7yH89ZCjbshgLNJ32Na7j3Imj1e0YR20r1VsD8ug8ZyqFmBxDGEnCXIh/wBRBn
+	zQT8nm1z0SAFZVVD2kU1fscq9sdTx8ty8T/fXjwz/O6RkPOIyJBE/07X0ZftiJJqn+G3
+	nClsTwqBP3Li4i5usVCU6fT4DarUJtWNMDctiJThsucjapyhJd6tLEeiM9selmDxVQaB
+	ymdnecAy13FwxOW7vnOOUGEjvSY4lf0oI9IIiaI9N830BNy0TiBqYvpKtLScwUW+isA8
+	atBg==
+X-Gm-Message-State: AKS2vOyAiCYbN2GgKI8JAu9gec7gqX5yGlWjFFNFTU0tDg7nDG2uYu5d
+	NHZal5YepcfNeGcphSY=
+X-Received: by 10.176.76.106 with SMTP id d42mr3090072uag.4.1497536161636;
+	Thu, 15 Jun 2017 07:16:01 -0700 (PDT)
+Received: from localhost.localdomain ([2804:14d:badb:90a5:f21e:34ff:fe00:20a5])
+	by smtp.gmail.com with ESMTPSA id w138sm13638vkw.28.2017.06.15.07.15.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 15 Jun 2017 07:16:00 -0700 (PDT)
+From: Ricardo Salveti <rsalveti@rsalveti.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jun 2017 07:14:19 -0700
-Message-Id: <20170615141419.16677-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-oe][PATCH V5] fwts: Bump SRCREV to latest past 17.03.00 release
+Date: Thu, 15 Jun 2017 11:15:53 -0300
+Message-Id: <1497536153-5388-1-git-send-email-rsalveti@rsalveti.net>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] networkmanager: add support for systemd-resolved
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,389 +54,697 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jun 2017 14:14:36 -0000
+X-List-Received-Date: Thu, 15 Jun 2017 14:16:01 -0000
 
-Helps fixing build issues with gcc7
+Now that resolved is enabled in systemd, backport upstream patch that
+adds support for the systemd-resolved backend and add one additional
+check for the OE-specific resolv.conf link path.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Acked-by: Koen Kooi <koen.kooi@linaro.org>
-Acked-by: Fathi Boudra <fathi.boudra@linaro.org>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Ricardo Salveti <rsalveti@rsalveti.net>
 ---
-v2 -> v3
-- move the LDFLAGS after CFLAGS
-v3 -> v4
-- Fix point-to-int incompatibilities seen on x86 with off_t being 64bit
-- Fix printf formatting issues
-v4 -> v5
-- Cast the off_t to intmax_t in printf functions for portablility
+ ...dns-resolved-add-systemd-resolved-backend.patch | 621 +++++++++++++++++++++
+ ...ed-also-check-for-etc-resolv-conf.systemd.patch |  29 +
+ .../networkmanager/networkmanager_1.4.4.bb         |   2 +
+ 3 files changed, 652 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-add-systemd-resolved-backend.patch
+ create mode 100644 meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch
 
- ...01-Add-correct-printf-qualifier-for-off_t.patch | 37 +++++++++++
- ...e-poll.h-instead-of-deprecated-sys-poll.h.patch | 48 ++++++++++++++
- ...-C99-defined-format-for-printing-uint64_t.patch | 53 +++++++++++++++
- ...efine-__SWORD_TYPE-if-not-defined-by-libc.patch | 33 ++++++++++
- .../fwts/fwts/0003-Undefine-PAGE_SIZE.patch        | 30 +++++++++
- ...ntptr_t-to-fix-pointer-to-int-cast-issues.patch | 76 ++++++++++++++++++++++
- meta-oe/recipes-test/fwts/fwts_git.bb              | 12 +++-
- 7 files changed, 287 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
- create mode 100644 meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch b/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-add-systemd-resolved-backend.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-add-systemd-resolved-backend.patch
 new file mode 100644
-index 000000000..192e05f1c
+index 0000000..bd194a6
 --- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-Add-correct-printf-qualifier-for-off_t.patch
-@@ -0,0 +1,37 @@
-+From 232daf5fca6fb52cced5e810f2601fe1a71b96d8 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:49:50 -0700
-+Subject: [PATCH 1/3] Add correct printf qualifier for off_t
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-add-systemd-resolved-backend.patch
+@@ -0,0 +1,621 @@
++From: Sjoerd Simons <sjoerd@luon.net>
++Date: Sun, 21 Aug 2016 21:46:02 +0200
++Subject: [PATCH] dns/resolved: add systemd-resolved backend
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Add initial DNS backend that pushes DNS information into
++systemd-resolved. Backend is choosen by default if the systems
++resolv.conv is setup to pointing to one of the standard resolved
++locations.
++
++This doesn't handle global dns configuration.
++
++Signed-off-by: Sjoerd Simons <sjoerd@luon.net>
++
++https://bugzilla.gnome.org/show_bug.cgi?id=762540
++
++Upstream-Status: Backport
++
 +---
-+ src/bios/ebda_region/ebda_region.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ man/NetworkManager.conf.xml               |  10 +-
++ src/Makefile.am                           |   2 +
++ src/dns-manager/nm-dns-manager.c          |  43 ++-
++ src/dns-manager/nm-dns-systemd-resolved.c | 427 ++++++++++++++++++++++++++++++
++ src/dns-manager/nm-dns-systemd-resolved.h |  45 ++++
++ 5 files changed, 523 insertions(+), 4 deletions(-)
++ create mode 100644 src/dns-manager/nm-dns-systemd-resolved.c
++ create mode 100644 src/dns-manager/nm-dns-systemd-resolved.h
 +
-+Index: git/src/bios/ebda_region/ebda_region.c
-+===================================================================
-+--- git.orig/src/bios/ebda_region/ebda_region.c
-++++ git/src/bios/ebda_region/ebda_region.c
-+@@ -83,9 +83,9 @@ static int ebda_test1(fwts_framework *fw
-+ 	if ((entry != NULL) &&
-+ 	    (entry->type == FWTS_MEMORY_MAP_RESERVED ||
-+ 	     entry->type == FWTS_MEMORY_MAP_ACPI)) {
-+-		fwts_passed(fw, "EBDA region mapped at 0x%lx and reserved as a %" PRId64
-++		fwts_passed(fw, "EBDA region mapped at 0x%jdx and reserved as a %" PRId64
-+ 			"K region in the %s table at 0x%" PRIx64 "..0x%" PRIx64 ".",
-+-			ebda_addr,
-++			(intmax_t)ebda_addr,
-+ 			(entry->end_address - entry->start_address) / 1024,
-+ 			memory_map_name,
-+ 			entry->start_address,
-+@@ -93,8 +93,8 @@ static int ebda_test1(fwts_framework *fw
-+ 	} else
-+ 		fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 			"EBDAMappedNotReserved",
-+-			"EBDA region mapped at 0x%lx but not reserved in the %s table.",
-+-			ebda_addr, memory_map_name);
-++			"EBDA region mapped at 0x%jdx but not reserved in the %s table.",
-++			(intmax_t)ebda_addr, memory_map_name);
-+ 		
-+ 	return FWTS_OK;
-+ }
-diff --git a/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-new file mode 100644
-index 000000000..8ad078936
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch
-@@ -0,0 +1,48 @@
-+From 100a107a53d5dc9b0554252ac5dbf2c9330615e9 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:25:09 -0700
-+Subject: [PATCH 1/3] Include poll.h instead of deprecated sys/poll.h
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_ipmi.c   | 3 ++-
-+ src/lib/src/fwts_pipeio.c | 2 +-
-+ 2 files changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/lib/src/fwts_ipmi.c b/src/lib/src/fwts_ipmi.c
-+index cbb27611..70d11cfa 100644
-+--- a/src/lib/src/fwts_ipmi.c
-++++ b/src/lib/src/fwts_ipmi.c
-+@@ -18,10 +18,11 @@
-+  *
-+  */
++diff --git a/man/NetworkManager.conf.xml b/man/NetworkManager.conf.xml
++index 6295b82..0a67ae5 100644
++--- a/man/NetworkManager.conf.xml
+++++ b/man/NetworkManager.conf.xml
++@@ -275,10 +275,12 @@ no-auto-default=*
++       <varlistentry>
++         <term><varname>dns</varname></term>
++         <listitem><para>Set the DNS (<filename>resolv.conf</filename>) processing mode.</para>
++-        <para><literal>default</literal>: The default if the key is
++-        not specified. NetworkManager will update
+++        <para><literal>default</literal>: NetworkManager will update
++         <filename>resolv.conf</filename> to reflect the nameservers
++-        provided by currently active connections.</para>
+++        provided by currently active connections.  This is the default
+++        if the key is not specified, unless the system is configured
+++        to use systemd-resolved; in this case the default is
+++        <literal>systemd-resolved</literal></para>
++         <para><literal>dnsmasq</literal>: NetworkManager will run
++         dnsmasq as a local caching nameserver, using a "split DNS"
++         configuration if you are connected to a VPN, and then update
++@@ -288,6 +290,8 @@ no-auto-default=*
++         to unbound and dnssec-triggerd, providing a "split DNS"
++         configuration with DNSSEC support. The <filename>/etc/resolv.conf</filename>
++         will be managed by dnssec-trigger daemon.</para>
+++        <para><literal>systemd-resolved</literal>: NetworkManager will
+++        push the DNS configuration to systemd-resolved</para>
++         <para><literal>none</literal>: NetworkManager will not
++         modify resolv.conf. This implies
++         <literal>rc-manager</literal>&nbsp;<literal>unmanaged</literal></para>
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 8d29b19..10f63de 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -345,6 +345,8 @@ libNetworkManager_la_SOURCES = \
++ 	\
++ 	dns-manager/nm-dns-dnsmasq.c \
++ 	dns-manager/nm-dns-dnsmasq.h \
+++	dns-manager/nm-dns-systemd-resolved.c \
+++	dns-manager/nm-dns-systemd-resolved.h \
++ 	dns-manager/nm-dns-unbound.c \
++ 	dns-manager/nm-dns-unbound.h \
++ 	dns-manager/nm-dns-manager.c \
++diff --git a/src/dns-manager/nm-dns-manager.c b/src/dns-manager/nm-dns-manager.c
++index 5a758a9..38bc786 100644
++--- a/src/dns-manager/nm-dns-manager.c
+++++ b/src/dns-manager/nm-dns-manager.c
++@@ -45,6 +45,7 @@
 + 
-++#include <poll.h>
++ #include "nm-dns-plugin.h"
++ #include "nm-dns-dnsmasq.h"
+++#include "nm-dns-systemd-resolved.h"
++ #include "nm-dns-unbound.h"
++ 
++ #if WITH_LIBSOUP
++@@ -1588,6 +1589,37 @@ _check_resconf_immutable (NMDnsManagerResolvConfManager rc_manager)
++ 
++ NM_DEFINE_SINGLETON_GETTER (NMDnsManager, nm_dns_manager_get, NM_TYPE_DNS_MANAGER);
++ 
+++static gboolean
+++_resolvconf_resolved_managed (void)
+++{
+++	static const char *const resolved_paths[] = {
+++		"/run/systemd/resolve/resolv.conf",
+++		"/lib/systemd/resolv.conf",
+++		"/usr/lib/systemd/resolv.conf",
+++	};
+++	GFile *f;
+++	GFileInfo *info;
+++	gboolean ret = FALSE;
 ++
-+ #include <sys/types.h>
-+ #include <sys/stat.h>
-+ #include <fcntl.h>
-+-#include <sys/poll.h>
-+ #include <sys/ioctl.h>
-+ #include <linux/ipmi.h>
-+ 
-+diff --git a/src/lib/src/fwts_pipeio.c b/src/lib/src/fwts_pipeio.c
-+index fd719640..bdc5b2ea 100644
-+--- a/src/lib/src/fwts_pipeio.c
-++++ b/src/lib/src/fwts_pipeio.c
-+@@ -30,9 +30,9 @@
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <paths.h>
-++#include <poll.h>
-+ 
-+ #include <sys/param.h>
-+-#include <sys/poll.h>
-+ #include <sys/types.h>
-+ #include <sys/wait.h>
-+ #include <errno.h>
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch b/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
-new file mode 100644
-index 000000000..35ce883a2
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0002-Add-C99-defined-format-for-printing-uint64_t.patch
-@@ -0,0 +1,53 @@
-+From 25f18b9ac37960dc12a3b648a5c866bd56ef2cbe Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:50:23 -0700
-+Subject: [PATCH 2/3] Add C99 defined format for printing uint64_t
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/opal/reserv_mem.c | 8 ++++----
-+ 1 file changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/src/opal/reserv_mem.c b/src/opal/reserv_mem.c
-+index eeec2947..f0672e05 100644
-+--- a/src/opal/reserv_mem.c
-++++ b/src/opal/reserv_mem.c
-+@@ -185,7 +185,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 		regions[j].start = (uint64_t)be64toh(ranges[2 * j]);
-+ 		regions[j].len = (uint64_t)be64toh(ranges[2 * j + 1]);
-+ 		fwts_log_info(fw, "Region name %80s"
-+-			" start: 0x%08lx, len: 0x%08lx\n",
-++			" start: 0x%08" PRIx64 ", len: 0x%08" PRIx64 "\n",
-+ 			regions[j].name, regions[j].start, regions[j].len);
-+ 	}
-+ 
-+@@ -248,7 +248,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in homer-image size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64 ", actual: 0x%" PRIx64 "",
-+ 					configstruct.homer, regions[j].len);
-+ 				ok = false;
-+ 			} else
-+@@ -261,7 +261,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in slw-image size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64 ", actual: 0x%" PRIx64 "",
-+ 					configstruct.slw, regions[j].len);
-+ 				ok = false;
-+ 			} else
-+@@ -274,7 +274,7 @@ static int reserv_mem_limits_test(fwts_framework *fw)
-+ 				fwts_failed(fw, LOG_LEVEL_MEDIUM,
-+ 					"ImageSizeMismatch",
-+ 					"Mismatch in occ-common-area size, "
-+-					"expected: 0x%lx, actual: 0x%lx",
-++					"expected: 0x%" PRIx64", actual: 0x%" PRIx64"",
-+ 					configstruct.occ_common,
-+ 					regions[j].len);
-+ 				ok = false;
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-new file mode 100644
-index 000000000..3b83ca57c
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch
-@@ -0,0 +1,33 @@
-+From 0e89127cd02ecd5ea4506b935cb2b59eb94107d2 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:37:20 -0700
-+Subject: [PATCH 2/3] Define __SWORD_TYPE if not defined by libc
-+
-+__SWORD_TYPE is internal to glibc, therefore
-+check and define it if needed e.g. on musl
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_uefi.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/lib/src/fwts_uefi.c b/src/lib/src/fwts_uefi.c
-+index 1f9d31fa..2d925f8d 100644
-+--- a/src/lib/src/fwts_uefi.c
-++++ b/src/lib/src/fwts_uefi.c
-+@@ -59,6 +59,10 @@ typedef struct {
-+ #define UEFI_IFACE_SYSFS		(2)	/* sysfs */
-+ #define UEFI_IFACE_EFIVARS		(3)	/* efivar fs */
-+ 
-++#ifndef __SWORD_TYPE
-++typedef __typeof__( ((struct statfs *)0)->f_type )	__SWORD_TYPE;
-++#endif
+++	f = g_file_new_for_path (_PATH_RESCONF);
+++	info = g_file_query_info (f,
+++	                          G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK","\
+++	                          G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET,
+++	                          G_FILE_QUERY_INFO_NOFOLLOW_SYMLINKS,
+++	                          NULL, NULL);
 ++
-+ /* File system magic numbers */
-+ #define PSTOREFS_MAGIC          ((__SWORD_TYPE)0x6165676C)
-+ #define EFIVARFS_MAGIC          ((__SWORD_TYPE)0xde5e81e4)
-+-- 
-+2.13.0
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
+++	if (info && g_file_info_get_is_symlink (info)) {
+++		ret = _nm_utils_strv_find_first ((gchar **) resolved_paths,
+++		                                 G_N_ELEMENTS (resolved_paths),
+++		                                 g_file_info_get_symlink_target (info)) >= 0;
+++	}
+++
+++	g_clear_object(&info);
+++	g_clear_object(&f);
+++
+++	return ret;
+++}
+++
++ static void
++ init_resolv_conf_mode (NMDnsManager *self, gboolean force_reload_plugin)
++ {
++@@ -1633,7 +1665,16 @@ again:
++ 
++ 	rc_manager = _check_resconf_immutable (rc_manager);
++ 
++-	if (nm_streq0 (mode, "dnsmasq")) {
+++	if (   (!mode && _resolvconf_resolved_managed ())
+++	    || nm_streq0 (mode, "systemd-resolved")) {
+++		if (   force_reload_plugin
+++		    || !NM_IS_DNS_SYSTEMD_RESOLVED (priv->plugin)) {
+++			_clear_plugin (self);
+++			priv->plugin = nm_dns_systemd_resolved_new ();
+++			plugin_changed = TRUE;
+++		}
+++		mode = "systemd-resolved";
+++	} else if (nm_streq0 (mode, "dnsmasq")) {
++ 		if (force_reload_plugin || !NM_IS_DNS_DNSMASQ (priv->plugin)) {
++ 			_clear_plugin (self);
++ 			priv->plugin = nm_dns_dnsmasq_new ();
++diff --git a/src/dns-manager/nm-dns-systemd-resolved.c b/src/dns-manager/nm-dns-systemd-resolved.c
++new file mode 100644
++index 0000000..6bdd5f6
++--- /dev/null
+++++ b/src/dns-manager/nm-dns-systemd-resolved.c
++@@ -0,0 +1,427 @@
+++/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+++/*
+++ * Copyright (C) 2010 Dan Williams <dcbw@redhat.com>
+++ * Copyright (C) 2016 Sjoerd Simons <sjoerd@luon.net>
+++ *
+++ * This program is free software; you can redistribute it and/or modify
+++ * it under the terms of the GNU General Public License as published by
+++ * the Free Software Foundation; either version 2, or (at your option)
+++ * any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License along
+++ * with this program; if not, write to the Free Software Foundation, Inc.,
+++ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+++ *
+++ */
+++
+++#include "nm-default.h"
+++
+++#include "nm-dns-systemd-resolved.h"
+++
+++#include <stdlib.h>
+++#include <unistd.h>
+++#include <sys/types.h>
+++#include <sys/wait.h>
+++#include <arpa/inet.h>
+++#include <sys/stat.h>
+++#include <linux/if.h>
+++
+++#include "nm-core-internal.h"
+++#include "nm-platform.h"
+++#include "nm-utils.h"
+++#include "nm-ip4-config.h"
+++#include "nm-ip6-config.h"
+++#include "nm-bus-manager.h"
+++#include "nm-manager.h"
+++#include "nm-device.h"
+++#include "NetworkManagerUtils.h"
+++
+++G_DEFINE_TYPE (NMDnsSystemdResolved, nm_dns_systemd_resolved, NM_TYPE_DNS_PLUGIN)
+++
+++#define NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE(o) \
+++  (G_TYPE_INSTANCE_GET_PRIVATE ((o), NM_TYPE_DNS_SYSTEMD_RESOLVED, \
+++    NMDnsSystemdResolvedPrivate))
+++
+++#define SYSTEMD_RESOLVED_DBUS_SERVICE "org.freedesktop.resolve1"
+++#define SYSTEMD_RESOLVED_DBUS_PATH "/org/freedesktop/resolve1"
+++
+++typedef struct {
+++	int ifindex;
+++	GList *configs;
+++} InterfaceConfig;
+++
+++typedef struct {
+++	GDBusProxy *resolve;
+++	GCancellable *init_cancellable;
+++	GCancellable *update_cancellable;
+++	GQueue dns_updates;
+++	GQueue domain_updates;
+++} NMDnsSystemdResolvedPrivate;
+++
+++/*****************************************************************************/
+++
+++#define _NMLOG_DOMAIN         LOGD_DNS
+++#define _NMLOG_PREFIX_NAME    "systemd-resolved"
+++#define _NMLOG(level, ...) \
+++    G_STMT_START { \
+++        nm_log ((level), _NMLOG_DOMAIN, \
+++                "%s[%p]: " _NM_UTILS_MACRO_FIRST(__VA_ARGS__), \
+++                _NMLOG_PREFIX_NAME, \
+++                (self) \
+++                _NM_UTILS_MACRO_REST(__VA_ARGS__)); \
+++    } G_STMT_END
+++
+++/*****************************************************************************/
+++
+++static void
+++call_done (GObject *source, GAsyncResult *r, gpointer user_data)
+++{
+++	GVariant *v;
+++	GError *error = NULL;
+++	NMDnsSystemdResolved *self = (NMDnsSystemdResolved *) user_data;
+++
+++	v = g_dbus_proxy_call_finish (G_DBUS_PROXY (source), r, &error);
+++
+++	if (g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+++		return;
+++
+++	if (error != NULL) {
+++		_LOGW ("Failed: %s\n", error->message);
+++		g_error_free (error);
+++	}
+++}
+++
+++static void
+++add_interface_configuration (NMDnsSystemdResolved *self,
+++                             GArray *interfaces,
+++                             const NMDnsIPConfigData *data)
+++{
+++	int i;
+++	InterfaceConfig *ic = NULL;
+++	int ifindex;
+++	NMDevice *device;
+++
+++	if (NM_IS_IP4_CONFIG (data->config))
+++		ifindex = nm_ip4_config_get_ifindex (data->config);
+++	else if (NM_IS_IP6_CONFIG  (data->config))
+++		ifindex = nm_ip6_config_get_ifindex (data->config);
+++	else
+++		g_return_if_reached ();
+++
+++	device = nm_manager_get_device_by_ifindex (nm_manager_get (), ifindex);
+++
+++	if (!nm_device_get_managed (device, FALSE))
+++		return;
+++
+++	for (i = 0; i < interfaces->len; i++) {
+++		InterfaceConfig *tic = &g_array_index (interfaces, InterfaceConfig, i);
+++		if (ifindex == tic->ifindex) {
+++			ic = tic;
+++			break;
+++		}
+++	}
+++
+++	if (!ic) {
+++		g_array_set_size (interfaces, interfaces->len + 1);
+++		ic = &g_array_index (interfaces, InterfaceConfig,
+++		                     interfaces->len - 1);
+++		ic->ifindex = ifindex;
+++	}
+++
+++	ic->configs = g_list_append (ic->configs, data->config);
+++}
+++
+++static void
+++add_domain (GVariantBuilder *domains,
+++            const char *domain,
+++            gboolean never_default)
+++{
+++	/* If this link is never the default (e.g. only used for resources on this
+++	 * network) add a routing domain. */
+++	g_variant_builder_add (domains, "(sb)", domain, never_default);
+++}
+++
+++static void
+++update_add_ip6_config (NMDnsSystemdResolved *self,
+++                       GVariantBuilder *dns,
+++                       GVariantBuilder *domains,
+++                       const NMIP6Config *config)
+++{
+++	guint i, n;
+++
+++	n = nm_ip6_config_get_num_nameservers (config);
+++	for (i = 0 ; i < n; i++) {
+++		const struct in6_addr *ip;
+++
+++		g_variant_builder_open (dns, G_VARIANT_TYPE ("(iay)"));
+++		g_variant_builder_add (dns, "i", AF_INET6);
+++		ip = nm_ip6_config_get_nameserver (config, i),
+++
+++		g_variant_builder_add_value (dns, g_variant_new_fixed_array (G_VARIANT_TYPE_BYTE, ip, 16, 1));
+++		g_variant_builder_close (dns);
+++	}
+++
+++	n = nm_ip6_config_get_num_searches (config);
+++	if (n > 0) {
+++		for (i = 0; i < n; i++) {
+++			add_domain (domains, nm_ip6_config_get_search (config, i),
+++			            nm_ip6_config_get_never_default (config));
+++		}
+++	} else {
+++		n = nm_ip6_config_get_num_domains (config);
+++		for (i = 0; i < n; i++) {
+++			add_domain (domains, nm_ip6_config_get_domain (config, i),
+++			            nm_ip6_config_get_never_default (config));
+++		}
+++	}
+++}
+++
+++static void
+++update_add_ip4_config (NMDnsSystemdResolved *self,
+++                       GVariantBuilder *dns,
+++                       GVariantBuilder *domains,
+++                       const NMIP4Config *config)
+++{
+++	guint i, n;
+++
+++	n = nm_ip4_config_get_num_nameservers (config);
+++	for (i = 0 ; i < n; i++) {
+++		guint32 ns;
+++
+++		g_variant_builder_open (dns, G_VARIANT_TYPE ("(iay)"));
+++		g_variant_builder_add (dns, "i", AF_INET);
+++		ns = nm_ip4_config_get_nameserver (config, i),
+++
+++		g_variant_builder_add_value (dns, g_variant_new_fixed_array (G_VARIANT_TYPE_BYTE, &ns, 4, 1));
+++		g_variant_builder_close (dns);
+++	}
+++
+++	n = nm_ip4_config_get_num_searches (config);
+++	if (n  > 0) {
+++		for (i = 0; i < n; i++) {
+++			add_domain (domains, nm_ip4_config_get_search (config, i),
+++			            nm_ip4_config_get_never_default (config));
+++		}
+++	} else {
+++		n = nm_ip4_config_get_num_domains (config);
+++		for (i = 0; i < n; i++) {
+++			add_domain (domains, nm_ip4_config_get_domain (config, i),
+++			            nm_ip4_config_get_never_default (config));
+++		}
+++	}
+++}
+++
+++static void
+++free_pending_updates (NMDnsSystemdResolved *self)
+++{
+++	NMDnsSystemdResolvedPrivate *priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++	GVariant *v;
+++
+++	while ((v = g_queue_pop_head (&priv->dns_updates)) != NULL)
+++		g_variant_unref (v);
+++
+++	while ((v = g_queue_pop_head (&priv->domain_updates)) != NULL)
+++		g_variant_unref (v);
+++}
+++
+++static void
+++prepare_one_interface (NMDnsSystemdResolved *self, InterfaceConfig *ic)
+++{
+++	NMDnsSystemdResolvedPrivate *priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++	GVariantBuilder dns, domains;
+++	GList *l;
+++
+++	g_variant_builder_init (&dns, G_VARIANT_TYPE ("(ia(iay))"));
+++	g_variant_builder_add (&dns, "i", ic->ifindex);
+++	g_variant_builder_open (&dns, G_VARIANT_TYPE ("a(iay)"));
+++
+++	g_variant_builder_init (&domains, G_VARIANT_TYPE ("(ia(sb))"));
+++	g_variant_builder_add (&domains, "i", ic->ifindex);
+++	g_variant_builder_open (&domains, G_VARIANT_TYPE ("a(sb)"));
+++
+++	for (l = ic->configs ; l != NULL ; l = g_list_next (l)) {
+++		if (NM_IS_IP4_CONFIG (l->data))
+++			update_add_ip4_config (self, &dns, &domains, l->data);
+++		else if (NM_IS_IP6_CONFIG (l->data))
+++			update_add_ip6_config (self, &dns, &domains, l->data);
+++		else
+++			g_assert_not_reached ();
+++	}
+++	g_variant_builder_close (&dns);
+++	g_variant_builder_close (&domains);
+++
+++	g_queue_push_tail (&priv->dns_updates,
+++	                   g_variant_ref_sink (g_variant_builder_end (&dns)));
+++	g_queue_push_tail (&priv->domain_updates,
+++	                   g_variant_ref_sink (g_variant_builder_end (&domains)));
+++}
+++
+++static void
+++send_updates (NMDnsSystemdResolved *self)
+++{
+++	NMDnsSystemdResolvedPrivate *priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++	GVariant *v;
+++
+++	nm_clear_g_cancellable (&priv->update_cancellable);
+++
+++	if (!priv->resolve)
+++		return;
+++
+++	priv->update_cancellable = g_cancellable_new ();
+++
+++	while ((v = g_queue_pop_head (&priv->dns_updates)) != NULL) {
+++		g_dbus_proxy_call (priv->resolve, "SetLinkDNS", v,
+++		                   G_DBUS_CALL_FLAGS_NONE,
+++		                   -1, priv->update_cancellable, call_done, self);
+++		g_variant_unref (v);
+++	}
+++
+++	while ((v = g_queue_pop_head (&priv->domain_updates)) != NULL) {
+++		g_dbus_proxy_call (priv->resolve, "SetLinkDomains", v,
+++		                   G_DBUS_CALL_FLAGS_NONE,
+++		                   -1, priv->update_cancellable, call_done, self);
+++		g_variant_unref (v);
+++	}
+++}
+++
+++static gboolean
+++update (NMDnsPlugin *plugin,
+++        const NMDnsIPConfigData **configs,
+++        const NMGlobalDnsConfig *global_config,
+++        const char *hostname)
+++{
+++	NMDnsSystemdResolved *self = NM_DNS_SYSTEMD_RESOLVED (plugin);
+++	GArray *interfaces = g_array_new (TRUE, TRUE, sizeof (InterfaceConfig));
+++	const NMDnsIPConfigData **c;
+++	int i;
+++
+++	for (c = configs; *c != NULL; c++)
+++		add_interface_configuration (self, interfaces, *c);
+++
+++	free_pending_updates (self);
+++
+++	for (i = 0; i < interfaces->len; i++) {
+++		InterfaceConfig *ic = &g_array_index (interfaces, InterfaceConfig, i);
+++
+++		prepare_one_interface (self, ic);
+++		g_list_free (ic->configs);
+++	}
+++
+++	g_array_free (interfaces, TRUE);
+++
+++	send_updates (self);
+++
+++	return TRUE;
+++}
+++
+++/****************************************************************/
+++
+++static gboolean
+++is_caching (NMDnsPlugin *plugin)
+++{
+++	return TRUE;
+++}
+++
+++static const char *
+++get_name (NMDnsPlugin *plugin)
+++{
+++	return "systemd-resolved";
+++}
+++
+++/****************************************************************/
+++
+++NMDnsPlugin *
+++nm_dns_systemd_resolved_new (void)
+++{
+++	return g_object_new (NM_TYPE_DNS_SYSTEMD_RESOLVED, NULL);
+++}
+++
+++static void
+++resolved_proxy_created (GObject *source, GAsyncResult *r, gpointer user_data)
+++{
+++	NMDnsSystemdResolved *self = (NMDnsSystemdResolved *) user_data;
+++	NMDnsSystemdResolvedPrivate *priv;
+++	gs_free_error GError *error = NULL;
+++	GDBusProxy *resolve;
+++
+++	resolve = g_dbus_proxy_new_finish (r, &error);
+++	if (   !resolve
+++	    && g_error_matches (error, G_IO_ERROR, G_IO_ERROR_CANCELLED))
+++		return;
+++
+++	priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++	g_clear_object (&priv->init_cancellable);
+++	if (!resolve) {
+++		_LOGW ("failed to connect to resolved via DBus: %s", error->message);
+++		g_signal_emit_by_name (self, NM_DNS_PLUGIN_FAILED);
+++		return;
+++	}
+++
+++	priv->resolve = resolve;
+++	send_updates (self);
+++}
+++
+++
+++static void
+++nm_dns_systemd_resolved_init (NMDnsSystemdResolved *self)
+++{
+++	NMDnsSystemdResolvedPrivate *priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++	NMBusManager *dbus_mgr;
+++	GDBusConnection *connection;
+++
+++	g_queue_init (&priv->dns_updates);
+++	g_queue_init (&priv->domain_updates);
+++
+++	dbus_mgr = nm_bus_manager_get ();
+++	g_return_if_fail (dbus_mgr);
+++
+++	connection = nm_bus_manager_get_connection (dbus_mgr);
+++	g_return_if_fail (connection);
+++
+++	priv->init_cancellable = g_cancellable_new ();
+++	g_dbus_proxy_new (connection,
+++	                  G_DBUS_PROXY_FLAGS_DO_NOT_LOAD_PROPERTIES |
+++	                  G_DBUS_PROXY_FLAGS_DO_NOT_CONNECT_SIGNALS,
+++	                  NULL,
+++	                  SYSTEMD_RESOLVED_DBUS_SERVICE,
+++	                  SYSTEMD_RESOLVED_DBUS_PATH,
+++	                  SYSTEMD_RESOLVED_DBUS_SERVICE ".Manager",
+++	                  priv->init_cancellable,
+++	                  resolved_proxy_created,
+++	                  self);
+++}
+++
+++static void
+++dispose (GObject *object)
+++{
+++	NMDnsSystemdResolved *self = NM_DNS_SYSTEMD_RESOLVED (object);
+++	NMDnsSystemdResolvedPrivate *priv = NM_DNS_SYSTEMD_RESOLVED_GET_PRIVATE (self);
+++
+++	free_pending_updates (self);
+++	g_clear_object (&priv->resolve);
+++	nm_clear_g_cancellable (&priv->init_cancellable);
+++	nm_clear_g_cancellable (&priv->update_cancellable);
+++
+++	G_OBJECT_CLASS (nm_dns_systemd_resolved_parent_class)->dispose (object);
+++}
+++
+++static void
+++nm_dns_systemd_resolved_class_init (NMDnsSystemdResolvedClass *dns_class)
+++{
+++	NMDnsPluginClass *plugin_class = NM_DNS_PLUGIN_CLASS (dns_class);
+++	GObjectClass *object_class = G_OBJECT_CLASS (dns_class);
+++
+++	g_type_class_add_private (dns_class, sizeof (NMDnsSystemdResolvedPrivate));
+++
+++	object_class->dispose = dispose;
+++
+++	plugin_class->is_caching = is_caching;
+++	plugin_class->update = update;
+++	plugin_class->get_name = get_name;
+++}
+++
++diff --git a/src/dns-manager/nm-dns-systemd-resolved.h b/src/dns-manager/nm-dns-systemd-resolved.h
++new file mode 100644
++index 0000000..45c64b3
++--- /dev/null
+++++ b/src/dns-manager/nm-dns-systemd-resolved.h
++@@ -0,0 +1,45 @@
+++/* -*- Mode: C; tab-width: 4; indent-tabs-mode: t; c-basic-offset: 4 -*- */
+++/* This program is free software; you can redistribute it and/or modify
+++ * it under the terms of the GNU General Public License as published by
+++ * the Free Software Foundation; either version 2, or (at your option)
+++ * any later version.
+++ *
+++ * This program is distributed in the hope that it will be useful,
+++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+++ * GNU General Public License for more details.
+++ *
+++ * You should have received a copy of the GNU General Public License along
+++ * with this program; if not, write to the Free Software Foundation, Inc.,
+++ * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+++ *
+++ * Copyright (C) 2010 Red Hat, Inc.
+++ * Copyright (C) 2016 Sjoerd Simons <sjoerd@luon.net>
+++ */
+++
+++#ifndef __NETWORKMANAGER_DNS_SYSTEMD_RESOLVED_H__
+++#define __NETWORKMANAGER_DNS_SYSTEMD_RESOLVED_H__
+++
+++#include "nm-dns-plugin.h"
+++
+++#define NM_TYPE_DNS_SYSTEMD_RESOLVED            (nm_dns_systemd_resolved_get_type ())
+++#define NM_DNS_SYSTEMD_RESOLVED(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), NM_TYPE_DNS_SYSTEMD_RESOLVED, NMDnsSystemdResolved))
+++#define NM_DNS_SYSTEMD_RESOLVED_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), NM_TYPE_DNS_SYSTEMD_RESOLVED, NMDnsSystemdResolvedClass))
+++#define NM_IS_DNS_SYSTEMD_RESOLVED(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), NM_TYPE_DNS_SYSTEMD_RESOLVED))
+++#define NM_IS_DNS_SYSTEMD_RESOLVED_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), NM_TYPE_DNS_SYSTEMD_RESOLVED))
+++#define NM_DNS_SYSTEMD_RESOLVED_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), NM_TYPE_DNS_SYSTEMD_RESOLVED, NMDnsSystemdResolvedClass))
+++
+++typedef struct {
+++	NMDnsPlugin parent;
+++} NMDnsSystemdResolved;
+++
+++typedef struct {
+++	NMDnsPluginClass parent;
+++} NMDnsSystemdResolvedClass;
+++
+++GType nm_dns_systemd_resolved_get_type (void);
+++
+++NMDnsPlugin *nm_dns_systemd_resolved_new (void);
+++
+++#endif /* __NETWORKMANAGER_DNS_SYSTEMD_RESOLVED_H__ */
+++
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch
 new file mode 100644
-index 000000000..f84fbffd8
+index 0000000..ca7e4a4
 --- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0003-Undefine-PAGE_SIZE.patch
-@@ -0,0 +1,30 @@
-+From 0857269d5a053b5b4c31cfa01b6501526b24035f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 6 Jun 2017 07:39:28 -0700
-+Subject: [PATCH 3/3] Undefine PAGE_SIZE
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager/0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch
+@@ -0,0 +1,29 @@
++From 6f799f1f0e68cc7bf89c0a56aec5ecf46937619d Mon Sep 17 00:00:00 2001
++From: Ricardo Salveti <rsalveti@rsalveti.net>
++Date: Thu, 15 Jun 2017 10:02:38 -0300
++Subject: [PATCH] dns/resolved: also check for /etc/resolv-conf.systemd
 +
-+musl defines PAGE_SIZE and build complains
-+of multiple definitions
++OE specific resolv.conf path, so it can be enabled by default if available.
 +
-+Upstream-Status: Pending
++Upstream-Status: Inappropriate [OE config specific]
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Ricardo Salveti <rsalveti@rsalveti.net>
 +---
-+ src/lib/src/fwts_acpi_tables.c | 1 +
++ src/dns-manager/nm-dns-manager.c | 1 +
 + 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 1d4fc705..71023ad2 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -42,6 +42,7 @@
-+ #define BIOS_START	(0x000e0000)		/* Start of BIOS memory */
-+ #define BIOS_END  	(0x000fffff)		/* End of BIOS memory */
-+ #define BIOS_LENGTH	(BIOS_END - BIOS_START)	/* Length of BIOS memory */
-++#undef PAGE_SIZE
-+ #define PAGE_SIZE	(4096)
-+ 
-+ static fwts_acpi_table_info	tables[ACPI_MAX_TABLES];
++diff --git a/src/dns-manager/nm-dns-manager.c b/src/dns-manager/nm-dns-manager.c
++index c1d2bf7..d70d4b4 100644
++--- a/src/dns-manager/nm-dns-manager.c
+++++ b/src/dns-manager/nm-dns-manager.c
++@@ -1596,6 +1596,7 @@ _resolvconf_resolved_managed (void)
++ 		"/run/systemd/resolve/resolv.conf",
++ 		"/lib/systemd/resolv.conf",
++ 		"/usr/lib/systemd/resolv.conf",
+++		"/etc/resolv-conf.systemd",
++ 	};
++ 	GFile *f;
++ 	GFileInfo *info;
 +-- 
-+2.13.0
++2.7.4
 +
-diff --git a/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch b/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-new file mode 100644
-index 000000000..3cd3fbbc1
---- /dev/null
-+++ b/meta-oe/recipes-test/fwts/fwts/0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch
-@@ -0,0 +1,76 @@
-+From d0d76820efe51dd404d381fc4c46544008e757dd Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 8 Jun 2017 16:50:59 -0700
-+Subject: [PATCH 3/3] use intptr_t to fix pointer-to-int-cast issues
-+
-+uintptr_t is guaranteed to be wide enough that
-+converting a void* to uintptr_t and back again
-+will yield the original pointer value
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/lib/src/fwts_acpi_tables.c | 4 ++--
-+ src/lib/src/fwts_mmap.c        | 2 +-
-+ src/lib/src/fwts_smbios.c      | 4 ++--
-+ 3 files changed, 5 insertions(+), 5 deletions(-)
-+
-+diff --git a/src/lib/src/fwts_acpi_tables.c b/src/lib/src/fwts_acpi_tables.c
-+index 832f8d66..d0006529 100644
-+--- a/src/lib/src/fwts_acpi_tables.c
-++++ b/src/lib/src/fwts_acpi_tables.c
-+@@ -150,7 +150,7 @@ static fwts_acpi_table_rsdp *fwts_acpi_get_rsdp(fwts_framework *fw, void *addr,
-+ 	fwts_acpi_table_rsdp *rsdp = NULL;
-+ 	*rsdp_len = 0;
-+ 
-+-	if ((mem = fwts_mmap((off_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
-++	if ((mem = fwts_mmap((uintptr_t)addr, sizeof(fwts_acpi_table_rsdp))) == FWTS_MAP_FAILED)
-+ 		return NULL;
-+ 
-+ 	if (fwts_safe_memread(mem, sizeof(fwts_acpi_table_rsdp)) != FWTS_OK) {
-+@@ -456,7 +456,7 @@ static int fwts_acpi_load_tables_from_firmware(fwts_framework *fw)
-+ 	if ((rsdp = fwts_acpi_get_rsdp(fw, rsdp_addr, &rsdp_len)) == NULL)
-+ 		return FWTS_ERROR;
-+ 
-+-	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(off_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
-++	fwts_acpi_add_table("RSDP", rsdp, (uint64_t)(uintptr_t)rsdp_addr, rsdp_len, FWTS_ACPI_TABLE_FROM_FIRMWARE);
-+ 
-+ 	/* Load any tables from XSDT if it's valid */
-+ 	if (rsdp->xsdt_address) {
-+diff --git a/src/lib/src/fwts_mmap.c b/src/lib/src/fwts_mmap.c
-+index a09f688e..9fe6329a 100644
-+--- a/src/lib/src/fwts_mmap.c
-++++ b/src/lib/src/fwts_mmap.c
-+@@ -81,7 +81,7 @@ int fwts_munmap(void *mem, const size_t size)
-+ 	off_t offset;
-+ 
-+ 	page_size = fwts_page_size();
-+-	offset = ((off_t)(mem)) & (page_size - 1);
-++	offset = ((uintptr_t)(mem)) & (page_size - 1);
-+ 
-+ 	if (munmap((void *)((uint8_t *)mem - offset), size + offset) < 0)
-+ 		return FWTS_ERROR;
-+diff --git a/src/lib/src/fwts_smbios.c b/src/lib/src/fwts_smbios.c
-+index 8d0ea39b..63b4bf25 100644
-+--- a/src/lib/src/fwts_smbios.c
-++++ b/src/lib/src/fwts_smbios.c
-+@@ -54,7 +54,7 @@ static void *fwts_smbios_find_entry_uefi(fwts_framework *fw, fwts_smbios_entry *
-+ 	if ((addr = fwts_scan_efi_systab("SMBIOS")) != NULL) {
-+ 		fwts_smbios_entry *mapped_entry;
-+ 
-+-		if ((mapped_entry = fwts_mmap((off_t)addr, sizeof(fwts_smbios_entry))) != FWTS_MAP_FAILED) {
-++		if ((mapped_entry = fwts_mmap((uintptr_t)addr, sizeof(fwts_smbios_entry))) != FWTS_MAP_FAILED) {
-+ 			*entry = *mapped_entry;
-+ 			(void)fwts_munmap(mapped_entry, sizeof(fwts_smbios_entry));
-+ 			*type  = FWTS_SMBIOS;
-+@@ -84,7 +84,7 @@ static void *fwts_smbios30_find_entry_uefi(fwts_framework *fw, fwts_smbios30_ent
-+ 	if ((addr = fwts_scan_efi_systab("SMBIOS3")) != NULL) {
-+ 		fwts_smbios30_entry *mapped_entry;
-+ 
-+-		if ((mapped_entry = fwts_mmap((off_t)addr, sizeof(fwts_smbios30_entry))) != FWTS_MAP_FAILED) {
-++		if ((mapped_entry = fwts_mmap((uintptr_t)addr, sizeof(fwts_smbios30_entry))) != FWTS_MAP_FAILED) {
-+ 			*entry = *mapped_entry;
-+ 			(void)fwts_munmap(mapped_entry, sizeof(fwts_smbios30_entry));
-+ 			return addr;
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-test/fwts/fwts_git.bb b/meta-oe/recipes-test/fwts/fwts_git.bb
-index 4c4ae66d6..87a23af19 100644
---- a/meta-oe/recipes-test/fwts/fwts_git.bb
-+++ b/meta-oe/recipes-test/fwts/fwts_git.bb
-@@ -5,11 +5,17 @@ HOMEPAGE = "https://wiki.ubuntu.com/Kernel/Reference/fwts"
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=16;md5=31da590f3e9f3bd34dcdb9e4db568519"
- 
--PV = "17.03.00"
-+PV = "17.03.00+git${SRCPV}"
- 
--SRCREV = "e3e9d1442b4cc70f5b30199f584cec8e25aeaad4"
-+SRCREV = "0153ea51cb648b3067a1b327eee6a075b6cfa330"
- SRC_URI = "git://kernel.ubuntu.com/hwe/fwts.git \
-            file://0001-ignore-constant-logical-operand-warning-with-clang.patch \
-+           file://0001-Include-poll.h-instead-of-deprecated-sys-poll.h.patch \
-+           file://0002-Define-__SWORD_TYPE-if-not-defined-by-libc.patch \
-+           file://0003-Undefine-PAGE_SIZE.patch \
-+           file://0001-Add-correct-printf-qualifier-for-off_t.patch \
-+           file://0002-Add-C99-defined-format-for-printing-uint64_t.patch \
-+           file://0003-use-intptr_t-to-fix-pointer-to-int-cast-issues.patch \
+diff --git a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.4.4.bb b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.4.4.bb
+index 85098fe..0de4383 100644
+--- a/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.4.4.bb
++++ b/meta-oe/recipes-connectivity/networkmanager/networkmanager_1.4.4.bb
+@@ -32,6 +32,8 @@ SRC_URI = "${GNOME_MIRROR}/NetworkManager/${@gnome_verdir("${PV}")}/NetworkManag
+            file://0004-Define-missing-features-to-cater-for-musl.patch \
+            file://0005-sd-lldp.h-Remove-net-ethernet.h-seems-to-be-over-spe.patch \
+            file://0001-check-for-strndupa-before-using-it.patch \
++           file://0001-dns-resolved-add-systemd-resolved-backend.patch \
++           file://0001-dns-resolved-also-check-for-etc-resolv-conf.systemd.patch \
             "
- 
- S = "${WORKDIR}/git"
-@@ -17,10 +23,12 @@ S = "${WORKDIR}/git"
- COMPATIBLE_HOST = "(i.86|x86_64|aarch64|powerpc64).*-linux"
- 
- DEPENDS = "libpcre json-c glib-2.0 dtc"
-+DEPENDS_append_libc-musl = " libexecinfo"
- 
- inherit autotools pkgconfig
- 
- CFLAGS += "-I${STAGING_INCDIR}/json-c -Wno-error=unknown-pragmas"
-+LDFLAGS_append_libc-musl = " -lexecinfo"
- 
- FILES_${PN} += "${libdir}/fwts/lib*${SOLIBS}"
- FILES_${PN}-dev += "${libdir}/fwts/lib*${SOLIBSDEV} ${libdir}/fwts/lib*.la"
+ SRC_URI[md5sum] = "63f1e0d6d7e9099499d062c84c927a75"
+ SRC_URI[sha256sum] = "829378f318cc008d138a23ca6a9191928ce75344e7e47a2f2c35f4ac82133309"
 -- 
-2.13.1
+2.7.4
 
 
