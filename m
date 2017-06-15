@@ -1,24 +1,49 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F25C978289
+Return-Path: <ross.burton@intel.com>
+Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
+	[209.85.216.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 717FD78077
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 06:05:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v5F65fec015630
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 15 Jun 2017 11:41:02 +0000 (UTC)
+Received: by mail-qt0-f178.google.com with SMTP id w1so16416691qtg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jun 2017 23:05:41 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Wed, 14 Jun 2017 23:05:40 -0700
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 15 Jun 2017 14:05:02 +0800
-Message-ID: <1497506702-180724-1-git-send-email-zhixiong.chi@windriver.com>
-X-Mailer: git-send-email 1.9.1
+	Thu, 15 Jun 2017 04:41:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=dQvEL1fXW9cBm6HhNWayZvhQR5EXnbCCS7Ippftqujs=;
+	b=Kci+X6OL5SGGwUoTKHgMZOep7iDNyTPi9EvBUhgft8AcQm4ZAfEuXxvrHS8rkO0ulN
+	Ffwh4ZecZDj+TB0vSR8RaGAC8zHTX+mYv32isxUB95H3KiLXrYWR6m2IrW6MLzpgXUTj
+	k+5kDIplNM6MEEjOcCQgvCkIQC/ygAkx/hs/tmxbt8quNzC0jGJ1dUnxj2omx3T/1F+g
+	+RhGr73NSZzoHsAGJuTNIb6D5uKws1WJbi+3Zk4Tmoi67FR/1WZT1EWsPaV7sAOo3BoH
+	A9OlYrw5kRKRqyBSpJsjluZ4rNWSH8eqOYwPcv3XDoVo4tEtXJ/E9ddkdYwJicoTI4Ow
+	JPNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=dQvEL1fXW9cBm6HhNWayZvhQR5EXnbCCS7Ippftqujs=;
+	b=WBBFy1ThWQfcG/O2rASjxpzv7OhFV5Heu7DNMOVNZKZqJtbMFz7fBL64e/p4bzVj8q
+	y7UTMVCiroAzxJsNDgnEY8G7y05pD0qBsEs1F/PeNyRqZqqrfzGZapDlkeLC9qK4OKCS
+	tUBsud9NhJtHAmIKAKARhTEdpWPdQH4N/a1vvAfPF8T8cPKnm8FB8/bNRvcqq/V7CqaN
+	QZPxbQbvrVaxMeRNHAFRYubP/Isb7dH3oKbtzRS79bB0AWPHnfPeUn8ZpxQpGkhkh85l
+	ZiJa/Jl20Cw5/DV/HwntbF3ZwRjVG1fGpMk3ZSPKZfXBrycZI9P81biNjP18G6o8k9bb
+	gckA==
+X-Gm-Message-State: AKS2vOy98VVPEIC5CaIauOOap+hXEgU3qUbpNkJuvByowWn65vHpNJPK
+	HeUEMK3d4MRXISnG0EHYm3oC2+PvP9QZ
+X-Received: by 10.55.100.130 with SMTP id y124mr6022942qkb.54.1497526863280;
+	Thu, 15 Jun 2017 04:41:03 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] mercurial: CVE-2017-9462
+Received: by 10.140.35.103 with HTTP; Thu, 15 Jun 2017 04:40:42 -0700 (PDT)
+In-Reply-To: <88d795d0702cfafe40b7a821c2d09df76b6f3dc0.1497428466.git.jackie.huang@windriver.com>
+References: <cover.1497428466.git.jackie.huang@windriver.com>
+	<88d795d0702cfafe40b7a821c2d09df76b6f3dc0.1497428466.git.jackie.huang@windriver.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 15 Jun 2017 12:40:42 +0100
+Message-ID: <CAJTo0LYda7e5GHATvCt=rcr44_jj+mZww51OQfCLa9nxLOM+zw@mail.gmail.com>
+To: "jackie.huang@windriver.com" <jackie.huang@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/1 v2] microcode-ctl: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,182 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jun 2017 06:05:44 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 15 Jun 2017 11:41:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Backport the CVE patch from
-https://www.mercurial-scm.org/repo/hg/rev/77eaf9539499
+On 15 June 2017 at 02:36, <jackie.huang@windriver.com> wrote:
 
-"hg serve --stdio" allows remote authenticated users to launch the
-Python debugger, and consequently execute arbitrary code, by using
- --debugger as a repository name.
+> The microcode_ctl utility is a companion to the
+> IA32 microcode driver.
+>
 
-CVE: CVE-2017-9462
+Wouldn't it make sense for this to be in meta-intel, alongside the
+microcode? Also what's the difference between this and iucode-tool, which
+is already in meta-intel?
 
-Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
----
- .../mercurial/files/mercurial-CVE-2017-9462.patch  | 135 +++++++++++++++++++++
- .../mercurial/mercurial-native_4.0.1.bb            |   4 +-
- 2 files changed, 138 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
-
-diff --git a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch b/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
-new file mode 100644
-index 0000000..3564661
---- /dev/null
-+++ b/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
-@@ -0,0 +1,135 @@
-+# HG changeset patch
-+# User Augie Fackler <augie@google.com>
-+# Date 1492021435 25200
-+#      Wed Apr 12 11:23:55 2017 -0700
-+# Branch stable
-+# Node ID 77eaf9539499a1b8be259ffe7ada787d07857f80
-+# Parent  68f263f52d2e3e2798b4f1e55cb665c6b043f93b
-+dispatch: protect against malicious 'hg serve --stdio' invocations (sec)
-+
-+Some shared-ssh installations assume that 'hg serve --stdio' is a safe
-+command to run for minimally trusted users. Unfortunately, the messy
-+implementation of argument parsing here meant that trying to access a
-+repo named '--debugger' would give the user a pdb prompt, thereby
-+sidestepping any hoped-for sandboxing. Serving repositories over HTTP(S)
-+is unaffected.
-+
-+We're not currently hardening any subcommands other than 'serve'. If
-+your service exposes other commands to users with arbitrary repository
-+names, it is imperative that you defend against repository names of
-+'--debugger' and anything starting with '--config'.
-+
-+The read-only mode of hg-ssh stopped working because it provided its hook
-+configuration to "hg serve --stdio" via --config parameter. This is banned for
-+security reasons now. This patch switches it to directly call ui.setconfig().
-+If your custom hosting infrastructure relies on passing --config to
-+"hg serve --stdio", you'll need to find a different way to get that configuration
-+into Mercurial, either by using ui.setconfig() as hg-ssh does in this patch,
-+or by placing an hgrc file someplace where Mercurial will read it.
-+
-+mitrandir@fb.com provided some extra fixes for the dispatch code and
-+for hg-ssh in places that I overlooked.
-+
-+CVE: CVE-2017-9462
-+
-+Upstream-Status: Backport
-+
-+diff --git a/contrib/hg-ssh b/contrib/hg-ssh
-+--- a/contrib/hg-ssh
-++++ b/contrib/hg-ssh
-+@@ -32,7 +32,7 @@
-+ # enable importing on demand to reduce startup time
-+ from mercurial import demandimport; demandimport.enable()
-+ 
-+-from mercurial import dispatch
-++from mercurial import dispatch, ui as uimod
-+ 
-+ import sys, os, shlex
-+ 
-+@@ -61,14 +61,15 @@
-+         repo = os.path.normpath(os.path.join(cwd, os.path.expanduser(path)))
-+         if repo in allowed_paths:
-+             cmd = ['-R', repo, 'serve', '--stdio']
-++            req = dispatch.request(cmd)
-+             if readonly:
-+-                cmd += [
-+-                    '--config',
-+-                    'hooks.pretxnopen.hg-ssh=python:__main__.rejectpush',
-+-                    '--config',
-+-                    'hooks.prepushkey.hg-ssh=python:__main__.rejectpush'
-+-                    ]
-+-            dispatch.dispatch(dispatch.request(cmd))
-++                if not req.ui:
-++                    req.ui = uimod.ui.load()
-++                req.ui.setconfig('hooks', 'pretxnopen.hg-ssh',
-++                                 'python:__main__.rejectpush', 'hg-ssh')
-++                req.ui.setconfig('hooks', 'prepushkey.hg-ssh',
-++                                 'python:__main__.rejectpush', 'hg-ssh')
-++            dispatch.dispatch(req)
-+         else:
-+             sys.stderr.write('Illegal repository "%s"\n' % repo)
-+             sys.exit(255)
-+diff --git a/mercurial/dispatch.py b/mercurial/dispatch.py
-+--- a/mercurial/dispatch.py
-++++ b/mercurial/dispatch.py
-+@@ -155,6 +155,37 @@
-+         pass # happens if called in a thread
-+ 
-+     def _runcatchfunc():
-++        realcmd = None
-++        try:
-++            cmdargs = fancyopts.fancyopts(req.args[:], commands.globalopts, {})
-++            cmd = cmdargs[0]
-++            aliases, entry = cmdutil.findcmd(cmd, commands.table, False)
-++            realcmd = aliases[0]
-++        except (error.UnknownCommand, error.AmbiguousCommand,
-++                IndexError, getopt.GetoptError):
-++            # Don't handle this here. We know the command is
-++            # invalid, but all we're worried about for now is that
-++            # it's not a command that server operators expect to
-++            # be safe to offer to users in a sandbox.
-++            pass
-++        if realcmd == 'serve' and '--stdio' in cmdargs:
-++            # We want to constrain 'hg serve --stdio' instances pretty
-++            # closely, as many shared-ssh access tools want to grant
-++            # access to run *only* 'hg -R $repo serve --stdio'. We
-++            # restrict to exactly that set of arguments, and prohibit
-++            # any repo name that starts with '--' to prevent
-++            # shenanigans wherein a user does something like pass
-++            # --debugger or --config=ui.debugger=1 as a repo
-++            # name. This used to actually run the debugger.
-++            if (len(req.args) != 4 or
-++                req.args[0] != '-R' or
-++                req.args[1].startswith('--') or
-++                req.args[2] != 'serve' or
-++                req.args[3] != '--stdio'):
-++                raise error.Abort(
-++                    _('potentially unsafe serve --stdio invocation: %r') %
-++                    (req.args,))
-++
-+         try:
-+             debugger = 'pdb'
-+             debugtrace = {
-+diff --git a/tests/test-ssh.t b/tests/test-ssh.t
-+--- a/tests/test-ssh.t
-++++ b/tests/test-ssh.t
-+@@ -357,6 +357,19 @@
-+   abort: destination 'a repo' is not empty
-+   [255]
-+ 
-++Make sure hg is really paranoid in serve --stdio mode. It used to be
-++possible to get a debugger REPL by specifying a repo named --debugger.
-++  $ hg -R --debugger serve --stdio
-++  abort: potentially unsafe serve --stdio invocation: ['-R', '--debugger', 'serve', '--stdio']
-++  [255]
-++  $ hg -R --config=ui.debugger=yes serve --stdio
-++  abort: potentially unsafe serve --stdio invocation: ['-R', '--config=ui.debugger=yes', 'serve', '--stdio']
-++  [255]
-++Abbreviations of 'serve' also don't work, to avoid shenanigans.
-++  $ hg -R narf serv --stdio
-++  abort: potentially unsafe serve --stdio invocation: ['-R', 'narf', 'serv', '--stdio']
-++  [255]
-++
-+ Test hg-ssh using a helper script that will restore PYTHONPATH (which might
-+ have been cleared by a hg.exe wrapper) and invoke hg-ssh with the right
-+ parameters:
-diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
-index 028bb42..a08acd9 100644
---- a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
-+++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
-@@ -5,7 +5,9 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
- DEPENDS = "python-native"
- 
--SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz"
-+SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
-+           file://mercurial-CVE-2017-9462.patch \
-+"
- SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
- SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
- 
--- 
-1.9.1
-
+Ross
 
