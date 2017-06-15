@@ -1,37 +1,51 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CC8C2781E2
+Return-Path: <twoerner@gmail.com>
+Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
+	[209.85.213.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D7D56FF7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 04:03:23 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="20056584"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 15 Jun 2017 12:03:17 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 60C1D46B53FF
+	Thu, 15 Jun 2017 05:25:11 +0000 (UTC)
+Received: by mail-vk0-f47.google.com with SMTP id g66so1573116vki.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 12:03:16 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0319.002; Thu, 15 Jun 2017 12:03:17 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [meta-networking][PATCH]: cifs-utils 6.6 -> 6.7
-Thread-Index: AQHS1fOYdiP6BEtWzUSBsOKPBqVAhqIlbLBw
-Date: Thu, 15 Jun 2017 04:03:14 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF7324596A60@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1495816903-99668-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-In-Reply-To: <1495816903-99668-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.100]
+	Wed, 14 Jun 2017 22:25:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=AiGFTAyiKvCep72rLpkfUnYIfFOxkavfmcFX7Db2LtM=;
+	b=XAFLcmQih+NVEhwnrPw0RxMFLaus1oK50D3BzbJBj0kzxViYJ2uGX4OTPdG+UFdDiK
+	wdrFAZBeEAMDFkzz5vGK8chIT917VCI87yB3+dbmcjUCWb5FGCP6tpk4ZjglSgyx6ymL
+	Mha9CYPiQdWCqfLVzR7co8T8B9dKvL3RdBxsVR0xsHTwW0e+A25MAOPe0gdppLrBuLzU
+	y61cnv5SUZ+Ff1lhzA2pBy50+wh/sd7YLn6n9TpqScdIhfPrCQIDvH+xh7jKR30YNzgF
+	zzmKU2Jr42dyMMKEitAvMSnrP1DUeMGwfMfETL8gIAF6VgvTPZGL2g97O5F6QicHTqHC
+	jtmw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=AiGFTAyiKvCep72rLpkfUnYIfFOxkavfmcFX7Db2LtM=;
+	b=QkAiWFGdot8rDz7F76YvR5xXiIHdMbc7WGXmZ9cPI5d6XvjotPWNBLi4uIyugoYF0h
+	ipyGosNEpR14SV08FiduXpd1hymYSTGyOKwV3+JtrQj+acIexjmJykUF2mEXgCatT5SY
+	4wJpJIeBiOU+AaHBtAcWe/Wk6XX4MEiQwo0vFo7ZDHUmczQqU881j6zuD8ItS83bzgRt
+	fDr3wCqs8ng6nf6UxVwNp/iK8KOOCY76PjwPKv291YWqdHiWSZv0Ei/DEdyvak/RYfA/
+	it/8IxyWN9I8yue3BGtKPfBGAd5GDaVbQwaIw+KrGK/KAIakVy8f+iNBUe/whD9GQR2l
+	8GVQ==
+X-Gm-Message-State: AKS2vOzVlU3qyri0HtZ+cbXsjNB5Ov0M5dSqBsQrha6DaA2bDKFNKcNx
+	XeSnnfGOwPMtzWTy2ysLfgfWAi/P3yjBMqY=
+X-Received: by 10.31.92.9 with SMTP id q9mr1685465vkb.19.1497504312939; Wed,
+	14 Jun 2017 22:25:12 -0700 (PDT)
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 60C1D46B53FF.ACA77
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [meta-networking][PATCH]: cifs-utils 6.6 -> 6.7
+Received: by 10.103.48.86 with HTTP; Wed, 14 Jun 2017 22:25:12 -0700 (PDT)
+In-Reply-To: <CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
+References: <1496925018-5300-1-git-send-email-samuli.piippo@qt.io>
+	<91dc3ff5-ad3a-ff4c-163a-4b82bb721422@gmail.com>
+	<CA+chaQe9JFMTrZ8HcOPyVqj7VDvg4N_8VKGRf3X3vDuwC37f8w@mail.gmail.com>
+	<CA+chaQe=8hRDdymjoqn0wRo03XUF0cTdvNiLQTUuvqzLsL2Q2w@mail.gmail.com>
+	<CABXoSoWZBLfn4K2DcHED90U3Bvcj8GRLX9Qa5XL844hZB0+Tzg@mail.gmail.com>
+	<CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Thu, 15 Jun 2017 01:25:12 -0400
+Message-ID: <CAHUNapTL=U_t4EwTKkQ8B8A7j+=WKCU64u_MFeioB0yv_VfACA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH v3] Upgrade to Qt 5.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,42 +58,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jun 2017 04:03:25 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 15 Jun 2017 05:25:12 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-UGluZw0KDQpaaGVuZyBSdW9xaW4NCk5hbmppbmcgRnVqaXRzdSBOYW5kYSBT
-b2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkNCkFERFIuOiBOby42IFdl
-bnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUsDQogICAgICAgTmFuamluZywg
-MjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5ncnEuZm5zdEBjbi5mdWppc3R1
-LmNvbQ0KDQoNCi0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0tDQpGcm9tOiBa
-aGVuZywgUnVvcWluL9ajIMj0x9UgDQpTZW50OiBTYXR1cmRheSwgTWF5IDI3
-LCAyMDE3IDEyOjQyIEFNDQpUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmcNCkNjOiBaaGVuZywgUnVvcWluL9ajIMj0x9Ug
-PHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NClN1YmplY3Q6IFtvZV0g
-W21ldGEtbmV0d29ya2luZ11bUEFUQ0hdOiBjaWZzLXV0aWxzIDYuNiAtPiA2
-LjcNCg0KVXBncmFkZSBjaWZzLXV0aWxzIGZyb20gNi42IHRvIDYuNw0KDQpT
-aWduZWQtb2ZmLWJ5OiB6aGVuZ3JxIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRz
-dS5jb20+DQotLS0NCiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1zdXBwb3J0
-L2NpZnMvY2lmcy11dGlsc19naXQuYmIgfCA1ICsrKy0tDQogMSBmaWxlIGNo
-YW5nZWQsIDMgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCg0KZGlm
-ZiAtLWdpdCBhL21ldGEtbmV0d29ya2luZy9yZWNpcGVzLXN1cHBvcnQvY2lm
-cy9jaWZzLXV0aWxzX2dpdC5iYiBiL21ldGEtbmV0d29ya2luZy9yZWNpcGVz
-LXN1cHBvcnQvY2lmcy9jaWZzLXV0aWxzX2dpdC5iYg0KaW5kZXggZWZkYTcw
-Ny4uM2NhNWI3OCAxMDA2NDQNCi0tLSBhL21ldGEtbmV0d29ya2luZy9yZWNp
-cGVzLXN1cHBvcnQvY2lmcy9jaWZzLXV0aWxzX2dpdC5iYg0KKysrIGIvbWV0
-YS1uZXR3b3JraW5nL3JlY2lwZXMtc3VwcG9ydC9jaWZzL2NpZnMtdXRpbHNf
-Z2l0LmJiDQpAQCAtNCwxMiArNCwxMyBAQCBTRUNUSU9OID0gIm90aGVyb3Nm
-cyINCiBMSUNFTlNFID0gIkdQTHYzICYgTEdQTHYzIg0KIExJQ19GSUxFU19D
-SEtTVU0gPSAiZmlsZTovL0NPUFlJTkc7bWQ1PWQzMjIzOWJjYjY3MzQ2M2Fi
-ODc0ZTgwZDQ3ZmFlNTA0Ig0KIA0KLVBWID0gIjYuNiINCitQViA9ICI2Ljci
-DQogDQotU1JDUkVWID0gIjc5MjZhYWVhOThjZGM5NmI2NTQ0YjhlMjFmYjVi
-MGI0NDIyYzM0MGQiDQorU1JDUkVWID0gIjgxMDFhMDc4NzFmMTg1YzcwNDRm
-YTJjYTIyMWIyODJhYjQ2MDdjOGIiDQogU1JDX1VSSSA9ICJnaXQ6Ly9naXQu
-c2FtYmEub3JnL2NpZnMtdXRpbHMuZ2l0Ig0KIA0KIFMgPSAiJHtXT1JLRElS
-fS9naXQiDQorREVQRU5EUyArPSAibGlidGFsbG9jIg0KIA0KIFBBQ0tBR0VD
-T05GSUcgPz89ICIiDQogUEFDS0FHRUNPTkZJR1tjYXBdID0gIi0td2l0aC1s
-aWJjYXAsLS13aXRob3V0LWxpYmNhcCxsaWJjYXAiDQotLSANCjIuNy40DQoN
-CgoK
+On Fri, Jun 9, 2017 at 4:16 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Then why does it work for chromium which used to have the same issue?
+
+https://github.com/OSSystems/meta-browser/blob/master/recipes-browser/chromium/chromium/chromium/m32.patch
 
