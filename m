@@ -1,37 +1,31 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9EFE7784F2
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 90F0E784D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:32:21 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id s33so11418067qtg.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 09:32:22 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=e6y/YfTFx7VyV36hL/Tw4yeBWlCby5r/tGlqiCJE2lM=;
-	b=aA7GpUXfcbMoxB+Tw79c04MCZG7bdTmar1QnsZJweXUDTb4rQgsMnsv/Pkjrf3M+pR
-	wAnF/pJemFZcgW9SIr2OrDi2LvyrZGUmNAEfKHdJ5BWbE8BtWf/z8fqH2MCavMwiRSGP
-	j9RJCoaYKzuz+sG1SIq2+HAaiPQVhN3+lPkbhieUnHXtPcpXQx0VOhRApJzuxa9yX2sj
-	xXiD+oW1KtQWWtENrP1VD+3YT3eCIQUDbOQzRG9Ih7TqL1lBAeluFGuNRV14TKi89INn
-	IFIDtvnstUdSblQ1f4CxuiZ2/y2WkB/91DiS/xtCaK1KSqjD8mTAegOiGu0O9sVvTUKp
-	cU/A==
-X-Gm-Message-State: AKS2vOwEUP2bF6YGPD0j9wY0an2XODz04tU+O+wfcmzIqQIoDu4vXMHV
-	jkGzXNkI05GkwY2daS8=
-X-Received: by 10.55.214.84 with SMTP id t81mr13263623qki.38.1497630741995;
-	Fri, 16 Jun 2017 09:32:21 -0700 (PDT)
-Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
-	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
-	x78sm1747902qkb.44.2017.06.16.09.32.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 09:32:21 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 12:32:03 -0400
-Message-Id: <1497630723-7551-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-astroid: update to version 1.5.3
+	Fri, 16 Jun 2017 16:34:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v5GGYu1c000554
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 16 Jun 2017 09:34:56 -0700 (PDT)
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 16 Jun 2017 09:34:56 -0700
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>, Martin Jansa
+	<martin.jansa@gmail.com>
+References: <20170616123014.2958-1-alexander.kanavin@linux.intel.com>
+	<CA+chaQcdyHhKcoVu2_+Ei2bxfoL49c9ip7wxTegs2e8GKeopag@mail.gmail.com>
+	<0ec7000d-a9fd-6eb2-a237-5d7b9895c885@linux.intel.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <7b85a271-c47f-d31b-c3af-34fedd988974@windriver.com>
+Date: Fri, 16 Jun 2017 12:34:54 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
+MIME-Version: 1.0
+In-Reply-To: <0ec7000d-a9fd-6eb2-a237-5d7b9895c885@linux.intel.com>
+X-Originating-IP: [172.25.44.7]
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] bdwgc: add a recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,33 +38,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 16:32:22 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 16:34:57 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python-astroid_1.4.9.bb => python-astroid_1.5.3.bb}       | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-astroid_1.4.9.bb => python-astroid_1.5.3.bb} (74%)
+On 2017-06-16 10:43 AM, Alexander Kanavin wrote:
+> On 06/16/2017 05:41 PM, Martin Jansa wrote:
+>> Why should we take this to meta-oe? Please explain in commit message.
+>>
+>> Is it just because of zile? +Randy who upgraded zile.
+> 
+> Yes, it's because of that. I checked latest upstream of zile, and it 
+> still seems to require it.
+> 
+> Do you want me to resend the patch?
 
-diff --git a/meta-python/recipes-devtools/python/python-astroid_1.4.9.bb b/meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python-astroid_1.4.9.bb
-rename to meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
-index cee1291..9731e0b 100644
---- a/meta-python/recipes-devtools/python/python-astroid_1.4.9.bb
-+++ b/meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
-@@ -4,8 +4,8 @@ SECTION = "devel/python"
- LICENSE = "LGPL"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--SRC_URI[md5sum] = "a57438971de05eb801b82eae59c05217"
--SRC_URI[sha256sum] = "a483e7891ce3a06dadfc6cb9095b0938aca58940d43576d72e4502b480c085d7"
-+SRC_URI[md5sum] = "6f65e4ea8290ec032320460905afb828"
-+SRC_URI[sha256sum] = "492c2a2044adbf6a84a671b7522e9295ad2f6a7c781b899014308db25312dd35"
- 
- inherit setuptools pypi
- 
+Given that Martin said:
+   "Please explain in commit message."
+yes, you should send a V2 patch.
+
+../Randy
+> 
+> 
+> Alex
+
+
 -- 
-2.7.4
-
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
