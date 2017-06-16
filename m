@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f180.google.com (mail-qt0-f180.google.com
-	[209.85.216.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 175FB71BA1
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9F2C071BF0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 17:15:46 +0000 (UTC)
-Received: by mail-qt0-f180.google.com with SMTP id w1so71074008qtg.2
+	Fri, 16 Jun 2017 17:19:38 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id o21so11726309qtb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 10:15:47 -0700 (PDT)
+	Fri, 16 Jun 2017 10:19:40 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=cA02woQ33uQY7cYlH/xkEzl4pLZlcRscaRtnmXiKOPk=;
-	b=TDbPaokMACL0WAedRIPR1GcjHAetYLp9TS9UJKu4GB5sE7eGVJ/tdefymlU3Z7xC5U
-	BIIFBTSFlhqTfipewFJpelHoHRMWP1GI5iEIvOVXh26T58kdFaFyJSB7cB0n48v88wE8
-	1setIS0ieciaEQZPqyfJZqDMLlgiYHzocNiLPVIPVZsEA+TWsXEc6kfx5Oj0W2OY5gEG
-	BCZ1Msv4rLvcY2QNgQIMfnAU3C6QdRw6cPGRhA7eRX7uEiFVkYyjpJNXE2BJEuDT0hOi
-	df9FYYEXYAZ263ZPXuw9cGWXzh4BiNQcbImgLsRcZtXH7bQqDYIUJfhNplKsTZ+3ve2A
-	F+og==
-X-Gm-Message-State: AKS2vOwTb4uwIlL2Jzlm/u0WYMuUKuBO8p0XIxx2gM/WTHDg4MB68Swp
-	iifh/j63ZOjgnRnbfMQ=
-X-Received: by 10.55.203.10 with SMTP id d10mr13142489qkj.167.1497633347219;
-	Fri, 16 Jun 2017 10:15:47 -0700 (PDT)
+	bh=pJ5b3FjOX32X21AJM3C8nqLJ10kpYQ3oamy3us5wEQA=;
+	b=D5jUuFCJ0BuVCHtv7/2EGHsDZtDQ7aoWcU5jnLuyE5lpd9P3tViKlSFR0+DKvx521Y
+	5O/Xm49A4ayAr27QwTBtAcxlEbERFn+xFPpsSwoHxelyLPQqLynTIGBsgXBpGUIcpjXX
+	tkKVxkCrmYnVLI6K7wZaM0KzVJbUfv3gEmKbcNOGgGtTa6IGJPsFob6Rqceedjnmidnf
+	A/VOJbkKmlAGHTQfRPhNxyz84CaALcuJPdOoQppZw0UjYiTgEw0CYwMErgUB6uDS6qZE
+	69ym/AzrI2Nw8YwNf/k4GmrIyokpYjkfF3kN11oK60kfYRrM+VvGIrP5MYDLv0/CqK3W
+	KbSg==
+X-Gm-Message-State: AKS2vOybFAXxBFx9gaZlpNJl783L2LiwDgC/xxs+LbkjKfyIz8M5JJ53
+	JHdMgN9Pz3DgNnpUSt4=
+X-Received: by 10.200.0.153 with SMTP id c25mr13961718qtg.28.1497633579438;
+	Fri, 16 Jun 2017 10:19:39 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
-	q37sm2047931qtb.13.2017.06.16.10.15.46
+	n37sm2160099qta.12.2017.06.16.10.19.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 10:15:46 -0700 (PDT)
+	Fri, 16 Jun 2017 10:19:38 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 13:15:39 -0400
-Message-Id: <1497633339-32314-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 13:19:32 -0400
+Message-Id: <1497633572-1306-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-gevent: update to version 1.2.2
+Subject: [meta-python][PATCH] python-serpent: update to version 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,49 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 17:15:55 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 17:19:38 -0000
+
+Verify the license terms have not changed and update checksum based on the
+latest PKG-INFO
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-gevent.inc               | 6 +++---
- .../python/{python-gevent_1.2.1.bb => python-gevent_1.2.2.bb}       | 0
- .../python/{python3-gevent_1.2.1.bb => python3-gevent_1.2.2.bb}     | 0
+ meta-python/recipes-devtools/python/python-serpent.inc              | 6 +++---
+ .../python/{python-serpent_1.19.bb => python-serpent_1.22.bb}       | 0
+ .../python/{python3-serpent_1.19.bb => python3-serpent_1.22.bb}     | 0
  3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-gevent_1.2.1.bb => python-gevent_1.2.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-gevent_1.2.1.bb => python3-gevent_1.2.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-serpent_1.19.bb => python-serpent_1.22.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-serpent_1.19.bb => python3-serpent_1.22.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-gevent.inc b/meta-python/recipes-devtools/python/python-gevent.inc
-index deeceae..8889cfb 100644
---- a/meta-python/recipes-devtools/python/python-gevent.inc
-+++ b/meta-python/recipes-devtools/python/python-gevent.inc
-@@ -3,7 +3,7 @@ DESCRIPTION = "gevent is a coroutine-based Python networking library that uses g
- a high-level synchronous API on top of the libevent event loop."
- HOMEPAGE = "http://www.gevent.org"
- LICENSE = "MIT & Python-2.0 & BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=2dbb33d00e1fd31c7041460a81ac0bd2 \
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4de99aac27b470c29c6c309e0c279b65 \
-                     file://NOTICE;md5=5966cd2c6582656d28ab3c33da3860f8 \
-                     file://deps/libev/LICENSE;md5=d6ad416afd040c90698edcdf1cbee347"
- DEPENDS += "libevent"
-@@ -20,8 +20,8 @@ SRC_URI_append = " \
-     file://libev-conf.patch;patch=1;pnum=1 \
- "
+diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
+index 0b1aa91..8b98043 100644
+--- a/meta-python/recipes-devtools/python/python-serpent.inc
++++ b/meta-python/recipes-devtools/python/python-serpent.inc
+@@ -1,9 +1,9 @@
+ SUMMARY = "Serialization based on ast.literal_eval"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=3773e39c491bb1f9ccc98389d57169d7"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dd6e89638fc70146d17dd7087fa817ae"
  
--SRC_URI[md5sum] = "6700a2433c8e0635425e6798760efc81"
--SRC_URI[sha256sum] = "3de300d0e32c31311e426e4d5d73b36777ed99c2bac3f8fbad939eeb2c29fa7c"
-+SRC_URI[md5sum] = "7f0baf355384fe5ff2ecf66853422554"
-+SRC_URI[sha256sum] = "4791c8ae9c57d6f153354736e1ccab1e2baf6c8d9ae5a77a9ac90f41e2966b2d"
+-SRC_URI[md5sum] = "cdef596f727cb6b4176c89769d2d41ee"
+-SRC_URI[sha256sum] = "946b2c837f889971df3575af9dadd8f09bfe48549ebc1b9f6434263b653707ce"
++SRC_URI[md5sum] = "6950f234edcacfa1d31b6655ac3c6256"
++SRC_URI[sha256sum] = "a67ca57082b00ea734854d751ab19e8a49d4ea0d4be7194985da35863fb9fb19"
  
- # The python-gevent has no autoreconf ability
- # and the logic for detecting a cross compile is flawed
-diff --git a/meta-python/recipes-devtools/python/python-gevent_1.2.1.bb b/meta-python/recipes-devtools/python/python-gevent_1.2.2.bb
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-serpent_1.19.bb b/meta-python/recipes-devtools/python/python-serpent_1.22.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-gevent_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python-gevent_1.2.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-gevent_1.2.1.bb b/meta-python/recipes-devtools/python/python3-gevent_1.2.2.bb
+rename from meta-python/recipes-devtools/python/python-serpent_1.19.bb
+rename to meta-python/recipes-devtools/python/python-serpent_1.22.bb
+diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.19.bb b/meta-python/recipes-devtools/python/python3-serpent_1.22.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-gevent_1.2.1.bb
-rename to meta-python/recipes-devtools/python/python3-gevent_1.2.2.bb
+rename from meta-python/recipes-devtools/python/python3-serpent_1.19.bb
+rename to meta-python/recipes-devtools/python/python3-serpent_1.22.bb
 -- 
 2.7.4
 
