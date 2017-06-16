@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f178.google.com (mail-qt0-f178.google.com
-	[209.85.216.178])
-	by mail.openembedded.org (Postfix) with ESMTP id F1767782C5
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id DDE4B782C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 17:38:39 +0000 (UTC)
-Received: by mail-qt0-f178.google.com with SMTP id w1so71913212qtg.2
+	Fri, 16 Jun 2017 17:41:04 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id o21so11862786qtb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 10:38:41 -0700 (PDT)
+	Fri, 16 Jun 2017 10:41:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6JisS+tnDEzRw9DIIFAScyStNWC1I5b3rFdCpxmsMkY=;
-	b=TJ42BDMVHMaQDuwoHdSmgJQm1qbU8W+aZTM6Iem526aAA4jBUKOcULejqrTZ2xKwlv
-	jqKtuI+Ce/RbjgXmXz+Een53/kNXnw1R17nQxgZHgfS25eCLcEe6YAibfESwXRdEoDaa
-	qRn2I6hfsdB03DoAZpMhjPMDvR+OTXTJd9AJomQRlsGcYBxOTAWJJ6tL/JlEzOXxtuVA
-	F0UQoUQUVqtNynaJn+t3Vs1NcB+x0tuNHlvf+fB1bfZBYlIiVd80YcS9af0cIRgkZ9l2
-	fkTEl8RLoKFsnS7y8lqBRSAjOWJrWhmGTFfPsUiEIR57b1Ppo9HcP/KK2IOpQI0uDb4V
-	CrGw==
-X-Gm-Message-State: AKS2vOxzq8SZf1DVBb06VCAIzQsctZG1AFwlaF7s14I6w4V/dLc1mVPS
-	RZn209FPtVhxIVUzip8=
-X-Received: by 10.55.77.2 with SMTP id a2mr13275499qkb.156.1497634720817;
-	Fri, 16 Jun 2017 10:38:40 -0700 (PDT)
+	bh=Qek8T9N0m4mVnwcdYCac/dl1VnZ07q3+nIOd6XJOQ5c=;
+	b=KBDWYYfuvnmIY7W0SHIYfSnLwuvdYsjXZAxryXWY/y5cNZoeJZ0aMnLPJ3UKLDyFNY
+	8vAiSUJCR/G5/OO8YdFY40Pu+5mlNlcG0p+Khpz2VYweSPQHT0wpAQusr20LTnZu89fq
+	bEnI20x+IuqFkb7DC7I7Y9ZvXHPC+5gJyyyfMVkLstwGn9iIloXSDAq1vKtoAvuIPfy2
+	GVzlttd4OHiEntEpnzSSazj/LJJWLQ4PQc89rILhZjsSLt7zarEtrAR82k3Ym/tFRpzY
+	b55q0e0hnFHCZkz+6IoepGOQ+2u2CoI6Noma51E14YmnUFpACQIPkm/99SqkGPma120K
+	KFYg==
+X-Gm-Message-State: AKS2vOw8T5IH03uWkBmz8F2K8OVUP9aMwCcfL13Q/HLIPLB7Oy2mkGu1
+	wNx80Tw0q6ADyEvx+BY=
+X-Received: by 10.55.95.194 with SMTP id t185mr13765226qkb.119.1497634865846; 
+	Fri, 16 Jun 2017 10:41:05 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
-	l46sm2019997qtb.21.2017.06.16.10.38.40
+	a41sm2055362qte.50.2017.06.16.10.41.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 10:38:40 -0700 (PDT)
+	Fri, 16 Jun 2017 10:41:05 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 13:38:32 -0400
-Message-Id: <1497634712-6953-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 13:40:58 -0400
+Message-Id: <1497634858-8581-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-gsocketpool: update to version 0.1.6
+Subject: [meta-python][PATCH] python-zopeinterface: update to version 4.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,88 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 17:38:40 -0000
-
-Remove patch that has been applied upstream in this release
+X-List-Received-Date: Fri, 16 Jun 2017 17:41:05 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../files/0001-fix_setup_py.patch                  | 35 ----------------------
- .../python-gsocketpool/python-gsocketpool.inc      |  8 ++---
- ...etpool_0.1.5.bb => python-gsocketpool_0.1.6.bb} |  0
- ...tpool_0.1.5.bb => python3-gsocketpool_0.1.6.bb} |  0
- 4 files changed, 2 insertions(+), 41 deletions(-)
- delete mode 100644 meta-python/recipes-connectivity/python-gsocketpool/files/0001-fix_setup_py.patch
- rename meta-python/recipes-connectivity/python-gsocketpool/{python-gsocketpool_0.1.5.bb => python-gsocketpool_0.1.6.bb} (100%)
- rename meta-python/recipes-connectivity/python-gsocketpool/{python3-gsocketpool_0.1.5.bb => python3-gsocketpool_0.1.6.bb} (100%)
+ meta-python/recipes-devtools/python/python-zopeinterface.inc          | 4 ++--
+ .../{python-zopeinterface_4.3.3.bb => python-zopeinterface_4.4.2.bb}  | 0
+ ...{python3-zopeinterface_4.3.3.bb => python3-zopeinterface_4.4.2.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-zopeinterface_4.3.3.bb => python-zopeinterface_4.4.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-zopeinterface_4.3.3.bb => python3-zopeinterface_4.4.2.bb} (100%)
 
-diff --git a/meta-python/recipes-connectivity/python-gsocketpool/files/0001-fix_setup_py.patch b/meta-python/recipes-connectivity/python-gsocketpool/files/0001-fix_setup_py.patch
-deleted file mode 100644
-index a9135a3..0000000
---- a/meta-python/recipes-connectivity/python-gsocketpool/files/0001-fix_setup_py.patch
-+++ /dev/null
-@@ -1,35 +0,0 @@
--From 2d47a5df58802173bf90d760b1d6f520aeea76fc Mon Sep 17 00:00:00 2001
--From: Andrej Rode <andrej.rode@ettus.com>
--Date: Mon, 10 Apr 2017 16:47:41 -0700
--Subject: [PATCH] setup: remove find_packages since that would install tests as
-- a package as well
--
--Signed-off-by: Andrej Rode <andrej.rode@ettus.com>
-----
-- setup.py | 4 ++--
-- 1 file changed, 2 insertions(+), 2 deletions(-)
--
--diff --git a/setup.py b/setup.py
--index 6b37016..a1f11a7 100644
----- a/setup.py
--+++ b/setup.py
--@@ -1,6 +1,6 @@
-- # -*- coding: utf-8 -*-
-- 
---from setuptools import setup, find_packages
--+from setuptools import setup
-- 
-- setup(
--     name='gsocketpool',
--@@ -9,7 +9,7 @@ setup(
--     author='Studio Ousia',
--     author_email='ikuya@ousia.jp',
--     url='http://github.com/studio-ousia/gsocketpool',
---    packages=find_packages(),
--+    packages=['gsocketpool'],
--     license=open('LICENSE').read(),
--     include_package_data=True,
--     classifiers=(
---- 
--2.10.2
--
-diff --git a/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool.inc b/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool.inc
-index 54dd49f..11971dc 100644
---- a/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool.inc
-+++ b/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool.inc
-@@ -6,11 +6,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
- DEPENDS += "${PYTHON_PN}-gevent"
- RDEPENDS_${PN} += "${PYTHON_PN}-gevent"
+diff --git a/meta-python/recipes-devtools/python/python-zopeinterface.inc b/meta-python/recipes-devtools/python/python-zopeinterface.inc
+index 1ea6114..8cc613b 100644
+--- a/meta-python/recipes-devtools/python/python-zopeinterface.inc
++++ b/meta-python/recipes-devtools/python/python-zopeinterface.inc
+@@ -2,8 +2,8 @@ SUMMARY = "Interface definitions for Zope products"
+ LICENSE = "ZPL-2.1"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=e54fd776274c1b7423ec128974bd9d46"
  
--SRC_URI_append = " \
--    file://0001-fix_setup_py.patch;patch=1;pnum=1 \
--"
--
--SRC_URI[md5sum] = "04f618864b18d6b06f774994f172ef49"
--SRC_URI[sha256sum] = "b6b73deab9bcbc428d4813697eebe5c3b9c40a971f62e13607b881aa749af9d0"
-+SRC_URI[md5sum] = "49f5f292ef1b60944ae92ca426a5e550"
-+SRC_URI[sha256sum] = "f2e2749aceadce6b27ca52e2b0a64af99797746a8681e1a2963f72007c14cb14"
+-SRC_URI[md5sum] = "ba3f32eacaea66094b7e2ae2788cec89"
+-SRC_URI[sha256sum] = "8780ef68ca8c3fe1abb30c058a59015129d6e04a6b02c2e56b9c7de6078dfa88"
++SRC_URI[md5sum] = "d69131352ef06753388c3da09cd8c8aa"
++SRC_URI[sha256sum] = "4e59e427200201f69ef82956ddf9e527891becf5b7cde8ec3ce39e1d0e262eb0"
  
- inherit pypi
-diff --git a/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool_0.1.5.bb b/meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool_0.1.6.bb
+ PYPI_PACKAGE = "zope.interface"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb b/meta-python/recipes-devtools/python/python-zopeinterface_4.4.2.bb
 similarity index 100%
-rename from meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool_0.1.5.bb
-rename to meta-python/recipes-connectivity/python-gsocketpool/python-gsocketpool_0.1.6.bb
-diff --git a/meta-python/recipes-connectivity/python-gsocketpool/python3-gsocketpool_0.1.5.bb b/meta-python/recipes-connectivity/python-gsocketpool/python3-gsocketpool_0.1.6.bb
+rename from meta-python/recipes-devtools/python/python-zopeinterface_4.3.3.bb
+rename to meta-python/recipes-devtools/python/python-zopeinterface_4.4.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-zopeinterface_4.3.3.bb b/meta-python/recipes-devtools/python/python3-zopeinterface_4.4.2.bb
 similarity index 100%
-rename from meta-python/recipes-connectivity/python-gsocketpool/python3-gsocketpool_0.1.5.bb
-rename to meta-python/recipes-connectivity/python-gsocketpool/python3-gsocketpool_0.1.6.bb
+rename from meta-python/recipes-devtools/python/python3-zopeinterface_4.3.3.bb
+rename to meta-python/recipes-devtools/python/python3-zopeinterface_4.4.2.bb
 -- 
 2.7.4
 
