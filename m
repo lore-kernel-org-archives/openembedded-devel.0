@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 8043A7844A
+Return-Path: <Liezhi.Yang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8474C78452
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 02:42:39 +0000 (UTC)
+	Fri, 16 Jun 2017 03:04:44 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v5G2geND007616
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v5G34jj0026738
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jun 2017 19:42:40 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 15 Jun 2017 19:42:40 -0700
-From: <jackie.huang@windriver.com>
+	Thu, 15 Jun 2017 20:04:45 -0700 (PDT)
+Received: from ala-blade47.wrs.com (147.11.105.67) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 15 Jun 2017 20:04:45 -0700
+From: Robert Yang <liezhi.yang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Jun 2017 10:42:38 +0800
-Message-ID: <20170616024238.13262-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+Date: Thu, 15 Jun 2017 20:04:45 -0700
+Message-ID: <20170616030445.19533-1-liezhi.yang@windriver.com>
+X-Mailer: git-send-email 2.10.2
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH] libfile-slurp-perl: add new recipe
+Subject: [meta-filesystems][PATCH] fuse: fix SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,48 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 02:42:40 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 03:04:44 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+${P} -> ${BP}, otherwise it would fail when multilib.
 
-This module provides subroutines to read or write
-entire files with a simple call.  It also has a
-subroutine for reading the list of filenames
-in a directory.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
 ---
- .../libfile/libfile-slurp-perl_9999.19.bb             | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
- create mode 100644 meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
+ meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
-new file mode 100644
-index 000000000..945b4c1c8
---- /dev/null
-+++ b/meta-perl/recipes-perl/libfile/libfile-slurp-perl_9999.19.bb
-@@ -0,0 +1,19 @@
-+SUMMARY = "Slurp entire files into variables."
-+DESCRIPTION = "This module provides subroutines to read or write \
-+  entire files with a simple call.  It also has a subroutine for \
-+  reading the list of filenames in a directory. \
-+"
-+SECTION = "libs"
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+
-+LIC_FILES_CHKSUM = "file://README;beginline=37;endline=41;md5=255fbd5f98a90d51d9908d31271ae4d4"
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/U/UR/URI/File-Slurp-${PV}.tar.gz"
-+
-+S = "${WORKDIR}/File-Slurp-${PV}"
-+
-+inherit cpan
-+
-+SRC_URI[md5sum] = "7d584cd15c4f8b9547765eff8c4ef078"
-+SRC_URI[sha256sum] = "ce29ebe995097ebd6e9bc03284714cdfa0c46dc94f6b14a56980747ea3253643"
-+
-+BBCLASSEXTEND="native"
+diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+index e66f3cd..87292fe 100644
+--- a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
++++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
+@@ -10,7 +10,7 @@ LICENSE = "GPLv2 & LGPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+                     file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
+ 
+-SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz \
++SRC_URI = "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.gz \
+            file://gold-unversioned-symbol.patch \
+            file://aarch64.patch \
+            file://0001-fuse-fix-the-return-value-of-help-option.patch \
 -- 
-2.11.0
+2.10.2
 
 
