@@ -1,56 +1,48 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
-	by mail.openembedded.org (Postfix) with ESMTP id F3275784BC
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 36E4678464
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 14:15:49 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bes.se.axis.com (Postfix) with ESMTP id AD8D12E697
+	Fri, 16 Jun 2017 14:41:34 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id u13so2643534ywg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:50 +0200 (CEST)
-X-Axis-NonUser-Spam: YES
-X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
-Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id X5W_oyFFlyjb
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bes.se.axis.com (Postfix) with ESMTPS id 855F02E705
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 716E71E088
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 66B471E092
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from thoth.se.axis.com (unknown [10.0.2.173])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
-	by thoth.se.axis.com (Postfix) with ESMTP id 5B573174
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
-Received: from saur-2.se.axis.com (localhost [127.0.0.1])
-	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id v5GEFn2Z028463
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:15:49 +0200
-Received: (from pkj@localhost)
-	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id v5GEFn3G028462
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jun 2017 16:15:49 +0200
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 16:15:44 +0200
-Message-Id: <20170616141544.28415-2-pkj@axis.com>
-X-Mailer: git-send-email 2.12.0
-In-Reply-To: <20170616141544.28415-1-pkj@axis.com>
-References: <20170616141544.28415-1-pkj@axis.com>
-X-TM-AS-GCONF: 00
-Subject: [PATCH 2/2] kconfig-frontends: Update to 4.11.0.1
+	Fri, 16 Jun 2017 07:41:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=eKcbR/7kVuR3snK6PoPYdsbm48YwepZEQKjFU5dTsJE=;
+	b=QuYtqiweg1mA387Z03Ho5BYLi47/kafYAh/chINkEt+qeZUkTycc2NcdG6EJl59/7E
+	BgEZLlPLXKJpgHP4nRraf6yLsHMJjgXFJQQfB40kUILWFJeSKYXIXgYeghilGzSP2jKh
+	MX/+n7tu39TlWG38HdnISD7rb42AVUoEECaMwLv62jhSE1eBH0Za0Lu12U2WvAUJJTAu
+	CawmNcVM7M4vGuMkEKzcvGvCQDo3DkmdEUjgiS+e/Gt4VyvvrcrmQGmjjEbJanlFH0/4
+	hmkEy7io8rkUdbUX0vC4tZXUBf+pb24ukyBUAxlD7rLJo0RBNonmiIXlasGgJptJg7gK
+	17IQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=eKcbR/7kVuR3snK6PoPYdsbm48YwepZEQKjFU5dTsJE=;
+	b=nvNSlz2+M9bSDuVLRlT4nVjmU5tNJW2Q+wH3fIPpp4zWF+W6AgTEfMI5Emhvx9Fe+z
+	1EcVO2Y7rSBb+S+zARCxjGeCzQB5PbhD+I6OWtQNNJUtIFtE4145FDgNwhUWZBtTx2+v
+	KBi/PmL4BJ2R1hMrXf2PHO2BXUY2E8srO4zpFmZAbV2Wqfoc3kFyuZujYxYdVDthB/l7
+	MXr/grLXr/7Xhaf2/9bpg0hbDWxkBPJMJY2nCnYsY+E0zfIaHCyTmWVcU2V/l3TMHBmU
+	EWVYlBijlrYb2gSg3RS+sq/emRFBel4UHEnO3mpRX8baNJOcF372TyBO7mFW5fHd9+7I
+	O3dg==
+X-Gm-Message-State: AKS2vOwsaVh+IuhIxSOGLxXhPkZ5MgyEcqCGkj9EFBUJqUTJhJaewLDF
+	6kbC7b9jXD7qwYeoMbMJl/oukmxjgw==
+X-Received: by 10.129.44.130 with SMTP id s124mr1556852yws.2.1497624095509;
+	Fri, 16 Jun 2017 07:41:35 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.181.204 with HTTP; Fri, 16 Jun 2017 07:41:35 -0700 (PDT)
+In-Reply-To: <20170616123014.2958-1-alexander.kanavin@linux.intel.com>
+References: <20170616123014.2958-1-alexander.kanavin@linux.intel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 16 Jun 2017 16:41:35 +0200
+Message-ID: <CA+chaQcdyHhKcoVu2_+Ei2bxfoL49c9ip7wxTegs2e8GKeopag@mail.gmail.com>
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>, 
+	Randy MacLeod <randy.macleod@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] bdwgc: add a recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,163 +55,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 14:15:50 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 14:41:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-No longer needed patches have been removed, and one patch has been
-backported instead of using the submitted patch.
+Why should we take this to meta-oe? Please explain in commit message.
 
-Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
----
- .../files/0001-Fix-installation-of-.pc-files.patch | 28 ----------------
- ...sure-frontends-exits-before-writing-into-.patch | 32 +++++++++++++++++++
- .../kconfig-frontends/files/missing-mkdir.patch    | 37 ----------------------
- ...s_4.10.0.1.bb => kconfig-frontends_4.11.0.1.bb} |  9 +++---
- 4 files changed, 36 insertions(+), 70 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
- create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/0001-Makefile-ensure-frontends-exits-before-writing-into-.patch
- delete mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
- rename meta-oe/recipes-devtools/kconfig-frontends/{kconfig-frontends_4.10.0.1.bb => kconfig-frontends_4.11.0.1.bb} (89%)
+Is it just because of zile? +Randy who upgraded zile.
 
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
-deleted file mode 100644
-index 57ea42e4b..000000000
---- a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 80c16b1f39402e8ce33600e5f297920a6d603090 Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex.kanavin@gmail.com>
--Date: Thu, 27 Apr 2017 16:57:06 +0300
--Subject: [PATCH] Fix installation of .pc files
--
--They go to prefix/pkgconfig/, not prefix/pkg-config.
--
--Upstream-Status: Submitted
--Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
-----
-- Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/Makefile.am b/Makefile.am
--index 058690a..f9e9b7b 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -107,7 +107,7 @@ EXTRA_DIST += \
-- 	libs/parser/yconf.y.patch
-- 
-- # libs/parser/kconfig-parser.pc generated by AC_CONFIG_FILES in configure.ac
---pkgconfigdir = $(libdir)/pkg-config
--+pkgconfigdir = $(libdir)/pkgconfig
-- pkgconfig_DATA = libs/parser/kconfig-parser.pc
-- DISTCLEANFILES += libs/parser/kconfig-parser.pc
-- EXTRA_DIST += libs/parser/kconfig-parser.pc.in
---- 
--2.11.0
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Makefile-ensure-frontends-exits-before-writing-into-.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Makefile-ensure-frontends-exits-before-writing-into-.patch
-new file mode 100644
-index 000000000..a5263c6f8
---- /dev/null
-+++ b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Makefile-ensure-frontends-exits-before-writing-into-.patch
-@@ -0,0 +1,32 @@
-+From 780b0b8e48551ba49b011caeeb09101a09c14a61 Mon Sep 17 00:00:00 2001
-+From: Ross Burton <ross.burton@intel.com>
-+Date: Fri, 26 May 2017 17:11:32 +0100
-+Subject: [PATCH] Makefile: ensure frontends/ exits before writing into it
-+
-+As previously, if GCC dependencies are not being written and the build is out of
-+tree then frontends/ won't exist so we need to create it.
-+
-+Upstream-Status: Backport
-+Signed-off-by: Ross Burton <ross.burton@intel.com>
-+Signed-off-by: Yann E. MORIN <yann.morin.1998@free.fr>
-+(cherry picked from commit f7986375129d1ada7dc6abeeec5b9d00ef6f7149)
-+Signed-off-by: Yann E. MORIN <yann.morin.1998@free.fr>
-+---
-+ Makefile.am | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 1baa110..434db5d 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -171,6 +171,7 @@ if COND_kconfig
-+ bin_SCRIPTS += frontends/kconfig
-+ 
-+ frontends/kconfig: frontends/kconfig.in
-++	$(MKDIR_P) $(@D)
-+ 	$(AM_V_GEN)$(SED) -e 's/@KCFG_LIST@/$(kcfg_list)/g' \
-+ 		$< >$@
-+ 	@chmod +x $@
-+-- 
-+2.12.0
-+
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
-deleted file mode 100644
-index a11186e51..000000000
---- a/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
-+++ /dev/null
-@@ -1,37 +0,0 @@
--Upstream-Status: Submitted
--Signed-off-by: Ross Burton <ross.burton@intel.com>
--
--From ca05ee2fb6db5b3b1edc16dba6150a2c6078a6cf Mon Sep 17 00:00:00 2001
--From: Ross Burton <ross.burton@intel.com>
--Date: Tue, 9 May 2017 15:30:00 +0100
--Subject: [PATCH] Makefile: ensure utils/ exists before writing to it
--
--Since utils/ was changed to not build recursively it's possible that in
--out-of-tree builds the utils/ directory hasn't been created when Make runs the
--utils/kconfig-tweak target which tries to write to file inside utils/.
--
--To ensure this can work, mkdir the directory.
--
--Signed-off-by: Ross Burton <ross.burton@intel.com>
-----
-- Makefile.am | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/Makefile.am b/Makefile.am
--index c8e96ef..1baa110 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -173,2 +173,3 @@ bin_SCRIPTS += frontends/kconfig
-- frontends/kconfig: frontends/kconfig.in
--+	$(MKDIR_P) $(@D)
-- 	$(AM_V_GEN)$(SED) -e 's/@KCFG_LIST@/$(kcfg_list)/g' \
--@@ -348,6 +348,7 @@ EXTRA_DIST += \
-- 	utils/kconfig-tweak.in.patch
-- 
-- utils/kconfig-tweak: utils/kconfig-tweak.in
--+	$(MKDIR_P) $(@D)
-- 	$(AM_V_GEN)$(SED) -e "s/@CONFIG_@/$(config_prefix)/g" \
-- 		$< >$@
-- 	@chmod +x $@
---- 
--2.8.1
-diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-similarity index 89%
-rename from meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb
-rename to meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-index d427e98c9..df08b8b11 100644
---- a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb
-+++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.11.0.1.bb
-@@ -13,12 +13,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=9b8cf60ff39767ff04b671fca8302408"
- SECTION = "devel"
- DEPENDS += "ncurses flex bison gperf-native"
- RDEPENDS_${PN} += "python3 bash"
--SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.10.x \
--           file://0001-Fix-installation-of-.pc-files.patch \
--           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch \
--           file://missing-mkdir.patch"
-+SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.11.x \
-+	   file://0001-Makefile-ensure-frontends-exits-before-writing-into-.patch \
-+           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch"
- 
--SRCREV = "f8ffe5e1c6f183cb7d5d515aa9381b7557de654e"
-+SRCREV = "f22fce3a308be1c7790ebefc6bbedb33c5f7c86a"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.12.0
+On Fri, Jun 16, 2017 at 2:30 PM, Alexander Kanavin <
+alexander.kanavin@linux.intel.com> wrote:
 
+> Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+> ---
+>  ...ac-add-check-for-NO_GETCONTEXT-definition.patch | 29 +++++++++++++++
+>  .../bdwgc/bdwgc/musl_header_fix.patch              | 27 ++++++++++++++
+>  meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb       | 42
+> ++++++++++++++++++++++
+>  3 files changed, 98 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/bdwgc/
+> bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+>  create mode 100644 meta-oe/recipes-support/bdwgc/
+> bdwgc/musl_header_fix.patch
+>  create mode 100644 meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+>
+> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-
+> add-check-for-NO_GETCONTEXT-definition.patch b/meta-oe/recipes-support/
+> bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+> new file mode 100644
+> index 000000000..8ef774f0f
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-
+> add-check-for-NO_GETCONTEXT-definition.patch
+> @@ -0,0 +1,29 @@
+> +configure.ac: add check for NO_GETCONTEXT definition
+> +
+> +Signed-off-by: Samuel Martin <s.martin49@gmail.com>
+> +[yann.morin.1998@free.fr: add a comment, change variable name, use
+> + AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
+> + Thomas)]
+> +Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+> +Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
+> +
+> +---
+> +Upstream-Status: Pending
+> + configure.ac | 6 ++++++
+> + 1 file changed, 6 insertions(+)
+> +
+> +--- bdwgc-7.2f.orig/configure.ac       2014-06-01 19:00:47.000000000
+> +0200
+> ++++ bdwgc-7.2f/configure.ac    2014-12-23 14:13:11.585716713 +0100
+> +@@ -365,6 +365,12 @@
+> +   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
+> + fi
+> +
+> ++# Check for getcontext (uClibc can be configured without it, for example)
+> ++AC_CHECK_FUNCS([getcontext])
+> ++AS_IF([test "$ac_cv_func_getcontext" = "no"],
+> ++  [CFLAGS="$CFLAGS -DNO_GETCONTEXT"
+> ++   CPPFLAGS="$CPPFLAGS -DNO_GETCONTEXT"])
+> ++
+> + case "$host" in
+> + # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing for N64
+> + # and unnecessary everywhere.
+> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> new file mode 100644
+> index 000000000..4a1849665
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+> @@ -0,0 +1,27 @@
+> +Add missing header to avoid:
+> +
+> +| 1472659610.016355: ../git/pthread_stop_world.c: In function
+> 'GC_brief_async_signal_safe_sleep':
+> +| 1472659610.0540252: ../git/pthread_stop_world.c:397:22: error: storage
+> size of 'tv' isn't known
+> +| 1472659610.0540252:        struct timeval tv;
+> +| 1472659610.0540252:                       ^~
+> +| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning: unused
+> variable 'tv' [-Wunused-variable]
+> +| 1472659610.054099:        struct timeval tv;
+> +| 1472659610.054099:                       ^~
+> +| 1472659610.054099: Makefile:1530: recipe for target
+> 'pthread_stop_world.lo' failed
+> +
+> +in musl builds.
+> +
+> +Upstream-Status: Pending
+> +
+> +Index: git/pthread_stop_world.c
+> +===================================================================
+> +--- git.orig/pthread_stop_world.c
+> ++++ git/pthread_stop_world.c
+> +@@ -45,6 +45,7 @@
+> + #include <semaphore.h>
+> + #include <errno.h>
+> + #include <unistd.h>
+> ++#include <sys/time.h>
+> + #include "atomic_ops.h"
+> +
+> + /* It's safe to call original pthread_sigmask() here.   */
+> diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> new file mode 100644
+> index 000000000..dcb68f028
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+> @@ -0,0 +1,42 @@
+> +SUMMARY = "A garbage collector for C and C++"
+> +
+> +DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can
+> be\
+> + used as a garbage collecting replacement for C malloc or C++ new. It
+> allows\
+> + you to allocate memory basically as you normally would, without
+> explicitly\
+> + deallocating memory that is no longer useful. The collector
+> automatically\
+> + recycles memory when it determines that it can no longer be otherwise\
+> + accessed.\
+> +  The collector is also used by a number of programming language\
+> + implementations that either use C as intermediate code, want to
+> facilitate\
+> + easier interoperation with C libraries, or just prefer the simple
+> collector\
+> + interface.\
+> +  Alternatively, the garbage collector may be used as a leak detector for
+> C\
+> + or C++ programs, though that is not its primary goal.\
+> +  Empirically, this collector works with most unmodified C programs,
+> simply\
+> + by replacing malloc with GC_malloc calls, replacing realloc with
+> GC_realloc\
+> + calls, and removing free calls."
+> +
+> +HOMEPAGE = "http://www.hboehm.info/gc/"
+> +SECTION = "devel"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://README.QUICK;md5=
+> 4f81f24ec69726c312487c2ac740e9e3"
+> +
+> +SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
+> +SRC_URI = "git://github.com/ivmai/bdwgc.git \
+> +           file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+> \
+> +           file://musl_header_fix.patch \
+> +          "
+> +
+> +FILES_${PN}-doc = "${datadir}"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +ARM_INSTRUCTION_SET = "arm"
+> +
+> +inherit autotools pkgconfig
+> +
+> +# by default use external libatomic-ops
+> +PACKAGECONFIG ??= "libatomic-ops"
+> +PACKAGECONFIG[libatomic-ops] = "--with-libatomic-ops=yes,--
+> with-libatomic-ops=no,libatomic-ops"
+> +
+> +BBCLASSEXTEND = "native nativesdk"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
