@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
 	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C894A784CE
+	by mail.openembedded.org (Postfix) with ESMTP id 63D50784CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:59:12 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id s33so11592832qtg.3
+	Fri, 16 Jun 2017 17:01:44 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id x58so11596470qtc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 09:59:14 -0700 (PDT)
+	Fri, 16 Jun 2017 10:01:46 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=m5BJ6HN2WxXkEjbUxkIeOWLGQID8E11eIn29PIJ5oIU=;
-	b=SLFgMZMOcYgpwUhWFnydLpedOTPDrBb8UIp1YgvszTGk0E2naoVCgsWQY9dJ0wVDe2
-	dYlWXtIfpK49eWCSBWVzhtvKvalUH1nX/s4HF8bkslVT4vrz4lcTRQAcKM+sns5TfnMy
-	1oMuq+Z98i+Jf+2z0RRujgdFhUw+5egMK9id19/8uAg31+N2sF++iEFD6aEXjrroVmd4
-	q7xe3FGe9fMAXbVguSn4jMvh98V/sh5sX7lhsE6WB7ohJqyczJjDhb/dC2N029ys0EyF
-	ER8Rnta2h1N45M02rHiFK/HqfddeD9iyenao2a2S55BfA4KYzpzaRf5lD484mZvQ6H3x
-	z9jA==
-X-Gm-Message-State: AKS2vOz/iQq290mBfqvMUi+w3EvVi9taif2o+UX4h9wSbFOyB5Gz9g6r
-	89cY266Z0BAVB9Ql2mI=
-X-Received: by 10.200.45.132 with SMTP id p4mr13833895qta.208.1497632353965;
-	Fri, 16 Jun 2017 09:59:13 -0700 (PDT)
+	bh=opOBMp55kNPqoEqqwN0udNrJ631K81CNJuvbDU7bCdY=;
+	b=HUJCx+n4ILeYq2Ts84p9hjsR8fRE5YolPjh2KN8PeA2X5b3MefqzJ2sthyE0In6Iuz
+	8g1E0oLNa0y2yGaPzjnSiwziN4pa/tO8GcgIys/0WIaE95K+Re2IZAfyQ8HyFC/VGBqi
+	sXsuayYmEjAI6VWblJGIYjjd7qiUy3LaPj82cfNG/4rqx1/EXn9mzGX3853skPTEuH1w
+	ZQT1jRfKO9t3i5gxQXgCSj7ob5Wj09wl9Qy6v0qiU2DfYc0Uxt+GpzK+Ry0pHU+XsQ8T
+	LC536pfeh1kSd1dHrLq/rpdenNeOagDSoiGEGKgOPb+C0iko3FZp9gHRO2wGUhb04eCC
+	TlSg==
+X-Gm-Message-State: AKS2vOxTS0TS61eu9Quc1M+kGFfxUJyKFMTZttOgqfnPUy6zwKmGdfQS
+	p7BnaQK1ytkeh9YVtlw=
+X-Received: by 10.55.203.208 with SMTP id u77mr13172206qkl.95.1497632505751;
+	Fri, 16 Jun 2017 10:01:45 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id f85sm2160757qkh.6.2017.06.16.09.59.13
+	by smtp.gmail.com with ESMTPSA id b6sm1720521qkc.68.2017.06.16.10.01.44
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 09:59:13 -0700 (PDT)
+	Fri, 16 Jun 2017 10:01:44 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 12:59:06 -0400
-Message-Id: <1497632346-2967-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 13:01:33 -0400
+Message-Id: <1497632493-8367-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-jsonpatch: update to version 1.16
+Subject: [meta-python][PATCH] python-monotonic: update to version 1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,31 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 16:59:12 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 17:01:46 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-jsonpatch_1.15.bb => python-jsonpatch_1.16.bb}     | 4 ++--
+ .../python/{python-monotonic_1.2.bb => python-monotonic_1.3.bb}       | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-jsonpatch_1.15.bb => python-jsonpatch_1.16.bb} (71%)
+ rename meta-python/recipes-devtools/python/{python-monotonic_1.2.bb => python-monotonic_1.3.bb} (67%)
 
-diff --git a/meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb b/meta-python/recipes-devtools/python/python-jsonpatch_1.16.bb
-similarity index 71%
-rename from meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb
-rename to meta-python/recipes-devtools/python/python-jsonpatch_1.16.bb
-index f214bf2..bbc61a4 100644
---- a/meta-python/recipes-devtools/python/python-jsonpatch_1.15.bb
-+++ b/meta-python/recipes-devtools/python/python-jsonpatch_1.16.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=32b15c843b7a329130f4e266a281ebb3"
+diff --git a/meta-python/recipes-devtools/python/python-monotonic_1.2.bb b/meta-python/recipes-devtools/python/python-monotonic_1.3.bb
+similarity index 67%
+rename from meta-python/recipes-devtools/python/python-monotonic_1.2.bb
+rename to meta-python/recipes-devtools/python/python-monotonic_1.3.bb
+index e5c88b1..ee91d18 100644
+--- a/meta-python/recipes-devtools/python/python-monotonic_1.2.bb
++++ b/meta-python/recipes-devtools/python/python-monotonic_1.3.bb
+@@ -2,8 +2,8 @@ SUMMARY = "An implementation of time.monotonic() for Python 2.0 through 3.2"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
+ 
+-SRC_URI[md5sum] = "d14c93aabc3d6af25ef086b032b123cf"
+-SRC_URI[sha256sum] = "c0e1ceca563ca6bb30b0fb047ee1002503ae6ad3585fc9c6af37a8f77ec274ba"
++SRC_URI[md5sum] = "34351251d1a67667a25cd7673d2e44bf"
++SRC_URI[sha256sum] = "2b469e2d7dd403f7f7f79227fe5ad551ee1e76f8bb300ae935209884b93c7c1b"
  
  inherit pypi setuptools
- 
--SRC_URI[md5sum] = "818d36e05d68ba90ca2b26597bd82975"
--SRC_URI[sha256sum] = "ae23cd08b2f7246f8f2475363501e740c4ef93f08f2a3b7b9bcfac0cc37fceb1"
-+SRC_URI[md5sum] = "8ef1ceb00dcf992c9e43611f698f9279"
-+SRC_URI[sha256sum] = "f025c28a08ce747429ee746bb21796c3b6417ec82288f8fe6514db7398f2af8a"
- 
- RDEPENDS_${PN} += "${PYTHON_PN}-json ${PYTHON_PN}-jsonpointer ${PYTHON_PN}-netclient ${PYTHON_PN}-re ${PYTHON_PN}-stringold"
  
 -- 
 2.7.4
