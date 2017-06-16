@@ -1,55 +1,20 @@
-Return-Path: <linus.svensson@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D079678225
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C33E7846A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 11:19:03 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id D2B0B18159
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hewXfVqVoJjb
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
-Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 122D0183A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 9B7551E096
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
-Received: from boulder03.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id 90C471E095
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder03.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
-Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
-	by seth.se.axis.com (Postfix) with ESMTP id 850891B4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
-Received: from [10.94.48.2] (10.0.5.60) by XBOX03.axis.com (10.0.5.17) with
-	Microsoft SMTP Server (TLS) id 15.0.1210.3;
-	Fri, 16 Jun 2017 13:19:02 +0200
-To: <openembedded-devel@lists.openembedded.org>
-References: <20170605172321.12557-1-acfoltzer@galois.com>
-	<20170605172321.12557-2-acfoltzer@galois.com>
-From: Linus Svensson <linus.svensson@axis.com>
-Message-ID: <d864b1f3-4db3-79ae-b0b9-3b2baee79a81@axis.com>
-Date: Fri, 16 Jun 2017 13:19:02 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
-MIME-Version: 1.0
-In-Reply-To: <20170605172321.12557-2-acfoltzer@galois.com>
-X-Originating-IP: [10.0.5.60]
-X-ClientProxiedBy: XBOX02.axis.com (10.0.5.16) To XBOX03.axis.com (10.0.5.17)
-X-TM-AS-GCONF: 00
-Subject: Re: [meta-oe][PATCH 2/3] meson: fix build/host confusion for bbclass
+	Fri, 16 Jun 2017 12:30:06 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by orsmga104.jf.intel.com with ESMTP; 16 Jun 2017 05:30:08 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,347,1493708400"; d="scan'208";a="113994962"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
+	by orsmga005.jf.intel.com with ESMTP; 16 Jun 2017 05:30:06 -0700
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Jun 2017 15:30:14 +0300
+Message-Id: <20170616123014.2958-1-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] bdwgc: add a recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,18 +27,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 11:19:04 -0000
-Content-Type: text/plain; charset="windows-1252"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 16 Jun 2017 12:30:07 -0000
 
-On 06/05/2017 07:23 PM, Adam C. Foltzer wrote:
-> Meson and Bitbake use different terminology for the build and host;
-> this provides the correct build machine info to Meson.
-What is the difference?
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+---
+ ...ac-add-check-for-NO_GETCONTEXT-definition.patch | 29 +++++++++++++++
+ .../bdwgc/bdwgc/musl_header_fix.patch              | 27 ++++++++++++++
+ meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb       | 42 ++++++++++++++++++++++
+ 3 files changed, 98 insertions(+)
+ create mode 100644 meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+ create mode 100644 meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+ create mode 100644 meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
 
-As far as I understand, bitbake and meson use the same terminology. 
-meson is supposed to get the build machine info from the environment, 
-not the cross file.
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+new file mode 100644
+index 000000000..8ef774f0f
+--- /dev/null
++++ b/meta-oe/recipes-support/bdwgc/bdwgc/0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch
+@@ -0,0 +1,29 @@
++configure.ac: add check for NO_GETCONTEXT definition
++
++Signed-off-by: Samuel Martin <s.martin49@gmail.com>
++[yann.morin.1998@free.fr: add a comment, change variable name, use
++ AS_IF, remove debug traces, use AC_CHECK_FUNCS (as suggested by
++ Thomas)]
++Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
++Cc: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
++
++---
++Upstream-Status: Pending
++ configure.ac | 6 ++++++
++ 1 file changed, 6 insertions(+)
++
++--- bdwgc-7.2f.orig/configure.ac	2014-06-01 19:00:47.000000000 +0200
+++++ bdwgc-7.2f/configure.ac	2014-12-23 14:13:11.585716713 +0100
++@@ -365,6 +365,12 @@
++   AC_MSG_RESULT($ac_cv_fno_strict_aliasing)
++ fi
++ 
+++# Check for getcontext (uClibc can be configured without it, for example)
+++AC_CHECK_FUNCS([getcontext])
+++AS_IF([test "$ac_cv_func_getcontext" = "no"],
+++  [CFLAGS="$CFLAGS -DNO_GETCONTEXT"
+++   CPPFLAGS="$CPPFLAGS -DNO_GETCONTEXT"])
+++
++ case "$host" in
++ # While IRIX 6 has libdl for the O32 and N32 ABIs, it's missing for N64
++ # and unnecessary everywhere.
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+new file mode 100644
+index 000000000..4a1849665
+--- /dev/null
++++ b/meta-oe/recipes-support/bdwgc/bdwgc/musl_header_fix.patch
+@@ -0,0 +1,27 @@
++Add missing header to avoid:
++
++| 1472659610.016355: ../git/pthread_stop_world.c: In function 'GC_brief_async_signal_safe_sleep':
++| 1472659610.0540252: ../git/pthread_stop_world.c:397:22: error: storage size of 'tv' isn't known
++| 1472659610.0540252:        struct timeval tv;
++| 1472659610.0540252:                       ^~
++| 1472659610.054099: ../git/pthread_stop_world.c:397:22: warning: unused variable 'tv' [-Wunused-variable]
++| 1472659610.054099:        struct timeval tv;
++| 1472659610.054099:                       ^~
++| 1472659610.054099: Makefile:1530: recipe for target 'pthread_stop_world.lo' failed
++
++in musl builds.
++
++Upstream-Status: Pending
++
++Index: git/pthread_stop_world.c
++===================================================================
++--- git.orig/pthread_stop_world.c
+++++ git/pthread_stop_world.c
++@@ -45,6 +45,7 @@
++ #include <semaphore.h>
++ #include <errno.h>
++ #include <unistd.h>
+++#include <sys/time.h>
++ #include "atomic_ops.h"
++ 
++ /* It's safe to call original pthread_sigmask() here.   */
+diff --git a/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+new file mode 100644
+index 000000000..dcb68f028
+--- /dev/null
++++ b/meta-oe/recipes-support/bdwgc/bdwgc_7.6.0.bb
+@@ -0,0 +1,42 @@
++SUMMARY = "A garbage collector for C and C++"
++
++DESCRIPTION = "The Boehm-Demers-Weiser conservative garbage collector can be\
++ used as a garbage collecting replacement for C malloc or C++ new. It allows\
++ you to allocate memory basically as you normally would, without explicitly\
++ deallocating memory that is no longer useful. The collector automatically\
++ recycles memory when it determines that it can no longer be otherwise\
++ accessed.\
++  The collector is also used by a number of programming language\
++ implementations that either use C as intermediate code, want to facilitate\
++ easier interoperation with C libraries, or just prefer the simple collector\
++ interface.\
++  Alternatively, the garbage collector may be used as a leak detector for C\
++ or C++ programs, though that is not its primary goal.\
++  Empirically, this collector works with most unmodified C programs, simply\
++ by replacing malloc with GC_malloc calls, replacing realloc with GC_realloc\
++ calls, and removing free calls."
++
++HOMEPAGE = "http://www.hboehm.info/gc/"
++SECTION = "devel"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://README.QUICK;md5=4f81f24ec69726c312487c2ac740e9e3"
++
++SRCREV = "8ac1d84a40eb7a431fec1b8097e3f24b48fb23fa"
++SRC_URI = "git://github.com/ivmai/bdwgc.git \
++           file://0001-configure.ac-add-check-for-NO_GETCONTEXT-definition.patch \
++           file://musl_header_fix.patch \
++          "
++
++FILES_${PN}-doc = "${datadir}"
++
++S = "${WORKDIR}/git"
++
++ARM_INSTRUCTION_SET = "arm"
++
++inherit autotools pkgconfig
++
++# by default use external libatomic-ops
++PACKAGECONFIG ??= "libatomic-ops"
++PACKAGECONFIG[libatomic-ops] = "--with-libatomic-ops=yes,--with-libatomic-ops=no,libatomic-ops"
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.11.0
 
-/Linus
 
