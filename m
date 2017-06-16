@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-yw0-f170.google.com (mail-yw0-f170.google.com
-	[209.85.161.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 219E978479
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B5E078479
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 17:28:46 +0000 (UTC)
-Received: by mail-yw0-f170.google.com with SMTP id l75so22691265ywc.3
+	Fri, 16 Jun 2017 17:30:57 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id w1so11738125qtg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 10:28:48 -0700 (PDT)
+	Fri, 16 Jun 2017 10:30:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2ndvzvVoCXnRxHV+W3bknp7rVkaURUzdMMMve53HWU0=;
-	b=FVPXVEmJY4TVVH846PSDc49+lxwa3bOHXfYzxp+y72IpI9zUKW59neI8qOLP8DzKPj
-	hWK3Dsy6TejHRfJpd2H/U61jUqUKs5gmRamTx6DsgI+uJZ0J7xVJG8V9YLyWRYye8fdv
-	9dmianOa3QBGhJmCUUp+6J45f9NvUh8G8oln0fADr14ATdMofQ8rTnnOZxRy9GDAwE4U
-	TRQrbHcA02w/16W8MidVXC6jeofoJqy6MzfC63i5A2D8Xy2ACKaGofjtn96Pa+KAaABK
-	8F5yFh1s3GdPgQ6lCsdNMwSa0QafPvmygM4L3VKgm4uQeetZGL0Qdh6fFIjjZjdoI0Ow
-	U8gg==
-X-Gm-Message-State: AKS2vOzbLaP+tRunKNqKF0hhIQ1hHXJiSRT2K36tdTQDQomploB3ZJ5O
-	RFZiZ8U4ArQ6C+fq0+E=
-X-Received: by 10.55.184.5 with SMTP id i5mr14053821qkf.141.1497634127842;
-	Fri, 16 Jun 2017 10:28:47 -0700 (PDT)
+	bh=j5wc63Aen5xHbYox3vNUJEGl1pFnejc3gJdOxQLXn1Q=;
+	b=ov2B9309/NpbgtEZEJMXDKNqFfT1ggQR0FyUe7hw79hrtcEqJWMPkK/+p7+GN7J3O6
+	p88pYgiFzGOe5j889EokjHlqMCGuZn+WQ9rTgaa38gZkMHEqfVhJLFBxMtutRZD2wFdo
+	nxTwdZ3V0BUWbIi4MShBc2ifJL1IL4tWfZ2fC65vjJKnoDO4eyiXskp5SlNCYPnEsmOp
+	twTpHtnAXAQv2l11NQhDDJ6vyhakpBfQc8ZOzlYl8auKvENlzgyDpB83PN/7sIP27ZXF
+	i3Xny9jlg89xh+ucLPm3trztwRlzEyKpBh0h3HtLEgjSpWFwUjt9ave9N+36PlnEx4br
+	y/Qw==
+X-Gm-Message-State: AKS2vOzxkg9Y+jWpxMavRPHr6kuBBK//f+9vJHc4+uY0VbVtlRpzP89z
+	X/slryN9Al4eKVIk26U=
+X-Received: by 10.55.15.9 with SMTP id z9mr13702105qkg.195.1497634258761;
+	Fri, 16 Jun 2017 10:30:58 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
-	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id r1sm2071918qkh.43.2017.06.16.10.28.46
+	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
+	f128sm1835805qkc.13.2017.06.16.10.30.57
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 10:28:47 -0700 (PDT)
+	Fri, 16 Jun 2017 10:30:57 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 13:28:41 -0400
-Message-Id: <1497634121-3716-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 13:30:51 -0400
+Message-Id: <1497634251-4474-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-py: update to version 1.4.34
+Subject: [meta-python][PATCH] python-isort: update to version 4.2.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,43 +44,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 17:28:47 -0000
-
-Verify the license terms remain the same and update the checksum
+X-List-Received-Date: Fri, 16 Jun 2017 17:31:05 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-py.inc                   | 6 +++---
- .../python/{python-py_1.4.32.bb => python-py_1.4.34.bb}             | 0
- .../python/{python3-py_1.4.32.bb => python3-py_1.4.34.bb}           | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-py_1.4.32.bb => python-py_1.4.34.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-py_1.4.32.bb => python3-py_1.4.34.bb} (100%)
+ .../python/{python-isort_4.2.5.bb => python-isort_4.2.15.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-isort_4.2.5.bb => python-isort_4.2.15.bb} (66%)
 
-diff --git a/meta-python/recipes-devtools/python/python-py.inc b/meta-python/recipes-devtools/python/python-py.inc
-index 4ac502e..cfead95 100644
---- a/meta-python/recipes-devtools/python/python-py.inc
-+++ b/meta-python/recipes-devtools/python/python-py.inc
-@@ -1,8 +1,8 @@
- SUMMARY = "Library with cross-python path, ini-parsing, io, code, log facilities"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a6bb0320b04a0a503f12f69fea479de9"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b506f3df287708b2f99588b5cc351091"
+diff --git a/meta-python/recipes-devtools/python/python-isort_4.2.5.bb b/meta-python/recipes-devtools/python/python-isort_4.2.15.bb
+similarity index 66%
+rename from meta-python/recipes-devtools/python/python-isort_4.2.5.bb
+rename to meta-python/recipes-devtools/python/python-isort_4.2.15.bb
+index e365dc6..b310fda 100644
+--- a/meta-python/recipes-devtools/python/python-isort_4.2.5.bb
++++ b/meta-python/recipes-devtools/python/python-isort_4.2.15.bb
+@@ -4,8 +4,8 @@ LICENSE = "MIT"
+ SECTION = "devel/python"
+ LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
  
--SRC_URI[md5sum] = "68ee0b5867282595d0b410a7f3c03ab3"
--SRC_URI[sha256sum] = "c4b89fd1ff1162375115608d01f77c38cca1d0f28f37fd718005e19b28be41a7"
-+SRC_URI[md5sum] = "d9c3d8f734b0819ff48e355d77bf1730"
-+SRC_URI[sha256sum] = "0f2d585d22050e90c7d293b6451c83db097df77871974d90efd5a30dc12fcde3"
+-SRC_URI[md5sum] = "71489ebd936429d5bda2af7ae662ed78"
+-SRC_URI[sha256sum] = "56b20044f43cf6e6783fe95d054e754acca52dd43fbe9277c1bdff835537ea5c"
++SRC_URI[md5sum] = "34915a2ce60e6fe3dbcbf5982deef9b4"
++SRC_URI[sha256sum] = "79f46172d3a4e2e53e7016e663cc7a8b538bec525c36675fcfd2767df30b3983"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-py_1.4.32.bb b/meta-python/recipes-devtools/python/python-py_1.4.34.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-py_1.4.32.bb
-rename to meta-python/recipes-devtools/python/python-py_1.4.34.bb
-diff --git a/meta-python/recipes-devtools/python/python3-py_1.4.32.bb b/meta-python/recipes-devtools/python/python3-py_1.4.34.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-py_1.4.32.bb
-rename to meta-python/recipes-devtools/python/python3-py_1.4.34.bb
+ inherit setuptools pypi
+ 
 -- 
 2.7.4
 
