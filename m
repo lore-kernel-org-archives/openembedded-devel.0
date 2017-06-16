@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DDC2078458
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 15495784B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 16:38:41 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id w1so11404612qtg.0
+	Fri, 16 Jun 2017 16:50:01 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id x58so11517494qtc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 09:38:43 -0700 (PDT)
+	Fri, 16 Jun 2017 09:50:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=madzJLIAyzoQJ0cVBtYNRPDtj9celc/uBkO2tUxYJ/4=;
-	b=WbnZ90qwPhJwdL7TBl+kDfpIIKygWn3xoheop11F+5NHGBSmabHkiId0v16IRntVNp
-	GBee7h2/RhxbegHPZvMRaY+ea9Qb8vySxVIvHnTUf7SGVuWcD/XlRQ+1F5mdoqNzEDJA
-	sJXmaSJTef/HYR5u8xhL9EAau+/C80yt3foK7oIz/v++ByH3KsxAr3bN+LkHNDKebgQc
-	5akkfffasMLQQPjJEMXzt/ibUw8KFxNcQmDHbwxjZjziNpg0uKt1pix+Wp/4baWRrSBt
-	0EtVL7fJNgUk935SccjKmKjAhAD6lgIZVdvoXljawc5sbXMhxM/AFMA7882uzXxIHqj4
-	o8Zg==
-X-Gm-Message-State: AKS2vOxnKyo+XE+zYpLd+4fxxLzlcCRbB3wZlE2PaLy4gwfkIXhbFD68
-	sLRojaPad/UlLRMCZhg=
-X-Received: by 10.55.166.194 with SMTP id p185mr8938459qke.132.1497631122723; 
-	Fri, 16 Jun 2017 09:38:42 -0700 (PDT)
+	bh=O2bRJb+G9rfJ1t0W9PfvmV2YJJSRednDs6SiI+zkOGk=;
+	b=YKxJjL3P/kg4m6vPUZC1lwHhPuc84trDuvIjlikNXnap32Wj5hPDDjIeqUM08RrHCB
+	AHG7aatrqqm/8fm3NajaJoBKiUn43j+BOPjpaXBh4uY+9OzauGvS6Eb/vZAarhwsHusw
+	xOX5YwV+N130rz3MucJGkKFd+9xS9o4AydOJwt0GyBzkTLQnjCtH999p1IbCnBYnLdk7
+	zyj+hxBzAPaFmpzzhjv8yN+vAHi+2+oQAl0zuUa1S1wO4qeeiicouDz+bunDqiyT/oLz
+	VAs1o1PkDAcYSWpbo1QyQMf3+IPh+E7LbnC2SaAEhwCG4+/fHGRfy//fGkF5kQhB9VcI
+	KNzQ==
+X-Gm-Message-State: AKS2vOyRG/E8itkvQn3Hmyg6D8Xh9DvUNG7LUvu33duMuUrLCkd6D8uC
+	bmTPzFv8by9nhBxVrCQ=
+X-Received: by 10.200.57.60 with SMTP id s57mr13391703qtb.141.1497631802872;
+	Fri, 16 Jun 2017 09:50:02 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
-	u186sm1808204qka.45.2017.06.16.09.38.42
+	s130sm1732438qke.66.2017.06.16.09.50.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 09:38:42 -0700 (PDT)
+	Fri, 16 Jun 2017 09:50:02 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 12:38:33 -0400
-Message-Id: <1497631113-11460-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 12:49:50 -0400
+Message-Id: <1497631790-29213-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cmd2: update to version 0.7.2
+Subject: [meta-python][PATCH] python-lxml: update to version 3.8.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,32 +44,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 16:38:42 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 16:50:02 -0000
+
+Verified license terms remain the same and updated the checksum
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-cmd2_0.7.0.bb => python-cmd2_0.7.2.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cmd2_0.7.0.bb => python-cmd2_0.7.2.bb} (77%)
+ meta-python/recipes-devtools/python/python-lxml.inc                 | 6 +++---
+ .../python/{python-lxml_3.7.3.bb => python-lxml_3.8.0.bb}           | 0
+ .../python/{python3-lxml_3.7.3.bb => python3-lxml_3.8.0.bb}         | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-lxml_3.7.3.bb => python-lxml_3.8.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_3.7.3.bb => python3-lxml_3.8.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.7.0.bb b/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-similarity index 77%
-rename from meta-python/recipes-devtools/python/python-cmd2_0.7.0.bb
-rename to meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-index 5c092a7..a379de0 100644
---- a/meta-python/recipes-devtools/python/python-cmd2_0.7.0.bb
-+++ b/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://setup.py;beginline=43;endline=43;md5=0f13c9cfc75288223cf7edd2f3b985a2"
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+index d5e6ae4..c6ff160 100644
+--- a/meta-python/recipes-devtools/python/python-lxml.inc
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -7,7 +7,7 @@ C14N and much more."
+ HOMEPAGE = "http://codespeak.net/lxml"
+ SECTION = "devel/python"
+ LICENSE = "BSD & GPLv2 & MIT & PSF"
+-LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
++LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
+                     file://doc/licenses/elementtree.txt;md5=eb34d036a6e3d56314ee49a6852ac891 \
+                     file://doc/licenses/BSD.txt;md5=700a1fc17f4797d4f2d34970c8ee694b \
+                     file://doc/licenses/GPL.txt;md5=94d55d512a9ba36caa9b7df079bae19f \
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=f9f1dc24f720c143c2240df41fe5073b \
  
--SRC_URI[md5sum] = "ee92ff1b73765d64bf230e94512d0b7a"
--SRC_URI[sha256sum] = "5ab76a1f07dd5fd1cc3c15ba4080265f33b80c7fd748d71bd69a51d60b30f51a"
-+SRC_URI[md5sum] = "4a5b5aab407bdeb49634789f9a42902b"
-+SRC_URI[sha256sum] = "d06301cc578a83531261121c0b11d79d29d0a80aca01ed6752c20c4cfcda2dd9"
+ DEPENDS += "libxml2 libxslt"
  
- inherit pypi setuptools
+-SRC_URI[md5sum] = "075692ce442e69bbd604d44e21c02753"
+-SRC_URI[sha256sum] = "aa502d78a51ee7d127b4824ff96500f0181d3c7826e6ee7b800d068be79361c7"
++SRC_URI[md5sum] = "e54e2fae44d684d6b9c636fe189e93ff"
++SRC_URI[sha256sum] = "736f72be15caad8116891eb6aa4a078b590d231fdc63818c40c21624ac71db96"
  
+ DISTUTILS_BUILD_ARGS += " \
+                      --with-xslt-config='pkg-config libxslt' \
+diff --git a/meta-python/recipes-devtools/python/python-lxml_3.7.3.bb b/meta-python/recipes-devtools/python/python-lxml_3.8.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-lxml_3.7.3.bb
+rename to meta-python/recipes-devtools/python/python-lxml_3.8.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb b/meta-python/recipes-devtools/python/python3-lxml_3.8.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-lxml_3.7.3.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_3.8.0.bb
 -- 
 2.7.4
 
