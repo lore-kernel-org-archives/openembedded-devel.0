@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f176.google.com (mail-qt0-f176.google.com
-	[209.85.216.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 179AE7853D
+Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 3978E78464
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 19:21:27 +0000 (UTC)
-Received: by mail-qt0-f176.google.com with SMTP id w1so75656515qtg.2
+	Fri, 16 Jun 2017 19:33:31 +0000 (UTC)
+Received: by mail-qt0-f177.google.com with SMTP id u12so76708047qth.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 12:21:29 -0700 (PDT)
+	Fri, 16 Jun 2017 12:33:33 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=WpNnUDJxdC4etsNKnzracR0k11FKmcVIixcy/R+1yQ8=;
-	b=fR64B1a4E+p+BXUESpAi7EOsfvgSc+iF1yBssPQMGRQ+dY8/Qz7ciUPZth+/0VENFn
-	uRCiBIOcITc3sw6K8tayj3tIgfWV5cH32L9r68hyhCXs6SZEHIZpvTMuEwfkhyQPtla2
-	rAVD74F2gWipbPTAt4TfryMlsvx5k6fGasBYOGHAaFnTCptlnna6Es3ZTsTcc6P770Ch
-	UDrc1OVVRZjpYHQqM5TE1DNgABkh75iICq5/NHbDSQf/cLPPy6iiJm3yJ53uNtBZ0qHx
-	0M8549IAD8WoHvJJGDPwBB5JqKSuFwVhRhTaF5zwBxB4MJWHSCz2K34FH8JIZJyjJLpg
-	FVDQ==
-X-Gm-Message-State: AKS2vOyrNtqCdkFiL2GHmzgp5vKFHLPJYczj6c7TAtz0e9/1HblGKJTm
-	rPRjtwAmM4U8f7U7n7o=
-X-Received: by 10.55.195.150 with SMTP id r22mr14282339qkl.162.1497640888942; 
-	Fri, 16 Jun 2017 12:21:28 -0700 (PDT)
+	bh=TgM9Qmb+kgCk978hKK1jq7yJlr4Ap41HtLaxmizOZa8=;
+	b=deG/yNT9q16cUWwDmzOQYiPKfAP0eQDRj4/p2qrgUCdMuKod/fxKSvQImqMQQY/q37
+	5/yV4Ta1cDKjLuNMbh3C83MSYN4RjP4NgrgC9oBTNY8wGSCU4ir+j11iWzOwo2QdGBph
+	c/+dW5OZYT2lMLbTwDQFD8v3IqsKC3KwESH2ZqT1SsBSq1TosI0c7/8oysy2d73h07Eo
+	GNK/N0JMHVq3i1NPtrbcC8tIPhFo2L0MtLcdqoJlY9HfHIaALKgA/VnNMkRfbYbUxDc5
+	BJGUToAnoG2CKwYmvBkCqdLvB+BPU6hY+sgN3nb0wlePr2UqEJNMBSwqKBYYxsQW8qXc
+	QekA==
+X-Gm-Message-State: AKS2vOzGj0Y0KGK0EDnOyVwashnr3T1CesNVql8eLokhX29UQKCallO2
+	hI5p/p8uCmzY6ppDxVM=
+X-Received: by 10.55.158.208 with SMTP id h199mr14260508qke.254.1497641612996; 
+	Fri, 16 Jun 2017 12:33:32 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id p21sm2308412qtc.6.2017.06.16.12.21.27
+	by smtp.gmail.com with ESMTPSA id n3sm2028566qkd.21.2017.06.16.12.33.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 12:21:28 -0700 (PDT)
+	Fri, 16 Jun 2017 12:33:32 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 15:21:19 -0400
-Message-Id: <1497640879-5655-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 15:33:24 -0400
+Message-Id: <1497641604-6998-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask: update to version 0.12.2
+Subject: [meta-python][PATCH] python-flask-pymongo: update to version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 19:21:28 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 19:33:32 -0000
+
+Verify the license terms remain the same and update checksum
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-flask.inc                  | 4 ++--
- .../python/{python-flask_0.12.bb => python-flask_0.12.2.bb}           | 0
- .../python/{python3-flask_0.12.bb => python3-flask_0.12.2.bb}         | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask_0.12.bb => python-flask_0.12.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask_0.12.bb => python3-flask_0.12.2.bb} (100%)
+ meta-python/recipes-devtools/python/python-flask-pymongo.inc        | 6 +++---
+ ...{python-flask-pymongo_0.4.1.bb => python-flask-pymongo_0.5.1.bb} | 0
+ ...ython3-flask-pymongo_0.4.1.bb => python3-flask-pymongo_0.5.1.bb} | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-flask-pymongo_0.4.1.bb => python-flask-pymongo_0.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-flask-pymongo_0.4.1.bb => python3-flask-pymongo_0.5.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask.inc b/meta-python/recipes-devtools/python/python-flask.inc
-index 04935a6..76b5fba 100644
---- a/meta-python/recipes-devtools/python/python-flask.inc
-+++ b/meta-python/recipes-devtools/python/python-flask.inc
-@@ -6,8 +6,8 @@ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo.inc b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+index 6d54837..e11283e 100644
+--- a/meta-python/recipes-devtools/python/python-flask-pymongo.inc
++++ b/meta-python/recipes-devtools/python/python-flask-pymongo.inc
+@@ -3,10 +3,10 @@ DESCRIPTION = "PyMongo support for Flask applications."
+ HOMEPAGE = "https://github.com/mitsuhiko/flask/"
+ SECTION = "devel/python"
  LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=19866b76b054ab30c270c0eb9d7e43d7"
+-LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;startline=1;endline=24;md5=dff998d5a8469503612ee7757f3a2052"
++LIC_FILES_CHKSUM = "file://flask_pymongo/wrappers.py;startline=1;endline=24;md5=424c4e1047d28e01b4e4634a069c019d"
  
--SRC_URI[md5sum] = "c1d30f51cff4a38f9454b23328a15c5a"
--SRC_URI[sha256sum] = "93e803cdbe326a61ebd5c5d353959397c85f829bec610d59cb635c9f97d7ca8b"
-+SRC_URI[md5sum] = "97278dfdafda98ba7902e890b0289177"
-+SRC_URI[sha256sum] = "49f44461237b69ecd901cc7ce66feea0319b9158743dd27a2899962ab214dac1"
+-SRC_URI[md5sum] = "cbf5fbcd22719d8393e481bcac36be05"
+-SRC_URI[sha256sum] = "75862daece1c979a9eab5f9d1e32eb781775842273b629ae5d1cb28e6953df78"
++SRC_URI[md5sum] = "d7a1b717f27154e1f3a355f8ec2467d6"
++SRC_URI[sha256sum] = "2baaa2ba5107d72b3a8bd4b5c0c8881316e35340ad1ae979cc13f1f3c8843b3d"
  
- CLEANBROKEN = "1"
+ PYPI_PACKAGE = "Flask-PyMongo"
  
-diff --git a/meta-python/recipes-devtools/python/python-flask_0.12.bb b/meta-python/recipes-devtools/python/python-flask_0.12.2.bb
+diff --git a/meta-python/recipes-devtools/python/python-flask-pymongo_0.4.1.bb b/meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask_0.12.bb
-rename to meta-python/recipes-devtools/python/python-flask_0.12.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask_0.12.bb b/meta-python/recipes-devtools/python/python3-flask_0.12.2.bb
+rename from meta-python/recipes-devtools/python/python-flask-pymongo_0.4.1.bb
+rename to meta-python/recipes-devtools/python/python-flask-pymongo_0.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-flask-pymongo_0.4.1.bb b/meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask_0.12.bb
-rename to meta-python/recipes-devtools/python/python3-flask_0.12.2.bb
+rename from meta-python/recipes-devtools/python/python3-flask-pymongo_0.4.1.bb
+rename to meta-python/recipes-devtools/python/python3-flask-pymongo_0.5.1.bb
 -- 
 2.7.4
 
