@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 34A5778550
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id ECDB2784BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 20:15:57 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id x58so12793927qtc.2
+	Fri, 16 Jun 2017 20:32:06 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id u8so20624qka.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 13:15:59 -0700 (PDT)
+	Fri, 16 Jun 2017 13:32:08 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=K7HeZfOXUGpWl3NK8CwWPJgqwk/LUweryUWvS6XCnBE=;
-	b=Kmr9I9FNrakT6L1xQgBZgcx3qiN5FjbazFBd7GVqWjztdJ+vPprThRpsCwSvYFTJV4
-	K9VNUQtE3aGrRLCw/2+aRIy5kZI4FuQyRnNc33UjsjFUKFfUyqkHmEtw/ThKY3XeyBaJ
-	7y11DmDBQTWO61CArL1djhnUoZbihzIqSiGUb1ussZVheiJeuGweCYGRp1wpKJiPidqa
-	4kDMjKenqcudn5hYADDjHnKVh3BphcGEWJgVNCMsj/J3/voNJ35eslTDzzWKavjY8Oge
-	4HM8kydO8rKoc29kvoy1Vt2PeSUZSvgyXrMsqbWG+xJQVgzAqalPF38P6NIMz8cgPMQM
-	Asgw==
-X-Gm-Message-State: AKS2vOwLjNJdlngS6MDN/M5XZx4afMdKNkraeearzWmYFnIjx0U+jw4v
-	TBAeUqbslN2trOzZERk=
-X-Received: by 10.237.49.166 with SMTP id 35mr15464609qth.53.1497644158964;
-	Fri, 16 Jun 2017 13:15:58 -0700 (PDT)
+	bh=qpeVpBT9eBsHPKIOnmg68y6n3EKNUyhhjTg+6j+ESm8=;
+	b=Dnu7vnslordrJTlYY8vCvFKnLIfyThv/rYn9Gj9yXiu0CentZA+wmfymDwMfAq1Pjn
+	NIjunjyPZq1DzFhg1JDuXgpj4ShgQ2YVES4Ae2Rvl7bhw/7Rg1daLhOK27ar3/lHx46Y
+	hFXGr6e0sOVg7SwWGoDFcv4gRs/0POynPgy3e4F0Adq3JhWasOIUs6v1BspFpY6S8bRc
+	UQmdslG+9GIimD3dFLtyYldTQbfT1963MXazmD/8XjiCvLEEsZG+ybGSMbhNA0eJGaio
+	/2uPA47rUPVa69Smzo4I2851Pm00h5dxRaSYrVsBb191XAdVtG02q/m96VYJnWjnUyhj
+	SKEA==
+X-Gm-Message-State: AKS2vOw1lgyiz6npBpxWv8kXTlIMZXE9/rO8b0xS7QxCcpo8jCjPLNgO
+	YN5SSkULIaNhsbmIEXU=
+X-Received: by 10.55.20.30 with SMTP id e30mr14120966qkh.51.1497645127432;
+	Fri, 16 Jun 2017 13:32:07 -0700 (PDT)
 Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
 	[67.85.98.4])
-	by smtp.gmail.com with ESMTPSA id r9sm2370978qtr.31.2017.06.16.13.15.58
+	by smtp.gmail.com with ESMTPSA id e4sm2158416qkb.30.2017.06.16.13.32.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 16 Jun 2017 13:15:58 -0700 (PDT)
+	Fri, 16 Jun 2017 13:32:06 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 16:14:42 -0400
-Message-Id: <1497644082-17033-1-git-send-email-derek@asterius.io>
+Date: Fri, 16 Jun 2017 16:31:57 -0400
+Message-Id: <1497645117-18067-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-paho-mqtt: update to version 1.2.3
+Subject: [meta-webserver][PATCH] nginx: update to version 1.13.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +44,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 20:15:58 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 20:32:07 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-paho-mqtt.inc              | 4 ++--
- .../python/{python-paho-mqtt_1.2.bb => python-paho-mqtt_1.2.3.bb}     | 0
- .../python/{python3-paho-mqtt_1.2.bb => python3-paho-mqtt_1.2.3.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-paho-mqtt_1.2.bb => python-paho-mqtt_1.2.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-paho-mqtt_1.2.bb => python3-paho-mqtt_1.2.3.bb} (100%)
+ .../recipes-httpd/nginx/{nginx_1.13.0.bb => nginx_1.13.1.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.13.0.bb => nginx_1.13.1.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt.inc b/meta-python/recipes-devtools/python/python-paho-mqtt.inc
-index 7ff3fb2..545985c 100644
---- a/meta-python/recipes-devtools/python/python-paho-mqtt.inc
-+++ b/meta-python/recipes-devtools/python/python-paho-mqtt.inc
-@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc"
- SRCNAME = "paho-mqtt"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.13.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.13.1.bb
+similarity index 64%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.13.0.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.13.1.bb
+index a999acc..d0d162e 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.13.0.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.13.1.bb
+@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
  
- inherit pypi
--SRC_URI[md5sum] = "241150b3fcb920ddca4d33181f3238b1"
--SRC_URI[sha256sum] = "9100a6aa706ab699d414ec02705a21eb66f436184691d0bf1f2a85a6213c6c1f"
-+SRC_URI[md5sum] = "4bd192ea24e7aa347f6d240101ef82f6"
-+SRC_URI[sha256sum] = "0fd746d8650563290f1bd0fec01e74cb57c3ab7406bdb58e5d9252bb5fa5ca44"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
  
- RDEPENDS_${PN} = "\
-                ${PYTHON_PN}-math \
-diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt_1.2.bb b/meta-python/recipes-devtools/python/python-paho-mqtt_1.2.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-paho-mqtt_1.2.bb
-rename to meta-python/recipes-devtools/python/python-paho-mqtt_1.2.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.2.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.2.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-paho-mqtt_1.2.bb
-rename to meta-python/recipes-devtools/python/python3-paho-mqtt_1.2.3.bb
+-SRC_URI[md5sum] = "0ff7057465d5622c5b1279e91b273e96"
+-SRC_URI[sha256sum] = "79f52ab6550f854e14439369808105b5780079769d7b8db3856be03c683605d7"
++SRC_URI[md5sum] = "5c2fe93447140b8b1a815a13bc89355b"
++SRC_URI[sha256sum] = "a5856c72a6609a4dc68c88a7f3c33b79e6693343b62952e021e043fe347b6776"
 -- 
 2.7.4
 
