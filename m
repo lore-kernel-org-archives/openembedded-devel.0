@@ -1,28 +1,55 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 67A917844A
+Return-Path: <linus.svensson@axis.com>
+Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
+	by mail.openembedded.org (Postfix) with ESMTP id D079678225
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 10:00:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v5GA0HN7017919
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 16 Jun 2017 03:00:17 -0700 (PDT)
-Received: from [128.224.162.160] (128.224.162.160) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 16 Jun 2017 03:00:17 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170616030445.19533-1-liezhi.yang@windriver.com>
-	<CA+chaQckrnWx9sMqP+f0HTziGgWBB-8qMFtrYdSLBxEFiD4=fA@mail.gmail.com>
-From: Robert Yang <liezhi.yang@windriver.com>
-Message-ID: <fb65895e-ee05-ebb4-3318-e1a2738eed2a@windriver.com>
-Date: Fri, 16 Jun 2017 18:00:15 +0800
+	Fri, 16 Jun 2017 11:19:03 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bastet.se.axis.com (Postfix) with ESMTP id D2B0B18159
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
+Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id hewXfVqVoJjb
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bastet.se.axis.com (Postfix) with ESMTPS id 122D0183A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:03 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 9B7551E096
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 90C471E095
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
+Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
+	by seth.se.axis.com (Postfix) with ESMTP id 850891B4
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 13:19:02 +0200 (CEST)
+Received: from [10.94.48.2] (10.0.5.60) by XBOX03.axis.com (10.0.5.17) with
+	Microsoft SMTP Server (TLS) id 15.0.1210.3;
+	Fri, 16 Jun 2017 13:19:02 +0200
+To: <openembedded-devel@lists.openembedded.org>
+References: <20170605172321.12557-1-acfoltzer@galois.com>
+	<20170605172321.12557-2-acfoltzer@galois.com>
+From: Linus Svensson <linus.svensson@axis.com>
+Message-ID: <d864b1f3-4db3-79ae-b0b9-3b2baee79a81@axis.com>
+Date: Fri, 16 Jun 2017 13:19:02 +0200
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.2.0
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQckrnWx9sMqP+f0HTziGgWBB-8qMFtrYdSLBxEFiD4=fA@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] fuse: fix SRC_URI
+In-Reply-To: <20170605172321.12557-2-acfoltzer@galois.com>
+X-Originating-IP: [10.0.5.60]
+X-ClientProxiedBy: XBOX02.axis.com (10.0.5.16) To XBOX03.axis.com (10.0.5.17)
+X-TM-AS-GCONF: 00
+Subject: Re: [meta-oe][PATCH 2/3] meson: fix build/host confusion for bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,61 +62,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 10:00:19 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
+X-List-Received-Date: Fri, 16 Jun 2017 11:19:04 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 06/05/2017 07:23 PM, Adam C. Foltzer wrote:
+> Meson and Bitbake use different terminology for the build and host;
+> this provides the correct build machine info to Meson.
+What is the difference?
 
-On 06/16/2017 04:13 PM, Martin Jansa wrote:
-> It's already in master for last 2 days:
-> http://git.openembedded.org/meta-openembedded/commit/?id=d3dd8bc3721f3958eb7ddeb026f7221d48daa986
+As far as I understand, bitbake and meson use the same terminology. 
+meson is supposed to get the build machine info from the environment, 
+not the cross file.
 
-Sorry, I didn't see that before I sent the patch.
-
-// Robert
-
->
-> On Fri, Jun 16, 2017 at 4:04 AM, Robert Yang <liezhi.yang@windriver.com
-> <mailto:liezhi.yang@windriver.com>> wrote:
->
->     ${P} -> ${BP}, otherwise it would fail when multilib.
->
->     Signed-off-by: Robert Yang <liezhi.yang@windriver.com
->     <mailto:liezhi.yang@windriver.com>>
->     ---
->      meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb <http://fuse_2.9.7.bb>
->     | 2 +-
->      1 file changed, 1 insertion(+), 1 deletion(-)
->
->     diff --git a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
->     <http://fuse_2.9.7.bb> b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb
->     <http://fuse_2.9.7.bb>
->     index e66f3cd..87292fe 100644
->     --- a/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb <http://fuse_2.9.7.bb>
->     +++ b/meta-filesystems/recipes-support/fuse/fuse_2.9.7.bb <http://fuse_2.9.7.bb>
->     @@ -10,7 +10,7 @@ LICENSE = "GPLv2 & LGPLv2"
->      LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
->                          file://COPYING.LIB;md5=4fbd65380cdd255951079008b364516c"
->
->     -SRC_URI =
->     "https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz
->     <https://github.com/libfuse/libfuse/releases/download/${P}/${P}.tar.gz> \
->     +SRC_URI =
->     "https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.gz
->     <https://github.com/libfuse/libfuse/releases/download/${BP}/${BP}.tar.gz> \
->                 file://gold-unversioned-symbol.patch \
->                 file://aarch64.patch \
->                 file://0001-fuse-fix-the-return-value-of-help-option.patch \
->     --
->     2.10.2
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
+/Linus
 
