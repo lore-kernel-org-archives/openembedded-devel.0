@@ -1,46 +1,54 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 1591378476
+Return-Path: <peter.kjellerstedt@axis.com>
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id F352F784CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 14:06:10 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id 36so38928144wry.3
+	Fri, 16 Jun 2017 14:15:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id 9221F2E676
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jun 2017 07:06:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=eVRsRhvmGjoALYlfIIWRaOBU325l891YWj1qzISRI/Y=;
-	b=TJrOC9PwzrcZrY7fITxe+2WQqLIaXLgsLDFnI0tfrKecDyfbiO/Qzc/VBNuKxu7VMz
-	G+REL+ketBGDjCeClTd2z8718TR3Qz78J/e/HT4XyMK2p4rlDn8lmjlB+wLLomgUo1a5
-	Eqk8v5uwa1ldbLb2LOixvK2XaTDhr2fMtWQYvfMET7wmFOpOF02kz5vgFD5Yu03hN2Wm
-	wCXr5dBpU41jI5voMHvLQ3A/YBGckb9INjU/o5ss7RilIBhN9PmaBMIQQibyYzD1+Ll+
-	a/v7/ySpgmSR05Q1Wf3dWQfxOBpQoTUcNHmapicS3MswLvss4T4W6m7hexIUs+Ak9YLz
-	Vw7A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eVRsRhvmGjoALYlfIIWRaOBU325l891YWj1qzISRI/Y=;
-	b=l91/ead07nbNdavMGfABRCx+Yp/oF9WjTl5FzeNKXJyMiQtGw4o/ABWPlCWlccGuko
-	TBUn03DHb5T8diuezN9/vcnvlUJfi2CVs4iOKE0jG06TqDYGEdy6v2syS7nKLkZ6t9pv
-	HzW5JIMOwxwWPGbOBQgHq8kXVSFeO9k1aucyNBlYMAE0qtO167YEjYhI+LVG0r0kwejs
-	5KGs1qKuLLHjb0MszaSHHEKGZN4F1SkL9D0WYGoLNikwwy9T7dPOuUIoLDoBzKJElqF6
-	bH1Egcu7Kvoh+LA1rgdtU/GgV+IbDBidOj7/rMAiaxChQMcs7D1hpNifyn4hsHHHx2oJ
-	Hd7A==
-X-Gm-Message-State: AKS2vOwrfyD0GCcEkFmzGYq909UImGUK9Pv+6TYi0X2VvWki6Nel8XMN
-	YqIHHHiKi9CkQHUb
-X-Received: by 10.223.160.88 with SMTP id l24mr7695824wrl.31.1497621971158;
-	Fri, 16 Jun 2017 07:06:11 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 18sm2726382wmt.6.2017.06.16.07.06.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 16 Jun 2017 07:06:10 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Fri, 16 Jun 2017 16:15:50 +0200 (CEST)
+X-Axis-NonUser-Spam: YES
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id FNHhfZKMuhCx
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bes.se.axis.com (Postfix) with ESMTPS id 797482E697
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 5B4921E08E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 469C11E088
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from seth.se.axis.com (unknown [10.0.2.172])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by seth.se.axis.com (Postfix) with ESMTP id 3B09EC8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200 (CEST)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id v5GEFnO8028459
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jun 2017 16:15:49 +0200
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id v5GEFn5m028458
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Jun 2017 16:15:49 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jun 2017 16:06:11 +0200
-Message-Id: <20170616140611.15494-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-browser][WIP][PATCH] chromium(-wayland): Fix build with gcc7
+Date: Fri, 16 Jun 2017 16:15:43 +0200
+Message-Id: <20170616141544.28415-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [PATCH 1/2] kconfig-frontends: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,96 +61,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jun 2017 14:06:13 -0000
+X-List-Received-Date: Fri, 16 Jun 2017 14:15:50 -0000
 
-* add 2 patches to fix issues detected by gcc7
+This provides the kconfig infrastructure that is used for the Linux
+kernel as a standalone package. It is not, however, intended to be
+used for the kernel itself, but can be used by other packages that are
+based on kconfig.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+This is a verbatim copy of the corresponding recipe in OE-core since
+that recipe is being removed.
+
+Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
 ---
- recipes-browser/chromium/chromium-browser.inc      |  2 ++
- .../files/0001-v8-fix-build-with-gcc7.patch        | 20 ++++++++++++++
- .../files/0002-WebKit-fix-build-with-gcc7.patch    | 31 ++++++++++++++++++++++
- 3 files changed, 53 insertions(+)
- create mode 100644 recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch
- create mode 100644 recipes-browser/chromium/files/0002-WebKit-fix-build-with-gcc7.patch
+ .../files/0001-Fix-installation-of-.pc-files.patch | 28 +++++++++++++++
+ ...Switch-utils-kconfig-diff-to-use-Python-3.patch | 26 ++++++++++++++
+ .../kconfig-frontends/files/missing-mkdir.patch    | 37 +++++++++++++++++++
+ .../kconfig-frontends_4.10.0.1.bb                  | 42 ++++++++++++++++++++++
+ 4 files changed, 133 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
+ create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/0001-Switch-utils-kconfig-diff-to-use-Python-3.patch
+ create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
+ create mode 100644 meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb
 
-diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
-index ad8e497..08853b1 100644
---- a/recipes-browser/chromium/chromium-browser.inc
-+++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -26,6 +26,8 @@ SRC_URI = "\
-         ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://api-keys.patch;patchdir=${WORKDIR}', '', d)} \
-         file://google-chrome.desktop \
-         file://unset-madv-free.patch \
-+        file://0001-v8-fix-build-with-gcc7.patch \
-+        file://0002-WebKit-fix-build-with-gcc7.patch \
- "
- 
- S = "${WORKDIR}/chromium-${PV}"
-diff --git a/recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch b/recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
 new file mode 100644
-index 0000000..0fc5bfb
+index 000000000..57ea42e4b
 --- /dev/null
-+++ b/recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch
-@@ -0,0 +1,20 @@
-+Use the fix from nodejs:
-+https://github.com/nodejs/node/commit/2a2a5565c298639b823250b571101f51210c50e8
++++ b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Fix-installation-of-.pc-files.patch
+@@ -0,0 +1,28 @@
++From 80c16b1f39402e8ce33600e5f297920a6d603090 Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 27 Apr 2017 16:57:06 +0300
++Subject: [PATCH] Fix installation of .pc files
 +
-+* fixes:
-+| ../../git/src/v8/src/objects-body-descriptors.h: In static member function 'static void v8::internal::FixedBodyDescriptor<start_offset, end_offset, size>::IterateBody(v8::internal::HeapObject*, int)':
-+| ../../git/src/v8/src/objects-body-descriptors.h:102:20: error: no matching function for call to 'v8::internal::FixedBodyDescriptor<start_offset, end_offset, size>::IterateBody(v8::internal::HeapObject*&)'
-+|      IterateBody(obj);
-+|                     ^
++They go to prefix/pkgconfig/, not prefix/pkg-config.
 +
-+--- chromium-54.0.2810.2.orig/v8/src/objects-body-descriptors.h	2016-07-28 12:17:37.000000000 -1000
-++++ chromium-54.0.2810.2/v8/src/objects-body-descriptors.h	2017-06-16 01:20:50.026665439 -1000
-+@@ -99,7 +99,7 @@
++Upstream-Status: Submitted
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ Makefile.am | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile.am b/Makefile.am
++index 058690a..f9e9b7b 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -107,7 +107,7 @@ EXTRA_DIST += \
++ 	libs/parser/yconf.y.patch
 + 
-+   template <typename StaticVisitor>
-+   static inline void IterateBody(HeapObject* obj, int object_size) {
-+-    IterateBody(obj);
-++    IterateBody<StaticVisitor>(obj);
-+   }
-+ };
-+ 
-diff --git a/recipes-browser/chromium/files/0002-WebKit-fix-build-with-gcc7.patch b/recipes-browser/chromium/files/0002-WebKit-fix-build-with-gcc7.patch
++ # libs/parser/kconfig-parser.pc generated by AC_CONFIG_FILES in configure.ac
++-pkgconfigdir = $(libdir)/pkg-config
+++pkgconfigdir = $(libdir)/pkgconfig
++ pkgconfig_DATA = libs/parser/kconfig-parser.pc
++ DISTCLEANFILES += libs/parser/kconfig-parser.pc
++ EXTRA_DIST += libs/parser/kconfig-parser.pc.in
++-- 
++2.11.0
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Switch-utils-kconfig-diff-to-use-Python-3.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Switch-utils-kconfig-diff-to-use-Python-3.patch
 new file mode 100644
-index 0000000..284a83c
+index 000000000..b8f890481
 --- /dev/null
-+++ b/recipes-browser/chromium/files/0002-WebKit-fix-build-with-gcc7.patch
-@@ -0,0 +1,31 @@
-+Based on qtwebengine-opensource-src-5.8.0-wtf-gcc7.patch from
-+http://git.net/ml/scm-fedora-commits/2017-03/msg15697.html
++++ b/meta-oe/recipes-devtools/kconfig-frontends/files/0001-Switch-utils-kconfig-diff-to-use-Python-3.patch
+@@ -0,0 +1,26 @@
++From 3b9b0f82c33f793a14d44bf06b6c8136bc3fc4bf Mon Sep 17 00:00:00 2001
++From: Alexander Kanavin <alex.kanavin@gmail.com>
++Date: Thu, 27 Apr 2017 16:48:42 +0300
++Subject: [PATCH] Switch utils/kconfig-diff to use Python 3
 +
-+* Fixes:
-+In file included from ../../git/src/third_party/WebKit/Source/platform/heap/ThreadingTraits.h:14:0,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/ThreadState.h:37,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/GarbageCollected.h:8,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/Visitor.h:35,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/GCInfo.h:8,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/Heap.h:35,
-+                 from ../../git/src/third_party/WebKit/Source/platform/heap/Handle.h:34,
-+                 from ../../git/src/third_party/WebKit/public/platform/WebPrivatePtr.h:38,
-+                 from ../../git/src/third_party/WebKit/public/platform/WebString.h:35,
-+                 from ../../git/src/third_party/WebKit/Source/platform/exported/FilePathConversion.cpp:8:
-+../../git/src/third_party/WebKit/Source/wtf/LinkedHashSet.h: In member function 'void WTF::LinkedHashSet<Value, HashFunctions, HashTraits, Allocator>::swap(WTF::LinkedHashSet<Value, HashFunctions, HashTraits, Allocator>&)':
-+../../git/src/third_party/WebKit/Source/wtf/LinkedHashSet.h:549:5: error: there are no arguments to 'swapAnchor' that depend on a template parameter, so a declaration of 'swapAnchor' must be available [-fpermissive]
-+     swapAnchor(m_anchor, other.m_anchor);
-+     ^~~~~~~~~~
-+../../git/src/third_party/WebKit/Source/wtf/LinkedHashSet.h:549:5: note: (if you use '-fpermissive', G++ will accept your code, but allowing the use of an undeclared name is deprecated)
++The script supports it, but continues to refer to 2.x in shebang.
 +
-+--- chromium-54.0.2810.2.orig/third_party/WebKit/Source/wtf/LinkedHashSet.h	2016-07-28 12:16:12.000000000 -1000
-++++ chromium-54.0.2810.2/third_party/WebKit/Source/wtf/LinkedHashSet.h	2017-06-16 02:19:37.928797121 -1000
-+@@ -542,6 +542,8 @@
-+     return *this;
-+ }
++Upstream-Status: Pending
++Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
++---
++ utils/kconfig-diff | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/utils/kconfig-diff b/utils/kconfig-diff
++index 0db267d..19189f3 100755
++--- a/utils/kconfig-diff
+++++ b/utils/kconfig-diff
++@@ -1,4 +1,4 @@
++-#!/usr/bin/python
+++#!/usr/bin/env python3
++ #
++ # diffconfig - a tool to compare .config files.
++ #
++-- 
++2.11.0
++
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch b/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
+new file mode 100644
+index 000000000..a11186e51
+--- /dev/null
++++ b/meta-oe/recipes-devtools/kconfig-frontends/files/missing-mkdir.patch
+@@ -0,0 +1,37 @@
++Upstream-Status: Submitted
++Signed-off-by: Ross Burton <ross.burton@intel.com>
++
++From ca05ee2fb6db5b3b1edc16dba6150a2c6078a6cf Mon Sep 17 00:00:00 2001
++From: Ross Burton <ross.burton@intel.com>
++Date: Tue, 9 May 2017 15:30:00 +0100
++Subject: [PATCH] Makefile: ensure utils/ exists before writing to it
++
++Since utils/ was changed to not build recursively it's possible that in
++out-of-tree builds the utils/ directory hasn't been created when Make runs the
++utils/kconfig-tweak target which tries to write to file inside utils/.
++
++To ensure this can work, mkdir the directory.
++
++Signed-off-by: Ross Burton <ross.burton@intel.com>
++---
++ Makefile.am | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/Makefile.am b/Makefile.am
++index c8e96ef..1baa110 100644
++--- a/Makefile.am
+++++ b/Makefile.am
++@@ -173,2 +173,3 @@ bin_SCRIPTS += frontends/kconfig
++ frontends/kconfig: frontends/kconfig.in
+++	$(MKDIR_P) $(@D)
++ 	$(AM_V_GEN)$(SED) -e 's/@KCFG_LIST@/$(kcfg_list)/g' \
++@@ -348,6 +348,7 @@ EXTRA_DIST += \
++ 	utils/kconfig-tweak.in.patch
 + 
-++inline void swapAnchor(LinkedHashSetNodeBase& a, LinkedHashSetNodeBase& b);
-++
-+ template<typename T, typename U, typename V, typename W>
-+ inline void LinkedHashSet<T, U, V, W>::swap(LinkedHashSet& other)
-+ {
++ utils/kconfig-tweak: utils/kconfig-tweak.in
+++	$(MKDIR_P) $(@D)
++ 	$(AM_V_GEN)$(SED) -e "s/@CONFIG_@/$(config_prefix)/g" \
++ 		$< >$@
++ 	@chmod +x $@
++-- 
++2.8.1
+diff --git a/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb
+new file mode 100644
+index 000000000..d427e98c9
+--- /dev/null
++++ b/meta-oe/recipes-devtools/kconfig-frontends/kconfig-frontends_4.10.0.1.bb
+@@ -0,0 +1,42 @@
++# Copyright (C) 2012 Khem Raj <raj.khem@gmail.com>
++# Released under the MIT license (see COPYING.MIT for the terms)
++
++SUMMARY = "Linux kernel style configuration framework for other projects"
++DESCRIPTION = "The kconfig-frontends project aims at centralising \
++the effort of keeping an up-to-date, out-of-tree, packaging of the \
++kconfig infrastructure, ready for use by third-party projects. \
++The kconfig-frontends package provides the kconfig parser, as well as all \
++the frontends"
++HOMEPAGE = "http://ymorin.is-a-geek.org/projects/kconfig-frontends"
++LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=9b8cf60ff39767ff04b671fca8302408"
++SECTION = "devel"
++DEPENDS += "ncurses flex bison gperf-native"
++RDEPENDS_${PN} += "python3 bash"
++SRC_URI = "git://ymorin.is-a-geek.org/kconfig-frontends;branch=4.10.x \
++           file://0001-Fix-installation-of-.pc-files.patch \
++           file://0001-Switch-utils-kconfig-diff-to-use-Python-3.patch \
++           file://missing-mkdir.patch"
++
++SRCREV = "f8ffe5e1c6f183cb7d5d515aa9381b7557de654e"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++do_configure_prepend () {
++	mkdir -p ${S}/scripts/.autostuff/m4
++}
++
++do_install_append() {
++	ln -s kconfig-conf ${D}${bindir}/conf
++	ln -s kconfig-mconf ${D}${bindir}/mconf
++}
++
++EXTRA_OECONF += "--disable-gconf --disable-qconf"
++
++# Some packages have the version preceeding the .so instead properly
++# versioned .so.<version>, so we need to reorder and repackage.
++SOLIBS = "-${@d.getVar('PV')[:-2]}.so"
++FILES_SOLIBSDEV = "${libdir}/libkconfig-parser.so"
++
++BBCLASSEXTEND = "native"
 -- 
-2.13.1
+2.12.0
 
 
