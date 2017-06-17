@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id A2D0B78372
+Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D150C78372
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 17:22:01 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id j186so10554714pge.1
+	Sat, 17 Jun 2017 17:22:03 +0000 (UTC)
+Received: by mail-pf0-f179.google.com with SMTP id s66so35717578pfs.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 10:22:03 -0700 (PDT)
+	Sat, 17 Jun 2017 10:22:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=DByymthtvthqDS5Qs7cFtJ+qhviif1+GSeNdl8HDJvA=;
-	b=PegNzir3kwpzBGIDUjv9I5t1/a6u00xIK75vM3CtiEmA1Xa6bGr67ueKOFMRsaUl/w
-	BUV/vywG99j2tBCWScNK4Qw6zlS2vU58k6kbqMZsWJmrH2CJhb7E9vRWL1Z9gdtaDsRO
-	I1vfhjwSHHUNx61pzLWel8q7/Hp8lveQcEASA/QfS9zUKd6/sXj9sHtiP3kRzngtju9O
-	Ffh1aThvJKX3FH/SdZ5xp/AuXOssDrWNfe/o/E0Fr/3quiM2o4EUPa4CzrNP6ZU2rFx2
-	vYI1QejoL6m2g97a4ZaDBrFEHy1ZTpRmCbwxcXFrDiJ+0n3w6qXwS6P13VPmybPV5jBa
-	iVZQ==
+	bh=+hPzj89FeTbqabNRH2myY/YsmLug1ZqLn34XFqBPdsQ=;
+	b=UbA91ahRcnYwU1h03pcfjvq+nXz1B6JF4yuex2iHfvLbpIKi5XOGzG/pRNdYX0PLek
+	gS/0q9qc8dDBWNgKwOG+i34SgBm+LHBO1QsYsJRvHdxksfl4CgcGUXAbFFzcIDFnnk53
+	67Db3fb+bl6xuzMX5qmYMTwWIh5ZyWcTpL+6sTUa/h0cQugGARCC643I4iZWEyZZsN04
+	YrBXalRPIYKBzU4XMbyhhpiJBFi231PUL0t0u12yXeEKjR85fokwowokR6r9SA6QOAzV
+	79GeXlHLHuWkcft88uYHcZKTu2ZydEyDI5x5SvizM6EIKkYN1TuRw0Zu3tdtivCXRaq5
+	bEDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=DByymthtvthqDS5Qs7cFtJ+qhviif1+GSeNdl8HDJvA=;
-	b=jHjmxNpUyu1xKaSMgzce1i8mq+469g/6uyzbfBWf9n+sq8R3PH7wHDA3+4jRcp2LEj
-	gtCBjiCafswz2cOxn29a6ckUir90VLoV7Otro5VXz6dp2nyfuKV78zh5f9WhEWFqd+Oq
-	UyhdRio93ZbBGqss76eXyCkPRHeoARkcl7dMUe4JeK2TH3mV/whH6PZT3/WVx9LpzmOa
-	i9ORzq6tyy5tZSYhqIbo4U4ptlaVCuS2CO6pkB57vd5fM7JWix2UU7i+uBBV1cbNhT3o
-	7YeyZ3Fos12HCPzXdxDrwP5VrGsvuUIZK3zXCTxoL7T7wy+t5QbImuVH2tJfjt+ysuLs
-	e/uQ==
-X-Gm-Message-State: AKS2vOwq3zG5+r/qJWZrAKhwx/nphU3ngEIRkDCOIBx3AEv07hJIBi3x
-	eyakK1CGcszEtyk6
-X-Received: by 10.84.137.129 with SMTP id 1mr19676856pln.37.1497720122694;
-	Sat, 17 Jun 2017 10:22:02 -0700 (PDT)
+	bh=+hPzj89FeTbqabNRH2myY/YsmLug1ZqLn34XFqBPdsQ=;
+	b=m4QPBsLmaGqwGoybHCG9SAl38IlhS9/crxnmfLPJH9G5S4f9T6APmAWqL2pz4MXiYK
+	8GGYu+ujjUtp7C+G9dOSjXk8tL20Ia3NhCGzM7ZVqykVh3kQYy43FicTJ6pYXNkNihYG
+	LqzJhn8oH0l/XtYDSAFYAx9v5nvTz2mV4ihPXKOM9RyXWftDaNVztK6MJ7d+ceciH762
+	26OUCmA1P2B/GwxQHqdaIt0Agg89bx3hT8i1nFUZQRU8SA3pbO4s0Clft+hbty8EA6iB
+	wvtA7USSrtQKk8OvLk0V5lGyqjRHZ/wTJQxM0dBBL/nHLva8nPf9SPdiWTELvDUlwMxP
+	Uh3w==
+X-Gm-Message-State: AKS2vOzxwdazrSN6sHP8S7Vwo45+pUn/B0Zlz+Dhb0sxlb3N72lNDIgi
+	FAB7AHQdzIGsuqCq
+X-Received: by 10.84.178.101 with SMTP id y92mr19807228plb.116.1497720124289; 
+	Sat, 17 Jun 2017 10:22:04 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
 	by smtp.gmail.com with ESMTPSA id
-	o12sm12201226pfi.9.2017.06.17.10.22.01
+	o12sm12201226pfi.9.2017.06.17.10.22.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Jun 2017 10:22:01 -0700 (PDT)
+	Sat, 17 Jun 2017 10:22:03 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Jun 2017 10:21:41 -0700
-Message-Id: <20170617172142.1311-8-raj.khem@gmail.com>
+Date: Sat, 17 Jun 2017 10:21:42 -0700
+Message-Id: <20170617172142.1311-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.1
 In-Reply-To: <20170617172142.1311-1-raj.khem@gmail.com>
 References: <20170617172142.1311-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 8/9] relayd: Fix build with hardening flags and glibc
+Subject: [meta-networking][PATCH 9/9] ruli: Fix build with hardening flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,70 +56,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jun 2017 17:22:01 -0000
+X-List-Received-Date: Sat, 17 Jun 2017 17:22:04 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-rtnl_flush-Error-on-failed-write.patch    | 34 ++++++++++++++++++++++
- .../recipes-connectivity/relayd/relayd_git.bb      |  4 ++-
- 2 files changed, 37 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
+ .../0001-Fix-build-with-format-string-checks.patch | 33 ++++++++++++++++++++++
+ meta-networking/recipes-support/ruli/ruli_0.36.bb  |  6 ++--
+ 2 files changed, 37 insertions(+), 2 deletions(-)
+ create mode 100644 meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
 
-diff --git a/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch b/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
+diff --git a/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
 new file mode 100644
-index 000000000..eaaf30460
+index 000000000..f8eb3ae67
 --- /dev/null
-+++ b/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
-@@ -0,0 +1,34 @@
-+From 2fa326b26dc479942367dc4283e2f87372403988 Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/ruli/files/0001-Fix-build-with-format-string-checks.patch
+@@ -0,0 +1,33 @@
++From 40848547abf592c8d29b85ef1346001514944435 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Jun 2017 09:32:04 -0700
-+Subject: [PATCH] rtnl_flush: Error on failed write()
++Date: Sat, 17 Jun 2017 10:14:20 -0700
++Subject: [PATCH] Fix build with format string checks
 +
 +Fixes
-+route.c:45:2: error: ignoring return value of 'write', declared with attribute warn_unused_result [-Werror=unused-result]
-+|   write(fd, "-1", 2);
-+|   ^~~~~~~~~~~~~~~~~~
++| ruli_addr.c:418:5: error: format not a string literal and no format arguments [-Werror=format-security]
++|      return fprintf(out, inet_ntoa(addr->ipv4));
++|      ^~~~~~
++
++Upstream-Status: Pending
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Submitted
++ src/ruli_addr.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+ route.c | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/route.c b/route.c
-+index c552d1f..fc5c31e 100644
-+--- a/route.c
-++++ b/route.c
-+@@ -42,7 +42,8 @@ static void rtnl_flush(void)
-+ 	if (fd < 0)
-+ 		return;
++diff --git a/src/ruli_addr.c b/src/ruli_addr.c
++index 00d5d0d..f1eabae 100644
++--- a/src/ruli_addr.c
+++++ b/src/ruli_addr.c
++@@ -415,7 +415,7 @@ int ruli_in_print(FILE *out, const _ruli_addr *addr, int family)
++ {
++   switch (family) {
++   case PF_INET:
++-    return fprintf(out, inet_ntoa(addr->ipv4));
+++    return fprintf(out, "%s", inet_ntoa(addr->ipv4));
 + 
-+-	write(fd, "-1", 2);
-++	if (write(fd, "-1", 2) < 0 )
-++		perror("write");
-+ 	close(fd);
-+ }
-+ 
++   case PF_INET6:
++     return ruli_inet6_print(out, &addr->ipv6);
 +-- 
 +2.13.1
 +
-diff --git a/meta-networking/recipes-connectivity/relayd/relayd_git.bb b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
-index ef28d2c42..98dc41a09 100644
---- a/meta-networking/recipes-connectivity/relayd/relayd_git.bb
-+++ b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
-@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://main.c;endline=17;md5=86aad799085683e0a2e1c2684a20bab
+diff --git a/meta-networking/recipes-support/ruli/ruli_0.36.bb b/meta-networking/recipes-support/ruli/ruli_0.36.bb
+index a455e1f9b..b41313090 100644
+--- a/meta-networking/recipes-support/ruli/ruli_0.36.bb
++++ b/meta-networking/recipes-support/ruli/ruli_0.36.bb
+@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- DEPENDS = "libubox"
+ DEPENDS = "liboop"
  
--SRC_URI = "git://git.openwrt.org/project/relayd.git"
-+SRC_URI = "git://git.openwrt.org/project/relayd.git \
-+           file://0001-rtnl_flush-Error-on-failed-write.patch \
-+"
+-SRC_URI += "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
+-            file://Makefile.patch"
++SRC_URI = "http://download.savannah.gnu.org/releases/ruli/ruli_${PV}.orig.tar.gz \
++           file://Makefile.patch \
++           file://0001-Fix-build-with-format-string-checks.patch \
++           "
  
- SRCREV = "ad0b25ad74345d367c62311e14b279f5ccb8ef13"
- PV = "0.0.1+git${SRCPV}"
+ SRC_URI[md5sum] = "e73fbfdeadddb68a703a70cea5271468"
+ SRC_URI[sha256sum] = "11d32def5b514748fbd9ea8c88049ae99e1bb358efc74eb91a4d268a3999dbfa"
 -- 
 2.13.1
 
