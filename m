@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 335A878372
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id A2D0B78372
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 17:21:59 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id y7so11054443pfd.3
+	Sat, 17 Jun 2017 17:22:01 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id j186so10554714pge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 10:22:01 -0700 (PDT)
+	Sat, 17 Jun 2017 10:22:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=I/TEG/28lrzCq+4KDovylwWlQeprOfKgMOUOFM3aPRY=;
-	b=hK43TZHJn/T0Q8kcHen9gCXRe6KRKdYPvHhT6VALDFVzFYzXaMchFjYBtQjufR0rhJ
-	pCavEgmCFGahsqIq4y8EcSQIpDxmrf45AKdi1TcM0/ZkNgnQZrBM4c7qPnPkFsKDgIPM
-	3biAelM5n8G1C9OHF7c9aDyBHrRkg6fdM6nYkj/jOvz+jNk2wrgQ9EZa2mb0EfEXRc9z
-	1FGu8ChlgqbAwMPEQZm6lhhRIEx9b1pG7dm6y4EIOrtNbsIOJbH72Wwh/jCnUsv9d0mO
-	IvF+fG1A+1uz0/g0+EHjgQ5fibn6N2dOkUm81hJfgDRG5c/P4EzvzFzKNndwfgHUnBGf
-	ccpw==
+	bh=DByymthtvthqDS5Qs7cFtJ+qhviif1+GSeNdl8HDJvA=;
+	b=PegNzir3kwpzBGIDUjv9I5t1/a6u00xIK75vM3CtiEmA1Xa6bGr67ueKOFMRsaUl/w
+	BUV/vywG99j2tBCWScNK4Qw6zlS2vU58k6kbqMZsWJmrH2CJhb7E9vRWL1Z9gdtaDsRO
+	I1vfhjwSHHUNx61pzLWel8q7/Hp8lveQcEASA/QfS9zUKd6/sXj9sHtiP3kRzngtju9O
+	Ffh1aThvJKX3FH/SdZ5xp/AuXOssDrWNfe/o/E0Fr/3quiM2o4EUPa4CzrNP6ZU2rFx2
+	vYI1QejoL6m2g97a4ZaDBrFEHy1ZTpRmCbwxcXFrDiJ+0n3w6qXwS6P13VPmybPV5jBa
+	iVZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=I/TEG/28lrzCq+4KDovylwWlQeprOfKgMOUOFM3aPRY=;
-	b=BabF+pUldmRO3ld4VzhUD3Xoq1jF2DdQE6eM9dmEC/OAD+dt94slmDExU+vWni84BI
-	P4BshHm0m9uALzi+2Vq4qV59uKWRZyPn7ffhPonXtXrDGMtJOvLkNrvpySVDyqFoJFXI
-	oF0QOJRp8Yoe9+zBRzeGa9+hpFwOmR2dMdW2jl9Xb9Ru5r/kNuzRAEeU9vLBR0bextnu
-	DDWuSIRo8F8ai8+xKmeGUeC3jYf/zl/eVRT8yCom9o3xGa3JogHk87PQuzBpTIdB+KCF
-	qC92amoJ4+DyDcuIHmuCA/VIt73C4i0ZrI6aizC4i/d5KwaLDZWK/noYSJeDP9B979bt
-	M/NA==
-X-Gm-Message-State: AKS2vOxKkEaQgjm86zQ8NYJ7niFhaKrkCigqpsNMKvO69B6bBR7e/UZo
-	QVL9EpUHl5kQedvd
-X-Received: by 10.84.254.11 with SMTP id b11mr19803296plm.209.1497720120964;
-	Sat, 17 Jun 2017 10:22:00 -0700 (PDT)
+	bh=DByymthtvthqDS5Qs7cFtJ+qhviif1+GSeNdl8HDJvA=;
+	b=jHjmxNpUyu1xKaSMgzce1i8mq+469g/6uyzbfBWf9n+sq8R3PH7wHDA3+4jRcp2LEj
+	gtCBjiCafswz2cOxn29a6ckUir90VLoV7Otro5VXz6dp2nyfuKV78zh5f9WhEWFqd+Oq
+	UyhdRio93ZbBGqss76eXyCkPRHeoARkcl7dMUe4JeK2TH3mV/whH6PZT3/WVx9LpzmOa
+	i9ORzq6tyy5tZSYhqIbo4U4ptlaVCuS2CO6pkB57vd5fM7JWix2UU7i+uBBV1cbNhT3o
+	7YeyZ3Fos12HCPzXdxDrwP5VrGsvuUIZK3zXCTxoL7T7wy+t5QbImuVH2tJfjt+ysuLs
+	e/uQ==
+X-Gm-Message-State: AKS2vOwq3zG5+r/qJWZrAKhwx/nphU3ngEIRkDCOIBx3AEv07hJIBi3x
+	eyakK1CGcszEtyk6
+X-Received: by 10.84.137.129 with SMTP id 1mr19676856pln.37.1497720122694;
+	Sat, 17 Jun 2017 10:22:02 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
 	by smtp.gmail.com with ESMTPSA id
-	o12sm12201226pfi.9.2017.06.17.10.21.59
+	o12sm12201226pfi.9.2017.06.17.10.22.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Jun 2017 10:21:59 -0700 (PDT)
+	Sat, 17 Jun 2017 10:22:01 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Jun 2017 10:21:40 -0700
-Message-Id: <20170617172142.1311-7-raj.khem@gmail.com>
+Date: Sat, 17 Jun 2017 10:21:41 -0700
+Message-Id: <20170617172142.1311-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.1
 In-Reply-To: <20170617172142.1311-1-raj.khem@gmail.com>
 References: <20170617172142.1311-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 7/9] tiobench: Fix build with hardening flags
+Subject: [meta-networking][PATCH 8/9] relayd: Fix build with hardening flags and glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,82 +55,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jun 2017 17:22:00 -0000
+X-List-Received-Date: Sat, 17 Jun 2017 17:22:01 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Specify-printf-formats.patch              | 49 ++++++++++++++++++++++
- .../recipes-benchmark/tiobench/tiobench_0.3.3.bb   |  1 +
- 2 files changed, 50 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Specify-printf-formats.patch
+ .../0001-rtnl_flush-Error-on-failed-write.patch    | 34 ++++++++++++++++++++++
+ .../recipes-connectivity/relayd/relayd_git.bb      |  4 ++-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
 
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Specify-printf-formats.patch b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Specify-printf-formats.patch
+diff --git a/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch b/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
 new file mode 100644
-index 000000000..cfd34f02a
+index 000000000..eaaf30460
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench-0.3.3/0001-Specify-printf-formats.patch
-@@ -0,0 +1,49 @@
-+From b08e61ef64eece23ce8ffa2784cd3c4f70b6169e Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/relayd/relayd/0001-rtnl_flush-Error-on-failed-write.patch
+@@ -0,0 +1,34 @@
++From 2fa326b26dc479942367dc4283e2f87372403988 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Jun 2017 08:08:56 -0700
-+Subject: [PATCH] Specify printf formats
++Date: Sat, 17 Jun 2017 09:32:04 -0700
++Subject: [PATCH] rtnl_flush: Error on failed write()
 +
 +Fixes
-+tiotest.c:555:4: error: format not a string literal and no format arguments [-Werror=format-security]
-+
-+Upstream-Status: Pending
++route.c:45:2: error: ignoring return value of 'write', declared with attribute warn_unused_result [-Werror=unused-result]
++|   write(fd, "-1", 2);
++|   ^~~~~~~~~~~~~~~~~~
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tiotest.c | 6 +++---
-+ 1 file changed, 3 insertions(+), 3 deletions(-)
++Upstream-Status: Submitted
 +
-+diff --git a/tiotest.c b/tiotest.c
-+index 6b3d0c3..3e6166a 100644
-+--- a/tiotest.c
-++++ b/tiotest.c
-+@@ -91,7 +91,7 @@ inline void checkIntZero(int value, char *mess)
-+ {
-+ 	if (value <= 0) 
-+ 	{
-+-		printf(mess);
-++		printf("%s",mess);
-+ 		printf("Try 'tiotest -h' for more information.\n");
-+ 		exit(1);
-+ 	}
-+@@ -101,7 +101,7 @@ inline void checkLong(long value, char *mess)
-+ {
-+ 	if (value < 0) 
-+ 	{
-+-		printf(mess);
-++		printf("%s", mess);
-+ 		printf("Try 'tiotest -h' for more information\n");
-+ 		exit(1);
-+ 	}
-+@@ -552,7 +552,7 @@ void do_test( ThreadTest *test, int testCase, int sequential,
-+ 		if(args.debugLevel > 4)
-+ 		{
-+ 			printf("Created %d threads\n", i);
-+-			fprintf(stderr, debugMessage);
-++			fprintf(stderr, "%s",  debugMessage);
-+ 			fflush(stderr);
-+ 		}
-+ 	
++ route.c | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/route.c b/route.c
++index c552d1f..fc5c31e 100644
++--- a/route.c
+++++ b/route.c
++@@ -42,7 +42,8 @@ static void rtnl_flush(void)
++ 	if (fd < 0)
++ 		return;
++ 
++-	write(fd, "-1", 2);
+++	if (write(fd, "-1", 2) < 0 )
+++		perror("write");
++ 	close(fd);
++ }
++ 
 +-- 
 +2.13.1
 +
-diff --git a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-index 35af35fd3..427ce67d6 100644
---- a/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-+++ b/meta-oe/recipes-benchmark/tiobench/tiobench_0.3.3.bb
-@@ -10,6 +10,7 @@ SRC_URI = "\
-     file://tiobench-makefile.patch \
-     file://avoid-glibc-clashes.patch \
-     file://0001-Drop-inline-of-crc32-function-to-fix-build-using-GCC.patch \
-+    file://0001-Specify-printf-formats.patch \
- "
- SRC_URI[md5sum] = "bf485bf820e693c79e6bd2a38702a128"
- SRC_URI[sha256sum] = "8ad011059a35ac70cdb5e3d3999ceee44a8e8e9078926844b0685b7ea9db2bcc"
+diff --git a/meta-networking/recipes-connectivity/relayd/relayd_git.bb b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+index ef28d2c42..98dc41a09 100644
+--- a/meta-networking/recipes-connectivity/relayd/relayd_git.bb
++++ b/meta-networking/recipes-connectivity/relayd/relayd_git.bb
+@@ -5,7 +5,9 @@ LIC_FILES_CHKSUM = "file://main.c;endline=17;md5=86aad799085683e0a2e1c2684a20bab
+ 
+ DEPENDS = "libubox"
+ 
+-SRC_URI = "git://git.openwrt.org/project/relayd.git"
++SRC_URI = "git://git.openwrt.org/project/relayd.git \
++           file://0001-rtnl_flush-Error-on-failed-write.patch \
++"
+ 
+ SRCREV = "ad0b25ad74345d367c62311e14b279f5ccb8ef13"
+ PV = "0.0.1+git${SRCPV}"
 -- 
 2.13.1
 
