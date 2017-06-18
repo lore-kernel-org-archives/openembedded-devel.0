@@ -1,49 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DDC878082
+Received: from mail-yb0-f178.google.com (mail-yb0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 8054471A8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jun 2017 12:09:07 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id f90so12322423wmh.0
+	Sun, 18 Jun 2017 19:58:47 +0000 (UTC)
+Received: by mail-yb0-f178.google.com with SMTP id e201so19223964ybb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jun 2017 05:09:09 -0700 (PDT)
+	Sun, 18 Jun 2017 12:58:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UwPEiPYiDxg3uulavLxD4nZYOh0tu19Wol5Qx9ja0Uc=;
-	b=bmc5uM48kj80HMul8kBxhlX+mmAS7bLP4sxoI++G4gMgszXvTHNvKuWYb8Ci6WyEtB
-	CYAXkDw1FosnakLQ7WdCEowEdKqs8Pe6CDnMlPk9NKPpkqyJp9KcbeIDv4aIGcQH4/AK
-	TO1mSvanefhI7e0hz3KP4/zftPiLC20tJE+rvRN1gPPcYuXX+LTyAtJcqG0feoqlpxjq
-	PDhlyXUG5UaRSNNOX4vcFiWVtTtSZQ+Tb0XtcAhixOd/sdaMJKpG+2TIpPud+yZm75Sp
-	uzhB/XwMhE2y2lVbO9sfpcxx3NDoszzYw1w6BE31IHATcW1+XS2t+cw22tb9WW3Sx99t
-	hTrg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=wSBExrgFngNvPJwyEf9EQlkj/qKoPWXBM/QnZWLG3W0=;
+	b=ZSKtsBbYH+3v40jqp218zphDO33O0XfKqQlhghnfOSF/gnm+VzR0KFiX5FVQdvNRia
+	mLBW3G0EfgYEIru8xqvsjxtIrrZ7h2HFreYs+uWtfD/hLccIYzxcSzw8iGwimA/qVa7B
+	K+tay4PLCa4ei+VJnYX63jy1JFJ1X474UMIqUCYf+sT24iBUhOGHPWggJIpaeO7fdcMu
+	dXppERpe8j5WY3k/pi2Xz3U3AoHO5dqX8mc0ROhUkzm6iMxCPvuY9A/L0Ol8XlgqwH2/
+	gl9KpSCxvfmnKfvBmEckqUaKl1PWdt8w/ok5IiZp3KlSe01mZ8JlW+zhcBbBqAkhv7Uh
+	BUvA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=UwPEiPYiDxg3uulavLxD4nZYOh0tu19Wol5Qx9ja0Uc=;
-	b=BRA+3YxBj2Lr8mQ4tjVhCfuw+QTY8LbRcrdQ/7PnVyWrmdbTJC8J8opiPAsGRlTBLI
-	x0WPpAwyo37QSp/mUlGVaqqeNKyXYCnNcFd6bT7uKzJj6nezyBi8R/0dse2cMkzgBCvM
-	OmjNq/5CIOS5j9sxob3CSrrzNNRoSwRTC36+bQAmgyoP6BB4eHw2h8akX/fJnLWf3TVs
-	DYj/2+4LpZ610sEST2uHWh7fRWfEx0Id+JJvVyFe+MpP3J8p5+zLlbfDmKgyRJLfZhEG
-	M29FIJNcfm6JLKycuh1hJqoqH97HfkbFjT8zR4uACAsI/OSt9t3Sx047sfvKe33ksLp4
-	3yxg==
-X-Gm-Message-State: AKS2vOyi3sFGO+VO+yX8vdykSaTGlvagm8g4JSo/efc552HvPLtKBd1T
-	5yshqPb+rxdl68y7
-X-Received: by 10.28.4.145 with SMTP id 139mr12818961wme.118.1497787748267;
-	Sun, 18 Jun 2017 05:09:08 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 92sm3078487wrb.55.2017.06.18.05.09.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 18 Jun 2017 05:09:06 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=wSBExrgFngNvPJwyEf9EQlkj/qKoPWXBM/QnZWLG3W0=;
+	b=LW3G8Zaj04i17LXcSStCEr7s1xodFw+aS1eaICb6uj3OUjp+CJxdeGeSUyapzHyxn0
+	JtxtBnDVCEi3q4G1hWabYiLpIq9rLp5R3HHQd0IEvOMPKoOgKdojPNKz1lIRgqHcuP5Z
+	yMdZj2NcPljL0/6dTgWS8PFmfWjw/KcvedleYZss76OsriAyxbEPihModUbUIeo43kZ1
+	x6AsYOZ5FkV6vrerGB1YFa6Q9pD2Mjn0Rgw/AhJu0bWn8J+pjkz+l7axuzi+1I+fh8LU
+	56W9I0H7V1ZXiwYvR9EmPMsUIz3ZNReZdfv/MrY8DqmKZE9j2uerIuLWuVH9lYyeSDha
+	F4WA==
+X-Gm-Message-State: AKS2vOyvN7zpCVNLnxg7RLKyH/mk15/dIxNRIgIEsl7w5U4n8albFNcW
+	00P2jCafdrZl5HHO77g+Sg3WlCNEyyzB
+X-Received: by 10.37.74.67 with SMTP id x64mr15644405yba.69.1497815928353;
+	Sun, 18 Jun 2017 12:58:48 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.181.204 with HTTP; Sun, 18 Jun 2017 12:58:47 -0700 (PDT)
+In-Reply-To: <CA+chaQcnwYQwBXfxbdpEN8D9ZYzG=fOxX_MPNXt1_uzShSSrwg@mail.gmail.com>
+References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
+	<2ef4f2a3-48e9-f3fa-a55e-01522507d86d@xevo.com>
+	<CA+chaQeUWj=4zxG1gdk0pwg_U1GUdMmwr1F9DEL_7pT8S0UUQg@mail.gmail.com>
+	<ac7731a3-ff5c-b4c8-f8d9-1ee0d30e17a1@xevo.com>
+	<CA+chaQcnwYQwBXfxbdpEN8D9ZYzG=fOxX_MPNXt1_uzShSSrwg@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Jun 2017 14:09:09 +0200
-Message-Id: <20170618120909.3499-2-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.13.1
-In-Reply-To: <20170618120909.3499-1-Martin.Jansa@gmail.com>
-References: <CA+chaQdyLDc38rC-geZay6JO_QcsUZn0ZUJPVzqWXcO-wxP2ww@mail.gmail.com>
-	<20170618120909.3499-1-Martin.Jansa@gmail.com>
-Subject: [meta-browser][PATCHv3 2/2] firefox: fix build with gcc7
+Date: Sun, 18 Jun 2017 21:58:47 +0200
+Message-ID: <CA+chaQdbrZ+R37sKDXamFwW71G9MvYVF-Bb=8OO_k5ChdUFGGg@mail.gmail.com>
+To: Martin Kelly <mkelly@xevo.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,295 +59,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jun 2017 12:09:08 -0000
+X-List-Received-Date: Sun, 18 Jun 2017 19:58:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-mozilla/firefox/firefox/gcc7.patch   | 259 +++++++++++++++++++++++++++
- recipes-mozilla/firefox/firefox_45.9.0esr.bb |   3 +-
- 2 files changed, 261 insertions(+), 1 deletion(-)
- create mode 100644 recipes-mozilla/firefox/firefox/gcc7.patch
+Fails to configure on qemuarm.
 
-diff --git a/recipes-mozilla/firefox/firefox/gcc7.patch b/recipes-mozilla/firefox/firefox/gcc7.patch
-new file mode 100644
-index 0000000..2c2b52d
---- /dev/null
-+++ b/recipes-mozilla/firefox/firefox/gcc7.patch
-@@ -0,0 +1,259 @@
-+
-+# HG changeset patch
-+# User Mike Hommey <mh+mozilla@glandium.org>
-+# Date 1463557039 -32400
-+# Node ID 68da139d0866977c0ada86319fa94388f2255446
-+# Parent  a640e6fa8ab9977fb6c5bcf63dc4daca6699477b
-+Bug 1269171 - Change how mozalloc.h is hooked in STL wrappers. r=froydnj
-+
-+Since the introduction of the STL wrappers, they have included
-+mozalloc.h, and multiple times, we've hit header reentrancy problems,
-+and worked around them as best as we could.
-+
-+Taking a step back, all mozalloc.h does is:
-+- declare moz_* allocator functions.
-+- define inline implementations of various operator new/delete variants.
-+
-+The first only requires the functions to be declared before they are used,
-+so mozalloc.h only needs to be included before anything that would use
-+those functions.
-+
-+The second doesn't actually require a specific order, as long as the
-+declaration for those functions comes before their use, and they are
-+either declared in <new> or implicitly by the C++ compiler.
-+
-+So all in all, it doesn't matter that mozalloc.h is included before the
-+wrapped STL headers. What matters is that it's included when STL headers
-+are included. So arrange things such that mozalloc.h is included after
-+the first wrapped STL header is fully preprocessed (and all its includes
-+have been included).
-+
-+
-+diff --git a/config/gcc-stl-wrapper.template.h b/config/gcc-stl-wrapper.template.h
-+--- a/config/gcc-stl-wrapper.template.h
-++++ b/config/gcc-stl-wrapper.template.h
-+@@ -12,56 +12,54 @@
-+ // compiling ObjC.
-+ #if defined(__EXCEPTIONS) && __EXCEPTIONS && !(__OBJC__ && __GNUC__ && XP_IOS)
-+ #  error "STL code can only be used with -fno-exceptions"
-+ #endif
-+ 
-+ // Silence "warning: #include_next is a GCC extension"
-+ #pragma GCC system_header
-+ 
-+-// Don't include mozalloc for cstdlib. See bug 1245076.
-+-#ifndef moz_dont_include_mozalloc_for_cstdlib
-+-#  define moz_dont_include_mozalloc_for_cstdlib
-+-#endif
-+-#ifndef moz_dont_include_mozalloc_for_${HEADER}
-+-// mozalloc.h wants <new>; break the cycle by always explicitly
-+-// including <new> here.  NB: this is a tad sneaky.  Sez the gcc docs:
-+-//
-+-//    `#include_next' does not distinguish between <file> and "file"
-+-//    inclusion, nor does it check that the file you specify has the
-+-//    same name as the current file. It simply looks for the file
-+-//    named, starting with the directory in the search path after the
-+-//    one where the current file was found.
-+-#  include_next <new>
-+-
-+-// See if we're in code that can use mozalloc.  NB: this duplicates
-+-// code in nscore.h because nscore.h pulls in prtypes.h, and chromium
-+-// can't build with that being included before base/basictypes.h.
-+-#  if !defined(XPCOM_GLUE) && !defined(NS_NO_XPCOM) && !defined(MOZ_NO_MOZALLOC)
-+-#    include "mozilla/mozalloc.h"
-+-#  else
-+-#    error "STL code can only be used with infallible ::operator new()"
-+-#  endif
-+-
-+-#endif
-+-
-+ #if defined(DEBUG) && !defined(_GLIBCXX_DEBUG)
-+ // Enable checked iterators and other goodies
-+ //
-+ // FIXME/bug 551254: gcc's debug STL implementation requires -frtti.
-+ // Figure out how to resolve this with -fno-rtti.  Maybe build with
-+ // -frtti in DEBUG builds?
-+ //
-+ //  # define _GLIBCXX_DEBUG 1
-+ #endif
-+ 
-++// Don't include mozalloc for cstdlib. See bug 1245076.
-++#ifndef moz_dont_include_mozalloc_for_cstdlib
-++#  define moz_dont_include_mozalloc_for_cstdlib
-++#endif
-++
-++// Include mozalloc after the STL header and all other headers it includes
-++// have been preprocessed.
-++#if !defined(MOZ_INCLUDE_MOZALLOC_H) && \
-++    !defined(moz_dont_include_mozalloc_for_${HEADER})
-++#  define MOZ_INCLUDE_MOZALLOC_H
-++#  define MOZ_INCLUDE_MOZALLOC_H_FROM_${HEADER}
-++#endif
-++
-+ #pragma GCC visibility push(default)
-+ #include_next <${HEADER}>
-+ #pragma GCC visibility pop
-+ 
-++#ifdef MOZ_INCLUDE_MOZALLOC_H_FROM_${HEADER}
-++// See if we're in code that can use mozalloc.  NB: this duplicates
-++// code in nscore.h because nscore.h pulls in prtypes.h, and chromium
-++// can't build with that being included before base/basictypes.h.
-++#  if !defined(XPCOM_GLUE) && !defined(NS_NO_XPCOM) && !defined(MOZ_NO_MOZALLOC)
-++#    include "mozilla/mozalloc.h"
-++#  else
-++#    error "STL code can only be used with infallible ::operator new()"
-++#  endif
-++#endif
-++
-+ // gcc calls a __throw_*() function from bits/functexcept.h when it
-+ // wants to "throw an exception".  functexcept exists nominally to
-+ // support -fno-exceptions, but since we'll always use the system
-+ // libstdc++, and it's compiled with exceptions, then in practice
-+ // these __throw_*() functions will always throw exceptions (shades of
-+ // -fshort-wchar).  We don't want that and so define our own inlined
-+ // __throw_*().
-+ #ifndef mozilla_throw_gcc_h
-+diff --git a/config/make-stl-wrappers.py b/config/make-stl-wrappers.py
-+--- a/config/make-stl-wrappers.py
-++++ b/config/make-stl-wrappers.py
-+@@ -25,28 +25,26 @@ def header_path(header, compiler):
-+ def is_comment(line):
-+     return re.match(r'\s*#.*', line)
-+ 
-+ def main(outdir, compiler, template_file, header_list_file):
-+     if not os.path.isdir(outdir):
-+         os.mkdir(outdir)
-+ 
-+     template = open(template_file, 'r').read()
-+-    path_to_new = header_path('new', compiler)
-+ 
-+     for header in open(header_list_file, 'r'):
-+         header = header.rstrip()
-+         if 0 == len(header) or is_comment(header):
-+             continue
-+ 
-+         path = header_path(header, compiler)
-+         with FileAvoidWrite(os.path.join(outdir, header)) as f:
-+             f.write(string.Template(template).substitute(HEADER=header,
-+-                                                         HEADER_PATH=path,
-+-                                                         NEW_HEADER_PATH=path_to_new))
-++                                                         HEADER_PATH=path))
-+ 
-+ 
-+ if __name__ == '__main__':
-+     if 5 != len(sys.argv):
-+         print("""Usage:
-+   python {0} OUT_DIR ('msvc'|'gcc') TEMPLATE_FILE HEADER_LIST_FILE
-+ """.format(sys.argv[0]), file=sys.stderr)
-+         sys.exit(1)
-+diff --git a/config/msvc-stl-wrapper.template.h b/config/msvc-stl-wrapper.template.h
-+--- a/config/msvc-stl-wrapper.template.h
-++++ b/config/msvc-stl-wrapper.template.h
-+@@ -3,45 +3,33 @@
-+  */
-+ /* This Source Code Form is subject to the terms of the Mozilla Public
-+  * License, v. 2.0. If a copy of the MPL was not distributed with this
-+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
-+ 
-+ #ifndef mozilla_${HEADER}_h
-+ #define mozilla_${HEADER}_h
-+ 
-+-#ifndef MOZ_HAVE_INCLUDED_ALLOC
-+-#define MOZ_HAVE_INCLUDED_ALLOC
-+-
-+ #if _HAS_EXCEPTIONS
-+ #  error "STL code can only be used with -fno-exceptions"
-+ #endif
-+ 
-++// Include mozalloc after the STL header and all other headers it includes
-++// have been preprocessed.
-++#if !defined(MOZ_INCLUDE_MOZALLOC_H)
-++#  define MOZ_INCLUDE_MOZALLOC_H
-++#  define MOZ_INCLUDE_MOZALLOC_H_FROM_${HEADER}
-++#endif
-++
-+ // Code built with !_HAS_EXCEPTIONS calls std::_Throw(), but the win2k
-+ // CRT doesn't export std::_Throw().  So we define it.
-+ #ifndef mozilla_Throw_h
-+ #  include "mozilla/throw_msvc.h"
-+ #endif
-+ 
-+-// Code might include <new> before other wrapped headers, but <new>
-+-// includes <exception> and so we want to wrap it.  But mozalloc.h
-+-// wants <new> also, so we break the cycle by always explicitly
-+-// including <new> here.
-+-#include <${NEW_HEADER_PATH}>
-+-
-+-// See if we're in code that can use mozalloc.  NB: this duplicates
-+-// code in nscore.h because nscore.h pulls in prtypes.h, and chromium
-+-// can't build with that being included before base/basictypes.h.
-+-#if !defined(XPCOM_GLUE) && !defined(NS_NO_XPCOM) && !defined(MOZ_NO_MOZALLOC)
-+-#  include "mozilla/mozalloc.h"
-+-#else
-+-#  error "STL code can only be used with infallible ::operator new()"
-+-#endif
-+-#endif /* MOZ_HAVE_INCLUDED_ALLOC */
-+-
-+ #ifdef _DEBUG
-+ // From
-+ //   http://msdn.microsoft.com/en-us/library/aa985982%28VS.80%29.aspx
-+ // and
-+ //   http://msdn.microsoft.com/en-us/library/aa985965%28VS.80%29.aspx
-+ // there appear to be two types of STL container checking.  The
-+ // former is enabled by -D_DEBUG (which is implied by -MDd or -MTd), and
-+ // looks to be full generation/mutation checked iterators as done by
-+@@ -70,9 +58,20 @@
-+ //        but that's OK because we're not throwing them.
-+ #pragma warning( push )
-+ #pragma warning( disable : 4275 4530 )
-+ 
-+ #include <${HEADER_PATH}>
-+ 
-+ #pragma warning( pop )
-+ 
-++#ifdef MOZ_INCLUDE_MOZALLOC_H_FROM_${HEADER}
-++// See if we're in code that can use mozalloc.  NB: this duplicates
-++// code in nscore.h because nscore.h pulls in prtypes.h, and chromium
-++// can't build with that being included before base/basictypes.h.
-++#  if !defined(XPCOM_GLUE) && !defined(NS_NO_XPCOM) && !defined(MOZ_NO_MOZALLOC)
-++#    include "mozilla/mozalloc.h"
-++#  else
-++#    error "STL code can only be used with infallible ::operator new()"
-++#  endif
-++#endif
-++
-+ #endif  // if mozilla_${HEADER}_h
-+diff --git a/memory/mozalloc/mozalloc.h b/memory/mozalloc/mozalloc.h
-+--- a/memory/mozalloc/mozalloc.h
-++++ b/memory/mozalloc/mozalloc.h
-+@@ -7,20 +7,27 @@
-+ 
-+ #ifndef mozilla_mozalloc_h
-+ #define mozilla_mozalloc_h
-+ 
-+ /*
-+  * https://bugzilla.mozilla.org/show_bug.cgi?id=427099
-+  */
-+ 
-+-#include <stdlib.h>
-+-#include <string.h>
-+ #if defined(__cplusplus)
-+ #  include <new>
-++// Since libstdc++ 6, including the C headers (e.g. stdlib.h) instead of the
-++// corresponding C++ header (e.g. cstdlib) can cause confusion in C++ code
-++// using things defined there. Specifically, with stdlib.h, the use of abs()
-++// in gfx/graphite2/src/inc/UtfCodec.h somehow ends up picking the wrong abs()
-++#  include <cstdlib>
-++#  include <cstring>
-++#else
-++#  include <stdlib.h>
-++#  include <string.h>
-+ #endif
-+ 
-+ #if defined(__cplusplus)
-+ #include "mozilla/fallible.h"
-+ #include "mozilla/TemplateLib.h"
-+ #endif
-+ #include "mozilla/Attributes.h"
-+ #include "mozilla/Types.h"
-+
-diff --git a/recipes-mozilla/firefox/firefox_45.9.0esr.bb b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-index 31baf79..54d1713 100644
---- a/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-+++ b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-@@ -42,7 +42,8 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
-            file://0001-use-pkg-config-to-find-nss.patch \
-            file://0002-use-pkg-config-to-find-nspr.patch \
-            file://0003-do-not-link-against-crmf-library-it-is-not-there.patch \
--           "
-+           file://gcc7.patch \
-+"
- 
- SRC_URI[archive.md5sum] = "f4d83c5150fc5085db20d71862497eb8"
- SRC_URI[archive.sha256sum] = "2afb02029e115fae65dbe1d9c562cbfeb761a6807338bbd30dbffba616cb2d20"
--- 
-2.13.1
+If arm isn't expected to be supported, can you please update
+COMPATIBLE_HOST restriction?
 
+http://errors.yoctoproject.org/Errors/Details/145599/
+
+On Thu, Jun 15, 2017 at 7:50 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> OK, I'll try to remember to fix it before merge.
+>
+> I'm sorry about it, tweaking other people commits always strikes back :).
+>
+> On Thu, Jun 15, 2017 at 7:40 PM, Martin Kelly <mkelly@xevo.com> wrote:
+>
+>> On 06/15/2017 09:54 AM, Martin Jansa wrote:
+>>
+>>> It didn't make it to patchwork, because you've sent only the cover
+>>> letter. I've added it to master-next now.
+>>>
+>>> Next time please send also individual patches. So that it gets more
+>>> visibility for other people to comment and also that I can use patchwork
+>>> to pull it in.
+>>>
+>>> Regards,
+>>>
+>>>
+>> Small note: Looks like the initial commit (24b2ac) has a small typo that
+>> should ideally be fixed before it's merged into master:
+>>
+>> "open-vm-tools: add recipe from meat-foss-openswitch"
+>>
+>> "meat" --> "meta"
+>>
+>> On Thu, Jun 15, 2017 at 6:36 PM, Martin Kelly <mkelly@xevo.com
+>>> <mailto:mkelly@xevo.com>> wrote:
+>>>
+>>>     On 06/09/2017 03:22 PM, Martin Kelly wrote:
+>>>
+>>>         Hi all,
+>>>
+>>>         This patch series adds a new recipe for Open VM Tools to
+>>>         meta-oe. This
+>>>         recipe is invaluable for using Openembedded with VMWare, as
+>>>         without the
+>>>         tools, performance is very slow.
+>>>
+>>>         More information about Open VM Tools can be found here:
+>>>
+>>>         https://github.com/vmware/open-vm-tools
+>>>         <https://github.com/vmware/open-vm-tools>
+>>>
+>>>         Please note that, as mentioned in the first commit, this recipe
+>>> is
+>>>         modified from the recipe originally found in the Open-Switch
+>>>         repository.
+>>>         The first patch is directly from that repository, and the
+>>> following
+>>>         patches are modifications to it.
+>>>
+>>>         Original recipe:
+>>>         https://github.com/open-switch/ops-build
+>>>         <https://github.com/open-switch/ops-build>
+>>>         yocto/openswitch/meta-foss-openswitch/recipes-extended/open-
+>>> vm-tools/open-vm-tools_10.0.5.bb
+>>>         <http://open-vm-tools_10.0.5.bb>
+>>>
+>>>         Commit 9008de2d8e100f3f868c66765742bca9fa98f3f9
+>>>
+>>>         Although the original recipe packaging was Apache-licensed, I
+>>>         received
+>>>         permission from the author (Diego Dompe) to relicense it under
+>>>         the MIT
+>>>         license for inclusion in meta-openembedded:
+>>>
+>>>         https://lists.openswitch.net/pipermail/ops-dev/2017-April/01
+>>> 4715.html
+>>>         <https://lists.openswitch.net/pipermail/ops-dev/2017-April/0
+>>> 14715.html>
+>>>         https://lists.openswitch.net/pipermail/ops-dev/2017-April/01
+>>> 4716.html
+>>>
+>>>         <https://lists.openswitch.net/pipermail/ops-dev/2017-April/0
+>>> 14716.html>
+>>>
+>>>         --
+>>>         The following changes since commit
+>>>         41cf832cc9abd6f2293a6d612463a34a53a9a52a:
+>>>
+>>>           Revert "rrdtool: add gettext-native dependency" (2017-06-05
+>>>         11:13:09
+>>>         +0200)
+>>>
+>>>         are available in the git repository at:
+>>>
+>>>           https://github.com/XevoInc/meta-openembedded
+>>>         <https://github.com/XevoInc/meta-openembedded>
+>>>
+>>>         for you to fetch changes up to
+>>>         402d1b3917195beb2ab7cac5dc94aaed8992b5a1:
+>>>
+>>>           open-vm-tools: style changes (2017-06-07 22:31:34 +0000)
+>>>
+>>>         ----------------------------------------------------------------
+>>>         Martin Kelly (14):
+>>>               add open-vm-tools recipe
+>>>               open-vm-tools: add missing pkgconfig dependency
+>>>               open-vm-tools: add missing glib-2.0-native dependency
+>>>               open-vm-tools: clarify and expand licensing
+>>>               open-vm-tools: base_contains --> bb.utils.contains
+>>>               open-vm-tools: update version to 10.1.5
+>>>               open-vm-tools: don't use mspack
+>>>               open-vm-tools: don't use dnet-config
+>>>               open-vm-tools: add #include to fix build break
+>>>               open-vm-tools: add missing X11 dependencies
+>>>               open-vm-tools: remove kernel module logic
+>>>               open-vm-tools: line up configure options
+>>>               open-vm-tools: support FUSE
+>>>               open-vm-tools: style changes
+>>>
+>>>          .../recipes-support/open-vm-tools/files/tools.conf |  2 +
+>>>          .../open-vm-tools/files/vmtoolsd.service           | 11 +++
+>>>          .../open-vm-tools/0001-Fix-kernel-detection.patch  | 35
+>>> +++++++++
+>>>          .../0002-configure.ac-don-t-use-dnet-config.patch  | 41
+>>> ++++++++++
+>>>          .../0003-add-include-sys-sysmacros.h.patch         | 33
+>>> ++++++++
+>>>          .../open-vm-tools/open-vm-tools_10.1.5.bb
+>>>         <http://open-vm-tools_10.1.5.bb>          | 90
+>>>         ++++++++++++++++++++++
+>>>          6 files changed, 212 insertions(+)
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/files/tools.conf
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/files/vmtoolsd.service
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Fix
+>>> -kernel-detection.patch
+>>>
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-con
+>>> figure.ac-don-t-use-dnet-config.patch
+>>>
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0003-add
+>>> -include-sys-sysmacros.h.patch
+>>>
+>>>          create mode 100644
+>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
+>>>         <http://open-vm-tools_10.1.5.bb>
+>>>         --
+>>>         2.1.4
+>>>
+>>>
+>>>     (ping)
+>>>
+>>>
+>>>
+>
 
