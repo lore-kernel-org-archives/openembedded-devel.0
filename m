@@ -1,48 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id D5E7E78374
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 3DBBE78082
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 20:01:29 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id m125so50059774wmm.1
+	Sun, 18 Jun 2017 12:09:05 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id z45so10548329wrb.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jun 2017 13:01:31 -0700 (PDT)
+	Sun, 18 Jun 2017 05:09:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=0uaZf0hw4j8xq33h+xzb86DTi6MmJPNNvCwERobmhBc=;
-	b=PmqjqSUet5u759V2b990Ulbgss2NpufAaZ89T+LP3KcsFaMBCftmY0uPvv1Q2Bf8pD
-	EeEL2RIHjsqgoWzoWY40GvxIIV0f1SRXI7j38GgR9KWCHVcT6ZvgFADT38vNprsHoS7H
-	m9GZ7jec2ExVre6Bm7FZndqXqYokP7W5XU2WXxMFVqHeivXPk+WLxO5yvDtBdnLv5+xA
-	mdVNG4qfigEPwKj40SfDddsgz3axn/x1udSXGPRmFPCretuaMQ24JvZY6OdIO1K6mEcX
-	6p2ATmbukuUZR1zv3K9lNU4flktw8NDhV7iMZ9NglOMa4VPZ/Oc5QxIvIyj3tvN7/hi8
-	rMSg==
+	bh=G1SMPl69ViiCNWmrrpJlmlplx9+fO53TE5uzw55i1HA=;
+	b=XUM9JYg7S1yNZlbsy5lD7EpZehQQW1eHyBrhflm0xHI1fnHdurLyCrs3UVhMAZBQvB
+	ilCHxeazwBumrgGd035MIJBgZvtWFwAZYfMDPgCwDjc5kn9lekMxs2Djy01OcJc3tzFu
+	+lghNKR1oTMch6KrAJqd4IjPN8Iooe1lpvhmZ6JdtsvHMDQmJVFUlaM1LDXww/UMhUM1
+	V1GpqdMCnFlNpZ/HvJ+L/8jePuP7Sv/74aa5I0jkeNf0OI9m0/FQ9NdZJrWX79yk0JrW
+	pGc2EJXwyI39p+fNP8cNfOxG+Uw1TC7KigAPFUP2/ffa3Kh+OcRrghqFuUtjeYHEl2Yr
+	cBmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=0uaZf0hw4j8xq33h+xzb86DTi6MmJPNNvCwERobmhBc=;
-	b=BxF/K8Q+H1yHQPTfC2qGe/peKIIo79aKKJNkrtsUbqzQXwj3hucmelEiv5hAXy+6m8
-	6w680VX4WGEwkQ50IKbIW5KLxxRgVig92gO3LIxL5LYbKNqxZ7B6YGF5u/r7eAlFczRn
-	Nhgy2Tgepj0yHZRpLJ+z3xaq09R9/vaMYQ9TePl3m2nPw8C43qYMYGffdZ5ZIFfAMCh4
-	kUSMcvDF4vdBe65rmqW6kIBeI6iSSjHwvL/RcYWhcZbkXRu9ufEpZke/X8GwKs3GAK9o
-	IUcazuNzYkVOeg9ndHz/UuJD3+JkEpqEIOJIT/OxRJ6mRzVLojoN1finojKoB1ydiwXH
-	oz1w==
-X-Gm-Message-State: AKS2vOzVFf+QoKMxC7r+cc4GJQEpOmY0d1eXPx5b1Etv1sPPRGSgWGLN
-	41PRVFTCCxwyJLSR
-X-Received: by 10.28.143.16 with SMTP id r16mr11339577wmd.50.1497729689295;
-	Sat, 17 Jun 2017 13:01:29 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id g7sm4534043wrb.52.2017.06.17.13.01.28
+	bh=G1SMPl69ViiCNWmrrpJlmlplx9+fO53TE5uzw55i1HA=;
+	b=o79C4LHsrESTicx5dEFmMm/zy0lHFGZ0H2dZoen+vccAZZovlqu4VwvuRoVLxG4mXo
+	YkLWo+bHBn4FvWlB5F/ca5eRdlzgUEe/4mos5sM3e45q0f56HCyayobWSS2pltcVbJWL
+	XWALJLZzmUF1BGyuWPgpd8EO2LaHAHl5hXAlvCTXqCLcDTo7pOePYXDXiorxu056ciwK
+	OgKjLcb8hv1G8RL4ddHKVuyOyayD6vGk7jFHEhIzGqjM6cGoXg5ZO0bPj6QxjXXeQRN4
+	5LPFIEfIHtgoZcaHaM/WXaGSJ4P6dOqXPv4VZre9Lkzum7Az63vWPH7P6J2NnFkTZwSr
+	2czg==
+X-Gm-Message-State: AKS2vOwGmbeatl7S/yh63CZ8wWnw0P902ftkvHmfUHJQRbSUMo4UPKWF
+	Z4C47jNRIHlpJ91k
+X-Received: by 10.223.139.19 with SMTP id n19mr14403760wra.116.1497787745761; 
+	Sun, 18 Jun 2017 05:09:05 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	t70sm12990823wmd.1.2017.06.18.05.09.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 17 Jun 2017 13:01:28 -0700 (PDT)
+	Sun, 18 Jun 2017 05:09:05 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Jun 2017 22:01:31 +0200
-Message-Id: <20170617200131.8997-1-Martin.Jansa@gmail.com>
+Date: Sun, 18 Jun 2017 14:09:08 +0200
+Message-Id: <20170618120909.3499-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.13.1
 In-Reply-To: <CA+chaQdyLDc38rC-geZay6JO_QcsUZn0ZUJPVzqWXcO-wxP2ww@mail.gmail.com>
 References: <CA+chaQdyLDc38rC-geZay6JO_QcsUZn0ZUJPVzqWXcO-wxP2ww@mail.gmail.com>
-Subject: [meta-browser][PATCHv2] chromium(-wayland): Fix build with gcc7
+Subject: [meta-browser][PATCHv3 1/2] chromium(-wayland): Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,35 +56,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jun 2017 20:01:30 -0000
+X-List-Received-Date: Sun, 18 Jun 2017 12:09:07 -0000
 
 * add 3 patches to fix issues detected by gcc7
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes-browser/chromium/chromium-browser.inc      |    3 +
+ recipes-browser/chromium/chromium-browser.inc      |    2 +
+ .../chromium/chromium-wayland_53.0.2785.143.bb     |    1 +
  .../files/0001-v8-fix-build-with-gcc7.patch        |  112 ++
  .../files/0002-WebKit-fix-build-with-gcc7.patch    |   31 +
  .../files/0003-pdfium-fix-build-with-gcc7.patch    | 1317 ++++++++++++++++++++
- 4 files changed, 1463 insertions(+)
+ 5 files changed, 1463 insertions(+)
  create mode 100644 recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch
  create mode 100644 recipes-browser/chromium/files/0002-WebKit-fix-build-with-gcc7.patch
  create mode 100644 recipes-browser/chromium/files/0003-pdfium-fix-build-with-gcc7.patch
 
 diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
-index ad8e497..3a197b3 100644
+index ad8e497..08853b1 100644
 --- a/recipes-browser/chromium/chromium-browser.inc
 +++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -26,6 +26,9 @@ SRC_URI = "\
+@@ -26,6 +26,8 @@ SRC_URI = "\
          ${@bb.utils.contains('PACKAGECONFIG', 'disable-api-keys-info-bar', 'file://api-keys.patch;patchdir=${WORKDIR}', '', d)} \
          file://google-chrome.desktop \
          file://unset-madv-free.patch \
 +        file://0001-v8-fix-build-with-gcc7.patch \
 +        file://0002-WebKit-fix-build-with-gcc7.patch \
-+	file://0003-pdfium-fix-build-with-gcc7.patch \
  "
  
  S = "${WORKDIR}/chromium-${PV}"
+diff --git a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+index 5fc554b..cc844c3 100644
+--- a/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
++++ b/recipes-browser/chromium/chromium-wayland_53.0.2785.143.bb
+@@ -6,6 +6,7 @@ DEPENDS += "wayland libxkbcommon"
+ 
+ SRC_URI += "\
+         file://chromium-wayland/add_missing_stat_h_include.patch \
++        file://0003-pdfium-fix-build-with-gcc7.patch \
+         file://0003-Remove-hard-coded-values-for-CC-and-CXX.patch \
+         file://0004-Create-empty-i18n_process_css_test.html-file-to-avoi.patch \
+         file://0005-Override-root-filesystem-access-restriction.patch \
 diff --git a/recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch b/recipes-browser/chromium/files/0001-v8-fix-build-with-gcc7.patch
 new file mode 100644
 index 0000000..0509238
