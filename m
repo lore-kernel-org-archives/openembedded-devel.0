@@ -1,53 +1,46 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
-	[209.85.161.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 85A597827D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id F41B06FF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jun 2017 20:28:47 +0000 (UTC)
-Received: by mail-yw0-f171.google.com with SMTP id e142so34293967ywa.1
+	Mon, 19 Jun 2017 01:05:26 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id y7so14374556pfd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jun 2017 13:28:49 -0700 (PDT)
+	Sun, 18 Jun 2017 18:05:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=QM/mkxzigULrn5GpQIRUWn3uZ12OeBzHe7NhFBG/iF4=;
-	b=qJAcFLH9FR/6s5aC/zHVirfoKxOKk9swCpZCoLX/BDAOPfGncGdTppMOBfqOkehD0X
-	N17EslIniajuq79lCuAQdCaKC0167JFvFhXhoOkK0uIQr3yvib/XyVps8rSjqa0VAABD
-	1T3/MiPGVt9ldNxTk2zUMzVO0g2h7Or58fgNTOCdOTAMAt88RtOJCsw+ZLHBkR2E5oz3
-	X7KXXMYAXRzGgI3lqRBkz+gLjt4TE0+PzzuJe8Ht6x7WM6Hi8O02ABocLDT/tuEQ2eP9
-	0u8RAoenRtSIRvR7539/LZIJh/XgtuE4KIOsETjLJIdiXMuqi8+dZ6VjIU+k2rly8zxV
-	Yj8A==
+	h=from:to:cc:subject:date:message-id;
+	bh=TmchiDn2yERIvNukNzPRxDqBYxEb0KxgXXHhLJc7qU0=;
+	b=kBqi7EmMvAVeQGoeMwSLKxKSqfkouERPb+t6qVp0fT/u7S/G55PTNK4xaNzbNhG6Fb
+	8MSDRRvcEApQpUU6IPL7tX30f8WpFDpOYvqW6oxpZ2gVZYbG/KI6P7bPm3sMbGTv9PHa
+	avvNFRXft1zRBrIt//saOlsvy72yfEFUcA7gCVzjiAUwn4lVB1+QKAEYW+JZYyw/6tso
+	cFC+xwJ+Rbew1SmPL5i8TueM8ffV4o1FmAiZ0pWkTGCpft4wgB7k8D0h3E14MUehtJW2
+	S7x+JN+CvGbqhVIpmFqfEEanW56/mbgcbCVXs+g6CLO7OoKY93xEPl8XA63XiCruhCgf
+	GAaw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=QM/mkxzigULrn5GpQIRUWn3uZ12OeBzHe7NhFBG/iF4=;
-	b=S/+mHGAyeO+rz6rQmq/ifln50Z6ZfXC0l0V+bnLR11Uhp8c6T8rP3CkPBPLwa0b60R
-	Sa/XbIb4VD/MqzJYrffSv24v1YVilWWcrAQKnrQjCXrocEt+ROAxxXFXGD2rhU9KE9Aq
-	UaEfMLLJCo39K3VPZcizTnHXFHGMsP+VXjOgQPp23bQ5WXZNogiSCt3ws+dM7EIlldmG
-	dOdRZDoVfREpcSbY0kM9jDw7a9kXk5fMz1FFnWPVgisqF7FrRVZLitg3EqA9SCcHbFwC
-	xC173xxAE64LvZddV1oZPux/uCCNOHb1zCnR9dmiDbChUOdHwmlrDBxJKzgbqqiqE9+1
-	xy2Q==
-X-Gm-Message-State: AKS2vOyN9wBLmpnjJOCXgW5P7MoZh/fflKsTzIo1msiJnI4tw9zF6WOC
-	v4D5DkZbrU8VspPXzbcsX/wNj0fBog==
-X-Received: by 10.13.255.131 with SMTP id p125mr94938ywf.243.1497817728562;
-	Sun, 18 Jun 2017 13:28:48 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.37.181.204 with HTTP; Sun, 18 Jun 2017 13:28:48 -0700 (PDT)
-In-Reply-To: <CA+chaQdbrZ+R37sKDXamFwW71G9MvYVF-Bb=8OO_k5ChdUFGGg@mail.gmail.com>
-References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
-	<2ef4f2a3-48e9-f3fa-a55e-01522507d86d@xevo.com>
-	<CA+chaQeUWj=4zxG1gdk0pwg_U1GUdMmwr1F9DEL_7pT8S0UUQg@mail.gmail.com>
-	<ac7731a3-ff5c-b4c8-f8d9-1ee0d30e17a1@xevo.com>
-	<CA+chaQcnwYQwBXfxbdpEN8D9ZYzG=fOxX_MPNXt1_uzShSSrwg@mail.gmail.com>
-	<CA+chaQdbrZ+R37sKDXamFwW71G9MvYVF-Bb=8OO_k5ChdUFGGg@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 18 Jun 2017 22:28:48 +0200
-Message-ID: <CA+chaQdrvQK_uDEkEcBy7NEn4EhVXKWx+FOfbmqM+bPfL7ad-Q@mail.gmail.com>
-To: Martin Kelly <mkelly@xevo.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=TmchiDn2yERIvNukNzPRxDqBYxEb0KxgXXHhLJc7qU0=;
+	b=aLAE+v0RZzxaSJorfFDLv3cDFgwyTv8QelpQVbX73xnn+3i7KrBp0vks4tso7meXPs
+	8AIP9l/uB9tjyE90BngD2Sqe642dV7lhFJTakANQ6RayjiQl5hG7I37PFY5wMdurQhFE
+	PvAVUlmnCil8W3pzx8fspT6srDD7vL4YbESN+4LNPAjLf+dv33hmKjY9S9LD9Rv/diR/
+	gyQgbY4cRQ086ugilHtn9QYM8wdLFPTRFJAQLbkixBsp/0by98GIdqDQufnhXVa7uvFE
+	oXGBJWIS5ead5FD8j/4sxrHp753Drox7IQ0hpynKXlH9xvCreXlkMdqN+XQztQYypkay
+	E7hw==
+X-Gm-Message-State: AKS2vOxPkuPUtzRkUbfgvADceLsyWjeGRHDUxEWxY/95pKdxO1s6dXvv
+	ljxBEAZkaa+shuIg
+X-Received: by 10.99.65.194 with SMTP id o185mr22979594pga.278.1497834327434; 
+	Sun, 18 Jun 2017 18:05:27 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
+	by smtp.gmail.com with ESMTPSA id
+	t128sm15389319pfd.64.2017.06.18.18.05.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 18 Jun 2017 18:05:26 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 18 Jun 2017 18:05:14 -0700
+Message-Id: <20170619010516.11453-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.1
+Subject: [meta-networking][PATCH 1/3] linux-atm: Fix build with hardening flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,232 +53,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jun 2017 20:28:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 19 Jun 2017 01:05:28 -0000
 
-And there is also this:
+Port to build on musl while here
 
-=== Incorrect PACKAGE_ARCH or sstate signatures (3) ===
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-ttcp-Add-printf-format-string.patch       | 34 ++++++++++++++++++++
+ ...0002-sigd-Replace-on_exit-API-with-atexit.patch | 30 ++++++++++++++++++
+ ...p-old-hack-to-compile-with-very-old-glibc.patch | 37 ++++++++++++++++++++++
+ .../recipes-support/linux-atm/linux-atm_2.5.2.bb   |  3 ++
+ 4 files changed, 104 insertions(+)
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0001-ttcp-Add-printf-format-string.patch
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
+ create mode 100644 meta-networking/recipes-support/linux-atm/linux-atm/0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch
 
-Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170618_014055.log/
-    * ERROR: 3 issues were found in these recipes: open-vm-tools
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0001-ttcp-Add-printf-format-string.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0001-ttcp-Add-printf-format-string.patch
+new file mode 100644
+index 000000000..87e7dc3c6
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0001-ttcp-Add-printf-format-string.patch
+@@ -0,0 +1,34 @@
++From b83fd54584fabd5d24f6645b4a3cf345c9d2020d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Jun 2017 16:11:59 -0700
++Subject: [PATCH 1/3] ttcp: Add printf format string
++
++Fixes compiler warnings when format security is enabled
++
++| ../../../linux-atm-2.5.2/src/test/ttcp.c:666:21: error: format not a string literal and no format arguments [-Werror=format-security]
++|      fprintf(stderr, Usage);
++|                      ^~~~~
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/test/ttcp.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/test/ttcp.c b/src/test/ttcp.c
++index acb9185..337cee5 100644
++--- a/src/test/ttcp.c
+++++ b/src/test/ttcp.c
++@@ -663,7 +663,7 @@ int no_check = 0;
++     exit(0);
++ 
++   usage:
++-    fprintf(stderr, Usage);
+++    fprintf(stderr, "%s", Usage);
++     exit(1);
++ }
++ 
++-- 
++2.13.1
++
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
+new file mode 100644
+index 000000000..ce061231c
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0002-sigd-Replace-on_exit-API-with-atexit.patch
+@@ -0,0 +1,30 @@
++From 27fa80dc8045e71c30dd2abea835206d5c8f6c71 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Jun 2017 16:18:56 -0700
++Subject: [PATCH 2/3] sigd: Replace on_exit() API with atexit()
++
++on_exit is not universally available
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/sigd/atmsigd.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/sigd/atmsigd.c b/src/sigd/atmsigd.c
++index 52e41c7..b766606 100644
++--- a/src/sigd/atmsigd.c
+++++ b/src/sigd/atmsigd.c
++@@ -517,7 +517,7 @@ int main(int argc,char **argv)
++ 	    exit(0);
++ 	}
++     }
++-    (void) on_exit(trace_on_exit,NULL);
+++    atexit(trace_on_exit);
++     poll_loop();
++     close_all();
++     for (sig = entities; sig; sig = sig->next) stop_saal(&sig->saal);
++-- 
++2.13.1
++
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm/0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch b/meta-networking/recipes-support/linux-atm/linux-atm/0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch
+new file mode 100644
+index 000000000..0302286dc
+--- /dev/null
++++ b/meta-networking/recipes-support/linux-atm/linux-atm/0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch
+@@ -0,0 +1,37 @@
++From fe954b2fb17d813aaab3e926cee76144314a115a Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 17 Jun 2017 16:22:55 -0700
++Subject: [PATCH 3/3] mpoad: Drop old hack to compile with very old glibc
++
++Use poll.h instead of sys/poll.h
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/mpoad/io.c | 9 +--------
++ 1 file changed, 1 insertion(+), 8 deletions(-)
++
++diff --git a/src/mpoad/io.c b/src/mpoad/io.c
++index 69900c2..8d1433f 100644
++--- a/src/mpoad/io.c
+++++ b/src/mpoad/io.c
++@@ -10,14 +10,7 @@
++ #include <errno.h>
++ #include <sys/ioctl.h>
++ #include <sys/param.h> /* for OPEN_MAX   */
++-#if __GLIBC__ >= 2
++-#include <sys/poll.h>
++-#else /* ugly hack to make it compile on RH 4.2 - WA */
++-#include <syscall.h>
++-#include <linux/poll.h>
++-#define SYS_poll 168
++-_syscall3(int,poll,struct pollfd *,ufds,unsigned int,nfds,int,timeout);
++-#endif
+++#include <poll.h>
++ #include <atm.h>
++ #include <linux/types.h>
++ #include <linux/atmioc.h>
++-- 
++2.13.1
++
+diff --git a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+index 6ab8b07d0..9fce4fba6 100644
+--- a/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
++++ b/meta-networking/recipes-support/linux-atm/linux-atm_2.5.2.bb
+@@ -11,6 +11,9 @@ SRC_URI = "http://nchc.dl.sourceforge.net/project/${BPN}/${BPN}/${PV}/${BPN}-${P
+            file://link-with-ldflags.patch \
+            file://install-from-buildir.patch \
+            file://0001-fix-compile-error-with-linux-kernel-v4.8.patch \
++           file://0001-ttcp-Add-printf-format-string.patch \
++           file://0002-sigd-Replace-on_exit-API-with-atexit.patch \
++           file://0003-mpoad-Drop-old-hack-to-compile-with-very-old-glibc.patch \
+ "
+ 
+ SRC_URI[md5sum] = "d49499368c3cf15f73a05d9bce8824a8"
+-- 
+2.13.1
 
-    * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
-    * ERROR: 1 errors found in
-signatures.qemux86.do_populate_sysroot.sigdata.log
-    * ERROR: 1 errors found in
-signatures.qemux86.do_package_write_ipk.sigdata.log
-
-    * ERROR: open-vm-tools different signature for task
-do_configure.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_configure.sigdata.log
-    * ERROR: open-vm-tools different signature for task
-do_populate_sysroot.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_populate_sysroot.sigdata.log
-    * ERROR: open-vm-tools different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: 3 issues were found in these recipes: open-vm-tools
-
-So it probably depends on some MACHINE specific variable without being
-marked as MACHINE_ARCH.
-
-Looking at:
-https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2ab7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
-
-It's depending on kernel, so it needs to be MACHINE_ARCH, also I've noticed
-few more issues:
-
-DEPENDS is there twice:
-https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2ab7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb#L24
-https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2ab7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb#L39
-
-What is supposed to set KERNEL_VERSION variable in:
-https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2ab7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb#L58
-?
-
-Don't use tags in SRCREV, use git hash instead (otherwise bitbake fetcher
-will reach upstream git repo every single time the recipe is parsed and
-will cause failed builds when github isn't accessible).
-https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2ab7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb#L35
-
-There are many hardcoded paths like /usr/lib/ or /usr/sbin/, please use
-proper variables like libdir, sbindir.
-
-Once you fix these issues please resend all changes to the ML, it's much
-better to review inline than this.
-
-Regards,
-
-
-On Sun, Jun 18, 2017 at 9:58 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
-
-> Fails to configure on qemuarm.
->
-> If arm isn't expected to be supported, can you please update
-> COMPATIBLE_HOST restriction?
->
-> http://errors.yoctoproject.org/Errors/Details/145599/
->
-> On Thu, Jun 15, 2017 at 7:50 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
->
->> OK, I'll try to remember to fix it before merge.
->>
->> I'm sorry about it, tweaking other people commits always strikes back :).
->>
->> On Thu, Jun 15, 2017 at 7:40 PM, Martin Kelly <mkelly@xevo.com> wrote:
->>
->>> On 06/15/2017 09:54 AM, Martin Jansa wrote:
->>>
->>>> It didn't make it to patchwork, because you've sent only the cover
->>>> letter. I've added it to master-next now.
->>>>
->>>> Next time please send also individual patches. So that it gets more
->>>> visibility for other people to comment and also that I can use patchwork
->>>> to pull it in.
->>>>
->>>> Regards,
->>>>
->>>>
->>> Small note: Looks like the initial commit (24b2ac) has a small typo that
->>> should ideally be fixed before it's merged into master:
->>>
->>> "open-vm-tools: add recipe from meat-foss-openswitch"
->>>
->>> "meat" --> "meta"
->>>
->>> On Thu, Jun 15, 2017 at 6:36 PM, Martin Kelly <mkelly@xevo.com
->>>> <mailto:mkelly@xevo.com>> wrote:
->>>>
->>>>     On 06/09/2017 03:22 PM, Martin Kelly wrote:
->>>>
->>>>         Hi all,
->>>>
->>>>         This patch series adds a new recipe for Open VM Tools to
->>>>         meta-oe. This
->>>>         recipe is invaluable for using Openembedded with VMWare, as
->>>>         without the
->>>>         tools, performance is very slow.
->>>>
->>>>         More information about Open VM Tools can be found here:
->>>>
->>>>         https://github.com/vmware/open-vm-tools
->>>>         <https://github.com/vmware/open-vm-tools>
->>>>
->>>>         Please note that, as mentioned in the first commit, this recipe
->>>> is
->>>>         modified from the recipe originally found in the Open-Switch
->>>>         repository.
->>>>         The first patch is directly from that repository, and the
->>>> following
->>>>         patches are modifications to it.
->>>>
->>>>         Original recipe:
->>>>         https://github.com/open-switch/ops-build
->>>>         <https://github.com/open-switch/ops-build>
->>>>         yocto/openswitch/meta-foss-openswitch/recipes-extended/open-
->>>> vm-tools/open-vm-tools_10.0.5.bb
->>>>         <http://open-vm-tools_10.0.5.bb>
->>>>
->>>>         Commit 9008de2d8e100f3f868c66765742bca9fa98f3f9
->>>>
->>>>         Although the original recipe packaging was Apache-licensed, I
->>>>         received
->>>>         permission from the author (Diego Dompe) to relicense it under
->>>>         the MIT
->>>>         license for inclusion in meta-openembedded:
->>>>
->>>>         https://lists.openswitch.net/pipermail/ops-dev/2017-April/01
->>>> 4715.html
->>>>         <https://lists.openswitch.net/pipermail/ops-dev/2017-April/0
->>>> 14715.html>
->>>>         https://lists.openswitch.net/pipermail/ops-dev/2017-April/01
->>>> 4716.html
->>>>
->>>>         <https://lists.openswitch.net/pipermail/ops-dev/2017-April/0
->>>> 14716.html>
->>>>
->>>>         --
->>>>         The following changes since commit
->>>>         41cf832cc9abd6f2293a6d612463a34a53a9a52a:
->>>>
->>>>           Revert "rrdtool: add gettext-native dependency" (2017-06-05
->>>>         11:13:09
->>>>         +0200)
->>>>
->>>>         are available in the git repository at:
->>>>
->>>>           https://github.com/XevoInc/meta-openembedded
->>>>         <https://github.com/XevoInc/meta-openembedded>
->>>>
->>>>         for you to fetch changes up to
->>>>         402d1b3917195beb2ab7cac5dc94aaed8992b5a1:
->>>>
->>>>           open-vm-tools: style changes (2017-06-07 22:31:34 +0000)
->>>>
->>>>         ------------------------------------------------------------
->>>> ----
->>>>         Martin Kelly (14):
->>>>               add open-vm-tools recipe
->>>>               open-vm-tools: add missing pkgconfig dependency
->>>>               open-vm-tools: add missing glib-2.0-native dependency
->>>>               open-vm-tools: clarify and expand licensing
->>>>               open-vm-tools: base_contains --> bb.utils.contains
->>>>               open-vm-tools: update version to 10.1.5
->>>>               open-vm-tools: don't use mspack
->>>>               open-vm-tools: don't use dnet-config
->>>>               open-vm-tools: add #include to fix build break
->>>>               open-vm-tools: add missing X11 dependencies
->>>>               open-vm-tools: remove kernel module logic
->>>>               open-vm-tools: line up configure options
->>>>               open-vm-tools: support FUSE
->>>>               open-vm-tools: style changes
->>>>
->>>>          .../recipes-support/open-vm-tools/files/tools.conf |  2 +
->>>>          .../open-vm-tools/files/vmtoolsd.service           | 11 +++
->>>>          .../open-vm-tools/0001-Fix-kernel-detection.patch  | 35
->>>> +++++++++
->>>>          .../0002-configure.ac-don-t-use-dnet-config.patch  | 41
->>>> ++++++++++
->>>>          .../0003-add-include-sys-sysmacros.h.patch         | 33
->>>> ++++++++
->>>>          .../open-vm-tools/open-vm-tools_10.1.5.bb
->>>>         <http://open-vm-tools_10.1.5.bb>          | 90
->>>>         ++++++++++++++++++++++
->>>>          6 files changed, 212 insertions(+)
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/files/tools.conf
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/files/vmtoolsd.service
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-Fix
->>>> -kernel-detection.patch
->>>>
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-con
->>>> figure.ac-don-t-use-dnet-config.patch
->>>>
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools/0003-add
->>>> -include-sys-sysmacros.h.patch
->>>>
->>>>          create mode 100644
->>>>         meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
->>>>         <http://open-vm-tools_10.1.5.bb>
->>>>         --
->>>>         2.1.4
->>>>
->>>>
->>>>     (ping)
->>>>
->>>>
->>>>
->>
->
 
