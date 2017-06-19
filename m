@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
-	by mail.openembedded.org (Postfix) with ESMTP id E8A4A78280
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 789506FF9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jun 2017 01:05:27 +0000 (UTC)
-Received: by mail-pg0-f49.google.com with SMTP id 132so7716211pgb.2
+	Mon, 19 Jun 2017 01:05:28 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id f127so13553345pgc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jun 2017 18:05:29 -0700 (PDT)
+	Sun, 18 Jun 2017 18:05:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=HcHNNEmo2GJzPneSqDzMKOqBaC8468yXhEY2rfX6haM=;
-	b=FrWk8fFM/x1Mznhq+90vljXsLLwQNgyi5EbwWFYjnFRnLxRZx72fIts4vaTnDgmNqh
-	CegL63uAdFL77C8byZVuNuIEW8NnEhmHeDddGfkgXChiU4FpJrgz4Rl5+6EZomyxu6ct
-	rTstPqPU7y7QQlUcB9ZNCVa21pyGqiYMGY8hnapxNVr3beDENpuX65KmdZeuvlTnzz3s
-	LnGksz0o0E30ifjrXUAFcrd5fc/rdU9tVr9akge1oG4Tgl26u9fDoWmaStVogNwRtAGD
-	gZe9vOclmopxnbXwAa/qDFe3HxTF2rUmKDYHwNf0dmLn5/Ibik7REjRx3n7VXEryOwA1
-	lMHQ==
+	bh=Kke/Q35HKcDKb9L9LinfdcoMvxZd5LgqkQMaebrVPUU=;
+	b=Q1K1e0OU/vu8wZM5bV419kHRBGjxXepiYKCQWgKmYV/eWxQEZi/3+5SmjTLINljiOH
+	acMK757NaNOw0WTP0ejDksidljYn6zerRURv9QECkquwnIdPokhGVhFUMrj8WTLSD7j6
+	plHYK7wVqdhsFT5uE6dTuP2GL9hWZnYQoyDPn3fgwMY4KB4XC57aYXC9fmsx0l34FjCV
+	zFGFNiNz5BoAGx0kpucRh9MxsqSYmpv2RAxfSbxzuI9eK5K8hoNo/+o/kV+UyUtODadd
+	vKRO6UuhKt2+nWON4xSkYD7T/HReF4Kl0+Tl5u7jAu0KV96XIJrksUrA6nlWZmadPNfA
+	b7kQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=HcHNNEmo2GJzPneSqDzMKOqBaC8468yXhEY2rfX6haM=;
-	b=PubJryeXz5HwgHICsvGVjKwirUXEOyfWo/UxuJcrFMDCTvdhFuIMSK/di+mH0wqYRi
-	VbJEM6uyLs8T9UjAHM5AO2vPprRz5rWljA1d3MFUvXWGRtB8vLvbqf50hTRue8rHmQjX
-	sVNrfYEld+u66Moz0Yd67w0cbFX14jHdh8NpkWP8OYkvudUFXOmoeEoGlm+ZVe0UnnHA
-	i4HlQup/7ejNKeEKvofJ0+Q/x2uutsv1RQSev8W/9vFH3NRD7kNJRyFPH1s9LA8T1d0/
-	YmeU6ZUnrb6Mg7DCA6smCSGmJfeaNM+ITP30OLpFGiFoHn4XpgeCtCNomJEHdRZd6Tgw
-	JRPw==
-X-Gm-Message-State: AKS2vOyJ4x9Tp9c8lySSp3QtYkU+M0xA+VWmKxHbzSen5/JOA4enaT6t
-	MnIbapemXvzKRUmO
-X-Received: by 10.98.218.25 with SMTP id c25mr22940734pfh.118.1497834328801;
-	Sun, 18 Jun 2017 18:05:28 -0700 (PDT)
+	bh=Kke/Q35HKcDKb9L9LinfdcoMvxZd5LgqkQMaebrVPUU=;
+	b=MZKp7kU+j4SJDQuII9QlYDZM4wJn264NlPFB+7Nhsw+fI50PaqTzYZk24K0g1KxcTS
+	DcAYJudRfNgowiPEIHx0tAKsaWO5MaEp8n7asQJ21BHMze2LpJx2OUMX7C2A3kNtlEJ3
+	OkihZJ47ewtlusZkSg1PBETzLtORwWCANstXJL0VEZAuzdNs42i2rsSB5dwsnxmEdeQs
+	JtNzWn54zuh4eW/t7tGKPlSI6t1NMnb8bQaCBsBEzf83mDg+WaQoIFj79RRR1jC6ag1D
+	mIjHIXdYbaVVj5fZe5q/34QnkzRGXzBCjNETw7E+edBATLc0Ho3KseoJgzqnvo0JYCnm
+	OvgQ==
+X-Gm-Message-State: AKS2vOyIIFbtMGkw2J4upYezlWiZQeDxpUqAq+6uh/FvyunVGsL3wbFh
+	KTfz0JBB9Wr2M8re
+X-Received: by 10.98.117.11 with SMTP id q11mr22426677pfc.137.1497834330048;
+	Sun, 18 Jun 2017 18:05:30 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
 	by smtp.gmail.com with ESMTPSA id
-	t128sm15389319pfd.64.2017.06.18.18.05.27
+	t128sm15389319pfd.64.2017.06.18.18.05.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 18 Jun 2017 18:05:27 -0700 (PDT)
+	Sun, 18 Jun 2017 18:05:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Jun 2017 18:05:15 -0700
-Message-Id: <20170619010516.11453-2-raj.khem@gmail.com>
+Date: Sun, 18 Jun 2017 18:05:16 -0700
+Message-Id: <20170619010516.11453-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.1
 In-Reply-To: <20170619010516.11453-1-raj.khem@gmail.com>
 References: <20170619010516.11453-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/3] sqlite: Fix build with hardening flags
+Subject: [meta-oe][PATCH 3/3] xmlstarlet: Update to 1.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,72 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jun 2017 01:05:28 -0000
+X-List-Received-Date: Mon, 19 Jun 2017 01:05:29 -0000
+
+Enable PARALLEL_MAKE again
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...c-Fix-format-not-a-string-literal-warning.patch | 32 ++++++++++++++++++++++
- meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb    |  8 ++++--
- 2 files changed, 37 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-support/sqlite/sqlite-2.8.17/0001-shell.c-Fix-format-not-a-string-literal-warning.patch
+ .../xmlstarlet/{xmlstarlet_1.5.0.bb => xmlstarlet_1.6.1.bb}   | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+ rename meta-oe/recipes-support/xmlstarlet/{xmlstarlet_1.5.0.bb => xmlstarlet_1.6.1.bb} (69%)
 
-diff --git a/meta-oe/recipes-support/sqlite/sqlite-2.8.17/0001-shell.c-Fix-format-not-a-string-literal-warning.patch b/meta-oe/recipes-support/sqlite/sqlite-2.8.17/0001-shell.c-Fix-format-not-a-string-literal-warning.patch
-new file mode 100644
-index 000000000..c5d7c0c81
---- /dev/null
-+++ b/meta-oe/recipes-support/sqlite/sqlite-2.8.17/0001-shell.c-Fix-format-not-a-string-literal-warning.patch
-@@ -0,0 +1,32 @@
-+From 443980ddc82fb40e2e1f9544f2be169bd23dd246 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 17 Jun 2017 16:49:24 -0700
-+Subject: [PATCH] shell.c:  Fix format not a string literal warning
-+
-+src/shell.c:695:20: error: format not a string literal and no format arguments [-Werror=format-security]
-+|      fprintf(stderr,zHelp);
-+|                     ^~~~~
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/shell.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/shell.c b/src/shell.c
-+index bb46c49..3c6fe0f 100644
-+--- a/src/shell.c
-++++ b/src/shell.c
-+@@ -692,7 +692,7 @@ static int do_meta_command(char *zLine, struct callback_data *p){
-+   }else
-+ 
-+   if( c=='h' && strncmp(azArg[0], "help", n)==0 ){
-+-    fprintf(stderr,zHelp);
-++    fprintf(stderr, "%s", zHelp);
-+   }else
-+ 
-+   if( c=='i' && strncmp(azArg[0], "indices", n)==0 && nArg>1 ){
-+-- 
-+2.13.1
-+
-diff --git a/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb b/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-index e6e14c2ad..501c0e3e7 100644
---- a/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-+++ b/meta-oe/recipes-support/sqlite/sqlite_2.8.17.bb
-@@ -8,9 +8,11 @@ LIC_FILES_CHKSUM = "file://src/main.c;beginline=1;endline=10;md5=e98469a8efa024a
- PR = "r7"
+diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+similarity index 69%
+rename from meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
+rename to meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+index bf99aff43..e3d52e616 100644
+--- a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
++++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
+@@ -15,8 +15,8 @@ DEPENDS = "libxml2 libxslt"
+ SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BP}.tar.gz \
+            file://configure.ac.patch \
+            file://0001-usage2c.awk-fix-wrong-basename-regexp.patch"
+-SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
+-SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af49fceb303f84da7214779ccf99fffc6bbba"
++SRC_URI[md5sum] = "f3c5dfa3b1a2ee06cd57c255cc8b70a0"
++SRC_URI[sha256sum] = "15d838c4f3375332fd95554619179b69e4ec91418a3a5296e7c631b7ed19e7ca"
  
- SRC_URI = "http://www.hwaci.com/sw/sqlite/sqlite-${PV}.tar.gz \
--    file://mainmk_build_dynamic.patch \
--    file://mainmk_no_tcl.patch \
--    file://sqlite.pc"
-+           file://mainmk_build_dynamic.patch \
-+           file://mainmk_no_tcl.patch \
-+           file://sqlite.pc \
-+           file://0001-shell.c-Fix-format-not-a-string-literal-warning.patch \
-+           "
+ inherit autotools
  
- SOURCES = "attach.o auth.o btree.o btree_rb.o build.o copy.o date.o delete.o \
-            expr.o func.o hash.o insert.o main.o opcodes.o os.o pager.o \
+@@ -24,10 +24,3 @@ inherit autotools
+ EXTRA_OECONF="--disable-build-docs \
+   --with-libxml-prefix=${STAGING_LIBDIR}/.. \
+   --with-libxslt-prefix=${STAGING_LIBDIR}/.."
+-
+-#Makefile:2116: recipe for target 'src/elem-usage.c' failed
+-#make[1]: *** [src/elem-usage.c] Error 1
+-#/bin/bash: src/escape-usage.c: No such file or directory
+-#Makefile:2116: recipe for target 'src/escape-usage.c' failed
+-#make[1]: *** [src/escape-usage.c] Error 1
+-PARALLEL_MAKE = ""
 -- 
 2.13.1
 
