@@ -1,45 +1,39 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 953BF71AB5;
-	Mon, 19 Jun 2017 09:27:31 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id x70so73455462wme.0;
-	Mon, 19 Jun 2017 02:27:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=LprvQWYJfW9AtrL0JGTiqBZK6Ls31tQZDdyQ4WvM8XI=;
-	b=KkKYn7hvfi8DDidaj4UKGzvlf37o1BEqIhZxx0f3SrkflIz5ZTIXWFgokKV6GZgufk
-	RDK6vUYfSMzHrCs8Ur/UX79ToagTumYQl41p9qOuC0FvNJZ33UyTKG4HXaYpdvTLQNjP
-	YwGnGjVYoBjvIcm48ptelATVhmq7G1qMhb4GoBDoO4kPRyxf35chTEivMESg4CzqVwy6
-	IVJ+DlpYOw7yChi69sNiJvrWi5I1qodC2qv16yFaRpDSOViAFUZBAo6TXCMddqLwPH/6
-	vATwB3uuDoebEQ5mjG32sfqyxv06Esnu3kp2p3y+UtpGDcV2/IgVD+suxPN4Kbovx3z4
-	2d4w==
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A8B0271AC1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Jun 2017 10:24:49 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id d17so16044718wme.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Jun 2017 03:24:51 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=LprvQWYJfW9AtrL0JGTiqBZK6Ls31tQZDdyQ4WvM8XI=;
-	b=QMqW973W9Zomb3hDE/W9+dc59SgKQwunze8VpYVYeOvzLX/fKy7oVO5+qit5+wYYFN
-	ojZYzliq3FXW86GhRaSzf6LDTd9UvXFf8T3ytp4xa3kMvQ/5F5KJB0pJO8IiCLFAr9jH
-	kvOXwYYdTpdOYb7b89uVdvOKOTX6BRjCIZntsIn5zStIL1zJHnhrFgh+I/v1QJQZgdtd
-	4rGjupgsZDJOSc0CtIlHtV/ACKF0xKhR8aW2ecjQdI7I0w09QgOaLk0Y5GEIKQJLKcsa
-	T3foCB9uZt5rC81/ZpjiRJ9ADCMxSUZFHHXK/E47yiyJHnNEmkHBEh2niNUPsI6Hw2AX
-	aHoA==
-X-Gm-Message-State: AKS2vOygwlYshNot7GT1qUFsCwQE9cvGnuRm9CkPi04TZpBR1Z+NvNmZ
-	pPFVVXdkkmdE5/nY3kaWptUnQYc4tw==
-X-Received: by 10.80.160.231 with SMTP id 94mr16155493edo.173.1497864451779;
-	Mon, 19 Jun 2017 02:27:31 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=Miocc1Hz+kejdKHXktMvzMkYOK8kt88Oc5Rj3siF3kk=;
+	b=IFDQpAGJ/PqBBrItaMs3JSPBsdS9vRtU1RdCOxoohag93E6nZ0xD+lSGz0V4HNTrMo
+	JuQPzk0lsrN8+REdcGw7PuMfdLWfxTaqf79m2jS12bvQ68+GR8qW0KvJXH21z2KAwhhC
+	qVrb+n3mG5dXwYKUhjxT0KgLz6PzY9K1v7qpuZ61pmxOjvVD9P8+MLu9CmBjhmFLwDwM
+	cFi3LB7DsyPMl+EfAX0p0IOA8TbGCUK/sRZ41JS3J6ej953mX756BCSZ7p08oFwqJ0gF
+	+2Zcp7OB0Mzt4QEP4Cx+T8WtZqDJkxxY9NXpfdEd+G5N2FAU6J/S48X9lllDqGzWIPyK
+	+WLw==
+X-Gm-Message-State: AKS2vOzSZqej5uIOOTTCKdgH6PIMQTrw8VnKK9eQaNIgHZgD1FcIxfaS
+	LjwgU9aipqXdc47oATA=
+X-Received: by 10.28.13.211 with SMTP id 202mr15002756wmn.23.1497867889013;
+	Mon, 19 Jun 2017 03:24:49 -0700 (PDT)
+Received: from tfsielt31850.tycofs.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	u80sm11601451wrb.1.2017.06.19.03.24.48
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 19 Jun 2017 03:24:48 -0700 (PDT)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Jun 2017 11:24:47 +0100
+Message-Id: <20170619102447.32569-1-git@andred.net>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 10.80.172.100 with HTTP; Mon, 19 Jun 2017 02:27:31 -0700 (PDT)
-In-Reply-To: <CA+chaQd-cdvNsrq=0MQDcZex3s2VHqG0vUxHnES5mmgio9a6wA@mail.gmail.com>
-References: <CA+chaQd-cdvNsrq=0MQDcZex3s2VHqG0vUxHnES5mmgio9a6wA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-Date: Mon, 19 Jun 2017 11:27:31 +0200
-Message-ID: <CAAQYJAuDz-Nwvv8w-G0Zj1PMWn4ggW18z=uPoiYbvM-ET0Jnig@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-06-18
+Subject: [meta-networking][PATCH] nftables: backport a few ICMP & ICMPv6 fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,490 +46,968 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jun 2017 09:27:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 19 Jun 2017 10:24:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Sun, Jun 18, 2017 at 10:19 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Firefox and chromium-* fixed few more to go, but not bad for big gcc
-> upgrade.
->
-> http://www.openembedded.org/wiki/Bitbake_World_Status
->
-> == Number of issues - stats ==
-> {| class='wikitable'
-> !|Date     !!colspan='3'|Failed tasks    !!|Signatures
-> !!colspan='14'|QA !!Comment
-> |-
-> || ||qemuarm ||qemux86 ||qemux86_64 ||all
-> ||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps ||version-going-backwards ||host-user-contaminated ||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path ||
-> |-
->
-> ||2017-06-18 ||6 ||6 ||6 ||3 ||0 ||0 ||2 ||0 ||0 ||18 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||
-> |}
->
-> == Failed tasks 2017-06-18 ==
->
-> INFO: jenkins-job.sh-1.8.23 Complete log available at
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170618_101835.log
->
-> === common (4) ===
->     *
-> meta-openembedded/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb:do_install
->     *
-> meta-openembedded/meta-networking/recipes-daemons/squid/squid_3.5.25.bb:do_compile
->     *
-> meta-smartphone/meta-shr/recipes-shr/3rdparty/omhacks_git.bb:do_compile
->     *
-> virtual:klibc:meta-openembedded/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb:do_compile
+From: André Draszik <adraszik@tycoint.com>
 
+- assign network ctx for ICMP & ICMPv6
+- additional ICMPv6 types
+- allow update of net base w. meta l4proto ipv6-icmp
+- l4 proto fixes
 
-I'll send a one-liner fix for gcc7 later today.
-Cheers
-Andrea
->
-> === common-x86 (2) ===
->     * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
->     *
-> openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.12.0.bb:do_compile_ptest_base
->
-> === qemuarm (2) ===
->     *
-> meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb:do_compile
->     *
-> meta-openembedded/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb:do_configure
->
-> === qemux86 (0) ===
->
-> === qemux86_64 (0) ===
->
-> === Number of failed tasks (18) ===
-> {| class=wikitable
-> |-
-> || qemuarm || 6 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170617_234735.log/
-> || http://errors.yoctoproject.org/Errors/Build/39738/
-> |-
-> || qemux86 || 6 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170617_233459.log/
-> || http://errors.yoctoproject.org/Errors/Build/39739/
-> |-
-> || qemux86_64 || 6 ||
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170618_042946.log/
-> || http://errors.yoctoproject.org/Errors/Build/39741/
-> |}
->
-> === PNBLACKLISTs (15) ===
->
-> === QA issues (20) ===
-> {| class=wikitable
-> !| Count ||Issue
->
-> |-
-> ||0 ||already-stripped
-> |-
-> ||0 ||build-deps
-> |-
-> ||0 ||compile-host-path
-> |-
-> ||0 ||file-rdeps
-> |-
-> ||0 ||host-user-contaminated
-> |-
-> ||0 ||installed-vs-shipped
-> |-
-> ||0 ||invalid-pkgconfig
-> |-
-> ||0 ||ldflags
-> |-
-> ||0 ||libdir
-> |-
-> ||0 ||pkgname
-> |-
-> ||0 ||symlink-to-sysroot
-> |-
-> ||0 ||unknown-configure-option
-> |-
-> ||18 ||version-going-backwards
-> |-
-> ||2 ||textrel
-> |}
->
->
->
-> === Incorrect PACKAGE_ARCH or sstate signatures (3) ===
->
-> Complete log:
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170618_014055.log/
->     * ERROR: 3 issues were found in these recipes: open-vm-tools
->
->     * ERROR: 1 errors found in signatures.qemux86.do_configure.sigdata.log
->     * ERROR: 1 errors found in
-> signatures.qemux86.do_populate_sysroot.sigdata.log
->     * ERROR: 1 errors found in
-> signatures.qemux86.do_package_write_ipk.sigdata.log
->
->     * ERROR: open-vm-tools different signature for task do_configure.sigdata
-> between qemux86copy and qemux86
->     * ERROR: 1 errors found in
-> /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_configure.sigdata.log
->     * ERROR: open-vm-tools different signature for task
-> do_populate_sysroot.sigdata between qemux86copy and qemux86
->     * ERROR: 1 errors found in
-> /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_populate_sysroot.sigdata.log
->     * ERROR: open-vm-tools different signature for task
-> do_package_write_ipk.sigdata between qemux86copy and qemux86
->     * ERROR: 1 errors found in
-> /home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1497786055/signatures.qemux86.do_package_write_ipk.sigdata.log
->     * ERROR: 3 issues were found in these recipes: open-vm-tools
->
->
-> PNBLACKLISTs:
-> openembedded-core/:
-> meta-browser:
-> recipes-browser/chromium/cef3_280796.bb:PNBLACKLIST[cef3] ?= "BROKEN: fails
-> to build with gcc-6"
-> meta-openembedded:
-> meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACKLIST[lksctp-tools]
-> ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails to
-> link against sctp_connectx symbol", '', d)}"
-> meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb:PNBLACKLIST[bluez-hcidump]
-> ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb:PNBLACKLIST[bluez4] ?=
-> "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb:PNBLACKLIST[gst-plugin-bluetooth]
-> ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb:PNBLACKLIST[libdbus-c++] ?=
-> "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/130644/ - the recipe will be
-> removed on 2017-09-01 unless the issue is fixed"
-> meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb:PNBLACKLIST[libsexy] ?=
-> "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/130607/ - the recipe will be
-> removed on 2017-09-01 unless the issue is fixed"
-> meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb:PNBLACKLIST[xf86-video-geode]
-> ?= "BROKEN, fails to build - the recipe will be removed on 2017-09-01 unless
-> the issue is fixed"
-> meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb:PNBLACKLIST[foxtrotgps]
-> ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-navigation/gypsy/gypsy.inc:PNBLACKLIST[gypsy] ?=
-> "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-navigation/navit/navit.inc:PNBLACKLIST[navit] ?=
-> "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb:PNBLACKLIST[libsyncml]
-> ?= "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with
-> bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
-> meta-qt5:
-> meta-smartphone:
-> meta-shr/recipes-shr/3rdparty/libsensmon_git.bb:PNBLACKLIST[libsensmon] ?=
-> "BROKEN: not compatible with newer vala,
-> http://errors.yoctoproject.org/Errors/Details/143058/"
-> meta-webos-ports:
-> meta-luneos/recipes-luneos/luna-webappmanager/luna-webappmanager.bb:PNBLACKLIST[luna-webappmanager]
-> ?= "BROKEN: needs to be adapted to new qt-5.7"
-> meta-luneui/recipes-luneui/luna-next/luna-next.bb:PNBLACKLIST[luna-next] ?=
-> "BROKEN: needs to be adapted to new qtwayland-5.7"
-> PNBLACKLIST[android-system] = "depends on lxc from meta-virtualiazation
-> which isn't included in my world builds"
-> PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be tested
-> so much"
-> PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be tested
-> so much"
-> PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be tested
-> so much"
-> PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be tested
-> so much"
-> PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be tested
-> so much"
-> PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-> directory in /home/builder/poky :/"
-> PNBLACKLIST[linux-yocto-tiny-kexecboot] = "does weird sh!t breaking other
-> kernels and modules - broken for years"
-> PNBLACKLIST[linux-yocto-tiny] = "does weird sh!t breaking other kernels and
-> modules - broken for years"
->
->
-> QA issues by type:
-> count: 0 issue: already-stripped
->
->
-> count: 0 issue: libdir
->
->
-> count: 2 issue: textrel
-> chromium-54.0.2810.2: ELF binary
-> '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
-> has relocations in .text [textrel]
-> chromium-wayland-53.0.2785.143: ELF binary
-> '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
-> has relocations in .text [textrel]
->
->
-> count: 0 issue: build-deps
->
->
-> count: 0 issue: file-rdeps
->
->
-> count: 18 issue: version-going-backwards
-> firefox-45.9.0esr: Package version for package firefox-dbg went backwards
-> which would break package feeds from (0:45.9.0esr-r0.3 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-dbg went backwards
-> which would break package feeds from (0:45.9.0esr-r0.4 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-dbg went backwards
-> which would break package feeds from (0:45.9.0esr-r0.5 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-dev went backwards
-> which would break package feeds from (0:45.9.0esr-r0.3 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-dev went backwards
-> which would break package feeds from (0:45.9.0esr-r0.4 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-dev went backwards
-> which would break package feeds from (0:45.9.0esr-r0.5 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-doc went backwards
-> which would break package feeds from (0:45.9.0esr-r0.3 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-doc went backwards
-> which would break package feeds from (0:45.9.0esr-r0.4 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-doc went backwards
-> which would break package feeds from (0:45.9.0esr-r0.5 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-locale went backwards
-> which would break package feeds from (0:45.9.0esr-r0.3 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-locale went backwards
-> which would break package feeds from (0:45.9.0esr-r0.4 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-locale went backwards
-> which would break package feeds from (0:45.9.0esr-r0.5 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-staticdev went
-> backwards which would break package feeds from (0:45.9.0esr-r0.3 to
-> 0:45.9.0esr-r0.0) [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-staticdev went
-> backwards which would break package feeds from (0:45.9.0esr-r0.4 to
-> 0:45.9.0esr-r0.0) [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox-staticdev went
-> backwards which would break package feeds from (0:45.9.0esr-r0.5 to
-> 0:45.9.0esr-r0.0) [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox went backwards which
-> would break package feeds from (0:45.9.0esr-r0.3 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox went backwards which
-> would break package feeds from (0:45.9.0esr-r0.4 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
-> firefox-45.9.0esr: Package version for package firefox went backwards which
-> would break package feeds from (0:45.9.0esr-r0.5 to 0:45.9.0esr-r0.0)
-> [version-going-backwards]
->
->
-> count: 0 issue: host-user-contaminated
->
->
-> count: 0 issue: installed-vs-shipped
->
->
-> count: 0 issue: unknown-configure-option
->
->
-> count: 0 issue: symlink-to-sysroot
->
->
-> count: 0 issue: invalid-pkgconfig
->
->
-> count: 0 issue: pkgname
->
->
-> count: 0 issue: ldflags
->
->
-> count: 0 issue: compile-host-path
->
->
->
-> == Tested changes (not included in master yet) - bitbake ==
->
-> latest upstream commit:
-> 5639faa cooker: ensure graceful exit after exception during BuildCompleted
-> handler
-> not included in master yet:
-> b65315d world-image: add extra target
->
-> == Tested changes (not included in master yet) - openembedded-core ==
-> latest upstream commit:
-> 1d9a88f ovmf: fix secureboot PACKAGECONFIG + OpenSSL update
-> not included in master yet:
-> 848893d v86d,qemuboot-x86.inc: use
-> KERNEL_MODULE_AUTOLOAD+KERNEL_MODULE_PROBECONF for uvesafb instead of
-> fbsetup init script
-> 645cace sstate-sysroot-cruft.sh: Extend the whitelist
-> ec4fab2 report-error: Allow to upload reports automatically
-> 1284cd0 buildhistory.bbclass: metadata-revs show repo parent
-> b84b7e7 metadata-revs: provide more information
-> 2babc63 qemux86: Add identical qemux86copy variant for tests
->
-> == Tested changes (not included in master yet) - meta-openembedded ==
->
-> latest upstream commit:
-> d3dd8bc fuse: fix fetcher error.
-> not included in master yet:
-> a98cf68 dnsmasq: disable the service by default
-> 3191acb freeradius: add new recipe
-> bd90ccc keepalived: add new recipe
-> 171dca1 vblade: update to version 22
-> 07eccbf geoipupdate: 2.2.2 -> 2.3.1
-> abf6ee3 ifenslave: 2.7 -> 2.9
-> a743af5 drbd-utils: remove /var/lock to avoid conflict
-> 7e5f536 wireguard: bump version to latest snapshot 0.0.20170517
-> 9ecb0d6 opensaf: Add -latomic to LDFLAGS
-> 12a4da1 open-isns: fix QA issue
-> 431bad1 dante: fix unknown-configure-option QA issue
-> 0b1195e snort: enable static daq
-> c8257b2 net-snmp: supported cross compile for the perl embedded and perl
-> modules
-> 4962077 traceroute: Move manual pages from mandir to man8 under it
-> e90e1d0 nopoll: Disable doc generation
-> a319386 cifs-utils 6.6 -> 6.7
-> 00b9dd8 openvpn: Upgrade 2.3.9 -> 2.4.2
-> e68ed29 proftpd: Update to 1.3.6 release
-> 0486de7 samba: Fix build with musl
-> b4ae520 wireshark: Upgrade to 2.2.7
-> 8ca9eb3 ippool: add new recipe
-> d928074 libdevmapper: sync with lvm2 2.02.171
-> 3e6defe samba: upgrade to 4.6.5
-> 24b2acd open-vm-tools: add recipe from meat-foss-openswitch
-> 9fd06cf open-vm-tools: add missing pkgconfig dependency
-> c6f14e2 open-vm-tools: add missing glib-2.0-native dependency
-> c69c95b open-vm-tools: clarify and expand licensing
-> 971fcf2 open-vm-tools: base_contains --> bb.utils.contains
-> 970a4c6 open-vm-tools: update version to 10.1.5
-> 640a861 open-vm-tools: don't use mspack
-> 29971b1 open-vm-tools: don't use dnet-config
-> 96bc53f open-vm-tools: add #include to fix build break
-> bd816a1 open-vm-tools: add missing X11 dependencies
-> e7f3c42 open-vm-tools: remove kernel module logic
-> 629ec5d open-vm-tools: line up configure options
-> 74e6748 open-vm-tools: support FUSE
-> ebee20a open-vm-tools: style changes
-> 9f8b117 mercurial: CVE-2017-9462
-> c59d688 fwts: Bump SRCREV to latest past 17.03.00 release
-> 56d8261 networkmanager: add support for systemd-resolved
-> dcf1881 iscsi-initiator-utils: do not regenerate prom_lex.c
-> 404fbbc rrdtool: allow configuration to disable nls
-> 477ab14 passwdqc: add new recipe and replace pam-passwdqc
-> 224e1ca libfile-slurp-perl: add new recipe
-> 50e9759 bdwgc: add a recipe from oe-core
-> 31932a4 kconfig-frontends: Add recipe
-> c8a7884 kconfig-frontends: Update to 4.11.0.1
-> cb0d915 python-astroid: update to version 1.5.3
-> e4495f7 python-chardet: update to version 3.0.4
-> 67944a7 python-cmd2: update to version 0.7.2
-> 601e007 python-lxml: update to version 3.8.0
-> a7449d3 python-wrapt: update to version 1.10.10
-> 2aa4b58 python-pbr: update to version 3.0.1
-> f059286 python-jsonpatch: update to version 1.16
-> fbad7ad python-monotonic: update to version 1.3
-> b173adc python-sqlalchemy: update to version 1.1.10
-> 04d4814 python-gevent: update to version 1.2.2
-> 78883d4 python-serpent: update to version 1.22
-> ee16911 python-selectors34: update to version 1.2
-> 36acb7b python-py: update to version 1.4.34
-> 9581c56 python-isort: update to version 4.2.15
-> 2104d4a python-unidiff: update to version 0.5.4
-> 5d13388 python-gsocketpool: update to version 0.1.6
-> 9b7b0cb python-zopeinterface: update to version 4.4.2
-> f812ba8 python-urllib3: update to version 1.21.1
-> 627d746 python-cryptography-vectors: update to version 1.9
-> 472fd42 python-cryptography: update to version 1.9
-> 4becac1 python3-multidict: update to version 2.1.6
-> 322f7b5 python-pybind11: update to version 2.1.1
-> 48cc6c9 python-flask: update to version 0.12.2
-> 0aa9ccb python-flask-pymongo: update to version 0.5.1
-> 6bf4333 python-lazy-object-proxy: update to version 1.3.1
-> 6f61cab python-mprpc: update to version 0.1.14
-> c7c3608 python-parse: update to version 1.8.2
-> a5cf9e0 python-prompt-toolkit: update to version 1.0.14
-> 1ab3535 python-pytest: update to version 3.1.2
-> 60d1607 python-paho-mqtt: update to version 1.2.3
-> 60f9b9f nginx: update to version 1.13.1
-> b2ed4db libvncserver: upgrade to 0.9.11
-> f43c9ff xfsprogs: Remove .la files in ${libdir}
-> aa3fbfc freeradius: Upgrade to 3.0.14
-> 1f407d5 ssiapi: Fix build with gcc7 and musl
-> 3d6c8ed vlan: Fix build with security flags turned on
-> 8c580ea relayd: Upgrade to latest
-> 43a3bfc openocd: Fix build with gcc7
-> dc42876 tiobench: Fix build with hardening flags
-> b973bcb relayd: Fix build with hardening flags and glibc
-> 242ee41 ruli: Fix build with hardening flags
-> d639a00 python-setuptools-scm: update to version 1.15.6
-> cda8b4f recipes: remove blacklisted recipes
->
-> == Tested changes (not included in master yet) - meta-qt5 ==
-> latest upstream commit:
-> 6605c48 python-pyqt5: Add recipe.
-> not included in master yet:
-> 1c80edb Upgrade to Qt 5.9.0
-> 8be83b0 qtbase: respect "ld-is-gold" DISTRO_FEATURES
->
-> == Tested changes (not included in master yet) - meta-browser ==
->
-> latest upstream commit:
-> 880a7bd Revert "firefox: Use system-wide cairo instead of built-in one"
-> not included in master yet:
-> 05e7482 gnome-settings-daemon: remove the bbappend for removed recipe
-> a7b0b40 firefox-l10n.inc: mangle download filename instead of DL_DIR
-> 39c0a62 chromium(-wayland): Fix build with gcc7
-> 3ebbb82 firefox: fix build with gcc7
->
-> == Tested changes (not included in master yet) - meta-webos-ports ==
-> latest upstream commit:
-> 47091c6 ofono: Use Mer's 1.19 and include fix
-> not included in master yet:
-> d23aeb0 mesa: remove --with-llvm-prefix in meta-luneui instead of
-> meta-luneos
-> 47ebb4f README: update to depend on master branches
-> 29413ad qtbase: enable fontconfig
-> a457d20 qtwayland, qtwebengine: use webOS-ports/master-next branch
-> compatible with 5.7
-> e1f0c7e luna-next: Make compatible with Qt 5.7
-> f557d2e qtwayland, qtwebengine: temporary drop bbappend
-> 013635d luna-sysservice: Fix build with qt 5.7
-> 426a038 luna-next, luna-webappmanager: temporary drop from image
-> 0fe78d3 packagegroup-luneos-development: drop qt5-opengles2-test
-> 4d68be8 libconnman-qt: replace with libconnman-qt5 from meta-qt5
-> 261c358 libqofono: use the recipe from meta-qt5
-> bddfec2 qtlocation: drop invalid and unused OE_LUNEOS_ENABLED option
-> 3aba05c phonesim: fix build with Qt 5.8
-> 7f330a0 qtbase: enable xkbcommon-evdev for qtwayland
-> 8e72c39 qt5-qpa-hwcomposer-plugi: Fix build with Qt 5.8
-> 178db00 packagegroup-luneos-extended: drop qtscenegraph-adaptation
->
-> == Tested changes (not included in master yet) - meta-smartphone ==
->
-> latest upstream commit:
-> be8374b libsensmon: blacklist due to newer vala incompatibility
-> not included in master yet:
-> a41a338 meta-shr, meta-fso: remove blacklisted recipes
->
->
->
->
-> --
-> _______________________________________________
-> Openembedded-core mailing list
-> Openembedded-core@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->
+The initial trigger was that ICMPv6 type 143
+(mld2-listener-report) wasn't working as expected.
+
+Signed-off-by: André Draszik <adraszik@tycoint.com>
+Acked-by: Sylvain Lemieux <slemieux@tycoint.com>
+---
+ ...licit-network-ctx-assignment-for-icmp-icm.patch | 323 +++++++++++++++++++++
+ .../0002-proto-Add-some-exotic-ICMPv6-types.patch  | 147 ++++++++++
+ ...oad-split-ll-proto-dependency-into-helper.patch |  62 ++++
+ ...update-of-net-base-w.-meta-l4proto-icmpv6.patch |  65 +++++
+ ...itch-implicit-dependencies-to-meta-l4prot.patch |  98 +++++++
+ ...orce-ip-ip6-protocol-depending-on-icmp-or.patch |  84 ++++++
+ ...ch-implicit-dependencies-to-meta-l4proto-.patch |  86 ++++++
+ .../recipes-filter/nftables/nftables_0.7.bb        |   9 +
+ 8 files changed, 874 insertions(+)
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0001-payload-explicit-network-ctx-assignment-for-icmp-icm.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0002-proto-Add-some-exotic-ICMPv6-types.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0003-payload-split-ll-proto-dependency-into-helper.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0004-src-allow-update-of-net-base-w.-meta-l4proto-icmpv6.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0005-src-ipv6-switch-implicit-dependencies-to-meta-l4prot.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0006-payload-enforce-ip-ip6-protocol-depending-on-icmp-or.patch
+ create mode 100644 meta-networking/recipes-filter/nftables/files/0007-src-ip-switch-implicit-dependencies-to-meta-l4proto-.patch
+
+diff --git a/meta-networking/recipes-filter/nftables/files/0001-payload-explicit-network-ctx-assignment-for-icmp-icm.patch b/meta-networking/recipes-filter/nftables/files/0001-payload-explicit-network-ctx-assignment-for-icmp-icm.patch
+new file mode 100644
+index 000000000..86a3d53df
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0001-payload-explicit-network-ctx-assignment-for-icmp-icm.patch
+@@ -0,0 +1,323 @@
++From 0011985554e269e1cc8f8e5b41eb9dcd795ebe8c Mon Sep 17 00:00:00 2001
++From: Arturo Borrero Gonzalez <arturo@debian.org>
++Date: Wed, 25 Jan 2017 12:51:08 +0100
++Subject: [PATCH] payload: explicit network ctx assignment for icmp/icmp6 in
++ special families
++
++In the inet, bridge and netdev families, we can add rules like these:
++
++% nft add rule inet t c ip protocol icmp icmp type echo-request
++% nft add rule inet t c ip6 nexthdr icmpv6 icmpv6 type echo-request
++
++However, when we print the ruleset:
++
++% nft list ruleset
++table inet t {
++	chain c {
++		icmpv6 type echo-request
++		icmp type echo-request
++	}
++}
++
++These rules we obtain can't be added again:
++
++% nft add rule inet t c icmp type echo-request
++<cmdline>:1:19-27: Error: conflicting protocols specified: inet-service vs. icmp
++add rule inet t c icmp type echo-request
++                  ^^^^^^^^^
++
++% nft add rule inet t c icmpv6 type echo-request
++<cmdline>:1:19-29: Error: conflicting protocols specified: inet-service vs. icmpv6
++add rule inet t c icmpv6 type echo-request
++                  ^^^^^^^^^^^
++
++Since I wouldn't expect an IP packet carrying ICMPv6, or IPv6 packet
++carrying ICMP, if the link layer is inet, the network layer protocol context
++can be safely update to 'ip' or 'ip6'.
++
++Moreover, nft currently generates a 'meta nfproto ipvX' depedency when
++using icmp or icmp6 in the inet family, and similar in netdev and bridge
++families.
++
++While at it, a bit of code factorization is introduced.
++
++Fixes: https://bugzilla.netfilter.org/show_bug.cgi?id=1073
++Signed-off-by: Arturo Borrero Gonzalez <arturo@debian.org>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/payload.c                       | 70 ++++++++++++++++---------------------
++ tests/py/any/icmpX.t.netdev         |  8 +++++
++ tests/py/any/icmpX.t.netdev.payload | 36 +++++++++++++++++++
++ tests/py/bridge/icmpX.t             |  8 +++++
++ tests/py/bridge/icmpX.t.payload     | 36 +++++++++++++++++++
++ tests/py/inet/icmpX.t               |  8 +++++
++ tests/py/inet/icmpX.t.payload       | 36 +++++++++++++++++++
++ 7 files changed, 162 insertions(+), 40 deletions(-)
++ create mode 100644 tests/py/any/icmpX.t.netdev
++ create mode 100644 tests/py/any/icmpX.t.netdev.payload
++ create mode 100644 tests/py/bridge/icmpX.t
++ create mode 100644 tests/py/bridge/icmpX.t.payload
++ create mode 100644 tests/py/inet/icmpX.t
++ create mode 100644 tests/py/inet/icmpX.t.payload
++
++diff --git a/src/payload.c b/src/payload.c
++index af533b2..74f8254 100644
++--- a/src/payload.c
+++++ b/src/payload.c
++@@ -223,6 +223,34 @@ static int payload_add_dependency(struct eval_ctx *ctx,
++ 	return 0;
++ }
++ 
+++static const struct proto_desc *
+++payload_gen_special_dependency(struct eval_ctx *ctx, const struct expr *expr)
+++{
+++	switch (expr->payload.base) {
+++	case PROTO_BASE_LL_HDR:
+++		switch (ctx->pctx.family) {
+++		case NFPROTO_INET:
+++			return &proto_inet;
+++		case NFPROTO_BRIDGE:
+++			return &proto_eth;
+++		case NFPROTO_NETDEV:
+++			return &proto_netdev;
+++		default:
+++			break;
+++		}
+++		break;
+++	case PROTO_BASE_TRANSPORT_HDR:
+++		if (expr->payload.desc == &proto_icmp)
+++			return &proto_ip;
+++		if (expr->payload.desc == &proto_icmp6)
+++			return &proto_ip6;
+++		return &proto_inet_service;
+++	default:
+++		break;
+++	}
+++	return NULL;
+++}
+++
++ /**
++  * payload_gen_dependency - generate match expression on payload dependency
++  *
++@@ -276,46 +304,8 @@ int payload_gen_dependency(struct eval_ctx *ctx, const struct expr *expr,
++ 
++ 	desc = ctx->pctx.protocol[expr->payload.base - 1].desc;
++ 	/* Special case for mixed IPv4/IPv6 and bridge tables */
++-	if (desc == NULL) {
++-		switch (ctx->pctx.family) {
++-		case NFPROTO_INET:
++-			switch (expr->payload.base) {
++-			case PROTO_BASE_LL_HDR:
++-				desc = &proto_inet;
++-				break;
++-			case PROTO_BASE_TRANSPORT_HDR:
++-				desc = &proto_inet_service;
++-				break;
++-			default:
++-				break;
++-			}
++-			break;
++-		case NFPROTO_BRIDGE:
++-			switch (expr->payload.base) {
++-			case PROTO_BASE_LL_HDR:
++-				desc = &proto_eth;
++-				break;
++-			case PROTO_BASE_TRANSPORT_HDR:
++-				desc = &proto_inet_service;
++-				break;
++-			default:
++-				break;
++-			}
++-			break;
++-		case NFPROTO_NETDEV:
++-			switch (expr->payload.base) {
++-			case PROTO_BASE_LL_HDR:
++-				desc = &proto_netdev;
++-				break;
++-			case PROTO_BASE_TRANSPORT_HDR:
++-				desc = &proto_inet_service;
++-				break;
++-			default:
++-				break;
++-			}
++-			break;
++-		}
++-	}
+++	if (desc == NULL)
+++		desc = payload_gen_special_dependency(ctx, expr);
++ 
++ 	if (desc == NULL)
++ 		return expr_error(ctx->msgs, expr,
++diff --git a/tests/py/any/icmpX.t.netdev b/tests/py/any/icmpX.t.netdev
++new file mode 100644
++index 0000000..a327ce6
++--- /dev/null
+++++ b/tests/py/any/icmpX.t.netdev
++@@ -0,0 +1,8 @@
+++:ingress;type filter hook ingress device lo priority 0
+++
+++*netdev;test-netdev;ingress
+++
+++ip protocol icmp icmp type echo-request;ok;icmp type echo-request
+++icmp type echo-request;ok
+++ip6 nexthdr icmpv6 icmpv6 type echo-request;ok;icmpv6 type echo-request
+++icmpv6 type echo-request;ok
++diff --git a/tests/py/any/icmpX.t.netdev.payload b/tests/py/any/icmpX.t.netdev.payload
++new file mode 100644
++index 0000000..8b8107c
++--- /dev/null
+++++ b/tests/py/any/icmpX.t.netdev.payload
++@@ -0,0 +1,36 @@
+++# ip protocol icmp icmp type echo-request
+++netdev test-netdev ingress
+++  [ meta load protocol => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# icmp type echo-request
+++netdev test-netdev ingress
+++  [ meta load protocol => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# ip6 nexthdr icmpv6 icmpv6 type echo-request
+++netdev test-netdev ingress
+++  [ meta load protocol => reg 1 ]
+++  [ cmp eq reg 1 0x0000dd86 ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
+++# icmpv6 type echo-request
+++netdev test-netdev ingress
+++  [ meta load protocol => reg 1 ]
+++  [ cmp eq reg 1 0x0000dd86 ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
++diff --git a/tests/py/bridge/icmpX.t b/tests/py/bridge/icmpX.t
++new file mode 100644
++index 0000000..8c0a597
++--- /dev/null
+++++ b/tests/py/bridge/icmpX.t
++@@ -0,0 +1,8 @@
+++:input;type filter hook input priority 0
+++
+++*bridge;test-bridge;input
+++
+++ip protocol icmp icmp type echo-request;ok;icmp type echo-request
+++icmp type echo-request;ok
+++ip6 nexthdr icmpv6 icmpv6 type echo-request;ok;icmpv6 type echo-request
+++icmpv6 type echo-request;ok
++diff --git a/tests/py/bridge/icmpX.t.payload b/tests/py/bridge/icmpX.t.payload
++new file mode 100644
++index 0000000..19efdd8
++--- /dev/null
+++++ b/tests/py/bridge/icmpX.t.payload
++@@ -0,0 +1,36 @@
+++# ip protocol icmp icmp type echo-request
+++bridge test-bridge input
+++  [ payload load 2b @ link header + 12 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# icmp type echo-request
+++bridge test-bridge input
+++  [ payload load 2b @ link header + 12 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# ip6 nexthdr icmpv6 icmpv6 type echo-request
+++bridge test-bridge input
+++  [ payload load 2b @ link header + 12 => reg 1 ]
+++  [ cmp eq reg 1 0x0000dd86 ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
+++# icmpv6 type echo-request
+++bridge test-bridge input
+++  [ payload load 2b @ link header + 12 => reg 1 ]
+++  [ cmp eq reg 1 0x0000dd86 ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
++diff --git a/tests/py/inet/icmpX.t b/tests/py/inet/icmpX.t
++new file mode 100644
++index 0000000..1b467a1
++--- /dev/null
+++++ b/tests/py/inet/icmpX.t
++@@ -0,0 +1,8 @@
+++:input;type filter hook input priority 0
+++
+++*inet;test-inet;input
+++
+++ip protocol icmp icmp type echo-request;ok;icmp type echo-request
+++icmp type echo-request;ok
+++ip6 nexthdr icmpv6 icmpv6 type echo-request;ok;icmpv6 type echo-request
+++icmpv6 type echo-request;ok
++diff --git a/tests/py/inet/icmpX.t.payload b/tests/py/inet/icmpX.t.payload
++new file mode 100644
++index 0000000..81ca774
++--- /dev/null
+++++ b/tests/py/inet/icmpX.t.payload
++@@ -0,0 +1,36 @@
+++# ip protocol icmp icmp type echo-request
+++inet test-inet input
+++  [ meta load nfproto => reg 1 ]
+++  [ cmp eq reg 1 0x00000002 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# icmp type echo-request
+++inet test-inet input
+++  [ meta load nfproto => reg 1 ]
+++  [ cmp eq reg 1 0x00000002 ]
+++  [ payload load 1b @ network header + 9 => reg 1 ]
+++  [ cmp eq reg 1 0x00000001 ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000008 ]
+++
+++# ip6 nexthdr icmpv6 icmpv6 type echo-request
+++inet test-inet input
+++  [ meta load nfproto => reg 1 ]
+++  [ cmp eq reg 1 0x0000000a ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
+++# icmpv6 type echo-request
+++inet test-inet input
+++  [ meta load nfproto => reg 1 ]
+++  [ cmp eq reg 1 0x0000000a ]
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000080 ]
+++
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0002-proto-Add-some-exotic-ICMPv6-types.patch b/meta-networking/recipes-filter/nftables/files/0002-proto-Add-some-exotic-ICMPv6-types.patch
+new file mode 100644
+index 000000000..4d9e9d11a
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0002-proto-Add-some-exotic-ICMPv6-types.patch
+@@ -0,0 +1,147 @@
++From 9ade8fb75f8963375b45b3f2973b8bb7aa66ad76 Mon Sep 17 00:00:00 2001
++From: Phil Sutter <phil@nwl.cc>
++Date: Thu, 16 Mar 2017 13:43:20 +0100
++Subject: [PATCH] proto: Add some exotic ICMPv6 types
++
++This adds support for matching on inverse ND messages as defined by
++RFC3122 (not implemented in Linux) and MLDv2 as defined by RFC3810.
++
++Note that ICMPV6_MLD2_REPORT macro is defined in linux/icmpv6.h but
++including that header leads to conflicts with symbols defined in
++netinet/icmp6.h.
++
++In addition to the above, "mld-listener-done" is introduced as an alias
++for "mld-listener-reduction".
++
++Signed-off-by: Phil Sutter <phil@nwl.cc>
++Signed-off-by: Pablo Neira Ayuso <pablo@netfilter.org>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/proto.c                       |  8 ++++++++
++ tests/py/ip6/icmpv6.t             |  8 ++++++--
++ tests/py/ip6/icmpv6.t.payload.ip6 | 34 +++++++++++++++++++++++++++++++++-
++ 3 files changed, 47 insertions(+), 3 deletions(-)
++
++diff --git a/src/proto.c b/src/proto.c
++index fb96530..79e9dbf 100644
++--- a/src/proto.c
+++++ b/src/proto.c
++@@ -632,6 +632,10 @@ const struct proto_desc proto_ip = {
++ 
++ #include <netinet/icmp6.h>
++ 
+++#define IND_NEIGHBOR_SOLICIT	141
+++#define IND_NEIGHBOR_ADVERT	142
+++#define ICMPV6_MLD2_REPORT	143
+++
++ static const struct symbol_table icmp6_type_tbl = {
++ 	.base		= BASE_DECIMAL,
++ 	.symbols	= {
++@@ -643,6 +647,7 @@ static const struct symbol_table icmp6_type_tbl = {
++ 		SYMBOL("echo-reply",			ICMP6_ECHO_REPLY),
++ 		SYMBOL("mld-listener-query",		MLD_LISTENER_QUERY),
++ 		SYMBOL("mld-listener-report",		MLD_LISTENER_REPORT),
+++		SYMBOL("mld-listener-done",		MLD_LISTENER_REDUCTION),
++ 		SYMBOL("mld-listener-reduction",	MLD_LISTENER_REDUCTION),
++ 		SYMBOL("nd-router-solicit",		ND_ROUTER_SOLICIT),
++ 		SYMBOL("nd-router-advert",		ND_ROUTER_ADVERT),
++@@ -650,6 +655,9 @@ static const struct symbol_table icmp6_type_tbl = {
++ 		SYMBOL("nd-neighbor-advert",		ND_NEIGHBOR_ADVERT),
++ 		SYMBOL("nd-redirect",			ND_REDIRECT),
++ 		SYMBOL("router-renumbering",		ICMP6_ROUTER_RENUMBERING),
+++		SYMBOL("ind-neighbor-solicit",		IND_NEIGHBOR_SOLICIT),
+++		SYMBOL("ind-neighbor-advert",		IND_NEIGHBOR_ADVERT),
+++		SYMBOL("mld2-listener-report",		ICMPV6_MLD2_REPORT),
++ 		SYMBOL_LIST_END
++ 	},
++ };
++diff --git a/tests/py/ip6/icmpv6.t b/tests/py/ip6/icmpv6.t
++index afbd451..a898fe3 100644
++--- a/tests/py/ip6/icmpv6.t
+++++ b/tests/py/ip6/icmpv6.t
++@@ -11,7 +11,8 @@ icmpv6 type echo-request accept;ok
++ icmpv6 type echo-reply accept;ok
++ icmpv6 type mld-listener-query accept;ok
++ icmpv6 type mld-listener-report accept;ok
++-icmpv6 type mld-listener-reduction accept;ok
+++icmpv6 type mld-listener-done accept;ok
+++icmpv6 type mld-listener-reduction accept;ok;icmpv6 type mld-listener-done accept
++ icmpv6 type nd-router-solicit accept;ok
++ icmpv6 type nd-router-advert accept;ok
++ icmpv6 type nd-neighbor-solicit accept;ok
++@@ -19,8 +20,11 @@ icmpv6 type nd-neighbor-advert accept;ok
++ icmpv6 type nd-redirect accept;ok
++ icmpv6 type parameter-problem accept;ok
++ icmpv6 type router-renumbering accept;ok
+++icmpv6 type ind-neighbor-solicit accept;ok
+++icmpv6 type ind-neighbor-advert accept;ok
+++icmpv6 type mld2-listener-report accept;ok
++ icmpv6 type {destination-unreachable, time-exceeded, nd-router-solicit} accept;ok
++-icmpv6 type {router-renumbering, mld-listener-reduction, time-exceeded, nd-router-solicit} accept;ok
+++icmpv6 type {router-renumbering, mld-listener-done, time-exceeded, nd-router-solicit} accept;ok
++ icmpv6 type {mld-listener-query, time-exceeded, nd-router-advert} accept;ok
++ icmpv6 type != {mld-listener-query, time-exceeded, nd-router-advert} accept;ok
++ 
++diff --git a/tests/py/ip6/icmpv6.t.payload.ip6 b/tests/py/ip6/icmpv6.t.payload.ip6
++index 9fe2496..30f58ca 100644
++--- a/tests/py/ip6/icmpv6.t.payload.ip6
+++++ b/tests/py/ip6/icmpv6.t.payload.ip6
++@@ -54,6 +54,14 @@ ip6 test-ip6 input
++   [ cmp eq reg 1 0x00000083 ]
++   [ immediate reg 0 accept ]
++ 
+++# icmpv6 type mld-listener-done accept
+++ip6 test-ip6 input
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000084 ]
+++  [ immediate reg 0 accept ]
+++
++ # icmpv6 type mld-listener-reduction accept
++ ip6 test-ip6 input
++   [ payload load 1b @ network header + 6 => reg 1 ]
++@@ -118,6 +126,30 @@ ip6 test-ip6 input
++   [ cmp eq reg 1 0x0000008a ]
++   [ immediate reg 0 accept ]
++ 
+++# icmpv6 type ind-neighbor-solicit accept
+++ip6 test-ip6 input
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x0000008d ]
+++  [ immediate reg 0 accept ]
+++
+++# icmpv6 type ind-neighbor-advert accept
+++ip6 test-ip6 input
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x0000008e ]
+++  [ immediate reg 0 accept ]
+++
+++# icmpv6 type mld2-listener-report accept
+++ip6 test-ip6 input
+++  [ payload load 1b @ network header + 6 => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x0000008f ]
+++  [ immediate reg 0 accept ]
+++
++ # icmpv6 type {destination-unreachable, time-exceeded, nd-router-solicit} accept
++ __set%d test-ip6 3
++ __set%d test-ip6 0
++@@ -129,7 +161,7 @@ ip6 test-ip6 input
++   [ lookup reg 1 set __set%d ]
++   [ immediate reg 0 accept ]
++ 
++-# icmpv6 type {router-renumbering, mld-listener-reduction, time-exceeded, nd-router-solicit} accept
+++# icmpv6 type {router-renumbering, mld-listener-done, time-exceeded, nd-router-solicit} accept
++ __set%d test-ip6 3
++ __set%d test-ip6 0
++ 	element 0000008a  : 0 [end]	element 00000084  : 0 [end]	element 00000003  : 0 [end]	element 00000085  : 0 [end]
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0003-payload-split-ll-proto-dependency-into-helper.patch b/meta-networking/recipes-filter/nftables/files/0003-payload-split-ll-proto-dependency-into-helper.patch
+new file mode 100644
+index 000000000..50cac300e
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0003-payload-split-ll-proto-dependency-into-helper.patch
+@@ -0,0 +1,62 @@
++From 8d8cfe5ad6ca460a5262fb15fdbef3601058c784 Mon Sep 17 00:00:00 2001
++From: Florian Westphal <fw@strlen.de>
++Date: Thu, 18 May 2017 13:30:54 +0200
++Subject: [PATCH 1/4] payload: split ll proto dependency into helper
++
++will be re-used in folloup patch for icmp/icmpv6 depenency
++handling.
++
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/payload.c | 29 ++++++++++++++++++-----------
++ 1 file changed, 18 insertions(+), 11 deletions(-)
++
++diff --git a/src/payload.c b/src/payload.c
++index 55128fe..31e5a02 100644
++--- a/src/payload.c
+++++ b/src/payload.c
++@@ -224,21 +224,28 @@ static int payload_add_dependency(struct eval_ctx *ctx,
++ }
++ 
++ static const struct proto_desc *
+++payload_get_get_ll_hdr(const struct eval_ctx *ctx)
+++{
+++	switch (ctx->pctx.family) {
+++	case NFPROTO_INET:
+++		return &proto_inet;
+++	case NFPROTO_BRIDGE:
+++		return &proto_eth;
+++	case NFPROTO_NETDEV:
+++		return &proto_netdev;
+++	default:
+++		break;
+++	}
+++
+++	return NULL;
+++}
+++
+++static const struct proto_desc *
++ payload_gen_special_dependency(struct eval_ctx *ctx, const struct expr *expr)
++ {
++ 	switch (expr->payload.base) {
++ 	case PROTO_BASE_LL_HDR:
++-		switch (ctx->pctx.family) {
++-		case NFPROTO_INET:
++-			return &proto_inet;
++-		case NFPROTO_BRIDGE:
++-			return &proto_eth;
++-		case NFPROTO_NETDEV:
++-			return &proto_netdev;
++-		default:
++-			break;
++-		}
++-		break;
+++		return payload_get_get_ll_hdr(ctx);
++ 	case PROTO_BASE_TRANSPORT_HDR:
++ 		if (expr->payload.desc == &proto_icmp)
++ 			return &proto_ip;
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0004-src-allow-update-of-net-base-w.-meta-l4proto-icmpv6.patch b/meta-networking/recipes-filter/nftables/files/0004-src-allow-update-of-net-base-w.-meta-l4proto-icmpv6.patch
+new file mode 100644
+index 000000000..180edb350
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0004-src-allow-update-of-net-base-w.-meta-l4proto-icmpv6.patch
+@@ -0,0 +1,65 @@
++From 9a1f2bbf3cd2417e0c10d18578e224abe2071d68 Mon Sep 17 00:00:00 2001
++From: Florian Westphal <fw@strlen.de>
++Date: Tue, 21 Mar 2017 19:47:22 +0100
++Subject: [PATCH 2/4] src: allow update of net base w. meta l4proto icmpv6
++
++nft add rule ip6 f i meta l4proto ipv6-icmp icmpv6 type nd-router-advert
++<cmdline>:1:50-60: Error: conflicting protocols specified: unknown vs. icmpv6
++
++add icmpv6 to nexthdr list so base gets updated correctly.
++
++Reported-by: Thomas Woerner <twoerner@redhat.com>
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/proto.c                 | 1 +
++ tests/py/any/meta.t         | 1 +
++ tests/py/any/meta.t.payload | 7 +++++++
++ 3 files changed, 9 insertions(+)
++
++diff --git a/src/proto.c b/src/proto.c
++index 79e9dbf..fcdfbe7 100644
++--- a/src/proto.c
+++++ b/src/proto.c
++@@ -779,6 +779,7 @@ const struct proto_desc proto_inet_service = {
++ 		PROTO_LINK(IPPROTO_TCP,		&proto_tcp),
++ 		PROTO_LINK(IPPROTO_DCCP,	&proto_dccp),
++ 		PROTO_LINK(IPPROTO_SCTP,	&proto_sctp),
+++		PROTO_LINK(IPPROTO_ICMPV6,	&proto_icmp6),
++ 	},
++ 	.templates	= {
++ 		[0]	= PROTO_META_TEMPLATE("l4proto", &inet_protocol_type, NFT_META_L4PROTO, 8),
++diff --git a/tests/py/any/meta.t b/tests/py/any/meta.t
++index c3ac0a4..2ff942f 100644
++--- a/tests/py/any/meta.t
+++++ b/tests/py/any/meta.t
++@@ -38,6 +38,7 @@ meta l4proto { 33, 55, 67, 88};ok;meta l4proto { 33, 55, 67, 88}
++ meta l4proto != { 33, 55, 67, 88};ok
++ meta l4proto { 33-55};ok
++ meta l4proto != { 33-55};ok
+++meta l4proto ipv6-icmp icmpv6 type nd-router-advert;ok;icmpv6 type nd-router-advert
++ 
++ meta priority root;ok
++ meta priority none;ok
++diff --git a/tests/py/any/meta.t.payload b/tests/py/any/meta.t.payload
++index e432656..871f1ad 100644
++--- a/tests/py/any/meta.t.payload
+++++ b/tests/py/any/meta.t.payload
++@@ -187,6 +187,13 @@ ip test-ip4 input
++   [ byteorder reg 1 = hton(reg 1, 2, 1) ]
++   [ lookup reg 1 set __set%d 0x1 ]
++ 
+++# meta l4proto ipv6-icmp icmpv6 type nd-router-advert
+++ip test-ip4 input
+++  [ meta load l4proto => reg 1 ]
+++  [ cmp eq reg 1 0x0000003a ]
+++  [ payload load 1b @ transport header + 0 => reg 1 ]
+++  [ cmp eq reg 1 0x00000086 ]
+++
++ # meta mark 0x4
++ ip test-ip4 input
++   [ meta load mark => reg 1 ]
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0005-src-ipv6-switch-implicit-dependencies-to-meta-l4prot.patch b/meta-networking/recipes-filter/nftables/files/0005-src-ipv6-switch-implicit-dependencies-to-meta-l4prot.patch
+new file mode 100644
+index 000000000..f600ae05c
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0005-src-ipv6-switch-implicit-dependencies-to-meta-l4prot.patch
+@@ -0,0 +1,98 @@
++From 2366ed9ffcb4f5f5341f10f0a1d1a4688d37ad87 Mon Sep 17 00:00:00 2001
++From: Florian Westphal <fw@strlen.de>
++Date: Wed, 22 Mar 2017 15:08:48 +0100
++Subject: [PATCH 3/4] src: ipv6: switch implicit dependencies to meta l4proto
++
++when using rule like
++
++ip6 filter input tcp dport 22
++nft generates:
++  [ payload load 1b @ network header + 6 => reg 1 ]
++  [ cmp eq reg 1 0x00000006 ]
++  [ payload load 2b @ transport header + 2 => reg 1 ]
++  [ cmp eq reg 1 0x00001600 ]
++
++which is: ip6 filter input ip6 nexthdr tcp dport 22
++IOW, such a rule won't match if e.g. a fragment header is in place.
++
++This changes ip6_proto to use 'meta l4proto' which is the protocol header
++found by exthdr walk.
++
++A side effect is that for bridge we get a shorter dependency chain as it
++no longer needs to prepend 'ether proto ipv6' for old 'ip6 nexthdr' dep.
++
++Only problem:
++
++ip6 nexthdr tcp tcp dport 22
++will now inject a (useless) meta l4 dependency as ip6 nexthdr is no
++longer flagged as EXPR_F_PROTOCOL, to avoid this add a small helper
++that skips the unneded meta dependency in that case.
++
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/payload.c | 19 ++++++++++++++++++-
++ src/proto.c   |  2 +-
++ 2 files changed, 19 insertions(+), 2 deletions(-)
++
++diff --git a/src/payload.c b/src/payload.c
++index 31e5a02..38db15e 100644
++--- a/src/payload.c
+++++ b/src/payload.c
++@@ -117,6 +117,23 @@ static const struct expr_ops payload_expr_ops = {
++ 	.pctx_update	= payload_expr_pctx_update,
++ };
++ 
+++/*
+++ * ipv6 is special case, we normally use 'meta l4proto' to fetch the last
+++ * l4 header of the ipv6 extension header chain so we will also match
+++ * tcp after a fragmentation header, for instance.
+++ *
+++ * If user specifically asks for nexthdr x, treat is as a full
+++ * dependency rather than injecting another (useless) meta l4 one.
+++ */
+++static bool proto_key_is_protocol(const struct proto_desc *desc, unsigned int type)
+++{
+++	if (type == desc->protocol_key ||
+++	    (desc == &proto_ip6 && type == IP6HDR_NEXTHDR))
+++		return true;
+++
+++	return false;
+++}
+++
++ struct expr *payload_expr_alloc(const struct location *loc,
++ 				const struct proto_desc *desc,
++ 				unsigned int type)
++@@ -129,7 +146,7 @@ struct expr *payload_expr_alloc(const struct location *loc,
++ 	if (desc != NULL) {
++ 		tmpl = &desc->templates[type];
++ 		base = desc->base;
++-		if (type == desc->protocol_key)
+++		if (proto_key_is_protocol(desc, type))
++ 			flags = EXPR_F_PROTOCOL;
++ 	} else {
++ 		tmpl = &proto_unknown_template;
++diff --git a/src/proto.c b/src/proto.c
++index fcdfbe7..3b20a5f 100644
++--- a/src/proto.c
+++++ b/src/proto.c
++@@ -707,7 +707,6 @@ const struct proto_desc proto_icmp6 = {
++ const struct proto_desc proto_ip6 = {
++ 	.name		= "ip6",
++ 	.base		= PROTO_BASE_NETWORK_HDR,
++-	.protocol_key	= IP6HDR_NEXTHDR,
++ 	.protocols	= {
++ 		PROTO_LINK(IPPROTO_ESP,		&proto_esp),
++ 		PROTO_LINK(IPPROTO_AH,		&proto_ah),
++@@ -720,6 +719,7 @@ const struct proto_desc proto_ip6 = {
++ 		PROTO_LINK(IPPROTO_ICMPV6,	&proto_icmp6),
++ 	},
++ 	.templates	= {
+++		[0]	= PROTO_META_TEMPLATE("l4proto", &inet_protocol_type, NFT_META_L4PROTO, 8),
++ 		[IP6HDR_VERSION]	= HDR_BITFIELD("version", &integer_type, 0, 4),
++ 		[IP6HDR_DSCP]		= HDR_BITFIELD("dscp", &dscp_type, 4, 6),
++ 		[IP6HDR_ECN]		= HDR_BITFIELD("ecn", &ecn_type, 10, 2),
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0006-payload-enforce-ip-ip6-protocol-depending-on-icmp-or.patch b/meta-networking/recipes-filter/nftables/files/0006-payload-enforce-ip-ip6-protocol-depending-on-icmp-or.patch
+new file mode 100644
+index 000000000..00076d7ce
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0006-payload-enforce-ip-ip6-protocol-depending-on-icmp-or.patch
+@@ -0,0 +1,84 @@
++From f21a7a4849b50c30341ec571813bd7fe37040ad3 Mon Sep 17 00:00:00 2001
++From: Florian Westphal <fw@strlen.de>
++Date: Thu, 18 May 2017 13:30:54 +0200
++Subject: [PATCH 4/4] payload: enforce ip/ip6 protocol depending on icmp or
++ icmpv6
++
++After some discussion with Pablo we agreed to treat icmp/icmpv6 specially.
++
++in the case of a rule like 'tcp dport 22' the inet, bridge and netdev
++families only care about the lower layer protocol.
++
++In the icmpv6 case however we'd like to also enforce an ipv6 protocol check
++(and ipv4 check in icmp case).
++
++This extends payload_gen_special_dependency() to consider this.
++With this patch:
++
++add rule $pf filter input meta l4proto icmpv6
++add rule $pf filter input meta l4proto icmpv6 icmpv6 type echo-request
++add rule $pf filter input icmpv6 type echo-request
++
++will work in all tables and all families.
++For inet/bridge/netdev, an ipv6 protocol dependency is added; this will
++not match ipv4 packets with ip->protocol == icmpv6, EXCEPT in the case
++of the ip family.
++
++Its still possible to match icmpv6-in-ipv4 in inet/bridge/netdev with an
++explicit dependency:
++
++add rule inet f i ip protocol ipv6-icmp meta l4proto ipv6-icmp icmpv6 type ...
++
++Implicit dependencies won't get removed at the moment, so
++  bridge ... icmp type echo-request
++will be shown as
++  ether type ip meta l4proto 1 icmp type echo-request
++
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/payload.c | 27 +++++++++++++++++++++++----
++ 1 file changed, 23 insertions(+), 4 deletions(-)
++
++diff --git a/src/payload.c b/src/payload.c
++index 38db15e..8796ee5 100644
++--- a/src/payload.c
+++++ b/src/payload.c
++@@ -264,10 +264,29 @@ payload_gen_special_dependency(struct eval_ctx *ctx, const struct expr *expr)
++ 	case PROTO_BASE_LL_HDR:
++ 		return payload_get_get_ll_hdr(ctx);
++ 	case PROTO_BASE_TRANSPORT_HDR:
++-		if (expr->payload.desc == &proto_icmp)
++-			return &proto_ip;
++-		if (expr->payload.desc == &proto_icmp6)
++-			return &proto_ip6;
+++		if (expr->payload.desc == &proto_icmp ||
+++		    expr->payload.desc == &proto_icmp6) {
+++			const struct proto_desc *desc, *desc_upper;
+++			struct stmt *nstmt;
+++
+++			desc = ctx->pctx.protocol[PROTO_BASE_LL_HDR].desc;
+++			if (!desc) {
+++				desc = payload_get_get_ll_hdr(ctx);
+++				if (!desc)
+++					break;
+++			}
+++
+++			desc_upper = &proto_ip6;
+++			if (expr->payload.desc == &proto_icmp)
+++				desc_upper = &proto_ip;
+++
+++			if (payload_add_dependency(ctx, desc, desc_upper,
+++						   expr, &nstmt) < 0)
+++				return NULL;
+++
+++			list_add_tail(&nstmt->list, &ctx->stmt->list);
+++			return desc_upper;
+++		}
++ 		return &proto_inet_service;
++ 	default:
++ 		break;
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/files/0007-src-ip-switch-implicit-dependencies-to-meta-l4proto-.patch b/meta-networking/recipes-filter/nftables/files/0007-src-ip-switch-implicit-dependencies-to-meta-l4proto-.patch
+new file mode 100644
+index 000000000..5b72437d2
+--- /dev/null
++++ b/meta-networking/recipes-filter/nftables/files/0007-src-ip-switch-implicit-dependencies-to-meta-l4proto-.patch
+@@ -0,0 +1,86 @@
++From 0825c57d571bb7121e7048e198b9b023f7e7f358 Mon Sep 17 00:00:00 2001
++From: Florian Westphal <fw@strlen.de>
++Date: Sun, 7 May 2017 03:53:30 +0200
++Subject: [PATCH] src: ip: switch implicit dependencies to meta l4proto too
++
++after ip6 nexthdr also switch ip to meta l4proto instead of ip protocol.
++
++While its needed for ipv6 (due to extension headers) this isn't needed
++for ip but it has the advantage that
++
++tcp dport 22
++
++produces same expressions for ip/ip6/inet families.
++
++Signed-off-by: Florian Westphal <fw@strlen.de>
++---
++Upstream-Status: Backport
++Signed-off-by: André Draszik <adraszik@tycoint.com>
++ src/payload.c | 17 +++++++++++------
++ src/proto.c   |  3 ++-
++ 2 files changed, 13 insertions(+), 7 deletions(-)
++
++diff --git a/src/payload.c b/src/payload.c
++index 8796ee5..11b6df3 100644
++--- a/src/payload.c
+++++ b/src/payload.c
++@@ -118,17 +118,22 @@ static const struct expr_ops payload_expr_ops = {
++ };
++ 
++ /*
++- * ipv6 is special case, we normally use 'meta l4proto' to fetch the last
++- * l4 header of the ipv6 extension header chain so we will also match
+++ * We normally use 'meta l4proto' to fetch the last l4 header of the
+++ * ipv6 extension header chain so we will also match
++  * tcp after a fragmentation header, for instance.
+++ * For consistency we also use meta l4proto for ipv4.
++  *
++- * If user specifically asks for nexthdr x, treat is as a full
++- * dependency rather than injecting another (useless) meta l4 one.
+++ * If user specifically asks for nexthdr x, don't add another (useless)
+++ * meta dependency.
++  */
++ static bool proto_key_is_protocol(const struct proto_desc *desc, unsigned int type)
++ {
++-	if (type == desc->protocol_key ||
++-	    (desc == &proto_ip6 && type == IP6HDR_NEXTHDR))
+++	if (type == desc->protocol_key)
+++		return true;
+++
+++	if (desc == &proto_ip6 && type == IP6HDR_NEXTHDR)
+++		return true;
+++	if (desc == &proto_ip && type == IPHDR_PROTOCOL)
++ 		return true;
++ 
++ 	return false;
++diff --git a/src/proto.c b/src/proto.c
++index 3b20a5f..2afedf7 100644
++--- a/src/proto.c
+++++ b/src/proto.c
++@@ -587,7 +587,6 @@ const struct proto_desc proto_ip = {
++ 	.name		= "ip",
++ 	.base		= PROTO_BASE_NETWORK_HDR,
++ 	.checksum_key	= IPHDR_CHECKSUM,
++-	.protocol_key	= IPHDR_PROTOCOL,
++ 	.protocols	= {
++ 		PROTO_LINK(IPPROTO_ICMP,	&proto_icmp),
++ 		PROTO_LINK(IPPROTO_ESP,		&proto_esp),
++@@ -600,6 +599,7 @@ const struct proto_desc proto_ip = {
++ 		PROTO_LINK(IPPROTO_SCTP,	&proto_sctp),
++ 	},
++ 	.templates	= {
+++		[0]	= PROTO_META_TEMPLATE("l4proto", &inet_protocol_type, NFT_META_L4PROTO, 8),
++ 		[IPHDR_VERSION]		= HDR_BITFIELD("version", &integer_type, 0, 4),
++ 		[IPHDR_HDRLENGTH]	= HDR_BITFIELD("hdrlength", &integer_type, 4, 4),
++ 		[IPHDR_DSCP]            = HDR_BITFIELD("dscp", &dscp_type, 8, 6),
++@@ -779,6 +779,7 @@ const struct proto_desc proto_inet_service = {
++ 		PROTO_LINK(IPPROTO_TCP,		&proto_tcp),
++ 		PROTO_LINK(IPPROTO_DCCP,	&proto_dccp),
++ 		PROTO_LINK(IPPROTO_SCTP,	&proto_sctp),
+++		PROTO_LINK(IPPROTO_ICMP,	&proto_icmp),
++ 		PROTO_LINK(IPPROTO_ICMPV6,	&proto_icmp6),
++ 	},
++ 	.templates	= {
++-- 
++2.11.0
++
+diff --git a/meta-networking/recipes-filter/nftables/nftables_0.7.bb b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
+index 3a3a94665..0ea79953b 100644
+--- a/meta-networking/recipes-filter/nftables/nftables_0.7.bb
++++ b/meta-networking/recipes-filter/nftables/nftables_0.7.bb
+@@ -9,6 +9,15 @@ RRECOMMENDS_${PN} += "kernel-module-nf-tables \
+ 
+ SRC_URI = "http://www.netfilter.org/projects/nftables/files/${BP}.tar.bz2 \
+            file://fix-to-generate-ntf.8.patch \
++           \
++           file://0001-payload-explicit-network-ctx-assignment-for-icmp-icm.patch \
++           file://0002-proto-Add-some-exotic-ICMPv6-types.patch \
++           \
++           file://0003-payload-split-ll-proto-dependency-into-helper.patch \
++           file://0004-src-allow-update-of-net-base-w.-meta-l4proto-icmpv6.patch \
++           file://0005-src-ipv6-switch-implicit-dependencies-to-meta-l4prot.patch \
++           file://0006-payload-enforce-ip-ip6-protocol-depending-on-icmp-or.patch \
++           file://0007-src-ip-switch-implicit-dependencies-to-meta-l4proto-.patch \
+           "
+ SRC_URI[md5sum] = "4c005e76a15a029afaba71d7db21d065"
+ SRC_URI[sha256sum] = "fe639239d801ce5890397f6f4391c58a934bfc27d8b7d5ef922692de5ec4ed43"
+-- 
+2.11.0
+
 
