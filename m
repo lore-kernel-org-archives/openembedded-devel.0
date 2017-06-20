@@ -1,24 +1,24 @@
 Return-Path: <daniela.plascencia@linux.intel.com>
 Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id B453278066
+	by mail.openembedded.org (Postfix) with ESMTP id CE1837806E
 	for <openembedded-devel@lists.openembedded.org>;
 	Tue, 20 Jun 2017 19:20:12 +0000 (UTC)
 Received: from fmsmga002.fm.intel.com ([10.253.24.26])
 	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
 	20 Jun 2017 12:20:13 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.39,364,1493708400"; d="scan'208";a="1184927640"
+X-IronPort-AV: E=Sophos;i="5.39,364,1493708400"; d="scan'208";a="1184927644"
 Received: from yctb04.ostc.intel.com ([10.54.69.58])
 	by fmsmga002.fm.intel.com with ESMTP; 20 Jun 2017 12:20:11 -0700
 From: daniela.plascencia@linux.intel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Jun 2017 12:20:03 -0700
-Message-Id: <20170620192006.14846-3-daniela.plascencia@linux.intel.com>
+Date: Tue, 20 Jun 2017 12:20:04 -0700
+Message-Id: <20170620192006.14846-4-daniela.plascencia@linux.intel.com>
 X-Mailer: git-send-email 2.12.0
 In-Reply-To: <20170620192006.14846-1-daniela.plascencia@linux.intel.com>
 References: <20170620192006.14846-1-daniela.plascencia@linux.intel.com>
 Cc: Daniela Plascencia <daniela.plascencia@linux.intel.com>
-Subject: [meta-python][PATCH 2/5] python-isort: adds Python3 support
+Subject: [meta-python][PATCH 3/5] python-lazy-object-proxy: adds Python3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,55 +39,54 @@ Extend the recipe for Python3 support.
 
 Signed-off-by: Daniela Plascencia <daniela.plascencia@linux.intel.com>
 ---
- meta-python/recipes-devtools/python/python-isort.inc        | 10 ++++++++++
- meta-python/recipes-devtools/python/python-isort_4.2.15.bb  | 13 ++-----------
- meta-python/recipes-devtools/python/python3-isort_4.2.15.bb |  2 ++
- 3 files changed, 14 insertions(+), 11 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-isort.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-isort_4.2.15.bb
+ .../recipes-devtools/python/python-lazy-object-proxy.inc     | 10 ++++++++++
+ .../python/python-lazy-object-proxy_1.3.1.bb                 | 12 ++----------
+ .../python/python3-lazy-object-proxy_1.3.1.bb                |  2 ++
+ 3 files changed, 14 insertions(+), 10 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-isort.inc b/meta-python/recipes-devtools/python/python-isort.inc
+diff --git a/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc b/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
 new file mode 100644
-index 000000000..9884c44f1
+index 000000000..83d2ea3cd
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-isort.inc
++++ b/meta-python/recipes-devtools/python/python-lazy-object-proxy.inc
 @@ -0,0 +1,10 @@
-+SUMMARY = "A Python utility / library to sort Python imports."
-+HOMEPAGE = "https://pypi.python.org/pypi/isort"
-+LICENSE = "MIT"
++SUMMARY = "A fast and thorough lazy object proxy"
++HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
++LICENSE = "BSD"
 +SECTION = "devel/python"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=ec680df42d8ad56427a83308817658cc"
 +
-+SRC_URI[md5sum] = "34915a2ce60e6fe3dbcbf5982deef9b4"
-+SRC_URI[sha256sum] = "79f46172d3a4e2e53e7016e663cc7a8b538bec525c36675fcfd2767df30b3983"
++SRC_URI[md5sum] = "e128152b76eb5b9ba759504936139fd0"
++SRC_URI[sha256sum] = "eb91be369f945f10d3a49f5f9be8b3d0b93a4c2be8f8a5b83b0571b8123e0a7a"
 +
 +inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-isort_4.2.15.bb b/meta-python/recipes-devtools/python/python-isort_4.2.15.bb
-index b310fda02..fa46d89b5 100644
---- a/meta-python/recipes-devtools/python/python-isort_4.2.15.bb
-+++ b/meta-python/recipes-devtools/python/python-isort_4.2.15.bb
-@@ -1,11 +1,2 @@
--SUMMARY = "A Python utility / library to sort Python imports."
--HOMEPAGE = "https://pypi.python.org/pypi/isort"
--LICENSE = "MIT"
+diff --git a/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb b/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb
+index 0db5e6ed9..df4d60bff 100644
+--- a/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb
++++ b/meta-python/recipes-devtools/python/python-lazy-object-proxy_1.3.1.bb
+@@ -1,10 +1,2 @@
+-SUMMARY = "A fast and thorough lazy object proxy"
+-HOMEPAGE = "https://python-lazy-object-proxy.readthedocs.io/"
+-LICENSE = "BSD"
 -SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://PKG-INFO;beginline=8;endline=8;md5=8227180126797a0148f94f483f3e1489"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=ec680df42d8ad56427a83308817658cc"
 -
--SRC_URI[md5sum] = "34915a2ce60e6fe3dbcbf5982deef9b4"
--SRC_URI[sha256sum] = "79f46172d3a4e2e53e7016e663cc7a8b538bec525c36675fcfd2767df30b3983"
+-SRC_URI[md5sum] = "e128152b76eb5b9ba759504936139fd0"
+-SRC_URI[sha256sum] = "eb91be369f945f10d3a49f5f9be8b3d0b93a4c2be8f8a5b83b0571b8123e0a7a"
 -
 -inherit setuptools pypi
--
 +inherit setuptools
-+require python-isort.inc
-diff --git a/meta-python/recipes-devtools/python/python3-isort_4.2.15.bb b/meta-python/recipes-devtools/python/python3-isort_4.2.15.bb
++require python-lazy-object-proxy.inc
+diff --git a/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb
 new file mode 100644
-index 000000000..755b3e2f2
+index 000000000..150e12fd4
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-isort_4.2.15.bb
++++ b/meta-python/recipes-devtools/python/python3-lazy-object-proxy_1.3.1.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-isort.inc
++require python-lazy-object-proxy.inc
 -- 
 2.12.0
 
