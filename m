@@ -1,47 +1,52 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 4520877E78
+Return-Path: <twoerner@gmail.com>
+Received: from mail-io0-f173.google.com (mail-io0-f173.google.com
+	[209.85.223.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CDA7160111
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jun 2017 04:30:41 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id f134so2850213wme.1
+	Tue, 20 Jun 2017 06:01:14 +0000 (UTC)
+Received: by mail-io0-f173.google.com with SMTP id i7so77383694ioe.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jun 2017 21:30:43 -0700 (PDT)
+	Mon, 19 Jun 2017 23:01:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=2ihTh5oJNosyRRJj/gleqNHXbxqZWyGOd0KXEaaRVxM=;
-	b=hMKlZ0aiPV1JmrOEa6ATWrANlJwkFYgaJm5bpWcuZmfIAFxaAuTBV6x/n3jBzSjmXJ
-	J/cEcpL4PH5SDEk7egpEZxBxqgMhn+tJLnmePdUZKoBcrWn8YLyV7bOutyqoEt8iZ332
-	36PhH588F+Gt3ynm/UmZfjsL6V1uHiO0mFu5dcxo6v2uFJ6kZ4GlSaohDKU8soelMImJ
-	y2zeLSxJHXOly1vhANrqx0E2V7eVvMGJJRNA7qTet39BToEajoy9Z0uhmJFDp2GFSbvn
-	3d2AYX1F/LGVnvYjp8JYGeBsjGnQ05BJeRZ5gwQXjz3ACleK/ag1vCzbvFX2/mfu77MY
-	zXRg==
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=g/ounFnED+SjL2vYJiUFGxcWB4iNiJUMfQauYiivEGE=;
+	b=Q56/e6mL1gBPrzgHhykxME4u9kykEbd9sn3hQww9sV9kVcMo7no5O2UB3kBfswXT36
+	VzY1bg7o5AtF4u1dd7g9XORt6c3yCaoo3WXaoeV8yODxUXpmFrm8PcwrjD3+OkrHywKJ
+	r+JVQYwpjjL0N8eKNqUIHyf7mP5nKOnwoyoF4OyuxaKbRxAbIZp2OMN4StYf+F2aAlFL
+	1Lnxy7rM083wNVP/aWd9x/SGnCeE0ZLhDhTU4K6fC5zCE6fLucQ83fpjCDn/z84pH+9J
+	gOQvWzSiRax3mOoVmTjoJxGKJuxPBxcdsWvU7fWRkP4X5M26XbcXbs0h6fgTyhSnIiOM
+	uu0w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2ihTh5oJNosyRRJj/gleqNHXbxqZWyGOd0KXEaaRVxM=;
-	b=gEzLe7d5fgH09Iqs5O0quU16zJTchHosCTUMQ/3JYMNKWp1s95jD8SItv8R7ykKRho
-	87XlSuHU7Tfu/aPtMfAcfUy8sl2Qc4PKG6r/pxhPhhkLi/wfIj5214dECMFIB6oL+jKb
-	qXHuHKkzzsnNxkce2pc3c0Oqn3MnWg/3XlZlw976Vsv/4Mdq5/U1ZO109ir5dM4XbR6b
-	MwAmLhnvnkCoebEqottK6kbtcnAWh9FMCzSqCdQDXuydUz0mR/N6TYJacAMSQBP5c1p7
-	vwuRAIzf/Y2d22uikh1OtffY6Wq4XctzGLPG45phTschmuX212BRG9u3nKtFmrJNAxWm
-	E3tw==
-X-Gm-Message-State: AKS2vOyRw335BsltaVcUogspLUu834MlyZpkgQ2DJP/SUBkoNOFgL9te
-	re3LKjulHHmDx3wr
-X-Received: by 10.80.157.71 with SMTP id j7mr19528097edk.4.1497933042325;
-	Mon, 19 Jun 2017 21:30:42 -0700 (PDT)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([106.119.192.84]) by smtp.gmail.com with ESMTPSA id
-	k44sm6056238ede.16.2017.06.19.21.30.39
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 19 Jun 2017 21:30:41 -0700 (PDT)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org,
-	martin.jansa@gmail.com
-Date: Tue, 20 Jun 2017 06:28:32 +0200
-Message-Id: <1497932912-30016-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-qt5] [PATCH] qttools: DEPENDS on icu
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=g/ounFnED+SjL2vYJiUFGxcWB4iNiJUMfQauYiivEGE=;
+	b=PIVOOOicw+VEA2giqAAIumOqqSbL+3sktzmbcV3SA/1H5tCMI6jluujPhOK4wua5oL
+	7qZsk/0mWls4wL4auxtpBLBbKVOXHGriHwDZJXW5yvCgebim0V6unaxlfZuf/XTuNXIz
+	sOMy+Zi5chzxbtBAcRW33Q0jmFidQMRnHDIJi+GUEN7DrFcS4chMEL2xN+PABIpDm5Ui
+	9JKXMtQn97GyaemAxhaI3SLiX1j0XfQ9xHSzmu8C062/LuiWiY9M7UiF27sNUXuXweHc
+	KrkhG8YrTvMCXAZtn/lRWeZpdW6KM73edRo2THm928oYNmhtDGcuoOvdr6Mn5fIkyl9Z
+	OZRw==
+X-Gm-Message-State: AKS2vOyB3h8rZXo1EfBArMsWM9hhC6P5E5n/Hd7L6CypYcmgGSvV7Lzv
+	1+kcYQG/GvbEitwsdFs=
+X-Received: by 10.107.20.150 with SMTP id 144mr24579699iou.25.1497938475371;
+	Mon, 19 Jun 2017 23:01:15 -0700 (PDT)
+Received: from linux-uys3 ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id i6sm7921966iti.20.2017.06.19.23.01.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 19 Jun 2017 23:01:11 -0700 (PDT)
+Date: Tue, 20 Jun 2017 02:01:09 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20170620060109.GA12744@linux-uys3>
+References: <CA+chaQdyLDc38rC-geZay6JO_QcsUZn0ZUJPVzqWXcO-wxP2ww@mail.gmail.com>
+	<20170618120909.3499-1-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20170618120909.3499-1-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-browser][PATCHv3 1/2] chromium(-wayland): Fix build with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,34 +59,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jun 2017 04:30:43 -0000
+X-List-Received-Date: Tue, 20 Jun 2017 06:01:15 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+Awesome!! I've build- and run- -tested this with x11 on:
+- minnow (x86-64)
+- qemux86
+- rpi3 (32-bit)
+- dragonboard-410c
 
-This fixes a following QA issue:
-| QA Issue: nativesdk-qtbase-tools rdepends on nativesdk-libicui18n, but it isn't a build dependency.
-| QA Issue: nativesdk-qtbase-tools rdepends on nativesdk-libicuuc, but it isn't a build dependency.
-| QA Issue: nativesdk-qtbase-tools rdepends on nativesdk-libicudata, but it isn't a build dependency.
-
-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
----
- recipes-qt/qt5/qttools_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/qttools_git.bb
-index 5c0f51c..1108390 100644
---- a/recipes-qt/qt5/qttools_git.bb
-+++ b/recipes-qt/qt5/qttools_git.bb
-@@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
- 
- inherit ptest
- 
--DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
-+DEPENDS += "qtbase qtdeclarative qtxmlpatterns icu"
- 
- SRC_URI += " \
-     file://run-ptest \
--- 
-2.7.4
-
+nice find
 
