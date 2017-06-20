@@ -1,44 +1,33 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B8E4E7821C
+Return-Path: <panagiotis.tamtamis@unify.com>
+X-Greylist: delayed 405 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 20 Jun 2017 08:14:21 UTC
+Received: from mx12.unify.com (mx12.unify.com [62.134.46.10])
+	by mail.openembedded.org (Postfix) with ESMTP id 6756A7821C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jun 2017 08:05:22 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id j186so19908845pge.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jun 2017 01:05:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=4fzTU4y7oLEdVZLxWXUYo8LEk8cZ3jIufcpAW0k/4JQ=;
-	b=DsJNfF4NKD7Pl7PUFMXn7RF3Sc6fOb6Xypz3ubHIq8L9jieP4ZB5bcBKJq+iEGCcGv
-	EdxN6ZFGa6ra9hAM+Whj+ZSpyamKOB5qxseA/aIBgiL57bk6JbYHEWW7ACaX20ljSTwd
-	hCKUvOHkJZr7ED/2dRtTRg+cJqT9eNKTlqZtKtwyPDTIbsF2LLd86nXtJv4PudsSknfO
-	WpyK/swMFmecyogdwF3ryL4EK061b8h+FJC2EIZWgJhk1DT/opnx/XI9Em4IkpAQ4vZZ
-	+b7zd01Sc8BgUMw2g/H5djakD+jaKDlNyuS784iJYthAYtXk7bluFiObYs0XnMqJ3Z9G
-	b6eA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4fzTU4y7oLEdVZLxWXUYo8LEk8cZ3jIufcpAW0k/4JQ=;
-	b=au2bj4od2uqqC9Lok6URyx4QKj89/oABXnlTYuwyUIqjZB9Q5+iQdpD+hTsHAmgQWz
-	UH/VvwHzpYDjUWFaNuuSSzolFoLKx58HYApT0CwSA9v1mD2kreMjw/VQLRNc6LC+iYHz
-	+LvCa1QOmoKzFPDiRRFNdwFMb8dOJuVLXyWLNUUMVWQaA4xsjiOQ+ETmirvSZDVe6d/0
-	rPRJ3skkuUQPvojJYdzQraTFkU6C46k3ZBfU98w+G6tyFL4TU5ylrA8QkDoTXQ/ptHh4
-	V3F/6kXAeLsP6woMybPX97YnGjW81crgwPiE1RtsJPztcBxJIRuL23UetSNfzLal6X8H
-	pgrQ==
-X-Gm-Message-State: AKS2vOwsRLijs8fINvAu7TtSsEsfmc884KKAMLpxKY+XMq2/pY6o24Em
-	t06pxBbGIrqVJx4k
-X-Received: by 10.98.155.218 with SMTP id e87mr29636182pfk.24.1497945923191;
-	Tue, 20 Jun 2017 01:05:23 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
-	by smtp.gmail.com with ESMTPSA id 18sm1919695pfh.65.2017.06.20.01.05.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Jun 2017 01:05:22 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Jun 2017 01:05:12 -0700
-Message-Id: <20170620080512.23657-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-oe][PATCH] scsirastools: Upgrade to 1.6.6
+	Tue, 20 Jun 2017 08:14:21 +0000 (UTC)
+Received: from MCHP02HTC.global-ad.net (unknown [172.29.42.235])
+	by mx12.unify.com (Server) with ESMTP id 55C9123F04B2;
+	Tue, 20 Jun 2017 10:07:37 +0200 (CEST)
+Received: from MCHP04MSX.global-ad.net ([169.254.37.243]) by
+	MCHP02HTC.global-ad.net ([172.29.42.235]) with mapi id 14.03.0339.000;
+	Tue, 20 Jun 2017 10:07:37 +0200
+From: "Tamtamis, Panagiotis" <panagiotis.tamtamis@unify.com>
+To: Josef Holzmayr <holzmayr@rsi-elektrotechnik.de>, ???'?? ??????
+	<maryan.pricak@gmail.com>, openembeded-devel
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] (no subject)
+Thread-Index: AQHS6S9vRAMWpElAQkOVoxiI+hFqmqItZArA
+Date: Tue, 20 Jun 2017 08:07:36 +0000
+Message-ID: <0D74DA672F03634EA90EB18A61E36D27263B0EC1@MCHP04MSX.global-ad.net>
+References: <CAGyDALnwxEvX3AFfbB5thjQy91+9BNmzgyR5RPQetLseZD7hJw@mail.gmail.com>
+	<e23728ee-eece-c3d1-da75-defd91e094ad@rsi-elektrotechnik.de>
+In-Reply-To: <e23728ee-eece-c3d1-da75-defd91e094ad@rsi-elektrotechnik.de>
+Accept-Language: en-GB, en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [172.29.42.225]
+MIME-Version: 1.0
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,298 +40,170 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jun 2017 08:05:23 -0000
+X-List-Received-Date: Tue, 20 Jun 2017 08:14:22 -0000
+X-Groupsio-MsgNum: 67262
+Content-Language: en-US
+Content-Type: multipart/signed; protocol="application/x-pkcs7-signature";
+	micalg=SHA1; boundary="----=_NextPart_000_0003_01D2E9B5.687A17B0"
 
-Fix build with hardening flags
+------=_NextPart_000_0003_01D2E9B5.687A17B0
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../scsirastools/scsirastools/mdadm.patch          |  13 ++
- .../scsirastools/scsirastools/print-format.patch   | 218 +++++++++++++++++++++
- ...scsirastools_1.6.4.bb => scsirastools_1.6.6.bb} |  14 +-
- 3 files changed, 242 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-extended/scsirastools/scsirastools/mdadm.patch
- create mode 100644 meta-oe/recipes-extended/scsirastools/scsirastools/print-format.patch
- rename meta-oe/recipes-extended/scsirastools/{scsirastools_1.6.4.bb => scsirastools_1.6.6.bb} (81%)
+Hi Maryan,
 
-diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools/mdadm.patch b/meta-oe/recipes-extended/scsirastools/scsirastools/mdadm.patch
-new file mode 100644
-index 000000000..6edda08cd
---- /dev/null
-+++ b/meta-oe/recipes-extended/scsirastools/scsirastools/mdadm.patch
-@@ -0,0 +1,13 @@
-+--- mdadm.d/mdadm-1.3.0/mdadm.h.org	2017-06-20 00:35:55.366978372 -0700
-++++ mdadm.d/mdadm-1.3.0/mdadm.h	2017-06-20 00:36:41.244363348 -0700
-+@@ -29,8 +29,9 @@
-+ 
-+ #define	__USE_LARGEFILE64
-+ #include	<unistd.h>
-+-extern __off64_t lseek64 __P ((int __fd, __off64_t __offset, int __whence));
-++//extern __off64_t lseek64 __P ((int __fd, __off64_t __offset, int __whence));
-+ 
-++#include	<sys/sysmacros.h>
-+ #include	<sys/types.h>
-+ #include	<sys/stat.h>
-+ #include	<stdlib.h>
-diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools/print-format.patch b/meta-oe/recipes-extended/scsirastools/scsirastools/print-format.patch
-new file mode 100644
-index 000000000..ac8178058
---- /dev/null
-+++ b/meta-oe/recipes-extended/scsirastools/scsirastools/print-format.patch
-@@ -0,0 +1,218 @@
-+Index: scsirastools-1.6.6/src/sgcommon.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgcommon.c
-++++ scsirastools-1.6.6/src/sgcommon.c
-+@@ -304,8 +304,8 @@ void showit(char *buf)
-+ 	    fdlog = stderr;
-+ 	}
-+     }
-+-    if (flogopen) fprintf(fdlog, buf);	/*write to log */
-+-    fprintf(fdmsg, buf);	/*defaults to stdout */
-++    if (flogopen) fprintf(fdlog, "%s", buf);	/*write to log */
-++    fprintf(fdmsg, "%s", buf);	/*defaults to stdout */
-+ }
-+ 
-+ void showlog(const char * format, ...) 
-+Index: scsirastools-1.6.6/src/sgdefects.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgdefects.c
-++++ scsirastools-1.6.6/src/sgdefects.c
-+@@ -226,7 +226,7 @@ int main(int argc, char **argv)
-+ 	    ("              ******************************************\n");
-+ 	if (flogopen)
-+ 	    printf("Log file %s is open\n", logfile);
-+-	printf(HeaderStr);
-++	printf("%s", HeaderStr);
-+ 	/* get SCSI Device Info */
-+ 	idev = 0;
-+ 	flags = O_RDWR;		/* could use OPEN_FLAG if read-only. */
-+Index: scsirastools-1.6.6/src/sgdiag.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgdiag.c
-++++ scsirastools-1.6.6/src/sgdiag.c
-+@@ -250,7 +250,7 @@ int main(int argc, char **argv)
-+ 	   printf("              ******************************************\n");
-+ 	   if (flogopen)
-+ 	       printf("Log file %s is open, debug=%d\n", logfile,fdebug);
-+-	   printf(HeaderStr);
-++	   printf("%s", HeaderStr);
-+ 	}
-+ 	/* get SCSI Device Info */
-+ 	idev = 0;
-+@@ -356,12 +356,12 @@ int main(int argc, char **argv)
-+ 	case 'F':
-+ 	case 'f':
-+ 	    func = 'f';
-+-	    printf(erase_msg);
-++	    printf("%s", erase_msg);
-+ 	    break;
-+ 	case 'W':
-+ 	case 'w':
-+ 	    func = 'w';
-+-	    printf(erase_msg);
-++	    printf("%s", erase_msg);
-+ 	    break;
-+ 	case 'S':
-+ 	case 's':
-+Index: scsirastools-1.6.6/src/sgdiskmon.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgdiskmon.c
-++++ scsirastools-1.6.6/src/sgdiskmon.c
-+@@ -197,9 +197,9 @@ void showit(char *buf)
-+         }
-+     }
-+     if (flogopen)
-+-        fprintf(fdlog, buf);    /*write to log */
-++        fprintf(fdlog, "%s", buf);    /*write to log */
-+     if (!background)
-+-        fprintf(fdmsg, buf);    /*message display defaults to stdout */
-++        fprintf(fdmsg, "%s",  buf);    /*message display defaults to stdout */
-+ }
-+ 
-+ /*
-+@@ -235,7 +235,7 @@ rem_scsi_dev(int bus, int ch, int id, in
-+ 	fp = fopen("/proc/scsi/scsi","r+");
-+ 	if (fp == NULL) return(errno); 
-+ 	sprintf(cmd,"remove-single-device %d %d %d %d",bus,ch,id,lun);
-+-	n = fprintf(fp,cmd);
-++	n = fprintf(fp,"%s", cmd);
-+ 	fclose(fp);
-+ 	strcat(cmd,"\n");
-+ 	showit(cmd);
-+@@ -256,7 +256,7 @@ add_scsi_dev(int bus, int ch, int id, in
-+ 	fp = fopen("/proc/scsi/scsi","r+");
-+ 	if (fp == NULL) return(errno); 
-+ 	sprintf(cmd,"add-single-device %d %d %d %d",bus,ch,id,lun);
-+-	n = fprintf(fp,cmd);
-++	n = fprintf(fp, "%s", cmd);
-+ 	fclose(fp);
-+ 	strcat(cmd,"\n");
-+ 	showit(cmd);
-+@@ -1233,7 +1233,7 @@ main(int argc, char **argv)
-+             interval = atoi(optarg);
-+             break;
-+ 	default:
-+-            printf(output2);    /*prog header*/
-++            printf("%s", output2);    /*prog header*/
-+             printf("Usage: %s [-bemnrx -t time]\n",progname);
-+ 	    printf(" -b  Run in Background as a daemon\n");
-+ 	    printf(" -e  Do not write to any files.\n");
-+@@ -1246,7 +1246,7 @@ main(int argc, char **argv)
-+             exit(1); 
-+ 	}
-+    }
-+-   if (!background) printf(output2);  /*prog header*/
-++   if (!background) printf("%s", output2);  /*prog header*/
-+ 
-+    /* only run this as superuser */
-+    i = geteuid();
-+Index: scsirastools-1.6.6/src/sgmode.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgmode.c
-++++ scsirastools-1.6.6/src/sgmode.c
-+@@ -303,7 +303,7 @@ int main(int argc, char **argv)
-+ 	    ("              ******************************************\n");
-+ 	if (flogopen)
-+ 	    printf("Log file %s is open\n", logfile);
-+-	printf(HeaderStr);
-++	printf("%s", HeaderStr);
-+ 	/* get SCSI Device Info */
-+ 	idev = 0;
-+ 	flags = O_RDWR;		/* could use OPEN_FLAG if read-only. */
-+@@ -585,8 +585,8 @@ int do_modeselect(int idx)
-+ 	    if (!foverwrite) {
-+ 		/* use existing capacity from mode sense */
-+ 		memcpy(sel_buffer + 4, out_buffer + 4, 8);
-+-		sprintf(scratch, "Using existing capacity instead\n");
-+-		printf(scratch);
-++		sprintf(scratch, "%s", "Using existing capacity instead\n");
-++		printf("%s",scratch);
-+ 		showlog( scratch);
-+ 	    } else {  /* foverwrite==1, changing something */
-+ 		/* usually only change num blks, if change blk size, flag it. */
-+Index: scsirastools-1.6.6/src/sgraidmon.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgraidmon.c
-++++ scsirastools-1.6.6/src/sgraidmon.c
-+@@ -269,9 +269,9 @@ void showit(char *buf)
-+         }
-+     }
-+     if (flogopen)
-+-        fprintf(fdlog, buf);    /*write to log */
-++        fprintf(fdlog, "%s", buf);    /*write to log */
-+     if (!background)
-+-        fprintf(fdmsg, buf);    /*message display defaults to stdout */
-++        fprintf(fdmsg, "%s", buf);    /*message display defaults to stdout */
-+ }
-+ 
-+ /*
-+@@ -563,7 +563,7 @@ add_scsi_dev(int bus, int ch, int id, in
-+ 	fp = fopen("/proc/scsi/scsi","r+");
-+ 	if (fp == NULL) return(errno); 
-+ 	sprintf(cmd,"add-single-device %d %d %d %d",bus,ch,id,lun);
-+-	fprintf(fp,cmd);
-++	fprintf(fp, "%s", cmd);
-+ 	fclose(fp);
-+ 	strcat(cmd,"\n");
-+ 	showit(cmd);
-+@@ -1585,7 +1585,7 @@ main(int argc, char **argv)
-+             interval = atoi(optarg);
-+             break;
-+ 	default:
-+-            printf(output2);    /*prog header*/
-++            printf("%s", output2);    /*prog header*/
-+             printf("Usage: %s [-bemnrx -t time]\n",progname);
-+ 	    printf(" -b  Run in Background as a daemon\n");
-+ 	    printf(" -e  Do not write to any files.\n");
-+@@ -1598,7 +1598,7 @@ main(int argc, char **argv)
-+             exit(1); 
-+ 	}
-+    }
-+-   if (!background) printf(output2);  /*prog header*/
-++   if (!background) printf("%s", output2);  /*prog header*/
-+ 
-+    /* only run this as superuser */
-+    i = geteuid();
-+Index: scsirastools-1.6.6/src/sgsafte.c
-+===================================================================
-+--- scsirastools-1.6.6.orig/src/sgsafte.c
-++++ scsirastools-1.6.6/src/sgsafte.c
-+@@ -174,9 +174,9 @@ void showit(char *buf)
-+         }
-+     }
-+     if (flogopen)
-+-        fprintf(fdlog, buf);    /*write to log */
-++        fprintf(fdlog, "%s", buf);    /*write to log */
-+     if (!background)
-+-        fprintf(fdmsg, buf);    /*message display defaults to stdout */
-++        fprintf(fdmsg, "%s", buf);    /*message display defaults to stdout */
-+ }
-+  
-+ /*
-+@@ -384,7 +384,7 @@ add_scsi_dev(int bus, int ch, int id, in
-+ 	fp = fopen("/proc/scsi/scsi","r+");
-+ 	if (fp == NULL) return(errno); 
-+ 	sprintf(cmd,"add-single-device %d %d %d %d",bus,ch,id,lun);
-+-	fprintf(fp,cmd);
-++	fprintf(fp, "%s", cmd);
-+ 	fclose(fp);
-+ 	strcat(cmd,"\n");
-+ 	showit(cmd);
-+@@ -1261,7 +1261,7 @@ main(int argc, char **argv)
-+             do_numeric = 0;
-+             break; 
-+ 	default:
-+-            printf(output2);    /*prog header*/
-++            printf("%s", output2);    /*prog header*/
-+             printf("Usage: %s [-d num -rf -emnx]\n",progname);
-+ 	    printf(" -d  drive number to set (0, 1, ...)\n");
-+ 	    printf(" -r  set SAF-TE status to ready\n");
-+@@ -1273,7 +1273,7 @@ main(int argc, char **argv)
-+             exit(1); 
-+ 	}
-+    }
-+-   if (!background) printf(output2);  /*prog header*/
-++   if (!background) printf("%s", output2);  /*prog header*/
-+ 
-+    if (setval != 0 && drivenum == -1) drivenum = 0;  /*default to first drive*/
-+ 
-diff --git a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-similarity index 81%
-rename from meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb
-rename to meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-index d0c36e472..e202d16eb 100644
---- a/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.4.bb
-+++ b/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb
-@@ -10,15 +10,23 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=687ea108478d26152ae46eb29d9d1545"
- 
- DEPENDS += "groff-native"
- 
--SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.tar.gz"
--SRC_URI[md5sum] = "2d775111b62e2dfc1960a722f5fda211"
--SRC_URI[sha256sum] = "38d2c6c9b04a2c594e528927b950754f94c0522718d17c78e6589ba778339bf8"
-+SRC_URI = "http://prdownloads.sourceforge.net/scsirastools/scsirastools-${PV}.tar.gz \
-+           file://mdadm.patch;apply=no \
-+           file://print-format.patch \
-+"
-+SRC_URI[md5sum] = "6271a61b2ce40aaf33ef61775148cda1"
-+SRC_URI[sha256sum] = "e7b997e75decb06a650c42c35cd63d0c94c34e39cf133c723337b0eeabbfdf6a"
- 
- inherit autotools update-rc.d
- 
- # mdadm Makefile has CC set to gcc, hence override CC to ${CC}
- EXTRA_OEMAKE += "CC='${CC}'"
- 
-+
-+do_configure_append() {
-+	oe_runmake -C mdadm.d mdadm-1.3.0
-+	patch -p0 < ${WORKDIR}/mdadm.patch
-+}
- INITSCRIPT_PACKAGES = "${PN}-diskmon ${PN}-raidmon"
- INITSCRIPT_NAME_${PN}-diskmon = "sgdisk"
- INITSCRIPT_PARAMS_${PN}-diskmon = "defaults 80 20"
--- 
-2.13.1
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Josef Holzmayr
+> Sent: Monday, June 19, 2017 10:02 PM
+> To: =D0=9C=D0=B0=D1=80'=D1=8F=D0=BD =
+=D0=9F=D1=80=D1=96=D1=86=D0=B0=D0=BA; openembeded-devel
+> Subject: Re: [oe] (no subject)
+>=20
+> Hi Maryan,
+>=20
+> On 19.06.2017 16:57, =D0=9C=D0=B0=D1=80'=D1=8F=D0=BD =
+=D0=9F=D1=80=D1=96=D1=86=D0=B0=D0=BA wrote:
+> > I'm trying to build an image that's supposed to be used as rootfs =
+for
+> > container.
+> > Is there a way to build image rootfs without Linux kernel and =
+modules?
 
+I use the following in my image recipe:
 
+FORCE_RO_REMOVE =3D "1"
+ROOTFS_RO_UNNEEDED +=3D " kernel-${LINUX_VERSION} =
+kernel-image-${LINUX_VERSION} kernel-image-uimage-${LINUX_VERSION}"
+
+With the above you force the image production to remove unwanted =
+packets. You can add also the modules that you don't want.
+See if this can work in your case also.
+
+>=20
+> The simplest solution is to just refer to linux-dummy:
+> https://layers.openembedded.org/layerindex/recipe/41/
+>=20
+> If you're not in a hurry, I expect to push a layer doing exactly what =
+you
+> describe to github, as I'm working on that too.
+>=20
+> Greetz
+> --
+> Josef Holzmayr
+> Software Developer Embedded Systems
+>=20
+> Tel: +49 8444 9204-48
+> Fax: +49 8444 9204-50
+>=20
+> R-S-I Elektrotechnik GmbH & Co. KG
+> Woelkestrasse 11
+> D-85301 Schweitenkirchen
+> www.rsi-elektrotechnik.de
+> =
+=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=
+=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94=E2=80=94
+> Amtsgericht Ingolstadt =E2=80=93 GmbH: HRB 191328 =E2=80=93 KG: HRA =
+170393
+> Gesch=C3=A4ftsf=C3=BChrer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz =
+Sorg
+> Ust-IdNr: DE 128592548
+
+Br,
+Tamis
+
+------=_NextPart_000_0003_01D2E9B5.687A17B0
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="smime.p7s"
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExCzAJBgUrDgMCGgUAMIAGCSqGSIb3DQEHAQAAoIIPnTCCAzYw
+ggIeoAMCAQICEFKIki0gLsWYSyx9eBbYcr0wDQYJKoZIhvcNAQELBQAwNTELMAkGA1UEBhMCREUx
+DjAMBgNVBAoMBVVuaWZ5MRYwFAYDVQQDDA1VbmlmeSBSb290IENBMB4XDTEzMDkyNTA3MzQzMFoX
+DTI4MDkyNTA3NDQyNVowNTELMAkGA1UEBhMCREUxDjAMBgNVBAoMBVVuaWZ5MRYwFAYDVQQDDA1V
+bmlmeSBSb290IENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp7oHRPmtJ+/8I3iv
+apenTzPKMh+diPfZPmp9SkuRTuW3NZivOarkd7vs2+gkhD8syKpPyLpKDRMG2zHgBjYxxdUhagYW
+MNKej07xGs3kmPXKbt/FxL+xI+64aHLV35fCmOrOS7tLBGpDfAMJhAWMEI9xmQdDAYcxJOXlR4Hw
+cosfPFvfDI7Tiwj4Kml547YRq1cKTpy8AtQgo1Rc41WakCknXeRcRtSlllGHydqd8RCNe49Ut+OI
+zBtKSfoe/cYVuUrSh2cOCUFOh3EAxKmFi2lCEI5t3mtZV35MVGOIAbFF8On9udmA10uvM/RR51fg
+o3oh9wdCOn0tFfMPLYOSGwIDAQABo0IwQDAOBgNVHQ8BAf8EBAMCAYYwDwYDVR0TAQH/BAUwAwEB
+/zAdBgNVHQ4EFgQUL/fEwyUdkMhFfPNnCnMzxVyab08wDQYJKoZIhvcNAQELBQADggEBAGaM56dC
+Yx9O21zPZ/Qnw8jw7uIVxlAdOE+jlrs5MLvenLmrlG5StAIgpqaXVzp5i9m+duDXhR+NVy9FwnyA
+xqah+NZd0sp5p/M+0MYPu2BynLBfrMBoW6TwtStkkoK8PfQr5U9u8KeVifyQJe2fswcDWg6odiUb
+/bdEmqQmXc2aA9qM6WEcCOYWa7QNHKt+bLXqFiznNiEkhIyehiro213FOvPn9OgVd8OjZzlSbxCp
+WbkGER4aD36mJSq7dU1/8qdfLn1nXwtlJkqP5Gj0DCjyNVRZTGKNvKRvHGDTOTRD/bbQOigqHDlf
+SXemNB3a5En3X73EJd8raK2M5JZRQ7MwggW9MIIEpaADAgECAg4w9GNsY4mqiwAAAAAABDANBgkq
+hkiG9w0BAQsFADA1MQswCQYDVQQGEwJERTEOMAwGA1UECgwFVW5pZnkxFjAUBgNVBAMMDVVuaWZ5
+IFJvb3QgQ0EwHhcNMTMwOTI2MTQ0MDA0WhcNMjMwOTI2MTQ1MDA0WjA1MQswCQYDVQQGEwJERTEO
+MAwGA1UECgwFVW5pZnkxFjAUBgNVBAMMDVVuaWZ5IFVzZXIgQ0EwggEiMA0GCSqGSIb3DQEBAQUA
+A4IBDwAwggEKAoIBAQCPGIg7woGyfrEXR+ihrCDd3i0M2evThPreB9ap8fL+bBiANbWggXV5rR/w
+DBo1rzMnTeaEEsmQQ8n00D+wl/Rwby8JZUtgS3y3284/H5kfgVnGL6FW7qnJLq/cQKgIQuCP+nGs
+dt5gc9LriPuwDo1p22lQuduffmF21saaFYOu7cSLAwV+YKoERBL7M00r9I4Qm1twYUqPI6/T9OVw
+V2nmerPobEwBUcBeXDxHzD7MGR+z0CRUuVvROcM28lakGuDW09YlBSNY81xrCj7Zf82uPoNdEb1T
+MkEcjVQO8U/IfCKPnalP/2/frXrWK6JAgGWpxXAcWMgKXAghR8uqsySTAgMBAAGjggLJMIICxTAO
+BgNVHQ8BAf8EBAMCAYYwHQYDVR0OBBYEFJhx96C5h8dG9AYMgSYzvV3eUAtmMBIGA1UdEwEB/wQI
+MAYBAf8CAQAwHwYDVR0jBBgwFoAUL/fEwyUdkMhFfPNnCnMzxVyab08wggEbBgNVHR8EggESMIIB
+DjCCAQqgggEGoIIBAoYqaHR0cDovL3BraS51bmlmeS5jb20vY3JsL3VuaWZ5LXJvb3QtY2EuY3Js
+hoHTbGRhcDovL3BraS1kaXJlY3RvcnkudW5pZnkuY29tL0NOPVVuaWZ5JTIwUm9vdCUyMENBLENO
+PXVuaWZ5LXBraSxDTj1DRFAsQ049UHVibGljJTIwS2V5JTIwU2VydmljZXMsQ049U2VydmljZXMs
+Q049Q29uZmlndXJhdGlvbixEQz1nbG9iYWwtYWQsREM9bmV0P2NlcnRpZmljYXRlUmV2b2NhdGlv
+bkxpc3Q/YmFzZT9vYmplY3RDbGFzcz1jUkxEaXN0cmlidXRpb25Qb2ludDCCAT4GCCsGAQUFBwEB
+BIIBMDCCASwwNgYIKwYBBQUHMAKGKmh0dHA6Ly9wa2kudW5pZnkuY29tL2NydC91bmlmeS1yb290
+LWNhLmNydDCByQYIKwYBBQUHMAKGgbxsZGFwOi8vcGtpLWRpcmVjdG9yeS51bmlmeS5jb20vQ049
+VW5pZnklMjBSb290JTIwQ0EsQ049QUlBLENOPVB1YmxpYyUyMEtleSUyMFNlcnZpY2VzLENOPVNl
+cnZpY2VzLENOPUNvbmZpZ3VyYXRpb24sREM9Z2xvYmFsLWFkLERDPW5ldD9jQUNlcnRpZmljYXRl
+P2Jhc2U/b2JqZWN0Q2xhc3M9Y2VydGlmaWNhdGlvbkF1dGhvcml0eTAmBggrBgEFBQcwAYYaaHR0
+cDovL29jc3AudW5pZnkuY29tL29yMDEwDQYJKoZIhvcNAQELBQADggEBAJ/DjgX7xxKEhsGGpQ0J
+xImw4V8hTITbBq8FqllxWhvkMjyI+7524g2xXBNLeHAfF+1W6BFgVeUuWjYqQzKl2vFkjLXJy4OX
+JQMigXk24N+s6PtF235yqMCiaOg4q/KIT4RjdWJKgNpWuf3r5GMUKCmRQiAOQggHKCbSfyky5f+J
+IHNHzby2x+AlRjipyEoy8Y4S96kdG90PQ/8fkplmjoigN03cSKglEvDVdf+EoBjVEgzhRTb+YIhh
+GCRuzlTl2BFQNMHoNDsIU4eoMa0eLIcsOZOEoTl9YLbdHrOkEiiF8FkOmsVRoQTmVeGTA6Cx0gd0
+ZB4vGvsaMJFxezMZTf8wggaeMIIFhqADAgECAgp+i/nRAAAAABCvMA0GCSqGSIb3DQEBCwUAMDUx
+CzAJBgNVBAYTAkRFMQ4wDAYDVQQKDAVVbmlmeTEWMBQGA1UEAwwNVW5pZnkgVXNlciBDQTAeFw0x
+MzEwMjEwNzM1MDRaFw0xODEwMjAwNzM1MDRaMFgxLDAqBgkqhkiG9w0BCQEWHXBhbmFnaW90aXMu
+dGFtdGFtaXNAdW5pZnkuY29tMSgwJgYDVQQDDB9UYW10YW1pcyBQYW5hZ2lvdGlzIFNFTkdSMDcw
+MTQwMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyNe0JD2i3s+szC33fTp76iZIUvbc
+GgGxbPdqG5/nQ4GCks2/lbRv9jslpM4sBctP1z+ggppIN/+elifcW1FBnLUaYYWZLMqmnJIzw8In
+VoqTP+0XEuGV/sx8Ekr5BJJigF6L2FN38b4OZT9Y5xBQHPB60QeUwSSnckgh9rQGx2ArhrgyYID7
+NKBSZjApGx1RNDckKEx2pe1Rv3WpmLz+T5vphZoTEJ2Go81u5TxpTa4+4A9yqEjMENLZ9KAjxjqd
+AK8jH8jD+v70xG2LKL8QV0wmgJ5QkvBZvNzQLGr7MezYZ7RibjD0di3SeTxEQrHayrrWactsSeMj
+T60og0h6hwIDAQABo4IDizCCA4cwPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGCNxUIgt6SVoGmryaG
+iZkJpvV0gvKhRYEphvjFSoLYuW8CAWQCAQ4wNQYDVR0lBC4wLAYKKwYBBAGCNxQCAgYIKwYBBQUH
+AwQGCisGAQQBgjcKAwQGCCsGAQUFBwMCMA4GA1UdDwEB/wQEAwIEsDAMBgNVHRMBAf8EAjAAMB0G
+A1UdDgQWBBRFUxQGRVbllZJknipjnI3bA7gs5TAfBgNVHSMEGDAWgBSYcfeguYfHRvQGDIEmM71d
+3lALZjCCARsGA1UdHwSCARIwggEOMIIBCqCCAQagggEChipodHRwOi8vcGtpLnVuaWZ5LmNvbS9j
+cmwvdW5pZnktdXNlci1jYS5jcmyGgdNsZGFwOi8vcGtpLWRpcmVjdG9yeS51bmlmeS5jb20vQ049
+VW5pZnklMjBVc2VyJTIwQ0EsQ049dW5pZnktcGtpLENOPUNEUCxDTj1QdWJsaWMlMjBLZXklMjBT
+ZXJ2aWNlcyxDTj1TZXJ2aWNlcyxDTj1Db25maWd1cmF0aW9uLERDPWdsb2JhbC1hZCxEQz1uZXQ/
+Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlP29iamVjdENsYXNzPWNSTERpc3RyaWJ1dGlv
+blBvaW50MIIBPgYIKwYBBQUHAQEEggEwMIIBLDA2BggrBgEFBQcwAoYqaHR0cDovL3BraS51bmlm
+eS5jb20vY3J0L3VuaWZ5LXVzZXItY2EuY3J0MIHJBggrBgEFBQcwAoaBvGxkYXA6Ly9wa2ktZGly
+ZWN0b3J5LnVuaWZ5LmNvbS9DTj1VbmlmeSUyMFVzZXIlMjBDQSxDTj1BSUEsQ049UHVibGljJTIw
+S2V5JTIwU2VydmljZXMsQ049U2VydmljZXMsQ049Q29uZmlndXJhdGlvbixEQz1nbG9iYWwtYWQs
+REM9bmV0P2NBQ2VydGlmaWNhdGU/YmFzZT9vYmplY3RDbGFzcz1jZXJ0aWZpY2F0aW9uQXV0aG9y
+aXR5MCYGCCsGAQUFBzABhhpodHRwOi8vb2NzcC51bmlmeS5jb20vb3IwMTBQBgNVHREESTBHoCYG
+CisGAQQBgjcUAgOgGAwWR1JNUzgyNjVAR0xPQkFMLUFELk5FVIEdcGFuYWdpb3Rpcy50YW10YW1p
+c0B1bmlmeS5jb20wDQYJKoZIhvcNAQELBQADggEBADhumYGMCtI/WyN7RrIqEPnn6EPv5+HhamLW
+t2pgQIDacVXWM3febceYb5Ytt0u/DcZvVG9X9Qqj1xmiplUE1spHv4kpO4YEzlXk+UmB3p8wFUzC
+ZHRRWap6Y5UeZrzM9W8E/x2gAH2CHF5Nj9X2EQg+JUZD7ro0G7XXTG7ciV+gxIAjrN4E2CsxLy8d
+LnXGTv7nk1OCmi/4NmnOdGJzjOEGh6XhNofosu17QGr541YsJHpw1x1VFWigImMxwfw9GC7X85dY
+HGtRTo2BIfr1eayJqgNSm7DWp5u5oprq1tpNXYaATsRB7o8ORVb/aIYp8Xc9v2GxNAWDtaANR+Ew
+I2MxggMvMIIDKwIBATBDMDUxCzAJBgNVBAYTAkRFMQ4wDAYDVQQKDAVVbmlmeTEWMBQGA1UEAwwN
+VW5pZnkgVXNlciBDQQIKfov50QAAAAAQrzAJBgUrDgMCGgUAoIIBwTAYBgkqhkiG9w0BCQMxCwYJ
+KoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNzA2MjAwODA3MjlaMCMGCSqGSIb3DQEJBDEWBBRA
+6NbJjohcU0g6ZPoCxcz4Fv649jBSBgkrBgEEAYI3EAQxRTBDMDUxCzAJBgNVBAYTAkRFMQ4wDAYD
+VQQKDAVVbmlmeTEWMBQGA1UEAwwNVW5pZnkgVXNlciBDQQIKfov50QAAAAAQrzBUBgsqhkiG9w0B
+CRACCzFFoEMwNTELMAkGA1UEBhMCREUxDjAMBgNVBAoMBVVuaWZ5MRYwFAYDVQQDDA1VbmlmeSBV
+c2VyIENBAgp+i/nRAAAAABCvMIG3BgkqhkiG9w0BCQ8xgakwgaYwCwYJYIZIAWUDBAEqMAsGCWCG
+SAFlAwQBFjAKBggqhkiG9w0DBzALBglghkgBZQMEAQIwDgYIKoZIhvcNAwICAgCAMAcGBSsOAwIH
+MA0GCCqGSIb3DQMCAgFAMA0GCCqGSIb3DQMCAgEoMAcGBSsOAwIaMAsGCWCGSAFlAwQCAzALBglg
+hkgBZQMEAgIwCwYJYIZIAWUDBAIBMAoGCCqGSIb3DQIFMA0GCSqGSIb3DQEBAQUABIIBAFZ/MWDD
+KoHqKAvX16R5GQ4npQTOcnLjHQf7JOWowCF0LuQV3Vx184V8DnLYsvTJLnctvkdAWeo/qRo97lra
+b736l4xK0Ka69CG5+0tDZwOsLY/FYBrNSRP6YmPSJHyLMK90fc4fES0g51zV7Fxx+KoAwtNZkSFq
+MsnVZ97XF+7BisAh9CevhEj9JlK9borYhsQUEvpmrhGsJ95yFvz38P+TkIEeWMe9j2IdTvX8nIDW
+Z59qwy9uTnCF9mjoip34R/G7HLve1CPk/ZTzQ8eR6NZ35KxngjZKiSoCIAg6rFrWV8Fln6z9xUbZ
+sY9siWrCcQS+tBmiYv3NdY0mDEOqj6kAAAAAAAA=
+
+------=_NextPart_000_0003_01D2E9B5.687A17B0--
