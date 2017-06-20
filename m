@@ -1,22 +1,59 @@
-Return-Path: <amery@hanoverdisplays.com>
-Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E09587821C
+Return-Path: <prvs=1344511f89=holzmayr@rsi-elektrotechnik.de>
+Received: from mo4-p00-ob.smtp.rzone.de (mo4-p00-ob.smtp.rzone.de
+	[81.169.146.160])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A83A781E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jun 2017 12:13:16 +0000 (UTC)
-Received: from localhost (192.168.0.21) by mail.hanoverdisplays.com
-	(192.168.0.31) with Microsoft SMTP Server (TLS) id 14.3.319.2;
-	Tue, 20 Jun 2017 13:13:16 +0100
-From: Alejandro Mery <amery@hanoverdisplays.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 20 Jun 2017 13:13:04 +0100
-Message-ID: <20170620121304.25402-1-amery@hanoverdisplays.com>
-X-Mailer: git-send-email 2.13.0
+	Tue, 20 Jun 2017 14:08:04 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; t=1497967685;
+	l=1083; s=domk; d=rsi-elektrotechnik.de;
+	h=Content-Transfer-Encoding:Content-Language:Content-Type:In-Reply-To:
+	MIME-Version:Date:From:References:To:Subject;
+	bh=KFzNu68q3XyenhZULP+2XSzTQ1YEfRQibgC08amMG+E=;
+	b=jW8STJ3bwOUjAT0OcwBOWkWAMzhrVa6brlD8Xbdoyr2PXzo15HFhxcEMbKypxpiOGx
+	NREOSlpo5BbXQcv+cuLWkfKwopm/ToMJGRfdAsyCpIBAVBf29jKmZsV73qWCjAv1+Nub
+	LYsRPLMMGuY+mJocVDLQwk2B/TKy7GYdfBTUc=
+X-RZG-AUTH: :fz5RJhWIaexwuXGosGLfiBc0xYyi1Y5bd+wRKqrzPWwJyH/ODuV4n+N24+CqMVTDvF1MhuFNtPdyidq2ZZdXriOrPDOpyD7Cm/6iRJmZvQ==
+X-RZG-CLASS-ID: mo00
+Received: from mail.rsi-elektrotechnik.de
+	([2001:0:9d38:78cf:2ca8:3fcf:af6c:cbea])
+	by smtp.strato.de (RZmta 40.9 AUTH) with ESMTPSA id j012d5t5KE83vG9
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA384 (curve secp384r1
+	with 384 ECDH bits, eq. 7680 bits RSA))
+	(Client did not present a certificate);
+	Tue, 20 Jun 2017 16:08:03 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/relaxed;
+	d=rsi-elektrotechnik.de; s=MDaemon; t=1497967671; x=1498572471;
+	i=holzmayr@rsi-elektrotechnik.de; q=dns/txt; h=Subject:To:
+	References:From:Message-ID:Date:User-Agent:MIME-Version:
+	In-Reply-To:Content-Type:Content-Language:
+	Content-Transfer-Encoding; bh=KFzNu68q3XyenhZULP+2XSzTQ1YEfRQibg
+	C08amMG+E=; b=u7rGyjo42twpaHWZgJPlERrRb49KGERueJsWMYHLaURbk1Z+33
+	n1c2zmQqpiLcczUox6NhYiuIk4GyEZb0iVz2ly43vuw2v4KERduUXWa0WNNJd/EG
+	5m49aOFNyRsb5DCpQjvI0irAjNK+3Ji6zJ82Z+V/PjJhmzZMdK2vEXVl8=
+Received: by mail.rsi-elektrotechnik.de (MDaemon PRO v17.0.2) with ESMTPSA id
+	md50000536404.msg; Tue, 20 Jun 2017 16:07:50 +0200
+X-Spam-Processed: mail.rsi-elektrotechnik.de, Tue, 20 Jun 2017 16:07:50 +0200
+	(not processed: message from trusted or authenticated source)
+X-MDRemoteIP: 185.69.203.14
+X-MDArrival-Date: Tue, 20 Jun 2017 16:07:50 +0200
+X-Authenticated-Sender: holzmayr@rsi-elektrotechnik.de
+X-Return-Path: prvs=1344511f89=holzmayr@rsi-elektrotechnik.de
+X-Envelope-From: holzmayr@rsi-elektrotechnik.de
+X-CAV-Result: skipped - holzmayr@rsi-elektrotechnik.de is in exclusion list
+To: "Tamtamis, Panagiotis" <panagiotis.tamtamis@unify.com>,
+	???'?? ?????? <maryan.pricak@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+References: <CAGyDALnwxEvX3AFfbB5thjQy91+9BNmzgyR5RPQetLseZD7hJw@mail.gmail.com>
+	<e23728ee-eece-c3d1-da75-defd91e094ad@rsi-elektrotechnik.de>
+	<0D74DA672F03634EA90EB18A61E36D27263B0EC1@MCHP04MSX.global-ad.net>
+From: Josef Holzmayr <holzmayr@rsi-elektrotechnik.de>
+Message-ID: <baf1ac86-c92d-1907-0cb5-25e94b495818@rsi-elektrotechnik.de>
+Date: Tue, 20 Jun 2017 16:07:46 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.0
 MIME-Version: 1.0
-X-Originating-IP: [192.168.0.21]
-X-GFI-SMTP-Submission: 1
-X-GFI-SMTP-HelloDomain: localhost
-X-GFI-SMTP-RemoteIP: 192.168.0.21
-Subject: [meta-oe][PATCH] gitver: skip packages instead of panic()ing if ${GITVER} fails to expand
+In-Reply-To: <0D74DA672F03634EA90EB18A61E36D27263B0EC1@MCHP04MSX.global-ad.net>
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,64 +66,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jun 2017 12:13:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 20 Jun 2017 14:08:06 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: de-DE
+Content-Transfer-Encoding: 8bit
 
-`inherit externalsrc gitver` is a very useful combo to get development trees
-in your workspace having a ${PN}_git.bb with PV=${GITVER} coexisting with a regular
-${PN}_${PV}.bb
+Hi Tamis,
 
-but not everyone wants to checkout all developments sources and managinging different
-layers for each options is quite troublesome.
+On 20.06.2017 10:07, Tamtamis, Panagiotis wrote:
+> I use the following in my image recipe:
+> 
+> FORCE_RO_REMOVE = "1"
+> ROOTFS_RO_UNNEEDED += " kernel-${LINUX_VERSION} kernel-image-${LINUX_VERSION} kernel-image-uimage-${LINUX_VERSION}"
 
-making `gitver` skip the .bb instead of panic()ing every time EXTERNALSRC is missing
-allows people to have a single development layer where packages get enabled if
-the right sources are present or falling back to the last release if not
+While that might work, it actually builds all the stuff and then only 
+excludes it from the rootfs generation. But if we actually never ever 
+want a kernel, why spend the compile time? :)
 
-Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
----
- meta-oe/classes/gitver.bbclass | 23 ++++++++++-------------
- 1 file changed, 10 insertions(+), 13 deletions(-)
-
-diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbclass
-index a09c99749..380374ab2 100644
---- a/meta-oe/classes/gitver.bbclass
-+++ b/meta-oe/classes/gitver.bbclass
-@@ -27,23 +27,20 @@ def get_git_pv(d, tagadjust=None):
-     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
-     try:
-         ver = gitrev_run("git describe --tags", gitdir)
--    except Exception as exc:
--        bb.fatal(str(exc))
--
--    if not ver:
-+    except:
-         try:
-             ver = gitrev_run("git rev-parse --short HEAD", gitdir)
-+            if ver:
-+                return "0.0+%s" % ver
-+            else:
-+                return "0.0"
-+
-         except Exception as exc:
--            bb.fatal(str(exc))
-+            raise bb.parse.SkipPackage(str(exc))
- 
--        if ver:
--            return "0.0+%s" % ver
--        else:
--            return "0.0"
--    else:
--        if tagadjust:
--            ver = tagadjust(ver)
--        return ver
-+    if ver and tagadjust:
-+        ver = tagadjust(ver)
-+    return ver
- 
- def get_git_hash(d):
-     import os
+Greetz
 -- 
-2.13.0
+Josef Holzmayr
+Software Developer Embedded Systems
+
+Tel: +49 8444 9204-48
+Fax: +49 8444 9204-50
+
+R-S-I Elektrotechnik GmbH & Co. KG
+Woelkestrasse 11
+D-85301 Schweitenkirchen
+www.rsi-elektrotechnik.de
+———————————————
+Amtsgericht Ingolstadt – GmbH: HRB 191328 – KG: HRA 170393
+Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
+Ust-IdNr: DE 128592548
+
+_____________________________________________________________
+Amtsgericht Ingolstadt - GmbH: HRB 191328 - KG: HRA 170363
+Geschäftsführer: Dr.-Ing. Michael Sorg, Dipl.-Ing. Franz Sorg
+USt-IdNr.: DE 128592548
 
 
