@@ -1,48 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f180.google.com (mail-yw0-f180.google.com
-	[209.85.161.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CE2A71A76
+Return-Path: <pauldotknopf@gmail.com>
+Received: from mail-ot0-f181.google.com (mail-ot0-f181.google.com
+	[74.125.82.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A4DF7199D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jun 2017 17:27:31 +0000 (UTC)
-Received: by mail-yw0-f180.google.com with SMTP id l75so67118902ywc.3
+	Wed, 21 Jun 2017 18:15:34 +0000 (UTC)
+Received: by mail-ot0-f181.google.com with SMTP id y47so95679068oty.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jun 2017 10:27:33 -0700 (PDT)
+	Wed, 21 Jun 2017 11:15:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=pj4FRu9yZdQzBrLqhIp7IvzluKkhU8G4Hzk2Qi6T1D0=;
-	b=k/NFc4aT3hpZ1N0UH8QZj3BfB1gEiL4Jc75AcqMhLfg/w8Juzhiuaj8a1/Lwk2LjCU
-	W5aD1D4ZepO8rX2K8BkyK0PCz5MMcbmRE8D8n2o76/K5dFn5vtSK6lIYMu8TW0zlV8xk
-	LhM08IzzhVMg4PPmM/7C+eMWRjIlK9bMa15pxFjO9sdJB+DstJlRYjHsCwg2DUpJ6uuU
-	0ydb8l1ZfshAx1J/40we1e4Fk7rS2UVU1IsRqQWKy03IjONDR/I3KRtTZQn55flBLDgt
-	RnLzfA7XmtPacq2NU7u06v0sTdMK+j7b2O4OskLlmVUadXLNpcFohFmgs/2s4XHTK4hw
-	hVEw==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=J9+CmkH6oLCyMxNRRz9VOAjXhnyagVFOcm5AIEvbH6s=;
+	b=JO3tp2r4Di/EMHsB7Czt9xEhiM6X2zV/h1DMs5k0tHIXy4p6+QVQ+RuLdjtqsUA5dy
+	/Vlixu3F0QfYAuZerW1SgjutF9MMh4LBj52xnzPfVXK6E/EERs4xJRVAbZMtOwNS4Uv2
+	nBKeHjQ4p1XJgnY4qU9EiOKLqKBpsvxU4WQ1W84bY382VADezot2HZ2oqTvh9vSf2bOm
+	yQdwjk0hnMgI7zEyhB96T/Va7iUxv7qWUUVQRnNSGp2P61g0J/GNt3exXLbZHasG6F5Z
+	84hbI5ruWawUVBStcWyEajpR0XkdsBOpTNSI9K5uf4bmL9nSjitRa1ly/D0DFRygggiM
+	S44A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=pj4FRu9yZdQzBrLqhIp7IvzluKkhU8G4Hzk2Qi6T1D0=;
-	b=KNkWZpyU+Q4C7IJ7wxF+4my9rQloOjvQj+3TmJVMFIZeaVCI7eyfvqsuKNYvY4ZQr7
-	zSKokCHIn2A1ObCJzB7uKlJPWGhptIOzORw9dXZUVdmrg44SMCLX0V4H5hShJi4O9VeR
-	cl8zCDQgQMZO9xVUdSF4Dj1DUXswcJwyI3U1xDaT26RLCGP2rFQ8/tjjS4FdritnFHqb
-	IaW7Swoam5cvxNGMkmHa/ZDh8qz1rHFNm7LTIWEbJ4T8O1g/Y6GbT68vvh1EIyt1wPeg
-	+SZ2WmYjvc8m24iXXCz191NUXTj/XNhCtSj8fS3nNOoAn3ABPctgXmvOm1d72q80vkDR
-	ixNA==
-X-Gm-Message-State: AKS2vOxKkSu/v4GW3/2D03pfE3Nangk8RuFx45AABUGD680Moo+wXWPv
-	KblfPLzs8FRyrtZq0g+EnCLgdGeM0Q==
-X-Received: by 10.129.62.28 with SMTP id l28mr26788322ywa.130.1498066052613;
-	Wed, 21 Jun 2017 10:27:32 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=J9+CmkH6oLCyMxNRRz9VOAjXhnyagVFOcm5AIEvbH6s=;
+	b=Wp49rcUiGQYgNKp5bIjFW++cyDozKbLKB4OLic9gNv/5D+bPJ7+vKUUVYBkEgaqeWG
+	i06VJvPYdqwV4QPYomgMjMcqKFS/L+KbJgGvMM5z2ZfM7BdIQVRYit+fEVAVuKi2KdXU
+	8CBiqHNaRL9CxCz4Q0/8bMzgRkHraAFLEWhQ49x+gesRG1zTVb8IlwqRYINXofBV2ukK
+	lAvQ/yQR5KkaGLOznd3KYLd6utd85vVdjXSOo5s5V3tIWBTCmqqQsisSz2x6rE91oTNy
+	GMzqXPOxw8XDKIiLzljOka1+T57H+f+4UhSi3GsilUvP2uDVaLarcN3/cxOtHkSUgSTE
+	QlFQ==
+X-Gm-Message-State: AKS2vOzJPjJRxWnv1SX23HM7fI+NrM8QYmRuMVXGXE1dM141iJv1CZO3
+	feVG/Iy0RdevWPlBOiNOk0jhi7hinXMt
+X-Received: by 10.157.32.76 with SMTP id n70mr15440780ota.151.1498068934946;
+	Wed, 21 Jun 2017 11:15:34 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.37.181.204 with HTTP; Wed, 21 Jun 2017 10:27:32 -0700 (PDT)
-In-Reply-To: <CAKmWj-1bxyR6gCMpOf+nQPvAWW2vz8dULDnL5DQ141OMcohF9A@mail.gmail.com>
-References: <CAKmWj-1bxyR6gCMpOf+nQPvAWW2vz8dULDnL5DQ141OMcohF9A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 21 Jun 2017 19:27:32 +0200
-Message-ID: <CA+chaQcd7tJZ+O0==e3=cfWFm_rBcaZHGnv5=9zhaX8QnMcudw@mail.gmail.com>
-To: Paul Knopf <pauldotknopf@gmail.com>
+Received: by 10.74.139.150 with HTTP; Wed, 21 Jun 2017 11:15:34 -0700 (PDT)
+From: Paul Knopf <pauldotknopf@gmail.com>
+Date: Wed, 21 Jun 2017 14:15:34 -0400
+Message-ID: <CAKmWj-1-sXNeNBJpO1uzF+8q7sFjS3XO4m=hQL3CDa10T2H99w@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: cflaat@medxchange.com,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: meta-qt5 pyro support?
+Subject: meta-qt5 nothing provides qtdeclarative-plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,20 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jun 2017 17:27:32 -0000
+X-List-Received-Date: Wed, 21 Jun 2017 18:15:34 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-tomorrow
+When I try to use "packagegroup-qt5-qtcreator-debug", I get this error.
 
-On Wed, Jun 21, 2017 at 4:22 PM, Paul Knopf <pauldotknopf@gmail.com> wrote:
+nothing provides qtdeclarative-plugins needed by
+packagegroup-qt5-qtcreator-debug-1.0-r0.noarch
 
-> I notice there is no pyro branch for meta-qt5.
->
-> What is the status of this? ETA?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+I am using poky/pyro, with meta-qt5/master
+(3ae86cb32edd1449f702e0a094929ae9b21ce191).
+
+I checked the build/workspace directory for this recipe, and indeed, no
+files are being put into the qtdeclarative-plugins package. The build
+directory contains no plugins directory.
+
+I checked the morty branch and some "plugins/qmltooling/libqmldbg_*".so"
+files were being placed inside of the "qtdeclarative-plugins" package.
+
+Does the "packagegroup-qt5-qtcreator-debug" need to remove the
+"qtdeclarative-plugins" dependency, or does the qtdeclarative recipe need
+to be fixes to include plugins in the build output?
 
