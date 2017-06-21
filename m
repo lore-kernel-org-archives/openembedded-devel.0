@@ -1,46 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id BE23F600BB
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wr0-f176.google.com (mail-wr0-f176.google.com
+	[209.85.128.176])
+	by mail.openembedded.org (Postfix) with ESMTP id B357778077
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jun 2017 05:50:32 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id y7so27793436pfd.3
+	Wed, 21 Jun 2017 07:27:50 +0000 (UTC)
+Received: by mail-wr0-f176.google.com with SMTP id r103so122310714wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jun 2017 22:50:34 -0700 (PDT)
+	Wed, 21 Jun 2017 00:27:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=pADC/3UDhnn+W3o9xpYYdePAYzTKOalOV9GKp/yapWg=;
-	b=NTLgpGTULgRzd/7M0IgwXrqPhsCHwk7WRSK1plxOC1arBzkZB9Bb08IDzrAQ1oH6PO
-	08xkx2kjsLR2XM9ZYPkWiI1bfH9RIWKp4T8FrVC3KNJ/Eh3gbN1pz+5yN64Dd4LuzvxU
-	NerMKPMpAm3y/Ekhn5SBpWTehIPFggWZn1U4fl9F5EhPlWaqL7fT8ZdAInHoIifJeomi
-	/BCwjH+XCfw4oUoyJy75Zh68TTvP90ub6mJ/YuHcE2VQb7c0TVPRYlx3QrOTwgQPQzBf
-	aqcJu8WLgwOnJxSD6OtepPL5+rUX5Unf9PMrZD0P+QlMgOlmKTrGuR7AoCckLRn4JOov
-	R4Jw==
+	bh=a1xQxX+jNb6yo8A3C2KyJsa6DB4d7aPggH/IdhEgrlY=;
+	b=POeOQP0CBbPDSNLLxSfQZgGoRgKjWs4+Q9QAf7vDOBikm0eKhVQs7Z9JypjwytmDZ+
+	zdPbEz7TWBAzS73KoHwWtcmC43vr0hM0Hlf58c0Zmu6Yj2gkuxMBnHg1npqjL+BILklZ
+	sco/fazK6hd9RzGKH944LK8ND8IsRAoxe9N2QT2CvZeOzJdoUiHogmT5/yhJx6W66Myq
+	2XkOwtolZK042uKd5xucV5Wde4xwYzj+E2PCRQTOjGrgYxNhgI40pIDbXgDcp2UBtLDA
+	E/cP8xi/A0V7scW9KykZXi6gSr3VJTa3cObbcoQ5vWnU3XujACuX0SCLK0hLPzYR13s0
+	ZXsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pADC/3UDhnn+W3o9xpYYdePAYzTKOalOV9GKp/yapWg=;
-	b=Cf2BhmPLvhnWoUmeYDXfu4/WYkvKC5LUT7LzYzAwiSGves2F/vs70+ZXeJW2vkceik
-	zQoltMFwY5G4+XTngHAk6X+qhX2dYnyud10egCSfKnB2H30ttMS+OvsDsxeUeo6f7Drw
-	+7KhscoqFr9EoLBB4gJnpDYSkbdseMscVmhIfCXXg+a8jNoFtvHiE1we3k9G4d/ZOn8i
-	kxvxniN7XkezF5NmuG7GJtnRIABl+r39pyOsWjU+qCWD5k62kiTVja9AiY/zV0yy3owJ
-	JYV7E4veG8XNppfBa8amFDE/1kw1nWOEbIZzM83aQEDrHGYXhZEU8+Ei7usAVUgnV7lM
-	z0Qg==
-X-Gm-Message-State: AKS2vOyga/PHfTfrvdzNoyw3dUfqKmUCsYT4ikgfwPF2xOVmWpvfShHU
-	NIcIrZm5Sseglpue
-X-Received: by 10.84.175.65 with SMTP id s59mr39409958plb.20.1498024233312;
-	Tue, 20 Jun 2017 22:50:33 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::36d3])
-	by smtp.gmail.com with ESMTPSA id
-	l85sm30410011pfj.130.2017.06.20.22.50.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 20 Jun 2017 22:50:32 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	bh=a1xQxX+jNb6yo8A3C2KyJsa6DB4d7aPggH/IdhEgrlY=;
+	b=MgdixGpkQpRpLrKwAeYgrajANgW45hp9RSsiRJNR9OHkX94eNnMecESLZZ+xTvLlUv
+	ro6zlU+Ay0QWRdjXVP5Xj2PMMpF6BSB+uOOtIUwQVUFpaPSMpOaK7m4WAuD7Qo/6077L
+	EhKN6dQOOUV83C4kJ2b2BqLrmrbMtvzkDW1bdd0rRBZ4Jp4TGCE3BZByYJwyWE1jRobI
+	2O791d2w8Zd4nzXWxcsiovk3MEfbKJOdppBgkrVaeMyXrMqh/Q+xCFWg3r7j/3oj8nN8
+	cEgka5T0Va5FK82Df+wXcmf2cInjOGNevzvEJBB4PrsS+TQU6YoMba9Yeo2fO79NJkR2
+	3dkA==
+X-Gm-Message-State: AKS2vOxA8OLG7xrpVdONaoL9Alojhe0yb7/U3PJoFAS6tdPSShdDs8SF
+	0Ldo3o2zk4JGtTYy/64=
+X-Received: by 10.28.209.72 with SMTP id i69mr5502606wmg.30.1498030070710;
+	Wed, 21 Jun 2017 00:27:50 -0700 (PDT)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host215-70-dynamic.249-95-r.retail.telecomitalia.it.
+	[95.249.70.215]) by smtp.gmail.com with ESMTPSA id
+	29sm25404861wrv.23.2017.06.21.00.27.49
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 21 Jun 2017 00:27:50 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Jun 2017 22:50:11 -0700
-Message-Id: <20170621055011.41502-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-oe][PATCH] ipmiutil: Upgrade to 3.0.5
+Date: Wed, 21 Jun 2017 09:27:44 +0200
+Message-Id: <1498030064-12746-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-initramfs][PATCH v2] kexecboot: update recipe to master on github (4c4f127)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,415 +54,452 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jun 2017 05:50:32 -0000
+X-List-Received-Date: Wed, 21 Jun 2017 07:27:51 -0000
 
-license changed information see
-https://sourceforge.net/p/ipmiutil/code-git/ci/647a155e219e56d9cec8ffc61ad5f43a35a1af3a/tree/COPYING?diff=adb40a4caea4873586803ba5030b79de1bfca601
+With pending OE patches and a new fix for gcc 7.
+Set PV = "0.6+git${SRCREV}" while waiting for a new 0.7 tarball upstream.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- .../ipmiutil/ipmiutil/fix_systemd_path.patch       | 318 ---------------------
- .../{ipmiutil_2.9.6.bb => ipmiutil_3.0.5.bb}       |  40 ++-
- 2 files changed, 16 insertions(+), 342 deletions(-)
- delete mode 100644 meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
- rename meta-oe/recipes-support/ipmiutil/{ipmiutil_2.9.6.bb => ipmiutil_3.0.5.bb} (68%)
+ .../files/0001-kexecboot-fix-build-when-S-B.patch  |  61 ----------
+ .../0002-kexecboot-fix-configure-warnings.patch    |  33 -----
+ ...0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch |  97 ---------------
+ ...-workaround-for-absolute-kernel-and-initr.patch | 135 ---------------------
+ .../files/0005-rgb.h-fix-build-with-gcc5.patch     |  35 ------
+ .../{kexecboot_0.6.bb => kexecboot_git.bb}         |  19 +--
+ 6 files changed, 4 insertions(+), 376 deletions(-)
+ delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0001-kexecboot-fix-build-when-S-B.patch
+ delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0002-kexecboot-fix-configure-warnings.patch
+ delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch
+ delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch
+ delete mode 100644 meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
+ rename meta-initramfs/recipes-bsp/kexecboot/{kexecboot_0.6.bb => kexecboot_git.bb} (81%)
 
-diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch b/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0001-kexecboot-fix-build-when-S-B.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0001-kexecboot-fix-build-when-S-B.patch
 deleted file mode 100644
-index 2fa7c6883..000000000
---- a/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
+index 6d3270f..0000000
+--- a/meta-initramfs/recipes-bsp/kexecboot/files/0001-kexecboot-fix-build-when-S-B.patch
 +++ /dev/null
-@@ -1,318 +0,0 @@
--allow systemd path to be defined by configure option.
+@@ -1,61 +0,0 @@
+-From 8519d61a7097498b0ee93fb8dc8262286825f3e5 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Thu, 1 May 2014 23:58:51 +0200
+-Subject: [PATCH 1/4] kexecboot: fix build when S != B
 -
--The configure probes the host for systemd path information.
+-* fatal error: ../config.h: No such file or directory
 -
--Upstream Status: Inappropriate [Embedded]
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- machine/zaurus.c | 2 +-
+- res/theme-gui.h  | 2 +-
+- res/theme-tui.h  | 4 ++--
+- 3 files changed, 4 insertions(+), 4 deletions(-)
 -
--Signed-off-By: Armin Kuster <akuster@mvista.com>
+-diff --git a/machine/zaurus.c b/machine/zaurus.c
+-index ea21047..83be13b 100644
+---- a/machine/zaurus.c
+-+++ b/machine/zaurus.c
+-@@ -25,7 +25,7 @@
+-  *
+-  */
+- 
+--#include "../config.h"
+-+#include "config.h"
+- 
+- #ifdef USE_ZAURUS
+- 
+-diff --git a/res/theme-gui.h b/res/theme-gui.h
+-index f8fef7f..79bed39 100644
+---- a/res/theme-gui.h
+-+++ b/res/theme-gui.h
+-@@ -15,7 +15,7 @@
+-  *
+-  */
+- 
+--#include "../config.h"
+-+#include "config.h"
+- 
+- #ifdef USE_ICONS
+- /** Icons **/
+-diff --git a/res/theme-tui.h b/res/theme-tui.h
+-index 94e7693..909be56 100644
+---- a/res/theme-tui.h
+-+++ b/res/theme-tui.h
+-@@ -15,11 +15,11 @@
+-  *
+-  */
+- 
+--#include "../config.h"
+-+#include "config.h"
+- 
+- #ifdef USE_TEXTUI
+- /** TEXT UI colors **/
+--#include "../termseq.h"
+-+#include "termseq.h"
+- 
+- /* Background color pair */
+- #define TUI_CLR_BG		TERM_CSI TERM_BG_BLACK ";" TERM_FG_WHITE TERM_SGR
+--- 
+-1.9.1
 -
--Index: ipmiutil-2.9.6/configure
--===================================================================
----- ipmiutil-2.9.6.orig/configure
--+++ ipmiutil-2.9.6/configure
--@@ -792,7 +792,6 @@ LTLIBOBJS
-- LIBOBJS
-- pkgconfigdir
-- SHR_LINK
---SYSTEMD_DIR
-- CROSS_LFLAGS
-- CROSS_CFLAGS
-- SUBDIR_S
--@@ -999,7 +998,7 @@ psdir='${docdir}'
-- libdir='${exec_prefix}/lib'
-- localedir='${datarootdir}/locale'
-- mandir='${datarootdir}/man'
---
--+systemddir='${datarootdir}/ipmiutil'
-- ac_prev=
-- ac_dashdash=
-- for ac_option
--@@ -1594,7 +1593,10 @@ Optional Features:
--   --enable-standalone    build standalone, with no GPL or LanPlus libs.
--   --enable-libsensors	 build libipmiutil with sensor modules [default=no]
--   --enable-gpl           build with some GPL code [default=no]
---  --enable-systemd       enable systemd service type=notify support and %_unitdir [default=disabled]
--+  --enable-systemd[=systemddir]      install systemd unit file.  If 'yes'
--+                probe the system for unit directory.
--+                If a path is specified, assume that
--+                is a valid install path.  [default=disabled]
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0002-kexecboot-fix-configure-warnings.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0002-kexecboot-fix-configure-warnings.patch
+deleted file mode 100644
+index ecf422b..0000000
+--- a/meta-initramfs/recipes-bsp/kexecboot/files/0002-kexecboot-fix-configure-warnings.patch
++++ /dev/null
+@@ -1,33 +0,0 @@
+-From b8938acc3f1ab35273fa9a2fa7728050ef72ff65 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Fri, 2 May 2014 00:19:24 +0200
+-Subject: [PATCH 2/4] kexecboot: fix configure warnings
+-
+-Makefile.am:5: warning: source file 'fstype/fstype.c' is in a subdirectory,
+-Makefile.am:5: but option 'subdir-objects' is disabled
+-automake: warning: possible forward-incompatibility.
+-...
+-Makefile.am:5: warning: source file 'machine/zaurus.c' is in a subdirectory,
+-...
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- configure.ac | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index 0ca4b81..66ec54e 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -1,7 +1,7 @@
+- AC_PREREQ(2.53)
+- AC_INIT([kexecboot], [0.6], [kexecboot-devel@linuxtogo.org])
+- AC_CANONICAL_HOST
+--AM_INIT_AUTOMAKE([-Wall foreign])
+-+AM_INIT_AUTOMAKE([-Wall foreign] [subdir-objects])
+- AC_CONFIG_SRCDIR(kexecboot.c)
+- AC_CONFIG_HEADERS(config.h)
+- AM_MAINTAINER_MODE
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch
+deleted file mode 100644
+index 4caa0d5..0000000
+--- a/meta-initramfs/recipes-bsp/kexecboot/files/0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch
++++ /dev/null
+@@ -1,97 +0,0 @@
+-From 800dae0d34f8629a34c638a612166b76dda03e27 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Sat, 2 Aug 2014 01:13:08 +0200
+-Subject: [PATCH 3/4] kexecboot: do not hardcode MOUNTPOINT
+-
+-Avoid to hardcode it: could be requested as a new configure option.
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- cfgparser.c |  6 +++---
+- kexecboot.c | 18 ++++++++++--------
+- 2 files changed, 13 insertions(+), 11 deletions(-)
+-
+-diff --git a/cfgparser.c b/cfgparser.c
+-index 8f6688c..dec27b1 100644
+---- a/cfgparser.c
+-+++ b/cfgparser.c
+-@@ -141,7 +141,7 @@ static int set_kernel(struct cfgdata_t *cfgdata, char *value)
+- 		return -1;
+- 	}
 - 
-- Optional Packages:
--   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
--@@ -12980,7 +12982,6 @@ CROSS_LFLAGS=""
-- CROSS_CFLAGS=""
-- LIBSENSORS=""
-- SAM2OBJ="isensor2.o ievents2.o"
---SYSTEMD_DIR=/usr/share/ipmiutil
+--	strcpy(sc->kernelpath, "/mnt");
+-+	strcpy(sc->kernelpath, MOUNTPOINT);
+- 	strcat(sc->kernelpath, value);
+- 	return 0;
+- }
+-@@ -155,7 +155,7 @@ static int set_icon(struct cfgdata_t *cfgdata, char *value)
 - 
-- # Check whether --enable-useflags was given.
-- if test "${enable_useflags+set}" = set; then
--@@ -13032,31 +13033,43 @@ if test "${enable_gpl+set}" = set; then
--     fi
+- 	dispose(sc->iconpath);
+- 	/* Add our mountpoint, since the enduser won't know it */
+--	sc->iconpath = malloc(sizeof(MOUNTPOINT)+strlen(value));
+-+	sc->iconpath = malloc(strlen(MOUNTPOINT)+strlen(value)+1);
+- 	if (NULL == sc->iconpath) {
+- 		DPRINTF("Can't allocate memory to store iconpath '%s'", value);
+- 		return -1;
+-@@ -194,7 +194,7 @@ static int set_initrd(struct cfgdata_t *cfgdata, char *value)
+- 		return -1;
+- 	}
 - 
-- fi
---
--+#
--+# Check for systemd unit files direectory exists if unit file installation
--+# is requested
--+#
+--	strcpy(sc->initrd, "/mnt");
+-+	strcpy(sc->initrd, MOUNTPOINT);
+- 	strcat(sc->initrd, value);
+- 	return 0;
+- }
+-diff --git a/kexecboot.c b/kexecboot.c
+-index d6657a0..7268d6b 100644
+---- a/kexecboot.c
+-+++ b/kexecboot.c
+-@@ -57,20 +57,22 @@
+- #endif
 - 
-- # Check whether --enable-systemd was given.
---if test "${enable_systemd+set}" = set; then
---  enableval=$enable_systemd;
---fi
---
---if test "x$enable_systemd" = "xyes"; then
---   GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
---   # if systemd enabled, install service scripts in unitdir
---   SYSTEMD_DIR=`rpm --eval "%{_unitdir}"`
---else
---   # otherwise install the systemd service scripts in the data dir
---  if test  "x$sysname" = "xDarwin" ; then
---    # MacOS 'which' command returns 0 always
---    SYSTEMD_DIR=/usr/share/ipmiutil
---  else
--+if test "${enable_systemd+set}" = set; then :
--+  withval=$enable_systemd; if test "$withval" = yes; then
--+  GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
--+  if test -z "$systemddir"; then
--+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking location of the systemd unit files directory" >&5
--+$as_echo_n "checking location of the systemd unit files directory... " >&6; }
--+    _rpmdir = ""
--     which rpm >/dev/null 2>&1
--     if test  $? -eq 0 ; then
---       datad=`rpm --eval "%{_datadir}"`
---       SYSTEMD_DIR=${datad}/ipmiutil
---    else
---       SYSTEMD_DIR=/usr/share/ipmiutil
--+      _rpmdir = `rpm --eval "%{_unitdir}"`
--     fi
--+    for systemd_d in ${datadir}/usr/share/ipmiutil ${_rpmdir} /usr/share/ipmiutil; do
--+      if test -z "$systemddir"; then
--+        if test -d "$systemd_d"; then
--+          systemddir="$systemd_d"
--+        fi
--+      fi
--+    done
--   fi
--+  if test -n "$systemddir"; then
--+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $systemddir" >&5
--+$as_echo "$systemddir" >&6; }
--+  else
--+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
--+$as_echo "not found" >&6; }
--+ fi
--+else
--+ if test "$withval" != no; then
--+  systemddir=$withval
--+ fi
--+fi
-- fi
+- #ifdef USE_MACHINE_KERNEL
+--/* Machine-dependent kernel patch */
+-+/* Machine-dependent kernel path */
+- char *machine_kernel = NULL;
+- #endif
 - 
-- case "$archm" in
--Index: ipmiutil-2.9.6/configure.ac
--===================================================================
----- ipmiutil-2.9.6.orig/configure.ac
--+++ ipmiutil-2.9.6/configure.ac
--@@ -140,7 +140,6 @@ CROSS_LFLAGS=""
-- CROSS_CFLAGS=""
-- LIBSENSORS=""
-- SAM2OBJ="isensor2.o ievents2.o"
---SYSTEMD_DIR=/usr/share/ipmiutil
+-+#define PREPEND_MOUNTPATH(string) MOUNTPOINT""string
+-+
+- /* NULL-terminated array of kernel search paths
+-  * First item should be filled with machine-dependent path */
+- char *default_kernels[] = {
+- #ifdef USE_ZIMAGE
+--	"/mnt/boot/zImage",
+--	"/mnt/zImage",
+-+	PREPEND_MOUNTPATH("/boot/zImage"),
+-+	PREPEND_MOUNTPATH("/zImage"),
+- #endif
+- #ifdef USE_UIMAGE
+--	"/mnt/boot/uImage",
+--	"/mnt/uImage",
+-+	PREPEND_MOUNTPATH("/boot/uImage"),
+-+	PREPEND_MOUNTPATH("/uImage"),
+- #endif
+- 	NULL
+- };
+-@@ -149,14 +151,14 @@ char *get_machine_kernelpath() {
+- 			++tmp;
+- 		}
 - 
-- AC_ARG_ENABLE([useflags],
--     [  --enable-useflags    include environment CFLAGS and LDFLAGS.],
--@@ -191,25 +190,42 @@ AC_ARG_ENABLE([gpl],
+--		/* Prepend "/mnt/boot/zImage-" to hw */
+--		tmp = malloc(strlen(hw) + 17 + 1);	/* strlen("/mnt/boot/zImage-") */
+-+		/* Prepend  MOUNTPOINT"/boot/zImage-" to hw */
+-+		tmp = malloc(strlen(PREPEND_MOUNTPATH("/boot/zImage-")) + strlen(hw) + 1);
+- 		if (NULL == tmp) {
+- 			DPRINTF("Can't allocate memory for machine-specific kernel path");
+- 			return NULL;
+- 		}
 - 
-- dnl Does this Linux have systemd enabled?  Otherwise use sysv init.
-- AC_ARG_ENABLE([systemd],
---    [  --enable-systemd       enable systemd service type=notify support and %_unitdir [[default=disabled]]],)
---if test "x$enable_systemd" = "xyes"; then
---   GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
---   # if systemd enabled, install service scripts in unitdir
---   SYSTEMD_DIR=`rpm --eval "%{_unitdir}"`
--+    [  --enable-systemd[=systemddir]      install systemd unit file.  If 'yes'
--+        probe the system for unit directory.
--+        If a path is specified, assume that
--+        is a valid install path. [[default=disabled]]],)
--+# Check whether --enable-systemd was given.
--+if test "${enable_systemd+set}" = set; then :
--+	withval=$enable_systemd; if test "$withval" = yes; then
--+	GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
--+	if test -z "$systemddir"; then
--+		{ $as_echo "$as_me:${as_lineno-$LINENO}: checking location of the systemd unit files directory" >&5
--+		$as_echo_n "checking location of the systemd unit files directory... " >&6; }
--+		_rpmdir = ""
--+		which rpm >/dev/null 2>&1
--+		if test  $? -eq 0 ; then
--+			_rpmdir = `rpm --eval "%{_unitdir}"`
--+		fi
--+		for systemd_d in ${datadir}/usr/share/ipmiutil ${_rpmdir} /usr/share/ipmiutil; do
--+			if test -z "$systemddir"; then
--+				if test -d "$systemd_d"; then
--+					systemddir="$systemd_d"
--+				fi
--+			fi
--+		done
--+	fi
--+	if test -n "$systemddir"; then
--+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $systemddir" >&5
--+		$as_echo "$systemddir" >&6; }
--+	else
--+		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
--+		$as_echo "not found" >&6; }
--+	fi
-- else
---   # otherwise install the systemd service scripts in the data dir
---  if test  "x$sysname" = "xDarwin" ; then
---    # MacOS 'which' command returns 0 always
---    SYSTEMD_DIR=/usr/share/ipmiutil
---  else
---    which rpm >/dev/null 2>&1
---    if test  $? -eq 0 ; then
---       datad=`rpm --eval "%{_datadir}"`
---       SYSTEMD_DIR=${datad}/ipmiutil
---    else
---       SYSTEMD_DIR=/usr/share/ipmiutil
---    fi
---  fi
--+	if test "$withval" != no; then
--+		systemddir=$withval
--+	fi
--+fi
-- fi
+--		strcpy(tmp, "/mnt/boot/zImage-");
+-+		strcpy(tmp, PREPEND_MOUNTPATH("/boot/zImage-"));
+- 		strcat(tmp, hw);
 - 
-- dnl start main logic
--@@ -481,7 +497,7 @@ AC_SUBST(INS_LIB)
-- AC_SUBST(SUBDIR_S)
-- AC_SUBST(CROSS_CFLAGS)
-- AC_SUBST(CROSS_LFLAGS)
---AC_SUBST(SYSTEMD_DIR)
--+AC_SUBST(systemddir)
-- AC_SUBST(SHR_LINK)
-- AC_SUBST(pkgconfigdir)
+- 		return tmp;
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch
+deleted file mode 100644
+index 6d81d83..0000000
+--- a/meta-initramfs/recipes-bsp/kexecboot/files/0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch
++++ /dev/null
+@@ -1,135 +0,0 @@
+-From de9a6284df8add6ec03e1d9981d0b6d0595bbc69 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Mon, 10 Nov 2014 23:37:23 +0100
+-Subject: [PATCH 4/4] kexecboot.c: workaround for absolute kernel and initrd
+- symlinks
+-
+-Add MOUNTPOINT prefix if the kernel/initrd symlinks start with '/'.
+-Do nothing if the path is a relative symbolic link or not a symlink.
+-
+-Fix following situation:
+-
+-root@mizar:/var/tmp# ls -al boot/
+-total 2076
+-drwxr-xr-x 2 root root    4096 lug  5 01:38 .
+-drwxrwxrwt 4 root root    4096 lug  5 12:26 ..
+--rw-r--r-- 1 root root     831 lug  5 01:24 boot.cfg
+--rw-r--r-- 1 root root    1322 lug  5 01:24 icon.xpm
+-lrwxrwxrwx 1 root root      34 lug  5 12:26 zImage ->
+-/boot/zImage-3.14.5-yocto-standard
+--rw-r--r-- 1 root root 2106832 lug  5 01:20 zImage-3.14.5-yocto-standard
+-
+-Cannot open `/mnt/boot/zImage': No such file or directory
+-Nothing has been loaded!
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- kexecboot.c | 53 ++++++++++++++++++++++++++++++++++++++++++++---------
+- 1 file changed, 44 insertions(+), 9 deletions(-)
+-
+-diff --git a/kexecboot.c b/kexecboot.c
+-index 7268d6b..8a7a7d2 100644
+---- a/kexecboot.c
+-+++ b/kexecboot.c
+-@@ -208,11 +208,16 @@ void start_kernel(struct params_t *params, int choice)
+- 	const char *load_argv[] = { NULL, "-l", NULL, NULL, NULL, NULL };
+- 	const char *exec_argv[] = { NULL, "-e", NULL, NULL};
 - 
--Index: ipmiutil-2.9.6/Makefile.in
--===================================================================
----- ipmiutil-2.9.6.orig/Makefile.in
--+++ ipmiutil-2.9.6/Makefile.in
--@@ -182,7 +182,7 @@ SHELL = @SHELL@
-- SHR_LINK = @SHR_LINK@
-- STRIP = @STRIP@
-- SUBDIR_S = @SUBDIR_S@
---SYSTEMD_DIR = @SYSTEMD_DIR@
--+SYSTEMD_DIR = @systemddir@
-- VERSION = @VERSION@
-- abs_builddir = @abs_builddir@
-- abs_srcdir = @abs_srcdir@
--@@ -233,6 +233,7 @@ sbindir = @sbindir@
-- sharedstatedir = @sharedstatedir@
-- srcdir = @srcdir@
-- sysconfdir = @sysconfdir@
--+systemddir = @systemddir@
-- target_alias = @target_alias@
-- top_build_prefix = @top_build_prefix@
-- top_builddir = @top_builddir@
--Index: ipmiutil-2.9.6/scripts/Makefile.in
--===================================================================
----- ipmiutil-2.9.6.orig/scripts/Makefile.in
--+++ ipmiutil-2.9.6/scripts/Makefile.in
--@@ -126,7 +126,7 @@ SHELL = @SHELL@
-- SHR_LINK = @SHR_LINK@
-- STRIP = @STRIP@
-- SUBDIR_S = @SUBDIR_S@
---SYSTEMD_DIR = @SYSTEMD_DIR@
--+SYSTEMD_DIR = @systemddir@
-- VERSION = @VERSION@
-- abs_builddir = @abs_builddir@
-- abs_srcdir = @abs_srcdir@
--@@ -195,7 +195,8 @@ cronto = ${DESTDIR}${etcdir}/cron.daily
-- sbinto = ${DESTDIR}${sbindir}
-- varto = ${DESTDIR}/var/lib/ipmiutil
-- initto = ${DESTDIR}@INIT_DIR@
---sysdto = ${DESTDIR}@SYSTEMD_DIR@
--+sysdto = ${DESTDIR}@systemddir@
--+systemddir = @systemddir@
-- sysvinit = ${datato}
-- sbinfls = ialarms ihealth ifru igetevent ireset icmd isol ilan isensor isel iserial iwdt iconfig ipicmg ifirewall ifwum ihpm
-- all: all-am
--@@ -398,11 +399,14 @@ install:
-- 	${INSTALL_SCRIPT_SH} evt.sh       ${datato}
-- 	if [ -f /etc/debian_version ]; then \
-- 	   sysvinit=${initto}; fi
---	${INSTALL_SCRIPT_SH} ipmiutil_wdt ${sysvinit}/ipmiutil_wdt
---	${INSTALL_SCRIPT_SH} ipmiutil_asy ${sysvinit}/ipmiutil_asy
---	${INSTALL_SCRIPT_SH} ipmiutil_evt ${sysvinit}/ipmiutil_evt
---	${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port
---	${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info
--+	if [ ! -z "${systemddir}" ]; then \
--+		$(MKDIR) ${sysdto}; \
--+		${INSTALL_SCRIPT_SH} ipmiutil_wdt ${sysvinit}/ipmiutil_wdt; \
--+		${INSTALL_SCRIPT_SH} ipmiutil_asy ${sysvinit}/ipmiutil_asy; \
--+		${INSTALL_SCRIPT_SH} ipmiutil_evt ${sysvinit}/ipmiutil_evt; \
--+		${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port; \
--+		${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info; \
--+	fi
-- 	${INSTALL_SCRIPT_SH} checksel     ${datato}
-- 	${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}
-- 	${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}
--Index: ipmiutil-2.9.6/scripts/Makefile.am
--===================================================================
----- ipmiutil-2.9.6.orig/scripts/Makefile.am
--+++ ipmiutil-2.9.6/scripts/Makefile.am
--@@ -17,7 +17,8 @@ cronto = ${DESTDIR}${etcdir}/cron.daily
-- sbinto = ${DESTDIR}${sbindir}
-- varto  = ${DESTDIR}/var/lib/ipmiutil
-- initto = ${DESTDIR}@INIT_DIR@
---sysdto = ${DESTDIR}@SYSTEMD_DIR@
--+sysdto = ${DESTDIR}@systemddir@
--+systemddir = @systemddir@
-- sysvinit = ${datato}
-- sbinfls = ialarms ihealth ifru igetevent ireset icmd isol ilan isensor isel iserial iwdt iconfig ipicmg ifirewall ifwum ihpm
+--	char *cmdline_arg = NULL, *initrd_arg = NULL;
+-+	char *cmdline_arg = NULL, *initrd_arg = NULL, *kernel_arg = NULL;
+- 	int n, idx, u;
+- 	struct stat sinfo;
+- 	struct boot_item_t *item;
 - 
--@@ -47,10 +48,14 @@ install:
-- 	${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port
-- 	${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info
-- 	${INSTALL_SCRIPT_SH} checksel     ${datato}
---	${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}
---	${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}
---	${INSTALL_DATA_SH} ipmiutil_evt.service ${sysdto}
---	${INSTALL_DATA_SH} ipmi_port.service    ${sysdto}
--+	
--+	if [ ! -z "${systemddir}" ]; then \
--+		$(MKDIR) ${sysdto}; \
--+		${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}; \
--+		${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}; \
--+		${INSTALL_DATA_SH} ipmiutil_evt.service ${sysdto}; \
--+		${INSTALL_DATA_SH} ipmi_port.service    ${sysdto}; \
--+	fi
-- 	${INSTALL_SCRIPT_SH} ipmiutil.env     ${datato}
-- 	${INSTALL_SCRIPT_SH} ipmiutil.pre     ${datato}
-- 	${INSTALL_SCRIPT_SH} ipmiutil.setup   ${datato}
--Index: ipmiutil-2.9.6/lib/Makefile.in
--===================================================================
----- ipmiutil-2.9.6.orig/lib/Makefile.in
--+++ ipmiutil-2.9.6/lib/Makefile.in
--@@ -128,7 +128,7 @@ SHELL = @SHELL@
-- SHR_LINK = @SHR_LINK@
-- STRIP = @STRIP@
-- SUBDIR_S = @SUBDIR_S@
---SYSTEMD_DIR = @SYSTEMD_DIR@
--+SYSTEMD_DIR = @systemddir@
-- VERSION = @VERSION@
-- abs_builddir = @abs_builddir@
-- abs_srcdir = @abs_srcdir@
--Index: ipmiutil-2.9.6/lib/lanplus/Makefile.in
--===================================================================
----- ipmiutil-2.9.6.orig/lib/lanplus/Makefile.in
--+++ ipmiutil-2.9.6/lib/lanplus/Makefile.in
--@@ -177,7 +177,8 @@ SHELL = @SHELL@
-- SHR_LINK = @SHR_LINK@
-- STRIP = @STRIP@
-- SUBDIR_S = @SUBDIR_S@
---SYSTEMD_DIR = @SYSTEMD_DIR@
--+SYSTEMD_DIR = @systemddir@
--+systemddir = @systemddir@
-- VERSION = @VERSION@
-- abs_builddir = @abs_builddir@
-- abs_srcdir = @abs_srcdir@
-diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb b/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-similarity index 68%
-rename from meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-rename to meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-index ee0766ea7..d86fc48e6 100644
---- a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-+++ b/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-@@ -13,23 +13,20 @@ is detected."
+-+	/* buffer for readlink (could be truncated) */
+-+	char buf[512];
+-+	int len;
+-+
+-+
+- 	item = params->bootcfg->list[choice];
+- 
+- 	exec_argv[0] = kexec_path;
+-@@ -306,10 +311,17 @@ void start_kernel(struct params_t *params, int choice)
+- 		}
+- 	}
+- 
+-+	/* Mount boot device */
+-+	if ( -1 == mount(mount_dev, mount_point, mount_fstype,
+-+			MS_RDONLY, NULL) ) {
+-+		perror("Can't mount boot device");
+-+		exit(-1);
+-+	}
+-+
+- 	/* fill '--initrd' option */
+- 	if (item->initrd) {
+- 		/* allocate space */
+--		n = sizeof(str_initrd_start) + strlen(item->initrd);
+-+		n = sizeof(str_initrd_start) + strlen(item->initrd) + 1 + sizeof(mount_point) + sizeof(buf);
+- 
+- 		initrd_arg = (char *)malloc(n);
+- 		if (NULL == initrd_arg) {
+-@@ -317,24 +329,46 @@ void start_kernel(struct params_t *params, int choice)
+- 		} else {
+- 			strcpy(initrd_arg, str_initrd_start);	/* --initrd= */
+- 			strcat(initrd_arg, item->initrd);
+-+
+-+			if ((len = readlink(item->initrd, buf, sizeof(buf)-1)) != -1) {
+-+				buf[len] = '\0';
+-+				/* Fix absolute symlinks: prepend MOUNTPOINT */
+-+				if (buf[0] == '/') {
+-+					strcpy(initrd_arg, str_initrd_start);	/* --initrd= */
+-+					strcat(initrd_arg, mount_point);
+-+					strcat(initrd_arg, buf);
+-+				}
+-+			}
+- 			load_argv[idx] = initrd_arg;
+- 			++idx;
+- 		}
+- 	}
+- 
+- 	/* Append kernelpath as last arg of kexec */
+--	load_argv[idx] = item->kernelpath;
+-+		/* allocate space */
+-+		n = strlen(item->kernelpath) + 1 + sizeof(mount_point) + sizeof(buf);
+-+
+-+		kernel_arg = (char *)malloc(n);
+-+		if (NULL == kernel_arg) {
+-+			perror("Can't allocate memory for kernel_arg");
+-+		} else {
+-+			strcpy(kernel_arg, item->kernelpath);
+-+
+-+			if ((len = readlink(item->kernelpath, buf, sizeof(buf)-1)) != -1) {
+-+				buf[len] = '\0';
+-+				/* Fix absolute symlinks: prepend MOUNTPOINT */
+-+				if (buf[0] == '/') {
+-+					strcpy(kernel_arg, mount_point);
+-+					strcat(kernel_arg, buf);
+-+				}
+-+			}
+-+			load_argv[idx] = kernel_arg;
+-+		}
+- 
+- 	DPRINTF("load_argv: %s, %s, %s, %s, %s", load_argv[0],
+- 			load_argv[1], load_argv[2],
+- 			load_argv[3], load_argv[4]);
+- 
+--	/* Mount boot device */
+--	if ( -1 == mount(mount_dev, mount_point, mount_fstype,
+--			MS_RDONLY, NULL) ) {
+--		perror("Can't mount boot device");
+--		exit(-1);
+--	}
+- 
+- 	/* Load kernel */
+- 	n = fexecw(kexec_path, (char *const *)load_argv, envp);
+-@@ -347,6 +381,7 @@ void start_kernel(struct params_t *params, int choice)
+- 
+- 	dispose(cmdline_arg);
+- 	dispose(initrd_arg);
+-+	dispose(kernel_arg);
+- 
+- 	/* Check /proc/sys/net presence */
+- 	if ( -1 == stat("/proc/sys/net", &sinfo) ) {
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch b/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
+deleted file mode 100644
+index b54199b..0000000
+--- a/meta-initramfs/recipes-bsp/kexecboot/files/0005-rgb.h-fix-build-with-gcc5.patch
++++ /dev/null
+@@ -1,35 +0,0 @@
+-From b2c4fc69868a4831ec798ad98f5e7fce200cf0e3 Mon Sep 17 00:00:00 2001
+-From: Andrea Adami <andrea.adami@gmail.com>
+-Date: Thu, 24 Sep 2015 00:02:48 +0200
+-Subject: [PATCH] rgb.h: fix build with gcc 5 (C99 inline semantic)
+-
+-Building with gcc 5.2 we trigger the following error:
+-
+-rgb.h:55:1: warning: inline function 'rgba2comp' declared but never defined
+-|  rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
+-|  ^
+-
+-https://gcc.gnu.org/gcc-5/porting_to.html
+-
+-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+----
+- rgb.h | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
+-
+-diff --git a/rgb.h b/rgb.h
+-index 0ba987a..4f64622 100644
+---- a/rgb.h
+-+++ b/rgb.h
+-@@ -51,8 +51,7 @@ typedef struct {
+- } kx_named_color;
+- 
+- /* Convert RGBA uint32 to red/green/blue/alpha components */
+--inline void
+--rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
+-+void rgba2comp(kx_rgba rgba, kx_ccomp *red, kx_ccomp *green,
+- 		kx_ccomp *blue, kx_ccomp *alpha);
+- 
+- /* Convert hex rgb color to rgba color */
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+similarity index 81%
+rename from meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
+rename to meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+index 45095f3..31dcbc7 100644
+--- a/meta-initramfs/recipes-bsp/kexecboot/kexecboot_0.6.bb
++++ b/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb
+@@ -36,21 +36,10 @@ DESCRIPTION = "kexecboot is a graphical linux-as-bootloader implementation based
+ HOMEPAGE = "http://kexecboot.org"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-
+-S = "${WORKDIR}/kexecboot-${PV}"
+-SRC_URI = "https://github.com/kexecboot/kexecboot/archive/v${PV}.tar.gz"
+-SRC_URI[md5sum] = "46b7c1a6f20531be56445ebb8669a2b8"
+-SRC_URI[sha256sum] = "6b360b8aa59bc5d68a96705349a0dd416f8ed704e931fa0ac7849298258f0f15"
+-
+-SRC_URI += "\
+-            file://0001-kexecboot-fix-build-when-S-B.patch \
+-            file://0002-kexecboot-fix-configure-warnings.patch \
+-            file://0003-kexecboot-do-not-hardcode-MOUNTPOINT.patch \
+-            file://0004-kexecboot.c-workaround-for-absolute-kernel-and-initr.patch \
+-            \
+-            file://0005-rgb.h-fix-build-with-gcc5.patch \
+-            "
+-
++PV = "0.6+git${SRCREV}"
++S = "${WORKDIR}/git"
++SRC_URI = "git://github.com/kexecboot/kexecboot.git"
++SRCREV = "4c4f127e79ac5b8d6b6e2fbb938ccbf12b04c531"
+ inherit autotools
  
- HOMEPAGE = "http://ipmiutil.sourceforge.net"
- LICENSE = "BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=626a5970304daa1fcb87f757fb42b795"
- 
- DEPENDS += "openssl"
- 
--PARALLEL_MAKE = ""
--
- SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
--    file://fix_systemd_path.patch "
--
--SRC_URI[md5sum] = "462087995f05fa9e692ed7f55c840f71"
--SRC_URI[sha256sum] = "884c1f3d8bfb0b33c303973d286c3166f5a537976451a0312e3524af54771519"
-+"
-+SRC_URI[md5sum] = "5feaf6a827205792e057bb4ff5c4e842"
-+SRC_URI[sha256sum] = "b2d7f72535131c7832ba4be13dc33c81513fc3ee43fe797b4b52014600ecee5e"
- 
- inherit autotools-brokensep pkgconfig systemd
- 
- PACKAGECONFIG ?= "lanplus gpl"
- PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
--PACKAGECONFIG[systemd] = "--enable-systemd=${datadir}/${BPN}, --enable-systemd=no"
-+PACKAGECONFIG[systemd] = "--enable-systemd=yes,--enable-systemd=no"
- PACKAGECONFIG[sha256] = "--enable-sha256, --enable-sha256=no, openssl-native, openssl"
- PACKAGECONFIG[lanplus] = "--enable-lanplus, --enable-lanplus=no, openssl-native, openssl"
- PACKAGECONFIG[landesk] = "--enable-landesk, --enable-landesk=no"
-@@ -40,23 +37,18 @@ PACKAGECONFIG[gpl] = "--enable-gpl, --enable-gpl=no"
- #no GPL or LanPlus libs
- PACKAGECONFIG[standalone] = "--enable-standalone, --enable-standalone=no"
- 
--CFLAGS += "-I${STAGING_INCDIR}"
--LDFLAGS += "-L${STAGING_LIBDIR}"
--
--do_configure () {
--    aclocal
--    libtoolize --automake --copy --force
--    autoheader
--    automake --foreign --add-missing --copy
-+EXTRA_OECONF += "--enable-useflags"
-+CFLAGS += "-fPIC"
- 
--    aclocal
--    autoconf
--    automake --foreign
--    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-+do_configure_prepend() {
-+        ./beforeconf.sh
-+	sed -i -e "s#rpm#/bin/false#g" ${S}/configure.ac
- }
--
--do_install () {
--    oe_runmake install DESTDIR=${D}
-+do_install_append() {
-+        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+                install -d ${D}${systemd_unitdir}/system
-+                mv ${D}/ipmiutil/*.service ${D}${systemd_unitdir}/system
-+        fi
-+        rm -rf ${D}/ipmiutil
- }
--
- COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
+ EXTRA_OECONF = "--enable-textui --enable-delay=2 --enable-evdev-rate=1000,250"
 -- 
-2.13.1
+2.7.4
 
 
