@@ -1,24 +1,76 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D3059601A5
+Return-Path: <mkelly@xevo.com>
+Received: from NAM03-DM3-obe.outbound.protection.outlook.com
+	(mail-dm3nam03on0051.outbound.protection.outlook.com [104.47.41.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 6623378223
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 14:23:40 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v5MENfLB026268
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 07:23:41 -0700
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 22 Jun 2017 07:23:40 -0700
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 22 Jun 2017 10:23:34 -0400
-Message-ID: <1498141414-32154-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 22 Jun 2017 17:15:06 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=vN3HXGr65OK1Zxs8Ec/KN+JsDIHSNrrwoiYq6xJcsOA=;
+	b=RnJ6AlAJ1NdlPkc0WsxUWgs4Ch14q7eEfrOS+nyRGOek5DGGblYwOuWVi5IuEWzo0nRWdDUymFN49MAoltQJVG5zxk51mb1QaQLTGHzwpHEceP/2ULgAsZA8SW55E+PUki5SQ3nBQyYT5jRrZdNufFyGZS394EIsrV28zvaBSec=
+Received: from BN6PR0101MB2931.prod.exchangelabs.com (10.174.87.140) by
+	BN6PR0101MB2929.prod.exchangelabs.com (10.174.87.138) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+	15.1.1178.14; Thu, 22 Jun 2017 17:15:05 +0000
+Received: from BN6PR0101MB2931.prod.exchangelabs.com ([10.174.87.140]) by
+	BN6PR0101MB2931.prod.exchangelabs.com ([10.174.87.140]) with mapi id
+	15.01.1178.023; Thu, 22 Jun 2017 17:15:05 +0000
+From: Martin Kelly <mkelly@xevo.com>
+To: "martin.jansa@gmail.com" <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
+Thread-Index: AQHS4W7pXFtwXtprf0C6+LiDAMtdgaIlsvMAgAB6PwD//5dxAIAAeDiAgATa34CAAAhiAIAByJ6AgARKkAA=
+Date: Thu, 22 Jun 2017 17:15:04 +0000
+Message-ID: <1498151700.8385.2.camel@xevo.com>
+References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
+	<2ef4f2a3-48e9-f3fa-a55e-01522507d86d@xevo.com>
+	<CA+chaQeUWj=4zxG1gdk0pwg_U1GUdMmwr1F9DEL_7pT8S0UUQg@mail.gmail.com>
+	<ac7731a3-ff5c-b4c8-f8d9-1ee0d30e17a1@xevo.com>
+	<CA+chaQcnwYQwBXfxbdpEN8D9ZYzG=fOxX_MPNXt1_uzShSSrwg@mail.gmail.com>
+	<CA+chaQdbrZ+R37sKDXamFwW71G9MvYVF-Bb=8OO_k5ChdUFGGg@mail.gmail.com>
+	<CA+chaQdrvQK_uDEkEcBy7NEn4EhVXKWx+FOfbmqM+bPfL7ad-Q@mail.gmail.com>
+	<1497915785.8604.2.camel@xevo.com>
+In-Reply-To: <1497915785.8604.2.camel@xevo.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: gmail.com; dkim=none (message not signed)
+	header.d=none;gmail.com; dmarc=none action=none header.from=xevo.com;
+x-originating-ip: [67.171.33.217]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; BN6PR0101MB2929;
+	7:I48/JOGyQ1u+JnpspD9YOKIBqmsnr/nOijhBARWzHE5vjSig5akkS256RwLanyppOPsMgdDKVgfdv7pMCdk76OaqW4/onrUswUTGoAsTGBSe4bwpNshLmtyK42UAydbh88TMRFewjmSh/GWiWidYQ45I/Qjl6rZSZVhBwsdwEefHrh/mtYS/DcpV/aWnFwlXcNM052f8bh76Vd8F0LdScCXYwbR8NbnvS5gBS/VMBMw4Jbnr7OB7EjuZbPOn3D5z2Dau/wO8u67tlBuJpsBmh0RVmCbdJH41D89pF7S1IFKVAC2rzzYZ18EYeqO7EWpHNPHCcxMaXFmrSUQwGqXnGSoMCmPjL01FlpwlZh9LGIZXyt/f2HGr/s/eb/yb4rHx2znTnMbvUW+OetWk/T6gk49lW2K4nFec9aRtMNQIFwdKx2NZJNs6UzgTa+OBeh43GiH7xsfnd/Nb2ovp+kZuu7yqqK5ufWbx2s8iDIRx60kuAz3mgP4PtVslXU9WiaXoX/DuxgdCYkRU+xavTE4KCyqYIwRGECn7VFOQ2woqrJhEYAVeb15GopKu4+2qG056NLGLMCRHs+YnbycQ388hQ006zl9Vz2YRyTsB39Bqbd0x/rCr+RdiVlvOqkpDX84h4rnj33cCALrwVSqEp2vKeW8won7Pz2DvNvY789bqHVecx8zcJMQ0lOf3dsbr4tQc/wQs+7TolFX9wX9smy3aiFYpbGRUzlUX5fR8rADOH60//U1dywpm9VNNOFCazQj8B94AKDifGmADlvkUWr38GxB7cyT0SWgyI9SDxrGxn2A=
+x-ms-office365-filtering-correlation-id: f2c370eb-76c4-40f4-3eeb-08d4b99239b2
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(300000500055)(300135000095)(300000501055)(300135300095)(22001)(300000502055)(300135100095)(2017030254075)(300000503055)(300135400095)(201703131423075)(201703031133081)(300000504055)(300135200095)(300000505055)(300135600095);
+	SRVR:BN6PR0101MB2929; 
+x-ms-traffictypediagnostic: BN6PR0101MB2929:
+x-microsoft-antispam-prvs: <BN6PR0101MB2929523B19A384A3E4571BF3ABDB0@BN6PR0101MB2929.prod.exchangelabs.com>
+x-exchange-antispam-report-test: UriScan:(166708455590820);
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(8121501046)(5005006)(3002001)(93006095)(93001095)(100000703101)(100105400095)(10201501046)(6041248)(20161123558100)(20161123562025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123564025)(20161123555025)(20161123560025)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
+	SRVR:BN6PR0101MB2929; BCL:0; PCL:0;
+	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
+	SRVR:BN6PR0101MB2929; 
+x-forefront-prvs: 03468CBA43
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(6009001)(39450400003)(39400400002)(39410400002)(39830400002)(377454003)(53754006)(377424004)(24454002)(69224002)(3660700001)(7736002)(305945005)(53546010)(3280700002)(4326008)(6246003)(53936002)(2900100001)(6512007)(8936002)(5640700003)(6436002)(966005)(6306002)(5660300001)(99286003)(229853002)(6486002)(25786009)(478600001)(6506006)(77096006)(54906002)(36756003)(230783001)(93886004)(2351001)(66066001)(76176999)(50986999)(189998001)(54356999)(2501003)(6916009)(2950100002)(122556002)(103116003)(33646002)(38730400002)(8676002)(39060400002)(81166006)(2906002)(86362001)(110136004)(14454004)(3846002)(6116002)(102836003);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2929;
+	H:BN6PR0101MB2931.prod.exchangelabs.com; FPR:; SPF:None;
+	MLV:ovrnspm; PTR:InfoNoRecords; LANG:en; 
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] twisted: add support to build for python3
+X-OriginatorOrg: xevo.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jun 2017 17:15:04.8938 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2929
+Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,600 +83,229 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jun 2017 14:23:41 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 22 Jun 2017 17:15:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2EB2EA17F473E64EB6C2A89E6FEA9CDA@prod.exchangelabs.com>
+Content-Transfer-Encoding: base64
 
-The work on twisted to ensure python3 compatability is nearing
-completion, as per their python3 tracker page:
-  https://twistedmatrix.com/trac/milestone/Python-3.x
-
-Create a common .inc file and a new python3-* recipe to match other
-python3 packages.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
- .../recipes-devtools/python/python-twisted.inc     | 244 +++++++++++++++++++++
- .../python/python-twisted_13.2.0.bb                | 243 +-------------------
- .../python/python3-twisted_13.2.0.bb               |  67 ++++++
- 3 files changed, 312 insertions(+), 242 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-twisted.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-new file mode 100644
-index 0000000..d734e03
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -0,0 +1,244 @@
-+DESCRIPTION = "Twisted is an event-driven networking framework written in Python and licensed under the LGPL. \
-+Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
-+(including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
-+HOMEPAGE = "http://www.twistedmatrix.com"
-+
-+#twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
-+
-+SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
-+SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
-+
-+PYPI_PACKAGE = "Twisted"
-+PYPI_PACKAGE_EXT = "tar.bz2"
-+
-+do_install_append() {
-+    # remove some useless files before packaging
-+    find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
-+}
-+
-+PACKAGES += "\
-+    ${PN}-zsh \
-+    ${PN}-test \
-+    ${PN}-protocols \
-+    ${PN}-conch \
-+    ${PN}-lore \
-+    ${PN}-mail \
-+    ${PN}-names \
-+    ${PN}-news \
-+    ${PN}-runner \
-+    ${PN}-web \
-+    ${PN}-words \
-+    ${PN}-flow \
-+    ${PN}-pair \
-+    ${PN}-core \
-+"
-+
-+PACKAGES =+ "\
-+    ${PN}-src \
-+    ${PN}-bin \
-+"
-+
-+RDEPENDS_${PN} = "\
-+    ${PN}-bin \
-+    ${PN}-conch \
-+    ${PN}-lore \
-+    ${PN}-mail \
-+    ${PN}-names \
-+    ${PN}-news \
-+    ${PN}-runner \
-+    ${PN}-web \
-+    ${PN}-words \
-+"
-+
-+RDEPENDS_${PN}-core = "python-core python-zopeinterface python-contextlib"
-+RDEPENDS_${PN}-test = "${PN}"
-+RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-lore = "${PN}-core"
-+RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-names = "${PN}-core"
-+RDEPENDS_${PN}-news = "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-runner = "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-web += "${PN}-core ${PN}-protocols"
-+RDEPENDS_${PN}-words += "${PN}-core"
-+RDEPENDS_${PN}-flow += "${PN}-core"
-+RDEPENDS_${PN}-pair += "${PN}-core"
-+RDEPENDS_${PN}-dbg = "${PN}"
-+
-+ALLOW_EMPTY_${PN} = "1"
-+FILES_${PN} = ""
-+
-+FILES_${PN}-test = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
-+"
-+
-+FILES_${PN}-protocols = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
-+"
-+
-+FILES_${PN}-zsh = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/twisted-completion.zsh \
-+"
-+
-+FILES_${PN}-conch = " \
-+    ${bindir}/ckeygen \
-+    ${bindir}/tkconch \
-+    ${bindir}/conch \
-+    ${bindir}/conchftp \
-+    ${bindir}/cftp \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_conch.py* \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/conch  \
-+"
-+
-+FILES_${PN}-core = " \
-+${bindir}/manhole \
-+${bindir}/mktap \
-+${bindir}/twistd \
-+${bindir}/tap2deb \
-+${bindir}/tap2rpm \
-+${bindir}/tapconvert \
-+${bindir}/tkmktap \
-+${bindir}/trial \
-+${bindir}/easy_install* \
-+${bindir}/pyhtmlizer \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.so \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__init__.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/notestplugin.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/testplugin.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_ftp.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_inet.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_manhole.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_portforward.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_socks.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_telnet.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_trial.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/dropin.cache \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/application \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/cred \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/enterprise \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/internet \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/persisted \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols\
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python\
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/timeoutqueue.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/filepath.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dxprofile.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/plugin.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/htmlizer.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__init__.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dispatch.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/hook.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadpool.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/otp.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/usage.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/roots.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/versions.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/urlpath.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/util.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/components.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/logfile.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/runtime.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/reflect.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/context.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadable.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/rebuild.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/failure.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/lockfile.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/formmethod.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/finalize.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/win32.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dist.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/shortcut.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zipstream.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/release.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/syslog.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/log.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/compat.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/procutils.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/text.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_twisted_zsh_stub \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/scripts/ \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/ \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/tap/ \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/trial/ \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/__init__.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/_version.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/copyright.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/im.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/*.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/topfiles \
-+${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
-+"
-+
-+FILES_${PN}-lore = " \
-+${bindir}/bookify \
-+${bindir}/lore \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_lore.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/lore \
-+"
-+
-+FILES_${PN}-mail = " \
-+${bindir}/mailmail \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_mail.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/mail \
-+"
-+
-+FILES_${PN}-names = " \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_names.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/names \
-+"
-+
-+FILES_${PN}-news = " \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_news.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/news \
-+"
-+
-+FILES_${PN}-runner = " \
-+${libdir}/site-packages/twisted/runner/portmap.so \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/runner\
-+"
-+
-+FILES_${PN}-web = " \
-+${bindir}/websetroot \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_web.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/web\
-+"
-+
-+FILES_${PN}-words = " \
-+${bindir}/im \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_words.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/words\
-+"
-+
-+FILES_${PN}-flow = " \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_flow.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/flow \"
-+
-+FILES_${PN}-pair = " \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_pair.py* \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/pair \
-+"
-+
-+FILES_${PN}-dbg += " \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
-+${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
-+"
-+
-+RDEPENDS_{PN}-src = "${PN}"
-+FILES_${PN}-src = " \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
-+    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-index 071106e..3b45110 100644
---- a/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python-twisted_13.2.0.bb
-@@ -1,245 +1,4 @@
--DESCRIPTION = "Twisted is an event-driven networking framework written in Python and licensed under the LGPL. \
--Twisted supports TCP, UDP, SSL/TLS, multicast, Unix sockets, a large number of protocols                   \
--(including HTTP, NNTP, IMAP, SSH, IRC, FTP, and others), and much more."
--HOMEPAGE = "http://www.twistedmatrix.com"
--
--#twisted/topfiles/NEWS:655: - Relicensed: Now under the MIT license, rather than LGPL.
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=5602d7228daf59a16f0f1b2640c46bca"
--
--SRC_URI[md5sum] = "83fe6c0c911cc1602dbffb036be0ba79"
--SRC_URI[sha256sum] = "095175638c019ac7c0604f4c291724a16ff1acd062e181b01293bf4dcbc62cf3"
--
--PYPI_PACKAGE = "Twisted"
--PYPI_PACKAGE_EXT = "tar.bz2"
- inherit pypi setuptools
--
--do_install_append() {
--    # remove some useless files before packaging
--    find ${D} \( -name "*.bat" -o -name "*.c" -o -name "*.h" \) -exec rm -f {} \;
--}
--
--PACKAGES += "\
--    ${PN}-zsh \
--    ${PN}-test \
--    ${PN}-protocols \
--    ${PN}-conch \
--    ${PN}-lore \
--    ${PN}-mail \
--    ${PN}-names \
--    ${PN}-news \
--    ${PN}-runner \
--    ${PN}-web \
--    ${PN}-words \
--    ${PN}-flow \
--    ${PN}-pair \
--    ${PN}-core \
--"
--
--PACKAGES =+ "\
--    ${PN}-src \
--    ${PN}-bin \
--"
--
--RDEPENDS_${PN} = "\
--    ${PN}-bin \
--    ${PN}-conch \
--    ${PN}-lore \
--    ${PN}-mail \
--    ${PN}-names \
--    ${PN}-news \
--    ${PN}-runner \
--    ${PN}-web \
--    ${PN}-words \
--"
-+require python-twisted.inc
- 
- RDEPENDS_${PN}-core = "python-core python-zopeinterface python-contextlib"
--RDEPENDS_${PN}-test = "${PN}"
--RDEPENDS_${PN}-conch = "${PN}-core ${PN}-protocols"
--RDEPENDS_${PN}-lore = "${PN}-core"
--RDEPENDS_${PN}-mail = "${PN}-core ${PN}-protocols"
--RDEPENDS_${PN}-names = "${PN}-core"
--RDEPENDS_${PN}-news = "${PN}-core ${PN}-protocols"
--RDEPENDS_${PN}-runner = "${PN}-core ${PN}-protocols"
--RDEPENDS_${PN}-web += "${PN}-core ${PN}-protocols"
--RDEPENDS_${PN}-words += "${PN}-core"
--RDEPENDS_${PN}-flow += "${PN}-core"
--RDEPENDS_${PN}-pair += "${PN}-core"
--RDEPENDS_${PN}-dbg = "${PN}"
--
--ALLOW_EMPTY_${PN} = "1"
--FILES_${PN} = ""
--
--FILES_${PN}-test = " \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/test \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/test \
--"
--
--FILES_${PN}-protocols = " \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/*.py* \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/gps/ \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/mice/ \
--"
--
--FILES_${PN}-zsh = " \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zsh \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.* \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/twisted-completion.zsh \
--"
--
--FILES_${PN}-conch = " \
--    ${bindir}/ckeygen \
--    ${bindir}/tkconch \
--    ${bindir}/conch \
--    ${bindir}/conchftp \
--    ${bindir}/cftp \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_conch.py* \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/conch  \
--"
--
--FILES_${PN}-core = " \
--${bindir}/manhole \
--${bindir}/mktap \
--${bindir}/twistd \
--${bindir}/tap2deb \
--${bindir}/tap2rpm \
--${bindir}/tapconvert \
--${bindir}/tkmktap \
--${bindir}/trial \
--${bindir}/easy_install* \
--${bindir}/pyhtmlizer \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.so \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__init__.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/notestplugin.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/testplugin.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_ftp.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_inet.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_manhole.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_portforward.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_socks.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_telnet.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_trial.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/dropin.cache \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/application \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/cred \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/enterprise \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/internet \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/manhole \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/persisted \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols\
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python\
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/timeoutqueue.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/filepath.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dxprofile.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/plugin.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/htmlizer.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__init__.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dispatch.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/hook.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadpool.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/otp.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/usage.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/roots.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/versions.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/urlpath.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/util.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/components.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/logfile.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/runtime.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/reflect.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/context.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/threadable.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/rebuild.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/failure.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/lockfile.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/formmethod.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/finalize.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/win32.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/dist.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/shortcut.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zipstream.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/release.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/syslog.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/log.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/compat.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/zshcomp.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/procutils.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/text.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/_twisted_zsh_stub \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/scripts/ \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/spread/ \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/tap/ \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/trial/ \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/__init__.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/_version.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/copyright.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/im.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/python/*.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/*.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/topfiles \
--${libdir}/${PYTHON_DIR}/site-packages/Twisted*egg-info \
--"
--
--FILES_${PN}-lore = " \
--${bindir}/bookify \
--${bindir}/lore \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_lore.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/lore \
--"
--
--FILES_${PN}-mail = " \
--${bindir}/mailmail \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_mail.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/mail \
--"
--
--FILES_${PN}-names = " \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_names.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/names \
--"
--
--FILES_${PN}-news = " \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_news.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/news \
--"
--
--FILES_${PN}-runner = " \
--${libdir}/site-packages/twisted/runner/portmap.so \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/runner\
--"
--
--FILES_${PN}-web = " \
--${bindir}/websetroot \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_web.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/web\
--"
--
--FILES_${PN}-words = " \
--${bindir}/im \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_words.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/words\
--"
--
--FILES_${PN}-flow = " \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_flow.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/flow \"
--
--FILES_${PN}-pair = " \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/twisted_pair.py* \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/pair \
--"
--
--FILES_${PN}-dbg += " \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/*/.debug \
--${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/.debug \
--"
--
--RDEPENDS_{PN}-src = "${PN}"
--FILES_${PN}-src = " \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*.py \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*.py \
--    ${libdir}/${PYTHON_DIR}/site-packages/twisted/*/*/*.py \
--"
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-new file mode 100644
-index 0000000..98016cc
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-@@ -0,0 +1,67 @@
-+inherit pypi setuptools3
-+require python-twisted.inc
-+
-+RDEPENDS_${PN}-core = "python3-core python3-zopeinterface python3-lang"
-+
-+FILES_${PN}-core_append += " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/__pycache__ \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/python/__pycache__/*pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/__init__*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/notestplugin*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/testplugin*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_ftp*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_inet*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_manhole*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_portforward*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_socks*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_telnet*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_trial*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_core*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_qtstub*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_reactors*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/cred*.pyc \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/dropin*.cache \
-+"
-+
-+FILES_${PN}-names_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_names*.pyc \
-+"
-+
-+FILES_${PN}-news_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_news*.pyc \
-+"
-+
-+FILES_${PN}-protocols_append += " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/protocols/__pycache__/*pyc \
-+"
-+
-+FILES_${PN}-conch_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_conch*.pyc \
-+"
-+
-+FILES_${PN}-lore_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_lore*.pyc \
-+"
-+FILES_${PN}-mail_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_mail*.pyc \
-+"
-+
-+FILES_${PN}-web_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_web*.pyc \
-+"
-+
-+FILES_${PN}-words_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_words*.pyc \
-+"
-+
-+FILES_${PN}-flow_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_flow*.pyc \
-+"
-+
-+FILES_${PN}-pair_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_pair*.pyc \
-+"
-+
-+FILES_${PN}-runner_append = " \
-+  ${libdir}/${PYTHON_DIR}/site-packages/twisted/plugins/__pycache__/twisted_runner*.pyc \
-+"
--- 
-2.7.4
-
+KHBpbmcpIEkgYXBvbG9naXplIGZvciB0aGUgdG9wLXBvc3QgYnV0IGRpZCBub3Qgd2FudCB0byBo
+YXZlIHRoZSBwaW5nDQpsb3N0IGluIHRoZSBub2lzZS4NCg0KT24gTW9uLCAyMDE3LTA2LTE5IGF0
+IDE2OjQzIC0wNzAwLCBNYXJ0aW4gS2VsbHkgd3JvdGU6DQo+IE9uIFN1biwgMjAxNy0wNi0xOCBh
+dCAyMjoyOCArMDIwMCwgTWFydGluIEphbnNhIHdyb3RlOg0KPiA+IEFuZCB0aGVyZSBpcyBhbHNv
+IHRoaXM6DQo+ID4gDQo+ID4gPT09IEluY29ycmVjdCBQQUNLQUdFX0FSQ0ggb3Igc3N0YXRlIHNp
+Z25hdHVyZXMgKDMpID09PQ0KPiA+IA0KPiA+IENvbXBsZXRlIGxvZzogaHR0cDovL2xvZ3MubnNs
+dTItbGludXgub3JnL2J1aWxkbG9ncy9vZS93b3JsZC9yb2Nrby8NCj4gPiBsbw0KPiA+IGcuc2ln
+bmF0dXJlcy4yMDE3MDYxOF8wMTQwNTUubG9nLw0KPiA+IMKgIMKgICogRVJST1I6IDMgaXNzdWVz
+IHdlcmUgZm91bmQgaW4gdGhlc2UgcmVjaXBlczogb3Blbi12bS10b29scw0KPiA+IA0KPiA+IMKg
+IMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5kIGluDQo+ID4gc2lnbmF0dXJlcy5xZW11eDg2LmRv
+X2NvbmZpZ3VyZS5zaWdkYXRhLmxvZw0KPiA+IMKgIMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5k
+IGluDQo+ID4gc2lnbmF0dXJlcy5xZW11eDg2LmRvX3BvcHVsYXRlX3N5c3Jvb3Quc2lnZGF0YS5s
+b2cNCj4gPiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbg0KPiA+IHNpZ25hdHVyZXMu
+cWVtdXg4Ni5kb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRhLmxvZw0KPiA+IA0KPiA+IMKgIMKg
+ICogRVJST1I6IG9wZW4tdm0tdG9vbHMgZGlmZmVyZW50IHNpZ25hdHVyZSBmb3IgdGFzaw0KPiA+
+IGRvX2NvbmZpZ3VyZS5zaWdkYXRhIGJldHdlZW4gcWVtdXg4NmNvcHkgYW5kIHFlbXV4ODYNCj4g
+PiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbiAvaG9tZS9qZW5raW5zL29lL3dvcmxk
+L3Noci1jb3JlL3RtcC0NCj4gPiBnbGliYy9zc3RhdGUtDQo+ID4gZGlmZi8xNDk3Nzg2MDU1L3Np
+Z25hdHVyZXMucWVtdXg4Ni5kb19jb25maWd1cmUuc2lnZGF0YS5sb2cNCj4gPiDCoCDCoCAqIEVS
+Uk9SOiBvcGVuLXZtLXRvb2xzIGRpZmZlcmVudCBzaWduYXR1cmUgZm9yIHRhc2sNCj4gPiBkb19w
+b3B1bGF0ZV9zeXNyb290LnNpZ2RhdGEgYmV0d2VlbiBxZW11eDg2Y29weSBhbmQgcWVtdXg4Ng0K
+PiA+IMKgIMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5kIGluIC9ob21lL2plbmtpbnMvb2Uvd29y
+bGQvc2hyLWNvcmUvdG1wLQ0KPiA+IGdsaWJjL3NzdGF0ZS0NCj4gPiBkaWZmLzE0OTc3ODYwNTUv
+c2lnbmF0dXJlcy5xZW11eDg2LmRvX3BvcHVsYXRlX3N5c3Jvb3Quc2lnZGF0YS5sb2cNCj4gPiDC
+oCDCoCAqIEVSUk9SOiBvcGVuLXZtLXRvb2xzIGRpZmZlcmVudCBzaWduYXR1cmUgZm9yIHRhc2sN
+Cj4gPiBkb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRhIGJldHdlZW4gcWVtdXg4NmNvcHkgYW5k
+IHFlbXV4ODYNCj4gPiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbiAvaG9tZS9qZW5r
+aW5zL29lL3dvcmxkL3Noci1jb3JlL3RtcC0NCj4gPiBnbGliYy9zc3RhdGUtDQo+ID4gZGlmZi8x
+NDk3Nzg2MDU1L3NpZ25hdHVyZXMucWVtdXg4Ni5kb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRh
+LmxvZw0KPiA+IMKgIMKgICogRVJST1I6IDMgaXNzdWVzIHdlcmUgZm91bmQgaW4gdGhlc2UgcmVj
+aXBlczogb3Blbi12bS10b29scw0KPiA+IA0KPiA+IFNvIGl0IHByb2JhYmx5IGRlcGVuZHMgb24g
+c29tZSBNQUNISU5FIHNwZWNpZmljIHZhcmlhYmxlIHdpdGhvdXQNCj4gPiBiZWluZyBtYXJrZWQg
+YXMgTUFDSElORV9BUkNILg0KPiA+IA0KPiA+IExvb2tpbmcgYXQ6DQo+ID4gaHR0cHM6Ly9naXRo
+dWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0K
+PiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
+L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmINCj4gPiAN
+Cj4gPiBJdCdzIGRlcGVuZGluZyBvbiBrZXJuZWwsIHNvIGl0IG5lZWRzIHRvIGJlIE1BQ0hJTkVf
+QVJDSCwgYWxzbyBJJ3ZlDQo+ID4gbm90aWNlZCBmZXcgbW9yZSBpc3N1ZXM6DQo+ID4gDQo+IA0K
+PiBUaGFua3MgZm9yIGFsbCB0aGUgZmVlZGJhY2suIEkgYmVsaWV2ZSBJJ3ZlIG5vdyBmaXhlZCBh
+bGwgdGhlIGlzc3Vlcw0KPiB5b3Ugb3V0bGluZWQuDQo+IA0KPiBJIGRyb3BwZWQgdGhlIGtlcm5l
+bCBkZXBlbmRlbmN5IGVudGlyZWx5LCBhcyB3ZSdyZSBubyBsb25nZXIgYnVpbGRpbmcNCj4gdGhl
+IGtlcm5lbCBtb2R1bGVzICh0aGV5IGFsbCBnb3QgdXBzdHJlYW1lZCkuIFRodXMgSSBzdXNwZWN0
+IHRoZQ0KPiBpc3N1ZQ0KPiBpcyBubyBsb25nZXIgcHJlc2VudCB3aXRoIG15IGxhdGVzdCBjaGFu
+Z2VzLg0KPiANCj4gVGhhdCBzYWlkLCBJIGNhbid0IHJlcHJvIHRoZSBzc3RhdGUgZXJyb3JzIG9u
+IG15IGxvY2FsIG1hY2hpbmUuIENvdWxkDQo+IHlvdSBwcm92aWRlIHJlcHJvIHN0ZXBzIHNvIEkg
+Y2FuIHZlcmlmeSB0aGlzIGlzIGZpeGVkIGJlZm9yZSBJIHNlbmQNCj4gbmV3DQo+IHBhdGNoZXM/
+DQo+IA0KPiA+IERFUEVORFMgaXMgdGhlcmUgdHdpY2U6DQo+ID4gaHR0cHM6Ly9naXRodWIuY29t
+L1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+IGFi
+DQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4t
+dm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDI0DQo+ID4gaHR0
+cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3
+MTk1YmViMg0KPiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBl
+cy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUu
+YmIjTDM5DQo+ID4gDQo+ID4gV2hhdCBpcyBzdXBwb3NlZCB0byBzZXQgS0VSTkVMX1ZFUlNJT04g
+dmFyaWFibGUgaW46DQo+ID4gaHR0cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1i
+ZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5
+OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2
+bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDU4DQo+ID4gP8KgDQo+ID4gDQo+ID4gRG9uJ3QgdXNl
+IHRhZ3MgaW4gU1JDUkVWLCB1c2UgZ2l0IGhhc2ggaW5zdGVhZCAob3RoZXJ3aXNlIGJpdGJha2UN
+Cj4gPiBmZXRjaGVyIHdpbGwgcmVhY2ggdXBzdHJlYW0gZ2l0IHJlcG8gZXZlcnkgc2luZ2xlIHRp
+bWUgdGhlIHJlY2lwZQ0KPiA+IGlzDQo+ID4gcGFyc2VkIGFuZCB3aWxsIGNhdXNlIGZhaWxlZCBi
+dWlsZHMgd2hlbiBnaXRodWIgaXNuJ3QgYWNjZXNzaWJsZSkuDQo+ID4gaHR0cHM6Ly9naXRodWIu
+Y29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+
+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29w
+ZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDM1DQo+ID4g
+DQo+ID4gVGhlcmUgYXJlIG1hbnkgaGFyZGNvZGVkIHBhdGhzIGxpa2UgL3Vzci9saWIvIG9yIC91
+c3Ivc2Jpbi8sIHBsZWFzZQ0KPiA+IHVzZSBwcm9wZXIgdmFyaWFibGVzIGxpa2UgbGliZGlyLCBz
+YmluZGlyLg0KPiA+IA0KPiA+IE9uY2UgeW91IGZpeCB0aGVzZSBpc3N1ZXMgcGxlYXNlIHJlc2Vu
+ZCBhbGwgY2hhbmdlcyB0byB0aGUgTUwsIGl0J3MNCj4gPiBtdWNoIGJldHRlciB0byByZXZpZXcg
+aW5saW5lIHRoYW4gdGhpcy4NCj4gPiANCj4gPiBSZWdhcmRzLA0KPiA+IA0KPiA+IA0KPiA+IE9u
+IFN1biwgSnVuIDE4LCAyMDE3IGF0IDk6NTggUE0sIE1hcnRpbiBKYW5zYSA8bWFydGluLmphbnNh
+QGdtYWlsLmMNCj4gPiBvbQ0KPiA+ID4gd3JvdGU6DQo+ID4gPiBGYWlscyB0byBjb25maWd1cmUg
+b24gcWVtdWFybS4NCj4gPiA+IA0KPiA+ID4gSWYgYXJtIGlzbid0IGV4cGVjdGVkIHRvIGJlIHN1
+cHBvcnRlZCwgY2FuIHlvdSBwbGVhc2UgdXBkYXRlDQo+ID4gPiBDT01QQVRJQkxFX0hPU1QgcmVz
+dHJpY3Rpb24/DQo+ID4gPiANCj4gPiA+IGh0dHA6Ly9lcnJvcnMueW9jdG9wcm9qZWN0Lm9yZy9F
+cnJvcnMvRGV0YWlscy8xNDU1OTkvDQo+ID4gPiANCj4gPiA+IE9uIFRodSwgSnVuIDE1LCAyMDE3
+IGF0IDc6NTAgUE0sIE1hcnRpbiBKYW5zYSA8bWFydGluLmphbnNhQGdtYWlsDQo+ID4gPiAuYw0K
+PiA+ID4gb20+IHdyb3RlOg0KPiA+ID4gPiBPSywgSSdsbCB0cnkgdG8gcmVtZW1iZXIgdG8gZml4
+IGl0IGJlZm9yZSBtZXJnZS4NCj4gPiA+ID4gDQo+ID4gPiA+IEknbSBzb3JyeSBhYm91dCBpdCwg
+dHdlYWtpbmcgb3RoZXIgcGVvcGxlIGNvbW1pdHMgYWx3YXlzDQo+ID4gPiA+IHN0cmlrZXMNCj4g
+PiA+ID4gYmFjayA6KS4NCj4gPiA+ID4gDQo+ID4gPiA+IE9uIFRodSwgSnVuIDE1LCAyMDE3IGF0
+IDc6NDAgUE0sIE1hcnRpbiBLZWxseSA8bWtlbGx5QHhldm8uY29tPg0KPiA+ID4gPiB3cm90ZToN
+Cj4gPiA+ID4gPiBPbiAwNi8xNS8yMDE3IDA5OjU0IEFNLCBNYXJ0aW4gSmFuc2Egd3JvdGU6DQo+
+ID4gPiA+ID4gPiBJdCBkaWRuJ3QgbWFrZSBpdCB0byBwYXRjaHdvcmssIGJlY2F1c2UgeW91J3Zl
+IHNlbnQgb25seQ0KPiA+ID4gPiA+ID4gdGhlDQo+ID4gPiA+ID4gPiBjb3Zlcg0KPiA+ID4gPiA+
+ID4gbGV0dGVyLiBJJ3ZlIGFkZGVkIGl0IHRvIG1hc3Rlci1uZXh0IG5vdy4NCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+ID4gTmV4dCB0aW1lIHBsZWFzZSBzZW5kIGFsc28gaW5kaXZpZHVhbCBwYXRj
+aGVzLiBTbyB0aGF0IGl0DQo+ID4gPiA+ID4gPiBnZXRzIG1vcmUNCj4gPiA+ID4gPiA+IHZpc2li
+aWxpdHkgZm9yIG90aGVyIHBlb3BsZSB0byBjb21tZW50IGFuZCBhbHNvIHRoYXQgSSBjYW4NCj4g
+PiA+ID4gPiA+IHVzZSBwYXRjaHdvcmsNCj4gPiA+ID4gPiA+IHRvIHB1bGwgaXQgaW4uDQo+ID4g
+PiA+ID4gPiANCj4gPiA+ID4gPiA+IFJlZ2FyZHMsDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IMKgDQo+ID4gPiA+ID4gU21hbGwgbm90ZTogTG9va3Mg
+bGlrZSB0aGUgaW5pdGlhbCBjb21taXQgKDI0YjJhYykgaGFzIGENCj4gPiA+ID4gPiBzbWFsbA0K
+PiA+ID4gPiA+IHR5cG8gdGhhdCBzaG91bGQgaWRlYWxseSBiZSBmaXhlZCBiZWZvcmUgaXQncyBt
+ZXJnZWQgaW50bw0KPiA+ID4gPiA+IG1hc3RlcjoNCj4gPiA+ID4gPiANCj4gPiA+ID4gPiAib3Bl
+bi12bS10b29sczogYWRkIHJlY2lwZSBmcm9tIG1lYXQtZm9zcy1vcGVuc3dpdGNoIg0KPiA+ID4g
+PiA+IA0KPiA+ID4gPiA+ICJtZWF0IiAtLT4gIm1ldGEiDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4g
+PiBPbiBUaHUsIEp1biAxNSwgMjAxNyBhdCA2OjM2IFBNLCBNYXJ0aW4gS2VsbHkgPG1rZWxseUB4
+ZXZvLg0KPiA+ID4gPiA+ID4gY28NCj4gPiA+ID4gPiA+IG0NCj4gPiA+ID4gPiA+IDxtYWlsdG86
+bWtlbGx5QHhldm8uY29tPj4gd3JvdGU6DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKg
+IE9uIDA2LzA5LzIwMTcgMDM6MjIgUE0sIE1hcnRpbiBLZWxseSB3cm90ZToNCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgSGkgYWxsLA0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+
+ID4gPiDCoCDCoCDCoCDCoCBUaGlzIHBhdGNoIHNlcmllcyBhZGRzIGEgbmV3IHJlY2lwZSBmb3Ig
+T3BlbiBWTQ0KPiA+ID4gPiA+ID4gVG9vbHMNCj4gPiA+ID4gPiA+IHRvDQo+ID4gPiA+ID4gPiDC
+oCDCoCDCoCDCoCBtZXRhLW9lLiBUaGlzDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCByZWNpcGUg
+aXMgaW52YWx1YWJsZSBmb3IgdXNpbmcgT3BlbmVtYmVkZGVkIHdpdGgNCj4gPiA+ID4gPiA+IFZN
+V2FyZSwgYXMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIHdpdGhvdXQgdGhlDQo+ID4gPiA+ID4g
+PiDCoCDCoCDCoCDCoCB0b29scywgcGVyZm9ybWFuY2UgaXMgdmVyeSBzbG93Lg0KPiA+ID4gPiA+
+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBNb3JlIGluZm9ybWF0aW9uIGFib3V0IE9wZW4g
+Vk0gVG9vbHMgY2FuIGJlIGZvdW5kDQo+ID4gPiA+ID4gPiBoZXJlOg0KPiA+ID4gPiA+ID4gDQo+
+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBodHRwczovL2dpdGh1Yi5jb20vdm13YXJlL29wZW4tdm0t
+dG9vbHMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwczovL2dpdGh1Yi5jb20vdm13YXJl
+L29wZW4tdm0tdG9vbHM+DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIFBs
+ZWFzZSBub3RlIHRoYXQsIGFzIG1lbnRpb25lZCBpbiB0aGUgZmlyc3QgY29tbWl0LA0KPiA+ID4g
+PiA+ID4gdGhpcyByZWNpcGUgaXMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1vZGlmaWVkIGZy
+b20gdGhlIHJlY2lwZSBvcmlnaW5hbGx5IGZvdW5kIGluIHRoZQ0KPiA+ID4gPiA+ID4gT3Blbi1T
+d2l0Y2gNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIHJlcG9zaXRvcnkuDQo+ID4gPiA+ID4gPiDC
+oCDCoCDCoCDCoCBUaGUgZmlyc3QgcGF0Y2ggaXMgZGlyZWN0bHkgZnJvbSB0aGF0IHJlcG9zaXRv
+cnksDQo+ID4gPiA+ID4gPiBhbmQNCj4gPiA+ID4gPiA+IHRoZSBmb2xsb3dpbmcNCj4gPiA+ID4g
+PiA+IMKgIMKgIMKgIMKgIHBhdGNoZXMgYXJlIG1vZGlmaWNhdGlvbnMgdG8gaXQuDQo+ID4gPiA+
+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIE9yaWdpbmFsIHJlY2lwZToNCj4gPiA+ID4g
+PiA+IMKgIMKgIMKgIMKgIGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuLXN3aXRjaC9vcHMtYnVpbGQN
+Cj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwczovL2dpdGh1Yi5jb20vb3Blbi1zd2l0Y2gv
+b3BzLWJ1aWxkPg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgeW9jdG8vb3BlbnN3aXRjaC9tZXRh
+LWZvc3Mtb3BlbnN3aXRjaC9yZWNpcGVzLQ0KPiA+ID4gPiA+ID4gZXh0ZW5kZWQvb3Blbi12bS10
+b29scy9vcGVuLXZtLXRvb2xzXzEwLjAuNS5iYg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0
+dHA6Ly9vcGVuLXZtLXRvb2xzXzEwLjAuNS5iYj4NCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4g
+wqAgwqAgwqAgwqAgQ29tbWl0IDkwMDhkZTJkOGUxMDBmM2Y4NjhjNjY3NjU3NDJiY2E5ZmE5OGYz
+ZjkNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgQWx0aG91Z2ggdGhlIG9y
+aWdpbmFsIHJlY2lwZSBwYWNrYWdpbmcgd2FzIEFwYWNoZS0NCj4gPiA+ID4gPiA+IGxpY2Vuc2Vk
+LCBJDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCByZWNlaXZlZA0KPiA+ID4gPiA+ID4gwqAgwqAg
+wqAgwqAgcGVybWlzc2lvbiBmcm9tIHRoZSBhdXRob3IgKERpZWdvIERvbXBlKSB0bw0KPiA+ID4g
+PiA+ID4gcmVsaWNlbnNlDQo+ID4gPiA+ID4gPiBpdCB1bmRlcg0KPiA+ID4gPiA+ID4gwqAgwqAg
+wqAgwqAgdGhlIE1JVA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbGljZW5zZSBmb3IgaW5jbHVz
+aW9uIGluIG1ldGEtb3BlbmVtYmVkZGVkOg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDC
+oCDCoCDCoCBodHRwczovL2xpc3RzLm9wZW5zd2l0Y2gubmV0L3BpcGVybWFpbC9vcHMtZGV2LzIw
+MTcNCj4gPiA+ID4gPiA+IC1BDQo+ID4gPiA+ID4gPiBwcmlsLzAxNDcxNS5odG1sDQo+ID4gPiA+
+ID4gPiDCoCDCoCDCoCDCoCA8aHR0cHM6Ly9saXN0cy5vcGVuc3dpdGNoLm5ldC9waXBlcm1haWwv
+b3BzLWRldi8yMDENCj4gPiA+ID4gPiA+IDctDQo+ID4gPiA+ID4gPiBBcHJpbC8wMTQ3MTUuaHRt
+bD4NCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIGh0dHBzOi8vbGlzdHMub3BlbnN3aXRjaC5uZXQv
+cGlwZXJtYWlsL29wcy1kZXYvMjAxNw0KPiA+ID4gPiA+ID4gLUENCj4gPiA+ID4gPiA+IHByaWwv
+MDE0NzE2Lmh0bWwNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0dHBz
+Oi8vbGlzdHMub3BlbnN3aXRjaC5uZXQvcGlwZXJtYWlsL29wcy1kZXYvMjAxDQo+ID4gPiA+ID4g
+PiA3LQ0KPiA+ID4gPiA+ID4gQXByaWwvMDE0NzE2Lmh0bWw+DQo+ID4gPiA+ID4gPiANCj4gPiA+
+ID4gPiA+IMKgIMKgIMKgIMKgIC0tDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBUaGUgZm9sbG93
+aW5nIGNoYW5nZXMgc2luY2UgY29tbWl0DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCA0MWNmODMy
+Y2M5YWJkNmYyMjkzYTZkNjEyNDYzYTM0YTUzYTlhNTJhOg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+
+ID4gPiDCoCDCoCDCoCDCoCDCoCBSZXZlcnQgInJyZHRvb2w6IGFkZCBnZXR0ZXh0LW5hdGl2ZSBk
+ZXBlbmRlbmN5Ig0KPiA+ID4gPiA+ID4gKDIwMTctMDYtMDUNCj4gPiA+ID4gPiA+IMKgIMKgIMKg
+IMKgIDExOjEzOjA5DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCArMDIwMCkNCj4gPiA+ID4gPiA+
+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgYXJlIGF2YWlsYWJsZSBpbiB0aGUgZ2l0IHJlcG9z
+aXRvcnkgYXQ6DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIGh0dHBz
+Oi8vZ2l0aHViLmNvbS9YZXZvSW5jL21ldGEtb3BlbmVtYmVkZGVkDQo+ID4gPiA+ID4gPiDCoCDC
+oCDCoCDCoCA8aHR0cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQ+DQo+
+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIGZvciB5b3UgdG8gZmV0Y2ggY2hh
+bmdlcyB1cCB0bw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgNDAyZDFiMzkxNzE5NWJlYjJhYjdj
+YWM1ZGM5NGFhZWQ4OTkyYjVhMToNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAg
+wqAgwqAgb3Blbi12bS10b29sczogc3R5bGUgY2hhbmdlcyAoMjAxNy0wNi0wNyAyMjozMTozNA0K
+PiA+ID4gPiA+ID4gKzAwMDApDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKg
+IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+
+ID4gPiA+ID4gLS0tLS0tLS0tLS0tLQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgTWFydGluIEtl
+bGx5ICgxNCk6DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDCoCBhZGQgb3Blbi12bS10
+b29scyByZWNpcGUNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9v
+bHM6IGFkZCBtaXNzaW5nIHBrZ2NvbmZpZw0KPiA+ID4gPiA+ID4gZGVwZW5kZW5jeQ0KPiA+ID4g
+PiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogYWRkIG1pc3NpbmcgZ2xp
+Yi0yLjAtbmF0aXZlDQo+ID4gPiA+ID4gPiBkZXBlbmRlbmN5DQo+ID4gPiA+ID4gPiDCoCDCoCDC
+oCDCoCDCoCDCoCDCoCBvcGVuLXZtLXRvb2xzOiBjbGFyaWZ5IGFuZCBleHBhbmQgbGljZW5zaW5n
+DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDCoCBvcGVuLXZtLXRvb2xzOiBiYXNlX2Nv
+bnRhaW5zIC0tPg0KPiA+ID4gPiA+ID4gYmIudXRpbHMuY29udGFpbnMNCj4gPiA+ID4gPiA+IMKg
+IMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IHVwZGF0ZSB2ZXJzaW9uIHRvIDEwLjEu
+NQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogZG9uJ3Qg
+dXNlIG1zcGFjaw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29s
+czogZG9uJ3QgdXNlIGRuZXQtY29uZmlnDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDC
+oCBvcGVuLXZtLXRvb2xzOiBhZGQgI2luY2x1ZGUgdG8gZml4IGJ1aWxkDQo+ID4gPiA+ID4gPiBi
+cmVhaw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogYWRk
+IG1pc3NpbmcgWDExIGRlcGVuZGVuY2llcw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgb3Blbi12bS10b29sczogcmVtb3ZlIGtlcm5lbCBtb2R1bGUgbG9naWMNCj4gPiA+ID4gPiA+
+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IGxpbmUgdXAgY29uZmlndXJlIG9w
+dGlvbnMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IHN1
+cHBvcnQgRlVTRQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29s
+czogc3R5bGUgY2hhbmdlcw0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
+oC4uLi9yZWNpcGVzLXN1cHBvcnQvb3Blbi12bS10b29scy9maWxlcy90b29scy5jb25mDQo+ID4g
+PiA+ID4gPiA+IMKgIDIgKw0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
+oC4uLi9vcGVuLXZtLXRvb2xzL2ZpbGVzL3ZtdG9vbHNkLnNlcnZpY2XCoCDCoCDCoCDCoCDCoA0K
+PiA+ID4gPiA+ID4gwqB8DQo+ID4gPiA+ID4gPiAxMSArKysNCj4gPiA+ID4gPiA+IMKgIMKgIMKg
+IMKgIMKgLi4uL29wZW4tdm0tdG9vbHMvMDAwMS1GaXgta2VybmVsLWRldGVjdGlvbi5wYXRjaMKg
+IA0KPiA+ID4gPiA+ID4gfA0KPiA+ID4gPiA+ID4gMzUgKysrKysrKysrDQo+ID4gPiA+ID4gPiDC
+oCDCoCDCoCDCoCDCoC4uLi8wMDAyLWNvbmZpZ3VyZS5hYy1kb24tdC11c2UtZG5ldC1jb25maWcu
+cGF0Y2jCoCANCj4gPiA+ID4gPiA+IHwNCj4gPiA+ID4gPiA+IDQxICsrKysrKysrKysNCj4gPiA+
+ID4gPiA+IMKgIMKgIMKgIMKgIMKgLi4uLzAwMDMtYWRkLWluY2x1ZGUtc3lzLXN5c21hY3Jvcy5o
+LnBhdGNowqAgwqAgwqAgwqANCj4gPiA+ID4gPiA+IMKgfA0KPiA+ID4gPiA+ID4gMzMgKysrKysr
+KysNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgLi4uL29wZW4tdm0tdG9vbHMvb3Blbi12bS10
+b29sc18xMC4xLjUuYmINCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwOi8vb3Blbi12bS10
+b29sc18xMC4xLjUuYmI+wqAgwqAgwqAgwqAgwqAgfCA5MA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAg
+wqAgKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqA2IGZp
+bGVzIGNoYW5nZWQsIDIxMiBpbnNlcnRpb25zKCspDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
+oGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbWV0YS1vZS9yZWNp
+cGVzLXN1cHBvcnQvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzL2ZpbGVzL3Rvb2xzLmNvbmYN
+Cj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gPiA+ID4g
+PiDCoCDCoCDCoCDCoCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuLXZtLQ0KPiA+ID4gPiA+
+ID4gdG9vbHMvZmlsZXMvdm10b29sc2Quc2VydmljZQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAg
+wqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1ldGEtb2UvcmVj
+aXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzLzAw
+MDEtRml4LWtlcm5lbC1kZXRlY3Rpb24ucGF0Y2gNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4g
+wqAgwqAgwqAgwqAgwqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKg
+IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4g
+PiA+IHRvb2xzLzAwMDItY29uZmlndXJlLmFjLWRvbi10LXVzZS1kbmV0LWNvbmZpZy5wYXRjaA0K
+PiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoGNyZWF0ZSBtb2RlIDEwMDY0
+NA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3Blbi12
+bS10b29scy9vcGVuLXZtLQ0KPiA+ID4gPiA+ID4gdG9vbHMvMDAwMy1hZGQtaW5jbHVkZS1zeXMt
+c3lzbWFjcm9zLmgucGF0Y2gNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAg
+wqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1ldGEtb2UvcmVj
+aXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzXzEw
+LjEuNS5iYg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0dHA6Ly9vcGVuLXZtLXRvb2xzXzEw
+LjEuNS5iYj4NCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIC0tDQo+ID4gPiA+ID4gPiDCoCDCoCDC
+oCDCoCAyLjEuNA0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKg
+IChwaW5nKQ0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IA0KPiA+ID4g
+PiA+IA0KPiA+ID4gPiA+IMKgDQo+ID4gPiA+IA0KPiA+ID4gPiANCj4gPiA+IA0KPiA+ID4gDQo+
+ID4gDQo+ID4gDQo=
 
