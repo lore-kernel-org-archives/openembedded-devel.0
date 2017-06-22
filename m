@@ -1,43 +1,48 @@
-Return-Path: <pauldotknopf@gmail.com>
-Received: from mail-ot0-f172.google.com (mail-ot0-f172.google.com
-	[74.125.82.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5B93A77ECB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 12:39:07 +0000 (UTC)
-Received: by mail-ot0-f172.google.com with SMTP id y47so9949074oty.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 05:39:09 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f180.google.com (mail-wr0-f180.google.com
+	[209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 6755060103;
+	Thu, 22 Jun 2017 14:08:56 +0000 (UTC)
+Received: by mail-wr0-f180.google.com with SMTP id r103so25206343wrb.0;
+	Thu, 22 Jun 2017 07:08:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=ahHqBh4mlWMGe+N5RLBGHm5lBfkcByFkO2VjFBBs8LY=;
-	b=sLccdR/zXMUyX+hUo2CcRvHfU2xUbLmp/ask+leBlcuKPBVk7Ui82Fcz5KOaiwyvre
-	JzkqIRSbK6ePz4SAxZsRBy0mziOAgkQaexn6LuXtUjMgnKrdb5T6q9MePtqKPbM8CO+U
-	lgmznjKHXmz9CWayODGymL0I6TEy3klr3IzYweL3VskDLevOVWSd9ZQkxIHj7cN9+A81
-	w3XwgxZlodtuVz/CbWwpX/EIQ8mpP2tLBFIh0XQuzExk7V+JgHCo91AocGHy0lDp9zcm
-	ZA3YASzAKPaSCiRaD44D0cqazGqhP27RCkfMdbO93wLPA6l+PP4+efw9gUB7+/2ZwJW8
-	nT/w==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=XVMDfESgJRgxIgI0ikt0sXPz92PgpDkmQTgu8Dx1i5Y=;
+	b=ol8p9zzP0BB59OkbDuN0g9K7N0aufjSBCVpJSaUhG1Us45Ra5dnCTeo8v6N9+dYug6
+	Iuw1ityPhzapzY03M7hzeG3hQTFyAQSKHMuQV5iwFvxdIG8+47knFDGX2yJop51Jz9ZA
+	9/F0KuP5WVai6JvtlAnRBHwmRMAa1uvt6o7qSCinrLMnYSk+bILGSsnqF+3xcaOPlX3n
+	qRjZI0clCiO0NbKVKpc9iiFwJZlNpnKL5qw4FZqKqVXA2HdgtfNTQ+/3JrMrlFq6w2Lu
+	3Xzjp4d42WNs6IkyMp2bfUih7Di/MSflynOlL3g6+UegIWK6haNM2CY6ZN68Z0b+dSbo
+	Dl/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=ahHqBh4mlWMGe+N5RLBGHm5lBfkcByFkO2VjFBBs8LY=;
-	b=pF9o9fsVg/tZqMwFt7M4xd98JEy8whE2rzPhkhz+kd5T7vRxnKG+ursdfdiUJZFFVg
-	JNmHxUvxprY83+8mlhQWJ/4Vub/xBtlbbQDrACHDUStifHem6Nz8HpYCzpp7jDpWwyiz
-	+B/WIknbDm8WWvaC0rGEaFyDzVIjJHCV3di7FaUjm5f2JiuUiglM67tkKtJMelZyVzyR
-	C0YRzjBxaYIXng1PpBo5SiRzBBWjzy7efiARB6YIe56EzgcPES9d4O6YxeSgpdHRKRQw
-	KM/hqIiSzgtCszUWk6P9C92JPBSD5NMzIpGI/8Kgn0XGOtgZ1Z/lzRfzKlu7gl1Yq2WK
-	d0NA==
-X-Gm-Message-State: AKS2vOxwwWeIyi/7/ULoqXHw0etw6txL8tPM18h7hpLxs1HrQ2x+Q7YR
-	VnkjVhk3EwVv0tk6bhzTlbvPNfcem3lc
-X-Received: by 10.157.32.76 with SMTP id n70mr1443711ota.151.1498135148687;
-	Thu, 22 Jun 2017 05:39:08 -0700 (PDT)
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=XVMDfESgJRgxIgI0ikt0sXPz92PgpDkmQTgu8Dx1i5Y=;
+	b=sZoze9k4qbu2HNEvKJxHwFLkq/dUyaMjtp8/lr4ec9RX2CQCHScqHPVLIg6FDyLBBQ
+	dQBgi5O4TwhKVEaM29uyiT1bQFp/Nw/6jES6Az08bMyXQ2Vv4U0BHFojWf2KrKh2d46/
+	4B38OBu41SowQkMteWktAiKnwTz9A6E5L9+la9Luosr6r3c+GnjrA9CbO1V6gZq64Qkm
+	1IpLeDx/Xi6QCVzDhtTwNfdF1W2I4jo7JHHScehhEg7HvxSv1EbaX5THkJEiDLBK/P6Y
+	GWM21cxYYNyrkAh7sc4WZuZ9NMYC6XOFbupbkgvK0wulDvHzPnlw3Ah6u2nE/rgwQmor
+	aCbQ==
+X-Gm-Message-State: AKS2vOzWUcnQe/LxLwHa/CFxjDg4ilXmxiFyY3KIgGyVlulXlmDApDyv
+	SURzGTukhREOJHR4
+X-Received: by 10.28.109.18 with SMTP id i18mr1956000wmc.97.1498140536774;
+	Thu, 22 Jun 2017 07:08:56 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	139sm1477087wmw.15.2017.06.22.07.08.55
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 22 Jun 2017 07:08:56 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 22 Jun 2017 16:09:08 +0200
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20170622140908.GA2792@jama>
 MIME-Version: 1.0
-Received: by 10.74.139.150 with HTTP; Thu, 22 Jun 2017 05:39:08 -0700 (PDT)
-From: Paul Knopf <pauldotknopf@gmail.com>
-Date: Thu, 22 Jun 2017 08:39:08 -0400
-Message-ID: <CAKmWj-0oR4i4QK7mVT2iy4yyS57ULJizNEzv9cSP3U0qthjFCQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: meta-qt5 issue with populate_sdk on meta-toolchain-qt5
+User-Agent: Mutt/1.8.3 (2017-05-23)
+Subject: State of bitbake world, Failed tasks 2017-06-21
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,274 +55,359 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jun 2017 12:39:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 22 Jun 2017 14:08:57 -0000
+X-Groupsio-MsgNum: 67293
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="qMm9M+Fa2AknHoGS"
+Content-Disposition: inline
 
-Using master (3ae86cb32edd1449f702e0a094929ae9b21ce191), running this
-command gives me problems.
+--qMm9M+Fa2AknHoGS
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-bitbake meta-toolchain-qt5 -c populate_sdk
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-I get the following error.
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!|Signatures		  !!colspan=
+=3D'14'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||all 	||already-stripped	||libdir	||t=
+extrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-cont=
+aminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sys=
+root	||invalid-pkgconfig	||pkgname	||ldflags	||compile-host-path	||=09
+|-
+||2017-06-21	||1	||3	||3	||0	||0		||0		||0		||0		||0		||0		||0		||0		||0		|=
+|0		||0		||0		||0		||0		||=09
+|}
 
-ERROR: meta-toolchain-qt5-1.0-r0 do_populate_sdk: Could not invoke dnf.
-Command
-'/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/recipe-sysroot-native/usr/bin/dnf
--y -c
-/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image/etc/dnf/dnf.conf
---setopt=reposdir=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image/etc/yum.repos.d
---repofrompath=oe-repo,/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/oe-rootfs-repo
---installroot=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image
---setopt=logdir=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/temp
---nogpgcheck install nativesdk-packagegroup-qt5-toolchain-host
-nativesdk-packagegroup-sdk-host
-packagegroup-cross-canadian-intel-corei7-64' returned 1:
-Added oe-repo repo from
-file:///home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/oe-rootfs-repo
-Last metadata expiration check: 0:00:00 ago on Thu Jun 22 12:34:46 2017 UTC.
-Dependencies resolved.
-================================================================================
- Package                         Arch             Version         Repository
+=3D=3D Failed tasks 2017-06-21 =3D=3D
 
- Size
-================================================================================
-Installing:
- nativesdk-packagegroup-qt5-toolchain-host
-                                 x86_64_nativesdk 1.0-r0          oe-repo
-5.5 k
- nativesdk-packagegroup-sdk-host x86_64_nativesdk 1.0-r12         oe-repo
-5.7 k
- packagegroup-cross-canadian-intel-corei7-64
-                                 x86_64_nativesdk 1.0-r0          oe-repo
-5.5 k
-Installing dependencies:
- binutils-cross-canadian-x86-64  x86_64_nativesdk 2.28-r0         oe-repo
- 12 M
- gcc-cross-canadian-x86-64       x86_64_nativesdk 6.3.0-r0        oe-repo
- 25 M
- gdb-cross-canadian-x86-64       x86_64_nativesdk 7.12.1-r0       oe-repo
-2.3 M
- meta-environment-intel-corei7-64
-                                 x86_64_nativesdk 1.0-r8          oe-repo
- 10 k
- nativesdk-autoconf              x86_64_nativesdk 2.69-r11        oe-repo
-513 k
- nativesdk-automake              x86_64_nativesdk 1.15-r0         oe-repo
-377 k
- nativesdk-cmake                 x86_64_nativesdk 3.7.2-r0        oe-repo
-7.2 M
- nativesdk-db                    x86_64_nativesdk 1:5.3.28-r1     oe-repo
-548 k
- nativesdk-dnf                   x86_64_nativesdk 2.0.0+git0+f0093d672d-r0
-                                                                  oe-repo
-195 k
- nativesdk-dtc                   x86_64_nativesdk 1.4.2-r0        oe-repo
- 70 k
- nativesdk-elfutils              x86_64_nativesdk 0.168-r0        oe-repo
-150 k
- nativesdk-flex                  x86_64_nativesdk 2.6.0-r0        oe-repo
-133 k
- nativesdk-gnu-config            x86_64_nativesdk
-20150728+git0+b576fa87c1-r0
-                                                                  oe-repo
- 32 k
- nativesdk-libarchive            x86_64_nativesdk 3.2.2-r0        oe-repo
-299 k
- nativesdk-libasm1               x86_64_nativesdk 0.168-r0        oe-repo
- 20 k
- nativesdk-libbz2-1              x86_64_nativesdk 1.0.6-r5        oe-repo
- 37 k
- nativesdk-libc6                 x86_64_nativesdk 2.25-r0         oe-repo
-1.7 M
- nativesdk-libcrypto1.0.2        x86_64_nativesdk 1.0.2k-r0       oe-repo
-986 k
- nativesdk-libcurl4              x86_64_nativesdk 7.53.1-r0       oe-repo
-174 k
- nativesdk-libdw1                x86_64_nativesdk 0.168-r0        oe-repo
-257 k
- nativesdk-libelf1               x86_64_nativesdk 0.168-r0        oe-repo
- 50 k
- nativesdk-libexpat1             x86_64_nativesdk 2.2.0-r0        oe-repo
- 68 k
- nativesdk-libffi6               x86_64_nativesdk 3.2.1-r0        oe-repo
- 23 k
- nativesdk-libgcc1               x86_64_nativesdk 6.3.0-r0        oe-repo
- 48 k
- nativesdk-libglib-2.0-0         x86_64_nativesdk 1:2.50.3-r0     oe-repo
-1.2 M
- nativesdk-libgmp10              x86_64_nativesdk 6.1.2-r0        oe-repo
-249 k
- nativesdk-libmpc3               x86_64_nativesdk 1.0.3-r0        oe-repo
- 49 k
- nativesdk-libmpfr4              x86_64_nativesdk 3.1.5-r0        oe-repo
-185 k
- nativesdk-libncurses5           x86_64_nativesdk 6.0+20161126-r0 oe-repo
- 73 k
- nativesdk-libncursesw5          x86_64_nativesdk 6.0+20161126-r0 oe-repo
- 96 k
- nativesdk-libopkg1              x86_64_nativesdk 1:0.3.4-r0      oe-repo
- 79 k
- nativesdk-libpcre1              x86_64_nativesdk 8.40-r0         oe-repo
-100 k
- nativesdk-libpixman-1-0         x86_64_nativesdk 1:0.34.0-r0     oe-repo
-277 k
- nativesdk-libpython3.5m1.0      x86_64_nativesdk 3.5.2-r1.0      oe-repo
-957 k
- nativesdk-libreadline7          x86_64_nativesdk 7.0-r0          oe-repo
-150 k
- nativesdk-libsdl-1.2-0          x86_64_nativesdk 1.2.15-r3       oe-repo
-157 k
- nativesdk-libsolv               x86_64_nativesdk 0.6.26-r0       oe-repo
-342 k
- nativesdk-libssl1.0.2           x86_64_nativesdk 1.0.2k-r0       oe-repo
-176 k
- nativesdk-libssp0               x86_64_nativesdk 6.3.0-r0        oe-repo
- 11 k
- nativesdk-libstdc++6            x86_64_nativesdk 6.3.0-r0        oe-repo
-456 k
- nativesdk-libtinfo5             x86_64_nativesdk 6.0+20161126-r0 oe-repo
- 68 k
- nativesdk-libtool               x86_64_nativesdk 2.4.6-r0        oe-repo
-509 k
- nativesdk-libx11-6              x86_64_nativesdk 1:1.6.4-r0      oe-repo
-750 k
- nativesdk-libxau6               x86_64_nativesdk 1:1.0.8-r0      oe-repo
- 12 k
- nativesdk-libxcb1               x86_64_nativesdk 1.12-r0         oe-repo
- 50 k
- nativesdk-libxdmcp6             x86_64_nativesdk 1:1.1.2-r0      oe-repo
- 16 k
- nativesdk-libxext6              x86_64_nativesdk 1:1.3.3-r0      oe-repo
- 33 k
- nativesdk-libxrandr2            x86_64_nativesdk 1:1.5.1-r0      oe-repo
- 23 k
- nativesdk-libxrender1           x86_64_nativesdk 1:0.9.10-r0     oe-repo
- 24 k
- nativesdk-libz1                 x86_64_nativesdk 1.2.11-r0       oe-repo
- 54 k
- nativesdk-m4                    x86_64_nativesdk 1.4.18-r0       oe-repo
-117 k
- nativesdk-makedevs              x86_64_nativesdk 1.0.1-r0        oe-repo
- 14 k
- nativesdk-openssl               x86_64_nativesdk 1.0.2k-r0       oe-repo
-240 k
- nativesdk-openssl-conf          x86_64_nativesdk 1.0.2k-r0       oe-repo
- 10 k
- nativesdk-opkg                  x86_64_nativesdk 1:0.3.4-r0      oe-repo
- 17 k
- nativesdk-pkgconfig             x86_64_nativesdk 0.29.1+git0+87152c05be-r0
-                                                                  oe-repo
-224 k
- nativesdk-postinst-intercept    x86_64_nativesdk 1.0-r0          oe-repo
-8.3 k
- nativesdk-pseudo                x86_64_nativesdk 1.8.2-r0        oe-repo
-1.5 M
- nativesdk-python3-argparse      x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 91 k
- nativesdk-python3-codecs        x86_64_nativesdk 3.5.2-r1.0      oe-repo
-1.1 M
- nativesdk-python3-compression   x86_64_nativesdk 3.5.2-r1.0      oe-repo
-207 k
- nativesdk-python3-core          x86_64_nativesdk 3.5.2-r1.0      oe-repo
-355 k
- nativesdk-python3-crypt         x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 37 k
- nativesdk-python3-datetime      x86_64_nativesdk 3.5.2-r1.0      oe-repo
-139 k
- nativesdk-python3-enum          x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 20 k
- nativesdk-python3-fcntl         x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 14 k
- nativesdk-python3-html          x86_64_nativesdk 3.5.2-r1.0      oe-repo
-128 k
- nativesdk-python3-importlib     x86_64_nativesdk 3.5.2-r1.0      oe-repo
-116 k
- nativesdk-python3-io            x86_64_nativesdk 3.5.2-r1.0      oe-repo
-343 k
- nativesdk-python3-lang          x86_64_nativesdk 3.5.2-r1.0      oe-repo
-329 k
- nativesdk-python3-logging       x86_64_nativesdk 3.5.2-r1.0      oe-repo
-156 k
- nativesdk-python3-math          x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 61 k
- nativesdk-python3-mime          x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 18 k
- nativesdk-python3-netclient     x86_64_nativesdk 3.5.2-r1.0      oe-repo
-514 k
- nativesdk-python3-pickle        x86_64_nativesdk 3.5.2-r1.0      oe-repo
-162 k
- nativesdk-python3-re            x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 47 k
- nativesdk-python3-reprlib       x86_64_nativesdk 3.5.2-r1.0      oe-repo
-8.2 k
- nativesdk-python3-selectors     x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 20 k
- nativesdk-python3-shell         x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 66 k
- nativesdk-python3-signal        x86_64_nativesdk 3.5.2-r1.0      oe-repo
-9.1 k
- nativesdk-python3-stringold     x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 14 k
- nativesdk-python3-subprocess    x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 69 k
- nativesdk-python3-textutils     x86_64_nativesdk 3.5.2-r1.0      oe-repo
-109 k
- nativesdk-python3-threading     x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 61 k
- nativesdk-qemu                  x86_64_nativesdk 2.8.0-r0        oe-repo
- 34 M
- nativesdk-qemu-helper           x86_64_nativesdk 1.0-r9          oe-repo
- 30 k
- nativesdk-qtbase-tools          x86_64_nativesdk 5.8.0+git0+49dc9aa409-r0
-                                                                  oe-repo
-7.2 M
- nativesdk-qttools-tools         x86_64_nativesdk 5.8.0+git0+30c10900ad-r0
-                                                                  oe-repo
-3.1 M
- nativesdk-shadow                x86_64_nativesdk 4.2.1-r0        oe-repo
-553 k
- nativesdk-unfs3                 x86_64_nativesdk 0.9.22.r497-r0  oe-repo
- 51 k
- nativesdk-update-alternatives-opkg
-                                 x86_64_nativesdk 0.3.4+git0+1a708fd73d-r0
-                                                                  oe-repo
-8.9 k
- nativesdk-util-linux            x86_64_nativesdk 2.29.1-r0       oe-repo
-1.2 M
-Installing weak dependencies:
- nativesdk-ca-certificates       x86_64_nativesdk 20161130-r0     oe-repo
-402 k
- nativesdk-ncurses-terminfo-base x86_64_nativesdk 6.0+20161126-r0 oe-repo
- 15 k
- nativesdk-python3-readline      x86_64_nativesdk 3.5.2-r1.0      oe-repo
- 24 k
+INFO: jenkins-job.sh-1.8.23 Complete log available at http://logs.nslu2-lin=
+ux.org/buildlogs/oe/world/rocko/log.report.20170621_073603.log
 
-Transaction Summary
-================================================================================
-Install  98 Packages
+=3D=3D=3D common (0) =3D=3D=3D
 
-Total size: 110 M
-Installed size: 327 M
-Running transaction check
-Transaction check succeeded.
-Running transaction test
-Error: Transaction check error:
-  file /opt/poky/2.3/sysroots/x86_64-pokysdk-linux/environment-setup.d
-conflicts between attempted installs of
-nativesdk-cmake-3.7.2-r0.x86_64_nativesdk and
-nativesdk-qtbase-tools-5.8.0+git0+49dc9aa409-r0.x86_64_nativesdk
+=3D=3D=3D common-x86 (3) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb:=
+do_install
+    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+    * openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.12.0.bb:d=
+o_compile_ptest_base
 
-Error Summary
--------------
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb=
+:do_compile
+
+=3D=3D=3D qemux86 (0) =3D=3D=3D
+
+=3D=3D=3D qemux86_64 (0) =3D=3D=3D
+
+=3D=3D=3D Number of failed tasks (7) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 1	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/l=
+og.world.qemuarm.20170620_223531.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/39906/
+|-
+|| qemux86 	|| 3	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/l=
+og.world.qemux86.20170620_223531.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/39907/
+|-
+|| qemux86_64 	|| 3	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rock=
+o/log.world.qemux86-64.20170621_002606.log/ || http://errors.yoctoproject.o=
+rg/Errors/Build/39913/
+|}
+
+=3D=3D=3D PNBLACKLISTs (15) =3D=3D=3D
+
+=3D=3D=3D QA issues (0) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||host-user-contaminated
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||textrel
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|}
 
 
-ERROR: meta-toolchain-qt5-1.0-r0 do_populate_sdk: Function failed:
-do_populate_sdk
-ERROR: Logfile of failure stored in:
-/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/temp/log.do_populate_sdk.4843
-ERROR: Task
-(/home/connor/Repos/Clear/recipes/build/../meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb:do_populate_sdk)
-failed with exit code '1'
 
-Any ideas?
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
 
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.sign=
+atures.20170621_001941.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gol=
+d', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez-hcidump_2.5.bb:PNBLACKLIST[bluez-h=
+cidump] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 con=
+flicts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/bluez4_4.101.bb:PNBLACKLIST[bluez4] ?=3D=
+ "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with =
+bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-connectivity/bluez/gst-plugin-bluetooth_4.101.bb:PNBLACKLIS=
+T[gst-plugin-bluetooth] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'blue=
+z5', 'bluez5 conflicts with bluez4 and bluez5 is selected in DISTRO_FEATURE=
+S', '', d)}"
+meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb:PNBLACKLIST[libdbus-c++] ?=
+=3D "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/=
+130644/ - the recipe will be removed on 2017-09-01 unless the issue is fixe=
+d"
+meta-oe/recipes-graphics/libsexy/libsexy_0.1.11.bb:PNBLACKLIST[libsexy] ?=
+=3D "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/=
+130607/ - the recipe will be removed on 2017-09-01 unless the issue is fixe=
+d"
+meta-oe/recipes-graphics/xorg-driver/xf86-video-geode_2.11.16.bb:PNBLACKLIS=
+T[xf86-video-geode] ?=3D "BROKEN, fails to build - the recipe will be remov=
+ed on 2017-09-01 unless the issue is fixed"
+meta-oe/recipes-navigation/foxtrotgps/foxtrotgps_1.1.1.bb:PNBLACKLIST[foxtr=
+otgps] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conf=
+licts with bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/gypsy/gypsy.inc:PNBLACKLIST[gypsy] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-navigation/navit/navit.inc:PNBLACKLIST[navit] ?=3D "${@bb.u=
+tils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts with bluez4 an=
+d bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-oe/recipes-support/opensync/libsyncml_0.5.4.bb:PNBLACKLIST[libsyncml] =
+?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'bluez5', 'bluez5 conflicts w=
+ith bluez4 and bluez5 is selected in DISTRO_FEATURES', '', d)}"
+meta-qt5:
+meta-smartphone:
+meta-shr/recipes-shr/3rdparty/libsensmon_git.bb:PNBLACKLIST[libsensmon] ?=
+=3D "BROKEN: not compatible with newer vala, http://errors.yoctoproject.org=
+/Errors/Details/143058/"
+meta-shr/recipes-shr/3rdparty/omhacks_git.bb:PNBLACKLIST[omhacks] ?=3D "Not=
+ compatible with gcc7 - the recipe will be removed on 2017-09-01 unless the=
+ issue is fixed"
+meta-webos-ports:
+meta-luneos/recipes-luneos/luna-webappmanager/luna-webappmanager.bb:PNBLACK=
+LIST[luna-webappmanager] ?=3D "BROKEN: needs to be adapted to new qt-5.7"
+meta-luneui/recipes-luneui/luna-next/luna-next.bb:PNBLACKLIST[luna-next] ?=
+=3D "BROKEN: needs to be adapted to new qtwayland-5.7"
+PNBLACKLIST[android-system] =3D "depends on lxc from meta-virtualiazation w=
+hich isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[build-appliance-image] =3D "tries to include whole downloads di=
+rectory in /home/builder/poky :/"
+PNBLACKLIST[linux-yocto-tiny-kexecboot] =3D "does weird sh!t breaking other=
+ kernels and modules - broken for years"
+PNBLACKLIST[linux-yocto-tiny] =3D "does weird sh!t breaking other kernels a=
+nd modules - broken for years"
+
+
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 0	issue: libdir
+
+
+count: 0	issue: textrel
+
+
+count: 0	issue: build-deps
+
+
+count: 0	issue: file-rdeps
+
+
+count: 0	issue: version-going-backwards
+
+
+count: 0	issue: host-user-contaminated
+
+
+count: 0	issue: installed-vs-shipped
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+count: 0	issue: ldflags
+
+
+count: 0	issue: compile-host-path
+
+
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+latest upstream commit:=20
+7b4e817 bitbake-user-manual: Updated BBLAYERS_FETCH_DIR variable description
+not included in master yet:=20
+4e7603f world-image: add extra target
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+latest upstream commit:=20
+1d9a88f ovmf: fix secureboot PACKAGECONFIG + OpenSSL update
+not included in master yet:=20
+848893d v86d,qemuboot-x86.inc: use KERNEL_MODULE_AUTOLOAD+KERNEL_MODULE_PRO=
+BECONF for uvesafb instead of fbsetup init script
+645cace sstate-sysroot-cruft.sh: Extend the whitelist
+ec4fab2 report-error: Allow to upload reports automatically
+1284cd0 buildhistory.bbclass: metadata-revs show repo parent
+b84b7e7 metadata-revs: provide more information
+2babc63 qemux86: Add identical qemux86copy variant for tests
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+latest upstream commit:=20
+bc94e43 python-setuptools-scm: update to version 1.15.6
+not included in master yet:=20
+1dd769c dnsmasq: disable the service by default
+24c4d75 freeradius: add new recipe
+cbe28d1 keepalived: add new recipe
+b204d53 vblade: update to version 22
+34514bd geoipupdate: 2.2.2 -> 2.3.1
+baefcda ifenslave: 2.7 -> 2.9
+fa3eb31 drbd-utils: remove /var/lock to avoid conflict
+2c5cb10 wireguard: bump version to latest snapshot 0.0.20170517
+b877693 opensaf: Add -latomic to LDFLAGS
+d0e32e8 open-isns: fix QA issue
+44ff19c dante: fix unknown-configure-option QA issue
+4753638 snort: enable static daq
+41cd6e5 net-snmp: supported cross compile for the perl embedded and perl mo=
+dules
+44b00b3 traceroute: Move manual pages from mandir to man8 under it
+0d8b4c1 nopoll: Disable doc generation
+436138c cifs-utils 6.6 -> 6.7
+47ef9cf openvpn: Upgrade 2.3.9 -> 2.4.2
+743e42e proftpd: Update to 1.3.6 release
+ef65126 samba: Fix build with musl
+bf4e84b wireshark: Upgrade to 2.2.7
+075fb56 ippool: add new recipe
+bbcf73e libdevmapper: sync with lvm2 2.02.171
+5970dba samba: upgrade to 4.6.5
+afe2433 iscsi-initiator-utils: do not regenerate prom_lex.c
+7b43332 freeradius: Upgrade to 3.0.14
+4f742e3 vlan: Fix build with security flags turned on
+7d82921 relayd: Upgrade to latest
+0d4364f relayd: Fix build with hardening flags and glibc
+d411fd2 ruli: Fix build with hardening flags
+6f5ea3a bdwgc: add a recipe from oe-core
+5eaf255 linux-atm: Fix build with hardening flags
+97426d4 sqlite: Fix build with hardening flags
+e3ce864 xmlstarlet: Update to 1.6.1
+73fc482 nftables: backport a few ICMP & ICMPv6 fixes
+62b0dfc xfsprogs: Remove .la files in ${libdir}
+47b19e0 squid: Upgrade to 3.5.26
+2154508 scsirastools: Upgrade to 1.6.6
+5209e91 gitver: skip packages instead of panic()ing if ${GITVER} fails to e=
+xpand
+c19042b makedumpfile: Fix build with hardening
+a131103 python-pylint: adds Python3 support
+c957274 python-isort: adds Python3 support
+6ee7c27 python-lazy-object-proxy: adds Python3 support
+c4944d6 python-astroid: adds Python3 support
+533e156 python-wrapt: adds Python3 support
+7d8c8da ipmiutil: Upgrade to 3.0.5
+4963260 zabbix: 3.0.8 -> 3.0.9
+96bcc82 kexecboot: update recipe to master on github (4c4f127)
+dffb47f recipes: remove blacklisted recipes
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+latest upstream commit:=20
+3ae86cb qtbase: respect "ld-is-gold" DISTRO_FEATURES
+not included in master yet:=20
+e1a7b1c Upgrade to Qt 5.9.0
+bc3c3f5 qttools: DEPENDS on icu
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+latest upstream commit:=20
+6edb458 firefox: fix build with gcc7
+not included in master yet:=20
+2a76650 gnome-settings-daemon: remove the bbappend for removed recipe
+
+=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
+latest upstream commit:=20
+47091c6 ofono: Use Mer's 1.19 and include fix
+not included in master yet:=20
+d23aeb0 mesa: remove --with-llvm-prefix in meta-luneui instead of meta-lune=
+os
+47ebb4f README: update to depend on master branches
+29413ad qtbase: enable fontconfig
+a457d20 qtwayland, qtwebengine: use webOS-ports/master-next branch compatib=
+le with 5.7
+e1f0c7e luna-next: Make compatible with Qt 5.7
+f557d2e qtwayland, qtwebengine: temporary drop bbappend
+013635d luna-sysservice: Fix build with qt 5.7
+426a038 luna-next, luna-webappmanager: temporary drop from image
+0fe78d3 packagegroup-luneos-development: drop qt5-opengles2-test
+4d68be8 libconnman-qt: replace with libconnman-qt5 from meta-qt5
+261c358 libqofono: use the recipe from meta-qt5
+bddfec2 qtlocation: drop invalid and unused OE_LUNEOS_ENABLED option
+3aba05c phonesim: fix build with Qt 5.8
+7f330a0 qtbase: enable xkbcommon-evdev for qtwayland
+8e72c39 qt5-qpa-hwcomposer-plugi: Fix build with Qt 5.8
+178db00 packagegroup-luneos-extended: drop qtscenegraph-adaptation
+
+=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
+latest upstream commit:=20
+f305d9f omhacks: blacklist
+not included in master yet:=20
+54aff16 meta-shr, meta-fso: remove blacklisted recipes
+
+--qMm9M+Fa2AknHoGS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWUvNnQAKCRA3VSO3ZXaA
+HEwbAJ9+4W2Pz3K+cfSPAvOtV2/H7dnLOgCfRvcU1g56Qf3dx4yzPron/MjuxOA=
+=eJLU
+-----END PGP SIGNATURE-----
+
+--qMm9M+Fa2AknHoGS--
