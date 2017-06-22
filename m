@@ -1,47 +1,43 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yb0-f172.google.com (mail-yb0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B97C6FF73
+Return-Path: <pauldotknopf@gmail.com>
+Received: from mail-ot0-f172.google.com (mail-ot0-f172.google.com
+	[74.125.82.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 5B93A77ECB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 11:51:58 +0000 (UTC)
-Received: by mail-yb0-f172.google.com with SMTP id 84so3849927ybe.0
+	Thu, 22 Jun 2017 12:39:07 +0000 (UTC)
+Received: by mail-ot0-f172.google.com with SMTP id y47so9949074oty.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 04:52:00 -0700 (PDT)
+	Thu, 22 Jun 2017 05:39:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=lWyi5TVm8CDD93XnfU5DDjH+H1fF4TrNgbXrwGwYuTU=;
-	b=D7JxO3xA3RHCcyawn+a2Yvpe9qrgucre9Evv4rATCfhrHQagl0wuuBSV8reEE9QIH6
-	GZLf/qx4CVbtz62K4C5l30is70Nxj9mctWK1sZ2eL2YDBHYXMuhMDPAh06lghGjD/3Hf
-	hjNzGM6mNsQJnyp6LitqBAzpeElmtG8A5akLyqpjYB0dAYuNDkABTTYDoYkXjWRPW0HU
-	lxcoNW5y+97UrILQhaIGhDAuwrd5x5fVjmEORDRF85Oo+Hmqhp62zH57F6NixE7Him53
-	MYrSgViqGHxsWvWbpAXse37JtmPBJ43B4YCJfmtaXcNHkHL/IEu/FM8uECnOzdenyA6Q
-	FWhw==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=ahHqBh4mlWMGe+N5RLBGHm5lBfkcByFkO2VjFBBs8LY=;
+	b=sLccdR/zXMUyX+hUo2CcRvHfU2xUbLmp/ask+leBlcuKPBVk7Ui82Fcz5KOaiwyvre
+	JzkqIRSbK6ePz4SAxZsRBy0mziOAgkQaexn6LuXtUjMgnKrdb5T6q9MePtqKPbM8CO+U
+	lgmznjKHXmz9CWayODGymL0I6TEy3klr3IzYweL3VskDLevOVWSd9ZQkxIHj7cN9+A81
+	w3XwgxZlodtuVz/CbWwpX/EIQ8mpP2tLBFIh0XQuzExk7V+JgHCo91AocGHy0lDp9zcm
+	ZA3YASzAKPaSCiRaD44D0cqazGqhP27RCkfMdbO93wLPA6l+PP4+efw9gUB7+/2ZwJW8
+	nT/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=lWyi5TVm8CDD93XnfU5DDjH+H1fF4TrNgbXrwGwYuTU=;
-	b=WTpPFw6vEq5AmcnUMFRQleytkS7CuVsYaWqdXUbPCHKBdAc1l9LHMtCacekOtgmgVm
-	ijOj7hmLDOU+QW5n6ocVHNxX1PNaGOAroMMkglS0BC4b9Q7d8coo6n+Y2yzR6c09VCSv
-	YPW9rLt9WLdz0i7dR7xaOK/V3IzGRUj2a3k5jetrZDYm2XLi8wrXi5sTJhiQGySWnEOw
-	QnfyYQK2u1f8cU26BOmZUL4OQCLKCqF8DH71WcK7AFrGP1XKJPJ9VOUhZRiIxjRg0HG+
-	E6H91iINR4iPuXy0UjR5RYvXC0XeUWm2XX51wxML0S9D8UXQ9z6/N3PR7AgjEzxRMGLv
-	chmw==
-X-Gm-Message-State: AKS2vOxVx/39K2S7HCfN568OuP1wd7VJc0EKGhIqybKwYxD23T/2Aymb
-	RAisbe0V9eX1L/U+H/qv9oEuYMIUwA==
-X-Received: by 10.37.74.67 with SMTP id x64mr1275730yba.69.1498132319345; Thu,
-	22 Jun 2017 04:51:59 -0700 (PDT)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=ahHqBh4mlWMGe+N5RLBGHm5lBfkcByFkO2VjFBBs8LY=;
+	b=pF9o9fsVg/tZqMwFt7M4xd98JEy8whE2rzPhkhz+kd5T7vRxnKG+ursdfdiUJZFFVg
+	JNmHxUvxprY83+8mlhQWJ/4Vub/xBtlbbQDrACHDUStifHem6Nz8HpYCzpp7jDpWwyiz
+	+B/WIknbDm8WWvaC0rGEaFyDzVIjJHCV3di7FaUjm5f2JiuUiglM67tkKtJMelZyVzyR
+	C0YRzjBxaYIXng1PpBo5SiRzBBWjzy7efiARB6YIe56EzgcPES9d4O6YxeSgpdHRKRQw
+	KM/hqIiSzgtCszUWk6P9C92JPBSD5NMzIpGI/8Kgn0XGOtgZ1Z/lzRfzKlu7gl1Yq2WK
+	d0NA==
+X-Gm-Message-State: AKS2vOxwwWeIyi/7/ULoqXHw0etw6txL8tPM18h7hpLxs1HrQ2x+Q7YR
+	VnkjVhk3EwVv0tk6bhzTlbvPNfcem3lc
+X-Received: by 10.157.32.76 with SMTP id n70mr1443711ota.151.1498135148687;
+	Thu, 22 Jun 2017 05:39:08 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.37.181.204 with HTTP; Thu, 22 Jun 2017 04:51:58 -0700 (PDT)
-In-Reply-To: <20170621055011.41502-1-raj.khem@gmail.com>
-References: <20170621055011.41502-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 22 Jun 2017 13:51:58 +0200
-Message-ID: <CA+chaQfgQ1qhU8T7hfbP=nF4QqU541TVSjBox_-3fOHxA6r6Jg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Received: by 10.74.139.150 with HTTP; Thu, 22 Jun 2017 05:39:08 -0700 (PDT)
+From: Paul Knopf <pauldotknopf@gmail.com>
+Date: Thu, 22 Jun 2017 08:39:08 -0400
+Message-ID: <CAKmWj-0oR4i4QK7mVT2iy4yyS57ULJizNEzv9cSP3U0qthjFCQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] ipmiutil: Upgrade to 3.0.5
+Subject: meta-qt5 issue with populate_sdk on meta-toolchain-qt5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,456 +50,274 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jun 2017 11:52:04 -0000
+X-List-Received-Date: Thu, 22 Jun 2017 12:39:08 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-http://errors.yoctoproject.org/Errors/Details/145873/
+Using master (3ae86cb32edd1449f702e0a094929ae9b21ce191), running this
+command gives me problems.
 
-On Wed, Jun 21, 2017 at 7:50 AM, Khem Raj <raj.khem@gmail.com> wrote:
+bitbake meta-toolchain-qt5 -c populate_sdk
 
-> license changed information see
-> https://sourceforge.net/p/ipmiutil/code-git/ci/
-> 647a155e219e56d9cec8ffc61ad5f43a35a1af3a/tree/COPYING?diff=
-> adb40a4caea4873586803ba5030b79de1bfca601
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../ipmiutil/ipmiutil/fix_systemd_path.patch       | 318
-> ---------------------
->  .../{ipmiutil_2.9.6.bb => ipmiutil_3.0.5.bb}       |  40 ++-
->  2 files changed, 16 insertions(+), 342 deletions(-)
->  delete mode 100644 meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_
-> path.patch
->  rename meta-oe/recipes-support/ipmiutil/{ipmiutil_2.9.6.bb =>
-> ipmiutil_3.0.5.bb} (68%)
->
-> diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
-> b/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
-> deleted file mode 100644
-> index 2fa7c6883..000000000
-> --- a/meta-oe/recipes-support/ipmiutil/ipmiutil/fix_systemd_path.patch
-> +++ /dev/null
-> @@ -1,318 +0,0 @@
-> -allow systemd path to be defined by configure option.
-> -
-> -The configure probes the host for systemd path information.
-> -
-> -Upstream Status: Inappropriate [Embedded]
-> -
-> -Signed-off-By: Armin Kuster <akuster@mvista.com>
-> -
-> -Index: ipmiutil-2.9.6/configure
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/configure
-> -+++ ipmiutil-2.9.6/configure
-> -@@ -792,7 +792,6 @@ LTLIBOBJS
-> - LIBOBJS
-> - pkgconfigdir
-> - SHR_LINK
-> --SYSTEMD_DIR
-> - CROSS_LFLAGS
-> - CROSS_CFLAGS
-> - SUBDIR_S
-> -@@ -999,7 +998,7 @@ psdir='${docdir}'
-> - libdir='${exec_prefix}/lib'
-> - localedir='${datarootdir}/locale'
-> - mandir='${datarootdir}/man'
-> --
-> -+systemddir='${datarootdir}/ipmiutil'
-> - ac_prev=
-> - ac_dashdash=
-> - for ac_option
-> -@@ -1594,7 +1593,10 @@ Optional Features:
-> -   --enable-standalone    build standalone, with no GPL or LanPlus libs.
-> -   --enable-libsensors  build libipmiutil with sensor modules [default=no]
-> -   --enable-gpl           build with some GPL code [default=no]
-> --  --enable-systemd       enable systemd service type=notify support and
-> %_unitdir [default=disabled]
-> -+  --enable-systemd[=systemddir]      install systemd unit file.  If 'yes'
-> -+                probe the system for unit directory.
-> -+                If a path is specified, assume that
-> -+                is a valid install path.  [default=disabled]
-> -
-> - Optional Packages:
-> -   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
-> -@@ -12980,7 +12982,6 @@ CROSS_LFLAGS=""
-> - CROSS_CFLAGS=""
-> - LIBSENSORS=""
-> - SAM2OBJ="isensor2.o ievents2.o"
-> --SYSTEMD_DIR=/usr/share/ipmiutil
-> -
-> - # Check whether --enable-useflags was given.
-> - if test "${enable_useflags+set}" = set; then
-> -@@ -13032,31 +13033,43 @@ if test "${enable_gpl+set}" = set; then
-> -     fi
-> -
-> - fi
-> --
-> -+#
-> -+# Check for systemd unit files direectory exists if unit file
-> installation
-> -+# is requested
-> -+#
-> -
-> - # Check whether --enable-systemd was given.
-> --if test "${enable_systemd+set}" = set; then
-> --  enableval=$enable_systemd;
-> --fi
-> --
-> --if test "x$enable_systemd" = "xyes"; then
-> --   GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
-> --   # if systemd enabled, install service scripts in unitdir
-> --   SYSTEMD_DIR=`rpm --eval "%{_unitdir}"`
-> --else
-> --   # otherwise install the systemd service scripts in the data dir
-> --  if test  "x$sysname" = "xDarwin" ; then
-> --    # MacOS 'which' command returns 0 always
-> --    SYSTEMD_DIR=/usr/share/ipmiutil
-> --  else
-> -+if test "${enable_systemd+set}" = set; then :
-> -+  withval=$enable_systemd; if test "$withval" = yes; then
-> -+  GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
-> -+  if test -z "$systemddir"; then
-> -+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking location of the
-> systemd unit files directory" >&5
-> -+$as_echo_n "checking location of the systemd unit files directory... "
-> >&6; }
-> -+    _rpmdir = ""
-> -     which rpm >/dev/null 2>&1
-> -     if test  $? -eq 0 ; then
-> --       datad=`rpm --eval "%{_datadir}"`
-> --       SYSTEMD_DIR=${datad}/ipmiutil
-> --    else
-> --       SYSTEMD_DIR=/usr/share/ipmiutil
-> -+      _rpmdir = `rpm --eval "%{_unitdir}"`
-> -     fi
-> -+    for systemd_d in ${datadir}/usr/share/ipmiutil ${_rpmdir}
-> /usr/share/ipmiutil; do
-> -+      if test -z "$systemddir"; then
-> -+        if test -d "$systemd_d"; then
-> -+          systemddir="$systemd_d"
-> -+        fi
-> -+      fi
-> -+    done
-> -   fi
-> -+  if test -n "$systemddir"; then
-> -+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: $systemddir" >&5
-> -+$as_echo "$systemddir" >&6; }
-> -+  else
-> -+    { $as_echo "$as_me:${as_lineno-$LINENO}: result: not found" >&5
-> -+$as_echo "not found" >&6; }
-> -+ fi
-> -+else
-> -+ if test "$withval" != no; then
-> -+  systemddir=$withval
-> -+ fi
-> -+fi
-> - fi
-> -
-> - case "$archm" in
-> -Index: ipmiutil-2.9.6/configure.ac
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/configure.ac
-> -+++ ipmiutil-2.9.6/configure.ac
-> -@@ -140,7 +140,6 @@ CROSS_LFLAGS=""
-> - CROSS_CFLAGS=""
-> - LIBSENSORS=""
-> - SAM2OBJ="isensor2.o ievents2.o"
-> --SYSTEMD_DIR=/usr/share/ipmiutil
-> -
-> - AC_ARG_ENABLE([useflags],
-> -     [  --enable-useflags    include environment CFLAGS and LDFLAGS.],
-> -@@ -191,25 +190,42 @@ AC_ARG_ENABLE([gpl],
-> -
-> - dnl Does this Linux have systemd enabled?  Otherwise use sysv init.
-> - AC_ARG_ENABLE([systemd],
-> --    [  --enable-systemd       enable systemd service type=notify support
-> and %_unitdir [[default=disabled]]],)
-> --if test "x$enable_systemd" = "xyes"; then
-> --   GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
-> --   # if systemd enabled, install service scripts in unitdir
-> --   SYSTEMD_DIR=`rpm --eval "%{_unitdir}"`
-> -+    [  --enable-systemd[=systemddir]      install systemd unit file.  If
-> 'yes'
-> -+        probe the system for unit directory.
-> -+        If a path is specified, assume that
-> -+        is a valid install path. [[default=disabled]]],)
-> -+# Check whether --enable-systemd was given.
-> -+if test "${enable_systemd+set}" = set; then :
-> -+      withval=$enable_systemd; if test "$withval" = yes; then
-> -+      GPL_CFLAGS="$GPL_CFLAGS -DENABLE_SYSTEMD"
-> -+      if test -z "$systemddir"; then
-> -+              { $as_echo "$as_me:${as_lineno-$LINENO}: checking location
-> of the systemd unit files directory" >&5
-> -+              $as_echo_n "checking location of the systemd unit files
-> directory... " >&6; }
-> -+              _rpmdir = ""
-> -+              which rpm >/dev/null 2>&1
-> -+              if test  $? -eq 0 ; then
-> -+                      _rpmdir = `rpm --eval "%{_unitdir}"`
-> -+              fi
-> -+              for systemd_d in ${datadir}/usr/share/ipmiutil ${_rpmdir}
-> /usr/share/ipmiutil; do
-> -+                      if test -z "$systemddir"; then
-> -+                              if test -d "$systemd_d"; then
-> -+                                      systemddir="$systemd_d"
-> -+                              fi
-> -+                      fi
-> -+              done
-> -+      fi
-> -+      if test -n "$systemddir"; then
-> -+              { $as_echo "$as_me:${as_lineno-$LINENO}: result:
-> $systemddir" >&5
-> -+              $as_echo "$systemddir" >&6; }
-> -+      else
-> -+              { $as_echo "$as_me:${as_lineno-$LINENO}: result: not
-> found" >&5
-> -+              $as_echo "not found" >&6; }
-> -+      fi
-> - else
-> --   # otherwise install the systemd service scripts in the data dir
-> --  if test  "x$sysname" = "xDarwin" ; then
-> --    # MacOS 'which' command returns 0 always
-> --    SYSTEMD_DIR=/usr/share/ipmiutil
-> --  else
-> --    which rpm >/dev/null 2>&1
-> --    if test  $? -eq 0 ; then
-> --       datad=`rpm --eval "%{_datadir}"`
-> --       SYSTEMD_DIR=${datad}/ipmiutil
-> --    else
-> --       SYSTEMD_DIR=/usr/share/ipmiutil
-> --    fi
-> --  fi
-> -+      if test "$withval" != no; then
-> -+              systemddir=$withval
-> -+      fi
-> -+fi
-> - fi
-> -
-> - dnl start main logic
-> -@@ -481,7 +497,7 @@ AC_SUBST(INS_LIB)
-> - AC_SUBST(SUBDIR_S)
-> - AC_SUBST(CROSS_CFLAGS)
-> - AC_SUBST(CROSS_LFLAGS)
-> --AC_SUBST(SYSTEMD_DIR)
-> -+AC_SUBST(systemddir)
-> - AC_SUBST(SHR_LINK)
-> - AC_SUBST(pkgconfigdir)
-> -
-> -Index: ipmiutil-2.9.6/Makefile.in
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/Makefile.in
-> -+++ ipmiutil-2.9.6/Makefile.in
-> -@@ -182,7 +182,7 @@ SHELL = @SHELL@
-> - SHR_LINK = @SHR_LINK@
-> - STRIP = @STRIP@
-> - SUBDIR_S = @SUBDIR_S@
-> --SYSTEMD_DIR = @SYSTEMD_DIR@
-> -+SYSTEMD_DIR = @systemddir@
-> - VERSION = @VERSION@
-> - abs_builddir = @abs_builddir@
-> - abs_srcdir = @abs_srcdir@
-> -@@ -233,6 +233,7 @@ sbindir = @sbindir@
-> - sharedstatedir = @sharedstatedir@
-> - srcdir = @srcdir@
-> - sysconfdir = @sysconfdir@
-> -+systemddir = @systemddir@
-> - target_alias = @target_alias@
-> - top_build_prefix = @top_build_prefix@
-> - top_builddir = @top_builddir@
-> -Index: ipmiutil-2.9.6/scripts/Makefile.in
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/scripts/Makefile.in
-> -+++ ipmiutil-2.9.6/scripts/Makefile.in
-> -@@ -126,7 +126,7 @@ SHELL = @SHELL@
-> - SHR_LINK = @SHR_LINK@
-> - STRIP = @STRIP@
-> - SUBDIR_S = @SUBDIR_S@
-> --SYSTEMD_DIR = @SYSTEMD_DIR@
-> -+SYSTEMD_DIR = @systemddir@
-> - VERSION = @VERSION@
-> - abs_builddir = @abs_builddir@
-> - abs_srcdir = @abs_srcdir@
-> -@@ -195,7 +195,8 @@ cronto = ${DESTDIR}${etcdir}/cron.daily
-> - sbinto = ${DESTDIR}${sbindir}
-> - varto = ${DESTDIR}/var/lib/ipmiutil
-> - initto = ${DESTDIR}@INIT_DIR@
-> --sysdto = ${DESTDIR}@SYSTEMD_DIR@
-> -+sysdto = ${DESTDIR}@systemddir@
-> -+systemddir = @systemddir@
-> - sysvinit = ${datato}
-> - sbinfls = ialarms ihealth ifru igetevent ireset icmd isol ilan isensor
-> isel iserial iwdt iconfig ipicmg ifirewall ifwum ihpm
-> - all: all-am
-> -@@ -398,11 +399,14 @@ install:
-> -       ${INSTALL_SCRIPT_SH} evt.sh       ${datato}
-> -       if [ -f /etc/debian_version ]; then \
-> -          sysvinit=${initto}; fi
-> --      ${INSTALL_SCRIPT_SH} ipmiutil_wdt ${sysvinit}/ipmiutil_wdt
-> --      ${INSTALL_SCRIPT_SH} ipmiutil_asy ${sysvinit}/ipmiutil_asy
-> --      ${INSTALL_SCRIPT_SH} ipmiutil_evt ${sysvinit}/ipmiutil_evt
-> --      ${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port
-> --      ${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info
-> -+      if [ ! -z "${systemddir}" ]; then \
-> -+              $(MKDIR) ${sysdto}; \
-> -+              ${INSTALL_SCRIPT_SH} ipmiutil_wdt
-> ${sysvinit}/ipmiutil_wdt; \
-> -+              ${INSTALL_SCRIPT_SH} ipmiutil_asy
-> ${sysvinit}/ipmiutil_asy; \
-> -+              ${INSTALL_SCRIPT_SH} ipmiutil_evt
-> ${sysvinit}/ipmiutil_evt; \
-> -+              ${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port; \
-> -+              ${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info; \
-> -+      fi
-> -       ${INSTALL_SCRIPT_SH} checksel     ${datato}
-> -       ${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}
-> -       ${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}
-> -Index: ipmiutil-2.9.6/scripts/Makefile.am
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/scripts/Makefile.am
-> -+++ ipmiutil-2.9.6/scripts/Makefile.am
-> -@@ -17,7 +17,8 @@ cronto = ${DESTDIR}${etcdir}/cron.daily
-> - sbinto = ${DESTDIR}${sbindir}
-> - varto  = ${DESTDIR}/var/lib/ipmiutil
-> - initto = ${DESTDIR}@INIT_DIR@
-> --sysdto = ${DESTDIR}@SYSTEMD_DIR@
-> -+sysdto = ${DESTDIR}@systemddir@
-> -+systemddir = @systemddir@
-> - sysvinit = ${datato}
-> - sbinfls = ialarms ihealth ifru igetevent ireset icmd isol ilan isensor
-> isel iserial iwdt iconfig ipicmg ifirewall ifwum ihpm
-> -
-> -@@ -47,10 +48,14 @@ install:
-> -       ${INSTALL_SCRIPT_SH} ipmi_port.sh ${sysvinit}/ipmi_port
-> -       ${INSTALL_SCRIPT_SH} ipmi_info    ${sysvinit}/ipmi_info
-> -       ${INSTALL_SCRIPT_SH} checksel     ${datato}
-> --      ${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}
-> --      ${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}
-> --      ${INSTALL_DATA_SH} ipmiutil_evt.service ${sysdto}
-> --      ${INSTALL_DATA_SH} ipmi_port.service    ${sysdto}
-> -+
-> -+      if [ ! -z "${systemddir}" ]; then \
-> -+              $(MKDIR) ${sysdto}; \
-> -+              ${INSTALL_DATA_SH} ipmiutil_wdt.service ${sysdto}; \
-> -+              ${INSTALL_DATA_SH} ipmiutil_asy.service ${sysdto}; \
-> -+              ${INSTALL_DATA_SH} ipmiutil_evt.service ${sysdto}; \
-> -+              ${INSTALL_DATA_SH} ipmi_port.service    ${sysdto}; \
-> -+      fi
-> -       ${INSTALL_SCRIPT_SH} ipmiutil.env     ${datato}
-> -       ${INSTALL_SCRIPT_SH} ipmiutil.pre     ${datato}
-> -       ${INSTALL_SCRIPT_SH} ipmiutil.setup   ${datato}
-> -Index: ipmiutil-2.9.6/lib/Makefile.in
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/lib/Makefile.in
-> -+++ ipmiutil-2.9.6/lib/Makefile.in
-> -@@ -128,7 +128,7 @@ SHELL = @SHELL@
-> - SHR_LINK = @SHR_LINK@
-> - STRIP = @STRIP@
-> - SUBDIR_S = @SUBDIR_S@
-> --SYSTEMD_DIR = @SYSTEMD_DIR@
-> -+SYSTEMD_DIR = @systemddir@
-> - VERSION = @VERSION@
-> - abs_builddir = @abs_builddir@
-> - abs_srcdir = @abs_srcdir@
-> -Index: ipmiutil-2.9.6/lib/lanplus/Makefile.in
-> -===================================================================
-> ---- ipmiutil-2.9.6.orig/lib/lanplus/Makefile.in
-> -+++ ipmiutil-2.9.6/lib/lanplus/Makefile.in
-> -@@ -177,7 +177,8 @@ SHELL = @SHELL@
-> - SHR_LINK = @SHR_LINK@
-> - STRIP = @STRIP@
-> - SUBDIR_S = @SUBDIR_S@
-> --SYSTEMD_DIR = @SYSTEMD_DIR@
-> -+SYSTEMD_DIR = @systemddir@
-> -+systemddir = @systemddir@
-> - VERSION = @VERSION@
-> - abs_builddir = @abs_builddir@
-> - abs_srcdir = @abs_srcdir@
-> diff --git a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-> b/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-> similarity index 68%
-> rename from meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-> rename to meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-> index ee0766ea7..d86fc48e6 100644
-> --- a/meta-oe/recipes-support/ipmiutil/ipmiutil_2.9.6.bb
-> +++ b/meta-oe/recipes-support/ipmiutil/ipmiutil_3.0.5.bb
-> @@ -13,23 +13,20 @@ is detected."
->
->  HOMEPAGE = "http://ipmiutil.sourceforge.net"
->  LICENSE = "BSD-2-Clause"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=5f9372493401f309e6149dd2ce0a044b"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=626a5970304daa1fcb87f757fb42b795"
->
->  DEPENDS += "openssl"
->
-> -PARALLEL_MAKE = ""
-> -
->  SRC_URI = "${SOURCEFORGE_MIRROR}/ipmiutil/ipmiutil-${PV}.tar.gz \
-> -    file://fix_systemd_path.patch "
-> -
-> -SRC_URI[md5sum] = "462087995f05fa9e692ed7f55c840f71"
-> -SRC_URI[sha256sum] = "884c1f3d8bfb0b33c303973d286c31
-> 66f5a537976451a0312e3524af54771519"
-> +"
-> +SRC_URI[md5sum] = "5feaf6a827205792e057bb4ff5c4e842"
-> +SRC_URI[sha256sum] = "b2d7f72535131c7832ba4be13dc33c
-> 81513fc3ee43fe797b4b52014600ecee5e"
->
->  inherit autotools-brokensep pkgconfig systemd
->
->  PACKAGECONFIG ?= "lanplus gpl"
->  PACKAGECONFIG += "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
-> -PACKAGECONFIG[systemd] = "--enable-systemd=${datadir}/${BPN},
-> --enable-systemd=no"
-> +PACKAGECONFIG[systemd] = "--enable-systemd=yes,--enable-systemd=no"
->  PACKAGECONFIG[sha256] = "--enable-sha256, --enable-sha256=no,
-> openssl-native, openssl"
->  PACKAGECONFIG[lanplus] = "--enable-lanplus, --enable-lanplus=no,
-> openssl-native, openssl"
->  PACKAGECONFIG[landesk] = "--enable-landesk, --enable-landesk=no"
-> @@ -40,23 +37,18 @@ PACKAGECONFIG[gpl] = "--enable-gpl, --enable-gpl=no"
->  #no GPL or LanPlus libs
->  PACKAGECONFIG[standalone] = "--enable-standalone, --enable-standalone=no"
->
-> -CFLAGS += "-I${STAGING_INCDIR}"
-> -LDFLAGS += "-L${STAGING_LIBDIR}"
-> -
-> -do_configure () {
-> -    aclocal
-> -    libtoolize --automake --copy --force
-> -    autoheader
-> -    automake --foreign --add-missing --copy
-> +EXTRA_OECONF += "--enable-useflags"
-> +CFLAGS += "-fPIC"
->
-> -    aclocal
-> -    autoconf
-> -    automake --foreign
-> -    ./configure ${CONFIGUREOPTS} ${EXTRA_OECONF}
-> +do_configure_prepend() {
-> +        ./beforeconf.sh
-> +       sed -i -e "s#rpm#/bin/false#g" ${S}/configure.ac
->  }
-> -
-> -do_install () {
-> -    oe_runmake install DESTDIR=${D}
-> +do_install_append() {
-> +        if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};
-> then
-> +                install -d ${D}${systemd_unitdir}/system
-> +                mv ${D}/ipmiutil/*.service ${D}${systemd_unitdir}/system
-> +        fi
-> +        rm -rf ${D}/ipmiutil
->  }
-> -
->  COMPATIBLE_HOST = '(x86_64|i.86).*-linux'
-> --
-> 2.13.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+I get the following error.
+
+ERROR: meta-toolchain-qt5-1.0-r0 do_populate_sdk: Could not invoke dnf.
+Command
+'/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/recipe-sysroot-native/usr/bin/dnf
+-y -c
+/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image/etc/dnf/dnf.conf
+--setopt=reposdir=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image/etc/yum.repos.d
+--repofrompath=oe-repo,/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/oe-rootfs-repo
+--installroot=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/sdk/image
+--setopt=logdir=/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/temp
+--nogpgcheck install nativesdk-packagegroup-qt5-toolchain-host
+nativesdk-packagegroup-sdk-host
+packagegroup-cross-canadian-intel-corei7-64' returned 1:
+Added oe-repo repo from
+file:///home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/oe-rootfs-repo
+Last metadata expiration check: 0:00:00 ago on Thu Jun 22 12:34:46 2017 UTC.
+Dependencies resolved.
+================================================================================
+ Package                         Arch             Version         Repository
+
+ Size
+================================================================================
+Installing:
+ nativesdk-packagegroup-qt5-toolchain-host
+                                 x86_64_nativesdk 1.0-r0          oe-repo
+5.5 k
+ nativesdk-packagegroup-sdk-host x86_64_nativesdk 1.0-r12         oe-repo
+5.7 k
+ packagegroup-cross-canadian-intel-corei7-64
+                                 x86_64_nativesdk 1.0-r0          oe-repo
+5.5 k
+Installing dependencies:
+ binutils-cross-canadian-x86-64  x86_64_nativesdk 2.28-r0         oe-repo
+ 12 M
+ gcc-cross-canadian-x86-64       x86_64_nativesdk 6.3.0-r0        oe-repo
+ 25 M
+ gdb-cross-canadian-x86-64       x86_64_nativesdk 7.12.1-r0       oe-repo
+2.3 M
+ meta-environment-intel-corei7-64
+                                 x86_64_nativesdk 1.0-r8          oe-repo
+ 10 k
+ nativesdk-autoconf              x86_64_nativesdk 2.69-r11        oe-repo
+513 k
+ nativesdk-automake              x86_64_nativesdk 1.15-r0         oe-repo
+377 k
+ nativesdk-cmake                 x86_64_nativesdk 3.7.2-r0        oe-repo
+7.2 M
+ nativesdk-db                    x86_64_nativesdk 1:5.3.28-r1     oe-repo
+548 k
+ nativesdk-dnf                   x86_64_nativesdk 2.0.0+git0+f0093d672d-r0
+                                                                  oe-repo
+195 k
+ nativesdk-dtc                   x86_64_nativesdk 1.4.2-r0        oe-repo
+ 70 k
+ nativesdk-elfutils              x86_64_nativesdk 0.168-r0        oe-repo
+150 k
+ nativesdk-flex                  x86_64_nativesdk 2.6.0-r0        oe-repo
+133 k
+ nativesdk-gnu-config            x86_64_nativesdk
+20150728+git0+b576fa87c1-r0
+                                                                  oe-repo
+ 32 k
+ nativesdk-libarchive            x86_64_nativesdk 3.2.2-r0        oe-repo
+299 k
+ nativesdk-libasm1               x86_64_nativesdk 0.168-r0        oe-repo
+ 20 k
+ nativesdk-libbz2-1              x86_64_nativesdk 1.0.6-r5        oe-repo
+ 37 k
+ nativesdk-libc6                 x86_64_nativesdk 2.25-r0         oe-repo
+1.7 M
+ nativesdk-libcrypto1.0.2        x86_64_nativesdk 1.0.2k-r0       oe-repo
+986 k
+ nativesdk-libcurl4              x86_64_nativesdk 7.53.1-r0       oe-repo
+174 k
+ nativesdk-libdw1                x86_64_nativesdk 0.168-r0        oe-repo
+257 k
+ nativesdk-libelf1               x86_64_nativesdk 0.168-r0        oe-repo
+ 50 k
+ nativesdk-libexpat1             x86_64_nativesdk 2.2.0-r0        oe-repo
+ 68 k
+ nativesdk-libffi6               x86_64_nativesdk 3.2.1-r0        oe-repo
+ 23 k
+ nativesdk-libgcc1               x86_64_nativesdk 6.3.0-r0        oe-repo
+ 48 k
+ nativesdk-libglib-2.0-0         x86_64_nativesdk 1:2.50.3-r0     oe-repo
+1.2 M
+ nativesdk-libgmp10              x86_64_nativesdk 6.1.2-r0        oe-repo
+249 k
+ nativesdk-libmpc3               x86_64_nativesdk 1.0.3-r0        oe-repo
+ 49 k
+ nativesdk-libmpfr4              x86_64_nativesdk 3.1.5-r0        oe-repo
+185 k
+ nativesdk-libncurses5           x86_64_nativesdk 6.0+20161126-r0 oe-repo
+ 73 k
+ nativesdk-libncursesw5          x86_64_nativesdk 6.0+20161126-r0 oe-repo
+ 96 k
+ nativesdk-libopkg1              x86_64_nativesdk 1:0.3.4-r0      oe-repo
+ 79 k
+ nativesdk-libpcre1              x86_64_nativesdk 8.40-r0         oe-repo
+100 k
+ nativesdk-libpixman-1-0         x86_64_nativesdk 1:0.34.0-r0     oe-repo
+277 k
+ nativesdk-libpython3.5m1.0      x86_64_nativesdk 3.5.2-r1.0      oe-repo
+957 k
+ nativesdk-libreadline7          x86_64_nativesdk 7.0-r0          oe-repo
+150 k
+ nativesdk-libsdl-1.2-0          x86_64_nativesdk 1.2.15-r3       oe-repo
+157 k
+ nativesdk-libsolv               x86_64_nativesdk 0.6.26-r0       oe-repo
+342 k
+ nativesdk-libssl1.0.2           x86_64_nativesdk 1.0.2k-r0       oe-repo
+176 k
+ nativesdk-libssp0               x86_64_nativesdk 6.3.0-r0        oe-repo
+ 11 k
+ nativesdk-libstdc++6            x86_64_nativesdk 6.3.0-r0        oe-repo
+456 k
+ nativesdk-libtinfo5             x86_64_nativesdk 6.0+20161126-r0 oe-repo
+ 68 k
+ nativesdk-libtool               x86_64_nativesdk 2.4.6-r0        oe-repo
+509 k
+ nativesdk-libx11-6              x86_64_nativesdk 1:1.6.4-r0      oe-repo
+750 k
+ nativesdk-libxau6               x86_64_nativesdk 1:1.0.8-r0      oe-repo
+ 12 k
+ nativesdk-libxcb1               x86_64_nativesdk 1.12-r0         oe-repo
+ 50 k
+ nativesdk-libxdmcp6             x86_64_nativesdk 1:1.1.2-r0      oe-repo
+ 16 k
+ nativesdk-libxext6              x86_64_nativesdk 1:1.3.3-r0      oe-repo
+ 33 k
+ nativesdk-libxrandr2            x86_64_nativesdk 1:1.5.1-r0      oe-repo
+ 23 k
+ nativesdk-libxrender1           x86_64_nativesdk 1:0.9.10-r0     oe-repo
+ 24 k
+ nativesdk-libz1                 x86_64_nativesdk 1.2.11-r0       oe-repo
+ 54 k
+ nativesdk-m4                    x86_64_nativesdk 1.4.18-r0       oe-repo
+117 k
+ nativesdk-makedevs              x86_64_nativesdk 1.0.1-r0        oe-repo
+ 14 k
+ nativesdk-openssl               x86_64_nativesdk 1.0.2k-r0       oe-repo
+240 k
+ nativesdk-openssl-conf          x86_64_nativesdk 1.0.2k-r0       oe-repo
+ 10 k
+ nativesdk-opkg                  x86_64_nativesdk 1:0.3.4-r0      oe-repo
+ 17 k
+ nativesdk-pkgconfig             x86_64_nativesdk 0.29.1+git0+87152c05be-r0
+                                                                  oe-repo
+224 k
+ nativesdk-postinst-intercept    x86_64_nativesdk 1.0-r0          oe-repo
+8.3 k
+ nativesdk-pseudo                x86_64_nativesdk 1.8.2-r0        oe-repo
+1.5 M
+ nativesdk-python3-argparse      x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 91 k
+ nativesdk-python3-codecs        x86_64_nativesdk 3.5.2-r1.0      oe-repo
+1.1 M
+ nativesdk-python3-compression   x86_64_nativesdk 3.5.2-r1.0      oe-repo
+207 k
+ nativesdk-python3-core          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+355 k
+ nativesdk-python3-crypt         x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 37 k
+ nativesdk-python3-datetime      x86_64_nativesdk 3.5.2-r1.0      oe-repo
+139 k
+ nativesdk-python3-enum          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 20 k
+ nativesdk-python3-fcntl         x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 14 k
+ nativesdk-python3-html          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+128 k
+ nativesdk-python3-importlib     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+116 k
+ nativesdk-python3-io            x86_64_nativesdk 3.5.2-r1.0      oe-repo
+343 k
+ nativesdk-python3-lang          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+329 k
+ nativesdk-python3-logging       x86_64_nativesdk 3.5.2-r1.0      oe-repo
+156 k
+ nativesdk-python3-math          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 61 k
+ nativesdk-python3-mime          x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 18 k
+ nativesdk-python3-netclient     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+514 k
+ nativesdk-python3-pickle        x86_64_nativesdk 3.5.2-r1.0      oe-repo
+162 k
+ nativesdk-python3-re            x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 47 k
+ nativesdk-python3-reprlib       x86_64_nativesdk 3.5.2-r1.0      oe-repo
+8.2 k
+ nativesdk-python3-selectors     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 20 k
+ nativesdk-python3-shell         x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 66 k
+ nativesdk-python3-signal        x86_64_nativesdk 3.5.2-r1.0      oe-repo
+9.1 k
+ nativesdk-python3-stringold     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 14 k
+ nativesdk-python3-subprocess    x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 69 k
+ nativesdk-python3-textutils     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+109 k
+ nativesdk-python3-threading     x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 61 k
+ nativesdk-qemu                  x86_64_nativesdk 2.8.0-r0        oe-repo
+ 34 M
+ nativesdk-qemu-helper           x86_64_nativesdk 1.0-r9          oe-repo
+ 30 k
+ nativesdk-qtbase-tools          x86_64_nativesdk 5.8.0+git0+49dc9aa409-r0
+                                                                  oe-repo
+7.2 M
+ nativesdk-qttools-tools         x86_64_nativesdk 5.8.0+git0+30c10900ad-r0
+                                                                  oe-repo
+3.1 M
+ nativesdk-shadow                x86_64_nativesdk 4.2.1-r0        oe-repo
+553 k
+ nativesdk-unfs3                 x86_64_nativesdk 0.9.22.r497-r0  oe-repo
+ 51 k
+ nativesdk-update-alternatives-opkg
+                                 x86_64_nativesdk 0.3.4+git0+1a708fd73d-r0
+                                                                  oe-repo
+8.9 k
+ nativesdk-util-linux            x86_64_nativesdk 2.29.1-r0       oe-repo
+1.2 M
+Installing weak dependencies:
+ nativesdk-ca-certificates       x86_64_nativesdk 20161130-r0     oe-repo
+402 k
+ nativesdk-ncurses-terminfo-base x86_64_nativesdk 6.0+20161126-r0 oe-repo
+ 15 k
+ nativesdk-python3-readline      x86_64_nativesdk 3.5.2-r1.0      oe-repo
+ 24 k
+
+Transaction Summary
+================================================================================
+Install  98 Packages
+
+Total size: 110 M
+Installed size: 327 M
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Error: Transaction check error:
+  file /opt/poky/2.3/sysroots/x86_64-pokysdk-linux/environment-setup.d
+conflicts between attempted installs of
+nativesdk-cmake-3.7.2-r0.x86_64_nativesdk and
+nativesdk-qtbase-tools-5.8.0+git0+49dc9aa409-r0.x86_64_nativesdk
+
+Error Summary
+-------------
+
+
+ERROR: meta-toolchain-qt5-1.0-r0 do_populate_sdk: Function failed:
+do_populate_sdk
+ERROR: Logfile of failure stored in:
+/home/connor/Repos/Clear/recipes/build/tmp/work/corei7-64-poky-linux/meta-toolchain-qt5/1.0-r0/temp/log.do_populate_sdk.4843
+ERROR: Task
+(/home/connor/Repos/Clear/recipes/build/../meta-qt5/recipes-qt/meta/meta-toolchain-qt5.bb:do_populate_sdk)
+failed with exit code '1'
+
+Any ideas?
 
