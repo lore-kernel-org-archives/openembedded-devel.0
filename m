@@ -1,28 +1,39 @@
-Return-Path: <mkelly@xevo.com>
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
-	(mail-dm3nam03on0051.outbound.protection.outlook.com [104.47.41.51])
-	by mail.openembedded.org (Postfix) with ESMTP id 6623378223
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f173.google.com (mail-yb0-f173.google.com
+	[209.85.213.173])
+	by mail.openembedded.org (Postfix) with ESMTP id D8CC578240
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 17:15:06 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=vN3HXGr65OK1Zxs8Ec/KN+JsDIHSNrrwoiYq6xJcsOA=;
-	b=RnJ6AlAJ1NdlPkc0WsxUWgs4Ch14q7eEfrOS+nyRGOek5DGGblYwOuWVi5IuEWzo0nRWdDUymFN49MAoltQJVG5zxk51mb1QaQLTGHzwpHEceP/2ULgAsZA8SW55E+PUki5SQ3nBQyYT5jRrZdNufFyGZS394EIsrV28zvaBSec=
-Received: from BN6PR0101MB2931.prod.exchangelabs.com (10.174.87.140) by
-	BN6PR0101MB2929.prod.exchangelabs.com (10.174.87.138) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1178.14; Thu, 22 Jun 2017 17:15:05 +0000
-Received: from BN6PR0101MB2931.prod.exchangelabs.com ([10.174.87.140]) by
-	BN6PR0101MB2931.prod.exchangelabs.com ([10.174.87.140]) with mapi id
-	15.01.1178.023; Thu, 22 Jun 2017 17:15:05 +0000
-From: Martin Kelly <mkelly@xevo.com>
-To: "martin.jansa@gmail.com" <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
-Thread-Index: AQHS4W7pXFtwXtprf0C6+LiDAMtdgaIlsvMAgAB6PwD//5dxAIAAeDiAgATa34CAAAhiAIAByJ6AgARKkAA=
-Date: Thu, 22 Jun 2017 17:15:04 +0000
-Message-ID: <1498151700.8385.2.camel@xevo.com>
+	Thu, 22 Jun 2017 17:32:49 +0000 (UTC)
+Received: by mail-yb0-f173.google.com with SMTP id 84so6781861ybe.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jun 2017 10:32:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=FJR/V/r22gaJt4HLNjwh3IB53mz98Wzxix8sybVY2WM=;
+	b=sWxqn97+r51oKG/BuZtVlLNCl78LqcGqEKlpZpEe2JnBy3V7c0M1YVH7D5rIQ6kQjr
+	LW0ABd2ju9TKPYp74L1maT4e3jq6lb4/YGvdfF5UdGwKVIBg7GLoQVvCdvOYRnd6D/C0
+	UFSy5uV/GM4AnWTvrRmbXjNyiHIHsDNyPt3zd0ocO29rJkc5zVGdI3A062h0oYiaSxRA
+	ZbUta9qGeIfH5MrpwM435sonXkaDhQ+sC3t3FtnLJi7VJMawWfFxX5rl9KEuVXOAbh47
+	lZBBxNEbEVo/cO6l3Idsegdm/Hne0ZqzZPTLnFfyPfbcOQwgRHEP8zekJYzKalX4Ov5w
+	A4kA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=FJR/V/r22gaJt4HLNjwh3IB53mz98Wzxix8sybVY2WM=;
+	b=lGrzLQLVIrQ0i4HdFDygkkqIpF3s+NU17gMX/402Xa8mGtP5jW84pm/J3vQOAJTg6p
+	GxgoC6DfY4vnNYhkeJxy0mFp67b3E9quGoYvxYRGCVDgv2WXpfTu9kWAnxb6OHYzDrum
+	l1ZRTt7bHARe20C137llJ9GTGJtucnIWqtDeywkIUqidCq6KpfxOnrEWdz2Uc0yir9pC
+	9Gm/SvbUOV+zK8wXQOKzsSrHgE7MCHcG88SwDRw5fR5fnYcMBG3RsiHs7fNvpBYK34lr
+	+SApqgvBiA61RGrpztfg2t12yNgSdHdGtLno04mtZUoXL7MYYFWq30/vxE9QZ4B1hDmG
+	9LoQ==
+X-Gm-Message-State: AKS2vOyiP9RIvRmMZVdyUYD/rsxJWYRbXfjRJLIOee3W1TVzRIYL7N3S
+	7rgooV54HKdgnvlvCTjQc+uHobjp7Q==
+X-Received: by 10.37.178.4 with SMTP id i4mr2559877ybj.147.1498152770588; Thu,
+	22 Jun 2017 10:32:50 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.181.204 with HTTP; Thu, 22 Jun 2017 10:32:49 -0700 (PDT)
+In-Reply-To: <1498151700.8385.2.camel@xevo.com>
 References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
 	<2ef4f2a3-48e9-f3fa-a55e-01522507d86d@xevo.com>
 	<CA+chaQeUWj=4zxG1gdk0pwg_U1GUdMmwr1F9DEL_7pT8S0UUQg@mail.gmail.com>
@@ -30,43 +41,12 @@ References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
 	<CA+chaQcnwYQwBXfxbdpEN8D9ZYzG=fOxX_MPNXt1_uzShSSrwg@mail.gmail.com>
 	<CA+chaQdbrZ+R37sKDXamFwW71G9MvYVF-Bb=8OO_k5ChdUFGGg@mail.gmail.com>
 	<CA+chaQdrvQK_uDEkEcBy7NEn4EhVXKWx+FOfbmqM+bPfL7ad-Q@mail.gmail.com>
-	<1497915785.8604.2.camel@xevo.com>
-In-Reply-To: <1497915785.8604.2.camel@xevo.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: gmail.com; dkim=none (message not signed)
-	header.d=none;gmail.com; dmarc=none action=none header.from=xevo.com;
-x-originating-ip: [67.171.33.217]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; BN6PR0101MB2929;
-	7:I48/JOGyQ1u+JnpspD9YOKIBqmsnr/nOijhBARWzHE5vjSig5akkS256RwLanyppOPsMgdDKVgfdv7pMCdk76OaqW4/onrUswUTGoAsTGBSe4bwpNshLmtyK42UAydbh88TMRFewjmSh/GWiWidYQ45I/Qjl6rZSZVhBwsdwEefHrh/mtYS/DcpV/aWnFwlXcNM052f8bh76Vd8F0LdScCXYwbR8NbnvS5gBS/VMBMw4Jbnr7OB7EjuZbPOn3D5z2Dau/wO8u67tlBuJpsBmh0RVmCbdJH41D89pF7S1IFKVAC2rzzYZ18EYeqO7EWpHNPHCcxMaXFmrSUQwGqXnGSoMCmPjL01FlpwlZh9LGIZXyt/f2HGr/s/eb/yb4rHx2znTnMbvUW+OetWk/T6gk49lW2K4nFec9aRtMNQIFwdKx2NZJNs6UzgTa+OBeh43GiH7xsfnd/Nb2ovp+kZuu7yqqK5ufWbx2s8iDIRx60kuAz3mgP4PtVslXU9WiaXoX/DuxgdCYkRU+xavTE4KCyqYIwRGECn7VFOQ2woqrJhEYAVeb15GopKu4+2qG056NLGLMCRHs+YnbycQ388hQ006zl9Vz2YRyTsB39Bqbd0x/rCr+RdiVlvOqkpDX84h4rnj33cCALrwVSqEp2vKeW8won7Pz2DvNvY789bqHVecx8zcJMQ0lOf3dsbr4tQc/wQs+7TolFX9wX9smy3aiFYpbGRUzlUX5fR8rADOH60//U1dywpm9VNNOFCazQj8B94AKDifGmADlvkUWr38GxB7cyT0SWgyI9SDxrGxn2A=
-x-ms-office365-filtering-correlation-id: f2c370eb-76c4-40f4-3eeb-08d4b99239b2
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(300000500055)(300135000095)(300000501055)(300135300095)(22001)(300000502055)(300135100095)(2017030254075)(300000503055)(300135400095)(201703131423075)(201703031133081)(300000504055)(300135200095)(300000505055)(300135600095);
-	SRVR:BN6PR0101MB2929; 
-x-ms-traffictypediagnostic: BN6PR0101MB2929:
-x-microsoft-antispam-prvs: <BN6PR0101MB2929523B19A384A3E4571BF3ABDB0@BN6PR0101MB2929.prod.exchangelabs.com>
-x-exchange-antispam-report-test: UriScan:(166708455590820);
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(8121501046)(5005006)(3002001)(93006095)(93001095)(100000703101)(100105400095)(10201501046)(6041248)(20161123558100)(20161123562025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123564025)(20161123555025)(20161123560025)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:BN6PR0101MB2929; BCL:0; PCL:0;
-	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:BN6PR0101MB2929; 
-x-forefront-prvs: 03468CBA43
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10009020)(6009001)(39450400003)(39400400002)(39410400002)(39830400002)(377454003)(53754006)(377424004)(24454002)(69224002)(3660700001)(7736002)(305945005)(53546010)(3280700002)(4326008)(6246003)(53936002)(2900100001)(6512007)(8936002)(5640700003)(6436002)(966005)(6306002)(5660300001)(99286003)(229853002)(6486002)(25786009)(478600001)(6506006)(77096006)(54906002)(36756003)(230783001)(93886004)(2351001)(66066001)(76176999)(50986999)(189998001)(54356999)(2501003)(6916009)(2950100002)(122556002)(103116003)(33646002)(38730400002)(8676002)(39060400002)(81166006)(2906002)(86362001)(110136004)(14454004)(3846002)(6116002)(102836003);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2929;
-	H:BN6PR0101MB2931.prod.exchangelabs.com; FPR:; SPF:None;
-	MLV:ovrnspm; PTR:InfoNoRecords; LANG:en; 
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
-MIME-Version: 1.0
-X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Jun 2017 17:15:04.8938 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2929
+	<1497915785.8604.2.camel@xevo.com> <1498151700.8385.2.camel@xevo.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 22 Jun 2017 19:32:49 +0200
+Message-ID: <CA+chaQdZdHS1Jny07kXGcNu7ZU+VBBirgvceNQ+6dBxk36gP2A@mail.gmail.com>
+To: Martin Kelly <mkelly@xevo.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "koen@dominion.thruhere.net" <koen@dominion.thruhere.net>,
 	"openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
@@ -83,229 +63,344 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jun 2017 17:15:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <2EB2EA17F473E64EB6C2A89E6FEA9CDA@prod.exchangelabs.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 22 Jun 2017 17:32:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-KHBpbmcpIEkgYXBvbG9naXplIGZvciB0aGUgdG9wLXBvc3QgYnV0IGRpZCBub3Qgd2FudCB0byBo
-YXZlIHRoZSBwaW5nDQpsb3N0IGluIHRoZSBub2lzZS4NCg0KT24gTW9uLCAyMDE3LTA2LTE5IGF0
-IDE2OjQzIC0wNzAwLCBNYXJ0aW4gS2VsbHkgd3JvdGU6DQo+IE9uIFN1biwgMjAxNy0wNi0xOCBh
-dCAyMjoyOCArMDIwMCwgTWFydGluIEphbnNhIHdyb3RlOg0KPiA+IEFuZCB0aGVyZSBpcyBhbHNv
-IHRoaXM6DQo+ID4gDQo+ID4gPT09IEluY29ycmVjdCBQQUNLQUdFX0FSQ0ggb3Igc3N0YXRlIHNp
-Z25hdHVyZXMgKDMpID09PQ0KPiA+IA0KPiA+IENvbXBsZXRlIGxvZzogaHR0cDovL2xvZ3MubnNs
-dTItbGludXgub3JnL2J1aWxkbG9ncy9vZS93b3JsZC9yb2Nrby8NCj4gPiBsbw0KPiA+IGcuc2ln
-bmF0dXJlcy4yMDE3MDYxOF8wMTQwNTUubG9nLw0KPiA+IMKgIMKgICogRVJST1I6IDMgaXNzdWVz
-IHdlcmUgZm91bmQgaW4gdGhlc2UgcmVjaXBlczogb3Blbi12bS10b29scw0KPiA+IA0KPiA+IMKg
-IMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5kIGluDQo+ID4gc2lnbmF0dXJlcy5xZW11eDg2LmRv
-X2NvbmZpZ3VyZS5zaWdkYXRhLmxvZw0KPiA+IMKgIMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5k
-IGluDQo+ID4gc2lnbmF0dXJlcy5xZW11eDg2LmRvX3BvcHVsYXRlX3N5c3Jvb3Quc2lnZGF0YS5s
-b2cNCj4gPiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbg0KPiA+IHNpZ25hdHVyZXMu
-cWVtdXg4Ni5kb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRhLmxvZw0KPiA+IA0KPiA+IMKgIMKg
-ICogRVJST1I6IG9wZW4tdm0tdG9vbHMgZGlmZmVyZW50IHNpZ25hdHVyZSBmb3IgdGFzaw0KPiA+
-IGRvX2NvbmZpZ3VyZS5zaWdkYXRhIGJldHdlZW4gcWVtdXg4NmNvcHkgYW5kIHFlbXV4ODYNCj4g
-PiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbiAvaG9tZS9qZW5raW5zL29lL3dvcmxk
-L3Noci1jb3JlL3RtcC0NCj4gPiBnbGliYy9zc3RhdGUtDQo+ID4gZGlmZi8xNDk3Nzg2MDU1L3Np
-Z25hdHVyZXMucWVtdXg4Ni5kb19jb25maWd1cmUuc2lnZGF0YS5sb2cNCj4gPiDCoCDCoCAqIEVS
-Uk9SOiBvcGVuLXZtLXRvb2xzIGRpZmZlcmVudCBzaWduYXR1cmUgZm9yIHRhc2sNCj4gPiBkb19w
-b3B1bGF0ZV9zeXNyb290LnNpZ2RhdGEgYmV0d2VlbiBxZW11eDg2Y29weSBhbmQgcWVtdXg4Ng0K
-PiA+IMKgIMKgICogRVJST1I6IDEgZXJyb3JzIGZvdW5kIGluIC9ob21lL2plbmtpbnMvb2Uvd29y
-bGQvc2hyLWNvcmUvdG1wLQ0KPiA+IGdsaWJjL3NzdGF0ZS0NCj4gPiBkaWZmLzE0OTc3ODYwNTUv
-c2lnbmF0dXJlcy5xZW11eDg2LmRvX3BvcHVsYXRlX3N5c3Jvb3Quc2lnZGF0YS5sb2cNCj4gPiDC
-oCDCoCAqIEVSUk9SOiBvcGVuLXZtLXRvb2xzIGRpZmZlcmVudCBzaWduYXR1cmUgZm9yIHRhc2sN
-Cj4gPiBkb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRhIGJldHdlZW4gcWVtdXg4NmNvcHkgYW5k
-IHFlbXV4ODYNCj4gPiDCoCDCoCAqIEVSUk9SOiAxIGVycm9ycyBmb3VuZCBpbiAvaG9tZS9qZW5r
-aW5zL29lL3dvcmxkL3Noci1jb3JlL3RtcC0NCj4gPiBnbGliYy9zc3RhdGUtDQo+ID4gZGlmZi8x
-NDk3Nzg2MDU1L3NpZ25hdHVyZXMucWVtdXg4Ni5kb19wYWNrYWdlX3dyaXRlX2lway5zaWdkYXRh
-LmxvZw0KPiA+IMKgIMKgICogRVJST1I6IDMgaXNzdWVzIHdlcmUgZm91bmQgaW4gdGhlc2UgcmVj
-aXBlczogb3Blbi12bS10b29scw0KPiA+IA0KPiA+IFNvIGl0IHByb2JhYmx5IGRlcGVuZHMgb24g
-c29tZSBNQUNISU5FIHNwZWNpZmljIHZhcmlhYmxlIHdpdGhvdXQNCj4gPiBiZWluZyBtYXJrZWQg
-YXMgTUFDSElORV9BUkNILg0KPiA+IA0KPiA+IExvb2tpbmcgYXQ6DQo+ID4gaHR0cHM6Ly9naXRo
-dWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0K
-PiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0
-L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmINCj4gPiAN
-Cj4gPiBJdCdzIGRlcGVuZGluZyBvbiBrZXJuZWwsIHNvIGl0IG5lZWRzIHRvIGJlIE1BQ0hJTkVf
-QVJDSCwgYWxzbyBJJ3ZlDQo+ID4gbm90aWNlZCBmZXcgbW9yZSBpc3N1ZXM6DQo+ID4gDQo+IA0K
-PiBUaGFua3MgZm9yIGFsbCB0aGUgZmVlZGJhY2suIEkgYmVsaWV2ZSBJJ3ZlIG5vdyBmaXhlZCBh
-bGwgdGhlIGlzc3Vlcw0KPiB5b3Ugb3V0bGluZWQuDQo+IA0KPiBJIGRyb3BwZWQgdGhlIGtlcm5l
-bCBkZXBlbmRlbmN5IGVudGlyZWx5LCBhcyB3ZSdyZSBubyBsb25nZXIgYnVpbGRpbmcNCj4gdGhl
-IGtlcm5lbCBtb2R1bGVzICh0aGV5IGFsbCBnb3QgdXBzdHJlYW1lZCkuIFRodXMgSSBzdXNwZWN0
-IHRoZQ0KPiBpc3N1ZQ0KPiBpcyBubyBsb25nZXIgcHJlc2VudCB3aXRoIG15IGxhdGVzdCBjaGFu
-Z2VzLg0KPiANCj4gVGhhdCBzYWlkLCBJIGNhbid0IHJlcHJvIHRoZSBzc3RhdGUgZXJyb3JzIG9u
-IG15IGxvY2FsIG1hY2hpbmUuIENvdWxkDQo+IHlvdSBwcm92aWRlIHJlcHJvIHN0ZXBzIHNvIEkg
-Y2FuIHZlcmlmeSB0aGlzIGlzIGZpeGVkIGJlZm9yZSBJIHNlbmQNCj4gbmV3DQo+IHBhdGNoZXM/
-DQo+IA0KPiA+IERFUEVORFMgaXMgdGhlcmUgdHdpY2U6DQo+ID4gaHR0cHM6Ly9naXRodWIuY29t
-L1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+IGFi
-DQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4t
-dm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDI0DQo+ID4gaHR0
-cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3
-MTk1YmViMg0KPiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBl
-cy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUu
-YmIjTDM5DQo+ID4gDQo+ID4gV2hhdCBpcyBzdXBwb3NlZCB0byBzZXQgS0VSTkVMX1ZFUlNJT04g
-dmFyaWFibGUgaW46DQo+ID4gaHR0cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1i
-ZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5
-OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2
-bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDU4DQo+ID4gP8KgDQo+ID4gDQo+ID4gRG9uJ3QgdXNl
-IHRhZ3MgaW4gU1JDUkVWLCB1c2UgZ2l0IGhhc2ggaW5zdGVhZCAob3RoZXJ3aXNlIGJpdGJha2UN
-Cj4gPiBmZXRjaGVyIHdpbGwgcmVhY2ggdXBzdHJlYW0gZ2l0IHJlcG8gZXZlcnkgc2luZ2xlIHRp
-bWUgdGhlIHJlY2lwZQ0KPiA+IGlzDQo+ID4gcGFyc2VkIGFuZCB3aWxsIGNhdXNlIGZhaWxlZCBi
-dWlsZHMgd2hlbiBnaXRodWIgaXNuJ3QgYWNjZXNzaWJsZSkuDQo+ID4gaHR0cHM6Ly9naXRodWIu
-Y29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQvYmxvYi80MDJkMWIzOTE3MTk1YmViMg0KPiA+
-IGFiDQo+ID4gN2NhYzVkYzk0YWFlZDg5OTJiNWExL21ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29w
-ZW4tdm0tdG9vbHMvb3Blbi0NCj4gPiB2bS0NCj4gPiB0b29sc18xMC4xLjUuYmIjTDM1DQo+ID4g
-DQo+ID4gVGhlcmUgYXJlIG1hbnkgaGFyZGNvZGVkIHBhdGhzIGxpa2UgL3Vzci9saWIvIG9yIC91
-c3Ivc2Jpbi8sIHBsZWFzZQ0KPiA+IHVzZSBwcm9wZXIgdmFyaWFibGVzIGxpa2UgbGliZGlyLCBz
-YmluZGlyLg0KPiA+IA0KPiA+IE9uY2UgeW91IGZpeCB0aGVzZSBpc3N1ZXMgcGxlYXNlIHJlc2Vu
-ZCBhbGwgY2hhbmdlcyB0byB0aGUgTUwsIGl0J3MNCj4gPiBtdWNoIGJldHRlciB0byByZXZpZXcg
-aW5saW5lIHRoYW4gdGhpcy4NCj4gPiANCj4gPiBSZWdhcmRzLA0KPiA+IA0KPiA+IA0KPiA+IE9u
-IFN1biwgSnVuIDE4LCAyMDE3IGF0IDk6NTggUE0sIE1hcnRpbiBKYW5zYSA8bWFydGluLmphbnNh
-QGdtYWlsLmMNCj4gPiBvbQ0KPiA+ID4gd3JvdGU6DQo+ID4gPiBGYWlscyB0byBjb25maWd1cmUg
-b24gcWVtdWFybS4NCj4gPiA+IA0KPiA+ID4gSWYgYXJtIGlzbid0IGV4cGVjdGVkIHRvIGJlIHN1
-cHBvcnRlZCwgY2FuIHlvdSBwbGVhc2UgdXBkYXRlDQo+ID4gPiBDT01QQVRJQkxFX0hPU1QgcmVz
-dHJpY3Rpb24/DQo+ID4gPiANCj4gPiA+IGh0dHA6Ly9lcnJvcnMueW9jdG9wcm9qZWN0Lm9yZy9F
-cnJvcnMvRGV0YWlscy8xNDU1OTkvDQo+ID4gPiANCj4gPiA+IE9uIFRodSwgSnVuIDE1LCAyMDE3
-IGF0IDc6NTAgUE0sIE1hcnRpbiBKYW5zYSA8bWFydGluLmphbnNhQGdtYWlsDQo+ID4gPiAuYw0K
-PiA+ID4gb20+IHdyb3RlOg0KPiA+ID4gPiBPSywgSSdsbCB0cnkgdG8gcmVtZW1iZXIgdG8gZml4
-IGl0IGJlZm9yZSBtZXJnZS4NCj4gPiA+ID4gDQo+ID4gPiA+IEknbSBzb3JyeSBhYm91dCBpdCwg
-dHdlYWtpbmcgb3RoZXIgcGVvcGxlIGNvbW1pdHMgYWx3YXlzDQo+ID4gPiA+IHN0cmlrZXMNCj4g
-PiA+ID4gYmFjayA6KS4NCj4gPiA+ID4gDQo+ID4gPiA+IE9uIFRodSwgSnVuIDE1LCAyMDE3IGF0
-IDc6NDAgUE0sIE1hcnRpbiBLZWxseSA8bWtlbGx5QHhldm8uY29tPg0KPiA+ID4gPiB3cm90ZToN
-Cj4gPiA+ID4gPiBPbiAwNi8xNS8yMDE3IDA5OjU0IEFNLCBNYXJ0aW4gSmFuc2Egd3JvdGU6DQo+
-ID4gPiA+ID4gPiBJdCBkaWRuJ3QgbWFrZSBpdCB0byBwYXRjaHdvcmssIGJlY2F1c2UgeW91J3Zl
-IHNlbnQgb25seQ0KPiA+ID4gPiA+ID4gdGhlDQo+ID4gPiA+ID4gPiBjb3Zlcg0KPiA+ID4gPiA+
-ID4gbGV0dGVyLiBJJ3ZlIGFkZGVkIGl0IHRvIG1hc3Rlci1uZXh0IG5vdy4NCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+ID4gTmV4dCB0aW1lIHBsZWFzZSBzZW5kIGFsc28gaW5kaXZpZHVhbCBwYXRj
-aGVzLiBTbyB0aGF0IGl0DQo+ID4gPiA+ID4gPiBnZXRzIG1vcmUNCj4gPiA+ID4gPiA+IHZpc2li
-aWxpdHkgZm9yIG90aGVyIHBlb3BsZSB0byBjb21tZW50IGFuZCBhbHNvIHRoYXQgSSBjYW4NCj4g
-PiA+ID4gPiA+IHVzZSBwYXRjaHdvcmsNCj4gPiA+ID4gPiA+IHRvIHB1bGwgaXQgaW4uDQo+ID4g
-PiA+ID4gPiANCj4gPiA+ID4gPiA+IFJlZ2FyZHMsDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+IA0KPiA+ID4gPiA+IMKgDQo+ID4gPiA+ID4gU21hbGwgbm90ZTogTG9va3Mg
-bGlrZSB0aGUgaW5pdGlhbCBjb21taXQgKDI0YjJhYykgaGFzIGENCj4gPiA+ID4gPiBzbWFsbA0K
-PiA+ID4gPiA+IHR5cG8gdGhhdCBzaG91bGQgaWRlYWxseSBiZSBmaXhlZCBiZWZvcmUgaXQncyBt
-ZXJnZWQgaW50bw0KPiA+ID4gPiA+IG1hc3RlcjoNCj4gPiA+ID4gPiANCj4gPiA+ID4gPiAib3Bl
-bi12bS10b29sczogYWRkIHJlY2lwZSBmcm9tIG1lYXQtZm9zcy1vcGVuc3dpdGNoIg0KPiA+ID4g
-PiA+IA0KPiA+ID4gPiA+ICJtZWF0IiAtLT4gIm1ldGEiDQo+ID4gPiA+ID4gDQo+ID4gPiA+ID4g
-PiBPbiBUaHUsIEp1biAxNSwgMjAxNyBhdCA2OjM2IFBNLCBNYXJ0aW4gS2VsbHkgPG1rZWxseUB4
-ZXZvLg0KPiA+ID4gPiA+ID4gY28NCj4gPiA+ID4gPiA+IG0NCj4gPiA+ID4gPiA+IDxtYWlsdG86
-bWtlbGx5QHhldm8uY29tPj4gd3JvdGU6DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKg
-IE9uIDA2LzA5LzIwMTcgMDM6MjIgUE0sIE1hcnRpbiBLZWxseSB3cm90ZToNCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgSGkgYWxsLA0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+
-ID4gPiDCoCDCoCDCoCDCoCBUaGlzIHBhdGNoIHNlcmllcyBhZGRzIGEgbmV3IHJlY2lwZSBmb3Ig
-T3BlbiBWTQ0KPiA+ID4gPiA+ID4gVG9vbHMNCj4gPiA+ID4gPiA+IHRvDQo+ID4gPiA+ID4gPiDC
-oCDCoCDCoCDCoCBtZXRhLW9lLiBUaGlzDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCByZWNpcGUg
-aXMgaW52YWx1YWJsZSBmb3IgdXNpbmcgT3BlbmVtYmVkZGVkIHdpdGgNCj4gPiA+ID4gPiA+IFZN
-V2FyZSwgYXMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIHdpdGhvdXQgdGhlDQo+ID4gPiA+ID4g
-PiDCoCDCoCDCoCDCoCB0b29scywgcGVyZm9ybWFuY2UgaXMgdmVyeSBzbG93Lg0KPiA+ID4gPiA+
-ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBNb3JlIGluZm9ybWF0aW9uIGFib3V0IE9wZW4g
-Vk0gVG9vbHMgY2FuIGJlIGZvdW5kDQo+ID4gPiA+ID4gPiBoZXJlOg0KPiA+ID4gPiA+ID4gDQo+
-ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBodHRwczovL2dpdGh1Yi5jb20vdm13YXJlL29wZW4tdm0t
-dG9vbHMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwczovL2dpdGh1Yi5jb20vdm13YXJl
-L29wZW4tdm0tdG9vbHM+DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIFBs
-ZWFzZSBub3RlIHRoYXQsIGFzIG1lbnRpb25lZCBpbiB0aGUgZmlyc3QgY29tbWl0LA0KPiA+ID4g
-PiA+ID4gdGhpcyByZWNpcGUgaXMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1vZGlmaWVkIGZy
-b20gdGhlIHJlY2lwZSBvcmlnaW5hbGx5IGZvdW5kIGluIHRoZQ0KPiA+ID4gPiA+ID4gT3Blbi1T
-d2l0Y2gNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIHJlcG9zaXRvcnkuDQo+ID4gPiA+ID4gPiDC
-oCDCoCDCoCDCoCBUaGUgZmlyc3QgcGF0Y2ggaXMgZGlyZWN0bHkgZnJvbSB0aGF0IHJlcG9zaXRv
-cnksDQo+ID4gPiA+ID4gPiBhbmQNCj4gPiA+ID4gPiA+IHRoZSBmb2xsb3dpbmcNCj4gPiA+ID4g
-PiA+IMKgIMKgIMKgIMKgIHBhdGNoZXMgYXJlIG1vZGlmaWNhdGlvbnMgdG8gaXQuDQo+ID4gPiA+
-ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIE9yaWdpbmFsIHJlY2lwZToNCj4gPiA+ID4g
-PiA+IMKgIMKgIMKgIMKgIGh0dHBzOi8vZ2l0aHViLmNvbS9vcGVuLXN3aXRjaC9vcHMtYnVpbGQN
-Cj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwczovL2dpdGh1Yi5jb20vb3Blbi1zd2l0Y2gv
-b3BzLWJ1aWxkPg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgeW9jdG8vb3BlbnN3aXRjaC9tZXRh
-LWZvc3Mtb3BlbnN3aXRjaC9yZWNpcGVzLQ0KPiA+ID4gPiA+ID4gZXh0ZW5kZWQvb3Blbi12bS10
-b29scy9vcGVuLXZtLXRvb2xzXzEwLjAuNS5iYg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0
-dHA6Ly9vcGVuLXZtLXRvb2xzXzEwLjAuNS5iYj4NCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4g
-wqAgwqAgwqAgwqAgQ29tbWl0IDkwMDhkZTJkOGUxMDBmM2Y4NjhjNjY3NjU3NDJiY2E5ZmE5OGYz
-ZjkNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgQWx0aG91Z2ggdGhlIG9y
-aWdpbmFsIHJlY2lwZSBwYWNrYWdpbmcgd2FzIEFwYWNoZS0NCj4gPiA+ID4gPiA+IGxpY2Vuc2Vk
-LCBJDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCByZWNlaXZlZA0KPiA+ID4gPiA+ID4gwqAgwqAg
-wqAgwqAgcGVybWlzc2lvbiBmcm9tIHRoZSBhdXRob3IgKERpZWdvIERvbXBlKSB0bw0KPiA+ID4g
-PiA+ID4gcmVsaWNlbnNlDQo+ID4gPiA+ID4gPiBpdCB1bmRlcg0KPiA+ID4gPiA+ID4gwqAgwqAg
-wqAgwqAgdGhlIE1JVA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbGljZW5zZSBmb3IgaW5jbHVz
-aW9uIGluIG1ldGEtb3BlbmVtYmVkZGVkOg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDC
-oCDCoCDCoCBodHRwczovL2xpc3RzLm9wZW5zd2l0Y2gubmV0L3BpcGVybWFpbC9vcHMtZGV2LzIw
-MTcNCj4gPiA+ID4gPiA+IC1BDQo+ID4gPiA+ID4gPiBwcmlsLzAxNDcxNS5odG1sDQo+ID4gPiA+
-ID4gPiDCoCDCoCDCoCDCoCA8aHR0cHM6Ly9saXN0cy5vcGVuc3dpdGNoLm5ldC9waXBlcm1haWwv
-b3BzLWRldi8yMDENCj4gPiA+ID4gPiA+IDctDQo+ID4gPiA+ID4gPiBBcHJpbC8wMTQ3MTUuaHRt
-bD4NCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIGh0dHBzOi8vbGlzdHMub3BlbnN3aXRjaC5uZXQv
-cGlwZXJtYWlsL29wcy1kZXYvMjAxNw0KPiA+ID4gPiA+ID4gLUENCj4gPiA+ID4gPiA+IHByaWwv
-MDE0NzE2Lmh0bWwNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0dHBz
-Oi8vbGlzdHMub3BlbnN3aXRjaC5uZXQvcGlwZXJtYWlsL29wcy1kZXYvMjAxDQo+ID4gPiA+ID4g
-PiA3LQ0KPiA+ID4gPiA+ID4gQXByaWwvMDE0NzE2Lmh0bWw+DQo+ID4gPiA+ID4gPiANCj4gPiA+
-ID4gPiA+IMKgIMKgIMKgIMKgIC0tDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCBUaGUgZm9sbG93
-aW5nIGNoYW5nZXMgc2luY2UgY29tbWl0DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCA0MWNmODMy
-Y2M5YWJkNmYyMjkzYTZkNjEyNDYzYTM0YTUzYTlhNTJhOg0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+
-ID4gPiDCoCDCoCDCoCDCoCDCoCBSZXZlcnQgInJyZHRvb2w6IGFkZCBnZXR0ZXh0LW5hdGl2ZSBk
-ZXBlbmRlbmN5Ig0KPiA+ID4gPiA+ID4gKDIwMTctMDYtMDUNCj4gPiA+ID4gPiA+IMKgIMKgIMKg
-IMKgIDExOjEzOjA5DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCArMDIwMCkNCj4gPiA+ID4gPiA+
-IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgYXJlIGF2YWlsYWJsZSBpbiB0aGUgZ2l0IHJlcG9z
-aXRvcnkgYXQ6DQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIGh0dHBz
-Oi8vZ2l0aHViLmNvbS9YZXZvSW5jL21ldGEtb3BlbmVtYmVkZGVkDQo+ID4gPiA+ID4gPiDCoCDC
-oCDCoCDCoCA8aHR0cHM6Ly9naXRodWIuY29tL1hldm9JbmMvbWV0YS1vcGVuZW1iZWRkZWQ+DQo+
-ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIGZvciB5b3UgdG8gZmV0Y2ggY2hh
-bmdlcyB1cCB0bw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgNDAyZDFiMzkxNzE5NWJlYjJhYjdj
-YWM1ZGM5NGFhZWQ4OTkyYjVhMToNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAg
-wqAgwqAgb3Blbi12bS10b29sczogc3R5bGUgY2hhbmdlcyAoMjAxNy0wNi0wNyAyMjozMTozNA0K
-PiA+ID4gPiA+ID4gKzAwMDApDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKg
-IC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiA+
-ID4gPiA+ID4gLS0tLS0tLS0tLS0tLQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgTWFydGluIEtl
-bGx5ICgxNCk6DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDCoCBhZGQgb3Blbi12bS10
-b29scyByZWNpcGUNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9v
-bHM6IGFkZCBtaXNzaW5nIHBrZ2NvbmZpZw0KPiA+ID4gPiA+ID4gZGVwZW5kZW5jeQ0KPiA+ID4g
-PiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogYWRkIG1pc3NpbmcgZ2xp
-Yi0yLjAtbmF0aXZlDQo+ID4gPiA+ID4gPiBkZXBlbmRlbmN5DQo+ID4gPiA+ID4gPiDCoCDCoCDC
-oCDCoCDCoCDCoCDCoCBvcGVuLXZtLXRvb2xzOiBjbGFyaWZ5IGFuZCBleHBhbmQgbGljZW5zaW5n
-DQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDCoCBvcGVuLXZtLXRvb2xzOiBiYXNlX2Nv
-bnRhaW5zIC0tPg0KPiA+ID4gPiA+ID4gYmIudXRpbHMuY29udGFpbnMNCj4gPiA+ID4gPiA+IMKg
-IMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IHVwZGF0ZSB2ZXJzaW9uIHRvIDEwLjEu
-NQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogZG9uJ3Qg
-dXNlIG1zcGFjaw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29s
-czogZG9uJ3QgdXNlIGRuZXQtY29uZmlnDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoCDCoCDC
-oCBvcGVuLXZtLXRvb2xzOiBhZGQgI2luY2x1ZGUgdG8gZml4IGJ1aWxkDQo+ID4gPiA+ID4gPiBi
-cmVhaw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29sczogYWRk
-IG1pc3NpbmcgWDExIGRlcGVuZGVuY2llcw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAg
-wqAgb3Blbi12bS10b29sczogcmVtb3ZlIGtlcm5lbCBtb2R1bGUgbG9naWMNCj4gPiA+ID4gPiA+
-IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IGxpbmUgdXAgY29uZmlndXJlIG9w
-dGlvbnMNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIG9wZW4tdm0tdG9vbHM6IHN1
-cHBvcnQgRlVTRQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqAgwqAgwqAgb3Blbi12bS10b29s
-czogc3R5bGUgY2hhbmdlcw0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
-oC4uLi9yZWNpcGVzLXN1cHBvcnQvb3Blbi12bS10b29scy9maWxlcy90b29scy5jb25mDQo+ID4g
-PiA+ID4gPiA+IMKgIDIgKw0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
-oC4uLi9vcGVuLXZtLXRvb2xzL2ZpbGVzL3ZtdG9vbHNkLnNlcnZpY2XCoCDCoCDCoCDCoCDCoA0K
-PiA+ID4gPiA+ID4gwqB8DQo+ID4gPiA+ID4gPiAxMSArKysNCj4gPiA+ID4gPiA+IMKgIMKgIMKg
-IMKgIMKgLi4uL29wZW4tdm0tdG9vbHMvMDAwMS1GaXgta2VybmVsLWRldGVjdGlvbi5wYXRjaMKg
-IA0KPiA+ID4gPiA+ID4gfA0KPiA+ID4gPiA+ID4gMzUgKysrKysrKysrDQo+ID4gPiA+ID4gPiDC
-oCDCoCDCoCDCoCDCoC4uLi8wMDAyLWNvbmZpZ3VyZS5hYy1kb24tdC11c2UtZG5ldC1jb25maWcu
-cGF0Y2jCoCANCj4gPiA+ID4gPiA+IHwNCj4gPiA+ID4gPiA+IDQxICsrKysrKysrKysNCj4gPiA+
-ID4gPiA+IMKgIMKgIMKgIMKgIMKgLi4uLzAwMDMtYWRkLWluY2x1ZGUtc3lzLXN5c21hY3Jvcy5o
-LnBhdGNowqAgwqAgwqAgwqANCj4gPiA+ID4gPiA+IMKgfA0KPiA+ID4gPiA+ID4gMzMgKysrKysr
-KysNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgLi4uL29wZW4tdm0tdG9vbHMvb3Blbi12bS10
-b29sc18xMC4xLjUuYmINCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIDxodHRwOi8vb3Blbi12bS10
-b29sc18xMC4xLjUuYmI+wqAgwqAgwqAgwqAgwqAgfCA5MA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAg
-wqAgKysrKysrKysrKysrKysrKysrKysrKw0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgwqA2IGZp
-bGVzIGNoYW5nZWQsIDIxMiBpbnNlcnRpb25zKCspDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDC
-oGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbWV0YS1vZS9yZWNp
-cGVzLXN1cHBvcnQvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzL2ZpbGVzL3Rvb2xzLmNvbmYN
-Cj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIMKgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4gPiA+ID4g
-PiDCoCDCoCDCoCDCoCBtZXRhLW9lL3JlY2lwZXMtc3VwcG9ydC9vcGVuLXZtLQ0KPiA+ID4gPiA+
-ID4gdG9vbHMvZmlsZXMvdm10b29sc2Quc2VydmljZQ0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAg
-wqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzLzAw
-MDEtRml4LWtlcm5lbC1kZXRlY3Rpb24ucGF0Y2gNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4g
-wqAgwqAgwqAgwqAgwqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKg
-IG1ldGEtb2UvcmVjaXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4g
-PiA+IHRvb2xzLzAwMDItY29uZmlndXJlLmFjLWRvbi10LXVzZS1kbmV0LWNvbmZpZy5wYXRjaA0K
-PiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiDCoCDCoCDCoCDCoCDCoGNyZWF0ZSBtb2RlIDEwMDY0
-NA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgbWV0YS1vZS9yZWNpcGVzLXN1cHBvcnQvb3Blbi12
-bS10b29scy9vcGVuLXZtLQ0KPiA+ID4gPiA+ID4gdG9vbHMvMDAwMy1hZGQtaW5jbHVkZS1zeXMt
-c3lzbWFjcm9zLmgucGF0Y2gNCj4gPiA+ID4gPiA+IA0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAg
-wqBjcmVhdGUgbW9kZSAxMDA2NDQNCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIG1ldGEtb2UvcmVj
-aXBlcy1zdXBwb3J0L29wZW4tdm0tdG9vbHMvb3Blbi12bS0NCj4gPiA+ID4gPiA+IHRvb2xzXzEw
-LjEuNS5iYg0KPiA+ID4gPiA+ID4gwqAgwqAgwqAgwqAgPGh0dHA6Ly9vcGVuLXZtLXRvb2xzXzEw
-LjEuNS5iYj4NCj4gPiA+ID4gPiA+IMKgIMKgIMKgIMKgIC0tDQo+ID4gPiA+ID4gPiDCoCDCoCDC
-oCDCoCAyLjEuNA0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IMKgIMKg
-IChwaW5nKQ0KPiA+ID4gPiA+ID4gDQo+ID4gPiA+ID4gPiANCj4gPiA+ID4gPiA+IA0KPiA+ID4g
-PiA+IA0KPiA+ID4gPiA+IMKgDQo+ID4gPiA+IA0KPiA+ID4gPiANCj4gPiA+IA0KPiA+ID4gDQo+
-ID4gDQo+ID4gDQo=
+It basically just calls this script:
+
+openembedded-core/scripts/sstate-diff-machines.sh --machines="qemux86copy
+qemux86 qemuarm" --targets=world --tmpdir=tmp-glibc/ --analyze 2>&1 | tee
+${LOGDIR}/signatures.log
+
+see:
+https://github.com/shr-project/jenkins-jobs/blob/master/jenkins-job.sh#L258
+
+for qemux86copy you either need to add meta-selftest layer from oe-core or
+apply:
+http://git.openembedded.org/openembedded-core-contrib/commit/?h=jansa/master&id=9d45c08641b868322af4bebc2f095340cf4dac3f
+
+Sorry I didn't reply earlier, I think it's resolved by dropped kernel
+dependency and I didn't notice the question about reproducing it.
+
+Regards,
+
+On Thu, Jun 22, 2017 at 7:15 PM, Martin Kelly <mkelly@xevo.com> wrote:
+
+> (ping) I apologize for the top-post but did not want to have the ping
+> lost in the noise.
+>
+> On Mon, 2017-06-19 at 16:43 -0700, Martin Kelly wrote:
+> > On Sun, 2017-06-18 at 22:28 +0200, Martin Jansa wrote:
+> > > And there is also this:
+> > >
+> > > === Incorrect PACKAGE_ARCH or sstate signatures (3) ===
+> > >
+> > > Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/
+> > > lo
+> > > g.signatures.20170618_014055.log/
+> > >     * ERROR: 3 issues were found in these recipes: open-vm-tools
+> > >
+> > >     * ERROR: 1 errors found in
+> > > signatures.qemux86.do_configure.sigdata.log
+> > >     * ERROR: 1 errors found in
+> > > signatures.qemux86.do_populate_sysroot.sigdata.log
+> > >     * ERROR: 1 errors found in
+> > > signatures.qemux86.do_package_write_ipk.sigdata.log
+> > >
+> > >     * ERROR: open-vm-tools different signature for task
+> > > do_configure.sigdata between qemux86copy and qemux86
+> > >     * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-
+> > > glibc/sstate-
+> > > diff/1497786055/signatures.qemux86.do_configure.sigdata.log
+> > >     * ERROR: open-vm-tools different signature for task
+> > > do_populate_sysroot.sigdata between qemux86copy and qemux86
+> > >     * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-
+> > > glibc/sstate-
+> > > diff/1497786055/signatures.qemux86.do_populate_sysroot.sigdata.log
+> > >     * ERROR: open-vm-tools different signature for task
+> > > do_package_write_ipk.sigdata between qemux86copy and qemux86
+> > >     * ERROR: 1 errors found in /home/jenkins/oe/world/shr-core/tmp-
+> > > glibc/sstate-
+> > > diff/1497786055/signatures.qemux86.do_package_write_ipk.sigdata.log
+> > >     * ERROR: 3 issues were found in these recipes: open-vm-tools
+> > >
+> > > So it probably depends on some MACHINE specific variable without
+> > > being marked as MACHINE_ARCH.
+> > >
+> > > Looking at:
+> > > https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2
+> > > ab
+> > > 7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-
+> > > vm-
+> > > tools_10.1.5.bb
+> > >
+> > > It's depending on kernel, so it needs to be MACHINE_ARCH, also I've
+> > > noticed few more issues:
+> > >
+> >
+> > Thanks for all the feedback. I believe I've now fixed all the issues
+> > you outlined.
+> >
+> > I dropped the kernel dependency entirely, as we're no longer building
+> > the kernel modules (they all got upstreamed). Thus I suspect the
+> > issue
+> > is no longer present with my latest changes.
+> >
+> > That said, I can't repro the sstate errors on my local machine. Could
+> > you provide repro steps so I can verify this is fixed before I send
+> > new
+> > patches?
+> >
+> > > DEPENDS is there twice:
+> > > https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2
+> > > ab
+> > > 7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-
+> > > vm-
+> > > tools_10.1.5.bb#L24
+> > > https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2
+> > > ab
+> > > 7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-
+> > > vm-
+> > > tools_10.1.5.bb#L39
+> > >
+> > > What is supposed to set KERNEL_VERSION variable in:
+> > > https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2
+> > > ab
+> > > 7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-
+> > > vm-
+> > > tools_10.1.5.bb#L58
+> > > ?
+> > >
+> > > Don't use tags in SRCREV, use git hash instead (otherwise bitbake
+> > > fetcher will reach upstream git repo every single time the recipe
+> > > is
+> > > parsed and will cause failed builds when github isn't accessible).
+> > > https://github.com/XevoInc/meta-openembedded/blob/402d1b3917195beb2
+> > > ab
+> > > 7cac5dc94aaed8992b5a1/meta-oe/recipes-support/open-vm-tools/open-
+> > > vm-
+> > > tools_10.1.5.bb#L35
+> > >
+> > > There are many hardcoded paths like /usr/lib/ or /usr/sbin/, please
+> > > use proper variables like libdir, sbindir.
+> > >
+> > > Once you fix these issues please resend all changes to the ML, it's
+> > > much better to review inline than this.
+> > >
+> > > Regards,
+> > >
+> > >
+> > > On Sun, Jun 18, 2017 at 9:58 PM, Martin Jansa <martin.jansa@gmail.c
+> > > om
+> > > > wrote:
+> > > > Fails to configure on qemuarm.
+> > > >
+> > > > If arm isn't expected to be supported, can you please update
+> > > > COMPATIBLE_HOST restriction?
+> > > >
+> > > > http://errors.yoctoproject.org/Errors/Details/145599/
+> > > >
+> > > > On Thu, Jun 15, 2017 at 7:50 PM, Martin Jansa <martin.jansa@gmail
+> > > > .c
+> > > > om> wrote:
+> > > > > OK, I'll try to remember to fix it before merge.
+> > > > >
+> > > > > I'm sorry about it, tweaking other people commits always
+> > > > > strikes
+> > > > > back :).
+> > > > >
+> > > > > On Thu, Jun 15, 2017 at 7:40 PM, Martin Kelly <mkelly@xevo.com>
+> > > > > wrote:
+> > > > > > On 06/15/2017 09:54 AM, Martin Jansa wrote:
+> > > > > > > It didn't make it to patchwork, because you've sent only
+> > > > > > > the
+> > > > > > > cover
+> > > > > > > letter. I've added it to master-next now.
+> > > > > > >
+> > > > > > > Next time please send also individual patches. So that it
+> > > > > > > gets more
+> > > > > > > visibility for other people to comment and also that I can
+> > > > > > > use patchwork
+> > > > > > > to pull it in.
+> > > > > > >
+> > > > > > > Regards,
+> > > > > > >
+> > > > > > >
+> > > > > >
+> > > > > >
+> > > > > > Small note: Looks like the initial commit (24b2ac) has a
+> > > > > > small
+> > > > > > typo that should ideally be fixed before it's merged into
+> > > > > > master:
+> > > > > >
+> > > > > > "open-vm-tools: add recipe from meat-foss-openswitch"
+> > > > > >
+> > > > > > "meat" --> "meta"
+> > > > > >
+> > > > > > > On Thu, Jun 15, 2017 at 6:36 PM, Martin Kelly <mkelly@xevo.
+> > > > > > > co
+> > > > > > > m
+> > > > > > > <mailto:mkelly@xevo.com>> wrote:
+> > > > > > >
+> > > > > > >     On 06/09/2017 03:22 PM, Martin Kelly wrote:
+> > > > > > >
+> > > > > > >         Hi all,
+> > > > > > >
+> > > > > > >         This patch series adds a new recipe for Open VM
+> > > > > > > Tools
+> > > > > > > to
+> > > > > > >         meta-oe. This
+> > > > > > >         recipe is invaluable for using Openembedded with
+> > > > > > > VMWare, as
+> > > > > > >         without the
+> > > > > > >         tools, performance is very slow.
+> > > > > > >
+> > > > > > >         More information about Open VM Tools can be found
+> > > > > > > here:
+> > > > > > >
+> > > > > > >         https://github.com/vmware/open-vm-tools
+> > > > > > >         <https://github.com/vmware/open-vm-tools>
+> > > > > > >
+> > > > > > >         Please note that, as mentioned in the first commit,
+> > > > > > > this recipe is
+> > > > > > >         modified from the recipe originally found in the
+> > > > > > > Open-Switch
+> > > > > > >         repository.
+> > > > > > >         The first patch is directly from that repository,
+> > > > > > > and
+> > > > > > > the following
+> > > > > > >         patches are modifications to it.
+> > > > > > >
+> > > > > > >         Original recipe:
+> > > > > > >         https://github.com/open-switch/ops-build
+> > > > > > >         <https://github.com/open-switch/ops-build>
+> > > > > > >         yocto/openswitch/meta-foss-openswitch/recipes-
+> > > > > > > extended/open-vm-tools/open-vm-tools_10.0.5.bb
+> > > > > > >         <http://open-vm-tools_10.0.5.bb>
+> > > > > > >
+> > > > > > >         Commit 9008de2d8e100f3f868c66765742bca9fa98f3f9
+> > > > > > >
+> > > > > > >         Although the original recipe packaging was Apache-
+> > > > > > > licensed, I
+> > > > > > >         received
+> > > > > > >         permission from the author (Diego Dompe) to
+> > > > > > > relicense
+> > > > > > > it under
+> > > > > > >         the MIT
+> > > > > > >         license for inclusion in meta-openembedded:
+> > > > > > >
+> > > > > > >         https://lists.openswitch.net/pipermail/ops-dev/2017
+> > > > > > > -A
+> > > > > > > pril/014715.html
+> > > > > > >         <https://lists.openswitch.net/pipermail/ops-dev/201
+> > > > > > > 7-
+> > > > > > > April/014715.html>
+> > > > > > >         https://lists.openswitch.net/pipermail/ops-dev/2017
+> > > > > > > -A
+> > > > > > > pril/014716.html
+> > > > > > >
+> > > > > > >         <https://lists.openswitch.net/pipermail/ops-dev/201
+> > > > > > > 7-
+> > > > > > > April/014716.html>
+> > > > > > >
+> > > > > > >         --
+> > > > > > >         The following changes since commit
+> > > > > > >         41cf832cc9abd6f2293a6d612463a34a53a9a52a:
+> > > > > > >
+> > > > > > >           Revert "rrdtool: add gettext-native dependency"
+> > > > > > > (2017-06-05
+> > > > > > >         11:13:09
+> > > > > > >         +0200)
+> > > > > > >
+> > > > > > >         are available in the git repository at:
+> > > > > > >
+> > > > > > >           https://github.com/XevoInc/meta-openembedded
+> > > > > > >         <https://github.com/XevoInc/meta-openembedded>
+> > > > > > >
+> > > > > > >         for you to fetch changes up to
+> > > > > > >         402d1b3917195beb2ab7cac5dc94aaed8992b5a1:
+> > > > > > >
+> > > > > > >           open-vm-tools: style changes (2017-06-07 22:31:34
+> > > > > > > +0000)
+> > > > > > >
+> > > > > > >         ---------------------------------------------------
+> > > > > > > -------------
+> > > > > > >         Martin Kelly (14):
+> > > > > > >               add open-vm-tools recipe
+> > > > > > >               open-vm-tools: add missing pkgconfig
+> > > > > > > dependency
+> > > > > > >               open-vm-tools: add missing glib-2.0-native
+> > > > > > > dependency
+> > > > > > >               open-vm-tools: clarify and expand licensing
+> > > > > > >               open-vm-tools: base_contains -->
+> > > > > > > bb.utils.contains
+> > > > > > >               open-vm-tools: update version to 10.1.5
+> > > > > > >               open-vm-tools: don't use mspack
+> > > > > > >               open-vm-tools: don't use dnet-config
+> > > > > > >               open-vm-tools: add #include to fix build
+> > > > > > > break
+> > > > > > >               open-vm-tools: add missing X11 dependencies
+> > > > > > >               open-vm-tools: remove kernel module logic
+> > > > > > >               open-vm-tools: line up configure options
+> > > > > > >               open-vm-tools: support FUSE
+> > > > > > >               open-vm-tools: style changes
+> > > > > > >
+> > > > > > >          .../recipes-support/open-vm-tools/files/tools.conf
+> > > > > > > >   2 +
+> > > > > > >
+> > > > > > >          .../open-vm-tools/files/vmtoolsd.service
+> > > > > > >  |
+> > > > > > > 11 +++
+> > > > > > >          .../open-vm-tools/0001-Fix-kernel-detection.patch
+> > > > > > > |
+> > > > > > > 35 +++++++++
+> > > > > > >          .../0002-configure.ac-don-t-use-dnet-config.patch
+> > > > > > > |
+> > > > > > > 41 ++++++++++
+> > > > > > >          .../0003-add-include-sys-sysmacros.h.patch
+> > > > > > >  |
+> > > > > > > 33 ++++++++
+> > > > > > >          .../open-vm-tools/open-vm-tools_10.1.5.bb
+> > > > > > >         <http://open-vm-tools_10.1.5.bb>          | 90
+> > > > > > >         ++++++++++++++++++++++
+> > > > > > >          6 files changed, 212 insertions(+)
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-
+> > > > > > > tools/files/tools.conf
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-
+> > > > > > > tools/files/vmtoolsd.service
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-tools/open-vm-
+> > > > > > > tools/0001-Fix-kernel-detection.patch
+> > > > > > >
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-tools/open-vm-
+> > > > > > > tools/0002-configure.ac-don-t-use-dnet-config.patch
+> > > > > > >
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-tools/open-vm-
+> > > > > > > tools/0003-add-include-sys-sysmacros.h.patch
+> > > > > > >
+> > > > > > >          create mode 100644
+> > > > > > >         meta-oe/recipes-support/open-vm-tools/open-vm-
+> > > > > > > tools_10.1.5.bb
+> > > > > > >         <http://open-vm-tools_10.1.5.bb>
+> > > > > > >         --
+> > > > > > >         2.1.4
+> > > > > > >
+> > > > > > >
+> > > > > > >     (ping)
+> > > > > > >
+> > > > > > >
+> > > > > > >
+> > > > > >
+> > > > > >
+> > > > >
+> > > > >
+> > > >
+> > > >
+> > >
+> > >
+>
 
