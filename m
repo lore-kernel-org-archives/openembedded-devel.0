@@ -1,15 +1,15 @@
 Return-Path: <amery@hanoverdisplays.com>
 Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 05137781F2
+	by mail.openembedded.org (Postfix) with ESMTP id 662FF77FED
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jun 2017 20:24:13 +0000 (UTC)
+	Fri, 23 Jun 2017 20:27:17 +0000 (UTC)
 Received: from localhost (192.168.0.21) by mail.hanoverdisplays.com
 	(192.168.0.31) with Microsoft SMTP Server (TLS) id 14.3.319.2;
-	Fri, 23 Jun 2017 21:24:13 +0100
+	Fri, 23 Jun 2017 21:27:18 +0100
 From: Alejandro Mery <amery@hanoverdisplays.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Jun 2017 21:23:22 +0100
-Message-ID: <20170623202324.69194-5-amery@hanoverdisplays.com>
+Date: Fri, 23 Jun 2017 21:27:03 +0100
+Message-ID: <20170623202705.69325-1-amery@hanoverdisplays.com>
 X-Mailer: git-send-email 2.13.0
 In-Reply-To: <20170623202324.69194-1-amery@hanoverdisplays.com>
 References: <20170623202324.69194-1-amery@hanoverdisplays.com>
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jun 2017 20:24:13 -0000
+X-List-Received-Date: Fri, 23 Jun 2017 20:27:20 -0000
 Content-Type: text/plain
 
 Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
