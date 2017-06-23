@@ -1,25 +1,33 @@
-Return-Path: <amery@hanoverdisplays.com>
-Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 73EE877FED
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 775FA781F9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jun 2017 20:27:51 +0000 (UTC)
-Received: from localhost (192.168.0.21) by mail.hanoverdisplays.com
-	(192.168.0.31) with Microsoft SMTP Server (TLS) id 14.3.319.2;
-	Fri, 23 Jun 2017 21:27:52 +0100
-From: Alejandro Mery <amery@hanoverdisplays.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Jun 2017 21:27:05 +0100
-Message-ID: <20170623202705.69325-3-amery@hanoverdisplays.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <20170623202705.69325-1-amery@hanoverdisplays.com>
+	Fri, 23 Jun 2017 20:37:31 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2C988208FB;
+	Fri, 23 Jun 2017 20:37:32 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id XCtZs2yaedkM; Fri, 23 Jun 2017 20:37:32 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 113E620072;
+	Fri, 23 Jun 2017 20:37:31 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id A426D162513; Fri, 23 Jun 2017 16:37:30 -0400 (EDT)
+Date: Fri, 23 Jun 2017 16:37:30 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Alejandro Mery <amery@hanoverdisplays.com>
+Message-ID: <20170623203729.GY28053@denix.org>
 References: <20170623202324.69194-1-amery@hanoverdisplays.com>
-	<20170623202705.69325-1-amery@hanoverdisplays.com>
 MIME-Version: 1.0
-X-Originating-IP: [192.168.0.21]
-X-GFI-SMTP-Submission: 1
-X-GFI-SMTP-HelloDomain: localhost
-X-GFI-SMTP-RemoteIP: 192.168.0.21
-Subject: [meta-oe][morty][PATCH 6/6] gitver: skip packages instead of panic()ing if ${GITVER} fails to expand
+In-Reply-To: <20170623202324.69194-1-amery@hanoverdisplays.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][morty][PATCH 0/6] merge devmem2 and gitver fixes from master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,65 +40,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jun 2017 20:27:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 23 Jun 2017 20:37:33 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-`inherit externalsrc gitver` is a very useful combo to get development trees
-in your workspace having a ${PN}_git.bb with PV=${GITVER} coexisting with a regular
-${PN}_${PV}.bb
+Wasn't there already a submission for devmem2 backport on the list?
 
-but not everyone wants to checkout all developments sources and managinging different
-layers for each options is quite troublesome.
-
-making `gitver` skip the .bb instead of panic()ing every time EXTERNALSRC is missing
-allows people to have a single development layer where packages get enabled if
-the right sources are present or falling back to the last release if not
-
-Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/classes/gitver.bbclass | 23 ++++++++++-------------
- 1 file changed, 10 insertions(+), 13 deletions(-)
-
-diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbclass
-index 5ecfb54c8..b8f5cf2d2 100644
---- a/meta-oe/classes/gitver.bbclass
-+++ b/meta-oe/classes/gitver.bbclass
-@@ -27,23 +27,20 @@ def get_git_pv(d, tagadjust=None):
-     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
-     try:
-         ver = gitrev_run("git describe --tags", gitdir)
--    except Exception as exc:
--        bb.fatal(str(exc))
--
--    if not ver:
-+    except:
-         try:
-             ver = gitrev_run("git rev-parse --short HEAD", gitdir)
-+            if ver:
-+                return "0.0+%s" % ver
-+            else:
-+                return "0.0"
-+
-         except Exception as exc:
--            bb.fatal(str(exc))
-+            raise bb.parse.SkipPackage(str(exc))
- 
--        if ver:
--            return "0.0+%s" % ver
--        else:
--            return "0.0"
--    else:
--        if tagadjust:
--            ver = tagadjust(ver)
--        return ver
-+    if ver and tagadjust:
-+        ver = tagadjust(ver)
-+    return ver
- 
- def get_git_hash(d):
-     import os
--- 
-2.13.0
-
+On Fri, Jun 23, 2017 at 09:23:18PM +0100, Alejandro Mery wrote:
+> The following changes have been cherry-picked from master and are
+> available in the git repository at:
+> 
+> https://github.com/amery/meta-openembedded for-morty
+> 
+> for you to fetch
+> 
+> Alejandro Mery (4):
+>   gitver: fix try/except syntax for python3 support
+>   gitver: extend class to use EXTERNALSRC if set
+>   gitver: fix broken ${GITSHA} and recursion in S when PV="${GITVER}"
+>   gitver: skip packages instead of panic()ing if ${GITVER} fails to
+>     expand
+> 
+> Denys Dmytriyenko (1):
+>   devmem2: use different filename to avoid checksum conflicts
+> 
+> Nicolas Ferre (1):
+>   devmem2: Change source URL to regain access to it
+> 
+>  meta-oe/classes/gitver.bbclass             | 51 ++++++++++++++++++------------
+>  meta-oe/recipes-support/devmem2/devmem2.bb | 12 ++++---
+>  2 files changed, 38 insertions(+), 25 deletions(-)
+> 
+> -- 
+> 2.13.0
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
