@@ -1,46 +1,28 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5527371984
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id BCFCA77E61
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jun 2017 06:24:46 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id y7so6113710pfd.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jun 2017 23:24:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=TMRFGnb5+F0IKG5oF47MkLaRYkwgrny1+6TFxyqNSDE=;
-	b=D7HXlJHiYYeZkm5LTUZkJy59foEeswbTBcbIV9TC9RBb+Xbhxxw0n4i4/51aHDgLDS
-	e7LQ84bUdUUq7+ol3ZPwi7/jUVPc4hCUyyZtVUjOi/TfrCVxh3T88wKMhcCmjOWiSRvA
-	F4vxnrfYCOpTaQtNzixYCSTrqn0Qi+/E8W/JExRsShjF0OO5ty6Y+cJLqMJBi+krTTc6
-	RiK9LBsxZ/D+JIjf8m0M7MrPu5h8vZKIcbBNnR1Mh1QiYc4phOZDrnm5vAkdu1ryr0yg
-	JbLkoKfLy9KzfybWtD8jxvpMWelAC2oKnnBkx4nDwYbi5KRtkt6+hIYYmCntqaAc2WEx
-	LAjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TMRFGnb5+F0IKG5oF47MkLaRYkwgrny1+6TFxyqNSDE=;
-	b=bPLo7CgnhKqPmT1a63kGzwtleeyIFrfA7VoWgCunrg4/jxE9fuNuMX1GSeioWbllXT
-	5Rdxs7Jp8dOOMXIhTlcuEsbLhYpjzgBA5ksg40VCSuXlP+dBbOPlBnT0JRkyqhSoiS/D
-	Z8T1Hj6l9wCjv52oikAjtM437A7dXU5KyiWv5oNcYBWOWaCPpAy4IIRcBFBaMm25fK77
-	Ux7SZzT0wBmtrHKOohH39OTb9mW1WCI2EUOrfzjVz4uvCm6aqKgBbuX85gl0vKuVXXlX
-	aacIN7HZpXgu1Cg4KKHoNcIl00hnmgXEG2YM337CVgIdnH1hMVZgj+56L+yBEgBbrmou
-	rvYg==
-X-Gm-Message-State: AKS2vOwpJwfK7bdhyS0UHRDSTogmyIBoXsfIlR9lmzmV+mnRDiZYLOSm
-	Kmkq6mFO/g62oQ==
-X-Received: by 10.84.241.4 with SMTP id a4mr493104pll.160.1498199087832;
-	Thu, 22 Jun 2017 23:24:47 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id j6sm8233809pgc.1.2017.06.22.23.24.46
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 22 Jun 2017 23:24:46 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Jun 2017 16:24:53 +1000
-Message-Id: <20170623062453.21908-1-net147@gmail.com>
-X-Mailer: git-send-email 2.13.1
-Subject: [meta-qt5][PATCH] libconnman-qt5: update to 1.1.10
+	Fri, 23 Jun 2017 07:41:09 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	23 Jun 2017 00:41:10 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.39,376,1493708400"; d="scan'208";a="116573980"
+Received: from lmmelle-mobl.ger.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.252.49.63])
+	by orsmga005.jf.intel.com with ESMTP; 23 Jun 2017 00:41:09 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 23 Jun 2017 09:41:08 +0200
+Message-ID: <5720950.qHQRHiQ22q@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+In-Reply-To: <CA+chaQeAHdzfBAaDcx_LQyFpCs_utwiE0a9Sxk3FoDQR+ridHA@mail.gmail.com>
+References: <e0efb641-fd8b-a8ff-e952-7b32805cc45a@xevo.com>
+	<7c692d80-c09b-798b-6fbe-1edc78572080@xevo.com>
+	<CA+chaQeAHdzfBAaDcx_LQyFpCs_utwiE0a9Sxk3FoDQR+ridHA@mail.gmail.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH 00/14] new recipe: open-vm-tools recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,30 +35,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jun 2017 06:24:48 -0000
+X-List-Received-Date: Fri, 23 Jun 2017 07:41:11 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
----
- recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+On Thursday, 15 June 2017 7:17:18 PM CEST Martin Jansa wrote:
+> No problem, I had issues with that script as well, but it works for me if I
+> provide all necessary params manually (when it doesn't try to figure out
+> anything).
 
-diff --git a/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb b/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-index 3ceb355..9605777 100644
---- a/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-+++ b/recipes-connectivity/libconnman-qt/libconnman-qt5_git.bb
-@@ -5,9 +5,9 @@ HOMEPAGE = "https://git.merproject.org/mer-core/libconnman-qt"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://libconnman-qt/clockmodel.h;endline=8;md5=ea9f724050803f15d2d900ce3c5dac88"
- DEPENDS += "qtbase qtdeclarative"
--PV = "1.0.98+git${SRCPV}"
-+PV = "1.1.10+git${SRCPV}"
- 
--SRCREV = "8d4580a55ca02b84fc3db374c6530e39c94e0d92"
-+SRCREV = "4d6def3053eaccaac04e4f9e03ee24dea8b9e8d8"
- SRC_URI = "git://git.merproject.org/mer-core/libconnman-qt.git;protocol=https \
-     file://0001-Don-t-use-MeeGo-as-prefix-in-order-to-make-this-a-co.patch \
- "
+Which issues have you been experiencing with send-pull-request? Have you 
+reported these as bugs?
+
+Cheers,
+Paul
+
 -- 
-2.13.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
