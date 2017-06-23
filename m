@@ -1,134 +1,136 @@
 Return-Path: <mkelly@xevo.com>
 Received: from NAM02-CY1-obe.outbound.protection.outlook.com
-	(mail-cys01nam02on0068.outbound.protection.outlook.com
-	[104.47.37.68])
-	by mail.openembedded.org (Postfix) with ESMTP id C45C577E97
+	(mail-cys01nam02on0075.outbound.protection.outlook.com
+	[104.47.37.75])
+	by mail.openembedded.org (Postfix) with ESMTP id C6C6878217
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jun 2017 22:48:47 +0000 (UTC)
+	Fri, 23 Jun 2017 22:49:07 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=TXu+lSeS1VJree3ODTeInXFnSigLkPqYb1tP3Pf9kzw=;
-	b=jchj7TMwBWqYGpPcyos6iIo90cY1nBnusm00XtNsiBBjG+X5lSo0QDNxXlb36NToIVL3mGm4VOSXCGn7E2LAU5cvTtvD04Rxcjd4y/72PouPMfbq/9fxMYPAchF463SFvWj8xc+rw7MGH4jJLeynweT0JRcrFTHOhzaemjkgNkY=
+	bh=jQT7Ujwt8KHSrHzkJQH4EuVpnAIXR8zZXncMBbOz4CM=;
+	b=vh0N/NMtjgbfPcd/FBQbR8vfrgdT1cGweFmuxHEfZfTk6xuAKWMtWL2Br7DW6Kj9JUlJ5PWXcRvfd2j8nQeIqbeszORLnqBUnFULSYOJSVgTjxCcPRW0xOIg9NQz+QrMPbTxXQCXx6/6Kh7Ordj9JTSL/SuenDJVW9TQcPXM2NY=
 Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
 	header.d=none; lists.openembedded.org;
 	dmarc=none action=none header.from=xevo.com;
 Received: from columbia.surround.io (65.122.179.226) by
-	MWHPR0101MB2943.prod.exchangelabs.com (10.174.170.14) with Microsoft
+	CY4PR0101MB2935.prod.exchangelabs.com (10.171.223.140) with Microsoft
 	SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1199.15; Fri, 23 Jun 2017 22:48:46 +0000
+	15.1.1199.15; Fri, 23 Jun 2017 22:49:07 +0000
 From: Martin Kelly <mkelly@xevo.com>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Jun 2017 15:47:36 -0700
-Message-Id: <cover.1498257745.git.mkelly@xevo.com>
+Date: Fri, 23 Jun 2017 15:48:46 -0700
+Message-Id: <c119c4c41e51373300a30cac13c88bbac2ba2f76.1498257745.git.mkelly@xevo.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.1498257745.git.mkelly@xevo.com>
+References: <cover.1498257745.git.mkelly@xevo.com>
 MIME-Version: 1.0
 X-Originating-IP: [65.122.179.226]
-X-ClientProxiedBy: DM5PR06CA0037.namprd06.prod.outlook.com (10.168.181.23) To
-	MWHPR0101MB2943.prod.exchangelabs.com (10.174.170.14)
+X-ClientProxiedBy: CY4PR08CA0055.namprd08.prod.outlook.com (10.171.251.148) To
+	CY4PR0101MB2935.prod.exchangelabs.com (10.171.223.140)
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 744912c9-d2b6-4b3e-06eb-08d4ba8a024b
+X-MS-Office365-Filtering-Correlation-Id: 6a3d6256-4ffb-48fa-2121-08d4ba8a0e8f
 X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(22001)(201703131423075)(201703031133081);
-	SRVR:MWHPR0101MB2943; 
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	3:0139jNGmwU+srHbmbCG7svAwUQXxQC53MbEa9VgUXbyp4Z2KbZud+lwkI4v0JqleqHzmYoqAwIIGOdR6yRwXqdiblGF7C7DqiVrIWT+kUc9M5Y2/ZTB89hyGqHaeYKtEPh++fO1xHJ9bLxljXClZ6oA0W7o1+JTHyQxXgSpSk0aZE28yFoZg/x1bqZh64LvTxPtdQWcwYYzD0QZTqtd8tAifgxEEXf53dTz5ecrMdnlKnwVIIYavZMV8iAhLF57umbRxd/kBjrSolR85h15CBTGO6kxHppgkQ70+EYh1GJWznw9JNl9LP7AUeoJ5meW4cYIBRzeoLlXfxx/Uq+2Usg==
-X-MS-TrafficTypeDiagnostic: MWHPR0101MB2943:
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	25:AyBzWIwypLR0/2LcLOmzTQzf72fdWe9K39J1ml9ucgTCFEDRRpFEBnAheeK/XJNtrnCIPEiJ/+W4xU/hZYF142oiPZnPAjn7lUxk1ALMgWSX4QU8nksYAkq4YsLo9DZl/Np70MuoIKTdgorShlOWWqFW6A5cOaLLkOeFND8C9tjCGgkecj2EpFQmxZANj4KDhb+jf2y8qBN06FO2EoQEFmAHf0IAuuAZTZjPNHyAyCudFC27RRl/4buLYXLt0qsf3J04PDdO6Hak/Wy5XvDDn25rzk2ukSKIUeifz1lcI3C57r2faSnckCDPBr6X8F8Ee9VOkv9TSKPAh2Jm0JTmAVXI72XkchjAlAUMRmOJrTxM8iN/G5P/yDdv6LyDdyRIZiRfobKYbyLS28pCBVrieqkqfkgQXN5UC2MFewSVvz69JjT7rlXUr1pMMGR4uog76LAdspFkxqKAeeBhz40+EVB4pbelKG+/aT5uVsZ0E0OIApYjfiTo7CxSl0zS2vPyuJItEetVP/BbAJFlraisrAu4ofQtN98O5w+sXKHSj53wt7GzmXmI/u3qQecj8yv2DqZ2ro7lL1c/x0P8NLqWt7vMVIWqgDxbj4t29SWNP5IpbGYZdrZV0ehOiJDpqfbkMmq4GPolEs5+UfB9zFqNE7zAuNuXQwkTl8uo1/wCL4wUVMxx6XZ7By054jKSUquB57NoiQ555IcIYsEInZoDulOgK78SW/eei8tJrRPE2msAsmDJHfe5yNdYKvL0oKKk8UWxdKSamYbAWBvPKUSHvy5Ap9zplI8a+0GO0mQ+82iuPreOPmC5awMjl69685MNqQDNWm1g+LclaRqVaFGgwmW5H+Q3tW3sSmyqoVr3EGG63OZ0uB+6RLyHDhK1EQAvAc3nmXQ7RuaGj/ZExJjJptdGrjBp1WxGId6lPX5/1+0=
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	31:gMr7dOFoqS9T8btSIQtm9QWl7tsv/kFK/MYjKdAHdV06PBZApM1PnRuFJUo5k8q6B45IbvvZ/DIWn6J7axGALjy6ydtRqBh9vxEdVWHoe7JpRQsyO8GiiEje1j0MvCc07Y9n+rDlFy4Ayc0wmY3vybLeJkcPNRDSq8eSzmnxAhLQnSKeUNUriWkw5hftiS1tLzTObLsNUqURV/M5gawPNdaxi8FsHsn83u8F13DNGwSr2GgpMNA/jC3N43VgCyXxO7lzAvhSGktPqcdu9WQGFeYbTRj2Lt041AnEs/sVfbDUrozIaAf43rCzZslUNY8XNNB0piB0hU1+tzksuaY5LqX34+8ifqdhil1n33XTcrJOENx7JiivzkZ75xEDFQQ5xRq/+woid6WhhIyW6b7in1Mdx5oqYKGuP0ycLNdvfKdUwxN07cki6BCxw6IeYMh1Ko59/QlK3BG/qF7NofKXkhsye5CHzD2dhz2Fw1tgPa+BRG1rGctS6yy2fZjAXuunG133jNhOxALuUvLySpVVuO2RP6VbjTcUf9wBXA24rOMOxwQjvF/fOG/l0QPo3SB8z6VpGLtK/FpQzYuhO0C2oIZoAnumeq3IexFD2CuBUghohlAvcopRbrmwhZPVA1eIKLOvrjzJrIDF9uI6UR8AWw+YTwUbRjALKptx2ipxrmI=
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	20:SFkvRxtDG6a+iDx9+4J2BIWUiR0q7O5akfCdWiqz7MszYNlsAOsvRNYIMVxm0dqqzplIBVUlUbYxgrMMFqwBLcIoCOvzT21bAA/GHk0jDSWcoLByhhcOimCkTWC5nRN88i9GQwqqafldOoOD9WTH7ofQUxLofvL0/KPjgrLUp/DoSxRT3so1c836wigAFGHixKiIirhgzK0vkohCUEb4hpBsmArBhOYsawAXszFJG05lg5z2luzJC4b/TrKUyGfIJBf93mT3VWwFDieZvyEhTDB5KH49KNCnhZxn6x7sv3h4qMp321TvOOwdmRjLORrl7qQ3YPK/src+aomFDJU9Ow==
-X-Microsoft-Antispam-PRVS: <MWHPR0101MB2943FD764F3E1AAD4F72C097ABD80@MWHPR0101MB2943.prod.exchangelabs.com>
-X-Exchange-Antispam-Report-Test: UriScan:(166708455590820)(133145235818549)(236129657087228)(148574349560750)(167848164394848);
+	RULEID:(300000500074)(300135000095)(300000501074)(300135300095)(300000502074)(300135100095)(22001)(300000503074)(300135400095)(201703131423075)(201703031133081)(300000504074)(300135200095)(300000505074)(300135600095)(300000506060)(300135500095);
+	SRVR:CY4PR0101MB2935; 
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	3:ROTL7A3lg4JcZfK6vaHeez+KzxU6agQADNHjQdjmP/YeVkNCQs5+TwXC2Bnonb6QMR2l87UALvJPEPveFHJFVFtNjFhOZ8Dz3N51ZatSNVCISop2N6Xqlh3W4qFGcR7t0ZFA0l2W5O1vVo7qXyunTIT/vNPv8A2i09t/6PlOicetnVVYGzDs+qU7MXBEJfQ2vH9T+Wd1l2XvdMv9NjQFnLGqbuS0aOZn/IT5TY42XpalcN/74LYSlwL3ah8M8f+iVI5h5ihOtuRBvtDwjyuRCSz8Nx9zIbyxR1K4undbt5ywfXp1AcJT+e7bF6TfhdKjljPcGeMmC6tXMAjVt8YIMx1IckeZKqK1oUiYgKXmXSFojXvPGoGki1Z2Y+vL8XYhLYugMR0hSeDgtGZY9wuSPPjqSuO0sS4ONQPuk5VZscyKeTceA+Aq595DTx7NcjXj8G7rnk72uvw1gw6eWecjLh5cf8CyyxTZHadYFpga/uLjZJj0fxdnaFZXskOuDYGdURKxS2vh4pMPv2hz1j49+EM5Ecj4uIYP6ekDsd0uP+K6OtbKsZatXeV0pQNsiRik6tiEahxCmuiDJIFQriWMDKeP5uISZIIvCntTbB9htl213Ecw5r6Zm3SyLzbPx6tfGbKto2EbyR+JVA86AP4Iv2GBnFCUSrRMUWsfMXhl1RX8P88gX6H22ifXKzZA7kdC1nEQGsU9Iz3hQYIgTChIY47KkUbCdIF/zzzo9sTS84A=
+X-MS-TrafficTypeDiagnostic: CY4PR0101MB2935:
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	25:j46BTDZ9uqkYROoNNZtqOMscQJRmEZGPhDfUHaxsiWwVzl+svmaH7FeSupSab7kaZQn8rhNFmwxNPQRuXKxZSaheIbNdPguJuRLoo3qR/rCOYwSIIMo2h0sviUdlSRUez4WAg5Y+dBQbOaTL7UXJail2ZjKXeODPWHFpTGXpcduSFZl42cAGSyRrandEMKva60lk/Xh4MwYl1DREYWOWhuYDLQcM19UKg2Gen9cO0xLCsTpGxmaELTZ48lPYW1NtwDUzq8JpdA9pHEdKHjVF+H73lp1G1FqBAYWocO5Ob59TbNKE016fPtFisv1FWq+vYHog6D6OLymetiCMRr2/dSX0EqO4UUYsEH2rBih4GomDDY9oZkGzWIpMA10O6q98SfN1vZ22cko6uBl379XTVmX19XMa0jMK8JzXddlY+Sj2trTCHPMUiTF74Bcu6i2TNrAm4O3g5EvfLSler7RvT3rPXCbL6VQLA7UNj5KAIoCuYezOZKga1kJHylm6UlWcxg3FAmBDsZeYxSidTmGgWLgNx+fXtqfEk8dFRFTOYomo9au4tP8zOC1H3As6kwDj9UMsgGPAkq6koCjx4VtpGi32fX8Pnjb7ksgKG4Mnq3PbCNYoUPp+C1/CyJBUly0WfHoaiGHp3IhKICSWHAnrItJe8uzvgU20bnBQ7QyGwZMPXddr6QBXk3a6JVlJqiS3IZe0tY6ecMk7r26N96aQRj3SdSBUsxNN7i/52sEqG9TiAOCwZCDr9AQW5zuiMjd4X4b5irw0frDPB1i3MDP9wtuePQ7DGQAodW3Fv9AOyn6PKE+KDm91m8pRhROxpDtBdqSbxtacmDzyKy718b/vQv33sHFVpPZ94l8lQVlGkLoG6qOeEgKHdSoyEpUZIu5tMKDFRw0Dr3UK5KHmC2iysDGIcaCGlZHd8DlqZDE2Bzw=
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	31:RP7qRqBYRPnNaWs4nhALaOQgErh5guIKJ0yx8lVgaPTZhx8tPNtcN+OJFTuKWNujniaDYduwEFX67Y7QXdlEtQLIma5wThLhutE67/m4UChMywi40RYm3Geuu5uT06SGs+IPyA4eWI5xgYUT5S9rZlbd7MDHNQI4qeBhbhuKPhk6rfSX2UAp9pwmu8/e+XLKCgL+ZeQ5Deaos1KyJ9tMZQ+QImFtF1VzWId4FV6E2ZWmul4EkHKxtu03kSKqqum5/xTTRYNujwiV2E6c00Y9upWtPW7qL+eo0ASu9h6ciXHoOz7wRLeAvR2ZeLr/u/4Jv1c0HP7GSOrjdlQCLauVH7G7v6B/lNlOQzs2rD7uxwYgSSUByOVRs8CSu2kJjjyAf/U0nx3Z+Cwv9IM1kA9gDMJ3yk+03Q7yYAWqVBgUCMabcRh7ZqONdP5zIN1g1yp2Vbvc77i/KEW24f7tyJjD9ow/Is1m7Io4Cnmn5ychs9awn+dcOyIP1US4dgnhTByUiYQACAfU4stoTh3B9he87vqolWkHszODIoBoePc4xgcFuL3q9IbZhHeVep232SM7OgLKw84FNPDFU86rSM6sbsKAgnx4C+zgOwF0UPNeh8rnbD8yKKeJepxRHEqhkx431NH0VAcNRSyG2xmLK+hpnuT4ZI6U7b6eVhiz2yH7WLM=
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	20:1XQ64sjO7HQnRj3F2t7sfxu94Xth7gbPrBE0CfUhl7Teb25RYRBKsYqnNwk71psuQSEzhIcS330SyoXtdwJEXl0/7ovF5jv9IIjex0XFaMeZc2HhPvtUyIqk9KZNSsrw1RmGCY8oC1ifoJSyEglc/LtN005D8PFWYqJG0ovzuhNBpSztbdkcv2P9bfEnITHkBzUAVEeK0FBoZkCVDcuQ/qpHPU0Nl/DWUK8EP1GimBSVRodC4SqVzcX0o4TN9I6+dal3dQtRmC9hRLNoE2BLZmzYCNUXJm0YP7EjVBonDcnBfNzeFgRmehb708GLzAW6LqN6syhVo5opSmUhYsU0rw==
+X-Microsoft-Antispam-PRVS: <CY4PR0101MB29355585FB10487494B7BFFEABD80@CY4PR0101MB2935.prod.exchangelabs.com>
+X-Exchange-Antispam-Report-Test: UriScan:(166708455590820)(236129657087228);
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(8121501046)(5005006)(93006095)(93001095)(100000703101)(100105400095)(10201501046)(3002001)(6041248)(20161123558100)(20161123560025)(20161123562025)(20161123564025)(20161123555025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:MWHPR0101MB2943; BCL:0; PCL:0;
+	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(3002001)(100000703101)(100105400095)(93006095)(93001095)(10201501046)(6041248)(20161123560025)(20161123562025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123555025)(20161123564025)(20161123558100)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
+	SRVR:CY4PR0101MB2935; BCL:0; PCL:0;
 	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:MWHPR0101MB2943; 
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; MWHPR0101MB2943;
-	4:ykam7vhnytvCTSdrzAKVhze71Va3DvAUndpGEjmp?=
-	=?us-ascii?Q?3El2VIxaSEQZhYxLxm56iuFuedfuLxKVpmBHGo9qHl7AzI2LZWtXP0ngS7oX?=
-	=?us-ascii?Q?guuwzHGfIv4xSWVTLzkcTgtHt8KrulObgfjqjHaaDSWPar/uymo8Pomg7TMY?=
-	=?us-ascii?Q?4iinEOcSME1N5nWpc/EWcy33eszP0oE3wsahjW8qC+5n4W2UIpcF2I4lzhfv?=
-	=?us-ascii?Q?fNdxjaXS3A5bX4srvtC8nm5aItxS1Efew813NE0Db+ExBZQlI6f+9Zcc/Ti/?=
-	=?us-ascii?Q?52FM6O88tjNNfO1GnhkxY/wNYS6EDvarLHokbvH+eCJAf+FciITg+NSmLjeJ?=
-	=?us-ascii?Q?NOF4jrsITrfytsKGav8nd3odk/bEUGTJeeD6EJWTBYknTeMckIpRjwHx7WKZ?=
-	=?us-ascii?Q?hlZnq7jImJeyFiBhaJi4CfkZqJvdwimLXOSxlBhpk3HuFdEFKz/LdqGr5O7T?=
-	=?us-ascii?Q?rO/JlqX/3BzV7+9cuDbCtVFIvL8liO8A0sb5lv5n6MThHFgpHA2amziJPdPF?=
-	=?us-ascii?Q?Lc/aYapNOkXhGhfLd6a8XyBZDH2pf1Nvju27zW6JlxyPoeArzlT3frf59q8i?=
-	=?us-ascii?Q?7/YahUnJZaAhwHCPBHoRm7m9j3AFUedm9kTQcd3+Sou46YJSxzfQFWJRUH2D?=
-	=?us-ascii?Q?hzJYONvJhJ/k2GHP4pKZf/uJVnbeDrDLac6S/O3lS0xOkYkaoRY89TN7iJ3B?=
-	=?us-ascii?Q?dxs4tATAb2gRonnw3Rr++A507aDwBPa5lRkiqRBMXssYg9WyCu8VhcnwAvV1?=
-	=?us-ascii?Q?oIq1hVIqm1kjbIHHpR1yGorx621fv2daXPiSJRb2YQW8G+bBOellV3JtjehH?=
-	=?us-ascii?Q?JtknLc3dLQuURk2HCtTTWtX+i+868U7tuITAUMPvBwVJ35VQqAH6FfnrUlyX?=
-	=?us-ascii?Q?+avzhdxxMgRWFOnl4HKrzaj5wtvOBkgcI7JeZkMq+FhKA5crU/IY9UBPwIWJ?=
-	=?us-ascii?Q?gY400sj8OVuckMX5VrbtqafrVcX9vnsk0lhmHNn94Huo7ULknnOYM+F8PFBb?=
-	=?us-ascii?Q?ER9OGCCkTT+SGAJUT0i9vBYO+gQyfCC/9nUTkronkdpO2OqXXS7bqHbtY4i5?=
-	=?us-ascii?Q?bUiO2oZw1LPf6DIP/nNrmsQCcxZ2GfysZgDxOXbnvFRrzBQKpPJ/PuWUZC2G?=
-	=?us-ascii?Q?Gyzc9+X+Avlh0cr7KbChdmZozHJ0D4ilW8Hq4zMYHo3KNUQvdf+pSMLQUxy2?=
-	=?us-ascii?Q?ODyIAB4+hZEX5ipFTXa28Z3FNzl0dmao3wxabRrK6iOO1MP9CmG9KfwGvYmC?=
-	=?us-ascii?Q?s4yabY7MgcL8RU3fpNPZXwM/AI180qkyILm2B/RQV64ja3xawVsmmDfeW7TS?=
-	=?us-ascii?Q?/zkbiDV2RptERQq1C/kh3g4=3D?=
+	SRVR:CY4PR0101MB2935; 
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; CY4PR0101MB2935;
+	4:O3UaGal5frNyGHILRFsr6RZ+jK6cZnRxeOXL7Dig?=
+	=?us-ascii?Q?LN4u5eQeKx9OdBaEMDJlHDnf4sgmor8alT0J58vb/+l9P46DQb0++W43i795?=
+	=?us-ascii?Q?dXaj9ck6xjYnbSXVdn374Sbu1rHdbeK1mbVjpvtShybPS+XfmnAmweEI6S8v?=
+	=?us-ascii?Q?jdAnBAqO7M+l19XYQc3DOUzVeRdj3jukH2CCTpXfHAM3tmGRY6YzY8QxrgUV?=
+	=?us-ascii?Q?8rf4wz9lP21ENwPj+OtPPNmKBsAgvdALnAYsrcJGL2o+yKFWgGClZJyi4pWC?=
+	=?us-ascii?Q?2k90PwjMJAsHtBsyqU+u3HAA+X77KuRDMC9usqTmKdzJ83/ABLOIygCo03cO?=
+	=?us-ascii?Q?KjocPYzulgeSPK3El2nllCe6E+50XsiESi0TJeQUHIx4cOjHm6tAt0r7Etbc?=
+	=?us-ascii?Q?O1160GRycgJeYGnszrMQN47SQjOkDLNvv1kAdGcbQvvI9xHS5SVR4yue1r5D?=
+	=?us-ascii?Q?bVlnHn3qdj10dspuM4C3y4+hQXBy5K2npihqk7TyYxW/0N884j99Y9+yOq+e?=
+	=?us-ascii?Q?Sc8tWYKKJAf1rHsXVU8lXcV4I/oE18+uWFHFAdoVJvbPZ3A6/fiiYAdmcBrm?=
+	=?us-ascii?Q?TTM09xrwKBnKi6JIPSgDZr1OtaGC0cJY8rNtAZ4BWHzQR2hsgnMZsEz/6Zsw?=
+	=?us-ascii?Q?WcT9quuJqB6YYvmNoknfdeo6F0K3qTAj4HfPC2SgNZTXXdVsOXYTrrUh8WHv?=
+	=?us-ascii?Q?JsvwdsPCr9owCDOIrtyfRcud8auU/Yk47a/uvEHZnAnZKCZIpqxRMRbfvsyM?=
+	=?us-ascii?Q?v/Isp2TI7qJoMIvvWXOurLuz94QKqCAtDINcHGJHsuhX0y6fLgfbK08/abPX?=
+	=?us-ascii?Q?NT+bw4c2fdeHSQ7vj+qeymvOB6uZ83QxzaZxLbB1sgI/XzqPq3C1V8KI0oar?=
+	=?us-ascii?Q?1htbrBnVCAS84lUdHw5hSFVB9b7PxlliGTh1tRlCR2BHRbDBncAvRr9YSw04?=
+	=?us-ascii?Q?SBUAUfR7y+x55qyp1XFoT22I7MKYaitvHsQYNzBpLxNQqMMNzd8CugxLP1z1?=
+	=?us-ascii?Q?8DN0n4fI09ASCdkRMMg2H4I5oBRn7fiP7wx57CnM2B9h8xHDiQ+NyXzB3mRh?=
+	=?us-ascii?Q?zTWKjki6nXnFdYRPVcZvz/0oNduvZJ8EipnTOdfZLMkREKIJpaHTcSPYiNUS?=
+	=?us-ascii?Q?EbTTyr31bWpMLPhg1k/g+i5r43qci8EcFtooTzI+K68uIbG/DptbPj5ESztj?=
+	=?us-ascii?Q?NMkepQhNy/dJIv4RNMLC9MAQNmhMtrF5m8dE?=
 X-Forefront-PRVS: 0347410860
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(4630300001)(6009001)(39400400002)(39410400002)(39450400003)(39830400002)(377424004)(53754006)(50986999)(966005)(66066001)(47776003)(42186005)(5003940100001)(4326008)(38730400002)(54906002)(50466002)(25786009)(478600001)(6916009)(53416004)(110136004)(6306002)(6666003)(6512007)(48376002)(53936002)(2906002)(33646002)(305945005)(50226002)(8676002)(6486002)(3846002)(6116002)(36756003)(81166006)(6506006)(86362001)(189998001)(230783001)(5660300001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:MWHPR0101MB2943;
+	SFS:(10009020)(4630300001)(6009001)(39450400003)(39410400002)(39830400002)(39400400002)(5660300001)(50986999)(53936002)(33646002)(5003940100001)(76176999)(966005)(1720100001)(8676002)(478600001)(50226002)(42186005)(47776003)(53416004)(66066001)(6666003)(2950100002)(118296001)(6506006)(6916009)(86362001)(575784001)(50466002)(189998001)(81166006)(48376002)(36756003)(4326008)(6116002)(54906002)(3846002)(25786009)(2906002)(230783001)(110136004)(6512007)(19625735003)(107886003)(6306002)(6486002)(305945005)(38730400002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:CY4PR0101MB2935;
 	H:columbia.surround.io; FPR:; SPF:None; MLV:sfv; LANG:en; 
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; MWHPR0101MB2943;
-	23:tygWeGgXKmZ8Mg4Dqc3ZyvdDSGpiUhpMfhTmJZK?=
-	=?us-ascii?Q?FgNxvfitzcJJMDDYs70PbarnARCExM4L60RJ+rihkHILn1jXg+GjZYgLg9QX?=
-	=?us-ascii?Q?RIhRlCAR6ELIAFi6t7J+pbpdKq6L7zT5JuyiPYMB1xcVXJ1qfedwR4Cp3N3t?=
-	=?us-ascii?Q?O2qIOqBEz2w08q7/uqflCrvvXO2HNwaS+nOloQCtYQnY6HcOJAgcNgbgnAGw?=
-	=?us-ascii?Q?zJZTwLk/Uc5xh1Nn2E+H2o5pObQIyrBy3B/cxc8tVtidZr02BMcy5tD9u0r8?=
-	=?us-ascii?Q?I3KNoZIJ1IQo4xBYU7SaASCf51aHdw51JVdjzW3H1cvpZ1HqcqR9ut3CSFdR?=
-	=?us-ascii?Q?uM0m1yjfuD5MKOyCpIz3jgOeW3mosBUHWzPQR538b7oUhlX1ir4O0JlDxR8G?=
-	=?us-ascii?Q?pYx7Ux3qyfWZaCxvSGnOoi4b2Dm0C8fDm87Nn4Wy3pLLvNRTnaHam4Tpee8S?=
-	=?us-ascii?Q?rvDm5Hea8gHfryZL8dyJlvJd35YWI7ofmQCdsYCa/qct/UJcxkinV7iOrGlS?=
-	=?us-ascii?Q?o4YfN3t7J9VeuMsIztiD6zvwUZJdletz/pqdFZ/u+nKgbW4hLb1pubWe02YW?=
-	=?us-ascii?Q?TDrGaQKbElsdSiJ3rkrvIRBjPDA7qSVBLtTTZPD+VLkaNqBadgOBw3/N3zNC?=
-	=?us-ascii?Q?hbflQ+wxcbtCPYTxu7WfbtMb1s700xTXbwNGlM3QEl/yu2B0RwPG8rZ0X23d?=
-	=?us-ascii?Q?ZSEpPdJ1oHWx6O55Dsqyia4axbU+vIPI/KHv82uuDNmeKfeG8Epci23Gd51m?=
-	=?us-ascii?Q?KgLDvhYu5fnhJ27p7GY0moTkt3dLHKkMxdJbN+1nEugXPrseS0PqZ5WjJEfd?=
-	=?us-ascii?Q?T+XI2/CDxtmVrhFPbdYQK3GnXr1vJhJdzGizggDrfbT+BzjqWBuXt2PLQKSq?=
-	=?us-ascii?Q?0Q690RK1b5r88YWWEJfqOhr9CLlKchL1RizJggQm2jj0mfqQVhhni3IIKpGC?=
-	=?us-ascii?Q?ZskhqMqvyTkkKbnMOQZoNyrpcOGKKCQuSmwl4DcPa+mtUenpEXC2qqsrUS3K?=
-	=?us-ascii?Q?ojywwRroTGfkshYgEqqozqxS0/8Khq62KMzW9BE0giCOhAZ69qBlMaaq5WN8?=
-	=?us-ascii?Q?k/zMPX5QGmtB2AdPpsWbvtoOo83A4?=
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; MWHPR0101MB2943;
-	6:hcX2wb28mz803KLyzGThvkkaxUz8AS4vC9l7w/Rq?=
-	=?us-ascii?Q?rLv0q5K6GpPF330QA5mawpc/MFMRIrfEAKarf9eADiEgQQot2ngU5ELcxoIc?=
-	=?us-ascii?Q?MtNJP5Enp59qyVxkBuKWFQrRLYUPCzKsVxmvpSK0/3pMxRkjQx3/taTFaNv2?=
-	=?us-ascii?Q?G93hBniav2PQwgcajE2ht6H2n3jPYwfHlVzcXZbM6MtHSzATmS9JnCcIGbQ2?=
-	=?us-ascii?Q?/7xj/6FXkREo99KwEvbw7eP5ZDFA/JvY9y9sF8cDgktSpWZFZqnvkwATcfvl?=
-	=?us-ascii?Q?UMkZeH7k7uHlvk3FBn1t+7cH9EBR7CS4VLBJ8DRt/PKu6WCQmNQyQbE/E/nJ?=
-	=?us-ascii?Q?Se+fAek4AOUcEmDPIC0hHBYYvv1X4QTqLImvwHerrEgir5PTTA5ctG5otudn?=
-	=?us-ascii?Q?IYZ06R2knGiOMVL9Lf1VKeJJv8OhH7ymFcT2ehv4ponEAlV+OuRjULt9Erzy?=
-	=?us-ascii?Q?pqqmwcVTlvRYu5rj6GMSCX6MpNt7euLemO1lIF46yOPtb4xhunr8JRTpq7Ko?=
-	=?us-ascii?Q?IUVd0eN/KvuybyYdM+KKUUi9KUuVB7gRUGNvjWHlWZ6dTJF6qRbglm7nAj6K?=
-	=?us-ascii?Q?xJRTziGyIqrMRZEfx6BY+vhXiFRBAPUKUTwPJnWeXBL3RWMtwP9qaOgxLZZ4?=
-	=?us-ascii?Q?WVZ1rNC5xbjhpX2YETUdylI5LzXFhZlYAIpbwpO4rJcqq+9bo3BNzuNF3Xja?=
-	=?us-ascii?Q?MXyjRue2lfSAoZcLpWMGGO9umMTBoEQqY/ASlWRaxJz9lF09bINnQMnptRpO?=
-	=?us-ascii?Q?UFzKzKomZOeD081E/AKagLN3iIfO8CCJycFnqDsujv/JH7Ig9ZuaEAM8tnPT?=
-	=?us-ascii?Q?J7+DHAxq1PsJ9rdimS0q4mqcvtf+4P/GLDUiNnbytl0zioAKcAOfQsfKSXkF?=
-	=?us-ascii?Q?9T7z2t+fgDp/PMmIdf/i7bFqTnWJ5k/8XrWpcF2iWoshBTwY1G8Uwxjonf70?=
-	=?us-ascii?Q?rW6wyBGZ6LWgg8x672N48Na8eLKuLXvgqocjWww18JwPu1YogLuv09tMrxP2?=
-	=?us-ascii?Q?HP4=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	5:nw23Volfa4rBuCC2Wr9sC1wDh+vXN4x5CmZG5xxjYPe2fItY1OCgmuYBB1vF95gAx3A7YOuLZd275FfoY80LnjBxidEgRIn2PCewZHdkujkYFT8nKsjcS6idQb6vFNYL6mx3qbFQlZ9qNkKi3LOS8CeIFU2qElOGk4dz2E3qRne5YewRL0bVbEpZne5rKSsuxteIzOINJzRHwr0nBdLzxfLxlduSnaFTneveGRHYf1LWPpJ8sAGqYs7hmvJChT9WQBZwNJm/DXpO/5nvk27xfo+smtZIYjDVUl0jY5QuLC01ejITJbaEDjrsbS06TAxtINZABDAW+7k9bwcsvy0dJmDQVWJY6iwdop1K2L0lDOMHoooeWghTgyl4EyVLVd1ncg6nGYEIWQ2TA+r4YPzBknuAlE53TDDXx538F+z2J4cBe9V/ec5j08ardojniBvYNKpUsp06mEfHgFt5XkNVxF0YKNRVAV/tD7aDHk3vQ2fyzK9ezNCmKuMGDpiJ7O8+;
-	24:fAtDSBkOd5jMwvncqEXonLSNYJf/JeST6fnBpJFXyy9FXH+J+3gX9mg6YdsCJmeSwEegNlv+na+qTCJTD+kkScIzTqq6qbvZ3c+YcwiHoPU=
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; CY4PR0101MB2935;
+	23:4X+R36eREp2SyOuMfqMsXQp+I4euW7z/llQbxFp?=
+	=?us-ascii?Q?MvDIP5KTI3+Z0I53eXunoMKRws3n7TJx80lFEZaaiiYtYOqTtgRjFgv1FQKj?=
+	=?us-ascii?Q?f2M/P5iD+ue2RpJTDL7XzdQ6n0ZeWakO8z+iXVcOvwTLnctK00CKhF7j2Bnm?=
+	=?us-ascii?Q?5htncLS5TA7zM3Ij8J9Uk7NPI4Zj2GGkaTXkkDQtFhqHK3Wh9mfiM3mVFC5H?=
+	=?us-ascii?Q?HVbBlyjigs08iCZC2s9JvABtUkN90K3xazjSSShvPksIlBdbUq6lP1tSVC/f?=
+	=?us-ascii?Q?ToW70WGMy+9I4XWIrnduAtImUoeeQ4eRw7XeK55SnhyMVHpQswz9ORN8zkz3?=
+	=?us-ascii?Q?lvhnYX8YhOmz8qARyPaJJzywrdiG9gVvxm+ta+JbXE1Yss+3rqAlZuxrxnXw?=
+	=?us-ascii?Q?jzFn4AZvH5zjQshrumCPhZ71RRUnnApEDtT2/wQN92bPLdmdOKwzxU1iLoVU?=
+	=?us-ascii?Q?PMmk4U1tULj8eDzu/dMmtlVqg5HRU4IyyZ5ZXXI0bwfTCs3Xpr7WFJmns/DV?=
+	=?us-ascii?Q?WC1GjGGIZVWoJnFOaycK5j/srIJIxTRHolXyZmPRZegmNszx9jJV6jjhJ7TH?=
+	=?us-ascii?Q?ItwVV5fTMg422enjbKsKihCjL/ZE1xgnYljOUOQrFwIMOr5npsTsKt6esLDK?=
+	=?us-ascii?Q?ncHYR29PYKFugP9BZcQchsC5C7SSWmbcYw4/w4kOONxiKOpMyp4pZiuoReh0?=
+	=?us-ascii?Q?EjYr4tpr0eKgKQAsxTgAxnztSqWUxblFLvrcIUVo6vdz0QaCv8nluzKNDVGN?=
+	=?us-ascii?Q?TGBgQkW4KJMyg2cMmJL4te9/RgBhOF22ZyT9NSsCGd7QPlsyKnQUXKN6E7fL?=
+	=?us-ascii?Q?hpgfY+Fm6qtKHESMArihvvcDSgrn/VLuPmC/cBSRp/Kwg+8rkSUsdY6OSveF?=
+	=?us-ascii?Q?x3ycEApFwZ9ps7cQi4vxdfYi7pF9DPJw4RMLgcRhkI3H7HnXn2DAnDhlJ7Kc?=
+	=?us-ascii?Q?TWUqQwpnqgYcp/wLBiQTbeyNAIQUu596hlIbMToRHO0s1vSKuiCrRrhwLRYS?=
+	=?us-ascii?Q?NSiwiAuSgtZe5B5e2hoSoCldffps6+nvhAw8NtxN3gV7rXhr0Yg9hUVyKWCi?=
+	=?us-ascii?Q?zRbkkGYGYZrR4sqcfncqXqqPsVicbit58eITwJSoYM3dFY/Q65GsXRhJAt0V?=
+	=?us-ascii?Q?oRQQX0LB7vHkzzMjVFku2PuRoVZL5nniscuJWJWeJUi2VychOAhzkv/5qBBR?=
+	=?us-ascii?Q?n3tux3SDPEuAC0Y9CYxYFJfrQj1Asy6Drqk5i?=
+X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; CY4PR0101MB2935;
+	6:vog58s821D4rOnMQyjDo6osAEEyLbjEV5qX4mCTm?=
+	=?us-ascii?Q?1WGPEBnU1gDC1gzznkRDc5QuZPssqs7Bjas+e0wzGpkONodpC/3QLtNNQm7S?=
+	=?us-ascii?Q?l0kIe3GRsunhIUwA6Omzu68nw05mIzBNrWSwhOcEVJYOxi1PqsCBt4dZcMNV?=
+	=?us-ascii?Q?AEX2oI5zNT+asMeqRpg7RHUYJuWOCeBo0Tn/E7RFS0DHNErpo1xwc/TpWUqY?=
+	=?us-ascii?Q?km8p72VGudAACtGMr74AMJm50ya86Rli0xGCE8hHu4iyrSWdiWEEUJRmDX0y?=
+	=?us-ascii?Q?mjXPD7YokY9u71wPw5JQCrggeJIC0UIYZgMv55s0zPat4kmgdueV6hIIvR/P?=
+	=?us-ascii?Q?bdXAGsFE0upu2Fz7S5dQn398vIKRvGrl68NHi7lWXbQ+g2qLoqeOJ4TP0Yli?=
+	=?us-ascii?Q?wUqkUuxUjYVFSiJzD7BnmaEVqNlBgze3YVVc7+joIXrsoMgCysuWQFGF8GqX?=
+	=?us-ascii?Q?AFDofWTWd8FrwPlfnlcwbQAuihg+kvMMYKwlziqqTXzfoX5ztxRt2JXVvd/M?=
+	=?us-ascii?Q?SC2gtYf7iVFuX8F7yeOeKpQox55B8wnEf98SYixxzOpkKFMXqdal1GW/qoY2?=
+	=?us-ascii?Q?R58emZesqWaj21nUcBweAe8TcvcT61F3OXFth7pEJqYAaBJTnasK3Ju1P+Mb?=
+	=?us-ascii?Q?QNmdF1FKLu9bzcAqwv7gqI1SM4890LV75lpyleucK+Yx4crp//RTACPQlL5C?=
+	=?us-ascii?Q?on78A7vNDdjAlUTUV3qGnaUymOKxTnDVcBvLLfNCLrZkawzQvOkOL6mkbPEo?=
+	=?us-ascii?Q?PVS9Pe/XSW9IyozEnZkvipHpj5P8hTmrsakIVarTwcNaxPGbpxGLuo75uXlh?=
+	=?us-ascii?Q?xF6CCn7otQWO/DfBkdw/8ozP8OjP+4hBn7yfPxbGD2lATsjqCHR2X/Vj/li5?=
+	=?us-ascii?Q?s6Th7XsKXrHDh6B/GZzEYx4ZoutMb9uqjoc9d3VmQxoJoC4YsjUaldFJbbFV?=
+	=?us-ascii?Q?V+xJytcFgHXQhsPq64IlMw8oSHqN2QzpvA3W7nu1102UJASq3wm1O6vTG37g?=
+	=?us-ascii?Q?3+A=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	5:GCNrNB/8B7hwb9P1yU/h+t93Brz61u2SZa2OxrcGR6YuVrtBfYtQ0rT7xDiQSzxne0Jqj9SQI+OSlsMUSQPPCMhsdXC8kJqO84CaNyU4hKIjKUDiappsDl3qEOgOSU3OaI7j5fbgofRDXjRYFO+tzlTraOSxUpexUjp6ZfmDRJKWhFNfDrrSXC9ZVqvFKhg14ONajIYfLk95xiNcp5FJSbeME1GVfqKFFRZ4ZlhHbagD1VkDxBRrjnB/QB+dkDC78tuAvalDoqzZVmsw5CuZ4dIP7Kd4g7YqQ63CkqRJTxsNpCNKKi2NjGI2NSsxzjqyC6eHFqSs7BylQTr+OGXL1hGA6/iI8fAkDclry/Z/hv7w5an8yKjen8ZZ28hNE8UfU1L0llOHC5/u24X0leCE+ocdM0+AdzVwy8fM2qoN7D0iAQy4j3M8o0JmRTnOjK+XCJImNMWDt7DmWoPUhT04ObZedcuwPwccJ5I6L20awG2vuAmm8gn1YONK4NU9/30w;
+	24:QRnT1c0DHR/dIeu7WVr8GX7PQuhEJ+ljIangLd0xsNz/TG/Ri9LNnyi6Kd14Txh2Bdj5rXO38Td10HCVU9Mzp6Y6S9skAuyGEhBwcS6D+1I=
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2943;
-	7:wFbaFEP/V4lYs/q3lQPE8GrgJN+LRIZhk+j/svYN+iPuYXGtYJKSuT8LwxjuecMvEQ//7y8bJENuG/co+7ROf6UiiKlrkuBQFSQdlP3OibPUjggc8AIrj49NvhqVxJJfSjei+6Tm47+jsir3VcZ9zfKx6Di7kTAO4yqDhbQyoVwU78GUIxMgXEF1itDnFJlwsgtP4eGAeLpKkqIJXaMq2QVl57iJvex0Jn/afE3r8d0FfdtdU3Rb0HAsAGE1iV+Dens0ECKYANoEHDlO7+2q9JgEdVsKh4t68M4xOP8KOQ8mIvtBsPy4QiXc8GcxpFBezYjQbe3hW8podSXZmAzySBzctqxmhdZBpFMlK+3jDLykq7hzSBHf2/9EVOtlH+HiCqUutX2gJ3LXZpsSOwIY8Ie/nqVDtPh001mBIQG0ucaohxnL2X/kp2NvszVB3Que9N3NoSRD25jCXfIMgIMNbLpcRE2h0GC7SoAG51obBzeyjvvu59SfhloLBod3kVNMEgMm/28tUj5ASCEVRUbcNkJuXuzLtw3TRWwR8r1TXsLScvsumzQOhbHumY6XFePEtI+oaeWo+bn+dyuBQJ5RvAdZtK1gId8Bn9q0LxiPbV+Djkn82rxwzwLgXPyuow4vH1enKtg0fbr+cDJ5JsiUr6YPi2txNByvlT9G/ShQi+RTmXtT1uujVFojT0ouoRrIM0q2ZAnt6fOIvbqC9E9UgMLOVM3qhjVb/rbOC639F9D1rtSURhpsEwK24chXX/B0ZM9l40q9Wm5gv3lDN86LaD7CEWi6iFPupZYkXoGHZeI=
+X-Microsoft-Exchange-Diagnostics: 1; CY4PR0101MB2935;
+	7:IbKMrqUYLjnf8c0WAyoDN6pOpKutFKTKjV5CoE5JhHMNIfF4teX3npqPboBUcDtocSqvTDtwxlWHB8V3P8X9+v3218EdMH9ck54wCzbNTc7j4+YG6Si0P9WsB4j5qwlJmJ5jLcOdK/XI3lYl0MWdj4IBcoRdWDVAqhQ7j86LZxH9xKq+SFCI7/ranJMk0cc0QqA82JLtYbU5XuotGl9Z0/VQidthP7qmHQ8Z3GPgnceAAbAu58w/c0HRu8tPFDIdevkZeseCp1Kn03AJTU4/VcdZlfCgopNjGzuv+Yg46jXroiDRH5UKwdQH5bWro42ILvkLpCULoO3fLeMbALKzlgFeyCS81y1PmkakQZWSQbEIRJ/25R4iGivzozigYqMexLMcw+xfx7zug0UE4SRlvHlfcv1MtKLDS5Z1HxuLVn5Fv2EEISz2+fkA+BRfE8jTZpAS6VSLQ+mESk6fMzu0aVE+PSs2X3vF/ZgfHKlMYAjfaPoBVRitPC85ZOV5dW/87fHUHhuLFgKMYehu/XBCrfo3Gyyc3jkAIMCDjMM7o0ypANYjitBNXw3LukLd4mmbfhDluAgMeLm3n75N5Y6kI4nrQpL6HyLSovTROBQ1cuRhnORzee7xZFAJm7WgMWOlyeuQrDtl87bgQK8nODnOE2y8kGVI5pBW/qgvmg9BT7bM3te8BeOrcqhSzoIHZkHTFGOZjdVb/WVs7zPZ92OKLI4L4gBBgvsw71fDi6kmrDvRiG5RHNtpHvEeHsR0qATJFGe1S3R/qAGo+h9wP+EdW3IohwsxlAdmtKHS6Y0ZLPk=
 X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2017 22:48:46.7494 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Jun 2017 22:49:07.6795 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR0101MB2943
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR0101MB2935
 Cc: Darren Hart <dvhart@vmware.com>
-Subject: [meta-oe][PATCH v2] 00/17] new recipe v2: open-vm-tools recipe
+Subject: [meta-oe][PATCH v2] 15/17] open-vm-tools: style changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -141,75 +143,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jun 2017 22:48:48 -0000
+X-List-Received-Date: Fri, 23 Jun 2017 22:49:08 -0000
 Content-Type: text/plain
 
-Hi all,
+Various cosmetic changes to make the recipe match the style guide:
 
-This is version 2 of a patch series to add a new recipe for Open VM Tools to
-meta-oe. This recipe is invaluable for using Openembedded with VMWare, as
-without the tools, performance is very slow.
+http://www.openembedded.org/wiki/Styleguide
 
-More information about Open VM Tools can be found here:
+Signed-off-by: Martin Kelly <mkelly@xevo.com>
+---
+ .../open-vm-tools/open-vm-tools_10.1.5.bb          | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
 
-https://github.com/vmware/open-vm-tools
-
-Please note that, as mentioned in the first commit, this recipe is modified
-from the recipe originally found in the Open-Switch repository. The first
-patch is directly from that repository, and the following patches are
-modifications to it.
-
-Original recipe: https://github.com/open-switch/ops-build
-yocto/openswitch/meta-foss-openswitch/recipes-extended/open-vm-tools/open-vm-tools_10.0.5.bb
-Commit 9008de2d8e100f3f868c66765742bca9fa98f3f9
-
-Although the original recipe packaging was Apache-licensed, I received
-permission from the author (Diego Dompe) to relicense it under the MIT license
-for inclusion in meta-openembedded:
-
-https://lists.openswitch.net/pipermail/ops-dev/2017-April/014715.html
-https://lists.openswitch.net/pipermail/ops-dev/2017-April/014716.html
-
-The following changes since commit d2da8b82cfb2f8e55236751c1c56c9e7f3b5f68d:
-
-  scsirastools: Upgrade to 1.6.6 (2017-06-22 16:04:14 +0200)
-
-are available in the git repository at:
-
-  git://github.com/XevoInc/meta-openembedded open-vm-tools-v2
-  https://github.com/XevoInc/meta-openembedded/tree/open-vm-tools-v2
-
-Martin Kelly (17):
-  add open-vm-tools recipe
-  open-vm-tools: add missing pkgconfig dependency
-  open-vm-tools: add missing glib-2.0-native dependency
-  open-vm-tools: clarify and expand licensing
-  open-vm-tools: base_contains --> bb.utils.contains
-  open-vm-tools: update version to 10.1.5
-  open-vm-tools: don't use mspack
-  open-vm-tools: don't use dnet-config
-  open-vm-tools: add #include to fix build break
-  open-vm-tools: add missing X11 dependencies
-  open-vm-tools: remove kernel module logic
-  open-vm-tools: line up configure options
-  open-vm-tools: support FUSE
-  open-vm-tools: scope build to only x86
-  open-vm-tools: style changes
-  open-vm-tools: fix all hardcoded paths
-  open-vm-tools: remove -Wno-error
-
- .../recipes-support/open-vm-tools/files/tools.conf |  2 +
- .../open-vm-tools/files/vmtoolsd.service           | 11 +++
- .../0001-configure.ac-don-t-use-dnet-config.patch  | 41 +++++++++++
- .../0002-add-include-sys-sysmacros.h.patch         | 33 +++++++++
- .../open-vm-tools/open-vm-tools_10.1.5.bb          | 84 ++++++++++++++++++++++
- 5 files changed, 171 insertions(+)
- create mode 100644 meta-oe/recipes-support/open-vm-tools/files/tools.conf
- create mode 100644 meta-oe/recipes-support/open-vm-tools/files/vmtoolsd.service
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0001-configure.ac-don-t-use-dnet-config.patch
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools/0002-add-include-sys-sysmacros.h.patch
- create mode 100644 meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
-
+diff --git a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
+index 906eaba64..4ab2820c1 100644
+--- a/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
++++ b/meta-oe/recipes-support/open-vm-tools/open-vm-tools_10.1.5.bb
+@@ -9,7 +9,8 @@
+ # in meta-openembedded by agreement of the author (Diego Dompe).
+ #
+ 
+-DECRIPTION = "open-vm-tools"
++SUMMARY = "Tools to enhance VMWare guest integration and performance"
++HOMEPAGE = "https://github.com/vmware/open-vm-tools"
+ SECTION = "vmware-tools"
+ 
+ LICENSE = "LGPLv2.1 & GPLv2 & BSD & CDDLv1"
+@@ -32,7 +33,6 @@ SRCREV = "854c0bb374612f7e633b448ca273f970f154458b"
+ S = "${WORKDIR}/git/open-vm-tools"
+ 
+ DEPENDS = "glib-2.0 glib-2.0-native util-linux libdnet procps"
+-RDEPENDS_${PN} = "util-linux libdnet"
+ 
+ # open-vm-tools is supported only on x86.
+ COMPATIBLE_HOST = '(x86_64.*|i.86.*)-linux'
+@@ -53,18 +53,24 @@ PACKAGECONFIG[x11] = ",${NO_X11_FLAGS},${X11_DEPENDS}"
+ # fuse gets implicitly detected; there is no --without-fuse option.
+ PACKAGECONFIG[fuse] = ",,fuse"
+ 
+-CFLAGS += '-Wno-error=deprecated-declarations'
++CFLAGS += "-Wno-error=deprecated-declarations"
+ 
+-FILES_${PN} += "/usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
+-		/usr/lib/open-vm-tools/plugins/common/lib*.so \
+-    ${sysconfdir}/vmware-tools/tools.conf"
++FILES_${PN} += "\
++    /usr/lib/open-vm-tools/plugins/vmsvc/lib*.so \
++    /usr/lib/open-vm-tools/plugins/common/lib*.so \
++    ${sysconfdir}/vmware-tools/tools.conf \
++    "
+ FILES_${PN}-locale += "/usr/share/open-vm-tools/messages"
+ FILES_${PN}-dev += "/usr/lib/open-vm-tools/plugins/common/lib*.la"
+-FILES_${PN}-dbg += "/usr/lib/open-vm-tools/plugins/common/.debug \
+-		    /usr/lib/open-vm-tools/plugins/vmsvc/.debug"
++FILES_${PN}-dbg += "\
++    /usr/lib/open-vm-tools/plugins/common/.debug \
++    /usr/lib/open-vm-tools/plugins/vmsvc/.debug \
++    "
+ 
+ CONFFILES_${PN} += "${sysconfdir}/vmware-tools/tools.conf"
+ 
++RDEPENDS_${PN} = "util-linux libdnet fuse"
++
+ do_install_append() {
+     ln -sf /usr/sbin/mount.vmhgfs ${D}/sbin/mount.vmhgfs
+     install -d ${D}${systemd_unitdir}/system ${D}${sysconfdir}/vmware-tools
 -- 
 2.11.0
 
