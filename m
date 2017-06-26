@@ -1,24 +1,23 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 03D3377811
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EB85677B27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 07:05:02 +0000 (UTC)
+	Mon, 26 Jun 2017 08:34:02 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v5Q751sN029518
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 00:05:01 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 26 Jun 2017 00:05:00 -0700
-From: <jackie.huang@windriver.com>
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v5Q8Y2Gq015758
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 26 Jun 2017 01:34:02 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 26 Jun 2017 01:34:02 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 26 Jun 2017 15:04:59 +0800
-Message-ID: <20170626070459.3973-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+Date: Mon, 26 Jun 2017 04:34:00 -0400
+Message-ID: <1498466040-142806-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] snort: fix for snort.conf
+Subject: [meta-filesystems][PATCH] xfsprogs: remove redundant install rule in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,44 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 07:05:03 -0000
+X-List-Received-Date: Mon, 26 Jun 2017 08:34:03 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Since the recipe inherits autotools-brokensep, it has
+`make install' in do_install by default. The extra one
+is not required which may conflict with install-dev.
 
-The /etc/snort/snort.conf doesn't work since
-there are hardcoded paths and lib names, and
-it tries to include many rules that are not
-provided.
+Occasionally build failure:
+...
+Installing include-install
+Installing libxfs-install-dev
+make[1]: *** No rule to make target '../inclu', needed by 'xfs_dir2.lo'.
+Stop.
+make[1]: *** Waiting for unfinished jobs....
+make: *** [Makefile:132: libxfs-install-dev] Error 2
+...
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+It is hard to reproduce by manual build, so export BUILD_VERBOSE to
+gain more debug info duiring the build.
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb | 11 +++++++++++
- 1 file changed, 11 insertions(+)
+ meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-index 57a04f2e7..dfd6ba971 100644
---- a/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-+++ b/meta-networking/recipes-connectivity/snort/snort_2.9.7.5.bb
-@@ -57,6 +57,17 @@ do_install_append() {
-     for i in map config conf dtd; do
-         cp ${S}/etc/*.$i ${D}${sysconfdir}/snort/
-     done
-+
-+    # fix the hardcoded path and lib name
-+    # comment out the rules that are not provided
-+    sed -i -e 's#/usr/local/lib#${libdir}#' \
-+           -e 's#\.\./\(.*rules\)#${sysconfdir}/snort/\1#' \
-+           -e 's#\(libsf_engine.so\)#\1.0#' \
-+           -e 's/^\(include $RULE_PATH\)/#\1/' \
-+           -e 's/^\(dynamicdetection\)/#\1/' \
-+           -e '/preprocessor reputation/,/blacklist/ s/^/#/' \
-+           ${D}${sysconfdir}/snort/snort.conf
-+
-     cp ${S}/preproc_rules/*.rules ${D}${sysconfdir}/snort/preproc_rules/
-     install -m 755 ${WORKDIR}/snort.init ${D}${sysconfdir}/init.d/snort
-     mkdir -p ${D}${localstatedir}/log/snort
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
+index 50ab987..b4f2c11 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.10.0.bb
+@@ -41,6 +41,7 @@ PACKAGECONFIG[readline] = "--enable-readline=yes,--enable-readline=no,readline"
+ PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
+ 
+ export DEBUG="-DNDEBUG"
++export BUILD_VERBOSE="1"
+ 
+ EXTRA_OEMAKE = "DIST_ROOT='${D}'"
+ 
+@@ -54,7 +55,7 @@ do_configure_prepend () {
+ }
+ 
+ do_install_append() {
+-        oe_runmake 'DESTDIR=${D}' install install-dev
++        oe_runmake 'DESTDIR=${D}' install-dev
+         rm ${D}${libdir}/*.la
+         rmdir --ignore-fail-on-non-empty ${D}${libdir}
+ }
 -- 
-2.11.0
+2.8.1
 
 
