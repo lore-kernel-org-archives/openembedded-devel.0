@@ -1,48 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yb0-f180.google.com (mail-yb0-f180.google.com
-	[209.85.213.180])
-	by mail.openembedded.org (Postfix) with ESMTP id E5E0A71AD1
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 6220477E9C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 15:26:26 +0000 (UTC)
-Received: by mail-yb0-f180.google.com with SMTP id s9so1444354ybe.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 08:26:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=DmF4mDoNjRfNK5wUPH1Q1ycVN0uTi78LJ7wJTfQ4D0I=;
-	b=YtHckbZ8+XjRJeL4EFCyLmjScSnFA0qXBtzAf8AfemZbtkOu/ZO6yzZp4I6HwlbZ4z
-	aYijMGRCbNmelPyS+HSsGjtWLoZ8UaLaSC4AO4nMdAbZ1F7x/X0/E2iKGh46MdZT99sz
-	pTP5hqMwkI4YrkYXi1fN4VfElSJZgUWU+qY+8qQ0L4GFOsBmD+4igXjrPa2y27hdbmyv
-	OrFnczowdOTwr9cVy9jUQfuNtaKSPvBRQb+wO46WHgdgBNxTr2CfbdBYcZaIegbr2lv8
-	Sr/42UgyBlpdHKShiKosF2zfSVT7JwMsaraHlOF8suBcHrjhi/dbDTleGqo6wi9+UD8T
-	zVUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=DmF4mDoNjRfNK5wUPH1Q1ycVN0uTi78LJ7wJTfQ4D0I=;
-	b=p7UtLiXROxeL+sHsS8yR+CtnojJgBS9ZIzlkf34R/uJh+z/scAI8hcCSLP1VHJyj4L
-	s7fVSjLZcT379CLiBua4Jah+B6oy1t22Ae6rkoh35P4DPIPaUKRCd5vHbdWiZARPidoO
-	mT/RG2Sl6Nqby+9fYKfhTQkupo4q3LSVk+bobtoySo8J69pdEkLn7p34pExDbMf5/val
-	vPjColTwtyyTMIcxmzgVIu90yzF+ncdSASQxKYgCHu5LMn+EgwzFnwmvGTnmTMiZH8ce
-	JjMvJWOIUBm24AW3plTQpUxp2eyyoF49HwY7pvn1NuGFblzO4i8jMFzy9XuSDVHOcc/i
-	l8IA==
-X-Gm-Message-State: AKS2vOxFZMjA0u2/5slYWQdNO63nBum/8Fdc5PGmVhOudFkr6y3gzQGr
-	azWpes8N8VFk+yxQHq0ipuqErTOS8Q==
-X-Received: by 10.37.228.70 with SMTP id b67mr569514ybh.28.1498490788202; Mon,
-	26 Jun 2017 08:26:28 -0700 (PDT)
+	Mon, 26 Jun 2017 15:52:57 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 5833420BA9;
+	Mon, 26 Jun 2017 15:52:58 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id WYAndsoDZKo9; Mon, 26 Jun 2017 15:52:58 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3523D207AF;
+	Mon, 26 Jun 2017 15:52:57 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id A2F76162514; Mon, 26 Jun 2017 11:52:56 -0400 (EDT)
+Date: Mon, 26 Jun 2017 11:52:56 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Ming Liu <liu.ming50@gmail.com>
+Message-ID: <20170626155256.GG28053@denix.org>
+References: <1497932912-30016-1-git-send-email-liu.ming50@gmail.com>
+	<20170622191849.GS28053@denix.org>
+	<20170623211933.GB28053@denix.org>
+	<CA+chaQeXfn18+4zHth7_enazNF9hh3idLT+V7YvJLPH+5p5cQw@mail.gmail.com>
+	<20170623214631.GC28053@denix.org>
+	<CALatG=7jn597sL8XE2hk8X67smJTH84HPe+wsYzwHC1HNHh9cA@mail.gmail.com>
 MIME-Version: 1.0
-Received: by 10.37.181.204 with HTTP; Mon, 26 Jun 2017 08:26:27 -0700 (PDT)
-In-Reply-To: <20170626151117.6221-7-ross.burton@intel.com>
-References: <20170626151117.6221-1-ross.burton@intel.com>
-	<20170626151117.6221-7-ross.burton@intel.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Jun 2017 17:26:27 +0200
-Message-ID: <CA+chaQfwLN87QvhhwCBaw-NtgvtcOFub-rSCcoxjAD=QKkQRMg@mail.gmail.com>
-To: Ross Burton <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 7/8] meson: use tarball instead of git checkout
+In-Reply-To: <CALatG=7jn597sL8XE2hk8X67smJTH84HPe+wsYzwHC1HNHh9cA@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5] [PATCH] qttools: DEPENDS on icu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,49 +45,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 15:26:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 26 Jun 2017 15:52:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I still don't trust github archives/releases, can we skip this one?
+I believe this was meant to be sent to the list, not just me directly...
 
-On Mon, Jun 26, 2017 at 5:11 PM, Ross Burton <ross.burton@intel.com> wrote:
-
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  meta-oe/recipes-devtools/meson/meson_0.40.1.bb | 10 +++-------
->  1 file changed, 3 insertions(+), 7 deletions(-)
->
-> diff --git a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-> b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-> index ab54b8c79..f33256a10 100644
-> --- a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-> +++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-> @@ -4,13 +4,9 @@ SUMMARY = "A high performance build system"
->  LICENSE = "Apache-2.0"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
->
-> -SRC_URI = " \
-> -    git://github.com/mesonbuild/meson.git \
-> -"
-> -
-> -SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
-> -
-> -S = "${WORKDIR}/git"
-> +SRC_URI = "https://github.com/mesonbuild/meson/releases/
-> download/${PV}/${BP}.tar.gz"
-> +SRC_URI[md5sum] = "8475b19d5f5f3bd5c40f4bb1f31b93f3"
-> +SRC_URI[sha256sum] = "890ce46e713ea0d061f8203c99fa7d
-> 38645354a62e4c207c38ade18db852cbf5"
->
->  inherit setuptools3
->
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+On Mon, Jun 26, 2017 at 05:00:14AM +0200, Ming Liu wrote:
+> Hi,
+> 
+> Please revert it, I probably made a mistake, I encountered this issue in
+> morty branch, then I checked the qttools-5.7 source, and found there is
+> code referring ICU, so I thought the issue is also impacting the upstream,
+> which it seems is not according to Denys, sorry for the inconvenience I
+> brought.
+> 
+> //Ming Liu
+> 
+> 2017-06-23 23:46 GMT+02:00 Denys Dmytriyenko <denis@denix.org>:
+> 
+> > Thanks.
+> >
+> > On Fri, Jun 23, 2017 at 11:41:05PM +0200, Martin Jansa wrote:
+> > > Yes, I've seen both e-mails. I'm waiting for response from author, then
+> > > I'll revert it in master and pyro branches.
+> > >
+> > > On Fri, Jun 23, 2017 at 11:19 PM, Denys Dmytriyenko <denis@denix.org>
+> > wrote:
+> > >
+> > > > Martin,
+> > > >
+> > > > Were you able to look into this yet? I didn't copy you directly at
+> > first,
+> > > > so
+> > > > not sure if you missed it...
+> > > >
+> > > >
+> > > > On Thu, Jun 22, 2017 at 03:18:49PM -0400, Denys Dmytriyenko wrote:
+> > > > > On Tue, Jun 20, 2017 at 06:28:32AM +0200, liu.ming50@gmail.com
+> > wrote:
+> > > > > > From: Ming Liu <peter.x.liu@external.atlascopco.com>
+> > > > > >
+> > > > > > This fixes a following QA issue:
+> > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
+> > nativesdk-libicui18n,
+> > > > but it isn't a build dependency.
+> > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on nativesdk-libicuuc,
+> > but
+> > > > it isn't a build dependency.
+> > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
+> > nativesdk-libicudata,
+> > > > but it isn't a build dependency.
+> > > > >
+> > > > > It seems there's inconsistency here between errors above referring to
+> > > > > nativesdk-qtbase-tools and the change below made to qttools instead
+> > of
+> > > > > qtbase!
+> > > > >
+> > > > > I wonder if this fix was not included by the author:
+> > > > >
+> > > > > https://github.com/meta-qt5/meta-qt5/commit/
+> > > > ff073f04109900fc07bf81e2f1df63c626caf342
+> > > > >
+> > > > > Just to double-check, I just built nativesdk-qttools using meta-qt5
+> > w/o
+> > > > this
+> > > > > patch and I don't see the above QA errors.
+> > > > >
+> > > > > --
+> > > > > Denys
+> > > > >
+> > > > >
+> > > > > > Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+> > > > > > ---
+> > > > > >  recipes-qt/qt5/qttools_git.bb | 2 +-
+> > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > >
+> > > > > > diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/
+> > > > qttools_git.bb
+> > > > > > index 5c0f51c..1108390 100644
+> > > > > > --- a/recipes-qt/qt5/qttools_git.bb
+> > > > > > +++ b/recipes-qt/qt5/qttools_git.bb
+> > > > > > @@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
+> > > > > >
+> > > > > >  inherit ptest
+> > > > > >
+> > > > > > -DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
+> > > > > > +DEPENDS += "qtbase qtdeclarative qtxmlpatterns icu"
+> > > > > >
+> > > > > >  SRC_URI += " \
+> > > > > >      file://run-ptest \
+> > > > > > --
+> > > > > > 2.7.4
+> > > > > >
+> > > > > > --
+> > > > > > _______________________________________________
+> > > > > > Openembedded-devel mailing list
+> > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > > > --
+> > > > > _______________________________________________
+> > > > > Openembedded-devel mailing list
+> > > > > Openembedded-devel@lists.openembedded.org
+> > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > >
+> >
 
