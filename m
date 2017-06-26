@@ -1,49 +1,48 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 018C777F38
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f180.google.com (mail-yb0-f180.google.com
+	[209.85.213.180])
+	by mail.openembedded.org (Postfix) with ESMTP id E5E0A71AD1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 15:11:33 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id i127so474237wma.0
+	Mon, 26 Jun 2017 15:26:26 +0000 (UTC)
+Received: by mail-yb0-f180.google.com with SMTP id s9so1444354ybe.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 08:11:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=+3vnObnOv3B2rhDlPy9iAzyaZ1he3nzdm01kn597LqI=;
-	b=ho8YQmZHUlS3V0LjUEtmZ1s5YQjpObVbv6Ba3QTY0ZJTiCSQ5LXCxu/V0PDU3Gl7pl
-	WgKJAA8mfYUh7VXHiKcCaZnXpNhF7jb/sz7tXtBu2tpEfplQqkiA7fhfxfjjUnINY896
-	rb4EWeSFZjxfzuF4YkdNV55CKkRW/yz5SBV6aN9xcWQE1UWAy95tMsWPoRCbBUFh2rRd
-	0Tdq7CIYMp/76BLZgyliSZdHz0YjvRGA8VVtxvEKgEFO2dWWTwNb9Wb4E2xmz6m3F5Mz
-	4It3U3btRHGvvdptawuvxiiOzl74mJECspzOvCT6ZjOtlVpBhqtwr7LqDlJY2UpTJJWC
-	eH4Q==
+	Mon, 26 Jun 2017 08:26:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=DmF4mDoNjRfNK5wUPH1Q1ycVN0uTi78LJ7wJTfQ4D0I=;
+	b=YtHckbZ8+XjRJeL4EFCyLmjScSnFA0qXBtzAf8AfemZbtkOu/ZO6yzZp4I6HwlbZ4z
+	aYijMGRCbNmelPyS+HSsGjtWLoZ8UaLaSC4AO4nMdAbZ1F7x/X0/E2iKGh46MdZT99sz
+	pTP5hqMwkI4YrkYXi1fN4VfElSJZgUWU+qY+8qQ0L4GFOsBmD+4igXjrPa2y27hdbmyv
+	OrFnczowdOTwr9cVy9jUQfuNtaKSPvBRQb+wO46WHgdgBNxTr2CfbdBYcZaIegbr2lv8
+	Sr/42UgyBlpdHKShiKosF2zfSVT7JwMsaraHlOF8suBcHrjhi/dbDTleGqo6wi9+UD8T
+	zVUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references;
-	bh=+3vnObnOv3B2rhDlPy9iAzyaZ1he3nzdm01kn597LqI=;
-	b=ng4L2Dqp6/9n33iX2u/XqlZzOZh5KcI4Fue4EjGMw1UcNmJGacc9E6alpaUW4uhgIk
-	drT6tbKl4Icz6ZfcuS5ZMunBLX0ecwCus7ceJJXEHdp2lyr7FU22a1vranG+oA2jCABW
-	b9v3/IU7J3GduSAN0PgGA3VHvZUSQFhHdkR2ehXYVyLtMb0Z1vCn2pJlXef7c3OO9yJ6
-	aHjKR7g9U8CLXMpD78+76uENTuWueoQE9BTxUvfj1SeKvlB+w1H/JhUjDEpmaBv9L1lT
-	QdC1cHCM4bxTIc0I1U1TiwfJyDknvauXubPyTzEMMoDxUG9GLTfyuf+ZeRRFTDnXDXPR
-	rosg==
-X-Gm-Message-State: AKS2vOzXfB3E3rWYQOFx1JxJKWJRfXNAzBs0Z56aMwaipVvb7axASaZN
-	z/s+C4fLeFJ9J8538Qo=
-X-Received: by 10.28.45.133 with SMTP id t127mr103wmt.107.1498489894392;
-	Mon, 26 Jun 2017 08:11:34 -0700 (PDT)
-Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
-	by smtp.gmail.com with ESMTPSA id d91sm368379wma.7.2017.06.26.08.11.33
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Jun 2017 08:11:33 -0700 (PDT)
-From: Ross Burton <ross.burton@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jun 2017 16:11:17 +0100
-Message-Id: <20170626151117.6221-8-ross.burton@intel.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <20170626151117.6221-1-ross.burton@intel.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=DmF4mDoNjRfNK5wUPH1Q1ycVN0uTi78LJ7wJTfQ4D0I=;
+	b=p7UtLiXROxeL+sHsS8yR+CtnojJgBS9ZIzlkf34R/uJh+z/scAI8hcCSLP1VHJyj4L
+	s7fVSjLZcT379CLiBua4Jah+B6oy1t22Ae6rkoh35P4DPIPaUKRCd5vHbdWiZARPidoO
+	mT/RG2Sl6Nqby+9fYKfhTQkupo4q3LSVk+bobtoySo8J69pdEkLn7p34pExDbMf5/val
+	vPjColTwtyyTMIcxmzgVIu90yzF+ncdSASQxKYgCHu5LMn+EgwzFnwmvGTnmTMiZH8ce
+	JjMvJWOIUBm24AW3plTQpUxp2eyyoF49HwY7pvn1NuGFblzO4i8jMFzy9XuSDVHOcc/i
+	l8IA==
+X-Gm-Message-State: AKS2vOxFZMjA0u2/5slYWQdNO63nBum/8Fdc5PGmVhOudFkr6y3gzQGr
+	azWpes8N8VFk+yxQHq0ipuqErTOS8Q==
+X-Received: by 10.37.228.70 with SMTP id b67mr569514ybh.28.1498490788202; Mon,
+	26 Jun 2017 08:26:28 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.181.204 with HTTP; Mon, 26 Jun 2017 08:26:27 -0700 (PDT)
+In-Reply-To: <20170626151117.6221-7-ross.burton@intel.com>
 References: <20170626151117.6221-1-ross.burton@intel.com>
-Subject: [meta-oe][PATCH 8/8] meson: set native tool flag variables
+	<20170626151117.6221-7-ross.burton@intel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 26 Jun 2017 17:26:27 +0200
+Message-ID: <CA+chaQfwLN87QvhhwCBaw-NtgvtcOFub-rSCcoxjAD=QKkQRMg@mail.gmail.com>
+To: Ross Burton <ross.burton@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 7/8] meson: use tarball instead of git checkout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,34 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 15:11:34 -0000
+X-List-Received-Date: Mon, 26 Jun 2017 15:26:28 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-As well as setting CC/CXX, export CFLAGS/CXXFLAGS and so on.
+I still don't trust github archives/releases, can we skip this one?
 
-Signed-off-by: Ross Burton <ross.burton@intel.com>
----
- meta-oe/classes/meson.bbclass | 4 ++++
- 1 file changed, 4 insertions(+)
+On Mon, Jun 26, 2017 at 5:11 PM, Ross Burton <ross.burton@intel.com> wrote:
 
-diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
-index b5b2b3b7e..7eeff4210 100644
---- a/meta-oe/classes/meson.bbclass
-+++ b/meta-oe/classes/meson.bbclass
-@@ -10,9 +10,13 @@ do_configure[cleandirs] = "${B}"
- MESON_SOURCEPATH = "${S}"
- 
- # These variables in the environment override the *native* tools, not the cross.
-+export CPPFLAGS = "${BUILD_CPPFLAGS}"
- export CC = "${BUILD_CC}"
-+export CFLAGS = "${BUILD_CFLAGS}"
- export CXX = "${BUILD_CXX}"
-+export CXXFLAGS = "${BUILD_CXXFLAGS}"
- export LD = "${BUILD_LD}"
-+export LDFLAGS = "${BUILD_LDFLAGS}"
- export AR = "${BUILD_AR}"
- export PKG_CONFIG = "pkg-config-native"
- 
--- 
-2.11.0
-
+> Signed-off-by: Ross Burton <ross.burton@intel.com>
+> ---
+>  meta-oe/recipes-devtools/meson/meson_0.40.1.bb | 10 +++-------
+>  1 file changed, 3 insertions(+), 7 deletions(-)
+>
+> diff --git a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> index ab54b8c79..f33256a10 100644
+> --- a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> +++ b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+> @@ -4,13 +4,9 @@ SUMMARY = "A high performance build system"
+>  LICENSE = "Apache-2.0"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
+>
+> -SRC_URI = " \
+> -    git://github.com/mesonbuild/meson.git \
+> -"
+> -
+> -SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
+> -
+> -S = "${WORKDIR}/git"
+> +SRC_URI = "https://github.com/mesonbuild/meson/releases/
+> download/${PV}/${BP}.tar.gz"
+> +SRC_URI[md5sum] = "8475b19d5f5f3bd5c40f4bb1f31b93f3"
+> +SRC_URI[sha256sum] = "890ce46e713ea0d061f8203c99fa7d
+> 38645354a62e4c207c38ade18db852cbf5"
+>
+>  inherit setuptools3
+>
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
