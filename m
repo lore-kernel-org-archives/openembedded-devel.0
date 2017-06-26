@@ -1,44 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id D6E1F77E4A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f176.google.com (mail-yb0-f176.google.com
+	[209.85.213.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C38877E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 14:22:44 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id i127so2915480wma.0
+	Mon, 26 Jun 2017 14:24:41 +0000 (UTC)
+Received: by mail-yb0-f176.google.com with SMTP id b81so899100yba.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 07:22:46 -0700 (PDT)
+	Mon, 26 Jun 2017 07:24:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=QPJLzHuMvE9Ct4OWOSkd0959/+OGMwnl8J+3mq/57Pg=;
-	b=eDHB+WM2mIcmyA96T4tXl7LSDnfH/djIGty55U66YMW6YL0/75gOaHVKjy36BEZun7
-	M1+5dz5oCpnOQoW2BlRWHM1tk1hH3yZYmS1Pasb4zlXeDzrTNhjRxzWEijUwSc/VFtce
-	bWU0fxcuTKyqvVM19sZ6GI9WkhsSH5RrDr5qYehI1wYMZkDUMogDJdAjMOnlUnWg4oFC
-	Y5F/eoP7y4+vaPHPTHT3Wj5f9V0jrQJ1acZKOOqw64JrF6d4I5Z+g0IcnSTAK9qIc7Lv
-	IVNKYN26bKoJuH+R39JCEkDklHI/5LLa8fgVKcSmIZ8eZRyM4vIGLaEePxhpLP3xk3k5
-	ZoJw==
+	:cc; bh=3/n5HWUHtRyfEwiXmEGBKMAZni70EP6/mO53h/aQL4c=;
+	b=trCdqVu5xCHR594Qy5LQMHXrJr83CB3D6LN/cOn5mtWB3funyqyLwplajrU/qWCTwN
+	ir3DicSY5PnnaqGUrcTyiidDT0U6xeRkAD/6Z+R7dHlUcwtYfFNQUofnGEsZ/D+vDwer
+	rWTEDBhVvsLvhAafXowXc/P4SlhGqiT44Gd4eWOGxbvF3CfDvCB3gNjcc45L5d6bMWxg
+	R/C+S4E9nsSXhdYsBReRg0TTBL1jrXd+VaDA80/zKoSa0+lLx3XByyepl6HGP3k3EhU/
+	p5WB7+/nq087GoT35tEC2mzZi/px0bmsimrKpvO9NROAJhk0EpHwHp8r6Kwr4V64Ul0A
+	x9tQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=QPJLzHuMvE9Ct4OWOSkd0959/+OGMwnl8J+3mq/57Pg=;
-	b=oZvGEelkcc3Nl/oJwdpUFxR7Y/kEKkZaVNiq5wox9oKhQ/VgYY0NPjeOAoEdQBcgdn
-	HcTQYLDMk6pTmwcvaIBkJHwO39ypoPimS2bLDFKpJihq/rfTzu0vaTiGa3fD7g6HG7u5
-	qe/4e+1dTnIYJZ/XluXFB0lgBN3COyujZLEasLqz1S8kLtZe4wh2NUznlmBKW/GsS0Ux
-	hOoYunIYYhs7wARkKA3EcTl5PRGoXsxf/K+nr8cyfCCv+cHJsAbMk0GK6aNpOqB2ggpd
-	tAptu++NEX9XeZcF+Xv3pvV7CAoD5A+LFqb935Lf7hf5CLo4l1qogWXTyOwgwrXHIUjv
-	30sw==
-X-Gm-Message-State: AKS2vOzqGLUgyfk4FqL01N/DoxUu+XABtkqRQXnT+zAbruGHMlwV9KiO
-	HoK9SJ7sfRv0bJnjH9H1v2u2jmRsmg==
-X-Received: by 10.80.131.6 with SMTP id 6mr317285edh.178.1498486965150; Mon,
-	26 Jun 2017 07:22:45 -0700 (PDT)
+	bh=3/n5HWUHtRyfEwiXmEGBKMAZni70EP6/mO53h/aQL4c=;
+	b=fykUQhpI62RdAEatBYXu5OiAoGkueH+NYexqovwrmodxcpy9EwYXEufjVWLFXyqzbD
+	04M/cPfHHaLgJarHhp/i0xDHTLPix2InbfAk1OzkpbmoxOd3hfEiLHl//lxmEZb/+eNa
+	LMgCRYANuvY/G/Z+AGFZKfw4OaCnpC/30Dznlop+55O51TlSuWzg1+gmuwJbrMweRrs3
+	3F2bC5o+DZINDK+o562Fmu7mVME+RlyJyfW2WzQhTIvAtprWcNuDlm0yPxHUKFPB9rp8
+	wYd2XPgC4SqpVeyEV2/4DUoNAIhzrexHsWP3oa+TVlcEs0fAHqDOdWRejcWFa+89S3wy
+	ENoQ==
+X-Gm-Message-State: AKS2vOx9+btVii74Nk6dkHsgoNe6HTD7r4Rh+KNCw51EPfE86KbtfHft
+	wMGK9SFaYqSrgqYww778BB2OcDMLmw==
+X-Received: by 10.37.228.70 with SMTP id b67mr361804ybh.28.1498487082357; Mon,
+	26 Jun 2017 07:24:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.165.198 with HTTP; Mon, 26 Jun 2017 07:22:14 -0700 (PDT)
-In-Reply-To: <20170626053446.37959-5-raj.khem@gmail.com>
+Received: by 10.37.181.204 with HTTP; Mon, 26 Jun 2017 07:24:41 -0700 (PDT)
+In-Reply-To: <CAMKF1sq6vXcOZDA7+4vaV5ixhFUPRs72fzssa0h6i6VkNu+iDw@mail.gmail.com>
 References: <20170626053446.37959-1-raj.khem@gmail.com>
 	<20170626053446.37959-5-raj.khem@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Jun 2017 07:22:14 -0700
-Message-ID: <CAMKF1sq6vXcOZDA7+4vaV5ixhFUPRs72fzssa0h6i6VkNu+iDw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAMKF1sq6vXcOZDA7+4vaV5ixhFUPRs72fzssa0h6i6VkNu+iDw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 26 Jun 2017 16:24:41 +0200
+Message-ID: <CA+chaQdgkooaK3k_K=KVRQ+NK8S6-=WbGO8OfP7LCcg0BgY8GQ@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 5/7] hwloc: Inherit pkgconfig
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -52,42 +56,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 14:22:45 -0000
+X-List-Received-Date: Mon, 26 Jun 2017 14:24:41 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi Martin
+Hi Khem,
 
+thanks for info, for some reason I haven't seen hwloc failing without
+pkgconfig before.
 
-I see that you did not pick this into master-next but this patch is independent
-of the other patch where you have comments to address. Although they
-address same package this patch is not depening on that patch, however
-that patch does depend on this one. So you can cherry pick this one regardless.
+So when it failed to apply without the PACKAGECONFIG one, I just dropped it
+assuming that it's not needed now.
 
-On Sun, Jun 25, 2017 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> Fixes
-> | checking for LIBXML2... cannot check without pkg-config
-> | configure: WARNING: --enable-libxml2 requested, but libxml2 was not found
-> | configure: error: Cannot continue
+Will try to remember to cherry-pick this next time I'm updating master-next.
+
+Regards,
+
+On Mon, Jun 26, 2017 at 4:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Hi Martin
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
 >
-> diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> index 16cd507e6..1194af0d2 100644
-> --- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> +++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> @@ -11,7 +11,7 @@ SRC_URI = "https://www.open-mpi.org/software/${PN}/v1.11/downloads/${BP}.tar.bz2
->  SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
->  SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac90698782bb36e5504f4bac1bba2394ba14dbbad24"
+> I see that you did not pick this into master-next but this patch is
+> independent
+> of the other patch where you have comments to address. Although they
+> address same package this patch is not depening on that patch, however
+> that patch does depend on this one. So you can cherry pick this one
+> regardless.
 >
-> -inherit autotools
-> +inherit autotools pkgconfig
->
->  DEPENDS += "ncurses udev zlib"
->  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux', 'libselinux', '', d)}"
+> On Sun, Jun 25, 2017 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > Fixes
+> > | checking for LIBXML2... cannot check without pkg-config
+> > | configure: WARNING: --enable-libxml2 requested, but libxml2 was not
+> found
+> > | configure: error: Cannot continue
+> >
+> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> > ---
+> >  meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 2 +-
+> >  1 file changed, 1 insertion(+), 1 deletion(-)
+> >
+> > diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+> b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+> > index 16cd507e6..1194af0d2 100644
+> > --- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+> > +++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
+> > @@ -11,7 +11,7 @@ SRC_URI = "https://www.open-mpi.org/
+> software/${PN}/v1.11/downloads/${BP}.tar.bz2
+> >  SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
+> >  SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac9069878
+> 2bb36e5504f4bac1bba2394ba14dbbad24"
+> >
+> > -inherit autotools
+> > +inherit autotools pkgconfig
+> >
+> >  DEPENDS += "ncurses udev zlib"
+> >  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux',
+> 'libselinux', '', d)}"
+> > --
+> > 2.13.1
+> >
 > --
-> 2.13.1
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
