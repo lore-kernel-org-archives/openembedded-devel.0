@@ -1,49 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yb0-f176.google.com (mail-yb0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 8C38877E4A
+Return-Path: <ross.burton@intel.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id A030C77E44
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 14:24:41 +0000 (UTC)
-Received: by mail-yb0-f176.google.com with SMTP id b81so899100yba.2
+	Mon, 26 Jun 2017 15:11:28 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id k67so145648694wrc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 07:24:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=3/n5HWUHtRyfEwiXmEGBKMAZni70EP6/mO53h/aQL4c=;
-	b=trCdqVu5xCHR594Qy5LQMHXrJr83CB3D6LN/cOn5mtWB3funyqyLwplajrU/qWCTwN
-	ir3DicSY5PnnaqGUrcTyiidDT0U6xeRkAD/6Z+R7dHlUcwtYfFNQUofnGEsZ/D+vDwer
-	rWTEDBhVvsLvhAafXowXc/P4SlhGqiT44Gd4eWOGxbvF3CfDvCB3gNjcc45L5d6bMWxg
-	R/C+S4E9nsSXhdYsBReRg0TTBL1jrXd+VaDA80/zKoSa0+lLx3XByyepl6HGP3k3EhU/
-	p5WB7+/nq087GoT35tEC2mzZi/px0bmsimrKpvO9NROAJhk0EpHwHp8r6Kwr4V64Ul0A
-	x9tQ==
+	Mon, 26 Jun 2017 08:11:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:subject:date:message-id;
+	bh=4JiuxajDExfYf+V77tBA178pbDUVlz+ZZoig/PLp+dg=;
+	b=bh4aTJUMkpk0bBE7bk6x9UGeJAjdc+AQnnCvm+22Ik5MV6YSWe4a2D5cVia1dq0KtS
+	KfkT4QEI/qgxwoQ+YujNx4WS7cWXA/bsIAVjicWOJJJGBJDm0CCvyX1Nrl2G8+dUjVIZ
+	pa232qsLLpL45wLpaE884ojMDQEahzLLrPZCRVNiEDxa2+NutpVZFTi2LlmTBJ9sNpSU
+	bTYBnKo+yQJg6ggu3UKJtFZWD/x5bNWLZFSONhRItLY6PA928enSKzV7uTRTNcvmckI/
+	ISJJlhEqZn1JcppnMGXl36jIH3mhCW5I/mzNZYkEqOP8FEFaF8h4rJ3aXn1d0psYwmr4
+	Y73Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=3/n5HWUHtRyfEwiXmEGBKMAZni70EP6/mO53h/aQL4c=;
-	b=fykUQhpI62RdAEatBYXu5OiAoGkueH+NYexqovwrmodxcpy9EwYXEufjVWLFXyqzbD
-	04M/cPfHHaLgJarHhp/i0xDHTLPix2InbfAk1OzkpbmoxOd3hfEiLHl//lxmEZb/+eNa
-	LMgCRYANuvY/G/Z+AGFZKfw4OaCnpC/30Dznlop+55O51TlSuWzg1+gmuwJbrMweRrs3
-	3F2bC5o+DZINDK+o562Fmu7mVME+RlyJyfW2WzQhTIvAtprWcNuDlm0yPxHUKFPB9rp8
-	wYd2XPgC4SqpVeyEV2/4DUoNAIhzrexHsWP3oa+TVlcEs0fAHqDOdWRejcWFa+89S3wy
-	ENoQ==
-X-Gm-Message-State: AKS2vOx9+btVii74Nk6dkHsgoNe6HTD7r4Rh+KNCw51EPfE86KbtfHft
-	wMGK9SFaYqSrgqYww778BB2OcDMLmw==
-X-Received: by 10.37.228.70 with SMTP id b67mr361804ybh.28.1498487082357; Mon,
-	26 Jun 2017 07:24:42 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.37.181.204 with HTTP; Mon, 26 Jun 2017 07:24:41 -0700 (PDT)
-In-Reply-To: <CAMKF1sq6vXcOZDA7+4vaV5ixhFUPRs72fzssa0h6i6VkNu+iDw@mail.gmail.com>
-References: <20170626053446.37959-1-raj.khem@gmail.com>
-	<20170626053446.37959-5-raj.khem@gmail.com>
-	<CAMKF1sq6vXcOZDA7+4vaV5ixhFUPRs72fzssa0h6i6VkNu+iDw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 26 Jun 2017 16:24:41 +0200
-Message-ID: <CA+chaQdgkooaK3k_K=KVRQ+NK8S6-=WbGO8OfP7LCcg0BgY8GQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 5/7] hwloc: Inherit pkgconfig
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=4JiuxajDExfYf+V77tBA178pbDUVlz+ZZoig/PLp+dg=;
+	b=Twf8v3ERc+UbwGIRqhcciOEtMgllm0XUkENpD5Mgg5/9Si8Y/JB70DFiGDRzRGyhLR
+	8oaIZiet+Uz7gX9kedmcviKL4crjbeZjCYwmBnXr5W8sK+0ySpQNeW2fykuqP982Zzmz
+	ydm2K4/M1Nlf+aKhdMveZCZ4XhV/HQhtJcRdeRTeN7KilX/LQB+04NODlVrW4L+aVDI/
+	R0GOiD7ZCkuNC77iFGma/6kCJ7tuQF2yij+/RN1rTxSODY2j+9iC3MrJ0NcQV3HjOGA4
+	EuIlGeRY7RyKd8YCvCJeV2nCtgcTRWDVf5LEw2G77K3EglAXVzsUXks09m3oVj8mRyW1
+	6XHQ==
+X-Gm-Message-State: AKS2vOy/k+eHE9Oxgv2Ki7bdVkQjI6TbD+NUX2ORv5oo5tr50eI61GUv
+	VTneo+21Y/PR9RnN5no=
+X-Received: by 10.223.176.253 with SMTP id j58mr13386052wra.65.1498489889044; 
+	Mon, 26 Jun 2017 08:11:29 -0700 (PDT)
+Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id d91sm368379wma.7.2017.06.26.08.11.27
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Jun 2017 08:11:28 -0700 (PDT)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Jun 2017 16:11:10 +0100
+Message-Id: <20170626151117.6221-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-oe][PATCH 1/8] meson: revert changes which shouldn't have been submitted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,69 +54,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 14:24:41 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 26 Jun 2017 15:11:29 -0000
 
-Hi Khem,
+From Adam Foltzer:
 
-thanks for info, for some reason I haven't seen hwloc failing without
-pkgconfig before.
+  Apologies, this line was inadvertently committed. It was a fix I tried before
+  learning that adding TARGET_CC_ARCH was the solution to linking the wrong
+  ld.so.
 
-So when it failed to apply without the PACKAGECONFIG one, I just dropped it
-assuming that it's not needed now.
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ meta-oe/classes/meson.bbclass | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Will try to remember to cherry-pick this next time I'm updating master-next.
+diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
+index 2c48a7eb9..cc9bc505b 100644
+--- a/meta-oe/classes/meson.bbclass
++++ b/meta-oe/classes/meson.bbclass
+@@ -75,7 +75,7 @@ endian = '${MESON_HOST_ENDIAN}'
+ [target_machine]
+ system = '${TARGET_OS}'
+ cpu_family = '${TARGET_ARCH}'
+-cpu = '${TUNE_PKGARCH}'
++cpu = '${TARGET_ARCH}'
+ endian = '${MESON_TARGET_ENDIAN}'
+ EOF
+ }
+-- 
+2.11.0
 
-Regards,
-
-On Mon, Jun 26, 2017 at 4:22 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Hi Martin
->
->
-> I see that you did not pick this into master-next but this patch is
-> independent
-> of the other patch where you have comments to address. Although they
-> address same package this patch is not depening on that patch, however
-> that patch does depend on this one. So you can cherry pick this one
-> regardless.
->
-> On Sun, Jun 25, 2017 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> > Fixes
-> > | checking for LIBXML2... cannot check without pkg-config
-> > | configure: WARNING: --enable-libxml2 requested, but libxml2 was not
-> found
-> > | configure: error: Cannot continue
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> > index 16cd507e6..1194af0d2 100644
-> > --- a/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> > +++ b/meta-oe/recipes-extended/hwloc/hwloc_1.11.5.bb
-> > @@ -11,7 +11,7 @@ SRC_URI = "https://www.open-mpi.org/
-> software/${PN}/v1.11/downloads/${BP}.tar.bz2
-> >  SRC_URI[md5sum] = "96c34136ff416d2b13a7821c27477bed"
-> >  SRC_URI[sha256sum] = "95d80286dfe658a3f79e2ac9069878
-> 2bb36e5504f4bac1bba2394ba14dbbad24"
-> >
-> > -inherit autotools
-> > +inherit autotools pkgconfig
-> >
-> >  DEPENDS += "ncurses udev zlib"
-> >  DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'selinux',
-> 'libselinux', '', d)}"
-> > --
-> > 2.13.1
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
