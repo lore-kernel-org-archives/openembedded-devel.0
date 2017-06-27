@@ -1,38 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id A05046093F
+Return-Path: <amery@hanoverdisplays.com>
+Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CA9B67780A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jun 2017 07:40:49 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="20532374"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 27 Jun 2017 15:40:42 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 949B147E64D5;
-	Tue, 27 Jun 2017 15:40:39 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0319.002; Tue, 27 Jun 2017 15:40:39 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Thread-Topic: [oe]  [meta-qt5] [PATCH] qtbase: add ptest
-Thread-Index: AQHS5GGO6yb30qCsdUSCbo2V2F938qI4Qk8A
-Date: Tue, 27 Jun 2017 07:40:38 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C60E021931@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<20170613162425.GC28053@denix.org>
-In-Reply-To: <20170613162425.GC28053@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.226.81]
+	Tue, 27 Jun 2017 08:38:37 +0000 (UTC)
+Received: from localhost (192.168.0.21) by mail.hanoverdisplays.com
+	(192.168.0.31) with Microsoft SMTP Server (TLS) id 14.3.319.2;
+	Tue, 27 Jun 2017 09:38:37 +0100
+From: Alejandro Mery <amery@hanoverdisplays.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 27 Jun 2017 09:38:13 +0100
+Message-ID: <20170627083813.118669-1-amery@hanoverdisplays.com>
+X-Mailer: git-send-email 2.13.0
+In-Reply-To: <20170623202324.69194-1-amery@hanoverdisplays.com>
+References: <20170623202324.69194-1-amery@hanoverdisplays.com>
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 949B147E64D5.A9EC4
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
+X-Originating-IP: [192.168.0.21]
+X-GFI-SMTP-Submission: 1
+X-GFI-SMTP-HelloDomain: localhost
+X-GFI-SMTP-RemoteIP: 192.168.0.21
+Subject: [meta-oe][morty][PATCH v2 5/6] gitver: fix broken ${GITSHA} and recursion in S when PV="${GITVER}"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,121 +31,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jun 2017 07:40:50 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 27 Jun 2017 08:38:38 -0000
+Content-Type: text/plain
 
-SGkgRGVueXMNCg0KQ29tcGlsZSBmYWlscyB3aGVuIEkgYWRkIHB0ZXN0LHNv
-IEkgYWRkIGEgcGF0Y2ggdG8gZGVsZXRlIHFsb25nbG9uZyBhbmQgcXVsb25n
-bG9uZy4gTWF5YmUgaXQgaXMgbm90IGNvbXBhdGlibGUgd2l0aCBnY2MuSSB3
-aWxsIGZpeCB0aGlzIGVycm9yIHdoZW4gSSBmaW5kIGEgYmV0dGVyIHdheS4N
-Cg0KSHVhbmcgUWl5dQ0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0tLS0t
-DQo+IEZyb206IERlbnlzIERteXRyaXllbmtvIFttYWlsdG86ZGVuaXNAZGVu
-aXgub3JnXQ0KPiBTZW50OiBXZWRuZXNkYXksIEp1bmUgMTQsIDIwMTcgMTI6
-MjQgQU0NCj4gVG86IEh1YW5nLCBRaXl1IDxodWFuZ3F5LmZuc3RAY24uZnVq
-aXRzdS5jb20+DQo+IENjOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZw0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1xdDVd
-IFtQQVRDSF0gcXRiYXNlOiBhZGQgcHRlc3QNCj4gDQo+IE9uIEZyaSwgSnVu
-IDA5LCAyMDE3IGF0IDA5OjA2OjI1QU0gKzA4MDAsIEh1YW5nIFFpeXUgd3Jv
-dGU6DQo+ID4gQWRkIHB0ZXN0IGZvciBxdGJhc2UgIGJ5IHVzaW5nIHByb3Zp
-ZGVkIHRlc3RzdWl0ZS4NCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEh1YW5n
-IFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gPiAtLS0N
-Cj4gPiAgLi4uLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1hbmQtcXVsb25nbG9u
-Zy5wYXRjaCAgICAgfCAyOA0KPiArKysrKysrKysrKysrKysrKysrKysrDQo+
-ID4gIHJlY2lwZXMtcXQvcXQ1L3F0YmFzZS9ydW4tcHRlc3QgICAgICAgICAg
-ICAgICAgICAgIHwgIDYgKysrKysNCj4gPiAgcmVjaXBlcy1xdC9xdDUvcXRi
-YXNlX2dpdC5iYiAgICAgICAgICAgICAgICAgICAgICAgfCAxNw0KPiArKysr
-KysrKysrKystDQo+ID4gIDMgZmlsZXMgY2hhbmdlZCwgNTAgaW5zZXJ0aW9u
-cygrKSwgMSBkZWxldGlvbigtKSAgY3JlYXRlIG1vZGUgMTAwNjQ0DQo+ID4g
-cmVjaXBlcy1xdC9xdDUvcXRiYXNlLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1h
-bmQtcXVsb25nbG9uZy5wYXRjaA0KPiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQg
-cmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1bi1wdGVzdA0KPiA+DQo+ID4gZGlm
-ZiAtLWdpdA0KPiA+IGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlLzAwMDEtRGVs
-ZXRlLXFsb25nbG9uZy1hbmQtcXVsb25nbG9uZy5wYXRjaA0KPiA+IGIvcmVj
-aXBlcy1xdC9xdDUvcXRiYXNlLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1hbmQt
-cXVsb25nbG9uZy5wYXRjaA0KPiA+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+
-ID4gaW5kZXggMDAwMDAwMC4uOTc1Y2QyOA0KPiA+IC0tLSAvZGV2L251bGwN
-Cj4gPiArKysgYi9yZWNpcGVzLXF0L3F0NS9xdGJhc2UvMDAwMS1EZWxldGUt
-cWxvbmdsb25nLWFuZC1xdWxvbmdsb25nLnBhdGNoDQo+ID4gQEAgLTAsMCAr
-MSwyOCBAQA0KPiA+ICtGcm9tIGM2N2E0YWYyZTVkYjRjMWUyMjEzOTYxZTYz
-OTJiNTlhZmZkMTk1OWYgTW9uIFNlcCAxNyAwMDowMDowMA0KPiA+ICsyMDAx
-DQo+ID4gK0Zyb206IEh1YW5nIFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWpp
-dHN1LmNvbT4NCj4gPiArRGF0ZTogV2VkLCA3IEp1biAyMDE3IDIxOjAwOjQ5
-ICswOTAwDQo+ID4gK1N1YmplY3Q6IFtQQVRDSF0gRGVsZXRlIHFsb25nbG9u
-ZyBhbmQgcXVsb25nbG9uZw0KPiANCj4gMS4gUmVhc29uIGZvciB0aGlzPw0K
-PiAyLiBVcHN0cmVhbS1TdGF0dXM/DQo+IA0KPiANCj4gPiArU2lnbmVkLW9m
-Zi1ieTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29t
-Pg0KPiA+ICstLS0NCj4gPiArIHRlc3RzL2F1dG8vY29yZWxpYi90aHJlYWQv
-cWF0b21pY2ludGVnZXIvcWF0b21pY2ludGVnZXIucHJvIHwgMiAtLQ0KPiA+
-ICsgMSBmaWxlIGNoYW5nZWQsIDIgZGVsZXRpb25zKC0pDQo+ID4gKw0KPiA+
-ICtkaWZmIC0tZ2l0DQo+ID4gK2EvdGVzdHMvYXV0by9jb3JlbGliL3RocmVh
-ZC9xYXRvbWljaW50ZWdlci9xYXRvbWljaW50ZWdlci5wcm8NCj4gPiArYi90
-ZXN0cy9hdXRvL2NvcmVsaWIvdGhyZWFkL3FhdG9taWNpbnRlZ2VyL3FhdG9t
-aWNpbnRlZ2VyLnBybw0KPiA+ICtpbmRleCAwOTQ1OGJkLi41OWExMjBlIDEw
-MDY0NA0KPiA+ICstLS0gYS90ZXN0cy9hdXRvL2NvcmVsaWIvdGhyZWFkL3Fh
-dG9taWNpbnRlZ2VyL3FhdG9taWNpbnRlZ2VyLnBybw0KPiA+ICsrKysgYi90
-ZXN0cy9hdXRvL2NvcmVsaWIvdGhyZWFkL3FhdG9taWNpbnRlZ2VyL3FhdG9t
-aWNpbnRlZ2VyLnBybw0KPiA+ICtAQCAtNSwxMCArNSw4IEBAIFNVQkRJUlM9
-XA0KPiA+ICsgICAgIGNoYXIzMl90IFwNCj4gPiArICAgICBpbnQgXA0KPiA+
-ICsgICAgIGxvbmcgXA0KPiA+ICstICAgIHFsb25nbG9uZyBcDQo+ID4gKyAg
-ICAgcXB0cmRpZmYgXA0KPiA+ICsgICAgIHF1aW50cHRyIFwNCj4gPiArLSAg
-ICBxdWxvbmdsb25nIFwNCj4gPiArICAgICBzY2hhciBcDQo+ID4gKyAgICAg
-c2hvcnQgXA0KPiA+ICsgICAgIHVjaGFyIFwNCj4gPiArLS0NCj4gPiArMi43
-LjQNCj4gPiArDQo+ID4gZGlmZiAtLWdpdCBhL3JlY2lwZXMtcXQvcXQ1L3F0
-YmFzZS9ydW4tcHRlc3QNCj4gPiBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS9y
-dW4tcHRlc3QgbmV3IGZpbGUgbW9kZSAxMDA2NDQgaW5kZXgNCj4gPiAwMDAw
-MDAwLi4wNDRmODM0DQo+ID4gLS0tIC9kZXYvbnVsbA0KPiA+ICsrKyBiL3Jl
-Y2lwZXMtcXQvcXQ1L3F0YmFzZS9ydW4tcHRlc3QNCj4gPiBAQCAtMCwwICsx
-LDYgQEANCj4gPiArIyEvYmluL3NoDQo+ID4gKw0KPiA+ICtmb3IgeCBpbiBg
-IGF3ayAne3ByaW50ICQxfScgdHN0X2xpc3QgYDtkbw0KPiA+ICsgICAgLi8k
-e3h9Ow0KPiA+ICtkb25lDQo+ID4gKw0KPiA+IGRpZmYgLS1naXQgYS9yZWNp
-cGVzLXF0L3F0NS9xdGJhc2VfZ2l0LmJiDQo+ID4gYi9yZWNpcGVzLXF0L3F0
-NS9xdGJhc2VfZ2l0LmJiIGluZGV4IDI3ZDBkZTEuLjM5ZmMyNzIgMTAwNjQ0
-DQo+ID4gLS0tIGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYg0KPiA+
-ICsrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZV9naXQuYmINCj4gPiBAQCAt
-MjMsOCArMjMsMTIgQEAgU1JDX1VSSSArPSAiXA0KPiA+DQo+IGZpbGU6Ly8w
-MDA1LWNvbmZpZ3VyZS1idW1wLXBhdGgtbGVuZ3RoLWZyb20tMjU2LXRvLTUx
-Mi1jaGFyYWN0ZXIucGF0Y2ggXA0KPiA+ICAgICAgZmlsZTovLzAwMDktRGlz
-YWJsZS1hbGwtdW5rbm93bi1mZWF0dXJlcy1pbnN0ZWFkLW9mLWVycm9yaW5n
-LW91dC5wYXRjaA0KPiBcDQo+ID4NCj4gPg0KPiBmaWxlOi8vMDAxMC1QcmV0
-ZW5kLVF0NS13YXNuLXQtZm91bmQtaWYtT0VfUU1BS0VfUEFUSF9FWFRFUk5B
-TF9ILnBhdGNoDQo+ID4gXA0KPiA+ICsgICAgZmlsZTovLzAwMDEtRGVsZXRl
-LXFsb25nbG9uZy1hbmQtcXVsb25nbG9uZy5wYXRjaCBcDQo+ID4gKyAgICBm
-aWxlOi8vcnVuLXB0ZXN0IFwNCj4gPiAgIg0KPiA+DQo+ID4gK2luaGVyaXQg
-cHRlc3QNCj4gPiArDQo+ID4gICMgb25seSBmb3IgdGFyZ2V0IHF0YmFzZQ0K
-PiA+ICBTUkNfVVJJICs9ICJcDQo+ID4gICAgICBmaWxlOi8vMDAwOC1jb25m
-aWd1cmUtcGF0aHMtZm9yLXRhcmdldC1xbWFrZS1wcm9wZXJseS5wYXRjaCBc
-IEBADQo+ID4gLTQ4LDcgKzUyLDcgQEAgUEFDS0FHRUNPTkZJR19ESVNUUk8g
-Pz0gIiINCj4gPiAgUEFDS0FHRUNPTkZJR19SRUxFQVNFID89ICJyZWxlYXNl
-Ig0KPiA+ICAjIFRoaXMgaXMgaW4gcXQ1LmluYywgYmVjYXVzZSBxdHdlYmtp
-dC1leGFtcGxlcyBhcmUgdXNpbmcgaXQgdG8NCj4gPiBlbmFibGUgY2EtY2Vy
-dGlmaWNhdGVzIGRlcGVuZGVuY3kgICMgUEFDS0FHRUNPTkZJR19PUEVOU1NM
-ID89DQo+ICJvcGVuc3NsIg0KPiA+IC1QQUNLQUdFQ09ORklHX0RFRkFVTFQg
-Pz0gImRidXMgdWRldiBldmRldiB3aWRnZXRzIHRvb2xzIGxpYnMgZnJlZXR5
-cGUiDQo+ID4gK1BBQ0tBR0VDT05GSUdfREVGQVVMVCA/PSAiZGJ1cyB1ZGV2
-IGV2ZGV2IHdpZGdldHMgdG9vbHMgbGlicyBmcmVldHlwZQ0KPiB0ZXN0cyIN
-Cj4gPg0KPiA+ICBQQUNLQUdFQ09ORklHID89ICIgXA0KPiA+ICAgICAgJHtQ
-QUNLQUdFQ09ORklHX1JFTEVBU0V9IFwNCj4gPiBAQCAtMTcwLDYgKzE3NCwx
-NyBAQCBkb19jb25maWd1cmUoKSB7DQo+ID4gICAgICAgICAgJHtRVF9DT05G
-SUdfRkxBR1N9DQo+ID4gIH0NCj4gPg0KPiA+ICtmYWtlcm9vdCBkb19pbnN0
-YWxsX3B0ZXN0KCkgew0KPiA+ICsgICAgbWtkaXIgLXAgJHtEfSR7UFRFU1Rf
-UEFUSH0NCj4gPiArICAgIHQ9JHtEfSR7UFRFU1RfUEFUSH0NCj4gPiArICAg
-IGZvciB2YXIgaW4gYCBmaW5kICR7Qn0vdGVzdHMvYXV0by8gLW5hbWUgdHN0
-XypgOyBkbw0KPiA+ICsgICAgICAgIGlmIFsgbm90IGAgZWNobyAke3ZhciMj
-Ki99IHwgZ3JlcCAnXC4nYCBdOyB0aGVuDQo+ID4gKyAgICAgICAgICAgIGVj
-aG8gJHt2YXIjIyovfSA+PiAke3R9L3RzdF9saXN0DQo+ID4gKyAgICAgICAg
-ICAgIGluc3RhbGwgLW0gMDY0NCAke3Zhcn0gJHt0fQ0KPiA+ICsgICAgICAg
-IGZpDQo+ID4gKyAgICBkb25lDQo+ID4gK30NCj4gPiArDQo+ID4gIGRvX2lu
-c3RhbGxfYXBwZW5kKCkgew0KPiA+ICAgICAgIyBBdm9pZCBxbWFrZSBlcnJv
-ciAiQ2Fubm90IHJlYWQNCj4gWy4uLl0vdXNyL2xpYi9xdDUvbWtzcGVjcy9v
-ZS1kZXZpY2UtZXh0cmEucHJpOiBObyBzdWNoIGZpbGUgb3IgZGlyZWN0b3J5
-Ig0KPiA+ICAgICAgdG91Y2gNCj4gPiAke0R9LyR7T0VfUU1BS0VfUEFUSF9R
-VF9BUkNIREFUQX0vbWtzcGVjcy9vZS1kZXZpY2UtZXh0cmEucHJpDQo+ID4g
-LS0NCj4gPiAyLjcuNA0KPiA+DQo+ID4NCj4gPg0KPiA+IC0tDQo+ID4gX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18N
-Cj4gPiBPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3Bl
-bmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCj4gPiBo
-dHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3RpbmZv
-L29wZW5lbWJlZGRlZC1kZXZlbA0KPiANCg0KCgo=
+v2:
+* use git rev-parse instead of rev-list for consistency with get_git_pv
+* fix getVar() to pass `expand` as required by morty's bitbake
+
+Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/classes/gitver.bbclass | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbclass
+index adb434a46..875a3d79d 100644
+--- a/meta-oe/classes/gitver.bbclass
++++ b/meta-oe/classes/gitver.bbclass
+@@ -13,16 +13,15 @@ def git_drop_tag_prefix(version):
+         return version
+ 
+ GIT_TAGADJUST = "git_drop_tag_prefix(version)"
+-GITVER = "${@get_git_pv('${S}', d, tagadjust=lambda version:${GIT_TAGADJUST})}"
+-GITSHA = "${@get_git_hash('${S}', d)}"
++GITVER = "${@get_git_pv(d, tagadjust=lambda version:${GIT_TAGADJUST})}"
++GITSHA = "${@get_git_hash(d)}"
+ 
+ def gitrev_run(cmd, path):
+     (output, error) = bb.process.run(cmd, cwd=path)
+     return output.rstrip()
+ 
+-def get_git_pv(path, d, tagadjust=None):
++def get_git_pv(d, tagadjust=None):
+     import os
+-    import bb.process
+ 
+     srcdir = d.getVar("EXTERNALSRC", True) or d.getVar("S", True)
+     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
+@@ -46,6 +45,17 @@ def get_git_pv(path, d, tagadjust=None):
+             ver = tagadjust(ver)
+         return ver
+ 
++def get_git_hash(d):
++    import os
++
++    srcdir = d.getVar("EXTERNALSRC", True) or d.getVar("S", True)
++    gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
++    try:
++        return gitrev_run("git rev-parse HEAD", gitdir)
++
++    except Exception as exc:
++        bb.fatal(str(exc))
++
+ def mark_recipe_dependencies(path, d):
+     from bb.parse import mark_dependency
+ 
+-- 
+2.13.0
+
 
