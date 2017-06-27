@@ -1,56 +1,52 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D41E77E8A
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 673B871DD7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 18:38:11 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id s66so4248036pfs.1
+	Tue, 27 Jun 2017 03:04:48 +0000 (UTC)
+Received: by mail-vk0-f41.google.com with SMTP id y70so9804575vky.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 11:38:13 -0700 (PDT)
+	Mon, 26 Jun 2017 20:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=et7O144tAb0vPQXrea3OZZc1Yckwm0y36YyBaPuuLu4=;
-	b=kfOJKtbWTOeOiBw8AabRy3o3HNukOKNaiXw9HsS0pxm25fZY6CDskPVn5Cavx+6lIO
-	9841/7znDIGkMK7fDV+nP65aWf82UBO4ooJdfomg5mPhrM40s9hToe9LD/Pcxl7sy7W5
-	MATjOcmvydQSgZHicJ64o78W4vFVdpRsmOTGbz3ShJWOxDEGqh8xtIEP8nI5p/2mxAgT
-	GE4lS4E9/5ruN1YFKa/FHHNUAbeVZfxbGJhYv6/KtjYrzTarofZgpkyeYG5nhvQ+lT6f
-	lykN4FR3i1mB9WRipeOYfkK80m80Z1XaWAuG4yGXh8EJ7sYh0FDlAxDNGI4qnzV40o2y
-	qGDg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=JTGiFhZomA8FfJSiSREJhY1IAlU+a951pA6qcQEIjmQ=;
+	b=dlbWuARe535AqiYDPBqQU3iHvimC4rCYz+9lrak9UyXRFGHfelkN2iqbvDw15vbmds
+	aL0TyKawyoiaXmlw7g9JA0632TtrrgRcQLRZlJGvz+cVNimFgWnbCGSUjqhVx4JMeHwX
+	QLYt4aWgn+dg6diG7BMa+iMyElEftutPnQ0uZMrSI6pZ9S2cJx9H3ZgisW8eqv92nqj5
+	t1AHuwpKhuDNjqiEXnji/4mrnDj6Qxy8Hmo9Na8xNT7ja1w+L9zmFEB+pNynO6RDZQwK
+	8K/oc2teterJzy554GbvHhtKTijMxR0J3mJ221fE3PdQtHmSvgHYHFVeOwojGYUoJUMm
+	PmpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=et7O144tAb0vPQXrea3OZZc1Yckwm0y36YyBaPuuLu4=;
-	b=MwZnrF3CK/2HSQqdYYo01nM+0tKHAuqBXajVnqtkbQVuQdmdRlOqQU4cansIAF64zL
-	7HZ3aSFBVymRsjMnJ7g6SHO3JZHRIMHohoki/JNmrO4+7lfKLZ4aof/JJFlLTfAthMrm
-	2WWJR9nxtPUzDUwXL+Ey5V8wBoOmfxekR1GLID4DIgAfoKahYtBdCkekhpkep2dSBGgU
-	RMgCQhDhdNMgirecHGNM9ElIDfwb49g8SOhaKon4F2R6LlP7qhpN13zXY0tNeEMziS8p
-	FW1RqXklzVWZIohO+J7bdZIzaVNUE0YajK47vJI9c2RWKx8OpA02vN/e6K6tcB1S9aKl
-	Os/A==
-X-Gm-Message-State: AKS2vOwvyENjRsxzIAmZvKJs2eJVRmhjWmhUNqCkuSsFGkRAF9oz8RG8
-	pGZYqQ0FMiW96n6tJaQ=
-X-Received: by 10.84.199.170 with SMTP id r39mr1596089pld.204.1498502292962;
-	Mon, 26 Jun 2017 11:38:12 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:844e:84be:bbd1:9ef2?
-	([2601:202:4001:9ea0:844e:84be:bbd1:9ef2])
-	by smtp.gmail.com with ESMTPSA id
-	w69sm1356788pfk.107.2017.06.26.11.38.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 26 Jun 2017 11:38:12 -0700 (PDT)
-To: openembedded-devel@lists.openembedded.org
-References: <20170623202324.69194-1-amery@hanoverdisplays.com>
-	<20170623203729.GY28053@denix.org>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <793b1001-788f-7a2a-f8f3-83b31d234ee5@gmail.com>
-Date: Mon, 26 Jun 2017 11:38:11 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.1.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=JTGiFhZomA8FfJSiSREJhY1IAlU+a951pA6qcQEIjmQ=;
+	b=ZDSBKw7Kkwaqg+BYWThw2X73kQ/1AXgiEUtFHIV+G7slrgSsHrz/PwJtwgRmdYlhaj
+	AE85ux6oseoZSnJJaYKcHFbN+4X8JnJ/qElqx0tfbLWjXNzlVRG6k1pm0+MDBoUPfTZL
+	fECuRkzFNUwGAensdYebpNUJXvqEfh4fKkOfSE6ref3HEg7kiKh+zpL2d744lpt5qhGO
+	tUiEObdOFKNnQLvK0O7p3uwt2b7L45nTtvzi02H0XYwFahg1YUXxNs7szMl9FF2RMkBe
+	QTiDTY3EsEIRXXBpJ+uts+6MyZfVY+/slQqVS/HZbr9A4HoYbaPXlbn2STwp4ByUEkDr
+	vceg==
+X-Gm-Message-State: AKS2vOzzDLw2mcQoAZwwlFKXM/VNcbDJUV3zUFzQQvtOL/muLxH6AZZQ
+	sShe+ETlLxEGs0wG8guEA5rA7DuJSviS
+X-Received: by 10.31.124.66 with SMTP id x63mr1721369vkc.126.1498532690135;
+	Mon, 26 Jun 2017 20:04:50 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20170623203729.GY28053@denix.org>
-Subject: Re: [meta-oe][morty][PATCH 0/6] merge devmem2 and gitver fixes from master
+Received: by 10.103.78.91 with HTTP; Mon, 26 Jun 2017 20:04:49 -0700 (PDT)
+In-Reply-To: <20170626155256.GG28053@denix.org>
+References: <1497932912-30016-1-git-send-email-liu.ming50@gmail.com>
+	<20170622191849.GS28053@denix.org> <20170623211933.GB28053@denix.org>
+	<CA+chaQeXfn18+4zHth7_enazNF9hh3idLT+V7YvJLPH+5p5cQw@mail.gmail.com>
+	<20170623214631.GC28053@denix.org>
+	<CALatG=7jn597sL8XE2hk8X67smJTH84HPe+wsYzwHC1HNHh9cA@mail.gmail.com>
+	<20170626155256.GG28053@denix.org>
+From: Ming Liu <liu.ming50@gmail.com>
+Date: Tue, 27 Jun 2017 05:04:49 +0200
+Message-ID: <CALatG=4YvrLRiLTczWKayJak2ZzX-iUGUX7sKhkX4pKp8cc1yA@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH] qttools: DEPENDS on icu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,51 +59,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jun 2017 18:38:12 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 27 Jun 2017 03:04:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+Hi,
 
+Please revert it, I probably made a mistake, I encountered this issue in
+morty branch, then I checked the qttools-5.7 source, and found there is
+code referring ICU, so I thought the issue is also impacting the upstream,
+which it seems is not according to Denys, sorry for the inconvenience I
+brought.
 
-On 06/23/2017 01:37 PM, Denys Dmytriyenko wrote:
-> Wasn't there already a submission for devmem2 backport on the list?
+2017-06-26 17:52 GMT+02:00 Denys Dmytriyenko <denis@denix.org>:
 
-yes. running a bit behind. pulling in today.
--armin
+> I believe this was meant to be sent to the list, not just me directly...
 >
-> On Fri, Jun 23, 2017 at 09:23:18PM +0100, Alejandro Mery wrote:
->> The following changes have been cherry-picked from master and are
->> available in the git repository at:
->>
->> https://github.com/amery/meta-openembedded for-morty
->>
->> for you to fetch
->>
->> Alejandro Mery (4):
->>    gitver: fix try/except syntax for python3 support
->>    gitver: extend class to use EXTERNALSRC if set
->>    gitver: fix broken ${GITSHA} and recursion in S when PV="${GITVER}"
->>    gitver: skip packages instead of panic()ing if ${GITVER} fails to
->>      expand
->>
->> Denys Dmytriyenko (1):
->>    devmem2: use different filename to avoid checksum conflicts
->>
->> Nicolas Ferre (1):
->>    devmem2: Change source URL to regain access to it
->>
->>   meta-oe/classes/gitver.bbclass             | 51 ++++++++++++++++++------------
->>   meta-oe/recipes-support/devmem2/devmem2.bb | 12 ++++---
->>   2 files changed, 38 insertions(+), 25 deletions(-)
->>
->> -- 
->> 2.13.0
->>
->> -- 
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
+> On Mon, Jun 26, 2017 at 05:00:14AM +0200, Ming Liu wrote:
+> > Hi,
+> >
+> > Please revert it, I probably made a mistake, I encountered this issue in
+> > morty branch, then I checked the qttools-5.7 source, and found there is
+> > code referring ICU, so I thought the issue is also impacting the
+> upstream,
+> > which it seems is not according to Denys, sorry for the inconvenience I
+> > brought.
+> >
+> > //Ming Liu
+> >
+> > 2017-06-23 23:46 GMT+02:00 Denys Dmytriyenko <denis@denix.org>:
+> >
+> > > Thanks.
+> > >
+> > > On Fri, Jun 23, 2017 at 11:41:05PM +0200, Martin Jansa wrote:
+> > > > Yes, I've seen both e-mails. I'm waiting for response from author,
+> then
+> > > > I'll revert it in master and pyro branches.
+> > > >
+> > > > On Fri, Jun 23, 2017 at 11:19 PM, Denys Dmytriyenko <denis@denix.org
+> >
+> > > wrote:
+> > > >
+> > > > > Martin,
+> > > > >
+> > > > > Were you able to look into this yet? I didn't copy you directly at
+> > > first,
+> > > > > so
+> > > > > not sure if you missed it...
+> > > > >
+> > > > >
+> > > > > On Thu, Jun 22, 2017 at 03:18:49PM -0400, Denys Dmytriyenko wrote:
+> > > > > > On Tue, Jun 20, 2017 at 06:28:32AM +0200, liu.ming50@gmail.com
+> > > wrote:
+> > > > > > > From: Ming Liu <peter.x.liu@external.atlascopco.com>
+> > > > > > >
+> > > > > > > This fixes a following QA issue:
+> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
+> > > nativesdk-libicui18n,
+> > > > > but it isn't a build dependency.
+> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
+> nativesdk-libicuuc,
+> > > but
+> > > > > it isn't a build dependency.
+> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
+> > > nativesdk-libicudata,
+> > > > > but it isn't a build dependency.
+> > > > > >
+> > > > > > It seems there's inconsistency here between errors above
+> referring to
+> > > > > > nativesdk-qtbase-tools and the change below made to qttools
+> instead
+> > > of
+> > > > > > qtbase!
+> > > > > >
+> > > > > > I wonder if this fix was not included by the author:
+> > > > > >
+> > > > > > https://github.com/meta-qt5/meta-qt5/commit/
+> > > > > ff073f04109900fc07bf81e2f1df63c626caf342
+> > > > > >
+> > > > > > Just to double-check, I just built nativesdk-qttools using
+> meta-qt5
+> > > w/o
+> > > > > this
+> > > > > > patch and I don't see the above QA errors.
+> > > > > >
+> > > > > > --
+> > > > > > Denys
+> > > > > >
+> > > > > >
+> > > > > > > Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+> > > > > > > ---
+> > > > > > >  recipes-qt/qt5/qttools_git.bb | 2 +-
+> > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
+> > > > > > >
+> > > > > > > diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/
+> > > > > qttools_git.bb
+> > > > > > > index 5c0f51c..1108390 100644
+> > > > > > > --- a/recipes-qt/qt5/qttools_git.bb
+> > > > > > > +++ b/recipes-qt/qt5/qttools_git.bb
+> > > > > > > @@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
+> > > > > > >
+> > > > > > >  inherit ptest
+> > > > > > >
+> > > > > > > -DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
+> > > > > > > +DEPENDS += "qtbase qtdeclarative qtxmlpatterns icu"
+> > > > > > >
+> > > > > > >  SRC_URI += " \
+> > > > > > >      file://run-ptest \
+> > > > > > > --
+> > > > > > > 2.7.4
+> > > > > > >
+> > > > > > > --
+> > > > > > > _______________________________________________
+> > > > > > > Openembedded-devel mailing list
+> > > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-
+> devel
+> > > > > > --
+> > > > > > _______________________________________________
+> > > > > > Openembedded-devel mailing list
+> > > > > > Openembedded-devel@lists.openembedded.org
+> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-
+> devel
+> > > > >
+> > >
+>
 
