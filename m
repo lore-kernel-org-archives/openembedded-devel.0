@@ -1,52 +1,45 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 673B871DD7
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 31ECE71999
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jun 2017 03:04:48 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id y70so9804575vky.3
+	Tue, 27 Jun 2017 05:57:18 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id u62so3016161pgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jun 2017 20:04:50 -0700 (PDT)
+	Mon, 26 Jun 2017 22:57:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JTGiFhZomA8FfJSiSREJhY1IAlU+a951pA6qcQEIjmQ=;
-	b=dlbWuARe535AqiYDPBqQU3iHvimC4rCYz+9lrak9UyXRFGHfelkN2iqbvDw15vbmds
-	aL0TyKawyoiaXmlw7g9JA0632TtrrgRcQLRZlJGvz+cVNimFgWnbCGSUjqhVx4JMeHwX
-	QLYt4aWgn+dg6diG7BMa+iMyElEftutPnQ0uZMrSI6pZ9S2cJx9H3ZgisW8eqv92nqj5
-	t1AHuwpKhuDNjqiEXnji/4mrnDj6Qxy8Hmo9Na8xNT7ja1w+L9zmFEB+pNynO6RDZQwK
-	8K/oc2teterJzy554GbvHhtKTijMxR0J3mJ221fE3PdQtHmSvgHYHFVeOwojGYUoJUMm
-	PmpA==
+	h=from:to:cc:subject:date:message-id;
+	bh=K8Ih7GO7Wyp3yCndYK40N4HRYo6ykg2GbaXEtedfuvQ=;
+	b=R3pmNkHVXiJTrD/xQCTKGijhclMN4NuOqQq9KW8J+nE+kgN3uMkKIMlxq/RI77cTNN
+	k5KtwxL17Na/fslWOys675znCD6FjIwl8xksEW2UDnCl1m2GW5bsblYw4sOlIPuDoKcg
+	QcaJOM+wPGcFPSaT3cDlKo7AysYN2nR/mC+IB6Mi3oaeLkwcpU/SsZ++NPPORlU92ib2
+	UCU9grdn2R/5hRxmwVROrCziYpMLaGonQVoghDoRBSFRx+HeMfo4RMOER1R1lAcA0zBg
+	vltfIJZlKxpD3mLGyYHxzrOnNmREezR9i1nEPv4Fml3pRd4h6oXfz5yRbecr7v8ZOoPO
+	/Dng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JTGiFhZomA8FfJSiSREJhY1IAlU+a951pA6qcQEIjmQ=;
-	b=ZDSBKw7Kkwaqg+BYWThw2X73kQ/1AXgiEUtFHIV+G7slrgSsHrz/PwJtwgRmdYlhaj
-	AE85ux6oseoZSnJJaYKcHFbN+4X8JnJ/qElqx0tfbLWjXNzlVRG6k1pm0+MDBoUPfTZL
-	fECuRkzFNUwGAensdYebpNUJXvqEfh4fKkOfSE6ref3HEg7kiKh+zpL2d744lpt5qhGO
-	tUiEObdOFKNnQLvK0O7p3uwt2b7L45nTtvzi02H0XYwFahg1YUXxNs7szMl9FF2RMkBe
-	QTiDTY3EsEIRXXBpJ+uts+6MyZfVY+/slQqVS/HZbr9A4HoYbaPXlbn2STwp4ByUEkDr
-	vceg==
-X-Gm-Message-State: AKS2vOzzDLw2mcQoAZwwlFKXM/VNcbDJUV3zUFzQQvtOL/muLxH6AZZQ
-	sShe+ETlLxEGs0wG8guEA5rA7DuJSviS
-X-Received: by 10.31.124.66 with SMTP id x63mr1721369vkc.126.1498532690135;
-	Mon, 26 Jun 2017 20:04:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.78.91 with HTTP; Mon, 26 Jun 2017 20:04:49 -0700 (PDT)
-In-Reply-To: <20170626155256.GG28053@denix.org>
-References: <1497932912-30016-1-git-send-email-liu.ming50@gmail.com>
-	<20170622191849.GS28053@denix.org> <20170623211933.GB28053@denix.org>
-	<CA+chaQeXfn18+4zHth7_enazNF9hh3idLT+V7YvJLPH+5p5cQw@mail.gmail.com>
-	<20170623214631.GC28053@denix.org>
-	<CALatG=7jn597sL8XE2hk8X67smJTH84HPe+wsYzwHC1HNHh9cA@mail.gmail.com>
-	<20170626155256.GG28053@denix.org>
-From: Ming Liu <liu.ming50@gmail.com>
-Date: Tue, 27 Jun 2017 05:04:49 +0200
-Message-ID: <CALatG=4YvrLRiLTczWKayJak2ZzX-iUGUX7sKhkX4pKp8cc1yA@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qttools: DEPENDS on icu
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=K8Ih7GO7Wyp3yCndYK40N4HRYo6ykg2GbaXEtedfuvQ=;
+	b=pt6D4igwxmHZ+t+27lNuHKeJ01K4T5wt6yXMf4Q6uiZUTNHwYXJ3MJ/5wkpedv5yjo
+	ELQhnEly9ADn8fTU82VPEkArVR6w0E743KOKSLnKOY9XQ5wR4/3ruU6s8RKCTS9/qbV9
+	D4eV5EUlf2RFZ9A8x9OiWJuu72s6wWyrIEpw8tdZPd5vYwOoePm5Tu9gITYXaBDvrONo
+	BUxiELsURvK8zWbfWW6B1OeR6ESGPMPdHlPnCLuwKCe5VDkD/aeB+7+be6IDSgwc6IXN
+	Rb2D1rBembmEypr4RIg7ok30a/F0y4quf4biHFHZ1vnXYmx2o5aGe9JkASa5mRlQszIm
+	LSjA==
+X-Gm-Message-State: AKS2vOz07zyyCjpNQxXe/Zm8a+QLtoTonsv+7a4ujx3xOOUXimmGaTmk
+	vhYoUVmnd3qCm1so
+X-Received: by 10.98.131.134 with SMTP id h128mr3615421pfe.132.1498543039444; 
+	Mon, 26 Jun 2017 22:57:19 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
+	by smtp.gmail.com with ESMTPSA id
+	h123sm2929327pgc.36.2017.06.26.22.57.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 26 Jun 2017 22:57:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 26 Jun 2017 22:57:08 -0700
+Message-Id: <20170627055709.26136-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-multimedia][PATCH 1/2] cdparanoia: Fix build with security flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,128 +52,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jun 2017 03:04:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 27 Jun 2017 05:57:19 -0000
 
-Hi,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../cdparanoia/cdparanoia_10.2.bb                  |  4 ++-
+ ...-for-null-buffer-before-trying-a-byteswap.patch | 31 +++++++++++++++++++++
+ .../files/0002-Fix-printf-format-errors.patch      | 32 ++++++++++++++++++++++
+ 3 files changed, 66 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
+ create mode 100644 meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
 
-Please revert it, I probably made a mistake, I encountered this issue in
-morty branch, then I checked the qttools-5.7 source, and found there is
-code referring ICU, so I thought the issue is also impacting the upstream,
-which it seems is not according to Denys, sorry for the inconvenience I
-brought.
+diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
+index e846e3a97..30d71ff2c 100644
+--- a/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
++++ b/meta-multimedia/recipes-multimedia/cdparanoia/cdparanoia_10.2.bb
+@@ -13,7 +13,9 @@ SRC_URI = "http://downloads.xiph.org/releases/cdparanoia/cdparanoia-III-${PV}.sr
+            file://0003-Fix-missing-shared-object-LDFLAGS.patch \
+            file://dont-use-internal-configs.patch \
+            file://out-of-tree-build.patch \
+-"
++           file://0001-check-for-null-buffer-before-trying-a-byteswap.patch \
++           file://0002-Fix-printf-format-errors.patch \
++           "
+ SRC_URI[md5sum] = "b304bbe8ab63373924a744eac9ebc652"
+ SRC_URI[sha256sum] = "005db45ef4ee017f5c32ec124f913a0546e77014266c6a1c50df902a55fe64df"
+ 
+diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
+new file mode 100644
+index 000000000..682cf6e03
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/0001-check-for-null-buffer-before-trying-a-byteswap.patch
+@@ -0,0 +1,31 @@
++From c760c5d31f2412a5be5ac6896e6069d1cea08527 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 26 Jun 2017 22:31:45 -0700
++Subject: [PATCH 1/2] check for null buffer before trying a byteswap
++
++Author: Monty <paranoia@xiph.org>
++
++Patch from debian
++http://sources.debian.net/src/cdparanoia/3.10.2%2Bdebian-11/debian/patches/04-endian.patch
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ interface/interface.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/interface/interface.c b/interface/interface.c
++index 526c2a9..763a0ea 100644
++--- a/interface/interface.c
+++++ b/interface/interface.c
++@@ -118,7 +118,7 @@ long cdda_read_timed(cdrom_drive *d, void *buffer, long beginsector, long sector
++ 	if(d->bigendianp==-1) /* not determined yet */
++ 	  d->bigendianp=data_bigendianp(d);
++ 	
++-	if(d->bigendianp!=bigendianp()){
+++	if(buffer && d->bigendianp!=bigendianp()){
++ 	  int i;
++ 	  u_int16_t *p=(u_int16_t *)buffer;
++ 	  long els=sectors*CD_FRAMESIZE_RAW/2;
++-- 
++2.13.2
++
+diff --git a/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch b/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
+new file mode 100644
+index 000000000..024479ca7
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/cdparanoia/files/0002-Fix-printf-format-errors.patch
+@@ -0,0 +1,32 @@
++From f4f81bdadb9515938b3b5d13707bd4b9322fd967 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 26 Jun 2017 22:37:13 -0700
++Subject: [PATCH 2/2] Fix printf format errors
++
++error: format not a string literal and no format arguments
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ main.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/main.c b/main.c
++index 664acac..d568fb1 100644
++--- a/main.c
+++++ b/main.c
++@@ -588,10 +588,10 @@ static void callback(long inpos, int function){
++ 	    buffer[aheadposition+19]='>';
++ 	}
++    
++-	fprintf(stderr,buffer);
+++	fprintf(stderr, "%s", buffer);
++        
++ 	if (logfile != NULL && function==-1) {
++-	  fprintf(logfile,buffer+1);
+++	  fprintf(logfile, "%s", buffer+1);
++ 	  fprintf(logfile,"\n\n");
++ 	  fflush(logfile);
++ 	}
++-- 
++2.13.2
++
+-- 
+2.13.2
 
-2017-06-26 17:52 GMT+02:00 Denys Dmytriyenko <denis@denix.org>:
-
-> I believe this was meant to be sent to the list, not just me directly...
->
-> On Mon, Jun 26, 2017 at 05:00:14AM +0200, Ming Liu wrote:
-> > Hi,
-> >
-> > Please revert it, I probably made a mistake, I encountered this issue in
-> > morty branch, then I checked the qttools-5.7 source, and found there is
-> > code referring ICU, so I thought the issue is also impacting the
-> upstream,
-> > which it seems is not according to Denys, sorry for the inconvenience I
-> > brought.
-> >
-> > //Ming Liu
-> >
-> > 2017-06-23 23:46 GMT+02:00 Denys Dmytriyenko <denis@denix.org>:
-> >
-> > > Thanks.
-> > >
-> > > On Fri, Jun 23, 2017 at 11:41:05PM +0200, Martin Jansa wrote:
-> > > > Yes, I've seen both e-mails. I'm waiting for response from author,
-> then
-> > > > I'll revert it in master and pyro branches.
-> > > >
-> > > > On Fri, Jun 23, 2017 at 11:19 PM, Denys Dmytriyenko <denis@denix.org
-> >
-> > > wrote:
-> > > >
-> > > > > Martin,
-> > > > >
-> > > > > Were you able to look into this yet? I didn't copy you directly at
-> > > first,
-> > > > > so
-> > > > > not sure if you missed it...
-> > > > >
-> > > > >
-> > > > > On Thu, Jun 22, 2017 at 03:18:49PM -0400, Denys Dmytriyenko wrote:
-> > > > > > On Tue, Jun 20, 2017 at 06:28:32AM +0200, liu.ming50@gmail.com
-> > > wrote:
-> > > > > > > From: Ming Liu <peter.x.liu@external.atlascopco.com>
-> > > > > > >
-> > > > > > > This fixes a following QA issue:
-> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
-> > > nativesdk-libicui18n,
-> > > > > but it isn't a build dependency.
-> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
-> nativesdk-libicuuc,
-> > > but
-> > > > > it isn't a build dependency.
-> > > > > > > | QA Issue: nativesdk-qtbase-tools rdepends on
-> > > nativesdk-libicudata,
-> > > > > but it isn't a build dependency.
-> > > > > >
-> > > > > > It seems there's inconsistency here between errors above
-> referring to
-> > > > > > nativesdk-qtbase-tools and the change below made to qttools
-> instead
-> > > of
-> > > > > > qtbase!
-> > > > > >
-> > > > > > I wonder if this fix was not included by the author:
-> > > > > >
-> > > > > > https://github.com/meta-qt5/meta-qt5/commit/
-> > > > > ff073f04109900fc07bf81e2f1df63c626caf342
-> > > > > >
-> > > > > > Just to double-check, I just built nativesdk-qttools using
-> meta-qt5
-> > > w/o
-> > > > > this
-> > > > > > patch and I don't see the above QA errors.
-> > > > > >
-> > > > > > --
-> > > > > > Denys
-> > > > > >
-> > > > > >
-> > > > > > > Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
-> > > > > > > ---
-> > > > > > >  recipes-qt/qt5/qttools_git.bb | 2 +-
-> > > > > > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > > > > > >
-> > > > > > > diff --git a/recipes-qt/qt5/qttools_git.bb b/recipes-qt/qt5/
-> > > > > qttools_git.bb
-> > > > > > > index 5c0f51c..1108390 100644
-> > > > > > > --- a/recipes-qt/qt5/qttools_git.bb
-> > > > > > > +++ b/recipes-qt/qt5/qttools_git.bb
-> > > > > > > @@ -16,7 +16,7 @@ LIC_FILES_CHKSUM = " \
-> > > > > > >
-> > > > > > >  inherit ptest
-> > > > > > >
-> > > > > > > -DEPENDS += "qtbase qtdeclarative qtxmlpatterns"
-> > > > > > > +DEPENDS += "qtbase qtdeclarative qtxmlpatterns icu"
-> > > > > > >
-> > > > > > >  SRC_URI += " \
-> > > > > > >      file://run-ptest \
-> > > > > > > --
-> > > > > > > 2.7.4
-> > > > > > >
-> > > > > > > --
-> > > > > > > _______________________________________________
-> > > > > > > Openembedded-devel mailing list
-> > > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-
-> devel
-> > > > > > --
-> > > > > > _______________________________________________
-> > > > > > Openembedded-devel mailing list
-> > > > > > Openembedded-devel@lists.openembedded.org
-> > > > > > http://lists.openembedded.org/mailman/listinfo/openembedded-
-> devel
-> > > > >
-> > >
->
 
