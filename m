@@ -1,48 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AA7B78082
+Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
+	by mail.openembedded.org (Postfix) with ESMTP id 9731877FF6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jun 2017 02:08:58 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id s66so6946907pfs.2
+	Wed, 28 Jun 2017 03:51:00 +0000 (UTC)
+Received: by mail-wm0-f51.google.com with SMTP id b184so45067082wme.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jun 2017 19:08:59 -0700 (PDT)
+	Tue, 27 Jun 2017 20:51:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=1Rwa+Aq3OuumzTpbsAJ4omRPUb61oZrJlzZvl/twI/g=;
-	b=BiqZoBITquBqEpN7OjzDgHDaYeK/QPgsbnlXXsrtgrH/NrpRLGRz2M8LUrZ3qDTu/w
-	82BWsu41Zklw6KghwzrME3mRC8p+zCiPBUMNm82WZHwmOHCG2O3mecKDY8FsUp89FhyU
-	mzjqgTNIF9OcvHPt8ePKI7rpsLSWQlWuO1fPGO97EkyyAuWOONuvdCDMySU+029cgHEk
-	pZYfuWp4yqx3RgT+1XrCjBwGI/HOUF5tPBxCuhMsd77BwDoqIVXb8D+AU0yE1AZFm3Ba
-	RPjO4LIvgqkg1iKFk1EFT03gn8g4LWVCwnG3CcMgRnZNo688ks/jzrmEZjElATyLDuF+
-	OBpQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
+	bh=U7aURbkoSAFE5jN+t/n3nEhHBkEBkBd4aLUpKzy4HuE=;
+	b=bfhDjuAidGc6BKwpt5ldNG2x88Xrcj/qLHPby0MUTFeA+XFBSpDZLa3yxbfPvukcAq
+	yYaJNLAs6UrEQaGMm6oCHDoKO34HhuGa2giE7rDkGYIeS6Zpxq/yY+EJuUG6QGn1+i0l
+	9NyJ/9SOLVCYhI24gB6Hn3v6YOi9iSBnn8ozfptQlzpfLlW8S6EOvnDAPegvU9XyVYls
+	Gww1u/lTfPN0Dg2E89+zUJ9O5gUaq/LOC6QnBkLWzJlanGPFCDZYEhyw/RO5VzX0V6vI
+	3eaKOYTI/ULiFgG9mcFd0AUbgZs+qGIjWFDdSVo6+xBb6jjXZnfP+oB4GTwPD11g0c00
+	J9nw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=1Rwa+Aq3OuumzTpbsAJ4omRPUb61oZrJlzZvl/twI/g=;
-	b=Hxkx6OgXzdc2GI2UIRgp91muzWndmm9/sk9EL5AHLy9AyaoSWkEVhuvCAk/LM2pPM/
-	binlAZW0GvOFE5Tl4nMk9tD0awhZq4uUFksnqjrC4lM7S4xc383W+ZULUS9EWiXi7dse
-	4DFZgqaPW0dlkDpyxBF+1VLdnG7ZmtVnwyl6uGQSMfIqVoVlZkqrzR9Bjl+2WtxXcTg1
-	qLIIOdpxN0oB0VbBDLN2UIlIhCGHiISDX6jBuG4GxJyIvar7lY0lKfK2Et8VqvQEifzs
-	bNfkwPEQ87Dx+AYuH4HlSnaeYL26IyKv/s3nTYcKcKSJRhuJUPuVt4STA61kdjiznGtT
-	nLTw==
-X-Gm-Message-State: AKS2vOy0VIrky41gfyKLODG0xXIimJzSrDC95+e3UJSTgXdJJ2APzM3k
-	v12sZ2wO1UHlUjGv
-X-Received: by 10.84.140.107 with SMTP id 98mr9077003pls.97.1498615739155;
-	Tue, 27 Jun 2017 19:08:59 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id b8sm1003591pfd.65.2017.06.27.19.08.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Jun 2017 19:08:58 -0700 (PDT)
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to;
+	bh=U7aURbkoSAFE5jN+t/n3nEhHBkEBkBd4aLUpKzy4HuE=;
+	b=i4mBCKEr1aKvfwdS+Ne09I+8SWL4FVlMxR5BAnBWfX5vcCk44v4wKSUsTEjlxggDSX
+	bGtlXJtP4P/SLaPMho5c5t1WRyZOWrsZ212yeJPewc9ZGPE3iH7/MvoL2qHZyQ/Ru/bx
+	xLwJYUZ0KarTTvrfAkQOrGNDl2y00ojMbIg4BbPFoOaIc5Jv8Q5JruCySaUKeFWe7Cf6
+	TRnZWD9iKq1Lfy8CPAi4NvYonax32j7GPeYPAnx5iZf7MtYd062M1/0xIHBC5F6RNwma
+	DD48YowwvCJO8zAnI7wRd54T6LvndEKwH8v5fb/c67eDJlFneG3OrOcsnzlwpUHNRtN9
+	PpHw==
+X-Gm-Message-State: AKS2vOwm5kCVsJtH0jnqyUsjShNDzLf5nVF5xQYIEmnZ0Z016GUH1uP1
+	4yFR4niEJc085OSIrsnVKAlhof7SVw==
+X-Received: by 10.80.139.229 with SMTP id n34mr6046521edn.127.1498621861004;
+	Tue, 27 Jun 2017 20:51:01 -0700 (PDT)
+MIME-Version: 1.0
+References: <1498612870-16566-1-git-send-email-Randy.MacLeod@windriver.com>
+In-Reply-To: <1498612870-16566-1-git-send-email-Randy.MacLeod@windriver.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jun 2017 19:08:19 -0700
-Message-Id: <20170628020819.17047-13-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170628020819.17047-1-raj.khem@gmail.com>
-References: <20170628020819.17047-1-raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 13/13] aufs-util: Upgrade to 3.18
+Date: Wed, 28 Jun 2017 03:50:50 +0000
+Message-ID: <CAMKF1spW2bpo5etTWmUVL1xBGJCeRFqfq06Wa8LBFx0uRPGgjg@mail.gmail.com>
+To: Randy MacLeod <Randy.MacLeod@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [PATCH] binutils: update SRCREV to fix powerpc gold link bug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,40 +52,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jun 2017 02:08:58 -0000
+X-List-Received-Date: Wed, 28 Jun 2017 03:51:00 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fix out of tree build, helps building with devtool
+On Tue, Jun 27, 2017 at 6:30 PM Randy MacLeod <Randy.MacLeod@windriver.com>
+wrote:
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+> Update to the latest commit on the 2.28 branch to pick up:
+>    a3e00a8 [GOLD] Avoid duplicate PLT stub symbols on ppc32
+> along with several backported bug fixes for arm*, etc.
+>
+> This resolves the systemd link error for qemuppc
+> with the error message:
+>    .../powerpc-oe-linux-ld.gold:
+>    error: invalid STB_LOCAL symbol in external symbols
+>    error: linker defined: multiple definition of
+> '00000001.plt_call.memcpy+8000'
+>    command line: previous definition here
+>
+> described in:
+>
+> [YOCTO #11696]
+>
+> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
+> ---
+>  meta/recipes-devtools/binutils/binutils-2.28.inc | 3 ++-
+>  1 file changed, 2 insertions(+), 1 deletion(-)
+>
+> diff --git a/meta/recipes-devtools/binutils/binutils-2.28.inc
+> b/meta/recipes-devtools/binutils/binutils-2.28.inc
+> index 47bfa1a..52f5d92 100644
+> --- a/meta/recipes-devtools/binutils/binutils-2.28.inc
+> +++ b/meta/recipes-devtools/binutils/binutils-2.28.inc
+> @@ -18,7 +18,8 @@ BINUPV = "${@binutils_branch_version(d)}"
+>
+>  UPSTREAM_CHECK_GITTAGREGEX = "binutils-(?P<pver>\d+_(\d_?)*)"
+>
+> -SRCREV = "cb44d42ce6ef0c7a4eed7e2a3c272ac102166850"
+> +#SRCREV = "cb44d42ce6ef0c7a4eed7e2a3c272ac102166850"
 
-diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-index 50d8b909a..1e8677574 100644
---- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-+++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
- DEPENDS = "aufs-util-native"
- DEPENDS_class-native = ""
- 
--SRCREV = "b59a2167a135ceea37581ee33997de278cf8a30a"
--SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.14 \
-+SRCREV = "bdfcc0dcfc6113146e928f85145dbd2cf9b0e080"
-+SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs3.18 \
-            file://aufs-util-don-t-strip-executables.patch \
-            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
-            file://aufs_type.h \
-@@ -34,7 +34,7 @@ do_configure_append () {
- 
- do_configure_append_class-target () {
-     for i in ver c2sh c2tmac; do
--        cp ${STAGING_BINDIR_NATIVE}/aufs-util-${PV}/$i ./
-+        cp ${STAGING_BINDIR_NATIVE}/aufs-util-*/$i ${B}
-     done
- }
- 
--- 
-2.13.2
+No need to comment out just replace it
 
+>
+> +SRCREV = "7ea1464297eadebe62aae92ad9bebb33f92c2454"
+>  SRC_URI = "\
+>       git://
+> sourceware.org/git/binutils-gdb.git;branch=binutils-${BINUPV}-branch;protocol=git
+> <http://sourceware.org/git/binutils-gdb.git;branch=binutils-$%7BBINUPV%7D-branch;protocol=git>
+> \
+>       file://0004-Point-scripts-location-to-libdir.patch \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
