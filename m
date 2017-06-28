@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 42F207806E
+Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
+	[209.85.192.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DC7B78088
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jun 2017 02:08:51 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id c73so25406961pfk.2
+	Wed, 28 Jun 2017 02:08:52 +0000 (UTC)
+Received: by mail-pf0-f179.google.com with SMTP id s66so25386749pfs.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jun 2017 19:08:53 -0700 (PDT)
+	Tue, 27 Jun 2017 19:08:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=N8ijFPMYs07b+cRqHvJkmO3Iie7qrXQq1Vro9edxArg=;
-	b=Lmms41ou5cVV8NFK1QtgLDXWw82kh1AjQ58BFW7arYO6AAlnmp4d6OmB2c6bOBJpeX
-	rSaPV30fE09LFzqn8GKCz8bAch1XBUovKZwepznvMiKz/b2Uidkn1eZ035gBSfXyTLjG
-	+Lydim2uedz8MlwEPuVq1dNvkOITY4yzX8GpZgd6G5Gn4nyMmu3bJOv942OGJRuaZZLQ
-	n/IvhQruHJEJk7WG87serbq6/ldsxfhOWSQtfRgYeV7dpv5cjplA7kK97AQI+V1QfhTj
-	kTOqSEaKhzFOmYzCuckQbH+srJVyuNYWSQhK+hFM7K9Q3fIhm8HqxPMdLR5RHfahrGe8
-	f8Iw==
+	bh=Udc/iIuAOncRBVm+++CftmRd96Epp+rpwGlVUQDwv0w=;
+	b=X64/aIQD9ILnB9rd42bsIQvYVG1ngScvNIDjUgTSiAM7qdk4RYsRsEWa6LcUhSeIAy
+	A4VQqX60fQUqFBXzaEEZPUUW14dgl/iproSapMy2XaR7hYWCig47BPiSGPE8uD/vYyd0
+	2vGW29ecWDS6O/l1uWG3/2qaIwa7njmP5Oe7BlzpI2NycwNb290K+Yyo4BN4AnOMjEo/
+	iS3ztDgD8785bcfCIGNMlkxrQOo9r9yz95fxhcR9inB3V25o5GGLUfBZlUTcd5MDwEUh
+	k3Ebmf6qpLe1DxwxOy1+kcQMnzJDplomrC4KzcmeUAS/APoqsv/QY0yKr9fFnJFg63EB
+	hADQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=N8ijFPMYs07b+cRqHvJkmO3Iie7qrXQq1Vro9edxArg=;
-	b=FkAxuEAjcfvRpDJMe/vaUnWfWovq7wK9hUoPoqdQ0eX6Q6GJLe3ndxhKoE14imU+Po
-	AI9mFmhwp9OqDpjDcrd5y1gmKzafjTFdPrZPnHkGtS3BG5oJzHkutE5OhhL3cdY1aKkN
-	upQw7HXy177cjpz3utqUAdm5etyU8dUcjTIfrTivvVvAgXAmGcar9GpjQWwkHMWzd5Ws
-	NhHsx/KRQuwmOuVjmlKx5gTx5mElpB44kADxlLZTgb0EDQjPUh+MSzQteBwU9rrL/T92
-	BoDd1ntGlWnmKAIaLZqu/1PC3anwKBQ7G/ObTZGm2alGv9Kp2JDWEQ/AuKHNbWtWRjmx
-	xINQ==
-X-Gm-Message-State: AKS2vOzSsQaG+bYWqKsypj/KFn9vJMW5BlM4hyDJp34tNC+d1LMLD3G9
-	BLSU1bJnHKECpBeb
-X-Received: by 10.98.26.211 with SMTP id a202mr8226654pfa.30.1498615732606;
-	Tue, 27 Jun 2017 19:08:52 -0700 (PDT)
+	bh=Udc/iIuAOncRBVm+++CftmRd96Epp+rpwGlVUQDwv0w=;
+	b=GgxNnlsULSppzxtZN9ExYU5NRoGoHbpvSObpg42ehroj/CGNhbNnRgbx7tX1Lsg08a
+	gHPfuHlzzPPXFA7LOODnFBuuJ5X4W1XabKMxaJ9+dG76thDtbTBMl+W16MRHVJ+cGrC+
+	X15PhSAuTPDNqIT85kx2Kat7C3cMqVePMo5x0vHq9ovMhpfizgiT+XHPwHYcSeK6ZVX2
+	l3QeIl7BFaDivahGs61mHAmCdCh/F5wBP9aXc3t52YS0vwzgKunalOLAS67/RUUOAxY6
+	URNLj08fqESCT5g8m1kbDUNw1rnV1cFUKgenRGPR8RG4Coa1CmNYI4e6XN+58w4zzK8H
+	AOGw==
+X-Gm-Message-State: AKS2vOzJkBr9jVR4ZCKxBHzENb5LymtZUr3eWSJyZgTVkZ2hB3kOdwjR
+	3K+0vOExjsir0gxV
+X-Received: by 10.98.78.88 with SMTP id c85mr8379897pfb.17.1498615734117;
+	Tue, 27 Jun 2017 19:08:54 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id b8sm1003591pfd.65.2017.06.27.19.08.51
+	by smtp.gmail.com with ESMTPSA id b8sm1003591pfd.65.2017.06.27.19.08.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 27 Jun 2017 19:08:51 -0700 (PDT)
+	Tue, 27 Jun 2017 19:08:53 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Jun 2017 19:08:15 -0700
-Message-Id: <20170628020819.17047-9-raj.khem@gmail.com>
+Date: Tue, 27 Jun 2017 19:08:16 -0700
+Message-Id: <20170628020819.17047-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170628020819.17047-1-raj.khem@gmail.com>
 References: <20170628020819.17047-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 09/13] ncftp: Upgrade to 3.2.6
+Subject: [meta-oe][PATCH 10/13] lmbench: Fix build with hardening flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,97 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jun 2017 02:08:52 -0000
-
-Fix build with hardening flags
+X-List-Received-Date: Wed, 28 Jun 2017 02:08:53 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-daemons/ncftp/ncftp/unistd.patch       | 32 ++++++++++++++++++++++
- .../ncftp/{ncftp_3.2.5.bb => ncftp_3.2.6.bb}       | 16 ++++++++---
- 2 files changed, 44 insertions(+), 4 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/ncftp/ncftp/unistd.patch
- rename meta-networking/recipes-daemons/ncftp/{ncftp_3.2.5.bb => ncftp_3.2.6.bb} (53%)
+ .../0001-lat_http.c-Add-printf-format.patch        | 26 ++++++++++++++++++++++
+ .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |  3 ++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_http.c-Add-printf-format.patch
 
-diff --git a/meta-networking/recipes-daemons/ncftp/ncftp/unistd.patch b/meta-networking/recipes-daemons/ncftp/ncftp/unistd.patch
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_http.c-Add-printf-format.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_http.c-Add-printf-format.patch
 new file mode 100644
-index 000000000..1c8146eda
+index 000000000..18ed43d06
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/ncftp/ncftp/unistd.patch
-@@ -0,0 +1,32 @@
-+This patch is needed to avoid double definitions of functions
-+especially when building with security flags turned on. The double
-+definitions causes the sed.sh script in configure to fail since it
-+starts to spit out double outputs e.g.
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-lat_http.c-Add-printf-format.patch
+@@ -0,0 +1,26 @@
++From 6faa6acdf20aa6f738eed1483b7dceed94286adb Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 27 Jun 2017 14:39:10 -0700
++Subject: [PATCH] lat_http.c: Add printf format
 +
-+wi_cv_gethostname_size_t size_t size_t
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/lat_http.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+which then caused almost all subsequent compile time tests to fail since
-+this gets into confdefs.h file
++diff --git a/src/lat_http.c b/src/lat_http.c
++index c630d59..28d04f7 100644
++--- a/src/lat_http.c
+++++ b/src/lat_http.c
++@@ -27,7 +27,7 @@ http(char *server, char *file, int prog)
++ 	sock = tcp_connect(server, prog, SOCKOPT_REUSE);
++ 	sprintf(buf, "GET /%s HTTP/1.0\r\n\r\n\n", file);
++ 	if (debug) {
++-		printf(buf);
+++		printf("%s", buf);
++ 	}
++ 	write(sock, buf, strlen(buf));
++ 	while ((n = read(sock, buf, XFERSIZE)) > 0) {
++-- 
++2.13.2
 +
-+removing this include causes only one definitions to be emitted into
-+the genrated protos.h file and thus avoiding the above failure.
-+
-+Other solution would to fix sed.sh to ignore double definitions
-+
-+Upstream-Status: Pending
-+
-+Signed-of-by: Khem Raj <raj.khem@gmail.com>
-+
-+
-+Index: ncftp-3.2.6/configure
-+===================================================================
-+--- ncftp-3.2.6.orig/configure
-++++ ncftp-3.2.6/configure
-+@@ -7859,7 +7859,6 @@ chmod 755 "$wi_tmpdir/prpp.pl"
-+ cat << 'EOF' > "$wi_tmpdir/unistd.c"
-+ #include <confdefs.h>
-+ 
-+-#include <unistd.h>
-+ #include <sys/types.h>
-+ #include <sys/socket.h>
-+ #include <netinet/in.h>
-diff --git a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.5.bb b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-similarity index 53%
-rename from meta-networking/recipes-daemons/ncftp/ncftp_3.2.5.bb
-rename to meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-index 893eacb99..5f92f27fd 100644
---- a/meta-networking/recipes-daemons/ncftp/ncftp_3.2.5.bb
-+++ b/meta-networking/recipes-daemons/ncftp/ncftp_3.2.6.bb
-@@ -2,21 +2,29 @@ DESCRIPTION = "A sophisticated console ftp client"
- HOMEPAGE = "http://ncftp.com/"
- SECTION = "net"
- LICENSE = "ClArtistic"
--LIC_FILES_CHKSUM = "file://ncftp/cmds.c;beginline=3;endline=4;md5=9de76faeaedc4f908082e3f8142715f4"
-+LIC_FILES_CHKSUM = "file://ncftp/cmds.c;beginline=3;endline=4;md5=9c2390809f71465aa7ff76e03dc14d91"
- DEPENDS = "ncurses"
+diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+index 62906fd68..43ac1d038 100644
+--- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
++++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
+@@ -19,7 +19,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
+            file://lmbench_result_html_report.patch \
+            file://fix-lmbench-memory-check-failure.patch \
+            file://0001-avoid-gcc-optimize-away-the-loops.patch \
+-"
++           file://0001-lat_http.c-Add-printf-format.patch \
++           "
+ SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
+ SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
  
--SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz \
-+SRC_URI = "ftp://ftp.ncftp.com/${BPN}/${BP}-src.tar.xz \
-            file://ncftp-configure-use-BUILD_CC-for-ccdv.patch \
-+           file://unistd.patch \
- "
--SRC_URI[md5sum] = "685e45f60ac11c89442c572c28af4228"
--SRC_URI[sha256sum] = "ac111b71112382853b2835c42ebe7bd59acb7f85dd00d44b2c19fbd074a436c4"
-+SRC_URI[md5sum] = "42d0f896d69a4d603ec097546444245f"
-+SRC_URI[sha256sum] = "5f200687c05d0807690d9fb770327b226f02dd86155b49e750853fce4e31098d"
- 
- inherit autotools-brokensep pkgconfig
- 
-+CFLAGS += "-DNO_SSLv2 -D_FILE_OFFSET_BITS=64 -Wall"
-+
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[ccdv] = "--enable-ccdv,--disable-ccdv,,"
- 
-+EXTRA_OECONF = "--disable-precomp"
-+TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
-+
- do_configure() {
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
-+    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
-     oe_runconf
- }
- do_install () {
 -- 
 2.13.2
 
