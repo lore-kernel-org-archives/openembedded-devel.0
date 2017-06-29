@@ -1,24 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B250078088
+Return-Path: <s.mueller-klieser@phytec.de>
+X-Greylist: delayed 555 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 29 Jun 2017 14:20:15 UTC
+Received: from root.phytec.de (mail.rapiddevelopmentkit.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id 81F9D774DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jun 2017 09:12:17 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v5T9CIAT016826
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 29 Jun 2017 14:20:15 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 959CAA0023F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jun 2017 02:12:18 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Thu, 29 Jun 2017 02:12:17 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 29 Jun 2017 17:05:03 +0800
-Message-ID: <20170629090503.13157-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
+	Thu, 29 Jun 2017 16:12:08 +0200 (CEST)
+Received: from lws-mklieser.phytec.de ([172.16.26.141])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP7)
+	with ESMTP id 2017062916105922-144267 ;
+	Thu, 29 Jun 2017 16:10:59 +0200 
+From: =?UTF-8?q?Stefan=20M=C3=BCller-Klieser?= <s.mueller-klieser@phytec.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 29 Jun 2017 16:10:49 +0200
+Message-Id: <1498745449-26690-1-git-send-email-s.mueller-klieser@phytec.de>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] gflags: update downloadfilename
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP7|August
+	17, 2016) at 29.06.2017 16:10:59,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP7|August  17,
+	2016) at 29.06.2017 16:10:59
+X-TNEFEvaluated: 1
+Subject: [meta-qt5][pyro][PATCH] qtquickcontrols: fix qa issue installed-vs-shipped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,33 +37,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jun 2017 09:12:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 29 Jun 2017 14:20:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-From: Kai Kang <kai.kang@windriver.com>
+QML dialogs ship an icons.ttf which does not get picked up by the
+default FILES mask.
 
-The downloadfilename of gflags is not proper for multilib recipe.
-Replace it with ${BP}.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
 ---
- meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-qt/qt5/qtquickcontrols=5Fgit.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-index 5fc28f6..e2bac9a 100644
---- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-+++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
-@@ -5,7 +5,7 @@ HOMEPAGE = "https://github.com/gflags/gflags"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
- 
--SRC_URI = "https://github.com/gflags/gflags/archive/v${PV}.tar.gz;downloadfilename=${PN}-${PV}.tar.gz"
-+SRC_URI = "https://github.com/gflags/gflags/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
- SRC_URI[md5sum] = "b99048d9ab82d8c56e876fb1456c285e"
- SRC_URI[sha256sum] = "466c36c6508a451734e4f4d76825cf9cd9b8716d2b70ef36479ae40f08271f88"
- 
--- 
-2.10.1
+diff --git a/recipes-qt/qt5/qtquickcontrols=5Fgit.bb b/recipes-qt/qt5/qtqui=
+ckcontrols=5Fgit.bb
+index 69f3d3b..c72ac4f 100644
+--- a/recipes-qt/qt5/qtquickcontrols=5Fgit.bb
++++ b/recipes-qt/qt5/qtquickcontrols=5Fgit.bb
+@@ -22,3 +22,5 @@ SRC=5FURI +=3D " \
+ "
+=20
+ SRCREV =3D "201c86391c7ff78d570fdec6e0c0b71eb1e9aae4"
++
++FILES=5F${PN}-qmlplugins +=3D "${OE=5FQMAKE=5FPATH=5FQML}/*/*/*/*.ttf"
+--=20
+1.9.1
 
 
