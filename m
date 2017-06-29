@@ -1,44 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 238B777F79
+	by mail.openembedded.org (Postfix) with ESMTP id 591D177EFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jun 2017 04:53:03 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id u36so10486950pgn.3
+	Thu, 29 Jun 2017 04:53:05 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id j186so10490052pge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jun 2017 21:53:05 -0700 (PDT)
+	Wed, 28 Jun 2017 21:53:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=VxxxtiijBjcNK2g0sTwT984KA0v7fEN0bzo1HvhCGA4=;
-	b=TeBdkX7G1urz/9HDaqNgPTNmnZYycugR7WKaAb81lkuP2nAQie0nk/8hFitJdr0gCU
-	nCcUSlcN88ZxJGWZaSwlFv41aY5AbrQWQ/AJZ4HL29c3y3sYUoXSc1B35C4MbdYhQUs3
-	X2A9nRrCiRmGXf7BlBJmk3Eyta90UoEnt0/+4cGJhV48ryeBjrmMCdQoVJ388IX/mlaS
-	L4R6ohXs4NJXEQOvovJua/nJbsECNSMFfe7bkoWLisyfdXZTnwdj/o5d2UoS3xf3SeHp
-	1ZkDhE9eISBzcxSTXqvFzMp71QHG3Q8mDmWYNychWOo3GyEQ8cwsUGVjIMuR978M0mh+
-	RFtA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=pwqcDrLoxWzCYKIAOu/V0PO8BzbyFsKpuCW6jp0NWEo=;
+	b=pXXCP3oc1eXS6nbBqNOBmdhojDZmcNIsbA9hnW2simMQrKWLQFrkXMsb0IjajefvwM
+	x+4VsoVVvUHhHvimPxvlOGHNpoxCgNxpabr7lDSdHgxjyoOmtOf0x0h+0XfoamGxkwQC
+	W9rYijZxyZ5aYCp2uBegLT19nKzmRz0efFIdr8tAlC2aY82osyMqpIJsTY37Iyb+8vW9
+	69/3Yl2dE75RFgqCunD2Sx+EChwKIZ3NnBOM1r9e8r+dl8GQFuHui2VJX+hdjydGuMsK
+	BLOZWsRmpU4pfMdB9FJCcAiBTtY/GNJAW+NvyLOSZD9G4FD4FyYlnFWPjDv3nPonjsyk
+	LKlg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VxxxtiijBjcNK2g0sTwT984KA0v7fEN0bzo1HvhCGA4=;
-	b=tUtPHE/y2fCe6O3I5o4ik+6omoC8AJ7F/GrAxxjRZGQKauXke90vF9le64x61eFGa0
-	br41Q07oX73gxY0P1+YsvhG3cgy8IByegSRGaQ/TI9YfzkFbgT7Mu/q22NiLscW+iQ+Z
-	22/aoU+keMA6+D3wzFlHLfxhJIDtExvK5f2qJl6jlxIDT4tHAHZuW4JGePqB4DrI0qwW
-	f379JPG1xc6GEBQ5HJkO7mOFoCNblNmUzzBjgzlb+vpAV+RCJG1UODkfCL8l+IUNRWHg
-	6S9j3bmBpdOCc7eqmuDZbHb/rLl36nNkOkg5+59SawiZoWjQelHX08EMdlr/mJaX/Gu3
-	bo2g==
-X-Gm-Message-State: AKS2vOxENKotOzXhCD5okOOWeYYLy1q7kkpbL3FEy256TWsexMXZfKJT
-	58iwNSPippKUqYmI
-X-Received: by 10.101.69.194 with SMTP id m2mr14017747pgr.105.1498711984797;
-	Wed, 28 Jun 2017 21:53:04 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=pwqcDrLoxWzCYKIAOu/V0PO8BzbyFsKpuCW6jp0NWEo=;
+	b=o/mwLAqwd2CX0ZAokjkUVja33yloZEulEB/kzRL8agLnDN/4fketXhffD6ouymjUJt
+	/zEXvYGb1MRfI3iKQzDHriNoCYj5NQTP7WGtHx3LZRvO8TpfGuDZMD/GNftVMPkCE+qy
+	GoBBP7mOkVYEyK9qiqsERPR5cjK4gxsrlEf3wasdVALcj2bqA9mYw/sxk8JcVGGEeWxB
+	Op6xy/Pb4IiP9SaDGa3JuCEsRBZQP/6YNuWySrh60PJmomHBKVM/jeOyqZkZN4PP06rZ
+	V7ojw/lZuyIeIzr4u+U0817hZ2VXz4EdoDDevNlkuNCqfuri41ydT8rTWPUTl4xzzXJE
+	W9xg==
+X-Gm-Message-State: AKS2vOz0XYWO5puEiNyTgjgad6uNv4271vGKxGqKPivO5Z1ZBLxT6OAl
+	BTbGzomeqNhX9Icd
+X-Received: by 10.101.85.14 with SMTP id f14mr13761416pgr.112.1498711986297;
+	Wed, 28 Jun 2017 21:53:06 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id 3sm8068423pfp.11.2017.06.28.21.53.02
+	by smtp.gmail.com with ESMTPSA id 3sm8068423pfp.11.2017.06.28.21.53.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 28 Jun 2017 21:53:03 -0700 (PDT)
+	Wed, 28 Jun 2017 21:53:05 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Jun 2017 21:52:51 -0700
-Message-Id: <20170629045254.22351-1-raj.khem@gmail.com>
+Date: Wed, 28 Jun 2017 21:52:52 -0700
+Message-Id: <20170629045254.22351-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH 1/4] fluentbit: Upgrade to 0.11.11
+In-Reply-To: <20170629045254.22351-1-raj.khem@gmail.com>
+References: <20170629045254.22351-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] breakpad: Upgrade to latest and fix use of ucontext_t
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,105 +54,295 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jun 2017 04:53:04 -0000
-
-Drop upstreamed patch
+X-List-Received-Date: Thu, 29 Jun 2017 04:53:05 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch | 52 ----------------------
- .../{fluentbit_0.11.3.bb => fluentbit_0.11.11.bb}  |  7 ++-
- 2 files changed, 3 insertions(+), 56 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
- rename meta-oe/recipes-extended/fluentbit/{fluentbit_0.11.3.bb => fluentbit_0.11.11.bb} (67%)
+ ...ce-use-of-struct-ucontext-with-ucontext_t.patch | 242 +++++++++++++++++++++
+ meta-oe/recipes-devtools/breakpad/breakpad_git.bb  |  11 +-
+ 2 files changed, 248 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
-deleted file mode 100644
-index 539a42a7d..000000000
---- a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch
-+++ /dev/null
-@@ -1,52 +0,0 @@
--From ceb47f37582a055bb7f253f813c435ad55c5b6eb Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 22 Apr 2017 10:02:50 -0700
--Subject: [PATCH 1/2] CMakeLists.txt: Add AUTOCONF_HOST_OPT to help cross
-- compiling
--
--This helps in doing cross compiles for modules which are using
--GNU autoconf for build system
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- CMakeLists.txt | 10 ++++++++--
-- 1 file changed, 8 insertions(+), 2 deletions(-)
--
--diff --git a/CMakeLists.txt b/CMakeLists.txt
--index b093f9a..ebf0cd7 100644
----- a/CMakeLists.txt
--+++ b/CMakeLists.txt
--@@ -290,6 +290,12 @@ else()
--   endif()
-- endif()
-- 
--+if("${GNU_HOST}" STREQUAL "")
--+    set(AUTOCONF_HOST_OPT "")
--+else()
--+    set(AUTOCONF_HOST_OPT "--host=${GNU_HOST}")
--+endif()
--+
-- # Memory Allocator
-- # ================
-- if(FLB_JEMALLOC AND ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
--@@ -299,7 +305,7 @@ if(FLB_JEMALLOC AND ${CMAKE_SYSTEM_NAME} MATCHES "Linux")
--   # Link to Jemalloc as an external dependency
--   ExternalProject_Add(jemalloc
--     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc
---    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc/configure --with-lg-quantum=3 --enable-cc-silence --prefix=<INSTALL_DIR>
--+    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/jemalloc/configure ${AUTOCONF_HOST_OPT} --with-lg-quantum=3 --enable-cc-silence --prefix=<INSTALL_DIR>
--     CFLAGS=-std=gnu99\ -Wall\ -pipe\ -g3\ -O3\ -funroll-loops
--     BUILD_COMMAND ${MAKE}
--     INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/
--@@ -317,7 +323,7 @@ endif()
-- if(FLB_REGEX)
--   ExternalProject_Add(onigmo
--     SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo
---    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo/configure --with-pic --disable-shared --enable-static --prefix=<INSTALL_DIR>
--+    CONFIGURE_COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/lib/onigmo/configure ${AUTOCONF_HOST_OPT} --with-pic --disable-shared --enable-static --prefix=<INSTALL_DIR>
--     CFLAGS=-std=gnu99\ -Wall\ -pipe\ -g3\ -O3\ -funroll-loops
--     BUILD_COMMAND ${MAKE}
--     INSTALL_DIR ${CMAKE_CURRENT_BINARY_DIR}/
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-similarity index 67%
-rename from meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
-rename to meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-index 8d756e6a4..46c47fd55 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-@@ -3,11 +3,10 @@ HOMEPAGE = "http://fluentbit.io"
- BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch
+new file mode 100644
+index 000000000..07cb8a366
+--- /dev/null
++++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch
+@@ -0,0 +1,242 @@
++From b90c8f3b60bfe5dbed2823620242e9d30b9eb28f Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 28 Jun 2017 19:01:18 -0700
++Subject: [PATCH] Replace use of struct ucontext with ucontext_t
++
++glibc 2.26 would not expose struct ucontext anymore
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Pending
++
++ .../linux/dump_writer_common/ucontext_reader.cc    | 32 +++++++++++-----------
++ .../linux/dump_writer_common/ucontext_reader.h     | 14 +++++-----
++ src/client/linux/handler/exception_handler.cc      | 10 +++----
++ src/client/linux/handler/exception_handler.h       |  4 +--
++ .../linux/microdump_writer/microdump_writer.cc     |  2 +-
++ .../linux/minidump_writer/minidump_writer.cc       |  2 +-
++ 6 files changed, 32 insertions(+), 32 deletions(-)
++
++diff --git a/src/client/linux/dump_writer_common/ucontext_reader.cc b/src/client/linux/dump_writer_common/ucontext_reader.cc
++index c80724dd..052ce37c 100644
++--- a/src/client/linux/dump_writer_common/ucontext_reader.cc
+++++ b/src/client/linux/dump_writer_common/ucontext_reader.cc
++@@ -36,19 +36,19 @@ namespace google_breakpad {
++ 
++ // Minidump defines register structures which are different from the raw
++ // structures which we get from the kernel. These are platform specific
++-// functions to juggle the ucontext and user structures into minidump format.
+++// functions to juggle the ucontext_t and user structures into minidump format.
++ 
++ #if defined(__i386__)
++ 
++-uintptr_t UContextReader::GetStackPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetStackPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.gregs[REG_ESP];
++ }
++ 
++-uintptr_t UContextReader::GetInstructionPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetInstructionPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.gregs[REG_EIP];
++ }
++ 
++-void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
+++void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
++                                     const struct _libc_fpstate* fp) {
++   const greg_t* regs = uc->uc_mcontext.gregs;
++ 
++@@ -88,15 +88,15 @@ void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
++ 
++ #elif defined(__x86_64)
++ 
++-uintptr_t UContextReader::GetStackPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetStackPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.gregs[REG_RSP];
++ }
++ 
++-uintptr_t UContextReader::GetInstructionPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetInstructionPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.gregs[REG_RIP];
++ }
++ 
++-void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
+++void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
++                                     const struct _libc_fpstate* fpregs) {
++   const greg_t* regs = uc->uc_mcontext.gregs;
++ 
++@@ -145,15 +145,15 @@ void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
++ 
++ #elif defined(__ARM_EABI__)
++ 
++-uintptr_t UContextReader::GetStackPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetStackPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.arm_sp;
++ }
++ 
++-uintptr_t UContextReader::GetInstructionPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetInstructionPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.arm_pc;
++ }
++ 
++-void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc) {
+++void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext_t *uc) {
++   out->context_flags = MD_CONTEXT_ARM_FULL;
++ 
++   out->iregs[0] = uc->uc_mcontext.arm_r0;
++@@ -184,15 +184,15 @@ void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc) {
++ 
++ #elif defined(__aarch64__)
++ 
++-uintptr_t UContextReader::GetStackPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetStackPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.sp;
++ }
++ 
++-uintptr_t UContextReader::GetInstructionPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetInstructionPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.pc;
++ }
++ 
++-void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
+++void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
++                                     const struct fpsimd_context* fpregs) {
++   out->context_flags = MD_CONTEXT_ARM64_FULL;
++ 
++@@ -210,15 +210,15 @@ void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc,
++ 
++ #elif defined(__mips__)
++ 
++-uintptr_t UContextReader::GetStackPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetStackPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.gregs[MD_CONTEXT_MIPS_REG_SP];
++ }
++ 
++-uintptr_t UContextReader::GetInstructionPointer(const struct ucontext* uc) {
+++uintptr_t UContextReader::GetInstructionPointer(const ucontext_t* uc) {
++   return uc->uc_mcontext.pc;
++ }
++ 
++-void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext *uc) {
+++void UContextReader::FillCPUContext(RawContextCPU *out, const ucontext_t *uc) {
++ #if _MIPS_SIM == _ABI64
++   out->context_flags = MD_CONTEXT_MIPS64_FULL;
++ #elif _MIPS_SIM == _ABIO32
++diff --git a/src/client/linux/dump_writer_common/ucontext_reader.h b/src/client/linux/dump_writer_common/ucontext_reader.h
++index b6e77b4b..2de80b70 100644
++--- a/src/client/linux/dump_writer_common/ucontext_reader.h
+++++ b/src/client/linux/dump_writer_common/ucontext_reader.h
++@@ -39,23 +39,23 @@
++ 
++ namespace google_breakpad {
++ 
++-// Wraps platform-dependent implementations of accessors to ucontext structs.
+++// Wraps platform-dependent implementations of accessors to ucontext_t structs.
++ struct UContextReader {
++-  static uintptr_t GetStackPointer(const struct ucontext* uc);
+++  static uintptr_t GetStackPointer(const ucontext_t* uc);
++ 
++-  static uintptr_t GetInstructionPointer(const struct ucontext* uc);
+++  static uintptr_t GetInstructionPointer(const ucontext_t* uc);
++ 
++-  // Juggle a arch-specific ucontext into a minidump format
+++  // Juggle a arch-specific ucontext_t into a minidump format
++   //   out: the minidump structure
++   //   info: the collection of register structures.
++ #if defined(__i386__) || defined(__x86_64)
++-  static void FillCPUContext(RawContextCPU *out, const ucontext *uc,
+++  static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
++                              const struct _libc_fpstate* fp);
++ #elif defined(__aarch64__)
++-  static void FillCPUContext(RawContextCPU *out, const ucontext *uc,
+++  static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
++                              const struct fpsimd_context* fpregs);
++ #else
++-  static void FillCPUContext(RawContextCPU *out, const ucontext *uc);
+++  static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc);
++ #endif
++ };
++ 
++diff --git a/src/client/linux/handler/exception_handler.cc b/src/client/linux/handler/exception_handler.cc
++index 586d84e9..05936d28 100644
++--- a/src/client/linux/handler/exception_handler.cc
+++++ b/src/client/linux/handler/exception_handler.cc
++@@ -457,9 +457,9 @@ bool ExceptionHandler::HandleSignal(int /*sig*/, siginfo_t* info, void* uc) {
++   // Fill in all the holes in the struct to make Valgrind happy.
++   memset(&g_crash_context_, 0, sizeof(g_crash_context_));
++   memcpy(&g_crash_context_.siginfo, info, sizeof(siginfo_t));
++-  memcpy(&g_crash_context_.context, uc, sizeof(struct ucontext));
+++  memcpy(&g_crash_context_.context, uc, sizeof(ucontext_t));
++ #if defined(__aarch64__)
++-  struct ucontext* uc_ptr = (struct ucontext*)uc;
+++  ucontext_t* uc_ptr = (ucontext_t*)uc;
++   struct fpsimd_context* fp_ptr =
++       (struct fpsimd_context*)&uc_ptr->uc_mcontext.__reserved;
++   if (fp_ptr->head.magic == FPSIMD_MAGIC) {
++@@ -468,9 +468,9 @@ bool ExceptionHandler::HandleSignal(int /*sig*/, siginfo_t* info, void* uc) {
++   }
++ #elif !defined(__ARM_EABI__) && !defined(__mips__)
++   // FP state is not part of user ABI on ARM Linux.
++-  // In case of MIPS Linux FP state is already part of struct ucontext
+++  // In case of MIPS Linux FP state is already part of ucontext_t
++   // and 'float_state' is not a member of CrashContext.
++-  struct ucontext* uc_ptr = (struct ucontext*)uc;
+++  ucontext_t* uc_ptr = (ucontext_t*)uc;
++   if (uc_ptr->uc_mcontext.fpregs) {
++     memcpy(&g_crash_context_.float_state, uc_ptr->uc_mcontext.fpregs,
++            sizeof(g_crash_context_.float_state));
++@@ -494,7 +494,7 @@ bool ExceptionHandler::SimulateSignalDelivery(int sig) {
++   // ExceptionHandler::HandleSignal().
++   siginfo.si_code = SI_USER;
++   siginfo.si_pid = getpid();
++-  struct ucontext context;
+++  ucontext_t context;
++   getcontext(&context);
++   return HandleSignal(sig, &siginfo, &context);
++ }
++diff --git a/src/client/linux/handler/exception_handler.h b/src/client/linux/handler/exception_handler.h
++index daba57e0..25598a29 100644
++--- a/src/client/linux/handler/exception_handler.h
+++++ b/src/client/linux/handler/exception_handler.h
++@@ -191,11 +191,11 @@ class ExceptionHandler {
++   struct CrashContext {
++     siginfo_t siginfo;
++     pid_t tid;  // the crashing thread.
++-    struct ucontext context;
+++    ucontext_t context;
++ #if !defined(__ARM_EABI__) && !defined(__mips__)
++     // #ifdef this out because FP state is not part of user ABI for Linux ARM.
++     // In case of MIPS Linux FP state is already part of struct
++-    // ucontext so 'float_state' is not required.
+++    // ucontext_t so 'float_state' is not required.
++     fpstate_t float_state;
++ #endif
++   };
++diff --git a/src/client/linux/microdump_writer/microdump_writer.cc b/src/client/linux/microdump_writer/microdump_writer.cc
++index 3764eec2..80ad5c46 100644
++--- a/src/client/linux/microdump_writer/microdump_writer.cc
+++++ b/src/client/linux/microdump_writer/microdump_writer.cc
++@@ -593,7 +593,7 @@ class MicrodumpWriter {
++ 
++   void* Alloc(unsigned bytes) { return dumper_->allocator()->Alloc(bytes); }
++ 
++-  const struct ucontext* const ucontext_;
+++  const ucontext_t* const ucontext_;
++ #if !defined(__ARM_EABI__) && !defined(__mips__)
++   const google_breakpad::fpstate_t* const float_state_;
++ #endif
++diff --git a/src/client/linux/minidump_writer/minidump_writer.cc b/src/client/linux/minidump_writer/minidump_writer.cc
++index d11ba6e5..c7161434 100644
++--- a/src/client/linux/minidump_writer/minidump_writer.cc
+++++ b/src/client/linux/minidump_writer/minidump_writer.cc
++@@ -1323,7 +1323,7 @@ class MinidumpWriter {
++   const int fd_;  // File descriptor where the minidum should be written.
++   const char* path_;  // Path to the file where the minidum should be written.
++ 
++-  const struct ucontext* const ucontext_;  // also from the signal handler
+++  const ucontext_t* const ucontext_;  // also from the signal handler
++ #if !defined(__ARM_EABI__) && !defined(__mips__)
++   const google_breakpad::fpstate_t* const float_state_;  // ditto
++ #endif
++-- 
++2.13.2
++
+diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+index 36c2b6349..a4f149143 100644
+--- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
++++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+@@ -17,21 +17,22 @@ PE = "1"
  
- SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
--           file://0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch \
-            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
-            "
--SRC_URI[md5sum] = "9383262339412782b80cc49e7ad15609"
--SRC_URI[sha256sum] = "eb8a85c656fa60682b0bf8dd1ad58d848cd251dab4f35a6777acd552c65b0511"
-+SRC_URI[md5sum] = "7bce8091c41fb6412b7fe0185b3cb8d6"
-+SRC_URI[sha256sum] = "93b1bdd14db20f2823cd31c6f1a2f3fcb7c94ec3e0c8daefabf130310b7fc4ed"
+ PV = "1.0+git${SRCPV}"
  
- S = "${WORKDIR}/fluent-bit-${PV}"
+-SRCREV_FORMAT = "breakpad_glog_gmock_gtest_protobuf_lss"
++SRCREV_FORMAT = "breakpad_glog_gtest_protobuf_lss_gyp"
  
-@@ -19,6 +18,6 @@ INSANE_SKIP_${PN}-dev += "dev-elf"
+-SRCREV_breakpad = "2f6cb866d615d6240a18c7535c994c6bb93b1ba5"
++SRCREV_breakpad = "66856d617b6658ce09ef2bc1b15d457ab7b152b0"
+ SRCREV_glog = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
+-SRCREV_gmock = "f7d03d2734759ee12b57d2dbcb695607d89e8e05"
+ SRCREV_gtest = "ec44c6c1675c25b9827aacd08c02433cccde7780"
+ SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
+-SRCREV_lss = "1549d20f6d3e7d66bb4e687c0ab9da42c2bff2ac"
++SRCREV_lss = "a91633d172407f6c83dd69af11510b37afebb7f9"
++SRCREV_gyp = "e8ab0833a42691cd2184bd4c45d779e43821d3e0"
  
- inherit cmake systemd
+ SRC_URI = "git://github.com/google/breakpad;name=breakpad \
+            git://github.com/google/glog.git;destsuffix=git/src/third_party/glog;name=glog \
+-           git://github.com/google/googlemock.git;destsuffix=git/src/testing;name=gmock \
+            git://github.com/google/googletest.git;destsuffix=git/src/testing/gtest;name=gtest \
+            git://github.com/google/protobuf.git;destsuffix=git/src/third_party/protobuf/protobuf;name=protobuf \
+            git://chromium.googlesource.com/linux-syscall-support;protocol=https;destsuffix=git/src/third_party/lss;name=lss \
++           git://chromium.googlesource.com/external/gyp;protocol=https;destsuffix=git/src/tools/gyp;name=gyp \
++           file://0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch \
+ "
+ S = "${WORKDIR}/git"
  
--EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS}"
-+EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
- 
- SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
 -- 
 2.13.2
 
