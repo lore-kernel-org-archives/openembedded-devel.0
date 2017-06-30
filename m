@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 80B0D78283
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DB23601F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:36 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id z6so17027289pfk.3
+	Fri, 30 Jun 2017 13:02:41 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id y5so7862497wmh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:38 -0700 (PDT)
+	Fri, 30 Jun 2017 06:02:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ufWA5wUVtrZZbTG2s3oQ+RH4VtTn+2b7cvbo60WEq+4=;
-	b=rmfj+01JMVjlR3tEHB/F9Yu11T+DMV6YD3JP1fbnLa/excjPf/z690fyW4AocwnP1q
-	/NDJI8hlfMipjGokdBTnJaYcRseK8HkV46PKSWaMA70YptQqncGdOGprDbAqDtwEU0+5
-	pBTugI9Za0PvLvFPLuwDxfCLhBhGMdeoZwvYNBi63Qhj4+qd4skDSgXbH6IJcuvVzW9b
-	hdTJlBIMOAGVkcabWtBsKGf1VDEmgBfEaDfJx0LYoM9q2051NHDmYwLyl4FAy2tneVbj
-	zdUeVSpjke4I7RKG52fuFs/X8ZeNRFdRJj6QABXN2Rro/aI2EIiJ7aU9+Ocb/r1+wM8Q
-	Lz+Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=MLAz/0bGdLOcEmtZaW3H4Wa3YQWjW4eqMvhQzbMBrC0=;
+	b=Y4lyi83WkUU7wYX0zCzY5ntVlEDDM1QIaFx0Ck1lDkFzn0Q3vdH//4xZzxxhdFN4C9
+	CXmNZOD0qetd1/4FqOy2j92kG8yc4F2Vp8VEh3BYFcYf9weInmwvhDNFRaGF3ifNzB1E
+	8HFnoNnKrx2gulNfQsJIaLD60e8RQEcESFoMadvIS9tG07NqXB+LHf1EX3SQzHaRSd4t
+	ssdXPTA6la5e6DF4KKg77aC1qNOGPYa7by1rs8FGNg+fWrd/qRoVBAa0cNkVbmjyNIFW
+	6uZshD03AiCuB9bbOhaQvLHR4jsbs849fghU4y55oT+fEGRVRA70cDgZSL29RMk59bSi
+	Mk5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ufWA5wUVtrZZbTG2s3oQ+RH4VtTn+2b7cvbo60WEq+4=;
-	b=bi7u/zmEL4hRrZgJ30sqrEB9FUywUkn2uVG6FGQxCnaKXHzAXD3twTooBIwUIzeKKY
-	jOIgakEI/tOMDsNznsmPAAOxrLkEH11NfFSkfTIAfeyTYSm3YVcOOwKb/qK/sJ2znsZA
-	VqBl4TRUVDJ26vsPpXladFWVhwL9TRjgz2RK3lgxWQWyxvwPUdMK3VOaL8yrMIGq0g+f
-	/i9WBlMIxvRdOkO6DsxJg4QzmbWd1vFSLGeifgm7b6Z1lt5yykGBL0sCPvKNqUDeq1S/
-	jfcIA2jSVcrYb5Kgd7BVZ3nWnpJEWxg9JivAZ1uO3n+Vd/jNy3DeWqgBtOxlAyE31ruQ
-	vshQ==
-X-Gm-Message-State: AKS2vOxmb1Nkq68HQgCHzXQY2U39mzlQuo+i7KszQmsrOaIuGB9yxQ9Y
-	/rUGkeisGLugyzFg
-X-Received: by 10.84.231.134 with SMTP id g6mr14035994plk.241.1498827637826;
-	Fri, 30 Jun 2017 06:00:37 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:36 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=MLAz/0bGdLOcEmtZaW3H4Wa3YQWjW4eqMvhQzbMBrC0=;
+	b=esOqpx/9mWC4MHgRIEU5jzkRTpAX910l6d12aofwjTLmha0nFe5ejPLFz1vYTiBOtb
+	vUYQ7Drr/Wigj359omsjGlkNcInso5uSrQGZbSc8OBIFekWhQKkVjxWKTEMwnXeEMhFP
+	9x0EX37Wef1xY7niJZsOdw9RsJImkHdLscZLQkXcgQjgdcEPJ7rpIR/ypbyz23zqC9j7
+	e0L1nAeX4FhzudQVOjsCIMtMVePIgZt2p3IaB687N5TX/Rn+Y+vMw3a04vmjBFyp5nge
+	0y7WZWKckJPUjcspn500rQPMieCj/ZXxL0pLtZBG6nkSvjx/2qkwJaLXUA6lCQ3gsV2l
+	zGAg==
+X-Gm-Message-State: AKS2vOwR//Uv8eS871AH+SH2l9E3gEn/1qMOhIBf+D0gZkfqt5mU53RR
+	yz5uYNBj232NnQvGWYvXo9He3iX+dA==
+X-Received: by 10.80.144.68 with SMTP id z4mr5233465edz.143.1498827762992;
+	Fri, 30 Jun 2017 06:02:42 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.165.198 with HTTP; Fri, 30 Jun 2017 06:02:12 -0700 (PDT)
+In-Reply-To: <CALbNGRRU67B0TZXShLBxdsMWZnjhYQvGm-PmVcN196vFByoonw@mail.gmail.com>
+References: <20170630120731.3745-1-schnitzeltony@googlemail.com>
+	<CALbNGRRU67B0TZXShLBxdsMWZnjhYQvGm-PmVcN196vFByoonw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:57 -0700
-Message-Id: <20170630125957.3342-17-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
-References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 17/17] openhpi: Fix build on 64bit platforms e.g. aarch64
+Date: Fri, 30 Jun 2017 06:02:12 -0700
+Message-ID: <CAMKF1srGbEGw+S9072yFMammJ5_8kxzti6QTzJ7RpCBH6hSMTg@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 0/3] gimp related updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,30 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:36 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:02:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+On Fri, Jun 30, 2017 at 5:10 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Fri, Jun 30, 2017 at 2:07 PM, Andreas M=C3=BCller
+> <schnitzeltony@googlemail.com> wrote:
+>> It started with gegl failing with gcc 7.1...
+>>
+>> Andreas M=C3=BCller (3):
+>>   babl: update 0.1.16 -> 0.1.26
+>>   gegl: update 0.3.4 -> 0.3.16
+>>   gimp: update 2.8.20 to 2.8.22
+>>
+>>  meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.bb} | 4 =
+++--
+>>  meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb}  | 4 =
+++--
+>>  meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.bb} | 4 =
+++--
+>>  3 files changed, 6 insertions(+), 6 deletions(-)
+>>  rename meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.b=
+b} (72%)
+>>  rename meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb=
+} (91%)
+>>  rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.b=
+b} (89%)
+>>
+>> --
+>> 2.9.4
+>>
+> Please ignore this series - it went out a bit over enthusiastic...
+>
 
-diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-index db2a24a9b..16e58dc73 100644
---- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-+++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
-@@ -54,9 +54,10 @@ FILES_${PN}-libs = "${libdir}/${BPN}/*.so /usr/lib/${BPN}/*.so"
- INSANE_SKIP_${PN}-libs = "dev-so"
- RDEPENDS_${PN} += "${PN}-libs"
- 
--PACKAGECONFIG ??= "libgcrypt"
-+PACKAGECONFIG ??= "libgcrypt non32bit"
- PACKAGECONFIG[sysfs] = "--enable-sysfs,--disable-sysfs,sysfsutils,"
- PACKAGECONFIG[libgcrypt] = "--enable-encryption,--disable-encryption,libgcrypt,"
-+PACKAGECONFIG[non32bit] = "--enable-non32bit-int,--disable-non32bit-int,,"
- 
- do_install_append () {
-     install -m 0755 -d ${D}${sysconfdir}/${BPN}
--- 
-2.13.2
+I have these three updated too a bit differently in the series I just
+sent today.
 
+
+> Andreas
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
