@@ -1,32 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4749B77E4A
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A10F77D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 05:47:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="20683719"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 30 Jun 2017 13:47:49 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 7AD0A47F64DA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:47:46 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Fri, 30 Jun 2017 13:47:45 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 30 Jun 2017 13:47:05 +0800
-Message-ID: <1498801625-1064-4-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1498801625-1064-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-References: <1498801625-1064-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	Fri, 30 Jun 2017 06:50:30 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v5U6oUq5008124
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 29 Jun 2017 23:50:30 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.294.0; Thu, 29 Jun 2017 23:50:30 -0700
+From: <kai.kang@windriver.com>
+To: <martin.jansa@gmail.com>
+Date: Fri, 30 Jun 2017 14:43:10 +0800
+Message-ID: <20170630064310.2061-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 7AD0A47F64DA.A901D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5] [PATCH v3 3/3] qtdeclarative: add ptest
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [meta-oe][PATCH V2] gflags: update SRC_URI with git fetcher
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,43 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 05:47:46 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 06:50:31 -0000
 Content-Type: text/plain
 
-Add ptest for qttools by using provided testsuite in qtdeclarative.
+From: Kai Kang <kai.kang@windriver.com>
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Because github archives can be regenerated from time to time, update
+SRC_URI with git fetcher for gflags.
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- recipes-qt/qt5/qtdeclarative/run-ptest | 5 +++++
- recipes-qt/qt5/qtdeclarative_git.bb    | 1 +
- 2 files changed, 6 insertions(+)
- create mode 100644 recipes-qt/qt5/qtdeclarative/run-ptest
+ meta-oe/recipes-support/gflags/gflags_2.2.0.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-qt/qt5/qtdeclarative/run-ptest b/recipes-qt/qt5/qtdeclarative/run-ptest
-new file mode 100644
-index 0000000..6c3f522
---- /dev/null
-+++ b/recipes-qt/qt5/qtdeclarative/run-ptest
-@@ -0,0 +1,5 @@
-+#!/bin/sh
-+
-+for x in ` awk '{print $1}' tst_list `;do
-+    ./${x};
-+done
-diff --git a/recipes-qt/qt5/qtdeclarative_git.bb b/recipes-qt/qt5/qtdeclarative_git.bb
-index a620a00..bb0a605 100644
---- a/recipes-qt/qt5/qtdeclarative_git.bb
-+++ b/recipes-qt/qt5/qtdeclarative_git.bb
-@@ -1,5 +1,6 @@
- require qt5.inc
- require qt5-git.inc
-+require qt5-ptest.inc
+diff --git a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
+index 5fc28f6..89caa37 100644
+--- a/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
++++ b/meta-oe/recipes-support/gflags/gflags_2.2.0.bb
+@@ -5,9 +5,10 @@ HOMEPAGE = "https://github.com/gflags/gflags"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=c80d1a3b623f72bb85a4c75b556551df"
  
- LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
- LIC_FILES_CHKSUM = " \
+-SRC_URI = "https://github.com/gflags/gflags/archive/v${PV}.tar.gz;downloadfilename=${PN}-${PV}.tar.gz"
+-SRC_URI[md5sum] = "b99048d9ab82d8c56e876fb1456c285e"
+-SRC_URI[sha256sum] = "466c36c6508a451734e4f4d76825cf9cd9b8716d2b70ef36479ae40f08271f88"
++SRC_URI = "git://github.com/gflags/gflags.git"
++SRCREV = "f8a0efe03aa69b3336d8e228b37d4ccb17324b88"
++
++S = "${WORKDIR}/git"
+ 
+ FILES_${PN}-dev += "${libdir}/cmake"
+ 
 -- 
-2.7.4
-
-
+2.10.1
 
 
