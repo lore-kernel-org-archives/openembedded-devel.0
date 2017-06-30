@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 59A0B78279
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 5021C78275
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:26 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id s66so17001279pfs.2
+	Fri, 30 Jun 2017 13:00:27 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id f127so15346449pgc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:28 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=a/vznGPSdpDAq2k8IjbAO+2+/hCY14rz9EUKUryxTOM=;
-	b=O5JcPbMKYUor5fVQUjM4UktRfOGk1aSBXXhJfVfIXsnFtL9tSqf5NyQIVpvZ01Debu
-	pMAUGb9F1utXmBnEvdgZ2fQXvEkTF51gmckGOgro3ZV4a5pl5lXMnankyU6jI07B6FGY
-	wQwC++Yq8mpHzzfZ8ZNSZiEmhDt326rqRHlbTa2lTC/EVueSnX/4Bj7sgCJ7SkuNBbwC
-	JkitoDClqeMhZgoXEyejuJROGHiLmcFuwFcmDPBJX4C97JEJLSytETTmeX8EFccnBrGV
-	sTz3P9XPJLBbdavJ/A9UZY7aQmYd4U4swL1+UZtNCAgClFKhQTrFDyFZWhfq/CdFTJHd
-	965g==
+	bh=io3fJpBH4KjgSWh6Zgx058g/VuaLVvoVe9T+aRp3UlA=;
+	b=Dl4VOcUbP6039xdJXaANc7IBxxHfEflLYTt2kBG/uMLp5OjZzTbOB0bC/yGT5jyzUJ
+	9ry2koYhrY/m1FAF4T2xZfLlPv3f/aGDPuyFQm2vumrqZ3ckHZU9vlgYPlguQe/cXkzc
+	QiEVNYcVLlGeb8SVJzB13PPHK35SyJKwmZA9ij+8WzBcjdS3kyd1+j2RY5S/jNWuQYBT
+	Og4hkNEt3x0er6y7lZCu0WJ5ZaYNOkNQgWUE7wXljteEx02rPOo3XRVsV9pXRG9BLa2F
+	8hOLzNqeoVQEwUXoHlvk3zlK3iWBLLFJaQGuOWdnzlM2nLAVGbhk+6tmRU7lnlrDiLs4
+	uOVQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=a/vznGPSdpDAq2k8IjbAO+2+/hCY14rz9EUKUryxTOM=;
-	b=jmbtHB6AWo9zPd2cfgdjojk3zgZqMIw4pktq9kTqpfbwqKiUgTxMJuM82bLMIWt32K
-	pUG7eWvCbpMC2YJazlDVj4ubpfo3pMSN+ZNkpmp1nNYl39GRCYiZZqThZp/5oZrK8YD6
-	y8tse3qUvBVaEGT+M4E46qGEaPlRsIp94GyN34pwLkEMCva5sJOVe9rZA7s6ycE9CTmT
-	NcmSvU3CmeBMVEq7yBY5vGa5G3tVHrtIOnin6DuHK+3MbC8Y+eq2H+7VM4l7LlOv3kTa
-	fQK2mYnZTzMGuAiE4P7fQ+VAabPrq7H8FI6xBnH5yz030ggrzY7sRoDB80VZHjcp8sgv
-	gG3Q==
-X-Gm-Message-State: AKS2vOyC3JFzQZOW4k8QwwK3n/mCEW9OMrtp40VEMV7T3gkN9D4dUX1W
-	wAjf0C7CljvxvIHA
-X-Received: by 10.99.185.28 with SMTP id z28mr21384509pge.123.1498827627377;
-	Fri, 30 Jun 2017 06:00:27 -0700 (PDT)
+	bh=io3fJpBH4KjgSWh6Zgx058g/VuaLVvoVe9T+aRp3UlA=;
+	b=S5qQxmv/Ac3IfcIV+PUbbGOzCRxX5g0u+SEKjYawSxAfO9ACuGcXGgKpWfPP3KMq5x
+	0/KqYpAasjHCa+CeNwyd3FkIQLDkctc3anD3Mw9LZVaGFbdqFjKXJcFQttzAkPto/IS+
+	CozqPiQ/6yyc7Fq+J5FjK+XYIoitGRgNw3H6TT645oOPYy0kiB/oVpo2pk1kVdoSglxL
+	vX3szVXFLixPBYduVWWTBC1LveC2HWkOFOhzNDH0AlYaJZn8Npu9cteF5L8hjadkgmMz
+	p3bhGwm0nSkoYkjUg8O+N7a2KF/63NbFLCBVaU9I6vRv+CNajASsBGS6XbPQjDlBy18P
+	fJPg==
+X-Gm-Message-State: AKS2vOykp1qhaJyjsX6S13VTdV2D+rIFjHz3Pt5Awa5N4/Tul+AQGxm8
+	tdnyd7luefl2/r8G
+X-Received: by 10.99.228.69 with SMTP id i5mr20532886pgk.192.1498827628756;
+	Fri, 30 Jun 2017 06:00:28 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.25
+	t26sm10735590pfl.41.2017.06.30.06.00.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:26 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:51 -0700
-Message-Id: <20170630125957.3342-11-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:52 -0700
+Message-Id: <20170630125957.3342-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 11/17] assimp: Upgrade to 3.3.1 release
+Subject: [meta-oe][PATCH 12/17] synergy: Update to 1.8.8 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,83 +55,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:27 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:28 -0000
 
-License years changed see
-https://github.com/assimp/assimp/commit/189340a99f335cc28cae7c39eaee434322a54548
+Change license to reflect openSSL linking exception
+https://github.com/symless/synergy/commit/a8472d2eb2106a0d1503d25369e6bdc6e3b88c7d
 
-Fix build on big-endian architectures
-Use Assimp namespace to fix build for big-endian architectures
+and copyright changes
+https://github.com/symless/synergy/commit/c3c0913633041584fa41180640d2e4c83fa92820
+
+Point to new(moved) SRC_URI
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...001-Fix-build-on-big-endian-architectures.patch | 29 ++++++++++++++++++++++
- .../assimp/{assimp_3.1.1.bb => assimp_3.3.1.bb}    | 10 +++++---
- 2 files changed, 35 insertions(+), 4 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
- rename meta-oe/recipes-graphics/assimp/{assimp_3.1.1.bb => assimp_3.3.1.bb} (50%)
+ meta-oe/recipes-support/synergy/synergy_git.bb | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch b/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
-new file mode 100644
-index 000000000..c94bb3d58
---- /dev/null
-+++ b/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
-@@ -0,0 +1,29 @@
-+From 614475dcac1cee4d63b764282c578672bc060321 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Jun 2017 14:23:00 -0700
-+Subject: [PATCH] Fix build on big-endian architectures
-+
-+see
-+https://github.com/assimp/assimp/pull/986
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ code/glTFAsset.inl | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/code/glTFAsset.inl b/code/glTFAsset.inl
-+index d52c825c..470246c9 100644
-+--- a/code/glTFAsset.inl
-++++ b/code/glTFAsset.inl
-+@@ -40,6 +40,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+ 
-+ #include "StringUtils.h"
-+ 
-++using namespace Assimp;
-++
-+ namespace glTF {
-+ 
-+ namespace {
-+-- 
-+2.13.2
-+
-diff --git a/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb b/meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
-similarity index 50%
-rename from meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
-rename to meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
-index 4da3dc213..064683a65 100644
---- a/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
-+++ b/meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
-@@ -3,13 +3,15 @@ DESCRIPTION = "Open Asset Import Library is a portable Open Source library to im
- HOMEPAGE = "http://www.assimp.org/"
- SECTION = "devel"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=bc4231a2268da8fc55525ad119638a87"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=4cd8c0aedc7a0623476669377d7eeda8"
+diff --git a/meta-oe/recipes-support/synergy/synergy_git.bb b/meta-oe/recipes-support/synergy/synergy_git.bb
+index 1c55a8a0f..68f0387ba 100644
+--- a/meta-oe/recipes-support/synergy/synergy_git.bb
++++ b/meta-oe/recipes-support/synergy/synergy_git.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Synergy - control multiple computers with one keyboard and mouse"
+ HOMEPAGE = "http://synergy-project.org"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0f366945b209c5523e39889f636af00a"
+-LICENSE = "GPL-2.0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d2ba51ca68e055566aade24662f9eb41"
++LICENSE = "GPL-2.0-with-OpenSSL-exception"
+ SECTION = "x11/utils"
  
- DEPENDS = "boost virtual/libgl"
+ DEPENDS = "virtual/libx11 libxtst libxinerama curl openssl"
+@@ -10,11 +10,11 @@ do_unpack_extra[depends] = "unzip-native:do_populate_sysroot"
+ # depends on virtual/libx11
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}-3.1/${BPN}-${PV}_no_test_models.zip"
--SRC_URI[md5sum] = "ccd4788204509da58a3a53c7aeda7a8b"
--SRC_URI[sha256sum] = "da9827876f10a8b447270368753392cfd502e70a2e9d1361554e5dfcb1fede9e"
-+SRCREV = "a8673d4828df5107186f49e5e4efa5316b727482"
-+SRC_URI = "git://github.com/assimp/assimp \
-+           file://0001-Fix-build-on-big-endian-architectures.patch \
-+           "
-+S = "${WORKDIR}/git"
+-SRC_URI = "git://github.com/synergy/synergy.git;protocol=http"
++SRC_URI = "git://github.com/symless/synergy.git;protocol=http"
  
- inherit cmake
+-# Version 1.7.4-rc8
+-SRCREV ?= "588fb4b805dd452556d05dbc03fe29ea5b4e43c0"
+-PV = "1.7.3+1.7.4-rc8+${SRCPV}"
++# Version 1.8.8-stable
++SRCREV ?= "c30301e23424db1125664da17deb8c3aa6aec52d"
++PV = "1.8.8+${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
  
 -- 
 2.13.2
