@@ -1,53 +1,48 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id E63A578260
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id B97A878260
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 12:07:44 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id u23so7628736wma.2
+	Fri, 30 Jun 2017 12:10:05 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id y70so7294538vky.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 05:07:46 -0700 (PDT)
+	Fri, 30 Jun 2017 05:10:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-transfer-encoding;
-	bh=wxzE/9oDKz2hgLg12UptTzMuNMZHCez+LvJI1V6IWFk=;
-	b=XbQ4FgSCqCgMoADY4dRNBcivQ6Dg1hLlmTl91VBEZHZiBW27aHsQPQuC7ImRSDUoE9
-	iqVeVvz4YwGikH4SLqb963hzb4csbt9gu7CYZ3aItothtR4zK+xCjZTFuKnuCEw3nAHh
-	2PUwD9LUVIk3G7yM5tc1yg/WONxMLkXn3mXD4AnLdNLev+eE5Afc1goep8jCwZJL5+/j
-	hC1rGa8TgJsUD9Os5rCEph129ROsvoUm88SmXLrn4S1a//68KC5i7E8rtfXbTPQdmIAo
-	5HpmMr3REbJiTWeegfjKYA7i5RQ8T0YVnMohYJnHBW7VA2XN65EXIQzezlzhwdxklwwj
-	L2uw==
+	bh=MhqamW3zUKDqWi3rbH+wOv5cVww0GwAABal/9QpjnC0=;
+	b=h/u6BGnQtngV5GSZsk8haKDLll3uwEWc6boPToFTh+o+Gefgdp95+TIGpUuhcOY3Mg
+	MxzFlbTrem8SgVtsAWVKMpFHqPq1koSDRmiIaCFwO2i9PWKRfarfBHe6TXlyz27B1YHc
+	3nsDVb4iHyPzzQziAVhzgNgEdc11VDwz44gSAhwOaTcsKqSGisxlslIB8mNBE8VOGQ5O
+	glm/VqMnahmI75ruWPdin6YczQSNlTC4KiIo/uypty6Lg0/z5Iws7aLyVtZckDHpguqx
+	JQXZPNEcUyzEYXm8ZG1ixsh9/VQkrE+hQQyeYuNUCjFi4mclMSnjtlcm0eRwNWmGyNgT
+	TCdQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=wxzE/9oDKz2hgLg12UptTzMuNMZHCez+LvJI1V6IWFk=;
-	b=HBE/HJAvn1w3t027SkGltlOYBX3tJlTGEZ3l/ewoq8Wm/B+V43OnZnS0JECeu+fYkd
-	sv2/3xagl35Nya6PLYM+JxPwkOeNRUXmXPliAP9HbfB6M0WEd0GUUcFNRu9AzbJLOrLt
-	4WGX6BC2CMO4v8kw3UIzC3B0AtbVRtOA308jUG/2S0sQkUhyJvBlgTvvml6qmtiR8z4+
-	74VVEA89cBWBWa9BzJpYAuyAFnygmHhTTrWM2kDgz6aAhHHBPDOCoY8wQrrrusFNh6iI
-	ij8gs5dmRqhrsOzHrU1KcnqPBv3tvbk7VsceklUkxs3YcY+dnNGqey30/dKlniixSEVO
-	6tDQ==
-X-Gm-Message-State: AKS2vOw+e5xxNwiEZ4ML0oIPrYL6BdMms/c3WF45mB2zlLsWfP2NJf1y
-	SA6q+uRkCl7vBKwl
-X-Received: by 10.28.232.29 with SMTP id f29mr5080759wmh.55.1498824465123;
-	Fri, 30 Jun 2017 05:07:45 -0700 (PDT)
-Received: from mueller-a-nb-linux.zera.local
-	(ip-109-91-251-134.hsi12.unitymediagroup.de. [109.91.251.134])
-	by smtp.googlemail.com with ESMTPSA id
-	d91sm14159496wma.7.2017.06.30.05.07.44
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 05:07:44 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 14:07:31 +0200
-Message-Id: <20170630120731.3745-4-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.4
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:content-transfer-encoding;
+	bh=MhqamW3zUKDqWi3rbH+wOv5cVww0GwAABal/9QpjnC0=;
+	b=DgQsZ8OSrkkGyWqsSFrrEwv44hTn7JiIsm7pJE4Jo49Gk+iM5Ss21TiHXYds0AdK1T
+	t0CMJqZPZfsFwTJu1FBP6qg+VfkC6IpEGLAPlkf9VsOAnJJZ6/TC09OdnJmCO5tDk4BR
+	n4d78LtTmfCNC5fT27XxF6hirZdnewGoWCbQIIwj4pBfmQb5rggRVCmLh/on3dAD/L4q
+	HV+zSIwqjn4W/1uidk6IlwD6QeX+u/oBEttEp4TIYRulFC/+0BZJZY65xHV8wfzkzmNq
+	Umyb4bnjQYxwvvukbqMpLFJUg3sAYvVdcHPPUEbIxFqB8t9VpAQAVMy/tlC6Vy4KY9OL
+	ULmA==
+X-Gm-Message-State: AKS2vOzztJyfY00U6YPcKFwDBmF9QZMjCe29BDfi3F6SxPV4vV9VUUyL
+	Xt2nPD2cXUtALYpQn6NyUnpRZk3MKQ==
+X-Received: by 10.31.186.130 with SMTP id k124mr11518038vkf.124.1498824606077; 
+	Fri, 30 Jun 2017 05:10:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.77.72 with HTTP; Fri, 30 Jun 2017 05:10:05 -0700 (PDT)
 In-Reply-To: <20170630120731.3745-1-schnitzeltony@googlemail.com>
 References: <20170630120731.3745-1-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] gimp: update 2.8.20 to 2.8.22
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Fri, 30 Jun 2017 14:10:05 +0200
+Message-ID: <CALbNGRRU67B0TZXShLBxdsMWZnjhYQvGm-PmVcN196vFByoonw@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 0/3] gimp related updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,35 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 12:07:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 30 Jun 2017 12:10:05 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb} (89%)
+On Fri, Jun 30, 2017 at 2:07 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> It started with gegl failing with gcc 7.1...
+>
+> Andreas M=C3=BCller (3):
+>   babl: update 0.1.16 -> 0.1.26
+>   gegl: update 0.3.4 -> 0.3.16
+>   gimp: update 2.8.20 to 2.8.22
+>
+>  meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.bb} | 4 +=
++--
+>  meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb}  | 4 +=
++--
+>  meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.bb} | 4 +=
++--
+>  3 files changed, 6 insertions(+), 6 deletions(-)
+>  rename meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.bb=
+} (72%)
+>  rename meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb}=
+ (91%)
+>  rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.bb=
+} (89%)
+>
+> --
+> 2.9.4
+>
+Please ignore this series - it went out a bit over enthusiastic...
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-similarity index 89%
-rename from meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
-rename to meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-index 9588ab0..68febca 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-@@ -32,8 +32,8 @@ SRC_URI = " \
-     file://0001-configure-ac-do-not-check-for-freetype-config.patch \
-     file://bump_Babl-GEGL_versions.patch \
- "
--SRC_URI[md5sum] = "d405640c426b234d6efc36fb4f5bae57"
--SRC_URI[sha256sum] = "939ca1df70be865c672ffd654f4e20f188121d01601c5c90237214101533c805"
-+SRC_URI[md5sum] = "7e4fd7a53b1d3c32dff642ab1a94b44d"
-+SRC_URI[sha256sum] = "9187a35cc52b110d78124d7b27b68a68ade14a794c2721314bac6134d2a5638a"
- 
- EXTRA_OECONF = "--disable-python \
-                 --without-webkit \
--- 
-2.9.4
-
+Andreas
 
