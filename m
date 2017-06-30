@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AF4A78275
+Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B9E778283
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:33 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id z6so17027160pfk.3
+	Fri, 30 Jun 2017 13:00:35 +0000 (UTC)
+Received: by mail-pg0-f45.google.com with SMTP id j186so63482232pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:35 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=NCQgWXf1WniMSFVG5dJJ5fRgJXN2H3/697ucKPA4eTU=;
-	b=LYxrNo/A23GmFLCozh4Vz6ghGHgjYMqkDGLgYmwmEVHCfdeQQAF5vtjqnQDDZ57scB
-	kRBj5Mfd9ibN/ZSPqOYMZJGv9jFBppSNh+jj1fx96z8JcxU6ixLBR2vlJclwOhe59WUO
-	p+V5P4EYhQJyjYjlk+a/CVy4VvhPoCVP3ICncK2hNu2JWq4ufUlz5RtviBR8fQj4pcRg
-	48Qo6HmZ0gGBSYk4FxHpUhZlFzQ5jyFmpdHa0dYkydeCmOtGQ8BtFXHO80/mCi0F1quA
-	myBnEA8svxLT/qa6nzKUccfQRIQUvcH+8I1RkKqMHYu/bPhu3j1fz/mJT71FKo5mE9S8
-	vl6A==
+	bh=uawfpAPnGIUrB1qXYyQjT9WsbfIjocLurGlvO/vmmEA=;
+	b=gSx0+2Jdq/NFnHWOQKDsVwc5d5ZkKt5V0aqF5N3BR6TImjoC0XbOoL7mzuRZg0qeYz
+	+1EMsvflGRS2nAn50nmDTOJ0kiU9pXnr0aT5CiV8ko24VQ3pP32X9q7gNvgnc24z/Cf6
+	h99tCCQ/qY57P12Xf9BfD0Dss7YH7pVZFJBHlVCSCkwgV7PIKfPrrLKvdeo2ypciqj/s
+	WYna2RoJxUa6rddc3yV9Fr6iVdJ1jJpJAmy8M4I0hMYvCuonfHa3yd7ZuvS5pVorz6uf
+	ga8PwzG+C3YbbfJzKBx9oU6nCRqjJVrhO9fBc8ZLwlDqa6Fcb+1+f5PznjtvQSImGWso
+	RA3Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=NCQgWXf1WniMSFVG5dJJ5fRgJXN2H3/697ucKPA4eTU=;
-	b=LtF3A3ddwe9JymJO8xvAuCI95vfLhaFDTSpX+O4ZZWPavfq+4NWGK0qJuVxeD647Bc
-	Abl13um/vr5yhN71jMxxBrL9nPTYF5Fh9t2C/zeG+BEeyuzkzOvKso01XjnDIrgwYdIr
-	xKrIxhmzruNe8XTSBtxwEqJn/rxyaszhXeA1EPFFHIetsgJ4iBKTPduGHbIsicLBx2pp
-	r9IfqZDkVEBmfHl52r1XT2C8NjyR94ELeK+WOlKwwgnGld4L2N0XkaNLQtBPCYVNRKbe
-	lboRIsUepJB4qZrpZc3HGuftzI3MSPsFoRtGQ1y/qvUylDqStNccCQ3FhCLPPg3qepOO
-	jS9Q==
-X-Gm-Message-State: AKS2vOz6dNFOZyWVVIBdwsfheymcBEgWvJhitngHmVo2krmFC6zLJ/Z/
-	JXAMxYAcoAQH5UFl
-X-Received: by 10.98.53.134 with SMTP id c128mr22190932pfa.36.1498827632981;
-	Fri, 30 Jun 2017 06:00:32 -0700 (PDT)
+	bh=uawfpAPnGIUrB1qXYyQjT9WsbfIjocLurGlvO/vmmEA=;
+	b=s62viFmmI0dl5BqUs4ij/asow8uYO2LUVeptDonXzIpgG4mzyrsdSYlodJvZdIx83s
+	tQYlqRTlD5sCRFaETaCOJKr0oSoG9UWMW6U2qAQpzGrRoSvZxcBXVru2zVwgPUWctx0b
+	Wv21rMmOBLNUYHFtcEUElnD5Q8LvCAXOSQts6rzlPkZt9J8ztpXQtHxqtxVwlLNXc8wQ
+	hHOS8YUMPP3Sc6u7nqbk2gjhscCOeO25wEVthRK6THRsCSilW66IA10CMF3rBJDwTgXj
+	iR9CJRDhXQmUVi7BJAL3jtxl/f5l1s0djRbKkehC4bqGDJKQpF6i14vuv/HY2sitCPId
+	j05Q==
+X-Gm-Message-State: AKS2vOzMeWughzmq2HiMArYZm+zWZsph0nug12BZNJ36IQeu+fT6Rpev
+	mU961GtWqTDLnhib
+X-Received: by 10.84.232.79 with SMTP id f15mr23843842pln.189.1498827636384;
+	Fri, 30 Jun 2017 06:00:36 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.30
+	t26sm10735590pfl.41.2017.06.30.06.00.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:30 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:54 -0700
-Message-Id: <20170630125957.3342-14-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:56 -0700
+Message-Id: <20170630125957.3342-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/17] libtorrent: Implement 64bit atomics for mips32
+Subject: [meta-oe][PATCH 16/17] uim: Add support for aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,306 +55,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:34 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:36 -0000
 
-Fixes build errors e.g.
-
-| /mnt/a/oe/build/tmp/work/mips32r2-bec-linux/rtorrent/0.9.6+gitAUTOINC+226e670dec-r0/recipe-sysroot/usr/lib/../lib/libtorrent.so: undefined reference to `__sync_fetch_and_and_8'
-| /mnt/a/oe/build/tmp/work/mips32r2-bec-linux/rtorrent/0.9.6+gitAUTOINC+226e670dec-r0/recipe-sysroot/usr/lib/../lib/libtorrent.so: undefined reference to `__sync_add_and_fetch_8'
-| collect2: error: ld returned 1 exit status
+Backport patch from
+https://github.com/uim/libgcroots/pull/1
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-implement-64bit-atomic-for-mips.patch     | 263 +++++++++++++++++++++
- .../libtorrent/libtorrent_git.bb                   |   5 +-
- 2 files changed, 266 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-implement-64bit-atomic-for-mips.patch
+ .../uim/uim/0001-Add-support-for-aarch64.patch     | 82 ++++++++++++++++++++++
+ meta-oe/recipes-support/uim/uim_1.8.6.bb           |  1 +
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-implement-64bit-atomic-for-mips.patch b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-implement-64bit-atomic-for-mips.patch
+diff --git a/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch b/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
 new file mode 100644
-index 000000000..84e0772a7
+index 000000000..4b1249436
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-implement-64bit-atomic-for-mips.patch
-@@ -0,0 +1,263 @@
-+From d7b6df5808e7bef5930b61a82e880699a9f9e208 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Jun 2017 15:39:19 -0700
-+Subject: [PATCH] implement 64bit atomic for mips
++++ b/meta-oe/recipes-support/uim/uim/0001-Add-support-for-aarch64.patch
+@@ -0,0 +1,82 @@
++From 24fd52cc45f7b5ff45afe072f5fbe66485df8c8e Mon Sep 17 00:00:00 2001
++From: Andreas Schwab <schwab@suse.de>
++Date: Wed, 29 Oct 2014 14:18:28 +0100
++Subject: [PATCH] Add support for aarch64
 +
-+GCC does not provide 64bit atomics for mips32
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++* include/private/gcconfig.h: Add support for aarch64.
 +---
-+ src/Makefile.am |   1 +
-+ src/atomic64.c  | 228 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-+ 2 files changed, 229 insertions(+)
-+ create mode 100644 src/atomic64.c
++ sigscheme/libgcroots/include/private/gcconfig.h | 37 +++++++++++++++++++++++++
++ 1 file changed, 37 insertions(+)
 +
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index 99aaace0..cbbbbee9 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -27,6 +27,7 @@ libtorrent_la_LIBADD = \
-+ 	utils/libsub_utils.la
++diff --git a/sigscheme/libgcroots/include/private/gcconfig.h b/sigscheme/libgcroots/include/private/gcconfig.h
++index 4d42b03..0f13db6 100644
++--- a/sigscheme/libgcroots/include/private/gcconfig.h
+++++ b/sigscheme/libgcroots/include/private/gcconfig.h
++@@ -62,6 +62,13 @@
++ # endif
 + 
-+ libtorrent_la_SOURCES = \
-++	atomic64.c \
-+ 	globals.cc \
-+ 	globals.h \
-+ 	manager.cc \
-+diff --git a/src/atomic64.c b/src/atomic64.c
-+new file mode 100644
-+index 00000000..f841b39b
-+--- /dev/null
-++++ b/src/atomic64.c
-+@@ -0,0 +1,228 @@
-++/*===----- atomic64.c - Support functions for 64-bit atomic operations.-----===
-++ *
-++ *                     The LLVM Compiler Infrastructure
-++ *
-++ * This file is dual licensed under the MIT and the University of Illinois Open
-++ * Source Licenses. See LICENSE.TXT for details.
-++ *
-++ *===-----------------------------------------------------------------------===
-++ *
-++ *  atomic64.c defines a set of functions for performing atomic accesses on
-++ *  64-bit memory locations. It also implements spinlock synchronization
-++ *  operations.
-++ *
-++ *===-----------------------------------------------------------------------===
-++ */
-++
-++#include <stdint.h>
-++#include <stdbool.h>
-++
-++/*
-++ * only need these on MIPS, since it lacks hardware 64-bit atomics,
-++ * unlike x86 and ARM.
-++ */
-++#if defined(__mips__) || defined(__mipsel__)
-++
-++static void __spin_lock(volatile int *lock) {
-++  while (__sync_lock_test_and_set(lock, 1))
-++    while (*lock) {}
-++}
-++
-++static void __spin_unlock(volatile int *lock) {
-++  __sync_lock_release(lock);
-++}
-++
-++/*
-++ * Make sure the lock is on its own cache line to prevent false sharing.
-++ * Put it inside a struct that is aligned and padded to the typical MIPS
-++ * cacheline which is 32 bytes.
-++ */
-++static struct {
-++  int lock;
-++  char pad[32 - sizeof(int)];
-++} __attribute__((aligned (32))) lock = { 0 };
-++
-++
-++uint64_t __sync_fetch_and_add_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = ret + val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_fetch_and_sub_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = ret - val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_fetch_and_and_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = ret & val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_fetch_and_or_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = ret | val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_fetch_and_xor_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = ret ^ val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_add_and_fetch_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr + val;
-++  *ptr = ret;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_sub_and_fetch_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr - val;
-++  *ptr = ret;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_and_and_fetch_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr & val;
-++  *ptr = ret;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_or_and_fetch_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr | val;
-++  *ptr = ret;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_xor_and_fetch_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr ^ val;
-++  *ptr = ret;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++bool __sync_bool_compare_and_swap_8(volatile uint64_t *ptr,
-++                                         uint64_t oldval, uint64_t newval) {
-++  bool ret = false;
-++
-++  __spin_lock(&lock.lock);
-++
-++  if (*ptr == oldval) {
-++    *ptr = newval;
-++    ret = true;
-++  }
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_val_compare_and_swap_8(volatile uint64_t *ptr,
-++                                            uint64_t oldval, uint64_t newval) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  if (ret == oldval)
-++    *ptr = newval;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++uint64_t __sync_lock_test_and_set_8(volatile uint64_t *ptr, uint64_t val) {
-++  uint64_t ret;
-++
-++  __spin_lock(&lock.lock);
-++
-++  ret = *ptr;
-++  *ptr = val;
-++
-++  __spin_unlock(&lock.lock);
-++
-++  return ret;
-++}
-++
-++void __sync_lock_release_8(volatile uint64_t *ptr) {
-++  __spin_lock(&lock.lock);
-++
-++  *ptr = 0;
-++
-++  __spin_unlock(&lock.lock);
-++}
-++
-++#endif
++ /* Determine the machine type: */
+++# if defined(__aarch64__)
+++#    define AARCH64
+++#    if !defined(LINUX)
+++#      define NOSYS
+++#      define mach_type_known
+++#    endif
+++# endif
++ # if defined(__arm__) || defined(__thumb__)
++ #    define ARM32
++ #    if !defined(LINUX) && !defined(NETBSD)
++@@ -231,6 +238,10 @@
++ #    define IA64
++ #    define mach_type_known
++ # endif
+++# if defined(LINUX) && defined(__aarch64__)
+++#    define AARCH64
+++#    define mach_type_known
+++# endif
++ # if defined(LINUX) && defined(__arm__)
++ #    define ARM32
++ #    define mach_type_known
++@@ -504,6 +515,7 @@
++ 		    /* 			running Amdahl UTS4		*/
++                     /*             S390       ==> 390-like machine      */
++ 		    /*                  running LINUX                   */
+++                    /*             AARCH64    ==> ARM AArch64           */
++ 		    /* 		   ARM32      ==> Intel StrongARM	*/
++ 		    /* 		   IA64	      ==> Intel IPF		*/
++ 		    /*				  (e.g. Itanium)	*/
++@@ -1724,6 +1736,31 @@
++ #   endif
++ # endif
++ 
+++# ifdef AARCH64
+++#   define CPP_WORDSZ 64
+++#   define MACH_TYPE "AARCH64"
+++#   define ALIGNMENT 8
+++#   ifndef HBLKSIZE
+++#     define HBLKSIZE 4096
+++#   endif
+++#   ifdef LINUX
+++#     define OS_TYPE "LINUX"
+++#     define LINUX_STACKBOTTOM
+++#     define DYNAMIC_LOADING
+++      extern int __data_start[];
+++#     define DATASTART ((ptr_t)__data_start)
+++      extern char _end[];
+++#     define DATAEND ((ptr_t)(&_end))
+++#   endif
+++#   ifdef NOSYS
+++      /* __data_start is usually defined in the target linker script.   */
+++      extern int __data_start[];
+++#     define DATASTART ((ptr_t)__data_start)
+++      extern void *__stack_base__;
+++#     define STACKBOTTOM ((ptr_t)__stack_base__)
+++#   endif
+++# endif
+++
++ # ifdef ARM32
++ #   define CPP_WORDSZ 32
++ #   define MACH_TYPE "ARM32"
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-index aaebc5f1b..0febebd93 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-@@ -7,8 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=393a5ca445f6965873eca0259a17f833"
- DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+index 76a41252d..ed846b968 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
++++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+@@ -8,6 +8,7 @@ SRC_URI = "http://uim.googlecode.com/files/uim-${PV}.tar.bz2"
  
- SRC_URI = "git://github.com/rakshasa/libtorrent \
--    file://don-t-run-code-while-configuring-package.patch \
--"
-+           file://don-t-run-code-while-configuring-package.patch \
-+           file://0001-implement-64bit-atomic-for-mips.patch \
-+           "
- SRCREV = "c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
- 
- PV = "0.13.6+git${SRCPV}"
+ SRC_URI_append_class-target = " file://uim-module-manager.patch \
+     file://0001-fix-bug-for-cross-compile.patch \
++    file://0001-Add-support-for-aarch64.patch \
+ "
+ SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
+ SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
 -- 
 2.13.2
 
