@@ -1,48 +1,45 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
-	[209.85.213.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B97A878260
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C2029601F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 12:10:05 +0000 (UTC)
-Received: by mail-vk0-f67.google.com with SMTP id y70so7294538vky.3
+	Fri, 30 Jun 2017 13:00:10 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id f127so15345626pgc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 05:10:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=MhqamW3zUKDqWi3rbH+wOv5cVww0GwAABal/9QpjnC0=;
-	b=h/u6BGnQtngV5GSZsk8haKDLll3uwEWc6boPToFTh+o+Gefgdp95+TIGpUuhcOY3Mg
-	MxzFlbTrem8SgVtsAWVKMpFHqPq1koSDRmiIaCFwO2i9PWKRfarfBHe6TXlyz27B1YHc
-	3nsDVb4iHyPzzQziAVhzgNgEdc11VDwz44gSAhwOaTcsKqSGisxlslIB8mNBE8VOGQ5O
-	glm/VqMnahmI75ruWPdin6YczQSNlTC4KiIo/uypty6Lg0/z5Iws7aLyVtZckDHpguqx
-	JQXZPNEcUyzEYXm8ZG1ixsh9/VQkrE+hQQyeYuNUCjFi4mclMSnjtlcm0eRwNWmGyNgT
-	TCdQ==
+	Fri, 30 Jun 2017 06:00:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=HmUkMkQXtGUKNzU8+CdHtLVI8z4W8seZ+x1SjIevrJY=;
+	b=ktjkDjviJ7Vrk+Dmk175TtQDTkxr3VAiylASx3LF/1fLNy2OifNMCq6/xvGM8uVmXa
+	NEdmW8L2M/N8P5bMPE8fKM7qzRoliBTgWlLB58Nv8KS9R5rkQ6o2MqRtdIFX0T57oESP
+	tutaRBA/UHV4ofoPkFWk4Z1LfXX0/88nkZ4BBIbUIYdnIpW5FRPaE179eJtqtCSPbXXH
+	UA6Kj6EG4KRcNH2T2jLg124YJ0qxEA4BeaDCWAN1wizsr1Dnv8s430dXehp04/IWWP4L
+	kJe300sXTcMkgtSpluNSxejSchyj1wWzgElBZDN2XujU/C1OWgnh6Zq0eh9sf3N0gtRb
+	x/FQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:content-transfer-encoding;
-	bh=MhqamW3zUKDqWi3rbH+wOv5cVww0GwAABal/9QpjnC0=;
-	b=DgQsZ8OSrkkGyWqsSFrrEwv44hTn7JiIsm7pJE4Jo49Gk+iM5Ss21TiHXYds0AdK1T
-	t0CMJqZPZfsFwTJu1FBP6qg+VfkC6IpEGLAPlkf9VsOAnJJZ6/TC09OdnJmCO5tDk4BR
-	n4d78LtTmfCNC5fT27XxF6hirZdnewGoWCbQIIwj4pBfmQb5rggRVCmLh/on3dAD/L4q
-	HV+zSIwqjn4W/1uidk6IlwD6QeX+u/oBEttEp4TIYRulFC/+0BZJZY65xHV8wfzkzmNq
-	Umyb4bnjQYxwvvukbqMpLFJUg3sAYvVdcHPPUEbIxFqB8t9VpAQAVMy/tlC6Vy4KY9OL
-	ULmA==
-X-Gm-Message-State: AKS2vOzztJyfY00U6YPcKFwDBmF9QZMjCe29BDfi3F6SxPV4vV9VUUyL
-	Xt2nPD2cXUtALYpQn6NyUnpRZk3MKQ==
-X-Received: by 10.31.186.130 with SMTP id k124mr11518038vkf.124.1498824606077; 
-	Fri, 30 Jun 2017 05:10:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.77.72 with HTTP; Fri, 30 Jun 2017 05:10:05 -0700 (PDT)
-In-Reply-To: <20170630120731.3745-1-schnitzeltony@googlemail.com>
-References: <20170630120731.3745-1-schnitzeltony@googlemail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 30 Jun 2017 14:10:05 +0200
-Message-ID: <CALbNGRRU67B0TZXShLBxdsMWZnjhYQvGm-PmVcN196vFByoonw@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 0/3] gimp related updates
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=HmUkMkQXtGUKNzU8+CdHtLVI8z4W8seZ+x1SjIevrJY=;
+	b=fXoQIHj6rwZeq1Ek2pOkqX+uAwec3APca9Ao+DL4HfT7HR3Tdi6QKymjFSu5tHpLvK
+	RI9rSBeD9rCZ1H+5HdDapCTiyuci2k+Myu6LQ4FsS4mGerO5aPD7k7zYYlzu18qa/ZSz
+	bdDkJUumchXmnA7qP7NLRynhuuPUGW+APoWGVFbAytWsMp4Dci3zxvDtCE4g6eKUCWTl
+	6g0f0hugF6fkBujhk4rxQupxMWafysoAiAeyKmhtoO9fVcSa/Ul4xqM91JFmWa2nGEGc
+	KXw7Mgxnp6id9l1j5hvbr9Ycmha0eUifGP0seR2fdUNSS71jGg4ud27LAxn52/Pyldhi
+	rieg==
+X-Gm-Message-State: AKS2vOxroqis3mVxAqN6eN0DrL1cuVVHhQQnRdVI8ADPiSrE3Si84RQi
+	eoc+6JaSvdPrTjzY
+X-Received: by 10.98.55.199 with SMTP id e190mr22196937pfa.15.1498827611244;
+	Fri, 30 Jun 2017 06:00:11 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
+	by smtp.gmail.com with ESMTPSA id
+	t26sm10735590pfl.41.2017.06.30.06.00.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 30 Jun 2017 06:00:10 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 30 Jun 2017 05:59:41 -0700
+Message-Id: <20170630125957.3342-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-networking][PATCH 01/17] autofs: Add build dependency on libnsl2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,37 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 12:10:05 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:10 -0000
 
-On Fri, Jun 30, 2017 at 2:07 PM, Andreas M=C3=BCller
-<schnitzeltony@googlemail.com> wrote:
-> It started with gegl failing with gcc 7.1...
->
-> Andreas M=C3=BCller (3):
->   babl: update 0.1.16 -> 0.1.26
->   gegl: update 0.3.4 -> 0.3.16
->   gimp: update 2.8.20 to 2.8.22
->
->  meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.bb} | 4 +=
-+--
->  meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb}  | 4 +=
-+--
->  meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.bb} | 4 +=
-+--
->  3 files changed, 6 insertions(+), 6 deletions(-)
->  rename meta-oe/recipes-graphics/babl/{babl_0.1.16.bb =3D> babl_0.1.26.bb=
-} (72%)
->  rename meta-oe/recipes-graphics/gegl/{gegl_0.3.4.bb =3D> gegl_0.3.16.bb}=
- (91%)
->  rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb =3D> gimp_2.8.22.bb=
-} (89%)
->
-> --
-> 2.9.4
->
-Please ignore this series - it went out a bit over enthusiastic...
+this is needed with glibc 2.26 where libnsl is deprecated
+and is provided using separate recipe building it from
+external sources now.
 
-Andreas
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb b/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
+index eea7c4b83..ccd8a7f24 100644
+--- a/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
++++ b/meta-networking/recipes-daemons/autofs/autofs_5.1.2.bb
+@@ -3,7 +3,7 @@ SECTION = "utils"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
+ 
+-DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl"
++DEPENDS += "libtirpc flex-native bison-native e2fsprogs openssl libxml2 util-linux cyrus-sasl libnsl2"
+ 
+ CFLAGS += "-I${STAGING_INCDIR}/tirpc"
+ 
+-- 
+2.13.2
+
 
