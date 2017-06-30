@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F54678270
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 59A0B78279
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:24 +0000 (UTC)
-Received: by mail-pg0-f53.google.com with SMTP id f127so63503119pgc.0
+	Fri, 30 Jun 2017 13:00:26 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id s66so17001279pfs.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:26 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=YqDdJL7uLVYs36dfMQDyOLKR6nIfrA0MUZ1mAR6p1lk=;
-	b=qP2lUK160p+x9K4OeKuT280VH0wyU7S8mGopwOBSWnHtvoCUDHDNx380EWJciQSiox
-	PolFvzwJs3NEc9nUUBAsUBOvCP58SHS0KCGnYXG2CzLcBQNyhKzcunLTF0DyqRvUX2yC
-	H6DWKn0fW+9FjDLntVSMxQG8h0Bont6uMzoXs9Ua4g0ADwrXtbFheS3xAdvRGPsWIpva
-	0WT1/SFyXgqqFaJTh+SHsbdJIQ6pMQKq7mJHnLqayQ6hJH0/vgbDh/hJNRBmJZovIOFQ
-	mvEVJywy78S+42A89X7BI37kWWl8emzUXMlVCdE8QhUGc/s32oGkkMBdAI2kOz5mXu14
-	+0Mg==
+	bh=a/vznGPSdpDAq2k8IjbAO+2+/hCY14rz9EUKUryxTOM=;
+	b=O5JcPbMKYUor5fVQUjM4UktRfOGk1aSBXXhJfVfIXsnFtL9tSqf5NyQIVpvZ01Debu
+	pMAUGb9F1utXmBnEvdgZ2fQXvEkTF51gmckGOgro3ZV4a5pl5lXMnankyU6jI07B6FGY
+	wQwC++Yq8mpHzzfZ8ZNSZiEmhDt326rqRHlbTa2lTC/EVueSnX/4Bj7sgCJ7SkuNBbwC
+	JkitoDClqeMhZgoXEyejuJROGHiLmcFuwFcmDPBJX4C97JEJLSytETTmeX8EFccnBrGV
+	sTz3P9XPJLBbdavJ/A9UZY7aQmYd4U4swL1+UZtNCAgClFKhQTrFDyFZWhfq/CdFTJHd
+	965g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=YqDdJL7uLVYs36dfMQDyOLKR6nIfrA0MUZ1mAR6p1lk=;
-	b=npmU5YzdNxWVJnIHZgE3E5kB2CNxw/MCIq1TUFlOamVNL0Fy0cerS0eNh5sIHwK45+
-	MWXKQCAtfpNcgfrjjtj1Jpmro6EekG9VWi9q22FLQabxS3RwSlmoK0civmJy89a5YQmE
-	JE2Ff3c/zPtBA5FjXopuJ1XwItCGD1ufLO/rm8UHJ/5YvoRLVM74UjmeylLEv93vN6zk
-	DYOQSocC3FwRqyzHKhgVC3J3oq8MeZrTYYPFwCCd/Y17xOKM9djCMkglhv47bwQXrM7U
-	98vNlzZJ8Kz4YQQonwwRsHdv29CRkWadL0FoXS3+u94c2uzXdMqAx8O0I08vP/uOlVDS
-	d6Ww==
-X-Gm-Message-State: AKS2vOxf3JQSiD/US2XmrmDVbRzHFxBXWgVsPaQYFYzv8RRn6+8HlN1R
-	PLdyz8n8tX2TXrjj
-X-Received: by 10.99.189.18 with SMTP id a18mr21126604pgf.195.1498827625941;
-	Fri, 30 Jun 2017 06:00:25 -0700 (PDT)
+	bh=a/vznGPSdpDAq2k8IjbAO+2+/hCY14rz9EUKUryxTOM=;
+	b=jmbtHB6AWo9zPd2cfgdjojk3zgZqMIw4pktq9kTqpfbwqKiUgTxMJuM82bLMIWt32K
+	pUG7eWvCbpMC2YJazlDVj4ubpfo3pMSN+ZNkpmp1nNYl39GRCYiZZqThZp/5oZrK8YD6
+	y8tse3qUvBVaEGT+M4E46qGEaPlRsIp94GyN34pwLkEMCva5sJOVe9rZA7s6ycE9CTmT
+	NcmSvU3CmeBMVEq7yBY5vGa5G3tVHrtIOnin6DuHK+3MbC8Y+eq2H+7VM4l7LlOv3kTa
+	fQK2mYnZTzMGuAiE4P7fQ+VAabPrq7H8FI6xBnH5yz030ggrzY7sRoDB80VZHjcp8sgv
+	gG3Q==
+X-Gm-Message-State: AKS2vOyC3JFzQZOW4k8QwwK3n/mCEW9OMrtp40VEMV7T3gkN9D4dUX1W
+	wAjf0C7CljvxvIHA
+X-Received: by 10.99.185.28 with SMTP id z28mr21384509pge.123.1498827627377;
+	Fri, 30 Jun 2017 06:00:27 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.24
+	t26sm10735590pfl.41.2017.06.30.06.00.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:24 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:26 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:50 -0700
-Message-Id: <20170630125957.3342-10-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:51 -0700
+Message-Id: <20170630125957.3342-11-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 10/17] libsrtp: Fix build on mips
+Subject: [meta-oe][PATCH 11/17] assimp: Upgrade to 3.3.1 release
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,108 +56,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:25 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:27 -0000
+
+License years changed see
+https://github.com/assimp/assimp/commit/189340a99f335cc28cae7c39eaee434322a54548
+
+Fix build on big-endian architectures
+Use Assimp namespace to fix build for big-endian architectures
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Rename-conflicting-variable-mips.patch    | 73 ++++++++++++++++++++++
- .../recipes-support/libsrtp/libsrtp_1.5.2.bb       |  4 +-
- 2 files changed, 76 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
+ ...001-Fix-build-on-big-endian-architectures.patch | 29 ++++++++++++++++++++++
+ .../assimp/{assimp_3.1.1.bb => assimp_3.3.1.bb}    | 10 +++++---
+ 2 files changed, 35 insertions(+), 4 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
+ rename meta-oe/recipes-graphics/assimp/{assimp_3.1.1.bb => assimp_3.3.1.bb} (50%)
 
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch b/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
+diff --git a/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch b/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
 new file mode 100644
-index 000000000..b56c78959
+index 000000000..c94bb3d58
 --- /dev/null
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
-@@ -0,0 +1,73 @@
-+From 3dc8a678a844247d0afcf7e30fb3cbd5ccbd828f Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-graphics/assimp/assimp/0001-Fix-build-on-big-endian-architectures.patch
+@@ -0,0 +1,29 @@
++From 614475dcac1cee4d63b764282c578672bc060321 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Jun 2017 14:05:06 -0700
-+Subject: [PATCH] Rename conflicting variable 'mips'
++Date: Thu, 29 Jun 2017 14:23:00 -0700
++Subject: [PATCH] Fix build on big-endian architectures
 +
-+Fixes
-+test/srtp_driver.c:344:12: error: expected identifier or '(' before numeric constant
-+     double mips = mips_estimate(1000000000, &ignore);
++see
++https://github.com/assimp/assimp/pull/986
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ test/srtp_driver.c | 20 ++++++++++----------
-+ 1 file changed, 10 insertions(+), 10 deletions(-)
++ code/glTFAsset.inl | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/test/srtp_driver.c b/test/srtp_driver.c
-+index 8872971..d38ea19 100644
-+--- a/test/srtp_driver.c
-++++ b/test/srtp_driver.c
-+@@ -341,7 +341,7 @@ main (int argc, char *argv[]) {
-+   if (do_codec_timing) {
-+     srtp_policy_t policy;
-+     int ignore;
-+-    double mips = mips_estimate(1000000000, &ignore);
-++    double est = mips_estimate(1000000000, &ignore);
++diff --git a/code/glTFAsset.inl b/code/glTFAsset.inl
++index d52c825c..470246c9 100644
++--- a/code/glTFAsset.inl
+++++ b/code/glTFAsset.inl
++@@ -40,6 +40,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 + 
-+     crypto_policy_set_rtp_default(&policy.rtp);
-+     crypto_policy_set_rtcp_default(&policy.rtcp);
-+@@ -353,33 +353,33 @@ main (int argc, char *argv[]) {
-+     policy.allow_repeat_tx = 0;
-+     policy.next = NULL;
++ #include "StringUtils.h"
 + 
-+-    printf("mips estimate: %e\n", mips);
-++    printf("mips estimate: %e\n", est);
+++using namespace Assimp;
+++
++ namespace glTF {
 + 
-+     printf("testing srtp processing time for voice codecs:\n");
-+     printf("codec\t\tlength (octets)\t\tsrtp instructions/second\n");
-+     printf("G.711\t\t%d\t\t\t%e\n", 80, 
-+-           (double) mips * (80 * 8) / 
-++           (double) est * (80 * 8) / 
-+ 	   srtp_bits_per_second(80, &policy) / .01 );
-+     printf("G.711\t\t%d\t\t\t%e\n", 160, 
-+-           (double) mips * (160 * 8) / 
-++           (double) est * (160 * 8) / 
-+ 	   srtp_bits_per_second(160, &policy) / .02);
-+     printf("G.726-32\t%d\t\t\t%e\n", 40, 
-+-           (double) mips * (40 * 8) / 
-++           (double) est * (40 * 8) / 
-+ 	   srtp_bits_per_second(40, &policy) / .01 );
-+     printf("G.726-32\t%d\t\t\t%e\n", 80, 
-+-           (double) mips * (80 * 8) / 
-++           (double) est * (80 * 8) / 
-+ 	   srtp_bits_per_second(80, &policy) / .02);
-+     printf("G.729\t\t%d\t\t\t%e\n", 10, 
-+-           (double) mips * (10 * 8) / 
-++           (double) est * (10 * 8) / 
-+ 	   srtp_bits_per_second(10, &policy) / .01 );
-+     printf("G.729\t\t%d\t\t\t%e\n", 20, 
-+-           (double) mips * (20 * 8) /
-++           (double) est * (20 * 8) /
-+ 	   srtp_bits_per_second(20, &policy) / .02 );
-+     printf("Wideband\t%d\t\t\t%e\n", 320, 
-+-           (double) mips * (320 * 8) /
-++           (double) est * (320 * 8) /
-+ 	   srtp_bits_per_second(320, &policy) / .01 );
-+     printf("Wideband\t%d\t\t\t%e\n", 640, 
-+-           (double) mips * (640 * 8) /
-++           (double) est * (640 * 8) /
-+ 	   srtp_bits_per_second(640, &policy) / .02 );
-+   }
-+ 
++ namespace {
 +-- 
 +2.13.2
 +
-diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-index 324982843..8abaa1284 100644
---- a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-+++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
-@@ -5,7 +5,9 @@ SECTION = "libs"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=15bc16b9d2e305974dde47e733883714"
+diff --git a/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb b/meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
+similarity index 50%
+rename from meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
+rename to meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
+index 4da3dc213..064683a65 100644
+--- a/meta-oe/recipes-graphics/assimp/assimp_3.1.1.bb
++++ b/meta-oe/recipes-graphics/assimp/assimp_3.3.1.bb
+@@ -3,13 +3,15 @@ DESCRIPTION = "Open Asset Import Library is a portable Open Source library to im
+ HOMEPAGE = "http://www.assimp.org/"
+ SECTION = "devel"
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=bc4231a2268da8fc55525ad119638a87"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4cd8c0aedc7a0623476669377d7eeda8"
  
--SRC_URI = "https://github.com/cisco/libsrtp/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
-+SRC_URI = "https://github.com/cisco/libsrtp/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-+           file://0001-Rename-conflicting-variable-mips.patch \
+ DEPENDS = "boost virtual/libgl"
+ 
+-SRC_URI = "http://sourceforge.net/projects/${BPN}/files/${BPN}-3.1/${BPN}-${PV}_no_test_models.zip"
+-SRC_URI[md5sum] = "ccd4788204509da58a3a53c7aeda7a8b"
+-SRC_URI[sha256sum] = "da9827876f10a8b447270368753392cfd502e70a2e9d1361554e5dfcb1fede9e"
++SRCREV = "a8673d4828df5107186f49e5e4efa5316b727482"
++SRC_URI = "git://github.com/assimp/assimp \
++           file://0001-Fix-build-on-big-endian-architectures.patch \
 +           "
- SRC_URI[md5sum] = "2309aa6027992810a4285b042c71e644"
- SRC_URI[sha256sum] = "86e1efe353397c0751f6bdd709794143bd1b76494412860f16ff2b6d9c304eda"
++S = "${WORKDIR}/git"
+ 
+ inherit cmake
  
 -- 
 2.13.2
