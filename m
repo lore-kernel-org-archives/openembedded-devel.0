@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B0E978268
+Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 003E578268
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:18 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id u36so15349943pgn.3
+	Fri, 30 Jun 2017 13:00:21 +0000 (UTC)
+Received: by mail-pg0-f50.google.com with SMTP id f127so63502382pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:20 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OxSaHLMxK7d0dWSaNM/psfOq2zE5ZabZJe8aL9sqYhQ=;
-	b=i/P4gkQFgbDy/CUgaQuXz6qsnufJ1Ix+q/nHn5WkrYbvaoTDFt/mqvsNavG1unGTnz
-	JtE5Slfr7mcXEc4tOLRoU2Iy86Lo/RtwwCm0HRhzoWjdrZ/M4vbmGUjdJZej4m6qXaFO
-	PXsI1afNUqBF1yXR7Mvx6vpQJ34171qkHeG/Ax1ynh4lQdoEU3W59Y58bx63tLjZnZme
-	2a58LUs3XvJj7Y5ZHKn/xoP+JdjRWCQqu9oSuAZ6TbYVsBKD8Rsn+nl+k4ASDK360T6F
-	DH8DAtPLwimm67hcsnZnJUGky7Cvenr5Jo3npTLSTIj4fBo4YqpcCmTLcED4hHjWwttJ
-	VaUQ==
+	bh=wJny9ZIiK4YIDVW4A/3CAz6XfQeW5hsq+C1XpgObdjc=;
+	b=NW/EhjDgy04q6k0BingwGE/4A+Zn5a+FMuBnhlU1k/H6xYRVvkV6OFRUMQF8DSbCce
+	ifuO26WxNHJX/sBe/Smo/qKAM9iWsJqINHjjnHMrsRrafWph9RFZBfRUaa1K1EslLKfN
+	6Ux+4GRKzNVevdjG5z6uuizSnvj2nC841A8y2+ZhQ6242qWS9r3I1u8H5luJB0YJBI0Y
+	92uxN+z0P0Nv6+gLIFJ57FgCZ98BN951jgH9bw0bQdXdMU7+Jk4FfW1DmNdZ+NKp6Kt6
+	bkgG/nAo1jP96neXwY7f4TWxvFCTM34BTmLGBa4Uy1yBZVHVcl1/4E/SpLW2qfzRLioa
+	ID9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=OxSaHLMxK7d0dWSaNM/psfOq2zE5ZabZJe8aL9sqYhQ=;
-	b=cWNAg04eH2Y/2Ss94liexnPRfD9DrUpul1x8ahDrvSh7pzCVuyznz74fo2MKJd6+NI
-	FfhWMtptnwDGJbnLOUZNugGE7DCEenUkka4/Svxa7JZmRS+irrFSyH4FQHwaBrWkv5BZ
-	/NtI3RbyRmK/FfS+COqG2REuQKEq4H6WaSefwQNuTryxQFzI848jYg6AwZkP5gHTb6ia
-	oZLyM5Y8OaYvzsg625WOWcMxdmQKZGzK0WX4ci2dmVvnmN0CTxyw5KyHN2vAOORVDY3A
-	kARIwJVAalQofxR3QTYsphA8kz+nhA1bl0YMt8q2JF6kS4W8CFWJTHMp0t1M9bf2jYj5
-	9JcQ==
-X-Gm-Message-State: AKS2vOxwWwN8FBIAQGGrwc3j6SbwFDcvtBbkczxFHBG7i2OxxaDvCo4w
-	36csKIVh9GFdtYGW
-X-Received: by 10.84.142.101 with SMTP id 92mr24014576plw.29.1498827620039;
-	Fri, 30 Jun 2017 06:00:20 -0700 (PDT)
+	bh=wJny9ZIiK4YIDVW4A/3CAz6XfQeW5hsq+C1XpgObdjc=;
+	b=H5bZsrTRySWXmglf2YKGd1hlNm0kyGIa0yuftS4hO+jyTYnLO3jVEM0QARUEA9w/iI
+	W2s9nbdGcp0fjSqo2ZctLLBXgToQYf6OjfzpEMq4fklFQ9T22lna6fJYmdasZ6dHfQ3r
+	LklYK9FfrV3RPs7JiQopnBfs9syRLooe6abAjwGOP9TMn8WV+tke4BHq1Xcr1RUbt+v/
+	BnOx4vy8JjSUffELZa1KQSLTzUpX5ktNPd37FUgIwLRd1lwm2ITKAJKWIt2aqqJG+q3L
+	GjS+ndv6EQ5nKfj0bu0Mj+qEp/nq3ZtkQU0mmXYrwQveXpnxLu7ZjrTs51f+tTThuOg4
+	yGlg==
+X-Gm-Message-State: AKS2vOw5626gWg9R9aZI+Yk6Uj74PZNvIUpnAP9HL78K4pLgLT+ORH/o
+	ELQigQRR/q4X+/Rf
+X-Received: by 10.98.133.16 with SMTP id u16mr11250469pfd.140.1498827621733;
+	Fri, 30 Jun 2017 06:00:21 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.18
+	t26sm10735590pfl.41.2017.06.30.06.00.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:18 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:46 -0700
-Message-Id: <20170630125957.3342-6-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:47 -0700
+Message-Id: <20170630125957.3342-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 06/17] babl: Upgrade to 0.1.28
+Subject: [meta-oe][PATCH 07/17] gimp: Upgrade to 2.8.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,32 +55,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:19 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:22 -0000
+
+Fix API issue due to new gegl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/babl/{babl_0.1.16.bb => babl_0.1.28.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/babl/{babl_0.1.16.bb => babl_0.1.28.bb} (72%)
+ .../gimp/gimp/0003-Fix-use-of-gegl-API.patch       | 34 ++++++++++++++++++++++
+ .../gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb}        | 14 ++++-----
+ 2 files changed, 41 insertions(+), 7 deletions(-)
+ create mode 100644 meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
+ rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb} (70%)
 
-diff --git a/meta-oe/recipes-graphics/babl/babl_0.1.16.bb b/meta-oe/recipes-graphics/babl/babl_0.1.28.bb
-similarity index 72%
-rename from meta-oe/recipes-graphics/babl/babl_0.1.16.bb
-rename to meta-oe/recipes-graphics/babl/babl_0.1.28.bb
-index daea05212..9d8c90fdb 100644
---- a/meta-oe/recipes-graphics/babl/babl_0.1.16.bb
-+++ b/meta-oe/recipes-graphics/babl/babl_0.1.28.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6a6a8e020838b23406c81b19c1d46df6"
- inherit gnomebase
+diff --git a/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch b/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
+new file mode 100644
+index 000000000..7da78e205
+--- /dev/null
++++ b/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
+@@ -0,0 +1,34 @@
++From e1c8f4b8323e3965271a93529eab5774c1a7083c Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 29 Jun 2017 10:32:14 -0700
++Subject: [PATCH 3/3] Fix use of gegl API
++
++newer version of gegl does not define GEGL_IS_PARAM_SPEC_MULTILINE
++
++| core/libappcore.a(gimpparamspecs-duplicate.o): In function `gimp_param_spec_duplicate':
++| /usr/src/debug/gimp/2.8.22-r0/gimp-2.8.22/app/core/../../../../../../../../../workspace/sources/gimp/app/core/gimpparamspecs-duplicate.c:70: undefined reference to `GEGL_IS_PARAM_SPEC_MULTILINE'
++| collect2: error: ld returned 1 exit status
++
++Upstream-Status: Pending
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ app/core/gimpparamspecs-duplicate.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/app/core/gimpparamspecs-duplicate.c b/app/core/gimpparamspecs-duplicate.c
++index c0b7426..2efaf23 100644
++--- a/app/core/gimpparamspecs-duplicate.c
+++++ b/app/core/gimpparamspecs-duplicate.c
++@@ -67,7 +67,7 @@ gimp_param_spec_duplicate (GParamSpec *pspec)
++                                      spec->default_value,
++                                      pspec->flags);
++ 
++-          if (GEGL_IS_PARAM_SPEC_MULTILINE (pspec))
+++          if (gegl_param_spec_get_property_key(pspec, "multiline"))
++             {
++               g_param_spec_set_qdata (new, multiline_quark,
++                                       GINT_TO_POINTER (TRUE));
++-- 
++2.13.2
++
+diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+similarity index 70%
+rename from meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
+rename to meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+index 9588ab016..1ecd2b715 100644
+--- a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
++++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
+@@ -27,13 +27,13 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '',
  
- SRC_URI = "http://ftp.gimp.org/pub/${BPN}/0.1/${BP}.tar.bz2"
--SRC_URI[md5sum] = "a1c72e5f5d55a8b736ef2fa67ddb86ec"
--SRC_URI[sha256sum] = "7d6ba55ec53ee6f6bf6945beec28839d09ff72376f4d83035eb379cd4f3e980e"
-+SRC_URI[md5sum] = "cc53d8474a43aafb7cdaccea56cfde44"
-+SRC_URI[sha256sum] = "63f3ed23e72a857a0e6df53d9d968a325024177b01edbe314a0c98b499eb8603"
+ inherit gnome gtk-doc
  
- FILES_${PN} += "${libdir}/babl-*/*.so"
- FILES_${PN}-dev += "${libdir}/babl-*/*.la"
+-SRC_URI = " \
+-    http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
+-    file://0001-configure-ac-do-not-check-for-freetype-config.patch \
+-    file://bump_Babl-GEGL_versions.patch \
+-"
+-SRC_URI[md5sum] = "d405640c426b234d6efc36fb4f5bae57"
+-SRC_URI[sha256sum] = "939ca1df70be865c672ffd654f4e20f188121d01601c5c90237214101533c805"
++SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
++           file://0001-configure-ac-do-not-check-for-freetype-config.patch \
++           file://bump_Babl-GEGL_versions.patch \
++           file://0003-Fix-use-of-gegl-API.patch \
++           "
++SRC_URI[md5sum] = "7e4fd7a53b1d3c32dff642ab1a94b44d"
++SRC_URI[sha256sum] = "9187a35cc52b110d78124d7b27b68a68ade14a794c2721314bac6134d2a5638a"
+ 
+ EXTRA_OECONF = "--disable-python \
+                 --without-webkit \
 -- 
 2.13.2
 
