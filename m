@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
-	[209.85.192.180])
-	by mail.openembedded.org (Postfix) with ESMTP id D44C778268
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 2F54678270
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 13:00:23 +0000 (UTC)
-Received: by mail-pf0-f180.google.com with SMTP id c73so66963924pfk.2
+	Fri, 30 Jun 2017 13:00:24 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id f127so63503119pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jun 2017 06:00:25 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WPO+11jpoCG7cOglqNsQPfEM+tKU3Y0U0lZG2/4fdHA=;
-	b=cpG+exdP1lisN7Hx6qD8b2mOIHDYU4JfnJ1H2TDj/M1rQKj9YXmEqTaesTZ0BlzUNz
-	rkjzN0ATUx9sOuJ0UUC9+2sx7TkxkPfFIabFUrBi5Cl4hPid1WgNtmrlELR7H8DkIMEl
-	0cruj6QCvpz3jjJ6k2w+2wHCZfT/yOZlgIK4PhvzRBmyQ6CpQN30JAs7ERIz+y8319ei
-	ea/bfn5tfw5PXwvJHyuRc937ZPs0Cy/Cv8ASYmWl7SeUNuwfj+z0CS5qDixVR0/XZ7Uw
-	abKgUqLpA2QSZ2RvWFPWYx5YXYcDDEs/huO/lW0ZGjaIxH/wcYy4KOSvmXHpUgJJlrh0
-	dTjA==
+	bh=YqDdJL7uLVYs36dfMQDyOLKR6nIfrA0MUZ1mAR6p1lk=;
+	b=qP2lUK160p+x9K4OeKuT280VH0wyU7S8mGopwOBSWnHtvoCUDHDNx380EWJciQSiox
+	PolFvzwJs3NEc9nUUBAsUBOvCP58SHS0KCGnYXG2CzLcBQNyhKzcunLTF0DyqRvUX2yC
+	H6DWKn0fW+9FjDLntVSMxQG8h0Bont6uMzoXs9Ua4g0ADwrXtbFheS3xAdvRGPsWIpva
+	0WT1/SFyXgqqFaJTh+SHsbdJIQ6pMQKq7mJHnLqayQ6hJH0/vgbDh/hJNRBmJZovIOFQ
+	mvEVJywy78S+42A89X7BI37kWWl8emzUXMlVCdE8QhUGc/s32oGkkMBdAI2kOz5mXu14
+	+0Mg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=WPO+11jpoCG7cOglqNsQPfEM+tKU3Y0U0lZG2/4fdHA=;
-	b=LetOfuegXIOsra0W4oQixMLTZTtsSl2LLAPTHi0ntAE7Byblth5hubQn44PWtad3oS
-	2EPtZrDmUX6/U+rGv+5fZrq3TMQKAGRyvAoNNKar0sN2Xv0BNREcVgPHtO29O00ESqYJ
-	lTxijzTcIMlBpwNGWjgTZ3K5VUl18HwgwZT019TAmYlKm5il/6lF77uSap6GjxLbZfq1
-	ewAYoK+G+oHgr2fHGV9kwxkNQ0qPUUX2sMoz4ljd+g7mIpSw1KHzkJB/dTRoSjX6Nx83
-	dIoWrOKP0jzfZZZg5ntyLWKDOejVmFU/fA8rObKSU4Xz2nSaDA+ufIaTSPYUOUA+z5wb
-	+GPw==
-X-Gm-Message-State: AKS2vOxg9eqdec8yNEJ8u/7C+jq5MFW9HyMDSqJyerxeyGEjcmXZhlsJ
-	6j58p4SfK+UheYIU
-X-Received: by 10.84.224.74 with SMTP id a10mr24076660plt.210.1498827624530;
-	Fri, 30 Jun 2017 06:00:24 -0700 (PDT)
+	bh=YqDdJL7uLVYs36dfMQDyOLKR6nIfrA0MUZ1mAR6p1lk=;
+	b=npmU5YzdNxWVJnIHZgE3E5kB2CNxw/MCIq1TUFlOamVNL0Fy0cerS0eNh5sIHwK45+
+	MWXKQCAtfpNcgfrjjtj1Jpmro6EekG9VWi9q22FLQabxS3RwSlmoK0civmJy89a5YQmE
+	JE2Ff3c/zPtBA5FjXopuJ1XwItCGD1ufLO/rm8UHJ/5YvoRLVM74UjmeylLEv93vN6zk
+	DYOQSocC3FwRqyzHKhgVC3J3oq8MeZrTYYPFwCCd/Y17xOKM9djCMkglhv47bwQXrM7U
+	98vNlzZJ8Kz4YQQonwwRsHdv29CRkWadL0FoXS3+u94c2uzXdMqAx8O0I08vP/uOlVDS
+	d6Ww==
+X-Gm-Message-State: AKS2vOxf3JQSiD/US2XmrmDVbRzHFxBXWgVsPaQYFYzv8RRn6+8HlN1R
+	PLdyz8n8tX2TXrjj
+X-Received: by 10.99.189.18 with SMTP id a18mr21126604pgf.195.1498827625941;
+	Fri, 30 Jun 2017 06:00:25 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.23
+	t26sm10735590pfl.41.2017.06.30.06.00.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:23 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:24 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:49 -0700
-Message-Id: <20170630125957.3342-9-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:50 -0700
+Message-Id: <20170630125957.3342-10-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 09/17] dietsplash: Fix build on mips
+Subject: [meta-multimedia][PATCH 10/17] libsrtp: Fix build on mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +55,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jun 2017 13:00:24 -0000
+X-List-Received-Date: Fri, 30 Jun 2017 13:00:25 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...figure.ac-Do-not-demand-linker-hash-style.patch | 28 ++++++++++++++++++++++
- .../recipes-graphics/dietsplash/dietsplash_git.bb  |  6 +++--
- 2 files changed, 32 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/dietsplash/dietsplash/0001-configure.ac-Do-not-demand-linker-hash-style.patch
+ .../0001-Rename-conflicting-variable-mips.patch    | 73 ++++++++++++++++++++++
+ .../recipes-support/libsrtp/libsrtp_1.5.2.bb       |  4 +-
+ 2 files changed, 76 insertions(+), 1 deletion(-)
+ create mode 100644 meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
 
-diff --git a/meta-oe/recipes-graphics/dietsplash/dietsplash/0001-configure.ac-Do-not-demand-linker-hash-style.patch b/meta-oe/recipes-graphics/dietsplash/dietsplash/0001-configure.ac-Do-not-demand-linker-hash-style.patch
+diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch b/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
 new file mode 100644
-index 000000000..87e8637ee
+index 000000000..b56c78959
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/dietsplash/dietsplash/0001-configure.ac-Do-not-demand-linker-hash-style.patch
-@@ -0,0 +1,28 @@
-+From 65e8e3c9c69f41778b6308c2f8f3262c82c6f3e1 Mon Sep 17 00:00:00 2001
++++ b/meta-multimedia/recipes-support/libsrtp/libsrtp/0001-Rename-conflicting-variable-mips.patch
+@@ -0,0 +1,73 @@
++From 3dc8a678a844247d0afcf7e30fb3cbd5ccbd828f Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Jun 2017 13:57:53 -0700
-+Subject: [PATCH] configure.ac: Do not demand linker hash-style
++Date: Thu, 29 Jun 2017 14:05:06 -0700
++Subject: [PATCH] Rename conflicting variable 'mips'
 +
-+This helps fixing on architectures e.g. mips where gnu hash
-+is not supported
++Fixes
++test/srtp_driver.c:344:12: error: expected identifier or '(' before numeric constant
++     double mips = mips_estimate(1000000000, &ignore);
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ configure.ac | 1 -
-+ 1 file changed, 1 deletion(-)
++ test/srtp_driver.c | 20 ++++++++++----------
++ 1 file changed, 10 insertions(+), 10 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index e1dba23..7bcc039 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -65,7 +65,6 @@ CC_CHECK_CFLAGS_APPEND([ \
-+         -ffunction-sections \
-+         -fdata-sections \
-+ 	-Wl,-O1 \
-+-	-Wl,--hash-style=gnu \
-+         -Wl,--as-needed \
-+         -Wl,--gc-sections])
++diff --git a/test/srtp_driver.c b/test/srtp_driver.c
++index 8872971..d38ea19 100644
++--- a/test/srtp_driver.c
+++++ b/test/srtp_driver.c
++@@ -341,7 +341,7 @@ main (int argc, char *argv[]) {
++   if (do_codec_timing) {
++     srtp_policy_t policy;
++     int ignore;
++-    double mips = mips_estimate(1000000000, &ignore);
+++    double est = mips_estimate(1000000000, &ignore);
++ 
++     crypto_policy_set_rtp_default(&policy.rtp);
++     crypto_policy_set_rtcp_default(&policy.rtcp);
++@@ -353,33 +353,33 @@ main (int argc, char *argv[]) {
++     policy.allow_repeat_tx = 0;
++     policy.next = NULL;
++ 
++-    printf("mips estimate: %e\n", mips);
+++    printf("mips estimate: %e\n", est);
++ 
++     printf("testing srtp processing time for voice codecs:\n");
++     printf("codec\t\tlength (octets)\t\tsrtp instructions/second\n");
++     printf("G.711\t\t%d\t\t\t%e\n", 80, 
++-           (double) mips * (80 * 8) / 
+++           (double) est * (80 * 8) / 
++ 	   srtp_bits_per_second(80, &policy) / .01 );
++     printf("G.711\t\t%d\t\t\t%e\n", 160, 
++-           (double) mips * (160 * 8) / 
+++           (double) est * (160 * 8) / 
++ 	   srtp_bits_per_second(160, &policy) / .02);
++     printf("G.726-32\t%d\t\t\t%e\n", 40, 
++-           (double) mips * (40 * 8) / 
+++           (double) est * (40 * 8) / 
++ 	   srtp_bits_per_second(40, &policy) / .01 );
++     printf("G.726-32\t%d\t\t\t%e\n", 80, 
++-           (double) mips * (80 * 8) / 
+++           (double) est * (80 * 8) / 
++ 	   srtp_bits_per_second(80, &policy) / .02);
++     printf("G.729\t\t%d\t\t\t%e\n", 10, 
++-           (double) mips * (10 * 8) / 
+++           (double) est * (10 * 8) / 
++ 	   srtp_bits_per_second(10, &policy) / .01 );
++     printf("G.729\t\t%d\t\t\t%e\n", 20, 
++-           (double) mips * (20 * 8) /
+++           (double) est * (20 * 8) /
++ 	   srtp_bits_per_second(20, &policy) / .02 );
++     printf("Wideband\t%d\t\t\t%e\n", 320, 
++-           (double) mips * (320 * 8) /
+++           (double) est * (320 * 8) /
++ 	   srtp_bits_per_second(320, &policy) / .01 );
++     printf("Wideband\t%d\t\t\t%e\n", 640, 
++-           (double) mips * (640 * 8) /
+++           (double) est * (640 * 8) /
++ 	   srtp_bits_per_second(640, &policy) / .02 );
++   }
 + 
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb b/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
-index a88caf814..32f081592 100644
---- a/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
-+++ b/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb
-@@ -7,8 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- PV = "0.3"
- PR = "r1"
+diff --git a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+index 324982843..8abaa1284 100644
+--- a/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
++++ b/meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+@@ -5,7 +5,9 @@ SECTION = "libs"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=15bc16b9d2e305974dde47e733883714"
  
--SRCREV = "f7aadacbe3c19e37ea938e00a5141b577fb74a5e"
--SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git"
-+SRCREV = "ef2e1a390e768e21e6a6268977580ee129a96633"
-+SRC_URI = "git://github.com/lucasdemarchi/dietsplash.git \
-+           file://0001-configure.ac-Do-not-demand-linker-hash-style.patch \
+-SRC_URI = "https://github.com/cisco/libsrtp/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
++SRC_URI = "https://github.com/cisco/libsrtp/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
++           file://0001-Rename-conflicting-variable-mips.patch \
 +           "
- 
- inherit autotools
+ SRC_URI[md5sum] = "2309aa6027992810a4285b042c71e644"
+ SRC_URI[sha256sum] = "86e1efe353397c0751f6bdd709794143bd1b76494412860f16ff2b6d9c304eda"
  
 -- 
 2.13.2
