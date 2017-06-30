@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 003E578268
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C01778268
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 30 Jun 2017 13:00:21 +0000 (UTC)
-Received: by mail-pg0-f50.google.com with SMTP id f127so63502382pgc.0
+Received: by mail-pf0-f194.google.com with SMTP id e199so17016681pfh.0
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 30 Jun 2017 06:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wJny9ZIiK4YIDVW4A/3CAz6XfQeW5hsq+C1XpgObdjc=;
-	b=NW/EhjDgy04q6k0BingwGE/4A+Zn5a+FMuBnhlU1k/H6xYRVvkV6OFRUMQF8DSbCce
-	ifuO26WxNHJX/sBe/Smo/qKAM9iWsJqINHjjnHMrsRrafWph9RFZBfRUaa1K1EslLKfN
-	6Ux+4GRKzNVevdjG5z6uuizSnvj2nC841A8y2+ZhQ6242qWS9r3I1u8H5luJB0YJBI0Y
-	92uxN+z0P0Nv6+gLIFJ57FgCZ98BN951jgH9bw0bQdXdMU7+Jk4FfW1DmNdZ+NKp6Kt6
-	bkgG/nAo1jP96neXwY7f4TWxvFCTM34BTmLGBa4Uy1yBZVHVcl1/4E/SpLW2qfzRLioa
-	ID9g==
+	bh=fJ15d+kdzb5K4yqVkvyoTMsabkyRKaaccjghzyL7uGk=;
+	b=B3+ggh+eCDZlQcs8W/M5W150faP/kk5a2rcuH0CdgkwTnquOn3I2LNHxSO3LgMqFbc
+	D0X2iEJwB+WqnESJTUQvsmS9UHQB+H2OHPzbrdy3qycyv4+6guuZfRzAh+zBjKfcEGHV
+	WckjS7poHrRZJVAscoBQ89Js7CMMwEBRxKegIsRIECex9c5GjecYJxk6M5u3VTMjb8wy
+	8ROrh6MprT4EMBeEpAc9iRG1n1OWRsIblqZitwWvq3WzfFYAxuveEv77OyAp795a9rFx
+	RH5vNVu8vCsrLJ3k3iQv7XNSxIwuur0rGOKvNdW9kiXwdpOKevvOY3CxrsWGmYYNGfdu
+	E4Sg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=wJny9ZIiK4YIDVW4A/3CAz6XfQeW5hsq+C1XpgObdjc=;
-	b=H5bZsrTRySWXmglf2YKGd1hlNm0kyGIa0yuftS4hO+jyTYnLO3jVEM0QARUEA9w/iI
-	W2s9nbdGcp0fjSqo2ZctLLBXgToQYf6OjfzpEMq4fklFQ9T22lna6fJYmdasZ6dHfQ3r
-	LklYK9FfrV3RPs7JiQopnBfs9syRLooe6abAjwGOP9TMn8WV+tke4BHq1Xcr1RUbt+v/
-	BnOx4vy8JjSUffELZa1KQSLTzUpX5ktNPd37FUgIwLRd1lwm2ITKAJKWIt2aqqJG+q3L
-	GjS+ndv6EQ5nKfj0bu0Mj+qEp/nq3ZtkQU0mmXYrwQveXpnxLu7ZjrTs51f+tTThuOg4
-	yGlg==
-X-Gm-Message-State: AKS2vOw5626gWg9R9aZI+Yk6Uj74PZNvIUpnAP9HL78K4pLgLT+ORH/o
-	ELQigQRR/q4X+/Rf
-X-Received: by 10.98.133.16 with SMTP id u16mr11250469pfd.140.1498827621733;
-	Fri, 30 Jun 2017 06:00:21 -0700 (PDT)
+	bh=fJ15d+kdzb5K4yqVkvyoTMsabkyRKaaccjghzyL7uGk=;
+	b=esBDh2yFCL/QrSKnY9TLIHuL0gAMCEVKFPCRNC9WJTPJMQU+HCa4xag5J1+1hVrJv3
+	nyf7vv0cTvYNua83MaXexm/SZtuw1iATwI2huSqgrXa/XADsmFbcQeYoD8fZukE4iXrU
+	jBhctPkR8hAQgClBD7wGnssliksqzaOJUB0fHvBmLWZ9bkMIoprYN0MbZejT25GzYLBL
+	7GzBbc5rh9782ZV6JBrQX31x21TytN3QinzT0ThRfyr+ILCPnvwD7pr977tN1hUtE2yL
+	8/5JQf9+sZCxOyivjuYtW6rmM26tyQuEy/qxtNSUatQPRBgLXxH+lqKYG1cyD/kpTBH/
+	LRCA==
+X-Gm-Message-State: AKS2vOy/dPeFIkS/JeftHSc0RD7fupHoUEbFPfUogYw9BpPPBmKcjXow
+	qQtSUSbgXLV3RKlp
+X-Received: by 10.101.73.11 with SMTP id p11mr20796460pgs.234.1498827622919;
+	Fri, 30 Jun 2017 06:00:22 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	t26sm10735590pfl.41.2017.06.30.06.00.20
+	t26sm10735590pfl.41.2017.06.30.06.00.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 30 Jun 2017 06:00:20 -0700 (PDT)
+	Fri, 30 Jun 2017 06:00:22 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jun 2017 05:59:47 -0700
-Message-Id: <20170630125957.3342-7-raj.khem@gmail.com>
+Date: Fri, 30 Jun 2017 05:59:48 -0700
+Message-Id: <20170630125957.3342-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170630125957.3342-1-raj.khem@gmail.com>
 References: <20170630125957.3342-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 07/17] gimp: Upgrade to 2.8.22
+Subject: [meta-oe][PATCH 08/17] fluentbit: Fix parallel build race
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,84 +58,73 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 30 Jun 2017 13:00:22 -0000
 
-Fix API issue due to new gegl
+Sometimes with high parallism the build fails like below
+
+| In file included from /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_thread_libco.h:24:0,
+|                  from /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_thread.h:41,
+|                  from /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_io.h:26,
+|                  from /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_output.h:34,
+|                  from /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_plugin_proxy.h:25,
+|                  from /mnt/a/oe/workspace/sources/fluentbit/src/proxy/go/go.c:22:
+| /mnt/a/oe/workspace/sources/fluentbit/include/fluent-bit/flb_mem.h:31:10: fatal error: jemalloc/jemalloc.h: No such file or directory
+|  #include <jemalloc/jemalloc.h>
+|           ^~~~~~~~~~~~~~~~~~~~~
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gimp/gimp/0003-Fix-use-of-gegl-API.patch       | 34 ++++++++++++++++++++++
- .../gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb}        | 14 ++++-----
- 2 files changed, 41 insertions(+), 7 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
- rename meta-oe/recipes-graphics/gimp/{gimp_2.8.20.bb => gimp_2.8.22.bb} (70%)
+ ...proxy-go-Add-missing-dependency-on-jemall.patch | 24 ++++++++++++++++++++++
+ .../fluentbit/fluentbit_0.11.11.bb                 |  3 +++
+ 2 files changed, 27 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch
 
-diff --git a/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch b/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch
 new file mode 100644
-index 000000000..7da78e205
+index 000000000..90242aeb6
 --- /dev/null
-+++ b/meta-oe/recipes-graphics/gimp/gimp/0003-Fix-use-of-gegl-API.patch
-@@ -0,0 +1,34 @@
-+From e1c8f4b8323e3965271a93529eab5774c1a7083c Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit/0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch
+@@ -0,0 +1,24 @@
++From 84d70b6bc744cd348e66a0bc6c7958cdfa9ce670 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 29 Jun 2017 10:32:14 -0700
-+Subject: [PATCH 3/3] Fix use of gegl API
-+
-+newer version of gegl does not define GEGL_IS_PARAM_SPEC_MULTILINE
-+
-+| core/libappcore.a(gimpparamspecs-duplicate.o): In function `gimp_param_spec_duplicate':
-+| /usr/src/debug/gimp/2.8.22-r0/gimp-2.8.22/app/core/../../../../../../../../../workspace/sources/gimp/app/core/gimpparamspecs-duplicate.c:70: undefined reference to `GEGL_IS_PARAM_SPEC_MULTILINE'
-+| collect2: error: ld returned 1 exit status
-+
-+Upstream-Status: Pending
++Date: Thu, 29 Jun 2017 12:56:21 -0700
++Subject: [PATCH] flb-plugin-proxy-go: Add missing dependency on jemalloc
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ app/core/gimpparamspecs-duplicate.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/proxy/go/CMakeLists.txt | 3 +++
++ 1 file changed, 3 insertions(+)
 +
-+diff --git a/app/core/gimpparamspecs-duplicate.c b/app/core/gimpparamspecs-duplicate.c
-+index c0b7426..2efaf23 100644
-+--- a/app/core/gimpparamspecs-duplicate.c
-++++ b/app/core/gimpparamspecs-duplicate.c
-+@@ -67,7 +67,7 @@ gimp_param_spec_duplicate (GParamSpec *pspec)
-+                                      spec->default_value,
-+                                      pspec->flags);
++diff --git a/src/proxy/go/CMakeLists.txt b/src/proxy/go/CMakeLists.txt
++index 3273346..02a54c2 100644
++--- a/src/proxy/go/CMakeLists.txt
+++++ b/src/proxy/go/CMakeLists.txt
++@@ -2,3 +2,6 @@ set(src
++   go.c)
 + 
-+-          if (GEGL_IS_PARAM_SPEC_MULTILINE (pspec))
-++          if (gegl_param_spec_get_property_key(pspec, "multiline"))
-+             {
-+               g_param_spec_set_qdata (new, multiline_quark,
-+                                       GINT_TO_POINTER (TRUE));
++ add_library(flb-plugin-proxy-go STATIC ${src})
+++if(FLB_JEMALLOC)
+++  target_link_libraries(flb-plugin-proxy-go libjemalloc)
+++endif()
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-similarity index 70%
-rename from meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
-rename to meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-index 9588ab016..1ecd2b715 100644
---- a/meta-oe/recipes-graphics/gimp/gimp_2.8.20.bb
-+++ b/meta-oe/recipes-graphics/gimp/gimp_2.8.22.bb
-@@ -27,13 +27,13 @@ DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'libxmu libxpm', '',
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
+index 46c47fd55..83818c84d 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
+@@ -3,6 +3,7 @@ HOMEPAGE = "http://fluentbit.io"
+ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
  
- inherit gnome gtk-doc
+ SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
++           file://0001-flb-plugin-proxy-go-Add-missing-dependency-on-jemall.patch \
+            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
+            "
+ SRC_URI[md5sum] = "7bce8091c41fb6412b7fe0185b3cb8d6"
+@@ -21,3 +22,5 @@ inherit cmake systemd
+ EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
  
--SRC_URI = " \
--    http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
--    file://0001-configure-ac-do-not-check-for-freetype-config.patch \
--    file://bump_Babl-GEGL_versions.patch \
--"
--SRC_URI[md5sum] = "d405640c426b234d6efc36fb4f5bae57"
--SRC_URI[sha256sum] = "939ca1df70be865c672ffd654f4e20f188121d01601c5c90237214101533c805"
-+SRC_URI = "http://ftp.gimp.org/pub/gimp/v2.8/gimp-${PV}.tar.bz2 \
-+           file://0001-configure-ac-do-not-check-for-freetype-config.patch \
-+           file://bump_Babl-GEGL_versions.patch \
-+           file://0003-Fix-use-of-gegl-API.patch \
-+           "
-+SRC_URI[md5sum] = "7e4fd7a53b1d3c32dff642ab1a94b44d"
-+SRC_URI[sha256sum] = "9187a35cc52b110d78124d7b27b68a68ade14a794c2721314bac6134d2a5638a"
- 
- EXTRA_OECONF = "--disable-python \
-                 --without-webkit \
+ SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
++
++TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
 -- 
 2.13.2
 
