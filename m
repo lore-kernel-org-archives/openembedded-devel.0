@@ -1,48 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id E178B77D4C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jul 2017 21:33:30 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id d193so678899pgc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jul 2017 14:33:32 -0700 (PDT)
+Return-Path: <andrea.adami@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id AC02078282;
+	Sat,  1 Jul 2017 21:53:06 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u23so13853197wma.2;
+	Sat, 01 Jul 2017 14:53:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=G0lqH1Dwm4myhq+VmsL7xHX+kPhrZ0l2QXyKyoL2rAk=;
-	b=pA+7vwcKjkapAdKsmXi7za0DheTFhNPUNKHYGQX9IuDQ5W/15KaMIqweKGF3h+yPJ4
-	bpJ4XwFUNOxe5G2HqvVR5DKTQu0gnJRq34aS/pZSVsupp0ChkoeazZCk2P9WbV0ruYQa
-	GflfSCAHg/DW7CbaYwAwunqP1gwJ0cW/g19AR5UVfjOnbdLVHQT0oDBmUsqKUgYxqppj
-	UdUH9+GgrjN0MRy0uVOPVRS7U6zBOIgwLzwN3YVakmVbjVvbmb55VTF76i244lNIq2Lw
-	aoy/91YgNmZ8yODwB+XcFKMvc2tKRdp1MMGTsss0Km0vwiY+bDWF2lug7xC5/DH0r4Yg
-	CiDw==
+	h=from:to:cc:subject:date:message-id;
+	bh=58srYNnJLcA6WZNCucf5Yl4Zc6g9QaHLTeyLSgtM0g8=;
+	b=muOK7FVoBLUvc57q2XXPTZziFERynXSwqR2Tn0cZnTXVFHB2YnTHU53TdAleNCwDMu
+	fhdUo0jCua/D6SbJUq8YV1Qv1D0p+4+e2PC8+4yqbZCfmQqPaAorgAAO3zJqfd809TmE
+	paFJJelTb8vkAsTvsucKpAmhbu1UxLd0atpSMphH9lBvXTV1tCYg7jjuKPEuF9zAgodG
+	9vtvz69VYJA0tZkKCzOg03m08KfgsoXEuV5dwiZMiorR3Vc7DM4Esy9t/7tBPIm7gaW3
+	JxSLU5lKpM9zRtGCltrWuXII5YT9+sieSQ1wnlhCa1Dp7XqkDnYnQSVg6lGqQq9Am/Q2
+	KfLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=G0lqH1Dwm4myhq+VmsL7xHX+kPhrZ0l2QXyKyoL2rAk=;
-	b=cErn6gUPce68Wzd0wqHIpt4f7e92ugbaLfUJ1X0GfS/azAT2iE5VmKJsFS0YLqH2zm
-	PvyyWIkr0mObIj9KEjMez7aB+Zvd6u2yufcOZ9EkEdys+v6v5X71fevd2Z68ioKW0XPV
-	gtmuwGbz1FZe+pLCb3BupkSVfexzGlJG6AI+/jLQBphQhHM58U0BpJxW4sbV573TaG2c
-	/kY/4+KV0YbNLzVa6ygXwq07rwD9W7eiQyvXnRyUbS3JykisCXJqyjW+FfNCbpjV7zT5
-	HKfQJePAJi7IOsRpI3mRDoLhTGBRIrK+GdR+nc1bD2GiWxuUpnuUUCjliEFjf8iQSKeK
-	UlCg==
-X-Gm-Message-State: AIVw110TPPaPSgKkBhswtN/S/Xmrc4g4CIeA6zdP46/KOythVwTJffbx
-	ysS/jWorqlqBsN1u
-X-Received: by 10.101.88.8 with SMTP id g8mr2464208pgr.137.1498944811421;
-	Sat, 01 Jul 2017 14:33:31 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id
-	k129sm26060081pfc.87.2017.07.01.14.33.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 01 Jul 2017 14:33:30 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jul 2017 14:33:10 -0700
-Message-Id: <20170701213310.18913-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170701213310.18913-1-raj.khem@gmail.com>
-References: <20170701213310.18913-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 2/2] kodi: User external crossguid
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=58srYNnJLcA6WZNCucf5Yl4Zc6g9QaHLTeyLSgtM0g8=;
+	b=fMDB2e/ySzOvhP+ZmQamBfoqnOh3BAwLLu7pznv35GrtF713Yp6+flcjvBAiLshS6G
+	RJA6QTQqwm3Nhdad9aAiKZypf8oVAxTV7WOZyQFTn9o+8Mwc7dh+Nfw0srhXzxvugHxB
+	JxwmeyPCfWKyghK+cb10TKl9SphIL2OMLHkOTlrJb7zqG4M5AG9C4HneK/7/9b83XScV
+	wgUWEtQvQaMzuxmfi9QZYVbaOdaUJoJnoliWDQbG6SeCmG3aJPE1OsMdsW0pvx7D1qAK
+	yoUT9k9yyxPrNv6L3H69K6tjbemm2GI3UFjFnzBXE8FE32Z7dzM55exxJ5Azrif1qRNN
+	PyHw==
+X-Gm-Message-State: AKS2vOyDqI2lwc1YHwxhMlySOax4GkqAC/liNg5T4o6Tu/GeHOJ56f9g
+	Mz6apf+y04T+Bw==
+X-Received: by 10.28.26.2 with SMTP id a2mr18978521wma.32.1498945987396;
+	Sat, 01 Jul 2017 14:53:07 -0700 (PDT)
+Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
+	(host251-139-dynamic.104-80-r.retail.telecomitalia.it.
+	[80.104.139.251]) by smtp.gmail.com with ESMTPSA id
+	h16sm27346781wma.14.2017.07.01.14.53.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 01 Jul 2017 14:53:06 -0700 (PDT)
+From: Andrea Adami <andrea.adami@gmail.com>
+To: shr-devel@lists.shr-project.org
+Date: Sat,  1 Jul 2017 23:53:02 +0200
+Message-Id: <1498945983-4205-1-git-send-email-andrea.adami@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: openembedded-devel@lists.openembedded.org,
+	openembedded-core@lists.openembedded.org
+Subject: [meta-shr-distro][PATCH 1/2] jenkins-job.sh: remove PNBLACKLIST for linux-yocto-tiny-kexecboot for world builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,45 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jul 2017 21:33:31 -0000
+X-List-Received-Date: Sat, 01 Jul 2017 21:53:07 -0000
 
-Prune our .pc directory when looking for configure.ac files
-Tighten the search regexp to look for just .ac or .in configure
-files
+Recipe has been removed from meta-initramfs with commit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+  8c03a06 linux-yocto-tiny-kexecboot: remove obsoleted recipe
+
+Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ jenkins-job.sh | 1 -
+ 1 file changed, 1 deletion(-)
 
-diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-index 19806a12a..3bc2eb591 100644
---- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-+++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
-@@ -18,6 +18,7 @@ DEPENDS = " \
-             avahi \
-             boost \
-             bzip2 \
-+            crossguid \
-             curl \
-             dcadec \
-             enca \
-@@ -150,13 +151,12 @@ def enable_glew(bb, d):
- do_configure() {
-     tar xf ${WORKDIR}/${BPN}-${ADDONSPV}-generated-addons.tar.xz -C ${S}/
+diff --git a/jenkins-job.sh b/jenkins-job.sh
+index b5c5bdb..2f53b24 100755
+--- a/jenkins-job.sh
++++ b/jenkins-job.sh
+@@ -401,7 +401,6 @@ PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be tested so mu
+ PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be tested so much"
+ PNBLACKLIST[build-appliance-image] = "tries to include whole downloads directory in /home/builder/poky :/"
  
--    ( for i in $(find ${S} -name "configure.*" ) ; do
-+    ( for i in $(find ${S} -name configure.ac -or -name configure.in|grep -v ".pc") ; do
-        cd $(dirname $i) && gnu-configize --force || true
-     done )
-     ( for f in ${S}/xbmc/interfaces/python/generated/*.cpp; do
-        touch `echo $f|sed -e 's/.cpp$/.xml/g'`
-     done )
--    make -C tools/depends/target/crossguid PREFIX=${STAGING_DIR_HOST}${prefix}
+-PNBLACKLIST[linux-yocto-tiny-kexecboot] = "does weird sh!t breaking other kernels and modules - broken for years"
+ PNBLACKLIST[linux-yocto-tiny] = "does weird sh!t breaking other kernels and modules - broken for years"
  
-     BOOTSTRAP_STANDALONE=1 make -f bootstrap.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
-     BOOTSTRAP_STANDALONE=1 make JAVA=/bin/true -f codegenerator.mk JSON_BUILDER="${STAGING_BINDIR_NATIVE}/JsonSchemaBuilder"
+ # enable reporting
 -- 
-2.13.2
+2.7.4
 
 
