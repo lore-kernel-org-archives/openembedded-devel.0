@@ -1,45 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id CFA2C71ADA
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D43571ADA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jul 2017 20:15:23 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id j186so18904390pge.1
+	Sat,  1 Jul 2017 20:15:24 +0000 (UTC)
+Received: by mail-pf0-f181.google.com with SMTP id s66so82221140pfs.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jul 2017 13:15:25 -0700 (PDT)
+	Sat, 01 Jul 2017 13:15:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=NXRPuSDYGRnCaZ7r97+0ykwTeT82ILsp3q5QE0ukSgw=;
-	b=qiC5zLuJTxF3+AQhCO0+A5PpwxTDJuv5/6qys0Mi4XU/O/zWhfJmD9o6zqYslyJoDV
-	JmK0KSQB/VciZx5qEzXk1RkWNCY3N5eGOvjuSHU2UXywpK6ytwRmEtwdOR3cdSlfl3Xl
-	P/2SG/FAXTHT4d9dteGs9cBc1J9uz1xfIgQgVg26JYUtLV0YIcguQavhKJJnBrYBTAF9
-	CLG4qNGYmIYsMBci0yUDTve9WuX32oI/gDiV92o3fV55qY5a7U+mYpI4LqY/+Uwdbalj
-	LBc900tBe4A/hesC+38UBeM4l0F6bNc2BqtaEtJaANxze41Jj7gqAmsFAwWq8iant+KU
-	NIbQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=wZXmoQu3G36SREpHzivBnNCegftlbqcj4Bmuxku2IEg=;
+	b=MxmsUP/IGQ769KjfiOShW2FIpwM7t2Wkkx75BUXxhfILpcoGPbdrKoDusV9LQSkY6z
+	meqkQ9/xECxiWdBzVNsd7Lk84BoWuVfwdVzbaQ/f9phK+KqqpGPvtooLUcSoC0Fttwi8
+	bTse2it02C7p4el22ST4eMUen4VSjdw6Bp2KbJ+Jh41nqB915KfRbRyPfePTKcjpxfbe
+	rAnyezOv/LxbEL493PTOB+1Ckaz7pVApsM1u82ZYHhkgUy34TsSQ18pw/ZeEHtZIt5yp
+	ZcYEdy074SiW7vEkSnuCPBM0+7jekSuewtXctH0jzfBBf4kwfz9V+27otZx8usFGVGjS
+	zaBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=NXRPuSDYGRnCaZ7r97+0ykwTeT82ILsp3q5QE0ukSgw=;
-	b=eSF5dkCCmkaxBj2YfYfPz/mzC7j1pTCFZ11qdZFr+UE2BtMvCf9KpoOIfqliMN8v3u
-	/ZSblHc5ldrjcEtBIGX/1n/KA/lvMhO+S8TROgDk2lnNSjF6mt9cYKoXjzkVyTLLjr8b
-	a6HXdlet14m7jilJygxtdLWHAyVPSPYD6W6BH0ZEu0s1N7vMemElajOinqOWHbLLMXNJ
-	D7EYNmTWK8QXc73zs986tyDnpaO5RZJmKrQuGfZYF2cOSRhzP4ptMl7Lt1ii//mfopTR
-	tk0Uc5LTWctJLUmtSPaghn/oxo40gEuXEvlVdynQmdywvhoHhsEUjDXVpw2ozi6ko6Ir
-	l5gA==
-X-Gm-Message-State: AIVw113l/mJgjJQimFj8CIm5OFzeI03G/lPhHeCJw02uxHvCYuuNpdWs
-	4Vff+sKLKXy9aGau
-X-Received: by 10.101.85.14 with SMTP id f14mr2206019pgr.112.1498940124665;
-	Sat, 01 Jul 2017 13:15:24 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=wZXmoQu3G36SREpHzivBnNCegftlbqcj4Bmuxku2IEg=;
+	b=S40b8f73fdRGd1DfKAC4BnuwWzcGWs/4lX1VBJtKi+WUljg3fmeQfBXIvHYiFc2108
+	kcxdBOgjlVwgGw+iJBLEgamJFMB6i3bdyMozBTnURx+vpy4FPj0ZK8M6jtIo/bs4d9pw
+	A/FUxLprYBSTEN0/YoMxK4jgkqlcW58ewLWQbo7pVffpazNOsfvNf8bpcgKlPJ46rLz2
+	7tO4q7b9VZX//xJLRIIM3TZ5xr1GjRN4vlZC8OtqF/vmce/QTTI86D8YVCVE9ozlGcVA
+	ddgrCZINUajoSKF/CoP79lHFKrvxSintd8UnAZniOTp6DVA/4OPfGfjUBPe2xRj7yrs4
+	5oGg==
+X-Gm-Message-State: AIVw1101ZwSDNYlAdg4SvZkAkHCGySBCg3WXdSdJ8OpOu72s55O1LJQj
+	62Yi8cYBjWClRkp+
+X-Received: by 10.84.170.67 with SMTP id i61mr2280657plb.114.1498940126046;
+	Sat, 01 Jul 2017 13:15:26 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	g5sm20020227pgc.42.2017.07.01.13.15.22
+	g5sm20020227pgc.42.2017.07.01.13.15.24
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 01 Jul 2017 13:15:23 -0700 (PDT)
+	Sat, 01 Jul 2017 13:15:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jul 2017 13:15:14 -0700
-Message-Id: <20170701201515.24835-1-raj.khem@gmail.com>
+Date: Sat,  1 Jul 2017 13:15:15 -0700
+Message-Id: <20170701201515.24835-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH 1/2] libtorrent: Link in 64bit atomics for ppc
+In-Reply-To: <20170701201515.24835-1-raj.khem@gmail.com>
+References: <20170701201515.24835-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/2] librcf: Define byteorder for powerpc machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,63 +56,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jul 2017 20:15:24 -0000
+X-List-Received-Date: Sat, 01 Jul 2017 20:15:25 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...efine-64bit-atomic-helpers-for-ppc-32-bit.patch | 30 ++++++++++++++++++++++
- .../libtorrent/libtorrent_git.bb                   |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch
+ .../librcf/0001-Check-for-__powerpc__-define.patch | 28 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb  |  3 ++-
+ 2 files changed, 30 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
 
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch
+diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
 new file mode 100644
-index 000000000..4d0979710
+index 000000000..d91accf1d
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent/0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch
-@@ -0,0 +1,30 @@
-+From c9859a38a58996b8767a30e14febc03845f66f95 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
+@@ -0,0 +1,28 @@
++From ac7316679e30f7013604b19aa0949a0744e91d2f Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 1 Jul 2017 13:10:53 -0700
-+Subject: [PATCH] Define 64bit atomic helpers for ppc 32-bit
++Date: Sat, 1 Jul 2017 13:06:30 -0700
++Subject: [PATCH] Check for __powerpc__ define
++
++Also check for gcc's internal define for ppc platform
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/atomic64.c | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/RCF/ByteOrdering.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/src/atomic64.c b/src/atomic64.c
-+index f841b39b..35c7c9d8 100644
-+--- a/src/atomic64.c
-++++ b/src/atomic64.c
-+@@ -18,10 +18,10 @@
-+ #include <stdbool.h>
++diff --git a/src/RCF/ByteOrdering.cpp b/src/RCF/ByteOrdering.cpp
++index 278ca80..9f9c446 100755
++--- a/src/RCF/ByteOrdering.cpp
+++++ b/src/RCF/ByteOrdering.cpp
++@@ -36,7 +36,7 @@ namespace RCF {
 + 
-+ /*
-+- * only need these on MIPS, since it lacks hardware 64-bit atomics,
-++ * only need these on MIPS & PPC32, since it lacks hardware 64-bit atomics,
-+  * unlike x86 and ARM.
-+  */
-+-#if defined(__mips__) || defined(__mipsel__)
-++#if defined(__mips__) || defined(__mipsel__) || defined(__powerpc__)
++     const ByteOrder MachineByteOrder = BigEndian;
 + 
-+ static void __spin_lock(volatile int *lock) {
-+   while (__sync_lock_test_and_set(lock, 1))
++-#elif defined( __ppc__ )
+++#elif defined( __ppc__ ) || defined( __powerpc__ )
++ 
++     const ByteOrder MachineByteOrder = BigEndian;
++ 
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-index 0febebd93..92e65289a 100644
---- a/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-+++ b/meta-oe/recipes-connectivity/libtorrent/libtorrent_git.bb
-@@ -9,6 +9,7 @@ DEPENDS = "zlib libsigc++-2.0 openssl cppunit"
- SRC_URI = "git://github.com/rakshasa/libtorrent \
-            file://don-t-run-code-while-configuring-package.patch \
-            file://0001-implement-64bit-atomic-for-mips.patch \
-+           file://0001-Define-64bit-atomic-helpers-for-ppc-32-bit.patch \
-            "
- SRCREV = "c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
+diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+index 1287eb014..dee74277c 100644
+--- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
++++ b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+@@ -15,7 +15,8 @@ SRC_URI = "http://www.deltavsoft.com/downloads/RCF-${PV}.tar.gz \
+            file://aarch64-support.patch \
+            file://0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch \
+            file://mips-support.patch \
+-          "
++           file://0001-Check-for-__powerpc__-define.patch \
++           "
  
+ SRC_URI[md5sum] = "7ecb3c73f7eb66dba8790b659374f690"
+ SRC_URI[sha256sum] = "bbfcc88de502c39604878c395f516b03fff4eac63eb4f7f44c07d433839712dd"
 -- 
 2.13.2
 
