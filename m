@@ -1,49 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
-	[209.85.192.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 1D43571ADA
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 47E3178289
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 Jul 2017 20:15:24 +0000 (UTC)
-Received: by mail-pf0-f181.google.com with SMTP id s66so82221140pfs.1
+	Sat,  1 Jul 2017 20:30:39 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id z6so21122707pfk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 01 Jul 2017 13:15:26 -0700 (PDT)
+	Sat, 01 Jul 2017 13:30:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wZXmoQu3G36SREpHzivBnNCegftlbqcj4Bmuxku2IEg=;
-	b=MxmsUP/IGQ769KjfiOShW2FIpwM7t2Wkkx75BUXxhfILpcoGPbdrKoDusV9LQSkY6z
-	meqkQ9/xECxiWdBzVNsd7Lk84BoWuVfwdVzbaQ/f9phK+KqqpGPvtooLUcSoC0Fttwi8
-	bTse2it02C7p4el22ST4eMUen4VSjdw6Bp2KbJ+Jh41nqB915KfRbRyPfePTKcjpxfbe
-	rAnyezOv/LxbEL493PTOB+1Ckaz7pVApsM1u82ZYHhkgUy34TsSQ18pw/ZeEHtZIt5yp
-	ZcYEdy074SiW7vEkSnuCPBM0+7jekSuewtXctH0jzfBBf4kwfz9V+27otZx8usFGVGjS
-	zaBQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=I0HBpoaHQprmkMhA6IXH7emItwg7RJmAh8viRE9xeqw=;
+	b=a6izZv15YxCbYKHHu94IflCo3MW2eDPpmMentG7pWeB3252l80/0VCFCnfMLBd0vva
+	UMvkPAWv2uKrF37VPeI4WckVSkhvBBBhrdsojAEnxd4rw453/2STPi86JjkLU1r5UX68
+	sSScB6tMJrkPQKQUFB85OGgcmCDNcEjAd5cZXnDcpfjmKkNCSFGy0dRTyHZ4szA7zdmo
+	dsycFk43/KYrhxcQ3rxjQ9/AeKvzKIHc2isONkdfySIANbefmXSFPx0lcnr46bck2qvQ
+	PDYstb/58uFuwC9Rdr7JRdU5fq+4cAZVqQoQ0yoRcvq6ABhfsAuXfKlm7CZIzJpiWcYf
+	K9tg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=wZXmoQu3G36SREpHzivBnNCegftlbqcj4Bmuxku2IEg=;
-	b=S40b8f73fdRGd1DfKAC4BnuwWzcGWs/4lX1VBJtKi+WUljg3fmeQfBXIvHYiFc2108
-	kcxdBOgjlVwgGw+iJBLEgamJFMB6i3bdyMozBTnURx+vpy4FPj0ZK8M6jtIo/bs4d9pw
-	A/FUxLprYBSTEN0/YoMxK4jgkqlcW58ewLWQbo7pVffpazNOsfvNf8bpcgKlPJ46rLz2
-	7tO4q7b9VZX//xJLRIIM3TZ5xr1GjRN4vlZC8OtqF/vmce/QTTI86D8YVCVE9ozlGcVA
-	ddgrCZINUajoSKF/CoP79lHFKrvxSintd8UnAZniOTp6DVA/4OPfGfjUBPe2xRj7yrs4
-	5oGg==
-X-Gm-Message-State: AIVw1101ZwSDNYlAdg4SvZkAkHCGySBCg3WXdSdJ8OpOu72s55O1LJQj
-	62Yi8cYBjWClRkp+
-X-Received: by 10.84.170.67 with SMTP id i61mr2280657plb.114.1498940126046;
-	Sat, 01 Jul 2017 13:15:26 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=I0HBpoaHQprmkMhA6IXH7emItwg7RJmAh8viRE9xeqw=;
+	b=Gh7N7AcgbfF7M2Hgrm3aZOKVuwW7ncSxEHzjie5bI2mkbweeBYDhpBs8VFG59HP6VU
+	zdWuta6cw/YBv8PbiH1k0A/mgB205raMEGS/0kWPxqUlhtakePj9JHUnXXwKLT95qdYV
+	T3zg0Oj4sRsFkm/j8iPA5Fgf4PUsMTi6OMHkPPiztVyb7oMQ/o5yhkSIjMuACAR+B8ox
+	tRNFsJkW78EXGvRMJeGRljFGcrtEZsesvtPdeNjYHzrIN0LrEPhaptjVvvoDvoPqOkb0
+	J20B8GIpOwNCCFoW8wCv4w8rS3+2N3Zp0JG6U3Dy/OA1tMKePhdF8W9jtnNqOKA4tSrL
+	uvvg==
+X-Gm-Message-State: AIVw112pjIVxGgGLaiDccE+40E65jIZzPNBs8hBXe1ou9mB8dTmoNwmH
+	pG1vHq87Mos+cff8
+X-Received: by 10.98.62.70 with SMTP id l67mr2142734pfa.114.1498941040948;
+	Sat, 01 Jul 2017 13:30:40 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
 	by smtp.gmail.com with ESMTPSA id
-	g5sm20020227pgc.42.2017.07.01.13.15.24
+	w190sm31062227pgb.30.2017.07.01.13.30.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 01 Jul 2017 13:15:25 -0700 (PDT)
+	Sat, 01 Jul 2017 13:30:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 Jul 2017 13:15:15 -0700
-Message-Id: <20170701201515.24835-2-raj.khem@gmail.com>
+Date: Sat,  1 Jul 2017 13:30:32 -0700
+Message-Id: <20170701203032.20647-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170701201515.24835-1-raj.khem@gmail.com>
-References: <20170701201515.24835-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] librcf: Define byteorder for powerpc machines
+Subject: [meta-oe][PATCH] gperftools: Fix build on ppc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,63 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 Jul 2017 20:15:25 -0000
+X-List-Received-Date: Sat, 01 Jul 2017 20:30:40 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../librcf/0001-Check-for-__powerpc__-define.patch | 28 ++++++++++++++++++++++
- meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb  |  3 ++-
- 2 files changed, 30 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
+ ...Use-ucontext_t-instead-of-struct-ucontext.patch | 36 ++++++++++++++++++++++
+ .../recipes-support/gperftools/gperftools_2.5.bb   |  3 +-
+ 2 files changed, 38 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
 
-diff --git a/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch b/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
+diff --git a/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch b/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
 new file mode 100644
-index 000000000..d91accf1d
+index 000000000..5bd0b6fa4
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/librcf/librcf/0001-Check-for-__powerpc__-define.patch
-@@ -0,0 +1,28 @@
-+From ac7316679e30f7013604b19aa0949a0744e91d2f Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/gperftools/gperftools/0001-Use-ucontext_t-instead-of-struct-ucontext.patch
+@@ -0,0 +1,36 @@
++From 12ac0dc6742e1bcdfaf1842186c9002f0820a5e8 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 1 Jul 2017 13:06:30 -0700
-+Subject: [PATCH] Check for __powerpc__ define
++Date: Sat, 1 Jul 2017 13:21:21 -0700
++Subject: [PATCH] Use ucontext_t instead of struct ucontext
 +
-+Also check for gcc's internal define for ppc platform
++Newer glibc has dropped the ucontext tag from exposing
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/RCF/ByteOrdering.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ src/stacktrace_powerpc-linux-inl.h | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
 +
-+diff --git a/src/RCF/ByteOrdering.cpp b/src/RCF/ByteOrdering.cpp
-+index 278ca80..9f9c446 100755
-+--- a/src/RCF/ByteOrdering.cpp
-++++ b/src/RCF/ByteOrdering.cpp
-+@@ -36,7 +36,7 @@ namespace RCF {
++diff --git a/src/stacktrace_powerpc-linux-inl.h b/src/stacktrace_powerpc-linux-inl.h
++index a9bf775..47ff2d7 100644
++--- a/src/stacktrace_powerpc-linux-inl.h
+++++ b/src/stacktrace_powerpc-linux-inl.h
++@@ -53,7 +53,6 @@
++ #elif defined(HAVE_UCONTEXT_H)
++ #include <ucontext.h>  // for ucontext_t
++ #endif
++-typedef ucontext ucontext_t;
 + 
-+     const ByteOrder MachineByteOrder = BigEndian;
-+ 
-+-#elif defined( __ppc__ )
-++#elif defined( __ppc__ ) || defined( __powerpc__ )
-+ 
-+     const ByteOrder MachineByteOrder = BigEndian;
-+ 
++ // PowerPC64 Little Endian follows BE wrt. backchain, condition register,
++ // and LR save area, so no need to adjust the reading struct.
++@@ -202,7 +201,7 @@ static int GET_STACK_TRACE_OR_FRAMES {
++         struct rt_signal_frame_32 {
++           char dummy[64 + 16];
++           siginfo_t info;
++-          struct ucontext uc;
+++          ucontext_t uc;
++           // We don't care about the rest, since IP value is at 'uc' field.A
++         } *sigframe = reinterpret_cast<rt_signal_frame_32*>(current);
++         result[n] = (void*) sigframe->uc.uc_mcontext.uc_regs->gregs[PT_NIP];
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-index 1287eb014..dee74277c 100644
---- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-+++ b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
-@@ -15,7 +15,8 @@ SRC_URI = "http://www.deltavsoft.com/downloads/RCF-${PV}.tar.gz \
-            file://aarch64-support.patch \
-            file://0001-ClientStub.hpp-fix-a-clang-compiling-issue.patch \
-            file://mips-support.patch \
+diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+index 15cfc97e8..43780a5ee 100644
+--- a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
++++ b/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+@@ -7,7 +7,8 @@ DEPENDS = "libunwind"
+ SRC_URI = "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz \
+            file://0001-Support-Atomic-ops-on-clang.patch \
+            file://0001-Fix-build-failure-for-ppc.patch \
 -          "
-+           file://0001-Check-for-__powerpc__-define.patch \
++           file://0001-Use-ucontext_t-instead-of-struct-ucontext.patch \
 +           "
  
- SRC_URI[md5sum] = "7ecb3c73f7eb66dba8790b659374f690"
- SRC_URI[sha256sum] = "bbfcc88de502c39604878c395f516b03fff4eac63eb4f7f44c07d433839712dd"
+ SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
+ SRC_URI[sha256sum] = "6fa2748f1acdf44d750253e160cf6e2e72571329b42e563b455bde09e9e85173"
 -- 
 2.13.2
 
