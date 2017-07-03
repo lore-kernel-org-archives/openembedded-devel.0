@@ -1,25 +1,49 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 7001C71AD4
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C54CE6FFA4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 11:29:09 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga105.jf.intel.com with ESMTP; 03 Jul 2017 04:29:10 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.40,302,1496127600"; d="scan'208";a="874285049"
-Received: from linux.intel.com ([10.54.29.200])
-	by FMSMGA003.fm.intel.com with ESMTP; 03 Jul 2017 04:29:10 -0700
-Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
-	[10.237.72.84])
-	by linux.intel.com (Postfix) with ESMTP id 01B3458028D
+	Mon,  3 Jul 2017 15:11:23 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id s66so26173219pfs.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 04:29:09 -0700 (PDT)
-From: "Maxin B. John" <maxin.john@intel.com>
+	Mon, 03 Jul 2017 08:11:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=rvpcJvbnAi4uid9neAcBLyv1WPJQeDrm85SezLhhufk=;
+	b=sBo4KbmJM/sMeaTwfOAhaeRuOMvy0sor/s5v2rbZCR3eKQu3054MCf/TXSbNBDzaV/
+	M3B69RpVGatn9KwbJxKGu/iEbF/lIp1i9SN1y2Ok+oFLbHQvhTog0cIMBuIhJlyxlUOc
+	ESLwC0PKQrl6XOWm3OocsnU8mAx/U0fjIPlngbNiOMfiaugV0cJXWXu5Rj/pVrHMgE8S
+	alRHllWe9BU/l1qYuwf+lDOI91YO3txAlvrn6PYAek/UC5maaDcvoXqx3BIbFObqoF0V
+	9TakOj0nzm8J8ZJAOf4IiqM/XPGZ85vHvNfLR7+mGSfR6hjrATYAfNMQknQHzh59RxP6
+	hddA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=rvpcJvbnAi4uid9neAcBLyv1WPJQeDrm85SezLhhufk=;
+	b=cr8htTJxejRH7sCIsEJuqb/C8wsNAyjlYkX2N1yMxpk7Ie81fnHtJ+5XytD06K3PA+
+	5pWzECCNmj43xUl55C/2SuSYa59ZeLUZwKJc3ybXyFpzgGGNwHthu5uJ1sFy4D/JliMi
+	Dp+icQtAEUSxA5WEtdr5GY4RsHQ7Osm+D2/Qqhyf97HNUwHQiU63V+UP8rihnVSXCUnx
+	IrQ79dlNaR30i0OStOCZMOeT+VB6ZewlRuOrjOvr7Rn1fI5cmK10wt97awrvmyAVFYsF
+	hECEASQIpLHmHdyT3wDEX0XotYbvKTb4eR8tVcpcmdL4Z1ufUWhxgutLq7Bh+ofdEpSH
+	abWg==
+X-Gm-Message-State: AIVw111+vA2+0WrKQ3u1QUW28dufiQmuT9IaQkJQo1Ynw+2qP3/iKlRT
+	3y7atj+w6AN1ieJs
+X-Received: by 10.98.160.133 with SMTP id p5mr10377103pfl.226.1499094684635;
+	Mon, 03 Jul 2017 08:11:24 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
+	by smtp.gmail.com with ESMTPSA id
+	k67sm12295707pfg.37.2017.07.03.08.11.22
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 03 Jul 2017 08:11:23 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Jul 2017 14:29:27 +0300
-Message-Id: <1499081367-26318-1-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-Subject: [meta-oe][PATCH] ser2net: upgrade to version 3.4
+Date: Mon,  3 Jul 2017 08:11:07 -0700
+Message-Id: <20170703151107.35350-2-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+In-Reply-To: <20170703151107.35350-1-raj.khem@gmail.com>
+References: <20170703151107.35350-1-raj.khem@gmail.com>
+Subject: [meta-multimedia][PATCH 2/2] kodi: Fix build on powerpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,35 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jul 2017 11:29:10 -0000
+X-List-Received-Date: Mon, 03 Jul 2017 15:11:23 -0000
 
-2.9.1 -> 3.4
+64bit atomics are not available therefore link in libatomic
 
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-connectivity/ser2net/{ser2net_2.9.1.bb => ser2net_3.4.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-connectivity/ser2net/{ser2net_2.9.1.bb => ser2net_3.4.bb} (71%)
+ meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb b/meta-oe/recipes-connectivity/ser2net/ser2net_3.4.bb
-similarity index 71%
-rename from meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-rename to meta-oe/recipes-connectivity/ser2net/ser2net_3.4.bb
-index 288c586..708650f 100644
---- a/meta-oe/recipes-connectivity/ser2net/ser2net_2.9.1.bb
-+++ b/meta-oe/recipes-connectivity/ser2net/ser2net_3.4.bb
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=bae3019b4c6dc4138c217864bd04331f"
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+index 3bc2eb591..0b39116a1 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+@@ -133,6 +133,7 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
  
- SRC_URI = "${SOURCEFORGE_MIRROR}/project/ser2net/ser2net/ser2net-${PV}.tar.gz"
+ LDFLAGS_append_mips = " -latomic"
+ LDFLAGS_append_mipsel = " -latomic"
++LDFLAGS_append_powerpc = " -latomic"
  
--SRC_URI[md5sum] = "80011ac0e60bbdcb65f1d7a86251e3f3"
--SRC_URI[sha256sum] = "fdee1e69903cf409bdc6f32403a566cbc6006aa9e2a4d6f8f12b90dfd5ca0d0e"
-+SRC_URI[md5sum] = "562274d783534276a9feac913b7d8c4e"
-+SRC_URI[sha256sum] = "d846066e27c3072565990745d030357aa0c278f96b7d1d4f59023347c1db8824"
- 
- inherit autotools pkgconfig
+ EXTRA_OECONF_append = " LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
  
 -- 
-2.4.0
+2.13.2
 
 
