@@ -1,45 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 0457277F69;
-	Mon,  3 Jul 2017 16:02:09 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id 62so173230692wmw.1;
-	Mon, 03 Jul 2017 09:02:11 -0700 (PDT)
+Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
+	[209.85.192.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 4DD806FF80
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  3 Jul 2017 17:23:33 +0000 (UTC)
+Received: by mail-pf0-f171.google.com with SMTP id s66so102972163pfs.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 Jul 2017 10:23:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=OPiOJrOFHrRAKGGztdSpzNc8wcBftW06NkLdiWN1SvA=;
-	b=u0tv5D5pcDqKqGTxSG7LtMsraqSOcDSY6xxh76HolaWiKfqg0D/Q5ADzG7+88m2znh
-	k/hdKz2KvgsoQcWYRKz1pUi8J1NP24dGffiEETqiraf2l59r36m9aozzQiLu66nCM8Xe
-	DeK2j5aMWYQR41JnnER5WYUY7/UAhrt/WYlboK6+SU75PZt2yTa6hE9ZT7sxduNW8ust
-	IBi/8l3i9X19KdLqsVcEwzXyoXPRaVx3xmxMB6NyejpmrxX8YioJeUtRZI4F8s8sj2/+
-	HJndHRyGec+13MwIYtq9SqMi9ezqA2ZgFipr4oJ2KVOjlCTmLj8ycTZIR6yTBSAY/OZU
-	5kjQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=0hSaNTeMuhgHTUKjNA7kXA51GVYkYvXyzyw4m4djv7g=;
+	b=Ppd+9xeyHW2V9iZpuvfevkZk/0DOVJ1yf794Ne1A/vo3JK83/ZalRLyO5KHERmUfeP
+	ZIZPWW2Z5HCLTAYuTOSVlFA3aCxHLMknd2y1WGZAmgae0XBSPKFMqhQXrxwDQ1tD1Q7/
+	EpVIG7lx8AGrcERzuSMX6eR4qgyLbilUwzRCkUjilVudPr+8qql+LOWzEzXdQozbOrGy
+	6JiYHhhGt/kgxoezsKFCofXzXilDjAoVCXnWh4HUL9Rmo0u9eCerSbLiRXM7zbQQLA26
+	zXlZZWrJqqaOJESVsfpMfI5AJUzbnuj4y3xRL0FkhWYilOqwEtPHJddA4irsXT2EBT/i
+	7ddw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=OPiOJrOFHrRAKGGztdSpzNc8wcBftW06NkLdiWN1SvA=;
-	b=QqIW/Ch/CjmQ0QWnc1CmwI0N4yyS8zA29bkvYUuPirkgAUD0V/UoUZ4Ca14G8+kSg9
-	zPnoGAJK+1nl64R/ImWuYd60OsK31s6vkaLu3dPDsu3XEjNUKDTEBY0ylUy26GgGpzi2
-	/FJem8N5VjbhqXWDGTZEsxfR1sCW62JfUQxucDNt6JgKbZeJ4l8cQKIqqVnZFxCFrFvl
-	o4n4YM3VpVZZ2Av4xxM8eHMOpJGtVOIq3ObdNGhzWd0fqxXdAiHRXheqI1qOTAA5IOig
-	gnVqfvhyQ6ggMrxmXMex2DmlUZOXpVSHw4HgjFWC+FUj/HGkPrGV++3YIPGFMPDWxuyZ
-	N4wA==
-X-Gm-Message-State: AKS2vOyF8K5XHphf8Oj+MX6Oyle8GDxwjGUmycEBhG8nO9JVbGpYX5kS
-	mUh+CPwug2VsS4b5B45+kFO+eLZo4g==
-X-Received: by 10.80.151.49 with SMTP id c46mr15736603edb.30.1499097730228;
-	Mon, 03 Jul 2017 09:02:10 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.165.198 with HTTP; Mon, 3 Jul 2017 09:01:39 -0700 (PDT)
-In-Reply-To: <CA+chaQeKdNstTz6s1KMLcM+oHE2Rb3CZ0PWo0+j+wM4kzbcQFw@mail.gmail.com>
-References: <CA+chaQeKdNstTz6s1KMLcM+oHE2Rb3CZ0PWo0+j+wM4kzbcQFw@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0hSaNTeMuhgHTUKjNA7kXA51GVYkYvXyzyw4m4djv7g=;
+	b=FwZgm+jkgeoKJ/jj9tqWx4MxMU+/wsJNaGYVti+omc/AIjy/PudUB/geTPMxseel0t
+	IZvti1S2AOZvA1E64GscI09KWL4UqdsoxPHRNJ47UOMe2fhQ0P1mV4dQyCGCLwK2DyAA
+	re6DofhQq4FeiZmPgS99RmEyBcKOPw1/T9Iz8P1dYG26r/t+Mww0ZN/nBCfUqquxBEGD
+	C1C4wsnStjBN1a1RvuZChSp4iaZR9+NDFZb+ziLbCO+hhhYnWuAB0nXBvJSCgym7gx5B
+	MJ9m1Z4jkoggWqcbnIY7Tckx9PyobX5b+e9hjDrHJ+0yNl9eYsRjp3qw29WMBiVWe60M
+	9dLA==
+X-Gm-Message-State: AIVw110Cy3SuZ74nWicSilfxCknBJyoZCW8TLEWmAAedy7GNFISTkL9N
+	OT8MebjaLRnw0Wdw
+X-Received: by 10.84.128.102 with SMTP id 93mr11517122pla.21.1499102615032;
+	Mon, 03 Jul 2017 10:23:35 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
+	by smtp.gmail.com with ESMTPSA id 75sm6756532pfk.84.2017.07.03.10.23.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 03 Jul 2017 10:23:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 3 Jul 2017 09:01:39 -0700
-Message-ID: <CAMKF1sqX_v0KA2ETEdT7wYBtx-nAybPk-t1TOZRsjLaENNjCvQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-07-02
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  3 Jul 2017 10:23:26 -0700
+Message-Id: <20170703172326.9061-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-browser][PATCH] firefox: Fix missing references to hardcoded PYTHON
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,47 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jul 2017 16:02:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 03 Jul 2017 17:23:34 -0000
 
-On Mon, Jul 3, 2017 at 4:20 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> http://www.openembedded.org/wiki/Bitbake_World_Status
->
-> == Number of issues - stats ==
-> {| class='wikitable'
-> !|Date     !!colspan='3'|Failed tasks    !!|Signatures
-> !!colspan='14'|QA !!Comment
-> |-
-> || ||qemuarm ||qemux86 ||qemux86_64 ||all
-> ||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps ||version-going-backwards ||host-user-contaminated ||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path ||
-> |-
-> ||2017-07-02 ||7 ||8 ||5 ||0 ||0 ||1 ||4 ||0 ||0 ||1238 ||1 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||
-> |}
->
-> == Failed tasks 2017-07-02 ==
->
-> INFO: jenkins-job.sh-1.8.24 Complete log available at
-> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170702_225940.log
->
-> === common (3) ===
->     *
-> meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb:do_configure
->     *
-> meta-openembedded/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb:do_package
->     *
-> virtual:native:meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_populate_sysroot
->
-> === common-x86 (2) ===
->     * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
->     *
-> openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.12.0.bb:do_compile_ptest_base
->
-> === qemuarm (4) ===
->     *
-> meta-openembedded/meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb:do_fetch
->     *
-> meta-openembedded/meta-oe/recipes-support/synergy/synergy_git.bb:do_fetch
->     *
+Since OE cross compiles we sometimes will  run into this issue
+https://bugzilla.mozilla.org/show_bug.cgi?id=1243321
 
-these worked ok for me. Seems to be transitory failures.
+This fix enhances the existing patch to use PYTHON variable
+itself to compute the python binary name and uses usr/bin/env
+to find it instead of hardcoding it.
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../firefox/firefox/fix-python-path.patch          | 27 +++++++++++++++-------
+ 1 file changed, 19 insertions(+), 8 deletions(-)
+
+diff --git a/recipes-mozilla/firefox/firefox/fix-python-path.patch b/recipes-mozilla/firefox/firefox/fix-python-path.patch
+index 544c611..963fbae 100644
+--- a/recipes-mozilla/firefox/firefox/fix-python-path.patch
++++ b/recipes-mozilla/firefox/firefox/fix-python-path.patch
+@@ -9,18 +9,29 @@ Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+  js/src/configure | 2 +-
+  1 file changed, 1 insertion(+), 1 deletion(-)
+ 
+-diff --git a/js/src/configure b/js/src/configure
+-index cce5430..780d201 100755
+---- a/js/src/configure
+-+++ b/js/src/configure
+-@@ -15933,7 +15933,7 @@ echo creating $CONFIG_STATUS
++Index: firefox-45.9.0esr/js/src/configure
++===================================================================
++--- firefox-45.9.0esr.orig/js/src/configure
+++++ firefox-45.9.0esr/js/src/configure
++@@ -17061,7 +17061,7 @@ echo creating $CONFIG_STATUS
+  extra_python_path=${COMM_BUILD:+"'mozilla', "}
+  
+  cat > $CONFIG_STATUS <<EOF
+ -#!${PYTHON}
+-+#!/usr/bin/python
+++#!/usr/bin/env `basename $PYTHON`
++ # coding=$encoding
++ 
++ import os
++Index: firefox-45.9.0esr/configure
++===================================================================
++--- firefox-45.9.0esr.orig/configure
+++++ firefox-45.9.0esr/configure
++@@ -30461,7 +30461,7 @@ echo creating $CONFIG_STATUS
++ extra_python_path=${COMM_BUILD:+"'mozilla', "}
++ 
++ cat > $CONFIG_STATUS <<EOF
++-#!${PYTHON}
+++#!/usr/bin/env `basename ${PYTHON}`
+  # coding=$encoding
+  
+  import os
+--- 
+-2.1.4
+-- 
+2.13.2
+
 
