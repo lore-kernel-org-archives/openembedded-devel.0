@@ -1,46 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E75B6FFA4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 15:11:22 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id s66so26173146pfs.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Jul 2017 08:11:24 -0700 (PDT)
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id 0457277F69;
+	Mon,  3 Jul 2017 16:02:09 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id 62so173230692wmw.1;
+	Mon, 03 Jul 2017 09:02:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=nXSGrCBe/fn54vD89VC4LOj3HtzfnDMM5b0ZVjR573g=;
-	b=ofqrixUeHRfq3EfAG5v+txjvuu6a1pzL4WDV73BHaup/dyosFZeBBYZWOcPMR4arun
-	sdDXsKl5NIoai4v6h0FKzpdoqZFfKfOm6fzf58ujMh5EfxrF0rvJirxWtzipTq8y8iWo
-	9mRYHJbYIUE0XQ3oZ6ELH4UYVuwmSbBXm7s31JvOHLDqeYZJHyjYIr1eqVyzGuPXi6k+
-	z7mPimRgyeP0jxJm3yGrk9DVAF8NR469SkA+qA0a+a+70fg1nW50BqN92Gm/pEXADWvv
-	KzWP2KQXWhgx8TQeTK4tc9zSd8BDRFVI1xudyahryDymyGyb0h41ae5gkAFbQD5NFbOi
-	ldzw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=OPiOJrOFHrRAKGGztdSpzNc8wcBftW06NkLdiWN1SvA=;
+	b=u0tv5D5pcDqKqGTxSG7LtMsraqSOcDSY6xxh76HolaWiKfqg0D/Q5ADzG7+88m2znh
+	k/hdKz2KvgsoQcWYRKz1pUi8J1NP24dGffiEETqiraf2l59r36m9aozzQiLu66nCM8Xe
+	DeK2j5aMWYQR41JnnER5WYUY7/UAhrt/WYlboK6+SU75PZt2yTa6hE9ZT7sxduNW8ust
+	IBi/8l3i9X19KdLqsVcEwzXyoXPRaVx3xmxMB6NyejpmrxX8YioJeUtRZI4F8s8sj2/+
+	HJndHRyGec+13MwIYtq9SqMi9ezqA2ZgFipr4oJ2KVOjlCTmLj8ycTZIR6yTBSAY/OZU
+	5kjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nXSGrCBe/fn54vD89VC4LOj3HtzfnDMM5b0ZVjR573g=;
-	b=Op6Dc7MW0N+Lb2kK8QDxSxvDRvESXZV9V0gDmenZ6cZLR1G8cHlq7hr57q44Zry0gW
-	01YHVqR+QEnV7xTtFmiD67sTiYA9qo9gEvYQg+5nniSnq20aBZ2SQd4U5OQPHuJbF9Yc
-	HWq6yC18JdIJRCCIWoFb722tE3x/kfVfADzwADroTUMp1Ex+hPB8jcrleWOn1PtX8/k3
-	cLrbFZW9t1nlwq77anXuqT+/TmueCdaQbNCmjAb586NO2Bde5I1S+WXDAFoTOIogh9uR
-	slNlDUtMh8jMF13AJI48jiL3wV3Pm+zjC0N+MfZOpcKP3scUlNiANv2fUcICgqgtUuA8
-	PHow==
-X-Gm-Message-State: AIVw112qFKXS8mOI8O1aRUItm369WQ68Q3TysxPxSyjN6NvwWx6Dd6mI
-	I2MyjSOqS+GjCRlS
-X-Received: by 10.84.196.131 with SMTP id l3mr11009845pld.232.1499094682761;
-	Mon, 03 Jul 2017 08:11:22 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id
-	k67sm12295707pfg.37.2017.07.03.08.11.21
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Jul 2017 08:11:21 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=OPiOJrOFHrRAKGGztdSpzNc8wcBftW06NkLdiWN1SvA=;
+	b=QqIW/Ch/CjmQ0QWnc1CmwI0N4yyS8zA29bkvYUuPirkgAUD0V/UoUZ4Ca14G8+kSg9
+	zPnoGAJK+1nl64R/ImWuYd60OsK31s6vkaLu3dPDsu3XEjNUKDTEBY0ylUy26GgGpzi2
+	/FJem8N5VjbhqXWDGTZEsxfR1sCW62JfUQxucDNt6JgKbZeJ4l8cQKIqqVnZFxCFrFvl
+	o4n4YM3VpVZZ2Av4xxM8eHMOpJGtVOIq3ObdNGhzWd0fqxXdAiHRXheqI1qOTAA5IOig
+	gnVqfvhyQ6ggMrxmXMex2DmlUZOXpVSHw4HgjFWC+FUj/HGkPrGV++3YIPGFMPDWxuyZ
+	N4wA==
+X-Gm-Message-State: AKS2vOyF8K5XHphf8Oj+MX6Oyle8GDxwjGUmycEBhG8nO9JVbGpYX5kS
+	mUh+CPwug2VsS4b5B45+kFO+eLZo4g==
+X-Received: by 10.80.151.49 with SMTP id c46mr15736603edb.30.1499097730228;
+	Mon, 03 Jul 2017 09:02:10 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.165.198 with HTTP; Mon, 3 Jul 2017 09:01:39 -0700 (PDT)
+In-Reply-To: <CA+chaQeKdNstTz6s1KMLcM+oHE2Rb3CZ0PWo0+j+wM4kzbcQFw@mail.gmail.com>
+References: <CA+chaQeKdNstTz6s1KMLcM+oHE2Rb3CZ0PWo0+j+wM4kzbcQFw@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Jul 2017 08:11:06 -0700
-Message-Id: <20170703151107.35350-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH 1/2] libdbus-c++: Fix build with gcc7 and unblacklist
+Date: Mon, 3 Jul 2017 09:01:39 -0700
+Message-ID: <CAMKF1sqX_v0KA2ETEdT7wYBtx-nAybPk-t1TOZRsjLaENNjCvQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-07-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,84 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jul 2017 15:11:26 -0000
+X-List-Received-Date: Mon, 03 Jul 2017 16:02:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-pipe.c-Use-a-string-instead-of-char.patch | 27 ++++++++++++++++++++++
- meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb     | 20 ++++++++--------
- 2 files changed, 36 insertions(+), 11 deletions(-)
- create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
+On Mon, Jul 3, 2017 at 4:20 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> http://www.openembedded.org/wiki/Bitbake_World_Status
+>
+> == Number of issues - stats ==
+> {| class='wikitable'
+> !|Date     !!colspan='3'|Failed tasks    !!|Signatures
+> !!colspan='14'|QA !!Comment
+> |-
+> || ||qemuarm ||qemux86 ||qemux86_64 ||all
+> ||already-stripped ||libdir ||textrel ||build-deps ||file-rdeps ||version-going-backwards ||host-user-contaminated ||installed-vs-shipped ||unknown-configure-option ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags ||compile-host-path ||
+> |-
+> ||2017-07-02 ||7 ||8 ||5 ||0 ||0 ||1 ||4 ||0 ||0 ||1238 ||1 ||0 ||0 ||0 ||0 ||0 ||0 ||0 ||
+> |}
+>
+> == Failed tasks 2017-07-02 ==
+>
+> INFO: jenkins-job.sh-1.8.24 Complete log available at
+> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170702_225940.log
+>
+> === common (3) ===
+>     *
+> meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb:do_configure
+>     *
+> meta-openembedded/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb:do_package
+>     *
+> virtual:native:meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_populate_sysroot
+>
+> === common-x86 (2) ===
+>     * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+>     *
+> openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.12.0.bb:do_compile_ptest_base
+>
+> === qemuarm (4) ===
+>     *
+> meta-openembedded/meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb:do_fetch
+>     *
+> meta-openembedded/meta-oe/recipes-support/synergy/synergy_git.bb:do_fetch
+>     *
 
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
-new file mode 100644
-index 000000000..6883f9a0b
---- /dev/null
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
-@@ -0,0 +1,27 @@
-+From 6bcb58bd69c38b9200e8ec6c382247167571189d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 1 Jul 2017 16:44:15 -0700
-+Subject: [PATCH] pipe.c: Use a string instead of char
-+
-+Fixes
-+error: invalid conversion from 'char' to 'const void*' [-fpermissive]
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/pipe.cpp | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/pipe.cpp b/src/pipe.cpp
-+index 45c2ba6..1303c2d 100644
-+--- a/src/pipe.cpp
-++++ b/src/pipe.cpp
-+@@ -83,5 +83,5 @@ ssize_t Pipe::read(void *buffer, unsigned int &nbytes)
-+ void Pipe::signal()
-+ {
-+   // TODO: ignoring return of read/write generates warning; maybe relevant for eventloop work...
-+-  ::write(_fd_write, '\0', 1);
-++  ::write(_fd_write, "", 1);
-+ }
-+-- 
-+2.13.2
-+
-diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-index 4412716a6..4cc133301 100644
---- a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-+++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
-@@ -6,15 +6,15 @@ LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
- DEPENDS = "dbus expat glib-2.0 libpcre"
- 
--SRC_URI = "\
--    ${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BP}.tar.gz \
--    file://fix-missing-unistd.h-include.patch \
--    file://remove-CXX_FOR_BUILD-stuff.patch \
--    file://0001-src-eventloop.cpp-use-portable-method-for-initializi.patch \
--    file://0002-tools-generate_proxy.cpp-avoid-possibly-undefined-ui.patch \
--    file://0003-Fixed-undefined-ssize_t-for-clang-3.8.0-on-FreeBSD.patch \
--    file://0004-use-POSIX-poll.h-instead-of-sys-poll.h.patch \
--"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BP}.tar.gz \
-+           file://fix-missing-unistd.h-include.patch \
-+           file://remove-CXX_FOR_BUILD-stuff.patch \
-+           file://0001-src-eventloop.cpp-use-portable-method-for-initializi.patch \
-+           file://0002-tools-generate_proxy.cpp-avoid-possibly-undefined-ui.patch \
-+           file://0003-Fixed-undefined-ssize_t-for-clang-3.8.0-on-FreeBSD.patch \
-+           file://0004-use-POSIX-poll.h-instead-of-sys-poll.h.patch \
-+           file://0001-pipe.c-Use-a-string-instead-of-char.patch \
-+           "
- SRC_URI[md5sum] = "e752116f523fa88ef041e63d3dee4de2"
- SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385af4e61"
- 
-@@ -27,5 +27,3 @@ PACKAGE_BEFORE_PN = "${PN}-tools"
- FILES_${PN}-tools = "${bindir}"
- 
- BBCLASSEXTEND = "native"
--
--PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.13.2
-
+these worked ok for me. Seems to be transitory failures.
 
