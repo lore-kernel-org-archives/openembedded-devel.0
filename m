@@ -1,30 +1,43 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 66223719B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 05:52:14 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="20768774"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 03 Jul 2017 13:52:12 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5B37D46B53E2
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 13:52:09 +0800 (CST)
-Received: from localhost.localdomain (10.167.226.81) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Mon, 3 Jul 2017 13:52:13 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 3 Jul 2017 13:51:52 +0800
-Message-ID: <1499061112-5475-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f178.google.com (mail-yb0-f178.google.com
+	[209.85.213.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B1076093F;
+	Mon,  3 Jul 2017 11:20:20 +0000 (UTC)
+Received: by mail-yb0-f178.google.com with SMTP id s15so20238025ybe.2;
+	Mon, 03 Jul 2017 04:20:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=Xf7I/Zhk0N2MGgno8etQR/cYePeOb/p1RXlL4nbmEnc=;
+	b=eOgAc26onmCpng5LxER39MW++7DqglFobFVzHHbv0RgwCzrApDEiqcN7fOm/mwtWGL
+	sDGo1tVgRaQf1MV1VTQ4PJQF3UzfHYRNuZbaZiPATkJ376fG6zxA9T3s/kjL9QBW44ux
+	uCEVNNW0gG2RXL7yafIvQoBxHGSo8DlbUSQV9iwWbS4uHtRwKnAfhW/rnwhC67H3/q4k
+	tbzbsaDDPrFsr/L7JyHH7PElyhiMpO+Wq35vE268sae1uEv8PcIip7pjUZZA4CFoRRrp
+	GODAA2kUHA/xeOSOq0Xdknbh0lcx4DR+ovvkVR4eWhRtpqazLM8AD4tL5RfMCYtQD0U2
+	E7Ow==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=Xf7I/Zhk0N2MGgno8etQR/cYePeOb/p1RXlL4nbmEnc=;
+	b=gkD03rHI2zvSahEmbv2myWXUAqUKxWaLkxTyyC98emxHnyCr9guMLHzIqaf6j+lC5k
+	NzuZiruQceX6Os8SYWlrcRsLxAWPsdSWm15NGmcIwrCZw/wBQ/GQ/ept3Icm8cnEmrV9
+	gnukpqwO5icp6k06EW4vQSvfNhjo24Z8zvUuxbU7OEjFQrs/s2gOfd5fEt0CwZlllmJl
+	LMPqzTxELBMt0/0rZltj3668Q4Ynj/oHvhCzD9bV//zh+irWwLZVLiYJtDAhJMKJZ/0R
+	7rBs7wontvbByLeg9KO9NjHwp77PPglTIagG3QPr7A8XZWngUN8+wKTcDQ36178Gi3Br
+	JfLw==
+X-Gm-Message-State: AKS2vOzTIOtZIcqr+omM4Imh5piTLBp+YBfD5X4oRuOkppZE+n/jlIDA
+	g0s/KYFlEf7UAr/xH3LsobxPmOJgiTAL
+X-Received: by 10.37.228.70 with SMTP id b67mr26979414ybh.28.1499080822034;
+	Mon, 03 Jul 2017 04:20:22 -0700 (PDT)
 MIME-Version: 1.0
-X-Originating-IP: [10.167.226.81]
-X-yoursite-MailScanner-ID: 5B37D46B53E2.A7088
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-qt5] [PATCH v3] qtquick1: add ptest
+Received: by 10.37.172.18 with HTTP; Mon, 3 Jul 2017 04:20:21 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 3 Jul 2017 13:20:21 +0200
+Message-ID: <CA+chaQeKdNstTz6s1KMLcM+oHE2Rb3CZ0PWo0+j+wM4kzbcQFw@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: State of bitbake world, Failed tasks 2017-07-02
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +50,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jul 2017 05:52:17 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 03 Jul 2017 11:20:21 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-   Add ptest for qttools by using provided testsuite in qtquick1.
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- recipes-qt/qt5/qtquick1/run-ptest | 6 ++++++
- recipes-qt/qt5/qtquick1_git.bb    | 1 +
- 2 files changed, 7 insertions(+)
- create mode 100644 recipes-qt/qt5/qtquick1/run-ptest
+== Number of issues - stats ==
+{| class='wikitable'
+!|Date		     !!colspan='3'|Failed tasks			    !!|Signatures		
+!!colspan='14'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||all
+	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	||ldflags	||compile-host-path	||
+|-
+||2017-07-02	||7	||8	||5	||0	||0		||1		||4		||0		||0		||1238		||1		||0		||0		||0		||0		||0		||0		||0		||
+|}
 
-diff --git a/recipes-qt/qt5/qtquick1/run-ptest b/recipes-qt/qt5/qtquick1/run-ptest
-new file mode 100644
-index 0000000..044f834
---- /dev/null
-+++ b/recipes-qt/qt5/qtquick1/run-ptest
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+
-+for x in ` awk '{print $1}' tst_list `;do
-+    ./${x};
-+done
-+
-diff --git a/recipes-qt/qt5/qtquick1_git.bb b/recipes-qt/qt5/qtquick1_git.bb
-index e9b6185..d41b838 100644
---- a/recipes-qt/qt5/qtquick1_git.bb
-+++ b/recipes-qt/qt5/qtquick1_git.bb
-@@ -1,5 +1,6 @@
- require qt5.inc
- require qt5-git.inc
-+require qt5-ptest.inc
- 
- LICENSE = "GFDL-1.3 & BSD & ( GPL-3.0 & The-Qt-Company-GPL-Exception-1.0 | The-Qt-Company-Commercial ) & ( GPL-2.0+ | LGPL-3.0 | The-Qt-Company-Commercial )"
- LIC_FILES_CHKSUM = " \
--- 
-2.7.4
+== Failed tasks 2017-07-02 ==
+
+INFO: jenkins-job.sh-1.8.24 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170702_225940.log
+
+=== common (3) ===
+    * meta-openembedded/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb:do_configure
+    * meta-openembedded/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb:do_package
+    * virtual:native:meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_populate_sysroot
+
+=== common-x86 (2) ===
+    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+    * openembedded-core/meta/recipes-devtools/valgrind/valgrind_3.12.0.bb:do_compile_ptest_base
+
+=== qemuarm (4) ===
+    * meta-openembedded/meta-oe/recipes-graphics/gegl/gegl_0.3.18.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-support/synergy/synergy_git.bb:do_fetch
+    * meta-openembedded/meta-python/recipes-devtools/python/python3-jsonschema_2.6.0.bb:do_compile
+    * meta-openembedded/meta-python/recipes-devtools/python/python3-pytest_3.1.2.bb:do_compile
+
+=== qemux86 (1) ===
+    * meta-openembedded/meta-python/recipes-devtools/python/python-pytest_3.1.2.bb:do_compile
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (20) ===
+{| class=wikitable
+|-
+|| qemuarm 	|| 7	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170701_001009.log/
+|| http://errors.yoctoproject.org/Errors/Build/40492/
+|-
+|| qemux86 	|| 8	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170701_001007.log/
+|| http://errors.yoctoproject.org/Errors/Build/40495/
+|-
+|| qemux86_64 	|| 5	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170702_004648.log/
+|| http://errors.yoctoproject.org/Errors/Build/40496/
+|}
+
+=== PNBLACKLISTs (15) ===
+
+=== QA issues (1244) ===
+{| class=wikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||1238	||version-going-backwards
+|-
+||1	||host-user-contaminated
+|-
+||1	||libdir
+|-
+||4	||textrel
+|}
 
 
 
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170701_233319.log/
+
+No issues detected
 
