@@ -1,45 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 4DD806FF80
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F72E60765
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  3 Jul 2017 17:23:33 +0000 (UTC)
-Received: by mail-pf0-f171.google.com with SMTP id s66so102972163pfs.1
+	Mon,  3 Jul 2017 19:24:39 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id z6so26795014pfk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 Jul 2017 10:23:35 -0700 (PDT)
+	Mon, 03 Jul 2017 12:24:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=0hSaNTeMuhgHTUKjNA7kXA51GVYkYvXyzyw4m4djv7g=;
-	b=Ppd+9xeyHW2V9iZpuvfevkZk/0DOVJ1yf794Ne1A/vo3JK83/ZalRLyO5KHERmUfeP
-	ZIZPWW2Z5HCLTAYuTOSVlFA3aCxHLMknd2y1WGZAmgae0XBSPKFMqhQXrxwDQ1tD1Q7/
-	EpVIG7lx8AGrcERzuSMX6eR4qgyLbilUwzRCkUjilVudPr+8qql+LOWzEzXdQozbOrGy
-	6JiYHhhGt/kgxoezsKFCofXzXilDjAoVCXnWh4HUL9Rmo0u9eCerSbLiRXM7zbQQLA26
-	zXlZZWrJqqaOJESVsfpMfI5AJUzbnuj4y3xRL0FkhWYilOqwEtPHJddA4irsXT2EBT/i
-	7ddw==
+	bh=u1y6QooyRkkDtoN1fh5oPB2AHWjrPXhXalSucMp0vSc=;
+	b=ruR4sdAHXLcpBk5X0+2sIS9KG9svCrxWda4OJW57fHIltXYXGE/u80k72z2Dkkjj6Z
+	kA56VCD3Mk/rKWya1RkEy9dVpzb1SvKNwBSR72Pmt4VcLjtlEviU3xnef8jtfEmLSWH4
+	3wQ+9GOUnPoe4SC1HkrDJ5jS7vz2oU1Uu8K/aSyNFluxAIT9PF5HsuLcnzJ9wjMvj3Ss
+	kuIxxlh2xRIbO6qIWWNAuf3qx/Y9L2vWGfr4eDNtGiwiUWn/U0S1wq1yyT3XA9GSgdUJ
+	yRZNRo6oGKDaM/kg9EDvLfDybf+TMtBOgDqYKy2B4vSesZzCDQcnaU0yABDdGwIEHoPt
+	e8Pg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0hSaNTeMuhgHTUKjNA7kXA51GVYkYvXyzyw4m4djv7g=;
-	b=FwZgm+jkgeoKJ/jj9tqWx4MxMU+/wsJNaGYVti+omc/AIjy/PudUB/geTPMxseel0t
-	IZvti1S2AOZvA1E64GscI09KWL4UqdsoxPHRNJ47UOMe2fhQ0P1mV4dQyCGCLwK2DyAA
-	re6DofhQq4FeiZmPgS99RmEyBcKOPw1/T9Iz8P1dYG26r/t+Mww0ZN/nBCfUqquxBEGD
-	C1C4wsnStjBN1a1RvuZChSp4iaZR9+NDFZb+ziLbCO+hhhYnWuAB0nXBvJSCgym7gx5B
-	MJ9m1Z4jkoggWqcbnIY7Tckx9PyobX5b+e9hjDrHJ+0yNl9eYsRjp3qw29WMBiVWe60M
-	9dLA==
-X-Gm-Message-State: AIVw110Cy3SuZ74nWicSilfxCknBJyoZCW8TLEWmAAedy7GNFISTkL9N
-	OT8MebjaLRnw0Wdw
-X-Received: by 10.84.128.102 with SMTP id 93mr11517122pla.21.1499102615032;
-	Mon, 03 Jul 2017 10:23:35 -0700 (PDT)
+	bh=u1y6QooyRkkDtoN1fh5oPB2AHWjrPXhXalSucMp0vSc=;
+	b=Diw4gmCrsdnQUewjqJOMaPcGg/3z2gvtlplGEAmjHtyBgr8BQRcoHIzshz9ItHKA92
+	vaKrQqjWLrOT6dlnweN3jjzxPoFNGYTxiyluF1sPCHgl/teM2V34OrHYag2x2CxeLZ68
+	sgFEJuX+Y9Xe7lfUmWirauM+UYo2ut+SBKH9DY1vqtXl1WWZU2Nw/dZ5byjKOE4+F1LU
+	rptGEAO8X4EfS2PxzdA/Xfaf6RoHenUcjHAMo73AlGCt/We+Lgy6KWjmwa128eFRlEkM
+	MrW5EpuMcmQx8axNOfk/Q8SCYJIw+9/bhmGt7js0Y6lcXZbGDyoFzVr5y4h5I5w83tGj
+	FZBw==
+X-Gm-Message-State: AIVw113eR5kKS1AzGUyhv45Ix/lzh5ErCf9QqCJ7B9QdakwEkd+B/jIz
+	n5OBTel+LgobihS/
+X-Received: by 10.84.232.72 with SMTP id f8mr12023391pln.87.1499109880801;
+	Mon, 03 Jul 2017 12:24:40 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::3df3])
-	by smtp.gmail.com with ESMTPSA id 75sm6756532pfk.84.2017.07.03.10.23.33
+	by smtp.gmail.com with ESMTPSA id
+	70sm36837061pft.104.2017.07.03.12.24.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 03 Jul 2017 10:23:33 -0700 (PDT)
+	Mon, 03 Jul 2017 12:24:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 Jul 2017 10:23:26 -0700
-Message-Id: <20170703172326.9061-1-raj.khem@gmail.com>
+Date: Mon,  3 Jul 2017 12:24:32 -0700
+Message-Id: <20170703192432.38081-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-browser][PATCH] firefox: Fix missing references to hardcoded PYTHON
+Subject: [meta-browser][PATCH] firefox: Fix Build QA error compile-host-path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,62 +53,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 Jul 2017 17:23:34 -0000
-
-Since OE cross compiles we sometimes will  run into this issue
-https://bugzilla.mozilla.org/show_bug.cgi?id=1243321
-
-This fix enhances the existing patch to use PYTHON variable
-itself to compute the python binary name and uses usr/bin/env
-to find it instead of hardcoding it.
+X-List-Received-Date: Mon, 03 Jul 2017 19:24:40 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../firefox/firefox/fix-python-path.patch          | 27 +++++++++++++++-------
- 1 file changed, 19 insertions(+), 8 deletions(-)
+ .../firefox/firefox/remove_AC_PATH_XTRA.patch      | 59 ++++++++++++++++++++++
+ recipes-mozilla/firefox/firefox_45.9.0esr.bb       |  1 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
 
-diff --git a/recipes-mozilla/firefox/firefox/fix-python-path.patch b/recipes-mozilla/firefox/firefox/fix-python-path.patch
-index 544c611..963fbae 100644
---- a/recipes-mozilla/firefox/firefox/fix-python-path.patch
-+++ b/recipes-mozilla/firefox/firefox/fix-python-path.patch
-@@ -9,18 +9,29 @@ Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-  js/src/configure | 2 +-
-  1 file changed, 1 insertion(+), 1 deletion(-)
- 
--diff --git a/js/src/configure b/js/src/configure
--index cce5430..780d201 100755
----- a/js/src/configure
--+++ b/js/src/configure
--@@ -15933,7 +15933,7 @@ echo creating $CONFIG_STATUS
-+Index: firefox-45.9.0esr/js/src/configure
-+===================================================================
-+--- firefox-45.9.0esr.orig/js/src/configure
-++++ firefox-45.9.0esr/js/src/configure
-+@@ -17061,7 +17061,7 @@ echo creating $CONFIG_STATUS
-  extra_python_path=${COMM_BUILD:+"'mozilla', "}
-  
-  cat > $CONFIG_STATUS <<EOF
- -#!${PYTHON}
--+#!/usr/bin/python
-++#!/usr/bin/env `basename $PYTHON`
-+ # coding=$encoding
-+ 
-+ import os
+diff --git a/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch b/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
+new file mode 100644
+index 0000000..69d297e
+--- /dev/null
++++ b/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
+@@ -0,0 +1,59 @@
++Drop unused X_* flags.
++
++There are actually causing harm doing cross builds since they are picking
++up $includedir which  is /usr/include and pouring that into CFLAGS in
++case of cairo, which ends up referening to build host's include paths
++
++Luckily, we have a QA check to catch such issues
++
++ERROR: firefox-45.9.0esr-r0 do_package_qa: QA Issue: firefox: The compile log indicates that host include and/or library paths were used.
++         Please check the log '/mnt/a/oe/build/tmp/work/corei7-64-bec-linux/firefox/45.9.0esr-r0/temp/log.do_compile' for more information. [compile-host-path]
++
++This patch fixes it
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++
 +Index: firefox-45.9.0esr/configure
 +===================================================================
 +--- firefox-45.9.0esr.orig/configure
 ++++ firefox-45.9.0esr/configure
-+@@ -30461,7 +30461,7 @@ echo creating $CONFIG_STATUS
-+ extra_python_path=${COMM_BUILD:+"'mozilla', "}
++@@ -30605,10 +30605,6 @@ sed 's/$/,/' >> $CONFIG_STATUS <<EOF
++     (''' MACOS_SDK_DIR ''', r''' $MACOS_SDK_DIR ''')
++     (''' MACOS_PRIVATE_FRAMEWORKS_DIR ''', r''' $MACOS_PRIVATE_FRAMEWORKS_DIR ''')
++     (''' GMAKE ''', r''' $GMAKE ''')
++-    (''' X_CFLAGS ''', r''' $X_CFLAGS ''')
++-    (''' X_PRE_LIBS ''', r''' $X_PRE_LIBS ''')
++-    (''' X_LIBS ''', r''' $X_LIBS ''')
++-    (''' X_EXTRA_LIBS ''', r''' $X_EXTRA_LIBS ''')
++     (''' SOLARIS_SUNPRO_CC ''', r''' $SOLARIS_SUNPRO_CC ''')
++     (''' SOLARIS_SUNPRO_CXX ''', r''' $SOLARIS_SUNPRO_CXX ''')
++     (''' MOZ_THUMB2 ''', r''' $MOZ_THUMB2 ''')
++Index: firefox-45.9.0esr/js/src/configure
++===================================================================
++--- firefox-45.9.0esr.orig/js/src/configure
+++++ firefox-45.9.0esr/js/src/configure
++@@ -17188,10 +17188,6 @@ sed 's/$/,/' >> $CONFIG_STATUS <<EOF
++     (''' MACOSX_DEPLOYMENT_TARGET ''', r''' $MACOSX_DEPLOYMENT_TARGET ''')
++     (''' MACOS_SDK_DIR ''', r''' $MACOS_SDK_DIR ''')
++     (''' GMAKE ''', r''' $GMAKE ''')
++-    (''' X_CFLAGS ''', r''' $X_CFLAGS ''')
++-    (''' X_PRE_LIBS ''', r''' $X_PRE_LIBS ''')
++-    (''' X_LIBS ''', r''' $X_LIBS ''')
++-    (''' X_EXTRA_LIBS ''', r''' $X_EXTRA_LIBS ''')
++     (''' MOZILLA_SYMBOLVERSION ''', r''' $MOZILLA_SYMBOLVERSION ''')
++     (''' JS_SHELL_NAME ''', r''' $JS_SHELL_NAME ''')
++     (''' JS_CONFIG_NAME ''', r''' $JS_CONFIG_NAME ''')
++Index: firefox-45.9.0esr/gfx/cairo/cairo/src/moz.build
++===================================================================
++--- firefox-45.9.0esr.orig/gfx/cairo/cairo/src/moz.build
+++++ firefox-45.9.0esr/gfx/cairo/cairo/src/moz.build
++@@ -246,9 +246,6 @@ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'qt':
++     CFLAGS += CONFIG['MOZ_QT_CFLAGS']
++     CXXFLAGS += CONFIG['MOZ_QT_CFLAGS']
 + 
-+ cat > $CONFIG_STATUS <<EOF
-+-#!${PYTHON}
-++#!/usr/bin/env `basename ${PYTHON}`
-  # coding=$encoding
-  
-  import os
---- 
--2.1.4
++-if CONFIG['MOZ_X11']:
++-    CFLAGS += CONFIG['XCFLAGS']
++-
++ if CONFIG['MOZ_ENABLE_CAIRO_FT']:
++     CFLAGS += CONFIG['CAIRO_FT_CFLAGS']
++     CXXFLAGS += CONFIG['CAIRO_FT_CFLAGS']
+diff --git a/recipes-mozilla/firefox/firefox_45.9.0esr.bb b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
+index 54d1713..812652e 100644
+--- a/recipes-mozilla/firefox/firefox_45.9.0esr.bb
++++ b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
+@@ -43,6 +43,7 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
+            file://0002-use-pkg-config-to-find-nspr.patch \
+            file://0003-do-not-link-against-crmf-library-it-is-not-there.patch \
+            file://gcc7.patch \
++           file://remove_AC_PATH_XTRA.patch \
+ "
+ 
+ SRC_URI[archive.md5sum] = "f4d83c5150fc5085db20d71862497eb8"
 -- 
 2.13.2
 
