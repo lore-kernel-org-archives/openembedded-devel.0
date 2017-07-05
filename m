@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BC5F271985
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 7DA497780E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jul 2017 08:19:22 +0000 (UTC)
+	Wed,  5 Jul 2017 08:19:24 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v658JOe7012727
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v658JPKA029863
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Jul 2017 01:19:24 -0700 (PDT)
+	Wed, 5 Jul 2017 01:19:25 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 5 Jul 2017 01:19:22 -0700
+	14.3.294.0; Wed, 5 Jul 2017 01:19:25 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Jul 2017 16:11:26 +0800
-Message-ID: <20170705081133.6496-4-kai.kang@windriver.com>
+Date: Wed, 5 Jul 2017 16:11:27 +0800
+Message-ID: <20170705081133.6496-5-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
 In-Reply-To: <20170705081133.6496-1-kai.kang@windriver.com>
 References: <20170705081133.6496-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 03/10] hostapd: disable configs depends on des if openssl not support
+Subject: [meta-oe][PATCH 04/10] krb5: toggle configure option pkinit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +33,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jul 2017 08:19:23 -0000
+X-List-Received-Date: Wed, 05 Jul 2017 08:19:24 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Distro feature 'openssl-no-weak-ciphers' is introduced to disable
-openssl weak ciphers support which include des. Check the distro feature
-to disable hostapd configs which depend on des.
+Toggle configure option pkinit of krb5 according to distro feature
+openssl-no-weak-ciphers. openssl-no-weak-ciphers is introduced to
+disable openssl weak ciphers support which include des. It could not
+build plugin pkinit without openssl des support.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+ meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-index 3b74f48..4a7275d 100644
---- a/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-+++ b/meta-oe/recipes-connectivity/hostapd/hostapd_2.6.bb
-@@ -26,6 +26,22 @@ do_configure() {
- }
+diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
+index 61cdd60..013a7e1 100644
+--- a/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
++++ b/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
+@@ -43,7 +43,9 @@ PACKAGECONFIG[keyutils] = "--enable-keyutils,--disable-keyutils,keyutils"
+ PACKAGECONFIG[ldap] = "--with-ldap,--without-ldap,openldap"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
  
- do_compile() {
-+    COMMENT="# Disable configs depend on DES"
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'openssl-no-weak-ciphers', 'true', 'false', d)} \
-+        && ! grep -q "$COMMENT" ${B}/.config; then
-+        echo >> ${B}/.config
-+        echo "$COMMENT" >> ${B}/.config
-+        for config in CONFIG_EAP_MSCHAPV2 CONFIG_EAP_PEAP CONFIG_EAP_IKEV2 \
-+                    CONFIG_EAP_TLS CONFIG_EAP_UNAUTH_TLS CONFIG_EAP_TTLS \
-+                    CONFIG_EAP_FAST CONFIG_INTERNAL_LIBTOMMATH; do
-+            sed -i -e "s/^$config=.*/#&/" ${B}/.config
-+            echo "$config=n" >>${B}/.config
-+        done
-+
-+        sed -i 's/^CONFIG_TLS=.*/#&/' ${B}/.config
-+        echo 'CONFIG_TLS=internal' >>${B}/.config
-+    fi
-+
-     export CFLAGS="-MMD -O2 -Wall -g -I${STAGING_INCDIR}/libnl3"
-     make
- }
+-EXTRA_OECONF += " --without-tcl --with-system-et --disable-rpath"
++EXTRA_OECONF += "--without-tcl --with-system-et --disable-rpath \
++                 ${@bb.utils.contains('DISTRO_FEATURES', 'openssl-no-weak-ciphers', '--disable-pkinit', '--enable-pkinit', d)} \
++                 "
+ CACHED_CONFIGUREVARS += "krb5_cv_attr_constructor_destructor=yes ac_cv_func_regcomp=yes \
+                   ac_cv_printf_positional=yes ac_cv_file__etc_environment=yes \
+                   ac_cv_file__etc_TIMEZONE=no"
 -- 
 2.10.1
 
