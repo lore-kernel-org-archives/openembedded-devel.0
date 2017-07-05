@@ -1,53 +1,37 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-X-Greylist: delayed 301 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 05 Jul 2017 13:29:11 UTC
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 71344776F4
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D4FFF7760A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jul 2017 13:29:10 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1499261352; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=SLAFCjq6Cf2LHNJEESpj3jdMUp1i1nxc4YEXUujSXDE=;
-	b=rkEYBIyN28IUxqYq6QigtA320jnebqxYiIDTsY6Nj+EfPV7fzUkOGSa/bOx0vkDm7k34X6rR
-	oEG63mJnDeS5sRGEhF+iXob9s9jaYnGc75syv+nb5CkXQ+f0Nw9bg0/gXdRKs7J4tzcnWPFM
-	7oSi6SwhWfAMjNberl6tWp4umT4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
-	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
-	Message-ID: Subject: To: Cc: Content-Type;
-	b=WWY55/O2OCkomj5mnItrTKyo3+nyOzQGBWg3qVbQkIR0R+86dVMxe3MJ5dgij/q7xByyVe
-	K+8laYOA8hmeF0kcjcBu2NNqjM/GZxebJvqA/EWA7wIeoA/gqePtCfhy4Dn+N33HsyNwMrXJ
-	qcWKH5I67ikW520WKgSVPiFdTbbVk=
-Sender: derek@asterius.io
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mxa.mailgun.org with ESMTP id 595ce879.7f8d681b8170-smtp-out-n01;
-	Wed, 05 Jul 2017 13:24:09 -0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id z62so85554394ioi.3;
-	Wed, 05 Jul 2017 06:24:09 -0700 (PDT)
-X-Gm-Message-State: AKS2vOwCe5itep3isCshq9UinkG/XdgHgBmXhSlBwAZxXXMV0xpKpp2R
-	UOtzV7haqsNTuEE4Stq8ZlDcGZOPyw==
-X-Received: by 10.107.131.203 with SMTP id n72mr46575269ioi.141.1499261049171; 
-	Wed, 05 Jul 2017 06:24:09 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.133.224 with HTTP; Wed, 5 Jul 2017 06:24:08 -0700 (PDT)
-In-Reply-To: <CA+chaQfGw_QQwM3VV989+62B5GAj5VHMwowgia3tMhkXm+iQZA@mail.gmail.com>
-References: <149789352069.8282.14573081186702268358@git.openembedded.org>
-	<20170619173202.216EB2328FD@git.openembedded.org>
-	<CA+chaQfGw_QQwM3VV989+62B5GAj5VHMwowgia3tMhkXm+iQZA@mail.gmail.com>
+	Wed,  5 Jul 2017 14:00:42 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id v31so30712245qtb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 Jul 2017 07:00:44 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=RQf4XkEYLWgV7HQSWj5kreXapr0NPIRuClQcZj6EtuU=;
+	b=k8sS3pL46uy8ySZ+VUlltsApdWI3gjf5iurmh+Tdnlt0YuDgamKe0vRGLs0DEdHrbJ
+	BfkuR5J8a04Jro8JY+qeOU8ivnf3wnGSE/9VWJJa2pFlAtxZMjloV4SGxgOOe+E+JyHc
+	4OTE6UmD5vj9G8j4vUwnLydWubvCTPrUgHdCevxqLK7lrkcFN5R1VcX4w56brIWZlv2M
+	my4ebihGJX1JI8CgxcSwBIQJxiG+hFXfqEJJUeHltLi8hCQ2YTRcXgip5qdxlPcbfzF0
+	qzs3kksx1d4LypbXAyFYlIJML/Prt5GLRx02/SYMksZnTfPwiQRsP+/cqWW5L/dSfh2h
+	PB9g==
+X-Gm-Message-State: AKS2vOzuiFnKJx8FdgnyjeunjsCOWjb/t2PJ1YcZs4MApeA//2cXPl+u
+	Pou+Xz07ObgE8vZyJX4=
+X-Received: by 10.237.39.33 with SMTP id n30mr57208737qtd.149.1499263243309;
+	Wed, 05 Jul 2017 07:00:43 -0700 (PDT)
+Received: from sparta.ny.asterius.io (ool-43556204.dyn.optonline.net.
+	[67.85.98.4]) by smtp.gmail.com with ESMTPSA id
+	q90sm16646267qki.11.2017.07.05.07.00.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 05 Jul 2017 07:00:42 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
-Date: Wed, 5 Jul 2017 09:24:08 -0400
-X-Gmail-Original-Message-ID: <CADNbA1qKY5BGu9cLXgRcaUfPoG2BK06w2_k10wm+44WQOAey6Q@mail.gmail.com>
-Message-ID: <CADNbA1qKY5BGu9cLXgRcaUfPoG2BK06w2_k10wm+44WQOAey6Q@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	"openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] [meta-openembedded] 37/44: python-pytest: update to version 3.1.2
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  5 Jul 2017 10:00:21 -0400
+Message-Id: <1499263222-25342-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/2] python-pytest: update to version 3.1.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,83 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jul 2017 13:29:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 05 Jul 2017 14:00:46 -0000
 
-Looks like it is calling out the setuptools-scm package in
-the setup_requires section in setup.py.  That forces the egg file to get
-downloaded when setup.py is run rather than the usual fetch stages.  I'll
-remove that requirement and update to the latest version later today.  That
-should resolve the issue of fetching
+Updated license for copyright changes and verified terms
 
-On Tue, Jul 4, 2017 at 2:24 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pytest.inc               | 6 +++---
+ .../python/{python-pytest_3.1.2.bb => python-pytest_3.1.3.bb}       | 0
+ .../python/{python3-pytest_3.1.2.bb => python3-pytest_3.1.3.bb}     | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pytest_3.1.2.bb => python-pytest_3.1.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pytest_3.1.2.bb => python3-pytest_3.1.3.bb} (100%)
 
-> Why is setuptools downloading something (bypassing bitbake fetcher _and_
-> already populated premirror) causing build failures like this:
-> http://errors.yoctoproject.org/Errors/Details/146740/
->
-> On Mon, Jun 19, 2017 at 7:32 PM, <git@git.openembedded.org> wrote:
->
->> This is an automated email from the git hooks/post-receive script.
->>
->> martin_jansa pushed a commit to branch master
->> in repository meta-openembedded.
->>
->> commit af0e31c58a381c2478435e8d015c142bab58c452
->> Author: Derek Straka <derek@asterius.io>
->> AuthorDate: Fri Jun 16 16:02:09 2017 -0400
->>
->>     python-pytest: update to version 3.1.2
->>
->>     Signed-off-by: Derek Straka <derek@asterius.io>
->>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->>  meta-python/recipes-devtools/python/python-pytest.inc                 |
->> 4 ++--
->>  .../python/{python-pytest_3.0.6.bb => python-pytest_3.1.2.bb}         |
->> 0
->>  .../python/{python3-pytest_3.0.6.bb => python3-pytest_3.1.2.bb}       |
->> 0
->>  3 files changed, 2 insertions(+), 2 deletions(-)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-pytest.inc
->> b/meta-python/recipes-devtools/python/python-pytest.inc
->> index c9c9bbf..2826838 100644
->> --- a/meta-python/recipes-devtools/python/python-pytest.inc
->> +++ b/meta-python/recipes-devtools/python/python-pytest.inc
->> @@ -2,8 +2,8 @@ SUMMARY = "Simple powerful teting with python"
->>  LICENSE = "MIT"
->>  LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
->>
->> -SRC_URI[md5sum] = "6639592fa430567d024189f097fcdbd7"
->> -SRC_URI[sha256sum] = "643434a9f1a188271da35e20064cb
->> 8b6c5440976c5bb541dc7b5b0e3cf75d940"
->> +SRC_URI[md5sum] = "c4d179f89043cc925e1c169d03128e02"
->> +SRC_URI[sha256sum] = "795ec29fbba70b22a593691ce8bcd
->> 4bdde2dc96e8099731f73c7d8bb3ce879bf"
->>
->>  RDEPENDS_${PN}_class-target += " \
->>      ${PYTHON_PN}-argparse \
->> diff --git a/meta-python/recipes-devtools/python/python-pytest_3.0.6.bb
->> b/meta-python/recipes-devtools/python/python-pytest_3.1.2.bb
->> similarity index 100%
->> rename from meta-python/recipes-devtools/python/python-pytest_3.0.6.bb
->> rename to meta-python/recipes-devtools/python/python-pytest_3.1.2.bb
->> diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.0.6.bb
->> b/meta-python/recipes-devtools/python/python3-pytest_3.1.2.bb
->> similarity index 100%
->> rename from meta-python/recipes-devtools/python/python3-pytest_3.0.6.bb
->> rename to meta-python/recipes-devtools/python/python3-pytest_3.1.2.bb
->>
->> --
->> To stop receiving notification emails like this one, please contact
->> the administrator of this repository.
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->>
->
->
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index 2826838..2279596 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -1,9 +1,9 @@
+ SUMMARY = "Simple powerful teting with python"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=d8a5609608d9a5a180705b0fa298ae01"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
+ 
+-SRC_URI[md5sum] = "c4d179f89043cc925e1c169d03128e02"
+-SRC_URI[sha256sum] = "795ec29fbba70b22a593691ce8bcd4bdde2dc96e8099731f73c7d8bb3ce879bf"
++SRC_URI[md5sum] = "35356e6e31cbd8318e8b2a8340a90b72"
++SRC_URI[sha256sum] = "095e1832f7e424563c95daf4d8d3c865052b80e139cdd2f9610a986ee8526206"
+ 
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-argparse \
+diff --git a/meta-python/recipes-devtools/python/python-pytest_3.1.2.bb b/meta-python/recipes-devtools/python/python-pytest_3.1.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pytest_3.1.2.bb
+rename to meta-python/recipes-devtools/python/python-pytest_3.1.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.1.2.bb b/meta-python/recipes-devtools/python/python3-pytest_3.1.3.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pytest_3.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-pytest_3.1.3.bb
+-- 
+2.7.4
+
 
