@@ -1,26 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E0A3571985
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3263677B8B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 Jul 2017 08:19:26 +0000 (UTC)
+	Wed,  5 Jul 2017 08:19:28 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v658JSC3012734
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v658JTkM029866
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 5 Jul 2017 01:19:28 -0700 (PDT)
+	Wed, 5 Jul 2017 01:19:29 -0700 (PDT)
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.294.0; Wed, 5 Jul 2017 01:19:27 -0700
+	14.3.294.0; Wed, 5 Jul 2017 01:19:29 -0700
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 5 Jul 2017 16:11:29 +0800
-Message-ID: <20170705081133.6496-7-kai.kang@windriver.com>
+Date: Wed, 5 Jul 2017 16:11:30 +0800
+Message-ID: <20170705081133.6496-8-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.10.1
 In-Reply-To: <20170705081133.6496-1-kai.kang@windriver.com>
 References: <20170705081133.6496-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 06/10] opensc: add PACKAGECONFIG openssl
+Subject: [meta-networking][PATCH 07/10] uftp: set NO_EC if openssl not support ec
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,36 +33,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 Jul 2017 08:19:27 -0000
+X-List-Received-Date: Wed, 05 Jul 2017 08:19:28 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Add PACKAGECONFIG openssl to enable or disable build with openssl for
-opensc. Check DISTRO_FEATURE openssl-no-weak-ciphers. If it exists then
-remove PACKAGECONFIG openssl for opensc.
+Distro feature openssl-no-weak-ciphers is introduced to make openssl
+disable weak ciphers support which include ec algorithm. So set NO_EC
+for uftp if openssl doesn't support ec.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- meta-oe/recipes-support/opensc/opensc_0.16.0.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-networking/recipes-support/uftp/uftp_4.9.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-support/opensc/opensc_0.16.0.bb b/meta-oe/recipes-support/opensc/opensc_0.16.0.bb
-index fd67181..fa7c81d 100644
---- a/meta-oe/recipes-support/opensc/opensc_0.16.0.bb
-+++ b/meta-oe/recipes-support/opensc/opensc_0.16.0.bb
-@@ -21,6 +21,11 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=7fbc338309ac38fefcd64b04bb903e34"
+diff --git a/meta-networking/recipes-support/uftp/uftp_4.9.3.bb b/meta-networking/recipes-support/uftp/uftp_4.9.3.bb
+index 1166f9a..6272792 100644
+--- a/meta-networking/recipes-support/uftp/uftp_4.9.3.bb
++++ b/meta-networking/recipes-support/uftp/uftp_4.9.3.bb
+@@ -11,6 +11,8 @@ SRC_URI[sha256sum] = "9e9215af0315257c6cc4f40fbc6161057e861be1fff10a38a5564f699e
  
- inherit autotools pkgconfig
+ DEPENDS = "openssl"
  
-+PACKAGECONFIG ??= "openssl"
-+PACKAGECONFIG[openssl] = "--enable-openssl,--disable-openssl,openssl"
++EXTRA_OEMAKE = "${@bb.utils.contains('DISTRO_FEATURES', 'openssl-no-weak-ciphers', 'NO_EC=1', '', d)}"
 +
-+PACKAGECONFIG_remove = "${@bb.utils.contains('DISTRO_FEATURES', 'openssl-no-weak-ciphers', 'openssl', '', d)}"
-+
- EXTRA_OECONF = " \
-     --disable-static \
-     --enable-openct \
+ do_install () {
+ 	oe_runmake install DESTDIR=${D}
+ }
 -- 
 2.10.1
 
