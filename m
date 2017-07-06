@@ -1,63 +1,41 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 2380E6010D
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt0-f182.google.com (mail-qt0-f182.google.com
+	[209.85.216.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8781077BD9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jul 2017 16:58:41 +0000 (UTC)
-Received: by mail-wr0-f172.google.com with SMTP id k67so10874001wrc.2
+	Thu,  6 Jul 2017 20:21:30 +0000 (UTC)
+Received: by mail-qt0-f182.google.com with SMTP id r30so12072552qtc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jul 2017 09:58:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=EEiHl+rfeOBCOWJuPODCwXniNaNyOdjLMEwkfpSSjAo=;
-	b=dcRaE6WZe1x7gAm5fCkuN3U9cARlyN+vqUQRR+nngCvWTlZ1/TVkA7B8GZU06Ze9IW
-	3gHROq89zzu4TFqkSe55DBon/hNukSKrYrBnkc2jvg/pz82maSrSHqomO1YTwbclU6a/
-	NqB64AHPcYT/HlyAll1Zu3k8D5IQMQXFesehqLJfQWfYrHME6qb10V5ieE1LuP/9bIHe
-	QjnidLlPPGk8rAGJAnqHU5TESMUtIYa5KZfOQAaeqFcAComdgQn0tQhzz0koN11WkPYC
-	FdeSethoLEm2ox5iu0tG+vDseSlczbSAn6QS+DRa9SM0NNTPA2pkQsGJs85LxY4QiSa4
-	ZztA==
+	Thu, 06 Jul 2017 13:21:32 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
-	:message-id:subject:to:cc;
-	bh=EEiHl+rfeOBCOWJuPODCwXniNaNyOdjLMEwkfpSSjAo=;
-	b=DYG6UcnpHsqynW3YHI6JrApjIf2D+XhkF1Ip1fJTHdt09MwNxYMEDQprKfXV5Pz5n0
-	yA12gtCnAfeFbgBy/zmpdHdqjW+Vzv8lHhNDrh9qBpvfWhH1GQBR0M+IDreNKqox8LHY
-	xC02w1I519zxnlUq9+Gg0sT8FfttQUid9cXT4sDTShjTwd78gBS7vdwiwhWhRuMmlGuQ
-	sEDI0KdihnJ9RjAbE+5s+7DQQDPVqnMtUUUFDhC7WEv9CI2BuCXVZLM2tWiXNrR6JNgN
-	hLw4HcvJNHxAP7W+DjNV4IwJJI8Xexi1OCKcIjiQ34aygrIUzcWbis7kpVOcxh3CDZ1J
-	cVcQ==
-X-Gm-Message-State: AKS2vOyK7bDBE3LJ4k0Hbet/kWsmnwjXGpagGy8YWDK7fJ45zs5AVzvo
-	wavPJiZst/Js4IM29Z8=
-X-Received: by 10.223.142.66 with SMTP id n60mr44025264wrb.188.1499360322554; 
-	Thu, 06 Jul 2017 09:58:42 -0700 (PDT)
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com.
-	[209.85.128.178])
-	by smtp.gmail.com with ESMTPSA id s30sm860817wrc.13.2017.07.06.09.58.41
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 06 Jul 2017 09:58:41 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-wr0-f178.google.com with SMTP id r103so11003894wrb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jul 2017 09:58:41 -0700 (PDT)
-X-Received: by 10.223.129.6 with SMTP id 6mr30316329wrm.23.1499360321218; Thu,
-	06 Jul 2017 09:58:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.209.14 with HTTP; Thu, 6 Jul 2017 09:58:40 -0700 (PDT)
-In-Reply-To: <20170706114443.3432-1-sledz@dresearch-fe.de>
-References: <04322183-852a-d327-3706-845980657ac4@dresearch-fe.de>
-	<20170706114443.3432-1-sledz@dresearch-fe.de>
-Date: Thu, 6 Jul 2017 13:58:40 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKr_MRqnZUsM9_GBC_LMbMxH5B51JPm=dYAC1NepiCwxAA@mail.gmail.com>
-Message-ID: <CAP9ODKr_MRqnZUsM9_GBC_LMbMxH5B51JPm=dYAC1NepiCwxAA@mail.gmail.com>
-To: Steffen Sledz <sledz@dresearch-fe.de>
-Cc: Denys Dmytriyenko <denys@ti.com>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5][pyro][PATCH] qtquickcontrols2: fix compilation of examples/texteditor
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=RXl/CNaybimbztee78QjD13CAfC65O2vmVPSX7F7CWg=;
+	b=O4nKNOwcBlu9a+4AwCpE4Czj+ffeOMaMPe5T3swdJ/igHcYZCR6Bx5kmB9k3QooI1b
+	fZA4k4Zx3BmpGtUEOVKDl6/Ev4o5qammNaGmP9hHPXf5FpSDtRnlw7ot5tKKsXslHX5m
+	P7iQu9PiP680IX0a3Bq1R3GcY0QHekpX/O77mJGZZVG+Mjh1L/aLGSkqTgw40VbbqibH
+	iLNVr8i9YinOSJTdgFJZMs3IFAeyrKN/2TQoxp0jUqRSc4xs5rIIzag5V2lC84Fu6sWj
+	hq3/G65gShQ444uaTocvS3wWyfzsSJkEiESpFA8ut4H7HaDU7hI4g/ko91fMPgcgIeeK
+	ss9g==
+X-Gm-Message-State: AKS2vOzo6wNhA4rhE8gXNnONO1npJj3qM/8pZPPSt/Tzddt1Fhh4mDzB
+	l8ljkUYupzcit0A/
+X-Received: by 10.237.63.141 with SMTP id s13mr66054163qth.61.1499372491247;
+	Thu, 06 Jul 2017 13:21:31 -0700 (PDT)
+Received: from localhost.localdomain ([179.105.243.125])
+	by smtp.gmail.com with ESMTPSA id w72sm867960qka.63.2017.07.06.13.21.27
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 06 Jul 2017 13:21:29 -0700 (PDT)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Thu, 06 Jul 2017 17:21:20 -0300
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu,  6 Jul 2017 17:21:15 -0300
+Message-Id: <20170706202116.8293-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.13.2
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-oe PATCH] glmark2: Bump to 9fa385e revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,20 +48,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 16:58:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 06 Jul 2017 20:21:32 -0000
 
-On Thu, Jul 6, 2017 at 8:44 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
-> git/examples/quickcontrols2/texteditor/documenthandler.cpp:284:18: error: invalid use of incomplete type 'class QDebug'
->           qWarning() << "load() called before DocumentHandler has QQmlEngine";
->
-> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
+This includes following changes:
 
-Acked-by: Otavio Salvador <otavio@ossystems.com.br>
+9fa385e GLStateEGL: Use eglGetPlatformDisplayEXT when possible
+ac983d7 wayland: Don't store the opaque region unnecessarily
+5fcdba1 wayland: Fix destruction order of surface-related objects
+bf766f8 SceneTerrain: Add missing header file for std::abs
 
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
+ ...ace-should-be-destoryed-after-the-wl_wind.patch | 34 ----------------------
+ meta-oe/recipes-benchmark/glmark2/glmark2_git.bb   |  3 +-
+ 2 files changed, 1 insertion(+), 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+
+diff --git a/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch b/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
+deleted file mode 100644
+index 439508102..000000000
+--- a/meta-oe/recipes-benchmark/glmark2/files/0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From 9c74ec83e2929b1d5ab65d5137b6ba42edeb332d Mon Sep 17 00:00:00 2001
+-From: Yong Gan <b45748@freescale.com>
+-Date: Tue, 27 Oct 2015 18:15:20 +0800
+-Subject: [PATCH] Fix: wl_surface should be destoryed after the wl_window
+- destroyed.
+-
+-Upstream-Status: Submitted [https://github.com/glmark2/glmark2/issues/12]
+-
+-Signed-off-by: Yong Gan <b45748@freescale.com>
+-
+----
+- src/native-state-wayland.cpp | 4 ++--
+- 1 file changed, 2 insertions(+), 2 deletions(-)
+-
+-diff --git a/src/native-state-wayland.cpp b/src/native-state-wayland.cpp
+-index 41fc743..cdcdf34 100644
+---- a/src/native-state-wayland.cpp
+-+++ b/src/native-state-wayland.cpp
+-@@ -56,10 +56,10 @@ NativeStateWayland::~NativeStateWayland()
+-             wl_shell_surface_destroy(window_->shell_surface);
+-         if (window_->opaque_reqion)
+-             wl_region_destroy(window_->opaque_reqion);
+--        if (window_->surface)
+--            wl_surface_destroy(window_->surface);
+-         if (window_->native)
+-             wl_egl_window_destroy(window_->native);
+-+        if (window_->surface)
+-+            wl_surface_destroy(window_->surface);
+-         delete window_;
+-     }
+- 
+--- 
+-1.9.1
+-
+diff --git a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+index 85d7bf16e..5d05c47cd 100644
+--- a/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
++++ b/meta-oe/recipes-benchmark/glmark2/glmark2_git.bb
+@@ -16,10 +16,9 @@ COMPATIBLE_HOST_rpi  = "${@bb.utils.contains('MACHINE_FEATURES', 'vc4graphics',
+ 
+ SRC_URI = "git://github.com/glmark2/glmark2.git;protocol=https \
+     file://build-Check-packages-to-be-used-by-the-enabled-flavo.patch \
+-    file://0001-Fix-wl_surface-should-be-destoryed-after-the-wl_wind.patch \
+     file://Fix-configure-for-sqrt-check.patch \
+ "
+-SRCREV = "9b1070fe9c5cf908f323909d3c8cbed08022abe8"
++SRCREV = "9fa385e86950d18c5ca1f64ca5fc323348a336fa"
+ 
+ S = "${WORKDIR}/git"
+ 
 -- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+2.13.2
+
 
