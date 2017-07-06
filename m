@@ -1,25 +1,23 @@
 Return-Path: <sledz@dresearch-fe.de>
-X-Greylist: delayed 328 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 06 Jul 2017 11:49:26 UTC
 Received: from zk223.dresearch-fe.de (zk223.dresearch-fe.de [217.92.177.116])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AFCF719E2
+	by mail.openembedded.org (Postfix) with ESMTP id 7569C71C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jul 2017 11:49:26 +0000 (UTC)
+	Thu,  6 Jul 2017 11:54:27 +0000 (UTC)
 Received: from fensuse.internal.dresearch-fe.de
 	(fensuse.internal.dresearch-fe.de [172.29.23.46])
-	by zk223.dresearch-fe.de (Postfix) with ESMTP id E9A07E00CD;
-	Thu,  6 Jul 2017 13:43:58 +0200 (CEST)
+	by zk223.dresearch-fe.de (Postfix) with ESMTP id B9FE1E00D6;
+	Thu,  6 Jul 2017 13:44:48 +0200 (CEST)
 Received: by fensuse.internal.dresearch-fe.de (Postfix, from userid 1000)
-	id C217E619F; Thu,  6 Jul 2017 13:43:58 +0200 (CEST)
+	id B67FB61A1; Thu,  6 Jul 2017 13:44:48 +0200 (CEST)
 From: Steffen Sledz <sledz@dresearch-fe.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 Jul 2017 13:43:44 +0200
-Message-Id: <20170706114344.1438-1-sledz@dresearch-fe.de>
+Date: Thu,  6 Jul 2017 13:44:43 +0200
+Message-Id: <20170706114443.3432-1-sledz@dresearch-fe.de>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <04322183-852a-d327-3706-845980657ac4@dresearch-fe.de>
 References: <04322183-852a-d327-3706-845980657ac4@dresearch-fe.de>
 Cc: Otavio Salvador <otavio@ossystems.com.br>, Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][PATCH] qtquickcontrols2: fix compilation of examples/texteditor
+Subject: [meta-qt5][pyro][PATCH] qtquickcontrols2: fix compilation of examples/texteditor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 11:49:26 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 11:54:28 -0000
 
 git/examples/quickcontrols2/texteditor/documenthandler.cpp:284:18: error: invalid use of incomplete type 'class QDebug'
           qWarning() << "load() called before DocumentHandler has QQmlEngine";
