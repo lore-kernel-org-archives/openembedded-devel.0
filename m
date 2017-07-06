@@ -1,44 +1,63 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 921AF72F96
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 2380E6010D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 Jul 2017 15:52:19 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id b40so5803678qtb.2
+	Thu,  6 Jul 2017 16:58:41 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id k67so10874001wrc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 Jul 2017 08:52:21 -0700 (PDT)
+	Thu, 06 Jul 2017 09:58:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=K3v532XRZf8a0bvEA0idIU6D5ZYX6TT0WXc6cK676kI=;
-	b=iT4cFCuNSj9Iyh1KWcV6YZZEoTLMb3NVuhKBPo1smhub2rvvnwhEqzsjvULSuFA/Iy
-	y8XDYxt/EFROMtnl8+wWnrBTVenUwlmzmZ3nAapaqPaHTM0HYSNef/JZUHkbVuW54bYH
-	bAxm6Lm69pZNSlJ6CrhMM4L/eCyBCBlImmdfoNN/dAGl3Nux8Ymtk7izNKXOQw1vE6us
-	tcFasRYcUst7Qcl1O1/bdrhdw04l3JUaviYWW5nJ7Tyg5tAuTJFIdAq1mS3Gk3GzRYg5
-	HKCb13OBcprRIvgC9vtaD1YxpDqNNhwIUvEULraqRDPILPKVwdKYUQoInHeJ7MHFnj3Z
-	HB2g==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=EEiHl+rfeOBCOWJuPODCwXniNaNyOdjLMEwkfpSSjAo=;
+	b=dcRaE6WZe1x7gAm5fCkuN3U9cARlyN+vqUQRR+nngCvWTlZ1/TVkA7B8GZU06Ze9IW
+	3gHROq89zzu4TFqkSe55DBon/hNukSKrYrBnkc2jvg/pz82maSrSHqomO1YTwbclU6a/
+	NqB64AHPcYT/HlyAll1Zu3k8D5IQMQXFesehqLJfQWfYrHME6qb10V5ieE1LuP/9bIHe
+	QjnidLlPPGk8rAGJAnqHU5TESMUtIYa5KZfOQAaeqFcAComdgQn0tQhzz0koN11WkPYC
+	FdeSethoLEm2ox5iu0tG+vDseSlczbSAn6QS+DRa9SM0NNTPA2pkQsGJs85LxY4QiSa4
+	ZztA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=K3v532XRZf8a0bvEA0idIU6D5ZYX6TT0WXc6cK676kI=;
-	b=iP0V/mQaZX/xa2WoJ450KUSUCNIgQuXOhNsS1OiEtFKiE/DTOCp+Ql3CjWz/mm3zpl
-	X3Z/vDIQrJDyhTsCpVvwHqdHofT63jKXkQpNdlzpbgJ25dxvIS+5GFWofCg8WssLxUNF
-	FDzkjqI5Z70e2vf7gsoPL+YgY89FqbQnQ6dBrVDqhH3TP84OuiJtxecuWKdz5k0L1553
-	/rkeFh4Ik3k+OQNw2tcNMyDvj60k9i+9VYjoAwMCQ3S59qVaIFcB1iDM0H5Q70PtuyPh
-	fyGAx7mlXSSnGVbJXTtVJeQDK1rISJlkOtm3OkPeoBTWMVu8+a0cI5Kw5l7cD+Cp5xpp
-	/WMg==
-X-Gm-Message-State: AIVw112pmwYLl+dgrko0Y5umJmD4v8dhqPUE/SmuLmXIw9sFw5Fvo67N
-	+WT6SFFU/HU28pJLj3k/3R73mgX9kxPU
-X-Received: by 10.200.45.241 with SMTP id q46mr12954856qta.177.1499356340287; 
-	Thu, 06 Jul 2017 08:52:20 -0700 (PDT)
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=EEiHl+rfeOBCOWJuPODCwXniNaNyOdjLMEwkfpSSjAo=;
+	b=DYG6UcnpHsqynW3YHI6JrApjIf2D+XhkF1Ip1fJTHdt09MwNxYMEDQprKfXV5Pz5n0
+	yA12gtCnAfeFbgBy/zmpdHdqjW+Vzv8lHhNDrh9qBpvfWhH1GQBR0M+IDreNKqox8LHY
+	xC02w1I519zxnlUq9+Gg0sT8FfttQUid9cXT4sDTShjTwd78gBS7vdwiwhWhRuMmlGuQ
+	sEDI0KdihnJ9RjAbE+5s+7DQQDPVqnMtUUUFDhC7WEv9CI2BuCXVZLM2tWiXNrR6JNgN
+	hLw4HcvJNHxAP7W+DjNV4IwJJI8Xexi1OCKcIjiQ34aygrIUzcWbis7kpVOcxh3CDZ1J
+	cVcQ==
+X-Gm-Message-State: AKS2vOyK7bDBE3LJ4k0Hbet/kWsmnwjXGpagGy8YWDK7fJ45zs5AVzvo
+	wavPJiZst/Js4IM29Z8=
+X-Received: by 10.223.142.66 with SMTP id n60mr44025264wrb.188.1499360322554; 
+	Thu, 06 Jul 2017 09:58:42 -0700 (PDT)
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com.
+	[209.85.128.178])
+	by smtp.gmail.com with ESMTPSA id s30sm860817wrc.13.2017.07.06.09.58.41
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 06 Jul 2017 09:58:41 -0700 (PDT)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-wr0-f178.google.com with SMTP id r103so11003894wrb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 Jul 2017 09:58:41 -0700 (PDT)
+X-Received: by 10.223.129.6 with SMTP id 6mr30316329wrm.23.1499360321218; Thu,
+	06 Jul 2017 09:58:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.140.31.118 with HTTP; Thu, 6 Jul 2017 08:51:59 -0700 (PDT)
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 6 Jul 2017 16:51:59 +0100
-Message-ID: <CAJTo0LYKZASb7simJZDieiL+9F8iVN3mGzN5cGPktGHX3T5h0w@mail.gmail.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Moving GNOME 2 recipes to an external meta-gnome2 layer?
+Received: by 10.28.209.14 with HTTP; Thu, 6 Jul 2017 09:58:40 -0700 (PDT)
+In-Reply-To: <20170706114443.3432-1-sledz@dresearch-fe.de>
+References: <04322183-852a-d327-3706-845980657ac4@dresearch-fe.de>
+	<20170706114443.3432-1-sledz@dresearch-fe.de>
+Date: Thu, 6 Jul 2017 13:58:40 -0300
+X-Gmail-Original-Message-ID: <CAP9ODKr_MRqnZUsM9_GBC_LMbMxH5B51JPm=dYAC1NepiCwxAA@mail.gmail.com>
+Message-ID: <CAP9ODKr_MRqnZUsM9_GBC_LMbMxH5B51JPm=dYAC1NepiCwxAA@mail.gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+Cc: Denys Dmytriyenko <denys@ti.com>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-qt5][pyro][PATCH] qtquickcontrols2: fix compilation of examples/texteditor
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,24 +70,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 Jul 2017 15:52:19 -0000
+X-List-Received-Date: Thu, 06 Jul 2017 16:58:43 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
+On Thu, Jul 6, 2017 at 8:44 AM, Steffen Sledz <sledz@dresearch-fe.de> wrote:
+> git/examples/quickcontrols2/texteditor/documenthandler.cpp:284:18: error: invalid use of incomplete type 'class QDebug'
+>           qWarning() << "load() called before DocumentHandler has QQmlEngine";
+>
+> Signed-off-by: Steffen Sledz <sledz@dresearch-fe.de>
 
-The meta-gnome layer in the meta-openembedded repository currently contains
-a mix of GNOME 2 and GNOME 3 recipes.  Considering GNOME 3 was released in
-2011, so GNOME 2 has been unmaintained for six years now, I think it is
-time to consider splitting out the GNOME 2 recipes into a meta-gnome2 layer
-that can be hosted somewhere else: meta-oe isn't the place for recipes to
-go and die, it should be useful and relevant.  I mean, one of the most
-recent commits was a fix to Dates to fix it under clang.  We (OpenedHand)
-abandoned that in 2009!
+Acked-by: Otavio Salvador <otavio@ossystems.com.br>
 
-So, does anyone actually use the GNOME 2 platform still?  Does anyone
-volunteer to maintain this layer?  Should I instead just delete the recipes
-instead, reducing meta-gnome down to the few recipes that are part of the
-GNOME 3 stack?
 
-Ross
+-- 
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
