@@ -1,46 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D4EC60767
+Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id D84B2780A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 Jul 2017 06:36:47 +0000 (UTC)
-Received: by mail-pg0-f50.google.com with SMTP id t186so26779773pgb.1
+	Sat,  8 Jul 2017 13:17:58 +0000 (UTC)
+Received: by mail-pg0-f47.google.com with SMTP id u62so29225552pgb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 Jul 2017 23:36:49 -0700 (PDT)
+	Sat, 08 Jul 2017 06:18:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=vcVE82sFw41ek2LbGhvnkKcSHTlktQZ8gP5fSEN4JYo=;
-	b=AspCa8GjXpVEqt1bfiYhACuww9Vd28BahPxoRTeb8vjhY5/RO3VLSuPuyCDUbmLmtn
-	Ks8SmxKXBNR/+Cq/kZArnvgN+r7eIYQFUbEHbp9SxQgxM+if/1pXquIzBNzf2NNmYNLk
-	P+ww8J4I+3J1L4ymW3ncYM3AxY2PPGrA/05Gox5gV1aWL4ToYTF01YhGojMHt9v8sZVF
-	Z+S65o2kYyxiWQzvRZ/XScx08b8xSRKVXXIe9hPvblGTcmHdeIfRTF88jY6udPL1lFpd
-	CsYGWCcUfEOXoYU/DJbdF1MMkcqvdJnYJombHCZ3OLnVI/GJTDhK2YHIO7ZQirWIMQp8
-	QMpQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=nXSGrCBe/fn54vD89VC4LOj3HtzfnDMM5b0ZVjR573g=;
+	b=uZdS6M3ppRJnjd73yl+ACNDpiNY+xrc5N/cTAv7QMFDAbJlhhXvFO7/LfBt9xPiYG3
+	cYFV2aQyXqabvp7mFjlw4ve9cpDrH68ZhYuEjAfeM+i6T//sqyW/Y0NM8ysOtG0iV2tS
+	ykqTqOen6vnHA2+3jwlMqGyuyqhtuAT0Yutlne+vKDqX1lRivmQRo8knUxtRtC6LJtvq
+	byTCix5tShF0bnrYFmfy8EjX84yADGfr0DmBEU87I3AhyciUjxjJnqBPhvqNumSeWBj5
+	dZ7vAecVV/Ej/awgbPsClhN4ZB5udxmYq3pxpxr2tAMfaF5cQRQqveLjQrPJJSWhFdSt
+	C55g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=vcVE82sFw41ek2LbGhvnkKcSHTlktQZ8gP5fSEN4JYo=;
-	b=pHCEoW9e5/fiUB7wHO+TmhN/3yUM3EUw06RwDDIXKEsF0EMnqsad8RWSXAInD3fT8J
-	MSQeuLRP73pFhMAflU1UQ03+AE3aB+WLz5TcjeL5ksRi8nHz2zy4/5tyqw2Wnn0MaZkL
-	gn7yghlS+YY+mwx1yN90EMCX+wc0Fr4X7S92/D+W05XU+FFQHJOrY6V5bIU1XgaoNNN+
-	cgmli8cJvWaw8Pz2cyT1iL2MhC1mWk/XzIB7aDZ+0uZuXKyPCDtajAUepER1MskTRuhh
-	FDTfwxqROO+modB4ACSaf14O6FTCsTNcqsJkqp/ZiRPUfMRAye5TSamcIMWt9WjFaoTf
-	mUfw==
-X-Gm-Message-State: AIVw112bmfQhgAdeR2UkyOhqLAVflFq0xjV8vIHSWjkfPRvLNDnKkOQV
-	T2XowGvx9GVxwcsf
-X-Received: by 10.98.252.17 with SMTP id e17mr34501588pfh.63.1499495808623;
-	Fri, 07 Jul 2017 23:36:48 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nXSGrCBe/fn54vD89VC4LOj3HtzfnDMM5b0ZVjR573g=;
+	b=i8ZELBLl/nSPTf5wYZy5dwcJ2twsGtNGgjI6/KlZj3+WnrqbCmMt8ksAzISBIkDagC
+	0tsLvha4dG7vpDFaORPe2Gp4XAC3I8s4We+9BRr+4Hx/akwZcrRHHMKo8N3qwqmv0VhK
+	vZKT12kzGKqRWyJ3j2JUwqkEbBrqFaiEkcEWXl4Ey0pbc2D9s727BTZGzvUQ9jLN8L0f
+	uZcTgvCK+G1D/G+jHP1ghD4YYVhCfv8OXh0wziygAqmzD4OqTA8rMSFHeSHvE3YF5DBM
+	+ZYqkIjIVEhsI7aOax/J/5AfOP98Qnrba2O45QN53sxPHDPM2n04o3ZP2o0lA7hgPozU
+	HNig==
+X-Gm-Message-State: AIVw113lnUcy2zPoeEVQFBVZKEhaLH4JrIXVVtK3GIpbr2ylbmGpnF0+
+	6o0ODBrvPwkEYJLo
+X-Received: by 10.99.100.193 with SMTP id y184mr6269561pgb.211.1499519879649; 
+	Sat, 08 Jul 2017 06:17:59 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	s62sm11744175pfi.36.2017.07.07.23.36.47
-	for <openembedded-devel@lists.openembedded.org>
+	o73sm13277185pfi.2.2017.07.08.06.17.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 07 Jul 2017 23:36:47 -0700 (PDT)
+	Sat, 08 Jul 2017 06:17:58 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 Jul 2017 23:36:32 -0700
-Message-Id: <20170708063632.1941-1-raj.khem@gmail.com>
+Date: Sat,  8 Jul 2017 06:17:40 -0700
+Message-Id: <20170708131744.33927-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-browser] Fix firefox and chromium for musl
+Subject: [meta-oe][PATCH 1/5] libdbus-c++: Fix build with gcc7 and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,69 +52,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 Jul 2017 06:36:50 -0000
+X-List-Received-Date: Sat, 08 Jul 2017 13:17:59 -0000
 
-The following changes since commit c79cf6c7811afd2cd167e8967e3c29b1e797371e:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-pipe.c-Use-a-string-instead-of-char.patch | 27 ++++++++++++++++++++++
+ meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb     | 20 ++++++++--------
+ 2 files changed, 36 insertions(+), 11 deletions(-)
+ create mode 100644 meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
 
-  Merge pull request #48 from kraj/kraj/master (2017-07-03 17:04:53 -0300)
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
+new file mode 100644
+index 000000000..6883f9a0b
+--- /dev/null
++++ b/meta-oe/recipes-core/dbus/libdbus-c++-0.9.0/0001-pipe.c-Use-a-string-instead-of-char.patch
+@@ -0,0 +1,27 @@
++From 6bcb58bd69c38b9200e8ec6c382247167571189d Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 1 Jul 2017 16:44:15 -0700
++Subject: [PATCH] pipe.c: Use a string instead of char
++
++Fixes
++error: invalid conversion from 'char' to 'const void*' [-fpermissive]
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/pipe.cpp | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/pipe.cpp b/src/pipe.cpp
++index 45c2ba6..1303c2d 100644
++--- a/src/pipe.cpp
+++++ b/src/pipe.cpp
++@@ -83,5 +83,5 @@ ssize_t Pipe::read(void *buffer, unsigned int &nbytes)
++ void Pipe::signal()
++ {
++   // TODO: ignoring return of read/write generates warning; maybe relevant for eventloop work...
++-  ::write(_fd_write, '\0', 1);
+++  ::write(_fd_write, "", 1);
++ }
++-- 
++2.13.2
++
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+index 4412716a6..4cc133301 100644
+--- a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
++++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+@@ -6,15 +6,15 @@ LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24"
+ DEPENDS = "dbus expat glib-2.0 libpcre"
+ 
+-SRC_URI = "\
+-    ${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BP}.tar.gz \
+-    file://fix-missing-unistd.h-include.patch \
+-    file://remove-CXX_FOR_BUILD-stuff.patch \
+-    file://0001-src-eventloop.cpp-use-portable-method-for-initializi.patch \
+-    file://0002-tools-generate_proxy.cpp-avoid-possibly-undefined-ui.patch \
+-    file://0003-Fixed-undefined-ssize_t-for-clang-3.8.0-on-FreeBSD.patch \
+-    file://0004-use-POSIX-poll.h-instead-of-sys-poll.h.patch \
+-"
++SRC_URI = "${SOURCEFORGE_MIRROR}/project/dbus-cplusplus/dbus-c++/${PV}/${BP}.tar.gz \
++           file://fix-missing-unistd.h-include.patch \
++           file://remove-CXX_FOR_BUILD-stuff.patch \
++           file://0001-src-eventloop.cpp-use-portable-method-for-initializi.patch \
++           file://0002-tools-generate_proxy.cpp-avoid-possibly-undefined-ui.patch \
++           file://0003-Fixed-undefined-ssize_t-for-clang-3.8.0-on-FreeBSD.patch \
++           file://0004-use-POSIX-poll.h-instead-of-sys-poll.h.patch \
++           file://0001-pipe.c-Use-a-string-instead-of-char.patch \
++           "
+ SRC_URI[md5sum] = "e752116f523fa88ef041e63d3dee4de2"
+ SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385af4e61"
+ 
+@@ -27,5 +27,3 @@ PACKAGE_BEFORE_PN = "${PN}-tools"
+ FILES_${PN}-tools = "${bindir}"
+ 
+ BBCLASSEXTEND = "native"
+-
+-PNBLACKLIST[libdbus-c++] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130644/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-- 
+2.13.2
 
-are available in the git repository at:
-
-  https://github.com/kraj/meta-browser kraj/master
-
-for you to fetch changes up to 68ad85b614dcab5b6a4c931ee2c37a2e166bbc15:
-
-  firefox: Fix build with musl (2017-07-07 23:27:58 -0700)
-
-----------------------------------------------------------------
-Khem Raj (4):
-      Dont disable gold explicitly when ld-is-gold is not in distro features
-      chromium: Fix build for musl platforms
-      chromium: Always use gold linker
-      firefox: Fix build with musl
-
- recipes-browser/chromium/chromium-browser.inc      | 23 +++++-
- recipes-browser/chromium/chromium.inc              |  7 ++
- ...-Define-TEMP_FAILURE_RETRY-if-not-defined.patch | 35 ++++++++++
- ...place-__WORDSIZE-with-defines-from-limits.patch | 40 +++++++++++
- ...03-Avoid-mallinfo-APIs-on-non-glibc-linux.patch | 48 +++++++++++++
- .../chromium/0004-include-fcntl.h-for-loff_t.patch | 25 +++++++
- ...off64_t-instead-of-the-internal-__off64_t.patch | 65 +++++++++++++++++
- .../0006-linux-glibc-make-the-distinction.patch    | 26 +++++++
- ...o-not-include-glibc_weak_symbols-for-musl.patch | 26 +++++++
- ...-member-name-__si_fields-from-LinuxSigInf.patch | 26 +++++++
- .../0009-Match-syscalls-to-match-musl.patch        | 47 +++++++++++++
- ...ninit-and-res_nclose-for-non-glibc-platfo.patch | 81 ++++++++++++++++++++++
- .../0011-Do-not-define-__sbrk-on-musl.patch        | 29 ++++++++
- .../0012-Adjust-default-pthread-stack-size.patch   | 77 ++++++++++++++++++++
- ...3-include-asm-generic-ioctl.h-for-TCGETS2.patch | 25 +++++++
- .../0014-link-with-libexecinfo-on-musl.patch       | 25 +++++++
- ...p-GNU-extentions-effective-only-when-usin.patch | 37 ++++++++++
- ...6-getcontext-API-is-unimplemented-in-musl.patch | 41 +++++++++++
- .../0001-mallinfo-is-glibc-specific-API.patch      | 34 +++++++++
- .../firefox/0002-disable-hunspell-hooks.patch      | 26 +++++++
- .../firefox/0003-define-TEMP_FAILURE_RETRY.patch   | 20 ++++++
- .../firefox/0004-Fix-mozilla-arm-builds.patch      | 26 +++++++
- recipes-mozilla/firefox/firefox_45.9.0esr.bb       |  7 ++
- 23 files changed, 795 insertions(+), 1 deletion(-)
- create mode 100644 recipes-browser/chromium/chromium/0001-sandbox-Define-TEMP_FAILURE_RETRY-if-not-defined.patch
- create mode 100644 recipes-browser/chromium/chromium/0002-breakpad-Replace-__WORDSIZE-with-defines-from-limits.patch
- create mode 100644 recipes-browser/chromium/chromium/0003-Avoid-mallinfo-APIs-on-non-glibc-linux.patch
- create mode 100644 recipes-browser/chromium/chromium/0004-include-fcntl.h-for-loff_t.patch
- create mode 100644 recipes-browser/chromium/chromium/0005-use-off64_t-instead-of-the-internal-__off64_t.patch
- create mode 100644 recipes-browser/chromium/chromium/0006-linux-glibc-make-the-distinction.patch
- create mode 100644 recipes-browser/chromium/chromium/0007-allocator-Do-not-include-glibc_weak_symbols-for-musl.patch
- create mode 100644 recipes-browser/chromium/chromium/0008-Use-correct-member-name-__si_fields-from-LinuxSigInf.patch
- create mode 100644 recipes-browser/chromium/chromium/0009-Match-syscalls-to-match-musl.patch
- create mode 100644 recipes-browser/chromium/chromium/0010-Define-res_ninit-and-res_nclose-for-non-glibc-platfo.patch
- create mode 100644 recipes-browser/chromium/chromium/0011-Do-not-define-__sbrk-on-musl.patch
- create mode 100644 recipes-browser/chromium/chromium/0012-Adjust-default-pthread-stack-size.patch
- create mode 100644 recipes-browser/chromium/chromium/0013-include-asm-generic-ioctl.h-for-TCGETS2.patch
- create mode 100644 recipes-browser/chromium/chromium/0014-link-with-libexecinfo-on-musl.patch
- create mode 100644 recipes-browser/chromium/chromium/0015-metrics-Keep-GNU-extentions-effective-only-when-usin.patch
- create mode 100644 recipes-browser/chromium/chromium/0016-getcontext-API-is-unimplemented-in-musl.patch
- create mode 100644 recipes-mozilla/firefox/firefox/0001-mallinfo-is-glibc-specific-API.patch
- create mode 100644 recipes-mozilla/firefox/firefox/0002-disable-hunspell-hooks.patch
- create mode 100644 recipes-mozilla/firefox/firefox/0003-define-TEMP_FAILURE_RETRY.patch
- create mode 100644 recipes-mozilla/firefox/firefox/0004-Fix-mozilla-arm-builds.patch
 
