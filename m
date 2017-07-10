@@ -1,45 +1,55 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id D0B8977D4C
+Return-Path: <brownson4u@gmail.com>
+Received: from mail-wr0-f173.google.com (mail-wr0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CC44077DCA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 21:33:33 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id u36so14124824pgn.3
+	Mon, 10 Jul 2017 21:49:25 +0000 (UTC)
+Received: by mail-wr0-f173.google.com with SMTP id r103so157016115wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 14:33:35 -0700 (PDT)
+	Mon, 10 Jul 2017 14:49:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=nnNijRrH0ZEs6bQRNWq/JMh8Mk1U6WrQMwNojjZa+v8=;
-	b=aw0AAhkT+cmSPhNgcrLljFmSOV89mRI261uJ+9moPIAYm8Oknda7uCmEM5nF2Xgbwn
-	7O/nLF6CVITzjbUJbMbxTXCAHHBgt4kysaZUlUU5LFNwTGqxqsG9o/9LFN4Yxz+tTXTa
-	aLs/yHvsjJy1jtdzhuF+t2bUEHnG41sl1A1aM+hu0S18GeaPlwgrAqB/UErg9Rni96Ow
-	M4BW3OxCLCTaLW9w4B85gya2N+PmwgfH6vWii/K7Hw+/W+AowxFpJQGx06/XfIFP2ETx
-	ltMf/NiMa2gWG+1rZD4ueClPYs+celsgWRrei38PE6uTzE8HzvbyhCx1dpzZ80UBHtcH
-	jhvg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=yuydLI6+UtKebLXsc2pnvCC2VkA7PrtU6rx6ira2+cE=;
+	b=P4r7Ns0qmOsJqTGIxnnn2pxR4LDJQrGl/iD1ONE4CTimgMtmPGKwzr4A+BBK5B3LFJ
+	45RM1sh2e1pNSFg6QxTiBncnrzIvU+Il5jkCngXnHJNlokVk40yxuzDqsWR6B9jHkwjB
+	RcH5o2HtuRjGsiL2UkzF3377pfToRJ1nmkO3qqZrpyIRRhtAuXGAgIag7/4UuA6BAEt8
+	o4VV7RijIrrt8IfCJnVKehtrl0zHGvD2xVe0luGQecB48pLY5wQpRBVx9vdvE6ovWJ0c
+	r8QesGx/Ap6q1F4r4KP2odDczwoUZUgiV3qRHw4ZFT+pSudW72Q6sE5a3UPMLJvFOmjp
+	8mQw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nnNijRrH0ZEs6bQRNWq/JMh8Mk1U6WrQMwNojjZa+v8=;
-	b=KF4syb8x1udMx5JdjQRH/lC4CCmFNC+T5Cya6MBo5F9CcWy7R6q4jdoWE1B8rN2aUZ
-	gEzeHwO4G+H2f8P15T9Sa6DEZsly23kPgwO+iNlCw5bNU39CYxAIctfwAxagHzuwAbi9
-	bzQsNhtvf9WXtP72aiOTTObvTh2yO8u6SI5ztSAWwMzIOz12VjJr0axj5wiXgH08auIm
-	BDhuzYbmhafP6mJrwcqoUi5P/SqIu3MG4QGA/zIVcB51WfFNyXjp97dxQp08idYcqQib
-	LAI9e9E+HgCYmuFj29rLOlxwmw3CtcCl00iq4HcUhVueXrTttG9dIyfq9/Aq7tkz3ZGy
-	mSig==
-X-Gm-Message-State: AIVw112PG+QS+VRwchaJet2tbekbH15/TRIvlXh4yFGj7V2t5YhSCmCl
-	CWNYaGLRfTwP13U0
-X-Received: by 10.98.93.136 with SMTP id n8mr46624889pfj.211.1499722414772;
-	Mon, 10 Jul 2017 14:33:34 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
-	by smtp.gmail.com with ESMTPSA id
-	d89sm25285128pfl.7.2017.07.10.14.33.33
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jul 2017 14:33:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=yuydLI6+UtKebLXsc2pnvCC2VkA7PrtU6rx6ira2+cE=;
+	b=ZzBU2mUil+ZMGFyH2bsqETkTaAP8/ZX1uHWquYJ0OFWc+PwIMzVKfE/PaOvxqUIZ8+
+	WEuIh8hf/aYvZVheggNV9JCCrkUeTOBcVY9+wUq3jA8n4uZd2zmoUIL0nQ4LdkmQ2/vN
+	ZGMR4NmNwc+mzZ9eBLMQKqHukrfzp01/iQQ2kZ08GLDRe98eFhwiQwD1wf8o1bsbDaKV
+	JS6ngyX8wBwKXJR9CIBPlqHYpYyAHDxiwZ0lmgxqS6VjHCXhYUwyt6kfhyoXzQbph9T6
+	V/L/TB3tMX81xcn6wfCruI0SUApimklqayohh9zFchG61K4aASqrGYkhUi2pFwdj5Nw7
+	MoCA==
+X-Gm-Message-State: AIVw110UMc6BxRM8z3awNCQqU3JkyBwv6VZ+3ptZmDtxQUclBMEAgvAA
+	51DTH9NF4Emf4JYV0zuA3Bj2rdEAPg==
+X-Received: by 10.223.169.51 with SMTP id u48mr7996772wrc.176.1499723366011;
+	Mon, 10 Jul 2017 14:49:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.173.66 with HTTP; Mon, 10 Jul 2017 14:49:25 -0700 (PDT)
+Received: by 10.223.173.66 with HTTP; Mon, 10 Jul 2017 14:49:25 -0700 (PDT)
+In-Reply-To: <CAMLuUbX=eGPsHcSLDdSPNZxZZiQrWb6nE259DxsTv6nBMnTBQg@mail.gmail.com>
+References: <CAMLuUbW8ZL3AcvU2ViMdMb-eyfihmFWFxEcsCMBfeZhm0kTAvg@mail.gmail.com>
+	<CAMLuUbX5OBj6Odz-K27CsWVtoQwoBsukpYfNA8bSzS-tzzv_Ag@mail.gmail.com>
+	<CAMLuUbXJ9YSf8bd8dQ3PsMZh3yZgf+Co1Q58sGUC551VaD3JkQ@mail.gmail.com>
+	<CAMLuUbUGL99KWx9k9JAS4p6eZAcuiNFrfd_KOnHeTnumWesqww@mail.gmail.com>
+	<CAMLuUbVA5+3oZf-skxQzTxusVTaRaHbuMH4p-pG-frt581YaYA@mail.gmail.com>
+	<CAMLuUbW9G8v+kEQPnPQSQLzSEQJBRhnE97BESr_3WYoJb56HOw@mail.gmail.com>
+	<CAMLuUbXQaXVxf5b2idB8ADEFkj7nBjD15+wvpdS5s4n6JroCpA@mail.gmail.com>
+	<CAMLuUbV8YtPa25s9v2JSyocAEsL7ZXy2H_GFs6jLRjtGn_6bFQ@mail.gmail.com>
+	<CAMLuUbX=eGPsHcSLDdSPNZxZZiQrWb6nE259DxsTv6nBMnTBQg@mail.gmail.com>
+From: Brownson Obele <brownson4u@gmail.com>
+Date: Tue, 11 Jul 2017 06:49:25 +0900
+Message-ID: <CAMLuUbUdZKf9N2q5VQ_D3WHyysaxLw_kFU-JcKu6mQtW87kUQQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jul 2017 14:33:24 -0700
-Message-Id: <20170710213324.43346-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-Subject: [meta-browser][PATCH] chromium: Do not enforce gold as default linker
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python] python-pygobject is not building and installing gi (gi.repository etc) modules on the target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,35 +62,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jul 2017 21:33:34 -0000
+X-List-Received-Date: Mon, 10 Jul 2017 21:49:26 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Provide a knob USEGOLD however to enable it if desired
+   1. The main python module i am trying to add to my yocto build image is
+   LDTP (https://github.com/ldtp/ldtp2). Using devtool, i have been able to
+   create a recipe for it which seems to build without any errors. It is only
+   when i try to run ldtp on the target that i see that certain dependencies
+   are missing.
+   2. So i am currently stuck at creating recipes for the dependencies.
+   3. Right now, below is where i am stuck
+      1. When i run ldtp, it trys to do an import from gi.repository XXX
+      and then complains that there is no module called "*gi.repository*" but
+      I have a recipe python-pygobject_2.28.3.bb which i expect to build
+      and then install (create) the gi folder and its contents on the target.
+      Somehow this is not happenning and i'm stuck trying to find out why.
+      2. The python-pygobject was not created by myself but seems to have
+      been created from this tarball http://ftp.acc.umu.se/pub/
+      GNOME/sources/pygobject/2.28/pygobject-2.28.3.tar.gz
+      <http://ftp.acc.umu.se/pub/GNOME/sources/pygobject/2.28/pygobject-2.28.3.tar.gz>
+      3. I have unzipped the tarball and checked to see that it does
+      contain the required gi folder  which in turn contains a
+repository folder,
+      makefiles etc but when i check my bitbake output in the
+      *.../work/my_target_board/python-pygobject/2.28.3-r0/packages-split/python-pygobject/usr/lib/python2.7/site-packages*
+ folde,
+      the gi folder etc is missing which means that they are not a part of the
+      packages packaged/installed.
+   4. What could i be missing? Any help in this regard will be highly
+   appreciated.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Denys Dmytriyenko <denis@denix.org>
----
- recipes-browser/chromium/chromium-browser.inc | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+Thank you
 
-diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
-index 094a3d3..1e4fb1e 100644
---- a/recipes-browser/chromium/chromium-browser.inc
-+++ b/recipes-browser/chromium/chromium-browser.inc
-@@ -200,7 +200,12 @@ python add_ozone_wayland_patches() {
-     d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES', False))
- }
- 
--USEGOLD ?= "-Dlinux_use_gold_flags=1"
-+# uncomment below or set it in a bbappend if you want to use gold linker
-+# to link chromium irrespective of system linker, gold speeds up linking
-+# chromium ( 8mins to < 2mins on a decent xeon system)
-+#
-+#USEGOLD = "-Dlinux_use_gold_flags=1"
-+USE_GOLD ??= ""
- 
- EXTRA_OEGYP = " \
- 	-Dangle_use_commit_id=0 \
--- 
-2.13.2
-
+Brownson
 
