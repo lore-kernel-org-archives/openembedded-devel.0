@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 071D46FFD3
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AD376FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 17:35:19 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id x23so26456998wrb.0
+	Mon, 10 Jul 2017 17:35:20 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id k67so26344363wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 10:35:21 -0700 (PDT)
+	Mon, 10 Jul 2017 10:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=dH5tKCxa+coIq8cIpYKoYeNpzegVMR+Wea6eytJKDkg=;
-	b=XrYtR/bzpC2U/d69Y6sfJYGHIJxb3bjDxK8bcNMKU/TTFqp7fJPLLXbzeq/9OEIoah
-	rJBNdMglbb3Bs/JzkUQ+EF+9+25mq9h8DMF3a+i8Q73aoHaGgcuSMlJIR6ldcTOgSAU7
-	ASIW0xmP3Ol9pCUE5SFv7ALrxaIS6iJXimkq4oIaG7JZk/QmH094Zl3GwVTVkN/1uqhj
-	bkQrppRqIQm44WMZDKm9M/PGDxIbJr3STSU6W9i4MJ8i/WBnzPzjO5dm6ABe0mr3TzsH
-	hlRv/rO71WlXqKjMatZ6loDn0a6bEH6o5cK4+z0cRoW4QRCu1VsJaO/juMGyKkUk3QE4
-	ervw==
+	bh=fLtV04aUPL+JuGcGt2HnCMyQ37gttjwKKK7c/XNOvLc=;
+	b=CwiwoiP0dQmKkWsNGY/Ut3frw6bs+M9IMRp7k1ikIT/YZ+KPiYMVQhhhRlw6Ebid8p
+	4WIk8PbkUTxB/3EJcA+OOzlxajG32vg7QR44VyFX0WIBquwRLoLgy6HhfUcxanHvk9ep
+	qOgi30g2s6MglMQyabEc5C44NG5gY/Gdt8m8DWvIkiC1MiVvVPPpS95/GUH4Nm7WUKhE
+	3y7eZ6FzsFnSMMC235+qA01YvzF0pmX7JpLHQsb9bP9a1gHAMocNcfUMu2OO26yKIuQI
+	QsyYcPWnT7UoZ8WfTp5hqjXIL1BKqVANfFSU+nhZBBsFnIna/hj7dlbW0Yc0RFcr91HR
+	CVnw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=dH5tKCxa+coIq8cIpYKoYeNpzegVMR+Wea6eytJKDkg=;
-	b=fxmbKKAXT3V3qJR4JQdIw8GcN1fUSPrTNUVvroKht8u7iVqgtOn0hmdS7Kco+oScHk
-	N+7YSXJ5j9ED4kfqv7idGXXL5oU2Q0ZOt2KljWetzwkFM3tqstzk7obL4hbqA93ySVu7
-	aRfJBikS4HuukKaCF3i5TZSzZvuR+Hit9Mj7WdFwIZ56zqfuu8qyTeMPedC1Xje85hdM
-	XZj7E9yGh0teukjnpfMIENTwd2u6vn+I1OTovKYVyrFbE9Tq7zcaqY0dNTLRVDmUk9qD
-	lW2ACzDzw2tfxKQKr00F+NmBMuSge/4iJskrteYikUU1OZZm23iZ9ElxCfz+vaQy/G/3
-	2I2w==
-X-Gm-Message-State: AIVw112VLVPko5yC8xltJJBObZzAMVU2zX0Dj6lFzufioNd+7wqq4MXB
-	dEm8DYAq4j2+BQWp
-X-Received: by 10.223.142.80 with SMTP id n74mr8869446wrb.131.1499708120330;
-	Mon, 10 Jul 2017 10:35:20 -0700 (PDT)
+	bh=fLtV04aUPL+JuGcGt2HnCMyQ37gttjwKKK7c/XNOvLc=;
+	b=lW4l+ILwSf8Vtyrj5ff1G806x5apGS7LhLBHFRuuJeCzikSaWjV87JtqycMVFJPIQi
+	2PPpKNn2iEgZjo3vqQgpubhUVHo88bNuuAwtLYKQ+ZWNiT5SrGd1jhrsysByLxLi/LGr
+	a79RY/tdNT+wVsGZRm5e68NlPTZnNWQbEOtSfQB8ye3skuKVAcAiqJjs25WVFzgliqym
+	3+UkJKpQp8UxoizaaxeGf41sbC4tzUfxbE+Tl7lNFXctLvkbA9PoHZiQLfMb58J5W7TQ
+	XSVjXjkhqzPEMii0uOq6z7Ce3xChSAccMKYdhcENMpprC0xzMFZMdCidKFtkAV/KGdBs
+	9A/Q==
+X-Gm-Message-State: AIVw113IXOt7kDc1Rwa++7/9N3B3jH0SnyVbTyn5GS+0MlQy62YgWu5u
+	kC2rnFLHuSpzs/42
+X-Received: by 10.223.131.99 with SMTP id 90mr8350672wrd.123.1499708121228;
+	Mon, 10 Jul 2017 10:35:21 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E9066A861E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e906:6a86:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	z195sm11980102wmz.28.2017.07.10.10.35.19
+	z195sm11980102wmz.28.2017.07.10.10.35.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jul 2017 10:35:19 -0700 (PDT)
+	Mon, 10 Jul 2017 10:35:20 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jul 2017 19:35:04 +0200
-Message-Id: <20170710173507.3843-3-schnitzeltony@googlemail.com>
+Date: Mon, 10 Jul 2017 19:35:05 +0200
+Message-Id: <20170710173507.3843-4-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.4
 In-Reply-To: <20170710173507.3843-1-schnitzeltony@googlemail.com>
 References: <20170710173507.3843-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/6] garcon: update 0.4.0 -> 0.6.1
+Subject: [PATCH 4/6] gparted: update 0.27.0 -> 0.28.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -68,27 +68,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-xfce/recipes-xfce/garcon/{garcon_0.4.0.bb => garcon_0.6.1.bb} | 4 ++--
+ .../recipes-extended/gparted/{gparted_0.27.0.bb => gparted_0.28.1.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-xfce/garcon/{garcon_0.4.0.bb => garcon_0.6.1.bb} (76%)
+ rename meta-gnome/recipes-extended/gparted/{gparted_0.27.0.bb => gparted_0.28.1.bb} (90%)
 
-diff --git a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb b/meta-xfce/recipes-xfce/garcon/garcon_0.6.1.bb
-similarity index 76%
-rename from meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
-rename to meta-xfce/recipes-xfce/garcon/garcon_0.6.1.bb
-index 8a3260a..06e2369 100644
---- a/meta-xfce/recipes-xfce/garcon/garcon_0.4.0.bb
-+++ b/meta-xfce/recipes-xfce/garcon/garcon_0.6.1.bb
-@@ -9,8 +9,8 @@ inherit xfce gtk-doc distro_features_check
- REQUIRED_DISTRO_FEATURES = "x11"
+diff --git a/meta-gnome/recipes-extended/gparted/gparted_0.27.0.bb b/meta-gnome/recipes-extended/gparted/gparted_0.28.1.bb
+similarity index 90%
+rename from meta-gnome/recipes-extended/gparted/gparted_0.27.0.bb
+rename to meta-gnome/recipes-extended/gparted/gparted_0.28.1.bb
+index c921065..83ab6f2 100644
+--- a/meta-gnome/recipes-extended/gparted/gparted_0.27.0.bb
++++ b/meta-gnome/recipes-extended/gparted/gparted_0.28.1.bb
+@@ -10,8 +10,8 @@ SRC_URI = " \
+     file://org.yoctoproject.pkexec.run-gparted.policy \
+     file://gparted_polkit \
+ "
+-SRC_URI[md5sum] = "726f539f774b442670028af656f270bd"
+-SRC_URI[sha256sum] = "208cf60c061b86bee4f658d568a3b5d843dce3ab9847f66b452298268799e7bd"
++SRC_URI[md5sum] = "ab72464a3ab2137664d9df8462befd3f"
++SRC_URI[sha256sum] = "76891f14394754f7d6ecceba2af0e585bf89f9d780c389a255dcd41a2f45d333"
  
- SRC_URI += "file://0001-xfce-applications.menu-don-t-bloat-settings-menu-by-.patch"
--SRC_URI[md5sum] = "aba62b80787aac295083bf7afd419ffb"
--SRC_URI[sha256sum] = "787dc859713b6518992d760d4b858fb02e8a30705e6f6e871d7a14cc97bca972"
-+SRC_URI[md5sum] = "174690ad19243f7ef9529cb0c24b9080"
-+SRC_URI[sha256sum] = "41c31ba0498c2cc39de4a8e0c2367510adbf4bc2104c17feee358e51e6acf603"
- 
- EXTRA_OECONF = "--disable-gtk-doc"
+ DEPENDS = "glib-2.0 glib-2.0-native gtkmm parted gnome-doc-utils intltool-native"
  
 -- 
 2.9.4
