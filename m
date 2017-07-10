@@ -1,55 +1,37 @@
-Return-Path: <brownson4u@gmail.com>
-Received: from mail-wr0-f173.google.com (mail-wr0-f173.google.com
-	[209.85.128.173])
-	by mail.openembedded.org (Postfix) with ESMTP id CC44077DCA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 21:49:25 +0000 (UTC)
-Received: by mail-wr0-f173.google.com with SMTP id r103so157016115wrb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 14:49:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=yuydLI6+UtKebLXsc2pnvCC2VkA7PrtU6rx6ira2+cE=;
-	b=P4r7Ns0qmOsJqTGIxnnn2pxR4LDJQrGl/iD1ONE4CTimgMtmPGKwzr4A+BBK5B3LFJ
-	45RM1sh2e1pNSFg6QxTiBncnrzIvU+Il5jkCngXnHJNlokVk40yxuzDqsWR6B9jHkwjB
-	RcH5o2HtuRjGsiL2UkzF3377pfToRJ1nmkO3qqZrpyIRRhtAuXGAgIag7/4UuA6BAEt8
-	o4VV7RijIrrt8IfCJnVKehtrl0zHGvD2xVe0luGQecB48pLY5wQpRBVx9vdvE6ovWJ0c
-	r8QesGx/Ap6q1F4r4KP2odDczwoUZUgiV3qRHw4ZFT+pSudW72Q6sE5a3UPMLJvFOmjp
-	8mQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=yuydLI6+UtKebLXsc2pnvCC2VkA7PrtU6rx6ira2+cE=;
-	b=ZzBU2mUil+ZMGFyH2bsqETkTaAP8/ZX1uHWquYJ0OFWc+PwIMzVKfE/PaOvxqUIZ8+
-	WEuIh8hf/aYvZVheggNV9JCCrkUeTOBcVY9+wUq3jA8n4uZd2zmoUIL0nQ4LdkmQ2/vN
-	ZGMR4NmNwc+mzZ9eBLMQKqHukrfzp01/iQQ2kZ08GLDRe98eFhwiQwD1wf8o1bsbDaKV
-	JS6ngyX8wBwKXJR9CIBPlqHYpYyAHDxiwZ0lmgxqS6VjHCXhYUwyt6kfhyoXzQbph9T6
-	V/L/TB3tMX81xcn6wfCruI0SUApimklqayohh9zFchG61K4aASqrGYkhUi2pFwdj5Nw7
-	MoCA==
-X-Gm-Message-State: AIVw110UMc6BxRM8z3awNCQqU3JkyBwv6VZ+3ptZmDtxQUclBMEAgvAA
-	51DTH9NF4Emf4JYV0zuA3Bj2rdEAPg==
-X-Received: by 10.223.169.51 with SMTP id u48mr7996772wrc.176.1499723366011;
-	Mon, 10 Jul 2017 14:49:26 -0700 (PDT)
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id D6E7E77D9F;
+	Mon, 10 Jul 2017 22:07:10 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 6E69320BCC;
+	Mon, 10 Jul 2017 22:07:11 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Ty9ptAnAhw68; Mon, 10 Jul 2017 22:07:11 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3DB182006D;
+	Mon, 10 Jul 2017 22:07:08 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id BA882162525; Mon, 10 Jul 2017 18:07:07 -0400 (EDT)
+Date: Mon, 10 Jul 2017 18:07:07 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Phil Blundell <pb@pbcl.net>
+Message-ID: <20170710220707.GE26405@denix.org>
+References: <20170710203642.GB26405@denix.org>
+	<20170710204751.GC26405@denix.org>
+	<598b8f59-0d75-314e-6f18-7f5daa24fa07@gmail.com>
+	<20170710210903.GD26405@denix.org>
+	<1499722526.27415.1.camel@pbcl.net>
 MIME-Version: 1.0
-Received: by 10.223.173.66 with HTTP; Mon, 10 Jul 2017 14:49:25 -0700 (PDT)
-Received: by 10.223.173.66 with HTTP; Mon, 10 Jul 2017 14:49:25 -0700 (PDT)
-In-Reply-To: <CAMLuUbX=eGPsHcSLDdSPNZxZZiQrWb6nE259DxsTv6nBMnTBQg@mail.gmail.com>
-References: <CAMLuUbW8ZL3AcvU2ViMdMb-eyfihmFWFxEcsCMBfeZhm0kTAvg@mail.gmail.com>
-	<CAMLuUbX5OBj6Odz-K27CsWVtoQwoBsukpYfNA8bSzS-tzzv_Ag@mail.gmail.com>
-	<CAMLuUbXJ9YSf8bd8dQ3PsMZh3yZgf+Co1Q58sGUC551VaD3JkQ@mail.gmail.com>
-	<CAMLuUbUGL99KWx9k9JAS4p6eZAcuiNFrfd_KOnHeTnumWesqww@mail.gmail.com>
-	<CAMLuUbVA5+3oZf-skxQzTxusVTaRaHbuMH4p-pG-frt581YaYA@mail.gmail.com>
-	<CAMLuUbW9G8v+kEQPnPQSQLzSEQJBRhnE97BESr_3WYoJb56HOw@mail.gmail.com>
-	<CAMLuUbXQaXVxf5b2idB8ADEFkj7nBjD15+wvpdS5s4n6JroCpA@mail.gmail.com>
-	<CAMLuUbV8YtPa25s9v2JSyocAEsL7ZXy2H_GFs6jLRjtGn_6bFQ@mail.gmail.com>
-	<CAMLuUbX=eGPsHcSLDdSPNZxZZiQrWb6nE259DxsTv6nBMnTBQg@mail.gmail.com>
-From: Brownson Obele <brownson4u@gmail.com>
-Date: Tue, 11 Jul 2017 06:49:25 +0900
-Message-ID: <CAMLuUbUdZKf9N2q5VQ_D3WHyysaxLw_kFU-JcKu6mQtW87kUQQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python] python-pygobject is not building and installing gi (gi.repository etc) modules on the target
+In-Reply-To: <1499722526.27415.1.camel@pbcl.net>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-architecture@lists.openembedded.org,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [Openembedded-architecture] [meta-browser] Chromium and gold linker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,37 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jul 2017 21:49:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 10 Jul 2017 22:07:11 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-   1. The main python module i am trying to add to my yocto build image is
-   LDTP (https://github.com/ldtp/ldtp2). Using devtool, i have been able to
-   create a recipe for it which seems to build without any errors. It is only
-   when i try to run ldtp on the target that i see that certain dependencies
-   are missing.
-   2. So i am currently stuck at creating recipes for the dependencies.
-   3. Right now, below is where i am stuck
-      1. When i run ldtp, it trys to do an import from gi.repository XXX
-      and then complains that there is no module called "*gi.repository*" but
-      I have a recipe python-pygobject_2.28.3.bb which i expect to build
-      and then install (create) the gi folder and its contents on the target.
-      Somehow this is not happenning and i'm stuck trying to find out why.
-      2. The python-pygobject was not created by myself but seems to have
-      been created from this tarball http://ftp.acc.umu.se/pub/
-      GNOME/sources/pygobject/2.28/pygobject-2.28.3.tar.gz
-      <http://ftp.acc.umu.se/pub/GNOME/sources/pygobject/2.28/pygobject-2.28.3.tar.gz>
-      3. I have unzipped the tarball and checked to see that it does
-      contain the required gi folder  which in turn contains a
-repository folder,
-      makefiles etc but when i check my bitbake output in the
-      *.../work/my_target_board/python-pygobject/2.28.3-r0/packages-split/python-pygobject/usr/lib/python2.7/site-packages*
- folde,
-      the gi folder etc is missing which means that they are not a part of the
-      packages packaged/installed.
-   4. What could i be missing? Any help in this regard will be highly
-   appreciated.
+On Mon, Jul 10, 2017 at 10:35:26PM +0100, Phil Blundell wrote:
+> On Mon, 2017-07-10 at 17:09 -0400, Denys Dmytriyenko wrote:
+> > On Mon, Jul 10, 2017 at 02:00:35PM -0700, Khem Raj wrote:
+> > > On 7/10/17 1:47 PM, Denys Dmytriyenko wrote:
+> > > > On Mon, Jul 10, 2017 at 04:36:42PM -0400, Denys Dmytriyenko
+> > > > wrote:
+> > > > > Khem, et al,
+> > > > > 
+> > > > > I couldn't find below patch being discussed on this mailing
+> > > > > list before it got 
+> > > > > merged:
+> > > > > 
+> > > > > https://github.com/OSSystems/meta-browser/commit/62e323848f569c
+> > > > > 4cdea5567b1917ce006d7705af
+> > > > 
+> > > > https://github.com/OSSystems/meta-browser/commit/55a74501bc65c90c
+> > > > 86e3236b51ec2dc2fc0145fb
+> > > > 
+> > > > "ld-is-gold just means that my default linker is gold, however we
+> > > > build
+> > > > both linkers, so one should be able to enable gold just for
+> > > > linking
+> > > > chromium even if default ld is bfd linker."
+> > > > 
+> > > > I strongly disagree with such interpretation - this would mean
+> > > > there's NO way 
+> > > > to disable gold linker completely, e.g. for when external
+> > > > toolchain doesn't 
+> > > > support it.
+> > 
+> > Copying OE architecture list for further discussion of "ld-is-gold"
+> > meaning.
+> 
+> The attribution above is a bit confusing so I'm not quite sure who
+> wrote what.  But it is certainly true that "ld-is-gold" in
+> DISTRO_FEATURES means, and always has meant, simply that gold is to be
+> installed as the default linker.  In other words, if you invoke plain
+> "ld", you will get gold, and if you need the BFD linker - usually
+> because you are using linker scripts that gold doesn't understand -
+> then you must invoke ld.bfd.  See
+> 207a9013670560d62c793a66f01e19f4760a71a8 from some six years ago for
+> the place that it was originally added.
+> 
+> As far as I know, we do not have (and never have had) any
+> DISTRO_FEATURE that will inhibit gold from being installed altogether,
 
-Thank you
+It is not about being installed, but about being supported by the toolchain 
+in use - think of external toolchains not built by OE-Core... The original 
+question was whether it's appropriate to force gold linker in recipes, if 
+ld-is-gold is not set by the distro.
 
-Brownson
+
+> nor can I immediately think of a reason why this would be generally
+> useful.  Obviously, any DISTRO that wants to do this is welcome to
+> provide a bbappend for binutils.
+> 
+> p.
+> 
 
