@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
-	[209.85.128.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 83C256FFD3
+Received: from mail-wr0-f180.google.com (mail-wr0-f180.google.com
+	[209.85.128.180])
+	by mail.openembedded.org (Postfix) with ESMTP id C46AC6FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 17:35:21 +0000 (UTC)
-Received: by mail-wr0-f175.google.com with SMTP id k67so147481919wrc.2
+	Mon, 10 Jul 2017 17:35:22 +0000 (UTC)
+Received: by mail-wr0-f180.google.com with SMTP id c11so148053028wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 10:35:23 -0700 (PDT)
+	Mon, 10 Jul 2017 10:35:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=Cv5YJN3GsNM8t6XrutATKWnFKjEBqzcMIBePv/Z6x4I=;
-	b=eUBOb7l+EUR5QyA5+7/LsPucXAnlDILpCVeIvNp9uXm3ZE5Vzh1KKFCuthdn53Gykh
-	6JdBvTI10YpqrBcrpIB8Ksh8D5jaubefrgJStQYWh/nonq4WOmIXB0e23XhGC0gNW1Bd
-	qIbIpAM/JBpsvjpDJ7DAgAy2G6KSjQnSGNy5vOAevhvW2U0oyo5JA4i5BVZ+Wufk0XTI
-	nze1dvSXm1pK42pE9TVdPr0380RNfcdGoCbokL6BBc5x0tKYtUlcw+clBYAL3EON+3zI
-	KCtQ35p/GHrbUmokBCFmBW6gUYybp6BJHUotgp/qECJBrPsaDhrCBM9axHXjuOZXDmXi
-	c6AA==
+	bh=RHQ0qPrf06V1K+WC6iP7cHyExjsPNVLIcQQIYrZTB0U=;
+	b=M5jukvBaxLaM5Vp8GWWaRrFHrw286PAhZZ6BwP6EY9aEe7axH1lLD9OUw+aUIIBXy/
+	+c7ro8LHCEz9ajMhLVfF90K2bKznpRnGTjZdcBumG7p/3MbmHLdC5t30C5lJvutrDzvj
+	P4kOOP6FKLqhFCf1AsZ49ONX41JuFDex1kiwjKj2EAlQ3UoCrhms/U/EyNp6uuBS80iC
+	GS1zEM/IjmPgNnmM1lJSgbNJV9lPE2PiJ9fVf8WiFHcPVYJO7IBe013sPrEdiY0ce8ok
+	h4NzEXi+RH/eIk1ZB2tPhxG5eNArhYCjS9uPCsEyiHc0Ut2+TNtINOvk2sJfCl6tDxBu
+	zXXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=Cv5YJN3GsNM8t6XrutATKWnFKjEBqzcMIBePv/Z6x4I=;
-	b=IjHY7XOgV01c4JhhN1ccv9sUBTaacc8X0zcSTI38JpccKCT1K++32UvfaNRr8SqZ9e
-	NB8gxuzZGVQqazqkg7qhM+ApGOAdFchbnwQyeFGpwRZyt36C6zFm02G2J8Vg/NnI7t/B
-	d8Uf53UKTO0bT5I5HjAh6WVkDEJe6G1XILAtZrKQrUeZNV8Y+JNtqjl/UXxcovOQs9P7
-	IvJnee3sFVp8K3xDqCoKPLMnptiziu/l53B1MbuQAejk5shkZm+IvOCqHINPXi8JL0FJ
-	6Y9RWuoNDX1jcSfN9E9BtZIfZMQN3+QfnQkJumyRjSFKZrQQSKxeZf/UmCDigzoHzG+B
-	DJyw==
-X-Gm-Message-State: AIVw111BNawhNnPLeM83Zqixa+jIpIoo2i930K2iJgEKWwXXNiRyrpMt
-	B+yrJI89HtZkMhnD
-X-Received: by 10.223.147.132 with SMTP id 4mr7858540wrp.107.1499708122105;
-	Mon, 10 Jul 2017 10:35:22 -0700 (PDT)
+	bh=RHQ0qPrf06V1K+WC6iP7cHyExjsPNVLIcQQIYrZTB0U=;
+	b=C+EfKYY9VN5DFTH7bwU8qQoE52nXlXUvUesmwjpl69VJ4C+6BsioIAUTume2ggh0x2
+	CPPDpZjATxaSnzkzSa/9THmolBHtzwUbiVvmF25zTMk5ON1XxZulFvICqj+N+HVXe/Vj
+	kzOVtyNfwYtSqW88wOYzKaSmdHeUb55pyIDYXQgmSxTY2KUuOYXfZyQG4Ry3vWSGbNwj
+	QVC76J/55IbywHyWFmauHpKmx5lKGK2aMxCDE8mXfoq56fM80qrosbLEsJw57sQqJXZO
+	H1lNeasf6J5/cO6UvAr9QkgSzGykUu4cP+o26DAXbUFx9129gAChMhJr3aB7c591Jvl8
+	+mNw==
+X-Gm-Message-State: AIVw111Mi9ClHcNoeZK3CsW0nJ2AK/Vxc2SWuCTon1grnzyeq84fLfmg
+	T7pZBXMnsnvw3u9Q
+X-Received: by 10.28.18.16 with SMTP id 16mr8840095wms.93.1499708123038;
+	Mon, 10 Jul 2017 10:35:23 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E9066A861E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e906:6a86:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	z195sm11980102wmz.28.2017.07.10.10.35.21
+	z195sm11980102wmz.28.2017.07.10.10.35.22
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jul 2017 10:35:21 -0700 (PDT)
+	Mon, 10 Jul 2017 10:35:22 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jul 2017 19:35:06 +0200
-Message-Id: <20170710173507.3843-5-schnitzeltony@googlemail.com>
+Date: Mon, 10 Jul 2017 19:35:07 +0200
+Message-Id: <20170710173507.3843-6-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.4
 In-Reply-To: <20170710173507.3843-1-schnitzeltony@googlemail.com>
 References: <20170710173507.3843-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 5/6] abiword: update 3.0.1 -> 3.0.2
+Subject: [PATCH 6/6] faac: update 1.28 -> 1.29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,123 +62,520 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jul 2017 17:35:21 -0000
+X-List-Received-Date: Mon, 10 Jul 2017 17:35:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Patch was a backport now included upstream
+Most patches don't apply any more and build succeeds
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...-13754-Fix-build-on-gcc-6-default-to-C-11.patch | 74 ----------------------
- .../abiword/{abiword_3.0.1.bb => abiword_3.0.2.bb} |  5 +-
- 2 files changed, 2 insertions(+), 77 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/abiword/abiword/0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch
- rename meta-gnome/recipes-gnome/abiword/{abiword_3.0.1.bb => abiword_3.0.2.bb} (96%)
+ .../recipes-multimedia/faac/faac_1.28.bb           |  26 --
+ .../recipes-multimedia/faac/faac_1.29.bb           |  27 ++
+ ...frontend-Fix-format-string-security-error.patch |  26 --
+ ...efine-__STRING-if-cdefs.h-does-not-exist.patch} |   0
+ .../files/address-gcc-6-narrowing-errors.patch     |  47 ---
+ .../recipes-multimedia/faac/files/build-fix.patch  | 332 ---------------------
+ 6 files changed, 27 insertions(+), 431 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/0001-frontend-Fix-format-string-security-error.patch
+ rename meta-multimedia/recipes-multimedia/faac/files/{0002-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch => 0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch} (100%)
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/address-gcc-6-narrowing-errors.patch
+ delete mode 100644 meta-multimedia/recipes-multimedia/faac/files/build-fix.patch
 
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword/0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch b/meta-gnome/recipes-gnome/abiword/abiword/0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch
+diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
 deleted file mode 100644
-index 595ee8e..0000000
---- a/meta-gnome/recipes-gnome/abiword/abiword/0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch
+index 5c9477f..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/faac_1.28.bb
 +++ /dev/null
-@@ -1,74 +0,0 @@
--From a83e6f50dbd5efa16fb39efe32b9de370f103130 Mon Sep 17 00:00:00 2001
--From: Hubert Figuiere <hub@figuiere.net>
--Date: Sat, 23 Jan 2016 20:46:02 +0000
--Subject: [PATCH] Bug 13754 - Fix build on gcc-6 (default to C++11).
+@@ -1,26 +0,0 @@
+-SUMMARY = "Freeware Advanced Audio Coder (MPEG2-AAC, MPEG4-AAC)"
+-SECTION = "libs"
+-LICENSE = "LGPLv2+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
+-                    file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
 -
--This is debian bug https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=811381
+-inherit autotools-brokensep
 -
--git-svn-id: svn+ssh://svn.abisource.com/svnroot/abiword/trunk@35182 bcba8976-2d24-0410-9c9c-aab3bd5fdfd6
+-SRC_URI = "${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
+-           file://build-fix.patch \
+-           file://address-gcc-6-narrowing-errors.patch \
+-           file://0001-frontend-Fix-format-string-security-error.patch \
+-           file://0002-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch \
+-           "
 -
--Upstream-Status: Backport
+-SRC_URI[md5sum] = "80763728d392c7d789cde25614c878f6"
+-SRC_URI[sha256sum] = "c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df"
+-
+-EXTRA_OECONF += "--without-mp4v2"
+-
+-PACKAGES =+ "lib${BPN} lib${BPN}-dev"
+-
+-FILES_${PN} = " ${bindir}/faac "
+-FILES_lib${PN} = " ${libdir}/libfaac.so.*"
+-FILES_lib${PN}-dev = "${includedir}/faac.h ${includedir}/faaccfg.h ${libdir}/libfaac.so ${libdir}/libfaac.la"
+-FILES_lib${PN}-staticdev = "${libdir}/libfaac.a"
+diff --git a/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb b/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+new file mode 100644
+index 0000000..4765c6c
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/faac/faac_1.29.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "Freeware Advanced Audio Coder (MPEG2-AAC, MPEG4-AAC)"
++SECTION = "libs"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7 \
++                    file://libfaac/coder.h;beginline=5;endline=17;md5=fa1fd6a5fa8cdc877d63a12530d273e0"
++
++inherit autotools
++
++SRC_URI = " \
++    ${SOURCEFORGE_MIRROR}/faac/${BP}.tar.gz \
++    file://0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch \
++"
++
++SRC_URI[md5sum] = "78603720f655180059d6970c582a3005"
++SRC_URI[sha256sum] = "8cc7b03ceb2722223a6457e95d4c994731d80214a03ba33d1af76ba53f4b3197"
++
++EXTRA_OECONF += "--without-mp4v2"
++
++PACKAGES =+ "lib${BPN} lib${BPN}-dev"
++
++FILES_${PN} = " ${bindir}/faac "
++FILES_lib${PN} = " ${libdir}/*.so.*"
++FILES_lib${PN}-dev = " \
++    ${includedir} \
++    ${libdir}/*.so \
++    ${libdir}/*.la \
++"
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/0001-frontend-Fix-format-string-security-error.patch b/meta-multimedia/recipes-multimedia/faac/files/0001-frontend-Fix-format-string-security-error.patch
+deleted file mode 100644
+index 75e003e..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/files/0001-frontend-Fix-format-string-security-error.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-From c1d7a8b992dc36d0012cc3d54b7d3abf4ad4d5d8 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Tue, 28 Mar 2017 21:33:01 -0700
+-Subject: [PATCH 1/2] frontend: Fix format string security error
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ----
-- plugins/collab/backends/service/xp/RealmProtocol.cpp | 4 ++--
-- plugins/collab/backends/service/xp/soa_soup.cpp      | 2 +-
-- plugins/latex/xp/ie_exp_LaTeX.cpp                    | 2 +-
-- plugins/xslfo/xp/ie_exp_XSL-FO.cpp                   | 2 +-
-- 4 files changed, 5 insertions(+), 5 deletions(-)
+- frontend/main.c | 2 +-
+- 1 file changed, 1 insertion(+), 1 deletion(-)
 -
--diff --git a/plugins/collab/backends/service/xp/RealmProtocol.cpp b/plugins/collab/backends/service/xp/RealmProtocol.cpp
--index fb426eb..347a49c 100644
----- a/plugins/collab/backends/service/xp/RealmProtocol.cpp
--+++ b/plugins/collab/backends/service/xp/RealmProtocol.cpp
--@@ -6,8 +6,8 @@ namespace protocolv1 {
+-diff --git a/frontend/main.c b/frontend/main.c
+-index 02146a8..cb9329c 100644
+---- a/frontend/main.c
+-+++ b/frontend/main.c
+-@@ -715,7 +715,7 @@ int main(int argc, char *argv[])
+-         break;
+- #endif
+-         case 'L':
+--        fprintf(stderr, faac_copyright_string);
+-+        fprintf(stderr, "%s", faac_copyright_string);
+-         dieMessage = license;
+-         break;
+-     case 'X':
+--- 
+-2.12.1
+-
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/0002-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch b/meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+similarity index 100%
+rename from meta-multimedia/recipes-multimedia/faac/files/0002-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+rename to meta-multimedia/recipes-multimedia/faac/files/0001-mp4v2-Define-__STRING-if-cdefs.h-does-not-exist.patch
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/address-gcc-6-narrowing-errors.patch b/meta-multimedia/recipes-multimedia/faac/files/address-gcc-6-narrowing-errors.patch
+deleted file mode 100644
+index 92fdd9b..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/files/address-gcc-6-narrowing-errors.patch
++++ /dev/null
+@@ -1,47 +0,0 @@
+---- faac-1.28/common/mp4v2/atom_standard.cpp.orig	2016-06-16 07:59:21.657040761 -0400
+-+++ faac-1.28/common/mp4v2/atom_standard.cpp	2016-06-16 08:01:50.613036724 -0400
+-@@ -22,15 +22,15 @@
+- #include "mp4common.h"
+- #include "atoms.h"
 - 
-- #define MAX_PACKET_DATA_SIZE 64*1024*1024
-- 		
---#define RPV1_PACKET_NONEXISTENT -2
---#define RPV1_PACKET_VARIABLE -1
--+#define RPV1_PACKET_NONEXISTENT uint32_t(-2)
--+#define RPV1_PACKET_VARIABLE uint32_t(-1)
-- 	
-- static uint32_t body_size[6] = {
-- 	RPV1_PACKET_NONEXISTENT, /* 0: reserved */
--diff --git a/plugins/collab/backends/service/xp/soa_soup.cpp b/plugins/collab/backends/service/xp/soa_soup.cpp
--index 4b81735..f4f5134 100644
----- a/plugins/collab/backends/service/xp/soa_soup.cpp
--+++ b/plugins/collab/backends/service/xp/soa_soup.cpp
--@@ -163,7 +163,7 @@ namespace soup_soa {
-- 	
-- 	static bool _invoke(const std::string& /*url*/, const soa::method_invocation& /*mi*/, SoaSoupSession& sess, std::string& result) {
-- 		if (!sess.m_session || !sess.m_msg )
---			return soa::GenericPtr();
--+			return false;
+--static const char name[5]={0251,'n', 'a', 'm', '\0'};
+--static const char art[5]={0251,'A', 'R', 'T', '\0'};
+--static const char wrt[5]={0251,'w', 'r', 't', '\0'};
+--static const char alb[5]={0251,'a', 'l', 'b', '\0'};
+--static const char day[5]={0251,'d', 'a', 'y', '\0'};
+--static const char too[5]={0251,'t', 'o', 'o', '\0'};
+--static const char cmt[5]={0251,'c', 'm', 't', '\0'};
+--static const char gen[5]={0251,'g', 'e', 'n', '\0'};
+--static const char grp[5]={0251,'g', 'r', 'p', '\0'};
+-+static const char name[5]={(char)0251,'n', 'a', 'm', '\0'};
+-+static const char art[5]={(char)0251,'A', 'R', 'T', '\0'};
+-+static const char wrt[5]={(char)0251,'w', 'r', 't', '\0'};
+-+static const char alb[5]={(char)0251,'a', 'l', 'b', '\0'};
+-+static const char day[5]={(char)0251,'d', 'a', 'y', '\0'};
+-+static const char too[5]={(char)0251,'t', 'o', 'o', '\0'};
+-+static const char cmt[5]={(char)0251,'c', 'm', 't', '\0'};
+-+static const char gen[5]={(char)0251,'g', 'e', 'n', '\0'};
+-+static const char grp[5]={(char)0251,'g', 'r', 'p', '\0'};
 - 
-- 		guint status = soup_session_send_message (sess.m_session, sess.m_msg);
-- 		if (!(SOUP_STATUS_IS_SUCCESSFUL (status) ||
--diff --git a/plugins/latex/xp/ie_exp_LaTeX.cpp b/plugins/latex/xp/ie_exp_LaTeX.cpp
--index 7aaf3a9..8bcc250 100644
----- a/plugins/latex/xp/ie_exp_LaTeX.cpp
--+++ b/plugins/latex/xp/ie_exp_LaTeX.cpp
--@@ -1330,7 +1330,7 @@ void s_LaTeX_Listener::_outputData(const UT_UCSChar * data, UT_uint32 length)
-- 	m_pie->write(sBuf.c_str(),sBuf.size());
+- MP4StandardAtom::MP4StandardAtom (const char *type) : MP4Atom(type)
+- {
+---- faac-1.28/common/mp4v2/mp4atom.cpp.orig	2016-06-16 08:03:07.777034633 -0400
+-+++ faac-1.28/common/mp4v2/mp4atom.cpp	2016-06-16 08:03:54.629033363 -0400
+-@@ -264,11 +264,11 @@
+-       }
+-       break;
+-     case 0251:
+--      static const char name[5]={0251,'n', 'a', 'm', '\0'};
+--      static const char cmt[5]={0251,'c', 'm', 't', '\0'};
+--      static const char cpy[5]={0251,'c', 'p', 'y', '\0'};
+--      static const char des[5]={0251,'d', 'e', 's','\0'};
+--      static const char prd[5]={0251, 'p', 'r', 'd', '\0'};
+-+      static const char name[5]={(char)0251,'n', 'a', 'm', '\0'};
+-+      static const char cmt[5]={(char)0251,'c', 'm', 't', '\0'};
+-+      static const char cpy[5]={(char)0251,'c', 'p', 'y', '\0'};
+-+      static const char des[5]={(char)0251,'d', 'e', 's','\0'};
+-+      static const char prd[5]={(char)0251, 'p', 'r', 'd', '\0'};
+-       if (ATOMID(type) == ATOMID(name) ||
+- 	  ATOMID(type) == ATOMID(cmt) ||
+- 	  ATOMID(type) == ATOMID(cpy) ||
+-
+diff --git a/meta-multimedia/recipes-multimedia/faac/files/build-fix.patch b/meta-multimedia/recipes-multimedia/faac/files/build-fix.patch
+deleted file mode 100644
+index 83cff8f..0000000
+--- a/meta-multimedia/recipes-multimedia/faac/files/build-fix.patch
++++ /dev/null
+@@ -1,332 +0,0 @@
+-Patch fixing build error and warnings. Error consisted of redefining
+-strcasestr function from string.h. Warnings consisted of deprecated conversions
+-of string constants to char*, using '%llu' for type uint64_t (which on 64 bit
+-systems, is defined as unsigned long int by stdint.h), and using '==' for
+-equality of two strings.
+-
+-Patch originally from Debian.
+-
+-Upstream-Status: Pending
+-
+-==========================================================================
+---- a/common/mp4v2/mpeg4ip.h
+-+++ b/common/mp4v2/mpeg4ip.h
+-@@ -120,14 +120,6 @@
+- #endif
+- #include <sys/param.h>
+- 
+--#ifdef __cplusplus
+--extern "C" {
+--#endif
+--char *strcasestr(const char *haystack, const char *needle);
+--#ifdef __cplusplus
+--}
+--#endif
+--
+- #define OPEN_RDWR O_RDWR
+- #define OPEN_CREAT O_CREAT 
+- #define OPEN_RDONLY O_RDONLY
+-@@ -135,7 +127,6 @@
+- #define closesocket close
+- #define IOSBINARY ios::bin
+- 
+--#if SIZEOF_LONG == 8
+- #define MAX_UINT64 -1LU
+- #define D64F "ld"
+- #define U64F  "lu"
+-@@ -143,15 +134,6 @@
+- 
+- #define TO_D64(a) (a##L)
+- #define TO_U64(a) (a##LU)
+--#else
+--#define MAX_UINT64 -1LLU
+--#define D64F "lld"
+--#define U64F  "llu"
+--#define X64F "llx"
+--
+--#define TO_D64(a) (a##LL)
+--#define TO_U64(a) (a##LLU)
+--#endif
+- 
+- #ifdef HAVE_FPOS_T___POS
+- #define FPOS_TO_VAR(fpos, typed, var) (var) = (typed)((fpos).__pos)
+---- a/configure.in
+-+++ b/configure.in
+-@@ -4,6 +4,9 @@
+- AM_INIT_AUTOMAKE
+- 
+- AM_CONFIG_HEADER(config.h)
+-+AH_TOP([#ifndef CONFIG_H
+-+#define CONFIG_H])
+-+AH_BOTTOM([#endif /* CONFIG_H */])
+- 
+- AC_ARG_WITH( mp4v2,  [  --with-mp4v2            compile libmp4v2],WITHMP4V2=$withval, WITHMP4V2=yes)
+- AC_ARG_ENABLE( drm,  [  --enable-drm            Digital Radio Mondiale support], enable_drm=$enableval, enable_drm=no)
+---- a/common/mp4v2/atom_avcC.cpp
+-+++ b/common/mp4v2/atom_avcC.cpp
+-@@ -29,7 +29,7 @@
+- class SizeTableProperty : public MP4TableProperty 
+- {
+-  public:
+--  SizeTableProperty(char *name, MP4IntegerProperty *pCountProperty) :
+-+  SizeTableProperty(const char *name, MP4IntegerProperty *pCountProperty) :
+-     MP4TableProperty(name, pCountProperty) {};
+-  protected:
+-   void ReadEntry(MP4File *pFile, u_int32_t index) {
+---- a/common/mp4v2/atom_ohdr.cpp
+-+++ b/common/mp4v2/atom_ohdr.cpp
+-@@ -21,7 +21,7 @@
+-       \param useCountedFormat    counted format flag.
+-       \param useUnicode          unicode flag.
+-   */
+--	OhdrMP4StringProperty(char* name, bool useCountedFormat = false,
+-+	OhdrMP4StringProperty(const char* name, bool useCountedFormat = false,
+-     bool useUnicode = false): MP4StringProperty(name, useCountedFormat,
+-     useUnicode) {
+-   }
+---- a/common/mp4v2/atom_stz2.cpp
+-+++ b/common/mp4v2/atom_stz2.cpp
+-@@ -30,7 +30,7 @@
+- class MP4HalfSizeTableProperty : public MP4TableProperty
+- {
+- public:
+--  MP4HalfSizeTableProperty(char *name, MP4IntegerProperty *pCountProperty) :
+-+  MP4HalfSizeTableProperty(const char *name, MP4IntegerProperty *pCountProperty) :
+-     MP4TableProperty(name, pCountProperty) {};
+- 
+-   // The count is half the actual size
+---- a/common/mp4v2/mp4atom.cpp
+-+++ b/common/mp4v2/mp4atom.cpp
+-@@ -806,7 +806,7 @@
+- 	AddProperty(new MP4Integer24Property("flags"));
 - }
 - 
---#define SUB(a,who) case a: subst = "\\(\\"who"\\)"; return true;
--+#define SUB(a,who) case a: subst = "\\(\\" who"\\)"; return true;
-- #define SUBd(a,who) case a: subst = who; return true;
-- static bool _convertLettersToSymbols(char c, const char *& subst)
+--void MP4Atom::AddReserved(char* name, u_int32_t size) 
+-+void MP4Atom::AddReserved(const char* name, u_int32_t size)
 - {
--diff --git a/plugins/xslfo/xp/ie_exp_XSL-FO.cpp b/plugins/xslfo/xp/ie_exp_XSL-FO.cpp
--index cc5e4e6..957226e 100644
----- a/plugins/xslfo/xp/ie_exp_XSL-FO.cpp
--+++ b/plugins/xslfo/xp/ie_exp_XSL-FO.cpp
--@@ -1451,7 +1451,7 @@ void s_XSL_FO_Listener::_openSection(PT_AttrPropIndex api)
-- 	{ \
-- 		UT_UTF8String esc = szValue; \
-- 		esc.escapeXML(); \
---		buf += " "x"=\""; \
--+		buf += " " x"=\""; \
-- 		buf += esc.utf8_str(); \
-- 		buf += "\""; \
+- 	MP4BytesProperty* pReserved = new MP4BytesProperty(name, size); 
+- 	pReserved->SetReadOnly();
+---- a/common/mp4v2/mp4atom.h
+-+++ b/common/mp4v2/mp4atom.h
+-@@ -204,7 +204,7 @@
+- 
+- 	void AddVersionAndFlags();
+- 
+--	void AddReserved(char* name, u_int32_t size);
+-+	void AddReserved(const char* name, u_int32_t size);
+- 
+- 	void ExpectChildAtom(const char* name, 
+- 		bool mandatory, bool onlyOne = true);
+---- a/common/mp4v2/mp4file.cpp
+-+++ b/common/mp4v2/mp4file.cpp
+-@@ -718,7 +718,7 @@
 - 	}
---- 
--2.5.5
--
-diff --git a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-similarity index 96%
-rename from meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-rename to meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-index 34fc97d..2a13e48 100644
---- a/meta-gnome/recipes-gnome/abiword/abiword_3.0.1.bb
-+++ b/meta-gnome/recipes-gnome/abiword/abiword_3.0.2.bb
-@@ -28,13 +28,12 @@ RCONFLICTS_${PN} = "${PN}-embedded"
- SRC_URI = " \
-     http://www.abisource.com/downloads/${BPN}/${PV}/source/${BP}.tar.gz \
-     file://0001-plugins-aiksaurus-Makefile.am-remove-uncomplete-opti.patch \
--    file://0002-Bug-13754-Fix-build-on-gcc-6-default-to-C-11.patch \
- "
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=c5edcc3ccd864b19004d14e9c1c9a26a"
- 
--SRC_URI[md5sum] = "f3f8052e7b4979a43b75775a381e6cb8"
--SRC_URI[sha256sum] = "e094f6fbf0afc5c5538b4894888e7c346f8ee8f49c9d24821dd696d0734865c6"
-+SRC_URI[md5sum] = "cda6dd58c747c133b421cc7eb18f5796"
-+SRC_URI[sha256sum] = "afbfd458fd02989d8b0c6362ba8a4c14686d89666f54cfdb5501bd2090cf3522"
- 
- #want 3.x from 3.x.y for the installation directory
- SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+- }
+- 
+--void MP4File::ProtectWriteOperation(char* where)
+-+void MP4File::ProtectWriteOperation(const char* where)
+- {
+- 	if (m_mode == 'r') {
+- 		throw new MP4Error("operation not permitted in read mode", where);
+-@@ -1274,7 +1274,7 @@
+- }
+- 
+- // NULL terminated list of brands which require the IODS atom
+--char *brandsWithIods[] = { "mp42",
+-+const char *brandsWithIods[] = { "mp42",
+-                            "isom",
+-                            NULL};
+- 
+-@@ -2211,11 +2211,11 @@
+- 	for (u_int32_t i = 0; i < m_pTracks.Size(); i++) {
+- 		if (!strcmp(normType, m_pTracks[i]->GetType())) {
+- 			if (subType) {
+--				if (normType == MP4_AUDIO_TRACK_TYPE) {
+-+				if (!strcmp(normType,MP4_AUDIO_TRACK_TYPE)) {
+- 					if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
+- 						continue;
+- 					}
+--				} else if (normType == MP4_VIDEO_TRACK_TYPE) {
+-+				} else if (!strcmp(normType,MP4_VIDEO_TRACK_TYPE)) {
+- 					if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
+- 						continue;
+- 					}
+-@@ -2278,11 +2278,11 @@
+-   for (u_int32_t i = 0; i < m_pTracks.Size(); i++) {
+-     if (!strcmp(normType, m_pTracks[i]->GetType())) {
+-       if (subType) {
+--	if (normType == MP4_AUDIO_TRACK_TYPE) {
+-+	if (!strcmp(normType,MP4_AUDIO_TRACK_TYPE)) {
+- 	  if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
+- 	    continue;
+- 	  }
+--	} else if (normType == MP4_VIDEO_TRACK_TYPE) {
+-+	} else if (!strcmp(normType,MP4_VIDEO_TRACK_TYPE)) {
+- 	  if (subType != GetTrackEsdsObjectTypeId(m_pTracks[i]->GetId())) {
+- 	    continue;
+- 	  }
+---- a/common/mp4v2/mp4file.h
+-+++ b/common/mp4v2/mp4file.h
+-@@ -700,7 +700,7 @@
+- 	const char* TempFileName();
+- 	void Rename(const char* existingFileName, const char* newFileName);
+- 
+--	void ProtectWriteOperation(char* where);
+-+	void ProtectWriteOperation(const char* where);
+- 
+- 	void FindIntegerProperty(const char* name, 
+- 		MP4Property** ppProperty, u_int32_t* pIndex = NULL);
+---- a/common/mp4v2/mp4property.cpp
+-+++ b/common/mp4v2/mp4property.cpp
+-@@ -313,7 +313,7 @@
+- 
+- // MP4StringProperty
+- 
+--MP4StringProperty::MP4StringProperty(char* name, 
+-+MP4StringProperty::MP4StringProperty(const char* name,
+- 	bool useCountedFormat, bool useUnicode)
+- 	: MP4Property(name)
+- {
+-@@ -420,7 +420,7 @@
+- 
+- // MP4BytesProperty
+- 
+--MP4BytesProperty::MP4BytesProperty(char* name, u_int32_t valueSize,
+-+MP4BytesProperty::MP4BytesProperty(const char* name, u_int32_t valueSize,
+-                                    u_int32_t defaultValueSize)
+- 	: MP4Property(name)
+- {
+-@@ -549,7 +549,7 @@
+- 
+- // MP4TableProperty
+- 
+--MP4TableProperty::MP4TableProperty(char* name, MP4IntegerProperty* pCountProperty)
+-+MP4TableProperty::MP4TableProperty(const char* name, MP4IntegerProperty* pCountProperty)
+- 	: MP4Property(name) 
+- {
+- 	m_pCountProperty = pCountProperty;
+-@@ -725,7 +725,7 @@
+- 
+- // MP4DescriptorProperty
+-   
+--MP4DescriptorProperty::MP4DescriptorProperty(char* name, 
+-+MP4DescriptorProperty::MP4DescriptorProperty(const char* name,
+- 	u_int8_t tagsStart, u_int8_t tagsEnd, bool mandatory, bool onlyOne)
+- 	: MP4Property(name) 
+- { 
+---- a/common/mp4v2/mp4property.h
+-+++ b/common/mp4v2/mp4property.h
+-@@ -100,7 +100,7 @@
+- 
+- class MP4IntegerProperty : public MP4Property {
+- protected:
+--	MP4IntegerProperty(char* name)
+-+	MP4IntegerProperty(const char* name)
+- 		: MP4Property(name) { };
+- 
+- public:
+-@@ -118,7 +118,7 @@
+- #define MP4INTEGER_PROPERTY_DECL2(isize, xsize) \
+- 	class MP4Integer##xsize##Property : public MP4IntegerProperty { \
+- 	public: \
+--		MP4Integer##xsize##Property(char* name) \
+-+		MP4Integer##xsize##Property(const char* name) \
+- 			: MP4IntegerProperty(name) { \
+- 			SetCount(1); \
+- 			m_values[0] = 0; \
+-@@ -188,7 +188,7 @@
+- 
+- class MP4BitfieldProperty : public MP4Integer64Property {
+- public:
+--	MP4BitfieldProperty(char* name, u_int8_t numBits)
+-+	MP4BitfieldProperty(const char* name, u_int8_t numBits)
+- 		: MP4Integer64Property(name) {
+- 		ASSERT(numBits != 0);
+- 		ASSERT(numBits <= 64);
+-@@ -213,7 +213,7 @@
+- 
+- class MP4Float32Property : public MP4Property {
+- public:
+--	MP4Float32Property(char* name)
+-+	MP4Float32Property(const char* name)
+- 		: MP4Property(name) {
+- 		m_useFixed16Format = false;
+- 		m_useFixed32Format = false;
+-@@ -280,7 +280,7 @@
+- 
+- class MP4StringProperty : public MP4Property {
+- public:
+--	MP4StringProperty(char* name, 
+-+	MP4StringProperty(const char* name,
+- 	  bool useCountedFormat = false, bool useUnicode = false);
+- 
+- 	~MP4StringProperty();
+-@@ -355,7 +355,7 @@
+- 
+- class MP4BytesProperty : public MP4Property {
+- public:
+--	MP4BytesProperty(char* name, u_int32_t valueSize = 0,
+-+	MP4BytesProperty(const char* name, u_int32_t valueSize = 0,
+-                          u_int32_t defaultValueSize = 0);
+- 
+- 	~MP4BytesProperty();
+-@@ -419,7 +419,7 @@
+- 
+- class MP4TableProperty : public MP4Property {
+- public:
+--	MP4TableProperty(char* name, MP4IntegerProperty* pCountProperty);
+-+	MP4TableProperty(const char* name, MP4IntegerProperty* pCountProperty);
+- 
+- 	~MP4TableProperty();
+- 
+-@@ -469,7 +469,7 @@
+- 
+- class MP4DescriptorProperty : public MP4Property {
+- public:
+--	MP4DescriptorProperty(char* name = NULL, 
+-+	MP4DescriptorProperty(const char* name = NULL,
+- 	  u_int8_t tagsStart = 0, u_int8_t tagsEnd = 0,
+- 	  bool mandatory = false, bool onlyOne = false);
+- 
+-@@ -531,7 +531,7 @@
+- 
+- class MP4QosQualifierProperty : public MP4DescriptorProperty {
+- public:
+--	MP4QosQualifierProperty(char* name = NULL, 
+-+	MP4QosQualifierProperty(const char* name = NULL,
+- 	  u_int8_t tagsStart = 0, u_int8_t tagsEnd = 0,
+- 	  bool mandatory = false, bool onlyOne = false) :
+- 	MP4DescriptorProperty(name, tagsStart, tagsEnd, mandatory, onlyOne) { }
+---- a/common/mp4v2/mp4track.cpp
+-+++ b/common/mp4v2/mp4track.cpp
+-@@ -1360,7 +1360,7 @@
+-   }
+- }
+- 
+--MP4Atom* MP4Track::AddAtom(char* parentName, char* childName)
+-+MP4Atom* MP4Track::AddAtom(const char* parentName, const char* childName)
+- {
+- 	MP4Atom* pChildAtom = MP4Atom::CreateAtom(childName);
+- 
+---- a/common/mp4v2/mp4track.h
+-+++ b/common/mp4v2/mp4track.h
+-@@ -168,7 +168,7 @@
+- 	void UpdateSyncSamples(MP4SampleId sampleId, 
+- 		bool isSyncSample);
+- 
+--	MP4Atom* AddAtom(char* parentName, char* childName);
+-+	MP4Atom* AddAtom(const char* parentName, const char* childName);
+- 
+- 	void UpdateDurations(MP4Duration duration);
+- 	MP4Duration ToMovieDuration(MP4Duration trackDuration);
+---- a/common/mp4v2/ocidescriptors.cpp
+-+++ b/common/mp4v2/ocidescriptors.cpp
+-@@ -171,7 +171,7 @@
+- 
+- class MP4CreatorTableProperty : public MP4TableProperty {
+- public:
+--	MP4CreatorTableProperty(char* name, MP4Integer8Property* pCountProperty) :
+-+	MP4CreatorTableProperty(const char* name, MP4Integer8Property* pCountProperty) :
+- 		MP4TableProperty(name, pCountProperty) {
+- 	};
+- protected:
 -- 
 2.9.4
 
