@@ -1,55 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 99C8677D16;
-	Mon, 10 Jul 2017 21:25:30 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id u36so14103771pgn.3;
-	Mon, 10 Jul 2017 14:25:31 -0700 (PDT)
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id D0B8977D4C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jul 2017 21:33:33 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id u36so14124824pgn.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 Jul 2017 14:33:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to;
-	bh=0Z+Jz7CiJcc91MrvL8Jn2sPM5GH5p2l/JNjWgRyuLWY=;
-	b=BSyOVYR6yOwI5KiDbtp47tT5S/ALKsGtwsb3q668KXGk37jp9V2FF+PocSyVZgwvke
-	pLoztIkdNkDQd4ZypPoUSWI9S26NtAoj6IhEwr4/tH7xO7DrPYgDSJAVzB27Ze8ixNoA
-	kU0rq0voT6NtxQ8PRpErl7b/Q52ikVLF8REvel2yi7c6SDG7Q+7GDkqnAQHDtKztTCZw
-	mDTw5g+TAjRntCPSr4ScMQwVqPQnh5Bpz8oWyoInL0pr4yEc9KlBble0yXbv+QvMtsOw
-	pDbE1eFBemxfltkvW0KOnIOtikxGzoWrxfsml0tGIDcBXiRocPfwsOP+LofMRk7zDVNs
-	qpMw==
+	h=from:to:cc:subject:date:message-id;
+	bh=nnNijRrH0ZEs6bQRNWq/JMh8Mk1U6WrQMwNojjZa+v8=;
+	b=aw0AAhkT+cmSPhNgcrLljFmSOV89mRI261uJ+9moPIAYm8Oknda7uCmEM5nF2Xgbwn
+	7O/nLF6CVITzjbUJbMbxTXCAHHBgt4kysaZUlUU5LFNwTGqxqsG9o/9LFN4Yxz+tTXTa
+	aLs/yHvsjJy1jtdzhuF+t2bUEHnG41sl1A1aM+hu0S18GeaPlwgrAqB/UErg9Rni96Ow
+	M4BW3OxCLCTaLW9w4B85gya2N+PmwgfH6vWii/K7Hw+/W+AowxFpJQGx06/XfIFP2ETx
+	ltMf/NiMa2gWG+1rZD4ueClPYs+celsgWRrei38PE6uTzE8HzvbyhCx1dpzZ80UBHtcH
+	jhvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to;
-	bh=0Z+Jz7CiJcc91MrvL8Jn2sPM5GH5p2l/JNjWgRyuLWY=;
-	b=dGLMATMxM2mez//kTVL+pYRg4lfcrJMVSvnyW/2KGWhhDSg0vDEJ0y3PPgSVIUZrzl
-	RGkThSvK42SMntSHH2gyOZwgEzqotTj5q8qTReXnTMUUY0Pc2hYyZd8IjFG/Xn3APsmh
-	9wclJrUcMO0D27Wdwi75HObdjtDhYFlccYu+SirT4IkGYE4jCR3gTm8/Y8dXBxnp9uQf
-	nIYUakzlyN1+yghzvR1HC2e+ZF6/obfw4wEJ2IsqBq7rEsWBJiiS3ESpP+btEOPvhdqa
-	RzUv6VSn/Z7pHLe1JKoy4ph5D1zs7v83hohHGwtngKbdJ8Nmn6jMLO+T6pqRLrpn8HeT
-	DZcA==
-X-Gm-Message-State: AIVw111T8lExbnzV1PFMbwzNcEX1QPLr3/+rsG/DzTj5lG0JAWlZ0DMJ
-	wdBwpay6uONdpT81V1Q=
-X-Received: by 10.84.229.6 with SMTP id b6mr19607225plk.247.1499721931226;
-	Mon, 10 Jul 2017 14:25:31 -0700 (PDT)
-Received: from ?IPv6:2601:646:8882:b8c:916c:598f:a4d5:4c49?
-	([2601:646:8882:b8c:916c:598f:a4d5:4c49])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=nnNijRrH0ZEs6bQRNWq/JMh8Mk1U6WrQMwNojjZa+v8=;
+	b=KF4syb8x1udMx5JdjQRH/lC4CCmFNC+T5Cya6MBo5F9CcWy7R6q4jdoWE1B8rN2aUZ
+	gEzeHwO4G+H2f8P15T9Sa6DEZsly23kPgwO+iNlCw5bNU39CYxAIctfwAxagHzuwAbi9
+	bzQsNhtvf9WXtP72aiOTTObvTh2yO8u6SI5ztSAWwMzIOz12VjJr0axj5wiXgH08auIm
+	BDhuzYbmhafP6mJrwcqoUi5P/SqIu3MG4QGA/zIVcB51WfFNyXjp97dxQp08idYcqQib
+	LAI9e9E+HgCYmuFj29rLOlxwmw3CtcCl00iq4HcUhVueXrTttG9dIyfq9/Aq7tkz3ZGy
+	mSig==
+X-Gm-Message-State: AIVw112PG+QS+VRwchaJet2tbekbH15/TRIvlXh4yFGj7V2t5YhSCmCl
+	CWNYaGLRfTwP13U0
+X-Received: by 10.98.93.136 with SMTP id n8mr46624889pfj.211.1499722414772;
+	Mon, 10 Jul 2017 14:33:34 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	z6sm24045334pff.46.2017.07.10.14.25.29
+	d89sm25285128pfl.7.2017.07.10.14.33.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jul 2017 14:25:30 -0700 (PDT)
-To: Denys Dmytriyenko <denis@denix.org>
-References: <20170710203642.GB26405@denix.org>
-	<20170710204751.GC26405@denix.org>
-	<598b8f59-0d75-314e-6f18-7f5daa24fa07@gmail.com>
-	<20170710210903.GD26405@denix.org>
+	Mon, 10 Jul 2017 14:33:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <eb50d0a7-dac2-d120-6103-a999c477369c@gmail.com>
-Date: Mon, 10 Jul 2017 14:25:21 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:54.0)
-	Gecko/20100101 Thunderbird/54.0
-MIME-Version: 1.0
-In-Reply-To: <20170710210903.GD26405@denix.org>
-Cc: openembedded-architecture@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-browser] Chromium and gold linker
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Jul 2017 14:33:24 -0700
+Message-Id: <20170710213324.43346-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-browser][PATCH] chromium: Do not enforce gold as default linker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,176 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 Jul 2017 21:25:31 -0000
-X-Groupsio-MsgNum: 67541
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="9GUQqJtCDrqtVbQLCD9peRQ7b7q8SBNBL"
+X-List-Received-Date: Mon, 10 Jul 2017 21:33:34 -0000
 
---9GUQqJtCDrqtVbQLCD9peRQ7b7q8SBNBL
-Content-Type: multipart/mixed; boundary="KnN7BWup2rjWvf9nI92ppkKS33RoqhqEw";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-Cc: openembedded-devel@lists.openembedded.org,
- openembedded-architecture@lists.openembedded.org
-Message-ID: <eb50d0a7-dac2-d120-6103-a999c477369c@gmail.com>
-Subject: Re: [oe] [meta-browser] Chromium and gold linker
-References: <20170710203642.GB26405@denix.org>
- <20170710204751.GC26405@denix.org>
- <598b8f59-0d75-314e-6f18-7f5daa24fa07@gmail.com>
- <20170710210903.GD26405@denix.org>
-In-Reply-To: <20170710210903.GD26405@denix.org>
+Provide a knob USEGOLD however to enable it if desired
 
---KnN7BWup2rjWvf9nI92ppkKS33RoqhqEw
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Cc: Denys Dmytriyenko <denis@denix.org>
+---
+ recipes-browser/chromium/chromium-browser.inc | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
 
-On 7/10/17 2:09 PM, Denys Dmytriyenko wrote:
-> On Mon, Jul 10, 2017 at 02:00:35PM -0700, Khem Raj wrote:
->> On 7/10/17 1:47 PM, Denys Dmytriyenko wrote:
->>> On Mon, Jul 10, 2017 at 04:36:42PM -0400, Denys Dmytriyenko wrote:
->>>> Khem, et al,
->>>>
->>>> I couldn't find below patch being discussed on this mailing list bef=
-ore it got=20
->>>> merged:
->>>>
->>>> https://github.com/OSSystems/meta-browser/commit/62e323848f569c4cdea=
-5567b1917ce006d7705af
->>>
->>> https://github.com/OSSystems/meta-browser/commit/55a74501bc65c90c86e3=
-236b51ec2dc2fc0145fb
->>>
->>> "ld-is-gold just means that my default linker is gold, however we bui=
-ld
->>> both linkers, so one should be able to enable gold just for linking
->>> chromium even if default ld is bfd linker."
->>>
->>> I strongly disagree with such interpretation - this would mean there'=
-s NO way=20
->>> to disable gold linker completely, e.g. for when external toolchain d=
-oesn't=20
->>> support it.
->=20
-> Copying OE architecture list for further discussion of "ld-is-gold" mea=
-ning.
->=20
->=20
->> it is not just interpretation but how it is designed if you look close=
-ly
->> to code in oe-core and as a matter of fact, there are certain packages=
-
->> where we enforce one linker or other.
->=20
-> So far I only seen forcing bfd, as a legacy linker, not the other way a=
-round.
->=20
->=20
->> mere presence or absence of
->> ld-is-gold in distro features does not mean that other linker will not=
-
->> be available. If your distro is making that assumption please correct =
-that.
->>
->> I however agree, that using gold as default linker should have a knob
->> and it so does which is USEGOLD, if a distro or toolchain layer does n=
-ot
->> want to use gold then they could set this variable to be off.
->>
->> USEGOLD =3D "" or USEGOLD =3D "-Dlinux_use_gold_flags=3D0"
->=20
-> Yes, I saw this variable and already added it to my bbappend. But the i=
-ssue is=20
-> that it's per-recipe, not global. Do we need a separate distro-level fl=
-ag to=20
-> avoid any and all gold linker references?
-
-Leave aside the meaning for a moment, I think its convenient to use it
-this way, I am not too hell bent for enforcing gold as default, so I
-will send a patch to not default to gold. The flag is useful only when
-bfd linker is system default and one just want to link chromium with
-gold for various
-reasons, they can set it explicitly in their own setups. We however will
-have the mechanism to do so without making gold the system linker.
-
->=20
->=20
->> I think its better to use gold linker for linking chromium since it
->> reduced the link time for chrome quite significantly (8 mins to 2min) =
-on
->> my experiments. But I am fine if other users think that we should not
->> make gold as default.  I can send a patch to toggle the USEGOLD switch=
-
->>
->>>
->>>> According to the layer README, openembedded-devel is the official ma=
-iling list=20
->>>> to submit patches. I understand that github pull request is a nice s=
-hortcut,=20
->>>> but it prevents others from seeing and commenting on the patches...
->>>>
->>>>
->>>> My issue with this change is that it makes an assumption of using OE=
--built=20
->>>> toolchain. It now breaks external toolchains like this:
->>
->> No it does not make assumption. See above.
->>
->>>>
->>>> | [17/20569] LINK genmacro
->>>> | FAILED: genmacro
->>>> | gcc  -L/opt/linaro-2016.11/arm-linux-gnueabihf/lib -Wl,-rpath-link=
-,/opt/linaro-2016.11/arm-linux-gnueabihf/lib -Wl,-O1 -Wl,--hash-style=3Dg=
-nu -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC =
--fuse-ld=3Dgold -Wl,--disable-new-dtags -Wl,-O1 -Wl,--as-needed -Wl,--gc-=
-sections -Wl,--no-as-needed -lpthread -Wl,--as-needed -o genmacro -Wl,--s=
-tart-group obj.host/third_party/yasm/source/patched-yasm/tools/genmacro/g=
-enmacro.genmacro.o -Wl,--end-group
->>>> | /usr/bin/ld.gold: fatal error: /opt/linaro-2016.11/arm-linux-gnuea=
-bihf/lib/libgcc_s.so.1: unsupported ELF machine number 40
->>>> | collect2: error: ld returned 1 exit status
->>>> | [18/20569] LINK genstring
->>>> | FAILED: genstring
->>>> | gcc  -L/opt/linaro-2016.11/arm-linux-gnueabihf/lib -Wl,-rpath-link=
-,/opt/linaro-2016.11/arm-linux-gnueabihf/lib -Wl,-O1 -Wl,--hash-style=3Dg=
-nu -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -pthread -Wl,-z,noexecstack -fPIC =
--fuse-ld=3Dgold -Wl,--disable-new-dtags -Wl,-O1 -Wl,--as-needed -Wl,--gc-=
-sections -Wl,--no-as-needed -lpthread -Wl,--as-needed -o genstring -Wl,--=
-start-group obj.host/third_party/yasm/source/patched-yasm/genstring.genst=
-ring.o -Wl,--end-group
->>>> | /usr/bin/ld.gold: fatal error: /opt/linaro-2016.11/arm-linux-gnuea=
-bihf/lib/libgcc_s.so.1: unsupported ELF machine number 40
->>>> | collect2: error: ld returned 1 exit status
->>>>
->>>> --=20
->>>> Denys
->>>> --=20
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->>
->=20
->=20
->=20
+diff --git a/recipes-browser/chromium/chromium-browser.inc b/recipes-browser/chromium/chromium-browser.inc
+index 094a3d3..1e4fb1e 100644
+--- a/recipes-browser/chromium/chromium-browser.inc
++++ b/recipes-browser/chromium/chromium-browser.inc
+@@ -200,7 +200,12 @@ python add_ozone_wayland_patches() {
+     d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES', False))
+ }
+ 
+-USEGOLD ?= "-Dlinux_use_gold_flags=1"
++# uncomment below or set it in a bbappend if you want to use gold linker
++# to link chromium irrespective of system linker, gold speeds up linking
++# chromium ( 8mins to < 2mins on a decent xeon system)
++#
++#USEGOLD = "-Dlinux_use_gold_flags=1"
++USE_GOLD ??= ""
+ 
+ EXTRA_OEGYP = " \
+ 	-Dangle_use_commit_id=0 \
+-- 
+2.13.2
 
 
-
---KnN7BWup2rjWvf9nI92ppkKS33RoqhqEw--
-
---9GUQqJtCDrqtVbQLCD9peRQ7b7q8SBNBL
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAllj8MkACgkQuwUzVZGdMxQeUACfbtfmG73HUX6QG7M67t3tu7Um
-KKoAn2F0sE4flmoOV4kyiFwJU886Cycf
-=fZwY
------END PGP SIGNATURE-----
-
---9GUQqJtCDrqtVbQLCD9peRQ7b7q8SBNBL--
