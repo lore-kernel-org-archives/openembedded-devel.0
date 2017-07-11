@@ -1,45 +1,46 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id ED17E77DCC
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CE2D377E24
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 17:09:18 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id z6so646784pfk.3
+	Tue, 11 Jul 2017 18:01:20 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id x23so1599600wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 10:09:20 -0700 (PDT)
+	Tue, 11 Jul 2017 11:01:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=5Ob4uy7ZThFKZcLX4gVWD7JJ1fKfh5cH18ao3MxcUXw=;
-	b=hmaBXPz5sLh9FqbNvVpbsuc9MHVmzNdF1SMTgw5TYuz4oh7lsa7s37qJtIco3r+C9k
-	11FKISXRC5uN1SMB1y1jNIVd37lMnwOBfyXpGrdMWa7/3EageOuE/31ydhieh/I2ztXe
-	hbFuET94BECJ9FYdPoC1pBYD4VJVjWtnBDDE4EctuMQCsAbMBjcMrBx0xCf5x/VqxBif
-	yqB3nK/rE+WVgbfHIfLOGb0510Hp3+vVmlVSjETUTnSzENc32nh531X/7bvBp9t28JEm
-	3kwZFBR4y3n144iq8KBhGkf/ieOdeeyv3bn2fbylVqmUOhKEymngPocXK5aRomYPEDdK
-	DZuw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=76iVNqrBjjncQYhj2hTTQQXQEym1G8opwEXD0i7Ckn0=;
+	b=M8e0XupXECm3NwGL1UfJ0P/C5R0AH+2beIpp0B3TROq3vwpTYOC/GnFOQY7HMfmf19
+	ae1PMxigZ68RYosp5wPdQ/HtRURi8JZzVCHrxmC5zEzDX0qCSl+DB4gZoWxMzfZeL4N2
+	C0bNLUmKVqLGAeuvQILEIk91CdRKh5s6dU8pMsZENSYlkyDIEXKSlIPF3HMCoWiVwVPi
+	bWDx9PgCa0e1zVZEKPoqvfSh/XHPVpkTb9xJuCLdqpWqUkV4oS5wLcaUsEhOP+05k0qG
+	LRaYFfBGXHFFNI/wK64t1gKfdBinKwa5Y707gqFdjPhi7GnMVuPk6uC9AcBkcnOJ32T/
+	/PfQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=5Ob4uy7ZThFKZcLX4gVWD7JJ1fKfh5cH18ao3MxcUXw=;
-	b=P5NjQ89cU6DJIrNLpcZ1DpskPAClPPprukHiKBZtdzEuE4Nn/+J+UF80xX9fp2lHcA
-	IBn/5cBwDehqJd5lP5FQQz4IX5nKmoQcW8QAO4SNzRkrRYMENCnZVIOaxM6cvv95OehQ
-	ktmQVzsgV/cz9RAJZl6ZD0l6np6c8al5FxpEq+6Cp9xQ8NRFw6MpU5rIVmnoc5nmuwdf
-	+0KKDa38hiEmlw4l/S19kIIDIInQvI4vxfvoLFV4M9qCA17gQvAP7cIiJo3Ch+2XKWwk
-	laU/tLYeHyU6Hlc3GhhUrVyOXEP34WaphKOdGC/VVT2Vj7Qt+3W4zHXMYstYftFrSqNp
-	BdCA==
-X-Gm-Message-State: AIVw110vsX+GIQrTBhgZksrRxN6IZpkR0d3VV8Om066+0aFWtIF85aGn
-	Pkgg8Wo5riqSNVKB
-X-Received: by 10.84.131.78 with SMTP id 72mr954629pld.43.1499792959000;
-	Tue, 11 Jul 2017 10:09:19 -0700 (PDT)
-Received: from e6520.cablelabs.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id z86sm996309pfl.40.2017.07.11.10.09.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 11 Jul 2017 10:09:17 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 10:09:11 -0700
-Message-Id: <1499792951-12837-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] ebtables: replace ebtables-save perl script with bash rewrite
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=76iVNqrBjjncQYhj2hTTQQXQEym1G8opwEXD0i7Ckn0=;
+	b=CkO0ly4YSZdiK4ZEuzU6YSXPySxa0aCIXZCvegsrZxkqojx2Bu6N5n8V+vpsV4qzFE
+	ddOqh8kgelIWPrHYgSyPvJIFwcQoWSr9DpF55Crv3kHgcPMFHS+9FgwazcKx5px3Z/OU
+	w0MxrqcGpCi54Y9DBvfw/dwc4OLkQDLZBSEiARrbEQ+EeypEqIn91PmTcVFhNqRKrGOo
+	rca2+NX7A2N/HS0/OnR63mJDkZvcBP4fjDiZ7GyBPTqecLrXY7VoCzQ1RtbZ5wAC7Nll
+	BWMOpfUbjKnYphALcOE/4F2TFUy+2rFvZaOKJN6rUKQ8Si9XCq7ghep0TXGaI4+pBb+a
+	wX8Q==
+X-Gm-Message-State: AIVw112TayHiu1kT5m36qTVY/cFNFQc5kbH5CpVvQi8+h6A3y0/uzt5t
+	r54LOx7jvsK4Ew0gI+LE1Szmz4M3NA==
+X-Received: by 10.80.164.185 with SMTP id w54mr3469865edb.76.1499796079049;
+	Tue, 11 Jul 2017 11:01:19 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.145.210 with HTTP; Tue, 11 Jul 2017 11:00:48 -0700 (PDT)
+In-Reply-To: <20170711085922.21020-1-Martin.Jansa@gmail.com>
+References: <20170711085922.21020-1-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 11 Jul 2017 11:00:48 -0700
+Message-ID: <CAMKF1sovEMpmpQaSBgJyP9sXj2FANYLeHuZLdju7deR_ccJoyw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH][meta-multimedia] kodi: Fix build on arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,119 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 17:09:19 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 18:01:25 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fedora provides a bash replacement for the default ebtables-save perl
-script. Using it allows the ebtables run-time dependency on perl to
-be replaced with a runtime dependency on bash - which is lower
-overhead and more likely to be present on typical embedded systems
-already.
+On Tue, Jul 11, 2017 at 1:59 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+> index 0b39116a1..5a9fa9801 100644
+> --- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+> +++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+> @@ -134,6 +134,7 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+>  LDFLAGS_append_mips = " -latomic"
+>  LDFLAGS_append_mipsel = " -latomic"
+>  LDFLAGS_append_powerpc = " -latomic"
+> +LDFLAGS_append_arm = " -latomic"
 
-  https://bugzilla.redhat.com/show_bug.cgi?id=746040
-  http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
+Perhaps it should just cover arm < armv6
 
-Since ebtables-save no longer contains a references to /usr, the
-previous QA issue workaround of moving it from ${base_sbindir} to
-${sbindir} is no longer required.
-
-  http://git.openembedded.org/meta-openembedded/commit/?id=a7c6fcebee7d9f86c356ea92de445d89e714ff62
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- .../ebtables/ebtables-2.0.10-4/ebtables-save       | 43 ++++++++++++++++++++++
- .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   | 15 ++++----
- 2 files changed, 50 insertions(+), 8 deletions(-)
- create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
-
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
-new file mode 100755
-index 0000000..2d7fc4e
---- /dev/null
-+++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
-@@ -0,0 +1,43 @@
-+#!/bin/bash
-+
-+EBTABLES="/sbin/ebtables"
-+
-+[ -x "$EBTABLES" ] || exit 1
-+
-+echo "# Generated by ebtables-save v1.0 on $(date)"
-+
-+cnt=""
-+[ "x$EBTABLES_SAVE_COUNTER" = "xyes" ] && cnt="--Lc"
-+
-+for table_name in $(grep -E '^ebtable_' /proc/modules | cut -f1 -d' ' | sed s/ebtable_//); do
-+    table=$($EBTABLES -t $table_name -L $cnt)
-+    [ $? -eq 0 ] || { echo "$table"; exit -1; }
-+
-+    chain=""
-+    rules=""
-+    while read line; do
-+	[ -z "$line" ] && continue
-+
-+	case "$line" in 
-+	    Bridge\ table:\ *)
-+		echo "*${line:14}"
-+		;;
-+	    Bridge\ chain:\ *)
-+		chain="${line:14}"
-+		chain="${chain%%,*}"
-+		policy="${line##*policy: }"
-+		echo ":$chain $policy"
-+		;;
-+	    *)
-+		if [ "$cnt" = "--Lc" ]; then
-+		    line=${line/, pcnt \=/ -c}
-+		    line=${line/-- bcnt \=/}
-+		fi
-+		rules="$rules-A $chain $line\n"
-+		;;
-+	esac
-+    done <<EOF
-+$table
-+EOF
-+    echo -e $rules
-+done
-diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-index 375423d..e724731 100644
---- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-+++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
-@@ -4,14 +4,15 @@ DESCRIPTION = "Utility for basic Ethernet frame filtering on a Linux bridge, \
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
- SECTION = "net"
--PR = "r3"
-+PR = "r4"
- 
--RDEPENDS_${PN} += "perl"
-+RDEPENDS_${PN} += "bash"
- 
- RRECOMMENDS_${PN} += "kernel-module-ebtables \
-     "
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
-+           file://ebtables-save \
-            file://installnonroot.patch \
-            file://01debian_defaultconfig.patch \
-            file://ebtables.init \
-@@ -78,12 +79,10 @@ do_install () {
-     mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
-     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
- 
--    # The script ebtables-save refernces perl in exec_prefix, so
--    # move it to sbindir to avoid QA issue
--    if ${base_sbindir} != ${sbindir} ; then
--       install -d ${D}/${sbindir}
--       mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
--    fi
-+    # Replace upstream ebtables-save perl script with Fedora bash based rewrite
-+    # http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
-+    install -m 0755 ${WORKDIR}/ebtables-save ${D}${base_sbindir}/ebtables-save
-+    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${base_sbindir}/ebtables-save
- 
-     # Install systemd service files
-     install -d ${D}${systemd_unitdir}/system
--- 
-1.9.1
-
+>
+>  EXTRA_OECONF_append = " LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
+>
+> --
+> 2.13.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
