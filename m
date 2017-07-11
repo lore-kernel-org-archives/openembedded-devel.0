@@ -1,47 +1,50 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id A356077D48
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 279A477E13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 16:44:58 +0000 (UTC)
-Received: by mail-lf0-f43.google.com with SMTP id z78so5369089lff.0
+	Tue, 11 Jul 2017 16:45:02 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id k67so1090394wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:45:00 -0700 (PDT)
+	Tue, 11 Jul 2017 09:45:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=o6O7nUSQvf6srFNgH8sX5DnrK8XOLIyhEVTTJy/NrH0=;
-	b=kHUThLzSGXplnxVkFJxDieGLjt+GhwEPic+26wX2XOkX8YRCeWcEcLGACzV2JzcD+L
-	tsicqbQfuj0n6ThP2tdf/uIbEh9Nr5dnzd9UFsOywPGULI+MCCF3Bpl3QeynYT3FYz3B
-	VNIeB9M4rdnpocguwAI/gWEF2luFpL/sM3UygP/pBSTcjTHNtdXqDNUbi3ERgp/mojVk
-	FmbQzxWMmKg0C++fnNVSAxKjdRb7jQBLlMG0VCLIqtPMUpfcCzjk22NbJjvN7BZSw9u+
-	BruZ39LoOCA/wWShCy7h55WJpE4gS38Pz1ZBmKAXUldPAVMXsH16iHs0hHAynUWXD3yg
-	zq6w==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=JZiD85a07MeGa/4LrKK+c3+EjqqcZk5RQ18AaJVJuto=;
+	b=cRKmwGBfMGoLFReo04cSadwwGmVBaTlI5Y1bAJIZOlvSUj5RV1C/3aV8hcV24PgOdw
+	T3I9bij/j8dTDEGeYH5rbvTn6qj/o1ShSAPBepFhG45Q8gwHIfZ2aGtK9PwIaY9sZAgE
+	SBNVcpnjUfbFqZ4jWtapYvAOacPOFEL+v9aWrUY5zl4iPsJhUwLvovkotQC848NpbwMt
+	e79XrB0IGBuYsQhX+qgBCyF7ILSG63HCpii1jF1/IVDNRkgY3VqCpPxByaCFo6+I/epb
+	xuXSQli1dtYltT5GozYjjQghainHejUXlsAbAW/A7yEgfliGtWeIBkkmpeh1r8mVA/I1
+	GM0Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=o6O7nUSQvf6srFNgH8sX5DnrK8XOLIyhEVTTJy/NrH0=;
-	b=mLzUFKj8M72iXVLfMShuOOyez1QyrP5oqUO+42SlOpVCosyWd+tJUp8nN6tfG1swZI
-	2NxJlap9oSGug5kZvrmiWQrlv2tnSdLl5gt3sIwsFIM4S342PZln0iKBkG7X2qcwJmO0
-	1GAgq/FS6wsqSiQAjes7jZv55YlgLcxQqSC8vk/sgEOwn6KL8QpdMhEXdVCBQn7LvQGn
-	OELHQs23JXCrsy6jzBTpaBliFsjaWV4xx4+wSTOGT+XcE5n/5tTVSvfvCpR5AKOg7Tdl
-	nFPhbfdZxNTWxMOZ68YMsu8XZelNgPqAbmT4SwoAZxKsl+Gv/kOwXLKEUlln5hyRk8xi
-	IPHw==
-X-Gm-Message-State: AIVw111rFjo6QZDAZh7RPOEaTS+WAM6bdp4nvGIsSj2mpiq2tBWvT0qS
-	syB0B/rE/lqRCDTy
-X-Received: by 10.80.241.71 with SMTP id z7mr3298567edl.182.1499791498999;
-	Tue, 11 Jul 2017 09:44:58 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=JZiD85a07MeGa/4LrKK+c3+EjqqcZk5RQ18AaJVJuto=;
+	b=sVzDO/hirOqhz/S9IhQdLm7Td3msip9kcFMC6yYbtAdLTyWofsZcg/VGrUvATETROM
+	oWiqN74+/9r+IUw6ISVpvmcokK2IYx5A/fvl5REjHkzc/lAeIw7Hl6JeiVI40Kwj20bQ
+	SsKU0lFqJxx5vp+tJehJrup/XW+MFBe7wShI9CXP4mDRn+/PR+FM6m3G05G+ATz10mpg
+	DZI0WwVCH0+uKsIF2AIP/bXSdMBt7Jw+8r+7UJMz6WEwvfSF/Emmic7QelIdlOzXOv9X
+	OvayyVU/ZnhYXMWRBLxdHwoR4esIs+PZPEGh/xqqUKH/Arz4KNje9SPosTjiY5ryx8ng
+	kxxQ==
+X-Gm-Message-State: AIVw113A3STiNUFciwf0Xg3bq0z2bkPfqwP/LNpv9FXBbhWvVX0OUNsA
+	G40KXeuXYca9wGyw
+X-Received: by 10.80.175.198 with SMTP id h64mr3222671edd.131.1499791503796;
+	Tue, 11 Jul 2017 09:45:03 -0700 (PDT)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([27.191.203.112]) by smtp.gmail.com with ESMTPSA id
-	p19sm1224952eda.15.2017.07.11.09.44.56
+	p19sm1224952eda.15.2017.07.11.09.45.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 11 Jul 2017 09:44:58 -0700 (PDT)
+	Tue, 11 Jul 2017 09:45:03 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 18:44:30 +0200
-Message-Id: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
+Date: Tue, 11 Jul 2017 18:44:31 +0200
+Message-Id: <1499791478-2407-2-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe/meta-perl] [PATCH 0/8] po4a: add full functionalities
+In-Reply-To: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
+References: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
+Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
+Subject: [meta-oe/meta-perl] [PATCH 1/8] libsombok3: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,47 +57,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 16:44:59 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 16:45:03 -0000
 
-From: Ming Liu <liu.ming50@gmail.com>
+From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-This patch series mainly aim to let po4a and po4a-native work with
-full functionalities by adding the following dependencies to its
-DEPENDS and RRECOMMENDS_${PN}:
-- libtext-wrapi18n-perl
-- libterm-readkey-perl
-- liblocale-gettext-perl
-- libunicode-linebreak-perl
+Sombok - Unicode Text Segmentation Package.
 
-Ming Liu (8):
-  libsombok3: add recipe
-  libmime-charset-perl: add recipe
-  libterm-readkey-perl: add recipe
-  liblocale-gettext-perl: add recipe
-  libtext-charwidth-perl: add recipe
-  libtext-wrapi18n-perl: add recipe
-  libunicode-linebreak-perl: add recipe
-  po4a: add full functionalities
+It's being depended by libunicode-linebreak-perl.
 
- ...01-configure.ac-fix-cross-compiling-issue.patch | 31 +++++++++++++++++++
- .../libsombok3/libsombok3_2.4.0.bb                 | 25 +++++++++++++++
- .../liblocale/liblocale-gettext-perl_1.07.bb       | 21 +++++++++++++
- .../libmime/libmime-charset-perl_1.012.2.bb        | 19 ++++++++++++
- .../libterm/libterm-readkey-perl_2.37.bb           | 36 ++++++++++++++++++++++
- .../libtext/libtext-charwidth-perl_0.04.bb         | 27 ++++++++++++++++
- .../libtext/libtext-wrapi18n-perl_0.06.bb          | 32 +++++++++++++++++++
- .../libunicode-linebreak-perl_2017.004.bb          | 26 ++++++++++++++++
- meta-perl/recipes-perl/po4a/po4a_0.49.bb           | 17 ++++++++--
- 9 files changed, 232 insertions(+), 2 deletions(-)
+Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+---
+ ...01-configure.ac-fix-cross-compiling-issue.patch | 31 ++++++++++++++++++++++
+ .../libsombok3/libsombok3_2.4.0.bb                 | 25 +++++++++++++++++
+ 2 files changed, 56 insertions(+)
  create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
  create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
- create mode 100644 meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
- create mode 100644 meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
- create mode 100644 meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb
- create mode 100644 meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
- create mode 100644 meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
- create mode 100644 meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb
 
+diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
+new file mode 100644
+index 0000000..1a69287
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
+@@ -0,0 +1,31 @@
++From 9c2ffe825e28d63e2a771135f297e8ffac0dbe81 Mon Sep 17 00:00:00 2001
++From: Ming Liu <liu.ming50@gmail.com>
++Date: Tue, 11 Jul 2017 14:35:30 +0200
++Subject: [PATCH] configure.ac: fix cross-compiling issue
++
++Avoid checking for file existence when cross compiling.
++
++Upstream-Status: Inappropriate [embedded specific]
++
++Signed-off-by: Ming Liu <liu.ming50@gmail.com>
++---
++ configure.ac | 3 ---
++ 1 file changed, 3 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 9978852..06b16e3 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -120,9 +120,6 @@ AC_ARG_WITH(unicode-version,
++   AC_HELP_STRING(--with-unicode-version=VERSION,
++   [version of Unicode Standard @<:@default=current version@:>@]),
++   UNICODE_VERSION=$withval,UNICODE_VERSION=$DEFAULT_UNICODE_VERSION)
++-AC_CHECK_FILE([lib/$UNICODE_VERSION.c],
++-  AC_MSG_RESULT($UNICODE_VERSION),
++-  AC_MSG_ERROR(Unknown Unicode version $UNICODE_VERSION.))
++ AC_SUBST(UNICODE_VERSION)
++ 
++ # check if code to debug memory allocation is enabled.
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+new file mode 100644
+index 0000000..b83e86a
+--- /dev/null
++++ b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+@@ -0,0 +1,25 @@
++SUMMARY = "Sombok - Unicode Text Segmentation Package."
++DESCRIPTION = "Sombok library package performs Line Breaking Algorithm described in \
++Unicode Standard Annex #14 (UAX #14).  East_Asian_Width informative \
++properties defined by Annex #11 (UAX #11) may be concerned to determin \
++breaking positions.  This package also implements "default" Grapheme \
++Cluster segmentation described in Annex #29 (UAX #29)."
++LICENSE = "Artistic-1.0 | GPLv1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
++
++SRC_URI = "git://github.com/hatukanezumi/sombok.git;protocol=https \
++           file://0001-configure.ac-fix-cross-compiling-issue.patch \
++          "
++
++inherit autotools pkgconfig
++
++# sombok-2.4.0
++SRCREV = "0098d85a037ef5c99a648a3669a077781a45e8cc"
++
++S = "${WORKDIR}/git"
++B = "${S}"
++
++# Disable libthai support
++EXTRA_OECONF = "--disable-libthai"
++
++BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
