@@ -1,50 +1,46 @@
-Return-Path: <h4nn35.work@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C0BFD77EA6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E273877EA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 08:28:27 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id x23so30554532wrb.0
+	Tue, 11 Jul 2017 08:58:45 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id g21so13427603lfk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 01:28:29 -0700 (PDT)
+	Tue, 11 Jul 2017 01:58:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=ytRezi19J0sA6EXOPNk0mB0GHx+w6cT3DSf7oKQgnxM=;
-	b=iqVC6bR3mqgJea2YRedYZ31/TFYSP+TpP6vtbTz0tX5fyitp1vb0NWVMl++NCFct+H
-	8Mfbk8Rjq3qNKUbzWSb0tP4xCrjJ9rqLaSTr0ZpFc+Kw8yxpSu+zfTLoDWAihRgsxkXl
-	uImTdY1kPX4gwj40Wh1tEGdEdK9uHt2CIV919gBronANCEMzCSIoVnvW+3dPxzTyeN2r
-	kwyQrRoANPdfJ/R5QYLB4Ak0X2tisilIBshGi+t/xE4lsj1TGQEOY7GY+AR2h9xAB8T8
-	N1prD2sztX6OvbOqnYW6ylwt5+pM8VMvQh+hW+6FsWwtpe8NHKHrHV9lsIKcR2i4D29u
-	li9A==
+	h=from:to:cc:subject:date:message-id;
+	bh=ufYDgcruFK12Lf5iGmSi1MouUiep5VyAEh2L2Fx7pB8=;
+	b=auSlcy4vdX8NhtqJakm7wV7OOrRo6pI0imJdEpkVGbHplmqkQqHsOBh/+d1UX8J0sz
+	g3WPxCW2D1tN2J5v2j9Ee1z46juZ/4jNlqU9v27GQCBE/khRH/XDeX3Uw8bXOGdHpTr1
+	xKVU5yFLx8KPoGix6z48mg4oExOQ0sd3vOsPsvq3aO0rpZOXd+0U1tPWpxD3PcM5rz8J
+	aJg6/ZJfKO6+sn9G5bczWYaV/mXPbasMR/EMaWJHyl7Epuc3xmvDlqAgbfoKAXIkahXJ
+	5E866Jxj+53L2FCfpVIeTWR0D0E6w/lAB2VitqH+4Lbf9DTTx/gp/WDFV1X4yy1wQiRd
+	6P2g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=ytRezi19J0sA6EXOPNk0mB0GHx+w6cT3DSf7oKQgnxM=;
-	b=B0laAAMOv7oK4WuhhxhQT9FA0NuzRWcoUSXHnGbvc5h546ZWymYz6BL2Fj9oZ04f96
-	xI38QMTl0iyNiyEKhxDFEUQo6fRFWhG3KMfjn8IkFurl/EXDxzFK0hUYeT+R0D3DFQMf
-	/H7/eNjYgpJ++rvnkp/5I7dVd2ttdweVtL5IZNPOco32+nElC1RWn2x473o0yvXIJHuT
-	U64oE0vEisO2fzQCMazibOD7ZBD/TxongW6SNezlRkn2U90mn7VqA2IvJSdAN95U9WWm
-	tAzUkS18R7cfcwbNv2JQz04ZE8IG+kGmnIfHj1vSOomB+B03NexJpa3pXFBrECB94byP
-	asLg==
-X-Gm-Message-State: AIVw111PDSrR4LBhLdoW2l5bc19seUEQahr4ziR6XZqKl3o5MkTL8112
-	BIX3IhAp/ArYa0AsneVR1ZInYcGMgA==
-X-Received: by 10.223.136.11 with SMTP id d11mr8829387wrd.73.1499761708426;
-	Tue, 11 Jul 2017 01:28:28 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.63.69 with HTTP; Tue, 11 Jul 2017 01:28:27 -0700 (PDT)
-In-Reply-To: <CA+chaQeFbZrhDVUbRZN4Bu35UjNrVheoLq+viXdEvUUrYyJJ5Q@mail.gmail.com>
-References: <20170706093039.30435-1-johannes.pointner@br-automation.com>
-	<CAD4b0_LYeFonQzv7bqTZxO=vq0fwcHtEw49ZDL_vDuki-UXH4w@mail.gmail.com>
-	<CAHvQdo3L34KbWREUuVAn+SqrSo6Q3UMwCvSKiX=4Va6s9htFQw@mail.gmail.com>
-	<CA+chaQeFbZrhDVUbRZN4Bu35UjNrVheoLq+viXdEvUUrYyJJ5Q@mail.gmail.com>
-From: Johannes Pointner <h4nn35.work@gmail.com>
-Date: Tue, 11 Jul 2017 10:28:27 +0200
-Message-ID: <CAHvQdo04jut3Jj9tydQUh5j9t8jXCAMhp6+qq+fJ0WfEA_ec+A@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libtinyxml2: upgrade to 5.0.1
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ufYDgcruFK12Lf5iGmSi1MouUiep5VyAEh2L2Fx7pB8=;
+	b=A9sxiKw+nB+EQbfo/m17mRZuXgtDuJK01eD6X3OI/WCIoC1zJ9xrTT8CCgSWSyZcYG
+	5K+7pyNgBzMGjvrX7mZw2TS0YDM+5pgfwYGFjLpIcTq2ufZ/5L9o9K4X7dUXWKF2RAy4
+	aT7Yn6SXyWpDLILLMgrSMjPlDu3LbUutWKYkTjUYQnkSX3NsobyfIyYGfXB+nwmVNeM+
+	QP9fzvDAazUhyHjoBkaUZVJdnFSJQVRFQTQNn5Ppa0Gi1+ycorWu7/r69IsPPglGA/7v
+	VBzMoOUJtoS+EJDdK+OF8IyIecCFhyxjA3tklhP125W5ZXrCxTJllajVROvtD1Ist/Fq
+	BsaQ==
+X-Gm-Message-State: AIVw111WVER6OA47uvws7INTQSaPHqoBaEBd4To7MbxtBXuzP0ZU9m2D
+	4KdhTE+rasipsAZR
+X-Received: by 10.28.232.141 with SMTP id f13mr10400056wmi.59.1499763526160;
+	Tue, 11 Jul 2017 01:58:46 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	k45sm9532187wrk.45.2017.07.11.01.58.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Jul 2017 01:58:45 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Jul 2017 10:59:22 +0200
+Message-Id: <20170711085922.21020-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [PATCH][meta-multimedia] kodi: Fix build on arm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,105 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 08:28:28 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Jul 2017 08:58:46 -0000
 
-Thx Martin,
-this does the trick.
-I'll send a v2
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-2017-07-11 9:06 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
-> Just FILES_${PN}-dev +=3D "${libdir}/cmake/" should be enough.
->
-> On Tue, Jul 11, 2017 at 8:24 AM, Johannes Pointner <h4nn35.work@gmail.com=
->
-> wrote:
->>
->> 2017-07-11 8:13 GMT+02:00 Maciej Borz=C4=99cki <maciej.borzecki@rndity.c=
-om>:
->> > On Thu, Jul 6, 2017 at 11:30 AM, Johannes Pointner
->> > <johannes.pointner@br-automation.com> wrote:
->> >> Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com=
->
->> >> ---
->> >>  .../{libtinyxml2_4.0.1.bb =3D> libtinyxml2_5.0.1.bb}          | 13
->> >> ++++++++++++-
->> >>  1 file changed, 12 insertions(+), 1 deletion(-)
->> >>  rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_4.0.1.bb =3D=
->
->> >> libtinyxml2_5.0.1.bb} (63%)
->> >>
->> >> diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
->> >> b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
->> >> similarity index 63%
->> >> rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
->> >> rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
->> >> index 3a6659815..edf836814 100644
->> >> --- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
->> >> +++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
->> >> @@ -6,10 +6,21 @@ LIC_FILES_CHKSUM =3D
->> >> "file://tinyxml2.cpp;endline=3D22;md5=3Dc19221dbd8a66ad3090462af4
->> >>
->> >>  SRC_URI =3D "git://github.com/leethomason/tinyxml2.git"
->> >>
->> >> -SRCREV =3D "74d44acb176f8510abf28ee0a70961eb26631988"
->> >> +SRCREV =3D "37bc3aca429f0164adf68c23444540b4a24b5778"
->> >>
->> >>  S =3D "${WORKDIR}/git"
->> >>
->> >>  inherit cmake
->> >>
->> >> +FILES_${PN} =3D " \
->> >> +    ${libdir}/lib*${SOLIBS} \
->> >> +    ${includedir}/* \
->> >
->> > pretty sure whatever is in ${includedir} it should be a part of -dev
->> > package.
->> You are right.
->> But this would still leave us with this rule:
->> FILES_${PN}-dev =3D " \
->>     ${includedir}/* \
->>     ${libdir}/lib*${SOLIBSDEV} \
->>     ${libdir}/cmake/* \
->>     ${libdir}/pkgconfig/* \
->>     "
->> Is this OK?
->> >
->> >> +    "
->> >> +
->> >> +FILES_${PN}-dev =3D " \
->> >> +    ${libdir}/lib*${SOLIBSDEV} \
->> >> +    ${libdir}/cmake/* \
->> >> +    ${libdir}/pkgconfig/* \
->> >> +    "
->> >> +
->> >>  BBCLASSEXTEND =3D "native"
->> >> --
->> >> 2.13.2
->> >>
->> >>
->> >> --
->> >> _______________________________________________
->> >> Openembedded-devel mailing list
->> >> Openembedded-devel@lists.openembedded.org
->> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> >
->> >
->> >
->> > --
->> > Maciej Borzecki
->> > RnDity
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
->
+diff --git a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+index 0b39116a1..5a9fa9801 100644
+--- a/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
++++ b/meta-multimedia/recipes-mediacenter/kodi/kodi_17.bb
+@@ -134,6 +134,7 @@ BUILD_OPTIMIZATION = "${FULL_OPTIMIZATION}"
+ LDFLAGS_append_mips = " -latomic"
+ LDFLAGS_append_mipsel = " -latomic"
+ LDFLAGS_append_powerpc = " -latomic"
++LDFLAGS_append_arm = " -latomic"
+ 
+ EXTRA_OECONF_append = " LIBTOOL=${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool"
+ 
+-- 
+2.13.2
+
 
