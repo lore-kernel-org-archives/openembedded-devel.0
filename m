@@ -1,48 +1,27 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EE12780B8
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id D79D97198D
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 21:02:04 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id z45so1044591wrb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 14:02:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=nVGm5Kh8gsV1VZnzdMOMjc2YCYiUyaUmXq/krKyrpuE=;
-	b=cmB9J+UnnZOsc8Z2JGDEZ/Y8kFGpW1Taq34DpGRLABRXqiTN9Mp0kdhafVpDj4uKkB
-	0u79dxhU+4nUzJEyhZODG+oMXDGnJ7lGWVX3jvUJCZMH0ryEXmv6smPvrEgn9Pf7/SeI
-	eBnS+JLSH85dJ/I8QXMPzcw75w92/VkPCMvfDC1Gws7x2tiIJvONzUbbUsoh8IXzKcfd
-	BS7PQkI5VzsbG2HEB6FaA+vM+9OQfA0IG5AIw85jZeATcaTy/+gNKkcDM/AkN4SF7hxr
-	CVuxpkY6EPZaIxOAK9OwISk75TaRTlh81d2fDolfUtgbdvvPpkw+zcE/EaFPyGtF3OOo
-	c89g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=nVGm5Kh8gsV1VZnzdMOMjc2YCYiUyaUmXq/krKyrpuE=;
-	b=BOdxsWqEn1jxFupFwBeL72gIu0d1Xr/yg/HAR4pRbQuI1zUVoGzh70hEBnitXVK0x+
-	FBiD2c+Fdc/dpw2qJXUO+zdnYZGAK1jENH8VpOiFD1pchyDlHWF5f347yVUdTi343Ivq
-	7An55gtY75nMyx9JPUHha4ilZtYC66Tz7LuzfYpuktQMN2kp7KND7mOcPEYoH2aOvvnI
-	TjgQNx0xhscFxNqOYgvuTCUOurYzvFAMRkyORF8MFNKiqNwUrwjlf4Kn5YaLP36JplDZ
-	ovNNWNy+vt02ryn09/nuj2LDRk14U2OCWYOK3HKVnrfZa74rGd7/8o3h1YHXy0XWSKgm
-	uEpQ==
-X-Gm-Message-State: AIVw113p+H8YcnK05RkYzb0ATE02cm9g+LLZe9PZ8r0RodK1qMjQd2uW
-	00EIeRqzxFOKaYLABUJh8BIW+9lt4Pya
-X-Received: by 10.223.172.15 with SMTP id v15mr1013918wrc.84.1499806925599;
-	Tue, 11 Jul 2017 14:02:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.176.170 with HTTP; Tue, 11 Jul 2017 14:02:05 -0700 (PDT)
-In-Reply-To: <20170711200829.xbjjqrvfld3ejpic@kozik-lap>
-References: <20170709162934.21355-1-krzk@kernel.org>
-	<CAJ86T=XFYb5NJD2VxsVra1KbR0eT9RhkPMefu8eNLWU3N9XhiA@mail.gmail.com>
-	<20170711200829.xbjjqrvfld3ejpic@kozik-lap>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 11 Jul 2017 14:02:05 -0700
-Message-ID: <CAJ86T=WaAXxV9JqyoBGKhRzKtdzuYB15Qy7vXeo63xwsLL=VGA@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] recipes-utils: Add recipe for udevil
+	Tue, 11 Jul 2017 22:32:07 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	11 Jul 2017 15:32:08 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.40,347,1496127600"; d="scan'208";a="110177691"
+Received: from ttorling-mac01.jf.intel.com ([10.24.14.216])
+	by orsmga002.jf.intel.com with ESMTP; 11 Jul 2017 15:32:07 -0700
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+In-Reply-To: <1499791478-2407-2-git-send-email-liu.ming50@gmail.com>
+Date: Tue, 11 Jul 2017 15:32:06 -0700
+Message-Id: <C483BBAB-ADAB-4944-8339-192A9A934C65@linux.intel.com>
+References: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
+	<1499791478-2407-2-git-send-email-liu.ming50@gmail.com>
+To: liu.ming50@gmail.com
+X-Mailer: Apple Mail (2.3273)
+Cc: Ming Liu <peter.x.liu@external.atlascopco.com>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe/meta-perl] [PATCH 1/8] libsombok3: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,129 +34,126 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 21:02:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 11 Jul 2017 22:32:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 11, 2017 at 1:08 PM, Krzysztof Kozlowski <krzk@kernel.org> wrote:
-> On Tue, Jul 11, 2017 at 12:33:27PM -0700, Andre McCurdy wrote:
->> On Sun, Jul 9, 2017 at 9:29 AM, Krzysztof Kozlowski <krzk@kernel.org> wrote:
->> > udevil is a command line Linux program which mounts and unmounts
->> > removable devices without a password.
->> >
->> > Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
->> > ---
->> >  .../0001-udevil-0.4.3-fix-compile-with-gcc6.patch  | 12 ++++++++++
->> >  .../recipes-utils/udevil/udevil_0.4.4.bb           | 28 ++++++++++++++++++++++
->> >  2 files changed, 40 insertions(+)
->> >  create mode 100644 meta-filesystems/recipes-utils/udevil/files/0001-udevil-0.4.3-fix-compile-with-gcc6.patch
->> >  create mode 100644 meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
->> >
->> > diff --git a/meta-filesystems/recipes-utils/udevil/files/0001-udevil-0.4.3-fix-compile-with-gcc6.patch b/meta-filesystems/recipes-utils/udevil/files/0001-udevil-0.4.3-fix-compile-with-gcc6.patch
->> > new file mode 100644
->> > index 000000000000..355e93a37b3b
->> > --- /dev/null
->> > +++ b/meta-filesystems/recipes-utils/udevil/files/0001-udevil-0.4.3-fix-compile-with-gcc6.patch
->> > @@ -0,0 +1,12 @@
->> > +Fix compilation with GCC6
->> > +
->> > +--- a/src/device-info.c        2013-12-09 14:59:27.000000000 +0100
->> > ++++ b/src/device-info.c        2017-03-13 07:06:25.506666680 +0100
->> > +@@ -3,6 +3,7 @@
->> > +  * contains code excerpts from udisks v1.0.4
->> > + ************************************************************************** */
->> > +
->> > ++#include <sys/stat.h>
->> > + #include "device-info.h"
->> > +
->> > + static char *
->> > diff --git a/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb b/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
->> > new file mode 100644
->> > index 000000000000..4ad4a09ed717
->> > --- /dev/null
->> > +++ b/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
->> > @@ -0,0 +1,28 @@
->> > +SUMMARY = "A command line Linux program which mounts and unmounts removable devices"
->> > +HOMEPAGE = "http://ignorantguru.github.io/udevil/"
->> > +
->> > +DEPENDS = "glib-2.0 \
->> > +           glib-2.0-native \
->> > +           intltool-native \
->> > +           udev \
->> > +"
->> > +RDEPENDS_${PN} = "glib-2.0 \
->> > +                  udev \
->>
->> Runtime dependencies on libraries are detected automatically so
->> explicitly setting RDEPENDS like this shouldn't be required.
->
-> I'll remove glib then.
->
->>
->> > +"
->> > +
->> > +LICENSE = "GPL-3.0"
->> > +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->> > +
->> > +inherit autotools pkgconfig systemd
->> > +
->> > +SRC_URI = "https://github.com/IgnorantGuru/udevil/raw/pkg/${PV}/udevil-${PV}.tar.xz \
->> > +           file://0001-udevil-0.4.3-fix-compile-with-gcc6.patch \
->> > +"
->> > +
->> > +SRC_URI[md5sum] = "dc1c489b603a0500a04dc7e1805ac1d9"
->> > +SRC_URI[sha256sum] = "ce8c51fd4d589cda7be56e75b42188deeb258c66fc911a9b3a70a3945c157739"
->> > +
->> > +SYSTEMD_SERVICE_${PN} = "devmon@.service"
->> > +SYSTEMD_AUTO_ENABLE = "disable"
->> > +
->> > +FILES_${PN} += " ${libdir}/systemd/system/devmon@.service"
->>
->> Setting SYSTEMD_SERVICE_${PN} should be enough to ensure that the
->> service file gets packaged correctly, so explicitly adding it to
->> FILES_${PN} like this shouldn't be required.
->
-> Without it, bitbake complains:
-> WARNING: udevil-0.4.4-r0 do_package: QA Issue: udevil: Files/directories were installed but not shipped in any package:
->   /usr/lib
->   /usr/lib/systemd
->   /usr/lib/systemd/system
->   /usr/lib/systemd/system/devmon@.service
->
-> I wonder if this is related to differences in systemd in my build
-> setting which are leading to error:
-> http://errors.yoctoproject.org/Errors/Details/147258/
 
-It looks like udevil installs the service file in a hardcoded path
-under ${libdir} rather than respecting ${systemd_unitdir} as defined
-by the distro:
+> On Jul 11, 2017, at 9:44 AM, liu.ming50@gmail.com wrote:
+>=20
+> From: Ming Liu <peter.x.liu@external.atlascopco.com>
+>=20
+> Sombok - Unicode Text Segmentation Package.
+>=20
+> It's being depended by libunicode-linebreak-perl.
+>=20
+> Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+> ---
+> ...01-configure.ac-fix-cross-compiling-issue.patch | 31 =
+++++++++++++++++++++++
+> .../libsombok3/libsombok3_2.4.0.bb                 | 25 =
++++++++++++++++++
+> 2 files changed, 56 insertions(+)
+> create mode 100644 =
+meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross=
+-compiling-issue.patch
+> create mode 100644 =
+meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
 
-  https://github.com/IgnorantGuru/udevil/blob/master/etc/Makefile.am
-  https://github.com/IgnorantGuru/udevil/tree/master/etc/systemd
+This is not following Debian naming, it should be =
+libsombok3-perl_2.4.0.bb
 
-so some patching or sed fix-ups and moving files in do_install() is
-going to be required to cover cases where the two don't align.
+>=20
+> diff --git =
+a/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cro=
+ss-compiling-issue.patch =
+b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cro=
+ss-compiling-issue.patch
+> new file mode 100644
+> index 0000000..1a69287
+> --- /dev/null
+> +++ =
+b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cro=
+ss-compiling-issue.patch
+> @@ -0,0 +1,31 @@
+> +=46rom 9c2ffe825e28d63e2a771135f297e8ffac0dbe81 Mon Sep 17 00:00:00 =
+2001
+> +From: Ming Liu <liu.ming50@gmail.com>
+> +Date: Tue, 11 Jul 2017 14:35:30 +0200
+> +Subject: [PATCH] configure.ac: fix cross-compiling issue
+> +
+> +Avoid checking for file existence when cross compiling.
+> +
+> +Upstream-Status: Inappropriate [embedded specific]
+> +
+> +Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+> +---
+> + configure.ac | 3 ---
+> + 1 file changed, 3 deletions(-)
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 9978852..06b16e3 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -120,9 +120,6 @@ AC_ARG_WITH(unicode-version,
+> +   AC_HELP_STRING(--with-unicode-version=3DVERSION,
+> +   [version of Unicode Standard @<:@default=3Dcurrent version@:>@]),
+> +   UNICODE_VERSION=3D$withval,UNICODE_VERSION=3D$DEFAULT_UNICODE_VERSIO=
+N)
+> +-AC_CHECK_FILE([lib/$UNICODE_VERSION.c],
+> +-  AC_MSG_RESULT($UNICODE_VERSION),
+> +-  AC_MSG_ERROR(Unknown Unicode version $UNICODE_VERSION.))
+> + AC_SUBST(UNICODE_VERSION)
+> +=20
+> + # check if code to debug memory allocation is enabled.
+> +--=20
+> +2.7.4
+> +
+> diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb =
+b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+> new file mode 100644
+> index 0000000..b83e86a
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
 
-> I tried DISTRO=poky and DISTRO=nodistro and I cannot reproduce error
-> above (with FILES both are working fine).
+> @@ -0,0 +1,25 @@
+> +SUMMARY =3D "Sombok - Unicode Text Segmentation Package."
+> +DESCRIPTION =3D "Sombok library package performs Line Breaking =
+Algorithm described in \
+> +Unicode Standard Annex #14 (UAX #14).  East_Asian_Width informative \
+> +properties defined by Annex #11 (UAX #11) may be concerned to =
+determin \
+> +breaking positions.  This package also implements "default" Grapheme =
+\
+> +Cluster segmentation described in Annex #29 (UAX #29)."
+> +LICENSE =3D "Artistic-1.0 | GPLv1+"
+> +LIC_FILES_CHKSUM =3D =
+"file://COPYING;md5=3D5b122a36d0f6dc55279a0ebc69f3c60b"
+> +
+> +SRC_URI =3D "git://github.com/hatukanezumi/sombok.git;protocol=3Dhttps =
+\
+> +           file://0001-configure.ac-fix-cross-compiling-issue.patch \
+> +          "
+> +
+> +inherit autotools pkgconfig
+> +
+> +# sombok-2.4.0
+> +SRCREV =3D "0098d85a037ef5c99a648a3669a077781a45e8cc"
+> +
+> +S =3D "${WORKDIR}/git"
+> +B =3D "${S}"
+> +
+> +# Disable libthai support
+> +EXTRA_OECONF =3D "--disable-libthai"
+> +
+> +BBCLASSEXTEND =3D "native"
+> --=20
+> 2.7.4
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-If you look in meta/classes/systemd.bbclass ->
-systemd_check_services() you should see the paths which are searched
-to find the service files defined via SYSTEMD_SERVICE_${PN}. From
-there you should be able to determine why your build appears to find
-the service file somewhere in these search paths and doesn't hit the
-fatal error.
-
-> Other build settings are:
-> BB_VERSION        = "1.34.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "ubuntu-17.04"
-> TARGET_SYS        = "i586-oe-linux"
-> MACHINE           = "qemux86"
-> DISTRO            = "nodistro"
-> DISTRO_VERSION    = "nodistro.0"
-> TUNE_FEATURES     = "m32 i586"
->
-> Best regards,
-> Krzysztof
->
 
