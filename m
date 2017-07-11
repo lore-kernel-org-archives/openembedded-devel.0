@@ -1,57 +1,47 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mail-it0-f45.google.com (mail-it0-f45.google.com
-	[209.85.214.45])
-	by mail.openembedded.org (Postfix) with ESMTP id DA7D2606B2
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
+	[209.85.161.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 61000606B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 07:03:00 +0000 (UTC)
-Received: by mail-it0-f45.google.com with SMTP id m84so10596098ita.0
+	Tue, 11 Jul 2017 07:04:56 +0000 (UTC)
+Received: by mail-yw0-f194.google.com with SMTP id l21so6608404ywb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 00:03:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	Tue, 11 Jul 2017 00:04:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mzwh8hfCMW4vx2HYSa1hb/ZfHClKjSR4G3YHiDaPVdA=;
-	b=aVddm1+q7JwFywlHADtGQkTkiZeHy8JfFrqvAQRlGMDKEQMMxecBI62TPb01PB5YKr
-	TpnYgMWf9zp5E0wJ9sqKlHDx3cPBl5oRtM/e8g3xJxinB7Ko/1A0jcihP2eUFsE4A06Q
-	exnOEcwqN5iuH0CrzKDEN95B7eoD8usxTHga/n/NfnBJWoNWI5fsCNsLzThpgTmMUVky
-	n7IQACjw4U8sU7KmtsaRtG985Y1ns6IXbqt3rY8H3AP/6VOR14hLLRe+yj4ooMw3/wrK
-	bsvMtFwZmvhYcgUds4i9d17Gh5Dio7vekFlQACJQwl2p3A6T9RNLXxW/RxGofvhaMRNy
-	S2kw==
+	:cc; bh=L+YtSnm8oL5gh4J2AN+mNH6YlCiagZfSNLAMqIqTwRY=;
+	b=UKj3MkqNRzopP6rZ7wHoAKf4ZeSjJ1WmAHjr/72/u3avqyuZIH1yWALyrgrn74YJBS
+	3CdgJiWZzEcODWX43/Z+rWQXa/ShDz6GS0JvEBlygZVdzbmQqF3bVpnVny2hhUWgOhms
+	+rcYnnnva61tWTIsYKDs/YFaIemGxppBHaptrtqR4hiKmCQZKilyV2gtkNw5IXwJfVh0
+	ySnTopX+/A5Xu1jxMVO7wOeBTKwiKhpW8wnMG8mJwN16aXZdps6jWsiiCdMv1Xi+ZOoY
+	MS+BNJtSUNaveCNGHAoYpRxOMpQfaSRxvO9NuFIeWYi6/7D4gYSHHPZOMIYaFJ8tHLNA
+	ZGjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=mzwh8hfCMW4vx2HYSa1hb/ZfHClKjSR4G3YHiDaPVdA=;
-	b=UZgPA7IjUXwsO8FdsGgQPaOt+9RpyVKZo4nwvxukqjME+weH+dLEt2tNWiVWdoNwNS
-	UqTSDIyB3Mij9OJBgApmGvdR751Oknm6y/6oWlVrEHNUKC0Kq8smr4iqFV4MPer9vCq1
-	3S6S3I2BE3z/1Zllaetg0kuHu0D7chWlkLmbq3k3vBOx+ObZ2b0ZWmZrCWQzqlVnZRyq
-	lHjYEzzDyyoEQ2lzhU1TGLavLMuDdUx6BnzPZ8cfFomXg8GPYRs0+/1QmbPuEARh3hHC
-	9FgoQvIVDjqS4OA1zHLFEtlsl6SpWfq/RIf4JlTf4hLgNLV+Edav2fWvmFoI4ew36FKY
-	FMIw==
-X-Gm-Message-State: AIVw110ILrDtBhxUpaz1tDjms6VvbvQzqMA0m6/T4JAvHJV/PNIOgRHP
-	pHMYz24jaaihdfhpgLCv0qxTocZYuv/D
-X-Received: by 10.107.37.141 with SMTP id l135mr6883217iol.146.1499756581847; 
-	Tue, 11 Jul 2017 00:03:01 -0700 (PDT)
+	bh=L+YtSnm8oL5gh4J2AN+mNH6YlCiagZfSNLAMqIqTwRY=;
+	b=Flwovv4yyLZWq09kyjb2Bh8TyEFTC6XDgWFDqsB+DX5QwAva/2G8hTuRlGSKBbeKvK
+	0RKW4C/ljsjohbj4AQAYNyemgXRhFTTz0Amau/hYixbCdcW/tSFR7SW7AqTDxfzn7dfW
+	MgFFxKN6HLN7f2Meb+HkUXIc5H06LMCadf+VWNnCqveHAlxkA+BNqpWxYoa59TYD0R5e
+	i81yDUlq0Q9qQ5ZYJ9FcGHbVRNpun+WTKWLUtEIn9f7UWpxaBSSX6EubMjeZRKLgf04e
+	+go5oF3NZNdvTHyxoJs3R0gm5qZK9lmma5qwmtps4jdCTP43AjqNTBpBoA34c+924ACs
+	oi0g==
+X-Gm-Message-State: AIVw1106vW6WHQibJ4PCcCHhWkGiINNm6Jylulw18kA6w+jPwHrxoCKG
+	mwtbwc7foZqeVy64IWdfdA2a2ao+VA==
+X-Received: by 10.13.230.12 with SMTP id p12mr3392031ywe.276.1499756698278;
+	Tue, 11 Jul 2017 00:04:58 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.44.87 with HTTP; Tue, 11 Jul 2017 00:02:31 -0700 (PDT)
-In-Reply-To: <CAMLuUbUdZKf9N2q5VQ_D3WHyysaxLw_kFU-JcKu6mQtW87kUQQ@mail.gmail.com>
-References: <CAMLuUbW8ZL3AcvU2ViMdMb-eyfihmFWFxEcsCMBfeZhm0kTAvg@mail.gmail.com>
-	<CAMLuUbX5OBj6Odz-K27CsWVtoQwoBsukpYfNA8bSzS-tzzv_Ag@mail.gmail.com>
-	<CAMLuUbXJ9YSf8bd8dQ3PsMZh3yZgf+Co1Q58sGUC551VaD3JkQ@mail.gmail.com>
-	<CAMLuUbUGL99KWx9k9JAS4p6eZAcuiNFrfd_KOnHeTnumWesqww@mail.gmail.com>
-	<CAMLuUbVA5+3oZf-skxQzTxusVTaRaHbuMH4p-pG-frt581YaYA@mail.gmail.com>
-	<CAMLuUbW9G8v+kEQPnPQSQLzSEQJBRhnE97BESr_3WYoJb56HOw@mail.gmail.com>
-	<CAMLuUbXQaXVxf5b2idB8ADEFkj7nBjD15+wvpdS5s4n6JroCpA@mail.gmail.com>
-	<CAMLuUbV8YtPa25s9v2JSyocAEsL7ZXy2H_GFs6jLRjtGn_6bFQ@mail.gmail.com>
-	<CAMLuUbX=eGPsHcSLDdSPNZxZZiQrWb6nE259DxsTv6nBMnTBQg@mail.gmail.com>
-	<CAMLuUbUdZKf9N2q5VQ_D3WHyysaxLw_kFU-JcKu6mQtW87kUQQ@mail.gmail.com>
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-Date: Tue, 11 Jul 2017 10:02:31 +0300
-Message-ID: <CAHiDW_FX1X5MPKHuu-TFO43pb_TA062dvRaOSYiE8C5-KYx_jw@mail.gmail.com>
-To: Brownson Obele <brownson4u@gmail.com>
+Received: by 10.37.77.4 with HTTP; Tue, 11 Jul 2017 00:04:57 -0700 (PDT)
+In-Reply-To: <20170710213324.43346-1-raj.khem@gmail.com>
+References: <20170710213324.43346-1-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 11 Jul 2017 09:04:57 +0200
+Message-ID: <CA+chaQcgnc_ADfO9+xYC7KZqvAoe9+B1VN=w3K+ftxVuefMkOw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] python-pygobject is not building and installing gi (gi.repository etc) modules on the target
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser][PATCH] chromium: Do not enforce gold as default linker
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,36 +54,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 07:03:02 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 07:04:57 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On 11 July 2017 at 00:49, Brownson Obele <brownson4u@gmail.com> wrote:
+USEGOLD
+or
+USE_GOLD
+?
 
->    1. The main python module i am trying to add to my yocto build image is
->    LDTP (https://github.com/ldtp/ldtp2). Using devtool, i have been able
-> to
->    create a recipe for it which seems to build without any errors. It is
-> only
->    when i try to run ldtp on the target that i see that certain
-> dependencies
->    are missing.
->    2. So i am currently stuck at creating recipes for the dependencies.
->    3. Right now, below is where i am stuck
->       1. When i run ldtp, it trys to do an import from gi.repository XXX
->       and then complains that there is no module called "*gi.repository*"
-> but
->       I have a recipe python-pygobject_2.28.3.bb which i expect to build
->       and then install (create) the gi folder and its contents on the
-> target.
->       Somehow this is not happenning and i'm stuck trying to find out why.
+On Mon, Jul 10, 2017 at 11:33 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Provide a knob USEGOLD however to enable it if desired
 >
-
-That version number sounds _very_ old.
-
-Which oe-core / meta-openembedded release are you on? Proper
-gobject-introspection support was added into oe-core early 2016, I think
-Krogoth was the first release where it really works (but please read the
-release notes, it's been a while).
-
-Jussi
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Denys Dmytriyenko <denis@denix.org>
+> ---
+>  recipes-browser/chromium/chromium-browser.inc | 7 ++++++-
+>  1 file changed, 6 insertions(+), 1 deletion(-)
+>
+> diff --git a/recipes-browser/chromium/chromium-browser.inc
+> b/recipes-browser/chromium/chromium-browser.inc
+> index 094a3d3..1e4fb1e 100644
+> --- a/recipes-browser/chromium/chromium-browser.inc
+> +++ b/recipes-browser/chromium/chromium-browser.inc
+> @@ -200,7 +200,12 @@ python add_ozone_wayland_patches() {
+>      d.appendVar('SRC_URI', ' ' + d.getVar('OZONE_WAYLAND_EXTRA_PATCHES',
+> False))
+>  }
+>
+> -USEGOLD ?= "-Dlinux_use_gold_flags=1"
+> +# uncomment below or set it in a bbappend if you want to use gold linker
+> +# to link chromium irrespective of system linker, gold speeds up linking
+> +# chromium ( 8mins to < 2mins on a decent xeon system)
+> +#
+> +#USEGOLD = "-Dlinux_use_gold_flags=1"
+> +USE_GOLD ??= ""
+>
+>  EXTRA_OEGYP = " \
+>         -Dangle_use_commit_id=0 \
+> --
+> 2.13.2
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
