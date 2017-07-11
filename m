@@ -1,38 +1,46 @@
-Return-Path: <johannes.pointner@br-automation.com>
-Received: from mail2.br-automation.com (mail.automotion.info [213.33.116.60])
-	by mail.openembedded.org (Postfix) with ESMTP id 1546777EA6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id D014277F38
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:19:38 +0000 (UTC)
-X-AuditID: c0a80110-eb1ff70000000ea4-08-59649828147c
-Received: from brsmtp01.br-automation.com (Unknown_Domain [192.168.1.60])
-	by mail2.br-automation.com () with SMTP id AB.D7.03748.82894695;
-	Tue, 11 Jul 2017 11:19:36 +0200 (CEST)
-MIME-Version: 1.0
-From: Johannes Pointner <johannes.pointner@br-automation.com>
+	Tue, 11 Jul 2017 09:20:32 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id r103so174727502wrb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jul 2017 02:20:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=IOANunbONa8y65twVEgUvEmI5JQPkTNhMDiCBc4Kg4A=;
+	b=GJLWuVHh6JSIzhGKzMMN1ov2+afs372XTCL+JYL9is7AAfBBugXmgb3NwHjoO/0qie
+	OR31wj/igjNpD4NvV40cbQUdYcngPl29nchNNtpSlP+wuhSlFhH6V776Ji6B+U1jZzgG
+	QLpNN45EtZVaRHRMmp1Vvjo4ZchgsE7UDOkpTHmgq5EymotSHl57fNpH0NoW5u0v04nz
+	qodSZ8+luBAuLflwberPRDwzYemJopqZwlIOlS9DysZQvA+04xbq7sP3LRJRfofAM/Gu
+	sSL33EeCRrZv1k9OOI2C72HdoLb3m9olnHH7w6c06knG0wy7So4E4Ure8eRyYIKiW73d
+	GIjw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=IOANunbONa8y65twVEgUvEmI5JQPkTNhMDiCBc4Kg4A=;
+	b=Iu7+VEQPCLD2pEqkECUQqqSDakNMA/dJKqrKs2aIiGvTAQM4UYtZcLM5yMFTFuphD2
+	OhzmeWedqsJZF75kVdQm/JtTkJM/VZdYeooUecSeNhFXQHxsjHzr27+bobLsfw7AREhY
+	IAseWYWbIoex0df9q7IwaO+WCaE7bc8j6FliKuBjji4t9mf8EIWVtndUscFeFk3WzRvm
+	PNXVAG61Lv4i45QYHdbRCh9DPishqcaIDM1VIgh4My+7LWG+FaEDppn7Mt73AYCWtiyC
+	IGkF7YU/HjWlCm3fZwp1cjjaRyrdJIG+W9fptw5IobPonSbYDEHsI/UF5jBzeE6BMMKR
+	wdTg==
+X-Gm-Message-State: AIVw111swg/eYW5euaGNwoKesRc+TOjof+544QqWJZnAFWvSpxu3Rjrk
+	OZ0aAQFhHhJCvBVh
+X-Received: by 10.28.181.6 with SMTP id e6mr1794234wmf.25.1499764833036;
+	Tue, 11 Jul 2017 02:20:33 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	143sm1338064wmo.11.2017.07.11.02.20.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 11 Jul 2017 02:20:32 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 11:19:11 +0200
-Message-Id: <20170711091911.27151-1-johannes.pointner@br-automation.com>
+Date: Tue, 11 Jul 2017 11:21:10 +0200
+Message-Id: <20170711092110.22992-1-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.13.2
-X-MIMETrack: Itemize by SMTP Server on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 11/07/2017 11:20:25,
-	Serialize by Router on BRSMTPINTERN2/InternSMTP(Release
-	9.0.1FP5|November 22, 2015) at 11/07/2017 11:20:29,
-	Serialize complete at 11/07/2017 11:20:29,
-	Itemize by SMTP Server on BRSMTP01/Eggelsberg/AT/B&R(Release
-	9.0.1FP5|November 22, 2015) at 11.07.2017 11:19:35
-X-TNEFEvaluated: 1
-X-Disclaimed: 14067
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupkluLIzCtJLcpLzFFi42I5sILRRldjRkqkwbRPOhYXDy9ldmD0OLdx
-	BWMAYxSXTUpqTmZZapG+XQJXxv2Np9gLfnNWrPr/g7mB8TVHFyMnh4SAicTtizuZuhi5OIQE
-	NjNKzPt2jR0kwSsgKHFy5hMWEJtNwFbiyISvYLaIgK7Exw9zGUFsZgFriffLF7CC2MICVhLT
-	HmwFq2ERUJVoWrGDFWKOh8SznROh6rUlli18zQyxWF7iXf9TsMUSAh3MEvP2/GGCSAhJnF58
-	FqpIWOLakwmMExj5ZiG5aRaSWQsYmVYxiucmZuYY6SUV6SaWluTnJpZk5ufpJefnbmKEBJDA
-	Dsbdb7QPMQpwMCrx8D6wTI4UYk0sK67MPcQowcGsJMK7sjklUog3JbGyKrUoP76oNCe1+BCj
-	NAeLkjhvnHh8pJBAemJJanZqakFqEUyWiYNTqoGRMWNWkULo3k1hs3X+fl+rWJ78mqlmCX/q
-	5Z3rN6Vunh39/MKhprKZlUuPf5xe+aThwbqFX3xsdn5q4zM1anxbxVl9mvXjKsnjr26c6ZQM
-	vrF7zb7bsdc/JF+10nMQW/PKXTHMkLniju+SRW4RCnE9IVlO9zVEdBYrzlGtEldmPHYwKkBl
-	6fWzSizFGYmGWsxFxYkAC6eBPBwCAAA=
-Subject: [meta-oe][PATCH v2] libtinyxml2: upgrade to 5.0.1
+Subject: [PATCH][meta-oe] fluentbit: fix SYSTEMD_SERVICE name
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,45 +53,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 09:19:40 -0000
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Jul 2017 09:20:33 -0000
 
-Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
----
-v2:
- - fixed packaging rules
----
- .../libtinyxml2/{libtinyxml2=5F4.0.1.bb =3D> libtinyxml2=5F5.0.1.bb}      =
-  | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
- rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2=5F4.0.1.bb =3D> li=
-btinyxml2=5F5.0.1.bb} (81%)
+* the binary and service name was renamed in 0.11.11
+  from fluent-bit to td-agent-bit, but unfortunately
+  SYSTEMD_SERVICE wasn't updated in the recipe with
+  the upgrade causing do_package failures as in:
+  http://errors.yoctoproject.org/Errors/Details/147040/
+  ERROR: SYSTEMD_SERVICE_fluentbit value fluent-bit.service does not exist
 
-diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F4.0.1.bb b/m=
-eta-oe/recipes-support/libtinyxml2/libtinyxml2=5F5.0.1.bb
-similarity index 81%
-rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F4.0.1.bb
-rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F5.0.1.bb
-index 3a6659815..8b5ab44fd 100644
---- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F4.0.1.bb
-+++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2=5F5.0.1.bb
-@@ -6,10 +6,12 @@ LIC=5FFILES=5FCHKSUM =3D "file://tinyxml2.cpp;endline=3D2=
-2;md5=3Dc19221dbd8a66ad3090462af4
-=20
- SRC=5FURI =3D "git://github.com/leethomason/tinyxml2.git"
-=20
--SRCREV =3D "74d44acb176f8510abf28ee0a70961eb26631988"
-+SRCREV =3D "37bc3aca429f0164adf68c23444540b4a24b5778"
-=20
- S =3D "${WORKDIR}/git"
-=20
- inherit cmake
-=20
-+FILES=5F${PN}-dev +=3D "${libdir}/cmake/"
-+
- BBCLASSEXTEND =3D "native"
---=20
+0.11.3-r0/image/
+0.11.3-r0/image/etc
+0.11.3-r0/image/etc/fluent-bit
+0.11.3-r0/image/etc/fluent-bit/parsers.conf
+0.11.3-r0/image/etc/fluent-bit/fluent-bit.conf
+0.11.3-r0/image/lib
+0.11.3-r0/image/lib/systemd
+0.11.3-r0/image/lib/systemd/system
+0.11.3-r0/image/lib/systemd/system/fluent-bit.service
+0.11.3-r0/image/usr
+0.11.3-r0/image/usr/bin
+0.11.3-r0/image/usr/bin/fluent-bit
+0.11.3-r0/image/usr/lib
+0.11.3-r0/image/usr/lib/libfluent-bit.so
+0.11.3-r0/image/usr/lib/pkgconfig
+0.11.3-r0/image/usr/lib/pkgconfig/msgpack.pc
+
+0.11.11-r0/image
+0.11.11-r0/image/etc
+0.11.11-r0/image/etc/td-agent-bit
+0.11.11-r0/image/etc/td-agent-bit/parsers.conf
+0.11.11-r0/image/etc/td-agent-bit/td-agent-bit.conf
+0.11.11-r0/image/lib
+0.11.11-r0/image/lib/systemd
+0.11.11-r0/image/lib/systemd/system
+0.11.11-r0/image/lib/systemd/system/td-agent-bit.service
+0.11.11-r0/image/usr
+0.11.11-r0/image/usr/bin
+0.11.11-r0/image/usr/bin/td-agent-bit
+0.11.11-r0/image/usr/lib
+0.11.11-r0/image/usr/lib/libfluent-bit.so
+0.11.11-r0/image/usr/lib/pkgconfig
+0.11.11-r0/image/usr/lib/pkgconfig/msgpack.pc
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
+index 83818c84d..aac981302 100644
+--- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
++++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
+@@ -21,6 +21,6 @@ inherit cmake systemd
+ 
+ EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
+ 
+-SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
++SYSTEMD_SERVICE_${PN} = "ttfluent-bit.service"
+ 
+ TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
+-- 
 2.13.2
-
 
 
