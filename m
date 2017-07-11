@@ -1,50 +1,50 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 279A477E13
+Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
+	[209.85.128.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 50AC777E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 16:45:02 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id k67so1090394wrc.1
+	Tue, 11 Jul 2017 16:45:06 +0000 (UTC)
+Received: by mail-wr0-f174.google.com with SMTP id 77so6794024wrb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:45:04 -0700 (PDT)
+	Tue, 11 Jul 2017 09:45:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=JZiD85a07MeGa/4LrKK+c3+EjqqcZk5RQ18AaJVJuto=;
-	b=cRKmwGBfMGoLFReo04cSadwwGmVBaTlI5Y1bAJIZOlvSUj5RV1C/3aV8hcV24PgOdw
-	T3I9bij/j8dTDEGeYH5rbvTn6qj/o1ShSAPBepFhG45Q8gwHIfZ2aGtK9PwIaY9sZAgE
-	SBNVcpnjUfbFqZ4jWtapYvAOacPOFEL+v9aWrUY5zl4iPsJhUwLvovkotQC848NpbwMt
-	e79XrB0IGBuYsQhX+qgBCyF7ILSG63HCpii1jF1/IVDNRkgY3VqCpPxByaCFo6+I/epb
-	xuXSQli1dtYltT5GozYjjQghainHejUXlsAbAW/A7yEgfliGtWeIBkkmpeh1r8mVA/I1
-	GM0Q==
+	bh=KOIq1Yw8x4WyUJvNVagjVqAg/EE2Yx/8GDBb0OMXS74=;
+	b=NocwN/QYU1sCYNaPmfRSemwsoUwDVNuBcZ8YweVSzMaj7W4U55G1iNYIMG/tWviCi7
+	pEQRg+khkCxOZn9cawdLpvar1aO9cFpFwmUOf2R1D9Jk+U+vQBf9P0zZOuFJYPe0Q6Cf
+	8codRTU6UcQOZkjaiYBEHyVZknE8lUZLfU/jST9L3uwaLtYl1GFi/sNGPhONqsnKk3I+
+	1g62swPiJZHErlpDVUFmEvoEv/jo0YWysrRf3695KPyJNEqg1g0+hyI89+J0MUPZJdyV
+	KtQYUgQGlPYiqRlr9HIuXpMvRgOyllkdNU5Zb2QeoaCdy1NbhBwxPURjC4IRBlMvOCOJ
+	QhDw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=JZiD85a07MeGa/4LrKK+c3+EjqqcZk5RQ18AaJVJuto=;
-	b=sVzDO/hirOqhz/S9IhQdLm7Td3msip9kcFMC6yYbtAdLTyWofsZcg/VGrUvATETROM
-	oWiqN74+/9r+IUw6ISVpvmcokK2IYx5A/fvl5REjHkzc/lAeIw7Hl6JeiVI40Kwj20bQ
-	SsKU0lFqJxx5vp+tJehJrup/XW+MFBe7wShI9CXP4mDRn+/PR+FM6m3G05G+ATz10mpg
-	DZI0WwVCH0+uKsIF2AIP/bXSdMBt7Jw+8r+7UJMz6WEwvfSF/Emmic7QelIdlOzXOv9X
-	OvayyVU/ZnhYXMWRBLxdHwoR4esIs+PZPEGh/xqqUKH/Arz4KNje9SPosTjiY5ryx8ng
-	kxxQ==
-X-Gm-Message-State: AIVw113A3STiNUFciwf0Xg3bq0z2bkPfqwP/LNpv9FXBbhWvVX0OUNsA
-	G40KXeuXYca9wGyw
-X-Received: by 10.80.175.198 with SMTP id h64mr3222671edd.131.1499791503796;
-	Tue, 11 Jul 2017 09:45:03 -0700 (PDT)
+	bh=KOIq1Yw8x4WyUJvNVagjVqAg/EE2Yx/8GDBb0OMXS74=;
+	b=ul9el74sgl/wJfIT/jkxeDXQarfNQ6B1YWgbVzpRgQvRWcC/ScyIXm/DDvi/3Fehme
+	5OugWh38pJePjkb+Y0mQKjF0dFzD8ou2SGZ4YtMAIRBGaxIkWThC7pvb97Uqgvh7F+HM
+	tz3GIpJgXnbkK1mHdnX4j8w2biDQN5oEj37lA4BG5ULxWsmII1hwAQAGbV6Kctbd6BYO
+	BVWdx+P5E/KcPxosooDUmI1NyPD0K3JjczeF1ANurwvEeXBm0kg6hd+qSw+x5AVjlqOg
+	nOorYdiz9sU6yLrEL23Jh42JxIW1sAT37f/lGoe+gWieZue6wfcAyhY4J3CMuPAqpzn4
+	nT3w==
+X-Gm-Message-State: AIVw112JB53xUZL7p6seMfWvumYLPnsQ5IDrlflpkqPm5IknIhaz+yc8
+	8cHWhzcLpuOIk03M
+X-Received: by 10.80.226.140 with SMTP id p12mr3252416edl.37.1499791507884;
+	Tue, 11 Jul 2017 09:45:07 -0700 (PDT)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([27.191.203.112]) by smtp.gmail.com with ESMTPSA id
-	p19sm1224952eda.15.2017.07.11.09.45.01
+	p19sm1224952eda.15.2017.07.11.09.45.05
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 11 Jul 2017 09:45:03 -0700 (PDT)
+	Tue, 11 Jul 2017 09:45:07 -0700 (PDT)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 18:44:31 +0200
-Message-Id: <1499791478-2407-2-git-send-email-liu.ming50@gmail.com>
+Date: Tue, 11 Jul 2017 18:44:32 +0200
+Message-Id: <1499791478-2407-3-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
 References: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-oe/meta-perl] [PATCH 1/8] libsombok3: add recipe
+Subject: [meta-oe/meta-perl] [PATCH 2/8] libmime-charset-perl: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,88 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 16:45:03 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 16:45:07 -0000
 
 From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-Sombok - Unicode Text Segmentation Package.
+MIME::Charset - Charset Information for MIME.
 
 It's being depended by libunicode-linebreak-perl.
 
 Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
 ---
- ...01-configure.ac-fix-cross-compiling-issue.patch | 31 ++++++++++++++++++++++
- .../libsombok3/libsombok3_2.4.0.bb                 | 25 +++++++++++++++++
- 2 files changed, 56 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
- create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+ .../libmime/libmime-charset-perl_1.012.2.bb           | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
 
-diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
+diff --git a/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
 new file mode 100644
-index 0000000..1a69287
+index 0000000..79b4681
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
-@@ -0,0 +1,31 @@
-+From 9c2ffe825e28d63e2a771135f297e8ffac0dbe81 Mon Sep 17 00:00:00 2001
-+From: Ming Liu <liu.ming50@gmail.com>
-+Date: Tue, 11 Jul 2017 14:35:30 +0200
-+Subject: [PATCH] configure.ac: fix cross-compiling issue
++++ b/meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "MIME::Charset - Charset Information for MIME."
++DESCRIPTION = "MIME::Charset provides information about character sets used for MIME \
++messages on Internet."
++HOMEPAGE = "http://search.cpan.org/~nezumi/MIME-Charset-${PV}/"
++SECTION = "libs"
 +
-+Avoid checking for file existence when cross compiling.
-+
-+Upstream-Status: Inappropriate [embedded specific]
-+
-+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
-+---
-+ configure.ac | 3 ---
-+ 1 file changed, 3 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 9978852..06b16e3 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -120,9 +120,6 @@ AC_ARG_WITH(unicode-version,
-+   AC_HELP_STRING(--with-unicode-version=VERSION,
-+   [version of Unicode Standard @<:@default=current version@:>@]),
-+   UNICODE_VERSION=$withval,UNICODE_VERSION=$DEFAULT_UNICODE_VERSION)
-+-AC_CHECK_FILE([lib/$UNICODE_VERSION.c],
-+-  AC_MSG_RESULT($UNICODE_VERSION),
-+-  AC_MSG_ERROR(Unknown Unicode version $UNICODE_VERSION.))
-+ AC_SUBST(UNICODE_VERSION)
-+ 
-+ # check if code to debug memory allocation is enabled.
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
-new file mode 100644
-index 0000000..b83e86a
---- /dev/null
-+++ b/meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
-@@ -0,0 +1,25 @@
-+SUMMARY = "Sombok - Unicode Text Segmentation Package."
-+DESCRIPTION = "Sombok library package performs Line Breaking Algorithm described in \
-+Unicode Standard Annex #14 (UAX #14).  East_Asian_Width informative \
-+properties defined by Annex #11 (UAX #11) may be concerned to determin \
-+breaking positions.  This package also implements "default" Grapheme \
-+Cluster segmentation described in Annex #29 (UAX #29)."
 +LICENSE = "Artistic-1.0 | GPLv1+"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=5b122a36d0f6dc55279a0ebc69f3c60b"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 +
-+SRC_URI = "git://github.com/hatukanezumi/sombok.git;protocol=https \
-+           file://0001-configure.ac-fix-cross-compiling-issue.patch \
-+          "
++SRC_URI = "${CPAN_MIRROR}/authors/id/N/NE/NEZUMI/MIME-Charset-${PV}.tar.gz"
 +
-+inherit autotools pkgconfig
++SRC_URI[md5sum] = "71440416376248c31aa3bef753fae28d"
++SRC_URI[sha256sum] = "878c779c0256c591666bd06c0cde4c0d7820eeeb98fd1183082aee9a1e7b1d13"
 +
-+# sombok-2.4.0
-+SRCREV = "0098d85a037ef5c99a648a3669a077781a45e8cc"
++S = "${WORKDIR}/MIME-Charset-${PV}"
 +
-+S = "${WORKDIR}/git"
-+B = "${S}"
-+
-+# Disable libthai support
-+EXTRA_OECONF = "--disable-libthai"
++inherit cpan
 +
 +BBCLASSEXTEND = "native"
 -- 
