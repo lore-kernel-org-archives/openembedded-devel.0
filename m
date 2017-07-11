@@ -1,49 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1662E77E87
+Return-Path: <h4nn35.work@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8DF8D719BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 04:54:34 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id c24so17271270pfe.1
+	Tue, 11 Jul 2017 06:09:35 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id k67so29687462wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 21:54:36 -0700 (PDT)
+	Mon, 10 Jul 2017 23:09:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=12HmN0rOTvR2jScIQMfYPebbHnpYlM51RbunOKE+Kp8=;
-	b=tURFy2hUI1ykn77VF4kW1dz+bOwdcEMGN+h+dIno/slQ2+8liCw1fH9bVO2NRLUlf8
-	bRYcRf5LQ9+yaI3Bl1KSoWJMUVmNDRs//EFxQanexhrSohFvZoOGrnZ1JX3dW3YQeMUs
-	aqJnAQw2J2klX4rNz/qLCJba0qa+jxWeDqBxfC0aJnLUi64eI5YGhgyGHx/VaknY6DpP
-	wgBL5Kr+f7apdk1OjpgusaZjj2pfJous5sUPCK/JFKXxMgYHzFSpXSKJb7q6xbKgUFw6
-	YZ+AN9EdPE6c1kYx6fi34pkRimX0H37RamLtDbdVeCAUMC5732elL5sa7VWXezlvTXCs
-	1HXQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ix6yzx2MBhZUJ/MiHBb/FZRLBXRx7z1fd2IbwEIxQ/c=;
+	b=q9ezEN26jZUMkYfLDr/RfKwAltZpJuRudRuQex4/snmM0uTPS1uj2hCVdQJ2a/Iw6A
+	10VG5Sq0resVF8MzEUc/WfxUohRjrPjlswaOqtsHdp6G+rreSvYD/b3TnfGPi9b8CY3k
+	c/a8gCA3Eo3jMePWaWUzInYQBGzaNzEr/DMwGqiKi6K+vmhtLcYrhIv0MVzBuoO2uxFq
+	yFSAcBpaiyJt23qlVuHECnJQMqCtlyaMXVTyXdcuy7OmfsV51SHAOxW+8GZtxxi6goCy
+	MP7hKmGmnRQzrbR8Yb5YBbbH8YZGxN9oUg9FwDVrxYEcT+jM+AGtgNtjVJujLhhwYD62
+	MwVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=12HmN0rOTvR2jScIQMfYPebbHnpYlM51RbunOKE+Kp8=;
-	b=rhj1WKQ6+EqzdMJgVEFim3Fa72R3ezoBxzkH1kHHVV57vG1J5VgtZ4RxyawWgM8mlm
-	OVfoCewx3C8ual7mJtgWl0AnzJtj4a7iqGoBhYA/uqnhIZeyXmaHuimp8fXeD8b2vqJq
-	h2Ogd4T7Ff+BwYmdzn8nGE5Mh41TfZ8u40I0xavhkMeheogiWQNNm/BW1s5VwBctc+V5
-	JW3HJkwuVeDUNGh2/D8j53j+fgVauCMNHoJ0GR58gv9vCVIICo1UUeR4Spw8E1uuou6E
-	Zoqs0ZBKzE9sEr3vIiX5Qu1WiO58/RPNm1lK8jupC1o2l95QkWgd9AAoNf2KCbNdMBjN
-	zF2Q==
-X-Gm-Message-State: AIVw113hSQTPANDsuFqU5tnKxJWci7zwzHI67gBsPGZEfFhPrnjADBlN
-	SffE7HlmXRUmoi1I
-X-Received: by 10.84.232.135 with SMTP id i7mr21791697plk.300.1499748875993;
-	Mon, 10 Jul 2017 21:54:35 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
-	by smtp.gmail.com with ESMTPSA id
-	l85sm24947833pfi.53.2017.07.10.21.54.34
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 10 Jul 2017 21:54:35 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 10 Jul 2017 21:54:23 -0700
-Message-Id: <20170711045423.21332-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170711045423.21332-1-raj.khem@gmail.com>
-References: <20170711045423.21332-1-raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH 3/3] ubi-utils-klibc: Pass TUNE_CCARGS into CFLAGS
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ix6yzx2MBhZUJ/MiHBb/FZRLBXRx7z1fd2IbwEIxQ/c=;
+	b=crKMQPMjVejMe0JgSgwyz4xS2cNwfI7ZmKXk+UW5X9mq0XycnuD25JE7DF5aFfL+ec
+	YMhwuX83iEjlG21i9Q+bNLrciVzAq/ec9C/rVQTJqLMgNJ+8X/Ks0+1jsCBMG7RZcSgA
+	lNtSENwCFSe4HlJ3NI5nCks1NmiYH/Q0pETp4gBQRr01NgrXNv1zrbm/C4PDIFsFiQfq
+	TsxV/tjQMwfbQS2pK4ropUI59BcdMdADa232XvvR7moqBnmQG2W5kBlzo/O42rLU4kWv
+	eCypHg3sl1L8YkyhakepmTO6qz7CkEG9MC01TY6e0+2V74/zjAq/ioaE9WAAiwI1QLeQ
+	ybfA==
+X-Gm-Message-State: AIVw110jRg6pStSWqdxa+h65NrNLHEoOT96h0USjvaSp9/E4Vboy/3sM
+	9PYqqKuJMHCDBD/nhAzgr8TD9wvOKA==
+X-Received: by 10.28.144.6 with SMTP id s6mr10186526wmd.16.1499753377078; Mon,
+	10 Jul 2017 23:09:37 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.63.69 with HTTP; Mon, 10 Jul 2017 23:09:36 -0700 (PDT)
+In-Reply-To: <CAJ86T=XdFKzseQKej3w7rPamzfUmH0391r-hFX=aTquDjtnOew@mail.gmail.com>
+References: <20170706093039.30435-1-johannes.pointner@br-automation.com>
+	<CAJ86T=XdFKzseQKej3w7rPamzfUmH0391r-hFX=aTquDjtnOew@mail.gmail.com>
+From: Johannes Pointner <h4nn35.work@gmail.com>
+Date: Tue, 11 Jul 2017 08:09:36 +0200
+Message-ID: <CAHvQdo32whF=KGa06f8ZXpMvEL=dOaphbFFfODa_Zv9GUGUk5Q@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libtinyxml2: upgrade to 5.0.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +54,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 04:54:35 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 06:09:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This is needed for hard float ABI selection options
+2017-07-11 2:13 GMT+02:00 Andre McCurdy <armccurdy@gmail.com>:
+> On Thu, Jul 6, 2017 at 2:30 AM, Johannes Pointner
+> <johannes.pointner@br-automation.com> wrote:
+>> Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
+>> ---
+>>  .../{libtinyxml2_4.0.1.bb => libtinyxml2_5.0.1.bb}          | 13 ++++++++++++-
+>>  1 file changed, 12 insertions(+), 1 deletion(-)
+>>  rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_4.0.1.bb => libtinyxml2_5.0.1.bb} (63%)
+>>
+>> diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
+>> similarity index 63%
+>> rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
+>> rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
+>> index 3a6659815..edf836814 100644
+>> --- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
+>> +++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
+>> @@ -6,10 +6,21 @@ LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4
+>>
+>>  SRC_URI = "git://github.com/leethomason/tinyxml2.git"
+>>
+>> -SRCREV = "74d44acb176f8510abf28ee0a70961eb26631988"
+>> +SRCREV = "37bc3aca429f0164adf68c23444540b4a24b5778"
+>>
+>>  S = "${WORKDIR}/git"
+>>
+>>  inherit cmake
+>>
+>> +FILES_${PN} = " \
+>> +    ${libdir}/lib*${SOLIBS} \
+>> +    ${includedir}/* \
+>> +    "
+>> +
+>> +FILES_${PN}-dev = " \
+>> +    ${libdir}/lib*${SOLIBSDEV} \
+>> +    ${libdir}/cmake/* \
+>> +    ${libdir}/pkgconfig/* \
+>> +    "
+>> +
+>
+> These packaging changes look very odd. Can you explain why they're needed?
+>
+> If the default packaging rules are not sufficient, the preferred
+> approach is to add additional patterns just to catch any unpackaged
+> files, not to completely replace the default rules.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
-Cc: Andrea Adami <andrea.adami@gmail.com>
----
- meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+without these I'll get the following error:
 
-diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-index 8ca1ca727..867407723 100644
---- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-+++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
-@@ -21,6 +21,7 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git;tag=b7455d847ab4f9eeeb6a729efc3
- S = "${WORKDIR}/git/"
- 
- EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
-+CFLAGS += "${TUNE_CCARGS}"
- 
- do_install () {
- 
--- 
-2.13.2
+ERROR: libtinyxml2-5.0.1-r0 do_package: QA Issue: libtinyxml2:
+Files/directories were installed but not shipped in any package:
+  /usr/lib/cmake
+  /usr/lib/cmake/tinyxml2
+  /usr/lib/cmake/tinyxml2/tinyxml2Targets.cmake
+  /usr/lib/cmake/tinyxml2/tinyxml2Targets-noconfig.cmake
+  /usr/lib/cmake/tinyxml2/tinyxml2Config.cmake
+Please set FILES such that these items are packaged. Alternatively if
+they are unneeded, avoid installing them or delete them within
+do_install.
+libtinyxml2: 5 installed and not shipped files. [installed-vs-shipped]
 
+Then I tried only to add the packaging rules for the dev package, but
+then I ran into the next errors:
+ERROR: libtinyxml2-5.0.1-r0 do_package: QA Issue: libtinyxml2:
+Files/directories were installed but not shipped in any package:
+  /usr/include
+  /usr/include/tinyxml2.h
+Please set FILES such that these items are packaged. Alternatively if
+they are unneeded, avoid installing them or delete them within
+do_install.
+libtinyxml2: 2 installed and not shipped files. [installed-vs-shipped]
+
+So I ended up with the above.
+But I'm open for suggestions. Maybe there is a better solution I'm no seeing.
+
+>
+>>  BBCLASSEXTEND = "native"
+>> --
+>> 2.13.2
+>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
