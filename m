@@ -1,50 +1,45 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3364A77FED
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id ED17E77DCC
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 16:45:31 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id g21so791370lfk.1
+	Tue, 11 Jul 2017 17:09:18 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id z6so646784pfk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:45:33 -0700 (PDT)
+	Tue, 11 Jul 2017 10:09:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=oiUZdGnz0edHG9t4ytXv+p0RIjQ1L6AlbwSf/iE/wiY=;
-	b=OBBUT4HQJzz/HJ+YpWM+9Am400Dy/vLab7nSQRC4sS5SmAwHRvBxMBdDdujEu3Tei+
-	ImzeKGsxgOXGBIGd5UUZwCHNctNpRLRGs3xfmldBYrPyErKleWChkYdpaYm1z/Twq/Xf
-	jt7LYoL9Hd4luPJIOLk+9WV1ILHNj4SbjD+DR06qqV7ThfTH4i+mIr356dC3zeYJAwbR
-	3FP0TAzU7CAccFUikMHrFSpiJhl/KSeDkf24X8dF1PkBuhcu4BH+og/Ndxp2E9F5MGq2
-	KjluClCtz+czH7cSrRvrhOCaVJzN1P8hWdJBnXROWZGMqB3T+4mSMh4o6DgOt74lBn65
-	T0EQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=5Ob4uy7ZThFKZcLX4gVWD7JJ1fKfh5cH18ao3MxcUXw=;
+	b=hmaBXPz5sLh9FqbNvVpbsuc9MHVmzNdF1SMTgw5TYuz4oh7lsa7s37qJtIco3r+C9k
+	11FKISXRC5uN1SMB1y1jNIVd37lMnwOBfyXpGrdMWa7/3EageOuE/31ydhieh/I2ztXe
+	hbFuET94BECJ9FYdPoC1pBYD4VJVjWtnBDDE4EctuMQCsAbMBjcMrBx0xCf5x/VqxBif
+	yqB3nK/rE+WVgbfHIfLOGb0510Hp3+vVmlVSjETUTnSzENc32nh531X/7bvBp9t28JEm
+	3kwZFBR4y3n144iq8KBhGkf/ieOdeeyv3bn2fbylVqmUOhKEymngPocXK5aRomYPEDdK
+	DZuw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=oiUZdGnz0edHG9t4ytXv+p0RIjQ1L6AlbwSf/iE/wiY=;
-	b=IvyVTspE1pqp069sBB8tHCySrbHOupiJiOIHH526Vk4Z5fMIFk+L1KLdBoZS6AmNsp
-	lWoG/30AJruOPB8ajLAsZhbWsznsHZjWDAdgqh81ybFw1AvoGQ7iPB0p1djEjSXjQagn
-	dvriuEeQUpjl+BQxW4QNZjSbAohLods5tDMx/HJzZkkiet7CSRjncA7vSwTmn1HKqNUN
-	x8ePiKdA2Zx6PeXTxEl5Ob+e8vixTXeROnqER6JwqXe/AavMYUh7XokxsAVmpAyIWDOj
-	UWfUNRlCIaPydTGdwPqNTb80sb93eIQ/9EQgH64FR3Lz+h3D9Lt8zOFAgu3cDQTL3bw3
-	0u2w==
-X-Gm-Message-State: AIVw111q90x/pt7/cEgU04khuPcZNJdfQh8Rf4BrmCBNc3P43pxSIEEI
-	76NY3CatBNxlSsZMdl0=
-X-Received: by 10.80.151.219 with SMTP id f27mr3178933edb.126.1499791532806;
-	Tue, 11 Jul 2017 09:45:32 -0700 (PDT)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([27.191.203.112]) by smtp.gmail.com with ESMTPSA id
-	p19sm1224952eda.15.2017.07.11.09.45.30
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=5Ob4uy7ZThFKZcLX4gVWD7JJ1fKfh5cH18ao3MxcUXw=;
+	b=P5NjQ89cU6DJIrNLpcZ1DpskPAClPPprukHiKBZtdzEuE4Nn/+J+UF80xX9fp2lHcA
+	IBn/5cBwDehqJd5lP5FQQz4IX5nKmoQcW8QAO4SNzRkrRYMENCnZVIOaxM6cvv95OehQ
+	ktmQVzsgV/cz9RAJZl6ZD0l6np6c8al5FxpEq+6Cp9xQ8NRFw6MpU5rIVmnoc5nmuwdf
+	+0KKDa38hiEmlw4l/S19kIIDIInQvI4vxfvoLFV4M9qCA17gQvAP7cIiJo3Ch+2XKWwk
+	laU/tLYeHyU6Hlc3GhhUrVyOXEP34WaphKOdGC/VVT2Vj7Qt+3W4zHXMYstYftFrSqNp
+	BdCA==
+X-Gm-Message-State: AIVw110vsX+GIQrTBhgZksrRxN6IZpkR0d3VV8Om066+0aFWtIF85aGn
+	Pkgg8Wo5riqSNVKB
+X-Received: by 10.84.131.78 with SMTP id 72mr954629pld.43.1499792959000;
+	Tue, 11 Jul 2017 10:09:19 -0700 (PDT)
+Received: from e6520.cablelabs.com ([4.16.80.121])
+	by smtp.gmail.com with ESMTPSA id z86sm996309pfl.40.2017.07.11.10.09.17
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 11 Jul 2017 09:45:32 -0700 (PDT)
-From: liu.ming50@gmail.com
+	Tue, 11 Jul 2017 10:09:17 -0700 (PDT)
+From: Andre McCurdy <armccurdy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 18:44:38 +0200
-Message-Id: <1499791478-2407-9-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
-References: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
-Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: [meta-oe/meta-perl] [PATCH 8/8] po4a: add full functionalities
+Date: Tue, 11 Jul 2017 10:09:11 -0700
+Message-Id: <1499792951-12837-1-git-send-email-armccurdy@gmail.com>
+X-Mailer: git-send-email 1.9.1
+Subject: [meta-networking][PATCH] ebtables: replace ebtables-save perl script with bash rewrite
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,51 +52,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 16:45:32 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 17:09:19 -0000
 
-From: Ming Liu <peter.x.liu@external.atlascopco.com>
+Fedora provides a bash replacement for the default ebtables-save perl
+script. Using it allows the ebtables run-time dependency on perl to
+be replaced with a runtime dependency on bash - which is lower
+overhead and more likely to be present on typical embedded systems
+already.
 
-Add the following dependencies to DEPENDS and RRECOMMENDS_${PN}, to
-let po4a and po4a-native work with full functionalities:
-- libtext-wrapi18n-perl
-- libterm-readkey-perl
-- liblocale-gettext-perl
-- libunicode-linebreak-perl
+  https://bugzilla.redhat.com/show_bug.cgi?id=746040
+  http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
 
-Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+Since ebtables-save no longer contains a references to /usr, the
+previous QA issue workaround of moving it from ${base_sbindir} to
+${sbindir} is no longer required.
+
+  http://git.openembedded.org/meta-openembedded/commit/?id=a7c6fcebee7d9f86c356ea92de445d89e714ff62
+
+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 ---
- meta-perl/recipes-perl/po4a/po4a_0.49.bb | 17 +++++++++++++++--
- 1 file changed, 15 insertions(+), 2 deletions(-)
+ .../ebtables/ebtables-2.0.10-4/ebtables-save       | 43 ++++++++++++++++++++++
+ .../recipes-filter/ebtables/ebtables_2.0.10-4.bb   | 15 ++++----
+ 2 files changed, 50 insertions(+), 8 deletions(-)
+ create mode 100755 meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
 
-diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb b/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-index e52e5f7..5db5b8f 100644
---- a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-+++ b/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-@@ -13,8 +13,21 @@ SRCREV = "79ed87a577a543538fe39c7b60079981f5997072"
- 
- S = "${WORKDIR}/git"
- 
--inherit cpan_build
-+DEPENDS = " \
-+    libmodule-build-perl-native \
-+    libtext-wrapi18n-perl \
-+    libterm-readkey-perl \
-+    liblocale-gettext-perl \
-+    libunicode-linebreak-perl \
-+"
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
+new file mode 100755
+index 0000000..2d7fc4e
+--- /dev/null
++++ b/meta-networking/recipes-filter/ebtables/ebtables-2.0.10-4/ebtables-save
+@@ -0,0 +1,43 @@
++#!/bin/bash
 +
-+RRECOMMENDS_${PN} = " \
-+    libtext-wrapi18n-perl \
-+    libterm-readkey-perl \
-+    liblocale-gettext-perl \
-+    libunicode-linebreak-perl \
-+"
++EBTABLES="/sbin/ebtables"
++
++[ -x "$EBTABLES" ] || exit 1
++
++echo "# Generated by ebtables-save v1.0 on $(date)"
++
++cnt=""
++[ "x$EBTABLES_SAVE_COUNTER" = "xyes" ] && cnt="--Lc"
++
++for table_name in $(grep -E '^ebtable_' /proc/modules | cut -f1 -d' ' | sed s/ebtable_//); do
++    table=$($EBTABLES -t $table_name -L $cnt)
++    [ $? -eq 0 ] || { echo "$table"; exit -1; }
++
++    chain=""
++    rules=""
++    while read line; do
++	[ -z "$line" ] && continue
++
++	case "$line" in 
++	    Bridge\ table:\ *)
++		echo "*${line:14}"
++		;;
++	    Bridge\ chain:\ *)
++		chain="${line:14}"
++		chain="${chain%%,*}"
++		policy="${line##*policy: }"
++		echo ":$chain $policy"
++		;;
++	    *)
++		if [ "$cnt" = "--Lc" ]; then
++		    line=${line/, pcnt \=/ -c}
++		    line=${line/-- bcnt \=/}
++		fi
++		rules="$rules-A $chain $line\n"
++		;;
++	esac
++    done <<EOF
++$table
++EOF
++    echo -e $rules
++done
+diff --git a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+index 375423d..e724731 100644
+--- a/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
++++ b/meta-networking/recipes-filter/ebtables/ebtables_2.0.10-4.bb
+@@ -4,14 +4,15 @@ DESCRIPTION = "Utility for basic Ethernet frame filtering on a Linux bridge, \
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=53b4a999993871a28ab1488fdbd2e73e"
+ SECTION = "net"
+-PR = "r3"
++PR = "r4"
  
--DEPENDS += "libmodule-build-perl-native"
-+inherit cpan_build
+-RDEPENDS_${PN} += "perl"
++RDEPENDS_${PN} += "bash"
  
- BBCLASSEXTEND = "native"
+ RRECOMMENDS_${PN} += "kernel-module-ebtables \
+     "
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/ebtables/ebtables-v${PV}.tar.gz \
++           file://ebtables-save \
+            file://installnonroot.patch \
+            file://01debian_defaultconfig.patch \
+            file://ebtables.init \
+@@ -78,12 +79,10 @@ do_install () {
+     mv ${D}${sysconfdir}/default/ebtables-config ${D}${sysconfdir}/default/ebtables
+     sed -i 's!/usr/sbin/!${sbindir}/!g' ${D}${sysconfdir}/init.d/ebtables
+ 
+-    # The script ebtables-save refernces perl in exec_prefix, so
+-    # move it to sbindir to avoid QA issue
+-    if ${base_sbindir} != ${sbindir} ; then
+-       install -d ${D}/${sbindir}
+-       mv ${D}/${base_sbindir}/ebtables-save ${D}/${sbindir}
+-    fi
++    # Replace upstream ebtables-save perl script with Fedora bash based rewrite
++    # http://pkgs.fedoraproject.org/cgit/rpms/ebtables.git/tree/ebtables-save
++    install -m 0755 ${WORKDIR}/ebtables-save ${D}${base_sbindir}/ebtables-save
++    sed -i 's!/sbin/!${base_sbindir}/!g' ${D}${base_sbindir}/ebtables-save
+ 
+     # Install systemd service files
+     install -d ${D}${systemd_unitdir}/system
 -- 
-2.7.4
+1.9.1
 
 
