@@ -1,46 +1,45 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 7805377E87
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D1B877E87
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 00:13:04 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id k67so28341022wrc.1
+	Tue, 11 Jul 2017 04:54:32 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id j186so15194831pge.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 Jul 2017 17:13:05 -0700 (PDT)
+	Mon, 10 Jul 2017 21:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/DUqY00Ij9dl49sQzWFSVQi61yWM+qMpkF8H3jhrbkg=;
-	b=lW8uv9r5jHoBP0AiSIE70m2Drt8+AU0Wy2d+yLIJgZYvqcXAZXWtqGM3ZMaYJQP6lZ
-	8zFAh519K+rUMCigDJsr1KBHSVGyeprCcDfG4NvlB/twhnZekNc+SLVM6hBIokqEa767
-	+cd3WEE4n7vd9XXusT4O7dwr88kep6djGrtVQs6VepqQyaQHn2CJk9Na2nEegij4wBsd
-	k0KHk1RuRrRj+JT1oDa6MY4wqblGTGisPebPnT09mCbyYtq7DLXim/9H3cHMNhKD8L+j
-	FSc+UrCs58FScO9DoxbWdUF2cRH3tZKTjj/hRRqZp3Ar/uMbCbjuSiaf7iuatm4Sclg5
-	n4Yg==
+	h=from:to:cc:subject:date:message-id;
+	bh=and5wzbPl7on5DUeILVeVwYIV4avmuPBWe35lJV/SE8=;
+	b=vRmOCOwWyOaYSfslratNWf7o7vUX0uX9nT32t8x37BYIFwFyvNPdxVYtesKhibDWR3
+	s0Y4mvKNK5SKt7xdgfJYNRHhLTzmFsfN9Y7Pbxk16O7r41F0ymvRRllWQoTRshCA9E0h
+	L3FVzu9kQDL9L8tEQN/tIYqK3dzRPD0TOtUxpbGo/jlu+5g3M6dpQ+7UlAP+nsVAtKbx
+	2Jhl01ndEx/FRX+xO8d09R/rqdRs9a1H9D2ye8Hd9MzPA7DqpVaoBacdKdqeCQqG7bsf
+	SBXgf9RIQtc2PnnoInfMq2Pq0L7iK0cgSnKssCd/U9N53vg1ilY36oQtJpj67CGdORaD
+	POww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/DUqY00Ij9dl49sQzWFSVQi61yWM+qMpkF8H3jhrbkg=;
-	b=kvXO/9Jr6WjvYNKUu30NwBz3otSQzn1q5oi9bx7hLFTUPTv+eP8QNaFlK98vy52Ljw
-	opZXrJyEeqc+PJLS1mJ3NZx1AkrIMM3ggSXeO/6EXKk+2b5ogYONE1Px9v6XVFcqvPNg
-	lvVYARRR+hgax2c7HeDaQjLIceWKQYUa5vjGHSGWI0uVdXyQ0EcGl/qv6Zim4+pxg7vf
-	cSRBBKfcWb1uFHYPqhoe+7VeZIxWiPCa+hrX9e+IG5ibSE4W+U72qbrntsV/pIY2GV8C
-	CldHBqcz+M5gzyjoNwVndlJIGm0aOi6aj/il7hWT8XGezULr5CKpABN0tlqHn+DbNpqK
-	N5XQ==
-X-Gm-Message-State: AIVw113d/c4c0ccp4V+wuH7MxQmoS4XSNvq70TZbUFd5N1F107C/VHpC
-	HwExM/1f66/0XQoEb9NvLy6T/y8kHw==
-X-Received: by 10.28.175.212 with SMTP id y203mr9475985wme.2.1499731985045;
-	Mon, 10 Jul 2017 17:13:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.176.170 with HTTP; Mon, 10 Jul 2017 17:13:04 -0700 (PDT)
-In-Reply-To: <20170706093039.30435-1-johannes.pointner@br-automation.com>
-References: <20170706093039.30435-1-johannes.pointner@br-automation.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 10 Jul 2017 17:13:04 -0700
-Message-ID: <CAJ86T=XdFKzseQKej3w7rPamzfUmH0391r-hFX=aTquDjtnOew@mail.gmail.com>
-To: Johannes Pointner <johannes.pointner@br-automation.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libtinyxml2: upgrade to 5.0.1
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=and5wzbPl7on5DUeILVeVwYIV4avmuPBWe35lJV/SE8=;
+	b=h5eW2r+SESY5hkuwMVWJtCAQpzY8bIQ1WVZh9tvxz8jTKDxx5ndd1mkiTrJe/uuD6a
+	kptavpXETYUqSR1p84YBkwHX57qbiL5X3GwKtXvmOKkkWKLnRq3EmuJUZGTfnXPj1eYL
+	OB7O8nLn04RX7bbVsftrnEk0EUBP9IVJoN6D3eGC2L8D7yxsovh+5Orm9vW1Gc9y81NK
+	thd5Od3rxDxKv6NPPeS78sBCjeIGqId9ZXm2js9TTv8ZEdOQBR9vhTmQGskxiE+fII9+
+	80dfi6VrUyLw5S3eP0bFlTtV/Qd+1eIsQNOdTvhT3NSigAxTDYfe1zQhY6sXXfQyntWF
+	4MDw==
+X-Gm-Message-State: AIVw112AIzOuRABy0CWEituCDB6dSvFE9IFdJASre3NJzZbaAx8qyUdq
+	IIu6vugylriEtPEb
+X-Received: by 10.98.109.194 with SMTP id i185mr48802200pfc.138.1499748873128; 
+	Mon, 10 Jul 2017 21:54:33 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
+	by smtp.gmail.com with ESMTPSA id
+	l85sm24947833pfi.53.2017.07.10.21.54.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 10 Jul 2017 21:54:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 10 Jul 2017 21:54:21 -0700
+Message-Id: <20170711045423.21332-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-oe][PATCH 1/3] libdbus-c++: Add -pthread to linker flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,61 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 00:13:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 11 Jul 2017 04:54:34 -0000
 
-On Thu, Jul 6, 2017 at 2:30 AM, Johannes Pointner
-<johannes.pointner@br-automation.com> wrote:
-> Signed-off-by: Johannes Pointner <johannes.pointner@br-automation.com>
-> ---
->  .../{libtinyxml2_4.0.1.bb => libtinyxml2_5.0.1.bb}          | 13 ++++++++++++-
->  1 file changed, 12 insertions(+), 1 deletion(-)
->  rename meta-oe/recipes-support/libtinyxml2/{libtinyxml2_4.0.1.bb => libtinyxml2_5.0.1.bb} (63%)
->
-> diff --git a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-> similarity index 63%
-> rename from meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
-> rename to meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-> index 3a6659815..edf836814 100644
-> --- a/meta-oe/recipes-support/libtinyxml2/libtinyxml2_4.0.1.bb
-> +++ b/meta-oe/recipes-support/libtinyxml2/libtinyxml2_5.0.1.bb
-> @@ -6,10 +6,21 @@ LIC_FILES_CHKSUM = "file://tinyxml2.cpp;endline=22;md5=c19221dbd8a66ad3090462af4
->
->  SRC_URI = "git://github.com/leethomason/tinyxml2.git"
->
-> -SRCREV = "74d44acb176f8510abf28ee0a70961eb26631988"
-> +SRCREV = "37bc3aca429f0164adf68c23444540b4a24b5778"
->
->  S = "${WORKDIR}/git"
->
->  inherit cmake
->
-> +FILES_${PN} = " \
-> +    ${libdir}/lib*${SOLIBS} \
-> +    ${includedir}/* \
-> +    "
-> +
-> +FILES_${PN}-dev = " \
-> +    ${libdir}/lib*${SOLIBSDEV} \
-> +    ${libdir}/cmake/* \
-> +    ${libdir}/pkgconfig/* \
-> +    "
-> +
+It uses symbols from libpthread e.g. pthread_mutexattr_init and pthread_mutexattr_settype
+but does not link with pthreads, gold is strict about it and calls out with an error
 
-These packaging changes look very odd. Can you explain why they're needed?
+../src/.libs/libdbus-c++-1.so: error: undefined reference to 'pthread_mutexattr_init'
+../src/.libs/libdbus-c++-1.so: error: undefined reference to 'pthread_mutexattr_settype'
 
-If the default packaging rules are not sufficient, the preferred
-approach is to add additional patterns just to catch any unpackaged
-files, not to completely replace the default rules.
+Therefore correct the linker cmdline
 
->  BBCLASSEXTEND = "native"
-> --
-> 2.13.2
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+index 4cc133301..a6d8b86ee 100644
+--- a/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
++++ b/meta-oe/recipes-core/dbus/libdbus-c++_0.9.0.bb
+@@ -21,6 +21,7 @@ SRC_URI[sha256sum] = "bc11ac297b3cb010be904c72789695543ee3fdf3d75cdc8225fd371385
+ inherit autotools pkgconfig
+ 
+ EXTRA_OECONF = "--disable-ecore --disable-examples --disable-tests"
++LDFLAGS += "-pthread"
+ 
+ PACKAGE_BEFORE_PN = "${PN}-tools"
+ 
+-- 
+2.13.2
+
 
