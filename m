@@ -1,47 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
 	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 81E50719D0
+	by mail.openembedded.org (Postfix) with ESMTP id 585B6719D0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 12:28:45 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id a12so7001623ywh.1
+	Tue, 11 Jul 2017 12:30:25 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id l21so7004505ywb.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 05:28:47 -0700 (PDT)
+	Tue, 11 Jul 2017 05:30:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=EdPp8QDqpvrS7eLSKOWkujTRqUA724Tqcm5NdRhYHbM=;
-	b=nawAOYuuJcb7ADQIo1tBGIcqJMA0Q/LYUQcOBG9LGiP1nxvzgmE4C7xbefxCflxTPp
-	FvsBgiQ1rnBTfp53PNOEbHrghrg7vDfpTIlzCRFcGPcthYykYCeZUG6nt39QM8Mw3oJA
-	kpva7UNoUR67eIiioo1lbZapiQkH3kG0O77l8Lf4r+6+sHgf6R4yCCh9P+nREWTC6JvI
-	xjOvF35s5EB5t71lC4CSah6KO4u0nf+756JiAV7rhJt6ODHOmclZEaagwp7eOmfjCrY8
-	BVtlCYA47T2e0KyimhvVKksBJIc/v5clrnZ8RS3SxE8cYfGW9f+6pmjwUi7l9ToPVbkF
-	OigA==
+	:cc; bh=azQO/DCIt9k+dnP2h0UREPOITSngJ+4audfN0Lpmf7w=;
+	b=Pm5SB2KqoOoyGV/Dapu4isuG4Q40xEMi5KrQ2kWXaVnor/XG8ypUe4l6r/qx+04C22
+	KCIwWeW2q/TO06fzTwaVLt1T2Z1uX4/Noxr8FuBnC7Fh4W4oq8MsxJoIE7aJz0iEIN07
+	Xp3nIbBfOm4Ii+Uho4XI6r0UlXSY3PFxkQJjNP2r9B+9HTHVZTVJ3asc7auYkTgMxudG
+	ucOSsN4Vs0jam7ufkLONC0/OyuREkt7njwNvvenM0qsTpc/fx7zqrMdY7cZ/TFnKQRJJ
+	WDmDok6XKQO+YrwBOxS6sK+saocRF1rEFL90lo8TlgoNBhDhR+M9U4eoWbR1rpOi6XFz
+	7rIA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=EdPp8QDqpvrS7eLSKOWkujTRqUA724Tqcm5NdRhYHbM=;
-	b=CtTQUEJja+IAyPIZ0yTddDXiGjXLnii2E/gqp1EiLI+PoX0gyWNwqzS3hdtFUQRNI8
-	z+xFIinnlU/HGdVdlCe27vF876rmHnMcl5oBQOuIPcZ/vn2XXhCM18B32SFjrcJi+Oz1
-	6ACIBb+0VHbAYyNlG++ti83OH6nQq/rrf2kCTkRxZciAiBpNAcRX/wmh+0bEVcaqHIOk
-	HpeRQR0tg0mMhx8hfZXC/9KiMtHB0R8Kro3j0xa9rmOLRTfP428c5G59KncPzdjWu2LG
-	aMrHHN+nxcgfEsssJEPgT9HFemRJz209/Pgm92E4J6P8K2YtXQYSar8HkgedhKtBoqEf
-	Ie2g==
-X-Gm-Message-State: AIVw112rLRVzVrmPyMTfYKzAYAWiRtQ1DSaPZlJVaEwSMb/rxtVh619Q
-	nM/xZtXFqW6EmXs/p0hcoayQP/tZnA==
-X-Received: by 10.129.49.83 with SMTP id x80mr4680019ywx.0.1499776126522; Tue,
-	11 Jul 2017 05:28:46 -0700 (PDT)
+	bh=azQO/DCIt9k+dnP2h0UREPOITSngJ+4audfN0Lpmf7w=;
+	b=XSCc4/H0KjMH2ErCbbFmNCCVTwQi983CiHUCGb5ZzWs3JFWC3Clsepmy4JiUK1jLDs
+	tcH93ElNryDgp49OumUgj3yQ2TPwX/xu9c/lcoQOZBDIGYDt+BwWCn6lanmY+18xOIYk
+	0qA9MITWOtR94xY72pDmEoDoslRSFAZ2NbqFg0tR6rGSh1u1C76lNrkHwRvfEq7svkb2
+	KtmpLMitMcAftycE+fx0qgNhJzq4CLAb3TCjbwarvjQtwGc6dlewwVZbPJQD6gjoGuvb
+	IINIoDOV2OBuSL73/xuVqa0KycIrkwJQ/fut0wdgFBHWS0dRicOt6II4NZkJi26g9YBR
+	Mq5g==
+X-Gm-Message-State: AIVw112Qy1GzBpI6ERVQl/0kpvhmWnVbCFf33YMO1OPe3xo+/0zsUTb0
+	1JufBq4FH061gPeT3iZTIntfXPv5pA==
+X-Received: by 10.129.62.29 with SMTP id l29mr4706413ywa.9.1499776225026; Tue,
+	11 Jul 2017 05:30:25 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Tue, 11 Jul 2017 05:28:45 -0700 (PDT)
-In-Reply-To: <20170709162934.21355-1-krzk@kernel.org>
-References: <20170709162934.21355-1-krzk@kernel.org>
+Received: by 10.37.77.4 with HTTP; Tue, 11 Jul 2017 05:30:24 -0700 (PDT)
+In-Reply-To: <20170711045423.21332-2-raj.khem@gmail.com>
+References: <20170711045423.21332-1-raj.khem@gmail.com>
+	<20170711045423.21332-2-raj.khem@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 11 Jul 2017 14:28:45 +0200
-Message-ID: <CA+chaQfYB8ONFeTgGsq_kBsLOjAUcfY5y_roReYdL1gMo7B_6Q@mail.gmail.com>
-To: Krzysztof Kozlowski <krzk@kernel.org>
+Date: Tue, 11 Jul 2017 14:30:24 +0200
+Message-ID: <CA+chaQcka+1Pjc7OJ=KVgAsyGdL7m05OThcpgXdCCThAWNcABA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-filesystems][PATCH] recipes-utils: Add recipe for udevil
+Subject: Re: [meta-initramfs][PATCH V2 2/3] klibc: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,90 +55,323 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 12:28:45 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 12:30:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Please use 4 spaces for indentation and the service file doesn't exist
-causing build to fail as in:
-http://errors.yoctoproject.org/Errors/Details/147258/
+Seems to break the build for qemuarm:
+http://errors.yoctoproject.org/Errors/Details/147256/
+http://errors.yoctoproject.org/Errors/Details/147257/
 
-On Sun, Jul 9, 2017 at 6:29 PM, Krzysztof Kozlowski <krzk@kernel.org> wrote:
+Also there is small typo in commit message "resepct"
 
-> udevil is a command line Linux program which mounts and unmounts
-> removable devices without a password.
+On Tue, Jul 11, 2017 at 6:54 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> klibc failed to build with armv7+ when using thumb2
+> it needed to resepct TUNE_CCARGS
 >
-> Signed-off-by: Krzysztof Kozlowski <krzk@kernel.org>
+> Add patches to fix build with musl, to sort out
+> the linux header maze.
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Cc: Andrea Adami <andrea.adami@gmail.com>
 > ---
->  .../0001-udevil-0.4.3-fix-compile-with-gcc6.patch  | 12 ++++++++++
->  .../recipes-utils/udevil/udevil_0.4.4.bb           | 28
+>  ...ine-in_-structs-for-non-glibc-system-libs.patch | 85
 > ++++++++++++++++++++++
->  2 files changed, 40 insertions(+)
->  create mode 100644 meta-filesystems/recipes-utils/udevil/files/0001-
-> udevil-0.4.3-fix-compile-with-gcc6.patch
->  create mode 100644 meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
+>  ...0001-dash-Specify-format-string-in-fmtstr.patch | 31 ++++++++
+>  .../0001-include-linux-sysinfo.h-directly.patch    | 32 ++++++++
+>  .../klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch | 29 ++++++++
+>  meta-initramfs/recipes-devtools/klibc/klibc.inc    | 34 ++++++---
+>  5 files changed, 200 insertions(+), 11 deletions(-)
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-Define-in_-structs-for-non-glibc-system-libs.patch
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-dash-Specify-format-string-in-fmtstr.patch
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-include-linux-sysinfo.h-directly.patch
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-mkfifo-Implement-mkfifo.patch
 >
-> diff --git a/meta-filesystems/recipes-utils/udevil/files/0001-
-> udevil-0.4.3-fix-compile-with-gcc6.patch b/meta-filesystems/recipes-
-> utils/udevil/files/0001-udevil-0.4.3-fix-compile-with-gcc6.patch
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-Define-in_-structs-for-non-glibc-system-libs.patch
+> b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-Define-in_-structs-for-non-glibc-system-libs.patch
 > new file mode 100644
-> index 000000000000..355e93a37b3b
+> index 000000000..8d1ec69ae
 > --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/udevil/files/0001-
-> udevil-0.4.3-fix-compile-with-gcc6.patch
-> @@ -0,0 +1,12 @@
-> +Fix compilation with GCC6
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-Define-in_-structs-for-non-glibc-system-libs.patch
+> @@ -0,0 +1,85 @@
+> +From f414dea1316a48aba3e8e293201ebd51652d3ef4 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 9 Jul 2017 15:17:29 -0700
+> +Subject: [PATCH] Define in_* structs for non-glibc system libs
 > +
-> +--- a/src/device-info.c        2013-12-09 14:59:27.000000000 +0100
-> ++++ b/src/device-info.c        2017-03-13 07:06:25.506666680 +0100
-> +@@ -3,6 +3,7 @@
-> +  * contains code excerpts from udisks v1.0.4
-> + **************************************************************************
+> +These defines and structs are required to be coming from
+> +userspace netinet/in.h, which is being overridden in klibc
+> +however, libc-compat.h from kernel is only written keeping
+> +glibc in mind, and does not provide adequate guards for musl
+> +to infer that these structs should be defined in linux/in.h
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + usr/include/netinet/in.h | 33 +++++++++++++++++++++++++++++++++
+> + 1 file changed, 33 insertions(+)
+> +
+> +Index: git/usr/include/netinet/in.h
+> +===================================================================
+> +--- git.orig/usr/include/netinet/in.h
+> ++++ git/usr/include/netinet/in.h
+> +@@ -5,6 +5,42 @@
+> + #ifndef _NETINET_IN_H
+> + #define _NETINET_IN_H
+> +
+> ++#ifndef __GLIBC__
+> ++#include <linux/libc-compat.h>
+> ++
+> ++#undef __UAPI_DEF_IN_ADDR
+> ++#undef __UAPI_DEF_IN_IPPROTO
+> ++#undef __UAPI_DEF_IN_PKTINFO
+> ++#undef __UAPI_DEF_IP_MREQ
+> ++#undef __UAPI_DEF_SOCKADDR_IN
+> ++#undef __UAPI_DEF_IN_CLASS
+> ++#undef __UAPI_DEF_IN6_ADDR
+> ++#undef __UAPI_DEF_IN6_ADDR_ALT
+> ++#undef __UAPI_DEF_SOCKADDR_IN6
+> ++#undef __UAPI_DEF_IPV6_MREQ
+> ++#undef __UAPI_DEF_IPPROTO_V6
+> ++#undef __UAPI_DEF_IPV6_OPTIONS
+> ++#undef __UAPI_DEF_IN6_PKTINFO
+> ++#undef __UAPI_DEF_IP6_MTUINFO
+> ++#undef __UAPI_DEF_IF_IFREQ
+> ++
+> ++#define __UAPI_DEF_IN_ADDR      1
+> ++#define __UAPI_DEF_IN_IPPROTO   1
+> ++#define __UAPI_DEF_IN_PKTINFO   1
+> ++#define __UAPI_DEF_IP_MREQ      1
+> ++#define __UAPI_DEF_SOCKADDR_IN  1
+> ++#define __UAPI_DEF_IN_CLASS     1
+> ++#define __UAPI_DEF_IN6_ADDR     1
+> ++#define __UAPI_DEF_IN6_ADDR_ALT 1
+> ++#define __UAPI_DEF_SOCKADDR_IN6 1
+> ++#define __UAPI_DEF_IPV6_MREQ    1
+> ++#define __UAPI_DEF_IPPROTO_V6   1
+> ++#define __UAPI_DEF_IPV6_OPTIONS 1
+> ++#define __UAPI_DEF_IN6_PKTINFO  1
+> ++#define __UAPI_DEF_IP6_MTUINFO  1
+> ++#define __UAPI_DEF_IF_IFREQ     1
+> ++#endif
+> ++
+> + #include <klibc/extern.h>
+> + #include <stdint.h>
+> + #include <endian.h>           /* Must be included *before* <linux/in.h>
 > */
+> +Index: git/usr/include/net/if.h
+> +===================================================================
+> +--- git.orig/usr/include/net/if.h
+> ++++ git/usr/include/net/if.h
+> +@@ -1,6 +1,17 @@
+> + #ifndef _NET_IF_H
+> + #define _NET_IF_H
 > +
-> ++#include <sys/stat.h>
-> + #include "device-info.h"
-> +
-> + static char *
-> diff --git a/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
-> b/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
+> ++#ifndef __GLIBC__
+> ++#include <linux/libc-compat.h>
+> ++#undef __UAPI_DEF_IF_IFREQ
+> ++#define __UAPI_DEF_IF_IFREQ            1
+> ++#undef __UAPI_DEF_IF_IFNAMSIZ
+> ++#define __UAPI_DEF_IF_IFNAMSIZ         1
+> ++#undef __UAPI_DEF_IF_IFMAP
+> ++#define __UAPI_DEF_IF_IFMAP            1
+> ++#undef __UAPI_DEF_IF_NET_DEVICE_FLAGS
+> ++#define __UAPI_DEF_IF_NET_DEVICE_FLAGS 1
+> ++#endif
+> + #include <sys/socket.h>
+> + #include <sys/types.h>
+> + #include <linux/if.h>
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-dash-Specify-format-string-in-fmtstr.patch b/meta-initramfs/recipes-
+> devtools/klibc/klibc-2.0.4/0001-dash-Specify-format-string-in-fmtstr.patch
 > new file mode 100644
-> index 000000000000..4ad4a09ed717
+> index 000000000..ae8c1f11a
 > --- /dev/null
-> +++ b/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb
-> @@ -0,0 +1,28 @@
-> +SUMMARY = "A command line Linux program which mounts and unmounts
-> removable devices"
-> +HOMEPAGE = "http://ignorantguru.github.io/udevil/"
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-dash-Specify-format-string-in-fmtstr.patch
+> @@ -0,0 +1,31 @@
+> +From 2fff607fd0b5550e5072a6fffcbb01c29d5207d2 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 9 Jul 2017 13:51:25 -0700
+> +Subject: [PATCH] dash: Specify format string in fmtstr()
 > +
-> +DEPENDS = "glib-2.0 \
-> +           glib-2.0-native \
-> +           intltool-native \
-> +           udev \
+> +Fixes build with hardening flags
+> +
+> +usr/dash/jobs.c:429:3: error: format not a string literal and no format
+> arguments [-Werror=format-security]
+> +   col = fmtstr(s, 32, strsignal(st));
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + usr/dash/jobs.c | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/usr/dash/jobs.c b/usr/dash/jobs.c
+> +index 009bbfee..299bcacc 100644
+> +--- a/usr/dash/jobs.c
+> ++++ b/usr/dash/jobs.c
+> +@@ -426,7 +426,7 @@ sprint_status(char *s, int status, int sigonly)
+> +                               goto out;
+> + #endif
+> +               }
+> +-              col = fmtstr(s, 32, strsignal(st));
+> ++              col = fmtstr(s, 32, "%s", strsignal(st));
+> + #ifdef WCOREDUMP
+> +               if (WCOREDUMP(status)) {
+> +                       col += fmtstr(s + col, 16, " (core dumped)");
+> +--
+> +2.13.2
+> +
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-include-linux-sysinfo.h-directly.patch b/meta-initramfs/recipes-
+> devtools/klibc/klibc-2.0.4/0001-include-linux-sysinfo.h-directly.patch
+> new file mode 100644
+> index 000000000..1b033acc4
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-include-linux-sysinfo.h-directly.patch
+> @@ -0,0 +1,32 @@
+> +From ab060a57b41f989665ade20e813bbcb67f91f1f2 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 9 Jul 2017 15:56:28 -0700
+> +Subject: [PATCH] include linux/sysinfo.h directly
+> +
+> +This is done to avoid the kernel header linux/kernel.h to use
+> +__GLIBC__ define to decide on if libc implements sysinfo() API
+> +or not. Kernel headers should be independent of such assumptions
+> +but until its done in right place, change the local header
+> +override to avoid this assumption
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + usr/include/sys/sysinfo.h | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/usr/include/sys/sysinfo.h b/usr/include/sys/sysinfo.h
+> +index dba68dc6..d145c0b1 100644
+> +--- a/usr/include/sys/sysinfo.h
+> ++++ b/usr/include/sys/sysinfo.h
+> +@@ -5,7 +5,7 @@
+> + #ifndef _SYS_SYSINFO_H
+> + #define _SYS_SYSINFO_H
+> +
+> +-#include <linux/kernel.h>
+> ++#include <linux/sysinfo.h>
+> +
+> + extern int sysinfo(struct sysinfo *info);
+> +
+> +--
+> +2.13.2
+> +
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-mkfifo-Implement-mkfifo.patch b/meta-initramfs/recipes-
+> devtools/klibc/klibc-2.0.4/0001-mkfifo-Implement-mkfifo.patch
+> new file mode 100644
+> index 000000000..9791412e4
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/
+> 0001-mkfifo-Implement-mkfifo.patch
+> @@ -0,0 +1,29 @@
+> +From b4e120f5edf06e6df138b1804a8b5180584cea6b Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Mon, 10 Jul 2017 20:42:50 -0700
+> +Subject: [PATCH] mkfifo: Implement mkfifo
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + usr/utils/mkfifo.c | 5 +++++
+> + 1 file changed, 5 insertions(+)
+> +
+> +diff --git a/usr/utils/mkfifo.c b/usr/utils/mkfifo.c
+> +index 5a758b2a..f1f577e6 100644
+> +--- a/usr/utils/mkfifo.c
+> ++++ b/usr/utils/mkfifo.c
+> +@@ -26,6 +26,11 @@ static int make_fifo(char *dir)
+> +       return 0;
+> + }
+> +
+> ++int mkfifo (const char *__p, mode_t __m)
+> ++{
+> ++      return mknod(__p, (__m & ~S_IFMT) | S_IFIFO, (dev_t) 0);
+> ++}
+> ++
+> + int main(int argc, char *argv[])
+> + {
+> +       int c, ret = 0;
+> +--
+> +2.13.2
+> +
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> index e039cb2c1..be59aa443 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> @@ -7,17 +7,23 @@ LIC_FILES_CHKSUM = "file://usr/klibc/LICENSE;md5=
+> d75181f10e998c21eb147f6d2e43ce8
+>  DEPENDS = "linux-libc-headers perl-native"
+>  SRCREV = "4d19974d7020488f63651244e1f9f51727c3f66c"
+>
+> -SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git"
+> -SRC_URI_append_linux-gnueabi = " file://klibc-config-eabi.patch \
+> -                                 file://armv4-fix-v4bx.patch \
+> -                                 "
+> -SRC_URI_append_linux-uclibceabi = " file://klibc-config-eabi.patch \
+> -                                    file://armv4-fix-v4bx.patch \
+> -                                    "
+> -SRC_URI += "file://klibc-linux-libc-dev.patch \
+> -            file://staging.patch \
+> -            file://klcc-consider-sysroot.patch \
+> -            "
+> +SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
+> +           ${ARMPATCHES} \
+> +           file://klibc-linux-libc-dev.patch \
+> +           file://staging.patch \
+> +           file://klcc-consider-sysroot.patch \
+> +           file://0001-dash-Specify-format-string-in-fmtstr.patch \
+> +           file://0001-Define-in_-structs-for-non-glibc-system-libs.patch
+> \
+> +           file://0001-include-linux-sysinfo.h-directly.patch \
+> +           file://0001-mkfifo-Implement-mkfifo.patch \
 > +"
-> +RDEPENDS_${PN} = "glib-2.0 \
-> +                  udev \
-> +"
 > +
-> +LICENSE = "GPL-3.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+> +ARMPATCHES ?= ""
 > +
-> +inherit autotools pkgconfig systemd
+> +ARMPATCHES_arm = "file://klibc-config-eabi.patch \
+> +                  file://armv4-fix-v4bx.patch \
+> +                 "
 > +
-> +SRC_URI = "https://github.com/IgnorantGuru/udevil/raw/pkg/${
-> PV}/udevil-${PV}.tar.xz \
-> +           file://0001-udevil-0.4.3-fix-compile-with-gcc6.patch \
-> +"
+>
+>  S = "${WORKDIR}/git"
+>
+> @@ -30,9 +36,12 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+>                  'INSTALLROOT=${D}' \
+>                  'INSTALLDIR=${libdir}/klibc' \
+>                  'SHLIBDIR=${libdir}' \
+> +                '${KLIBCTHUMB}' \
+> +                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
+>                  "
+>
+>  export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
+> +KLIBCTHUMB = "${@['', 'CONFIG_KLIBC_THUMB=y'][(d.getVar('ARM_INSTRUCTION_SET')
+> == 'thumb')]}"
+>
+>  do_configure () {
+>      ln -sf "${STAGING_DIR_TARGET}${exec_prefix}" linux
+> @@ -51,3 +60,6 @@ KLIBC_ARCH_x86-64 = "x86_64"
+>  KLIBC_ARCH_powerpc = "ppc"
+>  KLIBC_ARCH_powerpc64 = "ppc64"
+>  THIS_LIBKLIBC = "libklibc (= ${PV}-${PR})"
 > +
-> +SRC_URI[md5sum] = "dc1c489b603a0500a04dc7e1805ac1d9"
-> +SRC_URI[sha256sum] = "ce8c51fd4d589cda7be56e75b42188
-> deeb258c66fc911a9b3a70a3945c157739"
-> +
-> +SYSTEMD_SERVICE_${PN} = "devmon@.service"
-> +SYSTEMD_AUTO_ENABLE = "disable"
-> +
-> +FILES_${PN} += " ${libdir}/systemd/system/devmon@.service"
+> +SECURITY_CFLAGS = "-fno-PIE -no-pie"
+> +SECURITY_LDFLAGS = "-no-pie"
 > --
-> 2.11.0
+> 2.13.2
 >
 > --
 > _______________________________________________
