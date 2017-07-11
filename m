@@ -1,50 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
-	[209.85.217.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B60777E06
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 16:32:26 +0000 (UTC)
-Received: by mail-ua0-f174.google.com with SMTP id j53so3467022uaa.2
-	for <Openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:32:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=6cd6S3EO2tQUA8og7hezqL/npbL3g0iVX8vYk8qxKpk=;
-	b=EA4t6rqkW9aeP8uFnqTJCDFCS+SYhvWXxTp9g0C8Ur6LdDAtR9isEphFPLu+/PLuEJ
-	59TVzO/6OolX1p/UrU91xHtUbFolSgj/DIXQMHU2fG5DCFF5KxN6gycmJ7QduAtC3J1L
-	73e06MDNqKG9GnMi6lFrjzlUi1U/1BZKRS0u4zN4mjfeScXkwIx9VlU45ll1BqfUPB5U
-	9oS8mSL+t9Bal1Utc0ZKJGt5xvJ0LXqYkr6k3cMa/JGEBCamgNpym2mmqRq4UTmCWhMz
-	ztcSsOeFKrVWkKVnhLBSMfgbQD588NMECt2jS8MyVQSXvvNOi9EUjB2EQZ60dwkacyD0
-	WC2Q==
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
+	[209.85.215.43])
+	by mail.openembedded.org (Postfix) with ESMTP id A356077D48
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jul 2017 16:44:58 +0000 (UTC)
+Received: by mail-lf0-f43.google.com with SMTP id z78so5369089lff.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 Jul 2017 09:45:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=o6O7nUSQvf6srFNgH8sX5DnrK8XOLIyhEVTTJy/NrH0=;
+	b=kHUThLzSGXplnxVkFJxDieGLjt+GhwEPic+26wX2XOkX8YRCeWcEcLGACzV2JzcD+L
+	tsicqbQfuj0n6ThP2tdf/uIbEh9Nr5dnzd9UFsOywPGULI+MCCF3Bpl3QeynYT3FYz3B
+	VNIeB9M4rdnpocguwAI/gWEF2luFpL/sM3UygP/pBSTcjTHNtdXqDNUbi3ERgp/mojVk
+	FmbQzxWMmKg0C++fnNVSAxKjdRb7jQBLlMG0VCLIqtPMUpfcCzjk22NbJjvN7BZSw9u+
+	BruZ39LoOCA/wWShCy7h55WJpE4gS38Pz1ZBmKAXUldPAVMXsH16iHs0hHAynUWXD3yg
+	zq6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=6cd6S3EO2tQUA8og7hezqL/npbL3g0iVX8vYk8qxKpk=;
-	b=GTBF0+8McEiT8OGrrf6bn0eNM+zWj9nL+SmHuIHL0ZMhCwvgxijqstxqI1Q2ur02Hg
-	bXXZd2OHre4mJFi+CpgDQjAYxj+Wi8PrApzhLmqaxLgNk3bURBxDyzH6An5ulXWvUkSH
-	h3ubYMf+UIHY97ADe5G/wF4rOKuIqAF/HFAlZVW5aU3YHeo11ovSRmqPtUQD7WPAdfuJ
-	0ZgTNqACSCDUj8a4LYqbgglsuhtBq3m3AzRZPacTyFPobezd53Eag7bsbEDQwB3Y1wN9
-	Kzd0BXOWoAaPyz07QXoKBEhGXQtcstLHnsaqeCEz//Ksntpx7E+8Qd5S/JRtFPxEOUz3
-	1p+Q==
-X-Gm-Message-State: AIVw1133NQnukswNdvdILAMGJ8fFy9vJnPpwTwhKQJ83qHZ9qVLNN+9f
-	C8QQBlMeuj6YNSfYCyuE9QUk/+UVbwhH
-X-Received: by 10.176.0.104 with SMTP id 95mr429466uai.124.1499790747919; Tue,
-	11 Jul 2017 09:32:27 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.77.72 with HTTP; Tue, 11 Jul 2017 09:32:27 -0700 (PDT)
-In-Reply-To: <CAMKF1spB+OyV7HLOyTy7NfE88+NQD_9QRADisH-ipdQGm2V_tw@mail.gmail.com>
-References: <CAMKF1squ2QyqpKvUKbz7QP5YsBvd94B6jFaju0hL+qWy6cA7tA@mail.gmail.com>
-	<CALbNGRQi_rdechQn35Dv+R9-42cvVahNt=K8MPYkaqhUhF90_A@mail.gmail.com>
-	<CAMKF1spB+OyV7HLOyTy7NfE88+NQD_9QRADisH-ipdQGm2V_tw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Tue, 11 Jul 2017 18:32:27 +0200
-Message-ID: <CALbNGRRxTNuWm_sLb2vUZjGHMerFP7OkkbptY6HM6iEXxjTXUQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] qdbuscpp2xml native Crash
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=o6O7nUSQvf6srFNgH8sX5DnrK8XOLIyhEVTTJy/NrH0=;
+	b=mLzUFKj8M72iXVLfMShuOOyez1QyrP5oqUO+42SlOpVCosyWd+tJUp8nN6tfG1swZI
+	2NxJlap9oSGug5kZvrmiWQrlv2tnSdLl5gt3sIwsFIM4S342PZln0iKBkG7X2qcwJmO0
+	1GAgq/FS6wsqSiQAjes7jZv55YlgLcxQqSC8vk/sgEOwn6KL8QpdMhEXdVCBQn7LvQGn
+	OELHQs23JXCrsy6jzBTpaBliFsjaWV4xx4+wSTOGT+XcE5n/5tTVSvfvCpR5AKOg7Tdl
+	nFPhbfdZxNTWxMOZ68YMsu8XZelNgPqAbmT4SwoAZxKsl+Gv/kOwXLKEUlln5hyRk8xi
+	IPHw==
+X-Gm-Message-State: AIVw111rFjo6QZDAZh7RPOEaTS+WAM6bdp4nvGIsSj2mpiq2tBWvT0qS
+	syB0B/rE/lqRCDTy
+X-Received: by 10.80.241.71 with SMTP id z7mr3298567edl.182.1499791498999;
+	Tue, 11 Jul 2017 09:44:58 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([27.191.203.112]) by smtp.gmail.com with ESMTPSA id
+	p19sm1224952eda.15.2017.07.11.09.44.56
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 11 Jul 2017 09:44:58 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Jul 2017 18:44:30 +0200
+Message-Id: <1499791478-2407-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe/meta-perl] [PATCH 0/8] po4a: add full functionalities
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,36 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 16:32:27 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 Jul 2017 16:44:59 -0000
 
-On Tue, Jul 11, 2017 at 5:58 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Jul 11, 2017 at 12:22 AM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Tue, Jul 11, 2017 at 8:42 AM, Khem Raj <raj.khem@gmail.com> wrote:
->>> Hi Andreas
->>>
->>> This patch was added by you.
->>>
->>> https://github.com/meta-qt5/meta-qt5/blob/master/recipes-qt/qt5/qtbase/=
-0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>>
->>> This is actually causing qdbuscpp2xml  tool to segfault just on invocat=
-ion
->>> when I build using on arch linux host.
->> Have you tried qdbuscpp2xml without this patch? Although it does not
->> solve your problem: I have Fedora 25 on my machines and qdbuscpp2xml
->> does not crash.
->
-> if I disable this patch then build goes through fine. I have qt5 5.9.x
-> installed on build machine as part of KDE desktop, I wonder if that
-> has some influence over native qt5 packages.
-The more I think of this - yes: Building qdbuscpp2xml not bootstrapped
-causes linking against host's libraries and makes build dependent on
-the version installed on host. The only way out I see is to remove
-this patch and hope a bootstrapped qdbuscpp2xml 5.9 works properly for
-kde's baloo..
+From: Ming Liu <liu.ming50@gmail.com>
 
-Andreas
+This patch series mainly aim to let po4a and po4a-native work with
+full functionalities by adding the following dependencies to its
+DEPENDS and RRECOMMENDS_${PN}:
+- libtext-wrapi18n-perl
+- libterm-readkey-perl
+- liblocale-gettext-perl
+- libunicode-linebreak-perl
+
+Ming Liu (8):
+  libsombok3: add recipe
+  libmime-charset-perl: add recipe
+  libterm-readkey-perl: add recipe
+  liblocale-gettext-perl: add recipe
+  libtext-charwidth-perl: add recipe
+  libtext-wrapi18n-perl: add recipe
+  libunicode-linebreak-perl: add recipe
+  po4a: add full functionalities
+
+ ...01-configure.ac-fix-cross-compiling-issue.patch | 31 +++++++++++++++++++
+ .../libsombok3/libsombok3_2.4.0.bb                 | 25 +++++++++++++++
+ .../liblocale/liblocale-gettext-perl_1.07.bb       | 21 +++++++++++++
+ .../libmime/libmime-charset-perl_1.012.2.bb        | 19 ++++++++++++
+ .../libterm/libterm-readkey-perl_2.37.bb           | 36 ++++++++++++++++++++++
+ .../libtext/libtext-charwidth-perl_0.04.bb         | 27 ++++++++++++++++
+ .../libtext/libtext-wrapi18n-perl_0.06.bb          | 32 +++++++++++++++++++
+ .../libunicode-linebreak-perl_2017.004.bb          | 26 ++++++++++++++++
+ meta-perl/recipes-perl/po4a/po4a_0.49.bb           | 17 ++++++++--
+ 9 files changed, 232 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3/0001-configure.ac-fix-cross-compiling-issue.patch
+ create mode 100644 meta-oe/recipes-devtools/libsombok3/libsombok3_2.4.0.bb
+ create mode 100644 meta-perl/recipes-perl/liblocale/liblocale-gettext-perl_1.07.bb
+ create mode 100644 meta-perl/recipes-perl/libmime/libmime-charset-perl_1.012.2.bb
+ create mode 100644 meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb
+ create mode 100644 meta-perl/recipes-perl/libtext/libtext-charwidth-perl_0.04.bb
+ create mode 100644 meta-perl/recipes-perl/libtext/libtext-wrapi18n-perl_0.06.bb
+ create mode 100644 meta-perl/recipes-perl/libunicode/libunicode-linebreak-perl_2017.004.bb
+
+-- 
+2.7.4
+
 
