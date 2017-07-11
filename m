@@ -1,46 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 54D4077FA6
+Received: from mail-yw0-f180.google.com (mail-yw0-f180.google.com
+	[209.85.161.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 8B33E78044
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 09:21:16 +0000 (UTC)
-Received: by mail-wr0-f182.google.com with SMTP id 77so174553619wrb.1
+	Tue, 11 Jul 2017 10:04:13 +0000 (UTC)
+Received: by mail-yw0-f180.google.com with SMTP id l21so46639209ywb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 02:21:18 -0700 (PDT)
+	Tue, 11 Jul 2017 03:04:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=6Thn0sk0fOePXcMK46h5HI1/qAH95bSSnS5XXBGbutc=;
-	b=p+VKzTlDMmVVk6ud3pm2Pg17U/KVvcuGI1jAdJhdrqEueWYDz/+xASDETmt1+N6/w8
-	aKveP7X/0uPremHtnQgpCRhX3GTbDlb644v0F5oy4F2gASgOvPkNT7lYSVx7r+4iG6bd
-	v0QnvIyZVP33K77QhZ+Ty9oVFlRN0CRuah6NqJIJ2+sLaTSzm9t9yJohUAcarKkFvdYX
-	5EnaOnr2HWFhBkqxHUlRrBak0rixlMYJa4kt9R/AtXlUQqHxeFop21SiynkhBsQbjz/S
-	rtE3PVAg0PPUb5eTKhm7q4PFRFMa6+bZVoTaBqlzePRi7r61LFZl/FCOd9tdVKDt8o+l
-	b40g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=H0coGM6bcbrHLvtSuScaSKEfQg6ItDtMbuXzVHlKCPQ=;
+	b=iXFwp/PFKLWy7BzbCOU80yRdhX8i8f2n68l3gI7jqE6pqA0baqaVS2Q/LKV0fgUjzM
+	ToELn96G0sbDutaSjYdGmJovDWKKMXntbOnMpXpxnAugWb2T2q5y+38wTucalo1YURHP
+	+O/gjH+8xR3xkF0rq6ScsdMM/f/Q7HuM7ZFUrydLMMhHOxSSPoStDRC4irqfF0lKl5GG
+	pe4xnHvll92mLuPt3ZA2tTIkrRFZL1yo7NA+rOaq6IEYYN3CzhNgOu+RsOL/dYf8ZW2A
+	Nx8SaiZF3sparr6JwQbEw6vojtAAb9mYXjzjARxmFu4Ox9GApLTCukYEAKpvtChPlmHn
+	NMCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6Thn0sk0fOePXcMK46h5HI1/qAH95bSSnS5XXBGbutc=;
-	b=NLP++ykj1Ep+eDoesRcSDyWmK6ZuL2kCv43ShGpS8girGs369SVSY1V39W4tRuD3f5
-	llO2eZ9fhmdYslouzUgt/jhMD4aTCHuOGOBhYD4j0qKX3cs1hGVBzx0OUuszaPZ9xc5H
-	mkwjnKL1cNmnyJXUrugagmmzfNeAT3FfEDwu2/RPg8wHstlm2jK4ICHHYCeQPSqYskRz
-	/EwDaFU8XledySDDpLtwTvr5yHz3tRGwN9Jgb99vqbhYLM0+NPLWaam6wPfBM2i1n7OU
-	H+dWmWjHoE24TyE9pe3mAeHO80gABbgUEpVrOavx+vCX5nebc1nj9ZrIphjEJVPe46Mh
-	wsPQ==
-X-Gm-Message-State: AIVw1105VE/x4dp8N+n3Vr1L7gRT923+rZXt8gHXzJBcCbV0MwvvCjHY
-	G07+TK8Osc0MtgfH
-X-Received: by 10.28.109.26 with SMTP id i26mr10653191wmc.64.1499764877953;
-	Tue, 11 Jul 2017 02:21:17 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	o131sm11520051wmd.26.2017.07.11.02.21.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 11 Jul 2017 02:21:16 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=H0coGM6bcbrHLvtSuScaSKEfQg6ItDtMbuXzVHlKCPQ=;
+	b=eOOAPW+RNxVvRH8lsJGuahl5Z6+p8BxqcH7WHMv7BWnFlKdlTlRzSeuOdI9APWzGxt
+	YRiAyh7X2XlB5k/hNq+ugDTKM0CbAnJiSSza6dlf8UJlczWV5vnNes+H+HaD7YPOvTPl
+	8QtwDn7D3gOpbS6+ANLl9hmUknlntq9yzsC8mHIKUkfh3PYrRsSWdW/Z5ZDZVbcayuCX
+	7igPIF/XlCQbf7kqnMiX2ce4c9ucfLyU4ZVXZjW/wyM+k+SOAdDWvIavGLMBGhoplrSP
+	euhCD5eBq0oRFoi5occuFxJbKogCzipDsrwMkwNOBhTEcJnopzP051BI9VL5DW40r700
+	/HXw==
+X-Gm-Message-State: AIVw112UN+rmWyZJBqoKyuA6yzLRaKbxUjg8OZJ43v5zhYbBGKOg1KPH
+	edmmDdBdp6fELBFIEJlQgX65FkyY/bD3
+X-Received: by 10.129.62.29 with SMTP id l29mr4064088ywa.9.1499763722958; Tue,
+	11 Jul 2017 02:02:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.77.4 with HTTP; Tue, 11 Jul 2017 02:02:02 -0700 (PDT)
+In-Reply-To: <1498801625-1064-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
+References: <1498801625-1064-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<1498801625-1064-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 Jul 2017 11:21:54 +0200
-Message-Id: <20170711092154.23082-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.13.2
-Subject: [PATCHv2][meta-oe] fluentbit: fix SYSTEMD_SERVICE name
+Date: Tue, 11 Jul 2017 11:02:02 +0200
+Message-ID: <CA+chaQdn0qcX5xpvUo8tr+gM9KeTfErz0mNJBfgvAy0-XL+3Dw@mail.gmail.com>
+To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH v3 1/3] qt5: add qt5-ptest.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,67 +55,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 09:21:24 -0000
+X-List-Received-Date: Tue, 11 Jul 2017 10:04:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* the binary and service name was renamed in 0.11.11
-  from fluent-bit to td-agent-bit, but unfortunately
-  SYSTEMD_SERVICE wasn't updated in the recipe with
-  the upgrade causing do_package failures as in:
-  http://errors.yoctoproject.org/Errors/Details/147040/
-  ERROR: SYSTEMD_SERVICE_fluentbit value fluent-bit.service does not exist
+This breaks qtxmlpatterns-native build as shown in:
+http://errors.yoctoproject.org/Errors/Details/147039/
 
-0.11.3-r0/image/
-0.11.3-r0/image/etc
-0.11.3-r0/image/etc/fluent-bit
-0.11.3-r0/image/etc/fluent-bit/parsers.conf
-0.11.3-r0/image/etc/fluent-bit/fluent-bit.conf
-0.11.3-r0/image/lib
-0.11.3-r0/image/lib/systemd
-0.11.3-r0/image/lib/systemd/system
-0.11.3-r0/image/lib/systemd/system/fluent-bit.service
-0.11.3-r0/image/usr
-0.11.3-r0/image/usr/bin
-0.11.3-r0/image/usr/bin/fluent-bit
-0.11.3-r0/image/usr/lib
-0.11.3-r0/image/usr/lib/libfluent-bit.so
-0.11.3-r0/image/usr/lib/pkgconfig
-0.11.3-r0/image/usr/lib/pkgconfig/msgpack.pc
+On Fri, Jun 30, 2017 at 7:47 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+wrote:
 
-0.11.11-r0/image
-0.11.11-r0/image/etc
-0.11.11-r0/image/etc/td-agent-bit
-0.11.11-r0/image/etc/td-agent-bit/parsers.conf
-0.11.11-r0/image/etc/td-agent-bit/td-agent-bit.conf
-0.11.11-r0/image/lib
-0.11.11-r0/image/lib/systemd
-0.11.11-r0/image/lib/systemd/system
-0.11.11-r0/image/lib/systemd/system/td-agent-bit.service
-0.11.11-r0/image/usr
-0.11.11-r0/image/usr/bin
-0.11.11-r0/image/usr/bin/td-agent-bit
-0.11.11-r0/image/usr/lib
-0.11.11-r0/image/usr/lib/libfluent-bit.so
-0.11.11-r0/image/usr/lib/pkgconfig
-0.11.11-r0/image/usr/lib/pkgconfig/msgpack.pc
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-index 83818c84d..521d00bf6 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.11.bb
-@@ -21,6 +21,6 @@ inherit cmake systemd
- 
- EXTRA_OECMAKE = "-DGNU_HOST=${HOST_SYS} -DFLB_ALL=ON -DFLB_TD=1"
- 
--SYSTEMD_SERVICE_${PN} = "fluent-bit.service"
-+SYSTEMD_SERVICE_${PN} = "td-agent-bit.service"
- 
- TARGET_CC_ARCH_append = " ${SELECTED_OPTIMIZATION}"
--- 
-2.13.2
-
+> Add qt5-ptest.inc file for qt ptest related tasks
+>     1)  Rewrite do_compile_ptest task for qt
+>     2)  Add new do_compile_ptest_base and task do_install_ptest
+>     3)  Write do_populate_sysroot_append to resolve do_compile_ptest_base
+> problem in yocto2.3
+>     The compile error log is shown as follow:
+>     cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/
+> work_qt/build/tmp/work/i586-poky-linux/qtxmlpatterns/5.8.
+> 0+gitAUTOINC+9f7e01b582-r0/recipe-sysroot-native/usr/bin/qt5/qmake -o
+> Makefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-
+> poky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/git/tests/auto/
+> auto.pro ) && make -f Makefile
+>     Project ERROR: Could not find feature xml-schema.
+>     Makefile:42: recipe for target 'sub-auto-make_first' failed
+>
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> ---
+>  recipes-qt/qt5/qt5-ptest.inc | 61 ++++++++++++++++++++++++++++++
+> ++++++++++++++
+>  1 file changed, 61 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
+>
+> diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
+> new file mode 100644
+> index 0000000..da0b65a
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qt5-ptest.inc
+> @@ -0,0 +1,61 @@
+> +SRC_URI += "file://run-ptest"
+> +
+> +inherit ptest
+> +
+> +addtask do_populate_sysroot after do_install before do_compile_ptest_base
+> +deltask do_compile_ptest_base
+> +addtask do_compile_ptest_base after do_populate_sysroot before
+> do_install_ptest
+> +addtask do_install_ptest after do_compile_ptest_base before do_package
+> +
+> +do_compile_ptest() {
+> +    cd ${S}/tests
+> +    qmake -o Makefile tests.pro
+> +    oe_runmake
+> +}
+> +
+> +do_populate_sysroot_append() {
+> +    workdir = d.getVar('WORKDIR')
+> +    srcdir = workdir + '/sysroot-destdir/usr/'
+> +    destdir = workdir + '/recipe-sysroot/usr/'
+> +
+> +    def copyFiles(sourceDir, targetDir, filelist):
+> +        for file in os.listdir(sourceDir):
+> +            sourceFile = os.path.join(sourceDir,  file)
+> +            targetFile = os.path.join(targetDir,  file)
+> +            filelist.append(targetFile)    #record the file list
+> +            if os.path.isfile(sourceFile):
+> +                if not os.path.exists(targetDir):
+> +                    os.makedirs(targetDir)
+> +                if not os.path.exists(targetFile)
+> or(os.path.exists(targetFile) and (os.path.getsize(targetFile) !=
+> os.path.getsize(sourceFile))):
+> +                        open(targetFile, "wb").write(open(sourceFile,
+> "rb").read())
+> +            if os.path.isdir(sourceFile):
+> +                First_Directory = False
+> +                copyFiles(sourceFile, targetFile, filelist)
+> +
+> +    Tmpfilelist = []
+> +    copyFiles(srcdir, destdir, Tmpfilelist)
+> +
+> +    fp=open(workdir + '/filelist', 'w')
+> +    for i in Tmpfilelist:
+> +        fp.write(i)
+> +        fp.write("\n")
+> +    fp.close()
+> +}
+> +
+> +fakeroot do_install_ptest() {
+> +    mkdir -p ${D}${PTEST_PATH}
+> +    t=${D}${PTEST_PATH}
+> +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
+> +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
+> +            echo ${var##*/} >> ${t}/tst_list
+> +            install -m 0644  ${var} ${t}
+> +        fi
+> +    done
+> +    for file in `cat ${WORKDIR}/filelist`; do
+> +       if [ -f $file ]; then
+> +           rm -f $file
+> +       fi
+> +    done
+> +    rm -f ${WORKDIR}/filelist
+> +}
+> +
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
