@@ -1,48 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f180.google.com (mail-yw0-f180.google.com
-	[209.85.161.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 8B33E78044
+Return-Path: <maxin.john@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 13D6671AC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 10:04:13 +0000 (UTC)
-Received: by mail-yw0-f180.google.com with SMTP id l21so46639209ywb.1
+	Tue, 11 Jul 2017 11:50:16 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	11 Jul 2017 04:50:16 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.40,346,1496127600"; d="scan'208";a="109943151"
+Received: from linux.intel.com ([10.54.29.200])
+	by orsmga002.jf.intel.com with ESMTP; 11 Jul 2017 04:50:16 -0700
+Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
+	[10.237.72.84])
+	by linux.intel.com (Postfix) with ESMTP id 06F1A5804B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 Jul 2017 03:04:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=H0coGM6bcbrHLvtSuScaSKEfQg6ItDtMbuXzVHlKCPQ=;
-	b=iXFwp/PFKLWy7BzbCOU80yRdhX8i8f2n68l3gI7jqE6pqA0baqaVS2Q/LKV0fgUjzM
-	ToELn96G0sbDutaSjYdGmJovDWKKMXntbOnMpXpxnAugWb2T2q5y+38wTucalo1YURHP
-	+O/gjH+8xR3xkF0rq6ScsdMM/f/Q7HuM7ZFUrydLMMhHOxSSPoStDRC4irqfF0lKl5GG
-	pe4xnHvll92mLuPt3ZA2tTIkrRFZL1yo7NA+rOaq6IEYYN3CzhNgOu+RsOL/dYf8ZW2A
-	Nx8SaiZF3sparr6JwQbEw6vojtAAb9mYXjzjARxmFu4Ox9GApLTCukYEAKpvtChPlmHn
-	NMCw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=H0coGM6bcbrHLvtSuScaSKEfQg6ItDtMbuXzVHlKCPQ=;
-	b=eOOAPW+RNxVvRH8lsJGuahl5Z6+p8BxqcH7WHMv7BWnFlKdlTlRzSeuOdI9APWzGxt
-	YRiAyh7X2XlB5k/hNq+ugDTKM0CbAnJiSSza6dlf8UJlczWV5vnNes+H+HaD7YPOvTPl
-	8QtwDn7D3gOpbS6+ANLl9hmUknlntq9yzsC8mHIKUkfh3PYrRsSWdW/Z5ZDZVbcayuCX
-	7igPIF/XlCQbf7kqnMiX2ce4c9ucfLyU4ZVXZjW/wyM+k+SOAdDWvIavGLMBGhoplrSP
-	euhCD5eBq0oRFoi5occuFxJbKogCzipDsrwMkwNOBhTEcJnopzP051BI9VL5DW40r700
-	/HXw==
-X-Gm-Message-State: AIVw112UN+rmWyZJBqoKyuA6yzLRaKbxUjg8OZJ43v5zhYbBGKOg1KPH
-	edmmDdBdp6fELBFIEJlQgX65FkyY/bD3
-X-Received: by 10.129.62.29 with SMTP id l29mr4064088ywa.9.1499763722958; Tue,
-	11 Jul 2017 02:02:02 -0700 (PDT)
+	Tue, 11 Jul 2017 04:50:15 -0700 (PDT)
+From: "Maxin B. John" <maxin.john@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 11 Jul 2017 14:50:48 +0300
+Message-Id: <1499773848-8003-1-git-send-email-maxin.john@intel.com>
+X-Mailer: git-send-email 2.4.0
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Tue, 11 Jul 2017 02:02:02 -0700 (PDT)
-In-Reply-To: <1498801625-1064-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-References: <1498801625-1064-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<1498801625-1064-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 11 Jul 2017 11:02:02 +0200
-Message-ID: <CA+chaQdn0qcX5xpvUo8tr+gM9KeTfErz0mNJBfgvAy0-XL+3Dw@mail.gmail.com>
-To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH v3 1/3] qt5: add qt5-ptest.inc
+Subject: [PATCH] Intel: remove license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,117 +34,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 Jul 2017 10:04:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 11 Jul 2017 11:50:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-This breaks qtxmlpatterns-native build as shown in:
-http://errors.yoctoproject.org/Errors/Details/147039/
+This license was added to fix warnings with acpitests.
 
-On Fri, Jun 30, 2017 at 7:47 AM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-wrote:
+acpitests recipe was moved to oe-core with this commit:
+OE-Core rev: 020f7ea3aa5c1f311841d4fb16bc525ae1dd5f11
 
-> Add qt5-ptest.inc file for qt ptest related tasks
->     1)  Rewrite do_compile_ptest task for qt
->     2)  Add new do_compile_ptest_base and task do_install_ptest
->     3)  Write do_populate_sysroot_append to resolve do_compile_ptest_base
-> problem in yocto2.3
->     The compile error log is shown as follow:
->     cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/
-> work_qt/build/tmp/work/i586-poky-linux/qtxmlpatterns/5.8.
-> 0+gitAUTOINC+9f7e01b582-r0/recipe-sysroot-native/usr/bin/qt5/qmake -o
-> Makefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-
-> poky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/git/tests/auto/
-> auto.pro ) && make -f Makefile
->     Project ERROR: Could not find feature xml-schema.
->     Makefile:42: recipe for target 'sub-auto-make_first' failed
->
-> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> ---
->  recipes-qt/qt5/qt5-ptest.inc | 61 ++++++++++++++++++++++++++++++
-> ++++++++++++++
->  1 file changed, 61 insertions(+)
->  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
->
-> diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> new file mode 100644
-> index 0000000..da0b65a
-> --- /dev/null
-> +++ b/recipes-qt/qt5/qt5-ptest.inc
-> @@ -0,0 +1,61 @@
-> +SRC_URI += "file://run-ptest"
-> +
-> +inherit ptest
-> +
-> +addtask do_populate_sysroot after do_install before do_compile_ptest_base
-> +deltask do_compile_ptest_base
-> +addtask do_compile_ptest_base after do_populate_sysroot before
-> do_install_ptest
-> +addtask do_install_ptest after do_compile_ptest_base before do_package
-> +
-> +do_compile_ptest() {
-> +    cd ${S}/tests
-> +    qmake -o Makefile tests.pro
-> +    oe_runmake
-> +}
-> +
-> +do_populate_sysroot_append() {
-> +    workdir = d.getVar('WORKDIR')
-> +    srcdir = workdir + '/sysroot-destdir/usr/'
-> +    destdir = workdir + '/recipe-sysroot/usr/'
-> +
-> +    def copyFiles(sourceDir, targetDir, filelist):
-> +        for file in os.listdir(sourceDir):
-> +            sourceFile = os.path.join(sourceDir,  file)
-> +            targetFile = os.path.join(targetDir,  file)
-> +            filelist.append(targetFile)    #record the file list
-> +            if os.path.isfile(sourceFile):
-> +                if not os.path.exists(targetDir):
-> +                    os.makedirs(targetDir)
-> +                if not os.path.exists(targetFile)
-> or(os.path.exists(targetFile) and (os.path.getsize(targetFile) !=
-> os.path.getsize(sourceFile))):
-> +                        open(targetFile, "wb").write(open(sourceFile,
-> "rb").read())
-> +            if os.path.isdir(sourceFile):
-> +                First_Directory = False
-> +                copyFiles(sourceFile, targetFile, filelist)
-> +
-> +    Tmpfilelist = []
-> +    copyFiles(srcdir, destdir, Tmpfilelist)
-> +
-> +    fp=open(workdir + '/filelist', 'w')
-> +    for i in Tmpfilelist:
-> +        fp.write(i)
-> +        fp.write("\n")
-> +    fp.close()
-> +}
-> +
-> +fakeroot do_install_ptest() {
-> +    mkdir -p ${D}${PTEST_PATH}
-> +    t=${D}${PTEST_PATH}
-> +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
-> +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
-> +            echo ${var##*/} >> ${t}/tst_list
-> +            install -m 0644  ${var} ${t}
-> +        fi
-> +    done
-> +    for file in `cat ${WORKDIR}/filelist`; do
-> +       if [ -f $file ]; then
-> +           rm -f $file
-> +       fi
-> +    done
-> +    rm -f ${WORKDIR}/filelist
-> +}
-> +
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Remove this file as it is not used anymore.
+
+Signed-off-by: Maxin B. John <maxin.john@intel.com>
+---
+ meta-oe/licenses/Intel | 21 ---------------------
+ 1 file changed, 21 deletions(-)
+ delete mode 100644 meta-oe/licenses/Intel
+
+diff --git a/meta-oe/licenses/Intel b/meta-oe/licenses/Intel
+deleted file mode 100644
+index eb81dd7..0000000
+--- a/meta-oe/licenses/Intel
++++ /dev/null
+@@ -1,21 +0,0 @@
+-License for Contributions to ACPICA
+-
+-Copyright (c) 2000 – 2015 Intel Corp.
+-All rights reserved.
+-
+-Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+-
+-1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+-2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+-
+-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+-ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+-LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+-CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+-SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINES
+-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+-POSSIBILITY OF SUCH DAMAGE.
+-- 
+2.4.0
+
 
