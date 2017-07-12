@@ -1,48 +1,21 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yb0-f176.google.com (mail-yb0-f176.google.com
-	[209.85.213.176])
-	by mail.openembedded.org (Postfix) with ESMTP id BEEBD780F9
+Return-Path: <sjl@vctlabs.com>
+X-Greylist: delayed 393 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 12 Jul 2017 08:42:41 UTC
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id 637FF71DD2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 08:30:16 +0000 (UTC)
-Received: by mail-yb0-f176.google.com with SMTP id p207so4745191yba.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 01:30:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=wi0dul1uTAkUEasfUNEnKF6clxeLqlRqnQcgfks1CT8=;
-	b=l8+LPYhp0DwtLWk3LJirdP2SWykPyruH+vN8RZmVFQoBih3lpvSnJ8EaUqcarNFUen
-	e9wmWH/fBxUTZ9zojRquziDytyd1J2nE6aQsMatSYRIx6ZtzhJgDgEgzQAF2KzugJE6U
-	T+7axNIDB5tn38uaxWhIDin48fBZsOM46bC3qhf2Y0f7AYH1NLUU4vpTBv9veVfEnS+N
-	wA1PWPT5WHHrZf85ikxdh4t3xsSIlGls5DBC2rkEod/p+ZWYyjsb0fqILYAqac1XDke8
-	4PmszzSnBbz6EzN2JdPuNTB9EeS6Cib0hwGFBh7PIbrLqyOBIxFQr3zOrOY/SYhA5cF3
-	YdUg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=wi0dul1uTAkUEasfUNEnKF6clxeLqlRqnQcgfks1CT8=;
-	b=p7yHL4TzD7DOu1/A2Uc5dXVB3OwxkMmmSXrNvt80EH9xx0iRFi3FxyJJXHdvlVwjlq
-	7YbQCrAYB/uDEdkaQPG5W8LlTFjyh4MU1PEPdJ744avznDRZFkMygSxwaVZ0BaTKfKbH
-	LxDXLTB1mikMet7qQP6U/MMSddxbA/tBDLgxMM0EHIZasme7y7GkJ3f8pJzZR0nPH0N7
-	91Rk453DtMLTub26t1piBrRv3Um4h7+G/P3J8iC59CyiZuC9gr9913QcS2S5a2jAwQ8j
-	8Wd1iSHNi1Ky6BLEZ9JKpQopg5qCT6OJxb9fWZxpT19pz9tXhZsXOZji1L2pKi4gfhH5
-	14pA==
-X-Gm-Message-State: AIVw113vnnwnXzNGFRU14lhP2F8ZihGRZjj2VG2itBgDEYJH9u47J4JB
-	+lm0H/ToUJNNFbw4Cx99gxPIo+dIpA==
-X-Received: by 10.37.200.69 with SMTP id y66mr24804ybf.147.1499844609254; Wed,
-	12 Jul 2017 00:30:09 -0700 (PDT)
+	Wed, 12 Jul 2017 08:42:41 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id E0C872803FE; Wed, 12 Jul 2017 01:36:34 -0700 (PDT)
+Date: Wed, 12 Jul 2017 01:36:34 -0700
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20170712083634.GZ22446@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Wed, 12 Jul 2017 00:30:08 -0700 (PDT)
-In-Reply-To: <a5e067ca-4cdf-df31-d106-de26b5637df9@xevo.com>
-References: <20170711181353.4404-1-raj.khem@gmail.com>
-	<a5e067ca-4cdf-df31-d106-de26b5637df9@xevo.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 12 Jul 2017 08:30:08 +0100
-Message-ID: <CA+chaQcKpDbFe=iq=BbKg4BiUrFfRHBHJePAEOxeMny9fUs8Bg@mail.gmail.com>
-To: Martin Kelly <mkelly@xevo.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtbase-native: Fix qdbuscpp2xml segfault
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-java][PATCH] java-library.bbclass: compatibility with per-recipe sysroots
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,150 +28,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jul 2017 08:30:17 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Jul 2017 08:42:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Is this meant to be applied only for 5.9 or are you seeing this issue with
-5.8 as well?
+The removebinaries task was intended to remove pre-built .jar and .class files
+from the unpacked source, but when per-recipe sysroots were implemented and
+ended up under WORKDIR, .jar or .class in those sysroots inadvertently started 
+getting killed as well.
 
-On Wed, Jul 12, 2017 at 1:13 AM, Martin Kelly <mkelly@xevo.com> wrote:
+For instance, ${WORKDIR}/recipe-sysroot-native/usr/share/java/ecj-bootstrap.jar
+was deleted when attempting to build jlex-native... which made javac in
+that sysroot rather unhappy.
 
-> Thanks! This bug has been bothering me for a while now, and the patch
-> fixes the issue for me.
->
->
-> On 07/11/2017 11:13 AM, Khem Raj wrote:
->
->> 0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch alone
->> was causing
->> qdbuscpp2xml to simply segfault on simple invocation
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> Cc: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ---
->>  recipes-qt/qt5/qtbase-native_git.bb                |  1 -
->>  ...l.pro-do-not-build-with-bootstrapped-depe.patch | 79
->> ----------------------
->>  2 files changed, 80 deletions(-)
->>  delete mode 100644 recipes-qt/qt5/qtbase/0012-qdb
->> uscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>
->> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/
->> qtbase-native_git.bb
->> index da69812..98cbecc 100644
->> --- a/recipes-qt/qt5/qtbase-native_git.bb
->> +++ b/recipes-qt/qt5/qtbase-native_git.bb
->> @@ -33,7 +33,6 @@ SRC_URI +=3D "\
->>  # common for qtbase-native and nativesdk-qtbase
->>  SRC_URI +=3D " \
->>      file://0011-Always-build-uic.patch \
->> -    file://0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.pa=
-tch
->> \
->>  "
->>
->>  CLEANBROKEN =3D "1"
->> diff --git a/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-wi=
-th-bootstrapped-depe.patch
->> b/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-w
->> ith-bootstrapped-depe.patch
->> deleted file mode 100644
->> index e72601c..0000000
->> --- a/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-w
->> ith-bootstrapped-depe.patch
->> +++ /dev/null
->> @@ -1,79 +0,0 @@
->> -From 86ae0ce931edbe0ac30cfe5f94f681f1d055fdb0 Mon Sep 17 00:00:00 2001
->> -From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@google=
-mail.com>
->> -Date: Mon, 6 Mar 2017 11:50:38 +0100
->> -Subject: [PATCH] qdbuscpp2xml.pro: do not build with bootstrapped
->> - dependenciies
->> -MIME-Version: 1.0
->> -Content-Type: text/plain; charset=3DUTF-8
->> -Content-Transfer-Encoding: 8bit
->> -
->> -Upstream-Status: Pending
->> -
->> -Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->> ----
->> - src/src.pro                             | 9 ++-------
->> - src/tools/qdbuscpp2xml/qdbuscpp2xml.pro | 3 +--
->> - src/tools/qdbusxml2cpp/qdbusxml2cpp.pro | 5 +----
->> - 3 files changed, 4 insertions(+), 13 deletions(-)
->> -
->> -diff --git a/src/src.pro b/src/src.pro
->> -index 90d7e2b..0aaf604 100644
->> ---- a/src/src.pro
->> -+++ b/src/src.pro
->> -@@ -4,9 +4,6 @@ QT_FOR_CONFIG +=3D gui-private
->> - include($$OUT_PWD/corelib/qtcore-config.pri)
->> - include($$OUT_PWD/gui/qtgui-config.pri)
->> -
->> --force_bootstrap|!qtConfig(commandlineparser): \
->> --    CONFIG +=3D force_dbus_bootstrap
->> --
->> - src_qtzlib.file =3D $$PWD/corelib/qtzlib.pro
->> - src_qtzlib.target =3D sub-zlib
->> -
->> -@@ -37,13 +34,11 @@ src_tools_bootstrap_dbus.depends =3D
->> src_tools_bootstrap
->> -
->> - src_tools_qdbusxml2cpp.subdir =3D tools/qdbusxml2cpp
->> - src_tools_qdbusxml2cpp.target =3D sub-qdbusxml2cpp
->> --force_dbus_bootstrap: src_tools_qdbusxml2cpp.depends =3D
->> src_tools_bootstrap_dbus
->> --else: src_tools_qdbusxml2cpp.depends =3D src_dbus
->> -+src_tools_qdbusxml2cpp.depends =3D src_dbus
->> -
->> - src_tools_qdbuscpp2xml.subdir =3D tools/qdbuscpp2xml
->> - src_tools_qdbuscpp2xml.target =3D sub-qdbuscpp2xml
->> --force_bootstrap: src_tools_qdbuscpp2xml.depends =3D
->> src_tools_bootstrap_dbus
->> --else: src_tools_qdbuscpp2xml.depends =3D src_dbus
->> -+src_tools_qdbuscpp2xml.depends =3D src_dbus
->> -
->> - src_winmain.subdir =3D $$PWD/winmain
->> - src_winmain.target =3D sub-winmain
->> -diff --git a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->> b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->> -index 5ac3159..74c507c 100644
->> ---- a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->> -+++ b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->> -@@ -1,7 +1,6 @@
->> - option(host_build)
->> - QT =3D core-private
->> --force_bootstrap: QT +=3D bootstrap_dbus-private
->> --else: QT +=3D dbus-private
->> -+QT +=3D dbus-private
->> - DEFINES +=3D QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
->> - QMAKE_CXXFLAGS +=3D $$QT_HOST_CFLAGS_DBUS
->> -
->> -diff --git a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->> b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->> -index d9ee5de..e891103 100644
->> ---- a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->> -+++ b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->> -@@ -1,9 +1,6 @@
->> - option(host_build)
->> --!force_bootstrap:!qtConfig(commandlineparser): \
->> --    CONFIG +=3D force_bootstrap
->> - QT =3D core-private
->> --force_bootstrap: QT +=3D bootstrap_dbus-private
->> --else: QT +=3D dbus-private
->> -+QT +=3D dbus-private
->> - DEFINES +=3D QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
->> - QMAKE_CXXFLAGS +=3D $$QT_HOST_CFLAGS_DBUS
->> -
->> ---
->> -2.9.3
->> -
->>
->> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+Solve by excluding both recipe-sysroot and recipe-sysroot-native dirs
+from the search-and-destroy operation.
+
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+---
+ classes/java-library.bbclass | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+index 58d5a40..ce1cd28 100644
+--- a/classes/java-library.bbclass
++++ b/classes/java-library.bbclass
+@@ -50,8 +50,10 @@ ALTJARFILENAMES = "${BPN}.jar"
+ # Java "source" distributions often contain precompiled things
+ # we want to delete first.
+ do_removebinaries() {
+-  find ${WORKDIR} -name "*.jar" -exec rm {} \;
+-  find ${WORKDIR} -name "*.class" -exec rm {} \;
++  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
++                  -name "*.jar" -exec rm {} \;
++  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
++                  -name "*.class" -exec rm {} \;
+ }
+ 
+ addtask removebinaries after do_unpack before do_patch
+-- 
+1.9.4
+
 
