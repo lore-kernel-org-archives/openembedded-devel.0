@@ -1,51 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 97AFE780B4
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
+	[209.85.215.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 3650A77E88
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 14:50:00 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id f68so1307053vkg.1
+	Wed, 12 Jul 2017 15:56:15 +0000 (UTC)
+Received: by mail-lf0-f65.google.com with SMTP id g21so3463593lfk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 07:50:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=YIewBBjwQuDx3gCjwprSuAB3C+oGAaKZOXWO75wArDg=;
-	b=VcrW+lutSEnFGAlBRgjMfq1Wg2Q6zbMAFojbTQRdh7bARZFBwv2/iG+r2ccRVN30YE
-	WwKZrR2+Qp2Nh6XBMWd4dJsJBN27u4Mx7R03NhlFZlND/1vKEo0IJQQ5xOtuRP0AETHO
-	J+MgBAbTeXBNopXUvvAbZi8Nzhta14uEK/XiKwDfCj5fdJvXFJFAwB8VLMOfuXbepI0G
-	R27+anzlpZiCszlEtxm9KSYKKcBY0T/CNUbtkHROuWKpvUmBEC6uPMdVUHXa6QVFfN9X
-	lN4DQJTYlhxvOuK11dudWfrx80yefpadJUY9pCFOkH9ZDLpXL5F7FBjmgkc6M0L9lpf1
-	A6dg==
+	Wed, 12 Jul 2017 08:56:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=z+DD3nQPOptpdwTzMnS1WSoBZgvLRnIGibdq60Lp4WY=;
+	b=vCwoOxTh7OpJEKdZrZCEENFTs1UvN3j9NLuzUyUrObeBDQOb3fK9zLbPNkdwyDQWls
+	1+knJzyNk1wHf6gJmC3E0umcEjWSoZpddL9zNsQSO5CURBwmE8asJK2Sl+pwce88TuhS
+	XQDFCqsmbjbmE1EhaAvgapBEWyCYjudc+ol9Vppts5OsMYNJduptmyGayP4+5ld7Jqmx
+	aDGgMa52SkfHQr6YrfG1nrRhZzVcOxollkeo7bDdNYWaPEIyCWpEII9t/nm1Fg1Af7sI
+	sv4qc222sRWA1RkCOBN3OhFWvxc9FCADOEp2E7WpqcztGzniU79lbwbWAV7TdfH1WVin
+	iGBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=YIewBBjwQuDx3gCjwprSuAB3C+oGAaKZOXWO75wArDg=;
-	b=U9GPh7sEs23P01a60C0TlhjnZUZcV6gfkaKqC2ix/+cPCmXQMuq75mk8ZOr9VRdMa1
-	ZE537IrFKW0a6Tg95hZ9aVwqOwB8fHisnHOzKn+C4POWoSc1tT2QN8XwvDzM7nZhkt70
-	LuVnhfyCYl5dMK4p/dvx2qJ+J78PBxddnazAiaJEBuJHp0Dgo6Mvf8oXnGnTBg6ORrAI
-	O6qQVR+TRX0zbvgVLGAolcM+Ew5U/aECjGOSDL27DMYLjyYhu0rtorJhEBo3Y5qb5nA4
-	k9UI/CF4xEFwiKSHad1EDh7sZQpyNNkLck/AdWLrj7u4LpSVaSx9c31+CV1jD0TPP+Xj
-	nDKA==
-X-Gm-Message-State: AIVw112BugcTjcg6H145FJD0rA/GsdlnzW4PUAnRdk0S4jgo/Hf+0gs2
-	jXCo58wNjf/CUFU2VvcHS4GHaW+mHA==
-X-Received: by 10.31.58.206 with SMTP id h197mr1499471vka.23.1499871001251;
-	Wed, 12 Jul 2017 07:50:01 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.77.72 with HTTP; Wed, 12 Jul 2017 07:50:00 -0700 (PDT)
-In-Reply-To: <CAMKF1sq30C2Kr9JsFE1RqeGsJOSC-NvvZeCDb+dJgdf5R5FoAw@mail.gmail.com>
-References: <20170711181353.4404-1-raj.khem@gmail.com>
-	<a5e067ca-4cdf-df31-d106-de26b5637df9@xevo.com>
-	<CA+chaQcKpDbFe=iq=BbKg4BiUrFfRHBHJePAEOxeMny9fUs8Bg@mail.gmail.com>
-	<CAMKF1sq30C2Kr9JsFE1RqeGsJOSC-NvvZeCDb+dJgdf5R5FoAw@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 12 Jul 2017 16:50:00 +0200
-Message-ID: <CALbNGRRuQMSr8CB++M1aBC=PRzMQ5FqLs6w5i7StS_7maFG7Ow@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qtbase-native: Fix qdbuscpp2xml segfault
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=z+DD3nQPOptpdwTzMnS1WSoBZgvLRnIGibdq60Lp4WY=;
+	b=cmmZIFdnny/WUKsgc04PhllCLYiwQz2metsOglqGWuISZzvnH1IU2d5kVXqIkUYeda
+	zeP/O/FKv+7Pil5gDQ1sh/2mPWNEKFwlsKaFWpgvwmP309rAvuQc3KicW9TNfuvAgXrC
+	lYp//PBMTyagn/P5638jdqYoxx8RY9uqAhnruyWsdnMv/lZVPExTvkgmjrks8PHtZ0/v
+	G4PWxapXs6d1VOKKnSK8kMJRj7RJu8kPl+aAqunYi/3tAL7NRNN9+bmgfqfrNrv6gQRj
+	tYf5y524jKCfEtDnOUrEs+/wgGm31jqVkxjDSvco04gDWCrdh3EecmyfsCSA4dTz12+A
+	SZ9w==
+X-Gm-Message-State: AIVw112z7zto4pc64qzso1hR+wQBJY+0LfL/YgmHoLE6yaMFoGnXtWCM
+	7b/3RV18Gx7V5upr
+X-Received: by 10.80.170.218 with SMTP id r26mr6671143edc.113.1499874976506;
+	Wed, 12 Jul 2017 08:56:16 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([27.191.203.112])
+	by smtp.gmail.com with ESMTPSA id 2sm2080801edt.36.2017.07.12.08.56.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 12 Jul 2017 08:56:15 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 12 Jul 2017 17:56:04 +0200
+Message-Id: <1499874964-6155-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
+Subject: [meta-oe] [PATCH] librcf: RDEPENDS on protobuf, json-spirit
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,39 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jul 2017 14:50:00 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 Jul 2017 15:56:17 -0000
 
-On Wed, Jul 12, 2017 at 3:13 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Wed, Jul 12, 2017 at 12:30 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->> Is this meant to be applied only for 5.9 or are you seeing this issue wi=
-th
->> 5.8 as well?
->>
->
-> for 5.8, i havent tested 5.9
->
->> On Wed, Jul 12, 2017 at 1:13 AM, Martin Kelly <mkelly@xevo.com> wrote:
->>>
->>> Thanks! This bug has been bothering me for a while now, and the patch
->>> fixes the issue for me.
->>>
-I think the patch does not cause trouble for Qt <=3D 5.8 installed on
-build host. It seems that 5.9 for host is the crashing combination.
+From: Ming Liu <peter.x.liu@external.atlascopco.com>
 
-As the author of the patch:
+librcf only refers some functions defined in protobuf and json-spirit
+headers, but does not link to any protobuf or json-spirit libraries,
+so technically librcf does not have runtime dependencies on protobuf
+or json-spirit. But we still need set it, or else we are missing
+do_package* task dependencies between them, hence will lead
+protobuf-dev and json-spirit-dev would not be installed during SDK
+populating, when building from sstate(do_package* dependencies
+skipped by setscene_depvalid optimization).
 
-* I am aware that removing this patch causes kde balloo build errors
-for cross 5.8 (current)
-* I hope moving cross 5.9 (future hopefully) will fix issues properly
-* the patch seems to do the wrong thing: it causes dependencies on
-build host's libraries
+Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+---
+ meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-So
+diff --git a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+index 4c9683a..cd7bd34 100644
+--- a/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
++++ b/meta-oe/recipes-devtools/librcf/librcf_2.2.0.0.bb
+@@ -32,8 +32,8 @@ PACKAGECONFIG[sf-serialization] = "-DLIBRCF_USE_SF_SERIALIZATION=ON,-DLIBRCF_USE
+ PACKAGECONFIG[boost-serialization] = "-DLIBRCF_USE_BOOST_SERIALIZATION=ON,-DLIBRCF_USE_BOOST_SERIALIZATION=OFF,boost,"
+ PACKAGECONFIG[boost-filesystem] = "-DLIBRCF_USE_BOOST_FILESYSTEM=ON,-DLIBRCF_USE_BOOST_FILESYSTEM=OFF,boost,"
+ PACKAGECONFIG[boost-asio] = "-DLIBRCF_USE_BOOST_ASIO=ON,-DLIBRCF_USE_BOOST_ASIO=OFF,boost,"
+-PACKAGECONFIG[protobuf] = "-DLIBRCF_USE_PROTOBUF=ON,-DLIBRCF_USE_PROTOBUF=OFF,protobuf,"
+-PACKAGECONFIG[json] = "-DLIBRCF_USE_JSON=ON,-DLIBRCF_USE_JSON=OFF,json-spirit,"
++PACKAGECONFIG[protobuf] = "-DLIBRCF_USE_PROTOBUF=ON,-DLIBRCF_USE_PROTOBUF=OFF,protobuf,protobuf"
++PACKAGECONFIG[json] = "-DLIBRCF_USE_JSON=ON,-DLIBRCF_USE_JSON=OFF,json-spirit,json-spirit"
+ PACKAGECONFIG[ipv6] = "-DLIBRCF_USE_IPV6=ON,-DLIBRCF_USE_IPV6=OFF,"
+ PACKAGECONFIG[custom-allocator] = "-DLIBRCF_USE_CUSTOM_ALLOCATOR=ON,-DLIBRCF_USE_CUSTOM_ALLOCATOR=OFF,"
+ PACKAGECONFIG[dll] = "-DLIBRCF_BUILD_DLL=ON,-DLIBRCF_BUILD_DLL=OFF,"
+-- 
+2.7.4
 
-Acked-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-
-Andreas
 
