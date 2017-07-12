@@ -1,45 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 5E770780FA
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9167E77F6D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 21:15:09 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id q85so4577565pfq.2
+	Wed, 12 Jul 2017 21:15:11 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id e199so4590230pfh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 14:15:11 -0700 (PDT)
+	Wed, 12 Jul 2017 14:15:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=elBdy5jTYfWT386iAWi0DneH3YZubG0n4IYZcQsuCmc=;
-	b=IgOJ2o/NLQiNx6FTL+6Sao2Y4mFOzzPUB5ezFtkxfJsfTjoJPRMehb6KIEoLX3BHg1
-	S588Vedoxs/kx7hxcpgpIFI7w6KLPGTEtJHy04BEbPJ5HAqBON0KJYZwlE3J2X9lj8B+
-	qiBcXX/C47/4aH9J7Pcktw37J+DMbFIds/V8qC/VafBjzOetfJyhu+eIwoBtdkkbv8pi
-	VPqIbmDnZQ+dKY1omrHoPbQmjLBEIcYKtSEszU7O1NOTuCU+bG3nw0pzKlsFqQyNv0uI
-	l3IcZpnG3EdwXPqrpgqjYPpHovOgvZAGaH0pJopFY41eFnHxO9nGR16kGA4P+HYOSOVx
-	CvTg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=vApo3cJHlI85/o6bVyFEDcAcb0SyPOtEktMUvvXAR58=;
+	b=taV4CtQ0Bf1aF9h8iDVGVEIYYNgjLNJRaB49+7ZSbnQ4fMIxUzf0ExL8uj4jgL781R
+	IsE8lDi9148Tj7kjcEYTkz+GupOK1+c5bcUmYB1XuDi/lelbHPp2JhmEfwxMXwJAqzyB
+	VKGJxoWw7i1w/7TSmUmeAjXgimC033O2ajtk76UgCuApSsCiF0RrotYmzhl0eTjaDJAK
+	0J3APiVcngiT7QFOXX+xbqGjgAitmUzkyn9xFAGXodsYTAEOLbhCvdY/wZNWjdpDoFO6
+	D5lZoBc/3p4bi0sqaTcRDZeKw/15ZWv+DzdHs8QX1nWr/pn8S9o7VeoAZYhXfI6+w59Z
+	9j0A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=elBdy5jTYfWT386iAWi0DneH3YZubG0n4IYZcQsuCmc=;
-	b=jCZ5J2fPBo9iAWFG67sS0FsTH0Jnf4LgmXhEa8z04ly1TDnPCNoyAiJzl+ObOoNxS/
-	ygi5HednTXOuEKQUqd3SlhYvsruPFJWCPIrSBv5MoK1ZjVAo4XiXu/P0Fr+G1vUD+bR5
-	qzislVqs+Uko3n9h9UBA9s6fqodCiI7N/yhTIcEaiOc2/nThOwwlt3t4GtDJqTK5Orkm
-	/m7hxYsMCuaOxjyaZOMHbkIHw/g04+Myjpw4iZa9cREED40oBdMb5YXnrVSSEruwNnN5
-	HrW7c76Ni8+ZiYWOb8lvOBMxgX99FJUJ4OwEe43xyKsbEM9vrylUeqMtE4ldaJcaIuQY
-	S3Xg==
-X-Gm-Message-State: AIVw110L5Z2lM435ye6hU6rpcwTkViFKhmvzakeojrLj/5RW4atumYIS
-	rEkltMkcMjTc/p9B
-X-Received: by 10.84.137.1 with SMTP id 1mr6078857plm.75.1499894111117;
-	Wed, 12 Jul 2017 14:15:11 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=vApo3cJHlI85/o6bVyFEDcAcb0SyPOtEktMUvvXAR58=;
+	b=k6EjAKCnP+71ZhYxQAxS0W2HNv4ryBicuE7lul2HFt+HlBoJ8vG+bAIrB/95fQjz7i
+	lJWLNO4jMRYqKUw5yfYvp8/eMuVkzjWEMZOI4RwGz9e6p3ForVrgOXa69Wxmu6/5Kowa
+	wNue8HMPhaGwaLjoGjTqAbyKo3tRG9krbxFgfbP1VkC/aDPJQqx9KmDQTstFAFITYFG7
+	/ab91y4dMhAlnig3iSnS0/TBienyeZLBEw48Y7A9c2yQWkkDfw6dhc0lbLJ6Ho4C9Lh7
+	mjVjtNUCseyH7gfrjlELedOsMMZCEdYy6CG5nzT80AHDxZoRX1tsuktGSwkJ9MqkPYYS
+	1qgw==
+X-Gm-Message-State: AIVw110xCUVEQ0tMm8CBIzBNLIPQQyP9J/apa5+19f7K3CUWUFhsYtS5
+	Z9m/nSnTVpKlT0la
+X-Received: by 10.98.83.130 with SMTP id h124mr32167712pfb.13.1499894112497;
+	Wed, 12 Jul 2017 14:15:12 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
-	by smtp.gmail.com with ESMTPSA id k18sm5923103pgf.5.2017.07.12.14.15.09
+	by smtp.gmail.com with ESMTPSA id k18sm5923103pgf.5.2017.07.12.14.15.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 12 Jul 2017 14:15:10 -0700 (PDT)
+	Wed, 12 Jul 2017 14:15:11 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 Jul 2017 14:15:00 -0700
-Message-Id: <20170712211501.45048-1-raj.khem@gmail.com>
+Date: Wed, 12 Jul 2017 14:15:01 -0700
+Message-Id: <20170712211501.45048-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-qt5][PATCH 1/2] maliit-framework-qt5: Always have optimize flags
+In-Reply-To: <20170712211501.45048-1-raj.khem@gmail.com>
+References: <20170712211501.45048-1-raj.khem@gmail.com>
+Subject: [meta-qt5][PATCH 2/2] qt5-creator: Fix build with NO_ACCESSIBILITY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,90 +55,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jul 2017 21:15:10 -0000
+X-List-Received-Date: Wed, 12 Jul 2017 21:15:11 -0000
 
-When building with hardening flags we need some optlevel > 0
-enabled, otherwise FORTIFY_SOURCE wont work
-
-Fixes
-maliit-framework-qt5/0.99.0+git999-r0/recipe-sysroot/usr/include/features.h:376:4: error: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp
-]
-|  #  warning _FORTIFY_SOURCE requires compiling with optimization (-O)
-|     ^~~~~~~
+Also add missing headers in sources
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...ig.pri-Use-O1-optimization-in-DEBUG-flags.patch | 34 ++++++++++++++++++++++
- recipes-qt/maliit/maliit-framework-qt5_git.bb      |  8 ++---
- 2 files changed, 38 insertions(+), 4 deletions(-)
- create mode 100644 recipes-qt/maliit/maliit-framework-qt5/0001-config.pri-Use-O1-optimization-in-DEBUG-flags.patch
+ ...-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch | 38 ++++++++++++++++++++
+ .../0001-Qmlpuppet-add-missing-includes.patch      | 41 ++++++++++++++++++++++
+ recipes-qt/qt5/qt5-creator_3.5.1.bb                |  2 ++
+ 3 files changed, 81 insertions(+)
+ create mode 100644 recipes-qt/qt5/qt5-creator/0001-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch
+ create mode 100644 recipes-qt/qt5/qt5-creator/0001-Qmlpuppet-add-missing-includes.patch
 
-diff --git a/recipes-qt/maliit/maliit-framework-qt5/0001-config.pri-Use-O1-optimization-in-DEBUG-flags.patch b/recipes-qt/maliit/maliit-framework-qt5/0001-config.pri-Use-O1-optimization-in-DEBUG-flags.patch
+diff --git a/recipes-qt/qt5/qt5-creator/0001-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch b/recipes-qt/qt5/qt5-creator/0001-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch
 new file mode 100644
-index 0000000..7356034
+index 0000000..9e90bab
 --- /dev/null
-+++ b/recipes-qt/maliit/maliit-framework-qt5/0001-config.pri-Use-O1-optimization-in-DEBUG-flags.patch
-@@ -0,0 +1,34 @@
-+From cb38c078fa34a3d0cff6bc195edd9f507477d2e1 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Jul 2017 11:45:06 -0700
-+Subject: [PATCH] config.pri: Use -O1 optimization in DEBUG flags
++++ b/recipes-qt/qt5/qt5-creator/0001-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch
+@@ -0,0 +1,38 @@
++From 429347dda56a4d45dc03fee2362eb02294161bfd Mon Sep 17 00:00:00 2001
++From: Eike Ziller <eike.ziller@qt.io>
++Date: Fri, 24 Jun 2016 10:23:24 +0200
++Subject: [PATCH] Fix compilation with QT_NO_ACCESSIBILITY
 +
-+when building wit FORTIFY_SOURCES we need some level of
-+optimization turned on for the compile to succeed
-+
-+O1 is a good compromise between debug quality and
-+optimization level.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Task-number: QTCREATORBUG-16446
++Change-Id: If75122c23a697f26ccf56391fe2e8d316aad6367
++Reviewed-by: hjk <hjk@theqtcompany.com>
 +---
-+ config.pri | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
++ src/libs/utils/fancymainwindow.cpp | 7 +++++--
++ 1 file changed, 5 insertions(+), 2 deletions(-)
 +
-+diff --git a/config.pri b/config.pri
-+index 1505f9d..7cc196a 100644
-+--- a/config.pri
-++++ b/config.pri
-+@@ -13,8 +13,8 @@ include(defines.pri)
-+ # Linker optimization for release build
-+ QMAKE_LFLAGS_RELEASE+=-Wl,--as-needed
-+ # Compiler warnings are error if the build type is debug
-+-QMAKE_CXXFLAGS_DEBUG+=-Werror -O0
-+-QMAKE_CFLAGS_DEBUG+=-Werror -O0
-++QMAKE_CXXFLAGS_DEBUG+=-Werror -O1
-++QMAKE_CFLAGS_DEBUG+=-Werror -O1
++diff --git a/src/libs/utils/fancymainwindow.cpp b/src/libs/utils/fancymainwindow.cpp
++index 9477f17..1ee425f 100644
++--- a/src/libs/utils/fancymainwindow.cpp
+++++ b/src/libs/utils/fancymainwindow.cpp
++@@ -159,13 +159,16 @@ public:
 + 
-+ OBJECTS_DIR = .obj
-+ MOC_DIR = .moc
++         m_floatButton = new DockWidgetTitleButton(this);
++         m_floatButton->setIcon(q->style()->standardIcon(QStyle::SP_TitleBarNormalButton, &opt, q));
++-        m_floatButton->setAccessibleName(QDockWidget::tr("Float"));
++-        m_floatButton->setAccessibleDescription(QDockWidget::tr("Undocks and re-attaches the dock widget"));
++ 
++         m_closeButton = new DockWidgetTitleButton(this);
++         m_closeButton->setIcon(q->style()->standardIcon(QStyle::SP_TitleBarCloseButton, &opt, q));
+++
+++#ifndef QT_NO_ACCESSIBILITY
+++        m_floatButton->setAccessibleName(QDockWidget::tr("Float"));
+++        m_floatButton->setAccessibleDescription(QDockWidget::tr("Undocks and re-attaches the dock widget"));
++         m_closeButton->setAccessibleName(QDockWidget::tr("Close"));
++         m_closeButton->setAccessibleDescription(QDockWidget::tr("Closes the dock widget"));
+++#endif
++ 
++         setActive(false);
++ 
 +-- 
 +2.13.2
 +
-diff --git a/recipes-qt/maliit/maliit-framework-qt5_git.bb b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-index 62a7209..e0a0e0e 100644
---- a/recipes-qt/maliit/maliit-framework-qt5_git.bb
-+++ b/recipes-qt/maliit/maliit-framework-qt5_git.bb
-@@ -7,9 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.LGPL;md5=5c917f6ce94ceb8d8d5e16e2fca5b9ad"
- inherit qmake5 qmake5_paths
- 
- SRC_URI = "git://github.com/maliit/framework.git;branch=master \
--    file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
--    file://maliit-server.desktop \
--"
-+           file://0001-Fix-MALIIT_INSTALL_PRF-to-allow-the-build-with-opene.patch \
-+           file://maliit-server.desktop \
-+           file://0001-config.pri-Use-O1-optimization-in-DEBUG-flags.patch \
-+           "
- 
- SRCREV = "60b1b10de14f932420313c547ab801daf522d539"
- PV = "0.99.0+git${SRCPV}"
-@@ -57,7 +58,6 @@ EXTRA_QMAKEVARS_PRE = "\
-     CONFIG+=enable-dbus-activation \
-     CONFIG+=qt5-inputcontext \
+diff --git a/recipes-qt/qt5/qt5-creator/0001-Qmlpuppet-add-missing-includes.patch b/recipes-qt/qt5/qt5-creator/0001-Qmlpuppet-add-missing-includes.patch
+new file mode 100644
+index 0000000..8c1311e
+--- /dev/null
++++ b/recipes-qt/qt5/qt5-creator/0001-Qmlpuppet-add-missing-includes.patch
+@@ -0,0 +1,41 @@
++From 51088a424416a8ca5cdf5161b792ac5e8a01f749 Mon Sep 17 00:00:00 2001
++From: Marco Benelli <marco.benelli@qt.io>
++Date: Thu, 6 Jul 2017 09:31:41 +0200
++Subject: [PATCH] Qmlpuppet: add missing includes
++
++Task-number:  QTCREATORBUG-18498
++Change-Id: Ie40a066508bb52f53b8ad528f9d4cf6969fc0632
++Reviewed-by: Thomas Hartmann <thomas.hartmann@qt.io>
++---
++ .../qtcreator/qml/qmlpuppet/qml2puppet/instances/layoutnodeinstance.cpp | 2 ++
++ .../qtcreator/qml/qmlpuppet/qml2puppet/instances/objectnodeinstance.cpp | 1 +
++ 2 files changed, 3 insertions(+)
++
++diff --git a/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/layoutnodeinstance.cpp b/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/layoutnodeinstance.cpp
++index 3f9f148..160e5c4 100644
++--- a/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/layoutnodeinstance.cpp
+++++ b/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/layoutnodeinstance.cpp
++@@ -29,6 +29,8 @@
++ ****************************************************************************/
++ #include "layoutnodeinstance.h"
++ 
+++#include <QCoreApplication>
+++
++ namespace QmlDesigner {
++ namespace Internal {
++ 
++diff --git a/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/objectnodeinstance.cpp b/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/objectnodeinstance.cpp
++index 5a9342f..bacbc12 100644
++--- a/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/objectnodeinstance.cpp
+++++ b/share/qtcreator/qml/qmlpuppet/qml2puppet/instances/objectnodeinstance.cpp
++@@ -33,6 +33,7 @@
++ #include <enumeration.h>
++ #include <qmlprivategate.h>
++ 
+++#include <QDebug>
++ #include <QEvent>
++ #include <QQmlContext>
++ #include <QQmlError>
++-- 
++2.13.2
++
+diff --git a/recipes-qt/qt5/qt5-creator_3.5.1.bb b/recipes-qt/qt5/qt5-creator_3.5.1.bb
+index f4ba858..c85f38c 100644
+--- a/recipes-qt/qt5/qt5-creator_3.5.1.bb
++++ b/recipes-qt/qt5/qt5-creator_3.5.1.bb
+@@ -21,6 +21,8 @@ DEPENDS = "qtbase qtscript qtwebkit qtxmlpatterns qtx11extras qtdeclarative qtto
+ SRC_URI = " \
+     http://download.qt.io/official_releases/qtcreator/3.5/${PV}/qt-creator-opensource-src-${PV}.tar.gz \
+     file://0001-Fix-Allow-qt-creator-to-build-on-arm-aarch32-and-aar.patch \
++    file://0001-Fix-compilation-with-QT_NO_ACCESSIBILITY.patch \
++    file://0001-Qmlpuppet-add-missing-includes.patch \
+     file://qtcreator.desktop.in \
  "
--
- EXTRA_OEMAKE += "INSTALL_ROOT=${D}"
- 
- do_install_append() {
+ SRC_URI[md5sum] = "77aef7df837eba07c7ce6037ee504c05"
 -- 
 2.13.2
 
