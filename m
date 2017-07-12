@@ -1,159 +1,159 @@
 Return-Path: <mkelly@xevo.com>
 Received: from NAM02-CY1-obe.outbound.protection.outlook.com
-	(mail-cys01nam02on0065.outbound.protection.outlook.com
-	[104.47.37.65])
-	by mail.openembedded.org (Postfix) with ESMTP id ED12A780AF
+	(mail-cys01nam02on0077.outbound.protection.outlook.com
+	[104.47.37.77])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AC786E660
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 Jul 2017 16:48:37 +0000 (UTC)
+	Wed, 12 Jul 2017 18:37:11 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=h+AGzMlDDGgjfTel6Fku4v9mlsWZQVkMNyNxctCxa48=;
-	b=DyniEmrai1kbV9pPRPFOZzXHQGFGk5h7vUTShcAV63jJn8k/AkSl947UGlNSxjGcMYte+Epvn+8WALui+FEFCiLNEYgPqDsTUH6qcVBoxM+oAHCSUd03twPHaQmwtk+eGMY4Ts5W2Cu4tPOCQogpjngqR4CMVknVurCDjToGVtI=
-Authentication-Results: lists.openembedded.org; dkim=none (message not signed)
-	header.d=none; lists.openembedded.org;
-	dmarc=none action=none header.from=xevo.com;
+	bh=bdVXOEJAro9wIudVUnJ0o9IWuwBCPFomlPNVI+Kv5yg=;
+	b=xvqk3pmB2vjrWboRrDQ+eiUdfpbcEG6r3goxERKUL5tOhs8dlPor2empMt5yrdmDe3XnW1NFHhVKa0nO/ib8NiO60iyArq6fA5J/AqaJpld8wAvJNkHSMV0dT0urUg59y9vR9WTDcKWxPqOsqhSpLGf1oaie4aJdxE7rgtB9Bk8=
+Authentication-Results: gmail.com; dkim=none (message not signed)
+	header.d=none;gmail.com; dmarc=none action=none header.from=xevo.com;
 Received: from [10.0.1.79] (65.122.179.226) by
-	MWHPR0101MB2944.prod.exchangelabs.com (10.174.170.15) with Microsoft
+	BN6PR0101MB2930.prod.exchangelabs.com (10.174.87.139) with Microsoft
 	SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
-	15.1.1261.13; Wed, 12 Jul 2017 16:32:45 +0000
-To: Khem Raj <raj.khem@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
+	15.1.1240.13; Wed, 12 Jul 2017 18:37:10 +0000
+To: openembedded-devel@lists.openembedded.org
 References: <20170711181353.4404-1-raj.khem@gmail.com>
 	<a5e067ca-4cdf-df31-d106-de26b5637df9@xevo.com>
 	<CA+chaQcKpDbFe=iq=BbKg4BiUrFfRHBHJePAEOxeMny9fUs8Bg@mail.gmail.com>
 	<CAMKF1sq30C2Kr9JsFE1RqeGsJOSC-NvvZeCDb+dJgdf5R5FoAw@mail.gmail.com>
+	<CALbNGRRuQMSr8CB++M1aBC=PRzMQ5FqLs6w5i7StS_7maFG7Ow@mail.gmail.com>
 From: Martin Kelly <mkelly@xevo.com>
-Message-ID: <f3435c5a-4d5e-1b0f-6e53-31e1729d0779@xevo.com>
-Date: Wed, 12 Jul 2017 09:32:38 -0700
+Message-ID: <2c3faf57-50ea-64d7-eb42-80fdd0c02422@xevo.com>
+Date: Wed, 12 Jul 2017 11:37:03 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
 	Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sq30C2Kr9JsFE1RqeGsJOSC-NvvZeCDb+dJgdf5R5FoAw@mail.gmail.com>
+In-Reply-To: <CALbNGRRuQMSr8CB++M1aBC=PRzMQ5FqLs6w5i7StS_7maFG7Ow@mail.gmail.com>
 X-Originating-IP: [65.122.179.226]
-X-ClientProxiedBy: CO2PR04CA0063.namprd04.prod.outlook.com (10.166.88.31) To
-	MWHPR0101MB2944.prod.exchangelabs.com (10.174.170.15)
+X-ClientProxiedBy: CY4PR01CA0021.prod.exchangelabs.com (10.169.249.31) To
+	BN6PR0101MB2930.prod.exchangelabs.com (10.174.87.139)
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 107ee497-6695-4922-6df3-08d4c943a044
+X-MS-Office365-Filtering-Correlation-Id: 43333ea7-5a7b-4bb6-0711-08d4c95501d8
 X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
 	RULEID:(300000500095)(300135000095)(300000501095)(300135300095)(22001)(300000502095)(300135100095)(300000503095)(300135400095)(201703131423075)(201703031133081)(300000504095)(300135200095)(300000505095)(300135600095)(300000506095)(300135500095);
-	SRVR:MWHPR0101MB2944; 
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	3:r2LptyJN1aN640Xhh1bUW1XZEdeZEtZP8Nr62VaeCCpoIiLQwZdnG+7Yrhz5QEvmak5ynUKCBcQUnrUhXaeEfbC8iSyIZcr5OMsragOTH4vs6GZX6MnzO8mP2iepcrQ3ce6S0zgxjDLV3iSv+ZPbwJJSB+U94NI2cZFSnrYbaARxTLVqDr/OIUD1+z6bOMgq83Ozh7n7aiyYLAZvpnbmNVZjUuwGqGL6LO3WfPB3SIN7cbA5gWjbyCCXJ8XhWkMpnmu/Vsd3y76R/hLHkEnHV87lDk1Us+sAdcnfJInALctB1sTfw4Tpo0RsQeBRjiADQp7etQuvy+9yxwgYcete6KpaoUQFxfDUbmXXMZLFMn4+7kYJcfqxntHTw4R2N1bWtutkM154Kaq2N4g4Kxzl0pk7A2ZlCcqutXEu4yeuCDJjhuB6hfcesOymElX15IeFF9aG9YvNoZpNqnk3hJjVB70Pxv/gJz8TAJGz8KZRi0VldD0GEUW493oPLALnbIOsK0GX78k9w0lSxRl5jh11CP8fxygqJE/ccYWove8zTG8thJwliw+cyDQ/iF8JjiBFB0770taymx4TblCTj9HKgITTqjg74oJeNSLVml6h3e67CDGkgCougE69Z3DB/29ul+D0PiBXfOOMwjjPET5MiTUB9Eh8kPWsYT0g0pXpdJZDeCEMoAWKOtHRriWyD8Tb1VK2AB3vIsdeoECfaB3Ket25UOJA5AaQgSN4xKzVTP0=
-X-MS-TrafficTypeDiagnostic: MWHPR0101MB2944:
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	25:PyH43g3JIJTqeVkLU3D9fpsrIFlIj1CIvhtHU+JO9GmdRvx9ZFsuvmb46OWwI6N96EHM1lkqmuWm8mewIBlIhOxaL/KwNQmgFCZ7lNYIZ7KKFYDGUUJ412vLc2mLVCYYBtgRYcF26YBy9AEdc8hXtT7kecw7MyCXFN6FjZ2xzRdQXRO1Ew386pOyUEWxV11hG2hGI+Of9D2oDXtwVtAHGHK12sESfOgOsQpiIq2+gls37ZtUaP8+6JMBmPBqcKWm2nZRQXa3qYL1YJcMcEu7UAioUUQF3wvexcxwx4crR56Wm2s+eYtki5YdG5iELBE7qZTH5gO7cXlX+MXELC6u2tNnhbi6bROzCFrmDyuiPKtSA96R5GxQKjMokF5RjeF+HfTNg2RML5pCBmAvYzfn4jvP77EaWxI8cxeBmJCkKvE7WSitPTE+dFKgd1rgl8RA1ug6OdRYsul9+AUbRU2tqO45wXcMZnduP6qiPwUXuzL/3Rnrgl9QUv5Mk3e/jsQ51S7B649MoHS/yEhDzSWsAoOz6aORnwZL/ZHMHqpvN1xmGOYngBH4O9mTeMk6PXHWiMGGMi0ypntXaVJJN/QuSCTAkoDAJbAHGmIhM/YKvGjm5xTpFkzzBcI6BvOzXiNcPvOjf5O5AV7zhMfi4KPh42qswDdT8Sgwy1G6Zsglgr/Qe/t77TVVGks1A/4YhcfMZheqRlol5y38LmR35DWrKQJLjU6NiJnCvHgLPAne6iJuoz366P0leksZWEu4caNYCNeL7v4sP0tLttab7DTrzpJ7UZODs2wM6q86VClRRPMkHO28Ik3rRq+AR2QrBaWgJGxN6mvEyjIuMh6xkOgJcmjyXVfJg/dTWppoD6wYfhqFbhHxJ3sBxrT8Vgzfjj3DBeL9akJO8w3EqI24ZdQtItXAlcR/3LOqDUNsCxPX2ZA=
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	31:vSw5JVvKdj4sAoixetQ0TxSSiQmJ7946ITTAqIPzOQdjHqkRPvkpx+SpX3xwBizw2y/ZUBAVJNHux5eTgea13UP2DFDQ2f7r+kG7TbQl7A6JbOyOR4tMhK7cysOIhetPcsLFUXGF1HTig0x7fzYaYqRzv5sPA3J/EawoXWVLfUdouchzvofrsDck1OUOct3YsKLVu4ADkxJ31mcq00ti7gl7GnYhWrP7IITdmZBdQg3PD0iOCU7IAEcfvQaBhIYKo00ue6abzRU1UjGK0Vy/AHhG6tg8UtOwf5SrfabcDQ1AknUNCAOE9/SFSdTIppyhDwfHXeL1NvVAFW5nalRZv8ygtFKZA2MoL5as1N/E+AijWvlWCmskWwZUWePMlSNPcF8UIOhJHcU6y1Z5dNWXEiKpCfEk3QlE2ufs1FIlD9bLS87nBnmeFpIaUOaYRMis9G0zFJ8C5jj33C0uGphR9UQM5dbsJOvjPPqDzjY0b7t4mdcGpoAV/vmMaZI0x0phFpS5DvI3NXtQO2Y+x2ZgoknZHOqtj5H+CanjbxFaqPceiOvfq6hbam3MmDzlmwdrjUkKDTX+b45UYily6N0/XXPJavVtM0dtwx9uaa0vCk3tyC9oXMWddUKut4qbblHoKak6L3XiLBiAtaZVO0g3ZvjOpE5NfVEcjaSzy3TDypqoP94aFCUy7pKcUN2pnLndyqBdy+wzaMuYigcBj+DgJw==
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	20:ut/RVvjHBYrYUhhU2Vuf7+L/ogXOdXog9T6pg8NOrG6bHZilrkmOXA/4e0+n5Y/33kcOrt1acji6ZH6T17wJyZCwwpbe6o2n4JYS5nRoA7TMhNTGIVPhwAyE7TbmdkoLKC8eh6gNvhNc4XI77etNaatqT/nQHj37kxdgRDOaPqdZGiFpZC5BJtfjdntSzX5kZ4QJpoApdxjOe1jr7n1/Nz7XL9MtzN2fvw+aiDii1I5d30OzG6/rZNLm4mByY52Dlz0tSQpAWYyfdAR2XWHHS+0TW8RnC+6/MRJu3B475f/Dj1QJ2WxMWPduvMl/ipjdH7zp2wy0GYrMR4Q/lTRrGm1sc+0Mz0yVdvQsKDUqZX8MkPCTTIgo49OWdSqj0t9XKQzt702Tg3g9X4tuO+AyeRBtiyHXsvz6sIXff9kI5FI=
-X-Exchange-Antispam-Report-Test: UriScan:(236129657087228)(264703809997249)(8415204561270); 
-X-Microsoft-Antispam-PRVS: <MWHPR0101MB29442012AB2E334B75923427ABAF0@MWHPR0101MB2944.prod.exchangelabs.com>
+	SRVR:BN6PR0101MB2930; 
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	3:3qaD2szPpMeOqvbb9AZIng3K1nvxJ8b4+vVf5MR7GIT3miEfSzxBx96J7QiA7Umi+rSLnZjQbjkVZjejPKbwdXIfRVt8fCLjppBT33uL9xzlTfPYA0wZujnXqxUUKez5MD1ZsgmYpYEwpmdgjM7GntN6a8Mmpx4pTq0u26EwP6cV+KUQBDq8lFUGJuRjOZi//PH6XUdKA9J0GyNeLqB3w7OspDiDLW/bQ/w5TlVEQREUFzUqgE4nmlzrk15XHWSQQhDDibTHrmJRBRkNL1Sst064fzEF6UHsAf6xbl9j/Atu0qAcEz2rgrNpEEq5i8jM4xGbbnJI0bBdg47PYu/5EoLsDVZD8UwvsSKIEyCx37CxbA/X2N+RH6NtmCKVVnYPkDMEcnR1NYJByW/xNJc8pmZ1GOv8Tqu+X8vdKRz5EGLd6NJu4EyFEbW2WXzJL8WiQ2tIPyw1FrB6Ym5mdm8ruwO0EO7dRpBhrKp872I7gmVKRvsP6fajDgTLsG6asvUxMNYl6YKqjnsRgAf6mI84oB7uFUxIYQ+35Zwe1o1uELuEaX708nG6pagtXslm5yVYHGCC9CsApli/dvSj4QFasn/SToChp/ECPcd9eBKTvwiFJP0WgnDWbsAKWn53anNlwnBPAhHV0UQ+xcSp75YngY8K1WIFiufVsXBMNgRH79q7g3bJ89Sbr4r8neu28p5SkGOkhpQgT4EgAYcMCoy2UVQsqAUrE2zL+eIgsU8q4PE=
+X-MS-TrafficTypeDiagnostic: BN6PR0101MB2930:
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	25:9YlQGEHaQgSn+3SVGcgLF1yJ2zqEUKtLnMjpPdN6wndV7zZCZGfK2JV81SDuV/5g6VkEAgUzxdXQvEPhi7vGyFtts5rrHzMtvzdImVyzYBMtY0J/sNsfC9FbFWWicMpvRDZ9l04r0gttjtVNwfWkAgiQ5ryi8tdGl1S1Ysbm3gASThJCVbBmelY09PmrylJF0P1gEnVmAMZrKV6rNHtGepqbsbEBzoNWxOUNp0bwPZ8393b+Sy3NSFN6Khn2ul3htiBpgK1tEYiyLkZ5aZmeGsCFRaRib72TquGqVS3e05y3R1V1XQiVqKxI0Dc9voA7Rc6Kf/sTSl4Zpxy97wsljuss9XVDPm63tHBoR5L2ZXzuajI/8npuVmtgQEIyBy8Sclr0XNcWyHhOgniFdqBSZjNPUlKMSBJ+m8WGSaNkJpwIk1zmhLVqkSg6VVUmZwEKOruKdJ0JCOzSZ10g+EBOgA4IJbG47G9TD4DFy27U2aCQxMKChOFgZN41Vo80ch2nhC+hTY6MLgS81LAfA2JQmB6YDAG3u01aTj3/BVWkS8xja29n+WczxUVwtxJZSCKhrA9t8QQaMMV1/wPUvrmwqUhD+Xh0cGWP4IjyBWpBgiTQUD9awxTDd9EF2WbdARzGQ4EA/H9INa+gLecwj/3wDjDq4UlPvk91Rxc/IZu2x+YGWu7hJU477Tu8UMxtOPdZClZFre9YAo6wqlQRXrbGElCrbxlJL5nOOY7VNlTeFAxctPU9IV71uYWmHz+gw8FSmHiRaw248gGg1GRe/R57VT8DdfHhcbIKPR2JREt11HNqTyK9vmpvIhzOSLTQw2U52vKCQtakusq3YuO1Ukyirc3RgmYuGZUJTqtJeCCETWWtzyG4OUGJK8FCGbhAt2n06VzKSc0e5fwyh4/MxrtZWiT+HIFFtuTGVRQwLDgO2Bs=
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	31:soAOEFurepd9OPQN7IxIrhrfStSLn97Bkkv1x68FFrLwQDFNCtObyfM/XNLEJ75jHE8lKcbNZjqClhp5x6z+Ly1tCLNVU4jEsCmzrkMBCsxDDvzd1Avo+kpkcXENaBgZ0oag1ckDmpn7hTYorfFchsaESN1QyDg9rLlmc6ZdTUGLvjgnXQV93cNWyatpXN8LWMEhFdmVdMoMV3YyFJ0e5IyKLmoNqdCemA50A+kmuV6mBDy6MxOUygFr3SGKFVUxgE0cAXcQSL85W0n1z8xQmhWhzO7Fvu5PKP9piskbBBZWcO8ZPPWeZ4HMC4qMkpeOxRRxBITzYiuEXbWSNpPzIhCVLyu0NyWqPVlcGGmbJOCQa3Y+taIR3ae0UQlelC6QH73WQLqkLWvLyGcWjTJbGJhU4FhN0cLL/yrJ6IEhlD3TSp6TmA/SNoggrL400hZJmHF41uzioDvuh5TlqSIPuobyw1Zumv7XOOGpscdpMISxoaVYx7Im4nvN2PaAMOVZFLCiV2wfl3yT7Y8eQXQdlU2tjpAyswztiVnvD/H2Q47g1/cBlU4zp85TkfDfRGrWeRxXy/y5XtcHmVYJCvxBWKF5bI5IBoaJOa7wx8DiVv0fLuqILqSntcv2q/OPdMfYJ7pVx+VfGpKqdnoo2NUHKsm5b7MzN3FD0iVmeluUDmrld9FUE7gZ7VpUEfhg57Ga1fgZ5pMITC4C766O14c3yw==
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	20:uSWebD2EnxX3Z2qnrTMIVRmZarx9QT1hL+IsefDdhSarAfj5OqCgf9ZqsvJSQf4BNNGCwqE8bHzZbunADRErkV3qJKZuBXRpl0LLSXM18+GGXWFLvy/FX1GJB//vfyZdZDIOIGIEYA22IL1L+WwCqNEGsfnfGjaERyLOmLbnUbnMbl/dhvWxJK6KFFQsMOo08L6h6eu8oPhRNrFPkOwGHAxsYzjLkbEPejot98s+PoMXkA49FF/SFP+eaThj6D4eqVRMtAWj0trvPLUensLbdf9cROgjSKi+ZswI695GU6WKV8k/qSYJ/NUYdivyYu7JgukLB47rYuQes8SdReoVbU93x4z+6o8fG1nBjEGQEHWcJJGqgSzaeFa4C02Qof9VB6Ts/S+A5uVe/BATb9qKUpOuTwf4Kl9p5rd7r/tHj0A=
+X-Exchange-Antispam-Report-Test: UriScan:(236129657087228)(8415204561270);
+X-Microsoft-Antispam-PRVS: <BN6PR0101MB29301F9646FB5446FB5787A0ABAF0@BN6PR0101MB2930.prod.exchangelabs.com>
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(2017060910075)(5005006)(8121501046)(100000703101)(100105400095)(3002001)(10201501046)(93006095)(93001095)(6041248)(20161123560025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123555025)(20161123562025)(20161123564025)(20161123558100)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:MWHPR0101MB2944; BCL:0; PCL:0;
+	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(2017060910075)(10201501046)(93006095)(93001095)(100000703101)(100105400095)(3002001)(6041248)(20161123564025)(20161123562025)(20161123555025)(20161123560025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123558100)(6072148)(100000704101)(100105200095)(100000705101)(100105500095);
+	SRVR:BN6PR0101MB2930; BCL:0; PCL:0;
 	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:MWHPR0101MB2944; 
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtNV0hQUjAxMDFNQjI5NDQ7NDpKRjQ2cXVuU3ZGdDQzcDRHb3Y2OUgzYkhl?=
-	=?utf-8?B?cnZnWVNtOXVCdVNXa0F0UmF6L2EwS2ZBNnNoc3lzVy9pcVJQZHNLN0IwYVZI?=
-	=?utf-8?B?OE9FOUZIOTIwMUZZaG9NbktKVXZjSi9nbE5LOTVYYTF5cS9SVytZM1lnYlU1?=
-	=?utf-8?B?bllqVmFzOXNyR3VRUm1GQ2VKaVlQaG1JOVNrazBwUDUwVTVLa01tTVpURlZn?=
-	=?utf-8?B?Vi9IM0JnR1d1NGgrSDhPdmNobWJORUZpKytuN0VXNUs3TkgvNC9ab2QzTXVF?=
-	=?utf-8?B?c2FXVXdjNHVLZzhTTDFjWTNpWXF2UEU3cmhYd1ovVmRadmZuUktJNmVLbk5Q?=
-	=?utf-8?B?eHRmelFFY3VWMlR2bHptTlBEa2tkVjdaM3gwck5nT01ubk4vY1hMSFYvT0xq?=
-	=?utf-8?B?T1dWYlA4WHhmZGZOU0cxa29BV2hZVjYxUHFvbFRZYzdDcVVhUXZMdGoyUmlI?=
-	=?utf-8?B?U3RBRWlLU2l1N09tMnlpbzl0YTZmNXVkV08rMUtVdS9xMmFUeTRJT0pYeUk5?=
-	=?utf-8?B?UE9lTFBsNEtKNFJvczV6MmUvVWxYekVFS0VBZm9mSXFoOGNQaG9vNDFIaUxu?=
-	=?utf-8?B?VHY3ZjE1UFJxbC9INERqenFwOWc3VFkvQXRYQXltNXdFbDd5VkRiSW5SMVFX?=
-	=?utf-8?B?NVdwR3ZHRnJRUU0yQW1EQUpJdW5Kamwrdzk5WjRqTGMzTEJyUldNN3NBMlNy?=
-	=?utf-8?B?NDhDenR2YUxBekxqSkpKdHU3V2NpVThibnhGcnpTM2FiOU1GNXJtQ1hTcHIx?=
-	=?utf-8?B?OEVkUEVKcUpIa3IwYWV3MGg2aXdESDVxbXM1ckRPVnNNVzNUeXY0YVVicHBI?=
-	=?utf-8?B?NE9kdWl6YXBqTlpIbU5ORmhhbnZERGhtMU1OcnpFNDY2R0hpSDNTVUxhM3pK?=
-	=?utf-8?B?RXhPc3IxeXBHM2xIYjRUSzczcXY2L3FaSjl5QXMrblVNVTg4SlRjMEJ0aTJq?=
-	=?utf-8?B?SWp5bEJIZUwvOU5ySzNLZXE4RGVXNXl2c080QkZSZTZvbkh0bzF1OTBBVVM4?=
-	=?utf-8?B?dm1mV0piRWFKTTNza3BqWDVSbi8wdjZsTXg0d2dlT1p2S0c1TlZCQkdPeGJq?=
-	=?utf-8?B?WUVxSGdnbWNzVlVSMWxURVJLMG4wY0VzRkRoNW03bUNyUXlpNTNGYkw2SVlr?=
-	=?utf-8?B?ZC9FcTdlMmdYaS9JWDY2aStZNXZzUmQ4cG1hU3pHMjdVT3c3QlVYaks1WFl2?=
-	=?utf-8?B?QzViY3NWYkhrYk5ON2I3UkNidjhlSnovaEVtemFzQ0JuMVorSS9IVnJRejc3?=
-	=?utf-8?B?bUprTW1BakN1MkFpcEYrcVRmSXlpcE03cW1yYVhMSnNCVjNEV3hNTWRNVUY4?=
-	=?utf-8?B?N1BJYUNYYy8vektaVzhkT3Rxa2NDZ1h1aDA5cytWeGVCTkZhM2dsZjB4Ly94?=
-	=?utf-8?B?RzQ2RGhrR3lZaDdzQ2FHUGRDRU51aUNrK0dpQVMvT0YySTRoUll2OWlWVlhh?=
-	=?utf-8?B?QWs3cW5qSVVYL01kSVhDcGNCRUh4VC92ek5DVDRoQzlLczk2RDgxeXA0dTIr?=
-	=?utf-8?B?bmw5ZkkvU0ZIcFBPOU1RS3lKejNVWWRtUTNibGRIcVl6c202WVFnNEpXL21K?=
-	=?utf-8?B?WlRZOXhmMTJCYmFGWDBSWTlzdC9iUFdmanJ6TGpFOGVqWWFGSllDTmdNbEZq?=
-	=?utf-8?B?anFJbmxaaWloaXpjVGNRUWtPVE1PK2dEMUhvN3c5am9FQ3RRWk52V2h0U2ho?=
-	=?utf-8?Q?nquV28Z2aiDphk1zhkTw2njS2NfvG2NJ0N372bqD?=
+	SRVR:BN6PR0101MB2930; 
+X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtCTjZQUjAxMDFNQjI5MzA7NDpldUVQSkJ5TFBsbGJCWkoyYTZlejU2WnQ4?=
+	=?utf-8?B?YUFtRFVpUExXS3FobEtzdEFKdXFmZXdaWVZZSzk1WGZncFJkd0pjVjlCbkRN?=
+	=?utf-8?B?cDFWNXhVK1k1Ulk1VXFSemJNaXh1VzFCWXJpaUtIaGdpOVpGV2MwZnFrMGhU?=
+	=?utf-8?B?cnk2UDZvVklZeUt6d2tkaHA5MFVwYWV6SU56cVlEc0NFYzVnRjJITGlhMkMr?=
+	=?utf-8?B?ODlkSHdjS1BpM0w3MTFTOEZvU3ZnOHJLOFd4VzBybnZYVTFDaGh4Y2t1YXVs?=
+	=?utf-8?B?bXlWdmorQ2QxSFlENDZGRWhYZENNQUIyMzhiR0xaK3p1TXFPaFptUzhPQVg2?=
+	=?utf-8?B?ZkYxV1JPWGw0RHRJV1NRcDZLcHpST0tJRElIRCtjWWcyODJhb2htV1BvT0d4?=
+	=?utf-8?B?cmJGM2dCM0JWRGJDQTdjaUp5WHNWdVlHWUJGVHlUWGQxUURqdVp2eGV4bzVp?=
+	=?utf-8?B?NHhERDJWNkVzWHNMV2ZBbGhKc3BKd3R0MVorTEJUUTg0M2IyYklkSURBRXZX?=
+	=?utf-8?B?MWhWbEtKTFlycUtjNmNHSitpUWc0eW8xK01yNVJidEk5cE1mcmJzbUZKSkdO?=
+	=?utf-8?B?cUZjdlo3ZWFWK0VJZnJuN2lFRE0ydFZDOXVabW9rVG9PaDAxcGNORDAzYm9m?=
+	=?utf-8?B?QjFCcm5kUTFGa1c0TTErczcvREY2ck1ZMlV4THUzbk0vRDNmblluZys2WUho?=
+	=?utf-8?B?SXpYWEx6eVVzVEJ5K1dtMHFOcEF3WTlzQ1BnTDNSZXlqeGJ0dHJkeHFpVU5Z?=
+	=?utf-8?B?aHByU2VnQWhaN1owOUo3V0p5OTBscVZWQ2p0Z1IrdHkwdnZrZGVmNmhpOEMz?=
+	=?utf-8?B?RXJ0a1IzYXhkMHhyTUI1bno5aHJOM0l5aUJWSWpxdWpjNTgzT05aSjh2MVZ0?=
+	=?utf-8?B?VzgzT3lteGJnUDFKN1Nqdm1kK0tIM0ovZ2lCRmx2aUdzQVVxdmt0THRTZHRP?=
+	=?utf-8?B?Z1h4NWdxdTdxcVNhM3RwdzFOVHF5NUFlZU5TMjlFaXRoWFhqeVAvZDZGQzJm?=
+	=?utf-8?B?SWpnbUtuYVBBVndMZkFQZHJtdDdhSTdTQ21namhSL0xDd0ZNQTMxenRIT2dq?=
+	=?utf-8?B?Ym9hdWQ1STYvUW51WTBjWlJadkVSSCtGeDg4RC91V3VxZkloYTJkOU5sNW5U?=
+	=?utf-8?B?WGQ0VDFaVlZCajRYb3J4aWtkcyswalFEeDlnN2w4Tm1rNjhoMmd4VlF6Sk5H?=
+	=?utf-8?B?NzJGSi94bnhYWHUrbHRkR0hvQ2VRejJ0UzdCM2RTRFdRYU1LQWRCZ05wcGZF?=
+	=?utf-8?B?eGdrK2tCUjdVTDduOEJ0V045WTVEK2pKSk9PTk43N0Z5Znh6bk40UmNjOXh1?=
+	=?utf-8?B?KzI0MnA1MkdQd3NiYUI5TEh4VkJOaUlsNUVWMHdLSmNBek9uVExsK2twZ2R5?=
+	=?utf-8?B?ZzFWVnN5K0RKa2NrZWYwOFpRV1N3NldYRUVqb2s0T1FIc2lHRDF1ZnM2UnFP?=
+	=?utf-8?B?cHFEcVB2M3M0T1BNQ25FcDdKdGpjUUE1TXl0c2RLZ1g1bUlrWXc0Z2xySHhJ?=
+	=?utf-8?B?bi9uaHB6R01xY1p4dzZDUnppYzhBcGxyVzRuRVJPR0V4ZVJlS2t2RURscXRj?=
+	=?utf-8?B?SXBoYkd1ZWEySVdwRzQ4akpaMFpENU9BZnZYYm10aFdzV2F1S2FRbGUvSXRY?=
+	=?utf-8?B?NzJ3cXNDNVVmZHl6L0NLMURUZ0RFVlVNMGNBdS94TjlyRmwyZE1aWVJYM09q?=
+	=?utf-8?Q?aMlBiGF2AnSthc5FW7Q=3D?=
 X-Forefront-PRVS: 036614DD9C
 X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(7370300001)(4630300001)(6049001)(6009001)(39400400002)(39450400003)(39410400002)(39830400002)(377454003)(24454002)(31686004)(7350300001)(36756003)(23676002)(2906002)(4001350100001)(4326008)(42186005)(6246003)(64126003)(1720100001)(2870700001)(93886004)(38730400002)(7736002)(65826007)(189998001)(966005)(50466002)(229853002)(50986999)(76176999)(54356999)(5660300001)(81166006)(6666003)(53546010)(83506001)(305945005)(53936002)(8676002)(3846002)(6116002)(25786009)(33646002)(478600001)(2950100002)(77096006)(6306002)(66066001)(6486002)(575784001)(47776003)(31696002)(86362001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:MWHPR0101MB2944; H:[10.0.1.79];
+	SFS:(10009020)(7370300001)(4630300001)(6049001)(6009001)(39450400003)(39410400002)(39400400002)(39830400002)(377454003)(24454002)(36756003)(50466002)(47776003)(66066001)(31696002)(86362001)(64126003)(2870700001)(65826007)(305945005)(83506001)(8676002)(478600001)(7736002)(5660300001)(23676002)(2906002)(189998001)(6486002)(2950100002)(77096006)(53546010)(6666003)(2361001)(81166006)(229853002)(6916009)(2351001)(7350300001)(50986999)(54906002)(31686004)(4326008)(33646002)(93886004)(42186005)(25786009)(76176999)(6246003)(38730400002)(54356999)(110136004)(4001350100001)(6116002)(53936002)(3846002);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2930; H:[10.0.1.79];
 	FPR:; SPF:None; MLV:sfv; LANG:en; 
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtNV0hQUjAxMDFNQjI5NDQ7MjM6R2Yyd3dpSVFBdytidkxiUUZqMGJzTWxI?=
-	=?utf-8?B?VC9kS2JIQUZrSVozdkxQMGZYUDJ0eEdyUy9yeDRyMmlaWnV3YUhKQlNkUTdy?=
-	=?utf-8?B?YWQ4SHNrZnF6WmpnbW5PL3JOVVNpNy8wNzJSS2JSTFE4NmhVUWM2OWxQNGh0?=
-	=?utf-8?B?eUg2RHg5T3FQMzZtU0FVQmx5K01wcVdlMTErOC92aVl1dmNxTDM5N0FZK2dC?=
-	=?utf-8?B?S013cmZVMEtSMGU2MjJQZTFaTXpCY2ZrYzlUMU5rMnREMVpqQ0p0Umk5c01j?=
-	=?utf-8?B?NzlELzkwWm9hcW5yMkFicTRRS0NROU9ZcmFpVEhBMUZLVjN5bWZIZkc4VFV1?=
-	=?utf-8?B?aStoV3NmMDBuTlNYUWE4VjBuWGFPNG9ZbXF3MStKRTM0NjA5eCtTUXd4N2ZB?=
-	=?utf-8?B?cTlXSGRaNGc2RFlXeHdIcjREaFcxU3hwMGo3TjFxYlkyWkxOYTRPaCtOSWZi?=
-	=?utf-8?B?MmlzeVZaT3JZempzZHVRNU5FTkY0SHlFdXRyTi9xQ085eFg4Z0hPczhtbDlI?=
-	=?utf-8?B?a1E0UEhjd1VTcExvMzNPTDc3ZzVidStCZVlmejhUdUtmcy9jRThsV2JKMjBy?=
-	=?utf-8?B?UVhDVmF5MGV6TisxMXZ1bHllbFd1RG5xd25Rd3Y3K2FHVUsrRjBtYkJkYjk5?=
-	=?utf-8?B?OFRYYVJtWWdYSjk4V2FvSzBiNTVjUER0ZjRGL0JEOXBSTGowWDFEMlVJaUxs?=
-	=?utf-8?B?UVJEbHRtR3QyK1pETTdNai96TnVFaU80ZmxiMzN4dDZsMlpSMWlFUUxuRlc4?=
-	=?utf-8?B?Ym1UKy9HZ01maW9jcVZkSVppcW84Zm5kaU9oUm5UWlc3S3hmZmRCQUpVYUNP?=
-	=?utf-8?B?LzdpWHNpY29qTTZkSHNBcUlzKzg1UytZRUZzSm0zZ1d2azRwYThFdDl2TDBV?=
-	=?utf-8?B?ZHZmSWRpVFlIMTYweDdmWmppM2pSdzVWV1lrc1UxeFA0YlhwYTVRZ1FCejQx?=
-	=?utf-8?B?Z09oRVRTNkdVcmdBTzRDSytvSGNwak5UT2k4MFVLeGQ5clJZSVBrUjBwdUxs?=
-	=?utf-8?B?ellKWU5nS3RhTDU3a3lJUm1vM09tWVM0MEJNUzFyN0I2VHJQMStYSWZoYW5U?=
-	=?utf-8?B?V1kzRDhwMkdUVEFrSHlnK0JKZnprOVlReUFlY0liWnNkbWVRZDlEMWQxb1hD?=
-	=?utf-8?B?aGlNdWkrYnBUMFcyRXEvMkMxblA2T3JDNng0L1dlSlhMM29SM0ZGUEs1SnR3?=
-	=?utf-8?B?eGxOVmF6Wk5BN0hDL0p6M1ZnT3lTcVBmVDA2NDZ6OHB4T2J6OWtKdTN6aVhJ?=
-	=?utf-8?B?VnpZOWtmWDd4UnhuWVgxUWd4akRSWUprY21LdEorR0toOW9SMUpjd3o0cVNI?=
-	=?utf-8?B?dFFiZXN1TEw2ZXZBblVXUk9MaVdYeTZnaHFtRUJldkRNV3VHbnA1WTJNeGlX?=
-	=?utf-8?B?RGVTMm1KME9DYk9mcjF4K2N4UnpIZnFtVCtxeDJ2M0xwKyswZFpQd2VxWFVq?=
-	=?utf-8?B?R1ZRZUJxQWNneGx1cmQ1MXdFdC9paVM0YWlQTmtpRnh3RjBNOUhnK1htZ2Y4?=
-	=?utf-8?B?eG43aGQwU3VRVnY5K283Y3lnVWQxdFgvV3U0ZGZmNU1XUzYydmdiQVNsUDk0?=
-	=?utf-8?B?L0lQbU14N0pDNVFCeHJuNHMxejVOM1pabzl3QnFZcWFjNjAxeWlKSUVrR21m?=
-	=?utf-8?B?aGFLSjgvV1hBdWltSmVmakFtZXpVYUJyb2JWSHlNVVRTVFBJaXZJdCt2QVhX?=
-	=?utf-8?B?SUFzSTNyaFFsYWxiZ1A4M2ZQZ0NJbWJCeGc3T3laM251TitmdHYvUm1RY1VX?=
-	=?utf-8?B?THlORzBuTXY3a3JrQlV4MXhPUjNaUmZsUFBNcnA2c2JQdW5rUG56dmEyelIr?=
-	=?utf-8?B?U3ZjcnJ5U0QxWWlnK25MUlZ4UnkxM2NBYno4MFAybzdBYzdPdz09?=
-X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtNV0hQUjAxMDFNQjI5NDQ7NjpHU1NieXFkYXJqV2RyWTBuM0hsVzlIUnkr?=
-	=?utf-8?B?MENreXZ1RVFtak0xb0FqdnMzQ3pGbDFQbWlNK0JsVWNFREZUOERGdUtaaU5S?=
-	=?utf-8?B?VTV5UmlsblhaMGJxWUoyNkptYTFTeG9xMkNtMEFBZzY2eitRSUJTWVNBNG5J?=
-	=?utf-8?B?bys4MkltSDZ1YzZsMGFXaDl0R1BnamV3dno5MzVybWZ0VHdveVVFK3ptdlVJ?=
-	=?utf-8?B?TCtvSTJRaGFJa3dCeVB4VkhWcGFLYUNRLzNIc3J5TlNmZjVNTzRabExCbGVY?=
-	=?utf-8?B?Ry9PTGd6R2Y2c040RktJLzRoMnR0U214SjIxekxlM2VNUkRaZTBZKzZrdzFa?=
-	=?utf-8?B?djF5bEE4ZzVid29OWkxvUndBWGZKeGRNcm9tMzJ1dnFoMkIrNWhSaEZBcGdD?=
-	=?utf-8?B?cXZMS1lDNjRCNjZKeUdXc1BjVlBKSGQxQWgvb3F6TEs2bGR4Yk5ydzMxc0ZE?=
-	=?utf-8?B?NG1lMEVSY2g5MlVaVytnN2JsNzJ1SUpNY0lYQ3o1SDBUQkhUTGdBZXZsem1H?=
-	=?utf-8?B?UDkxd0paSDNocGRPNXhXZWx1c2cydG5UWFhncUJuRXFvMjBkamVLbXM0K0J2?=
-	=?utf-8?B?S2MrMWxVM1d4bXlnMHFMNkZwMUVMTnZZQm5yZzJkTURzeGw5V1Z2elhRbnRw?=
-	=?utf-8?B?elNQYUk2SUxSd08xWEhtVkFqMlBUREthSUZtUFZJVzc4L0ZRUzd1cGEwTmEv?=
-	=?utf-8?B?anFrckhGZWhXK09BMVZ3VHNiVWxsRUlTTmsvRTRoSllkVUt2anhvVVh2THNp?=
-	=?utf-8?B?M2MweXB4b3NvNkNLMEdScXdldlBoUnJtNHNGS2JQclNRVWNqMTJCdUtHaWxD?=
-	=?utf-8?B?MVdMM01IREVZcjkrRzRQOUdRNmNtQ3pwWTc0R25PdWozN2E3K2ZURGZ3cHRZ?=
-	=?utf-8?B?S2JHNEErNXFVd1RyVVRJOTdEcjE4dDdaUkJhUHJTUnVxMW11M1NSdndWVjdh?=
-	=?utf-8?B?eGZ4V2hpS2VXUS94eUlDSlR6eTAzbWtKZFNqNWlWTGJkbStLaHByMWVhbGdp?=
-	=?utf-8?B?WitMNUxndjR6bDNQekxoNEI4LzZEMlVEUkgyOHd6VDM2TEtRTzE1Z2xYSXo1?=
-	=?utf-8?B?WUMzRjl0bmtWaFJJUnc0NUNVYVlpMlRKZ2RhNjFpQzRjaXhnL0hsaHZsVHZt?=
-	=?utf-8?B?cEFCeS9IQ1MzOEVlL3ExVjl4SzBodVZiZktQZXp6SEtmaXRVLzZoZkxqK1hG?=
-	=?utf-8?B?NFFBVW0yZDM3YXhTM3N2SnZJL2l1TCtaaVJpcmwrQVJaWXdzczZrSkNrZit1?=
-	=?utf-8?B?S1hTSlczVGpUckcwbEVxR2V1RmprOTFsUFZYNzFnN1pxTzFtNTJBc2hDc1V6?=
-	=?utf-8?Q?AEPWn/Zg2xcZtxu3lMWxJcqjyy+yGR5co=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	5:794EWMJ1aD6Emzol7UV2rfuZTZXljuiaSJxUTAdl6oEfwxFKTwxSE2QR/t28s+mPnFb8O6gFZrkqnuhmMTzlvvMZ+fCIf3DxrXFEqHZhdrpBRSaAQbuz1oIUz5BmeEsJwl4p6s+WK6wwYQKXbP3fmxculgEQ5oeJcIgG3K1x0ycvgfK+s2j5gzN+Yc/77K2lBRxfmvaEtReRlm93E6N2IDJo/xyaDYriT8lFnNGp3k2GddL/1VH+j+kzFiPJ71nrhsv/makQPWli/txHvhvm3TeH3QTFyeMECy3QvbLi7rKuSeSO3IHCMfhJCdx1o9gZTjkBxTdSihUrNsk53wWDFpT/FT1Tx7Kiy7EF2DhubtoGFGa3qibUha5xL803lSYEdyXLlBIiZSMihaee5mK9JUA5Cma6exRsRVv7rBpFzz2PzAsJ33+PlLxAaYk98D4aKCuRNCxQzlL0OFdUo4z8lF4xLE9/eKuHkQH/IBnPFnP2k6xRRXltNtBKPijieffq;
-	24:NH8Zl5tDi07N2khYfbeEooOvOpx3pfSFnKe6ugrWw24Nwf84CfVCja5FL1KzMdPtV9dmC8oBGJrfDh5pccbVnnRKj9TkyjLzrqZFHRedAxU=
+X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtCTjZQUjAxMDFNQjI5MzA7MjM6R1dIbUhtM2NGWGZSVUpMdnRUTGpGNVpO?=
+	=?utf-8?B?M0d3bllqbnJMREZBamFhODE3S1doNGNQZm84U1JGQ0p0ejBnNnJ6TDdsdXpE?=
+	=?utf-8?B?U1hYYklBTVF6b0twTnZHWlJsTGZ4WnJqVHEvbVRyZDM1YTBvb0xEdndMVXd6?=
+	=?utf-8?B?K0lQd2htbWFpbU1HRjlrRVV4Zm40d0JRNDNvRnRQOTFFMGFlQ3F0K21QUmNF?=
+	=?utf-8?B?MSthZENyWmxTdzJLaERnUmgwN2dQV3hHOS94VGRON25HaDUzRnVEQWV2eGM4?=
+	=?utf-8?B?UC9LTHppc1Q1azBjV3NyZTVKUUdvRktiN0R1YkdTZ2swM3hOWDBLTndWUlR2?=
+	=?utf-8?B?TTZ5SmFia1EvWjlCNEFwWkJJOGkzWVRCcWFmWVhKTFc1K294NUJRc055Nndx?=
+	=?utf-8?B?VXhvcFRESXZkeVQ4NDQyUVZQK0IvQVFCUkxoR0tmYWp6WDVPYlBzUE1MQkYz?=
+	=?utf-8?B?aTZRZkszaXhlcnp4YXNidjhqTDRnaS9GaWp4Qy9OUkZJMXlEaXJKR1JkaXFK?=
+	=?utf-8?B?WHRYSFJiYitGREhrVjZFUGhWalNTRURDbDFHclFWditEZjJ2UUZDbFlqWlN5?=
+	=?utf-8?B?ZlVBTUVxczM1Rm1DUW5lTjF2MDh6RUQvZ2dzWW56UlFmNXkxNit0bDJWZVBK?=
+	=?utf-8?B?N3pqUUZtaXQ2emxKTnlmVGRnVHdTSGd0NkU5OWY4VWgwU1A4S2w5cUFsakpm?=
+	=?utf-8?B?WXUwQnlnMzFobE96OEE0YlRXcXNJUDFpUittdWtCOC9ROEQ3YTJuUHVvZitX?=
+	=?utf-8?B?aFo2MDhYaXR0Z3VuVUE4YThoc0MySFM2VzlOZ1JXKzVWV1NsMURwZWx2K3c5?=
+	=?utf-8?B?VHB1bjNVTkJtVGVDbkVzczJzUUk4S0ZRcXBDRWFWcU9LTXRpS21pVlBjM3lu?=
+	=?utf-8?B?anM3Z0Z1QVRCMkpZOTB2Mm1Fc1RyZ1BoMnVrc0tNVTRNRmorb2d5QmFDUlZY?=
+	=?utf-8?B?L0NwWVhXUWJZVG5nRm5qVVkyRGxVK3hEdHVoeEtTYWcxVlo3N2V5VDltdGNt?=
+	=?utf-8?B?ZWhEYVMrUWp2R1VZaThJbFVOQ2RoUTNPOUMwSkJIdk1qb1lEWldweHdjK3B6?=
+	=?utf-8?B?R0R1c1duWi9HdVZSZlBhWXBOUDB6UHNUZGYwcG9GWWx5ZXFLTXpKcFdiaUdq?=
+	=?utf-8?B?eUxlc1FUTHI2aEJPVFlaMXEwMkYyWG9IV3NtWDNldEd3d2w5UzdZK0Q0QVB4?=
+	=?utf-8?B?K3p2ZjdIcHlvWlFldHl4MytHSnp6RXZQMW9QamJUc0Y3VkNPMnJZQ011NEQ5?=
+	=?utf-8?B?STF2UjF6SGdYMjFyc2ExRzBwbHd5VHNDMU5XeWdhMStXWWJ1ZkxRZlJMWGJm?=
+	=?utf-8?B?MlVTR1FxM3UvK0taSDVGNitteEhWWkg2OVpuc2FwQWZkZExTK0YrTzExM2RZ?=
+	=?utf-8?B?aGVsUkJEZ1pHVU5CUHJtRzNGVXViZ3JydHl5WW9nTUNPdVpPTWtvRXFVOWtN?=
+	=?utf-8?B?YS94bGpxQ1lyZE5XZEV1QzArYnRrQ2N6eFNyaElzUGQvd1JqMEVHeThpR1Iw?=
+	=?utf-8?B?bGhUbks3R0RzbU91dWw1QnpHOWtCamJxbUExb1FaUjBOYXFsWUFKTHp0cWl5?=
+	=?utf-8?B?VFVlU1ZRcTZ6OGtxcS83ZFRSV1V2Qy90REFyQnFnVTJ2M25FTGFBeGUveGR0?=
+	=?utf-8?B?WllsekQySnBzNS9LVGZmKzN6aFZIaDk5OUExdXVvdkFHUXFaQVdFMnlkNlVu?=
+	=?utf-8?B?VFd0S2NrMzg2bkhMcFg4djQyaU9LelQzUzUwYVhoNGhrcnorR1pCTlZnYXlI?=
+	=?utf-8?B?TmtlV3JUY2NKRGFnZWtnK2dpeFBESG1IM01iWnd6VHlUNWNNT3NXV0VWT2lS?=
+	=?utf-8?B?ejlBVTFLN1h6aFUxcU1PSkNHbTlrY3JuY3UvWG8zdDcrdVBzaDZkd1hoNkM0?=
+	=?utf-8?Q?hrTXpKC8LJZ6E=3D?=
+X-Microsoft-Exchange-Diagnostics: =?utf-8?B?MTtCTjZQUjAxMDFNQjI5MzA7NjpyYXN5L084QmVJSnkzYlRENCtqT1NDdmtq?=
+	=?utf-8?B?NDJRdnBwWFQybFFCOU5hb21nQjdHOEhOMHovSCtPblExNWdYSkg0UXZSQXhL?=
+	=?utf-8?B?Vjc0V21zVTIzUFR3SXltTUpJbkZCN0x3eE56NzNNVk1Gd1F2U1RPaTZ6TlZn?=
+	=?utf-8?B?L2JwamJ2RnVjMFpqV0kxazA0aFZYM1JiUit3QUhWaFl4U2NySjFmL0lxSlFu?=
+	=?utf-8?B?aWpodzVVMkpMZ1NwSnZINmlsQ3BscVIzM0lROTUyemN3WGdoTlU0RnFRaVdq?=
+	=?utf-8?B?dUJ6L3dLZ0xibjJjUW1tb2Q2bXFEeHFhNW9ScE1QM1dha3puYmJQYlNNc2t1?=
+	=?utf-8?B?SmFVNlU5dkZ5MDhHMFZYdjdwRVFLbDExOE1jK3N0bGNsWHFUK2o3emhJbjli?=
+	=?utf-8?B?SUh2Rnd5YzU4d0RnM2hnS2QwdjJPVmthaDNMcXNXVkJJRW9US2RDYUFpWjZt?=
+	=?utf-8?B?a2VMZTN6bEpiM1ZFbU9sYnh3RHpuTnc5Z21TYnYwMUlFVnp6R1dwNm9ZRkMw?=
+	=?utf-8?B?RmNnU1NqWGNuZEQvRXAzbUJLVDErVlRNMHVEbVByTG1YUU9adXkxY2l6OW1h?=
+	=?utf-8?B?SDVXbUc5RUowaHE2YXQ3THcra3N0VytuWEtjUHI0aGRnSmdWeFBZMTc1dFAr?=
+	=?utf-8?B?MXFpZk9WcHY4bXA4bWVGb1hKVVh5QzcxTXZKdEdCTVFWTlo4dlNvNEV4UElD?=
+	=?utf-8?B?dFRkSTVLa2JxclhhdHlVck9NV1hORnFaVVF4ekRuWVNVcWFueWVYeEdHLzFH?=
+	=?utf-8?B?ays2QzZZQ3hRc0xJK1FXRThxRi84WTdIQnVWQkgyQTN0eWxhU1ZXSUkwL2h2?=
+	=?utf-8?B?MTJuTm8zWExSa1hyMVI4aEJ5TTdQWXlBenhnRlc0WTdZaWpjTTBWc1l0NzFy?=
+	=?utf-8?B?UHFYUGZhdXNWRWtsMWFvWGZrbzZHdmdxMFhtaTN5K2ZKczltazNOSThIbTQx?=
+	=?utf-8?B?REtBeHZJNitvWFh5Q2s1eW1ITmlhOXBDWTh3NmdWbWkrQlU2L1liNHUzZnRt?=
+	=?utf-8?B?Zzg4WXBQUkFUSEp6alEwcDMvRU94bWt5eW4xd2pSa3BMNndqYVZBdDdQS3VF?=
+	=?utf-8?B?ejVmUTd0d1ZMUjdKZjF3YTRtRjhXQnRCS2ovV291Yko2KzRERW1Yd2psaXF0?=
+	=?utf-8?B?KzhiZFpOUFR6OFFIbGhqdStHTk5GVzdGV0V5L3J1OEdLUW9FTkJLVTNWRm1M?=
+	=?utf-8?B?Um5kektJOE9oVjVvdTh5NmJlemZjQVF4cWVCeGZ4eWtRLzk4dWs5OVJKeWt0?=
+	=?utf-8?B?bTZQMWhmSys4QkxWdUFVbituUjNrOXB5NDVhQ2dzZGF3ZnpEaHI5QjVzZlZC?=
+	=?utf-8?Q?NzEmTczHJxlmoiRaYXI135Cmp70zV/9wI=3D?=
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	5:8ARPIK86ZKVXbRZqS3Hb1FqNYRHaSzTlp2o3i7r2RlBM20bPJtO5kDU+pryAeDX2tg5rPpdopfDVSc+l5HUHqOu1tf8EQAaMgxAVZ7op6Xlw++NuFAmOAhnj0yalhHsvnQfn4VgT9G53ET8zYZjFuDLVoa9Sybl8+LwjsQk74a9DOJUY/FSQPAZM4YJcztCWSZx8QHgGhVcoj036BbnDMcipqNtc9c/cZ+/1gv6krKsSzwKeteRSfWkprdMfGd03B3myIFE0LqGNfMFRkWnWwCsEXzDpSSA8z6nukryaL1WWVgqMlo88USNPLkoNQ4xe3iZQZS9zNzT7KyHjSJbxIsP8QSJfXKx8mVEElqicMPwPMP2PjMoyYodjRJ+8cFdI1aEiTjgJiqS6222yLfgIDIFOuxavBcSY4iBD5aolik5X0GRlREuraS7PpiZxgss7V3swmNorYclzCd5TQq5LNDm81DPyJ0mV3jvMmzzQOxHZciU/i2ts6h7rFIZsS1oS;
+	24:n5B6uC2o7t3i+6SlN6mwFXvJQNyF7ATlgGn167HrNQDuwUWYVmwnvKaUORRWko/WVa0H7BGFUje6A7sYBirZASYGk/S5b3EKZFdo4u9w8m8=
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
-X-Microsoft-Exchange-Diagnostics: 1; MWHPR0101MB2944;
-	7:EQrpDTmWSr2UljSbU38ZGSFB7hvMDZ7NpJklaSg2ZIoByQMYlq9zzL2mhFv7u/FU85sog2ZZtURdTxry8+R55Xm780kwzcTJi6ZhpsvBtO/IAaAtpC5/fimNGxNXEQ7GETooyzyRWn9bVKz5GVRSnmXtRgLThynKL61ZtXKnm3tRw0sMhMyVha9je5jQjB97z+Ma/JMGI+ShMwoNw5vnmJAE0lLoQa+6370B1kOIhQxYwUybnhSfOGOrOCybN4WvGVMoYVs3y/0zpgNWI4bXKPK78SziuxOIetdyx86vvDAGvo9R9OvQeQ5uCG2N3YaUAv+EUg2QgOVeDwdA8slGXDX6eaLq5fJA4VCuFMMzrQeZGMJTH8rUWoyDCdcDp6jwLWjVfRDfgHfohlwTzcsLuQ3O7hAvfyDSfbfVrp/WmsUuRPUa72P0x0zMRLXrs+pb2bRcKOVEh0WxvLFkvE+WlN/wpTj1l0PopkBEo9sg9iMq3+Z5NCKHc0MVWt1YSyx6y0jlXrqT1cugxm/BKR+FiKn23hh5HIRt94pksOkTUD05v0hpUsbBSxX2ywsUvX9M3A51FqpThnmU6x5DXpnX4BTxMELH4hFuj2M704ze53/KoP0GWnY4kH1VbrkpAArs7rIp+UFvcB9Pa/K9vXcQFSoqoJpiHDLzFjmbE14trUYmbNE3+FlLJ3FlY9SLr3P1J5uf/fKm0Bk4W0QCp6qFLl3zey09KGJidnx3d24GT+lfHoUmBnKbWu6xnDjRxRAbTEseEki79bgtcrlHz3hKadxEr1FOWs5cwN0pzaAjtcY=
+X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2930;
+	7:ufjyIig7oljuCwBbGjH74VZOIyr2ie1tUY9SbQZ2KB3NumWsgHpQfUs9+qfkNYjiA+hHyDRCPgFEhcWq+Ogncu7ZW+dR3EnbagH/+83mPTVQvNY9Uw6I6rj6Q/RX9KfLXxy1h0LYFseZMVKycRPKVawGwl6URMxgMre0nAYpvKzIVeHG5HCoypj3Gf9+pDSgp846UaQXF3b28Fccwi/71RzKPXjtVZOheW2V/RZD0IYw13GKjIy+5OTJZnQQ1AmSTYFKhN6zNeo9JPnnhZOi/aNAukDCKZHFiwLuUgB7NvLv97CZ5+QHImjOLfzTh++w0spupOEa3tb3CvTuPHhdmwc8p4sdwvndJT/HGQBCKNWuEewW8qP/Tryo7Ektukielh7l9aHK62NL07gedcv3JU97onATS0ggLAhub1m38Fr8hk0R/+Ez7x40MTR5QNbmJJNcsO+1YPujo/M9FoXQT2JNKtIQu0haG4Tetr5dRsRUiBYiV5+mnucy6b9f3NAPLcL+1r+K1hfbn81wUvRKBU6AaWGCf9IIKAGVAW009J1jNEASnKJu7e1m5U7/gOWaHUYnUSDfGk1H7a3IEq7OCuqdQe0BWKohuepHFS4vVKejXiWHydk+aBgUxrNORieG/TDjbDHQglepEGHcJyL15QG3/Upx0neBN5HmS3nflmBOq0FyIAL82Z407oWABcTCl/VGv56nlEYPCOto7Fl6uQiBEIHmz/9MpcYAYqqpK9dNs5x7601ca3lbruVHgZVeH4Nqg++viaPs8m+fiky7MQN/8iMuCstspBnL6eNxHYs=
 X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2017 16:32:45.4601 (UTC)
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Jul 2017 18:37:10.2217 (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR0101MB2944
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2930
 Subject: Re: [meta-qt5][PATCH] qtbase-native: Fix qdbuscpp2xml segfault
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -167,156 +167,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 Jul 2017 16:48:38 -0000
+X-List-Received-Date: Wed, 12 Jul 2017 18:37:12 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On 07/12/2017 06:13 AM, Khem Raj wrote:
-> On Wed, Jul 12, 2017 at 12:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> Is this meant to be applied only for 5.9 or are you seeing this issue with
->> 5.8 as well?
+On 07/12/2017 07:50 AM, Andreas Müller wrote:
+> On Wed, Jul 12, 2017 at 3:13 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Wed, Jul 12, 2017 at 12:30 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>>> Is this meant to be applied only for 5.9 or are you seeing this issue with
+>>> 5.8 as well?
+>>>
 >>
->
-> for 5.8, i havent tested 5.9
+>> for 5.8, i havent tested 5.9
+>>
+>>> On Wed, Jul 12, 2017 at 1:13 AM, Martin Kelly <mkelly@xevo.com> wrote:
+>>>>
+>>>> Thanks! This bug has been bothering me for a while now, and the patch
+>>>> fixes the issue for me.
+>>>>
+> I think the patch does not cause trouble for Qt <= 5.8 installed on
+> build host. It seems that 5.9 for host is the crashing combination.
 >
 
-Same for me.
+I don't have 5.9 on my host. Specifically, I started noticing this when 
+I upgraded from Debian Jessie to Debian Stretch. Jessie had Qt 5.3.2 
+while Stretch has Qt 5.7.1.
 
->> On Wed, Jul 12, 2017 at 1:13 AM, Martin Kelly <mkelly@xevo.com> wrote:
->>>
->>> Thanks! This bug has been bothering me for a while now, and the patch
->>> fixes the issue for me.
->>>
->>>
->>> On 07/11/2017 11:13 AM, Khem Raj wrote:
->>>>
->>>> 0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch alone was
->>>> causing
->>>> qdbuscpp2xml to simply segfault on simple invocation
->>>>
->>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>> Cc: Andreas Müller <schnitzeltony@googlemail.com>
->>>> ---
->>>>  recipes-qt/qt5/qtbase-native_git.bb                |  1 -
->>>>  ...l.pro-do-not-build-with-bootstrapped-depe.patch | 79
->>>> ----------------------
->>>>  2 files changed, 80 deletions(-)
->>>>  delete mode 100644
->>>> recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>>>
->>>> diff --git a/recipes-qt/qt5/qtbase-native_git.bb
->>>> b/recipes-qt/qt5/qtbase-native_git.bb
->>>> index da69812..98cbecc 100644
->>>> --- a/recipes-qt/qt5/qtbase-native_git.bb
->>>> +++ b/recipes-qt/qt5/qtbase-native_git.bb
->>>> @@ -33,7 +33,6 @@ SRC_URI += "\
->>>>  # common for qtbase-native and nativesdk-qtbase
->>>>  SRC_URI += " \
->>>>      file://0011-Always-build-uic.patch \
->>>> -
->>>> file://0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch \
->>>>  "
->>>>
->>>>  CLEANBROKEN = "1"
->>>> diff --git
->>>> a/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>>> b/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>>> deleted file mode 100644
->>>> index e72601c..0000000
->>>> ---
->>>> a/recipes-qt/qt5/qtbase/0012-qdbuscpp2xml.pro-do-not-build-with-bootstrapped-depe.patch
->>>> +++ /dev/null
->>>> @@ -1,79 +0,0 @@
->>>> -From 86ae0ce931edbe0ac30cfe5f94f681f1d055fdb0 Mon Sep 17 00:00:00 2001
->>>> -From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
->>>> -Date: Mon, 6 Mar 2017 11:50:38 +0100
->>>> -Subject: [PATCH] qdbuscpp2xml.pro: do not build with bootstrapped
->>>> - dependenciies
->>>> -MIME-Version: 1.0
->>>> -Content-Type: text/plain; charset=UTF-8
->>>> -Content-Transfer-Encoding: 8bit
->>>> -
->>>> -Upstream-Status: Pending
->>>> -
->>>> -Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
->>>> ----
->>>> - src/src.pro                             | 9 ++-------
->>>> - src/tools/qdbuscpp2xml/qdbuscpp2xml.pro | 3 +--
->>>> - src/tools/qdbusxml2cpp/qdbusxml2cpp.pro | 5 +----
->>>> - 3 files changed, 4 insertions(+), 13 deletions(-)
->>>> -
->>>> -diff --git a/src/src.pro b/src/src.pro
->>>> -index 90d7e2b..0aaf604 100644
->>>> ---- a/src/src.pro
->>>> -+++ b/src/src.pro
->>>> -@@ -4,9 +4,6 @@ QT_FOR_CONFIG += gui-private
->>>> - include($$OUT_PWD/corelib/qtcore-config.pri)
->>>> - include($$OUT_PWD/gui/qtgui-config.pri)
->>>> -
->>>> --force_bootstrap|!qtConfig(commandlineparser): \
->>>> --    CONFIG += force_dbus_bootstrap
->>>> --
->>>> - src_qtzlib.file = $$PWD/corelib/qtzlib.pro
->>>> - src_qtzlib.target = sub-zlib
->>>> -
->>>> -@@ -37,13 +34,11 @@ src_tools_bootstrap_dbus.depends =
->>>> src_tools_bootstrap
->>>> -
->>>> - src_tools_qdbusxml2cpp.subdir = tools/qdbusxml2cpp
->>>> - src_tools_qdbusxml2cpp.target = sub-qdbusxml2cpp
->>>> --force_dbus_bootstrap: src_tools_qdbusxml2cpp.depends =
->>>> src_tools_bootstrap_dbus
->>>> --else: src_tools_qdbusxml2cpp.depends = src_dbus
->>>> -+src_tools_qdbusxml2cpp.depends = src_dbus
->>>> -
->>>> - src_tools_qdbuscpp2xml.subdir = tools/qdbuscpp2xml
->>>> - src_tools_qdbuscpp2xml.target = sub-qdbuscpp2xml
->>>> --force_bootstrap: src_tools_qdbuscpp2xml.depends =
->>>> src_tools_bootstrap_dbus
->>>> --else: src_tools_qdbuscpp2xml.depends = src_dbus
->>>> -+src_tools_qdbuscpp2xml.depends = src_dbus
->>>> -
->>>> - src_winmain.subdir = $$PWD/winmain
->>>> - src_winmain.target = sub-winmain
->>>> -diff --git a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->>>> b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->>>> -index 5ac3159..74c507c 100644
->>>> ---- a/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->>>> -+++ b/src/tools/qdbuscpp2xml/qdbuscpp2xml.pro
->>>> -@@ -1,7 +1,6 @@
->>>> - option(host_build)
->>>> - QT = core-private
->>>> --force_bootstrap: QT += bootstrap_dbus-private
->>>> --else: QT += dbus-private
->>>> -+QT += dbus-private
->>>> - DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
->>>> - QMAKE_CXXFLAGS += $$QT_HOST_CFLAGS_DBUS
->>>> -
->>>> -diff --git a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->>>> b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->>>> -index d9ee5de..e891103 100644
->>>> ---- a/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->>>> -+++ b/src/tools/qdbusxml2cpp/qdbusxml2cpp.pro
->>>> -@@ -1,9 +1,6 @@
->>>> - option(host_build)
->>>> --!force_bootstrap:!qtConfig(commandlineparser): \
->>>> --    CONFIG += force_bootstrap
->>>> - QT = core-private
->>>> --force_bootstrap: QT += bootstrap_dbus-private
->>>> --else: QT += dbus-private
->>>> -+QT += dbus-private
->>>> - DEFINES += QT_NO_CAST_FROM_ASCII QT_NO_FOREACH
->>>> - QMAKE_CXXFLAGS += $$QT_HOST_CFLAGS_DBUS
->>>> -
->>>> ---
->>>> -2.9.3
->>>> -
->>>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->>
+> As the author of the patch:
+>
+> * I am aware that removing this patch causes kde balloo build errors
+> for cross 5.8 (current)
+> * I hope moving cross 5.9 (future hopefully) will fix issues properly
+> * the patch seems to do the wrong thing: it causes dependencies on
+> build host's libraries
+>
+> So
+>
+> Acked-by: Andreas Müller <schnitzeltony@googlemail.com>
+>
+> Andreas
+>
 
