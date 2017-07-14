@@ -1,52 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 5362078223
+Return-Path: <changhyeok.bae@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id B4E74782A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 19:28:05 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id f68so5936014vkg.1
+	Sat, 15 Jul 2017 00:00:06 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id y129so12111151pgy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 12:28:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=hwvpXHNM5R1tsFC31Cqr3Qtlby/AbpiHTXhdpo5uuB0=;
-	b=Cya4ms4yKUxlkn+MF+lN5DGZ1qzCqSWPlXVwB3ikUhyXVESQ2YsYQvM12hvp8DctCO
-	Zu63PY9Pg3N3zT31QgufjhPYNOJYViQhGZzyHMNqcPS2MjqJodp3PEehd2+00Gews+b4
-	sSMze+Xa57SI7SW0iSa5ukNy3xRTlE/LbB2sJ2r3DPIwhinNK3iaBvVJcuxWeBOQqW1P
-	CfHppfVnpOyEmHLL6MtLzKa2I17HNZV4XUZ+KAp1TrMq8IKhlHpv9vfOt7+yeemxJtT2
-	GjH3x0pnX11nNh/OZ4nPwbbmIMJg8GcRcWLkpjaL3VT6cniu/w0Nyn2tCzslm103WkTJ
-	Aa3g==
+	Fri, 14 Jul 2017 17:00:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=rIt6ZRVNIYHi34a763RuulTwn3EbNsnjUI13cw3ICGc=;
+	b=Iv0oX3KDuDu2FZE/ux10WsPKXnzjgnNTdt+6xFnDAX8eFMhnu4Fupdqtarf3zKkKeP
+	JVnKajEez/sb+uHD5ZnzGsa9vuzB7OeW6m93mPdcIcA17I2DNwOfHUVazDCoOuacTwN6
+	N6P6V4vkl+UiapKpUZ2r/tLSLneMwwDPXqR0tnHmgczebs8yishUtfjMoPQt6hBq7yhh
+	pe9deit6I0Iu9BvR4g88GhvgjDt1GKn6r7JTHqki1Di7dLv3vMxYxlV6xOeH4uIfP5/2
+	sIOH6TGOP7r2pfOm31FS4KK0RnaFoPkSDCc46p6NE/Hrx0EmUgKEe34wBctabyqd/PQA
+	1+0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=hwvpXHNM5R1tsFC31Cqr3Qtlby/AbpiHTXhdpo5uuB0=;
-	b=Ojp2V5sMfZJUm4ul2DRWeGGVQEX7niH5pKu9TkqMgtL6SpxTP/PIGN+mMVg16ZorRj
-	gVLe4wzB80qBP7kBRapIyF82rhfB4zJ7p5TxgQskQXwdeghPcSHHP/oUCc55Gch7nj5k
-	ZRStGs97m4YPHJCWDIEvC/wabSOtmHFs8JuhoD990R0BmY8Gj9Ao4C5fL6Vb0DtDqIFJ
-	d+EvEF/K6chY/rem8hxBz8f1HMJQdDAeTvZbXePb6UPSNfDrdnh7ZXoAMdLwccmuyAww
-	GTtO21Ny76VT7GvvJpun1JAnNeATmHly5HaJJU/nYLy7KNUan0LXL/22y+V4vqxJWTkR
-	pl0w==
-X-Gm-Message-State: AIVw113qeZGMiJtjazNcTipMd53utRi6IcGUs1S7g2Pi0+E53wdZ4nQL
-	rMlAweIW1Jgr58qPQN8P5HP4CDv/0A==
-X-Received: by 10.31.164.130 with SMTP id n124mr6010091vke.62.1500060486740;
-	Fri, 14 Jul 2017 12:28:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.77.72 with HTTP; Fri, 14 Jul 2017 12:28:06 -0700 (PDT)
-In-Reply-To: <CAMKF1spZuMc=jQGPPo4kZC=7SGURVN6jWi+dxmk1Aa1DLMpCjg@mail.gmail.com>
-References: <20170714054013.34458-1-raj.khem@gmail.com>
-	<20170714054013.34458-8-raj.khem@gmail.com>
-	<CALbNGRQcaHHbQ-nFwTXG0XcwvExeaA=7RUMHd4R7yLA2g407Ww@mail.gmail.com>
-	<CAMKF1spZuMc=jQGPPo4kZC=7SGURVN6jWi+dxmk1Aa1DLMpCjg@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Fri, 14 Jul 2017 21:28:06 +0200
-Message-ID: <CALbNGRQVCPMXReo+ndHMtzMN4ULznmdAoEEDggJytvHYxs-gSQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 08/18] xfce4-netload-plugin: Do not include sys/sysctl.h
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=rIt6ZRVNIYHi34a763RuulTwn3EbNsnjUI13cw3ICGc=;
+	b=fgqGIQwp2kRTazkGuZ4HU1qza6Fxx5HVX+2LJvNsrNyE2HKeqHJYr6VHshOLT1lC+6
+	vDThAW3/4NI2CFynOFVJVHkKYKeGyY1VSfLED8zCMQLv1QyRvuYpt+gFTsi9sczuDRzs
+	47yU0h6UiIOx2kvq8TQgPSVU/rDbo3ymvkdk6igfmtyijSegnHy5X/+04ezcITCxuYLD
+	qAhBY1HfScIOr5tDNMkycnN5xPE3SAfoSb/c3kBVnnSaZGNWZ2HUnZCoZArLuUaynzOw
+	aiM32a4YAI7uDb2DShLJLupsjRk1IJWVqbaPGJAOhasmw6bgFG2MGgVoJpCof0R1SLhE
+	LlrA==
+X-Gm-Message-State: AIVw113MjVOqWhwynjsBhgvidJEcfpvJl6O4RkF79hoczKXhJIwRJuwp
+	pGH1EpVSyywvNVsz
+X-Received: by 10.98.75.156 with SMTP id d28mr7708604pfj.135.1500076807228;
+	Fri, 14 Jul 2017 17:00:07 -0700 (PDT)
+Received: from ip-172-31-1-64.ap-northeast-2.compute.internal
+	(ec2-13-124-121-69.ap-northeast-2.compute.amazonaws.com.
+	[13.124.121.69]) by smtp.gmail.com with ESMTPSA id
+	b6sm23929681pgn.67.2017.07.14.17.00.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 14 Jul 2017 17:00:06 -0700 (PDT)
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 14 Jul 2017 23:59:59 +0000
+Message-Id: <1500076799-13470-1-git-send-email-changhyeok.bae@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: namhyung@gmail.com
+Subject: [meta-oe][PATCH] uftrace: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,91 +54,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jul 2017 19:28:08 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 15 Jul 2017 00:00:06 -0000
 
-On Fri, Jul 14, 2017 at 3:25 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Thu, Jul 13, 2017 at 11:45 PM, Andreas M=C3=BCller
-> <schnitzeltony@googlemail.com> wrote:
->> On Fri, Jul 14, 2017 at 7:40 AM, Khem Raj <raj.khem@gmail.com> wrote:
->>> Its unused, moreover it helps it compile with musl
->>>
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> ---
->>>  ...ude-sys-sysctl.h-its-unused-on-linux-port.patch | 25 ++++++++++++++=
-++++++++
->>>  .../netload/xfce4-netload-plugin_1.3.1.bb          |  3 +++
->>>  2 files changed, 28 insertions(+)
->>>  create mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netlo=
-ad-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
->>>
->>> diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plug=
-in/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch b/meta-x=
-fce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-=
-sys-sysctl.h-its-unused-on-linux-port.patch
->>> new file mode 100644
->>> index 000000000..e35418192
->>> --- /dev/null
->>> +++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001=
--Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
->>> @@ -0,0 +1,25 @@
->>> +From 7fcc7352ec11644ac8be4e9ec1584a5be3333684 Mon Sep 17 00:00:00 2001
->>> +From: Khem Raj <raj.khem@gmail.com>
->>> +Date: Wed, 12 Jul 2017 18:18:30 -0700
->>> +Subject: [PATCH] Do not include sys/sysctl.h its unused on linux port
->>> +
->>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> +---
->>> + panel-plugin/os.h | 1 -
->>> + 1 file changed, 1 deletion(-)
->>> +
->>> +diff --git a/panel-plugin/os.h b/panel-plugin/os.h
->>> +index 473c2a4..9a5c544 100644
->>> +--- a/panel-plugin/os.h
->>> ++++ b/panel-plugin/os.h
->>> +@@ -170,7 +170,6 @@
->>> + #elif __linux__             /* L I N U X */
->>> + #  include <stdio.h>
->>> + #  include <sys/param.h>
->>> +-#  include <sys/sysctl.h>
->>> + #  include <stdlib.h>
->>> + #  include <stdarg.h>
->>> + #  include <unistd.h>
->>> +--
->>> +2.13.2
->>> +
->>> diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plug=
-in_1.3.1.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_=
-1.3.1.bb
->>> index 7d7778202..35c8861bc 100644
->>> --- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.=
-1.bb
->>> +++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.=
-1.bb
->>> @@ -5,5 +5,8 @@ LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D35a7203c41b8=
-6d15546dddc05995f97f"
->>>
->>>  inherit xfce-panel-plugin
->>>
->>> +SRC_URI =3D "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV=
-}'[0:3]}/${BPN}-${PV}.tar.bz2 \
->>> +           file://0001-Do-not-include-sys-sysctl.h-its-unused-on-linux=
--port.patch \
->>> +           "
->>>  SRC_URI[md5sum] =3D "f25aa3242e3119b49f259a3e4a1af08b"
->>>  SRC_URI[sha256sum] =3D "99762781099d1e0ab9aa6a7b30c2bd94d8f658dbe61c76=
-0410d5d42d0766391c"
->>> --
->>> 2.13.2
->>>
->> Please add Upstream-Status (or even better - send the xfce patches upstr=
-eam)
->>
->
-> help me upstream it
->
-OK - but I think the next 2-3 weeks there is no time for that
+- Add recipe for uftrace v0.7.
+- Support x86_64, arm (v6 or later), and aarch64.
+- Disable for armv4 and armv5 in arm architecture which is only
+  supported armv6 or later.
+- Attached 2 patches is merged to upstream.
 
-Andreas
+Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+---
+ .../0001-Makefile-Add-LDFLAGS-in-export.patch      | 31 +++++++++++++++++++
+ ...tils-Add-limits-header-to-fix-build-error.patch | 31 +++++++++++++++++++
+ meta-oe/recipes-devtools/uftrace/uftrace_0.7.bb    | 35 ++++++++++++++++++++++
+ 3 files changed, 97 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0001-Makefile-Add-LDFLAGS-in-export.patch
+ create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace/0002-utils-Add-limits-header-to-fix-build-error.patch
+ create mode 100644 meta-oe/recipes-devtools/uftrace/uftrace_0.7.bb
+
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0001-Makefile-Add-LDFLAGS-in-export.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0001-Makefile-Add-LDFLAGS-in-export.patch
+new file mode 100644
+index 0000000..f665051
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uftrace/uftrace/0001-Makefile-Add-LDFLAGS-in-export.patch
+@@ -0,0 +1,31 @@
++From ec794945475d5792f2ae85afe461e64266613640 Mon Sep 17 00:00:00 2001
++From: Changhyeok Bae <changhyeok.bae@gmail.com>
++Date: Thu, 13 Jul 2017 16:44:52 +0900
++Subject: [PATCH 1/2] Makefile: Add LDFLAGS in export
++
++To use build with musl, need to argp library.
++So need to add LDFLAGS from outside.
++
++Upstream-Status: Accepted
++
++Signed-off-by: <Changhyeok Bae changhyeok.bae@gmail.com>
++---
++ Makefile | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/Makefile b/Makefile
++index 67be2da..0ca649a 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -48,7 +48,7 @@ endif
++ RM = rm -f
++ INSTALL = install
++ 
++-export ARCH CC AR LD RM srcdir objdir
+++export ARCH CC AR LD RM srcdir objdir LDFLAGS
++ 
++ COMMON_CFLAGS := -O2 -g -D_GNU_SOURCE $(CFLAGS) $(CPPFLAGS)
++ COMMON_CFLAGS +=  -iquote $(srcdir) -iquote $(objdir) -iquote $(srcdir)/arch/$(ARCH)
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace/0002-utils-Add-limits-header-to-fix-build-error.patch b/meta-oe/recipes-devtools/uftrace/uftrace/0002-utils-Add-limits-header-to-fix-build-error.patch
+new file mode 100644
+index 0000000..2690011
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uftrace/uftrace/0002-utils-Add-limits-header-to-fix-build-error.patch
+@@ -0,0 +1,31 @@
++From 3bda554766150705160fe2191d8761c7881e2433 Mon Sep 17 00:00:00 2001
++From: Changhyeok Bae <changhyeok.bae@gmail.com>
++Date: Thu, 13 Jul 2017 16:46:20 +0900
++Subject: [PATCH 2/2] utils: Add limits header to fix build error
++
++[Error]
++error: 'PATH_MAX' undeclared (first use in this function); did you mean
++'INT8_MAX'?
++
++Upstream-Status: Accepted
++
++Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
++---
++ utils/utils.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/utils/utils.c b/utils/utils.c
++index 03522c9..30f9e81 100644
++--- a/utils/utils.c
+++++ b/utils/utils.c
++@@ -6,6 +6,7 @@
++ #include <errno.h>
++ #include <sys/uio.h>
++ #include <sys/stat.h>
+++#include <limits.h>
++ 
++ #include "utils/utils.h"
++ 
++-- 
++1.9.1
++
+diff --git a/meta-oe/recipes-devtools/uftrace/uftrace_0.7.bb b/meta-oe/recipes-devtools/uftrace/uftrace_0.7.bb
+new file mode 100644
+index 0000000..821d0bb
+--- /dev/null
++++ b/meta-oe/recipes-devtools/uftrace/uftrace_0.7.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Trace and analyze execution of a program written in C/C++"
++HOMEPAGE = "https://github.com/namhyung/uftrace"
++BUGTRACKER = "https://github.com/namhyung/uftrace/issues"
++SECTION = "devel"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "elfutils"
++DEPENDS_append_libc-musl = " argp-standalone"
++
++inherit autotools
++
++SRCREV = "712ad01fdde57893936d7e254451eec67ab41ca6"
++SRC_URI = "\
++    git://github.com/namhyung/${BPN} \
++    file://0001-Makefile-Add-LDFLAGS-in-export.patch \
++    file://0002-utils-Add-limits-header-to-fix-build-error.patch \
++"
++S = "${WORKDIR}/git"
++
++LDFLAGS_append_libc-musl = " -largp"
++EXTRA_OECONF = "ARCH=${TARGET_ARCH}"
++
++do_configure() {
++    ${S}/configure ${EXTRA_OECONF}
++}
++
++FILES_SOLIBSDEV = ""
++FILES_${PN} += "${libdir}/*.so"
++
++COMPATIBLE_HOST = "(x86_64|aarch64|arm)"
++
++# uftrace supports armv6 and above
++COMPATIBLE_HOST_armv4 = 'null'
++COMPATIBLE_HOST_armv5 = 'null'
+-- 
+2.7.4
+
 
