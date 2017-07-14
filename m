@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id AF50578152
+	by mail.openembedded.org (Postfix) with ESMTP id EB40D78152
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 05:40:38 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id u62so9393490pgb.0
+	Fri, 14 Jul 2017 05:40:39 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id y129so9410919pgy.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jul 2017 22:40:40 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=pCuvorYrSH+iU+SgCEftk8MF7dDshkppunByBb5nxrI=;
-	b=kalWSY7fxzmImxnZXU2R2P9v0n/bUeiChhM/rduL9pbCLB2UANcKVf3XVp3pwYH2mE
-	VJ3qzMCvwk2HSV48eilr0whNJZ+rFE4MFiyeSU1WjMZ6L0NtLLELokTM9uR7XZsVUYHy
-	NSgs8tyZbFNis2uFldHGmumrUynb0tIu1HrVUt7dGpy/+X0y89ZqBavS1hlyUJa/qiUx
-	rTHzs/5zZO1wwnNU1Wbwt313nfDZcelQYiJAPYWI5tR2q9WYlwD5J+80hNK3xUZ1A9+f
-	fNyKEihwnvJVsxR0wTuD5ygJDjMTMWK4T+HMdohTMbZjnqaIAWp7h/zr3EeFfuPP1HMP
-	DSPQ==
+	bh=TEAogt7GPK74IvbDrpKSwUGsN5/mz2Ye/++MZxwAvQo=;
+	b=T3rWetSa/GkmufwfdZDmpdy8AMOFTIbXasgJogJDSrDdDMEzMxuy41Ls+FPc5xqLog
+	moNxuXl4KFUApIyKFEXqK5LAgxVjo061HCe6MRUPwkJzlnPnx2xhV1XWutY0f9oulPk7
+	kuBoSYyU3pjAXjrkGmcKK7aDXsYYbXvUJhVijBulD3ndN41gkVjOuYbTQigWOkkbd/5E
+	X2GAUXlwm7wKIsQiTUJEeTHvMKJ9S4vwkmDopSHFMCs8ms6GAFNMAA5bzGrBgFmI/aGN
+	j3gKBWJuz12k7HRwKXi9pfIr//uVncEsfC7kK/d+TBslW3Fu27zJ7qJdAaQqqU3JesdZ
+	EjuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=pCuvorYrSH+iU+SgCEftk8MF7dDshkppunByBb5nxrI=;
-	b=S8UOBLpzC3Y+BRnVBNXAiyVGn4Bgj5G7bQKLYQqWvLHnjRiB0Ga6CJFqs6yMJqzp5g
-	DzSYRwiyhpK0H5/4EDas9MF69OrK3idYPCe351N3cjqx12/0SXHVM9hJ797ruDJ/ncxf
-	LGLDr9uB1ua+aG6UVS700D0FSEcswHCZ5F0EbPOOVSb2jdW8tTf6tKiudVwJMGOZE9Wr
-	dJvGAM9xtLwrmN/QUit7lc5su9tmk/QfiEJ2T52HGCxngLg6h5VOgmd5bqmmk7W9Tb9O
-	HEmC7pcKa2Y484fw1Z/tM1vLtg2xP/LD5pcGohiY6cQMXAJsrCIIk2VdSAT8OjvD5qdg
-	N8Qg==
-X-Gm-Message-State: AIVw110xeqKf7h0fyPg1Jjw5Y4a7PffzDxEKVTcpYa7uOEY24sBWJwRB
-	0p1OoispwaWge6Bw
-X-Received: by 10.84.169.67 with SMTP id g61mr13908491plb.155.1500010839540;
-	Thu, 13 Jul 2017 22:40:39 -0700 (PDT)
+	bh=TEAogt7GPK74IvbDrpKSwUGsN5/mz2Ye/++MZxwAvQo=;
+	b=UEAKP6xEbuf9NdK92MtIhyMsBjhvwEhVauJ1kv/Lo/p4oqs0sRzJUrgs1E44wem6Ge
+	NrLeJOAuvIrBy7MISgmuMb1jPqKQ/hcJd//mQ2J4lUmZhAR0IupRR2Lq97IcGeU8rU2/
+	QisSSoGOwm22tjsNFP1iH2S/JArSnYuCILDCmedj+N8AEkiYUpHbkP7m/h5yv5auucDd
+	RBYuvVnsyLJIIeu9mSbfAKPVbMVp8QgyCZIVDj7J2cI/+ulxPxRnUtJBLekVL6y/EoR1
+	rl/J29uwtBDdzH7IteBVEZ1k8KBjbW4LyvgtInmjySmzUyUawM31oHVUT4vpzRIlxO81
+	LbtA==
+X-Gm-Message-State: AIVw110Tpr3fezuDhIHzgDOm6PAZLaDdgNjh4Gm0qc0sn7eMSSKxTrwc
+	2bDJMh1eWWfum9Rb
+X-Received: by 10.98.148.25 with SMTP id m25mr3452235pfe.7.1500010841222;
+	Thu, 13 Jul 2017 22:40:41 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	z86sm17519420pfl.40.2017.07.13.22.40.38
+	z86sm17519420pfl.40.2017.07.13.22.40.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Jul 2017 22:40:38 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:39 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jul 2017 22:40:06 -0700
-Message-Id: <20170714054013.34458-11-raj.khem@gmail.com>
+Date: Thu, 13 Jul 2017 22:40:07 -0700
+Message-Id: <20170714054013.34458-12-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170714054013.34458-1-raj.khem@gmail.com>
 References: <20170714054013.34458-1-raj.khem@gmail.com>
-Subject: [meta-gnome][PATCH 11/18] onboard: Fix build with musl
+Subject: [meta-gnome][PATCH 12/18] libgtop: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,102 +55,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jul 2017 05:40:38 -0000
+X-List-Received-Date: Fri, 14 Jul 2017 05:40:40 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...m-Define-error-API-if-platform-does-not-h.patch | 67 ++++++++++++++++++++++
- .../recipes-support/onboard/onboard_1.4.1.bb       |  4 +-
- 2 files changed, 70 insertions(+), 1 deletion(-)
- create mode 100644 meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
+ ...-Include-libc-net-headers-unconditionally.patch | 46 ++++++++++++++++++++++
+ meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb |  3 ++
+ 2 files changed, 49 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/libgtop/libgtop/0001-netload-Include-libc-net-headers-unconditionally.patch
 
-diff --git a/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
+diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop/0001-netload-Include-libc-net-headers-unconditionally.patch b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-netload-Include-libc-net-headers-unconditionally.patch
 new file mode 100644
-index 000000000..fda37895c
+index 000000000..c4f7da4bf
 --- /dev/null
-+++ b/meta-gnome/recipes-support/onboard/onboard/0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch
-@@ -0,0 +1,67 @@
-+From 1c95f64aa342147387ce4b1b7269a5c8b34bd898 Mon Sep 17 00:00:00 2001
++++ b/meta-gnome/recipes-gnome/libgtop/libgtop/0001-netload-Include-libc-net-headers-unconditionally.patch
+@@ -0,0 +1,46 @@
++From 3c6f70e50cb586ac4add4dea627c316242691040 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 13 Jul 2017 09:01:04 -0700
-+Subject: [PATCH] pypredict/lm: Define error API if platform does not have it
++Date: Thu, 13 Jul 2017 09:17:29 -0700
++Subject: [PATCH] netload: Include libc net headers unconditionally
 +
-+error() API is not implemented across all libcs on linux
-+e.g. musl does not provide it.
++This fixes compile with musl, and this conditional
++is not needed now a days if we are still using glibc < 1.0
++we have other bigger problems
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ Onboard/pypredict/lm/lm.cpp         |  1 -
-+ Onboard/pypredict/lm/lm.h           | 13 +++++++++++++
-+ Onboard/pypredict/lm/lm_dynamic.cpp |  2 --
-+ 3 files changed, 13 insertions(+), 3 deletions(-)
++ sysdeps/linux/netload.c | 11 -----------
++ 1 file changed, 11 deletions(-)
 +
-+diff --git a/Onboard/pypredict/lm/lm.cpp b/Onboard/pypredict/lm/lm.cpp
-+index 2e64296..37ae241 100644
-+--- a/Onboard/pypredict/lm/lm.cpp
-++++ b/Onboard/pypredict/lm/lm.cpp
-+@@ -19,7 +19,6 @@
++diff --git a/sysdeps/linux/netload.c b/sysdeps/linux/netload.c
++index c275db2..446bddd 100644
++--- a/sysdeps/linux/netload.c
+++++ b/sysdeps/linux/netload.c
++@@ -34,8 +34,6 @@
++ #include <sys/socket.h>
++ #include <sys/ioctl.h>
 + 
-+ #include <stdlib.h>
-+ #include <stdio.h>
-+-#include <error.h>
-+ #include <algorithm>
-+ #include <cmath>
-+ #include <string>
-+diff --git a/Onboard/pypredict/lm/lm.h b/Onboard/pypredict/lm/lm.h
-+index ed4164a..b8b63ee 100644
-+--- a/Onboard/pypredict/lm/lm.h
-++++ b/Onboard/pypredict/lm/lm.h
-+@@ -32,6 +32,19 @@
-+ #include <algorithm>
-+ #include <string>
-+ 
-++#if defined(HAVE_ERROR_H)
-++#include <error.h>
-++#else
-++#include <err.h>
-++#define _onboard_error(S, E, F, ...) do { \
-++       if (E) \
-++               err(S, F ": %s", ##__VA_ARGS__, strerror(E)); \
-++       else \
-++               err(S, F, ##__VA_ARGS__); \
-++} while(0)
-++
-++#define error _onboard_error
-++#endif
-+ 
-+ // break into debugger
-+ // step twice to come back out of the raise() call into known code
-+diff --git a/Onboard/pypredict/lm/lm_dynamic.cpp b/Onboard/pypredict/lm/lm_dynamic.cpp
-+index 7c62824..e7c7f40 100644
-+--- a/Onboard/pypredict/lm/lm_dynamic.cpp
-++++ b/Onboard/pypredict/lm/lm_dynamic.cpp
-+@@ -17,8 +17,6 @@
-+  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-+  */
-+ 
-+-#include <error.h>
++-#if !defined (_LIBC) && defined (__GNU_LIBRARY__) && __GNU_LIBRARY__ > 1
++-/* GNU LibC */
++ #include <net/if.h>
++ #include <netinet/ip_icmp.h>
++ #include <netinet/in.h>
++@@ -43,15 +41,6 @@
++ #include <netinet/tcp.h>
++ #include <netinet/udp.h>
++ #include <net/if.h>
++-#else /* Libc 5 */
++-#include <linux/if.h>
++-#include <linux/in.h>
++-#include <linux/ip.h>
++-#include <linux/icmp.h>
++-#include <linux/tcp.h>
++-#include <linux/udp.h>
++-#endif
 +-
-+ #include "lm_dynamic.h"
 + 
-+ using namespace std;
++ #ifdef HAVE_IFADDRS_H
++ /* needed for IPV6 support */
 +-- 
 +2.13.2
 +
-diff --git a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-index 3a4f18971..10765ee0c 100644
---- a/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-+++ b/meta-gnome/recipes-support/onboard/onboard_1.4.1.bb
-@@ -4,7 +4,9 @@ LIC_FILES_CHKSUM = "file://COPYING.GPL3;md5=8521fa4dd51909b407c5150498d34f4e"
+diff --git a/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
+index d79b9e5d4..946d11845 100644
+--- a/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
++++ b/meta-gnome/recipes-gnome/libgtop/libgtop_2.30.0.bb
+@@ -6,6 +6,9 @@ inherit gnomebase lib_package gtk-doc distro_features_check gobject-introspectio
+ # depends on libxau
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- DEPENDS += "gtk+3 hunspell libcanberra libxkbfile dconf python3-distutils-extra-native intltool-native"
- 
--SRC_URI = "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV}.tar.gz"
-+SRC_URI = "https://launchpad.net/onboard/1.4/${PV}/+download/${BPN}-${PV}.tar.gz \
-+           file://0001-pypredict-lm-Define-error-API-if-platform-does-not-h.patch \
++SRC_URI = "${GNOME_MIRROR}/${GNOMEBN}/${@gnome_verdir("${PV}")}/${GNOMEBN}-${PV}.tar.${GNOME_COMPRESS_TYPE};name=archive \
++           file://0001-netload-Include-libc-net-headers-unconditionally.patch \
 +           "
- SRC_URI[md5sum] = "1a2fbe82e934f5b37841d17ff51e80e8"
- SRC_URI[sha256sum] = "01cae1ac5b1ef1ab985bd2d2d79ded6fc99ee04b1535cc1bb191e43a231a3865"
+ SRC_URI[archive.md5sum] = "ee29a9ef60659ebf4b075ac281f71cb2"
+ SRC_URI[archive.sha256sum] = "463bcbe5737b1b93f3345ee34abf601e8eb864f507c49ff1921c2737abafc1e5"
  
 -- 
 2.13.2
