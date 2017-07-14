@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EE4D780C3
+	by mail.openembedded.org (Postfix) with ESMTP id 3E00E78170
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 05:40:33 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id z6so9725678pfk.3
+	Fri, 14 Jul 2017 05:40:34 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id z6so9725722pfk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jul 2017 22:40:34 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=SlBMeSzEqXv7uvMenMahnCpD9nnRlX5cjdLf4nsL9OE=;
-	b=ZyfvbUNKd6RIz10sbO+XT6M368jNp/r3YOabt20deTF4oowNZYToWqzX4t/om/Sj90
-	+7/CqqNfCYzSAWVkv1cofVtg5B5PM/D6eJ10NmRe9RbZ387FHgwo3+Mci+Q+00kvSgHX
-	gsbvtbHgvBnszj4LSDtc+NqHK7M0wrKt6FJFhEuuVJb3/mKzB8DacdIrz9pJiaSIrK1l
-	9Ob88xQta/qanhfkZ6Mjm5OyCuR6vNzXn83O7yr7bSMtSTwDuoJDFUhWfhXnSc4qed6g
-	CzN6gZUs+p9IGhrzrpujDq68RaiOwyqIdf9WPQW82HYFJpT05YFL0moIdLZmN6OaSMmn
-	5nIA==
+	bh=bRBTFBXD9j5NxfcEAReytLcguUI+hcAX1onKxrpHkpU=;
+	b=njw7sN4yS3A36p1rc5BTaOG9trXK+IQmvRd3LNDwL4UTC2UgQlhub6V3ekuIloVxkG
+	j1whPfTYnHqSpw5tD8Q3aTtdTLGNgATROxoag9jDmBMK+uc9uPO3S3MsUZ8/oBKLzGPH
+	rp5AyXZiwcXhJFORXTAKaWh93FtXOdALxTw/DdCUQGM1Hk9WXnLyGCA4UXtRe2DEo4bL
+	xZZ4V5cTsAMhuzJbHFF/YKoLvDnYM/R+OZSDHO0OC/FJFTnxwTeqUTbEtYBYCJnu8jN7
+	2JBz0WSZvZeiFizgSFe/eXnRkGGcku2xeIejJhkt4NCb72vGlxWzI3OLo3W/9Q11JnXa
+	hzww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=SlBMeSzEqXv7uvMenMahnCpD9nnRlX5cjdLf4nsL9OE=;
-	b=oQ4V4RWfhCg8e22KFr7KgaXHh0l+hg12yL6OqjSYkbsySPV0OUhCVvQIQZgdmlpybp
-	85RovU/fVZ03E9M1do1LAxr+Ig8OmMTJCLp0iy5Opf4hcT2B9Szr7hBO+oj+4xYFL+Ym
-	S3u1WDcwzvEaANwXAhhnTXHwG3ThBcpOhPqfcr6qRFYqxcgH2Bc5BuNGLJOdLJwffcpa
-	9z9mxYw3k8fx7JUCfkTDcuUng68ktiHjvX9vZlSAWhEYAxRzktp7sm/vuvNo/Ke00W0U
-	akt8VVRT1G4u0Mjw+cYRsOg5nmmY+50thDPwcJXsTW/Fv9Fuvd88WDHh9hnWys3xdxvK
-	+T2g==
-X-Gm-Message-State: AIVw112O5ni9ey6ZXJ5KywmECuHUsb7vx4t0qqcHr55YPYYi9Pf+02hC
-	gBbtLftGgEKRZuHx
-X-Received: by 10.99.36.198 with SMTP id k189mr12962133pgk.230.1500010834296; 
-	Thu, 13 Jul 2017 22:40:34 -0700 (PDT)
+	bh=bRBTFBXD9j5NxfcEAReytLcguUI+hcAX1onKxrpHkpU=;
+	b=uQOaEZWfH7XuNxNgYdFriT2Kucjz0UJfnzgDcLn2HSg3/M6kzVkfoFH4NoxZEc59Ge
+	C4G3nJ1kipAxnoqLUhVodni5ls6LMTU0jxbVZEp/8gRaThA9i8I/DBkAnPrZVU8SUx3e
+	LutgC5ehg944yb5YxF2Zj1/UulFwVh9X7IQdx6XoP+IXxxpUpk/T6AZsT1LAKhv4YRN1
+	7zK/MgawAe71HN30zifo7Ddd81sMNbtgvEAmpGGeFSLsyWeHJEVroK0TOKJRxsSZ03i0
+	7Q/eq18Lvc/4QLC+xWPAbetfPDJiYxifMKZ9rz5uzI1HO7M8oFj4S+1fokzv0W1RtIAz
+	D8vg==
+X-Gm-Message-State: AIVw112eGSz4GFS23ty5vq9kGAljgiW9WQRrB4trOPoKWzldFXT4rHgI
+	BiL8es5dmLgTkinZ
+X-Received: by 10.101.88.130 with SMTP id d2mr13224998pgu.265.1500010835543;
+	Thu, 13 Jul 2017 22:40:35 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	z86sm17519420pfl.40.2017.07.13.22.40.33
+	z86sm17519420pfl.40.2017.07.13.22.40.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Jul 2017 22:40:33 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:34 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jul 2017 22:40:02 -0700
-Message-Id: <20170714054013.34458-7-raj.khem@gmail.com>
+Date: Thu, 13 Jul 2017 22:40:03 -0700
+Message-Id: <20170714054013.34458-8-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170714054013.34458-1-raj.khem@gmail.com>
 References: <20170714054013.34458-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 07/18] lmbench: Fix build with musl
+Subject: [meta-xfce][PATCH 08/18] xfce4-netload-plugin: Do not include sys/sysctl.h
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,165 +56,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jul 2017 05:40:33 -0000
+X-List-Received-Date: Fri, 14 Jul 2017 05:40:34 -0000
+
+Its unused, moreover it helps it compile with musl
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...usl-define-guard-before-redefining-sockle.patch | 29 +++++++++
- ...t-CFLAGS-LDFLAGS-to-append-values-passed-.patch | 76 ++++++++++++++++++++++
- .../recipes-benchmark/lmbench/lmbench_3.0-a9.bb    |  8 ++-
- 3 files changed, 112 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-Check-for-musl-define-guard-before-redefining-sockle.patch
- create mode 100644 meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
+ ...ude-sys-sysctl.h-its-unused-on-linux-port.patch | 25 ++++++++++++++++++++++
+ .../netload/xfce4-netload-plugin_1.3.1.bb          |  3 +++
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
 
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-Check-for-musl-define-guard-before-redefining-sockle.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-Check-for-musl-define-guard-before-redefining-sockle.patch
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
 new file mode 100644
-index 000000000..20791bf23
+index 000000000..e35418192
 --- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0001-Check-for-musl-define-guard-before-redefining-sockle.patch
-@@ -0,0 +1,29 @@
-+From 31d58ed7e6552781f415501e96d7cc74f83b910d Mon Sep 17 00:00:00 2001
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin/0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch
+@@ -0,0 +1,25 @@
++From 7fcc7352ec11644ac8be4e9ec1584a5be3333684 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Jul 2017 18:08:51 -0700
-+Subject: [PATCH 1/2] Check for musl define guard before redefining socklen_t
-+
-+musl uses __DEFINED_socklen_t so check for that as well
-+along with HAVE_socklen_t
++Date: Wed, 12 Jul 2017 18:18:30 -0700
++Subject: [PATCH] Do not include sys/sysctl.h its unused on linux port
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/bench.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ panel-plugin/os.h | 1 -
++ 1 file changed, 1 deletion(-)
 +
-+diff --git a/src/bench.h b/src/bench.h
-+index 597d068..2ebdf5a 100644
-+--- a/src/bench.h
-++++ b/src/bench.h
-+@@ -77,7 +77,7 @@ typedef long long int64;
-+ #endif /* HAVE_int64_t */
-+ #endif /* HAVE_int64 */
-+ 
-+-#ifndef HAVE_socklen_t
-++#if !defined(HAVE_socklen_t) && !defined(__DEFINED_socklen_t)
-+ typedef int socklen_t;
-+ #endif
-+ 
++diff --git a/panel-plugin/os.h b/panel-plugin/os.h
++index 473c2a4..9a5c544 100644
++--- a/panel-plugin/os.h
+++++ b/panel-plugin/os.h
++@@ -170,7 +170,6 @@
++ #elif __linux__             /* L I N U X */
++ #  include <stdio.h>
++ #  include <sys/param.h>
++-#  include <sys/sysctl.h>
++ #  include <stdlib.h>
++ #  include <stdarg.h>
++ #  include <unistd.h>
 +-- 
 +2.13.2
 +
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
-new file mode 100644
-index 000000000..d5c8f5f2f
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench-3.0-a9/0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch
-@@ -0,0 +1,76 @@
-+From 76f3a9abc2ff96155425ef97d8c5520cfbc8fe6a Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Jul 2017 18:09:46 -0700
-+Subject: [PATCH 2/2] build: Adjust CFLAGS/LDFLAGS to append values passed from
-+ env
-+
-+For musl we have to pass additional arguments via cflags and ldflags
-+to link in librirpc, make room for those changes to take effect
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/build |  2 +-
-+ src/Makefile  | 14 +++++++-------
-+ 2 files changed, 8 insertions(+), 8 deletions(-)
-+
-+diff --git a/scripts/build b/scripts/build
-+index 34a1371..3786741 100755
-+--- a/scripts/build
-++++ b/scripts/build
-+@@ -18,7 +18,7 @@ done
-+ 
-+ trap 'rm -f ${BASE}$$.s ${BASE}$$.c ${BASE}$$.o ${BASE}$$; exit 1' 1 2 15
-+ 
-+-LDLIBS=-lm
-++LDLIBS+=-lm
-+ 
-+ # check for HP-UX's ANSI compiler
-+ echo "main(int ac, char *av[]) { int i; }" > ${BASE}$$.c
-+diff --git a/src/Makefile b/src/Makefile
-+index d9efd54..96467d7 100644
-+--- a/src/Makefile
-++++ b/src/Makefile
-+@@ -112,8 +112,8 @@ LIBOBJS= $O/lib_tcp.o $O/lib_udp.o $O/lib_unix.o $O/lib_timing.o 	\
-+ 	$O/lib_sched.o
-+ 
-+ lmbench: $(UTILS)
-+-	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
-+-	-@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="k$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
-++	@env CFLAGS+=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build all
-++	-@env CFLAGS+=-O MAKE="$(MAKE)" MAKEFLAGS="k$(MAKEFLAGS)" CC="$(CC)" OS="$(OS)" ../scripts/build opt
-+ 
-+ results: lmbench
-+ 	@env OS="${OS}" ../scripts/config-run
-+@@ -137,7 +137,7 @@ os: lmbench
-+ 	@env OS="${OS}" BENCHMARK_HARDWARE=NO  BENCHMARK_OS=YES ../scripts/results
-+ 
-+ install: lmbench
-+-	@env CFLAGS=-O MAKE="$(MAKE)"  MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build install-target
-++	@env CFLAGS+=-O MAKE="$(MAKE)"  MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build install-target
-+ 
-+ install-target:
-+ 	if [ ! -d $(BASE) ]; then mkdir $(BASE); fi
-+@@ -155,16 +155,16 @@ all: $(EXES) $O/lmbench
-+ opt: $(OPT_EXES)
-+ asm: $(ASMS)
-+ $(ASMS):
-+-	$(CC) -S $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ `basename $@ .s`.c
-++	$(CC) -S $(CFLAGS) $(CPPFLAGS) -o $@ `basename $@ .s`.c $(LDFLAGS)
-+ 
-+ Wall:
-+-	@env CFLAGS="-g -O -Wall" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
-++	@env CFLAGS+="-g -O -Wall" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
-+ 
-+ debug:
-+-	@env CFLAGS="-g -O -DDEBUG" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
-++	@env CFLAGS+="-g -O -DDEBUG" MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build all opt
-+ 
-+ assembler:
-+-	@env CFLAGS=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build asm
-++	@env CFLAGS+=-O MAKE="$(MAKE)" MAKEFLAGS="$(MAKEFLAGS)" CC="${CC}" OS="${OS}" ../scripts/build asm
-+ 
-+ 
-+ tag:
-+-- 
-+2.13.2
-+
-diff --git a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-index 43ac1d038..03b3721ca 100644
---- a/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-+++ b/meta-oe/recipes-benchmark/lmbench/lmbench_3.0-a9.bb
-@@ -7,6 +7,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=8ca43cbc842c2336e835926c2166c28b \
+diff --git a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
+index 7d7778202..35c8861bc 100644
+--- a/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
++++ b/meta-xfce/recipes-panel-plugins/netload/xfce4-netload-plugin_1.3.1.bb
+@@ -5,5 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=35a7203c41b86d15546dddc05995f97f"
  
- inherit autotools-brokensep
+ inherit xfce-panel-plugin
  
-+DEPENDS_append_libc-musl = " libtirpc"
-+CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
-+LDLIBS_append_libc-musl = " -ltirpc "
-+
- PR = "r2"
- 
- SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-@@ -20,12 +24,14 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/lmbench/lmbench-${PV}.tgz \
-            file://fix-lmbench-memory-check-failure.patch \
-            file://0001-avoid-gcc-optimize-away-the-loops.patch \
-            file://0001-lat_http.c-Add-printf-format.patch \
-+           file://0001-Check-for-musl-define-guard-before-redefining-sockle.patch \
-+           file://0002-build-Adjust-CFLAGS-LDFLAGS-to-append-values-passed-.patch \
-            "
- SRC_URI[md5sum] = "b3351a3294db66a72e2864a199d37cbf"
- SRC_URI[sha256sum] = "cbd5777d15f44eab7666dcac418054c3c09df99826961a397d9acf43d8a2a551"
- 
- EXTRA_OEMAKE = 'CC="${CC}" AR="${AR}" RANLIB="${RANLIB}" CFLAGS="${CFLAGS}" \
--                LDFLAGS="${LDFLAGS}" LD="${LD}" OS="${TARGET_SYS}" \
-+                LDFLAGS="${LDFLAGS}" LDLIBS="${LDLIBS}" LD="${LD}" OS="${TARGET_SYS}" \
-                 TARGET="${TARGET_OS}" BASE="${prefix}" MANDIR="${mandir}"'
- 
- do_configure() {
++SRC_URI = "http://archive.xfce.org/src/panel-plugins/${BPN}/${@'${PV}'[0:3]}/${BPN}-${PV}.tar.bz2 \
++           file://0001-Do-not-include-sys-sysctl.h-its-unused-on-linux-port.patch \
++           "
+ SRC_URI[md5sum] = "f25aa3242e3119b49f259a3e4a1af08b"
+ SRC_URI[sha256sum] = "99762781099d1e0ab9aa6a7b30c2bd94d8f658dbe61c760410d5d42d0766391c"
 -- 
 2.13.2
 
