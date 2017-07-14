@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D18B77BF4
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 42A8F780C3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 05:40:27 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id d193so9392012pgc.2
+	Fri, 14 Jul 2017 05:40:28 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id q85so9706343pfq.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 Jul 2017 22:40:29 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=qXa7mW9TLJca3Qqc07CVqpEaRigLZ1MIp5DKjC0zTNg=;
-	b=Y4pOEZKsFzSBbNGydGlujWnd6SzjmQvfdFz4eHxfxNURmynM0oMuLB5JWHHH03Ow1v
-	1WGLcbXowe6AX4i+MOFAoDUFIdcOtXbfLkyAJk8s5ZGxRlnTDLJZGImp3Vh6uOKKQdpt
-	GGnJQjjW5ZA46DQEK1+uePiNrBkVP9GjnvevVkZxfEG8NlNHWz3MlG1/ekxx9RY9dfOp
-	/+qe4bmpk0KtiuqP2Ctn6geqVdQmPbZcPCj62Xt94nSWAn0ItvJiz8c+RNwE0taBhJCd
-	ZXh9QXFxWxpTVmcX+YxqjexuqEW+0Xql9rvCiu8c55ll/90NQbQU97Uyj90bPTFkqRr8
-	+ZGw==
+	bh=NCrCkRlbGSuZhaXxnlTeY2A34DMCi6dTtMyiUzd1tn8=;
+	b=udLyYJLHlCsIf2g+rYDOaywvXDV0GvO9oaSMB6MiNsB2lDSJFh2VLvFPPGZ3EmDDsR
+	QneVb+8IkvYq/3kQJKmvqXF2n+CKa3TZmrQCOmLfUF3gU8vAMvc/hhtYX5E96VUWjMqg
+	Exj+GmN9m7d5Ud4cmfgV1/q0FkAyBGf1Cpsntp/HNxcypVhVIlHXC4WdEGtI4CIiTc10
+	iPVNDCGSyrYjdPZNLlabyWY8bOG0BGbl6VubdF/WFUtHL2z7uT0En6nM69mw4r7ebDzQ
+	Gzdr4JT3Afk6KLgqbzj+F9ed1/2xLFQY9qHd1Vf0RYtEddTaDGfACDtftnk/27bEw61h
+	rCFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=qXa7mW9TLJca3Qqc07CVqpEaRigLZ1MIp5DKjC0zTNg=;
-	b=tCba/bb47LwSzkecrkxhiZ8b3eVgqHoI/iSkBcKnhuOWViAu5FQ8ySVlaZKTnzBnya
-	O3yR1mi2p2+GU+Fiu4LfMk5bAnosDLMXIYH7Y2aWmsuFT1sfkBPPTBr55ur6YCQ3MCeD
-	fNPtKDy90DwsEPB4uwSbM7JCsaTJQ8rsEUD7unIyhVB3EhKkNY9+O5pPoBDhISIsU4y+
-	9pL1tchIJROpTG4g1Z7Ntnm83MzCKBg3OQGiDucYS+qJjTqwDdXsLbk49HLQ+G+j/xCK
-	K2IC9bVJwxmqCp1XJvExceo/8Vb0NuCHkDEnsOI81AeGNmoFVWk6pjPpOKcJUKjh5Tjf
-	2KEw==
-X-Gm-Message-State: AIVw111QlJkZcbUW7WB/weEY2rZoE/gh5XlbglAj6I+jgM4YYAIzOwN/
-	dofziFwIMv1CJPHK
-X-Received: by 10.84.216.92 with SMTP id f28mr14166067plj.199.1500010828482;
-	Thu, 13 Jul 2017 22:40:28 -0700 (PDT)
+	bh=NCrCkRlbGSuZhaXxnlTeY2A34DMCi6dTtMyiUzd1tn8=;
+	b=Z/92FUiNU8NIgjfgFR837ZZjzHbsLYpFqiBvRc1x5s6PN5uahcLOzxvyffZk5NJf+j
+	6/S4fDVkOVU7cqdpcz5JE11T2IiMtx/NDTTVAEBIFSfYF4zEoYm0yuW253R+ipuMpLIc
+	uOEGrn3gCXeq3SdO2gX9HdiIhgoEBZJkzktlclxFoYKh5/xpX3OY6B1yc5SXiUXlIJXD
+	HznR27Rc7A4UqHuMcCZyiJNYw//kGTqFwf0Pn/cE6qgJ2rBrDBjiaiHOED5Q39MeR1lR
+	bfwSpcRvB8ACfoDxkdfCuhm9dyZcZmCqgwQv2s4dRWbseSH4QrgbhMFBRpIEhH6dvXSS
+	CR2Q==
+X-Gm-Message-State: AIVw113fmpK4geJxhICkxKjzNyUkDuJjyDdr0/9L2ppFiyZnySwWtUF3
+	0JfObVEP8uQLS+uD
+X-Received: by 10.84.217.134 with SMTP id p6mr14253368pli.196.1500010830057;
+	Thu, 13 Jul 2017 22:40:30 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	z86sm17519420pfl.40.2017.07.13.22.40.27
+	z86sm17519420pfl.40.2017.07.13.22.40.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 13 Jul 2017 22:40:27 -0700 (PDT)
+	Thu, 13 Jul 2017 22:40:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 Jul 2017 22:39:58 -0700
-Message-Id: <20170714054013.34458-3-raj.khem@gmail.com>
+Date: Thu, 13 Jul 2017 22:39:59 -0700
+Message-Id: <20170714054013.34458-4-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.2
 In-Reply-To: <20170714054013.34458-1-raj.khem@gmail.com>
 References: <20170714054013.34458-1-raj.khem@gmail.com>
-Subject: [meta-multimedia][PATCH 03/18] sox: Fix build with musl
+Subject: [meta-multimedia][PATCH 04/18] webrtc-audio-processing: Link with libexecinfo on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,64 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 Jul 2017 05:40:27 -0000
+X-List-Received-Date: Fri, 14 Jul 2017 05:40:29 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...error-line-and-live-without-file-type-det.patch | 28 ++++++++++++++++++++++
- .../recipes-multimedia/sox/sox_14.4.0.bb           |  4 +++-
- 2 files changed, 31 insertions(+), 1 deletion(-)
- create mode 100644 meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
+ .../webrtc-audio-processing/webrtc-audio-processing_0.3.bb             | 3 +++
+ 1 file changed, 3 insertions(+)
 
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch b/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
-new file mode 100644
-index 000000000..605863a22
---- /dev/null
-+++ b/meta-multimedia/recipes-multimedia/sox/sox/0001-remove-the-error-line-and-live-without-file-type-det.patch
-@@ -0,0 +1,28 @@
-+From c2aed28e3e14329ad0a8c4371fdcce9934013f21 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 12 Jul 2017 16:36:06 -0700
-+Subject: [PATCH] remove the #error line and live without file-type detection
-+ with pipes
-+
-+this fallback is executed with musl
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/formats.c | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/src/formats.c b/src/formats.c
-+index 7e231ca..b13f0d5 100644
-+--- a/src/formats.c
-++++ b/src/formats.c
-+@@ -416,7 +416,6 @@ static void UNUSED rewind_pipe(FILE * fp)
-+   /* To fix this #error, either simply remove the #error line and live without
-+    * file-type detection with pipes, or add support for your compiler in the
-+    * lines above.  Test with cat monkey.au | ./sox --info - */
-+-  #error FIX NEEDED HERE
-+   #define NO_REWIND_PIPE
-+   (void)fp;
-+ #endif
-+-- 
-+2.13.2
-+
-diff --git a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-index ada958b13..e115f1c18 100644
---- a/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-+++ b/meta-multimedia/recipes-multimedia/sox/sox_14.4.0.bb
-@@ -27,7 +27,9 @@ LICENSE = "GPLv2 & LGPLv2.1"
- LIC_FILES_CHKSUM = "file://LICENSE.GPL;md5=751419260aa954499f7abaabaa882bbe \
-                     file://LICENSE.LGPL;md5=fbc093901857fcd118f065f900982c24"
+diff --git a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
+index eb9a30466..2b0f7c684 100644
+--- a/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
++++ b/meta-multimedia/recipes-multimedia/webrtc-audio-processing/webrtc-audio-processing_0.3.bb
+@@ -2,6 +2,8 @@ DESCRIPTION = "Audio processing bits of the WebRTC reference implementation"
+ HOMEPAGE = "https://www.freedesktop.org/software/pulseaudio/webrtc-audio-processing/"
+ SECTION = "audio"
  
--SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz"
-+SRC_URI = "${SOURCEFORGE_MIRROR}/sox/sox-${PV}.tar.gz \
-+           file://0001-remove-the-error-line-and-live-without-file-type-det.patch \
-+           "
- SRC_URI[md5sum] = "b0c15cff7a4ba0ec17fdc74e6a1f9cf1"
- SRC_URI[sha256sum] = "3ee34b14dd267de378e8a117aae81ec4cae330772342e6a55bbf6520a0a88aa3"
++DEPENDS_append_libc-musl = " libexecinfo"
++
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=da08a38a32a340c5d91e13ee86a118f2 \
+                     file://webrtc/common.h;beginline=1;endline=9;md5=41f7322d91deabaf0acbbd0b8d0bc548 \
+@@ -22,4 +24,5 @@ SRC_URI = "http://freedesktop.org/software/pulseaudio/webrtc-audio-processing/${
+ SRC_URI[md5sum] = "336ae032f608e65808ac577cde0ab72c"
+ SRC_URI[sha256sum] = "756e291d4f557d88cd50c4fe3b8454ec238362d22cedb3e6173240d90f0a80fa"
  
++LDFLAGS_append_libc-musl = " -lexecinfo"
+ inherit autotools
 -- 
 2.13.2
 
