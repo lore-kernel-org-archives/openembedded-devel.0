@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f54.google.com (mail-pg0-f54.google.com [74.125.83.54])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D4B5782B5
+Received: from mail-pg0-f44.google.com (mail-pg0-f44.google.com [74.125.83.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E551782B4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 Jul 2017 01:55:53 +0000 (UTC)
-Received: by mail-pg0-f54.google.com with SMTP id 123so2668808pgd.3
+	Sat, 15 Jul 2017 01:55:54 +0000 (UTC)
+Received: by mail-pg0-f44.google.com with SMTP id k14so53320046pgr.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 Jul 2017 18:55:54 -0700 (PDT)
+	Fri, 14 Jul 2017 18:55:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=xyk/O5wBNEECj5ODPlD/4HSjdfqiYn/cHqULFEma67w=;
-	b=AbL3XY4P3fDL10jBi7zAVk8tG/MzmmbNBQA5xAYOXubTXJkoFukAaw1525XD2bLuot
-	XcwQVBRRmQkE2IcMSmtfMc55ZXTJuYV6SJB/FlHT+EQ2l6gHfnD8gWvbQNOaeZX/O5LW
-	0KdVsAxiRNdFNDs5SyrOZ1N/3dd+TcVi6Bu7LMJSfF+BV+q/LD2ofRNksAthUNBTxQ7h
-	P3fjxjhY8URtDYTY8td18fX31ihRh5+pZ+r2iSxM5FvnrmPxqRTmDSoUosyn9B1G8rPu
-	aokhddL4q4oX8smnMNEzoZCdBdhRx4fAEkemp0eY0JbCjEyTpfrACc5FRl5FAR7asrND
-	H1Tg==
+	bh=sbA+tHv2/EQwEktLI5CbrMIDVQiU6igUgW6cwBKAhWI=;
+	b=lbH4/TWVX1O3JdyXH5ciR962rOOMdOx2mC18Wpe9J2ouxxCE3G4b1OED7dLLEFgKeG
+	5MO1ZJX6WBoCmABR+LXpZhq19rXmgzHf1HrWnNJ1V8pQPxOQn91QbvWcaJSKBL/yriP6
+	nduSNvIX92vubypDr2WpRTRLLNQJh9QEihi/wERUBgssy1WXglSgOb49O+3aeCaW0P4A
+	uODQd4TE+N3E55nPfxlsboECh6I/Ezw+kzUToH6Ds0Owb6wcysoFAPM/fv24Sx1ipNWI
+	AuqJ3aVWrBJKznqo3ZxN2Cc1BwIVviu0lJISJhSeQI2KMz/oyRuDSrs0zxCHMkj7r26I
+	Gzvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=xyk/O5wBNEECj5ODPlD/4HSjdfqiYn/cHqULFEma67w=;
-	b=trKAvWZIYYBtmIAoco04iz/X1asKFLbQ4BpbH11EaHQxn0NKIBMpT3mrTbMa/shNnn
-	sCB4r0uHYS92oGxNBcLp8KqPf99JZ7dOq4lpVsopSAdJ1fTUVggOEfm+w1f4P/dIHXD5
-	ZyPS+v5GsXwO3c18g8NXDJsXzIP/uRYqtKxcXod7lJWfRhnj1UHwUkrBbkdGMjp+pIMk
-	C0bEgvyX9rItVqNqy3bWUtR6kYQk96npgzXo6TERY01ZzNUx4m/+V7K5PaBlBNf4zIO8
-	GE5FE3gCRx9vfrwWJeb/NShh+vq8ySlJZRBbVQmoUmx73TMS561tlDvdxXApeQK8WPxy
-	g7fw==
-X-Gm-Message-State: AIVw110D3f4sLCCUqxbgEDbRIBpjMI8sR/hXuiCX/g74oxohTNCGw54E
-	4swbykvoROAznFE4
-X-Received: by 10.84.241.135 with SMTP id b7mr18907721pll.107.1500083754180;
-	Fri, 14 Jul 2017 18:55:54 -0700 (PDT)
+	bh=sbA+tHv2/EQwEktLI5CbrMIDVQiU6igUgW6cwBKAhWI=;
+	b=OSxnh0jPkMtMUh/oKFCBTyVp2qj5c212ywMAyO0xUIOLq41AVd0torilrFQBgqHUZ7
+	m5tmlmBX6A5fRZ+Zk/cOMrl4EU7esJvQME+n4GO2lkdWG+EV5cP40j4nOGbhXLQFNDHL
+	jd9kZmM/9D1litTeDzMCnhCXg3JWL29JjyE1nyll9NHSGk6pZOkxhS5GoRtczQKabD+b
+	OEaYZSA2E9phWrALYQ120n9O2fshCd1z0buwaY1SBVv4t07E4WQEkJWbYfLVtE0zcP/w
+	sRD3qPPQxg7XaTtE+AGl/Zp34Z4dbB4wlM2Qvt8wxeoe336MZ3P79ElTd6KDyzJYypls
+	kiSQ==
+X-Gm-Message-State: AIVw113XWngPL3RrrK73ZT//7VgQIV9MzpuLS3UpPapyEBMXqfvwZI88
+	oGK3X9bY7iudD9pZ
+X-Received: by 10.99.122.3 with SMTP id v3mr17518296pgc.98.1500083755535;
+	Fri, 14 Jul 2017 18:55:55 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::7028])
 	by smtp.gmail.com with ESMTPSA id
-	l4sm18189589pgr.21.2017.07.14.18.55.52
+	l4sm18189589pgr.21.2017.07.14.18.55.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 14 Jul 2017 18:55:53 -0700 (PDT)
+	Fri, 14 Jul 2017 18:55:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 Jul 2017 18:55:38 -0700
-Message-Id: <20170715015539.31584-5-raj.khem@gmail.com>
+Date: Fri, 14 Jul 2017 18:55:39 -0700
+Message-Id: <20170715015539.31584-6-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
 In-Reply-To: <20170715015539.31584-1-raj.khem@gmail.com>
 References: <20170715015539.31584-1-raj.khem@gmail.com>
-Subject: [meta-webserver][PATCH V2 5/6] monkey: Link in libexecinfo on musl
+Subject: [meta-networking][PATCH 6/6] pimd: Upgrade to 2.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,28 +57,28 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sat, 15 Jul 2017 01:55:54 -0000
 
-Needed for backtrace() APIs
-
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-configure-Respect-LIBS-variable-from-env.patch | 29 ++++++++++++++++++++++
- .../recipes-httpd/monkey/monkey_1.5.6.bb           |  9 +++++++
- 2 files changed, 38 insertions(+)
- create mode 100644 meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
+ ...ure-Dont-use-uname-to-determine-target-OS.patch | 28 ++++++++++++++++++++++
+ meta-networking/recipes-support/pimd/pimd_2.1.8.bb | 19 ---------------
+ meta-networking/recipes-support/pimd/pimd_2.3.2.bb | 20 ++++++++++++++++
+ 3 files changed, 48 insertions(+), 19 deletions(-)
+ create mode 100644 meta-networking/recipes-support/pimd/pimd/0001-configure-Dont-use-uname-to-determine-target-OS.patch
+ delete mode 100644 meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+ create mode 100644 meta-networking/recipes-support/pimd/pimd_2.3.2.bb
 
-diff --git a/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
+diff --git a/meta-networking/recipes-support/pimd/pimd/0001-configure-Dont-use-uname-to-determine-target-OS.patch b/meta-networking/recipes-support/pimd/pimd/0001-configure-Dont-use-uname-to-determine-target-OS.patch
 new file mode 100644
-index 000000000..7a229513b
+index 000000000..eb549ded9
 --- /dev/null
-+++ b/meta-webserver/recipes-httpd/monkey/files/0001-configure-Respect-LIBS-variable-from-env.patch
-@@ -0,0 +1,29 @@
-+From b0526a9b5325bd4758dad8d14efd85c98ef2ebff Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-support/pimd/pimd/0001-configure-Dont-use-uname-to-determine-target-OS.patch
+@@ -0,0 +1,28 @@
++From f3e04281bad361249a8dad0cde150a801d720f67 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 14 Jul 2017 18:25:23 -0700
-+Subject: [PATCH] configure: Respect LIBS variable from env
++Date: Fri, 14 Jul 2017 18:46:52 -0700
++Subject: [PATCH] configure: Dont use uname to determine target OS
 +
-+For musl we need to pass -lexecinfo from env
-+this change accomodates that
++Helps with cross-compiling
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
@@ -86,50 +86,72 @@ index 000000000..7a229513b
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
 +diff --git a/configure b/configure
-+index 4286c34..f1c65db 100755
++index 6c35a72..f9714e2 100755
 +--- a/configure
 ++++ b/configure
-+@@ -620,7 +620,7 @@ LIBDEFS = -DSHAREDLIB -fPIC \$(DEFS)
-+ INCDIR  = ./include
-+ LDFLAGS = $LDFLAGS
-+ DESTDIR = ../bin/monkey
-+-LIBS    = -ldl $libs
-++LIBS    = -ldl $libs ${LIBS}
-+ OBJ     = monkey.o mk_method.o mk_mimetype.o mk_vhost.o mk_request.o \\
-+           mk_header.o mk_config.o mk_signals.o \\
-+           mk_user.o mk_utils.o mk_epoll.o mk_scheduler.o \\
++@@ -31,7 +31,7 @@
++ #DEFS += -DSCOPED_ACL
++ #
++ 
++-OS=`uname`
+++OS="Linux"
++ CFG=config.mk
++ TMP=`mktemp /tmp/XXXXXX`
++ BUGREPORT_URL="https://github.com/troglobit/pimd/issues"
 +-- 
 +2.13.3
 +
-diff --git a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
-index be8ed37b9..97dc2769a 100644
---- a/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
-+++ b/meta-webserver/recipes-httpd/monkey/monkey_1.5.6.bb
-@@ -7,7 +7,10 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- 
- SECTION = "net"
- 
-+DEPENDS_append_libc-musl = " libexecinfo"
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb b/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
+deleted file mode 100644
+index 7edb6422d..000000000
+--- a/meta-networking/recipes-support/pimd/pimd_2.1.8.bb
++++ /dev/null
+@@ -1,19 +0,0 @@
+-SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing daemon."
+-HOMEPAGE = "http://troglobit.com/pimd.html"
+-SECTION = "net"
+-LICENSE = "BSD-3-Clause"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
+-
+-SRC_URI = "ftp://ftp.troglobit.com/pimd/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "a12448bc7c9bfcebf51a13ebf1ffa962"
+-SRC_URI[sha256sum] = "01016940543a0a6131d4e6c91b595d47e187012c59a298eec14c3dbc38564b3a"
+-
+-EXTRA_OEMAKE = "-e MAKEFLAGS="
+-CFLAGS += "-I ${S}/include "
+-
+-do_install() {
+-    unset datadir
+-    unset mandir
+-    oe_runmake 'DESTDIR=${D}' install
+-}
+-
+diff --git a/meta-networking/recipes-support/pimd/pimd_2.3.2.bb b/meta-networking/recipes-support/pimd/pimd_2.3.2.bb
+new file mode 100644
+index 000000000..2faa7cb1c
+--- /dev/null
++++ b/meta-networking/recipes-support/pimd/pimd_2.3.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "pimd is a lightweight stand-alone PIM-SM v2 multicast routing daemon."
++HOMEPAGE = "http://troglobit.com/pimd.html"
++SECTION = "net"
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=94f108f91fab720d62425770b70dd790"
 +
- SRC_URI = "http://monkey-project.com/releases/1.5/monkey-${PV}.tar.gz \
-+           file://0001-configure-Respect-LIBS-variable-from-env.patch \
-            file://monkey.service \
-            file://monkey.init"
- 
-@@ -24,7 +27,13 @@ EXTRA_OECONF = "--plugdir=${libdir}/monkey/ \
-                 --disable-plugins=mbedtls \
-                 --debug \
-                 --malloc-libc"
++SRC_URI = "ftp://ftp.troglobit.com/pimd/${BP}.tar.gz \
++           file://0001-configure-Dont-use-uname-to-determine-target-OS.patch \
++           "
++SRC_URI[md5sum] = "a3c03e40540980b2c06e265a17988e60"
++SRC_URI[sha256sum] = "c77a9812751f114490a28a6839b16aac8b020c8d9fd6aa22bf3880c054e19f1d"
 +
-+do_configure_prepend_libc-musl() {
-+	export LIBS="-lexecinfo"
++EXTRA_OECONF_append_libc-musl = " --embedded-libc"
++
++inherit autotools-brokensep
++
++do_configure() {
++    oe_runconf
 +}
 +
- DISABLE_STATIC = ""
-+CLEANBROKEN = "1"
- 
- inherit autotools-brokensep pkgconfig update-rc.d systemd
- 
 -- 
 2.13.3
 
