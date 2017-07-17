@@ -1,23 +1,46 @@
-Return-Path: <stanley.cheong.kwan.phoong@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 76A0D77DC8
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id A34FD77D21
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 02:48:28 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 Jul 2017 19:48:30 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.40,372,1496127600"; d="scan'208";a="879546000"
-Received: from phoongst-mobl2.png.intel.com ([10.221.22.197])
-	by FMSMGA003.fm.intel.com with ESMTP; 16 Jul 2017 19:48:29 -0700
-From: Stanley Phoong <stanley.cheong.kwan.phoong@intel.com>
-To: OpenEmbedded Devel Mailing List <openembedded-devel@lists.openembedded.org>
-Date: Mon, 17 Jul 2017 10:48:11 +0800
-Message-Id: <1500259691-9782-10-git-send-email-stanley.cheong.kwan.phoong@intel.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1500259691-9782-1-git-send-email-stanley.cheong.kwan.phoong@intel.com>
+	Mon, 17 Jul 2017 03:55:53 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id p204so20755514wmg.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 16 Jul 2017 20:55:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=9I/OQCPhk+SCGT/s1vxvyvw2OJyDa1RQ/+oQaemg0AI=;
+	b=nX7cNn/Qndcg8VtHQLp/zzBbmyDV+l2Sp9cqpf3urcC4C0UwJmTtwrRDJBQkRllwdh
+	c6zNTKUKurMhXnPvOKMhZZ80xNGSAHp07FOT1/jcbAxRaAuGUtGcURDmy286vYbU/P+G
+	QuC9eLU4gT+wenrbJD13apsWeQjL2ioaVGuDIG7jZUqkHz3nvxPkTw1ASwGCEnlEKT4Z
+	ThSI4nrKl0CNsu6kgOjERkyWhauZGVc4/GLoYHLyL8zv8Y5iM1naGJzsh5SyfzrKFi8m
+	PFmLYVMasEinYuXi87XjWIyasMxN3dp3sh7h4DsiJDnLIfS5a7wxfQ4JbNIMCbPIZfCK
+	jkKQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=9I/OQCPhk+SCGT/s1vxvyvw2OJyDa1RQ/+oQaemg0AI=;
+	b=NwELMnHAxrrQUthEnYfjoH2Ofva5IHvczDnBzSsBXwvNnq7o3AvA9o8RE5gKIoCRVN
+	Ei/LnxT/EK/BFWnSRbcOgsYes/r/LMONygYYtmNqu/QvrOeAxgfJF9bdFrFEjfzjzKPp
+	KG4S/2P4zh7pB+/iQxVWXskJ15oXJl9w+SHidqWJ4H/AHhhqxnuiowKoKIJ843UuxrgF
+	E5CZO0Ywl0TzIZJQ/BECai5+M5S2E5Nw+dliJuzbWh0C0IZJUy3A/xPA2RHTG//LeI1W
+	z24/jSCR9zu299P+f6Fp7XwyrzGk7jwNsR33wqI551j9wQcmgyaVuz0cz3Oxl9FTX1WX
+	HyWA==
+X-Gm-Message-State: AIVw11242BVwzkjdA9MQu6wZyGRl5+8nT6fK43cBZFQ01hEy4mvHb+Te
+	Jj6t4WMgaklHPPF8T0xjjoI5Y2bvGQ==
+X-Received: by 10.80.164.185 with SMTP id w54mr15964135edb.76.1500263754215;
+	Sun, 16 Jul 2017 20:55:54 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.145.210 with HTTP; Sun, 16 Jul 2017 20:55:23 -0700 (PDT)
+In-Reply-To: <1500259691-9782-5-git-send-email-stanley.cheong.kwan.phoong@intel.com>
 References: <1500259691-9782-1-git-send-email-stanley.cheong.kwan.phoong@intel.com>
-Subject: [meta-openwrt][PATCH 9/9] Juci: fix node_modules dependencies error
+	<1500259691-9782-5-git-send-email-stanley.cheong.kwan.phoong@intel.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 16 Jul 2017 20:55:23 -0700
+Message-ID: <CAMKF1sq06C2Q10GzW=Ud85mBvOAdDu7O7hK5u0H4cNgRdZkU6w@mail.gmail.com>
+To: Stanley Phoong <stanley.cheong.kwan.phoong@intel.com>
+Cc: OpenEmbedded Devel Mailing List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-openwrt][PATCH 4/9] Juci: fix uglify-js not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,158 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 Jul 2017 02:48:28 -0000
+X-List-Received-Date: Mon, 17 Jul 2017 03:55:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: "Stanley Cheong Kwan, Phoong" <stanley.cheong.kwan.phoong@intel.com>
+On Sun, Jul 16, 2017 at 7:48 PM, Stanley Phoong
+<stanley.cheong.kwan.phoong@intel.com> wrote:
+> From: "Stanley Cheong Kwan, Phoong" <stanley.cheong.kwan.phoong@intel.com>
+>
+> uglify-js is not found by the Makefile. This happens due to npm install
+> will install into a local node_modules and this would not be reflected
+> into recipe-sysroot-native/usr/bin. Added softlink to uglify-js.
+>
+> Signed-off-by: Stanley Cheong Kwan, Phoong <stanley.cheong.kwan.phoong@intel.com>
+> ---
+>  recipes-core/juci/juci_git.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/recipes-core/juci/juci_git.bb b/recipes-core/juci/juci_git.bb
+> index 6d3d798..def6a90 100644
+> --- a/recipes-core/juci/juci_git.bb
+> +++ b/recipes-core/juci/juci_git.bb
+> @@ -23,6 +23,7 @@ do_compile() {
+>  }
+>
+>  do_install_append() {
+> +        ln -sf ${WORKDIR}/git/node_modules/uglify-js/bin/uglifyjs ${WORKDIR}/recipe-sysroot-native/usr/bin/uglifyjs
 
-In the latest Juci build, Juci now has an offline node_modules that is
-shipped together as a tar.gz. Some dependencies are not saved properly
-inside the package.json which causes the npm shrinkwrap to file error.
-This commit fixes this error.
+this should be done by a native recipe. May be a new recipe to install
+this would be ok.
 
-Signed-off-by: Stanley Cheong Kwan, Phoong <stanley.cheong.kwan.phoong@intel.com>
----
- .../juci/juci/0006-package-json-update.patch       | 108 +++++++++++++++++++++
- recipes-core/juci/juci_git.bb                      |   5 +-
- 2 files changed, 111 insertions(+), 2 deletions(-)
- create mode 100644 recipes-core/juci/juci/0006-package-json-update.patch
-
-diff --git a/recipes-core/juci/juci/0006-package-json-update.patch b/recipes-core/juci/juci/0006-package-json-update.patch
-new file mode 100644
-index 0000000..68f45fc
---- /dev/null
-+++ b/recipes-core/juci/juci/0006-package-json-update.patch
-@@ -0,0 +1,108 @@
-+Index: git/package.json
-+===================================================================
-+--- git.orig/package.json
-++++ git/package.json
-+@@ -18,7 +18,102 @@
-+     "gettext-parser": "*",
-+     "underscore": "*",
-+     "ws": "*",
-+-    "express-ws": "*"
-++    "express-ws": "*",
-++    "abbrev": "1.0.7",
-++    "angular-gettext-tools": "2.1.11",
-++    "espree": "2.2.5",
-++    "argparse": "1.0.7",
-++    "array-find-index": "1.0.1",
-++    "binary-search": "1.2.0",
-++    "boolbase": "1.0.0",
-++    "builtin-modules": "1.1.1",
-++    "camelcase": "2.1.1",
-++    "camelcase-keys": "2.1.0",
-++    "cheerio": "0.19.0",
-++    "coffee-script": "1.10.0",
-++    "colors": "1.1.2",
-++    "css-select": "1.0.0",
-++    "css-what": "1.0.0",
-++    "dateformat": "1.0.12",
-++    "decamelize": "1.2.0",
-++    "dom-serializer": "0.1.0",
-++    "domelementtype": "1.1.3",
-++    "domelementtype": "1.3.0",
-++    "domhandler": "2.3.0",
-++    "domutils": "1.4.3",
-++    "entities": "1.1.1",
-++    "error-ex": "1.3.0",
-++    "espree": "2.2.5",
-++    "esprima": "2.7.2",
-++    "eventemitter2": "0.4.14",
-++    "exit": "0.1.2",
-++    "find-up": "1.1.2",
-++    "findup-sync": "0.3.0",
-++    "glob": "7.0.3",
-++    "get-stdin": "4.0.1",
-++    "getobject": "0.1.0",
-++    "grunt": "1.0.0",
-++    "grunt-cli": "1.2.0",
-++    "grunt-angular-gettext": "2.1.11",
-++    "grunt-known-options": "1.1.0",
-++    "grunt-legacy-log": "1.0.0",
-++    "grunt-legacy-log-utils": "1.0.0",
-++    "lodash": "4.3.0",
-++    "grunt-legacy-util": "1.0.0",
-++    "lodash": "4.3.0",
-++    "hooker": "0.2.3",
-++    "hosted-git-info": "2.1.4",
-++    "htmlparser2": "3.8.3",
-++    "indent-string": "2.1.0",
-++    "is-absolute": "0.1.7",
-++    "is-arrayish": "0.2.1",
-++    "is-builtin-module": "1.0.0",
-++    "is-finite": "1.0.1",
-++    "is-relative": "0.1.3",
-++    "is-utf8": "0.2.1",
-++    "isarray": "0.0.1",
-++    "isexe": "1.1.2",
-++    "js-yaml": "3.5.5",
-++    "karma": ">=0.12.8",
-++    "load-json-file": "1.1.0",
-++    "lodash": "3.10.1",
-++    "lodash._isnative": "2.4.1",
-++    "lodash.isarray": "2.4.1",
-++    "loud-rejection": "1.3.0",
-++    "map-obj": "1.0.1",
-++    "meow": "3.7.0",
-++    "minimist": "1.2.0",
-++    "nopt": "3.0.6",
-++    "normalize-package-data": "2.3.5",
-++    "nth-check": "1.0.1",
-++    "number-is-nan": "1.0.0",
-++    "options": "0.0.6",
-++    "parse-json": "2.2.0",
-++    "path-exists": "2.1.0",
-++    "path-type": "1.1.0",
-++    "pify": "2.3.0",
-++    "pofile": "1.0.2",
-++    "read-pkg": "1.1.0",
-++    "read-pkg-up": "1.0.1",
-++    "readable-stream": "1.1.13",
-++    "redent": "1.0.0",
-++    "repeating": "2.0.0",
-++    "resolve": "1.1.7",
-++    "rimraf": "2.2.8",
-++    "semver": "5.1.0",
-++    "signal-exit": "2.1.2",
-++    "spdx-correct": "1.0.2",
-++    "spdx-exceptions": "1.0.4",
-++    "spdx-expression-parse": "1.0.2",
-++    "spdx-license-ids": "1.2.0",
-++    "sprintf-js": "1.0.3",
-++    "strip-bom": "2.0.0",
-++    "strip-indent": "1.0.1",
-++    "trim-newlines": "1.0.0",
-++    "ultron": "1.0.2",
-++    "underscore.string": "3.2.3",
-++    "validate-npm-package-license": "3.0.1",
-++    "which": "1.2.4"
-+   },
-+   "engines": {
-+     "node": "0.10.x",
-diff --git a/recipes-core/juci/juci_git.bb b/recipes-core/juci/juci_git.bb
-index c79c064..4c7cc1c 100644
---- a/recipes-core/juci/juci_git.bb
-+++ b/recipes-core/juci/juci_git.bb
-@@ -12,13 +12,14 @@ SRC_URI = "git://github.com/mkschreder/juci"
- SRC_URI += "file://0002-fix-bootstrap.patch"
- SRC_URI += "file://0003-fix-juci-compile.patch"
- SRC_URI += "file://0005-makefile-local.patch"
-+SRC_URI += "file://0006-package-json-update.patch"
- 
- S = "${WORKDIR}/git"
- 
- inherit npm-install
- 
--NPM_INSTALL_append = " --save uglify-js less minify"
--DEPENDS += "jucid lua5.1 grunt-cli-native"
-+NPM_INSTALL_append = " --save uglify-js less minify espree grunt-cli karma grunt@~0.4.1"
-+DEPENDS += "jucid lua5.1 grunt-cli-native gettext-native"
- 
- do_compile() {
- 	oe_runmake node_modules
--- 
-2.7.4
-
+>         oe_runmake
+>         oe_runmake DESTDIR='${D}' install
+>  }
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
