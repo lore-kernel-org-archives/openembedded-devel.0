@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CD8277E88
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 8011D77E88
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:10:34 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id q85so1025670pfq.2
+	Tue, 18 Jul 2017 03:10:35 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id v190so1059005pgv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 20:10:35 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=j9PcXtK9nVRWaDGS3bsbZyOCiUQF/Bk0LRLqBE6VdfE=;
-	b=ByLw4x1lwhnsGJksdKf+65meF/qYfTvTJZnPYa6eVkGol6xD/vVzKYSz+QiqY306nV
-	iFQS9HO8kzcRw+Wa2zwVgm9KQZhbEXGKgPJg+o0f5YAakbgREnH7o2Xwi1XP3UPYQi0f
-	hq1I2Dpsyroj0bFDVLmQIzaTIZYbP9XvcEQAMgaTzkO3KW7rMMZBC3BEco3S4dj0Hh5R
-	7Hh6k0l7D33ne2ReXQr1cVSk5FwIbaOpWjU5D2r0euwnygeoncVMn8Nn7xS25D2ebwkG
-	NJTBTaM9ENS3wEM4tj7pO07fFmX5jAIiehOKfsAOkm9zgQBzYdIu6hsb0Ty3Xns3JSYd
-	b8og==
+	bh=YuVJSkjymcQ2UArvQ4MYPSrlePelBzsEK1KyMi8GrQg=;
+	b=HvvlVQjby4TCqb9V/grko5AjU+iL+BMJkE/SMdL4rBFfnrxp3nkKGPb/8eFjE3D8Hs
+	B+GeMZLw+ab1+OySd7QhWRcLwlx3oGXT2FLT7V2srSBKgndeUcGNRqWRIA6WDmCEe1oX
+	e4WGGMKzSvbZWS+nva7ej+bkB2+eIQCtni318TnQi3gw0enF0pOQp3EIege8IBKJA2K0
+	jxllrtB9ukwtAh0eBNmXp1TRmFTOwhhyydne1EI7yDM7G+Q4orleZwoLRt/xFQWD2OCw
+	XcTJNkpqRrHGPXfwYHalW5S9vmTaE+Cr4wrkK8cWk3MCqT8gWCEAOf/rnnDPMDmBVSwI
+	L/eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=j9PcXtK9nVRWaDGS3bsbZyOCiUQF/Bk0LRLqBE6VdfE=;
-	b=nkbWlrVhgZS6fwf8HhKaYFhuY5hVTY3LHanN0GHg/1fHwLub0KnerPjQ0u5L/DOT/j
-	Ux8j6nIwsmhmyVKDH6k8ovsiZ9pkkfuJd9e+znPkU9K3xkmUcd8zP1QB3uWyojsY5FVC
-	FeCvDsFR8wShNXiqDASNb2cMCkSgM5TO6cOCmMuJSEc3bs/2VfhUw4tqnlEHcNaPViXu
-	R/sWQnPWPo+wyR+ASYMQsoSkSPdwNRCPDQesea+06ML8j13/cr09s9r+fP4puUqykbjR
-	bL+Ipp1jrqEeeiJnDgVIFL/rPeRSophHKMfNy/FdOgMOiNGTE+GwyGkKEr9WzF+TR0SO
-	OSYw==
-X-Gm-Message-State: AIVw113SWwGHqAHPUez3MprKYMkg5jJpWqLiWKLpcbN+wmlhwJCZ1794
-	JV5I6nc4AGV8RRJv
-X-Received: by 10.84.128.14 with SMTP id 14mr839351pla.285.1500347435268;
-	Mon, 17 Jul 2017 20:10:35 -0700 (PDT)
+	bh=YuVJSkjymcQ2UArvQ4MYPSrlePelBzsEK1KyMi8GrQg=;
+	b=m44Kq5ySGp3DriUcT9K1UJfv+xdZLgTl+YYJEcMwYMEGFhrvJXQ3+iOx6Nqxfoh5xg
+	9znp2GZ3iDo9Z1/1TDUjQIrA2p85GOzhmj/HudK/WKw9DPcb/fGSqt4//8f2WjTE0WAL
+	qYodrGk4dzQi6HJPBlpat7sjRDouh0LgL7pX/ACT+xq3h4E2n1MFqH9NvxPJxZn0RfPR
+	rioXqvYSy7H1HD34HIbGrMOdp4wM7a/3Cx7CjZTZQf7HkSjXStu7Z+PNuF/vOkyQrBWX
+	++VPJLL2jamDtAWKEVdbg8k5258m8N4qLAJgyx0eXuwB3VwPsNpmyNwy999O6HJv2x5Y
+	vFCg==
+X-Gm-Message-State: AIVw110dcvYQ+P4CmH/UloxXuhZ4SdkRfqyPhcaDF2rEmW0YPWKK/wcl
+	X1ferjkBCVt/BTKP
+X-Received: by 10.84.133.11 with SMTP id 11mr841626plf.77.1500347436624;
+	Mon, 17 Jul 2017 20:10:36 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	w85sm1086674pfj.115.2017.07.17.20.10.33
+	w85sm1086674pfj.115.2017.07.17.20.10.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Jul 2017 20:10:34 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jul 2017 20:10:04 -0700
-Message-Id: <20170718031013.44536-8-raj.khem@gmail.com>
+Date: Mon, 17 Jul 2017 20:10:05 -0700
+Message-Id: <20170718031013.44536-9-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
 In-Reply-To: <20170718031013.44536-1-raj.khem@gmail.com>
 References: <20170718031013.44536-1-raj.khem@gmail.com>
-Subject: [meta-initramfs][PATCH 08/17] grubby: Link with libexecinfo on musl
+Subject: [meta-oe][PATCH 09/17] numactl: Update to latest from github
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,112 +55,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 03:10:34 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 03:10:35 -0000
+
+There are patches to compile it on musl upstream
+therefore switch the SRC_URI to fetch from github
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-variable-LIBS-to-provides-libraries-from.patch | 26 ++++++++++++++++++++++
- .../0002-include-paths.h-for-_PATH_MOUNTED.patch   | 25 +++++++++++++++++++++
- .../recipes-devtools/grubby/grubby_8.40.bb         |  9 ++++++--
- 3 files changed, 58 insertions(+), 2 deletions(-)
- create mode 100644 meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
- create mode 100644 meta-initramfs/recipes-devtools/grubby/grubby/0002-include-paths.h-for-_PATH_MOUNTED.patch
+ .../numactl/{numactl_2.0.11.bb => numactl_git.bb}                | 9 ++++++---
+ 1 file changed, 6 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/numactl/{numactl_2.0.11.bb => numactl_git.bb} (88%)
 
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch b/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
-new file mode 100644
-index 000000000..1b1a993a0
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby/0001-Add-another-variable-LIBS-to-provides-libraries-from.patch
-@@ -0,0 +1,26 @@
-+From 22afaa21b4b258082be591e54c99e1ba6fbd7748 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 15 Jul 2017 10:19:22 -0700
-+Subject: [PATCH 1/2] Add another variable LIBS to provides libraries from env
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ Makefile | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile b/Makefile
-+index ac14404..92a8e73 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -27,7 +27,7 @@ RPM_OPT_FLAGS ?= -O2 -g -pipe -Wp,-D_FORTIFY_SOURCE=2 -fstack-protector
-+ CFLAGS += $(RPM_OPT_FLAGS) -std=gnu99 -Wall -Werror -Wno-error=unused-function -Wno-unused-function -ggdb
-+ LDFLAGS := 
-+ 
-+-grubby_LIBS = -lblkid -lpopt
-++grubby_LIBS = -lblkid -lpopt ${LIBS}
-+ 
-+ all: grubby
-+ 
-+-- 
-+2.13.3
-+
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby/0002-include-paths.h-for-_PATH_MOUNTED.patch b/meta-initramfs/recipes-devtools/grubby/grubby/0002-include-paths.h-for-_PATH_MOUNTED.patch
-new file mode 100644
-index 000000000..de8133a3a
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby/0002-include-paths.h-for-_PATH_MOUNTED.patch
-@@ -0,0 +1,25 @@
-+From 8f844ac7f44b8dc428d06cd6958c5f32d383d01c Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 15 Jul 2017 10:19:50 -0700
-+Subject: [PATCH 2/2] include paths.h for _PATH_MOUNTED
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ grubby.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/grubby.c b/grubby.c
-+index 47a1a15..59f74a9 100644
-+--- a/grubby.c
-++++ b/grubby.c
-+@@ -34,6 +34,7 @@
-+ #include <libgen.h>
-+ #include <execinfo.h>
-+ #include <signal.h>
-++#include <paths.h>
-+ #include <blkid/blkid.h>
-+ 
-+ #include "log.h"
-+-- 
-+2.13.3
-+
-diff --git a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
-index 0e9379085..5a998248c 100644
---- a/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
-+++ b/meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
-@@ -9,11 +9,14 @@ LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=892f569a555ba9c07a568a7c0c4fa63a"
+diff --git a/meta-oe/recipes-support/numactl/numactl_2.0.11.bb b/meta-oe/recipes-support/numactl/numactl_git.bb
+similarity index 88%
+rename from meta-oe/recipes-support/numactl/numactl_2.0.11.bb
+rename to meta-oe/recipes-support/numactl/numactl_git.bb
+index dd159a3b1..f2d9a1760 100644
+--- a/meta-oe/recipes-support/numactl/numactl_2.0.11.bb
++++ b/meta-oe/recipes-support/numactl/numactl_git.bb
+@@ -10,15 +10,18 @@ inherit autotools-brokensep ptest
  
- DEPENDS = "popt util-linux"
-+DEPENDS_append_libc-musl = " libexecinfo"
+ LIC_FILES_CHKSUM = "file://README;beginline=19;endline=32;md5=5644cc3851cb2499f6c48e52fe198bd9"
  
- SRC_URI = "https://github.com/rhinstaller/${BPN}/archive/${PV}-1.tar.gz;downloadfilename=${BPN}-${PV}-1.tar.gz \
-            file://grubby-rename-grub2-editenv-to-grub-editenv.patch \
-            file://run-ptest \
--"
-+           file://0001-Add-another-variable-LIBS-to-provides-libraries-from.patch \
-+           file://0002-include-paths.h-for-_PATH_MOUNTED.patch \
-+           "
+-SRC_URI = "ftp://oss.sgi.com/www/projects/libnuma/download/${BPN}-${PV}.tar.gz \
++SRCREV = "ea3a70681c2f523fe58e1d44527f478ca76db74e"
++PV = "2.0.11+git${SRCPV}"
++
++SRC_URI = "git://github.com/numactl/numactl \
+     file://fix-null-pointer.patch \
+     file://Fix-the-test-output-format.patch \
+     file://Makefile \
+     file://run-ptest \
+     file://0001-define-run-test-target.patch \
+ "
+-SRC_URI[md5sum] = "d3bc88b7ddb9f06d60898f4816ae9127"
+-SRC_URI[sha256sum] = "450c091235f891ee874a8651b179c30f57a1391ca5c4673354740ba65e527861"
++
++S = "${WORKDIR}/git"
  
- SRC_URI[md5sum] = "1005907b275d6d93368d045274537d86"
- SRC_URI[sha256sum] = "85f1c678484f74c8978e8643451594967defce463a86c35cb1ee56d12767a9df"
-@@ -24,8 +27,10 @@ RDEPENDS_${PN} += "dracut"
- 
- inherit autotools-brokensep ptest
- 
--EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}'"
-+EXTRA_OEMAKE = "-e 'CC=${CC}' 'LDFLAGS=${LDFLAGS}' LIBS='${LIBS}'"
- 
-+LIBS_libc-musl = "-lexecinfo"
-+LIBS ?= ""
- do_install_ptest() {
-     install -d ${D}${PTEST_PATH}
-     cp -r ${S}/test ${S}/test.sh ${D}${PTEST_PATH}
+ # ARM does not currently support NUMA
+ COMPATIBLE_HOST = "^((?!arm).*)$"
 -- 
 2.13.3
 
