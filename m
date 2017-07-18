@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E3C577F90
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 080F777FC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 06:09:31 +0000 (UTC)
+	Tue, 18 Jul 2017 06:09:33 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6I69WOI018851
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 17 Jul 2017 23:09:32 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6I69XOe013612
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 17 Jul 2017 23:09:33 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 17 Jul 2017 23:09:31 -0700
+	Mon, 17 Jul 2017 23:09:33 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Jul 2017 02:09:11 -0400
-Message-ID: <ba342578adfeefd886664136f09464871e9a3190.1500357921.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Jul 2017 02:09:12 -0400
+Message-ID: <709861cfabf74c7a0cefb15d791399e0f9a1f76f.1500357921.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1500357921.git.hongxu.jia@windriver.com>
 References: <cover.1500357921.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 8/9] python3-pid: add recipe 2.1.1
+Subject: [PATCH 9/9] python3-prctl: add recipe 1.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,72 +32,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 06:09:31 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 06:09:33 -0000
 Content-Type: text/plain
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../0001-remove-requirement-of-nose.patch          | 29 ++++++++++++++++++++++
- .../recipes-devtools/python/python3-pid_2.1.1.bb   | 14 +++++++++++
- 2 files changed, 43 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
- create mode 100644 meta-python/recipes-devtools/python/python3-pid_2.1.1.bb
+ .../0001-support-cross-complication.patch          | 61 ++++++++++++++++++++++
+ .../recipes-devtools/python/python3-prctl_1.6.1.bb | 22 ++++++++
+ 2 files changed, 83 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+ create mode 100644 meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch b/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
+diff --git a/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
 new file mode 100644
-index 0000000..3beef07
+index 0000000..775ae1b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pid/0001-remove-requirement-of-nose.patch
-@@ -0,0 +1,29 @@
-+From 04d04a8fa1ef3d8dbdaebbaac9ae936e1c8234c1 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python3-prctl/0001-support-cross-complication.patch
+@@ -0,0 +1,61 @@
++From 9a16800738547d117284354bbcad7dd77d9d0344 Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 28 Jun 2017 21:17:43 -0400
-+Subject: [PATCH] remove requirement of nose
-+
-+The nose extends unittest to make testing easier.
-+Do not need the test suite, so remove requirement of nose.
++Date: Thu, 21 Apr 2016 03:05:57 -0400
++Subject: [PATCH] support cross-complication
 +
 +Upstream-Status: Inappropriate [oe specific]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ setup.py | 2 --
-+ 1 file changed, 2 deletions(-)
++ setup.py | 35 -----------------------------------
++ 1 file changed, 35 deletions(-)
 +
 +diff --git a/setup.py b/setup.py
-+index 3f7c7cb..c42a546 100644
++index 658d1a5..e8be7eb 100755
 +--- a/setup.py
 ++++ b/setup.py
-+@@ -53,6 +53,4 @@ setup(
-+     keywords='pid pidfile context manager decorator',
-+     packages=["pid"],
-+     install_requires=[],
-+-    test_suite='nose.collector',
-+-    setup_requires=['nose>=1.0'],
-+ )
++@@ -13,41 +13,6 @@ import sys
++ # - Need gcc
++ # - Need C headers
++ # - Need libcap headers
++-if not sys.platform.startswith('linux'):
++-    sys.stderr.write("This module only works on linux\n")
++-    sys.exit(1)
++-
++-kvers = os.uname()[2]
++-if kvers < '2.6.18' and not os.environ.get("PRCTL_SKIP_KERNEL_CHECK",False):
++-    sys.stderr.write("This module requires linux 2.6.18 or newer\n")
++-    sys.exit(1)
++-
++-if sys.version_info[:2] < (2,4):
++-    sys.stderr.write("This module requires python 2.4 or newer\n")
++-    sys.exit(1)
++-
++-exit = False
++-try:
++-    subprocess.call(['gcc','-v'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-except:
++-    sys.stderr.write("You need to install gcc to build this module\n")
++-    sys.exit(1)
++-
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp.communicate('#include <sys/prctl.h>\n'.encode())
++-if sp.returncode:
++-    sys.stderr.write("You need to install libc development headers to build this module\n")
++-    exit = True
++-
++-sp = subprocess.Popen(['cpp'], stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
++-sp.communicate('#include <sys/capability.h>\n'.encode())
++-if sp.returncode:
++-    sys.stderr.write("You need to install libcap development headers to build this module\n")
++-    exit = True
++-
++-if exit:
++-    sys.exit(1)
++-
++ _prctl = Extension("_prctl",
++                    sources = ['_prctlmodule.c'],
++                    depends = ['securebits.h'],
 +-- 
 +2.8.1
 +
-diff --git a/meta-python/recipes-devtools/python/python3-pid_2.1.1.bb b/meta-python/recipes-devtools/python/python3-pid_2.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb b/meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb
 new file mode 100644
-index 0000000..c88d9a0
+index 0000000..5de83ce
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pid_2.1.1.bb
-@@ -0,0 +1,14 @@
-+SUMMARY = "Pidfile featuring stale detection and file-locking, can also \
-+be used as context-manager or decorator"
-+HOMEPAGE = "https://github.com/trbs/pid/"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=83d53cbd3105063f20305bc313464e29"
++++ b/meta-python/recipes-devtools/python/python3-prctl_1.6.1.bb
+@@ -0,0 +1,22 @@
++SUMMARY  = "Control process attributes through prctl"
++DESCRIPTION = "The linux prctl function allows you to control specific characteristics of a \
++process' behaviour. Usage of the function is fairly messy though, due to \
++limitations in C and linux. This module provides a nice non-messy python(ic) \
++interface."
++SECTION = "devel/python"
++LICENSE = "GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=5eb2f4bcd60326f83e5deb542372d52f"
 +
-+SRC_URI[md5sum] = "9634b1e3d545544a9d496e25e4530d14"
-+SRC_URI[sha256sum] = "b443169d3dc21397695b4a82016fadb4cfdb0ed8b2ddb4aaa428e1701bb34e1f"
++S = "${WORKDIR}/git"
++B = "${S}"
 +
-+inherit pypi setuptools3
++SRCREV = "1107d0be7bec4b28c85c62c454882d16844c930a"
++PV = "1.6.1+git${SRCPV}"
 +
-+SRC_URI += " \
-+    file://0001-remove-requirement-of-nose.patch \
++SRC_URI = "git://github.com/seveas/python-prctl;branch=master \
++           file://0001-support-cross-complication.patch \
 +"
++inherit setuptools3 python3native
++
++DEPENDS += "libcap"
++
 -- 
 2.8.1
 
