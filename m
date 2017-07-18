@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 5420478072
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 636F878075
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:10:41 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id u5so4582615pgq.3
+	Tue, 18 Jul 2017 03:10:42 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id z1so1060074pgs.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=eLOGSaepGFT43n48dchFA1gL3lPNCwpfzqWME62hnTs=;
-	b=moysx7wes4lwquuuCkqYMPGoZBNwZcnRocB6jBlDGIqenzsVIsicCtxh7KW8zLw6l6
-	A4HBOppFkffUriBxtTuATLGk6gY9wmLj0/hrXTgGOUidOgzLWIPp7mVHaXRE5gipqc9+
-	p/KgZRpgUPhex7/rSTqN1N+7ukrx9dqiquDMd0aYWxAChBOJ5TgCa+g8l5BOSMKDWopA
-	U50PD58M1Vk6/EgZfWtP1alceS05MWb1e6rUnjq7qQwJHIkWGqqlKSglNy4zXmEyTNUb
-	zn8+mbhlGEPdEh9UabrQtEgfxswIWZfona7jOek12wmSov0SNnuPUn1ibUFFq3EeagES
-	Uu4A==
+	bh=wJwLV3JJRITdVgWXacnPfiphMJeaWy0zEF8uFIak3sg=;
+	b=YNp3gBE8ZVNUjyc4rWEgpuPWfRcM3EYOUke40Afo90xgorreSu+cabGxX6RbVrKRb+
+	eqjG0i0uwnA58VghTdoONebE6NHFqOEiirRKUAucxQwF3A/BJmnVBmoC4LQwpDMcaG8Y
+	61xpaky0dVuSvMHFnjfsd6fXwQpYcGzpLWEHQPqxphqj6FFCbXlt6UiTKcDSPD26dFkh
+	j5Awjjb0FMirGnjhrODvBMchWvJKRJDX8E0dmvFRXUAXjxCvoqiRXdAes3wH63J6SesF
+	xhlfj2XcE7iT9NIn9gQi0t8WjoJVJw5joCkRhsx4c1THt+JDWrpwfAapCCeQMQsvCOKj
+	XD4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=eLOGSaepGFT43n48dchFA1gL3lPNCwpfzqWME62hnTs=;
-	b=QwapFgIl3KTbXH3CzBbg42LIN8fXubr5Ycjk/ECuVr31AApZsLwvKU5gso3s0CyjQe
-	OA77gdP/goihWLq+RHcKCJlDv6gNsgqaKGmca/F3z3pm+c1+brBTdyPcroq/p4SW4YjO
-	QEcNbeS80F0dPhc+boxZ9WvnxIySeJ+ZE7QJbvzNQ0xW/tDD1/slsTGKHC1B8KLGdE8B
-	zaoRGbfRjjOSu8fpRkPlWfwnfkeJIiBfem4k8Q1iC9sQrsiseJJLY64BRPm4/UGuB3am
-	TAPeOSJSMmXWV1hsV47BCcCwfxcbGMrXHezf8mNquewkMZ9dW/zQ3iWTYl5TLwaV6Q5u
-	SBPw==
-X-Gm-Message-State: AIVw111pM83m38KxIej315kj0Yzrncvploror7YQgO3iIMhbBgYLgbsX
-	/RyjRGkrFZ3NjNvw
-X-Received: by 10.99.66.1 with SMTP id p1mr803742pga.120.1500347442384;
-	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
+	bh=wJwLV3JJRITdVgWXacnPfiphMJeaWy0zEF8uFIak3sg=;
+	b=OmyAQpiI2lSvlD28YQFKB3sM8pVkqs4/GUFsmWWY8gKlAMFCeFKIGnzUY3XHlqye2v
+	WmkV1o9xLmXXjEQo6T/sCseM6v45oiKfDl7Pk111FVvd3+XGg3OwGDSDGVzvLcnzOG39
+	lIC2dniRtkD6KatX5kmiZ0YuYQwiYPaSO0cbvqMveYUkwKuZZSowqInEHgTRq4f81Pbs
+	vH+JZ2LjO8x4UKnduz9e/8wyuL3/3WIChyzadIUwHKR3OKCel0s3EyYiZ8gDqXgl/WXb
+	FWnzfkGI8STAon09dJAwQYeDksjTW2wQFQrj8YQI7ula+5/mFvwhtejJpOKQI1pu7igS
+	qELA==
+X-Gm-Message-State: AIVw112J3Np5XrobYMDlbWZXqjniJaENuvrsS9CQhuYIxU0pa/OzlftT
+	chpZRdLSZftBrYUs
+X-Received: by 10.98.28.71 with SMTP id c68mr827379pfc.116.1500347443736;
+	Mon, 17 Jul 2017 20:10:43 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	w85sm1086674pfj.115.2017.07.17.20.10.41
+	w85sm1086674pfj.115.2017.07.17.20.10.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Jul 2017 20:10:41 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jul 2017 20:10:09 -0700
-Message-Id: <20170718031013.44536-13-raj.khem@gmail.com>
+Date: Mon, 17 Jul 2017 20:10:10 -0700
+Message-Id: <20170718031013.44536-14-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
 In-Reply-To: <20170718031013.44536-1-raj.khem@gmail.com>
 References: <20170718031013.44536-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 13/17] phonet-utils: Fix build with musl
+Subject: [meta-oe][PATCH 14/17] nicstat: Fix build on musl/x86_64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,57 +59,69 @@ X-List-Received-Date: Tue, 18 Jul 2017 03:10:42 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-Include-limits.h-for-PATH_MAX.patch       | 25 ++++++++++++++++++++++
- .../phonet-utils/phonet-utils_git.bb               |  4 +++-
- 2 files changed, 28 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+ ...tat.c-Do-not-define-uint64_t-and-uint32_t.patch | 37 ++++++++++++++++++++++
+ meta-oe/recipes-extended/nicstat/nicstat_1.95.bb   |  4 ++-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
 
-diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+diff --git a/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch b/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
 new file mode 100644
-index 000000000..8bb7e5a18
+index 000000000..a208f97eb
 --- /dev/null
-+++ b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
-@@ -0,0 +1,25 @@
-+From f7ad9a4471cee2324f216a0d82ba8097ec746c56 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
+@@ -0,0 +1,37 @@
++From 52590fbf735cef3fec85a042458aa89a02c52b57 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 15 Jul 2017 11:48:12 -0700
-+Subject: [PATCH] Include limits.h for PATH_MAX
++Date: Sat, 15 Jul 2017 11:33:12 -0700
++Subject: [PATCH] nicstat.c: Do not define uint64_t and uint32_t
++
++Use the defines from platform
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/pnstat.c | 1 +
-+ 1 file changed, 1 insertion(+)
 +
-+diff --git a/src/pnstat.c b/src/pnstat.c
-+index 661a5bc..76068e6 100644
-+--- a/src/pnstat.c
-++++ b/src/pnstat.c
-+@@ -35,6 +35,7 @@
-+ #include <dirent.h>
-+ #include <unistd.h>
-+ #include <netinet/tcp.h>
-++#include <limits.h>
++---
++ nicstat.c | 3 +--
++ 1 file changed, 1 insertion(+), 2 deletions(-)
++
++diff --git a/nicstat.c b/nicstat.c
++index 83ad557..2a6e0c1 100644
++--- a/nicstat.c
+++++ b/nicstat.c
++@@ -32,6 +32,7 @@
 + 
-+ struct fd
-+ {
++ #include <stdio.h>
++ #include <stdlib.h>
+++#include <stdint.h>
++ #include <unistd.h>
++ #include <string.h>
++ #include <ctype.h>
++@@ -88,8 +89,6 @@
++ #define	PROC_NET_BUFSIZ		(128 * 1024)
++ #define	PROC_UPTIME		"/proc/uptime"
++ /* Needs to be fixed if not built under ILP32 */
++-typedef unsigned long long	uint64_t;
++-typedef unsigned int		uint32_t;
++ extern char *optarg;
++ extern int optind, opterr, optopt;
++ #endif /* OS_LINUX */
 +-- 
 +2.13.3
 +
-diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
-index 558996391..3c599950f 100644
---- a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
-+++ b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
-@@ -2,7 +2,9 @@ SUMMARY = "This small package provides a few command line tools for Linux Phonet
- HOMEPAGE = ""
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master"
-+SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master \
-+           file://0001-Include-limits.h-for-PATH_MAX.patch \
+diff --git a/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
+index 5126a31cd..3875f0f60 100644
+--- a/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
++++ b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
+@@ -5,7 +5,9 @@ HOMEPAGE = "http://nicstat.sourceforge.net"
+ LICENSE = "Artistic-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b4a94da2a1f918b217ef5156634fc9e0"
+ 
+-SRC_URI = "http://softlayer-sng.dl.sourceforge.net/project/${BPN}/${BP}.tar.gz"
++SRC_URI = "http://softlayer-sng.dl.sourceforge.net/project/${BPN}/${BP}.tar.gz \
++           file://0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch \
 +           "
- PR = "r2"
- S = "${WORKDIR}/git"
- SRCREV = "4acfa720fd37d178a048fc2be17180137d4a70ea"
+ SRC_URI[md5sum] = "9a0b87bbc670c1e738e5b40c7afd184d"
+ SRC_URI[sha256sum] = "c4cc33f8838f4523f27c3d7584eedbe59f4c587f0821612f5ac2201adc18b367"
+ 
 -- 
 2.13.3
 
