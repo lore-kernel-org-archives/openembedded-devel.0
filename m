@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 636F878075
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 04E717805C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:10:42 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id z1so1060074pgs.0
+	Tue, 18 Jul 2017 03:10:45 +0000 (UTC)
+Received: by mail-pf0-f176.google.com with SMTP id e26so4364570pfd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 20:10:44 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wJwLV3JJRITdVgWXacnPfiphMJeaWy0zEF8uFIak3sg=;
-	b=YNp3gBE8ZVNUjyc4rWEgpuPWfRcM3EYOUke40Afo90xgorreSu+cabGxX6RbVrKRb+
-	eqjG0i0uwnA58VghTdoONebE6NHFqOEiirRKUAucxQwF3A/BJmnVBmoC4LQwpDMcaG8Y
-	61xpaky0dVuSvMHFnjfsd6fXwQpYcGzpLWEHQPqxphqj6FFCbXlt6UiTKcDSPD26dFkh
-	j5Awjjb0FMirGnjhrODvBMchWvJKRJDX8E0dmvFRXUAXjxCvoqiRXdAes3wH63J6SesF
-	xhlfj2XcE7iT9NIn9gQi0t8WjoJVJw5joCkRhsx4c1THt+JDWrpwfAapCCeQMQsvCOKj
-	XD4w==
+	bh=mDLjWwIfdVpcg0j2bHr5I8O1kAdvIdjycQvHkqMikqs=;
+	b=YF3PeKzuePD96Ht3BRh0E50Eg9MeGnk4K7CezvZR5L13fOon1q3HLYSRbHNNegWTuL
+	ODAHs71NczoTECmPZEtCbPF+0GJcIIUF6/mVa6BtwDQKsjz37OwUyU0EdW/5JIHyN3Ef
+	f4pfpsLX34S6vy4MGYVjxuIq7Q1cnYmsUZ0dlvJB/Jq75vAhBQNZJ18QUv2ztUjmeSe/
+	iZPZCmuOhOr0MDRwX6N4kg6nY2kLT8FP0gLbTnXviffTcnlk6KCw2nbuYVsjeZrGn5rd
+	evbwHn1AVgaZ7Q+X8xUrcxYYV8rV8eqAglpUnAcuNXPw+T40j5A2GDu44mQwwXly2JlA
+	4NkA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=wJwLV3JJRITdVgWXacnPfiphMJeaWy0zEF8uFIak3sg=;
-	b=OmyAQpiI2lSvlD28YQFKB3sM8pVkqs4/GUFsmWWY8gKlAMFCeFKIGnzUY3XHlqye2v
-	WmkV1o9xLmXXjEQo6T/sCseM6v45oiKfDl7Pk111FVvd3+XGg3OwGDSDGVzvLcnzOG39
-	lIC2dniRtkD6KatX5kmiZ0YuYQwiYPaSO0cbvqMveYUkwKuZZSowqInEHgTRq4f81Pbs
-	vH+JZ2LjO8x4UKnduz9e/8wyuL3/3WIChyzadIUwHKR3OKCel0s3EyYiZ8gDqXgl/WXb
-	FWnzfkGI8STAon09dJAwQYeDksjTW2wQFQrj8YQI7ula+5/mFvwhtejJpOKQI1pu7igS
-	qELA==
-X-Gm-Message-State: AIVw112J3Np5XrobYMDlbWZXqjniJaENuvrsS9CQhuYIxU0pa/OzlftT
-	chpZRdLSZftBrYUs
-X-Received: by 10.98.28.71 with SMTP id c68mr827379pfc.116.1500347443736;
-	Mon, 17 Jul 2017 20:10:43 -0700 (PDT)
+	bh=mDLjWwIfdVpcg0j2bHr5I8O1kAdvIdjycQvHkqMikqs=;
+	b=KHwyfUrRuxggsG0+L8TCLmRh5yCkHjzgPMrOVPGzvb/BblEO6fZFxx/yaUqpaVUVHU
+	JNEm/DHY9irrpP0hcJWoAk7USXeqFQPd2LbY9y7Mpxy3I+2n7nBwGVOq6VNu48ZJPXhG
+	6drVCM5w1Ag97BzJetD0Qni20KyzfZIoBXdhefVsmXl9Y3uBNk3icYqCrYj6qI+F3KA6
+	YZ/X8BISD3io0Yg4HToHqrlNUvts6VGOnQ6+8ui41NPb4rbdp22PpIvx8coV7w0LfiIK
+	MYcS6lnElKIuATqln6SpicQASGZ/UikS6NYAEdYzv7R124TsGIOTMu8PHKbZePcck7b9
+	6beQ==
+X-Gm-Message-State: AIVw110jke+V808jsG1C7C4eh8/T5RO+u68PZgRJ5e1HZdY/zRsJ1uhG
+	mCkCe78dNRglDyiS
+X-Received: by 10.101.90.135 with SMTP id c7mr790991pgt.168.1500347446746;
+	Mon, 17 Jul 2017 20:10:46 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	w85sm1086674pfj.115.2017.07.17.20.10.42
+	w85sm1086674pfj.115.2017.07.17.20.10.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jul 2017 20:10:10 -0700
-Message-Id: <20170718031013.44536-14-raj.khem@gmail.com>
+Date: Mon, 17 Jul 2017 20:10:12 -0700
+Message-Id: <20170718031013.44536-16-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
 In-Reply-To: <20170718031013.44536-1-raj.khem@gmail.com>
 References: <20170718031013.44536-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 14/17] nicstat: Fix build on musl/x86_64
+Subject: [meta-oe][PATCH 16/17] lm_sensors: Fix build on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,72 +56,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 03:10:42 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 03:10:46 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...tat.c-Do-not-define-uint64_t-and-uint32_t.patch | 37 ++++++++++++++++++++++
- meta-oe/recipes-extended/nicstat/nicstat_1.95.bb   |  4 ++-
- 2 files changed, 40 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
+ ...-limit-sys-io.h-header-include-to-just-gl.patch | 88 ++++++++++++++++++++++
+ .../recipes-support/lm_sensors/lmsensors_3.4.0.bb  |  6 ++
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
 
-diff --git a/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch b/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch b/meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
 new file mode 100644
-index 000000000..a208f97eb
+index 000000000..fb3878dc3
 --- /dev/null
-+++ b/meta-oe/recipes-extended/nicstat/nicstat/0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch
-@@ -0,0 +1,37 @@
-+From 52590fbf735cef3fec85a042458aa89a02c52b57 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors/0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch
+@@ -0,0 +1,88 @@
++From 727524453f115ddc05109e9bbb3d0e60a7db9185 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 15 Jul 2017 11:33:12 -0700
-+Subject: [PATCH] nicstat.c: Do not define uint64_t and uint32_t
++Date: Sun, 16 Jul 2017 15:05:50 -0700
++Subject: [PATCH] prog: Do not limit sys/io.h header include to just glibc
 +
-+Use the defines from platform
++musl provides it too.
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+
 +---
-+ nicstat.c | 3 +--
-+ 1 file changed, 1 insertion(+), 2 deletions(-)
++ prog/dump/isadump.c | 6 ------
++ prog/dump/isaset.c  | 6 ------
++ prog/dump/superio.c | 5 -----
++ prog/dump/util.c    | 5 -----
++ 4 files changed, 22 deletions(-)
 +
-+diff --git a/nicstat.c b/nicstat.c
-+index 83ad557..2a6e0c1 100644
-+--- a/nicstat.c
-++++ b/nicstat.c
-+@@ -32,6 +32,7 @@
++diff --git a/prog/dump/isadump.c b/prog/dump/isadump.c
++index e0e6f00..8794537 100644
++--- a/prog/dump/isadump.c
+++++ b/prog/dump/isadump.c
++@@ -36,13 +36,7 @@
++ #include "util.h"
++ #include "superio.h"
 + 
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#include <stdint.h>
-+ #include <unistd.h>
++-
++-/* To keep glibc2 happy */
++-#if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ >= 0
++ #include <sys/io.h>
++-#else
++-#include <asm/io.h>
++-#endif
++ 
++ #ifdef __powerpc__
++ unsigned long isa_io_base = 0; /* XXX for now */
++diff --git a/prog/dump/isaset.c b/prog/dump/isaset.c
++index e743755..85a4f64 100644
++--- a/prog/dump/isaset.c
+++++ b/prog/dump/isaset.c
++@@ -32,13 +32,7 @@
 + #include <string.h>
-+ #include <ctype.h>
-+@@ -88,8 +89,6 @@
-+ #define	PROC_NET_BUFSIZ		(128 * 1024)
-+ #define	PROC_UPTIME		"/proc/uptime"
-+ /* Needs to be fixed if not built under ILP32 */
-+-typedef unsigned long long	uint64_t;
-+-typedef unsigned int		uint32_t;
-+ extern char *optarg;
-+ extern int optind, opterr, optopt;
-+ #endif /* OS_LINUX */
++ #include "util.h"
++ 
++-
++-/* To keep glibc2 happy */
++-#if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ >= 0
++ #include <sys/io.h>
++-#else
++-#include <asm/io.h>
++-#endif
++ 
++ #ifdef __powerpc__
++ unsigned long isa_io_base = 0; /* XXX for now */
++diff --git a/prog/dump/superio.c b/prog/dump/superio.c
++index 64ef27b..906fe55 100644
++--- a/prog/dump/superio.c
+++++ b/prog/dump/superio.c
++@@ -20,12 +20,7 @@
++ */
++ 
++ #include <stdlib.h>
++-
++-#if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ >= 0
++ #include <sys/io.h>
++-#else
++-#include <asm/io.h>
++-#endif
++ 
++ #include "superio.h"
++ 
++diff --git a/prog/dump/util.c b/prog/dump/util.c
++index 874c1b9..197fa64 100644
++--- a/prog/dump/util.c
+++++ b/prog/dump/util.c
++@@ -11,12 +11,7 @@
++ #include <stdio.h>
++ #include "util.h"
++ 
++-/* To keep glibc2 happy */
++-#if defined(__GLIBC__) && __GLIBC__ == 2 && __GLIBC_MINOR__ >= 0
++ #include <sys/io.h>
++-#else
++-#include <asm/io.h>
++-#endif
++ 
++ /* Return 1 if we should continue, 0 if we should abort */
++ int user_ack(int def)
 +-- 
 +2.13.3
 +
-diff --git a/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
-index 5126a31cd..3875f0f60 100644
---- a/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
-+++ b/meta-oe/recipes-extended/nicstat/nicstat_1.95.bb
-@@ -5,7 +5,9 @@ HOMEPAGE = "http://nicstat.sourceforge.net"
- LICENSE = "Artistic-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=b4a94da2a1f918b217ef5156634fc9e0"
+diff --git a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+index dbc05a898..454a69f40 100644
+--- a/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
++++ b/meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+@@ -11,6 +11,7 @@ SRC_URI = "https://github.com/groeck/lm-sensors/archive/V3-4-0.tar.gz \
+            file://fancontrol.init \
+            file://sensord.init \
+            file://0001-lmsensors-sensors-detect-print-a-special-message-whe.patch \
++           file://0001-prog-Do-not-limit-sys-io.h-header-include-to-just-gl.patch \
+ "
+ SRC_URI[md5sum] = "1e9f117cbfa11be1955adc96df71eadb"
+ SRC_URI[sha256sum] = "e334c1c2b06f7290e3e66bdae330a5d36054701ffd47a5dde7a06f9a7402cb4e"
+@@ -37,6 +38,11 @@ EXTRA_OEMAKE = 'EXLDFLAGS="${LDFLAGS}" \
+         CC="${CC}" AR="${AR}"'
  
--SRC_URI = "http://softlayer-sng.dl.sourceforge.net/project/${BPN}/${BP}.tar.gz"
-+SRC_URI = "http://softlayer-sng.dl.sourceforge.net/project/${BPN}/${BP}.tar.gz \
-+           file://0001-nicstat.c-Do-not-define-uint64_t-and-uint32_t.patch \
-+           "
- SRC_URI[md5sum] = "9a0b87bbc670c1e738e5b40c7afd184d"
- SRC_URI[sha256sum] = "c4cc33f8838f4523f27c3d7584eedbe59f4c587f0821612f5ac2201adc18b367"
+ do_compile() {
++    sed -i -e 's:^# \(PROG_EXTRA\):\1:' ${S}/Makefile
++    # Respect LDFLAGS
++    sed -i -e 's/\$(LIBDIR)$/\$(LIBDIR) \$(LDFLAGS)/g' ${S}/Makefile
++    sed -i -e 's/\$(LIBSHSONAME) -o/$(LIBSHSONAME) \$(LDFLAGS) -o/g' \
++                ${S}/lib/Module.mk
+     oe_runmake user PROG_EXTRA="sensors sensord"
+ }
  
 -- 
 2.13.3
