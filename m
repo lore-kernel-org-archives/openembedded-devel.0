@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id D749D65D35
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id B7BD877E8F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 06:09:21 +0000 (UTC)
+	Tue, 18 Jul 2017 06:09:24 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6I69M1U013595
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v6I69PNm023084
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 17 Jul 2017 23:09:22 -0700 (PDT)
+	Mon, 17 Jul 2017 23:09:25 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 17 Jul 2017 23:09:21 -0700
+	Mon, 17 Jul 2017 23:09:24 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 18 Jul 2017 02:09:06 -0400
-Message-ID: <63e072d5cacfefd80116235155c7e7adf59a057a.1500357921.git.hongxu.jia@windriver.com>
+Date: Tue, 18 Jul 2017 02:09:07 -0400
+Message-ID: <d714c13548914fab6bbc4427d6bc1f522c698463.1500357921.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1500357921.git.hongxu.jia@windriver.com>
 References: <cover.1500357921.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 3/9] python3-langtable: add recipe 0.0.37
+Subject: [PATCH 4/9] python3-ntplib: add recipe 0.3.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,43 +32,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 06:09:22 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 06:09:24 -0000
 Content-Type: text/plain
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../python/python3-langtable_0.0.37.bb             | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
+ meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
+diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
 new file mode 100644
-index 0000000..362ca1a
+index 0000000..35440bc
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "langtable is used to guess reasonable defaults for locale,\
-+keyboard, territory"
-+HOMEPAGE = "https://github.com/mike-fabian/langtable/"
-+LICENSE = "GPLv3+"
++++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "This module offers a simple interface to query NTP servers from Python."
 +SECTION = "devel/python"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://ntplib.py;beginline=1;endline=23;md5=afa07338a9595257e94c205c3e72224d"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++SRCNAME = "ntplib"
++SRC_URI[md5sum] = "c7cc8e9b09f40c84819859d70b7784ca"
++SRC_URI[sha256sum] = "c4621b64d50be9461d9bd9a71ba0b4af06fbbf818bbd483752d95c1a4e273ede"
 +
-+S = "${WORKDIR}/git"
-+B = "${S}"
++S = "${WORKDIR}/${SRCNAME}-${PV}"
 +
-+SRCREV = "3f001eef027ba69ef2fdb35c670b7da26b79b5e2"
-+PV = "0.0.37+git${SRCPV}"
-+SRC_URI = "git://github.com/mike-fabian/langtable.git;branch=master \
-+"
-+
-+inherit setuptools3 python3native
-+
-+DISTUTILS_INSTALL_ARGS = "--prefix=${D}/${prefix} \
-+    --install-data=${D}/${datadir}/langtable"
-+
-+FILES_${PN} += "${datadir}/*"
++inherit setuptools3 python3native pypi
 -- 
 2.8.1
 
