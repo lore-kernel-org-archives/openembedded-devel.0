@@ -1,45 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C11977E88
+Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id C4DDF77E8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:10:23 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id z1so1059196pgs.0
+	Tue, 18 Jul 2017 03:10:25 +0000 (UTC)
+Received: by mail-pg0-f49.google.com with SMTP id v190so4683561pgv.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 20:10:25 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=04lNUDGZAQTA8w+18V3nh8+A8HJFiR7EyKYTMTKjL+o=;
-	b=ZknbnfUNqzIUCx7laeRqZpTmljenlVaugozpnSMr8emdBMVwm19nD4HcKfoxaHdL/R
-	nfJUTFnCcZXbDeeJUCcHIbIUAT9BHja+Ugs53MZ6S7nJDEEkfTTXK4ITD29Q5XEOuA7I
-	eELCYMesD/aPWdfk5ERdJr6Cdpnh6qf74/7dNudOh91JZX2kF/2r5dOZQNGIsYCnf0h6
-	BzDcv8oWL/DlVk5FKaOH3uI4tsbBoVTkGdBSljJqV/tNvT83CI7cqYACELYEZOuSLMh+
-	/JxRR9E976IfX7nOoXENDBUwVah6ZwRM3+1wvmP3XMNpNoTn2SlSrYgSkn4VPMphjFhS
-	m15A==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=Xd0HbgPBNvXneRsH/4lbPCZvmlen17w3b7t2A6SmIC4=;
+	b=u4fXPRFbSjzTQ5FpPMmJA1vppgMFnW/2M0vWlWB4IqOELG2g44Q/sOY7lZjhCc1aUK
+	yWFDfQ67Y+b1FHVVQBXckK1k+NYWthPu2+8v7KQStjcoR1M7omTR7WUbmV/cS0JrGKTz
+	w8wv10hOfLXO/t37Xq36LSOjbDXQgmMACeq68JP3uZ/j+TvX/baAhDDrjGmrjUKrdHeY
+	lR5AxErCRpcE5PZ8oselwGI4Atgs96Oi78ggo43uU+i0GXu4Tza7lZDbGy7oRqElC9cR
+	y5UEilKaAda6DqAFAV5yZnLFydIJ7ggE55KK0ZCxGjDzxDvBofAjMvE6ayX61DPzjTbC
+	RhQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=04lNUDGZAQTA8w+18V3nh8+A8HJFiR7EyKYTMTKjL+o=;
-	b=NccGOKjzU0kEm09R2ACss2la0ap1YyQgW5ZXUvRGHQrZrrMDCi+4quqcJmC+LbDK/4
-	A40M8f68JgXr/Q0/mwHnolG39yilVvVGkW/Pl+NQAHkNMUM0aqbeu7UXNK44jl9wCveE
-	ryVecM3CLV2BsApV6v/PboSpSoHPBOPkXtBL1t0i+fahD6C0btRqqpUOxw8r8wD30ZCK
-	zVNUlU1rH0nizLVF81ebtRZPKkoSTeaLkZ3GRKk+c7AU6YWBrpsSGO11zwgk0q8d2bS+
-	hwHpe+8H7q5O2hcgmE1NL4/UrXL583163/OM/cLtQyHGMqHQHUGgcfy0eXBHXbTluYk6
-	OvXw==
-X-Gm-Message-State: AIVw112n9OdN4aVOaxVyGFfnaR8M5+yXFzgitOQRn+ZVJ1tw3UfrN8y8
-	ij0gxYRrlKu0i2uE
-X-Received: by 10.84.143.129 with SMTP id 1mr820513plz.185.1500347425111;
-	Mon, 17 Jul 2017 20:10:25 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=Xd0HbgPBNvXneRsH/4lbPCZvmlen17w3b7t2A6SmIC4=;
+	b=WRagzxbZiGoUfW1uqDBy6C4QKR0Anz8UDPzbiDzUrNcDI8t057QAj7WXrQKHETACiu
+	ReAOSI8TcOnQjKBzfZDWptr90JFuzOOuxH1i5Pl4jMqfK2/xrB7MpktT3KQRW1NwJ/Iw
+	Ihvk6Qxx8tgR61xJ/YQCKzKK++2x+Mqauh5UNuV9S1wSMkd6unre3nR8Lbk10owKlrSi
+	VGJnlVywL32THtuCTdf62hiJBVJWdTioz1E5McV9+2/XbdoK45tpgNwirtPVoBHqG57k
+	HfTAB2gcGBI+6Snz3hSiM4AJ36u2oPzQU83k4eJFw+J1ngJ0eMPMQsMD3tugPEIEWS++
+	xSJg==
+X-Gm-Message-State: AIVw113DsImDIc8qVh5oAG6JC0HorcXf2NSme9J40JHpt9mahXRo0cww
+	Z3nzY4smjAzbzyYi
+X-Received: by 10.84.248.66 with SMTP id e2mr877983pln.118.1500347426420;
+	Mon, 17 Jul 2017 20:10:26 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	w85sm1086674pfj.115.2017.07.17.20.10.23
+	w85sm1086674pfj.115.2017.07.17.20.10.25
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Jul 2017 20:10:24 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:25 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jul 2017 20:09:57 -0700
-Message-Id: <20170718031013.44536-1-raj.khem@gmail.com>
+Date: Mon, 17 Jul 2017 20:09:58 -0700
+Message-Id: <20170718031013.44536-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
-Subject: [meta-networking][PATCH 01/17] igmpproxy: Include missing sys/tupes.h and define _GNU_SOURCE
+In-Reply-To: <20170718031013.44536-1-raj.khem@gmail.com>
+References: <20170718031013.44536-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 02/17] rdate: Define logwtmp if libc != glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,64 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 03:10:24 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 03:10:26 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...xy.h-Include-sys-types.h-for-u_short-u_in.patch | 25 ++++++++++++++++++++++
- .../recipes-daemons/igmpproxy/igmpproxy_0.1.bb     |  5 ++++-
- 2 files changed, 29 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-daemons/igmpproxy/igmpproxy/0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch
+ .../0001-rdate-define-logwtmp-on-libc-glibc.patch  | 40 ++++++++++++++++++++++
+ .../recipes-connectivity/rdate/rdate_1.5.bb        |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-networking/recipes-connectivity/rdate/rdate/0001-rdate-define-logwtmp-on-libc-glibc.patch
 
-diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy/0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch b/meta-networking/recipes-daemons/igmpproxy/igmpproxy/0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch
+diff --git a/meta-networking/recipes-connectivity/rdate/rdate/0001-rdate-define-logwtmp-on-libc-glibc.patch b/meta-networking/recipes-connectivity/rdate/rdate/0001-rdate-define-logwtmp-on-libc-glibc.patch
 new file mode 100644
-index 000000000..82cdc36ac
+index 000000000..08ba2c31e
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/igmpproxy/igmpproxy/0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch
-@@ -0,0 +1,25 @@
-+From a557651a08e21e3c7c7f5eca9f5405f86624903f Mon Sep 17 00:00:00 2001
++++ b/meta-networking/recipes-connectivity/rdate/rdate/0001-rdate-define-logwtmp-on-libc-glibc.patch
+@@ -0,0 +1,40 @@
++From e0c690acfcddd3c3421f6eb0182c54815fd70f8f Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 14 Jul 2017 22:42:51 -0700
-+Subject: [PATCH] src/igmpproxy.h: Include sys/types.h for u_short/u_init
++Date: Fri, 14 Jul 2017 23:21:08 -0700
++Subject: [PATCH] rdate: define logwtmp on libc != glibc
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ src/igmpproxy.h | 1 +
-+ 1 file changed, 1 insertion(+)
++ src/rdate.c | 15 +++++++++++++++
++ 1 file changed, 15 insertions(+)
 +
-+diff --git a/src/igmpproxy.h b/src/igmpproxy.h
-+index 4dabd1c..4454729 100644
-+--- a/src/igmpproxy.h
-++++ b/src/igmpproxy.h
-+@@ -46,6 +46,7 @@
-+ #include <stdbool.h>
++diff --git a/src/rdate.c b/src/rdate.c
++index 943d481..685b1b8 100644
++--- a/src/rdate.c
+++++ b/src/rdate.c
++@@ -41,7 +41,22 @@ static int print_mode = 0;		// display the time
++ static int timeout = 10;		// timeout for each connection attempt
++ static char *service = DEFAULT_SERVICE;
 + 
-+ #include <sys/socket.h>
-++#include <sys/types.h>
-+ #include <sys/un.h>
-+ #include <sys/time.h>
-+ #include <sys/ioctl.h>
+++#ifndef __GLIBC__
+++static void logwtmp(const char * line, const char * name, const char * host)
+++{
+++    struct utmp u;
+++    memset(&u, 0, sizeof(u));
+++
+++    u.ut_pid = getpid();
+++    u.ut_type = name[0] ? USER_PROCESS : DEAD_PROCESS;
+++    strncpy(u.ut_line, line, sizeof(u.ut_line));
+++    strncpy(u.ut_name, name, sizeof(u.ut_name));
+++    strncpy(u.ut_host, host, sizeof(u.ut_host));
+++    gettimeofday(&(u.ut_tv), NULL);
++ 
+++    updwtmp(_PATH_WTMP, &u);
+++}
+++#endif /* __GLIBC__ */
++ 
++ // Returns string from address info pointer
++ static char*
 +-- 
 +2.13.3
 +
-diff --git a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
-index c3d2f1afa..5424dc455 100644
---- a/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
-+++ b/meta-networking/recipes-daemons/igmpproxy/igmpproxy_0.1.bb
-@@ -5,9 +5,12 @@ LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=1e995e2799bb0d27d63069b97f805420"
+diff --git a/meta-networking/recipes-connectivity/rdate/rdate_1.5.bb b/meta-networking/recipes-connectivity/rdate/rdate_1.5.bb
+index b3af9275e..cd4db12c0 100644
+--- a/meta-networking/recipes-connectivity/rdate/rdate_1.5.bb
++++ b/meta-networking/recipes-connectivity/rdate/rdate_1.5.bb
+@@ -13,6 +13,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- SRC_URI = "http://sourceforge.net/projects/igmpproxy/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
--    "
-+           file://0001-src-igmpproxy.h-Include-sys-types.h-for-u_short-u_in.patch \
-+           "
- 
- SRC_URI[md5sum] = "c56f41ec195bc1fe016369bf74efc5a1"
- SRC_URI[sha256sum] = "ee18ff3d8c3ae3a29dccb7e5eedf332337330020168bd95a11cece8d7d7ee6ae"
- 
- inherit autotools pkgconfig
-+
-+CFLAGS += "-D_GNU_SOURCE"
+ SRC_URI = "https://www.aelius.com/njh/${BPN}/${BP}.tar.gz \
+            file://0001-src-rdate-Fix-printf-format-errors.patch \
++           file://0001-rdate-define-logwtmp-on-libc-glibc.patch \
+            "
+ SRC_URI[md5sum] = "0a4f612480777fdf25264ac03c57eae6"
+ SRC_URI[sha256sum] = "6e800053eaac2b21ff4486ec42f0aca7214941c7e5fceedd593fa0be99b9227d"
 -- 
 2.13.3
 
