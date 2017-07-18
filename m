@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id F22FA77FF9
+Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 5420478072
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:10:39 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id q85so1025885pfq.2
+	Tue, 18 Jul 2017 03:10:41 +0000 (UTC)
+Received: by mail-pg0-f47.google.com with SMTP id u5so4582615pgq.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 Jul 2017 20:10:41 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9P+QarLBiwQgK28XhRFvK52lgfe5PVbnTod0cP/eOq8=;
-	b=ACfJG0v2+PlwKcDvMSB5lz8PbBb2qiwc04Ocg7P1Y/AYf6lTCmbGsce3UNG+zUwlcE
-	8ifs9BWCpUFH9MN5tgeykvyj9Qg/BNx/t71ylI3UDMSgxfZyLCK6UUwhUr8Z22Wtfdyc
-	6e4b5dQg6Y29zyIQOhNU9m7373EPujvqmo3ZdAGL8NEIT2e8IalCip7SuD02Qb2ttlbF
-	lJ2RgMHgKct+v6FnrT2BGTc/S9OpHzohClzmEUeEurI98pVsXUJvCoP4AnYLRPeXjQEb
-	a5VrwdXGttsgMc/kNsX9AuO9aGmLQM7eecS5xyBQmGpV2LvdFJoS/txdoeBGrqRbYjbM
-	9V6g==
+	bh=eLOGSaepGFT43n48dchFA1gL3lPNCwpfzqWME62hnTs=;
+	b=moysx7wes4lwquuuCkqYMPGoZBNwZcnRocB6jBlDGIqenzsVIsicCtxh7KW8zLw6l6
+	A4HBOppFkffUriBxtTuATLGk6gY9wmLj0/hrXTgGOUidOgzLWIPp7mVHaXRE5gipqc9+
+	p/KgZRpgUPhex7/rSTqN1N+7ukrx9dqiquDMd0aYWxAChBOJ5TgCa+g8l5BOSMKDWopA
+	U50PD58M1Vk6/EgZfWtP1alceS05MWb1e6rUnjq7qQwJHIkWGqqlKSglNy4zXmEyTNUb
+	zn8+mbhlGEPdEh9UabrQtEgfxswIWZfona7jOek12wmSov0SNnuPUn1ibUFFq3EeagES
+	Uu4A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9P+QarLBiwQgK28XhRFvK52lgfe5PVbnTod0cP/eOq8=;
-	b=jzmrRuCiiAkMTnVcNT6bCLzZRpYeqJ+Sp+bLAZ7xbl5SVHCbQsaK6pvQl02CIMA9ip
-	Y5SYr7Z+Oqt4YcozldCBKG+4tBBWvhMoX45y1mbiJeYd7IFa8Lhm5SEhPjwP4gWO1cUH
-	Ram98xpc2OLoVqQ9NMlt/0Dzh2+v3B+RHvDhOVZBFj6qhG9cV/rFa6Xgbozow96qyE20
-	Cpw21Dvza8M/T643+I697Xu4+LJeWZZg3pVpZVdIQx/zbn9CE/lNy0unJDI08EC/lyKU
-	2mpTrl8aTamR2dXSgy+oNZUc2DjmXFenrJeoB63Qq0sXnMYdAV/WsBrQ2ouypV6HvcgU
-	bftw==
-X-Gm-Message-State: AIVw113XWZU//za/gsfYLUhAX8VV4NKyx/vyc0ZpjFTLI6VDAxvnu1J3
-	t2iyxuxdX/Y2ddKe
-X-Received: by 10.99.150.2 with SMTP id c2mr791053pge.166.1500347441042;
-	Mon, 17 Jul 2017 20:10:41 -0700 (PDT)
+	bh=eLOGSaepGFT43n48dchFA1gL3lPNCwpfzqWME62hnTs=;
+	b=QwapFgIl3KTbXH3CzBbg42LIN8fXubr5Ycjk/ECuVr31AApZsLwvKU5gso3s0CyjQe
+	OA77gdP/goihWLq+RHcKCJlDv6gNsgqaKGmca/F3z3pm+c1+brBTdyPcroq/p4SW4YjO
+	QEcNbeS80F0dPhc+boxZ9WvnxIySeJ+ZE7QJbvzNQ0xW/tDD1/slsTGKHC1B8KLGdE8B
+	zaoRGbfRjjOSu8fpRkPlWfwnfkeJIiBfem4k8Q1iC9sQrsiseJJLY64BRPm4/UGuB3am
+	TAPeOSJSMmXWV1hsV47BCcCwfxcbGMrXHezf8mNquewkMZ9dW/zQ3iWTYl5TLwaV6Q5u
+	SBPw==
+X-Gm-Message-State: AIVw111pM83m38KxIej315kj0Yzrncvploror7YQgO3iIMhbBgYLgbsX
+	/RyjRGkrFZ3NjNvw
+X-Received: by 10.99.66.1 with SMTP id p1mr803742pga.120.1500347442384;
+	Mon, 17 Jul 2017 20:10:42 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	w85sm1086674pfj.115.2017.07.17.20.10.39
+	w85sm1086674pfj.115.2017.07.17.20.10.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 17 Jul 2017 20:10:40 -0700 (PDT)
+	Mon, 17 Jul 2017 20:10:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 17 Jul 2017 20:10:08 -0700
-Message-Id: <20170718031013.44536-12-raj.khem@gmail.com>
+Date: Mon, 17 Jul 2017 20:10:09 -0700
+Message-Id: <20170718031013.44536-13-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
 In-Reply-To: <20170718031013.44536-1-raj.khem@gmail.com>
 References: <20170718031013.44536-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 12/17] sessreg: Fix build on musl
+Subject: [meta-oe][PATCH 13/17] phonet-utils: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,27 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 03:10:40 -0000
-
-musl does not define _WTMPX_FILE or _UTMPX_FILE
-use versions without 'X'
+X-List-Received-Date: Tue, 18 Jul 2017 03:10:42 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb | 3 +++
- 1 file changed, 3 insertions(+)
+ .../0001-Include-limits.h-for-PATH_MAX.patch       | 25 ++++++++++++++++++++++
+ .../phonet-utils/phonet-utils_git.bb               |  4 +++-
+ 2 files changed, 28 insertions(+), 1 deletion(-)
+ create mode 100644 meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
 
-diff --git a/meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb b/meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb
-index 2e25b7d91..3885d613d 100644
---- a/meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb
-+++ b/meta-oe/recipes-graphics/xorg-app/sessreg_1.1.0.bb
-@@ -6,3 +6,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d938a70c8280c265a1ccd2954365d185"
- SRC_URI += "file://0001-Makefile.am-Error-Fix.patch"
- SRC_URI[md5sum] = "e238c89dabc566e1835e1ecb61b605b9"
- SRC_URI[sha256sum] = "551177657835e0902b5eee7b19713035beaa1581bbd3c6506baa553e751e017c"
+diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+new file mode 100644
+index 000000000..8bb7e5a18
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils/0001-Include-limits.h-for-PATH_MAX.patch
+@@ -0,0 +1,25 @@
++From f7ad9a4471cee2324f216a0d82ba8097ec746c56 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 15 Jul 2017 11:48:12 -0700
++Subject: [PATCH] Include limits.h for PATH_MAX
 +
-+CFLAGS_append_libc-musl = " -D_WTMPX_FILE=WTMP_FILE -D_PATH_WTMPX=_PATH_WTMP -D_UTMPX_FILE=UTMP_FILE -D_PATH_UTMPX=_PATH_UTMP "
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ src/pnstat.c | 1 +
++ 1 file changed, 1 insertion(+)
 +
++diff --git a/src/pnstat.c b/src/pnstat.c
++index 661a5bc..76068e6 100644
++--- a/src/pnstat.c
+++++ b/src/pnstat.c
++@@ -35,6 +35,7 @@
++ #include <dirent.h>
++ #include <unistd.h>
++ #include <netinet/tcp.h>
+++#include <limits.h>
++ 
++ struct fd
++ {
++-- 
++2.13.3
++
+diff --git a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
+index 558996391..3c599950f 100644
+--- a/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
++++ b/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb
+@@ -2,7 +2,9 @@ SUMMARY = "This small package provides a few command line tools for Linux Phonet
+ HOMEPAGE = ""
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+-SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master"
++SRC_URI = "git://gitorious.org/meego-cellular/phonet-utils.git;branch=master \
++           file://0001-Include-limits.h-for-PATH_MAX.patch \
++           "
+ PR = "r2"
+ S = "${WORKDIR}/git"
+ SRCREV = "4acfa720fd37d178a048fc2be17180137d4a70ea"
 -- 
 2.13.3
 
