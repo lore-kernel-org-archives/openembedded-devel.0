@@ -1,49 +1,21 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f67.google.com (mail-lf0-f67.google.com
-	[209.85.215.67])
-	by mail.openembedded.org (Postfix) with ESMTP id CCD1378088
+Return-Path: <daniela.plascencia@linux.intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id BF5F777E06
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 10:06:00 +0000 (UTC)
-Received: by mail-lf0-f67.google.com with SMTP id w198so706597lff.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 Jul 2017 03:06:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ga++qS2FK3ryOI8tINjck3cpG8pzh3kBaZ2HNHm+bOw=;
-	b=NpE2Ns79axOsQW+mTJ50MzaoNzIuUNeP9dgTXGGNH0OTxT41+9Dg3QmHKD4+e/WYIq
-	r1CFmVsurdE/GDtkroYJv1IM/V5UUEHMzbE7qHfkgKoXeRt1MV9P8460a/M+/5ZIp3al
-	n8MUUSDUJDHcDuyClkynyPXE4+PrnswR7DVJJkP9BPqJbbhO3LoHLSNoFy8cE78ms1FH
-	Z+YRcD5L4TCHiOws98kv/gjA2VhclRgZNLTp4QPAOKIj3lvB6+44zQrjOM7hhsyvjB+Q
-	zkciumxrd+rbefFNsiZTDfmXTIM6ANyKLjm084aNPG4Mn/2Z8/GQuhcRb5AVKzSubGKi
-	hX/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ga++qS2FK3ryOI8tINjck3cpG8pzh3kBaZ2HNHm+bOw=;
-	b=sEd7j8bgUyNghbfMRkRser7nMwaBU2uwqnht/TyOrCW03Sx9aGbmVglDF47JVzYxFr
-	n+NaytHLb5Tez87nk3b6yZMarIMCCtsj2YZcFhyCWKOYTdWeayZRIhVqLR1srl58jjop
-	/QIlGlTMijsLjOBfJaiUKOHYfLpja+L2iW0WzmGHrZcUZ7+U7P6lpu0E+KhqngaM9DYC
-	POm3HQLKHk/qzROU3E302B8W6qk6pPTTMdENQtP8IxdtiPEGhKX/JIWlWrRYcQ4ELdUi
-	dVecDUsbKYByaIBGtnIV/HCtLSz5JbYNs6MTTR3Z0cV34t1R0GkoMSBgACeBqUFjE/yO
-	tlnQ==
-X-Gm-Message-State: AIVw110k/gGaco5D2MHRFDQGMC5/fJb0qoaMVuOOoQnq2ge2Uxm9h9RF
-	laVvt6b81PfF7ZjC0Tc=
-X-Received: by 10.25.221.77 with SMTP id u74mr377868lfg.29.1500372361422;
-	Tue, 18 Jul 2017 03:06:01 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id j12sm455132lfh.23.2017.07.18.03.06.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 18 Jul 2017 03:06:00 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+	Tue, 18 Jul 2017 10:30:54 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by orsmga104.jf.intel.com with ESMTP; 18 Jul 2017 03:30:56 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.40,377,1496127600"; d="scan'208";a="1196732044"
+Received: from yctb04.ostc.intel.com ([10.54.69.58])
+	by fmsmga002.fm.intel.com with ESMTP; 18 Jul 2017 03:30:55 -0700
+From: daniela.plascencia@linux.intel.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 Jul 2017 12:05:41 +0200
-Message-Id: <20170718100541.2916-4-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.13.2
-In-Reply-To: <20170718100541.2916-1-ricardo.ribalda@gmail.com>
-References: <20170718100541.2916-1-ricardo.ribalda@gmail.com>
-Subject: [meta-clang][PATCH] llvm-config: Fix implementation of --libs flag
+Date: Tue, 18 Jul 2017 03:30:54 -0700
+Message-Id: <20170718103054.6690-1-daniela.plascencia@linux.intel.com>
+X-Mailer: git-send-email 2.12.3
+Cc: Daniela Plascencia <daniela.plascencia@linux.intel.com>
+Subject: [meta-python][PATCH] python-unidiff: adds Python3 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,43 +28,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 Jul 2017 10:06:02 -0000
+X-List-Received-Date: Tue, 18 Jul 2017 10:30:54 -0000
 
-llvm-config is called by mesa with the following parameters:
+From: Daniela Plascencia <daniela.plascencia@linux.intel.com>
 
-llvm-config --libs liba libb libc libd .....
+Extend the recipe for Python3 support.
 
-This result in an invalid call of llvm config:
-
-llvm-config --libs
-llvm-config liba
-llvm-config libb
-llvm-config libc
-....
-
-Fix this use.
-
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+Signed-off-by: Daniela Plascencia <daniela.plascencia@linux.intel.com>
 ---
- recipes-devtools/clang/llvm-common/llvm-config | 4 ++++
- 1 file changed, 4 insertions(+)
+ meta-python/recipes-devtools/python/python-unidiff.inc       |  9 +++++++++
+ meta-python/recipes-devtools/python/python-unidiff_0.5.4.bb  | 11 ++---------
+ meta-python/recipes-devtools/python/python3-unidiff_0.5.4.bb |  2 ++
+ 3 files changed, 13 insertions(+), 9 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-unidiff.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-unidiff_0.5.4.bb
 
-diff --git a/recipes-devtools/clang/llvm-common/llvm-config b/recipes-devtools/clang/llvm-common/llvm-config
-index 9fb14cb74cdc..4462896af6e2 100644
---- a/recipes-devtools/clang/llvm-common/llvm-config
-+++ b/recipes-devtools/clang/llvm-common/llvm-config
-@@ -14,6 +14,10 @@ if [[ $# == 0 ]]; then
-   exec "$NEXT_LLVM_CONFIG"
- fi
- 
-+if [[ $1 == "--libs" ]]; then
-+  exec "$NEXT_LLVM_CONFIG" $@
-+fi
+diff --git a/meta-python/recipes-devtools/python/python-unidiff.inc b/meta-python/recipes-devtools/python/python-unidiff.inc
+new file mode 100644
+index 000000000..040255091
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-unidiff.inc
+@@ -0,0 +1,9 @@
++SUMMARY = "Unified diff parsing/metadata extraction library"
++HOMEPAGE = "http://github.com/matiasb/python-unidiff"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
 +
- for arg in "$@"; do
-   case "$arg" in
-     --cppflags)
++SRC_URI[md5sum] = "c8099edf89d2e3bac16123766625a38b"
++SRC_URI[sha256sum] = "a7baf71846a68c5305a7d6005dfb5eca8798f13861176355a285cbda3206824d"
++
++inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-unidiff_0.5.4.bb b/meta-python/recipes-devtools/python/python-unidiff_0.5.4.bb
+index ceb80bdd3..bdb3d27f9 100644
+--- a/meta-python/recipes-devtools/python/python-unidiff_0.5.4.bb
++++ b/meta-python/recipes-devtools/python/python-unidiff_0.5.4.bb
+@@ -1,9 +1,2 @@
+-SUMMARY = "Unified diff parsing/metadata extraction library"
+-HOMEPAGE = "http://github.com/matiasb/python-unidiff"
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=4c434b08ef42fea235bb019b5e5a97b3"
+-
+-SRC_URI[md5sum] = "c8099edf89d2e3bac16123766625a38b"
+-SRC_URI[sha256sum] = "a7baf71846a68c5305a7d6005dfb5eca8798f13861176355a285cbda3206824d"
+-
+-inherit  pypi setuptools
++require python-unidiff.inc
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-unidiff_0.5.4.bb b/meta-python/recipes-devtools/python/python3-unidiff_0.5.4.bb
+new file mode 100644
+index 000000000..0ddc7e2f2
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-unidiff_0.5.4.bb
+@@ -0,0 +1,2 @@
++require python-unidiff.inc
++inherit setuptools3
 -- 
-2.13.2
+2.12.3
 
 
