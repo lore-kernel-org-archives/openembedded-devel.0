@@ -1,22 +1,46 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id A2A2378301
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AB3E782EE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jul 2017 15:33:50 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v6JFXpDZ030713
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Wed, 19 Jul 2017 17:33:51 +0200
-Received: from dev.sbt.siemens.com ([139.16.24.9])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v6JFXoJ3016027;
-	Wed, 19 Jul 2017 17:33:50 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
+	Wed, 19 Jul 2017 15:41:44 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id c23so289994pfe.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 Jul 2017 08:41:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=dRqogqce+C3rgSBychEIO450KXe3qlIgs90GI6ivtmM=;
+	b=WspGSxMceXxzIhjM0M0fyGjssuM1zCpCqcpDa+cTAfquzMrPhaholnXmtov9212Xzg
+	fGaYxblbBdD6lHDAnR4/qSS3NvvzHP4X+xe07PQR1RgHyYaiHD+GwspmZ4cekuePUpkD
+	06ANszk6GaFqLfIdsYVu1aAbJwW2d1TzuVJ3Rz+4ZNsBi2EgNoRyTp2+pka+3t6iQvEU
+	iT/SzbmD9mfBsMGUBu0Orv7xAvvBW1oCg6JYvFT9GkWhH1EGGpM8lWoK9PY5WNdz+FzA
+	w0NPEKERdjkKZg9IjeiMLq0OxUglAV8UgvGTLX+ZWdMyR0rAlPAoGsGoAaAy6h2Tirfp
+	J9ww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dRqogqce+C3rgSBychEIO450KXe3qlIgs90GI6ivtmM=;
+	b=ZH7VisCg+zQ2GyVWLZDWI7gTkZdWn0dXX5EI+Jhw8hb8+seMvS2JQLs8VkTOA73RDV
+	uZd5V+hCJVYJKiPsrxmlTal70iSE4hCNHp/mEMH4bVuf6Dv9w6OtOiZvuTsNTXUX2OCI
+	lT8D46P380LYN+J5O1gjgTnVkTJ6sygZ6iz66MdcKf0vQHXEbJrOajDMWLRmDp2qbuTj
+	f4y+kYQXzKo5b6yccPeJbjCZyhSfYoMAhxQZS+VjUa/KqBWBbc5blmvBsN0nTjiuf4o0
+	Snv7N7+XH0lTeN70NkY22k6YiTAQBnhLEayH1/gEoYxN009wm+6AluK5jtkFcV3a6ZNw
+	PZqA==
+X-Gm-Message-State: AIVw111EzPZl7vgkX0Tg308HQ4Ba2IDIULoR6/+jwY6z8n3oPewKPEw8
+	WeQaMZth+mpl3nTu
+X-Received: by 10.99.166.17 with SMTP id t17mr558150pge.60.1500478906030;
+	Wed, 19 Jul 2017 08:41:46 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
+	by smtp.gmail.com with ESMTPSA id
+	b85sm494845pfe.94.2017.07.19.08.41.44
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 19 Jul 2017 08:41:45 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 Jul 2017 17:33:46 +0200
-Message-Id: <1500478426-18392-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Cc: Pascal Bach <pascal.bach@nextrem.ch>
-Subject: [meta-oe][PATCH] python-requests, python3-requests: update to 2.28.1
+Date: Wed, 19 Jul 2017 08:41:29 -0700
+Message-Id: <20170719154132.20556-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.3
+Subject: [meta-networking][PATCH 1/4] ippool: Fix build errors found with hardening flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,77 +53,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 Jul 2017 15:33:51 -0000
+X-List-Received-Date: Wed, 19 Jul 2017 15:41:45 -0000
 
-From: Pascal Bach <pascal.bach@nextrem.ch>
-
-The copyright year changed in the license file.
-
-Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-requests.inc        | 10 +++++++---
- .../{python-requests_2.13.0.bb => python-requests_2.18.1.bb}   |  2 +-
- .../{python3-requests_2.13.0.bb => python3-requests_2.18.1.bb} |  2 +-
- 3 files changed, 9 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python-requests_2.13.0.bb => python-requests_2.18.1.bb} (73%)
- rename meta-python/recipes-devtools/python/{python3-requests_2.13.0.bb => python3-requests_2.18.1.bb} (81%)
+ ...timer-Check-for-return-value-of-write-API.patch | 28 ++++++++++++++++++++++
+ .../recipes-daemons/ippool/ippool_1.3.bb           | 22 ++++++++---------
+ 2 files changed, 39 insertions(+), 11 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/ippool/ippool/0001-usl_timer-Check-for-return-value-of-write-API.patch
 
-diff --git a/meta-python/recipes-devtools/python/python-requests.inc b/meta-python/recipes-devtools/python/python-requests.inc
-index b66f66e..81819bf 100644
---- a/meta-python/recipes-devtools/python/python-requests.inc
-+++ b/meta-python/recipes-devtools/python/python-requests.inc
-@@ -1,10 +1,12 @@
- DESCRIPTION = "Python HTTP for Humans."
- HOMEPAGE = "http://python-requests.org"
- LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=d9bb3515869c0f426cb8441c899ae7f5"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=979d6a23b143e13ea0e5e3aa81248820"
- 
--SRC_URI[md5sum] = "921ec6b48f2ddafc8bb6160957baf444"
--SRC_URI[sha256sum] = "5722cd09762faa01276230270ff16af7acf7c5c45d623868d9ba116f15791ce8"
-+SRC_URI[md5sum] = "40f723ed01dddeaf990d0609d073f021"
-+SRC_URI[sha256sum] = "c6f3bdf4a4323ac7b45d01e04a6f6c20e32a052cd04de81e05103abc049ad9b9"
+diff --git a/meta-networking/recipes-daemons/ippool/ippool/0001-usl_timer-Check-for-return-value-of-write-API.patch b/meta-networking/recipes-daemons/ippool/ippool/0001-usl_timer-Check-for-return-value-of-write-API.patch
+new file mode 100644
+index 000000000..6fb7cc5c4
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ippool/ippool/0001-usl_timer-Check-for-return-value-of-write-API.patch
+@@ -0,0 +1,28 @@
++From 5d7f20c045b3c74dad2c53d65e30bd4840250082 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 27 Jun 2017 15:17:19 -0700
++Subject: [PATCH] usl_timer: Check for return value of write() API
 +
-+inherit pypi
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ usl/usl_timer.c | 4 +++-
++ 1 file changed, 3 insertions(+), 1 deletion(-)
++
++diff --git a/usl/usl_timer.c b/usl/usl_timer.c
++index fda752b..d8414a6 100644
++--- a/usl/usl_timer.c
+++++ b/usl/usl_timer.c
++@@ -94,7 +94,9 @@ void usl_timer_tick(void)
++ 
++ 	if (!usl_tick_pending) {
++ 		usl_tick_pending = 1;
++-		write(usl_tick_pipe[1], &msg, sizeof(msg));
+++		if (write(usl_tick_pipe[1], &msg, sizeof(msg)) != sizeof(msg)) {
+++			fprintf(stderr, "write to fd %i failed: %s\n", usl_tick_pipe[1], strerror(errno));
+++		}
++ 	}
++ }
++ 
++-- 
++2.13.2
++
+diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+index 969f434cc..e1c9215ca 100644
+--- a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
++++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+@@ -11,16 +11,16 @@ HOMEPAGE = "http://www.openl2tp.org/"
+ SECTION = "console/network"
+ LICENSE = "GPLv2+"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-email \
-@@ -15,6 +17,8 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-pyopenssl \
-     ${PYTHON_PN}-pysocks \
-     ${PYTHON_PN}-urllib3 \
-+    ${PYTHON_PN}-chardet \
-+    ${PYTHON_PN}-idna \
- "
+-SRC_URI = "\
+-        https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
+-        file://ippool_usl_timer.patch \
+-        file://ippool_parallel_make_and_pic.patch \
+-        file://ippool_init.d.patch \
+-        file://always_syslog.patch \
+-        file://makefile-add-ldflags.patch \
+-        file://runtest.sh \
+-        file://ippool.service \
+-        "
++SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-${PV}.tar.gz \
++           file://runtest.sh \
++           file://ippool.service \
++           file://ippool_usl_timer.patch \
++           file://ippool_parallel_make_and_pic.patch \
++           file://ippool_init.d.patch \
++           file://always_syslog.patch \
++           file://makefile-add-ldflags.patch \
++           file://0001-usl_timer-Check-for-return-value-of-write-API.patch \
++           "
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-requests_2.13.0.bb b/meta-python/recipes-devtools/python/python-requests_2.18.1.bb
-similarity index 73%
-rename from meta-python/recipes-devtools/python/python-requests_2.13.0.bb
-rename to meta-python/recipes-devtools/python/python-requests_2.18.1.bb
-index 627bc95..0d7a29f 100644
---- a/meta-python/recipes-devtools/python/python-requests_2.13.0.bb
-+++ b/meta-python/recipes-devtools/python/python-requests_2.18.1.bb
-@@ -1,4 +1,4 @@
--inherit pypi setuptools
-+inherit setuptools
- require python-requests.inc
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=4c59283b82fc2b166455e0fc23c71c6f"
+ SRC_URI[md5sum] = "e2401e65db26a3764585b97212888fae"
+@@ -50,7 +50,7 @@ do_compile_prepend() {
  
- RDEPENDS_${PN} += "${PYTHON_PN}-zlib"
-diff --git a/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb b/meta-python/recipes-devtools/python/python3-requests_2.18.1.bb
-similarity index 81%
-rename from meta-python/recipes-devtools/python/python3-requests_2.13.0.bb
-rename to meta-python/recipes-devtools/python/python3-requests_2.18.1.bb
-index 5e869b7..d91d993 100644
---- a/meta-python/recipes-devtools/python/python3-requests_2.13.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-requests_2.18.1.bb
-@@ -1,4 +1,4 @@
--inherit pypi setuptools3
-+inherit setuptools3
- require python-requests.inc
+     # ignore the OPT_CFLAGS?= in Makefile,
+     # it should be in CFLAGS from env
+-    export OPT_CFLAGS=
++    export OPT_CFLAGS="${SELECTED_OPTIMIZATION}"
+ }
  
- # Add the runtime depends for selectors.py
+ 
 -- 
-2.1.4
+2.13.3
 
 
