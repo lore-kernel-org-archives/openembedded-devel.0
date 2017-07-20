@@ -1,51 +1,50 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wr0-f174.google.com (mail-wr0-f174.google.com
-	[209.85.128.174])
-	by mail.openembedded.org (Postfix) with ESMTP id BDB5D7832B
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id C300678319
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 15:35:22 +0000 (UTC)
-Received: by mail-wr0-f174.google.com with SMTP id v105so42193125wrb.0
+	Thu, 20 Jul 2017 15:35:23 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id w126so27756162wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 08:35:24 -0700 (PDT)
+	Thu, 20 Jul 2017 08:35:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:subject:date:message-id:in-reply-to:references;
-	bh=Ob2Saj8zZ+tk3TnfIkzNbJU+dYHJoc03OKdFk5OSWWo=;
-	b=eg4OKVbroyEN9TWz6kMH/XEcsWNfg64v1H5eLwivIbM9swLBHBmPfDHceB7+TWfSa3
-	5mwimoCnRqicnVsGU+D1UimgfmRc/k9ztzK1MbTTzPOqvyna33OhuoHiycVRjgv61ZI8
-	nsRWDGB6AC2u0f8j7Gp+QJitcPadubD5mEjMfsCGz4P+N2h5vZINyDX+tBficZl+Mhfu
-	vCEN09OOx+zPj0ultLVGdQj7moqgAq5lWXWRGjiVL+Gyz8+YEMcaDEb6fy+0gsUkoueR
-	bVbKD0ves0efgp4ZtfQqoz0JdfYu+6ME8CNdQP+dwcTlhkLD9XfXUghag2AzyzDvPAyh
-	Il5w==
+	bh=hyiLSkB3n+KwHiA/wBkqJxIgaKNj0vnkldifNSsZb6A=;
+	b=XAMdVHsehUqXr/jIGS3DYK3toDexzi3i766VnhRCYQZuw/7+Y27aLdQuOKFgKq7dN0
+	IeNEo5mnBQxipYzb8bz72aOnjSoffosVXY2nGMUOleqrw3BjDuw3WgzQOWI/NA4tHzsa
+	ywwnM7A4VlMvZ9OXdm/TghGJqYewxjg4Z5+2EyU0UuBTe7LnWeg+VnSP6O9qVSlRGg56
+	CVPWuwyepXqDlmyCq27iJ0RiJvk0TonwFeEP8sICsGYmlf4m2+VqExrJkJIKOXCKWHwy
+	ErvPZKNlDzpiq0mintNtRSfToxTtPP8aXHnZDKkbg2JzxSDNh+pXf0oxeLmQ0sA4lUvC
+	cscw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references;
-	bh=Ob2Saj8zZ+tk3TnfIkzNbJU+dYHJoc03OKdFk5OSWWo=;
-	b=AykvJfOlAOAAQwGd3M3CYmKw9HngvivWKdZ+yPLMENKEsblLrogDoeT29Vnq9yKeYM
-	JbyDBIez2uiXiJQoiSrzM9AcHd8nrRxxRezc/Z+6xVApPPK2KPuB7w4n2VxOQSbRUCHD
-	1ILQQF4dT3ksr69AMEo3C998dICJ1BWROSQaI4cJqtiFNxha4ngz/h1G8PcD7dAwyo10
-	18GW4YRMBkynpbh4kM9XKLfDDmPPAwC6kXJ9LMjjzCRTQusFrZyxFMrvr4i6dDofUAng
-	+t+6sAmeBiscG90LhdyYa2Q4fmHq36L13N70sLKRVnd7bKyPZ8U3b7FNcX8DocpCsoOt
-	WjwQ==
-X-Gm-Message-State: AIVw111Ymh182gQMHpcyVsufJkQ4BjFMfk9E9y+UfoHISWM2YCYQx489
-	fk4EwZb11dhIl5EUlkg=
-X-Received: by 10.223.141.146 with SMTP id o18mr3268840wrb.215.1500564922890; 
-	Thu, 20 Jul 2017 08:35:22 -0700 (PDT)
+	bh=hyiLSkB3n+KwHiA/wBkqJxIgaKNj0vnkldifNSsZb6A=;
+	b=lWN81A2BOpDXGHJAXAf3dpGxUH4fcJBKIQ2zDctNCt/t6JZ+gXy6FQWGV+JA6E601f
+	oeL3XEk79Fb2EddImhgkQww/PYmqCEptWvGPa/07UlVp2euSoilUBw9L3DHs5HC4syix
+	YeN1K7QDdi5H9RqQFSEpqWAD3nBwfQNMlgDNAaLtxqjB7FCu8XY6VIMdGtpbdD/JwcgH
+	A3fQVHt5wsS8FfoRVkmP61kaEOg1Ivlv5uMQFO0IMoXE4Pjh/UrC/7fvThjpXzK11WAG
+	nvbgllufy8dxKQgClnLKxc3yN4pnrZfM4fbPOIzc9dPZk1l1RECEmo/szTN+RaKpEHTT
+	deXQ==
+X-Gm-Message-State: AIVw113gdQQwKufm3WjYbTGWGK3NURb+hFkH1WnYFn/GlaqRwufPCmmG
+	v6kWqs+cpzggFJrSdfw=
+X-Received: by 10.28.154.85 with SMTP id c82mr2764545wme.151.1500564923987;
+	Thu, 20 Jul 2017 08:35:23 -0700 (PDT)
 Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
 	by smtp.gmail.com with ESMTPSA id
-	190sm2853628wmh.36.2017.07.20.08.35.21
+	190sm2853628wmh.36.2017.07.20.08.35.22
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Jul 2017 08:35:22 -0700 (PDT)
+	Thu, 20 Jul 2017 08:35:23 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jul 2017 16:35:06 +0100
-Message-Id: <20170720153508.23113-7-ross.burton@intel.com>
+Date: Thu, 20 Jul 2017 16:35:07 +0100
+Message-Id: <20170720153508.23113-8-ross.burton@intel.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170720153508.23113-1-ross.burton@intel.com>
 References: <20170720153508.23113-1-ross.burton@intel.com>
-Subject: [PATCH][meta-gnome 7/9] gthumb: remove (previously blacklisted)
+Subject: [PATCH][meta-gnome 8/9] system-tools-backends: remove (previously blacklisted)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,256 +57,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 15:35:23 -0000
+X-List-Received-Date: Thu, 20 Jul 2017 15:35:24 -0000
 
-GThumb 2.12.4 is from 2011 and blacklisted, so remove it.
+system-tools-backends is from 2011 and blacklisted, so remove it.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../0001-Drop-help-directory-from-build.patch      |  25 ----
- .../recipes-gnome/gthumb/files/parallel.patch      | 158 ---------------------
- meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb   |  35 -----
- 3 files changed, 218 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/gthumb/files/0001-Drop-help-directory-from-build.patch
- delete mode 100644 meta-gnome/recipes-gnome/gthumb/files/parallel.patch
- delete mode 100644 meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+ .../add-angstrom-distro.patch                      | 41 ------------
+ .../system-tools-backends                          | 74 ----------------------
+ .../system-tools/system-tools-backends_2.10.2.bb   | 54 ----------------
+ 3 files changed, 169 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/add-angstrom-distro.patch
+ delete mode 100644 meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/system-tools-backends
+ delete mode 100644 meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb
 
-diff --git a/meta-gnome/recipes-gnome/gthumb/files/0001-Drop-help-directory-from-build.patch b/meta-gnome/recipes-gnome/gthumb/files/0001-Drop-help-directory-from-build.patch
+diff --git a/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/add-angstrom-distro.patch b/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/add-angstrom-distro.patch
 deleted file mode 100644
-index d116968a6..000000000
---- a/meta-gnome/recipes-gnome/gthumb/files/0001-Drop-help-directory-from-build.patch
+index cb03fd86e..000000000
+--- a/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/add-angstrom-distro.patch
 +++ /dev/null
-@@ -1,25 +0,0 @@
--From 48cb878cb724e7a509260f014db6365510b8b541 Mon Sep 17 00:00:00 2001
--From: Alexander Kanavin <alex.kanavin@gmail.com>
--Date: Tue, 17 May 2016 14:05:29 +0300
--Subject: [PATCH] Drop help directory from build
+@@ -1,41 +0,0 @@
+-From b5084616a3bc2a0d485f43aeae69c6025f3f857e Mon Sep 17 00:00:00 2001
+-From: Koen Kooi <koen@dominion.thruhere.net>
+-Date: Fri, 10 Jun 2011 18:44:21 +0200
+-Subject: [PATCH] add support for the angstrom distribtion
 -
--It hardcodes the use of xml2po tool form gnome-doc-utils
--
--Signed-off-by: Alexander Kanavin <alex.kanavin@gmail.com>
+-Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
 ----
-- Makefile.am | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
+- Utils/Platform.pm |    3 +++
+- 1 files changed, 3 insertions(+), 0 deletions(-)
 -
--diff --git a/Makefile.am b/Makefile.am
--index d056875..3fc4a41 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,4 +1,4 @@
---SUBDIRS = m4 copy-n-paste data po gthumb extensions tests help
--+SUBDIRS = m4 copy-n-paste data po gthumb extensions tests
+-diff --git a/Utils/Platform.pm b/Utils/Platform.pm
+-index fc76360..8b8c770 100644
+---- a/Utils/Platform.pm
+-+++ b/Utils/Platform.pm
+-@@ -92,6 +92,7 @@ my $PLATFORM_INFO = {
+-   "nexenta-1.0"     => [ "Nexenta GNU/Solaris", "1.0", "Ellate" ],
+-   "yellowdog-4.1"   => [ "Yellow Dog Linux", "4.1", "Sagitta" ],
+-   "guadalinex-v4"   => [ "Guadalinex", "v4", "Toro" ],
+-+  "angstrom"        => [ "Angstrom", "", "" ],
+- };
 - 
-- ACLOCAL_AMFLAGS = -I m4
-- AMCFLAGS = -fPIC -DPIC
+- sub get_platform_info
+-@@ -143,6 +144,7 @@ sub ensure_distro_map
+-      "vine-3.1"         => "vine-3.0",
+-      "vlos-1.2"         => "gentoo",
+-      "nexenta-1.0"      => "solaris-2.11",
+-+     "angstrom"         => "debian",
+-      );
+- 
+-   return $metamap{$distro} if ($metamap{$distro});
+-@@ -375,6 +377,7 @@ sub guess
+-                   [ \&check_ark ],
+-                   [ \&check_yoper ],
+-                   [ \&check_distro_file, "/etc/yellowdog-release", "yellowdog", "^Yellow Dog Linux release (\\S+)" ],
+-+                  [ \&check_file_exists, "/etc/angstrom-version", "angstrom" ],
+-                  ],
+-     "FreeBSD" => [[ \&check_freebsd ]],
+-     "SunOS"   => [[ \&check_solaris ]]
 --- 
--2.8.1
+-1.6.6.1
 -
-diff --git a/meta-gnome/recipes-gnome/gthumb/files/parallel.patch b/meta-gnome/recipes-gnome/gthumb/files/parallel.patch
+diff --git a/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/system-tools-backends b/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/system-tools-backends
 deleted file mode 100644
-index 20ce5c5aa..000000000
---- a/meta-gnome/recipes-gnome/gthumb/files/parallel.patch
+index 704c36dbf..000000000
+--- a/meta-gnome/recipes-gnome/system-tools/system-tools-backends-2.10.2/system-tools-backends
 +++ /dev/null
-@@ -1,158 +0,0 @@
--From 34969cde1dcb7740b4a7c3b6e3d04d481e5980b5 Mon Sep 17 00:00:00 2001
--From: Ross Burton <ross.burton@intel.com>
--Date: Tue, 31 Jul 2012 17:26:27 +0100
--Subject: [PATCH] build: Fix parallel build problems with enum generation
+@@ -1,74 +0,0 @@
+-#! /bin/sh
+-### BEGIN INIT INFO
+-# Provides:          system-tools-backends
+-# Required-Start:    $local_fs dbus
+-# Required-Stop:     $local_fs dbus
+-# Should-Start:	     $syslog
+-# Should-Stop:       $syslog
+-# Default-Start:     2 3 4 5
+-# Default-Stop:      1
+-# Short-Description: Gnome System Tools Backends
+-# Description:       The Gnome System Tools Backends daemon handles root-needed
+-#                    operations to configure your machine with the Gnome System
+-#		     Tools.
+-### END INIT INFO
 -
--This is a backport from a patch against master.
+-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+-DAEMON=/usr/bin/system-tools-backends
+-PIDDIR=/var/run
+-PIDFILE=$PIDDIR/system-tools-backends.pid
+-NAME=system-tools-backends
+-DESC="System Tools Backends"
 -
--Upstream-Status: Submitted [https://bugzilla.gnome.org/show_bug.cgi?id=680925]
-----
-- extensions/file_tools/Makefile.am    |   10 ++++------
-- extensions/importer/Makefile.am      |   10 ++++------
-- extensions/pixbuf_savers/Makefile.am |   10 ++++------
-- gthumb/Makefile.am                   |   10 ++++------
-- 4 files changed, 16 insertions(+), 24 deletions(-)
+-test -x $DAEMON || exit 0
 -
--diff --git a/extensions/file_tools/Makefile.am b/extensions/file_tools/Makefile.am
--index 7785eff..d70a8a5 100644
----- a/extensions/file_tools/Makefile.am
--+++ b/extensions/file_tools/Makefile.am
--@@ -24,17 +24,16 @@ HEADER_FILES = 				\
-- 	gth-file-tool-undo.h		\
-- 	preferences.h
-- 
---enum-types.h: $(HEADER_FILES) $(GLIB_MKENUMS)
--+enum-types.h: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#ifndef ENUM_TYPES_H\n#define ENUM_TYPES_H\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
-- 		--fprod "/* enumerations from \"@filename@\" */\n" \
-- 		--vhead "GType @enum_name@_get_type (void);\n#define GTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
-- 		--ftail "G_END_DECLS\n\n#endif /* ENUM_TYPES_H */" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) enum-types.h || cp xgen-$(@F) enum-types.h ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) enum-types.h )
-- 
---enum-types.c: $(HEADER_FILES) enum-types.h
--+enum-types.c: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#include <glib-object.h>\n" \
-- 		--fprod "\n/* enumerations from \"@filename@\" */\n#include \"@filename@\"" \
--@@ -42,8 +41,7 @@ enum-types.c: $(HEADER_FILES) enum-types.h
-- 		--vprod "      { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
-- 		--vtail "      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n  return etype;\n}\n" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) enum-types.c || cp xgen-$(@F) enum-types.c ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) enum-types.c )
-- 
-- libfile_tools_la_SOURCES = 		\
-- 	$(ENUM_TYPES)			\
--diff --git a/extensions/importer/Makefile.am b/extensions/importer/Makefile.am
--index 29e7f2c..07c1eba 100644
----- a/extensions/importer/Makefile.am
--+++ b/extensions/importer/Makefile.am
--@@ -14,17 +14,16 @@ HEADER_FILES = 					\
-- 	preferences.h				\
-- 	utils.h
-- 
---gth-import-enum-types.h: $(HEADER_FILES) $(GLIB_MKENUMS)
--+gth-import-enum-types.h: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#ifndef ENUM_TYPES_H\n#define ENUM_TYPES_H\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
-- 		--fprod "/* enumerations from \"@filename@\" */\n" \
-- 		--vhead "GType @enum_name@_get_type (void);\n#define GTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
-- 		--ftail "G_END_DECLS\n\n#endif /* ENUM_TYPES_H */" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) gth-import-enum-types.h || cp xgen-$(@F) gth-import-enum-types.h ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) gth-import-enum-types.h )
-- 
---gth-import-enum-types.c: $(HEADER_FILES) gth-import-enum-types.h
--+gth-import-enum-types.c: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#include <glib-object.h>\n" \
-- 		--fprod "\n/* enumerations from \"@filename@\" */\n#include \"@filename@\"" \
--@@ -32,8 +31,7 @@ gth-import-enum-types.c: $(HEADER_FILES) gth-import-enum-types.h
-- 		--vprod "      { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
-- 		--vtail "      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n  return etype;\n}\n" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) gth-import-enum-types.c || cp xgen-$(@F) gth-import-enum-types.c ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) gth-import-enum-types.c )
-- 
-- libimporter_la_SOURCES = 			\
-- 	$(ENUM_TYPES)				\
--diff --git a/extensions/pixbuf_savers/Makefile.am b/extensions/pixbuf_savers/Makefile.am
--index bfe9f34..4764c32 100644
----- a/extensions/pixbuf_savers/Makefile.am
--+++ b/extensions/pixbuf_savers/Makefile.am
--@@ -10,17 +10,16 @@ ENUM_TYPES =				\
-- HEADER_FILES = 				\
-- 	preferences.h
-- 
---enum-types.h: $(HEADER_FILES) $(GLIB_MKENUMS)
--+enum-types.h: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#ifndef ENUM_TYPES_H\n#define ENUM_TYPES_H\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
-- 		--fprod "/* enumerations from \"@filename@\" */\n" \
-- 		--vhead "GType @enum_name@_get_type (void);\n#define GTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
-- 		--ftail "G_END_DECLS\n\n#endif /* ENUM_TYPES_H */" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) enum-types.h || cp xgen-$(@F) enum-types.h ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) enum-types.h )
-- 
---enum-types.c: $(HEADER_FILES) enum-types.h
--+enum-types.c: $(HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#include <glib-object.h>\n" \
-- 		--fprod "\n/* enumerations from \"@filename@\" */\n#include \"@filename@\"" \
--@@ -28,8 +27,7 @@ enum-types.c: $(HEADER_FILES) enum-types.h
-- 		--vprod "      { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
-- 		--vtail "      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n  return etype;\n}\n" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) enum-types.c || cp xgen-$(@F) enum-types.c ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) enum-types.c )
-- 
-- libpixbuf_savers_la_SOURCES = 	\
-- 	$(ENUM_TYPES)		\
--diff --git a/gthumb/Makefile.am b/gthumb/Makefile.am
--index e9e385e..2f14e03 100644
----- a/gthumb/Makefile.am
--+++ b/gthumb/Makefile.am
--@@ -296,17 +296,16 @@ gthumb_CFLAGS =							\
-- 	-DGTHUMB_EXTENSIONS_DIR=\"$(extensions_dir)\"		\
-- 	$(NULL)
-- 
---gth-enum-types.h: $(PUBLIC_HEADER_FILES) $(GLIB_MKENUMS)
--+gth-enum-types.h: $(PUBLIC_HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#ifndef GTH_ENUM_TYPES_H\n#define GTH_ENUM_TYPES_H\n\n#include <glib-object.h>\n\nG_BEGIN_DECLS\n" \
-- 		--fprod "/* enumerations from \"@filename@\" */\n" \
-- 		--vhead "GType @enum_name@_get_type (void);\n#define GTH_TYPE_@ENUMSHORT@ (@enum_name@_get_type())\n" \
-- 		--ftail "G_END_DECLS\n\n#endif /* GTH_ENUM_TYPES_H */" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) gth-enum-types.h || cp xgen-$(@F) gth-enum-types.h ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) gth-enum-types.h )
-- 
---gth-enum-types.c: $(PUBLIC_HEADER_FILES) gth-enum-types.h
--+gth-enum-types.c: $(PUBLIC_HEADER_FILES)
-- 	$(AM_V_GEN)( $(GLIB_MKENUMS) \
-- 		--fhead "#include <glib-object.h>\n" \
-- 		--fprod "\n/* enumerations from \"@filename@\" */\n#include \"@filename@\"" \
--@@ -314,8 +313,7 @@ gth-enum-types.c: $(PUBLIC_HEADER_FILES) gth-enum-types.h
-- 		--vprod "      { @VALUENAME@, \"@VALUENAME@\", \"@valuenick@\" }," \
-- 		--vtail "      { 0, NULL, NULL }\n    };\n    etype = g_@type@_register_static (\"@EnumName@\", values);\n  }\n  return etype;\n}\n" \
-- 		$^> xgen-$(@F) \
---	&& (cmp -s xgen-$(@F) gth-enum-types.c || cp xgen-$(@F) gth-enum-types.c ) \
---	&& rm -f xgen-$(@F) )
--+	&& mv -f xgen-$(@F) gth-enum-types.c )
-- 
-- gth-marshal.h: gth-marshal.list $(GLIB_GENMARSHAL)
-- 	$(AM_V_GEN)( $(GLIB_GENMARSHAL) $(srcdir)/gth-marshal.list --header --prefix=gth_marshal > $@ )
---- 
--1.7.10.4
+-set -e
 -
-diff --git a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb b/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+-do_start() {
+-    echo "Starting $DESC"
+-    start-stop-daemon --start --startas $DAEMON --quiet --pidfile $PIDFILE
+-}
+-
+-do_stop() {
+-    echo "Stopping $DESC"
+-    start-stop-daemon --stop --oknodo --quiet --pidfile $PIDFILE --startas $DAEMON
+-}
+-
+-case "$1" in
+-  start)
+-    do_start
+-    ;;
+-  stop)
+-    do_stop
+-    ;;
+-  #reload)
+-    #
+-    # If the daemon can reload its config files on the fly
+-    # for example by sending it SIGHUP, do it here.
+-    #
+-    # If the daemon responds to changes in its config file
+-    # directly anyway, make this a do-nothing entry.
+-    #
+-    # echo "Reloading $DESC configuration files."
+-    # start-stop-daemon --stop --signal 1 --quiet --pidfile \
+-    #   /var/run/$NAME.pid --exec $DAEMON
+-  #;;
+-  restart|force-reload)
+-    #
+-    #   If the "reload" option is implemented, move the "force-reload"
+-    #   option to the "reload" entry above. If not, "force-reload" is
+-    #   just the same as "restart".
+-    #
+-    do_stop
+-    sleep 5
+-    do_start
+-    ;;
+-  *)
+-    N=/etc/init.d/$NAME
+-    echo "Usage: $N {start|stop|restart|reload|force-reload|status}" >&2
+-    exit 1
+-    ;;
+-esac
+-
+-exit 0
+-
+diff --git a/meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb b/meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb
 deleted file mode 100644
-index 62d3df98e..000000000
---- a/meta-gnome/recipes-gnome/gthumb/gthumb_2.12.4.bb
+index 862c0ea30..000000000
+--- a/meta-gnome/recipes-gnome/system-tools/system-tools-backends_2.10.2.bb
 +++ /dev/null
-@@ -1,35 +0,0 @@
--SUMMARY = "gThumb is an image viewer and browser for the GNOME Desktop"
--SECTION = "x11/gnome"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
--DEPENDS = "gnome-common-native glib-2.0 gtk+ libxml2 gnome-doc-utils libunique gconf libpng gstreamer jpeg tiff gst-plugins-base intltool-native gconf-native"
+@@ -1,54 +0,0 @@
+-SUMMARY = "gnome system tools backends"
+-LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 -
--PR = "r4"
+-DEPENDS = "dbus dbus-glib glib-2.0 polkit"
 -
--EXTRA_OECONF = "--disable-gnome-keyring --disable-libsoup --disable-exiv2 --disable-clutter"
+-inherit gnome pkgconfig update-rc.d gettext
 -
--inherit gnome pkgconfig
+-SRC_URI[archive.md5sum] = "edae148b31342aecae035051adc70c74"
+-SRC_URI[archive.sha256sum] = "1dbe5177df46a9c7250735e05e77129fe7ec04840771accfa87690111ca2c670"
 -
--SRC_URI[archive.md5sum] = "97fc13221b0c5d80c27a2e25a3a3ac6f"
--SRC_URI[archive.sha256sum] = "cf809695230ab8892a078be454a42ade865754c72ec1da7c3d74d4310de54f1d"
--GNOME_COMPRESS_TYPE="bz2"
+-SRC_URI += " \
+-            file://system-tools-backends \
+-"
 -
--SRC_URI += "file://parallel.patch \
--            file://0001-Drop-help-directory-from-build.patch"
+-# This needs to move to meta-angstrom
+-SRC_URI_append_angstrom = " \
+-            file://add-angstrom-distro.patch \
+-"
 -
--do_configure_prepend () {
--    rm -f ${S}/m4/gnome-doc-utils.m4
+-EXTRA_OECONF = " --with-net-dbus=${libdir}/perl5 "
+-
+-do_configure() {
+-    rm missing || true
+-    automake --add-missing
+-    sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.am
+-    sed -i -e 's:CC=$(CC):CC="$(CC)":g' ${S}/Net-DBus/Makefile.in
+-    libtoolize --force --install
+-    aclocal
+-    gnu-configize
+-    oe_runconf
+-    cp ${STAGING_BINDIR_CROSS}/${HOST_SYS}-libtool ${S}
 -}
 -
 -do_install_append () {
--    rm -f ${D}${libdir}/${BPN}/extensions/*.a
+-    install -d ${D}/${sysconfdir}/init.d
+-    install -m 0755 ${WORKDIR}/system-tools-backends ${D}/${sysconfdir}/init.d/
 -}
 -
--FILES_${PN} += "${datadir}/icons"
--FILES_${PN} += "${libdir}/${BPN}/extensions/*.so \
--                ${libdir}/${BPN}/extensions/*.extension"
--FILES_${PN}-dev += "${libdir}/${BPN}/extensions/*.la"
--FILES_${PN}-dbg += "${libdir}/${BPN}/extensions/.debug/"
+-INITSCRIPT_NAME = "system-tools-backends"
+-INITSCRIPT_PARAMS = "start 50 2 3 4 5 . stop 70 1 ."
 -
+-# Shadow added so there is a full adduser/deluser
+-# (Gnome images tend to pull in shadow anyway)
+-RDEPENDS_${PN} = "shadow"
 -
--PNBLACKLIST[gthumb] ?= "Depends on blacklisted gstreamer - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-FILES_${PN} += " ${sysconfdir}/dbus-1/system.d"
+-FILES_${PN} += " ${libdir}/pkgconfig"
+-FILES_${PN} += " ${datadir}/dbus-1/system-services"
+-FILES_${PN} += " ${datadir}/system-tools-backends-2.0/files"
+-FILES_${PN} += " ${datadir}/system-tools-backends-2.0/scripts"
+-FILES_${PN} += " ${datadir}/polkit*"
+-
+-PNBLACKLIST[system-tools-backends] ?= "does not build with distroless qemuarm as reported in 'State of bitbake world' thread, nobody volunteered to fix them - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
 2.11.0
 
