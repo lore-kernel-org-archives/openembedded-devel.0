@@ -1,45 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 159FE77E8A
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CFEA378244
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 01:38:06 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id w191so13628002wmw.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 Jul 2017 18:38:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xBPmZyNNAy0UXR2ofBjR8TJ6JEA/stsCUABGljNbmAg=;
-	b=W02o1xC5NYLEs9dTuKTdtHnI0c+79kevUWb5ovJScdrvmmBil9DIhD1WCNUIrfKy7E
-	pz5RlEbmHlr8JlKDFcZNKzMoXShty6K/Ou8GtL6R+dqCVazRPvZpr3Tbc/ZWwIlXmqab
-	WWCczwa7rxb0keVEZzC2LO3q4N7JZpUVCitTeCTJdT6NbKaRfQ7fZvKSqkwX2igakp/D
-	ixNLwCg/MHh0BgdZITfbwuZTxvdrdc5KaJS6ld4fU7ga2Kg9Slw6XedwVSovwgJJ1t6G
-	jGIXcGaR1Brddd6qsYgnzvnoVykGAs/3z5t4A04h5Sw5+sBr3UIfVBS8V2/8z9CuGJ+l
-	54eQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=xBPmZyNNAy0UXR2ofBjR8TJ6JEA/stsCUABGljNbmAg=;
-	b=ZYikNYF+jPuiaK3tN7Jc2ljRNVVWGsHx46c3n9sWhjH1uJNMg8cJ13waGWPsC0d0FU
-	OLZT39BucHHZwX7zWOCOGsuFJ4De4HkEzUAHHog5yDeOz2z3oLmh3j0d3vCz4hBuvKVe
-	tbY2DQzBVam6pxeRjKDsOyhjws/kGvekow1PZipBgKgksoHk5POFc3ZERSyswupdn9jg
-	mytVO07naJFI6FXicBtNU7QDHWjA/Jjlum2Whw/ZfrD3CMRlds0Wi2DcdGpe0dK6FM4o
-	CjtTeFIyEf/yF3e6LCz8QRo6QiT1JkmFErhcVrHbYdPETif+hjrV9evDKh539zVdwXCx
-	CkQg==
-X-Gm-Message-State: AIVw111SomOOWjERcJu15lPC2ht2eXRjvUAG10gJuzNQ6nHpRF4/E9yt
-	NcHSRmbFDNqADBOxclTlYV/TIn29VMrR
-X-Received: by 10.80.217.75 with SMTP id u11mr1340938edj.250.1500514687661;
-	Wed, 19 Jul 2017 18:38:07 -0700 (PDT)
+	Thu, 20 Jul 2017 07:44:37 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6K7ibhN024038
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 20 Jul 2017 00:44:38 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 20 Jul 2017 00:44:36 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 20 Jul 2017 03:44:27 -0400
+Message-ID: <cover.1500536448.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Received: by 10.80.149.173 with HTTP; Wed, 19 Jul 2017 18:37:37 -0700 (PDT)
-In-Reply-To: <4f5ed5b4-3ffe-78bc-e030-400a6b7794f4@ubiant.com>
-References: <4f5ed5b4-3ffe-78bc-e030-400a6b7794f4@ubiant.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 19 Jul 2017 21:37:37 -0400
-Message-ID: <CAMKF1sr3OQKiwn1r_nxz26qQNjo104CNVEnyfX+MfJRP4OuFwg@mail.gmail.com>
-To: Romain Bazile <romain.bazile@ubiant.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python] Pip recipes PR
+Subject: [PATCH 0/8] add 7 recipes & upgrade 1 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,33 +30,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 01:38:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 20 Jul 2017 07:44:38 -0000
+Content-Type: text/plain
 
-On Wed, Jul 19, 2017 at 6:48 PM, Romain Bazile <romain.bazile@ubiant.com> wrote:
-> Hello,
->
-> I created a couple of meta-python recipes for pip packages that I want to
-> share.
->
-> Can I send a PR to this mailing-list with those?
->
-> I assume one patch per recipe.
->
+The following changes since commit 1cbd1bc195017312ba8cf670b340f61a2ac6207b:
 
-sure. These are guidelines to help you
+  unionfs-fuse: 0.26 -> 2.0 (2017-07-14 23:45:53 +0200)
 
-http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+are available in the git repository at:
 
-> Sincerely,
-> --
-> Romain Bazile
-> Hardware R&D Engineer
-> www.ubiant.com
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  git://git.openembedded.org/openembedded-core-contrib hongxu/add-recipe2
+  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/add-recipe2
+
+Hongxu Jia (8):
+  libgnomekbd: 2.32 -> 3.22
+  python3-pykickstart: add recipe 2.35
+  python3-meh: add recipe 0.45
+  usermode: add recipe 1.111
+  isomd5sum: add recipe 1.2.1
+  satyr: add recipe 0.23
+  libtar: add recipe 1.2.20
+  xmlrpc-c: add recipe 1.31.0
+
+ .../gnome-settings-daemon_2.32.1.bb                |   3 -
+ .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb   |  20 ---
+ .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb   |  17 +++
+ .../recipes-support/usermode/usermode_1.111.bb     |  25 ++++
+ .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   |  22 +++
+ .../files/0001-tweak-install-prefix.patch          |  60 ++++++++
+ .../isomd5sum/files/0002-fix-parallel-error.patch  |  33 +++++
+ .../recipes-extended/isomd5sum/isomd5sum_1.2.1.bb  |  35 +++++
+ .../libtar/files/0002-Do-not-strip-libtar.patch    |  25 ++++
+ .../libtar/files/fix_libtool_sysroot.patch         |  19 +++
+ meta-oe/recipes-support/libtar/libtar_1.2.20.bb    |  21 +++
+ .../satyr/files/0001-do-not-support-python2.patch  |  84 ++++++++++++
+ meta-oe/recipes-support/satyr/satyr_0.23.bb        |  32 +++++
+ .../files/tweak-native-language-support.patch      |  44 ++++++
+ .../python-meh/python3-meh_0.45.bb                 |  17 +++
+ ...0001-support-authentication-for-kickstart.patch | 151 +++++++++++++++++++++
+ ...-parser.py-add-lock-for-readKickstart-and.patch |  76 +++++++++++
+ ...-sections-shutdown-and-environment-in-gen.patch |  48 +++++++
+ ...d.py-retry-to-invoke-request-with-timeout.patch |  82 +++++++++++
+ .../python-pykickstart/python3-pykickstart_2.35.bb |  26 ++++
+ 20 files changed, 817 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+ create mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+ create mode 100644 meta-gnome/recipes-support/usermode/usermode_1.111.bb
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+ create mode 100644 meta-oe/recipes-extended/isomd5sum/files/0001-tweak-install-prefix.patch
+ create mode 100644 meta-oe/recipes-extended/isomd5sum/files/0002-fix-parallel-error.patch
+ create mode 100644 meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.1.bb
+ create mode 100644 meta-oe/recipes-support/libtar/files/0002-Do-not-strip-libtar.patch
+ create mode 100644 meta-oe/recipes-support/libtar/files/fix_libtool_sysroot.patch
+ create mode 100644 meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+ create mode 100644 meta-oe/recipes-support/satyr/files/0001-do-not-support-python2.patch
+ create mode 100644 meta-oe/recipes-support/satyr/satyr_0.23.bb
+ create mode 100644 meta-python/recipes-extended/python-meh/files/tweak-native-language-support.patch
+ create mode 100644 meta-python/recipes-extended/python-meh/python3-meh_0.45.bb
+ create mode 100644 meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch
+ create mode 100644 meta-python/recipes-extended/python-pykickstart/files/0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch
+ create mode 100644 meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch
+ create mode 100644 meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-pykickstart/python3-pykickstart_2.35.bb
+
+-- 
+2.8.1
+
 
