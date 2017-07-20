@@ -1,45 +1,43 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 3CD3D78302
+Return-Path: <jason.liu@gumstix.com>
+Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B9E9782BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 18:53:42 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id g127so34784080wmd.0
+	Thu, 20 Jul 2017 19:31:59 +0000 (UTC)
+Received: by mail-pg0-f49.google.com with SMTP id 123so18832862pgj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 11:53:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=zzuYDsZaS0SgWpgw0WvEsYyMBmFlfVgEDXOIRTCATI0=;
-	b=MD+RVAtjXZw4uqHAlN7t4ofT7iMznOToUH5/EuBC8Z6KrQ7Fo61kVMZirbaD3Q4/ED
-	ZgdFjNn3ul/zOBCVU2/xlun1ik/6WJp2ZAHlpXUTv04pSTCUL/8kxh2X4XA6gzopDzhE
-	uPnk3MYRigCM550y8xeA9iLXS1UK4ryzONHA4CJ3TqiWN1KABpz0kqrDs4TRJqGyWjc6
-	D9Bas3zWn2XzZpZ2qo82x++xQfY2JUPxcUAfmHdOGhWDJ/DJJLlT7P4nuPkWeph//aq+
-	+qf1j3uAz1eF4dAOgXlE19J+ZRvvLfi6GZ2vdODn9teeCgsHkUZRsSfzRV3ZFXvyTLDj
-	eK3w==
+	Thu, 20 Jul 2017 12:32:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gumstix.com; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=wBLUB90dinPw2SIxb91Qd1JFEHAb7ns6dztbZaeo54M=;
+	b=GNnCSenCMZa4tCrpFjM3DIv4GsRMzYvdKOD6Z6nTfDkC6497/s0R1FrPDP0x32MhSg
+	Sd11s0aHCwJRRuRN/6f6bPuKUBXUVfNw+T8PgRNvP8HPFQ2/kwbBQgTfycb/8AlEovP0
+	qIobaF817K1EYA9hRHrtTCOHaO/vSft9jMsWs=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=zzuYDsZaS0SgWpgw0WvEsYyMBmFlfVgEDXOIRTCATI0=;
-	b=QJX0iLYcjJds8JO9Qrjrj1LgPHVeHha7KCPGiXyXj69uj2cpD8t8mI6ZuvUvVnOxYt
-	f+A6/eKaIgEI/Q3Nt1oQmqZX/zOiRBbmKcOnx+JpxfNlLt9OCm6hI0BtlGXQ3AOz7DQ/
-	+pbYsZjiy/3eyMLqe+ZEtK6BcF0ELumsDkvzYpJPkaBH6k6l4n2bgu6HXd7wWeuWd3rh
-	8BoawT4CWaCpESKF6GWQomXgIDilGB0Ji2sNiS9iQsep18fjt3Pi42qlIRj13hkIpBcP
-	jdYSQVxYIQg1hc8coD8Iq7a36ZSnPpdONzvfbL06bk7y9WK/3J7Z32RtdivAM9XLpDDR
-	nPjA==
-X-Gm-Message-State: AIVw112Fj2zmlkYkzq5ureZXhXCL2W4U3g3SbPcFJGwk8ovw8GWqasT9
-	vHVQSNCNNaFLvzAtQ7zd0ul8v3eQYJQ+
-X-Received: by 10.80.217.141 with SMTP id w13mr3695392edj.228.1500576824215;
-	Thu, 20 Jul 2017 11:53:44 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.80.149.173 with HTTP; Thu, 20 Jul 2017 11:53:13 -0700 (PDT)
-In-Reply-To: <CAGkS5bn1Ke-k4W_-aCAQ9Mcp2ZvW4g+9ahx9CLrrpAf05SnLcw@mail.gmail.com>
-References: <CAGkS5bn1Ke-k4W_-aCAQ9Mcp2ZvW4g+9ahx9CLrrpAf05SnLcw@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Jul 2017 14:53:13 -0400
-Message-ID: <CAMKF1sq=EmOidjmsMqEs2uYGiU6W3qs-EuzFNOOd4VuNjN7gRg@mail.gmail.com>
-To: Jason Liu <jason.liu@gumstix.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: Pull Request
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wBLUB90dinPw2SIxb91Qd1JFEHAb7ns6dztbZaeo54M=;
+	b=hQ9LtTyNYhwZqgQNYzdkmT2HUjeBy5HyxPyo201wZkOFZtdCvTIc8LF/fx2XMt4nH1
+	V6OxPWo+2zCfPn6vPO+PqfLzm+xIGmizEeTlp0RRN9Z1c1NLg6Gunderr527YgQH9v3p
+	Jgno9lgiAWiUe9lQdLraWHCl9S+Ku6eVHRrk04hmp6GQT6BCZ4Jh1DP35pVfSvY9dfHF
+	nuWRiSilSOySJ1IHvjUB0F0uNygVWP0UIDmXuf/FBX91r56yrYQPEQzcEFs+ybWD34bh
+	WHftsFV5EpswZYnpPQS84E2+H5xEfDaLzVZg5lPfK8TQwig5BwrLxSV9tDhYtMULapAo
+	p2Tg==
+X-Gm-Message-State: AIVw112IzV55n56DEmrP+TAAW09P8fyD1fFePbAfCYYGqV8e/vXILCuj
+	GcFTEEU8DR3R9TOY2ys=
+X-Received: by 10.98.153.76 with SMTP id d73mr4981221pfe.14.1500579120527;
+	Thu, 20 Jul 2017 12:32:00 -0700 (PDT)
+Received: from localhost.localdomain ([209.121.22.40])
+	by smtp.gmail.com with ESMTPSA id
+	n80sm5942756pfj.118.2017.07.20.12.31.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 20 Jul 2017 12:32:00 -0700 (PDT)
+From: Jason Liu <jason.liu@gumstix.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 20 Jul 2017 12:31:33 -0700
+Message-Id: <1500579093-29708-1-git-send-email-jason.liu@gumstix.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Koen Kooi <koen@dominion.thruhere.net>
+Subject: [meta-oe][morty][PATCH] libvdpau: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,35 +50,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 18:53:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 20 Jul 2017 19:31:59 -0000
 
-Jason
+From: Koen Kooi <koen@dominion.thruhere.net>
 
-On Thu, Jul 20, 2017 at 12:42 PM, Jason Liu <jason.liu@gumstix.com> wrote:
-> Hi Openembedded,
->
-> Currently we are developing our kernel using morty branch openembedded
-> recipe and we found that there is no libvdpau package in morty branch. So I
-> did cherry-pick to apply the commit from master to add the bb file in.
->
-> The pull request is https://github.com/openembedded/meta-
-> openembedded/pull/48.
-> Please confirm the changes.
->
+Needed for x86 machines
 
-We do not follow the github pull request workflow, the github repos
-are mirrors for distributing the pulls
-you should submit the patches to openembedded-devel mailing list.
+Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-graphics/vdpau/libvdpau_git.bb | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
 
-http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
+diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
+new file mode 100644
+index 0000000..31f4df4
+--- /dev/null
++++ b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
+@@ -0,0 +1,23 @@
++SUMMARY = "Video Decode and Presentation API for UNIX"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
++
++DEPENDS = "virtual/libx11 libxext dri2proto"
++
++PV = "1.1.1+git${SRCPV}"
++
++SRCREV = "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
++SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
++
++S = "${WORKDIR}/git"
++
++inherit autotools pkgconfig
++
++do_install_append() {
++    rm -f ${D}${libdir}/*/*.la
++}
++
++FILES_${PN}-dbg += "${libdir}/vdpau/.debug"
++FILES_${PN}-dev += "${libdir}/vdpau/lib*${SOLIBSDEV}"
++FILES_${PN} += "${libdir}/vdpau/lib*${SOLIBS}"
+-- 
+2.7.4
 
-> Regards,
->
-> Jason
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
