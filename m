@@ -1,33 +1,45 @@
-Return-Path: <romain.bazile@ubiant.com>
-X-Greylist: delayed 2398 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 20 Jul 2017 00:07:42 UTC
-Received: from 20.mo1.mail-out.ovh.net (20.mo1.mail-out.ovh.net
-	[188.165.45.168])
-	by mail.openembedded.org (Postfix) with ESMTP id 2D32078203
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 159FE77E8A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 00:07:42 +0000 (UTC)
-Received: from player169.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo1.mail-out.ovh.net (Postfix) with ESMTP id 54D7287545
+	Thu, 20 Jul 2017 01:38:06 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id w191so13628002wmw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 00:48:46 +0200 (CEST)
-Received: from [10.0.0.130] (LStLambert-656-1-42-23.w92-154.abo.wanadoo.fr
-	[92.154.89.23]) (Authenticated sender: romain.bazile@ubiant.com)
-	by player169.ha.ovh.net (Postfix) with ESMTPSA id D904958007A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 00:48:45 +0200 (CEST)
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-From: Romain Bazile <romain.bazile@ubiant.com>
-Organization: Ubiant
-Message-ID: <4f5ed5b4-3ffe-78bc-e030-400a6b7794f4@ubiant.com>
-Date: Thu, 20 Jul 2017 00:48:45 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Wed, 19 Jul 2017 18:38:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=xBPmZyNNAy0UXR2ofBjR8TJ6JEA/stsCUABGljNbmAg=;
+	b=W02o1xC5NYLEs9dTuKTdtHnI0c+79kevUWb5ovJScdrvmmBil9DIhD1WCNUIrfKy7E
+	pz5RlEbmHlr8JlKDFcZNKzMoXShty6K/Ou8GtL6R+dqCVazRPvZpr3Tbc/ZWwIlXmqab
+	WWCczwa7rxb0keVEZzC2LO3q4N7JZpUVCitTeCTJdT6NbKaRfQ7fZvKSqkwX2igakp/D
+	ixNLwCg/MHh0BgdZITfbwuZTxvdrdc5KaJS6ld4fU7ga2Kg9Slw6XedwVSovwgJJ1t6G
+	jGIXcGaR1Brddd6qsYgnzvnoVykGAs/3z5t4A04h5Sw5+sBr3UIfVBS8V2/8z9CuGJ+l
+	54eQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=xBPmZyNNAy0UXR2ofBjR8TJ6JEA/stsCUABGljNbmAg=;
+	b=ZYikNYF+jPuiaK3tN7Jc2ljRNVVWGsHx46c3n9sWhjH1uJNMg8cJ13waGWPsC0d0FU
+	OLZT39BucHHZwX7zWOCOGsuFJ4De4HkEzUAHHog5yDeOz2z3oLmh3j0d3vCz4hBuvKVe
+	tbY2DQzBVam6pxeRjKDsOyhjws/kGvekow1PZipBgKgksoHk5POFc3ZERSyswupdn9jg
+	mytVO07naJFI6FXicBtNU7QDHWjA/Jjlum2Whw/ZfrD3CMRlds0Wi2DcdGpe0dK6FM4o
+	CjtTeFIyEf/yF3e6LCz8QRo6QiT1JkmFErhcVrHbYdPETif+hjrV9evDKh539zVdwXCx
+	CkQg==
+X-Gm-Message-State: AIVw111SomOOWjERcJu15lPC2ht2eXRjvUAG10gJuzNQ6nHpRF4/E9yt
+	NcHSRmbFDNqADBOxclTlYV/TIn29VMrR
+X-Received: by 10.80.217.75 with SMTP id u11mr1340938edj.250.1500514687661;
+	Wed, 19 Jul 2017 18:38:07 -0700 (PDT)
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 16270661032694602568
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 50
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeelkedrgeeggddvudcutefuodetggdotefrodftvfcurfhrohhfihhlvgemucfqggfjpdevjffgvefmvefgnecuuegrihhlohhuthemuceftddtnecuogetfeejfedqtdegucdlhedtmd
-Subject: [meta-python] Pip recipes PR
+Received: by 10.80.149.173 with HTTP; Wed, 19 Jul 2017 18:37:37 -0700 (PDT)
+In-Reply-To: <4f5ed5b4-3ffe-78bc-e030-400a6b7794f4@ubiant.com>
+References: <4f5ed5b4-3ffe-78bc-e030-400a6b7794f4@ubiant.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 19 Jul 2017 21:37:37 -0400
+Message-ID: <CAMKF1sr3OQKiwn1r_nxz26qQNjo104CNVEnyfX+MfJRP4OuFwg@mail.gmail.com>
+To: Romain Bazile <romain.bazile@ubiant.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python] Pip recipes PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,24 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 00:07:43 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: fr-FR
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 Jul 2017 01:38:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hello,
+On Wed, Jul 19, 2017 at 6:48 PM, Romain Bazile <romain.bazile@ubiant.com> wrote:
+> Hello,
+>
+> I created a couple of meta-python recipes for pip packages that I want to
+> share.
+>
+> Can I send a PR to this mailing-list with those?
+>
+> I assume one patch per recipe.
+>
 
-I created a couple of meta-python recipes for pip packages that I want 
-to share.
+sure. These are guidelines to help you
 
-Can I send a PR to this mailing-list with those?
+http://www.openembedded.org/wiki/How_to_submit_a_patch_to_OpenEmbedded
 
-I assume one patch per recipe.
-
-Sincerely,
--- 
-Romain Bazile
-Hardware R&D Engineer
-www.ubiant.com
-
+> Sincerely,
+> --
+> Romain Bazile
+> Hardware R&D Engineer
+> www.ubiant.com
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
