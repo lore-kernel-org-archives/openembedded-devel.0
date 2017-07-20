@@ -1,28 +1,25 @@
-Return-Path: <romain.bazile@ubiant.com>
-Received: from 20.mo1.mail-out.ovh.net (20.mo1.mail-out.ovh.net
-	[188.165.45.168])
-	by mail.openembedded.org (Postfix) with ESMTP id 692667828E
+Return-Path: <Yue.Tao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 344D37828E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 08:12:42 +0000 (UTC)
-Received: from player169.ha.ovh.net (b9.ovh.net [213.186.33.59])
-	by mo1.mail-out.ovh.net (Postfix) with ESMTP id 146D3882CF
+	Thu, 20 Jul 2017 08:17:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6K8Hq4P006183
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 09:57:14 +0200 (CEST)
-Received: from UBI-2016-10.ubiant.me
-	(LStLambert-656-1-42-23.w92-154.abo.wanadoo.fr [92.154.89.23])
-	(Authenticated sender: romain.bazile@ubiant.com)
-	by player169.ha.ovh.net (Postfix) with ESMTPSA id E6B29580097;
-	Thu, 20 Jul 2017 09:57:12 +0200 (CEST)
-From: Romain Bazile <romain.bazile@ubiant.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jul 2017 09:56:51 +0200
-Message-Id: <20170720075651.16444-1-romain.bazile@ubiant.com>
-X-Mailer: git-send-email 2.13.3
-X-Ovh-Tracer-Id: 7086695491757366088
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: 0
-X-VR-SPAMCAUSE: gggruggvucftvghtrhhoucdtuddrfeelkedrgeeggddufedvucetufdoteggodetrfdotffvucfrrhhofhhilhgvmecuqfggjfdpvefjgfevmfevgfenuceurghilhhouhhtmecufedttdenuc
-Subject: [meta-python][PATCH] python-pytun: addition of recipe for python and python3 using pipy
+	Thu, 20 Jul 2017 01:17:52 -0700 (PDT)
+Received: from pek-ytao-l1.corp.ad.wrs.com (128.224.162.238) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server
+	(TLS) id 14.3.294.0; Thu, 20 Jul 2017 01:17:51 -0700
+From: Yue Tao <Yue.Tao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 20 Jul 2017 16:17:47 +0800
+Message-ID: <1500538667-4504-1-git-send-email-Yue.Tao@windriver.com>
+X-Mailer: git-send-email 1.7.9.5
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.238]
+Subject: [meta-networking][PATCH] netperf: change SRC_URI to git repository
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,51 +32,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 08:12:42 -0000
+X-List-Received-Date: Thu, 20 Jul 2017 08:17:51 -0000
+Content-Type: text/plain
 
-Signed-off-by: Romain Bazile <romain.bazile@ubiant.com>
+netperf upstream has been migrated to GitHub. They no longer
+provide ftp and tar balls. Update the SRC_URI to point the
+GitHub repo instead of the ftp server address, still using the
+v2.6.0 version.
+
+Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
 ---
- meta-python/recipes-connectivity/python-pytun/python-pytun.inc | 10 ++++++++++
- .../recipes-connectivity/python-pytun/python-pytun_2.2.1.bb    |  2 ++
- .../recipes-connectivity/python-pytun/python3-pytun_2.2.1.bb   |  2 ++
- 3 files changed, 14 insertions(+)
- create mode 100644 meta-python/recipes-connectivity/python-pytun/python-pytun.inc
- create mode 100644 meta-python/recipes-connectivity/python-pytun/python-pytun_2.2.1.bb
- create mode 100644 meta-python/recipes-connectivity/python-pytun/python3-pytun_2.2.1.bb
+ .../recipes-support/netperf/netperf_2.6.0.bb       |   66 --------------------
+ .../recipes-support/netperf/netperf_git.bb         |   66 ++++++++++++++++++++
+ 2 files changed, 66 insertions(+), 66 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+ create mode 100644 meta-networking/recipes-support/netperf/netperf_git.bb
 
-diff --git a/meta-python/recipes-connectivity/python-pytun/python-pytun.inc b/meta-python/recipes-connectivity/python-pytun/python-pytun.inc
+diff --git a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb b/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
+deleted file mode 100644
+index 650fdae..0000000
+--- a/meta-networking/recipes-support/netperf/netperf_2.6.0.bb
++++ /dev/null
+@@ -1,66 +0,0 @@
+-SUMMARY = "A networking benchmarking tool"
+-DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, sockets, ATM and more."
+-SECTION = "net"
+-HOMEPAGE = "http://www.netperf.org/"
+-LICENSE = "netperf"
+-LICENSE_FLAGS = "non-commercial"
+-
+-
+-SRC_URI="ftp://ftp.netperf.org/netperf/archive/netperf-${PV}.tar.bz2 \
+-         file://cpu_set.patch \
+-         file://vfork.patch \
+-         file://init"
+-SRC_URI[md5sum] = "9654ffdfd4c4f2c93ce3733cd9ed9236"
+-SRC_URI[sha256sum] = "cd8dac710d4273d29f70e8dbd09353a6362ac58a11926e0822233c0cb230323a"
+-
+-LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
+-
+-inherit update-rc.d autotools
+-
+-S = "${WORKDIR}/netperf-${PV}"
+-
+-# cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
+-CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
+-
+-# set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files
+-# larger than 2GB
+-CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
+-    ' -D_FILE_OFFSET_BITS=64', '', d)}"
+-
+-PACKAGECONFIG ??= ""
+-PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
+-
+-# autotools.bbclass attends to include m4 files with path depth <= 2 by
+-# "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
+-do_configure_prepend() {
+-    test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
+-}
+-
+-do_install() {
+-    sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
+-
+-    install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
+-    install -m 4755 src/netperf ${D}${bindir}
+-    install -m 4755 src/netserver ${D}${sbindir}
+-    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
+-
+-    # man
+-    install -d ${D}${mandir}/man1/
+-    install -m 0644 ${S}/doc/netserver.man ${D}${mandir}/man1/netserver.1
+-    install -m 0644 ${S}/doc/netperf.man ${D}${mandir}/man1/netperf.1
+-
+-    # move scripts to examples directory
+-    install -d ${D}${docdir}/netperf/examples
+-    install -m 0644 ${S}/doc/examples/*_script ${D}${docdir}/netperf/examples/
+-
+-    # docs ..
+-    install -m 0644 ${S}/COPYING ${D}${docdir}/netperf
+-    install -m 0644 ${S}/Release_Notes ${D}${docdir}/netperf
+-    install -m 0644 ${S}/README ${D}${docdir}/netperf
+-    install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
+-}
+-
+-RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
+-
+-INITSCRIPT_NAME="netperf"
+-INITSCRIPT_PARAMS="defaults"
+diff --git a/meta-networking/recipes-support/netperf/netperf_git.bb b/meta-networking/recipes-support/netperf/netperf_git.bb
 new file mode 100644
-index 000000000..79eddce99
+index 0000000..5a51477
 --- /dev/null
-+++ b/meta-python/recipes-connectivity/python-pytun/python-pytun.inc
-@@ -0,0 +1,10 @@
-+ SUMMARY = "Python TUN/TAP tunnel module"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=13f7629e8e4989b66b4a913ab05a91de"
++++ b/meta-networking/recipes-support/netperf/netperf_git.bb
+@@ -0,0 +1,66 @@
++SUMMARY = "A networking benchmarking tool"
++DESCRIPTION = "Network performance benchmark including tests for TCP, UDP, sockets, ATM and more."
++SECTION = "net"
++HOMEPAGE = "http://www.netperf.org/"
++LICENSE = "netperf"
++LICENSE_FLAGS = "non-commercial"
 +
-+SRC_URI[md5sum] = "5b35b1cf80a02cca7ec72eb95d6b0192"
-+SRC_URI[sha256sum] = "07595dadf85f5176eb08c8d4d9ba5b862a180e96633f670f91437c47a1bead0d"
++PV = "2.6.0+git${SRCREV}"
++SRCREV = "050accccc728f29344088f5e15eff36fd2e0bc8a"
 +
-+PYPI_PACKAGE = "python-pytun"
++SRC_URI="git://github.com/HewlettPackard/netperf.git \
++         file://cpu_set.patch \
++         file://vfork.patch \
++         file://init"
 +
-+inherit pypi 
-diff --git a/meta-python/recipes-connectivity/python-pytun/python-pytun_2.2.1.bb b/meta-python/recipes-connectivity/python-pytun/python-pytun_2.2.1.bb
-new file mode 100644
-index 000000000..3fc587f3a
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-pytun/python-pytun_2.2.1.bb
-@@ -0,0 +1,2 @@
-+require python-pytun.inc
-+inherit setuptools
-diff --git a/meta-python/recipes-connectivity/python-pytun/python3-pytun_2.2.1.bb b/meta-python/recipes-connectivity/python-pytun/python3-pytun_2.2.1.bb
-new file mode 100644
-index 000000000..938d9d739
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-pytun/python3-pytun_2.2.1.bb
-@@ -0,0 +1,2 @@
-+require python-pytun.inc
-+inherit setuptools3
++LIC_FILES_CHKSUM = "file://COPYING;md5=a0ab17253e7a3f318da85382c7d5d5d6"
++
++inherit update-rc.d autotools
++
++S = "${WORKDIR}/git"
++
++# cpu_set.patch plus _GNU_SOURCE makes src/netlib.c compile with CPU_ macros
++CFLAGS_append = " -DDO_UNIX -DDO_IPV6 -D_GNU_SOURCE"
++
++# set the "_FILE_OFFSET_BITS" preprocessor symbol to 64 to support files
++# larger than 2GB
++CFLAGS_append = "${@bb.utils.contains('DISTRO_FEATURES', 'largefile', \
++    ' -D_FILE_OFFSET_BITS=64', '', d)}"
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[sctp] = "--enable-sctp,--disable-sctp,lksctp-tools,"
++
++# autotools.bbclass attends to include m4 files with path depth <= 2 by
++# "find ${S} -maxdepth 2 -name \*.m4", so move m4 files from m4/m4.
++do_configure_prepend() {
++    test -d ${S}/m4/m4 && mv -f ${S}/m4/m4 ${S}/m4-files
++}
++
++do_install() {
++    sed -e 's#/usr/sbin/#${sbindir}/#g' -i ${WORKDIR}/init
++
++    install -d ${D}${sbindir} ${D}${bindir} ${D}${sysconfdir}/init.d
++    install -m 4755 src/netperf ${D}${bindir}
++    install -m 4755 src/netserver ${D}${sbindir}
++    install -m 0755 ${WORKDIR}/init ${D}${sysconfdir}/init.d/netperf
++
++    # man
++    install -d ${D}${mandir}/man1/
++    install -m 0644 ${S}/doc/netserver.man ${D}${mandir}/man1/netserver.1
++    install -m 0644 ${S}/doc/netperf.man ${D}${mandir}/man1/netperf.1
++
++    # move scripts to examples directory
++    install -d ${D}${docdir}/netperf/examples
++    install -m 0644 ${S}/doc/examples/*_script ${D}${docdir}/netperf/examples/
++
++    # docs ..
++    install -m 0644 ${S}/COPYING ${D}${docdir}/netperf
++    install -m 0644 ${S}/Release_Notes ${D}${docdir}/netperf
++    install -m 0644 ${S}/README ${D}${docdir}/netperf
++    install -m 0644 ${S}/doc/netperf_old.ps ${D}${docdir}/netperf
++}
++
++RRECOMMENDS_${PN} += "${@bb.utils.contains('PACKAGECONFIG', 'sctp', 'kernel-module-sctp', '', d)}"
++
++INITSCRIPT_NAME="netperf"
++INITSCRIPT_PARAMS="defaults"
 -- 
-2.13.3
+1.7.9.5
 
 
