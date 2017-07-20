@@ -1,48 +1,46 @@
-Return-Path: <diego.rondini@kynetics.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 9487C7825D
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id A98DA782BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 12:07:13 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id 184so724363wmo.3
+	Thu, 20 Jul 2017 12:56:38 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id w191so26155430wmw.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 05:07:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=kynetics-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=+aXdY6Nrvku0U0kbI69DejrCJnhNX8rTjuohmM4Hzgg=;
-	b=cPV0IfvV6s3a99aMZVGiLB14fSOMiicfCt3vA/f5GoZDJpWKf9PXmNuVsAg5UKIbYA
-	QcYGMMG0wVYAYAzaO/MntL7OwsW9vdVEPrQ3ZCXXk5C+ExdpRrBKZK9UfjC7jMSbbosF
-	klij4Bjhl3Y3/8wAikZ1AInwTsj9j4B8Po4BVySFYMOoJ3Fe59EGnCJxXViWYcanKROR
-	0fLGpD4nw6DfL6Q3pT4eYH3Jne5YQNHUupg0vFj/M48rk7aW801XEO1pjQAwe1f+WSvv
-	boU2jYxhHjzbhdMXuPKHUz+UXjyhzgmnGrE6xLGg2hCCMuDqqcrLiu6bM3TvME0pUdo8
-	wSkg==
+	Thu, 20 Jul 2017 05:56:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=afVMErZYRixvq5hnblqR+OMx/ZcUl/YLhS5e1Q+C8V0=;
+	b=Vd/lw/mv1KZRwknNFqCdxi7fcCD4aDq1wG1ITBj3Kc+j1yVujxFDKy4QHLT1Vo1gRq
+	5+EGC+B9D5D7aVXUyzCfonIU+rKpxg+FS0o22vZutAvCWp0rKBO0eJZBBw6n4Y1ww9Js
+	BDpKDOJYnie9QdhSPFIW8hCgP2G0tlLjo4kkZ2Jbfcj8i/vNu49TPxfUxbGleEdn9fBL
+	GThPHWYj+8BSow5V4NUiKwp9WOGiLmydhMvNHHHuUlB5WtyJFmxwWy2oKcs9vhaWc9F3
+	rYa2J9Txbh+5Zu8jsULWp7brG9PxScY3u2kvldzM1yFnn+eeA1NXfmMaYoucBjKP62DK
+	J38g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+aXdY6Nrvku0U0kbI69DejrCJnhNX8rTjuohmM4Hzgg=;
-	b=PbSMhum6Z9CGaM4VhLnVgmxJPg95buJ7hk35WGEaG4Wl3KYqQwKJs9V/pMmBmOo4eQ
-	TEZFEr9WeEUqdf8j1W7KnQQQznphZwWVhQL1cOKinvRHw46Bo21dOEnwfZaU8PLY8jIQ
-	Md2rCidYT1417cmbb6AntV5i3oyYEMlGyNN05wQjePuUdowMGUaIFzqd4w8uwJoZvg7i
-	mBUbGKQKmZ9MmwKisD45WShZdGEkzbnwMQObqvEwHTHrzd5gMWWjcwmC9k1DF6//kz5Y
-	b+tlcju3YKHgGzDqBoxvjc/vTCUkVDSvvYRI1v9qbAVfTG1AnLyBCAicu6+D07Xfm81S
-	oe8A==
-X-Gm-Message-State: AIVw110tCgclfn9Ym5HPyVREF/bhURxU6rU4KPHgWfxzLSXiEa1ekcr8
-	2tSmPSj0lO7BBV0PYQc=
-X-Received: by 10.28.15.75 with SMTP id 72mr1108158wmp.177.1500552433852;
-	Thu, 20 Jul 2017 05:07:13 -0700 (PDT)
-Received: from yoctovde.kynetics.it
-	(host57-224-static.7-79-b.business.telecomitalia.it. [79.7.224.57])
-	by smtp.gmail.com with ESMTPSA id
-	q21sm3533595wra.86.2017.07.20.05.07.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 20 Jul 2017 05:07:13 -0700 (PDT)
-From: Diego Rondini <diego.rondini@kynetics.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jul 2017 14:07:01 +0200
-Message-Id: <1500552421-10582-1-git-send-email-diego.rondini@kynetics.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Diego Rondini <diego.rondini@kynetics.com>
-Subject: [meta-qt5][PATCH] python-pyqt5: include QtWidgets module
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=afVMErZYRixvq5hnblqR+OMx/ZcUl/YLhS5e1Q+C8V0=;
+	b=LBCwC9IUFWxrnVBOwn80erKYXxfgrKvJkTm0q1B9bQejIU8vvp1ZEEdQCii/4qeT6K
+	g6/A1yYJEr5HaBOjqFz3K44EzdRJEJndL2INxjDjG6bbzVdUnxFHfHFMoftnKl0BxTY0
+	pN6KoIbbt4a+6LAk82+Br6pCEo/fyRRpieQ94DN0+XV2U9w7jvy2TOkiGBaKvT5ckp8+
+	xqweXJVQxzBJXgz93UDB+CJaEfNtdq63LaXHv72tadMsfRrzRypAE4S7UWiY2WYaVAfh
+	RYAs0uzL0/PTsgOc/LPC8V2WWC3bSu+0wceFhpRjhjRURGE8l335/F431WtsATPBq0rh
+	RaiA==
+X-Gm-Message-State: AIVw1135Y0I9/kfkXOmwKSeEh9j2S/dF/h2ncl3VAkwUB1Yq2axJDegF
+	pK8G1FlpavqwgyJcOnhBh+FzOzeORg==
+X-Received: by 10.80.176.162 with SMTP id j31mr2965012edd.186.1500555399470;
+	Thu, 20 Jul 2017 05:56:39 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.149.173 with HTTP; Thu, 20 Jul 2017 05:56:09 -0700 (PDT)
+In-Reply-To: <8ed13ec40929590cc5daa25b13e8f6c0f10b0f3f.1500536448.git.hongxu.jia@windriver.com>
+References: <cover.1500536448.git.hongxu.jia@windriver.com>
+	<8ed13ec40929590cc5daa25b13e8f6c0f10b0f3f.1500536448.git.hongxu.jia@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 20 Jul 2017 08:56:09 -0400
+Message-ID: <CAMKF1srDQnVVjzu7U-UQ00Ooe73Nw==igbYQaOxNAUL=2DLxXQ@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-gnome][PATCH 1/8] libgnomekbd: 2.32 -> 3.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,80 +53,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 12:07:13 -0000
+X-List-Received-Date: Thu, 20 Jul 2017 12:56:38 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
----
- ...sip-fix-build-with-accessibility-disabled.patch | 35 ++++++++++++++++++++++
- recipes-python/pyqt5/python-pyqt5_5.8.2.bb         |  5 ++--
- 2 files changed, 38 insertions(+), 2 deletions(-)
- create mode 100644 recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
+On Thu, Jul 20, 2017 at 3:44 AM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
+> Remove --disable-schemas-install:
+> ...
+> |QA Issue: libgnomekbd: configure was passed unrecognised
+> options: --disable-schemas-install [unknown-configure-option]
+> ...
 
-diff --git a/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch b/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
-new file mode 100644
-index 0000000..7e1c7bf
---- /dev/null
-+++ b/recipes-python/pyqt5/files/0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch
-@@ -0,0 +1,35 @@
-+From 8a2f852417414e19d060da66cd7c5cba76e43c7d Mon Sep 17 00:00:00 2001
-+From: Diego Rondini <diego.rondini@kynetics.com>
-+Date: Wed, 19 Jul 2017 14:17:51 +0200
-+Subject: [PATCH] qtabbar.sip: fix build with accessibility disabled
-+
-+Upstream-Status: Submitted
-+
-+Signed-off-by: Diego Rondini <diego.rondini@kynetics.com>
-+---
-+ sip/QtWidgets/qtabbar.sip | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/sip/QtWidgets/qtabbar.sip b/sip/QtWidgets/qtabbar.sip
-+index ffe2d3b..80ad816 100644
-+--- a/sip/QtWidgets/qtabbar.sip
-++++ b/sip/QtWidgets/qtabbar.sip
-+@@ -166,11 +166,15 @@ protected:
-+ 
-+ public:
-+ %If (Qt_5_8_0 -)
-++%If (PyQt_Accessibility)
-+     QString accessibleTabName(int index) const;
-+ %End
-++%End
-+ %If (Qt_5_8_0 -)
-++%If (PyQt_Accessibility)
-+     void setAccessibleTabName(int index, const QString &name);
-+ %End
-++%End
-+ 
-+ private:
-+     QTabBar(const QTabBar &);
-+-- 
-+2.7.4
-+
-diff --git a/recipes-python/pyqt5/python-pyqt5_5.8.2.bb b/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
-index 3fa3d64..fdfa120 100644
---- a/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
-+++ b/recipes-python/pyqt5/python-pyqt5_5.8.2.bb
-@@ -11,6 +11,7 @@ DEPENDS = "sip sip-native qtbase python"
- SRC_URI = "\
-     ${SOURCEFORGE_MIRROR}/pyqt/PyQt5_gpl-${PV}.tar.gz \
-     file://fix-sm.patch \
-+    file://0001-qtabbar.sip-fix-build-with-accessibility-disabled.patch \
- "
- SRC_URI[md5sum] = "c3048e9d242f3e72fd393630da1d971a"
- SRC_URI[sha256sum] = "ebd70515b30bbd6098fee29e6271a6696b1183c5530ee30e6ba9aaab195536e8"
-@@ -31,8 +32,8 @@ DISABLED_FEATURES = "PyQt_Desktop_OpenGL PyQt_Accessibility PyQt_SessionManager"
- 
- DISABLED_FEATURES_append_arm = " PyQt_qreal_double"
- 
--PYQT_MODULES = "QtCore QtGui QtNetwork"
--PYQT_MODULES_aarch64 = "QtCore QtGui QtNetwork"
-+PYQT_MODULES = "QtCore QtGui QtNetwork QtWidgets"
-+PYQT_MODULES_aarch64 = "QtCore QtGui QtNetwork QtWidgets"
- 
- do_configure_prepend() {
-     cd ${S}
--- 
-2.7.4
+can you also build all these packages on musl and see if they build ?
 
+>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> ---
+>  .../gnome-settings-daemon_2.32.1.bb                  |  3 ---
+>  .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb     | 20 --------------------
+>  .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb     | 17 +++++++++++++++++
+>  3 files changed, 17 insertions(+), 23 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+>  create mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+> index c1db6d3..9a18972 100644
+> --- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+> +++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+> @@ -40,7 +40,4 @@ FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
+>  FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
+>  FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
+>
+> -
+> -PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted libgnomekbd - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+> -
+>  PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted gnome-desktop - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+> deleted file mode 100644
+> index 852d8e1..0000000
+> --- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -SUMMARY = "GNOME keyboard library"
+> -LICENSE = "LGPLv2"
+> -LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+> -
+> -SECTION = "x11/gnome/libs"
+> -
+> -DEPENDS = "gconf gtk+ glib-2.0 libxklavier intltool-native gnome-common-native"
+> -
+> -inherit gnome
+> -
+> -SRC_URI[archive.md5sum] = "de32a6e3e3464b566eecdc4332bf34bd"
+> -SRC_URI[archive.sha256sum] = "ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00ffc3e70c088ca4ee7383d256"
+> -GNOME_COMPRESS_TYPE="bz2"
+> -
+> -do_configure_append() {
+> -    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+> -    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
+> -}
+> -
+> -PNBLACKLIST[libgnomekbd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130608/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+> new file mode 100644
+> index 0000000..12ed81d
+> --- /dev/null
+> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY = "GNOME keyboard library"
+> +LICENSE = "LGPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+> +
+> +SECTION = "x11/gnome/libs"
+> +
+> +DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
+> +
+> +inherit gnome gobject-introspection gettext
+> +
+> +GNOME_COMPRESS_TYPE = "xz"
+> +
+> +SRC_URI[archive.md5sum] = "7b1ebf99f4254c99922163c262c7ff04"
+> +SRC_URI[archive.sha256sum] = "340b30dabfebbd4e0e6c0fe34a378966dd5640b5d44595ab8a19b0be255d77df"
+> +
+> +EXTRA_OECONF_remove = "--disable-schemas-install"
+> +
+> --
+> 2.8.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
