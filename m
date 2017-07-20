@@ -1,53 +1,51 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
-	[209.85.128.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 32FCD6AC37
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 450BB7831C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 15:35:19 +0000 (UTC)
-Received: by mail-wr0-f179.google.com with SMTP id f21so15891994wrf.5
+	Thu, 20 Jul 2017 15:35:20 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id v105so42192837wrb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 08:35:21 -0700 (PDT)
+	Thu, 20 Jul 2017 08:35:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=hrKwKccxVyUzYrxDS+w6qMBWP841RpwYcKoqAtomCq8=;
-	b=cMvzNGf28ri2E969WYGL8AgOyKZbUpBttttyZA8HkcPYK1V1CQEMTntz1+QU4y6wMQ
-	a4gs6QQ7J89kkgJNCgxFP3EJiULWd3B3yG0s5MEs8moiDkM88XR7vAhl/4bkaQOHXZDd
-	ehvlvloId9JzstjUqfYSebSU9cMl82LgqD8rtrv4E+EeVMzmr5ZxE2IK6NDcXLB1FQlt
-	i073vJ2wsSaMVmLBSTX8GA0moTlJCarorsUA5EZ2ta+QqejMap5ZlggqeI3aw+JALhca
-	xkiW6KDykVDOK94Lo9pbcgNCVr0DspHMXj7MAVrP2Lmkikq5WqY1xbXD8dWoIefGfoUP
-	OS+A==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=ydDCK3Gn2lYHKL23zRpWm09D2RFw1rNlFow7XvKwKQE=;
+	b=j6td1R+UoRsum/jee7kdQhN7cPrtEQZ7EAk2Fni44Ras+5Wo+tTEvyzHYD1s8Xd5zH
+	DLfKJj8rYdFuzFTn+6ltDJR91yGc3cqixT/TZkKQyu8X91gj0RCl6JjIwOlJ8iMisdjT
+	CtoKUsYbZyufPwXBTZai5zJrqPTIx9nyBSPp4TIQ4UZW4v6fecaahcYYapHC6BbF67hP
+	ouQ5Qn1yMUvbO/e6OlWtFvXfJ0ZXIZGLZ3gXPQJ5s9NG6uuQTSEEsID7Co/6V+KOo1PW
+	mJnGuLCEOKMPl5hvex8s1K7xGI2wn7sFVdpLrioz/m+YEA7ekIUmmSTSxPmB9EAEBS5d
+	pq2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=hrKwKccxVyUzYrxDS+w6qMBWP841RpwYcKoqAtomCq8=;
-	b=WBdmRxIYgCb5HgUevwCApKDdJ6r5nyslTWhWsTmlm/RxyDizicbCi8uKrGqO+Gf6jA
-	CSBJIfJ7m0FzumC0+iq8XU0m960QY8SS4k/HvYuj+Go8w4tmwchBara73ik/fzE+K/yb
-	OAge1eeM2Qc37jDPqi5CaSzrSZ8K44LuRdPfmd9BkQjJFxajr73+aqXwf/Fb0QHyDj1q
-	oYdkr5CwZDK12lxhCvqpP8kjD8N75MwhWFToPVg0X5XpWkx2fiiSnV5Vi2mK8yRPxmTq
-	GHW3d/PNcEUJQldLOj2rWlkImfldljV6oxYb+GjC+Fe562aSTeHcDMvV4KEUVcMwenup
-	EVIg==
-X-Gm-Message-State: AIVw113uw7WP5KBVFl9goZ5FLEZqN23UmMY1+QwZNoETff0zMlwDOe1W
-	kwhOuAQ7JtPaD4kcQ/M=
-X-Received: by 10.223.151.206 with SMTP id t14mr3774317wrb.229.1500564920563; 
-	Thu, 20 Jul 2017 08:35:20 -0700 (PDT)
+	:references;
+	bh=ydDCK3Gn2lYHKL23zRpWm09D2RFw1rNlFow7XvKwKQE=;
+	b=LHzEkI8TOo1rMMdq6kuWWnTpLMTMBIDBCbQFexNTYsv96K3lUZgOO3NysWyQDj+e1S
+	6d+V8wyNwvGDGG2LgTTj/spspzzEBwmNtEBSY8XTDd8WmO5yfqn1shc0/UxJqg9cWXe+
+	WKLaJgi0yO8qXgcXdcT3r4G1DTQHN8VvO4M6oBo0ZfuHooio1hv+q22+0u07v3233XbH
+	ZPJltBuLl0pqsjEpbX7fy0nvRsQx1P4QP4dDsFHU889d+x8aNTeCpaP5lrBdC9L2uA2b
+	Xt4wHJ9XzU7NrdOR902yk1zc0YYldcLnEzxPzRWssade80n/7OU6QRcT16usyKs+/oHI
+	SzXw==
+X-Gm-Message-State: AIVw113fKQz4473dTELDgZ6H1+bXIXf77LiE0yRD1zRdoRwsToGXP6Fn
+	tZ3yOu47tNhYPQBQDCc=
+X-Received: by 10.223.161.204 with SMTP id v12mr6906659wrv.125.1500564921553; 
+	Thu, 20 Jul 2017 08:35:21 -0700 (PDT)
 Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
 	by smtp.gmail.com with ESMTPSA id
-	190sm2853628wmh.36.2017.07.20.08.35.19
+	190sm2853628wmh.36.2017.07.20.08.35.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 20 Jul 2017 08:35:19 -0700 (PDT)
+	Thu, 20 Jul 2017 08:35:20 -0700 (PDT)
 From: Ross Burton <ross.burton@intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 20 Jul 2017 16:35:04 +0100
-Message-Id: <20170720153508.23113-5-ross.burton@intel.com>
+Date: Thu, 20 Jul 2017 16:35:05 +0100
+Message-Id: <20170720153508.23113-6-ross.burton@intel.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <20170720153508.23113-1-ross.burton@intel.com>
 References: <20170720153508.23113-1-ross.burton@intel.com>
-MIME-Version: 1.0
-Subject: [PATCH][meta-gnome 5/9] zenity: remove
+Subject: [PATCH][meta-gnome 6/9] gcalctool: remove (previously blacklisted)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,92 +58,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 15:35:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 20 Jul 2017 15:35:21 -0000
 
-Zenity 2.32.1 is from 2010 and is blacklisted, so remove it.
+GCalctool 5.32.0 is from 2010 and blacklisted, so remove it.
 
 Signed-off-by: Ross Burton <ross.burton@intel.com>
 ---
- .../files/0001-Makefile.am-don-t-build-help.patch  | 39 ----------------------
- meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb   | 21 ------------
- 2 files changed, 60 deletions(-)
- delete mode 100644 meta-gnome/recipes-gnome/zenity/files/0001-Makefile.am-don-t-build-help.patch
- delete mode 100644 meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
+ .../recipes-gnome/gcalctool/gcalctool_5.32.0.bb      | 20 --------------------
+ 1 file changed, 20 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb
 
-diff --git a/meta-gnome/recipes-gnome/zenity/files/0001-Makefile.am-don-t-build-help.patch b/meta-gnome/recipes-gnome/zenity/files/0001-Makefile.am-don-t-build-help.patch
+diff --git a/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb b/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb
 deleted file mode 100644
-index 50c9cb99f..000000000
---- a/meta-gnome/recipes-gnome/zenity/files/0001-Makefile.am-don-t-build-help.patch
+index 6028f2d1a..000000000
+--- a/meta-gnome/recipes-gnome/gcalctool/gcalctool_5.32.0.bb
 +++ /dev/null
-@@ -1,39 +0,0 @@
--From 17e5606f8c4c8ff26ba18489aad4c484cf8e2949 Mon Sep 17 00:00:00 2001
--From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
--Date: Mon, 29 Apr 2013 11:34:27 +0200
--Subject: [PATCH] Makefile.am: don't build help
--MIME-Version: 1.0
--Content-Type: text/plain; charset=UTF-8
--Content-Transfer-Encoding: 8bit
+@@ -1,20 +0,0 @@
+-SUMMARY = "gcalctool is a powerful calculator"
+-SECTION = "x11"
+-DEPENDS = "gtk+ gnome-doc-utils"
 -
--it crashes with:
+-LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
 -
--| warning: failed to load external entity "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
--| cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
--| make[2]: *** [zenity-bg.omf] Error 1
--| make[2]: Leaving directory `/home/andreas/tmp/oe-core-eglibc/work/armv7a-vfp-neon-angstrom-linux-gnueabi/zenity/2.32.1-r2/zenity-2.32.1/help'
+-SHRT_VER = "${@d.getVar('PV').split('.')[0]}.${@d.getVar('PV').split('.')[1]}"
+-SRC_URI = "http://download.gnome.org/sources/${BPN}/${SHRT_VER}/${BP}.tar.gz"
 -
--Upstream-Status: Inappropriate [configuration]
+-SRC_URI[md5sum] = "48db927c6e7ee1d5395f953a8c184c98"
+-SRC_URI[sha256sum] = "346f645c0fdef900642f6e9a2c18e7ba9a7ca9bc62fe2b08eb418f065a425c89"
 -
--Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-----
-- Makefile.am |    3 +--
-- 1 files changed, 1 insertions(+), 2 deletions(-)
+-inherit autotools pkgconfig gsettings
 -
--diff --git a/Makefile.am b/Makefile.am
--index 03accc1..caec7f0 100644
----- a/Makefile.am
--+++ b/Makefile.am
--@@ -1,8 +1,7 @@
-- SUBDIRS = \
-- 	src	\
-- 	po	\
---	data	\
---	help
--+	data
-- 
-- EXTRA_DIST = \
-- 	autogen.sh		\
---- 
--1.7.6.5
--
-diff --git a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb b/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-deleted file mode 100644
-index bd9f7a0ab..000000000
---- a/meta-gnome/recipes-gnome/zenity/zenity_2.32.1.bb
-+++ /dev/null
-@@ -1,21 +0,0 @@
--SUMMARY = "Display dialog boxes from the commandline and shell scripts"
--LICENSE = "LGPLv2"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3bf50002aefd002f49e7bb854063f7e7"
--
--PR = "r2"
--
--PNBLACKLIST[zenity] ?= "BROKEN: doesn't build with B!=S - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--
--DEPENDS = "gtk+ glib-2.0 libnotify gnome-doc-utils"
--
--inherit gnomebase
--SRC_URI += "file://0001-Makefile.am-don-t-build-help.patch"
--SRC_URI[archive.md5sum] = "aa66ec35451b16e424519b4973082170"
--SRC_URI[archive.sha256sum] = "8838be041a07364b62a4281c971392e4a09bb01bb3237a836ec0457ec0ea18ac"
--
--EXTRA_OECONF += "--disable-scrollkeeper"
--# remove -I/usr/include from zenity_CPPFLAGS
 -do_configure_prepend() {
--    sed -i -e '/-I$(includedir)/d' src/Makefile.am
+-    sed -i -e "s: help: :g" ${S}/Makefile.am
 -}
 -
+-PNBLACKLIST[gcalctool] ?= "broken at least since April 2013 http://permalink.gmane.org/gmane.comp.handhelds.openembedded/57920 and nobody complained, it's also replaced by gnome calculator - the recipe will be removed on 2017-09-01 unless the issue is fixed"
 -- 
 2.11.0
 
