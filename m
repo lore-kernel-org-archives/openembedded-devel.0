@@ -1,46 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
-	by mail.openembedded.org (Postfix) with ESMTP id A98DA782BB
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yw0-f170.google.com (mail-yw0-f170.google.com
+	[209.85.161.170])
+	by mail.openembedded.org (Postfix) with ESMTP id D6A426003C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 12:56:38 +0000 (UTC)
-Received: by mail-wm0-f41.google.com with SMTP id w191so26155430wmw.1
+	Thu, 20 Jul 2017 13:34:53 +0000 (UTC)
+Received: by mail-yw0-f170.google.com with SMTP id v193so12848544ywg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 05:56:40 -0700 (PDT)
+	Thu, 20 Jul 2017 06:34:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=afVMErZYRixvq5hnblqR+OMx/ZcUl/YLhS5e1Q+C8V0=;
-	b=Vd/lw/mv1KZRwknNFqCdxi7fcCD4aDq1wG1ITBj3Kc+j1yVujxFDKy4QHLT1Vo1gRq
-	5+EGC+B9D5D7aVXUyzCfonIU+rKpxg+FS0o22vZutAvCWp0rKBO0eJZBBw6n4Y1ww9Js
-	BDpKDOJYnie9QdhSPFIW8hCgP2G0tlLjo4kkZ2Jbfcj8i/vNu49TPxfUxbGleEdn9fBL
-	GThPHWYj+8BSow5V4NUiKwp9WOGiLmydhMvNHHHuUlB5WtyJFmxwWy2oKcs9vhaWc9F3
-	rYa2J9Txbh+5Zu8jsULWp7brG9PxScY3u2kvldzM1yFnn+eeA1NXfmMaYoucBjKP62DK
-	J38g==
+	:cc; bh=KEkH/iWoJ1SpgSbqYadXn2kcBIefVklL+0HlcJPV6do=;
+	b=iFnaq1Hdrvm1FVPvBo2wMZjEc6W3N2xN078yCSOWYYmYEik3lOsrE4jZKNdRlD9bYs
+	ZoTUsxlDAHGbQnrHZLkS5whayRQiALOPCk6E5v3nPmZwuUBWUhWur+8dn9XgJ3qtdQL8
+	q9gPjVvemXJH23xJD5UaQxKC+RiiycJwTxL1nkRH6GebqPb3tiZDvyOl5Dyl2iAWp52U
+	ZuJJiPBUakd3RUSGbcaqh38/A2QvfoufyZH728I7G4Xe4736rzq882TY5Zso1jbpTW6U
+	gGqcWXjR3b2JqR325YNCsoypMqODHie1CmxZVP0/1gciNVeYklZglOGrbVeWb/Uz9uBN
+	391g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=afVMErZYRixvq5hnblqR+OMx/ZcUl/YLhS5e1Q+C8V0=;
-	b=LBCwC9IUFWxrnVBOwn80erKYXxfgrKvJkTm0q1B9bQejIU8vvp1ZEEdQCii/4qeT6K
-	g6/A1yYJEr5HaBOjqFz3K44EzdRJEJndL2INxjDjG6bbzVdUnxFHfHFMoftnKl0BxTY0
-	pN6KoIbbt4a+6LAk82+Br6pCEo/fyRRpieQ94DN0+XV2U9w7jvy2TOkiGBaKvT5ckp8+
-	xqweXJVQxzBJXgz93UDB+CJaEfNtdq63LaXHv72tadMsfRrzRypAE4S7UWiY2WYaVAfh
-	RYAs0uzL0/PTsgOc/LPC8V2WWC3bSu+0wceFhpRjhjRURGE8l335/F431WtsATPBq0rh
-	RaiA==
-X-Gm-Message-State: AIVw1135Y0I9/kfkXOmwKSeEh9j2S/dF/h2ncl3VAkwUB1Yq2axJDegF
-	pK8G1FlpavqwgyJcOnhBh+FzOzeORg==
-X-Received: by 10.80.176.162 with SMTP id j31mr2965012edd.186.1500555399470;
-	Thu, 20 Jul 2017 05:56:39 -0700 (PDT)
+	bh=KEkH/iWoJ1SpgSbqYadXn2kcBIefVklL+0HlcJPV6do=;
+	b=eZelUKLwhL3Oseg8ojd7Nd5oHjQeIiSa3xEX3hKBL8AgH7qp068jPmZPc0Vlr4BKXg
+	dRmqDShum1+ZtFyIA6r9ZAONe98ixwHACkq7lTYF+l+Wwn9t9UbDnsRbSsY7nA+6F8wZ
+	ciGOUAl9DNdrRiJhVuZZE9QZOh4xOOZVUjeVnC0KnjYhfHL1upgxfwDP/t798CPw88HA
+	PlWZ0ie312lISdCLVQ4NT+1mgbM2dO9FkKXIwJZEVsYcBtwBKr/BNWdvkwBk8a+K3TjA
+	WBh/1bSRlOhvpftw4+nrMHFZXVHMWu/VP4RZXOvfgdbeUWrnrdJBauEL0biyMu2aU9b0
+	mnaA==
+X-Gm-Message-State: AIVw113WrI8hFpPKoTE+Q4d+ZN9oYPRs3S9ktN4Lu1vpwBfg4N3phoEI
+	JfzfM6b+HkGb6lTkNpGAt6U4uENYiA==
+X-Received: by 10.13.194.1 with SMTP id e1mr2687004ywd.64.1500547173470; Thu,
+	20 Jul 2017 03:39:33 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.80.149.173 with HTTP; Thu, 20 Jul 2017 05:56:09 -0700 (PDT)
-In-Reply-To: <8ed13ec40929590cc5daa25b13e8f6c0f10b0f3f.1500536448.git.hongxu.jia@windriver.com>
-References: <cover.1500536448.git.hongxu.jia@windriver.com>
-	<8ed13ec40929590cc5daa25b13e8f6c0f10b0f3f.1500536448.git.hongxu.jia@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 20 Jul 2017 08:56:09 -0400
-Message-ID: <CAMKF1srDQnVVjzu7U-UQ00Ooe73Nw==igbYQaOxNAUL=2DLxXQ@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-gnome][PATCH 1/8] libgnomekbd: 2.32 -> 3.22
+Received: by 10.37.77.4 with HTTP; Thu, 20 Jul 2017 03:39:33 -0700 (PDT)
+In-Reply-To: <20170711063102.10384-1-raj.khem@gmail.com>
+References: <20170711063102.10384-1-raj.khem@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 20 Jul 2017 12:39:33 +0200
+Message-ID: <CA+chaQfPrnGpgXibiSt9NS4qKH+eQt53oNcm+i-k=eAYWUscbg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qwt-qt5: Fix rpath issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,95 +54,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 12:56:38 -0000
+X-List-Received-Date: Thu, 20 Jul 2017 13:34:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Jul 20, 2017 at 3:44 AM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
-> Remove --disable-schemas-install:
-> ...
-> |QA Issue: libgnomekbd: configure was passed unrecognised
-> options: --disable-schemas-install [unknown-configure-option]
-> ...
+I still see QA warning from this one just on .debug file now:
 
-can you also build all these packages on musl and see if they build ?
 
+qwt-qt5-6.1.3: qwt-qt5-dbg: found library in wrong location:
+/usr/plugins/designer/.debug/libqwt_designer_plugin.so [libdir]
+
+
+On Tue, Jul 11, 2017 at 8:31 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> It errors out
+> usr/plugins/designer/libqwt_designer_plugin.so [rpaths]
+> QA Issue: qwt-qt5-plugins: found library in wrong location:
+> /usr/plugins/designer/libqwt_designer_plugin.so
 >
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  .../gnome-settings-daemon_2.32.1.bb                  |  3 ---
->  .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb     | 20 --------------------
->  .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb     | 17 +++++++++++++++++
->  3 files changed, 17 insertions(+), 23 deletions(-)
->  delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
->  create mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+>  recipes-qt/qwt/qwt-qt5.inc                |  5 +++--
+>  recipes-qt/qwt/qwt-qt5/remove_rpath.patch | 17 +++++++++++++++++
+>  2 files changed, 20 insertions(+), 2 deletions(-)
+>  create mode 100644 recipes-qt/qwt/qwt-qt5/remove_rpath.patch
 >
-> diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-> index c1db6d3..9a18972 100644
-> --- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-> +++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
-> @@ -40,7 +40,4 @@ FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
->  FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
->  FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
+> diff --git a/recipes-qt/qwt/qwt-qt5.inc b/recipes-qt/qwt/qwt-qt5.inc
+> index ee4fbd7..90bd9f7 100644
+> --- a/recipes-qt/qwt/qwt-qt5.inc
+> +++ b/recipes-qt/qwt/qwt-qt5.inc
+> @@ -8,9 +8,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=
+> dac2743472b0462ff3cfb4af42051c88"
+>  DEPENDS = "qtbase qtsvg qttools"
 >
-> -
-> -PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted libgnomekbd - the recipe will be removed on 2017-09-01 unless the issue is fixed"
-> -
->  PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted gnome-desktop - the recipe will be removed on 2017-09-01 unless the issue is fixed"
-> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-> deleted file mode 100644
-> index 852d8e1..0000000
-> --- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
-> +++ /dev/null
-> @@ -1,20 +0,0 @@
-> -SUMMARY = "GNOME keyboard library"
-> -LICENSE = "LGPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
-> -
-> -SECTION = "x11/gnome/libs"
-> -
-> -DEPENDS = "gconf gtk+ glib-2.0 libxklavier intltool-native gnome-common-native"
-> -
-> -inherit gnome
-> -
-> -SRC_URI[archive.md5sum] = "de32a6e3e3464b566eecdc4332bf34bd"
-> -SRC_URI[archive.sha256sum] = "ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00ffc3e70c088ca4ee7383d256"
-> -GNOME_COMPRESS_TYPE="bz2"
-> -
-> -do_configure_append() {
-> -    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
-> -    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
-> -}
-> -
-> -PNBLACKLIST[libgnomekbd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130608/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
-> diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2;name=qwt \
+> +           file://remove_rpath.patch \
+>            "
+> -#           file://qwt6.patch
+> -#           file://qwt6-fix-linking-with-ld-gold.patch"
+>
+>  S = "${WORKDIR}/qwt-${PV}"
+>
+> @@ -45,3 +44,5 @@ FILES_${PN}-plugins = "${prefix}/plugins/designer/*.so"
+>  FILES_${PN}-dbg += "${prefix}/plugins/designer/.debug"
+>  FILES_${PN}-doc += "${prefix}/doc"
+>
+> +INSANE_SKIP_${PN}-plugins += "libdir"
+> +
+> diff --git a/recipes-qt/qwt/qwt-qt5/remove_rpath.patch
+> b/recipes-qt/qwt/qwt-qt5/remove_rpath.patch
 > new file mode 100644
-> index 0000000..12ed81d
+> index 0000000..14b65d6
 > --- /dev/null
-> +++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+> +++ b/recipes-qt/qwt/qwt-qt5/remove_rpath.patch
 > @@ -0,0 +1,17 @@
-> +SUMMARY = "GNOME keyboard library"
-> +LICENSE = "LGPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+> +Remove rpath from library, it points to build area which is not
+> +ok
 > +
-> +SECTION = "x11/gnome/libs"
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +
-> +DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
+> +Index: qwt-6.1.3/designer/designer.pro
+> +===================================================================
+> +--- qwt-6.1.3.orig/designer/designer.pro
+> ++++ qwt-6.1.3/designer/designer.pro
+> +@@ -83,7 +83,6 @@ contains(QWT_CONFIG, QwtDesigner) {
+> +         # compile the path for finding the Qwt library
+> +         # into the plugin. Not supported on Windows !
 > +
-> +inherit gnome gobject-introspection gettext
+> +-        QMAKE_RPATHDIR *= $${QWT_INSTALL_LIBS}
+> +         qwtAddLibrary($${QWT_OUT_ROOT}/lib, qwt)
 > +
-> +GNOME_COMPRESS_TYPE = "xz"
-> +
-> +SRC_URI[archive.md5sum] = "7b1ebf99f4254c99922163c262c7ff04"
-> +SRC_URI[archive.sha256sum] = "340b30dabfebbd4e0e6c0fe34a378966dd5640b5d44595ab8a19b0be255d77df"
-> +
-> +EXTRA_OECONF_remove = "--disable-schemas-install"
-> +
+> +         contains(QWT_CONFIG, QwtDll) {
 > --
-> 2.8.1
+> 2.13.2
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
