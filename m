@@ -1,50 +1,36 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C184E78353
+Return-Path: <brian.avery@intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 946A278323
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 21:51:45 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id v129so1169162ybv.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 Jul 2017 14:51:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ZnksdMZwyZjz7fxteSnuEvdtydYTwtNgC1MxFF7JDJU=;
-	b=BoAjnKM50/FF63TUzdVixbwN9S3Y6V/EIK90KXxEMNeaWbJvjC1jXfkr4FsQjoeoGv
-	YmhNlp1g4fhVlbfaTEWwuXsvBAKwAu+uxI+J8x5/g85XMfl1Gb9G3U5oFb0P8M5tMDFI
-	zWHIpLcA7tOgWOBgyBrHSg2DaV4aqTnRixO07aztvD1VT7vmh2Ar2hCXme7SmAEGhMrN
-	qgYjeP8sMwzeF2xJD1egzZvKxfGHdOYtzPC2vKrgQVnIbswlENLBsCu/Owtq2DYuiyd0
-	szPSUTSNvKky10mYSkQOYnn8aS8n5AvkuQAFPSBUHsg45RhUOJ+dhjNEmn99NpdFeA8c
-	l3FQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ZnksdMZwyZjz7fxteSnuEvdtydYTwtNgC1MxFF7JDJU=;
-	b=KatkldbJ+a/rzel5DvlAL4bRFYgUGPSJr/CiqFGkuBvtn8DEZsBcEqAqb2M0tYVfbp
-	MtGIV5V/YxAkkQ7EH7BNXjYSxRg9HkGH0oUODaMAqbMgjmIrAREyRPY+QodCUUl8DB6d
-	/E2fuBlu0/CLxdSvGsztdg5CZTViy3Oee8PC3S/FsqmXNe8M603txGT5JGZNyH+x0yjH
-	9I2cZ7Gi+0fj/9fLh34sOvGHWmtHdGUS8kOUX29xOXetItK5vwnmxQwZcrr0iEXZoiyh
-	6aOUgQL267FsieVCh5OQHtQCatUi8Fl+LDqZc98myTk+9TEnEkCGdRy25GCFdi8M777N
-	Jq+g==
-X-Gm-Message-State: AIVw113sleIcHi9dNaGHDAdY3goGvF5hHiLWn2G8rNUlmosALO5jfDRR
-	lmq/qMXpEyc1T+B9msQ2qhB4DJqFtQ==
-X-Received: by 10.37.0.195 with SMTP id 186mr4422109yba.46.1500587506651; Thu,
-	20 Jul 2017 14:51:46 -0700 (PDT)
+	Thu, 20 Jul 2017 22:23:38 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	20 Jul 2017 15:23:40 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.40,386,1496127600"; 
+	d="list'?scan'208";a="1197783980"
+Received: from orsmsx101.amr.corp.intel.com ([10.22.225.128])
+	by fmsmga002.fm.intel.com with ESMTP; 20 Jul 2017 15:23:32 -0700
+Received: from orsmsx104.amr.corp.intel.com ([169.254.4.205]) by
+	ORSMSX101.amr.corp.intel.com ([169.254.8.145]) with mapi id
+	14.03.0319.002; Thu, 20 Jul 2017 15:23:30 -0700
+From: "Avery, Brian" <brian.avery@intel.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-java][pyro][BUG REPORT] jamvm-initial-native fails to
+	build on host lacking java
+Thread-Index: AQHTAabQsHz+zGWeh0GqdbXnOWQTJg==
+Date: Thu, 20 Jul 2017 22:23:29 +0000
+Message-ID: <0001B95B-2554-4DE8-9A35-6598CBCBA285@intel.com>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.24.8.144]
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Thu, 20 Jul 2017 14:51:46 -0700 (PDT)
-In-Reply-To: <6930f0a2-4d9e-a862-5184-e532435fc800@gmail.com>
-References: <1500579093-29708-1-git-send-email-jason.liu@gumstix.com>
-	<6930f0a2-4d9e-a862-5184-e532435fc800@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 20 Jul 2017 23:51:46 +0200
-Message-ID: <CA+chaQcHLZmKtf+8GVnhnUwcL6ecHwU0FKW7brsrDe4D23Qrsg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Koen Kooi <koen@dominion.thruhere.net>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Jason Liu <jason.liu@gumstix.com>
-Subject: Re: [meta-oe][morty][PATCH] libvdpau: Add recipe
+Cc: "mario@ossystems.com.br" <mario@ossystems.com.br>,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	"heinold@inf.fu-berlin.de" <heinold@inf.fu-berlin.de>
+Subject: [meta-java][pyro][BUG REPORT] jamvm-initial-native fails to build on host lacking java
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,75 +43,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 Jul 2017 21:51:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 20 Jul 2017 22:23:39 -0000
+X-Groupsio-MsgNum: 67772
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_002_0001B95B25544DE89A356598CBCBA285intelcom_"
 
-Then maybe you shouldn't backport those changes which added dependency on
-it.
+--_002_0001B95B25544DE89A356598CBCBA285intelcom_
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <2BB6EC49BC1EA841BEEA2935CCA5160B@intel.com>
+Content-Transfer-Encoding: base64
 
-I've fine with either adding it to resolve this mess or reverting those 2
-backports (for vlc and mpv).
+SGksIA0KDQpJZiB0aGVyZSBpcyBhIGJldHRlciBvciBtb3JlIGFwcHJvcHJpYXRlIHBsYWNlIHRv
+IHJlcG9ydCB0aGlzIGtpbmQgb2YgYnVnLCBwbGVhc2UgbGV0IG1lIGtub3cgYW5kIEkgY2FuIHJl
+ZG8gaXQuDQotYnJpYW4NCi0tLQ0KSSByYW4gYWNyb3NzIHRoaXMgYnVnIHdoaWxlIGNoYXNpbmcg
+c29tZXRoaW5nIGVsc2UuIEnigJltIG5vdCBjb252ZXJzYW50IGVub3VnaCB3aXRoIHRoZSBqYXZh
+IGJ1aWxkIHByb2Nlc3MgdG8gZml4IGl0IDovLg0KDQpNeSBzZXR1cA0KDQpDb25mOg0KTUFDSElO
+RT1xZW11eDg2LTY0DQpQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9qYXZhLWluaXRpYWwtbmF0
+aXZlID0gImphbXZtLWluaXRpYWwtbmF0aXZlIg0KUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwv
+amF2YS1uYXRpdmUgPSAiamFtdm0tbmF0aXZlIg0KDQpiYmxheWVycyBpbmNsdWRlZDoNCnBva3kv
+bWV0YSANCnBva3kvbWV0YS1wb2t5IA0KcG9reS9tZXRhLXlvY3RvLWJzcCANCm1ldGEtb3BlbmVt
+YmVkZGVkL21ldGEtb2UgDQptZXRhLWphdmEgDQoNCmJ1aWxkLWhvc3QgdWJ1bnR1OjE2LjA0IGJh
+c2VkIGNvbnRhaW5lciBydW5uaW5nIG9uIGFuIHVidW50dSAxNi4wNCBob3N0Lg0KDQpiaXRiYWtl
+IG9wZW5qcmUtOA0KDQpJZiBJIHNldCBQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC9qYXZhLWlu
+aXRpYWwtbmF0aXZlID0gImphbXZtLWluaXRpYWwtbmF0aXZlIg0KcmVzdWx0cyBpbjoNCkVSUk9S
+OiBUYXNrICgvaG9tZS9iYXZlcnkvd29yay9qYXZhU1N0YXRlLTExNzMyL21ldGEtamF2YS9yZWNp
+cGVzLWNvcmUvY2xhc3NwYXRoL2NsYXNzcGF0aC1uYXRpdmVfMC45OS5iYjpkb19jb25maWd1cmUp
+IGZhaWxlZCB3aXRoIGV4aXQgY29kZSAnMScNCg0KRGlnZ2luZyBhIHRhZCBkZWVwZXIgd2hhdCBz
+ZWVtcyB0byBiZSBmYWlsaW5nIGlzIGluIHRoZSBjb25maWd1cmUgZm9yIC9jbGFzc3BhdGgtbmF0
+aXZlIHdoZW4gdGhlIGluaXRpYWwgY29tcGlsZXIgaXMgcnVuOg0KDQo8UnVubmluZyBKYW1WTS1p
+bml0aWFsOiAtWG14NTEybSAtRGpkdC5jb21waWxlci51c2VTaW5nbGVUaHJlYWQ9dHJ1ZSAtY3Ag
+L2hvbWUvYmF2ZXJ5L3dvcmsvamF2YVNTdGF0ZS0xMTczMi9idWlsZC1zc3RhdGUvdG1wL3dvcmsv
+eDg2XzY0LWxpbnV4L2NsYXNzcGF0aC1uYXRpdmUvMC45OS1yNi4wL3JlY2lwZS1zeXNyb290LW5h
+dGl2ZS91c3Ivc2hhcmUvamF2YS9lY2otYm9vdHN0cmFwLmphciBvcmcuZWNsaXBzZS5qZHQuaW50
+ZXJuYWwuY29tcGlsZXIuYmF0Y2guTWFpbiAtLXZlcnNpb24+DQpib290Y2xhc3NwYXRoIGlzIGVt
+cHR5IQ0KDQpBbmQgaWYgSSBidWlsZCBqYW12bS1pbml0aWFsLW5hdGl2ZSBvbiBhIGJ1aWxkIG1h
+Y2hpbmUgdGhhdCBoYXMgamF2YSBpbnN0YWxsZWQgb24gaXQgYWxyZWFkeSAoZnJvbSBlY2xpcHNl
+IGluIG15IGNhc2UpLCB0aGVuIGphbXZtLWluaXRpYWwtbmF0aXZlIHdvcmtzIGZpbmUuDQoNCg0K
+SWYgSSBzZXQgUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwvamF2YS1pbml0aWFsLW5hdGl2ZSA9
+ICJjYWNhby1pbml0aWFsLW5hdGl2ZSINCmNhY2FvLWluaXRpYWwtbmF0aXZlIHdvcmtzIGZpbmUg
+cmVnYXJkbGVzcyBvZiB0aGUgcHJlc2VuY2Ugb2YgaG9zdCBzaWRlIGphdmEuDQoNCg0KU2luY2Ug
+SGVucnkgaGFzIGJlZW4gYWJsZSB0byBmaW5kIGFuIGlzc3VlIHdoZXJlIHRoZSB1YnVudHUgY29u
+dGFpbmVyIGdpdmVzIGEgZGlmZmVyZW50IGVycm9yIHdoZW4gcnVuIG9uIGEgZmVkb3JhIGhvc3Qs
+IEnigJltIGF0dGFjaGluZyB0aGUgaG9zdCB1bmFtZSBhbmQgbHNtb2QgbGlzdCBmcm9tIHRoZSBi
+dWlsZCBob3N0IHRoYXQgaGFzIHRoZSBhYm92ZSBiZWhhdmlvdXIuDQpCdWlsZCBob3N0IHVuYW1l
+IOKAk2EgDQpMaW51eCBlY2hpZG5hIDQuNC4wLTcyLWdlbmVyaWMgIzkzLVVidW50dSBTTVAgRnJp
+IE1hciAzMSAxNDowNzo0MSBVVEMgMjAxNyB4ODZfNjQgeDg2XzY0IHg4Nl82NCBHTlUvTGludXgN
+CmxzbW9kIGxpc3QgYXR0YWNoZWQuDQoNCg==
 
-On Thu, Jul 20, 2017 at 11:24 PM, akuster808 <akuster808@gmail.com> wrote:
+--_002_0001B95B25544DE89A356598CBCBA285intelcom_
+Content-Type: application/octet-stream; name="echidna_loaded_modules.list"
+Content-Description: echidna_loaded_modules.list
+Content-Disposition: attachment; filename="echidna_loaded_modules.list";
+	size=4569; creation-date="Thu, 20 Jul 2017 22:23:29 GMT";
+	modification-date="Thu, 20 Jul 2017 22:23:29 GMT"
+Content-ID: <C10FE8B5BAE9BA49AC01EB988ECEDC84@intel.com>
+Content-Transfer-Encoding: base64
 
->
->
-> On 07/20/2017 12:31 PM, Jason Liu wrote:
->
->> From: Koen Kooi <koen@dominion.thruhere.net>
->>
->> Needed for x86 machines
->>
->> Signed-off-by: Koen Kooi <koen@dominion.thruhere.net>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>
->
-> Sorry, I am not going to a new package to a stable branch.
->
-> - armin
->
-> ---
->>   meta-oe/recipes-graphics/vdpau/libvdpau_git.bb | 23
->> +++++++++++++++++++++++
->>   1 file changed, 23 insertions(+)
->>   create mode 100644 meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
->>
->> diff --git a/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
->> b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
->> new file mode 100644
->> index 0000000..31f4df4
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/vdpau/libvdpau_git.bb
->> @@ -0,0 +1,23 @@
->> +SUMMARY = "Video Decode and Presentation API for UNIX"
->> +
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=83af8811a28727a13f04132cc33b7f58"
->> +
->> +DEPENDS = "virtual/libx11 libxext dri2proto"
->> +
->> +PV = "1.1.1+git${SRCPV}"
->> +
->> +SRCREV = "a21bf7aa438f5dd40d0a300a3167aa3d6f26dccc"
->> +SRC_URI = "git://anongit.freedesktop.org/vdpau/libvdpau"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit autotools pkgconfig
->> +
->> +do_install_append() {
->> +    rm -f ${D}${libdir}/*/*.la
->> +}
->> +
->> +FILES_${PN}-dbg += "${libdir}/vdpau/.debug"
->> +FILES_${PN}-dev += "${libdir}/vdpau/lib*${SOLIBSDEV}"
->> +FILES_${PN} += "${libdir}/vdpau/lib*${SOLIBS}"
->>
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+TW9kdWxlICAgICAgICAgICAgICAgICAgU2l6ZSAgVXNlZCBieQp4dF9uYXQgICAgICAgICAgICAg
+ICAgIDE2Mzg0ICAwCnh0X3RjcHVkcCAgICAgICAgICAgICAgMTYzODQgIDAKdWZzICAgICAgICAg
+ICAgICAgICAgICA3MzcyOCAgMApxbng0ICAgICAgICAgICAgICAgICAgIDE2Mzg0ICAwCmhmc3Bs
+dXMgICAgICAgICAgICAgICAxMDY0OTYgIDAKaGZzICAgICAgICAgICAgICAgICAgICA1NzM0NCAg
+MAptaW5peCAgICAgICAgICAgICAgICAgIDM2ODY0ICAwCm50ZnMgICAgICAgICAgICAgICAgICAg
+OTgzMDQgIDAKbXNkb3MgICAgICAgICAgICAgICAgICAyMDQ4MCAgMApqZnMgICAgICAgICAgICAg
+ICAgICAgMTgwMjI0ICAwCnhmcyAgICAgICAgICAgICAgICAgICA5NzA3NTIgIDAKdmV0aCAgICAg
+ICAgICAgICAgICAgICAxNjM4NCAgMAp4dF9SRURJUkVDVCAgICAgICAgICAgIDE2Mzg0ICAxCm5m
+X25hdF9yZWRpcmVjdCAgICAgICAgMTYzODQgIDEgeHRfUkVESVJFQ1QKaXB0X01BU1FVRVJBREUg
+ICAgICAgICAxNjM4NCAgMQpuZl9uYXRfbWFzcXVlcmFkZV9pcHY0ICAgIDE2Mzg0ICAxIGlwdF9N
+QVNRVUVSQURFCnhmcm1fdXNlciAgICAgICAgICAgICAgMzI3NjggIDEKeGZybV9hbGdvICAgICAg
+ICAgICAgICAxNjM4NCAgMSB4ZnJtX3VzZXIKaXB0YWJsZV9uYXQgICAgICAgICAgICAxNjM4NCAg
+MQpuZl9jb25udHJhY2tfaXB2NCAgICAgIDE2Mzg0ICAyCm5mX2RlZnJhZ19pcHY0ICAgICAgICAg
+MTYzODQgIDEgbmZfY29ubnRyYWNrX2lwdjQKbmZfbmF0X2lwdjQgICAgICAgICAgICAxNjM4NCAg
+MSBpcHRhYmxlX25hdAp4dF9hZGRydHlwZSAgICAgICAgICAgIDE2Mzg0ICAyCmlwdGFibGVfZmls
+dGVyICAgICAgICAgMTYzODQgIDEKaXBfdGFibGVzICAgICAgICAgICAgICAyNDU3NiAgMiBpcHRh
+YmxlX2ZpbHRlcixpcHRhYmxlX25hdAp4dF9jb25udHJhY2sgICAgICAgICAgIDE2Mzg0ICAxCnhf
+dGFibGVzICAgICAgICAgICAgICAgMzY4NjQgIDggaXBfdGFibGVzLHh0X3RjcHVkcCxpcHRfTUFT
+UVVFUkFERSx4dF9jb25udHJhY2sseHRfbmF0LGlwdGFibGVfZmlsdGVyLHh0X1JFRElSRUNULHh0
+X2FkZHJ0eXBlCm5mX25hdCAgICAgICAgICAgICAgICAgMjQ1NzYgIDQgbmZfbmF0X3JlZGlyZWN0
+LG5mX25hdF9pcHY0LHh0X25hdCxuZl9uYXRfbWFzcXVlcmFkZV9pcHY0Cm5mX2Nvbm50cmFjayAg
+ICAgICAgICAxMDY0OTYgIDUgbmZfbmF0LG5mX25hdF9pcHY0LHh0X2Nvbm50cmFjayxuZl9uYXRf
+bWFzcXVlcmFkZV9pcHY0LG5mX2Nvbm50cmFja19pcHY0CmJyX25ldGZpbHRlciAgICAgICAgICAg
+MjQ1NzYgIDAKYnJpZGdlICAgICAgICAgICAgICAgIDEyNjk3NiAgMSBicl9uZXRmaWx0ZXIKc3Rw
+ICAgICAgICAgICAgICAgICAgICAxNjM4NCAgMSBicmlkZ2UKbGxjICAgICAgICAgICAgICAgICAg
+ICAxNjM4NCAgMiBzdHAsYnJpZGdlCm5sc19pc284ODU5XzEgICAgICAgICAgMTYzODQgIDEKaXBt
+aV9kZXZpbnRmICAgICAgICAgICAyMDQ4MCAgMAppcG1pX3NzaWYgICAgICAgICAgICAgIDI0NTc2
+ICAwCmludGVsX3JhcGwgICAgICAgICAgICAgMjA0ODAgIDAKeDg2X3BrZ190ZW1wX3RoZXJtYWwg
+ICAgMTYzODQgIDAKaW50ZWxfcG93ZXJjbGFtcCAgICAgICAxNjM4NCAgMApjb3JldGVtcCAgICAg
+ICAgICAgICAgIDE2Mzg0ICAwCmt2bSAgICAgICAgICAgICAgICAgICA1NDQ3NjggIDAKaXJxYnlw
+YXNzICAgICAgICAgICAgICAxNjM4NCAgMSBrdm0KaW5wdXRfbGVkcyAgICAgICAgICAgICAxNjM4
+NCAgMApqb3lkZXYgICAgICAgICAgICAgICAgIDIwNDgwICAwCnNiX2VkYWMgICAgICAgICAgICAg
+ICAgMzI3NjggIDAKZWRhY19jb3JlICAgICAgICAgICAgICA1MzI0OCAgMSBzYl9lZGFjCmxwY19p
+Y2ggICAgICAgICAgICAgICAgMjQ1NzYgIDAKbWVpX21lICAgICAgICAgICAgICAgICAzNjg2NCAg
+MAptZWkgICAgICAgICAgICAgICAgICAgIDk4MzA0ICAxIG1laV9tZQppb2F0ZG1hICAgICAgICAg
+ICAgICAgIDUzMjQ4ICAwCnNocGNocCAgICAgICAgICAgICAgICAgMzY4NjQgIDAKaXBtaV9zaSAg
+ICAgICAgICAgICAgICA1NzM0NCAgMAo4MjUwX2ZpbnRlayAgICAgICAgICAgIDE2Mzg0ICAwCmlw
+bWlfbXNnaGFuZGxlciAgICAgICAgNDkxNTIgIDMgaXBtaV9zc2lmLGlwbWlfZGV2aW50ZixpcG1p
+X3NpCmFjcGlfcG93ZXJfbWV0ZXIgICAgICAgMjA0ODAgIDAKYWNwaV9wYWQgICAgICAgICAgICAg
+ICAyNDU3NiAgMAptYWNfaGlkICAgICAgICAgICAgICAgIDE2Mzg0ICAwCmliX2lzZXIgICAgICAg
+ICAgICAgICAgNDkxNTIgIDAKcmRtYV9jbSAgICAgICAgICAgICAgICA0OTE1MiAgMSBpYl9pc2Vy
+Cml3X2NtICAgICAgICAgICAgICAgICAgNDUwNTYgIDEgcmRtYV9jbQppYl9jbSAgICAgICAgICAg
+ICAgICAgIDQ1MDU2ICAxIHJkbWFfY20KaWJfc2EgICAgICAgICAgICAgICAgICAzNjg2NCAgMiBy
+ZG1hX2NtLGliX2NtCmliX21hZCAgICAgICAgICAgICAgICAgNDkxNTIgIDIgaWJfY20saWJfc2EK
+aWJfY29yZSAgICAgICAgICAgICAgIDEwNjQ5NiAgNiByZG1hX2NtLGliX2NtLGliX3NhLGl3X2Nt
+LGliX21hZCxpYl9pc2VyCmliX2FkZHIgICAgICAgICAgICAgICAgMjA0ODAgIDIgcmRtYV9jbSxp
+Yl9jb3JlCmlzY3NpX3RjcCAgICAgICAgICAgICAgMjA0ODAgIDAKbGliaXNjc2lfdGNwICAgICAg
+ICAgICAyNDU3NiAgMSBpc2NzaV90Y3AKbGliaXNjc2kgICAgICAgICAgICAgICA1MzI0OCAgMyBs
+aWJpc2NzaV90Y3AsaXNjc2lfdGNwLGliX2lzZXIKc2NzaV90cmFuc3BvcnRfaXNjc2kgICAgOTgz
+MDQgIDQgaXNjc2lfdGNwLGliX2lzZXIsbGliaXNjc2kKYXV0b2ZzNCAgICAgICAgICAgICAgICA0
+MDk2MCAgMgpidHJmcyAgICAgICAgICAgICAgICAgOTg3MTM2ICAxCnJhaWQxMCAgICAgICAgICAg
+ICAgICAgNDkxNTIgIDAKcmFpZDQ1NiAgICAgICAgICAgICAgIDExMDU5MiAgMAphc3luY19yYWlk
+Nl9yZWNvdiAgICAgIDIwNDgwICAxIHJhaWQ0NTYKYXN5bmNfbWVtY3B5ICAgICAgICAgICAxNjM4
+NCAgMiByYWlkNDU2LGFzeW5jX3JhaWQ2X3JlY292CmFzeW5jX3BxICAgICAgICAgICAgICAgMTYz
+ODQgIDIgcmFpZDQ1Nixhc3luY19yYWlkNl9yZWNvdgphc3luY194b3IgICAgICAgICAgICAgIDE2
+Mzg0ICAzIGFzeW5jX3BxLHJhaWQ0NTYsYXN5bmNfcmFpZDZfcmVjb3YKYXN5bmNfdHggICAgICAg
+ICAgICAgICAxNjM4NCAgNSBhc3luY19wcSxyYWlkNDU2LGFzeW5jX3hvcixhc3luY19tZW1jcHks
+YXN5bmNfcmFpZDZfcmVjb3YKeG9yICAgICAgICAgICAgICAgICAgICAyNDU3NiAgMiBidHJmcyxh
+c3luY194b3IKcmFpZDZfcHEgICAgICAgICAgICAgIDEwMjQwMCAgNCBhc3luY19wcSxyYWlkNDU2
+LGJ0cmZzLGFzeW5jX3JhaWQ2X3JlY292CmxpYmNyYzMyYyAgICAgICAgICAgICAgMTYzODQgIDIg
+eGZzLHJhaWQ0NTYKcmFpZDAgICAgICAgICAgICAgICAgICAyMDQ4MCAgMAptdWx0aXBhdGggICAg
+ICAgICAgICAgIDE2Mzg0ICAwCmxpbmVhciAgICAgICAgICAgICAgICAgMTYzODQgIDAKcmFpZDEg
+ICAgICAgICAgICAgICAgICAzNjg2NCAgNApoaWRfZ2VuZXJpYyAgICAgICAgICAgIDE2Mzg0ICAw
+Cm14bV93bWkgICAgICAgICAgICAgICAgMTYzODQgIDAKY3JjdDEwZGlmX3BjbG11bCAgICAgICAx
+NjM4NCAgMApjcmMzMl9wY2xtdWwgICAgICAgICAgIDE2Mzg0ICAwCmdoYXNoX2NsbXVsbmlfaW50
+ZWwgICAgMTYzODQgIDAKYWVzbmlfaW50ZWwgICAgICAgICAgIDE2NzkzNiAgMAphZXNfeDg2XzY0
+ICAgICAgICAgICAgIDIwNDgwICAxIGFlc25pX2ludGVsCmxydyAgICAgICAgICAgICAgICAgICAg
+MTYzODQgIDEgYWVzbmlfaW50ZWwKZ2YxMjhtdWwgICAgICAgICAgICAgICAxNjM4NCAgMSBscncK
+Z2x1ZV9oZWxwZXIgICAgICAgICAgICAxNjM4NCAgMSBhZXNuaV9pbnRlbAphYmxrX2hlbHBlciAg
+ICAgICAgICAgIDE2Mzg0ICAxIGFlc25pX2ludGVsCmNyeXB0ZCAgICAgICAgICAgICAgICAgMjA0
+ODAgIDMgZ2hhc2hfY2xtdWxuaV9pbnRlbCxhZXNuaV9pbnRlbCxhYmxrX2hlbHBlcgppeGdiZSAg
+ICAgICAgICAgICAgICAgMjkwODE2ICAwCmRjYSAgICAgICAgICAgICAgICAgICAgMTYzODQgIDIg
+aXhnYmUsaW9hdGRtYQp2eGxhbiAgICAgICAgICAgICAgICAgIDQ5MTUyICAxIGl4Z2JlCmlwNl91
+ZHBfdHVubmVsICAgICAgICAgMTYzODQgIDEgdnhsYW4KdWRwX3R1bm5lbCAgICAgICAgICAgICAx
+NjM4NCAgMSB2eGxhbgp1c2JoaWQgICAgICAgICAgICAgICAgIDQ5MTUyICAwCmFoY2kgICAgICAg
+ICAgICAgICAgICAgMzY4NjQgIDExCnB0cCAgICAgICAgICAgICAgICAgICAgMjA0ODAgIDEgaXhn
+YmUKaGlkICAgICAgICAgICAgICAgICAgIDExODc4NCAgMiBoaWRfZ2VuZXJpYyx1c2JoaWQKbGli
+YWhjaSAgICAgICAgICAgICAgICAzMjc2OCAgMSBhaGNpCnBwc19jb3JlICAgICAgICAgICAgICAg
+MjA0ODAgIDEgcHRwCm1kaW8gICAgICAgICAgICAgICAgICAgMTYzODQgIDEgaXhnYmUKZmplcyAg
+ICAgICAgICAgICAgICAgICAyODY3MiAgMAp3bWkgICAgICAgICAgICAgICAgICAgIDIwNDgwICAx
+IG14bV93bWkK
 
+--_002_0001B95B25544DE89A356598CBCBA285intelcom_--
