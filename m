@@ -1,49 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f178.google.com (mail-yw0-f178.google.com
-	[209.85.161.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 72345783C1
+Received: from mail-yw0-f179.google.com (mail-yw0-f179.google.com
+	[209.85.161.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A65878369
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 08:48:07 +0000 (UTC)
-Received: by mail-yw0-f178.google.com with SMTP id x6so15116280ywd.1
+	Fri, 21 Jul 2017 08:54:00 +0000 (UTC)
+Received: by mail-yw0-f179.google.com with SMTP id x125so22302147ywa.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 01:48:09 -0700 (PDT)
+	Fri, 21 Jul 2017 01:54:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=COyrZbnAYu4JAmuMN1/iO5yRuwHtExOV7NSG6Df4Ipk=;
-	b=EiJ2K4FU7kzwMXBFHisW6hPFhj6zUiJGjoI8jEQcqmfNqOKc0zHO5GGLOr2suuDoT2
-	YYcKWlK+oc1l5RutEUXWgItnKBCh3IY5d+z2Nd26N4wauz+o+F/1dP/ZngsNMhK++3ES
-	q7KX+cjEsfDshFmjrJ0z2rej0ZSJc0W/wrSFtUakgWfz2v1n8zlHVqAjb8Q8aA9GC8fs
-	WLqbkuoB0cFfme3Kdth/Gtgg+nsOUf1ii1Kof8F9JXvrCuOzXyHleAgL+wMIs+uJdPOm
-	ap3gjUo4W8ltA0ABlcw29VWHmE5TwjD4GPvzYcuiuyzYZQ+U4sO3qmz2DtX1hiS83lKW
-	01fw==
+	:cc; bh=zcNapsHE9O8XPcClN9lTNfrz3dJqQfrzHYrfB0QkeOU=;
+	b=iy9RcI1M0ELEBsSZCcqCIgZVtWeeDGqJJBMfT2+K0quA37UHvcFGOjklwY8vkadFsb
+	7opRJ2/2BOhJ4pc8rR73kDzxUYqx1tm8WcAZMQNEEBU2MsaZaHcDDVpdyf65KmUFKf0y
+	rozCL0zhV+uzsaivfbCeOGpdp7oPlmVzus3XsS+RMoKXWmitOraxVc+pE3Te/JcYuzqS
+	4ZlFqM402sGSK50R08QZTEyBI6DAABmPNEtU4tLU0r1wR6DXyTCi0L+yXmPBu3QUsDsF
+	6CD+vkqxWe5oxu6CAKlFjgaslnDCmOMpTf5KTB5BmYT69QiNMOAKj2IXdnaIGOsBRUs1
+	srJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=COyrZbnAYu4JAmuMN1/iO5yRuwHtExOV7NSG6Df4Ipk=;
-	b=NIeBUFsf/8fYjtawM/2Sza/bGIkhsdA9Fh1QGHKemoabL6ddedpM1qmZe9ueTFhr+8
-	CFafRhc/NVnn+NHUvuVjc7fcixV1Wq4k5Ydd3Ix1XO3ZNWQNoFaBXh0HnXIogPlFqABs
-	Ub3JCqLieY8YnF/DjxYAhRcWdi9EptVHaxzkXr8rAxIJIVCdKCriFIwjGc3GmKw1JBeM
-	eHC6nDRnd6wGF0AlISxVH2U2e9eUtzxBN5hPE7ATx/d0hO3ggXye4wRlO8Z2u7NFj60G
-	CFAt/6YiAO0QK+/PUPpZCwfCVbCTHCHAgQKb4sFPHmcY7UEfNip7240qf+COanbJuFk7
-	+Yhw==
-X-Gm-Message-State: AIVw112k8O0tVcNTdD2K3BSvgzwOnVIhvp+vJazZElh1FiOICx3cuAHT
-	r/e3+FobI/MNu0byPDyMcpDbWV4d2Q==
-X-Received: by 10.129.73.141 with SMTP id w135mr6061196ywa.414.1500626889293; 
-	Fri, 21 Jul 2017 01:48:09 -0700 (PDT)
+	bh=zcNapsHE9O8XPcClN9lTNfrz3dJqQfrzHYrfB0QkeOU=;
+	b=l14jDbgGjzWXk2YC4rl4LCcOIxrAqBDu6nJx2SYrl/xhBdQprQ1juHHN8P6eXXXgmB
+	Vbk86YaMgbY3XxwQ4K3yntkP3vFj7fqC7lSiInWwnGyio18FIlHCONcm10XHk4wD65mR
+	ZbQutDKMssg8Ml7qhOtZRxIq7mDnonC4gqvMKkMgnaGBrfrt9qlLIusZv6EJ8RrAVyF7
+	G/tdZHtUu8nnAew5cjaw2Doh4MFfYmHYtbH4M5bXWZWHYNOsUDyDu0h0wZY4ZFONVE75
+	lCVR9taLx1dAD3KREZ6JGfN98FdxvJU9g2OgKjSw1PS1PqQpDMByxCadU5uCMqkK5ivW
+	uIpQ==
+X-Gm-Message-State: AIVw112REpLAmuGkCcnePSWR3UU3MdpYWTfMxY4liWnN8vJA/MbLVgsa
+	d+oikTy7Xac2GE8ycCLoiY1Akt3xDw==
+X-Received: by 10.13.207.67 with SMTP id r64mr6057239ywd.244.1500627241504;
+	Fri, 21 Jul 2017 01:54:01 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Fri, 21 Jul 2017 01:48:08 -0700 (PDT)
-In-Reply-To: <97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
+Received: by 10.37.77.4 with HTTP; Fri, 21 Jul 2017 01:54:01 -0700 (PDT)
+In-Reply-To: <cover.1500621886.git.hongxu.jia@windriver.com>
+References: <cover.1500621886.git.hongxu.jia@windriver.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 21 Jul 2017 10:48:08 +0200
-Message-ID: <CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
-To: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
+Date: Fri, 21 Jul 2017 10:54:01 +0200
+Message-ID: <CA+chaQcQYv4xtjOLvowSTsGA3rTn8Y92Xz-zX5ixqD2Kvm7ukQ@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH V2 00/10] add 9 recipes & upgrade 1 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,156 +54,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 08:48:08 -0000
+X-List-Received-Date: Fri, 21 Jul 2017 08:54:00 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-It was merged last week, why are you pinging this?
+Thanks for changes, next time please update status on patchwork when
+sending such mostly duplicated set of patches.
 
-On Fri, Jul 21, 2017 at 9:01 AM, Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+On Fri, Jul 21, 2017 at 9:34 AM, Hongxu Jia <hongxu.jia@windriver.com>
 wrote:
 
-> ping
+> Changed in V2:
 >
-> > -----Original Message-----
-> > From: Huang, Qiyu/=E9=BB=84 =E7=90=A6=E5=AE=87
-> > Sent: Friday, June 09, 2017 9:06 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Huang, Qiyu/=E9=BB=84 =E7=90=A6=E5=AE=87 <huangqy.fnst@cn.fujitsu.c=
-om>
-> > Subject: [oe] [meta-qt5] [PATCH] qtbase: add ptest
-> >
-> > Add ptest for qtbase  by using provided testsuite.
-> >
-> > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > ---
-> >  .../0001-Delete-qlonglong-and-qulonglong.patch     | 28
-> > ++++++++++++++++++++++
-> >  recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
-> >  recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
-> >  3 files changed, 50 insertions(+), 1 deletion(-)  create mode 100644
-> > recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> >  create mode 100644 recipes-qt/qt5/qtbase/run-ptest
-> >
-> > diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
-> qulonglong.patch
-> > b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> > new file mode 100644
-> > index 0000000..975cd28
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> > @@ -0,0 +1,28 @@
-> > +From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00
-> > 2001
-> > +From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > +Date: Wed, 7 Jun 2017 21:00:49 +0900
-> > +Subject: [PATCH] Delete qlonglong and qulonglong
-> > +
-> > +Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > +---
-> > + tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
-> > + 1 file changed, 2 deletions(-)
-> > +
-> > +diff --git
-> > +a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +index 09458bd..59a120e 100644
-> > +--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > ++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +@@ -5,10 +5,8 @@ SUBDIRS=3D\
-> > +     char32_t \
-> > +     int \
-> > +     long \
-> > +-    qlonglong \
-> > +     qptrdiff \
-> > +     quintptr \
-> > +-    qulonglong \
-> > +     schar \
-> > +     short \
-> > +     uchar \
-> > +--
-> > +2.7.4
-> > +
-> > diff --git a/recipes-qt/qt5/qtbase/run-ptest
-> b/recipes-qt/qt5/qtbase/run-ptest
-> > new file mode 100644 index 0000000..044f834
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qtbase/run-ptest
-> > @@ -0,0 +1,6 @@
-> > +#!/bin/sh
-> > +
-> > +for x in ` awk '{print $1}' tst_list `;do
-> > +    ./${x};
-> > +done
-> > +
-> > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.b=
-b
-> index
-> > 27d0de1..39fc272 100644
-> > --- a/recipes-qt/qt5/qtbase_git.bb
-> > +++ b/recipes-qt/qt5/qtbase_git.bb
-> > @@ -23,8 +23,12 @@ SRC_URI +=3D "\
-> >      file://0005-configure-bump-path-length-from-256-to-512-
-> character.patch
-> > \
-> >      file://0009-Disable-all-unknown-features-instead-of-erroring-out.p=
-atch
-> \
-> >
-> > file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-> > \
-> > +    file://0001-Delete-qlonglong-and-qulonglong.patch \
-> > +    file://run-ptest \
-> >  "
-> >
-> > +inherit ptest
-> > +
-> >  # only for target qtbase
-> >  SRC_URI +=3D "\
-> >      file://0008-configure-paths-for-target-qmake-properly.patch \ @@
-> -48,7
-> > +52,7 @@ PACKAGECONFIG_DISTRO ?=3D ""
-> >  PACKAGECONFIG_RELEASE ?=3D "release"
-> >  # This is in qt5.inc, because qtwebkit-examples are using it to enable
-> > ca-certificates dependency  # PACKAGECONFIG_OPENSSL ?=3D "openssl"
-> > -PACKAGECONFIG_DEFAULT ?=3D "dbus udev evdev widgets tools libs freetyp=
-e"
-> > +PACKAGECONFIG_DEFAULT ?=3D "dbus udev evdev widgets tools libs freetyp=
-e
-> > tests"
-> >
-> >  PACKAGECONFIG ?=3D " \
-> >      ${PACKAGECONFIG_RELEASE} \
-> > @@ -170,6 +174,17 @@ do_configure() {
-> >          ${QT_CONFIG_FLAGS}
-> >  }
-> >
-> > +fakeroot do_install_ptest() {
-> > +    mkdir -p ${D}${PTEST_PATH}
-> > +    t=3D${D}${PTEST_PATH}
-> > +    for var in ` find ${B}/tests/auto/ -name tst_*`; do
-> > +        if [ not ` echo ${var##*/} | grep '\.'` ]; then
-> > +            echo ${var##*/} >> ${t}/tst_list
-> > +            install -m 0644 ${var} ${t}
-> > +        fi
-> > +    done
-> > +}
-> > +
-> >  do_install_append() {
-> >      # Avoid qmake error "Cannot read
-> > [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or
-> directory"
-> >      touch
-> > ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
-> > --
-> > 2.7.4
+> - xmlrpc-c, satyr, usermode: fix compile failure against musl C library
 >
+> - add recipe keybinder and volume-key
 >
+> - Build on qemux86, qemux86-64, qemumips, qemuarm64,
+>   qemux86 + musl, qemux86-64 + musl
+>
+> //Hongxu
+>
+> The following changes since commit 1cbd1bc195017312ba8cf670b340f6
+> 1a2ac6207b:
+>
+>   unionfs-fuse: 0.26 -> 2.0 (2017-07-14 23:45:53 +0200)
+>
+> are available in the git repository at:
+>
+>   git://git.openembedded.org/openembedded-core-contrib hongxu/add-recipe2
+>   http://cgit.openembedded.org/openembedded-core-contrib/log/
+> ?h=hongxu/add-recipe2
+>
+> Hongxu Jia (10):
+>   keybinder: add recipe 3.0
+>   volume-key: add recipe 0.3.9
+>   libgnomekbd: 2.32 -> 3.22
+>   python3-pykickstart: add recipe 2.35
+>   python3-meh: add recipe 0.45
+>   usermode: add recipe 1.111
+>   isomd5sum: add recipe 1.2.1
+>   satyr: add recipe 0.23
+>   libtar: add recipe 1.2.20
+>   xmlrpc-c: add recipe 1.31.0
+>
+>  .../gnome-settings-daemon_2.32.1.bb                |   3 -
+>  .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb   |  20 ---
+>  .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb   |  17 +++
+>  .../recipes-support/keybinder/keybinder_3.0.bb     |  26 ++++
+>  ...ix-compile-failure-against-musl-C-library.patch |  27 ++++
+>  .../recipes-support/usermode/usermode_1.111.bb     |  27 ++++
+>  meta-oe/licenses/X11                               |  23 ++++
+>  ...ix-compile-failure-against-musl-C-library.patch |  52 +++++++
+>  .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   |  23 ++++
+>  .../files/0001-tweak-install-prefix.patch          |  60 ++++++++
+>  .../isomd5sum/files/0002-fix-parallel-error.patch  |  33 +++++
+>  .../recipes-extended/isomd5sum/isomd5sum_1.2.1.bb  |  35 +++++
+>  ...-explicitly-support-python3-by-pkg-config.patch |  56 ++++++++
+>  .../volume_key/volume-key_0.3.9.bb                 |  34 +++++
+>  .../libtar/files/0002-Do-not-strip-libtar.patch    |  25 ++++
+>  .../libtar/files/fix_libtool_sysroot.patch         |  19 +++
+>  meta-oe/recipes-support/libtar/libtar_1.2.20.bb    |  21 +++
+>  .../satyr/files/0001-do-not-support-python2.patch  |  84 ++++++++++++
+>  ...ix-compile-failure-against-musl-C-library.patch |  28 ++++
+>  meta-oe/recipes-support/satyr/satyr_0.23.bb        |  33 +++++
+>  .../files/tweak-native-language-support.patch      |  44 ++++++
+>  .../python-meh/python3-meh_0.45.bb                 |  17 +++
+>  ...0001-support-authentication-for-kickstart.patch | 151
+> +++++++++++++++++++++
+>  ...-parser.py-add-lock-for-readKickstart-and.patch |  76 +++++++++++
+>  ...-sections-shutdown-and-environment-in-gen.patch |  48 +++++++
+>  ...d.py-retry-to-invoke-request-with-timeout.patch |  82 +++++++++++
+>  .../python-pykickstart/python3-pykickstart_2.35.bb |  26 ++++
+>  27 files changed, 1067 insertions(+), 23 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-gnome/libgnome/
+> libgnomekbd_2.32.0.bb
+>  create mode 100644 meta-gnome/recipes-gnome/libgnome/
+> libgnomekbd_3.22.0.bb
+>  create mode 100644 meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+>  create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-fix-
+> compile-failure-against-musl-C-library.patch
+>  create mode 100644 meta-gnome/recipes-support/usermode/usermode_1.111.bb
+>  create mode 100644 meta-oe/licenses/X11
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-
+> compile-failure-against-musl-C-library.patch
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+>  create mode 100644 meta-oe/recipes-extended/isomd5sum/files/0001-tweak-
+> install-prefix.patch
+>  create mode 100644 meta-oe/recipes-extended/isomd5sum/files/0002-fix-
+> parallel-error.patch
+>  create mode 100644 meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.1.bb
+>  create mode 100644 meta-oe/recipes-extended/volume_key/files/0001-
+> explicitly-support-python3-by-pkg-config.patch
+>  create mode 100644 meta-oe/recipes-extended/volume_key/
+> volume-key_0.3.9.bb
+>  create mode 100644 meta-oe/recipes-support/libtar/files/0002-Do-not-
+> strip-libtar.patch
+>  create mode 100644 meta-oe/recipes-support/libtar/files/fix_libtool_
+> sysroot.patch
+>  create mode 100644 meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+>  create mode 100644 meta-oe/recipes-support/satyr/
+> files/0001-do-not-support-python2.patch
+>  create mode 100644 meta-oe/recipes-support/satyr/files/0002-fix-compile-
+> failure-against-musl-C-library.patch
+>  create mode 100644 meta-oe/recipes-support/satyr/satyr_0.23.bb
+>  create mode 100644 meta-python/recipes-extended/
+> python-meh/files/tweak-native-language-support.patch
+>  create mode 100644 meta-python/recipes-extended/python-meh/
+> python3-meh_0.45.bb
+>  create mode 100644 meta-python/recipes-extended/
+> python-pykickstart/files/0001-support-authentication-for-kickstart.patch
+>  create mode 100644 meta-python/recipes-extended/
+> python-pykickstart/files/0002-pykickstart-parser.py-add-
+> lock-for-readKickstart-and.patch
+>  create mode 100644 meta-python/recipes-extended/
+> python-pykickstart/files/0003-comment-out-sections-shutdown-
+> and-environment-in-gen.patch
+>  create mode 100644 meta-python/recipes-extended/
+> python-pykickstart/files/0004-load.py-retry-to-invoke-
+> request-with-timeout.patch
+>  create mode 100644 meta-python/recipes-extended/python-pykickstart/
+> python3-pykickstart_2.35.bb
 >
 > --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> 2.8.1
+>
 >
 
