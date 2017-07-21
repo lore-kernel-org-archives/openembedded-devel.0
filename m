@@ -1,45 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 8D2E6783E1
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id F3B09783FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 11:16:11 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id d193so5172774pgc.2
+	Fri, 21 Jul 2017 11:16:12 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id d18so4633101pfe.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 04:16:13 -0700 (PDT)
+	Fri, 21 Jul 2017 04:16:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=CJHxdEDvnTigaLOKYdmh7HOZ84VQtMx0WnAULO2D9kM=;
-	b=MjNVckWMmuJvrwF6GMYlgCuRYfmSjW29VdNIiJbb+HuXj7LF3xV8Vla+djkuFfiLPo
-	cnt8oskVnapX+lICqTFb+7DVqig6JP/H/fRoASdMtXYIJjrVeo+oNvNxpJdBO6KFa1FP
-	6vome+qVnvWuTMP7h5tBJAzwQE31nhHl6dLe2J2ys7xyHrZ/J0xSSU6BjL+UfkOFlDut
-	AHp0wkUBxjWacA3cssaXOdI1L0cqixkbuP1wWm3c8DLJ0TXjBlpfWH8v97o4GUUAFacV
-	WeyAYcO6fdjasFNcEPGA5DgbOcSDCXKb/JTlTXQtSaz9oh6ri9+jPFd9/eV85qAXDk0s
-	BfMg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=S8lWL0GVMgAvw49Q5rIhjES267baGFG+M6ex3Soo5Gk=;
+	b=CQM1ihcvLM6l7lYCSBqna+HE05dCnwIdE5/zvNCfU78Nb7Hcp1Cd3vxEl6BewOub0C
+	JyIO8x5RrGUL/mHHO/QrxRjnGBE23my96hUOisvPdsaEjvWh/OLLNIhm+LdejEB7b9FT
+	4leymiyMv8OMNDOY/riTWeRDN+CsSQUSPsd4RGSA7u+pixDyGbTyNv0ZLOF2dKak30J5
+	Nm38B6FnIrzIhd8msKboI+cb7NLhrae9AS8xYK1FA3HR4I05LqVqfkSV2+p8IDRa0LHS
+	IpDHyy72PS/zb/WWUF7OKfOkKK27cDxjubLphju2lpgFPWBGaXxeHsoG+30bYD9hv3Oj
+	rksQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=CJHxdEDvnTigaLOKYdmh7HOZ84VQtMx0WnAULO2D9kM=;
-	b=nwO+/+clqPRKQBujgJ4bBFBHI5NUqXPy2tRwfmPbi9O2fMmRCWCWEWsr5XyCXChspG
-	SPQD4eLSG13NsMhvA79jmxIpSeRiIrq6yBXJkDttcnKv2UXEdu1qcWLD8qjlhU1lT+yz
-	0w3a1GrBZO8yqmiriM0/77Yeot1rAIbyBAvYDO6fpIrUQA54zUrPXxaZF/oYD+C4WVlA
-	nh7YG09d7/HdqpptokxneHOMKtw318mM1uNX9m8Oa/0Aw9OZ8geBOefkIQ3YIqOC2VaN
-	x3zPltt6A79gajMWhLtnrnxFBm0xrRQtonU/cHOsE72vj6NhVLof/8vrozxqKhudEYXD
-	p97Q==
-X-Gm-Message-State: AIVw1114GdTjU9eO3a8EvPaUcBdi8YWFnMWvM5XV+x6dx6tQnBJPxNsJ
-	FlwI5agMgMFQdH4B
-X-Received: by 10.99.126.86 with SMTP id o22mr7084837pgn.385.1500635772466;
-	Fri, 21 Jul 2017 04:16:12 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=S8lWL0GVMgAvw49Q5rIhjES267baGFG+M6ex3Soo5Gk=;
+	b=CiswT0Rw/N8AVTjLCm1U7QJ7R6GnQymW7YJJt1WyI9DQNeHWMMthlJwA1HrtxCUzlT
+	Fs/VjzGt59NTccYrUIdb7U2E22gTLNwANLMbuE4bUiwxhZ0LZNqz12qKtzYd/wP20xrt
+	ZfQ4GomF6WJBdLTyv6Cvjt60N8sl0GwW8Ssr4gWl/ww8/AjbiX3wNKN+sGn1JbvXjw9b
+	BPdXkkfF78A8EoNA5aq35rc1QZh8xpVTucNIZXYeDbHXTTyCsy/qW/whCB1qjmVKvcBZ
+	ZuNBuEm7A5sxGGfCn4wE1sx4/xRTOVCpAYwuidKCcBFMCkXyt/x+ecH0o71ouZTKrI9S
+	Bt9g==
+X-Gm-Message-State: AIVw110KzAlmiJNEuF6CV/WdmM4E1jDrUkJdxqalXsnPE5eFbts0cEWA
+	Tm0t13fMUJWVVECW
+X-Received: by 10.99.36.5 with SMTP id k5mr7019819pgk.328.1500635773696;
+	Fri, 21 Jul 2017 04:16:13 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
 	by smtp.gmail.com with ESMTPSA id
-	b16sm9129223pfm.84.2017.07.21.04.16.11
+	b16sm9129223pfm.84.2017.07.21.04.16.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Jul 2017 04:16:11 -0700 (PDT)
+	Fri, 21 Jul 2017 04:16:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jul 2017 04:16:00 -0700
-Message-Id: <20170721111602.2547-1-raj.khem@gmail.com>
+Date: Fri, 21 Jul 2017 04:16:01 -0700
+Message-Id: <20170721111602.2547-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.13.3
-Subject: [meta-networking][PATCH 1/3] openflow: Fix build with musl
+In-Reply-To: <20170721111602.2547-1-raj.khem@gmail.com>
+References: <20170721111602.2547-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH 2/3] xl2tpd: Update to 1.3.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,183 +56,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 11:16:11 -0000
+X-List-Received-Date: Fri, 21 Jul 2017 11:16:13 -0000
 
-Regenerate configure before running oe_runconf
+License changes are cosmetic
+
+https://github.com/xelerance/xl2tpd/commit/1611d6f028fe30da4cee5b026fd1de81d97cba48
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-protocols/openflow/openflow.inc        |  3 +-
- ...use-strlcpy-from-libc-before-defining-own.patch | 64 ++++++++++++++++++++++
- ...lib-netdev-Adjust-header-include-sequence.patch | 59 ++++++++++++++++++++
- .../recipes-protocols/openflow/openflow_git.bb     |  5 ++
- 4 files changed, 129 insertions(+), 2 deletions(-)
- create mode 100644 meta-networking/recipes-protocols/openflow/openflow/0001-Check-and-use-strlcpy-from-libc-before-defining-own.patch
- create mode 100644 meta-networking/recipes-protocols/openflow/openflow/0002-lib-netdev-Adjust-header-include-sequence.patch
+ .../recipes-protocols/xl2tpd/xl2tpd.inc            |   5 +-
+ .../fix-inline-functions-errors-with-gcc-5.x.patch | 134 ---------------------
+ .../recipes-protocols/xl2tpd/xl2tpd_git.bb         |   4 +-
+ 3 files changed, 3 insertions(+), 140 deletions(-)
+ delete mode 100644 meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
 
-diff --git a/meta-networking/recipes-protocols/openflow/openflow.inc b/meta-networking/recipes-protocols/openflow/openflow.inc
-index 0ae2d1f1d..cccbfa19a 100644
---- a/meta-networking/recipes-protocols/openflow/openflow.inc
-+++ b/meta-networking/recipes-protocols/openflow/openflow.inc
-@@ -27,9 +27,8 @@ S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+index 6f7f69330..d037c7cfc 100644
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd.inc
+@@ -6,12 +6,9 @@ DEPENDS = "ppp virtual/kernel"
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
  
- inherit autotools-brokensep pkgconfig
+ LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=0636e73ff0215e8d672dc4c32c317bb3"
+-
+-INC_PR = "r0"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263"
  
--do_configure() {
-+do_configure_prepend() {
-     ./boot.sh
--    oe_runconf
- }
+ SRC_URI = "git://github.com/xelerance/xl2tpd.git \
+-    file://fix-inline-functions-errors-with-gcc-5.x.patch \
+ "
  
- do_install_append() {
-diff --git a/meta-networking/recipes-protocols/openflow/openflow/0001-Check-and-use-strlcpy-from-libc-before-defining-own.patch b/meta-networking/recipes-protocols/openflow/openflow/0001-Check-and-use-strlcpy-from-libc-before-defining-own.patch
-new file mode 100644
-index 000000000..952274bb9
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openflow/openflow/0001-Check-and-use-strlcpy-from-libc-before-defining-own.patch
-@@ -0,0 +1,64 @@
-+From 7b62e5884353b247f542844d1e4687d0e9211999 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 04:27:32 -0700
-+Subject: [PATCH 1/2] Check and use strlcpy from libc before defining own
-+
-+This is required especially on musl where
-+function prototype conflicts and causes build
-+failures.
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 +-
-+ lib/util.c   | 2 ++
-+ lib/util.h   | 1 +
-+ 3 files changed, 4 insertions(+), 1 deletion(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 13064f6..596c43f 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -57,7 +57,7 @@ OFP_CHECK_HWTABLES
-+ OFP_CHECK_HWLIBS
-+ AC_SYS_LARGEFILE
-+ 
-+-AC_CHECK_FUNCS([strsignal])
-++AC_CHECK_FUNCS([strlcpy strsignal])
-+ 
-+ AC_ARG_VAR(KARCH, [Kernel Architecture String])
-+ AC_SUBST(KARCH)
-+diff --git a/lib/util.c b/lib/util.c
-+index 21cc28d..1f341b1 100644
-+--- a/lib/util.c
-++++ b/lib/util.c
-+@@ -138,6 +138,7 @@ xasprintf(const char *format, ...)
-+     return s;
-+ }
-+ 
-++#ifndef HAVE_STRLCPY
-+ void
-+ strlcpy(char *dst, const char *src, size_t size)
-+ {
-+@@ -148,6 +149,7 @@ strlcpy(char *dst, const char *src, size_t size)
-+         dst[n_copy] = '\0';
-+     }
-+ }
-++#endif
-+ 
-+ void
-+ ofp_fatal(int err_no, const char *format, ...)
-+diff --git a/lib/util.h b/lib/util.h
-+index fde681f..9e45ea9 100644
-+--- a/lib/util.h
-++++ b/lib/util.h
-+@@ -41,6 +41,7 @@
-+ #include <stdio.h>
-+ #include <string.h>
-+ #include "compiler.h"
-++#include "config.h"
-+ 
-+ #ifndef va_copy
-+ #ifdef __va_copy
-+-- 
-+2.13.3
-+
-diff --git a/meta-networking/recipes-protocols/openflow/openflow/0002-lib-netdev-Adjust-header-include-sequence.patch b/meta-networking/recipes-protocols/openflow/openflow/0002-lib-netdev-Adjust-header-include-sequence.patch
-new file mode 100644
-index 000000000..75180fe32
---- /dev/null
-+++ b/meta-networking/recipes-protocols/openflow/openflow/0002-lib-netdev-Adjust-header-include-sequence.patch
-@@ -0,0 +1,59 @@
-+From 5bba224edea38607e8732081f86679ffd8b218ab Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 04:29:04 -0700
-+Subject: [PATCH 2/2] lib/netdev: Adjust header include sequence
-+
-+Specify libc headers before kernel UAPIs
-+this helps compiling with musl where otherwise
-+it uses the definition from kernel and complains
-+about double definition in libc headers
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ lib/netdev.c | 11 +++++------
-+ 1 file changed, 5 insertions(+), 6 deletions(-)
-+
-+diff --git a/lib/netdev.c b/lib/netdev.c
-+index 3b6fbc5..c7de25e 100644
-+--- a/lib/netdev.c
-++++ b/lib/netdev.c
-+@@ -39,7 +39,6 @@
-+ #include <fcntl.h>
-+ #include <arpa/inet.h>
-+ #include <inttypes.h>
-+-#include <linux/if_tun.h>
-+ 
-+ /* Fix for some compile issues we were experiencing when setting up openwrt
-+  * with the 2.4 kernel. linux/ethtool.h seems to use kernel-style inttypes,
-+@@ -57,10 +56,6 @@
-+ #define s64 __s64
-+ #endif
-+ 
-+-#include <linux/ethtool.h>
-+-#include <linux/rtnetlink.h>
-+-#include <linux/sockios.h>
-+-#include <linux/version.h>
-+ #include <sys/types.h>
-+ #include <sys/ioctl.h>
-+ #include <sys/socket.h>
-+@@ -68,12 +63,16 @@
-+ #include <net/ethernet.h>
-+ #include <net/if.h>
-+ #include <net/if_arp.h>
-+-#include <net/if_packet.h>
-+ #include <net/route.h>
-+ #include <netinet/in.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+ #include <unistd.h>
-++#include <linux/ethtool.h>
-++#include <linux/rtnetlink.h>
-++#include <linux/sockios.h>
-++#include <linux/version.h>
-++#include <linux/if_tun.h>
-+ 
-+ #include "fatal-signal.h"
-+ #include "list.h"
-+-- 
-+2.13.3
-+
-diff --git a/meta-networking/recipes-protocols/openflow/openflow_git.bb b/meta-networking/recipes-protocols/openflow/openflow_git.bb
-index 6403bfb22..eceb45e94 100644
---- a/meta-networking/recipes-protocols/openflow/openflow_git.bb
-+++ b/meta-networking/recipes-protocols/openflow/openflow_git.bb
-@@ -2,3 +2,8 @@ include ${BPN}.inc
+ S = "${WORKDIR}/git"
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch b/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
+deleted file mode 100644
+index b75c9129d..000000000
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd/fix-inline-functions-errors-with-gcc-5.x.patch
++++ /dev/null
+@@ -1,134 +0,0 @@
+-Upstream-Status: Backport
+-
+-Backport from https://github.com/xelerance/xl2tpd/commit/9098f64950eb22cf049058d40f647bafdb822174
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+-From 9098f64950eb22cf049058d40f647bafdb822174 Mon Sep 17 00:00:00 2001
+-From: Kai Kang <kai.kang@windriver.com>
+-Date: Wed, 23 Sep 2015 10:41:05 +0800
+-Subject: [PATCH] Fix build errors caused by inline function with gcc 5
+-
+-GCC 5 defaults to -std=gnu11 instead of -std=gnu89. And -std=gnu89
+-employs the GNU89 inline semantics, -std=gnu11 uses the C99 inline
+-semantics.
+-
+-For 'inline' fuction, it is NOT exported by C99. So error messages such as:
+-
+-| control.c:1717: undefined reference to `check_control'
+-
+-For these functions which is not referred by other compile units, make
+-them 'static inline'.
+-
+-For 'extern inline' function, it fails such as:
+-
+-| misc.h:68:20: warning: inline function 'swaps' declared but never defined
+-|  extern inline void swaps (void *, int);
+-|                      ^
+-
+-Because function swaps() is referred by other compile units, it must be
+-exported. The semantics of 'extern inline' are not same between GNU89
+-and C99, so remove 'inline' attribute for compatible with GNU89.
+-
+-Ref:
+-https://gcc.gnu.org/gcc-5/porting_to.html
+-
+-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+----
+- control.c | 8 ++++----
+- misc.c    | 2 +-
+- misc.h    | 2 +-
+- network.c | 4 ++--
+- 4 files changed, 8 insertions(+), 8 deletions(-)
+-
+-diff --git a/control.c b/control.c
+-index b2891a9..c4a39b5 100644
+---- a/control.c
+-+++ b/control.c
+-@@ -1140,7 +1140,7 @@ int control_finish (struct tunnel *t, struct call *c)
+-     return 0;
+- }
+- 
+--inline int check_control (const struct buffer *buf, struct tunnel *t,
+-+static inline int check_control (const struct buffer *buf, struct tunnel *t,
+-                           struct call *c)
+- {
+-     /*
+-@@ -1276,7 +1276,7 @@ inline int check_control (const struct buffer *buf, struct tunnel *t,
+-     return 0;
+- }
+- 
+--inline int check_payload (struct buffer *buf, struct tunnel *t,
+-+static inline int check_payload (struct buffer *buf, struct tunnel *t,
+-                           struct call *c)
+- {
+-     /*
+-@@ -1382,7 +1382,7 @@ inline int check_payload (struct buffer *buf, struct tunnel *t,
+- #endif
+-     return 0;
+- }
+--inline int expand_payload (struct buffer *buf, struct tunnel *t,
+-+static inline int expand_payload (struct buffer *buf, struct tunnel *t,
+-                            struct call *c)
+- {
+-     /*
+-@@ -1562,7 +1562,7 @@ void send_zlb (void *data)
+-     toss (buf);
+- }
+- 
+--inline int write_packet (struct buffer *buf, struct tunnel *t, struct call *c,
+-+static inline int write_packet (struct buffer *buf, struct tunnel *t, struct call *c,
+-                          int convert)
+- {
+-     /*
+-diff --git a/misc.c b/misc.c
+-index 3092401..af90dbf 100644
+---- a/misc.c
+-+++ b/misc.c
+-@@ -170,7 +170,7 @@ void do_packet_dump (struct buffer *buf)
+-     printf ("}\n");
+- }
+- 
+--inline void swaps (void *buf_v, int len)
+-+void swaps (void *buf_v, int len)
+- {
+- #ifdef __alpha
+-     /* Reverse byte order alpha is little endian so lest save a step.
+-diff --git a/misc.h b/misc.h
+-index aafdc62..caab7a1 100644
+---- a/misc.h
+-+++ b/misc.h
+-@@ -65,7 +65,7 @@ extern void l2tp_log (int level, const char *fmt, ...);
+- extern struct buffer *new_buf (int);
+- extern void udppush_handler (int);
+- extern int addfcs (struct buffer *buf);
+--extern inline void swaps (void *, int);
+-+extern void swaps (void *, int);
+- extern void do_packet_dump (struct buffer *);
+- extern void status (const char *fmt, ...);
+- extern void status_handler (int signal);
+-diff --git a/network.c b/network.c
+-index b1268c6..d324a71 100644
+---- a/network.c
+-+++ b/network.c
+-@@ -135,7 +135,7 @@ int init_network (void)
+-     return 0;
+- }
+- 
+--inline void extract (void *buf, int *tunnel, int *call)
+-+static inline void extract (void *buf, int *tunnel, int *call)
+- {
+-     /*
+-      * Extract the tunnel and call #'s, and fix the order of the 
+-@@ -155,7 +155,7 @@ inline void extract (void *buf, int *tunnel, int *call)
+-     }
+- }
+- 
+--inline void fix_hdr (void *buf)
+-+static inline void fix_hdr (void *buf)
+- {
+-     /*
+-      * Fix the byte order of the header
+--- 
+-2.6.1
+-
+diff --git a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+index 42bc398a1..88ae5d6f8 100644
+--- a/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
++++ b/meta-networking/recipes-protocols/xl2tpd/xl2tpd_git.bb
+@@ -2,7 +2,7 @@ require xl2tpd.inc
  
- SRCREV = "c84f33f09d5dbcfc9b489f64cb30475bf36f653a"
- PV = "1.0+git${SRCPV}"
-+
-+SRC_URI += "\
-+           file://0001-Check-and-use-strlcpy-from-libc-before-defining-own.patch \
-+           file://0002-lib-netdev-Adjust-header-include-sequence.patch \
-+           "
+ # This is v1.3.6 plus some commits.  There is no tag for this commit.
+ #
+-PV = "1.3.6+git${SRCPV}"
++PV = "1.3.9+git${SRCPV}"
+ 
+-SRCREV = "a96b345962622ea58490924130675df6db062d11"
++SRCREV = "f114c10ac532051badeca0132b144a2f1596f047"
+ 
 -- 
 2.13.3
 
