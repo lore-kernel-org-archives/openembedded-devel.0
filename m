@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 339EE782D9
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 55DD97837D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 07:34:52 +0000 (UTC)
+	Fri, 21 Jul 2017 07:34:54 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v6L7YrAN000982
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 21 Jul 2017 00:34:53 -0700 (PDT)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6L7YtFC025497
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Fri, 21 Jul 2017 00:34:55 -0700
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 21 Jul 2017 00:34:52 -0700
+	Fri, 21 Jul 2017 00:34:54 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Jul 2017 03:34:39 -0400
-Message-ID: <f926846f5abcd19df71409818392bccd1b39f0b9.1500621886.git.hongxu.jia@windriver.com>
+Date: Fri, 21 Jul 2017 03:34:40 -0400
+Message-ID: <b336a55a3bbac087be3cac1df05ea57dad2b12ad.1500621886.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1500621886.git.hongxu.jia@windriver.com>
 References: <cover.1500621886.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 02/10] volume-key: add recipe 0.3.9
+Subject: [meta-gnome][PATCH 03/10] libgnomekbd: 2.32 -> 3.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,118 +32,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 07:34:53 -0000
+X-List-Received-Date: Fri, 21 Jul 2017 07:34:54 -0000
 Content-Type: text/plain
+
+Remove --disable-schemas-install:
+...
+|QA Issue: libgnomekbd: configure was passed unrecognised
+options: --disable-schemas-install [unknown-configure-option]
+...
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- ...-explicitly-support-python3-by-pkg-config.patch | 56 ++++++++++++++++++++++
- .../volume_key/volume-key_0.3.9.bb                 | 34 +++++++++++++
- 2 files changed, 90 insertions(+)
- create mode 100644 meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
- create mode 100644 meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
+ .../gnome-settings-daemon_2.32.1.bb                  |  3 ---
+ .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb     | 20 --------------------
+ .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb     | 17 +++++++++++++++++
+ 3 files changed, 17 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+ create mode 100644 meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
 
-diff --git a/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch b/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
+diff --git a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+index c1db6d3..9a18972 100644
+--- a/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-settings-daemon/gnome-settings-daemon_2.32.1.bb
+@@ -40,7 +40,4 @@ FILES_${PN}-dbg += "${libdir}/gnome-settings-daemon-2.0/.debug"
+ FILES_${PN}-dev += "${libdir}/gnome-settings-daemon-2.0/*.la"
+ FILES_${PN}-staticdev += "${libdir}/gnome-settings-daemon-2.0/*.a"
+ 
+-
+-PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted libgnomekbd - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-
+ PNBLACKLIST[gnome-settings-daemon] ?= "Depends on blacklisted gnome-desktop - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+deleted file mode 100644
+index 852d8e1..0000000
+--- a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "GNOME keyboard library"
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
+-
+-SECTION = "x11/gnome/libs"
+-
+-DEPENDS = "gconf gtk+ glib-2.0 libxklavier intltool-native gnome-common-native"
+-
+-inherit gnome
+-
+-SRC_URI[archive.md5sum] = "de32a6e3e3464b566eecdc4332bf34bd"
+-SRC_URI[archive.sha256sum] = "ddd52c4cc7d83ad7ef964a1bcb4db87407e65b00ffc3e70c088ca4ee7383d256"
+-GNOME_COMPRESS_TYPE="bz2"
+-
+-do_configure_append() {
+-    find ${B} -name Makefile | xargs sed -i s:'-I$(includedir)':'-I.':g
+-    find ${B} -name Makefile | xargs sed -i s:'-I/usr/include':'-I${STAGING_INCDIR}':g
+-}
+-
+-PNBLACKLIST[libgnomekbd] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130608/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+diff --git a/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
 new file mode 100644
-index 0000000..03edb13
+index 0000000..12ed81d
 --- /dev/null
-+++ b/meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
-@@ -0,0 +1,56 @@
-+From 18415c0b4c6e50ed9b99dfdae8d210590d0ab72e Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Fri, 28 Apr 2017 04:50:30 -0400
-+Subject: [PATCH] explicitly support python3 by pkg-config
++++ b/meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "GNOME keyboard library"
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://COPYING.LIB;md5=6e29c688d912da12b66b73e32b03d812"
 +
-+The PYTHON_CPPFLAGS and -lpython$(PYTHON_VERSION) is hardcoded,
-+use pkg-config to replace
++SECTION = "x11/gnome/libs"
 +
-+Upstream-Status: Inappropriate [wr-installer specific]
++DEPENDS = "gconf glib-2.0 libxklavier gtk+3 intltool-native"
 +
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ Makefile.am  | 5 ++---
-+ configure.ac | 2 ++
-+ 2 files changed, 4 insertions(+), 3 deletions(-)
++inherit gnome gobject-introspection gettext
 +
-+diff --git a/Makefile.am b/Makefile.am
-+index 4569bbf..7a8daf4 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -20,7 +20,6 @@ ACLOCAL_AMFLAGS = -I m4
-+ AM_CPPFLAGS = $(blkid_CFLAGS) $(glib_CFLAGS) $(GPGME_CFLAGS) \
-+ 	$(libcryptsetup_CFLAGS) $(nss_CFLAGS)
-+ LOCALEDIR_CPPFLAGS = -DLOCALEDIR='"$(localedir)"'
-+-PYTHON_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
-+ 
-+ ## Targets
-+ SUBDIRS = po
-+@@ -63,9 +62,9 @@ lib_libvolume_key_la_LIBADD = $(blkid_LIBS) $(glib_LIBS) $(GPGME_LIBS) \
-+ 	$(LTLIBINTL) $(libcryptsetup_LIBS) $(nss_LIBS)
-+ 
-+ python__volume_key_la_SOURCES = python/volume_key_wrap.c
-+-python__volume_key_la_CPPFLAGS = $(AM_CPPFLAGS) $(PYTHON_CPPFLAGS)
-++python__volume_key_la_CPPFLAGS = $(AM_CPPFLAGS) $(python3_CFLAGS)
-+ python__volume_key_la_LDFLAGS = -module -avoid-version $(glib_LIBS)
-+-python__volume_key_la_LIBADD = lib/libvolume_key.la -lpython$(PYTHON_VERSION) \
-++python__volume_key_la_LIBADD = lib/libvolume_key.la $(python3_LIBS) \
-+ 	$(glib_LIBS) $(nss_LIBS)
-+ 
-+ src_volume_key_SOURCES = src/volume_key.c
-+diff --git a/configure.ac b/configure.ac
-+index ff35dd0..0928a6c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -27,6 +27,8 @@ AM_INIT_AUTOMAKE([no-dist-gzip dist-xz no-define subdir-objects -Wall])
-+ AC_PROG_CC
-+ AM_PROG_CC_C_O
-+ LT_INIT([disable-static])
-++
-++PKG_CHECK_MODULES(python3, [python3])
-+ AM_PATH_PYTHON
-+ 
-+ dnl Not gpg2, it cannot receive passphrases from gpgme
-+-- 
-+2.8.1
++GNOME_COMPRESS_TYPE = "xz"
 +
-diff --git a/meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb b/meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
-new file mode 100644
-index 0000000..febf3f2
---- /dev/null
-+++ b/meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
-@@ -0,0 +1,34 @@
-+DESCRIPTION = "The volume_key project provides a libvolume_key, a library for manipulating \
-+storage volume encryption keys and storing them separately from volumes, and an \
-+associated command-line tool, named volume_key."
-+LICENSE = "GPLv2"
-+SECTION = "devel/lib"
++SRC_URI[archive.md5sum] = "7b1ebf99f4254c99922163c262c7ff04"
++SRC_URI[archive.sha256sum] = "340b30dabfebbd4e0e6c0fe34a378966dd5640b5d44595ab8a19b0be255d77df"
 +
-+HOMEPAGE = "https://pagure.io/volume_key"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+SRC_URI = "https://releases.pagure.org/volume_key/volume_key-${PV}.tar.xz \
-+           file://0001-explicitly-support-python3-by-pkg-config.patch \
-+"
-+SRC_URI[md5sum] = "a2d14931177c660e1f3ebbcf5f47d8e2"
-+SRC_URI[sha256sum] = "450a54fe9bf56acec6850c1e71371d3e4913c9ca1ef0cdc3a517b4b6910412a6"
-+
-+SRCNAME = "volume_key"
-+S = "${WORKDIR}/${SRCNAME}-${PV}"
-+
-+inherit autotools python3native gettext
-+
-+DEPENDS += " \
-+    util-linux \
-+    glib-2.0 \
-+    cryptsetup \
-+    nss \
-+    gpgme \
-+"
-+
-+RDEPENDS_python3-${PN} += "${PN}"
-+
-+PACKAGES += "python3-${PN}"
-+FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
++EXTRA_OECONF_remove = "--disable-schemas-install"
 +
 -- 
 2.8.1
