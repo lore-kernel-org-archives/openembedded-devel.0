@@ -1,40 +1,26 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 58F14783E1
+Return-Path: <maxin.john@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id CDF58783FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 09:41:21 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208,217";a="21623538"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Jul 2017 17:41:19 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5AD0646B5DED;
-	Fri, 21 Jul 2017 17:41:21 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0319.002; Fri, 21 Jul 2017 17:41:21 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-qt5] [PATCH] qtbase: add ptest
-Thread-Index: AQHS4LynT7YFNQDK3k6KSbSlVRNYoqJeHMXg//+XywCAAJSmAA==
-Date: Fri, 21 Jul 2017 09:41:20 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C60E25F48F@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
-	<CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
-In-Reply-To: <CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.235.93]
+	Fri, 21 Jul 2017 10:52:16 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	21 Jul 2017 03:52:17 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.40,389,1496127600"; d="scan'208";a="881217012"
+Received: from mbabyjoh-desk.fi.intel.com (HELO
+	mbabyjoh-desk.ger.corp.intel.com) ([10.237.72.84])
+	by FMSMGA003.fm.intel.com with ESMTP; 21 Jul 2017 03:52:16 -0700
+Date: Fri, 21 Jul 2017 13:53:15 +0300
+From: "Maxin B. John" <maxin.john@intel.com>
+To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
+Message-ID: <20170721105314.GA31758@mbabyjoh-desk.ger.corp.intel.com>
+References: <20170712083634.GZ22446@vctlabs.com>
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 5AD0646B5DED.A8B3C
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
+In-Reply-To: <20170712083634.GZ22446@vctlabs.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: Re: [meta-java][PATCH] java-library.bbclass: compatibility with per-recipe sysroots
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,138 +33,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 09:41:23 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 21 Jul 2017 10:52:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-RGVhciBNYXJ0aW4NCg0KSSBoYXZlIHNlYXJjaGVkIGluIHRoZSBnaXQgbG9n
-LGFuZCBpdCB3YXMgcmVhbGx5IG5vdCBiZSBtZXJnZXJkLkNvdWxkIHlvdSBw
-bGVhc2UgZW5zdXJlIGl0Pw0KDQpodWFuZ3F5DQoNCkZyb206IE1hcnRpbiBK
-YW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21dDQpTZW50OiBG
-cmlkYXksIEp1bHkgMjEsIDIwMTcgNDo0OCBQTQ0KVG86IEh1YW5nLCBRaXl1
-IDxodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+DQpDYzogb3BlbmVtYmVk
-ZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNClN1YmplY3Q6IFJl
-OiBbb2VdIFttZXRhLXF0NV0gW1BBVENIXSBxdGJhc2U6IGFkZCBwdGVzdA0K
-DQpJdCB3YXMgbWVyZ2VkIGxhc3Qgd2Vlaywgd2h5IGFyZSB5b3UgcGluZ2lu
-ZyB0aGlzPw0KDQpPbiBGcmksIEp1bCAyMSwgMjAxNyBhdCA5OjAxIEFNLCBI
-dWFuZywgUWl5dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPG1haWx0
-bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+PiB3cm90ZToNCnBpbmcN
-Cg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBIdWFu
-ZywgUWl5dQ0KPiBTZW50OiBGcmlkYXksIEp1bmUgMDksIDIwMTcgOTowNiBB
-TQ0KPiBUbzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc8bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnPg0KPiBDYzogSHVhbmcsIFFpeXUgPGh1YW5ncXkuZm5zdEBj
-bi5mdWppdHN1LmNvbTxtYWlsdG86aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3Uu
-Y29tPj4NCj4gU3ViamVjdDogW29lXSBbbWV0YS1xdDVdIFtQQVRDSF0gcXRi
-YXNlOiBhZGQgcHRlc3QNCj4NCj4gQWRkIHB0ZXN0IGZvciBxdGJhc2UgIGJ5
-IHVzaW5nIHByb3ZpZGVkIHRlc3RzdWl0ZS4NCj4NCj4gU2lnbmVkLW9mZi1i
-eTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPG1h
-aWx0bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiAtLS0NCj4g
-IC4uLi8wMDAxLURlbGV0ZS1xbG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0
-Y2ggICAgIHwgMjgNCj4gKysrKysrKysrKysrKysrKysrKysrKw0KPiAgcmVj
-aXBlcy1xdC9xdDUvcXRiYXNlL3J1bi1wdGVzdCAgICAgICAgICAgICAgICAg
-ICAgfCAgNiArKysrKw0KPiAgcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5i
-YjxodHRwOi8vcXRiYXNlX2dpdC5iYj4gICAgICAgICAgICAgICAgICAgICAg
-IHwgMTcgKysrKysrKysrKysrLQ0KPiAgMyBmaWxlcyBjaGFuZ2VkLCA1MCBp
-bnNlcnRpb25zKCspLCAxIGRlbGV0aW9uKC0pICBjcmVhdGUgbW9kZSAxMDA2
-NDQNCj4gcmVjaXBlcy1xdC9xdDUvcXRiYXNlLzAwMDEtRGVsZXRlLXFsb25n
-bG9uZy1hbmQtcXVsb25nbG9uZy5wYXRjaA0KPiAgY3JlYXRlIG1vZGUgMTAw
-NjQ0IHJlY2lwZXMtcXQvcXQ1L3F0YmFzZS9ydW4tcHRlc3QNCj4NCj4gZGlm
-ZiAtLWdpdCBhL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDAxLURlbGV0ZS1x
-bG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2gNCj4gYi9yZWNpcGVzLXF0
-L3F0NS9xdGJhc2UvMDAwMS1EZWxldGUtcWxvbmdsb25nLWFuZC1xdWxvbmds
-b25nLnBhdGNoDQo+IG5ldyBmaWxlIG1vZGUgMTAwNjQ0DQo+IGluZGV4IDAw
-MDAwMDAuLjk3NWNkMjgNCj4gLS0tIC9kZXYvbnVsbA0KPiArKysgYi9yZWNp
-cGVzLXF0L3F0NS9xdGJhc2UvMDAwMS1EZWxldGUtcWxvbmdsb25nLWFuZC1x
-dWxvbmdsb25nLnBhdGNoDQo+IEBAIC0wLDAgKzEsMjggQEANCj4gK0Zyb20g
-YzY3YTRhZjJlNWRiNGMxZTIyMTM5NjFlNjM5MmI1OWFmZmQxOTU5ZiBNb24g
-U2VwIDE3IDAwOjAwOjAwDQo+IDIwMDENCj4gK0Zyb206IEh1YW5nIFFpeXUg
-PGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbTxtYWlsdG86aHVhbmdxeS5m
-bnN0QGNuLmZ1aml0c3UuY29tPj4NCj4gK0RhdGU6IFdlZCwgNyBKdW4gMjAx
-NyAyMTowMDo0OSArMDkwMA0KPiArU3ViamVjdDogW1BBVENIXSBEZWxldGUg
-cWxvbmdsb25nIGFuZCBxdWxvbmdsb25nDQo+ICsNCj4gK1NpZ25lZC1vZmYt
-Ynk6IEh1YW5nIFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbTxt
-YWlsdG86aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPj4NCj4gKy0tLQ0K
-PiArIHRlc3RzL2F1dG8vY29yZWxpYi90aHJlYWQvcWF0b21pY2ludGVnZXIv
-cWF0b21pY2ludGVnZXIucHJvPGh0dHA6Ly9xYXRvbWljaW50ZWdlci5wcm8+
-IHwgMiAtLQ0KPiArIDEgZmlsZSBjaGFuZ2VkLCAyIGRlbGV0aW9ucygtKQ0K
-PiArDQo+ICtkaWZmIC0tZ2l0DQo+ICthL3Rlc3RzL2F1dG8vY29yZWxpYi90
-aHJlYWQvcWF0b21pY2ludGVnZXIvcWF0b21pY2ludGVnZXIucHJvPGh0dHA6
-Ly9xYXRvbWljaW50ZWdlci5wcm8+DQo+ICtiL3Rlc3RzL2F1dG8vY29yZWxp
-Yi90aHJlYWQvcWF0b21pY2ludGVnZXIvcWF0b21pY2ludGVnZXIucHJvPGh0
-dHA6Ly9xYXRvbWljaW50ZWdlci5wcm8+DQo+ICtpbmRleCAwOTQ1OGJkLi41
-OWExMjBlIDEwMDY0NA0KPiArLS0tIGEvdGVzdHMvYXV0by9jb3JlbGliL3Ro
-cmVhZC9xYXRvbWljaW50ZWdlci9xYXRvbWljaW50ZWdlci5wcm88aHR0cDov
-L3FhdG9taWNpbnRlZ2VyLnBybz4NCj4gKysrKyBiL3Rlc3RzL2F1dG8vY29y
-ZWxpYi90aHJlYWQvcWF0b21pY2ludGVnZXIvcWF0b21pY2ludGVnZXIucHJv
-PGh0dHA6Ly9xYXRvbWljaW50ZWdlci5wcm8+DQo+ICtAQCAtNSwxMCArNSw4
-IEBAIFNVQkRJUlM9XA0KPiArICAgICBjaGFyMzJfdCBcDQo+ICsgICAgIGlu
-dCBcDQo+ICsgICAgIGxvbmcgXA0KPiArLSAgICBxbG9uZ2xvbmcgXA0KPiAr
-ICAgICBxcHRyZGlmZiBcDQo+ICsgICAgIHF1aW50cHRyIFwNCj4gKy0gICAg
-cXVsb25nbG9uZyBcDQo+ICsgICAgIHNjaGFyIFwNCj4gKyAgICAgc2hvcnQg
-XA0KPiArICAgICB1Y2hhciBcDQo+ICstLQ0KPiArMi43LjQNCj4gKw0KPiBk
-aWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1bi1wdGVzdCBi
-L3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS9ydW4tcHRlc3QNCj4gbmV3IGZpbGUg
-bW9kZSAxMDA2NDQgaW5kZXggMDAwMDAwMC4uMDQ0ZjgzNA0KPiAtLS0gL2Rl
-di9udWxsDQo+ICsrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS9ydW4tcHRl
-c3QNCj4gQEAgLTAsMCArMSw2IEBADQo+ICsjIS9iaW4vc2gNCj4gKw0KPiAr
-Zm9yIHggaW4gYCBhd2sgJ3twcmludCAkMX0nIHRzdF9saXN0IGA7ZG8NCj4g
-KyAgICAuLyR7eH07DQo+ICtkb25lDQo+ICsNCj4gZGlmZiAtLWdpdCBhL3Jl
-Y2lwZXMtcXQvcXQ1L3F0YmFzZV9naXQuYmI8aHR0cDovL3F0YmFzZV9naXQu
-YmI+IGIvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYjxodHRwOi8vcXRi
-YXNlX2dpdC5iYj4gaW5kZXgNCj4gMjdkMGRlMS4uMzlmYzI3MiAxMDA2NDQN
-Cj4gLS0tIGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYjxodHRwOi8v
-cXRiYXNlX2dpdC5iYj4NCj4gKysrIGIvcmVjaXBlcy1xdC9xdDUvcXRiYXNl
-X2dpdC5iYjxodHRwOi8vcXRiYXNlX2dpdC5iYj4NCj4gQEAgLTIzLDggKzIz
-LDEyIEBAIFNSQ19VUkkgKz0gIlwNCj4gICAgICBmaWxlOi8vMDAwNS1jb25m
-aWd1cmUtYnVtcC1wYXRoLWxlbmd0aC1mcm9tLTI1Ni10by01MTItY2hhcmFj
-dGVyLnBhdGNoPGZpbGU6Ly8vXFwwMDA1LWNvbmZpZ3VyZS1idW1wLXBhdGgt
-bGVuZ3RoLWZyb20tMjU2LXRvLTUxMi1jaGFyYWN0ZXIucGF0Y2g+DQo+IFwN
-Cj4gICAgICBmaWxlOi8vMDAwOS1EaXNhYmxlLWFsbC11bmtub3duLWZlYXR1
-cmVzLWluc3RlYWQtb2YtZXJyb3Jpbmctb3V0LnBhdGNoPGZpbGU6Ly8vXFww
-MDA5LURpc2FibGUtYWxsLXVua25vd24tZmVhdHVyZXMtaW5zdGVhZC1vZi1l
-cnJvcmluZy1vdXQucGF0Y2g+IFwNCj4NCj4gZmlsZTovLzAwMTAtUHJldGVu
-ZC1RdDUtd2Fzbi10LWZvdW5kLWlmLU9FX1FNQUtFX1BBVEhfRVhURVJOQUxf
-SC5wYXRjaDxmaWxlOi8vL1xcMDAxMC1QcmV0ZW5kLVF0NS13YXNuLXQtZm91
-bmQtaWYtT0VfUU1BS0VfUEFUSF9FWFRFUk5BTF9ILnBhdGNoPg0KPiBcDQo+
-ICsgICAgZmlsZTovLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1hbmQtcXVsb25n
-bG9uZy5wYXRjaDxmaWxlOi8vL1xcMDAwMS1EZWxldGUtcWxvbmdsb25nLWFu
-ZC1xdWxvbmdsb25nLnBhdGNoPiBcDQo+ICsgICAgZmlsZTovL3J1bi1wdGVz
-dDxmaWxlOi8vL1xccnVuLXB0ZXN0PiBcDQo+ICAiDQo+DQo+ICtpbmhlcml0
-IHB0ZXN0DQo+ICsNCj4gICMgb25seSBmb3IgdGFyZ2V0IHF0YmFzZQ0KPiAg
-U1JDX1VSSSArPSAiXA0KPiAgICAgIGZpbGU6Ly8wMDA4LWNvbmZpZ3VyZS1w
-YXRocy1mb3ItdGFyZ2V0LXFtYWtlLXByb3Blcmx5LnBhdGNoPGZpbGU6Ly8v
-XFwwMDA4LWNvbmZpZ3VyZS1wYXRocy1mb3ItdGFyZ2V0LXFtYWtlLXByb3Bl
-cmx5LnBhdGNoPiBcIEBAIC00OCw3DQo+ICs1Miw3IEBAIFBBQ0tBR0VDT05G
-SUdfRElTVFJPID89ICIiDQo+ICBQQUNLQUdFQ09ORklHX1JFTEVBU0UgPz0g
-InJlbGVhc2UiDQo+ICAjIFRoaXMgaXMgaW4gcXQ1LmluYywgYmVjYXVzZSBx
-dHdlYmtpdC1leGFtcGxlcyBhcmUgdXNpbmcgaXQgdG8gZW5hYmxlDQo+IGNh
-LWNlcnRpZmljYXRlcyBkZXBlbmRlbmN5ICAjIFBBQ0tBR0VDT05GSUdfT1BF
-TlNTTCA/PSAib3BlbnNzbCINCj4gLVBBQ0tBR0VDT05GSUdfREVGQVVMVCA/
-PSAiZGJ1cyB1ZGV2IGV2ZGV2IHdpZGdldHMgdG9vbHMgbGlicyBmcmVldHlw
-ZSINCj4gK1BBQ0tBR0VDT05GSUdfREVGQVVMVCA/PSAiZGJ1cyB1ZGV2IGV2
-ZGV2IHdpZGdldHMgdG9vbHMgbGlicyBmcmVldHlwZQ0KPiB0ZXN0cyINCj4N
-Cj4gIFBBQ0tBR0VDT05GSUcgPz0gIiBcDQo+ICAgICAgJHtQQUNLQUdFQ09O
-RklHX1JFTEVBU0V9IFwNCj4gQEAgLTE3MCw2ICsxNzQsMTcgQEAgZG9fY29u
-ZmlndXJlKCkgew0KPiAgICAgICAgICAke1FUX0NPTkZJR19GTEFHU30NCj4g
-IH0NCj4NCj4gK2Zha2Vyb290IGRvX2luc3RhbGxfcHRlc3QoKSB7DQo+ICsg
-ICAgbWtkaXIgLXAgJHtEfSR7UFRFU1RfUEFUSH0NCj4gKyAgICB0PSR7RH0k
-e1BURVNUX1BBVEh9DQo+ICsgICAgZm9yIHZhciBpbiBgIGZpbmQgJHtCfS90
-ZXN0cy9hdXRvLyAtbmFtZSB0c3RfKmA7IGRvDQo+ICsgICAgICAgIGlmIFsg
-bm90IGAgZWNobyAke3ZhciMjKi99IHwgZ3JlcCAnXC4nYCBdOyB0aGVuDQo+
-ICsgICAgICAgICAgICBlY2hvICR7dmFyIyMqL30gPj4gJHt0fS90c3RfbGlz
-dA0KPiArICAgICAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7dmFyfSAke3R9
-DQo+ICsgICAgICAgIGZpDQo+ICsgICAgZG9uZQ0KPiArfQ0KPiArDQo+ICBk
-b19pbnN0YWxsX2FwcGVuZCgpIHsNCj4gICAgICAjIEF2b2lkIHFtYWtlIGVy
-cm9yICJDYW5ub3QgcmVhZA0KPiBbLi4uXS91c3IvbGliL3F0NS9ta3NwZWNz
-L29lLWRldmljZS1leHRyYS5wcmk6IE5vIHN1Y2ggZmlsZSBvciBkaXJlY3Rv
-cnkiDQo+ICAgICAgdG91Y2gNCj4gJHtEfS8ke09FX1FNQUtFX1BBVEhfUVRf
-QVJDSERBVEF9L21rc3BlY3Mvb2UtZGV2aWNlLWV4dHJhLnByaQ0KPiAtLQ0K
-PiAyLjcuNA0KDQoNCg0KLS0NCl9fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fDQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFp
-bGluZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVk
-ZGVkLm9yZzxtYWlsdG86T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
-bWJlZGRlZC5vcmc+DQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9t
-YWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoKCg==
+Hi,
+
+On Wed, Jul 12, 2017 at 01:36:34AM -0700, S. Lockwood-Childs wrote:
+> The removebinaries task was intended to remove pre-built .jar and .class files
+> from the unpacked source, but when per-recipe sysroots were implemented and
+> ended up under WORKDIR, .jar or .class in those sysroots inadvertently started 
+> getting killed as well.
+> 
+> For instance, ${WORKDIR}/recipe-sysroot-native/usr/share/java/ecj-bootstrap.jar
+> was deleted when attempting to build jlex-native... which made javac in
+> that sysroot rather unhappy.
+> 
+> Solve by excluding both recipe-sysroot and recipe-sysroot-native dirs
+> from the search-and-destroy operation.
+> 
+> Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+> ---
+>  classes/java-library.bbclass | 6 ++++--
+>  1 file changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+> index 58d5a40..ce1cd28 100644
+> --- a/classes/java-library.bbclass
+> +++ b/classes/java-library.bbclass
+> @@ -50,8 +50,10 @@ ALTJARFILENAMES = "${BPN}.jar"
+>  # Java "source" distributions often contain precompiled things
+>  # we want to delete first.
+>  do_removebinaries() {
+> -  find ${WORKDIR} -name "*.jar" -exec rm {} \;
+> -  find ${WORKDIR} -name "*.class" -exec rm {} \;
+> +  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
+> +                  -name "*.jar" -exec rm {} \;
+> +  find ${WORKDIR} ! -path "${RECIPE_SYSROOT}/*" ! -path "${RECIPE_SYSROOT_NATIVE}/*" \
+> +                  -name "*.class" -exec rm {} \;
+>  }
+>  
+>  addtask removebinaries after do_unpack before do_patch
+> -- 
+> 1.9.4
+>
+
+Thanks, Pushed to master.
+
+Best Regards,
+Maxin
 
