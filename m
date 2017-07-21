@@ -1,25 +1,28 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 29842783AE
+Return-Path: <mcfrisk@kapsi.fi>
+Received: from mail.kapsi.fi (mail.kapsi.fi [217.30.184.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E06F782D9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 07:35:07 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v6L7Z8jK000994
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Fri, 21 Jul 2017 00:35:08 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Fri, 21 Jul 2017 00:35:07 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 21 Jul 2017 03:34:47 -0400
-Message-ID: <5d10992c138933e79ec7d1bec6d7fd03caec20bd.1500621886.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1500621886.git.hongxu.jia@windriver.com>
-References: <cover.1500621886.git.hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH V2 10/10] xmlrpc-c: add recipe 1.31.0
+	Fri, 21 Jul 2017 07:35:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=kapsi.fi;
+	s=20161220; h=Message-Id:Date:Subject:Cc:To:From;
+	bh=iWMsepvUhtj0geA62jpADo8V3IOH7cIqy6AJhP+vsDs=; 
+	b=vly6jtWvoLH5ySgreOZI68Dzn1AE2I2cwZNu5rtgjuRFFSkXVgaN/ZzgD+NdXdY8mkBPGBb55SIn8nqgWw2GK5ijjik7kjfmOnHMYuWO9reIp1rk7nVmk4G74OWudWML2Yr04DAgMYme23UBq0yZUMqQ+nkYGUYVVUVuIAUKMNoe+IGXqUKMt2x2DDDxGHLQjQ0mBCF1Mu6by7vd/oxngta9E87S+tp2i+U2AB5fBv12UcHpHHxKERTqEv0bcoFe01Nu7JVjwaGvlU8XFqHPqkbcijfrZLOMc8TSoqPtSSaPIL3e+Bajeeyw/5YUP8YcpH31s8UUDfl7x/ZBR202Kg==;
+Received: from lakka.kapsi.fi ([2001:1bc8:1004::1] ident=Debian-exim)
+	by mail.kapsi.fi with esmtps (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.84_2) (envelope-from <mcfrisk@kapsi.fi>)
+	id 1dYRyD-00067n-8v; Fri, 21 Jul 2017 10:03:29 +0300
+Received: from mcfrisk by lakka.kapsi.fi with local (Exim 4.84_2)
+	(envelope-from <mcfrisk@lakka.kapsi.fi>)
+	id 1dYRyD-0007lX-7Q; Fri, 21 Jul 2017 10:03:29 +0300
+From: Mikko Rapeli <mikko.rapeli@bmw.de>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 21 Jul 2017 10:03:14 +0300
+Message-Id: <1500620597-28886-1-git-send-email-mikko.rapeli@bmw.de>
+X-Mailer: git-send-email 2.1.4
+X-SA-Exim-Connect-IP: 2001:1bc8:1004::1
+X-SA-Exim-Mail-From: mcfrisk@kapsi.fi
+X-SA-Exim-Scanned: No (on mail.kapsi.fi); SAEximRunCond expanded to false
+Subject: [meta-oe][PATCH 0/3] Add CVE_PRODUCT fields to a few recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,105 +35,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 07:35:08 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 21 Jul 2017 07:35:56 -0000
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- ...ix-compile-failure-against-musl-C-library.patch | 52 ++++++++++++++++++++++
- .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   | 23 ++++++++++
- 2 files changed, 75 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
- create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+This way yocto cve-check can find open CVE's for these recipes. See also:
 
-diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
-new file mode 100644
-index 0000000..234d696
---- /dev/null
-+++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
-@@ -0,0 +1,52 @@
-+From 950b27f8320b841490cafcb3e6e3b818c7174c0d Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 20 Jul 2017 22:32:50 -0400
-+Subject: [PATCH] fix compile failure against musl C library
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ test/cpp/server_abyss.cpp               |  2 +-
-+ tools/xmlrpc_pstream/xmlrpc_pstream.cpp | 10 +++++++---
-+ 2 files changed, 8 insertions(+), 4 deletions(-)
-+
-+diff --git a/test/cpp/server_abyss.cpp b/test/cpp/server_abyss.cpp
-+index 2458a8f..82f91da 100644
-+--- a/test/cpp/server_abyss.cpp
-++++ b/test/cpp/server_abyss.cpp
-+@@ -18,7 +18,7 @@
-+ #ifdef WIN32
-+   #include <winsock2.h>
-+ #else
-+-  #include <sys/unistd.h>
-++  #include <unistd.h>
-+   #include <sys/socket.h>
-+   #include <arpa/inet.h>
-+   #include <netinet/in.h>
-+diff --git a/tools/xmlrpc_pstream/xmlrpc_pstream.cpp b/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
-+index d39e105..1fd8900 100644
-+--- a/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
-++++ b/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
-+@@ -15,11 +15,15 @@
-+ #include "xmlrpc-c/girerr.hpp"
-+ using girerr::throwf;
-+ 
-+-#include <features.h>  // for __BEGIN_DECLS
-++#ifdef __cplusplus
-++extern "C" {
-++#endif
-+ 
-+-__BEGIN_DECLS
-+ #include "dumpvalue.h"  /* An internal Xmlrpc-c header file ! */
-+-__END_DECLS
-++
-++#ifdef __cplusplus
-++}
-++#endif
-+ 
-+ 
-+ #include <xmlrpc-c/base.hpp>
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
-new file mode 100644
-index 0000000..9050d66
---- /dev/null
-+++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "XML-RPC for C/C++ is programming libraries and related tools to help you \
-+write an XML-RPC server or client in C or C++."
-+
-+HOMEPAGE = "http://xmlrpc-c.sourceforge.net/"
-+LICENSE = "BSD & MIT"
-+LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea951"
-+
-+SRC_URI = "git://github.com/ensc/xmlrpc-c.git;branch=master \
-+           file://0001-fix-compile-failure-against-musl-C-library.patch \
-+"
-+SRCREV = "81443a9dc234cc275449dbc17867ad77ae189124"
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "curl libxml2"
-+RDEPENDS_${PN} = "curl"
-+
-+inherit cmake
-+
-+EXTRA_OECMAKE = "-D_lib:STRING=${baselib}"
-+
-+BBCLASSEXTEND = "native"
-+
-+TARGET_CFLAGS += "-Wno-narrowing"
+http://lists.openembedded.org/pipermail/openembedded-core/2017-July/139897.html
+
+"Results from cve-check are not very good at the moment.
+One of the reasons for this is that component names used in CVE
+database differ from yocto recipe names. This series fixes several
+of those name mapping problems by setting the CVE_PRODUCT correctly
+in the recipes. To check this mapping with after a build, I'm exporting
+LICENSE and CVE_PRODUCT variables to buildhistory for recipes and
+packages."
+
+Mikko Rapeli (3):
+  fribidi_0.19.7.bb: set CVE_PRODUCT to gnu_fribidi
+  krb5_1.15.1.bb: set CVE_PRODUCT to kerberos
+  udisks2_2.1.8.bb: set CVE_PRODUCT to udisks
+
+ meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb      | 2 ++
+ meta-oe/recipes-devtools/libfribidi/fribidi_0.19.7.bb | 2 ++
+ meta-oe/recipes-support/udisks/udisks2_2.1.8.bb       | 2 ++
+ 3 files changed, 6 insertions(+)
+
 -- 
-2.8.1
+1.9.1
 
 
