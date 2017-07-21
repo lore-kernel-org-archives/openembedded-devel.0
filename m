@@ -1,47 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f169.google.com (mail-yw0-f169.google.com
-	[209.85.161.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 2308B71984
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 84982782E3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 08:56:09 +0000 (UTC)
-Received: by mail-yw0-f169.google.com with SMTP id x125so22318689ywa.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 01:56:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ouAoyR/EOdGTzQ+fHXjE984OaJgGC4P6aXpD1I7gOdQ=;
-	b=A8sCyFgK+yfrG66gs9CLKdg2RK4RF/FARisZqyI18JfzDhgdkRBSMkrupVXDZ5Jfr3
-	4G1p1KW4cSZ3H8hRWk5POIzhrO8V/2KYsxGEoji62HqMCAjd+pZblxm8QgWyykdQRLXg
-	Y1S1/Yrvqe7+6oOKMoqQp2Nq/W8fZXkPlC8ZnUWg4se/BpeP8vBHvRjK+3Z1CcMO06uE
-	aD5s/gefQwvgHIj5sI7wo1eV1CHFwhoveTVmzYNg7BvST9mGwB7K81PSKFoGF6TvpGYg
-	w6fK+4zOvBRzZLYg0Ty7rB98gunKg4sGuOVUHITZSOsZKP7sO9oMotEu6gQhXGuem4Hq
-	Vttw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=ouAoyR/EOdGTzQ+fHXjE984OaJgGC4P6aXpD1I7gOdQ=;
-	b=fbYqZchql1GwOBJsXQkEzMMSPRSxieyFqZogHHVt+uYJ2sAhktV6LvEO8ZJoUMaCLA
-	FvmxRnb8dWXYwNubscCzVWt0g/sAiGlEkjVwHhPmfYmbc0RyaWW4K9YPeotGS6QvzB52
-	p6TIMemhQJKZs8+Lyo0dj0Z3W46Va1/TraM5aiHF+zzGOwccBWlreJ2AbbbYyZM4dzgb
-	2IEC/y7ZLNSagLiTfulT2juLmTSdSrS6vAuF2bZn1cFGJjSR1T308gdcbRqr7CfXsOiR
-	2jGSbnvW0zIjpOSZGRPuUxOkxQhsggZ8OdIcURkFDI0wMjjYsmGcZQKzxLXYVAF+gN92
-	ajLw==
-X-Gm-Message-State: AIVw110bySmD8238SYK6iyeHPxxdiJ6gA58erTIBmiSXYfDQRjrCROVn
-	65XAC8SqnykbOnzf6CCnFi801wcdJg==
-X-Received: by 10.13.223.141 with SMTP id i135mr4825881ywe.37.1500627371035;
-	Fri, 21 Jul 2017 01:56:11 -0700 (PDT)
+	Fri, 21 Jul 2017 09:03:35 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6L93VPT027628
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Fri, 21 Jul 2017 02:03:34 -0700
+Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Fri, 21 Jul 2017 02:03:29 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <cover.1500621886.git.hongxu.jia@windriver.com>
+	<CA+chaQcQYv4xtjOLvowSTsGA3rTn8Y92Xz-zX5ixqD2Kvm7ukQ@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <04626822-4244-2cfa-fc5b-14998f4691a7@windriver.com>
+Date: Fri, 21 Jul 2017 17:03:48 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Fri, 21 Jul 2017 01:56:10 -0700 (PDT)
-In-Reply-To: <20170720153508.23113-1-ross.burton@intel.com>
-References: <20170720153508.23113-1-ross.burton@intel.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 21 Jul 2017 10:56:10 +0200
-Message-ID: <CA+chaQceN=yak2xd2RqPucsNR2xfnPKAJQztnfEPxovsH6iqGg@mail.gmail.com>
-To: Ross Burton <ross.burton@intel.com>
+In-Reply-To: <CA+chaQcQYv4xtjOLvowSTsGA3rTn8Y92Xz-zX5ixqD2Kvm7ukQ@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH][meta-gnome 1/9] cheese: remove (previously blacklisted)
+Subject: Re: [PATCH V2 00/10] add 9 recipes & upgrade 1 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,70 +36,168 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 08:56:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 21 Jul 2017 09:03:35 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-The PNBLACKLIST message says it will be removed on 2017-09-01. I already
-have a patch which will remove all blacklisted recipes with such
-PNBLACKLIST but I'll apply it only at the end of next month.
+On 2017年07月21日 16:54, Martin Jansa wrote:
+> Thanks for changes, next time please update status on patchwork when 
+> sending such mostly duplicated set of patches.
+>
 
-On Thu, Jul 20, 2017 at 5:35 PM, Ross Burton <ross.burton@intel.com> wrote:
+OK, with a simple search in patchwork, none of these patches in patchwork.
 
-> Cheese 2.30.1 is very old (2010) and has been blacklisted for some time, so
-> remove it.
+https://patchwork.openembedded.org/project/oe/series/?ordering=-last_updated
+
+//Hongxu
+
+> On Fri, Jul 21, 2017 at 9:34 AM, Hongxu Jia <hongxu.jia@windriver.com 
+> <mailto:hongxu.jia@windriver.com>> wrote:
 >
-> Signed-off-by: Ross Burton <ross.burton@intel.com>
-> ---
->  meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb | 26
-> -------------------------
->  1 file changed, 26 deletions(-)
->  delete mode 100644 meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
+>     Changed in V2:
 >
-> diff --git a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-> b/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-> deleted file mode 100644
-> index 3f5a5b124..000000000
-> --- a/meta-gnome/recipes-apps/cheese/cheese_2.30.1.bb
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -SUMMARY = "Take photos and videos with your webcam, with fun graphical
-> effects"
-> -LICENSE = "GPLv2"
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
-> -
-> -DEPENDS = "gtk+ gstreamer gst-plugins-base libcanberra udev librsvg
-> gnome-desktop evolution-data-server intltool-native"
-> -
-> -PR = "r2"
-> -
-> -inherit gnome
-> -
-> -SRC_URI[archive.md5sum] = "1599fded8a1797ea51fb010af4e6c45b"
-> -SRC_URI[archive.sha256sum] = "48f03470c6f527caa0e3b269d3afcf
-> f86ae0939a74f66ce030d4eed3bc3cbd9a"
-> -GNOME_COMPRESS_TYPE="bz2"
-> -
-> -FILES_${PN} += "${datadir}/dbus-1"
-> -RRECOMMENDS_${PN} = "gst-plugins-good-meta gst-plugins-base-meta"
-> -
-> -EXTRA_OECONF += "--disable-scrollkeeper"
-> -
-> -do_configure_prepend() {
-> -    sed -i -e "s: help : :g" ${S}/Makefile.am
-> -}
-> -
-> -PNBLACKLIST[cheese] ?= "Depends on blacklisted gstreamer - the recipe
-> will be removed on 2017-09-01 unless the issue is fixed"
-> -
-> -PNBLACKLIST[cheese] ?= "Depends on blacklisted gnome-desktop - the recipe
-> will be removed on 2017-09-01 unless the issue is fixed"
-> --
-> 2.11.0
+>     - xmlrpc-c, satyr, usermode: fix compile failure against musl C
+>     library
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     - add recipe keybinder and volume-key
 >
+>     - Build on qemux86, qemux86-64, qemumips, qemuarm64,
+>       qemux86 + musl, qemux86-64 + musl
+>
+>     //Hongxu
+>
+>     The following changes since commit
+>     1cbd1bc195017312ba8cf670b340f61a2ac6207b:
+>
+>       unionfs-fuse: 0.26 -> 2.0 (2017-07-14 23:45:53 +0200)
+>
+>     are available in the git repository at:
+>
+>       git://git.openembedded.org/openembedded-core-contrib
+>     <http://git.openembedded.org/openembedded-core-contrib>
+>     hongxu/add-recipe2
+>     http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/add-recipe2
+>     <http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/add-recipe2>
+>
+>     Hongxu Jia (10):
+>       keybinder: add recipe 3.0
+>       volume-key: add recipe 0.3.9
+>       libgnomekbd: 2.32 -> 3.22
+>       python3-pykickstart: add recipe 2.35
+>       python3-meh: add recipe 0.45
+>       usermode: add recipe 1.111
+>       isomd5sum: add recipe 1.2.1
+>       satyr: add recipe 0.23
+>       libtar: add recipe 1.2.20
+>       xmlrpc-c: add recipe 1.31.0
+>
+>      .../gnome-settings-daemon_2.32.1.bb
+>     <http://gnome-settings-daemon_2.32.1.bb>               |   3 -
+>      .../recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+>     <http://libgnomekbd_2.32.0.bb>  |  20 ---
+>      .../recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+>     <http://libgnomekbd_3.22.0.bb>  |  17 +++
+>      .../recipes-support/keybinder/keybinder_3.0.bb
+>     <http://keybinder_3.0.bb>    |  26 ++++
+>      ...ix-compile-failure-against-musl-C-library.patch | 27 ++++
+>      .../recipes-support/usermode/usermode_1.111.bb
+>     <http://usermode_1.111.bb>    |  27 ++++
+>      meta-oe/licenses/X11                               |  23 ++++
+>      ...ix-compile-failure-against-musl-C-library.patch | 52 +++++++
+>      .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+>     <http://xmlrpc-c_1.31.0.bb>  |  23 ++++
+>      .../files/0001-tweak-install-prefix.patch          | 60 ++++++++
+>      .../isomd5sum/files/0002-fix-parallel-error.patch  | 33 +++++
+>      .../recipes-extended/isomd5sum/isomd5sum_1.2.1.bb
+>     <http://isomd5sum_1.2.1.bb> |  35 +++++
+>      ...-explicitly-support-python3-by-pkg-config.patch | 56 ++++++++
+>      .../volume_key/volume-key_0.3.9.bb <http://volume-key_0.3.9.bb>  
+>                  |  34 +++++
+>      .../libtar/files/0002-Do-not-strip-libtar.patch    | 25 ++++
+>      .../libtar/files/fix_libtool_sysroot.patch         | 19 +++
+>      meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+>     <http://libtar_1.2.20.bb>   |  21 +++
+>      .../satyr/files/0001-do-not-support-python2.patch  | 84 ++++++++++++
+>      ...ix-compile-failure-against-musl-C-library.patch | 28 ++++
+>      meta-oe/recipes-support/satyr/satyr_0.23.bb
+>     <http://satyr_0.23.bb>       |  33 +++++
+>      .../files/tweak-native-language-support.patch      | 44 ++++++
+>      .../python-meh/python3-meh_0.45.bb <http://python3-meh_0.45.bb>  
+>                  |  17 +++
+>      ...0001-support-authentication-for-kickstart.patch | 151
+>     +++++++++++++++++++++
+>      ...-parser.py-add-lock-for-readKickstart-and.patch | 76 +++++++++++
+>      ...-sections-shutdown-and-environment-in-gen.patch | 48 +++++++
+>      ...d.py-retry-to-invoke-request-with-timeout.patch | 82 +++++++++++
+>      .../python-pykickstart/python3-pykickstart_2.35.bb
+>     <http://python3-pykickstart_2.35.bb> |  26 ++++
+>      27 files changed, 1067 insertions(+), 23 deletions(-)
+>      delete mode 100644
+>     meta-gnome/recipes-gnome/libgnome/libgnomekbd_2.32.0.bb
+>     <http://libgnomekbd_2.32.0.bb>
+>      create mode 100644
+>     meta-gnome/recipes-gnome/libgnome/libgnomekbd_3.22.0.bb
+>     <http://libgnomekbd_3.22.0.bb>
+>      create mode 100644
+>     meta-gnome/recipes-support/keybinder/keybinder_3.0.bb
+>     <http://keybinder_3.0.bb>
+>      create mode 100644
+>     meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch
+>      create mode 100644
+>     meta-gnome/recipes-support/usermode/usermode_1.111.bb
+>     <http://usermode_1.111.bb>
+>      create mode 100644 meta-oe/licenses/X11
+>      create mode 100644
+>     meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
+>      create mode 100644
+>     meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+>     <http://xmlrpc-c_1.31.0.bb>
+>      create mode 100644
+>     meta-oe/recipes-extended/isomd5sum/files/0001-tweak-install-prefix.patch
+>      create mode 100644
+>     meta-oe/recipes-extended/isomd5sum/files/0002-fix-parallel-error.patch
+>      create mode 100644
+>     meta-oe/recipes-extended/isomd5sum/isomd5sum_1.2.1.bb
+>     <http://isomd5sum_1.2.1.bb>
+>      create mode 100644
+>     meta-oe/recipes-extended/volume_key/files/0001-explicitly-support-python3-by-pkg-config.patch
+>      create mode 100644
+>     meta-oe/recipes-extended/volume_key/volume-key_0.3.9.bb
+>     <http://volume-key_0.3.9.bb>
+>      create mode 100644
+>     meta-oe/recipes-support/libtar/files/0002-Do-not-strip-libtar.patch
+>      create mode 100644
+>     meta-oe/recipes-support/libtar/files/fix_libtool_sysroot.patch
+>      create mode 100644
+>     meta-oe/recipes-support/libtar/libtar_1.2.20.bb
+>     <http://libtar_1.2.20.bb>
+>      create mode 100644
+>     meta-oe/recipes-support/satyr/files/0001-do-not-support-python2.patch
+>      create mode 100644
+>     meta-oe/recipes-support/satyr/files/0002-fix-compile-failure-against-musl-C-library.patch
+>      create mode 100644 meta-oe/recipes-support/satyr/satyr_0.23.bb
+>     <http://satyr_0.23.bb>
+>      create mode 100644
+>     meta-python/recipes-extended/python-meh/files/tweak-native-language-support.patch
+>      create mode 100644
+>     meta-python/recipes-extended/python-meh/python3-meh_0.45.bb
+>     <http://python3-meh_0.45.bb>
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/files/0001-support-authentication-for-kickstart.patch
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/files/0002-pykickstart-parser.py-add-lock-for-readKickstart-and.patch
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/files/0003-comment-out-sections-shutdown-and-environment-in-gen.patch
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/files/0004-load.py-retry-to-invoke-request-with-timeout.patch
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/python3-pykickstart_2.35.bb
+>     <http://python3-pykickstart_2.35.bb>
+>
+>     --
+>     2.8.1
+>
+>
+
 
