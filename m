@@ -1,49 +1,51 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 4CF1678401
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-yb0-f181.google.com (mail-yb0-f181.google.com
+	[209.85.213.181])
+	by mail.openembedded.org (Postfix) with ESMTP id B16FB78402
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 11:16:13 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id a11so4632727pfj.3
+	Fri, 21 Jul 2017 11:35:58 +0000 (UTC)
+Received: by mail-yb0-f181.google.com with SMTP id z37so11899359ybh.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 Jul 2017 04:16:15 -0700 (PDT)
+	Fri, 21 Jul 2017 04:36:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=r/FUjjdB0SvRr3Hm4pepyilSL+AG1otUFlo7IQgUIeU=;
-	b=RkITJ4hSn5IA6WR63foMYA/gZXtBF8Dvq3VMjFq5qcHI5uGXTpajts9R9Lpp1IDaco
-	c5crkYzqVECddo03+UyCj+WmOJ71lvJg3Ji4xPftmrwGTx+leaXw1tUANvVWZJm8bZjt
-	ILUZgvjDmmcardRgtSZiqlBjQanSNP6N2fREu2/Cjs96yAC/5yVAgnaQxFj79tQquNG5
-	fvi+dZs3VzNmQSg5XCRWYYt5pUbRIleJDvHw4MyihxGky6wrLgG7axayitZy+20FYasM
-	2HqCOUwEYEY62YMJ3zQcjcHJ6wbs+bpcZ1DSzLi5D4msjIOdU0jMbzHBFbXTsp/Zhw7g
-	nDrQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=c4YhpN+K80JUwbqiJSD7BInYYyF5DKBbSokNLLz16Bs=;
+	b=VUuvSmxcEMeIfkJhrhBsM4kMZktpSyYhn8T8dAVoX0XURhR9075hapATmvcOOEO0lm
+	WNJ5+A196sFJpBgCISYDC2LLGch5JR8etmCR/Stqf3lkLI6kgzLovVuqvvdpOMggXNkN
+	t47+EYFE6DLrVABKxL3RfnNIiPgCOsq94lnHhbSV3DxQsS6F7FFdYtSy4bFEAilezVSy
+	RmgsWmZAccNZ52P9qTAIieRBoD5LUDhTG9HeOHPC0gnoE67vcZx2ekkD6XsSTo2o0BrD
+	FlfrW9xWzb0jUX1jxqD95JeNcYV8N6rIM/wAKGIOZLKLxOxuwrP42aC9VhRP6iJPQTli
+	JGmQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=r/FUjjdB0SvRr3Hm4pepyilSL+AG1otUFlo7IQgUIeU=;
-	b=f9wHI+as5qwcCnuIAf8zH6ayOXSq6jli8QM4fs+ldHKkTnXh2sKtHWBj37iHWKsS8M
-	4Q6tA9nq4CHMNBQdVxpBkzM97d6avwILA0fYWiakVZvScNc277tYEg6vDk39a958r3iW
-	ghKa8LzJz4dxcUNDEzqq9vGHfUjX6z0egANpsDPaptkbaqorhzgS70h6/FGDkIiR6jMs
-	VBhSLwVGvKjcLGpWZNX7m9M/lrYprdrlKh4uGh9Dh38HjL2GkdRMAu8psSo8/ZqAjA/c
-	R1xs4MsK6uY+AfjUlEmLSZofCOop3QNqjuaFSxH09VT0CVKOz/GU5MXQi3A0kdJxdvcL
-	l/Qw==
-X-Gm-Message-State: AIVw112QNT0NiPQlruF/Kx/ERHqSVf+o6o4I/BsRiZoNtCSJTM5Rd5mT
-	QDBUPqqYcyUox7P7
-X-Received: by 10.99.1.88 with SMTP id 85mr6957420pgb.315.1500635775078;
-	Fri, 21 Jul 2017 04:16:15 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	b16sm9129223pfm.84.2017.07.21.04.16.13
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 21 Jul 2017 04:16:14 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 21 Jul 2017 04:16:02 -0700
-Message-Id: <20170721111602.2547-3-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.3
-In-Reply-To: <20170721111602.2547-1-raj.khem@gmail.com>
-References: <20170721111602.2547-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] wvstreams: Fix build with musl
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=c4YhpN+K80JUwbqiJSD7BInYYyF5DKBbSokNLLz16Bs=;
+	b=e9F0xtCuTivVraKB4c3FM4oPzzl7eTn9gLUzp/7iaF4X5DmSIPfFWAhXezOuJN+JkZ
+	YX7r/5YY7PH0x7NwPES/x4S8a5twnIUU1uUoGLchMFv+TtN1Zts46/8AiG8u5UMxCTkY
+	9U5Aes33OMlyKJ/nd5BsRMXjrYNN+ww/cGvxEuCwMpdUY9M5mfKohaJMBNwxfyJ5Q/Ot
+	X4CNL6s5kck/rtfNeNFz6ss6PsV1Cl5YeQ0ED9mT2774YPXoeqM5BwUvFVg31gO5NYYO
+	QniTQBYIwRy6THG+m3SWS/CtSDStRxV6sCFEy+JytSKarEC5UR3eTSFRQzceWePr1+z2
+	/6YQ==
+X-Gm-Message-State: AIVw113RBXLVTLfQueMhaedhL2QsWfHlazd13/irfmeCqFgf673z9TuG
+	RCZ0Xyj5pElH/jcE7kw6Qc9UMIz3ZA==
+X-Received: by 10.37.189.204 with SMTP id g12mr6259958ybk.336.1500636959456;
+	Fri, 21 Jul 2017 04:35:59 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.37.77.4 with HTTP; Fri, 21 Jul 2017 04:35:58 -0700 (PDT)
+In-Reply-To: <97F7C8E70D26E94FA7E05578493F65C60E25F48F@G08CNEXMBPEKD03.g08.fujitsu.local>
+References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
+	<CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
+	<97F7C8E70D26E94FA7E05578493F65C60E25F48F@G08CNEXMBPEKD03.g08.fujitsu.local>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 21 Jul 2017 13:35:58 +0200
+Message-ID: <CA+chaQcoC6XVFfVxYsXh5=KbNEH+D1dKHPvJXK6J7DV9TCLbeg@mail.gmail.com>
+To: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,372 +58,186 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 Jul 2017 11:16:14 -0000
+X-List-Received-Date: Fri, 21 Jul 2017 11:35:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-Check-for-limits.h-during-configure.patch |  26 ++++
- ...sk-Dont-use-ucontext-on-non-glibc-systems.patch | 135 +++++++++++++++++++++
- ...k-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch |  27 +++++
- .../0004-wvcrash-Replace-use-of-basename-API.patch |  28 +++++
- ...05-check-for-libexecinfo-during-configure.patch |  30 +++++
- .../wvdial/wvstreams/argp.patch                    |  37 ++++++
- .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   9 +-
- 7 files changed, 291 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
+Dear Huang,
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
-new file mode 100644
-index 000000000..b092ba2fc
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
-@@ -0,0 +1,26 @@
-+From 7deaf836d1f1b9e4426818584b4267f8c4a095aa Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:04:07 -0700
-+Subject: [PATCH 1/5] Check for limits.h during configure
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index fe0fa2b..188adfe 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -139,6 +139,8 @@ int main()
-+ 			     [Compiler warning on deprecated functions])])
-+ CPPFLAGS="$CPPFLAGS_save"
-+ 
-++AC_CHECK_HEADERS(limits.h)
-++
-+ # argp
-+ USE_WVSTREAMS_ARGP=0
-+ AC_CHECK_HEADERS(argp.h)
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
-new file mode 100644
-index 000000000..232db9e63
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
-@@ -0,0 +1,135 @@
-+From 0e054339c1422168a7f4a9dcf090268053a33b1f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:05:37 -0700
-+Subject: [PATCH 2/5] wvtask: Dont use ucontext on non-glibc systems
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvtask.cc | 24 ++++++++++++++++++++++++
-+ 1 file changed, 24 insertions(+)
-+
-+diff --git a/utils/wvtask.cc b/utils/wvtask.cc
-+index cdcd544..c0bff7d 100644
-+--- a/utils/wvtask.cc
-++++ b/utils/wvtask.cc
-+@@ -199,7 +199,9 @@ WvTaskMan::WvTaskMan()
-+     stacktop = (char *)alloca(0);
-+     
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&get_stack_return) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	// initial setup - start the stackmaster() task (never returns!)
-+@@ -265,13 +267,17 @@ int WvTaskMan::run(WvTask &task, int val)
-+ 	state = &old_task->mystate;
-+     
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(state) == 0);
-++#endif
-+     int newval = context_return;
-+     if (newval == 0)
-+     {
-+ 	// saved the state, now run the task.
-+         context_return = val;
-++#ifdef __GLIBC__
-+         setcontext(&task.mystate);
-++#endif
-+         return -1;
-+     }
-+     else
-+@@ -319,13 +325,17 @@ int WvTaskMan::yield(int val)
-+ #endif
-+ 		
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&current_task->mystate) == 0);
-++#endif
-+     int newval = context_return;
-+     if (newval == 0)
-+     {
-+ 	// saved the task state; now yield to the toplevel.
-+         context_return = val;
-++#ifdef __GLIBC__
-+         setcontext(&toplevel);
-++#endif
-+         return -1;
-+     }
-+     else
-+@@ -341,7 +351,9 @@ int WvTaskMan::yield(int val)
-+ void WvTaskMan::get_stack(WvTask &task, size_t size)
-+ {
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&get_stack_return) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	assert(magic_number == -WVTASK_MAGIC);
-+@@ -371,7 +383,9 @@ void WvTaskMan::get_stack(WvTask &task, size_t size)
-+ 	// initial setup
-+ 	stack_target = &task;
-+ 	context_return = size/1024 + (size%1024 > 0);
-++#ifdef __GLIBC__
-+ 	setcontext(&stackmaster_task);
-++#endif
-+     }
-+     else
-+     {
-+@@ -409,7 +423,9 @@ void WvTaskMan::_stackmaster()
-+ 	assert(magic_number == -WVTASK_MAGIC);
-+ 	
-+         context_return = 0;
-++#ifdef __GLIBC__
-+         assert(getcontext(&stackmaster_task) == 0);
-++#endif
-+         val = context_return;
-+ 	if (val == 0)
-+ 	{
-+@@ -419,7 +435,9 @@ void WvTaskMan::_stackmaster()
-+ 	    // all current stack allocations) and go back to get_stack
-+ 	    // (or the constructor, if that's what called us)
-+             context_return = 1;
-++#ifdef __GLIBC__
-+             setcontext(&get_stack_return);
-++#endif
-+ 	}
-+ 	else
-+ 	{
-+@@ -474,7 +492,9 @@ void WvTaskMan::do_task()
-+ 	
-+     // back here from longjmp; someone wants stack space.    
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&task->mystate) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	// done the setjmp; that means the target task now has
-+@@ -510,7 +530,9 @@ void WvTaskMan::do_task()
-+                 }
-+                 else
-+                 {
-++#ifdef __GLIBC__
-+                     assert(getcontext(&task->func_call) == 0);
-++#endif
-+                     task->func_call.uc_stack.ss_size = task->stacksize;
-+                     task->func_call.uc_stack.ss_sp = task->stack;
-+                     task->func_call.uc_stack.ss_flags = 0;
-+@@ -521,9 +543,11 @@ void WvTaskMan::do_task()
-+                             (void (*)(void))call_func, 1, task);
-+ 
-+                     context_return = 0;
-++#ifdef __GLIBC__
-+                     assert(getcontext(&task->func_return) == 0);
-+                     if (context_return == 0)
-+                         setcontext(&task->func_call);
-++#endif
-+                 }
-+ 		
-+ 		// the task's function terminated.
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
-new file mode 100644
-index 000000000..f9304197a
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
-@@ -0,0 +1,27 @@
-+From f1fc9f4d523dd8b773a4535176547b0619ec05c6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:08:57 -0700
-+Subject: [PATCH 3/5] wvtask: Check for HAVE_LIBC_STACK_END only on glibc
-+ systems
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvtask.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/utils/wvtask.cc b/utils/wvtask.cc
-+index c0bff7d..716344b 100644
-+--- a/utils/wvtask.cc
-++++ b/utils/wvtask.cc
-+@@ -563,7 +563,7 @@ void WvTaskMan::do_task()
-+ 
-+ const void *WvTaskMan::current_top_of_stack()
-+ {
-+-#ifdef HAVE_LIBC_STACK_END
-++#if defined(HAVE_LIBC_STACK_END) && defined(__GLIBC__)
-+     extern const void *__libc_stack_end;
-+     if (use_shared_stack() || current_task == NULL)
-+         return __libc_stack_end;
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
-new file mode 100644
-index 000000000..6f3fbffbd
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
-@@ -0,0 +1,28 @@
-+From bfe68126693f9159f7ac66a69217e0b5f43e5781 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:11:21 -0700
-+Subject: [PATCH 4/5] wvcrash: Replace use of basename API
-+
-+musl does not have this API
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvcrash.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/utils/wvcrash.cc b/utils/wvcrash.cc
-+index 0417759..3d160b7 100644
-+--- a/utils/wvcrash.cc
-++++ b/utils/wvcrash.cc
-+@@ -404,7 +404,7 @@ extern void __wvcrash_init_buffers(const char *program_name);
-+ void wvcrash_setup(const char *_argv0, const char *_desc)
-+ {
-+     if (_argv0)
-+-	argv0 = basename(_argv0);
-++	argv0 = strrchr(_argv0, '/') ? strrchr(_argv0, '/')+1 : _argv0;
-+     __wvcrash_init_buffers(argv0);
-+     if (_desc)
-+     {
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
-new file mode 100644
-index 000000000..25e9ee236
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
-@@ -0,0 +1,30 @@
-+From fd9515f08dcdafea6ae03413fbe5a43a6438fe3e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:25:48 -0700
-+Subject: [PATCH 5/5] check for libexecinfo during configure
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 188adfe..1ab4d3c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -159,6 +159,12 @@ AC_SEARCH_LIBS([argp_parse], [argp c], [], [
-+       USE_WVSTREAMS_ARGP=1
-+   fi
-+ ])
-++
-++USE_LIBEXECINFO=0
-++AC_SEARCH_LIBS([backtrace], [execinfo], [], [
-++USE_LIBEXECINFO=1
-++])
-++
-+ # Function checks
-+ AC_HEADER_DIRENT
-+ 
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
-new file mode 100644
-index 000000000..e85721363
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
-@@ -0,0 +1,37 @@
-+Check for argp_parse in libargp and then in libc before using internal version
-+
-+Index: wvstreams-4.6.1/configure.ac
-+===================================================================
-+--- wvstreams-4.6.1.orig/configure.ac
-++++ wvstreams-4.6.1/configure.ac
-+@@ -142,20 +142,21 @@ CPPFLAGS="$CPPFLAGS_save"
-+ # argp
-+ USE_WVSTREAMS_ARGP=0
-+ AC_CHECK_HEADERS(argp.h)
-+-AC_CHECK_FUNC(argp_parse)
-+-if test "$ac_cv_func_argp_parse" != yes \
-+-    -o "$ac_cv_header_argp_h" != yes ; then
-+-    (
-+-    	echo
-++AC_SEARCH_LIBS([argp_parse], [argp c], [], [
-++
-++  if test "$ac_cv_func_argp_parse" != yes \
-++      -o "$ac_cv_header_argp_h" != yes ; then
-++      (
-++       	echo
-+     	echo 'configuring argp...'
-+     	cd argp
-+     	./configure --host=$host_cpu-$host_os || exit $?
-+     	echo 'argp configured.'
-+     	echo
-+-    ) || exit $?
-+-    USE_WVSTREAMS_ARGP=1
-+-fi
-+-
-++      ) || exit $?
-++      USE_WVSTREAMS_ARGP=1
-++  fi
-++])
-+ # Function checks
-+ AC_HEADER_DIRENT
-+ 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index 607a6178f..0ac175251 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -5,6 +5,7 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
- 
- DEPENDS = "zlib openssl (>= 0.9.8) dbus readline"
-+DEPENDS_append_libc-musl = " argp-standalone libexecinfo"
- 
- SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
-            file://04_signed_request.diff \
-@@ -12,7 +13,13 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
-            file://06_gcc-4.7.diff \
-            file://07_buildflags.diff \
-            file://gcc-6.patch \
--          "
-+           file://argp.patch \
-+           file://0001-Check-for-limits.h-during-configure.patch \
-+           file://0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch \
-+           file://0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch \
-+           file://0004-wvcrash-Replace-use-of-basename-API.patch \
-+           file://0005-check-for-libexecinfo-during-configure.patch \
-+           "
- 
- SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
- SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
--- 
-2.13.3
+I'm sorry other ptest related changes were merged, but not this one. I've
+added it to master-next now.
 
+On Fri, Jul 21, 2017 at 11:41 AM, Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+wrote:
+
+> Dear Martin
+>
+>
+>
+> I have searched in the git log,and it was really not be mergerd.Could you
+> please ensure it?
+>
+>
+>
+> huangqy
+>
+>
+>
+> *From:* Martin Jansa [mailto:martin.jansa@gmail.com]
+> *Sent:* Friday, July 21, 2017 4:48 PM
+> *To:* Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+> *Cc:* openembedded-devel@lists.openembedded.org
+> *Subject:* Re: [oe] [meta-qt5] [PATCH] qtbase: add ptest
+>
+>
+>
+> It was merged last week, why are you pinging this?
+>
+>
+>
+> On Fri, Jul 21, 2017 at 9:01 AM, Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+> wrote:
+>
+> ping
+>
+> > -----Original Message-----
+> > From: Huang, Qiyu
+> > Sent: Friday, June 09, 2017 9:06 AM
+> > To: openembedded-devel@lists.openembedded.org
+> > Cc: Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > Subject: [oe] [meta-qt5] [PATCH] qtbase: add ptest
+> >
+>
+> > Add ptest for qtbase  by using provided testsuite.
+> >
+> > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > ---
+> >  .../0001-Delete-qlonglong-and-qulonglong.patch     | 28
+> > ++++++++++++++++++++++
+> >  recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
+> >  recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
+> >  3 files changed, 50 insertions(+), 1 deletion(-)  create mode 100644
+> > recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+> >  create mode 100644 recipes-qt/qt5/qtbase/run-ptest
+> >
+> > diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
+> qulonglong.patch
+> > b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+> > new file mode 100644
+> > index 0000000..975cd28
+> > --- /dev/null
+> > +++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+> > @@ -0,0 +1,28 @@
+> > +From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00
+> > 2001
+> > +From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > +Date: Wed, 7 Jun 2017 21:00:49 +0900
+> > +Subject: [PATCH] Delete qlonglong and qulonglong
+> > +
+> > +Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > +---
+> > + tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
+> > + 1 file changed, 2 deletions(-)
+> > +
+> > +diff --git
+>
+> > +a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > +b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+>
+> > +index 09458bd..59a120e 100644
+> > +--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > ++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > +@@ -5,10 +5,8 @@ SUBDIRS=\
+> > +     char32_t \
+> > +     int \
+> > +     long \
+> > +-    qlonglong \
+> > +     qptrdiff \
+> > +     quintptr \
+> > +-    qulonglong \
+> > +     schar \
+> > +     short \
+> > +     uchar \
+> > +--
+> > +2.7.4
+> > +
+> > diff --git a/recipes-qt/qt5/qtbase/run-ptest
+> b/recipes-qt/qt5/qtbase/run-ptest
+> > new file mode 100644 index 0000000..044f834
+> > --- /dev/null
+> > +++ b/recipes-qt/qt5/qtbase/run-ptest
+> > @@ -0,0 +1,6 @@
+> > +#!/bin/sh
+> > +
+> > +for x in ` awk '{print $1}' tst_list `;do
+> > +    ./${x};
+> > +done
+> > +
+> > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+> index
+> > 27d0de1..39fc272 100644
+> > --- a/recipes-qt/qt5/qtbase_git.bb
+> > +++ b/recipes-qt/qt5/qtbase_git.bb
+> > @@ -23,8 +23,12 @@ SRC_URI += "\
+> >      file://0005-configure-bump-path-length-from-256-to-512-
+> character.patch
+> > \
+> >      file://0009-Disable-all-unknown-features-instead-of-
+> erroring-out.patch \
+> >
+> > file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
+> > \
+> > +    file://0001-Delete-qlonglong-and-qulonglong.patch \
+> > +    file://run-ptest \
+> >  "
+> >
+> > +inherit ptest
+> > +
+> >  # only for target qtbase
+> >  SRC_URI += "\
+> >      file://0008-configure-paths-for-target-qmake-properly.patch \ @@
+> -48,7
+> > +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
+> >  PACKAGECONFIG_RELEASE ?= "release"
+> >  # This is in qt5.inc, because qtwebkit-examples are using it to enable
+> > ca-certificates dependency  # PACKAGECONFIG_OPENSSL ?= "openssl"
+> > -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype"
+> > +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype
+> > tests"
+> >
+> >  PACKAGECONFIG ?= " \
+> >      ${PACKAGECONFIG_RELEASE} \
+> > @@ -170,6 +174,17 @@ do_configure() {
+> >          ${QT_CONFIG_FLAGS}
+> >  }
+> >
+> > +fakeroot do_install_ptest() {
+> > +    mkdir -p ${D}${PTEST_PATH}
+> > +    t=${D}${PTEST_PATH}
+> > +    for var in ` find ${B}/tests/auto/ -name tst_*`; do
+> > +        if [ not ` echo ${var##*/} | grep '\.'` ]; then
+> > +            echo ${var##*/} >> ${t}/tst_list
+> > +            install -m 0644 ${var} ${t}
+> > +        fi
+> > +    done
+> > +}
+> > +
+> >  do_install_append() {
+> >      # Avoid qmake error "Cannot read
+> > [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or
+> directory"
+> >      touch
+> > ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
+> > --
+> > 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
+>
 
