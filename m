@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f169.google.com (mail-yw0-f169.google.com
-	[209.85.161.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 925E9783F0
+Received: from mail-yw0-f175.google.com (mail-yw0-f175.google.com
+	[209.85.161.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B0CB782F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jul 2017 09:13:03 +0000 (UTC)
-Received: by mail-yw0-f169.google.com with SMTP id x125so32071481ywa.0
+	Sat, 22 Jul 2017 09:59:16 +0000 (UTC)
+Received: by mail-yw0-f175.google.com with SMTP id a12so31929649ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jul 2017 02:13:05 -0700 (PDT)
+	Sat, 22 Jul 2017 02:59:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=33UjPWn3/bBRJdeM2IRSgSwCL6VkTrA4R7ZMSNlPCYU=;
-	b=rrcAkXUwNQmPEPnxEIKlqXT6tN+E/jNMFpV7NenkCelrg1EPw5rbaRyHeYlGP0FZmL
-	wbMuI/Ich6LbA0jARLQDANG8Xpo03oz+0/MWRGY1IHNJxz7rMJ7SGuph1aCFPYvKQ9Vg
-	+95djIfU5MB/7si9xb4sfueGGipiwU7ds1G2nTeJCImG/9RaNAl9a4T40Wdf1FFKv6JB
-	lbZrFFBb8Uu5+6MkgegCeQw9/C7eqUjqIZt+sA/Gv7fe6P4ZePrC/AmRSF6YEXsyhyPl
-	pLHKlrn2eGfHHpVD/OeXJWtOtWqLo+75LijfQRja55mpRsY05yuS7wQYHT2BIcFJyhLf
-	lwTg==
+	:cc; bh=3Q1iQxBmkLAZEd7QFBphRTIR8iHWYbR59QTMfv0eMbk=;
+	b=l9gGBDyyVDgrvIbu8ZTZz2kHg7LS9nBk1Z6GUStaEqSPF238FJofp+Hs/NbIeZfJwk
+	zBlAJwxXdc5mtFWv6766aWbBcCWkWKt4/sPU50eSQo7kd+ZTrgn6FFpj2TWIx0GZu0Ox
+	wHz6KizQSEVsmirnijSCTCk5qnahwTydVUDjUN/Ucy9f34gUCmpCrhOZ7PMteEx3aU/L
+	pBYRiiKPe+guo6Wq9ldC0/f8Jfl+iz75tAXfPve8BFgz8YIj9G2mMHrae5EVneaXFRlJ
+	DidEp2cHmI3YRl+QxGYqi1uRCcvJNU8WwpfCh38I1dfJV/qE5RfdTTv+qUzQBOCWerbW
+	onow==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=33UjPWn3/bBRJdeM2IRSgSwCL6VkTrA4R7ZMSNlPCYU=;
-	b=ujXJcpB8yHv42uIV1TkgXtyevWcNMrN34eXx983/k1wBnmBNzw3P4AYek9elLnsXYd
-	L/6epoF75qEeuyTxg2G3qDcxDMItB6JFq1h/gDSwR8WLQM/iX/wru0epK6DRQYuyL4Wz
-	hOy+s+C6Y9JTK0wdcKTrOdERvxvsXxujzMWSgieqX+kqy1r7BozDopsjIpCppbgmVjlp
-	tq061VTP3DWc61uPaYZ9KSUl70Z79HwqOQteznzjrdxB0+Ip0RszwItceox8LF2wAD0V
-	zDKfAx65BS39Fr8F2skKZTWgxrTJFHTZ3GZcT6WjsJ0AOwolav8D6uckkG+VdgIgVxIX
-	KWAQ==
-X-Gm-Message-State: AIVw111medyCmJrZOD0CMKV5A6akJ5vezFo+vI6bNK02JXhsPhR22q8c
-	pl818t2sE+TMZ3hIfBVIquUGS2/H1Q==
-X-Received: by 10.13.223.141 with SMTP id i135mr7675219ywe.37.1500714784621;
-	Sat, 22 Jul 2017 02:13:04 -0700 (PDT)
+	bh=3Q1iQxBmkLAZEd7QFBphRTIR8iHWYbR59QTMfv0eMbk=;
+	b=Y+ANzU07KpY+d/xLWmFxHUuDWr7/vslnN78fS7sw/XiFWTBNPvCmUOXa2Q4rB/jT76
+	bNPChhsxsA5Lj544Po7QoVQ5ZkdL+250L0fMiT2V5r0sVSw/tW3h/FH8M3gU2mJ6yWrx
+	KiC1cQJb0JCGqaYKDL2Pdv/MkygaEm1bapzWwjsKzSz/Qy5oUcj7cdVWca5y2/HUIC0H
+	SrnvOKgkAs+LhQIVLjJW0ownROAjAYRuOmoXvDffhyaE2s775rCU6RaI5AaLyz9G/ELw
+	+3WpyoRwrgu3VSE/m5ztf96kS6G4uPMw76HjSSTAjeIz1BFnwsU/FXpqfLmNxJPC/g0t
+	fkBw==
+X-Gm-Message-State: AIVw110d/RuVSnRZDx+0NFdPlO2SsonYi80pGUQX+YHwY1tIYegTB+T6
+	WxfBdca734LDZWGSb27cTSBhpRiRkw==
+X-Received: by 10.129.73.141 with SMTP id w135mr9190934ywa.414.1500717558079; 
+	Sat, 22 Jul 2017 02:59:18 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.37.77.4 with HTTP; Sat, 22 Jul 2017 02:13:04 -0700 (PDT)
-In-Reply-To: <20170718031013.44536-10-raj.khem@gmail.com>
-References: <20170718031013.44536-1-raj.khem@gmail.com>
-	<20170718031013.44536-10-raj.khem@gmail.com>
+Received: by 10.37.77.4 with HTTP; Sat, 22 Jul 2017 02:59:17 -0700 (PDT)
+In-Reply-To: <5d10992c138933e79ec7d1bec6d7fd03caec20bd.1500621886.git.hongxu.jia@windriver.com>
+References: <cover.1500621886.git.hongxu.jia@windriver.com>
+	<5d10992c138933e79ec7d1bec6d7fd03caec20bd.1500621886.git.hongxu.jia@windriver.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 22 Jul 2017 11:13:04 +0200
-Message-ID: <CA+chaQcPvJNaX1UseBsHY7K1Ggzkf2DYbSg3i45MGwAHu7f56w@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 22 Jul 2017 11:59:17 +0200
+Message-ID: <CA+chaQfEi1RG_Ji7opKrs2mFx9Xb7wC_b2kuW-wi65frBnsrEA@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 10/17] efivar: Upgrade to 0.31
+Subject: Re: [meta-oe][PATCH V2 10/10] xmlrpc-c: add recipe 1.31.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,403 +55,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jul 2017 09:13:04 -0000
+X-List-Received-Date: Sat, 22 Jul 2017 09:59:17 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-For target version it fails to apply gold linker patch:
+Fails to build with:
+http://errors.yoctoproject.org/Errors/Details/148212/
 
-Applying patch 0004-fix-unknow-option-for-gold-linker.patch
-patching file gcc.specs
-Hunk #1 FAILED at 14.
-1 out of 1 hunk FAILED -- rejects in file gcc.specs
-Patch 0004-fix-unknow-option-for-gold-linker.patch does not apply (enforce
-with -f)
+On Fri, Jul 21, 2017 at 9:34 AM, Hongxu Jia <hongxu.jia@windriver.com>
+wrote:
 
-and native version fails in do_compile with:
-In file included from dp.c:27:0:
-util.h:109:10: error: expected expression before =E2=80=98int=E2=80=99
-          int *: int_add(a,b,c),   \
-          ^
-
-On Tue, Jul 18, 2017 at 5:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 > ---
->  ...some-extra-const-that-gcc-complains-about.patch | 44 ---------------
->  ...Do-not-use-__bswap_constant_-16-32-macros.patch | 37 ++++++++++++
->  ...-version-new-way-symbol-versioning-breaks.patch | 66
-> ----------------------
->  .../efivar/efivar/0002-disable-static-build.patch  | 33 -----------
->  .../fix-compile-failure-with-host-gcc-4.6.patch    | 13 ++---
->  .../efivar/efivar/musl-strndupa.patch              | 17 ++++++
->  .../efivar/{efivar_0.24.bb =3D> efivar_0.31.bb}      |  9 ++-
->  7 files changed, 63 insertions(+), 156 deletions(-)
->  delete mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-Remove-
-> some-extra-const-that-gcc-complains-about.patch
->  create mode 100644 meta-oe/recipes-extended/efivar/efivar/0001-makeguids=
--
-> Do-not-use-__bswap_constant_-16-32-macros.patch
->  delete mode 100644 meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-
-> version-new-way-symbol-versioning-breaks.patch
->  delete mode 100644 meta-oe/recipes-extended/efivar/efivar/0002-disable-
-> static-build.patch
->  create mode 100644 meta-oe/recipes-extended/efivar/efivar/musl-strndupa.
-> patch
->  rename meta-oe/recipes-extended/efivar/{efivar_0.24.bb =3D> efivar_0.31.=
-bb}
-> (83%)
+>  ...ix-compile-failure-against-musl-C-library.patch | 52
+> ++++++++++++++++++++++
+>  .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   | 23 ++++++++++
+>  2 files changed, 75 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-
+> compile-failure-against-musl-C-library.patch
+>  create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
 >
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-Remove-
-> some-extra-const-that-gcc-complains-about.patch
-> b/meta-oe/recipes-extended/efivar/efivar/0001-Remove-
-> some-extra-const-that-gcc-complains-about.patch
-> deleted file mode 100644
-> index 4ae8cb90f..000000000
-> --- a/meta-oe/recipes-extended/efivar/efivar/0001-Remove-
-> some-extra-const-that-gcc-complains-about.patch
-> +++ /dev/null
-> @@ -1,44 +0,0 @@
-> -From 29a2dea16113b5a8e51de46437c6a9f7426c5867 Mon Sep 17 00:00:00 2001
-> -From: Peter Jones <pjones@redhat.com>
-> -Date: Mon, 6 Feb 2017 14:28:19 -0500
-> -Subject: [PATCH 1/2] Remove some extra "const" that gcc complains about.
-> -
-> -One of these days I'll get these right.
-> -
-> -Signed-off-by: Peter Jones <pjones@redhat.com>
-> ----
-> - src/include/efivar/efiboot-loadopt.h | 4 ++--
-> - src/loadopt.c                        | 2 +-
-> - 2 files changed, 3 insertions(+), 3 deletions(-)
-> -
-> -diff --git a/src/include/efivar/efiboot-loadopt.h
-> b/src/include/efivar/efiboot-loadopt.h
-> -index 07db5c4..efc29c6 100644
-> ---- a/src/include/efivar/efiboot-loadopt.h
-> -+++ b/src/include/efivar/efiboot-loadopt.h
-> -@@ -32,8 +32,8 @@ extern ssize_t efi_loadopt_create(uint8_t *buf, ssize_=
-t
-> size,
-> -
-> - extern efidp efi_loadopt_path(efi_load_option *opt, ssize_t limit)
-> -       __attribute__((__nonnull__ (1)));
-> --extern const unsigned char const * efi_loadopt_desc(efi_load_option
-> *opt,
-> --                                                  ssize_t limit)
-> -+extern const unsigned char * efi_loadopt_desc(efi_load_option *opt,
-> -+                                            ssize_t limit)
-> -       __attribute__((__visibility__ ("default")))
-> -       __attribute__((__nonnull__ (1)));
-> - extern uint32_t efi_loadopt_attrs(efi_load_option *opt)
-> -diff --git a/src/loadopt.c b/src/loadopt.c
-> -index 64e333f..ec50722 100644
-> ---- a/src/loadopt.c
-> -+++ b/src/loadopt.c
-> -@@ -336,7 +336,7 @@ teardown(void)
-> -
-> - __attribute__((__nonnull__ (1)))
-> - __attribute__((__visibility__ ("default")))
-> --const unsigned char const *
-> -+const unsigned char *
-> - efi_loadopt_desc(efi_load_option *opt, ssize_t limit)
-> - {
-> -       if (last_desc) {
-> ---
-> -2.12.2
-> -
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0001-makeguids-
-> Do-not-use-__bswap_constant_-16-32-macros.patch
-> b/meta-oe/recipes-extended/efivar/efivar/0001-makeguids-
-> Do-not-use-__bswap_constant_-16-32-macros.patch
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-
+> compile-failure-against-musl-C-library.patch b/meta-oe/recipes-devtools/
+> xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
 > new file mode 100644
-> index 000000000..73a772186
+> index 0000000..234d696
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/efivar/efivar/0001-makeguids-
-> Do-not-use-__bswap_constant_-16-32-macros.patch
-> @@ -0,0 +1,37 @@
-> +From 98b33d4193998687aa3a78c097f7bd4c393e0c85 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Sat, 15 Jul 2017 00:29:42 -0700
-> +Subject: [PATCH] makeguids: Do not use __bswap_constant_{16|32} macros
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-
+> compile-failure-against-musl-C-library.patch
+> @@ -0,0 +1,52 @@
+> +From 950b27f8320b841490cafcb3e6e3b818c7174c0d Mon Sep 17 00:00:00 2001
+> +From: Hongxu Jia <hongxu.jia@windriver.com>
+> +Date: Thu, 20 Jul 2017 22:32:50 -0400
+> +Subject: [PATCH] fix compile failure against musl C library
 > +
-> +not available on musl
+> +Upstream-Status: Pending
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 > +---
-> + src/makeguids.c | 8 ++++----
-> + 1 file changed, 4 insertions(+), 4 deletions(-)
+> + test/cpp/server_abyss.cpp               |  2 +-
+> + tools/xmlrpc_pstream/xmlrpc_pstream.cpp | 10 +++++++---
+> + 2 files changed, 8 insertions(+), 4 deletions(-)
 > +
-> +diff --git a/src/makeguids.c b/src/makeguids.c
-> +index da2f5f7..daf821a 100644
-> +--- a/src/makeguids.c
-> ++++ b/src/makeguids.c
-> +@@ -155,13 +155,13 @@ main(int argc, char *argv[])
-> + #if BYTE_ORDER =3D=3D BIG_ENDIAN\n\
-> + #define cpu_to_be32(n) (n)\n\
-> + #define cpu_to_be16(n) (n)\n\
-> +-#define cpu_to_le32(n) (__bswap_constant_32(n))\n\
-> +-#define cpu_to_le16(n) (__bswap_constant_16(n))\n\
-> ++#define cpu_to_le32(n) ((uint32_t) ((n)>>24 | (n)>>8&0xff00 |
-> (n)<<8&0xff0000 | (n)<<24))\n\
-> ++#define cpu_to_le16(n) ((uint16_t) ((n)<<8 | (n)>>8))\n\
-> + #else\n\
-> + #define cpu_to_le32(n) (n)\n\
-> + #define cpu_to_le16(n) (n)\n\
-> +-#define cpu_to_be32(n) (__bswap_constant_32(n))\n\
-> +-#define cpu_to_be16(n) (__bswap_constant_16(n))\n\
-> ++#define cpu_to_be32(n) ((uint32_t) ((n)>>24 | (n)>>8&0xff00 |
-> (n)<<8&0xff0000 | (n)<<24))\n\
-> ++#define cpu_to_be16(n) ((uint16_t) ((n)<<8 | (n)>>8))\n\
-> + #endif\n\
-> + """);
+> +diff --git a/test/cpp/server_abyss.cpp b/test/cpp/server_abyss.cpp
+> +index 2458a8f..82f91da 100644
+> +--- a/test/cpp/server_abyss.cpp
+> ++++ b/test/cpp/server_abyss.cpp
+> +@@ -18,7 +18,7 @@
+> + #ifdef WIN32
+> +   #include <winsock2.h>
+> + #else
+> +-  #include <sys/unistd.h>
+> ++  #include <unistd.h>
+> +   #include <sys/socket.h>
+> +   #include <arpa/inet.h>
+> +   #include <netinet/in.h>
+> +diff --git a/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
+> b/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
+> +index d39e105..1fd8900 100644
+> +--- a/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
+> ++++ b/tools/xmlrpc_pstream/xmlrpc_pstream.cpp
+> +@@ -15,11 +15,15 @@
+> + #include "xmlrpc-c/girerr.hpp"
+> + using girerr::throwf;
 > +
-> +--
-> +2.13.3
-> +
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-
-> version-new-way-symbol-versioning-breaks.patch b/meta-oe/recipes-extended=
-/
-> efivar/efivar/0002-New-gcc-version-new-way-symbol-versioning-breaks.patch
-> deleted file mode 100644
-> index 737b78b01..000000000
-> --- a/meta-oe/recipes-extended/efivar/efivar/0002-New-gcc-
-> version-new-way-symbol-versioning-breaks.patch
-> +++ /dev/null
-> @@ -1,66 +0,0 @@
-> -From 31e655d2b5f66e772d9714422b7332bbaa60d2e6 Mon Sep 17 00:00:00 2001
-> -From: Peter Jones <pjones@redhat.com>
-> -Date: Mon, 6 Feb 2017 14:41:58 -0500
-> -Subject: [PATCH 2/2] New gcc version, new way symbol versioning breaks.
-> -
-> -Apparently I get to redo this every time there's a compiler release.
-> -Yaaaaaay.
-> -
-> -Anyway, the current method is to define the two compat things from the
-> -land before time as @libefivar.so.0 symbols and list them there in the
-> -link map.  Then we have the real one defined with another name, and set
-> -as efi_set_variable@@LIBEFIVAR_0.24.  Then to make there actually be a
-> -efi_set_variable symbol to link against, we create it as a weak alias.
-> -
-> -This is all completely absurd.
-> -
-> -Signed-off-by: Peter Jones <pjones@redhat.com>
-> ----
-> - src/lib.c | 17 ++++++++++++-----
-> - 1 file changed, 12 insertions(+), 5 deletions(-)
-> -
-> -diff --git a/src/lib.c b/src/lib.c
-> -index 6a9b392..afa7d94 100644
-> ---- a/src/lib.c
-> -+++ b/src/lib.c
-> -@@ -49,7 +49,7 @@ _efi_set_variable(efi_guid_t guid, const char *name,
-> uint8_t *data,
-> - {
-> -       return ops->set_variable(guid, name, data, data_size, attributes,
-> 0600);
-> - }
-> --__asm__(".symver _efi_set_variable,_efi_set_variable@");
-> -+__asm__(".symver _efi_set_variable,_efi_set_variable@libefivar.so.0");
-> -
-> - int
-> - __attribute__((__nonnull__ (2, 3)))
-> -@@ -59,17 +59,24 @@ _efi_set_variable_variadic(efi_guid_t guid, const
-> char *name, uint8_t *data,
-> - {
-> -       return ops->set_variable(guid, name, data, data_size, attributes,
-> 0600);
-> - }
-> --__asm__(".symver _efi_set_variable_variadic,efi_set_variable@");
-> -+__asm__(".symver _efi_set_variable_variadic,
-> efi_set_variable@libefivar.so.0");
-> -
-> - int
-> - __attribute__((__nonnull__ (2, 3)))
-> - __attribute__((__visibility__ ("default")))
-> --efi_set_variable(efi_guid_t guid, const char *name, uint8_t *data,
-> --               size_t data_size, uint32_t attributes, mode_t mode)
-> -+_efi_set_variable_mode(efi_guid_t guid, const char *name, uint8_t *data=
-,
-> -+                     size_t data_size, uint32_t attributes, mode_t mode=
-)
-> - {
-> -       return ops->set_variable(guid, name, data, data_size, attributes,
-> mode);
-> - }
-> --__asm__(".symver efi_set_variable,efi_set_variable@@LIBEFIVAR_0.24");
-> -+__asm__(".symver _efi_set_variable_mode,efi_set_variable@
-> @LIBEFIVAR_0.24");
-> -+
-> -+int
-> -+__attribute__((__nonnull__ (2, 3)))
-> -+__attribute__((__visibility__ ("default")))
-> -+efi_set_variable(efi_guid_t guid, const char *name, uint8_t *data,
-> -+               size_t data_size, uint32_t attributes, mode_t mode)
-> -+      __attribute((weak, alias ("_efi_set_variable_mode")));
-> -
-> - int
-> - __attribute__((__nonnull__ (2, 3)))
-> ---
-> -2.12.2
-> -
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/0002-disable-static-b=
-uild.patch
-> b/meta-oe/recipes-extended/efivar/efivar/0002-disable-static-build.patch
-> deleted file mode 100644
-> index 951b15921..000000000
-> --- a/meta-oe/recipes-extended/efivar/efivar/0002-disable-
-> static-build.patch
-> +++ /dev/null
-> @@ -1,33 +0,0 @@
-> -From 126e0d3c1ad74cf5b0abe9e98ec444bcc3c83159 Mon Sep 17 00:00:00 2001
-> -From: Koen Kooi <koen.kooi@linaro.org>
-> -Date: Fri, 4 Mar 2016 14:53:55 +0100
-> -Subject: [PATCH 2/2] disable static build
-> -
-> -Signed-off-by: Koen Kooi <koen.kooi@linaro.org>
-> -
-> -Upstream-Status: Inappropriate [meta-oe specific]
-> -Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> -
-> ----
-> - src/Makefile | 4 ++--
-> - 1 file changed, 2 insertions(+), 2 deletions(-)
-> -
-> -diff --git a/src/Makefile b/src/Makefile
-> -index 1829d22..c7a0ca3 100644
-> ---- a/src/Makefile
-> -+++ b/src/Makefile
-> -@@ -8,9 +8,9 @@ include $(TOPDIR)/Make.defaults
-> -
-> - LIBTARGETS=3Dlibefivar.so libefiboot.so
-> - STATICLIBTARGETS=3Dlibefivar.a libefiboot.a
-> --BINTARGETS=3Defivar efivar-static
-> -+BINTARGETS=3Defivar
-> - PCTARGETS=3Defivar.pc efiboot.pc
-> --TARGETS=3D$(LIBTARGETS) $(STATICLIBTARGETS) $(BINTARGETS) $(PCTARGETS)
-> -+TARGETS=3D$(LIBTARGETS) $(BINTARGETS) $(PCTARGETS)
-> -
-> - LIBEFIBOOT_SOURCES =3D crc32.c creator.c disk.c gpt.c linux.c loadopt.c
-> - LIBEFIBOOT_OBJECTS =3D $(patsubst %.c,%.o,$(LIBEFIBOOT_SOURCES))
-> ---
-> -2.4.3
-> -
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/fix-compile-
-> failure-with-host-gcc-4.6.patch b/meta-oe/recipes-extended/
-> efivar/efivar/fix-compile-failure-with-host-gcc-4.6.patch
-> index 1c68a2934..e3fa2e1c1 100644
-> --- a/meta-oe/recipes-extended/efivar/efivar/fix-compile-
-> failure-with-host-gcc-4.6.patch
-> +++ b/meta-oe/recipes-extended/efivar/efivar/fix-compile-
-> failure-with-host-gcc-4.6.patch
-> @@ -20,10 +20,10 @@ Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
->   gcc.specs | 4 ++--
->   1 file changed, 2 insertions(+), 2 deletions(-)
->
-> -diff --git a/gcc.specs b/gcc.specs
-> -index 0d4bbda..3802ca6 100644
-> ---- a/gcc.specs
-> -+++ b/gcc.specs
-> +Index: git/gcc.specs
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/gcc.specs
-> ++++ git/gcc.specs
->  @@ -2,13 +2,13 @@
->   + -D_GNU_SOURCE
->
-> @@ -35,11 +35,8 @@ index 0d4bbda..3802ca6 100644
->   + %(efivar_cpp_options)
->
->   *cc1_options:
-> --+ %(efivar_cpp_options) -Wmaybe-uninitialized -fno-merge-constants -flt=
-o
-> -fvisibility=3Dhidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%
-> {!fPIC:%{!fno-pic:-fPIE}}}}}}
-> +-+ %(efivar_cpp_options) -Wmaybe-uninitialized -fno-merge-constants
-> -fvisibility=3Dhidden %{!r:%{!fpie:%{!fPIE:%{!fpic:%
-> {!fPIC:%{!fno-pic:-fPIE}}}}}}
->  ++ %(efivar_cpp_options) -fno-merge-constants -fvisibility=3Dhidden
-> %{!r:%{!fpie:%{!fPIE:%{!fpic:%{!fPIC:%{!fno-pic:-fPIE}}}}}}
->
->   *self_spec:
->   + %{!shared:%{!static:%{!r:-pie}}} %{static:-Wl,-no-fatal-warnings
-> -Wl,-static -static -Wl,-z,relro,-z,now}
-> ---
-> -2.8.1
-> -
-> diff --git a/meta-oe/recipes-extended/efivar/efivar/musl-strndupa.patch
-> b/meta-oe/recipes-extended/efivar/efivar/musl-strndupa.patch
-> new file mode 100644
-> index 000000000..fc8f8c8b2
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/efivar/efivar/musl-strndupa.patch
-> @@ -0,0 +1,17 @@
-> +Taken from void linux
-> +
-> +Index: git/src/linux.c
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- git.orig/src/linux.c
-> ++++ git/src/linux.c
-> +@@ -40,6 +40,10 @@
-> + #include <efivar.h>
-> + #include <efiboot.h>
-> +
-> ++#if !defined(__GLIBC__)
-> ++#define strndupa(x,s) strncpy(alloca(strlen(x)+1),x,s)
+> +-#include <features.h>  // for __BEGIN_DECLS
+> ++#ifdef __cplusplus
+> ++extern "C" {
 > ++#endif
+> +
+> +-__BEGIN_DECLS
+> + #include "dumpvalue.h"  /* An internal Xmlrpc-c header file ! */
+> +-__END_DECLS
 > ++
-> + #include "dp.h"
-> + #include "linux.h"
-> + #include "util.h"
-> diff --git a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> b/meta-oe/recipes-extended/efivar/efivar_0.31.bb
-> similarity index 83%
-> rename from meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> rename to meta-oe/recipes-extended/efivar/efivar_0.31.bb
-> index 877ca9045..10dde896e 100644
-> --- a/meta-oe/recipes-extended/efivar/efivar_0.24.bb
-> +++ b/meta-oe/recipes-extended/efivar/efivar_0.31.bb
-> @@ -12,13 +12,12 @@ inherit pkgconfig
->
->  COMPATIBLE_HOST =3D "(i.86|x86_64|arm|aarch64).*-linux"
->
-> -SRCREV =3D "963cb2e5adc145fe00717f94e382f2973f80e753"
-> +SRCREV =3D "11324799c68193116e1dd5f94b416591bd324f90"
->  SRC_URI =3D "git://github.com/rhinstaller/efivar.git \
-> -           file://0002-disable-static-build.patch \
->             file://allow-multi-definitions-for-native.patch \
-> -           file://0001-Remove-some-extra-const-that-gcc-complains-about.=
-patch
-> \
-> -           file://0002-New-gcc-version-new-way-symbol-versioning-breaks.=
-patch
-> \
-> -"
-> +           file://0001-makeguids-Do-not-use-__bswap_constant_-16-32-macr=
-os.patch
-> \
-> +           file://musl-strndupa.patch \
-> +           "
->  SRC_URI_append_class-target =3D " file://0001-efivar-fix-for-cross-compi=
-le.patch
-> \
->                                  file://0003-efivar-fix-for-cross-compile=
-.patch
-> \
->                                  ${@bb.utils.contains('DISTRO_FEATURES',
-> 'ld-is-gold', 'file://0004-fix-unknow-option-for-gold-linker.patch', '',
-> d)} \
+> ++#ifdef __cplusplus
+> ++}
+> ++#endif
+> +
+> +
+> + #include <xmlrpc-c/base.hpp>
+> +--
+> +2.8.1
+> +
+> diff --git a/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+> b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+> new file mode 100644
+> index 0000000..9050d66
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+> @@ -0,0 +1,23 @@
+> +DESCRIPTION = "XML-RPC for C/C++ is programming libraries and related
+> tools to help you \
+> +write an XML-RPC server or client in C or C++."
+> +
+> +HOMEPAGE = "http://xmlrpc-c.sourceforge.net/"
+> +LICENSE = "BSD & MIT"
+> +LIC_FILES_CHKSUM = "file://doc/COPYING;md5=aefbf81ba0750f02176b6f86752ea9
+> 51"
+> +
+> +SRC_URI = "git://github.com/ensc/xmlrpc-c.git;branch=master \
+> +           file://0001-fix-compile-failure-against-musl-C-library.patch \
+> +"
+> +SRCREV = "81443a9dc234cc275449dbc17867ad77ae189124"
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS = "curl libxml2"
+> +RDEPENDS_${PN} = "curl"
+> +
+> +inherit cmake
+> +
+> +EXTRA_OECMAKE = "-D_lib:STRING=${baselib}"
+> +
+> +BBCLASSEXTEND = "native"
+> +
+> +TARGET_CFLAGS += "-Wno-narrowing"
 > --
-> 2.13.3
+> 2.8.1
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
