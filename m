@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 44B427844C
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E747C783B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jul 2017 16:51:04 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id g14so3202916pgu.4
+	Sat, 22 Jul 2017 16:51:58 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id 65so10242378wmf.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 Jul 2017 09:51:05 -0700 (PDT)
+	Sat, 22 Jul 2017 09:52:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=r/FUjjdB0SvRr3Hm4pepyilSL+AG1otUFlo7IQgUIeU=;
-	b=ZsfOoAX3txt2CHO8A9KoqMOoAf+yc47R+XK0K7KMcCt7SaK5pSr2BvMY3wClsjS1zO
-	yTEzOdHmcup1LtG8xZ8+YCw9GtD6/gd9RfFzNdkC5d1pmaLMM/LHRC/odZynU7XFGWba
-	6rrXiTQvJw2RYS8S7C0JCNwj7atVC7RDHpc5Iq/8L0WV8dF0KawUs2QUd2D6DyljjVAK
-	1CegRxqKgTmfVUy8TcCwRg3f0bn8ZEECQ9078WBoKn1oNQfV880QoNxnVO5kh54FLZIg
-	JTFaca+ysKM8qOWGf/bOLE7LfZUs22WhOsTWuq4wfegaaaudJioiTgLSpFHbhpnpQyQI
-	SfQA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=foKGihhxbQu/L08OgE9yp09L4mGbDNmAEL+tyEDzF/M=;
+	b=NSUqfQQs6mxpAqovQcRlGGrgafn186n86dUbzCUqEB0CJqyH4+5Zht1mzc4AOSCc39
+	scT26vMDiNYreQlGe1mlNVPFD2uV0PC46oXssF/YdodmM+Ybg9YffciGV3K+T0VpA8V9
+	zXZp6YlNF2A5lBMGfpYdxOnJxw5Vi8Or62P7UIH0x7MwdBtPuvbHDP4iaG5uacOaI/VL
+	T+eR12APiuvA6XEBDqbKlVFJ9D1mi7KR5Y3vhMFcj4p7ti+O/ry/tRNBaWF3ivpwqgKB
+	5w5whsPzQ8Y2+7KIiHse3ukBZy+9yn3I9JUiNJ4DhlJt+GFXvrQp+Lo/sFCLl/f9xAY6
+	j3hw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=r/FUjjdB0SvRr3Hm4pepyilSL+AG1otUFlo7IQgUIeU=;
-	b=hK2PCowcziiZpzQ/HnwMgVsC6J/D1NmrKostONoUFOiJfZQ9iZ2gqP+ETW5/PW57fU
-	7oU77zPLIf6v56IyIK+uvNs0uIwyJe6lmdGNgA4gKaCbfdRyVoNH5XFBmgLumRGaPFhW
-	/BIR7hqLSSsY87bPHDiK7NvjAmCZ8kXXuvQv4hF8Ss0tr6AJgU49DrxsJVmt2YE8FBpE
-	BPte5zFXjYAoempjguo2daRmCTviNLhT2obJIHuN+aiezpMs7eJV/Qq6i3hBvMjuVkD1
-	7BzilITo45Du88dG1sV79XCdAyYoRXeEFwfTUOARJim0NEO1lwLmGYqIvBWdfLHL8kKw
-	XzYQ==
-X-Gm-Message-State: AIVw1131S2rNNnRaHX8mSS03heNi+v+wY1dz3RLcdQD42AXsxvCABIpo
-	/YInH154svlijQPL
-X-Received: by 10.84.192.131 with SMTP id c3mr12474079pld.9.1500742265194;
-	Sat, 22 Jul 2017 09:51:05 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c:6245:cbff:fe64:591])
-	by smtp.gmail.com with ESMTPSA id
-	o10sm15628924pgc.81.2017.07.22.09.51.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 22 Jul 2017 09:51:04 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=foKGihhxbQu/L08OgE9yp09L4mGbDNmAEL+tyEDzF/M=;
+	b=rieDmkuCXEZ9qGxQm1hPqGoRPdsY72MYHWCSTAJSvsMqzDMUD6QqmgNIy9J3WXSo9w
+	vf/PnD9cavrXs7GrbTuV4HC0BRKOq9CeT3Mlmex99yzQRswQUOO0CWBqC3L8KxkLQNj/
+	37imfQFAd9MMVeo4rwBxRnbV9Wr4SHGT13rFeF7eQlCtu3gdVwMQss1lnUzE6vz3Y9NW
+	SApiVGE7jcVHQ8XgqcILTQez3cLRn6KPlPeO8x5lJCWaBwXA+ZZnk0Kyg+Bwg48jiu1x
+	oJEmJxFyxYuOvXDVHo9e0XK4/aYOisdxFIf9y+7Z5Pc9ZOI8wjNIg9b3Mpz9IZXOd7O+
+	FkyQ==
+X-Gm-Message-State: AIVw113TH4lFPo2RyiAYMe/qsboz7jpeXm8Ow8DvqwKqRF7ynR0yUC3I
+	5xAyY6OQs/M+GxRuI3c0R52x8Bl07A==
+X-Received: by 10.80.176.162 with SMTP id j31mr9307716edd.186.1500742319513;
+	Sat, 22 Jul 2017 09:51:59 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.149.181 with HTTP; Sat, 22 Jul 2017 09:51:29 -0700 (PDT)
+In-Reply-To: <CA+chaQeg69bHANtE_LOQhrhmVCTW7t3tWyWa9rqGFmPtecx5YA@mail.gmail.com>
+References: <20170718031013.44536-1-raj.khem@gmail.com>
+	<20170718031013.44536-17-raj.khem@gmail.com>
+	<CA+chaQfN+Q2wjK6DzEvK8z69V48sDX1RYOR6RSM0dQss5MdA=A@mail.gmail.com>
+	<CAMKF1sp0Ctt7HT16JHcLuPzmnZEp3FDTYKy-iVum+ypfjGVJ7Q@mail.gmail.com>
+	<CA+chaQeg69bHANtE_LOQhrhmVCTW7t3tWyWa9rqGFmPtecx5YA@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 22 Jul 2017 09:50:45 -0700
-Message-Id: <20170722165045.44735-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.3
-In-Reply-To: <20170722165045.44735-1-raj.khem@gmail.com>
-References: <20170722165045.44735-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/4] wvstreams: Fix build with musl
+Date: Sat, 22 Jul 2017 09:51:29 -0700
+Message-ID: <CAMKF1so8E_87-n2Vrs6Thh2Hbh284d7h2iNJU29fe4LtovsRdA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 17/17] gperftools: Upgrade to 2.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,372 +56,276 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 Jul 2017 16:51:04 -0000
+X-List-Received-Date: Sat, 22 Jul 2017 16:51:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../0001-Check-for-limits.h-during-configure.patch |  26 ++++
- ...sk-Dont-use-ucontext-on-non-glibc-systems.patch | 135 +++++++++++++++++++++
- ...k-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch |  27 +++++
- .../0004-wvcrash-Replace-use-of-basename-API.patch |  28 +++++
- ...05-check-for-libexecinfo-during-configure.patch |  30 +++++
- .../wvdial/wvstreams/argp.patch                    |  37 ++++++
- .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |   9 +-
- 7 files changed, 291 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
- create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
+On Sat, Jul 22, 2017 at 8:55 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> I would be happy to test with qemuarmv7 and/or qemuarmv8 once they are added
+> to oe-core.
+>
+> I know some people have qemuarmv7 for long time, but as long as qemuarm in
+> oe-core defaults to armv5t I'll continue to test it.
 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
-new file mode 100644
-index 000000000..b092ba2fc
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-Check-for-limits.h-during-configure.patch
-@@ -0,0 +1,26 @@
-+From 7deaf836d1f1b9e4426818584b4267f8c4a095aa Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:04:07 -0700
-+Subject: [PATCH 1/5] Check for limits.h during configure
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 2 ++
-+ 1 file changed, 2 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index fe0fa2b..188adfe 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -139,6 +139,8 @@ int main()
-+ 			     [Compiler warning on deprecated functions])])
-+ CPPFLAGS="$CPPFLAGS_save"
-+ 
-++AC_CHECK_HEADERS(limits.h)
-++
-+ # argp
-+ USE_WVSTREAMS_ARGP=0
-+ AC_CHECK_HEADERS(argp.h)
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
-new file mode 100644
-index 000000000..232db9e63
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch
-@@ -0,0 +1,135 @@
-+From 0e054339c1422168a7f4a9dcf090268053a33b1f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:05:37 -0700
-+Subject: [PATCH 2/5] wvtask: Dont use ucontext on non-glibc systems
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvtask.cc | 24 ++++++++++++++++++++++++
-+ 1 file changed, 24 insertions(+)
-+
-+diff --git a/utils/wvtask.cc b/utils/wvtask.cc
-+index cdcd544..c0bff7d 100644
-+--- a/utils/wvtask.cc
-++++ b/utils/wvtask.cc
-+@@ -199,7 +199,9 @@ WvTaskMan::WvTaskMan()
-+     stacktop = (char *)alloca(0);
-+     
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&get_stack_return) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	// initial setup - start the stackmaster() task (never returns!)
-+@@ -265,13 +267,17 @@ int WvTaskMan::run(WvTask &task, int val)
-+ 	state = &old_task->mystate;
-+     
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(state) == 0);
-++#endif
-+     int newval = context_return;
-+     if (newval == 0)
-+     {
-+ 	// saved the state, now run the task.
-+         context_return = val;
-++#ifdef __GLIBC__
-+         setcontext(&task.mystate);
-++#endif
-+         return -1;
-+     }
-+     else
-+@@ -319,13 +325,17 @@ int WvTaskMan::yield(int val)
-+ #endif
-+ 		
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&current_task->mystate) == 0);
-++#endif
-+     int newval = context_return;
-+     if (newval == 0)
-+     {
-+ 	// saved the task state; now yield to the toplevel.
-+         context_return = val;
-++#ifdef __GLIBC__
-+         setcontext(&toplevel);
-++#endif
-+         return -1;
-+     }
-+     else
-+@@ -341,7 +351,9 @@ int WvTaskMan::yield(int val)
-+ void WvTaskMan::get_stack(WvTask &task, size_t size)
-+ {
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&get_stack_return) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	assert(magic_number == -WVTASK_MAGIC);
-+@@ -371,7 +383,9 @@ void WvTaskMan::get_stack(WvTask &task, size_t size)
-+ 	// initial setup
-+ 	stack_target = &task;
-+ 	context_return = size/1024 + (size%1024 > 0);
-++#ifdef __GLIBC__
-+ 	setcontext(&stackmaster_task);
-++#endif
-+     }
-+     else
-+     {
-+@@ -409,7 +423,9 @@ void WvTaskMan::_stackmaster()
-+ 	assert(magic_number == -WVTASK_MAGIC);
-+ 	
-+         context_return = 0;
-++#ifdef __GLIBC__
-+         assert(getcontext(&stackmaster_task) == 0);
-++#endif
-+         val = context_return;
-+ 	if (val == 0)
-+ 	{
-+@@ -419,7 +435,9 @@ void WvTaskMan::_stackmaster()
-+ 	    // all current stack allocations) and go back to get_stack
-+ 	    // (or the constructor, if that's what called us)
-+             context_return = 1;
-++#ifdef __GLIBC__
-+             setcontext(&get_stack_return);
-++#endif
-+ 	}
-+ 	else
-+ 	{
-+@@ -474,7 +492,9 @@ void WvTaskMan::do_task()
-+ 	
-+     // back here from longjmp; someone wants stack space.    
-+     context_return = 0;
-++#ifdef __GLIBC__
-+     assert(getcontext(&task->mystate) == 0);
-++#endif
-+     if (context_return == 0)
-+     {
-+ 	// done the setjmp; that means the target task now has
-+@@ -510,7 +530,9 @@ void WvTaskMan::do_task()
-+                 }
-+                 else
-+                 {
-++#ifdef __GLIBC__
-+                     assert(getcontext(&task->func_call) == 0);
-++#endif
-+                     task->func_call.uc_stack.ss_size = task->stacksize;
-+                     task->func_call.uc_stack.ss_sp = task->stack;
-+                     task->func_call.uc_stack.ss_flags = 0;
-+@@ -521,9 +543,11 @@ void WvTaskMan::do_task()
-+                             (void (*)(void))call_func, 1, task);
-+ 
-+                     context_return = 0;
-++#ifdef __GLIBC__
-+                     assert(getcontext(&task->func_return) == 0);
-+                     if (context_return == 0)
-+                         setcontext(&task->func_call);
-++#endif
-+                 }
-+ 		
-+ 		// the task's function terminated.
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
-new file mode 100644
-index 000000000..f9304197a
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch
-@@ -0,0 +1,27 @@
-+From f1fc9f4d523dd8b773a4535176547b0619ec05c6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:08:57 -0700
-+Subject: [PATCH 3/5] wvtask: Check for HAVE_LIBC_STACK_END only on glibc
-+ systems
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvtask.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/utils/wvtask.cc b/utils/wvtask.cc
-+index c0bff7d..716344b 100644
-+--- a/utils/wvtask.cc
-++++ b/utils/wvtask.cc
-+@@ -563,7 +563,7 @@ void WvTaskMan::do_task()
-+ 
-+ const void *WvTaskMan::current_top_of_stack()
-+ {
-+-#ifdef HAVE_LIBC_STACK_END
-++#if defined(HAVE_LIBC_STACK_END) && defined(__GLIBC__)
-+     extern const void *__libc_stack_end;
-+     if (use_shared_stack() || current_task == NULL)
-+         return __libc_stack_end;
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
-new file mode 100644
-index 000000000..6f3fbffbd
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0004-wvcrash-Replace-use-of-basename-API.patch
-@@ -0,0 +1,28 @@
-+From bfe68126693f9159f7ac66a69217e0b5f43e5781 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:11:21 -0700
-+Subject: [PATCH 4/5] wvcrash: Replace use of basename API
-+
-+musl does not have this API
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ utils/wvcrash.cc | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/utils/wvcrash.cc b/utils/wvcrash.cc
-+index 0417759..3d160b7 100644
-+--- a/utils/wvcrash.cc
-++++ b/utils/wvcrash.cc
-+@@ -404,7 +404,7 @@ extern void __wvcrash_init_buffers(const char *program_name);
-+ void wvcrash_setup(const char *_argv0, const char *_desc)
-+ {
-+     if (_argv0)
-+-	argv0 = basename(_argv0);
-++	argv0 = strrchr(_argv0, '/') ? strrchr(_argv0, '/')+1 : _argv0;
-+     __wvcrash_init_buffers(argv0);
-+     if (_desc)
-+     {
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
-new file mode 100644
-index 000000000..25e9ee236
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0005-check-for-libexecinfo-during-configure.patch
-@@ -0,0 +1,30 @@
-+From fd9515f08dcdafea6ae03413fbe5a43a6438fe3e Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 20 Jul 2017 21:25:48 -0700
-+Subject: [PATCH 5/5] check for libexecinfo during configure
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ configure.ac | 6 ++++++
-+ 1 file changed, 6 insertions(+)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 188adfe..1ab4d3c 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -159,6 +159,12 @@ AC_SEARCH_LIBS([argp_parse], [argp c], [], [
-+       USE_WVSTREAMS_ARGP=1
-+   fi
-+ ])
-++
-++USE_LIBEXECINFO=0
-++AC_SEARCH_LIBS([backtrace], [execinfo], [], [
-++USE_LIBEXECINFO=1
-++])
-++
-+ # Function checks
-+ AC_HEADER_DIRENT
-+ 
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
-new file mode 100644
-index 000000000..e85721363
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/argp.patch
-@@ -0,0 +1,37 @@
-+Check for argp_parse in libargp and then in libc before using internal version
-+
-+Index: wvstreams-4.6.1/configure.ac
-+===================================================================
-+--- wvstreams-4.6.1.orig/configure.ac
-++++ wvstreams-4.6.1/configure.ac
-+@@ -142,20 +142,21 @@ CPPFLAGS="$CPPFLAGS_save"
-+ # argp
-+ USE_WVSTREAMS_ARGP=0
-+ AC_CHECK_HEADERS(argp.h)
-+-AC_CHECK_FUNC(argp_parse)
-+-if test "$ac_cv_func_argp_parse" != yes \
-+-    -o "$ac_cv_header_argp_h" != yes ; then
-+-    (
-+-    	echo
-++AC_SEARCH_LIBS([argp_parse], [argp c], [], [
-++
-++  if test "$ac_cv_func_argp_parse" != yes \
-++      -o "$ac_cv_header_argp_h" != yes ; then
-++      (
-++       	echo
-+     	echo 'configuring argp...'
-+     	cd argp
-+     	./configure --host=$host_cpu-$host_os || exit $?
-+     	echo 'argp configured.'
-+     	echo
-+-    ) || exit $?
-+-    USE_WVSTREAMS_ARGP=1
-+-fi
-+-
-++      ) || exit $?
-++      USE_WVSTREAMS_ARGP=1
-++  fi
-++])
-+ # Function checks
-+ AC_HEADER_DIRENT
-+ 
-diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-index 607a6178f..0ac175251 100644
---- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-+++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
-@@ -5,6 +5,7 @@ LICENSE = "LGPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=55ca817ccb7d5b5b66355690e9abc605"
- 
- DEPENDS = "zlib openssl (>= 0.9.8) dbus readline"
-+DEPENDS_append_libc-musl = " argp-standalone libexecinfo"
- 
- SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
-            file://04_signed_request.diff \
-@@ -12,7 +13,13 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
-            file://06_gcc-4.7.diff \
-            file://07_buildflags.diff \
-            file://gcc-6.patch \
--          "
-+           file://argp.patch \
-+           file://0001-Check-for-limits.h-during-configure.patch \
-+           file://0002-wvtask-Dont-use-ucontext-on-non-glibc-systems.patch \
-+           file://0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch \
-+           file://0004-wvcrash-Replace-use-of-basename-API.patch \
-+           file://0005-check-for-libexecinfo-during-configure.patch \
-+           "
- 
- SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
- SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8ebc07633"
--- 
-2.13.3
+may be stop testing with thumb ISA for now
 
+>
+> On Sat, Jul 22, 2017 at 5:06 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> On Sat, Jul 22, 2017 at 3:00 AM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>> > Fails to build with:
+>> > http://errors.yoctoproject.org/Errors/Details/148214/
+>> >
+>>
+>> {standard input}: Assembler messages:
+>> {standard input}:434: Error: lo register required -- `ldr pc,[sp]'
+>>
+>> we need to get you off thumb1 somehow :)
+>>
+>> > On Tue, Jul 18, 2017 at 5:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> >>
+>> >> Fix build with musl
+>> >>
+>> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> >> ---
+>> >>  .../0001-Fix-build-failure-for-ppc.patch           | 28 ----------
+>> >>  .../gperftools/0001-fix-build-with-musl-libc.patch | 61
+>> >> ++++++++++++++++++++++
+>> >>  ...001-include-fcntl.h-for-loff_t-definition.patch | 28 ++++++++++
+>> >>  .../{gperftools_2.5.bb => gperftools_2.6.1.bb}     | 13 ++---
+>> >>  4 files changed, 96 insertions(+), 34 deletions(-)
+>> >>  delete mode 100644
+>> >>
+>> >> meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
+>> >>  create mode 100644
+>> >>
+>> >> meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
+>> >>  create mode 100644
+>> >>
+>> >> meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
+>> >>  rename meta-oe/recipes-support/gperftools/{gperftools_2.5.bb =>
+>> >> gperftools_2.6.1.bb} (67%)
+>> >>
+>> >> diff --git
+>> >>
+>> >> a/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
+>> >>
+>> >> b/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
+>> >> deleted file mode 100644
+>> >> index 27f855d1e..000000000
+>> >> ---
+>> >>
+>> >> a/meta-oe/recipes-support/gperftools/gperftools/0001-Fix-build-failure-for-ppc.patch
+>> >> +++ /dev/null
+>> >> @@ -1,28 +0,0 @@
+>> >> -Subject: Fix build failure for ppc
+>> >> -
+>> >> -Upstream-Status: Pending
+>> >> -
+>> >> -Fix the following build failure.
+>> >> -
+>> >> -  error: 'siginfo_t' does not name a type
+>> >> -
+>> >> -Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+>> >> ----
+>> >> - src/stacktrace_powerpc-linux-inl.h | 1 +
+>> >> - 1 file changed, 1 insertion(+)
+>> >> -
+>> >> -diff --git a/src/stacktrace_powerpc-linux-inl.h
+>> >> b/src/stacktrace_powerpc-linux-inl.h
+>> >> -index 5d16fa1..a9bf775 100644
+>> >> ---- a/src/stacktrace_powerpc-linux-inl.h
+>> >> -+++ b/src/stacktrace_powerpc-linux-inl.h
+>> >> -@@ -44,6 +44,7 @@
+>> >> -
+>> >> - #include <stdint.h>   // for uintptr_t
+>> >> - #include <stdlib.h>   // for NULL
+>> >> -+#include <signal.h>   // for siginfo_t
+>> >> - #include <gperftools/stacktrace.h>
+>> >> - #include <base/vdso_support.h>
+>> >> -
+>> >> ---
+>> >> -2.8.3
+>> >> -
+>> >> diff --git
+>> >>
+>> >> a/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
+>> >>
+>> >> b/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
+>> >> new file mode 100644
+>> >> index 000000000..78621c7fe
+>> >> --- /dev/null
+>> >> +++
+>> >>
+>> >> b/meta-oe/recipes-support/gperftools/gperftools/0001-fix-build-with-musl-libc.patch
+>> >> @@ -0,0 +1,61 @@
+>> >> +From 157914941bd38f1a38bb6bd7294ca6c2bc1b8dcb Mon Sep 17 00:00:00 2001
+>> >> +From: Khem Raj <raj.khem@gmail.com>
+>> >> +Date: Sun, 16 Jul 2017 15:51:28 -0700
+>> >> +Subject: [PATCH] fix build with musl libc
+>> >> +
+>> >> +Patch from https://github.com/gperftools/gperftools/pull/765/
+>> >> +
+>> >> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> >> +---
+>> >> + configure.ac                 | 1 +
+>> >> + src/malloc_hook_mmap_linux.h | 8 ++++++--
+>> >> + 2 files changed, 7 insertions(+), 2 deletions(-)
+>> >> +
+>> >> +diff --git a/configure.ac b/configure.ac
+>> >> +index b42fea3..70b49a3 100644
+>> >> +--- a/configure.ac
+>> >> ++++ b/configure.ac
+>> >> +@@ -188,6 +188,7 @@ AC_HEADER_STDC
+>> >> + AC_CHECK_TYPES([__int64])       # defined in some windows platforms
+>> >> + AC_CHECK_TYPES([struct mallinfo],,, [#include <malloc.h>])
+>> >> + AC_CHECK_TYPES([Elf32_Versym],,, [#include <elf.h>])   # for
+>> >> vdso_support.h
+>> >> ++AC_CHECK_FUNCS(__sbrk)          # for intercepting glibc memory
+>> >> allocator
+>> >> + AC_CHECK_FUNCS(sbrk)            # for tcmalloc to get memory
+>> >> + AC_CHECK_FUNCS(geteuid)         # for turning off services when run
+>> >> as
+>> >> root
+>> >> + AC_CHECK_FUNCS(fork)            # for the pthread_atfork setup
+>> >> +diff --git a/src/malloc_hook_mmap_linux.h
+>> >> b/src/malloc_hook_mmap_linux.h
+>> >> +index 79ac4e3..d444635 100755
+>> >> +--- a/src/malloc_hook_mmap_linux.h
+>> >> ++++ b/src/malloc_hook_mmap_linux.h
+>> >> +@@ -46,6 +46,10 @@
+>> >> + #include <errno.h>
+>> >> + #include "base/linux_syscall_support.h"
+>> >> +
+>> >> ++#ifndef __GLIBC__
+>> >> ++typedef off64_t   __off64_t;
+>> >> ++#endif
+>> >> ++
+>> >> + // The x86-32 case and the x86-64 case differ:
+>> >> + // 32b has a mmap2() syscall, 64b does not.
+>> >> + // 64b and 32b have different calling conventions for mmap().
+>> >> +@@ -168,7 +172,7 @@ extern "C" void* mmap64(void *start, size_t
+>> >> length,
+>> >> int prot, int flags,
+>> >> +   return result;
+>> >> + }
+>> >> +
+>> >> +-# if !defined(__USE_FILE_OFFSET64) || !defined(__REDIRECT_NTH)
+>> >> ++# if defined(__GLIBC__) && (!defined(__USE_FILE_OFFSET64) ||
+>> >> !defined(__REDIRECT_NTH))
+>> >> +
+>> >> + extern "C" void* mmap(void *start, size_t length, int prot, int
+>> >> flags,
+>> >> +                       int fd, off_t offset) __THROW {
+>> >> +@@ -206,7 +210,7 @@ extern "C" void* mremap(void* old_addr, size_t
+>> >> old_size, size_t new_size,
+>> >> +   return result;
+>> >> + }
+>> >> +
+>> >> +-#ifndef __UCLIBC__
+>> >> ++#if HAVE___SBRK
+>> >> + // libc's version:
+>> >> + extern "C" void* __sbrk(ptrdiff_t increment);
+>> >> +
+>> >> +--
+>> >> +2.13.3
+>> >> +
+>> >> diff --git
+>> >>
+>> >> a/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
+>> >>
+>> >> b/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
+>> >> new file mode 100644
+>> >> index 000000000..667008a5b
+>> >> --- /dev/null
+>> >> +++
+>> >>
+>> >> b/meta-oe/recipes-support/gperftools/gperftools/0001-include-fcntl.h-for-loff_t-definition.patch
+>> >> @@ -0,0 +1,28 @@
+>> >> +From 04ea8e001501931f4dbf20288aca78469617b08a Mon Sep 17 00:00:00 2001
+>> >> +From: Khem Raj <raj.khem@gmail.com>
+>> >> +Date: Sun, 16 Jul 2017 19:28:17 -0700
+>> >> +Subject: [PATCH] include fcntl.h for loff_t definition
+>> >> +
+>> >> +Fixes
+>> >> +linux_syscall_support.h:2641:26: error: 'loff_t' has not been declared
+>> >> +
+>> >> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> >> +---
+>> >> + src/base/linux_syscall_support.h | 1 +
+>> >> + 1 file changed, 1 insertion(+)
+>> >> +
+>> >> +diff --git a/src/base/linux_syscall_support.h
+>> >> b/src/base/linux_syscall_support.h
+>> >> +index 85347a2..70431ca 100644
+>> >> +--- a/src/base/linux_syscall_support.h
+>> >> ++++ b/src/base/linux_syscall_support.h
+>> >> +@@ -162,6 +162,7 @@ extern "C" {
+>> >> + #include <unistd.h>
+>> >> + #include <linux/unistd.h>
+>> >> + #include <endian.h>
+>> >> ++#include <fcntl.h>
+>> >> +
+>> >> + #ifdef __mips__
+>> >> + /* Include definitions of the ABI currently in use.
+>> >> */
+>> >> +--
+>> >> +2.13.3
+>> >> +
+>> >> diff --git a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+>> >> b/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
+>> >> similarity index 67%
+>> >> rename from meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+>> >> rename to meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
+>> >> index 43780a5ee..946463805 100644
+>> >> --- a/meta-oe/recipes-support/gperftools/gperftools_2.5.bb
+>> >> +++ b/meta-oe/recipes-support/gperftools/gperftools_2.6.1.bb
+>> >> @@ -2,19 +2,20 @@ SUMMARY = "Fast, multi-threaded malloc() and nifty
+>> >> performance analysis tools"
+>> >>  HOMEPAGE = "http://code.google.com/p/gperftools/"
+>> >>  LICENSE = "BSD"
+>> >>  LIC_FILES_CHKSUM =
+>> >> "file://COPYING;md5=762732742c73dc6c7fbe8632f06c059a"
+>> >> -DEPENDS = "libunwind"
+>> >> +DEPENDS += "libunwind"
+>> >>
+>> >> -SRC_URI =
+>> >>
+>> >> "http://pkgs.fedoraproject.org/repo/pkgs/gperftools/gperftools-2.5.tar.gz/aa1eaf95dbe2c9828d0bd3a00f770f50/gperftools-2.5.tar.gz
+>> >> \
+>> >> +SRCREV = "bf840dec0495e17f5c8403e68e10b9d6bf05c559"
+>> >> +SRC_URI = "git://github.com/gperftools/gperftools \
+>> >>             file://0001-Support-Atomic-ops-on-clang.patch \
+>> >> -           file://0001-Fix-build-failure-for-ppc.patch \
+>> >>             file://0001-Use-ucontext_t-instead-of-struct-ucontext.patch
+>> >> \
+>> >> +           file://0001-fix-build-with-musl-libc.patch \
+>> >> +           file://0001-include-fcntl.h-for-loff_t-definition.patch \
+>> >>             "
+>> >>
+>> >> -SRC_URI[md5sum] = "aa1eaf95dbe2c9828d0bd3a00f770f50"
+>> >> -SRC_URI[sha256sum] =
+>> >> "6fa2748f1acdf44d750253e160cf6e2e72571329b42e563b455bde09e9e85173"
+>> >> -
+>> >>  inherit autotools
+>> >>
+>> >> +S = "${WORKDIR}/git"
+>> >> +
+>> >>  # On mips, we have the following error.
+>> >>  #   do_page_fault(): sending SIGSEGV to ls for invalid read access
+>> >> from
+>> >> 00000008
+>> >>  #   Segmentation fault (core dumped)
+>> >> --
+>> >> 2.13.3
+>> >>
+>> >> --
+>> >> _______________________________________________
+>> >> Openembedded-devel mailing list
+>> >> Openembedded-devel@lists.openembedded.org
+>> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> >
+>> >
+>
+>
 
