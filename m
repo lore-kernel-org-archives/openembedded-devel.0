@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 66A9371C54
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EB40F71C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 18:32:06 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id d136so10676194qkg.3
+	Mon, 24 Jul 2017 18:32:58 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id q66so10673832qki.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 11:32:08 -0700 (PDT)
+	Mon, 24 Jul 2017 11:33:00 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Qzs3wsYysd/V0uXMD+YZwoKyas7f/XQR3vrayPq32n0=;
-	b=Qv6csPhc0dctttVrZ6jAyU5MLFbVyQvlThgjf4IPU1FtNE18WkfzIek4pNuDu+3LCM
-	j40UCJHk89izGk2dw3tWNK4kDP+Q6C85l8Ythp3TeqmRR1tKCriWrPYjqJUbu95L5qiV
-	r2Y583/4zRj4Dd1czPDdI2/ULeJER2r0o0l2K9UuyxKaUkqYv46zoZ1ZI8TPiyo1kBSd
-	PaymROgYnQQgGEowl0oiLnQA9mLmoTQdHE+XVfWwpYS0ssLkuqJQPRYHLLy4+6ScDtwH
-	kYBFezef+MDiROgzvM/p4XPCs+JJIK1dlxVNpBT3LxchsCMthgp5s0pG5LPn7o1t6Xfy
-	dnQQ==
-X-Gm-Message-State: AIVw110C8xQRf276ASTu0KXGmhSwNEwSlT0qgcAvv7MqyJplQgUADFld
-	Wrh0AcPKHzXoY6s3ydc=
-X-Received: by 10.55.168.140 with SMTP id r134mr10970949qke.204.1500921128047; 
-	Mon, 24 Jul 2017 11:32:08 -0700 (PDT)
+	bh=wu3+RbO0qIScZKvbDRCS62JKBUjOU7JC+onPkds6dps=;
+	b=EVtY+x/NUllDNu2QPcVBNTQaodiNJ0r8ziabQWErcGymSSR8mWtvGf0VaYTNoI4455
+	QVPEEH4Fg/BZcm9IpTGBNeXSVkJZBeSfEG88EMTmx4JG6C/Vu811UCnn3eba/5UmqRzY
+	zuI7V8mNZDxZ//BIjVmCrHvtF1/eEPzR8VeuLSfjOTUMqCyEX5nxJAR5Pf8EODgvIohT
+	MfyPTzoIB/S6r8xh22M2MnsjeeATLJlzsq1j/+QdI84EtF0kk206eMGYMouf4iFLtxOB
+	45kDYkhRBOcpe+NceX/uicjapB7LO1d+Ug15iZLL1+czcalXFlQb4BjooYrJbTS+5RvA
+	EDQQ==
+X-Gm-Message-State: AIVw111qQhfuGgjPckrAnMU8HMup4s/E2GUy7Kru25b2CfdKLNo4r1wV
+	HDYehpVC3a02qYOfm8E=
+X-Received: by 10.55.42.216 with SMTP id q85mr20044737qkq.202.1500921179669;
+	Mon, 24 Jul 2017 11:32:59 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.81.71])
 	by smtp.gmail.com with ESMTPSA id
-	t43sm8997302qth.30.2017.07.24.11.32.06
+	131sm8363927qki.23.2017.07.24.11.32.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Jul 2017 11:32:06 -0700 (PDT)
+	Mon, 24 Jul 2017 11:32:59 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jul 2017 14:32:00 -0400
-Message-Id: <1500921120-15260-1-git-send-email-derek@asterius.io>
+Date: Mon, 24 Jul 2017 14:32:53 -0400
+Message-Id: <1500921173-15375-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCHv2] python-serpent: update to version 1.23
+Subject: [meta-python][PATCH] python-cython: update to version 0.26
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,44 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 18:32:07 -0000
-
-Update license checksum and verify terms are unchanged
+X-List-Received-Date: Mon, 24 Jul 2017 18:32:59 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-serpent.inc              | 6 +++---
- .../python/{python-serpent_1.22.bb => python-serpent_1.23.bb}       | 0
- .../python/{python3-serpent_1.22.bb => python3-serpent_1.23.bb}     | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-serpent_1.22.bb => python-serpent_1.23.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-serpent_1.22.bb => python3-serpent_1.23.bb} (100%)
+ meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
+ .../python/{python-cython_0.25.2.bb => python-cython_0.26.bb}         | 0
+ .../python/{python3-cython_0.25.2.bb => python3-cython_0.26.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cython_0.25.2.bb => python-cython_0.26.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cython_0.25.2.bb => python3-cython_0.26.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-serpent.inc b/meta-python/recipes-devtools/python/python-serpent.inc
-index 8b98043..6454ee0 100644
---- a/meta-python/recipes-devtools/python/python-serpent.inc
-+++ b/meta-python/recipes-devtools/python/python-serpent.inc
-@@ -1,9 +1,9 @@
- SUMMARY = "Serialization based on ast.literal_eval"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=dd6e89638fc70146d17dd7087fa817ae"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=9f611d4c9e2816d387bab64c40d93294"
+diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
+index da39d14..1f5ef0f 100644
+--- a/meta-python/recipes-devtools/python/python-cython.inc
++++ b/meta-python/recipes-devtools/python/python-cython.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
+ PYPI_PACKAGE = "Cython"
+ BBCLASSEXTEND = "native"
  
--SRC_URI[md5sum] = "6950f234edcacfa1d31b6655ac3c6256"
--SRC_URI[sha256sum] = "a67ca57082b00ea734854d751ab19e8a49d4ea0d4be7194985da35863fb9fb19"
-+SRC_URI[md5sum] = "d9d6afa51f2560cf5933dcdfd947011d"
-+SRC_URI[sha256sum] = "8480ce3d8864b8974d9fe396998c6a7dae96edb68edf905bfd32ea9a11853ba5"
+-SRC_URI[md5sum] = "642c81285e1bb833b14ab3f439964086"
+-SRC_URI[sha256sum] = "f141d1f9c27a07b5a93f7dc5339472067e2d7140d1c5a9e20112a5665ca60306"
++SRC_URI[md5sum] = "2fa7ea73eb9944fdad3989adbfd22088"
++SRC_URI[sha256sum] = "4c24e2c22ddaed624d35229dc5db25049e9e225c6f64f3364326836cad8f2c66"
  
  inherit pypi
  
-diff --git a/meta-python/recipes-devtools/python/python-serpent_1.22.bb b/meta-python/recipes-devtools/python/python-serpent_1.23.bb
+diff --git a/meta-python/recipes-devtools/python/python-cython_0.25.2.bb b/meta-python/recipes-devtools/python/python-cython_0.26.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-serpent_1.22.bb
-rename to meta-python/recipes-devtools/python/python-serpent_1.23.bb
-diff --git a/meta-python/recipes-devtools/python/python3-serpent_1.22.bb b/meta-python/recipes-devtools/python/python3-serpent_1.23.bb
+rename from meta-python/recipes-devtools/python/python-cython_0.25.2.bb
+rename to meta-python/recipes-devtools/python/python-cython_0.26.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cython_0.25.2.bb b/meta-python/recipes-devtools/python/python3-cython_0.26.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-serpent_1.22.bb
-rename to meta-python/recipes-devtools/python/python3-serpent_1.23.bb
+rename from meta-python/recipes-devtools/python/python3-cython_0.25.2.bb
+rename to meta-python/recipes-devtools/python/python3-cython_0.26.bb
 -- 
 2.7.4
 
