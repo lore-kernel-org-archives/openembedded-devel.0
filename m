@@ -1,36 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E1F6782E6
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 93F5977CF1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 14:39:43 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id p3so1798914qtg.5
+	Mon, 24 Jul 2017 16:54:24 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id y43so17890853wrd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 07:39:45 -0700 (PDT)
+	Mon, 24 Jul 2017 09:54:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=glLjJt/Zj1xH8BQWcLOWFqirB+i8N2qJhyWWMby2P3g=;
+	b=aE3saRIEh618n3wEaWKfkbMhQqreKieZdStagI2iaOmXtGdyw9ylkoKrxZCDRuiliP
+	rYZAL/AWG6dqUe083+ROfFvIylgr98lrU0FkDL05ukaAFk8/fJWaIqMUVM8Y1eXCNcb4
+	cCf1z4Hak7Tchc4sg74IZzd3If1ywIGUZI0zUvOxGUM85KZjZYIF0Um9YrV6qeySEvPJ
+	LwUXu5puma7TNn1fKyw/Hcx0k12JJhrNvheyqjKfMlzrFV+wlJ/nZ7kT2llQL/xqkJNn
+	oKI5BhrDN6/4Cy9xlumcgiAkT2xnUSyvxQTOTQMaFMjsE/3k5nsuVfPkNveFhvB9TczF
+	1HLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QeFnL3uubqj2unQ9Fs9Br/7V+dFjbRErjUFEisUiA+E=;
-	b=GtCzE90GZXW/NTb449Xt3xuT/ETucW1n65w3RASq8AoZ7xZRBJDq+aTkkD9GIi1vNn
-	IIzikkzM0MH+kldjHLtMGygKQuGYV2PzUU5Ky+NshCOlEB628MAHarfrvN5C1MGvZAEs
-	PG74SgnmPj+vMjUgqXKdweIlZN6nGsb1gIGxbED0U2t9SYt3es1Y+tYEud7kaiwp/nAy
-	klLQSRHqlS+8n8cHIQdVYDpUBkXbBXtxV9tom6uLbSAqDlmeAqjpsgcIUUaVSKc4p/4I
-	4ZvQBqpPfm6PWCO0wonUzrprZWCtSuUsDNon6SfSeI5mnI4PA0MAV3qG7p8uf+OxlCcz
-	ekfw==
-X-Gm-Message-State: AIVw110JzviZXn8nvpu4GlTeSiFJtmqnG8vBRH7GdFp4/L1cfXmCnK9n
-	64bRTcZ6z+eFPP6FUKU=
-X-Received: by 10.200.49.85 with SMTP id h21mr20136307qtb.152.1500907184284;
-	Mon, 24 Jul 2017 07:39:44 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.81.71])
-	by smtp.gmail.com with ESMTPSA id n8sm8704260qtc.5.2017.07.24.07.39.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Jul 2017 07:39:43 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	bh=glLjJt/Zj1xH8BQWcLOWFqirB+i8N2qJhyWWMby2P3g=;
+	b=Q8BhKKEbRdbQOYsMk8VN7jXoNK3FrSHlnd1UTMGKx1Wq2JIz1hwk94fx96CtcbCAQZ
+	NtSRetMLFabHoU1SyFEvV8/WJuuS81EMePDVILW36+WB4QXs/uSmlcgDgO5czwcS9i5F
+	Fn1zSi9L62k6OS+6s01JCGzTeeKP++1yQ6IIn0RtRPDLTqNrdGCz5AdL8GBThf2nQFk2
+	e2phGF8HMDxqjU+E025MW2oT8CyqwrF7jEKdswrZBdsr87fEricu+c/9sJtwn3DW1QbB
+	Ri/bkyZnw2WKxlDwRIsm5O74MVCDO8+uKPK2BPzeaeo0ZfvZvKcfgLpmyiAX4n4lsa9I
+	Gsvw==
+X-Gm-Message-State: AIVw111aY95orFlTBM5dtHjU45TfF+EfEb7fbdynDTJ1HvDI6EhjryWt
+	d7rU4BfoVQ3my1yV
+X-Received: by 10.223.147.164 with SMTP id 33mr11916659wrp.107.1500915264834; 
+	Mon, 24 Jul 2017 09:54:24 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	35sm10080386wrf.72.2017.07.24.09.54.23
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 24 Jul 2017 09:54:24 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jul 2017 10:39:18 -0400
-Message-Id: <1500907158-16626-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyserial: update to version 3.4
+Date: Mon, 24 Jul 2017 18:55:21 +0200
+Message-Id: <20170724165521.3432-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.13.3
+Subject: [PATCH][meta-oe] pidgin-otr: unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,41 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 14:39:44 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 16:54:25 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+* pidgin was already unblacklisted
+* add dependency on glib2-native for glib-gettextize
+* remove manual -dbg definition
+* fix indentation
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-pyserial.inc               | 4 ++--
- .../python/{python-pyserial_3.3.bb => python-pyserial_3.4.bb}         | 0
- .../python/{python3-pyserial_3.3.bb => python3-pyserial_3.4.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyserial_3.3.bb => python-pyserial_3.4.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pyserial_3.3.bb => python3-pyserial_3.4.bb} (100%)
+ meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb | 11 +++--------
+ 1 file changed, 3 insertions(+), 8 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyserial.inc b/meta-python/recipes-devtools/python/python-pyserial.inc
-index 2508e76..99c6fc4 100644
---- a/meta-python/recipes-devtools/python/python-pyserial.inc
-+++ b/meta-python/recipes-devtools/python/python-pyserial.inc
-@@ -13,8 +13,8 @@ RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-threading \
+diff --git a/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb b/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
+index 47cdc7242..e8539c902 100644
+--- a/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
++++ b/meta-oe/recipes-support/pidgin/pidgin-otr_4.0.0.bb
+@@ -2,20 +2,15 @@ SUMMARY = "(OTR) Messaging allows you to have private conversations over instant
+ HOMEPAGE = "http://www.cypherpunks.ca/otr/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=92fe174bad6da3763f6e9e9eaff6df24"
+-DEPENDS = "libgcrypt libotr pidgin intltool-native"
+-
+-PNBLACKLIST[pidgin-otr] ?= "depends on blacklisted pidgin - the recipe will be removed on 2017-09-01 unless the issue is fixed"
++DEPENDS = "libgcrypt libotr pidgin intltool-native glib-2.0-native"
+ 
+ SRC_URI = "http://www.cypherpunks.ca/otr/${BP}.tar.gz \
+-           file://ignore_extra-portability_warnings.patch \
++    file://ignore_extra-portability_warnings.patch \
  "
  
--RSRC_URI[md5sum] = "6afe4c2e47bcec6eb7051b8c1ce19d52"
--SRC_URI[sha256sum] = "2949cddffc2b05683065a3cd2345114b1a49b08df8cb843d69ba99dc3e19edc2"
-+SRC_URI[md5sum] = "ed6183b15519a0ae96675e9c3330c69b"
-+SRC_URI[sha256sum] = "6e2d401fdee0eab996cf734e67773a0143b932772ca8b42451440cfed942c627"
+ SRC_URI[md5sum] = "eadb953376acc474e56041d4c12aa2c8"
+ SRC_URI[sha256sum] = "d56b3f092dbe9ee6597641c7d2dd294884dc04ba47aaf4ec571cd54977df4691"
  
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-pyserial_3.3.bb b/meta-python/recipes-devtools/python/python-pyserial_3.4.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pyserial_3.3.bb
-rename to meta-python/recipes-devtools/python/python-pyserial_3.4.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pyserial_3.3.bb b/meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pyserial_3.3.bb
-rename to meta-python/recipes-devtools/python/python3-pyserial_3.4.bb
+-
+ FILES_${PN} = "${libdir}/pidgin/*"
+-FILES_${PN}-dbg = "${libdir}/pidgin/.debug"
+-FILES_${PN}-dbg += "${libdir}/pidgin/.debug/pidgin-otr.so"
+-FILES_${PN}-dbg += "/usr/src/debug/pidgin-otr/${PV}-${PR}/${P}/*"
++
+ inherit autotools pkgconfig
 -- 
-2.7.4
+2.13.3
 
 
