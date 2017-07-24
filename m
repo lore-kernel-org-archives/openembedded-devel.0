@@ -1,37 +1,36 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 215B071C54
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A3D178348
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 18:43:33 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id d136so10704057qkg.3
+	Mon, 24 Jul 2017 19:37:14 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id q130so10828352qka.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 11:43:35 -0700 (PDT)
+	Mon, 24 Jul 2017 12:37:16 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=NULYizbnfsHuOkSNDk57cLIAztqR1W/e0RKKU5+7UG4=;
-	b=pAEW+I0ZiSFxbrvvilD5K885Iq2VELVXaipw1rS3vf5ik828+s5334ynfY7SqZadRI
-	Mzye4JzsIsy7ZVqaME/tzsTOqvFjRYcBuL1I47YF65jX+iuCqbvhLDLHbA1hYXM6JWCx
-	LOIOoW6Pn8mDmk27b2IvpIve0M+G3uKlBttWPwgEVKcWbOU9Pp/vDXvWxZIxWslcLmFb
-	RPkcAQx07uzSfBGAUAeeNpSwkzgRUC7m5T2fo8NJC1mPn/MXqILRCjQUf5dQZr5tScH4
-	HZYjz17aMjfr1t7IFBG5AOPFYne8zYTIU3YNBXHWFK1/zzrhDyer5riy5Joz5sJflXNc
-	R+7A==
-X-Gm-Message-State: AIVw110dIcM14zMSFqXgJXntun/vL7xS9xfY4mvVaWIfxEq0Dzk+QAJV
-	SxNP/KSs7txZ8wpBnhA=
-X-Received: by 10.55.42.216 with SMTP id q85mr20080113qkq.202.1500921815107;
-	Mon, 24 Jul 2017 11:43:35 -0700 (PDT)
+	bh=c6cP0dpQiv5Lx5VuIcy5eQUMxuxlSMxIwdMgugLXk3s=;
+	b=oLXHLSactTkDb7wGsTijd4xXJik6K81hdkoLBA7jFV73kBWMfV6UoP7vDxJE3ouQcO
+	kUluf5od8Gia0PtaadeF+KjPq9h9VLFg20oc9E8JXttJO0PqO5Gt9R2NrZZtIhZniiRX
+	mlehkbG661rj+9Pci+73dqk77vVeWpHX1SUWXBh3JhyhhUTyCFTJbIycPBJbl345tWJp
+	S0H0q5DCQZhetjGxt+TPSwKjgty47YAIch6E4DS/1Qonunct4VjrzFLl0Iywnnb2lXDf
+	2Me8MGa/IBmJMa3j5QUzYVhsIHaj52tA8Y0AD4bKuSeFWJY2kyp7rg4Dndpd9fm9itFy
+	mLPA==
+X-Gm-Message-State: AIVw1106XeD//PbNu+CiS8xP2eLxw4vrUHzVy4jfS0mtayE9WqwLcme6
+	jX/+gLXgWWA5jXlc840=
+X-Received: by 10.55.198.145 with SMTP id s17mr20463088qkl.105.1500925035994; 
+	Mon, 24 Jul 2017 12:37:15 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.81.71])
-	by smtp.gmail.com with ESMTPSA id
-	n14sm8866406qtn.73.2017.07.24.11.43.34
+	by smtp.gmail.com with ESMTPSA id 5sm8590961qkk.75.2017.07.24.12.37.14
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Jul 2017 11:43:34 -0700 (PDT)
+	Mon, 24 Jul 2017 12:37:15 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jul 2017 14:43:29 -0400
-Message-Id: <1500921809-15823-1-git-send-email-derek@asterius.io>
+Date: Mon, 24 Jul 2017 15:37:08 -0400
+Message-Id: <1500925028-848-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCHv2] python-urllib3: update to version 1.22
+Subject: [meta-python][PATCH] python-ldap: update to version 2.4.41
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 18:43:34 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 19:37:15 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-urllib3.inc                | 4 ++--
- .../python/{python-urllib3_1.21.1.bb => python-urllib3_1.22.bb}       | 0
- .../python/{python3-urllib3_1.21.1.bb => python3-urllib3_1.22.bb}     | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-urllib3_1.21.1.bb => python-urllib3_1.22.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-urllib3_1.21.1.bb => python3-urllib3_1.22.bb} (100%)
+ .../python/{python-ldap_2.4.32.bb => python-ldap_2.4.41.bb}           | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-ldap_2.4.32.bb => python-ldap_2.4.41.bb} (85%)
 
-diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
-index 8f31c27..cf79926 100644
---- a/meta-python/recipes-devtools/python/python-urllib3.inc
-+++ b/meta-python/recipes-devtools/python/python-urllib3.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
+diff --git a/meta-python/recipes-devtools/python/python-ldap_2.4.32.bb b/meta-python/recipes-devtools/python/python-ldap_2.4.41.bb
+similarity index 85%
+rename from meta-python/recipes-devtools/python/python-ldap_2.4.32.bb
+rename to meta-python/recipes-devtools/python/python-ldap_2.4.41.bb
+index f25ad1e..3dbc8b1 100644
+--- a/meta-python/recipes-devtools/python/python-ldap_2.4.32.bb
++++ b/meta-python/recipes-devtools/python/python-ldap_2.4.41.bb
+@@ -15,8 +15,8 @@ PYPI_PACKAGE = "python-ldap"
+ inherit pypi setuptools
  
--SRC_URI[md5sum] = "ef6c72c79b9c6bcd68c204f9b92abc86"
--SRC_URI[sha256sum] = "b14486978518ca0901a76ba973d7821047409d7f726f22156b24e83fd71382a5"
-+SRC_URI[md5sum] = "0da7bed3fe94bf7dc59ae37885cc72f7"
-+SRC_URI[sha256sum] = "cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"
+ LIC_FILES_CHKSUM = "file://LICENCE;md5=a41c82edffa04912007cae1d20cac555"
+-SRC_URI[md5sum] = "7c46c8a04acc227a778c7900c87cdfc7"
+-SRC_URI[sha256sum] = "5810f1b5a9ae9255df99fb9c2dcab7352fed325687efda56c0faae1a82c5e3cb"
++SRC_URI[md5sum] = "18db2d009150ec1864710fea3ed76173"
++SRC_URI[sha256sum] = "6d430ecf040f2fc704ee316d3390cb1f5419c191371e1e131baef54a0e42cef0"
  
- RDEPENDS_${PN} += "\
-     ${PYTHON_PN}-certifi \
-diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.21.1.bb b/meta-python/recipes-devtools/python/python-urllib3_1.22.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-urllib3_1.21.1.bb
-rename to meta-python/recipes-devtools/python/python-urllib3_1.22.bb
-diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.21.1.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-urllib3_1.21.1.bb
-rename to meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
+ do_configure_prepend() {
+     sed -i -e 's:^library_dirs =.*::' setup.cfg
 -- 
 2.7.4
 
