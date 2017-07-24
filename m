@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
 	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id DC042782A5
+	by mail.openembedded.org (Postfix) with ESMTP id DBEFA782A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 18:16:01 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id p3so2349491qtg.5
+	Mon, 24 Jul 2017 18:22:52 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id i19so2247756qte.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 11:16:03 -0700 (PDT)
+	Mon, 24 Jul 2017 11:22:54 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=MraboWYN7NEi5Y3b8AWM7NPtgneIPq1+supSoYTZXPY=;
-	b=gxpq4AR5q9s+SHxFKGZXvCd06/YrjSbtzGIrlUhelEDPVTVjoJgWF3RwmgIUkW9hWa
-	c1Q5BdptXrStTOp4L7lg+Ng97244HLNAOMwEuNyr/7lZISt6I7bGRPjNn/ESo56M59rr
-	ujkxBdMJ60BVudKFz8lqaNNJDoSI5yRGw2etawK3lYkg6IcUikA1K1drHqdmkkJ6JJa5
-	Yxk8rEUEn93bFqyp6zb4veKXo3RxK0L5XtC+j7jdzWtNByd2rm3TO7iZMIOco/5daDWI
-	BFU9WnNWT246quMHIGcBK8snNOzjg8s8XzLbCLkOrRZ3E17b3+Q5dd6OK37eUT50T2+X
-	8Qbg==
-X-Gm-Message-State: AIVw111VHOVIy47PQNL0sE8lvtBAdt+DQnUQlcV2jVjdA9FRMGJ2gc7t
-	n5TJ+8QJPeeq+dq3zuU=
-X-Received: by 10.237.43.163 with SMTP id e32mr7860198qtd.200.1500920162986;
-	Mon, 24 Jul 2017 11:16:02 -0700 (PDT)
+	bh=vWNCYpuw90x7rzCZov0IzhsNEGELQ9LDuRZCcCSAZKw=;
+	b=EEX6aQGdrDjVvUWF8DcX5lNgJPpGFgV0SWZqJ7rnx5nLq3v+dY+7EJ1Ym10Jhb/AXp
+	ODgJf1mu6aSH8C8Mnlz1pXT5HNKpcKogU0fjOecAGOeWfFAfIowu136H0YByI7Y760yn
+	DvqcflludSw0zmf02kF3DJWtdD/P3T0m+fGbR4jgvz3LfbMH3SOU90vytyxY6huunv24
+	WGbvLQ7KmYcSesZu6s/iTLzKMDVnS8riVJO31WepR6WXHmcdWPOOgS45d0NXLYbx9X76
+	HMhdgSD8bO880eQ9dkWUJaLNsSwUmgM8kyaaRv2SYkZ8qKCNYskbbVAf1Zo+AqOIxe+q
+	VoXA==
+X-Gm-Message-State: AIVw111zmZH54PawuH0aJo+Dm2rO3heki9//t2nnS6C5lNnVoiBfzuff
+	ioG6PAYFWuvwdNy1kbs=
+X-Received: by 10.237.37.136 with SMTP id x8mr20332860qtc.326.1500920573651;
+	Mon, 24 Jul 2017 11:22:53 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.81.71])
 	by smtp.gmail.com with ESMTPSA id
-	t57sm9015648qtt.18.2017.07.24.11.16.02
+	z43sm8716519qtg.59.2017.07.24.11.22.52
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 24 Jul 2017 11:16:02 -0700 (PDT)
+	Mon, 24 Jul 2017 11:22:52 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 Jul 2017 14:15:55 -0400
-Message-Id: <1500920155-14828-1-git-send-email-derek@asterius.io>
+Date: Mon, 24 Jul 2017 14:22:45 -0400
+Message-Id: <1500920565-14912-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cmd2: update to version 0.7.5
+Subject: [meta-python][PATCH] python-webencodings: update to version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,35 +44,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 18:16:03 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 18:22:53 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python-cmd2_0.7.2.bb => python-cmd2_0.7.5.bb}           | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cmd2_0.7.2.bb => python-cmd2_0.7.5.bb} (67%)
+ .../recipes-devtools/python/python-webencodings_0.5.1.bb       | 10 ++++++++++
+ meta-python/recipes-devtools/python/python-webencodings_0.5.bb | 10 ----------
+ 2 files changed, 10 insertions(+), 10 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-webencodings_0.5.1.bb
+ delete mode 100644 meta-python/recipes-devtools/python/python-webencodings_0.5.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb b/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-similarity index 67%
-rename from meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-rename to meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-index a379de0..9621326 100644
---- a/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-+++ b/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-@@ -1,10 +1,10 @@
- SUMMARY = "Extra features for standard library's cmd module"
- HOMEPAGE = "http://packages.python.org/cmd2/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://setup.py;beginline=43;endline=43;md5=0f13c9cfc75288223cf7edd2f3b985a2"
-+LIC_FILES_CHKSUM = "file://setup.py;beginline=49;endline=49;md5=0f13c9cfc75288223cf7edd2f3b985a2"
- 
--SRC_URI[md5sum] = "4a5b5aab407bdeb49634789f9a42902b"
--SRC_URI[sha256sum] = "d06301cc578a83531261121c0b11d79d29d0a80aca01ed6752c20c4cfcda2dd9"
-+SRC_URI[md5sum] = "9f758f3a6a20f1220d60f6320bb839b3"
-+SRC_URI[sha256sum] = "7a47afafc5ad45649a2998df8d96f39d8e1d0686f55c785285889e45151ff75f"
- 
- inherit pypi setuptools
- 
+diff --git a/meta-python/recipes-devtools/python/python-webencodings_0.5.1.bb b/meta-python/recipes-devtools/python/python-webencodings_0.5.1.bb
+new file mode 100644
+index 0000000..d7e4d2e
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-webencodings_0.5.1.bb
+@@ -0,0 +1,10 @@
++SUMMARY = "Character encoding aliases for legacy web content"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=af5c81bfe98855a56d36b6ba5de2906f"
++
++SRC_URI[md5sum] = "32f6e261d52e57bf7e1c4d41546d15b8"
++SRC_URI[sha256sum] = "b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab16748587e1923"
++
++inherit pypi setuptools
++
++RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
+diff --git a/meta-python/recipes-devtools/python/python-webencodings_0.5.bb b/meta-python/recipes-devtools/python/python-webencodings_0.5.bb
+deleted file mode 100644
+index fbe6285..0000000
+--- a/meta-python/recipes-devtools/python/python-webencodings_0.5.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SUMMARY = "Character encoding aliases for legacy web content"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=2fc6c99a19e6dbde9f7a2239143c9d13"
+-
+-SRC_URI[md5sum] = "878714d45241f7970dffd8991d61fff9"
+-SRC_URI[sha256sum] = "a5c55ee93b24e740fe951c37b5c228dccc1f171450e188555a775261cce1b904"
+-
+-inherit pypi setuptools
+-
+-RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
 -- 
 2.7.4
 
