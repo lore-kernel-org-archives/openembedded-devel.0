@@ -1,24 +1,23 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 65E047833B
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DBC7F70100
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 06:49:42 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6O6nhpK003646
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 Jul 2017 23:49:43 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Sun, 23 Jul 2017 23:49:42 -0700
-From: <jackie.huang@windriver.com>
+	Mon, 24 Jul 2017 07:04:10 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v6O74A5q029141
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 24 Jul 2017 00:04:10 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Mon, 24 Jul 2017 00:04:10 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Jul 2017 14:49:22 +0800
-Message-ID: <20170724064922.13560-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+Date: Mon, 24 Jul 2017 03:04:03 -0400
+Message-ID: <cover.1500878698.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] pam-ssh-agent-auth: add new recipe
+Subject: [PATCH 0/5] add 5 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +30,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 06:49:42 -0000
+X-List-Received-Date: Mon, 24 Jul 2017 07:04:11 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Changed in V3:
 
-A PAM module which permits authentication via ssh-agent.
+- xmlrpc-c, usermode: fixed when compile with "-Wformat -Wformat-security -Werror=format-security"
+  (already updated the status on patchwork)
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../pam/pam-ssh-agent-auth_0.10.3.bb               | 46 ++++++++++++++++++++++
- 1 file changed, 46 insertions(+)
- create mode 100644 meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
+- Add recipe libpwquality, libbytesize and libtimezonemap
 
-diff --git a/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
-new file mode 100644
-index 000000000..42b648e8b
---- /dev/null
-+++ b/meta-oe/recipes-extended/pam/pam-ssh-agent-auth_0.10.3.bb
-@@ -0,0 +1,46 @@
-+SUMMARY = "pam-ssh-agent-auth"
-+DESCRIPTION = "A PAM module which permits authentication via ssh-agent."
-+HOMEPAGE = "http://sourceforge.net/projects/pamsshagentauth/"
-+SECTION = "libs"
-+LICENSE = "openssl & BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE.OpenSSL;md5=8ab01146141ded59b75f8ba7811ed05a \
-+                    file://OPENSSH_LICENSE;md5=7ae09218173be1643c998a4b71027f9b \
-+"
-+
-+SRC_URI = "http://sourceforge.net/projects/pamsshagentauth/files/pam_ssh_agent_auth/v${PV}/pam_ssh_agent_auth-${PV}.tar.bz2"
-+SRC_URI[md5sum] = "8dbe90ab3625e545036333e6f51ccf1d"
-+SRC_URI[sha256sum] = "3c53d358d6eaed1b211239df017c27c6f9970995d14102ae67bae16d4f47a763"
-+
-+DEPENDS += "libpam openssl"
-+
-+# This gets us ssh-agent, which we are almost certain to want.
-+#
-+RDEPENDS_${PN} += "openssh-misc"
-+
-+# Kind of unfortunate to have underscores in the name.
-+#
-+S = "${WORKDIR}/pam_ssh_agent_auth-${PV}"
-+
-+inherit autotools-brokensep
-+
-+# Avoid autoreconf.  Override the --libexec oe_runconf specifies so that
-+# the module is put with the other pam modules.  Because it cannot, in general,
-+# do a runtime test, configure wants to use rpl_malloc() and rpl_realloc()
-+# instead of malloc() and realloc().  We set variables to tell it not to because
-+# these functions do not exist.
-+#
-+do_configure () {
-+    oe_runconf --without-openssl-header-check  --libexecdir=${base_libdir}/security \
-+               ac_cv_func_malloc_0_nonnull=yes ac_cv_func_realloc_0_nonnull=yes
-+}
-+
-+# Link with CC.  Configure cannot figure out the correct AR.
-+#
-+do_compile () {
-+    oe_runmake  LD="${CC}" AR="${AR}"
-+}
-+
-+# This stuff is not any place looked at by default.
-+#
-+FILES_${PN} += "${base_libdir}/security/pam*"
-+FILES_${PN}-dbg += "${base_libdir}/security/.debug"
+Changed in V2:
+
+- xmlrpc-c, usermode: fix compile failure against musl C library
+
+//Hongxu
+
+
+The following changes since commit 86e87c049f612534ce85301de8110a045596b7f7:
+
+  keybinder: add recipe 3.0 (2017-07-24 02:04:30 -0400)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/openembedded-core-contrib hongxu/add-recipe1
+  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/add-recipe1
+
+Hongxu Jia (5):
+  libpwquality: add recipe 1.4.0
+  libbytesize: add recipe 0.10
+  libtimezonemap: add recipe 0.4.5
+  xmlrpc-c: add recipe 1.31.0
+  usermode: add recipe 1.111
+
+ .../libtimezonemap/libtimezonemap_0.4.5.bb         | 22 +++++++++
+ ...ix-compile-failure-against-musl-C-library.patch | 27 +++++++++++
+ .../usermode/usermode/0001-formatting-issues.patch | 34 ++++++++++++++
+ .../recipes-support/usermode/usermode_1.111.bb     | 29 ++++++++++++
+ ...ix-compile-failure-against-musl-C-library.patch | 52 ++++++++++++++++++++++
+ .../xmlrpc-c/0002-fix-formatting-issues.patch      | 34 ++++++++++++++
+ .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   | 24 ++++++++++
+ .../add-missing-python-include-dir-for-cross.patch | 48 ++++++++++++++++++++
+ .../libpwquality/libpwquality_1.4.0.bb             | 45 +++++++++++++++++++
+ .../files/0001-remove-python2-support.patch        | 30 +++++++++++++
+ .../libbytesize/libbytesize_0.10.bb                | 34 ++++++++++++++
+ 11 files changed, 379 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/libtimezonemap/libtimezonemap_0.4.5.bb
+ create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch
+ create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
+ create mode 100644 meta-gnome/recipes-support/usermode/usermode_1.111.bb
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0001-fix-compile-failure-against-musl-C-library.patch
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c/0002-fix-formatting-issues.patch
+ create mode 100644 meta-oe/recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+ create mode 100644 meta-oe/recipes-extended/libpwquality/files/add-missing-python-include-dir-for-cross.patch
+ create mode 100644 meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
+ create mode 100644 meta-oe/recipes-support/libbytesize/files/0001-remove-python2-support.patch
+ create mode 100644 meta-oe/recipes-support/libbytesize/libbytesize_0.10.bb
+
 -- 
-2.11.0
+2.8.1
 
 
