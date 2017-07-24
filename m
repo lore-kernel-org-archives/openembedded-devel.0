@@ -1,25 +1,37 @@
-Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 9B51478369
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 215B071C54
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 18:41:02 +0000 (UTC)
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	24 Jul 2017 11:40:49 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.40,408,1496127600"; d="scan'208";a="111421689"
-Received: from lsandov1-mobl2.zpn.intel.com ([10.219.128.119])
-	by orsmga004.jf.intel.com with ESMTP; 24 Jul 2017 11:40:48 -0700
-Message-ID: <1500922159.2230.32.camel@linux.intel.com>
-From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
-To: Derek Straka <derek@asterius.io>
-Date: Mon, 24 Jul 2017 13:49:19 -0500
-In-Reply-To: <1500920155-14828-1-git-send-email-derek@asterius.io>
-References: <1500920155-14828-1-git-send-email-derek@asterius.io>
-X-Mailer: Evolution 3.12.9-1+b1 
-Mime-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] python-cmd2: update to version 0.7.5
+	Mon, 24 Jul 2017 18:43:33 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id d136so10704057qkg.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jul 2017 11:43:35 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=NULYizbnfsHuOkSNDk57cLIAztqR1W/e0RKKU5+7UG4=;
+	b=pAEW+I0ZiSFxbrvvilD5K885Iq2VELVXaipw1rS3vf5ik828+s5334ynfY7SqZadRI
+	Mzye4JzsIsy7ZVqaME/tzsTOqvFjRYcBuL1I47YF65jX+iuCqbvhLDLHbA1hYXM6JWCx
+	LOIOoW6Pn8mDmk27b2IvpIve0M+G3uKlBttWPwgEVKcWbOU9Pp/vDXvWxZIxWslcLmFb
+	RPkcAQx07uzSfBGAUAeeNpSwkzgRUC7m5T2fo8NJC1mPn/MXqILRCjQUf5dQZr5tScH4
+	HZYjz17aMjfr1t7IFBG5AOPFYne8zYTIU3YNBXHWFK1/zzrhDyer5riy5Joz5sJflXNc
+	R+7A==
+X-Gm-Message-State: AIVw110dIcM14zMSFqXgJXntun/vL7xS9xfY4mvVaWIfxEq0Dzk+QAJV
+	SxNP/KSs7txZ8wpBnhA=
+X-Received: by 10.55.42.216 with SMTP id q85mr20080113qkq.202.1500921815107;
+	Mon, 24 Jul 2017 11:43:35 -0700 (PDT)
+Received: from sparta.ny.asterius.io ([68.132.81.71])
+	by smtp.gmail.com with ESMTPSA id
+	n14sm8866406qtn.73.2017.07.24.11.43.34
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 24 Jul 2017 11:43:34 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 24 Jul 2017 14:43:29 -0400
+Message-Id: <1500921809-15823-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCHv2] python-urllib3: update to version 1.22
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,48 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 18:41:02 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 24 Jul 2017 18:43:34 -0000
 
-On Mon, 2017-07-24 at 14:15 -0400, Derek Straka wrote:
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  .../python/{python-cmd2_0.7.2.bb => python-cmd2_0.7.5.bb}           | 6 +++---
->  1 file changed, 3 insertions(+), 3 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-cmd2_0.7.2.bb => python-cmd2_0.7.5.bb} (67%)
-> 
-> diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb b/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-> similarity index 67%
-> rename from meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-> rename to meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-> index a379de0..9621326 100644
-> --- a/meta-python/recipes-devtools/python/python-cmd2_0.7.2.bb
-> +++ b/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
-> @@ -1,10 +1,10 @@
->  SUMMARY = "Extra features for standard library's cmd module"
->  HOMEPAGE = "http://packages.python.org/cmd2/"
->  LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://setup.py;beginline=43;endline=43;md5=0f13c9cfc75288223cf7edd2f3b985a2"
-> +LIC_FILES_CHKSUM = "file://setup.py;beginline=49;endline=49;md5=0f13c9cfc75288223cf7edd2f3b985a2"
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-urllib3.inc                | 4 ++--
+ .../python/{python-urllib3_1.21.1.bb => python-urllib3_1.22.bb}       | 0
+ .../python/{python3-urllib3_1.21.1.bb => python3-urllib3_1.22.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-urllib3_1.21.1.bb => python-urllib3_1.22.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-urllib3_1.21.1.bb => python3-urllib3_1.22.bb} (100%)
 
-looking at the beginline & endline values, it means that just from one
-line the license is being taken, which I believe it just contains the
-name and not the terms&conditions. Is this ok?
-
-Leo
-
->  
-> -SRC_URI[md5sum] = "4a5b5aab407bdeb49634789f9a42902b"
-> -SRC_URI[sha256sum] = "d06301cc578a83531261121c0b11d79d29d0a80aca01ed6752c20c4cfcda2dd9"
-> +SRC_URI[md5sum] = "9f758f3a6a20f1220d60f6320bb839b3"
-> +SRC_URI[sha256sum] = "7a47afafc5ad45649a2998df8d96f39d8e1d0686f55c785285889e45151ff75f"
->  
->  inherit pypi setuptools
->  
-> -- 
-> 2.7.4
-> 
-
+diff --git a/meta-python/recipes-devtools/python/python-urllib3.inc b/meta-python/recipes-devtools/python/python-urllib3.inc
+index 8f31c27..cf79926 100644
+--- a/meta-python/recipes-devtools/python/python-urllib3.inc
++++ b/meta-python/recipes-devtools/python/python-urllib3.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/shazow/urllib3"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=ea114851ad9a8c311aac8728a681a067"
+ 
+-SRC_URI[md5sum] = "ef6c72c79b9c6bcd68c204f9b92abc86"
+-SRC_URI[sha256sum] = "b14486978518ca0901a76ba973d7821047409d7f726f22156b24e83fd71382a5"
++SRC_URI[md5sum] = "0da7bed3fe94bf7dc59ae37885cc72f7"
++SRC_URI[sha256sum] = "cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"
+ 
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-certifi \
+diff --git a/meta-python/recipes-devtools/python/python-urllib3_1.21.1.bb b/meta-python/recipes-devtools/python/python-urllib3_1.22.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-urllib3_1.21.1.bb
+rename to meta-python/recipes-devtools/python/python-urllib3_1.22.bb
+diff --git a/meta-python/recipes-devtools/python/python3-urllib3_1.21.1.bb b/meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-urllib3_1.21.1.bb
+rename to meta-python/recipes-devtools/python/python3-urllib3_1.22.bb
+-- 
+2.7.4
 
 
