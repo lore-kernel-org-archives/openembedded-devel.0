@@ -1,25 +1,48 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D62178377
+Return-Path: <jkrishnanjanappa@mvista.com>
+Received: from mail-pf0-f176.google.com (mail-pf0-f176.google.com
+	[209.85.192.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 462307837E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 07:04:18 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6O74JZb006187
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 24 Jul 2017 00:04:19 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Mon, 24 Jul 2017 00:04:18 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 24 Jul 2017 03:04:08 -0400
-Message-ID: <fa2e315250469349885bf455eceb953b4afeaccc.1500878698.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1500878698.git.hongxu.jia@windriver.com>
-References: <cover.1500878698.git.hongxu.jia@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-gnome][PATCH V3 5/5] usermode: add recipe 1.111
+	Mon, 24 Jul 2017 08:31:22 +0000 (UTC)
+Received: by mail-pf0-f176.google.com with SMTP id z129so4751088pfb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 Jul 2017 01:31:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=mvista-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=vK5dcz/V34jDGlaQj2dqWTkEdN4TAJLJryuOZkWZiok=;
+	b=FPSTHXJrFDbCucOa8hiK9GBpzY+uqOySQBsavFqK2gf9eitOxvpqNfQ3kCP5q9jV2h
+	EKIF5j2zJ7SpagS/jDqXyk+Ac1l/Ea6aBQ36jI16ERJFh1pGLDkoUnqHNjnF23+gRFrC
+	yoQzDqSmfhkgADsrVkakpvtns3FMgJ/YC2/dx4wfN29IDf3VggTnqcJuSSreyqJtM6gn
+	GZz6lzYlkm2Duz831tuNCnhvb39UJ+HN0WpQ3UKdTgMHpcrjfB5mIEha2d5AFOfbLhCk
+	SdA7/YyLoT5lhHjvIrS6sWAWePAmb5bAeodZ1JUEViqAqeYQfOr45CJ5KzsEezf9ni/I
+	Hw/w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vK5dcz/V34jDGlaQj2dqWTkEdN4TAJLJryuOZkWZiok=;
+	b=O8kB38L+3qv3f2AwjifKGPqCxidjIX9GXbIeHyhNBQ3LkoJyviFZWvjvuIGasA6Qam
+	eRIr7909ObyGt47LB0ksFB6AgZ6B2pXOezqUlgduB6zWRvoywasKqe+xIVRVVkdmihLM
+	0OH41YGBWz56HpAz3+FNjKvJoW8jPEmEkKQ0AXqPa6a5fIQVd0jf4g/b9gG2yPNjEMzm
+	h43E4ovKMlWsyplDBMSyiwzcu6OIoqG+TpBUOBv1kNDw1uinvIDbqNIJ0FPMiRbw1FBf
+	E/reVG6JVKijfGVkHlqXreo4fTnZe+0ugSfpMga7pvbOmZft4eJSVAey6SoMYTTWo73z
+	WRPQ==
+X-Gm-Message-State: AIVw112NCaD4AnLuuwP9oV38G4nkjV599saSwymP0PcXwJObwCSefCWw
+	ukQF1Gs25kIjUp1C3zE=
+X-Received: by 10.84.215.2 with SMTP id k2mr16867190pli.104.1500885084228;
+	Mon, 24 Jul 2017 01:31:24 -0700 (PDT)
+Received: from jkrishnanjanappa-VPCEB26FG.mvista.com
+	([2405:204:5517:55b5:ebb1:6447:517c:34f5])
+	by smtp.gmail.com with ESMTPSA id
+	m186sm19754267pfc.54.2017.07.24.01.31.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 24 Jul 2017 01:31:23 -0700 (PDT)
+From: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 24 Jul 2017 14:01:11 +0530
+Message-Id: <1500885071-11437-1-git-send-email-jkrishnanjanappa@mvista.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH] syslog-ng: provide correct PID directory location to restart/stop syslog-ng daemon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,132 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 Jul 2017 07:04:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 24 Jul 2017 08:31:23 -0000
 
-- Fix compile failure against musl C library
+If "--with-pidfile-dir" configure option is not specified, then the syslog-ng
+configure script assigns PID directory to /var/lib/syslog-ng; which is
+where the PID file of syslog-ng process is created. But the syslog-ng
+initscript (/etc/init.d/syslog-ng) uses /var/lib/syslog-ng/
+as PID directory, this results in not stopping/restarting syslog-ng daemons
+when it was requested to do so.
 
-- Fixed when compile with "-Wformat -Wformat-security -Werror=format-security"
+For example:
+-- snip --
+root@qemux86:~# /etc/init.d/syslog status
+/usr/sbin/syslog-ng (pid 345 344) is running...
+root@qemux86:~# /etc/init.d/syslog stop
+Stopping syslog-ng:.
+root@qemux86:~# /etc/init.d/syslog status
+/usr/sbin/syslog-ng (pid 345 344) is running...
+root@qemux86:~#
+-- snip --
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Hence set --with-pidfile-dir to "/var/run/syslog-ng", so that syslog-ng daemon
+can be stopped/restarted via initscript.
+
+Signed-off-by: Jagadeesh Krishnanjanappa <jkrishnanjanappa@mvista.com>
 ---
- ...ix-compile-failure-against-musl-C-library.patch | 27 +++++++++++++++++
- .../usermode/usermode/0001-formatting-issues.patch | 34 ++++++++++++++++++++++
- .../recipes-support/usermode/usermode_1.111.bb     | 29 ++++++++++++++++++
- 3 files changed, 90 insertions(+)
- create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch
- create mode 100644 meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
- create mode 100644 meta-gnome/recipes-support/usermode/usermode_1.111.bb
+ meta-oe/recipes-support/syslog-ng/syslog-ng.inc | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch b/meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch
-new file mode 100644
-index 0000000..bf19f28
---- /dev/null
-+++ b/meta-gnome/recipes-support/usermode/usermode/0001-fix-compile-failure-against-musl-C-library.patch
-@@ -0,0 +1,27 @@
-+From c77e3f0d4560797f7dc56549ae5ebcc035714a4d Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 20 Jul 2017 23:20:53 -0400
-+Subject: [PATCH] fix compile failure against musl C library
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ usermount.c | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/usermount.c b/usermount.c
-+index 3aafadd..4107027 100644
-+--- a/usermount.c
-++++ b/usermount.c
-+@@ -46,6 +46,7 @@
-+ #include <limits.h>
-+ #include <locale.h>
-+ #include <mntent.h>
-++#include <paths.h>
-+ #include <stdio.h>
-+ #include <stdlib.h>
-+ #include <string.h>
-+-- 
-+2.8.1
-+
-diff --git a/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch b/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
-new file mode 100644
-index 0000000..9d512d4
---- /dev/null
-+++ b/meta-gnome/recipes-support/usermode/usermode/0001-formatting-issues.patch
-@@ -0,0 +1,34 @@
-+From 7a316dad0697af2ef4e8079a5af51565a8195aa6 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Mon, 24 Jul 2017 01:42:30 -0400
-+Subject: [PATCH] userhelper.c: fix formatting issues
-+
-+Fixed when compile with "-Wformat -Wformat-security -Werror=format-security":
-+|../usermode-1.111/userhelper.c:585:4: error: format not a string
-+literal and no format arguments [-Werror=format-security]
-+|    text = g_strdup_printf(dgettext(data->domain, data->banner));
-+|    ^~~~
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ userhelper.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/userhelper.c b/userhelper.c
-+index 76ad492..ee0da49 100644
-+--- a/userhelper.c
-++++ b/userhelper.c
-+@@ -582,7 +582,7 @@ converse_console(int num_msg, const struct pam_message **msg,
-+ 
-+ 	if (banner == 0) {
-+ 		if ((data->banner != NULL) && (data->domain != NULL)) {
-+-			text = g_strdup_printf(dgettext(data->domain, data->banner));
-++			text = g_strdup_printf("%s", dgettext(data->domain, data->banner));
-+ 		} else {
-+ 			if ((service != NULL) && (strlen(service) > 0)) {
-+ 				if (data->fallback_allowed) {
-+-- 
-+2.8.1
-+
-diff --git a/meta-gnome/recipes-support/usermode/usermode_1.111.bb b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
-new file mode 100644
-index 0000000..06e400e
---- /dev/null
-+++ b/meta-gnome/recipes-support/usermode/usermode_1.111.bb
-@@ -0,0 +1,29 @@
-+DESCRIPTION = "The usermode contains the userhelper program, which can be used to allow configured \
-+programs to be run with superuser privileges by ordinary users, and several \
-+graphical tools for users: \
-+* userinfo allows users to change their finger information. \
-+* usermount lets users mount, unmount, and format filesystems. \
-+* userpasswd allows users to change their passwords. \
-+"
-+HOMEPAGE = "https://pagure.io/usermode"
-+LICENSE = "GPLv2+"
-+DEPENDS = "libuser ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} \
-+           gtk+ desktop-file-utils-native \
-+           startup-notification intltool-native \
-+           util-linux \
-+"
-+
-+SRC_URI = "https://releases.pagure.org/${BPN}/${BPN}-${PV}.tar.xz \
-+           file://0001-formatting-issues.patch \
-+"
-+SRC_URI[md5sum] = "28ba510fbd8da9f4e86e57d6c31cff29"
-+SRC_URI[sha256sum] = "3dd0b9639b5bd396b7ea5fada6aaa694dbfdaa3ad06eb95a6eabcdfd02f875c6"
-+
-+SRC_URI_append_libc-musl = " file://0001-fix-compile-failure-against-musl-C-library.patch"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
-+
-+inherit autotools gettext pkgconfig
-+
-+EXTRA_OEMAKE += "INSTALL='install -p'"
-+
+diff --git a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+index 0977f7e..f1bf9b0 100644
+--- a/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
++++ b/meta-oe/recipes-support/syslog-ng/syslog-ng.inc
+@@ -36,6 +36,7 @@ EXTRA_OECONF = " \
+     --with-librabbitmq-client=no \
+     --disable-python \
+     --disable-java --disable-java-modules \
++    --with-pidfile-dir=${localstatedir}/run/${BPN} \
+     ${CONFIG_TLS} \
+ "
+ 
 -- 
-2.8.1
+2.6.4
 
 
