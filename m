@@ -1,24 +1,43 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 266C278305
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DED6378237
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jul 2017 00:59:52 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v6P0xnnd008949
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 17:59:50 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.294.0; Mon, 24 Jul 2017 17:59:49 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 25 Jul 2017 08:59:28 +0800
-Message-ID: <20170725005928.4127-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Tue, 25 Jul 2017 01:27:20 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208,217";a="21752184"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Jul 2017 09:27:18 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 03F4746B6580;
+	Tue, 25 Jul 2017 09:27:12 +0800 (CST)
+Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0319.002; Tue, 25 Jul 2017 09:27:11 +0800
+From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-qt5] [PATCH] qtbase: add ptest
+Thread-Index: AQHS4LynT7YFNQDK3k6KSbSlVRNYoqJeHMXg//+XywCAAJSmAP//mj8AgAHIpQCABFyN4A==
+Date: Tue, 25 Jul 2017 01:27:11 +0000
+Message-ID: <97F7C8E70D26E94FA7E05578493F65C60E25F9B6@G08CNEXMBPEKD03.g08.fujitsu.local>
+References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
+	<CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
+	<97F7C8E70D26E94FA7E05578493F65C60E25F48F@G08CNEXMBPEKD03.g08.fujitsu.local>
+	<CA+chaQcoC6XVFfVxYsXh5=KbNEH+D1dKHPvJXK6J7DV9TCLbeg@mail.gmail.com>
+	<CA+chaQe34ExS_fyr0nNbjgqzPmZKeheF98ZbrWbVJLUWsPuOAA@mail.gmail.com>
+In-Reply-To: <CA+chaQe34ExS_fyr0nNbjgqzPmZKeheF98ZbrWbVJLUWsPuOAA@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [10.167.235.93]
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] vlock: add new recipe
+X-yoursite-MailScanner-ID: 03F4746B6580.A5CAA
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,278 +50,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jul 2017 00:59:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 25 Jul 2017 01:27:22 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-vlock is a program to lock one or more
-sessions on the Linux console.
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../vlock/vlock-2.2.3/disable_vlockrc.patch        |  37 +++++++
- .../vlock/vlock-2.2.3/vlock-no_tally.patch         | 107 +++++++++++++++++++++
- .../recipes-extended/vlock/vlock-2.2.3/vlock_pam   |   3 +
- .../vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch |  19 ++++
- meta-oe/recipes-extended/vlock/vlock_2.2.3.bb      |  53 ++++++++++
- 5 files changed, 219 insertions(+)
- create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
- create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-no_tally.patch
- create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam
- create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch
- create mode 100644 meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-
-diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
-new file mode 100644
-index 000000000..ee0d074de
---- /dev/null
-+++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
-@@ -0,0 +1,37 @@
-+Upstream-Status: Inappropriate [configuration]
-+
-+written by: Jeff Polk <jeff.polk@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+Index: vlock-2.2.2/man/vlock.1
-+===================================================================
-+--- vlock-2.2.2.orig/man/vlock.1	2010-07-26 14:12:42.000000000 -0400
-++++ vlock-2.2.2/man/vlock.1	2010-07-26 14:13:06.000000000 -0400
-+@@ -111,11 +111,6 @@
-+ to an invalid value or 0 no timeout is used.  \fBWarning\fR: If this value is
-+ too low, you may not be able to unlock your session.
-+ .PP
-+-.SH FILES
-+-.B ~/.vlockrc
-+-.IP
-+-This file is read by \fBvlock\fR on startup if it exists.  All the variables
-+-mentioned above can be set here.
-+ .SH SECURITY
-+ See the SECURITY file in the \fBvlock\fR distribution for more information.
-+ .PP
-+Index: vlock-2.2.2/src/vlock.sh
-+===================================================================
-+--- vlock-2.2.2.orig/src/vlock.sh	2010-07-26 14:12:32.000000000 -0400
-++++ vlock-2.2.2/src/vlock.sh	2010-07-26 14:13:33.000000000 -0400
-+@@ -35,11 +35,6 @@
-+ 
-+ ${VLOCK_ENTER_PROMPT}"
-+ 
-+-# Read user settings.
-+-if [ -r "${HOME}/.vlockrc" ] ; then
-+-  . "${HOME}/.vlockrc"
-+-fi
-+-
-+ # "Compile" time variables.
-+ VLOCK_MAIN="%PREFIX%/sbin/vlock-main"
-+ VLOCK_VERSION="%VLOCK_VERSION%"
-diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-no_tally.patch b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-no_tally.patch
-new file mode 100644
-index 000000000..6e8a6a9fd
---- /dev/null
-+++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-no_tally.patch
-@@ -0,0 +1,107 @@
-+Upstream-Status: Pending
-+
-+written by: Jeff Polk <jeff.polk@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+--- a/Makefile
-++++ b/Makefile
-+@@ -126,6 +126,10 @@ ifeq ($(AUTH_METHOD),shadow)
-+ vlock-main : override LDLIBS += $(CRYPT_LIB)
-+ endif
-+ 
-++ifneq ($(ENABLE_FAIL_COUNT),yes)
-++vlock-main.o : override CFLAGS += -DNO_FAIL_COUNT
-++endif
-++
-+ ifeq ($(ENABLE_PLUGINS),yes)
-+ vlock-main: plugins.o plugin.o module.o process.o script.o tsort.o list.o
-+ # -rdynamic is needed so that the all plugin can access the symbols from console_switch.o
-+--- a/configure
-++++ b/configure
-+@@ -44,6 +44,7 @@ Optional Features:
-+   --enable-shadow         enable shadow authentication [disabled]
-+   --enable-root-password  enable unlogging with root password [enabled]
-+   --enable-debug          enable debugging
-++  --enable-fail-count     enable failed login attempt summary [enabled]
-+ 
-+ Additional configuration:
-+   --with-scripts=SCRIPTS  enable the named scripts []
-+@@ -78,6 +79,9 @@ enable_feature() {
-+     root-password)
-+       ENABLE_ROOT_PASSWORD="$2"
-+     ;;
-++    fail-count)
-++      ENABLE_FAIL_COUNT="$2"
-++    ;;
-+     pam|shadow)
-+       if [ "$2" = "yes" ] ; then
-+         if [ -n "$auth_method" ] && [ "$auth_method" != "$1" ] ; then
-+@@ -232,6 +232,7 @@ set_defaults() {
-+   AUTH_METHOD="pam"
-+   ENABLE_ROOT_PASSWORD="yes"
-+   ENABLE_PLUGINS="yes"
-++  ENABLE_FAIL_COUNT="yes"
-+   SCRIPTS=""
-+ 
-+   VLOCK_GROUP="vlock"
-+@@ -356,10 +356,14 @@ ENABLE_PLUGINS = ${ENABLE_PLUGINS}
-+ # which plugins should be build
-+ MODULES = ${MODULES}
-+ # which scripts should be installed
-+ SCRIPTS = ${SCRIPTS}
-+ 
-++# display a summary of failed authentication attempts after successfully
-++# unlocking?
-++ENABLE_FAIL_COUNT = ${ENABLE_FAIL_COUNT}
-++
-+ # root's group
-+ ROOT_GROUP = ${ROOT_GROUP}
-+ 
-+ # group for privileged plugins
-+ VLOCK_GROUP = ${VLOCK_GROUP}
-+--- a/src/vlock-main.c
-++++ b/src/vlock-main.c
-+@@ -111,7 +111,9 @@ static void restore_terminal(void)
-+   (void) tcsetattr(STDIN_FILENO, TCSANOW, &term);
-+ }
-+ 
-++#ifdef ENABLE_FAIL_COUNT
-+ static int auth_tries;
-++#endif /* ENABLE_FAIL_COUNT */
-+ 
-+ static void auth_loop(const char *username)
-+ {
-+@@ -181,7 +183,9 @@ static void auth_loop(const char *userna
-+     }
-+ #endif
-+ 
-++#ifdef ENABLE_FAIL_COUNT
-+     auth_tries++;
-++#endif /* ENABLE_FAIL_COUNT */
-+   }
-+ 
-+   /* Free timeouts memory. */
-+@@ -189,11 +193,13 @@ static void auth_loop(const char *userna
-+   free(prompt_timeout);
-+ }
-+ 
-++#ifdef ENABLE_FAIL_COUNT
-+ void display_auth_tries(void)
-+ {
-+   if (auth_tries > 0)
-+     fprintf(stderr, "%d failed authentication %s.\n", auth_tries, auth_tries > 1 ? "tries" : "try");
-+ }
-++#endif /* ENABLE_FAIL_COUNT */
-+ 
-+ #ifdef USE_PLUGINS
-+ static void call_end_hook(void)
-+@@ -216,7 +222,9 @@ int main(int argc, char *const argv[])
-+   if (username == NULL)
-+     fatal_perror("vlock: could not get username");
-+ 
-++#ifdef ENABLE_FAIL_COUNT
-+   ensure_atexit(display_auth_tries);
-++#endif /* ENABLE_FAIL_COUNT */
-+ 
-+ #ifdef USE_PLUGINS
-+   for (int i = 1; i < argc; i++)
-diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam
-new file mode 100644
-index 000000000..a919682b0
---- /dev/null
-+++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam
-@@ -0,0 +1,3 @@
-+# Use the default auth and account policies for vlock
-+auth       include      common-auth
-+account    include      common-account
-diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch
-new file mode 100644
-index 000000000..4ce0abc71
---- /dev/null
-+++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch
-@@ -0,0 +1,19 @@
-+Upstream-Status: Pending
-+
-+written by: Jeff Polk <jeff.polk@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+Index: vlock-2.2.2/src/auth-pam.c
-+===================================================================
-+--- vlock-2.2.2.orig/src/auth-pam.c	2010-06-14 14:38:51.000000000 -0400
-++++ vlock-2.2.2/src/auth-pam.c	2010-06-14 14:39:12.000000000 -0400
-+@@ -148,6 +148,9 @@
-+ 
-+   if (pam_status != PAM_SUCCESS) {
-+     fprintf(stderr, "vlock: %s\n", pam_strerror(pamh, pam_status));
-++  } else {
-++    pam_status = pam_acct_mgmt(pamh, 0);
-++    if (pam_status == PAM_SUCCESS) pam_setcred(pamh, PAM_REINITIALIZE_CRED);
-+   }
-+ 
-+ end:
-diff --git a/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb b/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-new file mode 100644
-index 000000000..d660b0378
---- /dev/null
-+++ b/meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
-@@ -0,0 +1,53 @@
-+SUMMARY = "Virtual Console lock program"
-+DESCRIPTION = "Sometimes a malicious local user could cause more problems \
-+  than a sophisticated remote one. vlock is a program that locks one or more \
-+  sessions on the Linux console to prevent attackers from gaining physical \
-+  access to the machine. \
-+  "
-+SECTION = "utils"
-+
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=a17cb0a873d252440acfdf9b3d0e7fbf"
-+
-+SRC_URI = "${GENTOO_MIRROR}/${BP}.tar.gz \
-+       file://disable_vlockrc.patch \
-+       file://vlock_pam_tally2_reset.patch \
-+       file://vlock-no_tally.patch \
-+       file://vlock_pam \
-+       "
-+
-+SRC_URI[md5sum] = "378175c7692a8f288e65fd4dbf8a38eb"
-+SRC_URI[sha256sum] = "85aa5aed1ae49351378a0bd527a013078f0f969372a63164b1944174ae1a5e39"
-+
-+inherit autotools-brokensep update-alternatives
-+
-+PACKAGECONFIG ?= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
-+PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam,"
-+
-+CFLAGS += "-Wall -W -pedantic -std=gnu99"
-+
-+do_configure () {
-+    ${CONFIGURE_SCRIPT} \
-+        VLOCK_GROUP=root \
-+        ROOT_GROUP=root \
-+        CC="${CC}" \
-+        CFLAGS="${CFLAGS}" \
-+        LDFLAGS="${LDFLAGS}" \
-+        --prefix=${prefix} \
-+        --libdir=${libdir} \
-+        --mandir=${mandir} \
-+        --with-modules="all.so new.so nosysrq.so ttyblank.so vesablank.so" \
-+        --disable-root-password --enable-debug --disable-fail-count \
-+        ${PACKAGECONFIG_CONFARGS}
-+}
-+
-+do_install_append () {
-+    if [ ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'yes', '', d)} = yes ]; then
-+        install -d -m 0755 ${D}/${sysconfdir}/pam.d
-+        install -m 0644 ${WORKDIR}/vlock_pam ${D}${sysconfdir}/pam.d/vlock
-+    fi
-+}
-+
-+ALTERNATIVE_${PN} = "vlock"
-+ALTERNATIVE_PRIORITY = "60"
-+ALTERNATIVE_LINK_NAME[vlock] = "${bindir}/vlock"
--- 
-2.11.0
-
+RGVhciBNYXJ0aW4NCkkgaGF2ZSB0cnllZCBteSBwYXRjaCBpbiB0aGUgbGFz
+dGVzdCBtYXN0ZXIgYnJhbmNoLCAgYnV0IEkgZGlkbid0IGZvdW5kIGFueSBj
+b21waWxlIGVycm9yIHdoZW4gSSBiaXRiYWtlIHF0YmFzZSBvciBxdGJhc2Ut
+bmF0aXZlLCBOb3cgSSBoYXZlIG1hZGUgYSBuZXcgcGF0Y2ggZm9yIHRoZSBs
+YXN0ZXN0IG1hc3RlciBicmFuY2guDQoNCmh1YW5ncXkNCg0KRnJvbTogTWFy
+dGluIEphbnNhIFttYWlsdG86bWFydGluLmphbnNhQGdtYWlsLmNvbV0NClNl
+bnQ6IFNhdHVyZGF5LCBKdWx5IDIyLCAyMDE3IDEwOjUwIFBNDQpUbzogSHVh
+bmcsIFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4NCkNjOiBv
+cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3Vi
+amVjdDogUmU6IFtvZV0gW21ldGEtcXQ1XSBbUEFUQ0hdIHF0YmFzZTogYWRk
+IHB0ZXN0DQoNCkZhaWxzIHRvIGJ1aWxkIGhlcmU6DQpodHRwOi8vZXJyb3Jz
+LnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL0RldGFpbHMvMTQ4MjE4Lw0KDQpP
+biBGcmksIEp1bCAyMSwgMjAxNyBhdCAxOjM1IFBNLCBNYXJ0aW4gSmFuc2Eg
+PG1hcnRpbi5qYW5zYUBnbWFpbC5jb208bWFpbHRvOm1hcnRpbi5qYW5zYUBn
+bWFpbC5jb20+PiB3cm90ZToNCkRlYXIgSHVhbmcsDQoNCkknbSBzb3JyeSBv
+dGhlciBwdGVzdCByZWxhdGVkIGNoYW5nZXMgd2VyZSBtZXJnZWQsIGJ1dCBu
+b3QgdGhpcyBvbmUuIEkndmUgYWRkZWQgaXQgdG8gbWFzdGVyLW5leHQgbm93
+Lg0KDQpPbiBGcmksIEp1bCAyMSwgMjAxNyBhdCAxMTo0MSBBTSwgSHVhbmcs
+IFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbTxtYWlsdG86aHVh
+bmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPj4gd3JvdGU6DQpEZWFyIE1hcnRp
+bg0KDQpJIGhhdmUgc2VhcmNoZWQgaW4gdGhlIGdpdCBsb2csYW5kIGl0IHdh
+cyByZWFsbHkgbm90IGJlIG1lcmdlcmQuQ291bGQgeW91IHBsZWFzZSBlbnN1
+cmUgaXQ/DQoNCmh1YW5ncXkNCg0KRnJvbTogTWFydGluIEphbnNhIFttYWls
+dG86bWFydGluLmphbnNhQGdtYWlsLmNvbTxtYWlsdG86bWFydGluLmphbnNh
+QGdtYWlsLmNvbT5dDQpTZW50OiBGcmlkYXksIEp1bHkgMjEsIDIwMTcgNDo0
+OCBQTQ0KVG86IEh1YW5nLCBRaXl1IDxodWFuZ3F5LmZuc3RAY24uZnVqaXRz
+dS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4+DQpD
+Yzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc8
+bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
+b3JnPg0KU3ViamVjdDogUmU6IFtvZV0gW21ldGEtcXQ1XSBbUEFUQ0hdIHF0
+YmFzZTogYWRkIHB0ZXN0DQoNCkl0IHdhcyBtZXJnZWQgbGFzdCB3ZWVrLCB3
+aHkgYXJlIHlvdSBwaW5naW5nIHRoaXM/DQoNCk9uIEZyaSwgSnVsIDIxLCAy
+MDE3IGF0IDk6MDEgQU0sIEh1YW5nLCBRaXl1IDxodWFuZ3F5LmZuc3RAY24u
+ZnVqaXRzdS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNv
+bT4+IHdyb3RlOg0KcGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
+LS0tDQo+IEZyb206IEh1YW5nLCBRaXl1DQo+IFNlbnQ6IEZyaWRheSwgSnVu
+ZSAwOSwgMjAxNyA5OjA2IEFNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
+bGlzdHMub3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+IENjOiBIdWFuZywgUWl5
+dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPG1haWx0bzpodWFuZ3F5
+LmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiBTdWJqZWN0OiBbb2VdIFttZXRh
+LXF0NV0gW1BBVENIXSBxdGJhc2U6IGFkZCBwdGVzdA0KPg0KPiBBZGQgcHRl
+c3QgZm9yIHF0YmFzZSAgYnkgdXNpbmcgcHJvdmlkZWQgdGVzdHN1aXRlLg0K
+Pg0KPiBTaWduZWQtb2ZmLWJ5OiBIdWFuZyBRaXl1IDxodWFuZ3F5LmZuc3RA
+Y24uZnVqaXRzdS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1
+LmNvbT4+DQo+IC0tLQ0KPiAgLi4uLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1h
+bmQtcXVsb25nbG9uZy5wYXRjaCAgICAgfCAyOA0KPiArKysrKysrKysrKysr
+KysrKysrKysrDQo+ICByZWNpcGVzLXF0L3F0NS9xdGJhc2UvcnVuLXB0ZXN0
+ICAgICAgICAgICAgICAgICAgICB8ICA2ICsrKysrDQo+ICByZWNpcGVzLXF0
+L3F0NS9xdGJhc2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPiAgICAg
+ICAgICAgICAgICAgICAgICAgfCAxNyArKysrKysrKysrKystDQo+ICAzIGZp
+bGVzIGNoYW5nZWQsIDUwIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkg
+IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiByZWNpcGVzLXF0L3F0NS9xdGJhc2Uv
+MDAwMS1EZWxldGUtcWxvbmdsb25nLWFuZC1xdWxvbmdsb25nLnBhdGNoDQo+
+ICBjcmVhdGUgbW9kZSAxMDA2NDQgcmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1
+bi1wdGVzdA0KPg0KPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRi
+YXNlLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1hbmQtcXVsb25nbG9uZy5wYXRj
+aA0KPiBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDAxLURlbGV0ZS1xbG9u
+Z2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2gNCj4gbmV3IGZpbGUgbW9kZSAx
+MDA2NDQNCj4gaW5kZXggMDAwMDAwMC4uOTc1Y2QyOA0KPiAtLS0gL2Rldi9u
+dWxsDQo+ICsrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDAxLURlbGV0
+ZS1xbG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2gNCj4gQEAgLTAsMCAr
+MSwyOCBAQA0KPiArRnJvbSBjNjdhNGFmMmU1ZGI0YzFlMjIxMzk2MWU2Mzky
+YjU5YWZmZDE5NTlmIE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gMjAwMQ0KPiAr
+RnJvbTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29t
+PG1haWx0bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiArRGF0
+ZTogV2VkLCA3IEp1biAyMDE3IDIxOjAwOjQ5ICswOTAwDQo+ICtTdWJqZWN0
+OiBbUEFUQ0hdIERlbGV0ZSBxbG9uZ2xvbmcgYW5kIHF1bG9uZ2xvbmcNCj4g
+Kw0KPiArU2lnbmVkLW9mZi1ieTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0
+QGNuLmZ1aml0c3UuY29tPG1haWx0bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRz
+dS5jb20+Pg0KPiArLS0tDQo+ICsgdGVzdHMvYXV0by9jb3JlbGliL3RocmVh
+ZC9xYXRvbWljaW50ZWdlci9xYXRvbWljaW50ZWdlci5wcm88aHR0cDovL3Fh
+dG9taWNpbnRlZ2VyLnBybz4gfCAyIC0tDQo+ICsgMSBmaWxlIGNoYW5nZWQs
+IDIgZGVsZXRpb25zKC0pDQo+ICsNCj4gK2RpZmYgLS1naXQNCj4gK2EvdGVz
+dHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9xYXRvbWlj
+aW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4NCj4gK2Iv
+dGVzdHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9xYXRv
+bWljaW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4NCj4g
+K2luZGV4IDA5NDU4YmQuLjU5YTEyMGUgMTAwNjQ0DQo+ICstLS0gYS90ZXN0
+cy9hdXRvL2NvcmVsaWIvdGhyZWFkL3FhdG9taWNpbnRlZ2VyL3FhdG9taWNp
+bnRlZ2VyLnBybzxodHRwOi8vcWF0b21pY2ludGVnZXIucHJvPg0KPiArKysr
+IGIvdGVzdHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9x
+YXRvbWljaW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4N
+Cj4gK0BAIC01LDEwICs1LDggQEAgU1VCRElSUz1cDQo+ICsgICAgIGNoYXIz
+Ml90IFwNCj4gKyAgICAgaW50IFwNCj4gKyAgICAgbG9uZyBcDQo+ICstICAg
+IHFsb25nbG9uZyBcDQo+ICsgICAgIHFwdHJkaWZmIFwNCj4gKyAgICAgcXVp
+bnRwdHIgXA0KPiArLSAgICBxdWxvbmdsb25nIFwNCj4gKyAgICAgc2NoYXIg
+XA0KPiArICAgICBzaG9ydCBcDQo+ICsgICAgIHVjaGFyIFwNCj4gKy0tDQo+
+ICsyLjcuNA0KPiArDQo+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXF0L3F0NS9x
+dGJhc2UvcnVuLXB0ZXN0IGIvcmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1bi1w
+dGVzdA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NCBpbmRleCAwMDAwMDAwLi4w
+NDRmODM0DQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvcmVjaXBlcy1xdC9x
+dDUvcXRiYXNlL3J1bi1wdGVzdA0KPiBAQCAtMCwwICsxLDYgQEANCj4gKyMh
+L2Jpbi9zaA0KPiArDQo+ICtmb3IgeCBpbiBgIGF3ayAne3ByaW50ICQxfScg
+dHN0X2xpc3QgYDtkbw0KPiArICAgIC4vJHt4fTsNCj4gK2RvbmUNCj4gKw0K
+PiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYjxo
+dHRwOi8vcXRiYXNlX2dpdC5iYj4gYi9yZWNpcGVzLXF0L3F0NS9xdGJhc2Vf
+Z2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPiBpbmRleA0KPiAyN2QwZGUx
+Li4zOWZjMjcyIDEwMDY0NA0KPiAtLS0gYS9yZWNpcGVzLXF0L3F0NS9xdGJh
+c2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPg0KPiArKysgYi9yZWNp
+cGVzLXF0L3F0NS9xdGJhc2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJi
+Pg0KPiBAQCAtMjMsOCArMjMsMTIgQEAgU1JDX1VSSSArPSAiXA0KPiAgICAg
+IGZpbGU6Ly8wMDA1LWNvbmZpZ3VyZS1idW1wLXBhdGgtbGVuZ3RoLWZyb20t
+MjU2LXRvLTUxMi1jaGFyYWN0ZXIucGF0Y2g8ZmlsZTovLy9cXDAwMDUtY29u
+ZmlndXJlLWJ1bXAtcGF0aC1sZW5ndGgtZnJvbS0yNTYtdG8tNTEyLWNoYXJh
+Y3Rlci5wYXRjaD4NCj4gXA0KPiAgICAgIGZpbGU6Ly8wMDA5LURpc2FibGUt
+YWxsLXVua25vd24tZmVhdHVyZXMtaW5zdGVhZC1vZi1lcnJvcmluZy1vdXQu
+cGF0Y2g8ZmlsZTovLy9cXDAwMDktRGlzYWJsZS1hbGwtdW5rbm93bi1mZWF0
+dXJlcy1pbnN0ZWFkLW9mLWVycm9yaW5nLW91dC5wYXRjaD4gXA0KPg0KPiBm
+aWxlOi8vMDAxMC1QcmV0ZW5kLVF0NS13YXNuLXQtZm91bmQtaWYtT0VfUU1B
+S0VfUEFUSF9FWFRFUk5BTF9ILnBhdGNoPGZpbGU6Ly8vXFwwMDEwLVByZXRl
+bmQtUXQ1LXdhc24tdC1mb3VuZC1pZi1PRV9RTUFLRV9QQVRIX0VYVEVSTkFM
+X0gucGF0Y2g+DQo+IFwNCj4gKyAgICBmaWxlOi8vMDAwMS1EZWxldGUtcWxv
+bmdsb25nLWFuZC1xdWxvbmdsb25nLnBhdGNoPGZpbGU6Ly8vXFwwMDAxLURl
+bGV0ZS1xbG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2g+IFwNCj4gKyAg
+ICBmaWxlOi8vcnVuLXB0ZXN0PGZpbGU6Ly8vXFxydW4tcHRlc3Q+IFwNCj4g
+ICINCj4NCj4gK2luaGVyaXQgcHRlc3QNCj4gKw0KPiAgIyBvbmx5IGZvciB0
+YXJnZXQgcXRiYXNlDQo+ICBTUkNfVVJJICs9ICJcDQo+ICAgICAgZmlsZTov
+LzAwMDgtY29uZmlndXJlLXBhdGhzLWZvci10YXJnZXQtcW1ha2UtcHJvcGVy
+bHkucGF0Y2g8ZmlsZTovLy9cXDAwMDgtY29uZmlndXJlLXBhdGhzLWZvci10
+YXJnZXQtcW1ha2UtcHJvcGVybHkucGF0Y2g+IFwgQEAgLTQ4LDcNCj4gKzUy
+LDcgQEAgUEFDS0FHRUNPTkZJR19ESVNUUk8gPz0gIiINCj4gIFBBQ0tBR0VD
+T05GSUdfUkVMRUFTRSA/PSAicmVsZWFzZSINCj4gICMgVGhpcyBpcyBpbiBx
+dDUuaW5jLCBiZWNhdXNlIHF0d2Via2l0LWV4YW1wbGVzIGFyZSB1c2luZyBp
+dCB0byBlbmFibGUNCj4gY2EtY2VydGlmaWNhdGVzIGRlcGVuZGVuY3kgICMg
+UEFDS0FHRUNPTkZJR19PUEVOU1NMID89ICJvcGVuc3NsIg0KPiAtUEFDS0FH
+RUNPTkZJR19ERUZBVUxUID89ICJkYnVzIHVkZXYgZXZkZXYgd2lkZ2V0cyB0
+b29scyBsaWJzIGZyZWV0eXBlIg0KPiArUEFDS0FHRUNPTkZJR19ERUZBVUxU
+ID89ICJkYnVzIHVkZXYgZXZkZXYgd2lkZ2V0cyB0b29scyBsaWJzIGZyZWV0
+eXBlDQo+IHRlc3RzIg0KPg0KPiAgUEFDS0FHRUNPTkZJRyA/PSAiIFwNCj4g
+ICAgICAke1BBQ0tBR0VDT05GSUdfUkVMRUFTRX0gXA0KPiBAQCAtMTcwLDYg
+KzE3NCwxNyBAQCBkb19jb25maWd1cmUoKSB7DQo+ICAgICAgICAgICR7UVRf
+Q09ORklHX0ZMQUdTfQ0KPiAgfQ0KPg0KPiArZmFrZXJvb3QgZG9faW5zdGFs
+bF9wdGVzdCgpIHsNCj4gKyAgICBta2RpciAtcCAke0R9JHtQVEVTVF9QQVRI
+fQ0KPiArICAgIHQ9JHtEfSR7UFRFU1RfUEFUSH0NCj4gKyAgICBmb3IgdmFy
+IGluIGAgZmluZCAke0J9L3Rlc3RzL2F1dG8vIC1uYW1lIHRzdF8qYDsgZG8N
+Cj4gKyAgICAgICAgaWYgWyBub3QgYCBlY2hvICR7dmFyIyMqL30gfCBncmVw
+ICdcLidgIF07IHRoZW4NCj4gKyAgICAgICAgICAgIGVjaG8gJHt2YXIjIyov
+fSA+PiAke3R9L3RzdF9saXN0DQo+ICsgICAgICAgICAgICBpbnN0YWxsIC1t
+IDA2NDQgJHt2YXJ9ICR7dH0NCj4gKyAgICAgICAgZmkNCj4gKyAgICBkb25l
+DQo+ICt9DQo+ICsNCj4gIGRvX2luc3RhbGxfYXBwZW5kKCkgew0KPiAgICAg
+ICMgQXZvaWQgcW1ha2UgZXJyb3IgIkNhbm5vdCByZWFkDQo+IFsuLi5dL3Vz
+ci9saWIvcXQ1L21rc3BlY3Mvb2UtZGV2aWNlLWV4dHJhLnByaTogTm8gc3Vj
+aCBmaWxlIG9yIGRpcmVjdG9yeSINCj4gICAgICB0b3VjaA0KPiAke0R9LyR7
+T0VfUU1BS0VfUEFUSF9RVF9BUkNIREFUQX0vbWtzcGVjcy9vZS1kZXZpY2Ut
+ZXh0cmEucHJpDQo+IC0tDQo+IDIuNy40DQoNCg0KDQotLQ0KX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCk9wZW5l
+bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQt
+ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCmh0dHA6Ly9saXN0cy5v
+cGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVk
+LWRldmVsDQoNCg0KDQoKCg==
 
