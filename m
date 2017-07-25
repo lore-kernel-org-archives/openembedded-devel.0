@@ -1,50 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B16D71957
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E432A6E660
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jul 2017 05:01:14 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id m85so32491363wma.1
+	Tue, 25 Jul 2017 08:34:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="21774183"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Jul 2017 16:34:15 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 48BE846B5E00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 Jul 2017 22:01:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=mxNhFNmJJUuXxwzS1gKEB2Ir7ac+GgMtaqOd1ErsEyQ=;
-	b=OGkagJioYFKi1Uc9VfaNCXKhqPqxqeE8rcBNkPWbJzWbk5DzZV293VTDaQ5xZrXdI7
-	b/LZtzSBcYWROzrQYdD6KIXEhV6LsWKK5FzlHAoz9qHcDJurPJpv3AGSNlASPMvGswvI
-	IqUTNDiX03r5ChS42Cmaik7c/Yqk2fSkaqKNMLsUtc8Dzoh4jaWJiKOn4J3YfRE9OSAO
-	90D9/T3HNhr8eGG7Ybo1ws6WYH19A4hgUOxnxNhQS3PucDfXhhMCKAk9zEoiSfjymUda
-	GW8P/DmNvWef9ZEMk1Brn13YSZhOWJK8PkwKYBWGIOby0AkoGLv8GuZkeIivIZU5Lpmg
-	7OKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=mxNhFNmJJUuXxwzS1gKEB2Ir7ac+GgMtaqOd1ErsEyQ=;
-	b=Y6uMJIt5fkvk3SPR8yicQ+ahT9lmLGzjIE4bSV1S9FdmfKkFkImt7Qm41YznLY4te0
-	7G5QjZpjUHxMZ7pEvS/7g5Q8IpzRLDTyUeOYaRGXxMcRZOnwruVJOdQaONkWsBdbchMS
-	FsjnpVfqsB6sT1NjMUQE+LXvuBwmaWxWp/CCUeYniFqKACswxL8345jNG7CIYjBDAwwK
-	qyduLlXfkFRfuttSheL4IMsdCl6mIA7plCRllYrAO67E6IGSUabCEBnA8ur3/dD6JuYb
-	nnjbu9dRpLvgJcunweRZhGP0BgaAEuEoETV8WCIuOddjyC7p/5+xHGYwPmJ7zSEVcXhw
-	bz+g==
-X-Gm-Message-State: AIVw111kF3RS9oo5B5pMyRmg6iPzPOx77GRAHfQYX9xlUKi/aI8LKddI
-	eMprM0nbbjDqR9dLxNJ+7bq7ujl6yg==
-X-Received: by 10.80.164.18 with SMTP id u18mr3709892edb.250.1500958876006;
-	Mon, 24 Jul 2017 22:01:16 -0700 (PDT)
+	Tue, 25 Jul 2017 16:34:09 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Tue, 25 Jul 2017 16:34:08 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Jul 2017 16:33:49 +0800
+Message-ID: <1500971629-1042-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.80.149.181 with HTTP; Mon, 24 Jul 2017 22:00:45 -0700 (PDT)
-In-Reply-To: <CAMKF1sqSdye3sXLmi1MBwMbRnAzXRPnzm453HCLqgzo4t_1k7A@mail.gmail.com>
-References: <20170718031013.44536-1-raj.khem@gmail.com>
-	<20170718031013.44536-10-raj.khem@gmail.com>
-	<CA+chaQcPvJNaX1UseBsHY7K1Ggzkf2DYbSg3i45MGwAHu7f56w@mail.gmail.com>
-	<CAMKF1sruKooyyNm=PSV_CZKo8agS2Zub655KZE4E6qfkHHNL+Q@mail.gmail.com>
-	<CAMKF1sqSdye3sXLmi1MBwMbRnAzXRPnzm453HCLqgzo4t_1k7A@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 24 Jul 2017 22:00:45 -0700
-Message-ID: <CAMKF1spL4DGy7tpjb+6z3CHsr1vEJcQ+nkbhZyLU7S894nGKsA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 10/17] efivar: Upgrade to 0.31
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: 48BE846B5E00.A7B06
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] openldap: 2.4.44 -> 2.4.45
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,39 +37,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jul 2017 05:01:15 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 Jul 2017 08:34:17 -0000
+Content-Type: text/plain
 
-On Sat, Jul 22, 2017 at 10:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Sat, Jul 22, 2017 at 8:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Sat, Jul 22, 2017 at 2:13 AM, Martin Jansa <martin.jansa@gmail.com> w=
-rote:
->>> For target version it fails to apply gold linker patch:
->>>
->>> Applying patch 0004-fix-unknow-option-for-gold-linker.patch
->>> patching file gcc.specs
->>> Hunk #1 FAILED at 14.
->>> 1 out of 1 hunk FAILED -- rejects in file gcc.specs
->>> Patch 0004-fix-unknow-option-for-gold-linker.patch does not apply (enfo=
-rce
->>> with -f)
->>>
->>> and native version fails in do_compile with:
->>> In file included from dp.c:27:0:
->>> util.h:109:10: error: expected expression before =E2=80=98int=E2=80=99
->>>           int *: int_add(a,b,c),   \
->>>           ^
->>>
->>
->> Interesting, I will take a look again
->
-> I just rebased kraj/master
->
-> https://github.com/kraj/meta-openembedded/commit/26ac6c0863936618321eadaa=
-12c2fa9d562b6261
->
-> it rebased fine and also built fine for intel-corei7-64
+1) Upgrade openldap from 2.4.44 to 2.4.45
+2) Delete openldap-CVE-2017-9287.patch, since it is integrated upstream.
+3) License checksum changed, since the copyright years were updated.
 
-just sent a v2, again the issue was due to me not using/testing ld-is-gold
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+---
+ .../openldap/openldap/openldap-CVE-2017-9287.patch | 30 ----------------------
+ .../{openldap_2.4.44.bb => openldap_2.4.45.bb}     |  7 +++--
+ 2 files changed, 3 insertions(+), 34 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
+ rename meta-oe/recipes-support/openldap/{openldap_2.4.44.bb => openldap_2.4.45.bb} (97%)
+
+diff --git a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch b/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
+deleted file mode 100644
+index 93e9243..0000000
+--- a/meta-oe/recipes-support/openldap/openldap/openldap-CVE-2017-9287.patch
++++ /dev/null
+@@ -1,30 +0,0 @@
+-From e0e65f309dc0eb5582387acf1b2c2b5b3955f6b6 Mon Sep 17 00:00:00 2001
+-From: Ryan Tandy <ryan@nardis.ca>
+-Date: Wed, 17 May 2017 20:07:39 -0700
+-Subject: [PATCH] Fix double free of search base with page size 0
+-
+-CVE: CVE-2017-9287
+-Upstream-Status: Submitted
+-
+-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+----
+- servers/slapd/back-mdb/search.c | 3 ++-
+- 1 file changed, 2 insertions(+), 1 deletion(-)
+-
+-diff --git a/servers/slapd/back-mdb/search.c b/servers/slapd/back-mdb/search.c
+-index 009939d..d0db918 100644
+---- a/servers/slapd/back-mdb/search.c
+-+++ b/servers/slapd/back-mdb/search.c
+-@@ -1066,7 +1066,8 @@ notfound:
+- 			/* check size limit */
+- 			if ( get_pagedresults(op) > SLAP_CONTROL_IGNORED ) {
+- 				if ( rs->sr_nentries >= ((PagedResultsState *)op->o_pagedresults_state)->ps_size ) {
+--					mdb_entry_return( op, e );
+-+					if (e != base)
+-+						mdb_entry_return( op, e );
+- 					e = NULL;
+- 					send_paged_response( op, rs, &lastid, tentries );
+- 					goto done;
+--- 
+-2.1.4
+-
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
+similarity index 97%
+rename from meta-oe/recipes-support/openldap/openldap_2.4.44.bb
+rename to meta-oe/recipes-support/openldap/openldap_2.4.45.bb
+index 2d3cfc0..adbf8ce 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.44.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
+@@ -9,7 +9,7 @@ HOMEPAGE = "http://www.OpenLDAP.org/license.html"
+ # basically BSD.  opensource.org does not record this license
+ # at present (so it is apparently not OSI certified).
+ LICENSE = "OpenLDAP"
+-LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=c933fba6d89fda89f58df1e086e3f2e7 \
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=25fd3721960f39128cd15a749fd21139 \
+                     file://LICENSE;md5=153d07ef052c4a37a8fac23bc6031972 \
+ "
+ SECTION = "libs"
+@@ -25,11 +25,10 @@ SRC_URI = "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/${BP}.tgz \
+     file://slapd.service \
+     file://thread_stub.patch \
+     file://openldap-CVE-2015-3276.patch \
+-    file://openldap-CVE-2017-9287.patch \
+ "
+ 
+-SRC_URI[md5sum] = "693ac26de86231f8dcae2b4e9d768e51"
+-SRC_URI[sha256sum] = "d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400"
++SRC_URI[md5sum] = "00ff8301277cdfd0af728a6927042a13"
++SRC_URI[sha256sum] = "cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb897cd5626df3824"
+ 
+ DEPENDS = "util-linux groff-native"
+ 
+-- 
+2.7.4
+
+
+
 
