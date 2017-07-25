@@ -1,43 +1,30 @@
 Return-Path: <huangqy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DED6378237
+	by mail.openembedded.org (Postfix) with ESMTP id 607B178237
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 Jul 2017 01:27:20 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208,217";a="21752184"
+	Tue, 25 Jul 2017 01:30:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="21752320"
 Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 25 Jul 2017 09:27:18 +0800
+	by heian.cn.fujitsu.com with ESMTP; 25 Jul 2017 09:30:34 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 03F4746B6580;
-	Tue, 25 Jul 2017 09:27:12 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0319.002; Tue, 25 Jul 2017 09:27:11 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-qt5] [PATCH] qtbase: add ptest
-Thread-Index: AQHS4LynT7YFNQDK3k6KSbSlVRNYoqJeHMXg//+XywCAAJSmAP//mj8AgAHIpQCABFyN4A==
-Date: Tue, 25 Jul 2017 01:27:11 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C60E25F9B6@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1496970385-22164-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E25DEFE@G08CNEXMBPEKD03.g08.fujitsu.local>
-	<CA+chaQfhgcbZvh1iQ5wGTzxrkYtwpz3a87FZ7B4BZTKpc8qt3g@mail.gmail.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E25F48F@G08CNEXMBPEKD03.g08.fujitsu.local>
-	<CA+chaQcoC6XVFfVxYsXh5=KbNEH+D1dKHPvJXK6J7DV9TCLbeg@mail.gmail.com>
-	<CA+chaQe34ExS_fyr0nNbjgqzPmZKeheF98ZbrWbVJLUWsPuOAA@mail.gmail.com>
-In-Reply-To: <CA+chaQe34ExS_fyr0nNbjgqzPmZKeheF98ZbrWbVJLUWsPuOAA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.235.93]
+	by cn.fujitsu.com (Postfix) with ESMTP id B2BB6467021F
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 Jul 2017 09:30:31 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Tue, 25 Jul 2017 09:30:31 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 25 Jul 2017 09:30:23 +0800
+Message-ID: <1500946223-25865-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 03F4746B6580.A5CAA
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: B2BB6467021F.A500B
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH] qtbase: add ptest
+Subject: [meta-qt5] [PATCH v2] qtbase: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,161 +37,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 Jul 2017 01:27:22 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Tue, 25 Jul 2017 01:30:34 -0000
+Content-Type: text/plain
 
-RGVhciBNYXJ0aW4NCkkgaGF2ZSB0cnllZCBteSBwYXRjaCBpbiB0aGUgbGFz
-dGVzdCBtYXN0ZXIgYnJhbmNoLCAgYnV0IEkgZGlkbid0IGZvdW5kIGFueSBj
-b21waWxlIGVycm9yIHdoZW4gSSBiaXRiYWtlIHF0YmFzZSBvciBxdGJhc2Ut
-bmF0aXZlLCBOb3cgSSBoYXZlIG1hZGUgYSBuZXcgcGF0Y2ggZm9yIHRoZSBs
-YXN0ZXN0IG1hc3RlciBicmFuY2guDQoNCmh1YW5ncXkNCg0KRnJvbTogTWFy
-dGluIEphbnNhIFttYWlsdG86bWFydGluLmphbnNhQGdtYWlsLmNvbV0NClNl
-bnQ6IFNhdHVyZGF5LCBKdWx5IDIyLCAyMDE3IDEwOjUwIFBNDQpUbzogSHVh
-bmcsIFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4NCkNjOiBv
-cGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3Vi
-amVjdDogUmU6IFtvZV0gW21ldGEtcXQ1XSBbUEFUQ0hdIHF0YmFzZTogYWRk
-IHB0ZXN0DQoNCkZhaWxzIHRvIGJ1aWxkIGhlcmU6DQpodHRwOi8vZXJyb3Jz
-LnlvY3RvcHJvamVjdC5vcmcvRXJyb3JzL0RldGFpbHMvMTQ4MjE4Lw0KDQpP
-biBGcmksIEp1bCAyMSwgMjAxNyBhdCAxOjM1IFBNLCBNYXJ0aW4gSmFuc2Eg
-PG1hcnRpbi5qYW5zYUBnbWFpbC5jb208bWFpbHRvOm1hcnRpbi5qYW5zYUBn
-bWFpbC5jb20+PiB3cm90ZToNCkRlYXIgSHVhbmcsDQoNCkknbSBzb3JyeSBv
-dGhlciBwdGVzdCByZWxhdGVkIGNoYW5nZXMgd2VyZSBtZXJnZWQsIGJ1dCBu
-b3QgdGhpcyBvbmUuIEkndmUgYWRkZWQgaXQgdG8gbWFzdGVyLW5leHQgbm93
-Lg0KDQpPbiBGcmksIEp1bCAyMSwgMjAxNyBhdCAxMTo0MSBBTSwgSHVhbmcs
-IFFpeXUgPGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbTxtYWlsdG86aHVh
-bmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPj4gd3JvdGU6DQpEZWFyIE1hcnRp
-bg0KDQpJIGhhdmUgc2VhcmNoZWQgaW4gdGhlIGdpdCBsb2csYW5kIGl0IHdh
-cyByZWFsbHkgbm90IGJlIG1lcmdlcmQuQ291bGQgeW91IHBsZWFzZSBlbnN1
-cmUgaXQ/DQoNCmh1YW5ncXkNCg0KRnJvbTogTWFydGluIEphbnNhIFttYWls
-dG86bWFydGluLmphbnNhQGdtYWlsLmNvbTxtYWlsdG86bWFydGluLmphbnNh
-QGdtYWlsLmNvbT5dDQpTZW50OiBGcmlkYXksIEp1bHkgMjEsIDIwMTcgNDo0
-OCBQTQ0KVG86IEh1YW5nLCBRaXl1IDxodWFuZ3F5LmZuc3RAY24uZnVqaXRz
-dS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4+DQpD
-Yzogb3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc8
-bWFpbHRvOm9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQu
-b3JnPg0KU3ViamVjdDogUmU6IFtvZV0gW21ldGEtcXQ1XSBbUEFUQ0hdIHF0
-YmFzZTogYWRkIHB0ZXN0DQoNCkl0IHdhcyBtZXJnZWQgbGFzdCB3ZWVrLCB3
-aHkgYXJlIHlvdSBwaW5naW5nIHRoaXM/DQoNCk9uIEZyaSwgSnVsIDIxLCAy
-MDE3IGF0IDk6MDEgQU0sIEh1YW5nLCBRaXl1IDxodWFuZ3F5LmZuc3RAY24u
-ZnVqaXRzdS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNv
-bT4+IHdyb3RlOg0KcGluZw0KDQo+IC0tLS0tT3JpZ2luYWwgTWVzc2FnZS0t
-LS0tDQo+IEZyb206IEh1YW5nLCBRaXl1DQo+IFNlbnQ6IEZyaWRheSwgSnVu
-ZSAwOSwgMjAxNyA5OjA2IEFNDQo+IFRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxA
-bGlzdHMub3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+IENjOiBIdWFuZywgUWl5
-dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29tPG1haWx0bzpodWFuZ3F5
-LmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiBTdWJqZWN0OiBbb2VdIFttZXRh
-LXF0NV0gW1BBVENIXSBxdGJhc2U6IGFkZCBwdGVzdA0KPg0KPiBBZGQgcHRl
-c3QgZm9yIHF0YmFzZSAgYnkgdXNpbmcgcHJvdmlkZWQgdGVzdHN1aXRlLg0K
-Pg0KPiBTaWduZWQtb2ZmLWJ5OiBIdWFuZyBRaXl1IDxodWFuZ3F5LmZuc3RA
-Y24uZnVqaXRzdS5jb208bWFpbHRvOmh1YW5ncXkuZm5zdEBjbi5mdWppdHN1
-LmNvbT4+DQo+IC0tLQ0KPiAgLi4uLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1h
-bmQtcXVsb25nbG9uZy5wYXRjaCAgICAgfCAyOA0KPiArKysrKysrKysrKysr
-KysrKysrKysrDQo+ICByZWNpcGVzLXF0L3F0NS9xdGJhc2UvcnVuLXB0ZXN0
-ICAgICAgICAgICAgICAgICAgICB8ICA2ICsrKysrDQo+ICByZWNpcGVzLXF0
-L3F0NS9xdGJhc2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPiAgICAg
-ICAgICAgICAgICAgICAgICAgfCAxNyArKysrKysrKysrKystDQo+ICAzIGZp
-bGVzIGNoYW5nZWQsIDUwIGluc2VydGlvbnMoKyksIDEgZGVsZXRpb24oLSkg
-IGNyZWF0ZSBtb2RlIDEwMDY0NA0KPiByZWNpcGVzLXF0L3F0NS9xdGJhc2Uv
-MDAwMS1EZWxldGUtcWxvbmdsb25nLWFuZC1xdWxvbmdsb25nLnBhdGNoDQo+
-ICBjcmVhdGUgbW9kZSAxMDA2NDQgcmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1
-bi1wdGVzdA0KPg0KPiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRi
-YXNlLzAwMDEtRGVsZXRlLXFsb25nbG9uZy1hbmQtcXVsb25nbG9uZy5wYXRj
-aA0KPiBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDAxLURlbGV0ZS1xbG9u
-Z2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2gNCj4gbmV3IGZpbGUgbW9kZSAx
-MDA2NDQNCj4gaW5kZXggMDAwMDAwMC4uOTc1Y2QyOA0KPiAtLS0gL2Rldi9u
-dWxsDQo+ICsrKyBiL3JlY2lwZXMtcXQvcXQ1L3F0YmFzZS8wMDAxLURlbGV0
-ZS1xbG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2gNCj4gQEAgLTAsMCAr
-MSwyOCBAQA0KPiArRnJvbSBjNjdhNGFmMmU1ZGI0YzFlMjIxMzk2MWU2Mzky
-YjU5YWZmZDE5NTlmIE1vbiBTZXAgMTcgMDA6MDA6MDANCj4gMjAwMQ0KPiAr
-RnJvbTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29t
-PG1haWx0bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KPiArRGF0
-ZTogV2VkLCA3IEp1biAyMDE3IDIxOjAwOjQ5ICswOTAwDQo+ICtTdWJqZWN0
-OiBbUEFUQ0hdIERlbGV0ZSBxbG9uZ2xvbmcgYW5kIHF1bG9uZ2xvbmcNCj4g
-Kw0KPiArU2lnbmVkLW9mZi1ieTogSHVhbmcgUWl5dSA8aHVhbmdxeS5mbnN0
-QGNuLmZ1aml0c3UuY29tPG1haWx0bzpodWFuZ3F5LmZuc3RAY24uZnVqaXRz
-dS5jb20+Pg0KPiArLS0tDQo+ICsgdGVzdHMvYXV0by9jb3JlbGliL3RocmVh
-ZC9xYXRvbWljaW50ZWdlci9xYXRvbWljaW50ZWdlci5wcm88aHR0cDovL3Fh
-dG9taWNpbnRlZ2VyLnBybz4gfCAyIC0tDQo+ICsgMSBmaWxlIGNoYW5nZWQs
-IDIgZGVsZXRpb25zKC0pDQo+ICsNCj4gK2RpZmYgLS1naXQNCj4gK2EvdGVz
-dHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9xYXRvbWlj
-aW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4NCj4gK2Iv
-dGVzdHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9xYXRv
-bWljaW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4NCj4g
-K2luZGV4IDA5NDU4YmQuLjU5YTEyMGUgMTAwNjQ0DQo+ICstLS0gYS90ZXN0
-cy9hdXRvL2NvcmVsaWIvdGhyZWFkL3FhdG9taWNpbnRlZ2VyL3FhdG9taWNp
-bnRlZ2VyLnBybzxodHRwOi8vcWF0b21pY2ludGVnZXIucHJvPg0KPiArKysr
-IGIvdGVzdHMvYXV0by9jb3JlbGliL3RocmVhZC9xYXRvbWljaW50ZWdlci9x
-YXRvbWljaW50ZWdlci5wcm88aHR0cDovL3FhdG9taWNpbnRlZ2VyLnBybz4N
-Cj4gK0BAIC01LDEwICs1LDggQEAgU1VCRElSUz1cDQo+ICsgICAgIGNoYXIz
-Ml90IFwNCj4gKyAgICAgaW50IFwNCj4gKyAgICAgbG9uZyBcDQo+ICstICAg
-IHFsb25nbG9uZyBcDQo+ICsgICAgIHFwdHJkaWZmIFwNCj4gKyAgICAgcXVp
-bnRwdHIgXA0KPiArLSAgICBxdWxvbmdsb25nIFwNCj4gKyAgICAgc2NoYXIg
-XA0KPiArICAgICBzaG9ydCBcDQo+ICsgICAgIHVjaGFyIFwNCj4gKy0tDQo+
-ICsyLjcuNA0KPiArDQo+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXF0L3F0NS9x
-dGJhc2UvcnVuLXB0ZXN0IGIvcmVjaXBlcy1xdC9xdDUvcXRiYXNlL3J1bi1w
-dGVzdA0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NCBpbmRleCAwMDAwMDAwLi4w
-NDRmODM0DQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvcmVjaXBlcy1xdC9x
-dDUvcXRiYXNlL3J1bi1wdGVzdA0KPiBAQCAtMCwwICsxLDYgQEANCj4gKyMh
-L2Jpbi9zaA0KPiArDQo+ICtmb3IgeCBpbiBgIGF3ayAne3ByaW50ICQxfScg
-dHN0X2xpc3QgYDtkbw0KPiArICAgIC4vJHt4fTsNCj4gK2RvbmUNCj4gKw0K
-PiBkaWZmIC0tZ2l0IGEvcmVjaXBlcy1xdC9xdDUvcXRiYXNlX2dpdC5iYjxo
-dHRwOi8vcXRiYXNlX2dpdC5iYj4gYi9yZWNpcGVzLXF0L3F0NS9xdGJhc2Vf
-Z2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPiBpbmRleA0KPiAyN2QwZGUx
-Li4zOWZjMjcyIDEwMDY0NA0KPiAtLS0gYS9yZWNpcGVzLXF0L3F0NS9xdGJh
-c2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJiPg0KPiArKysgYi9yZWNp
-cGVzLXF0L3F0NS9xdGJhc2VfZ2l0LmJiPGh0dHA6Ly9xdGJhc2VfZ2l0LmJi
-Pg0KPiBAQCAtMjMsOCArMjMsMTIgQEAgU1JDX1VSSSArPSAiXA0KPiAgICAg
-IGZpbGU6Ly8wMDA1LWNvbmZpZ3VyZS1idW1wLXBhdGgtbGVuZ3RoLWZyb20t
-MjU2LXRvLTUxMi1jaGFyYWN0ZXIucGF0Y2g8ZmlsZTovLy9cXDAwMDUtY29u
-ZmlndXJlLWJ1bXAtcGF0aC1sZW5ndGgtZnJvbS0yNTYtdG8tNTEyLWNoYXJh
-Y3Rlci5wYXRjaD4NCj4gXA0KPiAgICAgIGZpbGU6Ly8wMDA5LURpc2FibGUt
-YWxsLXVua25vd24tZmVhdHVyZXMtaW5zdGVhZC1vZi1lcnJvcmluZy1vdXQu
-cGF0Y2g8ZmlsZTovLy9cXDAwMDktRGlzYWJsZS1hbGwtdW5rbm93bi1mZWF0
-dXJlcy1pbnN0ZWFkLW9mLWVycm9yaW5nLW91dC5wYXRjaD4gXA0KPg0KPiBm
-aWxlOi8vMDAxMC1QcmV0ZW5kLVF0NS13YXNuLXQtZm91bmQtaWYtT0VfUU1B
-S0VfUEFUSF9FWFRFUk5BTF9ILnBhdGNoPGZpbGU6Ly8vXFwwMDEwLVByZXRl
-bmQtUXQ1LXdhc24tdC1mb3VuZC1pZi1PRV9RTUFLRV9QQVRIX0VYVEVSTkFM
-X0gucGF0Y2g+DQo+IFwNCj4gKyAgICBmaWxlOi8vMDAwMS1EZWxldGUtcWxv
-bmdsb25nLWFuZC1xdWxvbmdsb25nLnBhdGNoPGZpbGU6Ly8vXFwwMDAxLURl
-bGV0ZS1xbG9uZ2xvbmctYW5kLXF1bG9uZ2xvbmcucGF0Y2g+IFwNCj4gKyAg
-ICBmaWxlOi8vcnVuLXB0ZXN0PGZpbGU6Ly8vXFxydW4tcHRlc3Q+IFwNCj4g
-ICINCj4NCj4gK2luaGVyaXQgcHRlc3QNCj4gKw0KPiAgIyBvbmx5IGZvciB0
-YXJnZXQgcXRiYXNlDQo+ICBTUkNfVVJJICs9ICJcDQo+ICAgICAgZmlsZTov
-LzAwMDgtY29uZmlndXJlLXBhdGhzLWZvci10YXJnZXQtcW1ha2UtcHJvcGVy
-bHkucGF0Y2g8ZmlsZTovLy9cXDAwMDgtY29uZmlndXJlLXBhdGhzLWZvci10
-YXJnZXQtcW1ha2UtcHJvcGVybHkucGF0Y2g+IFwgQEAgLTQ4LDcNCj4gKzUy
-LDcgQEAgUEFDS0FHRUNPTkZJR19ESVNUUk8gPz0gIiINCj4gIFBBQ0tBR0VD
-T05GSUdfUkVMRUFTRSA/PSAicmVsZWFzZSINCj4gICMgVGhpcyBpcyBpbiBx
-dDUuaW5jLCBiZWNhdXNlIHF0d2Via2l0LWV4YW1wbGVzIGFyZSB1c2luZyBp
-dCB0byBlbmFibGUNCj4gY2EtY2VydGlmaWNhdGVzIGRlcGVuZGVuY3kgICMg
-UEFDS0FHRUNPTkZJR19PUEVOU1NMID89ICJvcGVuc3NsIg0KPiAtUEFDS0FH
-RUNPTkZJR19ERUZBVUxUID89ICJkYnVzIHVkZXYgZXZkZXYgd2lkZ2V0cyB0
-b29scyBsaWJzIGZyZWV0eXBlIg0KPiArUEFDS0FHRUNPTkZJR19ERUZBVUxU
-ID89ICJkYnVzIHVkZXYgZXZkZXYgd2lkZ2V0cyB0b29scyBsaWJzIGZyZWV0
-eXBlDQo+IHRlc3RzIg0KPg0KPiAgUEFDS0FHRUNPTkZJRyA/PSAiIFwNCj4g
-ICAgICAke1BBQ0tBR0VDT05GSUdfUkVMRUFTRX0gXA0KPiBAQCAtMTcwLDYg
-KzE3NCwxNyBAQCBkb19jb25maWd1cmUoKSB7DQo+ICAgICAgICAgICR7UVRf
-Q09ORklHX0ZMQUdTfQ0KPiAgfQ0KPg0KPiArZmFrZXJvb3QgZG9faW5zdGFs
-bF9wdGVzdCgpIHsNCj4gKyAgICBta2RpciAtcCAke0R9JHtQVEVTVF9QQVRI
-fQ0KPiArICAgIHQ9JHtEfSR7UFRFU1RfUEFUSH0NCj4gKyAgICBmb3IgdmFy
-IGluIGAgZmluZCAke0J9L3Rlc3RzL2F1dG8vIC1uYW1lIHRzdF8qYDsgZG8N
-Cj4gKyAgICAgICAgaWYgWyBub3QgYCBlY2hvICR7dmFyIyMqL30gfCBncmVw
-ICdcLidgIF07IHRoZW4NCj4gKyAgICAgICAgICAgIGVjaG8gJHt2YXIjIyov
-fSA+PiAke3R9L3RzdF9saXN0DQo+ICsgICAgICAgICAgICBpbnN0YWxsIC1t
-IDA2NDQgJHt2YXJ9ICR7dH0NCj4gKyAgICAgICAgZmkNCj4gKyAgICBkb25l
-DQo+ICt9DQo+ICsNCj4gIGRvX2luc3RhbGxfYXBwZW5kKCkgew0KPiAgICAg
-ICMgQXZvaWQgcW1ha2UgZXJyb3IgIkNhbm5vdCByZWFkDQo+IFsuLi5dL3Vz
-ci9saWIvcXQ1L21rc3BlY3Mvb2UtZGV2aWNlLWV4dHJhLnByaTogTm8gc3Vj
-aCBmaWxlIG9yIGRpcmVjdG9yeSINCj4gICAgICB0b3VjaA0KPiAke0R9LyR7
-T0VfUU1BS0VfUEFUSF9RVF9BUkNIREFUQX0vbWtzcGVjcy9vZS1kZXZpY2Ut
-ZXh0cmEucHJpDQo+IC0tDQo+IDIuNy40DQoNCg0KDQotLQ0KX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCk9wZW5l
-bWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQt
-ZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NCmh0dHA6Ly9saXN0cy5v
-cGVuZW1iZWRkZWQub3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVk
-LWRldmVsDQoNCg0KDQoKCg==
+Add ptest for qtbase by using provided testsuite.
+
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+---
+ .../0001-Delete-qlonglong-and-qulonglong.patch     | 28 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
+ recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
+ 3 files changed, 50 insertions(+), 1 deletion(-)
+ create mode 100644 recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+ create mode 100644 recipes-qt/qt5/qtbase/run-ptest
+
+diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+new file mode 100644
+index 0000000..975cd28
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+@@ -0,0 +1,28 @@
++From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00 2001
++From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
++Date: Wed, 7 Jun 2017 21:00:49 +0900
++Subject: [PATCH] Delete qlonglong and qulonglong
++
++Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
++---
++ tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
++ 1 file changed, 2 deletions(-)
++
++diff --git a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
++index 09458bd..59a120e 100644
++--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
++@@ -5,10 +5,8 @@ SUBDIRS=\
++     char32_t \
++     int \
++     long \
++-    qlonglong \
++     qptrdiff \
++     quintptr \
++-    qulonglong \
++     schar \
++     short \
++     uchar \
++-- 
++2.7.4
++
+diff --git a/recipes-qt/qt5/qtbase/run-ptest b/recipes-qt/qt5/qtbase/run-ptest
+new file mode 100644
+index 0000000..044f834
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/run-ptest
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++for x in ` awk '{print $1}' tst_list `;do
++    ./${x};
++done
++
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 5cfbcfa..8464873 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -23,8 +23,12 @@ SRC_URI += "\
+     file://0005-configure-bump-path-length-from-256-to-512-character.patch \
+     file://0009-Disable-all-unknown-features-instead-of-erroring-out.patch \
+     file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
++    file://0001-Delete-qlonglong-and-qulonglong.patch \
++    file://run-ptest \
+ "
+ 
++inherit ptest
++
+ # only for target qtbase
+ SRC_URI += "\
+     file://0008-configure-paths-for-target-qmake-properly.patch \
+@@ -48,7 +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
+ PACKAGECONFIG_RELEASE ?= "release"
+ # This is in qt5.inc, because qtwebkit-examples are using it to enable ca-certificates dependency
+ # PACKAGECONFIG_OPENSSL ?= "openssl"
+-PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype"
++PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype tests"
+ 
+ PACKAGECONFIG ?= " \
+     ${PACKAGECONFIG_RELEASE} \
+@@ -171,6 +175,17 @@ do_configure() {
+         ${QT_CONFIG_FLAGS}
+ }
+ 
++fakeroot do_install_ptest() {
++    mkdir -p ${D}${PTEST_PATH}
++    t=${D}${PTEST_PATH}
++    for var in ` find ${B}/tests/auto/ -name tst_*`; do
++        if [ not ` echo ${var##*/} | grep '\.'` ]; then
++            echo ${var##*/} >> ${t}/tst_list
++            install -m 0644 ${var} ${t}
++        fi
++    done
++}
++
+ do_install_append() {
+     # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
+     touch ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
+-- 
+2.7.4
+
+
+
 
