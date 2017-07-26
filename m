@@ -1,33 +1,43 @@
-Return-Path: <luca@lucaceresoli.net>
-Received: from srv-hp10-72.netsons.net (srv-hp10-72.netsons.net [94.141.22.72])
-	by mail.openembedded.org (Postfix) with ESMTP id 0EBD078220
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 10:27:33 +0000 (UTC)
-Received: from 45.11.168.109.cust.ip.kpnqwest.it ([109.168.11.45]:51846
-	helo=pc-ceresoli.dev.aim)
-	by srv-hp10.netsons.net with esmtpa (Exim 4.89)
-	(envelope-from <luca@lucaceresoli.net>)
-	id 1daIxc-001h31-II; Wed, 26 Jul 2017 11:50:32 +0200
-From: Luca Ceresoli <luca@lucaceresoli.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jul 2017 11:49:46 +0200
-Message-Id: <1501062586-25070-1-git-send-email-luca@lucaceresoli.net>
-X-Mailer: git-send-email 2.7.4
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - srv-hp10.netsons.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - lucaceresoli.net
-X-Get-Message-Sender-Via: srv-hp10.netsons.net: authenticated_id:
-	luca+lucaceresoli.net/only user confirmed/virtual account not
-	confirmed
-X-Authenticated-Sender: srv-hp10.netsons.net: luca@lucaceresoli.net
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-Cc: Luca Ceresoli <luca@lucaceresoli.net>
-Subject: [meta-qt5][PATCH for master] qt5-ptest: fix build with yocto < 2.3 (pyro)
+Return-Path: <gizero@gmail.com>
+Received: from mail-ua0-f180.google.com (mail-ua0-f180.google.com
+	[209.85.217.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 6AF5977BE8;
+	Wed, 26 Jul 2017 13:55:12 +0000 (UTC)
+Received: by mail-ua0-f180.google.com with SMTP id q25so99173116uah.1;
+	Wed, 26 Jul 2017 06:55:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=1FzFw3vqN2GP1jflsQYPDBksEKN1YW/rGTTVN/NTOgk=;
+	b=KfrYbvOr0b8vfkIDx/AcmAKBD2eBgPzC7S1lVc5WGgD/Nlbzh3oPXiPS7qRhD7Ii+5
+	bucxhsQqEgfZorNPwl57TTeqTq+8M9k7XZmLHNbB1sZWwlWJd9I3Vsej/ZvaRXhTjvnG
+	XNFGCcTianXeFHALuzGczuZF0ZtKUPKdc8srANQB9obNIGCdQgOrqFZ6PZCUboU5pp64
+	SySMaoxh3iXVgJSRF7Og6soK0X9ssjpiB+x9dTxh3PO6OxzMW+MSjLyUEsW53Lm2amDb
+	BVaJNJjQs1rjxg2ftmsDlYcl8YvRvbM44yrNcMWF5KEBD/nOZISakOyyaaMZ+YSiaq/q
+	tZaQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=1FzFw3vqN2GP1jflsQYPDBksEKN1YW/rGTTVN/NTOgk=;
+	b=T7NiZtZaynfrJ6G53mSACt4+FVqHOsFmOzcQ1KpQ5eHDP8+2sa2Tq13QpQXK3JKTLg
+	SFwDP5Pjbm1GCivIoX8l3FHpMsezxfewO4w27j/2JTvZQTnpcTBE2KX/fxCIUc35PvXF
+	gDJpXP3hgd5Ak0+il9EmTvG35N94TA8d42xVPURZZ5mAIuq8PZGCtvM7lh4IgOFvIYli
+	pafN8g4kaYb8SgGjot8v4mWoM6SrUBSZssjw4UaQzbPh94Eadr1j0ce1IwVXMVD+cww+
+	hjcIzJ/V0hXRGH/hag3BYCc7nMqAIMEkfzDMI9dgNtimDCke2EuK2EtHIsx1LTSJ4BwQ
+	1tOw==
+X-Gm-Message-State: AIVw111/f9bCGKhkHfh8yxcTU2Edd/oDynHV8L6+9fAODEbjj7iIwM/m
+	CRfcBeMouFq3n+V+9W8+OeVavscn/am+
+X-Received: by 10.159.51.231 with SMTP id y39mr685170uab.130.1501077313789;
+	Wed, 26 Jul 2017 06:55:13 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.176.74.94 with HTTP; Wed, 26 Jul 2017 06:55:13 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
+Date: Wed, 26 Jul 2017 15:55:13 +0200
+Message-ID: <CAC+thW1Yk9DbCAqJqxprsZ1kOZ6RQBjVuSAkQTQqCZ=cNerf8A@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: android-tools related warnings in (updated) eSDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,69 +50,124 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jul 2017 10:27:34 -0000
+X-List-Received-Date: Wed, 26 Jul 2017 13:55:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The expand parameter to DataSmart.getVar() defaults to True since
-yocto 2.3 (pyro) [0]. Stable Yocto releases 2.2 (morty) and 2.1
-(krogoth) had no default value. Older, now unsupported releases
-defaulted to False [1] [2].
+When upgrading an eSDK (via devtool sdk-update) from a project that
+includes meta-oe in the stack, some files listed in android-tools' SRC_URI,
+most notably patches and systemd service file got removed from the eSDK
+copy of metadata during the update, leading bitbake to start warning about
+not being able to verify the checksum for those files (those files are
+indeed missing as shown below).
 
-Not passing the expand parameter here means all recipes including
-qt5-ptest.inc won't build with yocto 2.2 and 2.1 with this error
-message:
+Here is the log from bitbake:
 
-  $ bitbake qtxmlpatterns -vfc populate_sysroot
-  [...]
-  ERROR: Error executing a python function in exec_python_func() autogenerated:
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry remove-selinux-android.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry use-capability.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry use-local-socket.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry preserve-ownership.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry mkbootimg-Add-dt-parameter-to-specify-DT-image.patch: file
+could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry remove-bionic-android.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry define-shell-command.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry implicit-declaration-function-strlcat-strlcopy.patch: file
+could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry fix-big-endian-build.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools-native
+SRC_URI entry android-tools-adbd.service: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry remove-selinux-android.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry use-capability.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry use-local-socket.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry preserve-ownership.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry mkbootimg-Add-dt-parameter-to-specify-DT-image.patch: file
+could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry remove-bionic-android.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry define-shell-command.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry implicit-declaration-function-strlcat-strlcopy.patch: file
+could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry fix-big-endian-build.patch: file could not be found
+WARNING:
+/home/vagrant/poky_sdk/layers/meta-oe/recipes-devtools/android-tools/
+android-tools_5.1.1.r37.bb: Unable to get checksum for android-tools
+SRC_URI entry android-tools-adbd.service: file could not be found
 
-  The stack trace of python calls that resulted in this exception/failure was:
-  File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
-       0001:
-   *** 0002:do_populate_sysroot(d)
-       0003:
-  File: '[...]/poky/meta/classes/staging.bbclass', lineno: 227, function: do_populate_sysroot
-       0223:        p = p.replace("/", "_")
-       0224:        with open(provdir + p, "w") as f:
-       0225:            f.write(pn)
-       0226:}
-   *** 0227:
-       0228:do_populate_sysroot[vardeps] += "${SYSROOT_PREPROCESS_FUNCS}"
-       0229:do_populate_sysroot[vardepsexclude] += "MULTI_PROVIDER_WHITELIST"
-       0230:
-       0231:SSTATETASKS += "do_populate_sysroot"
-  Exception: TypeError: getVar() missing 1 required positional argument: 'expand'
+...and the metadata files:
 
-  DEBUG: Python function do_populate_sysroot finished
-  ERROR: Function failed: do_populate_sysroot
+$ find poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/
+fastboot.mk
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/
+mkbootimg.mk
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/
+ext4_utils.mk
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/adb.mk
+poky_sdk/layers/meta-oe/recipes-devtools/android-tools/android-tools/.gitignore
 
-Fixing this in a user layer requires duplicating the entire
-do_populate_sysroot_append() in the .bbappend of all packages
-including qt5-ptest.inc, i.e. currently qtdeclarative, qtquick1 and
-qtxmlpatterns.
+As you see, *.patch at al. are missing...
 
-Avoid the hassle for those users by explicitly passing expand=True.
+The root cause to me seems the existence of a .gitignore file in the
+meta-oe metadata
+(meta-oe/recipes-devtools/android-tools/android-tools/.gitignore): the
+exact reason for this being there is not 100% clear to me but I suspects it
+then gets in the way when oe-publish-sdk runs...
 
-[0] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=2631c375b8a025ee2e4329f6d93900bb7b5dadf7
-[1] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=c7610aa353e31977c099ce574acb188a3f4219e0
-[2] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=4e5e501155a21fe64a470c626b3afe6d9748308e
----
- recipes-qt/qt5/qt5-ptest.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-index d39f65aa2744..4844878ab567 100644
---- a/recipes-qt/qt5/qt5-ptest.inc
-+++ b/recipes-qt/qt5/qt5-ptest.inc
-@@ -14,7 +14,7 @@ do_compile_ptest() {
- }
- 
- do_populate_sysroot_append_class-target() {
--    workdir = d.getVar('WORKDIR')
-+    workdir = d.getVar('WORKDIR', True)
-     srcdir = workdir + '/sysroot-destdir/usr/'
-     destdir = workdir + '/recipe-sysroot/usr/'
-     
--- 
-2.7.4
-
+Any eSDK and friends guru with a clue here?
 
