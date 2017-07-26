@@ -1,37 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (unknown [59.151.112.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 70639781D3
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 91EA478291
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 05:20:25 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.22,518,1449504000"; d="scan'208";a="21825371"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 26 Jul 2017 13:20:25 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 2EDCD46B4C8D
+	Wed, 26 Jul 2017 05:37:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6Q5bsoE024082
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 13:20:25 +0800 (CST)
-Received: from G08CNEXMBPEKD03.g08.fujitsu.local ([10.167.33.86]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0319.002; Wed, 26 Jul 2017 13:20:25 +0800
-From: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [OE-core] [PATCH] openssl: By default, disable cryptodev.
-Thread-Index: AQHTBc49obecri23X02yGeA3QFcfDaJlkZjw
-Date: Wed, 26 Jul 2017 05:20:24 +0000
-Message-ID: <97F7C8E70D26E94FA7E05578493F65C60E25FD04@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1501046123-2508-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-In-Reply-To: <1501046123-2508-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.167.235.93]
+	Tue, 25 Jul 2017 22:37:54 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.294.0; Tue, 25 Jul 2017 22:37:54 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 26 Jul 2017 13:37:32 +0800
+Message-ID: <20170726053732.3582-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 2EDCD46B4C8D.AA3C7
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [OE-core] [PATCH] openssl: By default, disable cryptodev.
+Subject: [meta-oe][PATCH] logcheck: update to 1.3.18
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,46 +31,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jul 2017 05:20:26 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 26 Jul 2017 05:37:53 -0000
+Content-Type: text/plain
 
-U29ycnksSSBzZW5kIHRoaXMgcGF0Y2ggdG8gd3JvbmcgbGlzdC4gUGxlYXNl
-IGlnbm9yZS4NCg0KaHVhbmdxeQ0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2Ut
-LS0tLQ0KPiBGcm9tOiBIdWFuZywgUWl5dS+7xiDn+dPuDQo+IFNlbnQ6IFdl
-ZG5lc2RheSwgSnVseSAyNiwgMjAxNyAxOjE1IFBNDQo+IFRvOiBvcGVuZW1i
-ZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KPiBDYzogSHVh
-bmcsIFFpeXUvu8Yg5/nT7iA8aHVhbmdxeS5mbnN0QGNuLmZ1aml0c3UuY29t
-Pg0KPiBTdWJqZWN0OiBbT0UtY29yZV0gW1BBVENIXSBvcGVuc3NsOiBCeSBk
-ZWZhdWx0LCBkaXNhYmxlIGNyeXB0b2Rldi4NCj4gDQo+IEJlY2F1c2UgYWNj
-b3JkaW5nIHRvIHRoZSBvdGhlciBEaXN0cm9zLGNyeXB0b2RldiBpcyBub3Qg
-ZW5hYmxlZC4NCj4gSWYgdXNlcnMgd2FudCBlbmFibGUgY3J5cHRvZGV2LCBq
-dXN0IGhhdmUgdG8gYWRkICJjcnlwdG9kZXYtbGludXgiIGludG8NCj4gUEFD
-S0FHRUNPTkZJRy4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IEh1YW5nIFFpeXUg
-PGh1YW5ncXkuZm5zdEBjbi5mdWppdHN1LmNvbT4NCj4gLS0tDQo+ICBtZXRh
-L3JlY2lwZXMtY29ubmVjdGl2aXR5L29wZW5zc2wvb3BlbnNzbF8xLjAuMmwu
-YmIgfCA2ICsrLS0tLQ0KPiAgMSBmaWxlIGNoYW5nZWQsIDIgaW5zZXJ0aW9u
-cygrKSwgNCBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS9tZXRh
-L3JlY2lwZXMtY29ubmVjdGl2aXR5L29wZW5zc2wvb3BlbnNzbF8xLjAuMmwu
-YmINCj4gYi9tZXRhL3JlY2lwZXMtY29ubmVjdGl2aXR5L29wZW5zc2wvb3Bl
-bnNzbF8xLjAuMmwuYmINCj4gaW5kZXggYzAwZGQ4MS4uN2M4ZjE4YiAxMDA2
-NDQNCj4gLS0tIGEvbWV0YS9yZWNpcGVzLWNvbm5lY3Rpdml0eS9vcGVuc3Ns
-L29wZW5zc2xfMS4wLjJsLmJiDQo+ICsrKyBiL21ldGEvcmVjaXBlcy1jb25u
-ZWN0aXZpdHkvb3BlbnNzbC9vcGVuc3NsXzEuMC4ybC5iYg0KPiBAQCAtMiwx
-MCArMiw4IEBAIHJlcXVpcmUgb3BlbnNzbC5pbmMNCj4gDQo+ICAjIEZvciB0
-YXJnZXQgc2lkZSB2ZXJzaW9ucyBvZiBvcGVuc3NsIGVuYWJsZSBzdXBwb3J0
-IGZvciBPQ0YgTGludXggZHJpdmVyICAjIGlmDQo+IHRoZXkgYXJlIGF2YWls
-YWJsZS4NCj4gLVBBQ0tBR0VDT05GSUdbY3J5cHRvZGV2LWxpbnV4XSA9ICIs
-LGNyeXB0b2Rldi1saW51eCINCj4gLURFUEVORFMgKz0gIiR7QGJiLnV0aWxz
-LmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHJywgJ2NyeXB0b2Rldi1saW51eCcs
-DQo+ICdjcnlwdG9kZXYtbGludXgnLCAnJywgZCl9Ig0KPiAtDQo+IC1DRkxB
-RyArPSAiJHtAYmIudXRpbHMuY29udGFpbnMoJ1BBQ0tBR0VDT05GSUcnLCAn
-Y3J5cHRvZGV2LWxpbnV4JywNCj4gJy1ESEFWRV9DUllQVE9ERVYgLURVU0Vf
-Q1JZUFRPREVWX0RJR0VTVFMnLCAnJywgZCl9Ig0KPiArUEFDS0FHRUNPTkZJ
-R1tjcnlwdG9kZXYtbGludXhdID0gIi1ESEFWRV9DUllQVE9ERVYNCj4gLURV
-U0VfQ1JZUFRPREVWX0RJR0VTVFMsLGNyeXB0b2Rldi1saW51eCINCj4gK0NG
-TEFHICs9ICIke1BBQ0tBR0VDT05GSUdfQ09ORkFSR1N9Ig0KPiANCj4gIENG
-TEFHX2FwcGVuZF9jbGFzcy1uYXRpdmUgPSAiIC1mUElDIg0KPiANCj4gLS0N
-Cj4gMi43LjQNCg0KCgo=
+From: Jackie Huang <jackie.huang@windriver.com>
+
+Changes:
+- logcheck should not be run as root, so inherit useradd
+  and add proper user and group.
+
+- Add missing runtime dependencies according to the file
+  debian/control and simple test by running "logcheck -ot".
+
+- For syslog, debian directly depends on rsyslog, but logcheck
+  works with any syslog and we have busybox-syslog, sysklogd,
+  syslog-ng and rsyslog, so use VIRTUAL-RUNTIME_syslog for the
+  syslog dependency and set rsyslog as the default, which can be
+  easily overridden in distro conf file or local.conf.
+
+- Don't install /var/lock when populating rootfs. Do it
+  through volatile.
+
+- install header.txt for generated mails
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../recipes-extended/logcheck/files/99_logcheck    |  2 +
+ .../{logcheck_1.3.17.bb => logcheck_1.3.18.bb}     | 50 +++++++++++++++++++---
+ 2 files changed, 47 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/logcheck/files/99_logcheck
+ rename meta-oe/recipes-extended/logcheck/{logcheck_1.3.17.bb => logcheck_1.3.18.bb} (46%)
+
+diff --git a/meta-oe/recipes-extended/logcheck/files/99_logcheck b/meta-oe/recipes-extended/logcheck/files/99_logcheck
+new file mode 100644
+index 000000000..4de33aca3
+--- /dev/null
++++ b/meta-oe/recipes-extended/logcheck/files/99_logcheck
+@@ -0,0 +1,2 @@
++# <type> <owner> <group> <mode> <path> <linksource>
++d logcheck logcheck 0755 /var/lock/logcheck none
+diff --git a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb b/meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
+similarity index 46%
+rename from meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
+rename to meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
+index ba4c2ab9a..24c19b72a 100644
+--- a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
++++ b/meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
+@@ -10,11 +10,20 @@ SECTION = "Applications/System"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
+ 
+-SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git"
+-SRCREV = "2429e67ad875fee8a0234c64d504277b038c89cd"
++SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git \
++           file://99_logcheck \
++"
++SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
+ 
+ S = "${WORKDIR}/git"
+ 
++inherit useradd
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = "-m -g ${BPN} -G adm -r -d ${localstatedir}/lib/${BPN} \
++                       -s /bin/false -c 'logcheck account' ${BPN}"
++GROUPADD_PARAM_${PN} = "-r ${BPN}"
++
+ do_install() {
+     # Fix QA Issue
+     sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
+@@ -25,14 +34,45 @@ do_install() {
+     install -m 644 docs/logcheck-test.1 ${D}${mandir}/man1/
+     install -m 644 docs/logtail.8 ${D}${mandir}/man8/
+     install -m 644 docs/logtail2.8 ${D}${mandir}/man8/
+-    sed -i "s/syslog/messages/" etc/logcheck.logfiles
+-    sed -i "s/auth\.log/secure/" etc/logcheck.logfiles
++
+     install -m 755 -d ${D}${sysconfdir}/cron.d
+     install -m 644 debian/logcheck.cron.d ${D}${sysconfdir}/cron.d/logcheck
+     install -m 755 -d ${D}/var/lib/logcheck
++
+     oe_runmake install DESTDIR=${D}
++
++    # install header.txt for generated mails
++    install -m 0644 ${S}/debian/header.txt ${D}${sysconfdir}/${BPN}
++
++    chown -R ${BPN}:${BPN} ${D}${localstatedir}/lib/${BPN}
++    chown -R root:${BPN} ${D}${sysconfdir}/${BPN}
++
++    # Don't install /var/lock when populating rootfs. Do it through volatile
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/default/volatiles
++        install -m 0644 ${WORKDIR}/99_logcheck ${D}${sysconfdir}/default/volatiles
++    fi
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -d ${D}${sysconfdir}/tmpfiles.d
++        echo "d /var/lock/logcheck 0755 logcheck logcheck -" \
++            > ${D}${sysconfdir}/tmpfiles.d/logcheck.conf
++    fi
+ }
+ 
+-RDEPENDS_${PN} = "perl"
++VIRTUAL-RUNTIME_syslog ??= "rsyslog"
++
++RDEPENDS_${PN} = "\
++    bash \
++    cronie \
++    debianutils-run-parts \
++    grep \
++    lockfile-progs \
++    mime-construct \
++    perl \
++    perl-module-file-basename \
++    perl-module-getopt-std \
++    perl-module-file-glob \
++    ${VIRTUAL-RUNTIME_syslog} \
++"
+ 
+ FILES_${PN} += "${datadir}/logtail"
+-- 
+2.11.0
+
 
