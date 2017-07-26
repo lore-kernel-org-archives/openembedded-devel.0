@@ -1,48 +1,31 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8396E77B6E
+Return-Path: <Alexey_Firago@mentor.com>
+Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
+	by mail.openembedded.org (Postfix) with ESMTP id BB00471BB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 18:58:37 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id d193so18107068pgc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 11:58:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=+hA67uAWcS6j6Wou2BUrPQYR6j4EHYSSNHES4Ugogn0=;
-	b=hHi/AkAWr1zR2qEHs7kQ8caCTvMMPWzWjpYoAOpRtVQj5l/SlaJFSB/rZhA/4LyGME
-	4wjXinFSyo9dZIfASIvdg6UxbcLtl3liO9cV3Zr6fxj19qA4Cb269Y8heZD/XevQqX4m
-	x3vfqlvoplX9Js/2Ews+84MORiFt9guVBQD0PtLaoL7dugYyP4yqacw0WG1ige71bls6
-	Ji7TEkea66xOkw1CnbhPTzGM8HHW5EFmv3Y2+XiMQEpL2X/jAvPs1XAEgzwIKGIHjQ5H
-	b5o5quUXzMssvTlDKsRT6qCLq2GsVMT4RcOzgNthbD77WQDYjorTFj4LTHmKwthWUZ9V
-	XAuw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=+hA67uAWcS6j6Wou2BUrPQYR6j4EHYSSNHES4Ugogn0=;
-	b=Bcc44WKlPJW3jBxGpIEkUC5vWol5UIZVXAudXxiMjdCLy0iSfBYmhZQvdOXs2IuZxF
-	zPR+tEohatmgUot2Ud2/6KVVxryofUuUxVEd9Bhllu37xqGL0GSmct5MO2TxKWs2RlaC
-	/1/GBxQnHC5Jw+IGQOWqUVyg4PiYMJB+Vf4hXcPK1CLHUAwxkxlCH5Or51VijOXxY0FQ
-	LfZ8rZfgDLRk4kVZyojXsvm4PuPq69UAOsQaUyRwotDur3KCML0vA+t58tJtHMRXQ6l6
-	7U61YGfRGveCOp1TGsuLfgxi0SRkroD+Ms/z4HfHcbkV26quzrxjxBFVvillSaZnIGyY
-	f10A==
-X-Gm-Message-State: AIVw111aiZJcwWbxNUPJLyPtpx9MbpmpiwrlzTN84Yco+xhwpG/3Sx+7
-	Gouo9PMCSniN2f6E
-X-Received: by 10.98.218.84 with SMTP id w20mr1724375pfl.240.1501095518465;
-	Wed, 26 Jul 2017 11:58:38 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::9b53])
-	by smtp.gmail.com with ESMTPSA id
-	s15sm33245864pfk.42.2017.07.26.11.58.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Jul 2017 11:58:37 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 Jul 2017 11:58:15 -0700
-Message-Id: <20170726185815.8898-7-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.3
-In-Reply-To: <20170726185815.8898-1-raj.khem@gmail.com>
-References: <20170726185815.8898-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 7/7] flashrom: Fix build with clang
+	Wed, 26 Jul 2017 18:59:57 +0000 (UTC)
+Received: from nat-ies.mentorg.com ([192.94.31.2]
+	helo=SVR-IES-MBX-04.mgc.mentorg.com)
+	by relay1.mentorg.com with esmtp 
+	id 1daRXK-0002sn-M9 from Alexey_Firago@mentor.com ;
+	Wed, 26 Jul 2017 11:59:58 -0700
+Received: from [172.30.176.17] (137.202.0.87) by
+	SVR-IES-MBX-04.mgc.mentorg.com (139.181.222.4) with Microsoft SMTP
+	Server (TLS) id 15.0.1263.5; Wed, 26 Jul 2017 19:59:55 +0100
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1500831823-32660-1-git-send-email-alexey_firago@mentor.com>
+	<CA+chaQcHfgXB-Lx8-BmxDpbP6hdF=PnXMQy9NGO2dDpVFsRvKw@mail.gmail.com>
+From: Alexey Firago <alexey_firago@mentor.com>
+Message-ID: <21d334b0-d490-f961-be24-7fe93bff099b@mentor.com>
+Date: Wed, 26 Jul 2017 21:59:54 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQcHfgXB-Lx8-BmxDpbP6hdF=PnXMQy9NGO2dDpVFsRvKw@mail.gmail.com>
+X-Originating-IP: [137.202.0.87]
+X-ClientProxiedBy: svr-ies-mbx-01.mgc.mentorg.com (139.181.222.1) To
+	SVR-IES-MBX-04.mgc.mentorg.com (139.181.222.4)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] c-ares: update 1.12.0 -> 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,124 +38,270 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jul 2017 18:58:37 -0000
+X-List-Received-Date: Wed, 26 Jul 2017 18:59:57 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Backport a patch from staging
+Thanks for the review.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../flashrom/0001-Remove-undefined-behavior.patch  | 82 ++++++++++++++++++++++
- .../recipes-extended/flashrom/flashrom_0.9.9.bb    |  3 +-
- 2 files changed, 84 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch
+I have fixed the issue with the missing libcares.pc, will be sent in V2.
 
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch b/meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch
-new file mode 100644
-index 000000000..51397dc55
---- /dev/null
-+++ b/meta-oe/recipes-extended/flashrom/flashrom/0001-Remove-undefined-behavior.patch
-@@ -0,0 +1,82 @@
-+From d2a03b3e43043b596a79803bcb93f70e513bbb50 Mon Sep 17 00:00:00 2001
-+From: Patrick Georgi <pgeorgi@google.com>
-+Date: Mon, 13 Mar 2017 13:48:03 +0100
-+Subject: [PATCH] Remove undefined behavior
-+
-+Per clang-3.9, the compiler fails on #define ...defined(...) statements
-+as they're undefined behavior (apparently with different behavior
-+between gcc/clang and msvc, too).
-+
-+See clang's cfe repo commit r258128 for details.
-+
-+Change-Id: I82b6235e11b425fae45eebbe06b08f81c5bdbb98
-+Signed-off-by: Patrick Georgi <pgeorgi@google.com>
-+Reviewed-on: https://review.coreboot.org/18792
-+Reviewed-by: Stefan Reinauer <stefan.reinauer@coreboot.org>
-+Tested-by: build bot (Jenkins) <no-reply@coreboot.org>
-+---
-+ hwaccess.c | 18 +++++++++++++++---
-+ platform.h | 18 +++++++++++++++---
-+ 2 files changed, 30 insertions(+), 6 deletions(-)
-+
-+diff --git a/hwaccess.c b/hwaccess.c
-+index aede7e3..2bf6f42 100644
-+--- a/hwaccess.c
-++++ b/hwaccess.c
-+@@ -37,9 +37,21 @@
-+ #error "Unknown operating system"
-+ #endif
-+ 
-+-#define USE_IOPL	(IS_LINUX || IS_MACOSX || defined(__NetBSD__) || defined(__OpenBSD__))
-+-#define USE_DEV_IO	(defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__))
-+-#define USE_IOPERM	(defined(__gnu_hurd__))
-++#if IS_LINUX || IS_MACOSX || defined(__NetBSD__) || defined(__OpenBSD__)
-++#define USE_IOPL 1
-++#else
-++#define USE_IOPL 0
-++#endif
-++#if defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)
-++#define USE_DEV_IO 1
-++#else
-++#define USE_DEV_IO 0
-++#endif
-++#if defined(__gnu_hurd__)
-++#define USE_IOPERM 1
-++#else
-++#define USE_IOPERM 0
-++#endif
-+ 
-+ #if USE_IOPERM
-+ #include <sys/io.h>
-+diff --git a/platform.h b/platform.h
-+index c5a52ef..b2fdcd0 100644
-+--- a/platform.h
-++++ b/platform.h
-+@@ -25,9 +25,21 @@
-+ #define __PLATFORM_H__ 1
-+ 
-+ // Helper defines for operating systems
-+-#define IS_LINUX	(defined(__gnu_linux__) || defined(__linux__))
-+-#define IS_MACOSX	(defined(__APPLE__) && defined(__MACH__)) /* yes, both. */
-+-#define IS_WINDOWS	(defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(__WINDOWS__))
-++#if defined(__gnu_linux__) || defined(__linux__)
-++#define IS_LINUX 1
-++#else
-++#define IS_LINUX 0
-++#endif
-++#if defined(__APPLE__) && defined(__MACH__) /* yes, both. */
-++#define IS_MACOSX 1
-++#else
-++#define IS_MACOSX 0
-++#endif
-++#if defined(_WIN32) || defined(_WIN64) || defined(__WIN32__) || defined(__WINDOWS__)
-++#define IS_WINDOWS 1
-++#else
-++#define IS_WINDOWS 0
-++#endif
-+ 
-+ // Likewise for target architectures
-+ #if defined (__i386__) || defined (__x86_64__) || defined(__amd64__)
-+-- 
-+2.13.3
-+
-diff --git a/meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb b/meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb
-index 1bd97929c..4cdd8ad23 100644
---- a/meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb
-+++ b/meta-oe/recipes-extended/flashrom/flashrom_0.9.9.bb
-@@ -3,11 +3,12 @@ LICENSE = "GPLv2"
- HOMEPAGE = "http://flashrom.org"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
--DEPENDS = "pciutils libusb"
-+DEPENDS = "pciutils libusb libusb-compat"
- 
- SRC_URI = "http://download.flashrom.org/releases/flashrom-${PV}.tar.bz2 \
-            file://0001-spi-Define-_XOPEN_SOURCE-to-enable-ffs-libc-API.patch \
-            file://sst26.patch \
-+           file://0001-Remove-undefined-behavior.patch \
-            "
- SRC_URI[md5sum] = "aab9c98925d9cfb5ffb28b67a6112530"
- SRC_URI[sha256sum] = "cb3156b0f63eb192024b76c0814135930297aac41f80761a5d293de769783c45"
--- 
-2.13.3
+Do you have any suggestion to fix the issue with the debian.bblass? 
+Maybe add one more package for example c-ares-tools ?
 
+Regards,
+Alexey Firago
+
+On 26.07.2017 12:34, Martin Jansa wrote:
+> There is few more changes at least worth mentioned in commit message (or 
+> better fixed to provide upgrade path)
+> 
+> There are few new binaries in ${PN} so debian.bbclass no longer renames 
+> the package:
+> diff --git a/packages/*-gnueabi/c-ares/c-ares/latest 
+> b/packages/*-gnueabi/c-ares/c-ares/latest
+> index 479e475..5301942 100644
+> --- a/packages/*-gnueabi/c-ares/c-ares/latest
+> +++ b/packages/*-gnueabi/c-ares/c-ares/latest
+> @@ -1,10 +1,10 @@
+> -PV = 1.12.0
+> +PV = 1.13.0+gitrAUTOINC+3be1924221
+>   PR = r0
+> +PKGV = 1.13.0+gitr0+3be1924221
+>   PKGR = r0.0
+> -PKG = libcares2
+> -RPROVIDES = c-ares (=1.12.0)
+> +RPROVIDES =
+>   RDEPENDS = glibc (>= 2.25.90) libgcc (>= 7.1.0)
+>   RRECOMMENDS =
+> -PKGSIZE = 43057
+> +PKGSIZE = 85465
+>   FILES = /usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /etc 
+> /com /var /bin/* /sbin/* /lib/*.so.* /lib/udev /usr/lib/udev /lib/udev /usr
+> -FILELIST = /usr/lib/libcares.so.2 /usr/lib/libcares.so.2.2.0
+> +FILELIST = /usr/bin/acountry /usr/bin/adig /usr/bin/ahost 
+> /usr/lib/libcares.so.2 /usr/lib/libcares.so.2.2.0
+> 
+> 
+> It no longer installs libcares.pc, so all other components which were 
+> using pkg-config to find libcares are now failing
+> 
+> diff --git a/packages/*-gnueabi/c-ares/c-ares-dev/latest 
+> b/packages/*-gnueabi/c-ares/c-ares-dev/latest
+> index bebfa7c..c1d4015 100644
+> --- a/packages/*-gnueabi/c-ares/c-ares-dev/latest
+> +++ b/packages/*-gnueabi/c-ares/c-ares-dev/latest
+> @@ -1,10 +1,10 @@
+> -PV = 1.12.0
+> +PV = 1.13.0+gitrAUTOINC+3be1924221
+>   PR = r0
+> +PKGV = 1.13.0+gitr0+3be1924221
+>   PKGR = r0.0
+> -PKG = libcares-dev
+> -RPROVIDES = c-ares-dev (=1.12.0)
+> -RDEPENDS = c-ares (= 1.12.0-r0.0)
+> +RPROVIDES =
+> +RDEPENDS = c-ares (= 1.13.0+gitr0+3be1924221-r0.0)
+>   RRECOMMENDS = glibc-dev libgcc-dev
+> -PKGSIZE = 36789
+> -FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la 
+> /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal 
+> /lib/*.o
+> -FILELIST = /usr/include/ares.h /usr/include/ares_build.h 
+> /usr/include/ares_dns.h /usr/include/ares_rules.h 
+> /usr/include/ares_version.h /usr/lib/l
+> +PKGSIZE = 40640
+> +FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la 
+> /usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal 
+> /lib/*.o
+> +FILELIST = /usr/include/ares.h /usr/include/ares_build.h 
+> /usr/include/ares_dns.h /usr/include/ares_rules.h 
+> /usr/include/ares_version.h /usr/lib/c
+> 
+> the last lines are truncated, but here it's shown nicely:
+> diff --git a/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt 
+> b/packages/*-gnueabi/c-ares/c-ares-dev/
+> index d95ff9a..7f47aa1 100644
+> --- a/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt
+> +++ b/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt
+> @@ -1,11 +1,14 @@
+>   drwxr-xr-x root       root             4096 ./usr
+>   drwxr-xr-x root       root             4096 ./usr/include
+> --rw-r--r-- root       root             3646 ./usr/include/ares_build.h
+> +-rw-r--r-- root       root              959 ./usr/include/ares_build.h
+>   -rw-r--r-- root       root             5306 ./usr/include/ares_dns.h
+> --rw-r--r-- root       root            22343 ./usr/include/ares.h
+> +-rw-r--r-- root       root            23253 ./usr/include/ares.h
+>   -rw-r--r-- root       root             4278 ./usr/include/ares_rules.h
+> --rw-r--r-- root       root              648 ./usr/include/ares_version.h
+> +-rw-r--r-- root       root              652 ./usr/include/ares_version.h
+>   drwxr-xr-x root       root             4096 ./usr/lib
+> -lrwxrwxrwx root       root               17 ./usr/lib/libcares.so -> 
+> libcares.so.2.2.0
+> -drwxr-xr-x root       root             4096 ./usr/lib/pkgconfig
+> --rw-r--r-- root       root              551 ./usr/lib/pkgconfig/libcares.pc
+> +drwxr-xr-x root       root             4096 ./usr/lib/cmake
+> +drwxr-xr-x root       root             4096 ./usr/lib/cmake/c-ares
+> +-rw-r--r-- root       root             1606 
+> ./usr/lib/cmake/c-ares/c-ares-config.cmake
+> +-rw-r--r-- root       root             3775 
+> ./usr/lib/cmake/c-ares/c-ares-targets.cmake
+> +-rw-r--r-- root       root              798 
+> ./usr/lib/cmake/c-ares/c-ares-targets-noconfig.cmake
+> +lrwxrwxrwx root       root               13 ./usr/lib/libcares.so -> 
+> libcares.so.2
+> 
+> 
+> On Sun, Jul 23, 2017 at 7:43 PM, Alexey Firago <alexey_firago@mentor.com 
+> <mailto:alexey_firago@mentor.com>> wrote:
+> 
+>     Update to c-ares version 1.13.0 from June 20 2017
+> 
+>     Recipe updates:
+>       * Change SRC_URI to github, because tarball at
+>     https://c-ares.haxx.se/download/c-ares-1.13.0.tar.gz
+>     <https://c-ares.haxx.se/download/c-ares-1.13.0.tar.gz>
+>         does not include all required files (cmake related).
+>       * Change build method to cmake. Library now supports cmake
+>         build system and installs *.cmake config files. These files can
+>         be used by several libraries/packages, such as gRPC, curl.
+> 
+>     Highlights of library changes and bug fixes:
+>       * cmake build system support added
+>       * Add virtual function set for socket IO: ares_set_socket_functions
+>       * CVE-2017-1000381: c-ares NAPTR parser out of bounds access
+> 
+>     Full changelog - https://c-ares.haxx.se/changelog.html
+>     <https://c-ares.haxx.se/changelog.html>
+> 
+>     Signed-off-by: Alexey Firago <alexey_firago@mentor.com
+>     <mailto:alexey_firago@mentor.com>>
+>     ---
+>       ...configure.ac-don-t-override-passed-cflags.patch | 26
+>     ----------------------
+>       .../recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>        | 15 -------------
+>       .../recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>        | 16 +++++++++++++
+>       3 files changed, 16 insertions(+), 41 deletions(-)
+>       delete mode 100644
+>     meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+>       delete mode 100644
+>     meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>       create mode 100644
+>     meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+> 
+>     diff --git
+>     a/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+>     b/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+>     deleted file mode 100644
+>     index 10fad4e..0000000
+>     ---
+>     a/meta-networking/recipes-support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
+>     +++ /dev/null
+>     @@ -1,26 +0,0 @@
+>     -From 2a7236d2a7bb9c3d3c3f44ebf59404bf7134fcb3 Mon Sep 17 00:00:00 2001
+>     -From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <adraszik@tycoint.com
+>     <mailto:adraszik@tycoint.com>>
+>     -Date: Tue, 12 Apr 2016 11:37:28 +0100
+>     -Subject: [PATCH] configure.ac <http://configure.ac>: don't override
+>     passed cflags
+>     -
+>     -We are controlling debug and optimiser flags from OE
+>     ----
+>     - configure.ac <http://configure.ac> | 2 --
+>     - 1 file changed, 2 deletions(-)
+>     -
+>     -diff --git a/configure.ac <http://configure.ac> b/configure.ac
+>     <http://configure.ac>
+>     -index 5c02450..3cf9fcd 100644
+>     ---- a/configure.ac <http://configure.ac>
+>     -+++ b/configure.ac <http://configure.ac>
+>     -@@ -147,8 +147,6 @@ dnl
+>     **********************************************************************
+>     -
+>     - CARES_CHECK_COMPILER
+>     - CARES_SET_COMPILER_BASIC_OPTS
+>     --CARES_SET_COMPILER_DEBUG_OPTS
+>     --CARES_SET_COMPILER_OPTIMIZE_OPTS
+>     - CARES_SET_COMPILER_WARNING_OPTS
+>     -
+>     - if test "$compiler_id" = "INTEL_UNIX_C"; then
+>     ---
+>     -2.8.0.rc3
+>     -
+>     diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     deleted file mode 100644
+>     index 4e28d6a..0000000
+>     --- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     +++ /dev/null
+>     @@ -1,15 +0,0 @@
+>     -# Copyright (c) 2012-2014 LG Electronics, Inc.
+>     -
+>     -SUMMARY = "c-ares is a C library that resolves names asynchronously."
+>     -HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/
+>     <http://daniel.haxx.se/projects/c-ares/>"
+>     -SECTION = "libs"
+>     -LICENSE = "MIT"
+>     -LIC_FILES_CHKSUM =
+>     "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
+>     -
+>     -SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz
+>     <http://c-ares.haxx.se/download/${BP}.tar.gz> \
+>     -         
+>       file://0001-configure.ac-don-t-override-passed-cflags.patch \
+>     -"
+>     -SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
+>     -SRC_URI[sha256sum] =
+>     "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
+>     -
+>     -inherit autotools pkgconfig
+>     diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     new file mode 100644
+>     index 0000000..46f0198
+>     --- /dev/null
+>     +++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     @@ -0,0 +1,16 @@
+>     +# Copyright (c) 2012-2014 LG Electronics, Inc.
+>     +SUMMARY = "c-ares is a C library that resolves names asynchronously."
+>     +HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/
+>     <http://daniel.haxx.se/projects/c-ares/>"
+>     +SECTION = "libs"
+>     +LICENSE = "MIT"
+>     +LIC_FILES_CHKSUM =
+>     "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
+>     +SRCREV = "3be1924221e1326df520f8498d704a5c4c8d0cce"
+>     +PV = "1.13.0+gitr${SRCPV}"
+>     +
+>     +SRC_URI = "git://github.com/c-ares/c-ares.git
+>     <http://github.com/c-ares/c-ares.git>"
+>     +
+>     +S = "${WORKDIR}/git"
+>     +
+>     +inherit cmake pkgconfig
+>     +
+>     +FILES_${PN}-dev += "${libdir}/cmake"
+>     --
+>     2.7.4
+> 
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+> 
+> 
 
