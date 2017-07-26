@@ -1,47 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f180.google.com (mail-yw0-f180.google.com
-	[209.85.161.180])
-	by mail.openembedded.org (Postfix) with ESMTP id 69B1C700F3
+Return-Path: <luca@lucaceresoli.net>
+X-Greylist: delayed 644 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 26 Jul 2017 10:01:16 UTC
+Received: from srv-hp10-72.netsons.net (srv-hp10-72.netsons.net [94.141.22.72])
+	by mail.openembedded.org (Postfix) with ESMTP id 45A0C781F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 09:34:17 +0000 (UTC)
-Received: by mail-yw0-f180.google.com with SMTP id l82so25932208ywc.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 02:34:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=SgbKUGGN0sJUdOEVNzaVxLdFK5s2R/wcpi8vUx1JuGA=;
-	b=LMSnB4tdS6W9YbDXnpxJo3SU1KdWdQePAsnRi7B0/HrGqeR7QfsD4tWsUJ7dxKtmFH
-	VBFV7g2kZ7KU1p3f9VladqLUUYBrFtdSNgPhlFJ8+Ea5xjoxXB12OiJY4V6VvSmGoH9K
-	9t9AiNUSUroKsGKv3354sXK6I7Pza+dHGy5dnbNepUzo/0D2OU++kQ43S3365g7z3yXU
-	TWmfX4Kx1XR2QrM5P14k1yznsxm7GcMgDkjsSqedUHiZ+c6qTwA/PBWWLfp5Bnlq8TVC
-	5YiB74ZChTTRj2rLkqNTWN3UHTw53u8htcjcVcQ1WCiruKvWpnEuOsNY4WUe3kCdqSwf
-	xCMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=SgbKUGGN0sJUdOEVNzaVxLdFK5s2R/wcpi8vUx1JuGA=;
-	b=N6pV+N2xdtJediV8sdkyRmFjqFotCojBk7RAKa+/jLSdnZBK0tchRFpsSykskN5P0w
-	fejOdrUcxelpugVZ8EaAnwxUxH1n6P1vSg99uc9gY5CcFAR6bUnVEzk7dOSs5PGAolxE
-	0fAJgInRkzGpHhEUPXQkLMB1i7s20noLjAIt3O+Unfsbo/TF+SJ4y7ZA5PFYHvdLfaPC
-	mzP0miF0MDZjvgy32YjNrEAddJbEv+OyGFxlH+uwvImSRCRxMo9S7fFFgC8yZhjIV4Cv
-	COCppF1r86ngKsLi2D6Bmi52ownBlTVQeDrt8bg8FW1MdjpSFtIZjxBoNYlcgu0IovEB
-	NJ+A==
-X-Gm-Message-State: AIVw113g8OH+Iq1Dlt6UkI0j3Sp8MqFAXhRtBzQHPtm2QiPMBx3xldMk
-	SAxhbZ4663udFT7QZ2Pb57k0BWxQyWq0
-X-Received: by 10.129.79.17 with SMTP id d17mr263332ywb.462.1501061659044;
-	Wed, 26 Jul 2017 02:34:19 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.37.73.196 with HTTP; Wed, 26 Jul 2017 02:34:18 -0700 (PDT)
-In-Reply-To: <1500831823-32660-1-git-send-email-alexey_firago@mentor.com>
-References: <1500831823-32660-1-git-send-email-alexey_firago@mentor.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 26 Jul 2017 11:34:18 +0200
-Message-ID: <CA+chaQcHfgXB-Lx8-BmxDpbP6hdF=PnXMQy9NGO2dDpVFsRvKw@mail.gmail.com>
-To: Alexey Firago <alexey_firago@mentor.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] c-ares: update 1.12.0 -> 1.13.0
+	Wed, 26 Jul 2017 10:01:16 +0000 (UTC)
+Received: from 45.11.168.109.cust.ip.kpnqwest.it ([109.168.11.45]:51910
+	helo=pc-ceresoli.dev.aim)
+	by srv-hp10.netsons.net with esmtpa (Exim 4.89)
+	(envelope-from <luca@lucaceresoli.net>)
+	id 1daJ81-001kIL-9f; Wed, 26 Jul 2017 12:01:17 +0200
+From: Luca Ceresoli <luca@lucaceresoli.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 26 Jul 2017 12:01:02 +0200
+Message-Id: <1501063262-31163-1-git-send-email-luca@lucaceresoli.net>
+X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1501062586-25070-1-git-send-email-luca@lucaceresoli.net>
+References: <1501062586-25070-1-git-send-email-luca@lucaceresoli.net>
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - srv-hp10.netsons.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - lucaceresoli.net
+X-Get-Message-Sender-Via: srv-hp10.netsons.net: authenticated_id:
+	luca+lucaceresoli.net/only user confirmed/virtual account not
+	confirmed
+X-Authenticated-Sender: srv-hp10.netsons.net: luca@lucaceresoli.net
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+Cc: Luca Ceresoli <luca@lucaceresoli.net>
+Subject: [meta-qt5][PATCH for jansa/master-5.9] qt5-ptest: fix build with yocto < 2.3 (pyro)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,233 +44,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 Jul 2017 09:34:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 26 Jul 2017 10:01:17 -0000
 
-There is few more changes at least worth mentioned in commit message (or
-better fixed to provide upgrade path)
+The expand parameter to DataSmart.getVar() defaults to True since
+yocto 2.3 (pyro) [0]. Stable Yocto releases 2.2 (morty) and 2.1
+(krogoth) had no default value. Older, now unsupported releases
+defaulted to False [1] [2].
 
-There are few new binaries in ${PN} so debian.bbclass no longer renames the
-package:
-diff --git a/packages/*-gnueabi/c-ares/c-ares/latest
-b/packages/*-gnueabi/c-ares/c-ares/latest
-index 479e475..5301942 100644
---- a/packages/*-gnueabi/c-ares/c-ares/latest
-+++ b/packages/*-gnueabi/c-ares/c-ares/latest
-@@ -1,10 +1,10 @@
--PV = 1.12.0
-+PV = 1.13.0+gitrAUTOINC+3be1924221
- PR = r0
-+PKGV = 1.13.0+gitr0+3be1924221
- PKGR = r0.0
--PKG = libcares2
--RPROVIDES = c-ares (=1.12.0)
-+RPROVIDES =
- RDEPENDS = glibc (>= 2.25.90) libgcc (>= 7.1.0)
- RRECOMMENDS =
--PKGSIZE = 43057
-+PKGSIZE = 85465
- FILES = /usr/bin/* /usr/sbin/* /usr/libexec/* /usr/lib/lib*.so.* /etc /com
-/var /bin/* /sbin/* /lib/*.so.* /lib/udev /usr/lib/udev /lib/udev /usr
--FILELIST = /usr/lib/libcares.so.2 /usr/lib/libcares.so.2.2.0
-+FILELIST = /usr/bin/acountry /usr/bin/adig /usr/bin/ahost
-/usr/lib/libcares.so.2 /usr/lib/libcares.so.2.2.0
+Not passing the expand parameter here means all recipes including
+qt5-ptest.inc won't build with yocto 2.2 and 2.1 with this error
+message:
 
+  ERROR: Error executing a python function in exec_python_func() autogenerated:
 
-It no longer installs libcares.pc, so all other components which were using
-pkg-config to find libcares are now failing
+  The stack trace of python calls that resulted in this exception/failure was:
+  File: 'exec_python_func() autogenerated', lineno: 2, function: <module>
+       0001:
+   *** 0002:do_populate_sysroot(d)
+       0003:
+  File: '[...]/poky/meta/classes/staging.bbclass', lineno: 226, function: do_populate_sysroot
+       0222:            continue
+       0223:        p = p.replace("/", "_")
+       0224:        with open(provdir + p, "w") as f:
+       0225:            f.write(pn)
+   *** 0226:}
+       0227:
+       0228:do_populate_sysroot[vardeps] += "${SYSROOT_PREPROCESS_FUNCS}"
+       0229:do_populate_sysroot[vardepsexclude] += "MULTI_PROVIDER_WHITELIST"
+       0230:
+  Exception: TypeError: getVar() missing 1 required positional argument: 'expand'
 
-diff --git a/packages/*-gnueabi/c-ares/c-ares-dev/latest
-b/packages/*-gnueabi/c-ares/c-ares-dev/latest
-index bebfa7c..c1d4015 100644
---- a/packages/*-gnueabi/c-ares/c-ares-dev/latest
-+++ b/packages/*-gnueabi/c-ares/c-ares-dev/latest
-@@ -1,10 +1,10 @@
--PV = 1.12.0
-+PV = 1.13.0+gitrAUTOINC+3be1924221
- PR = r0
-+PKGV = 1.13.0+gitr0+3be1924221
- PKGR = r0.0
--PKG = libcares-dev
--RPROVIDES = c-ares-dev (=1.12.0)
--RDEPENDS = c-ares (= 1.12.0-r0.0)
-+RPROVIDES =
-+RDEPENDS = c-ares (= 1.13.0+gitr0+3be1924221-r0.0)
- RRECOMMENDS = glibc-dev libgcc-dev
--PKGSIZE = 36789
--FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la
-/usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal
-/lib/*.o
--FILELIST = /usr/include/ares.h /usr/include/ares_build.h
-/usr/include/ares_dns.h /usr/include/ares_rules.h
-/usr/include/ares_version.h /usr/lib/l
-+PKGSIZE = 40640
-+FILES = /usr/include /lib/lib*.so /usr/lib/lib*.so /usr/lib/*.la
-/usr/lib/*.o /usr/lib/pkgconfig /usr/share/pkgconfig /usr/share/aclocal
-/lib/*.o
-+FILELIST = /usr/include/ares.h /usr/include/ares_build.h
-/usr/include/ares_dns.h /usr/include/ares_rules.h
-/usr/include/ares_version.h /usr/lib/c
+  DEBUG: Python function do_populate_sysroot finished
+  ERROR: Function failed: do_populate_sysroot
 
-the last lines are truncated, but here it's shown nicely:
-diff --git a/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt
-b/packages/*-gnueabi/c-ares/c-ares-dev/
-index d95ff9a..7f47aa1 100644
---- a/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt
-+++ b/packages/*-gnueabi/c-ares/c-ares-dev/files-in-package.txt
-@@ -1,11 +1,14 @@
- drwxr-xr-x root       root             4096 ./usr
- drwxr-xr-x root       root             4096 ./usr/include
---rw-r--r-- root       root             3646 ./usr/include/ares_build.h
-+-rw-r--r-- root       root              959 ./usr/include/ares_build.h
- -rw-r--r-- root       root             5306 ./usr/include/ares_dns.h
---rw-r--r-- root       root            22343 ./usr/include/ares.h
-+-rw-r--r-- root       root            23253 ./usr/include/ares.h
- -rw-r--r-- root       root             4278 ./usr/include/ares_rules.h
---rw-r--r-- root       root              648 ./usr/include/ares_version.h
-+-rw-r--r-- root       root              652 ./usr/include/ares_version.h
- drwxr-xr-x root       root             4096 ./usr/lib
--lrwxrwxrwx root       root               17 ./usr/lib/libcares.so ->
-libcares.so.2.2.0
--drwxr-xr-x root       root             4096 ./usr/lib/pkgconfig
---rw-r--r-- root       root              551 ./usr/lib/pkgconfig/libcares.pc
-+drwxr-xr-x root       root             4096 ./usr/lib/cmake
-+drwxr-xr-x root       root             4096 ./usr/lib/cmake/c-ares
-+-rw-r--r-- root       root             1606
-./usr/lib/cmake/c-ares/c-ares-config.cmake
-+-rw-r--r-- root       root             3775
-./usr/lib/cmake/c-ares/c-ares-targets.cmake
-+-rw-r--r-- root       root              798
-./usr/lib/cmake/c-ares/c-ares-targets-noconfig.cmake
-+lrwxrwxrwx root       root               13 ./usr/lib/libcares.so ->
-libcares.so.2
+Fixing this in a user layer requires duplicating the entire
+do_populate_sysroot_append() in the .bbappend of all packages
+including qt5-ptest.inc, i.e. currently qtdeclarative and
+qtxmlpatterns.
 
+Avoid the hassle for those users by explicitly passing expand=True.
 
-On Sun, Jul 23, 2017 at 7:43 PM, Alexey Firago <alexey_firago@mentor.com>
-wrote:
+[0] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=2631c375b8a025ee2e4329f6d93900bb7b5dadf7
+[1] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=c7610aa353e31977c099ce574acb188a3f4219e0
+[2] http://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=4e5e501155a21fe64a470c626b3afe6d9748308e
+---
+ recipes-qt/qt5/qt5-ptest.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-> Update to c-ares version 1.13.0 from June 20 2017
->
-> Recipe updates:
->  * Change SRC_URI to github, because tarball at
->    https://c-ares.haxx.se/download/c-ares-1.13.0.tar.gz
->    does not include all required files (cmake related).
->  * Change build method to cmake. Library now supports cmake
->    build system and installs *.cmake config files. These files can
->    be used by several libraries/packages, such as gRPC, curl.
->
-> Highlights of library changes and bug fixes:
->  * cmake build system support added
->  * Add virtual function set for socket IO: ares_set_socket_functions
->  * CVE-2017-1000381: c-ares NAPTR parser out of bounds access
->
-> Full changelog - https://c-ares.haxx.se/changelog.html
->
-> Signed-off-by: Alexey Firago <alexey_firago@mentor.com>
-> ---
->  ...configure.ac-don-t-override-passed-cflags.patch | 26
-> ----------------------
->  .../recipes-support/c-ares/c-ares_1.12.0.bb        | 15 -------------
->  .../recipes-support/c-ares/c-ares_1.13.0.bb        | 16 +++++++++++++
->  3 files changed, 16 insertions(+), 41 deletions(-)
->  delete mode 100644 meta-networking/recipes-support/c-ares/c-ares/0001-
-> configure.ac-don-t-override-passed-cflags.patch
->  delete mode 100644 meta-networking/recipes-support/c-ares/c-ares_1.12.0.
-> bb
->  create mode 100644 meta-networking/recipes-support/c-ares/c-ares_1.13.0.
-> bb
->
-> diff --git a/meta-networking/recipes-support/c-ares/c-ares/0001-
-> configure.ac-don-t-override-passed-cflags.patch b/meta-networking/recipes-
-> support/c-ares/c-ares/0001-configure.ac-don-t-override-passed-cflags.patch
-> deleted file mode 100644
-> index 10fad4e..0000000
-> --- a/meta-networking/recipes-support/c-ares/c-ares/0001-
-> configure.ac-don-t-override-passed-cflags.patch
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -From 2a7236d2a7bb9c3d3c3f44ebf59404bf7134fcb3 Mon Sep 17 00:00:00 2001
-> -From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <adraszik@tycoint.com>
-> -Date: Tue, 12 Apr 2016 11:37:28 +0100
-> -Subject: [PATCH] configure.ac: don't override passed cflags
-> -
-> -We are controlling debug and optimiser flags from OE
-> ----
-> - configure.ac | 2 --
-> - 1 file changed, 2 deletions(-)
-> -
-> -diff --git a/configure.ac b/configure.ac
-> -index 5c02450..3cf9fcd 100644
-> ---- a/configure.ac
-> -+++ b/configure.ac
-> -@@ -147,8 +147,6 @@ dnl ******************************
-> ****************************************
-> -
-> - CARES_CHECK_COMPILER
-> - CARES_SET_COMPILER_BASIC_OPTS
-> --CARES_SET_COMPILER_DEBUG_OPTS
-> --CARES_SET_COMPILER_OPTIMIZE_OPTS
-> - CARES_SET_COMPILER_WARNING_OPTS
-> -
-> - if test "$compiler_id" = "INTEL_UNIX_C"; then
-> ---
-> -2.8.0.rc3
-> -
-> diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> b/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> deleted file mode 100644
-> index 4e28d6a..0000000
-> --- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -# Copyright (c) 2012-2014 LG Electronics, Inc.
-> -
-> -SUMMARY = "c-ares is a C library that resolves names asynchronously."
-> -HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
-> -SECTION = "libs"
-> -LICENSE = "MIT"
-> -LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47cc
-> ac"
-> -
-> -SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
-> -           file://0001-configure.ac-don-t-override-passed-cflags.patch \
-> -"
-> -SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
-> -SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021
-> 665118ee9bfea905d1a76f04d4e6f365fb"
-> -
-> -inherit autotools pkgconfig
-> diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> new file mode 100644
-> index 0000000..46f0198
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> @@ -0,0 +1,16 @@
-> +# Copyright (c) 2012-2014 LG Electronics, Inc.
-> +SUMMARY = "c-ares is a C library that resolves names asynchronously."
-> +HOMEPAGE = "http://daniel.haxx.se/projects/c-ares/"
-> +SECTION = "libs"
-> +LICENSE = "MIT"
-> +LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47cc
-> ac"
-> +SRCREV = "3be1924221e1326df520f8498d704a5c4c8d0cce"
-> +PV = "1.13.0+gitr${SRCPV}"
-> +
-> +SRC_URI = "git://github.com/c-ares/c-ares.git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake pkgconfig
-> +
-> +FILES_${PN}-dev += "${libdir}/cmake"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
+index da0b65a83a1a..24752d2b5b55 100644
+--- a/recipes-qt/qt5/qt5-ptest.inc
++++ b/recipes-qt/qt5/qt5-ptest.inc
+@@ -14,7 +14,7 @@ do_compile_ptest() {
+ }
+ 
+ do_populate_sysroot_append() {
+-    workdir = d.getVar('WORKDIR')
++    workdir = d.getVar('WORKDIR', True)
+     srcdir = workdir + '/sysroot-destdir/usr/'
+     destdir = workdir + '/recipe-sysroot/usr/'
+     
+-- 
+2.7.4
+
 
