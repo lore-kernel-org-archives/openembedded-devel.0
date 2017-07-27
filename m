@@ -1,54 +1,23 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 215A577E83
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B4E2780F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jul 2017 04:45:42 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id k190so27363951pgk.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 Jul 2017 21:45:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:organization:message-id:date
-	:user-agent:mime-version:in-reply-to;
-	bh=TmBXDFA1H1ziW2xGHuWkrIONsBLdFaakaNWBaiDSRoc=;
-	b=H66484N35GAW6adxzspAsBu086W34HkgGPBavJ7J+tm/egzVo05Q3bUDysn/E0Uvir
-	I2I0i0TbUT8S3wWMiAnP+6R9TFnQ5JKkw6lAeyeJfUtDcIdlOq1df3RQpyPFlC6Mypne
-	o7srMBLSvQn7jbt+/HxWagHrEjRUAHHcKo3Ce6qt7LzDNT7oDdOIOnN4HLctG8rkL5bd
-	wfujtnkTaD+FrEFjezO8ctHAu/zL0TGBGxdx02bk8SjJ2VuJqTN2J24sufIzdDqI1lOo
-	t/r3QuT7o8HmcKW+8jfNAmnbHgkFAJZBp2s9nhObIX1+qwNZrMWwd/AWoSuKKXNWbLR1
-	77Xg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to;
-	bh=TmBXDFA1H1ziW2xGHuWkrIONsBLdFaakaNWBaiDSRoc=;
-	b=uK72VRsF0dzUTVy+XaT7xO/xr7GepkERd5giEHc/w3sFkd7xV4mAZvEufaeSXDtTo6
-	NxqONmk8OhiLAuvGgm4+bWGt4h19mZ0v309D+cV0bV4VWm6fweHmsHbcUAxcJAXjMRL2
-	kmD7QaOfIeOYuSeak+o5i63wFIAMcrJmE5PJtppCc/CANPqMtACm0eBG3N67I1kz8jep
-	tV3qBt0iTzUsQJ32eDxDJJGd0/eOHc6NCumT/rCjkkN8Z7z8HwFhjwn4jd/jbCStMCgP
-	73GvlMP+j20uvxjSekz3JhTOL3HsgI18nN03Od/Usk+tQEGsiZx0mGLlG6BqO3yo2D32
-	eLkw==
-X-Gm-Message-State: AIVw110gvXoi4IhuVq6Rwg9t24XgPHr+oHyJ7w0ACfe90aoY6w0m5GDq
-	sXhCIuEYwZEnrg==
-X-Received: by 10.84.133.193 with SMTP id f59mr3144369plf.316.1501130743430;
-	Wed, 26 Jul 2017 21:45:43 -0700 (PDT)
-Received: from Khems-MacBook-Pro.local ([2601:646:8882:b8c::397b])
-	by smtp.gmail.com with ESMTPSA id p78sm976190pfa.46.2017.07.26.21.45.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 26 Jul 2017 21:45:42 -0700 (PDT)
-To: Flavian Manea <flavian.manea@rinftech.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <VI1PR10MB068863542F730ACA8867F5FE8FB90@VI1PR10MB0688.EURPRD10.PROD.OUTLOOK.COM>
-From: Khem Raj <raj.khem@gmail.com>
-Organization: HIMVIS LLC
-Message-ID: <158b26cc-6342-3521-6508-7d8ca0e5a03a@gmail.com>
-Date: Wed, 26 Jul 2017 21:45:36 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:55.0)
-	Gecko/20100101 Thunderbird/55.0
+	Thu, 27 Jul 2017 08:44:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6R8iSJj028259
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 27 Jul 2017 01:44:28 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
+	Thu, 27 Jul 2017 01:44:27 -0700
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 27 Jul 2017 04:44:20 -0400
+Message-ID: <cover.1501142861.git.hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <VI1PR10MB068863542F730ACA8867F5FE8FB90@VI1PR10MB0688.EURPRD10.PROD.OUTLOOK.COM>
-Cc: Stefan Andritoiu <stefan.andritoiu@rinftech.com>
-Subject: Re: OpenJdk9
+Subject: [PATCH 0/6] add 5 recipes and 1 bug fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,119 +30,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jul 2017 04:45:43 -0000
-X-Groupsio-MsgNum: 67886
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="QCW1LkXrrvvi58WTWESAJkWctSpjGdCBk"
+X-List-Received-Date: Thu, 27 Jul 2017 08:44:28 -0000
+Content-Type: text/plain
 
---QCW1LkXrrvvi58WTWESAJkWctSpjGdCBk
-Content-Type: multipart/mixed; boundary="MIQtv8PQje2wPAdJwUIv8gikqnNQaMR2g";
- protected-headers="v1"
-From: Khem Raj <raj.khem@gmail.com>
-To: Flavian Manea <flavian.manea@rinftech.com>,
- "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>
-Cc: Stefan Andritoiu <stefan.andritoiu@rinftech.com>
-Message-ID: <158b26cc-6342-3521-6508-7d8ca0e5a03a@gmail.com>
-Subject: Re: [oe] OpenJdk9
-References: <VI1PR10MB068863542F730ACA8867F5FE8FB90@VI1PR10MB0688.EURPRD10.PROD.OUTLOOK.COM>
-In-Reply-To: <VI1PR10MB068863542F730ACA8867F5FE8FB90@VI1PR10MB0688.EURPRD10.PROD.OUTLOOK.COM>
+Changed in V2:
 
---MIQtv8PQje2wPAdJwUIv8gikqnNQaMR2g
-Content-Type: text/plain; charset=windows-1250
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+- s/fix contamination on centos7/fix host contamination on centos7/
 
+//Hongxu
 
+The following changes since commit a3a1ff1d411bcee88ed56caf4c9a7148c4a6e54a:
 
-On 7/26/17 9:22 AM, Flavian Manea wrote:
-> Hello guys,
->=20
->=20
->=20
-> I am trying to make an openJdk9, based on what have been done on the op=
-enJdk8 recipes (excluding patches)., and I am struggling with some proble=
-ms relating to "./configure" part, in the do_configure step (which is not=
- specified in the recipe).
->=20
->=20
-> I suspect that yocto/autotools/autoconf tries to look for configure.ac,=
- but in our case, the ./configure script comes directly configured from t=
-he repository and there is no need "regenerate" it.
->=20
->=20
-> A part of the log can be seen here:
->=20
-> "
->=20
-> | autoreconf: configure.ac: tracing
-> | autoreconf: configure.ac: creating directory $TOPDIR/common/autoconf/=
-build-aux
-> | autoreconf: cannot create $TOPDIR/common/autoconf/build-aux: No such =
-file or directory
-> | autoreconf: configure.ac: not using Libtool
-> | autoreconf: running: /home/fmanea/buildPulsar8/wr-core/build-intel-x8=
-6/tmp/sysroots/x86_64-linux/usr/bin/autoconf --include=3D/home/fmanea/bui=
-ldPulsar8/wr-core/build-intel-x86/tmp/work/x86_64-linux/openjdk-9-native/=
-102b14-r0/jdk9-d2982a786f53/common/autoconf/ --include=3D/home/fmanea/bui=
-ldPulsar8/wr-core/build-intel-x86/tmp/work/x86_64-linux/openjdk-9-native/=
-102b14-r0/jdk9-d2982a786f53/common/autoconf/build-aux/ --force
-> | autoreconf: configure.ac: not using Autoheader
-> | autoreconf: configure.ac: not using Automake
-> | autoreconf: running: gnu-configize
-> | gnu-configize: cannot create $TOPDIR/common/autoconf/build-aux: No su=
-ch file or directory
-> | cp: cannot create regular file '/common/autoconf/build-aux/': No such=
- file or directory
-> | gnu-configize: cp failed with exit status: 1
-> | autoreconf: gnu-configize failed with exit status: 1
-> | ERROR: autoreconf execution failed.
-> | ERROR: Function failed: do_configure (log file is located at /home/fm=
-anea/buildPulsar8/wr-core/build-intel-x86/tmp/work/x86_64-linux/openjdk-9=
--native/102b14-r0/temp/log.do_configure.16943)
-> "
->=20
->=20
-> Has anyone struggled with ./configure/make parts in yocto, or is this i=
-ssue familiar to someone?
->=20
+  usermode: add recipe 1.111 (2017-07-24 21:13:11 -0400)
 
-you can override do_configure if you dont want default behavior as
-defined in autotools class which is to regenerate configure scripts
-using autoreconf. you could do something like
+are available in the git repository at:
 
-do_configure() {
-    oe_runconf
-}
+  git://git.openembedded.org/openembedded-core-contrib hongxu/add-recipe2
+  http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/add-recipe2
 
->=20
-> Thank you,
->=20
-> Flavian
->=20
->=20
-> RINF Tech
-> Flavian Manea
-> flavian.manea<mailto:gabriel.simion@rinftech.com>@rinftech.com<mailto:g=
-abriel.simion@rinftech.com> | www.rinftech.com<http://www.rinftech.com>
-> 4 Gara Herastrau Street, Building B =96 Skanska Green Court, 3rd floor,=
- 2nd District, Bucharest Romania
->=20
+Hongxu Jia (6):
+  glade: fix host contamination on centos7
+  tigervnc: add recipe 1.8.0
+  libreport: add recipe 2.9.1
+  libblockdev: add recipe 2.10
+  python3-blivet: add recipe 2.2.0
+  python3-blivetgui: add recipe 2.1.5
+
+ meta-oe/recipes-devtools/glade/glade_3.20.0.bb     |   4 +-
+ .../0001-fix-configure-and-compile-failures.patch  |  79 ++++
+ .../files/0002-remove-python2-support.patch        |  30 ++
+ ...emove-dmraid-while-compiling-with-with-dm.patch | 470 +++++++++++++++++++++
+ ...ix-compile-failure-against-musl-C-library.patch |  50 +++
+ .../libblockdev/libblockdev_2.10.bb                |  50 +++
+ .../0001-Makefile.am-remove-doc-and-apidoc.patch   |  28 ++
+ ...ac-remove-prog-test-of-xmlto-and-asciidoc.patch |  48 +++
+ .../files/0003-without-build-plugins.patch         |  26 ++
+ ...configure.ac-remove-prog-test-of-augparse.patch |  36 ++
+ .../files/0005-remove-python2-support.patch        | 142 +++++++
+ .../recipes-extended/libreport/libreport_2.9.1.bb  |  43 ++
+ .../files/0001-tigervnc-remove-includedir.patch    |  50 +++
+ .../0002-do-not-build-tests-sub-directory.patch    |  29 ++
+ ...missing-dynamic-library-to-FLTK_LIBRARIES.patch |  28 ++
+ ...tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch |  62 +++
+ .../recipes-graphics/tigervnc/tigervnc_1.8.0.bb    | 131 ++++++
+ .../python3-blivet/0001-comment-out-selinux.patch  |  70 +++
+ .../0002-run_program-support-timeout.patch         | 102 +++++
+ .../0003-support-infinit-timeout.patch             |  66 +++
+ .../0004-Mount-var-volatile-during-install.patch   |  59 +++
+ .../0005-update-fstab-by-appending.patch           |  32 ++
+ ...0006-fix-new.roots-object-is-not-iterable.patch |  28 ++
+ ...correct-timeout-while-system-time-changed.patch |  48 +++
+ .../python3-blivet/0008-tweak-btrfs-packages.patch |  45 ++
+ ...0009-invoking-mount-with-infinite-timeout.patch |  31 ++
+ ...-use-oe-variable-to-replace-hardcoded-dir.patch |  34 ++
+ .../0011-invoking-fsck-with-infinite-timeout.patch |  31 ++
+ .../0012-invoking-mkfs-with-infinite-timeout.patch |  31 ++
+ ...evert-Adapt-to-logging-module-name-change.patch |  30 ++
+ .../python-blivet/python3-blivet_2.2.0.bb          |  46 ++
+ .../python-blivet/python3-blivetgui_2.1.5.bb       |  27 ++
+ 32 files changed, 1983 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/libblockdev_2.10.bb
+ create mode 100644 meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
+ create mode 100644 meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
+ create mode 100644 meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
+ create mode 100644 meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
+ create mode 100644 meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch
+ create mode 100644 meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+ create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0001-tigervnc-remove-includedir.patch
+ create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0002-do-not-build-tests-sub-directory.patch
+ create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch
+ create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch
+ create mode 100644 meta-oe/recipes-graphics/tigervnc/tigervnc_1.8.0.bb
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0001-comment-out-selinux.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0002-run_program-support-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0003-support-infinit-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0004-Mount-var-volatile-during-install.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0005-update-fstab-by-appending.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0006-fix-new.roots-object-is-not-iterable.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0007-fix-incorrect-timeout-while-system-time-changed.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0008-tweak-btrfs-packages.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0009-invoking-mount-with-infinite-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0010-use-oe-variable-to-replace-hardcoded-dir.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0011-invoking-fsck-with-infinite-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0012-invoking-mkfs-with-infinite-timeout.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet/0013-Revert-Adapt-to-logging-module-name-change.patch
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
+ create mode 100644 meta-python/recipes-extended/python-blivet/python3-blivetgui_2.1.5.bb
+
+-- 
+2.8.1
 
 
---MIQtv8PQje2wPAdJwUIv8gikqnNQaMR2g--
-
---QCW1LkXrrvvi58WTWESAJkWctSpjGdCBk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iEYEARECAAYFAll5b/QACgkQuwUzVZGdMxRxBwCfV8q/z9AfgOoOPUAzTph1fdaP
-sTgAnRCmNCS6NWj5+ygjl3/CgjCw+z4B
-=YKyF
------END PGP SIGNATURE-----
-
---QCW1LkXrrvvi58WTWESAJkWctSpjGdCBk--
