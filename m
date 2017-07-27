@@ -1,25 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 94A616FEE0
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4187D7826F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 Jul 2017 08:44:32 +0000 (UTC)
+	Thu, 27 Jul 2017 08:44:34 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v6R8iXk0028262
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 27 Jul 2017 01:44:33 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v6R8iYn6006193
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 27 Jul 2017 01:44:35 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.294.0;
-	Thu, 27 Jul 2017 01:44:32 -0700
+	Thu, 27 Jul 2017 01:44:34 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 27 Jul 2017 04:44:23 -0400
-Message-ID: <9a8f3b3b988d86861b41591062e0ad441023a434.1501142861.git.hongxu.jia@windriver.com>
+Date: Thu, 27 Jul 2017 04:44:24 -0400
+Message-ID: <a2ac19a34f5765b1ff7c3366d472af130a62f49e.1501142861.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1501142861.git.hongxu.jia@windriver.com>
 References: <cover.1501142861.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 3/6] libreport: add recipe 2.9.1
+Subject: [PATCH 4/6] libblockdev: add recipe 2.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,383 +32,731 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 Jul 2017 08:44:32 -0000
+X-List-Received-Date: Thu, 27 Jul 2017 08:44:34 -0000
 Content-Type: text/plain
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../0001-Makefile.am-remove-doc-and-apidoc.patch   |  28 ++++
- ...ac-remove-prog-test-of-xmlto-and-asciidoc.patch |  48 +++++++
- .../files/0003-without-build-plugins.patch         |  26 ++++
- ...configure.ac-remove-prog-test-of-augparse.patch |  36 ++++++
- .../files/0005-remove-python2-support.patch        | 142 +++++++++++++++++++++
- .../recipes-extended/libreport/libreport_2.9.1.bb  |  43 +++++++
- 6 files changed, 323 insertions(+)
- create mode 100644 meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
- create mode 100644 meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
- create mode 100644 meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
- create mode 100644 meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
- create mode 100644 meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch
- create mode 100644 meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+ .../0001-fix-configure-and-compile-failures.patch  |  79 ++++
+ .../files/0002-remove-python2-support.patch        |  30 ++
+ ...emove-dmraid-while-compiling-with-with-dm.patch | 470 +++++++++++++++++++++
+ ...ix-compile-failure-against-musl-C-library.patch |  50 +++
+ .../libblockdev/libblockdev_2.10.bb                |  50 +++
+ 5 files changed, 679 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
+ create mode 100644 meta-oe/recipes-extended/libblockdev/libblockdev_2.10.bb
 
-diff --git a/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch b/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch b/meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch
 new file mode 100644
-index 0000000..9b328a1
+index 0000000..914ee99
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/files/0001-Makefile.am-remove-doc-and-apidoc.patch
-@@ -0,0 +1,28 @@
-+From db32ba60ca75d288d3ac08b54256cb74d9e1581a Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/libblockdev/files/0001-fix-configure-and-compile-failures.patch
+@@ -0,0 +1,79 @@
++From 86686ccbf43c5d9e8c8dc97c66ba09e522050e5e Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 26 Apr 2017 03:47:58 -0400
-+Subject: [PATCH 1/3] Makefile.am: remove doc and apidoc
++Date: Thu, 27 Jul 2017 10:06:24 +0800
++Subject: [PATCH 1/3] fix configure and compile failures
 +
-+There was a failure at do_install time, so remove doc to workaround.
++1. Fix do_configure failure
++---------------------------
++|Checking header volume_key/libvolume_key.h existence and usability.
++../tmp/6tvtK.c:1:38: fatal error: volume_key/libvolume_key.h:
++No such file or directory
++| #include <volume_key/libvolume_key.h>
++|Checking header dmraid/dmraid.h existence and usability.../tmp/
++ktVJ6.c:1:27: fatal error: dmraid/dmraid.h: No such file or directory
++| #include <dmraid/dmraid.h>
++---------------------------
++We explictly add volume_key and dmraid to DEPENDS, do not need
++configure to test.
 +
-+Upstream-Status:  Inappropriate workaround
++2. Fix config.h not found
++Add it to configure.ac
++
++3. Correct AC_DEFINE
++...
++autoheader: warning: missing template: LIBMOUNT_NEW_ERR_API
++autoheader: Use AC_DEFINE([LIBMOUNT_NEW_ERR_API], [], [Description])
++...
++
++Upstream-Status: Inappropriate [oe specific]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index c6ab640..fb09fc1 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -1,5 +1,5 @@
-+ ACLOCAL_AMFLAGS = -I m4
-+-SUBDIRS = po src tests doc apidoc
-++SUBDIRS = po src tests
-+ 
-+ EXTRA_DIST = \
-+     libreport.pc.in \
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch b/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
-new file mode 100644
-index 0000000..146510e
---- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/files/0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
-@@ -0,0 +1,48 @@
-+From d8c49e6a15ab28f4ca94e03b2a53ed8df63346cd Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 26 Apr 2017 03:49:45 -0400
-+Subject: [PATCH 2/3] configure.ac: remove prog test of xmlto and asciidoc
-+
-+The prog of xmlto and asciidoc were used to generate documents,
-+and since the doc module has already been disabled, so we should
-+remove the prog test.
-+
-+Upstream-Status:  Inappropriate workaround
-+
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ configure.ac | 18 ------------------
-+ 1 file changed, 18 deletions(-)
++ configure.ac | 10 ++++------
++ 1 file changed, 4 insertions(+), 6 deletions(-)
 +
 +diff --git a/configure.ac b/configure.ac
-+index ccefe50..ed48c88 100644
++index 0270c99..b7c7368 100644
 +--- a/configure.ac
 ++++ b/configure.ac
-+@@ -68,24 +68,6 @@ if test -z "$PYTHON3"; then
-+     exit 1
-+ fi
++@@ -9,6 +9,8 @@ AC_DISABLE_STATIC
++ AM_INIT_AUTOMAKE([foreign -Wall -Werror -Wno-syntax -Wno-portability])
++ AC_CONFIG_MACRO_DIR([m4])
 + 
-+-AC_PATH_PROG([ASCIIDOC], [asciidoc], [no])
-+-[if test "$ASCIIDOC" = "no"]
-+-[then]
-+-    [echo "The asciidoc program was not found in the search path. Please ensure"]
-+-    [echo "that it is installed and its directory is included in the search path."]
-+-    [echo "Then run configure again before attempting to build libreport."]
-+-    [exit 1]
-+-[fi]
-+-
-+-AC_PATH_PROG([XMLTO], [xmlto], [no])
-+-[if test "$XMLTO" = "no"]
-+-[then]
-+-    [echo "The xmlto program was not found in the search path. Please ensure"]
-+-    [echo "that it is installed and its directory is included in the search path."]
-+-    [echo "Then run configure again before attempting to build libreport."]
-+-    [exit 1]
-+-[fi]
-+-
-+ AC_ARG_WITH(bugzilla,
-+ AS_HELP_STRING([--with-bugzilla],[use Bugzilla plugin (default is YES)]),
-+ LIBREPORT_PARSE_WITH([bugzilla]))
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch b/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
-new file mode 100644
-index 0000000..3ad7774
---- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/files/0003-without-build-plugins.patch
-@@ -0,0 +1,26 @@
-+From 0e96d9f23b2b166e7444e7c8e0a6d4b83c2eccd7 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Wed, 26 Apr 2017 03:51:03 -0400
-+Subject: [PATCH 3/3] without build plugins
-+
-+Upstream-Status:  Inappropriate workaround
-+
-+Rebase to 2.9.1
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ src/Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/Makefile.am b/src/Makefile.am
-+index c15928c..bac02b1 100644
-+--- a/src/Makefile.am
-++++ b/src/Makefile.am
-+@@ -8,4 +8,4 @@ if BUILD_NEWT
-+ sub_dirs += report-newt
-+ endif
+++AC_CONFIG_HEADERS([config.h])
+++
++ AM_PATH_PYTHON
 + 
-+-SUBDIRS = include lib plugins report-python cli client-python workflows $(sub_dirs)
-++SUBDIRS = include lib report-python cli client-python workflows $(sub_dirs)
++ AM_PROG_AR
++@@ -129,7 +131,6 @@ LIBBLOCKDEV_PKG_CHECK_MODULES([UDEV], [libudev >= 216])
++ AS_IF([test "x$with_crypto" != "xno"],
++       [LIBBLOCKDEV_PKG_CHECK_MODULES([CRYPTSETUP], [libcryptsetup >= 1.6.7])
++        LIBBLOCKDEV_PKG_CHECK_MODULES([NSS], [nss >= 3.18.0])
++-       LIBBLOCKDEV_CHECK_HEADER([volume_key/libvolume_key.h], [$GLIB_CFLAGS $NSS_CFLAGS], [libvolume_key.h not available])
++       ],
++       [])
++ 
++@@ -137,10 +138,6 @@ AS_IF([test "x$with_dm" != "xno" -o "x$with_lvm" != "xno" -o "x$with_lvm_dbus" !
++       [LIBBLOCKDEV_PKG_CHECK_MODULES([DEVMAPPER], [devmapper >= 1.02.93])],
++       [])
++ 
++-AS_IF([test "x$with_dm" != "xno"],
++-      [LIBBLOCKDEV_CHECK_HEADER([dmraid/dmraid.h], [], [dmraid.h not available])],
++-      [])
++-
++ AS_IF([test "x$with_kbd" != "xno"],
++       [LIBBLOCKDEV_PKG_CHECK_MODULES([KMOD], [libkmod >= 19])],
++       [])
++@@ -154,7 +151,8 @@ AS_IF([test "x$with_fs" != "xno"],
++       [LIBBLOCKDEV_PKG_CHECK_MODULES([MOUNT], [mount >= 2.23.0])
++        # new versions of libmount has some new functions we can use
++        AS_IF([$PKG_CONFIG --atleast-version=2.30.0 mount],
++-             [AC_DEFINE([LIBMOUNT_NEW_ERR_API])], [])
+++             [AC_DEFINE([LIBMOUNT_NEW_ERR_API], [1], [new versions of libmount has some new functions we can use])],
+++             [])
++ 
++        LIBBLOCKDEV_PKG_CHECK_MODULES([BLKID], [blkid >= 2.23.0])
++        # older versions of libblkid don't support BLKID_SUBLKS_BADCSUM so let's just
 +-- 
-+2.8.1
++1.8.3.1
 +
-diff --git a/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch b/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch b/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
 new file mode 100644
-index 0000000..9839e5a
+index 0000000..0719759
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/files/0004-configure.ac-remove-prog-test-of-augparse.patch
-@@ -0,0 +1,36 @@
-+From cf3b646facc19078ed29f828e36dd2e552283518 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/libblockdev/files/0002-remove-python2-support.patch
+@@ -0,0 +1,30 @@
++From 40dae7ea6450cb30f066da8443eabf063b5b0ad7 Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 27 Apr 2017 02:15:02 -0400
-+Subject: [PATCH] configure.ac: remove prog test of augparse
++Date: Mon, 8 May 2017 02:05:40 -0400
++Subject: [PATCH 2/3] remove python2 support
 +
-+The build time does not require it.
++Only python3 is required.
 +
-+Upstream-Status:  Inappropriate workaround
++Upstream-Status: Inappropriate [wr-installer specific]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ configure.ac | 8 --------
-+ 1 file changed, 8 deletions(-)
++ src/python/gi/overrides/Makefile.am | 5 -----
++ 1 file changed, 5 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index c06af2d..b90f49e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -288,14 +288,6 @@ AC_ARG_WITH(augeaslenslibdir,
-+                            [Directory for librepor lens (default: /usr/share/augeas/lenses)])],
-+             [], [with_augeaslenslibdir="/usr/share/augeas/lenses"])
-+ AC_SUBST([AUGEAS_LENS_LIB_DIR], [$with_augeaslenslibdir])
-+-AC_PATH_PROG(AUGPARSE, augparse, no)
-+-[if test "$AUGPARSE" = "no"]
-+-[then]
-+-    [echo "The augparse program was not found in the search path. Please ensure"]
-+-    [echo "that it is installed and its directory is included in the search path."]
-+-    [echo "Then run configure again before attempting to build libreport."]
-+-    [exit 1]
-+-[fi]
-+ 
-+ AC_ARG_WITH([defaultdumpdirmode],
-+             AS_HELP_STRING([--with-defaultdumpdirmode=OCTAL-MODE],
++diff --git a/src/python/gi/overrides/Makefile.am b/src/python/gi/overrides/Makefile.am
++index a2927ac..6385502 100644
++--- a/src/python/gi/overrides/Makefile.am
+++++ b/src/python/gi/overrides/Makefile.am
++@@ -1,8 +1,3 @@
++-pylibdir = $(shell python -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(1,0,prefix='${exec_prefix}'))")
++-
++-overridesdir = $(pylibdir)/gi/overrides
++-dist_overrides_DATA = BlockDev.py
++-
++ if WITH_PYTHON3
++ py3libdir = $(shell python3 -c "import distutils.sysconfig; print(distutils.sysconfig.get_python_lib(1,0,prefix='${exec_prefix}'))")
++ py3overridesdir = $(py3libdir)/gi/overrides
 +-- 
-+2.8.1
++1.8.3.1
 +
-diff --git a/meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch b/meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch b/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
 new file mode 100644
-index 0000000..9770f07
+index 0000000..3d9cb6d
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/files/0005-remove-python2-support.patch
-@@ -0,0 +1,142 @@
-+From 06710ab89fc7d7a82a378289aa3fcd92d33074f2 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-extended/libblockdev/files/0003-remove-dmraid-while-compiling-with-with-dm.patch
+@@ -0,0 +1,470 @@
++From bda7c937ba544182a5cae2a9cf0c173e0ba268c9 Mon Sep 17 00:00:00 2001
 +From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 27 Apr 2017 03:31:00 -0400
-+Subject: [PATCH] remove python2 support
++Date: Thu, 27 Jul 2017 09:47:23 +0800
++Subject: [PATCH 3/3] remove dmraid while compiling with --with-dm
 +
-+We do not require python2, so remove it.
++Fix the following failure:
 +
-+Upstream-Status:  Inappropriate workaround
++...
++Perhaps you should add the directory containing `dmraid.pc'
++to the PKG_CONFIG_PATH environment variable
++No package 'dmraid' found
++...
++
++...
++../../../git/src/plugins/dm.c:24:10: fatal error: dmraid/dmraid.h: No
++such file or directory
++ #include <dmraid/dmraid.h>
++          ^~~~~~~~~~~~~~~~~
++...
++
++Upstream-Status: Inappropriate [oe specific]
 +
 +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 +---
-+ configure.ac                               | 15 ---------------
-+ src/client-python/reportclient/Makefile.am |  9 ---------
-+ src/report-python/Makefile.am              | 19 -------------------
-+ 3 files changed, 43 deletions(-)
++ src/lib/plugin_apis/dm.api          |  41 -----
++ src/plugins/Makefile.am             |   2 +-
++ src/plugins/dm.c                    | 318 ------------------------------------
++ src/plugins/dm.h                    |   5 -
++ src/python/gi/overrides/BlockDev.py |   6 -
++ 5 files changed, 1 insertion(+), 371 deletions(-)
 +
-+diff --git a/configure.ac b/configure.ac
-+index eb50382..826d0fe 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -166,15 +166,6 @@ do
-+ done
-+ fi dnl end NO_MANTISBT
++diff --git a/src/lib/plugin_apis/dm.api b/src/lib/plugin_apis/dm.api
++index a885bba..ec86b80 100644
++--- a/src/lib/plugin_apis/dm.api
+++++ b/src/lib/plugin_apis/dm.api
++@@ -68,44 +68,3 @@ gchar* bd_dm_node_from_name (const gchar *map_name, GError **error);
++  */
++ gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean active_only, GError **error);
 + 
-+-AC_PATH_PROG([PYTHON_CONFIG], [python-config], [no])
-+-[if test "$PYTHON_CONFIG" = "no"]
-+-[then]
-+-    [echo "The python-config program was not found in the search path. Please ensure"]
-+-    [echo "that it is installed and its directory is included in the search path."]
-+-    [echo "Then run configure again before attempting to build libreport."]
-+-    [exit 1]
-+-[fi]
++-/**
++- * bd_dm_get_member_raid_sets:
++- * @name: (allow-none): name of the member
++- * @uuid: (allow-none): uuid of the member
++- * @major: major number of the device or -1 if not specified
++- * @minor: minor number of the device or -1 if not specified
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: (transfer full) (array zero-terminated=1): list of names of the RAID sets related to
++- * the member or %NULL in case of error
++- *
++- * One of @name, @uuid or @major:@minor has to be given.
++- */
++-gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error);
 +-
-+ AC_PATH_PROG([PYTHON3_CONFIG], [python3-config], [no])
-+ [if test "$PYTHON3_CONFIG" = "no"]
-+ [then]
-+@@ -184,9 +175,6 @@ AC_PATH_PROG([PYTHON3_CONFIG], [python3-config], [no])
-+     [exit 1]
-+ [fi]
-+ 
-+-PYTHON_CFLAGS=`python-config --cflags 2> /dev/null`
-+-PYTHON_LIBS=`python-config --libs 2> /dev/null`
++-/**
++- * bd_dm_activate_raid_set:
++- * @name: name of the DM RAID set to activate
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: whether the RAID set @name was successfully activate or not
++- */
++-gboolean bd_dm_activate_raid_set (const gchar *name, GError **error);
 +-
-+ PYTHON3_CFLAGS=`python3-config --cflags 2> /dev/null`
-+ PYTHON3_LIBS=`python3-config --libs 2> /dev/null`
-+ 
-+@@ -198,9 +186,6 @@ PYTHON3_DIR=`$PYTHON3 -c "import distutils.sysconfig; \
-+ PYTHON3_EXECDIR=`$PYTHON3 -c "import distutils.sysconfig; \
-+     print(distutils.sysconfig.get_python_lib(1,0,prefix='$PYTHON3_EXEC_PREFIX'))"`
-+ 
-+-AC_SUBST(PYTHON_CFLAGS)
-+-AC_SUBST(PYTHON_LIBS)
++-/**
++- * bd_dm_deactivate_raid_set:
++- * @name: name of the DM RAID set to deactivate
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: whether the RAID set @name was successfully deactivate or not
++- */
++-gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error);
 +-
-+ AC_SUBST(PYTHON3_CFLAGS)
-+ AC_SUBST(PYTHON3_LIBS)
-+ AC_SUBST(python3dir, $PYTHON3_DIR)
-+diff --git a/src/client-python/reportclient/Makefile.am b/src/client-python/reportclient/Makefile.am
-+index 46ac42f..fb5216a 100644
-+--- a/src/client-python/reportclient/Makefile.am
-++++ b/src/client-python/reportclient/Makefile.am
-+@@ -4,13 +4,10 @@ PYFILES = \
-+     dnfdebuginfo.py \
-+     yumdebuginfo.py
++-/**
++- * bd_dm_get_raid_set_type:
++- * @name: name of the DM RAID set to get the type of
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: string representation of the @name RAID set's type
++- */
++-gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error);
++diff --git a/src/plugins/Makefile.am b/src/plugins/Makefile.am
++index 6c4038f..59dc5e3 100644
++--- a/src/plugins/Makefile.am
+++++ b/src/plugins/Makefile.am
++@@ -76,7 +76,7 @@ endif
 + 
-+-py2clientdir = $(pyexecdir)/reportclient
-+ py3clientdir = $(py3execdir)/reportclient
++ if WITH_DM
++ libbd_dm_la_CFLAGS = $(GLIB_CFLAGS) $(DEVMAPPER_CFLAGS) $(UDEV_CFLAGS) -Wall -Wextra -Werror
++-libbd_dm_la_LIBADD = $(GLIB_LIBS) $(DEVMAPPER_LIBS) $(UDEV_LIBS) -ldmraid ${builddir}/../utils/libbd_utils.la
+++libbd_dm_la_LIBADD = $(GLIB_LIBS) $(DEVMAPPER_LIBS) $(UDEV_LIBS) ${builddir}/../utils/libbd_utils.la
++ libbd_dm_la_LDFLAGS = -L${srcdir}/../utils/ -version-info 2:0:0 -Wl,--no-undefined
++ # Dear author of libdmdraid, VERSION really is not a good name for an enum member!
++ libbd_dm_la_CPPFLAGS = -I${builddir}/../../include/ -UVERSION
++diff --git a/src/plugins/dm.c b/src/plugins/dm.c
++index 9cee742..fd7c7ba 100644
++--- a/src/plugins/dm.c
+++++ b/src/plugins/dm.c
++@@ -21,16 +21,10 @@
++ #include <unistd.h>
++ #include <blockdev/utils.h>
++ #include <libdevmapper.h>
++-#include <dmraid/dmraid.h>
++ #include <libudev.h>
 + 
-+-py2client_PYTHON = $(PYFILES)
-+ py3client_PYTHON = $(PYFILES)
++ #include "dm.h"
 + 
-+-py2client_LTLIBRARIES = _reportclient.la
-+ py3client_LTLIBRARIES = _reportclient3.la
-+ 
-+ PYEXTFILES = \
-+@@ -33,12 +30,6 @@ PYEXTLDFLAGS = \
-+     -avoid-version \
-+     -Wl,-z,relro -Wl,-z,now
-+ 
-+-_reportclient_la_SOURCES = $(PYEXTFILES)
-+-_reportclient_la_CPPFLAGS = $(PYEXTCPPFLAGS) $(PYTHON_CFLAGS)
-+-_reportclient_la_LDFLAGS = $(PYEXTLDFLAGS) \
-+-    -export-symbols-regex init_reportclient
-+-_reportclient_la_LIBADD = ../../lib/libreport.la
++-/* macros taken from the pyblock/dmraid.h file plus one more*/
++-#define for_each_raidset(_c, _n) list_for_each_entry(_n, LC_RS(_c), list)
++-#define for_each_subset(_rs, _n) list_for_each_entry(_n, &(_rs)->sets, list)
++-#define for_each_device(_rs, _d) list_for_each_entry(_d, &(_rs)->devs, devs)
 +-
-+ _reportclient3_la_SOURCES = $(PYEXTFILES)
-+ _reportclient3_la_CPPFLAGS = $(PYEXTCPPFLAGS) $(PYTHON3_CFLAGS)
-+ _reportclient3_la_LDFLAGS = $(PYEXTLDFLAGS) \
-+diff --git a/src/report-python/Makefile.am b/src/report-python/Makefile.am
-+index 793cebd..241dcb7 100644
-+--- a/src/report-python/Makefile.am
-++++ b/src/report-python/Makefile.am
-+@@ -1,12 +1,9 @@
-+ PYFILES = __init__.py accountmanager.py
++ /**
++  * SECTION: dm
++  * @short_description: plugin for basic operations with device mapper
++@@ -286,315 +280,3 @@ gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean a
++     return ret;
++ }
 + 
-+-pyreportexecdir = $(pyexecdir)/report
-+ py3reportexecdir = $(py3execdir)/report
-+ 
-+-pyreportexec_PYTHON = $(PYFILES)
-+ py3reportexec_PYTHON = $(PYFILES)
-+ 
-+-pyreportexec_LTLIBRARIES = _pyreport.la
-+ py3reportexec_LTLIBRARIES = _py3report.la
-+ 
-+ PYEXTFILES = \
-+@@ -34,20 +31,6 @@ PYEXTLDFLAGS = \
-+     -avoid-version \
-+     -Wl,-z,relro -Wl,-z,now
-+ 
-+-_pyreport_la_SOURCES = $(PYEXTFILES)
++-/**
++- * init_dmraid_stack: (skip)
++- *
++- * Initializes the dmraid stack by creating the library context, discovering
++- * devices, raid sets, etc.
++- */
++-static struct lib_context* init_dmraid_stack (GError **error) {
++-    gint rc = 0;
++-    gchar *argv[] = {"blockdev.dmraid", NULL};
++-    struct lib_context *lc;
 +-
-+-_pyreport_la_CPPFLAGS = \
-+-    $(PYEXTCPPFLAGS) \
-+-    $(PYTHON_CFLAGS)
++-    /* the code for this function was cherry-picked from the pyblock code */
++-    /* XXX: do this all just once, store global lc and provide a reinit
++-     *      function? */
 +-
-+-_pyreport_la_LDFLAGS = \
-+-   $(PYEXTLDFLAGS) \
-+-   -export-symbols-regex init_pyreport
++-    /* initialize dmraid library context */
++-    lc = libdmraid_init (1, (gchar **)argv);
 +-
-+-_pyreport_la_LIBADD = \
-+-    ../lib/libreport.la \
-+-    $(PYTHON2_LIBS)
++-    rc = discover_devices (lc, NULL);
++-    if (!rc) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
++-                     "Failed to discover devices");
++-        libdmraid_exit (lc);
++-        return NULL;
++-    }
++-    discover_raid_devices (lc, NULL);
 +-
-+ _py3report_la_SOURCES = $(PYEXTFILES)
++-    if (!count_devices (lc, RAID)) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_DEVS,
++-                     "No RAIDs discovered");
++-        libdmraid_exit (lc);
++-        return NULL;
++-    }
++-
++-    argv[0] = NULL;
++-    if (!group_set (lc, argv)) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
++-                     "Failed to group_set");
++-        libdmraid_exit (lc);
++-        return NULL;
++-    }
++-
++-    return lc;
++-}
++-
++-/**
++- * raid_dev_matches_spec: (skip)
++- *
++- * Returns: whether the device specified by @sysname matches the spec given by @name,
++- *          @uuid, @major and @minor
++- */
++-static gboolean raid_dev_matches_spec (struct raid_dev *raid_dev, const gchar *name, const gchar *uuid, gint major, gint minor) {
++-    gchar const *dev_name = NULL;
++-    gchar const *dev_uuid;
++-    gchar const *major_str;
++-    gchar const *minor_str;
++-    struct udev *context;
++-    struct udev_device *device;
++-    gboolean ret = TRUE;
++-
++-    /* find the second '/' to get name (the rest of the string) */
++-    dev_name = strchr (raid_dev->di->path, '/');
++-    if (dev_name && strlen (dev_name) > 1) {
++-        dev_name++;
++-        dev_name = strchr (dev_name, '/');
++-    }
++-    if (dev_name && strlen (dev_name) > 1) {
++-        dev_name++;
++-    }
++-    else
++-        dev_name = NULL;
++-
++-    /* if we don't have the name, we cannot check any match */
++-    g_return_val_if_fail (dev_name, FALSE);
++-
++-    if (name && strcmp (dev_name, name) != 0) {
++-        return FALSE;
++-    }
++-
++-    context = udev_new ();
++-    device = udev_device_new_from_subsystem_sysname (context, "block", dev_name);
++-    dev_uuid = udev_device_get_property_value (device, "UUID");
++-    major_str = udev_device_get_property_value (device, "MAJOR");
++-    minor_str = udev_device_get_property_value (device, "MINOR");
++-
++-    if (uuid && (g_strcmp0 (uuid, "") != 0) && (g_strcmp0 (uuid, dev_uuid) != 0))
++-        ret = FALSE;
++-
++-    if (major >= 0 && (atoi (major_str) != major))
++-        ret = FALSE;
++-
++-    if (minor >= 0 && (atoi (minor_str) != minor))
++-        ret = FALSE;
++-
++-    udev_device_unref (device);
++-    udev_unref (context);
++-
++-    return ret;
++-}
++-
++-/**
++- * find_raid_sets_for_dev: (skip)
++- */
++-static void find_raid_sets_for_dev (const gchar *name, const gchar *uuid, gint major, gint minor, struct lib_context *lc, struct raid_set *rs, GPtrArray *ret_sets) {
++-    struct raid_set *subset;
++-    struct raid_dev *dev;
++-
++-    if (T_GROUP(rs) || !list_empty(&(rs->sets))) {
++-        for_each_subset (rs, subset)
++-            find_raid_sets_for_dev (name, uuid, major, minor, lc, subset, ret_sets);
++-    } else {
++-        for_each_device (rs, dev) {
++-            if (raid_dev_matches_spec (dev, name, uuid, major, minor))
++-                g_ptr_array_add (ret_sets, g_strdup (rs->name));
++-        }
++-    }
++-}
++-
++-/**
++- * bd_dm_get_member_raid_sets:
++- * @name: (allow-none): name of the member
++- * @uuid: (allow-none): uuid of the member
++- * @major: major number of the device or -1 if not specified
++- * @minor: minor number of the device or -1 if not specified
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: (transfer full) (array zero-terminated=1): list of names of the RAID sets related to
++- * the member or %NULL in case of error
++- *
++- * One of @name, @uuid or @major:@minor has to be given.
++- */
++-gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error) {
++-    guint64 i = 0;
++-    struct lib_context *lc = NULL;
++-    struct raid_set *rs = NULL;
++-    GPtrArray *ret_sets = g_ptr_array_new ();
++-    gchar **ret = NULL;
++-
++-    lc = init_dmraid_stack (error);
++-    if (!lc)
++-        /* error is already populated */
++-        return NULL;
++-
++-    for_each_raidset (lc, rs) {
++-        find_raid_sets_for_dev (name, uuid, major, minor, lc, rs, ret_sets);
++-    }
++-
++-    /* now create the return value -- NULL-terminated array of strings */
++-    ret = g_new0 (gchar*, ret_sets->len + 1);
++-    for (i=0; i < ret_sets->len; i++)
++-        ret[i] = (gchar*) g_ptr_array_index (ret_sets, i);
++-    ret[i] = NULL;
++-
++-    g_ptr_array_free (ret_sets, FALSE);
++-
++-    libdmraid_exit (lc);
++-    return ret;
++-}
++-
++-/**
++- * find_in_raid_sets: (skip)
++- *
++- * Runs @eval_fn with @data on each set (traversing recursively) and returns the
++- * first RAID set that @eval_fn returns. Thus the @eval_fn should return %NULL
++- * on all RAID sets that don't fulfill the search criteria.
++- */
++-static struct raid_set* find_in_raid_sets (struct raid_set *rs, RSEvalFunc eval_fn, gpointer data) {
++-    struct raid_set *subset = NULL;
++-    struct raid_set *ret = NULL;
++-
++-    ret = eval_fn (rs, data);
++-    if (ret)
++-        return ret;
++-
++-    if (T_GROUP(rs) || !list_empty(&(rs->sets))) {
++-        for_each_subset (rs, subset) {
++-            ret = find_in_raid_sets (subset, eval_fn, data);
++-            if (ret)
++-                return ret;
++-        }
++-    }
++-
++-    return ret;
++-}
++-
++-static struct raid_set* rs_matches_name (struct raid_set *rs, gpointer *name_data) {
++-    gchar *name = (gchar*) name_data;
++-
++-    if (g_strcmp0 (rs->name, name) == 0)
++-        return rs;
++-    else
++-        return NULL;
++-}
++-
++-static gboolean change_set_by_name (const gchar *name, enum activate_type action, GError **error) {
++-    gint rc = 0;
++-    struct lib_context *lc;
++-    struct raid_set *iter_rs;
++-    struct raid_set *match_rs = NULL;
++-
++-    lc = init_dmraid_stack (error);
++-    if (!lc)
++-        /* error is already populated */
++-        return FALSE;
++-
++-    for_each_raidset (lc, iter_rs) {
++-        match_rs = find_in_raid_sets (iter_rs, (RSEvalFunc)rs_matches_name, (gchar *)name);
++-        if (match_rs)
++-            break;
++-    }
++-
++-    if (!match_rs) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_EXIST,
++-                     "RAID set %s doesn't exist", name);
++-        libdmraid_exit (lc);
++-        return FALSE;
++-    }
++-
++-    rc = change_set (lc, action, match_rs);
++-    if (!rc) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
++-                     "Failed to activate the RAID set '%s'", name);
++-        libdmraid_exit (lc);
++-        return FALSE;
++-    }
++-
++-    libdmraid_exit (lc);
++-    return TRUE;
++-}
++-
++-/**
++- * bd_dm_activate_raid_set:
++- * @name: name of the DM RAID set to activate
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: whether the RAID set @name was successfully activate or not
++- */
++-gboolean bd_dm_activate_raid_set (const gchar *name, GError **error) {
++-    guint64 progress_id = 0;
++-    gchar *msg = NULL;
++-    gboolean ret = FALSE;
++-
++-    msg = g_strdup_printf ("Activating DM RAID set '%s'", name);
++-    progress_id = bd_utils_report_started (msg);
++-    g_free (msg);
++-    ret = change_set_by_name (name, A_ACTIVATE, error);
++-    bd_utils_report_finished (progress_id, "Completed");
++-    return ret;
++-}
++-
++-/**
++- * bd_dm_deactivate_raid_set:
++- * @name: name of the DM RAID set to deactivate
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: whether the RAID set @name was successfully deactivate or not
++- */
++-gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error) {
++-    guint64 progress_id = 0;
++-    gchar *msg = NULL;
++-    gboolean ret = FALSE;
++-
++-    msg = g_strdup_printf ("Deactivating DM RAID set '%s'", name);
++-    progress_id = bd_utils_report_started (msg);
++-    g_free (msg);
++-    ret = change_set_by_name (name, A_DEACTIVATE, error);
++-    bd_utils_report_finished (progress_id, "Completed");
++-    return ret;
++-}
++-
++-/**
++- * bd_dm_get_raid_set_type:
++- * @name: name of the DM RAID set to get the type of
++- * @error: (out): variable to store error (if any)
++- *
++- * Returns: string representation of the @name RAID set's type
++- */
++-gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error) {
++-    struct lib_context *lc;
++-    struct raid_set *iter_rs;
++-    struct raid_set *match_rs = NULL;
++-    const gchar *type = NULL;
++-
++-    lc = init_dmraid_stack (error);
++-    if (!lc)
++-        /* error is already populated */
++-        return NULL;
++-
++-    for_each_raidset (lc, iter_rs) {
++-        match_rs = find_in_raid_sets (iter_rs, (RSEvalFunc)rs_matches_name, (gchar *)name);
++-        if (match_rs)
++-            break;
++-    }
++-
++-    if (!match_rs) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_NO_EXIST,
++-                     "RAID set %s doesn't exist", name);
++-        libdmraid_exit (lc);
++-        return NULL;
++-    }
++-
++-    type = get_set_type (lc, match_rs);
++-    if (!type) {
++-        g_set_error (error, BD_DM_ERROR, BD_DM_ERROR_RAID_FAIL,
++-                     "Failed to get RAID set's type");
++-        libdmraid_exit (lc);
++-        return NULL;
++-    }
++-
++-    libdmraid_exit (lc);
++-    return g_strdup (type);
++-}
++diff --git a/src/plugins/dm.h b/src/plugins/dm.h
++index 859fb80..80acd49 100644
++--- a/src/plugins/dm.h
+++++ b/src/plugins/dm.h
++@@ -1,5 +1,4 @@
++ #include <glib.h>
++-#include <dmraid/dmraid.h>
 + 
-+ _py3report_la_CPPFLAGS = \
-+@@ -64,7 +47,6 @@ _py3report_la_LIBADD = \
++ #ifndef BD_DM
++ #define BD_DM
++@@ -35,9 +34,5 @@ gboolean bd_dm_remove (const gchar *map_name, GError **error);
++ gchar* bd_dm_name_from_node (const gchar *dm_node, GError **error);
++ gchar* bd_dm_node_from_name (const gchar *map_name, GError **error);
++ gboolean bd_dm_map_exists (const gchar *map_name, gboolean live_only, gboolean active_only, GError **error);
++-gchar** bd_dm_get_member_raid_sets (const gchar *name, const gchar *uuid, gint major, gint minor, GError **error);
++-gboolean bd_dm_activate_raid_set (const gchar *name, GError **error);
++-gboolean bd_dm_deactivate_raid_set (const gchar *name, GError **error);
++-gchar* bd_dm_get_raid_set_type (const gchar *name, GError **error);
 + 
-+ # report compat:
++ #endif  /* BD_DM */
++diff --git a/src/python/gi/overrides/BlockDev.py b/src/python/gi/overrides/BlockDev.py
++index fb3ffb4..eed0a38 100644
++--- a/src/python/gi/overrides/BlockDev.py
+++++ b/src/python/gi/overrides/BlockDev.py
++@@ -233,12 +233,6 @@ def dm_create_linear(map_name, device, length, uuid=None):
++     return _dm_create_linear(map_name, device, length, uuid)
++ __all__.append("dm_create_linear")
 + 
-+-pyreportioexecdir = $(pyexecdir)/report/io
-+ py3reportioexecdir = $(py3execdir)/report/io
++-_dm_get_member_raid_sets = BlockDev.dm_get_member_raid_sets
++-@override(BlockDev.dm_get_member_raid_sets)
++-def dm_get_member_raid_sets(name=None, uuid=None, major=-1, minor=-1):
++-    return _dm_get_member_raid_sets(name, uuid, major, minor)
++-__all__.append("dm_get_member_raid_sets")
++-
 + 
-+ PYIOFILES = \
-+@@ -73,5 +55,4 @@ PYIOFILES = \
-+     io/NewtIO.py \
-+     io/TextIO.py
-+ 
-+-pyreportioexec_PYTHON = $(PYIOFILES)
-+ py3reportioexec_PYTHON = $(PYIOFILES)
++ _loop_setup = BlockDev.loop_setup
++ @override(BlockDev.loop_setup)
 +-- 
-+2.8.1
++1.8.3.1
 +
-diff --git a/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb b/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+diff --git a/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch b/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
 new file mode 100644
-index 0000000..459f0f2
+index 0000000..f18b569
 --- /dev/null
-+++ b/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
-@@ -0,0 +1,43 @@
-+DESCRIPTION = "Libraries providing API for reporting different problems in applications \
-+to different bug targets like Bugzilla, ftp, trac, etc..."
-+SUMMARY = "Generic library for reporting various problems"
-+HOMEPAGE = "https://abrt.readthedocs.org/"
-+LICENSE = "GPLv2+"
-+DEPENDS = "xmlrpc-c xmlrpc-c-native intltool-native \
-+        json-c libtar libnewt libproxy rpm \
-+        augeas satyr systemd gtk+3 \
++++ b/meta-oe/recipes-extended/libblockdev/files/0004-fix-compile-failure-against-musl-C-library.patch
+@@ -0,0 +1,50 @@
++From 59fbd57acd1df25b1972a131dc6a77a4fe147729 Mon Sep 17 00:00:00 2001
++From: Hongxu Jia <hongxu.jia@windriver.com>
++Date: Thu, 27 Jul 2017 10:45:02 +0800
++Subject: [PATCH] fix compile failure against musl C library
++
++Upstream-Status: Pending
++
++Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
++---
++ src/plugins/crypto.c | 2 +-
++ src/plugins/part.c   | 3 ++-
++ 2 files changed, 3 insertions(+), 2 deletions(-)
++
++diff --git a/src/plugins/crypto.c b/src/plugins/crypto.c
++index 8fbce4f..66e11e5 100644
++--- a/src/plugins/crypto.c
+++++ b/src/plugins/crypto.c
++@@ -22,7 +22,7 @@
++ #include <libcryptsetup.h>
++ #include <nss.h>
++ #include <volume_key/libvolume_key.h>
++-#include <sys/fcntl.h>
+++#include <fcntl.h>
++ #include <sys/ioctl.h>
++ #include <linux/random.h>
++ #include <locale.h>
++diff --git a/src/plugins/part.c b/src/plugins/part.c
++index 12d2ef7..3afe297 100644
++--- a/src/plugins/part.c
+++++ b/src/plugins/part.c
++@@ -25,6 +25,7 @@
++ #include <inttypes.h>
++ #include <unistd.h>
++ #include <sys/file.h>
+++#include <fcntl.h>
++ #include <blockdev/utils.h>
++ #include <part_err.h>
++ 
++@@ -1224,7 +1225,7 @@ static gboolean set_gpt_flags (const gchar *device, int part_num, guint64 flags,
++         real_flags |= 0x4000000000000000; /* 1 << 62 */
++     if (flags & BD_PART_FLAG_GPT_NO_AUTOMOUNT)
++         real_flags |= 0x8000000000000000; /* 1 << 63 */
++-    mask_str = g_strdup_printf ("%.16"__PRI64_PREFIX"x", real_flags);
+++    mask_str = g_strdup_printf ("%.16"__PRI64"x", real_flags);
++ 
++     args[2] = g_strdup_printf ("%d:=:%s", part_num, mask_str);
++     g_free (mask_str);
++-- 
++1.8.3.1
++
+diff --git a/meta-oe/recipes-extended/libblockdev/libblockdev_2.10.bb b/meta-oe/recipes-extended/libblockdev/libblockdev_2.10.bb
+new file mode 100644
+index 0000000..4806dcd
+--- /dev/null
++++ b/meta-oe/recipes-extended/libblockdev/libblockdev_2.10.bb
+@@ -0,0 +1,50 @@
++DESCRIPTION = "libblockdev is a C library supporting GObject introspection for manipulation of \
++block devices. It has a plugin-based architecture where each technology (like \
++LVM, Btrfs, MD RAID, Swap,...) is implemented in a separate plugin, possibly \
++with multiple implementations (e.g. using LVM CLI or the new LVM DBus API)."
++HOMEPAGE = "http://rhinstaller.github.io/libblockdev/"
++LICENSE = "LGPLv2+"
++SECTION = "devel/lib"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=c07cb499d259452f324bb90c3067d85c"
++
++S = "${WORKDIR}/git"
++B = "${S}"
++
++SRCREV = "c1dda45001542edd7d7f1ffc6451c5a74623f805"
++SRC_URI = "git://github.com/rhinstaller/libblockdev;branch=master \
++           file://0001-fix-configure-and-compile-failures.patch \
++           file://0002-remove-python2-support.patch \
++           file://0003-remove-dmraid-while-compiling-with-with-dm.patch \
++"
++SRC_URI_append_libc-musl = " \
++           file://0004-fix-compile-failure-against-musl-C-library.patch \
 +"
 +
-+LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
++inherit autotools python3native gobject-introspection
 +
-+
-+SRC_URI = "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}}-%{PV}.tar.gz"
-+SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
-+            file://0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch \
-+            file://0003-without-build-plugins.patch \
-+            file://0004-configure.ac-remove-prog-test-of-augparse.patch \
-+            file://0005-remove-python2-support.patch \
++DEPENDS += " \
++    cryptsetup \
++    nss \
++    volume-key \
++    libbytesize \
++    btrfs-tools \
++"
++RDEPENDS_${PN} += " \
++    lvm2 \
 +"
 +
-+SRC_URI[md5sum] = "f732a63dcc68cf96f0df02bcfc5fccc7"
-+SRC_URI[sha256sum] = "484e15759a079730608b708ea9ae74a045ebe74f35dbfe9c9c16834c4462bcd4"
++FILES_${PN} += "${PYTHON_SITEPACKAGES_DIR}"
 +
-+inherit distro_features_check
-+REQUIRED_DISTRO_FEATURES = "systemd"
++PACKAGECONFIG ??= "python3 lvm dm kmod parted fs"
++PACKAGECONFIG[python3] = "--with-python3, --without-python3,,python3"
++PACKAGECONFIG[lvm] = "--with-lvm, --without-lvm, multipath-tools"
++PACKAGECONFIG[dm] = "--with-dm, --without-dm"
++PACKAGECONFIG[kmod] = "--with-kbd, --without-kbd, kmod"
++PACKAGECONFIG[parted] = "--with-part, --without-part, parted"
++PACKAGECONFIG[fs] = "--with-fs, --without-fs, util-linux"
++PACKAGECONFIG[doc] = "--with-gtk-doc, --without-gtk-doc, gtk-doc-native"
 +
-+inherit gettext autotools python3native pkgconfig
-+
-+RDEPENDS_${PN}-python3 += "${PN}"
-+
-+do_patch[prefuncs] += "do_gen_version"
-+do_gen_version() {
-+    cd ${S}
-+    ./gen-version
-+}
-+
-+PACKAGES += "python3-${PN}"
-+
-+FILES_${PN} += "${datadir}/*"
-+FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug"
-+FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
++export STAGING_INCDIR
++export GIR_EXTRA_LIBS_PATH="${B}/src/utils/.libs"
 +
 -- 
 2.8.1
