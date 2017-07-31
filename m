@@ -1,31 +1,21 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from song.cn.fujitsu.com (unknown [222.73.24.84])
-	by mail.openembedded.org (Postfix) with ESMTP id D688678523
+Return-Path: <kevron.m.rees@intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A96C78589
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jul 2017 10:04:09 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.20,367,1444665600"; 
-   d="scan'208";a="1500334"
-Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
-	by song.cn.fujitsu.com with ESMTP; 31 Jul 2017 18:04:07 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 048C6402BB71
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jul 2017 18:04:04 +0800 (CST)
-Received: from localhost.localdomain (10.167.235.93) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Mon, 31 Jul 2017 18:04:05 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 31 Jul 2017 18:03:47 +0800
-Message-ID: <1501495427-1525-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	Mon, 31 Jul 2017 17:52:06 +0000 (UTC)
+Received: from fmsmga002.fm.intel.com ([10.253.24.26])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	31 Jul 2017 10:52:07 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.41,304,1498546800"; d="scan'208";a="1201174291"
+Received: from tripzero-desktop.jf.intel.com ([10.54.70.70])
+	by fmsmga002.fm.intel.com with ESMTP; 31 Jul 2017 10:51:55 -0700
+From: Kevron Rees <kevron.m.rees@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 31 Jul 2017 10:52:30 -0700
+Message-Id: <1501523550-30183-1-git-send-email-kevron.m.rees@intel.com>
 X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [10.167.235.93]
-X-yoursite-MailScanner-ID: 048C6402BB71.A4041
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking] [PATCH] libtdb: update 1.3.12 -> 1.3.14
+Subject: [meta-python][PATCH] add recipes for autobahn and txaio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,124 +28,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jul 2017 10:04:11 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 31 Jul 2017 17:52:07 -0000
 
-1) Upgrade libtdb from 1.3.12 to 1.3.14.
-2) Update tdb-Add-configure-options-for-packages.patch for libtdb_1.3.14.
-
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Kevron Rees <kevron.m.rees@intel.com>
 ---
- .../tdb-Add-configure-options-for-packages.patch   | 43 +++++++++++++---------
- .../libtdb/{libtdb_1.3.12.bb => libtdb_1.3.14.bb}  |  4 +-
- 2 files changed, 27 insertions(+), 20 deletions(-)
- rename meta-networking/recipes-support/libtdb/{libtdb_1.3.12.bb => libtdb_1.3.14.bb} (91%)
+ .../python-autobahn/python3-autobahn_17.7.1.bb     | 16 ++++++++
+ .../recipes-devtools/python/python3-txaio_2.8.1.bb | 43 ++++++++++++++++++++++
+ 2 files changed, 59 insertions(+)
+ create mode 100644 meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
 
-diff --git a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-index 4000557..272921e 100644
---- a/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-+++ b/meta-networking/recipes-support/libtdb/libtdb/tdb-Add-configure-options-for-packages.patch
-@@ -1,7 +1,10 @@
--From 10ac5e5fdda44adcc2a159b6f9a2d51a51361057 Mon Sep 17 00:00:00 2001
--From: Jackie Huang <jackie.huang@windriver.com>
--Date: Wed, 21 Sep 2016 10:46:19 +0800
--Subject: [PATCH] tdb: Add configure options for packages
-+From 24911f36bcb00412e5dc4cd11fda139e09d58798 Mon Sep 17 00:00:00 2001
-+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-+Date: Tue, 1 Aug 2017 03:12:09 +0900
-+Subject: [PATCH] From 10ac5e5fdda44adcc2a159b6f9a2d51a51361057 Mon Sep 17
-+ 00:00:00 2001 From: Jackie Huang <jackie.huang@windriver.com> Date: Wed, 21
-+ Sep 2016 10:46:19 +0800 Subject: [PATCH] tdb: Add configure options for
-+ packages
- 
- Add configure options for the following packages:
-  - acl
-@@ -14,6 +17,10 @@ Add configure options for the following packages:
- Upstream-Status: Inappropriate [oe deterministic build specific]
- 
- Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+diff --git a/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb b/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
+new file mode 100644
+index 0000000..644fa6c
+--- /dev/null
++++ b/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hixie-76) framework for creating WebSocket-based clients and servers. \
++AutobahnPython also includes an implementation of WAMP (The WebSockets Application Messaging Protocol), a light-weight,  \
++asynchronous RPC/PubSub over JSON/WebSocket protocol."
++HOMEPAGE = "http://autobahn.ws/python"
 +
-+Update for libtdb_1.3.14.
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=3efa50c72bcff15042722ebd09c54701"
 +
-+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
- ---
-  lib/replace/system/wscript_configure |  6 ++-
-  lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
-@@ -37,7 +44,7 @@ index 2035474..10f9ae7 100644
-  
-  # solaris varients of getXXent_r
- diff --git a/lib/replace/wscript b/lib/replace/wscript
--index 145300d..310048c 100644
-+index 7c50e1d..15df5c3 100644
- --- a/lib/replace/wscript
- +++ b/lib/replace/wscript
- @@ -23,6 +23,41 @@ def set_options(opt):
-@@ -124,7 +131,7 @@ index 145300d..310048c 100644
-      conf.CHECK_HEADERS('nss_common.h nsswitch.h ns_api.h')
-      conf.CHECK_HEADERS('sys/extattr.h sys/ea.h sys/proplist.h sys/cdefs.h')
-      conf.CHECK_HEADERS('utmp.h utmpx.h lastlog.h')
--@@ -248,17 +298,18 @@ def configure(conf):
-+@@ -251,17 +301,18 @@ def configure(conf):
-  
-      conf.CHECK_FUNCS('prctl dirname basename')
-  
-@@ -155,23 +162,23 @@ index 145300d..310048c 100644
-      conf.CHECK_CODE('''
-                  struct ucred cred;
- diff --git a/wscript b/wscript
--index 50b2286..748eef1 100644
-+index 1c9655a..8c20d3b 100644
- --- a/wscript
- +++ b/wscript
--@@ -64,7 +64,12 @@ def set_options(opt):
--         opt.add_option('--disable-python',
--                        help=("disable the pytdb module"),
--                        action="store_true", dest='disable_python', default=False)
-+@@ -62,7 +62,12 @@ def set_options(opt):
-+                    help=("Disable the use of pthread robust mutexes"),
-+                    action="store_true", dest='disable_tdb_mutex_locking',
-+                    default=False)
- -
--+        opt.add_option('--with-valgrind',
--+                       help=("enable use of valgrind"),
--+                       action="store_true", dest='enable_valgrind')
--+        opt.add_option('--without-valgrind',
--+                       help=("disable use of valgrind"),
--+                       action="store_false", dest='enable_valgrind', default=False)
-++    opt.add_option('--with-valgrind',
-++                   help=("enable use of valgrind"),
-++                   action="store_true", dest='enable_valgrind')
-++    opt.add_option('--without-valgrind',
-++                   help=("disable use of valgrind"),
-++                   action="store_false", dest='enable_valgrind', default=False)
-  
-  def configure(conf):
-      conf.env.disable_tdb_mutex_locking = getattr(Options.options,
- -- 
--2.8.3
-+2.7.4
- 
-diff --git a/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb b/meta-networking/recipes-support/libtdb/libtdb_1.3.14.bb
-similarity index 91%
-rename from meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb
-rename to meta-networking/recipes-support/libtdb/libtdb_1.3.14.bb
-index e256ac9..ccc4ee4 100644
---- a/meta-networking/recipes-support/libtdb/libtdb_1.3.12.bb
-+++ b/meta-networking/recipes-support/libtdb/libtdb_1.3.14.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://samba.org/ftp/tdb/tdb-${PV}.tar.gz \
-            file://tdb-Add-configure-options-for-packages.patch \
- "
- 
--SRC_URI[md5sum] = "d9627e7aacd535a8251401f914bb6924"
--SRC_URI[sha256sum] = "60134e32253cac8e2efe5e0185d20123c208bcf6ad15edf2f50d80daadf8c348"
-+SRC_URI[md5sum] = "dd23f2ba8ca2bfdcb833bc79d5b5ac6f"
-+SRC_URI[sha256sum] = "3a7d4bb79229460df530c7e1c7067ba9fb9d370aa61fff537fdc2bdf918acbe9"
- 
- PACKAGECONFIG ??= "\
-     ${@bb.utils.filter('DISTRO_FEATURES', 'acl', d)} \
++SRC_URI[md5sum] = "0458295eff8a05b09982e87125a1a2e8"
++SRC_URI[sha256sum] = "801a318d5bf6776a60f7a93d715f83f7f12204b470019a339e4e7e14087c17e6"
++
++PYPI_PACKAGE_EXT = "tar.gz"
++inherit pypi setuptools3
++
++RDEPENDS_${PN} = "python3 python3-txaio"
++
+diff --git a/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+new file mode 100644
+index 0000000..f6b72c5
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+@@ -0,0 +1,43 @@
++# Recipe created by recipetool
++# This is the basis of a recipe and may need further editing in order to be fully functional.
++# (Feel free to remove these comments when editing.)
++
++SUMMARY = "Compatibility API between asyncio/Twisted/Trollius"
++HOMEPAGE = "https://github.com/crossbario/txaio"
++# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
++# your responsibility to verify that the values are complete and correct.
++# NOTE: License in setup.py/PKGINFO is: MIT License
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
++
++SRC_URI = "https://pypi.python.org/packages/1a/e5/7f9106acf4d12b6f5c30d1e654d8f0f3d7aec6fe13a4fe83895f331e10cf/txaio-${PV}.tar.gz"
++SRC_URI[md5sum] = "2e36cbc6b34b5cacb1bf8a05c1ae114e"
++SRC_URI[sha256sum] = "fe2e0e4d3a06705f86bbd351fdd1f39dae61755e44162375e024acbf32eafddb"
++
++S = "${WORKDIR}/txaio-${PV}"
++
++inherit setuptools3
++
++# The following configs & dependencies are from setuptools extras_require.
++# These dependencies are optional, hence can be controlled via PACKAGECONFIG.
++# The upstream names may not correspond exactly to bitbake package names.
++#
++# Uncomment this line to enable all the optional features.
++#PACKAGECONFIG ?= "dev twisted all"
++PACKAGECONFIG[dev] = ",,,python3-mock python3-pep8 python3-pyenchant python3-pytest python3-pytest-cov python3-sphinx python3-sphinx_rtd_theme python3-sphinxcontrib-spelling python3-tox python3-twine"
++PACKAGECONFIG[twisted] = ",,,python3-twisted python3-zope-interface"
++PACKAGECONFIG[all] = ",,,python3-twisted python-zope-interface"
++
++# WARNING: the following rdepends are from setuptools install_requires. These
++# upstream names may not correspond exactly to bitbake package names.
++RDEPENDS_${PN} += "python3-six"
++
++# WARNING: the following rdepends are determined through basic analysis of the
++# python sources, and might not be 100% accurate.
++#RDEPENDS_${PN} += "python3-contextlib python3-core python3-datetime python3-lang python3-logging"
++
++
++do_install_append() {
++	echo "removing licence file because why is it installed here?"
++	rm -rf ${D}/usr/share
++}
 -- 
 2.7.4
-
-
 
 
