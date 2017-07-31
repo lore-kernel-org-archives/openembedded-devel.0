@@ -1,29 +1,33 @@
-Return-Path: <richard@rpsys.net>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id CC95678413
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+X-Greylist: delayed 634 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 31 Jul 2017 09:10:13 UTC
+Received: from song.cn.fujitsu.com (unknown [222.73.24.84])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C5277840A
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 Jul 2017 15:19:26 +0000 (UTC)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
-	v6UFJO7n022685
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
-	verify=NOT); Sun, 30 Jul 2017 16:19:25 +0100
-Received: from richard by hex with local (Exim 4.86_2)
-	(envelope-from <richard@rpsys.net>)
-	id 1dbq04-0001bN-NZ; Sun, 30 Jul 2017 16:19:24 +0100
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 30 Jul 2017 16:19:23 +0100
-Message-Id: <1501427963-6097-5-git-send-email-richard.purdie@linuxfoundation.org>
+	Mon, 31 Jul 2017 09:10:13 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.20,367,1444665600"; 
+   d="scan'208";a="1499706"
+Received: from unknown (HELO cn.fujitsu.com) ([10.167.33.5])
+	by song.cn.fujitsu.com with ESMTP; 31 Jul 2017 16:59:36 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id CBB0E402BB71
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 Jul 2017 16:59:31 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Mon, 31 Jul 2017 16:59:33 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 31 Jul 2017 16:59:11 +0800
+Message-ID: <1501491551-1414-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1501427963-6097-1-git-send-email-richard.purdie@linuxfoundation.org>
-References: <1501427963-6097-1-git-send-email-richard.purdie@linuxfoundation.org>
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.11
-	(dan.rpsys.net [192.168.3.1]);
-	Sun, 30 Jul 2017 16:19:25 +0100 (BST)
-X-Virus-Scanned: clamav-milter 0.99.2 at dan
-X-Virus-Status: Clean
-Subject: [PATCH 5/5] image: Make do_image_qa a dummy sstate task to match do_image_complete
+MIME-Version: 1.0
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: CBB0E402BB71.A7861
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] libqb: update 1.0.1 -> 1.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,38 +40,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 Jul 2017 15:19:27 -0000
+X-List-Received-Date: Mon, 31 Jul 2017 09:10:14 -0000
+Content-Type: text/plain
 
-Similar to do_image_complete, make do_image_qa a dummy sstate task
-so that rm_work doesn't cause image generation to repeat on every
-new build command.
+Upgrade libqb from 1.0.1 to 1.0.2
 
-Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta/classes/image.bbclass | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ meta-oe/recipes-extended/libqb/{libqb_1.0.1.bb => libqb_1.0.2.bb} | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+ rename meta-oe/recipes-extended/libqb/{libqb_1.0.1.bb => libqb_1.0.2.bb} (92%)
 
-diff --git a/meta/classes/image.bbclass b/meta/classes/image.bbclass
-index 696aacd..2c1dc81 100644
---- a/meta/classes/image.bbclass
-+++ b/meta/classes/image.bbclass
-@@ -324,6 +324,15 @@ fakeroot python do_image_qa () {
- }
- addtask do_image_qa after do_image_complete before do_build
+diff --git a/meta-oe/recipes-extended/libqb/libqb_1.0.1.bb b/meta-oe/recipes-extended/libqb/libqb_1.0.2.bb
+similarity index 92%
+rename from meta-oe/recipes-extended/libqb/libqb_1.0.1.bb
+rename to meta-oe/recipes-extended/libqb/libqb_1.0.2.bb
+index e26bb7c..574f660 100644
+--- a/meta-oe/recipes-extended/libqb/libqb_1.0.1.bb
++++ b/meta-oe/recipes-extended/libqb/libqb_1.0.2.bb
+@@ -11,7 +11,7 @@ inherit autotools pkgconfig
  
-+SSTATETASKS += "do_image_qa"
-+SSTATE_SKIP_CREATION_task-image-qa = '1'
-+do_image_qa[sstate-inputdirs] = ""
-+do_image_qa[sstate-outputdirs] = ""
-+python do_image_qa_setscene () {
-+    sstate_setscene(d)
-+}
-+addtask do_image_qa_setscene
-+
- def setup_debugfs_variables(d):
-     d.appendVar('IMAGE_ROOTFS', '-dbg')
-     d.appendVar('IMAGE_LINK_NAME', '-dbg')
+ PV .= "+git${SRCPV}"
+ 
+-SRCREV = "0a329683a76bc6aeb36f20f2bf6b43ba0440c4dc"
++SRCREV = "608de6d59a3de0eef0fbcbd8f284acbc018daa9a"
+ SRC_URI = "git://github.com/ClusterLabs/${BPN}.git \
+            file://0001-Remove-runtime-check-for-CLOCK_MONOTONIC.patch \
+           "
 -- 
 2.7.4
+
+
 
 
