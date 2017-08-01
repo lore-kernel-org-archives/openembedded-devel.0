@@ -1,49 +1,24 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id E61D478355
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id DFEDB7826C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  1 Aug 2017 14:16:10 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id c65so2498988pfl.0
+	Tue,  1 Aug 2017 17:01:53 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v71H1sLt011367
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Aug 2017 07:16:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=tGFhfQG/5HcofN1IE9wt8ADPT55dN9xhbQIGG9HEDtc=;
-	b=msPIl7tpf+R27VOhaNxPgG8xFKDrPijy3j7nocg+tnlnZopcu6GtIsoBzgEMwc4rsv
-	wJwkhgFW3c8wSaDuF27IAUl54D/x9W+7q2L+U82No+T1L/lwV4/ImUClrLxphltRUR2k
-	XPIqR5C0lpLra9Is+mJGbbRroylwsegKh/xhyQ9w/aMoO/BCo5vDFoIShFPiiFJuMpTX
-	OfEmiXzX6ix4jGlg8EkblTatFnSajrTn6yjAuSbsMBODGQPnaps0vwxoEwsIwAwFd342
-	ohmJUl8Muapzv1p37WKDnNQYwYs2M9MVhyvoM4GIAALF94JsNi0kMfhtofXuQQ/DBnlY
-	cF5w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=tGFhfQG/5HcofN1IE9wt8ADPT55dN9xhbQIGG9HEDtc=;
-	b=r0T6ZIZ/Vlq0ZO5j99L8gVnRZIVRP5lnR+eZayrHnEuX5NZ38sHI4rxR2AQmN84k54
-	R5CJtJYGCK3+52oGnTPp3l4lP1J0fG3/dr2C9sRuuh2uOVzLjvwcLqyqWIhcWqUja8ra
-	G7Wu2jlJOmHNhVH2suuJgrc5tpHqg+5t7UDVcJ093knA0qTBcjCF4dsM1XBtsZiHUojU
-	ApuwWG8Wf3k8ujpKTu+84Jl60VPHgbSM0dDIfj+7jiV6nyvy6sSppVpmFrkBkrSiStjy
-	dgWRlEeGCXtTfdaPYt6pyfLsjooFTQMlGpK5Q4/sNmW9QOiUK0dIBmoJtvTpWK0ey/cb
-	yJEw==
-X-Gm-Message-State: AIVw111B+ctx5JMkIn5iMa4odza1JXjxlJuLGZMPPYsHiPnO/S8NcHfq
-	PN/2GP5YBljkuPAy
-X-Received: by 10.84.133.162 with SMTP id f31mr21054367plf.242.1501596971978; 
-	Tue, 01 Aug 2017 07:16:11 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::1f6f])
-	by smtp.gmail.com with ESMTPSA id
-	l17sm58510561pfk.146.2017.08.01.07.16.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 01 Aug 2017 07:16:11 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  1 Aug 2017 07:15:59 -0700
-Message-Id: <20170801141559.17067-4-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.13.3
-In-Reply-To: <20170801141559.17067-1-raj.khem@gmail.com>
-References: <20170801141559.17067-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/4] memcached: Update to 1.5.0
+	Tue, 1 Aug 2017 10:01:55 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 1 Aug 2017 10:01:54 -0700
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 1 Aug 2017 10:01:52 -0700
+Message-ID: <20170801170152.94586-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] imagemagick: upgrade from 7.0.5 to 7.0.6p4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +31,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Aug 2017 14:16:11 -0000
+X-List-Received-Date: Tue, 01 Aug 2017 17:01:54 -0000
+Content-Type: text/plain
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- .../memcached/{memcached_1.4.36.bb => memcached_1.5.0.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/memcached/{memcached_1.4.36.bb => memcached_1.5.0.bb} (92%)
+ .../imagemagick/{imagemagick_7.0.5.bb => imagemagick_7.0.6.bb}      | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/imagemagick/{imagemagick_7.0.5.bb => imagemagick_7.0.6.bb} (96%)
 
-diff --git a/meta-networking/recipes-support/memcached/memcached_1.4.36.bb b/meta-networking/recipes-support/memcached/memcached_1.5.0.bb
-similarity index 92%
-rename from meta-networking/recipes-support/memcached/memcached_1.4.36.bb
-rename to meta-networking/recipes-support/memcached/memcached_1.5.0.bb
-index 48c3c9ee2..fd3d171f0 100644
---- a/meta-networking/recipes-support/memcached/memcached_1.4.36.bb
-+++ b/meta-networking/recipes-support/memcached/memcached_1.5.0.bb
-@@ -22,8 +22,8 @@ RDEPENDS_${PN} += "perl perl-module-posix perl-module-autoloader \
- SRC_URI = "http://www.memcached.org/files/${BP}.tar.gz \
-            file://memcached-add-hugetlbfs-check.patch \
-            "
--SRC_URI[md5sum] = "1e028fbab7288911fcaa5ed2a21817fe"
--SRC_URI[sha256sum] = "773b6bb20bf80223ca6a15d75f570fbab346ad11ec98595e5af5e33f54bd82d8"
-+SRC_URI[md5sum] = "81326513f60d7ba482f8131975cd55ae"
-+SRC_URI[sha256sum] = "c001f812024bb461b5e4d7d0506daab63dff9614eea26f46536c3b7e1e601c32"
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb
+similarity index 96%
+rename from meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb
+rename to meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb
+index b8ee6e7be..6f967c3a1 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb
+@@ -8,11 +8,11 @@ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
+ # Important note: tarballs for all patchsets within a version are deleted when
+ # a new pachset is created. To avoid multiple patches for each patchset, try to
+ # update to the last pachset of a version
+-PATCHSET = "6"
++PATCHSET = "4"
+ SRC_URI = "http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET}.tar.xz \
+ "
+-SRC_URI[md5sum] = "dfaa2bd61f65d67ea8d5307ed6cd197f"
+-SRC_URI[sha256sum] = "f60c3e3466ccbf9a0e643284ffec3467363edf9611f16a98387f927a974b49ab"
++SRC_URI[md5sum] = "079a857268536862148b00efcf3ad75a"
++SRC_URI[sha256sum] = "5fe1ce7d78befb5c8aa7f8ae69710d0f78063d2e3a35c656521a3ce468ea733b"
  
- # set the same COMPATIBLE_HOST as libhugetlbfs
- COMPATIBLE_HOST = '(i.86|x86_64|powerpc|powerpc64|arm).*-linux'
+ S = "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
+ 
 -- 
-2.13.3
+2.11.0
 
 
