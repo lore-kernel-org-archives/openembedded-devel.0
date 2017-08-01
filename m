@@ -1,21 +1,27 @@
-Return-Path: <kevron.m.rees@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A96C78589
+Return-Path: <richard@rpsys.net>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 6222B78351
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 Jul 2017 17:52:06 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	31 Jul 2017 10:52:07 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,304,1498546800"; d="scan'208";a="1201174291"
-Received: from tripzero-desktop.jf.intel.com ([10.54.70.70])
-	by fmsmga002.fm.intel.com with ESMTP; 31 Jul 2017 10:51:55 -0700
-From: Kevron Rees <kevron.m.rees@intel.com>
+	Tue,  1 Aug 2017 10:31:49 +0000 (UTC)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
+	v71AVmfO000497
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
+	verify=NOT); Tue, 1 Aug 2017 11:31:49 +0100
+Received: from richard by hex with local (Exim 4.86_2)
+	(envelope-from <richard@rpsys.net>)
+	id 1dcUSq-0000H9-I4; Tue, 01 Aug 2017 11:31:48 +0100
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 Jul 2017 10:52:30 -0700
-Message-Id: <1501523550-30183-1-git-send-email-kevron.m.rees@intel.com>
+Date: Tue,  1 Aug 2017 11:31:47 +0100
+Message-Id: <1501583507-1017-1-git-send-email-richard.purdie@linuxfoundation.org>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] add recipes for autobahn and txaio
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.5.11
+	(dan.rpsys.net [192.168.3.1]);
+	Tue, 01 Aug 2017 11:31:49 +0100 (BST)
+X-Virus-Scanned: clamav-milter 0.99.2 at dan
+X-Virus-Status: Clean
+Subject: [PATCH] uninative: Allow a local own-mirror to work with uninative
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,87 +34,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 Jul 2017 17:52:07 -0000
+X-List-Received-Date: Tue, 01 Aug 2017 10:31:49 -0000
 
-Signed-off-by: Kevron Rees <kevron.m.rees@intel.com>
+The games we play with path manipulation of DL_DIR in uninative mean standard
+PREMIRRORS don't work and we can't easily put 'chksum' into the url path from
+a url parameter with the current fetcher url handling to make a generic
+remapping. We therefore add to PREMIRRORS when we know the chksum to
+create a premirror mapping which can work.
+
+[YOCTO #9888]
+
+Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
 ---
- .../python-autobahn/python3-autobahn_17.7.1.bb     | 16 ++++++++
- .../recipes-devtools/python/python3-txaio_2.8.1.bb | 43 ++++++++++++++++++++++
- 2 files changed, 59 insertions(+)
- create mode 100644 meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+ meta/classes/uninative.bbclass | 6 ++++++
+ 1 file changed, 6 insertions(+)
 
-diff --git a/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb b/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
-new file mode 100644
-index 0000000..644fa6c
---- /dev/null
-+++ b/meta-python/recipes-connectivity/python-autobahn/python3-autobahn_17.7.1.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to -17, Hixie-76) framework for creating WebSocket-based clients and servers. \
-+AutobahnPython also includes an implementation of WAMP (The WebSockets Application Messaging Protocol), a light-weight,  \
-+asynchronous RPC/PubSub over JSON/WebSocket protocol."
-+HOMEPAGE = "http://autobahn.ws/python"
-+
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = " file://autobahn/__init__.py;beginline=1;endline=17;md5=3efa50c72bcff15042722ebd09c54701"
-+
-+SRC_URI[md5sum] = "0458295eff8a05b09982e87125a1a2e8"
-+SRC_URI[sha256sum] = "801a318d5bf6776a60f7a93d715f83f7f12204b470019a339e4e7e14087c17e6"
-+
-+PYPI_PACKAGE_EXT = "tar.gz"
-+inherit pypi setuptools3
-+
-+RDEPENDS_${PN} = "python3 python3-txaio"
-+
-diff --git a/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
-new file mode 100644
-index 0000000..f6b72c5
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
-@@ -0,0 +1,43 @@
-+# Recipe created by recipetool
-+# This is the basis of a recipe and may need further editing in order to be fully functional.
-+# (Feel free to remove these comments when editing.)
-+
-+SUMMARY = "Compatibility API between asyncio/Twisted/Trollius"
-+HOMEPAGE = "https://github.com/crossbario/txaio"
-+# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best guesses - it is
-+# your responsibility to verify that the values are complete and correct.
-+# NOTE: License in setup.py/PKGINFO is: MIT License
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
-+
-+SRC_URI = "https://pypi.python.org/packages/1a/e5/7f9106acf4d12b6f5c30d1e654d8f0f3d7aec6fe13a4fe83895f331e10cf/txaio-${PV}.tar.gz"
-+SRC_URI[md5sum] = "2e36cbc6b34b5cacb1bf8a05c1ae114e"
-+SRC_URI[sha256sum] = "fe2e0e4d3a06705f86bbd351fdd1f39dae61755e44162375e024acbf32eafddb"
-+
-+S = "${WORKDIR}/txaio-${PV}"
-+
-+inherit setuptools3
-+
-+# The following configs & dependencies are from setuptools extras_require.
-+# These dependencies are optional, hence can be controlled via PACKAGECONFIG.
-+# The upstream names may not correspond exactly to bitbake package names.
-+#
-+# Uncomment this line to enable all the optional features.
-+#PACKAGECONFIG ?= "dev twisted all"
-+PACKAGECONFIG[dev] = ",,,python3-mock python3-pep8 python3-pyenchant python3-pytest python3-pytest-cov python3-sphinx python3-sphinx_rtd_theme python3-sphinxcontrib-spelling python3-tox python3-twine"
-+PACKAGECONFIG[twisted] = ",,,python3-twisted python3-zope-interface"
-+PACKAGECONFIG[all] = ",,,python3-twisted python-zope-interface"
-+
-+# WARNING: the following rdepends are from setuptools install_requires. These
-+# upstream names may not correspond exactly to bitbake package names.
-+RDEPENDS_${PN} += "python3-six"
-+
-+# WARNING: the following rdepends are determined through basic analysis of the
-+# python sources, and might not be 100% accurate.
-+#RDEPENDS_${PN} += "python3-contextlib python3-core python3-datetime python3-lang python3-logging"
-+
-+
-+do_install_append() {
-+	echo "removing licence file because why is it installed here?"
-+	rm -rf ${D}/usr/share
-+}
+diff --git a/meta/classes/uninative.bbclass b/meta/classes/uninative.bbclass
+index 8f34483..a410647 100644
+--- a/meta/classes/uninative.bbclass
++++ b/meta/classes/uninative.bbclass
+@@ -49,6 +49,12 @@ python uninative_event_fetchloader() {
+             localdata = bb.data.createCopy(d)
+             localdata.setVar('FILESPATH', "")
+             localdata.setVar('DL_DIR', tarballdir)
++            # Our games with path manipulation of DL_DIR mean standard PREMIRRORS don't work
++            # and we can't easily put 'chksum' into the url path from a url parameter with
++            # the current fetcher url handling
++            ownmirror = d.getVar('SOURCE_MIRROR_URL')
++            if ownmirror:
++                localdata.appendVar("PREMIRRORS", " ${UNINATIVE_URL}${UNINATIVE_TARBALL} ${SOURCE_MIRROR_URL}/uninative/%s/${UNINATIVE_TARBALL}" % chksum)
+ 
+             srcuri = d.expand("${UNINATIVE_URL}${UNINATIVE_TARBALL};sha256sum=%s" % chksum)
+             bb.note("Fetching uninative binary shim from %s" % srcuri)
 -- 
 2.7.4
 
