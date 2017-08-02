@@ -1,54 +1,48 @@
-Return-Path: <koen@dominion.thruhere.net>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 4F970607F8
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id C2FCB6060F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Aug 2017 17:21:26 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id r77so7961038wmd.2
+	Wed,  2 Aug 2017 19:50:57 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1501703459; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=wo46PIC4U/SV6LmNc26PTSZk1QwSNz3/4t9UoO+3cpA=;
+	b=nHemvZtYrtGs5FwIL30sdr73wT6bKRy4wJSez00Sd3Bx7lfGetWX+Ks6NPVzubF2d271PG0z
+	VwmwBOk6E8vtpeapjwjBc+ebW59+PfpiRFVwIDsljg0xa8Navfmhr+vCNYMog2Fss0x5wAnX
+	9EALt3WEIYYMq9luD3CqwxAEmzE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=VE/XiVOkioYxy3vvxyaM7t/zHhNQMmUkY7/NX85bI4rz/NJXuIjz5/zQ7aDsL9cFZ9SJFW
+	pOVCQvkUuv74tg4/1dZqKPmWcDLV3GkbwReYBsh2znVm5SQAf/l9tsqElaJw34sT1blY8gWc
+	lxIQoulLqEKXMn7/8rWf1OxqjTZ1Q=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f51.google.com (mail-it0-f51.google.com
+	[209.85.214.51])
+	by mxa.mailgun.org with ESMTP id 59822d22.7f63784123b0-smtp-out-n03;
+	Wed, 02 Aug 2017 19:50:58 -0000 (UTC)
+Received: by mail-it0-f51.google.com with SMTP id h199so29087385ith.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Aug 2017 10:21:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dominion-thruhere-net.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=MzmveToMQTo3mqtJjKB88BYulUnOBLZIBn3B2emZJYE=;
-	b=bW3jrI1d4OA1hnSYd3SoclKKtnFo5/RHbmrK+MHNpJzwVCkj5fZRmmyKCjA2fIDDoL
-	ccKDKZ1wW6XIz34r8GTHlVlzCvYE6WtbjAZ2dyqRb5tCo/aKzncXMN6KOQvfT03y5CXB
-	jBjTBV+he0WHdH0sNIr/8sFjf102/WNWhJTZf/xVEI+kp4bGfNt3fd7CZfNeR812jBuI
-	ZJcWztTPQkMIlIsp+cq/WgX4u4tnx2hd5adygnxTMBfzSJV/ej2WD91dmmj8Ia/W9JJy
-	OtDbaFUa2Ys470BY+K/ceti0wfLvo5zR7VeIYM82AcQp+BqN7wix3PfFd+Zi50nYavjF
-	x2vw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
-	:content-transfer-encoding:message-id:references:to;
-	bh=MzmveToMQTo3mqtJjKB88BYulUnOBLZIBn3B2emZJYE=;
-	b=qjwMeQDRx2SwleQxKcfPZyV2OByaSsCn6g5vDqg1sLfrlXf81a4yjhpXOVpHruJLzJ
-	Fw1sD3PvzmxOu39MNg6yalvovVSWQ5g6brCHZrh9uGCHFyVFbOrjIlmwR0FfokMt+fVs
-	fTX+2m5q5GDw5OXIZICq7aT4l+SVWU3wLKqFwxaHHlfpuJ68Jz3h7qRxttWqXXhWYnyh
-	3nmU57JFwitGsuaECmbbE6A28+UJLFu5J0hX+m8/+z+7+TCXloZhlXSwgiBKvOcvvHok
-	JOlKmcJ8/fFzGlfyydKbeFkAwLSVoWaGpt5LOk6CKwod2V1o53xd3aMFm4/TYIws+QF7
-	Npug==
-X-Gm-Message-State: AIVw112+X9jyYVH+g+XTrL4vUqQ7OoJDBUUwb6/GVF4ZmPSQ0j1LsZVM
-	/hn/BNu51PVKYNMQ
-X-Received: by 10.80.209.195 with SMTP id i3mr21857351edg.70.1501694488021;
-	Wed, 02 Aug 2017 10:21:28 -0700 (PDT)
-Received: from [172.20.0.85] ([185.47.135.167])
-	by smtp.gmail.com with ESMTPSA id
-	v5sm15936031ede.75.2017.08.02.10.21.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 02 Aug 2017 10:21:26 -0700 (PDT)
-Mime-Version: 1.0 (Mac OS X Mail 11.0 \(3441.0.1\))
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4aaa2c14-284f-71b4-47d2-fc7e8e27beef@windriver.com>
-Date: Wed, 2 Aug 2017 19:21:23 +0200
-Message-Id: <BFE10A87-CF18-46BA-88E4-A795FB20506E@dominion.thruhere.net>
-References: <20170801170152.94586-1-Randy.MacLeod@windriver.com>
-	<olqm6a$87a$1@blaine.gmane.org>
-	<4aaa2c14-284f-71b4-47d2-fc7e8e27beef@windriver.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-X-Mailer: Apple Mail (2.3441.0.1)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] imagemagick: upgrade from 7.0.5 to 7.0.6p4
+	Wed, 02 Aug 2017 12:50:57 -0700 (PDT)
+X-Gm-Message-State: AIVw113J8psvsuUQybFhBDZpj1FNCVoTB9Mk5RHf58uvp397WsLYWpY6
+	Jp5BRtBpGiHc1o4QQqs+TN4903MdnQ==
+X-Received: by 10.36.113.70 with SMTP id n67mr6634732itc.39.1501703457458;
+	Wed, 02 Aug 2017 12:50:57 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.198.133 with HTTP; Wed, 2 Aug 2017 12:50:56 -0700 (PDT)
+In-Reply-To: <1501523550-30183-1-git-send-email-kevron.m.rees@intel.com>
+References: <1501523550-30183-1-git-send-email-kevron.m.rees@intel.com>
+From: Derek Straka <derek@asterius.io>
+Date: Wed, 2 Aug 2017 15:50:56 -0400
+X-Gmail-Original-Message-ID: <CADNbA1oGUzHJm=J3WEX6iKDj5W-TV0ojM7RoHg4R6WnOHZDtOA@mail.gmail.com>
+Message-ID: <CADNbA1oGUzHJm=J3WEX6iKDj5W-TV0ojM7RoHg4R6WnOHZDtOA@mail.gmail.com>
+To: Kevron Rees <kevron.m.rees@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] add recipes for autobahn and txaio
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,180 +55,141 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Aug 2017 17:21:27 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 02 Aug 2017 19:50:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
+On Mon, Jul 31, 2017 at 1:52 PM, Kevron Rees <kevron.m.rees@intel.com>
+wrote:
 
+> Signed-off-by: Kevron Rees <kevron.m.rees@intel.com>
+> ---
+>  .../python-autobahn/python3-autobahn_17.7.1.bb     | 16 ++++++++
+>  .../recipes-devtools/python/python3-txaio_2.8.1.bb | 43
+> ++++++++++++++++++++++
+>  2 files changed, 59 insertions(+)
+>  create mode 100644 meta-python/recipes-connectivity/python-autobahn/p
+> ython3-autobahn_17.7.1.bb
+>  create mode 100644 meta-python/recipes-devtools/python/
+> python3-txaio_2.8.1.bb
+>
+> diff --git a/meta-python/recipes-connectivity/python-autobahn/p
+> ython3-autobahn_17.7.1.bb b/meta-python/recipes-
+> connectivity/python-autobahn/python3-autobahn_17.7.1.bb
+> new file mode 100644
+> index 0000000..644fa6c
+> --- /dev/null
+> +++ b/meta-python/recipes-connectivity/python-autobahn/p
+> ython3-autobahn_17.7.1.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "AutobahnPython provides a WebSocket (RFC6455, Hybi-10 to
+> -17, Hixie-76) framework for creating WebSocket-based clients and servers. \
+> +AutobahnPython also includes an implementation of WAMP (The WebSockets
+> Application Messaging Protocol), a light-weight,  \
+> +asynchronous RPC/PubSub over JSON/WebSocket protocol."
+> +HOMEPAGE = "http://autobahn.ws/python"
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = " file://autobahn/__init__.py;
+> beginline=1;endline=17;md5=3efa50c72bcff15042722ebd09c54701"
+> +
+> +SRC_URI[md5sum] = "0458295eff8a05b09982e87125a1a2e8"
+> +SRC_URI[sha256sum] = "801a318d5bf6776a60f7a93d715f83
+> f7f12204b470019a339e4e7e14087c17e6"
+> +
+> +PYPI_PACKAGE_EXT = "tar.gz"
+> +inherit pypi setuptools3
+> +
+> +RDEPENDS_${PN} = "python3 python3-txaio"
 
-> Op 2 aug. 2017, om 17:29 heeft Randy MacLeod =
-<randy.macleod@windriver.com> het volgende geschreven:
->=20
-> On 2017-08-01 03:52 PM, Koen Kooi wrote:
->> Op 01-08-17 om 19:01 schreef Randy MacLeod:
->>> Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
->> Does python-wand work with this version?
->=20
->=20
-> Well, that's in meta-linaro but I took a look anyway... ;-)
++
+> diff --git a/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+> b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+> new file mode 100644
+> index 0000000..f6b72c5
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-txaio_2.8.1.bb
+> @@ -0,0 +1,43 @@
+> +# Recipe created by recipetool
+> +# This is the basis of a recipe and may need further editing in order to
+> be fully functional.
+> +# (Feel free to remove these comments when editing.)
+>
+This should also be removed
 
-Oops, I could=E2=80=99ve sworn I have submitted it to meta-oe :/ Thanks =
-for looking into this!
+> +
+> +SUMMARY = "Compatibility API between asyncio/Twisted/Trollius"
+> +HOMEPAGE = "https://github.com/crossbario/txaio"
 
->=20
-> It's not working for me on qemux86 since python-wand
-> is looking for:
->   libMagickWand-6.Q16HDRI and
->   libMagickWand-7.Q16HDRI is the current version.
-> If I soft link to work-around that problem, there's another issue:
->   ImportError: MagickWand shared library not found.
->=20
-> python-wand hasn't released a version newer than 0.4.4.
-> I'm not really interested in trying the git repo.
++# WARNING: the following LICENSE and LIC_FILES_CHKSUM values are best
+> guesses - it is
+> +# your responsibility to verify that the values are complete and correct.
+> +# NOTE: License in setup.py/PKGINFO is: MIT License
+>
+These should be removed
 
-I=E2=80=99ll have a look at trying the git repo with your patch to =
-update imagemagick and hopefully get it working well enough to get it =
-into oe-core :)
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=97c0bda20ad1d845c6369c0e47a1cd98"
+> +
+> +SRC_URI = "https://pypi.python.org/packages/1a/e5/
+> 7f9106acf4d12b6f5c30d1e654d8f0f3d7aec6fe13a4fe83895f331e10cf
+> /txaio-${PV}.tar.gz"
+> +SRC_URI[md5sum] = "2e36cbc6b34b5cacb1bf8a05c1ae114e"
+> +SRC_URI[sha256sum] = "fe2e0e4d3a06705f86bbd351fdd1f3
+> 9dae61755e44162375e024acbf32eafddb"
+> +
+> +S = "${WORKDIR}/txaio-${PV}"
+> +
+> +inherit setuptools3
+> +
+> +# The following configs & dependencies are from setuptools extras_require.
+> +# These dependencies are optional, hence can be controlled via
+> PACKAGECONFIG.
+> +# The upstream names may not correspond exactly to bitbake package names.
+> +#
+> +# Uncomment this line to enable all the optional features.
+> +#PACKAGECONFIG ?= "dev twisted all"
 
++PACKAGECONFIG[dev] = ",,,python3-mock python3-pep8 python3-pyenchant
+> python3-pytest python3-pytest-cov python3-sphinx python3-sphinx_rtd_theme
+> python3-sphinxcontrib-spelling python3-tox python3-twine"
+>
+ I'm a little confused as to what this is trying to do since most of these
+packages do not have recipes.  The default right now will not include
+Twisted and zope.interface, which are required dependencies
 
->=20
-> More unstructured logs below largely for me to reference
-> should I come back to testing this package.
->=20
-> ../Randy
->=20
->=20
-> First there are a bunch of dependencies missing from the wand recipe,
-> which I started fixing like this:
->=20
-> -DEPENDS +=3D " imagemagick-native"
-> +DEPENDS +=3D " imagemagick-native python-ctypes"
->=20
-> but then ditched to doing:
->=20
-> $ grep wand conf/local.conf
-> IMAGE_INSTALL_append =3D " \
->   python-ctypes python-numbers python-contextlib \
->   python-io python-subprocess python-wand imagemagick"
->=20
->=20
->=20
-> qemux86 login: root
-> root@qemux86:~# python
-> Python 2.7.13 (default, Aug  1 2017, 17:41:39)
-> [GCC 7.1.0] on linux2
-> Type "help", "copyright", "credits" or "license" for more information.
->>>> from wand.image import Image
-> Traceback (most recent call last):
->  File "<stdin>", line 1, in <module>
->  File "/usr/lib/python2.7/site-packages/wand/image.py", line 20, in =
-<module>
->    from .api import MagickPixelPacket, libc, libmagick, library
->  File "/usr/lib/python2.7/site-packages/wand/api.py", line 206, in =
-<module>
->    'Try to install:\n  ' + msg)
-> ImportError: MagickWand shared library not found.
-> You probably had not installed ImageMagick library.
-> Try to install:
->  http://docs.wand-py.org/en/latest/guide/install.html
->>>>=20
->=20
->=20
->=20
-> root@qemux86:~# find /usr -name "*agick*so*"
-> /usr/lib/libMagickWand-7.Q16HDRI.so.3
-> /usr/lib/libMagickCore-7.Q16HDRI.so.3
-> /usr/lib/libMagickWand-7.Q16HDRI.so.3.0.0
-> /usr/lib/libMagick++-7.Q16HDRI.so.3
-> /usr/lib/libMagick++-7.Q16HDRI.so.3.0.0
-> /usr/lib/libMagickCore-7.Q16HDRI.so.3.0.0
-> root@qemux86:~# QEMU 2.8.1.1 monitor - type 'help' for more =
-information
-> (qemu) q
-> Cleanup
-> rmacleod@ala-lpggp2$find =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/ =
--name "*MagickWand*" | grep so
-> =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/image=
-magick-dbg/usr/lib/.debug/libMagickWand-7.Q16HDRI.so.3.0.0
-> =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/image=
-magick-dev/usr/lib/libMagickWand-7.Q16HDRI.so
-> =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/image=
-magick-doc/usr/share/doc/ImageMagick-7/www/api/MagickWand/MagickWand_8h-so=
-urce.html
-> =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/image=
-magick/usr/lib/libMagickWand-7.Q16HDRI.so.3.0.0
-> =
-tmp-glibc/work/core2-64-oe-linux/imagemagick/7.0.6-r0/packages-split/image=
-magick/usr/lib/libMagickWand-7.Q16HDRI.so.3
->=20
->=20
-> root@qemux86:~# cd /usr/lib/
-> root@qemux86:/usr/lib# ln -s libMagickWand-7.Q16HDRI.so.3 =
-libMagickWand-6.Q16HDRI.so.3
-> root@qemux86:/usr/lib# ln -s libMagickWand-7.Q16HDRI.so.3.0.0 =
-libMagickWand-6.Q16HDRI.so.3.0.0
-> root@qemux86:/usr/lib# python
-> Python 2.7.13 (default, Aug  1 2017, 17:41:39)
-> [GCC 7.1.0] on linux2
-> Type "help", "copyright", "credits" or "license" for more information.
-> >>> from wand.image import Image
-> Traceback (most recent call last):
->  File "<stdin>", line 1, in <module>
->  File "/usr/lib/python2.7/site-packages/wand/image.py", line 20, in =
-<module>
->    from .api import MagickPixelPacket, libc, libmagick, library
->  File "/usr/lib/python2.7/site-packages/wand/api.py", line 206, in =
-<module>
->    'Try to install:\n  ' + msg)
-> ImportError: MagickWand shared library not found.
-> You probably had not installed ImageMagick library.
-> Try to install:
->  http://docs.wand-py.org/en/latest/guide/install.html
->=20
->=20
->>> --- .../imagemagick/{imagemagick_7.0.5.bb =3D> imagemagick_7.0.6.bb} =
-     | 6 +++--- 1 file changed, 3 insertions(+), 3 deletions(-) rename
->>> meta-oe/recipes-support/imagemagick/{imagemagick_7.0.5.bb =3D> =
-imagemagick_7.0.6.bb} (96%)
->>>=20
->>> diff --git =
-a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb =
-b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb similarity =
-index 96% rename from
->>> meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb rename to =
-meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb index =
-b8ee6e7be..6f967c3a1 100644 ---
->>> a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.5.bb +++ =
-b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.6.bb @@ -8,11 =
-+8,11 @@ DEPENDS =3D "lcms bzip2 jpeg libpng
->>> librsvg tiff zlib fftw freetype" # Important note: tarballs for all =
-patchsets within a version are deleted when # a new pachset is created. =
-To avoid multiple patches for each
->>> patchset, try to # update to the last pachset of a version -PATCHSET =
-=3D "6" +PATCHSET =3D "4" SRC_URI =3D
->>> =
-"http://www.imagemagick.org/download/releases/ImageMagick-${PV}-${PATCHSET=
-}.tar.xz \ " -SRC_URI[md5sum] =3D "dfaa2bd61f65d67ea8d5307ed6cd197f" =
--SRC_URI[sha256sum] =3D
->>> "f60c3e3466ccbf9a0e643284ffec3467363edf9611f16a98387f927a974b49ab" =
-+SRC_URI[md5sum] =3D "079a857268536862148b00efcf3ad75a" =
-+SRC_URI[sha256sum] =3D
->>> "5fe1ce7d78befb5c8aa7f8ae69710d0f78063d2e3a35c656521a3ce468ea733b"
->>>=20
->>> S =3D "${WORKDIR}/ImageMagick-${PV}-${PATCHSET}"
->>>=20
->>>=20
->=20
->=20
-> --=20
-> # Randy MacLeod. SMTS, Linux, Wind River
-> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, =
-Canada, K2K 2W5
+> +PACKAGECONFIG[twisted] = ",,,python3-twisted python3-zope-interface"
+> +PACKAGECONFIG[all] = ",,,python3-twisted python-zope-interface"
+> +
+> +# WARNING: the following rdepends are from setuptools install_requires.
+> These
+> +# upstream names may not correspond exactly to bitbake package names.
+>
+Remove cruft
 
+> +RDEPENDS_${PN} += "python3-six"
+> +
+> +# WARNING: the following rdepends are determined through basic analysis
+> of the
+> +# python sources, and might not be 100% accurate.
+
++#RDEPENDS_${PN} += "python3-contextlib python3-core python3-datetime
+> python3-lang python3-logging"
+>
+Do you want to remove this line?
+
+> +
+> +
+> +do_install_append() {
+> +       echo "removing licence file because why is it installed here?"
+> +       rm -rf ${D}/usr/share
+> +}
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
