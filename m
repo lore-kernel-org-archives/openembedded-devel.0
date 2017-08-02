@@ -1,46 +1,46 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 18EDC780A1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id D5D1178218
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Aug 2017 01:09:09 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id y43so2579853wrd.0
+	Wed,  2 Aug 2017 02:55:33 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id t86so4559128pfe.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Aug 2017 18:09:11 -0700 (PDT)
+	Tue, 01 Aug 2017 19:55:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=eAtxp1AhAtX9ICEyZ4kQklZtYjbMtIGeQCAF43bsP3I=;
-	b=cD8zH6Bj7vzZuQ+cDNvKyPI7ajUqBdeVcVmswW2Do58MdcTEYyJmsJpLyu96nAwOAL
-	CYQu3zZhkwRkFrulBirRB4s5chznAkvrMj+tVfSS5pMzDycoIBNZyvA2ej4JFUrAXoG6
-	HLzaP+lLj5bCvIMvSI/hWyuZZOpxq8+C7SORHVS87l8DamkLO+wHsLXeXyLWUrHLMASH
-	8dkEBef0p0eYshrUiGqVduSYRrpJFhK1ne1W3i9ag04sOeDkrX/l2bCPgl6YHZIHJCUz
-	onZonuTZQFF8LaZG50Q1P7EYZl1C11uz1m8nP+ByOoOTu3rgcP3B9TSGF3IbsfjxhEk0
-	WScg==
+	h=from:to:cc:subject:date:message-id;
+	bh=l2wYTb4Lft808JDdZbLIuAVEd5yuQ/EbeEC/B1aFQds=;
+	b=llTJAxFGXcpexn6Lkk+oQJgmu8wTYAt/MrVB3Upv9B3nGk5OGZ/VrB/5anw5oG5GT0
+	8uajUcig4WJeOHqN5vWcOhl3rxgV0ogEaCaF76lEIfNFo3OtibemVZ0qFWdzsYsNaVSC
+	MXPpMg0nRWmEfsd//MHJ2J6bX1zt6dgEDeEzcV2ku1lgCHcXbCOc4tLgr5R/q9i+sfAE
+	SSpZba9OFdMy8v2M/sZOHdNwowMsrG/UdwusMGfSeoINrTmsD0+h/mQfddQDvm8129JM
+	k7kJGujTw2zn+C0weQ8eNJFIiNGXzfFc20vjREkoL8+YgqtXgCeO9/mZ4QbA5Pk+uHf7
+	YiEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=eAtxp1AhAtX9ICEyZ4kQklZtYjbMtIGeQCAF43bsP3I=;
-	b=IK8skelFP5wD3KzMxBL2UDcjnkdF8lRWPsGPTEvAzp0mS9yF2F3oj3UVHFmb9LGfVq
-	ErcB0n6o11FDLESmuVLSz7IMr95F91MEwmq1Rh4Z6DOuzymgf42A9Pt6IIqd5XeXe4rM
-	/Nzgf88Cq1DDqBJdSFi8vHYeaz93VoLRaYyNuwwhc0E67rwA5UYd8fgJ+b3OqNFL+Mzz
-	4tL9yzbcapqCdHIMHhcS1lrh24W1M6B3MW2GmKqqMkJHhi0+/8kxFtIFXlCpEaQ8ehgJ
-	DOKwVBXWkSCFWYaJtqAHgqgJePuuju4DEmt/+V7j1kNRssPZXN09tpALcwrIQ7WCRv/Z
-	U8Vw==
-X-Gm-Message-State: AIVw110NA+kj0EQeyxC8P4S4W356yUlM1+RLTZVinPn2zC9rhZT92CEr
-	8FQJWoCM6TpH601vySfgt1uOr3ndyA==
-X-Received: by 10.223.151.82 with SMTP id r76mr16308661wrb.6.1501636150469;
-	Tue, 01 Aug 2017 18:09:10 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.175.16 with HTTP; Tue, 1 Aug 2017 18:09:09 -0700 (PDT)
-In-Reply-To: <1501583507-1017-1-git-send-email-richard.purdie@linuxfoundation.org>
-References: <1501583507-1017-1-git-send-email-richard.purdie@linuxfoundation.org>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 1 Aug 2017 18:09:09 -0700
-Message-ID: <CAJ86T=UoTjRek3EfeqzhPXZP2GgmeJXEHCiz84id_MnkLuK7fg@mail.gmail.com>
-To: Richard Purdie <richard.purdie@linuxfoundation.org>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] uninative: Allow a local own-mirror to work with uninative
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=l2wYTb4Lft808JDdZbLIuAVEd5yuQ/EbeEC/B1aFQds=;
+	b=s4OQZZKUTz9KQfkDtbGAQfQQTH8okJWoUb8dOiZOv31k8Krxl1UAy+hSO01NrF40jA
+	d7QO3vhs3Y4b0GdxDVBKeMhsY+coMDoPigVUGYOCQ6csdXgRaoI3NvgEo9ZX+GDgZA8c
+	hAZ2l6ITcDQg/MP3yY4SBMCyVxjV8fdbeKxepMZB1weBCE1SE43GNgOqASKoL9cZ3DN0
+	aKEfp1TY3gQZ2l7E129Pi7DPhtCttZcXctjAsNJ/7Q/MDYddYlN1xD47LvA2RpWhnNEi
+	Kloauh7zgXEl3ofCX6iGVT8e7wBULCUA5NSWg5hOha6XM88hkHPdoJkYwtXy5c/CQb2m
+	3ORQ==
+X-Gm-Message-State: AIVw112pYi/clyoYUVkN0BZg5Jz+pS0TEhxQKaDfgpRTsQbV93kmzJ1C
+	Ke1pJvpF05pAJkLJ
+X-Received: by 10.98.57.138 with SMTP id u10mr21015100pfj.227.1501642534482;
+	Tue, 01 Aug 2017 19:55:34 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::1f6f])
+	by smtp.gmail.com with ESMTPSA id
+	s206sm59775669pfs.55.2017.08.01.19.55.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 01 Aug 2017 19:55:33 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  1 Aug 2017 19:55:22 -0700
+Message-Id: <20170802025523.37417-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.3
+Subject: [meta-qt5][PATCH 1/2] qtbase: Use sched_yield instead of pthread_yield
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,48 +53,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Aug 2017 01:09:10 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 02 Aug 2017 02:55:34 -0000
 
-On Tue, Aug 1, 2017 at 3:31 AM, Richard Purdie
-<richard.purdie@linuxfoundation.org> wrote:
-> The games we play with path manipulation of DL_DIR in uninative mean standard
-> PREMIRRORS don't work and we can't easily put 'chksum' into the url path from
-> a url parameter with the current fetcher url handling to make a generic
-> remapping. We therefore add to PREMIRRORS when we know the chksum to
-> create a premirror mapping which can work.
+Makes it portable across glibc and musl
 
-Wrong list?
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...11-Replace-pthread_yield-with-sched_yield.patch | 63 ++++++++++++++++++++++
+ recipes-qt/qt5/qtbase_git.bb                       |  1 +
+ 2 files changed, 64 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtbase/0011-Replace-pthread_yield-with-sched_yield.patch
 
-> [YOCTO #9888]
-> Signed-off-by: Richard Purdie <richard.purdie@linuxfoundation.org>
-> ---
->  meta/classes/uninative.bbclass | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/meta/classes/uninative.bbclass b/meta/classes/uninative.bbclass
-> index 8f34483..a410647 100644
-> --- a/meta/classes/uninative.bbclass
-> +++ b/meta/classes/uninative.bbclass
-> @@ -49,6 +49,12 @@ python uninative_event_fetchloader() {
->              localdata = bb.data.createCopy(d)
->              localdata.setVar('FILESPATH', "")
->              localdata.setVar('DL_DIR', tarballdir)
-> +            # Our games with path manipulation of DL_DIR mean standard PREMIRRORS don't work
-> +            # and we can't easily put 'chksum' into the url path from a url parameter with
-> +            # the current fetcher url handling
-> +            ownmirror = d.getVar('SOURCE_MIRROR_URL')
-> +            if ownmirror:
-> +                localdata.appendVar("PREMIRRORS", " ${UNINATIVE_URL}${UNINATIVE_TARBALL} ${SOURCE_MIRROR_URL}/uninative/%s/${UNINATIVE_TARBALL}" % chksum)
->
->              srcuri = d.expand("${UNINATIVE_URL}${UNINATIVE_TARBALL};sha256sum=%s" % chksum)
->              bb.note("Fetching uninative binary shim from %s" % srcuri)
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/qtbase/0011-Replace-pthread_yield-with-sched_yield.patch b/recipes-qt/qt5/qtbase/0011-Replace-pthread_yield-with-sched_yield.patch
+new file mode 100644
+index 0000000..ed0d4bc
+--- /dev/null
++++ b/recipes-qt/qt5/qtbase/0011-Replace-pthread_yield-with-sched_yield.patch
+@@ -0,0 +1,63 @@
++From d1d4b520e29b58e427fc7bd336d34b82d0d2b1f3 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 27 Jul 2017 08:02:51 -0700
++Subject: [PATCH] Replace pthread_yield with sched_yield
++
++On Linux pthead_yield is same as sched_yield implementation wise
++and sched_yield is available on all libc
++implementations on Linux
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp   | 4 ++--
++ tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp | 5 +++--
++ 2 files changed, 5 insertions(+), 4 deletions(-)
++
++diff --git a/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp b/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
++index 7d9f56ef38..bc115ef61d 100644
++--- a/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
+++++ b/tests/auto/corelib/kernel/qmetatype/tst_qmetatype.cpp
++@@ -34,7 +34,7 @@
++ #include "tst_qvariant_common.h"
++ 
++ #ifdef Q_OS_LINUX
++-# include <pthread.h>
+++# include <sched.h>
++ #endif
++ 
++ #include <algorithm>
++@@ -197,7 +197,7 @@ protected:
++             const char *nm = name.constData();
++             int tp = qRegisterMetaType<Bar>(nm);
++ #if defined(Q_OS_LINUX) && !defined(Q_OS_ANDROID)
++-            pthread_yield();
+++            sched_yield();
++ #endif
++             QMetaType info(tp);
++             if (!info.isValid()) {
++diff --git a/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp b/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
++index fe1057bdde..e23e97b259 100644
++--- a/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
+++++ b/tests/auto/network/socket/qtcpsocket/tst_qtcpsocket.cpp
++@@ -75,6 +75,7 @@
++ #include <stdlib.h>
++ #include <sys/stat.h>
++ #include <unistd.h>
+++#include <sched.h>
++ #endif
++ 
++ #include "private/qhostinfo_p.h"
++@@ -2129,8 +2130,8 @@ public slots:
++ 
++ #if defined(Q_OS_MAC)
++         pthread_yield_np();
++-#elif defined Q_OS_LINUX && !defined Q_OS_ANDROID
++-        pthread_yield();
+++#elif defined Q_OS_LINUX
+++        sched_yield();
++ #endif
++         if (!sock->waitForConnected()) {
++             networkTimeout = true;
++-- 
++2.13.3
++
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index c26a93b..9e652c3 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -24,6 +24,7 @@ SRC_URI += "\
+     file://0009-Disable-all-unknown-features-instead-of-erroring-out.patch \
+     file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
+     file://0010-tst_qstring-Disable-Wformat-security-with-clang-as-w.patch \
++    file://0011-Replace-pthread_yield-with-sched_yield.patch \
+ "
+ 
+ # only for target qtbase
+-- 
+2.13.3
+
 
