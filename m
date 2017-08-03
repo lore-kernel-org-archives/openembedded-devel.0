@@ -1,25 +1,45 @@
-Return-Path: <amery@hanoverdisplays.com>
-Received: from mail.hanoverdisplays.com (mail.hanoverdisplays.com [62.7.92.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3979772F2A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 96E967199A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Aug 2017 13:05:49 +0000 (UTC)
-Received: from localhost (192.168.0.21) by mail.hanoverdisplays.com
-	(192.168.0.31) with Microsoft SMTP Server (TLS) id 14.3.319.2;
-	Thu, 3 Aug 2017 14:05:49 +0100
-From: Alejandro Mery <amery@hanoverdisplays.com>
-To: <openembedded-devel@lists.openembedded.org>, Armin Kuster
-	<akuster808@gmail.com>
-Date: Thu, 3 Aug 2017 14:05:18 +0100
-Message-ID: <20170803130518.6351-4-amery@hanoverdisplays.com>
-X-Mailer: git-send-email 2.13.0
-In-Reply-To: <20170803130518.6351-1-amery@hanoverdisplays.com>
-References: <20170803130518.6351-1-amery@hanoverdisplays.com>
-MIME-Version: 1.0
-X-Originating-IP: [192.168.0.21]
-X-GFI-SMTP-Submission: 1
-X-GFI-SMTP-HelloDomain: localhost
-X-GFI-SMTP-RemoteIP: 192.168.0.21
-Subject: [meta-oe][pyro][PATCH 3/3] gitver: skip packages instead of panic()ing if ${GITVER} fails to expand
+	Thu,  3 Aug 2017 16:43:38 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id y129so1963479pgy.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Aug 2017 09:43:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=kCuZY3Pa4Xn9/67t4vRd/Md2gB4PkalpAcmnZrElCss=;
+	b=JgFFjCpKSXnIht8jWoF6Xw2iVfcEnfD7j28hZVOcAjLgp6R/+l1c5TpXI6fkdz/E9I
+	tXbO0vrYWfZwZXc2B0uhsWPaRpHZvrRKCULQwiIrNmPutGQFsBZZWVpWYAq7I32sW/qf
+	b4GbjefRB5R2+SWv8o73hg5ZbzTuWIwYhsMgmxEhq59CjIwZf7GglRTbjeeFAAbiWwWb
+	VIz5OpJZy7Jd9GZ+mHjOv7xwf9Hv4WAPdaRDYxiEGieQ5e4cO0avMb+eMlKxDc/Dx4mf
+	nVEQ5BLWqDtJ1HZiBOerH7aqWRze12wgIUkqT7nM1bGkzg9bjN0gp57wIkX+hcuBiEJQ
+	u99g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=kCuZY3Pa4Xn9/67t4vRd/Md2gB4PkalpAcmnZrElCss=;
+	b=gSJbPKZXw61drXN3MtqtVS59kJ6CRR0DnQkXqudiBpyXbCSfqvN4q+qfCUSCB0jxC/
+	yDs2kfoMDNAcm5qcHWi8ZF7x0xjCVi4njhTdeqsTFYNELCwIBFe4zN61Ci8aSFCMG7Hs
+	SDxQXQQWedimkMxsV4XMnMKzbQcDMtT6kgPbeipAe/+MLP314JrBS6lGMa3UQKU9kk4J
+	Kwhg2irdfW0R5Bal0Gn2bNkIhVeOxITjHf4gjE1wtXdQsgSaI4MZM9cNfVyGY9tdohGb
+	xqSOf5+UDvvnMhENQRfUD2xMl4TgxoP2zO5anPk3f6s4haLuufO4jTK1ZwCVR/t5WkNW
+	+rww==
+X-Gm-Message-State: AIVw110ZftsbAZ6BN2UBn+rzsCq1eUdd3V6Z9PYjSxD60d/vtPC/OT4g
+	SmXMroPff8F83pBi
+X-Received: by 10.84.128.75 with SMTP id 69mr2558285pla.58.1501778619637;
+	Thu, 03 Aug 2017 09:43:39 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::1f6f])
+	by smtp.gmail.com with ESMTPSA id
+	l2sm58417558pgc.27.2017.08.03.09.43.38
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 03 Aug 2017 09:43:38 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  3 Aug 2017 09:43:26 -0700
+Message-Id: <20170803164326.11187-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.13.4
+Subject: [meta-browser][PATCH] chromium: Disable use_sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,65 +52,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Aug 2017 13:05:49 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 03 Aug 2017 16:43:38 -0000
 
-`inherit externalsrc gitver` is a very useful combo to get development trees
-in your workspace having a ${PN}_git.bb with PV=${GITVER} coexisting with a regular
-${PN}_${PV}.bb
+This variable is required to be unset so that we
+can tell the system that we are using a different
+newer C++ runtime library than the sysroot which
+helps in compiling with clang also
 
-but not everyone wants to checkout all developments sources and managinging different
-layers for each options is quite troublesome.
+Fixes link errors like
+undefined reference to '__atomic_is_lock_free'
 
-making `gitver` skip the .bb instead of panic()ing every time EXTERNALSRC is missing
-allows people to have a single development layer where packages get enabled if
-the right sources are present or falling back to the last release if not
-
-Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- meta-oe/classes/gitver.bbclass | 23 ++++++++++-------------
- 1 file changed, 10 insertions(+), 13 deletions(-)
+ recipes-browser/chromium/files/aarch64/oe-defaults.gypi | 1 +
+ recipes-browser/chromium/files/armv6/oe-defaults.gypi   | 1 +
+ recipes-browser/chromium/files/armv7a/oe-defaults.gypi  | 1 +
+ recipes-browser/chromium/files/armv7ve/oe-defaults.gypi | 1 +
+ recipes-browser/chromium/files/x86-64/oe-defaults.gypi  | 1 +
+ recipes-browser/chromium/files/x86/oe-defaults.gypi     | 1 +
+ 6 files changed, 6 insertions(+)
 
-diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbclass
-index a09c99749..380374ab2 100644
---- a/meta-oe/classes/gitver.bbclass
-+++ b/meta-oe/classes/gitver.bbclass
-@@ -27,23 +27,20 @@ def get_git_pv(d, tagadjust=None):
-     gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
-     try:
-         ver = gitrev_run("git describe --tags", gitdir)
--    except Exception as exc:
--        bb.fatal(str(exc))
--
--    if not ver:
-+    except:
-         try:
-             ver = gitrev_run("git rev-parse --short HEAD", gitdir)
-+            if ver:
-+                return "0.0+%s" % ver
-+            else:
-+                return "0.0"
-+
-         except Exception as exc:
--            bb.fatal(str(exc))
-+            raise bb.parse.SkipPackage(str(exc))
- 
--        if ver:
--            return "0.0+%s" % ver
--        else:
--            return "0.0"
--    else:
--        if tagadjust:
--            ver = tagadjust(ver)
--        return ver
-+    if ver and tagadjust:
-+        ver = tagadjust(ver)
-+    return ver
- 
- def get_git_hash(d):
-     import os
+diff --git a/recipes-browser/chromium/files/aarch64/oe-defaults.gypi b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+index 27e1cfe..3862e58 100644
+--- a/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/aarch64/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0
++    'use_sysroot': 0,
+   }, 
+ }
+diff --git a/recipes-browser/chromium/files/armv6/oe-defaults.gypi b/recipes-browser/chromium/files/armv6/oe-defaults.gypi
+index 27e1cfe..3862e58 100644
+--- a/recipes-browser/chromium/files/armv6/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/armv6/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0
++    'use_sysroot': 0,
+   }, 
+ }
+diff --git a/recipes-browser/chromium/files/armv7a/oe-defaults.gypi b/recipes-browser/chromium/files/armv7a/oe-defaults.gypi
+index 27e1cfe..3862e58 100644
+--- a/recipes-browser/chromium/files/armv7a/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/armv7a/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0
++    'use_sysroot': 0,
+   }, 
+ }
+diff --git a/recipes-browser/chromium/files/armv7ve/oe-defaults.gypi b/recipes-browser/chromium/files/armv7ve/oe-defaults.gypi
+index 27e1cfe..3862e58 100644
+--- a/recipes-browser/chromium/files/armv7ve/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/armv7ve/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0
++    'use_sysroot': 0,
+   }, 
+ }
+diff --git a/recipes-browser/chromium/files/x86-64/oe-defaults.gypi b/recipes-browser/chromium/files/x86-64/oe-defaults.gypi
+index 0a6e8e8..9f858d4 100644
+--- a/recipes-browser/chromium/files/x86-64/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/x86-64/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0,
++    'use_sysroot': 0,
+   }, 
+ }
+diff --git a/recipes-browser/chromium/files/x86/oe-defaults.gypi b/recipes-browser/chromium/files/x86/oe-defaults.gypi
+index 0a6e8e8..9f858d4 100644
+--- a/recipes-browser/chromium/files/x86/oe-defaults.gypi
++++ b/recipes-browser/chromium/files/x86/oe-defaults.gypi
+@@ -11,5 +11,6 @@
+     'use_cups': 0,
+     'use_gnome_keyring': 0,
+     'linux_link_gnome_keyring': 0,
++    'use_sysroot': 0,
+   }, 
+ }
 -- 
-2.13.0
+2.13.4
 
 
