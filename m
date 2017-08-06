@@ -1,47 +1,46 @@
 Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f179.google.com (mail-pf0-f179.google.com
-	[209.85.192.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 8E5B2602D9
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DFFD665D00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  6 Aug 2017 07:12:29 +0000 (UTC)
-Received: by mail-pf0-f179.google.com with SMTP id c28so21827779pfe.3
+	Sun,  6 Aug 2017 07:15:58 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id l64so5796805pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Aug 2017 00:12:31 -0700 (PDT)
+	Sun, 06 Aug 2017 00:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=610zUSWb7Ey/JOyacrXNxTYN3e8ce8qgq0Mu9XMMA68=;
-	b=F/2j9+m4Phh/cN4wBzKBzh/gPLo+Ce+hKEkivDDMfohPQwvzXV8j+8KAj7z1iOY9z5
-	TqC1Gm51MgPmPKRKywfJitTQdWcOWLSM0ffKQwMWbuMUNoKyo//LMv9rp66dn6crzghB
-	7gTRV2Vf1zOGsg5F7xKGW5jpeR8TibxP0NKoayKOq9RDuKzSjAl3vVv0728KpmMUMcml
-	El4YiwFyIqCGyTse9qc7jxcKp+LjAcnnATamldiIxxygzwRYjzgSuQn0/LuqBY+79sbe
-	PSSAwDHGMzIgOWQ/5Epdoa3VfttIODbbiYSYIJf+8tL7vXvW+G734up/pVMB27G7HjCY
-	GkZQ==
+	bh=xBnugcqey96YEX+WV+dqGohYBGPjCUuD56/nLQa0jGE=;
+	b=gE14fS/F/AS0bh38RkrW3PIGzYmX/KSq1rTEFZLy0fss8NzAmow4J8z28Y6/O8fHRZ
+	9+9GKghrtbGf2aqSYCfL7t9kZ0W0fyBQ/3MLYvLsbUJhzdn4kQ8V2fNKTl0xArEi/QVi
+	tbAE0q0vRw9QQhlEIgyLgLZp4JJoeivCvdI29FcQcyGpHMF3/PkxZGUD/U2lo197Vzuf
+	5vzWHlwrRdO2Pb6BMgiIBg+CcaGOxU4bjQJ25re41eqY4uWkAM/Zw70NsiyOKbq6fAne
+	lqDprEK0w1N/VN1iyiAu4zsD7m6Y6S2ttxngYXWOGjGoDwG+DxYhjGsinNYoEzMB7L39
+	BvPw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=610zUSWb7Ey/JOyacrXNxTYN3e8ce8qgq0Mu9XMMA68=;
-	b=CY9VVaqKpj9WEPmTjlrvjLQN2mrVHsPCjgk1ifr0dG7ASLyF7EIGfHHMVzmz529e/7
-	EXEvDbBKzda97Zxy8/EQcNlA49u+NEIvtQLf5r7gt9cCG6yxWPOlLcfJD0w2IJT2kyJb
-	gDg6/dOx+OEcm0wh7x1OKLT/a2tsvbtiMXt/YlemwHk9RR3ossKRLWmAGp8rcRpn+MR6
-	Q/PjlYA7NTP4OYyoU552pqLvikEjXatuvNTRpC+jBqWKyLaetFKbi9ZDki6A3q2iEuJg
-	nRIqOn60bIBewWNsUcUJhbBdbzsZnBgji3mafrnS9aIiKylTjBRwT07pY1NoHXhriS+v
-	J1Gw==
-X-Gm-Message-State: AIVw11118xrw7nY1dwTr9n0Gc44k6J2TK7PVef1Mb9Im9xLOzoYHLqnd
-	P4P62bJZw+G34Q==
-X-Received: by 10.99.116.74 with SMTP id e10mr7412155pgn.179.1502003551057;
-	Sun, 06 Aug 2017 00:12:31 -0700 (PDT)
+	bh=xBnugcqey96YEX+WV+dqGohYBGPjCUuD56/nLQa0jGE=;
+	b=U7Rfb/2P3GaDtRo6XJ/a+z6IJyoNNS8bTGtXuzMfv6GDIx+tX7EEUnjrmU1vlltWqI
+	c1hnHt+pAnh7d2kW7BdUVZWCMIgnDlHYlI9l0MP+WzshQyrtzT0oYu5bG6r6WVfEU/Wd
+	fNHaX3J3mMs5LVidct+1dyhfRDgQoJ0Le8zzcY17hEFi0pJw2kREbM3gWzEjEhkw+JYh
+	/bgZfXiMDW0L48icsoJPq6wx3ABuWzCnvKWhm4yuNY089jwuMTCDHWHx4iWE5/h+R8zJ
+	1KIwE5h2BI82uI7IqUUvs0V5SvE8+SLtQxgjeQwseaDEYHWU2dRJ/6kUUm8rKWfiYRxN
+	uisA==
+X-Gm-Message-State: AHYfb5hl9Cn0dsN6viQCDQhttiLG9jJAmOBtrN8agrO1uAxKzqf5Wnto
+	XxAT1lSh1+I8bA==
+X-Received: by 10.98.67.208 with SMTP id l77mr8002604pfi.333.1502003760076;
+	Sun, 06 Aug 2017 00:16:00 -0700 (PDT)
 Received: from 60-242-179-244.static.tpgi.com.au
 	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
 	by smtp.gmail.com with ESMTPSA id
-	k85sm10664325pfj.5.2017.08.06.00.12.29
+	b84sm9001225pfj.128.2017.08.06.00.15.59
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sun, 06 Aug 2017 00:12:30 -0700 (PDT)
+	Sun, 06 Aug 2017 00:15:59 -0700 (PDT)
 From: Jonathan Liu <net147@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  6 Aug 2017 17:13:32 +1000
-Message-Id: <20170806071332.17253-1-net147@gmail.com>
+Date: Sun,  6 Aug 2017 17:17:04 +1000
+Message-Id: <20170806071704.17635-1-net147@gmail.com>
 X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH] libcyusbserial: new recipe
+Subject: [meta-qt5][PATCH] quazip: update to 0.7.3 and add missing metadata
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,38 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Aug 2017 07:12:30 -0000
+X-List-Received-Date: Sun, 06 Aug 2017 07:15:59 -0000
+
+The license checksum has changed as a static linking exception has been
+added on top of the LGPL 2.1 license.
 
 Signed-off-by: Jonathan Liu <net147@gmail.com>
 ---
- .../libcyusbserial/libcyusbserial_git.bb               | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
+ recipes-qt/quazip/{quazip_0.7.2.bb => quazip_0.7.3.bb} | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+ rename recipes-qt/quazip/{quazip_0.7.2.bb => quazip_0.7.3.bb} (43%)
 
-diff --git a/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
-new file mode 100644
-index 000000000..74b5e21e2
---- /dev/null
-+++ b/meta-oe/recipes-support/libcyusbserial/libcyusbserial_git.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "Enable userspace control of Cypress USB-Serial bridge devices"
-+HOMEPAGE = "https://github.com/cyrozap/libcyusbserial"
-+BUGTRACKER = "https://github.com/cyrozap/libcyusbserial/issues"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING.LESSER.txt;md5=4fbd65380cdd255951079008b364516c"
-+DEPENDS = "libusb udev"
-+
-+PV = "1.0.0+git${SRCPV}"
-+
-+SRCREV = "655e2d544183d094f0e2d119c7e0c6206a0ddb3f"
-+SRC_URI = "git://github.com/cyrozap/${BPN}.git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+PACKAGES =+ "${PN}-utils"
-+FILES_${PN}-utils = "${bindir}/*"
+diff --git a/recipes-qt/quazip/quazip_0.7.2.bb b/recipes-qt/quazip/quazip_0.7.3.bb
+similarity index 43%
+rename from recipes-qt/quazip/quazip_0.7.2.bb
+rename to recipes-qt/quazip/quazip_0.7.3.bb
+index 6b09cf9..970204e 100644
+--- a/recipes-qt/quazip/quazip_0.7.2.bb
++++ b/recipes-qt/quazip/quazip_0.7.3.bb
+@@ -1,11 +1,13 @@
+ SUMMARY = "Qt/C++ wrapper for ZIP/UNZIP package"
++HOMEPAGE = "http://quazip.sourceforge.net/"
++BUGTRACKER = "https://sourceforge.net/p/quazip/bugs/"
+ LICENSE = "LGPLv2.1"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=27818cd7fd83877a8e3ef82b82798ef4"
++LIC_FILES_CHKSUM = "file://COPYING;md5=910d778aab53617cbaf13c4e1810e289"
+ DEPENDS = "qtbase"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "84163487a4c3470781c93e5f56c4ca43"
+-SRC_URI[sha256sum] = "91d827fbcafd099ae814cc18a8dd3bb709da6b8a27c918ee1c6c03b3f29440f4"
++SRC_URI[md5sum] = "2ba7dd8b1d6dd588374c9fab5c46e76e"
++SRC_URI[sha256sum] = "2ad4f354746e8260d46036cde1496c223ec79765041ea28eb920ced015e269b5"
+ 
+ inherit qmake5
+ 
 -- 
 2.13.2
 
