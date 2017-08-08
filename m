@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 704EE719AF
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id A67D871A36
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 17:40:51 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q66so3682084qki.1
+	Tue,  8 Aug 2017 17:49:04 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id p3so3762482qtg.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Aug 2017 10:40:53 -0700 (PDT)
+	Tue, 08 Aug 2017 10:49:06 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xTKsV5hvXDIcT0bQ2sFDtI3sKXABlFP3adY4yVkMUBQ=;
-	b=gwQdHguQBG2Irq1fbcMnlSldICeuzFCuzEq6L/jiK6/zFo/XYHAS/WwkP9utGIfaam
-	Z3M3a2mugh90e9qGmTEgUXhcSTp3crWexfEgdelgyncua70NnPNIKq8ZazPHQ/Mo0Zs7
-	ghlNXIHhHIQfUjysCMSuSNVMJg7QhxGAxLg6EggT8DKMbuc602615o9XeKb0XO8a/2+a
-	0NtBP4sNd9GuUEMwckc2vjLBNCBZ1VaSY2Odnvh0SxEgfFKfX6pjlr/aHaHJmoLTxee1
-	U5gavG5R1xGnT1/hYC9JcpntgvPhnZaJHM97EhiFC9FVmTM3dX1rtKk9/gyvC0nPpiMz
-	S3wg==
-X-Gm-Message-State: AHYfb5ht9NN08+dtOKVnOSM699AbE1hnNb0e14NYSOIcEkaELo6BLD8H
-	S72Z/hGLvMukM+I61lk=
-X-Received: by 10.237.38.132 with SMTP id q4mr6499030qtd.321.1502214052983;
-	Tue, 08 Aug 2017 10:40:52 -0700 (PDT)
+	bh=BFSTm3hUBcvJczc1LkrnaAatHKphhMVGA1vZg+Wly50=;
+	b=JUY9asMxqfy9PJqZJVIcWdBvYP6fTgggAR0mltqTgAxgLqZHcP6IlXgLiB2qCVZbiG
+	NEG5s8UzyHvtMTm3/bUkHAvItZoUl7oRH5NYx7fhNJXbl/xzj4Ae5NNSnGy8qvgp3OPp
+	3mAxnbjvPi8BZRJ/3pRgHTIBL1f1bkocH7oTVavRQpCeFJTgIdiVSvsUBaRUAExci/Hw
+	mi0+RTWdxXp0xk66TsIZLNDvWJuKPpKqjKqguxQqo26kr4+9z9qFoXGUDeNKESFeO5k1
+	PS4TxnnmzkQ5xBc0RSHqv3Bm4J2uHKoWxWOFs2Pye5Wn3tZWzOs1s0TuyyHaZs0CigA2
+	aWRA==
+X-Gm-Message-State: AHYfb5gE8shxdu89KWyMlqNX92162LFrtDcrcV6d+p+4J5j77XCphKRn
+	ML85fGVuBi2Gqz/zYeI=
+X-Received: by 10.200.45.236 with SMTP id q41mr6802318qta.177.1502214545536;
+	Tue, 08 Aug 2017 10:49:05 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id y36sm935121qtc.38.2017.08.08.10.40.51
+	by smtp.gmail.com with ESMTPSA id o1sm938520qtg.7.2017.08.08.10.49.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 08 Aug 2017 10:40:51 -0700 (PDT)
+	Tue, 08 Aug 2017 10:49:05 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Aug 2017 13:40:45 -0400
-Message-Id: <1502214045-10239-1-git-send-email-derek@asterius.io>
+Date: Tue,  8 Aug 2017 13:48:57 -0400
+Message-Id: <1502214537-14417-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] apache2: update to version 2.4.27
+Subject: [meta-perl][PATCH] libxml-sax-writer-perl: update to version 0.57
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,51 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 17:40:52 -0000
+X-List-Received-Date: Tue, 08 Aug 2017 17:49:04 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../apache2/{apache2-native_2.4.25.bb => apache2-native_2.4.27.bb}    | 4 ++--
- .../recipes-httpd/apache2/{apache2_2.4.25.bb => apache2_2.4.27.bb}    | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
- rename meta-webserver/recipes-httpd/apache2/{apache2-native_2.4.25.bb => apache2-native_2.4.27.bb} (91%)
- rename meta-webserver/recipes-httpd/apache2/{apache2_2.4.25.bb => apache2_2.4.27.bb} (98%)
+ ...{libxml-sax-writer-perl_0.56.bb => libxml-sax-writer-perl_0.57.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/libxml/{libxml-sax-writer-perl_0.56.bb => libxml-sax-writer-perl_0.57.bb} (86%)
 
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.27.bb
-similarity index 91%
-rename from meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2-native_2.4.27.bb
-index 99717d2..4e893db 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2-native_2.4.27.bb
-@@ -15,8 +15,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
- S = "${WORKDIR}/httpd-${PV}"
+diff --git a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+similarity index 86%
+rename from meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb
+rename to meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+index 961ceda..d1b0de0 100644
+--- a/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.56.bb
++++ b/meta-perl/recipes-perl/libxml/libxml-sax-writer-perl_0.57.bb
+@@ -13,8 +13,8 @@ DEPENDS += "libxml-filter-buffertext-perl-native"
+ RDEPENDS_${PN} += "libxml-filter-buffertext-perl"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
--SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
-+SRC_URI[md5sum] = "97b6bbfa83c866dbe20ef317e3afd108"
-+SRC_URI[sha256sum] = "71fcc128238a690515bd8174d5330a5309161ef314a326ae45c7c15ed139c13a"
+ SRC_URI = "http://search.cpan.org/CPAN/authors/id/P/PE/PERIGRIN/XML-SAX-Writer-${PV}.tar.gz"
+-SRC_URI[md5sum] = "e5fa5e2b2f6867b1aca9b5b43e1ce361"
+-SRC_URI[sha256sum] = "d073f7a25072c8150317b86b99d07031316a15bffab99e63e5afe591c8217d03"
++SRC_URI[md5sum] = "3e3023c648e3003c04de2fb04435f8bd"
++SRC_URI[sha256sum] = "3d61d07ef43b0126f5b4de4f415a256fa859fa88dc4fdabaad70b7be7c682cf0"
  
- EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS}/apr-1-config \
-                 --with-apr-util=${STAGING_BINDIR_CROSS}/apu-1-config \
-diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.27.bb
-similarity index 98%
-rename from meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-rename to meta-webserver/recipes-httpd/apache2/apache2_2.4.27.bb
-index 0ba7d3c..f053e37 100644
---- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.25.bb
-+++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.27.bb
-@@ -23,8 +23,8 @@ SRC_URI = "${APACHE_MIRROR}/httpd/httpd-${PV}.tar.bz2 \
-           "
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=dbff5a2b542fa58854455bf1a0b94b83"
--SRC_URI[md5sum] = "2826f49619112ad5813c0be5afcc7ddb"
--SRC_URI[sha256sum] = "f87ec2df1c9fee3e6bfde3c8b855a3ddb7ca1ab20ca877bd0e2b6bf3f05c80b2"
-+SRC_URI[md5sum] = "97b6bbfa83c866dbe20ef317e3afd108"
-+SRC_URI[sha256sum] = "71fcc128238a690515bd8174d5330a5309161ef314a326ae45c7c15ed139c13a"
- 
- S = "${WORKDIR}/httpd-${PV}"
+ LIC_FILES_CHKSUM = "file://README;beginline=45;endline=46;md5=d41d8cd98f00b204e9800998ecf8427e"
  
 -- 
 2.7.4
