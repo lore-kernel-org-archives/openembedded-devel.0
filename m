@@ -1,53 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 234B56093B
+Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
+	by mail.openembedded.org (Postfix) with ESMTP id DED436093B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 21:38:33 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id y43so3299645wrd.0
+	Tue,  8 Aug 2017 21:38:34 +0000 (UTC)
+Received: by mail-wm0-f54.google.com with SMTP id m85so17498317wma.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Aug 2017 14:38:35 -0700 (PDT)
+	Tue, 08 Aug 2017 14:38:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=b1S/KzcG1EJQ4Irf5OLxLJC6SWQK/HxJ7Y+hBeRxrZw=;
-	b=uU8j2uicydZLtgW2XOYwukS4LtbPT6YBkaYozHB5y3f6QukvWXjL56+wREkLvzYh4T
-	fMvGid1UjP/IRsmh/yEJPer375HRB3SZVyhNSCuYh6z4erZm40W/0W/G+1tIN8tso47W
-	Xcrz8YM8MpaUAqhcRphOKvuoLPs/468oBqgKQyknBatiJwnIWCR8Snypakl2aWf+72TM
-	yxu6qs6kN+hiLQN6HYFUgf2p/wp2HAYB4BgvgYvb1G1rFCYqDzGG33V9+w2b5gir3gDy
-	VAg/Eg0Q9JW0GQ3vNOR42TysI+4out+PyZseURBCp3KRcC8Fdj0VwRNMSXO6I1gKjW8Q
-	zYiw==
+	bh=LKp5vr0KSN6IE5MOkJBLXfNGJTPKSpGX3wrcItwlkvc=;
+	b=Hw1vaXTHwEdmsSRflENw9hFp7+jAyqLNwVWidLp8tqvVimNsC9GS2b2SacaqWcmGqb
+	Hfg0wWY/8v02YJgOTgf+TBUMzTmmTcd6UpOUS0XMm0HtixgkGAGLP6fM8VuNaWamt1t8
+	vo+asWz3EGRyFiZXem1lD2cfvLYgzyCE3beOk/SMVBFvqoCx3mTFBlXlJGdTPC7NLvot
+	39Mrhxs9I1WV0f/q4ZTnUDX4jlHzG8uqSusBCfNtBIKBK94tZup0NgOJrFSSl4qk0BSF
+	G5JQKgdk1sM4I4eeZxyIine5Mr394/xJOePOFw//BYyX0jUzRlqET1R7B7o05gdh8+TP
+	exuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=b1S/KzcG1EJQ4Irf5OLxLJC6SWQK/HxJ7Y+hBeRxrZw=;
-	b=Zbepaq+yODBnP2ppk8X/uDzsvMuaj0CGRJOU139QKqNL4U0J+jEzyE00npVLsUP1fm
-	+i8Gxlj6Gj+Hvk1tkbvGlRXCSneL/xeD7kHdg6DQDtruBPim4Hb8gcS7+LMkYvBwUS5T
-	Ayz+HovcDM0Ux3NEDnjSHYfTLGSS9zsLFhywT9ulyszWLLhL19NqLa4UsPPetGHPljWU
-	VB2eFDklhZkVVrBd0aagArBnOvVFRXBQ9y4iL6F5uEMoZ/2ZZJA28N08D+lBSZoLMjTZ
-	b3LGbOJva3XYuRHabMk+YcWB/MqqLazFCW4h/EjmRQo7L6GSkKB3b/5kPwPEPfQ4bMSv
-	reLw==
-X-Gm-Message-State: AHYfb5hxk6GnMEYxEBls4fQxqju6B9gnxCVwR59ycRA0uduqWrC61FOz
-	uDaFdLU5OyRSANn5
-X-Received: by 10.223.134.221 with SMTP id 29mr4775147wry.63.1502228314464;
-	Tue, 08 Aug 2017 14:38:34 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=LKp5vr0KSN6IE5MOkJBLXfNGJTPKSpGX3wrcItwlkvc=;
+	b=GIDhbSkmFqoEgCa9PcT/IFvgSzp2wzxA0wfVWVrwHTweWrOPCT6RPaXY7iVkItKpv2
+	k2GEsRQAVz2eY/IKD4sT9gi2fY8s5gr4mM1VBLLPsK5BiGu2ouyF1tDDVbMP+sfSf2mw
+	XuyVp/OZe8Ljbk5Qf2Xm98WeSQ5oXfskcqndnmjm5II0Jbz+dWK1zi4MM8zVN44xFZu9
+	UE5SQw1SZXPakRrXjDVdVdbMkZsA54eioZJD+Snxkv39O287yNhqh5HPnIiEMTj05UsO
+	MyEuHmDtDmAX0XVlk3ScaekH1X17fwLhlU0wjLQXgX0j6fD+fObm9M5PllpTKG2d9nIb
+	wOrg==
+X-Gm-Message-State: AHYfb5gNt3eSCuFQFTbQTl3BAeoDyfN5ngjzFWjzwZgMMJqJ1SN27LC9
+	9QAMJAvgPJyr8mEv
+X-Received: by 10.28.71.5 with SMTP id u5mr4410431wma.138.1502228315397;
+	Tue, 08 Aug 2017 14:38:35 -0700 (PDT)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030046E90C29881E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:46:e90c:2988:1e6f:65ff:fe3e:7f61])
 	by smtp.googlemail.com with ESMTPSA id
-	p68sm14587855wmf.0.2017.08.08.14.38.33
+	p68sm14587855wmf.0.2017.08.08.14.38.34
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Aug 2017 14:38:33 -0700 (PDT)
+	Tue, 08 Aug 2017 14:38:34 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Aug 2017 23:38:13 +0200
-Message-Id: <20170808213821.17561-1-schnitzeltony@googlemail.com>
+Date: Tue,  8 Aug 2017 23:38:14 +0200
+Message-Id: <20170808213821.17561-2-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.4
+In-Reply-To: <20170808213821.17561-1-schnitzeltony@googlemail.com>
+References: <20170808213821.17561-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/9] exo: update 0.11.2 -> 0.11.5
+Subject: [PATCH 2/9] thunar: update 1.6.11 -> 1.6.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,110 +61,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 21:38:34 -0000
+X-List-Received-Date: Tue, 08 Aug 2017 21:38:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../exo/exo/reduce-build-to-exo-csource-only.patch | 40 ++++++++--------------
- .../exo/{exo_0.11.2.bb => exo_0.11.5.bb}           |  4 +--
- 2 files changed, 17 insertions(+), 27 deletions(-)
- rename meta-xfce/recipes-xfce/exo/{exo_0.11.2.bb => exo_0.11.5.bb} (88%)
+ meta-xfce/recipes-xfce/thunar/{thunar_1.6.11.bb => thunar_1.6.12.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/thunar/{thunar_1.6.11.bb => thunar_1.6.12.bb} (88%)
 
-diff --git a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-index 8073fca..99318d5 100644
---- a/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-+++ b/meta-xfce/recipes-xfce/exo/exo/reduce-build-to-exo-csource-only.patch
-@@ -15,11 +15,11 @@ Upstream-Status: Inappropriate [configuration]
- Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
- ---
-  Makefile.am  | 10 +---------
-- configure.ac | 26 --------------------------
-- 2 files changed, 1 insertion(+), 35 deletions(-)
-+ configure.ac | 22 ----------------------
-+ 2 files changed, 1 insertion(+), 31 deletions(-)
- 
- diff --git a/Makefile.am b/Makefile.am
--index 9979b36..05d594e 100644
-+index 62ad18d..bdc5fae 100644
- --- a/Makefile.am
- +++ b/Makefile.am
- @@ -1,15 +1,7 @@
-@@ -40,7 +40,7 @@ index 9979b36..05d594e 100644
-  distclean-local:
-  	rm -rf *.cache *~
- diff --git a/configure.ac b/configure.ac
--index b66c92b..5243132 100644
-+index ba5395d..2605067 100644
- --- a/configure.ac
- +++ b/configure.ac
- @@ -116,15 +116,6 @@ AC_PROG_CC()
-@@ -59,36 +59,26 @@ index b66c92b..5243132 100644
-  
-  dnl ***************************************
-  dnl *** Check for standard header files ***
--@@ -171,29 +162,12 @@ dnl ***********************************
-+@@ -171,19 +162,6 @@ dnl ***********************************
-  dnl *** Check for required packages ***
-  dnl ***********************************
-- XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.30.0])
---XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.30.0])
-+ XDT_CHECK_PACKAGE([GLIB], [glib-2.0], [2.42.0])
-+-XDT_CHECK_PACKAGE([GIO], [gio-2.0], [2.42.0])
- -XDT_CHECK_PACKAGE([GTK], [gtk+-2.0], [2.24.0])
---XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.30.0])
-+-XDT_CHECK_PACKAGE([GTK3], [gtk+-3.0], [3.20.0])
-+-XDT_CHECK_PACKAGE([GTHREAD], [gthread-2.0], [2.42.0])
- -XDT_CHECK_PACKAGE([LIBXFCE4UTIL], [libxfce4util-1.0], [4.10.0])
---XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.10.0])
---XDT_CHECK_OPTIONAL_PACKAGE([GIO_UNIX], [gio-unix-2.0], [2.30.0], [gio-unix], [GIO-Unix features])
-- 
-- dnl ***********************************************************
-- dnl *** Optional support for a GTK+3 version of the library ***
-- dnl ***********************************************************
---XDT_CHECK_OPTIONAL_PACKAGE([GTK3],
---                           [gtk+-3.0], [3.6.0], [gtk3],
---                           [GTK+ 3 support])
---XDT_CHECK_OPTIONAL_PACKAGE([LIBXFCE4UI2],
---                           [libxfce4ui-2], [4.12.0], [libxfce4ui2],
---                           [GTK+ 3 support: libxfce4ui-2])
-- AM_CONDITIONAL([ENABLE_GTK3_LIBRARY], [test "x$GTK3_FOUND" = "xyes" && test "x$LIBXFCE4UI2_FOUND" = "xyes" ])
-- 
-+-XDT_CHECK_PACKAGE([LIBXFCE4UI], [libxfce4ui-1], [4.12.0])
-+-XDT_CHECK_PACKAGE([LIBXFCE4UI2], [libxfce4ui-2], [4.12.0])
-+-XDT_CHECK_OPTIONAL_PACKAGE([GIO_UNIX], [gio-unix-2.0], [2.42.0], [gio-unix], [GIO-Unix features])
-+-
- -dnl *********************
- -dnl *** Check for X11 ***
- -dnl *********************
- -XDT_CHECK_LIBX11_REQUIRE()
---
-+ 
-  dnl *************************
-  dnl *** Check for gtk-doc ***
-- dnl *************************
- -- 
--2.5.5
-+2.9.4
- 
-diff --git a/meta-xfce/recipes-xfce/exo/exo_0.11.2.bb b/meta-xfce/recipes-xfce/exo/exo_0.11.5.bb
+diff --git a/meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb b/meta-xfce/recipes-xfce/thunar/thunar_1.6.12.bb
 similarity index 88%
-rename from meta-xfce/recipes-xfce/exo/exo_0.11.2.bb
-rename to meta-xfce/recipes-xfce/exo/exo_0.11.5.bb
-index cb29c34..d5508c0 100644
---- a/meta-xfce/recipes-xfce/exo/exo_0.11.2.bb
-+++ b/meta-xfce/recipes-xfce/exo/exo_0.11.5.bb
-@@ -20,8 +20,8 @@ SRC_URI_append_class-native = " \
-     file://reduce-build-to-exo-csource-only.patch \
- "
+rename from meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb
+rename to meta-xfce/recipes-xfce/thunar/thunar_1.6.12.bb
+index c750e8c..8f1b23e 100644
+--- a/meta-xfce/recipes-xfce/thunar/thunar_1.6.11.bb
++++ b/meta-xfce/recipes-xfce/thunar/thunar_1.6.12.bb
+@@ -9,8 +9,8 @@ inherit xfce distro_features_check
+ REQUIRED_DISTRO_FEATURES = "x11"
  
--SRC_URI[md5sum] = "0b036c8042a2ed5d3767d1177a4213a2"
--SRC_URI[sha256sum] = "76bd1c4229503ff3c301485de3a41c55dec93e98de1a9eef1be77fe502ca4f77"
-+SRC_URI[md5sum] = "2e560edfa8ddf77e21c4787a6f600171"
-+SRC_URI[sha256sum] = "8e8629f33783eba1ce6d092a42c28217458a0cc3d1ad7474097b9187054955c1"
+ SRC_URI = "http://archive.xfce.org/src/xfce/${BPN}/${@'${PV}'[0:3]}/Thunar-${PV}.tar.bz2"
+-SRC_URI[md5sum] = "9749be8247cb19ed0fd36e4118c6236a"
+-SRC_URI[sha256sum] = "b1c7c3121827f59610900ef1cc19aa10a50ab2cc3ae38eee15181b64256e8b42"
++SRC_URI[md5sum] = "1bdf3c4a57ff886c512341f24b5e0e88"
++SRC_URI[sha256sum] = "fb22091f07ec6de2c9d9d89c61289d2bc3436b36c8c53ccbc9c32ca8a99f2086"
  
- PACKAGES =+ "exo-csource"
+ S = "${WORKDIR}/Thunar-${PV}/"
  
 -- 
 2.9.4
