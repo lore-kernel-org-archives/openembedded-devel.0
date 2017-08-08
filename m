@@ -1,48 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-yw0-f176.google.com (mail-yw0-f176.google.com
-	[209.85.161.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 047797197E
+Return-Path: <sveinse@seldal.com>
+X-Greylist: delayed 316 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 08 Aug 2017 19:27:04 UTC
+Received: from smtp.domeneshop.no (smtp.domeneshop.no [194.63.252.55])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EF84719AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 19:04:12 +0000 (UTC)
-Received: by mail-yw0-f176.google.com with SMTP id s143so27134040ywg.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Aug 2017 12:04:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=FNV0SYSB2oJaNVSXCB5rup8qNwVdgJO6JsSZnARZ+g4=;
-	b=vSQdQRyLEgJF52sm4vcYS59PVrOmKSWa2qV34rNzICJZRjk3cf2djntIuNMvOXu0MA
-	8VkCOTDEECyFNzqzVPyr++N58YvLeg94fkYSgYt1ODxSFQ/NJ7LLB3sO8gKSYsNYt+g/
-	PjTVdD7kTl5x1DPfjtdcRRj70Z+aEq3F658oH/2CovOhvO4aah2VjEHKrdclA/eQC1vc
-	FB/GrHlaWVvPeOJd0XGgQRVag5FvKs93AMSbBKvn0guf1hA9yl65SDxcsY+JsmqqJ/Lr
-	MhTimuYLhxK6EImSRq85W1ZKhTUSgkCu6pAZQwIh1IoHrMaBuUeJZXw/m1oD7B49UHsQ
-	dFSw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=FNV0SYSB2oJaNVSXCB5rup8qNwVdgJO6JsSZnARZ+g4=;
-	b=d9AugHSiIZzCPGeHnGkwEGgkn4gRznuLt25zrcUAyig/+2YjtBTmPbkGwoT8Qr/eXm
-	5AD2DiQQVwDBoMc9wqr9+Yd0ygHt2tWU0JSJhzhrSYynlgs03O8BB2KdOTPUQuWna7Ex
-	0KnogOzCA3sqq2mQHxeBk+YUK9zplv3R98ec0M8RTot+Mrg58Es51gwlbj2zX9fVT+0I
-	BMtuktKKAj1kd5DO6bMiFSMFfuXkkZbTk64OmGTWdyvgOHU+sE3p9ElfUbNpl0rsV1hh
-	wWx7jWRcG5nCSipXtxICdNwYhAjG8tDUy4TibqHnjOOmzsnUV8l6Yr/0HucE9jRg9vom
-	hSKA==
-X-Gm-Message-State: AHYfb5hkpLfMLQxx1su0JbqQV4Y+N80fEorR+L/BxKxxN+RsyNlStQYP
-	PbMufClgcYrJvJ3gAm1dPGNAOciYXw==
-X-Received: by 10.129.183.20 with SMTP id v20mr4404981ywh.377.1502219053652;
-	Tue, 08 Aug 2017 12:04:13 -0700 (PDT)
+	Tue,  8 Aug 2017 19:27:04 +0000 (UTC)
+Received: from 156.92-221-160.customer.lyse.net ([92.221.160.156]:56290
+	helo=[10.5.5.194]) by smtp.domeneshop.no with esmtpsa
+	(TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim 4.84_2)
+	(envelope-from <sveinse@seldal.com>) id 1dfA4a-0001qj-SM
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Aug 2017 21:21:48 +0200
+From: Svein Seldal <sveinse@seldal.com>
+To: openembedded-devel@lists.openembedded.org
+References: <1502153954-2796-1-git-send-email-mickey.happygolucky@gmail.com>
+	<1502153954-2796-7-git-send-email-mickey.happygolucky@gmail.com>
+Message-ID: <56add783-540c-e01d-d504-97e757a258dc@seldal.com>
+Date: Tue, 8 Aug 2017 21:21:47 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Received: by 10.37.172.196 with HTTP; Tue, 8 Aug 2017 12:04:13 -0700 (PDT)
-In-Reply-To: <20170331151828.25907-1-Martin.Jansa@gmail.com>
-References: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
-	<20170331151828.25907-1-Martin.Jansa@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 8 Aug 2017 21:04:13 +0200
-Message-ID: <CA+chaQeX1LcAh0WQsMrNM49pgwOp-eeS8eafHreFMw5gX8BfFA@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Subject: Re: [meta-oe][morty][PATCHv2 1/7] lftp: change SRC_URI source
+In-Reply-To: <1502153954-2796-7-git-send-email-mickey.happygolucky@gmail.com>
+Subject: Re: [PATCH 6/6] uim: Fixed a problem that an immodule.cache is not updated appropriately when uim-gtk2.0 or uim-gtk3 was installed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,54 +34,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 19:04:13 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 08 Aug 2017 19:27:04 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-ping
+FYI, We've had some problems building uim and anthy in our image, and we 
+had to apply the patch below.
 
-On Fri, Mar 31, 2017 at 5:18 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Noteable changes are:
+   - Change SRC_URI, the uim.googlecode.com URL gives us a 404
+   - Add PACKAGECONFIG to be able to control better which features and 
+DEPENDS to include. Notibly x11, gtk3, anthy and libedit are selectable.
 
-> From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
->
-> Changed SRC_URI source to official web-site, which keeps tarballs with
-> old releases.
->
-> Cherry-picked from master, but without the upgrade to 4.7.5.
->
->   commit a2e075ba656a89da58ca4f849c2f08ec6d50a96f
->   Author: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
->   Date:   Mon Jan 9 15:34:07 2017 +0100
->
->     lftp: update to 4.7.5 and change SRC_URI source
->
->     Updated lftp to version 4.7.5 and changed SRC_URI source to official
->     web-site, which keeps tarballs with old releases.
->
-> Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+This patch is no way perfect and complete, but it solved the dependency 
+issue we were having with anthy. Especially since we are using uim 
+without x11 or gtk3. Use this as inspiration at your discression.
+
+Best regards,
+Svein Seldal
+
+
+diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb 
+b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+index ed846b9..78da142 100644
+--- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
++++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+@@ -4,7 +4,8 @@ LICENSE = "BSD-3-Clause & LGPLv2+"
+  LIC_FILES_CHKSUM = "file://COPYING;md5=32463fd29aa303fb2360faeeae17256b"
+  SECTION = "inputmethods"
+
+-SRC_URI = "http://uim.googlecode.com/files/uim-${PV}.tar.bz2"
++SRC_URI = 
+"https://github.com/uim/uim/releases/download/${BP}/${BP}.tar.bz2 \
++          "
+
+  SRC_URI_append_class-target = " file://uim-module-manager.patch \
+      file://0001-fix-bug-for-cross-compile.patch \
+@@ -13,11 +14,7 @@ SRC_URI_append_class-target = " 
+file://uim-module-manager.patch \
+  SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
+  SRC_URI[sha256sum] = 
+"7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
+
+-DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
+-DEPENDS_class-target += "intltool-native gtk+ gtk+3 uim-native takao-fonts"
+-
+-RDEPENDS_uim = "libuim0 libedit"
+-RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
++DEPENDS = "fontconfig glib-2.0 ncurses intltool-native uim-native"
+
+  LEAD_SONAME = "libuim.so.1"
+
+@@ -30,9 +27,20 @@ EXTRA_OECONF += "--disable-emacs \
+      --without-canna \
+      --without-mana \
+      --without-eb \
++
++PACKAGECONFIG ??= " \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xft gtk3', '', d)} \
++    libedit \
++    anthy \
++"
++PACKAGECONFIG_class-native ??= "\
++    ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'xft', '', d)} \
+  "
+
+-CONFIGUREOPTS_remove_class-target = "--disable-silent-rules"
++PACKAGECONFIG[x11]     = ",,libxft libxt"
++PACKAGECONFIG[gtk3]    = ",--without-gtk2 --with-gtk3=no,gtk+ gtk+3"
++PACKAGECONFIG[anthy]   = 
+"--with-anthy-utf8,--without-anthy,anthy,takao-fonts"
++PACKAGECONFIG[libedit] = "--with-libedit,--without-libedit,libedit"
+
+  #Because m4 file's find maxdepth=2, so copy the m4 files of the deep 
+depth.
+  do_configure_prepend () {
+@@ -43,6 +51,9 @@ do_install_append() {
+      rm -rf ${D}/${datadir}/applications
+  }
+
++# UIM fails with a race when installing with multiple
++PARALLEL_MAKEINST = ""
++
+  PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep 
+uim-common uim-anthy libuim0 libuim-dev"
+
+  FILES_${PN} = "${bindir}/uim-help \
+
+
+
+On 08. aug. 2017 02:59, Yusuke Mitsuki wrote:
+> pkg_postinst_uim-gtk2.0 is not worked. Plus, uim-gtk3 is not supported.
+> oe-core has gtk-immodule-cache class for update the immodule.cache.
+> Modified to use the this class instead of pkg_post_uim-gtk2.0 and added support to uim-gtk3.
+> 
+> Signed-off-by: Yusuke Mitsuki <mickey.happygolucky@gmail.com>
 > ---
->  meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-> b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-> index 287821194..d62453745 100644
-> --- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-> +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-> @@ -6,7 +6,7 @@ SECTION = "console/network"
->  LICENSE = "GPLv3"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->
-> -SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
-> +SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz \
->             file://fix-gcc-6-conflicts-signbit.patch \
->            "
->  SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
-> --
-> 2.12.2
->
->
+>   meta-oe/recipes-support/uim/uim_1.8.6.bb | 7 ++-----
+>   1 file changed, 2 insertions(+), 5 deletions(-)
+> 
+> diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+> index 3d6425c..6b04f6e 100644
+> --- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
+> +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
+> @@ -21,7 +21,8 @@ RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0 glibc-utils glibc-gconv-euc-jp
+>   
+>   LEAD_SONAME = "libuim.so.1"
+>   
+> -inherit autotools pkgconfig gettext qemu
+> +inherit autotools pkgconfig gettext qemu gtk-immodules-cache
+> +GTKIMMODULES_PACKAGES = "uim-gtk2.0 uim-gtk3"
+>   
+>   EXTRA_OECONF += "--disable-emacs \
+>       --without-scim \
+> @@ -120,10 +121,6 @@ pkg_prerm_uim-anthy() {
+>       fi
+>   }
+>   
+> -pkg_postinst_uim-gtk2.0() {
+> -    gtk-query-immodules-2.0 > /etc/gtk-2.0/gtk.immodules
+> -}
+> -
+>   pkg_postinst_uim-skk() {
+>       if test -n "$D"; then
+>           ${@qemu_run_binary(d, '$D', '${bindir}/uim-module-manager')} --register skk --path $D${datadir}/uim
+> 
 
