@@ -1,49 +1,48 @@
 Return-Path: <mickey.happygolucky@gmail.com>
-Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
-	[209.85.161.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 4C55970018
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id C362F70018
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 00:59:31 +0000 (UTC)
-Received: by mail-yw0-f193.google.com with SMTP id p68so1334327ywg.5
+	Tue,  8 Aug 2017 00:59:32 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id u185so1780619pgb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Aug 2017 17:59:32 -0700 (PDT)
+	Mon, 07 Aug 2017 17:59:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=yTalCsvVWyvdZPcMENIk+lY0L1vryroIE/d162Z9kvs=;
-	b=vLN+5d9uab+Ko0XLinGOE78Zg5GVnq1tC2VsMM1mVBjF/0EHnWJWN3EWdHVjdR8Oyj
-	KvKhhCDli0GnTXoUJnhllY/+5K9vdMuxsvgSxWbL25cZqkm+akXyzqByxe93D3Anzfv7
-	FwHMSvAmrfpzuF4jCVZAUBKpeOmoKtIeLL+r1ORDZlMkOGpuCgTzLW6TMeP4bp5HeyW3
-	PYvTEapBu7rrsl9t7UWBBxxzmkuybN4BY9ezwwFhakc+0J6zdBQN1qCdM8NRRqSfAsSj
-	C5APbT+NakPBMG/g07X9yCx/nqsPmk4pe85v0wyB8cvv30S8GOVIMDe/bIIyh0FRCrWX
-	elEA==
+	bh=2BNUM8CRAzA3HNIKWDX/H+dV8dUAMbCWBlhRxScasfs=;
+	b=W4CbD46DnH51VnwKKgE8MgAKOL4n+grtLVtrNp2yilRlqh7q1OqVuqXA/t+tp4Vbkd
+	zDPnLxj3EcqtU8l6KHjb49Bd59lD1IMIIv79DyH5f5CEQu7GpeW92DTc9GQ3vSVodSSa
+	ZfjPgGLLjmTJpfO+uy2A3YPTYxeTQoiqZgzDydgfV6Ll8f0Je9HNMrK1S6suk0uQegtd
+	46Itdp3L0dYHy7qYFb/oAsaWRUXzCFs0Z1A3Mx5wqKw12Yw4oDD8SCcxGv6McdqObhua
+	2vt4E1lACLwoTfTK88r5e8bQL/l3fMAWgPGAyJHpQoyMGGFLD8zDS35c6apcG9XoSKAG
+	iUJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=yTalCsvVWyvdZPcMENIk+lY0L1vryroIE/d162Z9kvs=;
-	b=lFNljKegylHfHTRBmYP3/+vBCLP+KjNwq0ISoO/GdGbu53mlbERvhbTGyV+lZZpiTQ
-	aEKrKX34NyIc+fRHs6kwUpGDdWPgh+X4DQTHu4wzL4V0XtXC9ZTQzAKhiCwLfoDjoPfw
-	79MJujYo5Pk4QHSelnnBG2MFElt9DuuTPkJ58/9AsWWeE/VCMhpi0IS9o4UtNnB3NOhZ
-	slO4rbtGKMeT5ivN7ANTeHatSCoDNnSZ7QBHemmUjD2pcfG/s3msVkOIEEoO82vCDJ2Y
-	UiRXt21Q0GqJD9q3aB5VPEOlAiOLrQ9JPRnJlyzJZMpG6TWEh3XjLh0t+6/cyfKzyTWx
-	33OA==
-X-Gm-Message-State: AHYfb5jQGwppIcOywQQkPfjVB660AAGSiIU7FMEbFV/dFuKe8ly+7l1Z
-	TXv4Zn01c3fBKWdA7DQ=
-X-Received: by 10.84.232.6 with SMTP id h6mr2700078plk.173.1502153972162;
-	Mon, 07 Aug 2017 17:59:32 -0700 (PDT)
+	bh=2BNUM8CRAzA3HNIKWDX/H+dV8dUAMbCWBlhRxScasfs=;
+	b=oEMun1y/H50E74rk7QUW74W5lHyISEz2LrpeosgDkbfisjus/WF30rfQhlkK1IXIX5
+	x3ZLiOptirL5ejC0q1OVg6r0ZSv1a9Q60Q/wuhGxX3mpUqxeYoapF0xXI0QU4Ui6Zbl9
+	celjY5XLb/NYlLfrgXeXqYDCMsTcKSacsuRCGXPtOix9DMoUj5mREXGzY35LjMlLqlyC
+	47xApWfG9dEKiUbOcEOpgERFkNSK1aaHKpdz0rC6h7h7l+C3aKGjen0SrP8d4EeorbPu
+	+9kh9bWCMguQgklpp70nrLAqJBqaTfRECe0wahqZbuG/GeFCyluLL7Oh3XqTVMkR+Srg
+	whJw==
+X-Gm-Message-State: AHYfb5hzvZzm1Dp+Kb82f/XzsIy9pEiO2nAJDl8t6xM5uvb4kBistws/
+	M+C+uaIqTAAwEzfszHw=
+X-Received: by 10.98.15.217 with SMTP id 86mr2477401pfp.23.1502153973698;
+	Mon, 07 Aug 2017 17:59:33 -0700 (PDT)
 Received: from localhost.localdomain
 	([2400:2411:21c1:9d00:b8cb:4f3b:9c01:c505])
-	by smtp.gmail.com with ESMTPSA id x25sm89484pfk.80.2017.08.07.17.59.30
+	by smtp.gmail.com with ESMTPSA id x25sm89484pfk.80.2017.08.07.17.59.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 07 Aug 2017 17:59:31 -0700 (PDT)
+	Mon, 07 Aug 2017 17:59:33 -0700 (PDT)
 From: Yusuke Mitsuki <mickey.happygolucky@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Aug 2017 09:59:09 +0900
-Message-Id: <1502153954-2796-2-git-send-email-mickey.happygolucky@gmail.com>
+Date: Tue,  8 Aug 2017 09:59:10 +0900
+Message-Id: <1502153954-2796-3-git-send-email-mickey.happygolucky@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1502153954-2796-1-git-send-email-mickey.happygolucky@gmail.com>
 References: <1502153954-2796-1-git-send-email-mickey.happygolucky@gmail.com>
-Subject: [PATCH 1/6] anthy: Added libanthy-dev to PROVIDES_class-terget uim: Added libanthy-dev to DEPENDS_class-target
+Subject: [PATCH 2/6] uim: Modified the order of package definition.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,42 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 00:59:31 -0000
+X-List-Received-Date: Tue, 08 Aug 2017 00:59:32 -0000
 
-anthy.h could not found at confiugre of uim.
-Dependency broke since it began to use recipes-sysroot.
+The uim-anthy package is created that empty.
+To avoid this problem by defining a packages with a rough PATH list after the uim-anthy package.
 
 Signed-off-by: Yusuke Mitsuki <mickey.happygolucky@gmail.com>
 ---
- meta-oe/recipes-support/anthy/anthy_9100h.bb | 1 +
- meta-oe/recipes-support/uim/uim_1.8.6.bb     | 2 +-
- 2 files changed, 2 insertions(+), 1 deletion(-)
+ meta-oe/recipes-support/uim/uim_1.8.6.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/anthy/anthy_9100h.bb b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-index a65d324..c507ad7 100644
---- a/meta-oe/recipes-support/anthy/anthy_9100h.bb
-+++ b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-@@ -18,6 +18,7 @@ SRC_URI[sha256sum] = "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2
- 
- DEPENDS_class-target = "anthy-native"
- RDEPENDS_${PN}_class-target = "libanthy0"
-+PROVIDES_class-target = "libanthy-dev"
- 
- inherit autotools pkgconfig
- 
 diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-index ed846b9..4cb7b62 100644
+index 4cb7b62..9e7b45c 100644
 --- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
 +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-@@ -14,7 +14,7 @@ SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
- SRC_URI[sha256sum] = "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
+@@ -43,7 +43,7 @@ do_install_append() {
+     rm -rf ${D}/${datadir}/applications
+ }
  
- DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
--DEPENDS_class-target += "intltool-native gtk+ gtk+3 uim-native takao-fonts"
-+DEPENDS_class-target += "intltool-native gtk+ gtk+3 uim-native takao-fonts libanthy-dev"
+-PACKAGES += "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-common uim-anthy libuim0 libuim-dev"
++PACKAGES =+ "uim-xim uim-utils uim-skk uim-gtk2.0 uim-gtk3 uim-fep uim-anthy uim-common libuim0 libuim-dev"
  
- RDEPENDS_uim = "libuim0 libedit"
- RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
+ FILES_${PN} = "${bindir}/uim-help \
+     ${libdir}/uim/plugin/libuim-* \
 -- 
 2.7.4
 
