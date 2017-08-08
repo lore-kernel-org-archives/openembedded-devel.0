@@ -1,46 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-wm0-f51.google.com (mail-wm0-f51.google.com [74.125.82.51])
-	by mail.openembedded.org (Postfix) with ESMTP id AF06460620
+Return-Path: <net147@gmail.com>
+Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
+	[209.85.223.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 28E7671971
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 03:48:18 +0000 (UTC)
-Received: by mail-wm0-f51.google.com with SMTP id m85so20854785wma.0
+	Tue,  8 Aug 2017 04:17:41 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id h70so1696083ioi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Aug 2017 20:48:20 -0700 (PDT)
+	Mon, 07 Aug 2017 21:17:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to; 
-	bh=YZylzxS/sRWYJJXWt84Q8Ge7EhbGYaEjA5zPqD2sSPI=;
-	b=Bbq0PQZ8/plktLynF7GRRn+S8Hts8fTfSumBZxI3gvdc6DrKrKP/R/ZbtKjpfErz2u
-	zGPTN+kZSJ/80yHBugV32s4Hm624sPPOZdzptSPegTjEAWssY8errOL2ZlAchd9+8C6a
-	9UdFceA0i0RwG23TmKe9D03r5xXKWWcD/2C/tPIFj7n/DvxxN3lwKo3SiLjRAVGincn6
-	XyTjLDfGQvC847qEJ4+GDDSNKYoIJSKm/dD1J+zvQFGkCQsYbaaNsJ423JS/xfLZTnZw
-	To8mbJOIDsKp2stDB5KJ3T9JcZzbf6jQ0UuEYp/VfqiC4OMibCopZRWAiGnbKTGVeWmB
-	qLfQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=sSKWCAl1LrNuwMm+LdPnkQK8h2ApF+Hh/sFNAvO/KTs=;
+	b=OlNRp9ojFMPs7DYYGvL168UWD0rknWTQXreE+bZjxZr1f0KST3LJ9gO9xT80e5fiGE
+	rUD83T7Z+JYD9uTII0s2zwtGWHJcDYe5SmIAdLPmt9mmE1EhpW/NEA0vRwHe9Cd84uVv
+	yoxlgZh9YJI0NJrjyCgHyPhl9a+SqAWH8fXbBrboTYyRlptZedMVhtelGU0kIRkGKenJ
+	dc+fCQTyXrYsbtNkcBhDt3aNeSHvzyy98NEXQl3x2hEOS7Y2xXm50jodYzHS2bHn2xup
+	VLYTUCpsIISAxgtrMCmLFytVwHQkION2/4PidNOg2bT0pbQo0A6AcL7q/lLVFAcEpMbf
+	9Few==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to;
-	bh=YZylzxS/sRWYJJXWt84Q8Ge7EhbGYaEjA5zPqD2sSPI=;
-	b=egaiOOSlndD1/JIl2Lw4V3w5518KkttQhGTyuIOzavqIrnwBfuAG/dF1wjYkCdPK1g
-	800JjOU4ew3wVOOqp77srM8mhJjjc0d/BZt2ZyPqHDgcdiNpZ5Z0wH1uUUmXOlbG+9ah
-	drCJlJlh11WRRlZvPWUkRSJu1ziwiufoSsgguKqvDpJ6HhNNhFAxyL8NAdD9UG8yIyXo
-	06vKlkeglqPuixRFEpCFIQJ8L8sghUK8WUHhutLO6COtg5ovK6xqHz2ZFa2vqkXI6CJL
-	jtt/f4emIkdOU5lcBrOF6virH13iS8NYa2iu5//vLzUsTglKHg6sMtA+7Zso4PXX5HuP
-	NOXQ==
-X-Gm-Message-State: AHYfb5jzwv3YIWKq1+XHUXx7Tjp02Ipa9vwpppmx25iMcBgMD/PsZkfS
-	j/kQeQbncZLR8KD+HEnj2gPSfHJvpQ==
-X-Received: by 10.80.145.38 with SMTP id e35mr3001479eda.8.1502164099690; Mon,
-	07 Aug 2017 20:48:19 -0700 (PDT)
-MIME-Version: 1.0
-References: <1502153954-2796-1-git-send-email-mickey.happygolucky@gmail.com>
-	<1502153954-2796-2-git-send-email-mickey.happygolucky@gmail.com>
-In-Reply-To: <1502153954-2796-2-git-send-email-mickey.happygolucky@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 08 Aug 2017 03:48:08 +0000
-Message-ID: <CAMKF1spheqXiBVN4b1oSLjr_EDkL0dcCSkZss-8K27XeF5Y_Cg@mail.gmail.com>
-To: Yusuke Mitsuki <mickey.happygolucky@gmail.com>, 
-	openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH 1/6] anthy: Added libanthy-dev to PROVIDES_class-terget uim: Added libanthy-dev to DEPENDS_class-target
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sSKWCAl1LrNuwMm+LdPnkQK8h2ApF+Hh/sFNAvO/KTs=;
+	b=TvcisjHzgpUY4vPzG1QGTWEPf12b4MBTmrx5PHxCWwUUqMJAUdpRsrggO5KiXx09Yx
+	L4ALo4VY0EVnPgE+bBQ9jfAvoq8iIPuDfh61TbwEK4iX/ZAz13eXY2Z3fNOMkYKlSGg5
+	sRlXsX3teM+hTkmmGhZcbEMFEZqZxjj6IZU4709lt3Q9mewzg0kEdVaKsWPuNLCbrzI2
+	5lwMm5vHc5fTR+39p2X4C8BbMPSg594K6nYk1ATDTYhZcWnXkfkbzG8YTvXaBnfZjVUd
+	SjciPFe4d7wg85G+YV+kHUSMJXGhiG+e+RKn/Pb2+a5ax7VUnAaSIISv7nhOL5ZCZQkQ
+	rGBQ==
+X-Gm-Message-State: AHYfb5iwj5m8vq0i+W4R51xbwvtlSQzRUAbJRBF5dwj6mYxlePDZSdfM
+	7x1VQXkYzu/c2w==
+X-Received: by 10.84.254.9 with SMTP id b9mr1119629plm.422.1502165863249;
+	Mon, 07 Aug 2017 21:17:43 -0700 (PDT)
+Received: from 60-242-179-244.static.tpgi.com.au
+	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
+	by smtp.gmail.com with ESMTPSA id r82sm599032pfe.0.2017.08.07.21.17.42
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Mon, 07 Aug 2017 21:17:42 -0700 (PDT)
+From: Jonathan Liu <net147@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  8 Aug 2017 14:19:01 +1000
+Message-Id: <20170808041901.22996-1-net147@gmail.com>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-oe][PATCH] libftdi: update to 1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,68 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 03:48:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 08 Aug 2017 04:17:42 -0000
 
-On Mon, Aug 7, 2017 at 6:00 PM Yusuke Mitsuki <mickey.happygolucky@gmail.com>
-wrote:
+Signed-off-by: Jonathan Liu <net147@gmail.com>
+---
+ meta-oe/recipes-support/libftdi/{libftdi_1.3.bb => libftdi_1.4.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/libftdi/{libftdi_1.3.bb => libftdi_1.4.bb} (85%)
 
-> anthy.h could not found at confiugre of uim.
-> Dependency broke since it began to use recipes-sysroot.
->
-> Signed-off-by: Yusuke Mitsuki <mickey.happygolucky@gmail.com>
-> ---
->  meta-oe/recipes-support/anthy/anthy_9100h.bb | 1 +
->  meta-oe/recipes-support/uim/uim_1.8.6.bb     | 2 +-
->  2 files changed, 2 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-oe/recipes-support/anthy/anthy_9100h.bb
-> b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-> index a65d324..c507ad7 100644
-> --- a/meta-oe/recipes-support/anthy/anthy_9100h.bb
-> +++ b/meta-oe/recipes-support/anthy/anthy_9100h.bb
-> @@ -18,6 +18,7 @@ SRC_URI[sha256sum] =
-> "d256f075f018b4a3cb0d165ed6151fda4ba7db1621727e0eb54569b6e2
->
->  DEPENDS_class-target = "anthy-native"
->  RDEPENDS_${PN}_class-target = "libanthy0"
-> +PROVIDES_class-target = "libanthy-dev"
+diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.3.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+similarity index 85%
+rename from meta-oe/recipes-support/libftdi/libftdi_1.3.bb
+rename to meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+index 199e5a8f6..6bea16582 100644
+--- a/meta-oe/recipes-support/libftdi/libftdi_1.3.bb
++++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
+@@ -14,8 +14,8 @@ DEPENDS = "libusb1"
+ 
+ SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
+ 
+-SRC_URI[md5sum] = "156cdf40cece9f8a3ce1582db59a502a"
+-SRC_URI[sha256sum] = "9a8c95c94bfbcf36584a0a58a6e2003d9b133213d9202b76aec76302ffaa81f4"
++SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
++SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74"
+ 
+ S = "${WORKDIR}/${BPN}1-${PV}"
+ 
+-- 
+2.13.2
 
-
-This seems redundant
-
-
->
->  inherit autotools pkgconfig
->
-> diff --git a/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> index ed846b9..4cb7b62 100644
-> --- a/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> +++ b/meta-oe/recipes-support/uim/uim_1.8.6.bb
-> @@ -14,7 +14,7 @@ SRC_URI[md5sum] = "ecea4c597bab1fd4ba98ea84edcece59"
->  SRC_URI[sha256sum] =
-> "7b1ea803c73f3478917166f04f67cce6e45ad7ea5ab6df99b948c17eb1cb235f"
->
->  DEPENDS = "anthy fontconfig libxft libxt glib-2.0 ncurses intltool"
-> -DEPENDS_class-target += "intltool-native gtk+ gtk+3 uim-native
-> takao-fonts"
-> +DEPENDS_class-target += "intltool-native gtk+ gtk+3 uim-native
-> takao-fonts libanthy-dev"
->
-
-It should say anthy not libanthy-dev
-
->
->  RDEPENDS_uim = "libuim0 libedit"
->  RDEPENDS_uim-anthy = "takao-fonts anthy libanthy0"
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
