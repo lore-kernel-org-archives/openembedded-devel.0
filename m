@@ -1,48 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 986E977BB1
+Received: from mail-pf0-f173.google.com (mail-pf0-f173.google.com
+	[209.85.192.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EF6077BB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 21:48:18 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id y129so4154208pgy.3
+	Tue,  8 Aug 2017 21:48:19 +0000 (UTC)
+Received: by mail-pf0-f173.google.com with SMTP id o86so19592993pfj.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Aug 2017 14:48:20 -0700 (PDT)
+	Tue, 08 Aug 2017 14:48:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=uiEPDrrdwE0BNK1RQe5/p0Yv55IvkzXy/BEQ2X+pt7I=;
-	b=FSCe1OzudTQRrRtyr2lOeYTwCvoScTZ6Tza4pevl0huQLOK5aOX6I5l/5KkLh717V3
-	dWC4LE/jnXx2HiJqZ8s49yfyIKFmn2Dhqg5Gv5tlteeVjXtAle5pMK1YFO0kpyEQjvtl
-	xSxuOe9jfnksxAjYVVykuVDlAFZmF3Fb6dhPM6lEqP5xSHD/ILEcOPaHky1w/uYzo0PN
-	/3/3GvD4NUYVJsCK0ONDEZesBATtHgka+wZ0xavKEOvcNBPmVtmded9E5ni/B8N9OWBC
-	9w/n+qQvBB2W//IKvcpV26ilwiNsJQNBKR6P8OsPR5UWjXmGuyroVIMrQgCREJtfVqLC
-	KQHw==
+	bh=XebsINcA7a1E1Tqa1/KlOUCydXEpsbR7nKQR9slcEgE=;
+	b=cN1AMtS+QGGn5jDAerKRF5sw8mxehR/dHC0Oqv7IkHdTAF2JQSe0Mipw5cqXK+I4W1
+	crw6bauQ8EGJNbEXYVJosQ0F7M0gNvSt8KusaMxgJiX8H1u3eYY/NpTj/IySn1vwB58e
+	nQhFzyytDnWaGkyea+rJi0KlOVKobfZvh07GNO1DI7dGWAurjIXEmRqO9M30TNNuXGO4
+	0irtV+KNyhVI561jqPGEfgYhzF1mzazXaT87PF1KuZf7MbTTaN2asfztJ0dtS9tGNzkj
+	/Tv1qzAUlWM9TCzzsr70U4PMgM3fRuOLcqXN/XeDd/SooTrSjFCyDWjuCUAYDEMVqx8Z
+	qzJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=uiEPDrrdwE0BNK1RQe5/p0Yv55IvkzXy/BEQ2X+pt7I=;
-	b=lxrdE4NVvSei9FFrNWHurD9lRnaNZj0+cQXotXOsYhLKWsvGtFq7Ijid+JQqX10TQE
-	4A1cxudKHbWQpzUueaaCxe3qd2g/Sxo7282Fpv5Wzr2eD6venk9tOZp63lvfkaRkzEnH
-	mvft4+rfH6d2RCnCkWXfPbTaa6WcKZv4N2hJBAY/eXOqwyLSU/kA2ymjjhSeL7fVcLas
-	BTlYa6GTmN6ej1aL64uukQuPNTQALQQZqWNTuf+biWm3UZQZNmMuSAdY7k8iRJx035x6
-	QzdvyUGKbSodKM8v9v0K3ZYFPXTnO1I1HK3UCzp0yuNlFuoRa6I2CMiV/1G1Hb8RIiYb
-	KDog==
-X-Gm-Message-State: AHYfb5hxEeUZNAHWncTgw/c+EIz+JL6tFzxTdwH7/ocPpIzedYkIQmmR
-	370Rlid/FyE+d2+i
-X-Received: by 10.98.209.87 with SMTP id t23mr5953618pfl.86.1502228899637;
-	Tue, 08 Aug 2017 14:48:19 -0700 (PDT)
+	bh=XebsINcA7a1E1Tqa1/KlOUCydXEpsbR7nKQR9slcEgE=;
+	b=F+6qiuxkI1yE8BFeyKPoWk9chfuKzVNouuSJU2MP00GhYA2XY8N0qr1mTnh0/AKO0B
+	+4dd/3X796t1fMY8Q1QaOnSFiu4Hvpc++KVE7PwM5I8qBbggRnehDM1wuuNqKf1+RKrc
+	wBvBMU5C8CKo5AAWL4XBNOgTJ1ZhJRkHxFLpIfqEbX96Ek1NymDzIA7P2HKotxTLnUvf
+	hIX9fis/y5shyyXLN/lVc72FsyXY0hCWRr8lU1uixWrxLvv7g3Y42Df3Q7XgWMJLwcjE
+	6RhN48h79xJiWhJ9zl2bxvlOsT8Py7tFd7kEGkGbqD61cChdyAM7jYqVsHaKMzijEFUP
+	4w6g==
+X-Gm-Message-State: AHYfb5hgGnir/ndEbiQf2yF1kvH2jm+feYXpWMVMOHeI0/wi6Q+ioLAJ
+	zSolzvGZfsPjLZ7F
+X-Received: by 10.98.63.83 with SMTP id m80mr5881179pfa.161.1502228900947;
+	Tue, 08 Aug 2017 14:48:20 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::f213])
 	by smtp.gmail.com with ESMTPSA id
-	d135sm2768713pga.6.2017.08.08.14.48.18
+	d135sm2768713pga.6.2017.08.08.14.48.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Aug 2017 14:48:18 -0700 (PDT)
+	Tue, 08 Aug 2017 14:48:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Aug 2017 14:47:57 -0700
-Message-Id: <20170808214800.39621-6-raj.khem@gmail.com>
+Date: Tue,  8 Aug 2017 14:47:58 -0700
+Message-Id: <20170808214800.39621-7-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.0
 In-Reply-To: <20170808214800.39621-1-raj.khem@gmail.com>
 References: <20170808214800.39621-1-raj.khem@gmail.com>
-Subject: [meta-python][PATCH 6/9] python3-twisted: Fix build with clang
+Subject: [meta-python][PATCH 7/9] python-grpcio: Do not hardcode compiler -std options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,111 +56,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 21:48:18 -0000
+X-List-Received-Date: Tue, 08 Aug 2017 21:48:20 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-initsendmsg-Return-NULL-on-error.patch    | 76 ++++++++++++++++++++++
- .../python/python3-twisted_13.2.0.bb               |  3 +
- 2 files changed, 79 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-twisted/0001-initsendmsg-Return-NULL-on-error.patch
+ ...up.py-Do-not-mix-C-and-C-compiler-options.patch | 36 ++++++++++++++++++++++
+ .../recipes-devtools/python/python-grpcio_1.4.0.bb |  2 ++
+ 2 files changed, 38 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
 
-diff --git a/meta-python/recipes-devtools/python/python3-twisted/0001-initsendmsg-Return-NULL-on-error.patch b/meta-python/recipes-devtools/python/python3-twisted/0001-initsendmsg-Return-NULL-on-error.patch
+diff --git a/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
 new file mode 100644
-index 000000000..d4cf34554
+index 000000000..3686144b3
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-twisted/0001-initsendmsg-Return-NULL-on-error.patch
-@@ -0,0 +1,76 @@
-+From 890d039f067d52a0ab77b561d40da13f0c135634 Mon Sep 17 00:00:00 2001
++++ b/meta-python/recipes-devtools/python/python-grpcio/0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch
+@@ -0,0 +1,36 @@
++From b02be74a2eff8abc612ef84f30e0fbce6a7f65f5 Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 3 Aug 2017 11:24:43 -0700
-+Subject: [PATCH] initsendmsg: Return NULL on error
++Date: Fri, 4 Aug 2017 09:04:07 -0700
++Subject: [PATCH] setup.py: Do not mix C and C++ compiler options
 +
-+Fixes a clang error
++EXTRA_ENV_COMPILE_ARGS is used both with CC and CXX
++so using -std=c++11 or -std=gnu99 together will cause
++build time errors espcially with clang
 +
-+sendmsg.c:129:9: error: non-void function 'initsendmsg' should return a value [-Wreturn-type]
++error: invalid argument '-std=gnu99' not allowed with 'C++'
++
++gcc7 ( defaults are -std=gnu11 and -std=gnu++14 )
++ as well clang default to these standards mode or newer
++anyway
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ twisted/python/sendmsg.c | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
++ setup.py | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/twisted/python/sendmsg.c b/twisted/python/sendmsg.c
-+index 9f2fd8c..9c080e1 100644
-+--- a/twisted/python/sendmsg.c
-++++ b/twisted/python/sendmsg.c
-+@@ -126,7 +126,7 @@ PyMODINIT_FUNC initsendmsg(void) {
-+     module = Py_InitModule3("sendmsg", sendmsg_methods, sendmsg_doc);
-+ 
-+     if (!module) {
-+-        return;
-++        return NULL;
-+     }
-+ 
-+     /*
-+@@ -135,39 +135,39 @@ PyMODINIT_FUNC initsendmsg(void) {
-+     */
-+ 
-+     if (-1 == PyModule_AddIntConstant(module, "SCM_RIGHTS", SCM_RIGHTS)) {
-+-        return;
-++        return NULL;
-+     }
-+ 
-+ 
-+     /* BSD, Darwin, Hurd */
-+ #if defined(SCM_CREDS)
-+     if (-1 == PyModule_AddIntConstant(module, "SCM_CREDS", SCM_CREDS)) {
-+-        return;
-++        return NULL;
-+     }
-+ #endif
-+ 
-+     /* Linux */
-+ #if defined(SCM_CREDENTIALS)
-+     if (-1 == PyModule_AddIntConstant(module, "SCM_CREDENTIALS", SCM_CREDENTIALS)) {
-+-        return;
-++        return NULL;
-+     }
-+ #endif
-+ 
-+     /* Apparently everywhere, but not standardized. */
-+ #if defined(SCM_TIMESTAMP)
-+     if (-1 == PyModule_AddIntConstant(module, "SCM_TIMESTAMP", SCM_TIMESTAMP)) {
-+-        return;
-++        return NULL;
-+     }
-+ #endif
-+ 
-+     module = PyImport_ImportModule("socket");
-+     if (!module) {
-+-        return;
-++        return NULL;
-+     }
-+ 
-+     sendmsg_socket_error = PyObject_GetAttrString(module, "error");
-+     if (!sendmsg_socket_error) {
-+-        return;
-++        return NULL;
-+     }
-+ }
++diff --git a/setup.py b/setup.py
++index cb85273..f79878d 100644
++--- a/setup.py
+++++ b/setup.py
++@@ -116,7 +116,7 @@ if EXTRA_ENV_COMPILE_ARGS is None:
++   elif 'win32' in sys.platform:
++     EXTRA_ENV_COMPILE_ARGS += ' -D_PYTHON_MSVC'
++   elif "linux" in sys.platform:
++-    EXTRA_ENV_COMPILE_ARGS += ' -std=c++11 -std=gnu99 -fvisibility=hidden -fno-wrapv'
+++    EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv'
++   elif "darwin" in sys.platform:
++     EXTRA_ENV_COMPILE_ARGS += ' -fvisibility=hidden -fno-wrapv'
 + 
 +-- 
 +2.13.4
 +
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb b/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-index 98016cca3..57406cd52 100644
---- a/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-twisted_13.2.0.bb
-@@ -1,6 +1,9 @@
- inherit pypi setuptools3
- require python-twisted.inc
+diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.4.0.bb b/meta-python/recipes-devtools/python/python-grpcio_1.4.0.bb
+index 5412e0243..2446411a1 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio_1.4.0.bb
++++ b/meta-python/recipes-devtools/python/python-grpcio_1.4.0.bb
+@@ -4,6 +4,8 @@ SECTION = "devel/python"
  
-+SRC_URI += "file://0001-initsendmsg-Return-NULL-on-error.patch \
+ DEPENDS = "python-protobuf"
+ 
++SRC_URI += "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
 +           "
-+
- RDEPENDS_${PN}-core = "python3-core python3-zopeinterface python3-lang"
- 
- FILES_${PN}-core_append += " \
+ RDEPENDS_${PN} = "python-enum34 \
+                   python-futures \
+                   python-protobuf \
 -- 
 2.14.0
 
