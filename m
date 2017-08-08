@@ -1,46 +1,37 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
-	[209.85.223.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 28E7671971
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F130719AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Aug 2017 04:17:41 +0000 (UTC)
-Received: by mail-io0-f195.google.com with SMTP id h70so1696083ioi.2
+	Tue,  8 Aug 2017 17:16:54 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id t37so3704200qtg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Aug 2017 21:17:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=sSKWCAl1LrNuwMm+LdPnkQK8h2ApF+Hh/sFNAvO/KTs=;
-	b=OlNRp9ojFMPs7DYYGvL168UWD0rknWTQXreE+bZjxZr1f0KST3LJ9gO9xT80e5fiGE
-	rUD83T7Z+JYD9uTII0s2zwtGWHJcDYe5SmIAdLPmt9mmE1EhpW/NEA0vRwHe9Cd84uVv
-	yoxlgZh9YJI0NJrjyCgHyPhl9a+SqAWH8fXbBrboTYyRlptZedMVhtelGU0kIRkGKenJ
-	dc+fCQTyXrYsbtNkcBhDt3aNeSHvzyy98NEXQl3x2hEOS7Y2xXm50jodYzHS2bHn2xup
-	VLYTUCpsIISAxgtrMCmLFytVwHQkION2/4PidNOg2bT0pbQo0A6AcL7q/lLVFAcEpMbf
-	9Few==
+	Tue, 08 Aug 2017 10:16:56 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=sSKWCAl1LrNuwMm+LdPnkQK8h2ApF+Hh/sFNAvO/KTs=;
-	b=TvcisjHzgpUY4vPzG1QGTWEPf12b4MBTmrx5PHxCWwUUqMJAUdpRsrggO5KiXx09Yx
-	L4ALo4VY0EVnPgE+bBQ9jfAvoq8iIPuDfh61TbwEK4iX/ZAz13eXY2Z3fNOMkYKlSGg5
-	sRlXsX3teM+hTkmmGhZcbEMFEZqZxjj6IZU4709lt3Q9mewzg0kEdVaKsWPuNLCbrzI2
-	5lwMm5vHc5fTR+39p2X4C8BbMPSg594K6nYk1ATDTYhZcWnXkfkbzG8YTvXaBnfZjVUd
-	SjciPFe4d7wg85G+YV+kHUSMJXGhiG+e+RKn/Pb2+a5ax7VUnAaSIISv7nhOL5ZCZQkQ
-	rGBQ==
-X-Gm-Message-State: AHYfb5iwj5m8vq0i+W4R51xbwvtlSQzRUAbJRBF5dwj6mYxlePDZSdfM
-	7x1VQXkYzu/c2w==
-X-Received: by 10.84.254.9 with SMTP id b9mr1119629plm.422.1502165863249;
-	Mon, 07 Aug 2017 21:17:43 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id r82sm599032pfe.0.2017.08.07.21.17.42
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 07 Aug 2017 21:17:42 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	bh=LNupBFCGt28boYEvUAl436aPlpHc9jaoEAUla2aGSlA=;
+	b=AEo/icU5VyomGerxDE/85zd081sU9PpBB5xcSStI51KAZI1JedVIy14IHoxxfpptiM
+	p5I7PzpqWazFEGbXfgbyJemfRVzcVlGsitdEna6ybBlPCrSOmPPPdJBAtJ8mF+s+JIw4
+	6BnmtnbN1vQo4GolAMSQ1XdRfPH0ecOqROQ+nhjpEEY1GWTIm+co4msPlOPi2v7iP8Hk
+	s98CIfJv7LyGgUYpKwsGM0ETOj7fF3/bo+FIiR/u6ljuEHSO++TfhuQJlGncgU3RObZz
+	/VQf1HC6ZCL3cdaTBddxhmdTs4paQGaJhpLyVd6R1m1U0M5zHGkPn7/l+cZOGTh4sUhf
+	HzJQ==
+X-Gm-Message-State: AHYfb5g6D12K8loBjFtcZQZm8qiZRBE331DqGl2ASHOIQfS5uYBq2vcD
+	N7Www7Gz4bEmIp2JPyk=
+X-Received: by 10.200.55.129 with SMTP id d1mr6903678qtc.167.1502212615175;
+	Tue, 08 Aug 2017 10:16:55 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id c39sm579874qta.40.2017.08.08.10.16.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 08 Aug 2017 10:16:54 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Aug 2017 14:19:01 +1000
-Message-Id: <20170808041901.22996-1-net147@gmail.com>
-X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH] libftdi: update to 1.4
+Date: Tue,  8 Aug 2017 13:16:46 -0400
+Message-Id: <1502212606-19666-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH] nginx: update stable version to 1.12.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,33 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Aug 2017 04:17:42 -0000
+X-List-Received-Date: Tue, 08 Aug 2017 17:16:54 -0000
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-support/libftdi/{libftdi_1.3.bb => libftdi_1.4.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/libftdi/{libftdi_1.3.bb => libftdi_1.4.bb} (85%)
+ meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb | 6 ------
+ meta-webserver/recipes-httpd/nginx/nginx_1.12.1.bb | 6 ++++++
+ 2 files changed, 6 insertions(+), 6 deletions(-)
+ delete mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
+ create mode 100644 meta-webserver/recipes-httpd/nginx/nginx_1.12.1.bb
 
-diff --git a/meta-oe/recipes-support/libftdi/libftdi_1.3.bb b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-similarity index 85%
-rename from meta-oe/recipes-support/libftdi/libftdi_1.3.bb
-rename to meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-index 199e5a8f6..6bea16582 100644
---- a/meta-oe/recipes-support/libftdi/libftdi_1.3.bb
-+++ b/meta-oe/recipes-support/libftdi/libftdi_1.4.bb
-@@ -14,8 +14,8 @@ DEPENDS = "libusb1"
- 
- SRC_URI = "http://www.intra2net.com/en/developer/${BPN}/download/${BPN}1-${PV}.tar.bz2"
- 
--SRC_URI[md5sum] = "156cdf40cece9f8a3ce1582db59a502a"
--SRC_URI[sha256sum] = "9a8c95c94bfbcf36584a0a58a6e2003d9b133213d9202b76aec76302ffaa81f4"
-+SRC_URI[md5sum] = "0c09fb2bb19a57c839fa6845c6c780a2"
-+SRC_URI[sha256sum] = "ec36fb49080f834690c24008328a5ef42d3cf584ef4060f3a35aa4681cb31b74"
- 
- S = "${WORKDIR}/${BPN}1-${PV}"
- 
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
+deleted file mode 100644
+index d3e15a8..0000000
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.12.0.bb
++++ /dev/null
+@@ -1,6 +0,0 @@
+-require nginx.inc
+-
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
+-
+-SRC_URI[md5sum] = "995eb0a140455cf0cfc497e5bd7f94b3"
+-SRC_URI[sha256sum] = "b4222e26fdb620a8d3c3a3a8b955e08b713672e1bc5198d1e4f462308a795b30"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.12.1.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.12.1.bb
+new file mode 100644
+index 0000000..7f0e3ad
+--- /dev/null
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.12.1.bb
+@@ -0,0 +1,6 @@
++require nginx.inc
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
++
++SRC_URI[md5sum] = "a307e74aca95403e5ee00f153807ce58"
++SRC_URI[sha256sum] = "8793bf426485a30f91021b6b945a9fd8a84d87d17b566562c3797aba8fac76fb"
 -- 
-2.13.2
+2.7.4
 
 
