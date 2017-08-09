@@ -1,25 +1,60 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F30C977BC9
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
+	by mail.openembedded.org (Postfix) with ESMTP id E86F96093B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Aug 2017 07:38:37 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v797cb2Z006676
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 9 Aug 2017 00:38:37 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 9 Aug 2017 00:38:36 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 9 Aug 2017 03:38:31 -0400
-Message-ID: <4da5a2645def3a34a0ca502d7f11a2a00b3e7fa6.1502261386.git.hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-In-Reply-To: <cover.1502261386.git.hongxu.jia@windriver.com>
-References: <cover.1502261386.git.hongxu.jia@windriver.com>
+	Wed,  9 Aug 2017 08:16:15 +0000 (UTC)
+Received: by mail-wm0-f50.google.com with SMTP id t201so25003654wmt.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Aug 2017 01:16:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=RRJ4y8hTZHNTk0Wr883N5I9mxqtvxftzwRxXTHZFGb4=;
+	b=fQICJznKRh2LM5Aaq63OFMQT81xaDbwqvtzpVsgNKwwlRTDwXFKxC+bK7q7csEQ9LI
+	BY1/Np8/0jSYcDRMXQ+Ngb7p+x6vzAo4hV1qzvg/nna67ovzMeQ3vbjjlofSvKnrkzSg
+	PN52YPfE+8IDc7/eF21CkUm5mftr1k4ad3H6pMIw3Y8CUVaoXB0UDLAV9ZHAcbAG3Bbh
+	XnWZpJYHKD2ODQqzprldJWaeBzOKEzPUQxyFmZN7omJ1v8ZGr95Tp8s+jagtEd1OtYMI
+	8hjLjT+TjtEgKsE290F3V0pI8AWSZxY41KH3LjYOSuHnMjaB5ohfBQvwdkagK0qWLzPc
+	HEuA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=RRJ4y8hTZHNTk0Wr883N5I9mxqtvxftzwRxXTHZFGb4=;
+	b=GJV6D3x6OOa7COUHynw3YovSuEw71Iw6iFjxzbdMOmI0ZMcQ5qCkh/55uMJnwmPUtg
+	wEqWht4iI9ooyNYQId6MUEknyzXlD+CXGzrESWZ0jIbrPoF4UOYHMm7t69WLeXSAzgA/
+	rbTuS40XsBe9F5xbJlOaOA5UExv04pgJF9/rDfgGJaSAAuZ/D0YTCIG/9s9Rui5o4vRq
+	ANfDGn67cAOfTc7UJzR30TOy5pgfjLglff4wyryh1jM1Yzgi5elgQO0yYbHKVrntnoWC
+	k93Z4nYt+Q27JwxsLP4t0dVQLsBziRrkaowHGo87VrxA2R7lQIC+PljK0nC4KoDbRh6W
+	XC4A==
+X-Gm-Message-State: AHYfb5h4sBDL1QYS49vrqMbnx4mdAjb5cNlBn0c01nT30RY6mc+jRZv7
+	IX0FR/AfaF1M2A==
+X-Received: by 10.28.7.213 with SMTP id 204mr4676109wmh.113.1502266576761;
+	Wed, 09 Aug 2017 01:16:16 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	o20sm2563356wro.45.2017.08.09.01.16.14
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Wed, 09 Aug 2017 01:16:15 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Wed, 9 Aug 2017 10:17:44 +0200
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20170809081744.GA3394@jama>
+References: <20170801170152.94586-1-Randy.MacLeod@windriver.com>
+	<olqm6a$87a$1@blaine.gmane.org>
+	<4aaa2c14-284f-71b4-47d2-fc7e8e27beef@windriver.com>
+	<BFE10A87-CF18-46BA-88E4-A795FB20506E@dominion.thruhere.net>
+	<f3b1d5bc-6d6f-4fdd-8076-5d856af4b8cf@windriver.com>
+	<CAMKF1srRkN_vfF5HkMQy4YM5aa8bUCC+HOX0zALdbweUeT8dCQ@mail.gmail.com>
+	<9ec26f7f-f87b-b470-ee15-459ac5712bfd@windriver.com>
+	<CALbNGRQQHqg-qWOxJim5Do08VSUCt_F8kSA-75LXeDx=SoDbqA@mail.gmail.com>
+	<CAMKF1spVbt=sEkrkrJbPjLJ=SRC7zAkPKy4A9xUK1OR=90pOMQ@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 2/2] tigervnc: fix a clang compiling issue
+In-Reply-To: <CAMKF1spVbt=sEkrkrJbPjLJ=SRC7zAkPKy4A9xUK1OR=90pOMQ@mail.gmail.com>
+User-Agent: Mutt/1.8.3 (2017-05-23)
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] imagemagick: upgrade from 7.0.5 to 7.0.6p4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,64 +67,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Aug 2017 07:38:38 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 09 Aug 2017 08:16:16 -0000
+X-Groupsio-MsgNum: 68025
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Kj7319i9nmIyA2yE"
+Content-Disposition: inline
 
-Backport a fix from upstream
+--Kj7319i9nmIyA2yE
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- ...005-Remove-INITARGS-from-xserver119.patch.patch | 27 ++++++++++++++++++++++
- .../recipes-graphics/tigervnc/tigervnc_1.8.0.bb    |  1 +
- 2 files changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-graphics/tigervnc/files/0005-Remove-INITARGS-from-xserver119.patch.patch
+On Tue, Aug 08, 2017 at 07:42:59PM -0700, Khem Raj wrote:
+> On Tue, Aug 8, 2017 at 7:28 PM, Andreas M=FCller
+> <schnitzeltony@googlemail.com> wrote:
+> > On Wed, Aug 9, 2017 at 4:02 AM, Randy MacLeod
+> > <randy.macleod@windriver.com> wrote:
+> >> On 2017-08-08 08:42 PM, Khem Raj wrote:
+> >>>
+> >>> I am seeing
+> >>>
+> >>> downloads
+> >>> 'http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4.tar=
+=2Exz'
+> >>> --progress=3Ddot -v failed with exit code 8, output:
+> >>> --2017-08-08 15:05:59--
+> >>> http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4.tar.=
+xz
+> >>> Resolving www.imagemagick.org... 198.72.81.86
+> >>> Connecting to www.imagemagick.org|198.72.81.86|:80... connected.
+> >>> HTTP request sent, awaiting response... 404 Not Found
+> >>> 2017-08-08 15:05:59 ERROR 404: Not Found.
+> >>>
+> >>>
+> >>> ERROR: imagemagick-7.0.6-r0 do_fetch: Fetcher failure for URL:
+> >>> 'http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4.tar=
+=2Exz'.
+> >>> Unable to fetch URL from any source.
+> >>> ERROR: imagemagick-7.0.6-r0 do_fetch: Function failed: base_do_fetch
+> >>> ERROR: Logfile of failure stored in:
+> >>>
+> >>> /mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/im=
+agemagick/7.0.6-r0/temp/log.do_fetch.17282
+> >>
+> >>
+> >> Ugh, the imagemagick devs have moved on to:
+> >>  http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-5.tar.=
+gz
+> >>
+> >> and deleted the 7.0.6-4 tarball already!
+> >> I'll send a patch in the morning and also talk to upstream about their
+> >> archiving policy. I don't see a directory for that at the moment.
+> >>
+> >> Thanks for the heads up.
+> >>
+> >> ../Randy
+> >>
+> > Yes and they will do it again until 7-0.7.x comes up :(
+>=20
+> I think we should copy the tarballs to source.openembedded.org before
+> accepting imagemagick updates.
 
-diff --git a/meta-oe/recipes-graphics/tigervnc/files/0005-Remove-INITARGS-from-xserver119.patch.patch b/meta-oe/recipes-graphics/tigervnc/files/0005-Remove-INITARGS-from-xserver119.patch.patch
-new file mode 100644
-index 0000000..2f342c6
---- /dev/null
-+++ b/meta-oe/recipes-graphics/tigervnc/files/0005-Remove-INITARGS-from-xserver119.patch.patch
-@@ -0,0 +1,27 @@
-+From e4ec992984983ac9107efae1f1cc552007e4229e Mon Sep 17 00:00:00 2001
-+From: Vishal Biswas <vshlbiswas@ymail.com>
-+Date: Mon, 8 May 2017 11:06:11 +0530
-+Subject: [PATCH] Remove INITARGS from xserver119.patch
-+
-+Upstream-Status: Backport
-+
-+---
-+ unix/xserver119.patch | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/unix/xserver119.patch b/unix/xserver119.patch
-+index 614f104..7adf314 100644
-+--- a/unix/xserver119.patch
-++++ b/unix/xserver119.patch
-+@@ -66,7 +66,7 @@ diff -up xserver/mi/miinitext.c.xserver116-rebased xserver/mi/miinitext.c
-+  #include "globals.h"
-+  
-+ +#ifdef TIGERVNC
-+-+extern void vncExtensionInit(INITARGS);
-+++extern void vncExtensionInit(void);
-+ +#endif
-+ +
-+  /* The following is only a small first step towards run-time
-+-- 
-+2.7.4
-+
-diff --git a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.8.0.bb b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.8.0.bb
-index d15bc9e..469745f 100644
---- a/meta-oe/recipes-graphics/tigervnc/tigervnc_1.8.0.bb
-+++ b/meta-oe/recipes-graphics/tigervnc/tigervnc_1.8.0.bb
-@@ -22,6 +22,7 @@ SRC_URI = "git://github.com/TigerVNC/tigervnc.git;branch=1.8-branch \
-            file://0002-do-not-build-tests-sub-directory.patch \
-            file://0003-add-missing-dynamic-library-to-FLTK_LIBRARIES.patch \
-            file://0004-tigervnc-add-fPIC-option-to-COMPILE_FLAGS.patch \
-+           file://0005-Remove-INITARGS-from-xserver119.patch.patch \
- "
- 
- # Keep sync with xorg-server in oe-core
--- 
-2.8.1
+That's what my jenkins builds do (or at least should do) once they build
+this.
 
+>=20
+> >
+> > Andreas
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--Kj7319i9nmIyA2yE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWYrFJwAKCRA3VSO3ZXaA
+HNUJAKCFbWDDJbjBkWRjMr6RqgQ+QkmabgCgmB/KfkqX7fEqY+xyKkkV7UsIb9Y=
+=Ngc7
+-----END PGP SIGNATURE-----
+
+--Kj7319i9nmIyA2yE--
