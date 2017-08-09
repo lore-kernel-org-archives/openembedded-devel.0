@@ -1,47 +1,51 @@
-Return-Path: <behanw@converseincode.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id D74E96011B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 246BB60777
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Aug 2017 00:24:05 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id h68so20874907pfk.0
+	Wed,  9 Aug 2017 00:43:03 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id m85so19241170wma.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Aug 2017 17:24:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=converseincode.com; s=google;
-	h=from:mime-version:subject:message-id:date:to;
-	bh=k0YpLezZx9FaFostyX/atGuKZeWZpJuQihjRsl38C/c=;
-	b=QIcNe+qj/I6MDrFGEAw9qQhwKa1cP9rD0912ACm4l6Hi//OBslz4hv3fhklsgU7ZPo
-	dcziHE9LSGnmH9m3HEUXDzQm/+eyz/ATiPrPlRB+xbHtocWN+Y1tkqaspW+SykrtkmIE
-	nO/4lGZ4JWn7MIbRs7KFPCQqZDOoz1w7LNr1s=
+	Tue, 08 Aug 2017 17:43:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=2kwqc3F7ckN2ut9LUUkwh/AdwZhDmTbWTjciTO0TLoQ=;
+	b=OAfIgpKadjsL9zH50LT95hWXeUQ9JdECkdtvD1GRRwlxcFS477FuZQ7apZb6a+fOmS
+	TKWQZX7q+/4XLK/zyoJ1mvABO6KK7rnsouRLjTWLFouc4z5Rx9FHVzmgvHPQP9J/K1S0
+	Gia0EHhQ207e9dGRj0KyRGkFr9/SNBLHXrlvbsm2up+JmgMBKdsz2ZpDIQOSsJpxSk2P
+	R+wt5Ibwy/V5A86Pp36giCYdb5ol2ED13buERxeKQ4F2ghiKyN67cdJYr1OS5CyQjmXa
+	hi637YHg3AkHpf+4ZSEyKkKcRD+2E4K82AuRHi9s/ObiuDh6crTlapUZvrSbBIWqUQvd
+	zH1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:subject:message-id:date:to;
-	bh=k0YpLezZx9FaFostyX/atGuKZeWZpJuQihjRsl38C/c=;
-	b=h6jfE2/nJ0TTVbNjm8JZzYDprRl6d654GlJbZIY3SkwZ5vEtBkuLivQRw74FteGDv2
-	Tm5Cb8/cxmqw6aGdg/Leg4X9ywIVtfYmAySGJ1IJ2dI0zfnOY8mDP2c4WGFB7wqWIAf0
-	Nzin3rAIhrVQ3KaajpJb78y4gerZ4dl0pOmHTxmNF3ZvCSKyptO1oG//BVrCwkWn0DPt
-	JYPg2hnafSgd64Cl7iehhqUKYZ5CjvQSoS2EYtzZeo+PHdcZy6vVK8YweAGhC6YahaOz
-	Sk5Z0gyLd/itZ4jQrF++7tU+UrFvs/+uvIonorCDgdhMq3RVBq8g4Yg66zIQsKOU3Tx5
-	2sPQ==
-X-Gm-Message-State: AHYfb5gcfFijXpl2CgQD+QVbEvYWW7c8JXu1Hb2+b4ExvW86N0tijRQG
-	R5WUBPDAmHRMoLBlfTqMfw==
-X-Received: by 10.84.231.197 with SMTP id g5mr6748469pln.152.1502238246769;
-	Tue, 08 Aug 2017 17:24:06 -0700 (PDT)
-Received: from [192.168.120.225] (d207-6-122-147.bchsia.telus.net.
-	[207.6.122.147]) by smtp.gmail.com with ESMTPSA id
-	r13sm4525204pfg.14.2017.08.08.17.24.05
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 08 Aug 2017 17:24:05 -0700 (PDT)
-From: Behan Webster <behanw@converseincode.com>
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Message-Id: <73F79297-B92A-4F4D-A3F1-A3F43CD39DAE@converseincode.com>
-Date: Tue, 8 Aug 2017 17:24:04 -0700
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3273)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Alpha release of check-requirement.sh
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=2kwqc3F7ckN2ut9LUUkwh/AdwZhDmTbWTjciTO0TLoQ=;
+	b=PcHKHsogIx7GRekxvPLvlzt+9v+D6CwQbqmPoMSKeNYr8wZNGS5ZJjcpCEijgIhynq
+	tn3tgjW/VnUokYNOmBUU+LfJudTkeNkEt4u/uxd2LzoZXK7xthBKQPwZqQZRMbjPOchW
+	W3EiHtYtDgkxXRLUaCSRzGv2K7P78KxBxjDVKvV+zEKgOhUrZOrpvkGUY2KV6zdqLH+8
+	Zd2hqRfzbqSypkfyDIaky+b/BsMgqjvdE2xmj+GrS8F+RCVLmFdWtV38XDlUzlo+dUH8
+	bB5xj6aUqMUvLG6mYHxkOD85QPSEFTxXRAoNAKCRxIIldFFxoF2YJ0qcuy/Su+zKx/nh
+	XjLQ==
+X-Gm-Message-State: AHYfb5iZBVvuZY5aNwAVN8CA/nY6RPEkkcEwmyU8MerIM3e+es9bw5XK
+	Lky/0riutos8l1s6Q6HlyWCru0Xb6A==
+X-Received: by 10.80.164.18 with SMTP id u18mr6096425edb.250.1502239384619;
+	Tue, 08 Aug 2017 17:43:04 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.80.149.181 with HTTP; Tue, 8 Aug 2017 17:42:34 -0700 (PDT)
+In-Reply-To: <f3b1d5bc-6d6f-4fdd-8076-5d856af4b8cf@windriver.com>
+References: <20170801170152.94586-1-Randy.MacLeod@windriver.com>
+	<olqm6a$87a$1@blaine.gmane.org>
+	<4aaa2c14-284f-71b4-47d2-fc7e8e27beef@windriver.com>
+	<BFE10A87-CF18-46BA-88E4-A795FB20506E@dominion.thruhere.net>
+	<f3b1d5bc-6d6f-4fdd-8076-5d856af4b8cf@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 8 Aug 2017 17:42:34 -0700
+Message-ID: <CAMKF1srRkN_vfF5HkMQy4YM5aa8bUCC+HOX0zALdbweUeT8dCQ@mail.gmail.com>
+To: Randy MacLeod <randy.macleod@windriver.com>
+Cc: Koen Kooi <koen@dominion.thruhere.net>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] imagemagick: upgrade from 7.0.5 to 7.0.6p4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,125 +58,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Aug 2017 00:24:05 -0000
-Content-Type: text/plain;
-	charset=utf-8
+X-List-Received-Date: Wed, 09 Aug 2017 00:43:04 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-I maintain a script (ready-for.sh) which checks requirements for various =
-courses I teach which makes sure you have the right computer, RAM, disk =
-space available, and such in order to do the class. It also makes sure =
-that the required packages for your $DISTRO are installed (supported =
-distros are CentOS, Debian, Fedora, Mint, openSUSE, RHEL, SLES, Ubuntu, =
-with some initial support for ArchLinux). It has a full test suite to =
-make sure the package lists are valid and available for each of the =
-distro. It also can output a JSON version of the requirements (if you =
-want to extract requirements for something else like a webpage or =
-document) and includes an auto-updater. Its designed to make getting =
-ready for a specific course very easy for a new person. I also use it to =
-debug setup issues on people=E2=80=99s computers over the phone or =
-email.
+I am seeing
 
-One of the courses I maintain requirements for is the LF Yocto Project =
-course. And recently I rebuilt the script into something more generic =
-(check-requirements.sh) which specifically allows you to check for =
-requirements for the various groupings of packages in the Yocto Project =
-documentation.
+downloads 'http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4=
+.tar.xz'
+--progress=3Ddot -v failed with exit code 8, output:
+--2017-08-08 15:05:59--
+http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4.tar.xz
+Resolving www.imagemagick.org... 198.72.81.86
+Connecting to www.imagemagick.org|198.72.81.86|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2017-08-08 15:05:59 ERROR 404: Not Found.
 
-I=E2=80=99ve made it initially available as an alpha release via =
-https://cm.converseincode.com/cr/ <https://cm.converseincode.com/cr/> , =
-and I plan to maintain it along with the script described above since =
-they share so much of the same code.
 
-The idea is that users would download and run this script once in order =
-to make sure their machines are ready to build OE or Poky or whatever, =
-instead of reading the setup document and manually installing all the =
-packages. One would still have to clone the appropriate git repo to get =
-a copy of OE or Poky after that.
+ERROR: imagemagick-7.0.6-r0 do_fetch: Fetcher failure for URL:
+'http://www.imagemagick.org/download/releases/ImageMagick-7.0.6-4.tar.xz'.
+Unable to fetch URL from any source.
+ERROR: imagemagick-7.0.6-r0 do_fetch: Function failed: base_do_fetch
+ERROR: Logfile of failure stored in:
+/mnt/a/oe/build/tmp/work/cortexa7t2hf-neon-vfpv4-bec-linux-gnueabi/imagemag=
+ick/7.0.6-r0/temp/log.do_fetch.17282
 
-As an example, here it is being run on an Ubuntu-16.04 machine which is =
-missing packages for building the documentation. (Showing the YP =
-requirements are boring, because this computer already meets those =
-requirements because I build OE all the time). It is to be run as a =
-normal user, but uses sudo internally when it needs to run privileged =
-commands. In fact if you try to run it as root, it complains.
-
-$ sudo ./check-requirements.sh=20
-[sudo] password for behanw:=20
-FAIL: Please don't run as root
-NOTE: Sudo will be used internally by this script as required.
-
-$ ./check-requirements.sh --list
-Available (4) options:
-  YPDOC - Requirements for Yocto Project Documentation
-  YPGUI - Requirements for Yocto Project GUI
-  YP - Requirements for Yocto Project
-  YPST - Requirements for OpenEmbedded Self-Test
-
-$ ./check-requirements.sh YPDOC
-Checking that this computer is suitable for YPDOC: Requirements for =
-Yocto Project Documentation
-=
---------------------------------------------------------------------------=
-------
-PASS: CPU architecture is x86_64
-PASS: 4 core CPU (good enough but 8 is preferred)
-PASS: Your CPU appears powerful enough (currently at 23228 BogoMIPS =
-cumulatively)
-PASS: 6 GiB RAM
-PASS: 158 GiB free disk space in /home/behanw
-PASS: Linux distribution architecture is x86_64
-PASS: Linux distribution is Ubuntu:amd64-16.04 (xenial)
-PASS: Internet is available (which is required in this case)
-=
---------------------------------------------------------------------------=
-------
-WARN: Some packages are missing
-NOTE: Need to install: dblatex docbook-dsssl docbook-utils fop jadetex =
-java-wrappers libavalon-framework-java libbatik-java libbsf-java =
-libfontbox-java libfop-java libosp5 libostyle1c2 libsgmls-perl libsp1c2 =
-libxmlgraphics-commons-java openjade sgmlspl sp texlive-bibtex-extra =
-texlive-math-extra xmlto
-You can install missing packages by running:
-  ./check-requirements.sh --install YPDOC
-or by:
-  sudo apt-get --no-install-recommends install dblatex docbook-dsssl =
-docbook-utils fop jadetex java-wrappers libavalon-framework-java =
-libbatik-java libbsf-java libfontbox-java libfop-java libosp5 =
-libostyle1c2 libsgmls-perl libsp1c2 libxmlgraphics-commons-java openjade =
-sgmlspl sp texlive-bibtex-extra texlive-math-extra xmlto
-=
---------------------------------------------------------------------------=
-------
-WARN: Your computer doesn't meet the stated requirements unless you can =
-fix the above warnings.
-WARN: You also have some missing packages.
-
-$ ./check-requirements.sh --install YPDOC
-Checking that this computer is suitable for YPDOC: Requirements for =
-Yocto Project Documentation
-=
---------------------------------------------------------------------------=
-------
-<snip>
-=
---------------------------------------------------------------------------=
-------
-WARN: Some packages are missing
-WARN: About to install: dblatex docbook-dsssl docbook-utils fop jadetex =
-java-wrappers libavalon-framework-java libbatik-java libbsf-java =
-libfontbox-java libfop-java libosp5 libostyle1c2 libsgmls-perl libsp1c2 =
-libxmlgraphics-commons-java openjade sgmlspl sp texlive-bibtex-extra =
-texlive-math-extra xmlto=20
-Is that okay? [y/N]=20
-
-Is this useful? Thoughts? Suggestions?
-
-Give it a try and let me know what you think. It=E2=80=99s extensible, =
-so adding other groupings of packages and such, or adding aliases for OE =
-or something is all trivially done.
-
-Thanks,
-
-Behan=
+On Wed, Aug 2, 2017 at 12:57 PM, Randy MacLeod
+<randy.macleod@windriver.com> wrote:
+> On 2017-08-02 01:21 PM, Koen Kooi wrote:
+>>
+>> Oops, I could=E2=80=99ve sworn I have submitted it to meta-oe :/ Thanks =
+for
+>> looking into this!
+>>
+>>> It's not working for me on qemux86 since python-wand
+>>> is looking for:
+>>>    libMagickWand-6.Q16HDRI and
+>>>    libMagickWand-7.Q16HDRI is the current version.
+>>> If I soft link to work-around that problem, there's another issue:
+>>>    ImportError: MagickWand shared library not found.
+>>>
+>>> python-wand hasn't released a version newer than 0.4.4.
+>>> I'm not really interested in trying the git repo.
+>>
+>> I=E2=80=99ll have a look at trying the git repo with your patch to updat=
+e
+>> imagemagick and hopefully get it working well enough to get it into oe-c=
+ore
+>> :)
+>>
+>
+> Err,
+> The meta-yocto version is actually still on 0.4.3.
+> I updated to 0.4.4 and that didn't help.
+>
+> A simple patch to require imagemagick version 7 does
+> get me one more step to:
+>
+> AttributeError: /usr/lib/libMagickWand-7.Q16HDRI.so.3: undefined symbol:
+> MagickGetImageChannelDepth
+>
+> At first I thought this was due to the imagemagick .so being
+> striped when packaged but it's a bunch of function renames from 6 to 7
+> based on git. I asked if that had be fixed on the wand irc channel
+> and it hasn't. Known misbehaving wand:
+>   https://github.com/dahlia/wand/issues/287
+>
+> ../Randy
+>
+>
+>
+>>>> from wand.image import Image
+> Traceback (most recent call last):
+>   File "<stdin>", line 1, in <module>
+>   File "/usr/lib/python2.7/site-packages/wand/image.py", line 20, in
+> <module>
+>     from .api import MagickPixelPacket, libc, libmagick, library
+>   File "/usr/lib/python2.7/site-packages/wand/api.py", line 1394, in
+> <module>
+>     traceback.format_exc())
+> ImportError: MagickWand shared library not found or incompatible
+> Original exception was raised in:
+> Traceback (most recent call last):
+>   File "/usr/lib/python2.7/site-packages/wand/api.py", line 370, in <modu=
+le>
+>     ctypes.c_int]
+>   File "/usr/lib/python2.7/ctypes/__init__.py", line 375, in __getattr__
+>     func =3D self.__getitem__(name)
+>   File "/usr/lib/python2.7/ctypes/__init__.py", line 380, in __getitem__
+>     func =3D self._FuncPtr((name_or_ordinal, self))
+> AttributeError: /usr/lib/libMagickWand-7.Q16HDRI.so.3: undefined symbol:
+> MagickGetImageChannelDepth
+>
+>>>>
+>
+>
+>
+> [15:46] <vmeson> Hey, I'm trying to get wand to work with
+> imagemagick-7.0.6p4 (in Yocto) -- several api have changed such as
+> MagickGetImageChannelDepth -> MagickGetImageDepth or maybe just
+> GetImageDepth
+> [15:47] <vmeson> I've got the git repo and I'm working through it but I
+> wonder if anyone has done this already and if a new tag is forthcoming to
+> support imagemagick-7
+> [15:47] * vmeson searchs for/in the email list.
+> [15:47] <hongminh1e> No one did that yet
+> [15:48] <hongminh1e> Afaik
+> [15:48] <vmeson> hongminh1e: thanks for the info. I might take a stab at =
+it
+> but it's not a high priority for me right now.
+>
+>
+>
+>
+>
+>
+> --
+> # Randy MacLeod. SMTS, Linux, Wind River
+> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, Canada=
+,
+> K2K 2W5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
