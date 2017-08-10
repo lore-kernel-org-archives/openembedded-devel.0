@@ -1,47 +1,57 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 838CA781FA
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f41.google.com (mail-pg0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 3EFBC781F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 18:39:15 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id w45so806325uac.3
+	Thu, 10 Aug 2017 19:00:05 +0000 (UTC)
+Received: by mail-pg0-f41.google.com with SMTP id u185so6457213pgb.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 11:39:17 -0700 (PDT)
+	Thu, 10 Aug 2017 12:00:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=N+m2rGoM6ODVfyr0T3AKavSPB/cpSiHA+o4MKJS88hA=;
-	b=gjqvGSWGbRnH/b7rHFQ6dr0hn8JMr8xtz7FuDdm5p31wcijDTUDEt9MCSu76OvxlfQ
-	EhnsIBtgRVT2dC3kAhIZLXEHOXuHU46RogDmJn+TtetCoHtX5gsaecpIgu0ROjkdHUV+
-	hdSe+QbDj106fOdu2W+fZo71HGwLXbdbYs/zexfFqRtVGUN8flVzwgPZ2OM5FS3NBNj2
-	Uvr7tFoHTT4aq1KHFogaZsJg7Uzq5qHieuZoCgrMAqiaFKBS9KnJeA/Bxt4aVJ/DAYTi
-	shSKqmNXmEyQ9uoL3k+DKiFns15i+hn3vKdNjjPmCb/PsAImlug6MWLF1n2o2JkvceYX
-	T0zg==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=scqDMS/zFXgig55/7h8thtRRvQ0fCcAcr2NIlMI670Y=;
+	b=FkhPxzZJ6YAB91bEcY7GJMlkWNAmIozMlfNboQTVnEpIis3rwDkuMmHz/e6LLwLMv9
+	s4uJquhRxyEEb9u4gLxdFooCi2zElcgmdWZtyCX3ifBhrvhEX3iOqnvRLlDsIiJij30V
+	0LP/w4XQB4WgdVoDiDTTqawrd1nJ7MHevCGp4d73WYum6/FqB1BRptmgOrAT059Qg5t3
+	XMJgzDzC8cZ1JKoab4QY2wQAutjU2MGvV3/HcyOhYNjRQHht+OBWM5VI709rLM1CsPuq
+	GR1GqW0V3lvXP1w7cqAhokM6YmgQnWkTHF/3hYojQmrbKl/ymWkyeVpFzbvBg2crTAFn
+	cS1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=N+m2rGoM6ODVfyr0T3AKavSPB/cpSiHA+o4MKJS88hA=;
-	b=arAQthUOMLdfBMEUfjy+Gcq/y2I4h76aSXXTb2KitUoH9WL/EkF6+3aBOS7sEOYDu6
-	rfxsyDRhPUSNQpybdYbgB2sfQCO3t4yDMjdtaNBmCyIgcSCd6cHqJQaiVq3/cFIsHFjJ
-	I8YZ4cMz9OBIVwMWVGKFA6Y5dRw4JlDapE5GSUJ+ykX5GT6h20PgJppTMo6eGAHgfWrY
-	p/2Pn8embyldIUfk3wm1xBOCvllXWI2VPJBIr2kAqey5sYqhbAJ2GvWhmsz6ha1fcRNE
-	L9g29sKV8PejsUz3JECThCDXHC8zDpBKYb3bfWmd9kw9IB1iKMQAtUhDpCiQ+tOt1ZRq
-	WHcA==
-X-Gm-Message-State: AHYfb5hH9UYI7iLSvcnibgk7WF6qjkAXFyTlJdY/8DokRM5tp3YPXhED
-	jrxJq9u8J2RNMvroOwMveavmh88HdQ==
-X-Received: by 10.176.72.208 with SMTP id y16mr9125604uac.103.1502390356662;
-	Thu, 10 Aug 2017 11:39:16 -0700 (PDT)
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=scqDMS/zFXgig55/7h8thtRRvQ0fCcAcr2NIlMI670Y=;
+	b=pq241OcexvkKnbpM47289GTWSp6HAYwPlIfvn/28qxFLHZoq/AL+kH1wvIxRor22cT
+	9bkMQwAd3af8G6ucUKWnz266cCKIiN/RrCdDpGHcrPLmUg8ZNcUkIWqr/oKg95OKKf1O
+	JNyDyWsIoixfUSZrSS0mGB75ZNBaVQiw6/lAeWBu+Xc62fYY3T18cjUuAsc7rlM78m34
+	TYW/iOmaMw1uGlaTyspzAeJzq22RKbkPDOML3aGon0XXbwGYhgkGB4VUr4NqQ6mtIt8k
+	kQfxaXN6Tq9uWUMc5oeEUmScM2kS5ploHIRMfIe8+jYzgjG1YUVXKrPxx/X7S/EMSD3m
+	zWqQ==
+X-Gm-Message-State: AHYfb5gQB0MkJzXKNOVxylAUReEYh+ctzYavuuMw19UksY7ZYLSne0bt
+	NfkMCXPCX4ZScw==
+X-Received: by 10.101.89.3 with SMTP id f3mr12422813pgu.177.1502391607547;
+	Thu, 10 Aug 2017 12:00:07 -0700 (PDT)
+Received: from ?IPv6:2601:202:4001:9ea0:1546:4e93:629:a226?
+	([2601:202:4001:9ea0:1546:4e93:629:a226])
+	by smtp.gmail.com with ESMTPSA id
+	w24sm13162895pfk.183.2017.08.10.12.00.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 10 Aug 2017 12:00:06 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+References: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
+	<20170331151828.25907-1-Martin.Jansa@gmail.com>
+	<CA+chaQeX1LcAh0WQsMrNM49pgwOp-eeS8eafHreFMw5gX8BfFA@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <2388668f-8c1c-2f60-5156-a1c5b16ef5dd@gmail.com>
+Date: Thu, 10 Aug 2017 12:00:05 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Thu, 10 Aug 2017 11:39:16 -0700 (PDT)
-In-Reply-To: <20170726053732.3582-1-jackie.huang@windriver.com>
-References: <20170726053732.3582-1-jackie.huang@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 10 Aug 2017 20:39:16 +0200
-Message-ID: <CA+chaQdWE2tGVU+NgwKGh0C8X4FViQRHjm0vtXrMEYgF8fs+Xw@mail.gmail.com>
-To: JackieHuang <jackie.huang@windriver.com>
+In-Reply-To: <CA+chaQeX1LcAh0WQsMrNM49pgwOp-eeS8eafHreFMw5gX8BfFA@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] logcheck: update to 1.3.18
+Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Subject: Re: [meta-oe][morty][PATCHv2 1/7] lftp: change SRC_URI source
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,151 +64,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 18:39:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 10 Aug 2017 19:00:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This adds runtime dependency on mime-construct which is in meta-perl and
-meta-oe cannot depend on meta-perl.
+ok. I dont' see this in the patch queue.
 
-Does it work in runtime without mime-construct?
+I work on this the next day or too.
 
-Either move mime-construct to RRECOMMEND (if it can work in runtime without
-it) or move logcheck to meta-perl.
+- armin
 
-On Wed, Jul 26, 2017 at 7:37 AM, <jackie.huang@windriver.com> wrote:
 
-> From: Jackie Huang <jackie.huang@windriver.com>
+On 08/08/2017 12:04 PM, Martin Jansa wrote:
+> ping
 >
-> Changes:
-> - logcheck should not be run as root, so inherit useradd
->   and add proper user and group.
+> On Fri, Mar 31, 2017 at 5:18 PM, Martin Jansa <martin.jansa@gmail.com 
+> <mailto:martin.jansa@gmail.com>> wrote:
 >
-> - Add missing runtime dependencies according to the file
->   debian/control and simple test by running "logcheck -ot".
+>     From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com
+>     <mailto:oleksandr.kravchuk@pelagicore.com>>
 >
-> - For syslog, debian directly depends on rsyslog, but logcheck
->   works with any syslog and we have busybox-syslog, sysklogd,
->   syslog-ng and rsyslog, so use VIRTUAL-RUNTIME_syslog for the
->   syslog dependency and set rsyslog as the default, which can be
->   easily overridden in distro conf file or local.conf.
+>     Changed SRC_URI source to official web-site, which keeps tarballs with
+>     old releases.
 >
-> - Don't install /var/lock when populating rootfs. Do it
->   through volatile.
+>     Cherry-picked from master, but without the upgrade to 4.7.5.
 >
-> - install header.txt for generated mails
+>       commit a2e075ba656a89da58ca4f849c2f08ec6d50a96f
+>       Author: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com
+>     <mailto:oleksandr.kravchuk@pelagicore.com>>
+>       Date:   Mon Jan 9 15:34:07 2017 +0100
 >
-> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> ---
->  .../recipes-extended/logcheck/files/99_logcheck    |  2 +
->  .../{logcheck_1.3.17.bb => logcheck_1.3.18.bb}     | 50
-> +++++++++++++++++++---
->  2 files changed, 47 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-extended/logcheck/files/99_logcheck
->  rename meta-oe/recipes-extended/logcheck/{logcheck_1.3.17.bb =>
-> logcheck_1.3.18.bb} (46%)
+>         lftp: update to 4.7.5 and change SRC_URI source
 >
-> diff --git a/meta-oe/recipes-extended/logcheck/files/99_logcheck
-> b/meta-oe/recipes-extended/logcheck/files/99_logcheck
-> new file mode 100644
-> index 000000000..4de33aca3
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/logcheck/files/99_logcheck
-> @@ -0,0 +1,2 @@
-> +# <type> <owner> <group> <mode> <path> <linksource>
-> +d logcheck logcheck 0755 /var/lock/logcheck none
-> diff --git a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-> b/meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
-> similarity index 46%
-> rename from meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-> rename to meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
-> index ba4c2ab9a..24c19b72a 100644
-> --- a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-> +++ b/meta-oe/recipes-extended/logcheck/logcheck_1.3.18.bb
-> @@ -10,11 +10,20 @@ SECTION = "Applications/System"
->  LICENSE = "GPLv2"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
+>         Updated lftp to version 4.7.5 and changed SRC_URI source to
+>     official
+>         web-site, which keeps tarballs with old releases.
 >
-> -SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git"
-> -SRCREV = "2429e67ad875fee8a0234c64d504277b038c89cd"
-> +SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git \
-> +           file://99_logcheck \
-> +"
-> +SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
+>     Signed-off-by: Oleksandr Kravchuk
+>     <oleksandr.kravchuk@pelagicore.com
+>     <mailto:oleksandr.kravchuk@pelagicore.com>>
+>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
+>     <mailto:Martin.Jansa@gmail.com>>
+>     Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com
+>     <mailto:joe_macdonald@mentor.com>>
+>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
+>     <mailto:Martin.Jansa@gmail.com>>
+>     ---
+>      meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>     <http://lftp_4.7.3.bb> | 2 +-
+>      1 file changed, 1 insertion(+), 1 deletion(-)
 >
->  S = "${WORKDIR}/git"
+>     diff --git
+>     a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>     <http://lftp_4.7.3.bb>
+>     b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>     <http://lftp_4.7.3.bb>
+>     index 287821194..d62453745 100644
+>     --- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>     <http://lftp_4.7.3.bb>
+>     +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
+>     <http://lftp_4.7.3.bb>
+>     @@ -6,7 +6,7 @@ SECTION = "console/network"
+>      LICENSE = "GPLv3"
+>      LIC_FILES_CHKSUM =
+>     "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
 >
-> +inherit useradd
-> +
-> +USERADD_PACKAGES = "${PN}"
-> +USERADD_PARAM_${PN} = "-m -g ${BPN} -G adm -r -d
-> ${localstatedir}/lib/${BPN} \
-> +                       -s /bin/false -c 'logcheck account' ${BPN}"
-> +GROUPADD_PARAM_${PN} = "-r ${BPN}"
-> +
->  do_install() {
->      # Fix QA Issue
->      sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
-> @@ -25,14 +34,45 @@ do_install() {
->      install -m 644 docs/logcheck-test.1 ${D}${mandir}/man1/
->      install -m 644 docs/logtail.8 ${D}${mandir}/man8/
->      install -m 644 docs/logtail2.8 ${D}${mandir}/man8/
-> -    sed -i "s/syslog/messages/" etc/logcheck.logfiles
-> -    sed -i "s/auth\.log/secure/" etc/logcheck.logfiles
-> +
->      install -m 755 -d ${D}${sysconfdir}/cron.d
->      install -m 644 debian/logcheck.cron.d ${D}${sysconfdir}/cron.d/
-> logcheck
->      install -m 755 -d ${D}/var/lib/logcheck
-> +
->      oe_runmake install DESTDIR=${D}
-> +
-> +    # install header.txt for generated mails
-> +    install -m 0644 ${S}/debian/header.txt ${D}${sysconfdir}/${BPN}
-> +
-> +    chown -R ${BPN}:${BPN} ${D}${localstatedir}/lib/${BPN}
-> +    chown -R root:${BPN} ${D}${sysconfdir}/${BPN}
-> +
-> +    # Don't install /var/lock when populating rootfs. Do it through
-> volatile
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true',
-> 'false', d)}; then
-> +        install -d ${D}${sysconfdir}/default/volatiles
-> +        install -m 0644 ${WORKDIR}/99_logcheck ${D}${sysconfdir}/default/
-> volatiles
-> +    fi
-> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
-> 'false', d)}; then
-> +        install -d ${D}${sysconfdir}/tmpfiles.d
-> +        echo "d /var/lock/logcheck 0755 logcheck logcheck -" \
-> +            > ${D}${sysconfdir}/tmpfiles.d/logcheck.conf
-> +    fi
->  }
+>     -SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz
+>     <http://fossies.org/linux/misc/lftp-$%7BPV%7D.tar.gz> \
+>     +SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz
+>     <http://lftp.yar.ru/ftp/lftp-$%7BPV%7D.tar.gz> \
+>                 file://fix-gcc-6-conflicts-signbit.patch \
+>                "
+>      SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
+>     --
+>     2.12.2
 >
-> -RDEPENDS_${PN} = "perl"
-> +VIRTUAL-RUNTIME_syslog ??= "rsyslog"
-> +
-> +RDEPENDS_${PN} = "\
-> +    bash \
-> +    cronie \
-> +    debianutils-run-parts \
-> +    grep \
-> +    lockfile-progs \
-> +    mime-construct \
-> +    perl \
-> +    perl-module-file-basename \
-> +    perl-module-getopt-std \
-> +    perl-module-file-glob \
-> +    ${VIRTUAL-RUNTIME_syslog} \
-> +"
 >
->  FILES_${PN} += "${datadir}/logtail"
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 
