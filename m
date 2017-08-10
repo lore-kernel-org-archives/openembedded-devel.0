@@ -1,38 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B5F467809C
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A7D7B7809C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 01:19:26 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id x77so7258137qka.4
+	Thu, 10 Aug 2017 01:23:12 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id x77so7263801qka.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Aug 2017 18:19:28 -0700 (PDT)
+	Wed, 09 Aug 2017 18:23:13 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=3APkOwhp9kNa0q1d8yTTXBNGO484pGk27bOfa816q8Y=;
-	b=KRZlyPWJ/bzyKj9QExNQqPLGHcRqIwQRxYmkeYzaR7hzZBL2n/U8kcf7KVLqfkJy6w
-	em8aPIwHGFHVbmtChxOZbU9Yk6uNL5greQ0Nxyw6JV+Kd6SGySakdYBpB+oysBK3dsM6
-	tN4y3jmMVwU3asMArupiXm5E+bBGQ+vhLSTeqwjPD2pWYMg6+nBfuEKfkP6JzYi0Rk96
-	cRAOmGkh3OOeRtuTYRHeG5gndByu8E7/JncxjD4YRXKg5Fuya1TIEmkEq+Dml/YTLJP/
-	xPx0g/+Z8EWlHZT7UEuNbZUErCRBqbtR51aJ4Rr5ENKx1dQipl/Yw1Aea2OvCvzhshN4
-	92HQ==
-X-Gm-Message-State: AHYfb5h2Y7Z/4YERObltNORlNqNFfn7d/HV2bS47kSiPtiOvuh8ebkU4
-	FhHTWkWnWQDpFQn9V0U=
-X-Received: by 10.55.33.77 with SMTP id h74mr13754111qkh.353.1502327967593;
-	Wed, 09 Aug 2017 18:19:27 -0700 (PDT)
+	bh=NHZQaJK8dOfTMsdHDOF+L9Iqytw5Rw3vVbkRaiiwsEo=;
+	b=oWebCJIzc4Usj9B3HkreYZaxLPk5W0upgUXh4V2JhPjXzvC74+JNLsOoACgXnGelDg
+	/V4veWhBDT/ZGap9Nk0WhAWcvz2xUBwrqtDXlf84hTHTHpis1v+upsFOBfkxMnOd0rnX
+	M2ir4X/75hh8zM9iLxxEyn4WH9WLQIYTgFc4JBbwyzvevAjozSt8PnB6TOBZx80N3875
+	2zvftnv9IOq9+aLbzr0IXL9XD12hYdaQEe5hYwdwfxI45tP8Pz9nwLstUtoo3lBH0Fol
+	dgwFD5sXcsc8yEPfParFPjo42350DUIpJBseGu/obFYv0K7d7S71eZVzHkdejTglp0ti
+	3hJA==
+X-Gm-Message-State: AHYfb5iiwL9Cp+xN5SZJsDCfyb/y7ujYJ7udNhec48VHM/vSgV7HLStG
+	R9eVBPsTN1T0RzCGAcs=
+X-Received: by 10.55.122.68 with SMTP id v65mr12183468qkc.225.1502328193291;
+	Wed, 09 Aug 2017 18:23:13 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	f55sm3087984qtc.18.2017.08.09.18.19.26
+	by smtp.gmail.com with ESMTPSA id d5sm3004778qtg.63.2017.08.09.18.23.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 Aug 2017 18:19:27 -0700 (PDT)
+	Wed, 09 Aug 2017 18:23:12 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Aug 2017 21:19:20 -0400
-Message-Id: <1502327960-2404-1-git-send-email-derek@asterius.io>
+Date: Wed,  9 Aug 2017 21:23:07 -0400
+Message-Id: <1502328187-3969-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-iso8601: update to version 0.1.11
+Subject: [meta-python][PATCH] python-pymongo: update to version 3.5.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,39 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 01:19:27 -0000
+X-List-Received-Date: Thu, 10 Aug 2017 01:23:12 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-iso8601.inc                | 4 ++--
- .../python/{python-iso8601_0.1.11.bb => python-iso8601_0.1.12.bb}     | 0
- .../python/{python3-iso8601_0.1.11.bb => python3-iso8601_0.1.12.bb}   | 0
+ meta-python/recipes-devtools/python/python-pymongo.inc                | 4 ++--
+ .../python/{python-pymongo_3.4.0.bb => python-pymongo_3.5.0.bb}       | 0
+ .../python/{python3-pymongo_3.4.0.bb => python3-pymongo_3.5.0.bb}     | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-iso8601_0.1.11.bb => python-iso8601_0.1.12.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-iso8601_0.1.11.bb => python3-iso8601_0.1.12.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pymongo_3.4.0.bb => python-pymongo_3.5.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pymongo_3.4.0.bb => python3-pymongo_3.5.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-iso8601.inc b/meta-python/recipes-devtools/python/python-iso8601.inc
-index dd4b83c..05cd6d3 100644
---- a/meta-python/recipes-devtools/python/python-iso8601.inc
-+++ b/meta-python/recipes-devtools/python/python-iso8601.inc
-@@ -2,7 +2,7 @@ SUMMARY = "Simple module to parse ISO 8601 dates"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b05625f2336fa024e8d57e65c6595844"
+diff --git a/meta-python/recipes-devtools/python/python-pymongo.inc b/meta-python/recipes-devtools/python/python-pymongo.inc
+index e709a36..6795213 100644
+--- a/meta-python/recipes-devtools/python/python-pymongo.inc
++++ b/meta-python/recipes-devtools/python/python-pymongo.inc
+@@ -8,8 +8,8 @@ HOMEPAGE = "http://github.com/mongodb/mongo-python-driver"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2a944942e1496af1886903d274dedb13"
  
--SRC_URI[md5sum] = "b06d11cd14a64096f907086044f0fe38"
--SRC_URI[sha256sum] = "e8fb52f78880ae063336c94eb5b87b181e6a0cc33a6c008511bac9a6e980ef30"
-+SRC_URI[md5sum] = "4de940f691c5ea759fb254384c8ddcf6"
-+SRC_URI[sha256sum] = "49c4b20e1f38aa5cf109ddcd39647ac419f928512c869dc01d5c7098eddede82"
+-SRC_URI[md5sum] = "aa77f88e51e281c9f328cea701bb6f3e"
+-SRC_URI[sha256sum] = "d359349c6c9ff9f482805f89e66e476846317dc7b1eea979d7da9c0857ee2721"
++SRC_URI[md5sum] = "717188415cb9071355a80b3c520370ff"
++SRC_URI[sha256sum] = "8137381e217038bc4b7d113c9d0d1133d8081d39008b5a4f11bf129b1520c1b0"
  
- BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb b/meta-python/recipes-devtools/python/python-iso8601_0.1.12.bb
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-datetime \
+diff --git a/meta-python/recipes-devtools/python/python-pymongo_3.4.0.bb b/meta-python/recipes-devtools/python/python-pymongo_3.5.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-iso8601_0.1.11.bb
-rename to meta-python/recipes-devtools/python/python-iso8601_0.1.12.bb
-diff --git a/meta-python/recipes-devtools/python/python3-iso8601_0.1.11.bb b/meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
+rename from meta-python/recipes-devtools/python/python-pymongo_3.4.0.bb
+rename to meta-python/recipes-devtools/python/python-pymongo_3.5.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymongo_3.4.0.bb b/meta-python/recipes-devtools/python/python3-pymongo_3.5.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-iso8601_0.1.11.bb
-rename to meta-python/recipes-devtools/python/python3-iso8601_0.1.12.bb
+rename from meta-python/recipes-devtools/python/python3-pymongo_3.4.0.bb
+rename to meta-python/recipes-devtools/python/python3-pymongo_3.5.0.bb
 -- 
 2.7.4
 
