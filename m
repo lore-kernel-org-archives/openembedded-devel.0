@@ -1,57 +1,29 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f41.google.com (mail-pg0-f41.google.com [74.125.83.41])
-	by mail.openembedded.org (Postfix) with ESMTP id 3EFBC781F8
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A612F78227
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 19:00:05 +0000 (UTC)
-Received: by mail-pg0-f41.google.com with SMTP id u185so6457213pgb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 12:00:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=scqDMS/zFXgig55/7h8thtRRvQ0fCcAcr2NIlMI670Y=;
-	b=FkhPxzZJ6YAB91bEcY7GJMlkWNAmIozMlfNboQTVnEpIis3rwDkuMmHz/e6LLwLMv9
-	s4uJquhRxyEEb9u4gLxdFooCi2zElcgmdWZtyCX3ifBhrvhEX3iOqnvRLlDsIiJij30V
-	0LP/w4XQB4WgdVoDiDTTqawrd1nJ7MHevCGp4d73WYum6/FqB1BRptmgOrAT059Qg5t3
-	XMJgzDzC8cZ1JKoab4QY2wQAutjU2MGvV3/HcyOhYNjRQHht+OBWM5VI709rLM1CsPuq
-	GR1GqW0V3lvXP1w7cqAhokM6YmgQnWkTHF/3hYojQmrbKl/ymWkyeVpFzbvBg2crTAFn
-	cS1g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=scqDMS/zFXgig55/7h8thtRRvQ0fCcAcr2NIlMI670Y=;
-	b=pq241OcexvkKnbpM47289GTWSp6HAYwPlIfvn/28qxFLHZoq/AL+kH1wvIxRor22cT
-	9bkMQwAd3af8G6ucUKWnz266cCKIiN/RrCdDpGHcrPLmUg8ZNcUkIWqr/oKg95OKKf1O
-	JNyDyWsIoixfUSZrSS0mGB75ZNBaVQiw6/lAeWBu+Xc62fYY3T18cjUuAsc7rlM78m34
-	TYW/iOmaMw1uGlaTyspzAeJzq22RKbkPDOML3aGon0XXbwGYhgkGB4VUr4NqQ6mtIt8k
-	kQfxaXN6Tq9uWUMc5oeEUmScM2kS5ploHIRMfIe8+jYzgjG1YUVXKrPxx/X7S/EMSD3m
-	zWqQ==
-X-Gm-Message-State: AHYfb5gQB0MkJzXKNOVxylAUReEYh+ctzYavuuMw19UksY7ZYLSne0bt
-	NfkMCXPCX4ZScw==
-X-Received: by 10.101.89.3 with SMTP id f3mr12422813pgu.177.1502391607547;
-	Thu, 10 Aug 2017 12:00:07 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:1546:4e93:629:a226?
-	([2601:202:4001:9ea0:1546:4e93:629:a226])
-	by smtp.gmail.com with ESMTPSA id
-	w24sm13162895pfk.183.2017.08.10.12.00.06
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 10 Aug 2017 12:00:06 -0700 (PDT)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-References: <adec7310-ce23-cef8-0c06-ea4b5bf9036c@gmail.com>
-	<20170331151828.25907-1-Martin.Jansa@gmail.com>
-	<CA+chaQeX1LcAh0WQsMrNM49pgwOp-eeS8eafHreFMw5gX8BfFA@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <2388668f-8c1c-2f60-5156-a1c5b16ef5dd@gmail.com>
-Date: Thu, 10 Aug 2017 12:00:05 -0700
+	Thu, 10 Aug 2017 21:30:36 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7ALUZ5I027931
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Thu, 10 Aug 2017 14:30:36 -0700 (PDT)
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 10 Aug 2017 14:30:35 -0700
+To: Scott Ellis <scott@jumpnowtek.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+References: <1502287422.130517799@apps.rackspace.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <b40bb1c8-2220-41a7-cf9f-89ef3a628c76@windriver.com>
+Date: Thu, 10 Aug 2017 17:30:32 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQeX1LcAh0WQsMrNM49pgwOp-eeS8eafHreFMw5gX8BfFA@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Subject: Re: [meta-oe][morty][PATCHv2 1/7] lftp: change SRC_URI source
+In-Reply-To: <1502287422.130517799@apps.rackspace.com>
+X-Originating-IP: [172.25.44.7]
+Subject: Re: [OE-core] [meta-qt5] Host paths show up in target qmake environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,82 +36,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 19:00:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset=utf-8; format=flowed
+X-List-Received-Date: Thu, 10 Aug 2017 21:30:36 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-ok. I dont' see this in the patch queue.
+Hi Scott,
 
-I work on this the next day or too.
+On 2017-08-09 10:03 AM, Scott Ellis wrote:
+> This breaks qmake on target.
+> 
+> Same behavior in both pyro and master branches of meta-qt5.
+> 
+> This differs from earlier branches of meta-qt5, using earlier versions of Qt.
 
-- armin
+Thanks for the report.
+
+meta-qt5 is not part of oe-core so it's discussed on:
+     openembedded-devel@lists.openembedded.org
+I've CCed that list and BCCed oe-core to move the discussion
+over.
+
+Someone who works on meta-qt5 might take time to fix this bug but
+it would be great if you could fix it and send a patch as you've
+done a couple of times before.
+
+Start by looking for 'host path' related email on this oe-core list:
+ 
+https://www.google.ca/search?q=host+path+site%3Alists.openembedded.org%2Fpipermail%2Fopenembedded-core%2F&oq=host+path+site%3Alists.openembedded.org%2Fpipermail%2Fopenembedded-core%2F&aqs=chrome..69i57.4517j0j4&sourceid=chrome&ie=UTF-8
 
 
-On 08/08/2017 12:04 PM, Martin Jansa wrote:
-> ping
->
-> On Fri, Mar 31, 2017 at 5:18 PM, Martin Jansa <martin.jansa@gmail.com 
-> <mailto:martin.jansa@gmail.com>> wrote:
->
->     From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com
->     <mailto:oleksandr.kravchuk@pelagicore.com>>
->
->     Changed SRC_URI source to official web-site, which keeps tarballs with
->     old releases.
->
->     Cherry-picked from master, but without the upgrade to 4.7.5.
->
->       commit a2e075ba656a89da58ca4f849c2f08ec6d50a96f
->       Author: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com
->     <mailto:oleksandr.kravchuk@pelagicore.com>>
->       Date:   Mon Jan 9 15:34:07 2017 +0100
->
->         lftp: update to 4.7.5 and change SRC_URI source
->
->         Updated lftp to version 4.7.5 and changed SRC_URI source to
->     official
->         web-site, which keeps tarballs with old releases.
->
->     Signed-off-by: Oleksandr Kravchuk
->     <oleksandr.kravchuk@pelagicore.com
->     <mailto:oleksandr.kravchuk@pelagicore.com>>
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
->     <mailto:Martin.Jansa@gmail.com>>
->     Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com
->     <mailto:joe_macdonald@mentor.com>>
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com
->     <mailto:Martin.Jansa@gmail.com>>
->     ---
->      meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
->     <http://lftp_4.7.3.bb> | 2 +-
->      1 file changed, 1 insertion(+), 1 deletion(-)
->
->     diff --git
->     a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
->     <http://lftp_4.7.3.bb>
->     b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
->     <http://lftp_4.7.3.bb>
->     index 287821194..d62453745 100644
->     --- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
->     <http://lftp_4.7.3.bb>
->     +++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
->     <http://lftp_4.7.3.bb>
->     @@ -6,7 +6,7 @@ SECTION = "console/network"
->      LICENSE = "GPLv3"
->      LIC_FILES_CHKSUM =
->     "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
->
->     -SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz
->     <http://fossies.org/linux/misc/lftp-$%7BPV%7D.tar.gz> \
->     +SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz
->     <http://lftp.yar.ru/ftp/lftp-$%7BPV%7D.tar.gz> \
->                 file://fix-gcc-6-conflicts-signbit.patch \
->                "
->      SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
->     --
->     2.12.2
->
->
+../Randy
 
+> 
+> root@rpi3:~# qmake -query
+> QT_SYSROOT:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot
+> QT_INSTALL_PREFIX:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr
+> QT_INSTALL_PREFIX/raw:/usr
+> QT_INSTALL_ARCHDATA:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5
+> QT_INSTALL_ARCHDATA/raw:/usr/lib/qt5
+> QT_INSTALL_DATA:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/qt5
+> QT_INSTALL_DATA/raw:/usr/share/qt5
+> QT_INSTALL_DOCS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/doc/qt5
+> QT_INSTALL_DOCS/raw:/usr/share/doc/qt5
+> QT_INSTALL_HEADERS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/include/qt5
+> QT_INSTALL_HEADERS/raw:/usr/include/qt5
+> QT_INSTALL_LIBS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib
+> QT_INSTALL_LIBS/raw:/usr/lib
+> QT_INSTALL_LIBEXECS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5/libexec
+> QT_INSTALL_LIBEXECS/raw:/usr/lib/qt5/libexec
+> QT_INSTALL_BINS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/bin/qt5
+> QT_INSTALL_BINS/raw:/usr/bin/qt5
+> QT_INSTALL_TESTS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/qt5/tests
+> QT_INSTALL_TESTS/raw:/usr/share/qt5/tests
+> QT_INSTALL_PLUGINS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5/plugins
+> QT_INSTALL_PLUGINS/raw:/usr/lib/qt5/plugins
+> QT_INSTALL_IMPORTS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5/imports
+> QT_INSTALL_IMPORTS/raw:/usr/lib/qt5/imports
+> QT_INSTALL_QML:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5/qml
+> QT_INSTALL_QML/raw:/usr/lib/qt5/qml
+> QT_INSTALL_TRANSLATIONS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/qt5/translations
+> QT_INSTALL_TRANSLATIONS/raw:/usr/share/qt5/translations
+> QT_INSTALL_CONFIGURATION:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/etc/qt5
+> QT_INSTALL_CONFIGURATION/raw:/etc/qt5
+> QT_INSTALL_EXAMPLES:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/qt5/examples
+> QT_INSTALL_EXAMPLES/raw:/usr/share/qt5/examples
+> QT_INSTALL_DEMOS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/share/qt5/examples
+> QT_INSTALL_DEMOS/raw:/usr/share/qt5/examples
+> QT_HOST_PREFIX:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot-native
+> QT_HOST_DATA:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib/qt5
+> QT_HOST_BINS:/usr/bin/qt5
+> QT_HOST_LIBS:/oe4/rpi/tmp-pyro/work/cortexa7hf-neon-vfpv4-poky-linux-gnueabi/qtbase/5.8.0+gitAUTOINC+49dc9aa409-r0/recipe-sysroot/usr/lib
+> QMAKE_SPEC:linux-oe-g++
+> QMAKE_XSPEC:linux-oe-g++
+> QMAKE_VERSION:3.1
+> QT_VERSION:5.8.0
+> 
+> 
+> The error you see on the target processing a simple Qt .pro file
+> 
+> root@rpi3:~/tspress# qmake
+> Could not find qmake configuration file linux-oe-g++.
+> Error processing project file: /home/root/tspress/tspress.pro
+> 
+> 
+
+
+-- 
+# Randy MacLeod. SMTS, Linux, Wind River
+Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON, 
+Canada, K2K 2W5
 
