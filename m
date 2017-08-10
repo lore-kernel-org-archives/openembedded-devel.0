@@ -1,51 +1,49 @@
 Return-Path: <behanw@converseincode.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 58BB777E99
+Received: from mail-pg0-f41.google.com (mail-pg0-f41.google.com [74.125.83.41])
+	by mail.openembedded.org (Postfix) with ESMTP id C087877BE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 04:37:55 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id v189so36571622pgd.2
+	Thu, 10 Aug 2017 04:40:30 +0000 (UTC)
+Received: by mail-pg0-f41.google.com with SMTP id l64so36491531pge.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Aug 2017 21:37:57 -0700 (PDT)
+	Wed, 09 Aug 2017 21:40:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=converseincode.com; s=google;
-	h=from:message-id:mime-version:subject:date:in-reply-to:cc:to
-	:references; bh=zJA8eoSjlBSmtaYG85xNoNfyQ+phYH9Q49LI8aJSvaA=;
-	b=AGlq2ehPojLXjgr1dM1IsH8oBvYoCy0lWVtHimqy9cBYTLBLuvQQwWgNnzE/2q5MYQ
-	GcE+M9FaZHelLw9mCaR7khWL8kksKWptipaqFeINxOIAbsWCoxfXG3IEDeTGJ5mKp3h1
-	sUI+/hvzUo35zsJi2SJYciuI/iqLOtk+B6vsc=
+	h=mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=9f3aW7aVT3sBx0i+v8L/gwu+at4zhJ73ZJwI0rXJMCY=;
+	b=CDt3G6LmdalvIDpaNIXOBVf5SogRmUs6JwsjOtCAthqThjwWBDfua3H3ewjoBJbuXW
+	6EgxXxLbjHq54lOjZEM8TWy/4lQVfwPFT+4lGimzFhpCiVC0PUq9fh+IZ+6Ej3lA2Ala
+	4SsQFTTE8ZuuVCXqCkbyrzSlNhPL6X4E4A2AY=
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:message-id:mime-version:subject:date
-	:in-reply-to:cc:to:references;
-	bh=zJA8eoSjlBSmtaYG85xNoNfyQ+phYH9Q49LI8aJSvaA=;
-	b=Mx+4lSMnT+kid+AVoZtRW+GHElXH2OVqorga/WBPkz62c6XgIsXs61QAog704FVKV6
-	+Ok8bJ7IGk1B5++gVleX6b4jmlcC7pMgWVdb64NJuI0i3HftHBZNxyCnJMfAmDFpW9MG
-	RfhyLLciSuvEEGyyQZYkCrvTx+v5PiHrq8UHcOQvlNnX/+37ZjoXIjl5uekZtf248VtK
-	9HtQPftvfJ5SXS2SP1MJJHKM/n13sp+xEr4yVcpAh8w3eYOw1tt5NmgG0SVTTtmwo3v8
-	/BTqEC4+ppXZnMv5aXGobYyunPVH+6Cc8CgjLzikc7vKgUlXjGcT8BSw1P3nIEfv23IB
-	j6/A==
-X-Gm-Message-State: AHYfb5je+aKPyBHQ0Z+o4wRbrER1VIaMQ4s+XweJs0GzvDIme1l6WYL7
-	Mo8UEjS8QDQ7SWzA
-X-Received: by 10.84.231.204 with SMTP id g12mr11925201pln.131.1502339877267; 
-	Wed, 09 Aug 2017 21:37:57 -0700 (PDT)
+	h=x-gm-message-state:mime-version:subject:from:in-reply-to:date:cc
+	:content-transfer-encoding:message-id:references:to;
+	bh=9f3aW7aVT3sBx0i+v8L/gwu+at4zhJ73ZJwI0rXJMCY=;
+	b=NZ3mc4BwckVqoaSOZZg/Ua/1EzzuGWJNl9pb8EF7L/uaw9E/Ao6QUTGXQR4k3CrWK8
+	88LjN7K+/aDjzWMfkcXMthL+1jBTMUwYf+nUpPYf7iMLtziOpHkK7QfK05CG/qtvQlQW
+	XI430mmiy6t/7aFlkrq3RFDmI8Jq+2U+ejk1K/MbJA47+H9FMVeOVYGzSC2OrMVfIM28
+	Ppa2hSIwRHjjZRM0DSVGC5Ta10qshtZRd+UBqkXYAESZdlZxbp4STntd7APvt5s3XeWv
+	ffziRdyYjII52Q5IJS1g0tFJ+AiK5mkvlXRAIRLqOoauvKstL4U81WSCAxEUJnd0UO3C
+	IYEg==
+X-Gm-Message-State: AHYfb5ilO8MwyVJAe4S+95A20lJ3FJlr5vEE5T2ume3TlJXCcHDaEbzs
+	lzsj/XudQGycOuF2M+ZQ9Q==
+X-Received: by 10.99.51.142 with SMTP id z136mr10025686pgz.275.1502340031871; 
+	Wed, 09 Aug 2017 21:40:31 -0700 (PDT)
 Received: from [192.168.120.225] (d207-6-122-147.bchsia.telus.net.
 	[207.6.122.147]) by smtp.gmail.com with ESMTPSA id
-	e131sm8548692pgc.64.2017.08.09.21.37.55
+	y70sm9659597pfg.93.2017.08.09.21.40.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 09 Aug 2017 21:37:56 -0700 (PDT)
-From: Behan Webster <behanw@converseincode.com>
-Message-Id: <B3D9B02E-38F0-4F66-8BC6-4E40FE7D64AD@converseincode.com>
+	Wed, 09 Aug 2017 21:40:30 -0700 (PDT)
 Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-Date: Wed, 9 Aug 2017 21:37:54 -0700
-In-Reply-To: <893c3fce-14cf-adbf-6613-1297b0334210@windriver.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
+From: Behan Webster <behanw@converseincode.com>
+In-Reply-To: <1502288526.1934.39.camel@linux.intel.com>
+Date: Wed, 9 Aug 2017 21:40:29 -0700
+Message-Id: <879E7479-CCE4-47D5-BB40-E789BA93185C@converseincode.com>
 References: <73F79297-B92A-4F4D-A3F1-A3F43CD39DAE@converseincode.com>
 	<1502288526.1934.39.camel@linux.intel.com>
-	<893c3fce-14cf-adbf-6613-1297b0334210@windriver.com>
+To: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
 X-Mailer: Apple Mail (2.3273)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>,
-	openembedded-devel@lists.openembedded.org
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: Alpha release of check-requirement.sh
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -59,60 +57,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 04:37:56 -0000
-Content-Type: text/plain;
-	charset=utf-8
+X-List-Received-Date: Thu, 10 Aug 2017 04:40:30 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-> On Aug 9, 2017, at 11:32 AM, Randy MacLeod =
-<randy.macleod@windriver.com> wrote:
+> On Aug 9, 2017, at 7:22 AM, Leonardo Sandoval =
+<leonardo.sandoval.gonzalez@linux.intel.com> wrote:
 >=20
-> On 2017-08-09 10:22 AM, Leonardo Sandoval wrote:
->> in my opinion, this fits nicely into the oe-core, into the
->> scripts/contrib folder.
->=20
-> Agreed.
+> in my opinion, this fits nicely into the oe-core, into the
+> scripts/contrib folder.
 
-As far as living in scripts/contrib, you are certainly free to keep a =
-copy there, but as it says on the webpage there is nothing specific to =
-YP nor OE in it at the moment (other than the list of requirements), and =
-I will likely be adding requirements for other projects.
+Keeping it in script/contrib seems odd to me (horse before the cart). =
+One of the requirements for OE is git (or tar) to actually get OE in the =
+first place.
 
-And what I=E2=80=99m saying is that maintaining it is kinda what I=E2=80=99=
-m already doing as a part of my course work (check-requirements is a =
-side effect of that work).
-
-> It would be nice to separate the data from the script so
-> that people could easily add to it. That might make updates
-> more difficult if the script is kept separate from oe-core.
-
-Well, what you aren=E2=80=99t seeing is that data is separate; it=E2=80=99=
-s all in arrays by requirement grouping. The script is also constructed =
-from a series of smaller scripts catted together by a makefile; what =
-you=E2=80=99re seeing is the output of a script build. I still need to =
-push the git repo to github.
-
-> Could you get rid of the references to 'course' if the script
-> gets integrated:
-> $ grep -i course ~/Downloads/check-requirements.sh | wc -l
-> 139
->=20
-> s/course/activity/ perhaps.
-
-And the =E2=80=9Ccourse=E2=80=9D part is current attribute of the shared =
-nature of the codebase; mostly variable names. I=E2=80=99d like to make =
-that more generic, but it doesn=E2=80=99t hurt much right now. =
-=E2=80=9CActivity=E2=80=9D is surely a possibility.
-
-Please note I said it was an alpha release. I literally banged this =
-together from ready-for.sh in about 8 hours. It is a work in progress. =
-But worth sharing considering it=E2=80=99s pretty useful already.
-
-I=E2=80=99d mostly be looking for bug reports as to =
-packages/requirements to add to lists for various versions of distros.
-
-It does occur to me that there may need to be a version of this per =
-release of YP, but that=E2=80=99s for the future.
+I see this as more something some one would run before cloning OE or =
+Poky. It=E2=80=99s a replacement for needing to read a long HOWTO on a =
+webpage to get started with OE or YP.
 
 Behan=
 
