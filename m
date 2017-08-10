@@ -1,37 +1,25 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 096DA77EFE
+Return-Path: <stefan@agner.ch>
+X-Greylist: delayed 396 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 10 Aug 2017 03:10:11 UTC
+Received: from mail.kmu-office.ch (mail.kmu-office.ch [178.209.48.109])
+	by mail.openembedded.org (Postfix) with ESMTP id 4551377BBF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Aug 2017 01:50:44 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id q66so7338891qki.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Aug 2017 18:50:46 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lDUhjQmILWa3WfIDFFadXV0LU6fjYvJEf8cuWVsh0NA=;
-	b=acOPmQuEwqRTk7taCzNaXgSIVD4lJZ/FEytgZwMyihCe+zyD2BpTGbXjl7QtJmzM2J
-	hIOouwY/UunzwgLarb2zddWDagHq3GCJSbstnRVnILRvSV5/3waaUNVLrvQwTMx7n6Vc
-	7JczoSNC3oAMmPKajmJlGSELXs5lCOOg5lRVrtItfBx06xziyym8dh9FFr1vI2vD0QiZ
-	6HnpI01lIloz5zX3ZhKRz4wgxGbSWoXS24Hp89TDvab8v9dj7DPMDCPs7Xk8N2AwOG76
-	7yKyON7RKugrag37dpyLhmsP4docyBC8h+N95Cf+WCTTXTcr/MZrRYxb2KNTyvEZpwH0
-	+b7w==
-X-Gm-Message-State: AHYfb5hJr+EBG9CJrNfxlpS2k44eYuMjNb1aBNgc/C6hBEczfb8hITtx
-	tzN3ckdolxK4QgVLADE=
-X-Received: by 10.55.128.1 with SMTP id b1mr13549495qkd.76.1502329845267;
-	Wed, 09 Aug 2017 18:50:45 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id g1sm1500702qta.65.2017.08.09.18.50.44
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 09 Aug 2017 18:50:44 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	Thu, 10 Aug 2017 03:10:11 +0000 (UTC)
+Received: from seahawk.toradex.int
+	(75-146-58-181-Washington.hfc.comcastbusiness.net [75.146.58.181])
+	by mail.kmu-office.ch (Postfix) with ESMTPSA id 8DE015C0B98;
+	Thu, 10 Aug 2017 05:00:39 +0200 (CEST)
+From: Stefan Agner <stefan@agner.ch>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Aug 2017 21:50:38 -0400
-Message-Id: <1502329838-20275-1-git-send-email-derek@asterius.io>
+Date: Wed,  9 Aug 2017 20:03:24 -0700
+Message-Id: <1502334204-27713-1-git-send-email-stefan@agner.ch>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pytest: update to version 3.2.0
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=agner.ch; s=dkim;
+	t=1502334040; bh=ez1ea+vqVkJ3FQ1b6lBnAsWRb4MNV25+uXlhRrVsaE8=;
+	h=From:To:Cc:Subject:Date:Message-Id;
+	b=LrSTCSns+J9Vg1hxI0ZNUT4hdh0LqjuTg/nJ6qhPLCO0T2kXzhpNZ4L/nKYmDSfpJZQE2907NIEo/oBpxstSocTDQdT2F1PPbuHcW6LSqOiPKoaH8LvA2fpbpa7XAu7zgC26kUO/1iH3S9mG8NIfHYtIvtBUVHiEG7ZOqT3GOwU=
+Cc: Stefan Agner <stefan.agner@toradex.com>
+Subject: [meta-oe][PATCH] rapidjson: avoid dependency to non-existing package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,40 +32,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Aug 2017 01:50:45 -0000
+X-List-Received-Date: Thu, 10 Aug 2017 03:10:12 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+From: Stefan Agner <stefan.agner@toradex.com>
+
+RapidJSON is a header only library. The automatic package split
+leads to no 'rapidjson' package but a 'rapidjson-dev' package with
+a dependency to the 'rapidjson' package, leading to errors like:
+ * Solver encountered 1 problem(s):
+ * Problem 1/1:
+ *   - nothing provides rapidjson = 1.1.0+git0+e5635fb27f-r0 needed by rapidjson-dev-1.1.0+git0+e5635fb27f-r0.core2-64
+
+Clear rapidjson-dev dependencies.
+
+Signed-off-by: Stefan Agner <stefan.agner@toradex.com>
 ---
- meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
- .../python/{python-pytest_3.1.3.bb => python-pytest_3.2.0.bb}         | 0
- .../python/{python3-pytest_3.1.3.bb => python3-pytest_3.2.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytest_3.1.3.bb => python-pytest_3.2.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytest_3.1.3.bb => python3-pytest_3.2.0.bb} (100%)
+ meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-index b5c1fa8..bfa6e46 100644
---- a/meta-python/recipes-devtools/python/python-pytest.inc
-+++ b/meta-python/recipes-devtools/python/python-pytest.inc
-@@ -2,8 +2,8 @@ SUMMARY = "Simple powerful teting with python"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
+diff --git a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+index 4cded07..8ab35d2 100644
+--- a/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
++++ b/meta-oe/recipes-devtools/rapidjson/rapidjson_git.bb
+@@ -21,5 +21,6 @@ EXTRA_OECMAKE += "-DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DRAPIDJ
+ # RapidJSON is a header-only C++ library, so the main package will be empty.
  
--SRC_URI[md5sum] = "35356e6e31cbd8318e8b2a8340a90b72"
--SRC_URI[sha256sum] = "095e1832f7e424563c95daf4d8d3c865052b80e139cdd2f9610a986ee8526206"
-+SRC_URI[md5sum] = "f7c0ffc970b26bdf8e6ba1c67af2ea79"
-+SRC_URI[sha256sum] = "0225cf10b9e173f84729d5f4648211458a222c6e53a77a85e104bc5f31c244ee"
+ FILES_${PN}-dev += "${libdir}/cmake"
++RDEPENDS_${PN}-dev = ""
  
- SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch"
- 
-diff --git a/meta-python/recipes-devtools/python/python-pytest_3.1.3.bb b/meta-python/recipes-devtools/python/python-pytest_3.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest_3.1.3.bb
-rename to meta-python/recipes-devtools/python/python-pytest_3.2.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.1.3.bb b/meta-python/recipes-devtools/python/python3-pytest_3.2.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytest_3.1.3.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_3.2.0.bb
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.7.4
 
