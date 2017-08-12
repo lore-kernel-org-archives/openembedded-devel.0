@@ -1,53 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EF44578352
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Aug 2017 09:07:00 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id g32so3906499wrd.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Aug 2017 02:07:02 -0700 (PDT)
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id F2F63605C3;
+	Sat, 12 Aug 2017 18:51:57 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id 26so7198285wrt.5;
+	Sat, 12 Aug 2017 11:51:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=VakAGjyx6yv/7qWeO00VWMz7R6YZ/PRagwFvEmzAuzA=;
-	b=IRCSPHXN3v/nwP0bQoIVyh91fmxA9wLrquY+v+6XkcMFx05sFJiNESTQsrTpwYoatP
-	QWPFgG6yzO/09bq8UjbFEwHK89heGlDilTDyE8TkEWTewO351Q+l1ukHpwp/gCeteUff
-	/b3vSf9yjcHN7pDQUlvXGGdt2KSBcp7gWwjobMKNUrOU8DlbZ04w1xBUuo4Edk1+xAIC
-	aMtSaIagus7CPLk1IdPES6cw0+eK+ZjiRA8CYXwc2hurq6o9sAYQNT1kuZLWT5IhtSfs
-	QJ2HXFah0vf5MipDZb5zLA/AayULVra1yPCT0FnsHSfiMK1zieiqBc6u0fCPuUilbMa3
-	dxfw==
+	h=from:date:to:subject:message-id:mime-version:content-disposition
+	:user-agent; bh=341XElmgLZYJnz2n5+vFXWjwAucLFcjDXNZnyYq7G6E=;
+	b=aBkHg/IrLZrcEd4YoX6knEV1xK+0i/ue7lMtZjh+WAxO98rUHNz9kN4jRcvIOXlLQH
+	hHHsHGgczY8gQC6iXqhB1Gp6IggWTZ+hUiEit5Mg8SxlOrRtxEvLbCgurL2bsSpVd8r3
+	4NzGLG9XFeMk7OsCLYMTOs9kFLDMNBIRsFaMNrBGIc9pDB/7ipb+S3tAT4rd/Gdujv5D
+	UE/uCJjvANlE78qwpXebHkW9EiWQyZJpsakiOu4S97Og1bdeLVnnE7fM/Q7pgEapobE2
+	FIXKYR/OxMs25KZKvJnRM0vsZ/EI8C3KQMmKmDF7fJb2TN9yIezSgnTOYZmUtRZQPuqq
+	XbUA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=VakAGjyx6yv/7qWeO00VWMz7R6YZ/PRagwFvEmzAuzA=;
-	b=NzjKoZbCNDc7zMBSBdGrhfDeBpXnCpAtplAhVDP+JthWKTkBoWVStlkOPDWnCd8aDG
-	b8VBczZ+XUFEhkev5igAygU6sunkG3JWTx3moXggHsVbmtu1W/T+j7byJiPfoLu0hbNx
-	m+obJXd83rAY0WtlqVGS70AsSyM/oMm32OfuJU8/wlRo9cAMZ6Mm0DsZy1Yj4sSn1+kI
-	5+wEgxOgsTFInvq1Z296KC2gdoQD5WqU0DAZbAvLOaCcz0w3F9VzQt0RU2gQzuScW8kf
-	POSG56eB3mSeYSPeSrlOLfvSXCa0q2jfw+OCgFV9DOoKAcOaWgHb3ajONNMczOVLrqlQ
-	o7tQ==
-X-Gm-Message-State: AHYfb5iNsbOPAJmC+YtHUG+IeyXnhCWivI77HE3nD0AIuVBDOXQrXntT
-	RYN3IcF/VhlIVX1h
-X-Received: by 10.223.136.155 with SMTP id f27mr12695489wrf.291.1502528821277; 
-	Sat, 12 Aug 2017 02:07:01 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 92sm1768812wrr.58.2017.08.12.02.06.59
+	h=x-gm-message-state:from:date:to:subject:message-id:mime-version
+	:content-disposition:user-agent;
+	bh=341XElmgLZYJnz2n5+vFXWjwAucLFcjDXNZnyYq7G6E=;
+	b=URtmRVDQWlBjoyPVEJZiCW0XLDir+I6sKfe38ClrBvk1lIzXeVXGAOrb96qqB9C8Aa
+	8gIHMnir5ONh4SVqt5/iC2O7sPmIsLoM1RVJppGZNXirewNAJAJat5N/CPUpc4ld4OpB
+	RZA6yxa2+7HJDsOT1q+qi6I4oU9vgXe84m7ueXFliEjDe4i1/HimEk0JAQjS8VupJ37s
+	OK1cE1g7F41q6zqzi7CVU4JQaiVeLlmKvwyUYCVcy/iQbtWyHIwvlHymGSQ8qLiCJHDh
+	zz3HI/pIlrBFf8JEKtmTp6pZiZYSc5p5sn2ZFQJ+3BT6+fxxJv5m01j2LqPNxr9UTOs4
+	0mTg==
+X-Gm-Message-State: AHYfb5iQAe2MoqS/u7ETfHMI3DBUF3QFVpbh8/lBd+ADj+9SDx5u/C4R
+	OZhTf1IohSaXaN9I
+X-Received: by 10.223.163.158 with SMTP id l30mr15434777wrb.203.1502563918368; 
+	Sat, 12 Aug 2017 11:51:58 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	x14sm4835303wmd.19.2017.08.12.11.51.57
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Sat, 12 Aug 2017 02:06:59 -0700 (PDT)
+	Sat, 12 Aug 2017 11:51:57 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Sat, 12 Aug 2017 11:08:30 +0200
-To: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <20170812090830.GA3337@jama>
-References: <cover.1501142861.git.hongxu.jia@windriver.com>
-	<2b121c2e2fbf3f417f9689d2435084d01a4a2f68.1501142861.git.hongxu.jia@windriver.com>
+Date: Sat, 12 Aug 2017 20:53:29 +0200
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Message-ID: <20170812185329.GB3337@jama>
 MIME-Version: 1.0
-In-Reply-To: <2b121c2e2fbf3f417f9689d2435084d01a4a2f68.1501142861.git.hongxu.jia@windriver.com>
 User-Agent: Mutt/1.8.3 (2017-05-23)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 5/6] python3-blivet: add recipe 2.2.0
+Subject: State of bitbake world, Failed tasks 2017-08-11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,902 +55,471 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Aug 2017 09:07:01 -0000
-X-Groupsio-MsgNum: 68097
+X-List-Received-Date: Sat, 12 Aug 2017 18:51:58 -0000
+X-Groupsio-MsgNum: 68098
 Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="AqsLC8rIMeq19msA"
+	protocol="application/pgp-signature"; boundary="VrqPEDrXMn8OVzN4"
 Content-Disposition: inline
 
---AqsLC8rIMeq19msA
+--VrqPEDrXMn8OVzN4
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 27, 2017 at 04:44:25AM -0400, Hongxu Jia wrote:
-> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> ---
->  .../python3-blivet/0001-comment-out-selinux.patch  |  70 ++++++++++++++
->  .../0002-run_program-support-timeout.patch         | 102 +++++++++++++++=
-++++++
->  .../0003-support-infinit-timeout.patch             |  66 +++++++++++++
->  .../0004-Mount-var-volatile-during-install.patch   |  59 ++++++++++++
->  .../0005-update-fstab-by-appending.patch           |  32 +++++++
->  ...0006-fix-new.roots-object-is-not-iterable.patch |  28 ++++++
->  ...correct-timeout-while-system-time-changed.patch |  48 ++++++++++
->  .../python3-blivet/0008-tweak-btrfs-packages.patch |  45 +++++++++
->  ...0009-invoking-mount-with-infinite-timeout.patch |  31 +++++++
->  ...-use-oe-variable-to-replace-hardcoded-dir.patch |  34 +++++++
->  .../0011-invoking-fsck-with-infinite-timeout.patch |  31 +++++++
->  .../0012-invoking-mkfs-with-infinite-timeout.patch |  31 +++++++
->  ...evert-Adapt-to-logging-module-name-change.patch |  30 ++++++
->  .../python-blivet/python3-blivet_2.2.0.bb          |  46 ++++++++++
->  14 files changed, 653 insertions(+)
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0001-comment-out-selinux.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0002-run_program-support-timeout.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0003-support-infinit-timeout.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0004-Mount-var-volatile-during-install.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0005-update-fstab-by-appending.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0006-fix-new.roots-object-is-not-iterable.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0007-fix-incorrect-timeout-while-system-time-changed.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0008-tweak-btrfs-packages.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0009-invoking-mount-with-infinite-timeout.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0010-use-oe-variable-to-replace-hardcoded-dir.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0011-invoking-fsck-with-infinite-timeout.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0012-invoking-mkfs-with-infinite-timeout.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet/0013-Revert-Adapt-to-logging-module-name-change.patch
->  create mode 100644 meta-python/recipes-extended/python-blivet/python3-bl=
-ivet_2.2.0.bb
->=20
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-01-comment-out-selinux.patch b/meta-python/recipes-extended/python-blivet/p=
-ython3-blivet/0001-comment-out-selinux.patch
-> new file mode 100644
-> index 0000000..0ee3205
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0001-comm=
-ent-out-selinux.patch
-> @@ -0,0 +1,70 @@
-> +From 7d483c27ac0a23ca3bba7f320918afc40013bd8e Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 14:25:52 +0800
-> +Subject: [PATCH 01/13] comment out selinux
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/flags.py | 5 +++--
-> + blivet/util.py  | 6 +++++-
-> + 2 files changed, 8 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/blivet/flags.py b/blivet/flags.py
-> +index 06822db..b55a93f 100644
-> +--- a/blivet/flags.py
-> ++++ b/blivet/flags.py
-> +@@ -20,7 +20,7 @@
-> + #
-> +=20
-> + import shlex
-> +-import selinux
-> ++#import selinux
-> +=20
-> +=20
-> + class Flags(object):
-> +@@ -49,7 +49,8 @@ class Flags(object):
-> +         #
-> +         # enable/disable functionality
-> +         #
-> +-        self.selinux =3D selinux.is_selinux_enabled()
-> ++        #self.selinux =3D selinux.is_selinux_enabled()
-> ++        self.selinux =3D False
-> +         self.multipath =3D True
-> +         self.dmraid =3D True
-> +         self.ibft =3D True
-> +diff --git a/blivet/util.py b/blivet/util.py
-> +index e3e71ce..0cf5188 100644
-> +--- a/blivet/util.py
-> ++++ b/blivet/util.py
-> +@@ -4,7 +4,7 @@ import glob
-> + import itertools
-> + import os
-> + import shutil
-> +-import selinux
-> ++#import selinux
-> + import subprocess
-> + import re
-> + import sys
-> +@@ -431,6 +431,8 @@ def get_cow_sysfs_path(dev_path, dev_sysfsPath):
-> + def match_path_context(path):
-> +     """ Return the default SELinux context for the given path. """
-> +     context =3D None
-> ++    return context
-> ++
-> +     try:
-> +         context =3D selinux.matchpathcon(os.path.normpath(path), 0)[1]
-> +     except OSError as e:
-> +@@ -455,6 +457,8 @@ def set_file_context(path, context, root=3DNone):
-> +=20
-> +             True if successful, False if not.
-> +     """
-> ++    return False
-> ++
-> +     if root is None:
-> +         root =3D '/'
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-02-run_program-support-timeout.patch b/meta-python/recipes-extended/python-=
-blivet/python3-blivet/0002-run_program-support-timeout.patch
-> new file mode 100644
-> index 0000000..01e71be
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0002-run_=
-program-support-timeout.patch
-> @@ -0,0 +1,102 @@
-> +From 86744d408b91acdcb086a03d7779fcda152f2ac3 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 14:39:56 +0800
-> +Subject: [PATCH 02/13] run_program support timeout
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/util.py | 68 +++++++++++++++++++++++++++++++++------------------=
--------
-> + 1 file changed, 39 insertions(+), 29 deletions(-)
-> +
-> +diff --git a/blivet/util.py b/blivet/util.py
-> +index 0cf5188..d4bd9bb 100644
-> +--- a/blivet/util.py
-> ++++ b/blivet/util.py
-> +@@ -158,6 +158,30 @@ class Path(str):
-> +     def __hash__(self):
-> +         return self._path.__hash__()
-> +=20
-> ++def timeout_command(argv, timeout, *args, **kwargs):
-> ++    """call shell-command and either return its output or kill it
-> ++    if it doesn't normally exit within timeout seconds and return None"=
-""
-> ++    import subprocess, datetime, os, time, signal
-> ++    start =3D datetime.datetime.now()
-> ++
-> ++    try:
-> ++        proc =3D subprocess.Popen(argv, *args, **kwargs)
-> ++        while proc.poll() is None:
-> ++            time.sleep(0.1)
-> ++            now =3D datetime.datetime.now()
-> ++            if (now - start).seconds> timeout:
-> ++                os.kill(proc.pid, signal.SIGKILL)
-> ++                os.waitpid(-1, os.WNOHANG)
-> ++                program_log.debug("%d seconds timeout" % timeout)
-> ++                return (-1, None)
-> ++
-> ++
-> ++    except OSError as e:
-> ++        program_log.error("Error running %s: %s", argv[0], e.strerror)
-> ++        raise
-> ++
-> ++    program_log.debug("Return code: %d", proc.returncode)
-> ++    return (proc.returncode, proc.stdout.read())
-> +=20
-> + def _run_program(argv, root=3D'/', stdin=3DNone, env_prune=3DNone, stde=
-rr_to_stdout=3DFalse, binary_output=3DFalse):
-> +     if env_prune is None:
-> +@@ -180,36 +204,22 @@ def _run_program(argv, root=3D'/', stdin=3DNone, e=
-nv_prune=3DNone, stderr_to_stdout=3DFa
-> +             stderr_dir =3D subprocess.STDOUT
-> +         else:
-> +             stderr_dir =3D subprocess.PIPE
-> +-        try:
-> +-            proc =3D subprocess.Popen(argv,
-> +-                                    stdin=3Dstdin,
-> +-                                    stdout=3Dsubprocess.PIPE,
-> +-                                    stderr=3Dstderr_dir,
-> +-                                    close_fds=3DTrue,
-> +-                                    preexec_fn=3Dchroot, cwd=3Droot, en=
-v=3Denv)
-> +-
-> +-            out, err =3D proc.communicate()
-> +-            if not binary_output and six.PY3:
-> +-                out =3D out.decode("utf-8")
-> +-            if out:
-> +-                if not stderr_to_stdout:
-> +-                    program_log.info("stdout:")
-> +-                for line in out.splitlines():
-> +-                    program_log.info("%s", line)
-> +-
-> +-            if not stderr_to_stdout and err:
-> +-                program_log.info("stderr:")
-> +-                for line in err.splitlines():
-> +-                    program_log.info("%s", line)
-> +-
-> +-        except OSError as e:
-> +-            program_log.error("Error running %s: %s", argv[0], e.strerr=
-or)
-> +-            raise
-> +-
-> +-        program_log.debug("Return code: %d", proc.returncode)
-> +-
-> +-    return (proc.returncode, out)
-> +=20
-> ++        res, out =3D timeout_command(argv, 10,
-> ++                                   stdin=3Dstdin,
-> ++                                   stdout=3Dsubprocess.PIPE,
-> ++                                   stderr=3Dstderr_dir,
-> ++                                   close_fds=3DTrue,
-> ++                                   preexec_fn=3Dchroot, cwd=3Droot, env=
-=3Denv)
-> ++        if not binary_output and six.PY3:
-> ++            out =3D out.decode("utf-8")
-> ++        if out:
-> ++            if not stderr_to_stdout:
-> ++                program_log.info("stdout:")
-> ++            for line in out.splitlines():
-> ++                program_log.info("%s", line)
-> ++
-> ++    return (res, out)
-> +=20
-> + def run_program(*args, **kwargs):
-> +     return _run_program(*args, **kwargs)[0]
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-03-support-infinit-timeout.patch b/meta-python/recipes-extended/python-bliv=
-et/python3-blivet/0003-support-infinit-timeout.patch
-> new file mode 100644
-> index 0000000..489fb56
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0003-supp=
-ort-infinit-timeout.patch
-> @@ -0,0 +1,66 @@
-> +From 923265e04df5920fc99393aa05f584032aa1b383 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 16:18:02 +0800
-> +Subject: [PATCH 03/13] support infinit timeout
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/util.py | 12 ++++++++----
-> + 1 file changed, 8 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/blivet/util.py b/blivet/util.py
-> +index d4bd9bb..44a2da5 100644
-> +--- a/blivet/util.py
-> ++++ b/blivet/util.py
-> +@@ -158,6 +158,7 @@ class Path(str):
-> +     def __hash__(self):
-> +         return self._path.__hash__()
-> +=20
-> ++# timeout =3D -1 means infinite timeout, always wait.
-> + def timeout_command(argv, timeout, *args, **kwargs):
-> +     """call shell-command and either return its output or kill it
-> +     if it doesn't normally exit within timeout seconds and return None"=
-""
-> +@@ -169,7 +170,7 @@ def timeout_command(argv, timeout, *args, **kwargs):
-> +         while proc.poll() is None:
-> +             time.sleep(0.1)
-> +             now =3D datetime.datetime.now()
-> +-            if (now - start).seconds> timeout:
-> ++            if timeout !=3D -1 and (now - start).seconds> timeout:
-> +                 os.kill(proc.pid, signal.SIGKILL)
-> +                 os.waitpid(-1, os.WNOHANG)
-> +                 program_log.debug("%d seconds timeout" % timeout)
-> +@@ -183,7 +184,7 @@ def timeout_command(argv, timeout, *args, **kwargs):
-> +     program_log.debug("Return code: %d", proc.returncode)
-> +     return (proc.returncode, proc.stdout.read())
-> +=20
-> +-def _run_program(argv, root=3D'/', stdin=3DNone, env_prune=3DNone, stde=
-rr_to_stdout=3DFalse, binary_output=3DFalse):
-> ++def _run_program(argv, root=3D'/', stdin=3DNone, env_prune=3DNone, stde=
-rr_to_stdout=3DFalse, binary_output=3DFalse, timeout=3D10):
-> +     if env_prune is None:
-> +         env_prune =3D []
-> +=20
-> +@@ -192,7 +193,10 @@ def _run_program(argv, root=3D'/', stdin=3DNone, en=
-v_prune=3DNone, stderr_to_stdout=3DFa
-> +             os.chroot(root)
-> +=20
-> +     with program_log_lock:  # pylint: disable=3Dnot-context-manager
-> +-        program_log.info("Running... %s", " ".join(argv))
-> ++        if timeout !=3D -1:
-> ++            program_log.info("Running... %s", " ".join(argv))
-> ++        else:
-> ++            program_log.info("Running... %s ...infinite timeout", " ".j=
-oin(argv))
-> +=20
-> +         env =3D os.environ.copy()
-> +         env.update({"LC_ALL": "C",
-> +@@ -205,7 +209,7 @@ def _run_program(argv, root=3D'/', stdin=3DNone, env=
-_prune=3DNone, stderr_to_stdout=3DFa
-> +         else:
-> +             stderr_dir =3D subprocess.PIPE
-> +=20
-> +-        res, out =3D timeout_command(argv, 10,
-> ++        res, out =3D timeout_command(argv, timeout,
-> +                                    stdin=3Dstdin,
-> +                                    stdout=3Dsubprocess.PIPE,
-> +                                    stderr=3Dstderr_dir,
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-04-Mount-var-volatile-during-install.patch b/meta-python/recipes-extended/p=
-ython-blivet/python3-blivet/0004-Mount-var-volatile-during-install.patch
-> new file mode 100644
-> index 0000000..cb837e2
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0004-Moun=
-t-var-volatile-during-install.patch
-> @@ -0,0 +1,59 @@
-> +From c3959bd00665e24a955bbdbea1ef555e76372f12 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 16:25:16 +0800
-> +Subject: [PATCH 04/13] Mount /var/volatile during install
-> +
-> +The installed system needs /var/volatile clean, otherwise it
-> +caused systemd's journalctl failed to record boot log.
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/osinstall.py | 9 +++++++++
-> + 1 file changed, 9 insertions(+)
-> +
-> +diff --git a/blivet/osinstall.py b/blivet/osinstall.py
-> +index a4f9535..61819c2 100644
-> +--- a/blivet/osinstall.py
-> ++++ b/blivet/osinstall.py
-> +@@ -294,6 +294,7 @@ class FSSet(object):
-> +         self._sysfs =3D None
-> +         self._proc =3D None
-> +         self._devshm =3D None
-> ++        self._volatile =3D None
-> +         self._usb =3D None
-> +         self._selinux =3D None
-> +         self._run =3D None
-> +@@ -335,6 +336,12 @@ class FSSet(object):
-> +         return self._devshm
-> +=20
-> +     @property
-> ++    def volatile(self):
-> ++        if not self._volatile:
-> ++            self._volatile =3D NoDevice(fmt=3Dget_format("tmpfs", devic=
-e=3D"tmpfs", mountpoint=3D"/var/volatile"))
-> ++        return self._volatile
-> ++
-> ++    @property
-> +     def usb(self):
-> +         if not self._usb:
-> +             self._usb =3D NoDevice(fmt=3Dget_format("usbfs", device=3D"=
-usbfs", mountpoint=3D"/proc/bus/usb"))
-> +@@ -591,6 +598,7 @@ class FSSet(object):
-> +=20
-> +         devices =3D list(self.mountpoints.values()) + self.swap_devices
-> +         devices.extend([self.dev, self.devshm, self.devpts, self.sysfs,
-> ++                        self.volatile,
-> +                         self.proc, self.selinux, self.usb, self.run])
-> +         if isinstance(_platform, EFI):
-> +             devices.append(self.efivars)
-> +@@ -650,6 +658,7 @@ class FSSet(object):
-> +         """ unmount filesystems, except swap if swapoff =3D=3D False """
-> +         devices =3D list(self.mountpoints.values()) + self.swap_devices
-> +         devices.extend([self.dev, self.devshm, self.devpts, self.sysfs,
-> ++                        self.volatile,
-> +                         self.proc, self.usb, self.selinux, self.run])
-> +         if isinstance(_platform, EFI):
-> +             devices.append(self.efivars)
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-05-update-fstab-by-appending.patch b/meta-python/recipes-extended/python-bl=
-ivet/python3-blivet/0005-update-fstab-by-appending.patch
-> new file mode 100644
-> index 0000000..4f343b7
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0005-upda=
-te-fstab-by-appending.patch
-> @@ -0,0 +1,32 @@
-> +From 386ff899763f8473eb93a7a1578fb7cc4f86f66d Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 16:28:12 +0800
-> +Subject: [PATCH 05/13] update fstab by appending
-> +
-> +The 'storage.write()' has updated fstab by overwriting
-> +the original one, we should update fstab by appending
-> +to keep original tmpfs partitions.
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/osinstall.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/osinstall.py b/blivet/osinstall.py
-> +index 61819c2..afa82db 100644
-> +--- a/blivet/osinstall.py
-> ++++ b/blivet/osinstall.py
-> +@@ -728,7 +728,7 @@ class FSSet(object):
-> +         # /etc/fstab
-> +         fstab_path =3D os.path.normpath("%s/etc/fstab" % get_sysroot())
-> +         fstab =3D self.fstab()
-> +-        open(fstab_path, "w").write(fstab)
-> ++        open(fstab_path, "a").write(fstab)
-> +=20
-> +         # /etc/crypttab
-> +         crypttab_path =3D os.path.normpath("%s/etc/crypttab" % get_sysr=
-oot())
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-06-fix-new.roots-object-is-not-iterable.patch b/meta-python/recipes-extende=
-d/python-blivet/python3-blivet/0006-fix-new.roots-object-is-not-iterable.pa=
-tch
-> new file mode 100644
-> index 0000000..f5ff754
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0006-fix-=
-new.roots-object-is-not-iterable.patch
-> @@ -0,0 +1,28 @@
-> +From cd92eea8fab37ba6b0c7f03daa5255343dc75716 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 16:30:20 +0800
-> +Subject: [PATCH 06/13] fix new.roots object is not iterable
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/blivet.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/blivet.py b/blivet/blivet.py
-> +index 6a33e9c..79ae91a 100644
-> +--- a/blivet/blivet.py
-> ++++ b/blivet/blivet.py
-> +@@ -1761,7 +1761,7 @@ class Blivet(object):
-> +             p =3D partition.disk.format.parted_disk.getPartitionByPath(=
-partition.path)
-> +             partition.parted_partition =3D p
-> +=20
-> +-        for root in new.roots:
-> ++        for root in new.roots or []:
-> +             root.swaps =3D [new.devicetree.get_device_by_id(d.id, hidde=
-n=3DTrue) for d in root.swaps]
-> +             root.swaps =3D [s for s in root.swaps if s]
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-07-fix-incorrect-timeout-while-system-time-changed.patch b/meta-python/reci=
-pes-extended/python-blivet/python3-blivet/0007-fix-incorrect-timeout-while-=
-system-time-changed.patch
-> new file mode 100644
-> index 0000000..6512d86
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0007-fix-=
-incorrect-timeout-while-system-time-changed.patch
-> @@ -0,0 +1,48 @@
-> +From 78ee2b9090f9400ccc4f730e674f5ae972740ccb Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Fri, 26 Aug 2016 02:02:49 -0400
-> +Subject: [PATCH 07/13] fix incorrect timeout while system time changed
-> +
-> +While system time changed by NTP, invoking timeout_command
-> +breaks with incorrect timeout.
-> +--------
-> +|05:40:55,872 INFO program: Running... mount -t ext2 -o
-> +  defaults,ro /dev/sda2 /mnt/sysimage
-> +|01:40:55,086 DEBUG program: 10 seconds timeout
-> +--------
-> +
-> +Use numbert count to replace current time count could workaround
-> +the issue.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/util.py | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/blivet/util.py b/blivet/util.py
-> +index 44a2da5..b3c45ac 100644
-> +--- a/blivet/util.py
-> ++++ b/blivet/util.py
-> +@@ -163,14 +163,14 @@ def timeout_command(argv, timeout, *args, **kwargs=
-):
-> +     """call shell-command and either return its output or kill it
-> +     if it doesn't normally exit within timeout seconds and return None"=
-""
-> +     import subprocess, datetime, os, time, signal
-> +-    start =3D datetime.datetime.now()
-> ++    count =3D 0
-> +=20
-> +     try:
-> +         proc =3D subprocess.Popen(argv, *args, **kwargs)
-> +         while proc.poll() is None:
-> +             time.sleep(0.1)
-> +-            now =3D datetime.datetime.now()
-> +-            if timeout !=3D -1 and (now - start).seconds> timeout:
-> ++            count +=3D 1
-> ++            if timeout !=3D -1 and count > timeout*10:
-> +                 os.kill(proc.pid, signal.SIGKILL)
-> +                 os.waitpid(-1, os.WNOHANG)
-> +                 program_log.debug("%d seconds timeout" % timeout)
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-08-tweak-btrfs-packages.patch b/meta-python/recipes-extended/python-blivet/=
-python3-blivet/0008-tweak-btrfs-packages.patch
-> new file mode 100644
-> index 0000000..121336e
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0008-twea=
-k-btrfs-packages.patch
-> @@ -0,0 +1,45 @@
-> +From 6f661a511eea096c073888c7adb836a9a880b476 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 16:33:15 +0800
-> +Subject: [PATCH 08/13] tweak btrfs packages
-> +
-> +In oe-cre/yocto, we name btrfs package with btrfs-tools,
-> +rather than btrfs-progs.
-> +
-> +Upstream-Status: Inappropriate [oe specific]
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/devices/btrfs.py | 2 +-
-> + blivet/formats/fs.py    | 2 +-
-> + 2 files changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/blivet/devices/btrfs.py b/blivet/devices/btrfs.py
-> +index c5cb21f..9d417b2 100644
-> +--- a/blivet/devices/btrfs.py
-> ++++ b/blivet/devices/btrfs.py
-> +@@ -55,7 +55,7 @@ class BTRFSDevice(StorageDevice):
-> +=20
-> +     """ Base class for BTRFS volume and sub-volume devices. """
-> +     _type =3D "btrfs"
-> +-    _packages =3D ["btrfs-progs"]
-> ++    _packages =3D ["btrfs-tools"]
-> +     _external_dependencies =3D [availability.BLOCKDEV_BTRFS_PLUGIN]
-> +=20
-> +     def __init__(self, *args, **kwargs):
-> +diff --git a/blivet/formats/fs.py b/blivet/formats/fs.py
-> +index a49826f..e8f216d 100644
-> +--- a/blivet/formats/fs.py
-> ++++ b/blivet/formats/fs.py
-> +@@ -918,7 +918,7 @@ class BTRFS(FS):
-> +     _formattable =3D True
-> +     _linux_native =3D True
-> +     _supported =3D True
-> +-    _packages =3D ["btrfs-progs"]
-> ++    _packages =3D ["btrfs-tools"]
-> +     _min_size =3D Size("256 MiB")
-> +     _max_size =3D Size("16 EiB")
-> +     _mkfs_class =3D fsmkfs.BTRFSMkfs
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-09-invoking-mount-with-infinite-timeout.patch b/meta-python/recipes-extende=
-d/python-blivet/python3-blivet/0009-invoking-mount-with-infinite-timeout.pa=
-tch
-> new file mode 100644
-> index 0000000..fc084b1
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0009-invo=
-king-mount-with-infinite-timeout.patch
-> @@ -0,0 +1,31 @@
-> +From a6ac2157ee6793302e23ddbc5e3b249fa7da5b7e Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Wed, 31 Aug 2016 21:30:32 -0400
-> +Subject: [PATCH 09/13] invoking mount with infinite timeout
-> +
-> +This large timeout is needed when running on machines with
-> +lots of disks, or with slow disks.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/util.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/util.py b/blivet/util.py
-> +index b3c45ac..9f02b18 100644
-> +--- a/blivet/util.py
-> ++++ b/blivet/util.py
-> +@@ -257,7 +257,7 @@ def mount(device, mountpoint, fstype, options=3DNone=
-):
-> +=20
-> +     argv =3D ["mount", "-t", fstype, "-o", options, device, mountpoint]
-> +     try:
-> +-        rc =3D run_program(argv)
-> ++        rc =3D run_program(argv, timeout=3D-1)
-> +     except OSError:
-> +         raise
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-10-use-oe-variable-to-replace-hardcoded-dir.patch b/meta-python/recipes-ext=
-ended/python-blivet/python3-blivet/0010-use-oe-variable-to-replace-hardcode=
-d-dir.patch
-> new file mode 100644
-> index 0000000..45d8fab
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0010-use-=
-oe-variable-to-replace-hardcoded-dir.patch
-> @@ -0,0 +1,34 @@
-> +From e07133dbcf3c52e1ddd2f12797dcd16145269273 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Mon, 8 May 2017 03:54:12 -0400
-> +Subject: [PATCH 10/13] use oe variable to replace hardcoded dir
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + setup.py | 8 ++++----
-> + 1 file changed, 4 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/setup.py b/setup.py
-> +index 4d06a33..a994d06 100644
-> +--- a/setup.py
-> ++++ b/setup.py
-> +@@ -61,10 +61,10 @@ class blivet_sdist(sdist):
-> +=20
-> +=20
-> + data_files =3D [
-> +-    ('/etc/dbus-1/system.d', ['dbus/blivet.conf']),
-> +-    ('/usr/share/dbus-1/system-services', ['dbus/com.redhat.Blivet1.ser=
-vice']),
-> +-    ('/usr/libexec', ['dbus/blivetd']),
-> +-    ('/usr/lib/systemd/system', ['dbus/blivet.service'])
-> ++    (os.environ.get('sysconfdir')+'/dbus-1/system.d', ['dbus/blivet.con=
-f']),
-> ++    (os.environ.get('datadir')+'/dbus-1/system-services', ['dbus/com.re=
-dhat.Blivet1.service']),
-> ++    (os.environ.get('libexecdir'), ['dbus/blivetd']),
-> ++    (os.environ.get('systemd_system_unitdir'), ['dbus/blivet.service'])
-> + ]
-> +=20
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-11-invoking-fsck-with-infinite-timeout.patch b/meta-python/recipes-extended=
-/python-blivet/python3-blivet/0011-invoking-fsck-with-infinite-timeout.patch
-> new file mode 100644
-> index 0000000..c61fe01
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0011-invo=
-king-fsck-with-infinite-timeout.patch
-> @@ -0,0 +1,31 @@
-> +From e9ab4376a18cc1bd413c000b036320833eec80d7 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Thu, 1 Jun 2017 16:05:27 +0800
-> +Subject: [PATCH 11/13] invoking fsck with infinite timeout
-> +
-> +This large timeout is needed when running on machines with
-> +lots of disks, or with slow disks.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/tasks/fsck.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/tasks/fsck.py b/blivet/tasks/fsck.py
-> +index c4214dc..e13ac6b 100644
-> +--- a/blivet/tasks/fsck.py
-> ++++ b/blivet/tasks/fsck.py
-> +@@ -77,7 +77,7 @@ class FSCK(task.BasicApplication, fstask.FSTask):
-> +             raise FSError("\n".join(error_msgs))
-> +=20
-> +         try:
-> +-            rc =3D util.run_program(self._fsck_command)
-> ++            rc =3D util.run_program(self._fsck_command, timeout=3D-1)
-> +         except OSError as e:
-> +             raise FSError("filesystem check failed: %s" % e)
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-12-invoking-mkfs-with-infinite-timeout.patch b/meta-python/recipes-extended=
-/python-blivet/python3-blivet/0012-invoking-mkfs-with-infinite-timeout.patch
-> new file mode 100644
-> index 0000000..33bdbe8
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0012-invo=
-king-mkfs-with-infinite-timeout.patch
-> @@ -0,0 +1,31 @@
-> +From 9f5a048181cf29d241d96814e736b8235b3d42b1 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Fri, 16 Jun 2017 15:43:00 +0800
-> +Subject: [PATCH 12/13] invoking mkfs with infinite timeout
-> +
-> +This large timeout is needed when running on machines with
-> +lots of disks, or with slow disks.
-> +
-> +Upstream-Status: Pending
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/tasks/fsmkfs.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/tasks/fsmkfs.py b/blivet/tasks/fsmkfs.py
-> +index ad166aa..7bf5075 100644
-> +--- a/blivet/tasks/fsmkfs.py
-> ++++ b/blivet/tasks/fsmkfs.py
-> +@@ -170,7 +170,7 @@ class FSMkfs(task.BasicApplication, FSMkfsTask):
-> +         options =3D options or []
-> +         cmd =3D self._mkfs_command(options, label, set_uuid)
-> +         try:
-> +-            ret =3D util.run_program(cmd)
-> ++            ret =3D util.run_program(cmd, timeout=3D-1)
-> +         except OSError as e:
-> +             raise FSError(e)
-> +=20
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet/00=
-13-Revert-Adapt-to-logging-module-name-change.patch b/meta-python/recipes-e=
-xtended/python-blivet/python3-blivet/0013-Revert-Adapt-to-logging-module-na=
-me-change.patch
-> new file mode 100644
-> index 0000000..6bdf4ce
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet/0013-Reve=
-rt-Adapt-to-logging-module-name-change.patch
-> @@ -0,0 +1,30 @@
-> +From bfdaf79a2109ac6aed408f0c94f69766991e60e2 Mon Sep 17 00:00:00 2001
-> +From: Hongxu Jia <hongxu.jia@windriver.com>
-> +Date: Thu, 27 Jul 2017 14:34:30 +0800
-> +Subject: [PATCH 13/13] Revert "Adapt to logging module name change"
-> +
-> +Upstream-Status: Inappropriate [oe specific, sync with anaconda f26-rele=
-ase]
-> +
-> +This reverts commit c367d62a516e541ad28636c8259321f1c53417ce.
-> +
-> +Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-> +---
-> + blivet/__init__.py | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/blivet/__init__.py b/blivet/__init__.py
-> +index 49277cb..a01e487 100644
-> +--- a/blivet/__init__.py
-> ++++ b/blivet/__init__.py
-> +@@ -124,7 +124,7 @@ def enable_installer_mode():
-> +         from pyanaconda.constants import ROOT_PATH  # pylint: disable=
-=3Dredefined-outer-name,no-name-in-module
-> +         _storage_root =3D _sysroot =3D ROOT_PATH
-> +=20
-> +-    from pyanaconda.anaconda_logging import program_log_lock
-> ++    from pyanaconda.anaconda_log import program_log_lock
-> +     util.program_log_lock =3D program_log_lock
-> +=20
-> +     flags.installer_mode =3D True
-> +--=20
-> +2.7.4
-> +
-> diff --git a/meta-python/recipes-extended/python-blivet/python3-blivet_2.=
-2.0.bb b/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
-> new file mode 100644
-> index 0000000..8b9448c
-> --- /dev/null
-> +++ b/meta-python/recipes-extended/python-blivet/python3-blivet_2.2.0.bb
-> @@ -0,0 +1,46 @@
-> +DESCRIPTION =3D "A python module for system storage configuration"
-> +HOMEPAGE =3D "http://fedoraproject.org/wiki/blivet"
-> +LICENSE =3D "LGPLv2+"
-> +SECTION =3D "devel/python"
-> +
-> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
-263"
-> +
-> +S =3D "${WORKDIR}/git"
-> +B =3D "${S}"
-> +
-> +SRCREV =3D "39db82f20d8d4904c0c4dc8912e595177c59e091"
-> +SRC_URI =3D "git://github.com/rhinstaller/blivet;branch=3D2.2-devel \
-> +           file://0001-comment-out-selinux.patch \
-> +           file://0002-run_program-support-timeout.patch\
-> +           file://0003-support-infinit-timeout.patch \
-> +           file://0004-Mount-var-volatile-during-install.patch \
-> +           file://0005-update-fstab-by-appending.patch \
-> +           file://0006-fix-new.roots-object-is-not-iterable.patch \
-> +           file://0007-fix-incorrect-timeout-while-system-time-changed.p=
-atch \
-> +           file://0008-tweak-btrfs-packages.patch \
-> +           file://0009-invoking-mount-with-infinite-timeout.patch \
-> +           file://0010-use-oe-variable-to-replace-hardcoded-dir.patch \
-> +           file://0011-invoking-fsck-with-infinite-timeout.patch \
-> +           file://0012-invoking-mkfs-with-infinite-timeout.patch \
-> +           file://0013-Revert-Adapt-to-logging-module-name-change.patch \
-> +"
-> +
-> +inherit distro_features_check
-> +REQUIRED_DISTRO_FEATURES =3D "systemd"
-> +
-> +inherit setuptools3 python3native
-> +
-> +RDEPENDS_${PN} =3D "pykickstart python3-pyudev \
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Should it rdepend on pykickstart or python3-pykickstart?
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!|Signatures		  !!colspan=
+=3D'14'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||all 	||already-stripped	||libdir	||t=
+extrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-cont=
+aminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sys=
+root	||invalid-pkgconfig	||pkgname	||ldflags	||compile-host-path	||=09
+|-
+||2017-08-11	||3	||4	||2	||0	||0		||0		||4		||0		||0		||18		||2		||0		||0		=
+||0		||0		||0		||0		||0		||=09
+|}
 
-There is
-PROVIDES =3D "pykickstart"
-RPROVIDES_${PN} =3D "pykickstart"
+=3D=3D Failed tasks 2017-08-11 =3D=3D
 
-in python3-pykickstart recipe so this works, but I don't understand why
-not rdepend on python3-pykickstart directly like for most other python
-packages.
+INFO: jenkins-job.sh-1.8.25 Complete log available at http://logs.nslu2-lin=
+ux.org/buildlogs/oe/world/rocko/log.report.20170812_084847.log
 
-> +                  parted python3-pyparted multipath-tools \
-> +                  lsof cryptsetup libblockdev \
-> +                  libbytesize \
-> +"
-> +
-> +FILES_${PN} +=3D " \
-> +    ${datadir}/dbus-1/system-services \
-> +"
-> +
-> +inherit systemd
-> +
-> +SYSTEMD_AUTO_ENABLE =3D "disable"
-> +SYSTEMD_SERVICE_${PN} =3D "blivet.service"
-> --=20
-> 2.8.1
->=20
+=3D=3D=3D common (0) =3D=3D=3D
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+=3D=3D=3D common-x86 (1) =3D=3D=3D
+    * meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:do_compile
 
---AqsLC8rIMeq19msA
+=3D=3D=3D qemuarm (3) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/imagemagick/imagemagick_7.0=
+=2E6.bb:do_fetch
+    * meta-openembedded/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb:do_=
+compile
+    * openembedded-core/meta/recipes-devtools/llvm/llvm_git.bb:do_compile
+
+=3D=3D=3D qemux86 (2) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb:do_c=
+ompile
+    * meta-qt5/recipes-qt/qt5/qtbase_git.bb:do_compile
+
+=3D=3D=3D qemux86_64 (1) =3D=3D=3D
+    * meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile
+
+=3D=3D=3D Number of failed tasks (9) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 3	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/l=
+og.world.qemuarm.20170810_220240.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/43325/
+|-
+|| qemux86 	|| 4	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/l=
+og.world.qemux86.20170810_220240.log/ || http://errors.yoctoproject.org/Err=
+ors/Build/43326/
+|-
+|| qemux86_64 	|| 2	 || http://logs.nslu2-linux.org/buildlogs/oe/world/rock=
+o/log.world.qemux86-64.20170811_230232.log/ || http://errors.yoctoproject.o=
+rg/Errors/Build/43327/
+|}
+
+=3D=3D=3D PNBLACKLISTs (1) =3D=3D=3D
+
+=3D=3D=3D QA issues (24) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||18	||version-going-backwards
+|-
+||2	||host-user-contaminated
+|-
+||4	||textrel
+|}
+
+
+
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.sign=
+atures.20170811_022738.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACK=
+LIST[lksctp-tools] ?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gol=
+d', "BROKEN: fails to link against sctp_connectx symbol", '', d)}"
+meta-qt5:
+meta-smartphone:
+meta-webos-ports:
+PNBLACKLIST[android-system] =3D "depends on lxc from meta-virtualiazation w=
+hich isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be teste=
+d so much"
+PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't really need to be test=
+ed so much"
+PNBLACKLIST[build-appliance-image] =3D "tries to include whole downloads di=
+rectory in /home/builder/poky :/"
+
+
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 0	issue: libdir
+
+
+count: 4	issue: textrel
+chromium-54.0.2810.2: ELF binary '/tmp/work/i586-oe-linux/chromium/54.0.281=
+0.2-r0/packages-split/chromium/usr/bin/chromium/chrome' has relocations in =
+=2Etext [textrel]
+chromium-wayland-53.0.2785.143: ELF binary '/tmp/work/i586-oe-linux/chromiu=
+m-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium=
+/chrome' has relocations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary '/tmp/work/i586-oe-linux/x264/=
+r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264-bin/usr/bin/x264' has re=
+locations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary '/tmp/work/i586-oe-linux/x264/=
+r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264/usr/lib/libx264.so.148' =
+has relocations in .text [textrel]
+
+
+count: 0	issue: build-deps
+
+
+count: 0	issue: file-rdeps
+
+
+count: 18	issue: version-going-backwards
+logcheck-1.3.17: Package version for package logcheck-dbg went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-dbg went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [versio=
+n-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-dbg went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-dev went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-dev went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [versio=
+n-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-dev went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-doc went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-doc went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [versio=
+n-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-doc went backwards wh=
+ich would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) [versi=
+on-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-locale went backwards=
+ which would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) [ve=
+rsion-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-locale went backwards=
+ which would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [ver=
+sion-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-locale went backwards=
+ which would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) [ve=
+rsion-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-staticdev went backwa=
+rds which would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) =
+[version-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-staticdev went backwa=
+rds which would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [=
+version-going-backwards]
+logcheck-1.3.17: Package version for package logcheck-staticdev went backwa=
+rds which would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) =
+[version-going-backwards]
+logcheck-1.3.17: Package version for package logcheck went backwards which =
+would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.12) [version-g=
+oing-backwards]
+logcheck-1.3.17: Package version for package logcheck went backwards which =
+would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.9) [version-go=
+ing-backwards]
+logcheck-1.3.17: Package version for package logcheck went backwards which =
+would break package feeds from (0:1.3.18-r0.1 to 0:1.3.17-r0.12) [version-g=
+oing-backwards]
+
+
+count: 2	issue: host-user-contaminated
+glibc-locale-2.25.90: glibc-locale: /glibc-binary-localedata-nds-nl/usr/lib=
+/locale/nds_NL/LC_NAME is owned by uid 3004, which is the same as the user =
+running bitbake. This may be due to host contamination [host-user-contamina=
+ted]
+glibc-locale-2.25.90: glibc-locale: /glibc-binary-localedata-shs-ca/usr/lib=
+/locale/shs_CA/LC_NAME is owned by uid 3004, which is the same as the user =
+running bitbake. This may be due to host contamination [host-user-contamina=
+ted]
+
+
+count: 0	issue: installed-vs-shipped
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+count: 0	issue: ldflags
+
+
+count: 0	issue: compile-host-path
+
+
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+latest upstream commit:=20
+923d556 main: Handle BB_SERVER_TIMEOUT =3D -1 for no server timeout
+not included in master yet:=20
+a14f46f world-image: add extra target
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+latest upstream commit:=20
+df7f522 libinput: Upgrade 1.7.3 -> 1.8.1
+not included in master yet:=20
+1bdfba7 report-error: Allow to upload reports automatically
+961c3f8 buildhistory.bbclass: metadata-revs show repo parent
+48809ce metadata-revs: provide more information
+f893927 qemux86: Add identical qemux86copy variant for tests
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+latest upstream commit:=20
+a8b54e3 pidgin-otr: unblacklist
+not included in master yet:=20
+627c0da dnsmasq: disable the service by default
+1c0b20d rdate: Fix build with hardening
+812b1de strongswan: Include stdint.h for uintptr_t
+e887307 netkit-rpc: Fix build with hardening flags
+25bab80 netkit-telnet: Fix build with hardening
+d053851 ncftp: Upgrade to 3.2.6
+ef1f2d3 autofs: Add build dependency on libnsl2
+45cb3ea openhpi: Fix build on 64bit platforms e.g. aarch64
+0ca1629 security_flags.inc: Delete
+908965b pptp-linux: Upgrade to 1.9.0
+ac540aa ebtables: replace ebtables-save perl script with bash rewrite
+ed3f7a2 pimd: Upgrade to 2.3.2
+156dc7d igmpproxy: Include missing sys/tupes.h and define _GNU_SOURCE
+2019e68 rdate: Define logwtmp if libc !=3D glibc
+469326a netkit-ftp: Include sys/types.h for u_long definition
+4e5a633 postfix: Disable nis support on musl
+55cd330 zeroconf: Fix build with musl
+6f5c1da netperf: change SRC_URI to git repository
+78d47b6 ippool: Fix build errors found with hardening flags
+1635d50 openflow: Fix build with musl
+dc71c92 xl2tpd: Update to 1.3.9
+c688bd7 wvstreams: Fix build with musl
+2e691cd meson: set needs_exe_wrapper
+ce6c02b gperftools: Upgrade to 2.6.1
+6ea350b c-ares: update 1.12.0 -> 1.13.0
+be8a512 radvd: 2.14 -> 2.17
+b482e5d pam-ssh-agent-auth: add new recipe
+5b91085 libpwquality: add recipe 1.4.0
+9fb3b71 libbytesize: add recipe 0.10
+81cc44e libtimezonemap: add recipe 0.4.5
+468d302 xmlrpc-c: add recipe 1.31.0
+cfecae4 usermode: add recipe 1.111
+f934668 syslog-ng: provide correct PID directory location to restart/stop s=
+yslog-ng daemon
+d778abd python-pyserial: update to version 3.4
+ac277b5 python3-cassandra-driver: update to version 3.8.1
+f51cb1c python-dateutil: update to version 2.6.1
+46958cb python-cmd2: update to version 0.7.5
+ef22f05 python-webencodings: update to version 0.5.1
+e467826 python-simplejson: update to version 3.11.1
+d15cffd python-serpent: update to version 1.23
+adeca9e python-cython: update to version 0.26
+7165137 python-evdev: update to version 0.7.0
+e25df49 python-vobject: update to version 0.9.5
+bc38b73 python-pbr: update to version 3.1.1
+a5e670c python-pycparser: update to version 2.18
+91a7dd7 python-pymisp: update to version 2.4.77
+f1d73b5 python-urllib3: update to version 1.22
+343f75a python-ldap: update to version 2.4.41
+dd6fa5d openldap: 2.4.44 -> 2.4.45
+dd6baf8 gvfs: Fix build regression from uprev
+899c14f logcheck: update to 1.3.18
+3bff079 minicoredumper: Initialize struct config
+98de9d8 cherokee: Upgrade to 1.2.104+git
+1256b31 libesmtp: Fix config.h define for snprintf detection
+a8d3fb0 usermode: Link with libm for powl() API
+87506b9 dbus-daemon-proxy: Fix return value from master_filter_cb()
+bd5d616 ssiapi: Fix build errors found with clang
+2520d9d flashrom: Fix build with clang
+d531e73 glade: fix host contamination on centos7
+2331029 tigervnc: add recipe 1.8.0
+a533dd8 libreport: add recipe 2.9.1
+5b506ac libblockdev: add recipe 2.10
+9793e97 python3-blivet: add recipe 2.2.0
+aa53387 python3-blivetgui: add recipe 2.1.5
+0765fb5 drbd: Add recipe
+7835635 net-snmp: fix engineBoots value on SIGHUP
+e079ce3 assimp: remove recipe
+f5234c1 openl2tp: add LGPL-2.1 license
+792edb2 openl2tp: add init script and systemd support
+b27397d ntop: add new recipe
+638ca9a android-tools: fix issue with missing files in eSDK updates
+b5dec68 autoconf-archive: move from meta-oe to OE-core
+654f5b1 libebml: inherit dos2unix
+1e9d03e Updated mpv to version 0.26.0.
+d03a78a libqb: update 1.0.1 -> 1.0.2
+c7c92e4 libtdb: update 1.3.12 -> 1.3.14
+ef8f0f7 glmark2: Upgrade to 2017.07 release
+eb173ef klibc: Fix build with clang
+710946e ninja,re2c: Remove
+ccf1fe1 ndisc6: Upgrade to 1.0.3
+d35aed6 memcached: Update to 1.5.0
+4516003 lvm2/libdevmapper: workaround build man failure
+a7f4259 python-pyusb: make recipe available as python3 version
+6cf8319 tcpdump: remove unnecessary patch
+aade1a0 libcyusbserial: new recipe
+64bffbe libftdi: update to 1.4
+73e6476 nginx: update stable version to 1.12.1
+c18e135 nginx: update development version to 1.13.3
+050445c apache2: update to version 2.4.27
+81b79e3 libxml-sax-writer-perl: update to version 0.57
+af7b525 librole-tiny-perl: update to version 2.000005
+5354586 libnet-ssleay-perl: update to version 1.81
+15e81f5 libmoo-perl: update to version 2.003002
+0405988 libextutils-parsexs-perl: update to version 3.35
+e0346ba uim: Modified the order of package definition.
+6360697 uim: add dependency on anthy
+2ec7234 uim: Added glibc-utils and glibc-gconv-euc-jp to RDEPENDS_uim-anthy
+18c9f9c uim: Removed pkg_postinst_uim-common/pkg_prerm_uim-common.
+e4ced32 uim: Fixed pkg_postinst_*/pkg_prerm_* for uim-anthy and uim-skk.
+10302b0 uim: Fixed a problem that an immodule.cache is not updated appropri=
+ately when uim-gtk2.0 or uim-gtk3 was installed.
+6b8a087 bluez4: remove bluez4-only recipes
+e44e402 libotr: Upgrade from 4.0.0 to 4.1.1 and update patches
+c6b759f pidgin: Update from 2.11.0 to 2.12.0
+b074a42 exo: update 0.11.2 -> 0.11.5
+1a14fe2 thunar: update 1.6.11 -> 1.6.12
+b1cac4c xfce4-terminal: update 0.8.4 -> 0.8.6
+c363146 xfce4-whiskermenu-plugin: update 2.1.2 -> 2.1.3
+deaacde xfce4-clipman-plugin: update 1.4.1 -> 1.4.2
+239f61d xfce4-xkb-plugin: update 0.7.1 -> 0.8.0
+fe62a33 xfce4-screenshooter: update 1.8.2 -> 1.9.1
+e5e4476 kodi: fix build with latest gcc
+1282b46 poppler: update 0.53.0 -> 0.57.0
+5bfb5db php7: upgrade to 7.1.7
+9e900d0 llvm: Remove
+4f4bf86 squid: Add missing dependencies on openssl expat and libxml2
+635355b mongodb: Upgrade to 3.4.6
+69edf28 python3-twisted: Fix build with clang
+1ea9c2f python-grpcio: Do not hardcode compiler -std options
+904b67c collectd: Fix build with clang
+9fa4d37 fbida: Fix build with libjpeg-turbo
+4cf9760 libblockdev: fix a clang compiling issue
+11fef1e tigervnc: fix a clang compiling issue
+db72227 opencv: update to version 3.3.
+a3230d8 webmin: update to version 1.850
+79ccc04 postfix: Upgrade to 3.2.2
+2f6f835 python-idna: update to version 2.6
+20705e1 python-typing: update to version 3.6.2
+7e85ba6 python-certifi: update to version 2017.7.27.1
+9a95357 python-decorator: update to version 4.1.2
+1d97bb3 python-sdnotify: update to version 0.3.2
+88d36f9 python-iso8601: update to version 0.1.11
+d0e027f python-pymongo: update to version 3.5.0
+4d57d04 python-pyasn1: update to version 0.3.2
+95a5006 python-cryptography-vectors: update to version 2.0.3
+bf2d119 python-cryptography: update to version 2.0.3
+6f5f9c3 python-requests: update to version 2.18.3
+340b971 python-django: update to version 1.11.4
+7923ac1 python-prompt-toolkit: update to version 1.0.15
+9bd4ada python-pytest: update to version 3.2.0
+9036121 rapidjson: avoid dependency to non-existing package
+e481d2f json-spirit: Add -latomic to LDFLAGS
+e0b1c5e imagemagick: upgrade from 7.0.5 to 7.0.6p5
+2290bdb recipes: remove blacklisted recipes
+db91fbe Revert "logcheck: update to 1.3.18"
+2050f0d Revert "autoconf-archive: move from meta-oe to OE-core"
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+latest upstream commit:=20
+8960831 qwt-qt5.inc: fix QA warning
+not included in master yet:=20
+6e9892a qtbase: add ptest
+d53382f qt5-ptest: fix build with yocto < 2.3 (pyro)
+9042969 qtbase: Fix ptests with clang
+0b41b62 qtbase: Use sched_yield instead of pthread_yield
+17d94b7 quazip: update to 0.7.3 and add missing metadata
+3963daa qtwebkit: Backport a patch to fix build with icu-59
+7efcea9 qt3d: Fix build with clang
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+latest upstream commit:=20
+e3c3aa0 Merge pull request #57 from kraj/kraj/master
+not included in master yet:=20
+e961581 gnome-settings-daemon: remove the bbappend for removed recipe
+
+=3D=3D Tested changes (not included in master yet) - meta-webos-ports =3D=3D
+latest upstream commit:=20
+03f4072 alsa-lib: Remove 0001-ucm-fix-handling-of-config-files-when-file-ty=
+pe-is-n.patch
+not included in master yet:=20
+
+=3D=3D Tested changes (not included in master yet) - meta-smartphone =3D=3D
+latest upstream commit:=20
+1fe2b3b android-system-image-tenderloin: update Android image
+not included in master yet:=20
+e468a34 meta-shr, meta-fso: remove blacklisted recipes
+
+--VrqPEDrXMn8OVzN4
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWY7FjgAKCRA3VSO3ZXaA
-HLB2AKCa+SYp7U2nw+dQ3qMKM0sY5T4T2wCeJt3rovpMx/qKNDIK76oVAsf/4ls=
-=/0Rh
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWY9OogAKCRA3VSO3ZXaA
+HF+BAJ41uxUX/Cl97UbicpfWMfkxFNHijwCguMMKecOamTn0Av1RSPwCeLOLXRk=
+=qdoc
 -----END PGP SIGNATURE-----
 
---AqsLC8rIMeq19msA--
+--VrqPEDrXMn8OVzN4--
