@@ -1,52 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D88DF60043
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 915D860043
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 11:37:00 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id x64so11426386wmg.1
+	Sun, 13 Aug 2017 11:37:01 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id x64so11426400wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 13 Aug 2017 04:37:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=VOikoNtCZgaakLF+JhRSneBNni7En3XE53V4ou9jo44=;
-	b=OyZ7N1r1OzKQmPDT//lO1B5rxMRRLuKr85Q3yyDWGR6btKdyPpNhT1mcKNAPgZyoyh
-	/bNeVFipbKyrerRnFjUQ04lrBkpAsoe54OF19i9jb0tRkUSn6mMA+nTHkMrvGA+DE6Wk
-	2aY0D5At3mW46keae4SHGqC6HYDWsmCe+R3nBfCXjheyWbrqyk53wjdiZiAvKlYrN0Gu
-	u0WwckeJJYHR8ipy5zqmfMt/pZd2mLqbASmdOGPegVesSOA8y+YT2kz+5SnMuvv5RZjq
-	/vCjYDOZ+s5x7bqkayrJI3gbkg9/XkLz/Cn9ib9c599s4au4aVOJX7jLCPR4pa5rry+p
-	+m5A==
+	bh=xJeXqu6TJ7xYqMEhypVKhyg6jUnVUWZicv6/w7tOESY=;
+	b=j7mb/jkmvdPKJ5iskd39j09+r1ap+FsUbt90GJheIY8zuJariueebRjmp8MJ3IozUX
+	uePJFJR0L08Z4ewlTfXLSfc1JH0m1rIE5xI3zK73WYsEKk+WyaI4nxvdneXQTMr9i8Hu
+	5rY/CPM9miCdIPKJ89BOVa/AGfRCNnqW5VcmUjnQUvsTQRlF3+7E9jyo3E6bogS4txKj
+	2ExW7efRWeJwUEk6pDOQFnbxiQXZozwMAp5wm53+qNRdyqyAQ62TZsiJKovXvb5Pd4wQ
+	sFBh5sBV1jDH+Xnx3kWPxYkQL9kymeqqc3E9fQExKKfH1mISfHsCOc7ZUkjzvJgEeW/3
+	Ymzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=VOikoNtCZgaakLF+JhRSneBNni7En3XE53V4ou9jo44=;
-	b=IWbxyX956d6asNFHSWNFAKVe4KpqMFyECNrmNkwwylTEgGbxeAxCjSfNb2qjboZfV+
-	Tf0wefmx1BnDdycoE+NrYxOW189FsDrzjQ6MqJFqVuOcqSLsDAkcpkP0502He3LxZHKS
-	q8FPu/D5oCoEkwzcjwR+nEpSHTaqsEXuCNlM1dCvUohwxvmhYRwKu+mVVsK8huiuwwxY
-	H5BagB2apXpdUln+pHq0uqmJd/O3OQJWcOYfK5ex4YX6gQwV21cbpIr8h0qN5MUD+mdp
-	8xurLI9yi0TuAbWrKGj/9hb50baUp0gDtar+kTmmQeUjzefA3zBAqZchQ+vbgffyKZGi
-	+qqQ==
-X-Gm-Message-State: AHYfb5jP1ebXK4nnhLVNCW5dKrdPkgHIW71LmmubCtG6zpqA5fx6LKOW
-	NeB78+n0MShDV9Vs
-X-Received: by 10.28.126.200 with SMTP id z191mr2182119wmc.46.1502624221078;
-	Sun, 13 Aug 2017 04:37:01 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=xJeXqu6TJ7xYqMEhypVKhyg6jUnVUWZicv6/w7tOESY=;
+	b=WdTb8j2CE4V03zjVbKIFFHQaPWWfc8kDiqra5C2UlU8a6IDFqTmxM4kPyKcyuJIROp
+	KNrHURQrSnqk7o+dJCuMBh/qNWu9OfclSL8mY9r5gEYqBNIloM4yaTTA9mBy74/IeDxp
+	D7e43Kd2AELHpHAArihQ0myB27CStNZCoZS58/0g/VMfnaGxzf0K+xIPJfXNF5bTz5Ig
+	jEtXQkQwPvgH/6hcLjmhWskVaJf0J5oaZ6iW1oO7fN3CHL3iiIETaIYBOO88LJmFbeKa
+	lI3gH40XocUHnpkTMKiN4eDL9pAlD2iGx/SswwHwNf5hIpwyRDibrqMtCvraXBVekCJq
+	IBcA==
+X-Gm-Message-State: AHYfb5ibguFGvT+TLSo3b/8MmHBoocfFXPnEfyppFvl1UxWk0120z1mQ
+	YMFPewFRicF6gW5z
+X-Received: by 10.28.87.6 with SMTP id l6mr2224166wmb.110.1502624222013;
+	Sun, 13 Aug 2017 04:37:02 -0700 (PDT)
 Received: from mueller-a-nb-linux.speedport.ip
 	(p20030046E902666856A7C2EFFD165696.dip0.t-ipconnect.de.
 	[2003:46:e902:6668:56a7:c2ef:fd16:5696])
 	by smtp.googlemail.com with ESMTPSA id
-	d26sm5812501wra.92.2017.08.13.04.37.00
+	d26sm5812501wra.92.2017.08.13.04.37.01
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Aug 2017 04:37:00 -0700 (PDT)
+	Sun, 13 Aug 2017 04:37:01 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Aug 2017 13:36:49 +0200
-Message-Id: <20170813113651.2987-1-schnitzeltony@googlemail.com>
+Date: Sun, 13 Aug 2017 13:36:50 +0200
+Message-Id: <20170813113651.2987-2-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.4
+In-Reply-To: <20170813113651.2987-1-schnitzeltony@googlemail.com>
+References: <20170813113651.2987-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/3] upower: update 0.99.4 -> 0.99.5
+Subject: [PATCH 2/3] geany: update 1.30.1 -> 1.31
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,27 +67,27 @@ Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- meta-oe/recipes-support/upower/{upower_0.99.4.bb => upower_0.99.5.bb} | 4 ++--
+ meta-oe/recipes-devtools/geany/{geany_1.30.1.bb => geany_1.31.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/upower/{upower_0.99.4.bb => upower_0.99.5.bb} (90%)
+ rename meta-oe/recipes-devtools/geany/{geany_1.30.1.bb => geany_1.31.bb} (75%)
 
-diff --git a/meta-oe/recipes-support/upower/upower_0.99.4.bb b/meta-oe/recipes-support/upower/upower_0.99.5.bb
-similarity index 90%
-rename from meta-oe/recipes-support/upower/upower_0.99.4.bb
-rename to meta-oe/recipes-support/upower/upower_0.99.5.bb
-index 3651e18..9314534 100644
---- a/meta-oe/recipes-support/upower/upower_0.99.4.bb
-+++ b/meta-oe/recipes-support/upower/upower_0.99.5.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
- DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
+diff --git a/meta-oe/recipes-devtools/geany/geany_1.30.1.bb b/meta-oe/recipes-devtools/geany/geany_1.31.bb
+similarity index 75%
+rename from meta-oe/recipes-devtools/geany/geany_1.30.1.bb
+rename to meta-oe/recipes-devtools/geany/geany_1.31.bb
+index e316ea7..ce36e1e 100644
+--- a/meta-oe/recipes-devtools/geany/geany_1.30.1.bb
++++ b/meta-oe/recipes-devtools/geany/geany_1.31.bb
+@@ -8,8 +8,8 @@ DEPENDS = "gtk+ libxml-parser-perl-native python3-docutils-native intltool-nativ
+ inherit autotools pkgconfig perlnative pythonnative gettext
  
- SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
--SRC_URI[md5sum] = "78800e1ac7f92b24aabdf433e38f75d2"
--SRC_URI[sha256sum] = "9ca325a6ccef505529b268ebbbd9becd0ce65a65f6ac7ee31e2e5b17648037b0"
-+SRC_URI[md5sum] = "ec57b4b7bf0af568f9a7a5603c921d97"
-+SRC_URI[sha256sum] = "78605664d027c788f6ab63c50950be6e86c6ba5d030c4cf35a6664337d87f3b2"
+ SRC_URI = "http://download.geany.org/${BP}.tar.bz2"
+-SRC_URI[md5sum] = "75081b600560c5c8366eda0e1b8cc531"
+-SRC_URI[sha256sum] = "0ac360f1f3d6c28790a81d570252a7d40421f6e1d8e5a8d653756bd041d88491"
++SRC_URI[md5sum] = "386000be6b26972c6a699939c37cda34"
++SRC_URI[sha256sum] = "30fdb906bb76c4251a8bcf83ee267db28c26ef6ab867668a782cec1164a3aba5"
  
- inherit autotools pkgconfig gettext gobject-introspection systemd
+ FILES_${PN} += "${datadir}/icons"
  
 -- 
 2.9.4
