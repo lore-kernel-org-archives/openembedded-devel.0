@@ -1,54 +1,47 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id B8E2560778
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 098EB78399
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 11:37:02 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id r77so11423445wmd.2
+	Sun, 13 Aug 2017 16:24:20 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id l64so6868682pge.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 04:37:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
-	:content-transfer-encoding;
-	bh=WRYa76UFshLB5R3KvqTWoN13f2mO3vfuunbmauc3zlM=;
-	b=KwuE3srlfO7iaRX/ms7IG/UJALkmx7JYV6Qk5I29Fc43105okGFHCC/Dg+9OwBKX/z
-	J23ERivlzi/m2iOgOxchN2PltuNeDeSMIfYAP3St5G2Op1GxmIVnKqlGVtF14F0EQApN
-	kRicFXxMm//pNzWAZnnICWjDzW4WWBUpo/w5mNfRmSLsdZiM73dnwH5uvKn2R7fE2IM/
-	60r7q0Frv4pjVOxMmidl/KAtA/YnjTt4KECiXlePcskKXxx44Dh6EfDTOVxjaVT0NcaI
-	Ly+4vJlSW2Ad5wUFmewxsckD9i7eJLTAio1tbAQEkRPojEsBk63/C1IQYOZ628OoxUTw
-	TQ4g==
+	Sun, 13 Aug 2017 09:24:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
+	b=uZf+peGVUHcAMMiWNb9q/aNha2dp8I0Hcf+zDORb+ySVwfG/P+AsiHnM+8Q3Pk2GZK
+	ouUK3gwOIoEUFqolfznEhP7yUqTMkzrnzOuLC5mO2BSVLLTx8NTPDd/XmXgSZlZfeXsB
+	N34foOmXuX/gLQKSpkBBxFHlrhu334qe99EkfGS5gaKbCNmWyKCcd+i34DMaN/Rw6I4C
+	iYnHYAy67rkfevD68mIzK8lZM2i3XAsr3kbPhPycfCtwdmKGl6+5lc763tmb2T8CJSAM
+	rJmx9dmFgPLtiWThD3TzblRo9+7wMSSYVa1oVNcDOlWQNaIYEOD40TXk/kBdEq2wBoa4
+	4/DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=WRYa76UFshLB5R3KvqTWoN13f2mO3vfuunbmauc3zlM=;
-	b=jSaIalusxnLpRhMTkFozde04rggMDgR71k1mJQc7l+HfDiidm+uN6I4eWypDUP/28E
-	BoJqYXNGv4T2SMomMTc/u2Lzi8F0RO11e5ZET6S/huUS96Jl0NbbYlugKvg6C5hUWhlT
-	ohlNTACCWDPcT4J/XhlFimB7OKhWva3cwQiuIIVfVAb0PmgsGLCi66n53l+JrDMQJwYC
-	mj5/q9UC6MLla+VTE4tnmRtnyoPXrIOH5XUTDwgjopbbDoMU/MyNYhkSRtzQOlsldCBE
-	Ml0unlqkVY5/N6NyOG2HcVqcArST3h74iQRiZkF6bi1NSlu40Qzb/dxts+Az0jagyhm9
-	68cA==
-X-Gm-Message-State: AHYfb5ijofSZbElKRZZ3gk8tcKYCHk6OXPNH+H0qCr35WoeVDoLkv0Jv
-	t7qKiK+/TNiluKyG
-X-Received: by 10.28.158.148 with SMTP id h142mr2256368wme.102.1502624223208; 
-	Sun, 13 Aug 2017 04:37:03 -0700 (PDT)
-Received: from mueller-a-nb-linux.speedport.ip
-	(p20030046E902666856A7C2EFFD165696.dip0.t-ipconnect.de.
-	[2003:46:e902:6668:56a7:c2ef:fd16:5696])
-	by smtp.googlemail.com with ESMTPSA id
-	d26sm5812501wra.92.2017.08.13.04.37.02
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 13 Aug 2017 04:37:02 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Aug 2017 13:36:51 +0200
-Message-Id: <20170813113651.2987-3-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.4
-In-Reply-To: <20170813113651.2987-1-schnitzeltony@googlemail.com>
-References: <20170813113651.2987-1-schnitzeltony@googlemail.com>
-MIME-Version: 1.0
-Subject: [PATCH 3/3] geany-plugins: update 1.30 -> 1.31
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
+	b=F/9lOKcrg5tO0SH4bOZhsWV83jeYF1F1U5y6xToWVpSKCHGXJAYsihMBoH65bnlK24
+	fKopNPX4E1ijVIwO/yd2zyF31mXyTjnWUpHrye7Ktktg1wGjRQq4CbfVadKejrd7Qb8Z
+	96seLmb2M151Fo0IWJwxvtfet0kITclhWBwNJSc5X6iaXfo+U7WAvwdjrXhCku6hJv+b
+	3oiEgDH5ReH5meiQfkXACcqAcBkRP2tt5h34QZRRXErLvshLiVaWZ7GTiLjBWxf1Ed/X
+	/6hFzgiXgEy4N4RAdEnR1f+zAMWOqD0ma12GMLXufCvk6WrmxKWRAfZvdR+r2wDPmhHG
+	G8Lw==
+X-Gm-Message-State: AHYfb5i3drAk/tqJtX/EDweWGt/QZq8AdllNW43oX9Afu51GxZeyD3Ye
+	GcdmZ21sG1cbtg==
+X-Received: by 10.84.194.228 with SMTP id h91mr24642819pld.46.1502641462137;
+	Sun, 13 Aug 2017 09:24:22 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:ac0b:7f59:5551:152b])
+	by smtp.gmail.com with ESMTPSA id
+	g1sm10009925pfk.92.2017.08.13.09.24.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 13 Aug 2017 09:24:21 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster808@gmail.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 13 Aug 2017 09:24:19 -0700
+Message-Id: <1502641460-4734-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][master][pyro] 1/2] libmtp: fix build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,47 +54,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Aug 2017 11:37:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 13 Aug 2017 16:24:21 -0000
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+DEBUG: Executing shell function BUILDSPEC
+| error: line 109: %package -n mtp-tools: package mtp-tools already exists
+
+Yes, there are two entries in libmtp.spec. Under packages-split, mtp-tools is empty but
+libmtp-bin is not.
+
+Removed PKG_${PN}-bin , this alignes how Debian split its packages
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../geany/{geany-plugins_1.30.bb => geany-plugins_1.31.bb}       | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/geany/{geany-plugins_1.30.bb => geany-plugins_1.31.bb} (96%)
+ meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb b/meta-oe/recipes-devtools/geany/geany-plugins_1.31.bb
-similarity index 96%
-rename from meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb
-rename to meta-oe/recipes-devtools/geany/geany-plugins_1.31.bb
-index f01dda8..27fe860 100644
---- a/meta-oe/recipes-devtools/geany/geany-plugins_1.30.bb
-+++ b/meta-oe/recipes-devtools/geany/geany-plugins_1.31.bb
-@@ -25,8 +25,8 @@ DEPENDS = " \
- inherit autotools pkgconfig gtk-icon-cache
- 
- SRC_URI = "http://plugins.geany.org/${PN}/${PN}-${PV}.tar.bz2"
--SRC_URI[md5sum] = "13f8e5d900b4911059385649b8dde887"
--SRC_URI[sha256sum] = "8adb90645d273d9549e1fa99b69ea87dc1fd612f7467eb18eee11a6b30c9ba5b"
-+SRC_URI[md5sum] = "808f9048b77fd9704569ed2ba12a56e9"
-+SRC_URI[sha256sum] = "76bd9e803db5a626b86669f08330cf95b8cc35057a1cdf65759bc00aef120e25"
- 
- do_configure_prepend() {
-     rm -f ${S}/build/cache/glib-gettext.m4
-@@ -166,6 +166,11 @@ LICENSE_${PN}-git-changebar = "GPLv3"
- FILES_${PN}-git-changebar = "${libdir}/geany/git-changebar.so"
- RDEPENDS_${PN}-git-changebar = "${PN}"
- 
-+PLUGINS += "${PN}-keyrecord"
-+LIC_FILES_CHKSUM += "file://keyrecord/COPYING;md5=751419260aa954499f7abaabaa882bbe"
-+FILES_${PN}-keyrecord = "${libdir}/geany/keyrecord.so"
-+RDEPENDS_${PN}-keyrecord = "${PN}"
-+
- PLUGINS += "${PN}-lineoperations"
- LIC_FILES_CHKSUM += "file://lineoperations/COPYING;md5=c107cf754550e65755c42985a5d4e9c9"
- FILES_${PN}-lineoperations = "${libdir}/geany/lineoperations.so"
+diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+index b5df8e0..c05ff4e 100644
+--- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
++++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+@@ -50,9 +50,6 @@ PACKAGES =+ "libmtp-common libmtp-runtime mtp-tools"
+ RDEPENDS_${PN} += "libmtp-common"
+ RRECOMMENDS_${PN} += "libmtp-runtime mtp-tools"
+ FILES_${PN}-dbg += "${nonarch_base_libdir}/udev/.debug/*"
+-PKG_${PN}-bin = "mtp-tools"
+-SUMMARY_${PN}-bin = "Tools for communicating with MTP devices"
+-DESCRIPTION_${PN}-bin = "${DESCRIPTION}\nThis package contains tools for communicating with MTP devices."
+ FILES_libmtp-common = "${nonarch_base_libdir}/udev/rules.d/*"
+ SUMMARY_libmtp-common = "The udev rules file for MTP devices"
+ FILES_libmtp-runtime = "${nonarch_base_libdir}/udev/mtp-probe"
 -- 
-2.9.4
+2.7.4
 
 
