@@ -1,47 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 098EB78399
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BE6DD78399
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 16:24:20 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id l64so6868682pge.2
+	Sun, 13 Aug 2017 16:24:21 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id t83so7903798pfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 09:24:22 -0700 (PDT)
+	Sun, 13 Aug 2017 09:24:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
-	b=uZf+peGVUHcAMMiWNb9q/aNha2dp8I0Hcf+zDORb+ySVwfG/P+AsiHnM+8Q3Pk2GZK
-	ouUK3gwOIoEUFqolfznEhP7yUqTMkzrnzOuLC5mO2BSVLLTx8NTPDd/XmXgSZlZfeXsB
-	N34foOmXuX/gLQKSpkBBxFHlrhu334qe99EkfGS5gaKbCNmWyKCcd+i34DMaN/Rw6I4C
-	iYnHYAy67rkfevD68mIzK8lZM2i3XAsr3kbPhPycfCtwdmKGl6+5lc763tmb2T8CJSAM
-	rJmx9dmFgPLtiWThD3TzblRo9+7wMSSYVa1oVNcDOlWQNaIYEOD40TXk/kBdEq2wBoa4
-	4/DA==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=dCfRKdjfPPvIO9iXzIQ6VgMQldhNkZv6AdtVHNXirEg=;
+	b=P9ZMjy4iwAQwIyBUXlBZVQA5mWICdOgRkyrIoVU0OSiP2vIaC6fqXuypa/+E/fhe65
+	TIF0E22qSb8dHQQMN7Pu0w6QKP+GFzhFix16xEH8WhDEiN7j9RkhNMBUqT9E9Bt9P4Mg
+	l2lckMVvyBWDcBfbY6KcCPCYOWn6HwbKi59ynPBAR+Y5ADM+3LseJP2bAv6IlCcoKt2M
+	Z4Bz1n/g7b/P4OMfOjLu6Naa31euTR8GukAjvw8towXay0tn0Zz8OIkv5y9+J9027+M5
+	9KdZ3CDeyNJxFrU67VkSpQ1k1OInDp9QuM5/WprQSR9HvEqzPPQqRcu6+8n+QhGZs3fs
+	xDLQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
-	b=F/9lOKcrg5tO0SH4bOZhsWV83jeYF1F1U5y6xToWVpSKCHGXJAYsihMBoH65bnlK24
-	fKopNPX4E1ijVIwO/yd2zyF31mXyTjnWUpHrye7Ktktg1wGjRQq4CbfVadKejrd7Qb8Z
-	96seLmb2M151Fo0IWJwxvtfet0kITclhWBwNJSc5X6iaXfo+U7WAvwdjrXhCku6hJv+b
-	3oiEgDH5ReH5meiQfkXACcqAcBkRP2tt5h34QZRRXErLvshLiVaWZ7GTiLjBWxf1Ed/X
-	/6hFzgiXgEy4N4RAdEnR1f+zAMWOqD0ma12GMLXufCvk6WrmxKWRAfZvdR+r2wDPmhHG
-	G8Lw==
-X-Gm-Message-State: AHYfb5i3drAk/tqJtX/EDweWGt/QZq8AdllNW43oX9Afu51GxZeyD3Ye
-	GcdmZ21sG1cbtg==
-X-Received: by 10.84.194.228 with SMTP id h91mr24642819pld.46.1502641462137;
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=dCfRKdjfPPvIO9iXzIQ6VgMQldhNkZv6AdtVHNXirEg=;
+	b=Od7olgCAv/AlO0X/9y5jFoZNe+q+u6sEgNrGsxhmC51nv99Py5W0NCEEkYRCrAYuqy
+	c9b2p+RkuJveQeoRr28EtCJOg+pLI+jHomVCHhpkbYT9NUQj7PyaPUQCYpT2UNafMmvR
+	mpnoIF62nWm7IoQd/VXZiUzvbuEMCFH4GNQpX4YWEshUGH66lbp+WwjPV9JOtrB9Co/b
+	HQVH+77oe2fqyfl3l4q9rljajhj3dPyt5AeUgW2qY8k4toZ0xmQrMbOH9KfLltaH9C39
+	Oaz82J0659G6NwUxMjfv0t5TQy/CHoyd70JeSY8BbVgnHmdmXIlGZTPoBEiO3m81o2dz
+	HLtQ==
+X-Gm-Message-State: AHYfb5gIypCYhynx9dzkWqn72ocjBOf5q6cPqW1bNaxg7IcaI+8saYCD
+	luUJR9LIv7PlJA==
+X-Received: by 10.84.241.197 with SMTP id t5mr25663531plm.473.1502641462984;
 	Sun, 13 Aug 2017 09:24:22 -0700 (PDT)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4001:9ea0:ac0b:7f59:5551:152b])
 	by smtp.gmail.com with ESMTPSA id
-	g1sm10009925pfk.92.2017.08.13.09.24.21
+	g1sm10009925pfk.92.2017.08.13.09.24.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 13 Aug 2017 09:24:21 -0700 (PDT)
+	Sun, 13 Aug 2017 09:24:22 -0700 (PDT)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster808@gmail.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sun, 13 Aug 2017 09:24:19 -0700
-Message-Id: <1502641460-4734-1-git-send-email-akuster808@gmail.com>
+Date: Sun, 13 Aug 2017 09:24:20 -0700
+Message-Id: <1502641460-4734-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][master][pyro] 1/2] libmtp: fix build issue
+In-Reply-To: <1502641460-4734-1-git-send-email-akuster808@gmail.com>
+References: <1502641460-4734-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-oe][master][pyro] 2/2] libexecinfo: fix complie issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,33 +60,30 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 13 Aug 2017 16:24:21 -0000
 
-DEBUG: Executing shell function BUILDSPEC
-| error: line 109: %package -n mtp-tools: package mtp-tools already exists
-
-Yes, there are two entries in libmtp.spec. Under packages-split, mtp-tools is empty but
-libmtp-bin is not.
-
-Removed PKG_${PN}-bin , this alignes how Debian split its packages
+define _GNU_SOURCES to fix compile issue:
+ execinfo.c:76:5: error: unknown type name 'Dl_info'
+|      Dl_info info;
+|      ^~~~~~~
+| execinfo.c:83:13: warning: implicit declaration of function 'dladdr' [-Wimplicit-function-declaration]
+|          if (dladdr(buffer[i], &info) != 0) {
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb | 3 ---
- 1 file changed, 3 deletions(-)
+ meta-oe/recipes-extended/libexecinfo/libexecinfo_1.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-index b5df8e0..c05ff4e 100644
---- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-+++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
-@@ -50,9 +50,6 @@ PACKAGES =+ "libmtp-common libmtp-runtime mtp-tools"
- RDEPENDS_${PN} += "libmtp-common"
- RRECOMMENDS_${PN} += "libmtp-runtime mtp-tools"
- FILES_${PN}-dbg += "${nonarch_base_libdir}/udev/.debug/*"
--PKG_${PN}-bin = "mtp-tools"
--SUMMARY_${PN}-bin = "Tools for communicating with MTP devices"
--DESCRIPTION_${PN}-bin = "${DESCRIPTION}\nThis package contains tools for communicating with MTP devices."
- FILES_libmtp-common = "${nonarch_base_libdir}/udev/rules.d/*"
- SUMMARY_libmtp-common = "The udev rules file for MTP devices"
- FILES_libmtp-runtime = "${nonarch_base_libdir}/udev/mtp-probe"
+diff --git a/meta-oe/recipes-extended/libexecinfo/libexecinfo_1.1.bb b/meta-oe/recipes-extended/libexecinfo/libexecinfo_1.1.bb
+index f79b1ab..13a38ab 100644
+--- a/meta-oe/recipes-extended/libexecinfo/libexecinfo_1.1.bb
++++ b/meta-oe/recipes-extended/libexecinfo/libexecinfo_1.1.bb
+@@ -16,6 +16,7 @@ SRC_URI[md5sum] = "8e9e81c554c1c5d735bc877448e92b91"
+ SRC_URI[sha256sum] = "c9a21913e7fdac8ef6b33250b167aa1fc0a7b8a175145e26913a4c19d8a59b1f"
+ 
+ CFLAGS += "-fno-omit-frame-pointer"
++CFLAGS += " -D_GNU_SOURCE"
+ 
+ do_install() {
+     install -D -m 0744 ${S}/execinfo.h ${D}${includedir}/execinfo.h
 -- 
 2.7.4
 
