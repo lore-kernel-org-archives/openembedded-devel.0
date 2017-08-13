@@ -1,48 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 01B8071957
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D88DF60043
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 11:15:51 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id x24so3806881uah.5
+	Sun, 13 Aug 2017 11:37:00 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id x64so11426386wmg.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Aug 2017 04:15:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=wxc7fK9j2F5GRo0WNWMSAwVEIqLcbfZ/OwWOcgcnS28=;
-	b=Sz9M3TBIMsBVXYQsg0M3+pJfBedDCRPtYIfVO0ahMRKFYup+NMMqaCcISq9jJzKV1o
-	mOnQx22nooutZNWpbDICrPY5qXU9be/SFZeyKjnW+OTbJ6cUc6MIjzbs2TkSDie28ygC
-	8Zk00XQxTxZXaegkwI3G5ElYSF0dEna6nb1Xi64wUm6PxpBIjOjlbowUGeBy0SAKWhQn
-	PpyLsWuxwWSRVx9D0njikWR6dE+Q1B59Cp/Gz766Pfu/NdtC+5JnVrQmNgmU+hiLjQnU
-	L4h4FIHx1pYJVEpqJzoGUp89btEQXDAo9eyJrdrO9GURL9UjXcManchSnxrbwyMuCSMb
-	ZVJQ==
+	Sun, 13 Aug 2017 04:37:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VOikoNtCZgaakLF+JhRSneBNni7En3XE53V4ou9jo44=;
+	b=OyZ7N1r1OzKQmPDT//lO1B5rxMRRLuKr85Q3yyDWGR6btKdyPpNhT1mcKNAPgZyoyh
+	/bNeVFipbKyrerRnFjUQ04lrBkpAsoe54OF19i9jb0tRkUSn6mMA+nTHkMrvGA+DE6Wk
+	2aY0D5At3mW46keae4SHGqC6HYDWsmCe+R3nBfCXjheyWbrqyk53wjdiZiAvKlYrN0Gu
+	u0WwckeJJYHR8ipy5zqmfMt/pZd2mLqbASmdOGPegVesSOA8y+YT2kz+5SnMuvv5RZjq
+	/vCjYDOZ+s5x7bqkayrJI3gbkg9/XkLz/Cn9ib9c599s4au4aVOJX7jLCPR4pa5rry+p
+	+m5A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=wxc7fK9j2F5GRo0WNWMSAwVEIqLcbfZ/OwWOcgcnS28=;
-	b=i1sWyUJajDEdtwHEaELeQ7RlRvWc0xIbsf0y9oytxENuEpQaAAallar6LOm8h6KYQy
-	iimbunY3LND5XC+pKnuUo0c4gNaNMHAQOYokeV7LDtuxSmncbP3AdJLlxm30ufyWoEee
-	gkrZ7Jw1ztk6a4fuOn7MArklrKor1ydVd3LvPwUC9/kgzgRKkQSYWsb2sJp1b55x1fcM
-	Nf1ikMxmlvwYQI/Nh41+bNU2BbP+a3LpmsX0s/YEghDzyTw/8MXrkMaherexNkAUQaDT
-	fDxpYeyorxHDnVHcC2XQeoxM98ijpxUX59A8glCdm4VAyikJuEmMrNMgMuOdCqkincRY
-	6JYQ==
-X-Gm-Message-State: AHYfb5gEYt0ldrEjAAqX0nFsmHrdk+XepkXJ+ivrcgSjao9uzx0Xzqza
-	Emp5x+J2m1qS32qWFxoUhftFA3obCg==
-X-Received: by 10.176.8.25 with SMTP id a25mr14837679uaf.13.1502622952908;
-	Sun, 13 Aug 2017 04:15:52 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=VOikoNtCZgaakLF+JhRSneBNni7En3XE53V4ou9jo44=;
+	b=IWbxyX956d6asNFHSWNFAKVe4KpqMFyECNrmNkwwylTEgGbxeAxCjSfNb2qjboZfV+
+	Tf0wefmx1BnDdycoE+NrYxOW189FsDrzjQ6MqJFqVuOcqSLsDAkcpkP0502He3LxZHKS
+	q8FPu/D5oCoEkwzcjwR+nEpSHTaqsEXuCNlM1dCvUohwxvmhYRwKu+mVVsK8huiuwwxY
+	H5BagB2apXpdUln+pHq0uqmJd/O3OQJWcOYfK5ex4YX6gQwV21cbpIr8h0qN5MUD+mdp
+	8xurLI9yi0TuAbWrKGj/9hb50baUp0gDtar+kTmmQeUjzefA3zBAqZchQ+vbgffyKZGi
+	+qqQ==
+X-Gm-Message-State: AHYfb5jP1ebXK4nnhLVNCW5dKrdPkgHIW71LmmubCtG6zpqA5fx6LKOW
+	NeB78+n0MShDV9Vs
+X-Received: by 10.28.126.200 with SMTP id z191mr2182119wmc.46.1502624221078;
+	Sun, 13 Aug 2017 04:37:01 -0700 (PDT)
+Received: from mueller-a-nb-linux.speedport.ip
+	(p20030046E902666856A7C2EFFD165696.dip0.t-ipconnect.de.
+	[2003:46:e902:6668:56a7:c2ef:fd16:5696])
+	by smtp.googlemail.com with ESMTPSA id
+	d26sm5812501wra.92.2017.08.13.04.37.00
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 13 Aug 2017 04:37:00 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 13 Aug 2017 13:36:49 +0200
+Message-Id: <20170813113651.2987-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.4
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Sun, 13 Aug 2017 04:15:52 -0700 (PDT)
-In-Reply-To: <b8c1e39c-066e-e22d-b694-1006d99cd12a@gmail.com>
-References: <1502575439-5591-1-git-send-email-jpuhlman@mvista.com>
-	<b8c1e39c-066e-e22d-b694-1006d99cd12a@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 13 Aug 2017 13:15:52 +0200
-Message-ID: <CA+chaQe_WeSWhOEboLLiN6MxBKyuRo=d08QvGX0hW4ThyfES_A@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] Strongswan: Add stdint.h to resolve build failure
+Subject: [PATCH 1/3] upower: update 0.99.4 -> 0.99.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,115 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Aug 2017 11:15:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 13 Aug 2017 11:37:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-There is already fix for that in master-next:
-https://patchwork.openembedded.org/patch/141328/
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-oe/recipes-support/upower/{upower_0.99.4.bb => upower_0.99.5.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/upower/{upower_0.99.4.bb => upower_0.99.5.bb} (90%)
 
-waiting for Joe to merge it.
+diff --git a/meta-oe/recipes-support/upower/upower_0.99.4.bb b/meta-oe/recipes-support/upower/upower_0.99.5.bb
+similarity index 90%
+rename from meta-oe/recipes-support/upower/upower_0.99.4.bb
+rename to meta-oe/recipes-support/upower/upower_0.99.5.bb
+index 3651e18..9314534 100644
+--- a/meta-oe/recipes-support/upower/upower_0.99.4.bb
++++ b/meta-oe/recipes-support/upower/upower_0.99.5.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0de8fbf1d97a140d1d93b9f14dcfbf08"
+ DEPENDS = "intltool-native libusb1 libgudev glib-2.0 dbus-glib polkit"
+ 
+ SRC_URI = "http://upower.freedesktop.org/releases/${BPN}-${PV}.tar.xz"
+-SRC_URI[md5sum] = "78800e1ac7f92b24aabdf433e38f75d2"
+-SRC_URI[sha256sum] = "9ca325a6ccef505529b268ebbbd9becd0ce65a65f6ac7ee31e2e5b17648037b0"
++SRC_URI[md5sum] = "ec57b4b7bf0af568f9a7a5603c921d97"
++SRC_URI[sha256sum] = "78605664d027c788f6ab63c50950be6e86c6ba5d030c4cf35a6664337d87f3b2"
+ 
+ inherit autotools pkgconfig gettext gobject-introspection systemd
+ 
+-- 
+2.9.4
 
-On Sun, Aug 13, 2017 at 7:41 AM, akuster808 <akuster808@gmail.com> wrote:
-
->
->
-> On 08/12/2017 03:03 PM, Jeremy Puhlman wrote:
->
->> From: "Jeremy A. Puhlman" <jpuhlman@mvista.com>
->>
->> In file included from
->> ../../../strongswan-5.5.3/src/libstrongswan/utils/utils.h:55:0,
->>                   from
->> ../../../strongswan-5.5.3/src/libstrongswan/library.h:101,
->>                   from
->> ../../../strongswan-5.5.3/src/libstrongswan/library.c:17:
->> ../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h: In
->> function 'memwipe_inline':
->> ../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h:99:15:
->> error: 'uintptr_t' undeclared (first use in this function); did you mean
->> '__intptr_t'?
->>    for (i = 0; (uintptr_t)&c[i] % sizeof(long) && i < n; i++)
->>                 ^~~~~~~~~
->>                 __intptr_t
->> ../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h:99:15:
->> note: each undeclared identifier is reported only once for each function
->> it appears in
->>
->> Signed-off-by: Jeremy Puhlman <jpuhlman@mvista.com>
->> ---
->>   .../strongswan/files/strongswan-gcc-7.patch        | 25
->> ++++++++++++++++++++++
->>   .../recipes-support/strongswan/strongswan_5.5.3.bb |  1 +
->>   2 files changed, 26 insertions(+)
->>   create mode 100644 meta-networking/recipes-suppor
->> t/strongswan/files/strongswan-gcc-7.patch
->>
->> diff --git a/meta-networking/recipes-support/strongswan/files/strongswan-gcc-7.patch
->> b/meta-networking/recipes-support/strongswan/files/strongswan-gcc-7.patch
->> new file mode 100644
->> index 0000000..388261b
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/strongswan/files/strongswa
->> n-gcc-7.patch
->> @@ -0,0 +1,25 @@
->> +Fix missing definition of uintptr_t after the switch to gcc 7
->> +
->> +In file included from ../../../strongswan-5.5.3/src/
->> libstrongswan/utils/utils.h:55:0,
->> +                 from ../../../strongswan-5.5.3/src/
->> libstrongswan/library.h:101,
->> +                 from ../../../strongswan-5.5.3/src/
->> libstrongswan/library.c:17:
->> +../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h: In
->> function 'memwipe_inline':
->> +../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h:99:15:
->> error: 'uintptr_t' undeclared (first use in this function); did you mean
->> '__intptr_t'?
->> +  for (i = 0; (uintptr_t)&c[i] % sizeof(long) && i < n; i++)
->> +               ^~~~~~~~~
->> +               __intptr_t
->> +../../../strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h:99:15:
->> note: each undeclared identifier is reported only once for each function it
->> appears in
->> +
->> +Upstream-Status: pending
->>
->
-> Missing "Signed-off-by:"  in the patch itself.
->
-> - armin
->
->> +
->> +--- strongswan-5.5.3-orig/src/libstrongswan/utils/utils/memory.h
->>  2016-04-22 13:01:35.000000000 -0700
->> ++++ strongswan-5.5.3/src/libstrongswan/utils/utils/memory.h
->> 2017-08-12 14:41:04.757398239 -0700
->> +@@ -22,6 +22,8 @@
->> + #ifndef MEMORY_H_
->> + #define MEMORY_H_
->> +
->> ++#include <stdint.h>
->> ++
->> + /**
->> +  * Helper function that compares two binary blobs for equality
->> +  */
->> diff --git a/meta-networking/recipes-support/strongswan/strongswan_5.5.
->> 3.bb b/meta-networking/recipes-support/strongswan/strongswan_5.5.3.bb
->> index 9215233..680d338 100644
->> --- a/meta-networking/recipes-support/strongswan/strongswan_5.5.3.bb
->> +++ b/meta-networking/recipes-support/strongswan/strongswan_5.5.3.bb
->> @@ -9,6 +9,7 @@ DEPENDS = "gmp openssl flex-native flex bison-native"
->>     SRC_URI = "http://download.strongswan.org/strongswan-${PV}.tar.bz2 \
->>           file://fix-funtion-parameter.patch \
->> +        file://strongswan-gcc-7.patch \
->>   "
->>     SRC_URI[md5sum] = "4afffe3c219bb2e04f09510905af836b"
->>
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
