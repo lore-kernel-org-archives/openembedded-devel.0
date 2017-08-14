@@ -1,52 +1,64 @@
-Return-Path: <jussi.kukkonen@intel.com>
-Received: from mail-it0-f50.google.com (mail-it0-f50.google.com
-	[209.85.214.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 2F2AD719A4
+Return-Path: <idealsim@laposte.net>
+X-Greylist: delayed 1420 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 14 Aug 2017 13:50:25 UTC
+Received: from smtp.laposte.net (smtpoutz27.laposte.net [194.117.213.102])
+	by mail.openembedded.org (Postfix) with ESMTP id C20937846B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 10:22:33 +0000 (UTC)
-Received: by mail-it0-f50.google.com with SMTP id 76so18930879ith.0
+	Mon, 14 Aug 2017 13:50:25 +0000 (UTC)
+Received: from smtp.laposte.net (localhost [127.0.0.1])
+	by lpn-prd-vrout015 (Postfix) with ESMTP id 2C6021CC32D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 03:22:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=u3hEopt+WuogsGtRyHVDL7xNhc3Gw9ix0/+tK7JIGjg=;
-	b=1mwIW3RuJVxRAHEfEjSnjDJhkcCWsRRosEnVlEbO4v+hDUIVk/fD4PF9V4SGw7PEm0
-	YE06BOkCvgeIp0vrBECOwfpg0obaNt4njPfftxhtsLqN8PUwVQbIhFPz+/U1zDc2vjdF
-	x1v9EjCZlAbCaXJnCeyYl9w5fxJygcMXEiVs54o7Odn0UxPrFJconWRvA1DR4vu7CBfC
-	n279cF62aV1IzcdLwbjiKgo+DSYaw5yb8ky9vLDE/EKLrce/C0LK1LrMxTFpKhsDKyuY
-	4qvWQVXC+Hk3Px+rbsAxy6x2o1fmN6GAeaETvvzulQimSYOhNHIKG1kuMbfr2BZC/k1m
-	CH1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=u3hEopt+WuogsGtRyHVDL7xNhc3Gw9ix0/+tK7JIGjg=;
-	b=oPMxDQtD95zLfOeBP4f9MtPojWNMblan3PI3KSkcd0HOmSfxD0Q0WX2CJnG6CmyNCx
-	PA3eSxQsOMg17tnfeCCJ0lZiBvRKQqOWYN/rJy6yBRxn1emSZMuDY4jznzZ+rvMU65s1
-	jayu8/ulD3F72OmVzifiYyk0YqYZ1gV5qquyQ55cStc3TBLW8jMq43G7vuXh8ntUftZw
-	D9uqs8kM7DnVj9QNOZWrVQVpkRfxKUsw+b8cpDSKwwUhBNnoOyhSAuhmFDOe7q14e0Qs
-	wIG2/zW3cBdDF15JcpnlxUgqNV2zAlekgSUm51m8dEv+whDvSrNqst56ds8Xcnx21egL
-	aOcQ==
-X-Gm-Message-State: AHYfb5iJkqF1IdxTJ/pqI6hyiXDwU6K88NlFMnh9iUVvjip3n+og+zzi
-	0OyVX7rgH1gOCgRL7ot8mD9sEDKYe4/H
-X-Received: by 10.36.82.67 with SMTP id d64mr5604262itb.119.1502706155322;
-	Mon, 14 Aug 2017 03:22:35 -0700 (PDT)
+	Mon, 14 Aug 2017 15:26:46 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=laposte.net; s=mail0;
+	t=1502717206; bh=RDnbl1liAUmwxnkKFlHTHT6DOnVXKvos9pFhEht5mRs=;
+	h=From:Subject:To:Date;
+	b=hxVQovmdLeQ+dwENmDipKaHc+sGg6jh+DwsW5EunFBLi7moszkppRJX/zUQwJEa6G
+	mm3FWn8ADDn44hTVR32Up7N8nbHAD/WRwOV885o8m+LcyagyUq8A/Ckhos3BsOrP+W
+	h1MqLWj3SdeUaAIzxT7zLQk0kV9vfoBgZom+5UuiR8fnM2KgCs83MlcXqUMknRGq5/
+	u9pXSk4u+80vLM5EFGYn0q49CBi2sZ0UypMVHmA1k15rK1xajNHWO0foLJPPrMzXQV
+	QxixoEMbTLKdl+vQ9Fo8vUF1zwbphaGz5ynpcOe5kasEqLDMKYXI80bhjYowwRIMcb
+	aMp0hHQQHz8dw==
+Received: from smtp.laposte.net (localhost [127.0.0.1])
+	by lpn-prd-vrout015 (Postfix) with ESMTP id 1DA9B1CC383
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Aug 2017 15:26:46 +0200 (CEST)
+Received: from lpn-prd-vrin002 (lpn-prd-vrin002.prosodie [10.128.63.3])
+	by lpn-prd-vrout015 (Postfix) with ESMTP id 185AE1CC32D
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Aug 2017 15:26:46 +0200 (CEST)
+Received: from lpn-prd-vrin002 (localhost [127.0.0.1])
+	by lpn-prd-vrin002 (Postfix) with ESMTP id 0A2865C3684
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Aug 2017 15:26:46 +0200 (CEST)
+Received: from [192.168.1.19] (ARennes-654-1-262-25.w2-13.abo.wanadoo.fr
+	[2.13.73.25])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by lpn-prd-vrin002 (Postfix) with ESMTPSA id 83E105C367C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Aug 2017 15:26:45 +0200 (CEST)
+From: idealsim <idealsim@laposte.net>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <b53934ef-2480-8d0e-27ce-fe2fc1eb4d39@laposte.net>
+Date: Mon, 14 Aug 2017 15:26:44 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-Received: by 10.107.141.19 with HTTP; Mon, 14 Aug 2017 03:22:04 -0700 (PDT)
-In-Reply-To: <CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
-References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
-	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
-From: Jussi Kukkonen <jussi.kukkonen@intel.com>
-Date: Mon, 14 Aug 2017 13:22:04 +0300
-Message-ID: <CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>, 
-	Raphael Kubo Da Costa <raphael.kubo.da.costa@intel.com>
+X-VR-SrcIP: 2.13.73.25
+X-VR-FullState: 0
+X-VR-Score: 0
+X-VR-Cause-1: gggruggvucftvghtrhhoucdtuddrfeelkedrleehgdeijecutefuodetggdotefrodftvfcurfhrohhf
+X-VR-Cause-2: ihhlvgemucfntefrqffuvffgnecuuegrihhlohhuthemucehtddtnecunecujfgurhephffuvffkffgf
+X-VR-Cause-3: gggtsegrtderredtfeejnecuhfhrohhmpehiuggvrghlshhimhcuoehiuggvrghlshhimheslhgrphho
+X-VR-Cause-4: shhtvgdrnhgvtheqnecukfhppedvrddufedrjeefrddvheenucfrrghrrghmpehmohguvgepshhmthhp
+X-VR-Cause-5: ohhuthdphhgvlhhopegludelvddrudeikedruddrudelngdpihhnvghtpedvrddufedrjeefrddvhedp
+X-VR-Cause-6: mhgrihhlfhhrohhmpehiuggvrghlshhimheslhgrphhoshhtvgdrnhgvthdprhgtphhtthhopehophgv
+X-VR-Cause-7: nhgvmhgsvgguuggvugdquggvvhgvlheslhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhg
+X-VR-AvState: No
+X-VR-State: 0
+X-VR-State: 0
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: denis@eukrea.com, Otavio Salvador <otavio@ossystems.com.br>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, eric@eukrea.com
-Subject: Re: chromium detected as stripped
+Subject: [qtwebengine] build failed in pyro branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,53 +71,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Aug 2017 10:22:34 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Aug 2017 13:50:26 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On 14 August 2017 at 10:04, Jussi Kukkonen <jussi.kukkonen@intel.com> wrote=
-:
+Hi all, i'm trying to build webengine in pyro branch but i have this 
+error during the build :
 
-> On 13 August 2017 at 02:10, Andreas M=C3=BCller <schnitzeltony@googlemail=
-.com>
-> wrote:
->
->> Hi,
->>
->> in current OE environment 'file' says:
->>
->> <...>image/usr/bin/chromium/chrome: ELF 32-bit LSB shared object, ARM,
->> EABI5 version 1 (SYSV), dynamically linked, interpreter
->> /lib/ld-linux-armhf.so.3, stripped
->>
->> This file is 4.3G of size and this does not fir into most of my sdcards!
->>
->> One note: I have an elder environment: meta-browser
->> c79cf6c7811afd2cd167e8967e3c29b1e797371e. There chrome binary is
->> detected as not stripped and properly stripped on do_package.
->>
->> Any idea why it is detected as stripped?
->>
->
-> I have a vague recollection that 'file' and other tools can get very
-> confused when given 32 bit executables that are larger than 4 GB. It may
-> make sense to build a non-debug version to begin with to get around this.
->
+/| ERROR: oe_runmake failed//
+//| make[3]: Entering directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src/core/api'//
+//| compiling 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qtwebenginecoreglobal.cpp//
+//| compiling 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebenginecookiestore.cpp//
+//| compiling 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlrequestinfo.cpp//
+//| compiling 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlrequestjob.cpp//
+//| compiling 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlschemehandler.cpp//
+//| generating .moc/moc_predefs.h//
+//| moc 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebenginecookiestore.h//
+//| moc 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlrequestinterceptor.h//
+//| moc 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlrequestjob.h//
+//| moc 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebengineurlschemehandler.h//
+//| compiling .moc/moc_qwebenginecookiestore.cpp//
+//| compiling .moc/moc_qwebengineurlrequestinterceptor.cpp//
+//| compiling .moc/moc_qwebengineurlrequestjob.cpp//
+//| compiling .moc/moc_qwebengineurlschemehandler.cpp//
+//| rm -f Release/libqtwebenginecoreapi.a//
+//| arm-poky-linux-gnueabi-ar cqs Release/libqtwebenginecoreapi.a 
+.obj/qtwebenginecoreglobal.o .obj/qwebenginecookiestore.o 
+.obj/qwebengineurlrequestinfo.o .obj/qwebengineurlrequestjob.o 
+.obj/qwebengineurlschemehandler.o .obj/moc_qwebenginecookiestore.o 
+.obj/moc_qwebengineurlrequestinterceptor.o 
+.obj/moc_qwebengineurlrequestjob.o .obj/moc_qwebengineurlschemehandler.o//
+//| make[3]: Leaving directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src/core/api'//
+//| ( test -e Makefile.core_module || 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot-native/usr/bin/qt5/qmake 
+-o Makefile.core_module 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/core_module.pro 
+GYP_CONFIG+=use_system_yasm GYP_CONFIG+=generate_character_data=0 
+WEBENGINE_CONFIG+=use_system_flac WEBENGINE_CONFIG+=use_system_libevent 
+WEBENGINE_CONFIG+=use_system_libwebp 
+WEBENGINE_CONFIG+=use_system_libxslt WEBENGINE_CONFIG+=use_system_speex 
+'QMAKE_CXX=arm-poky-linux-gnueabi-g++  -march=armv7-a -marm -mfpu=neon  
+-mfloat-abi=hard -mcpu=cortex-a9 
+--sysroot=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot' 
+'QMAKE_CC=arm-poky-linux-gnueabi-gcc  -march=armv7-a -marm -mfpu=neon  
+-mfloat-abi=hard -mcpu=cortex-a9 
+--sysroot=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot' 
+'QMAKE_LINK=arm-poky-linux-gnueabi-g++  -march=armv7-a -marm -mfpu=neon  
+-mfloat-abi=hard -mcpu=cortex-a9 
+--sysroot=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot' 
+'QMAKE_CFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0=/usr/src/debug/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot-native= 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot= 
+' 'QMAKE_CXXFLAGS= -O2 -pipe -g -feliminate-unused-debug-types 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0=/usr/src/debug/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot-native= 
+-fdebug-prefix-map=/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot= 
+-fvisibility-inlines-hidden' 'QMAKE_AR=arm-poky-linux-gnueabi-ar cqs' 
+-after ) && make -f Makefile.core_module//
+//| make[3]: Entering directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src/core'//
+//| creating linker version script QtWebEngineCore.version//
+//| rm -f libQt5WebEngineCore.so.5.8.0 libQt5WebEngineCore.so 
+libQt5WebEngineCore.so.5 libQt5WebEngineCore.so.5.8//
+//| linking ../../lib/libQt5WebEngineCore.so.5.8.0//
+//| collect2: fatal error: ld terminated with signal 9 [Killed]//
+//| compilation terminated.//
+//| Makefile.core_module:157: recipe for target 
+'../../lib/libQt5WebEngineCore.so.5.8.0' failed//
+//| make[3]: *** [../../lib/libQt5WebEngineCore.so.5.8.0] Error 1//
+//| make[3]: Leaving directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src/core'//
+//| Makefile:158: recipe for target 'sub-core_module-pro-make_first' 
+failed//
+//| make[2]: *** [sub-core_module-pro-make_first] Error 2//
+//| make[2]: Leaving directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src/core'//
+//| Makefile:49: recipe for target 'sub-core-make_first' failed//
+//| make[1]: *** [sub-core-make_first] Error 2//
+//| make[1]: Leaving directory 
+'/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src'//
+//| Makefile:44: recipe for target 'sub-src-make_first' failed//
+//| make: *** [sub-src-make_first] Error 2//
+//| ERROR: Function failed: do_compile (log file is located at 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/temp/log.do_compile.30193)//
+//ERROR: Task 
+(/media/modjo/data1TO/yocto/pyro/sources/meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile) 
+failed with exit code '1'//
+//NOTE: Tasks Summary: Attempted 6306 tasks of which 6175 didn't need to 
+be rerun and 1 failed.//
+//
+//Summary: 1 task failed://
+///media/modjo/data1TO/yocto/pyro/sources/meta-qt5/recipes-qt/qt5/qtwebengine_git.bb:do_compile//
+//Summary: There was 1 WARNING message shown.//
+//Summary: There were 2 ERROR messages shown, returning a non-zero exit 
+code./
 
-I chatted with rakuco who's done nice work with up to date chromium in
-meta-crosswalk, he's got some relevant commits related to this:
+an idea where is the issue ?
 
-https://github.com/rakuco/meta-crosswalk/commit/5aae1539c3d62b295dba40f4943=
-97c0797140b0f
+regards
 
-https://github.com/rakuco/meta-crosswalk/commit/c56aa2bf047d3a01e14f4f9bfe5=
-f88664b333f36
-
-On a related note, this good work is currently a bit hidden in
-meta-crosswalk -- is there a chance we could get this combined with
-meta-browser (or whatever place makes sense)? I know next to nothing about
-chromium packaging so CCing Raphael and the meta-browser maintainers for
-comments.
-
-Jussi=E2=80=8B
+Mickaël
 
