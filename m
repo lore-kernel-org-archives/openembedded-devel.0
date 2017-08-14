@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
 	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id A94357848E
+	by mail.openembedded.org (Postfix) with ESMTP id 45D1D78456
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 14:01:27 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id u19so9656276qtc.0
+	Mon, 14 Aug 2017 14:05:22 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id c15so9657346qta.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 07:01:29 -0700 (PDT)
+	Mon, 14 Aug 2017 07:05:24 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Spjz2Vc6qtQd0N9iJKGsBNAf3QBQ/oz2DwKUIyjWyec=;
-	b=lslGizbjV7+iwh0hfasQsnXlxfCpdnX1jbCvJkpgGm7SIQm8kb69eoJeCAjFk7UEp2
-	qs9NmHwYILmQWdrUj9xYRym35cf+UU95h05A3UKogvBwU1XT3YTFBgC8CHF9lAwGW+nl
-	JNeYZe37MUlKxSRBQtiCLinH/6P3TtAcg09v2P7HOmwcL3uhcmMx7IN+/HGqRD2jR7sY
-	S4itvdlBTE2ntnQYJYjLmE9ldkZ2x2iQYvzLrARd80nlt7mJW56xMtktJoxdB4q6AIXm
-	h6AP/W/8/qK2OgG983cWhoTZFNmDjMxqBw/3XbePXTSZ+eybPaKOx0SnhbNHNdaw2g5T
-	rQJA==
-X-Gm-Message-State: AHYfb5jrcXDxu2Pi2/2j2ETP/Bm4UQXmSH19NiZDSxfRjm7K8rX1FHTP
-	78qYWUMkdWDX4A+vgGA=
-X-Received: by 10.237.49.132 with SMTP id 4mr35048337qth.105.1502719288255;
-	Mon, 14 Aug 2017 07:01:28 -0700 (PDT)
+	bh=MbYsrE90jDkSk7rZvVbFrk8RxgyIHQZryZzkw6DofPA=;
+	b=hUayWOJzp2OnV8yHyLAGoym+tpIR205ljqIt7df0Lqw5C0Wom7Gr89qQmV1TToW6hV
+	VKbnSJfeuo0ZcFSpnynMg7cOApMasntRzTDN3GgwYYN+Zrx0gIuGEZVTydm/ZT2BkG7Q
+	7NHLpclQfGFs50PIFGvcdTIRDwx5RqgZf7p/f/8xhCMMZT3ub5fq58WtYycEyAeS0e7F
+	jQCj47DhngliVM1QVTvv2XpzsGbyQ/H63489WbjtzZYqHmp1lkPlxsYznqBvJWR2eze4
+	2++A0FuvfO20ppTX72mzevsdINZmBNcdHj/frbl51Ac0FlU6I+2dhOohP2gBiCJlx2M9
+	nyEg==
+X-Gm-Message-State: AHYfb5h8nlLT0x55SajX69INTbhrQGH73zWe1/4lsgeyzYSmm/Uj2MG9
+	ay68s3FIcaGWd6S1FEw=
+X-Received: by 10.200.44.97 with SMTP id e30mr33571185qta.319.1502719524111;
+	Mon, 14 Aug 2017 07:05:24 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	y10sm5258740qtb.57.2017.08.14.07.01.27
+	h42sm5215416qtb.97.2017.08.14.07.05.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 14 Aug 2017 07:01:27 -0700 (PDT)
+	Mon, 14 Aug 2017 07:05:23 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Aug 2017 10:01:14 -0400
-Message-Id: <1502719274-13424-1-git-send-email-derek@asterius.io>
+Date: Mon, 14 Aug 2017 10:05:17 -0400
+Message-Id: <1502719517-14943-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-wrapt: update to version 1.10.11
+Subject: [meta-python][PATCH] python-cmd2: update to version 0.7.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,45 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Aug 2017 14:01:27 -0000
-
-Update license checksum for copyright year modification to 2017
+X-List-Received-Date: Mon, 14 Aug 2017 14:05:23 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-wrapt.inc                | 6 +++---
- .../python/{python-wrapt_1.10.10.bb => python-wrapt_1.10.11.bb}     | 0
- .../python/{python3-wrapt_1.10.10.bb => python3-wrapt_1.10.11.bb}   | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-wrapt_1.10.10.bb => python-wrapt_1.10.11.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-wrapt_1.10.10.bb => python3-wrapt_1.10.11.bb} (100%)
+ .../python/{python-cmd2_0.7.5.bb => python-cmd2_0.7.6.bb}             | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cmd2_0.7.5.bb => python-cmd2_0.7.6.bb} (77%)
 
-diff --git a/meta-python/recipes-devtools/python/python-wrapt.inc b/meta-python/recipes-devtools/python/python-wrapt.inc
-index 19668c0..c85548f 100644
---- a/meta-python/recipes-devtools/python/python-wrapt.inc
-+++ b/meta-python/recipes-devtools/python/python-wrapt.inc
-@@ -2,10 +2,10 @@ SUMMARY = "A Python module for decorators, wrappers and monkey patching."
- HOMEPAGE = "http://wrapt.readthedocs.org/"
- LICENSE = "BSD"
- SECTION = "devel/python"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=82704725592991ea88b042d150a66303"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=61c27930012e86b3dc7e36f92e83c4d8"
+diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb b/meta-python/recipes-devtools/python/python-cmd2_0.7.6.bb
+similarity index 77%
+rename from meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
+rename to meta-python/recipes-devtools/python/python-cmd2_0.7.6.bb
+index 9621326..d136672 100644
+--- a/meta-python/recipes-devtools/python/python-cmd2_0.7.5.bb
++++ b/meta-python/recipes-devtools/python/python-cmd2_0.7.6.bb
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://packages.python.org/cmd2/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://setup.py;beginline=49;endline=49;md5=0f13c9cfc75288223cf7edd2f3b985a2"
  
--SRC_URI[md5sum] = "97365e906afa8b431f266866ec4e2e18"
--SRC_URI[sha256sum] = "42160c91b77f1bc64a955890038e02f2f72986c01d462d53cb6cb039b995cdd9"
-+SRC_URI[md5sum] = "e1346f31782d50401f81c2345b037076"
-+SRC_URI[sha256sum] = "d4d560d479f2c21e1b5443bbd15fe7ec4b37fe7e53d335d3b9b0a7b1226fe3c6"
+-SRC_URI[md5sum] = "9f758f3a6a20f1220d60f6320bb839b3"
+-SRC_URI[sha256sum] = "7a47afafc5ad45649a2998df8d96f39d8e1d0686f55c785285889e45151ff75f"
++SRC_URI[md5sum] = "71f862cb2817b207c9cecec7382324d6"
++SRC_URI[sha256sum] = "fcf116b44a46188bbae2ba852a5c2354c069b798feda314a452cb927054d2f86"
  
- inherit pypi
+ inherit pypi setuptools
  
-diff --git a/meta-python/recipes-devtools/python/python-wrapt_1.10.10.bb b/meta-python/recipes-devtools/python/python-wrapt_1.10.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-wrapt_1.10.10.bb
-rename to meta-python/recipes-devtools/python/python-wrapt_1.10.11.bb
-diff --git a/meta-python/recipes-devtools/python/python3-wrapt_1.10.10.bb b/meta-python/recipes-devtools/python/python3-wrapt_1.10.11.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-wrapt_1.10.10.bb
-rename to meta-python/recipes-devtools/python/python3-wrapt_1.10.11.bb
 -- 
 2.7.4
 
