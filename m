@@ -1,37 +1,53 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B16660670
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 9527260670
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 14:08:59 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id c15so9668580qta.3
+	Mon, 14 Aug 2017 14:10:25 +0000 (UTC)
+Received: by mail-ua0-f169.google.com with SMTP id q25so37034623uah.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 07:09:01 -0700 (PDT)
+	Mon, 14 Aug 2017 07:10:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=i+cMWmndpt7nDA9G+SkzciWTpAvGh3LKcEu7NvwhpMg=;
+	b=OyE/cMsi3+oYBgmr1B3g8shmQpKiIgRDcy5WLc/Vd02BiQ3ElxKvOfaMoBeTK4AARy
+	Qgs8KZ1qDp95yVq2XsIPUIT7vaFHVvGRBkYhOwnWQRI4jv+1wB3ADGIK7YPRZR6HY4fJ
+	nyjpNXNmyW+tJNW7JmkabtWjSn4VEsKwC/D5WOakYKX0OUW90hKa5g1MYJuAr0niVNVJ
+	PTap4uJTehi4uMPTjgiCeW04SJadFWEmfp/NFuMz8zkw8M3pCrr8WAjjz5HglDc1hSoK
+	LXVuNKezTQnL7ScNgwF1HydmQDbSffqCl8H8xywa+GhmYFyz+dZXVSDN1kBRRcVKsv2Z
+	03Dg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+OcHo1KnUCScu7/yT2DXk3vTYC8rJZB+hd7yv6hOano=;
-	b=KwsV9uabXWX1TNajurUw+pkg+6R2jReO0teAD/CGXSRGk5Afca90ljdBNNoRRnVupX
-	Ren5HNbvHUH9uKfoAv9DRyRqFS/jEJdejRZ6QUcLMWS55OEJtH3yk9sR0DPKH/cKfB9H
-	3hE7QnmXehmpFC5DeyN0W0kLUoiayAjk228EM/aYQd/UKCdkN4NX7Qiz6/r9JxVK9Lf4
-	CCqTYvjD6+7ySUlQ0fsVddFhtOw3CHvcae/t4krZPcME4tfWRml+03mCWzVxZ7M2QDsG
-	SCogDakjE4RvXnVJmn3NNTJVlQILqh01zFTF4N7OpiJN2lalqJWse2/dHoZtDYm7jEIE
-	TVQQ==
-X-Gm-Message-State: AHYfb5i6YfRP1o5RDTQGsqCZDIjjA+eTblMkV/nxBfgI/SXftESbuny6
-	tf1GMdhfRnSLNbg+bYA=
-X-Received: by 10.237.56.38 with SMTP id j35mr34495602qte.30.1502719741046;
-	Mon, 14 Aug 2017 07:09:01 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id c5sm5310910qtk.4.2017.08.14.07.09.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 14 Aug 2017 07:09:00 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 14 Aug 2017 10:08:53 -0400
-Message-Id: <1502719733-16930-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-sqlalchemy: update to version 1.1.13
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=i+cMWmndpt7nDA9G+SkzciWTpAvGh3LKcEu7NvwhpMg=;
+	b=tdLCN2MsVbSWHyFfcuWAYHc+qpOtTo92YXPMWsNS/VgflU0JJz4XUEhZn66rNmYY/4
+	mL3q1FMKWton8FFe40vFgY3WAXo2PcJs3QGtQVzgKvhgwkF3gIk4oqicvkjh/gnWaYMM
+	4ef4rBP9xQdS/1pnkeVVQv05bHL5ZE6TJju8s8nhhyOdo3zvkPmeHZ25c/0mcfgRBmLC
+	hc8DtW/gXtPAcOAKPz5gbBFM0QYQU6kbCbGmluIbcSByGVZFR9tft++xSSk6CRnQCTfO
+	WzvnQq+oiU8H4e2kC1ql4WmQt4fiKFMCpRuiH1tZEMs5abba8A8mKUjcl+b7D+9oHpYk
+	0ENA==
+X-Gm-Message-State: AHYfb5j0NPHuNP19durpLutGPu7+E4HYiANw1z9w8pL3g0wESso25lLa
+	DrttcoxhmdLtXizW4NKaec2F2U4B/A==
+X-Received: by 10.176.83.110 with SMTP id y43mr15231237uay.118.1502719826253; 
+	Mon, 14 Aug 2017 07:10:26 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.51.10 with HTTP; Mon, 14 Aug 2017 07:10:25 -0700 (PDT)
+In-Reply-To: <CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
+References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
+	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
+	<CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 14 Aug 2017 16:10:25 +0200
+Message-ID: <CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
+To: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Cc: denis@eukrea.com, Otavio Salvador <otavio@ossystems.com.br>,
+	=?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: chromium detected as stripped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,41 +60,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Aug 2017 14:09:00 -0000
+X-List-Received-Date: Mon, 14 Aug 2017 14:10:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-sqlalchemy.inc             | 4 ++--
- .../{python-sqlalchemy_1.1.11.bb => python-sqlalchemy_1.1.13.bb}      | 0
- .../{python3-sqlalchemy_1.1.11.bb => python3-sqlalchemy_1.1.13.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-sqlalchemy_1.1.11.bb => python-sqlalchemy_1.1.13.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-sqlalchemy_1.1.11.bb => python3-sqlalchemy_1.1.13.bb} (100%)
+On Mon, Aug 14, 2017 at 12:22 PM, Jussi Kukkonen
+<jussi.kukkonen@intel.com> wrote:
+>
+> On 14 August 2017 at 10:04, Jussi Kukkonen <jussi.kukkonen@intel.com> wro=
+te:
+>>
+>> On 13 August 2017 at 02:10, Andreas M=C3=BCller <schnitzeltony@googlemai=
+l.com>
+>> wrote:
+>>>
+>>> Hi,
+>>>
+>>> in current OE environment 'file' says:
+>>>
+>>> <...>image/usr/bin/chromium/chrome: ELF 32-bit LSB shared object, ARM,
+>>> EABI5 version 1 (SYSV), dynamically linked, interpreter
+>>> /lib/ld-linux-armhf.so.3, stripped
+>>>
+>>> This file is 4.3G of size and this does not fir into most of my sdcards=
+!
+>>>
+>>> One note: I have an elder environment: meta-browser
+>>> c79cf6c7811afd2cd167e8967e3c29b1e797371e. There chrome binary is
+>>> detected as not stripped and properly stripped on do_package.
+>>>
+>>> Any idea why it is detected as stripped?
+>>
+>>
+>> I have a vague recollection that 'file' and other tools can get very
+>> confused when given 32 bit executables that are larger than 4 GB. It may
+>> make sense to build a non-debug version to begin with to get around this=
+.
+>
+>
+> I chatted with rakuco who's done nice work with up to date chromium in
+> meta-crosswalk, he's got some relevant commits related to this:
+>
+> https://github.com/rakuco/meta-crosswalk/commit/5aae1539c3d62b295dba40f49=
+4397c0797140b0f
+> https://github.com/rakuco/meta-crosswalk/commit/c56aa2bf047d3a01e14f4f9bf=
+e5f88664b333f36
+>
+> On a related note, this good work is currently a bit hidden in
+> meta-crosswalk -- is there a chance we could get this combined with
+> meta-browser (or whatever place makes sense)? I know next to nothing abou=
+t
+> chromium packaging so CCing Raphael and the meta-browser maintainers for
+> comments.
+>
+That is interesting. If your suspicion is correct, we are very close
+to the edge of file working properly or not. With meta-browser
+c79cf6c7811afd2cd167e8967e3c29b1e797371e (16 commits behind master) I
+get a proper detected and then split chromium. With meta-browser
+master head file incorrectly reports that chrome is split already. I
+did not check the exact size numbers but my file browser reports 4.3G
+for both cases.
 
-diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy.inc b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-index 0a93dc4..12f16c3 100644
---- a/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-+++ b/meta-python/recipes-devtools/python/python-sqlalchemy.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=452f4b8adb0feba42e5be5f1fbfbf538"
- PYPI_PACKAGE = "SQLAlchemy"
- inherit pypi
- 
--SRC_URI[md5sum] = "3de387eddb4012083a4562928c511e43"
--SRC_URI[sha256sum] = "76f76965e9a968ba3aecd2a8bc0d991cea04fd9a182e6c95c81f1551487b0211"
-+SRC_URI[md5sum] = "6353eb8223b8476bb0399c28adff5850"
-+SRC_URI[sha256sum] = "2a98ac87b30eaa2bee1f1044848b9590e476e7f93d033c6542e60b993a5cf898"
- 
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-json \
-diff --git a/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.11.bb b/meta-python/recipes-devtools/python/python-sqlalchemy_1.1.13.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-sqlalchemy_1.1.11.bb
-rename to meta-python/recipes-devtools/python/python-sqlalchemy_1.1.13.bb
-diff --git a/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.11.bb b/meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.13.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.11.bb
-rename to meta-python/recipes-devtools/python/python3-sqlalchemy_1.1.13.bb
--- 
-2.7.4
+Just to gather further information I think about bisecting meta-browser.
 
+Thanks
+
+Andreas
 
