@@ -1,24 +1,53 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F1B1478466
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 90ED5601A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 19:36:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7EJapIY008781
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Mon, 14 Aug 2017 19:38:53 +0000 (UTC)
+Received: by mail-ua0-f179.google.com with SMTP id f9so40509919uaf.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 12:36:51 -0700 (PDT)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Mon, 14 Aug 2017 12:36:51 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 14 Aug 2017 12:36:51 -0700
-Message-ID: <20170814193651.249819-1-jslater@windriver.com>
-X-Mailer: git-send-email 2.13.0
+	Mon, 14 Aug 2017 12:38:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=jTlPO63tE+a1A+sMq+JRUs2TlZKhr2IdRYtUanmsJSI=;
+	b=Vjop1g7SPaHKRnWN3fQE0Yumv/9j29nl/gFY+zsm3QPNo4KVAoYJ4l0X8KPWSOfFON
+	r8MeSpPZAkpGAnioziCH6KRSkuuUZV6J0mH+YdC75MiDWlmnI4L9GEigRvtSHeBG6LNO
+	oolcsuFhCLd8PWmk92yF/KyNDU4/M5XppTvSE5RHGvXLbfSdkCqfdcK0ZHHEQL/Oj3uT
+	tpEghkp2xCEOYTbh/T4K+qaC2K5bczw4YyDzYbmWzD9GMEWxK+Gj2Ql65FqhyMeu5cMe
+	YaZ+F/he6sWuc/yX1vO7TKU2MYAgTa0f/dbqg3pxE+ZrTmtHjHBuL3hNt799PPIbTxmn
+	8hEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=jTlPO63tE+a1A+sMq+JRUs2TlZKhr2IdRYtUanmsJSI=;
+	b=ObzQX9xNR+OfAQZGSnh3ShIvhJCqgELowlPPzpw1CGNAMfTZdq2hV0rNSsiQ7Ph/C5
+	uAB0sgPIT/ISfR2BOTbEUWFJZSjQE+lR04tZVLjRkaa7gKPVBTWpXA4lSGOiunahLSE/
+	Mkzlsm10QoFuSHcij8JK+CNHPkAvMkEwDcaPErOUaMF1fe3n8k+b7y7LlvO3SzQZDGNy
+	ACbyHjag8n0LFCqPrvr9lzOZy/clBOeF8APXLBGQb9/BnntMwiHCZxFOZrh0C74PrK25
+	NWPTwL0/Gf9moq/dcQChaUetimvgJX+CPPKPAF32VmPLczr0ZS7BxV37VBvqNckRkr+W
+	/8Kw==
+X-Gm-Message-State: AHYfb5gJ47ukrakD3vYgMSbLM5adFmFYWgAgGEMcT9cPeEtwqVTi/YmL
+	vM67Ny/Ky39udjk1uhlKGm+L87PthA==
+X-Received: by 10.176.90.193 with SMTP id x1mr15506469uae.129.1502739534327;
+	Mon, 14 Aug 2017 12:38:54 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][v2][PATCH 1/1] php: move to version 7.1.8 from 7.1.7
+Received: by 10.159.51.10 with HTTP; Mon, 14 Aug 2017 12:38:53 -0700 (PDT)
+In-Reply-To: <CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
+References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
+	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
+	<CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
+	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 14 Aug 2017 21:38:53 +0200
+Message-ID: <CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
+To: Jussi Kukkonen <jussi.kukkonen@intel.com>
+Cc: Otavio Salvador <otavio@ossystems.com.br>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: chromium detected as stripped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,48 +60,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Aug 2017 19:36:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 14 Aug 2017 19:38:53 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Only change is source version.
+On Mon, Aug 14, 2017 at 4:10 PM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> On Mon, Aug 14, 2017 at 12:22 PM, Jussi Kukkonen
+> <jussi.kukkonen@intel.com> wrote:
+>>
+>>
+>> I chatted with rakuco who's done nice work with up to date chromium in
+>> meta-crosswalk, he's got some relevant commits related to this:
+>>
+>> https://github.com/rakuco/meta-crosswalk/commit/5aae1539c3d62b295dba40f4=
+94397c0797140b0f
+>> https://github.com/rakuco/meta-crosswalk/commit/c56aa2bf047d3a01e14f4f9b=
+fe5f88664b333f36
+>>
+>> On a related note, this good work is currently a bit hidden in
+>> meta-crosswalk -- is there a chance we could get this combined with
+>> meta-browser (or whatever place makes sense)? I know next to nothing abo=
+ut
+>> chromium packaging so CCing Raphael and the meta-browser maintainers for
+>> comments.
+>>
+> That is interesting. If your suspicion is correct, we are very close
+> to the edge of file working properly or not. With meta-browser
+> c79cf6c7811afd2cd167e8967e3c29b1e797371e (16 commits behind master) I
+> get a proper detected and then split chromium. With meta-browser
+> master head file incorrectly reports that chrome is split already. I
+> did not check the exact size numbers but my file browser reports 4.3G
+> for both cases.
+>
+> Just to gather further information I think about bisecting meta-browser.
+>
+After first bisect build I checked size:: 4299018288 bytes / 2^32 is
+4294967296 - so no need for further bisecting. Thanks Jussi for the
+hint.
 
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../php/{php-7.1.7 => php-7.1.8}/0001-Specify-tag-with-libtool.patch  | 0
- .../{php-7.1.7 => php-7.1.8}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch   | 0
- meta-oe/recipes-devtools/php/{php_7.1.7.bb => php_7.1.8.bb}           | 4 ++--
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/php/{php-7.1.7 => php-7.1.8}/0001-Specify-tag-with-libtool.patch (100%)
- rename meta-oe/recipes-devtools/php/{php-7.1.7 => php-7.1.8}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch (100%)
- rename meta-oe/recipes-devtools/php/{php_7.1.7.bb => php_7.1.8.bb} (79%)
+For now I'll choose old version - have not much time to take care.
 
-diff --git a/meta-oe/recipes-devtools/php/php-7.1.7/0001-Specify-tag-with-libtool.patch b/meta-oe/recipes-devtools/php/php-7.1.8/0001-Specify-tag-with-libtool.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/php/php-7.1.7/0001-Specify-tag-with-libtool.patch
-rename to meta-oe/recipes-devtools/php/php-7.1.8/0001-Specify-tag-with-libtool.patch
-diff --git a/meta-oe/recipes-devtools/php/php-7.1.7/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.8/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-similarity index 100%
-rename from meta-oe/recipes-devtools/php/php-7.1.7/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-rename to meta-oe/recipes-devtools/php/php-7.1.8/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
-diff --git a/meta-oe/recipes-devtools/php/php_7.1.7.bb b/meta-oe/recipes-devtools/php/php_7.1.8.bb
-similarity index 79%
-rename from meta-oe/recipes-devtools/php/php_7.1.7.bb
-rename to meta-oe/recipes-devtools/php/php_7.1.8.bb
-index ebf9237..a66bcf8 100644
---- a/meta-oe/recipes-devtools/php/php_7.1.7.bb
-+++ b/meta-oe/recipes-devtools/php/php_7.1.8.bb
-@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0af599f66d0461c5837c695fcbc5c1e"
- SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
-             file://0001-Specify-tag-with-libtool.patch \
-            "
--SRC_URI[md5sum] = "22e11a372f99afbbbf3f46a31e8a82ca"
--SRC_URI[sha256sum] = "079b6792987f38dc485f92258c04f9e02dedd593f9d260ebe725343f812d1ff8"
-+SRC_URI[md5sum] = "d22451dc20bbdf4b8bb656dc787c2a36"
-+SRC_URI[sha256sum] = "7064a00a9450565190890c7a4be04e646e0be73b2e0f8c46ae34419f343ca2f8"
- 
- PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
-                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
--- 
-2.7.4
-
+Andreas
 
