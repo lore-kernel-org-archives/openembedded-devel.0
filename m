@@ -1,47 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 63CFA78374
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id AC624783CD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 14:14:49 +0000 (UTC)
-Received: by mail-vk0-f46.google.com with SMTP id g189so31725550vke.5
+	Mon, 14 Aug 2017 14:16:18 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id d145so9458930qkc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Aug 2017 07:14:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=DKePMaNXUEQJxnVTd0fh2qwDl1YqRDqSY36rBtBNDuQ=;
-	b=YnjusxDSEyrdTwgv3FKtfjDoc87c31nryre63wMaedcDJQG9bJOZ800i1fJPtS9Dxo
-	EAyakBm2l3TKXd9GZnM7XB23JTcdWKhDAPLWnBj7OzDpJKSpPW0h2r5q2nlSHpz1/X61
-	DWy/S3y+TNe3B0HN1X010uyqGA1abbZjfBXtHmDRg7ytjSUQo1QoplXj/jG0hjD8nkxD
-	nUFH8Xrf18AFKB+v5BO563Kzoxq6RteL3ywWfOQbo0LHsT1hXcUNkZPLSfGbPQQ2Lt4W
-	pc/lquVTfMlJFe5cimaPEej4+cPi+f3o6MikL7N67vTcPAeeXAYhJo9pFxz53ZF0fjjC
-	+qgw==
+	Mon, 14 Aug 2017 07:16:20 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=DKePMaNXUEQJxnVTd0fh2qwDl1YqRDqSY36rBtBNDuQ=;
-	b=a+kyaUDaaUL3PQNBp2qU/5uSvS2fXOEdwVaYD9GN/PkBZYatKnRwsFmIIiakYyhbhl
-	gp88spDqYT1CLJ1hC2B+nME9qqGhIoiEBoFjIlyb2t1b4xYPjw/DqNLB73wHe9Eu1kId
-	a2bnRKAqNw5GYxi/hrCD4jsi/UU955qAxJ3cxi+5poytZZQCtNV3UXml3Th4SV/ztcoU
-	O89060BsDITUZB9TqCAGdyoXfd066P/L2ZrdC7RWAzlBt19zgQGw29iIhVJoonUTwGSM
-	hYZoeDhPWW4ymAIhx06gOd8rnqFNSYl9gXS+1NvOzgLw0/gT5BN5gzwHCh3ZaQDput9J
-	LMYA==
-X-Gm-Message-State: AHYfb5ib+xqK0VcEx5Za60JrWn+WWCRfjnj+TzbrvMfvyMPA+FXTPLTs
-	3d0Sm5KHNSjjeCZrN3+yJZxHDyAIkQ==
-X-Received: by 10.31.63.151 with SMTP id m145mr14993375vka.59.1502720091157;
-	Mon, 14 Aug 2017 07:14:51 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Mon, 14 Aug 2017 07:14:50 -0700 (PDT)
-In-Reply-To: <b53934ef-2480-8d0e-27ce-fe2fc1eb4d39@laposte.net>
-References: <b53934ef-2480-8d0e-27ce-fe2fc1eb4d39@laposte.net>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 14 Aug 2017 16:14:50 +0200
-Message-ID: <CA+chaQdv1yxXbfJpd7mucwn0xHiW2XXZJPUA8s=Q_sqeeDAatw@mail.gmail.com>
-To: idealsim <idealsim@laposte.net>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [qtwebengine] build failed in pyro branch
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OUNCyldyd9MTsrWnAnAox2IoglDuJG7s6OcMebg1dcQ=;
+	b=dbFSNkhYp9VWptaR8u7EoSGsUD55zINtQqhAj6Abn/AMDGX/HZqLDnKLPa2XO4hijO
+	ONqkFY4box/fvEsZj+feSSsJkx+i3hVkQBw5DTVs8dcju3h22EUIV2Cj6xT4IS+1dfPv
+	ftwnqL0hhJexrEBpvW22am/2AuqkWekL1YbrkRGRlsBdSCTnySu0nVr7ksB6U8e1qx1T
+	7PqLvfEUBt6e54E72zGFkvBUByzXA5+FxfpnskGfk2QKEmNWUHC6KhwfLf11d0Yd6Ud8
+	SRHoacMnafDFrceRf/4IPmWkJzdD4YhP2XrL0AoY6SG2Dl37a/I8hvcyel+AXlt8GPa7
+	i+OQ==
+X-Gm-Message-State: AHYfb5iTimq7tcdrS0fnTW929gY3iuBNr5zTnSEfyihbFBCIZalkKlva
+	m6tO8JJDqMpBdxN1YRg=
+X-Received: by 10.55.77.194 with SMTP id a185mr29237340qkb.338.1502720179501; 
+	Mon, 14 Aug 2017 07:16:19 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id
+	d184sm4972598qkc.68.2017.08.14.07.16.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 14 Aug 2017 07:16:18 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 14 Aug 2017 10:16:07 -0400
+Message-Id: <1502720167-20094-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pytest: update to version 3.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,199 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Aug 2017 14:14:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 14 Aug 2017 14:16:18 -0000
 
->> //| collect2: fatal error: ld terminated with signal 9 [Killed]//
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
+ .../python/{python-pytest_3.2.0.bb => python-pytest_3.2.1.bb}         | 0
+ .../python/{python3-pytest_3.2.0.bb => python3-pytest_3.2.1.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pytest_3.2.0.bb => python-pytest_3.2.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pytest_3.2.0.bb => python3-pytest_3.2.1.bb} (100%)
 
-You've probably run out of memory and OOMK killed the linker.
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index bfa6e46..5dd1783 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -2,8 +2,8 @@ SUMMARY = "Simple powerful teting with python"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
+ 
+-SRC_URI[md5sum] = "f7c0ffc970b26bdf8e6ba1c67af2ea79"
+-SRC_URI[sha256sum] = "0225cf10b9e173f84729d5f4648211458a222c6e53a77a85e104bc5f31c244ee"
++SRC_URI[md5sum] = "635976c2a9b2c2599d69fb0ad5abaf7d"
++SRC_URI[sha256sum] = "4c2159d2be2b4e13fa293e7a72bdf2f06848a017150d5c6d35112ce51cfd74ce"
+ 
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pytest_3.2.0.bb b/meta-python/recipes-devtools/python/python-pytest_3.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pytest_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python-pytest_3.2.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.2.0.bb b/meta-python/recipes-devtools/python/python3-pytest_3.2.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pytest_3.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-pytest_3.2.1.bb
+-- 
+2.7.4
 
-Try with bigger swap or switch from bfd to gold.
-
-On Mon, Aug 14, 2017 at 3:26 PM, idealsim <idealsim@laposte.net> wrote:
-
-> Hi all, i'm trying to build webengine in pyro branch but i have this erro=
-r
-> during the build :
->
-> /| ERROR: oe_runmake failed//
-> //| make[3]: Entering directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/build/src/core/api'//
-> //| compiling /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9=
-h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qtwebenginecoreglobal.cpp//
-> //| compiling /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9=
-h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qwebenginecookiestore.cpp//
-> //| compiling /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9=
-h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qwebengineurlrequestinfo.cpp//
-> //| compiling /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9=
-h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qwebengineurlrequestjob.cpp//
-> //| compiling /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9=
-h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebeng
-> ineurlschemehandler.cpp//
-> //| generating .moc/moc_predefs.h//
-> //| moc /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qwebenginecookiestore.h//
-> //| moc /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebeng
-> ineurlrequestinterceptor.h//
-> //| moc /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/
-> qwebengineurlrequestjob.h//
-> //| moc /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/api/qwebeng
-> ineurlschemehandler.h//
-> //| compiling .moc/moc_qwebenginecookiestore.cpp//
-> //| compiling .moc/moc_qwebengineurlrequestinterceptor.cpp//
-> //| compiling .moc/moc_qwebengineurlrequestjob.cpp//
-> //| compiling .moc/moc_qwebengineurlschemehandler.cpp//
-> //| rm -f Release/libqtwebenginecoreapi.a//
-> //| arm-poky-linux-gnueabi-ar cqs Release/libqtwebenginecoreapi.a
-> .obj/qtwebenginecoreglobal.o .obj/qwebenginecookiestore.o
-> .obj/qwebengineurlrequestinfo.o .obj/qwebengineurlrequestjob.o
-> .obj/qwebengineurlschemehandler.o .obj/moc_qwebenginecookiestore.o
-> .obj/moc_qwebengineurlrequestinterceptor.o .obj/moc_qwebengineurlrequestj=
-ob.o
-> .obj/moc_qwebengineurlschemehandler.o//
-> //| make[3]: Leaving directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/build/src/core/api'//
-> //| ( test -e Makefile.core_module || /media/modjo/data1TO/yocto/pyr
-> o/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/recipe-sysroot-native/usr/bin/qt5/qmake -o Makefile.core_module
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/git/src/core/core_module.pro
-> GYP_CONFIG+=3Duse_system_yasm GYP_CONFIG+=3Dgenerate_character_data=3D0
-> WEBENGINE_CONFIG+=3Duse_system_flac WEBENGINE_CONFIG+=3Duse_system_libeve=
-nt
-> WEBENGINE_CONFIG+=3Duse_system_libwebp WEBENGINE_CONFIG+=3Duse_system_lib=
-xslt
-> WEBENGINE_CONFIG+=3Duse_system_speex 'QMAKE_CXX=3Darm-poky-linux-gnueabi-=
-g++
-> -march=3Darmv7-a -marm -mfpu=3Dneon  -mfloat-abi=3Dhard -mcpu=3Dcortex-a9
-> --sysroot=3D/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/
-> work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtwebengine
-> /5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot'
-> 'QMAKE_CC=3Darm-poky-linux-gnueabi-gcc  -march=3Darmv7-a -marm -mfpu=3Dne=
-on
-> -mfloat-abi=3Dhard -mcpu=3Dcortex-a9 --sysroot=3D/media/modjo/data1TO
-> /yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-
-> poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/=
-recipe-sysroot'
-> 'QMAKE_LINK=3Darm-poky-linux-gnueabi-g++  -march=3Darmv7-a -marm -mfpu=3D=
-neon
-> -mfloat-abi=3Dhard -mcpu=3Dcortex-a9 --sysroot=3D/media/modjo/data1TO
-> /yocto/pyro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-
-> poky-linux-gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/=
-recipe-sysroot'
-> 'QMAKE_CFLAGS=3D -O2 -pipe -g -feliminate-unused-debug-types
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0=3D/usr/
-> src/debug/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot-nati=
-ve=3D
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot=3D '
-> 'QMAKE_CXXFLAGS=3D -O2 -pipe -g -feliminate-unused-debug-types
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0=3D/usr/
-> src/debug/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot-nati=
-ve=3D
-> -fdebug-prefix-map=3D/media/modjo/data1TO/yocto/pyro/quadBuild
-> /tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/
-> qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/recipe-sysroot=3D
-> -fvisibility-inlines-hidden' 'QMAKE_AR=3Darm-poky-linux-gnueabi-ar cqs'
-> -after ) && make -f Makefile.core_module//
-> //| make[3]: Entering directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/build/src/core'//
-> //| creating linker version script QtWebEngineCore.version//
-> //| rm -f libQt5WebEngineCore.so.5.8.0 libQt5WebEngineCore.so
-> libQt5WebEngineCore.so.5 libQt5WebEngineCore.so.5.8//
-> //| linking ../../lib/libQt5WebEngineCore.so.5.8.0//
-> //| collect2: fatal error: ld terminated with signal 9 [Killed]//
-> //| compilation terminated.//
-> //| Makefile.core_module:157: recipe for target
-> '../../lib/libQt5WebEngineCore.so.5.8.0' failed//
-> //| make[3]: *** [../../lib/libQt5WebEngineCore.so.5.8.0] Error 1//
-> //| make[3]: Leaving directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/build/src/core'//
-> //| Makefile:158: recipe for target 'sub-core_module-pro-make_first'
-> failed//
-> //| make[2]: *** [sub-core_module-pro-make_first] Error 2//
-> //| make[2]: Leaving directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd
-> 92-r0/build/src/core'//
-> //| Makefile:49: recipe for target 'sub-core-make_first' failed//
-> //| make[1]: *** [sub-core-make_first] Error 2//
-> //| make[1]: Leaving directory '/media/modjo/data1TO/yocto/py
-> ro/quadBuild/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-
-> gnueabi/qtwebengine/5.8.0+gitAUTOINC+d740d6a7db_15d257fd92-r0/build/src'/=
-/
-> //| Makefile:44: recipe for target 'sub-src-make_first' failed//
-> //| make: *** [sub-src-make_first] Error 2//
-> //| ERROR: Function failed: do_compile (log file is located at
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/cortexa9h
-> f-neon-mx6qdl-poky-linux-gnueabi/qtwebengine/5.8.0+
-> gitAUTOINC+d740d6a7db_15d257fd92-r0/temp/log.do_compile.30193)//
-> //ERROR: Task (/media/modjo/data1TO/yocto/pyro/sources/meta-qt5/recipes-q=
-t
-> /qt5/qtwebengine_git.bb:do_compile) failed with exit code '1'//
-> //NOTE: Tasks Summary: Attempted 6306 tasks of which 6175 didn't need to
-> be rerun and 1 failed.//
-> //
-> //Summary: 1 task failed://
-> ///media/modjo/data1TO/yocto/pyro/sources/meta-qt5/recipes-q
-> t/qt5/qtwebengine_git.bb:do_compile//
-> //Summary: There was 1 WARNING message shown.//
-> //Summary: There were 2 ERROR messages shown, returning a non-zero exit
-> code./
->
-> an idea where is the issue ?
->
-> regards
->
-> Micka=C3=ABl
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
