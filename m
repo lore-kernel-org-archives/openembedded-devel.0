@@ -1,38 +1,24 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 4433178461
+Return-Path: <jason.wessel@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 2208578252
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 16:23:02 +0000 (UTC)
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Aug 2017 09:23:04 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,378,1498546800"; d="scan'208";a="140534414"
-Received: from pgarraul-mobl.ger.corp.intel.com (HELO
-	rkubodac-desk.ger.corp.intel.com) ([10.252.27.114])
-	by fmsmga006.fm.intel.com with ESMTP; 15 Aug 2017 09:23:02 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com> (Khem Raj's
-	message of "Tue, 15 Aug 2017 09:19:07 -0700")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
-	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
-	<CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
-	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
-	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
-	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
-	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
-	<8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.2 (gnu/linux)
-Date: Tue, 15 Aug 2017 18:23:01 +0200
-Message-ID: <87r2wcajh6.fsf@rkubodac-desk.ger.corp.intel.com>
+	Tue, 15 Aug 2017 19:24:23 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7FJOOxl017220
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Aug 2017 12:24:24 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 15 Aug 2017 12:24:24 -0700
+From: Jason Wessel <jason.wessel@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 15 Aug 2017 12:24:24 -0700
+Message-ID: <20170815192424.129143-1-jason.wessel@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: chromium detected as stripped
+Subject: [meta-oe][PATCH] mailx: Force mailx to build with openssl10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,21 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Aug 2017 16:23:03 -0000
+X-List-Received-Date: Tue, 15 Aug 2017 19:24:24 -0000
 Content-Type: text/plain
 
-Khem Raj <raj.khem@gmail.com> writes:
+The latest changes in oe-core switch to using openssl 1.1.  The
+SSLv3_client_method and RAND_egd functions are removed in the openssl
+1.1. This causes mailx to fail to compile.
 
-> what are main architectures targetted with crosswalk ? I think scope is
-> important, since meta-browser supports, almost all oe-core supported
-> architectures. including x86/arm/mips/ppc, any cross build patches are
-> required in anycase, but architecture patches will be additional if you
-> were only considering a subset of architectures.
+For now we can use openssl10 in the same manner that openssh is doing.
+At the point in time that openssl10 goes away the code for openssl in
+mailx will have to be altered.
 
-There's nothing Crosswalk-related in my Chromium recipe; it's in
-meta-crosswalk simply due to a historical accident and the fact that I
-haven't found a proper home for it so far.
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+---
+ meta-oe/recipes-extended/mailx/mailx_12.5-5.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-With that said, I've tested my builds with x86, x86-64, ARMv7 (IIRC
-Chromium doesn't support earlier ARM processors) and aarch64.
+diff --git a/meta-oe/recipes-extended/mailx/mailx_12.5-5.bb b/meta-oe/recipes-extended/mailx/mailx_12.5-5.bb
+index 9dd710a71..0a191a00c 100644
+--- a/meta-oe/recipes-extended/mailx/mailx_12.5-5.bb
++++ b/meta-oe/recipes-extended/mailx/mailx_12.5-5.bb
+@@ -9,7 +9,7 @@ SECTION = "console/network"
+ LICENSE = "BSD & MPL-1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4202a0a62910cf94f7af8a3436a2a2dd"
+ 
+-DEPENDS = "openssl"
++DEPENDS = "openssl10"
+ 
+ SRC_URI = "http://snapshot.debian.org/archive/debian/20160728T043443Z/pool/main/h/heirloom-mailx/heirloom-mailx_12.5.orig.tar.gz;name=archive \
+            file://0001-Don-t-reuse-weak-symbol-optopt-to-fix-FTBFS-on-mips.patch \
+-- 
+2.11.0
+
 
