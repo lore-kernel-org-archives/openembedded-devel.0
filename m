@@ -1,49 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
+Return-Path: <matt.hoosier@gmail.com>
 Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
 	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D015C6FFFE
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 10:23:01 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id r199so1338687vke.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 03:23:03 -0700 (PDT)
+	by mail.openembedded.org (Postfix) with ESMTP id 1BDE378492
+	for <openembedded-devel@openembedded.org>;
+	Tue, 15 Aug 2017 13:02:31 +0000 (UTC)
+Received: by mail-vk0-f41.google.com with SMTP id d124so2289082vkf.2
+	for <openembedded-devel@openembedded.org>;
+	Tue, 15 Aug 2017 06:02:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=siBbHROyJOpB+vvoFrRhtLw1eesy3EjNsAlrXw6M0cE=;
-	b=KDmUdyV/xdLDgeqtZsx/nftStDpZMekwQmWIGmF5Q/22wvJL1Vm4hIK/6EBqahJyCW
-	xeQ11RKK2sD0oYt1D9fspQF7mh1o/0eoSc9lx2FW6cjfrQ/cvFz8WfLY+YwVzq2PArHA
-	r+NxjTp7bxb17C2jVMZHluW9ivsb5zarmEHPY+3tlaT4O3kr6oVUyJw6iVohtn/iGpcv
-	6RD5qtJoZtJNeFxD0feHpf7vkrO4m4TIkSgG/RSmuNYMuLpispGjoZLOFSpBm1+vX4aK
-	9W1iKqIEMKaoVrr4iohME+e5PlKHBHUyT2t8kQgdI1EUijlpiFtXKNvv3eCQkVWN3AM3
-	0vBg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=679Sa6XV0EFdrJzYE9aqz9Ig+Bc0jbsdzsm+5mOLUTk=;
+	b=id5VBb8YGy2bx9A0aCN+3oFvqZZENbocNSIvkuL6LIVIoY5Q596h5ZpzFfVFl4PEcm
+	sH8fdRa+q/rwgp2Q0+PggjrypxBkYmsgaOpHcEKZCJ15PUp8ritcwRMuKsCGjsFhrrGb
+	sCRAF4QZMbX5625gw5dZPuMOLBEjjIgAk0h5Hq1hSQ+FA76maH6e4jXOOf2GfoMo8Ihw
+	E4bRQqgXD1Xlsh5qs9htgz+2UFMRFQE/821hDj/+PoQmy1Zk1L2iM2HUND34TbHtbEuV
+	e+Ia6wGRj6QiUUA1eIaQkxGC8Kz0x1EKdWGDpcVgKQJT/XOtC02oe7NXvzzrKUHeuqV9
+	1giQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=siBbHROyJOpB+vvoFrRhtLw1eesy3EjNsAlrXw6M0cE=;
-	b=GGDcRiaimpqgSKEmVWsnC0WsG2+gghus+QWoxAXixVo9QSKhQrLmIjcWLYnCdIKpAw
-	Hp9ms79+YIbGaG9/RNrSbFtKP6s4elcV1OOK6AK7uHgT0fCWbvs1zAbtEt3i+O6mRsM8
-	CKhSsyhSxwjPvVOZ0Nltk63vBz5CVbhjV4Wk8khqqpvhyp0NuhFAC+cExzKUA08BKp2q
-	MpZjLX1h7BC2ExgeldV0ph0yXQQ37f0VwaAM5+3zh5S8IWdQOBM3iuqzBAHgF/uzb0xD
-	y7NQ1E2BT5UDLh+0HluPMWjqYsxwqmKzsM1OE6JXoW7zf7MchHgwtEEcEzdfaN1h31G2
-	w/lA==
-X-Gm-Message-State: AHYfb5iCTu+5mJoPSwmriUrcOguBVXxo5Hu8vpmw4WCVV5OAOjzfTWXy
-	haa8J2AiUKazaidreFof0q4dNT7uQQ==
-X-Received: by 10.31.63.151 with SMTP id m145mr16481522vka.59.1502788940882;
-	Tue, 15 Aug 2017 02:22:20 -0700 (PDT)
+	:message-id:subject:to;
+	bh=679Sa6XV0EFdrJzYE9aqz9Ig+Bc0jbsdzsm+5mOLUTk=;
+	b=avL/kIfhS1+IPWRFxN6Qk4RgTniZ9Lrz6Qau7zoUz6Y23gTIzawG4xX2L6tZJpAaja
+	3VmsouwbhYQwVTIPQTwzZ3YTUM98j1XqUv/pjNsfFhDjw5GkEC71pdDcuky5GMB40HdE
+	8MVojdFJcxGaU3fp9uzxPHgzv/obTaJ3lM8eCeTWyKx2cr21mw0tdOoKVWH53riI1CWK
+	zVGyRsqeGJe9NIwynJUXDqYQ2qdhUl5AQA39qeIbus2MI6wVQGGexGkl4u1YkSEwSdVM
+	L6PaIBJ5aYbO673p9yHC31+wsx4qY7VwXNla17UYjwBiCS73ee0Za42wFKxc9lTwZWU6
+	2Blw==
+X-Gm-Message-State: AHYfb5he0JTS1MbGeb5Q7TS/WKuckcDrpz5MMIAtaiyGEf6w3cPvRWuA
+	fOcAV3o0RWu522FJ8lNqriI3peHyaBl6MWE=
+X-Received: by 10.31.225.133 with SMTP id y127mr15645071vkg.162.1502802152596; 
+	Tue, 15 Aug 2017 06:02:32 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Tue, 15 Aug 2017 02:22:20 -0700 (PDT)
-In-Reply-To: <97F7C8E70D26E94FA7E05578493F65C60E31BBC6@G08CNEXMBPEKD03.g08.fujitsu.local>
-References: <1500946223-25865-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E31BBC6@G08CNEXMBPEKD03.g08.fujitsu.local>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 15 Aug 2017 11:22:20 +0200
-Message-ID: <CA+chaQd2cADxXOpPJX3NDEY3w15oTwJKKGpx8SpA6TmB-2A5BA@mail.gmail.com>
-To: "Huang, Qiyu" <huangqy.fnst@cn.fujitsu.com>
+Received: by 10.176.1.213 with HTTP; Tue, 15 Aug 2017 06:01:52 -0700 (PDT)
+In-Reply-To: <CAJgxT3-uULn7v7QO+i26Y-15jpt2CXsy8LXU5B_VGSo+snbGJw@mail.gmail.com>
+References: <CAJgxT38uSRVXyYaMPPTE_pnDU94txQ9_Gp4nvkv3FLQHE1ABLw@mail.gmail.com>
+	<CAJgxT3-uULn7v7QO+i26Y-15jpt2CXsy8LXU5B_VGSo+snbGJw@mail.gmail.com>
+From: Matt Hoosier <matt.hoosier@gmail.com>
+Date: Tue, 15 Aug 2017 08:01:52 -0500
+Message-ID: <CAJgxT3-Fwi2KJsMezWfvnvDD7WnkK6HzH7FEegfSrzezR5cugw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH v2] qtbase: add ptest
+Subject: Re: [meta-qt5] Minimum required Yocto version for 5.9 branch?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,155 +54,212 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Aug 2017 10:23:02 -0000
+X-List-Received-Date: Tue, 15 Aug 2017 13:02:32 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-pong,
+This is addressed with pull request #62:
 
-it's failing to build as reported by me and Khem, so it won't get merged in
-this form.
+From: Matt Hoosier <matt.hoosier@garmin.com>
+>
+> Date: Mon, 14 Aug 2017 08:04:03 -0500
+>
+> Subject: [PATCH 1/2] qtbase: fix Krogoth build regression from efa8aaf
+>
+>
+>> With
+>
+>
+>>     commit efa8aaf82e580a7d32eaaab48eb92d436f2e222a
+>
+>     Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+>
+>     Date:   Thu Feb  9 00:26:09 2017
+>
+>
+>>     qmake5_base.bbclass: set qt.conf by environment variable again
+>
+>
+>> we stopped pointing ${OE_QMAKE_QTCONF_PATH} at a valid file and
+>
+> instead directed it to a path which was intended not to exist.
+>
+>
+>> The motivation was to permit qtbase/qtbase-native/nativesdk-qtbase
+>
+> to build again after Qt 5.8 started paying attention to the
+>
+> contents of this file.
+>
+>
+>> The change as done in efa8aaf works well enough for Morty and
+>
+> subsequent releases' copies of Bitbake, but fails on earlier
+>
+> releases because they lack the following change:
+>
+>
+>>     commit 2afcbfef2cd1ca568e5225884a8021df38ee3db0
+>
+>     Author: Ross Burton <ross.burton@intel.com>
+>
+>     Date: 2016-07-14 13:56:22
+>
+>
+>>     bitbake: build: don't use $B as the default cwd for functions
+>
+>
+>> The result is that when we build with Krogoth or prior, the body
+>
+> of do_generate_qt_config_file() runs with a cwd of ${B}, which was
+>
+> _not_ the intent of efa8aaf. Because the working directory is ${B},
+>
+> ${OE_QMAKE_QTCONF_PATH} is written in there too. do_configure() --
+>
+> whose cwd is by design also ${B} -- then finds the file 'foodummy',
+>
+> and the build breaks for the reasons outlined in efa8aaf.
+>
+>
+>> This change simply shifts the implementation tactics to suppress
+>
+> the creation of ${OE_QMAKE_QTCONF_PATH} during qtbase rather than rely
+>
+> on unspecified behavior about the cwd of do_generate_qt_config_file().
+>
+>
+>
+This is a backport from the Qt fork of meta-qt5.
 
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-August/114108.html
-
-On Tue, Aug 15, 2017 at 3:21 AM, Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+On Fri, Aug 11, 2017 at 5:16 PM, Matt Hoosier <matt.hoosier@gmail.com>
 wrote:
 
-> ping
+> On Fri, Aug 11, 2017 at 3:11 PM, Matt Hoosier <matt.hoosier@gmail.com>
+> wrote:
 >
-> > -----Original Message-----
-> > From: Huang, Qiyu
-> > Sent: Tuesday, July 25, 2017 9:30 AM
-> > To: openembedded-devel@lists.openembedded.org
-> > Cc: Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > Subject: [oe] [meta-qt5] [PATCH v2] qtbase: add ptest
-> >
-> > Add ptest for qtbase by using provided testsuite.
-> >
-> > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > ---
-> >  .../0001-Delete-qlonglong-and-qulonglong.patch     | 28
-> > ++++++++++++++++++++++
-> >  recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
-> >  recipes-qt/qt5/qtbase_git.bb                       | 17 ++++++++++++-
-> >  3 files changed, 50 insertions(+), 1 deletion(-)  create mode 100644
-> > recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> >  create mode 100644 recipes-qt/qt5/qtbase/run-ptest
-> >
-> > diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
-> qulonglong.patch
-> > b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> > new file mode 100644
-> > index 0000000..975cd28
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
-> > @@ -0,0 +1,28 @@
-> > +From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00
-> > 2001
-> > +From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > +Date: Wed, 7 Jun 2017 21:00:49 +0900
-> > +Subject: [PATCH] Delete qlonglong and qulonglong
-> > +
-> > +Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > +---
-> > + tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
-> > + 1 file changed, 2 deletions(-)
-> > +
-> > +diff --git
-> > +a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +index 09458bd..59a120e 100644
-> > +--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > ++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
-> > +@@ -5,10 +5,8 @@ SUBDIRS=\
-> > +     char32_t \
-> > +     int \
-> > +     long \
-> > +-    qlonglong \
-> > +     qptrdiff \
-> > +     quintptr \
-> > +-    qulonglong \
-> > +     schar \
-> > +     short \
-> > +     uchar \
-> > +--
-> > +2.7.4
-> > +
-> > diff --git a/recipes-qt/qt5/qtbase/run-ptest
-> b/recipes-qt/qt5/qtbase/run-ptest
-> > new file mode 100644 index 0000000..044f834
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qtbase/run-ptest
-> > @@ -0,0 +1,6 @@
-> > +#!/bin/sh
-> > +
-> > +for x in ` awk '{print $1}' tst_list `;do
-> > +    ./${x};
-> > +done
-> > +
-> > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index
-> > 5cfbcfa..8464873 100644
-> > --- a/recipes-qt/qt5/qtbase_git.bb
-> > +++ b/recipes-qt/qt5/qtbase_git.bb
-> > @@ -23,8 +23,12 @@ SRC_URI += "\
-> >      file://0005-configure-bump-path-length-from-256-to-512-
-> character.patch
-> > \
-> >      file://0009-Disable-all-unknown-features-instead-of-erroring-out.patch
-> \
-> >
-> > file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch
-> > \
-> > +    file://0001-Delete-qlonglong-and-qulonglong.patch \
-> > +    file://run-ptest \
-> >  "
-> >
-> > +inherit ptest
-> > +
-> >  # only for target qtbase
-> >  SRC_URI += "\
-> >      file://0008-configure-paths-for-target-qmake-properly.patch \ @@
-> -48,7
-> > +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
-> >  PACKAGECONFIG_RELEASE ?= "release"
-> >  # This is in qt5.inc, because qtwebkit-examples are using it to enable
-> > ca-certificates dependency  # PACKAGECONFIG_OPENSSL ?= "openssl"
-> > -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype"
-> > +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs freetype
-> > tests"
-> >
-> >  PACKAGECONFIG ?= " \
-> >      ${PACKAGECONFIG_RELEASE} \
-> > @@ -171,6 +175,17 @@ do_configure() {
-> >          ${QT_CONFIG_FLAGS}
-> >  }
-> >
-> > +fakeroot do_install_ptest() {
-> > +    mkdir -p ${D}${PTEST_PATH}
-> > +    t=${D}${PTEST_PATH}
-> > +    for var in ` find ${B}/tests/auto/ -name tst_*`; do
-> > +        if [ not ` echo ${var##*/} | grep '\.'` ]; then
-> > +            echo ${var##*/} >> ${t}/tst_list
-> > +            install -m 0644 ${var} ${t}
-> > +        fi
-> > +    done
-> > +}
-> > +
-> >  do_install_append() {
-> >      # Avoid qmake error "Cannot read
-> > [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or
-> directory"
-> >      touch
-> > ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
-> > --
-> > 2.7.4
+>> Hi,
+>>
+>> I observe that qtbase-native from jansa/master-5.9 fails on releases
+>> versions of Yocto prior to 2.2 with a message like:
+>>
+>> | + /home/hoosier/projects/consumer/tools/yocto/build/tmp/work/
+>>> x86_64-linux/qtbase-native/5.9.1+gitAUTOINC+160533328c-r0/build/bin/qma=
+ke
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/work/
+>>> x86_64-linux/qtbase-native/5.9.1+gitAUTOINC+160533328c-r0/git --
+>>> -opensource -confirm-license -sysroot /home/hoosier/projects/consume
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux -no-gcc-sysroot
+>>> -system-zlib -no-libjpeg -no-libpng -no-gif -no-accessibility -no-cups
+>>> -no-gui -no-qml-debug -no-sql-mysql -no-sql-sqlite -no-opengl -no-opens=
+sl
+>>> -no-xcb -no-icu -verbose -release -prefix /home/hoosier/projects/consum=
+e
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux/usr -hostprefix
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysroots/x86_64-l=
+inux/usr
+>>> -bindir /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/bin/qt5 -hostbindir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/bin/qt5 -libdir /home/hoosier/projects/consum=
+e
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux/usr/lib -hostlibdir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysroots/x86_64-l=
+inux/usr/lib
+>>> -headerdir /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/include/qt5 -archdatadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/lib/qt5 -datadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/share/qt5 -hostdatadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/lib/qt5 -docdir /home/hoosier/projects/consum=
+e
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux/usr/share/doc/qt5
+>>> -sysconfdir /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysro=
+ots/x86_64-linux/etc/qt5
+>>> -no-glib -no-iconv -silent -nomake examples -nomake tests -no-rpath
+>>> -platform linux-oe-g++
+>>> | Command line: -opensource -confirm-license -sysroot
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysroots/x86_64-l=
+inux
+>>> -no-gcc-sysroot -system-zlib -no-libjpeg -no-libpng -no-gif
+>>> -no-accessibility -no-cups -no-gui -no-qml-debug -no-sql-mysql
+>>> -no-sql-sqlite -no-opengl -no-openssl -no-xcb -no-icu -verbose -release
+>>> -prefix /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysroots/=
+x86_64-linux/usr
+>>> -hostprefix /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysro=
+ots/x86_64-linux/usr
+>>> -bindir /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/bin/qt5 -hostbindir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/bin/qt5 -libdir /home/hoosier/projects/consum=
+e
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux/usr/lib -hostlibdir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysroots/x86_64-l=
+inux/usr/lib
+>>> -headerdir /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/include/qt5 -archdatadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/lib/qt5 -datadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/share/qt5 -hostdatadir
+>>> /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/lib/qt5 -docdir /home/hoosier/projects/consum=
+e
+>>> r/tools/yocto/build/tmp/sysroots/x86_64-linux/usr/share/doc/qt5
+>>> -sysconfdir /home/hoosier/projects/consumer/tools/yocto/build/tmp/sysro=
+ots/x86_64-linux/etc/qt5
+>>> -no-glib -no-iconv -silent -nomake examples -nomake tests -no-rpath
+>>> -platform linux-oe-g++
+>>> | Cannot read /home/hoosier/projects/consumer/tools/yocto/build/tmp/
+>>> sysroots/x86_64-linux/usr/lib/qt5/mkspecs/linux-oe-g++/qmake.conf: No
+>>> such file or directory
+>>
+>>
+>> Does anybody know what might be going on with this error?
+>>
+>>
 >
+> After a bit of digging, I find that the following commit in poky is the
+> one that's required to let the 5.9 branch of meta-qt5 build correctly wit=
+h
+> Yocto <=3D 2.1:
 >
+> Author: Ross Burton <ross.burton@intel.com>  2016-07-14 13:56:22
+>> Committer: Richard Purdie <richard.purdie@linuxfoundation.org>
+>>  2016-07-19 02:56:50
+>> Parent: faa726824dfb5bc0141919bb16c0d0069a3da69e (bitbake:
+>> lib/bb/build.py: decode the command as UTF-8)
+>> Branches: remotes/origin/morty, remotes/origin/pyro
+>> Follows: 2.2_M1
+>> Precedes: 2.2_M2
+>>     bitbake: build: don't use $B as the default cwd for functions
+>>
+>>     When bitbake executes a shell or Python function it can cd/chdir()
+>> into a
+>>     directory before executing the task. If no directory is specified
+>> then the
+>>     default of $B is used.  However $B is an OpenEmbedded variable and
+>> BitBake
+>>     shouldn't be aware of it.
+>>
+>>     To solve this change the semantics slightly so that if no directory =
+is
+>>     specified, the current working directory isn't changed.  There's als=
+o
+>> a sanity
+>>     check that emits a warning if a Python task does os.chdir() without
+>> restoring
+>>     the old path, and the previous working directory is restored.
+>>
+>>     This does change semantics: whereas before a function in OE would
+>> have $B as the
+>>     working directory unless specified, now the working directory is the
+>> top of the
+>>     build tree.  Any breakage this causes can be solved by either adding
+>>     do_some_task[dirs] =3D "${B}" or by using absolute paths in the task=
+.
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
