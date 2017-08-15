@@ -1,52 +1,38 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-oi0-f53.google.com (mail-oi0-f53.google.com
-	[209.85.218.53])
-	by mail.openembedded.org (Postfix) with ESMTP id C8185784F4
+Return-Path: <twoerner@gmail.com>
+Received: from mail-yw0-f174.google.com (mail-yw0-f174.google.com
+	[209.85.161.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A6B078367
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 14:18:13 +0000 (UTC)
-Received: by mail-oi0-f53.google.com with SMTP id e124so8425355oig.2
+	Tue, 15 Aug 2017 14:43:07 +0000 (UTC)
+Received: by mail-yw0-f174.google.com with SMTP id u207so5914686ywc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 07:18:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=Hah1fohBL1hRKexFhhs7llm3mlkoTobnphoTnq4xZ5A=;
-	b=Fw7WjjR9ZhXHOqsOMDW+s1+90oZvXTyFsPwkd3Hsqt95gy9WCuQ5mk4Qfr85R5fdXe
-	aa3mD6/EoMNYN/JfCyL850Y4g18uia2uJNF5f0viFePj1XKjONdVKxOiHJ+AkwueYCy3
-	yxnjxSf0VmaMOdh8nMUdAohGppvON0iK4UQ00IjAkeDsM3HmnrOORt1UTUny3OPI3OrQ
-	ejX7dSGiDOmyKlz/s0xzog6hT1qNpwJ3kzShLNmafOJI3kT+M/d9h8O+4Zm2R6DqyPgc
-	c+g3oPO7iNqTmm6vgU+05e7gRa2hdizjbayh1bSmE9FhXFAiC/ouf3uIigcxr1octbv+
-	H2Bg==
+	Tue, 15 Aug 2017 07:43:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=WS/qQ6OR9VBwhoYdOkD7QvNLrX6d+oyDIMO8oUapAjY=;
+	b=U2gIWDXpVnSqQJ/qygHkapdlmuNusvjMK6Ug5w+dAE8m7NW1yKd5TjMo8VZa7ohWRd
+	YJKRWBig491RXdf+sodUcQkwTmfcNxo7yZq1AKgQ9yMwYyPUiRrlm5OxIze4U1jVuzGf
+	RHee7BjPFLT7J1saUEBEoB8NDZn5jhZ6iYfeC5wfY8iIxi5S+2EgwT6kIK0M9VOqhp4N
+	qPAF5XWuVz6GBwHdV8VW9fZyEBp9qCjg13vPrhGJz8x3uMlEEYO3+bgeZEX7s8xOgGjW
+	hvokcKimSPzouwfjNU8iKLNRvMQ/0Z0ZxloKUtaDXz92Sgt06mtoNSxUslhWR3Xkxl9s
+	Cgzw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Hah1fohBL1hRKexFhhs7llm3mlkoTobnphoTnq4xZ5A=;
-	b=sSRuTqt6DUKrLlTOaQb70IM4fDUWPHi4Is0TMcNiwOxf2AvDNsh7eNFjO13KeNAHrI
-	K8IcbXjCFY7jzVmL/sPUXt/EpsjhmBJ6Gvj8nEbv6TvzUOylKAO4YPqQZb2t4vPJqMjp
-	k6BSRWzZvqH3qHwDTGNrbPQZAGXiiX7Q/3dhMTOXniDhnNRhuLl47IIZqgMf9KZIencm
-	T5+Qoje1UGVhN1+tQKEgksiOOMfmNOAHBzEVFu/VRDCIeFFlfBkNPS+awYNbWDB65vw9
-	w6RQIBw7BsM1rC2kCRqqh1ygNzkUwm2gk2vQMvPvHQLVQuDto9eHtGeYAvEm58beZyi7
-	F5iw==
-X-Gm-Message-State: AHYfb5jtw4XnymXThym2dKCsjRm0sCyps/D1R1Tz7aHxyw5zzZGUDyFd
-	GvzeGbWSjaN/05ITww0=
-X-Received: by 10.202.82.11 with SMTP id g11mr34048752oib.310.1502806694328;
-	Tue, 15 Aug 2017 07:18:14 -0700 (PDT)
-Received: from mail-oi0-f41.google.com (mail-oi0-f41.google.com.
-	[209.85.218.41]) by smtp.gmail.com with ESMTPSA id
-	v186sm11455386oie.44.2017.08.15.07.18.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 15 Aug 2017 07:18:13 -0700 (PDT)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f41.google.com with SMTP id x3so8404430oia.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 07:18:12 -0700 (PDT)
-X-Received: by 10.202.235.140 with SMTP id j134mr29975881oih.281.1502806692562;
-	Tue, 15 Aug 2017 07:18:12 -0700 (PDT)
+	bh=WS/qQ6OR9VBwhoYdOkD7QvNLrX6d+oyDIMO8oUapAjY=;
+	b=kjt5wWo+vc5gHjjx+gazbDin9jyz4qHHSgxLJdOLLqGF9SxnuucKp2TLfeTbuzhJ+d
+	OYyzu4AS/DssERquyu5cPwrdO+eBdNd3vqCNBYO82qDt8qmDNGX6fKxCs76W1pnnRVeH
+	zDQ/ivXcfYa2KlCiNC//JkOk0gqT5WIDzPm01BdZVjYS0NL0Enz244vzdb4P+p5kYD/p
+	65RWObefrrfYglsDZTzcYWfPtBiSaJVkCRNCG3IJACIZmaqW4r6IIoDzrHdYlZWPSHrA
+	ejAYt1UmzzDt0sdfnrQbH/XoGfbcwIjwjDIqqOkaYatpZXx44CJyk5HZJXJikoeSf8at
+	onwQ==
+X-Gm-Message-State: AHYfb5iYNCRgwgr5Q0GluLMzNNPgKeNZhUVpIiK9CfWaJmWbA6LLttZ4
+	gF1A+khapYTxHXgKUZVxrPPMjgHfzg==
+X-Received: by 10.37.175.19 with SMTP id a19mr8275665ybh.291.1502808188193;
+	Tue, 15 Aug 2017 07:43:08 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.182.247.10 with HTTP; Tue, 15 Aug 2017 07:18:11 -0700 (PDT)
+Received: by 10.37.66.151 with HTTP; Tue, 15 Aug 2017 07:43:07 -0700 (PDT)
 In-Reply-To: <87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
 References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
 	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
@@ -55,12 +41,10 @@ References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
 	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
 	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
 	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
-Date: Tue, 15 Aug 2017 11:18:11 -0300
-X-Gmail-Original-Message-ID: <CAP9ODKrCcP62G1yH6Ww-4ApvEr_n6E0Neg-bkgAnWsNozn7=XQ@mail.gmail.com>
-Message-ID: <CAP9ODKrCcP62G1yH6Ww-4ApvEr_n6E0Neg-bkgAnWsNozn7=XQ@mail.gmail.com>
-To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>, 
-	Carlos Rafael Giani <dv@pseudoterminal.org>,
-	Khem Raj <raj.khem@gmail.com>, Trevor Woerner <twoerner@gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Tue, 15 Aug 2017 10:43:07 -0400
+Message-ID: <CAHUNapQ8zxvaEdn51D0kN5C7JVRpQJq34tCuqamMEM0fm20LRw@mail.gmail.com>
+To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: chromium detected as stripped
@@ -76,54 +60,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Aug 2017 14:18:14 -0000
+X-List-Received-Date: Tue, 15 Aug 2017 14:43:07 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hello Raphael,
-
-On Tue, Aug 15, 2017 at 10:05 AM, Raphael Kubo da Costa
+On Tue, Aug 15, 2017 at 9:05 AM, Raphael Kubo da Costa
 <raphael.kubo.da.costa@intel.com> wrote:
-> Otavio Salvador <otavio.salvador@ossystems.com.br> writes:
->
->>>> On Mon, Aug 14, 2017 at 12:22 PM, Jussi Kukkonen
->>>> <jussi.kukkonen@intel.com> wrote:
->>>>> On a related note, this good work is currently a bit hidden in
->>>>> meta-crosswalk -- is there a chance we could get this combined with
->>>>> meta-browser (or whatever place makes sense)? I know next to nothing about
->>>>> chromium packaging so CCing Raphael and the meta-browser maintainers for
->>>>> comments.
->>
->> Indeed it does sound like the proper workaround for now. That said,
->> I'd love to receive more help from meta-crosswalk people and avoid
->> duplication of work in packaging Chromium so I am adding Raphael on Cc
->> here so he can comment about how we can try to work together on this.
->
-> The main reason why we haven't worked together yet is procrastination
-> from my side :-)
->
-> My recipe's working fine and is up-to-date with Chromium's stable
-> releases, but I'd love to find a more permanent home for it and stop
-> duplicating the efforts, especially as I spend most of my time working
-> on Chromium itself, not its Yocto recipe or even Yocto in general.
->
 > The main reason why I opted to start my recipe from scratch at the time
 > was simplicity: the meta-browser repository used the same recipe for
 > Chromium, CEF and Chromium with Ozone-Wayland, offered many different
 > options and shipped quite a few patches that made updates quite
-> difficult. My recipe is a lot less customizable, but OTOH that makes it
+> difficult.
+
+I agree 100% (or more). This is why, earlier this year, I removed CEF
+(which wasn't working, hadn't been working in over a year, and
+(apparently) nobody was using). This is also why I also split out
+"pure" chromium and chromium-wayland recipes. Trying to do everything
+in one recipe was getting too onerous.
+
+In my own (failed and therefore put on the back-burner) efforts to
+update the chromium (x11) recipe to 59 and 60 I too created a recipe
+from scratch without all the baggage of debug vs non-debug, no
+packageconfigs, multiple architectures, component build, and without
+pulling in any *.inc files. Just a small, self-contained recipe.
+
+> My recipe is a lot less customizable, but OTOH that makes it
 > quite easy to move to new Chromium milestones. If we're able to find a
 > balance there, I definitely think we'd be able to get a lot more done
 > together.
 
-The newer releases do not require the Ozone patches, AFAIK, and in the
-worse case, we can keep a version for CEF use if they don't match.
-
-I think Carlos, Khem and Trevor would also be happy to help to test
-and reviewing those patches. So please take a look and see if we can
-avoid this duplication as it'd benefit a broader set of users.
-
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+I think it was a mistake for meta-browser to have recently added a
+huge number of patches supporting musl. One commit alone added almost
+700 lines of diff for musl support (not to mention the subsequent
+fixup patches)! Musl support should be kept and maintained in
+meta-musl, isn't that the purpose of meta-musl? If users want musl
+support they're going to need to add meta-musl anyway, so it's no
+change from a user's point of view. But 700 lines of patches provides
+a heavy burden for anyone trying to maintain or update meta-browser's
+chromium, especially if they don't use or care about musl support.
 
