@@ -1,48 +1,24 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id C4D8277794
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C1E0B785F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 23:34:40 +0000 (UTC)
-Received: by mail-vk0-f47.google.com with SMTP id n125so7393998vke.1
+	Wed, 16 Aug 2017 01:11:07 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7G1B8po031565
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 16:34:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=79CJZsTeSagcw4jXB8EnttSSNeNABzY2ISFM9K977Go=;
-	b=DhLrL3zUvfiDU+T78gew2ALxTCP9mOZ1C7T8PlN/snkpkrhRn+WVSf2ogrSiEzPuNg
-	4PAH4Uw9ghxDWcxBNmXNJz/oXAvOFcS9Lv+HlbGuUPXw5i19ZPWdF4yvqGCOLY+J6PC2
-	qaDQZoH99oryaID0YK6cxcr6O4t3Q8bAL6VU2Xy5Y6BrtrFP6Va5ja9KZDrVH4vuTL8Q
-	9ryWWjWm9SJHEPveVVMK8zzZZecvlufx7ON1A0pLW9fSgk4Z+w072i61QQ7oSLFaQSTM
-	a4lUHtEWtrsc5mbFt66JCkxgm7dTiPpbcmgNJgAA6sCAL8mxTxLi5H+pZhQMxXfsWYU4
-	We5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=79CJZsTeSagcw4jXB8EnttSSNeNABzY2ISFM9K977Go=;
-	b=hvsKHXlUb5cdfJ9kAnIEwQOXO15mw2/s2eOYjVLyBFMrEp+Y2wbYmzTKaC3h+/d03D
-	svxfOuveBQk4bLRUdev1xc81UXObJaoWkitHRZ4pPyIMa+1u7n6DiwyPW5UIoml+z56Y
-	py8p5rhZdysIardIeaxjQ3GHvsrl9QTbJAXrQRrlTw1lzLg8fyds1zaIAgII1/Y7+O3/
-	0F6sLrQb+0C9CL6YnDXp+ns2wuglT3QpP5uypp720uAbmHYSd9F1lpNbbLQPQxq/5OAQ
-	jPbjzOe5PJamJ73sp1LSau0uYVcz0M66I3Nr5ueo7rewWpBlsrX1irPSXiYwv+Itf39R
-	+Srg==
-X-Gm-Message-State: AHYfb5g2kL+iRuRs7Uxnnb2I+FF8ubJkQGEkWyYvgMU0jjDDA1e+njGH
-	toAYuuPw53tgFxj5KWSEleiWxrGW3N/K
-X-Received: by 10.31.131.69 with SMTP id f66mr20565616vkd.9.1502840081346;
-	Tue, 15 Aug 2017 16:34:41 -0700 (PDT)
+	Tue, 15 Aug 2017 18:11:09 -0700
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Tue, 15 Aug 2017 18:11:08 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Aug 2017 09:10:32 +0800
+Message-ID: <20170816011032.14328-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 10.159.51.10 with HTTP; Tue, 15 Aug 2017 16:34:40 -0700 (PDT)
-In-Reply-To: <20170815225855.81205-1-jslater@windriver.com>
-References: <20170815225855.81205-1-jslater@windriver.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Wed, 16 Aug 2017 01:34:40 +0200
-Message-ID: <CALbNGRRw9BGtqWnqL6nStjc5DF=+yz=8ZNyL4+5=C4u19Cc7zA@mail.gmail.com>
-To: Joe Slater <jslater@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] php: disable this version by default
+Subject: [meta-networking][PATCH] freeradius: Upgrade to 3.0.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,15 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Aug 2017 23:34:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 16 Aug 2017 01:11:07 -0000
+Content-Type: text/plain
 
-On Wed, Aug 16, 2017 at 12:58 AM, Joe Slater <jslater@windriver.com> wrote:
-> There are many unaddressed CVEs which are fixed in 7.1.7
-> and later versions.  Allow the user to define php_5.6.26
-> to enable building the recipe.
->
-I am not using php so I surely missed something: why do we keep 5.6.26 at all?
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Andreas
+* Upgrade to 3.0.15 to fix many CVE issues.
+* There is a defect for disabling dhcp feature:
+  https://github.com/FreeRADIUS/freeradius-server/issues/2039
+  We don't need the dhcp feature but it's harmless
+  to enable it, so enable it as the default.
+
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../freeradius/{freeradius_3.0.14.bb => freeradius_3.0.15.bb}        | 5 ++---
+ 1 file changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-connectivity/freeradius/{freeradius_3.0.14.bb => freeradius_3.0.15.bb} (98%)
+
+diff --git a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.14.bb b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.15.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/freeradius/freeradius_3.0.14.bb
+rename to meta-networking/recipes-connectivity/freeradius/freeradius_3.0.15.bb
+index 6971b0379..4155a4059 100644
+--- a/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.14.bb
++++ b/meta-networking/recipes-connectivity/freeradius/freeradius_3.0.15.bb
+@@ -30,8 +30,8 @@ SRC_URI = "ftp://ftp.freeradius.org/pub/freeradius/freeradius-server-${PV}.tar.b
+     file://radiusd.service \
+     file://radiusd-volatiles.conf \
+ "
+-SRC_URI[md5sum] = "7d98dfafffac81f19cadccea5af89cea"
+-SRC_URI[sha256sum] = "2771f6ecd6c816ac4d52b66bb8ae6781ca20e1e4984c5804fc4e67de3a807c59"
++SRC_URI[md5sum] = "0c81a4464ccf1d04f7ef1218a029d37a"
++SRC_URI[sha256sum] = "23267d8505e7b2909f5bdbf3938ca077c1fe122290dc969304d4f3b594f7e3ba"
+ 
+ PARALLEL_MAKE = ""
+ 
+@@ -58,7 +58,6 @@ EXTRA_OECONF = " --enable-strict-dependencies \
+         --without-rlm_sql_oracle \
+         --without-rlm_sql_sybase \
+         --without-rlm_sqlhpwippool \
+-        --without-dhcp \
+         ac_cv_path_PERL=${bindir}/perl \
+         ax_cv_cc_builtin_choose_expr=no \
+         ax_cv_cc_builtin_types_compatible_p=no \
+-- 
+2.11.0
+
 
