@@ -1,24 +1,55 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E14387866B
+Return-Path: <peter.kjellerstedt@axis.com>
+X-Greylist: delayed 532 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 16 Aug 2017 11:32:49 UTC
+Received: from bes.se.axis.com (bes.se.axis.com [195.60.68.10])
+	by mail.openembedded.org (Postfix) with ESMTP id BB7C778675
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 09:51:53 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7G9psxW025624
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 16 Aug 2017 11:32:49 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by bes.se.axis.com (Postfix) with ESMTP id B0D872F1FE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 02:51:54 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 16 Aug 2017 02:51:53 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 16 Aug 2017 17:41:06 +0800
-Message-ID: <20170816094106.15026-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
-MIME-Version: 1.0
-Subject: [PATCH] wireshark: 2.2.7 -> 2.2.8
+	Wed, 16 Aug 2017 13:23:58 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at bes.se.axis.com
+Received: from bes.se.axis.com ([IPv6:::ffff:127.0.0.1])
+	by localhost (bes.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP id r4-2D-DRiyGh
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:58 +0200 (CEST)
+Received: from boulder03.se.axis.com (boulder03.se.axis.com [10.0.8.17])
+	by bes.se.axis.com (Postfix) with ESMTPS id 1C1242EAE8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:58 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id 083141E083
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:58 +0200 (CEST)
+Received: from boulder03.se.axis.com (unknown [127.0.0.1])
+	by IMSVA (Postfix) with ESMTP id F15581E081
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:57 +0200 (CEST)
+Received: from thoth.se.axis.com (unknown [10.0.2.173])
+	by boulder03.se.axis.com (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:57 +0200 (CEST)
+Received: from saur-2.se.axis.com (saur-2.se.axis.com [10.92.3.2])
+	by thoth.se.axis.com (Postfix) with ESMTP id E5CAD25B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:57 +0200 (CEST)
+Received: from saur-2.se.axis.com (localhost [127.0.0.1])
+	by saur-2.se.axis.com (8.14.5/8.14.5) with ESMTP id v7GBNvsq006901
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 13:23:57 +0200
+Received: (from pkj@localhost)
+	by saur-2.se.axis.com (8.14.5/8.14.5/Submit) id v7GBNuI0006900
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Aug 2017 13:23:56 +0200
+From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 16 Aug 2017 13:23:51 +0200
+Message-Id: <20170816112351.6854-1-pkj@axis.com>
+X-Mailer: git-send-email 2.12.0
+X-TM-AS-GCONF: 00
+Subject: [meta-oe][PATCH] start-stop-daemon: Only create a link in ${base_sbindir} if necessary
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,36 +62,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Aug 2017 09:51:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 Aug 2017 11:32:50 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+If usrmerge is enabled in DISTRO_FEATURES, then ${base_sbindir} and
+${sbindir} are set to the same path and the symbolic link from
+${base_sbindir}/start-stop-daemon to ${sbindir}/start-stop-daemon can
+(and should) not be created.
 ---
- .../wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb}              | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb} (95%)
+ .../recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb  | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
-index 2f6f7b0..f94324e 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+diff --git a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
+index 5ee4472cd..cc2727b75 100644
+--- a/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
++++ b/meta-oe/recipes-support/start-stop-daemon/start-stop-daemon_1.17.25.bb
+@@ -31,6 +31,8 @@ do_install_append () {
  
- PE = "1"
- 
--SRC_URI[md5sum] = "a4d880554c7f925dafef60fa313b580d"
--SRC_URI[sha256sum] = "689ddf62221b152779d8846ab5b2063cc7fd41ec1a9f04eefab09b5d5486dbb5"
-+SRC_URI[md5sum] = "bb81d0ecf3a8ed46bedfaeae6fd318a8"
-+SRC_URI[sha256sum] = "ecf02c148c9ab6e809026ad5743fe9be1739a9840ef6fece6837a7ddfbdf7edc"
- 
- inherit autotools pkgconfig perlnative
- 
+     # support for buggy init.d scripts that refer to an alternative
+     # explicit path to start-stop-daemon
+-    mkdir -p ${D}/sbin/
+-    ln -sf /usr/sbin/start-stop-daemon ${D}/sbin/start-stop-daemon
++    if [ "${base_sbindir}" != "${sbindir}" ]; then
++        mkdir -p ${D}${base_sbindir}
++        ln -sf ${sbindir}/start-stop-daemon ${D}${base_sbindir}/start-stop-daemon
++    fi
+ }
 -- 
-2.10.1
+2.12.0
 
 
