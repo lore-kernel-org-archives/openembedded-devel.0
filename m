@@ -1,24 +1,27 @@
-Return-Path: <Wenzong.Fan@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 80F137861C
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id D1A927863E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 06:55:43 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7G6th5T001382
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Aug 2017 23:55:44 -0700 (PDT)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 15 Aug 2017 23:55:43 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 15 Aug 2017 23:55:43 -0700
-Message-ID: <20170816065543.62218-1-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.13.0
+	Wed, 16 Aug 2017 09:01:59 +0000 (UTC)
+Received: from orsmga002.jf.intel.com ([10.7.209.21])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 Aug 2017 02:02:00 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.41,382,1498546800"; d="scan'208";a="124141579"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga002.jf.intel.com with ESMTP; 16 Aug 2017 02:01:59 -0700
+To: Jason Wessel <jason.wessel@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+References: <20170815192424.129143-1-jason.wessel@windriver.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <fdf8f2ef-eb85-391d-b5f7-61dc01b6a419@linux.intel.com>
+Date: Wed, 16 Aug 2017 11:58:47 +0300
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] fontforge: update to 20170731 to fix CVEs
+In-Reply-To: <20170815192424.129143-1-jason.wessel@windriver.com>
+Subject: Re: [meta-oe][PATCH] mailx: Force mailx to build with openssl10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,46 +34,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Aug 2017 06:55:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 16 Aug 2017 09:02:00 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+On 08/15/2017 10:24 PM, Jason Wessel wrote:
+> The latest changes in oe-core switch to using openssl 1.1.  The
+> SSLv3_client_method and RAND_egd functions are removed in the openssl
+> 1.1. This causes mailx to fail to compile.
+> 
+> For now we can use openssl10 in the same manner that openssh is doing.
+> At the point in time that openssl10 goes away the code for openssl in
+> mailx will have to be altered.
 
-Fixed CVEs & Issues:
-  CVE-2017-11577: #3088
-  CVE-2017-11576: #3091
-  CVE-2017-11575: #3096
-  CVE-2017-11574: #3090
-  CVE-2017-11572: #3092
-  CVE-2017-11571: #3087
-  CVE-2017-11569: #3093
-  CVE-2017-11568: #3089
+Please note the following (from mailx removal commit in oe-core):
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../fontforge/{fontforge_20161012.bb => fontforge_20170731.bb}        | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-graphics/fontforge/{fontforge_20161012.bb => fontforge_20170731.bb} (96%)
+     This recipe was carried only for LSB compatibility,
+     with upstream being defunct for a long time; if there is a need
+     for a modern, supported implementation of mail/mailx, then
+     s-nail (http://sdaoden.eu/code.html) or mailutils 
+(http://mailutils.org/)    should be used.
 
-diff --git a/meta-oe/recipes-graphics/fontforge/fontforge_20161012.bb b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
-similarity index 96%
-rename from meta-oe/recipes-graphics/fontforge/fontforge_20161012.bb
-rename to meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
-index 1c3376d42..d9f086749 100644
---- a/meta-oe/recipes-graphics/fontforge/fontforge_20161012.bb
-+++ b/meta-oe/recipes-graphics/fontforge/fontforge_20170731.bb
-@@ -14,8 +14,8 @@ inherit autotools pkgconfig pythonnative distro_features_check gettext
- REQUIRED_DISTRO_FEATURES_append_class-target = " x11"
- 
- SRC_URI = "git://github.com/${BPN}/${BPN}.git"
--# tag 20161012
--SRCREV = "072edb0235cd163d6c3391da9cc3754c3c66f47a"
-+# tag 20170731
-+SRCREV = "b9149c13e8f9464fc21473f1f676b36a2130775d"
- S = "${WORKDIR}/git"
- 
- EXTRA_OECONF_append_class-native = " with_x=no"
--- 
-2.13.0
+So when openssl 1.0 goes away, it's better to package either of these two.
 
+
+Alex
 
