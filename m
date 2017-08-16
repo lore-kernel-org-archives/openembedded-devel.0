@@ -1,27 +1,24 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id D1A927863E
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id E14387866B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 09:01:59 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 Aug 2017 02:02:00 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,382,1498546800"; d="scan'208";a="124141579"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by orsmga002.jf.intel.com with ESMTP; 16 Aug 2017 02:01:59 -0700
-To: Jason Wessel <jason.wessel@windriver.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20170815192424.129143-1-jason.wessel@windriver.com>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <fdf8f2ef-eb85-391d-b5f7-61dc01b6a419@linux.intel.com>
-Date: Wed, 16 Aug 2017 11:58:47 +0300
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Wed, 16 Aug 2017 09:51:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7G9psxW025624
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 02:51:54 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Wed, 16 Aug 2017 02:51:53 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 16 Aug 2017 17:41:06 +0800
+Message-ID: <20170816094106.15026-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-In-Reply-To: <20170815192424.129143-1-jason.wessel@windriver.com>
-Subject: Re: [meta-oe][PATCH] mailx: Force mailx to build with openssl10
+Subject: [PATCH] wireshark: 2.2.7 -> 2.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,30 +31,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Aug 2017 09:02:00 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Aug 2017 09:51:54 -0000
+Content-Type: text/plain
 
-On 08/15/2017 10:24 PM, Jason Wessel wrote:
-> The latest changes in oe-core switch to using openssl 1.1.  The
-> SSLv3_client_method and RAND_egd functions are removed in the openssl
-> 1.1. This causes mailx to fail to compile.
-> 
-> For now we can use openssl10 in the same manner that openssh is doing.
-> At the point in time that openssl10 goes away the code for openssl in
-> mailx will have to be altered.
+From: Kai Kang <kai.kang@windriver.com>
 
-Please note the following (from mailx removal commit in oe-core):
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb}              | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.7.bb => wireshark_2.2.8.bb} (95%)
 
-     This recipe was carried only for LSB compatibility,
-     with upstream being defunct for a long time; if there is a need
-     for a modern, supported implementation of mail/mailx, then
-     s-nail (http://sdaoden.eu/code.html) or mailutils 
-(http://mailutils.org/)    should be used.
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
+similarity index 95%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
+index 2f6f7b0..f94324e 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.8.bb
+@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+ 
+ PE = "1"
+ 
+-SRC_URI[md5sum] = "a4d880554c7f925dafef60fa313b580d"
+-SRC_URI[sha256sum] = "689ddf62221b152779d8846ab5b2063cc7fd41ec1a9f04eefab09b5d5486dbb5"
++SRC_URI[md5sum] = "bb81d0ecf3a8ed46bedfaeae6fd318a8"
++SRC_URI[sha256sum] = "ecf02c148c9ab6e809026ad5743fe9be1739a9840ef6fece6837a7ddfbdf7edc"
+ 
+ inherit autotools pkgconfig perlnative
+ 
+-- 
+2.10.1
 
-So when openssl 1.0 goes away, it's better to package either of these two.
-
-
-Alex
 
