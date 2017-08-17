@@ -1,47 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f48.google.com (mail-vk0-f48.google.com
-	[209.85.213.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 90057783A1
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id D473B7846B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 09:17:31 +0000 (UTC)
-Received: by mail-vk0-f48.google.com with SMTP id u133so20367530vke.3
+	Thu, 17 Aug 2017 09:39:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H9dFgg008037
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 02:17:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+rDogNbaTB4+oYmtI0xeNttbMbCdHyfQcxNzsZ27GiY=;
-	b=uNYP3gVGN7O0tvwejAW/Yk4z7+Cc7oMt1Gwj5352OUTqnSXSP0PAghN/4pdUvy7a/k
-	oZUzX+3ysHdhGatbLebn3gqiV9rPYWf15VJQcb0Jv5NhEwOyg+NNipfUgkmOIsO+OjMZ
-	QYbWFYsuSwrb0qoDi33zQqI9LgXPgDY7oR5CXI+jicb6713zt7ZC8MzQRbPT0tM1dsXn
-	fxrYoER8+F8Pd7W8jJ34wc7ltFwxKOl5rqLOw+W/GU8TGbqDZ9TFpyje9qrMVNtNMs25
-	pMZ3Lv81t9N8zQh5Ma7eiYPBqgOxNHj1Rsp79u2ou0317EKa/jrpvvQwA2tEUD9UrIdH
-	aziA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=+rDogNbaTB4+oYmtI0xeNttbMbCdHyfQcxNzsZ27GiY=;
-	b=QepEZMB3lSPtUc1uDTvH7OR5N3wGmTmXqFKym1QV86c89vS4C35X3mf4EnYlYfFFs0
-	P055LrXcgeofqm522ES/6neF1OmIG+f7nCbxv0HbLQ+wMfywpS1hgMsk4e5imV26iU3Z
-	VjA/TZqqfPdetB+YCi7xgnOADn/AkWP1gDPcYhT5t0Q5Ils9hhCBgd3+yn5nTQR4L0he
-	TbN6Bwk5EbELU2wlTm9/KYpx0+g+1Fv2DSX7wSWzjJOLA00zuY0wV2WQ45Oirx2u83hr
-	Zzaeh7wXuovjVPZ4qIJ+IztniBzXmQeFNbSsnZV9y/CQ+ZRtcBxoQwsOG2IARlVlnDUZ
-	jVzw==
-X-Gm-Message-State: AHYfb5irKVRoHEKZxzBQm1de5vYTfi0tXF32IGfA4p5v+w7TVpfceeDn
-	eRHWP4g1aFrdRB8e7sd8hQkid58mTw==
-X-Received: by 10.31.56.74 with SMTP id f71mr2865826vka.21.1502961453255; Thu,
-	17 Aug 2017 02:17:33 -0700 (PDT)
+	Thu, 17 Aug 2017 02:39:16 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 17 Aug 2017 02:39:15 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Aug 2017 17:28:28 +0800
+Message-ID: <20170817092828.3629-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.10.1
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Thu, 17 Aug 2017 02:17:32 -0700 (PDT)
-In-Reply-To: <1502959724-47472-1-git-send-email-dengke.du@windriver.com>
-References: <1502959724-47472-1-git-send-email-dengke.du@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 17 Aug 2017 11:17:32 +0200
-Message-ID: <CA+chaQc_JOJyRZf_LPk0w8jSMCFG93CoimNPAAv+dnpjWPPm3Q@mail.gmail.com>
-To: Dengke Du <dengke.du@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] c-ares: upgrade to 1.13.0
+Subject: [PATCH] mariadb: 5.5.55 -> 5.5.57
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,49 +31,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 09:17:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 17 Aug 2017 09:39:15 -0000
+Content-Type: text/plain
 
-There is better change for this from Alexey Firago in master-next
+From: Kai Kang <kai.kang@windriver.com>
 
-On Thu, Aug 17, 2017 at 10:48 AM, Dengke Du <dengke.du@windriver.com> wrote:
+Upgrade mariadb from 5.5.55 to 5.5.57.
 
-> Signed-off-by: Dengke Du <dengke.du@windriver.com>
-> ---
->  .../recipes-support/c-ares/{c-ares_1.12.0.bb => c-ares_1.13.0.bb}     |
-> 4 ++--
->  1 file changed, 2 insertions(+), 2 deletions(-)
->  rename meta-networking/recipes-support/c-ares/{c-ares_1.12.0.bb =>
-> c-ares_1.13.0.bb} (75%)
->
-> diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> similarity index 75%
-> rename from meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> rename to meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> index 4e28d6a..0d9a2a4 100644
-> --- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
-> +++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
-> @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=
-> f4b026880834eb01c035c5e5cb47ccac"
->  SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
->             file://0001-configure.ac-don-t-override-passed-cflags.patch \
->  "
-> -SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
-> -SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021
-> 665118ee9bfea905d1a76f04d4e6f365fb"
-> +SRC_URI[md5sum] = "d2e010b43537794d8bedfb562ae6bba2"
-> +SRC_URI[sha256sum] = "03f708f1b14a26ab26c38abd511376
-> 40cb444d3ec72380b21b20f1a8d2861da7"
->
->  inherit autotools pkgconfig
-> --
-> 2.8.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+* update SRC_URI that mariadb.com doesn't provides source tarball of 5.5.57
+* remove gcc7.patch which is not needed any more
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb}  |  0
+ meta-oe/recipes-support/mysql/mariadb.inc                   |  8 ++++----
+ meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13 -------------
+ .../mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb}          |  0
+ 4 files changed, 4 insertions(+), 17 deletions(-)
+ rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb} (100%)
+ delete mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+ rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb} (100%)
+
+diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
+rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+index fd9dcbd..32e3eaa 100644
+--- a/meta-oe/recipes-support/mysql/mariadb.inc
++++ b/meta-oe/recipes-support/mysql/mariadb.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
++SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
+            file://fix-cmake-module-path.patch \
+            file://remove-bad-path.patch \
+            file://fix-mysqlclient-r-version.patch \
+@@ -17,10 +17,10 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
+            file://fix-a-building-failure.patch \
+            file://change-cc-to-cc-version.patch \
+            file://0001-disable-ucontext-on-musl.patch \
+-           file://gcc7.patch \
+           "
+-SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
+-SRC_URI[sha256sum] = "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
++
++SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
++SRC_URI[sha256sum] = "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
+ 
+ S = "${WORKDIR}/mariadb-${PV}"
+ 
+diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+deleted file mode 100644
+index 3e75b26..0000000
+--- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: mariadb-5.5.55/client/mysql.cc
+-===================================================================
+---- mariadb-5.5.55.orig/client/mysql.cc
+-+++ mariadb-5.5.55/client/mysql.cc
+-@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
+-         mysql_free_result(fields);
+-         break;
+-       }
+--      field_names[i][num_fields*2]= '\0';
+-+      field_names[i][num_fields*2][0]= '\0';
+-       j=0;
+-       while ((sql_field=mysql_fetch_field(fields)))
+-       {
+diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+similarity index 100%
+rename from meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+-- 
+2.10.1
+
 
