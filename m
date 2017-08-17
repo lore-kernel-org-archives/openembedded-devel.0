@@ -1,46 +1,32 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 736AC780A8
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D45071985
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 01:02:17 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id 83so7099716pgb.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 18:02:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=cBIVzYE6jLFDfG1XqRx5eJKgt/NkbE/IrY4b+sQt0ts=;
-	b=YBIdOrQdyDJjUwWkAwlcC9vROG1WhWBqjBNU4q3pXSiIpmLGZxGZ1MmvQIBJgK0/ZX
-	WfD+9E3MbCKo7vZdCnxd3ZIDxQ79UQyYhtKcVeiEG2LbhF4yyyCaXNIBTij0sGoaQ6RQ
-	74yOC38NSEZxvHSKhcGZsVH/MdibE8G7CCEJf4FY0YAPUOaaANMrHREEhFCiSSlW/grw
-	0SlkROdT+qPIW8g7J5seI3Wpv7g8pNww1Ng/0sZfi3U4QY6uHKTpjHVnaoKsv7ar5Xp4
-	EB0GG9BDlVqteszO7X08orkFN3H+FM4Lmv/84DqDIxFFcvGDbhhtBwcIXqRWqJNlqp4W
-	MMQw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=cBIVzYE6jLFDfG1XqRx5eJKgt/NkbE/IrY4b+sQt0ts=;
-	b=c6C02vCTwqU0pvNgUd7Ji6w07kxxOOlZK+Adek7T5dgml2NCDrkTqRcf4HoXcKZ4jl
-	P0qAarHmIma06fsor/KZgnx0G2nsOQzhfmrqAtrRbHxWLhj9i0uAkWpyjkgdAywQpZeb
-	u461JrSynKmj2POPkwMSa9WzicoYpezL5kDtOzDMe/+6E9K4R4JYsqP/iKnBaNvVegcX
-	l9nYrSEkDPfLpO9yzojjf7LB3qCPstEdoiwF+KX2An6L8Ag81Wg/3GE8X4OmdViiMa0q
-	cwxiOY7rASBCRLP6QJh1LJEGsia3vIitgsjlfS3vC6/x3uJY1pk95kpc8lo8rJ50hNfx
-	3Jeg==
-X-Gm-Message-State: AHYfb5iEA/fUD9LsXHuqYHmic/8LJDMeL6N7SjFwdv75HetIPY3IDZ3I
-	jp7k1D+NuO1hNL87apAIlEGrTAPpYg==
-X-Received: by 10.98.147.19 with SMTP id b19mr3465310pfe.283.1502931738659;
-	Wed, 16 Aug 2017 18:02:18 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.167.2 with HTTP; Wed, 16 Aug 2017 18:01:48 -0700 (PDT)
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA014B8652B2@ALA-MBD.corp.ad.wrs.com>
+	Thu, 17 Aug 2017 01:12:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H1CJsf004783
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 16 Aug 2017 18:12:19 -0700 (PDT)
+Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.209]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0361.001;
+	Wed, 16 Aug 2017 18:12:19 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH v2] vlock: add new recipe
+Thread-Index: AQHTFrLekOr51oYL/kyFY5Uy42p7CqKHtrvggAB6BgD//4wLIA==
+Date: Thu, 17 Aug 2017 01:12:18 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B86538C@ALA-MBD.corp.ad.wrs.com>
 References: <20170816053740.24934-1-jackie.huang@windriver.com>
 	<CAMKF1sr1sKAThgm-tJPam+VAMqg4=wtSv7qhZ5ciBq+c6-gjsg@mail.gmail.com>
 	<1B858668EC6A94408DCA5225FDFA85AA014B8652B2@ALA-MBD.corp.ad.wrs.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 16 Aug 2017 18:01:48 -0700
-Message-ID: <CAMKF1sqf3=F9S2EymZnJ2N77=qx1-svNAVU+t7rd9qvnFxctvQ@mail.gmail.com>
-To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+	<CAMKF1sqf3=F9S2EymZnJ2N77=qx1-svNAVU+t7rd9qvnFxctvQ@mail.gmail.com>
+In-Reply-To: <CAMKF1sqf3=F9S2EymZnJ2N77=qx1-svNAVU+t7rd9qvnFxctvQ@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.176.91]
+MIME-Version: 1.0
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH v2] vlock: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -55,82 +41,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 01:02:17 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Aug 2017 01:12:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Aug 16, 2017 at 5:48 PM, Huang, Jie (Jackie)
-<Jackie.Huang@windriver.com> wrote:
->
->
->> -----Original Message-----
->> From: Khem Raj [mailto:raj.khem@gmail.com]
->> Sent: Thursday, August 17, 2017 01:12
->> To: Huang, Jie (Jackie)
->> Cc: openembeded-devel
->> Subject: Re: [oe] [meta-oe][PATCH v2] vlock: add new recipe
->>
->> On Tue, Aug 15, 2017 at 10:37 PM,  <jackie.huang@windriver.com> wrote:
->> > From: Jackie Huang <jackie.huang@windriver.com>
->> >
->> > vlock is a program to lock one or more
->> > sessions on the Linux console.
->> >
->> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->> > ---
->> >  .../vlock/vlock-2.2.3/disable_vlockrc.patch        |  37 +++++++
->> >  .../vlock/vlock-2.2.3/vlock-no_tally.patch         | 107
->> +++++++++++++++++++++
->> >  .../recipes-extended/vlock/vlock-2.2.3/vlock_pam   |   3 +
->> >  .../vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch |  19 ++++
->> >  meta-oe/recipes-extended/vlock/vlock_2.2.3.bb      |  59 ++++++++++++
->> >  5 files changed, 225 insertions(+)
->> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-
->> 2.2.3/disable_vlockrc.patch
->> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-
->> no_tally.patch
->> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_p=
-am
->> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-
->> 2.2.3/vlock_pam_tally2_reset.patch
->> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
->> >
->> > diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockr=
-c.patch
->> b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
->> > new file mode 100644
->> > index 000000000..ee0d074de
->> > --- /dev/null
->> > +++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
->> > @@ -0,0 +1,37 @@
->> > +Upstream-Status: Inappropriate [configuration]
->> > +
->> > +written by: Jeff Polk <jeff.polk@windriver.com>
->>
->> I think a SOB is better than inventing another tag.
->
-> I just follow the guideline:
-> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Importin=
-g_from_Elsewhere
->
-> """
-> It is also necessary to document the original author of the change. You s=
-hould indicate the original author by simply stating "written by" or "poste=
-d to the ... mailing list by". You must not add a Signed-off-by: tag line w=
-ith their name, only the original author may add their own Signed-off-by: t=
-ag line.
-> """
->
-
-I wasn't suggesting that you add SOB for someone else. I was suggesting to
-not have original author attribution so close to the format for
-Signed-off-by, tested-off-by etc. Something like
-
-Original Patch from: < source >
-
-where source is publicly listed URL where the patch is posted.
-
-
-> Thanks,
-> Jackie
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
+bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBBdWd1c3QgMTcsIDIwMTcg
+MDk6MDINCj4gVG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4gQ2M6IG9wZW5lbWJlZGVkLWRldmVs
+DQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2Ml0gdmxvY2s6IGFkZCBuZXcg
+cmVjaXBlDQo+IA0KPiBPbiBXZWQsIEF1ZyAxNiwgMjAxNyBhdCA1OjQ4IFBNLCBIdWFuZywgSmll
+IChKYWNraWUpDQo+IDxKYWNraWUuSHVhbmdAd2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+ID4NCj4g
+Pg0KPiA+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiA+PiBGcm9tOiBLaGVtIFJhaiBb
+bWFpbHRvOnJhai5raGVtQGdtYWlsLmNvbV0NCj4gPj4gU2VudDogVGh1cnNkYXksIEF1Z3VzdCAx
+NywgMjAxNyAwMToxMg0KPiA+PiBUbzogSHVhbmcsIEppZSAoSmFja2llKQ0KPiA+PiBDYzogb3Bl
+bmVtYmVkZWQtZGV2ZWwNCj4gPj4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2VdW1BBVENIIHYy
+XSB2bG9jazogYWRkIG5ldyByZWNpcGUNCj4gPj4NCj4gPj4gT24gVHVlLCBBdWcgMTUsIDIwMTcg
+YXQgMTA6MzcgUE0sICA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+IHdyb3RlOg0KPiA+PiA+
+IEZyb206IEphY2tpZSBIdWFuZyA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+DQo+ID4+ID4N
+Cj4gPj4gPiB2bG9jayBpcyBhIHByb2dyYW0gdG8gbG9jayBvbmUgb3IgbW9yZQ0KPiA+PiA+IHNl
+c3Npb25zIG9uIHRoZSBMaW51eCBjb25zb2xlLg0KPiA+PiA+DQo+ID4+ID4gU2lnbmVkLW9mZi1i
+eTogSmFja2llIEh1YW5nIDxqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbT4NCj4gPj4gPiAtLS0N
+Cj4gPj4gPiAgLi4uL3Zsb2NrL3Zsb2NrLTIuMi4zL2Rpc2FibGVfdmxvY2tyYy5wYXRjaCAgICAg
+ICAgfCAgMzcgKysrKysrKw0KPiA+PiA+ICAuLi4vdmxvY2svdmxvY2stMi4yLjMvdmxvY2stbm9f
+dGFsbHkucGF0Y2ggICAgICAgICB8IDEwNw0KPiA+PiArKysrKysrKysrKysrKysrKysrKysNCj4g
+Pj4gPiAgLi4uL3JlY2lwZXMtZXh0ZW5kZWQvdmxvY2svdmxvY2stMi4yLjMvdmxvY2tfcGFtICAg
+fCAgIDMgKw0KPiA+PiA+ICAuLi4vdmxvY2svdmxvY2stMi4yLjMvdmxvY2tfcGFtX3RhbGx5Ml9y
+ZXNldC5wYXRjaCB8ICAxOSArKysrDQo+ID4+ID4gIG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC92
+bG9jay92bG9ja18yLjIuMy5iYiAgICAgIHwgIDU5ICsrKysrKysrKysrKw0KPiA+PiA+ICA1IGZp
+bGVzIGNoYW5nZWQsIDIyNSBpbnNlcnRpb25zKCspDQo+ID4+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0
+NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxvY2svdmxvY2stDQo+ID4+IDIuMi4zL2Rpc2Fi
+bGVfdmxvY2tyYy5wYXRjaA0KPiA+PiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNp
+cGVzLWV4dGVuZGVkL3Zsb2NrL3Zsb2NrLTIuMi4zL3Zsb2NrLQ0KPiA+PiBub190YWxseS5wYXRj
+aA0KPiA+PiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3Zs
+b2NrL3Zsb2NrLQ0KPiAyLjIuMy92bG9ja19wYW0NCj4gPj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0
+IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC92bG9jay92bG9jay0NCj4gPj4gMi4yLjMvdmxvY2tf
+cGFtX3RhbGx5Ml9yZXNldC5wYXRjaA0KPiA+PiA+ICBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1v
+ZS9yZWNpcGVzLWV4dGVuZGVkL3Zsb2NrL3Zsb2NrXzIuMi4zLmJiDQo+ID4+ID4NCj4gPj4gPiBk
+aWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3Zsb2NrL3Zsb2NrLQ0KPiAyLjIu
+My9kaXNhYmxlX3Zsb2NrcmMucGF0Y2gNCj4gPj4gYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQv
+dmxvY2svdmxvY2stMi4yLjMvZGlzYWJsZV92bG9ja3JjLnBhdGNoDQo+ID4+ID4gbmV3IGZpbGUg
+bW9kZSAxMDA2NDQNCj4gPj4gPiBpbmRleCAwMDAwMDAwMDAuLmVlMGQwNzRkZQ0KPiA+PiA+IC0t
+LSAvZGV2L251bGwNCj4gPj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxvY2sv
+dmxvY2stMi4yLjMvZGlzYWJsZV92bG9ja3JjLnBhdGNoDQo+ID4+ID4gQEAgLTAsMCArMSwzNyBA
+QA0KPiA+PiA+ICtVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2NvbmZpZ3VyYXRpb25d
+DQo+ID4+ID4gKw0KPiA+PiA+ICt3cml0dGVuIGJ5OiBKZWZmIFBvbGsgPGplZmYucG9sa0B3aW5k
+cml2ZXIuY29tPg0KPiA+Pg0KPiA+PiBJIHRoaW5rIGEgU09CIGlzIGJldHRlciB0aGFuIGludmVu
+dGluZyBhbm90aGVyIHRhZy4NCj4gPg0KPiA+IEkganVzdCBmb2xsb3cgdGhlIGd1aWRlbGluZToN
+Cj4gPg0KPiBodHRwOi8vd3d3Lm9wZW5lbWJlZGRlZC5vcmcvd2lraS9Db21taXRfUGF0Y2hfTWVz
+c2FnZV9HdWlkZWxpbmVzI0ltcA0KPiBvcnRpbmdfZnJvbV9FbHNld2hlcmUNCj4gPg0KPiA+ICIi
+Ig0KPiA+IEl0IGlzIGFsc28gbmVjZXNzYXJ5IHRvIGRvY3VtZW50IHRoZSBvcmlnaW5hbCBhdXRo
+b3Igb2YgdGhlIGNoYW5nZS4gWW91IHNob3VsZA0KPiBpbmRpY2F0ZSB0aGUgb3JpZ2luYWwgYXV0
+aG9yIGJ5IHNpbXBseSBzdGF0aW5nICJ3cml0dGVuIGJ5IiBvciAicG9zdGVkIHRvIHRoZSAuLi4N
+Cj4gbWFpbGluZyBsaXN0IGJ5Ii4gWW91IG11c3Qgbm90IGFkZCBhIFNpZ25lZC1vZmYtYnk6IHRh
+ZyBsaW5lIHdpdGggdGhlaXIgbmFtZSwgb25seQ0KPiB0aGUgb3JpZ2luYWwgYXV0aG9yIG1heSBh
+ZGQgdGhlaXIgb3duIFNpZ25lZC1vZmYtYnk6IHRhZyBsaW5lLg0KPiA+ICIiIg0KPiA+DQo+IA0K
+PiBJIHdhc24ndCBzdWdnZXN0aW5nIHRoYXQgeW91IGFkZCBTT0IgZm9yIHNvbWVvbmUgZWxzZS4g
+SSB3YXMgc3VnZ2VzdGluZyB0bw0KPiBub3QgaGF2ZSBvcmlnaW5hbCBhdXRob3IgYXR0cmlidXRp
+b24gc28gY2xvc2UgdG8gdGhlIGZvcm1hdCBmb3INCj4gU2lnbmVkLW9mZi1ieSwgdGVzdGVkLW9m
+Zi1ieSBldGMuIFNvbWV0aGluZyBsaWtlDQo+IA0KPiBPcmlnaW5hbCBQYXRjaCBmcm9tOiA8IHNv
+dXJjZSA+DQo+IA0KPiB3aGVyZSBzb3VyY2UgaXMgcHVibGljbHkgbGlzdGVkIFVSTCB3aGVyZSB0
+aGUgcGF0Y2ggaXMgcG9zdGVkLg0KDQpJIGdvdCB0aGUgcGF0Y2ggZnJvbSBvdXIgaW50ZXJuYWwg
+bGF5ZXIgYW5kIHRoZSBhdXRob3IgaXMgbm8gbG9uZ2VyIGluIG91ciBjb21wYW55LA0Kd2hhdCBp
+cyB0aGUgc3VnZ2VzdGluZyB3YXkgaWYgSSBjYW4ndCBmaW5kIGEgcHVibGljIFVSTCBmb3IgdGhp
+cz8NCg0KVGhhbmtzLA0KSmFja2llDQoNCj4gDQo+IA0KPiA+IFRoYW5rcywNCj4gPiBKYWNraWUN
+Cg==
 
