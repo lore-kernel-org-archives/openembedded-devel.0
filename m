@@ -1,62 +1,24 @@
-Return-Path: <idealsim@laposte.net>
-Received: from smtp.laposte.net (smtpoutz25.laposte.net [194.117.213.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 4637D7838C
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4CA4E77809
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 10:32:54 +0000 (UTC)
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 735D5104C0C
+	Thu, 17 Aug 2017 10:46:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7HAkoVD011161
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=laposte.net; s=mail0;
-	t=1502965975; bh=IAmYjAVHGc2BQo6GgYNuDfjMJ2ks1spnTFvOIKyCi5Y=;
-	h=To:From:Subject:Date;
-	b=Yv/WV6J2EdQVkTbCntXBuyTdNV+dvyOXVq6LEEmBh/jGm/RxwCXk0dZvVTDneWWom
-	U8Dy1v8gCTaNTLmL+sfzYMep/zM5pn5hbe6OED3wZJpLyT+qN45qCKFaIUCcYpTENg
-	xcOahWG6isfzG1zPothYJ8QM+k+yNC2XWwsgbPgKeBOp6j5RtyMKjhXzzvH19i8MU2
-	h2u+QcV/lVCIc26vDqiGLCUXyn842B3KVSnipI7JcwWFcda/pdtg/RxSAJMcdTA1X/
-	sloIyX5N+MS4xNG0pHxFtyTiZ+1GFR/vzc8vP4AR8qgu6NGyjcMWJW4pnkVjp+mNGQ
-	8zps5pX52TCnw==
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 64A01104C11
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
-Received: from lpn-prd-vrin004 (lpn-prd-vrin004.laposte [10.128.63.5])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 5F297104C0C
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
-Received: from lpn-prd-vrin004 (localhost [127.0.0.1])
-	by lpn-prd-vrin004 (Postfix) with ESMTP id 5164A713FC4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
-Received: from [192.168.1.19] (ARennes-654-1-262-25.w2-13.abo.wanadoo.fr
-	[2.13.73.25])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by lpn-prd-vrin004 (Postfix) with ESMTPSA id 0C526713FAB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 12:32:54 +0200 (CEST)
-To: openembedded-devel@lists.openembedded.org
-From: idealsim <idealsim@laposte.net>
-Message-ID: <c2b6cee4-59c7-c8f3-ebcb-5946172af1cc@laposte.net>
-Date: Thu, 17 Aug 2017 12:32:54 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+	Thu, 17 Aug 2017 03:46:56 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.167) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 17 Aug 2017 03:46:50 -0700
+From: <Qi.Chen@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 17 Aug 2017 18:51:31 +0800
+Message-ID: <1502967091-31272-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-X-VR-SrcIP: 2.13.73.25
-X-VR-FullState: 0
-X-VR-Score: 0
-X-VR-Cause-1: gggruggvucftvghtrhhoucdtuddrfeelkedruddtuddgvdejucetufdoteggodetrfdotffvucfrrhho
-X-VR-Cause-2: fhhilhgvmecunfetrffquffvgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefvhffukfff
-X-VR-Cause-3: fgggtgesrgdtreertdefjeenucfhrhhomhepihguvggrlhhsihhmuceoihguvggrlhhsihhmsehlrghp
-X-VR-Cause-4: ohhsthgvrdhnvghtqeenucfkphepvddrudefrdejfedrvdehnecurfgrrhgrmhepmhhouggvpehsmhht
-X-VR-Cause-5: phhouhhtpdhhvghloheplgduledvrdduieekrddurddulegnpdhinhgvthepvddrudefrdejfedrvdeh
-X-VR-Cause-6: pdhmrghilhhfrhhomhepihguvggrlhhsihhmsehlrghpohhsthgvrdhnvghtpdhrtghpthhtohepohhp
-X-VR-Cause-7: vghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrgh
-X-VR-AvState: No
-X-VR-State: 0
-X-VR-State: 0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [php5.6.26]error during build
+Subject: [meta-oe][PATCH] rsyslog: fix CVE-2017-12588
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,86 +31,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 10:32:55 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Aug 2017 10:46:57 -0000
+Content-Type: text/plain
 
-Hi try to build an image with php5.6.26 in pyro branch. I have this 
-error during the build :
+From: Chen Qi <Qi.Chen@windriver.com>
 
-/| ERROR: oe_runmake failed//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-In function `ssl_onceonlyinit'://
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-TSRM/.libs/TSRM.o: undefined reference to symbol 
-'pthread_getspecific@@GLIBC_2.4'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-error adding symbols: DSO missing from command line//
-//| collect2: error: ld returned 1 exit status//
-//| Makefile:270: recipe for target 'sapi/cli/php' failed//
-//| make: *** [sapi/cli/php] Error 1//
-//| make: *** Waiting for unfinished jobs....//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-In function `ssl_onceonlyinit'://
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-TSRM/.libs/TSRM.o: undefined reference to symbol 
-'pthread_getspecific@@GLIBC_2.4'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-error adding symbols: DSO missing from command line//
-//| collect2: error: ld returned 1 exit status//
-//| Makefile:306: recipe for target 'sapi/cgi/php-cgi' failed//
-//| make: *** [sapi/cgi/php-cgi] Error 1//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-In function `ssl_onceonlyinit'://
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-TSRM/.libs/TSRM.o: undefined reference to symbol 
-'pthread_getspecific@@GLIBC_2.4'//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-error adding symbols: DSO missing from command line//
-//| collect2: error: ld returned 1 exit status//
-//| Makefile:283: recipe for target 'sapi/fpm/php-fpm' failed//
-//| make: *** [sapi/fpm/php-fpm] Error 1//
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-In function `ssl_onceonlyinit'://
-//| 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-//| WARNING: exit code 1 from a shell command.//
-//| ERROR: Function failed: do_compile (log file is located at 
-/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/temp/log.do_compile.15528)//
-//ERROR: Task 
-(/media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile) 
-failed with exit code '1'//
-//NOTE: Tasks Summary: Attempted 6275 tasks of which 6269 didn't need to 
-be rerun and 1 failed.//
-//
-//Summary: 1 task failed://
-///media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile//
-//Summary: There was 1 WARNING message shown.//
-//Summary: There were 2 ERROR messages shown, returning a non-zero exit 
-code./
+Backport a patch to fix CVE-2017-12588.
 
-Do you have an idea to resolve this ?
+The zmq3 input and output modules in rsyslog before 8.28.0 interpreted
+description fields as format strings, possibly allowing a format string
+attack with unspecified impact.
 
-Mickael
+Reference: https://nvd.nist.gov/vuln/detail/CVE-2017-12588
+
+CVE: CVE-2017-12588
+
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+---
+ .../rsyslog/rsyslog/CVE-2017-12588.patch           | 40 ++++++++++++++++++++++
+ meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb |  1 +
+ 2 files changed, 41 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
+
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
+new file mode 100644
+index 0000000..73c3310
+--- /dev/null
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
+@@ -0,0 +1,40 @@
++From 6bc4aa975a83abed43d734299ce76cd9e1a14aec Mon Sep 17 00:00:00 2001
++From: Thomas Deutschmann <whissi@whissi.de>
++Date: Wed, 17 May 2017 23:05:24 +0200
++Subject: [PATCH] imzmq3: Fix building with -Werror=format-security
++
++Reference: https://nvd.nist.gov/vuln/detail/CVE-2017-12588
++
++CVE: 2017-12588
++
++Upstream-Status: Backport
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
++---
++ contrib/imzmq3/imzmq3.c | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/contrib/imzmq3/imzmq3.c b/contrib/imzmq3/imzmq3.c
++index 9ca17871..d32dcbc2 100644
++--- a/contrib/imzmq3/imzmq3.c
+++++ b/contrib/imzmq3/imzmq3.c
++@@ -403,7 +403,7 @@ static rsRetVal createSocket(instanceConf_t* info, void** sock) {
++ 
++     /* Do the bind/connect... */
++     if (info->action==ACTION_CONNECT) {
++-        rv = zsocket_connect(*sock, info->description);
+++        rv = zsocket_connect(*sock, "%s", info->description);
++         if (rv == -1) {
++             errmsg.LogError(0,
++                             RS_RET_INVALID_PARAMS,
++@@ -413,7 +413,7 @@ static rsRetVal createSocket(instanceConf_t* info, void** sock) {
++         }
++         DBGPRINTF("imzmq3: connect for %s successful\n",info->description);
++     } else {
++-        rv = zsocket_bind(*sock, info->description);
+++        rv = zsocket_bind(*sock, "%s", info->description);
++         if (rv == -1) {
++             errmsg.LogError(0,
++                             RS_RET_INVALID_PARAMS,
++-- 
++2.13.0
++
+diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+index d1d391b..6e3a75c 100644
+--- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
++++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+@@ -24,6 +24,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
+            file://use-pkgconfig-to-check-libgcrypt.patch \
+            file://run-ptest \
+            file://rsyslog-fix-ptest-not-finish.patch \
++           file://CVE-2017-12588.patch \
+ "
+ 
+ SRC_URI_append_libc-musl = " \
+-- 
+1.9.1
 
 
