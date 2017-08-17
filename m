@@ -1,27 +1,27 @@
 Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id B512E78441
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 850B4782A1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 06:39:37 +0000 (UTC)
+	Thu, 17 Aug 2017 06:39:41 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H6ddL9006666
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7H6dgZF007725
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 23:39:39 -0700 (PDT)
+	Wed, 16 Aug 2017 23:39:42 -0700
 Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Wed, 16 Aug 2017 23:39:38 -0700
+	Wed, 16 Aug 2017 23:39:41 -0700
 From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Aug 2017 14:40:14 +0800
-Message-ID: <1502952015-23737-2-git-send-email-yi.zhao@windriver.com>
+Date: Thu, 17 Aug 2017 14:40:15 +0800
+Message-ID: <1502952015-23737-3-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
 References: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
 MIME-Version: 1.0
 X-Originating-IP: [128.224.162.198]
-Subject: [meta-oe][PATCH 1/2] iproute2: add bbappend for supporting tipc tool
+Subject: [meta-oe][PATCH 2/2] tipcutils: add runtime dependency for iproute2-tipc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,32 +34,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 06:39:37 -0000
+X-List-Received-Date: Thu, 17 Aug 2017 06:39:41 -0000
 Content-Type: text/plain
 
 The tipcutils 2.2 removed the tipc-config tool and recommended to use
 the new configuration tool named "tipc" in iproute2 package for
 configuring the tipc, which utilizes the new tipc netlink kernel API.
 
-We supported tipc in iproute2 with PACKAGECONFIG in oe-core commit
-944ef0de241de77429ab0e5cb1dd4a7f355cf3fd
-
-Add iproute2 bbappend to enable tipc for tipcutils.
+Add iproute2-tipc as a runtime dependency.
 
 Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend | 2 ++
+ meta-oe/recipes-extended/tipcutils/tipcutils_git.bb | 2 ++
  1 file changed, 2 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
 
-diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
-new file mode 100644
-index 0000000..0869f7f
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
-@@ -0,0 +1,2 @@
-+# For tipcutils
-+PACKAGECONFIG_append = " tipc"
+diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+index b7157b4..720aa3c 100644
+--- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
++++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
+@@ -17,6 +17,8 @@ inherit autotools pkgconfig
+ 
+ DEPENDS += "libdaemon"
+ 
++RDEPENDS_${PN} = "iproute2-tipc"
++
+ S = "${WORKDIR}/git"
+ 
+ do_configure_prepend() {
 -- 
 2.7.4
 
