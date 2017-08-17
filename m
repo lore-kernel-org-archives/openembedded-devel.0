@@ -1,24 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id D473B7846B
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 65B857837B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 09:39:14 +0000 (UTC)
+	Thu, 17 Aug 2017 09:46:57 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H9dFgg008037
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 02:39:16 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Thu, 17 Aug 2017 02:39:15 -0700
-From: <kai.kang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Aug 2017 17:28:28 +0800
-Message-ID: <20170817092828.3629-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7H9kvXl012888
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 17 Aug 2017 02:46:57 -0700
+Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Thu, 17 Aug 2017 02:46:56 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1502959724-47472-1-git-send-email-dengke.du@windriver.com>
+	<CA+chaQc_JOJyRZf_LPk0w8jSMCFG93CoimNPAAv+dnpjWPPm3Q@mail.gmail.com>
+From: Dengke Du <dengke.du@windriver.com>
+Message-ID: <c0648e7f-842b-01ec-7a59-5ed6d383a314@windriver.com>
+Date: Thu, 17 Aug 2017 17:46:29 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Subject: [PATCH] mariadb: 5.5.55 -> 5.5.57
+In-Reply-To: <CA+chaQc_JOJyRZf_LPk0w8jSMCFG93CoimNPAAv+dnpjWPPm3Q@mail.gmail.com>
+X-Originating-IP: [128.224.162.194]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] c-ares: upgrade to 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,82 +37,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 09:39:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 17 Aug 2017 09:46:57 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-From: Kai Kang <kai.kang@windriver.com>
+OK, thanks.
 
-Upgrade mariadb from 5.5.55 to 5.5.57.
 
-* update SRC_URI that mariadb.com doesn't provides source tarball of 5.5.57
-* remove gcc7.patch which is not needed any more
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- .../{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb}  |  0
- meta-oe/recipes-support/mysql/mariadb.inc                   |  8 ++++----
- meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13 -------------
- .../mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb}          |  0
- 4 files changed, 4 insertions(+), 17 deletions(-)
- rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb} (100%)
- delete mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
- rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb} (100%)
-
-diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
-rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index fd9dcbd..32e3eaa 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -4,7 +4,7 @@ SECTION = "libs"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
--SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
-+SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
-            file://fix-cmake-module-path.patch \
-            file://remove-bad-path.patch \
-            file://fix-mysqlclient-r-version.patch \
-@@ -17,10 +17,10 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
-            file://fix-a-building-failure.patch \
-            file://change-cc-to-cc-version.patch \
-            file://0001-disable-ucontext-on-musl.patch \
--           file://gcc7.patch \
-           "
--SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
--SRC_URI[sha256sum] = "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
-+
-+SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
-+SRC_URI[sha256sum] = "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
- 
- S = "${WORKDIR}/mariadb-${PV}"
- 
-diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-deleted file mode 100644
-index 3e75b26..0000000
---- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-+++ /dev/null
-@@ -1,13 +0,0 @@
--Index: mariadb-5.5.55/client/mysql.cc
--===================================================================
----- mariadb-5.5.55.orig/client/mysql.cc
--+++ mariadb-5.5.55/client/mysql.cc
--@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
--         mysql_free_result(fields);
--         break;
--       }
---      field_names[i][num_fields*2]= '\0';
--+      field_names[i][num_fields*2][0]= '\0';
--       j=0;
--       while ((sql_field=mysql_fetch_field(fields)))
--       {
-diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
-similarity index 100%
-rename from meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
-rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
--- 
-2.10.1
+On 2017年08月17日 17:17, Martin Jansa wrote:
+> There is better change for this from Alexey Firago in master-next
+>
+> On Thu, Aug 17, 2017 at 10:48 AM, Dengke Du <dengke.du@windriver.com 
+> <mailto:dengke.du@windriver.com>> wrote:
+>
+>     Signed-off-by: Dengke Du <dengke.du@windriver.com
+>     <mailto:dengke.du@windriver.com>>
+>     ---
+>      .../recipes-support/c-ares/{c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb> => c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>}    | 4 ++--
+>      1 file changed, 2 insertions(+), 2 deletions(-)
+>      rename meta-networking/recipes-support/c-ares/{c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb> => c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>} (75%)
+>
+>     diff --git
+>     a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     similarity index 75%
+>     rename from
+>     meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     rename to meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     index 4e28d6a..0d9a2a4 100644
+>     --- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+>     <http://c-ares_1.12.0.bb>
+>     +++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+>     <http://c-ares_1.13.0.bb>
+>     @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =
+>     "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
+>      SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz
+>     <http://c-ares.haxx.se/download/$%7BBP%7D.tar.gz> \
+>                
+>     file://0001-configure.ac-don-t-override-passed-cflags.patch \
+>      "
+>     -SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
+>     -SRC_URI[sha256sum] =
+>     "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
+>     +SRC_URI[md5sum] = "d2e010b43537794d8bedfb562ae6bba2"
+>     +SRC_URI[sha256sum] =
+>     "03f708f1b14a26ab26c38abd51137640cb444d3ec72380b21b20f1a8d2861da7"
+>
+>      inherit autotools pkgconfig
+>     --
+>     2.8.1
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
 
 
