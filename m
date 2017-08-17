@@ -1,27 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 850B4782A1
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 47ACE78467
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 06:39:41 +0000 (UTC)
+	Thu, 17 Aug 2017 08:48:44 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7H6dgZF007725
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H8mjkb000178
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 23:39:42 -0700
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Wed, 16 Aug 2017 23:39:41 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
+	Thu, 17 Aug 2017 01:48:46 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 17 Aug 2017 01:48:45 -0700
+From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Aug 2017 14:40:15 +0800
-Message-ID: <1502952015-23737-3-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
-References: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
+Date: Thu, 17 Aug 2017 04:48:44 -0400
+Message-ID: <1502959724-47472-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-oe][PATCH 2/2] tipcutils: add runtime dependency for iproute2-tipc
+Subject: [meta-networking][PATCH] c-ares: upgrade to 1.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,34 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 06:39:41 -0000
+X-List-Received-Date: Thu, 17 Aug 2017 08:48:45 -0000
 Content-Type: text/plain
 
-The tipcutils 2.2 removed the tipc-config tool and recommended to use
-the new configuration tool named "tipc" in iproute2 package for
-configuring the tipc, which utilizes the new tipc netlink kernel API.
-
-Add iproute2-tipc as a runtime dependency.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-extended/tipcutils/tipcutils_git.bb | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-support/c-ares/{c-ares_1.12.0.bb => c-ares_1.13.0.bb}     | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/c-ares/{c-ares_1.12.0.bb => c-ares_1.13.0.bb} (75%)
 
-diff --git a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
-index b7157b4..720aa3c 100644
---- a/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
-+++ b/meta-oe/recipes-extended/tipcutils/tipcutils_git.bb
-@@ -17,6 +17,8 @@ inherit autotools pkgconfig
+diff --git a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+similarity index 75%
+rename from meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
+rename to meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+index 4e28d6a..0d9a2a4 100644
+--- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
++++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
+@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
+ SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz \
+            file://0001-configure.ac-don-t-override-passed-cflags.patch \
+ "
+-SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
+-SRC_URI[sha256sum] = "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
++SRC_URI[md5sum] = "d2e010b43537794d8bedfb562ae6bba2"
++SRC_URI[sha256sum] = "03f708f1b14a26ab26c38abd51137640cb444d3ec72380b21b20f1a8d2861da7"
  
- DEPENDS += "libdaemon"
- 
-+RDEPENDS_${PN} = "iproute2-tipc"
-+
- S = "${WORKDIR}/git"
- 
- do_configure_prepend() {
+ inherit autotools pkgconfig
 -- 
-2.7.4
+2.8.1
 
 
