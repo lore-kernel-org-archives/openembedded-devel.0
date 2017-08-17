@@ -1,30 +1,46 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 812E87837C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 736AC780A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 00:48:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H0mt9m010966
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 16 Aug 2017 17:48:55 -0700 (PDT)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.209]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0361.001;
-	Wed, 16 Aug 2017 17:48:55 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] vlock: add new recipe
-Thread-Index: AQHTFrLekOr51oYL/kyFY5Uy42p7CqKHtrvg
-Date: Thu, 17 Aug 2017 00:48:54 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B8652B2@ALA-MBD.corp.ad.wrs.com>
+	Thu, 17 Aug 2017 01:02:17 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id 83so7099716pgb.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Aug 2017 18:02:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=cBIVzYE6jLFDfG1XqRx5eJKgt/NkbE/IrY4b+sQt0ts=;
+	b=YBIdOrQdyDJjUwWkAwlcC9vROG1WhWBqjBNU4q3pXSiIpmLGZxGZ1MmvQIBJgK0/ZX
+	WfD+9E3MbCKo7vZdCnxd3ZIDxQ79UQyYhtKcVeiEG2LbhF4yyyCaXNIBTij0sGoaQ6RQ
+	74yOC38NSEZxvHSKhcGZsVH/MdibE8G7CCEJf4FY0YAPUOaaANMrHREEhFCiSSlW/grw
+	0SlkROdT+qPIW8g7J5seI3Wpv7g8pNww1Ng/0sZfi3U4QY6uHKTpjHVnaoKsv7ar5Xp4
+	EB0GG9BDlVqteszO7X08orkFN3H+FM4Lmv/84DqDIxFFcvGDbhhtBwcIXqRWqJNlqp4W
+	MMQw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=cBIVzYE6jLFDfG1XqRx5eJKgt/NkbE/IrY4b+sQt0ts=;
+	b=c6C02vCTwqU0pvNgUd7Ji6w07kxxOOlZK+Adek7T5dgml2NCDrkTqRcf4HoXcKZ4jl
+	P0qAarHmIma06fsor/KZgnx0G2nsOQzhfmrqAtrRbHxWLhj9i0uAkWpyjkgdAywQpZeb
+	u461JrSynKmj2POPkwMSa9WzicoYpezL5kDtOzDMe/+6E9K4R4JYsqP/iKnBaNvVegcX
+	l9nYrSEkDPfLpO9yzojjf7LB3qCPstEdoiwF+KX2An6L8Ag81Wg/3GE8X4OmdViiMa0q
+	cwxiOY7rASBCRLP6QJh1LJEGsia3vIitgsjlfS3vC6/x3uJY1pk95kpc8lo8rJ50hNfx
+	3Jeg==
+X-Gm-Message-State: AHYfb5iEA/fUD9LsXHuqYHmic/8LJDMeL6N7SjFwdv75HetIPY3IDZ3I
+	jp7k1D+NuO1hNL87apAIlEGrTAPpYg==
+X-Received: by 10.98.147.19 with SMTP id b19mr3465310pfe.283.1502931738659;
+	Wed, 16 Aug 2017 18:02:18 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.167.2 with HTTP; Wed, 16 Aug 2017 18:01:48 -0700 (PDT)
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA014B8652B2@ALA-MBD.corp.ad.wrs.com>
 References: <20170816053740.24934-1-jackie.huang@windriver.com>
 	<CAMKF1sr1sKAThgm-tJPam+VAMqg4=wtSv7qhZ5ciBq+c6-gjsg@mail.gmail.com>
-In-Reply-To: <CAMKF1sr1sKAThgm-tJPam+VAMqg4=wtSv7qhZ5ciBq+c6-gjsg@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.91]
-MIME-Version: 1.0
+	<1B858668EC6A94408DCA5225FDFA85AA014B8652B2@ALA-MBD.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 16 Aug 2017 18:01:48 -0700
+Message-ID: <CAMKF1sqf3=F9S2EymZnJ2N77=qx1-svNAVU+t7rd9qvnFxctvQ@mail.gmail.com>
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH v2] vlock: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -39,51 +55,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 00:48:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 17 Aug 2017 01:02:17 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
-bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFRodXJzZGF5LCBBdWd1c3QgMTcsIDIwMTcg
-MDE6MTINCj4gVG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4gQ2M6IG9wZW5lbWJlZGVkLWRldmVs
-DQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2Ml0gdmxvY2s6IGFkZCBuZXcg
-cmVjaXBlDQo+IA0KPiBPbiBUdWUsIEF1ZyAxNSwgMjAxNyBhdCAxMDozNyBQTSwgIDxqYWNraWUu
-aHVhbmdAd2luZHJpdmVyLmNvbT4gd3JvdGU6DQo+ID4gRnJvbTogSmFja2llIEh1YW5nIDxqYWNr
-aWUuaHVhbmdAd2luZHJpdmVyLmNvbT4NCj4gPg0KPiA+IHZsb2NrIGlzIGEgcHJvZ3JhbSB0byBs
-b2NrIG9uZSBvciBtb3JlDQo+ID4gc2Vzc2lvbnMgb24gdGhlIExpbnV4IGNvbnNvbGUuDQo+ID4N
-Cj4gPiBTaWduZWQtb2ZmLWJ5OiBKYWNraWUgSHVhbmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIu
-Y29tPg0KPiA+IC0tLQ0KPiA+ICAuLi4vdmxvY2svdmxvY2stMi4yLjMvZGlzYWJsZV92bG9ja3Jj
-LnBhdGNoICAgICAgICB8ICAzNyArKysrKysrDQo+ID4gIC4uLi92bG9jay92bG9jay0yLjIuMy92
-bG9jay1ub190YWxseS5wYXRjaCAgICAgICAgIHwgMTA3DQo+ICsrKysrKysrKysrKysrKysrKysr
-Kw0KPiA+ICAuLi4vcmVjaXBlcy1leHRlbmRlZC92bG9jay92bG9jay0yLjIuMy92bG9ja19wYW0g
-ICB8ICAgMyArDQo+ID4gIC4uLi92bG9jay92bG9jay0yLjIuMy92bG9ja19wYW1fdGFsbHkyX3Jl
-c2V0LnBhdGNoIHwgIDE5ICsrKysNCj4gPiAgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL3Zsb2Nr
-L3Zsb2NrXzIuMi4zLmJiICAgICAgfCAgNTkgKysrKysrKysrKysrDQo+ID4gIDUgZmlsZXMgY2hh
-bmdlZCwgMjI1IGluc2VydGlvbnMoKykNCj4gPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2Uv
-cmVjaXBlcy1leHRlbmRlZC92bG9jay92bG9jay0NCj4gMi4yLjMvZGlzYWJsZV92bG9ja3JjLnBh
-dGNoDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxv
-Y2svdmxvY2stMi4yLjMvdmxvY2stDQo+IG5vX3RhbGx5LnBhdGNoDQo+ID4gIGNyZWF0ZSBtb2Rl
-IDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxvY2svdmxvY2stMi4yLjMvdmxvY2tf
-cGFtDQo+ID4gIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxv
-Y2svdmxvY2stDQo+IDIuMi4zL3Zsb2NrX3BhbV90YWxseTJfcmVzZXQucGF0Y2gNCj4gPiAgY3Jl
-YXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC92bG9jay92bG9ja18yLjIu
-My5iYg0KPiA+DQo+ID4gZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1leHRlbmRlZC92bG9j
-ay92bG9jay0yLjIuMy9kaXNhYmxlX3Zsb2NrcmMucGF0Y2gNCj4gYi9tZXRhLW9lL3JlY2lwZXMt
-ZXh0ZW5kZWQvdmxvY2svdmxvY2stMi4yLjMvZGlzYWJsZV92bG9ja3JjLnBhdGNoDQo+ID4gbmV3
-IGZpbGUgbW9kZSAxMDA2NDQNCj4gPiBpbmRleCAwMDAwMDAwMDAuLmVlMGQwNzRkZQ0KPiA+IC0t
-LSAvZGV2L251bGwNCj4gPiArKysgYi9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvdmxvY2svdmxv
-Y2stMi4yLjMvZGlzYWJsZV92bG9ja3JjLnBhdGNoDQo+ID4gQEAgLTAsMCArMSwzNyBAQA0KPiA+
-ICtVcHN0cmVhbS1TdGF0dXM6IEluYXBwcm9wcmlhdGUgW2NvbmZpZ3VyYXRpb25dDQo+ID4gKw0K
-PiA+ICt3cml0dGVuIGJ5OiBKZWZmIFBvbGsgPGplZmYucG9sa0B3aW5kcml2ZXIuY29tPg0KPiAN
-Cj4gSSB0aGluayBhIFNPQiBpcyBiZXR0ZXIgdGhhbiBpbnZlbnRpbmcgYW5vdGhlciB0YWcuDQoN
-CkkganVzdCBmb2xsb3cgdGhlIGd1aWRlbGluZToNCmh0dHA6Ly93d3cub3BlbmVtYmVkZGVkLm9y
-Zy93aWtpL0NvbW1pdF9QYXRjaF9NZXNzYWdlX0d1aWRlbGluZXMjSW1wb3J0aW5nX2Zyb21fRWxz
-ZXdoZXJlDQoNCiIiIg0KSXQgaXMgYWxzbyBuZWNlc3NhcnkgdG8gZG9jdW1lbnQgdGhlIG9yaWdp
-bmFsIGF1dGhvciBvZiB0aGUgY2hhbmdlLiBZb3Ugc2hvdWxkIGluZGljYXRlIHRoZSBvcmlnaW5h
-bCBhdXRob3IgYnkgc2ltcGx5IHN0YXRpbmcgIndyaXR0ZW4gYnkiIG9yICJwb3N0ZWQgdG8gdGhl
-IC4uLiBtYWlsaW5nIGxpc3QgYnkiLiBZb3UgbXVzdCBub3QgYWRkIGEgU2lnbmVkLW9mZi1ieTog
-dGFnIGxpbmUgd2l0aCB0aGVpciBuYW1lLCBvbmx5IHRoZSBvcmlnaW5hbCBhdXRob3IgbWF5IGFk
-ZCB0aGVpciBvd24gU2lnbmVkLW9mZi1ieTogdGFnIGxpbmUuDQoiIiINCg0KVGhhbmtzLA0KSmFj
-a2llDQo=
+On Wed, Aug 16, 2017 at 5:48 PM, Huang, Jie (Jackie)
+<Jackie.Huang@windriver.com> wrote:
+>
+>
+>> -----Original Message-----
+>> From: Khem Raj [mailto:raj.khem@gmail.com]
+>> Sent: Thursday, August 17, 2017 01:12
+>> To: Huang, Jie (Jackie)
+>> Cc: openembeded-devel
+>> Subject: Re: [oe] [meta-oe][PATCH v2] vlock: add new recipe
+>>
+>> On Tue, Aug 15, 2017 at 10:37 PM,  <jackie.huang@windriver.com> wrote:
+>> > From: Jackie Huang <jackie.huang@windriver.com>
+>> >
+>> > vlock is a program to lock one or more
+>> > sessions on the Linux console.
+>> >
+>> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+>> > ---
+>> >  .../vlock/vlock-2.2.3/disable_vlockrc.patch        |  37 +++++++
+>> >  .../vlock/vlock-2.2.3/vlock-no_tally.patch         | 107
+>> +++++++++++++++++++++
+>> >  .../recipes-extended/vlock/vlock-2.2.3/vlock_pam   |   3 +
+>> >  .../vlock/vlock-2.2.3/vlock_pam_tally2_reset.patch |  19 ++++
+>> >  meta-oe/recipes-extended/vlock/vlock_2.2.3.bb      |  59 ++++++++++++
+>> >  5 files changed, 225 insertions(+)
+>> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-
+>> 2.2.3/disable_vlockrc.patch
+>> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock-
+>> no_tally.patch
+>> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-2.2.3/vlock_p=
+am
+>> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock-
+>> 2.2.3/vlock_pam_tally2_reset.patch
+>> >  create mode 100644 meta-oe/recipes-extended/vlock/vlock_2.2.3.bb
+>> >
+>> > diff --git a/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockr=
+c.patch
+>> b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
+>> > new file mode 100644
+>> > index 000000000..ee0d074de
+>> > --- /dev/null
+>> > +++ b/meta-oe/recipes-extended/vlock/vlock-2.2.3/disable_vlockrc.patch
+>> > @@ -0,0 +1,37 @@
+>> > +Upstream-Status: Inappropriate [configuration]
+>> > +
+>> > +written by: Jeff Polk <jeff.polk@windriver.com>
+>>
+>> I think a SOB is better than inventing another tag.
+>
+> I just follow the guideline:
+> http://www.openembedded.org/wiki/Commit_Patch_Message_Guidelines#Importin=
+g_from_Elsewhere
+>
+> """
+> It is also necessary to document the original author of the change. You s=
+hould indicate the original author by simply stating "written by" or "poste=
+d to the ... mailing list by". You must not add a Signed-off-by: tag line w=
+ith their name, only the original author may add their own Signed-off-by: t=
+ag line.
+> """
+>
+
+I wasn't suggesting that you add SOB for someone else. I was suggesting to
+not have original author attribution so close to the format for
+Signed-off-by, tested-off-by etc. Something like
+
+Original Patch from: < source >
+
+where source is publicly listed URL where the patch is posted.
+
+
+> Thanks,
+> Jackie
 
