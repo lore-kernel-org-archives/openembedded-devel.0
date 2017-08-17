@@ -1,24 +1,30 @@
-Return-Path: <Qi.Chen@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5FC3578357
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 53BBF78414
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 03:30:38 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7H3UdON003647
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Thu, 17 Aug 2017 05:49:51 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.41,386,1498492800"; d="scan'208";a="23863605"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 17 Aug 2017 13:49:52 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 79030472438F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Aug 2017 20:30:40 -0700
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.167) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 16 Aug 2017 20:30:39 -0700
-From: <Qi.Chen@windriver.com>
+	Thu, 17 Aug 2017 13:49:52 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.319.2; Thu, 17 Aug 2017 13:49:52 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Aug 2017 11:35:20 +0800
-Message-ID: <1502940920-30350-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 17 Aug 2017 13:49:39 +0800
+Message-ID: <1502948979-4046-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openobex: disable building documentation
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: 79030472438F.A4377
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] openwsman: rename to 2.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,35 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 03:30:39 -0000
+X-List-Received-Date: Thu, 17 Aug 2017 05:49:53 -0000
 Content-Type: text/plain
 
-From: Chen Qi <Qi.Chen@windriver.com>
+As openwsman has been upgrdaed to v2.6.3, but the name of recipe file still v2.6.2, so rename it.
 
-When building openobex on a host without any connection to outside,
-the configure fails as it tries to get some url from outside to build
-the documentation.
-
-Fix this problem by disabling building documentation.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb | 1 +
- 1 file changed, 1 insertion(+)
+ .../recipes-extended/openwsman/{openwsman_2.6.2.bb => openwsman_2.6.3.bb} | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename meta-oe/recipes-extended/openwsman/{openwsman_2.6.2.bb => openwsman_2.6.3.bb} (100%)
 
-diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-index 053c80a..2db48f3 100644
---- a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-+++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-@@ -21,6 +21,7 @@ inherit cmake pkgconfig
- S = "${WORKDIR}/${BP}-Source"
- 
- EXTRA_OECONF = " -DCMAKE_SKIP_RPATH=ON "
-+EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF"
- 
- #--enable-apps --enable-syslog
- 
+diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
+similarity index 100%
+rename from meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
+rename to meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
 -- 
-1.9.1
+2.7.4
+
+
 
 
