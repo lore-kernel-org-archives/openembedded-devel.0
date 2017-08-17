@@ -1,30 +1,25 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 53BBF78414
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 70E0F78433
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 05:49:51 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.41,386,1498492800"; d="scan'208";a="23863605"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 17 Aug 2017 13:49:52 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 79030472438F
+	Thu, 17 Aug 2017 06:39:34 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7H6dZ8Z008700
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 13:49:52 +0800 (CST)
-Received: from localhost.localdomain (10.167.235.93) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.319.2; Thu, 17 Aug 2017 13:49:52 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Wed, 16 Aug 2017 23:39:35 -0700 (PDT)
+Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Wed, 16 Aug 2017 23:39:35 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Aug 2017 13:49:39 +0800
-Message-ID: <1502948979-4046-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Thu, 17 Aug 2017 14:40:13 +0800
+Message-ID: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.235.93]
-X-yoursite-MailScanner-ID: 79030472438F.A4377
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] openwsman: rename to 2.6.3
+X-Originating-IP: [128.224.162.198]
+Subject: [meta-oe][PATCH 0/2] Add tipc tool for tipcutils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,24 +32,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 05:49:53 -0000
+X-List-Received-Date: Thu, 17 Aug 2017 06:39:34 -0000
 Content-Type: text/plain
 
-As openwsman has been upgrdaed to v2.6.3, but the name of recipe file still v2.6.2, so rename it.
+Yi Zhao (2):
+  iproute2: add bbappend for supporting tipc tool
+  tipcutils: add runtime dependency for iproute2-tipc
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- .../recipes-extended/openwsman/{openwsman_2.6.2.bb => openwsman_2.6.3.bb} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-extended/openwsman/{openwsman_2.6.2.bb => openwsman_2.6.3.bb} (100%)
+ meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend | 2 ++
+ meta-oe/recipes-extended/tipcutils/tipcutils_git.bb       | 2 ++
+ 2 files changed, 4 insertions(+)
+ create mode 100644 meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
 
-diff --git a/meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb b/meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
-similarity index 100%
-rename from meta-oe/recipes-extended/openwsman/openwsman_2.6.2.bb
-rename to meta-oe/recipes-extended/openwsman/openwsman_2.6.3.bb
 -- 
 2.7.4
-
-
 
 
