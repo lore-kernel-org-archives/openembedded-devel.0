@@ -1,30 +1,62 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 65B857837B
+Return-Path: <idealsim@laposte.net>
+Received: from smtp.laposte.net (smtpoutz25.laposte.net [194.117.213.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 4637D7838C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 09:46:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7H9kvXl012888
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 17 Aug 2017 02:46:57 -0700
-Received: from [128.224.162.194] (128.224.162.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Thu, 17 Aug 2017 02:46:56 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <1502959724-47472-1-git-send-email-dengke.du@windriver.com>
-	<CA+chaQc_JOJyRZf_LPk0w8jSMCFG93CoimNPAAv+dnpjWPPm3Q@mail.gmail.com>
-From: Dengke Du <dengke.du@windriver.com>
-Message-ID: <c0648e7f-842b-01ec-7a59-5ed6d383a314@windriver.com>
-Date: Thu, 17 Aug 2017 17:46:29 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Thu, 17 Aug 2017 10:32:54 +0000 (UTC)
+Received: from smtp.laposte.net (localhost [127.0.0.1])
+	by lpn-prd-vrout013 (Postfix) with ESMTP id 735D5104C0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=laposte.net; s=mail0;
+	t=1502965975; bh=IAmYjAVHGc2BQo6GgYNuDfjMJ2ks1spnTFvOIKyCi5Y=;
+	h=To:From:Subject:Date;
+	b=Yv/WV6J2EdQVkTbCntXBuyTdNV+dvyOXVq6LEEmBh/jGm/RxwCXk0dZvVTDneWWom
+	U8Dy1v8gCTaNTLmL+sfzYMep/zM5pn5hbe6OED3wZJpLyT+qN45qCKFaIUCcYpTENg
+	xcOahWG6isfzG1zPothYJ8QM+k+yNC2XWwsgbPgKeBOp6j5RtyMKjhXzzvH19i8MU2
+	h2u+QcV/lVCIc26vDqiGLCUXyn842B3KVSnipI7JcwWFcda/pdtg/RxSAJMcdTA1X/
+	sloIyX5N+MS4xNG0pHxFtyTiZ+1GFR/vzc8vP4AR8qgu6NGyjcMWJW4pnkVjp+mNGQ
+	8zps5pX52TCnw==
+Received: from smtp.laposte.net (localhost [127.0.0.1])
+	by lpn-prd-vrout013 (Postfix) with ESMTP id 64A01104C11
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
+Received: from lpn-prd-vrin004 (lpn-prd-vrin004.laposte [10.128.63.5])
+	by lpn-prd-vrout013 (Postfix) with ESMTP id 5F297104C0C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
+Received: from lpn-prd-vrin004 (localhost [127.0.0.1])
+	by lpn-prd-vrin004 (Postfix) with ESMTP id 5164A713FC4
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Aug 2017 12:32:55 +0200 (CEST)
+Received: from [192.168.1.19] (ARennes-654-1-262-25.w2-13.abo.wanadoo.fr
+	[2.13.73.25])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by lpn-prd-vrin004 (Postfix) with ESMTPSA id 0C526713FAB
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Aug 2017 12:32:54 +0200 (CEST)
+To: openembedded-devel@lists.openembedded.org
+From: idealsim <idealsim@laposte.net>
+Message-ID: <c2b6cee4-59c7-c8f3-ebcb-5946172af1cc@laposte.net>
+Date: Thu, 17 Aug 2017 12:32:54 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.8.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQc_JOJyRZf_LPk0w8jSMCFG93CoimNPAAv+dnpjWPPm3Q@mail.gmail.com>
-X-Originating-IP: [128.224.162.194]
+X-VR-SrcIP: 2.13.73.25
+X-VR-FullState: 0
+X-VR-Score: 0
+X-VR-Cause-1: gggruggvucftvghtrhhoucdtuddrfeelkedruddtuddgvdejucetufdoteggodetrfdotffvucfrrhho
+X-VR-Cause-2: fhhilhgvmecunfetrffquffvgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefvhffukfff
+X-VR-Cause-3: fgggtgesrgdtreertdefjeenucfhrhhomhepihguvggrlhhsihhmuceoihguvggrlhhsihhmsehlrghp
+X-VR-Cause-4: ohhsthgvrdhnvghtqeenucfkphepvddrudefrdejfedrvdehnecurfgrrhgrmhepmhhouggvpehsmhht
+X-VR-Cause-5: phhouhhtpdhhvghloheplgduledvrdduieekrddurddulegnpdhinhgvthepvddrudefrdejfedrvdeh
+X-VR-Cause-6: pdhmrghilhhfrhhomhepihguvggrlhhsihhmsehlrghpohhsthgvrdhnvghtpdhrtghpthhtohepohhp
+X-VR-Cause-7: vghnvghmsggvugguvgguqdguvghvvghlsehlihhsthhsrdhophgvnhgvmhgsvgguuggvugdrohhrgh
+X-VR-AvState: No
+X-VR-State: 0
+X-VR-State: 0
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] c-ares: upgrade to 1.13.0
+Subject: [php5.6.26]error during build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,73 +69,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Aug 2017 09:46:57 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 17 Aug 2017 10:32:55 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-OK, thanks.
+Hi try to build an image with php5.6.26 in pyro branch. I have this 
+error during the build :
 
+/| ERROR: oe_runmake failed//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
+In function `ssl_onceonlyinit'://
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
+warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
+TSRM/.libs/TSRM.o: undefined reference to symbol 
+'pthread_getspecific@@GLIBC_2.4'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
+error adding symbols: DSO missing from command line//
+//| collect2: error: ld returned 1 exit status//
+//| Makefile:270: recipe for target 'sapi/cli/php' failed//
+//| make: *** [sapi/cli/php] Error 1//
+//| make: *** Waiting for unfinished jobs....//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
+In function `ssl_onceonlyinit'://
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
+warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
+TSRM/.libs/TSRM.o: undefined reference to symbol 
+'pthread_getspecific@@GLIBC_2.4'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
+error adding symbols: DSO missing from command line//
+//| collect2: error: ld returned 1 exit status//
+//| Makefile:306: recipe for target 'sapi/cgi/php-cgi' failed//
+//| make: *** [sapi/cgi/php-cgi] Error 1//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
+In function `ssl_onceonlyinit'://
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
+warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
+TSRM/.libs/TSRM.o: undefined reference to symbol 
+'pthread_getspecific@@GLIBC_2.4'//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
+error adding symbols: DSO missing from command line//
+//| collect2: error: ld returned 1 exit status//
+//| Makefile:283: recipe for target 'sapi/fpm/php-fpm' failed//
+//| make: *** [sapi/fpm/php-fpm] Error 1//
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
+In function `ssl_onceonlyinit'://
+//| 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
+warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
+//| WARNING: exit code 1 from a shell command.//
+//| ERROR: Function failed: do_compile (log file is located at 
+/media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/temp/log.do_compile.15528)//
+//ERROR: Task 
+(/media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile) 
+failed with exit code '1'//
+//NOTE: Tasks Summary: Attempted 6275 tasks of which 6269 didn't need to 
+be rerun and 1 failed.//
+//
+//Summary: 1 task failed://
+///media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile//
+//Summary: There was 1 WARNING message shown.//
+//Summary: There were 2 ERROR messages shown, returning a non-zero exit 
+code./
 
-On 2017年08月17日 17:17, Martin Jansa wrote:
-> There is better change for this from Alexey Firago in master-next
->
-> On Thu, Aug 17, 2017 at 10:48 AM, Dengke Du <dengke.du@windriver.com 
-> <mailto:dengke.du@windriver.com>> wrote:
->
->     Signed-off-by: Dengke Du <dengke.du@windriver.com
->     <mailto:dengke.du@windriver.com>>
->     ---
->      .../recipes-support/c-ares/{c-ares_1.12.0.bb
->     <http://c-ares_1.12.0.bb> => c-ares_1.13.0.bb
->     <http://c-ares_1.13.0.bb>}    | 4 ++--
->      1 file changed, 2 insertions(+), 2 deletions(-)
->      rename meta-networking/recipes-support/c-ares/{c-ares_1.12.0.bb
->     <http://c-ares_1.12.0.bb> => c-ares_1.13.0.bb
->     <http://c-ares_1.13.0.bb>} (75%)
->
->     diff --git
->     a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
->     <http://c-ares_1.12.0.bb>
->     b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
->     <http://c-ares_1.13.0.bb>
->     similarity index 75%
->     rename from
->     meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
->     <http://c-ares_1.12.0.bb>
->     rename to meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
->     <http://c-ares_1.13.0.bb>
->     index 4e28d6a..0d9a2a4 100644
->     --- a/meta-networking/recipes-support/c-ares/c-ares_1.12.0.bb
->     <http://c-ares_1.12.0.bb>
->     +++ b/meta-networking/recipes-support/c-ares/c-ares_1.13.0.bb
->     <http://c-ares_1.13.0.bb>
->     @@ -9,7 +9,7 @@ LIC_FILES_CHKSUM =
->     "file://LICENSE.md;md5=f4b026880834eb01c035c5e5cb47ccac"
->      SRC_URI = "http://c-ares.haxx.se/download/${BP}.tar.gz
->     <http://c-ares.haxx.se/download/$%7BBP%7D.tar.gz> \
->                
->     file://0001-configure.ac-don-t-override-passed-cflags.patch \
->      "
->     -SRC_URI[md5sum] = "2ca44be1715cd2c5666a165d35788424"
->     -SRC_URI[sha256sum] =
->     "8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb"
->     +SRC_URI[md5sum] = "d2e010b43537794d8bedfb562ae6bba2"
->     +SRC_URI[sha256sum] =
->     "03f708f1b14a26ab26c38abd51137640cb444d3ec72380b21b20f1a8d2861da7"
->
->      inherit autotools pkgconfig
->     --
->     2.8.1
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->
->
+Do you have an idea to resolve this ?
+
+Mickael
 
 
