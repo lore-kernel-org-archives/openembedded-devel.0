@@ -1,28 +1,31 @@
 Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 638B27833C
+	by mail.openembedded.org (Postfix) with ESMTP id A1AAB78442
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Aug 2017 18:15:35 +0000 (UTC)
+	Fri, 18 Aug 2017 18:39:47 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7IIF7UW026043
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7IIdlFS026525
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Fri, 18 Aug 2017 11:15:07 -0700
+	Fri, 18 Aug 2017 11:39:47 -0700
 Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 18 Aug 2017 11:15:06 -0700
-To: idealsim <idealsim@laposte.net>,
-	<openembedded-devel@lists.openembedded.org>
-References: <c2b6cee4-59c7-c8f3-ebcb-5946172af1cc@laposte.net>
+	Fri, 18 Aug 2017 11:39:46 -0700
+To: Yi Zhao <yi.zhao@windriver.com>, Khem Raj <raj.khem@gmail.com>
+References: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
+	<1502952015-23737-2-git-send-email-yi.zhao@windriver.com>
+	<CAMKF1soqnxmDPWcr5-zOBRGo8CSO7qyYCXM3jzm66FfO4TPnhg@mail.gmail.com>
+	<fef5a9c1-95e7-c49f-f5b2-a1b46bb1b860@windriver.com>
 From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <40e2291e-7b4a-17a2-853a-9b7c257f2a6a@windriver.com>
-Date: Fri, 18 Aug 2017 14:15:02 -0400
+Message-ID: <00070e83-1df7-8006-a47f-b9b906c6f883@windriver.com>
+Date: Fri, 18 Aug 2017 14:39:45 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <c2b6cee4-59c7-c8f3-ebcb-5946172af1cc@laposte.net>
+In-Reply-To: <fef5a9c1-95e7-c49f-f5b2-a1b46bb1b860@windriver.com>
 X-Originating-IP: [172.25.44.7]
-Subject: Re: [php5.6.26]error during build
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] iproute2: add bbappend for supporting tipc tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,124 +38,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Aug 2017 18:15:35 -0000
+X-List-Received-Date: Fri, 18 Aug 2017 18:39:47 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 8bit
 
-On 2017-08-17 06:32 AM, idealsim wrote:
-> Hi try to build an image with php5.6.26 in pyro branch. I have this 
-> error during the build :
+On 2017-08-18 02:10 AM, Yi Zhao wrote:
 > 
-> /| ERROR: oe_runmake failed//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-> In function `ssl_onceonlyinit'://
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-> TSRM/.libs/TSRM.o: undefined reference to symbol 
-> 'pthread_getspecific@@GLIBC_2.4'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-> error adding symbols: DSO missing from command line//
-> //| collect2: error: ld returned 1 exit status//
-> //| Makefile:270: recipe for target 'sapi/cli/php' failed//
-> //| make: *** [sapi/cli/php] Error 1//
-> //| make: *** Waiting for unfinished jobs....//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-> In function `ssl_onceonlyinit'://
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-> TSRM/.libs/TSRM.o: undefined reference to symbol 
-> 'pthread_getspecific@@GLIBC_2.4'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-> error adding symbols: DSO missing from command line//
-> //| collect2: error: ld returned 1 exit status//
-> //| Makefile:306: recipe for target 'sapi/cgi/php-cgi' failed//
-> //| make: *** [sapi/cgi/php-cgi] Error 1//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-> In function `ssl_onceonlyinit'://
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld: 
-> TSRM/.libs/TSRM.o: undefined reference to symbol 
-> 'pthread_getspecific@@GLIBC_2.4'//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0: 
-> error adding symbols: DSO missing from command line//
-> //| collect2: error: ld returned 1 exit status//
-> //| Makefile:283: recipe for target 'sapi/fpm/php-fpm' failed//
-> //| make: *** [sapi/fpm/php-fpm] Error 1//
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o): 
-> In function `ssl_onceonlyinit'://
-> //| 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302: 
-> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
-> //| WARNING: exit code 1 from a shell command.//
-> //| ERROR: Function failed: do_compile (log file is located at 
-> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/temp/log.do_compile.15528)// 
 > 
-> //ERROR: Task 
-> (/media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile) 
-> failed with exit code '1'//
-> //NOTE: Tasks Summary: Attempted 6275 tasks of which 6269 didn't need to 
-> be rerun and 1 failed.//
-> //
-> //Summary: 1 task failed://
-> ///media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile// 
+> 在 2017年08月17日 22:01, Khem Raj 写道:
+>> On Wed, Aug 16, 2017 at 11:40 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+>>> The tipcutils 2.2 removed the tipc-config tool and recommended to use
+>>> the new configuration tool named "tipc" in iproute2 package for
+>>> configuring the tipc, which utilizes the new tipc netlink kernel API.
+>>>
+>>> We supported tipc in iproute2 with PACKAGECONFIG in oe-core commit
+>>> 944ef0de241de77429ab0e5cb1dd4a7f355cf3fd
+>>>
+>>> Add iproute2 bbappend to enable tipc for tipcutils.
+>>>
+>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>> ---
+>>>   meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend | 2 ++
+>>>   1 file changed, 2 insertions(+)
+>>>   create mode 100644 
+>>> meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>
+>>> diff --git 
+>>> a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend 
+>>> b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>> new file mode 100644
+>>> index 0000000..0869f7f
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>> @@ -0,0 +1,2 @@
+>>> +# For tipcutils
+>>> +PACKAGECONFIG_append = " tipc"
+>> can we do it in recipe proper itself ?
 > 
-> //Summary: There was 1 WARNING message shown.//
-> //Summary: There were 2 ERROR messages shown, returning a non-zero exit 
-> code./
+> Hi Khem,
 > 
-> Do you have an idea to resolve this ?
+> The tipc in iproute2 needs libmnl as dependency.  Currently libmnl is in 
+> meta-networking and there are some packages in meta-networking need it 
+> as dependency, so we can not enable tipc build in oe-core directly.
+> If we want to enable it in iproute2 recipe directly, we should move 
+> libmnl to oe-core. I don't know if it is worth to do that because few 
+> people need tipc. How do you think about it ?
 
-Hmm, the recipe might just be missing a -lpthread?
+We should move libmnl and the iproute2 change to oe-core.
 
-For example, see this fix for oe-core's apr recipe:
+By default, TIPC is enabled as a module in YP kernel:
 
-$ git log -1 --stat ef9dfc361e5e97157d05dfeaf67a3e872648d372
-commit ef9dfc361e5e97157d05dfeaf67a3e872648d372
-Author: Andreas Müller <schnitzeltony@googlemail.com>
-Date:   Sat Mar 4 11:24:09 2017 +0100
+$ grep TIPC 
+tmp-glibc/work/qemuppc-oe-linux/linux-yocto/4.10.17+gitAUTOINC+e92bd55409_6648a34e00-r0/linux-qemuppc-standard-build/.config
+CONFIG_TIPC=m
+CONFIG_TIPC_MEDIA_UDP=y
 
-     apr: fix rss+perf+gold failure on do_compile_ptest_base
+so it should be configurable with just the oe-core layer.
 
-     Was detected in Martin's world build
+Once libmnl is in oe-core, we could move nftables,
+"the successor to iptables" to oe-core say at the start of
+the 2.5 dev cycle.
 
-     Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
-     Signed-off-by: Ross Burton <ross.burton@intel.com>
-
- 
-meta/recipes-support/apr/apr/0002-explicitly-link-libapr-against-phtread-to-make-gold-.patch 
-| 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
-  meta/recipes-support/apr/apr_1.5.2.bb 
-                       |  1 +
-  2 files changed, 51 insertions(+)
-
-
-but the bigger question is why bother with php5 rather than
-php7? Clearly few, if any, meta-oe users are using php5 and
-some people have suggested just removing it.
-
-Good luck,
 ../Randy
 
-
 > 
-> Mickael
+> Thanks,
+> Yi
+> 
+>>
+>>> -- 
+>>> 2.7.4
+>>>
+>>> -- 
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 > 
 
 
