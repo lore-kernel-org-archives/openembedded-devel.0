@@ -1,27 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id AF0D6780C3
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 71ED87845A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Aug 2017 02:49:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7I2nVuV022774
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 18 Aug 2017 03:00:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7I2tlS5004207
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Aug 2017 19:49:31 -0700 (PDT)
-Received: from [128.224.162.212] (128.224.162.212) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 17 Aug 2017 19:49:30 -0700
+	Thu, 17 Aug 2017 19:55:48 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 17 Aug 2017 19:55:46 -0700
+From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <20170817092828.3629-1-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
-Date: Fri, 18 Aug 2017 10:51:50 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+Date: Thu, 17 Aug 2017 22:55:45 -0400
+Message-ID: <1503024945-85605-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-In-Reply-To: <20170817092828.3629-1-kai.kang@windriver.com>
-Subject: Re: [meta-oe][PATCH] mariadb: 5.5.55 -> 5.5.57
+Subject: [PATCH] libvpx: upgrade to 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,93 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Aug 2017 02:49:31 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 18 Aug 2017 03:00:00 -0000
+Content-Type: text/plain
 
-On 2017年08月17日 17:28, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Upgrade mariadb from 5.5.55 to 5.5.57.
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
+---
+ meta-oe/recipes-multimedia/webm/{libvpx_1.5.0.bb => libvpx_1.6.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-multimedia/webm/{libvpx_1.5.0.bb => libvpx_1.6.0.bb} (90%)
 
-Forgot [meta-oe] in title. Sorry for inconvenience.
-
---Kai
-
->
-> * update SRC_URI that mariadb.com doesn't provides source tarball of 5.5.57
-> * remove gcc7.patch which is not needed any more
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   .../{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb}  |  0
->   meta-oe/recipes-support/mysql/mariadb.inc                   |  8 ++++----
->   meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13 -------------
->   .../mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb}          |  0
->   4 files changed, 4 insertions(+), 17 deletions(-)
->   rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb => mariadb-native_5.5.57.bb} (100%)
->   delete mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->   rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb => mariadb_5.5.57.bb} (100%)
->
-> diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
-> similarity index 100%
-> rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
-> rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
-> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-> index fd9dcbd..32e3eaa 100644
-> --- a/meta-oe/recipes-support/mysql/mariadb.inc
-> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
-> @@ -4,7 +4,7 @@ SECTION = "libs"
->   LICENSE = "GPLv2"
->   LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->   
-> -SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${PV}.tar.gz \
-> +SRC_URI = "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz \
->              file://fix-cmake-module-path.patch \
->              file://remove-bad-path.patch \
->              file://fix-mysqlclient-r-version.patch \
-> @@ -17,10 +17,10 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
->              file://fix-a-building-failure.patch \
->              file://change-cc-to-cc-version.patch \
->              file://0001-disable-ucontext-on-musl.patch \
-> -           file://gcc7.patch \
->             "
-> -SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
-> -SRC_URI[sha256sum] = "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
-> +
-> +SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
-> +SRC_URI[sha256sum] = "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
->   
->   S = "${WORKDIR}/mariadb-${PV}"
->   
-> diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-> deleted file mode 100644
-> index 3e75b26..0000000
-> --- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
-> +++ /dev/null
-> @@ -1,13 +0,0 @@
-> -Index: mariadb-5.5.55/client/mysql.cc
-> -===================================================================
-> ---- mariadb-5.5.55.orig/client/mysql.cc
-> -+++ mariadb-5.5.55/client/mysql.cc
-> -@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
-> -         mysql_free_result(fields);
-> -         break;
-> -       }
-> --      field_names[i][num_fields*2]= '\0';
-> -+      field_names[i][num_fields*2][0]= '\0';
-> -       j=0;
-> -       while ((sql_field=mysql_fetch_field(fields)))
-> -       {
-> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
-> similarity index 100%
-> rename from meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
-> rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
-
-
+diff --git a/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb b/meta-oe/recipes-multimedia/webm/libvpx_1.6.0.bb
+similarity index 90%
+rename from meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
+rename to meta-oe/recipes-multimedia/webm/libvpx_1.6.0.bb
+index 648818e..b5a8cff 100644
+--- a/meta-oe/recipes-multimedia/webm/libvpx_1.5.0.bb
++++ b/meta-oe/recipes-multimedia/webm/libvpx_1.6.0.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=d5b04755015be901744a78cc30d390d4"
+ SRC_URI += "http://storage.googleapis.com/downloads.webmproject.org/releases/webm/${BP}.tar.bz2 \
+             file://libvpx-configure-support-blank-prefix.patch \
+            "
+-SRC_URI[md5sum] = "49e59dd184caa255886683facea56fca"
+-SRC_URI[sha256sum] = "306d67908625675f8e188d37a81fbfafdf5068b09d9aa52702b6fbe601c76797"
++SRC_URI[md5sum] = "f95a176768a0e1bb4fe42742e27a41af"
++SRC_URI[sha256sum] = "d0afbb5eb1ecae68f8d578abace160a97e2e8a230e3028cf4db115d59a695aad"
+ 
+ # ffmpeg links with this and fails
+ # sysroots/armv4t-oe-linux-gnueabi/usr/lib/libvpx.a(vpx_encoder.c.o)(.text+0xc4): unresolvable R_ARM_THM_CALL relocation against symbol `memcpy@@GLIBC_2.4'
 -- 
-Regards,
-Neil | Kai Kang
+2.8.1
 
 
