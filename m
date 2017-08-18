@@ -1,29 +1,30 @@
 Return-Path: <Yi.Zhao@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1A2EE78411
+	by mail.openembedded.org (Postfix) with ESMTP id 379187855E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Aug 2017 05:14:26 +0000 (UTC)
+	Fri, 18 Aug 2017 06:10:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7I5ERtJ008150
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7I6A2TF009112
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Thu, 17 Aug 2017 22:14:27 -0700
+	Thu, 17 Aug 2017 23:10:02 -0700
 Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Thu, 17 Aug 2017 22:14:26 -0700
-To: Khem Raj <raj.khem@gmail.com>, <openembedded-devel@lists.openembedded.org>
-References: <1503032354-3955-1-git-send-email-yi.zhao@windriver.com>
-	<CAMKF1sp43WJ-X7z=7cLw_QvKdWOS_n4-tCBQLKG=kY89ezMStQ@mail.gmail.com>
+	Thu, 17 Aug 2017 23:10:01 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
+	<1502952015-23737-2-git-send-email-yi.zhao@windriver.com>
+	<CAMKF1soqnxmDPWcr5-zOBRGo8CSO7qyYCXM3jzm66FfO4TPnhg@mail.gmail.com>
 From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <8963f081-9f7d-560a-c69e-3fff783fc08a@windriver.com>
-Date: Fri, 18 Aug 2017 13:15:07 +0800
+Message-ID: <fef5a9c1-95e7-c49f-f5b2-a1b46bb1b860@windriver.com>
+Date: Fri, 18 Aug 2017 14:10:42 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sp43WJ-X7z=7cLw_QvKdWOS_n4-tCBQLKG=kY89ezMStQ@mail.gmail.com>
+In-Reply-To: <CAMKF1soqnxmDPWcr5-zOBRGo8CSO7qyYCXM3jzm66FfO4TPnhg@mail.gmail.com>
 X-Originating-IP: [128.224.162.198]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-networking][PATCH] quagga: update to 1.2.1
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] iproute2: add bbappend for supporting tipc tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,174 +37,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Aug 2017 05:14:27 -0000
-Content-Language: en-US
+X-List-Received-Date: Fri, 18 Aug 2017 06:10:03 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
 
 
-在 2017年08月18日 13:05, Khem Raj 写道:
->
-> On Thu, Aug 17, 2017 at 9:58 PM Yi Zhao <yi.zhao@windriver.com 
-> <mailto:yi.zhao@windriver.com>> wrote:
->
->     * Add c-ares as dependency
->     * Remove variable QUAGGASUBDIR as it is not needed anymore
->     * Remove the duplicated RDEPENDS_${PN} += "iproute2"
->
->     Signed-off-by: Yi Zhao <yi.zhao@windriver.com
->     <mailto:yi.zhao@windriver.com>>
->     ---
->      .../recipes-protocols/quagga/quagga.inc            | 24
->     ++++++++--------------
->      .../recipes-protocols/quagga/quagga_1.1.0.bb
->     <http://quagga_1.1.0.bb>      |  6 ------
->      .../recipes-protocols/quagga/quagga_1.2.1.bb
->     <http://quagga_1.2.1.bb>      |  4 ++++
->      3 files changed, 12 insertions(+), 22 deletions(-)
->      delete mode 100644
->     meta-networking/recipes-protocols/quagga/quagga_1.1.0.bb
->     <http://quagga_1.1.0.bb>
->      create mode 100644
->     meta-networking/recipes-protocols/quagga/quagga_1.2.1.bb
->     <http://quagga_1.2.1.bb>
->
->     diff --git a/meta-networking/recipes-protocols/quagga/quagga.inc
->     b/meta-networking/recipes-protocols/quagga/quagga.inc
->     index 4fb6723..dfd6aa7 100644
->     --- a/meta-networking/recipes-protocols/quagga/quagga.inc
->     +++ b/meta-networking/recipes-protocols/quagga/quagga.inc
->     @@ -7,21 +7,20 @@ Ishiguro. The Quagga tree aims to build a more
->     involved community \
->      around Quagga than the current centralised model of GNU Zebra."
->      HOMEPAGE = "http://www.nongnu.org/quagga/"
->      SECTION = "net"
->     -LICENSE = "GPL-2.0 & LGPL-2.0"
->
->
-> Perhaps this should be LGPL-2.1 can you cross check
+在 2017年08月17日 22:01, Khem Raj 写道:
+> On Wed, Aug 16, 2017 at 11:40 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+>> The tipcutils 2.2 removed the tipc-config tool and recommended to use
+>> the new configuration tool named "tipc" in iproute2 package for
+>> configuring the tipc, which utilizes the new tipc netlink kernel API.
+>>
+>> We supported tipc in iproute2 with PACKAGECONFIG in oe-core commit
+>> 944ef0de241de77429ab0e5cb1dd4a7f355cf3fd
+>>
+>> Add iproute2 bbappend to enable tipc for tipcutils.
+>>
+>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>> ---
+>>   meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend | 2 ++
+>>   1 file changed, 2 insertions(+)
+>>   create mode 100644 meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>
+>> diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>> new file mode 100644
+>> index 0000000..0869f7f
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>> @@ -0,0 +1,2 @@
+>> +# For tipcutils
+>> +PACKAGECONFIG_append = " tipc"
+> can we do it in recipe proper itself ?
 
-Thanks Khem,
+Hi Khem,
 
-I checked the COPYING.LIB, it is 2.0, not 2.1.
+The tipc in iproute2 needs libmnl as dependency.  Currently libmnl is in 
+meta-networking and there are some packages in meta-networking need it 
+as dependency, so we can not enable tipc build in oe-core directly.
+If we want to enable it in iproute2 recipe directly, we should move 
+libmnl to oe-core. I don't know if it is worth to do that because few 
+people need tipc. How do you think about it ?
 
+Thanks,
 Yi
 
 >
->     -DEPENDS = "readline ncurses perl-native"
->     -DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'snmp',
->     'net-snmp', '', d)}"
->     -SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp',
->     '--enable-snmp', '', d)}"
->
->     +
->     +LICENSE = "GPL-2.0 & LGPL-2.0"
->      LIC_FILES_CHKSUM =
->     "file://COPYING;md5=81bcece21748c91ba9992349a91ec11d \
->      file://COPYING.LIB;md5=01ef24401ded36cd8e5d18bfe947240c"
->
->     +DEPENDS = "readline ncurses perl-native c-ares"
->     +DEPENDS += "${@bb.utils.contains('DISTRO_FEATURES', 'snmp',
->     'net-snmp', '', d)}"
->     +SNMP_CONF="${@bb.utils.contains('DISTRO_FEATURES', 'snmp',
->     '--enable-snmp', '', d)}"
->     +
->      # the "ip" command from busybox is not sufficient (flush by
->     protocol flushes all routes)
->      RDEPENDS_${PN} += "iproute2"
->
->     -QUAGGASUBDIR = ""
->     -# ${QUAGGASUBDIR} is deal with old versions. Set to "/attic" for old
->     -# versions and leave it empty for recent versions.
->     -SRC_URI =
->     "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
->     +SRC_URI = "${SAVANNAH_GNU_MIRROR}/quagga/quagga-${PV}.tar.gz; \
->                 file://quagga.init \
->                 file://quagga.default \
->                 file://watchquagga.init \
->     @@ -35,7 +34,7 @@ SRC_URI =
->     "${SAVANNAH_GNU_MIRROR}/quagga${QUAGGASUBDIR}/quagga-${PV}.tar.gz; \
->                 file://ripd.service \
->                 file://ripngd.service \
->                 file://zebra.service \
->     -"
->     +          "
->
->      PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pam', d)}"
->      PACKAGECONFIG[cap] =
->     "--enable-capabilities,--disable-capabilities,libcap"
->     @@ -108,10 +107,6 @@ do_install () {
->          sed -i 's!/var/!${localstatedir}/!g'
->     ${D}${sysconfdir}/init.d/*
->     ${D}${sysconfdir}/default/volatiles/volatiles.03_quagga
->          sed -i
->     's!^PATH=.*!PATH=${base_sbindir}:${sbindir}:${base_bindir}:${bindir}!'
->     ${D}${sysconfdir}/init.d/*
->
->     -    # Remove generated info dir file, it doesn't belong in the
->     generated
->     -    # package.
->     -    rm -f ${D}${infodir}/dir
->     -
->          # For PAM
->          for feature in ${DISTRO_FEATURES}; do
->              if [ "$feature" = "pam" ]; then
->     @@ -188,9 +183,6 @@ CONFFILES_${PN}-watchquagga =
->     "${sysconfdir}/default/watchquagga"
->      DEBIAN_NOAUTONAME_${PN}-ospfd = "1"
->      DEBIAN_NOAUTONAME_${PN}-ospfclient = "1"
->
->     -# the "ip" command from busybox is not sufficient (flush by
->     protocol flushes all routes)
->     -RDEPENDS_${PN}          += "iproute2"
->     -
->      # Main init script starts all deamons
->      # Seperate init script for watchquagga
->      INITSCRIPT_PACKAGES                     = "${PN} ${PN}-watchquagga"
->     diff --git
->     a/meta-networking/recipes-protocols/quagga/quagga_1.1.0.bb
->     <http://quagga_1.1.0.bb>
->     b/meta-networking/recipes-protocols/quagga/quagga_1.1.0.bb
->     <http://quagga_1.1.0.bb>
->     deleted file mode 100644
->     index 1b5c34c..0000000
->     --- a/meta-networking/recipes-protocols/quagga/quagga_1.1.0.bb
->     <http://quagga_1.1.0.bb>
->     +++ /dev/null
->     @@ -1,6 +0,0 @@
->     -require quagga.inc
->     -
->     -SRC_URI[md5sum] = "daa303871e07ea5856aae6fd79e89722"
->     -SRC_URI[sha256sum] =
->     "f7a43a9c59bfd3722002210530b2553c8d5cc05bfea5acd56d4f102b9f55dc63"
->     -
->     -QUAGGASUBDIR = ""
->     diff --git
->     a/meta-networking/recipes-protocols/quagga/quagga_1.2.1.bb
->     <http://quagga_1.2.1.bb>
->     b/meta-networking/recipes-protocols/quagga/quagga_1.2.1.bb
->     <http://quagga_1.2.1.bb>
->     new file mode 100644
->     index 0000000..4d43d7b
->     --- /dev/null
->     +++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.1.bb
->     <http://quagga_1.2.1.bb>
->     @@ -0,0 +1,4 @@
->     +require quagga.inc
->     +
->     +SRC_URI[md5sum] = "b1546de89062f7070d56e780b30be4b1"
->     +SRC_URI[sha256sum] =
->     "aaddba5d4f41ed8e4c2f155f4584c993465d122c9096b5b52ada3fc75266fbcd"
->     --
->     2.7.4
->
->     --
->     _______________________________________________
->     Openembedded-devel mailing list
->     Openembedded-devel@lists.openembedded.org
->     <mailto:Openembedded-devel@lists.openembedded.org>
->     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
 
