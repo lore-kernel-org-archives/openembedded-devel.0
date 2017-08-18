@@ -1,28 +1,28 @@
 Return-Path: <Randy.MacLeod@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id E281371A2D
+	by mail.openembedded.org (Postfix) with ESMTP id C0E0D784C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Aug 2017 15:57:07 +0000 (UTC)
+	Fri, 18 Aug 2017 16:03:43 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7IFv82R025261
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7IG3jDs025313
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Aug 2017 08:57:08 -0700 (PDT)
+	Fri, 18 Aug 2017 09:03:45 -0700 (PDT)
 Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 18 Aug 2017 08:57:07 -0700
+	Fri, 18 Aug 2017 09:03:44 -0700
 To: <Qi.Chen@windriver.com>, <openembedded-devel@lists.openembedded.org>
-References: <1502940920-30350-1-git-send-email-Qi.Chen@windriver.com>
+References: <1502967091-31272-1-git-send-email-Qi.Chen@windriver.com>
 From: Randy MacLeod <randy.macleod@windriver.com>
-Message-ID: <2a09e83a-dab4-467c-a1ec-4f93687f203c@windriver.com>
-Date: Fri, 18 Aug 2017 11:57:06 -0400
+Message-ID: <614fa943-e47f-c40e-c99d-f5743f5dcfa9@windriver.com>
+Date: Fri, 18 Aug 2017 12:03:43 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <1502940920-30350-1-git-send-email-Qi.Chen@windriver.com>
+In-Reply-To: <1502967091-31272-1-git-send-email-Qi.Chen@windriver.com>
 X-Originating-IP: [172.25.44.7]
-Subject: Re: [meta-oe][PATCH] openobex: disable building documentation
+Subject: Re: [meta-oe][PATCH] rsyslog: fix CVE-2017-12588
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,44 +35,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Aug 2017 15:57:08 -0000
+X-List-Received-Date: Fri, 18 Aug 2017 16:03:43 -0000
 Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-On 2017-08-16 11:35 PM, Qi.Chen@windriver.com wrote:
+On 2017-08-17 06:51 AM, Qi.Chen@windriver.com wrote:
 > From: Chen Qi <Qi.Chen@windriver.com>
 > 
-> When building openobex on a host without any connection to outside,
-> the configure fails as it tries to get some url from outside to build
-> the documentation.
+> Backport a patch to fix CVE-2017-12588.
 > 
-> Fix this problem by disabling building documentation.
+> The zmq3 input and output modules in rsyslog before 8.28.0 interpreted
+> description fields as format strings, possibly allowing a format string
+> attack with unspecified impact.
+> 
+> Reference: https://nvd.nist.gov/vuln/detail/CVE-2017-12588
+> 
+> CVE: CVE-2017-12588
 > 
 > Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 > ---
->   meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb | 1 +
->   1 file changed, 1 insertion(+)
+>   .../rsyslog/rsyslog/CVE-2017-12588.patch           | 40 ++++++++++++++++++++++
+>   meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb |  1 +
+>   2 files changed, 41 insertions(+)
+>   create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
 > 
-> diff --git a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> index 053c80a..2db48f3 100644
-> --- a/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> +++ b/meta-oe/recipes-connectivity/obex/openobex_1.7.2.bb
-> @@ -21,6 +21,7 @@ inherit cmake pkgconfig
->   S = "${WORKDIR}/${BP}-Source"
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
+> new file mode 100644
+> index 0000000..73c3310
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog/CVE-2017-12588.patch
+> @@ -0,0 +1,40 @@
+> +From 6bc4aa975a83abed43d734299ce76cd9e1a14aec Mon Sep 17 00:00:00 2001
+> +From: Thomas Deutschmann <whissi@whissi.de>
+> +Date: Wed, 17 May 2017 23:05:24 +0200
+> +Subject: [PATCH] imzmq3: Fix building with -Werror=format-security
+> +
+> +Reference: https://nvd.nist.gov/vuln/detail/CVE-2017-12588
+> +
+> +CVE: 2017-12588
+> +
+> +Upstream-Status: Backport
+> +Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> +---
+> + contrib/imzmq3/imzmq3.c | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +diff --git a/contrib/imzmq3/imzmq3.c b/contrib/imzmq3/imzmq3.c
+> +index 9ca17871..d32dcbc2 100644
+> +--- a/contrib/imzmq3/imzmq3.c
+> ++++ b/contrib/imzmq3/imzmq3.c
+> +@@ -403,7 +403,7 @@ static rsRetVal createSocket(instanceConf_t* info, void** sock) {
+> +
+> +     /* Do the bind/connect... */
+> +     if (info->action==ACTION_CONNECT) {
+> +-        rv = zsocket_connect(*sock, info->description);
+> ++        rv = zsocket_connect(*sock, "%s", info->description);
+> +         if (rv == -1) {
+> +             errmsg.LogError(0,
+> +                             RS_RET_INVALID_PARAMS,
+> +@@ -413,7 +413,7 @@ static rsRetVal createSocket(instanceConf_t* info, void** sock) {
+> +         }
+> +         DBGPRINTF("imzmq3: connect for %s successful\n",info->description);
+> +     } else {
+> +-        rv = zsocket_bind(*sock, info->description);
+> ++        rv = zsocket_bind(*sock, "%s", info->description);
+> +         if (rv == -1) {
+> +             errmsg.LogError(0,
+> +                             RS_RET_INVALID_PARAMS,
+> +--
+> +2.13.0
+> +
+> diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+> index d1d391b..6e3a75c 100644
+> --- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+> +++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
+> @@ -24,6 +24,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
+>              file://use-pkgconfig-to-check-libgcrypt.patch \
+>              file://run-ptest \
+>              file://rsyslog-fix-ptest-not-finish.patch \
+> +           file://CVE-2017-12588.patch \
+>   "
 >   
->   EXTRA_OECONF = " -DCMAKE_SKIP_RPATH=ON "
-> +EXTRA_OECMAKE += "-DBUILD_DOCUMENTATION=OFF"
->   
->   #--enable-apps --enable-syslog
->   
+>   SRC_URI_append_libc-musl = " \
 > 
 
-Okay as a work-around. I guess.
 
-What would it take to add the additional data/src used
-to build the docs?
-
+Better to just upgrade to 8.25. It was released in February so
+it should be well tested.
 
 -- 
 # Randy MacLeod. SMTS, Linux, Wind River
