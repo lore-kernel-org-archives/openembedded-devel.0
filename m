@@ -1,69 +1,48 @@
-Return-Path: <idealsim@laposte.net>
-Received: from smtp.laposte.net (smtpoutz25.laposte.net [194.117.213.100])
-	by mail.openembedded.org (Postfix) with ESMTP id BD293605FE
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F6A36FF7F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 08:18:15 +0000 (UTC)
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 79919104C4C
+	Sat, 19 Aug 2017 10:17:24 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id q189so6704272wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 10:18:16 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=laposte.net; s=mail0;
-	t=1503130696; bh=fVJKceC8QMQuictYWuKEI4wTvbGJXreolIZmXrqBl4w=;
-	h=Subject:To:References:From:Date:In-Reply-To;
-	b=G9ls3nlDuDeFlQP7bTQiMTbrVqdNZhbTWvBRj50CoFp3a+MWMKmftuwHthel2OkEN
-	mUiY5iXHchM92cbnMlofNUjELPrzVlV11B37aKplYwsayg6Gni+G30MoHFhg+wB860
-	kvf9GNDDY6C4SFZv2/iwB22lgHf7fRsagY9QjrQRLcYl6+6ndy3kb3XUEJkGEBxhpp
-	Y0jpGQKmMf1VcKVwC5REWCaYUm7Fq+8IgqFS7Lc/zsda9sHWsbSpuK2smysmwkD7rf
-	gpJG8NwCSOsK9FdNpwub3M8VTeOSeLQtsXKP4Z0VnKgbPqXisIvBQQfJ8beEm5kfZ+
-	5jQMWrwQyWj/w==
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 591391046CE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 10:18:16 +0200 (CEST)
-Received: from lpn-prd-vrin004 (lpn-prd-vrin004.laposte [10.128.63.5])
-	by lpn-prd-vrout013 (Postfix) with ESMTP id 57B1D104C5E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 10:18:16 +0200 (CEST)
-Received: from lpn-prd-vrin004 (localhost [127.0.0.1])
-	by lpn-prd-vrin004 (Postfix) with ESMTP id 462FB714052
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 10:18:16 +0200 (CEST)
-Received: from [192.168.1.19] (ARennes-654-1-118-187.w2-13.abo.wanadoo.fr
-	[2.13.101.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by lpn-prd-vrin004 (Postfix) with ESMTPSA id 865C7713F83;
-	Sat, 19 Aug 2017 10:18:15 +0200 (CEST)
-To: "Slater, Joseph" <joe.slater@windriver.com>,
-	"MacLeod, Randy" <Randy.MacLeod@windriver.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <c2b6cee4-59c7-c8f3-ebcb-5946172af1cc@laposte.net>
-	<40e2291e-7b4a-17a2-853a-9b7c257f2a6a@windriver.com>
-	<007BD92917A2324FA403BCF9A464CF84CF3E5925@ALA-MBD.corp.ad.wrs.com>
-From: idealsim <idealsim@laposte.net>
-Message-ID: <7992d32b-93b6-8a8d-836f-587d6bb53ecb@laposte.net>
-Date: Sat, 19 Aug 2017 10:18:14 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
-MIME-Version: 1.0
-In-Reply-To: <007BD92917A2324FA403BCF9A464CF84CF3E5925@ALA-MBD.corp.ad.wrs.com>
-X-VR-SrcIP: 2.13.101.187
-X-VR-FullState: 0
-X-VR-Score: -100
-X-VR-Cause-1: gggruggvucftvghtrhhoucdtuddrfeelkedruddthedgtdefucetufdoteggodetrfdotffvucfrrhho
-X-VR-Cause-2: fhhilhgvmecunfetrffquffvgfenuceurghilhhouhhtmecuhedttdenucesvcftvggtihhpihgvnhht
-X-VR-Cause-3: shculddquddttddmnecujfgurhepuffvfhfhkffffgggjggtsegrtderredtfeehnecuhfhrohhmpehi
-X-VR-Cause-4: uggvrghlshhimhcuoehiuggvrghlshhimheslhgrphhoshhtvgdrnhgvtheqnecuffhomhgrihhnpeho
-X-VR-Cause-5: phgvnhgvmhgsvgguuggvugdrohhrghenucfkphepvddrudefrddutddurddukeejnecurfgrrhgrmhep
-X-VR-Cause-6: mhhouggvpehsmhhtphhouhhtpdhhvghloheplgduledvrdduieekrddurddulegnpdhinhgvthepvddr
-X-VR-Cause-7: udefrddutddurddukeejpdhmrghilhhfrhhomhepihguvggrlhhsihhmsehlrghpohhsthgvrdhnvght
-X-VR-Cause-8: pdhrtghpthhtohepjhhovgdrshhlrghtvghrseifihhnughrihhvvghrrdgtohhm
-X-VR-AvState: No
-X-VR-State: 0
-X-VR-State: 0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [php5.6.26]error during build
+	Sat, 19 Aug 2017 03:17:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=nwxkbIPHDlUPPqXlw3HDDUYZ/ejQY3tKIdOYYQZbZdc=;
+	b=nM/s0WIi8wWDTQ9nR3qFFxJFaFuHjOk7ApY+FjFnljfjKsPyJWtxnYGB7os/+rkaTA
+	7PuMlBtwxj+PW43rYd7SYcXWPjQw39JBaf9EV9YxvvKDOapeaSjQ8iCyzEwxzBUN9vyj
+	6z22r79n2cOdByyHAajM8LXmYid6i3hLcBVcy4xiXsTnKsFj0sT/r+6Kbrmq8yykgQFM
+	sS/CbY1bfvv8MOG5s8hgRob1xHsp8LVYn2gJWVshag0BnvXonTiQzgPcBJkNz+urddT1
+	N1FXOM/2YCSb5Ic/1ZCn+0aoWCHEDcUM43ojqc26rmoVU/Y/szes4Nyst303A/h0Defb
+	e3iQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=nwxkbIPHDlUPPqXlw3HDDUYZ/ejQY3tKIdOYYQZbZdc=;
+	b=O0j5YqPjUIYifcG05RLrlN/M56xil3OPtoBt9hRK8sB5jMiK6zEMJvPbvwlbwEFPHz
+	00UOsIrPX87IlIRteZuQ8ro9GdqSFcJt8ljsRaDbd+ncVlVAyQD1QbTxSwaGFD43Z7Ax
+	2v3inRNC3RxgUHBlRIJXt5Gb/fP3jMRi+Oqws0QWXEYJ1VKEs/nM8SuNosYLvLaaG4JI
+	PMSh9cSc9XofK501bW2cA8cPawzIqkc4KA1MIVWaQCsaqd1HieCoPUBhLXLvgXYkSpuS
+	wPpFUM101u+hG2WUIagKD0QrlkiIBiFDgz74llOVm9oN9Ud+dcojjcT9MQnHlJYfJGKx
+	sm6A==
+X-Gm-Message-State: AHYfb5hw7/w0N17cDGi0PxyxjJvJDZmV/eH+fMjbQeQwueC6SdrjcY9k
+	gop+T4bYuLAAitm5
+X-Received: by 10.28.61.4 with SMTP id k4mr2780287wma.148.1503137845384;
+	Sat, 19 Aug 2017 03:17:25 -0700 (PDT)
+Received: from localhost ([217.30.68.212])
+	by smtp.gmail.com with ESMTPSA id f4sm2554641wmh.28.2017.08.19.03.17.24
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Aug 2017 03:17:24 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 19 Aug 2017 12:19:01 +0200
+Message-Id: <20170819101901.22156-2-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.14.0
+In-Reply-To: <20170819101901.22156-1-Martin.Jansa@gmail.com>
+References: <20170819101901.22156-1-Martin.Jansa@gmail.com>
+Subject: [meta-qt5][PATCH 2/2] qtwebengine: add a fix for building demobrowser without printing support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -76,153 +55,286 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Aug 2017 08:18:17 -0000
-Content-Type: text/plain; charset=windows-1252; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 19 Aug 2017 10:17:25 -0000
 
-Thanks for this. For information i tested to build php5 because i have 
-an issue when i try to build php7 in pyro !*
-*
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../0005-Always-compile-QWebEnginePage-print.patch | 241 +++++++++++++++++++++
+ recipes-qt/qt5/qtwebengine_git.bb                  |   6 +
+ 2 files changed, 247 insertions(+)
+ create mode 100644 recipes-qt/qt5/qtwebengine/0005-Always-compile-QWebEnginePage-print.patch
 
-But,  Khem Ra give me the solution (for php 5 and 7) :
-
-http://git.openembedded.org/meta-openembedded/commit/?id=6cd249225ecdd0a4592afe1844541378acae6cea
-
-
-Regards,
-
-Le 18/08/2017 à 21:26, Slater, Joseph a écrit :
-> There is a patch on master, 6cd2492, that you can cherry-pick.  It addresses more than just this issue, though.
->
-> Joe
->
-> ________________________________________
-> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel-bounces@lists.openembedded.org] on behalf of Randy MacLeod [randy.macleod@windriver.com]
-> Sent: Friday, August 18, 2017 11:15 AM
-> To: idealsim; openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [php5.6.26]error during build
->
-> On 2017-08-17 06:32 AM, idealsim wrote:
->> Hi try to build an image with php5.6.26 in pyro branch. I have this
->> error during the build :
->>
->> /| ERROR: oe_runmake failed//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o):
->> In function `ssl_onceonlyinit'://
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302:
->> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld:
->> TSRM/.libs/TSRM.o: undefined reference to symbol
->> 'pthread_getspecific@@GLIBC_2.4'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0:
->> error adding symbols: DSO missing from command line//
->> //| collect2: error: ld returned 1 exit status//
->> //| Makefile:270: recipe for target 'sapi/cli/php' failed//
->> //| make: *** [sapi/cli/php] Error 1//
->> //| make: *** Waiting for unfinished jobs....//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o):
->> In function `ssl_onceonlyinit'://
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302:
->> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld:
->> TSRM/.libs/TSRM.o: undefined reference to symbol
->> 'pthread_getspecific@@GLIBC_2.4'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0:
->> error adding symbols: DSO missing from command line//
->> //| collect2: error: ld returned 1 exit status//
->> //| Makefile:306: recipe for target 'sapi/cgi/php-cgi' failed//
->> //| make: *** [sapi/cgi/php-cgi] Error 1//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o):
->> In function `ssl_onceonlyinit'://
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302:
->> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot-native/usr/bin/arm-poky-linux-gnueabi/../../libexec/arm-poky-linux-gnueabi/gcc/arm-poky-linux-gnueabi/6.3.0/ld:
->> TSRM/.libs/TSRM.o: undefined reference to symbol
->> 'pthread_getspecific@@GLIBC_2.4'//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/lib/libpthread.so.0:
->> error adding symbols: DSO missing from command line//
->> //| collect2: error: ld returned 1 exit status//
->> //| Makefile:283: recipe for target 'sapi/fpm/php-fpm' failed//
->> //| make: *** [sapi/fpm/php-fpm] Error 1//
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/recipe-sysroot/usr/lib/../lib/libc-client.a(osdep.o):
->> In function `ssl_onceonlyinit'://
->> //|
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/uw-imap/2007f-r0/imap-2007f/c-client/osdep.c:302:
->> warning: the use of `tmpnam' is dangerous, better use `mkstemp'//
->> //| WARNING: exit code 1 from a shell command.//
->> //| ERROR: Function failed: do_compile (log file is located at
->> /media/modjo/data1TO/yocto/pyro/quadBuild/tmp/work/udooqdl-poky-linux-gnueabi/php/5.6.26-r0/temp/log.do_compile.15528)//
->>
->> //ERROR: Task
->> (/media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile)
->> failed with exit code '1'//
->> //NOTE: Tasks Summary: Attempted 6275 tasks of which 6269 didn't need to
->> be rerun and 1 failed.//
->> //
->> //Summary: 1 task failed://
->> ///media/modjo/data1TO/yocto/pyro/sources/meta-openembedded/meta-oe/recipes-devtools/php/php_5.6.26.bb:do_compile//
->>
->> //Summary: There was 1 WARNING message shown.//
->> //Summary: There were 2 ERROR messages shown, returning a non-zero exit
->> code./
->>
->> Do you have an idea to resolve this ?
-> Hmm, the recipe might just be missing a -lpthread?
->
-> For example, see this fix for oe-core's apr recipe:
->
-> $ git log -1 --stat ef9dfc361e5e97157d05dfeaf67a3e872648d372
-> commit ef9dfc361e5e97157d05dfeaf67a3e872648d372
-> Author: Andreas Müller <schnitzeltony@googlemail.com>
-> Date:   Sat Mar 4 11:24:09 2017 +0100
->
->       apr: fix rss+perf+gold failure on do_compile_ptest_base
->
->       Was detected in Martin's world build
->
->       Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
->       Signed-off-by: Ross Burton <ross.burton@intel.com>
->
->
-> meta/recipes-support/apr/apr/0002-explicitly-link-libapr-against-phtread-to-make-gold-.patch
-> | 50 ++++++++++++++++++++++++++++++++++++++++++++++++++
->    meta/recipes-support/apr/apr_1.5.2.bb
->                         |  1 +
->    2 files changed, 51 insertions(+)
->
->
-> but the bigger question is why bother with php5 rather than
-> php7? Clearly few, if any, meta-oe users are using php5 and
-> some people have suggested just removing it.
->
-> Good luck,
-> ../Randy
->
->
->> Mickael
->>
->
-> --
-> # Randy MacLeod. SMTS, Linux, Wind River
-> Direct: 613.963.1350 | 350 Terry Fox Drive, Suite 200, Ottawa, ON,
-> Canada, K2K 2W5
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/recipes-qt/qt5/qtwebengine/0005-Always-compile-QWebEnginePage-print.patch b/recipes-qt/qt5/qtwebengine/0005-Always-compile-QWebEnginePage-print.patch
+new file mode 100644
+index 0000000..c63086d
+--- /dev/null
++++ b/recipes-qt/qt5/qtwebengine/0005-Always-compile-QWebEnginePage-print.patch
+@@ -0,0 +1,241 @@
++From a8c0deca850ca519b3f146c71492a8f42a33dd84 Mon Sep 17 00:00:00 2001
++From: =?UTF-8?q?J=C3=BCri=20Valdmann?= <juri.valdmann@qt.io>
++Date: Tue, 20 Jun 2017 15:36:43 +0200
++Subject: [PATCH] Always compile QWebEnginePage::print
++
++- Remove two out of five layers of ifdefs around and inside this method.
++- Now always compiled but will yield an error if printing is disabled.
++- Remove printing-related ifdefs from demobrowser.
++
++Task-number: QTBUG-61510
++Change-Id: I79781189d3d3fb62db0a2216b2b989e3fa1d1f86
++Reviewed-by: Allan Sandfeld Jensen <allan.jensen@qt.io>
++Reviewed-by: Rolf Eike Beer <eb@emlix.com>
++---
++ examples/webenginewidgets/demobrowser/browsermainwindow.cpp | 12 ------------
++ examples/webenginewidgets/demobrowser/browsermainwindow.h   |  6 ------
++ examples/webenginewidgets/demobrowser/printtopdfdialog.cpp  |  7 -------
++ src/webenginewidgets/api/qwebenginepage.cpp                 | 10 ++--------
++ src/webenginewidgets/api/qwebenginepage.h                   |  8 --------
++ 5 files changed, 2 insertions(+), 41 deletions(-)
++
++diff --git a/examples/webenginewidgets/demobrowser/browsermainwindow.cpp b/examples/webenginewidgets/demobrowser/browsermainwindow.cpp
++index 327d7a9d..14d49f7f 100644
++--- a/examples/webenginewidgets/demobrowser/browsermainwindow.cpp
+++++ b/examples/webenginewidgets/demobrowser/browsermainwindow.cpp
++@@ -109,9 +109,7 @@ BrowserMainWindow::BrowserMainWindow(QWidget *parent, Qt::WindowFlags flags)
++     , m_historyForward(0)
++     , m_stop(0)
++     , m_reload(0)
++-#ifndef QT_NO_PRINTER
++     , m_currentPrinter(nullptr)
++-#endif
++ {
++     setToolButtonStyle(Qt::ToolButtonFollowStyle);
++     setAttribute(Qt::WA_DeleteOnClose, true);
++@@ -312,9 +310,7 @@ void BrowserMainWindow::setupMenu()
++ #if defined(QWEBENGINEPAGE_PRINT)
++     fileMenu->addAction(tr("P&rint Preview..."), this, SLOT(slotFilePrintPreview()));
++ #endif
++-#ifndef QT_NO_PRINTER
++     fileMenu->addAction(tr("&Print..."), this, SLOT(slotFilePrint()), QKeySequence::Print);
++-#endif
++     fileMenu->addAction(tr("&Print to PDF..."), this, SLOT(slotFilePrintToPDF()));
++     fileMenu->addSeparator();
++ 
++@@ -702,23 +698,19 @@ void BrowserMainWindow::slotFileOpen()
++ 
++ void BrowserMainWindow::slotFilePrintPreview()
++ {
++-#ifndef QT_NO_PRINTPREVIEWDIALOG
++     if (!currentTab())
++         return;
++     QPrintPreviewDialog *dialog = new QPrintPreviewDialog(this);
++     connect(dialog, SIGNAL(paintRequested(QPrinter*)),
++             currentTab(), SLOT(print(QPrinter*)));
++     dialog->exec();
++-#endif
++ }
++ 
++ void BrowserMainWindow::slotFilePrint()
++ {
++-#ifndef QT_NO_PRINTER
++     if (!currentTab())
++         return;
++     printRequested(currentTab()->page());
++-#endif
++ }
++ 
++ void BrowserMainWindow::slotHandlePdfPrinted(const QByteArray& result)
++@@ -751,7 +743,6 @@ void BrowserMainWindow::slotFilePrintToPDF()
++     currentTab()->page()->printToPdf(invoke(this, &BrowserMainWindow::slotHandlePdfPrinted), dialog->pageLayout());
++ }
++ 
++-#ifndef QT_NO_PRINTER
++ void BrowserMainWindow::slotHandlePagePrinted(bool result)
++ {
++     Q_UNUSED(result);
++@@ -763,7 +754,6 @@ void BrowserMainWindow::slotHandlePagePrinted(bool result)
++ 
++ void BrowserMainWindow::printRequested(QWebEnginePage *page)
++ {
++-#ifndef QT_NO_PRINTDIALOG
++     if (m_currentPrinter)
++         return;
++     m_currentPrinter = new QPrinter();
++@@ -774,9 +764,7 @@ void BrowserMainWindow::printRequested(QWebEnginePage *page)
++         return;
++     }
++     page->print(m_currentPrinter, invoke(this, &BrowserMainWindow::slotHandlePagePrinted));
++-#endif
++ }
++-#endif
++ 
++ void BrowserMainWindow::slotPrivateBrowsing()
++ {
++diff --git a/examples/webenginewidgets/demobrowser/browsermainwindow.h b/examples/webenginewidgets/demobrowser/browsermainwindow.h
++index 91e1c1d2..5bbbb292 100644
++--- a/examples/webenginewidgets/demobrowser/browsermainwindow.h
+++++ b/examples/webenginewidgets/demobrowser/browsermainwindow.h
++@@ -56,9 +56,7 @@
++ #include <QtCore/QUrl>
++ 
++ QT_BEGIN_NAMESPACE
++-#ifndef QT_NO_PRINTER
++ class QPrinter;
++-#endif
++ class QWebEnginePage;
++ QT_END_NAMESPACE
++ 
++@@ -142,10 +140,8 @@ private slots:
++     void slotSwapFocus();
++     void slotHandlePdfPrinted(const QByteArray&);
++ 
++-#ifndef QT_NO_PRINTER
++     void slotHandlePagePrinted(bool result);
++     void printRequested(QWebEnginePage *page);
++-#endif
++     void geometryChangeRequested(const QRect &geometry);
++     void updateToolbarActionText(bool visible);
++     void updateBookmarksToolbarActionText(bool visible);
++@@ -180,9 +176,7 @@ private:
++     QAction *m_restoreLastSession;
++     QAction *m_addBookmark;
++ 
++-#ifndef QT_NO_PRINTER
++     QPrinter *m_currentPrinter;
++-#endif
++ 
++     QIcon m_reloadIcon;
++     QIcon m_stopIcon;
++diff --git a/examples/webenginewidgets/demobrowser/printtopdfdialog.cpp b/examples/webenginewidgets/demobrowser/printtopdfdialog.cpp
++index 0f3b1765..50a8bb91 100644
++--- a/examples/webenginewidgets/demobrowser/printtopdfdialog.cpp
+++++ b/examples/webenginewidgets/demobrowser/printtopdfdialog.cpp
++@@ -52,10 +52,8 @@
++ #include "ui_printtopdfdialog.h"
++ 
++ #include <QtCore/QDir>
++-#ifndef QT_NO_PRINTER
++ #include <QtPrintSupport/QPageSetupDialog>
++ #include <QtPrintSupport/QPrinter>
++-#endif // QT_NO_PRINTER
++ #include <QtWidgets/QFileDialog>
++ 
++ PrintToPdfDialog::PrintToPdfDialog(const QString &filePath, QWidget *parent) :
++@@ -66,11 +64,8 @@ PrintToPdfDialog::PrintToPdfDialog(const QString &filePath, QWidget *parent) :
++     ui->setupUi(this);
++     setWindowFlags(windowFlags() & ~Qt::WindowContextHelpButtonHint);
++     connect(ui->chooseFilePathButton, &QToolButton::clicked, this, &PrintToPdfDialog::onChooseFilePathButtonClicked);
++-#ifndef QT_NO_PRINTER
++     connect(ui->choosePageLayoutButton, &QToolButton::clicked, this, &PrintToPdfDialog::onChoosePageLayoutButtonClicked);
++-#else
++     ui->choosePageLayoutButton->hide();
++-#endif // QT_NO_PRINTER
++     updatePageLayoutLabel();
++     setFilePath(filePath);
++ }
++@@ -82,7 +77,6 @@ PrintToPdfDialog::~PrintToPdfDialog()
++ 
++ void PrintToPdfDialog::onChoosePageLayoutButtonClicked()
++ {
++-#ifndef QT_NO_PRINTER
++     QPrinter printer;
++     printer.setPageLayout(currentPageLayout);
++ 
++@@ -92,7 +86,6 @@ void PrintToPdfDialog::onChoosePageLayoutButtonClicked()
++     currentPageLayout.setPageSize(printer.pageLayout().pageSize());
++     currentPageLayout.setOrientation(printer.pageLayout().orientation());
++     updatePageLayoutLabel();
++-#endif // QT_NO_PRINTER
++ }
++ 
++ void PrintToPdfDialog::onChooseFilePathButtonClicked()
++diff --git a/src/webenginewidgets/api/qwebenginepage.cpp b/src/webenginewidgets/api/qwebenginepage.cpp
++index 82720ae3..20d3268c 100644
++--- a/src/webenginewidgets/api/qwebenginepage.cpp
+++++ b/src/webenginewidgets/api/qwebenginepage.cpp
++@@ -80,11 +80,9 @@
++ #include <QMenu>
++ #include <QMessageBox>
++ #include <QMimeData>
++-#if defined(QT_PRINTSUPPORT_LIB)
++-#ifndef QT_NO_PRINTER
+++#ifdef ENABLE_PRINTING
++ #include <QPrinter>
++-#endif //QT_NO_PRINTER
++-#endif //QT_PRINTSUPPORT_LIB
+++#endif
++ #include <QStandardPaths>
++ #include <QStyle>
++ #include <QTimer>
++@@ -2052,8 +2050,6 @@ void QWebEnginePage::printToPdf(const QWebEngineCallback<const QByteArray&> &res
++ #endif // if defined(ENABLE_PDF)
++ }
++ 
++-#if defined(QT_PRINTSUPPORT_LIB)
++-#ifndef QT_NO_PRINTER
++ /*!
++     \fn void QWebEnginePage::print(QPrinter *printer, FunctorOrLambda resultCallback)
++     Renders the current content of the page into a temporary PDF document, then prints it using \a printer.
++@@ -2090,8 +2086,6 @@ void QWebEnginePage::print(QPrinter *printer, const QWebEngineCallback<bool> &re
++     d->m_callbacks.invokeDirectly(resultCallback, false);
++ #endif // if defined(ENABLE_PDF)
++ }
++-#endif // if defined(QT_NO_PRINTER)
++-#endif // if defined(QT_PRINTSUPPORT_LIB)
++ 
++ /*!
++     \since 5.7
++diff --git a/src/webenginewidgets/api/qwebenginepage.h b/src/webenginewidgets/api/qwebenginepage.h
++index c7d5a19e..5619639c 100644
++--- a/src/webenginewidgets/api/qwebenginepage.h
+++++ b/src/webenginewidgets/api/qwebenginepage.h
++@@ -55,11 +55,7 @@
++ 
++ QT_BEGIN_NAMESPACE
++ class QMenu;
++-#if defined(QT_PRINTSUPPORT_LIB)
++-#ifndef QT_NO_PRINTER
++ class QPrinter;
++-#endif // QT_NO_PRINTER
++-#endif // QT_PRINTSUPPORT_LIB
++ 
++ class QWebChannel;
++ class QWebEngineContextMenuData;
++@@ -294,15 +290,11 @@ public:
++     void printToPdf(const QWebEngineCallback<const QByteArray&> &resultCallback, const QPageLayout &layout = QPageLayout(QPageSize(QPageSize::A4), QPageLayout::Portrait, QMarginsF()));
++ #endif
++ 
++-#if defined(QT_PRINTSUPPORT_LIB)
++-#ifndef QT_NO_PRINTER
++ #ifdef Q_QDOC
++     void print(QPrinter *printer, FunctorOrLambda resultCallback);
++ #else
++     void print(QPrinter *printer, const QWebEngineCallback<bool> &resultCallback);
++ #endif // QDOC
++-#endif // QT_NO_PRINTER
++-#endif // QT_PRINTSUPPORT_LIB
++ 
++     const QWebEngineContextMenuData &contextMenuData() const;
++ 
+diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+index 659cbcf..45b885c 100644
+--- a/recipes-qt/qt5/qtwebengine_git.bb
++++ b/recipes-qt/qt5/qtwebengine_git.bb
+@@ -121,12 +121,18 @@ RDEPENDS_${PN}-examples += " \
+ 
+ QT_MODULE_BRANCH_CHROMIUM = "56-based"
+ 
++# Patches from https://github.com/meta-qt5/qtwebengine/commits/b5.9
+ SRC_URI += " \
+     ${QT_GIT}/qtwebengine-chromium.git;name=chromium;branch=${QT_MODULE_BRANCH_CHROMIUM};protocol=${QT_GIT_PROTOCOL};destsuffix=git/src/3rdparty \
+     file://0001-functions.prf-allow-build-for-linux-oe-g-platform.patch \
+     file://0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch \
+     file://0003-Include-dependency-to-QCoreApplication-translate.patch \
+     file://0004-Force-host-toolchain-configuration.patch \
++    file://0005-Always-compile-QWebEnginePage-print.patch \
++"
++
++# Patches from https://github.com/meta-qt5/qtwebengine-chromium/commits/56-based 
++SRC_URI += " \
+     file://0001-chromium-Change-false-to-FALSE-and-1-to-TRUE-FIX-qtw.patch;patchdir=src/3rdparty \
+     file://0002-chromium-Force-host-toolchain-configuration.patch;patchdir=src/3rdparty \
+ "
+-- 
+2.14.0
 
 
