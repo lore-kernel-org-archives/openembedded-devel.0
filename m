@@ -1,48 +1,46 @@
-Return-Path: <matt.hoosier@gmail.com>
-Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
-	[209.85.217.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 79E01784E5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B899783AD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 12:55:52 +0000 (UTC)
-Received: by mail-ua0-f179.google.com with SMTP id x35so4766243uax.4
+	Sat, 19 Aug 2017 13:31:47 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id 49so9042738wrw.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 05:55:54 -0700 (PDT)
+	Sat, 19 Aug 2017 06:31:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc:content-transfer-encoding;
-	bh=mLuBiyJW8k+PI3dgkjsegWmo6puY9P89CeZ7Wcb5ntc=;
-	b=aV8Cis8sL885P8aEj/wTYixcxdB7/n0WErXesLhcK62IBqsp4l3ugEgiTQVbuGfdAc
-	DOIHxFyWMUPmDipQHvPukI2signtuq2FLKlX4f+DaIbEVFsHmmBVw5XRv1hDg3+8Fv63
-	MC/17m2riVS6LP2JGL5DNYPSeDYAmtdIiPYbqhMUNAmyV30E5S8qBv7S1RBU7gMSglWI
-	kxzd6rKPLxXG4s578f3UnTcPQHTjM2j2lve3n7lAJc6XvhRHdN0YKuoNxjJP1PlSyRvQ
-	VW3tmDI/nwTb0qRyOLj1LogeaozuRazg5bCeNkbGD1s6RNU3rc/PQbhJSUPIzmlbmV5p
-	0iLg==
+	h=from:to:cc:subject:date:message-id;
+	bh=9wjQxQk/rEVc+a6kAUW295SyCsx1zkm6GmItvLIhipc=;
+	b=ZvM9n34PYoy0hui1lsG/dInZKvo8pg3EE4QXQ7ySuYLavnrDn2Ul0qLBUDCFN35tDf
+	yQHWZlkHpdTiBg5qOQKGdbVn0XdgPJXle35DDwgOxaD8glRxEMDjcvtrkpQUVuw2+0ir
+	xTnVuVwM7IqMiFgoqmt5JYzPz0VKRyQF3eSGlhCl6Z3Ou2WSEFKlte+T/v+Z9Eeb1OzW
+	Yef70GUekQ6d2P1cGvyL3kY5gkQq+ELTdVvCO1Vlc4Bx1XVxP+wQNicHsYlgmuA0rg+V
+	aXA7viPr9by0k4lFgnznqC9esZcDtYBEbHQLvgI1/DwB4qvUjT6SFpGSnU7T8QsLB2Xp
+	4/vQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc:content-transfer-encoding;
-	bh=mLuBiyJW8k+PI3dgkjsegWmo6puY9P89CeZ7Wcb5ntc=;
-	b=LbpZvrs6t+wnEwYl7aCaheGQp4NWdgBrzV2KMX96JjZmOtUUbSWDZkcx6GqKGRyywJ
-	+ma/Nsm+Ga/nEtu2GTQrnDGsbA24KtXMK86ZRakPw0t7FPhPTBbZm1As6V/JvwvzPEhv
-	cU6Pis/tRldvsX0M4/MFS8F9V7tEYYsf8UWHz9PIpI6w7JqFEbVgCrP2GrqScDLk0AzQ
-	rP1NOD/2PCc65ahPRAIQk9V62rqbmphIUtJperoQYrRZfLtuOA1WBmmPH4Jc9mWRcLuf
-	6QoV2AfQ3VSoOVY3sUNe8GLMiaUGR5evyDAWxOrFASlDqUtc6nvp3inUPs/Zx+SumUCI
-	ZiWA==
-X-Gm-Message-State: AHYfb5jVHHmUvXIk0K3EYlsM4NBK667KkOZnnvev0vrPFFwj9Ysnqn27
-	Smy/YBVAQ3dkZaYxqVPQ91GVXgbNw2qQ
-X-Received: by 10.159.33.232 with SMTP id 95mr7275291uac.1.1503147353233; Sat,
-	19 Aug 2017 05:55:53 -0700 (PDT)
-MIME-Version: 1.0
-Sender: matt.hoosier@gmail.com
-Received: by 10.176.1.169 with HTTP; Sat, 19 Aug 2017 05:55:12 -0700 (PDT)
-In-Reply-To: <20170817122733.5027-1-matt.hoosier@gmail.com>
-References: <20170817122733.5027-1-matt.hoosier@gmail.com>
-From: Matt Hoosier <matt.hoosier@garmin.com>
-Date: Sat, 19 Aug 2017 07:55:12 -0500
-X-Google-Sender-Auth: _94Ws_0tztpqOQRaV3hNJCpyds8
-Message-ID: <CAJgxT3_Qy3DmcGznf3SdRXfis3qBxXSHPYMrLqdW6r+Tjy0ftQ@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=9wjQxQk/rEVc+a6kAUW295SyCsx1zkm6GmItvLIhipc=;
+	b=WLK2INpkMWfLQftrEczY8fRgXl42F/Dsdf05CfE7NmORn91UyX3VcB3FRumY1eZ6Rh
+	wGQDSPfSghOnIjQ/+Myo3RJ+HTp56Olfuq2lCPHiF/CZbBUjTgydr8iKWUlwR7GBNP95
+	hsCiPldF2LShdL0iFWlk5KydljIWBNnZTqCKOhcniU1caE8WnFPLXHE7dvI1aH6blWFQ
+	WOgjNWGjODiWgpbAyYSK415Txmo8fapXMF5+0wJbDdKDhKgZsJnQlL2jcs6W4c2TPKZ0
+	URxXWDpukUQn31pHxMZiD0fmYXaz1QpngRvpIxgKXO2ssF/N7Fjg4XKWKXtuH+5bmVjl
+	2R6A==
+X-Gm-Message-State: AHYfb5hYveJvrUsgIN6uTKy6QWUiOUzRap7RWpTf+vX3ZBTJfr6cg9V7
+	5/lpXKxC+qmvNvtZ
+X-Received: by 10.223.188.16 with SMTP id s16mr8039854wrg.4.1503149507845;
+	Sat, 19 Aug 2017 06:31:47 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	r70sm4799095wmb.35.2017.08.19.06.31.47
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 19 Aug 2017 06:31:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qtbase: fix Krogoth build regression from efa8aaf
+Date: Sat, 19 Aug 2017 15:33:26 +0200
+Message-Id: <20170819133326.9663-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.14.0
+Subject: [meta-qt5][PATCH] qtbase: disable gold to work around binutils bug
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,105 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Aug 2017 12:55:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 19 Aug 2017 13:31:47 -0000
 
-On Thu, Aug 17, 2017 at 7:27 AM, Matt Hoosier <matt.hoosier@gmail.com> wrot=
-e:
->
-> From: Matt Hoosier <matt.hoosier@garmin.com>
->
-> With
->
->     commit efa8aaf82e580a7d32eaaab48eb92d436f2e222a
->     Author: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->     Date:   Thu Feb  9 00:26:09 2017
->
->     qmake5_base.bbclass: set qt.conf by environment variable again
->
-> we stopped pointing ${OE_QMAKE_QTCONF_PATH} at a valid file and
-> instead directed it to a path which was intended not to exist.
->
-> The motivation was to permit qtbase/qtbase-native/nativesdk-qtbase
-> to build again after Qt 5.8 started paying attention to the
-> contents of this file.
->
-> The change as done in efa8aaf works well enough for Morty and
-> subsequent releases' copies of Bitbake, but fails on earlier
-> releases because they lack the following change:
->
->     commit 2afcbfef2cd1ca568e5225884a8021df38ee3db0
->     Author: Ross Burton <ross.burton@intel.com>
->     Date: 2016-07-14 13:56:22
->
->     bitbake: build: don't use $B as the default cwd for functions
->
-> The result is that when we build with Krogoth or prior, the body
-> of do_generate_qt_config_file() runs with a cwd of ${B}, which was
-> _not_ the intent of efa8aaf. Because the working directory is ${B},
-> ${OE_QMAKE_QTCONF_PATH} is written in there too. do_configure() --
-> whose cwd is by design also ${B} -- then finds the file 'foodummy',
-> and the build breaks for the reasons outlined in efa8aaf.
->
-> This change simply shifts the implementation tactics to suppress
-> the creation of ${OE_QMAKE_QTCONF_PATH} during qtbase rather than rely
-> on unspecified behavior about the cwd of do_generate_qt_config_file().
->
-> (cherry picked from commit a17ff281aa8d99f770b0a049cb798235005fb93e
-> at https://codereview.qt-project.org/yocto/meta-qt5.)
-> ---
->  recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
->  recipes-qt/qt5/qtbase-native_git.bb    | 2 +-
->  recipes-qt/qt5/qtbase_git.bb           | 2 +-
->  3 files changed, 3 insertions(+), 3 deletions(-)
->
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nati=
-vesdk-qtbase_git.bb
-> index f2ff5f7..ffbb917 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> @@ -94,7 +94,7 @@ OE_QMAKE_PATH_HOST_LIBS =3D "${libdir}"
->
->  # for qtbase configuration we need default settings
->  # since we cannot set empty set filename to a not existent file
-> -export OE_QMAKE_QTCONF_PATH =3D "foodummy"
-> +deltask generate_qt_config_file
->
->  do_configure() {
->      ${S}/configure -v \
-> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-=
-native_git.bb
-> index 98cbecc..0884a19 100644
-> --- a/recipes-qt/qt5/qtbase-native_git.bb
-> +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> @@ -79,7 +79,7 @@ PACKAGECONFIG_CONFARGS =3D " \
->
->  # for qtbase configuration we need default settings
->  # since we cannot set empty set filename to a not existent file
-> -export OE_QMAKE_QTCONF_PATH =3D "foodummy"
-> +deltask generate_qt_config_file
->
->  do_configure_prepend() {
->      # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device=
--extra.pri: No such file or directory"
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 5cfbcfa..a2e8917 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -137,7 +137,7 @@ QT_CONFIG_FLAGS +=3D " \
->
->  # for qtbase configuration we need default settings
->  # since we cannot set empty set filename to a not existent file
-> -export OE_QMAKE_QTCONF_PATH =3D "foodummy"
-> +deltask generate_qt_config_file
->
->  do_configure() {
->      # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device=
--extra.pri: No such file or directory" during configuration
-> --
-> 2.12.0
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes-qt/qt5/qtbase_git.bb | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
 
-Any comments?
+diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+index 8cd23a0..ada8004 100644
+--- a/recipes-qt/qt5/qtbase_git.bb
++++ b/recipes-qt/qt5/qtbase_git.bb
+@@ -41,6 +41,28 @@ SRC_URI += "\
+ # for syncqt
+ RDEPENDS_${PN}-tools += "perl"
+ 
++# workaround for gold bug:
++# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=842304
++# https://sourceware.org/bugzilla/show_bug.cgi?id=21712
++# it's triggered only in combination of gold and security_flags.inc,
++# because security_flags.inc now enable pie by default.
++# Adding -no-pie or changing -fuse-ld=gold to -fuse-ld=bfd
++# works around this issue, will use -fuse-ld=bfd as it's considered
++# binutils bug.
++# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $ i586-oe-linux-g++  -m32 -march=i586 --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -fuse-ld=gold -Wl,--enable-new-dtags -o tst_qmetatype .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib -lQt5Test -lQt5Core -lpthread
++# .obj/tst_qmetatype.o(.qtversion+0x0): error: unexpected reloc 3 against global symbol qt_version_tag without base register in object file when generating a position-independent output file
++# collect2: error: ld returned 1 exit status
++#
++# with -no-pie:
++# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $ i586-oe-linux-g++ -no-pie -m32 -march=i586 --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -fuse-ld=gold -Wl,--enable-new-dtags -o tst_qmetatype .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib -lQt5Test -lQt5Core -lpthread
++#
++# with -fuse-ld=gold replaced with -fuse-ld=bfd:
++# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $ i586-oe-linux-g++  -m32 -march=i586 --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot -Wl,-O1 -fuse-ld=bfd -Wl,--enable-new-dtags -o tst_qmetatype .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib -lQt5Test -lQt5Core -lpthread
++#
++# http://errors.yoctoproject.org/Errors/Details/150329/
++LDFLAGS_append_x86 = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
++LDFLAGS_remove_x86 = "-fuse-ld=gold"
++
+ # separate some parts of PACKAGECONFIG which are often changed
+ PACKAGECONFIG_GL ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl', 'gl', '', d)}"
+ PACKAGECONFIG_FB ?= "${@bb.utils.contains('DISTRO_FEATURES', 'directfb', 'directfb', '', d)}"
+-- 
+2.14.0
+
 
