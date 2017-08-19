@@ -1,63 +1,46 @@
-Return-Path: <idealsim@laposte.net>
-Received: from smtp.laposte.net (smtpoutz26.laposte.net [194.117.213.101])
-	by mail.openembedded.org (Postfix) with ESMTP id C4EEC78357
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BDAA47842D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 16:10:46 +0000 (UTC)
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout014 (Postfix) with ESMTP id DC3C0121F08
+	Sat, 19 Aug 2017 16:36:52 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id h75so3206528pfh.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 18:10:46 +0200 (CEST)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=laposte.net; s=mail0;
-	t=1503159046; bh=EaVXLZEYd9Rb+yzjpSrcV6/5ZvhJmRyJqRDVXHbAbps=;
-	h=To:From:Subject:Date;
-	b=E+/Bqb9lFXt/yRH3vkgDooqg9MBtAX4Y//vZd9F3FZY5/5lyIFde1HLIE4zoiZ6C/
-	awRcIl+Nl10SUWS4RChtyoy25hpIQbmGLEmAs0NrKT1KIZd+1wSTdKsu9Z9HmzYrdw
-	oAHboErdov0ANJHC7uRIUtjtqv/kIb8KRuDcwd9Qt6Lh7+qp/+G91MuC+069dErzec
-	xt7v+Y5mvZo+OK7M/4BYo+D01qnH3/0TV1CbORXV97eVTaY93Gxhui9SrMfu8puQzu
-	3rJQgByjDKs0aloj4d7gtlL1gvxel/KC/s4FqFYxUHOxRnu1H+N5yNJGG1AST1B1kR
-	gBNizek96z7yg==
-Received: from smtp.laposte.net (localhost [127.0.0.1])
-	by lpn-prd-vrout014 (Postfix) with ESMTP id CE79C121F0D
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 18:10:46 +0200 (CEST)
-Received: from lpn-prd-vrin003 (lpn-prd-vrin003.prosodie [10.128.63.4])
-	by lpn-prd-vrout014 (Postfix) with ESMTP id CAB30121F08
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 18:10:46 +0200 (CEST)
-Received: from lpn-prd-vrin003 (localhost [127.0.0.1])
-	by lpn-prd-vrin003 (Postfix) with ESMTP id BC0994932F5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 18:10:46 +0200 (CEST)
-Received: from [192.168.1.19] (ARennes-654-1-118-187.w2-13.abo.wanadoo.fr
-	[2.13.101.187])
-	(using TLSv1.2 with cipher ECDHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by lpn-prd-vrin003 (Postfix) with ESMTPSA id 965484931FE
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Aug 2017 18:10:46 +0200 (CEST)
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-From: idealsim <idealsim@laposte.net>
-Message-ID: <55765cc3-9a1c-14fb-35ea-005ee7e833b9@laposte.net>
-Date: Sat, 19 Aug 2017 18:10:46 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
-	Thunderbird/45.8.0
+	Sat, 19 Aug 2017 09:36:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=A24BqOfbdEbqqmzER7HzgL91lhPyTz+2HnH5H5bZk5s=;
+	b=HR1SbSYd1InnUdS54o4tIO/gciRX4MMgw0jhS/JCOoa7ZR97PltMdzHMLRwyOL9dhI
+	HtKCzm5d/uJgTYDyNTE/dQwyabdbp8DIR2CetdHVKoVVR0KPMnvkCfIgkLbHqS4E7USQ
+	sbwLgNRduEbBAA6AVeCEcLit/KhnuXImrPBCAXM9eED8/t848adze8GEqz67gnQV1amy
+	e3WDgzCF387a8cBlgELrgiILU55x8cbu3MtWKhGGgDbQnIRxbq/WySZX/fGwT1uAnorM
+	fmivVsBNwMHROCttZ++hFHzLlu9JsP8PsG08awOMpcSXuS9F9BG1pX3wJ2U/t9A/wdy1
+	Kqzg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=A24BqOfbdEbqqmzER7HzgL91lhPyTz+2HnH5H5bZk5s=;
+	b=OJom9Dcv6/s0+RFtIWVbKpdWFlQi+E6nmWcyBYTaTSgBJGa+oRk67sA7SXFr0LhHty
+	DkWdFE3VhUZ+o+SccXK2tw0ZWMqQLqXk3d5a9NxnBIewCoQNpr1j/K7BRxT6uxtTm+MN
+	54jw9td8Z1DDKc8VXyDMTy8MtTP5datPBdxODfm/bMkflqCYAfeREETww5PGPcifwhYo
+	UltqqihatytBaWkBFNra0fqxI5NHb9U5ynhehffrgbOxDRtpOOxhGibtVnwAAqeC0nc+
+	LKqTZInDWuVas334f8Dz5ZIngELWtio1ThFf0RUxnD9TKiTy23i+WCbH3zyVru1H6eKa
+	6NOQ==
+X-Gm-Message-State: AHYfb5g42oZvlrvqHTtEGPS5U2MN67NyH96LFEJdEQnX2yJzVDapfB6g
+	FM5JyxpHPqtX/U72sKJNeQNdj8i8Yg==
+X-Received: by 10.84.138.129 with SMTP id 1mr14032135plp.223.1503160613791;
+	Sat, 19 Aug 2017 09:36:53 -0700 (PDT)
 MIME-Version: 1.0
-X-VR-SrcIP: 2.13.101.187
-X-VR-FullState: 0
-X-VR-Score: 0
-X-VR-Cause-1: gggruggvucftvghtrhhoucdtuddrfeelkedruddthedgleelucetufdoteggodetrfdotffvucfrrhho
-X-VR-Cause-2: fhhilhgvmecunfetrffquffvgfenuceurghilhhouhhtmecuhedttdenucenucfjughrpefvhffukfff
-X-VR-Cause-3: fgggtgesrgdtreertdefjeenucfhrhhomhepihguvggrlhhsihhmuceoihguvggrlhhsihhmsehlrghp
-X-VR-Cause-4: ohhsthgvrdhnvghtqeenucffohhmrghinhepghhithhhuhgsrdgtohhmnecukfhppedvrddufedruddt
-X-VR-Cause-5: uddrudekjeenucfrrghrrghmpehmohguvgepshhmthhpohhuthdphhgvlhhopegludelvddrudeikedr
-X-VR-Cause-6: uddrudelngdpihhnvghtpedvrddufedruddtuddrudekjedpmhgrihhlfhhrohhmpehiuggvrghlshhi
-X-VR-Cause-7: mheslhgrphhoshhtvgdrnhgvthdprhgtphhtthhopehophgvnhgvmhgsvgguuggvugdquggvvhgvlhes
-X-VR-Cause-8: lhhishhtshdrohhpvghnvghmsggvugguvggurdhorhhg
-X-VR-AvState: No
-X-VR-State: 0
-X-VR-State: 0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] populate_sdk error in pyro
+Received: by 10.100.167.2 with HTTP; Sat, 19 Aug 2017 09:36:23 -0700 (PDT)
+In-Reply-To: <20170819103325.16967-1-Martin.Jansa@gmail.com>
+References: <20170819103325.16967-1-Martin.Jansa@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 19 Aug 2017 09:36:23 -0700
+Message-ID: <CAMKF1srJyq2L8eqUUaGCJ+ZUZChOPAniS0OJF-hAuF+s3sQHZA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: disable SECURITY_STRINGFORMAT to fix the build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -70,38 +53,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Aug 2017 16:10:47 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 19 Aug 2017 16:36:52 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Hi all, i'm trying to build the sdk with "-c populate_sdk" but i have 
-this error at end :
+On Sat, Aug 19, 2017 at 3:33 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> * meta/conf/distro/include/security_flags.inc adds -Wformat and
+>   -Wformat-security, but openh264 adds -Wno-format after that causing
+>   build to fail
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes-qt/qt5/qtwebengine_git.bb | 8 ++++++++
+>  1 file changed, 8 insertions(+)
+>
+> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
+> index 45b885c..830e640 100644
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> @@ -34,6 +34,14 @@ EXTRA_QMAKEVARS_PRE += "GYP_CONFIG+=use_system_yasm \
+>  "
+>  EXTRA_QMAKEVARS_CONFIGURE += "-feature-system-ninja -no-feature-system-gn"
+>
+> +# chromium/third_party/openh264/openh264.gyp adds
+> +# -Wno-format to openh264_cflags_add
+> +# similarly chromium/third_party/openh264/BUILD.gn for newer qtwebengine
+> +# causing following error, because -Wformat-security cannot be used together with -Wno-format
+> +# cc1plus: error: -Wformat-security ignored without -Wformat [-Werror=format-security]
+> +# http://errors.yoctoproject.org/Errors/Details/150333/
+> +SECURITY_STRINGFORMAT = ""
+> +
 
-/Transaction Summary//
-//================================================================================//
-//Install  103 Packages//
-//
-//Total size: 108 M//
-//Installed size: 310 M//
-//Running transaction check//
-//Transaction check succeeded.//
-//Running transaction test//
-//Error: Transaction check error://
-//  file 
-/opt/poky/2.3.1/sysroots/x86_64-pokysdk-linux/environment-setup.d 
-conflicts between attempted installs of 
-nativesdk-cmake-3.7.2-r0.x86_64_nativesdk and 
-nativesdk-qtbase-tools-5.8.0+git0+49dc9aa409-r0.x86_64_nativesdk/
+If its not happening in lot of files may be doing something like
 
+ QT_WARNING_PUSH
+ QT_WARNING_DISABLE_GCC("-Wformat-security")
+#ifdef __clang__
+QT_WARNING_DISABLE_CLANG("-Wformat-security")
+#endif
+....
 
-Complete log here : 
-https://gist.github.com/modjo756/c8a6eeebc1ab0787ee72033f09d99ac2
+QT_WARNING_POP
 
-Do you already meet this issue ?
+is more targeted as it can be done per file.
 
-regards
-
-
-Mickaël
-
+>  # To use system ffmpeg you need to enable also libwebp, opus, vpx
+>  # Only depenedencies available in oe-core are enabled by default
+>  PACKAGECONFIG ??= "libwebp flac libevent libxslt speex nss"
+> --
+> 2.14.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
