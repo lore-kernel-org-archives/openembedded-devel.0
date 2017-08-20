@@ -1,46 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f170.google.com (mail-ua0-f170.google.com
-	[209.85.217.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C108783AB
+Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
+	[209.85.217.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 57E00700F0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Aug 2017 11:08:09 +0000 (UTC)
-Received: by mail-ua0-f170.google.com with SMTP id k12so2076348uag.3
+	Sun, 20 Aug 2017 23:48:56 +0000 (UTC)
+Received: by mail-ua0-f194.google.com with SMTP id q40so821618uag.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Aug 2017 04:08:11 -0700 (PDT)
+	Sun, 20 Aug 2017 16:48:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=B1dqxMDydTZcF2GN1/b1xylxv29lxSeu1HfaLMkD4oE=;
-	b=RpXeO5+0ADyzscOEDSO1MXOgqy82V+0UzDpjR0un41buw2sI4s9L6CDA1Gt96VUUBv
-	aohwQuO091h2Zt23ovApnLeN5v3ArWMnN+ZdyoF4d79H/NS1yqV5d6cnLw66ZX1ktSnG
-	ssq6p/F6HlX1lCdPegYUXJEWT189IxBEIcGT+f+SKQy/kxLm+TNzMFV2lQ6fYLwvxSl6
-	z2Ak50IYi7wIZ+aGzTrZA6Cpa4bAaDd6l3SOyxwdSH6I8U6pKjq9SCmPBKELai203PM/
-	mYtNtGF0j69FrofcmxAji8SitGm1CYV35qr3AjyoOwIkcA+IyNxSZeb4kH0AYgAKOGOW
-	k9XQ==
+	:cc; bh=+zJrjg33hZqpuER6AxQs23Q1sVCVgnZ3QWmMLZcA5W8=;
+	b=mqEknbBl/atde81qGoe5L3dd74X/yQqQJ02fQgO0z9ksTK3YnGy7ehKnd30psjk1Yj
+	c7KvbMQFeIM2yLL0uqeolQH9VfvmInf7DrWiaGFBByvF28j9+Ia0S7qSlEaLrRKwdFY3
+	GYDcbtHGdmVwQUyufgMvdyr3WTGEmIED8hS0veapS8L7CvBMvGyhVfNqihzib1fdlGb3
+	YRMc/i6f5OzBaslFBFrlPLkhIEMD/V+g3NZah98Ch21fcroq24MJ8GjYuxq2xTVCysCu
+	GopCtVKutBvyOlqOlO51plx8hy4GJID+5AnE0QUWEJ2uqGFHMiVWOu8IBQCB7oFRTXIx
+	d6wA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=B1dqxMDydTZcF2GN1/b1xylxv29lxSeu1HfaLMkD4oE=;
-	b=PauS4jKgwSzuQLiQ4feSB1ddk9Qsz//2N4RTF54dHpvEf1hvfDlqCKsnAd8FvKNtli
-	0RJsAspKprVP/EjxJe3u85ctlVT1ckb4Ebo7MQNmpejwCKZ1TlmYW6R+KNI+oYD3QtpH
-	v+oinefuRiX5nfxUOiHuOFekfufjbb/uzLOpePpHKOaq8qpDvlTXGGJa9Ow1hv5Sruvd
-	63+dLvb3/hWxR7YUvwIxxH9drYVVaF4br2ALBOpew5unvJ8pe9IFRqINuAAh447gFsFv
-	2g61XeilYKIl5i+o0crL2Ee47fY76R2hTfqLsvCuQNsLt/63G3zwgWZdBk/FeOa+iu/Q
-	9MwA==
-X-Gm-Message-State: AHYfb5hDcP1Ozj3LGVP2G7x+QU/OcZVp/QdmRVGk5BeGYBKl6Ovhpcb4
-	INcJ45zJAGNc9dhVGxi3TxTc4G9eTccT
-X-Received: by 10.176.8.194 with SMTP id o2mr8478460uaf.191.1503227290758;
-	Sun, 20 Aug 2017 04:08:10 -0700 (PDT)
+	bh=+zJrjg33hZqpuER6AxQs23Q1sVCVgnZ3QWmMLZcA5W8=;
+	b=ehf/MjFkFLsFBkcOihyfzzvlPqTYxqi6yGmYnlSuxl24a6tChN8uNZ4/+Kosndttlg
+	1hGbJn5tHueRB5nF8zUHn6e6YTiyzqFRf9xEoFmT+1bLejQDjrY+OInkSBsAtmRG71gt
+	KlnwiZxaxnQBnzmnCoO9zDqt/gI0ZGoPQ4FLtLROJkGM22QM190GHKlYgDUcOgLUNcn0
+	v/mzqEFPyq8Ifj1gDGZeKxsYHyl7UcmI45gEjdpGabVgIa1PhoOl01yDBlST4i1GK+po
+	lFXcaJxko0rjrcTay5LV9O+IzhKGoVBwDsqq8EVl8D6zVGAssqo6b+amV/45WJAefO5/
+	Jrjw==
+X-Gm-Message-State: AHYfb5ilWXcl+IDeFibWon1Ul0pRCW50zFaludycs2XBnLij/9DPsNF7
+	l03R7e3dIT8nVj7gItU95x/cXm9Z7w==
+X-Received: by 10.176.8.194 with SMTP id o2mr9294533uaf.191.1503272938234;
+	Sun, 20 Aug 2017 16:48:58 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Sun, 20 Aug 2017 04:08:10 -0700 (PDT)
-In-Reply-To: <20170819142843.4722-1-Martin.Jansa@gmail.com>
-References: <20170819142843.4722-1-Martin.Jansa@gmail.com>
+Received: by 10.103.122.88 with HTTP; Sun, 20 Aug 2017 16:48:57 -0700 (PDT)
+In-Reply-To: <5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
+References: <20170817092828.3629-1-kai.kang@windriver.com>
+	<5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 20 Aug 2017 13:08:10 +0200
-Message-ID: <CA+chaQfmkWH4FK-XHK8c-DLLYdTK+d4OV3Oj9gm-vgnbHCSPow@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Aug 2017 01:48:57 +0200
+Message-ID: <CA+chaQeZAssT0CUJPQREUZqx0ti0OycLPsGSFcXg2Y96R8PC4Q@mail.gmail.com>
+To: Kang Kai <Kai.Kang@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCHv2] qtbase: disable gold to work around binutils bug
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mariadb: 5.5.55 -> 5.5.57
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,103 +55,127 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Aug 2017 11:08:10 -0000
+X-List-Received-Date: Sun, 20 Aug 2017 23:48:57 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Combination of v1 and v2 is actually needed, because without -fuse-ld=bfd
-it will still use gold by default even when -no-use-gold-linker is used.
+Like the previous version this one fails to build for qemuarm when
+security_flags.inc are enabled (maybe only in combination with gold and
+thumb), can you please look into it?
 
-I'll resend after finishing build of all qt,
-because meta-qt5/recipes-qt/qt5/qtgraphicaleffects_git.bb seems to have the
-same issue with security_flags.inc.
+http://errors.yoctoproject.org/Errors/Details/152655/
 
-On Sat, Aug 19, 2017 at 4:28 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+On Fri, Aug 18, 2017 at 4:51 AM, Kang Kai <Kai.Kang@windriver.com> wrote:
 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  recipes-qt/qt5/qtbase_git.bb | 24 +++++++++++++++++++++++-
->  1 file changed, 23 insertions(+), 1 deletion(-)
+> On 2017=E5=B9=B408=E6=9C=8817=E6=97=A5 17:28, kai.kang@windriver.com wrot=
+e:
 >
-> diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-> index 8cd23a0..804a604 100644
-> --- a/recipes-qt/qt5/qtbase_git.bb
-> +++ b/recipes-qt/qt5/qtbase_git.bb
-> @@ -41,6 +41,27 @@ SRC_URI += "\
->  # for syncqt
->  RDEPENDS_${PN}-tools += "perl"
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Upgrade mariadb from 5.5.55 to 5.5.57.
+>>
 >
-> +# workaround for gold bug:
-> +# https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=842304
-> +# https://sourceware.org/bugzilla/show_bug.cgi?id=21712
-> +# it's triggered only in combination of gold and security_flags.inc,
-> +# because security_flags.inc now enable pie by default.
-> +# Adding -no-pie or changing -fuse-ld=gold to -fuse-ld=bfd
-> +# works around this issue, will use -fuse-ld=bfd as it's considered
-> +# binutils bug.
-> +# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.
-> 0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $
-> i586-oe-linux-g++  -m32 -march=i586 --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -fuse-ld=gold -Wl,--enable-new-dtags -o tst_qmetatype
-> .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/
-> work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib
-> -lQt5Test -lQt5Core -lpthread
-> +# .obj/tst_qmetatype.o(.qtversion+0x0): error: unexpected reloc 3
-> against global symbol qt_version_tag without base register in object file
-> when generating a position-independent output file
-> +# collect2: error: ld returned 1 exit status
-> +#
-> +# with -no-pie:
-> +# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.
-> 0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $
-> i586-oe-linux-g++ -no-pie -m32 -march=i586 --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -fuse-ld=gold -Wl,--enable-new-dtags -o tst_qmetatype
-> .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/
-> work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib
-> -lQt5Test -lQt5Core -lpthread
-> +#
-> +# with -fuse-ld=gold replaced with -fuse-ld=bfd:
-> +# OE @ ~/build/oe-core/tmp-glibc/work/i586-oe-linux/qtbase/5.9.
-> 0+gitAUTOINC+f6b36eaafe-r0/build/tests/auto/corelib/kernel/qmetatype $
-> i586-oe-linux-g++  -m32 -march=i586 --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed --sysroot=/OE/build/oe-core/
-> tmp-glibc/work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/recipe-sysroot
-> -Wl,-O1 -fuse-ld=bfd -Wl,--enable-new-dtags -o tst_qmetatype
-> .obj/tst_qmetatype.o   -L/OE/build/oe-core/tmp-glibc/
-> work/i586-oe-linux/qtbase/5.9.0+gitAUTOINC+f6b36eaafe-r0/build/lib
-> -lQt5Test -lQt5Core -lpthread
-> +#
-> +# http://errors.yoctoproject.org/Errors/Details/150329/
-> +QT_CONFIG_FLAGS_GOLD_x86 = "-no-use-gold-linker"
-> +
->  # separate some parts of PACKAGECONFIG which are often changed
->  PACKAGECONFIG_GL ?= "${@bb.utils.contains('DISTRO_FEATURES', 'opengl',
-> 'gl', '', d)}"
->  PACKAGECONFIG_FB ?= "${@bb.utils.contains('DISTRO_FEATURES', 'directfb',
-> 'directfb', '', d)}"
-> @@ -129,8 +150,9 @@ PACKAGECONFIG[libproxy] = "-libproxy,-no-libproxy,
-> libproxy"
->  PACKAGECONFIG[libinput] = "-libinput,-no-libinput,libinput"
->  PACKAGECONFIG[journald] = "-journald,-no-journald,systemd"
+> Forgot [meta-oe] in title. Sorry for inconvenience.
 >
-> +QT_CONFIG_FLAGS_GOLD = "${@bb.utils.contains('DISTRO_FEATURES',
-> 'ld-is-gold', '-use-gold-linker', '-no-use-gold-linker', d)}"
->  QT_CONFIG_FLAGS += " \
-> -    ${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold',
-> '-use-gold-linker', '-no-use-gold-linker', d)} \
-> +    ${QT_CONFIG_FLAGS_GOLD} \
->      -shared \
->      -silent \
->      -no-pch \
+> --Kai
+>
+>
+>
+>> * update SRC_URI that mariadb.com doesn't provides source tarball of
+>> 5.5.57
+>> * remove gcc7.patch which is not needed any more
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>   .../{mariadb-native_5.5.55.bb =3D> mariadb-native_5.5.57.bb}  |  0
+>>   meta-oe/recipes-support/mysql/mariadb.inc                   |  8
+>> ++++----
+>>   meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13
+>> -------------
+>>   .../mysql/{mariadb_5.5.55.bb =3D> mariadb_5.5.57.bb}          |  0
+>>   4 files changed, 4 insertions(+), 17 deletions(-)
+>>   rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb =3D>
+>> mariadb-native_5.5.57.bb} (100%)
+>>   delete mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>>   rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb =3D>
+>> mariadb_5.5.57.bb} (100%)
+>>
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
+>> b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
+>> rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+>> b/meta-oe/recipes-support/mysql/mariadb.inc
+>> index fd9dcbd..32e3eaa 100644
+>> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+>> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+>> @@ -4,7 +4,7 @@ SECTION =3D "libs"
+>>   LICENSE =3D "GPLv2"
+>>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260a
+>> a954499f7abaabaa882bbe"
+>>   -SRC_URI =3D "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/sourc=
+e/m
+>> ariadb-${PV}.tar.gz \
+>> +SRC_URI =3D "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz =
+\
+>>              file://fix-cmake-module-path.patch \
+>>              file://remove-bad-path.patch \
+>>              file://fix-mysqlclient-r-version.patch \
+>> @@ -17,10 +17,10 @@ SRC_URI =3D "http://downloads.mariadb.com/
+>> MariaDB/mariadb-${PV}/source/mariadb-${P
+>>              file://fix-a-building-failure.patch \
+>>              file://change-cc-to-cc-version.patch \
+>>              file://0001-disable-ucontext-on-musl.patch \
+>> -           file://gcc7.patch \
+>>             "
+>> -SRC_URI[md5sum] =3D "54a0bbbc9b67308e7c076622d02f0fcd"
+>> -SRC_URI[sha256sum] =3D "cb94e315d0fc90c62db5a6c7829c9
+>> 966f674285d99b3ba3ffa575fb4a26edc86"
+>> +
+>> +SRC_URI[md5sum] =3D "2d4104aae0b9e5efa8878918bd329cb4"
+>> +SRC_URI[sha256sum] =3D "5dbde98d7e4a5a1721b6cbed7898b
+>> 2549a88866247951cf586057975c6cea641"
+>>     S =3D "${WORKDIR}/mariadb-${PV}"
+>>   diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>> b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>> deleted file mode 100644
+>> index 3e75b26..0000000
+>> --- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>> +++ /dev/null
+>> @@ -1,13 +0,0 @@
+>> -Index: mariadb-5.5.55/client/mysql.cc
+>> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> ---- mariadb-5.5.55.orig/client/mysql.cc
+>> -+++ mariadb-5.5.55/client/mysql.cc
+>> -@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
+>> -         mysql_free_result(fields);
+>> -         break;
+>> -       }
+>> --      field_names[i][num_fields*2]=3D '\0';
+>> -+      field_names[i][num_fields*2][0]=3D '\0';
+>> -       j=3D0;
+>> -       while ((sql_field=3Dmysql_fetch_field(fields)))
+>> -       {
+>> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+>> b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+>> similarity index 100%
+>> rename from meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+>> rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+>>
+>
+>
 > --
-> 2.14.0
+> Regards,
+> Neil | Kai Kang
 >
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
