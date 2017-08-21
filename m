@@ -1,29 +1,24 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E3FC6782A8
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B7B4782EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Aug 2017 06:35:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7L6Z8qf006043
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Sun, 20 Aug 2017 23:35:09 -0700
-Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Sun, 20 Aug 2017 23:35:08 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <cover.1503295148.git.hongxu.jia@windriver.com>
-	<CA+chaQcNNKcae4OhNGLeUDG-c_007J2PYW=xxAN-Z=s_wLPmRg@mail.gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <4a9e32d4-6a0b-8f79-a66d-6fa1f2983b01@windriver.com>
-Date: Mon, 21 Aug 2017 14:36:02 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Mon, 21 Aug 2017 06:49:03 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7L6n4p4007286
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Aug 2017 23:49:05 -0700 (PDT)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.361.1; Sun, 20 Aug 2017 23:49:03 -0700
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 21 Aug 2017 14:48:24 +0800
+Message-ID: <20170821064824.21203-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcNNKcae4OhNGLeUDG-c_007J2PYW=xxAN-Z=s_wLPmRg@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 0/3] multipath-tools/python3-pykickstart/xmlrpc-c: fix file-rdeps QA issues
+Subject: [meta-webserver][PATCH] phpmyadmin: upgrade to 4.7.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,69 +31,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Aug 2017 06:35:09 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 21 Aug 2017 06:49:04 -0000
+Content-Type: text/plain
 
-On 2017年08月21日 14:21, Martin Jansa wrote:
-> Do you know why so many do_package_qa failures were detected now?
->
-> I was reading oe-core commits added since last world build and I don't 
-> see where this QA check was fixed or why it reports so many issues now.
->
-> Is it thanks to this change?
-> http://git.openembedded.org/openembedded-core/commit/?id=bf017930036f19b3d6df8e5b50d9979ee7045c5c
->
+From: Jackie Huang <jackie.huang@windriver.com>
 
-I think so, I sync oe-core to latest and found these QA issue.
+The license files and md5 are updated.
 
-Here is the original repo:
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ .../phpmyadmin/{phpmyadmin_4.6.3.bb => phpmyadmin_4.7.3.bb}    | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+ rename meta-webserver/recipes-php/phpmyadmin/{phpmyadmin_4.6.3.bb => phpmyadmin_4.7.3.bb} (70%)
 
-http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=pkj/rpm_regressions2
-
-And some improvement in
-
-https://www.mail-archive.com/openembedded-core@lists.openembedded.org/msg100243.html
-
-//Hongxu
-
-> On Mon, Aug 21, 2017 at 8:00 AM, Hongxu Jia <hongxu.jia@windriver.com 
-> <mailto:hongxu.jia@windriver.com>> wrote:
->
->     The following changes since commit
->     ac2a6d2b5d69937577effcb8bb2149651bac0176:
->
->       json-spirit: Add -latomic to LDFLAGS (2017-08-13 13:21:04 +0200)
->
->     are available in the git repository at:
->
->       git://git.openembedded.org/openembedded-core-contrib
->     <http://git.openembedded.org/openembedded-core-contrib>
->     hongxu/fix-qa-issue
->     http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/fix-qa-issue
->     <http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/fix-qa-issue>
->
->     Hongxu Jia (3):
->       multipath-tools: add bash to RDEPENDS
->       python3-pykickstart: tweak shebang to python3
->       xmlrpc-c: add perl to RDEPENDS
->
->      .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
->     <http://xmlrpc-c_1.31.0.bb>  |  2 +-
->      .../multipath-tools/multipath-tools_0.7.1.bb
->     <http://multipath-tools_0.7.1.bb>      |  2 +-
->      .../files/0005-tweak-shebang-to-python3.patch      | 25
->     ++++++++++++++++++++++
->      .../python-pykickstart/python3-pykickstart_2.35.bb
->     <http://python3-pykickstart_2.35.bb> |  1 +
->      4 files changed, 28 insertions(+), 2 deletions(-)
->      create mode 100644
->     meta-python/recipes-extended/python-pykickstart/files/0005-tweak-shebang-to-python3.patch
->
->     --
->     2.8.1
->
->
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.6.3.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.3.bb
+similarity index 70%
+rename from meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.6.3.bb
+rename to meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.3.bb
+index 61872ae09..9949a7395 100644
+--- a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.6.3.bb
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.3.bb
+@@ -1,16 +1,18 @@
+ SUMMARY = "Web-based MySQL administration interface"
+ HOMEPAGE = "http://www.phpmyadmin.net"
+-# Main code is GPLv2, libraries/tcpdf is under LGPLv3, js/jquery is under MIT
++# Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
+ LICENSE = "GPLv2 & LGPLv3 & MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+-                    file://libraries/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c"
++                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c \
++                    file://js/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
++"
+ 
+ SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
+            file://apache.conf \
+ "
+ 
+-SRC_URI[md5sum] = "53c7a6a577d10de04a5dd21a05018542"
+-SRC_URI[sha256sum] = "943bad38a95f21bb015bdb78c9c067e0ea7510c1b35d4b8e757cb89c413e3bac"
++SRC_URI[md5sum] = "4b0c5dbaf871eb86671613da3c31e6b3"
++SRC_URI[sha256sum] = "ed51669043f62494dc3bc21a87423373164ff63865a6c6bceaee535ef785f33e"
+ 
+ S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
+ 
+-- 
+2.11.0
 
 
