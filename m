@@ -1,48 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 57E00700F0
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 950A577B6E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Aug 2017 23:48:56 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id q40so821618uag.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Aug 2017 16:48:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+zJrjg33hZqpuER6AxQs23Q1sVCVgnZ3QWmMLZcA5W8=;
-	b=mqEknbBl/atde81qGoe5L3dd74X/yQqQJ02fQgO0z9ksTK3YnGy7ehKnd30psjk1Yj
-	c7KvbMQFeIM2yLL0uqeolQH9VfvmInf7DrWiaGFBByvF28j9+Ia0S7qSlEaLrRKwdFY3
-	GYDcbtHGdmVwQUyufgMvdyr3WTGEmIED8hS0veapS8L7CvBMvGyhVfNqihzib1fdlGb3
-	YRMc/i6f5OzBaslFBFrlPLkhIEMD/V+g3NZah98Ch21fcroq24MJ8GjYuxq2xTVCysCu
-	GopCtVKutBvyOlqOlO51plx8hy4GJID+5AnE0QUWEJ2uqGFHMiVWOu8IBQCB7oFRTXIx
-	d6wA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=+zJrjg33hZqpuER6AxQs23Q1sVCVgnZ3QWmMLZcA5W8=;
-	b=ehf/MjFkFLsFBkcOihyfzzvlPqTYxqi6yGmYnlSuxl24a6tChN8uNZ4/+Kosndttlg
-	1hGbJn5tHueRB5nF8zUHn6e6YTiyzqFRf9xEoFmT+1bLejQDjrY+OInkSBsAtmRG71gt
-	KlnwiZxaxnQBnzmnCoO9zDqt/gI0ZGoPQ4FLtLROJkGM22QM190GHKlYgDUcOgLUNcn0
-	v/mzqEFPyq8Ifj1gDGZeKxsYHyl7UcmI45gEjdpGabVgIa1PhoOl01yDBlST4i1GK+po
-	lFXcaJxko0rjrcTay5LV9O+IzhKGoVBwDsqq8EVl8D6zVGAssqo6b+amV/45WJAefO5/
-	Jrjw==
-X-Gm-Message-State: AHYfb5ilWXcl+IDeFibWon1Ul0pRCW50zFaludycs2XBnLij/9DPsNF7
-	l03R7e3dIT8nVj7gItU95x/cXm9Z7w==
-X-Received: by 10.176.8.194 with SMTP id o2mr9294533uaf.191.1503272938234;
-	Sun, 20 Aug 2017 16:48:58 -0700 (PDT)
+	Mon, 21 Aug 2017 00:40:26 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7L0eQTw031049
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Sun, 20 Aug 2017 17:40:26 -0700
+Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Sun, 20 Aug 2017 17:40:25 -0700
+To: Randy MacLeod <randy.macleod@windriver.com>, Khem Raj <raj.khem@gmail.com>
+References: <1502952015-23737-1-git-send-email-yi.zhao@windriver.com>
+	<1502952015-23737-2-git-send-email-yi.zhao@windriver.com>
+	<CAMKF1soqnxmDPWcr5-zOBRGo8CSO7qyYCXM3jzm66FfO4TPnhg@mail.gmail.com>
+	<fef5a9c1-95e7-c49f-f5b2-a1b46bb1b860@windriver.com>
+	<00070e83-1df7-8006-a47f-b9b906c6f883@windriver.com>
+From: Yi Zhao <yi.zhao@windriver.com>
+Message-ID: <beebadb9-bc35-14b4-68dd-a0b220f726c6@windriver.com>
+Date: Mon, 21 Aug 2017 08:41:08 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Sun, 20 Aug 2017 16:48:57 -0700 (PDT)
-In-Reply-To: <5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
-References: <20170817092828.3629-1-kai.kang@windriver.com>
-	<5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 21 Aug 2017 01:48:57 +0200
-Message-ID: <CA+chaQeZAssT0CUJPQREUZqx0ti0OycLPsGSFcXg2Y96R8PC4Q@mail.gmail.com>
-To: Kang Kai <Kai.Kang@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] mariadb: 5.5.55 -> 5.5.57
+In-Reply-To: <00070e83-1df7-8006-a47f-b9b906c6f883@windriver.com>
+X-Originating-IP: [128.224.162.198]
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 1/2] iproute2: add bbappend for supporting tipc tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,127 +39,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Aug 2017 23:48:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 21 Aug 2017 00:40:26 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Like the previous version this one fails to build for qemuarm when
-security_flags.inc are enabled (maybe only in combination with gold and
-thumb), can you please look into it?
 
-http://errors.yoctoproject.org/Errors/Details/152655/
 
-On Fri, Aug 18, 2017 at 4:51 AM, Kang Kai <Kai.Kang@windriver.com> wrote:
+在 2017年08月19日 02:39, Randy MacLeod 写道:
+> On 2017-08-18 02:10 AM, Yi Zhao wrote:
+>>
+>>
+>> 在 2017年08月17日 22:01, Khem Raj 写道:
+>>> On Wed, Aug 16, 2017 at 11:40 PM, Yi Zhao <yi.zhao@windriver.com> 
+>>> wrote:
+>>>> The tipcutils 2.2 removed the tipc-config tool and recommended to use
+>>>> the new configuration tool named "tipc" in iproute2 package for
+>>>> configuring the tipc, which utilizes the new tipc netlink kernel API.
+>>>>
+>>>> We supported tipc in iproute2 with PACKAGECONFIG in oe-core commit
+>>>> 944ef0de241de77429ab0e5cb1dd4a7f355cf3fd
+>>>>
+>>>> Add iproute2 bbappend to enable tipc for tipcutils.
+>>>>
+>>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>>> ---
+>>>>   meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend | 2 ++
+>>>>   1 file changed, 2 insertions(+)
+>>>>   create mode 100644 
+>>>> meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>>
+>>>> diff --git 
+>>>> a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend 
+>>>> b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>> new file mode 100644
+>>>> index 0000000..0869f7f
+>>>> --- /dev/null
+>>>> +++ b/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>> @@ -0,0 +1,2 @@
+>>>> +# For tipcutils
+>>>> +PACKAGECONFIG_append = " tipc"
+>>> can we do it in recipe proper itself ?
+>>
+>> Hi Khem,
+>>
+>> The tipc in iproute2 needs libmnl as dependency.  Currently libmnl is 
+>> in meta-networking and there are some packages in meta-networking 
+>> need it as dependency, so we can not enable tipc build in oe-core 
+>> directly.
+>> If we want to enable it in iproute2 recipe directly, we should move 
+>> libmnl to oe-core. I don't know if it is worth to do that because few 
+>> people need tipc. How do you think about it ?
+>
+> We should move libmnl and the iproute2 change to oe-core.
+>
+> By default, TIPC is enabled as a module in YP kernel:
+>
+> $ grep TIPC 
+> tmp-glibc/work/qemuppc-oe-linux/linux-yocto/4.10.17+gitAUTOINC+e92bd55409_6648a34e00-r0/linux-qemuppc-standard-build/.config
+> CONFIG_TIPC=m
+> CONFIG_TIPC_MEDIA_UDP=y
+>
+> so it should be configurable with just the oe-core layer.
+>
+> Once libmnl is in oe-core, we could move nftables,
+> "the successor to iptables" to oe-core say at the start of
+> the 2.5 dev cycle.
 
-> On 2017=E5=B9=B408=E6=9C=8817=E6=97=A5 17:28, kai.kang@windriver.com wrot=
-e:
+Thanks, Randy.
+I will do it.
+
+Yi
+
 >
->> From: Kai Kang <kai.kang@windriver.com>
+> ../Randy
+>
 >>
->> Upgrade mariadb from 5.5.55 to 5.5.57.
+>> Thanks,
+>> Yi
 >>
->
-> Forgot [meta-oe] in title. Sorry for inconvenience.
->
-> --Kai
->
->
->
->> * update SRC_URI that mariadb.com doesn't provides source tarball of
->> 5.5.57
->> * remove gcc7.patch which is not needed any more
->>
->> Signed-off-by: Kai Kang <kai.kang@windriver.com>
->> ---
->>   .../{mariadb-native_5.5.55.bb =3D> mariadb-native_5.5.57.bb}  |  0
->>   meta-oe/recipes-support/mysql/mariadb.inc                   |  8
->> ++++----
->>   meta-oe/recipes-support/mysql/mariadb/gcc7.patch            | 13
->> -------------
->>   .../mysql/{mariadb_5.5.55.bb =3D> mariadb_5.5.57.bb}          |  0
->>   4 files changed, 4 insertions(+), 17 deletions(-)
->>   rename meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb =3D>
->> mariadb-native_5.5.57.bb} (100%)
->>   delete mode 100644 meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->>   rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb =3D>
->> mariadb_5.5.57.bb} (100%)
->>
->> diff --git a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
->> b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
->> similarity index 100%
->> rename from meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
->> rename to meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
->> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
->> b/meta-oe/recipes-support/mysql/mariadb.inc
->> index fd9dcbd..32e3eaa 100644
->> --- a/meta-oe/recipes-support/mysql/mariadb.inc
->> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->> @@ -4,7 +4,7 @@ SECTION =3D "libs"
->>   LICENSE =3D "GPLv2"
->>   LIC_FILES_CHKSUM =3D "file://COPYING;md5=3D751419260a
->> a954499f7abaabaa882bbe"
->>   -SRC_URI =3D "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/sourc=
-e/m
->> ariadb-${PV}.tar.gz \
->> +SRC_URI =3D "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz =
-\
->>              file://fix-cmake-module-path.patch \
->>              file://remove-bad-path.patch \
->>              file://fix-mysqlclient-r-version.patch \
->> @@ -17,10 +17,10 @@ SRC_URI =3D "http://downloads.mariadb.com/
->> MariaDB/mariadb-${PV}/source/mariadb-${P
->>              file://fix-a-building-failure.patch \
->>              file://change-cc-to-cc-version.patch \
->>              file://0001-disable-ucontext-on-musl.patch \
->> -           file://gcc7.patch \
->>             "
->> -SRC_URI[md5sum] =3D "54a0bbbc9b67308e7c076622d02f0fcd"
->> -SRC_URI[sha256sum] =3D "cb94e315d0fc90c62db5a6c7829c9
->> 966f674285d99b3ba3ffa575fb4a26edc86"
->> +
->> +SRC_URI[md5sum] =3D "2d4104aae0b9e5efa8878918bd329cb4"
->> +SRC_URI[sha256sum] =3D "5dbde98d7e4a5a1721b6cbed7898b
->> 2549a88866247951cf586057975c6cea641"
->>     S =3D "${WORKDIR}/mariadb-${PV}"
->>   diff --git a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->> b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->> deleted file mode 100644
->> index 3e75b26..0000000
->> --- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->> +++ /dev/null
->> @@ -1,13 +0,0 @@
->> -Index: mariadb-5.5.55/client/mysql.cc
->> -=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> ---- mariadb-5.5.55.orig/client/mysql.cc
->> -+++ mariadb-5.5.55/client/mysql.cc
->> -@@ -2850,7 +2850,7 @@ You can turn off this feature to get a q
->> -         mysql_free_result(fields);
->> -         break;
->> -       }
->> --      field_names[i][num_fields*2]=3D '\0';
->> -+      field_names[i][num_fields*2][0]=3D '\0';
->> -       j=3D0;
->> -       while ((sql_field=3Dmysql_fetch_field(fields)))
->> -       {
->> diff --git a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
->> b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
->> similarity index 100%
->> rename from meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
->> rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+>>>
+>>>> -- 
+>>>> 2.7.4
+>>>>
+>>>> -- 
+>>>> _______________________________________________
+>>>> Openembedded-devel mailing list
+>>>> Openembedded-devel@lists.openembedded.org
+>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >>
 >
 >
-> --
-> Regards,
-> Neil | Kai Kang
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+
 
