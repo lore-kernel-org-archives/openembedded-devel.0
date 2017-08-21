@@ -1,44 +1,26 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 089D4782C5
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id E3FC6782A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Aug 2017 06:21:21 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id l132so134282vke.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Aug 2017 23:21:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=AoBRrGuGcVb1ZaA/jHh8+zwE0I0YsIpGULRF1j1b7CY=;
-	b=sYr6G0TSNp1Gzc8aE19SPY+KpO7IDD79xqAqu6jZkQSQAMeti2OBWUe69P8fgfngc6
-	Fn1Ulp6nVUjgiEdqaYZLSMmp/ueRRl+kuIWXZmnMXZP8G30OK1ikjUERZRb3isb75GAb
-	vrF3eIjCB6zCxjsVTgZrCp1Slj8meHUvk6cmszo3zw7ks4d2/tS7UyB1WKPxrBKLECIz
-	mVacvQGITK2jalyRaxOyPXlIoSU8v8gI8RIdOSO2C7sIPmu0u+CmzUP0upKuti22oiS2
-	/Zuob0xWTuRLSeZAae10zhtSJGWRXZnrdsfT/r01RfcU+01jxwvqlmN6iSWMEL8kMuPI
-	DbhQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=AoBRrGuGcVb1ZaA/jHh8+zwE0I0YsIpGULRF1j1b7CY=;
-	b=infSVu8Ki7BV7pVhvKEYJvYGCThIMuDRpv/CuDkN6pq25cByn8wK9DXnGwfhATTPRO
-	D4O5MmUt23wo0i6/Dscb8y1S+evxxxKNkJyWxUfy8JzErF0mjeS4JU5+TWWnpLPUjPhg
-	rj+Ph/B8ztxEFi31Cn2ULAHt7dsBTFFTlhXG9Fy5xpgRED4zpVDC//GVUVI+WArUu1bA
-	9o9/j43TaHrruPGjuxQjUvI09pGsmtyDZuyhxZhMLQDlkJAzhuaq1q16An42PPdFVahO
-	1+WmtnCJy6tZFZX4RqMboZnYkcZfuY42CDC0346aaKBW9JtcCP4oaHYxh1ebBOgFcI0b
-	jW1g==
-X-Gm-Message-State: AHYfb5iNYS7YZrvktRLBgy5XPP0hxlQlPsTi5QwP5+DG0dhHstdqqRx3
-	KkB5XXiCn9/gCmlOKwozoEsUwQQvVg==
-X-Received: by 10.31.233.194 with SMTP id g185mr10376948vkh.56.1503296482917; 
-	Sun, 20 Aug 2017 23:21:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.122.88 with HTTP; Sun, 20 Aug 2017 23:21:22 -0700 (PDT)
-In-Reply-To: <cover.1503295148.git.hongxu.jia@windriver.com>
+	Mon, 21 Aug 2017 06:35:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7L6Z8qf006043
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Sun, 20 Aug 2017 23:35:09 -0700
+Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Sun, 20 Aug 2017 23:35:08 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
 References: <cover.1503295148.git.hongxu.jia@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 21 Aug 2017 08:21:22 +0200
-Message-ID: <CA+chaQcNNKcae4OhNGLeUDG-c_007J2PYW=xxAN-Z=s_wLPmRg@mail.gmail.com>
-To: Hongxu Jia <hongxu.jia@windriver.com>
+	<CA+chaQcNNKcae4OhNGLeUDG-c_007J2PYW=xxAN-Z=s_wLPmRg@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <4a9e32d4-6a0b-8f79-a66d-6fa1f2983b01@windriver.com>
+Date: Mon, 21 Aug 2017 14:36:02 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQcNNKcae4OhNGLeUDG-c_007J2PYW=xxAN-Z=s_wLPmRg@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH 0/3] multipath-tools/python3-pykickstart/xmlrpc-c: fix file-rdeps QA issues
@@ -54,47 +36,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Aug 2017 06:21:22 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 21 Aug 2017 06:35:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Do you know why so many do_package_qa failures were detected now?
+On 2017年08月21日 14:21, Martin Jansa wrote:
+> Do you know why so many do_package_qa failures were detected now?
+>
+> I was reading oe-core commits added since last world build and I don't 
+> see where this QA check was fixed or why it reports so many issues now.
+>
+> Is it thanks to this change?
+> http://git.openembedded.org/openembedded-core/commit/?id=bf017930036f19b3d6df8e5b50d9979ee7045c5c
+>
 
-I was reading oe-core commits added since last world build and I don't see
-where this QA check was fixed or why it reports so many issues now.
+I think so, I sync oe-core to latest and found these QA issue.
 
-Is it thanks to this change?
-http://git.openembedded.org/openembedded-core/commit/?id=bf017930036f19b3d6df8e5b50d9979ee7045c5c
+Here is the original repo:
 
-On Mon, Aug 21, 2017 at 8:00 AM, Hongxu Jia <hongxu.jia@windriver.com>
-wrote:
+http://git.yoctoproject.org/cgit.cgi/poky-contrib/log/?h=pkj/rpm_regressions2
 
-> The following changes since commit ac2a6d2b5d69937577effcb8bb2149
-> 651bac0176:
+And some improvement in
+
+https://www.mail-archive.com/openembedded-core@lists.openembedded.org/msg100243.html
+
+//Hongxu
+
+> On Mon, Aug 21, 2017 at 8:00 AM, Hongxu Jia <hongxu.jia@windriver.com 
+> <mailto:hongxu.jia@windriver.com>> wrote:
 >
->   json-spirit: Add -latomic to LDFLAGS (2017-08-13 13:21:04 +0200)
+>     The following changes since commit
+>     ac2a6d2b5d69937577effcb8bb2149651bac0176:
 >
-> are available in the git repository at:
+>       json-spirit: Add -latomic to LDFLAGS (2017-08-13 13:21:04 +0200)
 >
->   git://git.openembedded.org/openembedded-core-contrib hongxu/fix-qa-issue
->   http://cgit.openembedded.org/openembedded-core-contrib/log/
-> ?h=hongxu/fix-qa-issue
+>     are available in the git repository at:
 >
-> Hongxu Jia (3):
->   multipath-tools: add bash to RDEPENDS
->   python3-pykickstart: tweak shebang to python3
->   xmlrpc-c: add perl to RDEPENDS
+>       git://git.openembedded.org/openembedded-core-contrib
+>     <http://git.openembedded.org/openembedded-core-contrib>
+>     hongxu/fix-qa-issue
+>     http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/fix-qa-issue
+>     <http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/fix-qa-issue>
 >
->  .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb   |  2 +-
->  .../multipath-tools/multipath-tools_0.7.1.bb       |  2 +-
->  .../files/0005-tweak-shebang-to-python3.patch      | 25
-> ++++++++++++++++++++++
->  .../python-pykickstart/python3-pykickstart_2.35.bb |  1 +
->  4 files changed, 28 insertions(+), 2 deletions(-)
->  create mode 100644 meta-python/recipes-extended/
-> python-pykickstart/files/0005-tweak-shebang-to-python3.patch
+>     Hongxu Jia (3):
+>       multipath-tools: add bash to RDEPENDS
+>       python3-pykickstart: tweak shebang to python3
+>       xmlrpc-c: add perl to RDEPENDS
 >
-> --
-> 2.8.1
+>      .../recipes-devtools/xmlrpc-c/xmlrpc-c_1.31.0.bb
+>     <http://xmlrpc-c_1.31.0.bb>  |  2 +-
+>      .../multipath-tools/multipath-tools_0.7.1.bb
+>     <http://multipath-tools_0.7.1.bb>      |  2 +-
+>      .../files/0005-tweak-shebang-to-python3.patch      | 25
+>     ++++++++++++++++++++++
+>      .../python-pykickstart/python3-pykickstart_2.35.bb
+>     <http://python3-pykickstart_2.35.bb> |  1 +
+>      4 files changed, 28 insertions(+), 2 deletions(-)
+>      create mode 100644
+>     meta-python/recipes-extended/python-pykickstart/files/0005-tweak-shebang-to-python3.patch
+>
+>     --
+>     2.8.1
 >
 >
+
 
