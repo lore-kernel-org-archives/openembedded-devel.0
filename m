@@ -1,21 +1,44 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 75F397823F;
-	Tue, 22 Aug 2017 14:29:25 +0000 (UTC)
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-	by fmsmga105.fm.intel.com with ESMTP; 22 Aug 2017 07:29:27 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,412,1498546800"; d="scan'208";a="143235333"
-Received: from jshtaway-mobl.amr.corp.intel.com ([10.254.23.190])
-	by fmsmga006.fm.intel.com with ESMTP; 22 Aug 2017 07:29:27 -0700
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-In-Reply-To: <20170822132022.GA3308@jama>
-Date: Tue, 22 Aug 2017 07:29:26 -0700
-Message-Id: <77D41A06-7D48-4CFE-948E-5C3D36118CA0@linux.intel.com>
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vk0-f50.google.com (mail-vk0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CC8778229;
+	Tue, 22 Aug 2017 15:50:08 +0000 (UTC)
+Received: by mail-vk0-f50.google.com with SMTP id j189so60548098vka.0;
+	Tue, 22 Aug 2017 08:50:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=g/yQZ9/Y/X3883lCYgql5TbdKtkmg3C0SJYAipARkKk=;
+	b=I1W4UgESLSu4YkUy1fpf8oEvJ6SewMZqP3L0v8rFXk7G+gDhF61mHssHrv6z+DchCE
+	diZtzchWYgQ/FMGhaYSGGqA0AyiUgojzItl6obLLrYvS6evwjT8ZTqIoyqWdUyDdd0nr
+	lyY7MGmHzNVaHTC+E1mr/MFTOh5QGUnblT4a182SL0G9T5Qy4cFegB8x8FkC7UfJeIT5
+	EEfIQOsmuEvXHGInuDP8ny0hkiRO3mRTMQTwhA1x6fA6+gTIJj95NQiYH7l6XcFvHDOz
+	8trv4Jui9BenGuW3klS2dCUEYM4HPU7sbOmRmQ98hNifbfM813bdmpGnNJWBHyD2Gw6e
+	Jblw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=g/yQZ9/Y/X3883lCYgql5TbdKtkmg3C0SJYAipARkKk=;
+	b=Xq7Iru5I+sjAVfCWa6H8nN2tYOy3zt4Pn+DDYcoFHfQhWT4PDWAKPVQF4KJydHjcKb
+	I8WDJWD2Zoac3gGA6NlRJ5KZVbfjhldFVkOc0qW4+RtNIHg4ol4QXgVkQvvEU7GHwCSS
+	VivcXp/iRyywolSIRNPyPBAMmOQUkvnS2uGfHnYMzPcoJlrtTtM7ScfZTfIeR5PPYCdG
+	tN+mSLIuD6kPCZr/WaVNsbNoVxJuCSOK0m6E2Zz5mK2VUzfEBvEuryV0MYbzFqIEqY8V
+	MocoiEPoTprYi7oY5dEHhZKXekaV3fQ5LPdEnkzXVTbIDtwHpy6A7o5L3qze0BVWpk0/
+	OkHg==
+X-Gm-Message-State: AHYfb5g4J67ghb1tFvxcFQcyvnCGYSW9yHTk/322kG59mnwVtvdh7/Js
+	X17OoPgdPl/jyfbHueg7fF6dikCSYQ==
+X-Received: by 10.31.184.66 with SMTP id i63mr667230vkf.122.1503417009836;
+	Tue, 22 Aug 2017 08:50:09 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.103.50.144 with HTTP; Tue, 22 Aug 2017 08:50:09 -0700 (PDT)
+In-Reply-To: <77D41A06-7D48-4CFE-948E-5C3D36118CA0@linux.intel.com>
 References: <20170822132022.GA3308@jama>
-To: Martin Jansa <martin.jansa@gmail.com>
-X-Mailer: Apple Mail (2.3273)
+	<77D41A06-7D48-4CFE-948E-5C3D36118CA0@linux.intel.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 22 Aug 2017 17:50:09 +0200
+Message-ID: <CA+chaQfr4EzLQqBsLT628qSJt8wiDH+Kf5MxhJBtLewWkHJ-uQ@mail.gmail.com>
+To: Tim Orling <timothy.t.orling@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>
@@ -32,51 +55,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Aug 2017 14:29:27 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 22 Aug 2017 15:50:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+Thanks Tim!
 
-> On Aug 22, 2017, at 6:20 AM, Martin Jansa <martin.jansa@gmail.com> =
-wrote:
->=20
-> Openssl was reverted back to 1.0 version being default, so there is
-> fewer errors now, but there was also a fix for package.bbclass:
-> =
-http://lists.openembedded.org/pipermail/openembedded-core/2017-August/1411=
-27.html
-> which causes many do_package_qa tasks to fail.
->=20
-> Please help by sending fixes for issues it found.
->=20
-> <snip>
->=20
-> =3D=3D Failed tasks 2017-08-19 =3D=3D
->=20
-> INFO: jenkins-job.sh-1.8.25 Complete log available at =
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170822_0=
-23550.log
->=20
-> =3D=3D=3D common (15) =3D=3D=3D
-> <snip>
->    * =
-meta-openembedded/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.=
-31.bb:do_package_qa
+Check this thread:
+http://lists.openembedded.org/pipermail/openembedded-core/2017-August/14108=
+7.html
+about python-matplotlib.
 
-I=E2=80=99ll take a shot at this one, especially since this recipe =
-version is very old. Latest is 0.4224.
+On Tue, Aug 22, 2017 at 4:29 PM, Tim Orling <
+timothy.t.orling@linux.intel.com> wrote:
 
->    * =
-meta-openembedded/meta-python/recipes-devtools/python/python3-pylint_1.6.5=
-.bb:do_package_qa
->    * =
-meta-openembedded/meta-python/recipes-devtools/python/python-matplotlib_1.=
-1.0.bb:do_compile
-
-I=E2=80=99ll take a shot at these two. pylint version is a bit old, =
-latest is 1.7.2. matplotlib latest version is 2.0.2, so this recipe is =
-very old; also needs python3 version.
-
-> <snip>
-
+>
+> > On Aug 22, 2017, at 6:20 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> >
+> > Openssl was reverted back to 1.0 version being default, so there is
+> > fewer errors now, but there was also a fix for package.bbclass:
+> > http://lists.openembedded.org/pipermail/openembedded-core/
+> 2017-August/141127.html
+> > which causes many do_package_qa tasks to fail.
+> >
+> > Please help by sending fixes for issues it found.
+> >
+> > <snip>
+> >
+> > =3D=3D Failed tasks 2017-08-19 =3D=3D
+> >
+> > INFO: jenkins-job.sh-1.8.25 Complete log available at
+> http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> report.20170822_023550.log
+> >
+> > =3D=3D=3D common (15) =3D=3D=3D
+> > <snip>
+> >    * meta-openembedded/meta-perl/recipes-perl/libmodule/
+> libmodule-build-perl_0.31.bb:do_package_qa
+>
+> I=E2=80=99ll take a shot at this one, especially since this recipe versio=
+n is very
+> old. Latest is 0.4224.
+>
+> >    * meta-openembedded/meta-python/recipes-devtools/python/
+> python3-pylint_1.6.5.bb:do_package_qa
+> >    * meta-openembedded/meta-python/recipes-devtools/python/
+> python-matplotlib_1.1.0.bb:do_compile
+>
+> I=E2=80=99ll take a shot at these two. pylint version is a bit old, lates=
+t is
+> 1.7.2. matplotlib latest version is 2.0.2, so this recipe is very old; al=
+so
+> needs python3 version.
+>
+> > <snip>
+>
+>
 
