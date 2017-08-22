@@ -1,24 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F5CE6FFFE
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 50EAD7822C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Aug 2017 09:35:09 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7M9ZBCb002110
+	Tue, 22 Aug 2017 09:52:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7M9qn7K009922
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Aug 2017 02:35:11 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 22 Aug 2017 02:35:10 -0700
-From: <kai.kang@windriver.com>
+	Tue, 22 Aug 2017 02:52:50 -0700 (PDT)
+Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.167) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Tue, 22 Aug 2017 02:52:49 -0700
+From: <Qi.Chen@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Aug 2017 17:24:02 +0800
-Message-ID: <20170822092402.32028-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.10.1
+Date: Tue, 22 Aug 2017 17:57:38 +0800
+Message-ID: <1503395858-10071-1-git-send-email-Qi.Chen@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] iperf3: 3.1.3 -> 3.2
+Subject: [meta-webserver][PATCH] webmin: add systemd service file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +31,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Aug 2017 09:35:10 -0000
+X-List-Received-Date: Tue, 22 Aug 2017 09:52:49 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Chen Qi <Qi.Chen@windriver.com>
 
-Upgrade iperf3 from 3.1.3 to 3.2.
+Add systemd service file for webmin.
 
-* update md5 checksum of license file which update year info and add
-  same bsd license for src/net.c
-* add dependency openssl
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 ---
- .../recipes-benchmark/iperf3/{iperf3_git.bb => iperf3_3.2.bb}    | 9 ++++++---
- 1 file changed, 6 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-benchmark/iperf3/{iperf3_git.bb => iperf3_3.2.bb} (83%)
+ .../recipes-webadmin/webmin/files/webmin.service          | 15 +++++++++++++++
+ meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb    | 11 ++++++++++-
+ 2 files changed, 25 insertions(+), 1 deletion(-)
+ create mode 100644 meta-webserver/recipes-webadmin/webmin/files/webmin.service
 
-diff --git a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb b/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-similarity index 83%
-rename from meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-rename to meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-index 4a01896..4d1b0c4 100644
---- a/meta-oe/recipes-benchmark/iperf3/iperf3_git.bb
-+++ b/meta-oe/recipes-benchmark/iperf3/iperf3_3.2.bb
-@@ -9,7 +9,9 @@ SECTION = "console/network"
- BUGTRACKER = "https://github.com/esnet/iperf/issues"
- AUTHOR = "ESNET <info@es.net>, Lawrence Berkeley National Laboratory <websupport@lbl.gov>"
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=8c3434c5a9a53c78c7739f0bc9e5adda"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d098223e44bdd19585315ee75cd9d2d7"
+diff --git a/meta-webserver/recipes-webadmin/webmin/files/webmin.service b/meta-webserver/recipes-webadmin/webmin/files/webmin.service
+new file mode 100644
+index 0000000..87cf4f9
+--- /dev/null
++++ b/meta-webserver/recipes-webadmin/webmin/files/webmin.service
+@@ -0,0 +1,15 @@
++[Unit]
++Description=Webmin Admin Tool
++Requires=local-fs.target
++After=basic.target
++Conflicts=shutdown.target
 +
-+DEPENDS = "openssl"
- 
- SRC_URI = "git://github.com/esnet/iperf.git \
-            file://automake-foreign.patch \
-@@ -17,8 +19,7 @@ SRC_URI = "git://github.com/esnet/iperf.git \
-            file://0002-Remove-pg-from-profile_CFLAGS.patch \
-            "
- 
--PV = "3.1.3+gitr${SRCPV}"
--SRCREV = "099244ec686b620393e9845478a554b1c7ca5c8b"
-+SRCREV = "88d907f7fb58bfab5d086c5da60c922e1c582c92"
- 
- S = "${WORKDIR}/git"
- 
-@@ -28,4 +29,6 @@ PACKAGECONFIG[lksctp] = "ac_cv_header_netinet_sctp_h=yes,ac_cv_header_netinet_sc
- 
- CFLAGS += "-D_GNU_SOURCE"
- 
-+EXTRA_OECONF = "--with-openssl=${RECIPE_SYSROOT}"
++[Service]
++Type=oneshot
++RemainAfterExit=yes
++ExecStart=@SYSCONFDIR@/webmin/start
++ExecStop=@SYSCONFDIR@/webmin/stop
++ExecReload=@SYSCONFDIR@/webmin/reload
 +
- BBCLASSEXTEND = "native"
++[Install]
++WantedBy=multi-user.target
+diff --git a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+index 6acff03..ae88eb6 100644
+--- a/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
++++ b/meta-webserver/recipes-webadmin/webmin/webmin_1.850.bb
+@@ -18,12 +18,13 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/webadmin/webmin-${PV}.tar.gz \
+            file://media-tomb.patch \
+            file://remove-python2.3.patch \
+            file://mysql-config-fix.patch \
++           file://webmin.service \
+             "
+ 
+ SRC_URI[md5sum] = "cd6ee98f73f9418562197675b952d81b"
+ SRC_URI[sha256sum] = "c66caa9e4cb50d5447bc8aceb7989d2284dde060278f404b13e171c7ce1690e1"
+ 
+-inherit perlnative update-rc.d
++inherit perlnative update-rc.d systemd
+ 
+ do_configure() {
+     # Remove binaries and plugins for other platforms
+@@ -77,6 +78,11 @@ do_install() {
+     install -d ${D}${sysconfdir}/init.d
+     install -m 0755 webmin-init ${D}${sysconfdir}/init.d/webmin
+ 
++    install -d ${D}${systemd_unitdir}/system
++    install -m 0644 ${WORKDIR}/webmin.service ${D}${systemd_unitdir}/system
++    sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++           ${D}${systemd_unitdir}/system/webmin.service
++
+     install -d ${D}${localstatedir}
+     install -d ${D}${localstatedir}/webmin
+ 
+@@ -117,6 +123,9 @@ do_install() {
+ INITSCRIPT_NAME = "webmin"
+ INITSCRIPT_PARAMS = "start 99 5 3 2 . stop 10 0 1 6 ."
+ 
++SYSTEMD_SERVICE_${PN} = "webmin.service"
++SYSTEMD_AUTO_ENABLE_${PN} = "disable"
++
+ # FIXME: some of this should be figured out automatically
+ RDEPENDS_${PN} += "perl perl-module-socket perl-module-exporter perl-module-exporter-heavy perl-module-carp perl-module-strict"
+ RDEPENDS_${PN} += "perl-module-warnings perl-module-xsloader perl-module-posix perl-module-autoloader"
 -- 
-2.10.1
+1.9.1
 
 
