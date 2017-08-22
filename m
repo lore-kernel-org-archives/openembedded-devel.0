@@ -1,49 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B67F3782DC
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B679378240
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Aug 2017 21:01:25 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id f8so14397124wrf.3
+	Tue, 22 Aug 2017 03:09:59 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7M39xA8002172
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Aug 2017 14:01:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=OfWpybptdpMbD5BwoRRMqg+0hBEFidy5O4ZhkTWqlx4=;
-	b=o6FC5MR5DtwkbQtQM/L7uKNBjNzSJ//wVmhin/Th9jex4nflRP0E1CL/pRnhxfmmJe
-	0OOMhbL/9pGfvrNpmNwBpFZHgytFr0rHENrRkDQzvqNs+2OQ4CCaB3ZzuCvnXoR/gAVn
-	dzPpm0Ft7H4jLFIdwIcNB+XE1Tb0cjmlAng8parq9TpmLTeKAFm6NBZeZtv5aenD1BBF
-	ghTneohY33pJwWn8vmuvKoD+odH3SiT5smie6OVTeJzlGZos1obmWZlSIc3VXBeaMES0
-	t1dWtB37PJlOYpWbh4Zh1h1eYb62/jH+1N/QCJQHvFRd1FkTmYD31jogfAdTtbf1Gq7l
-	L3pA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=OfWpybptdpMbD5BwoRRMqg+0hBEFidy5O4ZhkTWqlx4=;
-	b=TuB+MN945FqoFjUiwfrN+97CzgIe1DK87FRGb1vQ/98gQ+OAxI3tlYnzjhMxx01bN8
-	si4R/yf7roJPQciq3USq/TPiz/XA4Gwm0lynrcdtK6dT/1cOFjPSaLyI3AxgyfbJp/Sd
-	eucJmg/yrghAj+xLtuM0MCPULCuqiR7PsvHXGL5gNNmyInm+z2+gTTH9mGAf4ZNtXLWm
-	r15YSwuhJkJ0pDR98cooURCuxMniXtPLDjE7wwbUH2r+hWK+HaX+xzAZBWz1xgTSxrJr
-	pP09tBwUayeDo/wqcT9S2pebcwX5oVyxzVJXC+9JE31ALEK/vum3ICTpjpr6ronGBxiO
-	U9fg==
-X-Gm-Message-State: AHYfb5jeyFEUOTKBvXQLYtNP5SI4Q/qhsaJ+tfomS1TcZJCHQO8okM8O
-	7ooYEbH/2hxblpVs
-X-Received: by 10.223.134.26 with SMTP id 26mr7957009wrv.184.1503349286602;
-	Mon, 21 Aug 2017 14:01:26 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	p197sm1200098wmg.19.2017.08.21.14.01.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 21 Aug 2017 14:01:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 21 Aug 2017 23:02:59 +0200
-Message-Id: <20170821210259.20276-7-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170821210259.20276-1-Martin.Jansa@gmail.com>
-References: <20170821210259.20276-1-Martin.Jansa@gmail.com>
-Subject: [meta-qt5][PATCHv2 7/7] qtwebengine: update 0004-Force-host-toolchain-configuration.patch
+	Mon, 21 Aug 2017 20:10:00 -0700 (PDT)
+Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Mon, 21 Aug 2017 20:09:59 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Aug 2017 11:10:43 +0800
+Message-ID: <1503371443-13516-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [128.224.162.198]
+Subject: [meta-webserver][PATCH] sthttpd: update to 2.27.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,93 +32,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Aug 2017 21:01:26 -0000
+X-List-Received-Date: Tue, 22 Aug 2017 03:09:59 -0000
+Content-Type: text/plain
 
-* refresh the patch from:
-  http://code.qt.io/cgit/yocto/meta-qt5.git/diff/recipes-qt/qt5/qtwebengine/0001-Force-host-toolchain-configuration.patch?id=5bac910f95453d0df6fe540778dd16a9707dcabf
+* Fix CVE-2017-10671: Heap-based buffer overflow in the de_dotdot
+  function in libhttpd.c
 
-* might fix passing arm specific flags into host builds like:
-  gcc: error: unrecognized command line option '-mflooat-abi=hard'
-  strip: unable to recognise the format of the input file
+* Update SRC_URI because the original site can not access.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
 ---
- .../0004-Force-host-toolchain-configuration.patch  | 35 +++++++++++++++++++---
- ...qtbug-61521.cpp-use-free-instead-of-cfree.patch |  2 +-
- 2 files changed, 32 insertions(+), 5 deletions(-)
+ .../recipes-httpd/sthttpd/{sthttpd_2.27.0.bb => sthttpd_2.27.1.bb}  | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-webserver/recipes-httpd/sthttpd/{sthttpd_2.27.0.bb => sthttpd_2.27.1.bb} (88%)
 
-diff --git a/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch b/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-index 258afd5..bda0ba1 100644
---- a/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-+++ b/recipes-qt/qt5/qtwebengine/0004-Force-host-toolchain-configuration.patch
-@@ -1,4 +1,4 @@
--From 5106be504b7edb7bc75309d581dfd33a89ed04fc Mon Sep 17 00:00:00 2001
-+From 9bdd03ad0bbb221ad7bffe0e570605c21c28b1b5 Mon Sep 17 00:00:00 2001
- From: Samuli Piippo <samuli.piippo@qt.io>
- Date: Wed, 15 Mar 2017 13:53:28 +0200
- Subject: [PATCH] Force host toolchain configuration
-@@ -6,16 +6,30 @@ Subject: [PATCH] Force host toolchain configuration
- Force gcc/g++ to be used for parts using host toolchain, since
- the option(host_build) does not work in yocto builds.
+diff --git a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+similarity index 88%
+rename from meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
+rename to meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+index 2125b24..c9fe55b 100644
+--- a/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.0.bb
++++ b/meta-webserver/recipes-httpd/sthttpd/sthttpd_2.27.1.bb
+@@ -6,13 +6,13 @@ LIC_FILES_CHKSUM = "file://src/thttpd.c;beginline=1;endline=26;md5=0c5762c2c34dc
  
-+Don't use QT_ARCH for the host architecture, since that's always
-+the target architecture in bitbake builds, instead ask specifically
-+for the qmakes's host architecture.
-+
- Upstream-Status: Inappropriate [OE specific]
- Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
- ---
-- src/buildtools/configure_host.pro | 12 ++++++------
-- 1 file changed, 6 insertions(+), 6 deletions(-)
-+ src/buildtools/configure_host.pro | 14 +++++++-------
-+ src/core/config/linux.pri         |  2 +-
-+ 2 files changed, 8 insertions(+), 8 deletions(-)
+ DEPENDS += "base-passwd"
  
- diff --git a/src/buildtools/configure_host.pro b/src/buildtools/configure_host.pro
--index f1b3d47b..521c507b 100644
-+index f1b3d47b..12123729 100644
- --- a/src/buildtools/configure_host.pro
- +++ b/src/buildtools/configure_host.pro
-+@@ -4,7 +4,7 @@ TEMPLATE = aux
-+ # Pick up the host toolchain
-+ option(host_build)
-+ 
-+-GN_HOST_CPU = $$gnArch($$QT_ARCH)
-++GN_HOST_CPU = $$gnArch($$QMAKE_HOST.arch)
-+ !isEmpty(QT_TARGET_ARCH): GN_TARGET_CPU = $$gnArch($$QT_TARGET_ARCH)
-+ else: GN_TARGET_CPU = $$GN_HOST_CPU
-+ GN_OS = $$gnOS()
- @@ -29,9 +29,9 @@ GN_CONTENTS = \
-  "import(\"//build/config/sysroot.gni\")" \
-  "import(\"//build/toolchain/gcc_toolchain.gni\")" \
-@@ -42,3 +56,16 @@ index f1b3d47b..521c507b 100644
-  "  ar = \"$$which(ar)\" " \
-  "  nm = \"$$which(nm)\" " \
-  "  toolchain_args = { " \
-+diff --git a/src/core/config/linux.pri b/src/core/config/linux.pri
-+index 714c864d..f66ca551 100644
-+--- a/src/core/config/linux.pri
-++++ b/src/core/config/linux.pri
-+@@ -98,7 +98,7 @@ contains(QT_ARCH, "mips"):!host_build {
-+ 
-+ host_build {
-+     gn_args += custom_toolchain=\"$$QTWEBENGINE_OUT_ROOT/src/toolchain:host\"
-+-    GN_HOST_CPU = $$gnArch($$QT_ARCH)
-++    GN_HOST_CPU = $$gnArch($$QMAKE_HOST.arch)
-+     gn_args += host_cpu=\"$$GN_HOST_CPU\"
-+     # Don't bother trying to use system libraries in this case
-+     gn_args += use_glib=false
-diff --git a/recipes-qt/qt5/qtwebengine/0005-qtbug-61521.cpp-use-free-instead-of-cfree.patch b/recipes-qt/qt5/qtwebengine/0005-qtbug-61521.cpp-use-free-instead-of-cfree.patch
-index 7375ff7..d8d89b8 100644
---- a/recipes-qt/qt5/qtwebengine/0005-qtbug-61521.cpp-use-free-instead-of-cfree.patch
-+++ b/recipes-qt/qt5/qtwebengine/0005-qtbug-61521.cpp-use-free-instead-of-cfree.patch
-@@ -1,4 +1,4 @@
--From b4eb5c926cf822ee5d5cf398d1bcdb0fdca6e47a Mon Sep 17 00:00:00 2001
-+From 331de4be615b8552e498ac2f3deff4b49b4b0fc0 Mon Sep 17 00:00:00 2001
- From: Martin Jansa <Martin.Jansa@gmail.com>
- Date: Sun, 20 Aug 2017 20:37:38 +0200
- Subject: [PATCH] qtbug-61521.cpp: use free instead of cfree
+-SRC_URI = "http://opensource.dyc.edu/pub/sthttpd/sthttpd-${PV}.tar.gz \
++SRC_URI = "https://github.com/blueness/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
+            file://thttpd.service \
+            file://thttpd.conf \
+            file://init"
+ 
+-SRC_URI[md5sum] = "f7dd2d506dc5fad2ad8794b1800d2634"
+-SRC_URI[sha256sum] = "97d660a881331e93818e872ce11536f461105d70a18dfc5de5895851c4b2afdb"
++SRC_URI[md5sum] = "3cda1b6c8c8542b1510eadb8e540d8b6"
++SRC_URI[sha256sum] = "a1ee2806432eaf5b5dd267a0523701f9f1fa00fefd499d5bec42165a41e05846"
+ 
+ S = "${WORKDIR}/sthttpd-${PV}"
+ 
 -- 
-2.14.1
+2.7.4
 
 
