@@ -1,25 +1,28 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7FD4978237
+Return-Path: <jose.alarcon@ge.com>
+Received: from mx0a-00176a03.pphosted.com (mx0b-00176a03.pphosted.com
+	[67.231.157.48])
+	by mail.openembedded.org (Postfix) with ESMTP id A802378281
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Aug 2017 04:36:13 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7M4aEP4000136
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Aug 2017 21:36:14 -0700 (PDT)
-Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Mon, 21 Aug 2017 21:36:12 -0700
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Aug 2017 12:36:56 +0800
-Message-ID: <1503376616-14240-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
-MIME-Version: 1.0
-X-Originating-IP: [128.224.162.198]
-Subject: [meta-oe][PATCH] postgresql: update to 9.4.13
+	Tue, 22 Aug 2017 05:05:55 +0000 (UTC)
+Received: from pps.filterd (m0048204.ppops.net [127.0.0.1])
+	by m0048204.ppops.net-00176a03. (8.16.0.21/8.16.0.21) with SMTP id
+	v7M55kBQ020781 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Aug 2017 01:05:56 -0400
+From: Jose Alarcon <jose.alarcon@ge.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Aug 2017 08:05:38 +0300
+Message-Id: <20170822050538.174882-1-jose.alarcon@ge.com>
+X-Mailer: git-send-email 2.10.1
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-08-22_01:, , signatures=0
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0
+	priorityscore=1501 malwarescore=0
+	suspectscore=1 phishscore=0 bulkscore=0 spamscore=0 clxscore=1011
+	lowpriorityscore=0 impostorscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx scancount=1 engine=8.0.1-1707230000
+	definitions=main-1708220078
+Subject: [meta-oe][PATCH v2] Dhrystone: add recipe 2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,41 +35,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Aug 2017 04:36:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 22 Aug 2017 05:05:55 -0000
 
-Fixed three security vulnerabilities:
+Dhrystone is a synthetic computing benchmark program developed
+in 1984 by Reinhold P. Weicker intended to be representative of
+system (integer) programming.
 
-CVE-2017-7546: Empty password accepted in some authentication methods
-CVE-2017-7547: The "pg_user_mappings" catalog view discloses passwords
-to users lacking server privileges
-CVE-2017-7548: lo_put() function ignores ACLs
+https://en.wikipedia.org/wiki/Dhrystone
 
-See release note:
-https://www.postgresql.org/docs/9.4/static/release-9-4-13.html
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Jose Alarcon <jose.alarcon@ge.com>
 ---
- .../postgresql/{postgresql_9.4.11.bb => postgresql_9.4.13.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/postgresql/{postgresql_9.4.11.bb => postgresql_9.4.13.bb} (67%)
+ .../dhrystone/dhrystone-2.1/dhrystone.patch        | 81 ++++++++++++++++++++++
+ .../recipes-benchmark/dhrystone/dhrystone_2.1.bb   | 26 +++++++
+ 2 files changed, 107 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone.patch
+ create mode 100644 meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.11.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
-similarity index 67%
-rename from meta-oe/recipes-support/postgresql/postgresql_9.4.11.bb
-rename to meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
-index 7043b27..bf97cad 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_9.4.11.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
-@@ -11,5 +11,5 @@ do_compile_prepend_libc-musl() {
-     sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
- }
- 
--SRC_URI[md5sum] = "2fee03f2034034dbfcb3321a0bb0f829"
--SRC_URI[sha256sum] = "e3eb51d045c180b03d2de1f0c3af9356e10be49448e966ca01dfc2c6d1cc9d23"
-+SRC_URI[md5sum] = "dbdb9fbe1b9a394b9ac19d3113b73944"
-+SRC_URI[sha256sum] = "0080f55d65194de8b96a2dab153443f8248ff2b2b10e6ab4cda2dcadcac7f2ab"
+diff --git a/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone.patch b/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone.patch
+new file mode 100644
+index 0000000..6a5350c
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/dhrystone/dhrystone-2.1/dhrystone.patch
+@@ -0,0 +1,81 @@
++dhrystone: fix compilation problems
++
++This patch fixes two compilation errors with original
++dhrystone sources:
++* Redefinition of times() with wrong return type
++  - Fixed by commenting out the unnecessary redefinition
++* Undefined identifier HZ
++  - Originally HZ was supposed to be the clock frequency
++    value for times()
++  - For Linux, the frequency should come from sysconf
++  - This patch defines global varible HZ and initializes
++    it from sysconf
++
++Additionally, this patch adds a simple Makefile.
++
++Upstream-status: Pending
++
++Sign-off-by: Kimmo Surakka <kimmo.surakka@ge.com>
++Signed-off-by: Jose Alarcon <jose.alarcon@ge.com>
++---
++
++diff -Naur dhry.orig/dhry_1.c dhry/dhry_1.c
++--- dhry.orig/dhry_1.c	2015-07-20 14:25:58.059945353 +0300
+++++ dhry/dhry_1.c	2015-07-20 12:43:25.318945353 +0300
++@@ -45,11 +45,15 @@
++ 
++ #ifdef TIMES
++ struct tms      time_info;
++-extern  int     times ();
+++/* extern  int     times (); */
++                 /* see library function "times" */
++ #define Too_Small_Time 120
++                 /* Measurements should last at least about 2 seconds */
++ #endif
+++#ifndef HZ
+++#include <unistd.h>  /* sysconf */
+++   long HZ;
+++#endif
++ #ifdef TIME
++ extern long     time();
++                 /* see library function "time"  */
++@@ -84,6 +88,9 @@
++ 
++   /* Initializations */
++ 
+++#ifndef HZ
+++  HZ = sysconf(_SC_CLK_TCK);
+++#endif
++   Next_Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
++   Ptr_Glob = (Rec_Pointer) malloc (sizeof (Rec_Type));
++ 
++diff -Naur dhry.orig/dhry.h dhry/dhry.h
++--- dhry.orig/dhry.h	2015-07-20 14:25:58.054945353 +0300
+++++ dhry/dhry.h	2015-07-20 12:42:59.903945353 +0300
++@@ -420,4 +420,6 @@
++           } variant;
++       } Rec_Type, *Rec_Pointer;
++ 
++-
+++#ifndef HZ
+++   extern long HZ;
+++#endif
++diff -Naur dhry.orig/Makefile dhry/Makefile
++--- dhry.orig/Makefile	1970-01-01 02:00:00.000000000 +0200
+++++ dhry/Makefile	2015-07-20 14:10:45.832945353 +0300
++@@ -0,0 +1,15 @@
+++CC=gcc
+++
+++all: dhry
+++
+++dhry: dhry_1.o dhry_2.o
+++	$(CC) $(LDFLAGS) -o $@ $^ $(LOADLIBES) $(LDLIBS)
+++
+++dhry_1.o: dhry_1.c dhry.h
+++
+++dhry_2.o: dhry_2.c dhry.h
+++
+++clean:
+++	rm -f *.o *~
+++
+++.PHONY: all clean
+diff --git a/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
+new file mode 100644
+index 0000000..17e8c70
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/dhrystone/dhrystone_2.1.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "Dhrystone CPU benchmark"
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/PD;md5=b3597d12946881e13cb3b548d1173851"
++
++SRC_URI = "http://www.netlib.org/benchmark/dhry-c;downloadfilename=dhry-c.shar \
++           file://dhrystone.patch"
++SRC_URI[md5sum] = "75aa5909c174eed98c134be2f56307da"
++SRC_URI[sha256sum] = "038a7e9169787125c3451a6c941f3aca5db2d2f3863871afcdce154ef17f4e3e"
++
++# Need to override Makefile variables
++EXTRA_OEMAKE = "-e MAKEFLAGS="
++
++do_unpack() {
++    [ -d ${S} ] || mkdir -p ${S}
++    cd ${S}
++    sh ${DL_DIR}/dhry-c.shar
++}
++do_install() {
++    install -d ${D}${bindir}
++    install -m 0755 ${S}/dhry ${D}${bindir}
++}
++
++# Prevent procedure merging as required by dhrystone.c:
++CFLAGS += "-fno-lto"
++
++LDFLAGS += "-fno-lto"
 -- 
-2.7.4
+2.10.1
 
 
