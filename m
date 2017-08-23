@@ -1,20 +1,24 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 6B058782DB
+Return-Path: <jason.wessel@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id AD06A782EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 17:09:56 +0000 (UTC)
-Received: from fmsmga005.fm.intel.com ([10.253.24.32])
-	by orsmga105.jf.intel.com with ESMTP; 23 Aug 2017 10:09:57 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,417,1498546800"; d="scan'208";a="143140473"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by fmsmga005.fm.intel.com with ESMTP; 23 Aug 2017 10:09:56 -0700
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Aug 2017 20:06:49 +0300
-Message-Id: <20170823170649.35614-1-alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [PATCH] meson: remove recipe and class
+	Wed, 23 Aug 2017 17:45:19 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7NHjK0L020416
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Aug 2017 10:45:20 -0700 (PDT)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 23 Aug 2017 10:45:20 -0700
+From: Jason Wessel <jason.wessel@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Aug 2017 10:45:20 -0700
+Message-ID: <20170823174520.61466-1-jason.wessel@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-gnome][PATCH] gnome-keyring: Fix compatibility with gcr 3 in oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,238 +31,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2017 17:09:56 -0000
+X-List-Received-Date: Wed, 23 Aug 2017 17:45:20 -0000
+Content-Type: text/plain
 
-They have been moved to oe-core layer, as meson is increasingly
-the primary build system for many projects, particularly in the
-Gnome stack.
+The gnome-keyring is used to configure save certain wifi attributes
+when using xfce or a gnome based UI.  This patch restores and fixes
+the recipe removed by commit 9a53ba969ba69c59735fdc56e9f88a3430596590
+in meta-openembedded's master-next branch.
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
 ---
- meta-oe/classes/meson.bbclass                      | 106 ---------------------
- .../meson/meson/native_bindir.patch                |  71 --------------
- meta-oe/recipes-devtools/meson/meson_0.40.1.bb     |  20 ----
- 3 files changed, 197 deletions(-)
- delete mode 100644 meta-oe/classes/meson.bbclass
- delete mode 100644 meta-oe/recipes-devtools/meson/meson/native_bindir.patch
- delete mode 100644 meta-oe/recipes-devtools/meson/meson_0.40.1.bb
+ .../gnome-keyring/gnome-keyring_2.32.1.bb          | 53 ++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
 
-diff --git a/meta-oe/classes/meson.bbclass b/meta-oe/classes/meson.bbclass
-deleted file mode 100644
-index a09bc240d..000000000
---- a/meta-oe/classes/meson.bbclass
-+++ /dev/null
-@@ -1,106 +0,0 @@
--inherit python3native
--
--DEPENDS_append = " meson-native ninja-native"
--
--# As Meson enforces out-of-tree builds we can just use cleandirs
--B = "${WORKDIR}/build"
--do_configure[cleandirs] = "${B}"
--
--# Where the meson.build build configuration is
--MESON_SOURCEPATH = "${S}"
--
--# These variables in the environment override the *native* tools, not the cross.
--export CPPFLAGS = "${BUILD_CPPFLAGS}"
--export CC = "${BUILD_CC}"
--export CFLAGS = "${BUILD_CFLAGS}"
--export CXX = "${BUILD_CXX}"
--export CXXFLAGS = "${BUILD_CXXFLAGS}"
--export LD = "${BUILD_LD}"
--export LDFLAGS = "${BUILD_LDFLAGS}"
--export AR = "${BUILD_AR}"
--export PKG_CONFIG = "pkg-config-native"
--
--def noprefix(var, d):
--    return d.getVar(var, True).replace(d.getVar('prefix', True) + '/', '', 1)
--
--MESONOPTS = " --prefix ${prefix} \
--              --bindir ${@noprefix('bindir', d)} \
--              --sbindir ${@noprefix('sbindir', d)} \
--              --datadir ${@noprefix('datadir', d)} \
--              --libdir ${@noprefix('libdir', d)} \
--              --libexecdir ${@noprefix('libexecdir', d)} \
--              --includedir ${@noprefix('includedir', d)} \
--              --mandir ${@noprefix('mandir', d)} \
--              --infodir ${@noprefix('infodir', d)} \
--              --sysconfdir ${sysconfdir} \
--              --localstatedir ${localstatedir} \
--              --sharedstatedir ${sharedstatedir}"
--
--MESON_C_ARGS = "${TARGET_CC_ARCH}${TOOLCHAIN_OPTIONS}"
--MESON_LINK_ARGS = "${MESON_C_ARGS} ${LDFLAGS}"
--
--MESON_HOST_ENDIAN = "${@bb.utils.contains('SITEINFO_ENDIANNESS', 'be', 'big', 'little', d)}"
--MESON_TARGET_ENDIAN = "${@bb.utils.contains('TUNE_FEATURES', 'bigendian', 'big', 'little', d)}"
--
--EXTRA_OEMESON += "${PACKAGECONFIG_CONFARGS}"
--
--MESON_CROSS_FILE = ""
--MESON_CROSS_FILE_class-target = "--cross-file ${WORKDIR}/meson.cross"
--
--def meson_array(var, d):
--    return "', '".join(d.getVar(var, True).split()).join(("'", "'"))
--
--addtask write_config before do_configure
--do_write_config[vardeps] += "MESON_C_ARGS TOOLCHAIN_OPTIONS"
--do_write_config() {
--    # This needs to be Py to split the args into single-element lists
--    cat >${WORKDIR}/meson.cross <<EOF
--[binaries]
--c = '${HOST_PREFIX}gcc'
--cpp = '${HOST_PREFIX}g++'
--ar = '${HOST_PREFIX}ar'
--ld = '${HOST_PREFIX}ld'
--strip = '${HOST_PREFIX}strip'
--readelf = '${HOST_PREFIX}readelf'
--pkgconfig = 'pkg-config'
--
--[properties]
--needs_exe_wrapper = true
--c_args = [${@meson_array('MESON_C_ARGS', d)}]
--c_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
--cpp_args = [${@meson_array('MESON_C_ARGS', d)}]
--cpp_link_args = [${@meson_array('MESON_LINK_ARGS', d)}]
--
--[host_machine]
--system = '${HOST_OS}'
--cpu_family = '${HOST_ARCH}'
--cpu = '${HOST_ARCH}'
--endian = '${MESON_HOST_ENDIAN}'
--
--[target_machine]
--system = '${TARGET_OS}'
--cpu_family = '${TARGET_ARCH}'
--cpu = '${TARGET_ARCH}'
--endian = '${MESON_TARGET_ENDIAN}'
--EOF
--}
--
--CONFIGURE_FILES = "meson.build"
--
--meson_do_configure() {
--    if ! meson ${MESONOPTS} "${MESON_SOURCEPATH}" "${B}" ${MESON_CROSS_FILE} ${EXTRA_OEMESON}; then
--        cat ${B}/meson-logs/meson-log.txt
--        bbfatal_log meson failed
--    fi
--}
--
--do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
--meson_do_compile() {
--    ninja ${PARALLEL_MAKE}
--}
--
--meson_do_install() {
--    DESTDIR='${D}' ninja ${PARALLEL_MAKEINST} install
--}
--
--EXPORT_FUNCTIONS do_configure do_compile do_install
-diff --git a/meta-oe/recipes-devtools/meson/meson/native_bindir.patch b/meta-oe/recipes-devtools/meson/meson/native_bindir.patch
-deleted file mode 100644
-index 993e9750e..000000000
---- a/meta-oe/recipes-devtools/meson/meson/native_bindir.patch
-+++ /dev/null
-@@ -1,71 +0,0 @@
--There are some discussions upstream to merge this patch, but I presonaly believe
--that is is OE only. https://github.com/mesonbuild/meson/issues/1849#issuecomment-303730323
--
--Upstream-Status: Inappropriate [OE specific]
--Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
--diff --git a/mesonbuild/dependencies.py b/mesonbuild/dependencies.py
--index 04a22f985941..3e33bc4a79e7 100644
----- a/mesonbuild/dependencies.py
--+++ b/mesonbuild/dependencies.py
--@@ -95,7 +95,7 @@ class Dependency:
--     def need_threads(self):
--         return False
-- 
---    def get_pkgconfig_variable(self, variable_name):
--+    def get_pkgconfig_variable(self, variable_name, use_native=False):
--         raise MesonException('Tried to get a pkg-config variable from a non-pkgconfig dependency.')
-- 
-- class InternalDependency(Dependency):
--@@ -224,8 +224,12 @@ class PkgConfigDependency(Dependency):
--         return s.format(self.__class__.__name__, self.name, self.is_found,
--                         self.version_reqs)
-- 
---    def _call_pkgbin(self, args):
---        p, out = Popen_safe([self.pkgbin] + args, env=os.environ)[0:2]
--+    def _call_pkgbin(self, args, use_native=False):
--+        if use_native:
--+            pkgbin = [self.pkgbin + "-native"]
--+        else:
--+            pkgbin = [self.pkgbin]
--+        p, out = Popen_safe(pkgbin + args, env=os.environ)[0:2]
--         return p.returncode, out.strip()
-- 
--     def _set_cargs(self):
--@@ -259,8 +263,8 @@ class PkgConfigDependency(Dependency):
--                 self.is_libtool = True
--             self.libs.append(lib)
-- 
---    def get_pkgconfig_variable(self, variable_name):
---        ret, out = self._call_pkgbin(['--variable=' + variable_name, self.name])
--+    def get_pkgconfig_variable(self, variable_name, use_native=False):
--+        ret, out = self._call_pkgbin(['--variable=' + variable_name, self.name], use_native=use_native)
--         variable = ''
--         if ret != 0:
--             if self.required:
--@@ -1091,7 +1095,7 @@ class QtBaseDependency(Dependency):
--         self.bindir = self.get_pkgconfig_host_bins(core)
--         if not self.bindir:
--             # If exec_prefix is not defined, the pkg-config file is broken
---            prefix = core.get_pkgconfig_variable('exec_prefix')
--+            prefix = core.get_pkgconfig_variable('exec_prefix', use_native=True)
--             if prefix:
--                 self.bindir = os.path.join(prefix, 'bin')
-- 
--@@ -1202,7 +1206,7 @@ class Qt5Dependency(QtBaseDependency):
--         QtBaseDependency.__init__(self, 'qt5', env, kwargs)
-- 
--     def get_pkgconfig_host_bins(self, core):
---        return core.get_pkgconfig_variable('host_bins')
--+        return core.get_pkgconfig_variable('host_bins', use_native=True)
-- 
-- class Qt4Dependency(QtBaseDependency):
--     def __init__(self, env, kwargs):
--@@ -1216,7 +1220,7 @@ class Qt4Dependency(QtBaseDependency):
--         applications = ['moc', 'uic', 'rcc', 'lupdate', 'lrelease']
--         for application in applications:
--             try:
---                return os.path.dirname(core.get_pkgconfig_variable('%s_location' % application))
--+                return os.path.dirname(core.get_pkgconfig_variable('%s_location' % application, use_native=True))
--             except MesonException:
--                 pass
-- 
-diff --git a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb b/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-deleted file mode 100644
-index 14644ba9b..000000000
---- a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-+++ /dev/null
-@@ -1,20 +0,0 @@
--HOMEPAGE = "http://mesonbuild.com"
--SUMMARY = "A high performance build system"
--
--LICENSE = "Apache-2.0"
--LIC_FILES_CHKSUM = "file://COPYING;md5=3b83ef96387f14655fc854ddc3c6bd57"
--
--SRC_URI = " \
--    git://github.com/mesonbuild/meson.git \
--    file://native_bindir.patch \
--"
--
--SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
--
--S = "${WORKDIR}/git"
--
--inherit setuptools3
--
--RDEPENDS_${PN} = "ninja python3-core python3-modules"
--
--BBCLASSEXTEND = "native"
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+new file mode 100644
+index 000000000..e22a360e3
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+@@ -0,0 +1,53 @@
++SUMMARY = "Password and keyring managing daemon"
++HOMEPAGE = "http://www.gnome.org/"
++BUGTRACKER = "https://bugzilla.gnome.org/"
++
++LICENSE = "GPLv2+ & LGPLv2+ & LGPLv2.1+"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
++                    file://gcr/gcr.h;endline=22;md5=a272df1e633e27ecf35e74fb5576250e \
++                    file://egg/egg-dbus.h;endline=25;md5=eb6f531af37165dc53420c073d774e61 \
++                    file://gp11/gp11.h;endline=24;md5=bd8c7a8a21d6c28d40536d96a35e3469 \
++                    file://pkcs11/pkcs11i.h;endline=24;md5=e72cfbb718389b76a4dae838d1c1f439"
++
++SECTION = "x11/gnome"
++
++PR = "r12"
++
++inherit autotools gnome gtk-doc pkgconfig gsettings
++
++SRC_URI += "file://egg-asn1x.patch"
++
++DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native"
++RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
++
++EXTRA_OECONF = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-pam-dir=${base_libdir}/security', '--disable-pam', d)}"
++
++SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
++SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
++GNOME_COMPRESS_TYPE="bz2"
++
++FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
++                ${base_libdir}/security/*${SOLIBSDEV} \
++               "
++
++FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
++                    ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
++                    ${libdir}/${BPN}/standalone/*.la \
++                    ${base_libdir}/security/*.la \
++                   "
++
++INSANE_SKIP_${PN}-dev += "dev-elf"
++
++FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
++                    ${libdir}/${BPN}/devel/.debug/ \
++                    ${base_libdir}/security/.debug/"
++
++# Make compatible with gcr version 3 or newer by removing
++# org.gnome.crypto.pgp.*, which is the provider for this optional
++# functionality.
++
++do_install_append() {
++	rm ${D}${datadir}/GConf/gsettings/org.gnome.crypto.pgp.convert
++	rm ${D}${datadir}/glib-2.0/schemas/org.gnome.crypto.pgp.gschema.xml
++}
++
 -- 
-2.14.1
+2.11.0
 
 
