@@ -1,54 +1,28 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 121AD782CE
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C91B6FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 19:23:49 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id u9so437499pgn.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 12:23:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=xyrCmvdhzxtud8GN0pwgVPwrt62JzB4pCQddqz2sEyo=;
-	b=Wd/9eTRveZ6pjEbxM9WvBawiDnPfF/fEOYiFwLBuyzGSc0gTuUKUlPROYxTsq+SS5M
-	nilNHeK+W5dL9chto95M/r+VNBr+pUTID86rviDl6EVLJueAGwZ9AUZHTcvXPwd9Xg2E
-	swxbRcjjyXsOToIx2GXVbdd347vxLB5yPGtM2MhJmDy5w3XBTky0lyQfXbADLROXJXMP
-	7Mb4U8nNscGfbSWm/JdkpVkR+PavMkGv77LuXpX+YozyLnVmT3LbKJDh5qCxq7mEzrz5
-	FQF4mQjXfL70mrbtk0qcXkPpOLCi94MK+jxS8XNsmpHqpnn74rMFagr5nfBioOegbejb
-	veTw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=xyrCmvdhzxtud8GN0pwgVPwrt62JzB4pCQddqz2sEyo=;
-	b=K4EZRyiDXAVY+RCFnEg6JwhSG5zcZ06IEAodm+5xcLrdoSkB0qVrau5DKI6/0BbsvS
-	aD8NVbnQkwgnHJxiRkWEtkKL4fJeymsHuc0yv1FSnZVRTEj/EiZlF5Jdhy2/+1FJ1F2P
-	QDWR3FYgAsq9PdUZarYPAB2DUDGDqmfzhz9kovYbHHTeOTldfu4xId/eR4LwMHOerCfW
-	B+ANuuqiMlC6KIOWx48AwmWrITLKjINRtDlZHw5BVrvc+r1nGmv8coEJKETWJvVFeCfh
-	QQo4OPqJb1aCL2VUDV27aVc3VheVMPuOBmbcbm9M7bZscbedU1dAX9eAz50P3U2wi2f3
-	Xvgw==
-X-Gm-Message-State: AHYfb5hdYjZ2/eI86j+lB99H5zxNcx1wGUF0z/kEl1BcWeiSGdvd9xDn
-	XL4GdI7sbUganw==
-X-Received: by 10.98.37.199 with SMTP id l190mr3950155pfl.332.1503516231339;
-	Wed, 23 Aug 2017 12:23:51 -0700 (PDT)
-Received: from ?IPv6:2601:647:4c00:6cf9:1d5a:396a:8869:87e0?
-	([2601:647:4c00:6cf9:1d5a:396a:8869:87e0])
-	by smtp.gmail.com with ESMTPSA id
-	z189sm3440037pgb.12.2017.08.23.12.23.50
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 23 Aug 2017 12:23:50 -0700 (PDT)
-To: liu.ming50@gmail.com, openembedded-devel@lists.openembedded.org
-References: <1503473173-12677-1-git-send-email-liu.ming50@gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Message-ID: <2981c645-6874-7925-c512-04f7dcd0038c@gmail.com>
-Date: Wed, 23 Aug 2017 12:23:50 -0700
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:56.0)
-	Gecko/20100101 Thunderbird/56.0
+	Wed, 23 Aug 2017 23:54:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7NNsFbO022849
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 23 Aug 2017 16:54:15 -0700 (PDT)
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 23 Aug 2017 16:54:14 -0700
+To: Martin Jansa <martin.jansa@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20170822142141.9783-1-Martin.Jansa@gmail.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <0b21ced3-5976-da19-7329-a3f7945d16f6@windriver.com>
+Date: Wed, 23 Aug 2017 19:54:13 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <1503473173-12677-1-git-send-email-liu.ming50@gmail.com>
-Cc: Ming Liu <peter.x.liu@external.atlascopco.com>
-Subject: Re: [meta-clang] [PATCH] clang: fix nativesdk build
+In-Reply-To: <20170822142141.9783-1-Martin.Jansa@gmail.com>
+X-Originating-IP: [172.25.44.7]
+Subject: Re: [meta-systemd][PATCH] meta-systemd: remove this now pretty empty layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,113 +35,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2017 19:23:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-US
+X-List-Received-Date: Wed, 23 Aug 2017 23:54:16 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
 Content-Transfer-Encoding: 7bit
 
-On 8/23/17 12:26 AM, liu.ming50@gmail.com wrote:
-> From: Ming Liu <peter.x.liu@external.atlascopco.com>
-> 
-> I could not manage to build nativesdk-clang, I encountered errors as
-> follows: (trimmed for purpose)
-> | ../gcc/x86_64-pokysdk-linux/6.3.0/ld::
-> | cannot find crt1.o: No such file or directory
-> | cannot find crtbegin.o: No such file or directory
-> | cannot find -lgcc
-> | cannot find -lgcc_s
-> 
-> After some investigation, I found it's caused by the llvm native tools
-> could not compile with crosssdk toolchains. (special linking flags
-> are needed)
-> 
-> So we introduce a cmake-native class with a task to generate a native
-> toolchain file, it will be used to build llvm native tools by passed
-> with CROSS_TOOLCHAIN_FLAGS_NATIVE.
+On 2017-08-22 10:21 AM, Martin Jansa wrote:
+> * the upgrade path from original meta-systemd still isn't provided
+>    by oe-core, but hopefully there are only a few remaining users
+>    of this layer.
+> * some BSPs probably still use systemd-machine-units, but they should
+>    push it to oe-core instead of depending on this layer just for this
+>    one recipe
 
-I have applied it. But does this happen when you use gcc7 for gcc as well ?
+Martin,
+
+Since you aren't getting much feedback on these removals,
+I thought I'd say that this is excellent, albeit brutal, clean-up!
+
+I guess it's good news that no one is objecting.
+
+../Randy
+
 > 
-> Signed-off-by: Ming Liu <peter.x.liu@external.atlascopco.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 > ---
->  classes/cmake-native.bbclass        | 47 +++++++++++++++++++++++++++++++++++++
->  recipes-devtools/clang/clang_git.bb |  3 ++-
->  2 files changed, 49 insertions(+), 1 deletion(-)
->  create mode 100644 classes/cmake-native.bbclass
+>   meta-systemd/README                                | 26 ------------------
+>   meta-systemd/conf/layer.conf                       | 32 ----------------------
+>   .../recipes-bsp/keymaps/keymaps_1.0.bbappend       |  4 ---
+>   .../recipes-connectivity/avahi/avahi_%.bbappend    |  4 ---
+>   .../connman/connman_%.bbappend                     |  3 --
+>   .../dhcp/dhcp/dhclient.service                     | 13 ---------
+>   .../recipes-connectivity/dhcp/dhcp_%.bbappend      | 24 ----------------
+>   .../recipes-connectivity/ofono/ofono_%.bbappend    |  5 ----
+>   .../openssh/openssh_%.bbappend                     |  3 --
+>   .../wpa-supplicant/wpa-supplicant_%.bbappend       |  3 --
+>   .../recipes-core/busybox/busybox_%.bbappend        |  3 --
+>   .../oe-core/recipes-core/dbus/dbus_%.bbappend      |  3 --
+>   .../recipes-core/dropbear/dropbear_%.bbappend      |  4 ---
+>   .../recipes-core/systemd/systemd_%.bbappend        |  3 --
+>   .../recipes-core/util-linux/util-linux_%.bbappend  |  3 --
+>   .../oe-core/recipes-extended/at/at_%.bbappend      |  4 ---
+>   .../recipes-extended/cronie/cronie_%.bbappend      |  3 --
+>   .../recipes-extended/lighttpd/lighttpd_%.bbappend  |  3 --
+>   .../recipes-extended/rpcbind/rpcbind_%.bbappend    |  3 --
+>   .../systemd/systemd-machine-units_1.0.bb           | 13 ---------
+>   20 files changed, 159 deletions(-)
+>   delete mode 100644 meta-systemd/README
+>   delete mode 100644 meta-systemd/conf/layer.conf
+>   delete mode 100644 meta-systemd/oe-core/recipes-bsp/keymaps/keymaps_1.0.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/avahi/avahi_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/connman/connman_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp/dhclient.service
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/dhcp/dhcp_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/ofono/ofono_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/openssh/openssh_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-connectivity/wpa-supplicant/wpa-supplicant_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-core/busybox/busybox_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-core/dbus/dbus_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-core/dropbear/dropbear_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-core/systemd/systemd_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-core/util-linux/util-linux_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-extended/at/at_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-extended/cronie/cronie_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-extended/lighttpd/lighttpd_%.bbappend
+>   delete mode 100644 meta-systemd/oe-core/recipes-extended/rpcbind/rpcbind_%.bbappend
+>   delete mode 100644 meta-systemd/recipes-core/systemd/systemd-machine-units_1.0.bb
 > 
-> diff --git a/classes/cmake-native.bbclass b/classes/cmake-native.bbclass
-> new file mode 100644
-> index 0000000..911476e
-> --- /dev/null
-> +++ b/classes/cmake-native.bbclass
-> @@ -0,0 +1,47 @@
-> +# We need to unset CCACHE otherwise cmake gets too confused
-> +CCACHE = ""
-> +
-> +# Native C/C++ compiler (without cpu arch/tune arguments)
-> +OECMAKE_NATIVE_C_COMPILER ?= "`echo ${BUILD_CC} | sed 's/^\([^ ]*\).*/\1/'`"
-> +OECMAKE_NATIVE_CXX_COMPILER ?= "`echo ${BUILD_CXX} | sed 's/^\([^ ]*\).*/\1/'`"
-> +OECMAKE_NATIVE_AR ?= "${BUILD_AR}"
-> +
-> +# Native compiler flags
-> +OECMAKE_NATIVE_C_FLAGS ?= "${BUILD_CC_ARCH} ${BUILD_CFLAGS}"
-> +OECMAKE_NATIVE_CXX_FLAGS ?= "${BUILD_CC_ARCH} ${BUILD_CXXFLAGS}"
-> +OECMAKE_NATIVE_C_FLAGS_RELEASE ?= "-DNDEBUG"
-> +OECMAKE_NATIVE_CXX_FLAGS_RELEASE ?= "-DNDEBUG"
-> +OECMAKE_NATIVE_C_LINK_FLAGS ?= "${BUILD_CC_ARCH} ${BUILD_CPPFLAGS} ${BUILD_LDFLAGS}"
-> +OECMAKE_NATIVE_CXX_LINK_FLAGS ?= "${BUILD_CC_ARCH} ${BUILD_CXXFLAGS} ${BUILD_LDFLAGS}"
-> +BUILD_CXXFLAGS += "${BUILD_CC_ARCH}"
-> +BUILD_CFLAGS += "${BUILD_CC_ARCH}"
-> +
-> +do_generate_native_toolchain_file() {
-> +        cat > ${WORKDIR}/toolchain-native.cmake <<EOF
-> +set( CMAKE_SYSTEM_NAME `echo ${BUILD_OS} | sed -e 's/^./\u&/' -e 's/^\(Linux\).*/\1/'` )
-> +set( CMAKE_SYSTEM_PROCESSOR ${BUILD_ARCH} )
-> +set( CMAKE_C_COMPILER ${OECMAKE_NATIVE_C_COMPILER} )
-> +set( CMAKE_CXX_COMPILER ${OECMAKE_NATIVE_CXX_COMPILER} )
-> +set( CMAKE_ASM_COMPILER ${OECMAKE_NATIVE_C_COMPILER} )
-> +set( CMAKE_AR ${OECMAKE_NATIVE_AR} CACHE FILEPATH "Archiver" )
-> +set( CMAKE_C_FLAGS "${OECMAKE_NATIVE_C_FLAGS}" CACHE STRING "CFLAGS" )
-> +set( CMAKE_CXX_FLAGS "${OECMAKE_NATIVE_CXX_FLAGS}" CACHE STRING "CXXFLAGS" )
-> +set( CMAKE_ASM_FLAGS "${OECMAKE_NATIVE_C_FLAGS}" CACHE STRING "ASM FLAGS" )
-> +set( CMAKE_C_FLAGS_RELEASE "${OECMAKE_NATIVE_C_FLAGS_RELEASE}" CACHE STRING "Additional CFLAGS for release" )
-> +set( CMAKE_CXX_FLAGS_RELEASE "${OECMAKE_NATIVE_CXX_FLAGS_RELEASE}" CACHE STRING "Additional CXXFLAGS for release" )
-> +set( CMAKE_ASM_FLAGS_RELEASE "${OECMAKE_NATIVE_C_FLAGS_RELEASE}" CACHE STRING "Additional ASM FLAGS for release" )
-> +set( CMAKE_C_LINK_FLAGS "${OECMAKE_NATIVE_C_LINK_FLAGS}" CACHE STRING "LDFLAGS" )
-> +set( CMAKE_CXX_LINK_FLAGS "${OECMAKE_NATIVE_CXX_LINK_FLAGS}" CACHE STRING "LDFLAGS" )
-> +
-> +set( CMAKE_FIND_ROOT_PATH ${STAGING_DIR_NATIVE} )
-> +set( CMAKE_FIND_ROOT_PATH_MODE_PACKAGE ONLY )
-> +set( CMAKE_FIND_ROOT_PATH_MODE_PROGRAM BOTH )
-> +set( CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY )
-> +set( CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY )
-> +
-> +# Use native cmake modules
-> +list(APPEND CMAKE_MODULE_PATH "${STAGING_DATADIR_NATIVE}/cmake/Modules/")
-> +EOF
-> +}
-> +
-> +addtask generate_native_toolchain_file after do_patch before do_configure
-> diff --git a/recipes-devtools/clang/clang_git.bb b/recipes-devtools/clang/clang_git.bb
-> index fb7854c..c226093 100644
-> --- a/recipes-devtools/clang/clang_git.bb
-> +++ b/recipes-devtools/clang/clang_git.bb
-> @@ -27,7 +27,7 @@ INHIBIT_DEFAULT_DEPS = "1"
->  
->  S = "${WORKDIR}/git"
->  
-> -inherit cmake
-> +inherit cmake cmake-native
->  
->  OECMAKE_FIND_ROOT_PATH_MODE_PROGRAM = "BOTH"
->  
-> @@ -85,6 +85,7 @@ EXTRA_OECMAKE_append_class-native = "\
->  "
->  EXTRA_OECMAKE_append_class-nativesdk = "\
->                    -DCMAKE_CROSSCOMPILING:BOOL=ON \
-> +                  -DCROSS_TOOLCHAIN_FLAGS_NATIVE='-DCMAKE_TOOLCHAIN_FILE=${WORKDIR}/toolchain-native.cmake' \
->                    -DLLVM_TARGETS_TO_BUILD='${LLVM_TARGETS_TO_BUILD}' \
->                    -DLLVM_TABLEGEN=${STAGING_BINDIR_NATIVE}/llvm-tblgen \
->                    -DCLANG_TABLEGEN=${STAGING_BINDIR_NATIVE}/clang-tblgen \
-> 
+...
 
+-- 
+# Randy MacLeod.  WR Linux
+# Wind River an Intel Company
 
