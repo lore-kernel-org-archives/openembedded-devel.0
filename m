@@ -1,32 +1,45 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CCAB0782DA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id 0000C7197E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 01:50:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7N1o6Hq002173
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 22 Aug 2017 18:50:07 -0700
-Received: from [128.224.162.212] (128.224.162.212) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 22 Aug 2017 18:50:06 -0700
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20170817092828.3629-1-kai.kang@windriver.com>
-	<5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
-	<CA+chaQeZAssT0CUJPQREUZqx0ti0OycLPsGSFcXg2Y96R8PC4Q@mail.gmail.com>
-	<515b5bdf-dd12-05fc-8585-0193e7dadbd1@windriver.com>
-	<CA+chaQeoFXxW7NomAOsT4U47nTo9cZgCwjmqTa-ciaUYv3oJ3Q@mail.gmail.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <8abc7fa7-1a83-e970-1b8e-b174e5e98a24@windriver.com>
-Date: Wed, 23 Aug 2017 09:50:00 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
-MIME-Version: 1.0
-In-Reply-To: <CA+chaQeoFXxW7NomAOsT4U47nTo9cZgCwjmqTa-ciaUYv3oJ3Q@mail.gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] mariadb: 5.5.55 -> 5.5.57
+	Wed, 23 Aug 2017 01:53:26 +0000 (UTC)
+Received: by mail-pf0-f180.google.com with SMTP id h75so1624975pfh.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Aug 2017 18:53:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=AZxtjtG7wmYWvGzQ+x7gxRTLFm1gE6PMiyy+0288fkw=;
+	b=cwzeRENtAD3Of60Gas3lk7+VN+RvLkUrxpPJ51wKGQOLCO/+WHHSx+uw1FUVWaaohG
+	A4iK14qMba8gyQ67G5di0p1LVL6aBhMdq5uQx+jl4fxnRiWhKc6xJf+3994bJ7LMHDeS
+	/KjMe4Npw+G8i1iEwN0USwJcHhACJJVpV1aSeM2mAh5auJNzPQJnDeRsJCWmQ4+lg7KC
+	KjvVgA/Xok/ON4300Qh7RhSJx6pYA1gTCDif7HZ30n27tvkY7JCQUXyUqce5uI87CagI
+	vnnDirgkWqAVVbJMbi54Zhb3dI3NMIDtKsO2l90W+OAzViqFT+t+eUdZlXe1N76az2Ab
+	vRMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AZxtjtG7wmYWvGzQ+x7gxRTLFm1gE6PMiyy+0288fkw=;
+	b=HwFLkm1wiRPJ2Bk1wcycw63q8obNCDIjihbkjWPzrtpINCzCIoRcuYiBMsJp9Klv5G
+	XR/INIqkPVDNncqHx1DGPKdbJ5ruitQgF/Aiit0IOnFOe4MCCDpUPzNwtYEMHl79JUNb
+	92XMnYC5pZjv8ADmcX7VOTteMMbGTGKknvYvi4rO5LPB/4aIaQR7ILxwj3qTzhsY7smV
+	Z7DkEjVsKiOqeVxw2TuYYlO+0cibTO4WLAb+3GyIf9j9lgfDZV9Fj3GTfIz+of+/Q31r
+	PjtE8pe1Kdt0MfY8WpU8+HwTWLr672lKPUQEIyy3zHn2YTTustcIpOOd1K9ngljoIrbG
+	Wi4g==
+X-Gm-Message-State: AHYfb5isj/heLca1k4b1WH5ZrAb9+IR9P/iH5CLymF84DN2RNECx4D50
+	yk1CTgBkbap1uaUQ
+X-Received: by 10.98.194.8 with SMTP id l8mr1086970pfg.293.1503453208022;
+	Tue, 22 Aug 2017 18:53:28 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
+	by smtp.gmail.com with ESMTPSA id k80sm383157pfj.42.2017.08.22.18.53.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 22 Aug 2017 18:53:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 22 Aug 2017 18:53:19 -0700
+Message-Id: <20170823015319.8326-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-python][PATCH V2] python-m2crypto: Upgrade to 0.26.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,216 +52,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2017 01:50:07 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 23 Aug 2017 01:53:27 -0000
 
-On 2017年08月21日 12:46, Martin Jansa wrote:
-> Hi,
->
-> the security_flags.inc:
->
-> require conf/distro/include/security_flags.inc
->
-> and if still doesn't reproduce than last bit is thumb:
->
-> PREFERRED_ARM_INSTRUCTION_SET              ?= "thumb"
-> ARM_INSTRUCTION_SET = "${PREFERRED_ARM_INSTRUCTION_SET}"
+Use proper LICENCE file for LIC_FILES_CHKSUM
+Update homepage to point to gitlab
 
-Hi Martin,
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...{python-m2crypto_0.25.1.bb => python-m2crypto_0.26.0.bb} | 13 ++++++-------
+ 1 file changed, 6 insertions(+), 7 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-m2crypto_0.25.1.bb => python-m2crypto_0.26.0.bb} (72%)
 
-Thanks. I can reproduce the failure and I'll try to figure out the root 
-cause.
-
-
---Kai
-
-
->
-> Regards,
->
-> On Mon, Aug 21, 2017 at 6:08 AM, Kang Kai <Kai.Kang@windriver.com 
-> <mailto:Kai.Kang@windriver.com>> wrote:
->
->     On 2017年08月21日 07:48, Martin Jansa wrote:
->>     Like the previous version this one fails to build for qemuarm
->>     when security_flags.inc are enabled (maybe only in combination
->>     with gold and thumb), can you please look into it?
->>
->>     http://errors.yoctoproject.org/Errors/Details/152655/
->>     <http://errors.yoctoproject.org/Errors/Details/152655/>
->
->     I built qemuarm with following configures in local.conf and no
->     failure.
->
->     require conf/distro/include/security_flags.inc
->
->     DISTRO_FEATURES_append = " ld-is-gold"
->
->
->     Any other configure did I miss? Thanks.
->
->
->     Regards,
->     Kai
->
->
->>
->>     On Fri, Aug 18, 2017 at 4:51 AM, Kang Kai <Kai.Kang@windriver.com
->>     <mailto:Kai.Kang@windriver.com>> wrote:
->>
->>         On 2017年08月17日 17:28, kai.kang@windriver.com
->>         <mailto:kai.kang@windriver.com> wrote:
->>
->>             From: Kai Kang <kai.kang@windriver.com
->>             <mailto:kai.kang@windriver.com>>
->>
->>             Upgrade mariadb from 5.5.55 to 5.5.57.
->>
->>
->>         Forgot [meta-oe] in title. Sorry for inconvenience.
->>
->>         --Kai
->>
->>
->>
->>             * update SRC_URI that mariadb.com <http://mariadb.com>
->>             doesn't provides source tarball of 5.5.57
->>             * remove gcc7.patch which is not needed any more
->>
->>             Signed-off-by: Kai Kang <kai.kang@windriver.com
->>             <mailto:kai.kang@windriver.com>>
->>             ---
->>               .../{mariadb-native_5.5.55.bb
->>             <http://mariadb-native_5.5.55.bb> =>
->>             mariadb-native_5.5.57.bb
->>             <http://mariadb-native_5.5.57.bb>} |  0
->>               meta-oe/recipes-support/mysql/mariadb.inc              
->>                |  8 ++++----
->>               meta-oe/recipes-support/mysql/mariadb/gcc7.patch      
->>                 | 13 -------------
->>               .../mysql/{mariadb_5.5.55.bb <http://mariadb_5.5.55.bb>
->>             => mariadb_5.5.57.bb <http://mariadb_5.5.57.bb>}         |  0
->>               4 files changed, 4 insertions(+), 17 deletions(-)
->>               rename
->>             meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb
->>             <http://mariadb-native_5.5.55.bb> =>
->>             mariadb-native_5.5.57.bb
->>             <http://mariadb-native_5.5.57.bb>} (100%)
->>               delete mode 100644
->>             meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->>               rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb
->>             <http://mariadb_5.5.55.bb> => mariadb_5.5.57.bb
->>             <http://mariadb_5.5.57.bb>} (100%)
->>
->>             diff --git
->>             a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
->>             <http://mariadb-native_5.5.55.bb>
->>             b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
->>             <http://mariadb-native_5.5.57.bb>
->>             similarity index 100%
->>             rename from
->>             meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
->>             <http://mariadb-native_5.5.55.bb>
->>             rename to
->>             meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
->>             <http://mariadb-native_5.5.57.bb>
->>             diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
->>             b/meta-oe/recipes-support/mysql/mariadb.inc
->>             index fd9dcbd..32e3eaa 100644
->>             --- a/meta-oe/recipes-support/mysql/mariadb.inc
->>             +++ b/meta-oe/recipes-support/mysql/mariadb.inc
->>             @@ -4,7 +4,7 @@ SECTION = "libs"
->>               LICENSE = "GPLv2"
->>               LIC_FILES_CHKSUM =
->>             "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->>               -SRC_URI =
->>             "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${PV}.tar.gz
->>             <http://downloads.mariadb.com/MariaDB/mariadb-$%7BPV%7D/source/mariadb-$%7BPV%7D.tar.gz>
->>             \
->>             +SRC_URI =
->>             "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz
->>             <https://downloads.mariadb.org/f/$%7BBP%7D/source/$%7BBP%7D.tar.gz>
->>             \
->>             file://fix-cmake-module-path.patch \
->>             file://remove-bad-path.patch \
->>             file://fix-mysqlclient-r-version.patch \
->>             @@ -17,10 +17,10 @@ SRC_URI =
->>             "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
->>             <http://downloads.mariadb.com/MariaDB/mariadb-$%7BPV%7D/source/mariadb-$%7BP>
->>             file://fix-a-building-failure.patch \
->>             file://change-cc-to-cc-version.patch \
->>             file://0001-disable-ucontext-on-musl.patch \
->>             - file://gcc7.patch \
->>                         "
->>             -SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
->>             -SRC_URI[sha256sum] =
->>             "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
->>             +
->>             +SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
->>             +SRC_URI[sha256sum] =
->>             "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
->>                 S = "${WORKDIR}/mariadb-${PV}"
->>               diff --git
->>             a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->>             b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->>             deleted file mode 100644
->>             index 3e75b26..0000000
->>             --- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
->>             +++ /dev/null
->>             @@ -1,13 +0,0 @@
->>             -Index: mariadb-5.5.55/client/mysql.cc
->>             -===================================================================
->>             ---- mariadb-5.5.55.orig/client/mysql.cc
->>             -+++ mariadb-5.5.55/client/mysql.cc
->>             -@@ -2850,7 +2850,7 @@ You can turn off this feature to
->>             get a q
->>             -         mysql_free_result(fields);
->>             -         break;
->>             -       }
->>             --      field_names[i][num_fields*2]= '\0';
->>             -+      field_names[i][num_fields*2][0]= '\0';
->>             -       j=0;
->>             -       while ((sql_field=mysql_fetch_field(fields)))
->>             -       {
->>             diff --git
->>             a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
->>             <http://mariadb_5.5.55.bb>
->>             b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
->>             <http://mariadb_5.5.57.bb>
->>             similarity index 100%
->>             rename from
->>             meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
->>             <http://mariadb_5.5.55.bb>
->>             rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
->>             <http://mariadb_5.5.57.bb>
->>
->>
->>
->>         -- 
->>         Regards,
->>         Neil | Kai Kang
->>
->>
->>         -- 
->>         _______________________________________________
->>         Openembedded-devel mailing list
->>         Openembedded-devel@lists.openembedded.org
->>         <mailto:Openembedded-devel@lists.openembedded.org>
->>         http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>         <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->>
->>
->
->     -- 
->     Regards,
->     Neil | Kai Kang
->
->
-
+diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
+similarity index 72%
+rename from meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
+rename to meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
+index 72523bd7f..1a5be8e2c 100644
+--- a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
++++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
+@@ -1,13 +1,12 @@
+ SUMMARY = "A Python crypto and SSL toolkit"
+-HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
++HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
+ 
+ LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95295693f047bb8f76928251a6154a60"
+-
+-SRC_URI[md5sum] = "040234289fbef5bed4029f0f7d1dae35"
+-SRC_URI[sha256sum] = "ac303a1881307a51c85ee8b1d87844d9866ee823b4fdbc52f7e79187c2d9acef"
++LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
+ 
+ SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch "
++SRC_URI[md5sum] = "9f02f0b88fbe225cc6ea8680945cafa0"
++SRC_URI[sha256sum] = "05d94fd9b2dae2fb8e072819a795f0e05d3611b09ea185f68e1630530ec09ae8"
+ 
+ PYPI_PACKAGE = "M2Crypto"
+ inherit pypi setuptools siteinfo
+@@ -18,8 +17,6 @@ RDEPENDS_${PN} += "python-typing"
+ DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST} -I${STAGING_INCDIR}"
+ DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
+ 
+-inherit setuptools
+-
+ SWIG_FEATURES_x86-64 = "-D__x86_64__"
+ SWIG_FEATURES ?= ""
+ export SWIG_FEATURES
+@@ -28,6 +25,8 @@ export SWIG_FEATURES
+ # multilib header file exists.
+ #
+ do_compile_prepend() {
++    ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v __REGISTER_PREFIX__ | grep -v __GNUC__ \
++	| sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' > SWIG/gcc_macros.h
+     if [ "${SITEINFO_BITS}" = "64" ];then
+         bit="64"
+     else
 -- 
-Regards,
-Neil | Kai Kang
+2.14.1
 
 
