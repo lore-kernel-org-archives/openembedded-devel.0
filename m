@@ -1,33 +1,32 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 33965781E3
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CCAB0782DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 00:58:26 +0000 (UTC)
+	Wed, 23 Aug 2017 01:50:06 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7N0wQH6011213
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 22 Aug 2017 17:58:26 -0700 (PDT)
-Received: from ALA-MBD.corp.ad.wrs.com ([169.254.3.209]) by
-	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0361.001;
-	Tue, 22 Aug 2017 17:58:26 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7N1o6Hq002173
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Tue, 22 Aug 2017 18:50:07 -0700
+Received: from [128.224.162.212] (128.224.162.212) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 22 Aug 2017 18:50:06 -0700
 To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH v2] logcheck: update to 1.3.18
-Thread-Index: AQHTGyOXnS4RiC6DnkuA1rwvsreN9KKRH0xQ
-Date: Wed, 23 Aug 2017 00:58:25 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B86ECD9@ALA-MBD.corp.ad.wrs.com>
-References: <20170816022341.8084-1-jackie.huang@windriver.com>
-	<CA+chaQeUHcj_Y3pszwAi4LqnGNV4qYyW8rqmopceHJyo=xoR9Q@mail.gmail.com>
-In-Reply-To: <CA+chaQeUHcj_Y3pszwAi4LqnGNV4qYyW8rqmopceHJyo=xoR9Q@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.90]
+References: <20170817092828.3629-1-kai.kang@windriver.com>
+	<5ff3ea2b-e7e2-5a68-563b-5786ad038e4d@windriver.com>
+	<CA+chaQeZAssT0CUJPQREUZqx0ti0OycLPsGSFcXg2Y96R8PC4Q@mail.gmail.com>
+	<515b5bdf-dd12-05fc-8585-0193e7dadbd1@windriver.com>
+	<CA+chaQeoFXxW7NomAOsT4U47nTo9cZgCwjmqTa-ciaUYv3oJ3Q@mail.gmail.com>
+From: Kang Kai <Kai.Kang@windriver.com>
+Message-ID: <8abc7fa7-1a83-e970-1b8e-b174e5e98a24@windriver.com>
+Date: Wed, 23 Aug 2017 09:50:00 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
+In-Reply-To: <CA+chaQeoFXxW7NomAOsT4U47nTo9cZgCwjmqTa-ciaUYv3oJ3Q@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v2] logcheck: update to 1.3.18
+Subject: Re: [meta-oe][PATCH] mariadb: 5.5.55 -> 5.5.57
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,114 +39,216 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Aug 2017 00:58:27 -0000
+X-List-Received-Date: Wed, 23 Aug 2017 01:50:07 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-SXQgZmFpbHMgd2l0aG91dCBtZXRhLXBlcmwsIHNvIEkgdGhpbmsgSSBoYXZlIHRvIG1vdmUgaXQg
-dG8gbWV0YS1wZXJsLg0KDQpUaGFua3MsDQpKYWNraWUNCg0KRnJvbTogTWFydGluIEphbnNhIFtt
-YWlsdG86bWFydGluLmphbnNhQGdtYWlsLmNvbV0NClNlbnQ6IFR1ZXNkYXksIEF1Z3VzdCAyMiwg
-MjAxNyAxNjo1MA0KVG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCkNjOiBvcGVuZW1iZWRkZWQtZGV2
-ZWwNClN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLW9lXVtQQVRDSCB2Ml0gbG9nY2hlY2s6IHVwZGF0
-ZSB0byAxLjMuMTgNCg0KVW5mb3J0dW5hdGVseSBpdCBzdGlsbCBmYWlscyBldmVuIHdpdGggUlJF
-Q09NTUVORFMsIHRyeSBpdCB3aXRob3V0IG1ldGEtcGVybC4NCg0KT24gV2VkLCBBdWcgMTYsIDIw
-MTcgYXQgNDoyMyBBTSwgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPG1haWx0bzpqYWNraWUu
-aHVhbmdAd2luZHJpdmVyLmNvbT4+IHdyb3RlOg0KRnJvbTogSmFja2llIEh1YW5nIDxqYWNraWUu
-aHVhbmdAd2luZHJpdmVyLmNvbTxtYWlsdG86amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+Pg0K
-DQpDaGFuZ2VzOg0KLSBsb2djaGVjayBzaG91bGQgbm90IGJlIHJ1biBhcyByb290LCBzbyBpbmhl
-cml0IHVzZXJhZGQNCiAgYW5kIGFkZCBwcm9wZXIgdXNlciBhbmQgZ3JvdXAuDQoNCi0gQWRkIG1p
-c3NpbmcgcnVudGltZSBkZXBlbmRlbmNpZXMgYWNjb3JkaW5nIHRvIHRoZSBmaWxlDQogIGRlYmlh
-bi9jb250cm9sIGFuZCBzaW1wbGUgdGVzdCBieSBydW5uaW5nICJsb2djaGVjayAtb3QiLg0KDQot
-IEZvciBzeXNsb2csIGRlYmlhbiBkaXJlY3RseSBkZXBlbmRzIG9uIHJzeXNsb2csIGJ1dCBsb2dj
-aGVjaw0KICB3b3JrcyB3aXRoIGFueSBzeXNsb2cgYW5kIHdlIGhhdmUgYnVzeWJveC1zeXNsb2cs
-IHN5c2tsb2dkLA0KICBzeXNsb2ctbmcgYW5kIHJzeXNsb2csIHNvIHVzZSBWSVJUVUFMLVJVTlRJ
-TUVfc3lzbG9nIGZvciB0aGUNCiAgc3lzbG9nIGRlcGVuZGVuY3kgYW5kIHNldCByc3lzbG9nIGFz
-IHRoZSBkZWZhdWx0LCB3aGljaCBjYW4gYmUNCiAgZWFzaWx5IG92ZXJyaWRkZW4gaW4gZGlzdHJv
-IGNvbmYgZmlsZSBvciBsb2NhbC5jb25mLg0KDQotIERvbid0IGluc3RhbGwgL3Zhci9sb2NrIHdo
-ZW4gcG9wdWxhdGluZyByb290ZnMuIERvIGl0DQogIHRocm91Z2ggdm9sYXRpbGUuDQoNCi0gaW5z
-dGFsbCBoZWFkZXIudHh0IGZvciBnZW5lcmF0ZWQgbWFpbHMNCg0KU2lnbmVkLW9mZi1ieTogSmFj
-a2llIEh1YW5nIDxqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbTxtYWlsdG86amFja2llLmh1YW5n
-QHdpbmRyaXZlci5jb20+Pg0KLS0tDQogLi4uL3JlY2lwZXMtZXh0ZW5kZWQvbG9nY2hlY2svZmls
-ZXMvOTlfbG9nY2hlY2sgICAgfCAgMiArDQogLi4uL3tsb2djaGVja18xLjMuMTcuYmI8aHR0cDov
-L2xvZ2NoZWNrXzEuMy4xNy5iYj4gPT4gbG9nY2hlY2tfMS4zLjE4LmJiPGh0dHA6Ly9sb2djaGVj
-a18xLjMuMTguYmI+fSAgICAgfCA1MiArKysrKysrKysrKysrKysrKysrLS0tDQogMiBmaWxlcyBj
-aGFuZ2VkLCA0OSBpbnNlcnRpb25zKCspLCA1IGRlbGV0aW9ucygtKQ0KIGNyZWF0ZSBtb2RlIDEw
-MDY0NCBtZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbG9nY2hlY2svZmlsZXMvOTlfbG9nY2hlY2sN
-CiByZW5hbWUgbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2xvZ2NoZWNrL3tsb2djaGVja18xLjMu
-MTcuYmI8aHR0cDovL2xvZ2NoZWNrXzEuMy4xNy5iYj4gPT4gbG9nY2hlY2tfMS4zLjE4LmJiPGh0
-dHA6Ly9sb2djaGVja18xLjMuMTguYmI+fSAoNDUlKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
-ZWNpcGVzLWV4dGVuZGVkL2xvZ2NoZWNrL2ZpbGVzLzk5X2xvZ2NoZWNrIGIvbWV0YS1vZS9yZWNp
-cGVzLWV4dGVuZGVkL2xvZ2NoZWNrL2ZpbGVzLzk5X2xvZ2NoZWNrDQpuZXcgZmlsZSBtb2RlIDEw
-MDY0NA0KaW5kZXggMDAwMDAwMDAwLi40ZGUzM2FjYTMNCi0tLSAvZGV2L251bGwNCisrKyBiL21l
-dGEtb2UvcmVjaXBlcy1leHRlbmRlZC9sb2djaGVjay9maWxlcy85OV9sb2djaGVjaw0KQEAgLTAs
-MCArMSwyIEBADQorIyA8dHlwZT4gPG93bmVyPiA8Z3JvdXA+IDxtb2RlPiA8cGF0aD4gPGxpbmtz
-b3VyY2U+DQorZCBsb2djaGVjayBsb2djaGVjayAwNzU1IC92YXIvbG9jay9sb2djaGVjayBub25l
-DQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2xvZ2NoZWNrL2xvZ2NoZWNr
-XzEuMy4xNy5iYjxodHRwOi8vbG9nY2hlY2tfMS4zLjE3LmJiPiBiL21ldGEtb2UvcmVjaXBlcy1l
-eHRlbmRlZC9sb2djaGVjay9sb2djaGVja18xLjMuMTguYmI8aHR0cDovL2xvZ2NoZWNrXzEuMy4x
-OC5iYj4NCnNpbWlsYXJpdHkgaW5kZXggNDUlDQpyZW5hbWUgZnJvbSBtZXRhLW9lL3JlY2lwZXMt
-ZXh0ZW5kZWQvbG9nY2hlY2svbG9nY2hlY2tfMS4zLjE3LmJiPGh0dHA6Ly9sb2djaGVja18xLjMu
-MTcuYmI+DQpyZW5hbWUgdG8gbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2xvZ2NoZWNrL2xvZ2No
-ZWNrXzEuMy4xOC5iYjxodHRwOi8vbG9nY2hlY2tfMS4zLjE4LmJiPg0KaW5kZXggYmE0YzJhYjlh
-Li5mNzc2ZjU4ZGMgMTAwNjQ0DQotLS0gYS9tZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbG9nY2hl
-Y2svbG9nY2hlY2tfMS4zLjE3LmJiPGh0dHA6Ly9sb2djaGVja18xLjMuMTcuYmI+DQorKysgYi9t
-ZXRhLW9lL3JlY2lwZXMtZXh0ZW5kZWQvbG9nY2hlY2svbG9nY2hlY2tfMS4zLjE4LmJiPGh0dHA6
-Ly9sb2djaGVja18xLjMuMTguYmI+DQpAQCAtMTAsMTEgKzEwLDIwIEBAIFNFQ1RJT04gPSAiQXBw
-bGljYXRpb25zL1N5c3RlbSINCiBMSUNFTlNFID0gIkdQTHYyIg0KIExJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovL0xJQ0VOU0U7bWQ1PWM5M2MwNTUwYmQzMTczZjQ1MDRiMmNiZDg5OTFlNTBiPGZp
-bGU6Ly8vXFxMSUNFTlNFO21kNT1jOTNjMDU1MGJkMzE3M2Y0NTA0YjJjYmQ4OTkxZTUwYj4iDQoN
-Ci1TUkNfVVJJID0gImdpdDovL2dpdC5kZWJpYW4ub3JnL2dpdC9sb2djaGVjay9sb2djaGVjay5n
-aXQ8aHR0cDovL2dpdC5kZWJpYW4ub3JnL2dpdC9sb2djaGVjay9sb2djaGVjay5naXQ+Ig0KLVNS
-Q1JFViA9ICIyNDI5ZTY3YWQ4NzVmZWU4YTAyMzRjNjRkNTA0Mjc3YjAzOGM4OWNkIg0KK1NSQ19V
-UkkgPSAiZ2l0Oi8vZ2l0LmRlYmlhbi5vcmcvZ2l0L2xvZ2NoZWNrL2xvZ2NoZWNrLmdpdDxodHRw
-Oi8vZ2l0LmRlYmlhbi5vcmcvZ2l0L2xvZ2NoZWNrL2xvZ2NoZWNrLmdpdD4gXA0KKyAgICAgICAg
-ICAgZmlsZTovLzk5X2xvZ2NoZWNrPGZpbGU6Ly8vXFw5OV9sb2djaGVjaz4gXA0KKyINCitTUkNS
-RVYgPSAiMGE1ODY1ZDgwZmEzNGM1NTM4N2ExOTE3YTNlNmY4ODViY2ZmN2YxZCINCg0KIFMgPSAi
-JHtXT1JLRElSfS9naXQiDQoNCitpbmhlcml0IHVzZXJhZGQNCisNCitVU0VSQUREX1BBQ0tBR0VT
-ID0gIiR7UE59Ig0KK1VTRVJBRERfUEFSQU1fJHtQTn0gPSAiLW0gLWcgJHtCUE59IC1HIGFkbSAt
-ciAtZCAke2xvY2Fsc3RhdGVkaXJ9L2xpYi8ke0JQTn0gXA0KKyAgICAgICAgICAgICAgICAgICAg
-ICAgLXMgL2Jpbi9mYWxzZSAtYyAnbG9nY2hlY2sgYWNjb3VudCcgJHtCUE59Ig0KK0dST1VQQURE
-X1BBUkFNXyR7UE59ID0gIi1yICR7QlBOfSINCisNCiBkb19pbnN0YWxsKCkgew0KICAgICAjIEZp
-eCBRQSBJc3N1ZQ0KICAgICBzZWQgLWkgJy9pbnN0YWxsIC1kICQoREVTVERJUilcL3ZhclwvbG9j
-a1wvbG9nY2hlY2svcy9eLyMvJyBNYWtlZmlsZQ0KQEAgLTI1LDE0ICszNCw0NyBAQCBkb19pbnN0
-YWxsKCkgew0KICAgICBpbnN0YWxsIC1tIDY0NCBkb2NzL2xvZ2NoZWNrLXRlc3QuMSAke0R9JHtt
-YW5kaXJ9L21hbjEvDQogICAgIGluc3RhbGwgLW0gNjQ0IGRvY3MvbG9ndGFpbC44ICR7RH0ke21h
-bmRpcn0vbWFuOC8NCiAgICAgaW5zdGFsbCAtbSA2NDQgZG9jcy9sb2d0YWlsMi44ICR7RH0ke21h
-bmRpcn0vbWFuOC8NCi0gICAgc2VkIC1pICJzL3N5c2xvZy9tZXNzYWdlcy8iIGV0Yy9sb2djaGVj
-ay5sb2dmaWxlcw0KLSAgICBzZWQgLWkgInMvYXV0aFwubG9nL3NlY3VyZS8iIGV0Yy9sb2djaGVj
-ay5sb2dmaWxlcw0KKw0KICAgICBpbnN0YWxsIC1tIDc1NSAtZCAke0R9JHtzeXNjb25mZGlyfS9j
-cm9uLmQNCiAgICAgaW5zdGFsbCAtbSA2NDQgZGViaWFuL2xvZ2NoZWNrLmNyb24uZCAke0R9JHtz
-eXNjb25mZGlyfS9jcm9uLmQvbG9nY2hlY2sNCiAgICAgaW5zdGFsbCAtbSA3NTUgLWQgJHtEfS92
-YXIvbGliL2xvZ2NoZWNrDQorDQogICAgIG9lX3J1bm1ha2UgaW5zdGFsbCBERVNURElSPSR7RH0N
-CisNCisgICAgIyBpbnN0YWxsIGhlYWRlci50eHQgZm9yIGdlbmVyYXRlZCBtYWlscw0KKyAgICBp
-bnN0YWxsIC1tIDA2NDQgJHtTfS9kZWJpYW4vaGVhZGVyLnR4dCAke0R9JHtzeXNjb25mZGlyfS8k
-e0JQTn0NCisNCisgICAgY2hvd24gLVIgJHtCUE59OiR7QlBOfSAke0R9JHtsb2NhbHN0YXRlZGly
-fS9saWIvJHtCUE59DQorICAgIGNob3duIC1SIHJvb3Q6JHtCUE59ICR7RH0ke3N5c2NvbmZkaXJ9
-LyR7QlBOfQ0KKw0KKyAgICAjIERvbid0IGluc3RhbGwgL3Zhci9sb2NrIHdoZW4gcG9wdWxhdGlu
-ZyByb290ZnMuIERvIGl0IHRocm91Z2ggdm9sYXRpbGUNCisgICAgaWYgJHtAYmIudXRpbHMuY29u
-dGFpbnMoJ0RJU1RST19GRUFUVVJFUzxtYWlsdG86JCU3YkBiYi51dGlscy5jb250YWlucygnRElT
-VFJPX0ZFQVRVUkVTPicsICdzeXN2aW5pdCcsICd0cnVlJywgJ2ZhbHNlJywgZCl9OyB0aGVuDQor
-ICAgICAgICBpbnN0YWxsIC1kICR7RH0ke3N5c2NvbmZkaXJ9L2RlZmF1bHQvdm9sYXRpbGVzDQor
-ICAgICAgICBpbnN0YWxsIC1tIDA2NDQgJHtXT1JLRElSfS85OV9sb2djaGVjayAke0R9JHtzeXNj
-b25mZGlyfS9kZWZhdWx0L3ZvbGF0aWxlcw0KKyAgICBmaQ0KKyAgICBpZiAke0BiYi51dGlscy5j
-b250YWlucygnRElTVFJPX0ZFQVRVUkVTPG1haWx0bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdE
-SVNUUk9fRkVBVFVSRVM+JywgJ3N5c3RlbWQnLCAndHJ1ZScsICdmYWxzZScsIGQpfTsgdGhlbg0K
-KyAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kDQorICAgICAg
-ICBlY2hvICJkIC92YXIvbG9jay9sb2djaGVjayAwNzU1IGxvZ2NoZWNrIGxvZ2NoZWNrIC0iIFwN
-CisgICAgICAgICAgICA+ICR7RH0ke3N5c2NvbmZkaXJ9L3RtcGZpbGVzLmQvbG9nY2hlY2suY29u
-Zg0KKyAgICBmaQ0KIH0NCg0KLVJERVBFTkRTXyR7UE59ID0gInBlcmwiDQorVklSVFVBTC1SVU5U
-SU1FX3N5c2xvZyA/Pz0gInJzeXNsb2ciDQorDQorUkRFUEVORFNfJHtQTn0gPSAiXA0KKyAgICBi
-YXNoIFwNCisgICAgY3JvbmllIFwNCisgICAgZGViaWFudXRpbHMtcnVuLXBhcnRzIFwNCisgICAg
-Z3JlcCBcDQorICAgIGxvY2tmaWxlLXByb2dzIFwNCisgICAgcGVybCBcDQorICAgIHBlcmwtbW9k
-dWxlLWZpbGUtYmFzZW5hbWUgXA0KKyAgICBwZXJsLW1vZHVsZS1nZXRvcHQtc3RkIFwNCisgICAg
-cGVybC1tb2R1bGUtZmlsZS1nbG9iIFwNCisgICAgJHtWSVJUVUFMLVJVTlRJTUVfc3lzbG9nfSBc
-DQorIg0KKw0KKyMgbWltZS1jb25zdHJ1Y3QgaXMgZm9yIG1haWxpbmcgdGhlIHJlcG9ydHMsIG5v
-dCBtYW5kYXRvcnkNCitSUkVDT01NRU5EU18ke1BOfSA9ICJtaW1lLWNvbnN0cnVjdCINCg0KIEZJ
-TEVTXyR7UE59ICs9ICIke2RhdGFkaXJ9L2xvZ3RhaWwiDQotLQ0KMi4xMS4wDQoNCi0tDQpfX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fXw0KT3BlbmVtYmVkZGVk
-LWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5lbWJlZGRl
-ZC5vcmc8bWFpbHRvOk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPg0K
-aHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcvbWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRk
-ZWQtZGV2ZWwNCg0K
+On 2017年08月21日 12:46, Martin Jansa wrote:
+> Hi,
+>
+> the security_flags.inc:
+>
+> require conf/distro/include/security_flags.inc
+>
+> and if still doesn't reproduce than last bit is thumb:
+>
+> PREFERRED_ARM_INSTRUCTION_SET              ?= "thumb"
+> ARM_INSTRUCTION_SET = "${PREFERRED_ARM_INSTRUCTION_SET}"
+
+Hi Martin,
+
+Thanks. I can reproduce the failure and I'll try to figure out the root 
+cause.
+
+
+--Kai
+
+
+>
+> Regards,
+>
+> On Mon, Aug 21, 2017 at 6:08 AM, Kang Kai <Kai.Kang@windriver.com 
+> <mailto:Kai.Kang@windriver.com>> wrote:
+>
+>     On 2017年08月21日 07:48, Martin Jansa wrote:
+>>     Like the previous version this one fails to build for qemuarm
+>>     when security_flags.inc are enabled (maybe only in combination
+>>     with gold and thumb), can you please look into it?
+>>
+>>     http://errors.yoctoproject.org/Errors/Details/152655/
+>>     <http://errors.yoctoproject.org/Errors/Details/152655/>
+>
+>     I built qemuarm with following configures in local.conf and no
+>     failure.
+>
+>     require conf/distro/include/security_flags.inc
+>
+>     DISTRO_FEATURES_append = " ld-is-gold"
+>
+>
+>     Any other configure did I miss? Thanks.
+>
+>
+>     Regards,
+>     Kai
+>
+>
+>>
+>>     On Fri, Aug 18, 2017 at 4:51 AM, Kang Kai <Kai.Kang@windriver.com
+>>     <mailto:Kai.Kang@windriver.com>> wrote:
+>>
+>>         On 2017年08月17日 17:28, kai.kang@windriver.com
+>>         <mailto:kai.kang@windriver.com> wrote:
+>>
+>>             From: Kai Kang <kai.kang@windriver.com
+>>             <mailto:kai.kang@windriver.com>>
+>>
+>>             Upgrade mariadb from 5.5.55 to 5.5.57.
+>>
+>>
+>>         Forgot [meta-oe] in title. Sorry for inconvenience.
+>>
+>>         --Kai
+>>
+>>
+>>
+>>             * update SRC_URI that mariadb.com <http://mariadb.com>
+>>             doesn't provides source tarball of 5.5.57
+>>             * remove gcc7.patch which is not needed any more
+>>
+>>             Signed-off-by: Kai Kang <kai.kang@windriver.com
+>>             <mailto:kai.kang@windriver.com>>
+>>             ---
+>>               .../{mariadb-native_5.5.55.bb
+>>             <http://mariadb-native_5.5.55.bb> =>
+>>             mariadb-native_5.5.57.bb
+>>             <http://mariadb-native_5.5.57.bb>} |  0
+>>               meta-oe/recipes-support/mysql/mariadb.inc              
+>>                |  8 ++++----
+>>               meta-oe/recipes-support/mysql/mariadb/gcc7.patch      
+>>                 | 13 -------------
+>>               .../mysql/{mariadb_5.5.55.bb <http://mariadb_5.5.55.bb>
+>>             => mariadb_5.5.57.bb <http://mariadb_5.5.57.bb>}         |  0
+>>               4 files changed, 4 insertions(+), 17 deletions(-)
+>>               rename
+>>             meta-oe/recipes-support/mysql/{mariadb-native_5.5.55.bb
+>>             <http://mariadb-native_5.5.55.bb> =>
+>>             mariadb-native_5.5.57.bb
+>>             <http://mariadb-native_5.5.57.bb>} (100%)
+>>               delete mode 100644
+>>             meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>>               rename meta-oe/recipes-support/mysql/{mariadb_5.5.55.bb
+>>             <http://mariadb_5.5.55.bb> => mariadb_5.5.57.bb
+>>             <http://mariadb_5.5.57.bb>} (100%)
+>>
+>>             diff --git
+>>             a/meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
+>>             <http://mariadb-native_5.5.55.bb>
+>>             b/meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+>>             <http://mariadb-native_5.5.57.bb>
+>>             similarity index 100%
+>>             rename from
+>>             meta-oe/recipes-support/mysql/mariadb-native_5.5.55.bb
+>>             <http://mariadb-native_5.5.55.bb>
+>>             rename to
+>>             meta-oe/recipes-support/mysql/mariadb-native_5.5.57.bb
+>>             <http://mariadb-native_5.5.57.bb>
+>>             diff --git a/meta-oe/recipes-support/mysql/mariadb.inc
+>>             b/meta-oe/recipes-support/mysql/mariadb.inc
+>>             index fd9dcbd..32e3eaa 100644
+>>             --- a/meta-oe/recipes-support/mysql/mariadb.inc
+>>             +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+>>             @@ -4,7 +4,7 @@ SECTION = "libs"
+>>               LICENSE = "GPLv2"
+>>               LIC_FILES_CHKSUM =
+>>             "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>>               -SRC_URI =
+>>             "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${PV}.tar.gz
+>>             <http://downloads.mariadb.com/MariaDB/mariadb-$%7BPV%7D/source/mariadb-$%7BPV%7D.tar.gz>
+>>             \
+>>             +SRC_URI =
+>>             "https://downloads.mariadb.org/f/${BP}/source/${BP}.tar.gz
+>>             <https://downloads.mariadb.org/f/$%7BBP%7D/source/$%7BBP%7D.tar.gz>
+>>             \
+>>             file://fix-cmake-module-path.patch \
+>>             file://remove-bad-path.patch \
+>>             file://fix-mysqlclient-r-version.patch \
+>>             @@ -17,10 +17,10 @@ SRC_URI =
+>>             "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
+>>             <http://downloads.mariadb.com/MariaDB/mariadb-$%7BPV%7D/source/mariadb-$%7BP>
+>>             file://fix-a-building-failure.patch \
+>>             file://change-cc-to-cc-version.patch \
+>>             file://0001-disable-ucontext-on-musl.patch \
+>>             - file://gcc7.patch \
+>>                         "
+>>             -SRC_URI[md5sum] = "54a0bbbc9b67308e7c076622d02f0fcd"
+>>             -SRC_URI[sha256sum] =
+>>             "cb94e315d0fc90c62db5a6c7829c9966f674285d99b3ba3ffa575fb4a26edc86"
+>>             +
+>>             +SRC_URI[md5sum] = "2d4104aae0b9e5efa8878918bd329cb4"
+>>             +SRC_URI[sha256sum] =
+>>             "5dbde98d7e4a5a1721b6cbed7898b2549a88866247951cf586057975c6cea641"
+>>                 S = "${WORKDIR}/mariadb-${PV}"
+>>               diff --git
+>>             a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>>             b/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>>             deleted file mode 100644
+>>             index 3e75b26..0000000
+>>             --- a/meta-oe/recipes-support/mysql/mariadb/gcc7.patch
+>>             +++ /dev/null
+>>             @@ -1,13 +0,0 @@
+>>             -Index: mariadb-5.5.55/client/mysql.cc
+>>             -===================================================================
+>>             ---- mariadb-5.5.55.orig/client/mysql.cc
+>>             -+++ mariadb-5.5.55/client/mysql.cc
+>>             -@@ -2850,7 +2850,7 @@ You can turn off this feature to
+>>             get a q
+>>             -         mysql_free_result(fields);
+>>             -         break;
+>>             -       }
+>>             --      field_names[i][num_fields*2]= '\0';
+>>             -+      field_names[i][num_fields*2][0]= '\0';
+>>             -       j=0;
+>>             -       while ((sql_field=mysql_fetch_field(fields)))
+>>             -       {
+>>             diff --git
+>>             a/meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+>>             <http://mariadb_5.5.55.bb>
+>>             b/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+>>             <http://mariadb_5.5.57.bb>
+>>             similarity index 100%
+>>             rename from
+>>             meta-oe/recipes-support/mysql/mariadb_5.5.55.bb
+>>             <http://mariadb_5.5.55.bb>
+>>             rename to meta-oe/recipes-support/mysql/mariadb_5.5.57.bb
+>>             <http://mariadb_5.5.57.bb>
+>>
+>>
+>>
+>>         -- 
+>>         Regards,
+>>         Neil | Kai Kang
+>>
+>>
+>>         -- 
+>>         _______________________________________________
+>>         Openembedded-devel mailing list
+>>         Openembedded-devel@lists.openembedded.org
+>>         <mailto:Openembedded-devel@lists.openembedded.org>
+>>         http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>         <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>>
+>>
+>
+>     -- 
+>     Regards,
+>     Neil | Kai Kang
+>
+>
+
+-- 
+Regards,
+Neil | Kai Kang
+
 
