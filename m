@@ -1,45 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D5AB478315
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id C3C2E78292
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Aug 2017 23:26:13 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id c15so132898pfm.3
+	Wed, 23 Aug 2017 00:20:54 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id t138so679782wmt.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Aug 2017 16:26:15 -0700 (PDT)
+	Tue, 22 Aug 2017 17:20:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=bzlLVid5Yz+l/EB58Bs/myJsuey2d/Af8TOMFH8HTqo=;
-	b=JyHeotmWucvbeWUolTKQ4nUt/7eSrL17nGm8TpMt2hTKT9va2vIZ7q1b7JfbUfrlC8
-	kf6nd+WyZOrjkLgwKkEh/VkPFguiBvHpxof1wz7AAdp6NBSIRZIcyQ/ba+ysugJ/b6+X
-	UwnXGsqIxZyTDpE/dBWxkDea9dLTUTmjsugIqn5zc4qmJwWJR4x7e2373/G1mfbC2V81
-	R3DwyED2zvHBqxBZO24hg9M+XblkXDesetmrwWu223IrrNNIIBznuGaNnKTWp6AFx47L
-	bUTxuZF3zzJUpk3e9xhXkmsHOIR9KDFR7Cd2TKzleEdoxR+mjZbFfNJkgw7cR+QLCr7z
-	MnEw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=ZQUGXyhqiqHsMq5zERK85axN+Whc/6RCtBb6jpC2Gm0=;
+	b=J6TzH2MtZPhpl4TtadZAy67ABsFmrG3ujhQmxysapBhRLwx285DYc8KHEWUdT8mQDq
+	uMyQS4OFDkRf/31vKinMNug0rb4s64fqoX/UlsNX6gTKRYZIIpxqsClMsACotOCQELbw
+	SdoJvsmCLI1LtI25qLDbx6p6DdcZaoB3UQ7j/8lgrRG1ZI60Yh/oJNLThwLsQyulqgaZ
+	EoQ0rjm1t+RbUKR1zzPn4jAkaBXZcCi7yzCoMFBdFeXbDmE6FiC93pjVqmuOMQileD8i
+	8ayI5VXeQJMRLNjWMNB8rfPt+dFTqE3IZfi2CERHMw5eTQqq75RqwekO38XZOrT+jO3Y
+	SPCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=bzlLVid5Yz+l/EB58Bs/myJsuey2d/Af8TOMFH8HTqo=;
-	b=ceqVF3MHbfeTbj4ZO4N+NZeDqS19n/M9iCqJxhzFEJpXk5iGxZej10jAPv/TLeuZfr
-	jChOkMWJaS+3OFTzIAAWsI1xJLz0hkqeVux9H9fNN3RNBn87hmXOxmb4IGf0hk+3BN24
-	AxtOGR0c6q/c2XywHkagNtVMJzgXeeNd7Gxfd/4aZXdGRY0nJn1JL7vA9QTEmm4wZBXF
-	VkPf/YDCYfHkqnzyC8k1zH0zCuIhqqDKX3EU8i/KjHoxyzH3+MdGK1ntrvw2lpU8pprg
-	OBOXIV7jknh/4cm5khu3n8Ud4RuXW2LntQwntCYVVWV+C46AOH45Uhb28Xy+U5RrBCu6
-	x1LA==
-X-Gm-Message-State: AHYfb5gurzRAWWesb+gfwyOOwZav7T04/7YDuTIWIMPMPe+IEvAmg3sl
-	DTaiTdg2pgmSXNUg
-X-Received: by 10.99.117.65 with SMTP id f1mr782632pgn.312.1503444374910;
-	Tue, 22 Aug 2017 16:26:14 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::175d])
-	by smtp.gmail.com with ESMTPSA id u28sm137304pfg.95.2017.08.22.16.26.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 22 Aug 2017 16:26:14 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Aug 2017 16:26:05 -0700
-Message-Id: <20170822232605.34193-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [meta-python][PATCH] python-markupsafe: Extend to build native version too
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=ZQUGXyhqiqHsMq5zERK85axN+Whc/6RCtBb6jpC2Gm0=;
+	b=h5aHVeOBi4Rv6pLIeRamjP/zpiDE7kkhygtzqwIhhpvTl5VSU+NpBSKAxdmlFxr4Gn
+	39tRIQhQdVuwIDTgRyCgIjpeIqTlgxanbBW3AlqeDhlp5WoeOoNOjwueNAcSca1XnDq0
+	lnT3Q2Mrj4urQiF+tZg2gDkUMFeLUow2NNG5+CrUaW08rkWvf/neGMZVaYZjeDMb7lmm
+	8Jl3zqrAqplcMycUv6n6UvxjUf4E/29SOfKntYA5lnZAnTUQp3r3vql1qFfVrcFFs1mg
+	7TUnMWB0Dyt0eQPSy9pFbWQI5G20pefMsrPaV16c7HTc9Dn1zB8lFDyfohMF5yDD+5ZH
+	WrKg==
+X-Gm-Message-State: AHYfb5gVZOYjM4Eo2B+P+hzbQbej+ldgiqOHKiCLeNfZrYwDnkXr1UB4
+	s3OOHxE+ma0atU7szvdBpU2ds1LxVA==
+X-Received: by 10.28.13.140 with SMTP id 134mr595891wmn.176.1503447655528;
+	Tue, 22 Aug 2017 17:20:55 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.169.70 with HTTP; Tue, 22 Aug 2017 17:20:54 -0700 (PDT)
+In-Reply-To: <20170822070258.27716-1-jackie.huang@windriver.com>
+References: <20170822070258.27716-1-jackie.huang@windriver.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 22 Aug 2017 17:20:54 -0700
+Message-ID: <CAJ86T=WihaULMmH5uQwtxsgDfsXFy4YH=PznYGm-uz=g2q9O8w@mail.gmail.com>
+To: "Huang, Jie (Jackie)" <jackie.huang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mozjs: customize HOST_CFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,25 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Aug 2017 23:26:14 -0000
+X-List-Received-Date: Wed, 23 Aug 2017 00:20:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-chromium-60+ will need it
+On Tue, Aug 22, 2017 at 12:02 AM,  <jackie.huang@windriver.com> wrote:
+> From: Mingli Yu <Mingli.Yu@windriver.com>
+>
+> Customize HOST_CFLAGS, HOST_CXXFLAGS and HOST_LDFLAGS
+> to fix do_configure error as previously use the common
+> CFLAGS and CXXFLAGS in both cross-compile env and host env,
+> and the option -fstack-protector-strong which not
+> recognized in host env can result in do_configure
+> error as below.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- meta-python/recipes-devtools/python/python-markupsafe_1.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
+That should already be solved by:
 
-diff --git a/meta-python/recipes-devtools/python/python-markupsafe_1.0.bb b/meta-python/recipes-devtools/python/python-markupsafe_1.0.bb
-index 396eff102..5c9884b9f 100644
---- a/meta-python/recipes-devtools/python/python-markupsafe_1.0.bb
-+++ b/meta-python/recipes-devtools/python/python-markupsafe_1.0.bb
-@@ -1,2 +1,4 @@
- inherit setuptools
- require python-markupsafe.inc
-+
-+BBCLASSEXTEND = "native"
--- 
-2.14.1
+  http://git.openembedded.org/meta-openembedded/commit/?id=3Da0b2e6f4fca7ac=
+907eb7d6e06ca4c1581a5c553f
 
+Which version of meta-oe are you testing with?
+
+> | checking whether the host c compiler (gcc -O2 -pipe -g -fstack-protecto=
+r-strong -D_FORTIFY_SOURCE=3D2 -Wl,-O1 -Wl,--hash-style=3Dgnu -Wl,--as-need=
+ed -fstack-protector-strong -Wl,-z,relro,-z,now) works... configure: error:=
+ installation or configuration problem: host compiler gcc cannot create exe=
+cutables.
+>
+> Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb | 3 +++
+>  1 file changed, 3 insertions(+)
+>
+> diff --git a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb b/meta-oe/rec=
+ipes-extended/mozjs/mozjs_17.0.0.bb
+> index b6744395f..b72ee7bb3 100644
+> --- a/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+> +++ b/meta-oe/recipes-extended/mozjs/mozjs_17.0.0.bb
+> @@ -51,6 +51,9 @@ PACKAGECONFIG[x11] =3D "--with-x --x-includes=3D${STAGI=
+NG_INCDIR} --x-libraries=3D${ST
+>
+>  # mozjs requires autoreconf 2.13
+>  do_configure() {
+> +    export HOST_CFLAGS=3D"${BUILD_CFLAGS}"
+> +    export HOST_CXXFLAGS=3D"${BUILD_CPPFLAGS}"
+> +    export HOST_LDFLAGS=3D"${BUILD_LDFLAGS}"
+>      ( cd ${S}
+>        gnu-configize --force
+>        mv config.guess config.sub build/autoconf )
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
