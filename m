@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id B964F77D11
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id AD876780C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 21:38:38 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 63so1006434pgc.1
+	Thu, 24 Aug 2017 21:38:39 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id r133so994151pgr.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 14:38:40 -0700 (PDT)
+	Thu, 24 Aug 2017 14:38:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=/JJ3axfisV8wrp9aX9Abss1ackXIW2gPdsC4BB+YBAk=;
-	b=XtVrTAQefQZ7KiZ+5IGBZfU4fVG3/WqZG8hfrWXF0WIRlvDxauVmogwQy8SwC2m4xI
-	dhkRg5JzCO4EwReRBA4+REq6rHPT0uQ31wmcvnYw4PYSqAeRUpnEIo1zblaIsq0/9bbj
-	MYmQ34DG+DLll1+KXL1PSg4k4K+ySYzKPKHilitsllVR3Tp+ozWk2d6NvUWgL7u6Wk69
-	NDY0LEVqBbqtsLXU/loI+4abgOOB3RVWGX8Je5U0XFi/kbNiW6Gqd/OJ77dLpofY/lIK
-	FEbFFIFT/0c1LGCWFkMah7HKgNacxmSBlnl794tAXFf6u/YC4Xh1Wug3WSqgZqLRy3fm
-	XDlw==
+	bh=XHn+BfjI+jtSXIlv7rfgSYVAP1EwNMt5fBzo9TAp9gk=;
+	b=dQpfTjGwwrGjtVclpzvBkQ+a2cniTa6pkUpwFuaEZ8seufSs1HlHsfx3fj1xPGfTze
+	qMWL+aYPuR06j32IjrmquCdYXsG82BpYHdN1cnrdYSHGgPpCKGgTw4aduJQEU503mGRu
+	C+dRDDp5nQ1H+PH3yVKBJLre1Q/CzG2EVYyHZb/OmhNpwz1FqDtmujFpW7eGNxTEtU9S
+	xluojH/RwVsPcNirPaH/Muatuq8f2xXDIsBw4CJ9sYdbNgGjSAoil7VH3RQ1LvrV9mhC
+	dAIG2NcdveM9vbI8pt6sXcoLzs7xK6s9X5B9pyrFyYIT6YDieJyWPayXbA20Knc1G/Mz
+	BJMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=/JJ3axfisV8wrp9aX9Abss1ackXIW2gPdsC4BB+YBAk=;
-	b=OlYb4odLGNdJRqVR4E/cL8jDlP5Xc+yKXKl0jkiCxhpvCdo82mzo+mT0DwdRIWgZFU
-	74cKF/xYJKuNLC+VnOGnTYV/aCa+F/ZeaIBSxWDIz7Is9QZgvnbz83UEurOBF7/K/H0m
-	roXTSyxWTFG66gIhNs/KawZT3bjNXwm/D1qn1wEd2Ttsylta5WPTIppXN7qxaH/Y11lg
-	zOf/NmdwCFc/xRazB0K/EJBYMpdfOfLyf8oIAuyJ66MSpAHhJEtM4Xy5XwFKvqpu1+0y
-	3k7re0kkey1nHhXWcc+nv0l7wDJxvsfmHNSTaH9AKerzvlGYGnCl2neybRKTNf608v1Z
-	2zuw==
-X-Gm-Message-State: AHYfb5hoIOm+dsJcSCKfr7/leLkLhWOmZK5/PwmVaE53GqpHgeId+Hv1
-	0+nCabd0vp9DqPJp
-X-Received: by 10.98.90.131 with SMTP id o125mr7693121pfb.222.1503610719930;
-	Thu, 24 Aug 2017 14:38:39 -0700 (PDT)
+	bh=XHn+BfjI+jtSXIlv7rfgSYVAP1EwNMt5fBzo9TAp9gk=;
+	b=geTsDGzSSVW7L/TAK/Fw92tKoYfp/iWh24rIOiN+Vm2MsU23v1rQU/rUCleador0tB
+	aj44AJos1ypdMOgQxyxvk2PtiSs8VIg6Hm7Ip0SEGq5CDSEw41pFTAEcF76vcxk/Ubc8
+	LqjzfUQAPwPa6CpZ6c1EUyH/zZmDvnh6ieyG3yAk4aQ/Qf9ylvrYGgmn2PZ3WewyJMEG
+	ifLBYOEW6wA0nPqS01B0rN6JlxnvkpwkPMzKAKYU1w8VwFOfl6qBTLQvvucPDf9DMDCV
+	Yx52wSNdlSPpVziiiTtcZr3YATUlyjVSAYQTc8fxFBWLcHkYUKzTJnjLv4hR2DpOK3LS
+	7UaQ==
+X-Gm-Message-State: AHYfb5jRqSqXXhvj5xeEXWqGwo7aMk/9FmiwI05GH+jmq/WxLEoVqzmU
+	XvFf8hqGFzSZppfq
+X-Received: by 10.98.64.154 with SMTP id f26mr7767537pfd.21.1503610721189;
+	Thu, 24 Aug 2017 14:38:41 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
 	by smtp.gmail.com with ESMTPSA id b27sm9076560pfe.6.2017.08.24.14.38.39
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 24 Aug 2017 14:38:39 -0700 (PDT)
+	Thu, 24 Aug 2017 14:38:40 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Aug 2017 14:38:25 -0700
-Message-Id: <20170824213829.41431-2-raj.khem@gmail.com>
+Date: Thu, 24 Aug 2017 14:38:26 -0700
+Message-Id: <20170824213829.41431-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
 In-Reply-To: <20170824213829.41431-1-raj.khem@gmail.com>
 References: <20170824213829.41431-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 2/6] wireguard-tools: Add bash to rdeps
+Subject: [meta-oe][PATCH 3/6] enscript: Define PERL variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 21:38:38 -0000
+X-List-Received-Date: Thu, 24 Aug 2017 21:38:40 -0000
 
-Fixes QA error
-/usr/bin/wg-quick contained in package wireguard-tools
- requires /bin/bash
+This sets up the perl interpreter correctly on target package
+Also fixes
+QA Issue: /usr/bin/sliceprint contained in package enscript requires /mnt/a/oe
+/build/tmp/hosttools/perl, but no providers found in RDEPENDS_enscript? [file-rdeps]
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb            | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/enscript/enscript_1.6.6.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
-index 79d420f1a..c4ddbcb0e 100644
---- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
-+++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
-@@ -24,4 +24,4 @@ FILES_${PN} = " \
-     ${bindir} \
- "
+diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+index 96129880a..2b6d14e6c 100644
+--- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
++++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+@@ -16,6 +16,8 @@ SRC_URI = "${GNU_MIRROR}/${BPN}/${BP}.tar.gz \
  
--RDEPENDS_${PN} = "wireguard-module"
-+RDEPENDS_${PN} = "wireguard-module bash"
+ inherit autotools gettext
+ 
++EXTRA_OECONF += "PERL='${USRBINPATH}/env perl'"
++
+ SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
+ SRC_URI[sha256sum] = "6d56bada6934d055b34b6c90399aa85975e66457ac5bf513427ae7fc77f5c0bb"
+ 
 -- 
 2.14.1
 
