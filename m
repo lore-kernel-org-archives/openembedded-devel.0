@@ -1,48 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f178.google.com (mail-ua0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E01D782A0
+Return-Path: <adrian.ratiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D05D78239
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 12:25:36 +0000 (UTC)
-Received: by mail-ua0-f178.google.com with SMTP id x47so1487288uah.2
+	Thu, 24 Aug 2017 12:40:14 +0000 (UTC)
+Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
+	v7OCa35p023588 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Aug 2017 07:40:15 -0500
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mx0a-00010702.pphosted.com with ESMTP id 2chxx5g0rp-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Aug 2017 07:40:14 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com
+	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
+	by us-aus-skprod2.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
+	v7OCeB6M005143
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 05:25:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=UvtFkc8mIxHxnhlBKWMjeODDbrjrAWJxPMDvCQvuk6E=;
-	b=rNhuzJKtW7b+KVLEyBDpldCTJgMBMHOu6iHt+3b0yXxathiR9VPHD/rO6ZkG3dSwmv
-	86mwhHnD1u7HLM2x+1sm+WuYMZ7D1ytPdXbc3bL69O97FyvAj/LqqaqrQt99PVrf3cis
-	DHmJIZuHdrbDlMrLPy3T95KoXT/QHB83FvU7xhCkU1SK8Ir3GyoOD+yDdryddgJvR/96
-	RhQD7S7IVe//2WzuVIciQlqqoYA3m8gV22cw40Ye8UMmaQagZOwb6IiHtJnHQaP7OAMu
-	YXeDis5f68btMY03Up6rMghnQTBWa/OyCqORsml+vy3J7UvUSnHlvJylmIqMRxLE+Y5B
-	+csw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=UvtFkc8mIxHxnhlBKWMjeODDbrjrAWJxPMDvCQvuk6E=;
-	b=YB9FazXnz4+nMWXDNnfF8MGGSB31z15wz0WLCki5NpFuFQqSFxksDhYWXaOr0b1kPz
-	YQnPoleFzbsUeSZ+OMKxFdVqXNTFHl5RowDOrKwE0O0bcyNrjs7MzgjfejUeWZAZNE3w
-	S8WJOmrN4KYNVeB0vZW23ticYbWIVoIFgNq4p7IEnfuSyUMf0nBk34bnVvL0c5Y+CojZ
-	Cx4qGgkwynsFyFTb56lok/kkNoBrK9OI/6HmNXHVwCb4hT5TEVYKCaRcxpFGX2nv4rrW
-	Q3vbNqs/lLDx/SmMmiFB7FSGOz5ev1AZA97G10X0Pd8EUSPIqY5Pu6UFyvWuTU19jPla
-	mn0w==
-X-Gm-Message-State: AHYfb5gxd/EI0z3NcXo4wKE8piPoCcsqB3OJXFcyH5qR6KGVTXVWPnU8
-	2ZgSHzprWJxVZ2XNC+ut7Y97dNzoIA==
-X-Received: by 10.176.95.85 with SMTP id z21mr3566021uah.183.1503577538043;
-	Thu, 24 Aug 2017 05:25:38 -0700 (PDT)
+	Thu, 24 Aug 2017 07:40:13 -0500
+Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 24 Aug 2017 07:40:12 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Thu, 24 Aug 2017 07:40:12 -0500
+Received: from adi-pc-linux.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Thu, 24 Aug 2017 07:40:11 -0500
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Aug 2017 15:40:10 +0300
+Message-ID: <20170824124010.13872-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Thu, 24 Aug 2017 05:25:37 -0700 (PDT)
-In-Reply-To: <0b21ced3-5976-da19-7329-a3f7945d16f6@windriver.com>
-References: <20170822142141.9783-1-Martin.Jansa@gmail.com>
-	<0b21ced3-5976-da19-7329-a3f7945d16f6@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 24 Aug 2017 14:25:37 +0200
-Message-ID: <CA+chaQd_SMSFAb5xihH399NwZpbxmjGw0=A835cRSmc13Dxwqw@mail.gmail.com>
-To: Randy MacLeod <randy.macleod@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-systemd][PATCH] meta-systemd: remove this now pretty empty layer
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-08-24_04:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
+	adultscore=0
+	classifier=spam adjust=30 reason=mlx scancount=1
+	engine=8.0.1-1707230000 definitions=main-1708240200
+Subject: [meta-oe][PATCH] openldap: fix native LDFLAGS build error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,118 +59,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 12:25:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 24 Aug 2017 12:40:14 -0000
+Content-Type: text/plain
 
-Thanks Randy and Khem,
+LDFLAGS += "-pthread" adds the flag both for native and target builds,
+however the openldap-native build overwrites the variable inside
+native.bbclass causing "undefined reference to `pthread_getspecific'"
+and other linker errors.
 
-I think there was enough time for sending fixes. Some of these things were
-broken and unused for years.
+Change the append to happen after parsing by using the override
+syntax and thus make sure it executes after native.bbclass (bitbake -e
+reports pre-expansion value "${BUILD_LDFLAGS} -pthread").
 
-Nobody volunteered to step-up and maintain meta-oe or at least some layers
-from it.
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ meta-oe/recipes-support/openldap/openldap_2.4.45.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-The meta-smartphone repository cleanup was much more brutal, 13 from 16
-layers are gone.
+diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
+index adbf8ce28..06d2467ec 100644
+--- a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
++++ b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
+@@ -150,7 +150,7 @@ PACKAGES += "${PN}-overlay-proxycache"
+ # it was disabled for cross-compiling.
+ CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\' -fPIC"
+ 
+-LDFLAGS += "-pthread"
++LDFLAGS_append = " -pthread"
+ 
+ do_configure() {
+     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
+-- 
+2.14.1
 
-Lets see how much faster my "bitbake world" builds will parse the metadata
-and build remaining recipes.
-
-Regards,
-
-On Thu, Aug 24, 2017 at 1:54 AM, Randy MacLeod <randy.macleod@windriver.com>
-wrote:
-
-> On 2017-08-22 10:21 AM, Martin Jansa wrote:
->
->> * the upgrade path from original meta-systemd still isn't provided
->>    by oe-core, but hopefully there are only a few remaining users
->>    of this layer.
->> * some BSPs probably still use systemd-machine-units, but they should
->>    push it to oe-core instead of depending on this layer just for this
->>    one recipe
->>
->
-> Martin,
->
-> Since you aren't getting much feedback on these removals,
-> I thought I'd say that this is excellent, albeit brutal, clean-up!
->
-> I guess it's good news that no one is objecting.
->
-> ../Randy
->
->
->
->> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
->> ---
->>   meta-systemd/README                                | 26
->> ------------------
->>   meta-systemd/conf/layer.conf                       | 32
->> ----------------------
->>   .../recipes-bsp/keymaps/keymaps_1.0.bbappend       |  4 ---
->>   .../recipes-connectivity/avahi/avahi_%.bbappend    |  4 ---
->>   .../connman/connman_%.bbappend                     |  3 --
->>   .../dhcp/dhcp/dhclient.service                     | 13 ---------
->>   .../recipes-connectivity/dhcp/dhcp_%.bbappend      | 24
->> ----------------
->>   .../recipes-connectivity/ofono/ofono_%.bbappend    |  5 ----
->>   .../openssh/openssh_%.bbappend                     |  3 --
->>   .../wpa-supplicant/wpa-supplicant_%.bbappend       |  3 --
->>   .../recipes-core/busybox/busybox_%.bbappend        |  3 --
->>   .../oe-core/recipes-core/dbus/dbus_%.bbappend      |  3 --
->>   .../recipes-core/dropbear/dropbear_%.bbappend      |  4 ---
->>   .../recipes-core/systemd/systemd_%.bbappend        |  3 --
->>   .../recipes-core/util-linux/util-linux_%.bbappend  |  3 --
->>   .../oe-core/recipes-extended/at/at_%.bbappend      |  4 ---
->>   .../recipes-extended/cronie/cronie_%.bbappend      |  3 --
->>   .../recipes-extended/lighttpd/lighttpd_%.bbappend  |  3 --
->>   .../recipes-extended/rpcbind/rpcbind_%.bbappend    |  3 --
->>   .../systemd/systemd-machine-units_1.0.bb           | 13 ---------
->>   20 files changed, 159 deletions(-)
->>   delete mode 100644 meta-systemd/README
->>   delete mode 100644 meta-systemd/conf/layer.conf
->>   delete mode 100644 meta-systemd/oe-core/recipes-b
->> sp/keymaps/keymaps_1.0.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/avahi/avahi_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/connman/connman_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/dhcp/dhcp/dhclient.service
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/dhcp/dhcp_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/ofono/ofono_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/openssh/openssh_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> onnectivity/wpa-supplicant/wpa-supplicant_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> ore/busybox/busybox_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> ore/dbus/dbus_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> ore/dropbear/dropbear_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> ore/systemd/systemd_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-c
->> ore/util-linux/util-linux_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-e
->> xtended/at/at_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-e
->> xtended/cronie/cronie_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-e
->> xtended/lighttpd/lighttpd_%.bbappend
->>   delete mode 100644 meta-systemd/oe-core/recipes-e
->> xtended/rpcbind/rpcbind_%.bbappend
->>   delete mode 100644 meta-systemd/recipes-core/systemd/
->> systemd-machine-units_1.0.bb
->>
->> ...
->
-> --
-> # Randy MacLeod.  WR Linux
-> # Wind River an Intel Company
->
 
