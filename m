@@ -1,24 +1,29 @@
-Return-Path: <Jackie.Huang@windriver.com>
+Return-Path: <Hongxu.Jia@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 330D178208
+	by mail.openembedded.org (Postfix) with ESMTP id 9F17671C42
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 03:20:34 +0000 (UTC)
+	Thu, 24 Aug 2017 05:33:24 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7O3KZiP006711
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Aug 2017 20:20:35 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 23 Aug 2017 20:20:34 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Aug 2017 11:19:53 +0800
-Message-ID: <20170824031953.7765-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7O5XOGl009386
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 23 Aug 2017 22:33:24 -0700
+Received: from [128.224.162.183] (128.224.162.183) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 23 Aug 2017 22:33:23 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <CAMKF1spON1L-HeobLHk+GaQqcqSbXtzvPQPnaVnjfy8jyqYEQQ@mail.gmail.com>
+	<1503467852-161518-1-git-send-email-hongxu.jia@windriver.com>
+	<CAMKF1srzoJzqCW_iYXQDd+hGB0dt2TZcDVK-Wy2GgtYOXkqx5w@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <12285f58-5d0b-2e9e-542b-933339268f33@windriver.com>
+Date: Thu, 24 Aug 2017 13:34:14 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Subject: [meta-perl][PATCH v3] logcheck: update to 1.3.18 and move to meta-perl
+In-Reply-To: <CAMKF1srzoJzqCW_iYXQDd+hGB0dt2TZcDVK-Wy2GgtYOXkqx5w@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH V2] netcf: upgrade to latest 0.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,128 +36,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 03:20:34 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Aug 2017 05:33:25 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-From: Jackie Huang <jackie.huang@windriver.com>
+On 2017年08月23日 22:36, Khem Raj wrote:
+> On Tue, Aug 22, 2017 at 10:57 PM, Hongxu Jia <hongxu.jia@windriver.com> wrote:
+>> Fix compile failure while gnulib upgraded to 2017-08-20.18
+>> ...
+>> | In file included from ../../../git/gnulib/lib/printf-args.h:41:0,
+>> |                  from ../../../git/gnulib/lib/printf-parse.h:29,
+>> |                  from ../../../git/gnulib/lib/printf-parse.c:36:
+>> | ./wchar.h:571:6: error: #if with no expression
+>> |  # if
+>> ...
+>>
+>> Update HOMEPAGE, SRC_URI since the formers are obsolete.
+>>
+>> Update SRCREV, although version not change, but the former
+>> was two years ago.
+>>
+>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>> ---
+>>   .../recipes-support/netcf/{netcf_git.bb => netcf_0.2.8.bb}     | 10 ++++++----
+>>   1 file changed, 6 insertions(+), 4 deletions(-)
+>>   rename meta-networking/recipes-support/netcf/{netcf_git.bb => netcf_0.2.8.bb} (88%)
+>>
+>> diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>> similarity index 88%
+>> rename from meta-networking/recipes-support/netcf/netcf_git.bb
+>> rename to meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>> index a7a5000..0b53add 100644
+>> --- a/meta-networking/recipes-support/netcf/netcf_git.bb
+>> +++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>> @@ -1,15 +1,15 @@
+>>   SUMMARY = "netcf"
+>>   DESCRIPTION = "netcf is a cross-platform network configuration library."
+>> -HOMEPAGE = "https://fedorahosted.org/netcf/"
+>> +HOMEPAGE = "https://pagure.io/netcf"
+>>   SECTION = "libs"
+>>   LICENSE = "LGPLv2.1"
+>>
+>> -LIC_FILES_CHKSUM = "file://COPYING;md5=bbb461211a33b134d42ed5ee802b37ff"
+>> +LIC_FILES_CHKSUM = "file://COPYING;md5=fb919cc88dbe06ec0b0bd50e001ccf1f"
+>>
+>> -SRCREV = "9158278ad35b46ce9a49b2e887483c6d8c287994"
+>> +SRCREV = "2c5d4255857531bc09d91dcd02e86545f29004d4"
+>>   PV = "0.2.8+git${SRCPV}"
+> you can change it to
+>
+> PV .= "+git${SRCPV}"
 
-- logcheck depends on mime-construct which is in meta-perl,
-  so move it to meta-perl to avoid that meta-oe depends on
-  meta-perl.
+Why? Since the PR Server used, will make version go backward?
 
-- logcheck should not be run as root, so inherit useradd
-  and add proper user and group.
+//Hongxu
 
-- Add missing runtime dependencies according to the file
-  debian/control and simple test by running "logcheck -ot".
-
-- For syslog, debian directly depends on rsyslog, but logcheck
-  works with any syslog and we have busybox-syslog, sysklogd,
-  syslog-ng and rsyslog, so use VIRTUAL-RUNTIME_syslog for the
-  syslog dependency and set rsyslog as the default, which can be
-  easily overridden in distro conf file or local.conf.
-
-- Don't install /var/lock when populating rootfs. Do it
-  through volatile.
-
-- install header.txt for generated mails
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../recipes-extended/logcheck/files/99_logcheck    |  2 +
- .../recipes-extended/logcheck/logcheck_1.3.18.bb   | 50 +++++++++++++++++++---
- 2 files changed, 47 insertions(+), 5 deletions(-)
- create mode 100644 meta-perl/recipes-extended/logcheck/files/99_logcheck
- rename meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb => meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb (46%)
-
-diff --git a/meta-perl/recipes-extended/logcheck/files/99_logcheck b/meta-perl/recipes-extended/logcheck/files/99_logcheck
-new file mode 100644
-index 000000000..4de33aca3
---- /dev/null
-+++ b/meta-perl/recipes-extended/logcheck/files/99_logcheck
-@@ -0,0 +1,2 @@
-+# <type> <owner> <group> <mode> <path> <linksource>
-+d logcheck logcheck 0755 /var/lock/logcheck none
-diff --git a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb b/meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb
-similarity index 46%
-rename from meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-rename to meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb
-index ba4c2ab9a..24c19b72a 100644
---- a/meta-oe/recipes-extended/logcheck/logcheck_1.3.17.bb
-+++ b/meta-perl/recipes-extended/logcheck/logcheck_1.3.18.bb
-@@ -10,11 +10,20 @@ SECTION = "Applications/System"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c93c0550bd3173f4504b2cbd8991e50b"
- 
--SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git"
--SRCREV = "2429e67ad875fee8a0234c64d504277b038c89cd"
-+SRC_URI = "git://git.debian.org/git/logcheck/logcheck.git \
-+           file://99_logcheck \
-+"
-+SRCREV = "0a5865d80fa34c55387a1917a3e6f885bcff7f1d"
- 
- S = "${WORKDIR}/git"
- 
-+inherit useradd
-+
-+USERADD_PACKAGES = "${PN}"
-+USERADD_PARAM_${PN} = "-m -g ${BPN} -G adm -r -d ${localstatedir}/lib/${BPN} \
-+                       -s /bin/false -c 'logcheck account' ${BPN}"
-+GROUPADD_PARAM_${PN} = "-r ${BPN}"
-+
- do_install() {
-     # Fix QA Issue
-     sed -i '/install -d $(DESTDIR)\/var\/lock\/logcheck/s/^/#/' Makefile
-@@ -25,14 +34,45 @@ do_install() {
-     install -m 644 docs/logcheck-test.1 ${D}${mandir}/man1/
-     install -m 644 docs/logtail.8 ${D}${mandir}/man8/
-     install -m 644 docs/logtail2.8 ${D}${mandir}/man8/
--    sed -i "s/syslog/messages/" etc/logcheck.logfiles
--    sed -i "s/auth\.log/secure/" etc/logcheck.logfiles
-+
-     install -m 755 -d ${D}${sysconfdir}/cron.d
-     install -m 644 debian/logcheck.cron.d ${D}${sysconfdir}/cron.d/logcheck
-     install -m 755 -d ${D}/var/lib/logcheck
-+
-     oe_runmake install DESTDIR=${D}
-+
-+    # install header.txt for generated mails
-+    install -m 0644 ${S}/debian/header.txt ${D}${sysconfdir}/${BPN}
-+
-+    chown -R ${BPN}:${BPN} ${D}${localstatedir}/lib/${BPN}
-+    chown -R root:${BPN} ${D}${sysconfdir}/${BPN}
-+
-+    # Don't install /var/lock when populating rootfs. Do it through volatile
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/default/volatiles
-+        install -m 0644 ${WORKDIR}/99_logcheck ${D}${sysconfdir}/default/volatiles
-+    fi
-+    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d /var/lock/logcheck 0755 logcheck logcheck -" \
-+            > ${D}${sysconfdir}/tmpfiles.d/logcheck.conf
-+    fi
- }
- 
--RDEPENDS_${PN} = "perl"
-+VIRTUAL-RUNTIME_syslog ??= "rsyslog"
-+
-+RDEPENDS_${PN} = "\
-+    bash \
-+    cronie \
-+    debianutils-run-parts \
-+    grep \
-+    lockfile-progs \
-+    mime-construct \
-+    perl \
-+    perl-module-file-basename \
-+    perl-module-getopt-std \
-+    perl-module-file-glob \
-+    ${VIRTUAL-RUNTIME_syslog} \
-+"
- 
- FILES_${PN} += "${datadir}/logtail"
--- 
-2.11.0
+>> -SRC_URI = "git://git.fedorahosted.org/netcf.git;protocol=git \
+>> +SRC_URI = "git://pagure.io/netcf.git;protocol=https \
+>>   "
+>>
+>>   DEPENDS += "augeas libnl libxslt libxml2 gnulib"
+>> @@ -23,6 +23,8 @@ EXTRA_OECONF_append_class-target = " --with-driver=redhat"
+>>   PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+>>   PACKAGECONFIG[systemd] = "--with-sysinit=systemd,--with-sysinit=initscripts,"
+>>
+>> +EXTRA_AUTORECONF += "-I ${S}/gnulib/m4"
+>> +
+>>   do_configure_prepend() {
+>>       currdir=`pwd`
+>>       cd ${S}
+>> --
+>> 2.8.1
+>>
 
 
