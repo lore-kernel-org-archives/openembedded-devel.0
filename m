@@ -1,24 +1,48 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id C2170607F8
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ua0-f178.google.com (mail-ua0-f178.google.com
+	[209.85.217.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 3E01D782A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 07:29:39 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7O7TeIW026329
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 24 Aug 2017 12:25:36 +0000 (UTC)
+Received: by mail-ua0-f178.google.com with SMTP id x47so1487288uah.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 00:29:40 -0700 (PDT)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Thu, 24 Aug 2017 00:29:39 -0700
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Aug 2017 15:28:57 +0800
-Message-ID: <20170824072857.19137-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Thu, 24 Aug 2017 05:25:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=UvtFkc8mIxHxnhlBKWMjeODDbrjrAWJxPMDvCQvuk6E=;
+	b=rNhuzJKtW7b+KVLEyBDpldCTJgMBMHOu6iHt+3b0yXxathiR9VPHD/rO6ZkG3dSwmv
+	86mwhHnD1u7HLM2x+1sm+WuYMZ7D1ytPdXbc3bL69O97FyvAj/LqqaqrQt99PVrf3cis
+	DHmJIZuHdrbDlMrLPy3T95KoXT/QHB83FvU7xhCkU1SK8Ir3GyoOD+yDdryddgJvR/96
+	RhQD7S7IVe//2WzuVIciQlqqoYA3m8gV22cw40Ye8UMmaQagZOwb6IiHtJnHQaP7OAMu
+	YXeDis5f68btMY03Up6rMghnQTBWa/OyCqORsml+vy3J7UvUSnHlvJylmIqMRxLE+Y5B
+	+csw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=UvtFkc8mIxHxnhlBKWMjeODDbrjrAWJxPMDvCQvuk6E=;
+	b=YB9FazXnz4+nMWXDNnfF8MGGSB31z15wz0WLCki5NpFuFQqSFxksDhYWXaOr0b1kPz
+	YQnPoleFzbsUeSZ+OMKxFdVqXNTFHl5RowDOrKwE0O0bcyNrjs7MzgjfejUeWZAZNE3w
+	S8WJOmrN4KYNVeB0vZW23ticYbWIVoIFgNq4p7IEnfuSyUMf0nBk34bnVvL0c5Y+CojZ
+	Cx4qGgkwynsFyFTb56lok/kkNoBrK9OI/6HmNXHVwCb4hT5TEVYKCaRcxpFGX2nv4rrW
+	Q3vbNqs/lLDx/SmMmiFB7FSGOz5ev1AZA97G10X0Pd8EUSPIqY5Pu6UFyvWuTU19jPla
+	mn0w==
+X-Gm-Message-State: AHYfb5gxd/EI0z3NcXo4wKE8piPoCcsqB3OJXFcyH5qR6KGVTXVWPnU8
+	2ZgSHzprWJxVZ2XNC+ut7Y97dNzoIA==
+X-Received: by 10.176.95.85 with SMTP id z21mr3566021uah.183.1503577538043;
+	Thu, 24 Aug 2017 05:25:38 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] logwarn: set correct paths and add missing dependency
+Received: by 10.103.50.144 with HTTP; Thu, 24 Aug 2017 05:25:37 -0700 (PDT)
+In-Reply-To: <0b21ced3-5976-da19-7329-a3f7945d16f6@windriver.com>
+References: <20170822142141.9783-1-Martin.Jansa@gmail.com>
+	<0b21ced3-5976-da19-7329-a3f7945d16f6@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 24 Aug 2017 14:25:37 +0200
+Message-ID: <CA+chaQd_SMSFAb5xihH399NwZpbxmjGw0=A835cRSmc13Dxwqw@mail.gmail.com>
+To: Randy MacLeod <randy.macleod@windriver.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-systemd][PATCH] meta-systemd: remove this now pretty empty layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,49 +55,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 07:29:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Aug 2017 12:25:38 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Jackie Huang <jackie.huang@windriver.com>
+Thanks Randy and Khem,
 
-* Set correct paths for programs (bash, cat, rm and sed)
-  to avoid QA issue:
-  | ERROR: logwarn-1.0.14-r0 do_package_qa: QA Issue:
-  | /usr/lib/nagios/plugins/check_logwarn contained in package
-  | logwarn-nagios requires /builddir/tmp/hosttools/bash,
-  |  but no providers found in RDEPENDS_logwarn-nagios? [file-rdeps]
+I think there was enough time for sending fixes. Some of these things were
+broken and unused for years.
 
-* Add missing dependency on coreutils and sed.
+Nobody volunteered to step-up and maintain meta-oe or at least some layers
+from it.
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+The meta-smartphone repository cleanup was much more brutal, 13 from 16
+layers are gone.
 
-diff --git a/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb b/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
-index 00e5d497b..5ae36bb67 100644
---- a/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
-+++ b/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb
-@@ -22,6 +22,12 @@ lcl_default_state_dir = "${localstatedir}/lib/logwarn"
- 
- CFLAGS += '-DDEFAULT_STATE_DIR=\""${lcl_default_state_dir}\""'
- 
-+CACHED_CONFIGUREVARS += " \
-+    ac_cv_path_BASH_SHELL=${base_bindir}/bash \
-+    ac_cv_path_CAT=${base_bindir}/cat \
-+    ac_cv_path_RM=${base_bindir}/rm \
-+    ac_cv_path_SED=${base_bindir}/sed \
-+"
- 
- # Make sure some files exist for autoreconf.
- #
-@@ -43,4 +49,4 @@ PACKAGES += "${PN}-nagios"
- 
- FILES_${PN}-nagios = "${nonarch_libdir}/nagios"
- 
--RDEPENDS_${PN}-nagios += "bash"
-+RDEPENDS_${PN}-nagios += "bash coreutils sed"
--- 
-2.11.0
+Lets see how much faster my "bitbake world" builds will parse the metadata
+and build remaining recipes.
 
+Regards,
+
+On Thu, Aug 24, 2017 at 1:54 AM, Randy MacLeod <randy.macleod@windriver.com>
+wrote:
+
+> On 2017-08-22 10:21 AM, Martin Jansa wrote:
+>
+>> * the upgrade path from original meta-systemd still isn't provided
+>>    by oe-core, but hopefully there are only a few remaining users
+>>    of this layer.
+>> * some BSPs probably still use systemd-machine-units, but they should
+>>    push it to oe-core instead of depending on this layer just for this
+>>    one recipe
+>>
+>
+> Martin,
+>
+> Since you aren't getting much feedback on these removals,
+> I thought I'd say that this is excellent, albeit brutal, clean-up!
+>
+> I guess it's good news that no one is objecting.
+>
+> ../Randy
+>
+>
+>
+>> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> ---
+>>   meta-systemd/README                                | 26
+>> ------------------
+>>   meta-systemd/conf/layer.conf                       | 32
+>> ----------------------
+>>   .../recipes-bsp/keymaps/keymaps_1.0.bbappend       |  4 ---
+>>   .../recipes-connectivity/avahi/avahi_%.bbappend    |  4 ---
+>>   .../connman/connman_%.bbappend                     |  3 --
+>>   .../dhcp/dhcp/dhclient.service                     | 13 ---------
+>>   .../recipes-connectivity/dhcp/dhcp_%.bbappend      | 24
+>> ----------------
+>>   .../recipes-connectivity/ofono/ofono_%.bbappend    |  5 ----
+>>   .../openssh/openssh_%.bbappend                     |  3 --
+>>   .../wpa-supplicant/wpa-supplicant_%.bbappend       |  3 --
+>>   .../recipes-core/busybox/busybox_%.bbappend        |  3 --
+>>   .../oe-core/recipes-core/dbus/dbus_%.bbappend      |  3 --
+>>   .../recipes-core/dropbear/dropbear_%.bbappend      |  4 ---
+>>   .../recipes-core/systemd/systemd_%.bbappend        |  3 --
+>>   .../recipes-core/util-linux/util-linux_%.bbappend  |  3 --
+>>   .../oe-core/recipes-extended/at/at_%.bbappend      |  4 ---
+>>   .../recipes-extended/cronie/cronie_%.bbappend      |  3 --
+>>   .../recipes-extended/lighttpd/lighttpd_%.bbappend  |  3 --
+>>   .../recipes-extended/rpcbind/rpcbind_%.bbappend    |  3 --
+>>   .../systemd/systemd-machine-units_1.0.bb           | 13 ---------
+>>   20 files changed, 159 deletions(-)
+>>   delete mode 100644 meta-systemd/README
+>>   delete mode 100644 meta-systemd/conf/layer.conf
+>>   delete mode 100644 meta-systemd/oe-core/recipes-b
+>> sp/keymaps/keymaps_1.0.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/avahi/avahi_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/connman/connman_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/dhcp/dhcp/dhclient.service
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/dhcp/dhcp_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/ofono/ofono_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/openssh/openssh_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> onnectivity/wpa-supplicant/wpa-supplicant_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> ore/busybox/busybox_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> ore/dbus/dbus_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> ore/dropbear/dropbear_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> ore/systemd/systemd_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-c
+>> ore/util-linux/util-linux_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-e
+>> xtended/at/at_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-e
+>> xtended/cronie/cronie_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-e
+>> xtended/lighttpd/lighttpd_%.bbappend
+>>   delete mode 100644 meta-systemd/oe-core/recipes-e
+>> xtended/rpcbind/rpcbind_%.bbappend
+>>   delete mode 100644 meta-systemd/recipes-core/systemd/
+>> systemd-machine-units_1.0.bb
+>>
+>> ...
+>
+> --
+> # Randy MacLeod.  WR Linux
+> # Wind River an Intel Company
+>
 
