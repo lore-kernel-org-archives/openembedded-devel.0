@@ -1,21 +1,31 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 17FBC71C3D
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 24 Aug 2017 18:44:25 UTC
+Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
+	[216.168.135.167])
+	by mail.openembedded.org (Postfix) with ESMTP id 05234783AA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 18:04:40 +0000 (UTC)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	24 Aug 2017 11:04:42 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,422,1498546800"; d="scan'208";a="141667544"
-Received: from wrath.jf.intel.com ([10.54.70.9])
-	by orsmga005.jf.intel.com with ESMTP; 24 Aug 2017 11:04:42 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Aug 2017 11:04:39 -0700
-Message-Id: <20170824180439.24462-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.13.5
-Subject: [meta-python][PATCH] python*-astroid: use SPDX compatible license identifier
+	Thu, 24 Aug 2017 18:44:25 +0000 (UTC)
+Received: (qmail 18080 invoked by uid 1003); 24 Aug 2017 18:37:46 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@108.44.111.57)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	24 Aug 2017 18:37:46 -0000
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>,
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>,
+	openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>
+From: Philip Balister <philip@balister.org>
+Message-ID: <37a76fa5-4f25-56dd-9616-4b4b23fbb093@balister.org>
+Date: Thu, 24 Aug 2017 14:37:44 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+Cc: Yocto Project <yocto@yoctoproject.org>
+Subject: OpenEmbedded Developer Meeting Oct 22, 2017 in Prague (before ELCE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,29 +38,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 18:04:41 -0000
+X-List-Received-Date: Thu, 24 Aug 2017 18:44:26 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 8bit
 
-License is LGPL-2.1, not simply LGPL
+Once again we will have a developer meeting in Prague the Sunday before
+ELCE.
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
----
- meta-python/recipes-devtools/python/python-astroid.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Please go to https://www.openembedded.org/wiki/OEDEM_2017 and add
+yourself if you are attending and ideas for topics.
 
-diff --git a/meta-python/recipes-devtools/python/python-astroid.inc b/meta-python/recipes-devtools/python/python-astroid.inc
-index a5bb10695..4cb1a3c4b 100644
---- a/meta-python/recipes-devtools/python/python-astroid.inc
-+++ b/meta-python/recipes-devtools/python/python-astroid.inc
-@@ -1,7 +1,7 @@
- SUMMARY = "An abstract syntax tree for Python with inference support."
- HOMEPAGE = "https://pypi.python.org/pypi/astroid"
- SECTION = "devel/python"
--LICENSE = "LGPL"
-+LICENSE = "LGPL-2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
- SRC_URI[md5sum] = "6f65e4ea8290ec032320460905afb828"
--- 
-2.13.5
+Although it is called a developer meeting, we invite members of the
+larger community to attend. The core developers are always interested in
+hearing how OpenEmbedded is used, and what we can do to make it better
+for building the embedded devices of the future.
 
+Thanks,
+
+Philip
 
