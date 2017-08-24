@@ -1,52 +1,49 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D05D78239
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 6145F782EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 12:40:14 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
-	v7OCa35p023588 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 07:40:15 -0500
-Received: from ni.com (skprod2.natinst.com [130.164.80.23])
-	by mx0a-00010702.pphosted.com with ESMTP id 2chxx5g0rp-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 07:40:14 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod2.natinst.com (8.16.0.17/8.16.0.17) with ESMTPS id
-	v7OCeB6M005143
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Thu, 24 Aug 2017 13:48:23 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id p14so4009837pgd.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 07:40:13 -0500
-Received: from us-aus-exch3.ni.corp.natinst.com (130.164.68.13) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Thu, 24 Aug 2017 07:40:12 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch3.ni.corp.natinst.com (130.164.68.13) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Thu, 24 Aug 2017 07:40:12 -0500
-Received: from adi-pc-linux.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Thu, 24 Aug 2017 07:40:11 -0500
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 24 Aug 2017 15:40:10 +0300
-Message-ID: <20170824124010.13872-1-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.14.1
+	Thu, 24 Aug 2017 06:48:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=Moh54Vqr7apdZHI7FEInilriJ9LNhadPjU8uuBzb0zQ=;
+	b=UcYSZV+5t0HJfsrZvKugsDiwD83NZ5jBJ8AjuLxRRDYbtBXNcBdvoWEyvWz2L7PLIZ
+	nLdKUixJ/DEVJvnxW6ne54fFzKQfe07gI4ftGMAzw+z47kiQ6opFOVbuWkPa6qjUaQ62
+	XyfAJvjxJKrbmmRUIRhjkBDpHrUvT0Yx4xI+XkkfP7Huc8VtKF9kuvP/R/94OSZlkpJe
+	88yIj6wuVv5+926rNU4MiLcFPYoZECvBiUx1Y/+vmqnxuipG5l6vT7H+OFbXD5xrEeTp
+	FuPko8m86PaH6vrv3ew3in2BgIs1iLnQO36Qwm8ZK3a3bhs10j9GEuhCdeyD7h0T4mD6
+	Begg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=Moh54Vqr7apdZHI7FEInilriJ9LNhadPjU8uuBzb0zQ=;
+	b=ZOWXZfjrXt+SFEBm9nIq2cSn30GY1YrZKZWcA1evA/06LbT0w70MXfmHdoP4VcbMZv
+	EyY75u+Le3x5GAoVcUKBdZJ7FedGi8sPgv1XD+C9P3pQWYN3oZsTDOgmig3J9/1g2/1d
+	dWv9RuJrlBXEM+m4MCIfrCQxexKzZCDaBH14XPDfy/eivhFWzqwOrWGpoFqE78/NU6M5
+	iGAxbGuvuWF8ifE+t2s2lst/nv1Kaa7JqSCVwDVF1K/Qy7GRFEvbg6BWvkHDGGPUqsYe
+	Bt4uB+L7/1FvmyFWgkC6Fg3+h1JeMmJw0X7SPoJ/YimwTwUucSmSvgZ2Yd1QJGUSJ54N
+	d5fA==
+X-Gm-Message-State: AHYfb5gFLS9yT34wjoR5JvLIKJF6myc10MPhpx7YsFtUxhBH2SeXBJUw
+	a2GSpLdscRShcHlGFS4acHLDlhMZhA==
+X-Received: by 10.99.138.199 with SMTP id y190mr6343939pgd.287.1503582504645; 
+	Thu, 24 Aug 2017 06:48:24 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-08-24_04:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
-	adultscore=0
-	classifier=spam adjust=30 reason=mlx scancount=1
-	engine=8.0.1-1707230000 definitions=main-1708240200
-Subject: [meta-oe][PATCH] openldap: fix native LDFLAGS build error
+Received: by 10.100.167.2 with HTTP; Thu, 24 Aug 2017 06:47:54 -0700 (PDT)
+In-Reply-To: <12285f58-5d0b-2e9e-542b-933339268f33@windriver.com>
+References: <CAMKF1spON1L-HeobLHk+GaQqcqSbXtzvPQPnaVnjfy8jyqYEQQ@mail.gmail.com>
+	<1503467852-161518-1-git-send-email-hongxu.jia@windriver.com>
+	<CAMKF1srzoJzqCW_iYXQDd+hGB0dt2TZcDVK-Wy2GgtYOXkqx5w@mail.gmail.com>
+	<12285f58-5d0b-2e9e-542b-933339268f33@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 24 Aug 2017 06:47:54 -0700
+Message-ID: <CAMKF1spetwUqZ5OmK4tGbqpCXVC4bBivLmThfQZniUgKPpXmLQ@mail.gmail.com>
+To: Hongxu Jia <hongxu.jia@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH V2] netcf: upgrade to latest 0.2.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,37 +56,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 12:40:14 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 24 Aug 2017 13:48:23 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-LDFLAGS += "-pthread" adds the flag both for native and target builds,
-however the openldap-native build overwrites the variable inside
-native.bbclass causing "undefined reference to `pthread_getspecific'"
-and other linker errors.
+On Wed, Aug 23, 2017 at 10:34 PM, Hongxu Jia <hongxu.jia@windriver.com> wro=
+te:
+> On 2017=E5=B9=B408=E6=9C=8823=E6=97=A5 22:36, Khem Raj wrote:
+>>
+>> On Tue, Aug 22, 2017 at 10:57 PM, Hongxu Jia <hongxu.jia@windriver.com>
+>> wrote:
+>>>
+>>> Fix compile failure while gnulib upgraded to 2017-08-20.18
+>>> ...
+>>> | In file included from ../../../git/gnulib/lib/printf-args.h:41:0,
+>>> |                  from ../../../git/gnulib/lib/printf-parse.h:29,
+>>> |                  from ../../../git/gnulib/lib/printf-parse.c:36:
+>>> | ./wchar.h:571:6: error: #if with no expression
+>>> |  # if
+>>> ...
+>>>
+>>> Update HOMEPAGE, SRC_URI since the formers are obsolete.
+>>>
+>>> Update SRCREV, although version not change, but the former
+>>> was two years ago.
+>>>
+>>> Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+>>> ---
+>>>   .../recipes-support/netcf/{netcf_git.bb =3D> netcf_0.2.8.bb}     | 10
+>>> ++++++----
+>>>   1 file changed, 6 insertions(+), 4 deletions(-)
+>>>   rename meta-networking/recipes-support/netcf/{netcf_git.bb =3D>
+>>> netcf_0.2.8.bb} (88%)
+>>>
+>>> diff --git a/meta-networking/recipes-support/netcf/netcf_git.bb
+>>> b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>>> similarity index 88%
+>>> rename from meta-networking/recipes-support/netcf/netcf_git.bb
+>>> rename to meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>>> index a7a5000..0b53add 100644
+>>> --- a/meta-networking/recipes-support/netcf/netcf_git.bb
+>>> +++ b/meta-networking/recipes-support/netcf/netcf_0.2.8.bb
+>>> @@ -1,15 +1,15 @@
+>>>   SUMMARY =3D "netcf"
+>>>   DESCRIPTION =3D "netcf is a cross-platform network configuration
+>>> library."
+>>> -HOMEPAGE =3D "https://fedorahosted.org/netcf/"
+>>> +HOMEPAGE =3D "https://pagure.io/netcf"
+>>>   SECTION =3D "libs"
+>>>   LICENSE =3D "LGPLv2.1"
+>>>
+>>> -LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dbbb461211a33b134d42ed5ee802=
+b37ff"
+>>> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Dfb919cc88dbe06ec0b0bd50e001=
+ccf1f"
+>>>
+>>> -SRCREV =3D "9158278ad35b46ce9a49b2e887483c6d8c287994"
+>>> +SRCREV =3D "2c5d4255857531bc09d91dcd02e86545f29004d4"
+>>>   PV =3D "0.2.8+git${SRCPV}"
+>>
+>> you can change it to
+>>
+>> PV .=3D "+git${SRCPV}"
+>
+>
+> Why? Since the PR Server used, will make version go backward?
 
-Change the append to happen after parsing by using the override
-syntax and thus make sure it executes after native.bbclass (bitbake -e
-reports pre-expansion value "${BUILD_LDFLAGS} -pthread").
-
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- meta-oe/recipes-support/openldap/openldap_2.4.45.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-index adbf8ce28..06d2467ec 100644
---- a/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-+++ b/meta-oe/recipes-support/openldap/openldap_2.4.45.bb
-@@ -150,7 +150,7 @@ PACKAGES += "${PN}-overlay-proxycache"
- # it was disabled for cross-compiling.
- CPPFLAGS_append = " -D_GNU_SOURCE -DURANDOM_DEVICE=\'/dev/urandom\' -fPIC"
- 
--LDFLAGS += "-pthread"
-+LDFLAGS_append = " -pthread"
- 
- do_configure() {
-     cp ${STAGING_DATADIR_NATIVE}/libtool/build-aux/ltmain.sh ${S}/build
--- 
-2.14.1
-
+since the recipe is not upgraded base PR should remains same for
+upgradability reasons.
 
