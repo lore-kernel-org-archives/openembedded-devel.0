@@ -1,31 +1,28 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 24 Aug 2017 18:44:25 UTC
-Received: from sanddollar.geekisp.com (sanddollar.geekisp.com
-	[216.168.135.167])
-	by mail.openembedded.org (Postfix) with ESMTP id 05234783AA
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 95C3977DB6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Aug 2017 18:44:25 +0000 (UTC)
-Received: (qmail 18080 invoked by uid 1003); 24 Aug 2017 18:37:46 -0000
-Received: from unknown (HELO ?192.168.11.142?)
-	(philip@opensdr.com@108.44.111.57)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	24 Aug 2017 18:37:46 -0000
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>,
-	openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>
-From: Philip Balister <philip@balister.org>
-Message-ID: <37a76fa5-4f25-56dd-9616-4b4b23fbb093@balister.org>
-Date: Thu, 24 Aug 2017 14:37:44 -0400
+	Thu, 24 Aug 2017 21:29:15 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7OLTGSR005085
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 24 Aug 2017 14:29:16 -0700 (PDT)
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 24 Aug 2017 14:29:15 -0700
+To: <kai.kang@windriver.com>, <openembedded-devel@lists.openembedded.org>
+References: <20170824151657.20748-1-kai.kang@windriver.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <937cda69-98b8-358b-b027-24d90b954597@windriver.com>
+Date: Thu, 24 Aug 2017 17:29:14 -0400
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-Cc: Yocto Project <yocto@yoctoproject.org>
-Subject: OpenEmbedded Developer Meeting Oct 22, 2017 in Prague (before ELCE)
+In-Reply-To: <20170824151657.20748-1-kai.kang@windriver.com>
+X-Originating-IP: [172.25.44.7]
+Subject: Re: [meta-oe][PATCH] imagemagick: 7.0.5 -> 7.0.6_9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,23 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Aug 2017 18:44:26 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 24 Aug 2017 21:29:15 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-Once again we will have a developer meeting in Prague the Sunday before
-ELCE.
+On 2017-08-24 11:16 AM, kai.kang@windriver.com wrote:
+> From: Kai Kang <kai.kang@windriver.com>
+> 
+> Upgrade imagemagick from 7.0.5 patchset 6 to 7.0.9 patchset 9.
+> 
+> * update SRC_URI. Replace tarball with git repo that it only keeps
+>    latest tarball on www.imagemagick.org
 
-Please go to https://www.openembedded.org/wiki/OEDEM_2017 and add
-yourself if you are attending and ideas for topics.
+This avoids the imagemagick disappearing tarball problem but
+the impact is ~350 MB for the git repo rather than  8 MB for
+the tarball.
 
-Although it is called a developer meeting, we invite members of the
-larger community to attend. The core developers are always interested in
-hearing how OpenEmbedded is used, and what we can do to make it better
-for building the embedded devices of the future.
+Any objections to using the gentoo distfiles site:
+http://distfiles.gentoo.org/distfiles/
 
-Thanks,
 
-Philip
+Kai, If not please send a revised upgrade to 7.0.6 using that URL.
+
+../Randy
+
+
+
+
+-- 
+# Randy MacLeod.  WR Linux
+# Wind River an Intel Company
 
