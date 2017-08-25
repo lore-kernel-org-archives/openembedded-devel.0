@@ -1,45 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C28D77D11
+	by mail.openembedded.org (Postfix) with ESMTP id C12D3783C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 07:14:30 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id q16so2570856pgc.0
+	Fri, 25 Aug 2017 07:14:31 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id 63so2735397pgc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 00:14:32 -0700 (PDT)
+	Fri, 25 Aug 2017 00:14:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=F+eCQ5XoQB1vANx8e6sdrySnWTHysH6OsYSkX42hMLQ=;
-	b=GvXNs46aFsjDlxeJfW0VS+p9exH5XXZ8r5vZB43R/pGcA6+PVxf2wle1uEPG9FEZVa
-	REqV7Q2nfEGGecie0XoCvdcWC0MYUgk9IOODNzky/8vF6NNXNuEi4/CwnTBvP5hUsuDc
-	4okLlLnBEhR6WQOXxJeOfHLx8zItpSdV9kNTA9ZsduE3cMPc3cMBESldNwhvL8nO4cZz
-	fOomYprwZW8K4JGw3XRQ+l8s3/CGxfJ4Y1IvdHPEOIqwJ+R5se+z+9z20HbZZ57lPyEX
-	FlOL43J0uCDBuaun+JIXpLYg7Jqjd2Y9U+F/ChRnxr3hSkEhwLRYDt5TrY2GtFQ5fWDM
-	IUjw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=gHU8IxIcq/YWD3gnmbc51RQb8qnfJrDjZgmCX/z5Ag0=;
+	b=PEgtFd3E7AKJmeaC4qH1QTrs3KR7yV+5SfkUdrQQni5CUxb7P8Nlq+f3PmtuOI5WXj
+	A2KL1kpLn/A5mzRyMiADr/4OO+mwfVEbohLis1ilmtLSxZOop0XsPRsH3fynmoVNSXCD
+	ZfiiPma6mKuP4M0RE2hTGSJmJbq7qHByVxs3SeX0rNfbQVxyQojRZsJmJ8INguv2KX9h
+	37eXsbA1r1bU8uaVepyF1sAA1uQitGe4GhRTUlW1Q5BbTXH+W1WOkrxewhrWdqN6TAZK
+	RI0wvGNzju88eV0w7UGdMY9Tm3rtmJ8SeqldWFWjrMPzLOyPwHLUfFwmkKu22pEmaHSK
+	66NQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=F+eCQ5XoQB1vANx8e6sdrySnWTHysH6OsYSkX42hMLQ=;
-	b=lOD3MvO0643L22XEva7wtFqSyGJ6uWIzboMu6rVuCqD36o/u6iFzw3ilBKZrbMDz5v
-	5Q0AjGUyxnUcvPlF+emHrFdw2evUnkAIyjr7qZdJtNxWNGZsD1GA1OYWOzWP1R5irBoC
-	mvjIABphd2rMFcOFAIZTolC6tvcQFZASYSudYJK4iC505MAY/cxdjzsZ0uIXxa7wLqo7
-	RH2y7XNZz9ZTNvXLIB3YKVEYZppKEoqCOk35tImUkQDkOktsmSysrZvep3SL9VRe1eez
-	lEPX4lkF4kwVqYi2QFV4OkIBV6lEBVAPosvA0hEcY1CBp71/WaonMfh1saxEunvwCjl4
-	xRfA==
-X-Gm-Message-State: AHYfb5gr5j924Oajtu5Q3uETN6ogZwUQI2gFjUcWsbu1mNMua1h8fj2l
-	ZjA7dOTI8RZ0Cgi7
-X-Received: by 10.84.136.135 with SMTP id 7mr9895383pll.356.1503645271941;
-	Fri, 25 Aug 2017 00:14:31 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=gHU8IxIcq/YWD3gnmbc51RQb8qnfJrDjZgmCX/z5Ag0=;
+	b=I/kTXThv8uiW3qcvC8/1NybN2zefTEQdTvQkvoEZpV8BJ+RZmgyaFLWwwB1Q6PHCq/
+	bXKl4covBVqD+77P6Ro4aPkZbB9KB5dG9qyhp5VY4XsQnWgmiUfmzARqRzf6wUDaJtDU
+	iJzLdAcO1IfpOHRzQCXdhX3lM+94bsiSrG6qk2om3s211UebGNmc26uCrw1Yj+L8KRUQ
+	qeq0h3SlaShbUr/lXko79xcywUB1ck0D2zax6fW/tWp8OyB/APY4C+cj7xMYdY66r7NM
+	UFbPl3DFijdFN6cA+S4h7tfmkVCyuqIYwMfIrRBmENJTamLs64ytnzneu2EnpCIyCnDk
+	oOYg==
+X-Gm-Message-State: AHYfb5jeJnB7mdzpcPOPWRcusEwAk98sOgfKv2NzY8bTAogabIl1HAGf
+	ff/bd8n+K9lyYNn9
+X-Received: by 10.98.79.214 with SMTP id f83mr9103911pfj.147.1503645273020;
+	Fri, 25 Aug 2017 00:14:33 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
 	by smtp.gmail.com with ESMTPSA id
 	x11sm11730377pfk.43.2017.08.25.00.14.31
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 25 Aug 2017 00:14:31 -0700 (PDT)
+	Fri, 25 Aug 2017 00:14:32 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Aug 2017 00:14:19 -0700
-Message-Id: <20170825071422.3969-1-raj.khem@gmail.com>
+Date: Fri, 25 Aug 2017 00:14:20 -0700
+Message-Id: <20170825071422.3969-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-gnome][PATCH 1/4] evolution-data-server: Fix build with clang
+In-Reply-To: <20170825071422.3969-1-raj.khem@gmail.com>
+References: <20170825071422.3969-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 2/4] wvstreams: Fix parallel build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,85 +55,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Aug 2017 07:14:31 -0000
+X-List-Received-Date: Fri, 25 Aug 2017 07:14:32 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...x-Fix-signature-for-imapx_tokenise_struct.patch | 33 ++++++++++++++++++++++
- .../recipes-gnome/eds/evolution-data-server_git.bb | 20 ++++++-------
- 2 files changed, 43 insertions(+), 10 deletions(-)
- create mode 100644 meta-gnome/recipes-gnome/eds/evolution-data-server/0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch
+ .../wvstreams/0001-build-fix-parallel-make.patch   | 76 ++++++++++++++++++++++
+ .../0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch      | 29 +++++++++
+ .../recipes-connectivity/wvdial/wvstreams_4.6.1.bb |  4 +-
+ 3 files changed, 107 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0001-build-fix-parallel-make.patch
+ create mode 100644 meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch
 
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch b/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-build-fix-parallel-make.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-build-fix-parallel-make.patch
 new file mode 100644
-index 000000000..f82a76df3
+index 000000000..6bc34331d
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/eds/evolution-data-server/0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch
-@@ -0,0 +1,33 @@
-+From 0e10e976025b21d12df099e82951f759024ad649 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0001-build-fix-parallel-make.patch
+@@ -0,0 +1,76 @@
++From 90de630f21ac744a37b3adac1bd84654471744ff Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 24 Aug 2017 22:04:56 -0700
-+Subject: [PATCH] imapx: Fix signature for imapx_tokenise_struct()
++Date: Thu, 24 Aug 2017 22:30:01 -0700
++Subject: [PATCH 1/2] build: fix parallel make
 +
-+clang complains about different signature for this patch
-+
-+Fixes
-+camel/providers/imapx/camel-imapx-tokens.txt:56:1: error: conflicting types for 'imapx_tokenise_struct'
-+| imapx_tokenise_struct (register const char *str, register size_t len)
-+| ^
++Imported from Gentoo
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ camel/providers/imapx/camel-imapx-tokens.txt | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ Makefile         | 15 +++++++++++++--
++ wvrules-posix.mk |  7 +++++--
++ 2 files changed, 18 insertions(+), 4 deletions(-)
 +
-+diff --git a/camel/providers/imapx/camel-imapx-tokens.txt b/camel/providers/imapx/camel-imapx-tokens.txt
-+index d48501865..994c368c0 100644
-+--- a/camel/providers/imapx/camel-imapx-tokens.txt
-++++ b/camel/providers/imapx/camel-imapx-tokens.txt
-+@@ -1,7 +1,7 @@
-+ /* This contains all of the keywords we care about.  These
-+    can be converted to an id very efficiently */
-+ struct _imapx_keyword {const gchar *name; camel_imapx_id_t id; };
-+-struct _imapx_keyword *imapx_tokenise_struct (register const char *str, register unsigned int len);
-++struct _imapx_keyword *imapx_tokenise_struct (register const char *str, register size_t len);
-+ %%
-+ ALERT,          IMAPX_ALERT
-+ APPENDUID,	IMAPX_APPENDUID
++diff --git a/Makefile b/Makefile
++index 72c8bef..5a4cfb2 100644
++--- a/Makefile
+++++ b/Makefile
++@@ -131,12 +131,19 @@ utils/tests/%: PRELIBS+=$(LIBWVSTREAMS)
++ # libwvstreams: stream/event handling library
++ #
++ TARGETS += libwvstreams.so
++-TARGETS += crypto/tests/ssltest ipstreams/tests/unixtest
+++TARGETS += crypto/tests/ssltest                                                                                                                             
+++crypto/tests/ssltest: $(LIBWVSTREAMS)                                                                                                                       
+++
+++TARGETS += ipstreams/tests/unixtest
+++ipstreams/tests/unixtest: $(LIBWVSTREAMS)
+++
++ TARGETS += crypto/tests/printcert
+++crypto/tests/printcert: $(LIBWVSTREAMS)
++ 
++ ifndef _MACOS
++   ifneq ("$(with_readline)", "no")
++     TARGETS += ipstreams/tests/wsd
+++    ipstreams/tests/wsd: $(LIBWVSTREAMS)
++     ipstreams/tests/wsd-LIBS += -lreadline
++   else
++     TEST_SKIP_OBJS += ipstreams/tests/wsd
++@@ -179,7 +186,11 @@ uniconf/tests/%: PRELIBS+=$(LIBUNICONF)
++ #
++ ifneq ("$(with_dbus)", "no")
++   TARGETS += libwvdbus.so
++-  TARGETS += dbus/tests/wvdbus dbus/tests/wvdbusd
+++  TARGETS += dbus/tests/wvdbus
+++  dbus/tests/wvdbus: $(LIBWVDBUS)
+++
+++  TARGETS += dbus/tests/wvdbusd
+++  dbus/tests/wvdbusd: $(LIBWVDBUS)
++   TESTS += $(call tests_cc,dbus/tests)
++   libwvdbus_OBJS += $(call objects,dbus)
++   libwvdbus.so: $(libwvdbus_OBJS) $(LIBWVSTREAMS)
++diff --git a/wvrules-posix.mk b/wvrules-posix.mk
++index f94d2cd..2e99f36 100644
++--- a/wvrules-posix.mk
+++++ b/wvrules-posix.mk
++@@ -80,12 +80,15 @@ define wvlink_ar
++ 	$(AR) s $1
++ endef
++ 
++-CC: FORCE
+++CC:
++ 	@CC="$(CC)" CFLAGS="$(CFLAGS)" CPPFLAGS="$(CPPFLAGS)" \
++ 	  $(WVSTREAMS)/gen-cc CC c
++ 
++-CXX: FORCE
+++CXX:
++ 	@CC="$(CXX)" CFLAGS="$(CXXFLAGS)" CPPFLAGS="$(CPPFLAGS)" \
++ 	  $(WVSTREAMS)/gen-cc CXX cc
++ 
+++#All files must depend on the above two rules. This is a godawful hack.
+++$(shell find -type f '(' -name '*.c' -o -name '*.cc' ')' ): CC CXX
+++
++ wvlink=$(LINK_MSG)$(WVLINK_CC) $(LDFLAGS) $($1-LDFLAGS) -o $1 $(filter %.o %.a %.so, $2) $($1-LIBS) $(XX_LIBS) $(LDLIBS) $(PRELIBS) $(LIBS)
 +-- 
 +2.14.1
 +
-diff --git a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
-index ff3365bc9..aadc4b5e3 100644
---- a/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
-+++ b/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb
-@@ -15,16 +15,16 @@ SRCREV = "a9e4e74ec4473a4fd09e56b690bd4fa72f686687"
- # 3.4 series needs libgdata-0.10*, 3.8 series needs also libsecret instead of gnome-keyring
- PV = "3.2.3+git${SRCPV}"
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch
+new file mode 100644
+index 000000000..59f70e380
+--- /dev/null
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams/0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch
+@@ -0,0 +1,29 @@
++From 4afff42714a15cb796d3589d87c6fac4558b2c95 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Thu, 24 Aug 2017 22:33:32 -0700
++Subject: [PATCH 2/2] wvrules.mk: Use _DEFAULT_SOURCE
++
++Fixes warnings with newer glibc
++warning: "_BSD_SOURCE and _SVID_SOURCE are deprecated, use _DEFAULT_SOURCE"
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ wvrules.mk | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/wvrules.mk b/wvrules.mk
++index 877f700..124bffd 100644
++--- a/wvrules.mk
+++++ b/wvrules.mk
++@@ -83,7 +83,7 @@ runtests:
++ 
++ INCFLAGS=$(addprefix -I,$(WVSTREAMS_INC) $(XPATH))
++ CPPFLAGS+=$(INCFLAGS) \
++-	-D_BSD_SOURCE -D_GNU_SOURCE $(OSDEFINE) \
+++	-D_DEFAULT_SOURCE $(OSDEFINE) \
++ 	-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 \
++ 	-DUNSTABLE
++ 
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+index 0ac175251..e3d5e7d20 100644
+--- a/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
++++ b/meta-oe/recipes-connectivity/wvdial/wvstreams_4.6.1.bb
+@@ -19,6 +19,8 @@ SRC_URI = "http://${BPN}.googlecode.com/files/${BP}.tar.gz \
+            file://0003-wvtask-Check-for-HAVE_LIBC_STACK_END-only-on-glibc-s.patch \
+            file://0004-wvcrash-Replace-use-of-basename-API.patch \
+            file://0005-check-for-libexecinfo-during-configure.patch \
++           file://0001-build-fix-parallel-make.patch \
++           file://0002-wvrules.mk-Use-_DEFAULT_SOURCE.patch \
+            "
  
--SRC_URI = " \
--    git://git.gnome.org/evolution-data-server;branch=gnome-3-2 \
--    file://0001-contact-Replace-the-Novell-sample-contact-with-somet.patch \
--    file://0002-Fix-for-automake-1.12.x.patch \
--    file://0003-Disable-Werror-for-automake.patch \
--    file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
--    file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
--    file://0006-configure.ac-do-not-overwrite-localedir.patch \
--    file://iconv-detect.h \
--"
-+SRC_URI = "git://git.gnome.org/evolution-data-server;branch=gnome-3-2 \
-+           file://0001-contact-Replace-the-Novell-sample-contact-with-somet.patch \
-+           file://0002-Fix-for-automake-1.12.x.patch \
-+           file://0003-Disable-Werror-for-automake.patch \
-+           file://0004-configure-Fix-libical-pkg-config-trying-to-use-host-.patch \
-+           file://0005-soup-adapt-to-new-libxml2-API-from-2.9.0.patch \
-+           file://0006-configure.ac-do-not-overwrite-localedir.patch \
-+           file://iconv-detect.h \
-+           file://0001-imapx-Fix-signature-for-imapx_tokenise_struct.patch \
-+           "
+ SRC_URI[md5sum] = "2760dac31a43d452a19a3147bfde571c"
+@@ -26,8 +28,6 @@ SRC_URI[sha256sum] = "8403f5fbf83aa9ac0c6ce15d97fd85607488152aa84e007b7d0621b8eb
  
- S = "${WORKDIR}/git"
+ inherit autotools-brokensep pkgconfig
  
+-PARALLEL_MAKE = ""
+-
+ TARGET_CFLAGS_append = " -fno-tree-dce -fno-optimize-sibling-calls"
+ 
+ LDFLAGS_append = " -Wl,-rpath-link,${CROSS_DIR}/${TARGET_SYS}/lib"
 -- 
 2.14.1
 
