@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 128DD783E6
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 413D778416
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 25 Aug 2017 09:37:16 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7P9b4VU002517
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7P9bHdC016149
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 02:37:17 -0700 (PDT)
+	Fri, 25 Aug 2017 02:37:18 -0700
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Fri, 25 Aug 2017 01:41:25 -0700
+	14.3.361.1; Fri, 25 Aug 2017 01:41:27 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 25 Aug 2017 16:40:40 +0800
-Message-ID: <8c18d34a6d2bf2742e5fc25d600713f75c26099b.1503650271.git.jackie.huang@windriver.com>
+Date: Fri, 25 Aug 2017 16:40:42 +0800
+Message-ID: <5efec29a974de0e2a4f6be5af0dbaaae415fb0aa.1503650271.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1503650271.git.jackie.huang@windriver.com>
 References: <cover.1503650271.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-python][PATCH 1/3] python-html5lib: add Python3 support
+Subject: [meta-python][PATCH 3/3] python-beautifulsoup4: add new recipe for both python2 and python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,71 +33,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Aug 2017 09:37:16 -0000
+X-List-Received-Date: Fri, 25 Aug 2017 09:37:17 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-Extend the recipe for Python3 support.
+Beautiful Soup sits atop an HTML or XML parser,
+providing Pythonic idioms for iterating, searching,
+and modifying the parse tree.
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-html5lib.inc  | 14 ++++++++++++++
- .../python/python-html5lib_0.999999999.bb                | 16 ++--------------
- .../python/python3-html5lib_0.999999999.bb               |  2 ++
- 3 files changed, 18 insertions(+), 14 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-html5lib.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-html5lib_0.999999999.bb
+ .../recipes-devtools/python/python-beautifulsoup4.inc   | 17 +++++++++++++++++
+ .../python/python-beautifulsoup4_4.6.0.bb               |  2 ++
+ .../python/python3-beautifulsoup4_4.6.0.bb              |  2 ++
+ 3 files changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-html5lib.inc b/meta-python/recipes-devtools/python/python-html5lib.inc
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4.inc b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
 new file mode 100644
-index 000000000..9c59e0d18
+index 000000000..d60d987ca
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-html5lib.inc
-@@ -0,0 +1,14 @@
-+SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4.inc
+@@ -0,0 +1,17 @@
++SUMMARY = "Screen-scraping library"
++HOMEPAGE = " https://www.crummy.com/software/BeautifulSoup/bs4"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
++LIC_FILES_CHKSUM = "file://COPYING.txt;md5=f2d38d8a40bf73fd4b3d16ca2e5882d1"
 +
-+SRC_URI[md5sum] = "8578e4e3a341436cb9743a9e4a299239"
-+SRC_URI[sha256sum] = "ee747c0ffd3028d2722061936b5c65ee4fe13c8e4613519b4447123fc4546298"
++SRC_URI[md5sum] = "c17714d0f91a23b708a592cb3c697728"
++SRC_URI[sha256sum] = "808b6ac932dccb0a4126558f7dfdcf41710dd44a4ef497a0bb59a77f9f078e89"
 +
 +inherit pypi
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-six \
-+    ${PYTHON_PN}-webencodings \
-+    ${PYTHON_PN}-xml \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb b/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
-index d0f7b56ee..f5941a2a1 100644
---- a/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
-+++ b/meta-python/recipes-devtools/python/python-html5lib_0.999999999.bb
-@@ -1,14 +1,2 @@
--SUMMARY = "HTML parser based on the WHATWG HTML specifcation"
--LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=1ba5ada9e6fead1fdc32f43c9f10ba7c"
--
--SRC_URI[md5sum] = "8578e4e3a341436cb9743a9e4a299239"
--SRC_URI[sha256sum] = "ee747c0ffd3028d2722061936b5c65ee4fe13c8e4613519b4447123fc4546298"
--
--inherit pypi setuptools
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-six \
--    ${PYTHON_PN}-webencodings \
--    ${PYTHON_PN}-xml \
--    "
-+inherit setuptools
-+require python-html5lib.inc
-diff --git a/meta-python/recipes-devtools/python/python3-html5lib_0.999999999.bb b/meta-python/recipes-devtools/python/python3-html5lib_0.999999999.bb
++RDEPENDS_${PN}_class-target = "\
++    ${PYTHON_PN}-core \
++    ${PYTHON_PN}-html5lib \
++    ${PYTHON_PN}-lxml \
++"
++
++BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb
 new file mode 100644
-index 000000000..6bd8b49f5
+index 000000000..907285ac1
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-html5lib_0.999999999.bb
++++ b/meta-python/recipes-devtools/python/python-beautifulsoup4_4.6.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-beautifulsoup4.inc
+diff --git a/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb
+new file mode 100644
+index 000000000..d98df11e3
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-beautifulsoup4_4.6.0.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-html5lib.inc
++require python-beautifulsoup4.inc
 -- 
 2.11.0
 
