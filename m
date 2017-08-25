@@ -1,49 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f47.google.com (mail-vk0-f47.google.com
-	[209.85.213.47])
-	by mail.openembedded.org (Postfix) with ESMTP id F3A907841F
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 8C86A7841F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 18:22:53 +0000 (UTC)
-Received: by mail-vk0-f47.google.com with SMTP id q189so1751513vke.4
+	Fri, 25 Aug 2017 18:27:12 +0000 (UTC)
+Received: by mail-pg0-f43.google.com with SMTP id b8so3008261pgn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 11:22:55 -0700 (PDT)
+	Fri, 25 Aug 2017 11:27:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=yUYHHzYppCLFbR5PPfLD9AvytaSN73z/EFwvo0Z1wHg=;
-	b=IvL5++PFJgnUqk6NRgGsruMcmcFIrbs/l1pOJJiRfUJDcX5WDAnwyevvXrWg1VY4E3
-	hMzRiuFc4sacQ9p+KIOIX9psMslJRUlQ3gQ/VL4ufBDDTUXpVZatT8Km9ZNlpYCLJQ2Z
-	QsbqwX0w9Ar9uM2C8VJ6mpaR9suSa7kbf/6zBQEF+XbcGmq9Yhst3TWjohGYj7/JIn+o
-	YuhM9lmvrHp2cVOiPZziqoxeD+g6JQezvMo6c2RLsMZQA8zXv82dhuB9cjG9FrpZQ6fP
-	NX/C8WJiKW4+Q6WCwiGlOPCO+VZtjyLbk9Kx61pcKsPpDr2z6xXO915zVnvoI0O3+l8Y
-	6dow==
+	:cc; bh=Iw4mvbqhb7iBfDKG1yorkzD95dHW5gN8aaL95vtCdTg=;
+	b=jklx98yeQU5jAtD6SplqXFy6uMlhvO+Ez6zvEDgahExfqAlucWQEi+Yo9ISpf2PDba
+	VCiEBGOTVU6kA9hfFzTShq3C83oNioUR1HYnu0JXUTzamkqT9rHVd6n9UvZI+D5kgLgT
+	4iFgO6lZKUaul7MOb/Wsy/UNHoOFqrPEK8ncFIlA33Kf5+QDIRUTkppulqj8SS1Jg/lH
+	/z9DN0Nbs/5wMfVhnmfx8aSQHuWWJiuIFqjki+I0mV6CQUEFIFZKBlH7F9PGwvZKSTJJ
+	zLdYukbzfk9d7v/1ZRax5w2RsJigvSXrYx1Fgq/agAZA1P3bGl8cw8uFhRWIGRLF8o5M
+	oM6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=yUYHHzYppCLFbR5PPfLD9AvytaSN73z/EFwvo0Z1wHg=;
-	b=g3tkEvsxcoBWgOjP7DKq7iNr5p5ErddIkJ9GUcy3AFCf+bF+KrZgNZsTbVQh4pbaZZ
-	xKV20D6sOwEvYFvIjnJlHj62+qBNjwJ0qxaiGCrhVrZgf2Ta5MXahkPvZxl2u0f+MlYN
-	20y8fZF9xaxEZNhjppr3MPEfad8K6chIeFRh9paG1psB9cjwUtcWQsSMmzTkfjLrYB7V
-	J05lSHJzvEEBKGxD5eNfTSCUGJi+092HPvuB5Bo2zaBO+JFFyxTqH6ZxeC4W13dAO5+0
-	nIcW8T5yJdN64CkG3GaQBADuUzIVtsU0Nz2nAzzSFSNBHdEGziIFcKTxqYdWCiqDQBEL
-	h45g==
-X-Gm-Message-State: AHYfb5gau/lNcH04mJ6lJkir5z0uKW2ojScYv/FjmwrsJna/SH0+4NR7
-	gKf1J/l3dvOF52HHqUnJcsAtQVNysw==
-X-Received: by 10.31.156.135 with SMTP id f129mr7714934vke.90.1503685375134;
-	Fri, 25 Aug 2017 11:22:55 -0700 (PDT)
+	bh=Iw4mvbqhb7iBfDKG1yorkzD95dHW5gN8aaL95vtCdTg=;
+	b=Ge4Rg7sFH1yn2LbiavG5pfuP0dFTByCGI2WYyoz1mx7pCJWXdDx936CYqyOlZY9sec
+	zaN7j2ty11VdyTo9eFk614whpO8sq3KZWKVDgN/yEH2oGLdP5ZeyG5Z2n0fuZjdVkNMO
+	9BPx68aRIUEnbckSmWNYk+sTkyW4w0Q3mmpLXs2piU3q/TDc5LFAZH9GvvmExy0+Rgs/
+	qxohXEam7KH3aq+kwg8BLkhjP1SaeZFaceH7vVsFeUvqPR5cKvsXVD+t2gm7bYrI+sl0
+	CIJkbhV/6lUn+FF9mSoiJ09ny0DhuCxGQ00MyzdUf/K/xFyWOdVzFk5ADTqne2qKh9cu
+	YeVg==
+X-Gm-Message-State: AHYfb5gU5lGCRvuqVpMnwoiZ/2h/vHFRaBCTReoYt891bOyB54h65OQ/
+	jxg3vrEHsKesBgs6MmTgN46a/ROaRw==
+X-Received: by 10.84.133.14 with SMTP id 14mr11638127plf.440.1503685633705;
+	Fri, 25 Aug 2017 11:27:13 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Fri, 25 Aug 2017 11:22:54 -0700 (PDT)
-In-Reply-To: <CAMKF1srQvTMq5Z5B=4gE62LRPMQi+1Azc5dZyn2+hiT1nSdCXQ@mail.gmail.com>
+Received: by 10.100.167.2 with HTTP; Fri, 25 Aug 2017 11:26:43 -0700 (PDT)
+In-Reply-To: <CA+chaQfyYC4M0B4YZx8qfGQSqHem=3JsKoeMYfGCgUZcGtuYGw@mail.gmail.com>
 References: <20170821210259.20276-1-Martin.Jansa@gmail.com>
 	<20170821210259.20276-5-Martin.Jansa@gmail.com>
 	<CAMKF1sor29cpSkBMq4wm_OECGZvMLK5J1QWNu6Smqf9KqPBetA@mail.gmail.com>
 	<CA+chaQdw5eRR40rkOsq8VMkLVyvG_mf=3jGgppeZ8SCQ0jxy=Q@mail.gmail.com>
 	<CAMKF1srQvTMq5Z5B=4gE62LRPMQi+1Azc5dZyn2+hiT1nSdCXQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Fri, 25 Aug 2017 20:22:54 +0200
-Message-ID: <CA+chaQfyYC4M0B4YZx8qfGQSqHem=3JsKoeMYfGCgUZcGtuYGw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CA+chaQfyYC4M0B4YZx8qfGQSqHem=3JsKoeMYfGCgUZcGtuYGw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 25 Aug 2017 11:26:43 -0700
+Message-ID: <CAMKF1sq-EZVXY_r65RBRVesDU40wONB_xcYHbvuKXbbMBvzZzQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-qt5][PATCHv2 5/7] qt: upgrade to latest revision in 5.9 branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -58,20 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Aug 2017 18:22:55 -0000
+X-List-Received-Date: Fri, 25 Aug 2017 18:27:12 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-It's here on ML or in jansa/master-5.9-rebase branch
-
-On Fri, Aug 25, 2017 at 8:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Fri, Aug 25, 2017 at 10:28 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > It looks like you're building 5.9.0 not 5.9.2 from the patch where you're
-> > replying, can you try if you can reproduce it with 5.9.2 as well? Maybe
-> it
-> > was already fixed upstream.
+On Fri, Aug 25, 2017 at 11:22 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> It's here on ML or in jansa/master-5.9-rebase branch
 >
-> is 5.9.2 in master-next ? if yes then I am on master-next as of today
+> On Fri, Aug 25, 2017 at 8:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> On Fri, Aug 25, 2017 at 10:28 AM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>> > It looks like you're building 5.9.0 not 5.9.2 from the patch where
+>> > you're
+>> > replying, can you try if you can reproduce it with 5.9.2 as well? Maybe
+>> > it
+>> > was already fixed upstream.
+>>
+>> is 5.9.2 in master-next ? if yes then I am on master-next as of today
+>
+
+OK. Thanks I will switch to this branch
+
 >
 
