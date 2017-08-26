@@ -1,45 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CCA68784A1
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EEA277F70
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Aug 2017 00:13:48 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id 63so1760544pgc.1
+	Sat, 26 Aug 2017 07:19:28 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id y65so512000pfd.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Aug 2017 17:13:50 -0700 (PDT)
+	Sat, 26 Aug 2017 00:19:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=k0fbak1DWrsiNjaaiLbwiYV9o9779MIOJKZcvYbAFdU=;
-	b=G0cguMJt/hR7DzKTm+ShhGee3AHEjhdW2m+sAn5TvTYkZdO/MZen4kR3QY9T2N+7hm
-	6To+eumjPyD9ebM4uRuZ//lcdM8KI6CilB/TiaQqgXaCnUFRQ/FT0D+R0yTqEennK8h7
-	5nQzvxsjBb+QSE57AOqcvItSVWzJdJji/7sh9N62/84X9MalqVuyUcqVUu1C7i4H+QIS
-	dARNQ8djkUYROvi+zYOuJzdQzJuMc4SHgrD67uk08KfjENIWlp0T9yfpOE8ulcqhICjW
-	wk0KP6cQOrq3NI5pg/DeV9vnvbN3njF5Okiu6495YDWxcFKC9Ssc+ut8ylue08PM5gPW
-	qhGw==
+	h=from:to:cc:subject:date:message-id;
+	bh=gNcr+UScw1Q+ZuZQKcwv8befzSUa+JgPncOz9xXE/aI=;
+	b=JgyQmRetUK0iHoCMQ2qZ7reCEF4V5URUBAQ9n+jmwV9MQyL8HkLlAMhEKpiiFYCSxP
+	1iK9VZFhUtQtg9vf79bbVV4Hlw5kVRU29qtGRsZlBWuGM+kstK9Cfu66OhQr1/s7uchJ
+	7rORiSiC4N2yy4RDywES6Dow1Cf0xZ9zTeu8a7mD5gON5mG7A1+lrzYNrm8Ust/4rZaI
+	0svsFPEstySm27tOV4HE+K1F4ZRQJt67QvSRG3zLMZe4cwsH7zH8fXdXyvbE2AyLgOjL
+	tNTixDe8KVX5OW1RCiK6iDa4EZer+/YrgqlPD6LOeVubhbVDf90FqkBQGo4K1Xs7ttL/
+	QeNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=k0fbak1DWrsiNjaaiLbwiYV9o9779MIOJKZcvYbAFdU=;
-	b=Zc8Teidh501bw/eDOx3MY3VMHr1aRkT5jQpp+ATTGC3ynco/bMrwvo2Rq1OPcgx8Zc
-	GpupmXcIrCfYSDORpXBnfX7vbyUNOrJFzOeZJNPUpBlHDb6WUSRP1Wbb/dRyrC0NAQc8
-	vDHgXbHfFTDMjOftjXO67hz7S6DF/dEey3KPbzjlISlSzvCS2s3Zd++CkBDPyhmavUio
-	212iIb+o4159tsFSLTt5BaQSF7p//gPUnOb67tKI/1UCeu7EP+Nu7yojR3+rRbv8cDrS
-	RO6j+/oHKfmh6UAR0gVjrygeOTzKWOhVIg7GqTvUqdP9g8F40VV2MDJx6IRz68JeH2Bg
-	zVkA==
-X-Gm-Message-State: AHYfb5hUl7cYaZKk9XvpQ3lh8fx2qdrTfb5arfg8Bl5/MwSghNJLAA1N
-	KddWJHsmAzlmXeBkwJXrL4zvXeb8rw==
-X-Received: by 10.99.116.79 with SMTP id e15mr191922pgn.317.1503706430070;
-	Fri, 25 Aug 2017 17:13:50 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.167.2 with HTTP; Fri, 25 Aug 2017 17:13:19 -0700 (PDT)
-In-Reply-To: <20170825225423.7248-1-jslater@windriver.com>
-References: <20170825225423.7248-1-jslater@windriver.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=gNcr+UScw1Q+ZuZQKcwv8befzSUa+JgPncOz9xXE/aI=;
+	b=NZwis3HZHUjtghb9GL8WABgBKlRSzhgWzRA0EuUETrodoei4wxzhq1nXMBpwCQLpa2
+	FCqUbLWV7SGs+ffkTHTotPnPSaOusUFDNoWzMWHhMzjmw6zCF/MItLpJBPSip5DDyvRX
+	EqEKqrZd1RKaqOOoqBfgi0RY/qln+MRxSm0NLHUj0EN1y+7ZmAw44Xf/dlK7miE5yV3w
+	EJchPfdmsquLaT17DIWfTRHeGuWi9/5Q4UNWvPoK/i+78DoiR56tWCiwL+kxl4wc0hsY
+	jo9hSXIGp0awJo6G2hKBAeyCoJ+dQ+rn7M2y9Srv79mTaUwfSm9W/rHRDmeBrgYzLfd5
+	Pv4w==
+X-Gm-Message-State: AHYfb5jaB5r4Ku7o76daZpWy5IMEW8HbJNfAXNQJP2rlSmJHDiWlZ+PV
+	NVoAoIXXnoePrMrj
+X-Received: by 10.98.43.213 with SMTP id r204mr993105pfr.0.1503731969627;
+	Sat, 26 Aug 2017 00:19:29 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
+	by smtp.gmail.com with ESMTPSA id
+	q3sm14384511pgf.69.2017.08.26.00.19.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 26 Aug 2017 00:19:28 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 25 Aug 2017 17:13:19 -0700
-Message-ID: <CAMKF1spt4LGdD0KWww+TUu9pRFsSrQdLQ+PVKg2wixWvoUCBnw@mail.gmail.com>
-To: Joe Slater <jslater@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 1/1] enscript ndisc6: specify target location of perl
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 26 Aug 2017 00:19:21 -0700
+Message-Id: <20170826071921.1565-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-networking][PATCH] wireguard: Upgrade to 20170810 snapshot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,63 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2017 00:13:48 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 26 Aug 2017 07:19:28 -0000
 
-On Fri, Aug 25, 2017 at 3:54 PM, Joe Slater <jslater@windriver.com> wrote:
-> configure finds the host perl, so we do not let it look
-> by setting PERL in the environment.
->
-> Signed-off-by: Joe Slater <jslater@windriver.com>
-> ---
->  meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb | 5 +++++
->  meta-oe/recipes-extended/enscript/enscript_1.6.6.bb    | 6 ++++++
->  2 files changed, 11 insertions(+)
->
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
-> index bea5e13..7771069 100644
-> --- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6_1.0.2.bb
-> @@ -49,6 +49,11 @@ or IPv4."
->  DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
->  servers through slateless IPv6 autoconfiguration."
->
-> +# We do not run perl during the build, but only use it on the target.
-> +do_configure_prepend() {
-> +    export PERL="/usr/bin/perl"
-> +}
-> +
->  do_install_append () {
->      rm -rf ${D}${localstatedir}
->      # Enable SUID bit for applications that need it
-> diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> index 9612988..bf63ccf 100644
-> --- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> +++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> @@ -19,4 +19,10 @@ inherit autotools gettext
->  SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
->  SRC_URI[sha256sum] = "6d56bada6934d055b34b6c90399aa85975e66457ac5bf513427ae7fc77f5c0bb"
->
-> +# We do not run perl during the build, but only use it on the target.
-> +do_configure_prepend() {
-> +    export PERL="/usr/bin/perl"
-> +}
+Fixes build with linux kernel 4.12+
 
-May be using something like
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...guard-module_0.0.20170517.bb => wireguard-module_0.0.20170810.bb} | 0
+ ...reguard-tools_0.0.20170517.bb => wireguard-tools_0.0.20170810.bb} | 0
+ meta-networking/recipes-kernel/wireguard/wireguard.inc               | 5 ++---
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20170517.bb => wireguard-module_0.0.20170810.bb} (100%)
+ rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20170517.bb => wireguard-tools_0.0.20170810.bb} (100%)
 
-EXTRA_OECONF += "'PERL=${USRBINPATH}/env perl'"
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170517.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170810.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170517.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170810.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170810.bb
+similarity index 100%
+rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
+rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170810.bb
+diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+index 9e38c57ff..f37d52b22 100644
+--- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
++++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+@@ -11,8 +11,7 @@ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ 
+ SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
+-
+-SRC_URI[md5sum] = "e9969ebbdf525fcbe91a513db8a5c864"
+-SRC_URI[sha256sum] = "7303e973654a3585039f4789e89a562f807f0d6010c7787b9b69ca72aa7a6908"
++SRC_URI[md5sum] = "8dd3e080407b8295c25565a847a4ca27"
++SRC_URI[sha256sum] = "ab96230390625aad6f4816fa23aef6e9f7fee130f083d838919129ff12089bf7"
+ 
+ S = "${WORKDIR}/WireGuard-${PV}/src/"
+-- 
+2.14.1
 
-would avoid hardcoding the perl path
-
-> +
->  RDEPENDS_${PN} = "perl"
-> +
-> --
-> 2.7.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
