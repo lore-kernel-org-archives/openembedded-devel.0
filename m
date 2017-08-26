@@ -1,43 +1,45 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CD04678266;
-	Sat, 26 Aug 2017 17:59:25 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id d124so1078893vkf.3;
-	Sat, 26 Aug 2017 10:59:27 -0700 (PDT)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 2AFA778227
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Aug 2017 18:35:27 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id 83so3179475pgb.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Aug 2017 11:35:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=K+tC4lYoeB2W7YCjuHCLxNC6DY1tSwi4zOxKl8uClwA=;
-	b=GvMhCiR07eguqidNOwzV9xFrv3NlwhXhi0Q7T9vUdreoqvEvMeAVdhqZop9KI2fiKA
-	pq7x16TWURISt6DacOuKqMFZyY5iQgfDs8WFm35hPB8qjyJ/doFBhq7ynqowzHhXUtzC
-	GvfQxIHZcJ9mf/WSHVeKIU85ujg6SGllHfPBTbQSccXWGYWnR8fa30sUTS4P89EPPI9/
-	PQqBStRDgUnUwrUg9ih24+FP5UzEVHBa531Sqa6KVEVpLfsj90ebRUnWf6DR/dweQHMv
-	MQXoGAC09EbjRMIjyI+yPziXqGJwcNKDZRoBpIWSLsnmAEalWokJ0u+s24nrFmjYwdVG
-	g6EQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=oEK1bOB21+ujAWlaP5um2bPinDGF/3UAb2b4WyxwPnc=;
+	b=cj8vrR06Hu7Cne/hA/uNHELO6fa81MlbEzQfRqQqYIt9wKmyGKgFSNKtXLe69RUAKq
+	iisTxf0WQeMFE6/O+J1U7DCKq456Ucf1zGT0L9MlwEeIaIHHxvD2sWMVjFL3Dz8rLvqi
+	p4cARxxplMcUI84xunmJ1CYDE8PmyPo7Iskfo5pXlXlYO+kLW47XmqSHzeZbpu7RvMAl
+	mJKsD+4KvtGyjIZ+sJEVuzNynd93C3huTtXMOOCx4oYuAA8FQG0CPEFEmwYPuHG741jI
+	TwlXChSE/zKQ2z4OvzmNsL0IwSV3I/zrCINSSiHt+8Ieu7ZdlnFh8C92TUOkHTBkw6Og
+	Sdrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=K+tC4lYoeB2W7YCjuHCLxNC6DY1tSwi4zOxKl8uClwA=;
-	b=cwUlJF0NcWYMtrJqRFdvY/S749QigfLFFhbDqNg2n5m9fmUKKNmsc75rRRQfsgJhdO
-	yapnI3IcaAOqGmbSNUtV4vzzX1dGRUClTL8+TF5leY8Foff0Mc2eVyG8k+qsu4VNqhSN
-	OExIaqjxKxYBtDbMweMp7dwmCnHTJAkcHd6Pzhw52HTIqXV1+kYNqkqCDpKFaOXVG7HC
-	VqudDRAv2dUQvpQHURVallYFODpMuHRQRqFkOMqBgI4i+Pa3EaKaQW119L9yNHWSY8Pw
-	BcR4Sc6pCCYL33KC2Ab7ru9aLnRScFqVlDKVOfdtjiAk30kQh81sMfenBAECjJGwijHA
-	QcMQ==
-X-Gm-Message-State: AHYfb5h9L769rNqwbn4SZRxfiwa8ti+Z9UfFzV4vKnqIuqivqcGYgTFp
-	W/ETcJEROI6rfhnGJJTNqE7v2g2Vw1wC
-X-Received: by 10.31.193.10 with SMTP id r10mr1442656vkf.56.1503770366064;
-	Sat, 26 Aug 2017 10:59:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Sat, 26 Aug 2017 10:59:25 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 26 Aug 2017 19:59:25 +0200
-Message-ID: <CA+chaQeNiTRKYY5KOOfpj4o8zk=biTiQFTgRY=ORtampc1o0Zw@mail.gmail.com>
-To: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: State of bitbake world, Failed tasks 2017-08-24
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=oEK1bOB21+ujAWlaP5um2bPinDGF/3UAb2b4WyxwPnc=;
+	b=rDOJq/znU8Tm3ScDRCiZxte1F9huWdy6QW6UJThNTOQNcSFjeurEDzwTi9LbpWM8Lv
+	hBtsGMYq+yRJBCyc6uuoiTlt9AxO/He83x+reFXAoA2m3F8qxwSD6ibMco96KlY6vScV
+	YogH4c7R7T121Ruw0ukAKbefEJeJFpXMhV/HcnmL6EZsOtJkIBkFQhxj2PANmcp3hFxA
+	TP0iepR3z1gsu/c0AjVanh0xQFsnA1ARIPG/ZAdCeoFON5JuP13XRrqc5wlWoRXl17fX
+	jDOsYyEB2j1KNcO7sh/9w4tRfnT86EheebTEYXAQCECRoGb6Bdmj8LdZ4G0TQSmerw7B
+	7FWA==
+X-Gm-Message-State: AHYfb5j1uzImuRtQLeKRgKyReoQ2v1HSKNY+SnnF3jtnN2dQyfp6a5eF
+	ZN8Ilop/D77LUcgY
+X-Received: by 10.98.79.136 with SMTP id f8mr2446049pfj.24.1503772528964;
+	Sat, 26 Aug 2017 11:35:28 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
+	by smtp.gmail.com with ESMTPSA id
+	m2sm15240546pgs.72.2017.08.26.11.35.28
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 26 Aug 2017 11:35:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 26 Aug 2017 11:35:15 -0700
+Message-Id: <20170826183521.34294-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-networking][PATCH 1/7] ippool: Fix build errors found by clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,568 +52,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Aug 2017 17:59:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 26 Aug 2017 18:35:28 -0000
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../ippool/ippool/0001-read-returns-ssize_t.patch  | 31 ++++++++++++
+ ...02-Mark-first-element-of-a-string-as-null.patch | 31 ++++++++++++
+ ...003-cli-Mark-return-of-strtol-as-long-int.patch | 58 ++++++++++++++++++++++
+ .../recipes-daemons/ippool/ippool_1.3.bb           |  5 +-
+ 4 files changed, 124 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/ippool/ippool/0001-read-returns-ssize_t.patch
+ create mode 100644 meta-networking/recipes-daemons/ippool/ippool/0002-Mark-first-element-of-a-string-as-null.patch
+ create mode 100644 meta-networking/recipes-daemons/ippool/ippool/0003-cli-Mark-return-of-strtol-as-long-int.patch
+
+diff --git a/meta-networking/recipes-daemons/ippool/ippool/0001-read-returns-ssize_t.patch b/meta-networking/recipes-daemons/ippool/ippool/0001-read-returns-ssize_t.patch
+new file mode 100644
+index 000000000..7d3f9acb6
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ippool/ippool/0001-read-returns-ssize_t.patch
+@@ -0,0 +1,31 @@
++From e4e0aae139b6489dc582fd14e54e562126482ce2 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 07:23:53 -0700
++Subject: [PATCH 1/3] read() returns ssize_t
++
++Fixes
++usl_fd.c:284:10: error: comparison of unsigned expression < 0 is always false [-Werror,-Wtautological-compare]
++                if (nb < 0) {
++                    ~~ ^ ~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ usl/usl_fd.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/usl/usl_fd.c b/usl/usl_fd.c
++index 3b7a813..04ba48c 100644
++--- a/usl/usl_fd.c
+++++ b/usl/usl_fd.c
++@@ -280,7 +280,7 @@ size_t usl_fd_read(int fd, void *buf, size_t count)
++ 	char *ptr = buf;
++ 
++ 	for (chars_read = 0; chars_read < count; ) {
++-		size_t nb = read(fd, ptr, count - chars_read);
+++		ssize_t nb = read(fd, ptr, count - chars_read);
++ 		if (nb < 0) {
++ 			if (errno == EINTR)
++ 				continue;
++-- 
++2.14.1
++
+diff --git a/meta-networking/recipes-daemons/ippool/ippool/0002-Mark-first-element-of-a-string-as-null.patch b/meta-networking/recipes-daemons/ippool/ippool/0002-Mark-first-element-of-a-string-as-null.patch
+new file mode 100644
+index 000000000..6e2bd523d
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ippool/ippool/0002-Mark-first-element-of-a-string-as-null.patch
+@@ -0,0 +1,31 @@
++From cf25576428903168cd41b183fb1ca9c2b7e2666e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 07:28:10 -0700
++Subject: [PATCH 2/3] Mark first element of a string as null
++
++Fixes
++cli_lib.c:427:20: error: expression which evaluates to zero treated as a null pointer constant of type 'char *' [-Werror,-Wnon-literal-null-conversion]
++                                        values[arg] = '\0';
++                                                      ^~~~
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ cli/cli_lib.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/cli/cli_lib.c b/cli/cli_lib.c
++index 41a0b06..e4d2fd5 100644
++--- a/cli/cli_lib.c
+++++ b/cli/cli_lib.c
++@@ -424,7 +424,7 @@ int cli_find_args(int argc, char *argv[], struct cli_node *cmd, struct cli_node
++ 			if (arg_string[1] == '\0') {
++ 				/* no arg value - only allowed for string args */
++ 				if (node->arg->parser == cli_arg_parse_string) {
++-					values[arg] = '\0';
+++					*values[arg] = '\0';
++ 				} else {
++ 					result = -EINVAL;
++ 					break;
++-- 
++2.14.1
++
+diff --git a/meta-networking/recipes-daemons/ippool/ippool/0003-cli-Mark-return-of-strtol-as-long-int.patch b/meta-networking/recipes-daemons/ippool/ippool/0003-cli-Mark-return-of-strtol-as-long-int.patch
+new file mode 100644
+index 000000000..3854b1133
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ippool/ippool/0003-cli-Mark-return-of-strtol-as-long-int.patch
+@@ -0,0 +1,58 @@
++From 994d9575374d3cdb34b1b0f70c3c53ae76fe578e Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 07:41:05 -0700
++Subject: [PATCH 3/3] cli: Mark return of strtol as long int
++
++strtol does not return unsigned long
++
++error: taking the absolute value of unsigned type 'unsigned long' has no effect [-Werror,-Wabsolute-value]
++        if ((*endp == '\0') && (labs(tmp) < 32768)) {
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ cli/cli_lib.c | 8 ++++----
++ 1 file changed, 4 insertions(+), 4 deletions(-)
++
++diff --git a/cli/cli_lib.c b/cli/cli_lib.c
++index e4d2fd5..5f487dc 100644
++--- a/cli/cli_lib.c
+++++ b/cli/cli_lib.c
++@@ -522,7 +522,7 @@ int cli_arg_parse_int32(struct cli_node *arg, const char *val, void *result)
++ int cli_arg_parse_int16(struct cli_node *arg, const char *val, void *result)
++ {
++ 	int16_t *intval = result;
++-	unsigned long tmp;
+++	long tmp;
++ 	char *endp;
++ 	int ret = 0;
++ 
++@@ -539,7 +539,7 @@ int cli_arg_parse_int16(struct cli_node *arg, const char *val, void *result)
++ int cli_arg_parse_int8(struct cli_node *arg, const char *val, void *result)
++ {
++ 	int8_t *intval = result;
++-	unsigned long tmp;
+++	long tmp;
++ 	char *endp;
++ 	int ret = 0;
++ 
++@@ -573,7 +573,7 @@ int cli_arg_parse_uint32(struct cli_node *arg, const char *val, void *result)
++ int cli_arg_parse_uint16(struct cli_node *arg, const char *val, void *result)
++ {
++ 	uint16_t *intval = result;
++-	unsigned long tmp;
+++	long tmp;
++ 	char *endp;
++ 	int ret = 0;
++ 
++@@ -590,7 +590,7 @@ int cli_arg_parse_uint16(struct cli_node *arg, const char *val, void *result)
++ int cli_arg_parse_uint8(struct cli_node *arg, const char *val, void *result)
++ {
++ 	uint8_t *intval = result;
++-	unsigned long tmp;
+++	long tmp;
++ 	char *endp;
++ 	int ret = 0;
++ 
++-- 
++2.14.1
++
+diff --git a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+index 05921d536..6e4748357 100644
+--- a/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
++++ b/meta-networking/recipes-daemons/ippool/ippool_1.3.bb
+@@ -21,7 +21,10 @@ SRC_URI = "https://sourceforge.net/projects/openl2tp/files/${BPN}/${PV}/${BPN}-$
+            file://makefile-add-ldflags.patch \
+            file://0001-usl_timer-Check-for-return-value-of-write-API.patch \
+            file://0001-Respect-flags-from-env.patch \
+-"
++           file://0001-read-returns-ssize_t.patch \
++           file://0002-Mark-first-element-of-a-string-as-null.patch \
++           file://0003-cli-Mark-return-of-strtol-as-long-int.patch \
++           "
+ SRC_URI_append_libc-musl = "\
+            file://0002-link-with-libtirpc.patch \
+            file://0003-musl-fixes.patch \
+-- 
+2.14.1
 
-Issues in meta-qt5 caused by security_flags.inc were fixed in this
-round, for next round I'll test fixed 5.9.0 upgrade and then final
-5.9.2 upgrade.
-
-
-Thanks for fixes for QA issues, few more are included in next round.
-
-
-Hopefully we'll get back to clean state before Rocko is released.
-
-
-This build already includes fewer layers, on 09-01 I'll remove them
-from the repositories as well.
-
-
-http://www.openembedded.org/wiki/Bitbake_World_Status
-
-== Number of issues - stats ==
-{| class='wikitable'
-!|Date		     !!colspan='3'|Failed tasks			    !!|Signatures		
-!!colspan='14'|QA !!Comment
-|-
-||		||qemuarm	||qemux86	||qemux86_64	||all
-	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	||ldflags	||compile-host-path	||
-|-
-
-||2017-08-24	||17	||16	||10	||1	||0		||0		||5		||0		||15		||33		||1		||0		||0		||0		||0		||0		||0		||0		||
-|}
-
-== Failed tasks 2017-08-24 ==
-
-INFO: jenkins-job.sh-1.8.27 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170826_075513.log
-
-=== common (7) ===
-    * meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:do_compile
-    * meta-openembedded/meta-networking/recipes-daemons/squid/squid_3.5.26.bb:do_package_qa
-    * meta-openembedded/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb:do_compile
-    * meta-openembedded/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170517.bb:do_compile
-    * meta-openembedded/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb:do_package_qa
-    * meta-openembedded/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb:do_package_qa
-    * meta-openembedded/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb:do_compile
-
-=== common-x86 (1) ===
-    * meta-openembedded/meta-oe/recipes-support/vboxguestdrivers/vboxguestdrivers_5.1.18.bb:do_compile
-
-=== qemuarm (10) ===
-    * meta-openembedded/meta-filesystems/recipes-utils/udevil/udevil_0.4.4.bb:do_package_qa
-    * meta-openembedded/meta-gnome/recipes-gnome/bonobo/libbonobo_2.32.1.bb:do_package_qa
-    * meta-openembedded/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb:do_compile
-    * meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
-    * meta-openembedded/meta-oe/recipes-devtools/mpich/mpich_3.2.bb:do_package_qa
-    * meta-openembedded/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb:do_package_qa
-    * meta-openembedded/meta-oe/recipes-support/mysql/mariadb_5.5.57.bb:do_compile
-    * meta-openembedded/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb:do_package_qa
-    * meta-openembedded/meta-python/recipes-devtools/python/python3-pylint_1.6.5.bb:do_package_qa
-    * meta-openembedded/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb:do_compile
-
-=== qemux86 (2) ===
-    * meta-openembedded/meta-oe/recipes-support/logwarn/logwarn_1.0.14.bb:do_package_qa
-    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb:do_compile
-
-=== qemux86_64 (1) ===
-    * meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-data-server_git.bb:do_compile
-
-=== Number of failed tasks (43) ===
-{| class=wikitable
-|-
-|| qemuarm 	|| 17	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170824_055549.log/
-||
-|-
-|| qemux86 	|| 16	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170823_180314.log/
-|| http://errors.yoctoproject.org/Errors/Build/45639/
-|-
-|| qemux86_64 	|| 10	 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170824_211230.log/
-|| http://errors.yoctoproject.org/Errors/Build/45730/
-|}
-
-=== PNBLACKLISTs (1) ===
-
-=== QA issues (54) ===
-{| class=wikitable
-!| Count		||Issue
-
-|-
-||0	||already-stripped
-|-
-||0	||build-deps
-|-
-||0	||compile-host-path
-|-
-||0	||installed-vs-shipped
-|-
-||0	||invalid-pkgconfig
-|-
-||0	||ldflags
-|-
-||0	||libdir
-|-
-||0	||pkgname
-|-
-||0	||symlink-to-sysroot
-|-
-||0	||unknown-configure-option
-|-
-||15	||file-rdeps
-|-
-||1	||host-user-contaminated
-|-
-||33	||version-going-backwards
-|-
-||5	||textrel
-|}
-
-
-
-=== Incorrect PACKAGE_ARCH or sstate signatures (1) ===
-
-Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170824_173753.log/
-    * ERROR: 1 issues were found in these recipes: android-tools
-
-    * ERROR: 1 errors found in
-signatures.qemux86.do_package_write_ipk.sigdata.log
-
-    * ERROR: android-tools different signature for task
-do_package_write_ipk.sigdata between qemux86copy and qemux86
-    * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503632273/signatures.qemux86.do_package_write_ipk.sigdata.log
-    * ERROR: 1 issues were found in these recipes: android-tools
-
-
-PNBLACKLISTs:
-openembedded-core/:
-meta-browser:
-meta-openembedded:
-meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACKLIST[lksctp-tools]
-?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN:
-fails to link against sctp_connectx symbol", '', d)}"
-meta-qt5:
-meta-smartphone:
-meta-webos-ports:
-PNBLACKLIST[android-system] = "depends on lxc from
-meta-virtualiazation which isn't included in my world builds"
-PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-tested so much"
-PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-directory in /home/builder/poky :/"
-
-
-QA issues by type:
-count: 0	issue: already-stripped
-
-
-count: 0	issue: libdir
-
-
-count: 5	issue: textrel
-chromium-54.0.2810.2: ELF binary
-'/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
-has relocations in .text [textrel]
-chromium-wayland-53.0.2785.143: ELF binary
-'/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
-has relocations in .text [textrel]
-corosync-2.4.2: ELF binary
-'/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-split/corosync/usr/sbin/corosync'
-has relocations in .text [textrel]
-x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
-'/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264-bin/usr/bin/x264'
-has relocations in .text [textrel]
-x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
-'/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264/usr/lib/libx264.so.148'
-has relocations in .text [textrel]
-
-
-count: 0	issue: build-deps
-
-
-count: 15	issue: file-rdeps
-corosync-2.4.2: /usr/share/corosync/corosync contained in package
-corosync requires /tmp/hosttools/bash, but no providers found in
-RDEPENDS_corosync? [file-rdeps]
-corosync-2.4.2: /usr/share/corosync/corosync-notifyd contained in
-package corosync requires /tmp/hosttools/bash, but no providers found
-in RDEPENDS_corosync? [file-rdeps]
-enscript-1.6.6: /usr/bin/diffpp contained in package enscript requires
-/tmp/hosttools/perl, but no providers found in RDEPENDS_enscript?
-[file-rdeps]
-enscript-1.6.6: /usr/bin/sliceprint contained in package enscript
-requires /tmp/hosttools/perl, but no providers found in
-RDEPENDS_enscript? [file-rdeps]
-libbonobo-2.32.1: /usr/bin/bonobo-slay contained in package
-libbonobo-bin requires /tmp/hosttools/perl, but no providers found in
-RDEPENDS_libbonobo-bin? [file-rdeps]
-libmodule-build-perl-0.31: /usr/bin/config_data contained in package
-libmodule-build-perl requires
-/tmp/work/armv5te-oe-linux-gnueabi/libmodule-build-perl/0.31-r0/recipe-sysroot-native/usr/bin/perl-native/perl.real,
-but no providers found in RDEPENDS_libmodule-build-perl? [file-rdeps]
-libmodule-build-perl-0.31: /usr/bin/config_data contained in package
-libmodule-build-perl requires
-/tmp/work/i586-oe-linux/libmodule-build-perl/0.31-r0/recipe-sysroot-native/usr/bin/perl-native/perl.real,
-but no providers found in RDEPENDS_libmodule-build-perl? [file-rdeps]
-logwarn-1.0.14: /usr/lib/nagios/plugins/check_logwarn contained in
-package logwarn-nagios requires /tmp/hosttools/bash, but no providers
-found in RDEPENDS_logwarn-nagios? [file-rdeps]
-mpich-3.2: /usr/bin/parkill contained in package mpich requires
-/tmp/hosttools/perl, but no providers found in RDEPENDS_mpich?
-[file-rdeps]
-ndisc6-1.0.3: /usr/bin/dnssort contained in package ndisc6-misc
-requires /tmp/hosttools/perl, but no providers found in
-RDEPENDS_ndisc6-misc? [file-rdeps]
-python3-pylint-1.6.5:
-/usr/lib/python3.5/site-packages/pylint/test/data/ascript contained in
-package python3-pylint requires /usr/bin/python, but no providers
-found in RDEPENDS_python3-pylint? [file-rdeps]
-squid-3.5.26: /usr/libexec/basic_db_auth contained in package squid
-requires /tmp/work/armv5te-oe-linux-gnueabi/squid/3.5.26-r0/recipe-sysroot-native/usr/bin/perl-native/perl,
-but no providers found in RDEPENDS_squid? [file-rdeps]
-squid-3.5.26: /usr/libexec/ext_delayer_acl contained in package squid
-requires /tmp/work/i586-oe-linux/squid/3.5.26-r0/recipe-sysroot-native/usr/bin/perl-native/perl,
-but no providers found in RDEPENDS_squid? [file-rdeps]
-squid-3.5.26: /usr/libexec/ext_wbinfo_group_acl contained in package
-squid requires /tmp/work/core2-64-oe-linux/squid/3.5.26-r0/recipe-sysroot-native/usr/bin/perl-native/perl,
-but no providers found in RDEPENDS_squid? [file-rdeps]
-udevil-0.4.4: /usr/bin/devmon contained in package udevil requires
-/bin/bash, but no providers found in RDEPENDS_udevil? [file-rdeps]
-
-
-count: 33	issue: version-going-backwards
-logcheck-1.3.17: Package version for package logcheck-dbg went
-backwards which would break package feeds from (0:1.3.18-r0.0 to
-0:1.3.17-r0.2) [version-going-backwards]
-logcheck-1.3.17: Package version for package logcheck-dev went
-backwards which would break package feeds from (0:1.3.18-r0.0 to
-0:1.3.17-r0.2) [version-going-backwards]
-logcheck-1.3.17: Package version for package logcheck-doc went
-backwards which would break package feeds from (0:1.3.18-r0.0 to
-0:1.3.17-r0.2) [version-going-backwards]
-logcheck-1.3.17: Package version for package logcheck-locale went
-backwards which would break package feeds from (0:1.3.18-r0.0 to
-0:1.3.17-r0.2) [version-going-backwards]
-logcheck-1.3.17: Package version for package logcheck-staticdev went
-backwards which would break package feeds from (0:1.3.18-r0.0 to
-0:1.3.17-r0.2) [version-going-backwards]
-logcheck-1.3.17: Package version for package logcheck went backwards
-which would break package feeds from (0:1.3.18-r0.0 to 0:1.3.17-r0.2)
-[version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-dbg went backwards which would break package
-feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-dev went backwards which would break package
-feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-doc went backwards which would break package
-feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-examples-dbg went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-examples-dev went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-examples-staticdev went backwards which would
-break package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-examples went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-locale went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-mkspecs went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-plugins-dbg went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-plugins went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-qmldesigner went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-qmlplugins-dbg went backwards which would
-break package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-qmlplugins went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-staticdev went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-tools-dbg went backwards which would break
-package feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine-tools went backwards which would break package
-feeds from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-qtwebengine-5.8.0+gitAUTOINC+d740d6a7db_15d257fd92: Package version
-for package qtwebengine went backwards which would break package feeds
-from (0:5.8.0+git0+d740d6a7db_15d257fd92-r0.4 to
-0:5.8.0+git0+d740d6a7db_15d257fd92-r0.0) [version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward-dbg went backwards which would break package feeds from
-(1:1.1+gitr0+2725c6c18c-r0.1 to 0:1.1+gitr0+00dbec2636-r0.0)
-[version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward-dev went backwards which would break package feeds from
-(1:1.1+gitr0+2725c6c18c-r0.1 to 0:1.1+gitr0+00dbec2636-r0.0)
-[version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward-doc went backwards which would break package feeds from
-(1:1.1+gitr0+2725c6c18c-r0.1 to 0:1.1+gitr0+00dbec2636-r0.0)
-[version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward-locale went backwards which would break package feeds
-from (1:1.1+gitr0+2725c6c18c-r0.1 to 0:1.1+gitr0+00dbec2636-r0.0)
-[version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward-staticdev went backwards which would break package
-feeds from (1:1.1+gitr0+2725c6c18c-r0.1 to
-0:1.1+gitr0+00dbec2636-r0.0) [version-going-backwards]
-serial-forward-1.1+gitrAUTOINC+00dbec2636: Package version for package
-serial-forward went backwards which would break package feeds from
-(1:1.1+gitr0+2725c6c18c-r0.1 to 0:1.1+gitr0+00dbec2636-r0.0)
-[version-going-backwards]
-xorg-fonts-100dpi-1.0: Package version for package
-xorg-fonts-100dpi-dbg went backwards which would break package feeds
-from (0:1.0-r0.6 to 0:1.0-r0.0) [version-going-backwards]
-xorg-fonts-100dpi-1.0: Package version for package
-xorg-fonts-100dpi-dev went backwards which would break package feeds
-from (0:1.0-r0.6 to 0:1.0-r0.0) [version-going-backwards]
-xorg-fonts-100dpi-1.0: Package version for package xorg-fonts-100dpi
-went backwards which would break package feeds from (0:1.0-r0.6 to
-0:1.0-r0.0) [version-going-backwards]
-
-
-count: 1	issue: host-user-contaminated
-glibc-locale-2.26: glibc-locale:
-/glibc-binary-localedata-ar-ae/usr/lib/locale/ar_AE/LC_COLLATE is
-owned by uid 3004, which is the same as the user running bitbake. This
-may be due to host contamination [host-user-contaminated]
-
-
-count: 0	issue: installed-vs-shipped
-
-
-count: 0	issue: unknown-configure-option
-
-
-count: 0	issue: symlink-to-sysroot
-
-
-count: 0	issue: invalid-pkgconfig
-
-
-count: 0	issue: pkgname
-
-
-count: 0	issue: ldflags
-
-
-count: 0	issue: compile-host-path
-
-
-
-== Tested changes (not included in master yet) - bitbake ==
-latest upstream commit:
-8a60106 main: Attempt to gain bitbake.lock rather than just waiting
-not included in master yet:
-a064963 world-image: add extra target
-
-== Tested changes (not included in master yet) - openembedded-core ==
-
-latest upstream commit:
-a8b89b3 default-providers: Add entries for pkgconfig (due to pkg-conf
-being added)
-not included in master yet:
-338cc89 report-error: Allow to upload reports automatically
-f492b98 buildhistory.bbclass: metadata-revs show repo parent
-eb590e9 metadata-revs: provide more information
-7860d90 qemux86: Add identical qemux86copy variant for tests
-9fdb66a reproducible_build.bbclass: initial support for binary reproducibility
-097476c cpio: provide cpio-replacement-native
-c3b689d image_types.bbclass: improve cpio image reproducibility
-cbd025c rootfs-postcommands.bbclass: support binary reproducibility
-c0f57c9 insane.bbclass: write QA issues to log file only when they are
-in ERROR_QA or WARN_QA
-
-== Tested changes (not included in master yet) - meta-openembedded ==
-
-latest upstream commit:
-ac2a6d2 json-spirit: Add -latomic to LDFLAGS
-not included in master yet:
-6ff499b dnsmasq: disable the service by default
-ca0e943 rdate: Fix build with hardening
-7e3d8e4 strongswan: Include stdint.h for uintptr_t
-217431e netkit-rpc: Fix build with hardening flags
-f3819cc netkit-telnet: Fix build with hardening
-048e071 ncftp: Upgrade to 3.2.6
-61495a9 autofs: Add build dependency on libnsl2
-96e606d openhpi: Fix build on 64bit platforms e.g. aarch64
-7feddb1 security_flags.inc: Delete
-a4723a6 pptp-linux: Upgrade to 1.9.0
-ab4774e ebtables: replace ebtables-save perl script with bash rewrite
-3a96b76 pimd: Upgrade to 2.3.2
-aa43496 igmpproxy: Include missing sys/tupes.h and define _GNU_SOURCE
-92bc7d2 rdate: Define logwtmp if libc != glibc
-a04b53f netkit-ftp: Include sys/types.h for u_long definition
-feb1653 postfix: Disable nis support on musl
-93ee634 zeroconf: Fix build with musl
-163c868 netperf: change SRC_URI to git repository
-4c2b4c4 ippool: Fix build errors found with hardening flags
-5ebba48 openflow: Fix build with musl
-610e392 xl2tpd: Update to 1.3.9
-53982a0 c-ares: update 1.12.0 -> 1.13.0
-b101101 radvd: 2.14 -> 2.17
-9a7309d libesmtp: Fix config.h define for snprintf detection
-b9b2b01 drbd: Add recipe
-b7b27a5 net-snmp: fix engineBoots value on SIGHUP
-f8559af openl2tp: add LGPL-2.1 license
-ce8ed9a openl2tp: add init script and systemd support
-4f97a6c ntop: add new recipe
-21479a9 libtdb: update 1.3.12 -> 1.3.14
-d946a42 ndisc6: Upgrade to 1.0.3
-f3dd13e memcached: Update to 1.5.0
-3436c8e tcpdump: remove unnecessary patch
-209a90c squid: Add missing dependencies on openssl expat and libxml2
-5061e4f postfix: Upgrade to 3.2.2
-33dff9b mpv: Update to version 0.26.0.
-cc37aef python3-blivet: add recipe 2.2.0
-ad94afe python3-blivetgui: add recipe 2.1.5
-47fb79b librcf: Add -latomic to LDFLAGS
-6599b98 upower: update 0.99.4 -> 0.99.5
-b720216 geany: update 1.30.1 -> 1.31
-29805cb geany-plugins: update 1.30 -> 1.31
-c94d8e7 python-wrapt: update to version 1.10.11
-69a7670 python-cmd2: update to version 0.7.6
-353a2ab python-sqlalchemy: update to version 1.1.13
-363c33c python-pytest: update to version 3.2.1
-38c6ecb python-pyro4: update to version 4.61
-07c7d83 php: move to version 7.1.8 from 7.1.7
-03eaf98 gsoap: Upgrade to 2.8.51
-16a43c3 caps: Mark ARCH empty
-5d25280 mailcap: upgrade to 2.1.48
-17dbbb3 mailx: Force mailx to build with openssl10
-ac85ad1 php: disable this version by default
-7b9dfb7 freeradius: Upgrade to 3.0.15
-4978e89 tcpdump: update to 4.9.1 to fix CVE-2017-11108
-a99294b vlock: add new recipe
-1e2f4b9 fontforge: update to 20170731 to fix CVEs
-5567b2a wireshark: 2.2.7 -> 2.2.8
-632f250 start-stop-daemon: Only create a link in ${base_sbindir} if necessary
-d8811b9 python-chardet: Extend to native and nativesdk
-ebd41b0 openobex: disable building documentation
-ac15d80 openwsman: rename to 2.6.3
-da135d6 iproute2: add bbappend for supporting tipc tool
-cebccb3 tipcutils: add runtime dependency for iproute2-tipc
-f920d63 mariadb: 5.5.55 -> 5.5.57
-64ee547 rsyslog: fix CVE-2017-12588
-cc02e10 rsyslog: install logrotate configuration file into correct location
-56d6e0a libvpx: upgrade to 1.6.1
-a4ee06b quagga: update to 1.2.1
-961abc1 gd: update to 2.2.4
-cb686c3 efivar: Upgrade to 0.31
-3706ca2 openvpn: 2.4.2 -> 2.4.3
-de9860c python*-ptyprocess: add v0.5.2
-fab2dd5 python*-pexpect: add v4.2.1
-543455e ipsec-tools: fix CVE-2016-10396
-6c775f9 multipath-tools: add bash to RDEPENDS
-5141a9b python3-pykickstart: tweak shebang to python3
-52f0eb1 xmlrpc-c: add perl to RDEPENDS
-92d6a0f phpmyadmin: upgrade to 4.7.3
-3716024 pcsc-lite: Update to 1.8.22
-d3af646 python-requests: Update to version 2.18.4
-e3057cc sthttpd: update to 2.27.1
-c9f10ab glibmm: fix perl path
-3a8e526 postgresql: update to 9.4.13
-4c2ea5a Dhrystone: add recipe 2.1
-c2a4bdf makedumpfile: update to 1.6.2
-6ce999e mozjs: customize HOST_CFLAGS
-f3e09bd adduser: use get_perl_version instead of PERLVERSION
-a17cffb iperf3: 3.1.3 -> 3.2
-40916b0 webmin: add systemd service file
-598c29c python-markupsafe: Extend to build native version too
-a7f2d3a vim: update to 8.0.0983
-9756937 python-m2crypto: Upgrade to 0.26.0
-87f7ea5 gnulib: upgrade to 2017-08-20.18
-0c7c8fb collectd: 5.7.1 -> 5.7.2
-54b071b netcf: upgrade to latest 0.2.8
-0c0ef1d tftp-hpa: add systemd unit files
-d1f41a0 gperftools: fixup HOMEPAGE
-8f5ed1d openconnect: fix parallel compilation failure
-5d15b1c gnome-keyring: Fix compatibility with gcr 3 in oe-core
-863d51e openconnect: upgrade to 7.08
-4dd9884 gflags: add runtime dependency on bash
-f3fc0cc logcheck: update to 1.3.18 and move to meta-perl
-3815615 python-pycrypto: Security fix CVE-2013-7459
-3d85015 logwarn: set correct paths and add missing dependency
-c2dbb9b openldap: fix native LDFLAGS build error
-166bf62 xorg-fonts-100dpi: unblacklist recipe
-a60ac1c recipes: remove blacklisted recipes
-69529c6 meta-ruby: remove this now pretty empty layer
-61e8314 meta-efl: remove this now pretty empty layer
-07ed328 meta-systemd: remove this now pretty empty layer
-7b0f2ca meta-gpe: remove this now pretty empty layer
-
-== Tested changes (not included in master yet) - meta-qt5 ==
-latest upstream commit:
-8960831 qwt-qt5.inc: fix QA warning
-not included in master yet:
-6e9892a qtbase: add ptest
-d53382f qt5-ptest: fix build with yocto < 2.3 (pyro)
-9042969 qtbase: Fix ptests with clang
-0b41b62 qtbase: Use sched_yield instead of pthread_yield
-17d94b7 quazip: update to 0.7.3 and add missing metadata
-3963daa qtwebkit: Backport a patch to fix build with icu-59
-7efcea9 qt3d: Fix build with clang
-c74e5b8 qtbase: remove qtbase-native from DEPENDS
-1619723 gstreamer1.0-plugins-bad: add qt5 packageconfig
-d82317c qtbase: refresh the patches
-246ec7b qtwebengine: refresh patches
-142f888 qt3d: refresh patches
-3522d3d qtbase: fix Krogoth build regression from efa8aaf
-d9f4b6e meta-toolchain-qt5: don't rely on COREBASE/LICENSE
-209e7e6 qtwebengine: disable SECURITY_STRINGFORMAT to fix the build
-648f7b0 qtbase, qtgraphicaleffect, qtmultimedia, qtscript, qtlocation,
-qtwayland: disable gold to work around binutils bug
-
-== Tested changes (not included in master yet) - meta-browser ==
-latest upstream commit:
-08576b0 Merge pull request #58 from kraj/kraj/master
-not included in master yet:
-f9c357c gnome-settings-daemon: remove the bbappend for removed recipe
 
