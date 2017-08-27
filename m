@@ -1,48 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 17921782D9
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DD8E7772F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Aug 2017 01:28:42 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 83so3587752pgb.3
+	Sun, 27 Aug 2017 19:12:11 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id q16so4749759pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Aug 2017 18:28:43 -0700 (PDT)
+	Sun, 27 Aug 2017 12:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=CngZv+bfk3QnJa3brQpx/o7hNBv95VnQEJfh1oyT1+w=;
-	b=kjUjVjaEDN4Grd0LE6vvAkUOIQLWOvHUtr9Wc/kllcjVxZUsDZ5B+88/l+Zsn/RYXs
-	X9j5XfwWYGV60MpYYdB19QBkeqRduiJFSr38alvdPAB63Px5Ugfke2CUbSvQRhpPXy0I
-	shLtGNLwG9R1MIsVpWFlMkzEuWE6ck0XgfaGwUoDHa/zQJd5Zmr4BcGkgmV/MYKIm6c3
-	4cpkl5V7Mta0GHaqbDlrDHc7IUz4SObF1EA8uaxYj3L9bYzjZDCOkieE9eULip8KltFL
-	LY5GtIkH4JTUgL+9NYbhjXSBwO+qT9NsYMzb8kLvgUWkXAvYt6moHT3DUV+KwV3SA2GY
-	BzzQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=AZsiw5SJT9Bix7iHz41d+WDm+GZI43icF7TQWOTIWtM=;
+	b=gIl864ayQWy1DUcPup25RTCWgtsr664INJ3a1ut1JXNowjMd+wFVrsG9V+zdNit9KN
+	00xmT5ArS094oLutgmzGEewLjBR+zevN5I7OoE1AVaFmql1YBHrXuITT08amaVXvzfF/
+	4P9Rhkw/uh4sP8N2clIBz02mST5bgzVI/HwMKkHDqEqF3tEfRcAVBYI4/sK0qx2SCyyb
+	t6Q2z40rrJJURmzq+rPzrNsSuXsCGdJqUul0tMTVxO+LGulP8fZQj7hxlbQkpRDxIz8N
+	C7JNIGxRJyQZkC3ZELvtSm8mR7Tv1p+uSQfTLNN9Mph9P3l9LshkOWrB06SJvLFTMxv9
+	gnDA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=CngZv+bfk3QnJa3brQpx/o7hNBv95VnQEJfh1oyT1+w=;
-	b=R2Hkov2434ZV2XDB2xBkd2BC8Rv//qqu1e5GNRKJeoCHiS5Bm9hPrseaaCjyP1Z61Z
-	Pc0wSIxoRUBOCLWZygrIw40tJKlC012hvbZmj66cEJjLfTW5f6A+xo+7UZuIUj6rf+BB
-	rxqJoH3eEPsCXuq5Yi9pAQLvLzrDtluObwnkgkIIjJZLxi+/x+4Rs4RbFKmbqlZEkL2i
-	A0eeerb+Bi9n4O48+VEV2tPGBm2ISsMZHRgCV/JZwEaEbb+IyXDAXnc7oqOYkoKqFe9g
-	KXEoMWZpKfUPPaWY7xDu0rtSYiKnIiT6Xu0UwOW2FwzF8HqbihQUQANgracijKSPcfjr
-	nJuQ==
-X-Gm-Message-State: AHYfb5hIK7WSSKHTqui/mPyg5wlNgm2uBYvwhzEu73jrspCVpX/hPihj
-	2sx2uafIHZ3k1uo5
-X-Received: by 10.99.23.100 with SMTP id 36mr3214873pgx.118.1503797323415;
-	Sat, 26 Aug 2017 18:28:43 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=AZsiw5SJT9Bix7iHz41d+WDm+GZI43icF7TQWOTIWtM=;
+	b=oiGBY2+poB0avN6uCaauvjaExW2VCEjqD6Z6iZjMYhFHvHGIu/0XfwahTxQ7Mtbqjp
+	EZh7ogv57HkdHhcMZSoUCdNOFT4PI8DGDJGeUCY8p7ru5aqt6tdg/iwypbI1I1kj6DmG
+	H9JEMmaggU3BQjYZlQGAInOvDECHWmsFgo6uOAZgRV1a5ZAxsNCDMNxxVT3uxuI8FOlM
+	iJMudfDS61XQ4AQcEuXSPs4cM0+Qr9k8KJLQ7DZ1cCaVtCHEm3ButdQT3Q+JyaNl6/Of
+	2Dy/KyMWpxSuC8lpAbrLe9VBnESq+kWtNl/SfDQFXOYkKmc/nBmpCsE1YEmzSjkxci9j
+	zd3w==
+X-Gm-Message-State: AHYfb5jLor4n9Fptd8hvQRNI0K2bXkm+MVHzWmf3X0YcFZvXvN1M5pV0
+	XC6nlqeY6biND5NN
+X-Received: by 10.99.63.206 with SMTP id m197mr4984677pga.170.1503861132735;
+	Sun, 27 Aug 2017 12:12:12 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
 	by smtp.gmail.com with ESMTPSA id
-	f123sm19301150pfg.86.2017.08.26.18.28.42
+	e184sm19231277pfe.172.2017.08.27.12.12.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 26 Aug 2017 18:28:42 -0700 (PDT)
+	Sun, 27 Aug 2017 12:12:12 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Aug 2017 18:28:30 -0700
-Message-Id: <20170827012830.11782-3-raj.khem@gmail.com>
+Date: Sun, 27 Aug 2017 12:12:03 -0700
+Message-Id: <20170827191204.8442-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170827012830.11782-1-raj.khem@gmail.com>
-References: <20170827012830.11782-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] nodejs: Upgrade to 8.4.0
+Subject: [meta-oe][PATCH 1/2] glade: Fix format string warnings with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,133 +52,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2017 01:28:42 -0000
+X-List-Received-Date: Sun, 27 Aug 2017 19:12:12 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...isable-running-gyp-files-for-bundled-deps.patch | 29 ++++++++++++++++++++++
- ...isable-running-gyp-files-for-bundled-deps.patch | 29 ++++++++++++++++++++++
- .../nodejs/{nodejs_4.8.3.bb => nodejs_8.4.0.bb}    | 13 +++++-----
- 3 files changed, 65 insertions(+), 6 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
- create mode 100644 meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
- rename meta-oe/recipes-devtools/nodejs/{nodejs_4.8.3.bb => nodejs_8.4.0.bb} (88%)
+ ...C_PRINTF-on-functions-with-format-strings.patch | 62 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/glade/glade3_3.8.5.bb     | 10 ++--
+ 2 files changed, 67 insertions(+), 5 deletions(-)
+ create mode 100644 meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
 
-diff --git a/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
+diff --git a/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch b/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
 new file mode 100644
-index 000000000..324a4683d
+index 000000000..03cb762ce
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-@@ -0,0 +1,29 @@
-+From c2aff16cc196a61f4ab1cdae4a91c7926123c239 Mon Sep 17 00:00:00 2001
-+From: Zuzana Svetlikova <zsvetlik@redhat.com>
-+Date: Thu, 27 Apr 2017 14:25:42 +0200
-+Subject: [PATCH] Disable running gyp on shared deps
++++ b/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+@@ -0,0 +1,62 @@
++From fcf29abe59607b5791f9de18ddb86b9ae3c9b7cc Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 23:50:05 -0700
++Subject: [PATCH] Add G_GNUC_PRINTF on functions with format strings
 +
++This allows compilation with clang without errors, even when
++-Wformat-nonliteral is active (as long as there are no real cases of
++non literal formatting).
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ Makefile | 7 +++----
-+ 1 file changed, 3 insertions(+), 4 deletions(-)
++ gladeui/glade-command.c | 4 ++--
++ gladeui/glade-utils.c   | 4 ++--
++ 2 files changed, 4 insertions(+), 4 deletions(-)
 +
-+diff --git a/Makefile b/Makefile
-+index 0a217bd893..e1229ad07f 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -79,10 +79,9 @@ $(NODE_G_EXE): config.gypi out/Makefile
-+ 	$(MAKE) -C out BUILDTYPE=Debug V=$(V)
-+ 	if [ ! -r $@ -o ! -L $@ ]; then ln -fs out/Debug/$(NODE_EXE) $@; fi
++diff --git a/gladeui/glade-command.c b/gladeui/glade-command.c
++index 9819766..4ac40ee 100644
++--- a/gladeui/glade-command.c
+++++ b/gladeui/glade-command.c
++@@ -266,7 +266,7 @@ glade_command_collapse (GladeCommand  *command,
++  *
++  * Marks the begining of a group.
++  */
++-void
+++G_GNUC_PRINTF(1, 2) void
++ glade_command_push_group (const gchar *fmt, ...)
++ {
++ 	va_list         args;
++@@ -655,7 +655,7 @@ glade_command_set_properties_list (GladeProject *project, GList *props)
 + 
-+-out/Makefile: common.gypi deps/uv/uv.gyp deps/http_parser/http_parser.gyp \
-+-              deps/zlib/zlib.gyp deps/v8/gypfiles/toolchain.gypi \
-+-              deps/v8/gypfiles/features.gypi deps/v8/src/v8.gyp node.gyp \
-+-              config.gypi
-++out/Makefile: common.gypi deps/http_parser/http_parser.gyp \
-++              deps/v8/gypfiles/toolchain.gypi deps/v8/gypfiles/features.gypi \
-++			  deps/v8/src/v8.gyp node.gyp config.gypi
-+ 	$(PYTHON) tools/gyp_node.py -f make
++ 	multiple = g_list_length (me->sdata) > 1;
++ 	if (multiple)
++-		glade_command_push_group (cmd->description);
+++		glade_command_push_group ("%s", cmd->description);
 + 
-+ config.gypi: configure
++ 
++ 	glade_command_check_group (GLADE_COMMAND (me));
++diff --git a/gladeui/glade-utils.c b/gladeui/glade-utils.c
++index ae52501..c51ae59 100644
++--- a/gladeui/glade-utils.c
+++++ b/gladeui/glade-utils.c
++@@ -197,7 +197,7 @@ glade_utils_get_pspec_from_funcname (const gchar *funcname)
++  *          selected "OK", True if the @type was GLADE_UI_YES_OR_NO and
++  *          the user selected "YES"; False otherwise.
++  */
++-gint
+++G_GNUC_PRINTF(4, 5) gint
++ glade_util_ui_message (GtkWidget           *parent, 
++ 		       GladeUIMessageType   type,
++ 		       GtkWidget           *widget,
++@@ -320,7 +320,7 @@ remove_message_timeout (FlashInfo * fi)
++  *
++  * Flash a temporary message on the statusbar.
++  */
++-void
+++G_GNUC_PRINTF(3, 4) void
++ glade_util_flash_message (GtkWidget *statusbar, guint context_id, gchar *format, ...)
++ {
++ 	va_list args;
 +-- 
-+2.12.2
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-new file mode 100644
-index 000000000..324a4683d
---- /dev/null
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs/0001-Disable-running-gyp-files-for-bundled-deps.patch
-@@ -0,0 +1,29 @@
-+From c2aff16cc196a61f4ab1cdae4a91c7926123c239 Mon Sep 17 00:00:00 2001
-+From: Zuzana Svetlikova <zsvetlik@redhat.com>
-+Date: Thu, 27 Apr 2017 14:25:42 +0200
-+Subject: [PATCH] Disable running gyp on shared deps
++2.14.1
 +
-+---
-+ Makefile | 7 +++----
-+ 1 file changed, 3 insertions(+), 4 deletions(-)
-+
-+diff --git a/Makefile b/Makefile
-+index 0a217bd893..e1229ad07f 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -79,10 +79,9 @@ $(NODE_G_EXE): config.gypi out/Makefile
-+ 	$(MAKE) -C out BUILDTYPE=Debug V=$(V)
-+ 	if [ ! -r $@ -o ! -L $@ ]; then ln -fs out/Debug/$(NODE_EXE) $@; fi
-+ 
-+-out/Makefile: common.gypi deps/uv/uv.gyp deps/http_parser/http_parser.gyp \
-+-              deps/zlib/zlib.gyp deps/v8/gypfiles/toolchain.gypi \
-+-              deps/v8/gypfiles/features.gypi deps/v8/src/v8.gyp node.gyp \
-+-              config.gypi
-++out/Makefile: common.gypi deps/http_parser/http_parser.gyp \
-++              deps/v8/gypfiles/toolchain.gypi deps/v8/gypfiles/features.gypi \
-++			  deps/v8/src/v8.gyp node.gyp config.gypi
-+ 	$(PYTHON) tools/gyp_node.py -f make
-+ 
-+ config.gypi: configure
-+-- 
-+2.12.2
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_4.8.3.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_4.8.3.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-index 7fde77891..5c580fb72 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_4.8.3.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-@@ -1,19 +1,19 @@
- DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE = "http://nodejs.org"
- LICENSE = "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=f45e9ffb97e64da46d14f462d34a039f"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=e4d35c6120f175e1fbe5ff908b1cf2d6"
+diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
+index fd655366f..c4f600095 100644
+--- a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
++++ b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
+@@ -8,11 +8,11 @@ DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native"
  
--DEPENDS = "openssl zlib"
-+DEPENDS = "openssl10 zlib"
+ inherit autotools pkgconfig pythonnative gtk-icon-cache
  
- COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
- COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
- COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+-SRC_URI = " \
+-    http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
+-    file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
+-    file://0002-fix-gcc-6-build.patch \
+-"
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
++           file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
++           file://0002-fix-gcc-6-build.patch \
++           file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
++           "
+ SRC_URI[md5sum] = "4e4b4f5ee34a03e017e4cef97d796c1f"
+ SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b6b2735"
  
- SRC_URI = "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
--    file://no-registry.patch \
-+           file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
- "
--SRC_URI[md5sum] = "dc40053a74100ce6df641a5b4c4d4d1e"
--SRC_URI[sha256sum] = "d84e7544c2e31a2d0825b4f8b093d169bf8bdb1881ee8cf75ff937918e59e9cb"
-+SRC_URI[md5sum] = "e6c85c83001340b30671e9432e1bd337"
-+SRC_URI[sha256sum] = "5d5aa2a101dcc617231a475812eb8ed87cac21491f1dcc7997b9dd463563f361"
- 
- S = "${WORKDIR}/node-v${PV}"
- 
-@@ -40,10 +40,11 @@ ARCHFLAGS ?= ""
- 
- # Node is way too cool to use proper autotools, so we install two wrappers to forcefully inject proper arch cflags to workaround gypi
- do_configure () {
-+    rm -rf ${S}/deps/openssl
-     export LD="${CXX}"
-     GYP_DEFINES="${GYP_DEFINES}" export GYP_DEFINES
-     # $TARGET_ARCH settings don't match --dest-cpu settings
--   ./configure --prefix=${prefix} --without-snapshot --shared-openssl --shared-zlib \
-+   ./configure --prefix=${prefix} --without-intl --without-snapshot --shared-openssl --shared-zlib \
-                --dest-cpu="${@map_nodejs_arch(d.getVar('TARGET_ARCH'), d)}" \
-                --dest-os=linux \
-                ${ARCHFLAGS}
 -- 
 2.14.1
 
