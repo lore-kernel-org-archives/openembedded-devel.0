@@ -1,45 +1,51 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DD8E7772F
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 988DD781E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Aug 2017 19:12:11 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id q16so4749759pgc.0
+	Sun, 27 Aug 2017 19:12:13 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id g13so2713078pfm.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Aug 2017 12:12:13 -0700 (PDT)
+	Sun, 27 Aug 2017 12:12:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=AZsiw5SJT9Bix7iHz41d+WDm+GZI43icF7TQWOTIWtM=;
-	b=gIl864ayQWy1DUcPup25RTCWgtsr664INJ3a1ut1JXNowjMd+wFVrsG9V+zdNit9KN
-	00xmT5ArS094oLutgmzGEewLjBR+zevN5I7OoE1AVaFmql1YBHrXuITT08amaVXvzfF/
-	4P9Rhkw/uh4sP8N2clIBz02mST5bgzVI/HwMKkHDqEqF3tEfRcAVBYI4/sK0qx2SCyyb
-	t6Q2z40rrJJURmzq+rPzrNsSuXsCGdJqUul0tMTVxO+LGulP8fZQj7hxlbQkpRDxIz8N
-	C7JNIGxRJyQZkC3ZELvtSm8mR7Tv1p+uSQfTLNN9Mph9P3l9LshkOWrB06SJvLFTMxv9
-	gnDA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references
+	:mime-version:content-transfer-encoding;
+	bh=QLXv7rC7U6ZYOKRiCLbcob72FXFJTLOmlZtaf6ivLaU=;
+	b=EUpMdjrM/fXb3FNUIHrrHx70l6NRRuaXg5+/xeiymSEmoF0B1jYtPi7Z4oVqI1b2rL
+	p/jVWmVoFzKeTyEY7ZR+WLWX79F4uKHFrfOCzdgj7j8dmvhqEXssYMBuDDXKUtDwz2RA
+	V1tOalatnCJcuOkLhn66l6HvAzd7cCtHd4VgAiPxR7hKbmZrpTsp/PvOac4rZlASG76c
+	fGZk5cXIorcek4f0hTql76EYL1l/Dm+OGImSBPp1goMYe+9rK64mrJOtr6VLP5hs8b8d
+	yCWAWH57AEHtxQN7TdrJf+RkzBgm4dYDB1G+I4pYhqqemHE+5EtTL/jSxlo32SoOh92C
+	MtBA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AZsiw5SJT9Bix7iHz41d+WDm+GZI43icF7TQWOTIWtM=;
-	b=oiGBY2+poB0avN6uCaauvjaExW2VCEjqD6Z6iZjMYhFHvHGIu/0XfwahTxQ7Mtbqjp
-	EZh7ogv57HkdHhcMZSoUCdNOFT4PI8DGDJGeUCY8p7ru5aqt6tdg/iwypbI1I1kj6DmG
-	H9JEMmaggU3BQjYZlQGAInOvDECHWmsFgo6uOAZgRV1a5ZAxsNCDMNxxVT3uxuI8FOlM
-	iJMudfDS61XQ4AQcEuXSPs4cM0+Qr9k8KJLQ7DZ1cCaVtCHEm3ButdQT3Q+JyaNl6/Of
-	2Dy/KyMWpxSuC8lpAbrLe9VBnESq+kWtNl/SfDQFXOYkKmc/nBmpCsE1YEmzSjkxci9j
-	zd3w==
-X-Gm-Message-State: AHYfb5jLor4n9Fptd8hvQRNI0K2bXkm+MVHzWmf3X0YcFZvXvN1M5pV0
-	XC6nlqeY6biND5NN
-X-Received: by 10.99.63.206 with SMTP id m197mr4984677pga.170.1503861132735;
-	Sun, 27 Aug 2017 12:12:12 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=QLXv7rC7U6ZYOKRiCLbcob72FXFJTLOmlZtaf6ivLaU=;
+	b=NMa65FoMNYv68fWOTeK0hE4OYFXakSdNnADM4bBWB8YFI7p4xvzOaCcFlQTkKRnD+I
+	uIanFLwpfrXIaRyezgfkpo2dwhnsFb719pFTqfcvIGp4bOxSOoTFKBDdpb88MPDJdRFj
+	ZV1r+/XIogMBApy2Av3NBaxtcLyTczNxZVAw5ysghkp4+jbtIKvfFe36LqMVpErgfScb
+	5q1f0G2iatny5WWzoz2TujN/FsZbdDKIXY/B8dlwZqhHOhsNEc3nzuwKTdzHBZ/8DBLB
+	5T0+QKE5ER4GNfSzWmid3QosU5SEgxkD1Rfxoh9+vnrV+JDd6xRR+0DiMuaL+fDEtVoh
+	39iw==
+X-Gm-Message-State: AHYfb5h+laZjiX4Hr/jGztZENvGg3PoGL+YNo7DmY2HeFJhZ/jhdC4TP
+	0/lLo3TYKnkYFDvm
+X-Received: by 10.99.114.14 with SMTP id n14mr4965767pgc.68.1503861133837;
+	Sun, 27 Aug 2017 12:12:13 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
 	by smtp.gmail.com with ESMTPSA id
-	e184sm19231277pfe.172.2017.08.27.12.12.11
+	e184sm19231277pfe.172.2017.08.27.12.12.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 27 Aug 2017 12:12:12 -0700 (PDT)
+	Sun, 27 Aug 2017 12:12:13 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Aug 2017 12:12:03 -0700
-Message-Id: <20170827191204.8442-1-raj.khem@gmail.com>
+Date: Sun, 27 Aug 2017 12:12:04 -0700
+Message-Id: <20170827191204.8442-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-oe][PATCH 1/2] glade: Fix format string warnings with clang
+In-Reply-To: <20170827191204.8442-1-raj.khem@gmail.com>
+References: <20170827191204.8442-1-raj.khem@gmail.com>
+MIME-Version: 1.0
+Subject: [meta-networking][PATCH 2/2] openhpi: Fix build with clang+c++11
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,104 +58,1353 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2017 19:12:12 -0000
+X-List-Received-Date: Sun, 27 Aug 2017 19:12:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...C_PRINTF-on-functions-with-format-strings.patch | 62 ++++++++++++++++++++++
- meta-oe/recipes-devtools/glade/glade3_3.8.5.bb     | 10 ++--
- 2 files changed, 67 insertions(+), 5 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+ .../recipes-daemons/openhpi/files/c++11.patch      |   12 +
+ .../openhpi/files/clang-c++11.patch                | 1288 ++++++++++++++++++++
+ .../recipes-daemons/openhpi/openhpi_3.6.1.bb       |    4 +-
+ 3 files changed, 1303 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/c++11.patch
+ create mode 100644 meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
 
-diff --git a/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch b/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
+diff --git a/meta-networking/recipes-daemons/openhpi/files/c++11.patch b/meta-networking/recipes-daemons/openhpi/files/c++11.patch
 new file mode 100644
-index 000000000..03cb762ce
+index 000000000..0549d5977
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/glade/glade3/0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch
-@@ -0,0 +1,62 @@
-+From fcf29abe59607b5791f9de18ddb86b9ae3c9b7cc Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 26 Aug 2017 23:50:05 -0700
-+Subject: [PATCH] Add G_GNUC_PRINTF on functions with format strings
-+
-+This allows compilation with clang without errors, even when
-+-Wformat-nonliteral is active (as long as there are no real cases of
-+non literal formatting).
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ gladeui/glade-command.c | 4 ++--
-+ gladeui/glade-utils.c   | 4 ++--
-+ 2 files changed, 4 insertions(+), 4 deletions(-)
-+
-+diff --git a/gladeui/glade-command.c b/gladeui/glade-command.c
-+index 9819766..4ac40ee 100644
-+--- a/gladeui/glade-command.c
-++++ b/gladeui/glade-command.c
-+@@ -266,7 +266,7 @@ glade_command_collapse (GladeCommand  *command,
-+  *
-+  * Marks the begining of a group.
-+  */
-+-void
-++G_GNUC_PRINTF(1, 2) void
-+ glade_command_push_group (const gchar *fmt, ...)
++++ b/meta-networking/recipes-daemons/openhpi/files/c++11.patch
+@@ -0,0 +1,12 @@
++Index: openhpi-3.6.1/configure.ac
++===================================================================
++--- openhpi-3.6.1.orig/configure.ac
+++++ openhpi-3.6.1/configure.ac
++@@ -44,6 +44,7 @@ AC_PROG_CPP
++ AC_PROG_INSTALL
++ AC_PROG_LN_S
++ AC_PROG_MAKE_SET
+++AX_CXX_COMPILE_STDCXX_11([noext],[mandatory])
++ 
++ enabled_non32bit="no"
++ AC_ARG_ENABLE([non32bit-int],
+diff --git a/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch b/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
+new file mode 100644
+index 000000000..9b35a0cce
+--- /dev/null
++++ b/meta-networking/recipes-daemons/openhpi/files/clang-c++11.patch
+@@ -0,0 +1,1288 @@
++Index: openhpi-3.6.1/plugins/dynamic_simulator/new_sim.cpp
++===================================================================
++--- openhpi-3.6.1.orig/plugins/dynamic_simulator/new_sim.cpp
+++++ openhpi-3.6.1/plugins/dynamic_simulator/new_sim.cpp
++@@ -415,7 +415,7 @@ extern "C" {
++ /**
++  * Alias for @ref öh_open(), implemented by @ref NewSimulatorOpen().
++  **/
++-static void * NewSimulatorOpen( GHashTable *, unsigned int, oh_evt_queue * ) __attribute__((used));
+++static void * NewSimulatorOpen( GHashTable *, unsigned int, oh_evt_queue * ) __asm__("NewSimulatorOpen") __attribute__((used));
++ 
++ /**
++  * @fn NewSimulatorOpen( GHashTable *handler_config, unsigned int hid, 
++@@ -530,7 +530,7 @@ static void * NewSimulatorOpen( GHashTab
++ /**
++  * Alias for @ref öh_close(), implemented by @ref NewSimulatorClose().
++  **/
++-static void NewSimulatorClose( void * ) __attribute__((used));
+++static void NewSimulatorClose( void * ) __asm__("NewSimulatorClose") __attribute__((used));
++ 
++ /**
++  * @relate NewSimulatorClose
++@@ -585,7 +585,7 @@ static void NewSimulatorClose( void *hnd
++  * 
++  * @return HPI error code
++  **/
++-static SaErrorT NewSimulatorGetEvent( void * ) __attribute__((used));
+++static SaErrorT NewSimulatorGetEvent( void * ) __asm__("NewSimulatorGetEvent") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetEvent( void *hnd ) {
++    dbg( "NewSimulatorGetEvent" );
++@@ -613,7 +613,7 @@ static SaErrorT NewSimulatorGetEvent( vo
++  * 
++  * @return HPI error code
++  **/
++-static SaErrorT NewSimulatorDiscoverResources( void * ) __attribute__((used));
+++static SaErrorT NewSimulatorDiscoverResources( void * ) __asm__("NewSimulatorDiscoverResources") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorDiscoverResources( void *hnd ) {
++    dbg( "NewSimulatorDiscoverResources" );
++@@ -641,7 +641,7 @@ static SaErrorT NewSimulatorDiscoverReso
++  * 
++  * @return HPI error code
++  **/
++-static SaErrorT NewSimulatorSetResourceTag( void *, SaHpiResourceIdT, SaHpiTextBufferT * ) __attribute__((used));
+++static SaErrorT NewSimulatorSetResourceTag( void *, SaHpiResourceIdT, SaHpiTextBufferT * ) __asm__("NewSimulatorSetResourceTag") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetResourceTag( void *hnd, SaHpiResourceIdT id, 
++                                              SaHpiTextBufferT *tag ) {
++@@ -669,7 +669,7 @@ static SaErrorT NewSimulatorSetResourceT
++  * 
++  * @return HPI error code
++  **/
++-static SaErrorT NewSimulatorSetResourceSeverity( void *, SaHpiResourceIdT, SaHpiSeverityT ) __attribute__((used));
+++static SaErrorT NewSimulatorSetResourceSeverity( void *, SaHpiResourceIdT, SaHpiSeverityT ) __asm__("NewSimulatorSetResourceSeverity") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetResourceSeverity( void *hnd, SaHpiResourceIdT id, 
++                                                   SaHpiSeverityT sev ) {
++@@ -703,7 +703,7 @@ static SaErrorT NewSimulatorGetSensorRea
++                                                SaHpiResourceIdT id,
++                                                SaHpiSensorNumT num,
++                                                SaHpiSensorReadingT *data,
++-                                               SaHpiEventStateT *state ) __attribute__((used));
+++                                               SaHpiEventStateT *state ) __asm__("NewSimulatorGetSensorReading") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSensorReading( void *hnd,
++                                                SaHpiResourceIdT id,
++@@ -738,7 +738,7 @@ static SaErrorT NewSimulatorGetSensorRea
++ static SaErrorT NewSimulatorGetSensorThresholds( void *hnd,
++                                           SaHpiResourceIdT,
++                                           SaHpiSensorNumT,
++-                                          SaHpiSensorThresholdsT * ) __attribute__((used));
+++                                          SaHpiSensorThresholdsT * ) __asm__("NewSimulatorGetSensorThresholds") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSensorThresholds( void *hnd,
++                                                   SaHpiResourceIdT id,
++@@ -777,7 +777,7 @@ static SaErrorT NewSimulatorGetSensorThr
++ static SaErrorT NewSimulatorSetSensorThresholds( void *,
++                                                   SaHpiResourceIdT,
++                                                   SaHpiSensorNumT,
++-                                                  const SaHpiSensorThresholdsT * ) __attribute__((used));
+++                                                  const SaHpiSensorThresholdsT * ) __asm__("NewSimulatorSetSensorThresholds") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSensorThresholds( void *hnd,
++                                                   SaHpiResourceIdT id,
++@@ -815,7 +815,7 @@ static SaErrorT NewSimulatorSetSensorThr
++ static SaErrorT NewSimulatorGetSensorEnable( void *,
++                                               SaHpiResourceIdT,
++                                               SaHpiSensorNumT,
++-                                              SaHpiBoolT * ) __attribute__((used));
+++                                              SaHpiBoolT * ) __asm__("NewSimulatorGetSensorEnable") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSensorEnable( void *hnd,
++                                               SaHpiResourceIdT id,
++@@ -849,7 +849,7 @@ static SaErrorT NewSimulatorGetSensorEna
++ static SaErrorT NewSimulatorSetSensorEnable( void *,
++                                               SaHpiResourceIdT,
++                                               SaHpiSensorNumT,
++-                                              SaHpiBoolT ) __attribute__((used));
+++                                              SaHpiBoolT ) __asm__("NewSimulatorSetSensorEnable") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSensorEnable( void *hnd,
++                                               SaHpiResourceIdT id,
++@@ -883,7 +883,7 @@ static SaErrorT NewSimulatorSetSensorEna
++ static SaErrorT NewSimulatorGetSensorEventEnables( void *,
++                                                     SaHpiResourceIdT,
++                                                     SaHpiSensorNumT,
++-                                                    SaHpiBoolT * ) __attribute__((used));
+++                                                    SaHpiBoolT * ) __asm__("NewSimulatorGetSensorEventEnables") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSensorEventEnables( void *hnd,
++                                                     SaHpiResourceIdT id,
++@@ -916,7 +916,7 @@ static SaErrorT NewSimulatorGetSensorEve
++ static SaErrorT NewSimulatorSetSensorEventEnables( void *,
++                                                     SaHpiResourceIdT,
++                                                     SaHpiSensorNumT,
++-                                                    SaHpiBoolT ) __attribute__((used));
+++                                                    SaHpiBoolT ) __asm__("NewSimulatorSetSensorEventEnables") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSensorEventEnables( void *hnd,
++                                                     SaHpiResourceIdT id,
++@@ -952,7 +952,7 @@ static SaErrorT NewSimulatorGetSensorEve
++                                                   SaHpiResourceIdT,
++                                                   SaHpiSensorNumT,
++                                                   SaHpiEventStateT *,
++-                                                  SaHpiEventStateT * ) __attribute__((used));
+++                                                  SaHpiEventStateT * ) __asm__("NewSimulatorGetSensorEventMasks") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSensorEventMasks( void *hnd,
++                                                   SaHpiResourceIdT id,
++@@ -990,7 +990,7 @@ static SaErrorT NewSimulatorSetSensorEve
++                                                   SaHpiSensorNumT,
++                                                   SaHpiSensorEventMaskActionT,
++                                                   SaHpiEventStateT,
++-                                                  SaHpiEventStateT ) __attribute__((used));
+++                                                  SaHpiEventStateT ) __asm__("NewSimulatorSetSensorEventMasks") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSensorEventMasks( void *hnd,
++                                                   SaHpiResourceIdT id,
++@@ -1026,7 +1026,7 @@ static SaErrorT NewSimulatorSetSensorEve
++ static SaErrorT NewSimulatorGetControlState( void *, SaHpiResourceIdT,
++                                               SaHpiCtrlNumT,
++                                               SaHpiCtrlModeT *,
++-                                              SaHpiCtrlStateT * ) __attribute__((used));
+++                                              SaHpiCtrlStateT * ) __asm__("NewSimulatorGetControlState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetControlState( void *hnd, SaHpiResourceIdT id,
++                                               SaHpiCtrlNumT num,
++@@ -1061,7 +1061,7 @@ static SaErrorT NewSimulatorGetControlSt
++ static SaErrorT NewSimulatorSetControlState( void *, SaHpiResourceIdT,
++                                               SaHpiCtrlNumT,
++                                               SaHpiCtrlModeT,
++-                                              SaHpiCtrlStateT * ) __attribute__((used));
+++                                              SaHpiCtrlStateT * ) __asm__("NewSimulatorSetControlState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetControlState( void *hnd, SaHpiResourceIdT id,
++                                               SaHpiCtrlNumT num,
++@@ -1099,7 +1099,7 @@ static SaErrorT NewSimulatorGetNextAnnou
++                                        SaHpiAnnunciatorNumT, 
++                                        SaHpiSeverityT, 
++                                        SaHpiBoolT, 
++-                                       SaHpiAnnouncementT *) __attribute__((used));
+++                                       SaHpiAnnouncementT *) __asm__("NewSimulatorGetNextAnnouncement") __attribute__((used));
++  
++ static SaErrorT NewSimulatorGetNextAnnouncement(void *hnd, SaHpiResourceIdT id,
++                                        SaHpiAnnunciatorNumT num,
++@@ -1135,7 +1135,7 @@ static SaErrorT NewSimulatorGetNextAnnou
++ static SaErrorT NewSimulatorGetAnnouncement(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT, 
++                                        SaHpiEntryIdT, 
++-                                       SaHpiAnnouncementT *) __attribute__((used));
+++                                       SaHpiAnnouncementT *) __asm__("NewSimulatorGetAnnouncement") __attribute__((used));
++  
++ static SaErrorT NewSimulatorGetAnnouncement(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num, 
++@@ -1171,7 +1171,7 @@ static SaErrorT NewSimulatorGetAnnouncem
++ static SaErrorT NewSimulatorAckAnnouncement(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT, 
++                                        SaHpiEntryIdT, 
++-                                       SaHpiSeverityT) __attribute__((used));
+++                                       SaHpiSeverityT) __asm__("NewSimulatorAckAnnouncement") __attribute__((used));
++  
++ static SaErrorT NewSimulatorAckAnnouncement(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num, 
++@@ -1205,7 +1205,7 @@ static SaErrorT NewSimulatorAckAnnouncem
++  **/
++ static SaErrorT NewSimulatorAddAnnouncement(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT, 
++-                                       SaHpiAnnouncementT *) __attribute__((used));
+++                                       SaHpiAnnouncementT *) __asm__("NewSimulatorAddAnnouncement") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddAnnouncement(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num, 
++@@ -1239,7 +1239,7 @@ static SaErrorT NewSimulatorAddAnnouncem
++ static SaErrorT NewSimulatorDelAnnouncement(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT, 
++                                        SaHpiEntryIdT, 
++-                                       SaHpiSeverityT) __attribute__((used));
+++                                       SaHpiSeverityT) __asm__("NewSimulatorDelAnnouncement") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorDelAnnouncement(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num, 
++@@ -1273,7 +1273,7 @@ static SaErrorT NewSimulatorDelAnnouncem
++  **/
++ static SaErrorT NewSimulatorGetAnnMode(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT,
++-                                       SaHpiAnnunciatorModeT *) __attribute__((used));
+++                                       SaHpiAnnunciatorModeT *) __asm__("NewSimulatorGetAnnMode") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetAnnMode(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num, 
++@@ -1306,7 +1306,7 @@ static SaErrorT NewSimulatorGetAnnMode(v
++  **/
++ static SaErrorT NewSimulatorSetAnnMode(void *, SaHpiResourceIdT, 
++                                        SaHpiAnnunciatorNumT,
++-                                       SaHpiAnnunciatorModeT) __attribute__((used));
+++                                       SaHpiAnnunciatorModeT) __asm__("NewSimulatorSetAnnMode") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetAnnMode(void *hnd, SaHpiResourceIdT id, 
++                                        SaHpiAnnunciatorNumT  num,
++@@ -1340,7 +1340,7 @@ static SaErrorT NewSimulatorSetAnnMode(v
++ static SaErrorT NewSimulatorGetIdrInfo( void *,
++                                          SaHpiResourceIdT,
++                                          SaHpiIdrIdT,
++-                                         SaHpiIdrInfoT * ) __attribute__((used));
+++                                         SaHpiIdrInfoT * ) __asm__("NewSimulatorGetIdrInfo") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetIdrInfo( void *hnd,
++                                          SaHpiResourceIdT id,
++@@ -1380,7 +1380,7 @@ static SaErrorT NewSimulatorGetIdrAreaHe
++                                                SaHpiIdrAreaTypeT,
++                                                SaHpiEntryIdT,
++                                                SaHpiEntryIdT *,
++-                                               SaHpiIdrAreaHeaderT * ) __attribute__((used));
+++                                               SaHpiIdrAreaHeaderT * ) __asm__("NewSimulatorGetIdrAreaHeader") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetIdrAreaHeader( void *hnd,
++                                                SaHpiResourceIdT id,
++@@ -1419,7 +1419,7 @@ static SaErrorT NewSimulatorAddIdrArea(
++                                          SaHpiResourceIdT,
++                                          SaHpiIdrIdT,
++                                          SaHpiIdrAreaTypeT,
++-                                         SaHpiEntryIdT * ) __attribute__((used));
+++                                         SaHpiEntryIdT * ) __asm__("NewSimulatorAddIdrArea") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddIdrArea( void *hnd,
++                                          SaHpiResourceIdT id,
++@@ -1456,7 +1456,7 @@ static SaErrorT NewSimulatorAddIdrAreaBy
++                                          SaHpiResourceIdT,
++                                          SaHpiIdrIdT,
++                                          SaHpiIdrAreaTypeT,
++-                                         SaHpiEntryIdT ) __attribute__((used));
+++                                         SaHpiEntryIdT ) __asm__("NewSimulatorAddIdrAreaById") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddIdrAreaById( void *hnd,
++                                          SaHpiResourceIdT id,
++@@ -1490,7 +1490,7 @@ static SaErrorT NewSimulatorAddIdrAreaBy
++ static SaErrorT NewSimulatorDelIdrArea( void *,
++                                          SaHpiResourceIdT,
++                                          SaHpiIdrIdT,
++-                                         SaHpiEntryIdT ) __attribute__((used));
+++                                         SaHpiEntryIdT ) __asm__("NewSimulatorDelIdrArea") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorDelIdrArea( void *hnd,
++                                          SaHpiResourceIdT id,
++@@ -1532,7 +1532,7 @@ static SaErrorT NewSimulatorGetIdrField(
++                                           SaHpiIdrFieldTypeT,
++                                           SaHpiEntryIdT,
++                                           SaHpiEntryIdT *,
++-                                          SaHpiIdrFieldT * ) __attribute__((used));
+++                                          SaHpiIdrFieldT * ) __asm__("NewSimulatorGetIdrField") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetIdrField( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -1570,7 +1570,7 @@ static SaErrorT NewSimulatorGetIdrField(
++ static SaErrorT NewSimulatorAddIdrField( void *,
++                                           SaHpiResourceIdT,
++                                           SaHpiIdrIdT,
++-                                          SaHpiIdrFieldT * ) __attribute__((used));
+++                                          SaHpiIdrFieldT * ) __asm__("NewSimulatorAddIdrField") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddIdrField( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -1604,7 +1604,7 @@ static SaErrorT NewSimulatorAddIdrField(
++ static SaErrorT NewSimulatorAddIdrFieldById( void *,
++                                           SaHpiResourceIdT,
++                                           SaHpiIdrIdT,
++-                                          SaHpiIdrFieldT * ) __attribute__((used));
+++                                          SaHpiIdrFieldT * ) __asm__("NewSimulatorAddIdrFieldById") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddIdrFieldById( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -1637,7 +1637,7 @@ static SaErrorT NewSimulatorAddIdrFieldB
++ static SaErrorT NewSimulatorSetIdrField( void *,
++                                           SaHpiResourceIdT,
++                                           SaHpiIdrIdT,
++-                                          SaHpiIdrFieldT * ) __attribute__((used));
+++                                          SaHpiIdrFieldT * ) __asm__("NewSimulatorSetIdrField") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetIdrField( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -1672,7 +1672,7 @@ static SaErrorT NewSimulatorDelIdrField(
++                                           SaHpiResourceIdT,
++                                           SaHpiIdrIdT,
++                                           SaHpiEntryIdT,
++-                                          SaHpiEntryIdT ) __attribute__((used));
+++                                          SaHpiEntryIdT ) __asm__("NewSimulatorDelIdrField") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorDelIdrField( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -1704,7 +1704,7 @@ static SaErrorT NewSimulatorDelIdrField(
++  **/ 
++ static SaErrorT NewSimulatorGetSelInfo( void *,
++                                          SaHpiResourceIdT,
++-                                         SaHpiEventLogInfoT * ) __attribute__((used));
+++                                         SaHpiEventLogInfoT * ) __asm__("NewSimulatorGetSelInfo") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSelInfo( void *hnd,
++                                          SaHpiResourceIdT id,
++@@ -1736,7 +1736,7 @@ static SaErrorT NewSimulatorGetSelInfo(
++  * 
++  * @return HPI error code
++  **/ 
++-static SaErrorT NewSimulatorSetSelTime( void *, SaHpiResourceIdT, SaHpiTimeT ) __attribute__((used));
+++static SaErrorT NewSimulatorSetSelTime( void *, SaHpiResourceIdT, SaHpiTimeT ) __asm__("NewSimulatorSetSelTime") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSelTime( void *hnd, SaHpiResourceIdT id, SaHpiTimeT t ) {
++    SaErrorT rv = SA_ERR_HPI_INTERNAL_ERROR;
++@@ -1766,7 +1766,7 @@ static SaErrorT NewSimulatorSetSelTime(
++  * 
++  * @return HPI error code
++  **/ 
++-static SaErrorT NewSimulatorAddSelEntry( void *, SaHpiResourceIdT, const SaHpiEventT * ) __attribute__((used));
+++static SaErrorT NewSimulatorAddSelEntry( void *, SaHpiResourceIdT, const SaHpiEventT * ) __asm__("NewSimulatorAddSelEntry") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorAddSelEntry( void *hnd, SaHpiResourceIdT id,
++                                           const SaHpiEventT *Event ) {
++@@ -1809,7 +1809,7 @@ static SaErrorT NewSimulatorGetSelEntry(
++                                           SaHpiEventLogEntryIdT *,
++                                           SaHpiEventLogEntryT *,
++                                           SaHpiRdrT *,
++-                                          SaHpiRptEntryT * ) __attribute__((used));
+++                                          SaHpiRptEntryT * ) __asm__("NewSimulatorGetSelEntry") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSelEntry( void *hnd, SaHpiResourceIdT id,
++                                           SaHpiEventLogEntryIdT current,
++@@ -1844,7 +1844,7 @@ static SaErrorT NewSimulatorGetSelEntry(
++  * 
++  * @return HPI error code
++  **/ 
++-static SaErrorT NewSimulatorClearSel( void *, SaHpiResourceIdT ) __attribute__((used));
+++static SaErrorT NewSimulatorClearSel( void *, SaHpiResourceIdT ) __asm__("NewSimulatorClearSel") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorClearSel( void *hnd, SaHpiResourceIdT id ) {
++    SaErrorT rv = SA_ERR_HPI_INTERNAL_ERROR;
++@@ -1875,7 +1875,7 @@ static SaErrorT NewSimulatorClearSel( vo
++  * @return HPI error code
++  **/ 
++ static SaErrorT NewSimulatorSetSelState(void *, SaHpiResourceIdT, 
++-                                         SaHpiBoolT) __attribute__((used));
+++                                         SaHpiBoolT) __asm__("NewSimulatorSetSelState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetSelState( void *hnd, SaHpiResourceIdT id,
++                                           SaHpiBoolT state ) {
++@@ -1907,7 +1907,7 @@ static SaErrorT NewSimulatorSetSelState(
++  * @return HPI error code
++  **/ 
++ static SaErrorT NewSimulatorGetSelState(void *, SaHpiResourceIdT, 
++-                                         SaHpiBoolT *) __attribute__((used));
+++                                         SaHpiBoolT *) __asm__("NewSimulatorGetSelState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSelState( void *hnd, SaHpiResourceIdT id,
++                                           SaHpiBoolT *state ) {
++@@ -1939,7 +1939,7 @@ static SaErrorT NewSimulatorGetSelState(
++  * @return HPI error code
++  **/ 
++ static SaErrorT NewSimulatorGetSelCapability(void *, SaHpiResourceIdT, 
++-                             SaHpiEventLogCapabilitiesT *) __attribute__((used));
+++                             SaHpiEventLogCapabilitiesT *) __asm__("NewSimulatorGetSelCapability") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetSelCapability( void *hnd, SaHpiResourceIdT id,
++                                           SaHpiEventLogCapabilitiesT *caps ) {
++@@ -1970,7 +1970,7 @@ static SaErrorT NewSimulatorGetSelCapabi
++  * @return HPI error code
++  **/ 
++ static SaErrorT NewSimulatorResetSelOverflow(void *, SaHpiResourceIdT) 
++-                                                           __attribute__((used));
+++                                                           __asm__("NewSimulatorResetSelOverflow") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorResetSelOverflow( void *hnd, SaHpiResourceIdT id ) {
++ 
++@@ -2002,7 +2002,7 @@ static SaErrorT NewSimulatorResetSelOver
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorHotswapPolicyCancel( void *, SaHpiResourceIdT,
++-                                                  SaHpiTimeoutT ) __attribute__((used));
+++                                                  SaHpiTimeoutT ) __asm__("NewSimulatorHotswapPolicyCancel") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorHotswapPolicyCancel( void *hnd, SaHpiResourceIdT id,
++                                                   SaHpiTimeoutT timeout) {
++@@ -2032,7 +2032,7 @@ static SaErrorT NewSimulatorHotswapPolic
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorGetHotswapState( void *, SaHpiResourceIdT ,
++-                                              SaHpiHsStateT * ) __attribute__((used));
+++                                              SaHpiHsStateT * ) __asm__("NewSimulatorGetHotswapState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetHotswapState( void *hnd, SaHpiResourceIdT id,
++                                               SaHpiHsStateT *state ) {
++@@ -2063,7 +2063,7 @@ static SaErrorT NewSimulatorGetHotswapSt
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorSetHotswapState( void *, SaHpiResourceIdT,
++-                                              SaHpiHsStateT ) __attribute__((used));
+++                                              SaHpiHsStateT ) __asm__("NewSimulatorSetHotswapState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetHotswapState( void *hnd, SaHpiResourceIdT id,
++                                               SaHpiHsStateT state ) {
++@@ -2105,7 +2105,7 @@ static SaErrorT NewSimulatorSetHotswapSt
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorRequestHotswapAction( void *, SaHpiResourceIdT,
++-                                                   SaHpiHsActionT ) __attribute__((used));
+++                                                   SaHpiHsActionT ) __asm__("NewSimulatorRequestHotswapAction") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorRequestHotswapAction( void *hnd, SaHpiResourceIdT id,
++                                                    SaHpiHsActionT act ) {
++@@ -2139,7 +2139,7 @@ static SaErrorT NewSimulatorRequestHotsw
++ static SaErrorT NewSimulatorGetWatchdogInfo(void *,
++                                              SaHpiResourceIdT,
++                                              SaHpiWatchdogNumT,
++-                                             SaHpiWatchdogT *) __attribute__((used));
+++                                             SaHpiWatchdogT *) __asm__("NewSimulatorGetWatchdogInfo") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetWatchdogInfo(void *hnd,
++                                              SaHpiResourceIdT  id,
++@@ -2170,7 +2170,7 @@ static SaErrorT NewSimulatorGetWatchdogI
++ static SaErrorT NewSimulatorSetWatchdogInfo(void *,
++                                              SaHpiResourceIdT,
++                                              SaHpiWatchdogNumT,
++-                                             SaHpiWatchdogT *) __attribute__((used));
+++                                             SaHpiWatchdogT *) __asm__("NewSimulatorSetWatchdogInfo") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetWatchdogInfo(void *hnd,
++                                              SaHpiResourceIdT  id,
++@@ -2199,7 +2199,7 @@ static SaErrorT NewSimulatorSetWatchdogI
++  **/
++ static SaErrorT NewSimulatorResetWatchdog(void *,
++                                            SaHpiResourceIdT,
++-                                           SaHpiWatchdogNumT) __attribute__((used));
+++                                           SaHpiWatchdogNumT) __asm__("NewSimulatorResetWatchdog") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorResetWatchdog(void *hnd,
++                                            SaHpiResourceIdT  id,
++@@ -2229,7 +2229,7 @@ static SaErrorT NewSimulatorResetWatchdo
++ static SaErrorT NewSimulatorGetFumiSpec(void *, 
++                                          SaHpiResourceIdT, 
++                                          SaHpiFumiNumT, 
++-                                         SaHpiFumiSpecInfoT *) __attribute__((used));
+++                                         SaHpiFumiSpecInfoT *) __asm__("NewSimulatorGetFumiSpec") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetFumiSpec(void *hnd, 
++                                          SaHpiResourceIdT    id, 
++@@ -2260,7 +2260,7 @@ static SaErrorT NewSimulatorGetFumiSpec(
++ static SaErrorT NewSimulatorGetFumiServImpact(void *, 
++                                                SaHpiResourceIdT, 
++                                                SaHpiFumiNumT, 
++-                                               SaHpiFumiServiceImpactDataT *) __attribute__((used));
+++                                               SaHpiFumiServiceImpactDataT *) __asm__("NewSimulatorGetFumiServImpact") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetFumiServImpact(void *hnd, 
++                                                SaHpiResourceIdT            id, 
++@@ -2294,7 +2294,7 @@ static SaErrorT NewSimulatorSetFumiSourc
++                                            SaHpiResourceIdT, 
++                                            SaHpiFumiNumT, 
++                                            SaHpiBankNumT, 
++-                                           SaHpiTextBufferT *) __attribute__((used));
+++                                           SaHpiTextBufferT *) __asm__("NewSimulatorSetFumiSource") __attribute__((used));
++                                            
++ static SaErrorT NewSimulatorSetFumiSource(void             *hnd, 
++                                            SaHpiResourceIdT  id, 
++@@ -2327,7 +2327,7 @@ static SaErrorT NewSimulatorSetFumiSourc
++ static SaErrorT NewSimulatorValidateFumiSource(void *, 
++                                                 SaHpiResourceIdT, 
++                                                 SaHpiFumiNumT, 
++-                                                SaHpiBankNumT) __attribute__((used));
+++                                                SaHpiBankNumT) __asm__("NewSimulatorValidateFumiSource") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorValidateFumiSource(void            *hnd, 
++                                                 SaHpiResourceIdT id, 
++@@ -2361,7 +2361,7 @@ static SaErrorT NewSimulatorGetFumiSourc
++                                            SaHpiResourceIdT, 
++                                            SaHpiFumiNumT, 
++                                            SaHpiBankNumT, 
++-                                           SaHpiFumiSourceInfoT *) __attribute__((used));
+++                                           SaHpiFumiSourceInfoT *) __asm__("NewSimulatorGetFumiSource") __attribute__((used));
++                                            
++ static SaErrorT NewSimulatorGetFumiSource(void                *hnd, 
++                                            SaHpiResourceIdT     id, 
++@@ -2400,7 +2400,7 @@ static SaErrorT NewSimulatorGetFumiSourc
++                              SaHpiBankNumT, 
++                              SaHpiEntryIdT, 
++                              SaHpiEntryIdT *, 
++-                             SaHpiFumiComponentInfoT *) __attribute__((used));
+++                             SaHpiFumiComponentInfoT *) __asm__("NewSimulatorGetFumiSourceComponent") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetFumiSourceComponent(void            *hnd, 
++                                                     SaHpiResourceIdT id, 
++@@ -2437,7 +2437,7 @@ static SaErrorT NewSimulatorGetFumiTarge
++                                            SaHpiResourceIdT, 
++                                            SaHpiFumiNumT, 
++                                            SaHpiBankNumT, 
++-                                           SaHpiFumiBankInfoT *) __attribute__((used));
+++                                           SaHpiFumiBankInfoT *) __asm__("NewSimulatorGetFumiTarget") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetFumiTarget(void              *hnd, 
++                                            SaHpiResourceIdT   id, 
++@@ -2476,7 +2476,7 @@ static SaErrorT NewSimulatorGetFumiTarge
++                                                     SaHpiBankNumT, 
++                                                     SaHpiEntryIdT, 
++                                                     SaHpiEntryIdT *, 
++-                                                    SaHpiFumiComponentInfoT *) __attribute__((used));
+++                                                    SaHpiFumiComponentInfoT *) __asm__("NewSimulatorGetFumiTargetComponent") __attribute__((used));
++                                                     
++  static SaErrorT NewSimulatorGetFumiTargetComponent(void                  *hnd, 
++                                                     SaHpiResourceIdT        id, 
++@@ -2511,7 +2511,7 @@ static SaErrorT NewSimulatorGetFumiTarge
++ static SaErrorT NewSimulatorGetFumiLogicalTarget(void *, 
++                                                   SaHpiResourceIdT, 
++                                                   SaHpiFumiNumT, 
++-                                                  SaHpiFumiLogicalBankInfoT *) __attribute__((used));
+++                                                  SaHpiFumiLogicalBankInfoT *) __asm__("NewSimulatorGetFumiLogicalTarget") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetFumiLogicalTarget(void            *hnd, 
++                                                   SaHpiResourceIdT id,
++@@ -2547,7 +2547,7 @@ static SaErrorT NewSimulatorGetFumiLogic
++                       SaHpiFumiNumT, 
++                       SaHpiEntryIdT, 
++                       SaHpiEntryIdT *, 
++-                      SaHpiFumiLogicalComponentInfoT *) __attribute__((used));
+++                      SaHpiFumiLogicalComponentInfoT *) __asm__("NewSimulatorGetFumiLogicalTargetComponent") __attribute__((used));
++                                                            
++ static SaErrorT NewSimulatorGetFumiLogicalTargetComponent(void         *hnd, 
++                                                          SaHpiResourceIdT id, 
++@@ -2579,7 +2579,7 @@ static SaErrorT NewSimulatorGetFumiLogic
++  **/                  
++ static SaErrorT NewSimulatorStartFumiBackup(void *, 
++                                              SaHpiResourceIdT, 
++-                                             SaHpiFumiNumT) __attribute__((used));
+++                                             SaHpiFumiNumT) __asm__("NewSimulatorStartFumiBackup") __attribute__((used));
++                                              
++ static SaErrorT NewSimulatorStartFumiBackup(void            *hnd, 
++                                              SaHpiResourceIdT id, 
++@@ -2612,7 +2612,7 @@ static SaErrorT NewSimulatorSetFumiBankO
++                                               SaHpiResourceIdT, 
++                                               SaHpiFumiNumT, 
++                                               SaHpiBankNumT, 
++-                                              SaHpiUint32T) __attribute__((used));
+++                                              SaHpiUint32T) __asm__("NewSimulatorSetFumiBankOrder") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetFumiBankOrder(void            *hnd, 
++                                               SaHpiResourceIdT id, 
++@@ -2647,7 +2647,7 @@ static SaErrorT NewSimulatorStartFumiBan
++                                                SaHpiResourceIdT, 
++                                                SaHpiFumiNumT, 
++                                                SaHpiBankNumT, 
++-                                               SaHpiBankNumT) __attribute__((used));
+++                                               SaHpiBankNumT) __asm__("NewSimulatorStartFumiBankCopy") __attribute__((used));
++                                                
++ static SaErrorT NewSimulatorStartFumiBankCopy(void             *hnd, 
++                                                SaHpiResourceIdT  id, 
++@@ -2680,7 +2680,7 @@ static SaErrorT NewSimulatorStartFumiBan
++ static SaErrorT NewSimulatorStartFumiInstall(void *, 
++                                               SaHpiResourceIdT, 
++                                               SaHpiFumiNumT, 
++-                                              SaHpiBankNumT) __attribute__((used));
+++                                              SaHpiBankNumT) __asm__("NewSimulatorStartFumiInstall") __attribute__((used));
++                                               
++ static SaErrorT NewSimulatorStartFumiInstall(void             *hnd, 
++                                               SaHpiResourceIdT  id, 
++@@ -2714,7 +2714,7 @@ static SaErrorT NewSimulatorGetFumiStatu
++                                            SaHpiResourceIdT, 
++                                            SaHpiFumiNumT, 
++                                            SaHpiBankNumT, 
++-                                           SaHpiFumiUpgradeStatusT *) __attribute__((used));
+++                                           SaHpiFumiUpgradeStatusT *) __asm__("NewSimulatorGetFumiStatus") __attribute__((used));
++                                            
++ static SaErrorT NewSimulatorGetFumiStatus(void                   *hnd, 
++                                            SaHpiResourceIdT        id, 
++@@ -2747,7 +2747,7 @@ static SaErrorT NewSimulatorGetFumiStatu
++ static SaErrorT NewSimulatorStartFumiVerification(void *, 
++                                                    SaHpiResourceIdT, 
++                                                    SaHpiFumiNumT, 
++-                                                   SaHpiBankNumT) __attribute__((used));
+++                                                   SaHpiBankNumT) __asm__("NewSimulatorStartFumiVerification") __attribute__((used));
++                                                    
++ static SaErrorT NewSimulatorStartFumiVerification(void            *hnd, 
++                                                    SaHpiResourceIdT id, 
++@@ -2776,7 +2776,7 @@ static SaErrorT NewSimulatorStartFumiVer
++  **/                             
++ static SaErrorT NewSimulatorStartFumiVerificationMain(void *, 
++                                                        SaHpiResourceIdT, 
++-                                                       SaHpiFumiNumT) __attribute__((used));
+++                                                       SaHpiFumiNumT) __asm__("NewSimulatorStartFumiVerificationMain") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorStartFumiVerificationMain(void            *hnd, 
++                                                        SaHpiResourceIdT id, 
++@@ -2807,7 +2807,7 @@ static SaErrorT NewSimulatorStartFumiVer
++ static SaErrorT NewSimulatorCancelFumiUpgrade(void *, 
++                                                SaHpiResourceIdT, 
++                                                SaHpiFumiNumT, 
++-                                               SaHpiBankNumT) __attribute__((used));
+++                                               SaHpiBankNumT) __asm__("NewSimulatorCancelFumiUpgrade") __attribute__((used));
++                                                
++ static SaErrorT NewSimulatorCancelFumiUpgrade(void            *hnd, 
++                                                SaHpiResourceIdT id, 
++@@ -2838,7 +2838,7 @@ static SaErrorT NewSimulatorCancelFumiUp
++ static SaErrorT NewSimulatorGetFumiRollback(void *, 
++                                              SaHpiResourceIdT, 
++                                              SaHpiFumiNumT, 
++-                                             SaHpiBoolT *) __attribute__((used));
+++                                             SaHpiBoolT *) __asm__("NewSimulatorGetFumiRollback") __attribute__((used));
++                                              
++ static SaErrorT NewSimulatorGetFumiRollback(void            *hnd, 
++                                              SaHpiResourceIdT id, 
++@@ -2870,7 +2870,7 @@ static SaErrorT NewSimulatorGetFumiRollb
++ static SaErrorT NewSimulatorSetFumiRollback(void *, 
++                                              SaHpiResourceIdT, 
++                                              SaHpiFumiNumT, 
++-                                             SaHpiBoolT) __attribute__((used));
+++                                             SaHpiBoolT) __asm__("NewSimulatorSetFumiRollback") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetFumiRollback(void            *hnd, 
++                                              SaHpiResourceIdT id, 
++@@ -2900,7 +2900,7 @@ static SaErrorT NewSimulatorSetFumiRollb
++  **/                          
++ static SaErrorT NewSimulatorStartFumiRollback(void *, 
++                                                SaHpiResourceIdT, 
++-                                               SaHpiFumiNumT) __attribute__((used));
+++                                               SaHpiFumiNumT) __asm__("NewSimulatorStartFumiRollback") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorStartFumiRollback(void            *hnd, 
++                                              SaHpiResourceIdT id, 
++@@ -2929,7 +2929,7 @@ static SaErrorT NewSimulatorStartFumiRol
++  **/                         
++ static SaErrorT NewSimulatorActivateFumi(void *, 
++                                           SaHpiResourceIdT, 
++-                                          SaHpiFumiNumT) __attribute__((used));
+++                                          SaHpiFumiNumT) __asm__("NewSimulatorActivateFumi") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorActivateFumi(void            *hnd, 
++                                           SaHpiResourceIdT id, 
++@@ -2960,7 +2960,7 @@ static SaErrorT NewSimulatorActivateFumi
++ static SaErrorT NewSimulatorStartFumiActivation(void *, 
++                                                  SaHpiResourceIdT, 
++                                                  SaHpiFumiNumT, 
++-                                                 SaHpiBoolT) __attribute__((used));
+++                                                 SaHpiBoolT) __asm__("NewSimulatorStartFumiActivation") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorStartFumiActivation(void            *hnd, 
++                                                  SaHpiResourceIdT id, 
++@@ -2992,7 +2992,7 @@ static SaErrorT NewSimulatorStartFumiAct
++ static SaErrorT NewSimulatorCleanupFumi(void *, 
++                                          SaHpiResourceIdT, 
++                                          SaHpiFumiNumT, 
++-                                         SaHpiBankNumT) __attribute__((used));
+++                                         SaHpiBankNumT) __asm__("NewSimulatorCleanupFumi") __attribute__((used));
++                                          
++ static SaErrorT NewSimulatorCleanupFumi(void            *hnd, 
++                                          SaHpiResourceIdT id, 
++@@ -3023,7 +3023,7 @@ static SaErrorT NewSimulatorCleanupFumi(
++ static SaErrorT NewSimulatorGetDimiInfo( void *, 
++                                           SaHpiResourceIdT, 
++                                           SaHpiDimiNumT, 
++-                                          SaHpiDimiInfoT *)  __attribute__((used));
+++                                          SaHpiDimiInfoT *)  __asm__("NewSimulatorGetDimiInfo") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetDimiInfo( void            *hnd, 
++                                           SaHpiResourceIdT id, 
++@@ -3057,7 +3057,7 @@ static SaErrorT NewSimulatorGetDimiTestI
++                                       SaHpiResourceIdT, 
++                                       SaHpiDimiNumT,
++                                       SaHpiDimiTestNumT, 
++-                                      SaHpiDimiTestT *)  __attribute__((used));
+++                                      SaHpiDimiTestT *)  __asm__("NewSimulatorGetDimiTestInfo") __attribute__((used));
++                                       
++ static SaErrorT NewSimulatorGetDimiTestInfo( void     *hnd, 
++                                       SaHpiResourceIdT  id, 
++@@ -3092,7 +3092,7 @@ static SaErrorT NewSimulatorGetDimiTestR
++                                      SaHpiResourceIdT, 
++                                      SaHpiDimiNumT,
++                                      SaHpiDimiTestNumT, 
++-                                     SaHpiDimiReadyT *)  __attribute__((used));
+++                                     SaHpiDimiReadyT *)  __asm__("NewSimulatorGetDimiTestReadiness") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetDimiTestReadiness( void *hnd, 
++                                      SaHpiResourceIdT    id, 
++@@ -3129,7 +3129,7 @@ static SaErrorT NewSimulatorStartDimiTes
++                         SaHpiDimiNumT, 
++                         SaHpiDimiTestNumT,
++                         SaHpiUint8T, 
++-                        SaHpiDimiTestVariableParamsT *)  __attribute__((used));
+++                        SaHpiDimiTestVariableParamsT *)  __asm__("NewSimulatorStartDimiTest") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorStartDimiTest( void    *hnd, 
++                         SaHpiResourceIdT             id, 
++@@ -3163,7 +3163,7 @@ static SaErrorT NewSimulatorStartDimiTes
++ static SaErrorT NewSimulatorCancelDimiTest( void *, 
++                                       SaHpiResourceIdT, 
++                                       SaHpiDimiNumT, 
++-                                      SaHpiDimiTestNumT) __attribute__((used));
+++                                      SaHpiDimiTestNumT) __asm__("NewSimulatorCancelDimiTest") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorCancelDimiTest( void      *hnd, 
++                                       SaHpiResourceIdT  id, 
++@@ -3199,7 +3199,7 @@ static SaErrorT NewSimulatorGetDimiTestS
++                               SaHpiDimiNumT, 
++                               SaHpiDimiTestNumT, 
++                               SaHpiDimiTestPercentCompletedT *,
++-                              SaHpiDimiTestRunStatusT *) __attribute__((used));
+++                              SaHpiDimiTestRunStatusT *) __asm__("NewSimulatorGetDimiTestStatus") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetDimiTestStatus( void        *hnd, 
++                               SaHpiResourceIdT               id, 
++@@ -3234,7 +3234,7 @@ static SaErrorT NewSimulatorGetDimiTestR
++                                 SaHpiResourceIdT, 
++                                 SaHpiDimiNumT, 
++                                 SaHpiDimiTestNumT, 
++-                                SaHpiDimiTestResultsT *) __attribute__((used));
+++                                SaHpiDimiTestResultsT *) __asm__("NewSimulatorGetDimiTestResults") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetDimiTestResults( void *hnd, 
++                                 SaHpiResourceIdT       id, 
++@@ -3263,7 +3263,7 @@ static SaErrorT NewSimulatorGetDimiTestR
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorSetAutoInsertTimeout( void *, 
++-                                         SaHpiTimeoutT ) __attribute__((used));
+++                                         SaHpiTimeoutT ) __asm__("NewSimulatorSetAutoInsertTimeout") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetAutoInsertTimeout( void *hnd, SaHpiTimeoutT  timeout) {
++    NewSimulator *newsim = VerifyNewSimulator( hnd );
++@@ -3289,7 +3289,7 @@ static SaErrorT NewSimulatorSetAutoInser
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorGetAutoExtractTimeout( void *, SaHpiResourceIdT,
++-                                                    SaHpiTimeoutT * ) __attribute__((used));
+++                                                    SaHpiTimeoutT * ) __asm__("NewSimulatorGetAutoExtractTimeout") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetAutoExtractTimeout( void *hnd, SaHpiResourceIdT id,
++                                                     SaHpiTimeoutT *timeout ) {
++@@ -3319,7 +3319,7 @@ static SaErrorT NewSimulatorGetAutoExtra
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorSetAutoExtractTimeout( void *, SaHpiResourceIdT,
++-                                                    SaHpiTimeoutT ) __attribute__((used));
+++                                                    SaHpiTimeoutT ) __asm__("NewSimulatorSetAutoExtractTimeout") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetAutoExtractTimeout( void *hnd, SaHpiResourceIdT id,
++                                                     SaHpiTimeoutT timeout ) {
++@@ -3350,7 +3350,7 @@ static SaErrorT NewSimulatorSetAutoExtra
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorGetPowerState( void *, SaHpiResourceIdT,
++-                                            SaHpiPowerStateT * ) __attribute__((used));
+++                                            SaHpiPowerStateT * ) __asm__("NewSimulatorGetPowerState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetPowerState( void *hnd, SaHpiResourceIdT id,
++                                             SaHpiPowerStateT *state ) {
++@@ -3382,7 +3382,7 @@ static SaErrorT NewSimulatorGetPowerStat
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorSetPowerState( void *, SaHpiResourceIdT,
++-                                            SaHpiPowerStateT ) __attribute__((used));
+++                                            SaHpiPowerStateT ) __asm__("NewSimulatorSetPowerState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetPowerState( void *hnd, SaHpiResourceIdT id,
++                                             SaHpiPowerStateT state ) {
++@@ -3414,7 +3414,7 @@ static SaErrorT NewSimulatorSetPowerStat
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorGetIndicatorState( void *, SaHpiResourceIdT,
++-                                                SaHpiHsIndicatorStateT * ) __attribute__((used));
+++                                                SaHpiHsIndicatorStateT * ) __asm__("NewSimulatorGetIndicatorState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetIndicatorState( void *hnd, SaHpiResourceIdT id,
++                                                 SaHpiHsIndicatorStateT *state ) {
++@@ -3446,7 +3446,7 @@ static SaErrorT NewSimulatorGetIndicator
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorSetIndicatorState( void *, SaHpiResourceIdT,
++-                                                SaHpiHsIndicatorStateT ) __attribute__((used));
+++                                                SaHpiHsIndicatorStateT ) __asm__("NewSimulatorSetIndicatorState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetIndicatorState( void *hnd, SaHpiResourceIdT id,
++                                                 SaHpiHsIndicatorStateT state ) {
++@@ -3479,7 +3479,7 @@ static SaErrorT NewSimulatorSetIndicator
++  **/
++ static SaErrorT NewSimulatorControlParm( void *,
++                                           SaHpiResourceIdT,
++-                                          SaHpiParmActionT ) __attribute__((used));
+++                                          SaHpiParmActionT ) __asm__("NewSimulatorControlParm") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorControlParm( void *hnd,
++                                           SaHpiResourceIdT id,
++@@ -3512,7 +3512,7 @@ static SaErrorT NewSimulatorControlParm(
++  * @return HPI error code
++  **/
++ static SaErrorT NewSimulatorGetResetState( void *, SaHpiResourceIdT,
++-                                            SaHpiResetActionT * ) __attribute__((used));
+++                                            SaHpiResetActionT * ) __asm__("NewSimulatorGetResetState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorGetResetState( void *hnd, SaHpiResourceIdT id,
++                                             SaHpiResetActionT *act ) {
++@@ -3545,7 +3545,7 @@ static SaErrorT NewSimulatorGetResetStat
++  **/
++ static SaErrorT NewSimulatorSetResetState( void *,
++                                             SaHpiResourceIdT,
++-                                            SaHpiResetActionT ) __attribute__((used));
+++                                            SaHpiResetActionT ) __asm__("NewSimulatorSetResetState") __attribute__((used));
++ 
++ static SaErrorT NewSimulatorSetResetState( void *hnd,
++                                             SaHpiResourceIdT id,
++Index: openhpi-3.6.1/plugins/dynamic_simulator/new_sim_file.cpp
++===================================================================
++--- openhpi-3.6.1.orig/plugins/dynamic_simulator/new_sim_file.cpp
+++++ openhpi-3.6.1/plugins/dynamic_simulator/new_sim_file.cpp
++@@ -44,9 +44,9 @@
++ ///< Global skip characters for oh_scanner_config
++ static gchar skip_characters[] = " \t\n";  
++ ///< Global identifier_first for oh_scanner_config
++-static gchar identifier_first[] = G_CSET_a_2_z"_/."G_CSET_A_2_Z; 
+++static gchar identifier_first[] = G_CSET_a_2_z "_/." G_CSET_A_2_Z;
++ ///< Global identifier_nth for oh_scanner_config
++-static gchar identifier_nth[] = G_CSET_a_2_z"_-0123456789/."G_CSET_A_2_Z;
+++static gchar identifier_nth[] = G_CSET_a_2_z "_-0123456789/." G_CSET_A_2_Z;
++ ///< Global comment signs for oh_scanner_config
++ static gchar comment_single[] = "#\n";
++ 
++Index: openhpi-3.6.1/plugins/ipmidirect/ipmi.cpp
++===================================================================
++--- openhpi-3.6.1.orig/plugins/ipmidirect/ipmi.cpp
+++++ openhpi-3.6.1/plugins/ipmidirect/ipmi.cpp
++@@ -279,7 +279,7 @@ extern "C" {
++ // ABI Interface functions
++ 
++ static void *
++-IpmiOpen( GHashTable *, unsigned int, oh_evt_queue * ) __attribute__((used));
+++IpmiOpen( GHashTable *, unsigned int, oh_evt_queue * )  __asm__("IpmiOpen") __attribute__((used));
++ 
++ static void *
++ IpmiOpen( GHashTable *handler_config, unsigned int hid, oh_evt_queue *eventq )
++@@ -388,7 +388,7 @@ IpmiOpen( GHashTable *handler_config, un
++ 
++ 
++ static void
++-IpmiClose( void * ) __attribute__((used));
+++IpmiClose( void * ) __asm__("IpmiClose") __attribute__((used));
++ 
++ static void
++ IpmiClose( void *hnd )
++@@ -436,7 +436,7 @@ IpmiClose( void *hnd )
++ 
++ 
++ static SaErrorT
++-IpmiGetEvent( void * ) __attribute__((used));
+++IpmiGetEvent( void * ) __asm__("IpmiGetEvent") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetEvent( void *hnd )
++@@ -458,7 +458,7 @@ IpmiGetEvent( void *hnd )
++ 
++ 
++ static SaErrorT
++-IpmiDiscoverResources( void * ) __attribute__((used));
+++IpmiDiscoverResources( void * ) __asm__("IpmiDiscoverResources") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiDiscoverResources( void *hnd )
++@@ -479,7 +479,7 @@ IpmiDiscoverResources( void *hnd )
++ 
++ 
++ static SaErrorT
++-IpmiSetResourceTag( void *, SaHpiResourceIdT, SaHpiTextBufferT * ) __attribute__((used));
+++IpmiSetResourceTag( void *, SaHpiResourceIdT, SaHpiTextBufferT * ) __asm__("IpmiSetResourceTag") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetResourceTag( void *hnd, SaHpiResourceIdT id, SaHpiTextBufferT *tag )
++@@ -499,7 +499,7 @@ IpmiSetResourceTag( void *hnd, SaHpiReso
++ 
++ 
++ static SaErrorT
++-IpmiSetResourceSeverity( void *, SaHpiResourceIdT, SaHpiSeverityT ) __attribute__((used));
+++IpmiSetResourceSeverity( void *, SaHpiResourceIdT, SaHpiSeverityT ) __asm__("IpmiSetResourceSeverity") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetResourceSeverity( void *hnd, SaHpiResourceIdT id, SaHpiSeverityT sev )
++@@ -523,7 +523,7 @@ IpmiGetSensorReading( void *,
++                    SaHpiResourceIdT id,
++                    SaHpiSensorNumT num,
++                    SaHpiSensorReadingT *data,
++-                   SaHpiEventStateT *state ) __attribute__((used));
+++                   SaHpiEventStateT *state ) __asm__("IpmiGetSensorReading") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSensorReading( void *hnd,
++@@ -550,7 +550,7 @@ static SaErrorT
++ IpmiGetSensorThresholds( void *hnd,
++                          SaHpiResourceIdT,
++                          SaHpiSensorNumT,
++-                         SaHpiSensorThresholdsT * ) __attribute__((used));
+++                         SaHpiSensorThresholdsT * ) __asm__("IpmiGetSensorThresholds") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSensorThresholds( void                   *hnd,
++@@ -581,7 +581,7 @@ static SaErrorT
++ IpmiSetSensorThresholds( void *,
++                          SaHpiResourceIdT,
++                          SaHpiSensorNumT,
++-                         const SaHpiSensorThresholdsT * ) __attribute__((used));
+++                         const SaHpiSensorThresholdsT * ) __asm__("IpmiSetSensorThresholds") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetSensorThresholds( void *hnd,
++@@ -612,7 +612,7 @@ static SaErrorT
++ IpmiGetSensorEnable( void *,
++                      SaHpiResourceIdT,
++                      SaHpiSensorNumT,
++-                     SaHpiBoolT * ) __attribute__((used));
+++                     SaHpiBoolT * ) __asm__("IpmiGetSensorEnable") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSensorEnable( void *hnd,
++@@ -638,7 +638,7 @@ static SaErrorT
++ IpmiSetSensorEnable( void *,
++                      SaHpiResourceIdT,
++                      SaHpiSensorNumT,
++-                     SaHpiBoolT ) __attribute__((used));
+++                     SaHpiBoolT ) __asm__("IpmiSetSensorEnable") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetSensorEnable( void *hnd,
++@@ -664,7 +664,7 @@ static SaErrorT
++ IpmiGetSensorEventEnables( void *,
++                            SaHpiResourceIdT,
++                            SaHpiSensorNumT,
++-                           SaHpiBoolT * ) __attribute__((used));
+++                           SaHpiBoolT * ) __asm__("IpmiGetSensorEventEnables") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSensorEventEnables( void *hnd,
++@@ -690,7 +690,7 @@ static SaErrorT
++ IpmiSetSensorEventEnables( void *,
++                            SaHpiResourceIdT,
++                            SaHpiSensorNumT,
++-                           SaHpiBoolT ) __attribute__((used));
+++                           SaHpiBoolT ) __asm__("IpmiSetSensorEventEnables") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetSensorEventEnables( void *hnd,
++@@ -717,7 +717,7 @@ IpmiGetSensorEventMasks( void *,
++                            SaHpiResourceIdT,
++                            SaHpiSensorNumT,
++                            SaHpiEventStateT *,
++-                           SaHpiEventStateT * ) __attribute__((used));
+++                           SaHpiEventStateT * ) __asm__("IpmiGetSensorEventMasks") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSensorEventMasks( void *hnd,
++@@ -747,7 +747,7 @@ IpmiSetSensorEventMasks( void *,
++                            SaHpiSensorNumT,
++                            SaHpiSensorEventMaskActionT,
++                            SaHpiEventStateT,
++-                           SaHpiEventStateT ) __attribute__((used));
+++                           SaHpiEventStateT ) __asm__("IpmiSetSensorEventMasks") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetSensorEventMasks( void *hnd,
++@@ -776,7 +776,7 @@ static SaErrorT
++ IpmiGetControlState( void *, SaHpiResourceIdT,
++                      SaHpiCtrlNumT,
++                      SaHpiCtrlModeT *,
++-                     SaHpiCtrlStateT * ) __attribute__((used));
+++                     SaHpiCtrlStateT * ) __asm__("IpmiGetControlState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetControlState( void *hnd, SaHpiResourceIdT id,
++@@ -802,7 +802,7 @@ static SaErrorT
++ IpmiSetControlState( void *, SaHpiResourceIdT,
++                      SaHpiCtrlNumT,
++                      SaHpiCtrlModeT,
++-                     SaHpiCtrlStateT * ) __attribute__((used));
+++                     SaHpiCtrlStateT * ) __asm__("IpmiSetControlState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetControlState( void *hnd, SaHpiResourceIdT id,
++@@ -828,7 +828,7 @@ static SaErrorT
++ IpmiGetIdrInfo( void *,
++                 SaHpiResourceIdT,
++                 SaHpiIdrIdT,
++-                SaHpiIdrInfoT * ) __attribute__((used));
+++                SaHpiIdrInfoT * ) __asm__("IpmiGetIdrInfo") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetIdrInfo( void *hnd,
++@@ -857,7 +857,7 @@ IpmiGetIdrAreaHeader( void *,
++                       SaHpiIdrAreaTypeT,
++                                   SaHpiEntryIdT,
++                       SaHpiEntryIdT *,
++-                      SaHpiIdrAreaHeaderT * ) __attribute__((used));
+++                      SaHpiIdrAreaHeaderT * ) __asm__("IpmiGetIdrAreaHeader") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetIdrAreaHeader( void *hnd,
++@@ -887,7 +887,7 @@ IpmiAddIdrArea( void *,
++                 SaHpiResourceIdT,
++                 SaHpiIdrIdT,
++                 SaHpiIdrAreaTypeT,
++-                            SaHpiEntryIdT * ) __attribute__((used));
+++                            SaHpiEntryIdT * ) __asm__("IpmiAddIdrArea") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiAddIdrArea( void *hnd,
++@@ -914,7 +914,7 @@ static SaErrorT
++ IpmiDelIdrArea( void *,
++                 SaHpiResourceIdT,
++                 SaHpiIdrIdT,
++-                            SaHpiEntryIdT ) __attribute__((used));
+++                            SaHpiEntryIdT ) __asm__("IpmiDelIdrArea") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiDelIdrArea( void *hnd,
++@@ -944,7 +944,7 @@ IpmiGetIdrField( void *,
++                  SaHpiIdrFieldTypeT,
++                  SaHpiEntryIdT,
++                              SaHpiEntryIdT *,
++-                 SaHpiIdrFieldT * ) __attribute__((used));
+++                 SaHpiIdrFieldT * ) __asm__("IpmiGetIdrField") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetIdrField( void *hnd,
++@@ -974,7 +974,7 @@ static SaErrorT
++ IpmiAddIdrField( void *,
++                  SaHpiResourceIdT,
++                  SaHpiIdrIdT,
++-                 SaHpiIdrFieldT * ) __attribute__((used));
+++                 SaHpiIdrFieldT * ) __asm__("IpmiAddIdrField") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiAddIdrField( void *hnd,
++@@ -1000,7 +1000,7 @@ static SaErrorT
++ IpmiSetIdrField( void *,
++                  SaHpiResourceIdT,
++                  SaHpiIdrIdT,
++-                 SaHpiIdrFieldT * ) __attribute__((used));
+++                 SaHpiIdrFieldT * ) __asm__("IpmiSetIdrField") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetIdrField( void *hnd,
++@@ -1027,7 +1027,7 @@ IpmiDelIdrField( void *,
++                  SaHpiResourceIdT,
++                  SaHpiIdrIdT,
++                  SaHpiEntryIdT,
++-                 SaHpiEntryIdT ) __attribute__((used));
+++                 SaHpiEntryIdT ) __asm__("IpmiDelIdrField") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiDelIdrField( void *hnd,
++@@ -1053,7 +1053,7 @@ IpmiDelIdrField( void *hnd,
++ static SaErrorT
++ IpmiGetSelInfo( void *,
++                 SaHpiResourceIdT,
++-                SaHpiEventLogInfoT * ) __attribute__((used));
+++                SaHpiEventLogInfoT * ) __asm__("IpmiGetSelInfo") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSelInfo( void *hnd,
++@@ -1075,7 +1075,7 @@ IpmiGetSelInfo( void *hnd,
++ 
++ 
++ static SaErrorT
++-IpmiSetSelTime( void *, SaHpiResourceIdT, SaHpiTimeT ) __attribute__((used));
+++IpmiSetSelTime( void *, SaHpiResourceIdT, SaHpiTimeT ) __asm__("IpmiSetSelTime") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetSelTime( void *hnd, SaHpiResourceIdT id, SaHpiTimeT t )
++@@ -1096,7 +1096,7 @@ IpmiSetSelTime( void *hnd, SaHpiResource
++ 
++ static SaErrorT
++ IpmiAddSelEntry( void *, SaHpiResourceIdT,
++-                 const SaHpiEventT * ) __attribute__((used));
+++                 const SaHpiEventT * ) __asm__("IpmiAddSelEntry") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiAddSelEntry( void *hnd, SaHpiResourceIdT id,
++@@ -1118,7 +1118,7 @@ IpmiAddSelEntry( void *hnd, SaHpiResourc
++ #ifdef NOTUSED
++ static SaErrorT
++ IpmiDelSelEntry( void *, SaHpiResourceIdT,
++-                 SaHpiEventLogEntryIdT ) __attribute__((used));
+++                 SaHpiEventLogEntryIdT ) __asm__("IpmiDelSelEntry") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiDelSelEntry( void *hnd, SaHpiResourceIdT id,
++@@ -1145,7 +1145,7 @@ IpmiGetSelEntry( void *hnd, SaHpiResourc
++                  SaHpiEventLogEntryIdT *, SaHpiEventLogEntryIdT *,
++                  SaHpiEventLogEntryT *,
++                  SaHpiRdrT *,
++-                 SaHpiRptEntryT * ) __attribute__((used));
+++                 SaHpiRptEntryT * ) __asm__("IpmiGetSelEntry") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetSelEntry( void *hnd, SaHpiResourceIdT id,
++@@ -1170,7 +1170,7 @@ IpmiGetSelEntry( void *hnd, SaHpiResourc
++ 
++ 
++ static SaErrorT
++-IpmiClearSel( void *, SaHpiResourceIdT ) __attribute__((used));
+++IpmiClearSel( void *, SaHpiResourceIdT ) __asm__("IpmiClearSel") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiClearSel( void *hnd, SaHpiResourceIdT id )
++@@ -1190,7 +1190,7 @@ IpmiClearSel( void *hnd, SaHpiResourceId
++ 
++ static SaErrorT
++ IpmiHotswapPolicyCancel( void *, SaHpiResourceIdT,
++-                         SaHpiTimeoutT ) __attribute__((used));
+++                         SaHpiTimeoutT ) __asm__("IpmiHotswapPolicyCancel") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiHotswapPolicyCancel( void *hnd, SaHpiResourceIdT id,
++@@ -1210,7 +1210,7 @@ IpmiHotswapPolicyCancel( void *hnd, SaHp
++ }
++ 
++ static SaErrorT
++-IpmiSetAutoInsertTimeout( void *, SaHpiTimeoutT ) __attribute__((used));
+++IpmiSetAutoInsertTimeout( void *, SaHpiTimeoutT ) __asm__("IpmiSetAutoInsertTimeout") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetAutoInsertTimeout( void *hnd, SaHpiTimeoutT  timeout)
++@@ -1229,7 +1229,7 @@ IpmiSetAutoInsertTimeout( void *hnd, SaH
++ 
++ static SaErrorT
++ IpmiGetAutoExtractTimeout( void *, SaHpiResourceIdT,
++-                           SaHpiTimeoutT * ) __attribute__((used));
+++                           SaHpiTimeoutT * ) __asm__("IpmiGetAutoExtractTimeout") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetAutoExtractTimeout( void *hnd, SaHpiResourceIdT id,
++@@ -1250,7 +1250,7 @@ IpmiGetAutoExtractTimeout( void *hnd, Sa
++ 
++ static SaErrorT
++ IpmiSetAutoExtractTimeout( void *, SaHpiResourceIdT,
++-                           SaHpiTimeoutT ) __attribute__((used));
+++                           SaHpiTimeoutT ) __asm__("IpmiSetAutoExtractTimeout") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetAutoExtractTimeout( void *hnd, SaHpiResourceIdT id,
++@@ -1271,7 +1271,7 @@ IpmiSetAutoExtractTimeout( void *hnd, Sa
++ 
++ static SaErrorT
++ IpmiGetHotswapState( void *, SaHpiResourceIdT ,
++-                     SaHpiHsStateT * ) __attribute__((used));
+++                     SaHpiHsStateT * ) __asm__("IpmiGetHotswapState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetHotswapState( void *hnd, SaHpiResourceIdT id,
++@@ -1293,7 +1293,7 @@ IpmiGetHotswapState( void *hnd, SaHpiRes
++ 
++ static SaErrorT
++ IpmiSetHotswapState( void *, SaHpiResourceIdT,
++-                     SaHpiHsStateT ) __attribute__((used));
+++                     SaHpiHsStateT ) __asm__("IpmiSetHotswapState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetHotswapState( void *hnd, SaHpiResourceIdT id,
++@@ -1315,7 +1315,7 @@ IpmiSetHotswapState( void *hnd, SaHpiRes
++ 
++ static SaErrorT
++ IpmiRequestHotswapAction( void *, SaHpiResourceIdT,
++-                          SaHpiHsActionT ) __attribute__((used));
+++                          SaHpiHsActionT ) __asm__("IpmiRequestHotswapAction") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiRequestHotswapAction( void *hnd, SaHpiResourceIdT id,
++@@ -1337,7 +1337,7 @@ IpmiRequestHotswapAction( void *hnd, SaH
++ 
++ static SaErrorT
++ IpmiGetPowerState( void *, SaHpiResourceIdT,
++-                   SaHpiPowerStateT * ) __attribute__((used));
+++                   SaHpiPowerStateT * ) __asm__("IpmiGetPowerState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetPowerState( void *hnd, SaHpiResourceIdT id,
++@@ -1359,7 +1359,7 @@ IpmiGetPowerState( void *hnd, SaHpiResou
++ 
++ static SaErrorT
++ IpmiSetPowerState( void *, SaHpiResourceIdT,
++-                   SaHpiPowerStateT ) __attribute__((used));
+++                   SaHpiPowerStateT ) __asm__("IpmiSetPowerState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetPowerState( void *hnd, SaHpiResourceIdT id,
++@@ -1381,7 +1381,7 @@ IpmiSetPowerState( void *hnd, SaHpiResou
++ 
++ static SaErrorT
++ IpmiGetIndicatorState( void *, SaHpiResourceIdT,
++-                       SaHpiHsIndicatorStateT * ) __attribute__((used));
+++                       SaHpiHsIndicatorStateT * ) __asm__("IpmiGetIndicatorState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetIndicatorState( void *hnd, SaHpiResourceIdT id,
++@@ -1403,7 +1403,7 @@ IpmiGetIndicatorState( void *hnd, SaHpiR
++ 
++ static SaErrorT
++ IpmiSetIndicatorState( void *, SaHpiResourceIdT,
++-                       SaHpiHsIndicatorStateT ) __attribute__((used));
+++                       SaHpiHsIndicatorStateT ) __asm__("IpmiSetIndicatorState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetIndicatorState( void *hnd, SaHpiResourceIdT id,
++@@ -1426,7 +1426,7 @@ IpmiSetIndicatorState( void *hnd, SaHpiR
++ static SaErrorT
++ IpmiControlParm( void *,
++                  SaHpiResourceIdT,
++-                 SaHpiParmActionT ) __attribute__((used));
+++                 SaHpiParmActionT ) __asm__("IpmiControlParm") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiControlParm( void *hnd,
++@@ -1449,7 +1449,7 @@ IpmiControlParm( void *hnd,
++ 
++ static SaErrorT
++ IpmiGetResetState( void *, SaHpiResourceIdT,
++-                   SaHpiResetActionT * ) __attribute__((used));
+++                   SaHpiResetActionT * ) __asm__("IpmiGetResetState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetResetState( void *hnd, SaHpiResourceIdT id,
++@@ -1472,7 +1472,7 @@ IpmiGetResetState( void *hnd, SaHpiResou
++ static SaErrorT
++ IpmiSetResetState( void *,
++                    SaHpiResourceIdT,
++-                   SaHpiResetActionT ) __attribute__((used));
+++                   SaHpiResetActionT ) __asm__("IpmiSetResetState") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetResetState( void *hnd,
++@@ -1496,7 +1496,7 @@ static SaErrorT
++ IpmiGetWatchdogInfo(void *,
++                     SaHpiResourceIdT,
++                     SaHpiWatchdogNumT,
++-                    SaHpiWatchdogT *) __attribute__((used));
+++                    SaHpiWatchdogT *) __asm__("IpmiGetWatchdogInfo") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiGetWatchdogInfo(void *hnd,
++@@ -1517,7 +1517,7 @@ static SaErrorT
++ IpmiSetWatchdogInfo(void *,
++                     SaHpiResourceIdT,
++                     SaHpiWatchdogNumT,
++-                    SaHpiWatchdogT *) __attribute__((used));
+++                    SaHpiWatchdogT *) __asm__("IpmiSetWatchdogInfo") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiSetWatchdogInfo(void *hnd,
++@@ -1537,7 +1537,7 @@ IpmiSetWatchdogInfo(void *hnd,
++ static SaErrorT
++ IpmiResetWatchdog(void *,
++                   SaHpiResourceIdT,
++-                  SaHpiWatchdogNumT) __attribute__((used));
+++                  SaHpiWatchdogNumT) __asm__("IpmiResetWatchdog") __attribute__((used));
++ 
++ static SaErrorT
++ IpmiResetWatchdog(void *hnd,
++Index: openhpi-3.6.1/plugins/ipmidirect/ipmi_auth.h
++===================================================================
++--- openhpi-3.6.1.orig/plugins/ipmidirect/ipmi_auth.h
+++++ openhpi-3.6.1/plugins/ipmidirect/ipmi_auth.h
++@@ -32,7 +32,7 @@ class cIpmiAuthSg
 + {
-+ 	va_list         args;
-+@@ -655,7 +655,7 @@ glade_command_set_properties_list (GladeProject *project, GList *props)
-+ 
-+ 	multiple = g_list_length (me->sdata) > 1;
-+ 	if (multiple)
-+-		glade_command_push_group (cmd->description);
-++		glade_command_push_group ("%s", cmd->description);
++ public:
++   void *data; /* NULL to terminate. */
++-  int   len;
+++  unsigned int   len;
++ };
 + 
 + 
-+ 	glade_command_check_group (GLADE_COMMAND (me));
-+diff --git a/gladeui/glade-utils.c b/gladeui/glade-utils.c
-+index ae52501..c51ae59 100644
-+--- a/gladeui/glade-utils.c
-++++ b/gladeui/glade-utils.c
-+@@ -197,7 +197,7 @@ glade_utils_get_pspec_from_funcname (const gchar *funcname)
-+  *          selected "OK", True if the @type was GLADE_UI_YES_OR_NO and
-+  *          the user selected "YES"; False otherwise.
-+  */
-+-gint
-++G_GNUC_PRINTF(4, 5) gint
-+ glade_util_ui_message (GtkWidget           *parent, 
-+ 		       GladeUIMessageType   type,
-+ 		       GtkWidget           *widget,
-+@@ -320,7 +320,7 @@ remove_message_timeout (FlashInfo * fi)
-+  *
-+  * Flash a temporary message on the statusbar.
-+  */
-+-void
-++G_GNUC_PRINTF(3, 4) void
-+ glade_util_flash_message (GtkWidget *statusbar, guint context_id, gchar *format, ...)
-+ {
-+ 	va_list args;
-+-- 
-+2.14.1
-+
-diff --git a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
-index fd655366f..c4f600095 100644
---- a/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
-+++ b/meta-oe/recipes-devtools/glade/glade3_3.8.5.bb
-@@ -8,11 +8,11 @@ DEPENDS = "gtk+ gnome-doc-utils gnome-common libxml2 intltool-native"
+diff --git a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+index 16e58dc73..64b2cc38c 100644
+--- a/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
++++ b/meta-networking/recipes-daemons/openhpi/openhpi_3.6.1.bb
+@@ -20,7 +20,7 @@ SECTION = "net"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=e3c772a32386888ccb5ae1c0ba95f1a4"
  
- inherit autotools pkgconfig pythonnative gtk-icon-cache
+-DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs"
++DEPENDS = "net-snmp libxml2 ncurses openssl glib-2.0 popt e2fsprogs autoconf-archive-native"
  
--SRC_URI = " \
--    http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
--    file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
--    file://0002-fix-gcc-6-build.patch \
--"
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade3/3.8/glade3-${PV}.tar.xz \
-+           file://0001-gnome-doc-utils.make-sysrooted-pkg-config.patch \
-+           file://0002-fix-gcc-6-build.patch \
-+           file://0001-Add-G_GNUC_PRINTF-on-functions-with-format-strings.patch \
-+           "
- SRC_URI[md5sum] = "4e4b4f5ee34a03e017e4cef97d796c1f"
- SRC_URI[sha256sum] = "58a5f6e4df4028230ddecc74c564808b7ec4471b1925058e29304f778b6b2735"
- 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://openhpi-netsnmp-cross-compile.patch \
+@@ -36,6 +36,8 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.gz \
+            file://openhpi-use-serial-tests-config-needed-by-ptest.patch \
+            file://openhpi-fix-alignment-issue.patch \
+            file://0001-Fix-build-failures-with-gcc7.patch \
++           file://c++11.patch \
++           file://clang-c++11.patch \
+            \
+            file://openhpi.init \
+            file://openhpid.service \
 -- 
 2.14.1
 
