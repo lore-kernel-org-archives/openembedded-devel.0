@@ -1,21 +1,29 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id C733A78204
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 41882719BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Aug 2017 23:29:43 +0000 (UTC)
-Received: from orsmga002.jf.intel.com ([10.7.209.21])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	27 Aug 2017 16:29:44 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.41,438,1498546800"; d="scan'208";a="128785322"
-Received: from wrath.jf.intel.com ([10.54.70.9])
-	by orsmga002.jf.intel.com with ESMTP; 27 Aug 2017 16:29:43 -0700
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 27 Aug 2017 16:29:42 -0700
-Message-Id: <20170827232942.27867-1-timothy.t.orling@linux.intel.com>
-X-Mailer: git-send-email 2.13.5
-Subject: [meta-perl][PATCH v3] libmodule-build-perl: upgrade to v0.4224
+	Mon, 28 Aug 2017 01:11:50 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7S1BoY6007974
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 27 Aug 2017 18:11:50 -0700 (PDT)
+Received: from [128.224.162.183] (128.224.162.183) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Sun, 27 Aug 2017 18:11:49 -0700
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1503645565-147503-1-git-send-email-hongxu.jia@windriver.com>
+	<CA+chaQchXQomKxrTVbDMyqi38ZQO+89DJXtNu5PLg9xdLLw04g@mail.gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <75ac2045-4b87-d385-967e-4b77cc7c2113@windriver.com>
+Date: Mon, 28 Aug 2017 09:12:36 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQchXQomKxrTVbDMyqi38ZQO+89DJXtNu5PLg9xdLLw04g@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libreport: fix typo of SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,104 +36,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Aug 2017 23:29:44 -0000
+X-List-Received-Date: Mon, 28 Aug 2017 01:11:51 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 8bit
 
-* Use COPYRIGHT excerpt from README for license check
-  - Remains the same perl5 license
-  - LICENSE contents is unhelpful "FULLTEXT"
-* Correct copy-paste error in SUMMARY
-* Author is now LEONT instead of KWILLIAMS
-* Update HOMEPAGE
-* Add interpreter fix from meta-cpan for lib/Module/Build/Base.pm
+On 2017年08月25日 22:58, Martin Jansa wrote:
+> Please change it to git fetcher, github archives can be regenerated 
+> from time to time with different checksums.
+>
 
-Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
+OK, I will update it.
 
----
-Changes in v3:
-* Dropped 'inherit allarch', inappropriate
-* Upstream change in package_rpm.bbclass seems to have fixed
-  the package qa file-rdeps error.
----
- .../libmodule/libmodule-build-perl_0.31.bb         | 27 -----------------
- .../libmodule/libmodule-build-perl_0.4224.bb       | 34 ++++++++++++++++++++++
- 2 files changed, 34 insertions(+), 27 deletions(-)
- delete mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
- create mode 100644 meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
+//Hongxu
 
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
-deleted file mode 100644
-index c0fa06d08..000000000
---- a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.31.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--SUMMARY = "Module::Build::Tiny - A tiny replacement for Module::Build"
--DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
--Makefile.PL file to drive distribution configuration, build, test and \
--installation. Traditionally, Build.PL uses Module::Build as the underlying \
--build system. This module provides a simple, lightweight, drop-in replacement. \
--Whereas Module::Build has over 6,700 lines of code; this module has less than \
--120, yet supports the features needed by most distributions."
--SECTION = "libs"
--
--HOMEPAGE = "http://search.cpan.org/~kwilliams/Module-Build-0.31/"
--
--LICENSE = "Artistic-1.0 | GPL-1.0+"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=43339d8f9d3a956ee9eceb07717ee95e"
--
--SRC_URI = "${CPAN_MIRROR}/authors/id/K/KW/KWILLIAMS/Module-Build-${PV}.tar.gz"
--SRC_URI[md5sum] = "3d4fdffe58f6236253767e5a71edf29b"
--SRC_URI[sha256sum] = "e2f723be8d6c70b4ddbca3b5e32e52e6e98eae8f43e34d7ede87efcb1796bbb5"
--
--S = "${WORKDIR}/Module-Build-${PV}"
--
--inherit cpan_build
--
--do_install () {
--        cpan_build_do_install
--}
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
-new file mode 100644
-index 000000000..d523a7a0c
---- /dev/null
-+++ b/meta-perl/recipes-perl/libmodule/libmodule-build-perl_0.4224.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Module::Build - Build and install Perl modules"
-+DESCRIPTION = "Many Perl distributions use a Build.PL file instead of a \
-+Makefile.PL file to drive distribution configuration, build, test and \
-+installation. Traditionally, Build.PL uses Module::Build as the underlying \
-+build system. This module provides a simple, lightweight, drop-in replacement. \
-+Whereas Module::Build has over 6,700 lines of code; this module has less than \
-+120, yet supports the features needed by most distributions."
-+
-+SECTION = "libs"
-+
-+HOMEPAGE = "https://metacpan.org/release/Module-Build"
-+
-+LICENSE = "Artistic-1.0 | GPL-1.0+"
-+LIC_FILES_CHKSUM = "file://README;beginline=960;endline=965;md5=624c06db56a2af4d70cf9edc29fcae1b"
-+
-+SRC_URI = "${CPAN_MIRROR}/authors/id/L/LE/LEONT/Module-Build-${PV}.tar.gz"
-+SRC_URI[md5sum] = "b74c2f6e84b60aad3a3defd30b6f0f4d"
-+SRC_URI[sha256sum] = "a6ca15d78244a7b50fdbf27f85c85f4035aa799ce7dd018a0d98b358ef7bc782"
-+
-+S = "${WORKDIR}/Module-Build-${PV}"
-+
-+inherit cpan_build
-+
-+# From:
-+# https://github.com/rehsack/meta-cpan/blob/master/recipes-devel/module-build-perl/module-build-perl_0.4216.bb
-+#
-+do_patch_module_build () {
-+    cd ${S}
-+    sed -i -e 's,my $interpreter = $self->{properties}{perl};,my $interpreter = "${bindir}/perl";,g' lib/Module/Build/Base.pm
-+}
-+
-+do_patch[postfuncs] += "do_patch_module_build"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.13.5
+> On Fri, Aug 25, 2017 at 9:19 AM, Hongxu Jia <hongxu.jia@windriver.com 
+> <mailto:hongxu.jia@windriver.com>> wrote:
+>
+>     Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com
+>     <mailto:hongxu.jia@windriver.com>>
+>     ---
+>      meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+>     <http://libreport_2.9.1.bb> | 2 +-
+>      1 file changed, 1 insertion(+), 1 deletion(-)
+>
+>     diff --git a/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+>     <http://libreport_2.9.1.bb>
+>     b/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+>     <http://libreport_2.9.1.bb>
+>     index 459f0f2..ee9a84c 100644
+>     --- a/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+>     <http://libreport_2.9.1.bb>
+>     +++ b/meta-oe/recipes-extended/libreport/libreport_2.9.1.bb
+>     <http://libreport_2.9.1.bb>
+>     @@ -11,7 +11,7 @@ DEPENDS = "xmlrpc-c xmlrpc-c-native
+>     intltool-native \
+>      LIC_FILES_CHKSUM =
+>     "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+>
+>
+>     -SRC_URI =
+>     "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}}-%{PV}.tar.gz
+>     <https://github.com/abrt/$%7BBPN%7D/archive/$%7BPV%7D/$%7BBPN%7D%7D-%%7BPV%7D.tar.gz>"
+>     +SRC_URI =
+>     "https://github.com/abrt/${BPN}/archive/${PV}/${BPN}-${PV}.tar.gz
+>     <https://github.com/abrt/$%7BBPN%7D/archive/$%7BPV%7D/$%7BBPN%7D-$%7BPV%7D.tar.gz>"
+>      SRC_URI += "file://0001-Makefile.am-remove-doc-and-apidoc.patch \
+>                
+>      file://0002-configure.ac-remove-prog-test-of-xmlto-and-asciidoc.patch
+>     \
+>                  file://0003-without-build-plugins.patch \
+>     --
+>     2.8.1
+>
+>
 
 
