@@ -1,43 +1,43 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f53.google.com (mail-vk0-f53.google.com
-	[209.85.213.53])
-	by mail.openembedded.org (Postfix) with ESMTP id B9C9560938;
-	Mon, 28 Aug 2017 08:40:16 +0000 (UTC)
-Received: by mail-vk0-f53.google.com with SMTP id s199so14036479vke.1;
-	Mon, 28 Aug 2017 01:40:18 -0700 (PDT)
+Received: from mail-vk0-f45.google.com (mail-vk0-f45.google.com
+	[209.85.213.45])
+	by mail.openembedded.org (Postfix) with ESMTP id EE83E60938;
+	Mon, 28 Aug 2017 08:41:34 +0000 (UTC)
+Received: by mail-vk0-f45.google.com with SMTP id d124so13997048vkf.3;
+	Mon, 28 Aug 2017 01:41:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:from:date:message-id:subject:to;
-	bh=LjFudcJVSORDaf7uEnhbmfF2ozmL6DUg161kiZaQtOU=;
-	b=AXSAhFOQ4L+VyPU4KC3E0st88n3yHY1+ym2aa37ZoruHwG736JW9OkBYu9L06V+z09
-	wfpwYuqsQhARImHvR7NFrN+DuGqHdswZKfc54Z9Dxbwwrsddbs8PD1m9D4kAkd2yTeOS
-	8v+PU+TYXpvve9PCrGNxY+HBAeNCiWKVeVjhVVQqerH7fYl3sYaru0QzBsZgOLegVx3l
-	0hXH1OU8rRDcFJ2T++Yfp4ceT55vf6r9OuZjQU0OBBLnbe3JPT8j050dWlvUb+ACOk98
-	0s+AgbB/lhURhbtcOpyps6umXy6OMIw4OMMDYcxkxZ6m+F4HpRwG+VDV+cQYkRxp75Fc
-	GXbg==
+	bh=csXEafpteD9fx6J5RhTVJud/Oy3YYA6pAbpNlKIgutg=;
+	b=QT/7np50CsGM05+Zu8OriJt9Jnf21aEq0R/dfiqrO49HnpJlJvremExephZJ53Pkxl
+	gqCCqHDvtCznsRX0tUMVZZivbs8zMF4zUQx31PIyHuhxImsB7Pg9ZXK/zMEGiPEML3nQ
+	g/tZQ92UN8mgb+I+987JZJAWiIPHge6hF3oHBNMlWp4NJgie2mY5rBgiK3//QPzVQ76O
+	wWP7iJj//+pUa8sAJWYBTMdKXZmYUYi8XePTpnrHgexnuWZQqnCajCtTwph7s1XQPNgG
+	kh4IcnRkG3hkOQmJtc7hI+snc/+0Dx4bg6Jlp4VzX7UAiGpUEZjztl2VF3e2jG+PmMMR
+	Qxog==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=LjFudcJVSORDaf7uEnhbmfF2ozmL6DUg161kiZaQtOU=;
-	b=cZmuCBvdkirOgXheuM8k20SFsGtK26b2mZm/yUmoUbE0LR+8XMckVUK9lot73HLzFg
-	oQ5SJlNo7kuiQ+df1c5+iZRH/QXO0/uInRm+BLAl+c14r0RrSfSGNRfKwll3Xql5FC57
-	a16722uZhNVxq7hfKeh7SkQvKgtuJkAasQDO6ycV+GhLZiFGxcUeRrlVIN9kBe5lV3ht
-	KTibHuubn/lVkvYSzAhw2eNd6qwwA8S7brNrndeyC7OQhbYmsseTVtz+W80eFQLW14C0
-	vfgepJcc3y+l1OTTb0nJnNIMZhB2iuXS/LQ3tc5FCc1tMvk7z9topgWDkDkMTfKUNhRj
-	F7Rw==
-X-Gm-Message-State: AHYfb5gEILKFNd5lZs0Q8qhKrwkPCsQIb8JFgd2XktuomxVRvCbAkzmo
-	ZvjBUVM9jIuRJgx0GrwFdwXvymPUHXpF
-X-Received: by 10.31.140.77 with SMTP id o74mr3464154vkd.1.1503909614273; Mon,
-	28 Aug 2017 01:40:14 -0700 (PDT)
+	bh=csXEafpteD9fx6J5RhTVJud/Oy3YYA6pAbpNlKIgutg=;
+	b=PuuCPmlZvNjcPHgfY5xmb3aJyoidVbpiyB0+xM7sZHm2u4w3KrEfaGlXoTjx8GYiPZ
+	zHluREfRAkVbe4SCFMlizMfzymokLLjeLqLtwcony9VLU+IWGTqvn8V4dhV5VW3nf5AC
+	lawBbBznsE9h0Ejms5dvD2IskoG5iGquSz0tmkzwdvwHequk5m/u7KrVFrHD/JT5sqTU
+	6PSRvxb1Xyv1xmlZjc7KksoP206bT4IRKaOsfLA7z6WJSVQtsnNo/LwskZOe6z5C0D7T
+	KnGf9yjG6K0Hb9rIipHEbM0gV2t+n01+/daDqUUyWSsNT+v95ftsiZ2f1GH07Bflsv3U
+	2zTg==
+X-Gm-Message-State: AHYfb5jb6emIiNaSJ8R6zOSC2Nip3vzt1M3TeTKrggyImk0Ivh4DuGs4
+	Z15oOOg3HV43AVH0un5ESVVo2uVKiimY
+X-Received: by 10.31.85.130 with SMTP id j124mr3687355vkb.177.1503909695185;
+	Mon, 28 Aug 2017 01:41:35 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 01:40:13 -0700 (PDT)
+Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 01:41:34 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 28 Aug 2017 10:40:13 +0200
-Message-ID: <CA+chaQcTA-CFVHj0ycyyc2JCn5O1cLeMGrrFB=VLkL2mipvcvw@mail.gmail.com>
+Date: Mon, 28 Aug 2017 10:41:34 +0200
+Message-ID: <CA+chaQc4gA_jXfFmxomw90FrXGN45f54rc9Xm+Z6uAjGUO4RUQ@mail.gmail.com>
 To: Patches and discussions about the oe-core layer
 	<openembedded-core@lists.openembedded.org>, 
 	openembedded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: State of bitbake world, Failed tasks 2017-08-26
+Subject: State of bitbake world, Failed tasks 2017-08-27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,10 +50,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 08:40:17 -0000
+X-List-Received-Date: Mon, 28 Aug 2017 08:41:35 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-This one is with qt 5.9.0
+And this one with Qt 5.9.2
 
 http://www.openembedded.org/wiki/Bitbake_World_Status
 
@@ -68,14 +68,14 @@ http://www.openembedded.org/wiki/Bitbake_World_Status
 ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags
 ||compile-host-path ||
 |-
-||2017-08-26 ||9 ||10 ||7 ||4 ||0 ||0 ||3 ||0 ||2 ||232 ||2 ||0 ||0 ||0 ||0
+||2017-08-27 ||9 ||10 ||7 ||4 ||0 ||0 ||1 ||0 ||2 ||6 ||4 ||0 ||0 ||0 ||0
 ||0 ||0 ||0 ||
 |}
 
-== Failed tasks 2017-08-26 ==
+== Failed tasks 2017-08-27 ==
 
 INFO: jenkins-job.sh-1.8.27 Complete log available at
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170827_223414.log
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170827_223348.log
 
 === common (6) ===
     * meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:do_compile
@@ -120,20 +120,21 @@ do_compile
 {| class=wikitable
 |-
 || qemuarm || 9 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170827_015147.log/
-|| http://errors.yoctoproject.org/Errors/Build/45890/
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170827_055148.log/
+|| http://errors.yoctoproject.org/Errors/Build/45909/
 |-
 || qemux86 || 10 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170826_080521.log/
-|| http://errors.yoctoproject.org/Errors/Build/45886/
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170827_051335.log/
+|| http://errors.yoctoproject.org/Errors/Build/45908/
 |-
 || qemux86_64 || 7 ||
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170826_231146.log/
-|| http://errors.yoctoproject.org/Errors/Build/45891/
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170827_092754.log/
+|| http://errors.yoctoproject.org/Errors/Build/45910/
 |}
 
 === PNBLACKLISTs (1) ===
-=== QA issues (239) ===
+
+=== QA issues (13) ===
 {| class=wikitable
 !| Count ||Issue
 |-
@@ -157,13 +158,13 @@ http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.201708
 |-
 ||0 ||unknown-configure-option
 |-
-||232 ||version-going-backwards
+||1 ||textrel
 |-
 ||2 ||file-rdeps
 |-
-||2 ||host-user-contaminated
+||4 ||host-user-contaminated
 |-
-||3 ||textrel
+||6 ||version-going-backwards
 |}
 
 
@@ -171,7 +172,7 @@ http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.201708
 === Incorrect PACKAGE_ARCH or sstate signatures (4) ===
 
 Complete log:
-http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170827_050201.log/
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170827_093850.log/
     * ERROR: 4 issues were found in these recipes: android-tools
 libmodule-build-perl
 
@@ -186,19 +187,19 @@ signatures.qemuarm.do_package_write_ipk.sigdata.log
     * ERROR: android-tools different signature for task
 do_package_write_ipk.sigdata between qemux86copy and qemux86
     * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503846121/signatures.qemux86.do_package_write_ipk.sigdata.log
+/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503862730/signatures.qemux86.do_package_write_ipk.sigdata.log
     * ERROR: libmodule-build-perl different signature for task
 do_configure.sigdata between qemux86copy and qemuarm
     * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503846121/signatures.qemuarm.do_configure.sigdata.log
+/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503862730/signatures.qemuarm.do_configure.sigdata.log
     * ERROR: libmodule-build-perl different signature for task
 do_populate_sysroot.sigdata between qemux86copy and qemuarm
     * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503846121/signatures.qemuarm.do_populate_sysroot.sigdata.log
+/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503862730/signatures.qemuarm.do_populate_sysroot.sigdata.log
     * ERROR: libmodule-build-perl different signature for task
 do_package_write_ipk.sigdata between qemux86copy and qemuarm
     * ERROR: 1 errors found in
-/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503846121/signatures.qemuarm.do_package_write_ipk.sigdata.log
+/home/jenkins/oe/world/shr-core/tmp-glibc/sstate-diff/1503862730/signatures.qemuarm.do_package_write_ipk.sigdata.log
     * ERROR: 4 issues were found in these recipes: android-tools
 libmodule-build-perl
 
@@ -236,13 +237,7 @@ count: 0 issue: already-stripped
 count: 0 issue: libdir
 
 
-count: 3 issue: textrel
-chromium-54.0.2810.2: ELF binary
-'/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
-has relocations in .text [textrel]
-chromium-wayland-53.0.2785.143: ELF binary
-'/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
-has relocations in .text [textrel]
+count: 1 issue: textrel
 corosync-2.4.2: ELF binary
 '/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-split/corosync/usr/sbin/corosync'
 has relocations in .text [textrel]
@@ -260,716 +255,7 @@ corosync requires /tmp/hosttools/bash, but no providers found in
 RDEPENDS_corosync? [file-rdeps]
 
 
-count: 232 issue: version-going-backwards
-abiword-3.0.2: Package version for package abiword-clipart went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-dbg went backwards which
-would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-dev went backwards which
-would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-doc went backwards which
-would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-locale went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-meta went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-applix went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-babelfish went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-bmp went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-clarisworks went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-collab went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-command went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-docbook went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-eml went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-epub went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-freetranslation
-went backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-garble went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-gdict went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-gimp went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-google went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-hancom went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-hrtext went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-iscii went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-kword went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-latex went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-loadbindings went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-mathview went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-mht went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-mif went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-mswrite went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-opendocument went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-openwriter went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-openxml went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-opml went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-paint went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-passepartout went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-pdb went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-pdf went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-presentation went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-s5 went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-sdw went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-t602 went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-urldict went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-wikipedia went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-wml went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-plugin-xslfo went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-staticdev went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-strings went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword-systemprofiles went
-backwards which would break package feeds from (0:3.0.2-r0.6 to
-0:3.0.2-r0.0) [version-going-backwards]
-abiword-3.0.2: Package version for package abiword-templates went backwards
-which would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-abiword-3.0.2: Package version for package abiword went backwards which
-would break package feeds from (0:3.0.2-r0.6 to 0:3.0.2-r0.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package dates-dbg
-went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package dates-dev
-went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package dates-doc
-went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-ca went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-cs went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-da went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-de went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-el went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-en-gb went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-es went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-et went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-eu went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-fi went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-fr went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-gl went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-he went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-hu went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-id went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-it went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-ja went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-ko went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-nb went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-nl went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-pa went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-pl went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-pt-br went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-ro went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-ru went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-sk went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-sl went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-sv went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-th went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-zh-cn went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-locale-zh-tw went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package
-dates-staticdev went backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-dates-0.4.11+gitAUTOINC+c8e30fa321: Package version for package dates went
-backwards which would break package feeds from
-(0:0.4.11+git0+c8e30fa321-r9.9 to 0:0.4.11+git0+c8e30fa321-r9.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-dbg went backwards which would break package
-feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-dev went backwards which would break package
-feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-doc went backwards which would break package
-feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-am went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ar went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ast went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-as went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-az went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-be went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-bg went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-bn-in went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-bn went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-bs went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ca+valencia went backwards which would
-break package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ca went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-cs went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-cy went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-da went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-de went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-dz went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-el went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-en-au went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-en-ca went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-en-gb went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-en+shaw went backwards which would
-break package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-eo went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-es went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-et went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-eu went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-fa went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-fi went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-fr went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ga went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-gl went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-gu went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-he went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-hi went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-hr went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-hu went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-id went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-is went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-it went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ja went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ka went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-kn went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ko went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ku went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-lt went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-lv went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-mai went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-mk went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ml went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-mn went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-mr went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ms went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-nb went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ne went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-nl went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-nn went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-oc went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-or went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-pa went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-pl went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-pt-br went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-pt went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ro went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ru went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-rw went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-si went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sk went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sl went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sq went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sr+latin went backwards which would
-break package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sr went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-sv went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ta went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-te went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-th went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-tr went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-ug went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-uk went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-vi went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-wa went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-xh went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-zh-cn went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-zh-hk went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-locale-zh-tw went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server-staticdev went backwards which would break
-package feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to
-0:3.2.3+git0+a9e4e74ec4-r0.0) [version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package evolution-data-server went backwards which would break package
-feeds from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libcamel-dev went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libcamel went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libebook-dev went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libebook went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libecal-dev went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libecal went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedata-book-dev went backwards which would break package feeds
-from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedata-book went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedata-cal-dev went backwards which would break package feeds
-from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedata-cal went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedataserver-dev went backwards which would break package feeds
-from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedataserverui-dev went backwards which would break package feeds
-from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedataserverui went backwards which would break package feeds
-from (0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
-evolution-data-server-3.2.3+gitAUTOINC+a9e4e74ec4: Package version for
-package libedataserver went backwards which would break package feeds from
-(0:3.2.3+git0+a9e4e74ec4-r0.10 to 0:3.2.3+git0+a9e4e74ec4-r0.0)
-[version-going-backwards]
+count: 6 issue: version-going-backwards
 libmodule-build-perl-0.4224: Package version for package
 libmodule-build-perl-dbg went backwards which would break package feeds
 from (0:0.4224-r0.1 to 0:0.4224-r0.0) [version-going-backwards]
@@ -988,161 +274,25 @@ feeds from (0:0.4224-r0.1 to 0:0.4224-r0.0) [version-going-backwards]
 libmodule-build-perl-0.4224: Package version for package
 libmodule-build-perl went backwards which would break package feeds from
 (0:0.4224-r0.1 to 0:0.4224-r0.0) [version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-dbg went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-dbg went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-dev went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-dev went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-doc went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-doc went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-dev went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-dev went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-staticdev went backwards which would break package
-feeds from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples-staticdev went backwards which would break package
-feeds from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-examples went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-locale went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-locale went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-mkspecs went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-mkspecs went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-plugins-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-plugins-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-plugins went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-plugins went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmldesigner went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmldesigner went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmlplugins-dbg went backwards which would break package
-feeds from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmlplugins-dbg went backwards which would break package
-feeds from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmlplugins went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-qmlplugins went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-staticdev went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-staticdev went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-tools-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-tools-dbg went backwards which would break package feeds
-from (0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-tools went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects-tools went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.2 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
-qtremoteobjects-5.9.0+gitAUTOINC+ae0b101884: Package version for package
-qtremoteobjects went backwards which would break package feeds from
-(0:5.9.0+git0+ae0b101884-r0.3 to 0:5.9.0+git0+ae0b101884-r0.0)
-[version-going-backwards]
 
 
-count: 2 issue: host-user-contaminated
+count: 4 issue: host-user-contaminated
 qt5-creator-3.5.1: qt5-creator:
-/qt5-creator/usr/lib/qt5/qtcreator/plugins/libIos.so is owned by uid 3004,
-which is the same as the user running bitbake. This may be due to host
-contamination [host-user-contaminated]
-qt5-creator-3.5.1: qt5-creator:
-/qt5-creator/usr/lib/qt5/qtcreator/plugins/libQmlProjectManager.so is owned
-by uid 3004, which is the same as the user running bitbake. This may be due
-to host contamination [host-user-contaminated]
+/qt5-creator/usr/lib/qt5/qtcreator/plugins/libClearCase.so is owned by uid
+3004, which is the same as the user running bitbake. This may be due to
+host contamination [host-user-contaminated]
+qtbase-5.9.2+gitAUTOINC+73573fce29: qtbase:
+/qtbase-mkspecs/usr/lib/qt5/mkspecs/modules/qt_lib_network_private.pri is
+owned by uid 3004, which is the same as the user running bitbake. This may
+be due to host contamination [host-user-contaminated]
+qtbase-5.9.2+gitAUTOINC+73573fce29: qtbase:
+/qtbase-plugins/usr/lib/qt5/plugins/generic/libqevdevmouseplugin.so is
+owned by uid 3004, which is the same as the user running bitbake. This may
+be due to host contamination [host-user-contaminated]
+qtquick1-5.9.2+gitAUTOINC+9bf0edd9bd: qtquick1:
+/qtquick1-qmlplugins/usr/lib/qt5/imports/Qt/labs/particles/plugins.qmltypes
+is owned by uid 3004, which is the same as the user running bitbake. This
+may be due to host contamination [host-user-contaminated]
 
 
 count: 0 issue: installed-vs-shipped
