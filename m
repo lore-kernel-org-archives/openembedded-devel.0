@@ -1,24 +1,81 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 54C1077E76
+Return-Path: <woutervdstoel@outlook.com>
+X-Greylist: delayed 28829 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 29 Aug 2017 05:36:22 UTC
+Received: from EUR02-HE1-obe.outbound.protection.outlook.com
+	(mail-oln040092068055.outbound.protection.outlook.com [40.92.68.55])
+	by mail.openembedded.org (Postfix) with ESMTP id 9EC9D78038
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 05:19:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T5J7gK017772
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 22:19:08 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Mon, 28 Aug 2017 22:19:07 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Aug 2017 01:19:06 -0400
-Message-ID: <1503983946-187275-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Tue, 29 Aug 2017 05:36:22 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=outlook.com;
+	s=selector1; h=From:Date:Subject:Message-ID:Content-Type:MIME-Version; 
+	bh=z9CTKzXFi9JHTWohGNppB9cGqXli6kgnGxZnozwdL/0=;
+	b=XIt14tCC+wPBw77mp9rVYk8B3Q7iZX+maGdGcxwSuvpj8rZevIwaLNnYtVSzJ2wCJFFMx7uPBNS2WLtQ08Avej9v3f+T6Y6zjScZHDiICU8pCsLc0ITiT9mjt2Ex3G22Qr1LVdKOr4mQ6S/VnvmLe8C4WtEjwLm3YDRk3PV5qRJEWYeRUvigJzA+kXuAIST0zJjeA2EAzmTO2SpO6ctDo9KMiHncgWh2bMtL94lTKCNDduAzLcAilqlcy4g8xaJj/F0k3irBecCcO+iOuuh1KTOYXfs5AtzXQ6alWPzpPu2Hll99VIkG/afcdN0nAASj7DZqoh4W7e9yy4DcGm6W8g==
+Received: from HE1EUR02FT056.eop-EUR02.prod.protection.outlook.com
+	(10.152.10.60) by HE1EUR02HT060.eop-EUR02.prod.protection.outlook.com
+	(10.152.11.252) with Microsoft SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P384) id 15.1.1341.15;
+	Mon, 28 Aug 2017 07:03:01 +0000
+Received: from AM4PR08MB0738.eurprd08.prod.outlook.com (10.152.10.55) by
+	HE1EUR02FT056.mail.protection.outlook.com (10.152.11.21) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256_P256) id
+	15.1.1341.15 via Frontend Transport; Mon, 28 Aug 2017 07:03:01 +0000
+Received: from AM4PR08MB0738.eurprd08.prod.outlook.com
+	([fe80::29d4:84d7:f697:1813]) by
+	AM4PR08MB0738.eurprd08.prod.outlook.com
+	([fe80::29d4:84d7:f697:1813%13]) with mapi id 15.01.1385.013;
+	Mon, 28 Aug 2017 07:03:01 +0000
+From: Wouter van der stoel <woutervdstoel@outlook.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [meta-oe][PATCH v2] mpv: upgrade to version 0.26.0
+Thread-Index: AQHTH8rk/3Lyerib90CiUeEUGhvLpg==
+Date: Mon, 28 Aug 2017 07:03:01 +0000
+Message-ID: <AM4PR08MB073846C7CD0E519AB521D687A19E0@AM4PR08MB0738.eurprd08.prod.outlook.com>
+Accept-Language: nl-NL, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: lists.openembedded.org; dkim=none (message not signed)
+	header.d=none; lists.openembedded.org;
+	dmarc=none action=none header.from=outlook.com;
+x-incomingtopheadermarker: OriginalChecksum:6EDE1976EE78E73987D3C2B6C8F7DB2608D4C4A0A58C4FA6CA7F04F8DCDA51F5;
+	UpperCasedChecksum:3FEB22E0B783DE1EEE5252612273D12A5E96FA5EA3CFA77E0B298A9E79541801;
+	SizeAsReceived:6947; Count:44
+x-ms-exchange-messagesentrepresentingtype: 1
+x-tmn: [eeDdygSNvB7nvV3RypfQSBzYW6Mgk4Bz]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; HE1EUR02HT060;
+	6:CuvHjciVyzfyYnNGOhCt1DGxSwE67gONDDMcK5FW2YKsSX/RLoMsxiImXNiD8WpX090k2/pFDXadsvI1jiZBq8sq2BnuNwi2Q10v/eFk8VYxaXdHEzokDZ5f6JqfL9cEI4rVSYPnbIEeZH1xw6l7G5LoEge+oiE2bEl+ppTt4frYFNcthhMdZwtPP7naOLwgqHP0HxEdVQ8fbWUKgHERu0gwvkBNpsyjehEEXdkN2lasyXY7V1ZZYlZOuhjXPQdfB9k8qojYeCJd1SF2o4b5rOImvK7EUpP1YAp5HJngu0vLDyfXzKqHM+UUBbWcTpA/4imxjCx2R/FtU9Qb+guQIA==;
+	5:GMLOeuejFz+BsdE7If5oMgbXPZB7R0VUd+PipN0J9Jm1nnE2NrdHXAQpyTFparCk8edg9zGBOwO14Lc7FV/mSAnKCQOIH9+B4WZqszKQuFJeu3g9iRllNKp2BnsnNeEVH50Px35hqkg10PqQHYbnWQ==;
+	24:+ZcNmype4y5bP8jBL168igvW4wg/rEAZgwCQVtYI+F6G6p3Cfx5shk0FV6O2Cv2ykSQg4UPHzP1IVL4RFMVnJzfbM79XiwokoBxhmHV+AoQ=;
+	7:/WtVOBgumB7c246rVShl37yH5CvKnDRa2mK1XG1Q95vDrOunHN7BtEcmAT9CNDmPmAAFS2GxvZE4RYkyd9ZJLYw+9s2leOilBUOnmKeSJQlxNT4ITDe0gFU5BxMygpgdLmXkFQxJNfOOmyqv+5U7UwcuxxVNdfZ1RhPeMtwHj9RYRbV6q6/mtNyRb9lEBoYYsGBYUNSJRr4LIgw6PG2mFdJUQdNhhlbb/NUGmFz/YA0=
+x-incomingheadercount: 44
+x-eopattributedmessage: 0
+x-forefront-antispam-report: EFV:NLI; SFV:NSPM; SFS:(7070007)(98901004);
+	DIR:OUT; SFP:1901; SCL:1; SRVR:HE1EUR02HT060;
+	H:AM4PR08MB0738.eurprd08.prod.outlook.com; FPR:; SPF:None;
+	LANG:en; 
+x-ms-office365-filtering-correlation-id: 3543d9fd-7656-486d-abf7-08d4ede2d25a
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(300000500095)(300135000095)(300000501095)(300135300095)(300000502095)(300135100095)(22001)(300000503095)(300135400095)(201702061074)(5061506573)(5061507331)(1603103135)(2017031320274)(2017031324274)(2017031323274)(2017031322404)(1603101448)(1601125374)(1701031045)(300000504095)(300135200095)(300000505095)(300135600095)(300000506095)(300135500095);
+	SRVR:HE1EUR02HT060; 
+x-ms-traffictypediagnostic: HE1EUR02HT060:
+x-exchange-antispam-report-test: UriScan:(166708455590820)(189930954265078);
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(444000031);
+	SRVR:HE1EUR02HT060; BCL:0; PCL:0;
+	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
+	SRVR:HE1EUR02HT060; 
+x-forefront-prvs: 0413C9F1ED
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] squid: upgrade to 3.5.27
+X-OriginatorOrg: outlook.com
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Aug 2017 07:03:01.2850 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Internet
+X-MS-Exchange-CrossTenant-id: 84df9e7f-e9f6-40af-b435-aaaaaaaaaaaa
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1EUR02HT060
+Subject: [meta-oe][PATCH v2] mpv: upgrade to version 0.26.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,172 +88,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 05:19:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 29 Aug 2017 05:36:23 -0000
+Content-Language: nl-NL
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Updates the mpv package to version 0.26.0.
+The patch that was previously necessary related to OpenGL has been added up=
+stream.
+
+Signed-off-by: Wouter van der Stoel <woutervdstoel@outlook.com>
 ---
- .../0001-Before-use-rpc-rpc.h-check-it-first.patch | 32 +++++++++++++++
- ...e-noexcept-instead-of-throw-for-C-11-comp.patch | 48 ----------------------
- .../recipes-daemons/squid/files/gcc7-fixes.patch   | 17 --------
- .../squid/{squid_3.5.26.bb => squid_3.5.27.bb}     | 11 +++--
- 4 files changed, 39 insertions(+), 69 deletions(-)
- create mode 100644 meta-networking/recipes-daemons/squid/files/0001-Before-use-rpc-rpc.h-check-it-first.patch
- delete mode 100644 meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
- delete mode 100644 meta-networking/recipes-daemons/squid/files/gcc7-fixes.patch
- rename meta-networking/recipes-daemons/squid/{squid_3.5.26.bb => squid_3.5.27.bb} (93%)
-
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-Before-use-rpc-rpc.h-check-it-first.patch b/meta-networking/recipes-daemons/squid/files/0001-Before-use-rpc-rpc.h-check-it-first.patch
-new file mode 100644
-index 0000000..485b18c
---- /dev/null
-+++ b/meta-networking/recipes-daemons/squid/files/0001-Before-use-rpc-rpc.h-check-it-first.patch
-@@ -0,0 +1,32 @@
-+From b5de7a89f31a17d37beb5d22857bbf829dbfb367 Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Mon, 28 Aug 2017 23:17:04 -0400
-+Subject: [PATCH] Before use rpc/rpc.h, check it first.
-+
-+When generate configure using *.m4, the ../NIS/required.m4, we should
-+check the rpc/rpc.h first before using it.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ helpers/basic_auth/NIS/required.m4 | 3 ++-
-+ 1 file changed, 2 insertions(+), 1 deletion(-)
-+
-+diff --git a/helpers/basic_auth/NIS/required.m4 b/helpers/basic_auth/NIS/required.m4
-+index fdb1360..ec4fe69 100755
-+--- a/helpers/basic_auth/NIS/required.m4
-++++ b/helpers/basic_auth/NIS/required.m4
-+@@ -6,7 +6,8 @@
-+ ##
-+ 
-+ BUILD_HELPER="NIS"
-+-AC_CHECK_HEADERS([sys/types.h rpc/rpc.h rpcsvc/ypclnt.h rpcsvc/yp_prot.h crypt.h],[],[BUILD_HELPER=""],AC_INCLUDES_DEFAULT([
-++AC_CHECK_HEADERS([rpc/rpc.h])
-++AC_CHECK_HEADERS([sys/types.h rpcsvc/ypclnt.h rpcsvc/yp_prot.h crypt.h],[],[BUILD_HELPER=""],AC_INCLUDES_DEFAULT([
-+ #if HAVE_RPC_RPC_H
-+ #include <rpc/rpc.h>
-+ #endif
-+-- 
-+2.8.1
-+
-diff --git a/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch b/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
-deleted file mode 100644
-index 48674c3..0000000
---- a/meta-networking/recipes-daemons/squid/files/0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch
-+++ /dev/null
-@@ -1,48 +0,0 @@
--From f9150a0dc092ab2cbd47ee428436b747dce323a9 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sun, 23 Apr 2017 10:28:28 -0700
--Subject: [PATCH] SquidNew: use noexcept instead of throw for C++11 compilers
--
--Fixes errors with gcc7 which is more pedantic about c++11
--conformance regarding deprecated features
--
--include/SquidNew.h:21:51: error: dynamic exception specifications are deprecated in C++11
--_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
--                                                       ^~~~~
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
+ .../mpv/0001-Fix-build-with-HAVE_GL-0.patch        | 39 ------------------=
 ----
-- include/SquidNew.h | 8 ++++----
-- 1 file changed, 4 insertions(+), 4 deletions(-)
--
--diff --git a/include/SquidNew.h b/include/SquidNew.h
--index 39fcee0..c960347 100644
----- a/include/SquidNew.h
--+++ b/include/SquidNew.h
--@@ -18,19 +18,19 @@
--  */
-- #include <new>
-- 
---_SQUID_EXTERNNEW_ void *operator new(size_t size) throw (std::bad_alloc)
--+_SQUID_EXTERNNEW_ void *operator new(size_t size) noexcept(false)
-- {
--     return xmalloc(size);
-- }
---_SQUID_EXTERNNEW_ void operator delete (void *address) throw()
--+_SQUID_EXTERNNEW_ void operator delete (void *address) noexcept(true)
-- {
--     xfree(address);
-- }
---_SQUID_EXTERNNEW_ void *operator new[] (size_t size) throw (std::bad_alloc)
--+_SQUID_EXTERNNEW_ void *operator new[] (size_t size) noexcept(false)
-- {
--     return xmalloc(size);
-- }
---_SQUID_EXTERNNEW_ void operator delete[] (void *address) throw()
--+_SQUID_EXTERNNEW_ void operator delete[] (void *address) noexcept(true)
-- {
--     xfree(address);
-- }
---- 
--2.12.2
--
-diff --git a/meta-networking/recipes-daemons/squid/files/gcc7-fixes.patch b/meta-networking/recipes-daemons/squid/files/gcc7-fixes.patch
+ .../mplayer/{mpv_0.24.0.bb =3D> mpv_0.26.0.bb}       |  5 ++-
+ 2 files changed, 2 insertions(+), 42 deletions(-)
+ delete mode 100644 meta-oe/recipes-multimedia/mplayer/mpv/0001-Fix-build-w=
+ith-HAVE_GL-0.patch
+ rename meta-oe/recipes-multimedia/mplayer/{mpv_0.24.0.bb =3D> mpv_0.26.0.b=
+b} (92%)
+
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv/0001-Fix-build-with-HAV=
+E_GL-0.patch b/meta-oe/recipes-multimedia/mplayer/mpv/0001-Fix-build-with-H=
+AVE_GL-0.patch
 deleted file mode 100644
-index cc1ea78..0000000
---- a/meta-networking/recipes-daemons/squid/files/gcc7-fixes.patch
+index ab2b534..0000000
+--- a/meta-oe/recipes-multimedia/mplayer/mpv/0001-Fix-build-with-HAVE_GL-0.=
+patch
 +++ /dev/null
-@@ -1,17 +0,0 @@
--../../squid-3.5.26/src/DiskIO/DiskThreads/aiops.cc: In function 'void squidaio_init()':                                                              ../../squid-3.5.26/src/DiskIO/DiskThreads/DiskThreads.h:30:50: error: '*' in boolean context, suggest '&&' instead [-Werror=int-in-bool-context]      #define NUMTHREADS (Config.cacheSwap.n_configured*16)
+@@ -1,39 +0,0 @@
+-From 212f6c8206bd4dcc7d8970c5f1632823ae4e783a Mon Sep 17 00:00:00 2001
+-From: Michael Forney <mforney@mforney.org>
+-Date: Sun, 12 Feb 2017 23:01:21 -0800
+-Subject: [PATCH] Fix build with HAVE_GL=3D=3D0
 -
+-video/out/opengl/hwdec.h includes video/out/opengl/common.h, which tries
+-to include opengl headers.
 -
 -Upstream-Status: Backport
--Index: squid-3.5.26/src/DiskIO/DiskThreads/aiops.cc
--===================================================================
----- squid-3.5.26.orig/src/DiskIO/DiskThreads/aiops.cc
--+++ squid-3.5.26/src/DiskIO/DiskThreads/aiops.cc
--@@ -290,7 +290,7 @@ squidaio_init(void)
--     /* Create threads and get them to sit in their wait loop */
--     squidaio_thread_pool = memPoolCreate("aio_thread", sizeof(squidaio_thread_t));
-- 
---    assert(NUMTHREADS);
--+    assert(NUMTHREADS != 0);
-- 
--     for (i = 0; i < NUMTHREADS; ++i) {
--         threadp = (squidaio_thread_t *)squidaio_thread_pool->alloc();
-diff --git a/meta-networking/recipes-daemons/squid/squid_3.5.26.bb b/meta-networking/recipes-daemons/squid/squid_3.5.27.bb
-similarity index 93%
-rename from meta-networking/recipes-daemons/squid/squid_3.5.26.bb
-rename to meta-networking/recipes-daemons/squid/squid_3.5.27.bb
-index a78a091..4626852 100644
---- a/meta-networking/recipes-daemons/squid/squid_3.5.26.bb
-+++ b/meta-networking/recipes-daemons/squid/squid_3.5.27.bb
-@@ -21,13 +21,12 @@ SRC_URI = "http://www.squid-cache.org/Versions/v${MAJ_VER}/${MIN_VER}/${BPN}-${P
-            file://volatiles.03_squid \
-            file://set_sysroot_patch.patch \
-            file://squid-don-t-do-squid-conf-tests-at-build-time.patch \
--           file://0001-SquidNew-use-noexcept-instead-of-throw-for-C-11-comp.patch \
-            file://0001-configure-Check-for-Wno-error-format-truncation-comp.patch \
--           file://gcc7-fixes.patch \
-            file://0001-tools.cc-fixed-unused-result-warning.patch \
-+           file://0001-Before-use-rpc-rpc.h-check-it-first.patch \
-            "
--SRC_URI[md5sum] = "dc1830cd361e077814aa39bcc3691d8b"
--SRC_URI[sha256sum] = "41d8845863dcd026c856508cd1599d417c8947ffd96e86e24085f9893cb8b8c2"
-+SRC_URI[md5sum] = "c17a3ed3a40cd59c23f48b8539dafcd8"
-+SRC_URI[sha256sum] = "467da134eaf0f7962ba5881793d106772fb05fefa4aea7d9569eec0412c52433"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=c492e2d6d32ec5c1aad0e0609a141ce9 \
-                     file://errors/COPYRIGHT;md5=8861130fae91400bcf99b66f133172b3 \
-@@ -68,6 +67,10 @@ do_compile_ptest() {
-     oe_runmake -C ${TESTDIR} buildtest-TESTS
- }
- 
-+do_compile_prepend() {
-+    sed -i 's,$(PERL),/usr/bin/perl,g' `find ${S} -name Makefile.in`
-+}
-+
- do_install_ptest() {
-     cp -rf ${B}/${TESTDIR} ${D}${PTEST_PATH}
-     cp -rf ${S}/${TESTDIR} ${D}${PTEST_PATH}
--- 
-2.8.1
-
+----
+- options/options.c | 5 ++++-
+- 1 file changed, 4 insertions(+), 1 deletion(-)
+-
+-diff --git a/options/options.c b/options/options.c
+-index b711156..0bb36ad 100644
+---- a/options/options.c
+-+++ b/options/options.c
+-@@ -40,7 +40,6 @@
+- #include "stream/stream.h"
+- #include "video/csputils.h"
+- #include "video/hwdec.h"
+--#include "video/out/opengl/hwdec.h"
+- #include "video/image_writer.h"
+- #include "sub/osd.h"
+- #include "audio/filter/af.h"
+-@@ -53,6 +52,10 @@
+- #include "video/out/drm_common.h"
+- #endif
+-=20
+-+#if HAVE_GL
+-+#include "video/out/opengl/hwdec.h"
+-+#endif
+-+
+- extern const char mp_help_text[];
+-=20
+- static void print_version(struct mp_log *log)
+---=20
+-2.9.3
+-
+diff --git a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb b/meta-oe/rec=
+ipes-multimedia/mplayer/mpv_0.26.0.bb
+similarity index 92%
+rename from meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+rename to meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+index b1da217..a154e50 100644
+--- a/meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
++++ b/meta-oe/recipes-multimedia/mplayer/mpv_0.26.0.bb
+@@ -14,10 +14,9 @@ LIC_FILES_CHKSUM =3D "[file://LICENSE;md5=3D91f1cb870c1c=
+c2d31351a4d2595441cb]file://LICENSE;md5=3D91f1cb870c1cc2d31351a4d2595441cb"
+ SRC_URI =3D " \
+     https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz;name=3Dmpv \
+     http://www.freehackers.org/~tnagy/release/waf-1.8.12;name=3Dwaf;subdir=
+=3D${BPN}-${PV} \
+-    file://0001-Fix-build-with-HAVE_GL-0.patch \
+ "
+-SRC_URI[mpv.md5sum] =3D "5c85d1163911e49315a5bf1ca1fae13d"
+-SRC_URI[mpv.sha256sum] =3D "a41854fa0ac35b9c309ad692aaee67c8d4495c3546f11c=
+b4cdd0a124195d3f15"
++SRC_URI[mpv.md5sum] =3D "038d0b660de07ff645ad6a741704ecab"
++SRC_URI[mpv.sha256sum] =3D "daf3ef358d5f260f2269f7caabce27f446c291457ec330=
+077152127133b71b46"
+ SRC_URI[waf.md5sum] =3D "cef4ee82206b1843db082d0b0506bf71"
+ SRC_URI[waf.sha256sum] =3D "01bf2beab2106d1558800c8709bc2c8e496d3da4a2ca34=
+3fe091f22fca60c98b"
+=20
+--=20
+2.7.4=
 
