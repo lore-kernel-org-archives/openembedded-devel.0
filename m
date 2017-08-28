@@ -1,56 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
-	[209.85.213.41])
-	by mail.openembedded.org (Postfix) with ESMTP id D4F6B6612D
+Return-Path: <adrian.ratiu@ni.com>
+Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
+	[148.163.156.75])
+	by mail.openembedded.org (Postfix) with ESMTP id 54F7877D3C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 10:49:34 +0000 (UTC)
-Received: by mail-vk0-f41.google.com with SMTP id s199so359215vke.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 03:49:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=tJLNokvUSOx12BPqrfnl8B5pXBvp2FbkHtvhs+BPxGY=;
-	b=g0PRowxA0UEcXw/adb65VUScDhbGnYad6ll9y688EHKHbZVsFXx/cShkUefrqwXOkc
-	RhvoGfUuRYVi9EXDl0aFSWBr2AuUfj2sb77OAF6EUwjTDRAsrfRJO0FujcuKbuOEqF2y
-	ZpAFS7+AHkfePENVOgb+VCJN1zZxCcCtOMKWfyghsfmzlQpo0bGV8lAKfd3ZMQAxkiA7
-	a+lb11wrIJU6CwDLupFYA8rAIzITTMc6YIF9NhqQwjdFEQ1mEScevVw2kTAIN/j4CfzP
-	u/1r0hUiww9CfRiXCQAWuu33+N1cKpS98dULOq0xfCxd0v5/x6UHs4oAhkPqTMFbfhDh
-	/7RA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=tJLNokvUSOx12BPqrfnl8B5pXBvp2FbkHtvhs+BPxGY=;
-	b=eDUvKGk20fIYlM4COwj4HwJJ6kXCAsm1/NdCv0qK9DWzuRonXp0WYK6Z4ks5ZVhjtL
-	7VYCO/waqKGQse2fIfM6G3jW0MtgXL91PKkaAb4mOUUTHnZ1fr4ShwfzAymXOnu2HMSu
-	6J20lumjDtHG5VGhGogUNQayy0FnpvTzY08FohLgwTmywcq0S5lw/LQUTeLMhkozeXaS
-	1X7Awawvlny4zOXm9CkWPN9xP0bGUj52iXgpGwpSEAtAF/DYwelOVaHmY6B6YEsSSOVR
-	Gz69GoRBH8i8Z6TA2mps8SvFbZwSkZep0YBbAkZ532BhW5JV2E68hMQoeuHBLoK/PKWm
-	nkig==
-X-Gm-Message-State: AHYfb5h27E5Sxu2AA4lg7hhraPqnhGbyKK8tlC/uH3L6JbmX8BM+AyOY
-	wMyGyE1vh2vyo3LhgaxqiVD+gK26Rg==
-X-Received: by 10.31.169.9 with SMTP id s9mr89830vke.90.1503917375861; Mon, 28
-	Aug 2017 03:49:35 -0700 (PDT)
+	Mon, 28 Aug 2017 11:06:09 +0000 (UTC)
+Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
+	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
+	v7SB6BI9019061; Mon, 28 Aug 2017 06:06:11 -0500
+Received: from ni.com (skprod2.natinst.com [130.164.80.23])
+	by mx0a-00010702.pphosted.com with ESMTP id 2cmbwe1fek-1
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=NOT); Mon, 28 Aug 2017 06:06:10 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com
+	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
+	by us-aus-skprod2.natinst.com (8.16.0.21/8.16.0.21) with ESMTPS id
+	v7SB69Iv022595
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
+	Mon, 28 Aug 2017 06:06:09 -0500
+Received: from us-aus-exch4.ni.corp.natinst.com (130.164.68.14) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 28 Aug 2017 06:06:09 -0500
+Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
+	us-aus-exch4.ni.corp.natinst.com (130.164.68.14) with Microsoft SMTP
+	Server (TLS) id 15.0.1156.6; Mon, 28 Aug 2017 06:06:09 -0500
+Received: from adi-pc-linux.natinst.com (130.164.49.7) by
+	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
+	Server
+	id 15.0.1156.6 via Frontend Transport; Mon, 28 Aug 2017 06:06:08 -0500
+From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+To: <martin.jansa@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Aug 2017 14:06:05 +0300
+Message-ID: <20170828110605.5575-1-adrian.ratiu@ni.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 03:49:35 -0700 (PDT)
-In-Reply-To: <CALbNGRSx+DxNwt52kik9+_Adm-2vWaqHMHf2WJMYk=dcHzxZmw@mail.gmail.com>
-References: <1496925018-5300-1-git-send-email-samuli.piippo@qt.io>
-	<91dc3ff5-ad3a-ff4c-163a-4b82bb721422@gmail.com>
-	<CA+chaQe9JFMTrZ8HcOPyVqj7VDvg4N_8VKGRf3X3vDuwC37f8w@mail.gmail.com>
-	<CA+chaQe=8hRDdymjoqn0wRo03XUF0cTdvNiLQTUuvqzLsL2Q2w@mail.gmail.com>
-	<CABXoSoWZBLfn4K2DcHED90U3Bvcj8GRLX9Qa5XL844hZB0+Tzg@mail.gmail.com>
-	<CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
-	<CAHUNapTL=U_t4EwTKkQ8B8A7j+=WKCU64u_MFeioB0yv_VfACA@mail.gmail.com>
-	<20170622193547.GT28053@denix.org>
-	<CAHUNapTJJfR8R7aUvuJDOV+KbcpkRb_dGEFO=k2a9Y+OQye3rA@mail.gmail.com>
-	<CALbNGRSx+DxNwt52kik9+_Adm-2vWaqHMHf2WJMYk=dcHzxZmw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 28 Aug 2017 12:49:35 +0200
-Message-ID: <CA+chaQcSVSm-eGcaRq-=LUQrGs4oDwYrEM5Ahvu6xth83FPO1w@mail.gmail.com>
-To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH v3] Upgrade to Qt 5.9.0
+X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
+	definitions=2017-08-28_06:, , signatures=0
+X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
+	score=30
+	priorityscore=1501 malwarescore=0 suspectscore=2 phishscore=0
+	bulkscore=0
+	spamscore=0 clxscore=1011 lowpriorityscore=0 impostorscore=0
+	adultscore=0
+	classifier=spam adjust=30 reason=mlx scancount=1
+	engine=8.0.1-1707230000 definitions=main-1708280182
+Subject: [meta-oe][PATCH] terminus-font: fix RSS breakage and unblacklist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,63 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 10:49:35 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Aug 2017 11:06:10 -0000
+Content-Type: text/plain
 
-I've fixed the gcc7 + security_flags.inc issues in 5.8.0, that's now merged
-in master.
+Depend on bdftopcf-native to fix errors like:
 
-Then I've rebased Samuli's upgrade to 5.9.0 to build on top of that and
-added another upgrade to 5.9.2. That's currently in master-next branch.
+| perl ./ucstoany.pl ter-u12b.bdf ISO8859 1 uni/x11gr.uni uni/ascii-h.uni uni/win-1252.uni | bdftopcf -o ter-112b.pcf
+| /bin/sh: bdftopcf: command not found
 
-But there is still this issue with qemux86 on x86_64 builders, so I'm not
-going to merge this all until it's fixed in qtwebengine's chromium.
-https://bugreports.qt.io/browse/QTBUG-59504
-maybe we could just revert:
-https://codereview.qt-project.org/#/c/189044/2/src/buildtools/configure_tar=
-get.pro
-but someone with deeper mksnapshot knowledge should confirm if the
-requirement for multilib toolchain isn't valid after all, some of the
-comments make some sense to me, so maybe the meta-browser fix actually
-breaks mksnapshot, but nobody noticed it as we don't have good tests for it
-in runtime.
+Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+---
+ meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb | 4 +---
+ 1 file changed, 1 insertion(+), 3 deletions(-)
 
-Regards,
+diff --git a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
+index 4c8399d7d..c460fc35c 100644
+--- a/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
++++ b/meta-oe/recipes-graphics/terminus-font/terminus-font_4.38.bb
+@@ -8,7 +8,7 @@ SECTION = "fonts"
+ LICENSE = "OFL-1.1"
+ LIC_FILES_CHKSUM = "file://OFL.TXT;md5=9cadb26f4c5c005618c5ae74f041ec54"
+ 
+-DEPENDS = "hostperl-runtime-native gzip-native"
++DEPENDS = "hostperl-runtime-native gzip-native bdftopcf-native"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BPN}-${PV}.tar.gz"
+ SRC_URI[md5sum] = "a8e792fe6e84c86ed2b6ed3e2a12ba66"
+@@ -43,5 +43,3 @@ PACKAGES += "${PN}-consolefonts ${PN}-consoletrans ${PN}-pcf"
+ FILES_${PN}-consolefonts = "${datadir}/consolefonts"
+ FILES_${PN}-consoletrans = "${datadir}/consoletrans"
+ FILES_${PN}-pcf = "${datadir}/fonts/terminus"
+-
+-PNBLACKLIST[terminus-font] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/130638/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-- 
+2.14.1
 
-On Fri, Jun 30, 2017 at 1:43 PM, Andreas M=C3=BCller <
-schnitzeltony@googlemail.com> wrote:
-
-> On Fri, Jun 23, 2017 at 2:58 AM, Trevor Woerner <twoerner@gmail.com>
-> wrote:
-> > On Thu, Jun 22, 2017 at 3:35 PM, Denys Dmytriyenko <denis@denix.org>
-> wrote:
-> >> On Thu, Jun 15, 2017 at 01:25:12AM -0400, Trevor Woerner wrote:
-> >>> On Fri, Jun 9, 2017 at 4:16 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> >>> > Then why does it work for chromium which used to have the same issu=
-e?
-> >>>
-> >>> https://github.com/OSSystems/meta-browser/blob/master/
-> recipes-browser/chromium/chromium/chromium/m32.patch
-> >>
-> >> Hmm, I'm wondering who comes up with such nonsense upstream that we
-> have to
-> >> patch it out? Is it due to laziness or are there some real limitations=
-?
-> >
-> > Unfortunately genius and insanity are virtually indistinguishable from
-> > each other ;-)
-> > --
-> Is anybody still working on Qt5.9 (or better on 5.9.1 which just
-> arrived)? I want to avoid double efforts fixing qtwebengine/gcc7 on
-> 5.8 or creating patches for 5.9.1 based on this series.
->
-> Andreas
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
