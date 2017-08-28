@@ -1,48 +1,48 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 63A72780B8
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 129A27820E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 16:39:41 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
-	v7SGaFsA008608; Mon, 28 Aug 2017 11:39:42 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2cmjtpantu-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT); Mon, 28 Aug 2017 11:39:42 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod3.natinst.com (8.16.0.21/8.16.0.21) with ESMTPS id
-	v7SGdfAh009306
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-	Mon, 28 Aug 2017 11:39:41 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 28 Aug 2017 11:39:41 -0500
-Received: from adi-pc-linux.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Mon, 28 Aug 2017 11:39:40 -0500
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <martin.jansa@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Mon, 28 Aug 2017 19:39:37 +0300
-Message-ID: <20170828163937.29460-3-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170828163937.29460-1-adrian.ratiu@ni.com>
-References: <20170828163937.29460-1-adrian.ratiu@ni.com>
-MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-08-28_09:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=2 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1015 lowpriorityscore=0 impostorscore=0
-	adultscore=0
-	classifier=spam adjust=30 reason=mlx scancount=1
-	engine=8.0.1-1707230000 definitions=main-1708280265
-Subject: [meta-oe][PATCH 3/3] smbnetfs: unblacklist recipe
+	Mon, 28 Aug 2017 18:13:30 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id d15so1079048qta.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Aug 2017 11:13:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=hIUNuUQVm4TGJeGVJEwJl7ryX93h6T3c8O9JD7g0RSA=;
+	b=uc43AUecjneZbNW+T+1KB1FyuMGHSB+ZcKU9cFNLYRzTeBBOCMKo/uIU4zB3WtZThy
+	poaLLC9hpkd+Xve5zI3BKRsbIz+GPB+Q8TZfRw4jYd2ozrGe1e5Ocm0wORH7lYbsTYCq
+	CGJ4ZRtzm3LYTwxNqBBjyd/EXh/NS2a929qVnH604+d94RfndtTlTV3Eb9VMtMLSrgVC
+	oHcEwVs4gmWvvtuPiFzL0jwikLWCHQFjVxDBP96yKitsgud893cHBiw20c7uDuCOCDID
+	0cGhUv4mYVOlHtyJhXVUed2UvFBPRyd92p2F50i3UcEdbIUemq+zSoa7van+Up0RYXn0
+	oDgQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=hIUNuUQVm4TGJeGVJEwJl7ryX93h6T3c8O9JD7g0RSA=;
+	b=J5WBi+hnKmGQMBNGZaY3zz2+H416lD1YhgGPRobiGMT9mo+8C0QmP7DJ2ZzP+gvq3t
+	lrrupUx2QFJzG9Yr4iqjLW11MI8R+e7huYI20Scgd34Uk2egRC5zEagIKjKha8GnFwEg
+	Pp5+MUq07XT0Vlt4SS6jOZDtcIMttX28FUIJuQxtpAEmaBEHrF3+kHdtKbuQjFQsGBvp
+	posHRjjR4ec8cmUzpZR9kTyg0neGsZv7APQQqm4ejhPKTu7w4C+YnbmAkFkWI6CawCNP
+	W20dxP7sJbZ+sAaA2Csqh5Z6HKHkVc+ynhSExs0Q2bq1Nwsgi5Vlt8sXEO1QaXSHiEEN
+	hgMQ==
+X-Gm-Message-State: AHYfb5ioGhIhcLVrj7xBb87sdjEo9B055vh/U0NCUGBUbDXSbuE8gCD9
+	EuSiI/Ttg9ftXOIl/e4=
+X-Received: by 10.237.62.92 with SMTP id m28mr1977284qtf.235.1503944011883;
+	Mon, 28 Aug 2017 11:13:31 -0700 (PDT)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	d187sm621072qkg.91.2017.08.28.11.13.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 28 Aug 2017 11:13:31 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Aug 2017 15:13:15 -0300
+Message-Id: <20170828181315.8179-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.11.0
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-oe][PATCH] iproute2: Move append to meta-networking layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 16:39:42 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 28 Aug 2017 18:13:31 -0000
 
-All its dependencies have been fixed and it builds correctly.
+meta-openembedded commit eb8994f44a080d9c7fd2c87b6b6935ad0a55eb27 added
+iproute2 append to enable tipc PACKAGECONFIG that install libmnl
+package. libmnl recipe is in meta-networking layer and this layer
+needs to be added to bblayers.conf file to build libmnl. Move
+iproute2 append to meta-networking to allow build iproute2 without add
+meta-networking layer to bblayers.conf.
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb | 2 --
- 1 file changed, 2 deletions(-)
+ .../recipes-connectivity/iproute2/iproute2_%.bbappend                     | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-connectivity/iproute2/iproute2_%.bbappend (100%)
 
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 6995ad3f5..f1420fbed 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -24,5 +24,3 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
- 
- S = "${WORKDIR}/git"
--
--PNBLACKLIST[smbnetfs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend b/meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
+similarity index 100%
+rename from meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+rename to meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
 -- 
-2.14.1
+2.11.0
 
 
