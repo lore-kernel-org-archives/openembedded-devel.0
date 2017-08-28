@@ -1,47 +1,56 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f172.google.com (mail-ua0-f172.google.com
-	[209.85.217.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 6626D60616
+Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id D4F6B6612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 09:05:27 +0000 (UTC)
-Received: by mail-ua0-f172.google.com with SMTP id g11so15299551uah.2
+	Mon, 28 Aug 2017 10:49:34 +0000 (UTC)
+Received: by mail-vk0-f41.google.com with SMTP id s199so359215vke.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 02:05:29 -0700 (PDT)
+	Mon, 28 Aug 2017 03:49:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=GdoSqAVCLLcceljkI6IB8HC6kHMat9EUKVEUpwOXAMA=;
-	b=rZfRkA3AEK2Eg+ijLgxw2zIjvo6/DLZ9JG6VRzvYIBDYHGPRsFaYmQ+hN5Jw4e+8AI
-	k7GD3kJ98CtWkIGfsVA+siEvOv9Fg+Nftqoweef6B/jYFzM05Gj5wKWHVrG6DUCZfCNq
-	tjXb/N0iCj+v0AoxEl5g1/jgE3I0pqKk5eEd2K4yS74jbeoNmKaM0rue3q06mIunGruY
-	gWHUendbXTxNOtur6fHK/AYsOCwbzvFQQPGaIr44/pyh1sLaK0fKyGyG0PHF4brUGk5P
-	VhAzlpb9qIdsozjp/ORyzyfwMgmsaLgBFXNMQx3hQRjNvaWSKhnC7K7smKLmCo9EhzFU
-	JtOw==
+	:cc; bh=tJLNokvUSOx12BPqrfnl8B5pXBvp2FbkHtvhs+BPxGY=;
+	b=g0PRowxA0UEcXw/adb65VUScDhbGnYad6ll9y688EHKHbZVsFXx/cShkUefrqwXOkc
+	RhvoGfUuRYVi9EXDl0aFSWBr2AuUfj2sb77OAF6EUwjTDRAsrfRJO0FujcuKbuOEqF2y
+	ZpAFS7+AHkfePENVOgb+VCJN1zZxCcCtOMKWfyghsfmzlQpo0bGV8lAKfd3ZMQAxkiA7
+	a+lb11wrIJU6CwDLupFYA8rAIzITTMc6YIF9NhqQwjdFEQ1mEScevVw2kTAIN/j4CfzP
+	u/1r0hUiww9CfRiXCQAWuu33+N1cKpS98dULOq0xfCxd0v5/x6UHs4oAhkPqTMFbfhDh
+	/7RA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=GdoSqAVCLLcceljkI6IB8HC6kHMat9EUKVEUpwOXAMA=;
-	b=n0mwnkoDBgdmxWpTSbONsey/e7BXrqisCVwFtu6EkulkKdBXoHbrqu6wxjIxsoWnZL
-	GDCR5NpeyNL+NjhAJby7ef/FpwzFeaBrVMDKSo7+W+6RNVJaVELFxNaVPEg3B37GSv4D
-	p4LWvzATwzTdvDkb5MBnLUekQyDLJlFKSsOUQiWmk62BX00Lo+/zAN60RwX7JWeR8Gc1
-	D2PiCcy7Yn82mwKYqO7pr/SFGrqBFG6OSsFl1qYSefcOFeQLIDsKrBhUeOa0UdkWMwXN
-	GVkqAg2MRmUGn4/MwruyMCRbpKcTeIsSbAwUsDgFXxrAVWQ22kSTOIA4bV53pwv5MIIb
-	Ajpg==
-X-Gm-Message-State: AHYfb5gRSRbOAfWG1eoYPyjH1xYoRiIcrGJRbMC12IMpXQ8pyjAMCzJ6
-	vfIiMHi/h1GM4c0GPTbIij0wjtfi0Q==
-X-Received: by 10.176.16.227 with SMTP id x35mr3726151uab.191.1503911129378;
-	Mon, 28 Aug 2017 02:05:29 -0700 (PDT)
+	bh=tJLNokvUSOx12BPqrfnl8B5pXBvp2FbkHtvhs+BPxGY=;
+	b=eDUvKGk20fIYlM4COwj4HwJJ6kXCAsm1/NdCv0qK9DWzuRonXp0WYK6Z4ks5ZVhjtL
+	7VYCO/waqKGQse2fIfM6G3jW0MtgXL91PKkaAb4mOUUTHnZ1fr4ShwfzAymXOnu2HMSu
+	6J20lumjDtHG5VGhGogUNQayy0FnpvTzY08FohLgwTmywcq0S5lw/LQUTeLMhkozeXaS
+	1X7Awawvlny4zOXm9CkWPN9xP0bGUj52iXgpGwpSEAtAF/DYwelOVaHmY6B6YEsSSOVR
+	Gz69GoRBH8i8Z6TA2mps8SvFbZwSkZep0YBbAkZ532BhW5JV2E68hMQoeuHBLoK/PKWm
+	nkig==
+X-Gm-Message-State: AHYfb5h27E5Sxu2AA4lg7hhraPqnhGbyKK8tlC/uH3L6JbmX8BM+AyOY
+	wMyGyE1vh2vyo3LhgaxqiVD+gK26Rg==
+X-Received: by 10.31.169.9 with SMTP id s9mr89830vke.90.1503917375861; Mon, 28
+	Aug 2017 03:49:35 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 02:05:28 -0700 (PDT)
-In-Reply-To: <20170823015319.8326-1-raj.khem@gmail.com>
-References: <20170823015319.8326-1-raj.khem@gmail.com>
+Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 03:49:35 -0700 (PDT)
+In-Reply-To: <CALbNGRSx+DxNwt52kik9+_Adm-2vWaqHMHf2WJMYk=dcHzxZmw@mail.gmail.com>
+References: <1496925018-5300-1-git-send-email-samuli.piippo@qt.io>
+	<91dc3ff5-ad3a-ff4c-163a-4b82bb721422@gmail.com>
+	<CA+chaQe9JFMTrZ8HcOPyVqj7VDvg4N_8VKGRf3X3vDuwC37f8w@mail.gmail.com>
+	<CA+chaQe=8hRDdymjoqn0wRo03XUF0cTdvNiLQTUuvqzLsL2Q2w@mail.gmail.com>
+	<CABXoSoWZBLfn4K2DcHED90U3Bvcj8GRLX9Qa5XL844hZB0+Tzg@mail.gmail.com>
+	<CA+chaQc8V+tVZ4g+B7CAeR49wbDgs4+Uo+B++8ieKgG8HA4Zig@mail.gmail.com>
+	<CAHUNapTL=U_t4EwTKkQ8B8A7j+=WKCU64u_MFeioB0yv_VfACA@mail.gmail.com>
+	<20170622193547.GT28053@denix.org>
+	<CAHUNapTJJfR8R7aUvuJDOV+KbcpkRb_dGEFO=k2a9Y+OQye3rA@mail.gmail.com>
+	<CALbNGRSx+DxNwt52kik9+_Adm-2vWaqHMHf2WJMYk=dcHzxZmw@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 28 Aug 2017 11:05:28 +0200
-Message-ID: <CA+chaQd6sBfeGX-Py8zn1PLNg4HGEdn78=nFRKUFbXpMxcgafw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Aug 2017 12:49:35 +0200
+Message-ID: <CA+chaQcSVSm-eGcaRq-=LUQrGs4oDwYrEM5Ahvu6xth83FPO1w@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH V2] python-m2crypto: Upgrade to 0.26.0
+Subject: Re: [meta-qt5][PATCH v3] Upgrade to Qt 5.9.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,79 +63,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 09:05:28 -0000
+X-List-Received-Date: Mon, 28 Aug 2017 10:49:35 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Unfortunately still fails to build:
+I've fixed the gcc7 + security_flags.inc issues in 5.8.0, that's now merged
+in master.
 
-http://errors.yoctoproject.org/Errors/Details/154230/
+Then I've rebased Samuli's upgrade to 5.9.0 to build on top of that and
+added another upgrade to 5.9.2. That's currently in master-next branch.
 
-On Wed, Aug 23, 2017 at 3:53 AM, Khem Raj <raj.khem@gmail.com> wrote:
+But there is still this issue with qemux86 on x86_64 builders, so I'm not
+going to merge this all until it's fixed in qtwebengine's chromium.
+https://bugreports.qt.io/browse/QTBUG-59504
+maybe we could just revert:
+https://codereview.qt-project.org/#/c/189044/2/src/buildtools/configure_tar=
+get.pro
+but someone with deeper mksnapshot knowledge should confirm if the
+requirement for multilib toolchain isn't valid after all, some of the
+comments make some sense to me, so maybe the meta-browser fix actually
+breaks mksnapshot, but nobody noticed it as we don't have good tests for it
+in runtime.
 
-> Use proper LICENCE file for LIC_FILES_CHKSUM
-> Update homepage to point to gitlab
+Regards,
+
+On Fri, Jun 30, 2017 at 1:43 PM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Fri, Jun 23, 2017 at 2:58 AM, Trevor Woerner <twoerner@gmail.com>
+> wrote:
+> > On Thu, Jun 22, 2017 at 3:35 PM, Denys Dmytriyenko <denis@denix.org>
+> wrote:
+> >> On Thu, Jun 15, 2017 at 01:25:12AM -0400, Trevor Woerner wrote:
+> >>> On Fri, Jun 9, 2017 at 4:16 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> >>> > Then why does it work for chromium which used to have the same issu=
+e?
+> >>>
+> >>> https://github.com/OSSystems/meta-browser/blob/master/
+> recipes-browser/chromium/chromium/chromium/m32.patch
+> >>
+> >> Hmm, I'm wondering who comes up with such nonsense upstream that we
+> have to
+> >> patch it out? Is it due to laziness or are there some real limitations=
+?
+> >
+> > Unfortunately genius and insanity are virtually indistinguishable from
+> > each other ;-)
+> > --
+> Is anybody still working on Qt5.9 (or better on 5.9.1 which just
+> arrived)? I want to avoid double efforts fixing qtwebengine/gcc7 on
+> 5.8 or creating patches for 5.9.1 based on this series.
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  ...{python-m2crypto_0.25.1.bb => python-m2crypto_0.26.0.bb} | 13
-> ++++++-------
->  1 file changed, 6 insertions(+), 7 deletions(-)
->  rename meta-python/recipes-devtools/python/{python-m2crypto_0.25.1.bb =>
-> python-m2crypto_0.26.0.bb} (72%)
->
-> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> similarity index 72%
-> rename from meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> rename to meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> index 72523bd7f..1a5be8e2c 100644
-> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> @@ -1,13 +1,12 @@
->  SUMMARY = "A Python crypto and SSL toolkit"
-> -HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
-> +HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
->
->  LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95295693f047bb8f76928251a6154a60"
-> -
-> -SRC_URI[md5sum] = "040234289fbef5bed4029f0f7d1dae35"
-> -SRC_URI[sha256sum] = "ac303a1881307a51c85ee8b1d87844
-> d9866ee823b4fdbc52f7e79187c2d9acef"
-> +LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
->
->  SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> "
-> +SRC_URI[md5sum] = "9f02f0b88fbe225cc6ea8680945cafa0"
-> +SRC_URI[sha256sum] = "05d94fd9b2dae2fb8e072819a795f0
-> e05d3611b09ea185f68e1630530ec09ae8"
->
->  PYPI_PACKAGE = "M2Crypto"
->  inherit pypi setuptools siteinfo
-> @@ -18,8 +17,6 @@ RDEPENDS_${PN} += "python-typing"
->  DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}
-> -I${STAGING_INCDIR}"
->  DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
->
-> -inherit setuptools
-> -
->  SWIG_FEATURES_x86-64 = "-D__x86_64__"
->  SWIG_FEATURES ?= ""
->  export SWIG_FEATURES
-> @@ -28,6 +25,8 @@ export SWIG_FEATURES
->  # multilib header file exists.
->  #
->  do_compile_prepend() {
-> +    ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v
-> __REGISTER_PREFIX__ | grep -v __GNUC__ \
-> +       | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' >
-> SWIG/gcc_macros.h
->      if [ "${SITEINFO_BITS}" = "64" ];then
->          bit="64"
->      else
-> --
-> 2.14.1
->
+> Andreas
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
