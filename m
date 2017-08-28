@@ -1,26 +1,45 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 502C777D30
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D3D0F7821B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 14:10:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7SEAoDe019196
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Mon, 28 Aug 2017 07:10:50 -0700
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Mon, 28 Aug 2017 07:10:50 -0700
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Mon, 28 Aug 2017 21:59:13 +0800
-Message-ID: <20170828135913.7508-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170828135913.7508-1-kai.kang@windriver.com>
-References: <20170828135913.7508-1-kai.kang@windriver.com>
+	Mon, 28 Aug 2017 15:26:49 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id 63so608108pgc.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Aug 2017 08:26:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=XiR2ljBob/081RODoCqBB+j5pEfc9cckvoNyvlvNLDQ=;
+	b=PYdVb7/Ov/7PJnB+UoTVFz9STuNCJXgI4X+M0Jd3X3yrZ1MTrLey6jG8EvexEv4LKT
+	S4NS7tpl7sFwVdNikD/8A3dbkDTGepK/cS9B/aPL4qd2sXIJz0xaHDgkImJrqQ9roz2m
+	pOto8vTOev4bn4vz+MG/SZeqIqGb4kV6sLEpGXEa3fbb8uU7qswL/e09d7QwiBb/fFUa
+	6akDIfc1TdXgjfNZFXBj3xzxLnEjRJowZ2+OimGhkLH3L8MNO4Ch029dxZTaQQ/1i/V8
+	2S85FJOMbpA1IR7Y8s+BNhuJuUhCNG1kamOtmpDf4icqPNrluMqdlDVRLYru/T+pfhgh
+	3+9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=XiR2ljBob/081RODoCqBB+j5pEfc9cckvoNyvlvNLDQ=;
+	b=uC7ufnUUbJ7rzfvgfNIOVyPuQspc0ptHKVsDRApDf2AHQsmb2DMo64E99EYY9tmaGZ
+	+Lo579vWVt433gUB1mz95oqFCjdi43i5cLjtA9jL883ui5Clx4gUqDyu2DPlh+hwJU6h
+	/HNxc2lktwpgnMdmGmVEPCpl34ydRUy7zI1aTn7i7tX0MbHYX74HDGZrgcWsQuzjbzJc
+	okMFqEoMQCsREFhHxMBroC2z/nET7VQaAvBamLcYy+Zc+J2sHVC7gfW5SbFuWWvyGf97
+	yfc3nZWEi5CK9tXCCgBZyiXdnZTNilK+6wAHnnthETSRJP+aG+MdUByhA9JCMDy+dVCq
+	fKUg==
+X-Gm-Message-State: AHYfb5gdUF8/iRO7pI+l1RN3vrlWOub1nNhLqOAxEd884GyrlQNYsukX
+	42/Wqy1sizP99/HqVvK6V7Jzk7FmOdQV
+X-Received: by 10.99.179.14 with SMTP id i14mr885397pgf.317.1503934010713;
+	Mon, 28 Aug 2017 08:26:50 -0700 (PDT)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-oe][PATCH 2/2] mariadb: disable thumb on armv5
+Received: by 10.100.167.2 with HTTP; Mon, 28 Aug 2017 08:26:20 -0700 (PDT)
+In-Reply-To: <20170828060531.13717-1-jackie.huang@windriver.com>
+References: <20170828060531.13717-1-jackie.huang@windriver.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 28 Aug 2017 08:26:20 -0700
+Message-ID: <CAMKF1sq9CpL3V9SU9C5GSLCdQ+TZLObFJO=0djB2+8Mn9ZeS=Q@mail.gmail.com>
+To: jhuang0 <jackie.huang@windriver.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] enscript: set the correct path for perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,43 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 14:10:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 28 Aug 2017 15:26:49 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Kai Kang <kai.kang@windriver.com>
+On Sun, Aug 27, 2017 at 11:05 PM,  <jackie.huang@windriver.com> wrote:
+> From: Jackie Huang <jackie.huang@windriver.com>
+>
+> Set the correct path for perl and avoid
+> searching the one in hosttools that cause
+> QA issue:
+>
+> | ERROR: enscript-1.6.6-r0 do_package_qa: QA Issue: /usr/bin/diffpp
+>   contained in package enscript requires
+>   /builddir/tmp/hosttools/perl, but no providers found in RDEPENDS_enscript? [file-rdeps]
+>
 
-Disable thumb on armv5 for mariadb which causes link error:
+already fixed with https://patchwork.openembedded.org/patch/143281/
 
-| libsql.a(mysqld.cc.o): In function `test_if_case_insensitive(char const*) [clone .constprop.28]':
-| /usr/src/debug/mariadb/5.5.57-r0/mariadb-5.5.57/sql/mysqld.cc:8276:(.text.unlikely+0xbe):
-| relocation truncated to fit: R_ARM_THM_CALL against symbol `fn_format' defined
-| in .glue_7 section in linker stubs
-| /usr/src/debug/mariadb/5.5.57-r0/mariadb-5.5.57/sql/mysqld.cc:8278:(.text.unlikely+0xd0):
-| relocation truncated to fit: R_ARM_THM_CALL against symbol `fn_format' defined
-| in .glue_7 section in linker stubs
-| /usr/src/debug/mariadb/5.5.57-r0/mariadb-5.5.57/sql/mysqld.cc:8285:(.text.unlikely+0x150):
-| relocation truncated to fit: R_ARM_THM_CALL against symbol
-| `sql_print_warning(char const*, ...)' defined in .glue_7 section in linker stubs
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- meta-oe/recipes-support/mysql/mariadb.inc | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 32e3eaa6d..03cded637 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -82,6 +82,8 @@ EXTRA_OECMAKE = "-DWITH_EMBEDDED_SERVER=ON \
-                  -DCAT_EXECUTABLE=`which cat` \
-                  -DCMAKE_AR:FILEPATH=${AR}"
- 
-+ARM_INSTRUCTION_SET_armv5 = "arm"
-+
- do_configure_append() {
-     # handle distros with different values of ${libexecdir}
-     libexecdir2=`echo ${libexecdir} | sed -e 's+/usr/++g'`
--- 
-2.14.1
-
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  meta-oe/recipes-extended/enscript/enscript_1.6.6.bb | 2 ++
+>  1 file changed, 2 insertions(+)
+>
+> diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+> index 96129880a..65f1ccfa0 100644
+> --- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+> +++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
+> @@ -19,4 +19,6 @@ inherit autotools gettext
+>  SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
+>  SRC_URI[sha256sum] = "6d56bada6934d055b34b6c90399aa85975e66457ac5bf513427ae7fc77f5c0bb"
+>
+> +CACHED_CONFIGUREVARS += "ac_cv_path_PERL=${bindir}/perl"
+> +
+>  RDEPENDS_${PN} = "perl"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
