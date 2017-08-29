@@ -1,29 +1,24 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 680A272F96
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id EAA1077D08
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 07:51:33 +0000 (UTC)
+	Tue, 29 Aug 2017 08:39:55 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7T7pYa7011189
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T8duCJ014584
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 00:51:34 -0700
-Received: from [128.224.162.212] (128.224.162.212) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 29 Aug 2017 00:51:33 -0700
-To: Randy MacLeod <randy.macleod@windriver.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <20170824151657.20748-1-kai.kang@windriver.com>
-	<937cda69-98b8-358b-b027-24d90b954597@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <53d8d212-14a3-d8c7-085b-7ab70ee96735@windriver.com>
-Date: Tue, 29 Aug 2017 15:53:42 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Tue, 29 Aug 2017 01:39:56 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Tue, 29 Aug 2017 01:39:55 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 29 Aug 2017 16:28:18 +0800
+Message-ID: <20170829082818.25340-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-In-Reply-To: <937cda69-98b8-358b-b027-24d90b954597@windriver.com>
-Subject: Re: [meta-oe][PATCH] imagemagick: 7.0.5 -> 7.0.6_9
+Subject: [meta-networking][PATCH] samba: 4.6.5 -> 4.6.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,43 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 07:51:33 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 29 Aug 2017 08:39:56 -0000
+Content-Type: text/plain
 
-On 2017年08月25日 05:29, Randy MacLeod wrote:
-> On 2017-08-24 11:16 AM, kai.kang@windriver.com wrote:
->> From: Kai Kang <kai.kang@windriver.com>
->>
->> Upgrade imagemagick from 7.0.5 patchset 6 to 7.0.9 patchset 9.
->>
->> * update SRC_URI. Replace tarball with git repo that it only keeps
->>    latest tarball on www.imagemagick.org
->
-> This avoids the imagemagick disappearing tarball problem but
-> the impact is ~350 MB for the git repo rather than  8 MB for
-> the tarball.
->
-> Any objections to using the gentoo distfiles site:
-> http://distfiles.gentoo.org/distfiles/
->
->
-> Kai, If not please send a revised upgrade to 7.0.6 using that URL.
+From: Kai Kang <kai.kang@windriver.com>
 
-OK. I'll be waiting for 2 more days.
+Upgrade samba from 4.6.5 to 4.6.7 to fix CVE-2017-11103.
 
---Kai
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ .../recipes-connectivity/samba/{samba_4.6.5.bb => samba_4.6.7.bb}    | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-connectivity/samba/{samba_4.6.5.bb => samba_4.6.7.bb} (98%)
 
->
-> ../Randy
->
->
->
->
-
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.5.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+similarity index 98%
+rename from meta-networking/recipes-connectivity/samba/samba_4.6.5.bb
+rename to meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+index 389a2743e..7f0770bf0 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.6.5.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+@@ -25,8 +25,9 @@ SRC_URI_append_libc-musl = " \
+            file://samba-4.2.7-pam.patch \
+            file://samba-4.3.9-remove-getpwent_r.patch \
+           "
+-SRC_URI[md5sum] = "2ae8ce2862d8bfa95e4681371ebb1623"
+-SRC_URI[sha256sum] = "c06901e1d318b425b8c3ecea3ef23a91e7371312a9ea7adbf34fb8eb42ca3b84"
++
++SRC_URI[md5sum] = "c6ee5c766016d59908c8fb672fbbd445"
++SRC_URI[sha256sum] = "9ef24393de08390f236cabccd6a420b5cea304e959cbf1a99ff317325db3ddfa"
+ 
+ inherit systemd waf-samba cpan-base perlnative update-rc.d
+ # remove default added RDEPENDS on perl
 -- 
-Regards,
-Neil | Kai Kang
+2.14.1
 
 
