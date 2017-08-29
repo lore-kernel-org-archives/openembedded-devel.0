@@ -1,26 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B1DD78240
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 5DFED78240
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 09:28:13 +0000 (UTC)
+	Tue, 29 Aug 2017 09:28:15 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T9SFps020332
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T9SGbx019322
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 02:28:15 -0700 (PDT)
+	Tue, 29 Aug 2017 02:28:17 -0700 (PDT)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 29 Aug 2017 02:28:14 -0700
+	14.3.361.1; Tue, 29 Aug 2017 02:28:16 -0700
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 29 Aug 2017 17:27:26 +0800
-Message-ID: <8e8ae99f268883f5180be729a498f259a8571d73.1503998700.git.jackie.huang@windriver.com>
+Date: Tue, 29 Aug 2017 17:27:27 +0800
+Message-ID: <6286ca12b20fb1972ee77d1fc217eb7ebbf60080.1503998700.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
 In-Reply-To: <cover.1503998700.git.jackie.huang@windriver.com>
 References: <cover.1503998700.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] corosync: fixes for sysvinit and systemd
+Subject: [meta-oe][PATCH 2/2] corosync: add support for extra features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,76 +33,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 09:28:14 -0000
+X-List-Received-Date: Tue, 29 Aug 2017 09:28:16 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-* Replace ${systemd_unitdir}/system with ${systemd_system_unitdir}
-
-* Remove the upstar settings and don't install upstar config files
-
-* Add volatile for sysvinit and tmpfiles for systemd
-
-* Set the correct bash path for init scripts to avoid QA issue:
-| corosync-2.4.2: /usr/share/corosync/corosync contained in package corosync
-  requires /tmp/hosttools/bash, but no providers found in RDEPENDS_corosync?
-  [file-rdeps]
-
-* The systemd services are intalled properly by "make install",
-  no need to install manually.
+* Add support for features: dbus qdevice qnetd snmp
+* Add related PACKAGECONFIG
+* inherit useradd to add proper user for qnetd service
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- .../recipes-extended/corosync/corosync_2.4.2.bb    | 24 ++++++++++------------
- 1 file changed, 11 insertions(+), 13 deletions(-)
+ .../recipes-extended/corosync/corosync_2.4.2.bb    | 30 +++++++++++++++++++---
+ 1 file changed, 27 insertions(+), 3 deletions(-)
 
 diff --git a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb b/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
-index ec1deaca5..2f3aef299 100644
+index 2f3aef299..7d5a87e4c 100644
 --- a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
 +++ b/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
-@@ -23,9 +23,10 @@ INITSCRIPT_NAME = "corosync-daemon"
+@@ -5,7 +5,7 @@ HOMEPAGE = "http://corosync.github.io/corosync/"
  
- PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
+ SECTION = "base"
  
--PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_unitdir}/system/,--with-systemddir="
-+PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
+-inherit autotools pkgconfig systemd
++inherit autotools pkgconfig systemd useradd
  
--EXTRA_OECONF = "--with-upstartdir=%{_sysconfdir}/init"
-+EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
-+EXTRA_OEMAKE = "tmpfilesdir_DATA="
+ SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
+ SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
+@@ -16,13 +16,23 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
  
- do_configure_prepend() {
-     ( cd ${S}
-@@ -34,20 +35,17 @@ do_configure_prepend() {
+ DEPENDS = "groff-native nss libqb"
  
- do_install_append() {
-     install -d ${D}${sysconfdir}/sysconfig/
--    install -d ${D}/${sysconfdir}/init.d
-     install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
--    install -m 0644 ${S}/init/corosync-notifyd.conf.in ${D}${sysconfdir}/sysconfig/corosync-notifyd.conf
--    install -m 0644 ${S}/init/corosync.conf.in ${D}${sysconfdir}/sysconfig/corosync.conf
--    install -m 0644 ${S}/init/corosync.in ${D}${sysconfdir}/init.d/corosync
--    install -m 0644 ${S}/init/corosync-notifyd.in ${D}${sysconfdir}/init.d/corosync-notifyd
-+    install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
+-SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service"
++SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
++                         ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
++                         ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'corosync-qnetd.service', '', d)} \
++"
+ SYSTEMD_AUTO_ENABLE = "enable"
+ 
+ INITSCRIPT_NAME = "corosync-daemon"
+ 
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)}"
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
++                   dbus qdevice qnetd snmp \
++"
+ 
++PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus"
++PACKAGECONFIG[qdevice] = "--enable-qdevices,--disable-qdevices"
++PACKAGECONFIG[qnetd] = "--enable-qnetd,--disable-qnetd"
++PACKAGECONFIG[rdma] = "--enable-rdma,--disable-rdma"
++PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
+ PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
+ 
+ EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
+@@ -43,12 +53,26 @@ do_install_append() {
+     install -d ${D}${sysconfdir}/default/volatiles
+     echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
+ 
++    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
++        chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
++        echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >> ${D}${sysconfdir}/default/volatiles/05_corosync
++    fi
 +
-+    rm -rf "${D}${localstatedir}/run"
-+
-+    install -d ${D}${sysconfdir}/default/volatiles
-+    echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
- 
      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${systemd_unitdir}/system
--        install -m 0644 ${S}/init/corosync.service.in ${D}${systemd_unitdir}/system/corosync.service
--        install -m 0644 ${S}/init/corosync-notifyd.service.in ${D}${systemd_unitdir}/system/corosync-notifyd.service
--        sed -i -e 's,@INITWRAPPERSDIR@,${sysconfdir}/init.d,g' ${D}${systemd_unitdir}/system/corosync.service
--        sed -i -e 's,@SYSCONFDIR@,${sysconfdir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
--        sed -i -e 's,@SBINDIR@,${base_sbindir},g' ${D}${systemd_unitdir}/system/corosync-notifyd.service
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
+         install -d ${D}${sysconfdir}/tmpfiles.d
+         echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
++
++        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
++            install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
++        fi
      fi
  }
  
+ RDEPENDS_${PN} += "bash"
+ 
+ FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
++FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
++
++USERADD_PACKAGES = "${PN}"
++GROUPADD_PARAM_${PN} = "--system coroqnetd"
++USERADD_PARAM_${PN} = "--system -d / -M -s /bin/nologin -c 'User for corosync-qnetd' -g coroqnetd coroqnetd"
 -- 
 2.11.0
 
