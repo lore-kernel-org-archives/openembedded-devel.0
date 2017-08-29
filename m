@@ -1,31 +1,31 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 46B3B7821C
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C9D77821C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 01:45:24 +0000 (UTC)
+	Tue, 29 Aug 2017 01:48:18 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T1jP1E004671
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T1mKrI016651
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 28 Aug 2017 18:45:25 -0700 (PDT)
-Received: from [128.224.162.198] (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Mon, 28 Aug 2017 18:45:24 -0700
-To: Khem Raj <raj.khem@gmail.com>
+	Mon, 28 Aug 2017 18:48:20 -0700 (PDT)
+Received: from soho-mhatle-m.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Mon, 28 Aug 2017 18:48:19 -0700
+To: Yi Zhao <yi.zhao@windriver.com>, Fabio Berton
+	<fabio.berton@ossystems.com.br>,
+	<openembedded-devel@lists.openembedded.org>
 References: <20170828181315.8179-1-fabio.berton@ossystems.com.br>
 	<c51a31ee-0d0a-f2ba-8791-c6ac04e0d80f@windriver.com>
 	<0d791125-a113-03a5-d1cd-61a54c4a2550@windriver.com>
 	<f381675e-2355-f6dc-212d-5f62b7ce3392@windriver.com>
-	<CAMKF1sqCjZfcOE0S=Wq4AeFcG309wGFg4Dv4_aRsA=+6uJps_A@mail.gmail.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <bc47f0de-d4da-4bd8-c0d0-765a6292aff5@windriver.com>
-Date: Tue, 29 Aug 2017 09:46:13 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <31444891-a355-0519-263e-6aa98e179eb2@windriver.com>
+Date: Mon, 28 Aug 2017 20:48:19 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
+	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqCjZfcOE0S=Wq4AeFcG309wGFg4Dv4_aRsA=+6uJps_A@mail.gmail.com>
-X-Originating-IP: [128.224.162.198]
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <f381675e-2355-f6dc-212d-5f62b7ce3392@windriver.com>
 Subject: Re: [meta-oe][PATCH] iproute2: Move append to meta-networking layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -39,100 +39,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 01:45:25 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 29 Aug 2017 01:48:19 -0000
+Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-
-
-在 2017年08月29日 09:36, Khem Raj 写道:
-> On Mon, Aug 28, 2017 at 6:30 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
->>
->> 在 2017年08月29日 09:19, Mark Hatle 写道:
->>> On 8/28/17 8:07 PM, Mark Hatle wrote:
->>>> On 8/28/17 1:13 PM, Fabio Berton wrote:
->>>>> meta-openembedded commit eb8994f44a080d9c7fd2c87b6b6935ad0a55eb27 added
->>>>> iproute2 append to enable tipc PACKAGECONFIG that install libmnl
->>>>> package. libmnl recipe is in meta-networking layer and this layer
->>>>> needs to be added to bblayers.conf file to build libmnl. Move
->>>>> iproute2 append to meta-networking to allow build iproute2 without add
->>>>> meta-networking layer to bblayers.conf.
->>>> At first I thought this was the right answer.. but the more I look at
->>>> this, the
->>>> more issues I find.
->>>>
->>>> The iproute2 bbappend modifies the PACKAGECONFIG.  The modification of
->>>> the
->>>> PACKAGECONFIG (other then adding new options) should not be done in a
->>>> bbappend,
->>>> otherwise it 'changes' the settings for that recipe.
->>>>
->>>> I'm thinking the right fix is actually to remove iproute2 bbappend.  And
->>>> any
->>>> distributions or users who need tipc should enable it themselves within
->>>> their
->>>> distribution configuration files (and also include the meta-networking
->>>> layer) as
->>>> necessary.
->>> Sorry to reply to my reply.. but
+On 8/28/17 8:30 PM, Yi Zhao wrote:
+> 
+> 
+> 在 2017年08月29日 09:19, Mark Hatle 写道:
+>> On 8/28/17 8:07 PM, Mark Hatle wrote:
+>>> On 8/28/17 1:13 PM, Fabio Berton wrote:
+>>>> meta-openembedded commit eb8994f44a080d9c7fd2c87b6b6935ad0a55eb27 added
+>>>> iproute2 append to enable tipc PACKAGECONFIG that install libmnl
+>>>> package. libmnl recipe is in meta-networking layer and this layer
+>>>> needs to be added to bblayers.conf file to build libmnl. Move
+>>>> iproute2 append to meta-networking to allow build iproute2 without add
+>>>> meta-networking layer to bblayers.conf.
+>>> At first I thought this was the right answer.. but the more I look at this, the
+>>> more issues I find.
 >>>
->>> Simply reverting this ends up with:
+>>> The iproute2 bbappend modifies the PACKAGECONFIG.  The modification of the
+>>> PACKAGECONFIG (other then adding new options) should not be done in a bbappend,
+>>> otherwise it 'changes' the settings for that recipe.
 >>>
->>> ERROR: Nothing RPROVIDES 'iproute2-tipc' (but
->>>
->>> /home/mhatle/git/lpd/master/layers/meta-openembedded/meta-networking/recipes-extended/tipcutils/tipcutils_git.bb
->>> RDEPENDS on or otherwise requires it)
->>>
->>> So somehow tipcutils requirement needs to be based on the configuration of
->>> iproute2.  I'm not sure how to do this.
+>>> I'm thinking the right fix is actually to remove iproute2 bbappend.  And any
+>>> distributions or users who need tipc should enable it themselves within their
+>>> distribution configuration files (and also include the meta-networking layer) as
+>>> necessary.
+>> Sorry to reply to my reply.. but
 >>
->> Hi Mark,
+>> Simply reverting this ends up with:
 >>
->> The tipcutils 2.2 removed the tipc-config tool and recommended to use the
->> new configuration tool named "tipc" in iproute2 package for configuring the
->> tipc.
->> The tipc in iproute2 needs libmnl as dependency but it is in meta-networking
->> layer now. so I add this bbappend because we can not enable tipc build in
->> oe-core directly.
->> Randy had pointed the best way is move libmnl to oe-core and enable tipc
->> build in iproute2 by default.
-> As suggested earlier, please propose a patch to move libmnl to
-> oe-core, there are many other
-> packages which depend on it.
-
-I'm working it now.
-
-Thanks,
-Yi
-
->
->> Yi
+>> ERROR: Nothing RPROVIDES 'iproute2-tipc' (but
+>> /home/mhatle/git/lpd/master/layers/meta-openembedded/meta-networking/recipes-extended/tipcutils/tipcutils_git.bb
+>> RDEPENDS on or otherwise requires it)
 >>
+>> So somehow tipcutils requirement needs to be based on the configuration of
+>> iproute2.  I'm not sure how to do this.
+> 
+> Hi Mark,
+> 
+> The tipcutils 2.2 removed the tipc-config tool and recommended to use 
+> the new configuration tool named "tipc" in iproute2 package for 
+> configuring the tipc.
+
+The problem still remains that the PACKAGECONFIG change violates the Yocto
+Project compliance check scripts requirement that PACKAGECONFIGs only be set by
+the original .bb or by a distribution configuration.
+
+I agree with the other comments that libmnl should be moved to oe-core (if that
+is still possible), but the PACKAGECONFIG piece is still a problem that needs to
+be resolved.
+
+> The tipc in iproute2 needs libmnl as dependency but it is in 
+> meta-networking layer now. so I add this bbappend because we can not 
+> enable tipc build in oe-core directly.
+> Randy had pointed the best way is move libmnl to oe-core and enable tipc 
+> build in iproute2 by default.
+> 
+> Yi
+> 
+>>
+>> --Mark
 >>
 >>> --Mark
 >>>
->>>> --Mark
+>>>> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+>>>> ---
+>>>>   .../recipes-connectivity/iproute2/iproute2_%.bbappend                     | 0
+>>>>   1 file changed, 0 insertions(+), 0 deletions(-)
+>>>>   rename {meta-oe => meta-networking}/recipes-connectivity/iproute2/iproute2_%.bbappend (100%)
 >>>>
->>>>> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
->>>>> ---
->>>>>    .../recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>> | 0
->>>>>    1 file changed, 0 insertions(+), 0 deletions(-)
->>>>>    rename {meta-oe =>
->>>>> meta-networking}/recipes-connectivity/iproute2/iproute2_%.bbappend (100%)
->>>>>
->>>>> diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>> b/meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>> similarity index 100%
->>>>> rename from meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>> rename to
->>>>> meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>> diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend b/meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>> similarity index 100%
+>>>> rename from meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>> rename to meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
+>>>>
+> 
 
 
