@@ -1,54 +1,28 @@
-Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FEB378283
+Return-Path: <Bruce.Ashfield@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9867E65D35
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 12:02:25 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id k22so17839771iod.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 05:02:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=FtA7nkWqkwv/ZPiXZ7B1SNZ8rMP4ZIlVhc3CLDVC8cE=;
-	b=MaaSNMGz+2FMSFedWvMVQNDUbDDmawpEJ8R0Q5OrVs1cVbPGVjAvjIFpCLz7Q8khNY
-	3XKfvk8hslFg3kCBXG5aZaQoOggwtNoOgZVQyUL5pvvpLnfOVs6p20ISo4hOYViMuMoX
-	+8KRHqYIb73ZLKyEfjXW62yf0JH4r1etBvQCRTAag4skzgKUZNZGjB9eHQg0NqjoPdOf
-	61y4wyTJu1f+R0FZ+5gcSYxUHGfFL6aCmT0TfqfnyV9Qyh9CKi/aFNkBp1TX0T4WCZ35
-	fQTZjfDa468sGAxg7I0+fCiEU+f0uy8pperJcpg/ttIjRrRt6OqkgQBET1WEWO7iGmPI
-	kq8Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=FtA7nkWqkwv/ZPiXZ7B1SNZ8rMP4ZIlVhc3CLDVC8cE=;
-	b=ApTbLp+/0KfLs5jGt6W53M2d1S3af8EcNBpX1nsgx/o26X8aGCVPF1mHxDfJU4or7h
-	seV2/MOMLGkKJ7jsp4O+bemxd5bvIjQR5jdbJ+wS8VEvU1Z1+BtnAl4Kp5b4P82giUrk
-	z2A16Q8w6lvErGq9x09khW7FUwVtsG+eHxdi6Yg9/y9mYpKdpT5X/9/HfbsYTPuwJ7KR
-	0hBvKu0f4PVx6Zn1tjOq79Iye2DuGeLwX4Z/ypFdD3Ws6xs9n9EaNnSiT7JOyEafRSNu
-	IbsYlj2YwUA8MO6xkc3APt2egBntMjwhY3JVL5dN3bIGXWkVP9BelAqgTfprUF9Vg1TY
-	ItSQ==
-X-Gm-Message-State: AHYfb5g/C9VKZAEU9O9rBSZFBnCa1la8ejPxH/keGUySTVat1ieOxeeD
-	W7+Ku0/YnwEyMsSEk0QD2ruXHg8KvzKR
-X-Received: by 10.36.23.80 with SMTP id 77mr3733030ith.70.1504008146859; Tue,
-	29 Aug 2017 05:02:26 -0700 (PDT)
+	Tue, 29 Aug 2017 12:26:56 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7TCQuC8017750
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Tue, 29 Aug 2017 05:26:56 -0700
+Received: from [128.224.56.93] (128.224.56.93) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 29 Aug 2017 05:26:56 -0700
+To: Khem Raj <raj.khem@gmail.com>
+References: <1503977887-29630-1-git-send-email-bruce.ashfield@windriver.com>
+	<CAMKF1spC+B8DhcFZ3jP84J66Uucw_UWujCyA+UHtTJ5zvJNcRw@mail.gmail.com>
+From: Bruce Ashfield <bruce.ashfield@windriver.com>
+Message-ID: <5123012b-2564-2c42-0709-7529cafd593a@windriver.com>
+Date: Tue, 29 Aug 2017 08:26:55 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Received: by 10.107.13.67 with HTTP; Tue, 29 Aug 2017 05:02:06 -0700 (PDT)
-X-Originating-IP: [181.220.79.73]
-In-Reply-To: <096b316f-2464-76db-0179-acb1bbd9c761@windriver.com>
-References: <20170828181315.8179-1-fabio.berton@ossystems.com.br>
-	<c51a31ee-0d0a-f2ba-8791-c6ac04e0d80f@windriver.com>
-	<0d791125-a113-03a5-d1cd-61a54c4a2550@windriver.com>
-	<f381675e-2355-f6dc-212d-5f62b7ce3392@windriver.com>
-	<31444891-a355-0519-263e-6aa98e179eb2@windriver.com>
-	<096b316f-2464-76db-0179-acb1bbd9c761@windriver.com>
-From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Tue, 29 Aug 2017 09:02:06 -0300
-Message-ID: <CAAPZna0iQcDy60ZqfAUTR4wXHiuZVyKQWHr3do2a+wKYPGTaZQ@mail.gmail.com>
-To: Yi Zhao <yi.zhao@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] iproute2: Move append to meta-networking layer
+In-Reply-To: <CAMKF1spC+B8DhcFZ3jP84J66Uucw_UWujCyA+UHtTJ5zvJNcRw@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] wireguard: fix kernel 4.12 build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,130 +35,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 12:02:25 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 29 Aug 2017 12:26:56 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-I agree that is better move libmnl to oe-core, you can abandon this patch
-and Yi Zhao patch.
+On 08/29/2017 01:06 AM, Khem Raj wrote:
+> On Mon, Aug 28, 2017 at 8:38 PM, Bruce Ashfield
+> <bruce.ashfield@windriver.com> wrote:
+>> We upgrade the module + tools recipes to fix the following build error:
+>>
+>>   wireguard-module/0.0.20170517-r0/WireGuard-0.0.20170517/src/device.c:
+>>   In function 'setup':
+>>   |
+>>   wireguard-module/0.0.20170517-r0/WireGuard-0.0.20170517/src/device.c:269:7:
+>>   error: 'struct net_device' has no member named 'destructor'; did you
+>>   mean 'priv_destructor'?
+>>   |   dev->destructor = destruct;
+>>   |        ^~~~~~~~~~
+>>   |        priv_destructor
+>>
+>> We also add a RDEPENDS on "bash" to the wireguard-tools recipe to fix
+>> the following QA issue that appeared with the version bump:
+>>
+>>    ERROR: wireguard-tools-0.0.20170810-r0 do_package_qa: QA Issue:
+>>    /usr/bin/wg-quick contained in package wireguard-tools requires
+>>    /bin/bash, but no providers found in RDEPENDS_wireguard-tools?
+>>    [file-rdeps]
+>>
+> 
+> already fixed with
+> https://patchwork.openembedded.org/patch/143341/
+> https://patchwork.openembedded.org/patch/143280/
+> 
 
-On Mon, Aug 28, 2017 at 10:54 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+Damn! I missed that going to the list. Luckily, it wasn't much
+work to fix :D
 
->
->
-> =E5=9C=A8 2017=E5=B9=B408=E6=9C=8829=E6=97=A5 09:48, Mark Hatle =E5=86=99=
-=E9=81=93:
->
->> On 8/28/17 8:30 PM, Yi Zhao wrote:
+Bruce
+
+> your commit msg is better though
+> 
+>> Signed-off-by: Bruce Ashfield <bruce.ashfield@windriver.com>
+>> ---
+>>   ...eguard-module_0.0.20170517.bb => wireguard-module_0.0.20170810.bb} | 0
+>>   ...ireguard-tools_0.0.20170517.bb => wireguard-tools_0.0.20170810.bb} | 2 +-
+>>   meta-networking/recipes-kernel/wireguard/wireguard.inc                | 4 ++--
+>>   3 files changed, 3 insertions(+), 3 deletions(-)
+>>   rename meta-networking/recipes-kernel/wireguard/{wireguard-module_0.0.20170517.bb => wireguard-module_0.0.20170810.bb} (100%)
+>>   rename meta-networking/recipes-kernel/wireguard/{wireguard-tools_0.0.20170517.bb => wireguard-tools_0.0.20170810.bb} (93%)
 >>
->>>
->>> =E5=9C=A8 2017=E5=B9=B408=E6=9C=8829=E6=97=A5 09:19, Mark Hatle =E5=86=
-=99=E9=81=93:
->>>
->>>> On 8/28/17 8:07 PM, Mark Hatle wrote:
->>>>
->>>>> On 8/28/17 1:13 PM, Fabio Berton wrote:
->>>>>
->>>>>> meta-openembedded commit eb8994f44a080d9c7fd2c87b6b6935ad0a55eb27
->>>>>> added
->>>>>> iproute2 append to enable tipc PACKAGECONFIG that install libmnl
->>>>>> package. libmnl recipe is in meta-networking layer and this layer
->>>>>> needs to be added to bblayers.conf file to build libmnl. Move
->>>>>> iproute2 append to meta-networking to allow build iproute2 without a=
-dd
->>>>>> meta-networking layer to bblayers.conf.
->>>>>>
->>>>> At first I thought this was the right answer.. but the more I look at
->>>>> this, the
->>>>> more issues I find.
->>>>>
->>>>> The iproute2 bbappend modifies the PACKAGECONFIG.  The modification o=
-f
->>>>> the
->>>>> PACKAGECONFIG (other then adding new options) should not be done in a
->>>>> bbappend,
->>>>> otherwise it 'changes' the settings for that recipe.
->>>>>
->>>>> I'm thinking the right fix is actually to remove iproute2 bbappend.
->>>>> And any
->>>>> distributions or users who need tipc should enable it themselves
->>>>> within their
->>>>> distribution configuration files (and also include the meta-networkin=
-g
->>>>> layer) as
->>>>> necessary.
->>>>>
->>>> Sorry to reply to my reply.. but
->>>>
->>>> Simply reverting this ends up with:
->>>>
->>>> ERROR: Nothing RPROVIDES 'iproute2-tipc' (but
->>>> /home/mhatle/git/lpd/master/layers/meta-openembedded/meta-ne
->>>> tworking/recipes-extended/tipcutils/tipcutils_git.bb
->>>> RDEPENDS on or otherwise requires it)
->>>>
->>>> So somehow tipcutils requirement needs to be based on the configuratio=
-n
->>>> of
->>>> iproute2.  I'm not sure how to do this.
->>>>
->>> Hi Mark,
->>>
->>> The tipcutils 2.2 removed the tipc-config tool and recommended to use
->>> the new configuration tool named "tipc" in iproute2 package for
->>> configuring the tipc.
->>>
->> The problem still remains that the PACKAGECONFIG change violates the Yoc=
-to
->> Project compliance check scripts requirement that PACKAGECONFIGs only be
->> set by
->> the original .bb or by a distribution configuration.
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170517.bb b/meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170810.bb
+>> similarity index 100%
+>> rename from meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170517.bb
+>> rename to meta-networking/recipes-kernel/wireguard/wireguard-module_0.0.20170810.bb
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170810.bb
+>> similarity index 93%
+>> rename from meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
+>> rename to meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170810.bb
+>> index 79d420f1a417..c4ddbcb0e90f 100644
+>> --- a/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170517.bb
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard-tools_0.0.20170810.bb
+>> @@ -24,4 +24,4 @@ FILES_${PN} = " \
+>>       ${bindir} \
+>>   "
 >>
->> I agree with the other comments that libmnl should be moved to oe-core
->> (if that
->> is still possible), but the PACKAGECONFIG piece is still a problem that
->> needs to
->> be resolved.
+>> -RDEPENDS_${PN} = "wireguard-module"
+>> +RDEPENDS_${PN} = "wireguard-module bash"
+>> diff --git a/meta-networking/recipes-kernel/wireguard/wireguard.inc b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> index 9e38c57ffa5b..b26536d3308c 100644
+>> --- a/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> +++ b/meta-networking/recipes-kernel/wireguard/wireguard.inc
+>> @@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = "file://../COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
 >>
->
-> Once the libmnl is moved,  the iproute2 can build tipc directly and no
-> need PACKAGECONFIG, we can remove it too.
->
-> Yi
->
->
->
->> The tipc in iproute2 needs libmnl as dependency but it is in
->>> meta-networking layer now. so I add this bbappend because we can not
->>> enable tipc build in oe-core directly.
->>> Randy had pointed the best way is move libmnl to oe-core and enable tip=
-c
->>> build in iproute2 by default.
->>>
->>> Yi
->>>
->>> --Mark
->>>>
->>>> --Mark
->>>>>
->>>>> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
->>>>>> ---
->>>>>>    .../recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>>>          | 0
->>>>>>    1 file changed, 0 insertions(+), 0 deletions(-)
->>>>>>    rename {meta-oe =3D> meta-networking}/recipes-conne
->>>>>> ctivity/iproute2/iproute2_%.bbappend (100%)
->>>>>>
->>>>>> diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappe=
-nd
->>>>>> b/meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
->>>>>> similarity index 100%
->>>>>> rename from meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappen=
-d
->>>>>> rename to meta-networking/recipes-connectivity/iproute2/iproute2_%.
->>>>>> bbappend
->>>>>>
->>>>>>
+>>   SRC_URI = "https://git.zx2c4.com/WireGuard/snapshot/WireGuard-${PV}.tar.xz"
 >>
->
+>> -SRC_URI[md5sum] = "e9969ebbdf525fcbe91a513db8a5c864"
+>> -SRC_URI[sha256sum] = "7303e973654a3585039f4789e89a562f807f0d6010c7787b9b69ca72aa7a6908"
+>> +SRC_URI[md5sum] = "8dd3e080407b8295c25565a847a4ca27"
+>> +SRC_URI[sha256sum] = "ab96230390625aad6f4816fa23aef6e9f7fee130f083d838919129ff12089bf7"
+>>
+>>   S = "${WORKDIR}/WireGuard-${PV}/src/"
+>> --
+>> 2.5.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
