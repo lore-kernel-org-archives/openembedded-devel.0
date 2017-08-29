@@ -1,48 +1,28 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 08B3878212
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 3B20578071
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 23:17:19 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id 105so842396uad.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 16:17:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=HQE0q027z4wEV21fkRLkar2trlKgz/jv/Pmypbu8KbQ=;
-	b=hlDa2A1iwZfFw6uLxsf+Tdsa5uECpcHYfQ6BsrGRA8ADC5yLZfl2pptNoaK7CIpdHX
-	gNzz26C7GEaDcD5s7X6+X7T3MbXZsINS95nqx4VNyNkafMbbpz36lf0yiDKP8tSm2L8O
-	owl3aYdnhQQ2r8WXkt54cfnFCUps6WCSwIrs0KmwLCT3g3IA978ONVOvY/kZKlsY2oQA
-	R6Cbv/pCiMTkoDEMNjc65kT4KugQhsdACVxyM3hRuJkQnhKo7z9cxg6fX5I5r43tBxKo
-	ZxsrMfI/Yd3lcKdDF5oBNMLX2gA/4as/63nwIQo+u23Wd8o40f7+qoGcb0Hvkbxwygbw
-	gF4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=HQE0q027z4wEV21fkRLkar2trlKgz/jv/Pmypbu8KbQ=;
-	b=dAQKCGBWWj1M/Zp2TUXFxxk4VyZnAOdlN03L3iaBj0AFsDK5bIapyI3y7dn1m7Tcxx
-	Ld57nYcaY5zfxJXMbhY4GWjCkq2KuNo7wDOfvXZPazlKKNV8Rxw2rpb4Ten/nm6d6NX+
-	2reVWqO8qm2X1S/8T0uUMYcukiz3gpNEP7a6DtDN8ImLksFn6B0vX7CficxzCB4OfmP2
-	RlSyW7SW+9HxyuBtWishmwR4JxGU6mU62BBmMOcEd3kQTdQBkwPHChpcTZBHI1XQPI9V
-	qGA9dGKmfjGHKcvPYZA73dvIeJyuojlyQVYHvj71ob0S4jlMZ6I6G54vGFQQd9itwgBy
-	qSRg==
-X-Gm-Message-State: AHYfb5gGTgKYScsiwNzCCg1wPiZZOB2+aTO5e5PDUHL/DVkrkmvPma1n
-	SAicsfJM14vZOJsQc0fGK5jHAoyIBQ==
-X-Received: by 10.159.32.163 with SMTP id 32mr1590436uaa.127.1503962240804;
-	Mon, 28 Aug 2017 16:17:20 -0700 (PDT)
+	Tue, 29 Aug 2017 01:07:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7T17SOU016538
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 28 Aug 2017 18:07:28 -0700 (PDT)
+Received: from soho-mhatle-m.local (172.25.36.227) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Mon, 28 Aug 2017 18:07:28 -0700
+To: Fabio Berton <fabio.berton@ossystems.com.br>,
+	<openembedded-devel@lists.openembedded.org>
+References: <20170828181315.8179-1-fabio.berton@ossystems.com.br>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <c51a31ee-0d0a-f2ba-8791-c6ac04e0d80f@windriver.com>
+Date: Mon, 28 Aug 2017 20:07:27 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
+	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Mon, 28 Aug 2017 16:17:20 -0700 (PDT)
-In-Reply-To: <CAMKF1sq9CpL3V9SU9C5GSLCdQ+TZLObFJO=0djB2+8Mn9ZeS=Q@mail.gmail.com>
-References: <20170828060531.13717-1-jackie.huang@windriver.com>
-	<CAMKF1sq9CpL3V9SU9C5GSLCdQ+TZLObFJO=0djB2+8Mn9ZeS=Q@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 29 Aug 2017 01:17:20 +0200
-Message-ID: <CA+chaQfG3sQW6mncedu36aeuWuckbmADjgVeCraU1dsXRAxWqg@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] enscript: set the correct path for perl
+In-Reply-To: <20170828181315.8179-1-fabio.berton@ossystems.com.br>
+Subject: Re: [meta-oe][PATCH] iproute2: Move append to meta-networking layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,59 +35,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Aug 2017 23:17:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 29 Aug 2017 01:07:28 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-And also by:
-https://patchwork.openembedded.org/patch/143340/
+On 8/28/17 1:13 PM, Fabio Berton wrote:
+> meta-openembedded commit eb8994f44a080d9c7fd2c87b6b6935ad0a55eb27 added
+> iproute2 append to enable tipc PACKAGECONFIG that install libmnl
+> package. libmnl recipe is in meta-networking layer and this layer
+> needs to be added to bblayers.conf file to build libmnl. Move
+> iproute2 append to meta-networking to allow build iproute2 without add
+> meta-networking layer to bblayers.conf.
 
-On Mon, Aug 28, 2017 at 5:26 PM, Khem Raj <raj.khem@gmail.com> wrote:
+At first I thought this was the right answer.. but the more I look at this, the
+more issues I find.
 
-> On Sun, Aug 27, 2017 at 11:05 PM,  <jackie.huang@windriver.com> wrote:
-> > From: Jackie Huang <jackie.huang@windriver.com>
-> >
-> > Set the correct path for perl and avoid
-> > searching the one in hosttools that cause
-> > QA issue:
-> >
-> > | ERROR: enscript-1.6.6-r0 do_package_qa: QA Issue: /usr/bin/diffpp
-> >   contained in package enscript requires
-> >   /builddir/tmp/hosttools/perl, but no providers found in
-> RDEPENDS_enscript? [file-rdeps]
-> >
->
-> already fixed with https://patchwork.openembedded.org/patch/143281/
->
-> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-> > ---
-> >  meta-oe/recipes-extended/enscript/enscript_1.6.6.bb | 2 ++
-> >  1 file changed, 2 insertions(+)
-> >
-> > diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> > index 96129880a..65f1ccfa0 100644
-> > --- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> > +++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
-> > @@ -19,4 +19,6 @@ inherit autotools gettext
-> >  SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
-> >  SRC_URI[sha256sum] = "6d56bada6934d055b34b6c90399aa8
-> 5975e66457ac5bf513427ae7fc77f5c0bb"
-> >
-> > +CACHED_CONFIGUREVARS += "ac_cv_path_PERL=${bindir}/perl"
-> > +
-> >  RDEPENDS_${PN} = "perl"
-> > --
-> > 2.11.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+The iproute2 bbappend modifies the PACKAGECONFIG.  The modification of the
+PACKAGECONFIG (other then adding new options) should not be done in a bbappend,
+otherwise it 'changes' the settings for that recipe.
+
+I'm thinking the right fix is actually to remove iproute2 bbappend.  And any
+distributions or users who need tipc should enable it themselves within their
+distribution configuration files (and also include the meta-networking layer) as
+necessary.
+
+--Mark
+
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> ---
+>  .../recipes-connectivity/iproute2/iproute2_%.bbappend                     | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename {meta-oe => meta-networking}/recipes-connectivity/iproute2/iproute2_%.bbappend (100%)
+> 
+> diff --git a/meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend b/meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
+> similarity index 100%
+> rename from meta-oe/recipes-connectivity/iproute2/iproute2_%.bbappend
+> rename to meta-networking/recipes-connectivity/iproute2/iproute2_%.bbappend
+> 
+
 
