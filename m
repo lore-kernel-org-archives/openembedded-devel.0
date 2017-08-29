@@ -1,46 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id EE54877D6C
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id E3EBF77EE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 06:32:27 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id k3so1764511pfc.3
+	Tue, 29 Aug 2017 06:32:28 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id k3so1764553pfc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 23:32:29 -0700 (PDT)
+	Mon, 28 Aug 2017 23:32:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=ScOeprUEMTE0KOrX9JfFwfBpEekWFKJnJuDyxmKclas=;
-	b=ANbDsjgJzSjZ0OQHFhjLLJ2yTawJV9fSIbEIrWTyhV+ugGkFLcIX7JLwU6Aj+BJi5H
-	cPUUMxvvEWJ6OqK5rNLTwaaeTY+acaAZkj0q39k/QoGoIfvciHTi2qb8/+k/ZpWy2Vv3
-	4nZPeFZBBOhBDamFZnac8Y7Tmka9CQzvJY5JWQAubdjLi/7JQpFW1tk8VnIAatRMR5L3
-	sCuDnpOfXRkY2DovODoQuZS6rqn02Jjabp2Qd1BXg0+nN9Ui7zxkUJcr25B87jXdqnfj
-	70CP0MgYs7b0WZNx9cJ+uAOoMxHt65NcZPi5xI1vIRgVPOTgjnpQY1L3McRE5gzuG3gu
-	zmlg==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=8u8Vy5Oam1VB3yjY1qy/byfDrJuMD5PoXwQuxCJRTrk=;
+	b=ohwnPbTCMUck8EPZA4zvEHr1+jBMeBddCdzhQoWKPkkAn9vqgVoULPsav9mklCUXHQ
+	qysOBRXm8x3SD+hJC5+j7YX4rarjxhXknadhPUb1SM9xvb5SbIUquiZ/R00SQnIp8KwW
+	yg3O05HqeJtQAhWUyKFOJ9oJHOtYxPXWFT92Cy1kr/gDoBdRfj/5TbrhcohVzTGgtmOa
+	J7HsliFChDjI67ZmmTu0O4eSrB1e4la5XI1OaUZJDnrBTg413+W5FMQFUgwn71j+jCzc
+	BT5oIngk3+0Ee4JAEyLxhQrKALiJkLHhY4cyKQYocIExMXc90I1e3lGjnegVlmXYqoTv
+	MVcQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ScOeprUEMTE0KOrX9JfFwfBpEekWFKJnJuDyxmKclas=;
-	b=XonRLlT9VrrM+aE2tuA7kvlxnNzbxcXd6cZwGyZOlFjXrj7Vs7NoQJUGVwzGXOj18N
-	UI1kDAG4uMmK6olOCA4quh97RoWNqJqDwrGUOBB+9kOiS9dIDFJ0UU9WLNpr1VLc3DDm
-	ZxV4GpbJbXaGqCqDSAQESd/xwwR+WoeGH1gdVjrprsVyofpouQys5Wkb7I5Ehy1ltUvA
-	PWDHN/I0JjolE8UHoa1PG73d/sdW2htmogIEiZsWkeIYeQTN4VTIPNrDY+l+uEH6F2qX
-	vzBJL2GMjzFIelvDRDrNAUflv1sE8VIfkAamxmD9iOTFnKL4uCEYnFitqzBUQRzwHz/b
-	gYng==
-X-Gm-Message-State: AHYfb5iqWePhHiQGqccZ2RJYlgjg53BNz314rW/fBxldG7qUzSUI/NzC
-	zaBUrcrUz6y9kBaI
-X-Received: by 10.84.217.157 with SMTP id p29mr3814344pli.406.1503988348892;
-	Mon, 28 Aug 2017 23:32:28 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=8u8Vy5Oam1VB3yjY1qy/byfDrJuMD5PoXwQuxCJRTrk=;
+	b=W4ZPiBHI0/9rwVgwq5QWz0lP3dR+akOSHI+qMQviLlo3iPe/l8w57w/Q25sFnIxAaa
+	HKyEnTmJbMSZ8mAle3Fr+Ohsr9VT+p1PnsA6ZFv3V4VZ6AJ96CK16FyHhgRb/974jxGd
+	skLRp6w4VkirV/bLcvcEcpFdFFy//mioU9BrDr3+GGsIx7psWv9UU8YqMclkmg8JzkXK
+	c2o1aV3QN4nWhBMi2q0hkWMDHLziDTwFXTJVV3s+aAnxeNLZO1hhmIs7DdCkEpLe06PT
+	2crfUM2d3srM6wIVyaGUfy2izBMYOa1nVklKPfjW0yyEG80ALCIDLZx7qJeyg9exF8ea
+	YsDw==
+X-Gm-Message-State: AHYfb5gcluQoc01ZjjNUNpfskuoJLp5vyp/GZUV0R2ishzq5/xV92kLW
+	0erZyONLxkUuahLP
+X-Received: by 10.84.217.213 with SMTP id d21mr3715198plj.225.1503988349920;
+	Mon, 28 Aug 2017 23:32:29 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
 	by smtp.gmail.com with ESMTPSA id
-	c14sm3629272pfm.151.2017.08.28.23.32.27
+	c14sm3629272pfm.151.2017.08.28.23.32.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 28 Aug 2017 23:32:28 -0700 (PDT)
+	Mon, 28 Aug 2017 23:32:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Aug 2017 23:32:18 -0700
-Message-Id: <20170829063219.1039-1-raj.khem@gmail.com>
+Date: Mon, 28 Aug 2017 23:32:19 -0700
+Message-Id: <20170829063219.1039-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-networking][PATCH 1/2] tftp-hpa: Fix PIE build with clang
+In-Reply-To: <20170829063219.1039-1-raj.khem@gmail.com>
+References: <20170829063219.1039-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH V2 2/2] iscsitarget: Fix kernel with new 4.12+ kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,99 +56,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 06:32:28 -0000
+X-List-Received-Date: Tue, 29 Aug 2017 06:32:29 -0000
 
-clang finds a name clash with libc and linker errors out like below
-
-tftpd.o: relocation R_ARM_REL32 against external or undefined symbol `__progname@@GLIBC_2.4' can not be used when making a PIE executable; recompile with -fPIC
+Fix patch to be able to work kernel < 4.12.0
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-__progname-is-provided-by-libc.patch      | 62 ++++++++++++++++++++++
- .../recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb       |  1 +
- 2 files changed, 63 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/tftp-hpa/files/0001-__progname-is-provided-by-libc.patch
+changes from:
+v1 -> v2:
+- Fix build with kernel < 4.12.0
 
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/files/0001-__progname-is-provided-by-libc.patch b/meta-networking/recipes-daemons/tftp-hpa/files/0001-__progname-is-provided-by-libc.patch
+ ...vent-netlink_ack-now-requires-4-arguments.patch | 40 ++++++++++++++++++++++
+ .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  4 ++-
+ 2 files changed, 43 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-extended/iscsitarget/files/0001-kernel-event-netlink_ack-now-requires-4-arguments.patch
+
+diff --git a/meta-networking/recipes-extended/iscsitarget/files/0001-kernel-event-netlink_ack-now-requires-4-arguments.patch b/meta-networking/recipes-extended/iscsitarget/files/0001-kernel-event-netlink_ack-now-requires-4-arguments.patch
 new file mode 100644
-index 000000000..cead977e2
+index 000000000..4426d3552
 --- /dev/null
-+++ b/meta-networking/recipes-daemons/tftp-hpa/files/0001-__progname-is-provided-by-libc.patch
-@@ -0,0 +1,62 @@
-+From 941038fc05be21202cab7a7a9434097fb55ecbe0 Mon Sep 17 00:00:00 2001
-+From: Thorsten Glaser <tg@mirbsd.de>
-+Date: Thu, 31 Jul 2014 16:29:41 +0930
-+Subject: [PATCH] __progname[] is provided by libc
++++ b/meta-networking/recipes-extended/iscsitarget/files/0001-kernel-event-netlink_ack-now-requires-4-arguments.patch
+@@ -0,0 +1,40 @@
++From cbc5f8151017f45231b75a826f18354a81c287c4 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 07:52:59 -0700
++Subject: [PATCH] kernel/event: netlink_ack() now requires 4 arguments
 +
-+Rename local variable to tftpd_progname to avoid a clash with glibc
-+global symbols and work around Debian bug #519006 (Closes: #564052).
++see https://patchwork.kernel.org/patch/9670181/
 +
-+[ hpa: specifically, double-underscore symbols in C are reserved for
-+  the implementation, i.e. compiler/libc. ]
++event.c:32:4: error: too few arguments to function 'netlink_ack'
++|     netlink_ack(skb, nlh, 0);
++|     ^~~~~~~~~~~
 +
-+Signed-off-by: Ron Lee <ron@debian.org>
-+Signed-off-by: H. Peter Anvin <hpa@linux.intel.com>
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tftpd/tftpd.c | 10 +++++-----
-+ 1 file changed, 5 insertions(+), 5 deletions(-)
++ kernel/event.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/tftpd/tftpd.c b/tftpd/tftpd.c
-+index e247b97..5fec7bf 100644
-+--- a/tftpd/tftpd.c
-++++ b/tftpd/tftpd.c
-+@@ -76,7 +76,7 @@ static int ai_fam = AF_INET;
-+ #define TRIES   6               /* Number of attempts to send each packet */
-+ #define TIMEOUT_LIMIT ((1 << TRIES)-1)
++Index: iscsitarget-1.4.20.3+svn502/kernel/event.c
++===================================================================
++--- iscsitarget-1.4.20.3+svn502.orig/kernel/event.c
+++++ iscsitarget-1.4.20.3+svn502/kernel/event.c
++@@ -6,6 +6,7 @@
++  * Some functions are based on audit code.
++  */
 + 
-+-const char *__progname;
-++const char *tftpd_progname;
-+ static int peer;
-+ static unsigned long timeout  = TIMEOUT;        /* Current timeout value */
-+ static unsigned long rexmtval = TIMEOUT;       /* Basic timeout value */
-+@@ -395,9 +395,9 @@ int main(int argc, char **argv)
-+     /* basename() is way too much of a pain from a portability standpoint */
-+ 
-+     p = strrchr(argv[0], '/');
-+-    __progname = (p && p[1]) ? p + 1 : argv[0];
-++    tftpd_progname = (p && p[1]) ? p + 1 : argv[0];
-+ 
-+-    openlog(__progname, LOG_PID | LOG_NDELAY, LOG_DAEMON);
-++    openlog(tftpd_progname, LOG_PID | LOG_NDELAY, LOG_DAEMON);
-+ 
-+     srand(time(NULL) ^ getpid());
-+ 
-+@@ -946,14 +946,14 @@ int main(int argc, char **argv)
-+        syslog daemon gets restarted by the time we get here. */
-+     if (secure && standalone) {
-+         closelog();
-+-        openlog(__progname, LOG_PID | LOG_NDELAY, LOG_DAEMON);
-++        openlog(tftpd_progname, LOG_PID | LOG_NDELAY, LOG_DAEMON);
-+     }
-+ 
-+ #ifdef HAVE_TCPWRAPPERS
-+     /* Verify if this was a legal request for us.  This has to be
-+        done before the chroot, while /etc is still accessible. */
-+     request_init(&wrap_request,
-+-                 RQ_DAEMON, __progname,
-++                 RQ_DAEMON, tftpd_progname,
-+                  RQ_FILE, fd,
-+                  RQ_CLIENT_SIN, &from, RQ_SERVER_SIN, &myaddr, 0);
-+     sock_methods(&wrap_request);
-+-- 
-+2.14.1
-+
-diff --git a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-index 0a418b97f..fe8a32e7d 100644
---- a/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-+++ b/meta-networking/recipes-daemons/tftp-hpa/tftp-hpa_5.2.bb
-@@ -26,6 +26,7 @@ SRC_URI = "http://kernel.org/pub/software/network/tftp/tftp-hpa/tftp-hpa-${PV}.t
-            file://add-error-check-for-disk-filled-up.patch \
-            file://tftp-hpa-bug-fix-on-separated-CR-and-LF.patch \
-            file://fix-writing-emtpy-file.patch \
-+           file://0001-__progname-is-provided-by-libc.patch \
-            file://tftpd-hpa.socket \
-            file://tftpd-hpa.service \
- "
+++#include <linux/version.h>
++ #include <linux/module.h>
++ #include <net/tcp.h>
++ #include "iet_u.h"
++@@ -29,7 +30,11 @@ static void event_recv_skb(struct sk_buf
++ 		ietd_pid = NETLINK_CB(skb).portid;
++ 		WARN_ON(ietd_pid == 0);
++ 		if (nlh->nlmsg_flags & NLM_F_ACK)
+++#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+++			netlink_ack(skb, nlh, 0, NULL);
+++#else
++ 			netlink_ack(skb, nlh, 0);
+++#endif
++ 		skb_pull(skb, rlen);
++ 	}
++ }
+diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+index 5c1e38e17..659366107 100644
+--- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
++++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
+@@ -14,7 +14,9 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
+            file://access-sk_v6_daddr-iff-IPV6-defined.patch \
+            file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch \
+            file://build_with_updated_interfaces_of_linux_v4.8_and_above.patch \
+-           file://fix-call-trace-of-ahash-API-calling.patch"
++           file://fix-call-trace-of-ahash-API-calling.patch \
++           file://0001-kernel-event-netlink_ack-now-requires-4-arguments.patch \
++           "
+ 
+ SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
+ SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
 -- 
 2.14.1
 
