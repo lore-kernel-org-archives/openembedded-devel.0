@@ -1,47 +1,45 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7765878250
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 9ED7D78250
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 01:11:35 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id 83so1535668pgb.3
+	Tue, 29 Aug 2017 01:12:52 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id t193so1535892pgc.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Aug 2017 18:11:36 -0700 (PDT)
+	Mon, 28 Aug 2017 18:12:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=OliWBYThGwhZjDXGvK2X2+i2SPu2mz4EQLaiFxNQiIk=;
-	b=ACjTC9cbwTMbR60O9uyecg3ENbStJulBRy+ijm2wFplJywnMtS3lEXnz9HauDMCGAA
-	rDybYVH5zjUNNK40BV5s5QTxIk3OesmlLdT8Uud/TLZQA0cdX2szf6juLwry2DwjNGoF
-	HkhDrfDvlVVqroPXy1ENjdlK40yO3ykB1NLflaXgYQ1lwL91E76NhfNVTsHNnQ4w9H0z
-	xdfSWFDgANcuL8BkpLOBkbD6hh2vm4VoUvv1DiAgQRBCkt/d/cfWSuQgoRKl4dp8vPCo
-	1lBl6HYeYoSOeYG15rn9sbz/MFhyyl57WBtWkqBQddzWj6Rd8+Lu2u2xJ+n2J9sjrC/9
-	vT0g==
+	h=from:to:cc:subject:date:message-id;
+	bh=LM5ifBb3+MwSh47lfclcbtsXr45SssmA0XjxjOnVP1w=;
+	b=ZNzhNhATeX0E/5oxizskbSL0zfMBT4FKQYSHtxtIPqVChBvFkriZOpEdauhE+GFm9h
+	I4nPChhbMkFkpVHlBjDOLLUfhyROhD913EysmRW3fezt3wSpIrH7vcyZCYOzwAKCEPFT
+	rBlKkOsL9odvuraFq8hVNu7FUBhQhrw4NC5IeXWDqVtrqnQQjj4qOf62HfoIvGq1n5UW
+	sjszbZjvduC1zDkjAU3iu3CAObu/fiOltSiWyPG72hT1ym6goHUwRbn6Dk7PSGsV7bZS
+	qGjnNBZDH6Z7ceFGfRrb9F2lFUI5XvvkOKwjQArsekrSNoaKGEXhob1gdS41lq63wVV5
+	hmrw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=OliWBYThGwhZjDXGvK2X2+i2SPu2mz4EQLaiFxNQiIk=;
-	b=ZmNl+2hqf6j58s7/VFvKVz9Qfx3ev0Rms27Goh2+6LC2FLLhYrUwWbvhj1uhLzPlm1
-	QT6gux83dOqde5mmkLiSSkmjSoY57Lq6YJW925ggG4MwYx5M43oR/37HY0U8dS0IQxuP
-	ccvcAsaNyQjZQ6DK2dtEyMoRQJ43tbUzCI5y/z/ukMv+LoumNGH0/FXoC5Vx9W4mLMul
-	/oM6DDlvDiMJXwK6/br8rDL+f3GrsAmBISh5149bdANBwRlUZydT0eiIfjSYMMzEwwq+
-	fElU0hSNmHqKaXsvQBFCBM6xhVboFY8of6GqZS63kw3HTvRKfqLe2beBsMcwfs7QL9d7
-	yItQ==
-X-Gm-Message-State: AHYfb5iQpF5wnX4r3IYi/4lBdBmCxsYEn5cRO3KZpc2I69I501ojahMe
-	4fdpx7N7DRkf9+L16FG9GFzTS5xdXw==
-X-Received: by 10.84.210.200 with SMTP id a66mr2864616pli.161.1503969096542;
-	Mon, 28 Aug 2017 18:11:36 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.167.2 with HTTP; Mon, 28 Aug 2017 18:11:05 -0700 (PDT)
-In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA014B889665@ALA-MBC.corp.ad.wrs.com>
-References: <20170828060531.13717-1-jackie.huang@windriver.com>
-	<CAMKF1sq9CpL3V9SU9C5GSLCdQ+TZLObFJO=0djB2+8Mn9ZeS=Q@mail.gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA014B889665@ALA-MBC.corp.ad.wrs.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LM5ifBb3+MwSh47lfclcbtsXr45SssmA0XjxjOnVP1w=;
+	b=Ep6lRqbnoF9qE31CZOdN4B1QZClgCU+Cn7/SkVCJbwS7rBk4QKOiQSiRQY3DfYoP/k
+	Ixzz5G0ywbZWp+QjcnuU7c/OheJWSdcjS8L/OcIpfWgtbHa6bTdOrcUzH+fR520NmLGr
+	e4+HOT/dQvSvavJh6fW/IZBQ8BeHDZkgXECTB5ae46jUrB+KQW0pbe7KFr9CmdJ0qfLC
+	DxJh6NyUYxeb4hrLf9pxF2+KOGvwbbFVKtRLyTJDJDT2CFfN00QuNnIoN/y8D+Z7dI06
+	OFm9uoPjiw1YH2THhXcsXgMNMTqxNxiLl8TvHGEtFD3l5y+0rfmW31zkByA8FO22J4TC
+	ThLA==
+X-Gm-Message-State: AHYfb5iMH07/XEQLnkn8IyZkr0XPw28JcFxMjmvysXZqXJgvl3Fr1FXL
+	Ym0JUecVt2k3P4fV
+X-Received: by 10.84.217.85 with SMTP id e21mr2980757plj.109.1503969173308;
+	Mon, 28 Aug 2017 18:12:53 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
+	by smtp.gmail.com with ESMTPSA id
+	s70sm2317643pfk.21.2017.08.28.18.12.52
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 28 Aug 2017 18:12:52 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 28 Aug 2017 18:11:05 -0700
-Message-ID: <CAMKF1sqNhcDG6z1hZVFLTNDgtzsuq=ofRZm1=mrOzGo1ET_ZDQ@mail.gmail.com>
-To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] enscript: set the correct path for perl
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 28 Aug 2017 18:12:42 -0700
+Message-Id: <20170829011242.19551-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH] openipmi: Fix build with clang+hardening
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,69 +52,652 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 01:11:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 29 Aug 2017 01:12:52 -0000
 
-On Mon, Aug 28, 2017 at 6:07 PM, Huang, Jie (Jackie)
-<Jackie.Huang@windriver.com> wrote:
->
->
->> -----Original Message-----
->> From: Khem Raj [mailto:raj.khem@gmail.com]
->> Sent: Monday, August 28, 2017 23:26
->> To: Huang, Jie (Jackie)
->> Cc: openembeded-devel
->> Subject: Re: [oe] [meta-oe][PATCH] enscript: set the correct path for perl
->>
->> On Sun, Aug 27, 2017 at 11:05 PM,  <jackie.huang@windriver.com> wrote:
->> > From: Jackie Huang <jackie.huang@windriver.com>
->> >
->> > Set the correct path for perl and avoid
->> > searching the one in hosttools that cause
->> > QA issue:
->> >
->> > | ERROR: enscript-1.6.6-r0 do_package_qa: QA Issue: /usr/bin/diffpp
->> >   contained in package enscript requires
->> >   /builddir/tmp/hosttools/perl, but no providers found in RDEPENDS_enscript?
->> [file-rdeps]
->> >
->>
->> already fixed with https://patchwork.openembedded.org/patch/143281/
->
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ ...ame-struct-parameter-printf-for-namespace.patch | 618 +++++++++++++++++++++
+ .../recipes-support/openipmi/openipmi_2.0.24.bb    |   1 +
+ 2 files changed, 619 insertions(+)
+ create mode 100644 meta-oe/recipes-support/openipmi/files/0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch
 
-I prefer the patch that I sent since that does not hardcode variables that
-configure should define.
+diff --git a/meta-oe/recipes-support/openipmi/files/0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch b/meta-oe/recipes-support/openipmi/files/0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch
+new file mode 100644
+index 000000000..25057fbce
+--- /dev/null
++++ b/meta-oe/recipes-support/openipmi/files/0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch
+@@ -0,0 +1,618 @@
++From 8b51a6bf5a4829d8add535a098c0c06a049a9958 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Sat, 26 Aug 2017 22:50:57 -0700
++Subject: [PATCH] lanserv: Rename struct parameter printf for namespace
++ collision
++
++This comes to fore when we use hardening flags where printf
++is treated as macro and gets replaced with printf_chk
++
++Fixes errors like
++
++error: no member named '__printf_chk' in 'struct emu_out_s'
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ lanserv/OpenIPMI/serv.h |   2 +-
++ lanserv/emu_cmd.c       | 132 ++++++++++++++++++++++++------------------------
++ lanserv/ipmi_sim.c      |  10 ++--
++ 3 files changed, 72 insertions(+), 72 deletions(-)
++
++diff --git a/lanserv/OpenIPMI/serv.h b/lanserv/OpenIPMI/serv.h
++index d12d63a..8555c85 100644
++--- a/lanserv/OpenIPMI/serv.h
+++++ b/lanserv/OpenIPMI/serv.h
++@@ -522,7 +522,7 @@ uint8_t ipmb_checksum(uint8_t *data, int size, uint8_t start);
++ typedef struct emu_data_s emu_data_t;
++ typedef struct emu_out_s
++ {
++-    void (*printf)(struct emu_out_s *out, char *format, ...);
+++    void (*eprintf)(struct emu_out_s *out, char *format, ...);
++     void *data;
++ } emu_out_t;
++ 
++diff --git a/lanserv/emu_cmd.c b/lanserv/emu_cmd.c
++index ca44032..54b6f7b 100644
++--- a/lanserv/emu_cmd.c
+++++ b/lanserv/emu_cmd.c
++@@ -76,7 +76,7 @@ emu_get_uchar(emu_out_t *out, char **toks, unsigned char *val, char *errstr,
++ 	if (empty_ok)
++ 	    return ENOSPC;
++ 	if (errstr)
++-	    out->printf(out, "**No %s given\n", errstr);
+++	    out->eprintf(out, "**No %s given\n", errstr);
++ 	return EINVAL;
++     }
++     if (str[0] == '\'') {
++@@ -86,7 +86,7 @@ emu_get_uchar(emu_out_t *out, char **toks, unsigned char *val, char *errstr,
++     *val = strtoul(str, &tmpstr, 0);
++     if (*tmpstr != '\0') {
++ 	if (errstr)
++-	    out->printf(out, "**Invalid %s given\n", errstr);
+++	    out->eprintf(out, "**Invalid %s given\n", errstr);
++ 	return EINVAL;
++     }
++ 
++@@ -108,7 +108,7 @@ emu_get_uchar_with_vals(emu_out_t *out, char **toks,
++ 	if (empty_ok)
++ 	    return ENOSPC;
++ 	if (errstr)
++-	    out->printf(out, "**No %s given\n", errstr);
+++	    out->eprintf(out, "**No %s given\n", errstr);
++ 	return EINVAL;
++     }
++     if (str[0] == '\'') {
++@@ -131,7 +131,7 @@ emu_get_uchar_with_vals(emu_out_t *out, char **toks,
++     *val = strtoul(str, &tmpstr, 0);
++     if (*tmpstr != '\0') {
++ 	if (errstr)
++-	    out->printf(out, "**Invalid %s given\n", errstr);
+++	    out->eprintf(out, "**Invalid %s given\n", errstr);
++ 	return EINVAL;
++     }
++  out:
++@@ -150,12 +150,12 @@ emu_get_bitmask(emu_out_t *out, char **toks, uint16_t *val, char *errstr,
++ 	if (empty_ok)
++ 	    return ENOSPC;
++ 	if (errstr)
++-	    out->printf(out, "**No %s given\n", errstr);
+++	    out->eprintf(out, "**No %s given\n", errstr);
++ 	return EINVAL;
++     }
++     if (strlen(str) != size) {
++ 	if (errstr)
++-	    out->printf(out, "**invalid number of bits in %s\n", errstr);
+++	    out->eprintf(out, "**invalid number of bits in %s\n", errstr);
++ 	return EINVAL;
++     }
++     *val = 0;
++@@ -166,7 +166,7 @@ emu_get_bitmask(emu_out_t *out, char **toks, uint16_t *val, char *errstr,
++ 	    *val |= 1 << i;
++ 	} else {
++ 	    if (errstr)
++-		out->printf(out, "**Invalid bit value '%c' in %s\n", str[j],
+++		out->eprintf(out, "**Invalid bit value '%c' in %s\n", str[j],
++ 			    errstr);
++ 	    return EINVAL;
++ 	}
++@@ -184,13 +184,13 @@ emu_get_uint(emu_out_t *out, char **toks, unsigned int *val, char *errstr)
++     str = mystrtok(NULL, " \t\n", toks);
++     if (!str) {
++ 	if (errstr)
++-	    out->printf(out, "**No %s given\n", errstr);
+++	    out->eprintf(out, "**No %s given\n", errstr);
++ 	return EINVAL;
++     }
++     *val = strtoul(str, &tmpstr, 0);
++     if (*tmpstr != '\0') {
++ 	if (errstr)
++-	    out->printf(out, "**Invalid %s given\n", errstr);
+++	    out->eprintf(out, "**Invalid %s given\n", errstr);
++ 	return EINVAL;
++     }
++ 
++@@ -206,7 +206,7 @@ emu_get_bytes(emu_out_t *out, char **tokptr, unsigned char *data, char *errstr,
++ 
++     if (!tok) {
++ 	if (errstr)
++-	    out->printf(out, "**No %s given\n", errstr);
+++	    out->eprintf(out, "**No %s given\n", errstr);
++ 	return EINVAL;
++     }
++     if (*tok == '"') {
++@@ -215,7 +215,7 @@ emu_get_bytes(emu_out_t *out, char **tokptr, unsigned char *data, char *errstr,
++ 	tok++;
++ 	end = strlen(tok) - 1;
++ 	if (tok[end] != '"') {
++-	  out->printf(out, "**ASCII %s doesn't end in '\"'", errstr);
+++	  out->eprintf(out, "**ASCII %s doesn't end in '\"'", errstr);
++ 	    return EINVAL;
++ 	}
++ 	if (end > (len - 1))
++@@ -228,7 +228,7 @@ emu_get_bytes(emu_out_t *out, char **tokptr, unsigned char *data, char *errstr,
++ 	char         c[3];
++ 	/* HEX pw */
++ 	if (strlen(tok) != 32) {
++-	    out->printf(out, "**HEX %s not 32 HEX characters long", errstr);
+++	    out->eprintf(out, "**HEX %s not 32 HEX characters long", errstr);
++ 	    return EINVAL;
++ 	}
++ 	c[2] = '\0';
++@@ -239,7 +239,7 @@ emu_get_bytes(emu_out_t *out, char **tokptr, unsigned char *data, char *errstr,
++ 	    tok++;
++ 	    data[i] = strtoul(c, &end, 16);
++ 	    if (*end != '\0') {
++-		out->printf(out, "**Invalid HEX character in %s", errstr);
+++		out->eprintf(out, "**Invalid HEX character in %s", errstr);
++ 		return -1;
++ 	    }
++ 	}
++@@ -263,12 +263,12 @@ read_command_file(emu_out_t *out, emu_data_t *emu, const char *command_file)
++ 
++ 	buffer = malloc(INPUT_BUFFER_SIZE);
++ 	if (!buffer) {
++-	    out->printf(out, "Could not allocate buffer memory\n");
+++	    out->eprintf(out, "Could not allocate buffer memory\n");
++ 	    rv = ENOMEM;
++ 	    goto out;
++ 	}
++ 	while (fgets(buffer+pos, INPUT_BUFFER_SIZE-pos, f)) {
++-	    out->printf(out, "%s", buffer+pos);
+++	    out->eprintf(out, "%s", buffer+pos);
++ 	    if (buffer[pos] == '#')
++ 		continue;
++ 	    pos = strlen(buffer);
++@@ -318,7 +318,7 @@ sel_enable(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_enable_sel(mc, max_records, flags);
++     if (rv)
++-	out->printf(out, "**Unable to enable sel, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to enable sel, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -343,9 +343,9 @@ sel_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_add_to_sel(mc, record_type, data, &r);
++     if (rv)
++-	out->printf(out, "**Unable to add to sel, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to add to sel, error 0x%x\n", rv);
++     else
++-	out->printf(out, "Added record %d\n", r);
+++	out->eprintf(out, "Added record %d\n", r);
++     return rv;
++ }
++ 
++@@ -361,14 +361,14 @@ main_sdr_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	if (rv == ENOSPC)
++ 	    break;
++ 	if (rv) {
++-	    out->printf(out, "**Error 0x%x in data byte %d\n", rv, i);
+++	    out->eprintf(out, "**Error 0x%x in data byte %d\n", rv, i);
++ 	    return rv;
++ 	}
++     }
++ 
++     rv = ipmi_mc_add_main_sdr(mc, data, i);
++     if (rv)
++-	out->printf(out, "**Unable to add to sdr, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to add to sdr, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -389,14 +389,14 @@ device_sdr_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	if (rv == ENOSPC)
++ 	    break;
++ 	if (rv) {
++-	    out->printf(out, "**Error 0x%x in data byte %d\n", rv, i);
+++	    out->eprintf(out, "**Error 0x%x in data byte %d\n", rv, i);
++ 	    return rv;
++ 	}
++     }
++ 
++     rv = ipmi_mc_add_device_sdr(mc, lun, data, i);
++     if (rv)
++-	out->printf(out, "**Unable to add to sdr, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to add to sdr, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -439,7 +439,7 @@ sensor_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++     while (tok) {
++ 	if (strcmp(tok, "poll") == 0) {
++ 	    if (handler) {
++-		out->printf(out, "**poll given twice in sensor\n", tok);
+++		out->eprintf(out, "**poll given twice in sensor\n", tok);
++ 		return -1;
++ 	    }
++ 
++@@ -449,27 +449,27 @@ sensor_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++ 	    tok = mystrtok(NULL, " \t\n", toks);
++ 	    if (!tok) {
++-		out->printf(out, "**No polled sensor handler given\n", tok);
+++		out->eprintf(out, "**No polled sensor handler given\n", tok);
++ 		return -1;
++ 	    }
++ 
++ 	    handler = ipmi_sensor_find_handler(tok);
++ 	    if (!handler) {
++-		out->printf(out, "**Invalid sensor handler: %s\n", tok);
+++		out->eprintf(out, "**Invalid sensor handler: %s\n", tok);
++ 		return -1;
++ 	    }
++ 
++ 	    rv = handler->init(mc, lun, num, toks, handler->cb_data, &rcb_data,
++ 			       &errstr);
++ 	    if (rv) {
++-		out->printf(out, "**Error initializing sensor handler: %s\n", 
+++		out->eprintf(out, "**Error initializing sensor handler: %s\n", 
++ 			    errstr);
++ 		return rv;
++ 	    }
++ 	} else if (strcmp(tok, "event-only") == 0) {
++ 	    event_only = 1;
++ 	} else {
++-	    out->printf(out, "**Unknown sensor option: %s\n", tok);
+++	    out->eprintf(out, "**Unknown sensor option: %s\n", tok);
++ 	    return -1;
++ 	}
++ 
++@@ -477,7 +477,7 @@ sensor_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++     }
++ 
++     if (handler && event_only) {
++-	out->printf(out, "**An event-only sensor cannot be polled\n");
+++	out->eprintf(out, "**An event-only sensor cannot be polled\n");
++ 	return -1;
++     }
++ 
++@@ -488,7 +488,7 @@ sensor_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	if (!rv && handler->postinit) {
++ 	    rv = handler->postinit(rcb_data, &errstr);
++ 	    if (rv) {
++-		out->printf(out, "**Error in sensor handler postinit: %s\n", 
+++		out->eprintf(out, "**Error in sensor handler postinit: %s\n", 
++ 			    errstr);
++ 	    }
++ 	}
++@@ -496,7 +496,7 @@ sensor_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	rv = ipmi_mc_add_sensor(mc, lun, num, type, code, event_only);
++     }
++     if (rv)
++-	out->printf(out, "**Unable to add to sensor, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to add to sensor, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -532,7 +532,7 @@ sensor_set_bit(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_sensor_set_bit(mc, lun, num, bit, value, gen_event);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor bit, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor bit, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -563,7 +563,7 @@ sensor_set_bit_clr_rest(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **
++ 
++     rv = ipmi_mc_sensor_set_bit_clr_rest(mc, lun, num, bit, gen_event);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor bit, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor bit, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -594,7 +594,7 @@ sensor_set_value(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_sensor_set_value(mc, lun, num, value, gen_event);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor value, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor value, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -637,7 +637,7 @@ sensor_set_hysteresis(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **to
++     rv = ipmi_mc_sensor_set_hysteresis(mc, lun, num, support, positive,
++ 				       negative);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor hysteresis, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor hysteresis, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -682,7 +682,7 @@ sensor_set_threshold(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **tok
++     rv = ipmi_mc_sensor_set_threshold(mc, lun, num, support,
++ 				      enabled, 1, thresholds);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor thresholds, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor thresholds, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -759,7 +759,7 @@ sensor_set_event_support(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char *
++ 					  assert_support, deassert_support,
++ 					  assert_enabled, deassert_enabled);
++     if (rv)
++-	out->printf(out, "**Unable to set sensor thresholds, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set sensor thresholds, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -819,7 +819,7 @@ mc_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	else if (strcmp("persist_sdr", tok) == 0)
++ 	    flags |= IPMI_MC_PERSIST_SDR;
++ 	else {
++-	    out->printf(out, "**Invalid MC flag: %s\n", tok);
+++	    out->eprintf(out, "**Invalid MC flag: %s\n", tok);
++ 	    return -1;
++ 	}
++     }
++@@ -833,7 +833,7 @@ mc_add(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 			 device_revision, major_fw_rev, minor_fw_rev,
++ 			 device_support, mfg_id, product_id, flags);
++     if (rv)
++-	out->printf(out, "**Unable to add the MC, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to add the MC, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -890,7 +890,7 @@ mc_set_power(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_set_power(mc, power, gen_int);
++     if (rv)
++-	out->printf(out, "**Unable to set power, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set power, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -916,7 +916,7 @@ mc_add_fru_data(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     tok = mystrtok(NULL, " \t\n", toks);
++     if (!tok) {
++-	out->printf(out, "**No FRU data type given");
+++	out->eprintf(out, "**No FRU data type given");
++ 	return -1;
++     }
++     if (strcmp(tok, "file") == 0) {
++@@ -929,13 +929,13 @@ mc_add_fru_data(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++ 	rv = get_delim_str(toks, &frufn, &errstr);
++ 	if (rv) {
++-	    out->printf(out, "**Error with FRU filename: %d", strerror(rv));
+++	    out->eprintf(out, "**Error with FRU filename: %d", strerror(rv));
++ 	    return rv;
++ 	}
++ 	rv = ipmi_mc_add_fru_file(mc, devid, length, file_offset,
++ 				  (void *) frufn);
++ 	if (rv)
++-	    out->printf(out, "**Unable to add FRU file, error 0x%x\n", rv);
+++	    out->eprintf(out, "**Unable to add FRU file, error 0x%x\n", rv);
++ 	
++     } else if (strcmp(tok, "data") == 0) {
++ 	for (i=0; i<length; i++) {
++@@ -943,14 +943,14 @@ mc_add_fru_data(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	    if (rv == ENOSPC)
++ 		break;
++ 	    if (rv) {
++-		out->printf(out, "**Error 0x%x in data byte %d\n", rv, i);
+++		out->eprintf(out, "**Error 0x%x in data byte %d\n", rv, i);
++ 		return rv;
++ 	    }
++ 	}
++ 
++ 	rv = emu_get_uchar(out, toks, &data[i], "data byte", 1);
++ 	if (rv != ENOSPC) {
++-	    out->printf(out, "**Error: input data too long for FRU\n", rv, i);
+++	    out->eprintf(out, "**Error: input data too long for FRU\n", rv, i);
++ 	    return EINVAL;
++ 	}
++ 
++@@ -958,9 +958,9 @@ mc_add_fru_data(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++ 	rv = ipmi_mc_add_fru_data(mc, devid, length, NULL, data);
++ 	if (rv)
++-	    out->printf(out, "**Unable to add FRU data, error 0x%x\n", rv);
+++	    out->eprintf(out, "**Unable to add FRU data, error 0x%x\n", rv);
++     } else {
++-	out->printf(out, "**FRU type not given, need file or data\n");
+++	out->eprintf(out, "**FRU type not given, need file or data\n");
++ 	rv = EINVAL;
++     }
++     return rv;
++@@ -981,28 +981,28 @@ mc_dump_fru_data(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_get_fru_data_len(mc, devid, &length);
++     if (rv) {
++-	out->printf(out, "**Unable to dump FRU data, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to dump FRU data, error 0x%x\n", rv);
++ 	goto out;
++     }
++ 
++     data = malloc(length);
++     if (!data) {
++-	out->printf(out, "**Unable to dump FRU data, out of memory\n", rv);
+++	out->eprintf(out, "**Unable to dump FRU data, out of memory\n", rv);
++ 	goto out;
++     }
++ 
++     rv = ipmi_mc_get_fru_data(mc, devid, length, data);
++     if (rv) {
++-	out->printf(out, "**Unable to dump FRU data, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to dump FRU data, error 0x%x\n", rv);
++ 	goto out;
++     }
++ 
++     for (i=0; i<length; i++) {
++ 	if ((i > 0) && ((i % 8) == 0))
++-	    out->printf(out, "\n");
++-	out->printf(out, " 0x%2.2x", data[i]);
+++	    out->eprintf(out, "\n");
+++	out->eprintf(out, " 0x%2.2x", data[i]);
++     }
++-    out->printf(out, "\n");
+++    out->eprintf(out, "\n");
++ 
++  out:
++     if (data)
++@@ -1021,7 +1021,7 @@ mc_setbmc(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	return rv;
++     rv = ipmi_emu_set_bmc_mc(emu, ipmb);
++     if (rv)
++-	out->printf(out, "**Invalid IPMB address\n");
+++	out->eprintf(out, "**Invalid IPMB address\n");
++     return rv;
++ }
++ 
++@@ -1032,7 +1032,7 @@ atca_enable(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_emu_atca_enable(emu);
++     if (rv)
++-	out->printf(out, "**Unable to enable ATCA mode, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to enable ATCA mode, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -1056,7 +1056,7 @@ atca_set_site(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_emu_atca_set_site(emu, hw_address, site_type, site_number);
++     if (rv)
++-	out->printf(out, "**Unable to set site type, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set site type, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -1072,7 +1072,7 @@ mc_set_num_leds(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     rv = ipmi_mc_set_num_leds(mc, count);
++     if (rv)
++-	out->printf(out, "**Unable to set number of LEDs, error 0x%x\n", rv);
+++	out->eprintf(out, "**Unable to set number of LEDs, error 0x%x\n", rv);
++     return rv;
++ }
++ 
++@@ -1085,7 +1085,7 @@ read_cmds(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     err = get_delim_str(toks, &filename, &errstr);
++     if (err) {
++-	out->printf(out, "Could not get include filename: %s\n", errstr);
+++	out->eprintf(out, "Could not get include filename: %s\n", errstr);
++ 	return err;
++     }
++ 
++@@ -1097,7 +1097,7 @@ read_cmds(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++     {
++ 	char *nf = malloc(strlen(BASE_CONF_STR) + strlen(filename) + 2);
++ 	if (!nf) {
++-	    out->printf(out, "Out of memory in include\n", errstr);
+++	    out->eprintf(out, "Out of memory in include\n", errstr);
++ 	    goto out_err;
++ 	}
++ 	strcpy(nf, BASE_CONF_STR);
++@@ -1107,7 +1107,7 @@ read_cmds(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	filename = nf;
++ 	err = read_command_file(out, emu, filename);
++ 	if (err) {
++-	    out->printf(out, "Could not read include file %s\n", filename);
+++	    out->eprintf(out, "Could not read include file %s\n", filename);
++ 	}
++     }
++ 
++@@ -1147,7 +1147,7 @@ debug_cmd(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	} else if (strcmp(tok, "sol") == 0) {
++ 	    level |= DEBUG_SOL;
++ 	} else {
++-	    out->printf(out, "Invalid debug level '%s', options are 'raw' and 'msg'\n",
+++	    out->eprintf(out, "Invalid debug level '%s', options are 'raw' and 'msg'\n",
++ 		   tok);
++ 	    return EINVAL;
++ 	}
++@@ -1168,7 +1168,7 @@ persist_cmd(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 	} else if (strcmp(tok, "off") == 0) {
++ 	    persist_enable = 0;
++ 	} else {
++-	    out->printf(out, "Invalid persist vale '%s', options are 'on' and 'off'\n",
+++	    out->eprintf(out, "Invalid persist vale '%s', options are 'on' and 'off'\n",
++ 		   tok);
++ 	    return EINVAL;
++ 	}
++@@ -1194,18 +1194,18 @@ do_define(emu_out_t *out, emu_data_t *emu, lmc_data_t *mc, char **toks)
++ 
++     name = mystrtok(NULL, " \t\n", toks);
++     if (!name) {
++-	out->printf(out, "No variable name given for define\n");
+++	out->eprintf(out, "No variable name given for define\n");
++ 	return EINVAL;
++     }
++     err = get_delim_str(toks, &value, &errstr);
++     if (err) {
++-	out->printf(out, "Could not get variable %s value: %s\n", name, errstr);
+++	out->eprintf(out, "Could not get variable %s value: %s\n", name, errstr);
++ 	return err;
++     }
++     err = add_variable(name, value);
++     if (err) {
++ 	free(value);
++-	out->printf(out, "Out of memory setting variable %s\n", name);
+++	out->eprintf(out, "Out of memory setting variable %s\n", name);
++ 	return err;
++     }
++     return 0;
++@@ -1301,7 +1301,7 @@ ipmi_emu_cmd(emu_out_t *out, emu_data_t *emu, char *cmd_str)
++ 		    return rv;
++ 		rv = ipmi_emu_get_mc_by_addr(emu, ipmb, &mc);
++ 		if (rv) {
++-		    out->printf(out, "**Invalid MC address\n");
+++		    out->eprintf(out, "**Invalid MC address\n");
++ 		    return rv;
++ 		}
++ 	    }
++@@ -1312,7 +1312,7 @@ ipmi_emu_cmd(emu_out_t *out, emu_data_t *emu, char *cmd_str)
++ 	}
++     }
++ 
++-    out->printf(out, "**Unknown command: %s\n", cmd);
+++    out->eprintf(out, "**Unknown command: %s\n", cmd);
++ 
++  out:
++     return rv;
++diff --git a/lanserv/ipmi_sim.c b/lanserv/ipmi_sim.c
++index 9472cce..30c4f27 100644
++--- a/lanserv/ipmi_sim.c
+++++ b/lanserv/ipmi_sim.c
++@@ -607,8 +607,8 @@ isim_log(sys_data_t *sys, int logtype, msg_t *msg, const char *format,
++ 
++     con = data->consoles;
++     while (con) {
++-	con->out.printf(&con->out, "%s", str);
++-	con->out.printf(&con->out, "\n");
+++	con->out.eprintf(&con->out, "%s", str);
+++	con->out.eprintf(&con->out, "\n");
++ 	con = con->next;
++     }
++ #if HAVE_SYSLOG
++@@ -956,7 +956,7 @@ console_bind_ready(int fd, void *cb_data, os_hnd_fd_id_t *id)
++     newcon->shutdown_on_close = 0;
++     newcon->telnet = 1;
++     newcon->tn_pos = 0;
++-    newcon->out.printf = emu_printf;
+++    newcon->out.eprintf = emu_printf;
++     newcon->out.data = newcon;
++ 
++     setsockopt(rv, IPPROTO_TCP, TCP_NODELAY, (char *)&val, sizeof(val));
++@@ -1463,10 +1463,10 @@ main(int argc, const char *argv[])
++     stdio_console.telnet = 0;
++     stdio_console.tn_pos = 0;
++     if (nostdio) {
++-	stdio_console.out.printf = dummy_printf;
+++	stdio_console.out.eprintf = dummy_printf;
++ 	stdio_console.out.data = &stdio_console;
++     } else {
++-	stdio_console.out.printf = emu_printf;
+++	stdio_console.out.eprintf = emu_printf;
++ 	stdio_console.out.data = &stdio_console;
++     }
++     stdio_console.next = NULL;
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-support/openipmi/openipmi_2.0.24.bb b/meta-oe/recipes-support/openipmi/openipmi_2.0.24.bb
+index 40395a35c..a4f63c5f4 100644
+--- a/meta-oe/recipes-support/openipmi/openipmi_2.0.24.bb
++++ b/meta-oe/recipes-support/openipmi/openipmi_2.0.24.bb
+@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/openipmi/OpenIPMI-${PV}.tar.gz \
+            file://include_sys_types.patch \
+            file://openipmi-helper \
+            file://ipmi.service \
++           file://0001-lanserv-Rename-struct-parameter-printf-for-namespace.patch \
+            "
+ 
+ S = "${WORKDIR}/OpenIPMI-${PV}"
+-- 
+2.14.1
 
-> Got it, thanks!
->
-> Thanks,
-> Jackie
->
->>
->> > Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
->> > ---
->> >  meta-oe/recipes-extended/enscript/enscript_1.6.6.bb | 2 ++
->> >  1 file changed, 2 insertions(+)
->> >
->> > diff --git a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb b/meta-
->> oe/recipes-extended/enscript/enscript_1.6.6.bb
->> > index 96129880a..65f1ccfa0 100644
->> > --- a/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
->> > +++ b/meta-oe/recipes-extended/enscript/enscript_1.6.6.bb
->> > @@ -19,4 +19,6 @@ inherit autotools gettext
->> >  SRC_URI[md5sum] = "3acc242b829adacabcaf28533f049afd"
->> >  SRC_URI[sha256sum] =
->> "6d56bada6934d055b34b6c90399aa85975e66457ac5bf513427ae7fc77f5c0bb"
->> >
->> > +CACHED_CONFIGUREVARS += "ac_cv_path_PERL=${bindir}/perl"
->> > +
->> >  RDEPENDS_${PN} = "perl"
->> > --
->> > 2.11.0
->> >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
