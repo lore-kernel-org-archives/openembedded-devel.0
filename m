@@ -1,24 +1,24 @@
-Return-Path: <Qi.Chen@windriver.com>
+Return-Path: <Dengke.Du@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id E862A71975
+	by mail.openembedded.org (Postfix) with ESMTP id 1C32F77FF9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Aug 2017 03:08:17 +0000 (UTC)
+	Wed, 30 Aug 2017 07:19:35 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7U38IRg007152
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7U7Ja1A012412
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 20:08:18 -0700
-Received: from pek-qchen1-d1.corp.ad.wrs.com (128.224.162.167) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 29 Aug 2017 20:08:17 -0700
-From: <Qi.Chen@windriver.com>
+	Wed, 30 Aug 2017 00:19:36 -0700
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 30 Aug 2017 00:19:35 -0700
+From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Aug 2017 11:13:17 +0800
-Message-ID: <1504062797-27983-1-git-send-email-Qi.Chen@windriver.com>
-X-Mailer: git-send-email 1.9.1
+Date: Wed, 30 Aug 2017 03:19:34 -0400
+Message-ID: <1504077574-86515-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] udisk: fix dependency about libdevmapper
+Subject: [PATCH] wolfssl: upgrade to 3.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,46 +31,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Aug 2017 03:08:18 -0000
+X-List-Received-Date: Wed, 30 Aug 2017 07:19:36 -0000
 Content-Type: text/plain
 
-From: Chen Qi <Qi.Chen@windriver.com>
-
-We have separated libdevmapper from lvm2, so we need to also fix related
-dependency for udisk.
-
-Instead of simply replacing lvm2 with libdevmapper in DEPENDS, we add
-PACKAGECONFIG for libdevmapper.
-
-Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-support/udisks/udisks_1.0.5.bb | 5 +++--
- 1 file changed, 3 insertions(+), 2 deletions(-)
+ ...0001-fix-no-rule-to-make-cyassl-options.h.patch | 27 ++++++++++++++++++++++
+ .../{wolfssl_3.9.0.bb => wolfssl_3.12.0.bb}        | 10 +++++---
+ 2 files changed, 34 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-connectivity/wolfssl/files/0001-fix-no-rule-to-make-cyassl-options.h.patch
+ rename meta-networking/recipes-connectivity/wolfssl/{wolfssl_3.9.0.bb => wolfssl_3.12.0.bb} (69%)
 
-diff --git a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-index ffe2c26..e332660 100644
---- a/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-+++ b/meta-oe/recipes-support/udisks/udisks_1.0.5.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "A storage daemon that implements well-defined D-Bus interfaces th
- LICENSE = "GPLv2+"
- LIC_FILES_CHKSUM = "file://COPYING;md5=73d83aebe7e4b62346afde80e0e94273"
+diff --git a/meta-networking/recipes-connectivity/wolfssl/files/0001-fix-no-rule-to-make-cyassl-options.h.patch b/meta-networking/recipes-connectivity/wolfssl/files/0001-fix-no-rule-to-make-cyassl-options.h.patch
+new file mode 100644
+index 0000000..f304d93
+--- /dev/null
++++ b/meta-networking/recipes-connectivity/wolfssl/files/0001-fix-no-rule-to-make-cyassl-options.h.patch
+@@ -0,0 +1,27 @@
++From fb490136cf8f2456cfe13b0b4f796e6c155e75dc Mon Sep 17 00:00:00 2001
++From: Dengke Du <dengke.du@windriver.com>
++Date: Wed, 30 Aug 2017 03:02:32 -0400
++Subject: [PATCH] fix no rule to make cyassl/options.h
++
++Upstream-Status: Pending
++
++Signed-off-by: Dengke Du <dengke.du@windriver.com>
++---
++ configure.ac | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/configure.ac b/configure.ac
++index 395d75d..d4a3880 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -3684,6 +3684,7 @@ AC_CONFIG_FILES([wolfssl/options.h])
++ #fi
++ AC_CONFIG_FILES([support/wolfssl.pc])
++ AC_CONFIG_FILES([rpm/spec])
+++AC_CONFIG_FILES([cyassl/options.h])
++ 
++ AX_CREATE_GENERIC_CONFIG
++ AX_AM_JOBSERVER([yes])
++-- 
++2.8.1
++
+diff --git a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.12.0.bb
+similarity index 69%
+rename from meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb
+rename to meta-networking/recipes-connectivity/wolfssl/wolfssl_3.12.0.bb
+index afae3c8..5126190 100644
+--- a/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.9.0.bb
++++ b/meta-networking/recipes-connectivity/wolfssl/wolfssl_3.12.0.bb
+@@ -12,10 +12,14 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+ PROVIDES += "cyassl"
+ RPROVIDES_${PN} = "cyassl"
  
--DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native lvm2 \
-+DEPENDS = "libatasmart sg3-utils polkit libgudev dbus-glib glib-2.0 intltool-native \
-     dbus-glib-native \
- "
- # optional dependencies: device-mapper parted
-@@ -24,7 +24,8 @@ SRC_URI[udisks.sha256sum] = "f2ec82eb0ea7e01dc299b5b29b3c18cdf861236ec43dcff66b3
+-SRC_URI = "http://www.wolfssl.com/${BP}.zip"
++SRC_URI = "https://github.com/wolfSSL/wolfssl/archive/v${PV}-stable.zip \
++           file://0001-fix-no-rule-to-make-cyassl-options.h.patch \
++          "
  
- inherit autotools-brokensep systemd gtk-doc
+-SRC_URI[md5sum] = "f3396726a9befd61443c2cce216e39ba"
+-SRC_URI[sha256sum] = "98f50244f7b43f8683bd0cf5c599849d330e75e6cf077e96f14e83bda8b03ca3"
++SRC_URI[md5sum] = "f9caf558169ab650dc8200708799ebeb"
++SRC_URI[sha256sum] = "b6d87d3e2c8757177d69aff373c91cf162f4a3944fae90fa10d086fd5f9542e7"
++
++S = "${WORKDIR}/wolfssl-${PV}-stable"
  
--PACKAGECONFIG ??= ""
-+PACKAGECONFIG ??= "libdevmapper"
-+PACKAGECONFIG[libdevmapper] = "--enable-devmapper,--disable-devmapper,libdevmapper"
- PACKAGECONFIG[parted] = "--enable-parted,--disable-parted,parted"
+ inherit autotools
  
- EXTRA_OECONF = "--disable-man-pages --libdir=${base_libdir} --sbindir=${base_sbindir}"
 -- 
-1.9.1
+2.8.1
 
 
