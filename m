@@ -1,49 +1,24 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f68.google.com (mail-vk0-f68.google.com
-	[209.85.213.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 8883B78307
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 4881D71ABB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 15:47:05 +0000 (UTC)
-Received: by mail-vk0-f68.google.com with SMTP id d124so1475893vkf.3
+	Wed, 30 Aug 2017 02:11:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7U2BAnK029431
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Aug 2017 08:47:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=OWkLVG6SvhTH9FBcdFoCBndSnVP1j4kwps0D2SHDKP0=;
-	b=CkiSdWvCwJYwPQxe1o9maj2enMXl3EZkq22cp6QOiDyksRqpPAxN+yxrxTuT2Q/msd
-	DhgDjQre2gzvkBIZBMwfGrcROP8k32jshOSasO3wA3psnyy6/36R0vOV9YAn8BAqhWJB
-	Ie7cdajPJhmGdCzBbvJ7fxJHzqJUkcf5Y02h/MNT/T9CFDHW70jS28KFZOjv1yRAXDKS
-	F1uKIwIgMmbV0lR/B1FLey/C1ke/9uHzRNs4qZ7vqc+I02DPhC2y9EX9fUL0mSV73c/q
-	l4JE8lZuqTL2LSsUvfXti6cMwYcS1OCJOnHBntAVIpLwdCS0R+qMLYA65nt98lD4aTiL
-	sgjQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=OWkLVG6SvhTH9FBcdFoCBndSnVP1j4kwps0D2SHDKP0=;
-	b=Lfm6//kee9jdATXGcXQS8z+jo+RI0XVKrCiwLMj/rk6j3BlLDo4Udqp5eHwa2uULbQ
-	rHbxd0Mrat4AVL3KlUhbkAHJpdR75sdKncifg/vwI/HefEzy5/D+c0Q1RzhbOAQwtGrN
-	YWwLqoryJthnssmuG6yu/4vzApdYseVtJsXY9Y7W5Vl6f7Fv2Am7Sb4JXO4wDayEjzjR
-	z+Se0sUXkXQOeZJ48Nw6gC+X2UkP/5/Qft6GjtHRTxKQQT7Ex74YjhZfVAMOBihYIQ9o
-	FwoAlsZCKT8jf6pBtjIQvPOILWVEMVZngHe1VLWghHe7jCB+csexZ62I6UWwjjDcB03y
-	01rg==
-X-Gm-Message-State: AHYfb5itItTUjnaorXqNR/6HSGfv/rUfiijA2+NzaIr9E8yLOm++Tl4I
-	t3vve9myhouq8eERq+ypZl6rILTIAQ==
-X-Received: by 10.31.176.132 with SMTP id z126mr453453vke.1.1504021626376;
-	Tue, 29 Aug 2017 08:47:06 -0700 (PDT)
+	Tue, 29 Aug 2017 19:11:10 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Tue, 29 Aug 2017 19:11:09 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 30 Aug 2017 09:59:27 +0800
+Message-ID: <20170830015927.11040-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-Received: by 10.103.50.144 with HTTP; Tue, 29 Aug 2017 08:47:05 -0700 (PDT)
-In-Reply-To: <CAMKF1soDqjV2xP1-+XyC23okmZaGPgXV+Z08tH1k9gi2hXd7+A@mail.gmail.com>
-References: <20170828163937.29460-1-adrian.ratiu@ni.com>
-	<20170828163937.29460-3-adrian.ratiu@ni.com>
-	<CAMKF1soDqjV2xP1-+XyC23okmZaGPgXV+Z08tH1k9gi2hXd7+A@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 29 Aug 2017 17:47:05 +0200
-Message-ID: <CA+chaQcJzL_P1wiMWZ9xzpUNQVhPNzgVfQjAszBpfbXRMLJQ2A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] smbnetfs: unblacklist recipe
+Subject: [meta-oe][PATCH] opencv: fix CVEs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,50 +31,1044 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Aug 2017 15:47:05 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 30 Aug 2017 02:11:10 -0000
+Content-Type: text/plain
 
-That's probably caused by my change in master-next to remove blacklisted
-recipes (and their patch files), I've removed smbfs from that commit, but
-forgot to restore the .patch file
+From: Kai Kang <kai.kang@windriver.com>
 
-On Tue, Aug 29, 2017 at 5:45 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Fix CVEs for opencv 3.3:
 
-> On Mon, Aug 28, 2017 at 9:39 AM, Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> wrote:
-> > All its dependencies have been fixed and it builds correctly.
-> >
->
-> I see
-> ERROR: smbnetfs-git-r0 do_fetch: Fetcher failure for URL:
-> 'file://configure.patch'. Unable to fetch URL from any source.
->
-> > Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-> > ---
-> >  meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb | 2 --
-> >  1 file changed, 2 deletions(-)
-> >
-> > diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_
-> git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-> > index 6995ad3f5..f1420fbed 100644
-> > --- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-> > +++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-> > @@ -24,5 +24,3 @@ PACKAGECONFIG ??= ""
-> >  PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--
-> with-gnome-keyring=no,libgnome-keyring"
-> >
-> >  S = "${WORKDIR}/git"
-> > -
-> > -PNBLACKLIST[smbnetfs] ?= "Fails to build with RSS
-> http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe will
-> be removed on 2017-09-01 unless the issue is fixed"
-> > --
-> > 2.14.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+* CVE-2017-12597
+* CVE-2017-12598
+* CVE-2017-12599
+* CVE-2017-12600
+* CVE-2017-12601
+* CVE-2017-12602
+* CVE-2017-12603
+* CVE-2017-12604
+* CVE-2017-12605
+* CVE-2017-12606
+* CVE-2017-12862
+* CVE-2017-12863
+* CVE-2017-12864
+
+Refs:
+1 https://github.com/opencv/opencv/pull/9376
+2 https://security-tracker.debian.org/tracker/CVE-2017-12601
+
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ ...round-GCC-7.1.1-compilation-issue-with-sa.patch | 127 ++++
+ ...mgcodecs-refactoring-improve-code-quality.patch | 656 +++++++++++++++++++++
+ ...3-imgproc-test-add-checks-for-remove-call.patch | 186 ++++++
+ meta-oe/recipes-support/opencv/opencv_3.3.bb       |   3 +
+ 4 files changed, 972 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0002-imgcodecs-refactoring-improve-code-quality.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0003-imgproc-test-add-checks-for-remove-call.patch
+
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch b/meta-oe/recipes-support/opencv/opencv/0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch
+new file mode 100644
+index 000000000..0140633db
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch
+@@ -0,0 +1,127 @@
++Upstream-Status: Backport [https://github.com/opencv/opencv/pull/9376/commits/0d854db361106dfcb055231fd0112c5b85ef2287]
++
++Fix CVEs for opencv 3.3.
++
++* CVE-2017-12597
++* CVE-2017-12598
++* CVE-2017-12599
++* CVE-2017-12600
++* CVE-2017-12601
++* CVE-2017-12602
++* CVE-2017-12603
++* CVE-2017-12604
++* CVE-2017-12605
++* CVE-2017-12606
++* CVE-2017-12862
++* CVE-2017-12863
++* CVE-2017-12864
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++From 0d854db361106dfcb055231fd0112c5b85ef2287 Mon Sep 17 00:00:00 2001
++From: Alexander Alekhin <alexander.a.alekhin@gmail.com>
++Date: Tue, 15 Aug 2017 21:45:05 +0000
++Subject: [PATCH 1/3] build: workaround GCC 7.1.1 compilation issue with
++ sanitize flags
++
++Version: gcc (GCC) 7.1.1 20170622 (Red Hat 7.1.1-3)
++Flags: -fsanitize=address,undefined
++---
++ modules/ts/src/cuda_test.cpp | 56 ++++++++++++++++++++++++++------------------
++ 1 file changed, 33 insertions(+), 23 deletions(-)
++
++diff --git a/modules/ts/src/cuda_test.cpp b/modules/ts/src/cuda_test.cpp
++index a48e0a087..eb4cee136 100644
++--- a/modules/ts/src/cuda_test.cpp
+++++ b/modules/ts/src/cuda_test.cpp
++@@ -322,16 +322,20 @@ namespace cvtest
++ 
++         if (m1.size() != m2.size())
++         {
++-            return AssertionFailure() << "Matrices \"" << expr1 << "\" and \"" << expr2 << "\" have different sizes : \""
++-                                      << expr1 << "\" [" << PrintToString(m1.size()) << "] vs \""
++-                                      << expr2 << "\" [" << PrintToString(m2.size()) << "]";
+++            std::stringstream msg;
+++            msg << "Matrices \"" << expr1 << "\" and \"" << expr2 << "\" have different sizes : \""
+++                << expr1 << "\" [" << PrintToString(m1.size()) << "] vs \""
+++                << expr2 << "\" [" << PrintToString(m2.size()) << "]";
+++            return AssertionFailure() << msg.str();
++         }
++ 
++         if (m1.type() != m2.type())
++         {
++-            return AssertionFailure() << "Matrices \"" << expr1 << "\" and \"" << expr2 << "\" have different types : \""
++-                                      << expr1 << "\" [" << PrintToString(MatType(m1.type())) << "] vs \""
++-                                      << expr2 << "\" [" << PrintToString(MatType(m2.type())) << "]";
+++            std::stringstream msg;
+++            msg << "Matrices \"" << expr1 << "\" and \"" << expr2 << "\" have different types : \""
+++                << expr1 << "\" [" << PrintToString(MatType(m1.type())) << "] vs \""
+++                << expr2 << "\" [" << PrintToString(MatType(m2.type())) << "]";
+++             return AssertionFailure() << msg.str();
++         }
++ 
++         Mat diff;
++@@ -343,12 +347,14 @@ namespace cvtest
++ 
++         if (maxVal > eps)
++         {
++-            return AssertionFailure() << "The max difference between matrices \"" << expr1 << "\" and \"" << expr2
++-                                      << "\" is " << maxVal << " at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ")"
++-                                      << ", which exceeds \"" << eps_expr << "\", where \""
++-                                      << expr1 << "\" at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ") evaluates to " << printMatVal(m1, maxLoc) << ", \""
++-                                      << expr2 << "\" at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ") evaluates to " << printMatVal(m2, maxLoc) << ", \""
++-                                      << eps_expr << "\" evaluates to " << eps;
+++            std::stringstream msg;
+++            msg << "The max difference between matrices \"" << expr1 << "\" and \"" << expr2
+++                << "\" is " << maxVal << " at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ")"
+++                << ", which exceeds \"" << eps_expr << "\", where \""
+++                << expr1 << "\" at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ") evaluates to " << printMatVal(m1, maxLoc) << ", \""
+++                << expr2 << "\" at (" << maxLoc.y << ", " << maxLoc.x / m1.channels() << ") evaluates to " << printMatVal(m2, maxLoc) << ", \""
+++                << eps_expr << "\" evaluates to " << eps;
+++            return AssertionFailure() << msg.str();
++         }
++ 
++         return AssertionSuccess();
++@@ -469,9 +475,11 @@ namespace cvtest
++     {
++         if (gold.size() != actual.size())
++         {
++-            return testing::AssertionFailure() << "KeyPoints size mistmach\n"
++-                                               << "\"" << gold_expr << "\" : " << gold.size() << "\n"
++-                                               << "\"" << actual_expr << "\" : " << actual.size();
+++            std::stringstream msg;
+++            msg << "KeyPoints size mistmach\n"
+++                << "\"" << gold_expr << "\" : " << gold.size() << "\n"
+++                << "\"" << actual_expr << "\" : " << actual.size();
+++            return AssertionFailure() << msg.str();
++         }
++ 
++         std::sort(actual.begin(), actual.end(), KeyPointLess());
++@@ -484,14 +492,16 @@ namespace cvtest
++ 
++             if (!keyPointsEquals(p1, p2))
++             {
++-                return testing::AssertionFailure() << "KeyPoints differ at " << i << "\n"
++-                                                   << "\"" << gold_expr << "\" vs \"" << actual_expr << "\" : \n"
++-                                                   << "pt : " << testing::PrintToString(p1.pt) << " vs " << testing::PrintToString(p2.pt) << "\n"
++-                                                   << "size : " << p1.size << " vs " << p2.size << "\n"
++-                                                   << "angle : " << p1.angle << " vs " << p2.angle << "\n"
++-                                                   << "response : " << p1.response << " vs " << p2.response << "\n"
++-                                                   << "octave : " << p1.octave << " vs " << p2.octave << "\n"
++-                                                   << "class_id : " << p1.class_id << " vs " << p2.class_id;
+++                std::stringstream msg;
+++                msg << "KeyPoints differ at " << i << "\n"
+++                    << "\"" << gold_expr << "\" vs \"" << actual_expr << "\" : \n"
+++                    << "pt : " << testing::PrintToString(p1.pt) << " vs " << testing::PrintToString(p2.pt) << "\n"
+++                    << "size : " << p1.size << " vs " << p2.size << "\n"
+++                    << "angle : " << p1.angle << " vs " << p2.angle << "\n"
+++                    << "response : " << p1.response << " vs " << p2.response << "\n"
+++                    << "octave : " << p1.octave << " vs " << p2.octave << "\n"
+++                    << "class_id : " << p1.class_id << " vs " << p2.class_id;
+++                return AssertionFailure() << msg.str();
++             }
++         }
++ 
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv/0002-imgcodecs-refactoring-improve-code-quality.patch b/meta-oe/recipes-support/opencv/opencv/0002-imgcodecs-refactoring-improve-code-quality.patch
+new file mode 100644
+index 000000000..39f33af9d
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0002-imgcodecs-refactoring-improve-code-quality.patch
+@@ -0,0 +1,656 @@
++Upstream-Status: Backport [https://github.com/opencv/opencv/pull/9376/commits/999f41fb4f4aa94a0cb47256919ae8b5c29ca5f3]
++
++Fix CVEs for opencv 3.3:
++
++* CVE-2017-12597
++* CVE-2017-12598
++* CVE-2017-12599
++* CVE-2017-12600
++* CVE-2017-12601
++* CVE-2017-12602
++* CVE-2017-12603
++* CVE-2017-12604
++* CVE-2017-12605
++* CVE-2017-12606
++* CVE-2017-12862
++* CVE-2017-12863
++* CVE-2017-12864
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++From 999f41fb4f4aa94a0cb47256919ae8b5c29ca5f3 Mon Sep 17 00:00:00 2001
++From: Alexander Alekhin <alexander.a.alekhin@gmail.com>
++Date: Tue, 15 Aug 2017 22:04:55 +0000
++Subject: [PATCH 2/3] imgcodecs: refactoring, improve code quality
++
++---
++ modules/imgcodecs/src/bitstrm.cpp   |   2 +
++ modules/imgcodecs/src/bitstrm.hpp   |  19 +++--
++ modules/imgcodecs/src/grfmt_bmp.cpp |  13 ++-
++ modules/imgcodecs/src/grfmt_pxm.cpp | 122 ++++++++++++++++-----------
++ modules/imgcodecs/src/loadsave.cpp  | 164 +++++++++++++++++++++++++++++-------
++ 5 files changed, 231 insertions(+), 89 deletions(-)
++
++diff --git a/modules/imgcodecs/src/bitstrm.cpp b/modules/imgcodecs/src/bitstrm.cpp
++index a7e187fa0..0a8941aec 100644
++--- a/modules/imgcodecs/src/bitstrm.cpp
+++++ b/modules/imgcodecs/src/bitstrm.cpp
++@@ -209,6 +209,8 @@ int  RLByteStream::getByte()
++         current = m_current;
++     }
++ 
+++    CV_Assert(current < m_end);
+++
++     val = *((uchar*)current);
++     m_current = current + 1;
++     return val;
++diff --git a/modules/imgcodecs/src/bitstrm.hpp b/modules/imgcodecs/src/bitstrm.hpp
++index 465c0a847..26947971f 100644
++--- a/modules/imgcodecs/src/bitstrm.hpp
+++++ b/modules/imgcodecs/src/bitstrm.hpp
++@@ -48,13 +48,20 @@
++ namespace cv
++ {
++ 
++-enum
++-{
++-    RBS_THROW_EOS=-123,  // <end of stream> exception code
++-    RBS_THROW_FORB=-124,  // <forrbidden huffman code> exception code
++-    RBS_HUFF_FORB=2047,  // forrbidden huffman code "value"
++-    RBS_BAD_HEADER=-125 // invalid header
+++#define DECLARE_RBS_EXCEPTION(name) \
+++class RBS_ ## name ## _Exception : public cv::Exception \
+++{ \
+++public: \
+++    RBS_ ## name ## _Exception(int code_, const String& err_, const String& func_, const String& file_, int line_) : \
+++        cv::Exception(code_, err_, func_, file_, line_) \
+++    {} \
++ };
+++DECLARE_RBS_EXCEPTION(THROW_EOS)
+++#define RBS_THROW_EOS RBS_THROW_EOS_Exception(cv::Error::StsError, "Unexpected end of input stream", CV_Func, __FILE__, __LINE__)
+++DECLARE_RBS_EXCEPTION(THROW_FORB)
+++#define RBS_THROW_FORB RBS_THROW_FORB_Exception(cv::Error::StsError, "Forrbidden huffman code", CV_Func, __FILE__, __LINE__)
+++DECLARE_RBS_EXCEPTION(BAD_HEADER)
+++#define RBS_BAD_HEADER RBS_BAD_HEADER_Exception(cv::Error::StsError, "Invalid header", CV_Func, __FILE__, __LINE__)
++ 
++ typedef unsigned long ulong;
++ 
++diff --git a/modules/imgcodecs/src/grfmt_bmp.cpp b/modules/imgcodecs/src/grfmt_bmp.cpp
++index 86cacd316..257f97c2d 100644
++--- a/modules/imgcodecs/src/grfmt_bmp.cpp
+++++ b/modules/imgcodecs/src/grfmt_bmp.cpp
++@@ -118,8 +118,9 @@ bool  BmpDecoder::readHeader()
++ 
++                 if( m_bpp <= 8 )
++                 {
++-                    memset( m_palette, 0, sizeof(m_palette));
++-                    m_strm.getBytes( m_palette, (clrused == 0? 1<<m_bpp : clrused)*4 );
+++                    CV_Assert(clrused < 256);
+++                    memset(m_palette, 0, sizeof(m_palette));
+++                    m_strm.getBytes(m_palette, (clrused == 0? 1<<m_bpp : clrused)*4 );
++                     iscolor = IsColorPalette( m_palette, m_bpp );
++                 }
++                 else if( m_bpp == 16 && m_rle_code == BMP_BITFIELDS )
++@@ -290,7 +291,9 @@ bool  BmpDecoder::readData( Mat& img )
++                     else if( code > 2 ) // absolute mode
++                     {
++                         if( data + code*nch > line_end ) goto decode_rle4_bad;
++-                        m_strm.getBytes( src, (((code + 1)>>1) + 1) & -2 );
+++                        int sz = (((code + 1)>>1) + 1) & (~1);
+++                        CV_Assert((size_t)sz < _src.size());
+++                        m_strm.getBytes(src, sz);
++                         if( color )
++                             data = FillColorRow4( data, src, code, m_palette );
++                         else
++@@ -379,7 +382,9 @@ decode_rle4_bad: ;
++ 
++                         if( data + code3 > line_end )
++                             goto decode_rle8_bad;
++-                        m_strm.getBytes( src, (code + 1) & -2 );
+++                        int sz = (code + 1) & (~1);
+++                        CV_Assert((size_t)sz < _src.size());
+++                        m_strm.getBytes(src, sz);
++                         if( color )
++                             data = FillColorRow8( data, src, code, m_palette );
++                         else
++diff --git a/modules/imgcodecs/src/grfmt_pxm.cpp b/modules/imgcodecs/src/grfmt_pxm.cpp
++index 1750cb705..68bd8fd93 100644
++--- a/modules/imgcodecs/src/grfmt_pxm.cpp
+++++ b/modules/imgcodecs/src/grfmt_pxm.cpp
++@@ -43,50 +43,58 @@
++ #include "precomp.hpp"
++ #include "utils.hpp"
++ #include "grfmt_pxm.hpp"
+++#include <iostream>
++ 
++ namespace cv
++ {
++ 
++ ///////////////////////// P?M reader //////////////////////////////
++ 
++-static int ReadNumber( RLByteStream& strm, int maxdigits )
+++static int ReadNumber(RLByteStream& strm, int maxdigits = 0)
++ {
++     int code;
++-    int val = 0;
+++    int64 val = 0;
++     int digits = 0;
++ 
++     code = strm.getByte();
++ 
++-    if( !isdigit(code))
+++    while (!isdigit(code))
++     {
++-        do
+++        if (code == '#' )
++         {
++-            if( code == '#' )
+++            do
++             {
++-                do
++-                {
++-                    code = strm.getByte();
++-                }
++-                while( code != '\n' && code != '\r' );
+++                code = strm.getByte();
++             }
++-
+++            while (code != '\n' && code != '\r');
++             code = strm.getByte();
++-
++-            while( isspace(code))
+++        }
+++        else if (isspace(code))
+++        {
+++            while (isspace(code))
++                 code = strm.getByte();
++         }
++-        while( !isdigit( code ));
+++        else
+++        {
+++#if 1
+++            CV_ErrorNoReturn_(Error::StsError, ("PXM: Unexpected code in ReadNumber(): 0x%x (%d)", code, code));
+++#else
+++            code = strm.getByte();
+++#endif
+++        }
++     }
++ 
++     do
++     {
++-        val = val*10 + code - '0';
++-        if( ++digits >= maxdigits ) break;
+++        val = val*10 + (code - '0');
+++        CV_Assert(val <= INT_MAX && "PXM: ReadNumber(): result is too large");
+++        digits++;
+++        if (maxdigits != 0 && digits >= maxdigits) break;
++         code = strm.getByte();
++     }
++-    while( isdigit(code));
+++    while (isdigit(code));
++ 
++-    return val;
+++    return (int)val;
++ }
++ 
++ 
++@@ -122,13 +130,13 @@ ImageDecoder PxMDecoder::newDecoder() const
++     return makePtr<PxMDecoder>();
++ }
++ 
++-void  PxMDecoder::close()
+++void PxMDecoder::close()
++ {
++     m_strm.close();
++ }
++ 
++ 
++-bool  PxMDecoder::readHeader()
+++bool PxMDecoder::readHeader()
++ {
++     bool result = false;
++ 
++@@ -158,10 +166,10 @@ bool  PxMDecoder::readHeader()
++         m_binary = code >= '4';
++         m_type = m_bpp > 8 ? CV_8UC3 : CV_8UC1;
++ 
++-        m_width = ReadNumber( m_strm, INT_MAX );
++-        m_height = ReadNumber( m_strm, INT_MAX );
+++        m_width = ReadNumber(m_strm);
+++        m_height = ReadNumber(m_strm);
++ 
++-        m_maxval = m_bpp == 1 ? 1 : ReadNumber( m_strm, INT_MAX );
+++        m_maxval = m_bpp == 1 ? 1 : ReadNumber(m_strm);
++         if( m_maxval > 65535 )
++             throw RBS_BAD_HEADER;
++ 
++@@ -175,8 +183,14 @@ bool  PxMDecoder::readHeader()
++             result = true;
++         }
++     }
++-    catch(...)
+++    catch (const cv::Exception&)
+++    {
+++        throw;
+++    }
+++    catch (...)
++     {
+++        std::cerr << "PXM::readHeader(): unknown C++ exception" << std::endl << std::flush;
+++        throw;
++     }
++ 
++     if( !result )
++@@ -189,33 +203,28 @@ bool  PxMDecoder::readHeader()
++ }
++ 
++ 
++-bool  PxMDecoder::readData( Mat& img )
+++bool PxMDecoder::readData( Mat& img )
++ {
++     int color = img.channels() > 1;
++     uchar* data = img.ptr();
++     PaletteEntry palette[256];
++     bool   result = false;
++-    int  bit_depth = CV_ELEM_SIZE1(m_type)*8;
++-    int  src_pitch = (m_width*m_bpp*bit_depth/8 + 7)/8;
+++    const int bit_depth = CV_ELEM_SIZE1(m_type)*8;
+++    const int src_pitch = divUp(m_width*m_bpp*(bit_depth/8), 8);
++     int  nch = CV_MAT_CN(m_type);
++     int  width3 = m_width*nch;
++-    int  i, x, y;
++ 
++     if( m_offset < 0 || !m_strm.isOpened())
++         return false;
++ 
++-    AutoBuffer<uchar> _src(src_pitch + 32);
++-    uchar* src = _src;
++-    AutoBuffer<uchar> _gray_palette;
++-    uchar* gray_palette = _gray_palette;
+++    uchar gray_palette[256] = {0};
++ 
++     // create LUT for converting colors
++     if( bit_depth == 8 )
++     {
++-        _gray_palette.allocate(m_maxval + 1);
++-        gray_palette = _gray_palette;
+++        CV_Assert(m_maxval < 256);
++ 
++-        for( i = 0; i <= m_maxval; i++ )
+++        for (int i = 0; i <= m_maxval; i++)
++             gray_palette[i] = (uchar)((i*255/m_maxval)^(m_bpp == 1 ? 255 : 0));
++ 
++         FillGrayPalette( palette, m_bpp==1 ? 1 : 8 , m_bpp == 1 );
++@@ -229,12 +238,16 @@ bool  PxMDecoder::readData( Mat& img )
++         {
++         ////////////////////////// 1 BPP /////////////////////////
++         case 1:
+++            CV_Assert(CV_MAT_DEPTH(m_type) == CV_8U);
++             if( !m_binary )
++             {
++-                for( y = 0; y < m_height; y++, data += img.step )
+++                AutoBuffer<uchar> _src(m_width);
+++                uchar* src = _src;
+++
+++                for (int y = 0; y < m_height; y++, data += img.step)
++                 {
++-                    for( x = 0; x < m_width; x++ )
++-                        src[x] = ReadNumber( m_strm, 1 ) != 0;
+++                    for (int x = 0; x < m_width; x++)
+++                        src[x] = ReadNumber(m_strm, 1) != 0;
++ 
++                     if( color )
++                         FillColorRow8( data, src, m_width, palette );
++@@ -244,7 +257,10 @@ bool  PxMDecoder::readData( Mat& img )
++             }
++             else
++             {
++-                for( y = 0; y < m_height; y++, data += img.step )
+++                AutoBuffer<uchar> _src(src_pitch);
+++                uchar* src = _src;
+++
+++                for (int y = 0; y < m_height; y++, data += img.step)
++                 {
++                     m_strm.getBytes( src, src_pitch );
++ 
++@@ -260,13 +276,17 @@ bool  PxMDecoder::readData( Mat& img )
++         ////////////////////////// 8 BPP /////////////////////////
++         case 8:
++         case 24:
++-            for( y = 0; y < m_height; y++, data += img.step )
+++        {
+++            AutoBuffer<uchar> _src(std::max<size_t>(width3*2, src_pitch));
+++            uchar* src = _src;
+++
+++            for (int y = 0; y < m_height; y++, data += img.step)
++             {
++                 if( !m_binary )
++                 {
++-                    for( x = 0; x < width3; x++ )
+++                    for (int x = 0; x < width3; x++)
++                     {
++-                        int code = ReadNumber( m_strm, INT_MAX );
+++                        int code = ReadNumber(m_strm);
++                         if( (unsigned)code > (unsigned)m_maxval ) code = m_maxval;
++                         if( bit_depth == 8 )
++                             src[x] = gray_palette[code];
++@@ -279,7 +299,7 @@ bool  PxMDecoder::readData( Mat& img )
++                     m_strm.getBytes( src, src_pitch );
++                     if( bit_depth == 16 && !isBigEndian() )
++                     {
++-                        for( x = 0; x < width3; x++ )
+++                        for (int x = 0; x < width3; x++)
++                         {
++                             uchar v = src[x * 2];
++                             src[x * 2] = src[x * 2 + 1];
++@@ -290,7 +310,7 @@ bool  PxMDecoder::readData( Mat& img )
++ 
++                 if( img.depth() == CV_8U && bit_depth == 16 )
++                 {
++-                    for( x = 0; x < width3; x++ )
+++                    for (int x = 0; x < width3; x++)
++                     {
++                         int v = ((ushort *)src)[x];
++                         src[x] = (uchar)(v >> 8);
++@@ -331,12 +351,19 @@ bool  PxMDecoder::readData( Mat& img )
++             }
++             result = true;
++             break;
+++        }
++         default:
++-            assert(0);
+++            CV_ErrorNoReturn(Error::StsError, "m_bpp is not supported");
++         }
++     }
++-    catch(...)
+++    catch (const cv::Exception&)
+++    {
+++        throw;
+++    }
+++    catch (...)
++     {
+++        std::cerr << "PXM::readData(): unknown exception" << std::endl << std::flush;
+++        throw;
++     }
++ 
++     return result;
++@@ -412,8 +439,9 @@ bool  PxMEncoder::write( const Mat& img, const std::vector<int>& params )
++     char* buffer = _buffer;
++ 
++     // write header;
++-    sprintf( buffer, "P%c\n%d %d\n%d\n",
+++    sprintf( buffer, "P%c\n# Generated by OpenCV %s\n%d %d\n%d\n",
++              '2' + (channels > 1 ? 1 : 0) + (isBinary ? 3 : 0),
+++             CV_VERSION,
++              width, height, (1 << depth) - 1 );
++ 
++     strm.putBytes( buffer, (int)strlen(buffer) );
++diff --git a/modules/imgcodecs/src/loadsave.cpp b/modules/imgcodecs/src/loadsave.cpp
++index 3b2366217..5ee4ca354 100644
++--- a/modules/imgcodecs/src/loadsave.cpp
+++++ b/modules/imgcodecs/src/loadsave.cpp
++@@ -55,6 +55,27 @@
++ /****************************************************************************************\
++ *                                      Image Codecs                                      *
++ \****************************************************************************************/
+++
+++namespace cv {
+++
+++// TODO Add runtime configuration
+++#define CV_IO_MAX_IMAGE_PARAMS (50)
+++#define CV_IO_MAX_IMAGE_WIDTH (1<<20)
+++#define CV_IO_MAX_IMAGE_HEIGHT (1<<20)
+++#define CV_IO_MAX_IMAGE_PIXELS (1<<30) // 1 Gigapixel
+++
+++static Size validateInputImageSize(const Size& size)
+++{
+++    CV_Assert(size.width > 0);
+++    CV_Assert(size.width <= CV_IO_MAX_IMAGE_WIDTH);
+++    CV_Assert(size.height > 0);
+++    CV_Assert(size.height <= CV_IO_MAX_IMAGE_HEIGHT);
+++    uint64 pixels = (uint64)size.width * (uint64)size.height;
+++    CV_Assert(pixels <= CV_IO_MAX_IMAGE_PIXELS);
+++    return size;
+++}
+++
+++
++ namespace {
++ 
++ class ByteStreamBuffer: public std::streambuf
++@@ -94,9 +115,6 @@ protected:
++ 
++ }
++ 
++-namespace cv
++-{
++-
++ /**
++  * @struct ImageCodecInitializer
++  *
++@@ -408,14 +426,26 @@ imread_( const String& filename, int flags, int hdrtype, Mat* mat=0 )
++     /// set the filename in the driver
++     decoder->setSource( filename );
++ 
++-   // read the header to make sure it succeeds
++-   if( !decoder->readHeader() )
+++    try
+++    {
+++        // read the header to make sure it succeeds
+++        if( !decoder->readHeader() )
+++            return 0;
+++    }
+++    catch (const cv::Exception& e)
+++    {
+++        std::cerr << "imread_('" << filename << "'): can't read header: " << e.what() << std::endl << std::flush;
++         return 0;
+++    }
+++    catch (...)
+++    {
+++        std::cerr << "imread_('" << filename << "'): can't read header: unknown exception" << std::endl << std::flush;
+++        return 0;
+++    }
+++
++ 
++     // established the required input image size
++-    CvSize size;
++-    size.width = decoder->width();
++-    size.height = decoder->height();
+++    Size size = validateInputImageSize(Size(decoder->width(), decoder->height()));
++ 
++     // grab the decoded type
++     int type = decoder->type();
++@@ -451,7 +481,21 @@ imread_( const String& filename, int flags, int hdrtype, Mat* mat=0 )
++     }
++ 
++     // read the image data
++-    if( !decoder->readData( *data ))
+++    bool success = false;
+++    try
+++    {
+++        if (decoder->readData(*data))
+++            success = true;
+++    }
+++    catch (const cv::Exception& e)
+++    {
+++        std::cerr << "imread_('" << filename << "'): can't read data: " << e.what() << std::endl << std::flush;
+++    }
+++    catch (...)
+++    {
+++        std::cerr << "imread_('" << filename << "'): can't read data: unknown exception" << std::endl << std::flush;
+++    }
+++    if (!success)
++     {
++         cvReleaseImage( &image );
++         cvReleaseMat( &matrix );
++@@ -504,8 +548,22 @@ imreadmulti_(const String& filename, int flags, std::vector<Mat>& mats)
++     decoder->setSource(filename);
++ 
++     // read the header to make sure it succeeds
++-    if (!decoder->readHeader())
+++    try
+++    {
+++        // read the header to make sure it succeeds
+++        if( !decoder->readHeader() )
+++            return 0;
+++    }
+++    catch (const cv::Exception& e)
+++    {
+++        std::cerr << "imreadmulti_('" << filename << "'): can't read header: " << e.what() << std::endl << std::flush;
++         return 0;
+++    }
+++    catch (...)
+++    {
+++        std::cerr << "imreadmulti_('" << filename << "'): can't read header: unknown exception" << std::endl << std::flush;
+++        return 0;
+++    }
++ 
++     for (;;)
++     {
++@@ -523,17 +581,32 @@ imreadmulti_(const String& filename, int flags, std::vector<Mat>& mats)
++                 type = CV_MAKETYPE(CV_MAT_DEPTH(type), 1);
++         }
++ 
+++        // established the required input image size
+++        Size size = validateInputImageSize(Size(decoder->width(), decoder->height()));
+++
++         // read the image data
++-        Mat mat(decoder->height(), decoder->width(), type);
++-        if (!decoder->readData(mat))
+++        Mat mat(size.height, size.width, type);
+++        bool success = false;
+++        try
++         {
++-            // optionally rotate the data if EXIF' orientation flag says so
++-            if( (flags & IMREAD_IGNORE_ORIENTATION) == 0 && flags != IMREAD_UNCHANGED )
++-            {
++-                ApplyExifOrientation(filename, mat);
++-            }
++-
+++            if (decoder->readData(mat))
+++                success = true;
+++        }
+++        catch (const cv::Exception& e)
+++        {
+++            std::cerr << "imreadmulti_('" << filename << "'): can't read data: " << e.what() << std::endl << std::flush;
+++        }
+++        catch (...)
+++        {
+++            std::cerr << "imreadmulti_('" << filename << "'): can't read data: unknown exception" << std::endl << std::flush;
+++        }
+++        if (!success)
++             break;
+++
+++        // optionally rotate the data if EXIF' orientation flag says so
+++        if( (flags & IMREAD_IGNORE_ORIENTATION) == 0 && flags != IMREAD_UNCHANGED )
+++        {
+++            ApplyExifOrientation(filename, mat);
++         }
++ 
++         mats.push_back(mat);
++@@ -616,6 +689,7 @@ static bool imwrite_( const String& filename, const Mat& image,
++     }
++ 
++     encoder->setDestination( filename );
+++    CV_Assert(params.size() <= CV_IO_MAX_IMAGE_PARAMS*2);
++     bool code = encoder->write( *pimage, params );
++ 
++     //    CV_Assert( code );
++@@ -663,22 +737,35 @@ imdecode_( const Mat& buf, int flags, int hdrtype, Mat* mat=0 )
++         decoder->setSource(filename);
++     }
++ 
++-    if( !decoder->readHeader() )
+++    bool success = false;
+++    try
+++    {
+++        if (decoder->readHeader())
+++            success = true;
+++    }
+++    catch (const cv::Exception& e)
+++    {
+++        std::cerr << "imdecode_('" << filename << "'): can't read header: " << e.what() << std::endl << std::flush;
+++    }
+++    catch (...)
+++    {
+++        std::cerr << "imdecode_('" << filename << "'): can't read header: unknown exception" << std::endl << std::flush;
+++    }
+++    if (!success)
++     {
++         decoder.release();
++-        if ( !filename.empty() )
+++        if (!filename.empty())
++         {
++-            if ( remove(filename.c_str()) != 0 )
+++            if (0 != remove(filename.c_str()))
++             {
++-                CV_Error( CV_StsError, "unable to remove temporary file" );
+++                std::cerr << "unable to remove temporary file:" << filename << std::endl << std::flush;
++             }
++         }
++         return 0;
++     }
++ 
++-    CvSize size;
++-    size.width = decoder->width();
++-    size.height = decoder->height();
+++    // established the required input image size
+++    Size size = validateInputImageSize(Size(decoder->width(), decoder->height()));
++ 
++     int type = decoder->type();
++     if( (flags & IMREAD_LOAD_GDAL) != IMREAD_LOAD_GDAL && flags != IMREAD_UNCHANGED )
++@@ -712,17 +799,30 @@ imdecode_( const Mat& buf, int flags, int hdrtype, Mat* mat=0 )
++         temp = cvarrToMat(image);
++     }
++ 
++-    bool code = decoder->readData( *data );
+++    success = false;
+++    try
+++    {
+++        if (decoder->readData(*data))
+++            success = true;
+++    }
+++    catch (const cv::Exception& e)
+++    {
+++        std::cerr << "imdecode_('" << filename << "'): can't read data: " << e.what() << std::endl << std::flush;
+++    }
+++    catch (...)
+++    {
+++        std::cerr << "imdecode_('" << filename << "'): can't read data: unknown exception" << std::endl << std::flush;
+++    }
++     decoder.release();
++-    if ( !filename.empty() )
+++    if (!filename.empty())
++     {
++-        if ( remove(filename.c_str()) != 0 )
+++        if (0 != remove(filename.c_str()))
++         {
++-            CV_Error( CV_StsError, "unable to remove temporary file" );
+++            std::cerr << "unable to remove temporary file:" << filename << std::endl << std::flush;
++         }
++     }
++ 
++-    if( !code )
+++    if (!success)
++     {
++         cvReleaseImage( &image );
++         cvReleaseMat( &matrix );
++@@ -859,7 +959,7 @@ cvSaveImage( const char* filename, const CvArr* arr, const int* _params )
++     if( _params )
++     {
++         for( ; _params[i] > 0; i += 2 )
++-            ;
+++            CV_Assert(i < CV_IO_MAX_IMAGE_PARAMS*2); // Limit number of params for security reasons
++     }
++     return cv::imwrite_(filename, cv::cvarrToMat(arr),
++         i > 0 ? std::vector<int>(_params, _params+i) : std::vector<int>(),
++@@ -890,7 +990,7 @@ cvEncodeImage( const char* ext, const CvArr* arr, const int* _params )
++     if( _params )
++     {
++         for( ; _params[i] > 0; i += 2 )
++-            ;
+++            CV_Assert(i < CV_IO_MAX_IMAGE_PARAMS*2); // Limit number of params for security reasons
++     }
++     cv::Mat img = cv::cvarrToMat(arr);
++     if( CV_IS_IMAGE(arr) && ((const IplImage*)arr)->origin == IPL_ORIGIN_BL )
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv/0003-imgproc-test-add-checks-for-remove-call.patch b/meta-oe/recipes-support/opencv/opencv/0003-imgproc-test-add-checks-for-remove-call.patch
+new file mode 100644
+index 000000000..5f4a60c96
+--- /dev/null
++++ b/meta-oe/recipes-support/opencv/opencv/0003-imgproc-test-add-checks-for-remove-call.patch
+@@ -0,0 +1,186 @@
++Upstream-Status: Backport [https://github.com/opencv/opencv/pull/9376/commits/78a310630fb0a1f6d089576202343e672f27609d]
++
++Fix CVEs for opencv 3.3.
++
++* CVE-2017-12597
++* CVE-2017-12598
++* CVE-2017-12599
++* CVE-2017-12600
++* CVE-2017-12601
++* CVE-2017-12602
++* CVE-2017-12603
++* CVE-2017-12604
++* CVE-2017-12605
++* CVE-2017-12606
++* CVE-2017-12862
++* CVE-2017-12863
++* CVE-2017-12864
++
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++---
++From 78a310630fb0a1f6d089576202343e672f27609d Mon Sep 17 00:00:00 2001
++From: Alexander Alekhin <alexander.alekhin@intel.com>
++Date: Wed, 16 Aug 2017 13:53:12 +0300
++Subject: [PATCH 3/3] imgproc(test): add checks for remove() call
++
++---
++ modules/imgcodecs/test/test_grfmt.cpp      |  2 +-
++ modules/imgcodecs/test/test_jpeg.cpp       | 12 ++++++------
++ modules/imgcodecs/test/test_png.cpp        |  2 +-
++ modules/imgcodecs/test/test_read_write.cpp |  4 ++--
++ modules/imgcodecs/test/test_tiff.cpp       |  8 ++++----
++ modules/imgcodecs/test/test_webp.cpp       |  6 +++---
++ 6 files changed, 17 insertions(+), 17 deletions(-)
++
++diff --git a/modules/imgcodecs/test/test_grfmt.cpp b/modules/imgcodecs/test/test_grfmt.cpp
++index 64a0c1e3a..74b72c3b3 100644
++--- a/modules/imgcodecs/test/test_grfmt.cpp
+++++ b/modules/imgcodecs/test/test_grfmt.cpp
++@@ -175,7 +175,7 @@ TEST_P(Imgcodecs_ExtSize, write_imageseq)
++             EXPECT_LT(n, 1.);
++             EXPECT_PRED_FORMAT2(cvtest::MatComparator(0, 0), img, img_gt);
++         }
++-        remove(filename.c_str());
+++        EXPECT_EQ(0, remove(filename.c_str()));
++     }
++ }
++ 
++diff --git a/modules/imgcodecs/test/test_jpeg.cpp b/modules/imgcodecs/test/test_jpeg.cpp
++index 5546f2d91..6ddb02840 100644
++--- a/modules/imgcodecs/test/test_jpeg.cpp
+++++ b/modules/imgcodecs/test/test_jpeg.cpp
++@@ -123,8 +123,8 @@ TEST(Imgcodecs_Jpeg, encode_decode_progressive_jpeg)
++ 
++     EXPECT_EQ(0, cvtest::norm(img_jpg_progressive, img_jpg_normal, NORM_INF));
++ 
++-    remove(output_progressive.c_str());
++-    remove(output_normal.c_str());
+++    EXPECT_EQ(0, remove(output_progressive.c_str()));
+++    EXPECT_EQ(0, remove(output_normal.c_str()));
++ }
++ 
++ TEST(Imgcodecs_Jpeg, encode_decode_optimize_jpeg)
++@@ -148,8 +148,8 @@ TEST(Imgcodecs_Jpeg, encode_decode_optimize_jpeg)
++ 
++     EXPECT_EQ(0, cvtest::norm(img_jpg_optimized, img_jpg_normal, NORM_INF));
++ 
++-    remove(output_optimized.c_str());
++-    remove(output_normal.c_str());
+++    EXPECT_EQ(0, remove(output_optimized.c_str()));
+++    EXPECT_EQ(0, remove(output_normal.c_str()));
++ }
++ 
++ TEST(Imgcodecs_Jpeg, encode_decode_rst_jpeg)
++@@ -173,8 +173,8 @@ TEST(Imgcodecs_Jpeg, encode_decode_rst_jpeg)
++ 
++     EXPECT_EQ(0, cvtest::norm(img_jpg_rst, img_jpg_normal, NORM_INF));
++ 
++-    remove(output_rst.c_str());
++-    remove(output_normal.c_str());
+++    EXPECT_EQ(0, remove(output_rst.c_str()));
+++    EXPECT_EQ(0, remove(output_normal.c_str()));
++ }
++ 
++ #endif // HAVE_JPEG
++diff --git a/modules/imgcodecs/test/test_png.cpp b/modules/imgcodecs/test/test_png.cpp
++index c46f90119..4e97043e1 100644
++--- a/modules/imgcodecs/test/test_png.cpp
+++++ b/modules/imgcodecs/test/test_png.cpp
++@@ -17,7 +17,7 @@ TEST(Imgcodecs_Png, write_big)
++     EXPECT_EQ(13043, img.cols);
++     EXPECT_EQ(13917, img.rows);
++     ASSERT_NO_THROW(imwrite(dst_file, img));
++-    remove(dst_file.c_str());
+++    EXPECT_EQ(0, remove(dst_file.c_str()));
++ }
++ 
++ TEST(Imgcodecs_Png, encode)
++diff --git a/modules/imgcodecs/test/test_read_write.cpp b/modules/imgcodecs/test/test_read_write.cpp
++index 38f10225f..5119813bf 100644
++--- a/modules/imgcodecs/test/test_read_write.cpp
+++++ b/modules/imgcodecs/test/test_read_write.cpp
++@@ -50,7 +50,7 @@ TEST(Imgcodecs_Image, read_write_bmp)
++         psnr = cvtest::PSNR(buf_loaded, image);
++         EXPECT_GT(psnr, thresDbell);
++ 
++-        remove(dst_name.c_str());
+++        EXPECT_EQ(0, remove(dst_name.c_str()));
++     }
++ }
++ 
++@@ -95,7 +95,7 @@ TEST_P(Imgcodecs_Image, read_write)
++     psnr = cvtest::PSNR(buf_loaded, image);
++     EXPECT_GT(psnr, thresDbell);
++ 
++-    remove(full_name.c_str());
+++    EXPECT_EQ(0, remove(full_name.c_str()));
++ }
++ 
++ const string exts[] = {
++diff --git a/modules/imgcodecs/test/test_tiff.cpp b/modules/imgcodecs/test/test_tiff.cpp
++index 0264da4cd..6ef0c1748 100644
++--- a/modules/imgcodecs/test/test_tiff.cpp
+++++ b/modules/imgcodecs/test/test_tiff.cpp
++@@ -41,8 +41,8 @@ TEST(Imgcodecs_Tiff, decode_tile16384x16384)
++         // not enough memory
++     }
++ 
++-    remove(file3.c_str());
++-    remove(file4.c_str());
+++    EXPECT_EQ(0, remove(file3.c_str()));
+++    EXPECT_EQ(0, remove(file4.c_str()));
++ }
++ 
++ TEST(Imgcodecs_Tiff, write_read_16bit_big_little_endian)
++@@ -88,7 +88,7 @@ TEST(Imgcodecs_Tiff, write_read_16bit_big_little_endian)
++         EXPECT_EQ(0xDEAD, img.at<ushort>(0,0));
++         EXPECT_EQ(0xBEEF, img.at<ushort>(0,1));
++ 
++-        remove(filename.c_str());
+++        EXPECT_EQ(0, remove(filename.c_str()));
++     }
++ }
++ 
++@@ -143,7 +143,7 @@ TEST(Imgcodecs_Tiff, decode_infinite_rowsperstrip)
++ 
++     EXPECT_NO_THROW(cv::imread(filename, IMREAD_UNCHANGED));
++ 
++-    remove(filename.c_str());
+++    EXPECT_EQ(0, remove(filename.c_str()));
++ }
++ 
++ //==================================================================================================
++diff --git a/modules/imgcodecs/test/test_webp.cpp b/modules/imgcodecs/test/test_webp.cpp
++index 6d40ce21e..d82fdd289 100644
++--- a/modules/imgcodecs/test/test_webp.cpp
+++++ b/modules/imgcodecs/test/test_webp.cpp
++@@ -44,7 +44,7 @@ TEST(Imgcodecs_WebP, encode_decode_lossless_webp)
++         }
++     }
++ 
++-    remove(output.c_str());
+++    EXPECT_EQ(0, remove(output.c_str()));
++ 
++     cv::Mat decode = cv::imdecode(buf, IMREAD_COLOR);
++     ASSERT_FALSE(decode.empty());
++@@ -71,7 +71,7 @@ TEST(Imgcodecs_WebP, encode_decode_lossy_webp)
++ 
++         EXPECT_NO_THROW(cv::imwrite(output, img, params));
++         cv::Mat img_webp = cv::imread(output);
++-        remove(output.c_str());
+++        EXPECT_EQ(0, remove(output.c_str()));
++         EXPECT_FALSE(img_webp.empty());
++         EXPECT_EQ(3,   img_webp.channels());
++         EXPECT_EQ(512, img_webp.cols);
++@@ -96,7 +96,7 @@ TEST(Imgcodecs_WebP, encode_decode_with_alpha_webp)
++ 
++     EXPECT_NO_THROW(cv::imwrite(output, img));
++     cv::Mat img_webp = cv::imread(output);
++-    remove(output.c_str());
+++    EXPECT_EQ(0, remove(output.c_str()));
++     EXPECT_FALSE(img_webp.empty());
++     EXPECT_EQ(4,   img_webp.channels());
++     EXPECT_EQ(512, img_webp.cols);
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+index a6a130271..efbb2f52a 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+@@ -46,6 +46,9 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+     file://uselocalxfeatures.patch;patchdir=../contrib/ \
+     file://0002-Make-opencv-ts-create-share-library-intead-of-static.patch \
+     file://0003-To-fix-errors-as-following.patch \
++    file://0001-build-workaround-GCC-7.1.1-compilation-issue-with-sa.patch \
++    file://0002-imgcodecs-refactoring-improve-code-quality.patch \
++    file://0003-imgproc-test-add-checks-for-remove-call.patch \
+ "
+ 
+ PV = "3.3+git${SRCPV}"
+-- 
+2.14.1
+
 
