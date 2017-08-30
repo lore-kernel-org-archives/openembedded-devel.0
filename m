@@ -1,24 +1,24 @@
 Return-Path: <Dengke.Du@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C32F77FF9
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4BBF077FF9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Aug 2017 07:19:35 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v7U7Ja1A012412
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Wed, 30 Aug 2017 07:20:34 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v7U7Ka0O001552
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Aug 2017 00:19:36 -0700
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 30 Aug 2017 00:19:35 -0700
+	Wed, 30 Aug 2017 00:20:36 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 30 Aug 2017 00:20:35 -0700
 From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 30 Aug 2017 03:19:34 -0400
-Message-ID: <1504077574-86515-1-git-send-email-dengke.du@windriver.com>
+Date: Wed, 30 Aug 2017 03:20:34 -0400
+Message-ID: <1504077634-86847-1-git-send-email-dengke.du@windriver.com>
 X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [PATCH] wolfssl: upgrade to 3.12.0
+Subject: [meta-networking][PATCH] wolfssl: upgrade to 3.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +31,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Aug 2017 07:19:36 -0000
+X-List-Received-Date: Wed, 30 Aug 2017 07:20:35 -0000
 Content-Type: text/plain
 
 Signed-off-by: Dengke Du <dengke.du@windriver.com>
