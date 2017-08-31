@@ -1,46 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E0D178405
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 59D3F78400
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 14:41:03 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id m15so618123pgc.0
+	Thu, 31 Aug 2017 14:48:32 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id t3so603864pgt.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 07:41:05 -0700 (PDT)
+	Thu, 31 Aug 2017 07:48:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
 	bh=WwgMsbOpo7q3RmQadLX3sUzUGpy5dprp84s/l1NxKAg=;
-	b=eEz9OIaiIV9RwKA67TcefvT+yNGT6/o8kwnj1sGOQDAivEjspijB78l15G09AizV/b
-	rUlQRv5srvfVuHYQTEFk65pU6HZXi25PvyYXNyXK8kmhbbCuW7KOnojfueWbInMiiB2o
-	l/VN5/WphD/iYuSUkIwK+tYvjriDgdwgIBIGI5bwQqjxkJ7vxv8/bzmlTfjghCctdbVV
-	lJqOV3Fzd9rZIU3oiVySuOIvjliq8C3wRUhbKRH6EkiwZ4uK1cId6XdMq6Qfvlk2ZLlV
-	vpJJ39DkukwelEJ1ab9CW0e4uEFlD6zm14EebF5a4Cde4jT/lE3ZzDxiPIVddCDteL17
-	wyfg==
+	b=GUh376COhl+JUmXvG8PE3nrkHv1pVEbM2BIoF+UPg9a0wCXUNdNto4QslAM18FAHM2
+	Hmg1KgAhxNWbabsB9TYXNuDKybT+KuETkGxrTOf3wQg/03i4TqRnMzFq3zFz91q0dmx/
+	2taZ7kjmdV7leSjL4VtchOAP0b2r5jeDRS/uXfnPe+bfpVG6i5zXgwT6Nc57gmg9f0vz
+	xHCWBY76v1rwE4zsYLvVxKjuaYwr0eFNNTuADYrA1jllz3zjsUGE1d+KxKDz9TqXQwKi
+	OepR5HtmW8wolG3kXFbKXLd35/aEhzX+2WHH3MocGUDCZeUhsZFC68yvrLBdMkVOKQvt
+	zpXg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
 	bh=WwgMsbOpo7q3RmQadLX3sUzUGpy5dprp84s/l1NxKAg=;
-	b=nJXUQhO+RoYL21RDp9CyMG90I7shdZ1bEzRzKFQlzWF3sle5Mr8m/XYu5L82oQ3THk
-	vJNiyGvzHIk4ESAM2RnxbivZnk2KO2LRk6mEpgx1NNY7GaFOTkkzxHT2hzUn2BSLgUSr
-	ElFNUY/ypFgehXYA6cuDSL3SiTS0yVXPBvTMbtfB33WVd8XxT8kK/CkYHSt/M76Xlt1y
-	dPr0hmaSq0V3PRQSMC8BODvZ/BffxzsJM1fkQaHIsOrTbC6FBCnlBNfYuFp4Y2hAT6Fd
-	htuo6Uwmll17KALl8ag4ovfXriO/kEmNcg/dXOCVpDPjwG38jRWiJu+OKLDFhGntQJ0c
-	WVZQ==
-X-Gm-Message-State: AHYfb5jPjicW6FS0bY9OKT1hQZmPqWHlJnfCJv+1kbsmC1xcCtydBuuA
-	stogjfLv8MrtLMkf
-X-Google-Smtp-Source: ADKCNb5yUom4VjGPtT2rcSIDQXmMZy9M6EPafdXO9o9bbCexAEAl7bRw7wdzKBB8dc2rDzhS/oHl0g==
-X-Received: by 10.99.150.2 with SMTP id c2mr2641727pge.247.1504190464924;
-	Thu, 31 Aug 2017 07:41:04 -0700 (PDT)
+	b=nim7GY1aVcT+ukoJXx117FO873p06F2UMthtXlnjZkFUaXuUEl9BRw0GG6H/iz2gj3
+	oYJffSHlKBltdJlqwUOzwllPLgfTtxxD8Wes+90CoOlBQhN+saw7eOfaSbC3bCVl/M3j
+	tm3vWvtHBufcvuVVHLiGiWZ4rBv5dNRNOg+DwAvfcJbtc3LtK48U95Y8ufQwPJ4R8yru
+	BzPyfClTMUxsgq11bDKzelheU7sUu9NG8ssZ66ynyqrVVK3k+t7JBhw+63x30NsHQKRV
+	mQp6EczNVXC31iHKrUCKWxXs7G17sIFUNFu7ajz1+DUQ+O1M2cQAHJFih5R5I2/FtvG5
+	ygIQ==
+X-Gm-Message-State: AHYfb5hNM2hIgCXJyhofSRVxbno/1OQaJEvyjjDZ/jSQTQWJExzeqnTl
+	ui5PR8lawORWB9Zj
+X-Google-Smtp-Source: ADKCNb7VpsOM+9QJjA0YPjMzc1Zz8r9qD7aIUuyg6CkVFRtxC9dNG3ynHw7zWvCHatj+Q9MOnLjNiA==
+X-Received: by 10.99.161.26 with SMTP id b26mr2601108pgf.168.1504190914383;
+	Thu, 31 Aug 2017 07:48:34 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
 	by smtp.gmail.com with ESMTPSA id
-	j184sm14062790pfc.147.2017.08.31.07.41.04
+	e190sm13470751pfa.41.2017.08.31.07.48.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Aug 2017 07:41:04 -0700 (PDT)
+	Thu, 31 Aug 2017 07:48:33 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Aug 2017 07:40:56 -0700
-Message-Id: <20170831144056.6264-1-raj.khem@gmail.com>
+Date: Thu, 31 Aug 2017 07:48:25 -0700
+Message-Id: <20170831144826.6048-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [PATCH] lxdm: Copy Makefile.in.in from gettext-native
+Subject: [meta-oe][PATCH V2 1/2] lxdm: Copy Makefile.in.in from gettext-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 14:41:04 -0000
+X-List-Received-Date: Thu, 31 Aug 2017 14:48:33 -0000
 
 virtual/gettext is not including virtual/gettext anymore
 
