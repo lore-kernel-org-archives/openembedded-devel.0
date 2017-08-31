@@ -1,23 +1,45 @@
-Return-Path: <Jianchuan.Wang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id AF971783A5
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 174C078391
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 08:57:33 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v7V8vYni014480
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 31 Aug 2017 01:57:35 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 31 Aug 2017 01:57:34 -0700
-From: <jianchuan.wang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Thu, 31 Aug 2017 04:57:32 -0400
-Message-ID: <20170831085732.183199-1-jianchuan.wang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] drbd-utils: only rmmod if DRBD is a module
+	Thu, 31 Aug 2017 11:28:11 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id e204so4614978wma.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 31 Aug 2017 04:28:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=/AS6lWdmjP70YWBM4so135JaKQ2q2X1cLpjXg0kS3B0=;
+	b=Z1JtyCkPCRFvqKOGP5h/lxibpIxaz5u2tioSnrkrCE1ThLGU48/FwtFx4ZwNjs6oq7
+	TRiN0M4B3G9XJDigazIMmgGxJj5uWAenve0qs7ISDfsHj4ysSyouO1hpZWkYX5DNXSf4
+	WI0hirzSClwOYlIbidyEb8a9YBiM2Loo7lVjBI6MKCxeqU3ap5KQTcfKZ9jwuZb8yyl7
+	xaOfE+iyA1HM1Pkj5yTudgU75tdoP2agJoKuqZB7enIKQss7SIfAyodAgheLB21WqxMz
+	y7ufxVWUexQEShvk1FGF4p8STANS+tgizA2AR4NaCuairZ2KdebjrrtfBVtXXU5pRZhE
+	HkGg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=/AS6lWdmjP70YWBM4so135JaKQ2q2X1cLpjXg0kS3B0=;
+	b=ZHoILlHGZKBOAnzFyqzCEA/aUJ/V1IuJaFOxo1JC3tauBmo1i56HClxk9t4UZUQnzs
+	/xc0li6BB2XGMLqXmSGkmFOVmUox9o8+g8LJxtOHkXw4hS2dHySnU1jIvVOedTM9xsk2
+	79rAESPX1wlqf7qbgV8QmAHV1njsU6QUtDA5+O2CkdKtpN3y9Cx6Z1uHA+SBlLNjgwPt
+	wxv+NwFWt4pbbd+5Z5xduFFC2eyIbX/GQ9DpOmcWdSJclHjzY0nwuzAAioUYfUcfK5Fh
+	qLF9hLc7azb0orQ1uQlyupnRPKuLul52BRiJ0zPlC4oyDClXX2ks7YA5bJSVbViB04K5
+	mjsg==
+X-Gm-Message-State: AHYfb5j5ymNc8GPCyH8bKZBK1TDffcuzYwdPo/FLLUqRZJCb21+DvW5o
+	QE9gsswM6HkajuQR
+X-Received: by 10.28.151.204 with SMTP id z195mr317983wmd.173.1504178892085;
+	Thu, 31 Aug 2017 04:28:12 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	v17sm6759483wrg.23.2017.08.31.04.28.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 31 Aug 2017 04:28:11 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Aug 2017 13:30:07 +0200
+Message-Id: <20170831113008.7247-1-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH 1/2] layer.conf: exclude android-tools->android-tools-conf from siggen
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,84 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 08:57:33 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 31 Aug 2017 11:28:12 -0000
 
-From: Jianchuan Wang <jianchuan.wang@windriver.com>
+* when android-tools were moved from meta-smartphone/meta-android to
+  meta-oe this part was overlooked and my jenkins jobs didn't detect
+  it because I was still including meta-android layer.
 
-Account for the case if the DRBD drive is built into
-the kernel. Otherwise, errors, like the following,
-will occur:
-
-root@localhost:~# /etc/init.d/drbd stop
-    Stopping all DRBD resources: ERROR: Module drbd does not exist in
-    /proc/modules
-
-Signed-off-by: Jianchuan Wang <jianchuan.wang@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- ...drbd-tools-only-rmmod-if-DRBD-is-a-module.patch | 39 ++++++++++++++++++++++
- .../recipes-support/drbd/drbd-utils_8.9.6.bb       |  1 +
- 2 files changed, 40 insertions(+)
- create mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
+ meta-oe/conf/layer.conf | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
-new file mode 100644
-index 000000000..add0b030c
---- /dev/null
-+++ b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
-@@ -0,0 +1,39 @@
-+Subject: drbd-tools: only rmmod if DRBD is a module
-+
-+Account for the case if the DRBD drive is built into
-+the kernel. Otherwise, errors, like the following,
-+will occur:
-+
-+root@localhost:~# /etc/init.d/drbd stop
-+    Stopping all DRBD resources: ERROR: Module drbd does not exist in
-+    /proc/modules
-+
-+Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
-+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
-+
-+[ refresh to 8.4.4: squash Aws' and Jason's patches ]
-+Signed-off-by: Michel Thebeau <michel.thebeau@windriver.com>
-+
-+Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-+---
-+ scripts/drbd | 4 +++-
-+ 1 file changed, 3 insertions(+), 1 deletion(-)
-+
-+diff --git a/scripts/drbd b/scripts/drbd
-+index 20bf628..de589dc 100755
-+--- a/scripts/drbd
-++++ b/scripts/drbd
-+@@ -241,7 +241,9 @@ case "$1" in
-+ 		if [ -d /sys/module/drbd/holders ]; then
-+ 			(cd /sys/module/drbd/holders; for tr in *; do [ -d ${tr} ] && ${RMMOD} ${tr}; done)
-+ 		fi
-+-		$RMMOD drbd && break
-++		if [ ! -z "$(cat /proc/modules | grep -w drbd)" ]; then
-++			$RMMOD drbd && break
-++		fi
-+ 	    fi
-+ 	done
-+ 	run_hook stop
-+-- 
-+1.9.1
-+
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-index 5f6c43f7e..5979fbb58 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-@@ -10,6 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
+diff --git a/meta-oe/conf/layer.conf b/meta-oe/conf/layer.conf
+index f0d21ed50..5097f4b95 100644
+--- a/meta-oe/conf/layer.conf
++++ b/meta-oe/conf/layer.conf
+@@ -41,6 +41,7 @@ SIGGEN_EXCLUDERECIPES_ABISAFE += " \
+ "
  
- SRC_URI = "http://oss.linbit.com/drbd/${BP}.tar.gz \
-            file://0001-Makefile.in-fix-permission-bits-for-drbd.service.patch \
-+           file://0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch \
-           "
- SRC_URI[md5sum] = "76ed6d3190cd77b00890f3365353124b"
- SRC_URI[sha256sum] = "297b77c9b3f88de2e7dae459234f2753ea4fc2805282b2d276e35cf51e292913"
+ SIGGEN_EXCLUDE_SAFE_RECIPE_DEPS += " \
++  android-tools->android-tools-conf \
+   usb-modeswitch-data->usb-modeswitch \
+   lmsensors->lmsensors-config \
+   phoronix-test-suite->bash \
 -- 
-2.11.0
+2.14.1
 
 
