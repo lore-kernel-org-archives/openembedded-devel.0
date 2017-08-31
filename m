@@ -1,56 +1,56 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DA11B783B6
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id E1F9B78418
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 21:49:54 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id v22so519843pfk.1
+	Thu, 31 Aug 2017 21:50:39 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id m15so551323pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 14:49:56 -0700 (PDT)
+	Thu, 31 Aug 2017 14:50:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding:content-language;
-	bh=p0t4F1i5UvxNzlczpP/52S1WeSleKspELxzSG9qAPKQ=;
-	b=u7wTAb+I4F/UUatt/S2HmtvhpLnMbwz+uujA35u25MBSy/ahmJ8Hg29AGUWiKb8RCU
-	49a6fJ+HmmIlZrvx+h6t7TeSu7E33EOWfp3eo4m/fgk/IHWMcL2oLMmbtjq31AyI0K3z
-	phLmpjQ1hb0zUT/IJ6/dvWBbRpOxCR/24OnYNMIbMkbebY8/WeGNVy950qGan5k5inli
-	uVqDizxqg4mrlQIYm/eLgNpGGu4OZJXzE5Qhx7oZA/iSX9/2EAgqIufYtT65rCRbkneX
-	+/F04Ld3lRIQpufhMeSQqL1Ug1aN47rPRDYrwFqMZZlfHWEzXY1yldaYMMF0uYaJsTiF
-	uN3g==
+	bh=TemiBP/rFgkaU3Lq+kMhSJnjnkUVTGuVy5yf2eQ2/Ds=;
+	b=n6NuozBP17Pc62BjMDeY32SuAY9/rqV3wptfohkj6MnOYC+uyTO+DL89dzsuqb88ir
+	hqqJ23hjQDLOb7KHUUsz5Ua4XjSJnfwatAD86NnTKBBonl8LtjSh8xdtV0QKEFtmFSgl
+	yTY8sfxHkUuHeEsSTL/HQ2bDwqx4Vq95ftGqF5dt70iYuIpSDpAL3BTzaIy9npmLw1+Y
+	ul5r1nfDIZfGws44aXisuCrD++nA1QVAT5+vOXQ+yce8x74d9Tzq9uX0Udkx1Bg8kYlm
+	MDifSUYha86Uk5PR1g1hFQULlyOh8tgacN73qHKjOjBclAJVqz/we1W3krmn467W7X5F
+	xl2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=p0t4F1i5UvxNzlczpP/52S1WeSleKspELxzSG9qAPKQ=;
-	b=SPGHVD+k0CRuFtWKGcJsJ+Vjso/qf6P81kxL06rpjhErO2vDfujGAvmuFcSvPyJD+H
-	rv0Qpi/zfXWVYb/eX+kXbINTH3YvIbvkG20W4SF8RB1Plm+kGZZfDwaRd2oBPxiUcKEy
-	pCXWjVYcCIZVYZDnmxlAOvzz5+s5QIvQVLdI5AZD3ZfKOQZj9vHtbgDoCODWFRePGLWA
-	q+3AZXH3nQ701BDTsrWOXtw2fjHWqNuvqNmS7XfDrzGXZOd/diIxavbIFBK9gGZ+DmW0
-	P6J8Ot/Mjx/uAZ3hCOiQO7CwMhWX0Fdtrr30wW6N1e5qZykPjhwL2V73NQ5nQBIleAnt
-	qh2Q==
-X-Gm-Message-State: AHYfb5iqAYUstf4tCUzQXulUHetrysRs6QJPvlfa9uEIWKSJkTp2R55q
-	FT2VZP+A50nqx5ej
-X-Google-Smtp-Source: ADKCNb64/6RNGeB/ixBMGkSXUXdkSFDWorQFX28bknl3n+CJu8omajmm5NQM+VCzKsSkDq3FkVxUVA==
-X-Received: by 10.99.53.71 with SMTP id c68mr3982161pga.143.1504216195497;
-	Thu, 31 Aug 2017 14:49:55 -0700 (PDT)
+	bh=TemiBP/rFgkaU3Lq+kMhSJnjnkUVTGuVy5yf2eQ2/Ds=;
+	b=uny6mcVn3/o67BFBpW4hnCMmGc8Leai7DwL0TooD6/8l04u0rHCMD+Kp/cAnuBVLzm
+	7xCS5Tve3Tot3WDSee5MDZlxqDJRlurubhM4jevlDZQAxD5V/OzFDdjFwc5uCgfV9cn9
+	WmGRNL1yx4IoN7MouZsExqt/MkqMrLDEhWv9a9ie9/jshJ64BIDSv0tQDjchovQjpy++
+	4GXq2qFpPJVf+BL1EjbnmxBCaB1cjvKZT7jtDpQY00I+yr39TNDux/ZJLjC/hdY9wpr+
+	llvWwaRjxpjeYTs67eBSpfCmCTvzKs4mU+k3bIRHCGuz4DDsHn6cqcqFyZImqasWAK+V
+	bdqA==
+X-Gm-Message-State: AHYfb5hckg2sm5n4Hgfm1Tye6HcB9ZHpgWJ0yARr8350RvPt/GzBoyTK
+	ZdmYGGmt5+KS8VvB
+X-Google-Smtp-Source: ADKCNb4+Q9/NQ/SqwdOLKpro3/qF6vVclo3Q45xw43YQ/+d6ScIPFeMfUn85TVImv4rhfbOHzhDcZA==
+X-Received: by 10.99.96.10 with SMTP id u10mr2488136pgb.76.1504216240854;
+	Thu, 31 Aug 2017 14:50:40 -0700 (PDT)
 Received: from ?IPv6:2601:202:4001:9ea0:d7b:f9dc:579b:aa63?
 	([2601:202:4001:9ea0:d7b:f9dc:579b:aa63])
 	by smtp.gmail.com with ESMTPSA id
-	z11sm766323pfl.120.2017.08.31.14.49.54
+	s76sm723287pfs.112.2017.08.31.14.50.40
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Aug 2017 14:49:54 -0700 (PDT)
-To: Khem Raj <raj.khem@gmail.com>, openembedded-devel@lists.openembedded.org
+	Thu, 31 Aug 2017 14:50:40 -0700 (PDT)
+To: openembedded-devel@lists.openembedded.org
 References: <20170831020401.6367-1-raj.khem@gmail.com>
-	<20170831020401.6367-3-raj.khem@gmail.com>
+	<20170831020401.6367-4-raj.khem@gmail.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <b75f32d6-181b-75a3-e06e-d0986a322ac1@gmail.com>
-Date: Thu, 31 Aug 2017 14:49:54 -0700
+Message-ID: <5f5ea77e-9fe1-9dfb-4ed1-0960afb42e58@gmail.com>
+Date: Thu, 31 Aug 2017 14:50:39 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.2.1
 MIME-Version: 1.0
-In-Reply-To: <20170831020401.6367-3-raj.khem@gmail.com>
-Subject: Re: [meta-networking][PATCH 3/4] netkit-rwho: Fix build with musl
+In-Reply-To: <20170831020401.6367-4-raj.khem@gmail.com>
+Subject: Re: [meta-networking][PATCH 4/4] netkit-tftp: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,7 +63,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 21:49:55 -0000
+X-List-Received-Date: Thu, 31 Aug 2017 21:50:40 -0000
 Content-Type: text/plain; charset=utf-8; format=flowed
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
@@ -73,157 +73,61 @@ Content-Language: en-US
 On 08/30/2017 07:04 PM, Khem Raj wrote:
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->   ...001-Add-missing-include-path-to-I-options.patch | 44 ++++++++++++++
->   .../0002-Fix-build-issues-found-with-musl.patch    | 69 ++++++++++++++++++++++
->   .../recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb |  4 +-
->   3 files changed, 116 insertions(+), 1 deletion(-)
->   create mode 100644 meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0001-Add-missing-include-path-to-I-options.patch
->   create mode 100644 meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
+>   .../0001-tftp-Include-missing-fcntl.h.patch        | 25 ++++++++++++++++++++++
+>   .../recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb |  7 +++---
+>   2 files changed, 29 insertions(+), 3 deletions(-)
+>   create mode 100644 meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
 >
-> diff --git a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0001-Add-missing-include-path-to-I-options.patch b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0001-Add-missing-include-path-to-I-options.patch
+> diff --git a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
 > new file mode 100644
-> index 000000000..9899292b0
+> index 000000000..c5dcdb423
 > --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0001-Add-missing-include-path-to-I-options.patch
-> @@ -0,0 +1,44 @@
-> +From 55ab6f1389261edff5f4c942bc3b0d8e695856d7 Mon Sep 17 00:00:00 2001
+> +++ b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
+> @@ -0,0 +1,25 @@
+> +From fa57e161fc953264a75d50a787cb83983e60acc7 Mon Sep 17 00:00:00 2001
 > +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Wed, 30 Aug 2017 18:11:33 -0700
-> +Subject: [PATCH 1/2] Add missing include path to -I options
-> +
-> +Fixes errors like
-> +| rwho.c:52:10: fatal error: 'protocols/rwhod.h' file not found
-> +| #include <protocols/rwhod.h>
-> +|          ^~~~~~~~~~~~~~~~~~~
-> +
-
-Am I not seeing "Upstream-Status"  in either patches?
-
+> +Date: Wed, 30 Aug 2017 18:30:02 -0700
+> +Subject: [PATCH] tftp: Include missing fcntl.h
+Did I miss the "Upstream-Status" ?
 - armin
-
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + rwho/Makefile  | 1 +
-> + rwhod/Makefile | 2 ++
-> + 2 files changed, 3 insertions(+)
-> +
-> +diff --git a/rwho/Makefile b/rwho/Makefile
-> +index 6f86388..67b28d4 100644
-> +--- a/rwho/Makefile
-> ++++ b/rwho/Makefile
-> +@@ -6,6 +6,7 @@ include ../MRULES
-> + rwho: rwho.o
-> + 	$(CC) $(LDFLAGS) $^ $(LIBS) -o $@
-> +
-> ++CFLAGS += -I../include
-> + rwho.o: ../version.h
-> +
-> + install: rwho
-> +diff --git a/rwhod/Makefile b/rwhod/Makefile
-> +index 772b641..9034218 100644
-> +--- a/rwhod/Makefile
-> ++++ b/rwhod/Makefile
-> +@@ -7,6 +7,8 @@ ifneq ($(USE_GLIBC),1)
-> + CFLAGS += -D_GNU_SOURCE
-> + endif
-> +
-> ++CFLAGS += -I../include
-> ++
-> + OBJS = rwhod.o
-> +
-> + rwhod: $(OBJS)
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
-> new file mode 100644
-> index 000000000..e149f3468
-> --- /dev/null
-> +++ b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho/0002-Fix-build-issues-found-with-musl.patch
-> @@ -0,0 +1,69 @@
-> +From 2108213242638fa355f662382f55495d91301858 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Wed, 30 Aug 2017 18:13:17 -0700
-> +Subject: [PATCH 2/2] Fix build issues found with musl
 > +
 > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +---
-> + ruptime/ruptime.c | 1 +
-> + rwho/rwho.c       | 1 +
-> + rwhod/rwhod.c     | 5 +++--
-> + 3 files changed, 5 insertions(+), 2 deletions(-)
+> + tftp/main.c | 1 +
+> + 1 file changed, 1 insertion(+)
 > +
-> +diff --git a/ruptime/ruptime.c b/ruptime/ruptime.c
-> +index 1d4f7b6..f1f043c 100644
-> +--- a/ruptime/ruptime.c
-> ++++ b/ruptime/ruptime.c
-> +@@ -53,6 +53,7 @@ char ruptime_rcsid[] =
-> + #include <string.h>
-> + #include <errno.h>
-> + #include <time.h>
+> +diff --git a/tftp/main.c b/tftp/main.c
+> +index 8c54843..5c9b698 100644
+> +--- a/tftp/main.c
+> ++++ b/tftp/main.c
+> +@@ -63,6 +63,7 @@ char main_rcsid[] =
+> + #include <ctype.h>
+> + #include <netdb.h>
+> + #include <unistd.h>
 > ++#include <fcntl.h>
 > +
-> + struct hs {
-> + 	char	hs_hostname[MAXHOSTNAMELEN];
-> +diff --git a/rwho/rwho.c b/rwho/rwho.c
-> +index 63919ac..71aec9e 100644
-> +--- a/rwho/rwho.c
-> ++++ b/rwho/rwho.c
-> +@@ -49,6 +49,7 @@ char rcsid[] = "$Id: rwho.c,v 1.7 1999/08/01 20:44:18 dholland Exp $";
-> + #include <assert.h>
-> + #include <stdio.h>
-> + #include <time.h>
-> ++#include <fcntl.h>
-> + #include <protocols/rwhod.h>
+> + #include "tftpsubs.h"  /* for mysignal() */
 > +
-> + #include "../version.h"
-> +diff --git a/rwhod/rwhod.c b/rwhod/rwhod.c
-> +index 54498d0..40cabcf 100644
-> +--- a/rwhod/rwhod.c
-> ++++ b/rwhod/rwhod.c
-> +@@ -76,6 +76,7 @@ char rcsid[] =
-> + #include <grp.h>
-> + #include <time.h>
-> + #include <stdint.h>
-> ++#include <fcntl.h>
-> +
-> + #include "../version.h"
-> +
-> +@@ -102,7 +103,7 @@ struct	nlist nl[] = {
-> + static void	broadcaster(void);
-> + static int	configure(int s);
-> + static int	verify(const char *name);
-> +-#if __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 2)
-> ++#if defined(__GLIBC__) &&  (__GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 2))
-> + static int	getloadavg(double ptr[3], int n);
-> + #endif
-> +
-> +@@ -549,7 +550,7 @@ sendpacket(struct whod *wd)
-> + 	}
-> + }
-> +
-> +-#if __GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 2)
-> ++#if defined(__GLIBC__) && (__GLIBC__ < 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ < 2))
-> + /*
-> +  * Taken from:
-> +  *
 > +--
 > +2.14.1
 > +
-> diff --git a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb
-> index 04baa4286..5685f03d6 100644
-> --- a/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb
-> +++ b/meta-networking/recipes-netkit/netkit-rwho/netkit-rwho_0.17.bb
-> @@ -8,7 +8,9 @@ SRC_URI = "${DEBIAN_MIRROR}/main/n/netkit-rwho/netkit-rwho_${PV}.orig.tar.gz;nam
->              ${DEBIAN_MIRROR}/main/n/netkit-rwho/netkit-rwho_${PV}-13.debian.tar.gz;name=patch13 \
->              file://rwhod \
->              file://rwhod.default \
+> diff --git a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
+> index 67a541d25..92c13e850 100644
+> --- a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
+> +++ b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
+> @@ -6,9 +6,10 @@ DEPENDS = "tcp-wrappers"
+>   LIC_FILES_CHKSUM = "file://tftp/tftp.c;beginline=2;endline=3;md5=84d2cfe1e60863a7d82648734ba4d30c"
+>   
+>   SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
+> -    ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-18.diff.gz;name=patch18 \
+> -    file://tftp.conf \
 > -"
-> +           file://0001-Add-missing-include-path-to-I-options.patch \
-> +           file://0002-Fix-build-issues-found-with-musl.patch \
+> +           ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-18.diff.gz;name=patch18 \
+> +           file://tftp.conf \
+> +           file://0001-tftp-Include-missing-fcntl.h.patch \
 > +           "
->   SRC_URI[archive.md5sum] = "0f71620d45d472f89134ba0d74242e75"
->   SRC_URI[archive.sha256sum] = "0409e2ce4bfdb2dacb2c193d0fedfc49bb975cb057c5c6b0ffcca603a1188da7"
->   SRC_URI[patch13.md5sum] = "82ed5a3c6b0bbf00b36508b9787963b9"
+>   
+>   SRC_URI[archive.md5sum] = "b7262c798e2ff50e29c2ff50dfd8d6a8"
+>   SRC_URI[archive.sha256sum] = "3a43c0010d4e61f412563fd83769d4667d8b8e82903526d21cb9205fe55ad14d"
 
 
