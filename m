@@ -1,48 +1,46 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id A69D978387
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 3492377E0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 02:04:18 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id m15so6292056pgc.0
+	Thu, 31 Aug 2017 05:28:34 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id r187so5610561pfr.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Aug 2017 19:04:20 -0700 (PDT)
+	Wed, 30 Aug 2017 22:28:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Vi43fk9yvySmbT4Y10dC+c5GiHl1hYjhWoaHH2VE39k=;
-	b=tj+HAh5szAKeJ/tqbMk3xrM4d+s8lLmDoDLeWfDyXRh792fQzew9JW6TWE6+/IZKH+
-	uJUBSBATOtJ2+hZJt6/xkvUSK0EHEOJcukLdGE8KEnWqfqi1ugdnYunfYZb5wxceV7Vn
-	QWCIUmjezy5Bfiwf6yD2wrCu6G0beh1glyEDDjGCPdHXyhsVVZmkg6VihdEW67lfW56A
-	2lmClA+fdqQ2DPNkERejyfyNZ5Jf1QmNbkMfjPnwR4IJkHN5oVyyeJDQHK4N6fc8FR8o
-	lsH5dhhGmkRbIVh5t3Rc2P/9Ts/V0bhSbVYybnD4ArpPIIdwzo+jHlx2TJ+hy82TS1Se
-	qEWg==
+	h=from:to:cc:subject:date:message-id;
+	bh=LzWYjOGUNuExBZyPWHN5IjAsHOmu1C2bg7mLspLLHzQ=;
+	b=JDiEbQkCvPXu1A/RGCVJ2pU1F+C0K+asAeT1KqqVmUWEHVZeuAvXXddIv3QY2byHWA
+	KzYMnehzBd0jJgCKhkfOkHMlg1E2WaMuTw9oaDQf9LjuJFqepiOMWJRAIdXwpHKElaPJ
+	ufCfRhc/q8CZPCsbSYgyAKTQbfQUDA5Vmqf7b4GIPKZNbFKe59GE2BGEYvTvE87uA6Q0
+	UJRUiuISEK7Zt3lKbBWuyhosJbnltc0Qo2zIeWda58kwfuNBdlPNWbxuXXG/79QWYgvO
+	6VHAxx7AEOqxBDnEYvE3Z8yhnwL6bZke19V2YmvcOJg1TNOjclLBENXNtEedBvRKx/px
+	0PWQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Vi43fk9yvySmbT4Y10dC+c5GiHl1hYjhWoaHH2VE39k=;
-	b=NdvltiOXLw8mTs6Z3rMK6xyJZloemVYFkvse5r30bND4oFkiuWy/mWe4OfF41QE/s7
-	7wrkTMfySeAZQh9c4kX7riKwXgpoXr+GJYaEN/CiH+CWFBirsk3DNt7U5LitOKksiK9a
-	ixhO7EISmuQRcK/M6xmADdnHE769qaDYGzGzhXubVpk9eVAwdF6NwjKzg1iqaqDSlaJL
-	k0TAZVGrkDlLLyLnwBW8YyJSGFzQvdfGyFpStBfU7rtYa5SJbDXKxQ3hjg79ej9CuszR
-	wvDZNZlW+sAm0B6OXz6vBFSTrHbCvkJ4Wi8YlfWhwu25c9TDvuJnvSFtmQseL+SaLGc3
-	Namw==
-X-Gm-Message-State: AHYfb5jEng8tNIwWlqKHdPPIDIRCvwDf0hu8kRWGs3o7a4za/03VozBc
-	H6vPI4ynmtj4nZ0W
-X-Received: by 10.99.113.29 with SMTP id m29mr630899pgc.39.1504145060124;
-	Wed, 30 Aug 2017 19:04:20 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::79ab])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LzWYjOGUNuExBZyPWHN5IjAsHOmu1C2bg7mLspLLHzQ=;
+	b=oYJRP/v2SeKmUSg2ruN8JM5iyc2OmRyZ/x0Yf6qYFnlxNYDF/m5PsaQmdRSO+bxydx
+	oKTHVmQL0j5eIu920Wzu+uQoHHL+F3guRrNPhY+weP2HuUsfd3b5B4N5Z61awZC0fF1w
+	HD0vntEd/xcxfMlIV19Rpf/b9oNgoCZuIY/2yZD14XSPu74SHS7oCWDaCvd0tuQ1rl7+
+	kb1dYpRKlSF9PQgoqApFTmNeNBCjGQZbUvU6Zrj/jSiWGW8RePaTLyX2PJyEcYAbxYTJ
+	CfMZyewGWAWn843LnQyODNFHf8HQFVnDWx9v++ro73mwJiTOq0VFAxk2rvVcBjJWfy1H
+	ppaA==
+X-Gm-Message-State: AHYfb5ggvenaysgqCLUb5yimD62Mt98j2mZIs5m8oeZ+zqg1GZdoIWUh
+	6AYaPpETJ9ECttFE
+X-Received: by 10.99.1.5 with SMTP id 5mr1106955pgb.313.1504157316122;
+	Wed, 30 Aug 2017 22:28:36 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
 	by smtp.gmail.com with ESMTPSA id
-	c10sm12347641pfk.101.2017.08.30.19.04.19
+	y81sm11737754pfi.153.2017.08.30.22.28.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 30 Aug 2017 19:04:19 -0700 (PDT)
+	Wed, 30 Aug 2017 22:28:35 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 30 Aug 2017 19:04:01 -0700
-Message-Id: <20170831020401.6367-4-raj.khem@gmail.com>
+Date: Wed, 30 Aug 2017 22:28:26 -0700
+Message-Id: <20170831052827.34529-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170831020401.6367-1-raj.khem@gmail.com>
-References: <20170831020401.6367-1-raj.khem@gmail.com>
-Subject: [meta-networking][PATCH 4/4] netkit-tftp: Fix build with musl
+Subject: [meta-oe][PATCH 1/2] serial-forward: Fix build with hardening+musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,64 +53,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 02:04:18 -0000
+X-List-Received-Date: Thu, 31 Aug 2017 05:28:35 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-tftp-Include-missing-fcntl.h.patch        | 25 ++++++++++++++++++++++
- .../recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb |  7 +++---
- 2 files changed, 29 insertions(+), 3 deletions(-)
- create mode 100644 meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
+ ...al_forward-Disable-default-static-linking.patch | 29 ++++++++++++++++++++++
+ .../serial-utils/serial-forward_git.bb             |  6 +++--
+ 2 files changed, 33 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-support/serial-utils/serial-forward/0001-serial_forward-Disable-default-static-linking.patch
 
-diff --git a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
+diff --git a/meta-oe/recipes-support/serial-utils/serial-forward/0001-serial_forward-Disable-default-static-linking.patch b/meta-oe/recipes-support/serial-utils/serial-forward/0001-serial_forward-Disable-default-static-linking.patch
 new file mode 100644
-index 000000000..c5dcdb423
+index 000000000..7dcc67d11
 --- /dev/null
-+++ b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp/0001-tftp-Include-missing-fcntl.h.patch
-@@ -0,0 +1,25 @@
-+From fa57e161fc953264a75d50a787cb83983e60acc7 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/serial-utils/serial-forward/0001-serial_forward-Disable-default-static-linking.patch
+@@ -0,0 +1,29 @@
++From a0d815ad9918aba977aed9275b3bf3d750a1709b Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Wed, 30 Aug 2017 18:30:02 -0700
-+Subject: [PATCH] tftp: Include missing fcntl.h
++Date: Wed, 30 Aug 2017 19:24:40 -0700
++Subject: [PATCH] serial_forward: Disable default static linking
++
++This does not work with ssp turned on with hardening flags on musl
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+ tftp/main.c | 1 +
-+ 1 file changed, 1 insertion(+)
++ tools/serial_forward/src/Makefile.am | 3 ---
++ 1 file changed, 3 deletions(-)
 +
-+diff --git a/tftp/main.c b/tftp/main.c
-+index 8c54843..5c9b698 100644
-+--- a/tftp/main.c
-++++ b/tftp/main.c
-+@@ -63,6 +63,7 @@ char main_rcsid[] =
-+ #include <ctype.h>
-+ #include <netdb.h>
-+ #include <unistd.h>
-++#include <fcntl.h>
++diff --git a/tools/serial_forward/src/Makefile.am b/tools/serial_forward/src/Makefile.am
++index 3f598286..bcac9bc9 100644
++--- a/tools/serial_forward/src/Makefile.am
+++++ b/tools/serial_forward/src/Makefile.am
++@@ -20,9 +20,6 @@ serial_forward_SOURCES = \
++ 	cy8mrln.h \
++ 	$(NULL)
 + 
-+ #include "tftpsubs.h"  /* for mysignal() */
-+ 
++-serial_forward_LDFLAGS = \
++-	-all-static
++-
++ pty_forward_SOURCES = \
++ 	pty_forward.c \
++ 	$(NULL)
 +-- 
 +2.14.1
 +
-diff --git a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
-index 67a541d25..92c13e850 100644
---- a/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
-+++ b/meta-networking/recipes-netkit/netkit-tftp/netkit-tftp_0.17.bb
-@@ -6,9 +6,10 @@ DEPENDS = "tcp-wrappers"
- LIC_FILES_CHKSUM = "file://tftp/tftp.c;beginline=2;endline=3;md5=84d2cfe1e60863a7d82648734ba4d30c"
+diff --git a/meta-oe/recipes-support/serial-utils/serial-forward_git.bb b/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
+index 6494de9d3..0ef829856 100644
+--- a/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
++++ b/meta-oe/recipes-support/serial-utils/serial-forward_git.bb
+@@ -3,10 +3,12 @@ AUTHOR = "Holger 'Zecke' Freyther'"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ebb5c50ab7cab4baeffba14977030c07"
+ SECTION = "console/devel"
+-SRCREV = "00dbec2636ae0385ad028587e20e446272ff97ec"
++SRCREV = "07c6fdede0870edc37a8d51d033b6e7e29aa7c91"
+ PV = "1.1+gitr${SRCPV}"
  
- SRC_URI = "${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}.orig.tar.gz;name=archive \
--    ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-18.diff.gz;name=patch18 \
--    file://tftp.conf \
--"
-+           ${DEBIAN_MIRROR}/main/n/${BPN}/${BPN}_${PV}-18.diff.gz;name=patch18 \
-+           file://tftp.conf \
-+           file://0001-tftp-Include-missing-fcntl.h.patch \
-+           "
+-SRC_URI = "git://github.com/freesmartphone/cornucopia.git"
++SRC_URI = "git://github.com/freesmartphone/cornucopia.git \
++           file://0001-serial_forward-Disable-default-static-linking.patch;striplevel=3 \
++          "
+ S = "${WORKDIR}/git/tools/serial_forward"
  
- SRC_URI[archive.md5sum] = "b7262c798e2ff50e29c2ff50dfd8d6a8"
- SRC_URI[archive.sha256sum] = "3a43c0010d4e61f412563fd83769d4667d8b8e82903526d21cb9205fe55ad14d"
+ inherit autotools
 -- 
 2.14.1
 
