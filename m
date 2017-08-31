@@ -1,45 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 1148378449
+Received: from mail-pf0-f181.google.com (mail-pf0-f181.google.com
+	[209.85.192.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D56B78468
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 23:27:00 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id r133so655780pgr.2
+	Thu, 31 Aug 2017 23:27:01 +0000 (UTC)
+Received: by mail-pf0-f181.google.com with SMTP id g13so3101530pfm.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 16:27:02 -0700 (PDT)
+	Thu, 31 Aug 2017 16:27:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=vrsOLPSsjzzLrY5vOur8UJStj6znfVEuDBr690di4Xo=;
-	b=ohX288+ydEAk9eh75s0/NhPlDKfvtgcOUTCz6qWrW+ovrSfhCuBkm8YRgdVBzEg9B0
-	nZfIb4Gu7bPUgXU9cZaFb3nFZk+RbrRUlYifqTg9NdEs9VNCfLQ1TRZZQDbWBMi7qMBW
-	DkxVXJBF3yZctZqeyTbTofWs/RG4j6rRz1RQKAvPXtkk130cbsk0THlAhxNeq4K/QT2o
-	zUXIGpjdPJPSpPjR+O8DVC4mDsW0/I0sYseMGobXTuem1K/f/yEc9GCMjcAkLVWxQsVS
-	OVlqLrbjIi7b+ngi5oiw8VP06AtpAhmHtb3lt83SmifjWPjy3xqbWis+5mH3oV4nGWzZ
-	TZAw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=7KAC/aOqJRgAbVuPQ0OkLKMrVvu77g8N/fvDZoDEFUY=;
+	b=D51zFWxLxPZ9Cx48hZSZcjpxyxlrn4GOzIjjXIisrnlUsU1XEF6kY7jhzBJ52dPE9v
+	hdm9jK77p2MqvFmpOY1TvrlBReTCgazgvEiEfe6Yd6i3A+9EuRwzq4pzEPj2efUX8RLP
+	iKEnxVUVJtxSqAWG64q7I7ZqCYjdJ6TTp+9Jll3nykivhA8TBl070H7z5VzPbe9TMBRd
+	GSgPix/zsjGj3Nx7cygO+V/vwAQ9wgv1lpJ6Rxzp9BPB5Q4OWy7m9wLRq/9OxGfnEkoC
+	frcyuqBiySnGlUAmTcdD9X0UoL6Mys4YA2RQ/GBfXzkE2zZaXhJdndbCouF2xi/c/1MT
+	5bUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vrsOLPSsjzzLrY5vOur8UJStj6znfVEuDBr690di4Xo=;
-	b=QZTFSKTJ4utok7D7x/aiPPI+GhCjPdZFXSpCMwVURhjoKBsMEZCxOG+wI5YmRnby+v
-	rY6Ytv+Z4zPATdIFHAw1C3K4IkixN0grJP+wudtfVZ3jIpSWRqr/3NVaH7y01uLNk6W/
-	0LGqhQWf2xC/VvTo74fnldv67qjcXM6OOp4D1OH6/FGoShGfxjbBtvQ/oO1FZeiYPkuF
-	vRjrS/Ac6e3l0oP+ehOICWY7mHmENk4dB+CFQ5au0dzqteWnTc2p/Me7ACRkZjPMBJsj
-	DeobQ8Xx9kTjS3NU7t8wLMDJjHx93Css3S8Nyb1LHIeTpTi7VCSuBAzxNSq+lES+CMFb
-	SR4w==
-X-Gm-Message-State: AHPjjUhP12LGYKCbWyOlFMLcOHhl21EF4M6ur+aeJGM/ujKDPx/o9Iag
-	TbNWLhTVDzhGoiVV
-X-Google-Smtp-Source: ADKCNb6IfA2xk0VwkoeXh9EQfA4CM8v6P3srOZ2frCrm5veOJbe9Ws9xHcCq9s6+j5Jy0MXeLnVW6g==
-X-Received: by 10.98.158.12 with SMTP id s12mr123629pfd.246.1504222021818;
-	Thu, 31 Aug 2017 16:27:01 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=7KAC/aOqJRgAbVuPQ0OkLKMrVvu77g8N/fvDZoDEFUY=;
+	b=CVDmJzwEL1ouVxxRlFueBUeYCmw+uO5dGqW85zn5l/bfjYdMpj8h7hNIzJ9+06w5eT
+	rh4zeeNVdGZWpuo9xILfCsO2st6e2O1JEQjzr3+xd0YYsLbRm+l09+vpDpmT/tHmizuq
+	galq8VhzERrcSpZIarv01Die6cJRTxABOqKHmREBLSlRy3eetBFRraxpRJrQL6eWRN8u
+	KUkSg4oRB2bwRHi3o3j6A5xVxXOQiaDRcwzlcTdbi2KlOwyGTbdB2x7mprCpK69cR048
+	SpG0uPh/olNyI1sdDZmsDEgDNeZUuBmH/4ug4jK3r7gZCx8jJSiGTui0Mp1wyHOgyRs8
+	iKYw==
+X-Gm-Message-State: AHPjjUipWWb9et3ugot2TxEYEwGeaflPPZBtgM28mu+LZnEFYkFE3nbC
+	f50n2HgPxBy6hjW9
+X-Google-Smtp-Source: ADKCNb5qzx1ZtP4kP3fOvWF0QlmgeU8uIegeAIK/cnu+Ofr4DWRshEaMGzTd8y0TwTsNoLjwUSgmFQ==
+X-Received: by 10.98.204.27 with SMTP id a27mr148068pfg.58.1504222022965;
+	Thu, 31 Aug 2017 16:27:02 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
-	by smtp.gmail.com with ESMTPSA id 16sm888569pge.33.2017.08.31.16.27.00
+	by smtp.gmail.com with ESMTPSA id 16sm888569pge.33.2017.08.31.16.27.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Aug 2017 16:27:01 -0700 (PDT)
+	Thu, 31 Aug 2017 16:27:02 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Aug 2017 16:26:42 -0700
-Message-Id: <20170831232645.6125-1-raj.khem@gmail.com>
+Date: Thu, 31 Aug 2017 16:26:43 -0700
+Message-Id: <20170831232645.6125-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-networking][PATCH 1/4] ndisc6: Fix build with clang and update to latest on git
+In-Reply-To: <20170831232645.6125-1-raj.khem@gmail.com>
+References: <20170831232645.6125-1-raj.khem@gmail.com>
+Subject: [meta-networking][PATCH V2 2/4] ntop: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,237 +56,368 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 31 Aug 2017 23:27:01 -0000
+X-List-Received-Date: Thu, 31 Aug 2017 23:27:02 -0000
 
-Change recipe to git
-Pass PERL variable to configure
-Add patches to fix VLAIS
+move away from .inc file, when its included in single recipe
+helps with devtool workflow too.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../0001-replace-VLAIS-with-malloc-free-pair.patch | 124 +++++++++++++++++++++
- .../ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch     |  30 +++++
- .../ndisc6/{ndisc6_1.0.3.bb => ndisc6_git.bb}      |  21 ++--
- 3 files changed, 168 insertions(+), 7 deletions(-)
- create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch
- create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch
- rename meta-networking/recipes-support/ndisc6/{ndisc6_1.0.3.bb => ndisc6_git.bb} (87%)
+ meta-networking/recipes-support/ntop/ntop.inc      | 131 --------------------
+ .../ntop/ntop/0001-nDPI-Include-sys-types.h.patch  |  26 ++++
+ .../recipes-support/ntop/ntop/support-arm64.patch  |  28 -----
+ meta-networking/recipes-support/ntop/ntop_5.0.1.bb | 135 ++++++++++++++++++++-
+ 4 files changed, 160 insertions(+), 160 deletions(-)
+ delete mode 100644 meta-networking/recipes-support/ntop/ntop.inc
+ create mode 100644 meta-networking/recipes-support/ntop/ntop/0001-nDPI-Include-sys-types.h.patch
+ delete mode 100644 meta-networking/recipes-support/ntop/ntop/support-arm64.patch
 
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch b/meta-networking/recipes-support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch
-new file mode 100644
-index 000000000..dc58b5b79
---- /dev/null
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch
-@@ -0,0 +1,124 @@
-+From 3a7d5396e633e6c02a4583be7faf3d79d0d33748 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 Aug 2017 11:14:41 -0700
-+Subject: [PATCH 1/2] replace VLAIS with malloc/free pair
-+
-+Makes it compatible with non-gnu compilers
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Pending
-+
-+ src/trace-icmp.c |  7 +++++--
-+ src/trace-tcp.c  | 14 ++++++++++----
-+ src/trace-udp.c  |  7 +++++--
-+ 3 files changed, 20 insertions(+), 8 deletions(-)
-+
-+diff --git a/src/trace-icmp.c b/src/trace-icmp.c
-+index 842938e..c76cb54 100644
-+--- a/src/trace-icmp.c
-++++ b/src/trace-icmp.c
-+@@ -43,16 +43,19 @@ send_echo_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	struct
-+ 	{
-+ 		struct icmp6_hdr ih;
-+-		uint8_t payload[plen - sizeof (struct icmp6_hdr)];
-++		uint8_t *payload;
-+ 	} packet;
-+ 	memset (&packet, 0, plen);
-++	packet.payload = malloc(plen - sizeof (struct icmp6_hdr));
-+ 
-+ 	packet.ih.icmp6_type = ICMP6_ECHO_REQUEST;
-+ 	packet.ih.icmp6_id = htons (getpid ());
-+ 	packet.ih.icmp6_seq = htons ((ttl << 8) | (n & 0xff));
-+ 	(void)port;
-+ 
-+-	return send_payload (fd, &packet.ih, plen, ttl);
-++	ssize_t ret = send_payload (fd, &packet.ih, plen, ttl);
-++	free(packet.payload);
-++	return ret;
-+ }
-+ 
-+ 
-+diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-+index 940f918..62d22ff 100644
-+--- a/src/trace-tcp.c
-++++ b/src/trace-tcp.c
-+@@ -54,10 +54,11 @@ send_syn_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	struct
-+ 	{
-+ 		struct tcphdr th;
-+-		uint8_t payload[plen - sizeof (struct tcphdr)];
-++		uint8_t *payload;
-+ 	} packet;
-+ 
-+ 	memset (&packet, 0, sizeof (packet));
-++	packet.payload = malloc(plen - sizeof (struct tcphdr));
-+ 	packet.th.th_sport = sport;
-+ 	packet.th.th_dport = port;
-+ 	packet.th.th_seq = htonl ((ttl << 24) | (n << 16) | (uint16_t)getpid ());
-+@@ -65,7 +66,9 @@ send_syn_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	packet.th.th_flags = TH_SYN | (ecn ? (TH_ECE | TH_CWR) : 0);
-+ 	packet.th.th_win = htons (TCP_WINDOW);
-+ 
-+-	return send_payload (fd, &packet, plen, ttl);
-++	ssize_t ret = send_payload (fd, &packet, plen, ttl);
-++	free(packet.payload);
-++	return ret;
-+ }
-+ 
-+ 
-+@@ -131,10 +134,11 @@ send_ack_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	struct
-+ 	{
-+ 		struct tcphdr th;
-+-		uint8_t payload[plen - sizeof (struct tcphdr)];
-++		uint8_t *payload;
-+ 	} packet;
-+ 
-+ 	memset (&packet, 0, sizeof (packet));
-++	packet.payload = malloc(plen - sizeof (struct tcphdr));
-+ 	packet.th.th_sport = sport;
-+ 	packet.th.th_dport = port;
-+ 	packet.th.th_ack = htonl ((ttl << 24) | (n << 16) | (uint16_t)getpid ());
-+@@ -142,7 +146,9 @@ send_ack_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	packet.th.th_flags = TH_ACK;
-+ 	packet.th.th_win = htons (TCP_WINDOW);
-+ 
-+-	return send_payload (fd, &packet, plen, ttl);
-++	ssize_t ret = send_payload (fd, &packet, plen, ttl);
-++	free(packet.payload);
-++	return ret;
-+ }
-+ 
-+ 
-+diff --git a/src/trace-udp.c b/src/trace-udp.c
-+index 4adde6b..a6cbb07 100644
-+--- a/src/trace-udp.c
-++++ b/src/trace-udp.c
-+@@ -46,9 +46,10 @@ send_udp_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	struct
-+ 	{
-+ 		struct udphdr uh;
-+-		uint8_t payload[plen - sizeof (struct udphdr)];
-++		uint8_t *payload;
-+ 	} packet;
-+ 	memset (&packet, 0, plen);
-++	packet.payload = malloc(plen - sizeof (struct udphdr));
-+ 
-+ 	(void)n;
-+ 	packet.uh.uh_sport = sport;
-+@@ -61,7 +62,9 @@ send_udp_probe (int fd, unsigned ttl, unsigned n, size_t plen, uint16_t port)
-+ 	/*if (plen > sizeof (struct udphdr))
-+ 		packet.payload[0] = (uint8_t)ttl;*/
-+ 
-+-	return send_payload (fd, &packet, plen, ttl);
-++	ssize_t ret = send_payload (fd, &packet, plen, ttl);
-++	free(packet.payload);
-++	return ret;
-+ }
-+ 
-+ 
-+-- 
-+2.14.1
-+
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch
-new file mode 100644
-index 000000000..3cc2ba80c
---- /dev/null
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch
-@@ -0,0 +1,30 @@
-+From 2a50154fbce38fd36be7e14f5cd4a8b03c65c72f Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 Aug 2017 11:15:37 -0700
-+Subject: [PATCH 2/2] Do not undef _GNU_SOURCE
-+
-+There are functions from tcp.h which are under _GNU_SOURCE
-+in musl
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Pending
-+
-+ src/trace-tcp.c | 1 -
-+ 1 file changed, 1 deletion(-)
-+
-+diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-+index 62d22ff..380008e 100644
-+--- a/src/trace-tcp.c
-++++ b/src/trace-tcp.c
-+@@ -21,7 +21,6 @@
-+ # include <config.h>
-+ #endif
-+ 
-+-#undef _GNU_SOURCE
-+ #define _DEFAULT_SOURCE 1
-+ 
-+ #include <string.h>
-+-- 
-+2.14.1
-+
-diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-similarity index 87%
-rename from meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-rename to meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-index 6bc0531b9..1ff2df731 100644
---- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-+++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-@@ -10,15 +10,27 @@ RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
- RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
- RDEPENDS_${PN}-misc += "perl"
- 
--SRC_URI = "http://www.remlab.net/files/ndisc6/ndisc6-${PV}.tar.bz2 \
--"
-+PV = "1.0.4+git${SRCPV}"
-+SRCREV = "4c794b5512d23c649def1f94a684225dcbb6ac3e"
-+SRC_URI = "git://git.remlab.net/git/ndisc6.git \
-+           file://0001-replace-VLAIS-with-malloc-free-pair.patch \
-+           file://0002-Do-not-undef-_GNU_SOURCE.patch \
-+           "
- SRC_URI[md5sum] = "21afdaa3a5a5c1ce50eb7f2b7d795989"
- SRC_URI[sha256sum] = "0f41d6caf5f2edc1a12924956ae8b1d372e3b426bd7b11eed7d38bc974eec821"
- 
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
- 
-+S = "${WORKDIR}/git"
-+
- inherit autotools gettext
- 
-+EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
-+
-+do_configure_prepend() {
-+    ${S}/autogen.sh
-+}
-+
- ALLOW_EMPTY_${PN} = "1"
- 
- # Split into seperate packages since we normal don't want them all
-@@ -49,11 +61,6 @@ or IPv4."
- DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS \
- servers through slateless IPv6 autoconfiguration."
- 
--# We do not run perl during the build, but only use it on the target.
--do_configure_prepend() {
--    export PERL="/usr/bin/perl"
+diff --git a/meta-networking/recipes-support/ntop/ntop.inc b/meta-networking/recipes-support/ntop/ntop.inc
+deleted file mode 100644
+index b96433425..000000000
+--- a/meta-networking/recipes-support/ntop/ntop.inc
++++ /dev/null
+@@ -1,131 +0,0 @@
+-SUMMARY = "ntop is network top"
+-DESCRIPTION = "ntop is a network traffic probe that shows the network usage, \
+-similar to what the popular top Unix command does."
+-
+-SECTION = "console/network"
+-
+-LICENSE = "GPLv2+ & GPLv3 & OpenSSL"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
+-                    file://LICENSE-OpenSSL.txt;md5=a409f902e447ddd889cffa0c70e7c7c2 \
+-                   "
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/ntop/ntop-${PV}.tar.gz \
+-           file://ntop_configure_in.patch \
+-           file://ntop_init.patch \
+-           file://ntop_webInterface.patch \
+-           file://ntop_configure_in_net_snmp_config_exist.patch \
+-           file://ntop.service \
+-           file://use-static-inline.patch \
+-           file://support-arm64.patch \
+-          "
+-
+-inherit autotools-brokensep useradd pythonnative pkgconfig systemd
+-
+-DEPENDS = "geoip rrdtool python zlib libpcap gdbm"
+-
+-PACKAGECONFIG ??= "openssl snmp plugins"
+-PACKAGECONFIG[openssl] = "--with-ssl, --without-ssl, openssl, openssl"
+-PACKAGECONFIG[snmp] = "--enable-snmp=yes NETSNMP=${STAGING_BINDIR_CROSS}/net-snmp-config, \
+---disable-snmp,net-snmp,"
+-PACKAGECONFIG[plugins] = "--enable-plugins=yes, --disable-plugins, ,"
+-
+-EXTRA_OECONF += "ac_cv_file_aclocal_m4=yes ac_cv_file_depcomp=no"
+-
+-do_configure() {
+-    cp ${STAGING_DATADIR_NATIVE}/aclocal/libtool.m4 libtool.m4.in
+-    cat acinclude.m4.in acinclude.m4.ntop libtool.m4.in > acinclude.m4
+-    cp 3rd_party/* ./
+-
+-    # config nDPI
+-    cd nDPI
+-    ./configure ${CONFIGUREOPTS} --with-pic
+-    cd ..
+-
+-    sed -i -e 's:^CFG_DBFILE_DIR=$localstatedir/ntop:CFG_DBFILE_DIR=$localstatedir/lib/ntop:' ${S}/configure.in
+-
+-    # fix the CFLAGS, CPPFLAGS, LDFLAGS, remove the host include
+-    sed -i \
+-        -e 's:\(^CFLAGS="\$.*\) -I/usr/local/include -I/opt/local/include":\1":' \
+-        -e 's:\(^CPPFLAGS="\$.*\) -I/usr/local/include -I/opt/local/include":\1":' \
+-        -e 's:\(^LDFLAGS="\$.*\) -L/usr/local/lib -L/opt/local/lib":\1":' \
+-        ${S}/configure.in
+-
+-    # replace the DISTRO RELEASE in configure.in which are host's
+-    # with our release, although those doesn't affect functionality
+-    sed -i -e \
+-        '/DEFINEOS="LINUX"/{N;s/DISTRO=.*/DISTRO="${DISTRO}"/;N;s/RELEASE=.*/RELEASE="${DISTRO_VERSION}"/;}' \
+-        ${S}/configure.in
+-
+-    # osName in original configure.in should be ${TARGET_SYS}
+-    # which will show in ntop's "show configuration"
+-    sed -i -e \
+-        's:^osName=.*:osName=${TARGET_SYS}:' \
+-        ${S}/configure.in
+-
+-    # rename configureextra to configureextra_rename to avoid
+-    # configure.in to guess host OS and pull in more configure, non needed
+-    # which will cause some cross-compiling failure on specific host
+-    # e.g. SUSE(SLED...)
+-    test ! -f configureextra || mv -f configureextra configureextra_rename
+-
+-    # make sure configure finds python includdirs/libs with these envs
+-    export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+-        STAGING_INCDIR=${STAGING_INCDIR} \
+-        STAGING_LIBDIR=${STAGING_LIBDIR}
+-
+-    autotools_do_configure
 -}
 -
- do_install_append () {
-     rm -rf ${D}${localstatedir}
-     # Enable SUID bit for applications that need it
+-do_compile_prepend() {
+-    cd nDPI
+-    oe_runmake
+-    cd ..
+-}
+-
+-do_install_append() {
+-    # remove the empty dirs
+-    rm -rf ${D}${libdir}/plugins
+-
+-    install -D -m 0755 ${S}/packages/RedHat/ntop.init \
+-        ${D}${sysconfdir}/init.d/ntop
+-    install -D -m 0644 ${S}/packages/RedHat/ntop.conf.sample \
+-        ${D}${sysconfdir}/ntop.conf
+-
+-    # change ntop dir in ntop.conf
+-    # don't use the -P as the ntop.init didn't support it
+-    sed -i -e "s:^--db-file-path /usr/share/ntop:--db-file-path /var/lib/ntop:" \
+-        -e "s:^#? -P /var/ntop:#? -P /var/lib/ntop:" \
+-        ${D}${sysconfdir}/ntop.conf
+-
+-    # For systemd
+-    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+-        install -D -m 0755 ${S}/packages/RedHat/ntop.init ${D}${libexecdir}/ntop-helper
+-        install -D -m 0644 ${WORKDIR}/ntop.service ${D}${systemd_system_unitdir}/ntop.service
+-        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
+-            -e 's,@SYSCONFDIR@,${sysconfdir},g' \
+-            ${D}${systemd_system_unitdir}/ntop.service
+-    fi
+-
+-    # Fix host-user-contaminated issue
+-    chown -R root:root ${D}
+-
+-    chown -R ntop.ntop ${D}${datadir}/ntop
+-    chown -R ntop:ntop ${D}${localstatedir}/lib/ntop
+-}
+-
+-USERADD_PACKAGES = "${PN}"
+-USERADD_PARAM_${PN} = "-M -g ntop -r -d ${localstatedir}/lib/ntop \
+--s /usr/sbin/nologin -c 'ntop' ntop"
+-GROUPADD_PARAM_${PN} = "-r ntop"
+-
+-SYSTEMD_SERVICE_${PN} = "ntop.service"
+-SYSTEMD_AUTO_ENABLE = "disable"
+-
+-FILES_${PN}_append = "${libdir}/ntop/plugins ${libdir}/libntop-*.so \
+-                      ${libdir}/libntopreport-*.so ${libdir}/lib*-${PV}.so"
+-FILES_${PN}-dev = "${includedir} ${libdir}/libntop.so \
+-                   ${libdir}/libntopreport.so \
+-                   ${libdir}/libnetflowPlugin.so ${libdir}/libsflowPlugin.so \
+-                   ${libdir}/librrdPlugin.so \
+-                   ${libdir}/*.a ${libdir}/libntopreport.a ${libdir}/*.la"
+-
+diff --git a/meta-networking/recipes-support/ntop/ntop/0001-nDPI-Include-sys-types.h.patch b/meta-networking/recipes-support/ntop/ntop/0001-nDPI-Include-sys-types.h.patch
+new file mode 100644
+index 000000000..81ffeec21
+--- /dev/null
++++ b/meta-networking/recipes-support/ntop/ntop/0001-nDPI-Include-sys-types.h.patch
+@@ -0,0 +1,26 @@
++From 6543f3e2d5fe214e2fc6c050289bf1ae73b18724 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Wed, 30 Aug 2017 13:56:24 -0700
++Subject: [PATCH] nDPI: Include sys/types.h
++
++Needed for uint_t types
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Pending
++
++ nDPI/src/include/ipq_api.h | 1 +
++ 1 file changed, 1 insertion(+)
++
++Index: ntop-5.0.1/nDPI/src/include/ipq_api.h
++===================================================================
++--- ntop-5.0.1.orig/nDPI/src/include/ipq_api.h
+++++ ntop-5.0.1/nDPI/src/include/ipq_api.h
++@@ -24,6 +24,7 @@
++ #ifndef __IPOQUE_API_INCLUDE_FILE__
++ #define __IPOQUE_API_INCLUDE_FILE__
++ 
+++#include <sys/types.h>
++ 
++ #if defined(HAVE_NTOP) && defined(WIN32)
++ #include <winsock2.h>
+diff --git a/meta-networking/recipes-support/ntop/ntop/support-arm64.patch b/meta-networking/recipes-support/ntop/ntop/support-arm64.patch
+deleted file mode 100644
+index 0b1e8afbc..000000000
+--- a/meta-networking/recipes-support/ntop/ntop/support-arm64.patch
++++ /dev/null
+@@ -1,28 +0,0 @@
+-Add support for arm64
+-
+-Upstream-Status: Inappropriate [no longer maintained]
+-
+-Signed-off-by: Yue Tao <Yue.Tao@windriver.com>
+-
+-diff --git a/nDPI/config.sub.old b/nDPI/config.sub
+-index c2d1257..e4347ac 100755
+---- a/nDPI/config.sub.old
+-+++ b/nDPI/config.sub
+-@@ -249,7 +249,7 @@ case $basic_machine in
+- 	| alpha | alphaev[4-8] | alphaev56 | alphaev6[78] | alphapca5[67] \
+- 	| alpha64 | alpha64ev[4-8] | alpha64ev56 | alpha64ev6[78] | alpha64pca5[67] \
+- 	| am33_2.0 \
+--	| arc | arm | arm[bl]e | arme[lb] | armv[2345] | armv[345][lb] | avr | avr32 \
+-+	| arc | arm | arm[bl]e | arme[lb] | armv[2345] | armv[345][lb] | avr | avr32 | aarch64 \
+- 	| bfin \
+- 	| c4x | clipper \
+- 	| d10v | d30v | dlx | dsp16xx \
+-@@ -331,7 +331,7 @@ case $basic_machine in
+- 	| alpha-* | alphaev[4-8]-* | alphaev56-* | alphaev6[78]-* \
+- 	| alpha64-* | alpha64ev[4-8]-* | alpha64ev56-* | alpha64ev6[78]-* \
+- 	| alphapca5[67]-* | alpha64pca5[67]-* | arc-* \
+--	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* \
+-+	| arm-*  | armbe-* | armle-* | armeb-* | armv*-* | aarch64-* \
+- 	| avr-* | avr32-* \
+- 	| bfin-* | bs2000-* \
+- 	| c[123]* | c30-* | [cjt]90-* | c4x-* | c54x-* | c55x-* | c6x-* \
+diff --git a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+index 77b5e436f..298fbec61 100644
+--- a/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
++++ b/meta-networking/recipes-support/ntop/ntop_5.0.1.bb
+@@ -1,4 +1,137 @@
+-include ntop.inc
++SUMMARY = "ntop is network top"
++DESCRIPTION = "ntop is a network traffic probe that shows the network usage, \
++similar to what the popular top Unix command does."
+ 
++SECTION = "console/network"
++
++LICENSE = "GPLv2+ & GPLv3 & OpenSSL"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://LICENSE-OpenSSL.txt;md5=a409f902e447ddd889cffa0c70e7c7c2 \
++                   "
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/ntop/ntop-${PV}.tar.gz \
++           file://ntop_configure_in.patch \
++           file://ntop_init.patch \
++           file://ntop_webInterface.patch \
++           file://ntop_configure_in_net_snmp_config_exist.patch \
++           file://ntop.service \
++           file://use-static-inline.patch \
++           file://0001-nDPI-Include-sys-types.h.patch \
++          "
+ SRC_URI[md5sum] = "01710b6925a8a5ffe1a41b8b512ebd69"
+ SRC_URI[sha256sum] = "7e8e84cb14d2173beaca4d4cb991a14d84a4bef84ec37b2276bc363f45c52ef8"
++
++inherit autotools-brokensep useradd pythonnative pkgconfig systemd
++
++DEPENDS = "geoip rrdtool python zlib libpcap gdbm"
++
++PACKAGECONFIG ??= "openssl snmp plugins"
++PACKAGECONFIG[openssl] = "--with-ssl, --without-ssl, openssl, openssl"
++PACKAGECONFIG[snmp] = "--enable-snmp=yes NETSNMP=${STAGING_BINDIR_CROSS}/net-snmp-config, \
++--disable-snmp,net-snmp,"
++PACKAGECONFIG[plugins] = "--enable-plugins=yes, --disable-plugins, ,"
++
++EXTRA_OECONF += "ac_cv_file_aclocal_m4=yes ac_cv_file_depcomp=no"
++
++do_configure() {
++    cp ${STAGING_DATADIR_NATIVE}/aclocal/libtool.m4 libtool.m4.in
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}/nDPI
++    install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}/nDPI
++    cat acinclude.m4.in acinclude.m4.ntop libtool.m4.in > acinclude.m4
++    cp 3rd_party/* ./
++
++    # config nDPI
++    cd nDPI
++    ./configure ${CONFIGUREOPTS} --with-pic
++    cd ..
++
++    sed -i -e 's:^CFG_DBFILE_DIR=$localstatedir/ntop:CFG_DBFILE_DIR=$localstatedir/lib/ntop:' ${S}/configure.in
++
++    # fix the CFLAGS, CPPFLAGS, LDFLAGS, remove the host include
++    sed -i \
++        -e 's:\(^CFLAGS="\$.*\) -I/usr/local/include -I/opt/local/include":\1":' \
++        -e 's:\(^CPPFLAGS="\$.*\) -I/usr/local/include -I/opt/local/include":\1":' \
++        -e 's:\(^LDFLAGS="\$.*\) -L/usr/local/lib -L/opt/local/lib":\1":' \
++        ${S}/configure.in
++
++    # replace the DISTRO RELEASE in configure.in which are host's
++    # with our release, although those doesn't affect functionality
++    sed -i -e \
++        '/DEFINEOS="LINUX"/{N;s/DISTRO=.*/DISTRO="${DISTRO}"/;N;s/RELEASE=.*/RELEASE="${DISTRO_VERSION}"/;}' \
++        ${S}/configure.in
++
++    # osName in original configure.in should be ${TARGET_SYS}
++    # which will show in ntop's "show configuration"
++    sed -i -e \
++        's:^osName=.*:osName=${TARGET_SYS}:' \
++        ${S}/configure.in
++
++    # rename configureextra to configureextra_rename to avoid
++    # configure.in to guess host OS and pull in more configure, non needed
++    # which will cause some cross-compiling failure on specific host
++    # e.g. SUSE(SLED...)
++    test ! -f configureextra || mv -f configureextra configureextra_rename
++
++    # make sure configure finds python includdirs/libs with these envs
++    export BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
++        STAGING_INCDIR=${STAGING_INCDIR} \
++        STAGING_LIBDIR=${STAGING_LIBDIR}
++
++    autotools_do_configure
++}
++
++do_compile_prepend() {
++    cd nDPI
++    oe_runmake
++    cd ..
++}
++
++do_install_append() {
++    # remove the empty dirs
++    rm -rf ${D}${libdir}/plugins
++
++    install -D -m 0755 ${S}/packages/RedHat/ntop.init \
++        ${D}${sysconfdir}/init.d/ntop
++    install -D -m 0644 ${S}/packages/RedHat/ntop.conf.sample \
++        ${D}${sysconfdir}/ntop.conf
++
++    # change ntop dir in ntop.conf
++    # don't use the -P as the ntop.init didn't support it
++    sed -i -e "s:^--db-file-path /usr/share/ntop:--db-file-path /var/lib/ntop:" \
++        -e "s:^#? -P /var/ntop:#? -P /var/lib/ntop:" \
++        ${D}${sysconfdir}/ntop.conf
++
++    # For systemd
++    if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
++        install -D -m 0755 ${S}/packages/RedHat/ntop.init ${D}${libexecdir}/ntop-helper
++        install -D -m 0644 ${WORKDIR}/ntop.service ${D}${systemd_system_unitdir}/ntop.service
++        sed -i -e 's,@LIBEXECDIR@,${libexecdir},g' \
++            -e 's,@SYSCONFDIR@,${sysconfdir},g' \
++            ${D}${systemd_system_unitdir}/ntop.service
++    fi
++
++    # Fix host-user-contaminated issue
++    chown -R root:root ${D}
++
++    chown -R ntop.ntop ${D}${datadir}/ntop
++    chown -R ntop:ntop ${D}${localstatedir}/lib/ntop
++}
++
++USERADD_PACKAGES = "${PN}"
++USERADD_PARAM_${PN} = "-M -g ntop -r -d ${localstatedir}/lib/ntop \
++-s /usr/sbin/nologin -c 'ntop' ntop"
++GROUPADD_PARAM_${PN} = "-r ntop"
++
++SYSTEMD_SERVICE_${PN} = "ntop.service"
++SYSTEMD_AUTO_ENABLE = "disable"
++
++FILES_${PN}_append = "${libdir}/ntop/plugins ${libdir}/libntop-*.so \
++                      ${libdir}/libntopreport-*.so ${libdir}/lib*-${PV}.so"
++FILES_${PN}-dev = "${includedir} ${libdir}/libntop.so \
++                   ${libdir}/libntopreport.so \
++                   ${libdir}/libnetflowPlugin.so ${libdir}/libsflowPlugin.so \
++                   ${libdir}/librrdPlugin.so \
++                   ${libdir}/*.a ${libdir}/libntopreport.a ${libdir}/*.la"
++
 -- 
 2.14.1
 
