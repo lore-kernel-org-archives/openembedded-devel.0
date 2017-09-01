@@ -1,24 +1,24 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 06B837848B
+Return-Path: <Dengke.Du@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 59A4A7848E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Sep 2017 07:44:15 +0000 (UTC)
+	Fri,  1 Sep 2017 08:39:17 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v817iHwC015907
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v818dJr9014258
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Sep 2017 00:44:17 -0700
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Fri, 1 Sep 2017 00:44:16 -0700
-From: <jackie.huang@windriver.com>
+	Fri, 1 Sep 2017 01:39:19 -0700 (PDT)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 1 Sep 2017 01:39:18 -0700
+From: Dengke Du <dengke.du@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Sep 2017 15:43:29 +0800
-Message-ID: <20170901074329.27500-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+Date: Fri, 1 Sep 2017 04:39:17 -0400
+Message-ID: <1504255157-223110-1-git-send-email-dengke.du@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] pmtools: use update-alternatives for acpixtract
+Subject: [PATCH] openjpeg: upgrade to 2.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,39 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Sep 2017 07:44:17 -0000
+X-List-Received-Date: Fri, 01 Sep 2017 08:39:18 -0000
 Content-Type: text/plain
 
-From: Jackie Huang <jackie.huang@windriver.com>
-
-acpixtract is both provided by acpica and pmtools, so use
-update-alternatives to fix conflicts:
-
-| file /usr/bin/acpixtract conflicts between attempted installs of
-  pmtools-20130209+git0+3ebe0e54c5-r0.i586 and acpica-20170303-r0.i586
-
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 ---
- meta-oe/recipes-devtools/pmtools/pmtools_git.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ .../openjpeg/{openjpeg_2.1.1.bb => openjpeg_2.2.0.bb}                 | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.1.1.bb => openjpeg_2.2.0.bb} (79%)
 
-diff --git a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
-index 94fc736b5..8491fc904 100644
---- a/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
-+++ b/meta-oe/recipes-devtools/pmtools/pmtools_git.bb
-@@ -15,6 +15,11 @@ COMPATIBLE_HOST = "(i.86|x86_64).*-linux"
+diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
+similarity index 79%
+rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
+rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
+index fa4f796..129aba7 100644
+--- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
++++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
+@@ -5,8 +5,8 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
  
- S = "${WORKDIR}/git"
+ SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
+-SRC_URI[md5sum] = "0cc4b2aee0a9b6e9e21b7abcd201a3ec"
+-SRC_URI[sha256sum] = "82c27f47fc7219e2ed5537ac69545bf15ed8c6ba8e6e1e529f89f7356506dbaa"
++SRC_URI[md5sum] = "269bb0b175476f3addcc0d03bd9a97b6"
++SRC_URI[sha256sum] = "6fddbce5a618e910e03ad00d66e7fcd09cc6ee307ce69932666d54c73b7c6e7b"
  
-+inherit update-alternatives
-+
-+ALTERNATIVE_PRIORITY = "90"
-+ALTERNATIVE_${PN} = "acpixtract"
-+
- do_configure[noexec] = "1"
- do_compile() {
-     oe_runmake
+ inherit cmake
+ 
 -- 
-2.11.0
+2.8.1
 
 
