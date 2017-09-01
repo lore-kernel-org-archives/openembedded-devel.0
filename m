@@ -1,24 +1,27 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CF287838B
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 34D6B7847C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Sep 2017 09:31:34 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v819VZgJ019623
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 1 Sep 2017 02:31:35 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 1 Sep 2017 02:31:34 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Sep 2017 05:31:33 -0400
-Message-ID: <1504258293-18973-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Fri,  1 Sep 2017 11:08:59 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by orsmga104.jf.intel.com with ESMTP; 01 Sep 2017 04:09:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.41,457,1498546800"; d="scan'208";a="1009979556"
+Received: from kcheng8-mobl.gar.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.249.71.81])
+	by orsmga003.jf.intel.com with ESMTP; 01 Sep 2017 04:08:57 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: Andrea Galbusera <gizero@gmail.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Date: Fri, 01 Sep 2017 23:08:53 +1200
+Message-ID: <1878611.57GleFT2nc@peggleto-mobl.ger.corp.intel.com>
+Organization: Intel Corporation
+In-Reply-To: <CAC+thW1YCXd-RGakNnfx-j8z3W0Cq9wwTORWNzv9bt=7VKSC2w@mail.gmail.com>
+References: <cover.1504238509.git.paul.eggleton@linux.intel.com>
+	<C8465E87-50F5-4857-8835-3B8D7D25D6C8@linux.intel.com>
+	<CAC+thW1YCXd-RGakNnfx-j8z3W0Cq9wwTORWNzv9bt=7VKSC2w@mail.gmail.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] openjpeg: upgrade to 2.2.0
+Subject: Re: [meta-oe][PATCH 0/2] Add a couple of MQTT support recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,77 +34,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Sep 2017 09:31:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Sep 2017 11:09:00 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
----
- ...fo_header-reject-bmp-files-with-biBitCoun.patch | 31 ++++++++++++++++++++++
- .../{openjpeg_2.1.1.bb => openjpeg_2.2.0.bb}       |  8 +++---
- 2 files changed, 36 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-graphics/openjpeg/files/0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch
- rename meta-oe/recipes-graphics/openjpeg/{openjpeg_2.1.1.bb => openjpeg_2.2.0.bb} (65%)
+On Friday, 1 September 2017 6:03:52 PM NZST Andrea Galbusera wrote:
+> On Fri, Sep 1, 2017 at 6:44 AM, Tim Orling <timothy.t.orling@linux.intel.com
+> > wrote:
+> > > On Aug 31, 2017, at 9:02 PM, Paul Eggleton <
+> > paul.eggleton@linux.intel.com> wrote:
+> > >
+> > > Add a couple of recipes from meta-intel-iot-middleware to support MQTT.
+> > > Since the meta-intel-iot-middleware layer isn't being actively
+> > > maintained and these aren't in any way Intel-specific I figured they
+> > > ought to be brought up-to-date and moved somewhere that people can more
+> > > easily reuse them.
+> > >
+> >
+> > Thank you for this. It has been a concern of mine and this is a welcome
+> > solution.
+> 
+> 
+> Good news for me also! FWIW months ago there used to be a more recent
+> version of meta-intel-iot-middleware hosted on github as part of Ostro.
+> Since this was confusing to me I asked [1] on the list to clarify
+> maintenance status and relationships between the two things, but only got a
+> reply [2] from a former maintainer of the repo on yoctoproject.org. Anyway
+> I agree that having MQTT recipes in meta-oe will help! Thanks Paul for
+> that!
+> 
+> [1]
+> https://lists.yoctoproject.org/pipermail/meta-intel/2016-December/
+004462.html
+> [2]
+> https://lists.yoctoproject.org/pipermail/meta-intel/2017-January/004488.html
 
-diff --git a/meta-oe/recipes-graphics/openjpeg/files/0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch b/meta-oe/recipes-graphics/openjpeg/files/0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch
-new file mode 100644
-index 0000000..866d9aa
---- /dev/null
-+++ b/meta-oe/recipes-graphics/openjpeg/files/0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch
-@@ -0,0 +1,31 @@
-+From 226f07e4b49c2757b181c62e6841000c512054e3 Mon Sep 17 00:00:00 2001
-+From: Even Rouault <even.rouault@spatialys.com>
-+Date: Mon, 14 Aug 2017 17:26:58 +0200
-+Subject: [PATCH] bmp_read_info_header(): reject bmp files with biBitCount == 0
-+ (#983)
-+
-+Upstream-Status: Backport [https://github.com/uclouvain/openjpeg/commit/baf0c1ad4572daa89caa3b12985bdd93530f0dd7]
-+CVE: CVE-2017-12982
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ src/bin/jp2/convertbmp.c | 4 ++++
-+ 1 file changed, 4 insertions(+)
-+
-+diff --git a/src/bin/jp2/convertbmp.c b/src/bin/jp2/convertbmp.c
-+index b49e7a0..2715fdf 100644
-+--- a/src/bin/jp2/convertbmp.c
-++++ b/src/bin/jp2/convertbmp.c
-+@@ -392,6 +392,10 @@ static OPJ_BOOL bmp_read_info_header(FILE* IN, OPJ_BITMAPINFOHEADER* header)
-+ 
-+     header->biBitCount  = (OPJ_UINT16)getc(IN);
-+     header->biBitCount |= (OPJ_UINT16)((OPJ_UINT32)getc(IN) << 8);
-++    if (header->biBitCount == 0) {
-++        fprintf(stderr, "Error, invalid biBitCount %d\n", 0);
-++        return OPJ_FALSE;
-++    }
-+ 
-+     if (header->biSize >= 40U) {
-+         header->biCompression  = (OPJ_UINT32)getc(IN);
-+-- 
-+2.8.1
-+
-diff --git a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-similarity index 65%
-rename from meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
-rename to meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-index fa4f796..4ef1c40 100644
---- a/meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
-+++ b/meta-oe/recipes-graphics/openjpeg/openjpeg_2.2.0.bb
-@@ -4,9 +4,11 @@ HOMEPAGE = "http://www.openjpeg.org"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c648878b4840d7babaade1303e7f108c"
- 
--SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
--SRC_URI[md5sum] = "0cc4b2aee0a9b6e9e21b7abcd201a3ec"
--SRC_URI[sha256sum] = "82c27f47fc7219e2ed5537ac69545bf15ed8c6ba8e6e1e529f89f7356506dbaa"
-+SRC_URI = "https://github.com/uclouvain/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
-+           file://0001-bmp_read_info_header-reject-bmp-files-with-biBitCoun.patch \
-+          "
-+SRC_URI[md5sum] = "269bb0b175476f3addcc0d03bd9a97b6"
-+SRC_URI[sha256sum] = "6fddbce5a618e910e03ad00d66e7fcd09cc6ee307ce69932666d54c73b7c6e7b"
- 
- inherit cmake
- 
+No worries. I see you were after these two recipes and hiredis (and the latter 
+is in meta-oe now as you probably know).
+
+The recipes that aren't either obsolete or available elsewhere are as follows:
+
+hid-api
+libstrophe
+libwyliodrin
+mdns
+python-pyfirmata
+sshpass
+tempered
+wyliodrin-server
+
+Only python-pyfirmata looks particularly interesting to me, but if there are 
+others that anyone would like preserved/updated please let me know.
+
+Cheers,
+Paul
+
 -- 
-2.8.1
 
+Paul Eggleton
+Intel Open Source Technology Centre
 
