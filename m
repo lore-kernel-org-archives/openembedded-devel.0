@@ -1,24 +1,49 @@
-Return-Path: <Dengke.Du@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id F041A78477
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id C1E9278481
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Sep 2017 05:26:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v815QWHd025856
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri,  1 Sep 2017 05:28:39 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id a2so1025541pfj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 22:26:33 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 31 Aug 2017 22:26:31 -0700
-From: Dengke Du <dengke.du@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 1 Sep 2017 01:26:30 -0400
-Message-ID: <1504243590-86579-1-git-send-email-dengke.du@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [PATCH] iscsitarget: fix few arguments for netlink_ack
+	Thu, 31 Aug 2017 22:28:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
+	b=lM1UnbkGoo/ZFjNcQy3lsLNqRPn8l/aSuXnC2jH9nf0CWYi5KatvEakAT3rl56q/B7
+	+g0mhogf6kIar6fiSxLXN1HatfR7//EUUGuuokKXUZQi8VuGZx7nmakAgoYVT7x9Jgsu
+	29Ai8Yd8sxTFKztc+dmeZhOS4OMGtaMjVquv0wIJ0Lov/x00skjZOl8N+xkXJPzSrFO2
+	FcYBCMkSCK5luoxP7WaYfczwufSxztnVE96lFVjvb+O1MvlP+kECPTMYoommFeSvv9Cd
+	S2s0ll3xf6zM9/+f5br2U4FkoNKLQ5ZDv7XbMEoFqe1cU7vyNGx/qLcInsPlN+82z91k
+	C57A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=CZuw/9q/HVp9pqUxM/S5XoqTx9oiQjH4Y092bHQQGI0=;
+	b=hy4m5HrSx62v3hhPln0AeMEY9fBD/q09/eFbeHgNWvBKKeA1vqC6gYiz9Db9k/zL4S
+	2HYHnCJA719gLZGlJaQTdsswYqpE1XJHhXPSVcTcc/RXBRa5eNCdQsG/8LFC5bzIXsPs
+	NquGrJ1l3ExLJmbxLF5CTaUf3bfvhLWtZ6Gkfa/orfx8uW9TFAmLXy+JNxKlKwVjh8hB
+	Hb6BaEimzCM3klY4MVnLPQUC3lxkd+pWEWYzu6eo8c8a0iYMUu0P5y5n2bfzYGr0e13E
+	0DRHj3oQAWzNw+kyK141c3L7CjbgU4u4TDS1f9ggoQniEpCyn9+wZExN1lSM94xjBhqE
+	jQSQ==
+X-Gm-Message-State: AHPjjUiRWSHZ23KNmYR0xfBuANQZBaYlodnb/qhpt+UllE86zGlJsYim
+	NlF9GuMYUniQ7A==
+X-Google-Smtp-Source: ADKCNb4Ugxg9IX5mTDV70icdCaYmy+ceGTmniOGbM5o+Kgj5TIgA0gY+ZtvatOc1RUyIxlqcy+bdKA==
+X-Received: by 10.98.156.145 with SMTP id u17mr974850pfk.217.1504243720864;
+	Thu, 31 Aug 2017 22:28:40 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4001:9ea0:c400:6ad5:9d97:9621])
+	by smtp.gmail.com with ESMTPSA id
+	r135sm1657935pfr.109.2017.08.31.22.28.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 31 Aug 2017 22:28:40 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 31 Aug 2017 22:28:38 -0700
+Message-Id: <1504243719-16782-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][v2][PATCH 1/2] libmtp: fix build issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,76 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Sep 2017 05:26:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 01 Sep 2017 05:28:39 -0000
 
-After kernel version 4.12, the function netlink_ack need four arguments,
-so adjust it in iscsitarget.
+DEBUG: Executing shell function BUILDSPEC
+| error: line 109: %package -n mtp-tools: package mtp-tools already exists
 
-Signed-off-by: Dengke Du <dengke.du@windriver.com>
+Yes, there are two entries in libmtp.spec. Under packages-split, mtp-tools is empty but
+libmtp-bin is not.
+
+Removed PKG_${PN}-bin , this alignes how Debian split its packages
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...itarget-fix-few-arguments-for-netlink_ack.patch | 35 ++++++++++++++++++++++
- .../iscsitarget/iscsitarget_1.4.20.3+svn502.bb     |  4 ++-
- 2 files changed, 38 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-extended/iscsitarget/files/0001-iscsitarget-fix-few-arguments-for-netlink_ack.patch
+ meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb | 3 ---
+ 1 file changed, 3 deletions(-)
 
-diff --git a/meta-networking/recipes-extended/iscsitarget/files/0001-iscsitarget-fix-few-arguments-for-netlink_ack.patch b/meta-networking/recipes-extended/iscsitarget/files/0001-iscsitarget-fix-few-arguments-for-netlink_ack.patch
-new file mode 100644
-index 0000000..84e5853
---- /dev/null
-+++ b/meta-networking/recipes-extended/iscsitarget/files/0001-iscsitarget-fix-few-arguments-for-netlink_ack.patch
-@@ -0,0 +1,35 @@
-+From 878b6830cbeb912362ea4cc3497954e72df6f043 Mon Sep 17 00:00:00 2001
-+From: Dengke Du <dengke.du@windriver.com>
-+Date: Wed, 30 Aug 2017 06:06:49 -0400
-+Subject: [PATCH] iscsitarget: fix few arguments for netlink_ack
-+
-+After the kernel upgrade to 4.12 in OE, the netlink_ack function
-+need four arguments, so add it. we can check the commit:
-+
-+    2d4bc93368f5a0ddb57c8c885cdad9c9b7a10ed5
-+
-+in kernel.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Dengke Du <dengke.du@windriver.com>
-+---
-+ kernel/event.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/kernel/event.c b/kernel/event.c
-+index ef4adcb..8ba5978 100644
-+--- a/kernel/event.c
-++++ b/kernel/event.c
-+@@ -29,7 +29,7 @@ static void event_recv_skb(struct sk_buff *skb)
-+ 		ietd_pid = NETLINK_CB(skb).portid;
-+ 		WARN_ON(ietd_pid == 0);
-+ 		if (nlh->nlmsg_flags & NLM_F_ACK)
-+-			netlink_ack(skb, nlh, 0);
-++			netlink_ack(skb, nlh, 0, NULL);
-+ 		skb_pull(skb, rlen);
-+ 	}
-+ }
-+-- 
-+2.8.1
-+
-diff --git a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-index 5c1e38e..dddea10 100644
---- a/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-+++ b/meta-networking/recipes-extended/iscsitarget/iscsitarget_1.4.20.3+svn502.bb
-@@ -14,7 +14,9 @@ SRC_URI = "http://ftp.heanet.ie/mirrors/ubuntu/pool/universe/i/${BPN}/${BPN}_${P
-            file://access-sk_v6_daddr-iff-IPV6-defined.patch \
-            file://build_with_updated_bio_struct_of_linux_v4.3_and_above.patch \
-            file://build_with_updated_interfaces_of_linux_v4.8_and_above.patch \
--           file://fix-call-trace-of-ahash-API-calling.patch"
-+           file://fix-call-trace-of-ahash-API-calling.patch \
-+           file://0001-iscsitarget-fix-few-arguments-for-netlink_ack.patch \
-+          "
- 
- SRC_URI[md5sum] = "ef9bc823bbabd3c772208c00d5f2d089"
- SRC_URI[sha256sum] = "d3196ccb78a43266dce28587bfe30d8ab4db7566d7bce96057dfbb84100babb5"
+diff --git a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+index b5df8e0..c05ff4e 100644
+--- a/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
++++ b/meta-oe/recipes-connectivity/libmtp/libmtp_1.1.5.bb
+@@ -50,9 +50,6 @@ PACKAGES =+ "libmtp-common libmtp-runtime mtp-tools"
+ RDEPENDS_${PN} += "libmtp-common"
+ RRECOMMENDS_${PN} += "libmtp-runtime mtp-tools"
+ FILES_${PN}-dbg += "${nonarch_base_libdir}/udev/.debug/*"
+-PKG_${PN}-bin = "mtp-tools"
+-SUMMARY_${PN}-bin = "Tools for communicating with MTP devices"
+-DESCRIPTION_${PN}-bin = "${DESCRIPTION}\nThis package contains tools for communicating with MTP devices."
+ FILES_libmtp-common = "${nonarch_base_libdir}/udev/rules.d/*"
+ SUMMARY_libmtp-common = "The udev rules file for MTP devices"
+ FILES_libmtp-runtime = "${nonarch_base_libdir}/udev/mtp-probe"
 -- 
-2.8.1
+2.7.4
 
 
