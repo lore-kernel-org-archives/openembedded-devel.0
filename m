@@ -1,50 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F37B78461
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D50E78494
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Sep 2017 05:07:36 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id k3so1006084pfc.3
+	Fri,  1 Sep 2017 05:21:12 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id g13so1024270pfm.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 31 Aug 2017 22:07:38 -0700 (PDT)
+	Thu, 31 Aug 2017 22:21:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=nm0sB641QmjlgpKtH20w3cc2YVCd5KGagHcXR3HEgQo=;
-	b=ZuE7bNqdjP/aJFYWTWUIP8aOePaPXzYVu4R0WAnXmLmwTW3RL2RelsXvSZRYQFIx47
-	2wMWl0frYDID7Tce/o6gxLqGi1KDHRisJExZzyxHfHUEyWY2FUdH9Ll4D+tQn9sO7KBV
-	cisRX23o4W7LxdwCy++Q5rJmLpQM2zT9J9sqUnaLNMv1NZ6bsZdgTimuvL2uKMyNtiva
-	hCLf6giiZGsyEDl5Orhwei+hBBPs6SUvG3ep3jFh1+NR+zgFM4mx1//O6U4UmMHX7CE8
-	nqpi5lCiPVjuaY6IodvcKlsPQUSVb1ERtY36nEF38Y/WksT0uQkkkA9QhW6M4P5CernC
-	d/kQ==
+	h=from:to:subject:date:message-id;
+	bh=2nM/FAlfDA9Yoc3fCVzD9ppgzMMA6Lue7FPQb0Ve22c=;
+	b=gg+D4UPskTNSaqlWL7cYrxCcuUIN0JM6Gf+acr49bP08TgRMM6LonbhNVYu0deq5ip
+	+Mp2xc12KLRVMfqWt4pXe43hEOPDXGEwekjHF9id0LuOT+ikYeekZR0uScqA/BaXteVU
+	T9Q5Px9bv2noI49+JUFxe5uKDN/ajtiEHS9+uK6Os/e+OFJiu1jA5sH0vWc59OC52gWI
+	jLCnwssjVMzWFzlfrDyhxQUyIwdsYnT22m8ShOq9vjOUvAma1o/7ta6wOABuC1bREVG1
+	e5lDByfj4wmpt4dqlcnQwnnUuiXX3QPCXRIc8smrhguwxtuAlc9lvnCmRalZOyznA+0a
+	9DUQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=nm0sB641QmjlgpKtH20w3cc2YVCd5KGagHcXR3HEgQo=;
-	b=STcM1PMWYe5QI7KlRzvyp6SAoCd8nARslylCrxUrIW3e8AH1Snvk/s3ERDov/WYKgs
-	d3EyMMpnw1tnOk1DQ/iFplXt6LzUfD2eFndRkFdmUNntqDrbS4zhhyW5MH9WSiR3OC6y
-	fuqrWYY+OhbsSFtEex4cDDCcu5+AQoRGWDHaRZlRiAZ+Li+xSoMc/UwlC02NBynpyjrY
-	KkdU7AXu4R9z4VPE03ljn0Af98HG6w5/usT38bWvKTWFHKZ9ojs693jUamDrvkdjxk05
-	bnEVUErzWaBh1W8+boAc9r2vp/qw68EErKNJ3Xfky7xGUGoSO17ZHxtEMCNlwBXpTJH9
-	hUyg==
-X-Gm-Message-State: AHPjjUjGxTWUVpf6FiP/CzOXva+lQk6bPbwRQqFPGd6wYFdbfhjBsJmW
-	4T15C0FJQ+jRmrIo
-X-Google-Smtp-Source: ADKCNb62qxirBA/ysO0ntHkUvVEvszqmyow3PBieDAM3pbqoCmXrkoXSCMY+P7D/5rigT87eQzTSbw==
-X-Received: by 10.84.233.133 with SMTP id l5mr960153plk.7.1504242458086;
-	Thu, 31 Aug 2017 22:07:38 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
-	by smtp.gmail.com with ESMTPSA id
-	n66sm1797491pfi.44.2017.08.31.22.07.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 31 Aug 2017 22:07:37 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 31 Aug 2017 22:07:28 -0700
-Message-Id: <20170901050728.37511-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170901050728.37511-1-raj.khem@gmail.com>
-References: <20170901050728.37511-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 2/2] sblim-sfcb: Fix build with musl
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=2nM/FAlfDA9Yoc3fCVzD9ppgzMMA6Lue7FPQb0Ve22c=;
+	b=cKLWEApbWI7ni8BrXC0vjOs5vVkok8+sfg/juZSkeb92Wh+GnbYPNLRmFzL8W0QOW9
+	tsEF4G/EVCO+8K51iR8/C5l8t5INZH9IbGCBFXhEJ1z9o2EioWDjoQEB+kdQWY4b/24q
+	5Fkr/eDdXG4DgYR2cnq9r0C+YOTZswLXM01mLybNJuGWlXkLtoQLFFiXnEngtKGyYNz3
+	C+QV4TjrnQdoLblRbnk/floUeCOTh06s0DInX9YwdzvKvYJkbHbbU3IXzyd/fPc7eEam
+	t+mMxDbN4fJo4HGqCEFXemevuiRVSsxZZt0nIQVxB0CGQEJKiCpwxVOoe4TocJTRRpW/
+	ke0g==
+X-Gm-Message-State: AHPjjUg0WL/A7cdJAg2hyGuRKPYzgk0b3PGI2R8dPmfXrET7s667AHq3
+	IO7yVQ6r0l9rAA==
+X-Google-Smtp-Source: ADKCNb4wYwRr65FL/dSBXwSWrL/wV3KRLiXuCXP35gYtgNmdV2XUQ8WVQorGay9bB+aATKjYk77elw==
+X-Received: by 10.101.89.7 with SMTP id f7mr1041736pgu.25.1504243274337;
+	Thu, 31 Aug 2017 22:21:14 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4001:9ea0:c400:6ad5:9d97:9621])
+	by smtp.gmail.com with ESMTPSA id p6sm1475937pga.85.2017.08.31.22.21.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 31 Aug 2017 22:21:13 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com, openembedded-devel@lists.openembedded.org,
+	joe_macdonald@mentor.com
+Date: Thu, 31 Aug 2017 22:21:12 -0700
+Message-Id: <1504243272-16546-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] wireshark: update to 2.2.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,158 +55,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Sep 2017 05:07:37 -0000
+X-List-Received-Date: Fri, 01 Sep 2017 05:21:13 -0000
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Change LIC_FILES_CHKSUM from README.linux to COPYING as COPYING contains the license info
+
+2.2.9 security fixes:
+    wnpa-sec-2017-38
+    MSDP dissector infinite loop (Bug 13933) CVE-2017-13767
+
+    wnpa-sec-2017-39
+    Profinet I/O buffer overrun (Bug 13847) CVE-2017-13766
+
+    wnpa-sec-2017-41
+    IrCOMM dissector buffer overrun (Bug 13929) CVE-2017-13765
+
+2.2.8 security fixes:
+    wnpa-sec-2017-13
+    WBMXL dissector infinite loop (Bug 13477, Bug 13796) CVE-2017-7702, CVE-2017-11410
+    Note: This is an update for a fix in Wireshark 2.2.6 and 2.0.12.
+
+    wnpa-sec-2017-28
+    openSAFETY dissector memory exhaustion (Bug 13649, Bug 13755) CVE-2017-9350, CVE-2017-11411
+    Note: This is an update for a fix in Wireshark 2.2.7.
+
+    wnpa-sec-2017-34
+    AMQP dissector crash. (Bug 13780) CVE-2017-11408
+
+    wnpa-sec-2017-35
+    MQ dissector crash. (Bug 13792) CVE-2017-11407
+
+    wnpa-sec-2017-36
+    DOCSIS infinite loop. (Bug 13797) CVE-2017-11406
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- ...e-need-for-error.h-when-it-does-not-exist.patch | 124 +++++++++++++++++++++
- .../sblim-sfcb/sblim-sfcb_1.4.9.bb                 |   1 +
- 2 files changed, 125 insertions(+)
- create mode 100644 meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
+ .../wireshark/{wireshark_2.2.7.bb => wireshark_2.2.9.bb}            | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-networking/recipes-support/wireshark/{wireshark_2.2.7.bb => wireshark_2.2.9.bb} (93%)
 
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
-new file mode 100644
-index 000000000..e72305023
---- /dev/null
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb-1.4.9/0001-Replace-need-for-error.h-when-it-does-not-exist.patch
-@@ -0,0 +1,124 @@
-+From 394bf0f1ed07419d40f6024363cc1ffc7ef61bc6 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Thu, 31 Aug 2017 21:56:25 -0700
-+Subject: [PATCH] Replace need for error.h when it does not exist
-+
-+helps fixing build on musl
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Pending
-+
-+ brokerUpc.c   |  5 ++++-
-+ configure.ac  |  2 +-
-+ httpAdapter.c |  4 +++-
-+ support.c     | 14 +++++++++++++-
-+ trace.c       |  4 +++-
-+ 5 files changed, 24 insertions(+), 5 deletions(-)
-+
-+diff --git a/brokerUpc.c b/brokerUpc.c
-+index 17cbd9b..fe2b347 100644
-+--- a/brokerUpc.c
-++++ b/brokerUpc.c
-+@@ -20,8 +20,11 @@
-+ 
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#ifdef HAVE_ERROR_H
-+ #include <error.h>
-+-
-++#else
-++#include <err.h>
-++#endif
-+ #include "support.h"
-+ #include "native.h"
-+ #include <sfcCommon/utilft.h>
-+diff --git a/configure.ac b/configure.ac
-+index ab2964e..d4915a1 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -517,7 +517,7 @@ fi
-+ # Checks for header files.
-+ AC_HEADER_STDC
-+ AC_HEADER_SYS_WAIT
-+-AC_CHECK_HEADERS([fcntl.h limits.h netdb.h netinet/in.h stdlib.h string.h sys/socket.h sys/time.h unistd.h zlib.h])
-++AC_CHECK_HEADERS([error.h fcntl.h limits.h netdb.h netinet/in.h stdlib.h string.h sys/socket.h sys/time.h unistd.h zlib.h])
-+ AC_CHECK_HEADERS([cmpi/cmpimacs.h cmpi/cmpift.h cmpi/cmpidt.h],[],[AC_MSG_ERROR([Could not find required CPMI header.])])
-+ 
-+ # Checks for typedefs, structures, and compiler characteristics.
-+diff --git a/httpAdapter.c b/httpAdapter.c
-+index 2719e6c..e768972 100644
-+--- a/httpAdapter.c
-++++ b/httpAdapter.c
-+@@ -71,7 +71,9 @@
-+ #ifdef HAVE_UDS
-+ #include <grp.h>
-+ #endif
-+-
-++#ifndef __SOCKADDR_ARG
-++# define __SOCKADDR_ARG         struct sockaddr *__restrict
-++#endif
-+ /* should probably go into cimRequest.h */
-+ #define CIM_PROTOCOL_ANY     0
-+ #define CIM_PROTOCOL_CIM_XML 1
-+diff --git a/support.c b/support.c
-+index c7bba8b..5b3eef1 100644
-+--- a/support.c
-++++ b/support.c
-+@@ -32,7 +32,11 @@
-+ #include "support.h"
-+ #include <stdio.h>
-+ #include <stdlib.h>
-++#ifdef HAVE_ERROR_H
-+ #include <error.h>
-++#else
-++#include <err.h>
-++#endif
-+ #include <errno.h>
-+ #include "native.h"
-+ #include "trace.h"
-+@@ -331,17 +335,25 @@ loadQualifierDeclMI(const char *provider,
-+   _SFCB_RETURN(NULL);
-+ };
-+ 
-++
-+ /****************************************************************************/
-+ 
-+ /** Exits the program with a memory allocation error message in case the given 
-+  *  condition holds.
-+  */
-++#if HAVE_ERROR_H
-+ #define __ALLOC_ERROR(cond) \
-+   if ( cond ) { \
-+     error_at_line ( -1, errno, __FILE__, __LINE__, \
-+ 		    "unable to allocate requested memory." ); \
-+   }
-+-
-++#else
-++#define __ALLOC_ERROR(cond) \
-++  if ( cond ) { \
-++    err(1, "%s:%d: %s", __FILE__, __LINE__, \
-++		    "unable to allocate requested memory." ); \
-++  }
-++#endif
-+ /**
-+  * flag to ensure MM is initialized only once
-+  */
-+diff --git a/trace.c b/trace.c
-+index d7f30db..438af46 100644
-+--- a/trace.c
-++++ b/trace.c
-+@@ -279,7 +279,9 @@ _sfcb_trap(int tn)
-+   }
-+ #endif
-+ }
-+-
-++#ifndef SA_INTERRUPT
-++# define SA_INTERRUPT 0x20000000 /* from GLIBC's <bits/sigaction.h> */
-++#endif
-+ sigHandler     *
-+ setSignal(int sn, sigHandler * sh, int flags)
-+ {
-+-- 
-+2.14.1
-+
-diff --git a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-index ddb1cba7f..c6b9f1019 100644
---- a/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-+++ b/meta-oe/recipes-extended/sblim-sfcb/sblim-sfcb_1.4.9.bb
-@@ -21,6 +21,7 @@ SRC_URI = "http://downloads.sourceforge.net/sblim/${BP}.tar.bz2 \
-            file://sblim-sfcb-1.4.8-default-ecdh-curve-name.patch \
-            file://sblim-sfcb-1.4.9-fix-ftbfs.patch \
-            file://0001-include-stdint.h-system-header-for-UINT16_MAX.patch \
-+           file://0001-Replace-need-for-error.h-when-it-does-not-exist.patch \
- "
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+similarity index 93%
+rename from meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
+rename to meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+index 2f6f7b0..82c25ff 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.7.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "wireshark - a popular network protocol analyzer"
+ HOMEPAGE = "http://www.wireshark.org"
+ SECTION = "net"
+ LICENSE = "GPL-2.0"
+-LIC_FILES_CHKSUM = "file://README.linux;md5=631e077455b7972172eb149195e065b0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
  
- SRC_URI[md5sum] = "28021cdabc73690a94f4f9d57254ce30"
+ DEPENDS = "pcre expat glib-2.0 glib-2.0-native"
+ 
+@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+ 
+ PE = "1"
+ 
+-SRC_URI[md5sum] = "a4d880554c7f925dafef60fa313b580d"
+-SRC_URI[sha256sum] = "689ddf62221b152779d8846ab5b2063cc7fd41ec1a9f04eefab09b5d5486dbb5"
++SRC_URI[md5sum] = "7d5e65efd0714bd6248aa5b36c28320d"
++SRC_URI[sha256sum] = "c8b32c0e7d44a277e737c53d9d142ad3fe4265338f25a7fd8c891f58a7633fc2"
+ 
+ inherit autotools pkgconfig perlnative
+ 
 -- 
-2.14.1
+2.7.4
 
 
