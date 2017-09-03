@@ -1,49 +1,44 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C1C3177E97
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Sep 2017 22:06:09 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id a2so2147809pfj.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 02 Sep 2017 15:06:11 -0700 (PDT)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vk0-f52.google.com (mail-vk0-f52.google.com
+	[209.85.213.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 9DE1978248;
+	Sun,  3 Sep 2017 06:49:06 +0000 (UTC)
+Received: by mail-vk0-f52.google.com with SMTP id j7so8635632vke.0;
+	Sat, 02 Sep 2017 23:49:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=jNNcJbFjkZPXk9uubIv3BlrS2OprR7+6taRwj7Jfgig=;
-	b=Q/9t/Nilu0ylVOQrtx9s0j2oqweC2LBR/uwxloohL85SffjHk/UTPRd7QbXSN6Dwn+
-	5XpevF8TyaRFgM12ALIsedTTGCA5FqF5nzQaJWTLEsUVn0ek4+gSaywZT1Q1/DGVspm8
-	WXk1tjbtl8jgs/ti6dlSWX9ALZAgoXPe+xc89B6FO0CZLu7hh6tkGiknz8mIMatcI8n9
-	VIY2DJdoG+zCtq2B9G4RQQPkYsIBqz5ILhLOxR65hS1aF1PzexBz+fKB5HXDHhRPeKrq
-	2RGpoiieN8HuF3duzT4W9LqPqPyrF2fY1a7jLEla/kvhpLRyGUnnjo+MeEv1QIYyUwHF
-	Mvbg==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=U5VekROav9Mhx5fE/f4f6pbgawU90UmsvqW+dsZbFiM=;
+	b=PGMQGhObkRftoTBQ4UBlRDvxwA3CFysDguu4zw2iDZEpMJXnnP0X8dJtaCpPnjoQFu
+	CPS1tBje+lkwLP2CrXHkzUg9FZRXrDYU9VVRNy0VDx1Jvv9medEAAeDDzIMdFxFSoQQ3
+	BhFkLK2kQBDp3Og54qs7gbNKZqE1qZNaZ5+YHgt5R5f06S4UZ9AM8RL15bXl8iLqB2Yo
+	RBG8GInN9E7/txUiDZS2M6BUYc2rkUxhJBbV/53ED5kMuJEmdudNpYnL5BlGssXgNPP7
+	wlkhI8Rtkt/vURQMxXi39bBCdtkloLPblSX8kN9Q4WGZW3jhBVdo98VpPsZFe1ETtKse
+	28iA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=jNNcJbFjkZPXk9uubIv3BlrS2OprR7+6taRwj7Jfgig=;
-	b=X75ICVv2yqGuAh/DAzv+Nzs5a0V2yiYe9oRSjXBUoZYxIolwosloXy/TKfTMpqeJ9n
-	OEr2zWRihVJslThMZk92KWcmTxdWwIuI7m5ZE1X9xKdEntrfQCou4mA8Nfe8b/7Ewtv0
-	WvD6WHN97+Dm4adUSmg/HO4jYGZReCidgnZb/+Df8pu14zfdeqp/oeng9PWUriRkF4Ss
-	XzrX7gyrMptxqZ2IyyFnHDzbAck9d5Epw0iUouLPtqj4pTenE5fdyZIUP0hzPnXzet0J
-	/Kbf+cJlUQRLscWYHpeKEYYTaPwF5zmWwPM+JO0X3SN3jyyPtBJEMWgld/rNMQIA/0KC
-	dkfQ==
-X-Gm-Message-State: AHPjjUgJ8QOzEosvmnlfxKV/t0s194bkWICbh8QtL1gZUh1F7eWgr251
-	+24aHZwXbHYUEiv2
-X-Google-Smtp-Source: ADKCNb7Q/Xy+2zNLkkZwGKfjtoNriTbcbW0cqNjuRAcEfHsZKxUMERzDemnk3HKQMNFAQFhFCkJE2A==
-X-Received: by 10.84.210.34 with SMTP id z31mr5095766plh.174.1504389971061;
-	Sat, 02 Sep 2017 15:06:11 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
-	by smtp.gmail.com with ESMTPSA id g1sm4998791pge.69.2017.09.02.15.06.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 02 Sep 2017 15:06:10 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat,  2 Sep 2017 15:05:59 -0700
-Message-Id: <20170902220559.9784-2-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170902220559.9784-1-raj.khem@gmail.com>
-References: <20170902220559.9784-1-raj.khem@gmail.com>
-Subject: [meta-filesystems][PATCH 2/2] xfsprogs: Upgrade to 4.12.0
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=U5VekROav9Mhx5fE/f4f6pbgawU90UmsvqW+dsZbFiM=;
+	b=DIa+TGR0c3YOblqF1UOOHAxC+eCqK8aLnJ2jivhNizZcSrMb4sXgQJq+LLVoZ1mh9I
+	PGE/pVsQF0QGQBxvqx41V3fCfnrTuXg9LXkA7btiMc8w45ZcvYWv63+C0qmtqEIKfyPS
+	LEvN4riPvbXZQ9CA6qkBEpvKlS5oOOeTDhE9Ul1D0PXCcHSzRyitsWuxCctm7Afnf0qa
+	IEJYagMhUmZZ7MHHCoXYI9WsO+PaSwnKkVt+WC9qrcfwrNCqkZNZsZypqaKEKH7hfuCq
+	nkz6xvGqcpQqz4vWktfsSr7CsuS5p4KwCc3MD/cmO8zEv6oC8oUqz+WydgdctP0bMUiw
+	R2PA==
+X-Gm-Message-State: AHPjjUg9ae4hUHjA824ScuA1l+04/QHeSSXQD6xluHrrLhrcS41pHfV1
+	YS0XeV7vcRSTI9moSiRBfTmk2OTSMBRh
+X-Google-Smtp-Source: ADKCNb7LMdNQXAJohz8SW3z9j6VIXKPeAoJkBSSABcCeRcuNxyVqq+ibnd9mNDdx/nyxirSM8puErbbQtEmZlVqnAAY=
+X-Received: by 10.31.176.132 with SMTP id z126mr3786276vke.1.1504421346892;
+	Sat, 02 Sep 2017 23:49:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.103.15.69 with HTTP; Sat, 2 Sep 2017 23:49:06 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Sun, 3 Sep 2017 08:49:06 +0200
+Message-ID: <CA+chaQeg6Z3ms+eMc3vtTp6avh+LWFrzQYMMkETuRw_fTL4q7Q@mail.gmail.com>
+To: Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: State of bitbake world, Failed tasks 2017-09-01
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,397 +51,327 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Sep 2017 22:06:09 -0000
+X-List-Received-Date: Sun, 03 Sep 2017 06:49:07 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Fix cross builds with hardening flags
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- ...Rename-progname-as-it-is-provided-by-libc.patch | 204 +++++++++++++++++++++
- .../files/remove_flags_from_build_flags.patch      |  13 ++
- .../xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch  | 117 ++++++++++++
- .../{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb}     |   7 +-
- 4 files changed, 339 insertions(+), 2 deletions(-)
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
- create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
- rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb} (85%)
+== Number of issues - stats ==
+{| class='wikitable'
+!|Date		     !!colspan='3'|Failed tasks			    !!|Signatures		
+!!colspan='14'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||all
+	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||version-going-backwards	||host-user-contaminated	||installed-vs-shipped	||unknown-configure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	||ldflags	||compile-host-path	||
+|-
 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch b/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
-new file mode 100644
-index 000000000..aa13b67be
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
-@@ -0,0 +1,204 @@
-+From 95aaaa800e0dc387875b4e2adad480b72c1632ff Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sat, 2 Sep 2017 14:46:49 -0700
-+Subject: [PATCH] Rename progname as it is provided by libc
-+
-+Rename local variable progname to avoid a clash with libc
-+global symbols
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ io/init.c                 | 10 +++++-----
-+ mdrestore/xfs_mdrestore.c | 10 +++++-----
-+ quota/init.c              | 10 +++++-----
-+ spaceman/init.c           |  8 ++++----
-+ 4 files changed, 19 insertions(+), 19 deletions(-)
-+
-+diff --git a/io/init.c b/io/init.c
-+index 20d5f80..e82e101 100644
-+--- a/io/init.c
-++++ b/io/init.c
-+@@ -23,7 +23,7 @@
-+ #include "init.h"
-+ #include "io.h"
-+ 
-+-char	*progname;
-++char	*io_progname;
-+ int	exitcode;
-+ int	expert;
-+ int	idlethread;
-+@@ -35,7 +35,7 @@ usage(void)
-+ {
-+ 	fprintf(stderr,
-+ _("Usage: %s [-adfinrRstVx] [-m mode] [-p prog] [[-c|-C] cmd]... file\n"),
-+-		progname);
-++		io_progname);
-+ 	exit(1);
-+ }
-+ 
-+@@ -142,7 +142,7 @@ init(
-+ 	xfs_fsop_geom_t	geometry = { 0 };
-+ 	struct fs_path	fsp;
-+ 
-+-	progname = basename(argv[0]);
-++	io_progname = basename(argv[0]);
-+ 	setlocale(LC_ALL, "");
-+ 	bindtextdomain(PACKAGE, LOCALEDIR);
-+ 	textdomain(PACKAGE);
-+@@ -186,7 +186,7 @@ init(
-+ 			flags |= IO_NONBLOCK;
-+ 			break;
-+ 		case 'p':
-+-			progname = optarg;
-++			io_progname = optarg;
-+ 			break;
-+ 		case 'r':
-+ 			flags |= IO_READONLY;
-+@@ -207,7 +207,7 @@ init(
-+ 			expert = 1;
-+ 			break;
-+ 		case 'V':
-+-			printf(_("%s version %s\n"), progname, VERSION);
-++			printf(_("%s version %s\n"), io_progname, VERSION);
-+ 			exit(0);
-+ 		default:
-+ 			usage();
-+diff --git a/mdrestore/xfs_mdrestore.c b/mdrestore/xfs_mdrestore.c
-+index 9d1b4e8..b840a54 100644
-+--- a/mdrestore/xfs_mdrestore.c
-++++ b/mdrestore/xfs_mdrestore.c
-+@@ -19,7 +19,7 @@
-+ #include "libxfs.h"
-+ #include "xfs_metadump.h"
-+ 
-+-char 		*progname;
-++char 		*mdrestore_progname;
-+ int		show_progress = 0;
-+ int		show_info = 0;
-+ int		progress_since_warning = 0;
-+@@ -30,7 +30,7 @@ fatal(const char *msg, ...)
-+ 	va_list		args;
-+ 
-+ 	va_start(args, msg);
-+-	fprintf(stderr, "%s: ", progname);
-++	fprintf(stderr, "%s: ", mdrestore_progname);
-+ 	vfprintf(stderr, msg, args);
-+ 	exit(1);
-+ }
-+@@ -194,7 +194,7 @@ perform_restore(
-+ static void
-+ usage(void)
-+ {
-+-	fprintf(stderr, "Usage: %s [-V] [-g] source target\n", progname);
-++	fprintf(stderr, "Usage: %s [-V] [-g] source target\n", mdrestore_progname);
-+ 	exit(1);
-+ }
-+ 
-+@@ -212,7 +212,7 @@ main(
-+ 	struct stat	statbuf;
-+ 	int		is_target_file;
-+ 
-+-	progname = basename(argv[0]);
-++	mdrestore_progname = basename(argv[0]);
-+ 
-+ 	while ((c = getopt(argc, argv, "giV")) != EOF) {
-+ 		switch (c) {
-+@@ -223,7 +223,7 @@ main(
-+ 				show_info = 1;
-+ 				break;
-+ 			case 'V':
-+-				printf("%s version %s\n", progname, VERSION);
-++				printf("%s version %s\n", mdrestore_progname, VERSION);
-+ 				exit(0);
-+ 			default:
-+ 				usage();
-+diff --git a/quota/init.c b/quota/init.c
-+index d45dc4c..46403de 100644
-+--- a/quota/init.c
-++++ b/quota/init.c
-+@@ -21,7 +21,7 @@
-+ #include "input.h"
-+ #include "init.h"
-+ 
-+-char	*progname;
-++char	*quota_progname;
-+ int	exitcode;
-+ int	expert;
-+ bool	foreign_allowed = false;
-+@@ -47,7 +47,7 @@ usage(void)
-+ {
-+ 	fprintf(stderr,
-+ 		_("Usage: %s [-V] [-x] [-f] [-p prog] [-c cmd]... [-d project]... [path]\n"),
-+-		progname);
-++		quota_progname);
-+ 	exit(1);
-+ }
-+ 
-+@@ -147,7 +147,7 @@ init(
-+ {
-+ 	int		c;
-+ 
-+-	progname = basename(argv[0]);
-++	quota_progname = basename(argv[0]);
-+ 	setlocale(LC_ALL, "");
-+ 	bindtextdomain(PACKAGE, LOCALEDIR);
-+ 	textdomain(PACKAGE);
-+@@ -173,13 +173,13 @@ init(
-+ 			projid_file = optarg;
-+ 			break;
-+ 		case 'p':
-+-			progname = optarg;
-++			quota_progname = optarg;
-+ 			break;
-+ 		case 'x':
-+ 			expert++;
-+ 			break;
-+ 		case 'V':
-+-			printf(_("%s version %s\n"), progname, VERSION);
-++			printf(_("%s version %s\n"), quota_progname, VERSION);
-+ 			exit(0);
-+ 		default:
-+ 			usage();
-+diff --git a/spaceman/init.c b/spaceman/init.c
-+index b3eface..bedf112 100644
-+--- a/spaceman/init.c
-++++ b/spaceman/init.c
-+@@ -23,7 +23,7 @@
-+ #include "path.h"
-+ #include "space.h"
-+ 
-+-char	*progname;
-++char	*spaceman_progname;
-+ int	exitcode;
-+ 
-+ void
-+@@ -31,7 +31,7 @@ usage(void)
-+ {
-+ 	fprintf(stderr,
-+ 		_("Usage: %s [-c cmd] file\n"),
-+-		progname);
-++		spaceman_progname);
-+ 	exit(1);
-+ }
-+ 
-+@@ -74,7 +74,7 @@ init(
-+ 	xfs_fsop_geom_t	geometry = { 0 };
-+ 	struct fs_path	fsp;
-+ 
-+-	progname = basename(argv[0]);
-++	spaceman_progname = basename(argv[0]);
-+ 	setlocale(LC_ALL, "");
-+ 	bindtextdomain(PACKAGE, LOCALEDIR);
-+ 	textdomain(PACKAGE);
-+@@ -86,7 +86,7 @@ init(
-+ 			add_user_command(optarg);
-+ 			break;
-+ 		case 'V':
-+-			printf(_("%s version %s\n"), progname, VERSION);
-++			printf(_("%s version %s\n"), spaceman_progname, VERSION);
-+ 			exit(0);
-+ 		default:
-+ 			usage();
-+-- 
-+2.14.1
-+
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
-new file mode 100644
-index 000000000..bba9a25c2
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
-@@ -0,0 +1,13 @@
-+Index: xfsprogs-4.12.0/include/builddefs.in
-+===================================================================
-+--- xfsprogs-4.12.0.orig/include/builddefs.in
-++++ xfsprogs-4.12.0/include/builddefs.in
-+@@ -164,7 +164,7 @@ ifeq ($(ENABLE_GETTEXT),yes)
-+ GCFLAGS += -DENABLE_GETTEXT
-+ endif
-+ 
-+-BUILD_CFLAGS += $(GCFLAGS) $(PCFLAGS)
-++BUILD_CFLAGS += $(GCFLAGS)
-+ # First, Global, Platform, Local CFLAGS
-+ CFLAGS += $(FCFLAGS) $(OPTIMIZER) $(GCFLAGS) $(PCFLAGS) $(LCFLAGS)
-+ 
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
-new file mode 100644
-index 000000000..efc57e4f6
---- /dev/null
-+++ b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
-@@ -0,0 +1,117 @@
-+From 21253610f9ef87db8e2a75b863b7fcfbd0cdb421 Mon Sep 17 00:00:00 2001
-+From: "Darrick J. Wong" <darrick.wong@oracle.com>
-+Date: Tue, 25 Jul 2017 13:45:01 -0500
-+Subject: [PATCH] In patch 4944defad4 ("xfs_db: redirect printfs when
-+ metadumping to stdout"), we solved the problem of xfs_db printfs ending up in
-+ the metadump stream by reassigning stdout for the duration of a stdout
-+ metadump.  Unfortunately, musl doesn't allow stdout to be reassigned (in
-+ their view "extern FILE *stdout" means "extern FILE * const stdout"), so we
-+ abandon the old approach in favor of playing games with dup() to switch the
-+ raw file descriptors.
-+
-+While we're at it, fix a regression where an unconverted outf test
-+allows progress info to end up in the metadump stream.
-+
-+Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
-+---
-+ db/metadump.c | 47 ++++++++++++++++++++++++++++++++++++-----------
-+ 1 file changed, 36 insertions(+), 11 deletions(-)
-+
-+diff --git a/db/metadump.c b/db/metadump.c
-+index 96641e0..4e2f648 100644
-+--- a/db/metadump.c
-++++ b/db/metadump.c
-+@@ -78,6 +78,7 @@ static int		obfuscate = 1;
-+ static int		zero_stale_data = 1;
-+ static int		show_warnings = 0;
-+ static int		progress_since_warning = 0;
-++static bool		stdout_metadump;
-+ 
-+ void
-+ metadump_init(void)
-+@@ -137,7 +138,7 @@ print_progress(const char *fmt, ...)
-+ 	va_end(ap);
-+ 	buf[sizeof(buf)-1] = '\0';
-+ 
-+-	f = (outf == stdout) ? stderr : stdout;
-++	f = stdout_metadump ? stderr : stdout;
-+ 	fprintf(f, "\r%-59s", buf);
-+ 	fflush(f);
-+ 	progress_since_warning = 1;
-+@@ -2750,7 +2751,8 @@ metadump_f(
-+ 	xfs_agnumber_t	agno;
-+ 	int		c;
-+ 	int		start_iocur_sp;
-+-	bool		stdout_metadump = false;
-++	int		outfd = -1;
-++	int		ret;
-+ 	char		*p;
-+ 
-+ 	exitcode = 1;
-+@@ -2870,16 +2872,35 @@ metadump_f(
-+ 		 * metadump operation so that dbprintf and other messages
-+ 		 * are sent to the console instead of polluting the
-+ 		 * metadump stream.
-++		 *
-++		 * We get to do this the hard way because musl doesn't
-++		 * allow reassignment of stdout.
-+ 		 */
-+-		outf = stdout;
-+-		stdout = stderr;
-++		fflush(stdout);
-++		outfd = dup(STDOUT_FILENO);
-++		if (outfd < 0) {
-++			perror("opening dump stream");
-++			goto out;
-++		}
-++		ret = dup2(STDERR_FILENO, STDOUT_FILENO);
-++		if (ret < 0) {
-++			perror("redirecting stdout");
-++			close(outfd);
-++			goto out;
-++		}
-++		outf = fdopen(outfd, "a");
-++		if (outf == NULL) {
-++			fprintf(stderr, "cannot create dump stream\n");
-++			dup2(outfd, 1);
-++			close(outfd);
-++			goto out;
-++		}
-+ 		stdout_metadump = true;
-+ 	} else {
-+ 		outf = fopen(argv[optind], "wb");
-+ 		if (outf == NULL) {
-+ 			print_warning("cannot create dump file");
-+-			free(metablock);
-+-			return 0;
-++			goto out;
-+ 		}
-+ 	}
-+ 
-+@@ -2907,15 +2928,19 @@ metadump_f(
-+ 	if (progress_since_warning)
-+ 		fputc('\n', stdout_metadump ? stderr : stdout);
-+ 
-+-	if (stdout_metadump)
-+-		stdout = outf;
-+-	else
-+-		fclose(outf);
-++	if (stdout_metadump) {
-++		fflush(outf);
-++		fflush(stdout);
-++		ret = dup2(outfd, STDOUT_FILENO);
-++		if (ret < 0)
-++			perror("un-redirecting stdout");
-++	}
-++	fclose(outf);
-+ 
-+ 	/* cleanup iocur stack */
-+ 	while (iocur_sp > start_iocur_sp)
-+ 		pop_cur();
-+-
-++out:
-+ 	free(metablock);
-+ 
-+ 	return 0;
-+-- 
-+2.13.3
-diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
-similarity index 85%
-rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
-rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
-index 046dea425..444f712b5 100644
---- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
-+++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
-@@ -8,9 +8,12 @@ DEPENDS = "util-linux util-linux-native"
- SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
-            file://link_needed_libs.patch \
-            file://0001-define-__-prefixed-version-of-intXY_t-types.patch \
-+           file://remove_flags_from_build_flags.patch \
-+           file://0001-Rename-progname-as-it-is-provided-by-libc.patch \
-+           file://xfsprogs-4.12.0-fix_musl.patch \
-            "
--SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
--SRC_URI[sha256sum] = "c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2"
-+SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
-+SRC_URI[sha256sum] = "b330ad8d737f4152ae511580102e2fc49212bb51dfb4b614084344abae46d0df"
- 
- inherit autotools-brokensep
- 
--- 
-2.14.1
+||2017-09-01	||4	||6	||3	||0	||0		||0		||5		||0		||0		||44058		||2		||0		||0		||0		||0		||0		||0		||0		||
+|}
 
+== Failed tasks 2017-09-01 ==
+
+INFO: jenkins-job.sh-1.8.28 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170902_201615.log
+
+=== common (3) ===
+    * meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:do_compile
+    * meta-openembedded/meta-networking/recipes-support/ntop/ntop_5.0.1.bb:do_patch
+    * meta-openembedded/meta-python/recipes-devtools/python/python-matplotlib_1.1.0.bb:do_compile
+
+=== common-x86 (0) ===
+
+=== qemuarm (1) ===
+    * meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+
+=== qemux86 (3) ===
+    * meta-openembedded/meta-oe/recipes-graphics/gphoto2/libgphoto2_2.5.8.bb:do_configure
+    * meta-openembedded/meta-oe/recipes-graphics/lxdm/lxdm_0.5.3.bb:do_configure
+    * meta-openembedded/meta-oe/recipes-support/mongodb/mongodb_git.bb:do_compile
+
+=== qemux86_64 (0) ===
+
+=== Number of failed tasks (13) ===
+{| class=wikitable
+
+|-
+|| qemuarm 	|| 4	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170901_034938.log/
+|| http://errors.yoctoproject.org/Errors/Build/46155/
+|-
+|| qemux86 	|| 6	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170831_032945.log/
+|| http://errors.yoctoproject.org/Errors/Build/46063/
+|-
+|| qemux86_64 	|| 3	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170901_071730.log/
+|| http://errors.yoctoproject.org/Errors/Build/46163/
+|}
+
+=== PNBLACKLISTs (4) ===
+
+=== QA issues (44065) ===
+{| class=wikitable
+!| Count		||Issue
+
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||installed-vs-shipped
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||2	||host-user-contaminated
+|-
+||44058	||version-going-backwards
+|-
+||5	||textrel
+|}
+
+
+
+=== Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170901_030102.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb:PNBLACKLIST[smbnetfs]
+?= "Fails to build with RSS
+http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe
+will be removed on 2017-09-01 unless the issue is fixed"
+meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb:PNBLACKLIST[gnome-keyring]
+?= "This version conflicts with gcr from oe-core - the recipe will be
+removed on 2017-09-01 unless the issue is fixed"
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACKLIST[lksctp-tools]
+?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN:
+fails to link against sctp_connectx symbol", '', d)}"
+meta-oe/recipes-support/system-setup-keyboard/system-setup-keyboard_0.8.8.bb:PNBLACKLIST[system-setup-keyboard]
+?= "Depends on blacklisted system-config-keyboard-native - the recipe
+will be removed on 2017-09-01 unless the issue is fixed"
+meta-qt5:
+PNBLACKLIST[android-system] = "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+directory in /home/builder/poky :/"
+
+
+QA issues by type:
+
+count: 0	issue: already-stripped
+
+count: 0	issue: libdir
+
+count: 5	issue: textrel
+
+chromium-54.0.2810.2: ELF binary
+'/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
+has relocations in .text [textrel]
+chromium-wayland-53.0.2785.143: ELF binary
+'/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
+has relocations in .text [textrel]
+corosync-2.4.2: ELF binary
+'/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-split/corosync/usr/sbin/corosync'
+has relocations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+'/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264-bin/usr/bin/x264'
+has relocations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+'/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264/usr/lib/libx264.so.148'
+has relocations in .text [textrel]
+
+
+count: 0	issue: build-deps
+
+count: 0	issue: file-rdeps
+
+count: 44058	issue: version-going-backwards
+
+a2jmidid-8: Package version for package a2jmidid-dbg went backwards
+which would break package feeds from (0:8-r0.3 to 0:8-r0.0)
+[version-going-backwards]
+
+...skip 44056 lines...
+
+zsh-5.3.1: Package version for package zsh went backwards which would
+break package feeds from (0:5.3.1-r0.3 to 0:5.3.1-r0.0)
+[version-going-backwards]
+
+
+count: 2	issue: host-user-contaminated
+glibc-locale-2.26: glibc-locale:
+/glibc-binary-localedata-gl-es.iso-8859-1/usr/lib/locale/gl_ES.ISO-8859-1/LC_CTYPE
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+libqofono-0.87+gitrAUTOINC+54435de3be: libqofono:
+/libqofono-tests/usr/lib/libqofono-qt5/tests/tst_qofonocellbroadcast
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+
+
+count: 0	issue: installed-vs-shipped
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+count: 0	issue: ldflags
+
+
+
+count: 0	issue: compile-host-path
+
+
+
+== Tested changes (not included in master yet) - bitbake ==
+
+latest upstream commit:
+2a78c2d siggen: Add reset to SignatureGenerator
+not included in master yet:
+72ae1b2 world-image: add extra target
+87ac37a fetch2: Allow Fetch.download() to warn instead of error
+
+== Tested changes (not included in master yet) - openembedded-core ==
+
+latest upstream commit:
+811edd9 selftest/prservice: Adapt to BB_SERVER_TIMEOUT
+not included in master yet:
+c14576a report-error: Allow to upload reports automatically
+910bca2 buildhistory.bbclass: metadata-revs show repo parent
+686d9d9 metadata-revs: provide more information
+9e73365 qemux86: Add identical qemux86copy variant for tests
+59e8b83 reproducible_build.bbclass: initial support for binary reproducibility
+95652fb cpio: provide cpio-replacement-native
+3b23ef6 image_types.bbclass: improve cpio image reproducibility
+bf38798 rootfs-postcommands.bbclass: support binary reproducibility
+7eeda32 insane.bbclass: write QA issues to log file only when they are
+in ERROR_QA or WARN_QA
+061d137 sstate.bbclass: Do not cause build failures due to setscene errors
+
+== Tested changes (not included in master yet) - meta-openembedded ==
+
+latest upstream commit:
+e5681e1 layer.conf: remove FREESMARTPHONE_GIT variable
+not included in master yet:
+10bace9 dnsmasq: disable the service by default
+4f93985 rdate: Fix build with hardening
+e5c886b strongswan: Include stdint.h for uintptr_t
+4677c6a netkit-rpc: Fix build with hardening flags
+c8efb3c netkit-telnet: Fix build with hardening
+76662d3 ncftp: Upgrade to 3.2.6
+53c064f autofs: Add build dependency on libnsl2
+8e943f5 openhpi: Fix build on 64bit platforms e.g. aarch64
+da43327 security_flags.inc: Delete
+2194ffc pptp-linux: Upgrade to 1.9.0
+3426784 ebtables: replace ebtables-save perl script with bash rewrite
+a9a8724 pimd: Upgrade to 2.3.2
+f131a95 igmpproxy: Include missing sys/tupes.h and define _GNU_SOURCE
+e7c14f4 rdate: Define logwtmp if libc != glibc
+ec9e308 netkit-ftp: Include sys/types.h for u_long definition
+066a9c7 postfix: Disable nis support on musl
+8da3ce9 zeroconf: Fix build with musl
+9c2d01f ippool: Fix build errors found with hardening flags
+fff054d openflow: Fix build with musl
+25d61ba xl2tpd: Update to 1.3.9
+51b1378 c-ares: update 1.12.0 -> 1.13.0
+f636b27 radvd: 2.14 -> 2.17
+82bf544 libesmtp: Fix config.h define for snprintf detection
+4cb7315 drbd: Add recipe
+6aa8077 net-snmp: fix engineBoots value on SIGHUP
+b270230 openl2tp: add LGPL-2.1 license
+fb9b74b openl2tp: add init script and systemd support
+4d7fd49 ntop: add new recipe
+650c226 libtdb: update 1.3.12 -> 1.3.14
+bc2ecf9 ndisc6: Upgrade to 1.0.3
+60b2801 memcached: Update to 1.5.0
+ab22cc4 tcpdump: remove unnecessary patch
+424e6e6 squid: Add missing dependencies on openssl expat and libxml2
+07e09c6 postfix: Upgrade to 3.2.2
+8ef3e24 freeradius: Upgrade to 3.0.15
+37e3ccd tcpdump: update to 4.9.1 to fix CVE-2017-11108
+ebff0aa wireshark: 2.2.7 -> 2.2.8
+d95f6b1 krb5: fix CVE-2017-11368
+4b71e13 quagga: update to 1.2.1
+346ae75 openvpn: 2.4.2 -> 2.4.3
+d1cf702 ipsec-tools: fix CVE-2016-10396
+1b793a9 netcf: upgrade to latest 0.2.8
+87377c8 tftp-hpa: add systemd unit files
+b04d96c openconnect: fix parallel compilation failure
+20c367e openconnect: upgrade to 7.08
+6b1cd36 ndisc6: specify target location of perl
+053e2cd wireguard-tools: Add bash to rdeps
+e4a15f9 openl2tp: Add bash to rdeps
+42116f6 squid: Disable format-truncation warning only with gcc
+2cb8fcb squid: Fix QA errors about wrong perl interpreter
+08f0852 wireguard: Upgrade to 20170810 snapshot
+ba3a771 ippool: Fix build errors found by clang
+ed9cb27 iscsitarget: Fix kernel with new 4.12+ kernel
+2e70823 postfix: Fix build with security flags and clang
+f45593d openhpi: Fix build with clang+c++11
+3ec9d31 openhpi: Fix ptest compile failures due to narrowing warnings with clang
+0fa6136 tcpreplay: upgrade to 4.2.6
+2ec0aa6 tftp-hpa: Fix PIE build with clang
+968836a samba: 4.6.5 -> 4.6.7
+43e4a8c wolfssl: upgrade to 3.12.0
+6af98c4 netperf: upgrade to 2.7.0+ with git version
+cc5e1a4 json-spirit: link to libatomic
+df870b0 librcf: link to libatomic
+48c49f5 ntop: Fix build with musl
+a67034e corosync: Fix build with musl
+0852b86 netkit-rwho: Fix build with musl
+0d251e8 netkit-tftp: Fix build with musl
+6010fc1 serial-forward: Fix build with hardening+musl
+9337155 gsoap: Fix build with musl
+7cc1044 libpwquality: fix do_qa_configure issue
+2d08073 drbd-utils: only rmmod if DRBD is a module
+b7b7c81 libgphoto2: Copy Makefile.in.in from gettext-native
+51f6429 lxdm: Copy Makefile.in.in from gettext-native
+
+== Tested changes (not included in master yet) - meta-qt5 ==
+latest upstream commit:
+2684299 qtwebengine: add patch for long paths
+not included in master yet:
+
+== Tested changes (not included in master yet) - meta-browser ==
+latest upstream commit:
+972cab7 gnome-settings-daemon: remove the bbappend for removed recipe
+not included in master yet:
 
