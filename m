@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A7B5272F87
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 1306577E4A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Sep 2017 13:32:07 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id j189so131907vka.0
+	Mon,  4 Sep 2017 17:34:26 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id k3so449791pfc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Sep 2017 06:32:09 -0700 (PDT)
+	Mon, 04 Sep 2017 10:34:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xpzQcy2mtF5G7u1eKbESHaw4uSYK2uVR5hNs/7pjM4s=;
-	b=vQjRZtA1v+9WpZID1QW/boKGt9c1WXO2mlVYALx3u1ZiHpRBF5xaoqvUUkJGk55B8f
-	j94tBqJMmnb4BwtsIbI7Nh7DkXdeuYfNqHzsPKBxCpbaYJKweO+W8oMBbeyP+BrjnEgA
-	vi+aEi94OOQB04ycVOHtW6nLrM73wwug9C6cIPCouHY5Xu9JZzjGXvNd45NXc2eqs0LE
-	zOKUUWI+6NJPftDcsl+C+1/4rrBj6pOYI1Os8frrLb69ZtUEkQNGJHhKRIBE1QWMblcQ
-	/CeDLDDbPQif0TzlvP8fpgFJ99XBy9u5J3PLALfSB6GHKeJlRKexY7ygAhbQ7RI9Ib3K
-	4r+Q==
+	h=from:to:cc:subject:date:message-id;
+	bh=wvmmOxcJ/A2vihavxjQ6uMKZmuUThWH7nTFDlBvAVQc=;
+	b=HSEKCC8LAcscMfafSHCoQY24BxwCSmyjxQDJ1pankiydFUIwlXLqLRuQW5HT0OFppY
+	mLXuc84I0V7UNdXHBTG66pLbCxSMjlFhK6WCXNhg4Dlp9UW+xgJEakOUrD8ZgPCFojVB
+	Tdiuti/mPrsZmkQewTRjT9rvpj9QC/eevyvblldYmg4T9bAxAcEqfwvKGSh4DVjzWoW0
+	arwhC/BbHqniuXOz3d9DIwxfrl4JOvCg4cWW7+cfGVBBm4VmB6rCSWfl7Yrl0l0j+mTF
+	KaGCk5L3YgaKDNNDEpOFTBRvZVVVNxqtHAEfCU8ehJeXNfIldG5zoQsK7pwGRYaNYytY
+	3f/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=xpzQcy2mtF5G7u1eKbESHaw4uSYK2uVR5hNs/7pjM4s=;
-	b=EqVK5UMCUT1sW2mjscKHSe1xWPOx2WRmNtcmcyCBVyYWQI7irUXlMyHEqDPJxB49KD
-	XYfOb94zwV6xxWwXHLJdCY8xh+EwX5uw3fH593wHIrpeErDwGDmFgasNunnHaFHswDKF
-	s1yWE2Zik9XWatHXk/5zpWRos6pSEYTQtTE6a8bY0vLCDyvA8ODINe2gln+G8HDdDkhS
-	LlII2Us5i7bZCBlV4hGsNB1eorF2sRPMvMVDL2IZCwldc7nOpAsnOVZratDPlRFizaSM
-	FBffdXJRKRrhu9KrINwKh+afWIEFE/R7I2ytPl4i9hNZn2Ej4Mk6QGDdDAWO3fGu/2d7
-	2M5w==
-X-Gm-Message-State: AHPjjUiT46GdukK0Qm3YJunlHsrA+EcwzOlkHPw4ae8N0IYTw0A8dgGI
-	TjYgDdBIS9jrmpL8t0olv0V8v0fw2Q==
-X-Google-Smtp-Source: ADKCNb6xcuKVqEvENS4JImDLl31v6M4Crc9MLz7YR0eED1ffFHA6lAg9TwaYtQAZeET9qYcPbUQ/l+Asx9gNJjNerKw=
-X-Received: by 10.31.9.197 with SMTP id 188mr244700vkj.23.1504531928658; Mon,
-	04 Sep 2017 06:32:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.15.69 with HTTP; Mon, 4 Sep 2017 06:32:08 -0700 (PDT)
-In-Reply-To: <20170831232645.6125-1-raj.khem@gmail.com>
-References: <20170831232645.6125-1-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 4 Sep 2017 15:32:08 +0200
-Message-ID: <CA+chaQduoSKyApyu2M4cgFQ9ER0QERLcJO=Si0QGUu7k+5pmxQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/4] ndisc6: Fix build with clang and update to latest on git
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wvmmOxcJ/A2vihavxjQ6uMKZmuUThWH7nTFDlBvAVQc=;
+	b=YKgha1GWX62YAWOUFTr9NfkgOb5CcgcjXce/Oxsx0gqEqozXDFtzuu2uuHER5Ib+Q1
+	g3+kaRa+f60LJkUY8TxOoQCVw7xG1ArSQHWb+tuQtJ4JqGbgcd+fhYmxqAfUvIso0mdy
+	qeOXmJKj23B2NgtFfl2PKs4Ys4fv8YYao6S70Xw9hwrawV8IOMr0pDBobMGllyisBkCa
+	FFA8cidVf0MTfAv1PCKXB11gIw1lCy4rGSI8AcQdUO2tG94tmYnTaZ/hcDbzWMHdpEkm
+	a29b68SaPQ67YgzN/j4Qc0+kjAwFXEjhGRKOlIajvOLWT+HgLN3NcQY1FC1rS/I3cifo
+	Bcww==
+X-Gm-Message-State: AHPjjUg24zzZSPrtNozWJry2ByuLc5F7PJExTZhQi1ME52Q81HSBREzb
+	L4lKA5MmAJnw2qIN
+X-Google-Smtp-Source: ADKCNb5TevznYBtwAvv0mfmrIZIylwh5lWLtSYJbjU3dDMZZf8g/pfCY6OkqbJGz8jP/sn3wLSAu3Q==
+X-Received: by 10.84.232.8 with SMTP id h8mr1456178plk.62.1504546468285;
+	Mon, 04 Sep 2017 10:34:28 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::2e06])
+	by smtp.gmail.com with ESMTPSA id
+	q66sm11078482pfb.132.2017.09.04.10.34.27
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 04 Sep 2017 10:34:27 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon,  4 Sep 2017 10:34:19 -0700
+Message-Id: <20170904173420.20442-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-networking][PATCH 1/2] netkit-rpc: Link libtirpc on musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,275 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Sep 2017 13:32:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 04 Sep 2017 17:34:27 -0000
 
-The git server seems to be down here.
-http://errors.yoctoproject.org/Errors/Details/155044/
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-and you can also drop the SRC_URI checksums now when it is using git
-fetcher.
+diff --git a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
+index 75ec07cfe..9487fdc2c 100644
+--- a/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
++++ b/meta-networking/recipes-netkit/netkit-rpc/netkit-rpc_0.17.bb
+@@ -4,12 +4,15 @@ SECTION = "net"
+ LICENSE = "SPL-1.0"
+ LIC_FILES_CHKSUM = "file://rpcinfo/rpcinfo.c;beginline=2;endline=3;md5=3e6339e3ce266e1122c5ba293e04bc89"
+ 
++DEPENDS_append_libc-musl = " libtirpc"
+ SRC_URI = "http://sources.openembedded.org/${BPN}-${PV}.tar.gz \
+            file://gcc4.patch \
+            file://0001-rpcgen-Fix-printf-formats.patch \
+            "
+ SRC_URI[md5sum] = "67212720482ea1aea9182a98653a9642"
+ SRC_URI[sha256sum] = "421d63b414162237a72867061f1bd3e3752a0d962cd5d30b5e933ddad8a14d3b"
++CFLAGS_append_libc-musl = " -I${STAGING_INCDIR}/tirpc"
++LIBS_append_libc-musl = " -ltirpc"
+ 
+ do_configure () {
+     ./configure --prefix=${prefix}
+@@ -18,6 +21,7 @@ do_configure () {
+     echo "LD=${LD}" >> MCONFIG
+     echo "CFLAGS=${CFLAGS}" >> MCONFIG
+     echo "LDFLAGS=${LDFLAGS}" >> MCONFIG
++    echo "LIBS=${LIBS}" >> MCONFIG
+ }
+ 
+ do_compile () {
+-- 
+2.14.1
 
-On Fri, Sep 1, 2017 at 1:26 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Change recipe to git
-> Pass PERL variable to configure
-> Add patches to fix VLAIS
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../0001-replace-VLAIS-with-malloc-free-pair.patch | 124
-> +++++++++++++++++++++
->  .../ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch     |  30 +++++
->  .../ndisc6/{ndisc6_1.0.3.bb => ndisc6_git.bb}      |  21 ++--
->  3 files changed, 168 insertions(+), 7 deletions(-)
->  create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch
->  create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
->  rename meta-networking/recipes-support/ndisc6/{ndisc6_1.0.3.bb =>
-> ndisc6_git.bb} (87%)
->
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch b/meta-networking/recipes-
-> support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch
-> new file mode 100644
-> index 000000000..dc58b5b79
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch
-> @@ -0,0 +1,124 @@
-> +From 3a7d5396e633e6c02a4583be7faf3d79d0d33748 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 31 Aug 2017 11:14:41 -0700
-> +Subject: [PATCH 1/2] replace VLAIS with malloc/free pair
-> +
-> +Makes it compatible with non-gnu compilers
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +Upstream-Status: Pending
-> +
-> + src/trace-icmp.c |  7 +++++--
-> + src/trace-tcp.c  | 14 ++++++++++----
-> + src/trace-udp.c  |  7 +++++--
-> + 3 files changed, 20 insertions(+), 8 deletions(-)
-> +
-> +diff --git a/src/trace-icmp.c b/src/trace-icmp.c
-> +index 842938e..c76cb54 100644
-> +--- a/src/trace-icmp.c
-> ++++ b/src/trace-icmp.c
-> +@@ -43,16 +43,19 @@ send_echo_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct icmp6_hdr ih;
-> +-              uint8_t payload[plen - sizeof (struct icmp6_hdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +       memset (&packet, 0, plen);
-> ++      packet.payload = malloc(plen - sizeof (struct icmp6_hdr));
-> +
-> +       packet.ih.icmp6_type = ICMP6_ECHO_REQUEST;
-> +       packet.ih.icmp6_id = htons (getpid ());
-> +       packet.ih.icmp6_seq = htons ((ttl << 8) | (n & 0xff));
-> +       (void)port;
-> +
-> +-      return send_payload (fd, &packet.ih, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet.ih, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
-> + }
-> +
-> +
-> +diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-> +index 940f918..62d22ff 100644
-> +--- a/src/trace-tcp.c
-> ++++ b/src/trace-tcp.c
-> +@@ -54,10 +54,11 @@ send_syn_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct tcphdr th;
-> +-              uint8_t payload[plen - sizeof (struct tcphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +
-> +       memset (&packet, 0, sizeof (packet));
-> ++      packet.payload = malloc(plen - sizeof (struct tcphdr));
-> +       packet.th.th_sport = sport;
-> +       packet.th.th_dport = port;
-> +       packet.th.th_seq = htonl ((ttl << 24) | (n << 16) |
-> (uint16_t)getpid ());
-> +@@ -65,7 +66,9 @@ send_syn_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       packet.th.th_flags = TH_SYN | (ecn ? (TH_ECE | TH_CWR) : 0);
-> +       packet.th.th_win = htons (TCP_WINDOW);
-> +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
-> + }
-> +
-> +
-> +@@ -131,10 +134,11 @@ send_ack_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct tcphdr th;
-> +-              uint8_t payload[plen - sizeof (struct tcphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +
-> +       memset (&packet, 0, sizeof (packet));
-> ++      packet.payload = malloc(plen - sizeof (struct tcphdr));
-> +       packet.th.th_sport = sport;
-> +       packet.th.th_dport = port;
-> +       packet.th.th_ack = htonl ((ttl << 24) | (n << 16) |
-> (uint16_t)getpid ());
-> +@@ -142,7 +146,9 @@ send_ack_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       packet.th.th_flags = TH_ACK;
-> +       packet.th.th_win = htons (TCP_WINDOW);
-> +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
-> + }
-> +
-> +
-> +diff --git a/src/trace-udp.c b/src/trace-udp.c
-> +index 4adde6b..a6cbb07 100644
-> +--- a/src/trace-udp.c
-> ++++ b/src/trace-udp.c
-> +@@ -46,9 +46,10 @@ send_udp_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct udphdr uh;
-> +-              uint8_t payload[plen - sizeof (struct udphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +       memset (&packet, 0, plen);
-> ++      packet.payload = malloc(plen - sizeof (struct udphdr));
-> +
-> +       (void)n;
-> +       packet.uh.uh_sport = sport;
-> +@@ -61,7 +62,9 @@ send_udp_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       /*if (plen > sizeof (struct udphdr))
-> +               packet.payload[0] = (uint8_t)ttl;*/
-> +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
-> + }
-> +
-> +
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch
-> b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
-> new file mode 100644
-> index 000000000..3cc2ba80c
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
-> @@ -0,0 +1,30 @@
-> +From 2a50154fbce38fd36be7e14f5cd4a8b03c65c72f Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 31 Aug 2017 11:15:37 -0700
-> +Subject: [PATCH 2/2] Do not undef _GNU_SOURCE
-> +
-> +There are functions from tcp.h which are under _GNU_SOURCE
-> +in musl
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +Upstream-Status: Pending
-> +
-> + src/trace-tcp.c | 1 -
-> + 1 file changed, 1 deletion(-)
-> +
-> +diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-> +index 62d22ff..380008e 100644
-> +--- a/src/trace-tcp.c
-> ++++ b/src/trace-tcp.c
-> +@@ -21,7 +21,6 @@
-> + # include <config.h>
-> + #endif
-> +
-> +-#undef _GNU_SOURCE
-> + #define _DEFAULT_SOURCE 1
-> +
-> + #include <string.h>
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> similarity index 87%
-> rename from meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> rename to meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> index 6bc0531b9..1ff2df731 100644
-> --- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> @@ -10,15 +10,27 @@ RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
->  RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
->  RDEPENDS_${PN}-misc += "perl"
->
-> -SRC_URI = "http://www.remlab.net/files/ndisc6/ndisc6-${PV}.tar.bz2 \
-> -"
-> +PV = "1.0.4+git${SRCPV}"
-> +SRCREV = "4c794b5512d23c649def1f94a684225dcbb6ac3e"
-> +SRC_URI = "git://git.remlab.net/git/ndisc6.git \
-> +           file://0001-replace-VLAIS-with-malloc-free-pair.patch \
-> +           file://0002-Do-not-undef-_GNU_SOURCE.patch \
-> +           "
->  SRC_URI[md5sum] = "21afdaa3a5a5c1ce50eb7f2b7d795989"
->  SRC_URI[sha256sum] = "0f41d6caf5f2edc1a12924956ae8b1
-> d372e3b426bd7b11eed7d38bc974eec821"
->
->  LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->
-> +S = "${WORKDIR}/git"
-> +
->  inherit autotools gettext
->
-> +EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
-> +
-> +do_configure_prepend() {
-> +    ${S}/autogen.sh
-> +}
-> +
->  ALLOW_EMPTY_${PN} = "1"
->
->  # Split into seperate packages since we normal don't want them all
-> @@ -49,11 +61,6 @@ or IPv4."
->  DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS
-> \
->  servers through slateless IPv6 autoconfiguration."
->
-> -# We do not run perl during the build, but only use it on the target.
-> -do_configure_prepend() {
-> -    export PERL="/usr/bin/perl"
-> -}
-> -
->  do_install_append () {
->      rm -rf ${D}${localstatedir}
->      # Enable SUID bit for applications that need it
-> --
-> 2.14.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
