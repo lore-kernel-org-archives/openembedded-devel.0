@@ -1,24 +1,54 @@
-Return-Path: <Ovidiu.Panait@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 4AD2A78067
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 84E5777E79
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Sep 2017 07:25:52 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v857PsDt006405
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Tue,  5 Sep 2017 07:29:38 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id 40so1260062wrv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 5 Sep 2017 00:25:54 -0700 (PDT)
-Received: from otp-opanait-l1.corp.ad.wrs.com (128.224.124.169) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 5 Sep 2017 00:25:53 -0700
-From: Ovidiu Panait <ovidiu.panait@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Sep 2017 10:25:21 +0300
-Message-ID: <20170905072521.24230-1-ovidiu.panait@windriver.com>
-X-Mailer: git-send-email 2.14.1
+	Tue, 05 Sep 2017 00:29:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WIZkUq2Pfa3gL3D52dENQzoIHJJUY4uOeCXFVAZETbc=;
+	b=lwbUEi25HL5fUqwk1ZgBrlTspwcfJtZAFyG47PDOGnRV8WJLJ4D22IGTLiOUrCRmDy
+	5P6/EIqWGx2MTGWIjyJD54e+3JFjdiSlcmwScTrazU7iD0T7MilxM+vGeCHfA3rZjA/B
+	vjfTUe4YlyxZ4nYYAuRbeSmH+DimUpAfmqN3x1zWZjFLM01KkbSPcz6mGkRHfCl1t9x/
+	JqrZCnJi9HohAO+xZOlpSBGTxi3nvPCefi+yx1sV7wpM+NN6fUjFsmbwffAXKsx4vMsN
+	pCK2X+W5brXB0PLpWoEsyU0FpexJpytFWMtIikZuK4R0KITx06kNNHeNs/MDAZztYcat
+	RCrw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=WIZkUq2Pfa3gL3D52dENQzoIHJJUY4uOeCXFVAZETbc=;
+	b=ZkZ88GnQxkcu4h7Qpdb5NV1kBPigUE1bdyw90FmjJ7s112i/sJpXvVSqVer/i95+Z9
+	rXtWTA8v1enLDNoT/MHtn3HfbpUjlCIjHK/ZlR3LohR8sp50ZSW5s114hTMQAAxa42ME
+	PUbVPWvru9pCMOm6b66lni6PuuHC0Yo7OapsUEgj2RLZb3rIc5tKcN8XklHm59N/59m9
+	yiMA/1NaxhTbTxjv/5dLsoJL2PKOMTBACmSOH+MLyGAhDKfk9mJhcNTZ7LlIZiF6+AzL
+	a0j6hr3g0qHyjaSAfC9zkAeSa8DP2n3ty1xAwB0q+K1MTLUiEJQwuM4GiyoxSOeNHlDC
+	NM1g==
+X-Gm-Message-State: AHPjjUiQ4ITIfFDhkfKJ3n3aXBKa9UKGfR95LYx12cd/4XJZuOGLZ+/6
+	KDPhNBZsTvFl2NPX
+X-Google-Smtp-Source: ADKCNb69VQNd5uVFM35vdjNOxdl6h25sr9iSk1Jt4ZUvj52+7MIcEZ/A/HEDpaQSepRQwttqU+Od8g==
+X-Received: by 10.223.128.3 with SMTP id 3mr1684524wrk.327.1504596578945;
+	Tue, 05 Sep 2017 00:29:38 -0700 (PDT)
+Received: from mueller-a-nb-linux.speedport.ip
+	(p20030046E901F2886E684C35E4EC4B89.dip0.t-ipconnect.de.
+	[2003:46:e901:f288:6e68:4c35:e4ec:4b89])
+	by smtp.googlemail.com with ESMTPSA id
+	j62sm73151wmf.4.2017.09.05.00.29.38
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 05 Sep 2017 00:29:38 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  5 Sep 2017 09:29:19 +0200
+Message-Id: <20170905072919.17654-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.4
 MIME-Version: 1.0
-Subject: [PATCH] rsyslog: fix segfault after configuration errors
+Subject: [meta-qt5][PATCH] qtbase-native: set path to mkspec for cmake properly again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,145 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Sep 2017 07:25:53 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 05 Sep 2017 07:29:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-rsyslog will segfault on startup if
-a) the local machine's hostname is set to a non-FQDN name
-b) the getaddrinfo() system call fails
-This scenario is higly unlikely, but may exist especially with
-provisioned VMs which may not properly be able to do name queries
-on startup (seen for example on AWS).
+Since update to 5.9.2 native recipes in meta-qt5-extra fail due to strange path
+to mkspecs. This patch fixes this the hard way.
 
-This patch fixes the situation and also provides more robustness
-for very early startup error messages when some of the error-reporting
-subsystem is not yet properly initialized. Note that under these
-circumstances, errors may only show up on stderr.
-
-closes https://github.com/rsyslog/rsyslog/issues/1573
-
-Reference:
-https://github.com/rsyslog/rsyslog/issues/1573
-
-Upstream patch:
-https://github.com/rsyslog/rsyslog/commit/6d258339802cb9f13d8a4a157a4b74eccb902d8f
-
-Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- ...ugfix-segfault-after-configuration-errors.patch | 90 ++++++++++++++++++++++
- meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb |  1 +
- 2 files changed, 91 insertions(+)
- create mode 100644 meta-oe/recipes-extended/rsyslog/rsyslog/0001-core-bugfix-segfault-after-configuration-errors.patch
+ recipes-qt/qt5/qtbase-native_git.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog/0001-core-bugfix-segfault-after-configuration-errors.patch b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-core-bugfix-segfault-after-configuration-errors.patch
-new file mode 100644
-index 0000000..189ca65
---- /dev/null
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog/0001-core-bugfix-segfault-after-configuration-errors.patch
-@@ -0,0 +1,90 @@
-+From 6d258339802cb9f13d8a4a157a4b74eccb902d8f Mon Sep 17 00:00:00 2001
-+From: Rainer Gerhards <rgerhards@adiscon.com>
-+Date: Mon, 17 Jul 2017 15:36:32 +0200
-+Subject: [PATCH] core bugfix: segfault after configuration errors
-+
-+rsyslog will segfault on startup if
-+a) the local machine's hostname is set to a non-FQDN name
-+b) the getaddrinfo() system call fails
-+This scenario is higly unlikely, but may exist especially with
-+provisioned VMs which may not properly be able to do name queries
-+on startup (seen for example on AWS).
-+
-+This patch fixes the situation and also provides more robustness
-+for very early startup error messages when some of the error-reporting
-+subsystem is not yet properly initialized. Note that under these
-+circumstances, errors may only show up on stderr.
-+
-+Upstream status: Backport
-+
-+closes https://github.com/rsyslog/rsyslog/issues/1573
-+
-+Signed-off-by: Ovidiu Panait <ovidiu.panait@windriver.com>
-+---
-+ runtime/prop.c   |  6 ++++++
-+ tools/rsyslogd.c | 17 +++++++++--------
-+ 2 files changed, 15 insertions(+), 8 deletions(-)
-+
-+diff --git a/runtime/prop.c b/runtime/prop.c
-+index e5b4693..cb93285 100644
-+--- a/runtime/prop.c
-++++ b/runtime/prop.c
-+@@ -133,7 +133,13 @@ propConstructFinalize(prop_t __attribute__((unused)) *pThis)
-+  */
-+ static rsRetVal AddRef(prop_t *pThis)
-+ {
-++	if(pThis == NULL)  {
-++		DBGPRINTF("prop/AddRef is passed a NULL ptr - ignoring it "
-++			"- further problems may occur\n");
-++		FINALIZE;
-++	}
-+ 	ATOMIC_INC(&pThis->iRefCount, &pThis->mutRefCount);
-++finalize_it:
-+ 	return RS_RET_OK;
-+ }
-+ 
-+diff --git a/tools/rsyslogd.c b/tools/rsyslogd.c
-+index 759d293..6aa1487 100644
-+--- a/tools/rsyslogd.c
-++++ b/tools/rsyslogd.c
-+@@ -808,9 +808,11 @@ logmsgInternal(int iErr, const syslog_pri_t pri, const uchar *const msg, int fla
-+ 	 * permits us to process unmodified config files which otherwise contain a
-+ 	 * supressor statement.
-+ 	 */
-+-	if(((Debug == DEBUG_FULL || !doFork) && ourConf->globals.bErrMsgToStderr) || iConfigVerify) {
-++	int emit_to_stderr = (ourConf == NULL) ? 1 : ourConf->globals.bErrMsgToStderr;
-++	if(((Debug == DEBUG_FULL || !doFork) && emit_to_stderr) || iConfigVerify) {
-+ 		if(pri2sev(pri) == LOG_ERR)
-+-			fprintf(stderr, "rsyslogd: %s\n", (bufModMsg == NULL) ? (char*)msg : bufModMsg);
-++			fprintf(stderr, "rsyslogd: %s\n",
-++				(bufModMsg == NULL) ? (char*)msg : bufModMsg);
-+ 	}
-+ 
-+ finalize_it:
-+@@ -1115,18 +1117,17 @@ initAll(int argc, char **argv)
-+ 
-+ 	/* doing some core initializations */
-+ 
-+-	/* get our host and domain names - we need to do this early as we may emit
-+-	 * error log messages, which need the correct hostname. -- rgerhards, 2008-04-04
-+-	 */
-+-	queryLocalHostname();
-+-
-+-	/* initialize the objects */
-+ 	if((iRet = modInitIminternal()) != RS_RET_OK) {
-+ 		fprintf(stderr, "fatal error: could not initialize errbuf object (error code %d).\n",
-+ 			iRet);
-+ 		exit(1); /* "good" exit, leaving at init for fatal error */
-+ 	}
-+ 
-++	/* get our host and domain names - we need to do this early as we may emit
-++	 * error log messages, which need the correct hostname. -- rgerhards, 2008-04-04
-++	 * But we need to have imInternal up first!
-++	 */
-++	queryLocalHostname();
-+ 
-+ 	/* END core initializations - we now come back to carrying out command line options*/
-+ 
-+-- 
-+2.10.2
-+
-diff --git a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-index bd317be..597a0c8 100644
---- a/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-+++ b/meta-oe/recipes-extended/rsyslog/rsyslog_8.22.0.bb
-@@ -25,6 +25,7 @@ SRC_URI = "http://www.rsyslog.com/download/files/download/rsyslog/${BPN}-${PV}.t
-            file://run-ptest \
-            file://rsyslog-fix-ptest-not-finish.patch \
-            file://CVE-2017-12588.patch \
-+           file://0001-core-bugfix-segfault-after-configuration-errors.patch \
- "
+diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+index 54a0b78..28a39ac 100644
+--- a/recipes-qt/qt5/qtbase-native_git.bb
++++ b/recipes-qt/qt5/qtbase-native_git.bb
+@@ -112,6 +112,10 @@ do_install() {
+     fi
  
- SRC_URI_append_libc-musl = " \
+     install -m 755 ${B}/bin/qfloat16-tables ${D}${OE_QMAKE_PATH_BINS}
++
++    # since 5.9.2 something sets a very strange path to mkspec ("${_qt5Core_install_prefix}/../../../../../../../../../../usr/lib/qt5//mkspecs/linux-oe-g++")
++    # override this until somebody finds a better way
++    echo 'set(_qt5_corelib_extra_includes "${_qt5Core_install_prefix}/lib${QT_DIR_NAME}/mkspecs/linux-oe-g++")' > ${D}${libdir}/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake
+ }
+ 
+ SRCREV = "73573fce295caef35da706a8c8c796ec18e6baf1"
 -- 
-2.10.2
+2.9.4
 
 
