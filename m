@@ -1,56 +1,25 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f171.google.com (mail-pf0-f171.google.com
-	[209.85.192.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 35A4971C7E
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C9C4D71DEE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  4 Sep 2017 23:36:37 +0000 (UTC)
-Received: by mail-pf0-f171.google.com with SMTP id g13so3641397pfm.2
+	Tue,  5 Sep 2017 02:24:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v852OvB5024075
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 04 Sep 2017 16:36:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=Z3gYiSnRo2rgwmKjWQzzW2zncCwPOKt8DCNSSd7M+yw=;
-	b=n/rwqaYsC3XxkG2ncVZbwbGKPb6b/4MZQf1ymqZCDbYl4uuXFKtjtsJ48iAGs5dvBn
-	EtLPZiC6EIbEa4bq34dVl7y+Dnw5SFpIHpIkWEKopT4RegoKjeqSKkbCXeX4PWVsPnJs
-	k1DL7uRzKeK9kubbDLWUYfHTbR1k55Bja73XPbIhgL9vqA2ZBijDm+FtVI7Odr8k5qFl
-	BiQOt/Vz+sntTRCEu/vHvH/gUeg1jaFi3RtkxU0o2hs6BPtTYhAZWNLcldEnQPBKUUIo
-	ETp7c2d0YSDVKovWKUjZ+Qe4dBsXL3iIxBUKQQLRpKmRIo7nt3W3HuVMl6mG5J4ZYwZC
-	yt9A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=Z3gYiSnRo2rgwmKjWQzzW2zncCwPOKt8DCNSSd7M+yw=;
-	b=VFe+zr6EHuueLMGJkwrwCrOOTqpGJq4Lc69I4XKk2zY4j8qw0VjUiCuE1wadVXuNhh
-	exNdKIemLsi8/ktM9dE+u2bpDTE9i6P/lx/yruEvkISy123noqWmP997fsDP8X5dCbDb
-	bs7i9NCCrl7DbaYL5ZRab+i2Tehb8zUtUbb7AFtnRet9Vv58HbXMbf76/dOlFx1HY2Dw
-	Vhj74ciPOcFO9cI4RkPcRXDok97HTaK/F+7mezEuNhA/QbvLeTwC0gVfzjDKjZgX10h6
-	acCMQuqwRGAr8Y/a5L5cPYEYB+NK3EoN0N4QzDBWkIly1/kCLeaapRfbpKT9qBzCjC5G
-	u6yg==
-X-Gm-Message-State: AHPjjUi8pIiaNsawnIHStxQT8q2F7DrFkiFwGAh36vVlaOrkE6KUi3YK
-	D7s3Aot7bUEdHQ4I
-X-Google-Smtp-Source: ADKCNb6QndlagYtsl41/ikByyUMcwmCBM77/4e9tJpu/sTDMs1H8UTSV0sZX2r9SWrgsHm6zZpwlTQ==
-X-Received: by 10.84.210.45 with SMTP id z42mr2295281plh.132.1504568198587;
-	Mon, 04 Sep 2017 16:36:38 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:b0f0:5dac:8a48:d7fa?
-	([2601:202:4001:9ea0:b0f0:5dac:8a48:d7fa])
-	by smtp.gmail.com with ESMTPSA id
-	21sm11731116pfb.146.2017.09.04.16.36.37
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 04 Sep 2017 16:36:38 -0700 (PDT)
-To: Mikko Rapeli <mikko.rapeli@bmw.de>,
-	openembedded-devel@lists.openembedded.org
-References: <1504276118-29353-1-git-send-email-mikko.rapeli@bmw.de>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <6a31d1c8-0b36-df07-42d6-2b5b2a28585b@gmail.com>
-Date: Mon, 4 Sep 2017 16:36:36 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Mon, 4 Sep 2017 19:24:57 -0700 (PDT)
+Received: from localhost (128.224.162.198) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Mon, 4 Sep 2017 19:24:55 -0700
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 5 Sep 2017 10:24:10 +0800
+Message-ID: <1504578250-4534-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <1504276118-29353-1-git-send-email-mikko.rapeli@bmw.de>
-Subject: Re: [PATCH] cve-check.bbclass: detect patched CVE's also from patch file names
+X-Originating-IP: [128.224.162.198]
+Subject: [meta-oe][PATCH] psqlodbc: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,73 +32,418 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 04 Sep 2017 23:36:38 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 05 Sep 2017 02:24:55 -0000
+Content-Type: text/plain
 
-Mikko,
+This package provides a driver that allows ODBC-enabled applications to
+access PostgreSQL database.
 
-wrong ML. I think you want openembedded-core@lists.openembedded.org
+This recipe was removed in commit
+ec9e5ed06256ad92c818474cdb490dc0d3a0d0a3
 
+Since its dependency postgresql already unblacklisted, so add it back.
 
--armin
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../psqlodbc-donot-use-the-hardcode-libdir.patch   |  26 ++++
+ .../files/psqlodbc-fix-for-ptest-support.patch     | 148 +++++++++++++++++++++
+ ...bc-remove-some-checks-for-cross-compiling.patch | 118 ++++++++++++++++
+ meta-oe/recipes-support/psqlodbc/psqlodbc.inc      |  50 +++++++
+ .../psqlodbc/psqlodbc_09.05.0300.bb                |  14 ++
+ 5 files changed, 356 insertions(+)
+ create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
+ create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
+ create mode 100644 meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
+ create mode 100644 meta-oe/recipes-support/psqlodbc/psqlodbc.inc
+ create mode 100644 meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb
 
-
-On 09/01/2017 07:28 AM, Mikko Rapeli wrote:
-> While poky master branch has been fixed so that all CVE patch files have
-> the:
->
-> CVE: CVE-2017-1234556
->
-> strings in the patch comments, many older versions of poky and other meta
-> layers are not, but the CVE patches quite often have the CVE id in the
-> patch file name.
->
-> If the CVE: string also found, there are no duplicates in the report.
->
-> Signed-off-by: Mikko Rapeli <mikko.rapeli@bmw.de>
-> ---
->   meta/classes/cve-check.bbclass | 16 +++++++++++++++-
->   1 file changed, 15 insertions(+), 1 deletion(-)
->
-> diff --git a/meta/classes/cve-check.bbclass b/meta/classes/cve-check.bbclass
-> index f44bbed..bc2f03f 100644
-> --- a/meta/classes/cve-check.bbclass
-> +++ b/meta/classes/cve-check.bbclass
-> @@ -118,10 +118,24 @@ def get_patches_cves(d):
->   
->       pn = d.getVar("PN")
->       cve_match = re.compile("CVE:( CVE\-\d{4}\-\d+)+")
-> +
-> +    # Matches last CVE-1234-211432 in the file name, also if written
-> +    # with small letters. Not supporting multiple CVE id's in a single
-> +    # file name.
-> +    cve_file_name_match = re.compile(".*([Cc][Vv][Ee]\-\d{4}\-\d+)")
-> +
->       patched_cves = set()
->       bb.debug(2, "Looking for patches that solves CVEs for %s" % pn)
->       for url in src_patches(d):
->           patch_file = bb.fetch.decodeurl(url)[2]
-> +
-> +        # Check patch file name for CVE ID
-> +        fname_match = cve_file_name_match.search(patch_file)
-> +        if fname_match:
-> +            cve = fname_match.group(1).upper()
-> +            patched_cves.add(cve)
-> +            bb.debug(2, "Found CVE %s from patch file name %s" % (cve, patch_file))
-> +
->           with open(patch_file, "r", encoding="utf-8") as f:
->               try:
->                   patch_text = f.read()
-> @@ -140,7 +154,7 @@ def get_patches_cves(d):
->               for cve in cves.split():
->                   bb.debug(2, "Patch %s solves %s" % (patch_file, cve))
->                   patched_cves.add(cve)
-> -        else:
-> +        elif not fname_match:
->               bb.debug(2, "Patch %s doesn't solve CVEs" % patch_file)
->   
->       return patched_cves
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
+new file mode 100644
+index 0000000..7eda038
+--- /dev/null
++++ b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-donot-use-the-hardcode-libdir.patch
+@@ -0,0 +1,26 @@
++[PATCH] do not use the hardcode libdir
++
++Upstream-status: Pending
++
++Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ configure.ac | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/configure.ac b/configure.ac
++index 9b88d4c..df5ad7a 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -140,7 +140,7 @@ if test "$with_libpq" != yes; then
++ 	if test -d "$with_libpq"; then
++ 		PATH="$PATH:$with_libpq/bin"
++ 		CPPFLAGS="$CPPFLAGS -I$with_libpq/include"
++-		LDFLAGS="$LDFLAGS -L$with_libpq/lib"
+++		LDFLAGS="$LDFLAGS -L$with_libpq/${base_libdir}"
++ 	else
++ 		if test -x "$with_libpq"; then
++ 			PG_CONFIG=$with_libpq
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
+new file mode 100644
+index 0000000..a8f14e7
+--- /dev/null
++++ b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-fix-for-ptest-support.patch
+@@ -0,0 +1,148 @@
++Subject: [PATCH] psqlodbc: fixes for ptest support
++
++* Fix the LIBODBC since we don't use ODBC_CONFIG.
++* Fix the path for driver.
++* Add the default info of postgresql server.
++* Fix the output format for ptest.
++* Fix the results and exe dir.
++
++Upstream-Status: Inappropriate [OE ptest specific]
++
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ test/Makefile.in    |  2 +-
++ test/odbcini-gen.sh |  8 ++++----
++ test/runsuite.c     | 26 +++++++++++++-------------
++ 3 files changed, 18 insertions(+), 18 deletions(-)
++
++diff --git a/test/Makefile.in b/test/Makefile.in
++index 8710616..fcb470e 100644
++--- a/test/Makefile.in
+++++ b/test/Makefile.in
++@@ -18,7 +18,7 @@ CFLAGS = @CFLAGS@
++ ODBC_CONFIG = @ODBC_CONFIG@
++ PROVE = @PROVE@
++ 
++-LIBODBC := $(shell $(ODBC_CONFIG) --libs)
+++LIBODBC = -lodbc
++ 
++ all: $(TESTBINS) runsuite reset-db
++ 
++diff --git a/test/odbcini-gen.sh b/test/odbcini-gen.sh
++index d2c2c87..6068d9d 100755
++--- a/test/odbcini-gen.sh
+++++ b/test/odbcini-gen.sh
++@@ -6,7 +6,7 @@
++ outini=odbc.ini
++ outinstini=odbcinst.ini
++ 
++-drvr=../.libs/psqlodbcw
+++drvr=@LIBDIR@/psqlodbca
++ driver=${drvr}.so
++ if test ! -e $driver ; then
++ 	driver=${drvr}.dll
++@@ -33,10 +33,10 @@ Driver          = psqlodbc test driver
++ Trace           = No
++ TraceFile               =
++ Database                = contrib_regression
++-Servername              =
++-Username                =
+++Servername              = localhost
+++Username                = postgres
++ Password                =
++-Port                    =
+++Port                    = 5432
++ ReadOnly                = No
++ RowVersioning           = No
++ ShowSystemTables                = No
++diff --git a/test/runsuite.c b/test/runsuite.c
++index 583cf35..fd2a90e 100644
++--- a/test/runsuite.c
+++++ b/test/runsuite.c
++@@ -51,7 +51,7 @@ bailout(const char *fmt, ...)
++ 
++ /* Given a test program's name, get the test name */
++ void
++-parse_argument(const char *in, char *testname, char *binname)
+++parse_argument(const char *in, char *testname, char *binname, const char *inputdir)
++ {
++ 	const char *basename;
++ #ifdef WIN32
++@@ -65,7 +65,7 @@ parse_argument(const char *in, char *testname, char *binname)
++ 	if (strchr(in, DIR_SEP) == NULL)
++ 	{
++ 		strcpy(testname, in);
++-		sprintf(binname, "exe%c%s-test", DIR_SEP, in);
+++		sprintf(binname, "%s%cexe%c%s-test", inputdir, DIR_SEP, DIR_SEP, in);
++ 		return;
++ 	}
++ 
++@@ -127,7 +127,7 @@ int main(int argc, char **argv)
++ 	failures = 0;
++ 	for (i = 1, j = 1; i <= numtests; i++, j++)
++ 	{
++-		parse_argument(argv[j], testname, binname);
+++		parse_argument(argv[j], testname, binname, inputdir);
++ 		if (runtest(binname, testname, i, inputdir) != 0)
++ 			failures++;
++ 	}
++@@ -157,29 +157,29 @@ runtest(const char *binname, const char *testname, int testno, const char *input
++ #ifndef WIN32
++ 	snprintf(cmdline, sizeof(cmdline),
++ 			 "ODBCSYSINI=. ODBCINSTINI=./odbcinst.ini ODBCINI=./odbc.ini "
++-			 "%s > results/%s.out",
++-			 binname, testname);
+++			 "%s > %s/results/%s.out",
+++			 binname, inputdir, testname);
++ #else
++ 	snprintf(cmdline, sizeof(cmdline),
++-			 "%s > results\\%s.out",
++-			 binname, testname);
+++			 "%s > %s/results\\%s.out",
+++			 binname, inputdir, testname);
++ #endif
++ 	rc = system(cmdline);
++ 
++ 	diff = rundiff(testname, inputdir);
++ 	if (rc != 0)
++ 	{
++-		printf("not ok %d - %s test returned %d\n", testno, testname, rc);
+++		printf("FAIL: %d - %s\n\ttest returned %d\n", testno, testname, rc);
++ 		ret = 1;
++ 	}
++ 	else if (diff != 0)
++ 	{
++-		printf("not ok %d - %s test output differs\n", testno, testname);
+++		printf("FAIL: %d - %s\n\ttest output differs\n", testno, testname);
++ 		ret = 1;
++ 	}
++ 	else
++ 	{
++-		printf("ok %d - %s\n", testno, testname);
+++		printf("PASS: %d - %s\n", testno, testname);
++ 		ret = 0;
++ 	}
++ 	fflush(stdout);
++@@ -196,7 +196,7 @@ rundiff(const char *testname, const char *inputdir)
++ 	char	   *result;
++ 	size_t		result_len;
++ 
++-	snprintf(filename, sizeof(filename), "results/%s.out", testname);
+++	snprintf(filename, sizeof(filename), "%s/results/%s.out", inputdir, testname);
++ 	result = slurpfile(filename, &result_len);
++ 
++ 	outputno = 0;
++@@ -244,8 +244,8 @@ rundiff(const char *testname, const char *inputdir)
++ 	 * files and print the smallest diff?
++ 	 */
++ 	snprintf(cmdline, sizeof(cmdline),
++-			 "diff -c %s/expected/%s.out results/%s.out >> regression.diffs",
++-			 inputdir, testname, testname);
+++			 "diff -c %s/expected/%s.out %s/results/%s.out >> regression.diffs",
+++			 inputdir, testname, inputdir, testname);
++ 	if (system(cmdline) == -1)
++ 		printf("# diff failed\n");
++ 
++-- 
++2.8.2
++
+diff --git a/meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
+new file mode 100644
+index 0000000..1d98818
+--- /dev/null
++++ b/meta-oe/recipes-support/psqlodbc/files/psqlodbc-remove-some-checks-for-cross-compiling.patch
+@@ -0,0 +1,118 @@
++Subject: [PATCH] remove some checks for cross-compiling
++
++some lib check is not suitable for
++cross-compiling, so remove them.
++
++Upstream-Status: Inappropriate [not a real bug,just for cross-compiling]
++
++Signed-off-by: Song.Li <Song.Li@windriver.com>
++Signed-off-by: Kai Kang <kai.kang@windriver.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++---
++ configure.ac | 66 +++++++-----------------------------------------------------
++ 1 file changed, 7 insertions(+), 59 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index df5ad7a..b72bd4c 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -46,57 +46,19 @@ AC_ARG_WITH(iodbc, [  --with-iodbc[[=DIR]]	  [[default=no]] DIR is the iODBC bas
++ if test "$with_iodbc" != no; then
++ 	with_unixodbc=no
++ 	AC_DEFINE(WITH_IODBC, 1, [Define to 1 to build with iODBC support])
++-	if test "$with_iodbc" = yes; then
++-		AC_PATH_PROGS(ODBC_CONFIG, iodbc-config)
++-	else
++-		ODBC_CONFIG=$with_iodbc
++-	fi
++-	if test ! -x "${ODBC_CONFIG}/bin/iodbc-config"; then
++-		if test ! -x "${ODBC_CONFIG}"; then
++-			AC_MSG_ERROR([iodbc-config not found (required for iODBC build)])
++-		fi
++-	else
++-		ODBC_CONFIG=${ODBC_CONFIG}/bin/iodbc-config
++-	fi
++ fi
++ 
++ if test "$with_unixodbc" != no; then
++ 	AC_DEFINE(WITH_UNIXODBC, 1,
++             [Define to 1 to build with unixODBC support])
++-	if test "$with_unixodbc" = yes; then
++-		AC_PATH_PROGS(ODBC_CONFIG, odbc_config)
++-	else
++-		ODBC_CONFIG=$with_unixodbc
++-	fi
++-	if test ! -x "${ODBC_CONFIG}/bin/odbc_config"; then
++-		if test ! -x "${ODBC_CONFIG}"; then
++-			AC_MSG_ERROR([odbc_config not found (required for unixODBC build)])
++-		fi
++-	else
++-		ODBC_CONFIG=${ODBC_CONFIG}/bin/odbc_config
++-	fi
++ fi
++ 
++ #
++ # ODBC include and library
++ #
++-
++-if test "$ODBC_CONFIG" != ""; then
++-	if test "$with_iodbc" != no; then
++-		ODBC_INCLUDE=`${ODBC_CONFIG} --cflags`
++-		CPPFLAGS="$CPPFLAGS ${ODBC_INCLUDE}"
++-		# Linking libiodoc is rather problematic
++-		[ODBC_LIBDIR=`${ODBC_CONFIG} --libs | sed -e "s/^\(-L\|.*[ \t]-L\)\([^ \n\r\f\t]*\).*$/-L\2/"`]
++-		LDFLAGS="$LDFLAGS ${ODBC_LIBDIR}"
++-	else
++-		ODBC_INCLUDE=`${ODBC_CONFIG} --include-prefix`
++-		CPPFLAGS="$CPPFLAGS -I${ODBC_INCLUDE}"
++-		# Linking libodoc is rather problematic
++-		ODBC_LIBDIR=`${ODBC_CONFIG} --lib-prefix`
++-		LDFLAGS="$LDFLAGS -L${ODBC_LIBDIR}"
++-	fi
++-	AC_MSG_NOTICE([using $ODBC_INCLUDE $ODBC_LIBDIR])
++-fi
+++ODBC_LIBS="-lodbcinst"
+++LIBS="$LIBS ${ODBC_LIBS}"
+++AC_MSG_NOTICE([using $ODBC_INCLUDE $ODBC_LIBS])
++ 
++ #
++ # SQLCOLATTRIBUTE_SQLLEN check
++@@ -176,18 +138,10 @@ PGAC_ARG_BOOL(enable, pthreads, yes,
++ # Find libpq headers and libraries
++ #
++ 
++-if test -z "$PG_CONFIG"; then
++-  AC_PATH_PROGS(PG_CONFIG, pg_config)
++-fi
++-
++-if test -n "$PG_CONFIG"; then
++-  pg_includedir=`"$PG_CONFIG" --includedir`
++-  pg_libdir=`"$PG_CONFIG" --libdir`
++-  CPPFLAGS="$CPPFLAGS -I$pg_includedir"
++-  LDFLAGS="$LDFLAGS -L$pg_libdir"
++-fi
++-
++-
+++pg_includedir=""
+++pg_libdir=""
+++CPPFLAGS="$CPPFLAGS"
+++LDFLAGS="$LDFLAGS"
++ 
++ # 1. Programs
++ 
++@@ -211,12 +165,6 @@ if test "$with_iodbc" != no; then
++                  [AC_MSG_ERROR([iODBC library "iodbcinst" not found])])
++ fi
++ 
++-if test "$enable_pthreads" = yes; then
++-  AC_CHECK_LIB(pthreads, pthread_create,
++-               [],
++-	       [AC_CHECK_LIB(pthread, pthread_create)])
++-fi
++-
++ AC_CHECK_LIB(pq, PQsetSingleRowMode, [],
++ 	      [AC_MSG_ERROR([libpq library version >= 9.2 is required])])
++ 
++-- 
++2.8.1
++
+diff --git a/meta-oe/recipes-support/psqlodbc/psqlodbc.inc b/meta-oe/recipes-support/psqlodbc/psqlodbc.inc
+new file mode 100644
+index 0000000..5337b45
+--- /dev/null
++++ b/meta-oe/recipes-support/psqlodbc/psqlodbc.inc
+@@ -0,0 +1,50 @@
++SUMMARY = "ODBC driver for PostgreSQL"
++DESCRIPTION = "\
++ This package provides a driver that allows ODBC-enabled applications to \
++ access PostgreSQL databases.  ODBC is an abstraction layer that allows \
++ applications written for that layer to access databases in a manner \
++ that is relatively independent of the particular database management \
++ system. \
++ . \
++ You need to install this package if you want to use an application that \
++ provides database access through ODBC and you want that application to \
++ access a PostgreSQL database.  This package would need to be installed \
++ on the same machine as that client application; the PostgreSQL database \
++ server can be on a different machine and does not need any additional \
++ software to accept ODBC clients. \
++"
++SECTION = "libs"
++HOMEPAGE = "http://psqlodbc.projects.postgresql.org/"
++
++DEPENDS += "postgresql unixodbc"
++
++EXTRA_OECONF = "\
++    ac_cv_lib_ltdl_lt_dlopen=no \
++    ac_cv_lib_pq_PQconnectdb=yes \
++    --with-unixodbc=yes \
++    --with-libpq=${STAGING_LIBDIR}/.. \
++    --enable-pthreads \
++    --disable-unicode \
++    LIBS="-lpthread" \
++"
++
++inherit autotools pkgconfig ptest
++
++do_compile_ptest() {
++    oe_runmake -C ${B}/test
++}
++
++do_install_ptest() {
++    install -d ${D}${PTEST_PATH}
++    cp -a --no-preserve=ownership ${B}/test/exe ${S}/test/expected ${D}${PTEST_PATH}
++    install -m 0755 ${B}/test/reset-db ${D}${PTEST_PATH}
++    install -m 0755 ${B}/test/runsuite ${D}${PTEST_PATH}
++    install -m 0755 ${S}/test/odbcini-gen.sh ${D}${PTEST_PATH}
++    install -m 0755 ${S}/test/sampletables.sql ${D}${PTEST_PATH}
++    sed -i -e 's|@LIBDIR@|${libdir}|' ${D}${PTEST_PATH}/odbcini-gen.sh
++}
++
++FILES_${PN} += "${libdir}"
++
++# The tests need a local PostgreSQL server running
++RDEPENDS_${PN}-ptest = "postgresql"
+diff --git a/meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb b/meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb
+new file mode 100644
+index 0000000..6e1c8ab
+--- /dev/null
++++ b/meta-oe/recipes-support/psqlodbc/psqlodbc_09.05.0300.bb
+@@ -0,0 +1,14 @@
++require ${PN}.inc
++
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://license.txt;md5=6db3822fc7512e83087ba798da013692"
++
++SRC_URI = "http://ftp.postgresql.org/pub/odbc/versions/src/${BPN}-${PV}.tar.gz \
++    file://psqlodbc-remove-some-checks-for-cross-compiling.patch \
++    file://psqlodbc-donot-use-the-hardcode-libdir.patch \
++    file://psqlodbc-fix-for-ptest-support.patch \
++    file://run-ptest \
++"
++
++SRC_URI[md5sum] = "4c6e0b22187d7bb1c998ffac89e50f6b"
++SRC_URI[sha256sum] = "9521f328bf28aaaf5c8488dc89792b614f9d6271742c0baf9bb41c97537764a8"
+-- 
+2.7.4
 
 
