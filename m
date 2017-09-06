@@ -1,26 +1,26 @@
 Return-Path: <mark.hatle@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id ED99077D67
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4AF4577D67
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 19:29:34 +0000 (UTC)
+	Wed,  6 Sep 2017 19:29:36 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v86JTaUI022120
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86JTbFs032244
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Sep 2017 12:29:36 -0700 (PDT)
+	Wed, 6 Sep 2017 12:29:37 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 6 Sep 2017 12:29:35 -0700
+	Wed, 6 Sep 2017 12:29:37 -0700
 From: Mark Hatle <mark.hatle@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Sep 2017 14:23:03 -0500
-Message-ID: <1504725809-12825-6-git-send-email-mark.hatle@windriver.com>
+Date: Wed, 6 Sep 2017 14:23:05 -0500
+Message-ID: <1504725809-12825-8-git-send-email-mark.hatle@windriver.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/31] openlmi-tools: Only build if the necessary python pieces are available
+Subject: [PATCH 07/31] boinc-client: Add distro flag, requires opengl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,27 +36,26 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 X-List-Received-Date: Wed, 06 Sep 2017 19:29:36 -0000
 Content-Type: text/plain
 
-Since this isn't a python library it doesn't really belong to meta-python.
-But I couldn't figure out where else to move it to.
-
 Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
 ---
- meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-index b23869d..13e67cb 100644
---- a/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-+++ b/meta-oe/recipes-extended/openlmi/openlmi-tools_0.10.5.bb
-@@ -21,3 +21,8 @@ do_compile_prepend() {
- do_install_prepend() {
-     cd cli
- }
+diff --git a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb b/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+index ac5f755..99b43fa 100644
+--- a/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
++++ b/meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+@@ -39,7 +39,9 @@ SRC_URI = "https://github.com/BOINC/boinc/archive/client_release/7.6/${PV}.tar.g
+ SRC_URI[md5sum] = "437b4b98e384b4bda4ef7056e68166ac"
+ SRC_URI[sha256sum] = "c4b1c29b9655013e0ac61dddf47ad7f30f38c46159f02a9d9dc8ab854e99aa6d"
+ 
+-inherit gettext autotools-brokensep pkgconfig
++inherit gettext autotools-brokensep pkgconfig distro_features_check
 +
-+python() {
-+    if 'meta-python' not in d.getVar('BBFILE_COLLECTIONS').split():
-+        raise bb.parse.SkipRecipe('Requires meta-python to be present.')
-+}
++REQUIRED_DISTRO_FEATURES += "opengl"
+ 
+ S = "${WORKDIR}/${BPN}_release-7.6-${PV}"
+ 
 -- 
 1.8.3.1
 
