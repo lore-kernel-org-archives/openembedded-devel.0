@@ -1,38 +1,28 @@
 Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2908F6AC37
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2A6C96AC37
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 23:40:13 +0000 (UTC)
+	Wed,  6 Sep 2017 23:41:34 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86NeE5h005916
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 6 Sep 2017 16:40:14 -0700
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v86NfZos029001
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 6 Sep 2017 16:41:36 -0700 (PDT)
 Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 6 Sep 2017 16:40:12 -0700
+	Wed, 6 Sep 2017 16:41:34 -0700
 From: Mark Hatle <mark.hatle@windriver.com>
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>
+To: <openembedded-devel@lists.openembedded.org>
 References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
-	<1504725809-12825-30-git-send-email-mark.hatle@windriver.com>
-	<CALbNGRSzEDGhGK9bA+8oUeusKVqTHoCktFRPvuVQ9OQJ_NfKvg@mail.gmail.com>
-	<9fab8446-0159-e7c8-b81f-a4e7fa3a5882@windriver.com>
-	<CALbNGRRQAKUNR-X1U=vdc4dEzpobc5k+b_F8cS=u2VOi04s7MA@mail.gmail.com>
-	<65cc49bb-5a7e-c3f6-1e08-09a6bcb8ccab@windriver.com>
-	<CALbNGRS260modGqY+bkNV+R5XiONyVcdSQpE-eYLoR47VxqsRg@mail.gmail.com>
-	<c1bf1c61-de6e-6f5c-9130-7808c77666e5@windriver.com>
-	<CALbNGRQgzpBr5WywUZN9e1aFc0+Kj8RThJp-qNL89s4WN3=gEQ@mail.gmail.com>
-	<9d02cc47-76d7-50d8-d083-016b8b5e2896@windriver.com>
 Organization: Wind River Systems
-Message-ID: <ad48f790-de27-1dad-db61-f9fed786e110@windriver.com>
-Date: Wed, 6 Sep 2017 18:40:12 -0500
+Message-ID: <a1b92287-eaad-9dfa-17e1-8ffeb3d43ced@windriver.com>
+Date: Wed, 6 Sep 2017 18:41:34 -0500
 User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
 	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-In-Reply-To: <9d02cc47-76d7-50d8-d083-016b8b5e2896@windriver.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 29/31] xfce4-mixer: Remove, gstreamer-0.10 is obsolete
+In-Reply-To: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
+Subject: Re: [PATCH 00/31] Numerous patches to resolve yocto-compat-layer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,79 +35,135 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 23:40:14 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 23:41:35 -0000
 Content-Type: text/plain; charset="utf-8"
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-On 9/6/17 4:00 PM, Mark Hatle wrote:
-> On 9/6/17 3:53 PM, Andreas Müller wrote:
->>>> I am sure that I miss the point again but fedora - for me
->>>> reference/inspiration many times - has no problem with xfce4-mixer
->>>> [1].
->>>>
->>>> [1] http://pkgs.fedoraproject.org/cgit/rpms/xfce4-mixer.git/tree/xfce4-mixer.spec
->>>
->>> arch - https://bbs.archlinux.org/viewtopic.php?id=222294
->>> debian - https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=785846
->>> mageia - https://forums.mageia.org/en/viewtopic.php?f=15&t=10018
->>> Fedora - https://bugzilla.redhat.com/show_bug.cgi?id=1355763
->> ^ Yes you should look into this - that is exactly the problem I have.
->>>
->>> etc...  This is what I based the original commit message on.
->>>
->>> Just an FYI, the first part of my test WITHOUT the xfce4-mixer and
->>> gstreamer-0.10 removal just passed.
->> Passed what exactly?
+Current version of these patches, the v2 of 13/31 and the dropping of 29 and 31
+has been pushed to:
+
+git://git.openembedded.org/meta-openembedded-contrib
+mgh/yp-compat/master-next
+
+--Mark
+
+On 9/6/17 2:22 PM, Mark Hatle wrote:
+> This patch set attempts to address the 'yocto-compat-layer.py' failures.
 > 
-> ../scripts/yocto-compat-layer.py meta-openembedded
+> Many of the patches seem like obvious fixes or changes to me.. however some
+> of them are clearly dubious.
 > 
-> bitbake -S none world
-> bitbake -S none universe
-> bitbake xfce4-mixer florence  (with opengl and x11 distro features enabled, and
-> commercial license flag set)
+> I would not suggestion treating this as a single take them all or take none,
+> but as individual changes.. (a few of them may require prior changes...)
 > 
-> bitbake world (bringing in additional recipes that may collide or otherwise
-> impact with the two versions of gstreamer) is what I have in progress.
-
-The received the following failures:
-  meta-openembedded/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb:do_compile
-
-meta-openembedded/meta-perl/recipes-perl/libterm/libterm-readkey-perl_2.37.bb:do_compile
-
-virtual:native:meta-openembedded/meta-oe/recipes-extended/efivar/efivar_0.31.bb:do_compile
-  meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb:do_compile
-  meta-openembedded/meta-oe/recipes-extended/leveldb/leveldb_git.bb:do_compile
-  meta-openembedded/meta-oe/recipes-navigation/geoclue/geoclue_2.4.4.bb:do_compile
-
-None of these are related to any of the changes in this system or gstreamer.
-
-> The next step will be to verify packagegroups/images can at least construct
-> something without generating a file conflict error.
-
-bitbake packagegroup-tools-bluetooth packagegroup-basic packagegroup-boot
-packagegroup-sdk-target packagegroup-fonts-truetype packagegroup-xfce-multimedia
-packagegroup-xfce-base packagegroup-xfce-extended
-
-Passed.
-
-bitbake core-image-minimal-xfce core-image-minimal core-image-base core-image-sato
-
-Passed.
-
-So whatever caused the fault with gstreamer when I was building before has gone
-away.  I'm unable to reproduce it.  So patches 29 and 31 can be dropped from the
-set.
-
-> --Mark
+> Besides the standard git summary (below), I have attempted to summaries the
+> individual patches here to help with review:
 > 
->>> I will let it continue and will report on
->>> the status once the full test is complete.  (full test as in bitbake world)
->>>
->>> --Mark
->>>
->> Andreas
->>
+> [01/31] iproute2: Move tipc enablement to oe-core
+> [02/31] libml: Move to oe-core
+> - I will be sending up a corresponding patch to oe-core for these.  See the
+> other email ( iproute2: Move tipc enablement to oe-core ) for a description
+> of why this is necessary.
 > 
-
+> [03/31] openipmi: Move to meta-networking requires net-snmp
+> - openipmi in meta-oe requires net-snmp, but meta-oe doesn't depend on
+> meta-networking.  Easiest resolution was to move it.
+> 
+> [04/31] glmark2: Set required distro features to opengl
+> - Should be one of the 'obvious' fixes
+> 
+> [05/31] openlmi-tools: Only build if the necessary python
+> - This is one of the dubious patches.  I could not figure out an appropriate
+> place to 'move' this to that requires meta-python -- as the item itself does
+> not appear to be appriopriate to put into meta-python.
+> 
+> [06/31] xorg-drivers: Add opengl distro flag requirement to ati
+> [07/31] boinc-client: Add distro flag, requires opengl
+> - Another set of the 'obvious' fixes
+> 
+> [08/31] networkmanager-openvpn: requires openvpn from meta-networking
+> - requires openvpn from meta-networking, but meta-oe doesn't depend on
+> meta-networking.  Easiest resolution was to move it.
+> 
+> [09/31] telepathy-python: Move to meta-python, requires python-dbus
+> - This seems like a reasonable move to meta-python
+> 
+> [10/31] networkmanager: Move to meta-networking, requires dnsmasq
+> - This moves the rest of networkmanager to meta-networking
+> 
+> [11/31] python-ldap: Move to meta-networking, requires cyrus-sasl
+> - I originally was going to move to meta-python, but that doesn't depend on
+> meta-networking... so move it there instead
+> 
+> [12/31] python-networkmanager: Move to networking, requires networkmanager
+> - Due to the prior moves, move this as well to meta-networking
+> 
+> [13/31] corosync: Requires net-snmp from meta-networking
+> - Again move to meta-networking due to dep
+> 
+> [14/31] pywbem: Requires python-m2crypto-native (and others)
+> - This is one I'm not sure if it's the right thing or not.. but it does
+> require meta-python.. so move it.
+> 
+> [15/31] dlm: requires corosync, from meta-networking
+> - Again move to meta-networking due to prior move
+> 
+> [16/31] open-vm-tools: only build if meta-networking and meta-filesystems
+> - open-vm-tools requires libdnet (meta-networking) and fuse (meta-filesystem)
+> I think this is a dubious way to 'fix' the issue, but I really couldn't think
+> of a better way.
+> 
+> [17/31] miniupnpd: Move to meta-networking, requires libnetfilter-conntrack
+> - Move to meta-networking due to dependency...
+> 
+> [18/31] enable_gnome.conf: Move the AVAHI_GTK setting
+> - The yp-compat script does not allow a layer to modify the system wide
+> configuration (including modifying other recipe behavior).  The AVHAI_GTK
+> changes the behavior of that recipe, which is detected by the script.  So
+> I choose to move this to a configuration file that will need to be required
+> by the user IF they want avahi to use GTK.  I'm not happy with this, but I
+> don't see any other way to meet the requirements.
+> 
+> [19/31] glade3: Move PACKAGECONFIG setting to enable_gnome.conf
+> - Similar to the above, but with PACKAGECONFIG this time.
+> 
+> [20/31] libart-lgpg: Obsolete, replaced by version in oe-core
+> - OE core already has this version, remove it.
+> 
+> [21/31] pinpoint: Add dependency on opengl for cogl
+> - Add the required distro flag...
+> 
+> [22/31] vim: Remove xfce vim bbappend
+> - This breaks the same rule as 18 and 19.  I didn't see a way to 'fix it',
+> so I just removed the change.
+> 
+> [23/31] layer.conf: Add meta-networking for the networkmanager
+> - add meta-networking as a dependency to meta-gnome for networkmanager
+> this is due to the move above
+> 
+> [24/31] meta-xfce: depend on meta-multimedia
+> - There was a duplicate openembedded-layer entry, but I think it was
+> supposed to be for meta-multimedia.  This resolves a bunch of dependency
+> errors.
+> 
+> [25/31] mpv: Requires ffmpeg which has a LICENSE_FLAGS =
+> [26/31] recipes-multimedia: Add LICENSE_FLAGS
+> [27/31] recipes-multimedia: Add LICENSE_FLAGS
+> - Above items all get LICENSE_FLAGS added to match their dependencies.  This
+> resolves a dependency issue where the required item(s) are not avaialable.
+> 
+> [28/31] libmtp: remove 'mtp-tools' from PACKAGES
+> - This is a real bug in mtp-tools, and needs to be fixed.
+> 
+> [29/31] xfce4-mixer: Remove, gstreamer-0.10 is obsolete
+> - There is no 'fix' for xfce4-mixer using gstreamer-0.10, so remove it...
+> 
+> [30/31] florence: update 0.6.3
+> - Use Andreas Muller's patch from Oct 2016 to git rid of the gstreamer-0.10
+> dependency.  Resolve the issue with requiring gtk+3.
+> 
+> [31/31] gstreamer-0.10: Remove as all users are gone and it is
+> - Remove gstreamer-0.10 as all of the users are now gone.  (This resolves
+> various preferred provider issues I observed..)
 
