@@ -1,25 +1,35 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D95B71D9F;
-	Tue,  5 Sep 2017 21:51:24 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v85LpQhG001516
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 5 Sep 2017 14:51:26 -0700
-Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 5 Sep 2017 14:51:24 -0700
-To: <openembedded-devel@lists.openembedded.org>, Patches and discussions about
-	the oe-core layer <openembedded-core@lists.openembedded.org>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <48bb4cd8-e3c9-542e-e0d0-7dbac226dc54@windriver.com>
-Date: Tue, 5 Sep 2017 16:51:24 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
-	Gecko/20100101 Thunderbird/52.3.0
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 037B4605BE
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  6 Sep 2017 01:01:51 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v8611pGD026440
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Tue, 5 Sep 2017 18:01:51 -0700 (PDT)
+Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.180]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
+	Tue, 5 Sep 2017 18:01:51 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH 2/2] corosync: add support for extra
+	features
+Thread-Index: AQHTJkK5SvQTXHSoiku2dYAeLub5m6KnClsw
+Date: Wed, 6 Sep 2017 01:01:50 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
+References: <cover.1503998700.git.jackie.huang@windriver.com>
+	<6286ca12b20fb1972ee77d1fc217eb7ebbf60080.1503998700.git.jackie.huang@windriver.com>
+	<CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
+In-Reply-To: <CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.176.154]
 MIME-Version: 1.0
-Subject: iproute2 - meta-openembedded/libmnl and Yocto Project compat
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] corosync: add support for extra features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,38 +42,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Sep 2017 21:51:25 -0000
-Content-Type: text/plain; charset="utf-8"
+X-List-Received-Date: Wed, 06 Sep 2017 01:01:52 -0000
 Content-Language: en-US
-Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-The patch to oe-core:
-
-commit 944ef0de241de77429ab0e5cb1dd4a7f355cf3fd
-Author: Yi Zhao <yi.zhao@windriver.com>
-Date:   Tue Aug 15 15:38:36 2017 +0800
-
-    iproute2: add tipc support
-
-added tipc support.  This is part of the work that originated in
-meta-openembedded.  However, the default of enabling tipc was not done as it
-requires libmnl, which is only available meta-networking... and we didn't catch
-this until after feature freeze.
-
-So in meta-openembedded -- there is a single .bbappend to iproute2 that sets
-PACKAGECONFIG_append = " tipc"
-
-(Without this change, the tipc-utils fails to build, because it requires
-iproute2-tipc.  Unfortunately there is no way for tipc-utils to check the
-configuration of iproute2 to make this dependency required or not.)
-
-This works -- but this type of thing is forbidden in the yocto-compat-layer.py
-script.
-
-The only way I can see to resolve this issue is to move libmnl into oe-core, as
-well as make the tipc setting the default for iproute2.
-
-I'm open to alternatives, but I'm kind of stuck here otherwise.
-
---Mark
+WWVzLCBzdXJlLCBidXQgSSBjYW7igJl0IHJlcHJvZHVjZSB0aGlzLCBjb3VsZCB5b3Ugc2hvdyBt
+ZSB0aGUgY29uZmlnIHRoYXQgaGFkIHRoaXMgaXNzdWU/IFRoYW5rcyENCg0KVGhhbmtzLA0KSmFj
+a2llDQoNCkZyb206IE1hcnRpbiBKYW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21d
+DQpTZW50OiBUdWVzZGF5LCBTZXB0ZW1iZXIgMDUsIDIwMTcgMjA6MzANClRvOiBIdWFuZywgSmll
+IChKYWNraWUpDQpDYzogb3BlbmVtYmVkZGVkLWRldmVsDQpTdWJqZWN0OiBSZTogW29lXSBbbWV0
+YS1vZV1bUEFUQ0ggMi8yXSBjb3Jvc3luYzogYWRkIHN1cHBvcnQgZm9yIGV4dHJhIGZlYXR1cmVz
+DQoNCkNhbiB5b3UgcGxlYXNlIGFsc28gZml4Og0KY29yb3N5bmMtMi40LjI6IEVMRiBiaW5hcnkg
+Jy90bXAvd29yay9jb3JlMi02NC1vZS1saW51eC9jb3Jvc3luYy8yLjQuMi1yMC9wYWNrYWdlcy1z
+cGxpdC9jb3Jvc3luYy91c3Ivc2Jpbi9jb3Jvc3luYycgaGFzIHJlbG9jYXRpb25zIGluIC50ZXh0
+IFt0ZXh0cmVsXQ0KDQppdCdzIGJlZW4gdGhlcmUgZm9yIGxvbmcgdGltZS4NCg0KT24gVHVlLCBB
+dWcgMjksIDIwMTcgYXQgMTE6MjcgQU0sIDxqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbTxtYWls
+dG86amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+PiB3cm90ZToNCkZyb206IEphY2tpZSBIdWFu
+ZyA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb208bWFpbHRvOmphY2tpZS5odWFuZ0B3aW5kcml2
+ZXIuY29tPj4NCg0KKiBBZGQgc3VwcG9ydCBmb3IgZmVhdHVyZXM6IGRidXMgcWRldmljZSBxbmV0
+ZCBzbm1wDQoqIEFkZCByZWxhdGVkIFBBQ0tBR0VDT05GSUcNCiogaW5oZXJpdCB1c2VyYWRkIHRv
+IGFkZCBwcm9wZXIgdXNlciBmb3IgcW5ldGQgc2VydmljZQ0KDQpTaWduZWQtb2ZmLWJ5OiBKYWNr
+aWUgSHVhbmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPG1haWx0bzpqYWNraWUuaHVhbmdA
+d2luZHJpdmVyLmNvbT4+DQotLS0NCiAuLi4vcmVjaXBlcy1leHRlbmRlZC9jb3Jvc3luYy9jb3Jv
+c3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+ICAgIHwgMzAgKysrKysrKysr
+KysrKysrKysrKy0tLQ0KIDEgZmlsZSBjaGFuZ2VkLCAyNyBpbnNlcnRpb25zKCspLCAzIGRlbGV0
+aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nvcm9zeW5j
+L2Nvcm9zeW5jXzIuNC4yLmJiPGh0dHA6Ly9jb3Jvc3luY18yLjQuMi5iYj4gYi9tZXRhLW9lL3Jl
+Y2lwZXMtZXh0ZW5kZWQvY29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nvcm9zeW5j
+XzIuNC4yLmJiPg0KaW5kZXggMmYzYWVmMjk5Li43ZDVhODdlNGMgMTAwNjQ0DQotLS0gYS9tZXRh
+LW9lL3JlY2lwZXMtZXh0ZW5kZWQvY29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nv
+cm9zeW5jXzIuNC4yLmJiPg0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nvcm9zeW5j
+L2Nvcm9zeW5jXzIuNC4yLmJiPGh0dHA6Ly9jb3Jvc3luY18yLjQuMi5iYj4NCkBAIC01LDcgKzUs
+NyBAQCBIT01FUEFHRSA9ICJodHRwOi8vY29yb3N5bmMuZ2l0aHViLmlvL2Nvcm9zeW5jLyINCg0K
+IFNFQ1RJT04gPSAiYmFzZSINCg0KLWluaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZyBzeXN0ZW1k
+DQoraW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnIHN5c3RlbWQgdXNlcmFkZA0KDQogU1JDX1VS
+SSA9ICJodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMub3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyR7QlB9
+LnRhci5nejxodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMub3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyQl
+N2JCUCU3ZC50YXIuZ3o+Ig0KIFNSQ19VUklbbWQ1c3VtXSA9ICI1NDdmYTc4NzA0ZGE1M2FhMzU5
+MTJiZTU4ZDMxMDM1ZiINCkBAIC0xNiwxMyArMTYsMjMgQEAgTElDX0ZJTEVTX0NIS1NVTSA9ICJm
+aWxlOi8vTElDRU5TRTttZDU9YTg1ZWI0Y2UyNDAzM2FkYjYwODhkZDFkNmZmYzVlNWQ8ZmlsZTov
+Ly9cXExJQ0VOU0U7bWQ1PWE4NWViNGNlMjQwMzNhZGI2MDg4ZGQxZDZmZmM1ZTVkPiINCg0KIERF
+UEVORFMgPSAiZ3JvZmYtbmF0aXZlIG5zcyBsaWJxYiINCg0KLVNZU1RFTURfU0VSVklDRV8ke1BO
+fSA9ICJjb3Jvc3luYy5zZXJ2aWNlIGNvcm9zeW5jLW5vdGlmeWQuc2VydmljZSINCitTWVNURU1E
+X1NFUlZJQ0VfJHtQTn0gPSAiY29yb3N5bmMuc2VydmljZSBjb3Jvc3luYy1ub3RpZnlkLnNlcnZp
+Y2UgXA0KKyAgICAgICAgICAgICAgICAgICAgICAgICAke0BiYi51dGlscy5jb250YWlucygnUEFD
+S0FHRUNPTkZJRzxtYWlsdG86JCU3YkBiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRz4n
+LCAncWRldmljZScsICdjb3Jvc3luYy1xZGV2aWNlLnNlcnZpY2UnLCAnJywgZCl9IFwNCisgICAg
+ICAgICAgICAgICAgICAgICAgICAgJHtAYmIudXRpbHMuY29udGFpbnMoJ1BBQ0tBR0VDT05GSUc8
+bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ1BBQ0tBR0VDT05GSUc+JywgJ3FuZXRkJywg
+J2Nvcm9zeW5jLXFuZXRkLnNlcnZpY2UnLCAnJywgZCl9IFwNCisiDQogU1lTVEVNRF9BVVRPX0VO
+QUJMRSA9ICJlbmFibGUiDQoNCiBJTklUU0NSSVBUX05BTUUgPSAiY29yb3N5bmMtZGFlbW9uIg0K
+DQotUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVT
+JywgJ3N5c3RlbWQnLCBkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuZmlsdGVyKCdESVNUUk9fRkVB
+VFVSRVMnLCUyMCdzeXN0ZW1kJywlMjBkKSU3ZD4iDQorUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJi
+LnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywgJ3N5c3RlbWQnLCBkKX0gXA0KKyAgICAg
+ICAgICAgICAgICAgICBkYnVzIHFkZXZpY2UgcW5ldGQgc25tcCBcDQorPG1haWx0bzokJTdiQGJi
+LnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywlMjAnc3lzdGVtZCcsJTIwZCklN2QlMjBc
+JTBiK8KgJTIwwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgZGJ1cyUy
+MHFkZXZpY2UlMjBxbmV0ZCUyMHNubXAlMjBcJTBiKz4iDQoNCitQQUNLQUdFQ09ORklHW2RidXNd
+ID0gIi0tZW5hYmxlLWRidXMsLS1kaXNhYmxlLWRidXMsZGJ1cyINCitQQUNLQUdFQ09ORklHW3Fk
+ZXZpY2VdID0gIi0tZW5hYmxlLXFkZXZpY2VzLC0tZGlzYWJsZS1xZGV2aWNlcyINCitQQUNLQUdF
+Q09ORklHW3FuZXRkXSA9ICItLWVuYWJsZS1xbmV0ZCwtLWRpc2FibGUtcW5ldGQiDQorUEFDS0FH
+RUNPTkZJR1tyZG1hXSA9ICItLWVuYWJsZS1yZG1hLC0tZGlzYWJsZS1yZG1hIg0KK1BBQ0tBR0VD
+T05GSUdbc25tcF0gPSAiLS1lbmFibGUtc25tcCwtLWRpc2FibGUtc25tcCxuZXQtc25tcCINCiBQ
+QUNLQUdFQ09ORklHW3N5c3RlbWRdID0gIi0tZW5hYmxlLXN5c3RlbWQgLS13aXRoLXN5c3RlbWRk
+aXI9JHtzeXN0ZW1kX3N5c3RlbV91bml0ZGlyfSwtLWRpc2FibGUtc3lzdGVtZCAtLXdpdGhvdXQt
+c3lzdGVtZGRpcixzeXN0ZW1kIg0KDQogRVhUUkFfT0VDT05GID0gImFjX2N2X3BhdGhfQkFTSFBB
+VEg9JHtiYXNlX2JpbmRpcn0vYmFzaCINCkBAIC00MywxMiArNTMsMjYgQEAgZG9faW5zdGFsbF9h
+cHBlbmQoKSB7DQogICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC92b2xh
+dGlsZXMNCiAgICAgZWNobyAiZCByb290IHJvb3QgMDc1NSAke2xvY2Fsc3RhdGVkaXJ9L2xvZy9j
+bHVzdGVyIG5vbmUiID4gJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC92b2xhdGlsZXMvMDVfY29y
+b3N5bmMNCg0KKyAgICBpZiAke0BiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRzxtYWls
+dG86JCU3YkBiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRz4nLCAncW5ldGQnLCAndHJ1
+ZScsICdmYWxzZScsIGQpfTsgdGhlbg0KKyAgICAgICAgY2hvd24gLVIgY29yb3FuZXRkOmNvcm9x
+bmV0ZCAke0R9JHtzeXNjb25mZGlyfS8ke0JQTn0vcW5ldGQNCisgICAgICAgIGVjaG8gImQgY29y
+b3FuZXRkIGNvcm9xbmV0ZCAwNzcwIC92YXIvcnVuL2Nvcm9zeW5jLXFuZXRkIG5vbmUiID4+ICR7
+RH0ke3N5c2NvbmZkaXJ9L2RlZmF1bHQvdm9sYXRpbGVzLzA1X2Nvcm9zeW5jDQorICAgIGZpDQor
+DQogICAgIGlmICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCdzeXN0ZW1k
+JywndHJ1ZScsJ2ZhbHNlJyxkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RS
+T19GRUFUVVJFUycsJ3N5c3RlbWQnLCd0cnVlJywnZmFsc2UnLGQpJTdkPjsgdGhlbg0KICAgICAg
+ICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kDQogICAgICAgICBlY2hv
+ICJkICR7bG9jYWxzdGF0ZWRpcn0vbG9nL2NsdXN0ZXIgLSAtIC0gLSIgPiAke0R9JHtzeXNjb25m
+ZGlyfS90bXBmaWxlcy5kL2Nvcm9zeW5jLmNvbmYNCisNCisgICAgICAgIGlmICR7QGJiLnV0aWxz
+LmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQ
+QUNLQUdFQ09ORklHPicsICdxbmV0ZCcsICd0cnVlJywgJ2ZhbHNlJywgZCl9OyB0aGVuDQorICAg
+ICAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7U30vY29uZi90bXBmaWxlcy5kL2Nvcm9zeW5jLXFu
+ZXRkLmNvbmYgJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZA0KKyAgICAgICAgZmkNCiAgICAg
+ZmkNCiB9DQoNCiBSREVQRU5EU18ke1BOfSArPSAiYmFzaCINCg0KIEZJTEVTXyR7UE59LWRiZyAr
+PSAiJHtsaWJleGVjZGlyfS9sY3Jzby8uZGVidWciDQorRklMRVNfJHtQTn0tZG9jICs9ICIke2Rh
+dGFkaXJ9L3NubXAvbWlicy9DT1JPU1lOQy1NSUIudHh0Ig0KKw0KK1VTRVJBRERfUEFDS0FHRVMg
+PSAiJHtQTn0iDQorR1JPVVBBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0ZW0gY29yb3FuZXRkIg0K
+K1VTRVJBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0ZW0gLWQgLyAtTSAtcyAvYmluL25vbG9naW4g
+LWMgJ1VzZXIgZm9yIGNvcm9zeW5jLXFuZXRkJyAtZyBjb3JvcW5ldGQgY29yb3FuZXRkIg0KLS0N
+CjIuMTEuMA0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
+b3BlbmVtYmVkZGVkLm9yZz4NCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4v
+bGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQoNCg==
 
