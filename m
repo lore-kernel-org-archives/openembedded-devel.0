@@ -1,26 +1,26 @@
 Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id BE4DB77B95
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 86C1377DC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 19:29:41 +0000 (UTC)
+	Wed,  6 Sep 2017 19:29:42 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86JThBD032250
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v86JTiYb022132
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Sep 2017 12:29:43 -0700
+	Wed, 6 Sep 2017 12:29:44 -0700 (PDT)
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 6 Sep 2017 12:29:42 -0700
+	Wed, 6 Sep 2017 12:29:43 -0700
 From: Mark Hatle <mark.hatle@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Sep 2017 14:23:11 -0500
-Message-ID: <1504725809-12825-14-git-send-email-mark.hatle@windriver.com>
+Date: Wed, 6 Sep 2017 14:23:12 -0500
+Message-ID: <1504725809-12825-15-git-send-email-mark.hatle@windriver.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 13/31] corosync: Requires net-snmp from meta-networking
+Subject: [PATCH 14/31] pywbem: Requires python-m2crypto-native (and others) from meta-python
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,185 +33,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 19:29:41 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 19:29:42 -0000
 Content-Type: text/plain
+
+Move pywbem to the meta-python layer to avoid missing requirements.
 
 Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
 ---
- .../recipes-extended/corosync/corosync_2.4.2.bb    | 78 ++++++++++++++++++++++
- .../recipes-extended/corosync/corosync_2.4.2.bb    | 78 ----------------------
- 2 files changed, 78 insertions(+), 78 deletions(-)
- create mode 100644 meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
- delete mode 100644 meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
+ meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb    | 36 ----------------------
+ .../recipes-extended/pywbem/pywbem_0.8.0.bb        | 36 ++++++++++++++++++++++
+ 2 files changed, 36 insertions(+), 36 deletions(-)
+ delete mode 100644 meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
+ create mode 100644 meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb
 
-diff --git a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb b/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-new file mode 100644
-index 0000000..7d5a87e
---- /dev/null
-+++ b/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-@@ -0,0 +1,78 @@
-+SUMMARY = "The Corosync Cluster Engine and Application Programming Interfaces"
-+DESCRIPTION = "This package contains the Corosync Cluster Engine Executive, several default \
-+APIs and libraries, default configuration files, and an init script."
-+HOMEPAGE = "http://corosync.github.io/corosync/"
-+
-+SECTION = "base"
-+
-+inherit autotools pkgconfig systemd useradd
-+
-+SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
-+SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
-+SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
-+
-+DEPENDS = "groff-native nss libqb"
-+
-+SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
-+                         ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
-+                         ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'corosync-qnetd.service', '', d)} \
-+"
-+SYSTEMD_AUTO_ENABLE = "enable"
-+
-+INITSCRIPT_NAME = "corosync-daemon"
-+
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
-+                   dbus qdevice qnetd snmp \
-+"
-+
-+PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus"
-+PACKAGECONFIG[qdevice] = "--enable-qdevices,--disable-qdevices"
-+PACKAGECONFIG[qnetd] = "--enable-qnetd,--disable-qnetd"
-+PACKAGECONFIG[rdma] = "--enable-rdma,--disable-rdma"
-+PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
-+PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
-+
-+EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
-+EXTRA_OEMAKE = "tmpfilesdir_DATA="
-+
-+do_configure_prepend() {
-+    ( cd ${S}
-+    ${S}/autogen.sh )
-+}
-+
-+do_install_append() {
-+    install -d ${D}${sysconfdir}/sysconfig/
-+    install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
-+    install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
-+
-+    rm -rf "${D}${localstatedir}/run"
-+
-+    install -d ${D}${sysconfdir}/default/volatiles
-+    echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
-+
-+    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-+        chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
-+        echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >> ${D}${sysconfdir}/default/volatiles/05_corosync
-+    fi
-+
-+    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+        install -d ${D}${sysconfdir}/tmpfiles.d
-+        echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
-+
-+        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-+            install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
-+        fi
-+    fi
-+}
-+
-+RDEPENDS_${PN} += "bash"
-+
-+FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
-+FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
-+
-+USERADD_PACKAGES = "${PN}"
-+GROUPADD_PARAM_${PN} = "--system coroqnetd"
-+USERADD_PARAM_${PN} = "--system -d / -M -s /bin/nologin -c 'User for corosync-qnetd' -g coroqnetd coroqnetd"
-diff --git a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb b/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
+diff --git a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
 deleted file mode 100644
-index 7d5a87e..0000000
---- a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb
+index 7f1986e..0000000
+--- a/meta-oe/recipes-extended/pywbem/pywbem_0.8.0.bb
 +++ /dev/null
-@@ -1,78 +0,0 @@
--SUMMARY = "The Corosync Cluster Engine and Application Programming Interfaces"
--DESCRIPTION = "This package contains the Corosync Cluster Engine Executive, several default \
--APIs and libraries, default configuration files, and an init script."
--HOMEPAGE = "http://corosync.github.io/corosync/"
+@@ -1,36 +0,0 @@
+-SUMMARY = "Python WBEM Client and Provider Interface"
+-DESCRIPTION = "\
+-A Python library for making CIM (Common Information Model) operations over \
+-HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
+-WBEM client should be easy to use and not necessarily require a large amount \
+-of programming knowledge. It is suitable for a large range of tasks from \
+-simply poking around to writing web and GUI applications. \
+-\
+-WBEM, or Web Based Enterprise Management is a manageability protocol, like \
+-SNMP, standardised by the Distributed Management Task Force (DMTF) available \
+-at http://www.dmtf.org/standards/wbem. \
+-\
+-It also provides a Python provider interface, and is the fastest and easiest \
+-way to write providers on the planet."
+-HOMEPAGE = "http://pywbem.sf.net/"
+-LICENSE = "LGPLv2"
+-LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+-SECTION = "Development/Libraries"
+-DEPENDS = "python-m2crypto-native python-typing-native"
+-SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
+-SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
+-SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
 -
--SECTION = "base"
+-S = "${WORKDIR}/${BP}-dev"
 -
--inherit autotools pkgconfig systemd useradd
--
--SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
--SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
--SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
--
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
--
--DEPENDS = "groff-native nss libqb"
--
--SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
--                         ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
--                         ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'corosync-qnetd.service', '', d)} \
--"
--SYSTEMD_AUTO_ENABLE = "enable"
--
--INITSCRIPT_NAME = "corosync-daemon"
--
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)} \
--                   dbus qdevice qnetd snmp \
--"
--
--PACKAGECONFIG[dbus] = "--enable-dbus,--disable-dbus,dbus"
--PACKAGECONFIG[qdevice] = "--enable-qdevices,--disable-qdevices"
--PACKAGECONFIG[qnetd] = "--enable-qnetd,--disable-qnetd"
--PACKAGECONFIG[rdma] = "--enable-rdma,--disable-rdma"
--PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
--PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
--
--EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
--EXTRA_OEMAKE = "tmpfilesdir_DATA="
--
--do_configure_prepend() {
--    ( cd ${S}
--    ${S}/autogen.sh )
--}
+-inherit setuptools python-dir
 -
 -do_install_append() {
--    install -d ${D}${sysconfdir}/sysconfig/
--    install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
--    install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
+-    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
+-    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
 -
--    rm -rf "${D}${localstatedir}/run"
--
--    install -d ${D}${sysconfdir}/default/volatiles
--    echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
--
--    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
--        chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
--        echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >> ${D}${sysconfdir}/default/volatiles/05_corosync
--    fi
--
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
--        install -d ${D}${sysconfdir}/tmpfiles.d
--        echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
--
--        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
--            install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
--        fi
--    fi
+-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
+-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
 -}
 -
--RDEPENDS_${PN} += "bash"
--
--FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
--FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
--
--USERADD_PACKAGES = "${PN}"
--GROUPADD_PARAM_${PN} = "--system coroqnetd"
--USERADD_PARAM_${PN} = "--system -d / -M -s /bin/nologin -c 'User for corosync-qnetd' -g coroqnetd coroqnetd"
+-BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb
+new file mode 100644
+index 0000000..7f1986e
+--- /dev/null
++++ b/meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Python WBEM Client and Provider Interface"
++DESCRIPTION = "\
++A Python library for making CIM (Common Information Model) operations over \
++HTTP using the WBEM CIM-XML protocol. It is based on the idea that a good \
++WBEM client should be easy to use and not necessarily require a large amount \
++of programming knowledge. It is suitable for a large range of tasks from \
++simply poking around to writing web and GUI applications. \
++\
++WBEM, or Web Based Enterprise Management is a manageability protocol, like \
++SNMP, standardised by the Distributed Management Task Force (DMTF) available \
++at http://www.dmtf.org/standards/wbem. \
++\
++It also provides a Python provider interface, and is the fastest and easiest \
++way to write providers on the planet."
++HOMEPAGE = "http://pywbem.sf.net/"
++LICENSE = "LGPLv2"
++LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
++SECTION = "Development/Libraries"
++DEPENDS = "python-m2crypto-native python-typing-native"
++SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
++SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
++SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
++
++S = "${WORKDIR}/${BP}-dev"
++
++inherit setuptools python-dir
++
++do_install_append() {
++    mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
++    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
++
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
++    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
++}
++
++BBCLASSEXTEND = "native"
 -- 
 1.8.3.1
 
