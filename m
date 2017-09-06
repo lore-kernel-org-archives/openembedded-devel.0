@@ -1,26 +1,26 @@
 Return-Path: <mark.hatle@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 6380D77DC8
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 9929677E68
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 19:29:48 +0000 (UTC)
+	Wed,  6 Sep 2017 19:29:49 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v86JTonM027114
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86JTp7i032260
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 6 Sep 2017 12:29:50 -0700 (PDT)
+	Wed, 6 Sep 2017 12:29:51 -0700
 Received: from msp-lpggp1.wrs.com (172.25.34.110) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 6 Sep 2017 12:29:49 -0700
+	Wed, 6 Sep 2017 12:29:50 -0700
 From: Mark Hatle <mark.hatle@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 6 Sep 2017 14:23:19 -0500
-Message-ID: <1504725809-12825-22-git-send-email-mark.hatle@windriver.com>
+Date: Wed, 6 Sep 2017 14:23:20 -0500
+Message-ID: <1504725809-12825-23-git-send-email-mark.hatle@windriver.com>
 X-Mailer: git-send-email 1.8.3.1
 In-Reply-To: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 21/31] pinpoint: Add dependency on opengl for cogl
+Subject: [PATCH 22/31] vim: Remove xfce vim bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,30 +33,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 19:29:48 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 19:29:49 -0000
 Content-Type: text/plain
+
+Changing the behavior of a recipe by including a layer is not allowed
+by the yocto-compat-layer script.
 
 Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
 ---
- meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ meta-xfce/recipes-support/vim/vim_%.bbappend | 6 ------
+ 1 file changed, 6 deletions(-)
+ delete mode 100644 meta-xfce/recipes-support/vim/vim_%.bbappend
 
-diff --git a/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb b/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
-index 5e902a1..bf5178c 100644
---- a/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
-+++ b/meta-gnome/recipes-apps/pinpoint/pinpoint_git.bb
-@@ -9,7 +9,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=fbc093901857fcd118f065f900982c24 \
- 
- DEPENDS = "glib-2.0 gdk-pixbuf cogl-1.0 clutter-1.0 clutter-gst-3.0 librsvg"
- 
--inherit autotools gettext pkgconfig
-+inherit autotools gettext pkgconfig distro_features_check
-+
-+# cogl requires opengl
-+REQUIRED_DISTRO_FEATURES = "opengl"
- 
- SRC_URI = "git://git.gnome.org/pinpoint"
- 
+diff --git a/meta-xfce/recipes-support/vim/vim_%.bbappend b/meta-xfce/recipes-support/vim/vim_%.bbappend
+deleted file mode 100644
+index 25403e6..0000000
+--- a/meta-xfce/recipes-support/vim/vim_%.bbappend
++++ /dev/null
+@@ -1,6 +0,0 @@
+-do_install_append() {
+-	# The mouse being autoenabled is just annoying in xfce4-terminal (mouse
+-	# drag make vim go into visual mode and there is no right click menu),
+-	# delete the block.
+-	sed -i '/the mouse works just fine/,+4d' ${D}/${datadir}/${BPN}/vimrc
+-}
 -- 
 1.8.3.1
 
