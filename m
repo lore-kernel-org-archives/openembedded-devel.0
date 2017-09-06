@@ -1,31 +1,53 @@
-Return-Path: <mark.hatle@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 24ACC6025E
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 59CCB77E93
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 20:15:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86KFhOk001177
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 6 Sep 2017 13:15:43 -0700
-Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 6 Sep 2017 13:15:42 -0700
-To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>
-References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
-	<1504725809-12825-31-git-send-email-mark.hatle@windriver.com>
-	<CALbNGRTmfx=4wMisDjkpkLmudikRdtf21YFtPjCK1FJJw7JMFQ@mail.gmail.com>
-From: Mark Hatle <mark.hatle@windriver.com>
-Organization: Wind River Systems
-Message-ID: <25388b3d-1aef-a470-72bd-21d7dc6b995e@windriver.com>
-Date: Wed, 6 Sep 2017 15:15:42 -0500
-User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
-	Gecko/20100101 Thunderbird/52.3.0
+	Wed,  6 Sep 2017 20:21:12 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id f4so3604915wmh.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Sep 2017 13:21:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=93pcsedChQr2KLGI3oCvH1C1xChJTcyNCmubX76vdUo=;
+	b=KvjHARwKZkAZobteXiErxKd27eR5HZf36GMQCSuWEtsUzJmFWUATTEWLkC6LOHX2N3
+	luTpDhbYyzn4siRmSUnGIYE3CmV/9etIGPJrU9K83lJwrgkyXK+5WTAuPymYwIrbUrE+
+	ZgitxhD6a7Lt5387l3nwiyr2ZLESxMLKG7LNkzMFFZ8ayoV0NQx963yGB/gC1JPYUB8T
+	6JC00VBNYi0/xnCWeFFDZvR9zwEyJrnnN8vxiZoOcdzZ1irHyfg4xYD7SuVi/xadRwO4
+	InycEG3o1sn0XndFVOohuMkQ7cFEAAygnYEP1/x2Jd/rQieSfXxRkaNpYoSZzEYQq1Vz
+	5xNQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=93pcsedChQr2KLGI3oCvH1C1xChJTcyNCmubX76vdUo=;
+	b=AAXjdS0miu3IPDteB8AIHIgq4Z5aJPfo9u0sRvkXfOuMUE87doOkMRbxjrnMvg5HIX
+	MTIThH4hzT6sC6IB8NlGTQAVdJIecU8xSQcU+CynZFpO4HF2GVQIoFBSQiY72lyyHMnP
+	4h/ghUEeAtd5JvbjDi/2jYRB9RM2GB4xis/dIWV+nu4xvfNytBUtgw0A/rb5L9Xd0VCQ
+	mHB7A+D8+PJA5oGpszCHdDFAv1/q3th/N+t3Dob4KFrRvgMeO1EXS/YyuAGLOFHazAPi
+	/oZFf63JtQDvUWp3311BmOMsg/Gim8CheZO8NfKdvYmrwhLajAPBSN1DtFJ7eHXAyUYB
+	iZnA==
+X-Gm-Message-State: AHPjjUjheN3r5GmOzhxGmDTWlmGSBiG1Jvmul+7sjeYs2tPKRK6vzEqX
+	ty3dlwlbmXGDP5DG
+X-Google-Smtp-Source: ADKCNb42N2uxyBPneAMadmjWPnR+7Doye+oPJ1PLwtLREhnyf23jczAdxzI5ay1VyjUpjfGA+GrJFQ==
+X-Received: by 10.28.21.80 with SMTP id 77mr617198wmv.77.1504729272935;
+	Wed, 06 Sep 2017 13:21:12 -0700 (PDT)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030046E901F2641E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:46:e901:f264:1e6f:65ff:fe3e:7f61])
+	by smtp.googlemail.com with ESMTPSA id
+	s9sm281786wra.73.2017.09.06.13.21.12
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Sep 2017 13:21:12 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Sep 2017 22:21:01 +0200
+Message-Id: <20170906202101.2983-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.5
 MIME-Version: 1.0
-In-Reply-To: <CALbNGRTmfx=4wMisDjkpkLmudikRdtf21YFtPjCK1FJJw7JMFQ@mail.gmail.com>
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 30/31] florence: update 0.6.3
+Subject: [meta-xfce][PATCH] meta-xfce: remove me as maintainer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,35 +60,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 20:15:43 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Language: en-US
+X-List-Received-Date: Wed, 06 Sep 2017 20:21:13 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-On 9/6/17 2:59 PM, Andreas Müller wrote:
-> On Wed, Sep 6, 2017 at 9:23 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
->> From: Andreas Müller <schnitzeltony@googlemail.com>
->>
->> * patches were either leftovers or do not match the code
->> * DESCRIPTION -> shortened SUMMARY
->>
->> Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
->>
->> Added gtk+3 dependency and resolved conflicts
->>
->> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ meta-xfce/README | 2 --
+ 1 file changed, 2 deletions(-)
 
-> There were certain reasons this was not accepted. Are these obsolete these days?
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 33ef509..bbc7cc7 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -18,5 +18,3 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
+ 
+ When sending single patches, please using something like:
+ 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
+-
+-Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
+-- 
+2.9.5
 
-Reading back a year ago the comments indicated that some of the dependencies
-were incorrect and there were some other packages that may be wrong.  These have
-been fixed (in the other packages).
-
-I do not have a way to check the functionality of the patch, other then it
-compiles and I'm going off your original patch.
-
-Looking at Debian and others, this appears to be the version of florence they
-are using.
-
---Mark
 
