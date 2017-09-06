@@ -1,48 +1,48 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
-	[209.85.213.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 064BF7760A
+Received: from mail-vk0-f44.google.com (mail-vk0-f44.google.com
+	[209.85.213.44])
+	by mail.openembedded.org (Postfix) with ESMTP id BBC5F72F96
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 08:10:39 +0000 (UTC)
-Received: by mail-vk0-f46.google.com with SMTP id t10so10739716vke.0
+	Wed,  6 Sep 2017 10:22:58 +0000 (UTC)
+Received: by mail-vk0-f44.google.com with SMTP id v203so10305643vkv.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Sep 2017 01:10:41 -0700 (PDT)
+	Wed, 06 Sep 2017 03:23:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=3WgoPhPjW/PI51w5jRg+9mxjoQge+7xswjnjGD1khtQ=;
-	b=aRLmeoqGouZH617NS8f7m+iGgboTPDaAtACD5cmGECgWxsMiKXjAG5d0n+7aUsfxri
-	iGytPUS8jly6jSBtrpBz5zGLihKicTupCZ6IeUtqKlbgczJDvbwo8d/yLw+9+rJUPX9z
-	1DTT4g+3Q1CpgwfqUWQTb1Pj4uIq2PUuXDqhX1JBVivIRsVeifXRTH8r8xa91c11LZvw
-	P8b7POzlfl+diWs7+y5fgP0xxvVqukFMPRCaFJLBEbaBPJNIGx+2bxTGWs16o2ulxOn/
-	6SI3F5sNojnwlfEM74fzCk20hbQrObkMtIi8xvbQkZ/51tp2VOll42q18YJHTb5zdFg7
-	yulA==
+	:cc; bh=qoh7yGFgzemcBiUBohyNL/DBQPnorYHhaO8ybxmQNKY=;
+	b=nY+7+OSIAn1efsaO0dscCc2KqUfOb6aHyoV/inXxo3SAihQ9Rt6GO5RToBGtJgNozg
+	kozZmQVVk478NVGEHYw1CiqHmTQdqlI1iO76hmShzDKoOKUozyEfjazENve1tLAVmVp9
+	+IM6hbpVu9IUzYM5ku4eN9jQeqfBtkDCsYUAGMDpm/0uhKmroQbqHptAHj3o1Eb4T6lc
+	FsyorFw2GwzLuMSXtIfMsLBBLqHjlePDzPV4hgI4Y0MQpN3p1uq70RnVI6hpvTqTwey6
+	HSBUuARKozhySOrfnndZZlVs0/4T5SrE+DvG/UfpsxPN+G57mielt8RT+/ve7eRVaEsl
+	UsDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=3WgoPhPjW/PI51w5jRg+9mxjoQge+7xswjnjGD1khtQ=;
-	b=WAp/nQGLncEjXP2hZCySrZUk0aGh2qIPW8n/quCEwdVCASbejYdETayXNAaRS1ybM4
-	nlzi4VeyE3fHSzGIG3IRxR0JAaWV6Eo7UfYygwy/yHToRSoSnspm73JYOnc+DpGVhq3C
-	WIdT1UCaWBsuwF0eEPe8XwugaIRoGYPr0w9AkrMogKQNOZ/+Ni1jVs2zRq+5eo/ByFIJ
-	cEykLe9vU7UWi3IDC/A2UCA7zY9/GHrFOGg98sXVx7JxXD/+b/93qWidhXyToAiO1gNg
-	RsIPYKGjZJobSyfu4gn3TuBZccKEk8/0mmRub3TVV3XgCSd8T1LJ2hOAI7lKHfs4HrtO
-	7lvw==
-X-Gm-Message-State: AHPjjUin/7rDS8kge8aXsDmbv78NeL6+g27+1v+Rbu/DON2+AnXrlap8
-	7kXEABDWKk17P0xqKmwSIwAxvmhyuA==
-X-Google-Smtp-Source: ADKCNb54gofvbst2f71ghQQ/s0Y+eIpkM81qZxXHb3sxLiijlFPwW960gVU/UZTwGCi/zEu/eeRCXmUF1HihB76NFy8=
-X-Received: by 10.31.157.71 with SMTP id g68mr1090111vke.130.1504685441013;
-	Wed, 06 Sep 2017 01:10:41 -0700 (PDT)
+	bh=qoh7yGFgzemcBiUBohyNL/DBQPnorYHhaO8ybxmQNKY=;
+	b=Eh/D3EPOB5D3C5YzoHAhdF/PUXKx9YQgB6fb1wR2zbIiL4vMeor6o+DpQnHAYgLkzC
+	uaIfFPnGxEzejergCGhQLntRpsMdXJVfes6O2YhXYDjOZS3e5QroBDWdVqp21pcYbqb5
+	eEzYhEeFkkUeJv2CL0qwSaBNZGI6M6FniqRAIwRpJWIH3ydQiKO+F/pvftuE4S9X7Hq/
+	82WVNdbhj9diI5NFMTEu96ihWzm3PL6mmjLuaWFQ5dsytG+TbCD+FgOoEwSvkSQ6kCJI
+	5BY/ouapgZed1AHBdHf2mpmFtLUP6+pWtQ2kMdOIfgk+Tojq8oVEB22mDW8vl5jgQv+t
+	bQhQ==
+X-Gm-Message-State: AHPjjUgP+Zo2Kbu1qjhGn8V4Iumwae8oPhgE2KoRxoQ6/+r0AOxXy7h9
+	ar6/xGpvfeoJF/RDXUvvQmASLlTyZw==
+X-Google-Smtp-Source: ADKCNb6Mt1IRgthz05VPJitvdAuQha5wN1HoyWGrA+dogHll6d/UIHxvjU7TmqjcO2eRs7JIzkGJMZrCg805VIJ3czE=
+X-Received: by 10.31.224.134 with SMTP id x128mr1047375vkg.1.1504693379793;
+	Wed, 06 Sep 2017 03:22:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.15.69 with HTTP; Wed, 6 Sep 2017 01:10:40 -0700 (PDT)
-In-Reply-To: <20170905054618.42430-1-raj.khem@gmail.com>
-References: <20170905054618.42430-1-raj.khem@gmail.com>
+Received: by 10.103.15.69 with HTTP; Wed, 6 Sep 2017 03:22:59 -0700 (PDT)
+In-Reply-To: <1504668347-20700-1-git-send-email-ankit.tarot@gmail.com>
+References: <1504668347-20700-1-git-send-email-ankit.tarot@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 6 Sep 2017 10:10:40 +0200
-Message-ID: <CA+chaQente3F7hKPWWzTF7H4MnzQcK6-CPEEoiw8SyFFc1-WAQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Sep 2017 12:22:59 +0200
+Message-ID: <CA+chaQearBerif8gfANPs3PpXpSXHvfyAKFidm6iva0d-B_0nw@mail.gmail.com>
+To: Ankit Navik <ankit.tarot@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] leveldb: Fix build with clang
+Subject: Re: [PATCH] ell: upgrade SRCREV and move recipes to core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,154 +55,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 08:10:40 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 10:22:58 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Fails to build:
-http://errors.yoctoproject.org/Errors/Details/155161/
+Why did you add ell.inc? We're usually moving in the other direction
+folding .inc into .bb and maintaining only one version of given component.
 
-On Tue, Sep 5, 2017 at 7:46 AM, Khem Raj <raj.khem@gmail.com> wrote:
+Also the tag in the subject should be [meta-oe] not [oe]
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+On Wed, Sep 6, 2017 at 5:25 AM, Ankit Navik <ankit.tarot@gmail.com> wrote:
+
+>  7b7c15c build: Include check for xxd binary when in maintainer-mode
+>
+> Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
 > ---
->  ...uild_detect_platform-Check-for-__SSE4_2__.patch | 40
-> ++++++++++++++++++++
->  .../0002-makefile-build-SHARED_MEMENVLIB.patch     | 43
-> ++++++++++++++++++++++
->  meta-oe/recipes-extended/leveldb/leveldb_git.bb    |  4 +-
->  3 files changed, 86 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-extended/leveldb/leveldb/0001-build_
-> detect_platform-Check-for-__SSE4_2__.patch
->  create mode 100644 meta-oe/recipes-extended/
-> leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
+>  meta-oe/recipes-connectivity/ell/ell_git.bb | 17 -----------------
+>  meta-oe/recipes-core/ell/ell.inc            | 13 +++++++++++++
+>  meta-oe/recipes-core/ell/ell_git.bb         |  5 +++++
+>  3 files changed, 18 insertions(+), 17 deletions(-)
+>  delete mode 100644 meta-oe/recipes-connectivity/ell/ell_git.bb
+>  create mode 100644 meta-oe/recipes-core/ell/ell.inc
+>  create mode 100644 meta-oe/recipes-core/ell/ell_git.bb
 >
-> diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_
-> detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-extended/
-> leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+> diff --git a/meta-oe/recipes-connectivity/ell/ell_git.bb
+> b/meta-oe/recipes-connectivity/ell/ell_git.bb
+> deleted file mode 100644
+> index d259f52..0000000
+> --- a/meta-oe/recipes-connectivity/ell/ell_git.bb
+> +++ /dev/null
+> @@ -1,17 +0,0 @@
+> -SUMMARY  = "Embedded Linux Library"
+> -DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
+> -LICENSE  = "LGPLv2.1"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+> -SECTION = "libs"
+> -
+> -inherit autotools pkgconfig
+> -
+> -S = "${WORKDIR}/git"
+> -SRCREV = "399099946abaeb2f3718a0667cc11436a7c0be14"
+> -SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
+> -
+> -do_configure_prepend () {
+> -    mkdir ${S}/build-aux
+> -}
+> -
+> -DEPENDS = "dbus"
+> diff --git a/meta-oe/recipes-core/ell/ell.inc b/meta-oe/recipes-core/ell/
+> ell.inc
 > new file mode 100644
-> index 000000000..a44ff883b
+> index 0000000..7bed240
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_
-> detect_platform-Check-for-__SSE4_2__.patch
-> @@ -0,0 +1,40 @@
-> +From 5fd0918df2bb30e8f3edb2ee895d178edbf26f40 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 4 Sep 2017 22:38:03 -0700
-> +Subject: [PATCH 1/2] build_detect_platform: Check for __SSE4_2__
+> +++ b/meta-oe/recipes-core/ell/ell.inc
+> @@ -0,0 +1,13 @@
+> +SUMMARY  = "Embedded Linux Library"
+> +DESCRIPTION = "ELL is a DBUS library which provides DBUS bindings."
+> +LICENSE  = "LGPLv2.1"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=fb504b67c50331fc78734fed90fb0e09"
+> +SECTION = "libs"
 > +
-> +just using -msse4.2 is not enough, especially with clang
-> +where it may accept -msse4.2 even during cross compiling
-> +for say arm, however the difference is that builtin defines
-> +wont be defined.
+> +inherit autotools pkgconfig
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +Upstream-Status: Pending
+> +do_configure_prepend () {
+> +    mkdir ${S}/build-aux
+> +}
 > +
-> + build_detect_platform | 4 ++--
-> + 1 file changed, 2 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/build_detect_platform b/build_detect_platform
-> +index d2a20ce..a06d49e 100755
-> +--- a/build_detect_platform
-> ++++ b/build_detect_platform
-> +@@ -224,13 +224,13 @@ EOF
-> +     rm -f $CXXOUTPUT 2>/dev/null
-> +
-> +     # Test if gcc SSE 4.2 is supported
-> +-    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -msse4.2 2>/dev/null  <<EOF
-> ++    $CXX $CXXFLAGS -x c++ -Werror - -o $CXXOUTPUT -msse4.2 -dD -E
-> 2>/dev/null  <<EOF
-> +       int main() {}
-> + EOF
-> ++    eval fgrep __SSE4_2__ $CXXOUTPUT 2>/dev/null
-> +     if [ "$?" = 0 ]; then
-> +         PLATFORM_SSEFLAGS="-msse4.2"
-> +     fi
-> +-
-> +     rm -f $CXXOUTPUT 2>/dev/null
-> + fi
-> +
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
-> b/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-
-> build-SHARED_MEMENVLIB.patch
+> +DEPENDS = "dbus"
+> diff --git a/meta-oe/recipes-core/ell/ell_git.bb
+> b/meta-oe/recipes-core/ell/ell_git.bb
 > new file mode 100644
-> index 000000000..fc708b23a
+> index 0000000..0589809
 > --- /dev/null
-> +++ b/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-
-> build-SHARED_MEMENVLIB.patch
-> @@ -0,0 +1,43 @@
-> +From 1ed8cec1fcf666904bb3ebd29fc85e235b72d122 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Mon, 4 Sep 2017 22:40:49 -0700
-> +Subject: [PATCH 2/2] makefile: build SHARED_MEMENVLIB
+> +++ b/meta-oe/recipes-core/ell/ell_git.bb
+> @@ -0,0 +1,5 @@
+> +require ell.inc
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> +Upstream-Status: Pending
-> +
-> + Makefile | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/Makefile b/Makefile
-> +index f7cc7d7..cb42278 100644
-> +--- a/Makefile
-> ++++ b/Makefile
-> +@@ -126,12 +126,12 @@ SHARED_VERSION_MINOR = 20
-> + SHARED_LIB1 = libleveldb.$(PLATFORM_SHARED_EXT)
-> + SHARED_LIB2 = $(SHARED_LIB1).$(SHARED_VERSION_MAJOR)
-> + SHARED_LIB3 = $(SHARED_LIB1).$(SHARED_VERSION_MAJOR).$(SHARED_
-> VERSION_MINOR)
-> +-SHARED_LIBS = $(SHARED_OUTDIR)/$(SHARED_LIB1) $(SHARED_OUTDIR)/$(SHARED_LIB2)
-> $(SHARED_OUTDIR)/$(SHARED_LIB3)
-> ++SHARED_LIBS = $(SHARED_OUTDIR)/$(SHARED_LIB1) $(SHARED_OUTDIR)/$(SHARED_LIB2)
-> $(SHARED_OUTDIR)/$(SHARED_LIB3) $(SHARED_MEMENVLIB)
-> + $(SHARED_OUTDIR)/$(SHARED_LIB1): $(SHARED_OUTDIR)/$(SHARED_LIB3)
-> +       ln -fs $(SHARED_LIB3) $(SHARED_OUTDIR)/$(SHARED_LIB1)
-> + $(SHARED_OUTDIR)/$(SHARED_LIB2): $(SHARED_OUTDIR)/$(SHARED_LIB3)
-> +       ln -fs $(SHARED_LIB3) $(SHARED_OUTDIR)/$(SHARED_LIB2)
-> +-SHARED_MEMENVLIB = $(SHARED_OUTDIR)/libmemenv.a
-> ++SHARED_MEMENVLIB = $(SHARED_OUTDIR)/libmemenv.$(
-> PLATFORM_SHARED_EXT).$(SHARED_VERSION_MAJOR).$(SHARED_VERSION_MINOR)
-> + endif
-> +
-> + $(SHARED_OUTDIR)/$(SHARED_LIB3): $(SHARED_LIBOBJECTS)
-> +@@ -294,7 +294,7 @@ endif
-> +
-> + $(SHARED_MEMENVLIB):$(SHARED_MEMENVOBJECTS)
-> +       rm -f $@
-> +-      $(AR) -rs $@ $(SHARED_MEMENVOBJECTS)
-> ++      $(CXX) $(LDFLAGS) $(PLATFORM_SHARED_LDFLAGS)$(basename $(notdir
-> $(SHARED_MEMENVLIB))) $(SHARED_MEMENVOBJECTS) -o $(SHARED_MEMENVLIB) $(LIBS)
-> +
-> + $(STATIC_OUTDIR)/db_bench:db/db_bench.cc $(STATIC_LIBOBJECTS)
-> $(TESTUTIL)
-> +       $(CXX) $(LDFLAGS) $(CXXFLAGS) db/db_bench.cc $(STATIC_LIBOBJECTS)
-> $(TESTUTIL) -o $@ $(LIBS)
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-> b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-> index d44aa14d2..dfe4b459a 100644
-> --- a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-> +++ b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
-> @@ -8,7 +8,9 @@ SRCREV = "a53934a3ae1244679f812d998a4f16f2c7f309a6"
->  PV = "1.20+git${SRCPV}"
->
->  SRC_URI = "git://github.com/google/${BPN}.git \
-> -"
-> +           file://0001-build_detect_platform-Check-for-__SSE4_2__.patch \
-> +           file://0002-makefile-build-SHARED_MEMENVLIB.patch \
-> +           "
->
->  S = "${WORKDIR}/git"
->
+> +S = "${WORKDIR}/git"
+> +SRCREV = "7b7c15c2e5caff88fc45e7a8b874a47196a0eddd"
+> +SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
 > --
-> 2.14.1
+> 1.9.1
 >
 > --
 > _______________________________________________
