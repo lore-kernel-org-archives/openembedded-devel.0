@@ -1,47 +1,49 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f47.google.com (mail-lf0-f47.google.com
-	[209.85.215.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 704A760290
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C166D60290
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 13:39:02 +0000 (UTC)
-Received: by mail-lf0-f47.google.com with SMTP id d17so17806008lfe.2
+	Wed,  6 Sep 2017 13:42:33 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id q76so3080219pfq.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Sep 2017 06:39:04 -0700 (PDT)
+	Wed, 06 Sep 2017 06:42:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=ebhAEGWnPIMnG1YBqRzf5BU1L3MCbWpxc9rsVmoTrh4=;
-	b=MF/H8skmx6ewUJEA5tkCgfoajfcoY5ZskMTJrLhbDz1tKCVuWBh6iQArpzuvRhKwQA
-	GBIdDu+qPZW+4bjrRoy0nhfRHdj2I0YXjfdNWhAWETRhrusXXlmfmTWX1rICp7ISnXcs
-	KmrJKo2+kfAoo43a/lg+GVfGOcm11J5GQ8yAcan6qLeTtoTxKrqTT7oqfZI60OJkUMyK
-	H0d1ng0Tw6w+pHEirfT8zTyaOnS3GpSDjkZGBKMol55/sYRqj9DfTapTFLdqgxN7qPHL
-	H+asuYKv1anOnlTUkBv92PmC+6hXknJA+8y3U2Q24/svUT3q01d/x7bZA/5w+MYv2XoK
-	/C3A==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=uDjwwVBvRfRorrRH6tZREv5zxAG0NTacTtayjRqv/Lo=;
+	b=fCM+JtO6RdjrSMM38QH74qzYqB6sur84D4KPMaCy2YNoNBxdc6Y8MJuWSzzOq5Ox+F
+	wIexMLHpk/4vHG2VP7XGFMado5pLtU7TmsSHx1iiBVSCQ4GtGJZjXmxudDiqpGExco4r
+	OZ35jw7YXkAW6sb7RzkDLEYy96/HCNEaQnUZKCGBydrKD01e27oMd4D1d5t8fWftaC8S
+	DVGxLR13Vdf9vQTrS6+t66ynA0u2vGnrbT9WgnIck57+/TMdCDnJLBymMy/jwpMVlK+J
+	Ow+g2nlQaRi9qB/MdTD3hLBzrFC1Y0SM8FNIz6aa0PmbMDxbU8xFRkP0sf/yKLNsTaaQ
+	dpKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=ebhAEGWnPIMnG1YBqRzf5BU1L3MCbWpxc9rsVmoTrh4=;
-	b=MCNPxh9JCbvuxx7yK1qnINDvcbUuVMwRGXDnfiFSjG7pJjhgt4A30ygeQeD8IKZTuD
-	tuEXvMF/eKj+TkNwYjxmwI+MkpbDMIDOIIU9MTJWxrZ7iurbq+a0OfvH/D5Ytu9yLivt
-	Qhqa7h9Arc9tEeUQ67gsKfyi4kFCkKR8xPInkYMBJ6TBD5kOnSQYZlnIBMAJUq5vZJ4u
-	JVVlOEXW1E/tIOBcJIO0GjcM2lkh3UeZRz3sRyCxz5pW2O852c3Tmq4sbX6WQfkHTsQy
-	Xx3ZBx/1SfqbFsIaFVaxrEI4mFOYIjXQmAKKpUJMzqLtZ1+SBmjFkF7YNd/wZM4Hz32+
-	kRcw==
-X-Gm-Message-State: AHPjjUiuvXAOEBsYMByesFnAzSV+sSQn7Mj57uNhlRbZ62C6EQo2jf3R
-	xV+nqUukhKW//kcXemtoAHkyA0nfaA==
-X-Google-Smtp-Source: ADKCNb5cqd+J5uIfutdB7apyHnZmf0sAAYhFlYwb8beiewNsNUGPGHbOrLjmUAOCofL74fflmac26t1AFnqov8Zy/5I=
-X-Received: by 10.25.25.80 with SMTP id 77mr1007974lfz.163.1504705143024; Wed,
-	06 Sep 2017 06:39:03 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=uDjwwVBvRfRorrRH6tZREv5zxAG0NTacTtayjRqv/Lo=;
+	b=oGftMjExO/QsWnX6dJ06AzGV4HGaNXmG4bO4nnjb+Nq7wbHaRaP4JYZR/Uxp9sTtna
+	4+RICXxRsm0m55WVpCKwmqC1muw0zUjChX75oDdHUqSQuNbMB4GIeGf8kJkQS0h/NCv3
+	t/XqD84z+P5Cq/MfXbOQSEG855N6P2RuuxFzJ6sG2S37oxhn/J+7dgJ/P+03N01sNB+4
+	FmSNrQgEZEw6IN65qQK9AGuZG4t6/I/s9U97RoNPcHczhQlvBF4JAC2+o8m7BAYUCKff
+	K6hoVRzysqHu9I+q938b51BwILb4T49lWWKJJr7v5g7TQeIOciKqOTTYvi+PZdlp9lCV
+	9vUw==
+X-Gm-Message-State: AHPjjUiJ9sTsNmoPjlAOhNTZxLBUkHSUsHSUt5wQHqqYOJlEOKQhfytE
+	DK9oh68Wu8wTjMYkQx2R4Q4eCyn4qflEvY2Yo74=
+X-Google-Smtp-Source: ADKCNb5A87vBXpHRpBT/1KaldBtSJramjZQjpKFx5KB2RmrpoL8OaN1pLth5Dfs4P+hYFEoyO2p+buZ2STPSVKO7E70=
+X-Received: by 10.84.246.201 with SMTP id j9mr3918588plt.114.1504705354590;
+	Wed, 06 Sep 2017 06:42:34 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.25.83.83 with HTTP; Wed, 6 Sep 2017 06:38:42 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Wed, 6 Sep 2017 15:38:42 +0200
-Message-ID: <CAPybu_1BguLCcMbeS0whX9+W0DjrBczUQ6gPQoH75HHUOTd_Ew@mail.gmail.com>
-To: Henning Heinold <henning@itconsulting-heinold.de>, 
-	Mario Domenech Goulart <mario@ossystems.com.br>,
-	Maxin John <maxin.john@intel.com>, 
-	Otavio Salvador <otavio@ossystems.com.br>, 
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: icedtea7-native SIGSEGV build with gcc7
+Received: by 10.100.189.8 with HTTP; Wed, 6 Sep 2017 06:42:04 -0700 (PDT)
+In-Reply-To: <CA+chaQefO7rkJG6eLnWctdow5cZmmKcwZ8xdjG3VWBrd4oyzUQ@mail.gmail.com>
+References: <20170902220559.9784-1-raj.khem@gmail.com>
+	<20170902220559.9784-2-raj.khem@gmail.com>
+	<CA+chaQefO7rkJG6eLnWctdow5cZmmKcwZ8xdjG3VWBrd4oyzUQ@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 6 Sep 2017 06:42:04 -0700
+Message-ID: <CAMKF1srvCCPyMxym9xFz6i2GyLAGt1qOF7-UZfOte5-gRMg8Tw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-filesystems][PATCH 2/2] xfsprogs: Upgrade to 4.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,122 +56,444 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 13:39:02 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 13:42:33 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi!
+On Wed, Sep 6, 2017 at 1:09 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Fails to build (probably due to gold):
+> http://errors.yoctoproject.org/Errors/Details/155158/
+>
 
-After updating my computer to gcc7 (Debian testing) icedtea7-native
-fails to build, resulting in a SIGSEGV in javac. (see the error
-attached at the end)
+yes although it seems we are missing -luuid on cmdline
 
-After some google digging I found a possible reason for this error
-https://bugzilla.redhat.com/show_bug.cgi?id=1423751 . But
-
-BUILD_CFLAGS += "-fno-store-merging -fno-code-hoisting -fno-ipa-cp
--fno-ipa-vrp -fno-split-loops"
-BUILD_CXXFLAGS += "-fno-store-merging -fno-code-hoisting -fno-ipa-cp
--fno-ipa-vrp -fno-split-loops"
-
-did not do the trick.
-
-
-On the other hand:
-export BUILD_CC = "${CCACHE}${BUILD_PREFIX}gcc-6"
-export BUILD_CXX = "${CCACHE}${BUILD_PREFIX}g++-6"
-export BUILD_CPP = "${BUILD_PREFIX}gcc-6 ${BUILD_CC_ARCH} -E"
-
-Managed to build icedtea7-native fine.
-
-
-Has anyone experienced something similar?
-
-
-Regards!
-
-| (cd  ./langtools/make && \
-|   /var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/sysroots/x86_64-linux/usr/bin/make
-JDK_TOPDIR=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/jdk
-JDK_MAKE_SHARED_DIR=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/jdk/make/common/shared
-EXTERNALSANITYCONTROL=true SOURCE_LANGUAGE_VERSION=7
-TARGET_CLASS_VERSION=7 MILESTONE=fcs BUILD_NUMBER=b21
-JDK_BUILD_NUMBER=b21 FULL_VERSION=1.7.0_03-icedtea-b21
-PREVIOUS_JDK_VERSION=1.6.0 JDK_VERSION=1.7.0_03 JDK_MKTG_VERSION=7u3
-JDK_MAJOR_VERSION=1 JDK_MINOR_VERSION=7 JDK_MICRO_VERSION=0
-PREVIOUS_MAJOR_VERSION=1 PREVIOUS_MINOR_VERSION=6
-PREVIOUS_MICRO_VERSION=0 STATIC_CXX=false ARCH_DATA_MODEL=64
-COOKED_JDK_UPDATE_VERSION=30 COOKED_BUILD_NUMBER=21
-ALT_OUTPUTDIR=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools
-ALT_BOOTDIR=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0
-all)
-| make[3]: Entering directory
-'/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make'
-| JAVA_HOME=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0
-ANT_OPTS=-Djava.io.tmpdir='/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-tmp'
-/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/sysroots/x86_64-linux/usr/bin/ant
--diagnostics > /var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-diagnostics.log
-; \
-|   JAVA_HOME=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0
-ANT_OPTS=-Djava.io.tmpdir='/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-tmp'
-/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/sysroots/x86_64-linux/usr/bin/ant
--version >> /var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-diagnostics.log
-| Aborted
-| JAVA_HOME=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0
-ANT_OPTS=-Djava.io.tmpdir='/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-tmp'
-/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/sysroots/x86_64-linux/usr/bin/ant
--Djdk.version=1.7.0_03 -Dfull.version='1.7.0_03-icedtea-b21'
--Drelease=1.7.0_03 -Dbuild.number=b21 -Djavac.debug=true
--Ddebug.classfiles=true -Djavac.target=7 -Djavac.source=7
--Dboot.java.home=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0
--Dimport.jdk=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/jdk
--Dbuild.dir=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build
--Ddist.dir=/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/dist
-build
-| Buildfile: /var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make/build.xml
-| #
-| # A fatal error has been detected by the Java Runtime Environment:
-| #
-| #  SIGSEGV (0xb) at pc=0x00007f03929f0808, pid=26143, tid=139653340595968
-| #
-| # JRE version: 7.0_03-b21
-| # Java VM: OpenJDK 64-Bit Server VM (22.0-b10 mixed mode linux-amd64
-compressed oops)
-| # Derivative: IcedTea7 2.1.3
-| # Distribution: Built on Debian GNU/Linux testing (buster) (Wed Sep
-6 05:55:44 CEST 2017)
-| # Problematic frame:
-| # V  [libjvm.so+0x78b808]  vframeArray::unpack_to_stack(frame&, int, int)+0x88
-| #
-| # Failed to write core dump. Core dumps have been disabled. To
-enable core dumping, try "ulimit -c unlimited" before starting Java
-again
-| #
-| # An error report file with more information is saved as:
-| # /var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make/hs_err_pid26143.log
-| #
-| # If you would like to submit a bug report, please include
-| # instructions on how to reproduce the bug and visit:
-| #   http://icedtea.classpath.org/bugzilla
-| #
-| Aborted
-| Makefile:201: recipe for target 'build' failed
-| make[3]: *** [build] Error 134
-| make[3]: Leaving directory
-'/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make'
-| make/langtools-rules.gmk:37: recipe for target 'langtools-build' failed
-| make[2]: *** [langtools-build] Error 2
-| make[2]: Leaving directory
-'/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk'
-| Makefile:244: recipe for target 'build_product_image' failed
-| make[1]: *** [build_product_image] Error 2
-| make[1]: Leaving directory
-'/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk'
-| Makefile:2115: recipe for target 'stamps/icedtea.stamp' failed
-| make: *** [stamps/icedtea.stamp] Error 2
-| ERROR: oe_runmake failed
-| ERROR: Function failed: do_compile (log file is located at
-/var/lib/jenkins/workspace/qt5022-cesium-clean/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/temp/log.do_compile.1778)
-
--- 
-Ricardo Ribalda
+> On Sun, Sep 3, 2017 at 12:05 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> Fix cross builds with hardening flags
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>>  ...Rename-progname-as-it-is-provided-by-libc.patch | 204
+>> +++++++++++++++++++++
+>>  .../files/remove_flags_from_build_flags.patch      |  13 ++
+>>  .../xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch  | 117 ++++++++++++
+>>  .../{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb}     |   7 +-
+>>  4 files changed, 339 insertions(+), 2 deletions(-)
+>>  create mode 100644
+>> meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
+>>  create mode 100644
+>> meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+>>  create mode 100644
+>> meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+>>  rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.11.0.bb =>
+>> xfsprogs_4.12.0.bb} (85%)
+>>
+>> diff --git
+>> a/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
+>> new file mode 100644
+>> index 000000000..aa13b67be
+>> --- /dev/null
+>> +++
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/0001-Rename-progname-as-it-is-provided-by-libc.patch
+>> @@ -0,0 +1,204 @@
+>> +From 95aaaa800e0dc387875b4e2adad480b72c1632ff Mon Sep 17 00:00:00 2001
+>> +From: Khem Raj <raj.khem@gmail.com>
+>> +Date: Sat, 2 Sep 2017 14:46:49 -0700
+>> +Subject: [PATCH] Rename progname as it is provided by libc
+>> +
+>> +Rename local variable progname to avoid a clash with libc
+>> +global symbols
+>> +
+>> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> +---
+>> + io/init.c                 | 10 +++++-----
+>> + mdrestore/xfs_mdrestore.c | 10 +++++-----
+>> + quota/init.c              | 10 +++++-----
+>> + spaceman/init.c           |  8 ++++----
+>> + 4 files changed, 19 insertions(+), 19 deletions(-)
+>> +
+>> +diff --git a/io/init.c b/io/init.c
+>> +index 20d5f80..e82e101 100644
+>> +--- a/io/init.c
+>> ++++ b/io/init.c
+>> +@@ -23,7 +23,7 @@
+>> + #include "init.h"
+>> + #include "io.h"
+>> +
+>> +-char  *progname;
+>> ++char  *io_progname;
+>> + int   exitcode;
+>> + int   expert;
+>> + int   idlethread;
+>> +@@ -35,7 +35,7 @@ usage(void)
+>> + {
+>> +       fprintf(stderr,
+>> + _("Usage: %s [-adfinrRstVx] [-m mode] [-p prog] [[-c|-C] cmd]...
+>> file\n"),
+>> +-              progname);
+>> ++              io_progname);
+>> +       exit(1);
+>> + }
+>> +
+>> +@@ -142,7 +142,7 @@ init(
+>> +       xfs_fsop_geom_t geometry = { 0 };
+>> +       struct fs_path  fsp;
+>> +
+>> +-      progname = basename(argv[0]);
+>> ++      io_progname = basename(argv[0]);
+>> +       setlocale(LC_ALL, "");
+>> +       bindtextdomain(PACKAGE, LOCALEDIR);
+>> +       textdomain(PACKAGE);
+>> +@@ -186,7 +186,7 @@ init(
+>> +                       flags |= IO_NONBLOCK;
+>> +                       break;
+>> +               case 'p':
+>> +-                      progname = optarg;
+>> ++                      io_progname = optarg;
+>> +                       break;
+>> +               case 'r':
+>> +                       flags |= IO_READONLY;
+>> +@@ -207,7 +207,7 @@ init(
+>> +                       expert = 1;
+>> +                       break;
+>> +               case 'V':
+>> +-                      printf(_("%s version %s\n"), progname, VERSION);
+>> ++                      printf(_("%s version %s\n"), io_progname,
+>> VERSION);
+>> +                       exit(0);
+>> +               default:
+>> +                       usage();
+>> +diff --git a/mdrestore/xfs_mdrestore.c b/mdrestore/xfs_mdrestore.c
+>> +index 9d1b4e8..b840a54 100644
+>> +--- a/mdrestore/xfs_mdrestore.c
+>> ++++ b/mdrestore/xfs_mdrestore.c
+>> +@@ -19,7 +19,7 @@
+>> + #include "libxfs.h"
+>> + #include "xfs_metadump.h"
+>> +
+>> +-char          *progname;
+>> ++char          *mdrestore_progname;
+>> + int           show_progress = 0;
+>> + int           show_info = 0;
+>> + int           progress_since_warning = 0;
+>> +@@ -30,7 +30,7 @@ fatal(const char *msg, ...)
+>> +       va_list         args;
+>> +
+>> +       va_start(args, msg);
+>> +-      fprintf(stderr, "%s: ", progname);
+>> ++      fprintf(stderr, "%s: ", mdrestore_progname);
+>> +       vfprintf(stderr, msg, args);
+>> +       exit(1);
+>> + }
+>> +@@ -194,7 +194,7 @@ perform_restore(
+>> + static void
+>> + usage(void)
+>> + {
+>> +-      fprintf(stderr, "Usage: %s [-V] [-g] source target\n", progname);
+>> ++      fprintf(stderr, "Usage: %s [-V] [-g] source target\n",
+>> mdrestore_progname);
+>> +       exit(1);
+>> + }
+>> +
+>> +@@ -212,7 +212,7 @@ main(
+>> +       struct stat     statbuf;
+>> +       int             is_target_file;
+>> +
+>> +-      progname = basename(argv[0]);
+>> ++      mdrestore_progname = basename(argv[0]);
+>> +
+>> +       while ((c = getopt(argc, argv, "giV")) != EOF) {
+>> +               switch (c) {
+>> +@@ -223,7 +223,7 @@ main(
+>> +                               show_info = 1;
+>> +                               break;
+>> +                       case 'V':
+>> +-                              printf("%s version %s\n", progname,
+>> VERSION);
+>> ++                              printf("%s version %s\n",
+>> mdrestore_progname, VERSION);
+>> +                               exit(0);
+>> +                       default:
+>> +                               usage();
+>> +diff --git a/quota/init.c b/quota/init.c
+>> +index d45dc4c..46403de 100644
+>> +--- a/quota/init.c
+>> ++++ b/quota/init.c
+>> +@@ -21,7 +21,7 @@
+>> + #include "input.h"
+>> + #include "init.h"
+>> +
+>> +-char  *progname;
+>> ++char  *quota_progname;
+>> + int   exitcode;
+>> + int   expert;
+>> + bool  foreign_allowed = false;
+>> +@@ -47,7 +47,7 @@ usage(void)
+>> + {
+>> +       fprintf(stderr,
+>> +               _("Usage: %s [-V] [-x] [-f] [-p prog] [-c cmd]... [-d
+>> project]... [path]\n"),
+>> +-              progname);
+>> ++              quota_progname);
+>> +       exit(1);
+>> + }
+>> +
+>> +@@ -147,7 +147,7 @@ init(
+>> + {
+>> +       int             c;
+>> +
+>> +-      progname = basename(argv[0]);
+>> ++      quota_progname = basename(argv[0]);
+>> +       setlocale(LC_ALL, "");
+>> +       bindtextdomain(PACKAGE, LOCALEDIR);
+>> +       textdomain(PACKAGE);
+>> +@@ -173,13 +173,13 @@ init(
+>> +                       projid_file = optarg;
+>> +                       break;
+>> +               case 'p':
+>> +-                      progname = optarg;
+>> ++                      quota_progname = optarg;
+>> +                       break;
+>> +               case 'x':
+>> +                       expert++;
+>> +                       break;
+>> +               case 'V':
+>> +-                      printf(_("%s version %s\n"), progname, VERSION);
+>> ++                      printf(_("%s version %s\n"), quota_progname,
+>> VERSION);
+>> +                       exit(0);
+>> +               default:
+>> +                       usage();
+>> +diff --git a/spaceman/init.c b/spaceman/init.c
+>> +index b3eface..bedf112 100644
+>> +--- a/spaceman/init.c
+>> ++++ b/spaceman/init.c
+>> +@@ -23,7 +23,7 @@
+>> + #include "path.h"
+>> + #include "space.h"
+>> +
+>> +-char  *progname;
+>> ++char  *spaceman_progname;
+>> + int   exitcode;
+>> +
+>> + void
+>> +@@ -31,7 +31,7 @@ usage(void)
+>> + {
+>> +       fprintf(stderr,
+>> +               _("Usage: %s [-c cmd] file\n"),
+>> +-              progname);
+>> ++              spaceman_progname);
+>> +       exit(1);
+>> + }
+>> +
+>> +@@ -74,7 +74,7 @@ init(
+>> +       xfs_fsop_geom_t geometry = { 0 };
+>> +       struct fs_path  fsp;
+>> +
+>> +-      progname = basename(argv[0]);
+>> ++      spaceman_progname = basename(argv[0]);
+>> +       setlocale(LC_ALL, "");
+>> +       bindtextdomain(PACKAGE, LOCALEDIR);
+>> +       textdomain(PACKAGE);
+>> +@@ -86,7 +86,7 @@ init(
+>> +                       add_user_command(optarg);
+>> +                       break;
+>> +               case 'V':
+>> +-                      printf(_("%s version %s\n"), progname, VERSION);
+>> ++                      printf(_("%s version %s\n"), spaceman_progname,
+>> VERSION);
+>> +                       exit(0);
+>> +               default:
+>> +                       usage();
+>> +--
+>> +2.14.1
+>> +
+>> diff --git
+>> a/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+>> new file mode 100644
+>> index 000000000..bba9a25c2
+>> --- /dev/null
+>> +++
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+>> @@ -0,0 +1,13 @@
+>> +Index: xfsprogs-4.12.0/include/builddefs.in
+>> +===================================================================
+>> +--- xfsprogs-4.12.0.orig/include/builddefs.in
+>> ++++ xfsprogs-4.12.0/include/builddefs.in
+>> +@@ -164,7 +164,7 @@ ifeq ($(ENABLE_GETTEXT),yes)
+>> + GCFLAGS += -DENABLE_GETTEXT
+>> + endif
+>> +
+>> +-BUILD_CFLAGS += $(GCFLAGS) $(PCFLAGS)
+>> ++BUILD_CFLAGS += $(GCFLAGS)
+>> + # First, Global, Platform, Local CFLAGS
+>> + CFLAGS += $(FCFLAGS) $(OPTIMIZER) $(GCFLAGS) $(PCFLAGS) $(LCFLAGS)
+>> +
+>> diff --git
+>> a/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+>> new file mode 100644
+>> index 000000000..efc57e4f6
+>> --- /dev/null
+>> +++
+>> b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+>> @@ -0,0 +1,117 @@
+>> +From 21253610f9ef87db8e2a75b863b7fcfbd0cdb421 Mon Sep 17 00:00:00 2001
+>> +From: "Darrick J. Wong" <darrick.wong@oracle.com>
+>> +Date: Tue, 25 Jul 2017 13:45:01 -0500
+>> +Subject: [PATCH] In patch 4944defad4 ("xfs_db: redirect printfs when
+>> + metadumping to stdout"), we solved the problem of xfs_db printfs ending
+>> up in
+>> + the metadump stream by reassigning stdout for the duration of a stdout
+>> + metadump.  Unfortunately, musl doesn't allow stdout to be reassigned (in
+>> + their view "extern FILE *stdout" means "extern FILE * const stdout"), so
+>> we
+>> + abandon the old approach in favor of playing games with dup() to switch
+>> the
+>> + raw file descriptors.
+>> +
+>> +While we're at it, fix a regression where an unconverted outf test
+>> +allows progress info to end up in the metadump stream.
+>> +
+>> +Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
+>> +---
+>> + db/metadump.c | 47 ++++++++++++++++++++++++++++++++++++-----------
+>> + 1 file changed, 36 insertions(+), 11 deletions(-)
+>> +
+>> +diff --git a/db/metadump.c b/db/metadump.c
+>> +index 96641e0..4e2f648 100644
+>> +--- a/db/metadump.c
+>> ++++ b/db/metadump.c
+>> +@@ -78,6 +78,7 @@ static int           obfuscate = 1;
+>> + static int            zero_stale_data = 1;
+>> + static int            show_warnings = 0;
+>> + static int            progress_since_warning = 0;
+>> ++static bool           stdout_metadump;
+>> +
+>> + void
+>> + metadump_init(void)
+>> +@@ -137,7 +138,7 @@ print_progress(const char *fmt, ...)
+>> +       va_end(ap);
+>> +       buf[sizeof(buf)-1] = '\0';
+>> +
+>> +-      f = (outf == stdout) ? stderr : stdout;
+>> ++      f = stdout_metadump ? stderr : stdout;
+>> +       fprintf(f, "\r%-59s", buf);
+>> +       fflush(f);
+>> +       progress_since_warning = 1;
+>> +@@ -2750,7 +2751,8 @@ metadump_f(
+>> +       xfs_agnumber_t  agno;
+>> +       int             c;
+>> +       int             start_iocur_sp;
+>> +-      bool            stdout_metadump = false;
+>> ++      int             outfd = -1;
+>> ++      int             ret;
+>> +       char            *p;
+>> +
+>> +       exitcode = 1;
+>> +@@ -2870,16 +2872,35 @@ metadump_f(
+>> +                * metadump operation so that dbprintf and other messages
+>> +                * are sent to the console instead of polluting the
+>> +                * metadump stream.
+>> ++               *
+>> ++               * We get to do this the hard way because musl doesn't
+>> ++               * allow reassignment of stdout.
+>> +                */
+>> +-              outf = stdout;
+>> +-              stdout = stderr;
+>> ++              fflush(stdout);
+>> ++              outfd = dup(STDOUT_FILENO);
+>> ++              if (outfd < 0) {
+>> ++                      perror("opening dump stream");
+>> ++                      goto out;
+>> ++              }
+>> ++              ret = dup2(STDERR_FILENO, STDOUT_FILENO);
+>> ++              if (ret < 0) {
+>> ++                      perror("redirecting stdout");
+>> ++                      close(outfd);
+>> ++                      goto out;
+>> ++              }
+>> ++              outf = fdopen(outfd, "a");
+>> ++              if (outf == NULL) {
+>> ++                      fprintf(stderr, "cannot create dump stream\n");
+>> ++                      dup2(outfd, 1);
+>> ++                      close(outfd);
+>> ++                      goto out;
+>> ++              }
+>> +               stdout_metadump = true;
+>> +       } else {
+>> +               outf = fopen(argv[optind], "wb");
+>> +               if (outf == NULL) {
+>> +                       print_warning("cannot create dump file");
+>> +-                      free(metablock);
+>> +-                      return 0;
+>> ++                      goto out;
+>> +               }
+>> +       }
+>> +
+>> +@@ -2907,15 +2928,19 @@ metadump_f(
+>> +       if (progress_since_warning)
+>> +               fputc('\n', stdout_metadump ? stderr : stdout);
+>> +
+>> +-      if (stdout_metadump)
+>> +-              stdout = outf;
+>> +-      else
+>> +-              fclose(outf);
+>> ++      if (stdout_metadump) {
+>> ++              fflush(outf);
+>> ++              fflush(stdout);
+>> ++              ret = dup2(outfd, STDOUT_FILENO);
+>> ++              if (ret < 0)
+>> ++                      perror("un-redirecting stdout");
+>> ++      }
+>> ++      fclose(outf);
+>> +
+>> +       /* cleanup iocur stack */
+>> +       while (iocur_sp > start_iocur_sp)
+>> +               pop_cur();
+>> +-
+>> ++out:
+>> +       free(metablock);
+>> +
+>> +       return 0;
+>> +--
+>> +2.13.3
+>> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+>> b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+>> similarity index 85%
+>> rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+>> rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+>> index 046dea425..444f712b5 100644
+>> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+>> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+>> @@ -8,9 +8,12 @@ DEPENDS = "util-linux util-linux-native"
+>>  SRC_URI =
+>> "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+>>             file://link_needed_libs.patch \
+>>             file://0001-define-__-prefixed-version-of-intXY_t-types.patch
+>> \
+>> +           file://remove_flags_from_build_flags.patch \
+>> +           file://0001-Rename-progname-as-it-is-provided-by-libc.patch \
+>> +           file://xfsprogs-4.12.0-fix_musl.patch \
+>>             "
+>> -SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
+>> -SRC_URI[sha256sum] =
+>> "c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2"
+>> +SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
+>> +SRC_URI[sha256sum] =
+>> "b330ad8d737f4152ae511580102e2fc49212bb51dfb4b614084344abae46d0df"
+>>
+>>  inherit autotools-brokensep
+>>
+>> --
+>> 2.14.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+>
 
