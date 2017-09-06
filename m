@@ -1,49 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E3A1573123
+Received: from mail-vk0-f41.google.com (mail-vk0-f41.google.com
+	[209.85.213.41])
+	by mail.openembedded.org (Postfix) with ESMTP id AEE1973123
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 08:08:47 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id v203so1615417vkv.1
+	Wed,  6 Sep 2017 08:09:49 +0000 (UTC)
+Received: by mail-vk0-f41.google.com with SMTP id x85so10711808vkx.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Sep 2017 01:08:49 -0700 (PDT)
+	Wed, 06 Sep 2017 01:09:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=9jZjFv7/J9DOE1c0+iwrUmxaSlZauJzXkZ2fJ5Dbnvk=;
-	b=sw5G0GQyHzpQHFNiMwn/PC/XPQ8u4L0g8qY2krkz3VKMfaDMs3ACeYinCPNDL1f4Ux
-	f1NP9B6RPOPvihOyOUbOyQj1Mjwnh19BFLYgkmsf4+ZxPM1Yg5SvUiYHqT2OJMwQtFCt
-	/5//I549fsUAd9NVRDXmTf4yidfyqpKG1sA9mJ6OPULrmSBZH2r1EP0rSHEp0oLWaprK
-	37zgmH5TLkLIqYJNstKRO48j33lHZhWm9kSoBKYy3idnS08RYEKuS8C2WTA+MaIs+mdT
-	52x/rrWmVay5Z6ztpA0yGRFgJqwDm/cJuX6pqkOgdoByiJZqxSsACV5kc4XSnKCV3kPU
-	Qpvw==
+	:cc; bh=1Ma24ZTUqaPU8ffIR246SPvZrrVuutOkW5HzFlh9buM=;
+	b=KyrTBpQ9/HAuwdi6yGPFdw9+tKrqq7WFOj0LjBTLQ2Auocw4a1POe+VDLwdQ9UqBis
+	0ZAY0qwtV0J2tVUJ++NX/jAZEwVCt0n0/8QPfnm694Um0MFiGNfjYsWinkiVRQWiMQtu
+	VYgVse2dXf1/V4iI3n+jwjx3N2A/TZeevyWFoPWe9tVMp0a5328LCQAxGi5UJrbBjgtN
+	DQap9GOr4wyG17ZJskIurwGIvMQK+dL/i0KRFrTzmxzqtGjxUeLMt0kdyaBErwdmuWsv
+	rnze9gd6INhYIUvpcrRF1rs+T1/MKM21qmuGS7yHqkt7UsV6C400sDYgEwKHoVtmu0+i
+	KvWw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=9jZjFv7/J9DOE1c0+iwrUmxaSlZauJzXkZ2fJ5Dbnvk=;
-	b=LuziCKGgR/KLNJVcz/cVVMRRSxPt0FaDUYk9ryIUrxPXoIRInCOhFuJ7V7hTtaYvIa
-	4J4iZYKjxC4/EtYTHkP0KG1vPpfKzMwEM8T7w9yko4frsD3spVOX5rFRz7daKr3EkFQq
-	aiZVA5f9EyM+kmsVMjqBTeejy9DrWNRUQ7psGrT6dXwvK40Pfc+wkIh8d9NIuuGJd+7W
-	koq6FVi5hUVuMYYG2v2u+HqAjpyYK/YGCJ7ktgrqI7UbIPkNP487eqSt290X3F4hfPk/
-	zw3oOmyKP7jloYICSYUsWk1PnSyEZ8Or/b32tFvtp3iFKnHzLiV0XAMAExxTqXJ2nAWT
-	Guww==
-X-Gm-Message-State: AHPjjUgkZceFg4EQiBsj0ct24MZ4QOhHZS+m/hA7pg6BuhVV3y1kC88G
-	9Sc6ATcECOUvRZxo4SvRVbS5M57LAw==
-X-Google-Smtp-Source: ADKCNb5l5MGUc3w4Ss3zyEgtRs7YclAKgWbCG2tQMVvyo2nPQ+eP5k17h9ymSYk8l8B+olCtVLxtHANTPvd64om0SrQ=
-X-Received: by 10.31.231.1 with SMTP id e1mr1099276vkh.90.1504685328802; Wed,
-	06 Sep 2017 01:08:48 -0700 (PDT)
+	bh=1Ma24ZTUqaPU8ffIR246SPvZrrVuutOkW5HzFlh9buM=;
+	b=kVDxcPGehNMCeRL5J+GT9MZuTbT87kogYVAyy471Udtt1aAO+9JAhg2rhxjy8t0y3q
+	Dbs25E0Bt2oBptqSaFDixEpHnJHK9PUdjUIacRACxwzSl8OuLyy9BqVYOROIuuPw46YK
+	NOAb2pN2lkr2unTD8Dnt+bEhTO7a06z4x8vGzJ4Dn7DMQV1rbCn4/XzdfSWnuXuWig2n
+	ltBTbYCwaOfBRfPc2hiuAoo8AThkwHEBO7JxorKsSWxOzzgWKD2xM5++05TvCtcRJ47V
+	bED2JcQVGoG0yUNIR5/Vl0RX3J1qraodPf4RU2WQRO2s6hff6rmgrlz4TpDAGPHCRlNP
+	vglg==
+X-Gm-Message-State: AHPjjUiVxf+6no2qXTRSI8xaTQoAbmo2VON8PMywPXSoAtx6evvrqUCU
+	7SDsTOU4h35+JF2vjcKr+r29801VoA==
+X-Google-Smtp-Source: ADKCNb4sKYN3P75dQJdI8Frbxk2m2Ovc/lBZF2SEmKo7w6zWsI28XOqD5NjocqM0xLyUuKpN4iHHUVjYlOcMtzHktes=
+X-Received: by 10.31.41.136 with SMTP id p130mr1031578vkp.122.1504685390807;
+	Wed, 06 Sep 2017 01:09:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.15.69 with HTTP; Wed, 6 Sep 2017 01:08:48 -0700 (PDT)
-In-Reply-To: <20170904173420.20442-2-raj.khem@gmail.com>
-References: <20170904173420.20442-1-raj.khem@gmail.com>
-	<20170904173420.20442-2-raj.khem@gmail.com>
+Received: by 10.103.15.69 with HTTP; Wed, 6 Sep 2017 01:09:50 -0700 (PDT)
+In-Reply-To: <20170902220559.9784-2-raj.khem@gmail.com>
+References: <20170902220559.9784-1-raj.khem@gmail.com>
+	<20170902220559.9784-2-raj.khem@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 6 Sep 2017 10:08:48 +0200
-Message-ID: <CA+chaQfYV9Ke+uZz+_=iQqsuiG_v1hLeOb+=tdYM7U+XPkO7Nw@mail.gmail.com>
+Date: Wed, 6 Sep 2017 10:09:50 +0200
+Message-ID: <CA+chaQefO7rkJG6eLnWctdow5cZmmKcwZ8xdjG3VWBrd4oyzUQ@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH V2 2/2] ndisc6: Fix build with clang and update to latest on git
+Subject: Re: [meta-filesystems][PATCH 2/2] xfsprogs: Upgrade to 4.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,291 +56,432 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 08:08:48 -0000
+X-List-Received-Date: Wed, 06 Sep 2017 08:09:50 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-v2 fetches ok, but fails to build:
+Fails to build (probably due to gold):
+http://errors.yoctoproject.org/Errors/Details/155158/
 
-http://errors.yoctoproject.org/Errors/Details/155160/
+On Sun, Sep 3, 2017 at 12:05 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-On Mon, Sep 4, 2017 at 7:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Change recipe to git and http protocol
-> Pass PERL variable to configure
-> Add patches to fix VLAIS
-> Re-organize structure of recipe
+> Fix cross builds with hardening flags
 >
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
->  .../0001-replace-VLAIS-with-malloc-free-pair.patch | 124
+>  ...Rename-progname-as-it-is-provided-by-libc.patch | 204
 > +++++++++++++++++++++
->  .../ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch     |  30 +++++
->  .../ndisc6/{ndisc6_1.0.3.bb => ndisc6_git.bb}      |  48 ++++----
->  3 files changed, 180 insertions(+), 22 deletions(-)
->  create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch
->  create mode 100644 meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
->  rename meta-networking/recipes-support/ndisc6/{ndisc6_1.0.3.bb =>
-> ndisc6_git.bb} (86%)
+>  .../files/remove_flags_from_build_flags.patch      |  13 ++
+>  .../xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch  | 117 ++++++++++++
+>  .../{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb}     |   7 +-
+>  4 files changed, 339 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/0001-
+> Rename-progname-as-it-is-provided-by-libc.patch
+>  create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/remove_
+> flags_from_build_flags.patch
+>  create mode 100644 meta-filesystems/recipes-
+> utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+>  rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.11.0.bb =>
+> xfsprogs_4.12.0.bb} (85%)
 >
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch b/meta-networking/recipes-
-> support/ndisc6/ndisc6/0001-replace-VLAIS-with-malloc-free-pair.patch
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/0001-
+> Rename-progname-as-it-is-provided-by-libc.patch
+> b/meta-filesystems/recipes-utils/xfsprogs/files/0001-
+> Rename-progname-as-it-is-provided-by-libc.patch
 > new file mode 100644
-> index 000000000..dc58b5b79
+> index 000000000..aa13b67be
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6/0001-
-> replace-VLAIS-with-malloc-free-pair.patch
-> @@ -0,0 +1,124 @@
-> +From 3a7d5396e633e6c02a4583be7faf3d79d0d33748 Mon Sep 17 00:00:00 2001
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/files/0001-
+> Rename-progname-as-it-is-provided-by-libc.patch
+> @@ -0,0 +1,204 @@
+> +From 95aaaa800e0dc387875b4e2adad480b72c1632ff Mon Sep 17 00:00:00 2001
 > +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 31 Aug 2017 11:14:41 -0700
-> +Subject: [PATCH 1/2] replace VLAIS with malloc/free pair
+> +Date: Sat, 2 Sep 2017 14:46:49 -0700
+> +Subject: [PATCH] Rename progname as it is provided by libc
 > +
-> +Makes it compatible with non-gnu compilers
+> +Rename local variable progname to avoid a clash with libc
+> +global symbols
 > +
 > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +---
-> +Upstream-Status: Pending
+> + io/init.c                 | 10 +++++-----
+> + mdrestore/xfs_mdrestore.c | 10 +++++-----
+> + quota/init.c              | 10 +++++-----
+> + spaceman/init.c           |  8 ++++----
+> + 4 files changed, 19 insertions(+), 19 deletions(-)
 > +
-> + src/trace-icmp.c |  7 +++++--
-> + src/trace-tcp.c  | 14 ++++++++++----
-> + src/trace-udp.c  |  7 +++++--
-> + 3 files changed, 20 insertions(+), 8 deletions(-)
+> +diff --git a/io/init.c b/io/init.c
+> +index 20d5f80..e82e101 100644
+> +--- a/io/init.c
+> ++++ b/io/init.c
+> +@@ -23,7 +23,7 @@
+> + #include "init.h"
+> + #include "io.h"
 > +
-> +diff --git a/src/trace-icmp.c b/src/trace-icmp.c
-> +index 842938e..c76cb54 100644
-> +--- a/src/trace-icmp.c
-> ++++ b/src/trace-icmp.c
-> +@@ -43,16 +43,19 @@ send_echo_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct icmp6_hdr ih;
-> +-              uint8_t payload[plen - sizeof (struct icmp6_hdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +       memset (&packet, 0, plen);
-> ++      packet.payload = malloc(plen - sizeof (struct icmp6_hdr));
-> +
-> +       packet.ih.icmp6_type = ICMP6_ECHO_REQUEST;
-> +       packet.ih.icmp6_id = htons (getpid ());
-> +       packet.ih.icmp6_seq = htons ((ttl << 8) | (n & 0xff));
-> +       (void)port;
-> +
-> +-      return send_payload (fd, &packet.ih, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet.ih, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
+> +-char  *progname;
+> ++char  *io_progname;
+> + int   exitcode;
+> + int   expert;
+> + int   idlethread;
+> +@@ -35,7 +35,7 @@ usage(void)
+> + {
+> +       fprintf(stderr,
+> + _("Usage: %s [-adfinrRstVx] [-m mode] [-p prog] [[-c|-C] cmd]...
+> file\n"),
+> +-              progname);
+> ++              io_progname);
+> +       exit(1);
 > + }
 > +
+> +@@ -142,7 +142,7 @@ init(
+> +       xfs_fsop_geom_t geometry = { 0 };
+> +       struct fs_path  fsp;
 > +
-> +diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-> +index 940f918..62d22ff 100644
-> +--- a/src/trace-tcp.c
-> ++++ b/src/trace-tcp.c
-> +@@ -54,10 +54,11 @@ send_syn_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct tcphdr th;
-> +-              uint8_t payload[plen - sizeof (struct tcphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
+> +-      progname = basename(argv[0]);
+> ++      io_progname = basename(argv[0]);
+> +       setlocale(LC_ALL, "");
+> +       bindtextdomain(PACKAGE, LOCALEDIR);
+> +       textdomain(PACKAGE);
+> +@@ -186,7 +186,7 @@ init(
+> +                       flags |= IO_NONBLOCK;
+> +                       break;
+> +               case 'p':
+> +-                      progname = optarg;
+> ++                      io_progname = optarg;
+> +                       break;
+> +               case 'r':
+> +                       flags |= IO_READONLY;
+> +@@ -207,7 +207,7 @@ init(
+> +                       expert = 1;
+> +                       break;
+> +               case 'V':
+> +-                      printf(_("%s version %s\n"), progname, VERSION);
+> ++                      printf(_("%s version %s\n"), io_progname, VERSION);
+> +                       exit(0);
+> +               default:
+> +                       usage();
+> +diff --git a/mdrestore/xfs_mdrestore.c b/mdrestore/xfs_mdrestore.c
+> +index 9d1b4e8..b840a54 100644
+> +--- a/mdrestore/xfs_mdrestore.c
+> ++++ b/mdrestore/xfs_mdrestore.c
+> +@@ -19,7 +19,7 @@
+> + #include "libxfs.h"
+> + #include "xfs_metadump.h"
 > +
-> +       memset (&packet, 0, sizeof (packet));
-> ++      packet.payload = malloc(plen - sizeof (struct tcphdr));
-> +       packet.th.th_sport = sport;
-> +       packet.th.th_dport = port;
-> +       packet.th.th_seq = htonl ((ttl << 24) | (n << 16) |
-> (uint16_t)getpid ());
-> +@@ -65,7 +66,9 @@ send_syn_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       packet.th.th_flags = TH_SYN | (ecn ? (TH_ECE | TH_CWR) : 0);
-> +       packet.th.th_win = htons (TCP_WINDOW);
+> +-char          *progname;
+> ++char          *mdrestore_progname;
+> + int           show_progress = 0;
+> + int           show_info = 0;
+> + int           progress_since_warning = 0;
+> +@@ -30,7 +30,7 @@ fatal(const char *msg, ...)
+> +       va_list         args;
 > +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
+> +       va_start(args, msg);
+> +-      fprintf(stderr, "%s: ", progname);
+> ++      fprintf(stderr, "%s: ", mdrestore_progname);
+> +       vfprintf(stderr, msg, args);
+> +       exit(1);
+> + }
+> +@@ -194,7 +194,7 @@ perform_restore(
+> + static void
+> + usage(void)
+> + {
+> +-      fprintf(stderr, "Usage: %s [-V] [-g] source target\n", progname);
+> ++      fprintf(stderr, "Usage: %s [-V] [-g] source target\n",
+> mdrestore_progname);
+> +       exit(1);
 > + }
 > +
+> +@@ -212,7 +212,7 @@ main(
+> +       struct stat     statbuf;
+> +       int             is_target_file;
 > +
-> +@@ -131,10 +134,11 @@ send_ack_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct tcphdr th;
-> +-              uint8_t payload[plen - sizeof (struct tcphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
+> +-      progname = basename(argv[0]);
+> ++      mdrestore_progname = basename(argv[0]);
 > +
-> +       memset (&packet, 0, sizeof (packet));
-> ++      packet.payload = malloc(plen - sizeof (struct tcphdr));
-> +       packet.th.th_sport = sport;
-> +       packet.th.th_dport = port;
-> +       packet.th.th_ack = htonl ((ttl << 24) | (n << 16) |
-> (uint16_t)getpid ());
-> +@@ -142,7 +146,9 @@ send_ack_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       packet.th.th_flags = TH_ACK;
-> +       packet.th.th_win = htons (TCP_WINDOW);
+> +       while ((c = getopt(argc, argv, "giV")) != EOF) {
+> +               switch (c) {
+> +@@ -223,7 +223,7 @@ main(
+> +                               show_info = 1;
+> +                               break;
+> +                       case 'V':
+> +-                              printf("%s version %s\n", progname,
+> VERSION);
+> ++                              printf("%s version %s\n",
+> mdrestore_progname, VERSION);
+> +                               exit(0);
+> +                       default:
+> +                               usage();
+> +diff --git a/quota/init.c b/quota/init.c
+> +index d45dc4c..46403de 100644
+> +--- a/quota/init.c
+> ++++ b/quota/init.c
+> +@@ -21,7 +21,7 @@
+> + #include "input.h"
+> + #include "init.h"
 > +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
+> +-char  *progname;
+> ++char  *quota_progname;
+> + int   exitcode;
+> + int   expert;
+> + bool  foreign_allowed = false;
+> +@@ -47,7 +47,7 @@ usage(void)
+> + {
+> +       fprintf(stderr,
+> +               _("Usage: %s [-V] [-x] [-f] [-p prog] [-c cmd]... [-d
+> project]... [path]\n"),
+> +-              progname);
+> ++              quota_progname);
+> +       exit(1);
 > + }
 > +
+> +@@ -147,7 +147,7 @@ init(
+> + {
+> +       int             c;
 > +
-> +diff --git a/src/trace-udp.c b/src/trace-udp.c
-> +index 4adde6b..a6cbb07 100644
-> +--- a/src/trace-udp.c
-> ++++ b/src/trace-udp.c
-> +@@ -46,9 +46,10 @@ send_udp_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       struct
-> +       {
-> +               struct udphdr uh;
-> +-              uint8_t payload[plen - sizeof (struct udphdr)];
-> ++              uint8_t *payload;
-> +       } packet;
-> +       memset (&packet, 0, plen);
-> ++      packet.payload = malloc(plen - sizeof (struct udphdr));
+> +-      progname = basename(argv[0]);
+> ++      quota_progname = basename(argv[0]);
+> +       setlocale(LC_ALL, "");
+> +       bindtextdomain(PACKAGE, LOCALEDIR);
+> +       textdomain(PACKAGE);
+> +@@ -173,13 +173,13 @@ init(
+> +                       projid_file = optarg;
+> +                       break;
+> +               case 'p':
+> +-                      progname = optarg;
+> ++                      quota_progname = optarg;
+> +                       break;
+> +               case 'x':
+> +                       expert++;
+> +                       break;
+> +               case 'V':
+> +-                      printf(_("%s version %s\n"), progname, VERSION);
+> ++                      printf(_("%s version %s\n"), quota_progname,
+> VERSION);
+> +                       exit(0);
+> +               default:
+> +                       usage();
+> +diff --git a/spaceman/init.c b/spaceman/init.c
+> +index b3eface..bedf112 100644
+> +--- a/spaceman/init.c
+> ++++ b/spaceman/init.c
+> +@@ -23,7 +23,7 @@
+> + #include "path.h"
+> + #include "space.h"
 > +
-> +       (void)n;
-> +       packet.uh.uh_sport = sport;
-> +@@ -61,7 +62,9 @@ send_udp_probe (int fd, unsigned ttl, unsigned n,
-> size_t plen, uint16_t port)
-> +       /*if (plen > sizeof (struct udphdr))
-> +               packet.payload[0] = (uint8_t)ttl;*/
+> +-char  *progname;
+> ++char  *spaceman_progname;
+> + int   exitcode;
 > +
-> +-      return send_payload (fd, &packet, plen, ttl);
-> ++      ssize_t ret = send_payload (fd, &packet, plen, ttl);
-> ++      free(packet.payload);
-> ++      return ret;
+> + void
+> +@@ -31,7 +31,7 @@ usage(void)
+> + {
+> +       fprintf(stderr,
+> +               _("Usage: %s [-c cmd] file\n"),
+> +-              progname);
+> ++              spaceman_progname);
+> +       exit(1);
 > + }
 > +
+> +@@ -74,7 +74,7 @@ init(
+> +       xfs_fsop_geom_t geometry = { 0 };
+> +       struct fs_path  fsp;
 > +
+> +-      progname = basename(argv[0]);
+> ++      spaceman_progname = basename(argv[0]);
+> +       setlocale(LC_ALL, "");
+> +       bindtextdomain(PACKAGE, LOCALEDIR);
+> +       textdomain(PACKAGE);
+> +@@ -86,7 +86,7 @@ init(
+> +                       add_user_command(optarg);
+> +                       break;
+> +               case 'V':
+> +-                      printf(_("%s version %s\n"), progname, VERSION);
+> ++                      printf(_("%s version %s\n"), spaceman_progname,
+> VERSION);
+> +                       exit(0);
+> +               default:
+> +                       usage();
 > +--
 > +2.14.1
 > +
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-not-undef-_GNU_SOURCE.patch
-> b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+> b/meta-filesystems/recipes-utils/xfsprogs/files/remove_
+> flags_from_build_flags.patch
 > new file mode 100644
-> index 000000000..3cc2ba80c
+> index 000000000..bba9a25c2
 > --- /dev/null
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6/0002-Do-
-> not-undef-_GNU_SOURCE.patch
-> @@ -0,0 +1,30 @@
-> +From 2a50154fbce38fd36be7e14f5cd4a8b03c65c72f Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 31 Aug 2017 11:15:37 -0700
-> +Subject: [PATCH 2/2] Do not undef _GNU_SOURCE
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/files/remove_
+> flags_from_build_flags.patch
+> @@ -0,0 +1,13 @@
+> +Index: xfsprogs-4.12.0/include/builddefs.in
+> +===================================================================
+> +--- xfsprogs-4.12.0.orig/include/builddefs.in
+> ++++ xfsprogs-4.12.0/include/builddefs.in
+> +@@ -164,7 +164,7 @@ ifeq ($(ENABLE_GETTEXT),yes)
+> + GCFLAGS += -DENABLE_GETTEXT
+> + endif
 > +
-> +There are functions from tcp.h which are under _GNU_SOURCE
-> +in musl
+> +-BUILD_CFLAGS += $(GCFLAGS) $(PCFLAGS)
+> ++BUILD_CFLAGS += $(GCFLAGS)
+> + # First, Global, Platform, Local CFLAGS
+> + CFLAGS += $(FCFLAGS) $(OPTIMIZER) $(GCFLAGS) $(PCFLAGS) $(LCFLAGS)
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+> b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-
+> 4.12.0-fix_musl.patch
+> new file mode 100644
+> index 000000000..efc57e4f6
+> --- /dev/null
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-
+> 4.12.0-fix_musl.patch
+> @@ -0,0 +1,117 @@
+> +From 21253610f9ef87db8e2a75b863b7fcfbd0cdb421 Mon Sep 17 00:00:00 2001
+> +From: "Darrick J. Wong" <darrick.wong@oracle.com>
+> +Date: Tue, 25 Jul 2017 13:45:01 -0500
+> +Subject: [PATCH] In patch 4944defad4 ("xfs_db: redirect printfs when
+> + metadumping to stdout"), we solved the problem of xfs_db printfs ending
+> up in
+> + the metadump stream by reassigning stdout for the duration of a stdout
+> + metadump.  Unfortunately, musl doesn't allow stdout to be reassigned (in
+> + their view "extern FILE *stdout" means "extern FILE * const stdout"), so
+> we
+> + abandon the old approach in favor of playing games with dup() to switch
+> the
+> + raw file descriptors.
+> +
+> +While we're at it, fix a regression where an unconverted outf test
+> +allows progress info to end up in the metadump stream.
+> +
+> +Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
 > +---
-> +Upstream-Status: Pending
+> + db/metadump.c | 47 ++++++++++++++++++++++++++++++++++++-----------
+> + 1 file changed, 36 insertions(+), 11 deletions(-)
 > +
-> + src/trace-tcp.c | 1 -
-> + 1 file changed, 1 deletion(-)
+> +diff --git a/db/metadump.c b/db/metadump.c
+> +index 96641e0..4e2f648 100644
+> +--- a/db/metadump.c
+> ++++ b/db/metadump.c
+> +@@ -78,6 +78,7 @@ static int           obfuscate = 1;
+> + static int            zero_stale_data = 1;
+> + static int            show_warnings = 0;
+> + static int            progress_since_warning = 0;
+> ++static bool           stdout_metadump;
 > +
-> +diff --git a/src/trace-tcp.c b/src/trace-tcp.c
-> +index 62d22ff..380008e 100644
-> +--- a/src/trace-tcp.c
-> ++++ b/src/trace-tcp.c
-> +@@ -21,7 +21,6 @@
-> + # include <config.h>
-> + #endif
+> + void
+> + metadump_init(void)
+> +@@ -137,7 +138,7 @@ print_progress(const char *fmt, ...)
+> +       va_end(ap);
+> +       buf[sizeof(buf)-1] = '\0';
 > +
-> +-#undef _GNU_SOURCE
-> + #define _DEFAULT_SOURCE 1
+> +-      f = (outf == stdout) ? stderr : stdout;
+> ++      f = stdout_metadump ? stderr : stdout;
+> +       fprintf(f, "\r%-59s", buf);
+> +       fflush(f);
+> +       progress_since_warning = 1;
+> +@@ -2750,7 +2751,8 @@ metadump_f(
+> +       xfs_agnumber_t  agno;
+> +       int             c;
+> +       int             start_iocur_sp;
+> +-      bool            stdout_metadump = false;
+> ++      int             outfd = -1;
+> ++      int             ret;
+> +       char            *p;
 > +
-> + #include <string.h>
+> +       exitcode = 1;
+> +@@ -2870,16 +2872,35 @@ metadump_f(
+> +                * metadump operation so that dbprintf and other messages
+> +                * are sent to the console instead of polluting the
+> +                * metadump stream.
+> ++               *
+> ++               * We get to do this the hard way because musl doesn't
+> ++               * allow reassignment of stdout.
+> +                */
+> +-              outf = stdout;
+> +-              stdout = stderr;
+> ++              fflush(stdout);
+> ++              outfd = dup(STDOUT_FILENO);
+> ++              if (outfd < 0) {
+> ++                      perror("opening dump stream");
+> ++                      goto out;
+> ++              }
+> ++              ret = dup2(STDERR_FILENO, STDOUT_FILENO);
+> ++              if (ret < 0) {
+> ++                      perror("redirecting stdout");
+> ++                      close(outfd);
+> ++                      goto out;
+> ++              }
+> ++              outf = fdopen(outfd, "a");
+> ++              if (outf == NULL) {
+> ++                      fprintf(stderr, "cannot create dump stream\n");
+> ++                      dup2(outfd, 1);
+> ++                      close(outfd);
+> ++                      goto out;
+> ++              }
+> +               stdout_metadump = true;
+> +       } else {
+> +               outf = fopen(argv[optind], "wb");
+> +               if (outf == NULL) {
+> +                       print_warning("cannot create dump file");
+> +-                      free(metablock);
+> +-                      return 0;
+> ++                      goto out;
+> +               }
+> +       }
+> +
+> +@@ -2907,15 +2928,19 @@ metadump_f(
+> +       if (progress_since_warning)
+> +               fputc('\n', stdout_metadump ? stderr : stdout);
+> +
+> +-      if (stdout_metadump)
+> +-              stdout = outf;
+> +-      else
+> +-              fclose(outf);
+> ++      if (stdout_metadump) {
+> ++              fflush(outf);
+> ++              fflush(stdout);
+> ++              ret = dup2(outfd, STDOUT_FILENO);
+> ++              if (ret < 0)
+> ++                      perror("un-redirecting stdout");
+> ++      }
+> ++      fclose(outf);
+> +
+> +       /* cleanup iocur stack */
+> +       while (iocur_sp > start_iocur_sp)
+> +               pop_cur();
+> +-
+> ++out:
+> +       free(metablock);
+> +
+> +       return 0;
 > +--
-> +2.14.1
-> +
-> diff --git a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> similarity index 86%
-> rename from meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> rename to meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> index 6bc0531b9..e1ab3ae76 100644
-> --- a/meta-networking/recipes-support/ndisc6/ndisc6_1.0.3.bb
-> +++ b/meta-networking/recipes-support/ndisc6/ndisc6_git.bb
-> @@ -3,22 +3,32 @@ IPv6 networks, including ndisc6, rdisc6, tcptraceroute6
-> and traceroute6."
->  SECTION = "net"
->  HOMEPAGE = "http://www.remlab.net/ndisc6/"
->  LICENSE = "GPL-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
->
-> -# The tcptraceroute6 and tracert6 commands depend on rltraceroute6 to
-> -# perform the actual trace operation.
-> -RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
-> -RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
-> -RDEPENDS_${PN}-misc += "perl"
-> -
-> -SRC_URI = "http://www.remlab.net/files/ndisc6/ndisc6-${PV}.tar.bz2 \
-> -"
-> -SRC_URI[md5sum] = "21afdaa3a5a5c1ce50eb7f2b7d795989"
-> -SRC_URI[sha256sum] = "0f41d6caf5f2edc1a12924956ae8b1
-> d372e3b426bd7b11eed7d38bc974eec821"
-> +PV = "1.0.4+git${SRCPV}"
-> +SRCREV = "4c794b5512d23c649def1f94a684225dcbb6ac3e"
-> +SRC_URI = "git://git.remlab.net/git/ndisc6.git;protocol=http \
-> +           file://0001-replace-VLAIS-with-malloc-free-pair.patch \
-> +           file://0002-Do-not-undef-_GNU_SOURCE.patch \
-> +           "
->
-> -LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-> +S = "${WORKDIR}/git"
->
->  inherit autotools gettext
->
-> +EXTRA_OECONF += "PERL=${USRBINPATH}/perl"
-> +
-> +do_configure_prepend() {
-> +    ${S}/autogen.sh
-> +}
-> +
-> +do_install_append () {
-> +    rm -rf ${D}${localstatedir}
-> +    # Enable SUID bit for applications that need it
-> +    chmod 4555 ${D}${bindir}/rltraceroute6
-> +    chmod 4555 ${D}${bindir}/ndisc6
-> +    chmod 4555 ${D}${bindir}/rdisc6
-> +}
->  ALLOW_EMPTY_${PN} = "1"
->
->  # Split into seperate packages since we normal don't want them all
-> @@ -49,15 +59,9 @@ or IPv4."
->  DESCRITPION_${PN}-rdnssd       = "Daemon to autoconfigure the list of DNS
+> +2.13.3
+> diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+> b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+> similarity index 85%
+> rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+> rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+> index 046dea425..444f712b5 100644
+> --- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+> +++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+> @@ -8,9 +8,12 @@ DEPENDS = "util-linux util-linux-native"
+>  SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${
+> BP}.tar.xz \
+>             file://link_needed_libs.patch \
+>             file://0001-define-__-prefixed-version-of-intXY_t-types.patch
 > \
->  servers through slateless IPv6 autoconfiguration."
+> +           file://remove_flags_from_build_flags.patch \
+> +           file://0001-Rename-progname-as-it-is-provided-by-libc.patch \
+> +           file://xfsprogs-4.12.0-fix_musl.patch \
+>             "
+> -SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
+> -SRC_URI[sha256sum] = "c3a6d87b564d7738243c507df82276
+> bed982265e345363a95f2c764e8a5f5bb2"
+> +SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
+> +SRC_URI[sha256sum] = "b330ad8d737f4152ae511580102e2f
+> c49212bb51dfb4b614084344abae46d0df"
 >
-> -# We do not run perl during the build, but only use it on the target.
-> -do_configure_prepend() {
-> -    export PERL="/usr/bin/perl"
-> -}
-> +# The tcptraceroute6 and tracert6 commands depend on rltraceroute6 to
-> +# perform the actual trace operation.
-> +RDEPENDS_${PN}-tcptraceroute6 = "${PN}-rltraceroute6"
-> +RDEPENDS_${PN}-tracert6 = "${PN}-rltraceroute6"
-> +RDEPENDS_${PN}-misc += "perl"
+>  inherit autotools-brokensep
 >
-> -do_install_append () {
-> -    rm -rf ${D}${localstatedir}
-> -    # Enable SUID bit for applications that need it
-> -    chmod 4555 ${D}${bindir}/rltraceroute6
-> -    chmod 4555 ${D}${bindir}/ndisc6
-> -    chmod 4555 ${D}${bindir}/rdisc6
-> -}
 > --
 > 2.14.1
 >
