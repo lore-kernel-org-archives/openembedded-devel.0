@@ -1,53 +1,33 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 59CCB77E93
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id B2DFF77FA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 20:21:12 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id f4so3604915wmh.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Sep 2017 13:21:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=93pcsedChQr2KLGI3oCvH1C1xChJTcyNCmubX76vdUo=;
-	b=KvjHARwKZkAZobteXiErxKd27eR5HZf36GMQCSuWEtsUzJmFWUATTEWLkC6LOHX2N3
-	luTpDhbYyzn4siRmSUnGIYE3CmV/9etIGPJrU9K83lJwrgkyXK+5WTAuPymYwIrbUrE+
-	ZgitxhD6a7Lt5387l3nwiyr2ZLESxMLKG7LNkzMFFZ8ayoV0NQx963yGB/gC1JPYUB8T
-	6JC00VBNYi0/xnCWeFFDZvR9zwEyJrnnN8vxiZoOcdzZ1irHyfg4xYD7SuVi/xadRwO4
-	InycEG3o1sn0XndFVOohuMkQ7cFEAAygnYEP1/x2Jd/rQieSfXxRkaNpYoSZzEYQq1Vz
-	5xNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=93pcsedChQr2KLGI3oCvH1C1xChJTcyNCmubX76vdUo=;
-	b=AAXjdS0miu3IPDteB8AIHIgq4Z5aJPfo9u0sRvkXfOuMUE87doOkMRbxjrnMvg5HIX
-	MTIThH4hzT6sC6IB8NlGTQAVdJIecU8xSQcU+CynZFpO4HF2GVQIoFBSQiY72lyyHMnP
-	4h/ghUEeAtd5JvbjDi/2jYRB9RM2GB4xis/dIWV+nu4xvfNytBUtgw0A/rb5L9Xd0VCQ
-	mHB7A+D8+PJA5oGpszCHdDFAv1/q3th/N+t3Dob4KFrRvgMeO1EXS/YyuAGLOFHazAPi
-	/oZFf63JtQDvUWp3311BmOMsg/Gim8CheZO8NfKdvYmrwhLajAPBSN1DtFJ7eHXAyUYB
-	iZnA==
-X-Gm-Message-State: AHPjjUjheN3r5GmOzhxGmDTWlmGSBiG1Jvmul+7sjeYs2tPKRK6vzEqX
-	ty3dlwlbmXGDP5DG
-X-Google-Smtp-Source: ADKCNb42N2uxyBPneAMadmjWPnR+7Doye+oPJ1PLwtLREhnyf23jczAdxzI5ay1VyjUpjfGA+GrJFQ==
-X-Received: by 10.28.21.80 with SMTP id 77mr617198wmv.77.1504729272935;
-	Wed, 06 Sep 2017 13:21:12 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030046E901F2641E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:46:e901:f264:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	s9sm281786wra.73.2017.09.06.13.21.12
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Sep 2017 13:21:12 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  6 Sep 2017 22:21:01 +0200
-Message-Id: <20170906202101.2983-1-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.5
+	Wed,  6 Sep 2017 20:21:27 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v86KLRp9001277
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 6 Sep 2017 13:21:27 -0700
+Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 6 Sep 2017 13:21:26 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>
+References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
+	<1504725809-12825-30-git-send-email-mark.hatle@windriver.com>
+	<CALbNGRSzEDGhGK9bA+8oUeusKVqTHoCktFRPvuVQ9OQJ_NfKvg@mail.gmail.com>
+	<9fab8446-0159-e7c8-b81f-a4e7fa3a5882@windriver.com>
+	<CALbNGRRQAKUNR-X1U=vdc4dEzpobc5k+b_F8cS=u2VOi04s7MA@mail.gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <65cc49bb-5a7e-c3f6-1e08-09a6bcb8ccab@windriver.com>
+Date: Wed, 6 Sep 2017 15:21:25 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
+	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-Subject: [meta-xfce][PATCH] meta-xfce: remove me as maintainer
+In-Reply-To: <CALbNGRRQAKUNR-X1U=vdc4dEzpobc5k+b_F8cS=u2VOi04s7MA@mail.gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 29/31] xfce4-mixer: Remove, gstreamer-0.10 is obsolete
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,26 +40,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 20:21:13 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 06 Sep 2017 20:21:27 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
 Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- meta-xfce/README | 2 --
- 1 file changed, 2 deletions(-)
+On 9/6/17 3:13 PM, Andreas Müller wrote:
+> On Wed, Sep 6, 2017 at 10:02 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>> On 9/6/17 2:58 PM, Andreas Müller wrote:
+>>> On Wed, Sep 6, 2017 at 9:23 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>>>> There is no upstream revision to the mixer to make it work w/o gstreamer-0.10
+>>>>
+>>>> also remove from packagegroup-xfce-extended
+>>>>
+>>>> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+>>>> ---
+>>>>  meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb   | 14 --------------
+>>>>  .../packagegroups/packagegroup-xfce-extended.bb            |  1 -
+>>>>  2 files changed, 15 deletions(-)
+>>>>  delete mode 100644 meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
+>>>>
+>>>> diff --git a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb b/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
+>>>> deleted file mode 100644
+>>>> index bdbec45..0000000
+>>>> --- a/meta-xfce/recipes-apps/xfce4-mixer/xfce4-mixer_4.11.0.bb
+>>>> +++ /dev/null
+>>>> @@ -1,14 +0,0 @@
+>>>> -SUMMARY = "A volume control application based on GStreamer"
+>>>> -LICENSE = "GPLv2"
+>>>> -LIC_FILES_CHKSUM = "file://COPYING;md5=59530bdf33659b29e73d4adb9f9f6552"
+>>>> -
+>>>> -inherit xfce-panel-plugin
+>>>> -
+>>>> -DEPENDS += "glib-2.0 gst-plugins-base gtk+ xfconf libunique"
+>>>> -
+>>>> -SRC_URI = "http://archive.xfce.org/src/apps/${BPN}/${@xfce_verdir("${PV}")}/${BPN}-${PV}.tar.bz2"
+>>>> -
+>>>> -SRC_URI[md5sum] = "1b3753b91224867a3a2dfddda239c28d"
+>>>> -SRC_URI[sha256sum] = "fb0c1df201ed1130f54f15b914cbe5a59286e994a137acda5609570c57112de2"
+>>>> -
+>>>> -RDEPENDS_${PN} = "gst-meta-audio"
+>>>> diff --git a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+>>>> index c07188f..ff024b3 100644
+>>>> --- a/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+>>>> +++ b/meta-xfce/recipes-xfce/packagegroups/packagegroup-xfce-extended.bb
+>>>> @@ -61,7 +61,6 @@ RRECOMMENDS_${PN} = " \
+>>>>      xfce4-appfinder \
+>>>>      xfce4-screenshooter \
+>>>>      xfce4-power-manager \
+>>>> -    xfce4-mixer \
+>>>>      ristretto \
+>>>>      xfce4-taskmanager \
+>>>>      gigolo \
+>>>> --
+>>>> 1.8.3.1
+>>>>
+>>> NAK - I use it daily and there is no proper replacement (not using pulsaudio)
+>>
+>> That is exactly why I removed it.. there is no proper replacement for it.
+>> Between gstreamer-0.10 not being supported and the existence of it in
+>> meta-openembedded causing preferred provider problems.  It really needs to be
+>> replaced with something else.  I have no idea 'what else', but I was looking and
+>> most other distributions have dumped it.
+>>
+>> I saw some references to security issues in gstreamer-0.10 (not being resolved)
+>> due to it no longer being supported as well, but no specifics.
+>>
+>> --Mark
+>>
+> You are about to remove a recipe I need very very very often. As you
+> can see in meta-qt5-extra I use my build for making music. You end up
+> in calling this other peoples problem (e.g mine) and don't really care
+> of any replacement. Thank you - I will send out a removing me as
+> maintainer for meta-xfce - fun times are definetely over.
 
-diff --git a/meta-xfce/README b/meta-xfce/README
-index 33ef509..bbc7cc7 100644
---- a/meta-xfce/README
-+++ b/meta-xfce/README
-@@ -18,5 +18,3 @@ Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce
- 
- When sending single patches, please using something like:
- 'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
--
--Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
--- 
-2.9.5
+You are missing the point.  We DO need a replacement.  However, I was unable to
+find one.  With the few references I found when searching that there was no
+replacement, and it was effectively obsolete (and removed in other
+distributions), I followed their example.
+
+As I said in the header, I don't believe this set is completely right.  But it's
+a first stab and what it took for me to pass the testing script.
+
+I am retesting with this patch and the removal of gstreamer removed from the
+test set (it will take a while, I've got -30,000- tasks to run through for a
+test).  It's possible that something else in the system was triggering a fault
+that caused gstreamer-0.10 to fail and that was resolved elsewhere.
+
+I tested the original work against master, but rebased to master-next after
+talking w/ Martin... I then spot checked the modified recipes that they were
+still working after the rebase.
+
+> And please don't even think about running your magic script for
+> meta-qt5-extra or send patches.
+
+Again, you are missing the point here.  Someone has to start this work.  It's
+the layer maintainers decision to accept or reject the patches, not mine..  but
+I feel it's my obligation as a community member to submit the patches I create
+to the community layers that I use.  I also feel it's my obligation as a patch
+submitter to explain why (or why not) they are necessary for my specific
+use-case.  (In this case, passing a specific compatibility test script.)
+
+--Mark
+
+> Over and out
+> 
+> Andreas
+> 
 
 
