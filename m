@@ -1,33 +1,49 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 037B4605BE
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A2C7A71B69
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Sep 2017 01:01:51 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v8611pGD026440
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 5 Sep 2017 18:01:51 -0700 (PDT)
-Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.180]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
-	Tue, 5 Sep 2017 18:01:51 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH 2/2] corosync: add support for extra
-	features
-Thread-Index: AQHTJkK5SvQTXHSoiku2dYAeLub5m6KnClsw
-Date: Wed, 6 Sep 2017 01:01:50 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
+	Wed,  6 Sep 2017 01:09:21 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id y68so2387113pfd.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 05 Sep 2017 18:09:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=wPbNAhMtoqBn4noiuCyX449G85iitb5O+DF7nVjgj8Q=;
+	b=tI1u13gTIdNPy6TopYTxrVjD9iFUsce86lWF9+jKIvuFbLulrvRF5Zoc7+r/ZCcBeM
+	jcnWSAI/SZUv7e/cWpwY7Gz+KS0IJhfKF4QrD8Bsy8faz1r6sJePwKYWRAW4b14ZdjPp
+	MholQEc9Jmgtjo0sOeHuSVKCMTPSVN1+LZ4izhhwlvbjthPTC08xEbwQ6uusJgm/zgvk
+	7SKpIRVrBgxseIee576Q6K4nOUL6YqB3cRZgTvYnYxAdD1IzrwG9B7cJ4HgK3hDJEZBt
+	edvx7pz+2h9vuHyUl+couDEzopKF/nryD2Dvd+WKXLgBtC8uWjFJcs0jKdKUPy/9THuh
+	eh2w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=wPbNAhMtoqBn4noiuCyX449G85iitb5O+DF7nVjgj8Q=;
+	b=Q7xvKLY4irQTHzLg+3cirsv1PG14encXQ6+KMP03KZox0+yeV6gioHxbnlS0vyzKJc
+	YlcY+iOBjaQ4kOWf5ApZo2J6hJtqu3y29PnObI4jAyuHYlPa7TrM2Ab0UOIACiUd6odV
+	YqFNJqT3lHs7lE3USzeK13GEx9unGzJrHD/FmIvneiRz61v1FpVAU4ELEicnTVS7xvam
+	G6FJZ30v+wj/9Nq/Q8/+XPnTgXPb2Cx4nvWwv70rnk3TMsiHpfm6aKylcv7l3S6ra9KZ
+	FGFpAMTXukdT5+PmMuQmO9U6LgGjOjMhIwCLKNQv/pXdlzXfcibsozsi+zVcxrdzx8e9
+	tc2w==
+X-Gm-Message-State: AHPjjUgAsoI2W5/lCKVTc+ivptQ/7MB1MU7crMnxMk1+bxYNNARRypTl
+	Lqqult1B4MJouoeL+2BwCUjZjLWDXQ==
+X-Google-Smtp-Source: ADKCNb4JYoJuKnv1pwsQchKt+DmTy5FddNfa9hOoFJEpby4Nju6KslmXFB7fOPfJEZvhP7CMkzwpV6Gzg6PLueUgtm0=
+X-Received: by 10.84.246.201 with SMTP id j9mr1978676plt.114.1504660162542;
+	Tue, 05 Sep 2017 18:09:22 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.189.8 with HTTP; Tue, 5 Sep 2017 18:08:52 -0700 (PDT)
+In-Reply-To: <1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
 References: <cover.1503998700.git.jackie.huang@windriver.com>
 	<6286ca12b20fb1972ee77d1fc217eb7ebbf60080.1503998700.git.jackie.huang@windriver.com>
 	<CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
-In-Reply-To: <CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.154]
-MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 5 Sep 2017 18:08:52 -0700
+Message-ID: <CAMKF1srJm5Y4UonABYcOmD7MP6ocnWnpoktNwCbr7oV6m5eA5w@mail.gmail.com>
+To: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-oe][PATCH 2/2] corosync: add support for extra features
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -42,102 +58,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Sep 2017 01:01:52 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 06 Sep 2017 01:09:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-WWVzLCBzdXJlLCBidXQgSSBjYW7igJl0IHJlcHJvZHVjZSB0aGlzLCBjb3VsZCB5b3Ugc2hvdyBt
-ZSB0aGUgY29uZmlnIHRoYXQgaGFkIHRoaXMgaXNzdWU/IFRoYW5rcyENCg0KVGhhbmtzLA0KSmFj
-a2llDQoNCkZyb206IE1hcnRpbiBKYW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21d
-DQpTZW50OiBUdWVzZGF5LCBTZXB0ZW1iZXIgMDUsIDIwMTcgMjA6MzANClRvOiBIdWFuZywgSmll
-IChKYWNraWUpDQpDYzogb3BlbmVtYmVkZGVkLWRldmVsDQpTdWJqZWN0OiBSZTogW29lXSBbbWV0
-YS1vZV1bUEFUQ0ggMi8yXSBjb3Jvc3luYzogYWRkIHN1cHBvcnQgZm9yIGV4dHJhIGZlYXR1cmVz
-DQoNCkNhbiB5b3UgcGxlYXNlIGFsc28gZml4Og0KY29yb3N5bmMtMi40LjI6IEVMRiBiaW5hcnkg
-Jy90bXAvd29yay9jb3JlMi02NC1vZS1saW51eC9jb3Jvc3luYy8yLjQuMi1yMC9wYWNrYWdlcy1z
-cGxpdC9jb3Jvc3luYy91c3Ivc2Jpbi9jb3Jvc3luYycgaGFzIHJlbG9jYXRpb25zIGluIC50ZXh0
-IFt0ZXh0cmVsXQ0KDQppdCdzIGJlZW4gdGhlcmUgZm9yIGxvbmcgdGltZS4NCg0KT24gVHVlLCBB
-dWcgMjksIDIwMTcgYXQgMTE6MjcgQU0sIDxqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbTxtYWls
-dG86amFja2llLmh1YW5nQHdpbmRyaXZlci5jb20+PiB3cm90ZToNCkZyb206IEphY2tpZSBIdWFu
-ZyA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb208bWFpbHRvOmphY2tpZS5odWFuZ0B3aW5kcml2
-ZXIuY29tPj4NCg0KKiBBZGQgc3VwcG9ydCBmb3IgZmVhdHVyZXM6IGRidXMgcWRldmljZSBxbmV0
-ZCBzbm1wDQoqIEFkZCByZWxhdGVkIFBBQ0tBR0VDT05GSUcNCiogaW5oZXJpdCB1c2VyYWRkIHRv
-IGFkZCBwcm9wZXIgdXNlciBmb3IgcW5ldGQgc2VydmljZQ0KDQpTaWduZWQtb2ZmLWJ5OiBKYWNr
-aWUgSHVhbmcgPGphY2tpZS5odWFuZ0B3aW5kcml2ZXIuY29tPG1haWx0bzpqYWNraWUuaHVhbmdA
-d2luZHJpdmVyLmNvbT4+DQotLS0NCiAuLi4vcmVjaXBlcy1leHRlbmRlZC9jb3Jvc3luYy9jb3Jv
-c3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+ICAgIHwgMzAgKysrKysrKysr
-KysrKysrKysrKy0tLQ0KIDEgZmlsZSBjaGFuZ2VkLCAyNyBpbnNlcnRpb25zKCspLCAzIGRlbGV0
-aW9ucygtKQ0KDQpkaWZmIC0tZ2l0IGEvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nvcm9zeW5j
-L2Nvcm9zeW5jXzIuNC4yLmJiPGh0dHA6Ly9jb3Jvc3luY18yLjQuMi5iYj4gYi9tZXRhLW9lL3Jl
-Y2lwZXMtZXh0ZW5kZWQvY29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nvcm9zeW5j
-XzIuNC4yLmJiPg0KaW5kZXggMmYzYWVmMjk5Li43ZDVhODdlNGMgMTAwNjQ0DQotLS0gYS9tZXRh
-LW9lL3JlY2lwZXMtZXh0ZW5kZWQvY29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nv
-cm9zeW5jXzIuNC4yLmJiPg0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWV4dGVuZGVkL2Nvcm9zeW5j
-L2Nvcm9zeW5jXzIuNC4yLmJiPGh0dHA6Ly9jb3Jvc3luY18yLjQuMi5iYj4NCkBAIC01LDcgKzUs
-NyBAQCBIT01FUEFHRSA9ICJodHRwOi8vY29yb3N5bmMuZ2l0aHViLmlvL2Nvcm9zeW5jLyINCg0K
-IFNFQ1RJT04gPSAiYmFzZSINCg0KLWluaGVyaXQgYXV0b3Rvb2xzIHBrZ2NvbmZpZyBzeXN0ZW1k
-DQoraW5oZXJpdCBhdXRvdG9vbHMgcGtnY29uZmlnIHN5c3RlbWQgdXNlcmFkZA0KDQogU1JDX1VS
-SSA9ICJodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMub3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyR7QlB9
-LnRhci5nejxodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMub3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyQl
-N2JCUCU3ZC50YXIuZ3o+Ig0KIFNSQ19VUklbbWQ1c3VtXSA9ICI1NDdmYTc4NzA0ZGE1M2FhMzU5
-MTJiZTU4ZDMxMDM1ZiINCkBAIC0xNiwxMyArMTYsMjMgQEAgTElDX0ZJTEVTX0NIS1NVTSA9ICJm
-aWxlOi8vTElDRU5TRTttZDU9YTg1ZWI0Y2UyNDAzM2FkYjYwODhkZDFkNmZmYzVlNWQ8ZmlsZTov
-Ly9cXExJQ0VOU0U7bWQ1PWE4NWViNGNlMjQwMzNhZGI2MDg4ZGQxZDZmZmM1ZTVkPiINCg0KIERF
-UEVORFMgPSAiZ3JvZmYtbmF0aXZlIG5zcyBsaWJxYiINCg0KLVNZU1RFTURfU0VSVklDRV8ke1BO
-fSA9ICJjb3Jvc3luYy5zZXJ2aWNlIGNvcm9zeW5jLW5vdGlmeWQuc2VydmljZSINCitTWVNURU1E
-X1NFUlZJQ0VfJHtQTn0gPSAiY29yb3N5bmMuc2VydmljZSBjb3Jvc3luYy1ub3RpZnlkLnNlcnZp
-Y2UgXA0KKyAgICAgICAgICAgICAgICAgICAgICAgICAke0BiYi51dGlscy5jb250YWlucygnUEFD
-S0FHRUNPTkZJRzxtYWlsdG86JCU3YkBiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRz4n
-LCAncWRldmljZScsICdjb3Jvc3luYy1xZGV2aWNlLnNlcnZpY2UnLCAnJywgZCl9IFwNCisgICAg
-ICAgICAgICAgICAgICAgICAgICAgJHtAYmIudXRpbHMuY29udGFpbnMoJ1BBQ0tBR0VDT05GSUc8
-bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ1BBQ0tBR0VDT05GSUc+JywgJ3FuZXRkJywg
-J2Nvcm9zeW5jLXFuZXRkLnNlcnZpY2UnLCAnJywgZCl9IFwNCisiDQogU1lTVEVNRF9BVVRPX0VO
-QUJMRSA9ICJlbmFibGUiDQoNCiBJTklUU0NSSVBUX05BTUUgPSAiY29yb3N5bmMtZGFlbW9uIg0K
-DQotUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVT
-JywgJ3N5c3RlbWQnLCBkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuZmlsdGVyKCdESVNUUk9fRkVB
-VFVSRVMnLCUyMCdzeXN0ZW1kJywlMjBkKSU3ZD4iDQorUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJi
-LnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywgJ3N5c3RlbWQnLCBkKX0gXA0KKyAgICAg
-ICAgICAgICAgICAgICBkYnVzIHFkZXZpY2UgcW5ldGQgc25tcCBcDQorPG1haWx0bzokJTdiQGJi
-LnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywlMjAnc3lzdGVtZCcsJTIwZCklN2QlMjBc
-JTBiK8KgJTIwwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgZGJ1cyUy
-MHFkZXZpY2UlMjBxbmV0ZCUyMHNubXAlMjBcJTBiKz4iDQoNCitQQUNLQUdFQ09ORklHW2RidXNd
-ID0gIi0tZW5hYmxlLWRidXMsLS1kaXNhYmxlLWRidXMsZGJ1cyINCitQQUNLQUdFQ09ORklHW3Fk
-ZXZpY2VdID0gIi0tZW5hYmxlLXFkZXZpY2VzLC0tZGlzYWJsZS1xZGV2aWNlcyINCitQQUNLQUdF
-Q09ORklHW3FuZXRkXSA9ICItLWVuYWJsZS1xbmV0ZCwtLWRpc2FibGUtcW5ldGQiDQorUEFDS0FH
-RUNPTkZJR1tyZG1hXSA9ICItLWVuYWJsZS1yZG1hLC0tZGlzYWJsZS1yZG1hIg0KK1BBQ0tBR0VD
-T05GSUdbc25tcF0gPSAiLS1lbmFibGUtc25tcCwtLWRpc2FibGUtc25tcCxuZXQtc25tcCINCiBQ
-QUNLQUdFQ09ORklHW3N5c3RlbWRdID0gIi0tZW5hYmxlLXN5c3RlbWQgLS13aXRoLXN5c3RlbWRk
-aXI9JHtzeXN0ZW1kX3N5c3RlbV91bml0ZGlyfSwtLWRpc2FibGUtc3lzdGVtZCAtLXdpdGhvdXQt
-c3lzdGVtZGRpcixzeXN0ZW1kIg0KDQogRVhUUkFfT0VDT05GID0gImFjX2N2X3BhdGhfQkFTSFBB
-VEg9JHtiYXNlX2JpbmRpcn0vYmFzaCINCkBAIC00MywxMiArNTMsMjYgQEAgZG9faW5zdGFsbF9h
-cHBlbmQoKSB7DQogICAgIGluc3RhbGwgLWQgJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC92b2xh
-dGlsZXMNCiAgICAgZWNobyAiZCByb290IHJvb3QgMDc1NSAke2xvY2Fsc3RhdGVkaXJ9L2xvZy9j
-bHVzdGVyIG5vbmUiID4gJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVsdC92b2xhdGlsZXMvMDVfY29y
-b3N5bmMNCg0KKyAgICBpZiAke0BiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRzxtYWls
-dG86JCU3YkBiYi51dGlscy5jb250YWlucygnUEFDS0FHRUNPTkZJRz4nLCAncW5ldGQnLCAndHJ1
-ZScsICdmYWxzZScsIGQpfTsgdGhlbg0KKyAgICAgICAgY2hvd24gLVIgY29yb3FuZXRkOmNvcm9x
-bmV0ZCAke0R9JHtzeXNjb25mZGlyfS8ke0JQTn0vcW5ldGQNCisgICAgICAgIGVjaG8gImQgY29y
-b3FuZXRkIGNvcm9xbmV0ZCAwNzcwIC92YXIvcnVuL2Nvcm9zeW5jLXFuZXRkIG5vbmUiID4+ICR7
-RH0ke3N5c2NvbmZkaXJ9L2RlZmF1bHQvdm9sYXRpbGVzLzA1X2Nvcm9zeW5jDQorICAgIGZpDQor
-DQogICAgIGlmICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdESVNUUk9fRkVBVFVSRVMnLCdzeXN0ZW1k
-JywndHJ1ZScsJ2ZhbHNlJyxkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ0RJU1RS
-T19GRUFUVVJFUycsJ3N5c3RlbWQnLCd0cnVlJywnZmFsc2UnLGQpJTdkPjsgdGhlbg0KICAgICAg
-ICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kDQogICAgICAgICBlY2hv
-ICJkICR7bG9jYWxzdGF0ZWRpcn0vbG9nL2NsdXN0ZXIgLSAtIC0gLSIgPiAke0R9JHtzeXNjb25m
-ZGlyfS90bXBmaWxlcy5kL2Nvcm9zeW5jLmNvbmYNCisNCisgICAgICAgIGlmICR7QGJiLnV0aWxz
-LmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQ
-QUNLQUdFQ09ORklHPicsICdxbmV0ZCcsICd0cnVlJywgJ2ZhbHNlJywgZCl9OyB0aGVuDQorICAg
-ICAgICAgICAgaW5zdGFsbCAtbSAwNjQ0ICR7U30vY29uZi90bXBmaWxlcy5kL2Nvcm9zeW5jLXFu
-ZXRkLmNvbmYgJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZA0KKyAgICAgICAgZmkNCiAgICAg
-ZmkNCiB9DQoNCiBSREVQRU5EU18ke1BOfSArPSAiYmFzaCINCg0KIEZJTEVTXyR7UE59LWRiZyAr
-PSAiJHtsaWJleGVjZGlyfS9sY3Jzby8uZGVidWciDQorRklMRVNfJHtQTn0tZG9jICs9ICIke2Rh
-dGFkaXJ9L3NubXAvbWlicy9DT1JPU1lOQy1NSUIudHh0Ig0KKw0KK1VTRVJBRERfUEFDS0FHRVMg
-PSAiJHtQTn0iDQorR1JPVVBBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0ZW0gY29yb3FuZXRkIg0K
-K1VTRVJBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0ZW0gLWQgLyAtTSAtcyAvYmluL25vbG9naW4g
-LWMgJ1VzZXIgZm9yIGNvcm9zeW5jLXFuZXRkJyAtZyBjb3JvcW5ldGQgY29yb3FuZXRkIg0KLS0N
-CjIuMTEuMA0KDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBtYWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMu
-b3BlbmVtYmVkZGVkLm9yZz4NCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQub3JnL21haWxtYW4v
-bGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQoNCg==
+include security-flags.inc file in distro config. if you use poky for
+distro then set DISTRO=3Dpoky-lsb and you will be able to reproduce it
+
+On Tue, Sep 5, 2017 at 6:01 PM, Huang, Jie (Jackie)
+<Jackie.Huang@windriver.com> wrote:
+> Yes, sure, but I can=E2=80=99t reproduce this, could you show me the conf=
+ig that had this issue? Thanks!
+>
+> Thanks,
+> Jackie
+>
+> From: Martin Jansa [mailto:martin.jansa@gmail.com]
+> Sent: Tuesday, September 05, 2017 20:30
+> To: Huang, Jie (Jackie)
+> Cc: openembedded-devel
+> Subject: Re: [oe] [meta-oe][PATCH 2/2] corosync: add support for extra fe=
+atures
+>
+> Can you please also fix:
+> corosync-2.4.2: ELF binary '/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0=
+/packages-split/corosync/usr/sbin/corosync' has relocations in .text [textr=
+el]
+>
+> it's been there for long time.
+>
+> On Tue, Aug 29, 2017 at 11:27 AM, <jackie.huang@windriver.com<mailto:jack=
+ie.huang@windriver.com>> wrote:
+> From: Jackie Huang <jackie.huang@windriver.com<mailto:jackie.huang@windri=
+ver.com>>
+>
+> * Add support for features: dbus qdevice qnetd snmp
+> * Add related PACKAGECONFIG
+> * inherit useradd to add proper user for qnetd service
+>
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com<mailto:jackie.hua=
+ng@windriver.com>>
+> ---
+>  .../recipes-extended/corosync/corosync_2.4.2.bb<http://corosync_2.4.2.bb=
+>    | 30 +++++++++++++++++++---
+>  1 file changed, 27 insertions(+), 3 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb<http://c=
+orosync_2.4.2.bb> b/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb<htt=
+p://corosync_2.4.2.bb>
+> index 2f3aef299..7d5a87e4c 100644
+> --- a/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb<http://corosync=
+_2.4.2.bb>
+> +++ b/meta-oe/recipes-extended/corosync/corosync_2.4.2.bb<http://corosync=
+_2.4.2.bb>
+> @@ -5,7 +5,7 @@ HOMEPAGE =3D "http://corosync.github.io/corosync/"
+>
+>  SECTION =3D "base"
+>
+> -inherit autotools pkgconfig systemd
+> +inherit autotools pkgconfig systemd useradd
+>
+>  SRC_URI =3D "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz=
+<http://build.clusterlabs.org/corosync/releases/$%7bBP%7d.tar.gz>"
+>  SRC_URI[md5sum] =3D "547fa78704da53aa35912be58d31035f"
+> @@ -16,13 +16,23 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Da85eb4ce24=
+033adb6088dd1d6ffc5e5d<file:///\\LICENSE;md5=3Da85eb4ce24033adb6088dd1d6ffc=
+5e5d>"
+>
+>  DEPENDS =3D "groff-native nss libqb"
+>
+> -SYSTEMD_SERVICE_${PN} =3D "corosync.service corosync-notifyd.service"
+> +SYSTEMD_SERVICE_${PN} =3D "corosync.service corosync-notifyd.service \
+> +                         ${@bb.utils.contains('PACKAGECONFIG<mailto:$%7b=
+@bb.utils.contains('PACKAGECONFIG>', 'qdevice', 'corosync-qdevice.service',=
+ '', d)} \
+> +                         ${@bb.utils.contains('PACKAGECONFIG<mailto:$%7b=
+@bb.utils.contains('PACKAGECONFIG>', 'qnetd', 'corosync-qnetd.service', '',=
+ d)} \
+> +"
+>  SYSTEMD_AUTO_ENABLE =3D "enable"
+>
+>  INITSCRIPT_NAME =3D "corosync-daemon"
+>
+> -PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
+}<mailto:$%7b@bb.utils.filter('DISTRO_FEATURES',%20'systemd',%20d)%7d>"
+> +PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd', d)=
+} \
+> +                   dbus qdevice qnetd snmp \
+> +<mailto:$%7b@bb.utils.filter('DISTRO_FEATURES',%20'systemd',%20d)%7d%20\=
+%0b+ %20 %20 %20 %20 %20 %20 %20 %20 %20 dbus%20qdevice%20qnetd%20snmp%20\%=
+0b+>"
+>
+> +PACKAGECONFIG[dbus] =3D "--enable-dbus,--disable-dbus,dbus"
+> +PACKAGECONFIG[qdevice] =3D "--enable-qdevices,--disable-qdevices"
+> +PACKAGECONFIG[qnetd] =3D "--enable-qnetd,--disable-qnetd"
+> +PACKAGECONFIG[rdma] =3D "--enable-rdma,--disable-rdma"
+> +PACKAGECONFIG[snmp] =3D "--enable-snmp,--disable-snmp,net-snmp"
+>  PACKAGECONFIG[systemd] =3D "--enable-systemd --with-systemddir=3D${syste=
+md_system_unitdir},--disable-systemd --without-systemddir,systemd"
+>
+>  EXTRA_OECONF =3D "ac_cv_path_BASHPATH=3D${base_bindir}/bash"
+> @@ -43,12 +53,26 @@ do_install_append() {
+>      install -d ${D}${sysconfdir}/default/volatiles
+>      echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sy=
+sconfdir}/default/volatiles/05_corosync
+>
+> +    if ${@bb.utils.contains('PACKAGECONFIG<mailto:$%7b@bb.utils.contains=
+('PACKAGECONFIG>', 'qnetd', 'true', 'false', d)}; then
+> +        chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
+> +        echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >=
+> ${D}${sysconfdir}/default/volatiles/05_corosync
+> +    fi
+> +
+>      if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d=
+)}<mailto:$%7b@bb.utils.contains('DISTRO_FEATURES','systemd','true','false'=
+,d)%7d>; then
+>          install -d ${D}${sysconfdir}/tmpfiles.d
+>          echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir=
+}/tmpfiles.d/corosync.conf
+> +
+> +        if ${@bb.utils.contains('PACKAGECONFIG<mailto:$%7b@bb.utils.cont=
+ains('PACKAGECONFIG>', 'qnetd', 'true', 'false', d)}; then
+> +            install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D=
+}${sysconfdir}/tmpfiles.d
+> +        fi
+>      fi
+>  }
+>
+>  RDEPENDS_${PN} +=3D "bash"
+>
+>  FILES_${PN}-dbg +=3D "${libexecdir}/lcrso/.debug"
+> +FILES_${PN}-doc +=3D "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
+> +
+> +USERADD_PACKAGES =3D "${PN}"
+> +GROUPADD_PARAM_${PN} =3D "--system coroqnetd"
+> +USERADD_PARAM_${PN} =3D "--system -d / -M -s /bin/nologin -c 'User for c=
+orosync-qnetd' -g coroqnetd coroqnetd"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org<mailto:Openembedded-devel@lists=
+.openembedded.org>
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
