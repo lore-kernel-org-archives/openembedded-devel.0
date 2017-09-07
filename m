@@ -1,36 +1,46 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id CCE27601F1
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B3AD771AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 01:02:35 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8712ZwU007833
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 6 Sep 2017 18:02:35 -0700
-Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.180]) by
-	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
-	Wed, 6 Sep 2017 18:02:34 -0700
-From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
-To: Khem Raj <raj.khem@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH 2/2] corosync: add support for extra
-	features
-Thread-Index: AQHTJkK5SvQTXHSoiku2dYAeLub5m6KnClswgAB34ACAARq1MA==
-Date: Thu, 7 Sep 2017 01:02:33 +0000
-Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B8994A7@ALA-MBC.corp.ad.wrs.com>
-References: <cover.1503998700.git.jackie.huang@windriver.com>
-	<6286ca12b20fb1972ee77d1fc217eb7ebbf60080.1503998700.git.jackie.huang@windriver.com>
-	<CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
-	<1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
-	<CAMKF1srJm5Y4UonABYcOmD7MP6ocnWnpoktNwCbr7oV6m5eA5w@mail.gmail.com>
-In-Reply-To: <CAMKF1srJm5Y4UonABYcOmD7MP6ocnWnpoktNwCbr7oV6m5eA5w@mail.gmail.com>
-Accept-Language: en-US, zh-CN
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [128.224.176.154]
-MIME-Version: 1.0
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] corosync: add support for extra features
+	Thu,  7 Sep 2017 03:58:11 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id g13so3628975pfm.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 06 Sep 2017 20:58:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=K9yYnrG3dPgZ42HICI/qrxKSnyRQbPw2mzL5hF+rLOI=;
+	b=WFsjiOHc1TeZJmbRzekhmvVhI7AkF0pQ+IH3QErfgkwQ/5NAqSN1GNb8BSlndUw1Hy
+	el8M50rwf2jMF0Klc+sH+bixk+ltEmqjXLZ4ojoWxdQ4Bkx4kcK9N+gxxTEO5HCw7HM6
+	bCcWQEqeUliMGo2p3R4v5guzqmQfGrywpbmEDAtmeOZX1yIR25Sxvy58tM3wvPPpNmQ0
+	C7gw1/czEMi43FFZNfFh6oFYxNRFu7wh44rDUc74x4LOpwaU07M909zaMXlr0wg/rkTF
+	zObPJkYC5uXgRVwJUFVW34nhWaHgAVuKO6hfJMuYpdFAnh3BNq7ejSfIcHGFRaKXLa7Z
+	iDgw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=K9yYnrG3dPgZ42HICI/qrxKSnyRQbPw2mzL5hF+rLOI=;
+	b=r2WumdRJWlMHr90cXwK8UOoAsZu45IBeBDTFKlqJj0NaB+q9nXPNwcIYTLTWG8R7Az
+	Hm7egOk/khniTddVO5ezVggxQp0HJf6F+czh4OHXvlQV1/4dGebTOoH07M33q7m+elwY
+	Q8QkcoraYZsm4Pe8bUiCCPV2XmppCqQwlbk2U6qV5/YEfVJRZI8N2bm9fRENF+CHNO+R
+	m2fioQ2adbc5YfUDApidfBLnXteQyBISXukdPetnA/7HGaSxJez54HW6pjC67gOzlVS1
+	Qm+y3z7yd8/5LYexLKHfWqfinYaMP/AdFhfqtk+bzdIqwnScyIHSg9MUO+hBMdSh4dqP
+	QiQA==
+X-Gm-Message-State: AHPjjUjKH+pvbS6SF3sCkWxvEfxe35Ae09kBPqq+7WbwZ/0jDX497nhZ
+	IGRdgMJ2S4c51OnD
+X-Google-Smtp-Source: ADKCNb6GJ9QPyJXAynraxyBnzO9IdcpO/P/2oIUi0zq4M63Gpjf9jkpyA4Zb+hzX51ToDOkRk8w09A==
+X-Received: by 10.98.133.194 with SMTP id m63mr1438565pfk.44.1504756692718;
+	Wed, 06 Sep 2017 20:58:12 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::be3d])
+	by smtp.gmail.com with ESMTPSA id 13sm1637379pfi.55.2017.09.06.20.58.11
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 06 Sep 2017 20:58:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  6 Sep 2017 20:57:54 -0700
+Message-Id: <20170907035758.41689-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-filesystems][PATCH 1/5] aufs-util: Use cross strip tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,125 +53,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 01:02:36 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 07 Sep 2017 03:58:11 -0000
 
-DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
-bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA2LCAy
-MDE3IDA5OjA5DQo+IFRvOiBIdWFuZywgSmllIChKYWNraWUpDQo+IENjOiBNYXJ0aW4gSmFuc2E7
-IG9wZW5lbWJlZGRlZC1kZXZlbA0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0gg
-Mi8yXSBjb3Jvc3luYzogYWRkIHN1cHBvcnQgZm9yIGV4dHJhDQo+IGZlYXR1cmVzDQo+IA0KPiBp
-bmNsdWRlIHNlY3VyaXR5LWZsYWdzLmluYyBmaWxlIGluIGRpc3RybyBjb25maWcuIGlmIHlvdSB1
-c2UgcG9reSBmb3INCj4gZGlzdHJvIHRoZW4gc2V0IERJU1RSTz1wb2t5LWxzYiBhbmQgeW91IHdp
-bGwgYmUgYWJsZSB0byByZXByb2R1Y2UgaXQNCg0KVW5mb3J0dW5hdGVseSBJIHN0aWxsIGNhbid0
-IHJlcHJvZHVjZSBpdCB3aXRoIERJU1RSTz1wb2t5LWxzYiwgZG8gSSBtaXNzDQphbnl0aGluZyBl
-bHNlPw0KDQpUaGFua3MsDQpKYWNraWUNCg0KPiANCj4gT24gVHVlLCBTZXAgNSwgMjAxNyBhdCA2
-OjAxIFBNLCBIdWFuZywgSmllIChKYWNraWUpDQo+IDxKYWNraWUuSHVhbmdAd2luZHJpdmVyLmNv
-bT4gd3JvdGU6DQo+ID4gWWVzLCBzdXJlLCBidXQgSSBjYW7igJl0IHJlcHJvZHVjZSB0aGlzLCBj
-b3VsZCB5b3Ugc2hvdyBtZSB0aGUgY29uZmlnIHRoYXQgaGFkDQo+IHRoaXMgaXNzdWU/IFRoYW5r
-cyENCj4gPg0KPiA+IFRoYW5rcywNCj4gPiBKYWNraWUNCj4gPg0KPiA+IEZyb206IE1hcnRpbiBK
-YW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21dDQo+ID4gU2VudDogVHVlc2RheSwg
-U2VwdGVtYmVyIDA1LCAyMDE3IDIwOjMwDQo+ID4gVG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4g
-PiBDYzogb3BlbmVtYmVkZGVkLWRldmVsDQo+ID4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2Vd
-W1BBVENIIDIvMl0gY29yb3N5bmM6IGFkZCBzdXBwb3J0IGZvciBleHRyYQ0KPiBmZWF0dXJlcw0K
-PiA+DQo+ID4gQ2FuIHlvdSBwbGVhc2UgYWxzbyBmaXg6DQo+ID4gY29yb3N5bmMtMi40LjI6IEVM
-RiBiaW5hcnkgJy90bXAvd29yay9jb3JlMi02NC1vZS1saW51eC9jb3Jvc3luYy8yLjQuMi0NCj4g
-cjAvcGFja2FnZXMtc3BsaXQvY29yb3N5bmMvdXNyL3NiaW4vY29yb3N5bmMnIGhhcyByZWxvY2F0
-aW9ucyBpbiAudGV4dCBbdGV4dHJlbF0NCj4gPg0KPiA+IGl0J3MgYmVlbiB0aGVyZSBmb3IgbG9u
-ZyB0aW1lLg0KPiA+DQo+ID4gT24gVHVlLCBBdWcgMjksIDIwMTcgYXQgMTE6MjcgQU0sDQo+IDxq
-YWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbTxtYWlsdG86amFja2llLmh1YW5nQHdpbmRyaXZlci5j
-b20+PiB3cm90ZToNCj4gPiBGcm9tOiBKYWNraWUgSHVhbmcNCj4gPGphY2tpZS5odWFuZ0B3aW5k
-cml2ZXIuY29tPG1haWx0bzpqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbT4+DQo+ID4NCj4gPiAq
-IEFkZCBzdXBwb3J0IGZvciBmZWF0dXJlczogZGJ1cyBxZGV2aWNlIHFuZXRkIHNubXANCj4gPiAq
-IEFkZCByZWxhdGVkIFBBQ0tBR0VDT05GSUcNCj4gPiAqIGluaGVyaXQgdXNlcmFkZCB0byBhZGQg
-cHJvcGVyIHVzZXIgZm9yIHFuZXRkIHNlcnZpY2UNCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEph
-Y2tpZSBIdWFuZw0KPiA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb208bWFpbHRvOmphY2tpZS5o
-dWFuZ0B3aW5kcml2ZXIuY29tPj4NCj4gPiAtLS0NCj4gPiAgLi4uL3JlY2lwZXMtZXh0ZW5kZWQv
-Y29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nvcm9zeW5jXzIuNC4yLmJiPg0KPiB8
-IDMwICsrKysrKysrKysrKysrKysrKystLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDI3IGluc2Vy
-dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
-ZWNpcGVzLQ0KPiBleHRlbmRlZC9jb3Jvc3luYy9jb3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29y
-b3N5bmNfMi40LjIuYmI+IGIvbWV0YS0NCj4gb2UvcmVjaXBlcy1leHRlbmRlZC9jb3Jvc3luYy9j
-b3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+DQo+ID4gaW5kZXggMmYz
-YWVmMjk5Li43ZDVhODdlNGMgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLQ0KPiBl
-eHRlbmRlZC9jb3Jvc3luYy9jb3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIu
-YmI+DQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLQ0KPiBleHRlbmRlZC9jb3Jvc3luYy9jb3Jv
-c3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+DQo+ID4gQEAgLTUsNyArNSw3
-IEBAIEhPTUVQQUdFID0gImh0dHA6Ly9jb3Jvc3luYy5naXRodWIuaW8vY29yb3N5bmMvIg0KPiA+
-DQo+ID4gIFNFQ1RJT04gPSAiYmFzZSINCj4gPg0KPiA+IC1pbmhlcml0IGF1dG90b29scyBwa2dj
-b25maWcgc3lzdGVtZA0KPiA+ICtpbmhlcml0IGF1dG90b29scyBwa2djb25maWcgc3lzdGVtZCB1
-c2VyYWRkDQo+ID4NCj4gPiAgU1JDX1VSSSA9DQo+ICJodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMu
-b3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyR7QlB9LnRhci5nejxodHRwOi8vYnVpbGQuY2x1c3Rlcg0K
-PiBsYWJzLm9yZy9jb3Jvc3luYy9yZWxlYXNlcy8kJTdiQlAlN2QudGFyLmd6PiINCj4gPiAgU1JD
-X1VSSVttZDVzdW1dID0gIjU0N2ZhNzg3MDRkYTUzYWEzNTkxMmJlNThkMzEwMzVmIg0KPiA+IEBA
-IC0xNiwxMyArMTYsMjMgQEAgTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vTElDRU5TRTtt
-ZDU9YTg1ZWI0Y2UyNDAzM2FkYjYwODhkZDFkNmZmYzVlNWQ8ZmlsZTovLy9cXExJQ0VOU0U7bQ0K
-PiBkNT1hODVlYjRjZTI0MDMzYWRiNjA4OGRkMWQ2ZmZjNWU1ZD4iDQo+ID4NCj4gPiAgREVQRU5E
-UyA9ICJncm9mZi1uYXRpdmUgbnNzIGxpYnFiIg0KPiA+DQo+ID4gLVNZU1RFTURfU0VSVklDRV8k
-e1BOfSA9ICJjb3Jvc3luYy5zZXJ2aWNlIGNvcm9zeW5jLW5vdGlmeWQuc2VydmljZSINCj4gPiAr
-U1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gImNvcm9zeW5jLnNlcnZpY2UgY29yb3N5bmMtbm90aWZ5
-ZC5zZXJ2aWNlIFwNCj4gPiArDQo+ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklH
-PG1haWx0bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncWRl
-dmljZScsICdjb3Jvc3luYy1xZGV2aWNlLnNlcnZpY2UnLCAnJywgZCl9IFwNCj4gPiArDQo+ICR7
-QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0bzokJTdiQGJiLnV0aWxzLmNv
-bnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncW5ldGQnLCAnY29yb3N5bmMtcW5ldGQuc2Vy
-dmljZScsICcnLCBkKX0gXA0KPiA+ICsiDQo+ID4gIFNZU1RFTURfQVVUT19FTkFCTEUgPSAiZW5h
-YmxlIg0KPiA+DQo+ID4gIElOSVRTQ1JJUFRfTkFNRSA9ICJjb3Jvc3luYy1kYWVtb24iDQo+ID4N
-Cj4gPiAtUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRV
-UkVTJywgJ3N5c3RlbWQnLA0KPiBkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuZmlsdGVyKCdESVNU
-Uk9fRkVBVFVSRVMnLCUyMCdzeXN0ZW1kJywlMjBkKSU3ZD4iDQo+ID4gK1BBQ0tBR0VDT05GSUcg
-Pz89ICIke0BiYi51dGlscy5maWx0ZXIoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgZCl9
-IFwNCj4gPiArICAgICAgICAgICAgICAgICAgIGRidXMgcWRldmljZSBxbmV0ZCBzbm1wIFwNCj4g
-Pg0KPiArPG1haWx0bzokJTdiQGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywlMjAn
-c3lzdGVtZCcsJTIwZCklN2QlMjANCj4gXCUwYisgJTIwICUyMCAlMjAgJTIwICUyMCAlMjAgJTIw
-ICUyMCAlMjANCj4gZGJ1cyUyMHFkZXZpY2UlMjBxbmV0ZCUyMHNubXAlMjBcJTBiKz4iDQo+ID4N
-Cj4gPiArUEFDS0FHRUNPTkZJR1tkYnVzXSA9ICItLWVuYWJsZS1kYnVzLC0tZGlzYWJsZS1kYnVz
-LGRidXMiDQo+ID4gK1BBQ0tBR0VDT05GSUdbcWRldmljZV0gPSAiLS1lbmFibGUtcWRldmljZXMs
-LS1kaXNhYmxlLXFkZXZpY2VzIg0KPiA+ICtQQUNLQUdFQ09ORklHW3FuZXRkXSA9ICItLWVuYWJs
-ZS1xbmV0ZCwtLWRpc2FibGUtcW5ldGQiDQo+ID4gK1BBQ0tBR0VDT05GSUdbcmRtYV0gPSAiLS1l
-bmFibGUtcmRtYSwtLWRpc2FibGUtcmRtYSINCj4gPiArUEFDS0FHRUNPTkZJR1tzbm1wXSA9ICIt
-LWVuYWJsZS1zbm1wLC0tZGlzYWJsZS1zbm1wLG5ldC1zbm1wIg0KPiA+ICBQQUNLQUdFQ09ORklH
-W3N5c3RlbWRdID0gIi0tZW5hYmxlLXN5c3RlbWQgLS13aXRoLQ0KPiBzeXN0ZW1kZGlyPSR7c3lz
-dGVtZF9zeXN0ZW1fdW5pdGRpcn0sLS1kaXNhYmxlLXN5c3RlbWQgLS13aXRob3V0LQ0KPiBzeXN0
-ZW1kZGlyLHN5c3RlbWQiDQo+ID4NCj4gPiAgRVhUUkFfT0VDT05GID0gImFjX2N2X3BhdGhfQkFT
-SFBBVEg9JHtiYXNlX2JpbmRpcn0vYmFzaCINCj4gPiBAQCAtNDMsMTIgKzUzLDI2IEBAIGRvX2lu
-c3RhbGxfYXBwZW5kKCkgew0KPiA+ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9k
-ZWZhdWx0L3ZvbGF0aWxlcw0KPiA+ICAgICAgZWNobyAiZCByb290IHJvb3QgMDc1NSAke2xvY2Fs
-c3RhdGVkaXJ9L2xvZy9jbHVzdGVyIG5vbmUiID4NCj4gJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVs
-dC92b2xhdGlsZXMvMDVfY29yb3N5bmMNCj4gPg0KPiA+ICsgICAgaWYNCj4gJHtAYmIudXRpbHMu
-Y29udGFpbnMoJ1BBQ0tBR0VDT05GSUc8bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ1BB
-Q0tBDQo+IEdFQ09ORklHPicsICdxbmV0ZCcsICd0cnVlJywgJ2ZhbHNlJywgZCl9OyB0aGVuDQo+
-ID4gKyAgICAgICAgY2hvd24gLVIgY29yb3FuZXRkOmNvcm9xbmV0ZCAke0R9JHtzeXNjb25mZGly
-fS8ke0JQTn0vcW5ldGQNCj4gPiArICAgICAgICBlY2hvICJkIGNvcm9xbmV0ZCBjb3JvcW5ldGQg
-MDc3MCAvdmFyL3J1bi9jb3Jvc3luYy1xbmV0ZCBub25lIiA+Pg0KPiAke0R9JHtzeXNjb25mZGly
-fS9kZWZhdWx0L3ZvbGF0aWxlcy8wNV9jb3Jvc3luYw0KPiA+ICsgICAgZmkNCj4gPiArDQo+ID4g
-ICAgICBpZg0KPiAke0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywnc3lzdGVt
-ZCcsJ3RydWUnLCdmYWxzZScsZCl9PG1haWx0bzokJTcNCj4gYkBiYi51dGlscy5jb250YWlucygn
-RElTVFJPX0ZFQVRVUkVTJywnc3lzdGVtZCcsJ3RydWUnLCdmYWxzZScsZCklN2Q+OyB0aGVuDQo+
-ID4gICAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kDQo+ID4g
-ICAgICAgICAgZWNobyAiZCAke2xvY2Fsc3RhdGVkaXJ9L2xvZy9jbHVzdGVyIC0gLSAtIC0iID4N
-Cj4gJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZC9jb3Jvc3luYy5jb25mDQo+ID4gKw0KPiA+
-ICsgICAgICAgIGlmDQo+ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0
-bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncW5ldGQnLCAn
-dHJ1ZScsICdmYWxzZScsIGQpfTsgdGhlbg0KPiA+ICsgICAgICAgICAgICBpbnN0YWxsIC1tIDA2
-NDQgJHtTfS9jb25mL3RtcGZpbGVzLmQvY29yb3N5bmMtcW5ldGQuY29uZg0KPiAke0R9JHtzeXNj
-b25mZGlyfS90bXBmaWxlcy5kDQo+ID4gKyAgICAgICAgZmkNCj4gPiAgICAgIGZpDQo+ID4gIH0N
-Cj4gPg0KPiA+ICBSREVQRU5EU18ke1BOfSArPSAiYmFzaCINCj4gPg0KPiA+ICBGSUxFU18ke1BO
-fS1kYmcgKz0gIiR7bGliZXhlY2Rpcn0vbGNyc28vLmRlYnVnIg0KPiA+ICtGSUxFU18ke1BOfS1k
-b2MgKz0gIiR7ZGF0YWRpcn0vc25tcC9taWJzL0NPUk9TWU5DLU1JQi50eHQiDQo+ID4gKw0KPiA+
-ICtVU0VSQUREX1BBQ0tBR0VTID0gIiR7UE59Ig0KPiA+ICtHUk9VUEFERF9QQVJBTV8ke1BOfSA9
-ICItLXN5c3RlbSBjb3JvcW5ldGQiDQo+ID4gK1VTRVJBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0
-ZW0gLWQgLyAtTSAtcyAvYmluL25vbG9naW4gLWMgJ1VzZXIgZm9yDQo+IGNvcm9zeW5jLXFuZXRk
-JyAtZyBjb3JvcW5ldGQgY29yb3FuZXRkIg0KPiA+IC0tDQo+ID4gMi4xMS4wDQo+ID4NCj4gPiAt
-LQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+
-ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZl
-bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxp
-c3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
-bWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gPg0KPiA+IC0tDQo+ID4gX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1i
-ZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
-ZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFu
-L2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
+Honor the STRIP variable when passed from environment
+Fixes build with musl/raspberrypi
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../aufs-util/0001-libau-Define-STRIP-weakly.patch | 39 ++++++++++++++++++++++
+ .../recipes-utils/aufs-util/aufs-util_git.bb       |  2 +-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+new file mode 100644
+index 000000000..9efea804b
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util/0001-libau-Define-STRIP-weakly.patch
+@@ -0,0 +1,39 @@
++From bb8801fb21ac8d73e3b1a11a8555aaf822182a51 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 5 Sep 2017 10:36:52 -0700
++Subject: [PATCH] libau: Define STRIP weakly
++
++STRIP can be set on environment to use cross version of strip utility
++hardcoding to strip is not working in cross environment
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++Upstream-Status: Submitted
++
++ libau/Makefile | 3 ++-
++ 1 file changed, 2 insertions(+), 1 deletion(-)
++
++diff --git a/libau/Makefile b/libau/Makefile
++index 81520ac..c25eef2 100644
++--- a/libau/Makefile
+++++ b/libau/Makefile
++@@ -25,6 +25,7 @@ LibSoHdr = libau.h rdu.h
++ LibSoExport = $(addsuffix .exp, $(basename ${LibSoObj}))
++ LibSoExportErr = $(addsuffix .err, ${LibSoExport})
++ LibSoVerScript = verscript
+++STRIP ?= strip
++ 
++ all: ${LibSo}
++ 
++@@ -77,7 +78,7 @@ ${LibSo}.${LibSoMajor}.${LibSoMinor}: ${LibSoObj}
++ 	${CC} --shared -Wl,-soname,${LibSo}.${LibSoMajor} \
++ 		-Wl,--version-script,${LibSoVerScript} \
++ 		${LDFLAGS} -o $@ $^ ${LDLIBS}
++-	strip -R EXP $@
+++	${STRIP} -R EXP $@
++ #	readelf --syms --use-dynamic libau.so
++ 
++ install_ulib: File = ${LibSo}.${LibSoMajor}.${LibSoMinor}
++-- 
++2.14.1
++
+diff --git a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+index 66f560c37..2e855e313 100644
+--- a/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
++++ b/meta-filesystems/recipes-utils/aufs-util/aufs-util_git.bb
+@@ -12,6 +12,7 @@ SRC_URI = "git://git.code.sf.net/p/aufs/aufs-util;protocol=git;branch=aufs4.4 \
+            https://raw.githubusercontent.com/sfjro/aufs4-linux/aufs4.4/include/uapi/linux/aufs_type.h;name=aufs_type \
+            file://aufs-util-don-t-strip-executables.patch \
+            file://aufs-util-add-tool-concept-to-Makefile-for-cross-com.patch \
++           file://0001-libau-Define-STRIP-weakly.patch \
+ "
+ SRC_URI[aufs_type.md5sum] = "f7b4a255dcb55fe7b0967f5f59b44f19"
+ SRC_URI[aufs_type.sha256sum] = "85bc8e4c1a94a7d526c382e4b047b4256cab8c4a65fc0396291707ad9a327a18"
+@@ -26,7 +27,6 @@ do_configure_prepend() {
+    sed -i -e 's;install_sbin: Tgt = ${DESTDIR}/sbin;install_sbin: Tgt = ${DESTDIR}/${base_sbindir};' \
+           -e 's;install_ubin: Tgt = ${DESTDIR}/usr/sbin;install_sbin: Tgt = ${DESTDIR}/${bindir};' \
+ 	  ${S}/Makefile
+-   sed -i -e 's;strip -R;${STRIP} -R;' ${S}/libau/Makefile
+ }
+ 
+ do_configure_append () {
+-- 
+2.14.1
+
 
