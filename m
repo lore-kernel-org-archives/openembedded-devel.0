@@ -1,47 +1,50 @@
 Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 49C9877D04
+Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
+	[209.85.215.68])
+	by mail.openembedded.org (Postfix) with ESMTP id DC71C77D04
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 08:51:44 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id q132so3392592lfe.4
+	Thu,  7 Sep 2017 08:51:46 +0000 (UTC)
+Received: by mail-lf0-f68.google.com with SMTP id y15so4135476lfd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Sep 2017 01:51:46 -0700 (PDT)
+	Thu, 07 Sep 2017 01:51:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=lFtGCw8qr1KNbEYdagkI8XNmCQtVq8DDdELm+ee0mI8=;
-	b=EcSIf2Qz3v2af8tD8LWU2x6lOYu1mVsyeCNU61e1FNw7AwspB7jitV0CzywnGJ9Ibi
-	qOYkt1ASq1Sxt3GzNmZLjVxSwVIkjp7JbVx8oa1A4Gwintx+1eaOLhb41s7L8gXX/OUT
-	Z4yA421i+/NzOsIRHgnmRaHhNN6SCq6wkBFBAWFe5ImJTts3qSOi7TNZnrTGesrevniQ
-	+xSYKHXD0pmy2kK8EdZC7rjRBYXb353KhKW4PKn0xla0Is1Jv67UmGiB6z6Jb+LGwWFx
-	cAu18UZg2mgyWgpQtZTelY9vtF3PrHx48NkN6w3EXNsorNp0KjhxEQKu25G5Vcw5pZzY
-	L1fw==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=aJ39qwm7q3oJ5JpjLe6NKwROmI848sM4nAclU1hqgiQ=;
+	b=F7IBNTTq3aYOEKzEhz7X/YRaJ8/xZRMjTYAj7WODdyHIkqujvg2AxgUqAi0oWMgkV6
+	2BCcKR1cHIpYa0Po1l7hjAi0vnGz7Hx2rIr7GxXR1dFcNOOyr4DMeKsQ2m2unTBH/jlH
+	8/Ue7LrpnC3WL0+ueWWvNDRew0tMR5C5/7roTI/WsvsRQSyeHN3OGcLoMq27gAmyePrw
+	W4+LSaghCJYhKDrtZP/gwIbtOhykm7mIsl8UJfOhTRrZ5vVk7ajjjxuDh8CqvKZdcTIx
+	P3mevaRRDgmEfxCYDNJCOhxXdAFhUCUMiFOukFrLaVjYLICFcevR18uDeo6y+HUxYMM9
+	MmXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lFtGCw8qr1KNbEYdagkI8XNmCQtVq8DDdELm+ee0mI8=;
-	b=j9EG2c3zX4V3YcTLe41mv8MEl18O0Sj5w8vEH2go4wAbaZgJNnxciF0jYIsW2HAcaH
-	k1Jsuzfj50ymLI1ZVbJwc3c7yBAdfkJLjFKuCvrIKSEgpIW/nS4znbsXVA2xCUWkpU0y
-	h2Q58KjWz36zzB2FIfNlZVQP0Md6xaG3XHNYmuvqAP6IkZPIfqi4kDYnNa3xNXb+JP6A
-	4PnnSSNMdESahmJcP45IScrgo+0G3X4Kp2ZdhdEcLNR8qk0otioEwpRjAjWcTBq7IEI5
-	6aSgeO74qd4ymV4+1XcDWXc/uPfVfOzMpCop3wBOGKHIlT/sPS8A52um8kJINrr1hK2s
-	rGzA==
-X-Gm-Message-State: AHPjjUiUPGA6ANHdkzyfrXjh1/jcDuQrUGiC0GUh1obV7MkGb7KaoSJl
-	n9GUcAep1hiAtDRK7F0=
-X-Google-Smtp-Source: AOwi7QBMPhzTMXTVmXouI/R0QPeCg7trP6sdfkC/9fuAkO9cld9MdEwDj7Fs0mfPod5Q9kBF0kzagQ==
-X-Received: by 10.25.143.199 with SMTP id s68mr630156lfk.143.1504774305554;
-	Thu, 07 Sep 2017 01:51:45 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=aJ39qwm7q3oJ5JpjLe6NKwROmI848sM4nAclU1hqgiQ=;
+	b=UUcE3KUIYdGCJ9T3++6+CqTgSQb0BaBjLDcIfFrjOKWUZgZMqwo9jkT/YpmMG9wGHV
+	TEAJ/C1XQR+fSOm3DKyeao4GEVb8CyG/RNtZ9aPUAoDpiLQKUqhiGijFeYjuBZi8ZtEY
+	OoWzgT+xB4v36s7+ySEY21T8fRRDX5WGVp/gL9hkGNAs2OMvdUWzhFFVEd9rzQ7QKxtU
+	Qal+avs0g/Yzf1flIKU4XMkGNpfGGjlLJ0Q8/7BbVrQwa2oai5NKF8NduTKDqaZRHbgw
+	a+xb1CKCE6CNMd4ImnhYTjXwwKPH48RFgq+tgfiJJVJalFoFQj80I730SjQWKzJQNWqq
+	a5Hg==
+X-Gm-Message-State: AHPjjUjjLvcnKSGVUfFU0namiUQwpJp5ix+hcaOcDlW33vXkntP2o+Op
+	kYe+ZPuitVyb/OfOsro=
+X-Google-Smtp-Source: AOwi7QBqrLAM8sZPbM4t1tRxh1MLfRO600pMDF9LyNyvwvvAgsWjyoAwMdNa/fM2B7KxM8qs7gGm1w==
+X-Received: by 10.25.92.68 with SMTP id q65mr694604lfb.206.1504774307244;
+	Thu, 07 Sep 2017 01:51:47 -0700 (PDT)
 Received: from neopili.qtec.com
 	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id n13sm332735lja.7.2017.09.07.01.51.44
+	by smtp.gmail.com with ESMTPSA id n13sm332735lja.7.2017.09.07.01.51.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Sep 2017 01:51:44 -0700 (PDT)
+	Thu, 07 Sep 2017 01:51:45 -0700 (PDT)
 From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Sep 2017 10:51:35 +0200
-Message-Id: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
+Date: Thu,  7 Sep 2017 10:51:36 +0200
+Message-Id: <20170907085136.20862-2-ricardo.ribalda@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-java][PATCH 1/2] icedtea-native: Fix segmentation build during build
+In-Reply-To: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
+References: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
+Subject: [meta-java][PATCH 2/2] openjdk-8-native: Fix sigsegv with gcc7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,104 +57,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 08:51:45 -0000
+X-List-Received-Date: Thu, 07 Sep 2017 08:51:47 -0000
 
-Without this patch, icedtea-native do_compile() results in a SIGSEGV
-when compiled with GCC7
+OpenJDK does not build properly with GCC7. Add the same workaround that
+we have for GCC6.
+
+Without this patch:
+
+| #
+| # A fatal error has been detected by the Java Runtime Environment:
+| #
+| #  SIGSEGV (0xb) at pc=0x00007fcad0efcd5b, pid=17206, tid=0x00007fcab264c700
+| #
+| # JRE version: OpenJDK Runtime Environment (8.0_102-b14) (build 1.8.0_102-internal-b14)
+| # Java VM: OpenJDK 64-Bit Server VM (25.102-b14 mixed mode linux-amd64 compressed oops)
+| # Problematic frame:
+| # V  [libjvm.so+0x78bd5b]  Node::Node(unsigned int)+0x2b
+| #
+| # Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+| #
+| # An error report file with more information is saved as:
+| # /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/openjdk-8-native/102b14-r0/build/hs_err_pid17206.log
+| [thread 140508549912320 also had an error]
+|
+| [error occurred during error reporting , id 0xb]
+|
+| #
+| # If you would like to submit a bug report, please visit:
+| #   http://bugreport.java.com/bugreport/crash.jsp
+| #
 
 Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
 ---
- recipes-core/icedtea/icedtea7-native.inc           |  2 +
- .../openjdk-7-03b147/vframeArray_Fix_sigsegv.patch | 60 ++++++++++++++++++++++
- 2 files changed, 62 insertions(+)
- create mode 100644 recipes-core/icedtea/openjdk-7-03b147/vframeArray_Fix_sigsegv.patch
+ recipes-core/openjdk/openjdk-8-common.inc | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
-index 55cb7e7a5024..7d625eb536ed 100644
---- a/recipes-core/icedtea/icedtea7-native.inc
-+++ b/recipes-core/icedtea/icedtea7-native.inc
-@@ -43,6 +43,7 @@ SRC_URI = " \
-   file://jaxws_fix_NullPointerException.patch;apply=no \
-   file://timezoneszip.patch \
-   file://sigsegv.patch;apply=no \
-+  file://vframeArray_Fix_sigsegv.patch;apply=no \
-   "
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index def779db4d59..0c5c2c3e3d2f 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -218,10 +218,11 @@ EXTRA_OECONF_append = "\
+         --with-update-version=${OPENJDK_UPDATE_VERSION} \
+ "
  
- S = "${WORKDIR}/${ICEDTEA}"
-@@ -154,6 +155,7 @@ do_configure_append() {
+-# GCC 6 sets the default C++ standard to C++14 and introduces dead store
+-# elimination by default. OpenJDK 8 is not ready for either of these
+-# changes.
++# Since v6, GCC sets the default C++ standard to C++14 and introduces
++# dead store elimination by default. OpenJDK 8 is not ready for either
++# of these changes.
+ FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
++FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
  
- 	patch -p1 < ${WORKDIR}/jaxws_fix_NullPointerException.patch
- 	patch -p1 < ${WORKDIR}/sigsegv.patch
-+	patch -p1 < ${WORKDIR}/vframeArray_Fix_sigsegv.patch
- }
- 
- EXTRA_OEMAKE = ' \
-diff --git a/recipes-core/icedtea/openjdk-7-03b147/vframeArray_Fix_sigsegv.patch b/recipes-core/icedtea/openjdk-7-03b147/vframeArray_Fix_sigsegv.patch
-new file mode 100644
-index 000000000000..62fe8b207011
---- /dev/null
-+++ b/recipes-core/icedtea/openjdk-7-03b147/vframeArray_Fix_sigsegv.patch
-@@ -0,0 +1,60 @@
-+Disable Optimization on vframeArray::unpack_to_stack
-+
-+GCC7 triggers a sigsegv while building:
-+
-+
-+| JAVA_HOME=/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0 ANT_OPTS=-Djava.io.tmpdir='/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk.build/langtools/build/ant-tmp' /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/recipe-sysroot-native/usr/bin/ant -Djdk.version=1.7.0_03 -Dfull.version='1.7.0_03-icedtea-b21'  -Drelease=1.7.0_03 -Dbuild.number=b21 -Djavac.debug=true -Ddebug.classfiles=true -Djavac.target=7 -Djavac.source=7 -Dboot.java.home=/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/bootstrap/jdk1.6.0 -Dimport.jdk=/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/jdk  ....
-+| Buildfile: /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make/build.xml
-+| #
-+| # A fatal error has been detected by the Java Runtime Environment:
-+| #
-+| #  SIGSEGV (0xb) at pc=0x00007fad7906e868, pid=9747, tid=140383055484672
-+| #
-+| # JRE version: 7.0_03-b21
-+| # Java VM: OpenJDK 64-Bit Server VM (22.0-b10 mixed mode linux-amd64 compressed oops)
-+| # Derivative: IcedTea7 2.1.3
-+| # Distribution: Custom build (Thu Sep  7 09:36:21 CEST 2017)
-+| # Problematic frame:
-+| # V  [libjvm.so+0x78b868]  vframeArray::unpack_to_stack(frame&, int, int)+0x88
-+| #
-+| # Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
-+| #
-+| # An error report file with more information is saved as:
-+| # /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/icedtea7-native/2.1.3-r1.0/icedtea-2.1.3/build/openjdk/langtools/make/hs_err_pid9747.log
-+| #
-+| # If you would like to submit a bug report, please include
-+| # instructions on how to reproduce the bug and visit:
-+| #   http://icedtea.classpath.org/bugzilla
-+| #
-+| Aborted
-+
-+
-+Upstream-Status: Inappropriate
-+
-+Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-+diff --git a/openjdk-boot/hotspot/src/share/vm/runtime/vframeArray.cpp b/build/openjdk-boot/hotspot/src/share/vm/runtime/vframeArray.cpp
-+index 52b080999224..81b6a09ea91a 100644
-+--- a/openjdk-boot/hotspot/src/share/vm/runtime/vframeArray.cpp
-++++ b/openjdk-boot/hotspot/src/share/vm/runtime/vframeArray.cpp
-+@@ -500,7 +500,7 @@ void vframeArray::fill_in(JavaThread* thread,
-+   }
-+ }
-+ 
-+-void vframeArray::unpack_to_stack(frame &unpack_frame, int exec_mode, int caller_actual_parameters) {
-++void __attribute__((optimize("O0"))) vframeArray::unpack_to_stack(frame &unpack_frame, int exec_mode, int caller_actual_parameters) {
-+   // stack picture
-+   //   unpack_frame
-+   //   [new interpreter frames ] (frames are skeletal but walkable)
-+diff --git a/openjdk/hotspot/src/share/vm/runtime/vframeArray.cpp b/build/openjdk/hotspot/src/share/vm/runtime/vframeArray.cpp
-+index 52b080999224..81b6a09ea91a 100644
-+--- a/openjdk/hotspot/src/share/vm/runtime/vframeArray.cpp
-++++ b/openjdk/hotspot/src/share/vm/runtime/vframeArray.cpp
-+@@ -500,7 +500,7 @@ void vframeArray::fill_in(JavaThread* thread,
-+   }
-+ }
-+ 
-+-void vframeArray::unpack_to_stack(frame &unpack_frame, int exec_mode, int caller_actual_parameters) {
-++void __attribute__((optimize("O0"))) vframeArray::unpack_to_stack(frame &unpack_frame, int exec_mode, int caller_actual_parameters) {
-+   // stack picture
-+   //   unpack_frame
-+   //   [new interpreter frames ] (frames are skeletal but walkable)
+ # All supported cross compilers support the compiler flags that were
+ # added to make compilation with gcc6 work. But the host compiler for
 -- 
 2.14.1
 
