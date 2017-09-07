@@ -1,52 +1,31 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
-	[209.85.214.41])
-	by mail.openembedded.org (Postfix) with ESMTP id AB18071A32
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 91B9F71A18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 11:15:34 +0000 (UTC)
-Received: by mail-it0-f41.google.com with SMTP id v19so617498ite.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Sep 2017 04:15:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=8XytmeTETfcTFMtQqg5WHMrlpjoRMZOzrAKHEtlvNRQ=;
-	b=a51LFUSx8lRFpQz7AInPzoaiwsvub3PCbqaY8oufHST4F5FQ9Zlm6zbug9YMYtcwGC
-	QYQkn6bpfBBlT63nOePi2g4DKAML+5bj84MH6W+7B6hkXZ/Tb66wpB089vTq+AFRGIO5
-	LhLUHbJZOFNOGn2s3kNA90VPr9wE+EpQX3+83v4jhdOLVUoe3AsHweQEntJrQMfbEiaf
-	bK+OE0MEaut0hCRdVpzRzilFCA73RGqv4/RbChNuEaTwlR2Eju8uMXQB+prSC/t55Vng
-	cRi/XeKY3o0kLoM6OxoCP4iitok/zfV2XXYGmjSMZLnP21sNmrC/2YpXyGay/Lv2vdFO
-	QG0A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=8XytmeTETfcTFMtQqg5WHMrlpjoRMZOzrAKHEtlvNRQ=;
-	b=EEngsy693bdejpXGfwz1pz5Ctkk8/Xo9RwGvTrBsZiUweHL2SO/eLKnQ3WH7+xU+mp
-	VPmkjyCtX15FotpzEioroEe9ui1krl00zLYCf9bBy7IVjg+7nrJGDXw+PkI/vzY55lSq
-	n2QQ0uAgtW26rkiw+IH66AN+zk1tfRXl/sEDHreMnvdE+d2+i7N4yjjnKAoP0bClVtpy
-	lxLIuA7QE3CFlyxid33nv0W8L55M8DxRH9f7K7+kG3qfv8Z/XNYcC7wH+hMR3ZR0xsWq
-	EVw+ueVzHplkXmSb4+M7arP1ZAKLiW9FMR5w/S9CODwpQkGUrEOqsat9ZGbGEXInU3uj
-	M/pQ==
-X-Gm-Message-State: AHPjjUjfqPceo+YoKCP9ddgsFrqXAe7s1bn790/zAdlcfhWI7DDj0uFN
-	73CPFNg2VSDVjmanfSREHQMZzg/bEZAw
-X-Google-Smtp-Source: ADKCNb5XwSGYxDQHVq4wv5MDLTEELw5HRGx6F2KsLhJP1nKo3QuxZNibFEfMR3/QhVpNVgf7HZP/+L4hwjiwodKrJU4=
-X-Received: by 10.36.143.195 with SMTP id k186mr3066324itd.88.1504782935755;
-	Thu, 07 Sep 2017 04:15:35 -0700 (PDT)
+	Thu,  7 Sep 2017 13:45:12 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v87DjC1q025846
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 7 Sep 2017 06:45:12 -0700
+Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 7 Sep 2017 06:45:11 -0700
+To: =?UTF-8?Q?Andreas_M=c3=bcller?= <schnitzeltony@googlemail.com>
+References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
+	<1504725809-12825-20-git-send-email-mark.hatle@windriver.com>
+	<CALbNGRS8S=vdceyyRV2fuTyJnZFM0MsK=JWdVoWn_KAxu_SRsw@mail.gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <729ff654-8482-3c02-fe1e-fc88a1a90179@windriver.com>
+Date: Thu, 7 Sep 2017 08:45:11 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
+	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.107.33.83 with HTTP; Thu, 7 Sep 2017 04:15:15 -0700 (PDT)
-In-Reply-To: <CAFbHwiQgzwPctvRJ5bDQKzjDGZx9XyvABU2Ldbew_OPNCELWmA@mail.gmail.com>
-References: <20170907091744.27071-1-willn@resin.io>
-	<CA+chaQc=8OV73nEFd2zhQ+7kGaEB0zAki5SJ9_342JmU0AgX4Q@mail.gmail.com>
-	<CAFbHwiQgzwPctvRJ5bDQKzjDGZx9XyvABU2Ldbew_OPNCELWmA@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Thu, 7 Sep 2017 12:15:15 +0100
-Message-ID: <CAJTo0LbX7z9vZt98r6-KNQJGauq8G3+++8z2cY0G2kz7NS9LBA@mail.gmail.com>
-To: Will Newton <will.newton@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Will Newton <willn@resin.io>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] goarch.bbclass: Replace logic for setting GOARM
+In-Reply-To: <CALbNGRS8S=vdceyyRV2fuTyJnZFM0MsK=JWdVoWn_KAxu_SRsw@mail.gmail.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 19/31] glade3: Move PACKAGECONFIG setting to enable_gnome.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,68 +38,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 11:15:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Sep 2017 13:45:12 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-This class is in oe-core, so should go do openembedded-core@ not -devel@.
+On 9/7/17 4:29 AM, Andreas Müller wrote:
+> On Wed, Sep 6, 2017 at 9:23 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+>> This resolves a failure of the yocto-compat-layer.py script.  Changing the
+>> PACKAGECONFIG setting by just including a layer can cause problems.
+>>
+>> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+>> ---
+>>  meta-gnome/conf/enable_gnome.conf                   | 2 ++
+>>  meta-gnome/recipes-devtools/glade/glade3_%.bbappend | 1 -
+>>  2 files changed, 2 insertions(+), 1 deletion(-)
+>>  delete mode 100644 meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+>>
+>> diff --git a/meta-gnome/conf/enable_gnome.conf b/meta-gnome/conf/enable_gnome.conf
+>> index 883a6f5..7e711ee 100644
+>> --- a/meta-gnome/conf/enable_gnome.conf
+>> +++ b/meta-gnome/conf/enable_gnome.conf
+>> @@ -1 +1,3 @@
+>>  AVAHI_GTK_pn-avahi-ui = "gtk gtk3"
+>> +
+>> +PACKAGECONFIG_pn-glade3 = "gnome"
+>> diff --git a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend b/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+>> deleted file mode 100644
+>> index 3abacfb..0000000
+>> --- a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+>> +++ /dev/null
+>> @@ -1 +0,0 @@
+>> -PACKAGECONFIG ??= "gnome"
+>> --
+>> 1.8.3.1
+>>
+> Yet another stupid question (yes I need gnome support for working with
+> glade3): How is enable_gnome.conf supposed to be activated?
+> 
+> For the record: This is yet another patch kicking things off for the
+> sake of yocto-compat-layer script. Is meta-gnome supposed to be yocto
+> compatible? Was this decided by 'community'?
 
-Ross
+See the cover letter:
 
-On 7 September 2017 at 10:20, Will Newton <will.newton@gmail.com> wrote:
+[18/31] enable_gnome.conf: Move the AVAHI_GTK setting
+- The yp-compat script does not allow a layer to modify the system wide
+configuration (including modifying other recipe behavior).  The AVHAI_GTK
+changes the behavior of that recipe, which is detected by the script.  So
+I choose to move this to a configuration file that will need to be required
+by the user IF they want avahi to use GTK.  I'm not happy with this, but I
+don't see any other way to meet the requirements.
 
-> On Thu, Sep 7, 2017 at 10:18 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > Wrong ML
->
-> I appreciate you taking the time to craft this response, but it isn't
-> very helpful to me.
->
-> > On Thu, Sep 7, 2017 at 11:17 AM, Will Newton <will.newton@gmail.com>
-> wrote:
-> >>
-> >> The previous logic applied a regex to TUNE_FEATURES which could
-> >> set the GOARM value to 7 incorrectly, for example when dealing
-> >> with an arm1176 core. Simplify to check for the presence of
-> >> "armv7a" instead. At the same time add a check for "armv6" and
-> >> set GOARM to 6 in that case.
-> >>
-> >> Signed-off-by: Will Newton <willn@resin.io>
-> >> ---
-> >>  meta/classes/goarch.bbclass | 7 +++++--
-> >>  1 file changed, 5 insertions(+), 2 deletions(-)
-> >>
-> >> diff --git a/meta/classes/goarch.bbclass b/meta/classes/goarch.bbclass
-> >> index 4a5b2ec..35f2987 100644
-> >> --- a/meta/classes/goarch.bbclass
-> >> +++ b/meta/classes/goarch.bbclass
-> >> @@ -38,8 +38,11 @@ def go_map_arch(a, d):
-> >>
-> >>  def go_map_arm(a, f, d):
-> >>      import re
-> >> -    if re.match('arm.*', a) and re.match('arm.*7.*', f):
-> >> -        return '7'
-> >> +    if re.match('arm.*', a):
-> >> +        if 'armv7a' in f:
-> >> +            return '7'
-> >> +        elif 'armv6' in f:
-> >> +            return '6'
-> >>      return ''
-> >>
-> >>  def go_map_os(o, d):
-> >> --
-> >> 2.7.4
-> >>
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
-> >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+[19/31] glade3: Move PACKAGECONFIG setting to enable_gnome.conf
+- Similar to the above, but with PACKAGECONFIG this time.
+
+I don't see an alternative here due to this requirement.  As I said before you
+guys maintain meta-openembedded, I don't.  If this doesn't work (and I never
+expected it to) then reject the patch and don't merge it.
+
+I simply don't have an answer to any other way to implement this based on the
+specific requirement of that checking script.
+
+> But I am sure I missed another point...
+> 
+> Andreas
+> 
+
 
