@@ -1,50 +1,50 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f68.google.com (mail-lf0-f68.google.com
-	[209.85.215.68])
-	by mail.openembedded.org (Postfix) with ESMTP id DC71C77D04
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
+	[209.85.217.174])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C564601A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 08:51:46 +0000 (UTC)
-Received: by mail-lf0-f68.google.com with SMTP id y15so4135476lfd.0
+	Thu,  7 Sep 2017 08:57:29 +0000 (UTC)
+Received: by mail-ua0-f174.google.com with SMTP id l24so18077671uaa.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Sep 2017 01:51:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=aJ39qwm7q3oJ5JpjLe6NKwROmI848sM4nAclU1hqgiQ=;
-	b=F7IBNTTq3aYOEKzEhz7X/YRaJ8/xZRMjTYAj7WODdyHIkqujvg2AxgUqAi0oWMgkV6
-	2BCcKR1cHIpYa0Po1l7hjAi0vnGz7Hx2rIr7GxXR1dFcNOOyr4DMeKsQ2m2unTBH/jlH
-	8/Ue7LrpnC3WL0+ueWWvNDRew0tMR5C5/7roTI/WsvsRQSyeHN3OGcLoMq27gAmyePrw
-	W4+LSaghCJYhKDrtZP/gwIbtOhykm7mIsl8UJfOhTRrZ5vVk7ajjjxuDh8CqvKZdcTIx
-	P3mevaRRDgmEfxCYDNJCOhxXdAFhUCUMiFOukFrLaVjYLICFcevR18uDeo6y+HUxYMM9
-	MmXQ==
+	Thu, 07 Sep 2017 01:57:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=OZU7ySv8exhY2oXhr/WXgI539r9rdUqXM63q0FRW/vM=;
+	b=B07EUE76E8/imIxCMGhvoB0l/V2u2JogyE7ztz/lj9J3PJbzzp11f2KycXmq+eqs17
+	jtdWMLzheYHLLnifODYEtR9NWjzkxxh+JgUSMDc2/S9/nlgs7027zI5eix3sqywrEWhI
+	QDmGDd1q3g0h3RW4tfncsXjS40MGhb6NFx8b6mxOFPJ6E6qp4HL7z7iIJd2vEtTE7yXm
+	mHUstAw910x1+GX0+pVG/SlBsvqFOOrbtXY8ue95uAA4HJydm7ydMjEn1EPtDtW0IKzd
+	I+d1QR6anFUKULRL6tP1xupg1tOlz06f3HiJh+J9Oty6WwFZM+1ScCCIFGvk0fd4vc0Y
+	R7VA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=aJ39qwm7q3oJ5JpjLe6NKwROmI848sM4nAclU1hqgiQ=;
-	b=UUcE3KUIYdGCJ9T3++6+CqTgSQb0BaBjLDcIfFrjOKWUZgZMqwo9jkT/YpmMG9wGHV
-	TEAJ/C1XQR+fSOm3DKyeao4GEVb8CyG/RNtZ9aPUAoDpiLQKUqhiGijFeYjuBZi8ZtEY
-	OoWzgT+xB4v36s7+ySEY21T8fRRDX5WGVp/gL9hkGNAs2OMvdUWzhFFVEd9rzQ7QKxtU
-	Qal+avs0g/Yzf1flIKU4XMkGNpfGGjlLJ0Q8/7BbVrQwa2oai5NKF8NduTKDqaZRHbgw
-	a+xb1CKCE6CNMd4ImnhYTjXwwKPH48RFgq+tgfiJJVJalFoFQj80I730SjQWKzJQNWqq
-	a5Hg==
-X-Gm-Message-State: AHPjjUjjLvcnKSGVUfFU0namiUQwpJp5ix+hcaOcDlW33vXkntP2o+Op
-	kYe+ZPuitVyb/OfOsro=
-X-Google-Smtp-Source: AOwi7QBqrLAM8sZPbM4t1tRxh1MLfRO600pMDF9LyNyvwvvAgsWjyoAwMdNa/fM2B7KxM8qs7gGm1w==
-X-Received: by 10.25.92.68 with SMTP id q65mr694604lfb.206.1504774307244;
-	Thu, 07 Sep 2017 01:51:47 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id n13sm332735lja.7.2017.09.07.01.51.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Sep 2017 01:51:45 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Sep 2017 10:51:36 +0200
-Message-Id: <20170907085136.20862-2-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
-References: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
-Subject: [meta-java][PATCH 2/2] openjdk-8-native: Fix sigsegv with gcc7
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=OZU7ySv8exhY2oXhr/WXgI539r9rdUqXM63q0FRW/vM=;
+	b=ADXeDyPWD1dhklVV0KzZZNWOKQnhdgn+LCRX5+pVuyBEuhQHszCEP+yAPXyVFC6YbV
+	G4pCzmlfFS1YqahnNgtKch8HzQPgbKUy4DNXVRC6f/ZwSUvTprbiE1zg2GPxOGy39iPf
+	lU0XMBdFrTEesE/0vUladi61hAJTajkGvLC4zm7aMmUYLgegtcYakU3zil5E/bBuKFSs
+	5+X1Za+BjVn1Nv1RPDBz7mlsC6Sp90Ok2e5QEFb6n4SRzDGyZnoRrElFpHhUTLDvWMCA
+	mIT8iXDLq3Qt1yGBEmjCxxRiauSDULriaDOZDnnEWTHLzWbky+QslRnD/wV0QYh5RGZE
+	8FYQ==
+X-Gm-Message-State: AHPjjUg2XQeqlbgk5IvAvp1RwdPrKdfIlTUIZ2oDVO7uTex+lQ3AFWP9
+	CzfdG/7dpQYXqPZF7YZbOizkH7tteA==
+X-Google-Smtp-Source: ADKCNb6za3eFGVar0+qtzbvF1+bGCz3og77z/Ct3uO7EAn7UXGNxrLNL39SP3Kt8+zh4Q3kEln4/Ac2k4VV95Hc6Gjg=
+X-Received: by 10.176.2.5 with SMTP id 5mr1396699uas.160.1504774650827; Thu,
+	07 Sep 2017 01:57:30 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.51.10 with HTTP; Thu, 7 Sep 2017 01:57:30 -0700 (PDT)
+In-Reply-To: <1504725809-12825-23-git-send-email-mark.hatle@windriver.com>
+References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
+	<1504725809-12825-23-git-send-email-mark.hatle@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 7 Sep 2017 10:57:30 +0200
+Message-ID: <CALbNGRTYz=c+_jSJDrUkp5Sa4H76xH3N7G7+7qv3+vRnMNnsgA@mail.gmail.com>
+To: Mark Hatle <mark.hatle@windriver.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 22/31] vim: Remove xfce vim bbappend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,61 +57,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 08:51:47 -0000
+X-List-Received-Date: Thu, 07 Sep 2017 08:57:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-OpenJDK does not build properly with GCC7. Add the same workaround that
-we have for GCC6.
+On Wed, Sep 6, 2017 at 9:23 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+> Changing the behavior of a recipe by including a layer is not allowed
+> by the yocto-compat-layer script.
+I have a question on this: What is the yocto target for this matter?
+Will there be times that a layer cannot change recipe's behavior
+anymore? Background: Personally I don't care much (yet) for
+yocto-compat-layer script - am busy enough to keep my images building
+and running with the functionality I am interested in. But if this
+will be forbidden by design in the future I have to expect further
+activities. Not to be misunderstood: I understand why this is part of
+requirements and only want to know what I need to put on my personal
+TODO.
 
-Without this patch:
-
-| #
-| # A fatal error has been detected by the Java Runtime Environment:
-| #
-| #  SIGSEGV (0xb) at pc=0x00007fcad0efcd5b, pid=17206, tid=0x00007fcab264c700
-| #
-| # JRE version: OpenJDK Runtime Environment (8.0_102-b14) (build 1.8.0_102-internal-b14)
-| # Java VM: OpenJDK 64-Bit Server VM (25.102-b14 mixed mode linux-amd64 compressed oops)
-| # Problematic frame:
-| # V  [libjvm.so+0x78bd5b]  Node::Node(unsigned int)+0x2b
-| #
-| # Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
-| #
-| # An error report file with more information is saved as:
-| # /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/openjdk-8-native/102b14-r0/build/hs_err_pid17206.log
-| [thread 140508549912320 also had an error]
-|
-| [error occurred during error reporting , id 0xb]
-|
-| #
-| # If you would like to submit a bug report, please visit:
-| #   http://bugreport.java.com/bugreport/crash.jsp
-| #
-
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- recipes-core/openjdk/openjdk-8-common.inc | 7 ++++---
- 1 file changed, 4 insertions(+), 3 deletions(-)
-
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index def779db4d59..0c5c2c3e3d2f 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -218,10 +218,11 @@ EXTRA_OECONF_append = "\
-         --with-update-version=${OPENJDK_UPDATE_VERSION} \
- "
- 
--# GCC 6 sets the default C++ standard to C++14 and introduces dead store
--# elimination by default. OpenJDK 8 is not ready for either of these
--# changes.
-+# Since v6, GCC sets the default C++ standard to C++14 and introduces
-+# dead store elimination by default. OpenJDK 8 is not ready for either
-+# of these changes.
- FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
-+FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
- 
- # All supported cross compilers support the compiler flags that were
- # added to make compilation with gcc6 work. But the host compiler for
--- 
-2.14.1
-
+Andreas
 
