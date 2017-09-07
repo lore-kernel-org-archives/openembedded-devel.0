@@ -1,47 +1,50 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f44.google.com (mail-lf0-f44.google.com
-	[209.85.215.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F0AA77E2D
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-vk0-f46.google.com (mail-vk0-f46.google.com
+	[209.85.213.46])
+	by mail.openembedded.org (Postfix) with ESMTP id 23E396FFFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 09:24:49 +0000 (UTC)
-Received: by mail-lf0-f44.google.com with SMTP id 80so18399799lfy.4
+	Thu,  7 Sep 2017 09:29:32 +0000 (UTC)
+Received: by mail-vk0-f46.google.com with SMTP id c82so8442710vkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Sep 2017 02:24:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=otpQ4/K3YlvPUJYnlRDJV61CDBxR4yjirhZWnhmtXZw=;
-	b=BLI1afW6bsLAmasFAUVSn31ds3Fw6KMLMfW0J7Yv6TUsgapLZIEC6ICVfF2MVbimT3
-	E90dGiMFdLmEbOmRh8qjDPKl6r3eAe06eK7gtL7CcEPa2k3i9VXpz5zsiq4fqMwcxtpJ
-	vtsDM/Zl75v63CXER/EipZfG7qAdvD4PVBHXN/5E/h+4jYEhtGD0vip4iOYIEEc7cUb7
-	22AfJSFVN5gLF6g3D6HLKHmOd8pIMQ2zmBj5vQ3+CwmZr74yYBP0YnUJbCpcg56ATSHw
-	4neuXvdqs5VyA+fY9LHj/Jv8vpsVBLyeb5FRM9xGaelGfv1ravtZf09pWzgweemB+2qT
-	Ljyg==
+	Thu, 07 Sep 2017 02:29:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=laeYxnpWEOf450yaiJI7iqbwKiAB9SgSXm/uGIW0CdU=;
+	b=a5ZbWToPmf8B53CTj9O+LGVRBSYkM9AEM9XMfEHbM5h+pwhl2E6k8IF3NWDnx8rygJ
+	cHrhHsUkYKWz6warZToiqnlmVkIierj7qyQ/aFqzHZzpBuIrGuqf+/ZWy7//WkEFBHj8
+	4ogLrwjwB7NaSmmw/faOU+7ndlkFDDg1Xmrgvc600Y3SBI0KYtOnt7DAaj+RzR/jN0No
+	SLSWokS9+REiPRSI3H22l8fSQ6OOEyvcjzH7pLtiaPh/GeF5bnorgiJLmeQQHgEg3D7o
+	THhBM5+8e3hYJ7nwAUitTSvXvovBKXwQKM3a4sDJ2noXJi56jr0YMx7PzZotezrbgxg9
+	oubg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=otpQ4/K3YlvPUJYnlRDJV61CDBxR4yjirhZWnhmtXZw=;
-	b=HJuaGXrFc2dvx382Q8LTiuNuCHIjP9YT4fXHg7/O0DWAKj0J8QcFJlyrSD0ycBpxBv
-	AABCNwwd6Lpk38yw5+8kU62UMryFyD7IN3+XodT1RKEQ8ZQOZCfNwp+QKbp+p7Po7xBt
-	2tFM9S1y1Ri3GuM2KozKOb82zTc81cYgkZtcA2BxsJ0zE41SHQI+4m6/4KP4CU2jYrXc
-	BZPhkit6Zq4+gyZ6zKlf92PUywez8jDOWUWjq9oHj+BYGne+Fff+ifp2w0cNhrqJBCrt
-	0FwL1Kk2k4gbXYwG2XOLrDQAuLsWcCiR4TciLza4YsMoKlZbeTWSBAX7ZXprvHWV3+CW
-	08uQ==
-X-Gm-Message-State: AHPjjUjIpRc2YtqGRh5q73rK/WKw/+UQf+8KylrhmDpmUiNsBze0tO0c
-	S61pM7qeIoRciy6EmF4=
-X-Google-Smtp-Source: AOwi7QAZoaGIVey1a8RnxOL40J32PK6GYIpdldkcVzEtMXW6juImCMv1YGMuSQFVYvJfL9UiJSbsvQ==
-X-Received: by 10.25.18.38 with SMTP id h38mr318431lfi.73.1504776290105;
-	Thu, 07 Sep 2017 02:24:50 -0700 (PDT)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id a1sm322900ljb.94.2017.09.07.02.24.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Sep 2017 02:24:48 -0700 (PDT)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Sep 2017 11:24:46 +0200
-Message-Id: <20170907092446.18244-1-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [meta-java][PATCH] openjdk-8-common: Fix warning evaluating CFLAGS
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=laeYxnpWEOf450yaiJI7iqbwKiAB9SgSXm/uGIW0CdU=;
+	b=LlUoUJme9+Wbu1k6u7Gc3BzW5fKlwD6iv3bfncM91/Pf7PWzPwbCNwZBmqgeLlpShu
+	oJVcVf1UFUvIEsQZmssQjGJcU6spEauu0hphDtdjK4EEW2oEgi2ny8f8XzHaFroUHSrN
+	MSVXc7XP3xn//47E/bXS6aFCJ4ZUypns+81pHenK4yIjSjM1JMpRpe/6y5D0HCci/IMX
+	UpuSfi5QJU8vVcgSQFL9CWcUWtt+9I8YVVN4DrsCpOU+sUpWQqqmDUInEMXzPx1GwaFo
+	QhcTX+Y5N/gy5tV+w7PIr3Ha3ILk5F/cSbE4p6jvOExUJvrXFrsZ6hICV5q8nUSVRI6H
+	VoDQ==
+X-Gm-Message-State: AHPjjUjU4xQ+uVNM+dpaEfEduR2T4WuURz2nFARLpNZeE/TvWTjO3GsW
+	5h92zSSqH58znsopjictGHWi17qY0w==
+X-Google-Smtp-Source: ADKCNb5p/6Q1wNuVMzF6AM5LWhITLRwjr1wnzE41i60oZy+A76ML3PDqtGVnErhv2NcEZn/aYCT3BP8hdCUJCjzU3PE=
+X-Received: by 10.31.89.193 with SMTP id n184mr1145128vkb.19.1504776574097;
+	Thu, 07 Sep 2017 02:29:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.159.51.10 with HTTP; Thu, 7 Sep 2017 02:29:33 -0700 (PDT)
+In-Reply-To: <1504725809-12825-20-git-send-email-mark.hatle@windriver.com>
+References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
+	<1504725809-12825-20-git-send-email-mark.hatle@windriver.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Thu, 7 Sep 2017 11:29:33 +0200
+Message-ID: <CALbNGRS8S=vdceyyRV2fuTyJnZFM0MsK=JWdVoWn_KAxu_SRsw@mail.gmail.com>
+To: Mark Hatle <mark.hatle@windriver.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 19/31] glade3: Move PACKAGECONFIG setting to enable_gnome.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,71 +57,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 09:24:49 -0000
+X-List-Received-Date: Thu, 07 Sep 2017 09:29:33 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Code is (on my opinion) simpler, making use of the dumpversion flag, instead of calling the pre-processor via a pipe.
+On Wed, Sep 6, 2017 at 9:23 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
+> This resolves a failure of the yocto-compat-layer.py script.  Changing the
+> PACKAGECONFIG setting by just including a layer can cause problems.
+>
+> Signed-off-by: Mark Hatle <mark.hatle@windriver.com>
+> ---
+>  meta-gnome/conf/enable_gnome.conf                   | 2 ++
+>  meta-gnome/recipes-devtools/glade/glade3_%.bbappend | 1 -
+>  2 files changed, 2 insertions(+), 1 deletion(-)
+>  delete mode 100644 meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+>
+> diff --git a/meta-gnome/conf/enable_gnome.conf b/meta-gnome/conf/enable_gnome.conf
+> index 883a6f5..7e711ee 100644
+> --- a/meta-gnome/conf/enable_gnome.conf
+> +++ b/meta-gnome/conf/enable_gnome.conf
+> @@ -1 +1,3 @@
+>  AVAHI_GTK_pn-avahi-ui = "gtk gtk3"
+> +
+> +PACKAGECONFIG_pn-glade3 = "gnome"
+> diff --git a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend b/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+> deleted file mode 100644
+> index 3abacfb..0000000
+> --- a/meta-gnome/recipes-devtools/glade/glade3_%.bbappend
+> +++ /dev/null
+> @@ -1 +0,0 @@
+> -PACKAGECONFIG ??= "gnome"
+> --
+> 1.8.3.1
+>
+Yet another stupid question (yes I need gnome support for working with
+glade3): How is enable_gnome.conf supposed to be activated?
 
-Flag has been tested on both clang gcc:
+For the record: This is yet another patch kicking things off for the
+sake of yocto-compat-layer script. Is meta-gnome supposed to be yocto
+compatible? Was this decided by 'community'?
 
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ gcc-4.8 -dumpversion
-4.8
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ gcc-4.9 -dumpversion
-4.9.3
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ gcc-5 -dumpversion
-5.4.1
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ gcc-6 -dumpversion
-6.4.0
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ gcc-7 -dumpversion
-7
-ricardo@neopili:~/curro/qt5022/build-qt5022-pyro/repo/java$ clang-4.0 -dumpversion
-4.2.1
+But I am sure I missed another point...
 
-Without this patch:
-
- WARNING:
- /home/ricardo/curro/qt5022/build-qt5022-pyro/repo/yocto/../java/recipes-core/openjdk/openjdk-8-native_102b14.bb:
- Unable to export ${CXXFLAGS}: Failure expanding variable CXXFLAGS,
- expression was
- -isystem/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/openjdk-8-native/102b14-r0/recipe-sysroot-native/usr/include
- -O2 -pipe -D_GLIBCXX_USE_CXX11_ABI=0 ${@version_specific_cflags(d)}
- ${@jdk_cpp_options(d)} which triggered exception IndexError: string
- index out of range
- WARNING:
- /home/ricardo/curro/qt5022/build-qt5022-pyro/repo/yocto/../java/recipes-core/openjdk/openjdk-8-native_102b14.bb:
- Unable to export ${CFLAGS}: Failure expanding variable CFLAGS,
- expression was
- -isystem/home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/openjdk-8-native/102b14-r0/recipe-sysroot-native/usr/include
- -O2 -pipe -Wno-error=deprecated-declarations
- ${@version_specific_cflags(d)} ${@jdk_cpp_options(d)} which triggered
- exception IndexError: string index out of range
-
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- recipes-core/openjdk/openjdk-8-common.inc | 10 +++-------
- 1 file changed, 3 insertions(+), 7 deletions(-)
-
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index 0c5c2c3e3d2f..83828e156fb6 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -238,13 +238,9 @@ def version_specific_cflags(d):
-     if bb.data.inherits_class('native', d):
-         from subprocess import Popen, PIPE
- 
--        cmd = d.expand('${CPP} -P -').split()
--        cc = Popen(cmd, stdin=PIPE, stdout=PIPE, stderr=PIPE)
--        # This check is GCC specific. Clang always returns 4. For Clang
--        # __clang_major__ and __clang_minor__ need to be checked. Ideally
--        # __GNUC_MINOR__ would be checked as well, but for this recipe
--        # GCC major is all we care about.
--        version = cc.communicate(b'__GNUC__')[0].decode('utf-8')[0]
-+        cmd = d.expand('${CC} -dumpversion').split()
-+        cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
-+        version = cc.communicate()[0].decode('utf-8')[0]
-     else:
-         # in the cross case, trust that GCCVERSION is correct. This won't
-         # work if the native toolchain is Clang, but as of this writing that
--- 
-2.14.1
-
+Andreas
 
