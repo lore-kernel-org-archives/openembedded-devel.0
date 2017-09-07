@@ -1,49 +1,36 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 271AB601F1
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CCE27601F1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Sep 2017 00:12:59 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id v82so3560767pgb.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Sep 2017 17:13:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=QtrET7LZrtGRw3/oWugg7M+fux4FXj7b9s5ZrStyKjM=;
-	b=S+Tc41iNtSzRYXgt0zc1J8EENhnsus1D5JM312oWzbkgckIaoGN7R1xJ4dQMoPtNI0
-	ljXS632faku4+hBt1C+6pT4j4HXMhw/9/6bDgy2bCGTZifLnmU46t9SKIbK5E5hGkjmf
-	ePbAOBcPWwxwkBn6/QIcOkr7OaORv9deZf3a8mn5/GaDZ9MbOW+mb3cwcjY9J//bilYN
-	VboANferYznSMSQ5vmn7Zvt0i6JHWiiJtV9wKuRXkxucGQ1AVPw3wKTX6IWGIEIHd3Ei
-	XMFZZg5SEX/mpHCt+r2+9fA0Wz2Rxr8BP5MlZDi8bcGVFXJPkMvEY5GiTqO0AEaEqaX+
-	0GPg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=QtrET7LZrtGRw3/oWugg7M+fux4FXj7b9s5ZrStyKjM=;
-	b=Opr+pbhq+HH4c5r+QS1QYQgu8JTYTPmRUz78ORkfjTOHI9oRmx03Or3Ou1JTkjWviP
-	1iAT+GQF3uCq3whkxHVRkIxpZitwQX3Gs9HUapYWaM3/iXIuh+LLkdUQ0uZNFv1Y16WP
-	n+XQAO9oFZfLvBRpNvm5nCcu1yz5CwU0s8APDm+7UJN0llavIxWmAPPIqnkxbfbnsrFP
-	KmK02F817V9KKcb7ZmerX1UROnU3OlY6RLxAnBls4njvFMSEaHs8Q5HpVnQ1whsdlyVP
-	vztQdqc2XLT0rFcGJgxX6ROXFfxFXRTWuHWfpWTOSWdHGqwABcU9JYs85dq9k1nplInd
-	QTgA==
-X-Gm-Message-State: AHPjjUgiAPxUBio6I37OLrmJHH3QipiHlJCPPJ5atC/LxGKVynDeLgfl
-	Ec/V4T7INvd6xcWxujAkoCp4qZ8IDKe0LGulNYE=
-X-Google-Smtp-Source: ADKCNb50ZutHhOqXYmB5suTRV9xzn/MnshmlO+xWCBN6skLmixSx9lmHXay73GyMCYJoIkgZh8AHYJZGZATwXKdZI00=
-X-Received: by 10.99.44.86 with SMTP id s83mr871292pgs.341.1504743181077; Wed,
-	06 Sep 2017 17:13:01 -0700 (PDT)
+	Thu,  7 Sep 2017 01:02:35 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8712ZwU007833
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 6 Sep 2017 18:02:35 -0700
+Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.180]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
+	Wed, 6 Sep 2017 18:02:34 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: Khem Raj <raj.khem@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH 2/2] corosync: add support for extra
+	features
+Thread-Index: AQHTJkK5SvQTXHSoiku2dYAeLub5m6KnClswgAB34ACAARq1MA==
+Date: Thu, 7 Sep 2017 01:02:33 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B8994A7@ALA-MBC.corp.ad.wrs.com>
+References: <cover.1503998700.git.jackie.huang@windriver.com>
+	<6286ca12b20fb1972ee77d1fc217eb7ebbf60080.1503998700.git.jackie.huang@windriver.com>
+	<CA+chaQcm0g_6Di-h93_Kn=v6i+h+C1D6HtaVFFaZuwbgrsfkWQ@mail.gmail.com>
+	<1B858668EC6A94408DCA5225FDFA85AA014B894A6D@ALA-MBC.corp.ad.wrs.com>
+	<CAMKF1srJm5Y4UonABYcOmD7MP6ocnWnpoktNwCbr7oV6m5eA5w@mail.gmail.com>
+In-Reply-To: <CAMKF1srJm5Y4UonABYcOmD7MP6ocnWnpoktNwCbr7oV6m5eA5w@mail.gmail.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.176.154]
 MIME-Version: 1.0
-Received: by 10.100.189.8 with HTTP; Wed, 6 Sep 2017 17:12:30 -0700 (PDT)
-In-Reply-To: <678a83c4-2216-2a44-cb27-ff80370a6a97@windriver.com>
-References: <1504725809-12825-1-git-send-email-mark.hatle@windriver.com>
-	<a1b92287-eaad-9dfa-17e1-8ffeb3d43ced@windriver.com>
-	<CAMKF1spHKrftLVZ379Y7X_5+DkyYyO5Eq56XypWx7EFRPFZGKg@mail.gmail.com>
-	<678a83c4-2216-2a44-cb27-ff80370a6a97@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 6 Sep 2017 17:12:30 -0700
-Message-ID: <CAMKF1sp4Bx_ys2LQnkwh7bYsR2tvpb5aw0_1agMZZd_0tKC9jg@mail.gmail.com>
-To: Mark Hatle <mark.hatle@windriver.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/31] Numerous patches to resolve yocto-compat-layer
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] corosync: add support for extra features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,156 +43,125 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Sep 2017 00:13:00 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 07 Sep 2017 01:02:36 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Sep 6, 2017 at 4:59 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
-> On 9/6/17 6:49 PM, Khem Raj wrote:
->> On Wed, Sep 6, 2017 at 4:41 PM, Mark Hatle <mark.hatle@windriver.com> wrote:
->>> Current version of these patches, the v2 of 13/31 and the dropping of 29 and 31
->>> has been pushed to:
->>>
->>> git://git.openembedded.org/meta-openembedded-contrib
->>> mgh/yp-compat/master-next
->>>
->>
->> Are these made on top of master-next ?
->> if not it would be easier to integrate if they were rebased on top of
->> master-next
->
-> Yes they are all based on master-next.
->
-
-thanks. I will pull them into my master-next and see how it goes with my set of
-world builds
-
-> --Mark
->
->>
->>> --Mark
->>>
->>> On 9/6/17 2:22 PM, Mark Hatle wrote:
->>>> This patch set attempts to address the 'yocto-compat-layer.py' failures.
->>>>
->>>> Many of the patches seem like obvious fixes or changes to me.. however some
->>>> of them are clearly dubious.
->>>>
->>>> I would not suggestion treating this as a single take them all or take none,
->>>> but as individual changes.. (a few of them may require prior changes...)
->>>>
->>>> Besides the standard git summary (below), I have attempted to summaries the
->>>> individual patches here to help with review:
->>>>
->>>> [01/31] iproute2: Move tipc enablement to oe-core
->>>> [02/31] libml: Move to oe-core
->>>> - I will be sending up a corresponding patch to oe-core for these.  See the
->>>> other email ( iproute2: Move tipc enablement to oe-core ) for a description
->>>> of why this is necessary.
->>>>
->>>> [03/31] openipmi: Move to meta-networking requires net-snmp
->>>> - openipmi in meta-oe requires net-snmp, but meta-oe doesn't depend on
->>>> meta-networking.  Easiest resolution was to move it.
->>>>
->>>> [04/31] glmark2: Set required distro features to opengl
->>>> - Should be one of the 'obvious' fixes
->>>>
->>>> [05/31] openlmi-tools: Only build if the necessary python
->>>> - This is one of the dubious patches.  I could not figure out an appropriate
->>>> place to 'move' this to that requires meta-python -- as the item itself does
->>>> not appear to be appriopriate to put into meta-python.
->>>>
->>>> [06/31] xorg-drivers: Add opengl distro flag requirement to ati
->>>> [07/31] boinc-client: Add distro flag, requires opengl
->>>> - Another set of the 'obvious' fixes
->>>>
->>>> [08/31] networkmanager-openvpn: requires openvpn from meta-networking
->>>> - requires openvpn from meta-networking, but meta-oe doesn't depend on
->>>> meta-networking.  Easiest resolution was to move it.
->>>>
->>>> [09/31] telepathy-python: Move to meta-python, requires python-dbus
->>>> - This seems like a reasonable move to meta-python
->>>>
->>>> [10/31] networkmanager: Move to meta-networking, requires dnsmasq
->>>> - This moves the rest of networkmanager to meta-networking
->>>>
->>>> [11/31] python-ldap: Move to meta-networking, requires cyrus-sasl
->>>> - I originally was going to move to meta-python, but that doesn't depend on
->>>> meta-networking... so move it there instead
->>>>
->>>> [12/31] python-networkmanager: Move to networking, requires networkmanager
->>>> - Due to the prior moves, move this as well to meta-networking
->>>>
->>>> [13/31] corosync: Requires net-snmp from meta-networking
->>>> - Again move to meta-networking due to dep
->>>>
->>>> [14/31] pywbem: Requires python-m2crypto-native (and others)
->>>> - This is one I'm not sure if it's the right thing or not.. but it does
->>>> require meta-python.. so move it.
->>>>
->>>> [15/31] dlm: requires corosync, from meta-networking
->>>> - Again move to meta-networking due to prior move
->>>>
->>>> [16/31] open-vm-tools: only build if meta-networking and meta-filesystems
->>>> - open-vm-tools requires libdnet (meta-networking) and fuse (meta-filesystem)
->>>> I think this is a dubious way to 'fix' the issue, but I really couldn't think
->>>> of a better way.
->>>>
->>>> [17/31] miniupnpd: Move to meta-networking, requires libnetfilter-conntrack
->>>> - Move to meta-networking due to dependency...
->>>>
->>>> [18/31] enable_gnome.conf: Move the AVAHI_GTK setting
->>>> - The yp-compat script does not allow a layer to modify the system wide
->>>> configuration (including modifying other recipe behavior).  The AVHAI_GTK
->>>> changes the behavior of that recipe, which is detected by the script.  So
->>>> I choose to move this to a configuration file that will need to be required
->>>> by the user IF they want avahi to use GTK.  I'm not happy with this, but I
->>>> don't see any other way to meet the requirements.
->>>>
->>>> [19/31] glade3: Move PACKAGECONFIG setting to enable_gnome.conf
->>>> - Similar to the above, but with PACKAGECONFIG this time.
->>>>
->>>> [20/31] libart-lgpg: Obsolete, replaced by version in oe-core
->>>> - OE core already has this version, remove it.
->>>>
->>>> [21/31] pinpoint: Add dependency on opengl for cogl
->>>> - Add the required distro flag...
->>>>
->>>> [22/31] vim: Remove xfce vim bbappend
->>>> - This breaks the same rule as 18 and 19.  I didn't see a way to 'fix it',
->>>> so I just removed the change.
->>>>
->>>> [23/31] layer.conf: Add meta-networking for the networkmanager
->>>> - add meta-networking as a dependency to meta-gnome for networkmanager
->>>> this is due to the move above
->>>>
->>>> [24/31] meta-xfce: depend on meta-multimedia
->>>> - There was a duplicate openembedded-layer entry, but I think it was
->>>> supposed to be for meta-multimedia.  This resolves a bunch of dependency
->>>> errors.
->>>>
->>>> [25/31] mpv: Requires ffmpeg which has a LICENSE_FLAGS =
->>>> [26/31] recipes-multimedia: Add LICENSE_FLAGS
->>>> [27/31] recipes-multimedia: Add LICENSE_FLAGS
->>>> - Above items all get LICENSE_FLAGS added to match their dependencies.  This
->>>> resolves a dependency issue where the required item(s) are not avaialable.
->>>>
->>>> [28/31] libmtp: remove 'mtp-tools' from PACKAGES
->>>> - This is a real bug in mtp-tools, and needs to be fixed.
->>>>
->>>> [29/31] xfce4-mixer: Remove, gstreamer-0.10 is obsolete
->>>> - There is no 'fix' for xfce4-mixer using gstreamer-0.10, so remove it...
->>>>
->>>> [30/31] florence: update 0.6.3
->>>> - Use Andreas Muller's patch from Oct 2016 to git rid of the gstreamer-0.10
->>>> dependency.  Resolve the issue with requiring gtk+3.
->>>>
->>>> [31/31] gstreamer-0.10: Remove as all users are gone and it is
->>>> - Remove gstreamer-0.10 as all of the users are now gone.  (This resolves
->>>> various preferred provider issues I observed..)
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+DQoNCj4gLS0tLS1PcmlnaW5hbCBNZXNzYWdlLS0tLS0NCj4gRnJvbTogS2hlbSBSYWogW21haWx0
+bzpyYWoua2hlbUBnbWFpbC5jb21dDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA2LCAy
+MDE3IDA5OjA5DQo+IFRvOiBIdWFuZywgSmllIChKYWNraWUpDQo+IENjOiBNYXJ0aW4gSmFuc2E7
+IG9wZW5lbWJlZGRlZC1kZXZlbA0KPiBTdWJqZWN0OiBSZTogW29lXSBbbWV0YS1vZV1bUEFUQ0gg
+Mi8yXSBjb3Jvc3luYzogYWRkIHN1cHBvcnQgZm9yIGV4dHJhDQo+IGZlYXR1cmVzDQo+IA0KPiBp
+bmNsdWRlIHNlY3VyaXR5LWZsYWdzLmluYyBmaWxlIGluIGRpc3RybyBjb25maWcuIGlmIHlvdSB1
+c2UgcG9reSBmb3INCj4gZGlzdHJvIHRoZW4gc2V0IERJU1RSTz1wb2t5LWxzYiBhbmQgeW91IHdp
+bGwgYmUgYWJsZSB0byByZXByb2R1Y2UgaXQNCg0KVW5mb3J0dW5hdGVseSBJIHN0aWxsIGNhbid0
+IHJlcHJvZHVjZSBpdCB3aXRoIERJU1RSTz1wb2t5LWxzYiwgZG8gSSBtaXNzDQphbnl0aGluZyBl
+bHNlPw0KDQpUaGFua3MsDQpKYWNraWUNCg0KPiANCj4gT24gVHVlLCBTZXAgNSwgMjAxNyBhdCA2
+OjAxIFBNLCBIdWFuZywgSmllIChKYWNraWUpDQo+IDxKYWNraWUuSHVhbmdAd2luZHJpdmVyLmNv
+bT4gd3JvdGU6DQo+ID4gWWVzLCBzdXJlLCBidXQgSSBjYW7igJl0IHJlcHJvZHVjZSB0aGlzLCBj
+b3VsZCB5b3Ugc2hvdyBtZSB0aGUgY29uZmlnIHRoYXQgaGFkDQo+IHRoaXMgaXNzdWU/IFRoYW5r
+cyENCj4gPg0KPiA+IFRoYW5rcywNCj4gPiBKYWNraWUNCj4gPg0KPiA+IEZyb206IE1hcnRpbiBK
+YW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21dDQo+ID4gU2VudDogVHVlc2RheSwg
+U2VwdGVtYmVyIDA1LCAyMDE3IDIwOjMwDQo+ID4gVG86IEh1YW5nLCBKaWUgKEphY2tpZSkNCj4g
+PiBDYzogb3BlbmVtYmVkZGVkLWRldmVsDQo+ID4gU3ViamVjdDogUmU6IFtvZV0gW21ldGEtb2Vd
+W1BBVENIIDIvMl0gY29yb3N5bmM6IGFkZCBzdXBwb3J0IGZvciBleHRyYQ0KPiBmZWF0dXJlcw0K
+PiA+DQo+ID4gQ2FuIHlvdSBwbGVhc2UgYWxzbyBmaXg6DQo+ID4gY29yb3N5bmMtMi40LjI6IEVM
+RiBiaW5hcnkgJy90bXAvd29yay9jb3JlMi02NC1vZS1saW51eC9jb3Jvc3luYy8yLjQuMi0NCj4g
+cjAvcGFja2FnZXMtc3BsaXQvY29yb3N5bmMvdXNyL3NiaW4vY29yb3N5bmMnIGhhcyByZWxvY2F0
+aW9ucyBpbiAudGV4dCBbdGV4dHJlbF0NCj4gPg0KPiA+IGl0J3MgYmVlbiB0aGVyZSBmb3IgbG9u
+ZyB0aW1lLg0KPiA+DQo+ID4gT24gVHVlLCBBdWcgMjksIDIwMTcgYXQgMTE6MjcgQU0sDQo+IDxq
+YWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbTxtYWlsdG86amFja2llLmh1YW5nQHdpbmRyaXZlci5j
+b20+PiB3cm90ZToNCj4gPiBGcm9tOiBKYWNraWUgSHVhbmcNCj4gPGphY2tpZS5odWFuZ0B3aW5k
+cml2ZXIuY29tPG1haWx0bzpqYWNraWUuaHVhbmdAd2luZHJpdmVyLmNvbT4+DQo+ID4NCj4gPiAq
+IEFkZCBzdXBwb3J0IGZvciBmZWF0dXJlczogZGJ1cyBxZGV2aWNlIHFuZXRkIHNubXANCj4gPiAq
+IEFkZCByZWxhdGVkIFBBQ0tBR0VDT05GSUcNCj4gPiAqIGluaGVyaXQgdXNlcmFkZCB0byBhZGQg
+cHJvcGVyIHVzZXIgZm9yIHFuZXRkIHNlcnZpY2UNCj4gPg0KPiA+IFNpZ25lZC1vZmYtYnk6IEph
+Y2tpZSBIdWFuZw0KPiA8amFja2llLmh1YW5nQHdpbmRyaXZlci5jb208bWFpbHRvOmphY2tpZS5o
+dWFuZ0B3aW5kcml2ZXIuY29tPj4NCj4gPiAtLS0NCj4gPiAgLi4uL3JlY2lwZXMtZXh0ZW5kZWQv
+Y29yb3N5bmMvY29yb3N5bmNfMi40LjIuYmI8aHR0cDovL2Nvcm9zeW5jXzIuNC4yLmJiPg0KPiB8
+IDMwICsrKysrKysrKysrKysrKysrKystLS0NCj4gPiAgMSBmaWxlIGNoYW5nZWQsIDI3IGluc2Vy
+dGlvbnMoKyksIDMgZGVsZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvbWV0YS1vZS9y
+ZWNpcGVzLQ0KPiBleHRlbmRlZC9jb3Jvc3luYy9jb3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29y
+b3N5bmNfMi40LjIuYmI+IGIvbWV0YS0NCj4gb2UvcmVjaXBlcy1leHRlbmRlZC9jb3Jvc3luYy9j
+b3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+DQo+ID4gaW5kZXggMmYz
+YWVmMjk5Li43ZDVhODdlNGMgMTAwNjQ0DQo+ID4gLS0tIGEvbWV0YS1vZS9yZWNpcGVzLQ0KPiBl
+eHRlbmRlZC9jb3Jvc3luYy9jb3Jvc3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIu
+YmI+DQo+ID4gKysrIGIvbWV0YS1vZS9yZWNpcGVzLQ0KPiBleHRlbmRlZC9jb3Jvc3luYy9jb3Jv
+c3luY18yLjQuMi5iYjxodHRwOi8vY29yb3N5bmNfMi40LjIuYmI+DQo+ID4gQEAgLTUsNyArNSw3
+IEBAIEhPTUVQQUdFID0gImh0dHA6Ly9jb3Jvc3luYy5naXRodWIuaW8vY29yb3N5bmMvIg0KPiA+
+DQo+ID4gIFNFQ1RJT04gPSAiYmFzZSINCj4gPg0KPiA+IC1pbmhlcml0IGF1dG90b29scyBwa2dj
+b25maWcgc3lzdGVtZA0KPiA+ICtpbmhlcml0IGF1dG90b29scyBwa2djb25maWcgc3lzdGVtZCB1
+c2VyYWRkDQo+ID4NCj4gPiAgU1JDX1VSSSA9DQo+ICJodHRwOi8vYnVpbGQuY2x1c3RlcmxhYnMu
+b3JnL2Nvcm9zeW5jL3JlbGVhc2VzLyR7QlB9LnRhci5nejxodHRwOi8vYnVpbGQuY2x1c3Rlcg0K
+PiBsYWJzLm9yZy9jb3Jvc3luYy9yZWxlYXNlcy8kJTdiQlAlN2QudGFyLmd6PiINCj4gPiAgU1JD
+X1VSSVttZDVzdW1dID0gIjU0N2ZhNzg3MDRkYTUzYWEzNTkxMmJlNThkMzEwMzVmIg0KPiA+IEBA
+IC0xNiwxMyArMTYsMjMgQEAgTElDX0ZJTEVTX0NIS1NVTSA9DQo+ICJmaWxlOi8vTElDRU5TRTtt
+ZDU9YTg1ZWI0Y2UyNDAzM2FkYjYwODhkZDFkNmZmYzVlNWQ8ZmlsZTovLy9cXExJQ0VOU0U7bQ0K
+PiBkNT1hODVlYjRjZTI0MDMzYWRiNjA4OGRkMWQ2ZmZjNWU1ZD4iDQo+ID4NCj4gPiAgREVQRU5E
+UyA9ICJncm9mZi1uYXRpdmUgbnNzIGxpYnFiIg0KPiA+DQo+ID4gLVNZU1RFTURfU0VSVklDRV8k
+e1BOfSA9ICJjb3Jvc3luYy5zZXJ2aWNlIGNvcm9zeW5jLW5vdGlmeWQuc2VydmljZSINCj4gPiAr
+U1lTVEVNRF9TRVJWSUNFXyR7UE59ID0gImNvcm9zeW5jLnNlcnZpY2UgY29yb3N5bmMtbm90aWZ5
+ZC5zZXJ2aWNlIFwNCj4gPiArDQo+ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklH
+PG1haWx0bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncWRl
+dmljZScsICdjb3Jvc3luYy1xZGV2aWNlLnNlcnZpY2UnLCAnJywgZCl9IFwNCj4gPiArDQo+ICR7
+QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0bzokJTdiQGJiLnV0aWxzLmNv
+bnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncW5ldGQnLCAnY29yb3N5bmMtcW5ldGQuc2Vy
+dmljZScsICcnLCBkKX0gXA0KPiA+ICsiDQo+ID4gIFNZU1RFTURfQVVUT19FTkFCTEUgPSAiZW5h
+YmxlIg0KPiA+DQo+ID4gIElOSVRTQ1JJUFRfTkFNRSA9ICJjb3Jvc3luYy1kYWVtb24iDQo+ID4N
+Cj4gPiAtUEFDS0FHRUNPTkZJRyA/Pz0gIiR7QGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRV
+UkVTJywgJ3N5c3RlbWQnLA0KPiBkKX08bWFpbHRvOiQlN2JAYmIudXRpbHMuZmlsdGVyKCdESVNU
+Uk9fRkVBVFVSRVMnLCUyMCdzeXN0ZW1kJywlMjBkKSU3ZD4iDQo+ID4gK1BBQ0tBR0VDT05GSUcg
+Pz89ICIke0BiYi51dGlscy5maWx0ZXIoJ0RJU1RST19GRUFUVVJFUycsICdzeXN0ZW1kJywgZCl9
+IFwNCj4gPiArICAgICAgICAgICAgICAgICAgIGRidXMgcWRldmljZSBxbmV0ZCBzbm1wIFwNCj4g
+Pg0KPiArPG1haWx0bzokJTdiQGJiLnV0aWxzLmZpbHRlcignRElTVFJPX0ZFQVRVUkVTJywlMjAn
+c3lzdGVtZCcsJTIwZCklN2QlMjANCj4gXCUwYisgJTIwICUyMCAlMjAgJTIwICUyMCAlMjAgJTIw
+ICUyMCAlMjANCj4gZGJ1cyUyMHFkZXZpY2UlMjBxbmV0ZCUyMHNubXAlMjBcJTBiKz4iDQo+ID4N
+Cj4gPiArUEFDS0FHRUNPTkZJR1tkYnVzXSA9ICItLWVuYWJsZS1kYnVzLC0tZGlzYWJsZS1kYnVz
+LGRidXMiDQo+ID4gK1BBQ0tBR0VDT05GSUdbcWRldmljZV0gPSAiLS1lbmFibGUtcWRldmljZXMs
+LS1kaXNhYmxlLXFkZXZpY2VzIg0KPiA+ICtQQUNLQUdFQ09ORklHW3FuZXRkXSA9ICItLWVuYWJs
+ZS1xbmV0ZCwtLWRpc2FibGUtcW5ldGQiDQo+ID4gK1BBQ0tBR0VDT05GSUdbcmRtYV0gPSAiLS1l
+bmFibGUtcmRtYSwtLWRpc2FibGUtcmRtYSINCj4gPiArUEFDS0FHRUNPTkZJR1tzbm1wXSA9ICIt
+LWVuYWJsZS1zbm1wLC0tZGlzYWJsZS1zbm1wLG5ldC1zbm1wIg0KPiA+ICBQQUNLQUdFQ09ORklH
+W3N5c3RlbWRdID0gIi0tZW5hYmxlLXN5c3RlbWQgLS13aXRoLQ0KPiBzeXN0ZW1kZGlyPSR7c3lz
+dGVtZF9zeXN0ZW1fdW5pdGRpcn0sLS1kaXNhYmxlLXN5c3RlbWQgLS13aXRob3V0LQ0KPiBzeXN0
+ZW1kZGlyLHN5c3RlbWQiDQo+ID4NCj4gPiAgRVhUUkFfT0VDT05GID0gImFjX2N2X3BhdGhfQkFT
+SFBBVEg9JHtiYXNlX2JpbmRpcn0vYmFzaCINCj4gPiBAQCAtNDMsMTIgKzUzLDI2IEBAIGRvX2lu
+c3RhbGxfYXBwZW5kKCkgew0KPiA+ICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS9k
+ZWZhdWx0L3ZvbGF0aWxlcw0KPiA+ICAgICAgZWNobyAiZCByb290IHJvb3QgMDc1NSAke2xvY2Fs
+c3RhdGVkaXJ9L2xvZy9jbHVzdGVyIG5vbmUiID4NCj4gJHtEfSR7c3lzY29uZmRpcn0vZGVmYXVs
+dC92b2xhdGlsZXMvMDVfY29yb3N5bmMNCj4gPg0KPiA+ICsgICAgaWYNCj4gJHtAYmIudXRpbHMu
+Y29udGFpbnMoJ1BBQ0tBR0VDT05GSUc8bWFpbHRvOiQlN2JAYmIudXRpbHMuY29udGFpbnMoJ1BB
+Q0tBDQo+IEdFQ09ORklHPicsICdxbmV0ZCcsICd0cnVlJywgJ2ZhbHNlJywgZCl9OyB0aGVuDQo+
+ID4gKyAgICAgICAgY2hvd24gLVIgY29yb3FuZXRkOmNvcm9xbmV0ZCAke0R9JHtzeXNjb25mZGly
+fS8ke0JQTn0vcW5ldGQNCj4gPiArICAgICAgICBlY2hvICJkIGNvcm9xbmV0ZCBjb3JvcW5ldGQg
+MDc3MCAvdmFyL3J1bi9jb3Jvc3luYy1xbmV0ZCBub25lIiA+Pg0KPiAke0R9JHtzeXNjb25mZGly
+fS9kZWZhdWx0L3ZvbGF0aWxlcy8wNV9jb3Jvc3luYw0KPiA+ICsgICAgZmkNCj4gPiArDQo+ID4g
+ICAgICBpZg0KPiAke0BiYi51dGlscy5jb250YWlucygnRElTVFJPX0ZFQVRVUkVTJywnc3lzdGVt
+ZCcsJ3RydWUnLCdmYWxzZScsZCl9PG1haWx0bzokJTcNCj4gYkBiYi51dGlscy5jb250YWlucygn
+RElTVFJPX0ZFQVRVUkVTJywnc3lzdGVtZCcsJ3RydWUnLCdmYWxzZScsZCklN2Q+OyB0aGVuDQo+
+ID4gICAgICAgICAgaW5zdGFsbCAtZCAke0R9JHtzeXNjb25mZGlyfS90bXBmaWxlcy5kDQo+ID4g
+ICAgICAgICAgZWNobyAiZCAke2xvY2Fsc3RhdGVkaXJ9L2xvZy9jbHVzdGVyIC0gLSAtIC0iID4N
+Cj4gJHtEfSR7c3lzY29uZmRpcn0vdG1wZmlsZXMuZC9jb3Jvc3luYy5jb25mDQo+ID4gKw0KPiA+
+ICsgICAgICAgIGlmDQo+ICR7QGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQUdFQ09ORklHPG1haWx0
+bzokJTdiQGJiLnV0aWxzLmNvbnRhaW5zKCdQQUNLQQ0KPiBHRUNPTkZJRz4nLCAncW5ldGQnLCAn
+dHJ1ZScsICdmYWxzZScsIGQpfTsgdGhlbg0KPiA+ICsgICAgICAgICAgICBpbnN0YWxsIC1tIDA2
+NDQgJHtTfS9jb25mL3RtcGZpbGVzLmQvY29yb3N5bmMtcW5ldGQuY29uZg0KPiAke0R9JHtzeXNj
+b25mZGlyfS90bXBmaWxlcy5kDQo+ID4gKyAgICAgICAgZmkNCj4gPiAgICAgIGZpDQo+ID4gIH0N
+Cj4gPg0KPiA+ICBSREVQRU5EU18ke1BOfSArPSAiYmFzaCINCj4gPg0KPiA+ICBGSUxFU18ke1BO
+fS1kYmcgKz0gIiR7bGliZXhlY2Rpcn0vbGNyc28vLmRlYnVnIg0KPiA+ICtGSUxFU18ke1BOfS1k
+b2MgKz0gIiR7ZGF0YWRpcn0vc25tcC9taWJzL0NPUk9TWU5DLU1JQi50eHQiDQo+ID4gKw0KPiA+
+ICtVU0VSQUREX1BBQ0tBR0VTID0gIiR7UE59Ig0KPiA+ICtHUk9VUEFERF9QQVJBTV8ke1BOfSA9
+ICItLXN5c3RlbSBjb3JvcW5ldGQiDQo+ID4gK1VTRVJBRERfUEFSQU1fJHtQTn0gPSAiLS1zeXN0
+ZW0gLWQgLyAtTSAtcyAvYmluL25vbG9naW4gLWMgJ1VzZXIgZm9yDQo+IGNvcm9zeW5jLXFuZXRk
+JyAtZyBjb3JvcW5ldGQgY29yb3FuZXRkIg0KPiA+IC0tDQo+ID4gMi4xMS4wDQo+ID4NCj4gPiAt
+LQ0KPiA+IF9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fDQo+
+ID4gT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KPiA+IE9wZW5lbWJlZGRlZC1kZXZl
+bEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnPG1haWx0bzpPcGVuZW1iZWRkZWQtDQo+IGRldmVsQGxp
+c3RzLm9wZW5lbWJlZGRlZC5vcmc+DQo+ID4gaHR0cDovL2xpc3RzLm9wZW5lbWJlZGRlZC5vcmcv
+bWFpbG1hbi9saXN0aW5mby9vcGVuZW1iZWRkZWQtZGV2ZWwNCj4gPg0KPiA+IC0tDQo+ID4gX19f
+X19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX18NCj4gPiBPcGVuZW1i
+ZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQo+ID4gT3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9w
+ZW5lbWJlZGRlZC5vcmcNCj4gPiBodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFu
+L2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0K
 
