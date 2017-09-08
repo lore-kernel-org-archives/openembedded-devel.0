@@ -1,46 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 9E8DD78213
+Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 30180781A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Sep 2017 22:08:45 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id h4so2004518pfk.0
+	Fri,  8 Sep 2017 23:28:46 +0000 (UTC)
+Received: by mail-pf0-f170.google.com with SMTP id e1so6611835pfk.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Sep 2017 15:08:47 -0700 (PDT)
+	Fri, 08 Sep 2017 16:28:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=xZDQs5UEODkIMfW6CRD6WxgM8itjARp+Trna6OLEsqM=;
-	b=GQqSm9yQTfXwKhor6f0p0HgPCmkQf1LZHqrFzdAPudFIaje8HH47K6HD1U9MT7FTzm
-	w00AyD/bTq6BRq0zf/CSf1mmfzOim+SDjAQlHWSEoDeesl2XMW8n6GRxKycH5ypeNxvT
-	dq8kFkF5JSfUXF7UOman9iWCB51eQUAp7SpRZ14bs7DuqGBK8clPAT9iEze+VF7iAl7P
-	J0zU9LPDblYvCVPIxc47haU27uqt4glFa7RDTYjeYSTzXFC5vweXtT3GQ9oPzwf6fKD3
-	NIlNVmUbEC6RlQk7iAyByRLf0HDUNf0YB18f7vV/cxdH1XTmWYAsOyGr9CWBf7ERVotK
-	acbw==
+	bh=0WSvbcZfrvwclabWxzKu3zHOrbmDDtJVJAvvfNmFZsY=;
+	b=jlrrNdlFO78hapm2dh7ZjLL5qFkN9Z0Nu7tZJkVSAYW2Rovc9mTXWfS1MMLaMl2w8g
+	QNcb/vdjL4qPllPARL4hBZJuUoF9gKq7c0ioaDeciYbgJEFpYEnZRgRaB18fV3iDgrdL
+	Rbfs6k/Y1jnOY936+31o122mRGuSk7N6WpkuCDkVnL6JIs4X+Ty0bhSDM34Lk46L0ak7
+	hvirhpUx7xAWuoZz1YYGP/qHWZo5qzwGggWtnxdQHSv3PPMECNZomD2CZ3zKwS97ZF7G
+	TcMyzA5vajhEC5Qt2DW62FAzNNmtI6DzxG+MnNOP6RTa5Phi/7sw4W54zYPyiTDu0t5e
+	slFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xZDQs5UEODkIMfW6CRD6WxgM8itjARp+Trna6OLEsqM=;
-	b=G6Re2yu0Y908UwmAHGGQKNkKbEx4qbTo3NEJHAJytFGaeehMCkoNEfKGxkB41IkdzM
-	O20YG//KKO1LqwzjWRa/2SkWgtrFmrOjfhWb3s9mdTHBYbx/SInzmu0EtqNYCgG0yH5K
-	UjKUTKr/zne5VyYMu/OHftQXsLc0cMFsRdHBPdTAsuhs0OGhE/G116AzUCigG6Nk89kd
-	PYyXoMIdXK8P9cQGtPH847U9amevKpLpaBN2UdErzyFyT+lhMlZ4++ohTKJRKbgRpIsh
-	/lrNJsRF4aw2F4M58RBMBySJIj3ubfNnwgCQzyx40FEaBHE8xBXE1TrbQQ8pL3PKKb1p
-	jrfA==
-X-Gm-Message-State: AHPjjUiVL1l74D/X71cCG2pKraowkUiCkXePGn5F0Z+HOJSUh5BY6eIu
-	IednTo36Ow2NhejY
-X-Google-Smtp-Source: ADKCNb5VHAl7lbagqTdypflLOnWh57/iSzK6yhg4w5Cqk+7vpbEGVwzutMtGbmVXz4taOWnGTKW/EA==
-X-Received: by 10.98.18.73 with SMTP id a70mr4646636pfj.245.1504908526966;
-	Fri, 08 Sep 2017 15:08:46 -0700 (PDT)
+	bh=0WSvbcZfrvwclabWxzKu3zHOrbmDDtJVJAvvfNmFZsY=;
+	b=o1jI5lnaWn/Nd4fAFn1sEZIK1ViHxAauBtok0qyen+BW3qxjp7qNMN96BRpv/1zCKi
+	h3CGSAjVetUBCOH59eUnnqVa/KdL8l5CVdkTO450qJtOY+6dNTeYeTyuEfD3EIKBDYoY
+	0zJaamCFZ0hU0qQ77AwH8JDSTf+2UoNINquW40nfe4HGTY8gehG1MVGvirxVNYhjoY9T
+	374W7aua7jMPiXAT1AnzdBIIOqmcOL3sYAxhc7Sme926ZKGUWZOPptSFIKElP1qrZWfI
+	tQtPEPbeuhl3DHJ0uDAmf6/UO03d/dyOfakz5y0YsvIaYUNqOdl0fhtwDyHzz0JWEK23
+	2nqA==
+X-Gm-Message-State: AHPjjUgw3smtXiiq6K6ILq/gxD4HwzaxnvFGI/o5u1JuljxfU74G9rI0
+	DoMCR8+Jmc6QCW1d
+X-Google-Smtp-Source: ADKCNb5/jaJJ0qpRTZl7jQZ90HkKHyYmg6eDxbccPfjoh2w3bG+eVJ8DC5ZUJaXLU/lfxvqq39hfMw==
+X-Received: by 10.99.97.148 with SMTP id v142mr4769537pgb.413.1504913327691;
+	Fri, 08 Sep 2017 16:28:47 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::be3d])
-	by smtp.gmail.com with ESMTPSA id a6sm4502134pgq.17.2017.09.08.15.08.45
+	by smtp.gmail.com with ESMTPSA id
+	r11sm5684881pfg.180.2017.09.08.16.28.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Sep 2017 15:08:45 -0700 (PDT)
+	Fri, 08 Sep 2017 16:28:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Sep 2017 15:08:37 -0700
-Message-Id: <20170908220837.44604-1-raj.khem@gmail.com>
+Date: Fri,  8 Sep 2017 16:28:39 -0700
+Message-Id: <20170908232839.1753-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-oe][PATCH V2] minicoredumper: Switch src_uri to upstream lf git
+Subject: [meta-filesystems][PATCH V4] xfsprogs: Upgrade to 4.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,94 +54,296 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2017 22:08:46 -0000
+X-List-Received-Date: Fri, 08 Sep 2017 23:28:47 -0000
 
-COPYING file changed since copyright is now assined to linutronix from Erricson
-
-Fix build on arm
-
-Fixes error like
-corestripper.c:1245:4: error: format specifies type 'unsigned long' but the arg
-ument has type 'long long' [-Werror,-Wformat]
+Fix cross builds with hardening flags
+Fix build with gold
+Specify libtool tag
+Add DISABLE_STATIC = ""
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
-Changes in V2: Add patch to fix build on arm
+Changes in V4: Enable static libs
 
- .../files/0001-fix-compile-error-on-arch-x32.patch | 32 ++++++++++++++++++++++
- .../minicoredumper/minicoredumper_2.0.0.bb         |  7 +++--
- 2 files changed, 36 insertions(+), 3 deletions(-)
- create mode 100644 meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
+ .../xfsprogs/files/link_needed_libs.patch          |  82 ---------------
+ .../files/remove_flags_from_build_flags.patch      |  13 +++
+ .../xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch  | 117 +++++++++++++++++++++
+ .../{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb}     |   9 +-
+ 4 files changed, 136 insertions(+), 85 deletions(-)
+ delete mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+ create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+ create mode 100644 meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+ rename meta-filesystems/recipes-utils/xfsprogs/{xfsprogs_4.11.0.bb => xfsprogs_4.12.0.bb} (86%)
 
-diff --git a/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch b/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch b/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
+deleted file mode 100644
+index 1de634ed7..000000000
+--- a/meta-filesystems/recipes-utils/xfsprogs/files/link_needed_libs.patch
++++ /dev/null
+@@ -1,82 +0,0 @@
+-Index: xfsprogs-4.10.0/libxcmd/Makefile
+-===================================================================
+---- xfsprogs-4.10.0.orig/libxcmd/Makefile
+-+++ xfsprogs-4.10.0/libxcmd/Makefile
+-@@ -30,10 +30,21 @@ LCFLAGS += -DENABLE_EDITLINE
+- LTLIBS += $(LIBEDITLINE) $(LIBTERMCAP)
+- endif
+- 
+-+ifeq ($(ENABLE_BLKID),yes)
+-+LCFLAGS += -DENABLE_BLKID
+-+LTLIBS += $(LIBBLKID)
+-+endif
+-+
+-+LTLIBS += $(LIBXFS)
+-+
+- default: ltdepend $(LTLIBRARY)
+- 
+- include $(BUILDRULES)
+- 
+--install install-dev: default
+-+install: default
+-+	$(INSTALL_LTLIB)
+-+
+-+install-dev: default
+-+	$(INSTALL_LTLIB_DEV)
+- 
+- -include .ltdep
+-Index: xfsprogs-4.10.0/libxfs/Makefile
+-===================================================================
+---- xfsprogs-4.10.0.orig/libxfs/Makefile
+-+++ xfsprogs-4.10.0/libxfs/Makefile
+-@@ -137,6 +137,7 @@ include $(BUILDRULES)
+- 
+- install: default
+- 	$(INSTALL) -m 755 -d $(PKG_INC_DIR)
+-+	$(INSTALL_LTLIB)
+- 
+- install-headers: $(addsuffix -hdrs, $(PKGHFILES))
+- 
+-Index: xfsprogs-4.10.0/libxlog/Makefile
+-===================================================================
+---- xfsprogs-4.10.0.orig/libxlog/Makefile
+-+++ xfsprogs-4.10.0/libxlog/Makefile
+-@@ -19,6 +19,10 @@ default: ltdepend $(LTLIBRARY)
+- 
+- include $(BUILDRULES)
+- 
+--install install-dev: default
+-+install: default
+-+	$(INSTALL_LTLIB)
+-+
+-+install-dev: default
+-+	$(INSTALL_LTLIB_DEV)
+- 
+- -include .ltdep
+-Index: xfsprogs-4.10.0/io/Makefile
+-===================================================================
+---- xfsprogs-4.10.0.orig/io/Makefile
+-+++ xfsprogs-4.10.0/io/Makefile
+-@@ -13,7 +13,7 @@
+- 	getrusage.c imap.c link.c mmap.c open.c parent.c pread.c prealloc.c \
+- 	pwrite.c reflink.c seek.c shutdown.c sync.c truncate.c utimes.c
+- 
+--LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBPTHREAD)
+-+LLDLIBS = $(LIBXCMD) $(LIBHANDLE) $(LIBUUID) $(LIBPTHREAD)
+- LTDEPENDENCIES = $(LIBXCMD) $(LIBHANDLE)
+- LLDFLAGS = -static-libtool-libs
+- 
+-Index: xfsprogs-4.10.0/quota/Makefile
+-===================================================================
+---- xfsprogs-4.10.0.orig/quota/Makefile
+-+++ xfsprogs-4.10.0/quotq/Makefile
+-@@ -14,7 +14,7 @@
+- PCFILES = darwin.c freebsd.c irix.c linux.c
+- LSRCFILES = $(shell echo $(PCFILES) | sed -e "s/$(PKG_PLATFORM).c//g")
+- 
+--LLDLIBS = $(LIBXCMD)
+-+LLDLIBS = $(LIBXCMD) $(LIBUUID)
+- LTDEPENDENCIES = $(LIBXCMD)
+- LLDFLAGS = -static
+- 
+-
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
 new file mode 100644
-index 000000000..6ba6ad481
+index 000000000..bba9a25c2
 --- /dev/null
-+++ b/meta-oe/recipes-kernel/minicoredumper/files/0001-fix-compile-error-on-arch-x32.patch
-@@ -0,0 +1,32 @@
-+From 883f53ee33eaef8aca1288a110857402ad362966 Mon Sep 17 00:00:00 2001
-+From: John Ogness <john.ogness@linutronix.de>
-+Date: Fri, 8 Sep 2017 15:03:03 -0700
-+Subject: [PATCH] fix compile error on arch=x32
++++ b/meta-filesystems/recipes-utils/xfsprogs/files/remove_flags_from_build_flags.patch
+@@ -0,0 +1,13 @@
++Index: xfsprogs-4.12.0/include/builddefs.in
++===================================================================
++--- xfsprogs-4.12.0.orig/include/builddefs.in
+++++ xfsprogs-4.12.0/include/builddefs.in
++@@ -164,7 +164,7 @@ ifeq ($(ENABLE_GETTEXT),yes)
++ GCFLAGS += -DENABLE_GETTEXT
++ endif
++ 
++-BUILD_CFLAGS += $(GCFLAGS) $(PCFLAGS)
+++BUILD_CFLAGS += $(GCFLAGS)
++ # First, Global, Platform, Local CFLAGS
++ CFLAGS += $(FCFLAGS) $(OPTIMIZER) $(GCFLAGS) $(PCFLAGS) $(LCFLAGS)
++ 
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+new file mode 100644
+index 000000000..efc57e4f6
+--- /dev/null
++++ b/meta-filesystems/recipes-utils/xfsprogs/files/xfsprogs-4.12.0-fix_musl.patch
+@@ -0,0 +1,117 @@
++From 21253610f9ef87db8e2a75b863b7fcfbd0cdb421 Mon Sep 17 00:00:00 2001
++From: "Darrick J. Wong" <darrick.wong@oracle.com>
++Date: Tue, 25 Jul 2017 13:45:01 -0500
++Subject: [PATCH] In patch 4944defad4 ("xfs_db: redirect printfs when
++ metadumping to stdout"), we solved the problem of xfs_db printfs ending up in
++ the metadump stream by reassigning stdout for the duration of a stdout
++ metadump.  Unfortunately, musl doesn't allow stdout to be reassigned (in
++ their view "extern FILE *stdout" means "extern FILE * const stdout"), so we
++ abandon the old approach in favor of playing games with dup() to switch the
++ raw file descriptors.
 +
-+On the x32 architecture time_t is a "long long int". By
-+ typecasting time_t to "long long", this should work correctly
-+ for all architectures.
++While we're at it, fix a regression where an unconverted outf test
++allows progress info to end up in the metadump stream.
 +
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Signed-off-by: Darrick J. Wong <darrick.wong@oracle.com>
 +---
-+Upstream-Status: Pending
++ db/metadump.c | 47 ++++++++++++++++++++++++++++++++++++-----------
++ 1 file changed, 36 insertions(+), 11 deletions(-)
 +
-+ src/minicoredumper/corestripper.c | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/src/minicoredumper/corestripper.c b/src/minicoredumper/corestripper.c
-+index fd39bfb..07dc318 100644
-+--- a/src/minicoredumper/corestripper.c
-++++ b/src/minicoredumper/corestripper.c
-+@@ -1241,7 +1241,7 @@ static int dump_compressed_tar(struct dump_info *di)
-+ 	snprintf(hdr.mode, sizeof(hdr.mode), "%07o", 0644);
-+ 	snprintf(hdr.uid, sizeof(hdr.uid), "%07o", 0);
-+ 	snprintf(hdr.gid, sizeof(hdr.gid), "%07o", 0);
-+-	snprintf(hdr.mtime, sizeof(hdr.mtime), "%011lo",
-++	snprintf(hdr.mtime, sizeof(hdr.mtime), "%011llo",
-+ 		 (long long)time(NULL));
-+ 	memset(hdr.checksum, ' ', sizeof(hdr.checksum));
-+ 	hdr.type = 'S';
++diff --git a/db/metadump.c b/db/metadump.c
++index 96641e0..4e2f648 100644
++--- a/db/metadump.c
+++++ b/db/metadump.c
++@@ -78,6 +78,7 @@ static int		obfuscate = 1;
++ static int		zero_stale_data = 1;
++ static int		show_warnings = 0;
++ static int		progress_since_warning = 0;
+++static bool		stdout_metadump;
++ 
++ void
++ metadump_init(void)
++@@ -137,7 +138,7 @@ print_progress(const char *fmt, ...)
++ 	va_end(ap);
++ 	buf[sizeof(buf)-1] = '\0';
++ 
++-	f = (outf == stdout) ? stderr : stdout;
+++	f = stdout_metadump ? stderr : stdout;
++ 	fprintf(f, "\r%-59s", buf);
++ 	fflush(f);
++ 	progress_since_warning = 1;
++@@ -2750,7 +2751,8 @@ metadump_f(
++ 	xfs_agnumber_t	agno;
++ 	int		c;
++ 	int		start_iocur_sp;
++-	bool		stdout_metadump = false;
+++	int		outfd = -1;
+++	int		ret;
++ 	char		*p;
++ 
++ 	exitcode = 1;
++@@ -2870,16 +2872,35 @@ metadump_f(
++ 		 * metadump operation so that dbprintf and other messages
++ 		 * are sent to the console instead of polluting the
++ 		 * metadump stream.
+++		 *
+++		 * We get to do this the hard way because musl doesn't
+++		 * allow reassignment of stdout.
++ 		 */
++-		outf = stdout;
++-		stdout = stderr;
+++		fflush(stdout);
+++		outfd = dup(STDOUT_FILENO);
+++		if (outfd < 0) {
+++			perror("opening dump stream");
+++			goto out;
+++		}
+++		ret = dup2(STDERR_FILENO, STDOUT_FILENO);
+++		if (ret < 0) {
+++			perror("redirecting stdout");
+++			close(outfd);
+++			goto out;
+++		}
+++		outf = fdopen(outfd, "a");
+++		if (outf == NULL) {
+++			fprintf(stderr, "cannot create dump stream\n");
+++			dup2(outfd, 1);
+++			close(outfd);
+++			goto out;
+++		}
++ 		stdout_metadump = true;
++ 	} else {
++ 		outf = fopen(argv[optind], "wb");
++ 		if (outf == NULL) {
++ 			print_warning("cannot create dump file");
++-			free(metablock);
++-			return 0;
+++			goto out;
++ 		}
++ 	}
++ 
++@@ -2907,15 +2928,19 @@ metadump_f(
++ 	if (progress_since_warning)
++ 		fputc('\n', stdout_metadump ? stderr : stdout);
++ 
++-	if (stdout_metadump)
++-		stdout = outf;
++-	else
++-		fclose(outf);
+++	if (stdout_metadump) {
+++		fflush(outf);
+++		fflush(stdout);
+++		ret = dup2(outfd, STDOUT_FILENO);
+++		if (ret < 0)
+++			perror("un-redirecting stdout");
+++	}
+++	fclose(outf);
++ 
++ 	/* cleanup iocur stack */
++ 	while (iocur_sp > start_iocur_sp)
++ 		pop_cur();
++-
+++out:
++ 	free(metablock);
++ 
++ 	return 0;
 +-- 
-+2.14.1
-+
-diff --git a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-index 3bf9f66b9..1858e102d 100644
---- a/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-+++ b/meta-oe/recipes-kernel/minicoredumper/minicoredumper_2.0.0.bb
-@@ -1,7 +1,7 @@
- SUMMARY = "minicoredumper provides an alternate core dump facility for Linux \
- to allow minimal and customized crash dumps"
- LICENSE = " LGPLv2.1 & BSD-2-Clause"
--LIC_FILES_CHKSUM = "file://COPYING;md5=709087c2ed0acda54a4d91497a889e42 \
-+LIC_FILES_CHKSUM = "file://COPYING;md5=aa846ae365f71b69e9fa0d21a56391ec \
-                     file://COPYING.BSD;md5=b915ac80d5236d6aa659cb986daf00e5 \
-                     file://COPYING.LGPLv2.1;md5=321bf41f280cf805086dd5a720b37785 \
-                    "
-@@ -9,14 +9,15 @@ DEPENDS = "elfutils dbus dbus-glib-native glib-2.0 dbus-glib util-linux json-c"
- 
- inherit autotools pkgconfig systemd update-rc.d
- 
--SRCREV = "248019446ccf6079926efb54f8b6dd7be769bbae"
-+SRCREV = "cdc1faf1212a51e89b477468876e229223fceb9a"
- 
- PR .= "+git${SRCPV}"
- 
--SRC_URI = "git://github.com/Linutronix/minicoredumper-debian;branch=unstable \
-+SRC_URI = "git://git.linuxfoundation.org/diamon/minicoredumper.git;protocol=http \
-            file://minicoredumper.service \
-            file://minicoredumper.init \
-            file://0001-minicoredumper-Initialize-pointer-to-config-struct-t.patch \
-+           file://0001-fix-compile-error-on-arch-x32.patch \
++2.13.3
+diff --git a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+similarity index 86%
+rename from meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
+rename to meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+index 046dea425..0202815c4 100644
+--- a/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.11.0.bb
++++ b/meta-filesystems/recipes-utils/xfsprogs/xfsprogs_4.12.0.bb
+@@ -6,11 +6,12 @@ LICENSE_libhandle = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://doc/COPYING;md5=102f7fec3d53c7c8f0b7baf9bf9d76a8"
+ DEPENDS = "util-linux util-linux-native"
+ SRC_URI = "https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/${BP}.tar.xz \
+-           file://link_needed_libs.patch \
+            file://0001-define-__-prefixed-version-of-intXY_t-types.patch \
++           file://remove_flags_from_build_flags.patch \
++           file://xfsprogs-4.12.0-fix_musl.patch \
             "
+-SRC_URI[md5sum] = "f1f9b8c752347eefdb56483dafa0cefb"
+-SRC_URI[sha256sum] = "c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2"
++SRC_URI[md5sum] = "e348b0e1d7bd1cd82d64b91ff37e727e"
++SRC_URI[sha256sum] = "b330ad8d737f4152ae511580102e2fc49212bb51dfb4b614084344abae46d0df"
  
- S = "${WORKDIR}/git"
+ inherit autotools-brokensep
+ 
+@@ -33,6 +34,7 @@ EXTRA_OECONF = "--enable-gettext=no \
+                 ac_cv_lib_rt_lio_listio=yes \
+ "
+ 
++DISABLE_STATIC = ""
+ EXTRA_AUTORECONF += "-I ${S}/m4 --exclude=autoheader"
+ 
+ PACKAGECONFIG ??= "readline blkid"
+@@ -42,6 +44,7 @@ PACKAGECONFIG[blkid] = "--enable-blkid=yes,--enable-blkid=no,util-linux"
+ 
+ export DEBUG="-DNDEBUG"
+ export BUILD_VERBOSE="1"
++export tagname="CC"
+ 
+ EXTRA_OEMAKE = "DIST_ROOT='${D}'"
+ 
 -- 
 2.14.1
 
