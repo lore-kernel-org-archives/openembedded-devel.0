@@ -1,21 +1,16 @@
-Return-Path: <mikko.ylinen@linux.intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 847A66067D
+Return-Path: <fabien.lahoudere@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id 04B8B77ACB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Sep 2017 11:10:39 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	08 Sep 2017 04:10:41 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.42,360,1500966000"; d="scan'208";a="898350036"
-Received: from summit.tm.intel.com ([10.237.55.36])
-	by FMSMGA003.fm.intel.com with ESMTP; 08 Sep 2017 04:10:40 -0700
-From: Mikko Ylinen <mikko.ylinen@linux.intel.com>
+	Fri,  8 Sep 2017 13:14:13 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aragua) with ESMTPSA id 551BA26CE39
+From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Sep 2017 14:10:39 +0300
-Message-Id: <20170908111039.5192-1-mikko.ylinen@linux.intel.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [PATCH] efivar: fix build when host gcc version is < 4.9
+Date: Fri,  8 Sep 2017 15:13:43 +0200
+Message-Id: <20170908131343.12748-1-fabien.lahoudere@collabora.co.uk>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-multimedia][PATCH] libupnp: Add recipe for version 1.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,46 +23,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Sep 2017 11:10:40 -0000
+X-List-Received-Date: Fri, 08 Sep 2017 13:14:14 -0000
 
-efivar v27 started using C11 _Generic keyword in macros but that
-is not implemented in gcc until 4.9. This makes efivar-native
-(which is a dependency to efivar) build to fail if the builder host
-gcc version is < 4.9.
-
-It turns out only 'makeguids' generator needs to be built for the
-build arch to generate GENERATED_SOURCES for efivar target build.
-'makeguids' sources/includes have no gcc version dependencies so
-to fix efivar build when host gcc < 4.9, we simply build 'makeguids'
-target for efivar-native.
-
-Signed-off-by: Mikko Ylinen <mikko.ylinen@linux.intel.com>
+Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 ---
- meta-oe/recipes-extended/efivar/efivar_0.31.bb | 6 +++++-
- 1 file changed, 5 insertions(+), 1 deletion(-)
+ .../recipes-connectivity/libupnp/libupnp_1.8.2.bb    | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
 
-diff --git a/meta-oe/recipes-extended/efivar/efivar_0.31.bb b/meta-oe/recipes-extended/efivar/efivar_0.31.bb
-index 6ad3b36..9d4cdc9 100644
---- a/meta-oe/recipes-extended/efivar/efivar_0.31.bb
-+++ b/meta-oe/recipes-extended/efivar/efivar_0.31.bb
-@@ -35,11 +35,15 @@ do_compile_prepend() {
-     sed -i -e s:-Werror::g ${S}/gcc.specs
- }
- 
-+do_compile_class-native() {
-+    oe_runmake -C src makeguids
-+}
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+new file mode 100644
+index 000000000..61b209ab8
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+@@ -0,0 +1,20 @@
++SUMMARY = "Portable SDK for UPnP* Devices"
++DESCRIPTION = "The Portable SDK for UPnP Devices is an SDK for development of \
++UPnP device and control point applications. It consists of the core UPnP \
++protocols along with a UPnP-specific eXtensible Markup Language (XML) parser \
++supporting the Document Object Model (DOM) Level 2 API and an optional, \
++integrated mini web server for serving UPnP related documents."
++HOMEPAGE = "http://pupnp.sourceforge.net/"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
 +
- do_install() {
-     oe_runmake install DESTDIR=${D}
- }
- 
--do_install_append_class-native() {
-+do_install_class-native() {
-     install -D -m 0755 ${B}/src/makeguids ${D}${bindir}/makeguids
- }
- 
++SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-${PV}.tar.gz "
++
++SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
++SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd69f049daba11d71bbb5d715336e00106cb4"
++
++S="${WORKDIR}/pupnp-release-${PV}"
++
++inherit autotools
++
++EXTRA_OECONF += "--enable-reuseaddr"
+\ No newline at end of file
 -- 
-2.1.4
+2.11.0
 
 
