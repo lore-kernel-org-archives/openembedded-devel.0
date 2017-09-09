@@ -1,46 +1,48 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 71B9271994
+Return-Path: <athoik@gmail.com>
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 0F4EC77ABF
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Sep 2017 06:28:40 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id v82so2235906pgb.1
+	Sat,  9 Sep 2017 21:14:45 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id a43so9001919wrc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 08 Sep 2017 23:28:42 -0700 (PDT)
+	Sat, 09 Sep 2017 14:14:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=qR/zwJAnkNciYW/xg2X7ZDXPbVPzM8woQUioIn1roYg=;
-	b=aLM18A2qZTHSs61j/Pjzps7iVhndkaqCeFOe09nUkO0SeN80doe6kSWFGQkl6hVr4q
-	O/pcDIw5/XdO3EP2xorijftd/bq6mBnGTu6JsY9EYtE17UHozj53zc832jvSAiqi39Iu
-	V/mcVs/aCZPiI/8dVPYflg9n1tna+0dtT+TveJUoqoWeoB/uS68Y/6/QvHRNJ8aMfwFy
-	i9wF43FH480n4uEcm0Pp4hnDi6m4MYePelGPMMbxG6AY0uAvBP69KATKGAAUz8Xt13AQ
-	wRHqilYOCX6PED0U+iSLEfUButWV85v7LLlcZcaFOrn8B3BtFDJWulDZ6liiZcH2PsVN
-	dRKA==
+	bh=R6dwf2e91nhkvIDpEGzyDNjp781PzHKEoSZhQC0gUDY=;
+	b=Et+FXETwYdo7czhTuTs6R3JpLPnHXg9W3ouIAegxUC6Z8XEGzQNdkP0Wwr1i4MYt9r
+	ov8cAZxSxMD4g0eQeQVMVv1AC0LEgrqGiFoXF/xylaHiyELTFO/tQsDK049KlBlMdRSD
+	+KbBYVK0GEXWkBYx+3LewkscD/h4OpoeOiAufwG44p57ax4WiDP2Nif0c4+EjAjBoSTc
+	17XgOU3PPBITnEPOvB3aNMPVAwQWdvHTxNPRxyTuiDn3R2m3Yc6yFSOpHm8eGXyYuR4R
+	cGtTO94K/FfjTVvr/16BCdKPr80cxz4LJlZyU0paIRdIcKgRayg/D2zKXZEcp6JBC1EQ
+	DlwA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qR/zwJAnkNciYW/xg2X7ZDXPbVPzM8woQUioIn1roYg=;
-	b=eqVupC4C+hJWNxcqC8KhlvTgmwoqVkQd90+IDOWn/gtuVH95yR85YZGTPiiXKrsT+c
-	U2JfP8wGjAF7e776aw20lUbu4cCew1XI3Uxlq56VqqHpd7PTPXloiwiysXy0GU+VPMHN
-	IPrk3k2AH4MLdYxmVpu6FPHhVnnU20kzt8r+zXJ3ZCH6J3X35V6wwzckf5WzFTK1tlbb
-	dwugQDif9Omn8atK+JT6o5+TEKwCMkLcCnKjFSv087goht1r+Ydfwcdmv/vbnX75LZY5
-	HLlW/3d6cJYJW3mqiTAzGNxDjd4tg405BYAqjp2u1wXLgwiFoi6IsEBkxb2eruxwstRT
-	0mYw==
-X-Gm-Message-State: AHPjjUjlsR4rDInV8qfYuY89/7NbwiapROzoobtJ4hY78KKAkfrLRMPO
-	T1JqWNuOSOjI5CVn
-X-Google-Smtp-Source: ADKCNb7X2puNA0Rv1FMSfB5U972RAumN3nEglOJWYWI+x++ScRwwRV9C8fa6aL9p2wgZXSy2V4Piog==
-X-Received: by 10.98.35.209 with SMTP id q78mr5686561pfj.36.1504938521663;
-	Fri, 08 Sep 2017 23:28:41 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::be3d])
+	bh=R6dwf2e91nhkvIDpEGzyDNjp781PzHKEoSZhQC0gUDY=;
+	b=FxhfpTlkT/qX5ejeEMwvZThstRjzqhaLbGgkV71AtzWg57afwCfJ3B4Dae8vhhXaNp
+	r8mgKccrF5/PnK5OiIEbq1qWWwB39pWPXr16YaRaug1WkOFLPJQmvNfyX/acYEaqjMjB
+	nN7PSrfuwKLPoeDcTDD75ycS/sLWQ7rs2SwySbE0ZK1ymuJU4TznpYdVFlR81PC6Q75d
+	3kU47SA1bCVsKRc/8zUj22uJFNkvVLzwjeOejBdaqk3My8GVtBRqUFPv/m4AkuBgHnnx
+	vADogoBLsw/gCdfBs45N4sB7oN7Hs4kmyA+yRDM3XheijhlzlOxdeGyi9pdcVR6hedVb
+	MDTw==
+X-Gm-Message-State: AHPjjUiweg6PN6zul04bxGTCXvt0qiGvq4vlyqzWvEcSMxWfc8pdKslJ
+	QnC94NMaMX96HtxI
+X-Google-Smtp-Source: ADKCNb6qCSz+ZzZSy8F12PdGp96My3zL/mAV8hbB3k4RWD9TLlCkjDxV32GKUcFI6GrzuqID/wdrRg==
+X-Received: by 10.223.177.18 with SMTP id l18mr2581686wra.167.1504991686656;
+	Sat, 09 Sep 2017 14:14:46 -0700 (PDT)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
 	by smtp.gmail.com with ESMTPSA id
-	b75sm6706150pfc.29.2017.09.08.23.28.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 08 Sep 2017 23:28:40 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	p71sm2067245wmd.40.2017.09.09.14.14.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sat, 09 Sep 2017 14:14:46 -0700 (PDT)
+From: Athanasios Oikonomou <athoik@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  8 Sep 2017 23:28:29 -0700
-Message-Id: <20170909062829.13084-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [meta-initramfs][PATCH] klibc: Fix include_next stdarg.h with clang
+Date: Sun, 10 Sep 2017 00:19:30 +0300
+Message-Id: <1504991970-596-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-oe][PATCH] v4l-utils: added missing dependency on udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,70 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2017 06:28:40 -0000
+X-List-Received-Date: Sat, 09 Sep 2017 21:14:46 -0000
 
-Fixes build
+Upgrading to newer v4l-utils 1.12.3 on commit f84a551f2d419df88b85987855fec866d9e84b4a
+Is causing issues because libdvbv5 now require libudev in order to work
+(commit db42484881bf5e6a902de51fe42444ddf286d52a on v4l-utils).
 
-git/usr/klibc/../include/stdarg.h:9:15: fatal error: 'stdarg.h' file not found
-| #include_next <stdarg.h>
-|               ^~~~~~~~~~
+First issue is missing dvb utils dvb-fe-tool, dvb-format-convert, dvbv5-daemon, dvbv5-scan, dvbv5-zap
+because libdvbv5 requires now libudev.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Another issue was the failure of building dvb-apps (currently removed from master)
+because the v4l-utils-native is missing dvb-format-convert.
+
+This commit adds the missing udev dependency only on target and brings back the missing dvb utils.
+
+Adding udev on native build is not possible because nothing provides udev-native.
 ---
- ...c-Add-path-to-compiler-headers-via-isyste.patch | 30 ++++++++++++++++++++++
- meta-initramfs/recipes-devtools/klibc/klibc.inc    |  1 +
- 2 files changed, 31 insertions(+)
- create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
-new file mode 100644
-index 000000000..7cd4c0e49
---- /dev/null
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch
-@@ -0,0 +1,30 @@
-+From 10fb440795a7796140bd657ee028847ec7c34447 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Fri, 8 Sep 2017 23:10:54 -0700
-+Subject: [PATCH] Kbuild.klibc: Add path to compiler headers via -isystem
-+
-+We need to include this path so it can find compiler headers e.g.
-+stdarg.h which is called from wrapper stdarg.h using include_next
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ scripts/Kbuild.klibc | 5 +++--
-+ 1 file changed, 3 insertions(+), 2 deletions(-)
-+
-+diff --git a/scripts/Kbuild.klibc b/scripts/Kbuild.klibc
-+index f500d535..1d5cdc43 100644
-+--- a/scripts/Kbuild.klibc
-++++ b/scripts/Kbuild.klibc
-+@@ -105,7 +105,8 @@ KLIBCOBJCOPY     := $(OBJCOPY)
-+ KLIBCOBJDUMP     := $(OBJDUMP)
-+ 
-+ # klibc include paths
-+-KLIBCCPPFLAGS    := -nostdinc -iwithprefix include \
-++KLIBCCPPFLAGS    := -nostdinc -iwithprefix include      \
-++		    -isystem $(shell $(CC) -print-file-name=include) \
-+ 		    -I$(KLIBCINC)/arch/$(KLIBCARCHDIR)	\
-+                     -I$(KLIBCINC)/bits$(KLIBCBITSIZE)	\
-+ 		    -I$(KLIBCOBJ)/../include		\
-+-- 
-+2.14.1
-+
-diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-index 45dc6baef..ed15b2e1e 100644
---- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
-+++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
-@@ -18,6 +18,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
-            file://0001-mkfifo-Implement-mkfifo.patch \
-            file://0001-always-use-bfd-linker.patch \
-            file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
-+           file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
- "
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+index 42da5cc..dacc406 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+@@ -7,6 +7,7 @@ PROVIDES = "libv4l media-ctl"
+ DEPENDS = "jpeg \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
+ DEPENDS_append_libc-musl = " argp-standalone"
++DEPENDS_append_class-target = " udev"
  
- ARMPATCHES ?= ""
+ inherit autotools gettext pkgconfig
+ 
 -- 
-2.14.1
+2.1.4
 
 
