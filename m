@@ -1,47 +1,16 @@
-Return-Path: <ankit.tarot@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F9E7780B8
+Return-Path: <fabien.lahoudere@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id E81B377EE4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 10:29:29 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id h4so4729488pfk.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 03:29:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=Qm5t2BKvpdqDiQw9PET4rYFkvOEBhGD/wc0jGzYlDXw=;
-	b=HZw7G9kohH91d5JtH/D55J/taCgAiykhcB5i0rfAu/CWQr66ovF/iwtu+429CjeaTb
-	Oeg/L3oN6w3zifkwnXpH/jd2Cl3XaI6ZyGni8BvVykSkweht3bkldowq7pvdbilMwvjN
-	Vw02PwfKtw3wI5Em4fwkezqToEY434w1k/dXLHagaCDm2/KgLLgJ8xrBmXxXBLy54I+I
-	HUsbEh8Vxm60l9RIqHygqUxZkMoGNVWZ8bxR7QduaMQPJZCu0TAqtzcCDi9JY2PINrmX
-	mzSwkcenzkCVzzocfUk4pP01N2UdIB/dgvkDBv8IScmoFaGm8ed8JjZmusjbbLJM0eCz
-	cCKA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Qm5t2BKvpdqDiQw9PET4rYFkvOEBhGD/wc0jGzYlDXw=;
-	b=kFajAcFiGbyXuOYAiChW4Hu/qZ4TskxFAGf4s81vYQ3pLkOGpLifoWeZ9pI700YhCA
-	t3ELzfqRvw5di3NLHUN0uwGnH4CP8ktcDHqwjwQCBVH67t1dPQ19odHmj3zLENgXHEDy
-	zj8Bu9s1NbGzBEUCpNdN9obg2nZc1D1JDFp8QWU1ORKtpIhjapvmLynuxvvF6foqHoYR
-	qEO0oMbjNSgA3yP2NJtvNgdrQCBpuyA0BBpySfZ6uJBN8TWbepBLoogp5/K5ztM8Loum
-	UGM2ww+oLoc9tkmeNJIMwrENbFdAAQkV+ZQ5noIbkBHKg2eJv4saJt8XwUTRSSsMS+l0
-	+YRw==
-X-Gm-Message-State: AHPjjUi3GlD/GMw/l2qdHVhVHwIuP8369ZeqYKzdpxXgPVnWETnL4THJ
-	Y7Gv2WYQRJtlXxVzr2U=
-X-Google-Smtp-Source: ADKCNb4tuxhDZefrgk+70i9xMtmyEVFRdIRWrNp5V5VO1TV0Rqqv8Ui3ELN2kxdvBGRdSM5y1oPCVw==
-X-Received: by 10.98.100.69 with SMTP id y66mr9738656pfb.337.1505125770552;
-	Mon, 11 Sep 2017 03:29:30 -0700 (PDT)
-Received: from ankit.iind.intel.com ([192.55.54.40])
-	by smtp.gmail.com with ESMTPSA id
-	d186sm15414568pfa.97.2017.09.11.03.29.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 11 Sep 2017 03:29:29 -0700 (PDT)
-From: Ankit Navik <ankit.tarot@gmail.com>
+	Mon, 11 Sep 2017 12:50:18 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aragua) with ESMTPSA id 8524D26D057
+From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Sep 2017 16:03:31 +0530
-Message-Id: <1505126011-30376-1-git-send-email-ankit.tarot@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] ell: upgrade SRCREV
+Date: Mon, 11 Sep 2017 14:50:09 +0200
+Message-Id: <20170911125009.9837-1-fabien.lahoudere@collabora.co.uk>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-multimedia][PATCH v2] libupnp: Bump to version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,33 +23,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2017 10:29:29 -0000
+X-List-Received-Date: Mon, 11 Sep 2017 12:50:19 -0000
 
- 7b7c15c build: Include check for xxd binary when in maintainer-mode
-
-Signed-off-by: Ankit Navik <ankit.tarot@gmail.com>
+Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 ---
- meta-oe/{recipes-connectivity => recipes-core}/ell/ell_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
- rename meta-oe/{recipes-connectivity => recipes-core}/ell/ell_git.bb (88%)
+ .../libupnp/libupnp/sepbuildfix.patch              | 34 ----------------------
+ .../{libupnp_1.6.21.bb => libupnp_1.8.2.bb}        | 12 ++++----
+ 2 files changed, 7 insertions(+), 39 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
+ rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.6.21.bb => libupnp_1.8.2.bb} (66%)
 
-diff --git a/meta-oe/recipes-connectivity/ell/ell_git.bb b/meta-oe/recipes-core/ell/ell_git.bb
-similarity index 88%
-rename from meta-oe/recipes-connectivity/ell/ell_git.bb
-rename to meta-oe/recipes-core/ell/ell_git.bb
-index d259f52..10df6e1 100644
---- a/meta-oe/recipes-connectivity/ell/ell_git.bb
-+++ b/meta-oe/recipes-core/ell/ell_git.bb
-@@ -7,7 +7,7 @@ SECTION = "libs"
- inherit autotools pkgconfig
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch b/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
+deleted file mode 100644
+index 0493cea0e..000000000
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
++++ /dev/null
+@@ -1,34 +0,0 @@
+-From e198f0a87660a048164ca0e16d18517d0aee846e Mon Sep 17 00:00:00 2001
+-From: Andre McCurdy <armccurdy@gmail.com>
+-Date: Tue, 9 Jun 2015 12:20:45 -0700
+-Subject: [PATCH] Fix builds when using separate source and build directories.
+-
+-Upstream-Status: Pending
+-
+-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+----
+- configure.ac           | 10 +++++-----
+- 1 files changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/configure.ac b/configure.ac
+-index a8731b5..54a3c3d 100644
+---- a/configure.ac
+-+++ b/configure.ac
+-@@ -744,9 +744,9 @@ AC_OUTPUT
+- #
+- # Files copied for windows compilation.
+- #
+--echo "configure: copying \"autoconfig.h\"          to \"build/inc/autoconfig.h\""
+--test -d build/inc || mkdir -p build/inc
+--cp autoconfig.h build/inc/autoconfig.h
+--echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"build/inc/upnpconfig.h\""
+--cp upnp/inc/upnpconfig.h build/inc/upnpconfig.h
+-+echo "configure: copying \"autoconfig.h\"          to \"\$srcdir/build/inc/autoconfig.h\""
+-+test -d $srcdir/build/inc || mkdir -p $srcdir/build/inc
+-+cp autoconfig.h $srcdir/build/inc/autoconfig.h
+-+echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"\$srcdir/build/inc/upnpconfig.h\""
+-+cp upnp/inc/upnpconfig.h $srcdir/build/inc/upnpconfig.h
+- 
+--- 
+-1.9.1
+-
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+similarity index 66%
+rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
+rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+index a1988295a..61b209ab8 100644
+--- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+@@ -8,11 +8,13 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
  
- S = "${WORKDIR}/git"
--SRCREV = "399099946abaeb2f3718a0667cc11436a7c0be14"
-+SRCREV = "7b7c15c2e5caff88fc45e7a8b874a47196a0eddd"
- SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
+-SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${BP}.tar.bz2 \
+-           file://sepbuildfix.patch \
+-"
++SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-${PV}.tar.gz "
  
- do_configure_prepend () {
+-SRC_URI[md5sum] = "513adadb07fa039a8aeb0ceb7b7b0f6e"
+-SRC_URI[sha256sum] = "af3f3c0846a1d75baeadae4aa5a2bda427567e2a1fb4559bf73ccff0a4f9a39b"
++SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
++SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd69f049daba11d71bbb5d715336e00106cb4"
++
++S="${WORKDIR}/pupnp-release-${PV}"
+ 
+ inherit autotools
++
++EXTRA_OECONF += "--enable-reuseaddr"
+\ No newline at end of file
 -- 
-1.9.1
+2.11.0
 
 
