@@ -1,16 +1,48 @@
-Return-Path: <fabien.lahoudere@collabora.co.uk>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id E81B377EE4
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 37C1071A35
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 12:50:18 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aragua) with ESMTPSA id 8524D26D057
-From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Sep 2017 14:50:09 +0200
-Message-Id: <20170911125009.9837-1-fabien.lahoudere@collabora.co.uk>
-X-Mailer: git-send-email 2.11.0
-Subject: [meta-multimedia][PATCH v2] libupnp: Bump to version 1.8.2
+	Mon, 11 Sep 2017 13:17:30 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id j189so2073859vka.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Sep 2017 06:17:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=stQ7LE/At+h9JCRnXCi2ITZc63xiuIqcMSfLBtTuUZA=;
+	b=csQZNyp0IftAhpFxbeV/xh7hYrjC90Mb8SPMqtnpT7oo5kH8k5s3pHeD4XdS0pUahP
+	ycXrcuckrVmiBn3bfv06Ev3cuULeDofQt09cUZPcazB5lg0FL6zktSeEarxMbzmAbo80
+	9R2FPUZNRRaG92mSmoXlPA0qC97E09uc5LM8KLbiCv5ROKG+6cKr3Pzm14pO3XpohoOD
+	3NFgPZPlhJvQpUXU7OM2r/c0C4wvtK2ztqQSucIkbnZZ95xxTrOck17xJui8z8b+HjiV
+	DEa8RG047ILM6D3d99T3w6zsPegoGaYoshk7t/D9ugjh/iqMCMTrS+coVRo17yvPagp2
+	6f0Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=stQ7LE/At+h9JCRnXCi2ITZc63xiuIqcMSfLBtTuUZA=;
+	b=UXLxtjRQFQQtQgWuU7T6doHu0buAFh+zb1g7pvIhOrolp1vTpRSfJnLqf/M/YUdsST
+	WbW8JKlb7x4Hh0IqJCmZB0v10hfpmTBc8FIR8wUXc5YJs6Cxg57ifmv0ahDQ9OK3Xuit
+	RoGxY7pXSdLcw+QH25XmOb7QOBEvF0S566zzXlFhoYXNifeB/xc5cHiFIRw2fL0Tva5S
+	TcHnRPOJl+o9EKPi88xXg+Y1GTWeA9L6ha2cY43o2kLlITgQKCnpoHx2qmGraUlZaSJJ
+	pvnv2gmKooeZNWtbSFCA7s7SZ6ZayTLjaIMSWul/H8O1oeMerXKBCmNZuwf7I1PrvUJt
+	gS9Q==
+X-Gm-Message-State: AHPjjUg2bRRopKnOEWUJ7cHqqE0CCKZFkKZr6AMutwtd8OT/E8FMk81l
+	a7BCTtxIFrzOmRSDYiCcrX/lgz9GnA==
+X-Google-Smtp-Source: AOwi7QDVwwHZc6fjsmGySsZMuGxdrQ1RuCuOvxbOB/gxaiReX29LUPw4ZfS+ImszfrNnvX/aK6gQuURgIMIpHk2folg=
+X-Received: by 10.31.224.134 with SMTP id x128mr7308015vkg.1.1505135852281;
+	Mon, 11 Sep 2017 06:17:32 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.103.15.69 with HTTP; Mon, 11 Sep 2017 06:17:31 -0700 (PDT)
+In-Reply-To: <1504993112-9111-1-git-send-email-athoik@gmail.com>
+References: <1504993112-9111-1-git-send-email-athoik@gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 11 Sep 2017 15:17:31 +0200
+Message-ID: <CA+chaQebLEPnMQk+P2XdVGH-FPB0FA41N8Cic5ovJifUvbdkgA@mail.gmail.com>
+To: Athanasios Oikonomou <athoik@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] v4l-utils: added missing dependency on udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,84 +55,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2017 12:50:19 -0000
+X-List-Received-Date: Mon, 11 Sep 2017 13:17:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
----
- .../libupnp/libupnp/sepbuildfix.patch              | 34 ----------------------
- .../{libupnp_1.6.21.bb => libupnp_1.8.2.bb}        | 12 ++++----
- 2 files changed, 7 insertions(+), 39 deletions(-)
- delete mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
- rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.6.21.bb => libupnp_1.8.2.bb} (66%)
+This causes build failure (at least with gold enabled):
 
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch b/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
-deleted file mode 100644
-index 0493cea0e..000000000
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
-+++ /dev/null
-@@ -1,34 +0,0 @@
--From e198f0a87660a048164ca0e16d18517d0aee846e Mon Sep 17 00:00:00 2001
--From: Andre McCurdy <armccurdy@gmail.com>
--Date: Tue, 9 Jun 2015 12:20:45 -0700
--Subject: [PATCH] Fix builds when using separate source and build directories.
--
--Upstream-Status: Pending
--
--Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-----
-- configure.ac           | 10 +++++-----
-- 1 files changed, 5 insertions(+), 5 deletions(-)
--
--diff --git a/configure.ac b/configure.ac
--index a8731b5..54a3c3d 100644
----- a/configure.ac
--+++ b/configure.ac
--@@ -744,9 +744,9 @@ AC_OUTPUT
-- #
-- # Files copied for windows compilation.
-- #
---echo "configure: copying \"autoconfig.h\"          to \"build/inc/autoconfig.h\""
---test -d build/inc || mkdir -p build/inc
---cp autoconfig.h build/inc/autoconfig.h
---echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"build/inc/upnpconfig.h\""
---cp upnp/inc/upnpconfig.h build/inc/upnpconfig.h
--+echo "configure: copying \"autoconfig.h\"          to \"\$srcdir/build/inc/autoconfig.h\""
--+test -d $srcdir/build/inc || mkdir -p $srcdir/build/inc
--+cp autoconfig.h $srcdir/build/inc/autoconfig.h
--+echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"\$srcdir/build/inc/upnpconfig.h\""
--+cp upnp/inc/upnpconfig.h $srcdir/build/inc/upnpconfig.h
-- 
---- 
--1.9.1
--
-diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
-similarity index 66%
-rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
-rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
-index a1988295a..61b209ab8 100644
---- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
-+++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
-@@ -8,11 +8,13 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${BP}.tar.bz2 \
--           file://sepbuildfix.patch \
--"
-+SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-${PV}.tar.gz "
- 
--SRC_URI[md5sum] = "513adadb07fa039a8aeb0ceb7b7b0f6e"
--SRC_URI[sha256sum] = "af3f3c0846a1d75baeadae4aa5a2bda427567e2a1fb4559bf73ccff0a4f9a39b"
-+SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
-+SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd69f049daba11d71bbb5d715336e00106cb4"
-+
-+S="${WORKDIR}/pupnp-release-${PV}"
- 
- inherit autotools
-+
-+EXTRA_OECONF += "--enable-reuseaddr"
-\ No newline at end of file
--- 
-2.11.0
+../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to
+'pthread_cancel'
+../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to
+'pthread_create'
 
+
+
+On Sat, Sep 9, 2017 at 11:38 PM, Athanasios Oikonomou <athoik@gmail.com>
+wrote:
+
+> Upgrading to newer v4l-utils 1.12.3 on commit
+> f84a551f2d419df88b85987855fec866d9e84b4a
+> Is causing issues because libdvbv5 now require libudev in order to work
+> (commit db42484881bf5e6a902de51fe42444ddf286d52a on v4l-utils).
+>
+> First issue is missing dvb utils dvb-fe-tool, dvb-format-convert,
+> dvbv5-daemon, dvbv5-scan, dvbv5-zap
+> because libdvbv5 requires now libudev.
+>
+> Another issue was the failure of building dvb-apps (currently removed from
+> master)
+> because the v4l-utils-native is missing dvb-format-convert.
+>
+> This commit adds the missing udev dependency only on target and brings
+> back the missing dvb utils.
+>
+> Adding udev on native build is not possible because nothing provides
+> udev-native.
+>
+> Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+> ---
+>  meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+> b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+> index 42da5cc..dacc406 100644
+> --- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+> +++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+> @@ -7,6 +7,7 @@ PROVIDES = "libv4l media-ctl"
+>  DEPENDS = "jpeg \
+>             ${@bb.utils.contains('DISTRO_FEATURES', 'x11',
+> 'virtual/libx11', '', d)}"
+>  DEPENDS_append_libc-musl = " argp-standalone"
+> +DEPENDS_append_class-target = " udev"
+>
+>  inherit autotools gettext pkgconfig
+>
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
