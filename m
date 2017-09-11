@@ -1,48 +1,51 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C7A4178272
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-vk0-f49.google.com (mail-vk0-f49.google.com
+	[209.85.213.49])
+	by mail.openembedded.org (Postfix) with ESMTP id 8466678250
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 18:47:09 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id u48so4816875wrf.4
+	Mon, 11 Sep 2017 19:52:50 +0000 (UTC)
+Received: by mail-vk0-f49.google.com with SMTP id t10so10872739vke.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 11:47:11 -0700 (PDT)
+	Mon, 11 Sep 2017 12:52:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=I6v91eQyw4bVqlA5GRFBc+EHaIqc2loWH0XELbOUF/8=;
-	b=A9MWWraC3HMLMaj4sZ4JM5a04FbiPPCtfRcGqBWAjNepxbq/dFKC9nVY/qmpCwJ/eR
-	0eJsjtIIKruV/5Ib4aKPmSoIerv0a9n8o39bhBZsT5uhXviZ7ZrIOMfym/esPwN7ZFEv
-	9/EI/ovejo4SndHxDeckHGaQ9sy6mW/U5Tyjk85RBY6P7th0GGTpy5jfyXedHeIPxHah
-	rUnuq3hd+0G08jEKh83hT8pbUpjCvHKbiVtgRbLUjp6BKSVJrAAFm5g+CiGv2KGxeX1g
-	kIAja+X4GumjTwAhx5JCcGmnSlu3fd39zYbdGsRtWUN77gMjkRQ2Kex7EbB5Jaa2T5ft
-	InuQ==
+	:cc; bh=NeQSG0Ncg02eehNjfxA4nh8Ncl+SnnClBMUF9ZN3+L8=;
+	b=ElZxCaTdZELdlBz0SQNPaa1XrSkWIc97jiwks0HnmS3YH37Jbz2tjJp0gpF3TDFghc
+	YIH/QWyR4USjbYTxvWhXRB+od0mTlnrJIxMV14GEnuB7slc8PpQyCjbdBJ07nYx38fOs
+	kLIGoW3rGS83kQMjTK/vPydGe1ZdVCZ0uXmfLGPVcAp8+Xj3lMIkgRQCxKCMbUtlQy35
+	U55eRrhdZCLXxUIfw4YeDPOAmQ5MlEmYLOWchGNFfa+XRofPyHr7j/4l3Tw7SjWQUPAu
+	R3dEfbSZyNiFl7eGii5mgVq+s4S/Czj/gH9L2JcKDI7vjAKwWvPrDVveZaArgdzr0776
+	XOLg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=I6v91eQyw4bVqlA5GRFBc+EHaIqc2loWH0XELbOUF/8=;
-	b=ocPXlJfaAj/E+OGwwP9gGgcryluqh7L/AgQQIELtLUjIMk8FcpxgwAt6vRMHyh7Oll
-	EhDoIrZ4nYDXz1VEP0IjdbNYpj8JCNP9LH+qt69a8AyOhc5uoxKPw/CHQigRpUyCfRvy
-	g+c39vpht74ULwNAgsvWChGAkXUFrDajOxrzWeu7fn8aQ8Ga3FgrsRROakvoZG6gjtzL
-	pyYMWcJSbu/BDUYdYxqk4xitiFceCwPU0GYjL211mer9kVfFMD+ZTflvVqdZbVrkWcDr
-	9SBFE8I6h6fqnjqNvalqHgkOlB3FNrauHeCX62iGHqd/smLwqkMs/w5R1PBGADxX0shk
-	ffiA==
-X-Gm-Message-State: AHPjjUgxWDKC/ZujS07nGnzMXADDo9r0mLvTuMQhIjT009bU3KlR73Ss
-	bHeX8lVq8DO7wxLjk7GJ45EKQztDCQ==
-X-Google-Smtp-Source: ADKCNb5yHVg8vI5GFb88O5IzX0YV6jy6QjdKZV0yWi26TAnqJSK66sScGKi+a2Y3Luo0or1/X28J4+FCNg1xt6+Zij8=
-X-Received: by 10.223.142.6 with SMTP id n6mr8773512wrb.140.1505155630481;
-	Mon, 11 Sep 2017 11:47:10 -0700 (PDT)
+	bh=NeQSG0Ncg02eehNjfxA4nh8Ncl+SnnClBMUF9ZN3+L8=;
+	b=jbDaSdRcmf0RgLolGxKnXyKw8qHPZhhdMqJSKqtUo0Sn7yFGLqE8GZ32JqjSaPuDwP
+	bC/qPHpD9qlEF0lZFSjjIBkiqfGYFLTf2r+dlwf+STcgc5Hoy8IOsJLOBwuVMcwYl7u7
+	suv1kKiPCWFlupa7V56+pwiB8lCXQMJGpxrpd5HuUdsg1Q1mCmVf/ksN8K7VJthib/fO
+	0vryPmNeeXi8CQXEAF5HJ6ZcDjtH4tQ8Qio1/Hn2zZn2yc0OnNjgKafdAe1pI9p3fKy0
+	hzULi1rBQeB8EVk/IzFC83/JeqKgZ4up3zLG8FVmJo0zbcMzYjuGk+gnxbTAakz0icRb
+	SObA==
+X-Gm-Message-State: AHPjjUjwSEBMJka5N8Xc3HPSqnKFeUChy9K8V6crWhsuBLlYbRmlvvfF
+	GizKXKDJkiLtLTK/UkqlZZ5tHY+O5g==
+X-Google-Smtp-Source: AOwi7QAkKVkT7wEkakFBF2VA7UZE455vR4/UFxkvbIKbygw94bocEkQZ46Qky0F9myoIY1rs3hmwR3bCk2ymsVP21Oo=
+X-Received: by 10.31.41.136 with SMTP id p130mr8878777vkp.122.1505159571562;
+	Mon, 11 Sep 2017 12:52:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.141.198 with HTTP; Mon, 11 Sep 2017 11:47:09 -0700 (PDT)
-In-Reply-To: <20170911151056.4577-4-raj.khem@gmail.com>
-References: <20170911151056.4577-1-raj.khem@gmail.com>
-	<20170911151056.4577-4-raj.khem@gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Mon, 11 Sep 2017 11:47:09 -0700
-Message-ID: <CAJ86T=UQtomn1KeUuUBaSnqmhofieCOWz9WEAUTLqR2FDTqzWA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 4/5] klibc.bbclass: Use forcevariable override to define flags
+Received: by 10.103.15.69 with HTTP; Mon, 11 Sep 2017 12:52:50 -0700 (PDT)
+In-Reply-To: <CANDbA3c8tGiOK-AUSNhe3rqZ=sCRn3=2NTdGF8o5y79d_aG7aA@mail.gmail.com>
+References: <1504993112-9111-1-git-send-email-athoik@gmail.com>
+	<CA+chaQebLEPnMQk+P2XdVGH-FPB0FA41N8Cic5ovJifUvbdkgA@mail.gmail.com>
+	<CANDbA3c8tGiOK-AUSNhe3rqZ=sCRn3=2NTdGF8o5y79d_aG7aA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 11 Sep 2017 21:52:50 +0200
+Message-ID: <CA+chaQducSfMb-woaHtjYUfTnUsCmZwNBbtJ_SV40N-rSkuOEA@mail.gmail.com>
+To: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
+	<athoik@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] v4l-utils: added missing dependency on udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,53 +58,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2017 18:47:10 -0000
+X-List-Received-Date: Mon, 11 Sep 2017 19:52:50 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 11, 2017 at 8:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> This is required so it can override the CC settings when
-> clang is used because meta-clang uses toolchain-clang
-> override to set CC and friends so we need to use higher
-> order override, forcevariable is highest order.
+yes
 
-Just for reference, ${LIBCOVERRIDE} is the highest order over-ride,
-forcevariable is second.
+On Mon, Sep 11, 2017 at 9:31 PM, =CE=91=CE=B8=CE=B1=CE=BD=CE=AC=CF=83=CE=B9=
+=CE=BF=CF=82 =CE=9F=CE=B9=CE=BA=CE=BF=CE=BD=CF=8C=CE=BC=CE=BF=CF=85 <athoik=
+@gmail.com>
+wrote:
 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  meta-initramfs/classes/klibc.bbclass | 13 ++++++-------
->  1 file changed, 6 insertions(+), 7 deletions(-)
+> 2017-09-11 16:17 GMT+03:00 Martin Jansa <martin.jansa@gmail.com>:
+> > This causes build failure (at least with gold enabled):
+> >
+> > ../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to
+> > 'pthread_cancel'
+> > ../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to
+> > 'pthread_create'
 >
-> diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
-> index f864104cf..2aacf241e 100644
-> --- a/meta-initramfs/classes/klibc.bbclass
-> +++ b/meta-initramfs/classes/klibc.bbclass
-> @@ -3,13 +3,12 @@ DEPENDS =+ "klcc-cross"
+> Most probably something unexpected with pthread and gold. I guess
+> adding -lpthread should fix that.
 >
->  # Default for klcc is to build static binaries.
->  # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
-> +CC_forcevariable = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
-> +CC_forcevariable_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
+> In order to test with gold enable just adding ld-is-gold to
+> DISTRO_FEATURES is enough?
 >
-> -export CC = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
-> -export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
-> -
-> -export CPP = "${CC} -E"
-> +CPP_forcevariable = "${CC} -E"
+> Thanks,
+> Athanasios
 >
->  # klcc uses own optimizations by default. See klcc(1) man file.
-> -export CFLAGS=""
-> -export CPPFLAGS=""
-> -export LDFLAGS=""
-> +CFLAGS_forcevariable=""
-> +CPPFLAGS_forcevariable=""
-> +LDFLAGS_forcevariable=""
-> --
-> 2.14.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
