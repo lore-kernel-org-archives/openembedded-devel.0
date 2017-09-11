@@ -1,49 +1,56 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id A766178221
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A97FB78221
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 16:03:26 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id q76so1002674pfq.2
+	Mon, 11 Sep 2017 16:04:50 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id i130so2834278pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Sep 2017 09:03:28 -0700 (PDT)
+	Mon, 11 Sep 2017 09:04:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=MSqDtf5dxvs+vSv6Vbd/mdCEQx2zgJIl6739AyQZ8o8=;
-	b=ZbMCMDpJc7sldZbo3XRmH6sSkjNxlTyf30a4Tt7fl2c6tmsOKBECxrXIuA3rsbe1Th
-	VPDoOHA1CIAKN3pUPTHpYXTJ9OrNjUiyNiim8TruehCDuEJeDYIIHyfewHgL4NCI5eUV
-	nQttJ6oalJrD0x8aXC/nqlXe/4meHL+GNFDB5Wt6H6wXB/B/rPhlNv5TXhzYrcLRZZOO
-	cAMnAWcPAXx3y2ID4MkXVNpuz9+um4JkgrBNKxYvOMHZXgD4vfO8CuNxH36xgh3IRI3N
-	CGiX6hxOaKja4wHtYvKtWnGrdoJYN5hI/m5ftIDL9CXb1bArm4Z5iWtBDTitvPXWDgMJ
-	Wa3A==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=hLEolIM97uS99wrC19EW0BNnyL4nKSs2a8fzX7WAOOc=;
+	b=HTn0c/zD2B2ftAcPTZDkRD4r5BLG+8xJAYTJep1ZBvt+zDhWiZnLjiwTg+YhqWNtUS
+	EnDqAg3dRLN07mt1iOBCaWJxQz3GmqKpMMeTEVHp3B8Kru6t4fhUviJq/Pgvmm9f8bb1
+	rW3VuOs96w5KvAo4s9NwDVUmfIQ+Lk2WxDta5DY+H0x6VawNYplR+UYDxi7iQJzvaShH
+	5usHWQMfgJxz7FVf0qQ++fjhMTw4fYlyvOYko5wP9zC5hh4SCKY55M4FKRVLBXom+iFO
+	qeCc25XBLFqXui6d6+noMl7QnwPF8hJbdK7VuoX9g84oCyQDYEuMc9brkszRsTfa4OOW
+	Kjeg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=MSqDtf5dxvs+vSv6Vbd/mdCEQx2zgJIl6739AyQZ8o8=;
-	b=bIVB/e4uqQDQyUJ1Pi9DaNsJCFC+0S2wkD+wAUefXMrTSL3vc20q5VgN0c/D7UMByq
-	+bEaHCCvhPOsti1tj2r6G0SAR6jtxuTXifItPTuGj/tcU34SAf5QnEAL42yPJVn3VyN1
-	vNkPFqrzJnxJ9+f/Fl1K+vIrDxNmqdNYnPetJTeE51oStgHsRWTST7bqRxlaRMrb1dPq
-	P0IQIAcriclIRnPdK+hALAjhKjEWgYyWJT/81SslvpdGZs6ZRY4C4wp2R4rY8ztOIG8t
-	+ds1nDmAfQuWQxmi5Xhg8SyQAjGSQe/0NyS3BDT+jmMTDdzwwGtv4DjcYz5Yebjfqbm9
-	7YbQ==
-X-Gm-Message-State: AHPjjUhg+v1cYJ6viNR4JySpuBnKOkoQxYsOqBuy25D37D8ofZ2B8OEB
-	7i/GJbvmkHPNhQ==
-X-Google-Smtp-Source: ADKCNb7ZW4b8HiqD/AMapSOROaJkPnDCHLvf/dJq3i/QGZjGNnTdnOfYrK+wMlzOcrl9k3PsC1+E4w==
-X-Received: by 10.98.131.141 with SMTP id h135mr10355911pfe.204.1505145807563; 
-	Mon, 11 Sep 2017 09:03:27 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=hLEolIM97uS99wrC19EW0BNnyL4nKSs2a8fzX7WAOOc=;
+	b=GYBIIjYf4sjwJSlfmJoTWFEkKn6pqqmtXI+CCwesJVIM4bI0DaZiFVhDDQZPfUKHiV
+	6cDKsoIk7ILQT28b17Q9HGnjCEr9qY9vJH/pVGQvpEsye46mVnzTesNFX42yIVvPRK25
+	OBh3V0ecTQRmm7WkvELpfupf62ZscTe4xIcFTbahWTO/EO4DVrLC4onZT9WhZz5qG3Ig
+	5m84ruBFoS2rfZE8+arsv4pMlpbVh4eRJJVZkGrsLGQH6nc0SOS83O0pXBlMRdXdU1kC
+	NnRiSRQgzxMikHVc09Ozwndh1v18R9Upze8E00g3Bsv4YtARtsuxk3Sv1Ux1wTgcqx4e
+	+BUA==
+X-Gm-Message-State: AHPjjUj6o4HxCgb7G834yRQIDPR4q5pEMrJqW4NShzuI5RHZMmtSSq+l
+	yy+g/70ZVNYxByWZ
+X-Google-Smtp-Source: ADKCNb7A+cEsJfYbq5lv0/8IcgFzT9dzYhV2NSa/OyX58wDVtJti7H/rIO3PuQ4E2nWZWkOkXNHYAA==
+X-Received: by 10.84.194.131 with SMTP id h3mr6169607pld.352.1505145892048;
+	Mon, 11 Sep 2017 09:04:52 -0700 (PDT)
+Received: from ?IPv6:2601:202:4001:9ea0:d402:d3c9:ca3b:9b54?
 	([2601:202:4001:9ea0:d402:d3c9:ca3b:9b54])
 	by smtp.gmail.com with ESMTPSA id
-	m24sm17292692pfj.28.2017.09.11.09.03.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 11 Sep 2017 09:03:26 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster808@gmail.com,
+	r22sm17752146pfe.78.2017.09.11.09.04.50
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 11 Sep 2017 09:04:51 -0700 (PDT)
+To: Alejandro Mery <amery@hanoverdisplays.com>,
 	openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Sep 2017 09:03:16 -0700
-Message-Id: <cover.1505145706.git.akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH 0/3] pryo-next pull request additional changes
+References: <20170803130518.6351-1-amery@hanoverdisplays.com>
+	<20170803130518.6351-2-amery@hanoverdisplays.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <d4b12e82-85ef-271d-2265-fbf2b92cae7e@gmail.com>
+Date: Mon, 11 Sep 2017 09:04:50 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+In-Reply-To: <20170803130518.6351-2-amery@hanoverdisplays.com>
+Subject: Re: [meta-oe][pyro][PATCH 1/3] gitver: extend class to use EXTERNALSRC if set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +63,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Sep 2017 16:03:26 -0000
+X-List-Received-Date: Mon, 11 Sep 2017 16:04:50 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Please consider these 3 additional changes for pyro.
+in current pyro-next pull request.
 
-The following changes since commit b435d7b59d7fffba06c0b2bef55be8cb220401a4:
+thanks.
 
-  krb5: fix CVE-2017-11368 (2017-09-10 09:00:19 -0700)
+Armin
 
-are available in the git repository at:
 
-  git://git.openembedded.org/meta-openembedded-contrib akuster/pyro-next
-  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=akuster/pyro-next
-
-Alejandro Mery (3):
-  gitver: extend class to use EXTERNALSRC if set
-  gitver: fix broken ${GITSHA} and recursion in S when PV="${GITVER}"
-  gitver: skip packages instead of panic()ing if ${GITVER} fails to
-    expand
-
- meta-oe/classes/gitver.bbclass | 47 +++++++++++++++++++++++++-----------------
- 1 file changed, 28 insertions(+), 19 deletions(-)
-
--- 
-2.7.4
+On 08/03/2017 06:05 AM, Alejandro Mery wrote:
+> Signed-off-by: Alejandro Mery <amery@hanoverdisplays.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>   meta-oe/classes/gitver.bbclass | 6 ++++--
+>   1 file changed, 4 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/classes/gitver.bbclass b/meta-oe/classes/gitver.bbclass
+> index a16429aa8..73521d538 100644
+> --- a/meta-oe/classes/gitver.bbclass
+> +++ b/meta-oe/classes/gitver.bbclass
+> @@ -24,7 +24,8 @@ def get_git_pv(path, d, tagadjust=None):
+>       import os
+>       import bb.process
+>   
+> -    gitdir = os.path.abspath(os.path.join(d.getVar("S"), ".git"))
+> +    srcdir = d.getVar("EXTERNALSRC") or d.getVar("S")
+> +    gitdir = os.path.abspath(os.path.join(srcdir, ".git"))
+>       try:
+>           ver = gitrev_run("git describe --tags", gitdir)
+>       except Exception as exc:
+> @@ -71,5 +72,6 @@ def mark_recipe_dependencies(path, d):
+>           mark_dependency(d, tagdir)
+>   
+>   python () {
+> -    mark_recipe_dependencies(d.getVar("S"), d)
+> +    srcdir = d.getVar("EXTERNALSRC") or d.getVar("S")
+> +    mark_recipe_dependencies(srcdir, d)
+>   }
 
 
