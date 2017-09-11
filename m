@@ -1,46 +1,30 @@
-Return-Path: <athoik@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F0B678170
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BDE960017
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  9 Sep 2017 21:34:08 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id 187so4055550wmn.0
+	Mon, 11 Sep 2017 02:16:45 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.42,375,1500912000"; d="scan'208";a="25591638"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Sep 2017 10:16:45 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 2A3AB46BA6AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 09 Sep 2017 14:34:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=V8nsuK3R8CkDNOjNULys7bipLQ6Mgrc7eAcf6Xjq2rE=;
-	b=F5w34eWx9SpEQN13YTh2r/YykhkrSseegVVKXimSK6h/ewmtqN0yacBhbuXUN04uiH
-	dYVP992NuIZTnWyl5Nzmo9yBCW3IDmWRt3XIip1cdci6JKr/YZbIrV3rEwlbKKL+Is9j
-	7iJI1kkjXBodAnl+zmeRlj4Z2wpTEjzQvuXME/21Y2IB8LkWVtWsx/Jm0oA7X1uinWcu
-	2qlhHFroCPH1EyuV6vrQNJCu3sNU0SzL6WoYH2z+/U9owuoaFJQbo2QqdzeG6bUCCi4D
-	A8dpRbwKzGgqLS6Ni/obRT9CogIlioX9wljvjTXNur84LkukyJeYcDsZi1g6q1+SMy6H
-	jopA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=V8nsuK3R8CkDNOjNULys7bipLQ6Mgrc7eAcf6Xjq2rE=;
-	b=Nze3mHxUxuTtb6kHf58/+o0NURQMWuqibkiX6HUqrXdnDmO3Qh3MvN+S192FZPO7jB
-	aSk9Hzw1eB63wOAgai8Q8PkRZFjTaL5gMUyMqPXB2+hOFVAWhiS0NcniM/1ApVdYlEdq
-	kXptv4nNklgsT/GE3FspLtWEcZ1jtcMCGEwN9Gm/viWtpYzq9dlQFcyScfgafWPZ7Fc9
-	itNF+jtJT2FNTEAO5CDg73tPzK5Bzrhuko/irfexgPU5R/acboxi3kbIYtzoA03nU5bh
-	05l1HOvvJZCvi08IpENmk4x8FRTUJ+6Ppoc1MjQBAkHytzMIK8u99Km2eCkefvC4jV62
-	Z9bA==
-X-Gm-Message-State: AHPjjUhEGtG9078G25G/qEe/1CIx17IxExkJ8TDNPPSU7DGj4xWzOzPf
-	yfAYNz3cRuAH0jMM
-X-Google-Smtp-Source: AOwi7QBUaVY3y4zbeXUSzgXwBhSyxd9pQZ4Aj8HZfSdksRoC4+hd95iCURGN122hBbvGsj7YmkNTHg==
-X-Received: by 10.28.19.76 with SMTP id 73mr4504789wmt.122.1504992849152;
-	Sat, 09 Sep 2017 14:34:09 -0700 (PDT)
-Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
-	by smtp.gmail.com with ESMTPSA id q4sm2099001wmd.3.2017.09.09.14.34.08
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 09 Sep 2017 14:34:08 -0700 (PDT)
-From: Athanasios Oikonomou <athoik@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 10 Sep 2017 00:38:32 +0300
-Message-Id: <1504993112-9111-1-git-send-email-athoik@gmail.com>
-X-Mailer: git-send-email 2.1.4
-Cc: Athanasios Oikonomou <athoik@gmail.com>
-Subject: [meta-oe][PATCH] v4l-utils: added missing dependency on udev
+	Mon, 11 Sep 2017 10:16:43 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Mon, 11 Sep 2017 10:16:45 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 11 Sep 2017 10:16:43 +0800
+Message-ID: <1505096207-27989-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
+MIME-Version: 1.0
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: 2A3AB46BA6AE.A7FA9
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-python][PATCH] python-cffi: Add HOMEPAGE info into recipe file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,40 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 09 Sep 2017 21:34:09 -0000
+X-List-Received-Date: Mon, 11 Sep 2017 02:16:47 -0000
+Content-Type: text/plain
 
-Upgrading to newer v4l-utils 1.12.3 on commit f84a551f2d419df88b85987855fec866d9e84b4a
-Is causing issues because libdvbv5 now require libudev in order to work
-(commit db42484881bf5e6a902de51fe42444ddf286d52a on v4l-utils).
-
-First issue is missing dvb utils dvb-fe-tool, dvb-format-convert, dvbv5-daemon, dvbv5-scan, dvbv5-zap
-because libdvbv5 requires now libudev.
-
-Another issue was the failure of building dvb-apps (currently removed from master)
-because the v4l-utils-native is missing dvb-format-convert.
-
-This commit adds the missing udev dependency only on target and brings back the missing dvb utils.
-
-Adding udev on native build is not possible because nothing provides udev-native.
-
-Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 1 +
+ meta-python/recipes-devtools/python/python-cffi.inc | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-index 42da5cc..dacc406 100644
---- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-+++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
-@@ -7,6 +7,7 @@ PROVIDES = "libv4l media-ctl"
- DEPENDS = "jpeg \
-            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
- DEPENDS_append_libc-musl = " argp-standalone"
-+DEPENDS_append_class-target = " udev"
- 
- inherit autotools gettext pkgconfig
- 
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index 0ea154f..8b5e952 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -1,4 +1,5 @@
+ SUMMARY = "Foreign Function Interface for Python calling C code"
++HOMEPAGE = "http://cffi.readthedocs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
+ DEPENDS += "libffi ${PYTHON_PN}-pycparser"
 -- 
-2.1.4
+2.7.4
+
+
 
 
