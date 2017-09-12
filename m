@@ -1,50 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f194.google.com (mail-ua0-f194.google.com
-	[209.85.217.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 44919784B5
+Return-Path: <athoik@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 4457D784ED
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Sep 2017 18:59:18 +0000 (UTC)
-Received: by mail-ua0-f194.google.com with SMTP id q29so3491999uaf.4
+	Tue, 12 Sep 2017 20:01:10 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id p37so6716668wrb.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 12 Sep 2017 11:59:20 -0700 (PDT)
+	Tue, 12 Sep 2017 13:01:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=acbLnLj0VNBjGGDCXLM5u1eVJBkzY0DzI8uJxH3+Iek=;
-	b=l02cR/PJywyFJGZIvy4q4JDp0/5nlBpbkjkHzNm9Zj4WS+GQhduHZM6dxwDF8tQowj
-	EJ/AxlKrXldcWgQsG1FFHQO3ZcwmqxqroEwW9JlUGythDrE0vx+FuGpXClCKTeHWUe7O
-	Qk28IQtnSOY36NMVHCtVTGlS+OecGTw2CHoaar6EmgvigzyEM024ii72sw2DkWTV6dMz
-	TSD5th9WfJ1b/B1XNJqjuIrZQnt5HvZzztkGIVFD1WCYnUXlVkTxdMPdyUVmfmYyRM5R
-	n6tvuWO+6inTmugrFqurO/kuAuILNSADVhcNeT1w3GgholjGjgD6UEKr/ZZyta43iTFi
-	eOgQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=sq0aKAmMuNxLWK2UjCJxbdX8TBUDtDQb7w6dvfwu7gQ=;
+	b=WrggHvJp2cNLCrvszn76VJ9hR+ijmLbhK79ntMrPn6iDWH4txTVNcKD4JfUXPpfmLf
+	ayuC/JZ9SqBy+VbsVbqSki4cxlSJEdCDLqDbk7E7N6VwaGDbM5P6bbO2Se/2Vyl14KcP
+	8NCZMKDE0h4G9y7Slxqdl7VbTFbiRiU1T46hJmK5YSmIkraFmfPaJRBSvKydCY/oNOHW
+	1nDjNpw4lWqga8loIZQIvGlQpOkyWncDsDIP0GLhmBqg8F32xjEh4uE0R1WGjLOBpNqE
+	jHChzm45yYFSvKxO9SZjiWLmK7PGc4QJsLxzm+Oc2Rca7EG566ozpRBGelbuzjbC95RO
+	9qOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=acbLnLj0VNBjGGDCXLM5u1eVJBkzY0DzI8uJxH3+Iek=;
-	b=FZXEevoE5RBJI9V10TSPne2tAIOc1P2sFvEtC9DDCzFhche8a1ynJLy6dZ8hS6i/jx
-	asExyEjkwDOoM2IOqYKnZOdr4y+XxH5H9BAPy7jphRHuUcpLtK/eQMZJeNjflwtKGiN1
-	zXeLMNUmYpeguuK4aBa+L4lLyaz/p7qhqoFPwqpr1Rn19jfx9FLht+A2PwRvNHpEbT3Y
-	7JWZdgrknCP9pxra+WIF6cFD4clP+/HL8QznPDqbys2qQG8A3L7hO+IsFgi9+8Zbe1ZQ
-	R7kppAbajsIwHJMZBCfh32dM+hRF4UOW7UNoTqj63hi3JGTGbMy6dTGC91evZgAD8SSN
-	DEBA==
-X-Gm-Message-State: AHPjjUjZdsbvh4TQGo3k6ORTAOR+cA66t6fsyAo3jb4w2XgM+AMmbEKK
-	SSeAZfrnZVltybDvpPWnqlJCsVk/mQ==
-X-Google-Smtp-Source: ADKCNb4xkzZmi2x5xS6qQXQ2lidT5YM4FieAuImGxJOCbDyy1kJtLHz9N/xDBmnVoSwS5wtDlb/EJTSWjLjBvDY5Erw=
-X-Received: by 10.176.75.25 with SMTP id h25mr12596726uaf.102.1505242760084;
-	Tue, 12 Sep 2017 11:59:20 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Tue, 12 Sep 2017 11:59:19 -0700 (PDT)
-In-Reply-To: <CAJ86T=UQtomn1KeUuUBaSnqmhofieCOWz9WEAUTLqR2FDTqzWA@mail.gmail.com>
-References: <20170911151056.4577-1-raj.khem@gmail.com>
-	<20170911151056.4577-4-raj.khem@gmail.com>
-	<CAJ86T=UQtomn1KeUuUBaSnqmhofieCOWz9WEAUTLqR2FDTqzWA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 12 Sep 2017 20:59:19 +0200
-Message-ID: <CA+chaQfuF=3F59upaJ7eO980G0-a4DDwrtK=gpxCf8BhQnixLg@mail.gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH 4/5] klibc.bbclass: Use forcevariable override to define flags
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sq0aKAmMuNxLWK2UjCJxbdX8TBUDtDQb7w6dvfwu7gQ=;
+	b=LpUFzYP4SahG3OcstG2mZKQbV/DIuM8C13HCZhO7J+sTjpn5cHcjKVgAjFu5PoHVFx
+	GgJkSEGK6oQnJjHKFN2yrGS/KQTKkNlsKZEOftWsJHwE06rTOfW8lsi1BG5BB9kJq9Qq
+	RgmDE4OUe7La0Ebi4c9QCBFQ/wtgV76/YblDXWP1IpSgp+QIencUuLTQZtb3DbZqVMBR
+	7KNLCPGLD3yH/ONQptHKrxBJJe4ysgKMBoWVn3DA96Hmek6bKVtgYtBZ3h+aVrXggixD
+	dzVjwhhkZTN3LFD6zdLcNdC7m0ZlJYJqfY5OVwJ2FKS5R72fpubDz6VfN7rhz73M/TiJ
+	iFhQ==
+X-Gm-Message-State: AHPjjUirZWQqtcq+PL0h1JGdTP5kIyzCZ4vvXGqpw9963QqPr1v1Ds8X
+	H+TuOCLOdzoHwnozcH4=
+X-Google-Smtp-Source: ADKCNb6cyZGP3NdYGky/y7jvfcVmtFerUvbXG/bN4zIKjs9pZ1Vrg3Tvkmhy/69Un+BZ4AD9eq9dBw==
+X-Received: by 10.223.131.99 with SMTP id 90mr13615624wrd.198.1505246471601;
+	Tue, 12 Sep 2017 13:01:11 -0700 (PDT)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
+	by smtp.gmail.com with ESMTPSA id
+	o14sm10419725wra.54.2017.09.12.13.01.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 12 Sep 2017 13:01:11 -0700 (PDT)
+From: Athanasios Oikonomou <athoik@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 12 Sep 2017 23:06:00 +0300
+Message-Id: <1505246760-31788-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-oe][PATCH v2] v4l-utils: added missing dependency on udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,68 +55,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 12 Sep 2017 18:59:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 12 Sep 2017 20:01:11 -0000
 
-One of these last changes seems to cause:
+Upgrading to newer v4l-utils 1.12.3 on commit f84a551f2d419df88b85987855fec866d9e84b4a
+Is causing issues because libdvbv5 now require libudev in order to work
+(commit db42484881bf5e6a902de51fe42444ddf286d52a on v4l-utils).
 
-http://errors.yoctoproject.org/Errors/Details/155766/
+First issue is missing dvb utils dvb-fe-tool, dvb-format-convert, dvbv5-daemon, dvbv5-scan, dvbv5-zap
+because libdvbv5 requires now libudev.
 
-On Mon, Sep 11, 2017 at 8:47 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+Another issue was the failure of building dvb-apps (currently removed from master)
+because the v4l-utils-native is missing dvb-format-convert.
 
-> On Mon, Sep 11, 2017 at 8:10 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> > This is required so it can override the CC settings when
-> > clang is used because meta-clang uses toolchain-clang
-> > override to set CC and friends so we need to use higher
-> > order override, forcevariable is highest order.
->
-> Just for reference, ${LIBCOVERRIDE} is the highest order over-ride,
-> forcevariable is second.
->
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  meta-initramfs/classes/klibc.bbclass | 13 ++++++-------
-> >  1 file changed, 6 insertions(+), 7 deletions(-)
-> >
-> > diff --git a/meta-initramfs/classes/klibc.bbclass
-> b/meta-initramfs/classes/klibc.bbclass
-> > index f864104cf..2aacf241e 100644
-> > --- a/meta-initramfs/classes/klibc.bbclass
-> > +++ b/meta-initramfs/classes/klibc.bbclass
-> > @@ -3,13 +3,12 @@ DEPENDS =+ "klcc-cross"
-> >
-> >  # Default for klcc is to build static binaries.
-> >  # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
-> > +CC_forcevariable = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
-> > +CC_forcevariable_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc
-> ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
-> >
-> > -export CC = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
-> > -export CC_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc
-> ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
-> > -
-> > -export CPP = "${CC} -E"
-> > +CPP_forcevariable = "${CC} -E"
-> >
-> >  # klcc uses own optimizations by default. See klcc(1) man file.
-> > -export CFLAGS=""
-> > -export CPPFLAGS=""
-> > -export LDFLAGS=""
-> > +CFLAGS_forcevariable=""
-> > +CPPFLAGS_forcevariable=""
-> > +LDFLAGS_forcevariable=""
-> > --
-> > 2.14.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+This commit adds the missing udev dependency only on target and brings back the missing dvb utils.
+
+Adding udev on native build is not possible because nothing provides udev-native.
+
+Additionally add lib pthread to LDFLAGS in order to solve building with gold.
+
+../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to 'pthread_cancel'
+../../lib/libdvbv5/.libs/libdvbv5.so: error: undefined reference to 'pthread_create'
+
+Issue with gold linking reported upstream and hopefully will be addressed soon.
+
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+---
+ meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+index b408bb0..57cfb13 100644
+--- a/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
++++ b/meta-oe/recipes-multimedia/v4l2apps/v4l-utils_1.12.3.bb
+@@ -7,6 +7,8 @@ PROVIDES = "libv4l media-ctl"
+ DEPENDS = "jpeg \
+            ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'virtual/libx11', '', d)}"
+ DEPENDS_append_libc-musl = " argp-standalone"
++DEPENDS_append_class-target = " udev"
++LDFLAGS_append = " -pthread"
+ 
+ inherit autotools gettext pkgconfig
+ 
+-- 
+2.1.4
+
 
