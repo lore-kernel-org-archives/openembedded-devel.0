@@ -1,49 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E0536E668
+Return-Path: <fabien.lahoudere@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id CCD8B78523
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 14:21:29 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id g206so8163373wme.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 07:21:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=Oqdsfrmt7eiGRT2QNlTeJW6CsvLunS0ZthLq8Y2eGiY=;
-	b=JYklFpF6uW7s/t/aGMo/wv1i5npe5pcZpCBf83IJnUvZ4NMthF7Mjb+q5rgASlTjZ/
-	4bAsLox/g78MK0oHSovpnFqDVnUnuWKVH42HA17wwJrocbTcwGdH+gfhHqdyN1/AJ4D3
-	LY7yBM56SOsQu1/t3oVk5QiEG2FIuI3n3PVztDEJjMf6GnUiDtzscV/QhCqNooflNB/R
-	4zDnb2uq/I87firYTL5g+Ij4nhDOGLd8N5gnCau7oNr01sU+6t+Nb6dJH/2WZBX2jyf5
-	B9nIpWxziAJh9N96uThSKlmlR/5AAUtXp2gbZmbiHYDqLB3vCWSdHSWtQaWu/7bB0Qyp
-	GjDg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=Oqdsfrmt7eiGRT2QNlTeJW6CsvLunS0ZthLq8Y2eGiY=;
-	b=PY/ZEqo4bitnBp1SGx9Uyq9wCvWOXNxxr9NOCfJSJdti/U62plL2NF5n2+4tOwbizk
-	11WapCleLpAXp2WgMTutLtOK4A1Nub7X5z/JhFc929DLw0UsGqVPGwLhQqYfUqaY2V+r
-	JQihncBu7d5ugtmPp3QXNszZKy5UH2rc+xp7aERSZafq7Mr7R+kXRLdPEy+gi8LnLiNc
-	w6bLYPQ4yQWgeFwqWJ3aqYgAgX0qMTviWLFQVNQGsyhGo7IYaixn5CRzcDpcn1hk6Sda
-	nIoaLsdHFZ+WmsA4wiTIUiAMk6hiDsuVSwkZnCw34J6fUfL+0ZQKddo9a6/zLIkmusRx
-	DNSw==
-X-Gm-Message-State: AHPjjUhQmHymjLdFBvZMoqiMFtDOZAZTSYVjV92cokMEGrhWqfFG/xNb
-	NIGZBsShKRmLkDvv
-X-Google-Smtp-Source: AOwi7QBjAMQfTlGv63bg3FcpXb4SsI9lGETFFi+p/6HzQdRlPnLy4syVSH64Kob+qfhDzKJdZtn6Vw==
-X-Received: by 10.28.127.4 with SMTP id a4mr2958188wmd.12.1505312490731;
-	Wed, 13 Sep 2017 07:21:30 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id p15sm1603618wmi.2.2017.09.13.07.21.29
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Sep 2017 07:21:30 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Sep 2017 16:23:47 +0200
-Message-Id: <20170913142347.23495-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.14.1
+	Wed, 13 Sep 2017 14:24:08 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aragua) with ESMTPSA id 35323264FE1
+Message-ID: <1505312646.3560.10.camel@collabora.co.uk>
+From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+To: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 13 Sep 2017 16:24:06 +0200
 In-Reply-To: <CA+chaQdHXzf+u5dAjWXsUU_wBf+hG6hi+VsOKosF+AEHb1kXMg@mail.gmail.com>
-References: <CA+chaQdHXzf+u5dAjWXsUU_wBf+hG6hi+VsOKosF+AEHb1kXMg@mail.gmail.com>
-Subject: [meta-multimedia][PATCH] Revert "gerbera: Add recipe"
+References: <20170911125009.9837-1-fabien.lahoudere@collabora.co.uk>
+	<CA+chaQdYaQa1-D9tRvvRksdv0vhudTaeUKKgRwwRte-PVLRCcg@mail.gmail.com>
+	<CA+chaQdHXzf+u5dAjWXsUU_wBf+hG6hi+VsOKosF+AEHb1kXMg@mail.gmail.com>
+X-Mailer: Evolution 3.22.6-1 
+Mime-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-multimedia][PATCH v2] libupnp: Bump to version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,81 +29,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 14:21:30 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 14:24:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-* depends on newer libupnp which wasn't merged yet, because it breaks
-  mpd
+Ok I will try to update mpd now and see if it help.
 
-This reverts commit e890ecb1d2bb4f2d23f4d5cc7e40e0b1806da984.
----
- .../gerbera/files/gerbera.service                  | 13 ---------
- .../recipes-multimedia/gerbera/gerbera_git.bb      | 34 ----------------------
- 2 files changed, 47 deletions(-)
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
- delete mode 100644 meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service b/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
-deleted file mode 100644
-index 1b5a3ad3e..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/files/gerbera.service
-+++ /dev/null
-@@ -1,13 +0,0 @@
--[Unit]
--Description=Start Gerbera, an UPnP media server
--After=multi-user.target network-online.target
--Wants=network-online.target
--
--[Service]
--ExecStart=/usr/bin/gerbera
--Environment='HOME=/root'
--Type=simple
--RemainAfterExit=yes
--
--[Install]
--WantedBy=multi-user.target
-\ No newline at end of file
-diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb b/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-deleted file mode 100644
-index 2bbedc0d1..000000000
---- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-+++ /dev/null
-@@ -1,34 +0,0 @@
--Description = "Gerbera - An UPnP media server"
--
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=25cdec9afe3f1f26212ead6bd2f7fac8"
--
--SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https \
--	   file://gerbera.service "
--
--
--# Modify these as desired
--PV = "1.0+git${SRCPV}"
--SRCREV = "4435b165d121195aefd67d0287f7f9349e181d45"
--
--S = "${WORKDIR}/git"
--
--DEPENDS = "expat zlib curl libupnp e2fsprogs sqlite3 taglib "
--RDEPENDS_${PN} = "expat zlib curl libupnp e2fsprogs taglib "
--
--SYSTEMD_SERVICE_${PN} = "gerbera.service"
--SYSTEMD_AUTO_ENABLE = "enable"
--
--inherit cmake systemd
--
--EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_TAGLIB=FALSE -DWITH_MAGIC=FALSE -DWITH_EXIF=FALSE -DLIBUUID_INCLUDE_DIRS=${WORKDIR}/recipe-sysroot/usr/include -DLIBUUID_LIBRARIES=-luuid"
--
--do_install_append() {
--	install -d ${D}/root/.config/
--	install -d ${D}${systemd_system_unitdir}
--        install -m 0644 ${WORKDIR}/gerbera.service ${D}${systemd_system_unitdir}/
--}
--
--FILES_${PN} += " /root/.config/ \
--	         ${systemd_system_unitdir}/* \
--"
-\ No newline at end of file
--- 
-2.14.1
-
+On Wed, 2017-09-13 at 16:20 +0200, Martin Jansa wrote:
+> Please fix this ASAP, because I've already merged gerbera recipe (tested together with this
+> libupnp change), but now with libupnp upgrade dropped from master-next because of this issue
+> gerbera fails as well in master due to old upnp:
+> 
+> -- Found UPnP: gerbera/1.0+gitAUTOINC+4435b165d1-r0/recipe-sysroot/usr/lib/libupnp.so (found
+> version "1.6.21") 
+> CMake Error at CMakeLists.txt:380 (message):
+>   gerbera requires libupnp 1.8.0 or above.
+> 
+> 
+> On Mon, Sep 11, 2017 at 6:51 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > This probably break mpd build:
+> > http://errors.yoctoproject.org/Errors/Details/155531/
+> > 
+> > On Mon, Sep 11, 2017 at 2:50 PM, Fabien Lahoudere <fabien.lahoudere@collabora.co.uk> wrote:
+> > > Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+> > > ---
+> > >  .../libupnp/libupnp/sepbuildfix.patch              | 34 ----------------------
+> > >  .../{libupnp_1.6.21.bb => libupnp_1.8.2.bb}        | 12 ++++----
+> > >  2 files changed, 7 insertions(+), 39 deletions(-)
+> > >  delete mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
+> > >  rename meta-multimedia/recipes-connectivity/libupnp/{libupnp_1.6.21.bb => libupnp_1.8.2.bb}
+> > > (66%)
+> > > 
+> > > diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch b/meta-
+> > > multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
+> > > deleted file mode 100644
+> > > index 0493cea0e..000000000
+> > > --- a/meta-multimedia/recipes-connectivity/libupnp/libupnp/sepbuildfix.patch
+> > > +++ /dev/null
+> > > @@ -1,34 +0,0 @@
+> > > -From e198f0a87660a048164ca0e16d18517d0aee846e Mon Sep 17 00:00:00 2001
+> > > -From: Andre McCurdy <armccurdy@gmail.com>
+> > > -Date: Tue, 9 Jun 2015 12:20:45 -0700
+> > > -Subject: [PATCH] Fix builds when using separate source and build directories.
+> > > -
+> > > -Upstream-Status: Pending
+> > > -
+> > > -Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> > > ----
+> > > - configure.ac           | 10 +++++-----
+> > > - 1 files changed, 5 insertions(+), 5 deletions(-)
+> > > -
+> > > -diff --git a/configure.ac b/configure.ac
+> > > -index a8731b5..54a3c3d 100644
+> > > ---- a/configure.ac
+> > > -+++ b/configure.ac
+> > > -@@ -744,9 +744,9 @@ AC_OUTPUT
+> > > - #
+> > > - # Files copied for windows compilation.
+> > > - #
+> > > --echo "configure: copying \"autoconfig.h\"          to \"build/inc/autoconfig.h\""
+> > > --test -d build/inc || mkdir -p build/inc
+> > > --cp autoconfig.h build/inc/autoconfig.h
+> > > --echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"build/inc/upnpconfig.h\""
+> > > --cp upnp/inc/upnpconfig.h build/inc/upnpconfig.h
+> > > -+echo "configure: copying \"autoconfig.h\"          to \"\$srcdir/build/inc/autoconfig.h\""
+> > > -+test -d $srcdir/build/inc || mkdir -p $srcdir/build/inc
+> > > -+cp autoconfig.h $srcdir/build/inc/autoconfig.h
+> > > -+echo "configure: copying \"upnp/inc/upnpconfig.h\" to \"\$srcdir/build/inc/upnpconfig.h\""
+> > > -+cp upnp/inc/upnpconfig.h $srcdir/build/inc/upnpconfig.h
+> > > -
+> > > ---
+> > > -1.9.1
+> > > -
+> > > diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb b/meta-
+> > > multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+> > > similarity index 66%
+> > > rename from meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
+> > > rename to meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+> > > index a1988295a..61b209ab8 100644
+> > > --- a/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.6.21.bb
+> > > +++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp_1.8.2.bb
+> > > @@ -8,11 +8,13 @@ HOMEPAGE = "http://pupnp.sourceforge.net/"
+> > >  LICENSE = "BSD"
+> > >  LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
+> > > 
+> > > -SRC_URI = "${SOURCEFORGE_MIRROR}/pupnp/${BP}.tar.bz2 \
+> > > -           file://sepbuildfix.patch \
+> > > -"
+> > > +SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-${PV}.tar.gz "
+> > > 
+> > > -SRC_URI[md5sum] = "513adadb07fa039a8aeb0ceb7b7b0f6e"
+> > > -SRC_URI[sha256sum] = "af3f3c0846a1d75baeadae4aa5a2bda427567e2a1fb4559bf73ccff0a4f9a39b"
+> > > +SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
+> > > +SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd69f049daba11d71bbb5d715336e00106cb4"
+> > > +
+> > > +S="${WORKDIR}/pupnp-release-${PV}"
+> > > 
+> > >  inherit autotools
+> > > +
+> > > +EXTRA_OECONF += "--enable-reuseaddr"
+> > > \ No newline at end of file
+> > > --
+> > > 2.11.0
+> > > 
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > 
+> > 
+> > 
+> 
+> 
 
