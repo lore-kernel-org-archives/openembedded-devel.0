@@ -1,23 +1,52 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
-	by mail.openembedded.org (Postfix) with ESMTP id 9BBBA7865F
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
+	[209.85.218.42])
+	by mail.openembedded.org (Postfix) with ESMTP id E871678624
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 11:45:39 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v8DBjdZj026265
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Wed, 13 Sep 2017 11:48:46 +0000 (UTC)
+Received: by mail-oi0-f42.google.com with SMTP id z73so41139656oia.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 13:45:40 +0200
-Received: from dev.sbt.siemens.com ([139.16.24.231])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v8DBjdOI021177;
-	Wed, 13 Sep 2017 13:45:39 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Sep 2017 13:45:30 +0200
-Message-Id: <1505303130-14127-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
+	Wed, 13 Sep 2017 04:48:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=wGWzGwRa1qDRiQ6i2XpuUnRZNG14M/WzlVmk+TsSi+I=;
+	b=I/xQtDct1siHt2u4ACiixHbSjRJ42ce5sqBNIc7KlPcwS1EeAv8Kd5b1zEggql8VcD
+	rO3JzZ8kg2/xf06QEON2sbZuvxu9eP+ctYQiNub/L+Bjfi2rp1CXUDzFtXv0DXNNycVL
+	eApEJGmHn53rvZVfmtWQ8No7bjbcm6IIKeO5JFy8MuwFb4iBAsNdeDHxLPTz3yW8X6Ei
+	soocIcWf7W9UWytwJlQ06Yv+7GjBtOKV9+Cn9et0rVJ2eRMXvuLptXP7jhFDr2nkH9wr
+	8cr5vj92Tb81SoU9jzJVMkIl6i5HEBhFVL3dqWg9+E1PRH7ZZUva5tcZV84bZEbY1Z+U
+	83IA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=wGWzGwRa1qDRiQ6i2XpuUnRZNG14M/WzlVmk+TsSi+I=;
+	b=IowuAMdCE8J2F5t3JXShRLnAzw+XhSGC+pAN3zs7FM/VL3WfEJ1w+9xLtKFkmw3cbK
+	qnZX/j2wrXxipwlVqTSsPSMYuXAnokacC4QFwFZVBPJ4YusPhMBrMCLhIxGpJaUqTFvM
+	OJwZIplm5sG0vfLQJBkcfQTJwGlh5jaKFofCQzfKCw46T2mHvv5TwXEKFp7MlltDUdRn
+	kY9C1B8ubrLDtd/+7M+Trf87/3X8Jnfe42JywYZAYwN3eCZBCH56Gz7uvqUYChmSqIOZ
+	gwcQl4SNZVV6DnOyx4eOU6KY1WNBxGpx7UlerEx4/y/ERmd7kcJITrvGvYldhMs5YkJD
+	aYtw==
+X-Gm-Message-State: AHPjjUhYeb1dOEZ1aZQYDo2wsapj+hoDmAWOLzG2WvqSpO7Rhjxo0fbh
+	EbVdz7oeML38G3bG5rU9/n0ThkCDmhSC6tqY1mwkpg==
+X-Google-Smtp-Source: AOwi7QCQioHuSUu+4trh5G5SUIReEqyy7mNr3ZoMcxQB1r7WrIexnVTPGP8kP16zZQW+AvVc6BO4u6urmVe9ewdY5r0=
+X-Received: by 10.202.10.150 with SMTP id k22mr16970930oiy.84.1505303328110;
+	Wed, 13 Sep 2017 04:48:48 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] capnproto: add version 0.6.1
+Received: by 10.157.10.46 with HTTP; Wed, 13 Sep 2017 04:48:47 -0700 (PDT)
+X-Originating-IP: [83.150.126.21]
+In-Reply-To: <CA+chaQeKGd0Q57a+4hax24Tmcv=XtWAzNazC47OBzdf4djX7fA@mail.gmail.com>
+References: <20170913110447.18816-1-brgl@bgdev.pl>
+	<CA+chaQeKGd0Q57a+4hax24Tmcv=XtWAzNazC47OBzdf4djX7fA@mail.gmail.com>
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+Date: Wed, 13 Sep 2017 13:48:47 +0200
+Message-ID: <CAMRc=Mdg8BwYvbuJ8rqzXH-5dBmBP0HBgerZCXS-ap7YP=VXGA@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] ceres-solver: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,51 +59,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 11:45:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 13 Sep 2017 11:48:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- .../recipes-devtools/capnproto/capnproto_0.6.1.bb  | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+2017-09-13 13:39 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
+> Don't use github archives as they might get regenerated from time to time.
+>
 
-diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
-new file mode 100644
-index 0000000..d900fae
---- /dev/null
-+++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "Cap'n Proto serialization/RPC system"
-+DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. "
-+HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
-+SECTION = "console/tools"
-+LICENSE = "MIT"
-+
-+PACKAGE_BEFORE_PN = "${PN}-compiler"
-+
-+RDEPENDS_${PN}-dev += "${PN}-compiler"
-+
-+LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
-+
-+SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
-+
-+SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
-+
-+EXTRA_OECMAKE += "\
-+	-DBUILD_TESTING=OFF \
-+  "
-+
-+inherit cmake
-+
-+S = "${WORKDIR}/git/c++"
-+
-+FILES_${PN}-dev += "${libdir}/cmake"
-+FILES_${PN}-compiler = "${bindir}"
-+
-+BBCLASSEXTEND = "native nativesdk"
--- 
-2.1.4
+What do I calculate the checksums from when not using tarballs?
 
+Best regards,
+Bartosz Golaszewski
 
