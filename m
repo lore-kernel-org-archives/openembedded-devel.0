@@ -1,23 +1,27 @@
 Return-Path: <Wenzong.Fan@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1512578585
+	by mail.openembedded.org (Postfix) with ESMTP id 2870F785B3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 03:10:56 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8D3Avjl013438
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Tue, 12 Sep 2017 20:10:57 -0700
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Tue, 12 Sep 2017 20:10:56 -0700
-From: <wenzong.fan@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <Joe_MacDonald@mentor.com>
-Date: Tue, 12 Sep 2017 20:10:57 -0700
-Message-ID: <20170913031057.65309-1-wenzong.fan@windriver.com>
-X-Mailer: git-send-email 2.13.0
+	Wed, 13 Sep 2017 03:21:00 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8D3L2Ui013616
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 12 Sep 2017 20:21:02 -0700
+Received: from [128.224.162.147] (128.224.162.147) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 12 Sep 2017 20:21:01 -0700
+To: <openembedded-devel@lists.openembedded.org>
+References: <20170907094920.191059-1-wenzong.fan@windriver.com>
+From: wenzong fan <wenzong.fan@windriver.com>
+Message-ID: <7c50c6f1-e834-f2a2-1ebd-33e411deea8b@windriver.com>
+Date: Wed, 13 Sep 2017 11:21:47 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] tcpdump: update to 4.9.2 to fix CVEs
+In-Reply-To: <20170907094920.191059-1-wenzong.fan@windriver.com>
+Subject: Re: [meta-networking][PATCH] tcpdump: fix CVE-2017-11541, 11542, 11543
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,134 +34,256 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 03:10:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 13 Sep 2017 03:21:01 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 7bit
 
-From: Wenzong Fan <wenzong.fan@windriver.com>
+Please ignore this patch, the fixes has been included by:
 
-Refer to http://www.tcpdump.org/tcpdump-changes.txt:
+   [oe] [meta-networking][PATCH] tcpdump: update to 4.9.2 to fix CVEs
 
-Fix buffer overflow vulnerabilities:
-  CVE-2017-11543 (SLIP)
-  CVE-2017-13011 (bittok2str_internal)
-Fix infinite loop vulnerabilities:
-  CVE-2017-12989 (RESP)
-  CVE-2017-12990 (ISAKMP)
-  CVE-2017-12995 (DNS)
-  CVE-2017-12997 (LLDP)
-Fix buffer over-read vulnerabilities:
-  CVE-2017-11541 (safeputs)
-  CVE-2017-11542 (PIMv1)
-  CVE-2017-12893 (SMB/CIFS)
-  CVE-2017-12894 (lookup_bytestring)
-  CVE-2017-12895 (ICMP)
-  CVE-2017-12896 (ISAKMP)
-  CVE-2017-12897 (ISO CLNS)
-  CVE-2017-12898 (NFS)
-  CVE-2017-12899 (DECnet)
-  CVE-2017-12900 (tok2strbuf)
-  CVE-2017-12901 (EIGRP)
-  CVE-2017-12902 (Zephyr)
-  CVE-2017-12985 (IPv6)
-  CVE-2017-12986 (IPv6 routing headers)
-  CVE-2017-12987 (IEEE 802.11)
-  CVE-2017-12988 (telnet)
-  CVE-2017-12991 (BGP)
-  CVE-2017-12992 (RIPng)
-  CVE-2017-12993 (Juniper)
-  CVE-2017-11542 (PIMv1)
-  CVE-2017-11541 (safeputs)
-  CVE-2017-12994 (BGP)
-  CVE-2017-12996 (PIMv2)
-  CVE-2017-12998 (ISO IS-IS)
-  CVE-2017-12999 (ISO IS-IS)
-  CVE-2017-13000 (IEEE 802.15.4)
-  CVE-2017-13001 (NFS)
-  CVE-2017-13002 (AODV)
-  CVE-2017-13003 (LMP)
-  CVE-2017-13004 (Juniper)
-  CVE-2017-13005 (NFS)
-  CVE-2017-13006 (L2TP)
-  CVE-2017-13007 (Apple PKTAP)
-  CVE-2017-13008 (IEEE 802.11)
-  CVE-2017-13009 (IPv6 mobility)
-  CVE-2017-13010 (BEEP)
-  CVE-2017-13012 (ICMP)
-  CVE-2017-13013 (ARP)
-  CVE-2017-13014 (White Board)
-  CVE-2017-13015 (EAP)
-  CVE-2017-11543 (SLIP)
-  CVE-2017-13016 (ISO ES-IS)
-  CVE-2017-13017 (DHCPv6)
-  CVE-2017-13018 (PGM)
-  CVE-2017-13019 (PGM)
-  CVE-2017-13020 (VTP)
-  CVE-2017-13021 (ICMPv6)
-  CVE-2017-13022 (IP)
-  CVE-2017-13023 (IPv6 mobility)
-  CVE-2017-13024 (IPv6 mobility)
-  CVE-2017-13025 (IPv6 mobility)
-  CVE-2017-13026 (ISO IS-IS)
-  CVE-2017-13027 (LLDP)
-  CVE-2017-13028 (BOOTP)
-  CVE-2017-13029 (PPP)
-  CVE-2017-13030 (PIM)
-  CVE-2017-13031 (IPv6 fragmentation header)
-  CVE-2017-13032 (RADIUS)
-  CVE-2017-13033 (VTP)
-  CVE-2017-13034 (PGM)
-  CVE-2017-13035 (ISO IS-IS)
-  CVE-2017-13036 (OSPFv3)
-  CVE-2017-13037 (IP)
-  CVE-2017-13038 (PPP)
-  CVE-2017-13039 (ISAKMP)
-  CVE-2017-13040 (MPTCP)
-  CVE-2017-13041 (ICMPv6)
-  CVE-2017-13042 (HNCP)
-  CVE-2017-13043 (BGP)
-  CVE-2017-13044 (HNCP)
-  CVE-2017-13045 (VQP)
-  CVE-2017-13046 (BGP)
-  CVE-2017-13047 (ISO ES-IS)
-  CVE-2017-13048 (RSVP)
-  CVE-2017-13049 (Rx)
-  CVE-2017-13050 (RPKI-Router)
-  CVE-2017-13051 (RSVP)
-  CVE-2017-13052 (CFM)
-  CVE-2017-13053 (BGP)
-  CVE-2017-13054 (LLDP)
-  CVE-2017-13055 (ISO IS-IS)
-  CVE-2017-13687 (Cisco HDLC)
-  CVE-2017-13688 (OLSR)
-  CVE-2017-13689 (IKEv1)
-  CVE-2017-13690 (IKEv2)
-  CVE-2017-13725 (IPv6 routing headers)
+Thanks
+Wenzong
 
-Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
----
- .../recipes-support/tcpdump/{tcpdump_4.9.1.bb => tcpdump_4.9.2.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/tcpdump/{tcpdump_4.9.1.bb => tcpdump_4.9.2.bb} (90%)
-
-diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
-similarity index 90%
-rename from meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-rename to meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
-index 40106975e..d38540e34 100644
---- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-+++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.2.bb
-@@ -12,8 +12,8 @@ SRC_URI = " \
-     file://run-ptest \
- "
- 
--SRC_URI[md5sum] = "1e0293210b0dea5ef18e88e4150394b7"
--SRC_URI[sha256sum] = "f9448cf4deb2049acf713655c736342662e652ef40dbe0a8f6f8d5b9ce5bd8f3"
-+SRC_URI[md5sum] = "9bbc1ee33dab61302411b02dd0515576"
-+SRC_URI[sha256sum] = "798b3536a29832ce0cbb07fafb1ce5097c95e308a6f592d14052e1ef1505fe79"
- 
- export LIBS=" -lpcap"
- 
--- 
-2.13.0
-
+On 09/07/2017 05:49 PM, wenzong.fan@windriver.com wrote:
+> From: Wenzong Fan <wenzong.fan@windriver.com>
+> 
+> Backport patches for fixing:
+> - CVE-2017-11541:
+>    https://nvd.nist.gov/vuln/detail/CVE-2017-11541
+>    https://github.com/the-tcpdump-group/tcpdump/commit/21d702a136c5c16882e368af7c173df728242280
+> 
+> - CVE-2017-11542:
+>    https://nvd.nist.gov/vuln/detail/CVE-2017-11542
+>    https://github.com/the-tcpdump-group/tcpdump/commit/bed48062a64fca524156d7684af19f5b4a116fae
+> 
+> - CVE-2017-11543:
+>    https://nvd.nist.gov/vuln/detail/CVE-2017-11543
+>    https://github.com/the-tcpdump-group/tcpdump/commit/7039327875525278d17edee59720e29a3e76b7b3
+> 
+> The tests/* changes dropped to workaround patch error:
+>    File tests/*.pcap: git binary diffs are not supported.
+> 
+> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> ---
+>   ...541-In-safeputs-check-the-length-before-c.patch | 49 +++++++++++++
+>   ...1-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch | 43 +++++++++++
+>   ...543-Make-sure-the-SLIP-direction-octet-is.patch | 85 ++++++++++++++++++++++
+>   .../recipes-support/tcpdump/tcpdump_4.9.1.bb       |  3 +
+>   4 files changed, 180 insertions(+)
+>   create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch
+>   create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
+>   create mode 100644 meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
+> 
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch
+> new file mode 100644
+> index 000000000..a83214b02
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch
+> @@ -0,0 +1,49 @@
+> +From 21d702a136c5c16882e368af7c173df728242280 Mon Sep 17 00:00:00 2001
+> +From: Guy Harris <guy@alum.mit.edu>
+> +Date: Tue, 7 Feb 2017 11:40:36 -0800
+> +Subject: [PATCH] CVE-2017-11541: In safeputs(), check the length before
+> + checking for a NUL terminator.
+> +
+> +safeputs() doesn't do packet bounds checking of its own; it assumes that
+> +the caller has checked the availability in the packet data of all maxlen
+> +bytes of data.  This means we should check that we're within the
+> +specified limit before looking at the byte.
+> +
+> +This fixes a buffer over-read discovered by Kamil Frankowicz.
+> +
+> +Add a test using the capture file supplied by the reporter(s).
+> +
+> +CVE: CVE-2017-11541
+> +
+> +Upstream-Status: Backport
+> +https://github.com/the-tcpdump-group/tcpdump/commit/21d702a136c5c16882e368af7c173df728242280
+> +
+> +Drop the tests/* changes to workaroud patch error:
+> +File tests/hoobr_safeputs.pcap: git binary diffs are not supported.
+> +
+> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> +---
+> + tests/TESTLIST            |   1 +
+> + tests/hoobr_safeputs.out  |   2 ++
+> + tests/hoobr_safeputs.pcap | Bin 0 -> 88 bytes
+> + util-print.c              |   2 +-
+> + 4 files changed, 4 insertions(+), 1 deletion(-)
+> + create mode 100644 tests/hoobr_safeputs.out
+> + create mode 100644 tests/hoobr_safeputs.pcap
+> +
+> +diff --git a/util-print.c b/util-print.c
+> +index 394e7d59..ec3e8de8 100644
+> +--- a/util-print.c
+> ++++ b/util-print.c
+> +@@ -904,7 +904,7 @@ safeputs(netdissect_options *ndo,
+> + {
+> + 	u_int idx = 0;
+> +
+> +-	while (*s && idx < maxlen) {
+> ++	while (idx < maxlen && *s) {
+> + 		safeputchar(ndo, *s);
+> + 		idx++;
+> + 		s++;
+> +--
+> +2.13.0
+> +
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
+> new file mode 100644
+> index 000000000..a177e7c0b
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
+> @@ -0,0 +1,43 @@
+> +From bed48062a64fca524156d7684af19f5b4a116fae Mon Sep 17 00:00:00 2001
+> +From: Guy Harris <guy@alum.mit.edu>
+> +Date: Tue, 7 Feb 2017 11:10:04 -0800
+> +Subject: [PATCH] CVE-2017-11542/PIMv1: Add a bounds check.
+> +
+> +This fixes a buffer over-read discovered by Kamil Frankowicz.
+> +
+> +Add a test using the capture file supplied by the reporter(s).
+> +
+> +CVE: CVE-2017-11542
+> +
+> +Upstream-Status: Backport
+> +https://github.com/the-tcpdump-group/tcpdump/commit/bed48062a64fca524156d7684af19f5b4a116fae
+> +
+> +Drop the tests/* changes to workaroud patch error:
+> +File tests/hoobr_pimv1.pcap: git binary diffs are not supported.
+> +
+> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> +---
+> + print-pim.c            |   1 +
+> + tests/TESTLIST         |   1 +
+> + tests/hoobr_pimv1.out  |  25 +++++++++++++++++++++++++
+> + tests/hoobr_pimv1.pcap | Bin 0 -> 3321 bytes
+> + 4 files changed, 27 insertions(+)
+> + create mode 100644 tests/hoobr_pimv1.out
+> + create mode 100644 tests/hoobr_pimv1.pcap
+> +
+> +diff --git a/print-pim.c b/print-pim.c
+> +index 25525953..ed880ae7 100644
+> +--- a/print-pim.c
+> ++++ b/print-pim.c
+> +@@ -306,6 +306,7 @@ pimv1_print(netdissect_options *ndo,
+> + 			pimv1_join_prune_print(ndo, &bp[8], len - 8);
+> + 		break;
+> + 	}
+> ++	ND_TCHECK(bp[4]);
+> + 	if ((bp[4] >> 4) != 1)
+> + 		ND_PRINT((ndo, " [v%d]", bp[4] >> 4));
+> + 	return;
+> +
+> +--
+> +2.13.0
+> +
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
+> new file mode 100644
+> index 000000000..36e3f6b0d
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
+> @@ -0,0 +1,85 @@
+> +From 7039327875525278d17edee59720e29a3e76b7b3 Mon Sep 17 00:00:00 2001
+> +From: Guy Harris <guy@alum.mit.edu>
+> +Date: Fri, 17 Mar 2017 12:49:04 -0700
+> +Subject: [PATCH] CVE-2017-11543/Make sure the SLIP direction octet is valid.
+> +
+> +Report if it's not, and don't use it as an out-of-bounds index into an
+> +array.
+> +
+> +This fixes a buffer overflow discovered by Wilfried Kirsch.
+> +
+> +Add a test using the capture file supplied by the reporter(s), modified
+> +so the capture file won't be rejected as an invalid capture.
+> +
+> +CVE: CVE-2017-11543
+> +
+> +Upstream-Status: Backport
+> +https://github.com/the-tcpdump-group/tcpdump/commit/7039327875525278d17edee59720e29a3e76b7b3
+> +
+> +Drop the tests/* changes to workaroud patch error:
+> +File tests/slip-bad-direction.pcap: git binary diffs are not supported.
+> +
+> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
+> +---
+> + print-sl.c                    |  25 +++++++++++++++++++++++--
+> + tests/TESTLIST                |   3 +++
+> + tests/slip-bad-direction.out  |   1 +
+> + tests/slip-bad-direction.pcap | Bin 0 -> 79 bytes
+> + 4 files changed, 27 insertions(+), 2 deletions(-)
+> + create mode 100644 tests/slip-bad-direction.out
+> + create mode 100644 tests/slip-bad-direction.pcap
+> +
+> +diff --git a/print-sl.c b/print-sl.c
+> +index 3fd7e898..a02077b3 100644
+> +--- a/print-sl.c
+> ++++ b/print-sl.c
+> +@@ -131,8 +131,21 @@ sliplink_print(netdissect_options *ndo,
+> + 	u_int hlen;
+> +
+> + 	dir = p[SLX_DIR];
+> +-	ND_PRINT((ndo, dir == SLIPDIR_IN ? "I " : "O "));
+> ++	switch (dir) {
+> +
+> ++	case SLIPDIR_IN:
+> ++		ND_PRINT((ndo, "I "));
+> ++		break;
+> ++
+> ++	case SLIPDIR_OUT:
+> ++		ND_PRINT((ndo, "O "));
+> ++		break;
+> ++
+> ++	default:
+> ++		ND_PRINT((ndo, "Invalid direction %d ", dir));
+> ++		dir = -1;
+> ++		break;
+> ++	}
+> + 	if (ndo->ndo_nflag) {
+> + 		/* XXX just dump the header */
+> + 		register int i;
+> +@@ -155,13 +168,21 @@ sliplink_print(netdissect_options *ndo,
+> + 		 * has restored the IP header copy to IPPROTO_TCP.
+> + 		 */
+> + 		lastconn = ((const struct ip *)&p[SLX_CHDR])->ip_p;
+> ++		ND_PRINT((ndo, "utcp %d: ", lastconn));
+> ++		if (dir == -1) {
+> ++			/* Direction is bogus, don't use it */
+> ++			return;
+> ++		}
+> + 		hlen = IP_HL(ip);
+> + 		hlen += TH_OFF((const struct tcphdr *)&((const int *)ip)[hlen]);
+> + 		lastlen[dir][lastconn] = length - (hlen << 2);
+> +-		ND_PRINT((ndo, "utcp %d: ", lastconn));
+> + 		break;
+> +
+> + 	default:
+> ++		if (dir == -1) {
+> ++			/* Direction is bogus, don't use it */
+> ++			return;
+> ++		}
+> + 		if (p[SLX_CHDR] & TYPE_COMPRESSED_TCP) {
+> + 			compressed_sl_print(ndo, &p[SLX_CHDR], ip,
+> + 			    length, dir);
+> +
+> +--
+> +2.13.0
+> +
+> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
+> index 261c78427..668d6f5e1 100644
+> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
+> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
+> @@ -11,6 +11,9 @@ SRC_URI = " \
+>       file://tcpdump-configure-dlpi.patch \
+>       file://add-ptest.patch \
+>       file://run-ptest \
+> +    file://0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch \
+> +    file://0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch \
+> +    file://0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch \
+>   "
+>   
+>   SRC_URI[md5sum] = "1e0293210b0dea5ef18e88e4150394b7"
+> 
 
