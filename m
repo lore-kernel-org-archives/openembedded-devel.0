@@ -1,49 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
-	[209.85.213.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C3AA6786C0
+Return-Path: <mark.hatle@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BC8F78686
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 16:07:42 +0000 (UTC)
-Received: by mail-vk0-f66.google.com with SMTP id t10so162527vke.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 09:07:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=jhn/nya7+Lt2/B89VCbxR8sgkSzcXvf0Kp05W181h5E=;
-	b=L0lt2HR6HRT1qhpA8WsZXWZLHDmhw7EXfJwSw2evB9Z+bI+8YP7+oSSyUSwB9agfo9
-	ejlYHnb5pMTT61aF+IU0Ux3OoWOcMtpZkzHafI7JhRRo8hqQI0AQF8bD3TDwCIdLfvHa
-	a6TLhqYbKl5TOZA8r1Oxn0eeeCuUTAbQBZVBDdeytYoZj+zF4WmedHPs5OUZJu7lfPNA
-	js/wEHNbsl4aqG2Ngqn6UXaXBSS2UU9bgZKAzckspidlasJQkRLz54KrWLrl5F/JnA3s
-	DNhaZBrzpaEE5AkKwceRlIOq10dlcyubuRv9MSRpf0KmHKXQy3Y5tCKQOXuReFWVHMYR
-	+XTQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=jhn/nya7+Lt2/B89VCbxR8sgkSzcXvf0Kp05W181h5E=;
-	b=mJs8YpEvZN5hd8kKoL0XyKT9Nqs1iQZvlkkE3jIv/uolwgRWGM5rmnHqhJAzZISXrC
-	UYBxsldZTj3B47leEFIRRX5hCuihRIB4ODWfpwD8GOWNyoZt4fvsdg8qUE9ERNqf0GQh
-	7yhXM7HguyeSzZ/T2DIKXbGtt4an2mLCWZz13qG2ExvApH7B9yOuNhZIaYZ4kDjZqUoi
-	ilQPlkbef9BXXyNrZutM0/8Mcb7a0/2TOzn1GC7GDopgY/dzBP/ExBzSW4ejLFF/Hnyr
-	dsjzXsHDJI+kPwUhN8hMvEgN3beJEmHUnVITslLW+uNCEg2nV4p+rij6/aJJNxWl+Gmg
-	5bNQ==
-X-Gm-Message-State: AHPjjUjdX5tsCADIDmU0aSCsjLn+lEQbqEB4ZdI1MMDJJ1O3RB7S6WhW
-	EHy91pFnxgJiWrVgQmhQcH2cxYyuU7bhwPA1ZBw=
-X-Google-Smtp-Source: AOwi7QCPWnqv/xmVI+FEnNTaw8Sr6ys9fvIhTqyGaag0Gl+XLJ1/EOp9jiVJpGwGztfh6QQg1LBjcyUjVFDVTTUHEN8=
-X-Received: by 10.31.41.136 with SMTP id p130mr13281100vkp.122.1505318863854; 
-	Wed, 13 Sep 2017 09:07:43 -0700 (PDT)
+	Wed, 13 Sep 2017 16:56:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8DGu8lQ000602
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 13 Sep 2017 09:56:08 -0700
+Received: from soho-mhatle-m.local (172.25.36.226) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 13 Sep 2017 09:56:07 -0700
+To: Martin Jansa <martin.jansa@gmail.com>, Kai Kang <kai.kang@windriver.com>
+References: <20170913093821.12746-1-kai.kang@windriver.com>
+	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
+From: Mark Hatle <mark.hatle@windriver.com>
+Organization: Wind River Systems
+Message-ID: <5cbf0e14-1b03-b621-65b8-c11579bdef5a@windriver.com>
+Date: Wed, 13 Sep 2017 11:56:19 -0500
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:52.0)
+	Gecko/20100101 Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 09:07:43 -0700 (PDT)
-In-Reply-To: <1dac1c4e37491a36fd3046a9816cd7a89a91e925.1505317801.git.fabien.lahoudere@collabora.co.uk>
-References: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
-	<1dac1c4e37491a36fd3046a9816cd7a89a91e925.1505317801.git.fabien.lahoudere@collabora.co.uk>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 18:07:43 +0200
-Message-ID: <CA+chaQfk--dM8ZrC4jVvuYOUzRgixDYWqq9uiA_Lfn_geLDmYA@mail.gmail.com>
-To: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v3 1/2] libupnp: Add recipe for version 1.8.2
+Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,67 +36,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 16:07:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 13 Sep 2017 16:56:08 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Please don't use github archives which can be regenerated in some cases.
-Safer to use just git fetcher.
+On 9/13/17 4:54 AM, Martin Jansa wrote:
+> All other LSB related recipes are in oe-core, why should libpng12 be
+> different and live in meta-oe?
 
-On Wed, Sep 13, 2017 at 5:58 PM, Fabien Lahoudere <
-fabien.lahoudere@collabora.co.uk> wrote:
+We had talked about some of this before, and I thought the OE/YP decision was to
+create a new meta-lsb to carry any packages that were clearly obsolete (and thus
+not in oe-core anymore), but still needed for LSB testing.
 
-> This version is needed for gerbera, however this version break mpd.
-> So we keep both recipe.
->
-> Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
-> ---
->  .../recipes-connectivity/libupnp/libupnp1.8.bb     | 22
-> ++++++++++++++++++++++
->  1 file changed, 22 insertions(+)
->  create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp1.
-> 8.bb
->
-> diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
-> b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
-> new file mode 100644
-> index 000000000..5b0e72d42
-> --- /dev/null
-> +++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
-> @@ -0,0 +1,22 @@
-> +SUMMARY = "Portable SDK for UPnP* Devices"
-> +DESCRIPTION = "The Portable SDK for UPnP Devices is an SDK for
-> development of \
-> +UPnP device and control point applications. It consists of the core UPnP \
-> +protocols along with a UPnP-specific eXtensible Markup Language (XML)
-> parser \
-> +supporting the Document Object Model (DOM) Level 2 API and an optional, \
-> +integrated mini web server for serving UPnP related documents."
-> +HOMEPAGE = "http://pupnp.sourceforge.net/"
-> +LICENSE = "BSD"
-> +
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
-> +
-> +SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-1.8.2.
-> tar.gz "
-> +
-> +SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
-> +SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd6
-> 9f049daba11d71bbb5d715336e00106cb4"
-> +
-> +PV="1.8.2"
-> +S="${WORKDIR}/pupnp-release-${PV}"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF += "--enable-reuseaddr"
-> \ No newline at end of file
-> --
-> 2.11.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+That way if anyone cared about the results they could contribute..  It also
+SHOULD be fairly low maintenance.
+
+This may be the first (only?) package we need to do that with.. similar to the
+meta-gplv2.
+
+--Mark
+
+> On Wed, Sep 13, 2017 at 11:38 AM, <kai.kang@windriver.com> wrote:
+> 
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> libpng12 is removed from oe-core. But lsb test 5.0 still requires
+>> libpng12. So add it back.
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>  meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb | 36
+>> +++++++++++++++++++++++++++
+>>  1 file changed, 36 insertions(+)
+>>  create mode 100644 meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
+>>
+>> diff --git a/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
+>> b/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
+>> new file mode 100644
+>> index 000000000..9f74f5fdb
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
+>> @@ -0,0 +1,36 @@
+>> +SUMMARY = "PNG image format decoding library"
+>> +HOMEPAGE = "http://www.libpng.org/"
+>> +SECTION = "libs"
+>> +LICENSE = "Libpng"
+>> +LIC_FILES_CHKSUM = "file://LICENSE;md5=597b8a91994a3e27ae6aa79bf02677d9 \
+>> +                    file://png.h;beginline=19;endline=109;md5=
+>> 166406397718925b660f0033f7558ef7"
+>> +DEPENDS = "zlib"
+>> +
+>> +PN = "libpng12"
+>> +S = "${WORKDIR}/libpng-${PV}"
+>> +
+>> +SRC_URI = "${GENTOO_MIRROR}/libpng-${PV}.tar.xz"
+>> +
+>> +SRC_URI[md5sum] = "307052e5e8af97b82b17b64fb1b3677a"
+>> +SRC_URI[sha256sum] = "0f4620e11fa283fedafb474427c8e9
+>> 6bf149511a1804bdc47350963ae5cf54d8"
+>> +
+>> +UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/libpng/files/
+>> libpng12/"
+>> +UPSTREAM_CHECK_REGEX = "/libpng12/(?P<pver>(\d+[\.\-_]*)+)/"
+>> +
+>> +BINCONFIG_GLOB = "${PN}-config"
+>> +
+>> +inherit autotools binconfig pkgconfig
+>> +
+>> +do_install_append() {
+>> +       # The follow link files link to corresponding png12*.h and
+>> libpng12* files
+>> +       # They conflict with higher verison, so drop them
+>> +       rm ${D}/${includedir}/png.h
+>> +       rm ${D}/${includedir}/pngconf.h
+>> +
+>> +       rm ${D}/${libdir}/libpng.la
+>> +       rm ${D}/${libdir}/libpng.so
+>> +       rm ${D}/${libdir}/libpng.a || true
+>> +       rm ${D}/${libdir}/pkgconfig/libpng.pc
+>> +
+>> +       rm ${D}/${bindir}/libpng-config
+>> +}
+>> --
+>> 2.14.1
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+
 
