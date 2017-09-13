@@ -1,16 +1,20 @@
 Return-Path: <fabien.lahoudere@collabora.co.uk>
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C1217868B
+	by mail.openembedded.org (Postfix) with ESMTP id 47AEC786A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 15:58:21 +0000 (UTC)
+	Wed, 13 Sep 2017 15:58:23 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aragua) with ESMTPSA id 0B69E2607DE
+	(Authenticated sender: aragua) with ESMTPSA id 491862607DE
 From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Sep 2017 17:58:11 +0200
-Message-Id: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
+Date: Wed, 13 Sep 2017 17:58:12 +0200
+Message-Id: <1dac1c4e37491a36fd3046a9816cd7a89a91e925.1505317801.git.fabien.lahoudere@collabora.co.uk>
 X-Mailer: git-send-email 2.11.0
-Subject: [meta-multimedia][PATCH v3 0/2] Add libupnp1.8 recipe
+In-Reply-To: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
+References: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
+In-Reply-To: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
+References: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
+Subject: [meta-multimedia][PATCH v3 1/2] libupnp: Add recipe for version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -23,46 +27,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 15:58:21 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 15:58:23 -0000
 
-In order to build gerbera, we need to support libupnp >= 1.8.
-However mpd won't build with this version probably due to API break.
+This version is needed for gerbera, however this version break mpd.
+So we keep both recipe.
 
-So we add a new recipe libupnp1.8 to be able to use both version.
-Both version can be run in parallel.
-
-?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-neon/libupnp_1.6.21-r0_armhf.deb 
-drwxrwxrwx root/root         0 2017-09-13 17:26 ./
-drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/
-drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/lib/
--rwxr-xr-x root/root     31600 2017-09-13 17:26 ./usr/lib/libixml.so.2.0.8
--rwxr-xr-x root/root     17912 2017-09-13 17:26 ./usr/lib/libthreadutil.so.6.0.4
--rwxr-xr-x root/root    117676 2017-09-13 17:26 ./usr/lib/libupnp.so.6.3.4
-lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libixml.so.2 -> libixml.so.2.0.8
-lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libthreadutil.so.6 -> libthreadutil.so.6.0.4
-lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libupnp.so.6 -> libupnp.so.6.3.4
-?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-neon/libupnp1.8_1.8.2-r0_armhf.deb 
-drwxrwxrwx root/root         0 2017-09-13 17:43 ./
-drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/
-drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/lib/
--rwxr-xr-x root/root     35696 2017-09-13 17:43 ./usr/lib/libixml.so.10.0.1
--rwxr-xr-x root/root    155128 2017-09-13 17:43 ./usr/lib/libupnp.so.10.1.1
-lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libixml.so.10 -> libixml.so.10.0.1
-lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libupnp.so.10 -> libupnp.so.10.1.1
-
-mpd and gerbera have been built successfully with this fix.
-
-The patch also clean a bit gerbera recipe and fix dependency issue.
-
-Fabien Lahoudere (2):
-  libupnp: Add recipe for version 1.8.2
-  gerbera: clean recipe
-
+Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+---
  .../recipes-connectivity/libupnp/libupnp1.8.bb     | 22 ++++++++++++++++++++++
- .../recipes-multimedia/gerbera/gerbera_git.bb      | 12 ++++++------
- 2 files changed, 28 insertions(+), 6 deletions(-)
+ 1 file changed, 22 insertions(+)
  create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
 
+diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+new file mode 100644
+index 000000000..5b0e72d42
+--- /dev/null
++++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Portable SDK for UPnP* Devices"
++DESCRIPTION = "The Portable SDK for UPnP Devices is an SDK for development of \
++UPnP device and control point applications. It consists of the core UPnP \
++protocols along with a UPnP-specific eXtensible Markup Language (XML) parser \
++supporting the Document Object Model (DOM) Level 2 API and an optional, \
++integrated mini web server for serving UPnP related documents."
++HOMEPAGE = "http://pupnp.sourceforge.net/"
++LICENSE = "BSD"
++
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
++
++SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-1.8.2.tar.gz "
++
++SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
++SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd69f049daba11d71bbb5d715336e00106cb4"
++
++PV="1.8.2"
++S="${WORKDIR}/pupnp-release-${PV}"
++
++inherit autotools
++
++EXTRA_OECONF += "--enable-reuseaddr"
+\ No newline at end of file
 -- 
 2.11.0
 
