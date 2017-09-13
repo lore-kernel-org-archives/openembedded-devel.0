@@ -1,48 +1,48 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-oi0-f42.google.com (mail-oi0-f42.google.com
-	[209.85.218.42])
-	by mail.openembedded.org (Postfix) with ESMTP id E871678624
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ua0-f170.google.com (mail-ua0-f170.google.com
+	[209.85.217.170])
+	by mail.openembedded.org (Postfix) with ESMTP id EAD3A78661
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 11:48:46 +0000 (UTC)
-Received: by mail-oi0-f42.google.com with SMTP id z73so41139656oia.2
+	Wed, 13 Sep 2017 11:53:36 +0000 (UTC)
+Received: by mail-ua0-f170.google.com with SMTP id l24so18549264uaa.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 04:48:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	Wed, 13 Sep 2017 04:53:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=wGWzGwRa1qDRiQ6i2XpuUnRZNG14M/WzlVmk+TsSi+I=;
-	b=I/xQtDct1siHt2u4ACiixHbSjRJ42ce5sqBNIc7KlPcwS1EeAv8Kd5b1zEggql8VcD
-	rO3JzZ8kg2/xf06QEON2sbZuvxu9eP+ctYQiNub/L+Bjfi2rp1CXUDzFtXv0DXNNycVL
-	eApEJGmHn53rvZVfmtWQ8No7bjbcm6IIKeO5JFy8MuwFb4iBAsNdeDHxLPTz3yW8X6Ei
-	soocIcWf7W9UWytwJlQ06Yv+7GjBtOKV9+Cn9et0rVJ2eRMXvuLptXP7jhFDr2nkH9wr
-	8cr5vj92Tb81SoU9jzJVMkIl6i5HEBhFVL3dqWg9+E1PRH7ZZUva5tcZV84bZEbY1Z+U
-	83IA==
+	:cc; bh=IHBP/vf3ui54RmIce6XDSGgXP68IPEhAQAONqFwrMUc=;
+	b=BNa1Z/a6c6/pAtJezfR3yXanrYyOmvKX2Mvj/3cPM+z/c3yQpRKE0rnaNe+/+2Jxhu
+	cJ/Aag75wymCdZvFnq5N63dQzu9T1w+qPDQ4dfw75TjF7vyVqYeFd0yTJ3iqeO3V6uET
+	uxoS0pO2Nehyiivrz4WSxgszsxph1IofiGnGdgVlflyhktp+Q87q9KIBNZB1WGL+Ltyg
+	Aq7ClRPH4N7qXoDm+nq47Gz0ufS1bokLBDzci0ulBoe/7n2jyYuO4kaXtY9EWWC34PPn
+	BQr4wUqBZs+LUnxfij04d6jIxIFxzmLx+yEcsDfzi1AZ85DXniPvjRwr0WIgaRzjZlaY
+	i6Ug==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=wGWzGwRa1qDRiQ6i2XpuUnRZNG14M/WzlVmk+TsSi+I=;
-	b=IowuAMdCE8J2F5t3JXShRLnAzw+XhSGC+pAN3zs7FM/VL3WfEJ1w+9xLtKFkmw3cbK
-	qnZX/j2wrXxipwlVqTSsPSMYuXAnokacC4QFwFZVBPJ4YusPhMBrMCLhIxGpJaUqTFvM
-	OJwZIplm5sG0vfLQJBkcfQTJwGlh5jaKFofCQzfKCw46T2mHvv5TwXEKFp7MlltDUdRn
-	kY9C1B8ubrLDtd/+7M+Trf87/3X8Jnfe42JywYZAYwN3eCZBCH56Gz7uvqUYChmSqIOZ
-	gwcQl4SNZVV6DnOyx4eOU6KY1WNBxGpx7UlerEx4/y/ERmd7kcJITrvGvYldhMs5YkJD
-	aYtw==
-X-Gm-Message-State: AHPjjUhYeb1dOEZ1aZQYDo2wsapj+hoDmAWOLzG2WvqSpO7Rhjxo0fbh
-	EbVdz7oeML38G3bG5rU9/n0ThkCDmhSC6tqY1mwkpg==
-X-Google-Smtp-Source: AOwi7QCQioHuSUu+4trh5G5SUIReEqyy7mNr3ZoMcxQB1r7WrIexnVTPGP8kP16zZQW+AvVc6BO4u6urmVe9ewdY5r0=
-X-Received: by 10.202.10.150 with SMTP id k22mr16970930oiy.84.1505303328110;
-	Wed, 13 Sep 2017 04:48:48 -0700 (PDT)
+	bh=IHBP/vf3ui54RmIce6XDSGgXP68IPEhAQAONqFwrMUc=;
+	b=uKlCqrdiqMvyB5h0Dk7pDreKdRa/tuiNDJ6wbMTpt/q0o1qeT1awp4ZQFcImVHV+aJ
+	EpAqQKhqaa1pH1L0hLS1JBG84p13hobOl2CpcwiT3/HulTag3J/+V7ypyBYAzzFMBWpQ
+	Yga+mnja/6nsiwoS6fjEDjUPJtWV/Ik31V2/eXA5HtS5SEMm5HAkCe996UKXWcc9Ae0c
+	L1+RsbVvW1Sk5pufQxwfg6Trr43b0jriMANVuaqZyVu1vasUMRvNQXlAntPYdCvuTdWq
+	x8l9HpDDUB6y3ykA8y1RJSHD/Y0GCmbGsaZhUNGJYalkgOIx88osE765w9uQmtkChpb+
+	B75g==
+X-Gm-Message-State: AHPjjUi2VeLOdG++DrrV3BVxZc2/yAD8pSMRsE3PW3VPTSiRL8R0YqYP
+	4ZQ/yJiKqu9mVaAmojApGlwjSEaLG44lnAOWSjg=
+X-Google-Smtp-Source: AOwi7QBFqMPiVNZMbbX2bK19uBOFSDPxNEV8vuX7tZxKM6dVbo7KhTZ02CCy+LEfkZQ72jRKXwn3mSln+vTvkpVMkqI=
+X-Received: by 10.176.77.76 with SMTP id k12mr14941249uag.141.1505303618050;
+	Wed, 13 Sep 2017 04:53:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.157.10.46 with HTTP; Wed, 13 Sep 2017 04:48:47 -0700 (PDT)
-X-Originating-IP: [83.150.126.21]
-In-Reply-To: <CA+chaQeKGd0Q57a+4hax24Tmcv=XtWAzNazC47OBzdf4djX7fA@mail.gmail.com>
+Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 04:53:37 -0700 (PDT)
+In-Reply-To: <CAMRc=Mdg8BwYvbuJ8rqzXH-5dBmBP0HBgerZCXS-ap7YP=VXGA@mail.gmail.com>
 References: <20170913110447.18816-1-brgl@bgdev.pl>
 	<CA+chaQeKGd0Q57a+4hax24Tmcv=XtWAzNazC47OBzdf4djX7fA@mail.gmail.com>
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-Date: Wed, 13 Sep 2017 13:48:47 +0200
-Message-ID: <CAMRc=Mdg8BwYvbuJ8rqzXH-5dBmBP0HBgerZCXS-ap7YP=VXGA@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
+	<CAMRc=Mdg8BwYvbuJ8rqzXH-5dBmBP0HBgerZCXS-ap7YP=VXGA@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 13 Sep 2017 13:53:37 +0200
+Message-ID: <CA+chaQe5UOetfk44y9HqphdssMCv+jbRxsvD3dM4YKEQH8R5UA@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>,
 	Koen Kooi <koen@dominion.thruhere.net>,
 	openembedded-devel <openembedded-devel@lists.openembedded.org>
@@ -59,15 +59,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 11:48:47 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 11:53:37 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-2017-09-13 13:39 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
-> Don't use github archives as they might get regenerated from time to time.
+git fetcher doesn't use SRC_URI checksums, just SRCREV
+
+On Wed, Sep 13, 2017 at 1:48 PM, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+
+> 2017-09-13 13:39 GMT+02:00 Martin Jansa <martin.jansa@gmail.com>:
+> > Don't use github archives as they might get regenerated from time to
+> time.
+> >
 >
-
-What do I calculate the checksums from when not using tarballs?
-
-Best regards,
-Bartosz Golaszewski
+> What do I calculate the checksums from when not using tarballs?
+>
+> Best regards,
+> Bartosz Golaszewski
+>
 
