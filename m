@@ -1,43 +1,22 @@
-Return-Path: <ruslan.bilovol@gmail.com>
-Received: from mail-io0-f193.google.com (mail-io0-f193.google.com
-	[209.85.223.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E049E78647;
-	Wed, 13 Sep 2017 15:40:53 +0000 (UTC)
-Received: by mail-io0-f193.google.com with SMTP id 93so559734iol.4;
-	Wed, 13 Sep 2017 08:40:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=568fV5s2eiVKoQa6KDWEtIy8+es2kf79JWXxc2T312s=;
-	b=ALPXhrX69lf6LALRtnwkAax6eRhzIxm1TXjzVyqDR7Yp/PBl/hSsr0U5264nVg+3PB
-	4CPI3LYkvd+h0UTteYb5u6bhjnsA6V+TQltHjVLfgHkp89uMZsfvRK+nMVTa3sRjA8Lu
-	EJMG30aQgxYNBdITmXlINA5xFEivFu1hJv/hTG10EMULgY9JIGaPuR9wTcTfBQubYsGG
-	CFbVguGo40d7eqy5gOQ6QB/k6lUbKYnQt1zOPFj+CQEMJGKB+plkVLwi9HMsd3qLIn48
-	NcDVuzoP5oFxB1HZ+X7C6efN+KljxUurRL0gPI+9AA9WhK/PkLkD4kCR4vHmmJ9qRXpk
-	C6HA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=568fV5s2eiVKoQa6KDWEtIy8+es2kf79JWXxc2T312s=;
-	b=EvFkkHz1RZ2/U3wmsm8oeIZJAJF17vNjSXEQD2ZdGfNdyzZYNRummOdxWHLJo30hsn
-	YKh3+l4A0Tym0bmEtE/9s7ZNUpSiqP2bS2ut/S0Kg4yQjr+G2hfECfLF74j47Ed9nxc1
-	F+zpBIvXBj1GL7d9wvJlAOaVjR4gLcNiNxNY/4MhZ3QUVLEoqF4GIqSri2tQ4ga6yE93
-	uQ/XmLo6XIAsoOEA/BeyXOGTlc3loPNy9ic84CJaQZACCakKuoCNlgc6ebz7RRh9C1Je
-	LTLV+vdwtFpXpvSsK/YFksVKyfRglIKtkYnBB+D8TgvrHUeCEU0LHBG/dqheo9E6xcP4
-	M+JQ==
-X-Gm-Message-State: AHPjjUj/fGJhmX/iawnh3OUI6f6L7nK0W69cgnt7HC7fBFyHscxIrRdd
-	cqiDFD2P1mY+xZsAyhpKi/CGgUvg/wQmvKq/2Mw=
-X-Google-Smtp-Source: ADKCNb4pAWw1N1UtNgRpRR8Fupc+LjtS2LNPm0a44Yynn1nf0Syl58o5cHBGxtJcp1Ac70e1Uy3C7NQS9Ygial7YaA4=
-X-Received: by 10.107.6.78 with SMTP id 75mr25636500iog.204.1505317254697;
-	Wed, 13 Sep 2017 08:40:54 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.27.133 with HTTP; Wed, 13 Sep 2017 08:40:53 -0700 (PDT)
-In-Reply-To: <37a76fa5-4f25-56dd-9616-4b4b23fbb093@balister.org>
+Return-Path: <philip@balister.org>
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id CB9497868B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 13 Sep 2017 15:56:57 +0000 (UTC)
+Received: (qmail 28561 invoked by uid 1003); 13 Sep 2017 15:56:57 -0000
+Received: from unknown (HELO ?172.16.29.59?) (philip@opensdr.com@67.52.142.5)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	13 Sep 2017 15:56:57 -0000
+To: Ruslan Bilovol <ruslan.bilovol@gmail.com>
 References: <37a76fa5-4f25-56dd-9616-4b4b23fbb093@balister.org>
-From: Ruslan Bilovol <ruslan.bilovol@gmail.com>
-Date: Wed, 13 Sep 2017 18:40:53 +0300
-Message-ID: <CAB=otbS8_F_Yhisc+ybm8X1m3GXBzCK1q16YjrWATDArwVf+Hw@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
+	<CAB=otbS8_F_Yhisc+ybm8X1m3GXBzCK1q16YjrWATDArwVf+Hw@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <7c9348d9-ed4f-7429-d015-839d3bf02e79@balister.org>
+Date: Wed, 13 Sep 2017 08:56:51 -0700
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
+MIME-Version: 1.0
+In-Reply-To: <CAB=otbS8_F_Yhisc+ybm8X1m3GXBzCK1q16YjrWATDArwVf+Hw@mail.gmail.com>
 Cc: Yocto Project <yocto@yoctoproject.org>,
 	"openembedded-members@lists.openembedded.org"
 	<openembedded-members@lists.openembedded.org>, openembedded-architecture
@@ -58,24 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 15:40:54 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 13 Sep 2017 15:56:58 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 7bit
 
-On Thu, Aug 24, 2017 at 9:37 PM, Philip Balister <philip@balister.org> wrote:
-> Once again we will have a developer meeting in Prague the Sunday before
-> ELCE.
->
-> Please go to https://www.openembedded.org/wiki/OEDEM_2017 and add
-> yourself if you are attending and ideas for topics.
->
-> Although it is called a developer meeting, we invite members of the
-> larger community to attend. The core developers are always interested in
-> hearing how OpenEmbedded is used, and what we can do to make it better
-> for building the embedded devices of the future.
+On 09/13/2017 08:40 AM, Ruslan Bilovol wrote:
+> On Thu, Aug 24, 2017 at 9:37 PM, Philip Balister <philip@balister.org> wrote:
+>> Once again we will have a developer meeting in Prague the Sunday before
+>> ELCE.
+>>
+>> Please go to https://www.openembedded.org/wiki/OEDEM_2017 and add
+>> yourself if you are attending and ideas for topics.
+>>
+>> Although it is called a developer meeting, we invite members of the
+>> larger community to attend. The core developers are always interested in
+>> hearing how OpenEmbedded is used, and what we can do to make it better
+>> for building the embedded devices of the future.
+> 
+> Is it free to attend, anything else required except of
+> self-registration on wiki?
 
-Is it free to attend, anything else required except of
-self-registration on wiki?
+Self registration on the wiki is fine. See you in October.
 
-Thanks,
-Ruslan
+Philip
+
+> 
+> Thanks,
+> Ruslan
+> 
 
