@@ -1,55 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 89CC678634
+Return-Path: <rob.woolleywr@gmail.com>
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 1BBB47869B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 21:28:40 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id a137so1010739wma.0
+	Wed, 13 Sep 2017 21:48:21 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id v109so3048907wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 14:28:41 -0700 (PDT)
+	Wed, 13 Sep 2017 14:48:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=M4usviXxEiyAGNzLkoqHIBvhSfQv9D1sZU8VrLVsoxY=;
-	b=dTLYmJXhPNm0qzWZMlkmyklH4Czb3gHjWiUehO/FEs0hrgNadOSciaJ8c/b/JrvpQ9
-	xl96HTn3BReGjwuZApkWM8AqeFiA6puf9Ksa52iJdeQxpLNHIbqAYD6bxIszFuYmyaIq
-	zUZemnvbMUjySz/I3YWfWPoWwPa0/d6jv825X4ZD1+IwnYEC5s9I1kzlvSO9InwtDQTR
-	tnK/EKJ1IrloR7BBC2Ztf4DgeVcOqet6VKyWcq7fqFklOXQbg0lOqWujAFL96tHVjfk1
-	jONZ7gEQbVRq3WKi5vnUQM/+fB6fCAhe5hGfAPj/paIHrU8ayUkPi7WYx+9WddQc1mt6
-	V4Wg==
+	h=mime-version:sender:in-reply-to:references:from:date:message-id
+	:subject:to:cc;
+	bh=SYaljj7tygYd38Kc4OJH6+w1lBm3dcrrY//q6LCvXts=;
+	b=Xfldvfx/J2I1dHEKrLZTbLWylBtk927zrcrO8lJmhYeEj/vDB6UnKBw1fi0l3y3G5X
+	v7WLhI1VXYTL5QLR7KzaCu/sVYuRrfRh2WQHsnsLA5xtZpjF3tw4CgIQBHajyW8NZbeM
+	e33UfzxKdJgsxDduaQLJmMLHbF/Eh5g6GENtUscYD74nO3OTi2REy2Un3oMDHBDBN7nP
+	lPx4MAM6KITLKf936AaG8GTQEWc5WD4+ZUc22GPAqL227YPc84/Gug0Qqdt9qo8uCETb
+	P6ZZocsJq4qdANFv35/ETIbt95F36kNnh2AH1XQtadeRuTxhucBfJkZBW7vQEM8E8ZqE
+	EAwg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=M4usviXxEiyAGNzLkoqHIBvhSfQv9D1sZU8VrLVsoxY=;
-	b=N1z076t3DH4ZaMpVnkjOGSiaUxgkIMoVP1Uov/v4F5W4MMOwicMGWuptmNsu9TUDKy
-	6mS667s+5GgVBw8OegUy8V5SYjA3VyYjICwTdjv/EUXlADozrczcKcdWMxzjycVlDBHe
-	/BisBJk5tHSc65BoT0peOH4mlxd9XfZP7ZyYMhnhBIYk7neeeGESmWHhjfWSE3GqmVM4
-	WXFk1DER7hNDF8M6cvMFvtyT+lTVwn/qaKbE6/BEOoLCvpgQwhvQAIux5dU/5WPSF9ID
-	b7sRUx2byVXeAT4Cke8rmTgU6EMQLivDaOIYuzSXsH1U+CcAZvdGkuzA4qZdnvSSVl0T
-	TUwQ==
-X-Gm-Message-State: AHPjjUhzUR3D5IX2wKHPJXUWKrLvBFjh2luhmPOHLKiMG1iyoPxvMsja
-	f3hU6AerUxzlf/m5
-X-Google-Smtp-Source: AOwi7QBmkp3hwTb0+ZXdgTjGJNonZaSLJZNNhXQk2g3DN6QaYZS62DF8B3/9eOaAMQbUJvreBz1hag==
-X-Received: by 10.28.140.18 with SMTP id o18mr56616wmd.145.1505338120863;
-	Wed, 13 Sep 2017 14:28:40 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	o21sm10601355wrf.31.2017.09.13.14.28.38
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Wed, 13 Sep 2017 14:28:39 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Wed, 13 Sep 2017 23:30:58 +0200
-To: Jose Lamego <jose.a.lamego@linux.intel.com>
-Message-ID: <20170913213058.GF3288@jama>
-References: <20170907094920.191059-1-wenzong.fan@windriver.com>
-	<7c50c6f1-e834-f2a2-1ebd-33e411deea8b@windriver.com>
-	<CA+chaQd8BSz_wHGiG+xf47GQ5f7mNNeCoNRCE8RjL15mwZpzbg@mail.gmail.com>
-	<4fdd7a5c-f984-eea9-a481-3b19e0c1d4f5@linux.intel.com>
+	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
+	:date:message-id:subject:to:cc;
+	bh=SYaljj7tygYd38Kc4OJH6+w1lBm3dcrrY//q6LCvXts=;
+	b=NoU05oZ985QGjn912XuwSz+HvZ8eg1Z4+nKTv7rh6++9CEKAopi8NNxCGdDDApHvy/
+	3ZHbnFeymy5juUcQOvjEoV38vQEtCQaJLIiNXFLeRtnrsToB5TqVgSbacUEr1umyOSlA
+	6rrlWbc7XeewWsX7DOkVk0fNXQbJld2temXpZuCc9+R/RRXDR+GkXaLa3mG8ueSlkY1/
+	QviKeSEjCb29lcMtPpZkL/UJSeTRZiH22G/7JWtjYOAsCt+38JJPtXf+B+TUDBtVPK5B
+	xmXBd/H/ayEy/R282OebMHCfpB0HNWGKmsV3/2EKBmzetl5IIjP9KXsVnCfCWJdGYlIT
+	2isg==
+X-Gm-Message-State: AHPjjUjsxgxQTtMjO88ZMMMnIWjGkfGvJZJzRF90+37pNFN4Apmdv8Q0
+	QUzhsaahty6by94OGKFc7aWit58v5JjYjvWD+08=
+X-Google-Smtp-Source: ADKCNb5I+EWyA5V2PS6Nc69hvhdl2nlcadEfVEsZyVOu6DkD9TaKfOUA1qUr3mKl51xJUvVwnSR0cZJ3485gDImR5s8=
+X-Received: by 10.223.139.81 with SMTP id v17mr15803262wra.226.1505339302814; 
+	Wed, 13 Sep 2017 14:48:22 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <4fdd7a5c-f984-eea9-a481-3b19e0c1d4f5@linux.intel.com>
-User-Agent: Mutt/1.9.0 (2017-09-02)
+Sender: rob.woolleywr@gmail.com
+Received: by 10.28.54.170 with HTTP; Wed, 13 Sep 2017 14:48:22 -0700 (PDT)
+In-Reply-To: <20170912083614.5300-3-Martin.Jansa@gmail.com>
+References: <20170912083614.5300-1-Martin.Jansa@gmail.com>
+	<20170912083614.5300-3-Martin.Jansa@gmail.com>
+From: Rob Woolley <rob.woolley@windriver.com>
+Date: Wed, 13 Sep 2017 17:48:22 -0400
+X-Google-Sender-Auth: b-I-WUEvv3w1EAXyye6mjmJska8
+Message-ID: <CAGAhMBzZ_5k+r+8M6t_3i8QxJiahZitC+K4erMPWpXY7EtW_pQ@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-networking][PATCH] tcpdump: fix CVE-2017-11541, 11542, 11543
+Subject: Re: [meta-oe][PATCH 3/3] gnome-keyring: delete blacklisted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,368 +59,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 21:28:40 -0000
-X-Groupsio-MsgNum: 68773
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="mrJd9p1Ce66CJMxE"
-Content-Disposition: inline
+X-List-Received-Date: Wed, 13 Sep 2017 21:48:22 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---mrJd9p1Ce66CJMxE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Hi Martin,
 
-On Wed, Sep 13, 2017 at 09:05:45AM -0500, Jose Lamego wrote:
->=20
->=20
-> On 09/13/2017 04:17 AM, Martin Jansa wrote:
-> > Please update the state on patchwork (https://patchwork.
-> > openembedded.org/project/oe/patches/) when sending updates like this.
-> >
-> > You can update it on the site or use some magic keywords in the e-mail
-> > reply to update it automatically (but I've failed to find link to
-> > documentation how this magic should look like).
-> >
->=20
-> To automatically change a patch status in Patchwork, the string to be
-> included at the bottom of an email reply must be in the form:
->     [Patchwork-Status: <new-state>]
->=20
-> where <new-state> can be any of the existing states (excepting "Accepted"=
-).
->=20
-> This and other ways of updating patch statuses can be seen at:
-> http://www.openembedded.org/wiki/Patchwork#Update_the_state_of_patches
+I just started looking into this today.
 
-Thanks for the info.
+Adding libgmodule to the gnome-keyring recipe should resolve the problem
+you're seeing: LDFLAGS += "-lgmodule-2.0"
 
-I've tried it with:
-https://patchwork.openembedded.org/patch/144079/
+How would you like me to send a patch should I merge it with Jason's
+previous patch or make a new patch in the series?
 
-and it doesn't seem to work, patchwork shows my reply, but the state is
-still New not Rejected.
+Regards,
+Rob
 
->=20
-> > On Wed, Sep 13, 2017 at 5:21 AM, wenzong fan <wenzong.fan@windriver.com>
-> > wrote:
-> >
-> >> Please ignore this patch, the fixes has been included by:
-> >>
-> >>   [oe] [meta-networking][PATCH] tcpdump: update to 4.9.2 to fix CVEs
-> >>
-> >> Thanks
-> >> Wenzong
-> >>
-> >>
-> >> On 09/07/2017 05:49 PM, wenzong.fan@windriver.com wrote:
-> >>
-> >>> From: Wenzong Fan <wenzong.fan@windriver.com>
-> >>>
-> >>> Backport patches for fixing:
-> >>> - CVE-2017-11541:
-> >>>    https://nvd.nist.gov/vuln/detail/CVE-2017-11541
-> >>>    https://github.com/the-tcpdump-group/tcpdump/commit/21d702a
-> >>> 136c5c16882e368af7c173df728242280
-> >>>
-> >>> - CVE-2017-11542:
-> >>>    https://nvd.nist.gov/vuln/detail/CVE-2017-11542
-> >>>    https://github.com/the-tcpdump-group/tcpdump/commit/bed4806
-> >>> 2a64fca524156d7684af19f5b4a116fae
-> >>>
-> >>> - CVE-2017-11543:
-> >>>    https://nvd.nist.gov/vuln/detail/CVE-2017-11543
-> >>>    https://github.com/the-tcpdump-group/tcpdump/commit/7039327
-> >>> 875525278d17edee59720e29a3e76b7b3
-> >>>
-> >>> The tests/* changes dropped to workaround patch error:
-> >>>    File tests/*.pcap: git binary diffs are not supported.
-> >>>
-> >>> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> >>> ---
-> >>>   ...541-In-safeputs-check-the-length-before-c.patch | 49 +++++++++++=
-++
-> >>>   ...1-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch | 43 +++++++++++
-> >>>   ...543-Make-sure-the-SLIP-direction-octet-is.patch | 85
-> >>> ++++++++++++++++++++++
-> >>>   .../recipes-support/tcpdump/tcpdump_4.9.1.bb       |  3 +
-> >>>   4 files changed, 180 insertions(+)
-> >>>   create mode 100644 meta-networking/recipes-suppor
-> >>> t/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-
-> >>> the-length-before-c.patch
-> >>>   create mode 100644 meta-networking/recipes-suppor
-> >>> t/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
-> >>>   create mode 100644 meta-networking/recipes-suppor
-> >>> t/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-
-> >>> direction-octet-is.patch
-> >>>
-> >>> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11541-In-safeputs-check-the-length-before-c.patch
-> >>> b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11541-In-safeputs-check-the-length-before-c.patch
-> >>> new file mode 100644
-> >>> index 000000000..a83214b02
-> >>> --- /dev/null
-> >>> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11541-In-safeputs-check-the-length-before-c.patch
-> >>> @@ -0,0 +1,49 @@
-> >>> +From 21d702a136c5c16882e368af7c173df728242280 Mon Sep 17 00:00:00 20=
-01
-> >>> +From: Guy Harris <guy@alum.mit.edu>
-> >>> +Date: Tue, 7 Feb 2017 11:40:36 -0800
-> >>> +Subject: [PATCH] CVE-2017-11541: In safeputs(), check the length bef=
-ore
-> >>> + checking for a NUL terminator.
-> >>> +
-> >>> +safeputs() doesn't do packet bounds checking of its own; it assumes =
-that
-> >>> +the caller has checked the availability in the packet data of all ma=
-xlen
-> >>> +bytes of data.  This means we should check that we're within the
-> >>> +specified limit before looking at the byte.
-> >>> +
-> >>> +This fixes a buffer over-read discovered by Kamil Frankowicz.
-> >>> +
-> >>> +Add a test using the capture file supplied by the reporter(s).
-> >>> +
-> >>> +CVE: CVE-2017-11541
-> >>> +
-> >>> +Upstream-Status: Backport
-> >>> +https://github.com/the-tcpdump-group/tcpdump/commit/21d702a
-> >>> 136c5c16882e368af7c173df728242280
-> >>> +
-> >>> +Drop the tests/* changes to workaroud patch error:
-> >>> +File tests/hoobr_safeputs.pcap: git binary diffs are not supported.
-> >>> +
-> >>> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> >>> +---
-> >>> + tests/TESTLIST            |   1 +
-> >>> + tests/hoobr_safeputs.out  |   2 ++
-> >>> + tests/hoobr_safeputs.pcap | Bin 0 -> 88 bytes
-> >>> + util-print.c              |   2 +-
-> >>> + 4 files changed, 4 insertions(+), 1 deletion(-)
-> >>> + create mode 100644 tests/hoobr_safeputs.out
-> >>> + create mode 100644 tests/hoobr_safeputs.pcap
-> >>> +
-> >>> +diff --git a/util-print.c b/util-print.c
-> >>> +index 394e7d59..ec3e8de8 100644
-> >>> +--- a/util-print.c
-> >>> ++++ b/util-print.c
-> >>> +@@ -904,7 +904,7 @@ safeputs(netdissect_options *ndo,
-> >>> + {
-> >>> +       u_int idx =3D 0;
-> >>> +
-> >>> +-      while (*s && idx < maxlen) {
-> >>> ++      while (idx < maxlen && *s) {
-> >>> +               safeputchar(ndo, *s);
-> >>> +               idx++;
-> >>> +               s++;
-> >>> +--
-> >>> +2.13.0
-> >>> +
-> >>> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11542-PIMv1-Add-a-bounds-check.patch b/meta-networking/recipes-s=
-upp
-> >>> ort/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
-> >>> new file mode 100644
-> >>> index 000000000..a177e7c0b
-> >>> --- /dev/null
-> >>> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11542-PIMv1-Add-a-bounds-check.patch
-> >>> @@ -0,0 +1,43 @@
-> >>> +From bed48062a64fca524156d7684af19f5b4a116fae Mon Sep 17 00:00:00 20=
-01
-> >>> +From: Guy Harris <guy@alum.mit.edu>
-> >>> +Date: Tue, 7 Feb 2017 11:10:04 -0800
-> >>> +Subject: [PATCH] CVE-2017-11542/PIMv1: Add a bounds check.
-> >>> +
-> >>> +This fixes a buffer over-read discovered by Kamil Frankowicz.
-> >>> +
-> >>> +Add a test using the capture file supplied by the reporter(s).
-> >>> +
-> >>> +CVE: CVE-2017-11542
-> >>> +
-> >>> +Upstream-Status: Backport
-> >>> +https://github.com/the-tcpdump-group/tcpdump/commit/bed4806
-> >>> 2a64fca524156d7684af19f5b4a116fae
-> >>> +
-> >>> +Drop the tests/* changes to workaroud patch error:
-> >>> +File tests/hoobr_pimv1.pcap: git binary diffs are not supported.
-> >>> +
-> >>> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> >>> +---
-> >>> + print-pim.c            |   1 +
-> >>> + tests/TESTLIST         |   1 +
-> >>> + tests/hoobr_pimv1.out  |  25 +++++++++++++++++++++++++
-> >>> + tests/hoobr_pimv1.pcap | Bin 0 -> 3321 bytes
-> >>> + 4 files changed, 27 insertions(+)
-> >>> + create mode 100644 tests/hoobr_pimv1.out
-> >>> + create mode 100644 tests/hoobr_pimv1.pcap
-> >>> +
-> >>> +diff --git a/print-pim.c b/print-pim.c
-> >>> +index 25525953..ed880ae7 100644
-> >>> +--- a/print-pim.c
-> >>> ++++ b/print-pim.c
-> >>> +@@ -306,6 +306,7 @@ pimv1_print(netdissect_options *ndo,
-> >>> +                       pimv1_join_prune_print(ndo, &bp[8], len - 8);
-> >>> +               break;
-> >>> +       }
-> >>> ++      ND_TCHECK(bp[4]);
-> >>> +       if ((bp[4] >> 4) !=3D 1)
-> >>> +               ND_PRINT((ndo, " [v%d]", bp[4] >> 4));
-> >>> +       return;
-> >>> +
-> >>> +--
-> >>> +2.13.0
-> >>> +
-> >>> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
-> >>> b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
-> >>> new file mode 100644
-> >>> index 000000000..36e3f6b0d
-> >>> --- /dev/null
-> >>> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
-> >>> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
-> >>> @@ -0,0 +1,85 @@
-> >>> +From 7039327875525278d17edee59720e29a3e76b7b3 Mon Sep 17 00:00:00 20=
-01
-> >>> +From: Guy Harris <guy@alum.mit.edu>
-> >>> +Date: Fri, 17 Mar 2017 12:49:04 -0700
-> >>> +Subject: [PATCH] CVE-2017-11543/Make sure the SLIP direction octet is
-> >>> valid.
-> >>> +
-> >>> +Report if it's not, and don't use it as an out-of-bounds index into =
-an
-> >>> +array.
-> >>> +
-> >>> +This fixes a buffer overflow discovered by Wilfried Kirsch.
-> >>> +
-> >>> +Add a test using the capture file supplied by the reporter(s), modif=
-ied
-> >>> +so the capture file won't be rejected as an invalid capture.
-> >>> +
-> >>> +CVE: CVE-2017-11543
-> >>> +
-> >>> +Upstream-Status: Backport
-> >>> +https://github.com/the-tcpdump-group/tcpdump/commit/7039327
-> >>> 875525278d17edee59720e29a3e76b7b3
-> >>> +
-> >>> +Drop the tests/* changes to workaroud patch error:
-> >>> +File tests/slip-bad-direction.pcap: git binary diffs are not support=
-ed.
-> >>> +
-> >>> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
-> >>> +---
-> >>> + print-sl.c                    |  25 +++++++++++++++++++++++--
-> >>> + tests/TESTLIST                |   3 +++
-> >>> + tests/slip-bad-direction.out  |   1 +
-> >>> + tests/slip-bad-direction.pcap | Bin 0 -> 79 bytes
-> >>> + 4 files changed, 27 insertions(+), 2 deletions(-)
-> >>> + create mode 100644 tests/slip-bad-direction.out
-> >>> + create mode 100644 tests/slip-bad-direction.pcap
-> >>> +
-> >>> +diff --git a/print-sl.c b/print-sl.c
-> >>> +index 3fd7e898..a02077b3 100644
-> >>> +--- a/print-sl.c
-> >>> ++++ b/print-sl.c
-> >>> +@@ -131,8 +131,21 @@ sliplink_print(netdissect_options *ndo,
-> >>> +       u_int hlen;
-> >>> +
-> >>> +       dir =3D p[SLX_DIR];
-> >>> +-      ND_PRINT((ndo, dir =3D=3D SLIPDIR_IN ? "I " : "O "));
-> >>> ++      switch (dir) {
-> >>> +
-> >>> ++      case SLIPDIR_IN:
-> >>> ++              ND_PRINT((ndo, "I "));
-> >>> ++              break;
-> >>> ++
-> >>> ++      case SLIPDIR_OUT:
-> >>> ++              ND_PRINT((ndo, "O "));
-> >>> ++              break;
-> >>> ++
-> >>> ++      default:
-> >>> ++              ND_PRINT((ndo, "Invalid direction %d ", dir));
-> >>> ++              dir =3D -1;
-> >>> ++              break;
-> >>> ++      }
-> >>> +       if (ndo->ndo_nflag) {
-> >>> +               /* XXX just dump the header */
-> >>> +               register int i;
-> >>> +@@ -155,13 +168,21 @@ sliplink_print(netdissect_options *ndo,
-> >>> +                * has restored the IP header copy to IPPROTO_TCP.
-> >>> +                */
-> >>> +               lastconn =3D ((const struct ip *)&p[SLX_CHDR])->ip_p;
-> >>> ++              ND_PRINT((ndo, "utcp %d: ", lastconn));
-> >>> ++              if (dir =3D=3D -1) {
-> >>> ++                      /* Direction is bogus, don't use it */
-> >>> ++                      return;
-> >>> ++              }
-> >>> +               hlen =3D IP_HL(ip);
-> >>> +               hlen +=3D TH_OFF((const struct tcphdr *)&((const int
-> >>> *)ip)[hlen]);
-> >>> +               lastlen[dir][lastconn] =3D length - (hlen << 2);
-> >>> +-              ND_PRINT((ndo, "utcp %d: ", lastconn));
-> >>> +               break;
-> >>> +
-> >>> +       default:
-> >>> ++              if (dir =3D=3D -1) {
-> >>> ++                      /* Direction is bogus, don't use it */
-> >>> ++                      return;
-> >>> ++              }
-> >>> +               if (p[SLX_CHDR] & TYPE_COMPRESSED_TCP) {
-> >>> +                       compressed_sl_print(ndo, &p[SLX_CHDR], ip,
-> >>> +                           length, dir);
-> >>> +
-> >>> +--
-> >>> +2.13.0
-> >>> +
-> >>> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-> >>> b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-> >>> index 261c78427..668d6f5e1 100644
-> >>> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-> >>> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
-> >>> @@ -11,6 +11,9 @@ SRC_URI =3D " \
-> >>>       file://tcpdump-configure-dlpi.patch \
-> >>>       file://add-ptest.patch \
-> >>>       file://run-ptest \
-> >>> +    file://0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch \
-> >>> +    file://0001-CVE-2017-11541-In-safeputs-check-the-length-before-c=
-=2Epatch
-> >>> \
-> >>> +    file://0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is=
-=2Epatch
-> >>> \
-> >>>   "
-> >>>     SRC_URI[md5sum] =3D "1e0293210b0dea5ef18e88e4150394b7"
-> >>>
-> >>> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
->=20
-> --=20
-> Jose Lamego | OTC Embedded Platform & Tools | GDC
->=20
-> --=20
+On Tue, Sep 12, 2017 at 4:36 AM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> * there was some work on it recently, but still contains QA issues and no
+>   reply in 2 weeks:
+>   http://lists.openembedded.org/pipermail/openembedded-devel/2
+> 017-August/114415.html
+>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  .../gnome-keyring/gnome-keyring/egg-asn1x.patch    | 55
+> ----------------------
+>  .../gnome-keyring/gnome-keyring_2.32.1.bb          | 45
+> ------------------
+>  2 files changed, 100 deletions(-)
+>  delete mode 100644 meta-gnome/recipes-gnome/gnome
+> -keyring/gnome-keyring/egg-asn1x.patch
+>  delete mode 100644 meta-gnome/recipes-gnome/gnome-keyring/
+> gnome-keyring_2.32.1.bb
+>
+> diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+> b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+> deleted file mode 100644
+> index ad8a40ccf..000000000
+> --- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring/egg-asn1x.patch
+> +++ /dev/null
+> @@ -1,55 +0,0 @@
+> -Fixed build error with gcc 4.8
+> -
+> -Errors like below
+> -
+> -egg-asn1x.c: In function 'anode_encode_build':
+> -egg-asn1x.c:1280:7: warning: variable 'type' set but not used
+> [-Wunused-but-set-variable]
+> -egg-asn1x.c: In function 'traverse_and_prepare':
+> -egg-asn1x.c:3354:3: warning: passing argument 1 of 'egg_asn1x_create'
+> from incompatible pointer type [enabled by default]
+> -In file included from egg-asn1x.c:50:0:
+> -egg-asn1x.h:38:8: note: expected 'const struct static_struct_asn *' but
+> argument is of type 'const struct asn1_static_node *'
+> -egg-asn1x.c: At top level:
+> -egg-asn1x.c:3509:1: error: conflicting types for 'egg_asn1x_create'
+> -In file included from egg-asn1x.c:50:0:
+> -egg-asn1x.h:38:8: note: previous declaration of 'egg_asn1x_create' was
+> here
+> -egg-asn1x.c:3572:1: error: conflicting types for 'egg_asn1x_create_quark'
+> -In file included from egg-asn1x.c:50:0:
+> -egg-asn1x.h:41:8: note: previous declaration of 'egg_asn1x_create_quark'
+> was here
+> -egg-asn1x.c:3579:1: error: conflicting types for
+> 'egg_asn1x_create_and_decode'
+> -In file included from egg-asn1x.c:50:0:
+> -egg-asn1x.h:44:8: note: previous declaration of
+> 'egg_asn1x_create_and_decode' was here
+> -make[4]: *** [libegg_la-egg-asn1x.lo] Error 1
+> -
+> -
+> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> -
+> -Upstream-Status: Pending
+> -Index: gnome-keyring-2.32.1/egg/egg-asn1x.h
+> -===================================================================
+> ---- gnome-keyring-2.32.1.orig/egg/egg-asn1x.h  2010-10-18
+> 19:11:38.000000000 -0700
+> -+++ gnome-keyring-2.32.1/egg/egg-asn1x.h       2013-06-11
+> 15:15:00.675399263 -0700
+> -@@ -25,6 +25,7 @@
+> - #define EGG_ASN1X_H_
+> -
+> - #include <glib.h>
+> -+#include <libtasn1.h>
+> -
+> - #ifndef HAVE_EGG_ALLOCATOR
+> - typedef void* (*EggAllocator) (void* p, gsize);
+> -@@ -35,13 +36,13 @@
+> -
+> - struct static_struct_asn;
+> -
+> --GNode*              egg_asn1x_create                 (const struct
+> static_struct_asn *defs,
+> -+GNode*              egg_asn1x_create                 (const
+> ASN1_ARRAY_TYPE *defs,
+> -                                                       const gchar *type);
+> -
+> --GNode*              egg_asn1x_create_quark           (const struct
+> static_struct_asn *defs,
+> -+GNode*              egg_asn1x_create_quark           (const
+> ASN1_ARRAY_TYPE *defs,
+> -                                                       GQuark type);
+> -
+> --GNode*              egg_asn1x_create_and_decode      (const struct
+> static_struct_asn *defs,
+> -+GNode*              egg_asn1x_create_and_decode      (const
+> ASN1_ARRAY_TYPE *defs,
+> -                                                       const gchar *type,
+> -                                                       gconstpointer data,
+> -                                                       gsize n_data);
+> diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.
+> 1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+> deleted file mode 100644
+> index 4ac75cbef..000000000
+> --- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+> +++ /dev/null
+> @@ -1,45 +0,0 @@
+> -SUMMARY = "Password and keyring managing daemon"
+> -HOMEPAGE = "http://www.gnome.org/"
+> -BUGTRACKER = "https://bugzilla.gnome.org/"
+> -
+> -LICENSE = "GPLv2+ & LGPLv2+ & LGPLv2.1+"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f \
+> -                    file://gcr/gcr.h;endline=22;md
+> 5=a272df1e633e27ecf35e74fb5576250e \
+> -                    file://egg/egg-dbus.h;endline=
+> 25;md5=eb6f531af37165dc53420c073d774e61 \
+> -                    file://gp11/gp11.h;endline=24;
+> md5=bd8c7a8a21d6c28d40536d96a35e3469 \
+> -                    file://pkcs11/pkcs11i.h;endlin
+> e=24;md5=e72cfbb718389b76a4dae838d1c1f439"
+> -
+> -SECTION = "x11/gnome"
+> -
+> -PR = "r12"
+> -
+> -inherit autotools gnome gtk-doc pkgconfig gsettings
+> -
+> -SRC_URI += "file://egg-asn1x.patch"
+> -
+> -DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf
+> ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}
+> intltool-native"
+> -RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
+> -
+> -EXTRA_OECONF = "${@bb.utils.contains('DISTRO_FEATURES', 'pam',
+> '--enable-pam --with-pam-dir=${base_libdir}/security', '--disable-pam',
+> d)}"
+> -
+> -SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
+> -SRC_URI[archive.sha256sum] = "31fecec1430a97f59a6159a5a2ea8
+> d6a1b44287f1e9e595b3594df46bf7f18f9"
+> -GNOME_COMPRESS_TYPE="bz2"
+> -
+> -FILES_${PN} += "${datadir}/dbus-1/services ${datadir}/gcr \
+> -                ${base_libdir}/security/*${SOLIBSDEV} \
+> -               "
+> -
+> -FILES_${PN}-dev += "${libdir}/${BPN}/devel/*.la \
+> -                    ${libdir}/${BPN}/devel/*${SOLIBSDEV} \
+> -                    ${libdir}/${BPN}/standalone/*.la \
+> -                    ${base_libdir}/security/*.la \
+> -                   "
+> -
+> -INSANE_SKIP_${PN}-dev += "dev-elf"
+> -
+> -FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
+> -                    ${libdir}/${BPN}/devel/.debug/ \
+> -                    ${base_libdir}/security/.debug/"
+> -
+> -PNBLACKLIST[gnome-keyring] ?= "This version conflicts with gcr from
+> oe-core - the recipe will be removed on 2017-09-01 unless the issue is
+> fixed"
+> --
+> 2.14.1
+>
+> --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---mrJd9p1Ce66CJMxE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWbmjkQAKCRA3VSO3ZXaA
-HJVLAJ0fdeMdUKQvHgiD1c6vEDzyxtNYkQCgto0efmJFxA5tjR0zk7OTgZ1MpLw=
-=MRhr
------END PGP SIGNATURE-----
-
---mrJd9p1Ce66CJMxE--
