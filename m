@@ -1,47 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 1528978641
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-lf0-f51.google.com (mail-lf0-f51.google.com
+	[209.85.215.51])
+	by mail.openembedded.org (Postfix) with ESMTP id A4F71719A7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 18:57:27 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id m30so504159pgn.5
+	Wed, 13 Sep 2017 19:02:52 +0000 (UTC)
+Received: by mail-lf0-f51.google.com with SMTP id c80so3062283lfh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 11:57:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=4zHfpjk+VYvu5CEMSF4oeL95C3SdXTJfbADxVTEEJg4=;
-	b=vfSWt2M+OJOR2gZ5qzbigsJ7E2mJp0ZBqPbGz69vbeETaPo4znb05QCoZQkVE+30UZ
-	Q481t5lWSr95tFHOHnVbshfcj0Yh3zJwWZKT2hhH74mGdIX28+GZNx3jsc5+Kkt58vSS
-	QLRpsXOzchZTyyHNJvWQn5gc1ry4a0dnKnGwQTzYL1X6eh3Y9ebP5WZd1f4c0bsWfJQj
-	QJRRTZi0pCSWuc2o5w44L7CC8NugTzPfDkV9ip8NWo8flKYNGVSwSJOZQuzTS84KbLMl
-	fbBxRkiQMzWaolPyjETTEaJXQDmXywD4RV+16Hzmipv+n8UQ/zpuHMnirmsxalC3tWgV
-	d+kA==
+	Wed, 13 Sep 2017 12:02:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=vbpFV1orIy/Kzbor/DrCZv8lUUJJFu6DYLD8S8t+l7g=;
+	b=LJUxHJRu1IUu2KvFt+SbLVGU+pgZo7gStK8V3D058Z3I04sniM66MTfRpgr3CK/dNc
+	xhWgIhhk6tpRRhHfKdVTCtIqb1xv3RgJTZK84RuKiKjHioIVusIGWz1fgj5OVcQQacYL
+	NV2b/54Pm7yknnv23doJRethQdFlY2ZRauzynIAxHMtqwxmX5g+Q+3+DFFlHWAN54b/h
+	YRiZFq/RX2fOQzDvqfogTwlCdeY+2vjBrfckhjPxJ6rC6Mx09O4F1jtDlrWiSitbbaBG
+	ZlVFf3uDNuwb2rgDUGrWS8bVfwkcSNNnmBhZqrF/vDAT2I1harKQPeDtG506doq/cV9B
+	39BQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=4zHfpjk+VYvu5CEMSF4oeL95C3SdXTJfbADxVTEEJg4=;
-	b=V/FH8lSxy9BQHQ02mJft0xZVnIzlR5AP/JaYFr/177T3rNpav8k66yVaA6BDzfpaHg
-	QLOchsrBXBj23TEyzhkvUrIkf6GReZX9zcR4xYSNTScDBfTpFfFnw4nHNFNOtfSu+cn1
-	eFzLzrp10Jr2I+JTHBQeO3qHIxmjCTsrkkkNdSC1oWxG6hbcsVo9jWdE/xAxGHwsbO3w
-	y/FPkV7fqlf+akLgqLYLxrlBZkc2NkBsPx5Tx6tElMMb4XRy0B2ILwN7bKmN7DImj7GG
-	Wm7N9R94WreQDFruDpHzyjRm3X6cbDtcOhh7YgnFb2zfgOX851flWp9PVkKEpe/zdgpY
-	VeOw==
-X-Gm-Message-State: AHPjjUi9dj+UscI7PaMMC0fEUD1YGdt8MP2jSg0b2gVuLF5TVdpAYJun
-	40Fvdb4YQvh+J6J+hDg02b/7AWL3paY61NG5kZI=
-X-Google-Smtp-Source: ADKCNb6DzE6p2PKkATeBvAJAhxZgRVKaGhfC7gtqtNek2WtjQRYK5SBIbJc6/7vW6LjMiZvyHq+8dTS+q9PwLdJrIfs=
-X-Received: by 10.98.202.138 with SMTP id y10mr18862972pfk.151.1505329049147; 
-	Wed, 13 Sep 2017 11:57:29 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.149.73 with HTTP; Wed, 13 Sep 2017 11:56:58 -0700 (PDT)
-In-Reply-To: <CAJ86T=VWQ_9OK+ftw5j=cz_G1HMdviQRQz2D_k8UpSKJCMtnmg@mail.gmail.com>
-References: <20170913174419.34815-1-raj.khem@gmail.com>
-	<CAJ86T=VWQ_9OK+ftw5j=cz_G1HMdviQRQz2D_k8UpSKJCMtnmg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 13 Sep 2017 11:56:58 -0700
-Message-ID: <CAMKF1sr8S22LQm_OZLXq1ehtm9Ez6mJOtSOp4bOE6zzgG8=0ug@mail.gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-initramfs][PATCH V3] klibc.bbclass: Add -mfloat-abi on arm
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=vbpFV1orIy/Kzbor/DrCZv8lUUJJFu6DYLD8S8t+l7g=;
+	b=jnPxVaFs084wCzuA/h4XAYMqIz4ZvsoC0XecVOHAU8bl30tQNBwo9BlmT+xgvjKlA+
+	mZ0dSXC/jhPzq55aH8hO4DY7dY9y0Blh8WNJvUeZxzoygHIdKfhd9z38xkPoDqcosYZ5
+	wjvpI77tbXtv+Qdj7tGG5BMyDEWZbNYLXvNAKrgL1UqFmYJbm0tK9n/tOQEtbrtYH1c7
+	wwm6J4IM2lIDLvl/z6ZzIyq4dthRIMRpRJiAm4i9lN0EZxfBE1+5uqZLf4Lf5EOjBAHA
+	8qgT8e8HpeWY0WmqfQ8rMs6Tm7pUh4EX5srZ3+fYrwME+pRQufzcZhSLCWRNm8xc1ktK
+	J6qg==
+X-Gm-Message-State: AHPjjUheHjseX0EOCu2x6UDb5UraCzda3GxwUKwJgoMAr1B3wj7BXGOC
+	H9ZH1FQR7rrKlRn6T7Fmiw==
+X-Google-Smtp-Source: ADKCNb7I9EFkLCl9NTCSnXpT+K8V4MJ1U7N3pRnWSfmgt0bhLgLlW+yLFmTpbJNK1g7pyws16fYaWg==
+X-Received: by 10.46.7.66 with SMTP id i2mr8110055ljd.69.1505329372972;
+	Wed, 13 Sep 2017 12:02:52 -0700 (PDT)
+Received: from localhost.localdomain ([193.185.223.3])
+	by smtp.gmail.com with ESMTPSA id b4sm1517956lfg.90.2017.09.13.12.02.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Sep 2017 12:02:52 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 13 Sep 2017 21:02:49 +0200
+Message-Id: <20170913190249.23896-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.13.2
+Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+Subject: [meta-oe][PATCH v2] ceres-solver: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,58 +57,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 18:57:28 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 13 Sep 2017 19:02:52 -0000
 
-On Wed, Sep 13, 2017 at 11:24 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Wed, Sep 13, 2017 at 10:44 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> Default toolchain is not configured for hard float
->> therefore we need to pass the right -mfloat-abi option
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> Changes in V3: Append -mfloat-abi only on armv6
->
-> The change seems to be for armv7a and armv7ve, not armv6 ?
+From: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
 
-yes. its a typo in the comment I should have said arm7, I dont build for v6
+Ceres Solver is an open source C++ library for modeling and solving
+large, complicated optimization problems.
 
->
->>  meta-initramfs/classes/klibc.bbclass                         | 2 ++
->>  meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb | 1 -
->>  2 files changed, 2 insertions(+), 1 deletion(-)
->>
->> diff --git a/meta-initramfs/classes/klibc.bbclass b/meta-initramfs/classes/klibc.bbclass
->> index c9de58cec..1ec7b2b05 100644
->> --- a/meta-initramfs/classes/klibc.bbclass
->> +++ b/meta-initramfs/classes/klibc.bbclass
->> @@ -5,6 +5,8 @@ DEPENDS =+ "klcc-cross"
->>  # Set CC = "${TARGET_PREFIX}klcc -shared" to build the dynamic version.
->>  CC_forcevariable = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS}"
->>  CC_forcevariable_armv4_linux-gnueabi = "${TARGET_PREFIX}klcc ${TOOLCHAIN_OPTIONS} -march=armv4 -mthumb-interwork"
->> +CC_append_armv7ve = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
->> +CC_append_armv7a = " ${@' -mfloat-abi=${TUNE_CCARGS_MFLOAT}' if (d.getVar('TUNE_CCARGS_MFLOAT') != '') else ''}"
->>
->>  CPP_forcevariable = "${CC} -E"
->>
->> diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
->> index 867407723..8ca1ca727 100644
->> --- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
->> +++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
->> @@ -21,7 +21,6 @@ SRC_URI = "git://git.infradead.org/mtd-utils.git;tag=b7455d847ab4f9eeeb6a729efc3
->>  S = "${WORKDIR}/git/"
->>
->>  EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
->> -CFLAGS += "${TUNE_CCARGS}"
->>
->>  do_install () {
->>
->> --
->> 2.14.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+It's often used in 3D computer vision applications.
+
+Signed-off-by: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+---
+v1 -> v2:
+- now fetching the source from git, not github archives
+- only add a specific directory (cmake files) to FILES_${PN}-dev
+- don't create the ${PN} package as the project is not building
+  a shared library
+
+ .../ceres-solver/ceres-solver_1.13.bb               | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+new file mode 100644
+index 0000000..58d242a
+--- /dev/null
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
++AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
++HOMEPAGE = "http://ceres-solver.org/"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
++
++SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
++SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "libeigen glog"
++
++inherit cmake
++
++# Only a static library and headers are created
++PACKAGES = "${PN}-dev ${PN}-staticdev ${PN}-dbg"
++RDEPENDS_${PN}-dev = ""
++
++FILES_${PN}-dev += "${libdir}/cmake/*"
+-- 
+2.7.4
+
 
