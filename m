@@ -1,50 +1,16 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-lf0-f51.google.com (mail-lf0-f51.google.com
-	[209.85.215.51])
-	by mail.openembedded.org (Postfix) with ESMTP id A4F71719A7
+Return-Path: <fabien.lahoudere@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id E5AD378648
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 19:02:52 +0000 (UTC)
-Received: by mail-lf0-f51.google.com with SMTP id c80so3062283lfh.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 12:02:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=vbpFV1orIy/Kzbor/DrCZv8lUUJJFu6DYLD8S8t+l7g=;
-	b=LJUxHJRu1IUu2KvFt+SbLVGU+pgZo7gStK8V3D058Z3I04sniM66MTfRpgr3CK/dNc
-	xhWgIhhk6tpRRhHfKdVTCtIqb1xv3RgJTZK84RuKiKjHioIVusIGWz1fgj5OVcQQacYL
-	NV2b/54Pm7yknnv23doJRethQdFlY2ZRauzynIAxHMtqwxmX5g+Q+3+DFFlHWAN54b/h
-	YRiZFq/RX2fOQzDvqfogTwlCdeY+2vjBrfckhjPxJ6rC6Mx09O4F1jtDlrWiSitbbaBG
-	ZlVFf3uDNuwb2rgDUGrWS8bVfwkcSNNnmBhZqrF/vDAT2I1harKQPeDtG506doq/cV9B
-	39BQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vbpFV1orIy/Kzbor/DrCZv8lUUJJFu6DYLD8S8t+l7g=;
-	b=jnPxVaFs084wCzuA/h4XAYMqIz4ZvsoC0XecVOHAU8bl30tQNBwo9BlmT+xgvjKlA+
-	mZ0dSXC/jhPzq55aH8hO4DY7dY9y0Blh8WNJvUeZxzoygHIdKfhd9z38xkPoDqcosYZ5
-	wjvpI77tbXtv+Qdj7tGG5BMyDEWZbNYLXvNAKrgL1UqFmYJbm0tK9n/tOQEtbrtYH1c7
-	wwm6J4IM2lIDLvl/z6ZzIyq4dthRIMRpRJiAm4i9lN0EZxfBE1+5uqZLf4Lf5EOjBAHA
-	8qgT8e8HpeWY0WmqfQ8rMs6Tm7pUh4EX5srZ3+fYrwME+pRQufzcZhSLCWRNm8xc1ktK
-	J6qg==
-X-Gm-Message-State: AHPjjUheHjseX0EOCu2x6UDb5UraCzda3GxwUKwJgoMAr1B3wj7BXGOC
-	H9ZH1FQR7rrKlRn6T7Fmiw==
-X-Google-Smtp-Source: ADKCNb7I9EFkLCl9NTCSnXpT+K8V4MJ1U7N3pRnWSfmgt0bhLgLlW+yLFmTpbJNK1g7pyws16fYaWg==
-X-Received: by 10.46.7.66 with SMTP id i2mr8110055ljd.69.1505329372972;
-	Wed, 13 Sep 2017 12:02:52 -0700 (PDT)
-Received: from localhost.localdomain ([193.185.223.3])
-	by smtp.gmail.com with ESMTPSA id b4sm1517956lfg.90.2017.09.13.12.02.51
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 13 Sep 2017 12:02:52 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: openembedded-devel@lists.openembedded.org,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 21:02:49 +0200
-Message-Id: <20170913190249.23896-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.13.2
-Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
-Subject: [meta-oe][PATCH v2] ceres-solver: add new recipe
+	Wed, 13 Sep 2017 20:05:46 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aragua) with ESMTPSA id 6398A2602D5
+From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 13 Sep 2017 22:05:35 +0200
+Message-Id: <cover.1505333001.git.fabien.lahoudere@collabora.co.uk>
+X-Mailer: git-send-email 2.11.0
+Subject: [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,55 +23,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 19:02:52 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 20:05:47 -0000
 
-From: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+In order to build gerbera, we need to support libupnp >= 1.8.
+However mpd won't build with this version probably due to API break.
 
-Ceres Solver is an open source C++ library for modeling and solving
-large, complicated optimization problems.
+So we add a new recipe libupnp1.8 to be able to use both version.
+Both version can be run in parallel.
 
-It's often used in 3D computer vision applications.
+?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-neon/libupnp_1.6.21-r0_armhf.deb 
+drwxrwxrwx root/root         0 2017-09-13 17:26 ./
+drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/
+drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/lib/
+-rwxr-xr-x root/root     31600 2017-09-13 17:26 ./usr/lib/libixml.so.2.0.8
+-rwxr-xr-x root/root     17912 2017-09-13 17:26 ./usr/lib/libthreadutil.so.6.0.4
+-rwxr-xr-x root/root    117676 2017-09-13 17:26 ./usr/lib/libupnp.so.6.3.4
+lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libixml.so.2 -> libixml.so.2.0.8
+lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libthreadutil.so.6 -> libthreadutil.so.6.0.4
+lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libupnp.so.6 -> libupnp.so.6.3.4
+?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-neon/libupnp1.8_1.8.2-r0_armhf.deb 
+drwxrwxrwx root/root         0 2017-09-13 17:43 ./
+drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/
+drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/lib/
+-rwxr-xr-x root/root     35696 2017-09-13 17:43 ./usr/lib/libixml.so.10.0.1
+-rwxr-xr-x root/root    155128 2017-09-13 17:43 ./usr/lib/libupnp.so.10.1.1
+lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libixml.so.10 -> libixml.so.10.0.1
+lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libupnp.so.10 -> libupnp.so.10.1.1
 
-Signed-off-by: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
----
-v1 -> v2:
-- now fetching the source from git, not github archives
-- only add a specific directory (cmake files) to FILES_${PN}-dev
-- don't create the ${PN} package as the project is not building
-  a shared library
+mpd and gerbera have been built successfully with this fix.
 
- .../ceres-solver/ceres-solver_1.13.bb               | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+The patch also clean a bit gerbera recipe and fix dependency issue.
 
-diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
-new file mode 100644
-index 0000000..58d242a
---- /dev/null
-+++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
-@@ -0,0 +1,21 @@
-+DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
-+AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
-+HOMEPAGE = "http://ceres-solver.org/"
-+
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
-+
-+SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
-+SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
-+
-+S = "${WORKDIR}/git"
-+
-+DEPENDS = "libeigen glog"
-+
-+inherit cmake
-+
-+# Only a static library and headers are created
-+PACKAGES = "${PN}-dev ${PN}-staticdev ${PN}-dbg"
-+RDEPENDS_${PN}-dev = ""
-+
-+FILES_${PN}-dev += "${libdir}/cmake/*"
+Changes since v3:
+	- Drop RDEPENDS from gerbera recipe.
+	- use git fetcher instead of github archive for libupnp
+
+Fabien Lahoudere (2):
+  libupnp: Add recipe for version 1.8.2
+  gerbera: clean recipe
+
+ .../recipes-connectivity/libupnp/libupnp1.8.bb       | 20 ++++++++++++++++++++
+ .../recipes-multimedia/gerbera/gerbera_git.bb        | 12 ++++++------
+ 2 files changed, 26 insertions(+), 6 deletions(-)
+ create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+
 -- 
-2.7.4
+2.11.0
 
 
