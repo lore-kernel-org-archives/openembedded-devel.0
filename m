@@ -1,22 +1,23 @@
 Return-Path: <pascal.bach@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id F232378554
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id 9BBBA7865F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 11:44:47 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v8DBimk0023197
+	Wed, 13 Sep 2017 11:45:39 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v8DBjdZj026265
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 13:44:48 +0200
+	Wed, 13 Sep 2017 13:45:40 +0200
 Received: from dev.sbt.siemens.com ([139.16.24.231])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v8DBilV5031577;
-	Wed, 13 Sep 2017 13:44:48 +0200
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v8DBjdOI021177;
+	Wed, 13 Sep 2017 13:45:39 +0200
 From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 13 Sep 2017 13:44:38 +0200
-Message-Id: <1505303078-14023-1-git-send-email-pascal.bach@siemens.com>
+Date: Wed, 13 Sep 2017 13:45:30 +0200
+Message-Id: <1505303130-14127-1-git-send-email-pascal.bach@siemens.com>
 X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCH] flatbuffers: add version 1.7.1
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] capnproto: add version 0.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,85 +30,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 11:44:48 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 11:45:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- .../files/0001-correct-version-for-so-lib.patch    | 26 +++++++++++++++++
- .../flatbuffers/flatbuffers_1.7.1.bb               | 34 ++++++++++++++++++++++
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
- create mode 100644 meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
+ .../recipes-devtools/capnproto/capnproto_0.6.1.bb  | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
+diff --git a/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
 new file mode 100644
-index 0000000..a7a42f9
+index 0000000..d900fae
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/flatbuffers/files/0001-correct-version-for-so-lib.patch
-@@ -0,0 +1,26 @@
-+From 8b44dc65d98d50b462843ac9dab6fe3fc25abe36 Mon Sep 17 00:00:00 2001
-+From: Pascal Bach <pascal.bach@siemens.com>
-+Date: Fri, 12 May 2017 13:54:49 +0200
-+Subject: [PATCH] correct version for so lib
-+
-+Upstream-Status: Pending
-+
-+---
-+ CMakeLists.txt | 1 +
-+ 1 file changed, 1 insertion(+)
-+
-+diff --git a/CMakeLists.txt b/CMakeLists.txt
-+index 3670afe..f4fcd2c 100644
-+--- a/CMakeLists.txt
-++++ b/CMakeLists.txt
-+@@ -172,6 +172,7 @@ endif()
-+ if(FLATBUFFERS_BUILD_SHAREDLIB)
-+   add_library(flatbuffers_shared SHARED ${FlatBuffers_Library_SRCS})
-+   set_target_properties(flatbuffers_shared PROPERTIES OUTPUT_NAME flatbuffers)
-++  set_target_properties(flatbuffers_shared PROPERTIES VERSION "${PV}")
-+ endif()
-+ 
-+ function(compile_flatbuffers_schema_to_cpp SRC_FBS)
-+-- 
-+2.1.4
-+
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
-new file mode 100644
-index 0000000..9e939ee
---- /dev/null
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
-@@ -0,0 +1,34 @@
-+SUMMARY = "Memory Efficient Serialization Library"
-+HOMEPAGE = "https://github.com/google/flatbuffers"
++++ b/meta-oe/recipes-devtools/capnproto/capnproto_0.6.1.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "Cap'n Proto serialization/RPC system"
++DESCRIPTION = "Cap’n Proto is an insanely fast data interchange format and capability-based RPC system. "
++HOMEPAGE = "https://github.com/sandstorm-io/capnproto"
 +SECTION = "console/tools"
-+LICENSE = "Apache-2.0"
++LICENSE = "MIT"
 +
 +PACKAGE_BEFORE_PN = "${PN}-compiler"
 +
-+RDEPENDS_${PN}-compiler = "${PN}"
 +RDEPENDS_${PN}-dev += "${PN}-compiler"
 +
-+LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
++LIC_FILES_CHKSUM = "file://../LICENSE;md5=0a5b5b742baf10cc1c158579eba7fb1d"
 +
-+SRCREV = "25a15950f5a24d7217689739ed8f6dac64912d62"
++SRCREV = "c949a18da5f041a36cc218c5c4b79c7705999b4f"
 +
-+SRC_URI = "git://github.com/google/flatbuffers.git \
-+           file://0001-correct-version-for-so-lib.patch"
-+
-+# Make sure C++11 is used, required for example for GCC 4.9
-+CXXFLAGS += "-std=c++11"
-+BUILD_CXXFLAGS += "-std=c++11"
++SRC_URI = "git://github.com/sandstorm-io/capnproto.git;branch=release-${PV}"
 +
 +EXTRA_OECMAKE += "\
-+	-DFLATBUFFERS_BUILD_TESTS=OFF \
-+	-DFLATBUFFERS_BUILD_SHAREDLIB=ON \
-+  -DPV=${PV} \
++	-DBUILD_TESTING=OFF \
 +  "
 +
 +inherit cmake
 +
-+S = "${WORKDIR}/git"
++S = "${WORKDIR}/git/c++"
 +
++FILES_${PN}-dev += "${libdir}/cmake"
 +FILES_${PN}-compiler = "${bindir}"
 +
 +BBCLASSEXTEND = "native nativesdk"
