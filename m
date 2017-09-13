@@ -1,48 +1,51 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f170.google.com (mail-ua0-f170.google.com
-	[209.85.217.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 6AB8178513
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-lf0-f53.google.com (mail-lf0-f53.google.com
+	[209.85.215.53])
+	by mail.openembedded.org (Postfix) with ESMTP id E1C6F7846B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 09:54:27 +0000 (UTC)
-Received: by mail-ua0-f170.google.com with SMTP id l24so18232953uaa.5
+	Wed, 13 Sep 2017 11:05:10 +0000 (UTC)
+Received: by mail-lf0-f53.google.com with SMTP id d17so33202934lfe.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 02:54:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=cS8zf95ILRu4gaOJQMytvq6v/TxMYqzdJjozP2CVLno=;
-	b=u+mdULpLekv9e5j3wVfQTj0Dohp4X9tf736U6gA+mfoGuNzrFD5MVxG/IVvvp6kmmx
-	9T4XcMWu5SSy7YDiYm9WmHfN+ggzAtixDlZqJ7fe9GxqNbwQyPZGE2JKPNumYIcyhfY1
-	ZPGBpS+8J/RaYPizc22Yz3tlIfQIKRF7NB8/izXASjURSi3WswyVTJnAoYNDtuQXWv7N
-	PXv/15OF4Ba1azFi9XLlmZLqVCwER2eC7jUfgUzgy92rAb6vEYXaXEBdD5BhdmEs/cs7
-	AHE8NoRk4SVaseKMCXnxyZro7m1KhPIPchpmqoXXMhH5Dlfgm2PD7uRsLs49k7gx5hcW
-	/4YQ==
+	Wed, 13 Sep 2017 04:05:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=FLKgRfjetUxXorFoAkhj9bQlmPr04d2rBZLLsFbOpyU=;
+	b=s2t9UWCwiCQh5b09LejOZQmUdWM9DTkboqnsW37Y6wzSdbGViWYaEBvWuvORA0ej7P
+	PNpfWS/+dXQbwi56TPhq7hnmPRboHPSBMkG5X0hKc8tktE9su+6orcHlm1kreTTvpOGV
+	NDjCpaBd2mZ+1J3OC0kQZ9MWSK26m4axcSjQl/8nFHsqiBFdlZPawRIAEFJCeEFgQQhB
+	LvmEmg1SWYXWqoGMur1GN6XCQrknlG0ckebto51ifrqsbGH9wgQt3T52oCmkPGEdrMXh
+	XlZe6SIpL2JvGOM98qIOJbVoh2sWd5Rp5uhLYUYWtZBBeshvMqmW8KrgvHwAr77tsiZQ
+	OvSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=cS8zf95ILRu4gaOJQMytvq6v/TxMYqzdJjozP2CVLno=;
-	b=QQizQM3hdF4IxLO0rjJFb9l2Ap9vRVfslMhaOymGZKJjfglOcxQjDOykn/jkxIqbtG
-	cRCBG9+21JirKHY9zHvpFzxEMOnCuto6/0Tx95rtmETjP6qkhfovfdsovo236mTAyxvr
-	oUiHpPglm1thQ/0+rwtnQRYNXlU7bzAxE8fFWbcW9sfXizkeKr1ZoLFSY13Dh0PPL7Bf
-	GD6feE52YDnmxF2BLS6rppFxNVIKCFK/Yc9YjPXuwB8OzIZOexVRbrJ+PWBio2V8fPaz
-	ZppWFWwv0UOLK/+HpFyq70yehhAsMyUaK42ZC34s7iHTbk6N6Qze7ecXfNVTbimQWYNt
-	5t5Q==
-X-Gm-Message-State: AHPjjUjS3Gm9OEuZQJRzgoi/nfluXm96kBiQo9JeOX1/hvxRJ0omi6s2
-	U9B0u+5fiuTe99AcMy/KdwswyumLM/CLUbdIT2o=
-X-Google-Smtp-Source: ADKCNb62AiBk3DNzM4tOfgfTg7CLSrCB0hdR3ynn3zaoyt3bOoQrUNr6T67IXD9MZZxNjVN6Sm7o8gNu9d9nXTuqPXY=
-X-Received: by 10.176.83.149 with SMTP id k21mr12848740uaa.183.1505296468479; 
-	Wed, 13 Sep 2017 02:54:28 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 02:54:28 -0700 (PDT)
-In-Reply-To: <20170913093821.12746-1-kai.kang@windriver.com>
-References: <20170913093821.12746-1-kai.kang@windriver.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 11:54:28 +0200
-Message-ID: <CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
-To: Kai Kang <kai.kang@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=FLKgRfjetUxXorFoAkhj9bQlmPr04d2rBZLLsFbOpyU=;
+	b=P4ZESdG5w9XUjVsZtx37Rn/wxNrK1ZZamtN/AwW7wu3tNBfcFfuzYoAOYk6id7fOM7
+	J/19NnmyCezCLoIgMzsZTC9gNn3iWvkIWuWvwMl0BzDjqc1EPA4v5/BXvAacdt+EzEGa
+	Q8c3CmFCDrAJsTSey5gHXhNf76lLec+L89EVuzCWBiFq2ujrqZGXrFiDlmPyNDphI2/q
+	jHprBKMhx/49CvIAVsj02AxqDPiMJmmCsMClKhdPCtY9O/eJOD0CYO0e8LcgMsdx5LOC
+	WLhmjWsffWCP104Dvruf88zsGqep9JJwZ/16ISIRGGHJgdiU9U49cjitSnw/D0RqrZN2
+	RY1w==
+X-Gm-Message-State: AHPjjUh82Mz61vIi8P9Mu64CQWtTGsaFTqdK+IMrwyoS+B66a+EjjCu2
+	awobpFKUde0G4wdoONMiXA==
+X-Google-Smtp-Source: AOwi7QCzoQt9NZWqb7wfhXbzbnCujJkHAvuGvwRTr6EilBLdLaYN4igoM4ctwH57LeZn0jtkunKfmw==
+X-Received: by 10.25.190.74 with SMTP id o71mr6754464lff.216.1505300711684;
+	Wed, 13 Sep 2017 04:05:11 -0700 (PDT)
+Received: from bgdev-debian.nomovok.info (auth.nomovok.info. [83.150.126.21])
+	by smtp.gmail.com with ESMTPSA id
+	r80sm2191514lfi.68.2017.09.13.04.05.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 13 Sep 2017 04:05:11 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 13 Sep 2017 13:04:47 +0200
+Message-Id: <20170913110447.18816-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.13.2
+Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+Subject: [meta-oe][PATCH] ceres-solver: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,80 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 09:54:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 13 Sep 2017 11:05:12 -0000
 
-All other LSB related recipes are in oe-core, why should libpng12 be
-different and live in meta-oe?
+From: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
 
-On Wed, Sep 13, 2017 at 11:38 AM, <kai.kang@windriver.com> wrote:
+Ceres Solver is an open source C++ library for modeling and solving
+large, complicated optimization problems.
 
-> From: Kai Kang <kai.kang@windriver.com>
->
-> libpng12 is removed from oe-core. But lsb test 5.0 still requires
-> libpng12. So add it back.
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->  meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb | 36
-> +++++++++++++++++++++++++++
->  1 file changed, 36 insertions(+)
->  create mode 100644 meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
->
-> diff --git a/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
-> b/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
-> new file mode 100644
-> index 000000000..9f74f5fdb
-> --- /dev/null
-> +++ b/meta-oe/recipes-lsb/libpng/libpng12_1.2.57.bb
-> @@ -0,0 +1,36 @@
-> +SUMMARY = "PNG image format decoding library"
-> +HOMEPAGE = "http://www.libpng.org/"
-> +SECTION = "libs"
-> +LICENSE = "Libpng"
-> +LIC_FILES_CHKSUM = "file://LICENSE;md5=597b8a91994a3e27ae6aa79bf02677d9 \
-> +                    file://png.h;beginline=19;endline=109;md5=
-> 166406397718925b660f0033f7558ef7"
-> +DEPENDS = "zlib"
-> +
-> +PN = "libpng12"
-> +S = "${WORKDIR}/libpng-${PV}"
-> +
-> +SRC_URI = "${GENTOO_MIRROR}/libpng-${PV}.tar.xz"
-> +
-> +SRC_URI[md5sum] = "307052e5e8af97b82b17b64fb1b3677a"
-> +SRC_URI[sha256sum] = "0f4620e11fa283fedafb474427c8e9
-> 6bf149511a1804bdc47350963ae5cf54d8"
-> +
-> +UPSTREAM_CHECK_URI = "http://sourceforge.net/projects/libpng/files/
-> libpng12/"
-> +UPSTREAM_CHECK_REGEX = "/libpng12/(?P<pver>(\d+[\.\-_]*)+)/"
-> +
-> +BINCONFIG_GLOB = "${PN}-config"
-> +
-> +inherit autotools binconfig pkgconfig
-> +
-> +do_install_append() {
-> +       # The follow link files link to corresponding png12*.h and
-> libpng12* files
-> +       # They conflict with higher verison, so drop them
-> +       rm ${D}/${includedir}/png.h
-> +       rm ${D}/${includedir}/pngconf.h
-> +
-> +       rm ${D}/${libdir}/libpng.la
-> +       rm ${D}/${libdir}/libpng.so
-> +       rm ${D}/${libdir}/libpng.a || true
-> +       rm ${D}/${libdir}/pkgconfig/libpng.pc
-> +
-> +       rm ${D}/${bindir}/libpng-config
-> +}
-> --
-> 2.14.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+It's often used in 3D computer vision applications.
+
+Signed-off-by: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+---
+ .../recipes-support/ceres-solver/ceres-solver_1.13.bb  | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+new file mode 100644
+index 0000000..0bfc083
+--- /dev/null
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+@@ -0,0 +1,18 @@
++DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
++AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
++HOMEPAGE = "http://ceres-solver.org/"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
++
++SRC_URI = "https://github.com/ceres-solver/ceres-solver/archive/${PV}.tar.gz"
++SRC_URI[md5sum] = "810f53772be2c41abff53a9c03d1e301"
++SRC_URI[sha256] = "51ccb201b61ac71501fb6ccef158f078a750bc796ee6a271cd535cfe338202e5"
++
++PV = "1.13.0"
++
++DEPENDS = "libeigen glog"
++
++inherit cmake
++
++FILES_${PN} = "${includedir} ${libdir}"
+-- 
+2.7.4
+
 
