@@ -1,49 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f174.google.com (mail-ua0-f174.google.com
-	[209.85.217.174])
-	by mail.openembedded.org (Postfix) with ESMTP id C6C98785AA
+Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 5152077AB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 09:17:11 +0000 (UTC)
-Received: by mail-ua0-f174.google.com with SMTP id q29so18020597uaf.3
+	Wed, 13 Sep 2017 09:33:50 +0000 (UTC)
+Received: by mail-ua0-f182.google.com with SMTP id q29so18063200uaf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 02:17:13 -0700 (PDT)
+	Wed, 13 Sep 2017 02:33:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=z1+D6ntpLErkmX/XoDQ1zAUCoBl0cCSTYnJK5hppr4E=;
-	b=rhPwPt41LZY3eje62k6Ud1VgyrvSzdO3VdJrXaiNyz3Wt7B4uEqv5m+ii8UxMfNwmG
-	O/sTZ9ztbw8qdluag6OcROlMsTjy3ngZUImVoTyvNlqguiAQgvtC5nu/Rpdvtr9UV4AU
-	/hJRNPT/sxoQpYhM3F83ekjzol9R2VWTJIn3U8BqzH76WngnDtgKuDAHM5HOtImIQQgn
-	K3uXl91gKeD4UlgPsIyqaGlypS8mtM/fr0RPrauFSrbsg92wLA2ugksPSTlJo+YPKpH9
-	GnxrhoagwcDjNpsCtrb6jcO5iSssFROhhdxfqNKYvAyDYULCM2sLhAl9vp3iLLREaRbC
-	3eIQ==
+	:cc; bh=0Bo4nCgl+cdeofm91tjeas/bGeAx0hsn4eCtxingL54=;
+	b=bRjsNqsBm9jsGwTQJhm1aTowju2fAmxVaTddCeKhHh6rbCEjWMOAhCpFu3ec3UAX5t
+	7lsbqeFh6b2UfVQUoukVSmOs7H0AxTvdOkDkI1BxaaEmPdYGojESirnAqwOxRKByxU4Q
+	qKux5GFrJXL+ZaoamS9afoho/zeGrjdI5FwkfNW5unkl0FUxvjMuJka19Guj25PtwsVT
+	baE2OUw4AH4LIaFqVvkEs8hI0yR9o7mA53Omy/Xu82LQWL6XSoP5Ux1tre99msu7CoZP
+	RqCivOo9K2igJxLdaGQg+E31au9Vvr+57WyXkp5tTnaG+jaIlq8hgRrk/N9WgPVQ/UCh
+	DeZQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=z1+D6ntpLErkmX/XoDQ1zAUCoBl0cCSTYnJK5hppr4E=;
-	b=cysY7O9jvzfMRjBpysOc35fhtqIBgcggE+B+8dxIT5Vd4C6ckansyFU0dSPkm9KJjy
-	+1MuD0vYuVv+o1ceCOsdK94EqSFJ8FBVcKNM7B0XVxI4RVLsnN69r3zJBv9aTS2fk9XR
-	CDHo6ovemnQdUHuv8AFD2a8bIDyu6xrGV5heSldlT6NSWgl/h0UlPSy2ohD1CI0F1Fha
-	xIZkPT5J13G0DBS39GdRyBi3ZOq3hUh8zczh7IlQPNU5rrUzM3Tlac09BC2V9xsju1Ok
-	4wnXJBIeqLrZfxZvyAls7PfC4ZWsy0UxBNJbeBriitZIDo2idHhALCN3PJGDgRocFA/D
-	Zn0A==
-X-Gm-Message-State: AHPjjUhPHSCEFeLuKNVbympDcc59RzTie0XXN4MR050Dv4Z8Fso8jzvq
-	Fsui+ERMIfaT+QXBMNmvekLQZ0oleWJFp+cTDfE=
-X-Google-Smtp-Source: AOwi7QCdOBPuTSYSRzt9s7Rk3uDAeBQaJ47yPk/TIDhIhL6N6OIL9JPg89Cm1ojPd1Q9W8hAdnBANklm42Lr0xBM+x0=
-X-Received: by 10.176.2.5 with SMTP id 5mr14780739uas.160.1505294232708; Wed,
-	13 Sep 2017 02:17:12 -0700 (PDT)
+	bh=0Bo4nCgl+cdeofm91tjeas/bGeAx0hsn4eCtxingL54=;
+	b=LEN1BsWxEz8bW1cEddbV/KGNDCBMNQGoiANVymCVE2v4wVG1MmZuxg8C1VPQcQTpuL
+	1FEfgm822caoQ523ymZnj6Oiu/gXGuE64Vyr0/TXjXTSQ29Vr2VEsveizBMWARHxjcZ+
+	rGx2a7zkVKo7nny3rMHqvm4tuTtbGxIh1dziqq8csUgypkgFSN0UldHinHcat932SXHR
+	T6JTKOGQ55JZMuygJWqDvzCan6uaT1ipr5liYDcF4W+BRRp6EiF/n6VaHEhDdgOpqdnb
+	0FMBOOkCSMlYQUtMHD2Thg0BT0IB4BfcjQaBWk8I0pQzJOthckK+FrQrK8U4YEN4DHK5
+	wSFQ==
+X-Gm-Message-State: AHPjjUiSb35eYb3nfRC/3ORkqlOaA8qn/88dV6bs9amKkqq3SLNWpPY0
+	5n2EYoQHG2ndnZAdqrGyr5ixL4W5H5pW1mM+IV4=
+X-Google-Smtp-Source: AOwi7QBTL115k2JG8gO4gmCuNlg7Ddbd7sFwxMSPTCHrcn0XIN4QpRhaAlC73iqC5m/D8ge0dd4JctdFiTimLWuypQQ=
+X-Received: by 10.176.2.5 with SMTP id 5mr14809803uas.160.1505295231967; Wed,
+	13 Sep 2017 02:33:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 02:17:12 -0700 (PDT)
-In-Reply-To: <7c50c6f1-e834-f2a2-1ebd-33e411deea8b@windriver.com>
-References: <20170907094920.191059-1-wenzong.fan@windriver.com>
-	<7c50c6f1-e834-f2a2-1ebd-33e411deea8b@windriver.com>
+Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 02:33:51 -0700 (PDT)
+In-Reply-To: <20170907035758.41689-2-raj.khem@gmail.com>
+References: <20170907035758.41689-1-raj.khem@gmail.com>
+	<20170907035758.41689-2-raj.khem@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 11:17:12 +0200
-Message-ID: <CA+chaQd8BSz_wHGiG+xf47GQ5f7mNNeCoNRCE8RjL15mwZpzbg@mail.gmail.com>
-To: wenzong fan <wenzong.fan@windriver.com>
+Date: Wed, 13 Sep 2017 11:33:51 +0200
+Message-ID: <CA+chaQc4dtQCRYuXcOxME66WAPPFVC4gap4P54vFWHTU2+S28g@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] tcpdump: fix CVE-2017-11541, 11542, 11543
+Subject: Re: [meta-oe][PATCH V2 2/5] leveldb: Fix build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,299 +56,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 09:17:12 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 09:33:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Please update the state on patchwork (https://patchwork.
-openembedded.org/project/oe/patches/) when sending updates like this.
+I'm keeping this one in master-next for a bit longer because in some builds
+I've seen some issues which might be caused by enabled parallelism.
 
-You can update it on the site or use some magic keywords in the e-mail
-reply to update it automatically (but I've failed to find link to
-documentation how this magic should look like).
+The log doesn't show much, the only error is:
 
-On Wed, Sep 13, 2017 at 5:21 AM, wenzong fan <wenzong.fan@windriver.com>
-wrote:
+Assembler messages:
+Fatal error: can't create out-shared/db/db_bench.o: No such file or
+directory
+mkdir out-shared/db
 
-> Please ignore this patch, the fixes has been included by:
+So I've removed the parallelism part from this change and re-running the
+builds.
+
+On Thu, Sep 7, 2017 at 5:57 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> Add build parallelism, since we do not use oe_runmake
 >
->   [oe] [meta-networking][PATCH] tcpdump: update to 4.9.2 to fix CVEs
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  ...uild_detect_platform-Check-for-__SSE4_2__.patch | 36
+> ++++++++++++++++++
+>  .../0002-makefile-build-SHARED_MEMENVLIB.patch     | 43
+> ++++++++++++++++++++++
+>  meta-oe/recipes-extended/leveldb/leveldb_git.bb    |  6 ++-
+>  3 files changed, 83 insertions(+), 2 deletions(-)
+>  create mode 100644 meta-oe/recipes-extended/leveldb/leveldb/0001-build_
+> detect_platform-Check-for-__SSE4_2__.patch
+>  create mode 100644 meta-oe/recipes-extended/
+> leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
 >
-> Thanks
-> Wenzong
+> diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-build_
+> detect_platform-Check-for-__SSE4_2__.patch b/meta-oe/recipes-extended/
+> leveldb/leveldb/0001-build_detect_platform-Check-for-__SSE4_2__.patch
+> new file mode 100644
+> index 000000000..bbabf688d
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/leveldb/leveldb/0001-build_
+> detect_platform-Check-for-__SSE4_2__.patch
+> @@ -0,0 +1,36 @@
+> +From 5fd0918df2bb30e8f3edb2ee895d178edbf26f40 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Mon, 4 Sep 2017 22:38:03 -0700
+> +Subject: [PATCH 1/2] build_detect_platform: Check for __SSE4_2__
+> +
+> +just using -msse4.2 is not enough, especially with clang
+> +where it may accept -msse4.2 even during cross compiling
+> +for say arm, however the difference is that builtin defines
+> +wont be defined.
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> +Upstream-Status: Pending
+> +
+> + build_detect_platform | 4 ++--
+> + 1 file changed, 2 insertions(+), 2 deletions(-)
+> +
+> +Index: git/build_detect_platform
+> +===================================================================
+> +--- git.orig/build_detect_platform
+> ++++ git/build_detect_platform
+> +@@ -230,13 +230,12 @@ EOF
+> +     rm -f $CXXOUTPUT 2>/dev/null
+> +
+> +     # Test if gcc SSE 4.2 is supported
+> +-    $CXX $CXXFLAGS -x c++ - -o $CXXOUTPUT -msse4.2 2>/dev/null  <<EOF
+> ++    $CXX $CXXFLAGS -Werror -x c++ - -o $CXXOUTPUT -msse4.2 -dD -E
+> 2>/dev/null | fgrep __SSE4_2__ $CXXOUTPUT 2>/dev/null  <<EOF
+> +       int main() {}
+> + EOF
+> +     if [ "$?" = 0 ]; then
+> +         PLATFORM_SSEFLAGS="-msse4.2"
+> +     fi
+> +-
+> +     rm -f $CXXOUTPUT 2>/dev/null
+> + fi
+> +
+> diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-build-SHARED_MEMENVLIB.patch
+> b/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-
+> build-SHARED_MEMENVLIB.patch
+> new file mode 100644
+> index 000000000..fc708b23a
+> --- /dev/null
+> +++ b/meta-oe/recipes-extended/leveldb/leveldb/0002-makefile-
+> build-SHARED_MEMENVLIB.patch
+> @@ -0,0 +1,43 @@
+> +From 1ed8cec1fcf666904bb3ebd29fc85e235b72d122 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Mon, 4 Sep 2017 22:40:49 -0700
+> +Subject: [PATCH 2/2] makefile: build SHARED_MEMENVLIB
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> +Upstream-Status: Pending
+> +
+> + Makefile | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/Makefile b/Makefile
+> +index f7cc7d7..cb42278 100644
+> +--- a/Makefile
+> ++++ b/Makefile
+> +@@ -126,12 +126,12 @@ SHARED_VERSION_MINOR = 20
+> + SHARED_LIB1 = libleveldb.$(PLATFORM_SHARED_EXT)
+> + SHARED_LIB2 = $(SHARED_LIB1).$(SHARED_VERSION_MAJOR)
+> + SHARED_LIB3 = $(SHARED_LIB1).$(SHARED_VERSION_MAJOR).$(SHARED_
+> VERSION_MINOR)
+> +-SHARED_LIBS = $(SHARED_OUTDIR)/$(SHARED_LIB1) $(SHARED_OUTDIR)/$(SHARED_LIB2)
+> $(SHARED_OUTDIR)/$(SHARED_LIB3)
+> ++SHARED_LIBS = $(SHARED_OUTDIR)/$(SHARED_LIB1) $(SHARED_OUTDIR)/$(SHARED_LIB2)
+> $(SHARED_OUTDIR)/$(SHARED_LIB3) $(SHARED_MEMENVLIB)
+> + $(SHARED_OUTDIR)/$(SHARED_LIB1): $(SHARED_OUTDIR)/$(SHARED_LIB3)
+> +       ln -fs $(SHARED_LIB3) $(SHARED_OUTDIR)/$(SHARED_LIB1)
+> + $(SHARED_OUTDIR)/$(SHARED_LIB2): $(SHARED_OUTDIR)/$(SHARED_LIB3)
+> +       ln -fs $(SHARED_LIB3) $(SHARED_OUTDIR)/$(SHARED_LIB2)
+> +-SHARED_MEMENVLIB = $(SHARED_OUTDIR)/libmemenv.a
+> ++SHARED_MEMENVLIB = $(SHARED_OUTDIR)/libmemenv.$(
+> PLATFORM_SHARED_EXT).$(SHARED_VERSION_MAJOR).$(SHARED_VERSION_MINOR)
+> + endif
+> +
+> + $(SHARED_OUTDIR)/$(SHARED_LIB3): $(SHARED_LIBOBJECTS)
+> +@@ -294,7 +294,7 @@ endif
+> +
+> + $(SHARED_MEMENVLIB):$(SHARED_MEMENVOBJECTS)
+> +       rm -f $@
+> +-      $(AR) -rs $@ $(SHARED_MEMENVOBJECTS)
+> ++      $(CXX) $(LDFLAGS) $(PLATFORM_SHARED_LDFLAGS)$(basename $(notdir
+> $(SHARED_MEMENVLIB))) $(SHARED_MEMENVOBJECTS) -o $(SHARED_MEMENVLIB) $(LIBS)
+> +
+> + $(STATIC_OUTDIR)/db_bench:db/db_bench.cc $(STATIC_LIBOBJECTS)
+> $(TESTUTIL)
+> +       $(CXX) $(LDFLAGS) $(CXXFLAGS) db/db_bench.cc $(STATIC_LIBOBJECTS)
+> $(TESTUTIL) -o $@ $(LIBS)
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+> b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+> index d44aa14d2..93ae2fdea 100644
+> --- a/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+> +++ b/meta-oe/recipes-extended/leveldb/leveldb_git.bb
+> @@ -8,7 +8,9 @@ SRCREV = "a53934a3ae1244679f812d998a4f16f2c7f309a6"
+>  PV = "1.20+git${SRCPV}"
 >
+>  SRC_URI = "git://github.com/google/${BPN}.git \
+> -"
+> +           file://0001-build_detect_platform-Check-for-__SSE4_2__.patch \
+> +           file://0002-makefile-build-SHARED_MEMENVLIB.patch \
+> +           "
 >
-> On 09/07/2017 05:49 PM, wenzong.fan@windriver.com wrote:
+>  S = "${WORKDIR}/git"
 >
->> From: Wenzong Fan <wenzong.fan@windriver.com>
->>
->> Backport patches for fixing:
->> - CVE-2017-11541:
->>    https://nvd.nist.gov/vuln/detail/CVE-2017-11541
->>    https://github.com/the-tcpdump-group/tcpdump/commit/21d702a
->> 136c5c16882e368af7c173df728242280
->>
->> - CVE-2017-11542:
->>    https://nvd.nist.gov/vuln/detail/CVE-2017-11542
->>    https://github.com/the-tcpdump-group/tcpdump/commit/bed4806
->> 2a64fca524156d7684af19f5b4a116fae
->>
->> - CVE-2017-11543:
->>    https://nvd.nist.gov/vuln/detail/CVE-2017-11543
->>    https://github.com/the-tcpdump-group/tcpdump/commit/7039327
->> 875525278d17edee59720e29a3e76b7b3
->>
->> The tests/* changes dropped to workaround patch error:
->>    File tests/*.pcap: git binary diffs are not supported.
->>
->> Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> ---
->>   ...541-In-safeputs-check-the-length-before-c.patch | 49 +++++++++++++
->>   ...1-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch | 43 +++++++++++
->>   ...543-Make-sure-the-SLIP-direction-octet-is.patch | 85
->> ++++++++++++++++++++++
->>   .../recipes-support/tcpdump/tcpdump_4.9.1.bb       |  3 +
->>   4 files changed, 180 insertions(+)
->>   create mode 100644 meta-networking/recipes-suppor
->> t/tcpdump/tcpdump/0001-CVE-2017-11541-In-safeputs-check-
->> the-length-before-c.patch
->>   create mode 100644 meta-networking/recipes-suppor
->> t/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
->>   create mode 100644 meta-networking/recipes-suppor
->> t/tcpdump/tcpdump/0001-CVE-2017-11543-Make-sure-the-SLIP-
->> direction-octet-is.patch
->>
->> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11541-In-safeputs-check-the-length-before-c.patch
->> b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11541-In-safeputs-check-the-length-before-c.patch
->> new file mode 100644
->> index 000000000..a83214b02
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11541-In-safeputs-check-the-length-before-c.patch
->> @@ -0,0 +1,49 @@
->> +From 21d702a136c5c16882e368af7c173df728242280 Mon Sep 17 00:00:00 2001
->> +From: Guy Harris <guy@alum.mit.edu>
->> +Date: Tue, 7 Feb 2017 11:40:36 -0800
->> +Subject: [PATCH] CVE-2017-11541: In safeputs(), check the length before
->> + checking for a NUL terminator.
->> +
->> +safeputs() doesn't do packet bounds checking of its own; it assumes that
->> +the caller has checked the availability in the packet data of all maxlen
->> +bytes of data.  This means we should check that we're within the
->> +specified limit before looking at the byte.
->> +
->> +This fixes a buffer over-read discovered by Kamil Frankowicz.
->> +
->> +Add a test using the capture file supplied by the reporter(s).
->> +
->> +CVE: CVE-2017-11541
->> +
->> +Upstream-Status: Backport
->> +https://github.com/the-tcpdump-group/tcpdump/commit/21d702a
->> 136c5c16882e368af7c173df728242280
->> +
->> +Drop the tests/* changes to workaroud patch error:
->> +File tests/hoobr_safeputs.pcap: git binary diffs are not supported.
->> +
->> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> +---
->> + tests/TESTLIST            |   1 +
->> + tests/hoobr_safeputs.out  |   2 ++
->> + tests/hoobr_safeputs.pcap | Bin 0 -> 88 bytes
->> + util-print.c              |   2 +-
->> + 4 files changed, 4 insertions(+), 1 deletion(-)
->> + create mode 100644 tests/hoobr_safeputs.out
->> + create mode 100644 tests/hoobr_safeputs.pcap
->> +
->> +diff --git a/util-print.c b/util-print.c
->> +index 394e7d59..ec3e8de8 100644
->> +--- a/util-print.c
->> ++++ b/util-print.c
->> +@@ -904,7 +904,7 @@ safeputs(netdissect_options *ndo,
->> + {
->> +       u_int idx = 0;
->> +
->> +-      while (*s && idx < maxlen) {
->> ++      while (idx < maxlen && *s) {
->> +               safeputchar(ndo, *s);
->> +               idx++;
->> +               s++;
->> +--
->> +2.13.0
->> +
->> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11542-PIMv1-Add-a-bounds-check.patch b/meta-networking/recipes-supp
->> ort/tcpdump/tcpdump/0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch
->> new file mode 100644
->> index 000000000..a177e7c0b
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11542-PIMv1-Add-a-bounds-check.patch
->> @@ -0,0 +1,43 @@
->> +From bed48062a64fca524156d7684af19f5b4a116fae Mon Sep 17 00:00:00 2001
->> +From: Guy Harris <guy@alum.mit.edu>
->> +Date: Tue, 7 Feb 2017 11:10:04 -0800
->> +Subject: [PATCH] CVE-2017-11542/PIMv1: Add a bounds check.
->> +
->> +This fixes a buffer over-read discovered by Kamil Frankowicz.
->> +
->> +Add a test using the capture file supplied by the reporter(s).
->> +
->> +CVE: CVE-2017-11542
->> +
->> +Upstream-Status: Backport
->> +https://github.com/the-tcpdump-group/tcpdump/commit/bed4806
->> 2a64fca524156d7684af19f5b4a116fae
->> +
->> +Drop the tests/* changes to workaroud patch error:
->> +File tests/hoobr_pimv1.pcap: git binary diffs are not supported.
->> +
->> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> +---
->> + print-pim.c            |   1 +
->> + tests/TESTLIST         |   1 +
->> + tests/hoobr_pimv1.out  |  25 +++++++++++++++++++++++++
->> + tests/hoobr_pimv1.pcap | Bin 0 -> 3321 bytes
->> + 4 files changed, 27 insertions(+)
->> + create mode 100644 tests/hoobr_pimv1.out
->> + create mode 100644 tests/hoobr_pimv1.pcap
->> +
->> +diff --git a/print-pim.c b/print-pim.c
->> +index 25525953..ed880ae7 100644
->> +--- a/print-pim.c
->> ++++ b/print-pim.c
->> +@@ -306,6 +306,7 @@ pimv1_print(netdissect_options *ndo,
->> +                       pimv1_join_prune_print(ndo, &bp[8], len - 8);
->> +               break;
->> +       }
->> ++      ND_TCHECK(bp[4]);
->> +       if ((bp[4] >> 4) != 1)
->> +               ND_PRINT((ndo, " [v%d]", bp[4] >> 4));
->> +       return;
->> +
->> +--
->> +2.13.0
->> +
->> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
->> b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
->> new file mode 100644
->> index 000000000..36e3f6b0d
->> --- /dev/null
->> +++ b/meta-networking/recipes-support/tcpdump/tcpdump/0001-CVE-
->> 2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
->> @@ -0,0 +1,85 @@
->> +From 7039327875525278d17edee59720e29a3e76b7b3 Mon Sep 17 00:00:00 2001
->> +From: Guy Harris <guy@alum.mit.edu>
->> +Date: Fri, 17 Mar 2017 12:49:04 -0700
->> +Subject: [PATCH] CVE-2017-11543/Make sure the SLIP direction octet is
->> valid.
->> +
->> +Report if it's not, and don't use it as an out-of-bounds index into an
->> +array.
->> +
->> +This fixes a buffer overflow discovered by Wilfried Kirsch.
->> +
->> +Add a test using the capture file supplied by the reporter(s), modified
->> +so the capture file won't be rejected as an invalid capture.
->> +
->> +CVE: CVE-2017-11543
->> +
->> +Upstream-Status: Backport
->> +https://github.com/the-tcpdump-group/tcpdump/commit/7039327
->> 875525278d17edee59720e29a3e76b7b3
->> +
->> +Drop the tests/* changes to workaroud patch error:
->> +File tests/slip-bad-direction.pcap: git binary diffs are not supported.
->> +
->> +Signed-off-by: Wenzong Fan <wenzong.fan@windriver.com>
->> +---
->> + print-sl.c                    |  25 +++++++++++++++++++++++--
->> + tests/TESTLIST                |   3 +++
->> + tests/slip-bad-direction.out  |   1 +
->> + tests/slip-bad-direction.pcap | Bin 0 -> 79 bytes
->> + 4 files changed, 27 insertions(+), 2 deletions(-)
->> + create mode 100644 tests/slip-bad-direction.out
->> + create mode 100644 tests/slip-bad-direction.pcap
->> +
->> +diff --git a/print-sl.c b/print-sl.c
->> +index 3fd7e898..a02077b3 100644
->> +--- a/print-sl.c
->> ++++ b/print-sl.c
->> +@@ -131,8 +131,21 @@ sliplink_print(netdissect_options *ndo,
->> +       u_int hlen;
->> +
->> +       dir = p[SLX_DIR];
->> +-      ND_PRINT((ndo, dir == SLIPDIR_IN ? "I " : "O "));
->> ++      switch (dir) {
->> +
->> ++      case SLIPDIR_IN:
->> ++              ND_PRINT((ndo, "I "));
->> ++              break;
->> ++
->> ++      case SLIPDIR_OUT:
->> ++              ND_PRINT((ndo, "O "));
->> ++              break;
->> ++
->> ++      default:
->> ++              ND_PRINT((ndo, "Invalid direction %d ", dir));
->> ++              dir = -1;
->> ++              break;
->> ++      }
->> +       if (ndo->ndo_nflag) {
->> +               /* XXX just dump the header */
->> +               register int i;
->> +@@ -155,13 +168,21 @@ sliplink_print(netdissect_options *ndo,
->> +                * has restored the IP header copy to IPPROTO_TCP.
->> +                */
->> +               lastconn = ((const struct ip *)&p[SLX_CHDR])->ip_p;
->> ++              ND_PRINT((ndo, "utcp %d: ", lastconn));
->> ++              if (dir == -1) {
->> ++                      /* Direction is bogus, don't use it */
->> ++                      return;
->> ++              }
->> +               hlen = IP_HL(ip);
->> +               hlen += TH_OFF((const struct tcphdr *)&((const int
->> *)ip)[hlen]);
->> +               lastlen[dir][lastconn] = length - (hlen << 2);
->> +-              ND_PRINT((ndo, "utcp %d: ", lastconn));
->> +               break;
->> +
->> +       default:
->> ++              if (dir == -1) {
->> ++                      /* Direction is bogus, don't use it */
->> ++                      return;
->> ++              }
->> +               if (p[SLX_CHDR] & TYPE_COMPRESSED_TCP) {
->> +                       compressed_sl_print(ndo, &p[SLX_CHDR], ip,
->> +                           length, dir);
->> +
->> +--
->> +2.13.0
->> +
->> diff --git a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
->> b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
->> index 261c78427..668d6f5e1 100644
->> --- a/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
->> +++ b/meta-networking/recipes-support/tcpdump/tcpdump_4.9.1.bb
->> @@ -11,6 +11,9 @@ SRC_URI = " \
->>       file://tcpdump-configure-dlpi.patch \
->>       file://add-ptest.patch \
->>       file://run-ptest \
->> +    file://0001-CVE-2017-11542-PIMv1-Add-a-bounds-check.patch \
->> +    file://0001-CVE-2017-11541-In-safeputs-check-the-length-before-c.patch
->> \
->> +    file://0001-CVE-2017-11543-Make-sure-the-SLIP-direction-octet-is.patch
->> \
->>   "
->>     SRC_URI[md5sum] = "1e0293210b0dea5ef18e88e4150394b7"
->>
->> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> @@ -17,7 +19,7 @@ inherit utils
+>  do_compile() {
+>      # do not use oe_runmake. oe_runmake pass to make compilation
+> arguments and override
+>      # leveldb makefile variable CFLAGS and broke leveldb build.
+> -    CFLAGS="${CFLAGS}" make || die
+> +    CFLAGS="${CFLAGS}" make ${PARALLEL_MAKE}|| die
+>  }
+>
+>  do_install() {
+> --
+> 2.14.1
+>
 >
 
