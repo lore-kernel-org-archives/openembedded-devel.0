@@ -1,14 +1,14 @@
 Return-Path: <fabien.lahoudere@collabora.co.uk>
 Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id CCD8B78523
+	by mail.openembedded.org (Postfix) with ESMTP id 2F271785E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 14:24:08 +0000 (UTC)
+	Wed, 13 Sep 2017 15:09:59 +0000 (UTC)
 Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aragua) with ESMTPSA id 35323264FE1
-Message-ID: <1505312646.3560.10.camel@collabora.co.uk>
+	(Authenticated sender: aragua) with ESMTPSA id AEFFF264F7B
+Message-ID: <1505315397.3560.12.camel@collabora.co.uk>
 From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 To: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 16:24:06 +0200
+Date: Wed, 13 Sep 2017 17:09:57 +0200
 In-Reply-To: <CA+chaQdHXzf+u5dAjWXsUU_wBf+hG6hi+VsOKosF+AEHb1kXMg@mail.gmail.com>
 References: <20170911125009.9837-1-fabien.lahoudere@collabora.co.uk>
 	<CA+chaQdYaQa1-D9tRvvRksdv0vhudTaeUKKgRwwRte-PVLRCcg@mail.gmail.com>
@@ -29,11 +29,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 14:24:09 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 15:10:01 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
 
-Ok I will try to update mpd now and see if it help.
+It seems libupnp breaks its API and mpd doesn't support it yet (I also test last release 0.20.10).
+
+I will revert libupnp deletion and rename the one for gerbera support libupnp-1.8.
+Is that solution acceptable?
 
 On Wed, 2017-09-13 at 16:20 +0200, Martin Jansa wrote:
 > Please fix this ASAP, because I've already merged gerbera recipe (tested together with this
