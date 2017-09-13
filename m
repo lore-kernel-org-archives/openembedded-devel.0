@@ -1,49 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-ua0-f195.google.com (mail-ua0-f195.google.com
-	[209.85.217.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 82C63786A4
+Received: from mail-vk0-f66.google.com (mail-vk0-f66.google.com
+	[209.85.213.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C3AA6786C0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 16:06:48 +0000 (UTC)
-Received: by mail-ua0-f195.google.com with SMTP id g47so192498uad.2
+	Wed, 13 Sep 2017 16:07:42 +0000 (UTC)
+Received: by mail-vk0-f66.google.com with SMTP id t10so162527vke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 13 Sep 2017 09:06:49 -0700 (PDT)
+	Wed, 13 Sep 2017 09:07:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Mo4twNt557SB66JJKJXQUkfneoxjDUUmCoq8uTdk63g=;
-	b=e72sqSgKfL5RsV61g/MCaN/UxoGAyqY7yAmwTdfFprrxMsEghjA8FJeAhL7wsUiQDj
-	EaFk5XwlMIbd8WtBO1G1PvhUvV/Qjbj5i4xMJgRFFxnmR7/civJyr90aWlI0dqN2nJZ/
-	DpLKt4dQrHz72jUoKq1BvMLQ2hpyWlvWxlr128nc8IGBXEOm4/SMdNxyIUsyUlcRNpDs
-	ef2p+EjlRjDBfBILDyNM0N4RWOXdvOlKPtVXV6elEviiY5Pl+xqL1/bqIMR0nUEre2/L
-	yONbaWCVgxdsLdk/1e342XgoTnI3E/w8f6k63IWCX89fqMWsCIwQOTilgAr4mPha2ATC
-	Mb4g==
+	:cc; bh=jhn/nya7+Lt2/B89VCbxR8sgkSzcXvf0Kp05W181h5E=;
+	b=L0lt2HR6HRT1qhpA8WsZXWZLHDmhw7EXfJwSw2evB9Z+bI+8YP7+oSSyUSwB9agfo9
+	ejlYHnb5pMTT61aF+IU0Ux3OoWOcMtpZkzHafI7JhRRo8hqQI0AQF8bD3TDwCIdLfvHa
+	a6TLhqYbKl5TOZA8r1Oxn0eeeCuUTAbQBZVBDdeytYoZj+zF4WmedHPs5OUZJu7lfPNA
+	js/wEHNbsl4aqG2Ngqn6UXaXBSS2UU9bgZKAzckspidlasJQkRLz54KrWLrl5F/JnA3s
+	DNhaZBrzpaEE5AkKwceRlIOq10dlcyubuRv9MSRpf0KmHKXQy3Y5tCKQOXuReFWVHMYR
+	+XTQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Mo4twNt557SB66JJKJXQUkfneoxjDUUmCoq8uTdk63g=;
-	b=Xwt7rsgXM0c5zsLSjc8giLJlxaKETtWPjYzqeEYVcDdNb2JiqyUC++LDZM4C/u/c/R
-	Sh+/5ZoKQDbqg2qFQbg3q9W7iIAizErQkV/n0N0TppdnNIizNgjmowOYtWItTpvSVmKX
-	Uthv2G3BTX7c0yCupC1iIV6iG9CWBOfn20jRSKAYFLiniowU2lBXStK0aK/mFcNm9Pxn
-	1ti20+FNXCbe9vFO7Z9FBxklZMkA+kviiOFbWb0apyOibnHsv9jcYoeLMhItUclY55qX
-	D4qUuIzyJgsTFjQx8QrbIxNRNdTBVv6aI85+uLfZTQpCNw6cukztvl0k2wYYE6t+9QPP
-	1QBA==
-X-Gm-Message-State: AHPjjUh0zyw7EKeTHbaekTPTzeSOD7j5RU/680K2rphdpl3frlQ0xh3e
-	LrQjDdMzKsjcbW2jXoO2FlYeJUSCeAwJu5t3TxI=
-X-Google-Smtp-Source: ADKCNb71JW11xKoW9b9PEBJ2QoPYvFLKRs4X30oF1VExrZwQrZErLRA2Vc+Jx8xY1LehGgYwaBK44AGF/ua2ddVDcKw=
-X-Received: by 10.176.21.109 with SMTP id p42mr6903182uae.127.1505318809165;
-	Wed, 13 Sep 2017 09:06:49 -0700 (PDT)
+	bh=jhn/nya7+Lt2/B89VCbxR8sgkSzcXvf0Kp05W181h5E=;
+	b=mJs8YpEvZN5hd8kKoL0XyKT9Nqs1iQZvlkkE3jIv/uolwgRWGM5rmnHqhJAzZISXrC
+	UYBxsldZTj3B47leEFIRRX5hCuihRIB4ODWfpwD8GOWNyoZt4fvsdg8qUE9ERNqf0GQh
+	7yhXM7HguyeSzZ/T2DIKXbGtt4an2mLCWZz13qG2ExvApH7B9yOuNhZIaYZ4kDjZqUoi
+	ilQPlkbef9BXXyNrZutM0/8Mcb7a0/2TOzn1GC7GDopgY/dzBP/ExBzSW4ejLFF/Hnyr
+	dsjzXsHDJI+kPwUhN8hMvEgN3beJEmHUnVITslLW+uNCEg2nV4p+rij6/aJJNxWl+Gmg
+	5bNQ==
+X-Gm-Message-State: AHPjjUjdX5tsCADIDmU0aSCsjLn+lEQbqEB4ZdI1MMDJJ1O3RB7S6WhW
+	EHy91pFnxgJiWrVgQmhQcH2cxYyuU7bhwPA1ZBw=
+X-Google-Smtp-Source: AOwi7QCPWnqv/xmVI+FEnNTaw8Sr6ys9fvIhTqyGaag0Gl+XLJ1/EOp9jiVJpGwGztfh6QQg1LBjcyUjVFDVTTUHEN8=
+X-Received: by 10.31.41.136 with SMTP id p130mr13281100vkp.122.1505318863854; 
+	Wed, 13 Sep 2017 09:07:43 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 09:06:48 -0700 (PDT)
-In-Reply-To: <5a992e251999009a2057a47afae953e1fab2e7cf.1505317801.git.fabien.lahoudere@collabora.co.uk>
+Received: by 10.103.67.130 with HTTP; Wed, 13 Sep 2017 09:07:43 -0700 (PDT)
+In-Reply-To: <1dac1c4e37491a36fd3046a9816cd7a89a91e925.1505317801.git.fabien.lahoudere@collabora.co.uk>
 References: <cover.1505317801.git.fabien.lahoudere@collabora.co.uk>
-	<5a992e251999009a2057a47afae953e1fab2e7cf.1505317801.git.fabien.lahoudere@collabora.co.uk>
+	<1dac1c4e37491a36fd3046a9816cd7a89a91e925.1505317801.git.fabien.lahoudere@collabora.co.uk>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 13 Sep 2017 18:06:48 +0200
-Message-ID: <CA+chaQe7pcP0yyC+B-OesSKKutB655vcaBAQ-d31qSN2i5+Zhg@mail.gmail.com>
+Date: Wed, 13 Sep 2017 18:07:43 +0200
+Message-ID: <CA+chaQfk--dM8ZrC4jVvuYOUzRgixDYWqq9uiA_Lfn_geLDmYA@mail.gmail.com>
 To: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v3 2/2] gerbera: clean recipe
+Subject: Re: [meta-multimedia][PATCH v3 1/2] libupnp: Add recipe for version 1.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,65 +56,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 13 Sep 2017 16:06:48 -0000
+X-List-Received-Date: Wed, 13 Sep 2017 16:07:42 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-There as also comment from Khem asking if all these runtime dependencies
-are really needed. They should be added automatically by package.bbclass.
-
-And you have libupnp in RDEPENDS. So drop whole RDEPENDS and after build
-you can check buildhistory that the runtime dependencies are still there
-for whatever is gerbera linked with.
+Please don't use github archives which can be regenerated in some cases.
+Safer to use just git fetcher.
 
 On Wed, Sep 13, 2017 at 5:58 PM, Fabien Lahoudere <
 fabien.lahoudere@collabora.co.uk> wrote:
 
-> Clean the recipe and change the name of libupnp to libupnp1.8.
+> This version is needed for gerbera, however this version break mpd.
+> So we keep both recipe.
 >
 > Signed-off-by: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
 > ---
->  meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb | 12
-> ++++++------
->  1 file changed, 6 insertions(+), 6 deletions(-)
+>  .../recipes-connectivity/libupnp/libupnp1.8.bb     | 22
+> ++++++++++++++++++++++
+>  1 file changed, 22 insertions(+)
+>  create mode 100644 meta-multimedia/recipes-connectivity/libupnp/libupnp1.
+> 8.bb
 >
-> diff --git a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-> b/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-> index 2bbedc0d1..151127768 100644
-> --- a/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-> +++ b/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb
-> @@ -6,22 +6,22 @@ LIC_FILES_CHKSUM = "file://LICENSE.md;md5=
-> 25cdec9afe3f1f26212ead6bd2f7fac8"
->  SRC_URI = "git://github.com/v00d00/gerbera.git;protocol=https \
->            file://gerbera.service "
->
-> -
-> -# Modify these as desired
->  PV = "1.0+git${SRCPV}"
->  SRCREV = "4435b165d121195aefd67d0287f7f9349e181d45"
->
->  S = "${WORKDIR}/git"
->
-> -DEPENDS = "expat zlib curl libupnp e2fsprogs sqlite3 taglib "
-> -RDEPENDS_${PN} = "expat zlib curl libupnp e2fsprogs taglib "
-> +DEPENDS = "expat zlib curl libupnp1.8 e2fsprogs sqlite3 "
-> +RDEPENDS_${PN} = "expat zlib curl libupnp e2fsprogs "
->
->  SYSTEMD_SERVICE_${PN} = "gerbera.service"
-> -SYSTEMD_AUTO_ENABLE = "enable"
->
->  inherit cmake systemd
->
-> -EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_TAGLIB=FALSE -DWITH_MAGIC=FALSE
-> -DWITH_EXIF=FALSE -DLIBUUID_INCLUDE_DIRS=${WORKDIR}/recipe-sysroot/usr/include
-> -DLIBUUID_LIBRARIES=-luuid"
-> +PACKAGECONFIG = ""
-> +PACKAGECONFIG[taglib] = "-DWITH_TAGLIB=TRUE,-DWITH_TAGLIB=FALSE,taglib"
+> diff --git a/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+> b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+> new file mode 100644
+> index 000000000..5b0e72d42
+> --- /dev/null
+> +++ b/meta-multimedia/recipes-connectivity/libupnp/libupnp1.8.bb
+> @@ -0,0 +1,22 @@
+> +SUMMARY = "Portable SDK for UPnP* Devices"
+> +DESCRIPTION = "The Portable SDK for UPnP Devices is an SDK for
+> development of \
+> +UPnP device and control point applications. It consists of the core UPnP \
+> +protocols along with a UPnP-specific eXtensible Markup Language (XML)
+> parser \
+> +supporting the Document Object Model (DOM) Level 2 API and an optional, \
+> +integrated mini web server for serving UPnP related documents."
+> +HOMEPAGE = "http://pupnp.sourceforge.net/"
+> +LICENSE = "BSD"
 > +
-> +EXTRA_OECMAKE = "-DWITH_JS=FALSE -DWITH_MAGIC=FALSE -DWITH_EXIF=FALSE
-> -DLIBUUID_INCLUDE_DIRS=${STAGING_INCDIR} -DLIBUUID_LIBRARIES=-luuid"
->
->  do_install_append() {
->         install -d ${D}/root/.config/
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=b3190d5244e08e78e4c8ee78544f4863"
+> +
+> +SRC_URI = "https://github.com/mrjimenez/pupnp/archive/release-1.8.2.
+> tar.gz "
+> +
+> +SRC_URI[md5sum] = "db8061f7cbd7f9af993ac4e87ad084cb"
+> +SRC_URI[sha256sum] = "438ad86bfd933cb1e9be1c41bf3bd6
+> 9f049daba11d71bbb5d715336e00106cb4"
+> +
+> +PV="1.8.2"
+> +S="${WORKDIR}/pupnp-release-${PV}"
+> +
+> +inherit autotools
+> +
+> +EXTRA_OECONF += "--enable-reuseaddr"
+> \ No newline at end of file
 > --
 > 2.11.0
 >
