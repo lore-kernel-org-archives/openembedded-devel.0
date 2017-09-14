@@ -1,47 +1,22 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B7CA7782AB
+Return-Path: <fabien.lahoudere@collabora.co.uk>
+Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
+	by mail.openembedded.org (Postfix) with ESMTP id 3BD2E783B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 12:15:20 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id n64so1611490wrb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 05:15:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=SouHiGYL/b0MZdIsFAHmCeDYwqJeRfT1VYdal77HZa0=;
-	b=KQthNxOLUZyifxn0PoZ5WEUDHbCqV/GxihHFxYSGH4uF4WhedwMh/8RQJW/c3xH6Ta
-	tTq+607cx4C4KXyJ9csy6O+2zgYmcJd7wt00b2vn8CxddcCXxBwWORzDDgwGM7mCk/6S
-	psclEDhXAH4fULYw+HoFvSB8FteB7b+ulbgkOlWNhn6UaZ8btNYMbI7HIgvwcYAzvmjM
-	avyeOsiXkWN2iy1KhuUI6Yanr4QAjORWrMWBw6vUYyGtNxQg56UhwL8aMoYWbtdDbSwA
-	CreqnBIkMHurTL+sMIcxaCDrHeDPncjoNrh04wRrZ86YPXrMslivMWHuDEF5YGBamXYC
-	re8g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SouHiGYL/b0MZdIsFAHmCeDYwqJeRfT1VYdal77HZa0=;
-	b=B+en8EusOwuq+DgsIQMRME6JLxwCD3QYjZpEkCmJkMUQDVW4Rl0UWR1H/zylSPr9bP
-	M0Dqizh+vQrTTeghb78Mtf6DCFN99yW0GblHq2abXaY1F7W8RSJx5G0NHSj6W/ep/lrm
-	PAXfRv4HKpgvolhA/eeV6dQv4U6jA5jr9fL7Lp46+N2RElXDekoJyCozowzt5oV4n61L
-	6U2ryaAa/q+hPyXZA5MBDv/hD1d+ggIaVQPotJoL8rTwGKNokelVuLibOFeFXPwvdSdX
-	8JiseYID4WYGEpgV8Hujp0ZCSqj0Bj+9H4ESM5Ynp3c6Z5mfib6hoz7yJmGqDoZUtR3M
-	yKgg==
-X-Gm-Message-State: AHPjjUiRW+5RXV0to1/4//QnY6K6HG9a/QIpSKlMY20n5Kf6Xwk3qfeP
-	PlVE5d2u9XaZCy2d
-X-Google-Smtp-Source: ADKCNb7ZUJT6Yn8llwQGpPI+UsJ6XlelS8LxkUuhS73RJmQpkIiCVbiQ+D2scaBu1nrVGDhVhoFUWA==
-X-Received: by 10.223.176.132 with SMTP id i4mr17901774wra.13.1505391321305;
-	Thu, 14 Sep 2017 05:15:21 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id d5sm1804003wma.22.2017.09.14.05.15.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Sep 2017 05:15:20 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Sep 2017 14:17:40 +0200
-Message-Id: <20170914121740.22996-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [meta-browser][PATCH] chromium: hide textrel QA issues which are there for ages
+	Thu, 14 Sep 2017 12:24:16 +0000 (UTC)
+Received: from [127.0.0.1] (localhost [127.0.0.1])
+	(Authenticated sender: aragua) with ESMTPSA id ED416260447
+Message-ID: <1505391854.3560.17.camel@collabora.co.uk>
+From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
+To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 14 Sep 2017 14:24:14 +0200
+In-Reply-To: <bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
+References: <cover.1505333001.git.fabien.lahoudere@collabora.co.uk>
+	<bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
+X-Mailer: Evolution 3.22.6-1 
+Mime-Version: 1.0
+Subject: Re: [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +29,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 12:15:20 -0000
+X-List-Received-Date: Thu, 14 Sep 2017 12:24:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-* nobody wants to fix them
+On Thu, 2017-09-14 at 08:01 +0000, Peter Kjellerstedt wrote:
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> > Fabien Lahoudere
+> > Sent: den 13 september 2017 22:06
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: [oe] [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
+> > 
+> > In order to build gerbera, we need to support libupnp >= 1.8.
+> > However mpd won't build with this version probably due to API break.
+> 
+> Wouldn't it be more appropriate to copy the current libupnp 1.6 recipe 
+> to libupnp16 and then update the libupnp recipe to 1.8? Presumably we 
+> want to get rid of the 1.6 version whenever mpd is updated to support 
+> the new API.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes-browser/chromium/chromium.inc | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+It is not a problem for me. Both solution are fine.
+The decision concerns only maintainers and their preferences.
 
-diff --git a/recipes-browser/chromium/chromium.inc b/recipes-browser/chromium/chromium.inc
-index 34dd2e8..ad3d50d 100644
---- a/recipes-browser/chromium/chromium.inc
-+++ b/recipes-browser/chromium/chromium.inc
-@@ -103,6 +103,8 @@ FILES_${PN}-dbg += "${bindir}/${BPN}/.debug/ ${libdir}/${BPN}/.debug/ ${libdir}/
- 
- PACKAGE_DEBUG_SPLIT_STYLE = "debug-without-src"
- 
--INSANE_SKIP_${PN} = "ldflags"
-+# chromium-54.0.2810.2: ELF binary 'i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome' has relocations in .text [textrel]
-+# chromium-wayland-53.0.2785.143: ELF binary 'i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome' has relocations in .text [textrel]
-+INSANE_SKIP_${PN} = "ldflags textrel"
- SOLIBS = ".so"
- FILES_SOLIBSDEV = ""
--- 
-2.14.1
-
+> 
+> > So we add a new recipe libupnp1.8 to be able to use both version.
+> > Both version can be run in parallel.
+> > 
+> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
+> > neon/libupnp_1.6.21-r0_armhf.deb
+> > drwxrwxrwx root/root         0 2017-09-13 17:26 ./
+> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/
+> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/lib/
+> > -rwxr-xr-x root/root     31600 2017-09-13 17:26
+> > ./usr/lib/libixml.so.2.0.8
+> > -rwxr-xr-x root/root     17912 2017-09-13 17:26
+> > ./usr/lib/libthreadutil.so.6.0.4
+> > -rwxr-xr-x root/root    117676 2017-09-13 17:26
+> > ./usr/lib/libupnp.so.6.3.4
+> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libixml.so.2
+> > -> libixml.so.2.0.8
+> > lrwxrwxrwx root/root         0 2017-09-13 17:26
+> > ./usr/lib/libthreadutil.so.6 -> libthreadutil.so.6.0.4
+> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libupnp.so.6
+> > -> libupnp.so.6.3.4
+> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
+> > neon/libupnp1.8_1.8.2-r0_armhf.deb
+> > drwxrwxrwx root/root         0 2017-09-13 17:43 ./
+> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/
+> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/lib/
+> > -rwxr-xr-x root/root     35696 2017-09-13 17:43
+> > ./usr/lib/libixml.so.10.0.1
+> > -rwxr-xr-x root/root    155128 2017-09-13 17:43
+> > ./usr/lib/libupnp.so.10.1.1
+> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libixml.so.10
+> > -> libixml.so.10.0.1
+> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libupnp.so.10
+> > -> libupnp.so.10.1.1
+> > 
+> > mpd and gerbera have been built successfully with this fix.
+> > 
+> > The patch also clean a bit gerbera recipe and fix dependency issue.
+> > 
+> > Changes since v3:
+> > 	- Drop RDEPENDS from gerbera recipe.
+> > 	- use git fetcher instead of github archive for libupnp
+> > 
+> > Fabien Lahoudere (2):
+> >   libupnp: Add recipe for version 1.8.2
+> >   gerbera: clean recipe
+> > 
+> >  .../recipes-connectivity/libupnp/libupnp1.8.bb       | 20
+> > ++++++++++++++++++++
+> >  .../recipes-multimedia/gerbera/gerbera_git.bb        | 12 ++++++------
+> >  2 files changed, 26 insertions(+), 6 deletions(-)
+> >  create mode 100644 meta-multimedia/recipes-
+> > connectivity/libupnp/libupnp1.8.bb
+> > 
+> > --
+> > 2.11.0
+> 
+> //Peter
+> 
 
