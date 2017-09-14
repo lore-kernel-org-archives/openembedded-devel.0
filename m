@@ -1,30 +1,32 @@
 Return-Path: <huangqy.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 660D9783A8
+	by mail.openembedded.org (Postfix) with ESMTP id 550DA7856C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 01:58:36 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.42,390,1500912000"; d="scan'208";a="26250050"
+	Thu, 14 Sep 2017 01:58:40 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.42,390,1500912000"; d="scan'208";a="26250054"
 Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2017 09:58:36 +0800
+	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2017 09:58:43 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C675846BA6A5
+	by cn.fujitsu.com (Postfix) with ESMTP id 41A9347278EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 09:58:33 +0800 (CST)
+	Thu, 14 Sep 2017 09:58:43 +0800 (CST)
 Received: from localhost.localdomain (10.167.235.93) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Thu, 14 Sep 2017 09:58:32 +0800
+	Server (TLS) id 14.3.361.1; Thu, 14 Sep 2017 09:58:42 +0800
 From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Sep 2017 09:58:29 +0800
-Message-ID: <1505354318-33200-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Thu, 14 Sep 2017 09:58:33 +0800
+Message-ID: <1505354318-33200-5-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
+In-Reply-To: <1505354318-33200-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+References: <1505354318-33200-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
 X-Originating-IP: [10.167.235.93]
-X-yoursite-MailScanner-ID: C675846BA6A5.A5483
+X-yoursite-MailScanner-ID: 41A9347278EA.A435B
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH] daemontools: Add HOMEPAGE info into recipe file.
+Subject: [meta-oe][PATCH] libjs-sizzle: Add HOMEPAGE info into recipe file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,26 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 01:58:38 -0000
+X-List-Received-Date: Thu, 14 Sep 2017 01:58:42 -0000
 Content-Type: text/plain
 
-From: Bian Yaqin <bianyq@cn.fujitsu.com>
-
-Signed-off-by: Bian Yaqin <bianyq@cn.fujitsu.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- meta-oe/recipes-support/daemontools/daemontools_0.76.bb | 1 +
+ meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-index def58db..84e9bca 100644
---- a/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
-+++ b/meta-oe/recipes-support/daemontools/daemontools_0.76.bb
+diff --git a/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb b/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
+index 92ab31f..4928b6c 100644
+--- a/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
++++ b/meta-oe/recipes-support/libjs/libjs-sizzle_1.10.18.bb
 @@ -1,4 +1,5 @@
- SUMMARY = "DJB daemontools"
-+HOMEPAGE = "http://cr.yp.to/daemontools.html"
- DESCRIPTION = "supervise monitors a service. It starts the service and restarts the \
- service if it dies. The companion svc program stops, pauses, or restarts \
- the service on sysadmin request. The svstat program prints a one-line \
+ SUMMARY = "Pure-JavaScript CSS selector engine"
++HOMEPAGE = "https://github.com/jquery/sizzle/wiki"
+ LICENSE = "GPL-2.0 & MIT & AFL-2.1"
+ LIC_FILES_CHKSUM = "file://MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9"
+ 
 -- 
 2.7.4
 
