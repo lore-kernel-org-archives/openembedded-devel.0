@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-vk0-f65.google.com (mail-vk0-f65.google.com
-	[209.85.213.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E2881783D3
+Received: from mail-ua0-f173.google.com (mail-ua0-f173.google.com
+	[209.85.217.173])
+	by mail.openembedded.org (Postfix) with ESMTP id 7502C783D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 10:33:27 +0000 (UTC)
-Received: by mail-vk0-f65.google.com with SMTP id v203so671389vkv.1
+	Thu, 14 Sep 2017 10:53:37 +0000 (UTC)
+Received: by mail-ua0-f173.google.com with SMTP id q29so3559196uaf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 03:33:29 -0700 (PDT)
+	Thu, 14 Sep 2017 03:53:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xtSpU5Z2QCgE5aFK0KgNiMPQlmhCQKXVt15gOsaLzNs=;
-	b=NsSfYQMb7F6wltN9yAXZwT5tgIQ+sI+AkY3fNmaLBp0FULd6JAzfcosRNTe+QM8JEE
-	mJjJchqMpk9blEEIkEIVgMC8i2JQAZFYW4NUAhYqLlnn0hN1ugq3F4bz9c9WVMJ5sRcv
-	he2yUMs6phTfo2CaPsm8K+eBhVyH4YZCsC4amnrE5j1rlFo9a3EkabqLbDY4s/pRR6Cy
-	rIK4xPJw4L2lPxeBSyuwkFmnQbmeJHF8VCUN3UIZMlI83E2jEA+qWO0a8ydmEqwRxm5R
-	SyGlauxYYRxYaVgGCSFuF2UcQ8S7/D/4YhQCzsYmPoSLnKrV99mWAVQy6hyW21myvMlH
-	TUlA==
+	:cc; bh=BuMPT64BJT2eVtAsJ2TxN8AM3UwQQphGzoj2ng3cF+w=;
+	b=qpuS1ROczTE6w6IvYgnnST6HJMPNsaJbXyFaPLab6dkadS+669TwsbJtJwQz0edAEg
+	E9KMXPVGxQPlKEtdkg2SSdosQ4ECFix7SXswoWgLTtPGzfjIxqYYUdowmAUyoIcpI9A8
+	wXjkX9a/w7//6hd6R6r38+suSJ0L+dBFtwbe0hm2fAIBbwLE4g/jNO/n7YGuyHIzca9W
+	G2kHFfSQzS/UVROtUN1TOgx4ABFqoSLbxE0kFsX3c2eAR5HCOeUxVkdbHSaLUZYZr4ji
+	QVfdfuzHJUxr2wZAA1kl9h8YmRQooyBxbsmeWs2smlO+aElgapjXs0GGrsbZwFw7DB5W
+	Unlw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=xtSpU5Z2QCgE5aFK0KgNiMPQlmhCQKXVt15gOsaLzNs=;
-	b=VQNSA8RFQLCBJMq6KLlcrfa49EHl/8lFMTPmosFDmonlKaPB6GBEgllMhNHzKExaBl
-	pQodC6HkAaPB4nJIm+rE2nUNSzs7svSRTcGrAG7J3J4A8l2wjleQtZf9o1mFIN+RVkCE
-	HDf7LGaXuQd8eN5qQaej2UOUDCocZGJVTIndPZ1OR7GGvgd3SzgEGQM40F4PlXTeW1o9
-	RGfRZkjOnrDJwfgwVlA3uc1atTxthPI8Z5G+PzxxNKrlfPoq7ODPyqAJrZGi/kW+YXqC
-	rPEeLxS6zG4CjtKoE/Dt7RyMbCQgT463dzj1J3iVFg4NI9/QavnU9H8q3vOwpM30b1Y1
-	Vf4Q==
-X-Gm-Message-State: AHPjjUjt6hN64ZjPYa+Qj6Z2XpP8FSAsdmH0K5kNYP9K+RuozASqrs/w
-	iuZMnNUE7qjsiIseW4aK9SndxPvALb9hX/YWLUA=
-X-Google-Smtp-Source: AOwi7QBpfLhWoMbF3rBP1UXq9wUCDLMDrJ/0SUfar9U5Y24iNDAuNOOHRFQwUzUWIe65GEKIW0OrvgMl+Q37kYswRlQ=
-X-Received: by 10.31.231.1 with SMTP id e1mr15807831vkh.90.1505385208980; Thu,
-	14 Sep 2017 03:33:28 -0700 (PDT)
+	bh=BuMPT64BJT2eVtAsJ2TxN8AM3UwQQphGzoj2ng3cF+w=;
+	b=QCKatbXYbCemThchSYRQefP5LJDNsEe+XXmZJD74CR2aH7l1oZKWuDkxG8am1wbDCV
+	s0GVfrL+tUoGfK3ZQ6FLPcBiGni2HsKJSylBz+SmMh/0hANfIGpVl2ferd33wyNU3KuI
+	TiZZDH1ls7xSUCJbQ4cGD0SrfvX7w7MkJYvhk5Vu6JPVtsk8ai+9M1VMilI1W1SOSID4
+	wgqnhwG5nVi0Akcktbm0Znppny0gRfxkLTbtgD8DxvpCytdxMdviA97oqhbsdiv6JGc0
+	MYVhVeNBCmwvrQv22Hy7YH6EwivRDJ/E2Mg5c0HCNw8hP+1j2TVK86MLvhqb5p38nP12
+	IVcg==
+X-Gm-Message-State: AHPjjUgZN9DDtM9G5KsgjmeuOEYELNjvbaygKwwYc0mTIPdmB0lVGwmr
+	LIUMGBvrNYSDzSnzCsIGJX/YxWNgKC3aQTY8kRCh/Q==
+X-Google-Smtp-Source: ADKCNb6Xb0lyGSYVXXD57cwZFJL7YFA4R+1giSLLacsF7/0F2Re2IBwit8d4XmgdDZ93NV0gMu95cOpOavfhUjlzIAc=
+X-Received: by 10.159.51.236 with SMTP id y44mr15991833uab.2.1505386418550;
+	Thu, 14 Sep 2017 03:53:38 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.103.67.130 with HTTP; Thu, 14 Sep 2017 03:33:28 -0700 (PDT)
-In-Reply-To: <CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
-References: <20170913093821.12746-1-kai.kang@windriver.com>
-	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
-	<CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
+Received: by 10.103.67.130 with HTTP; Thu, 14 Sep 2017 03:53:38 -0700 (PDT)
+In-Reply-To: <20170914081341.25163-1-brgl@bgdev.pl>
+References: <20170914081341.25163-1-brgl@bgdev.pl>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 14 Sep 2017 12:33:28 +0200
-Message-ID: <CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 14 Sep 2017 12:53:38 +0200
+Message-ID: <CA+chaQc7n8tEJb2q2k1YQg2exQ5ho_GfJq89g3jvz4+sEc-xUg@mail.gmail.com>
+To: Bartosz Golaszewski <brgl@bgdev.pl>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
+Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] ceres-solver: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,27 +57,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 10:33:28 -0000
+X-List-Received-Date: Thu, 14 Sep 2017 10:53:37 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-LSB compliance isn't a goal of meta-oe as well, otherwise we'd need to add
-Qt4 to meta-oe too.
+Why do you prefer useless empty package to be installed together with the
+${PN}-dev?
 
-On Thu, Sep 14, 2017 at 12:25 PM, Burton, Ross <ross.burton@intel.com>
-wrote:
+RDEPENDS_${PN}-dev = ""
 
-> On 13 September 2017 at 10:54, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
+was IMHO better.
+
+On Thu, Sep 14, 2017 at 10:13 AM, Bartosz Golaszewski <brgl@bgdev.pl> wrote:
+
+> From: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
 >
->> All other LSB related recipes are in oe-core, why should libpng12 be
->> different and live in meta-oe?
+> Ceres Solver is an open source C++ library for modeling and solving
+> large, complicated optimization problems.
 >
+> It's often used in 3D computer vision applications.
 >
-> Mainly because LSB compliance isn't a goal of oe-core, otherwise we'd need
-> to add Qt4 to oe-core too.
+> Signed-off-by: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+> ---
+> v1 -> v2:
+> - now fetching the source from git, not github archives
+> - only add a specific directory (cmake files) to FILES_${PN}-dev
+> - don't create the ${PN} package as the project is not building
+>   a shared library
 >
-> meta-oe seems like a perfectly acceptable place for this.
+> v2 -> v3:
+> - instead of not creating the ceres-solver package, just allow it to
+>   be empty
 >
-> Ross
+>  .../ceres-solver/ceres-solver_1.13.bb                | 20
+> ++++++++++++++++++++
+>  1 file changed, 20 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/ceres-solver/
+> ceres-solver_1.13.bb
+>
+> diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+> b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+> new file mode 100644
+> index 0000000..e883c70
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+> @@ -0,0 +1,20 @@
+> +DESCRIPTION = "Ceres Solver is an open source C++ library for modeling
+> and solving large, complicated optimization problems."
+> +AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
+> +HOMEPAGE = "http://ceres-solver.org/"
+> +
+> +LICENSE = "BSD-3-Clause"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
+> +
+> +SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
+> +SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
+> +
+> +S = "${WORKDIR}/git"
+> +
+> +DEPENDS = "libeigen glog"
+> +
+> +inherit cmake
+> +
+> +# Only a static library and headers are created
+> +ALLOW_EMPTY_${PN} = "1"
+> +
+> +FILES_${PN}-dev += "${libdir}/cmake/*"
+> --
+> 2.7.4
+>
 >
 
