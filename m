@@ -1,54 +1,54 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 7D725784F8
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 98E026067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 14:44:01 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id f4so312708wmh.4
+	Thu, 14 Sep 2017 15:03:54 +0000 (UTC)
+Received: by mail-io0-f178.google.com with SMTP id v36so1208149ioi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 07:44:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=K3GllEpKZ7O29YRtzQ6bIuGApB9fEjgCGRH93re6lMM=;
-	b=ii6k1/WxbiO7B6WwMnFp0Ck1DjCgwTb6+FbXVWM7S/73A6qFJu6KyhG0ZIW2FBrkF4
-	fX7W410j2AwJGITaKtygac1jlpK1wONUwdYXZYcZhO7fvnOBC+m+DEuE2tO3DVHLHl/8
-	lzkzcuzUlXPfDBnJjBMMnG0ZtJsSpbDc/JZftru8uvs4vDyk2UY1qfrZZVSBqKQUTKoO
-	O9Jgd9tMkd36y5BV1fc8Ldd0hjn+p4WY9LcReX0Qey7D27qhzIsc15ImW5GoI3p7+ZuI
-	/RxbnV7VpJpyYEyOFT3HhCEKesVWlP+ZlYlose3zwPmFHDG0ACUsP/PmF0X59yEpDsqk
-	S3LA==
+	Thu, 14 Sep 2017 08:03:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=nx96SC652YjeHFrI4pfl3VMDDpuVjl+0vukiEcCIMCc=;
+	b=omnrkALwL6N78/jpTgwCNmIiZqdhwBh6mI979lZfYYRKzTGbVWR/RHOW/jVQ3Ji86b
+	Y9rr7aQTYc6ZQ3uN8Py8TYbsCOid9WKnuisO/IkUtUNo38teABVOi5E33Sd89g69biOz
+	Sl2bFQEW1s/h2F4mSflgnsAaPvjBTZEGG9qQ9taiTwuh4qcNd5AKHU2L1zPWOkwG4VdF
+	wa/xW6u0BlJAfHdtxfyQqcovDGejnAhe/EcKLulmCa712cp55I/qnWSQToCv4ziSixX+
+	MPmQlBZLm8IS13o2IsoODGA3R7/wFpkNG+mefgJp/Bp6pcRFtt0n2/sXvnQesupugvTv
+	nTTw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=K3GllEpKZ7O29YRtzQ6bIuGApB9fEjgCGRH93re6lMM=;
-	b=dczGxk/Q/uaH8ImWVVJW3Nz8QvICZVNKBGMHPgImR2jgYLMQo7P/Z8guwtyuaxh8LG
-	XL/GchX8SK8d8h+nykWKlNEGn5ubyxvxbFNA1KHZPOFfDfT7WqW+M5S7LzCZsGSgT0Eq
-	bbG7BY7g8lbG4LoLvs1Q+MpKLJJzy3c2FhXWK9BZEqyfwOhyHNLEyurpAO4S2OPnmVUS
-	wvJ9s03a34A3Pe9s3W6GnYo3qkqZi2AhrtZuEqNSKWOlXaVYEJxW7/x0Te0Etf439wSG
-	M88N+fQHfMr3czscmAm84c7rldr8FlZY+VCpooDA2nVFCsEmijvBmIJxmLxkhMK93gI5
-	SEZA==
-X-Gm-Message-State: AHPjjUiMfOy7kbUnG0nu5VIzJX8kecZT0p/LGlZu3IsAzqEzts9pIyfR
-	/6U61ioU3Uok5A==
-X-Google-Smtp-Source: AOwi7QCuRCA5MLHnd4sciUgllnZQPtlfsWP+WWBe0twhpGmC9tm7YmZAt44iCPy3wyE4dn3XikVAjQ==
-X-Received: by 10.28.23.76 with SMTP id 73mr280406wmx.70.1505400242293;
-	Thu, 14 Sep 2017 07:44:02 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id m86sm189256wmi.27.2017.09.14.07.44.01
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 14 Sep 2017 07:44:01 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Thu, 14 Sep 2017 16:46:22 +0200
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-Message-ID: <20170914144622.GA3292@jama>
-References: <cover.1505333001.git.fabien.lahoudere@collabora.co.uk>
-	<bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=nx96SC652YjeHFrI4pfl3VMDDpuVjl+0vukiEcCIMCc=;
+	b=EGfUFSoCIPeT0khPVgf20ICgW8iiFLLPggs0wapGRXYSeP73O/WcJoMYO3EnHyVHSO
+	L6ok3TrBYIIdfU5MmBbMz9NTMY7Q5nK+P2Tz4IPH53UmKo3rkZ591dCBTNCGvUctcdxC
+	c2ZoX0potOgjblgge8JVvUpa/QpO9ALI23pL/EuESPL5c+qc1p1PjZLVKg2n+IR8VyZh
+	ukWTYI8BXujfYY+Ah5NjQTwY/b5di8o1y9wVuccDy0gN6i8LGx/dvP3IZSYXZ6EpXJgV
+	tjDS5Q9VCd8SHqmLZVRBtUJff3+oUKy5uMIzlS6ZW4oHqnIgPbAQsrgdiO5wXGZYBnP3
+	6q6A==
+X-Gm-Message-State: AHPjjUiLfVdbZw1RFAnBdzawG32SJwt6Pw48j0wDdg0Kc0fW68D7eFy4
+	60vN6+MjhJPCcoFCjGbH9+BvPKYeGZGhfIUwMrVnmw==
+X-Google-Smtp-Source: AOwi7QCPU2P4+1+wDtu1H0+Pk+VauiMHx4OSUmkNSUAhs2jGjFdr3nuTV9jh+/bJXPy6zU88/pYpH/A6vUN0oPpsgjU=
+X-Received: by 10.107.32.70 with SMTP id g67mr3331101iog.77.1505401435580;
+	Thu, 14 Sep 2017 08:03:55 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
-User-Agent: Mutt/1.9.0 (2017-09-02)
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
+Received: by 10.107.19.68 with HTTP; Thu, 14 Sep 2017 08:03:34 -0700 (PDT)
+In-Reply-To: <a28c31a6-0635-6e7a-414c-beeef338ba45@linux.intel.com>
+References: <20170913093821.12746-1-kai.kang@windriver.com>
+	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
+	<CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
+	<CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
+	<CAJTo0La57nRi7hraiCbNqyKXA6t7vvRw6=YXprWV5usReHMB4g@mail.gmail.com>
+	<a28c31a6-0635-6e7a-414c-beeef338ba45@linux.intel.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 14 Sep 2017 16:03:34 +0100
+Message-ID: <CAJTo0LbR-ks7hgfg8L2cLXoThLZxa_PAY28ci-gt5XZtn29AOg@mail.gmail.com>
+To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,116 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 14:44:01 -0000
-X-Groupsio-MsgNum: 68808
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="ReaqsoxgOBHFXBhH"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 14 Sep 2017 15:03:54 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---ReaqsoxgOBHFXBhH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 14 September 2017 at 14:49, Alexander Kanavin <
+alexander.kanavin@linux.intel.com> wrote:
 
-On Thu, Sep 14, 2017 at 08:01:49AM +0000, Peter Kjellerstedt wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Fabien Lahoudere
-> > Sent: den 13 september 2017 22:06
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
-> >=20
-> > In order to build gerbera, we need to support libupnp >=3D 1.8.
-> > However mpd won't build with this version probably due to API break.
->=20
-> Wouldn't it be more appropriate to copy the current libupnp 1.6 recipe=20
-> to libupnp16 and then update the libupnp recipe to 1.8? Presumably we=20
-> want to get rid of the 1.6 version whenever mpd is updated to support=20
-> the new API.
+> On 09/14/2017 04:42 PM, Burton, Ross wrote:
+>
+>> On 14 September 2017 at 11:33, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>>
+>> LSB compliance isn't a goal of meta-oe as well, otherwise we'd need to
+>>> add Qt4 to meta-oe too.
+>>>
+>>>
+>> Touche.
+>>
+>> It still needs to go somewhere though...
+>>
+>
+> How about modifying the LSB tests to make the absence of libpng12 a
+> warning rather than an error?
+>
 
-Makes sense, I've renamed it in master-next.
+Then it won't be doing a LSB test...   The LSB is the LSB, we don't claim
+to support it, but there's a need for a libpng12 recipe for people who want
+to be close.  Currently it's just this one recipe that I'm aware of that
+isn't already in a layer somewhere.
 
-I've also noticed that libupnp is optionally used by vlc, that's not
-tested by my world builds, because PACKAGECONFIG for it isn't enabled by
-default, but maybe vlc is also incompatible with libupnp 1.8.
+Ross
 
-> > So we add a new recipe libupnp1.8 to be able to use both version.
-> > Both version can be run in parallel.
-> >=20
-> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
-> > neon/libupnp_1.6.21-r0_armhf.deb
-> > drwxrwxrwx root/root         0 2017-09-13 17:26 ./
-> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/
-> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/lib/
-> > -rwxr-xr-x root/root     31600 2017-09-13 17:26
-> > ./usr/lib/libixml.so.2.0.8
-> > -rwxr-xr-x root/root     17912 2017-09-13 17:26
-> > ./usr/lib/libthreadutil.so.6.0.4
-> > -rwxr-xr-x root/root    117676 2017-09-13 17:26
-> > ./usr/lib/libupnp.so.6.3.4
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libixml.so.2
-> > -> libixml.so.2.0.8
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26
-> > ./usr/lib/libthreadutil.so.6 -> libthreadutil.so.6.0.4
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libupnp.so.6
-> > -> libupnp.so.6.3.4
-> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
-> > neon/libupnp1.8_1.8.2-r0_armhf.deb
-> > drwxrwxrwx root/root         0 2017-09-13 17:43 ./
-> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/
-> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/lib/
-> > -rwxr-xr-x root/root     35696 2017-09-13 17:43
-> > ./usr/lib/libixml.so.10.0.1
-> > -rwxr-xr-x root/root    155128 2017-09-13 17:43
-> > ./usr/lib/libupnp.so.10.1.1
-> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libixml.so.10
-> > -> libixml.so.10.0.1
-> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libupnp.so.10
-> > -> libupnp.so.10.1.1
-> >=20
-> > mpd and gerbera have been built successfully with this fix.
-> >=20
-> > The patch also clean a bit gerbera recipe and fix dependency issue.
-> >=20
-> > Changes since v3:
-> > 	- Drop RDEPENDS from gerbera recipe.
-> > 	- use git fetcher instead of github archive for libupnp
-> >=20
-> > Fabien Lahoudere (2):
-> >   libupnp: Add recipe for version 1.8.2
-> >   gerbera: clean recipe
-> >=20
-> >  .../recipes-connectivity/libupnp/libupnp1.8.bb       | 20
-> > ++++++++++++++++++++
-> >  .../recipes-multimedia/gerbera/gerbera_git.bb        | 12 ++++++------
-> >  2 files changed, 26 insertions(+), 6 deletions(-)
-> >  create mode 100644 meta-multimedia/recipes-
-> > connectivity/libupnp/libupnp1.8.bb
-> >=20
-> > --
-> > 2.11.0
->=20
-> //Peter
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-
---ReaqsoxgOBHFXBhH
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-
------BEGIN PGP SIGNATURE-----
-
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWbqWPQAKCRA3VSO3ZXaA
-HGlRAJwOOYwEX4ej4SF9JvG+e+gUQfAXxQCgqrGdza0J9JzOzEhFxwJlwDpyFRs=
-=Gmin
------END PGP SIGNATURE-----
-
---ReaqsoxgOBHFXBhH--
