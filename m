@@ -1,22 +1,52 @@
-Return-Path: <fabien.lahoudere@collabora.co.uk>
-Received: from bhuna.collabora.co.uk (bhuna.collabora.co.uk [46.235.227.227])
-	by mail.openembedded.org (Postfix) with ESMTP id 3BD2E783B6
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D70678363
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 12:24:16 +0000 (UTC)
-Received: from [127.0.0.1] (localhost [127.0.0.1])
-	(Authenticated sender: aragua) with ESMTPSA id ED416260447
-Message-ID: <1505391854.3560.17.camel@collabora.co.uk>
-From: Fabien Lahoudere <fabien.lahoudere@collabora.co.uk>
-To: Peter Kjellerstedt <peter.kjellerstedt@axis.com>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Sep 2017 14:24:14 +0200
-In-Reply-To: <bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
-References: <cover.1505333001.git.fabien.lahoudere@collabora.co.uk>
-	<bb4c384945a04d3cb2e3690aeef5d48d@XBOX02.axis.com>
-X-Mailer: Evolution 3.22.6-1 
-Mime-Version: 1.0
-Subject: Re: [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
+	Thu, 14 Sep 2017 13:43:17 +0000 (UTC)
+Received: by mail-io0-f178.google.com with SMTP id k101so524775iod.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 14 Sep 2017 06:43:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=iRD5d/7hFGhDuztMyHz1/ew32KCzr9bv3Z9Wc29p7Jg=;
+	b=w5GJNG8WxwouIne/59INdkCitcMfVXCl7y7Z7DQnyw8eBu68YvmNW9N1o7mUvV7WvL
+	D7NBu6o9ndW34Utj9dVawknY+hbbp+o4I/BGwMLeXBxIeA6pwfq6q7pWCE7HRHe068Dg
+	JuGxCHuTnk9SJnsdfIKLX+MLdEQMPRe99IIPdH6j1r2fyMatlMIiM886/2Oo7X5R67Jb
+	AZhk03TKOnMLrEWO2hz44RzmkK/A5vIGCty0sW8AtASaA0u+rvpKkhwh21YJHhLKB5lE
+	M4TrshfIRwZuEKiK1H4GMiGzOCxduOIawVtbzKYDXaw8lk1Ia+uO2DF7MazGvxirJA24
+	G1TA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=iRD5d/7hFGhDuztMyHz1/ew32KCzr9bv3Z9Wc29p7Jg=;
+	b=kd3fsiYLPC12NP+5ksVrWgDMACJ28u/zrC1ERo5P79sC/HN2tRM0+N2ireJp/2J/62
+	cGb7dTl75ouOZTUyhZbveTVsRbJFqXMJX8yS5A8b9kw1hmmkf9UQNnfXs6x+fMPBQPqa
+	cbmqSOil84KWTWiV7wgd3c29vKPEtdieyKN0ziJE1FX2Q6GheoJeaqQlwvX3zgBAqaPP
+	nFNlFP+qYXI53SzB8SwCwlPE8R21MQp8to0HKUw04s0g7L4H3FhmuF44Qe1BTXJ62kZ9
+	Fw+FxRvfIN3mUUOCF030Wo5ai5W1QPqjJISUCOEOjBCGBHOXyeMS4CXIdpVCChPOazRa
+	3C0A==
+X-Gm-Message-State: AHPjjUjgeJpA8YqTf0M75u9tUy+Nh2cVm8P7Ik+xBVhOTenOj/QZJRTb
+	rWPdZJg/6ob72/p6v7Eutzcg7jPtyzhYQWEomgX+WQ==
+X-Google-Smtp-Source: AOwi7QAzp4njJIjhyqRLHWylW3w6Rq4MWbxJrHiwsGQUGtjkur19nEJ15Cpwyu1XPQ4ookJIPtYPnkEKbHVQHJMPeqA=
+X-Received: by 10.107.135.72 with SMTP id j69mr2919995iod.210.1505396599113;
+	Thu, 14 Sep 2017 06:43:19 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.19.68 with HTTP; Thu, 14 Sep 2017 06:42:58 -0700 (PDT)
+In-Reply-To: <CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
+References: <20170913093821.12746-1-kai.kang@windriver.com>
+	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
+	<CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
+	<CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 14 Sep 2017 14:42:58 +0100
+Message-ID: <CAJTo0La57nRi7hraiCbNqyKXA6t7vvRw6=YXprWV5usReHMB4g@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,87 +59,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 12:24:16 -0000
+X-List-Received-Date: Thu, 14 Sep 2017 13:43:18 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
 
-On Thu, 2017-09-14 at 08:01 +0000, Peter Kjellerstedt wrote:
-> > -----Original Message-----
-> > From: openembedded-devel-bounces@lists.openembedded.org
-> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> > Fabien Lahoudere
-> > Sent: den 13 september 2017 22:06
-> > To: openembedded-devel@lists.openembedded.org
-> > Subject: [oe] [meta-multimedia][PATCH v4 0/2] Add libupnp1.8 recipe
-> > 
-> > In order to build gerbera, we need to support libupnp >= 1.8.
-> > However mpd won't build with this version probably due to API break.
-> 
-> Wouldn't it be more appropriate to copy the current libupnp 1.6 recipe 
-> to libupnp16 and then update the libupnp recipe to 1.8? Presumably we 
-> want to get rid of the 1.6 version whenever mpd is updated to support 
-> the new API.
+On 14 September 2017 at 11:33, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-It is not a problem for me. Both solution are fine.
-The decision concerns only maintainers and their preferences.
+> LSB compliance isn't a goal of meta-oe as well, otherwise we'd need to
+> add Qt4 to meta-oe too.
+>
 
-> 
-> > So we add a new recipe libupnp1.8 to be able to use both version.
-> > Both version can be run in parallel.
-> > 
-> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
-> > neon/libupnp_1.6.21-r0_armhf.deb
-> > drwxrwxrwx root/root         0 2017-09-13 17:26 ./
-> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/
-> > drwxr-xr-x root/root         0 2017-09-13 17:26 ./usr/lib/
-> > -rwxr-xr-x root/root     31600 2017-09-13 17:26
-> > ./usr/lib/libixml.so.2.0.8
-> > -rwxr-xr-x root/root     17912 2017-09-13 17:26
-> > ./usr/lib/libthreadutil.so.6.0.4
-> > -rwxr-xr-x root/root    117676 2017-09-13 17:26
-> > ./usr/lib/libupnp.so.6.3.4
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libixml.so.2
-> > -> libixml.so.2.0.8
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26
-> > ./usr/lib/libthreadutil.so.6 -> libthreadutil.so.6.0.4
-> > lrwxrwxrwx root/root         0 2017-09-13 17:26 ./usr/lib/libupnp.so.6
-> > -> libupnp.so.6.3.4
-> > ?:~/src/oe-core/build$ dpkg-deb -c tmp-glibc/deploy/deb/cortexa9hf-
-> > neon/libupnp1.8_1.8.2-r0_armhf.deb
-> > drwxrwxrwx root/root         0 2017-09-13 17:43 ./
-> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/
-> > drwxr-xr-x root/root         0 2017-09-13 17:43 ./usr/lib/
-> > -rwxr-xr-x root/root     35696 2017-09-13 17:43
-> > ./usr/lib/libixml.so.10.0.1
-> > -rwxr-xr-x root/root    155128 2017-09-13 17:43
-> > ./usr/lib/libupnp.so.10.1.1
-> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libixml.so.10
-> > -> libixml.so.10.0.1
-> > lrwxrwxrwx root/root         0 2017-09-13 17:43 ./usr/lib/libupnp.so.10
-> > -> libupnp.so.10.1.1
-> > 
-> > mpd and gerbera have been built successfully with this fix.
-> > 
-> > The patch also clean a bit gerbera recipe and fix dependency issue.
-> > 
-> > Changes since v3:
-> > 	- Drop RDEPENDS from gerbera recipe.
-> > 	- use git fetcher instead of github archive for libupnp
-> > 
-> > Fabien Lahoudere (2):
-> >   libupnp: Add recipe for version 1.8.2
-> >   gerbera: clean recipe
-> > 
-> >  .../recipes-connectivity/libupnp/libupnp1.8.bb       | 20
-> > ++++++++++++++++++++
-> >  .../recipes-multimedia/gerbera/gerbera_git.bb        | 12 ++++++------
-> >  2 files changed, 26 insertions(+), 6 deletions(-)
-> >  create mode 100644 meta-multimedia/recipes-
-> > connectivity/libupnp/libupnp1.8.bb
-> > 
-> > --
-> > 2.11.0
-> 
-> //Peter
-> 
+Touche.
+
+It still needs to go somewhere though...
+
+Ross
 
