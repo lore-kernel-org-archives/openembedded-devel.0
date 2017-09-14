@@ -1,32 +1,23 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 4BF7778583
+Return-Path: <Rob.Woolley@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 32967780B2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 02:03:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.42,390,1500912000"; d="scan'208";a="26250310"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 14 Sep 2017 10:03:40 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8122246BA6A2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 10:03:39 +0800 (CST)
-Received: from localhost.localdomain (10.167.235.93) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Thu, 14 Sep 2017 10:03:38 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Thu, 14 Sep 2017 02:44:43 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8E2ih4x015317
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Wed, 13 Sep 2017 19:44:43 -0700
+Received: from yow-feoserver.wrs.com (128.224.149.92) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.361.1; Wed, 13 Sep 2017 19:44:42 -0700
+From: Rob Woolley <rob.woolley@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Sep 2017 10:03:36 +0800
-Message-ID: <1505354616-33396-3-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Wed, 13 Sep 2017 22:44:40 -0400
+Message-ID: <1505357080-2240-1-git-send-email-rob.woolley@windriver.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1505354616-33396-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-References: <1505354616-33396-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 MIME-Version: 1.0
-X-Originating-IP: [10.167.235.93]
-X-yoursite-MailScanner-ID: 8122246BA6A2.A4EA5
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] libndp: Add HOMEPAGE info into recipe file.
+Subject: [PATCH v3] gnome-keyring: Resolve conflict with gcr 3 and gold linking error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,28 +30,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 02:03:40 -0000
+X-List-Received-Date: Thu, 14 Sep 2017 02:44:44 -0000
 Content-Type: text/plain
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+The gnome-keyring is used to configure save certain wifi attributes
+when using xfce or a gnome based UI.
+
+Removing org.gnome.crypto.pgp.* makes gnome-keyring compatible with
+gcr 3.
+
+The gnome-keyring needs libgmodule to be explicitly added in order
+to satisfy the gold linker.  This is necessary because pkg-config
+doesn't list libgmodule as one of the libraries for gtk+-2.0.
+
+Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Rob Woolley <rob.woolley@windriver.com>
 ---
- meta-oe/recipes-connectivity/libndp/libndp_1.6.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ .../recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb       | 11 ++++++++++-
+ 1 file changed, 10 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
-index 2cc345a..5148798 100644
---- a/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
-+++ b/meta-oe/recipes-connectivity/libndp/libndp_1.6.bb
-@@ -1,5 +1,5 @@
- SUMMARY = "Library for IPv6 Neighbor Discovery Protocol"
--
-+HOMEPAGE = "http://libndp.org/"
- LICENSE = "LGPLv2.1"
- LIC_FILES_CHKSUM = "file://COPYING;md5=4fbd65380cdd255951079008b364516c"
+diff --git a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+index 4ac75cbef..3b4cbf57f 100644
+--- a/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
++++ b/meta-gnome/recipes-gnome/gnome-keyring/gnome-keyring_2.32.1.bb
+@@ -20,6 +20,8 @@ SRC_URI += "file://egg-asn1x.patch"
+ DEPENDS = "gtk+ libgcrypt libtasn1 libtasn1-native gconf ${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)} intltool-native"
+ RDEPENDS_${PN} = "libgnome-keyring glib-2.0-utils"
  
++LDFLAGS += "-lgmodule-2.0"
++
+ EXTRA_OECONF = "${@bb.utils.contains('DISTRO_FEATURES', 'pam', '--enable-pam --with-pam-dir=${base_libdir}/security', '--disable-pam', d)}"
+ 
+ SRC_URI[archive.md5sum] = "9a8aa74e03361676f29d6e73155786fc"
+@@ -42,4 +44,11 @@ FILES_${PN}-dbg += "${libdir}/${BPN}/standalone/.debug/ \
+                     ${libdir}/${BPN}/devel/.debug/ \
+                     ${base_libdir}/security/.debug/"
+ 
+-PNBLACKLIST[gnome-keyring] ?= "This version conflicts with gcr from oe-core - the recipe will be removed on 2017-09-01 unless the issue is fixed"
++# Make compatible with gcr version 3 or newer by removing
++# org.gnome.crypto.pgp.*, which is the provider for this optional
++# functionality.
++
++do_install_append() {
++	rm ${D}${datadir}/GConf/gsettings/org.gnome.crypto.pgp.convert
++	rm ${D}${datadir}/glib-2.0/schemas/org.gnome.crypto.pgp.gschema.xml
++}
 -- 
-2.7.4
-
-
+2.11.0
 
 
