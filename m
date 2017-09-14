@@ -1,24 +1,51 @@
-Return-Path: <Liezhi.Yang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 7214878589
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-lf0-f42.google.com (mail-lf0-f42.google.com
+	[209.85.215.42])
+	by mail.openembedded.org (Postfix) with ESMTP id 739F978369
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 08:10:08 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v8E8AAqS022669
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 14 Sep 2017 08:13:43 +0000 (UTC)
+Received: by mail-lf0-f42.google.com with SMTP id q132so6338380lfe.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Sep 2017 01:10:10 -0700 (PDT)
-Received: from ala-blade48.wrs.com (147.11.105.68) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 14 Sep 2017 01:10:09 -0700
-From: Robert Yang <liezhi.yang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 14 Sep 2017 01:10:09 -0700
-Message-ID: <20170914081009.24809-1-liezhi.yang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-MIME-Version: 1.0
-Subject: [meta-networking][PATCH] drbd-utils: remove 0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
+	Thu, 14 Sep 2017 01:13:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=LQR+QB9fYoVSKiZUJu4vTQbHKqekMks2+eE4bXBF3+A=;
+	b=xRPFEZf1rb0CkzdXZDRHOY4x4T+TQI5pxeRAuQnLqm8QpIM2YdM4ZOslzB+jBL8+bX
+	rnW+esH4D7LFh8TUcobKdzPWGLJs6RXPMyB4KGJNgVrC/RXHwBnn+clwL4kGDPUNHweX
+	gGkJBv8dRWGlXI1NhzidmSfvcNyG3c1SYwyY7GXqDgjtMwJ8TemXguquTG5nOUMSMgVY
+	kfIqquSSlspqSh66FbLepn6LGottp/Nt4tyUr7tle9iLeEp7+/+kAsK64rtYd+p9rRZX
+	xjCI9R/NHTvgFTRLV6oDbNaZfOY4MzvNpKsMFTV0Uc0lhkTlWU9HAMV3M83LRTHT5AS6
+	KUMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=LQR+QB9fYoVSKiZUJu4vTQbHKqekMks2+eE4bXBF3+A=;
+	b=CRzM/oRGUPTtJTP8VgfFXdxgKTlblz7LSfiyyL0MPwgv1Q5wdcBz1Vb6Jqy8Sez/cJ
+	jId2Dwm2yfm7zVAg5TSoj5dOayArNDKaiKI/dgw/zaD0lSEPZG+rTMADlO70ZpEqW532
+	KTBfrYHVHlvCFY/MEz31ajbWSVD1K5dKPYzSdofIA/jP5O4a01DDwyzg7dgVn3eZE0xU
+	Nc6mXKOp6q4PbVL/O55nUXvukcnZOTLCMTEZTU5NkyKP9OrUqXocquB2ZMx+VXQERTZ6
+	XkvN75puPDENDJ3+J1+l9MDe1n+QxYgz0XsIPPOrz+fdnOzitLnq8epCR8dpM2NigG4q
+	N1yw==
+X-Gm-Message-State: AHPjjUiYq7ezfbAf1qA+tvZEP3h6PAs/9JQPMshj5LULGZ+tYoPzZ6N/
+	R9p0kZ8ryY5+TqwJWwlqcQ==
+X-Google-Smtp-Source: AOwi7QDvaD3rNBTo+7AHP28I9qikE6Az6YyR/c2GoLImjz3LfrzP1ulixtwJrLNMCfH3qXUD2Gezig==
+X-Received: by 10.25.129.196 with SMTP id c187mr5821793lfd.107.1505376824552; 
+	Thu, 14 Sep 2017 01:13:44 -0700 (PDT)
+Received: from bgdev-debian.nomovok.info (auth.nomovok.info. [83.150.126.21])
+	by smtp.gmail.com with ESMTPSA id
+	e195sm2894068lfg.47.2017.09.14.01.13.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 14 Sep 2017 01:13:43 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Thu, 14 Sep 2017 10:13:41 +0200
+Message-Id: <20170914081341.25163-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.13.2
+Cc: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
+Subject: [meta-oe][PATCH v3] ceres-solver: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,78 +58,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Sep 2017 08:10:09 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 14 Sep 2017 08:13:44 -0000
 
-It is already in the source, fixed do_patch failure:
-Patch 0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch is already applied; check your series file
-ERROR: drbd-utils-8.9.6-r0 do_patch: Function failed: patch_do_patch
+From: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
 
-Signed-off-by: Robert Yang <liezhi.yang@windriver.com>
+Ceres Solver is an open source C++ library for modeling and solving
+large, complicated optimization problems.
+
+It's often used in 3D computer vision applications.
+
+Signed-off-by: Bartosz Golaszewski <brgl+baylibre@bgdev.pl>
 ---
- ...drbd-tools-only-rmmod-if-DRBD-is-a-module.patch | 39 ----------------------
- .../recipes-support/drbd/drbd-utils_8.9.6.bb       |  1 -
- 2 files changed, 40 deletions(-)
- delete mode 100644 meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
+v1 -> v2:
+- now fetching the source from git, not github archives
+- only add a specific directory (cmake files) to FILES_${PN}-dev
+- don't create the ${PN} package as the project is not building
+  a shared library
 
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch b/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
-deleted file mode 100644
-index add0b030c..000000000
---- a/meta-networking/recipes-support/drbd/drbd-utils/0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--Subject: drbd-tools: only rmmod if DRBD is a module
--
--Account for the case if the DRBD drive is built into
--the kernel. Otherwise, errors, like the following,
--will occur:
--
--root@localhost:~# /etc/init.d/drbd stop
--    Stopping all DRBD resources: ERROR: Module drbd does not exist in
--    /proc/modules
--
--Signed-off-by: Aws Ismail <aws.ismail@windriver.com>
--Signed-off-by: Jason Wessel <jason.wessel@windriver.com>
--
--[ refresh to 8.4.4: squash Aws' and Jason's patches ]
--Signed-off-by: Michel Thebeau <michel.thebeau@windriver.com>
--
--Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
-----
-- scripts/drbd | 4 +++-
-- 1 file changed, 3 insertions(+), 1 deletion(-)
--
--diff --git a/scripts/drbd b/scripts/drbd
--index 20bf628..de589dc 100755
----- a/scripts/drbd
--+++ b/scripts/drbd
--@@ -241,7 +241,9 @@ case "$1" in
-- 		if [ -d /sys/module/drbd/holders ]; then
-- 			(cd /sys/module/drbd/holders; for tr in *; do [ -d ${tr} ] && ${RMMOD} ${tr}; done)
-- 		fi
---		$RMMOD drbd && break
--+		if [ ! -z "$(cat /proc/modules | grep -w drbd)" ]; then
--+			$RMMOD drbd && break
--+		fi
-- 	    fi
-- 	done
-- 	run_hook stop
---- 
--1.9.1
--
-diff --git a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-index 5979fbb58..5f6c43f7e 100644
---- a/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-+++ b/meta-networking/recipes-support/drbd/drbd-utils_8.9.6.bb
-@@ -10,7 +10,6 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=5574c6965ae5f583e55880e397fbb018"
- 
- SRC_URI = "http://oss.linbit.com/drbd/${BP}.tar.gz \
-            file://0001-Makefile.in-fix-permission-bits-for-drbd.service.patch \
--           file://0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch \
-           "
- SRC_URI[md5sum] = "76ed6d3190cd77b00890f3365353124b"
- SRC_URI[sha256sum] = "297b77c9b3f88de2e7dae459234f2753ea4fc2805282b2d276e35cf51e292913"
+v2 -> v3:
+- instead of not creating the ceres-solver package, just allow it to
+  be empty
+
+ .../ceres-solver/ceres-solver_1.13.bb                | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+
+diff --git a/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+new file mode 100644
+index 0000000..e883c70
+--- /dev/null
++++ b/meta-oe/recipes-support/ceres-solver/ceres-solver_1.13.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Ceres Solver is an open source C++ library for modeling and solving large, complicated optimization problems."
++AUTHOR = "Sameer Agarwal and Keir Mierle and Others"
++HOMEPAGE = "http://ceres-solver.org/"
++
++LICENSE = "BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=35e00f0c4c96a0820a03e0b31e6416be"
++
++SRC_URI = "git://github.com/ceres-solver/ceres-solver.git"
++SRCREV = "19333b0f55c8462381038e70d42af43b52941128"
++
++S = "${WORKDIR}/git"
++
++DEPENDS = "libeigen glog"
++
++inherit cmake
++
++# Only a static library and headers are created
++ALLOW_EMPTY_${PN} = "1"
++
++FILES_${PN}-dev += "${libdir}/cmake/*"
 -- 
-2.11.0
+2.7.4
 
 
