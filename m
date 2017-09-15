@@ -1,43 +1,59 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
-	by mail.openembedded.org (Postfix) with ESMTP id 4D59C78604
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f175.google.com (mail-io0-f175.google.com
+	[209.85.223.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C8E71783D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Sep 2017 12:05:29 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Sep 2017 05:05:30 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.42,396,1500966000"; d="scan'208";a="900570092"
-Received: from rkubodac-desk.ger.corp.intel.com ([10.252.30.245])
-	by FMSMGA003.fm.intel.com with ESMTP; 15 Sep 2017 05:05:28 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Trevor Woerner <twoerner@gmail.com>
-In-Reply-To: <CAHUNapTy3Lngxr0d2Gkd_2gFkZDcyYaumrEGTK6S8Aks5czhxw@mail.gmail.com>
-	(Trevor Woerner's message of "Tue, 12 Sep 2017 21:31:09 -0700")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
-	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
-	<CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
-	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
-	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
-	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
-	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
-	<8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com>
-	<87r2wcajh6.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CALbNGRS1ywFbSNAoY976cPgJ4STQLqUEqzwq34XGaMH_CYhAaw@mail.gmail.com>
-	<20170816160609.GA29490@linux-uys3>
-	<CA+chaQdPFsk3yJzCO7e=L+=OW=SP8hdg3kUytdj36daOpwqjww@mail.gmail.com>
-	<CALbNGRSMbrpZ+LMdRx1ZGAGbJHM3z8E8fT7oW2cNAE9+Sg-82A@mail.gmail.com>
-	<CAHUNapS=PyHpv+G03RvmgptLxkhTK5mZLxdw4bN3z82Fo6Kvig@mail.gmail.com>
-	<CAHUNapTy3Lngxr0d2Gkd_2gFkZDcyYaumrEGTK6S8Aks5czhxw@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Fri, 15 Sep 2017 14:05:28 +0200
-Message-ID: <87efr8p3p3.fsf@rkubodac-desk.ger.corp.intel.com>
+	Fri, 15 Sep 2017 13:27:29 +0000 (UTC)
+Received: by mail-io0-f175.google.com with SMTP id w94so8330388ioi.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Sep 2017 06:27:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/zLN2asSSvsXcvK26lxRIUUmASO73tRM6wcj4pvWUPU=;
+	b=mwgIIZfoZBEMxjfTabOAw/glfH91s2cFl+en/67ED9rTOB95RZOVlOLGUd5GcB5e5c
+	fseLdzqmQPB+l9k4UJdUZfDE+qQ69x4PflQym+WAXZDglPJxLS0uTbBxFAZiQI1lXolZ
+	EUc6FyVNAPm71r82yG1RnJrkdeghQ0rw+RLkFehXyUgKsKsvZ9V/KOnWzk75rUJxr+Wb
+	q31oiVPOKNHgrM674JW2hZlOMKqbJoXzRVYFh6QlH2Yg9oKymENRM5bTneeNGDdD9SyU
+	QrS2bONvXqLd+SqwFr7UOgysYmezCIDUfItK5DFmw8ex1WNDb+I3C1eS52JC81VmT/c9
+	CisA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/zLN2asSSvsXcvK26lxRIUUmASO73tRM6wcj4pvWUPU=;
+	b=VI0zauCbj0pqpwyslP3ydb4bjpPKG834yeQKa6qBzc6QPLRtpGUjjhLEs3OSuWVg2W
+	CKq22UEjApdxzmfTiXhm3OnPQi1CHXoBFsICDmJQq7bHl4vTK0w5zignhQyl20xaUh8L
+	GRKOQtddYKghmcfghXITa6tptDnt98b/qBawgvP3L81gsmVP/kMqpumr27biSBJrfdMT
+	/YMzQoUiohmTx+xg+jE6oVckJVy+o72p63/IOOMfBVLtX+MY2xGDzzheR+Wm4TVyGB3R
+	R0ULCxiwvXu1lwXqMzAwffrijqRjtohnHtLGFwPZlc2ivbwYfgfGSQpGILqi16aC9A3+
+	v/7w==
+X-Gm-Message-State: AHPjjUjH6c8rIuzy/b0quk+cb6ZLd7LMfp0v8zOZ0MD+I7WhDVYuk3X5
+	x6c6WmQ6GwjwHz0fTdp9RI5oDTEEH7qc87o3jeF2Pg==
+X-Google-Smtp-Source: AOwi7QBaqynUnWr6S8QSZaZB0PEJfRKHxenRAK8QmrrUe9ELIrMF7zt9agrTBILLRcm1DciHo1+L1tfTyV7Iz0osX7c=
+X-Received: by 10.107.135.72 with SMTP id j69mr8461409iod.210.1505482050456;
+	Fri, 15 Sep 2017 06:27:30 -0700 (PDT)
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: chromium detected as stripped
+Received: by 10.107.19.68 with HTTP; Fri, 15 Sep 2017 06:27:09 -0700 (PDT)
+In-Reply-To: <CA+chaQf1ZsbpeVeW_p+Qm--GueHsQNbijbRYFrWPNhVVGHQW_A@mail.gmail.com>
+References: <20170913093821.12746-1-kai.kang@windriver.com>
+	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
+	<CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
+	<CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
+	<CAJTo0La57nRi7hraiCbNqyKXA6t7vvRw6=YXprWV5usReHMB4g@mail.gmail.com>
+	<a28c31a6-0635-6e7a-414c-beeef338ba45@linux.intel.com>
+	<CAJTo0LbR-ks7hgfg8L2cLXoThLZxa_PAY28ci-gt5XZtn29AOg@mail.gmail.com>
+	<CA+chaQdS4NPaF=cqUGR12+Bxt1L2wzThxYZCQFEvK-DxrZ6Dww@mail.gmail.com>
+	<CAMKF1srUN0TGPCdYRKuxKhBGDnPNVr3r35=Xb5UoJYuksQSfHA@mail.gmail.com>
+	<CALbNGRQdYe0RVE3wT2i6btqCMtHaWzcyyGz+PLYG614-zCb6sw@mail.gmail.com>
+	<CA+chaQf1ZsbpeVeW_p+Qm--GueHsQNbijbRYFrWPNhVVGHQW_A@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Fri, 15 Sep 2017 14:27:09 +0100
+Message-ID: <CAJTo0La3Q5MFeo1H-At-wJkXT1KMzRRR=oeSfpGmrriq4Ssdyw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,41 +66,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2017 12:05:30 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Sep 2017 13:27:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Trevor Woerner <twoerner@gmail.com> writes:
+On 15 September 2017 at 11:03, Martin Jansa <martin.jansa@gmail.com> wrote:
 
-> On Wed, Aug 16, 2017 at 10:00 AM, Trevor Woerner <twoerner@gmail.com> wrote:
->> I won't submit anything to meta-browser until I can build and get it
->> running on a target (or multiple targets).
+> Hi,
 >
-> I've been playing with this off-and-on for the past while. It looks
-> really nice! Unfortunately I can't seem to get it to compile. Is there
-> some secret I'm missing? I'm past all the openssl and gcc6/7 nonsense.
-> All pre-requisites build fine, the build failure is (and has been for
-> a while) with chromium itself.
+> most of our prebuilt binaries (built outside OE, sometimes by other
+> companies) are built against libpng12.
 >
-> I've been trying to build it off master, but chromium always fails in
-> breakpad. I won't bore you with the full build log (unless you really
-> want to see it). My build setup is:
+> Not because they must be, just because libpng12 was there when they started
+> building them and nobody revisited that since then. Now I'm trying to get
+> all those prebuilt binaries to be rebuilt against libpng 1.6 before we
+> upgrade to Yocto 2.4. If I don't get them soon enough I'll need to keep
+> libpng12 in one of our internal layer for a bit longer.
 >
-> Build Configuration:
-> BB_VERSION        = "1.35.0"
-> BUILD_SYS         = "x86_64-linux"
-> NATIVELSBSTRING   = "opensuse-42.2"
-> TARGET_SYS        = "x86_64-oe-linux"
-> MACHINE           = "qemux86-64"
-> DISTRO            = "nodistro"
-> DISTRO_VERSION    = "nodistro.0"
-> TUNE_FEATURES     = "m64 core2"
-> TARGET_FPU        = ""
-> meta              = "master:2ebbeb61114e4b847e9164c621ac87b5cf03a299"
-> meta-oe           = "master:8b991640f19f1d19b17db141c31bc56e26695a23"
-> meta-crosswalk    = "chromium60:433371f15be4a16e1faab9e155d56edb572737d6"
+> So I agree it's outdated waste of time, but unfortunately still mis-used by
+> some people.
+>
 
-Works For Me (TM), though I've only tested it with Yocto's pyro branch
-so far. Also, do note that Chromium 61 is available in the chromium61
-branch. Can you share the actual error you're getting in breakpad so I
-could take a look?
+That sounds like a great rationale to keep libpng12 in meta-oe.
+
+Ross
 
