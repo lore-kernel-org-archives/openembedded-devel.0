@@ -1,24 +1,57 @@
-Return-Path: <Catalin.Enache@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 8EEFE77E57
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-ua0-f175.google.com (mail-ua0-f175.google.com
+	[209.85.217.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 9E6ED780F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Sep 2017 09:46:03 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v8F9k4R9006280
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 15 Sep 2017 10:03:42 +0000 (UTC)
+Received: by mail-ua0-f175.google.com with SMTP id t36so969979uah.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Sep 2017 02:46:04 -0700 (PDT)
-Received: from no3.corp.ad.wrs.com (128.224.125.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Fri, 15 Sep 2017 02:46:03 -0700
-From: Catalin Enache <catalin.enache@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Sep 2017 12:45:45 +0300
-Message-ID: <1505468745-9991-1-git-send-email-catalin.enache@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 15 Sep 2017 03:03:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=oKUWovnIrQnZHY30m3wuJRQzDKynQhDBiNkUFlJihAM=;
+	b=gxd7fUPKtie7yn4KW7NLSeVvl9ahnINZHIJVMvKwoD4MfNtA3bCriDUw8JdQWyKWcQ
+	aeSScHQSyFk+/N9toXfwZ8PJrdQYQZuExnFwyFdsvaqGOpDFZayb29vGed1ePKBwgZzt
+	tKRVm/v3pnGHbNTIA8mRbJ+LRkJKI6tYT+P06FMePCXtBc5BqMRgf1mrQd8RVjtFKzQN
+	zOy7DrLfgdwGKS+fF3O+21w32dg028kdFwVdGD6rGCNmeNBiDmmyEfAeC1+rsDxf+iv2
+	DAdjD90KmJ2/rSc65JsWgXA/HZBekaeMXqHqtbA8jgPx03l5NS5+UnWJwgnhvaBYQqs3
+	9lFA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=oKUWovnIrQnZHY30m3wuJRQzDKynQhDBiNkUFlJihAM=;
+	b=T5enS3HbBkeJExhx4wQ1liFjc43MtTJmU8oDkebIEyncRq98+vr24cwhIVEhVJxF7o
+	gKnpPMwcYxUBjJoX7EUxWA24aUc3PnTcAydoXVH5i7SVLc6fvj3Bd/FWaryxVV18QK4i
+	1g9YsMdeVKhySZHaKjjR9nG2TK8IIKXxKqq3ASY1PoiNV3pnLSO+9uuBH0Ty7oduLcFB
+	M4bPx06b/rXvplBH5pCyVDBri1a5llf/dzHTxfLbT4lqwNB6YnnmAZUgURfTZOv+iXfr
+	CnfPR2bi801f5NiWv3+ErYQUxHVcRIwNsIUYIA9jncXdgTi1bK3MQfLb9DTr3hgVXY6I
+	zWlQ==
+X-Gm-Message-State: AHPjjUglsZJa9P85VuH+aZYmu5KO3zT+3OBK63Ao7i4U5gZtYkVpLc9Q
+	2USy3jdmU9BRlfj1wvi6qtrf5SFJTahdH5pMwww=
+X-Google-Smtp-Source: ADKCNb6OEW+Hztfn7Se8odFUY/zjYnBN/+Y/1LMUfQcWmlVTqHhRqhmMDBHSo1MlRpIIAfxmF2vSLgBaE7uZ+m/KJoQ=
+X-Received: by 10.176.83.149 with SMTP id k21mr18611852uaa.183.1505469823448; 
+	Fri, 15 Sep 2017 03:03:43 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH] krb5: CVE-2017-11462
+Received: by 10.103.67.130 with HTTP; Fri, 15 Sep 2017 03:03:42 -0700 (PDT)
+In-Reply-To: <CALbNGRQdYe0RVE3wT2i6btqCMtHaWzcyyGz+PLYG614-zCb6sw@mail.gmail.com>
+References: <20170913093821.12746-1-kai.kang@windriver.com>
+	<CA+chaQfD6QeAiKWQo+u6i5xSQ-bAFvMVL9CMvuA4N6-4dj3pGQ@mail.gmail.com>
+	<CAJTo0LYxnw1L2-HWwZq=Jqrjty8FvtLB-gjWsH8d3Ri7-H9Siw@mail.gmail.com>
+	<CA+chaQdg=ty-=h4afPNoJ8KSK6yjxEzzrSOFTOFtQNtdqYEHwA@mail.gmail.com>
+	<CAJTo0La57nRi7hraiCbNqyKXA6t7vvRw6=YXprWV5usReHMB4g@mail.gmail.com>
+	<a28c31a6-0635-6e7a-414c-beeef338ba45@linux.intel.com>
+	<CAJTo0LbR-ks7hgfg8L2cLXoThLZxa_PAY28ci-gt5XZtn29AOg@mail.gmail.com>
+	<CA+chaQdS4NPaF=cqUGR12+Bxt1L2wzThxYZCQFEvK-DxrZ6Dww@mail.gmail.com>
+	<CAMKF1srUN0TGPCdYRKuxKhBGDnPNVr3r35=Xb5UoJYuksQSfHA@mail.gmail.com>
+	<CALbNGRQdYe0RVE3wT2i6btqCMtHaWzcyyGz+PLYG614-zCb6sw@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Fri, 15 Sep 2017 12:03:42 +0200
+Message-ID: <CA+chaQf1ZsbpeVeW_p+Qm--GueHsQNbijbRYFrWPNhVVGHQW_A@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libpng12: add it back from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,464 +64,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2017 09:46:03 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Sep 2017 10:03:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Double free vulnerability in MIT Kerberos 5 (aka krb5) allows attackers to
-have unspecified impact via vectors involving automatic deletion of
-security contexts on error.
+Hi,
 
-Reference:
-https://nvd.nist.gov/vuln/detail/CVE-2017-11462
+most of our prebuilt binaries (built outside OE, sometimes by other
+companies) are built against libpng12.
 
-Upstream patch:
-https://github.com/krb5/krb5/commit/56f7b1bc95a2a3eeb420e069e7655fb181ade5cf
+Not because they must be, just because libpng12 was there when they started
+building them and nobody revisited that since then. Now I'm trying to get
+all those prebuilt binaries to be rebuilt against libpng 1.6 before we
+upgrade to Yocto 2.4. If I don't get them soon enough I'll need to keep
+libpng12 in one of our internal layer for a bit longer.
 
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
----
- .../krb5/krb5/CVE-2017-11462.patch                 | 419 +++++++++++++++++++++
- meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb   |   1 +
- 2 files changed, 420 insertions(+)
- create mode 100644 meta-oe/recipes-connectivity/krb5/krb5/CVE-2017-11462.patch
+So I agree it's outdated waste of time, but unfortunately still mis-used by
+some people.
 
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5/CVE-2017-11462.patch b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2017-11462.patch
-new file mode 100644
-index 0000000..4b82f02
---- /dev/null
-+++ b/meta-oe/recipes-connectivity/krb5/krb5/CVE-2017-11462.patch
-@@ -0,0 +1,419 @@
-+From 56f7b1bc95a2a3eeb420e069e7655fb181ade5cf Mon Sep 17 00:00:00 2001
-+From: Greg Hudson <ghudson@mit.edu>
-+Date: Fri, 14 Jul 2017 13:02:46 -0400
-+Subject: [PATCH] Preserve GSS context on init/accept failure
-+
-+After gss_init_sec_context() or gss_accept_sec_context() has created a
-+context, don't delete the mechglue context on failures from subsequent
-+calls, even if the mechanism deletes the mech-specific context (which
-+is allowed by RFC 2744 but not preferred).  Check for union contexts
-+with no mechanism context in each GSS function which accepts a
-+gss_ctx_id_t.
-+
-+CVE-2017-11462:
-+
-+RFC 2744 permits a GSS-API implementation to delete an existing
-+security context on a second or subsequent call to
-+gss_init_sec_context() or gss_accept_sec_context() if the call results
-+in an error.  This API behavior has been found to be dangerous,
-+leading to the possibility of memory errors in some callers.  For
-+safety, GSS-API implementations should instead preserve existing
-+security contexts on error until the caller deletes them.
-+
-+All versions of MIT krb5 prior to this change may delete acceptor
-+contexts on error.  Versions 1.13.4 through 1.13.7, 1.14.1 through
-+1.14.5, and 1.15 through 1.15.1 may also delete initiator contexts on
-+error.
-+
-+ticket: 8598 (new)
-+target_version: 1.15-next
-+target_version: 1.14-next
-+tags: pullup
-+
-+Upstream-Status: Backport
-+CVE: CVE-2017-11462
-+
-+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-+---
-+ src/lib/gssapi/mechglue/g_accept_sec_context.c  | 22 +++++++++++++++-------
-+ src/lib/gssapi/mechglue/g_complete_auth_token.c |  2 ++
-+ src/lib/gssapi/mechglue/g_context_time.c        |  2 ++
-+ src/lib/gssapi/mechglue/g_delete_sec_context.c  | 14 ++++++++------
-+ src/lib/gssapi/mechglue/g_exp_sec_context.c     |  2 ++
-+ src/lib/gssapi/mechglue/g_init_sec_context.c    | 19 +++++++++++--------
-+ src/lib/gssapi/mechglue/g_inq_context.c         |  2 ++
-+ src/lib/gssapi/mechglue/g_prf.c                 |  2 ++
-+ src/lib/gssapi/mechglue/g_process_context.c     |  2 ++
-+ src/lib/gssapi/mechglue/g_seal.c                |  4 ++++
-+ src/lib/gssapi/mechglue/g_sign.c                |  2 ++
-+ src/lib/gssapi/mechglue/g_unseal.c              |  2 ++
-+ src/lib/gssapi/mechglue/g_unwrap_aead.c         |  2 ++
-+ src/lib/gssapi/mechglue/g_unwrap_iov.c          |  4 ++++
-+ src/lib/gssapi/mechglue/g_verify.c              |  2 ++
-+ src/lib/gssapi/mechglue/g_wrap_aead.c           |  2 ++
-+ src/lib/gssapi/mechglue/g_wrap_iov.c            |  8 ++++++++
-+ 17 files changed, 72 insertions(+), 21 deletions(-)
-+
-+diff --git a/src/lib/gssapi/mechglue/g_accept_sec_context.c b/src/lib/gssapi/mechglue/g_accept_sec_context.c
-+index ddaf874..f28e2b1 100644
-+--- a/src/lib/gssapi/mechglue/g_accept_sec_context.c
-++++ b/src/lib/gssapi/mechglue/g_accept_sec_context.c
-+@@ -216,6 +216,8 @@ gss_cred_id_t *		d_cred;
-+     } else {
-+ 	union_ctx_id = (gss_union_ctx_id_t)*context_handle;
-+ 	selected_mech = union_ctx_id->mech_type;
-++	if (union_ctx_id->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	    return (GSS_S_NO_CONTEXT);
-+     }
-+ 
-+     /* Now create a new context if we didn't get one. */
-+@@ -234,9 +236,6 @@ gss_cred_id_t *		d_cred;
-+ 	    free(union_ctx_id);
-+ 	    return (status);
-+ 	}
-+-
-+-	/* set the new context handle to caller's data */
-+-	*context_handle = (gss_ctx_id_t)union_ctx_id;
-+     }
-+ 
-+     /*
-+@@ -277,8 +276,10 @@ gss_cred_id_t *		d_cred;
-+ 					d_cred ? &tmp_d_cred : NULL);
-+ 
-+ 	    /* If there's more work to do, keep going... */
-+-	    if (status == GSS_S_CONTINUE_NEEDED)
-++	    if (status == GSS_S_CONTINUE_NEEDED) {
-++		*context_handle = (gss_ctx_id_t)union_ctx_id;
-+ 		return GSS_S_CONTINUE_NEEDED;
-++	    }
-+ 
-+ 	    /* if the call failed, return with failure */
-+ 	    if (status != GSS_S_COMPLETE) {
-+@@ -364,14 +365,22 @@ gss_cred_id_t *		d_cred;
-+ 		*mech_type = gssint_get_public_oid(actual_mech);
-+ 	    if (ret_flags != NULL)
-+ 		*ret_flags = temp_ret_flags;
-+-	    return	(status);
-++	    *context_handle = (gss_ctx_id_t)union_ctx_id;
-++	    return GSS_S_COMPLETE;
-+     } else {
-+ 
-+ 	status = GSS_S_BAD_MECH;
-+     }
-+ 
-+ error_out:
-+-    if (union_ctx_id) {
-++	/*
-++	 * RFC 2744 5.1 requires that we not create a context on a failed first
-++	 * call to accept, and recommends that on a failed subsequent call we
-++	 * make the caller responsible for calling gss_delete_sec_context.
-++	 * Even if the mech deleted its context, keep the union context around
-++	 * for the caller to delete.
-++	 */
-++    if (union_ctx_id && *context_handle == GSS_C_NO_CONTEXT) {
-+ 	if (union_ctx_id->mech_type) {
-+ 	    if (union_ctx_id->mech_type->elements)
-+ 		free(union_ctx_id->mech_type->elements);
-+@@ -384,7 +393,6 @@ error_out:
-+ 					 GSS_C_NO_BUFFER);
-+ 	}
-+ 	free(union_ctx_id);
-+-	*context_handle = GSS_C_NO_CONTEXT;
-+     }
-+ 
-+     if (src_name)
-+diff --git a/src/lib/gssapi/mechglue/g_complete_auth_token.c b/src/lib/gssapi/mechglue/g_complete_auth_token.c
-+index 9181551..4bcb47e 100644
-+--- a/src/lib/gssapi/mechglue/g_complete_auth_token.c
-++++ b/src/lib/gssapi/mechglue/g_complete_auth_token.c
-+@@ -52,6 +52,8 @@ gss_complete_auth_token (OM_uint32 *minor_status,
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return GSS_S_NO_CONTEXT;
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech != NULL) {
-+diff --git a/src/lib/gssapi/mechglue/g_context_time.c b/src/lib/gssapi/mechglue/g_context_time.c
-+index 2ff8d09..c947e76 100644
-+--- a/src/lib/gssapi/mechglue/g_context_time.c
-++++ b/src/lib/gssapi/mechglue/g_context_time.c
-+@@ -58,6 +58,8 @@ OM_uint32 *		time_rec;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+diff --git a/src/lib/gssapi/mechglue/g_delete_sec_context.c b/src/lib/gssapi/mechglue/g_delete_sec_context.c
-+index 4bf0dec..574ff02 100644
-+--- a/src/lib/gssapi/mechglue/g_delete_sec_context.c
-++++ b/src/lib/gssapi/mechglue/g_delete_sec_context.c
-+@@ -87,12 +87,14 @@ gss_buffer_t		output_token;
-+     if (GSSINT_CHK_LOOP(ctx))
-+ 	return (GSS_S_CALL_INACCESSIBLE_READ | GSS_S_NO_CONTEXT);
-+ 
-+-    status = gssint_delete_internal_sec_context(minor_status,
-+-						ctx->mech_type,
-+-						&ctx->internal_ctx_id,
-+-						output_token);
-+-    if (status)
-+-	return status;
-++    if (ctx->internal_ctx_id != GSS_C_NO_CONTEXT) {
-++	status = gssint_delete_internal_sec_context(minor_status,
-++						    ctx->mech_type,
-++						    &ctx->internal_ctx_id,
-++						    output_token);
-++	if (status)
-++	    return status;
-++    }
-+ 
-+     /* now free up the space for the union context structure */
-+     free(ctx->mech_type->elements);
-+diff --git a/src/lib/gssapi/mechglue/g_exp_sec_context.c b/src/lib/gssapi/mechglue/g_exp_sec_context.c
-+index b637452..1d7990b 100644
-+--- a/src/lib/gssapi/mechglue/g_exp_sec_context.c
-++++ b/src/lib/gssapi/mechglue/g_exp_sec_context.c
-+@@ -95,6 +95,8 @@ gss_buffer_t		interprocess_token;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) *context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+     if (!mech)
-+ 	return GSS_S_BAD_MECH;
-+diff --git a/src/lib/gssapi/mechglue/g_init_sec_context.c b/src/lib/gssapi/mechglue/g_init_sec_context.c
-+index 9f154b8..e2df1ce 100644
-+--- a/src/lib/gssapi/mechglue/g_init_sec_context.c
-++++ b/src/lib/gssapi/mechglue/g_init_sec_context.c
-+@@ -192,8 +192,13 @@ OM_uint32 *		time_rec;
-+ 
-+ 	/* copy the supplied context handle */
-+ 	union_ctx_id->internal_ctx_id = GSS_C_NO_CONTEXT;
-+-    } else
-++    } else {
-+ 	union_ctx_id = (gss_union_ctx_id_t)*context_handle;
-++	if (union_ctx_id->internal_ctx_id == GSS_C_NO_CONTEXT) {
-++	    status = GSS_S_NO_CONTEXT;
-++	    goto end;
-++	}
-++    }
-+ 
-+     /*
-+      * get the appropriate cred handle from the union cred struct.
-+@@ -224,15 +229,13 @@ OM_uint32 *		time_rec;
-+ 
-+     if (status != GSS_S_COMPLETE && status != GSS_S_CONTINUE_NEEDED) {
-+ 	/*
-+-	 * The spec says the preferred method is to delete all context info on
-+-	 * the first call to init, and on all subsequent calls make the caller
-+-	 * responsible for calling gss_delete_sec_context.  However, if the
-+-	 * mechanism decided to delete the internal context, we should also
-+-	 * delete the union context.
-++	 * RFC 2744 5.19 requires that we not create a context on a failed
-++	 * first call to init, and recommends that on a failed subsequent call
-++	 * we make the caller responsible for calling gss_delete_sec_context.
-++	 * Even if the mech deleted its context, keep the union context around
-++	 * for the caller to delete.
-+ 	 */
-+ 	map_error(minor_status, mech);
-+-	if (union_ctx_id->internal_ctx_id == GSS_C_NO_CONTEXT)
-+-	    *context_handle = GSS_C_NO_CONTEXT;
-+ 	if (*context_handle == GSS_C_NO_CONTEXT) {
-+ 	    free(union_ctx_id->mech_type->elements);
-+ 	    free(union_ctx_id->mech_type);
-+diff --git a/src/lib/gssapi/mechglue/g_inq_context.c b/src/lib/gssapi/mechglue/g_inq_context.c
-+index 6f1c71e..6c0d98d 100644
-+--- a/src/lib/gssapi/mechglue/g_inq_context.c
-++++ b/src/lib/gssapi/mechglue/g_inq_context.c
-+@@ -104,6 +104,8 @@ gss_inquire_context(
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (!mech || !mech->gss_inquire_context || !mech->gss_display_name ||
-+diff --git a/src/lib/gssapi/mechglue/g_prf.c b/src/lib/gssapi/mechglue/g_prf.c
-+index fcca3e4..9e168ad 100644
-+--- a/src/lib/gssapi/mechglue/g_prf.c
-++++ b/src/lib/gssapi/mechglue/g_prf.c
-+@@ -59,6 +59,8 @@ gss_pseudo_random (OM_uint32 *minor_status,
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return GSS_S_NO_CONTEXT;
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech != NULL) {
-+diff --git a/src/lib/gssapi/mechglue/g_process_context.c b/src/lib/gssapi/mechglue/g_process_context.c
-+index bc260ae..3968b5d 100644
-+--- a/src/lib/gssapi/mechglue/g_process_context.c
-++++ b/src/lib/gssapi/mechglue/g_process_context.c
-+@@ -61,6 +61,8 @@ gss_buffer_t		token_buffer;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+diff --git a/src/lib/gssapi/mechglue/g_seal.c b/src/lib/gssapi/mechglue/g_seal.c
-+index f17241c..3db1ee0 100644
-+--- a/src/lib/gssapi/mechglue/g_seal.c
-++++ b/src/lib/gssapi/mechglue/g_seal.c
-+@@ -92,6 +92,8 @@ gss_wrap( OM_uint32 *minor_status,
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++        return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+@@ -226,6 +228,8 @@ gss_wrap_size_limit(OM_uint32  *minor_status,
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++        return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (!mech)
-+diff --git a/src/lib/gssapi/mechglue/g_sign.c b/src/lib/gssapi/mechglue/g_sign.c
-+index 86d641a..03fbd8c 100644
-+--- a/src/lib/gssapi/mechglue/g_sign.c
-++++ b/src/lib/gssapi/mechglue/g_sign.c
-+@@ -94,6 +94,8 @@ gss_buffer_t		msg_token;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+diff --git a/src/lib/gssapi/mechglue/g_unseal.c b/src/lib/gssapi/mechglue/g_unseal.c
-+index 3e8053c..c208635 100644
-+--- a/src/lib/gssapi/mechglue/g_unseal.c
-++++ b/src/lib/gssapi/mechglue/g_unseal.c
-+@@ -76,6 +76,8 @@ gss_qop_t *		qop_state;
-+      * call it.
-+      */
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+diff --git a/src/lib/gssapi/mechglue/g_unwrap_aead.c b/src/lib/gssapi/mechglue/g_unwrap_aead.c
-+index e78bff2..0682bd8 100644
-+--- a/src/lib/gssapi/mechglue/g_unwrap_aead.c
-++++ b/src/lib/gssapi/mechglue/g_unwrap_aead.c
-+@@ -186,6 +186,8 @@ gss_qop_t		*qop_state;
-+      * call it.
-+      */
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (!mech)
-+diff --git a/src/lib/gssapi/mechglue/g_unwrap_iov.c b/src/lib/gssapi/mechglue/g_unwrap_iov.c
-+index c0dd314..599be2c 100644
-+--- a/src/lib/gssapi/mechglue/g_unwrap_iov.c
-++++ b/src/lib/gssapi/mechglue/g_unwrap_iov.c
-+@@ -89,6 +89,8 @@ int			iov_count;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+@@ -128,6 +130,8 @@ gss_verify_mic_iov(OM_uint32 *minor_status, gss_ctx_id_t context_handle,
-+ 
-+     /* Select the approprate underlying mechanism routine and call it. */
-+     ctx = (gss_union_ctx_id_t)context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return GSS_S_NO_CONTEXT;
-+     mech = gssint_get_mechanism(ctx->mech_type);
-+     if (mech == NULL)
-+ 	return GSS_S_BAD_MECH;
-+diff --git a/src/lib/gssapi/mechglue/g_verify.c b/src/lib/gssapi/mechglue/g_verify.c
-+index 1578ae1..8996fce 100644
-+--- a/src/lib/gssapi/mechglue/g_verify.c
-++++ b/src/lib/gssapi/mechglue/g_verify.c
-+@@ -65,6 +65,8 @@ gss_qop_t *		qop_state;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+diff --git a/src/lib/gssapi/mechglue/g_wrap_aead.c b/src/lib/gssapi/mechglue/g_wrap_aead.c
-+index 96cdf3c..7fe3b7b 100644
-+--- a/src/lib/gssapi/mechglue/g_wrap_aead.c
-++++ b/src/lib/gssapi/mechglue/g_wrap_aead.c
-+@@ -256,6 +256,8 @@ gss_buffer_t		output_message_buffer;
-+      * call it.
-+      */
-+     ctx = (gss_union_ctx_id_t)context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+     if (!mech)
-+ 	return (GSS_S_BAD_MECH);
-+diff --git a/src/lib/gssapi/mechglue/g_wrap_iov.c b/src/lib/gssapi/mechglue/g_wrap_iov.c
-+index 40cd98f..14447c4 100644
-+--- a/src/lib/gssapi/mechglue/g_wrap_iov.c
-++++ b/src/lib/gssapi/mechglue/g_wrap_iov.c
-+@@ -93,6 +93,8 @@ int			iov_count;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+@@ -151,6 +153,8 @@ int			iov_count;
-+      */
-+ 
-+     ctx = (gss_union_ctx_id_t) context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return (GSS_S_NO_CONTEXT);
-+     mech = gssint_get_mechanism (ctx->mech_type);
-+ 
-+     if (mech) {
-+@@ -190,6 +194,8 @@ gss_get_mic_iov(OM_uint32 *minor_status, gss_ctx_id_t context_handle,
-+ 
-+     /* Select the approprate underlying mechanism routine and call it. */
-+     ctx = (gss_union_ctx_id_t)context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return GSS_S_NO_CONTEXT;
-+     mech = gssint_get_mechanism(ctx->mech_type);
-+     if (mech == NULL)
-+ 	return GSS_S_BAD_MECH;
-+@@ -218,6 +224,8 @@ gss_get_mic_iov_length(OM_uint32 *minor_status, gss_ctx_id_t context_handle,
-+ 
-+     /* Select the approprate underlying mechanism routine and call it. */
-+     ctx = (gss_union_ctx_id_t)context_handle;
-++    if (ctx->internal_ctx_id == GSS_C_NO_CONTEXT)
-++	return GSS_S_NO_CONTEXT;
-+     mech = gssint_get_mechanism(ctx->mech_type);
-+     if (mech == NULL)
-+ 	return GSS_S_BAD_MECH;
-+-- 
-+2.10.2
-+
-diff --git a/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb b/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
-index b515eb5..e75e861 100644
---- a/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
-+++ b/meta-oe/recipes-connectivity/krb5/krb5_1.15.1.bb
-@@ -31,6 +31,7 @@ SRC_URI = "http://web.mit.edu/kerberos/dist/${BPN}/${SHRT_VER}/${BP}.tar.gz \
-            file://krb5-kdc.service \
-            file://krb5-admin-server.service \
-            file://fix-CVE-2017-11368.patch;striplevel=2 \
-+           file://CVE-2017-11462.patch;striplevel=2 \
- "
- SRC_URI[md5sum] = "8022f3a1cde8463e44fd35ef42731f85"
- SRC_URI[sha256sum] = "437c8831ddd5fde2a993fef425dedb48468109bb3d3261ef838295045a89eb45"
--- 
-2.10.2
+Regards,
 
+On Fri, Sep 15, 2017 at 10:25 AM, Andreas M=C3=BCller <
+schnitzeltony@googlemail.com> wrote:
+
+> On Fri, Sep 15, 2017 at 2:31 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Thu, Sep 14, 2017 at 8:58 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> >> If LSB isn't goal of oe-core, then why not move all this:
+> >>
+> >> OE qemux86-64@ ~/build/oe-core/openembedded-core $ find meta -name
+> \*lsb\*
+> >> meta/recipes-extended/images/core-image-lsb.bb
+> >> meta/recipes-extended/images/core-image-lsb-dev.bb
+> >> meta/recipes-extended/images/core-image-lsb-sdk.bb
+> >> meta/recipes-extended/lsb
+> >> meta/recipes-extended/lsb/lsb
+> >> meta/recipes-extended/lsb/lsb/lsb_pidofproc
+> >> meta/recipes-extended/lsb/lsb/lsb_start_daemon
+> >> meta/recipes-extended/lsb/lsb/lsb_log_message
+> >> meta/recipes-extended/lsb/lsb/0001-fix-lsb_release-to-work-
+> with-busybox-head-and-find.patch
+> >> meta/recipes-extended/lsb/lsb/lsb_killproc
+> >> meta/recipes-extended/lsb/lsbinitscripts_9.72.bb
+> >> meta/recipes-extended/lsb/lsbinitscripts
+> >> meta/recipes-extended/lsb/lsbtest_1.0.bb
+> >> meta/recipes-extended/lsb/lsb_4.1.bb
+> >> meta/recipes-extended/lsb/lsbtest
+> >> meta/recipes-extended/packagegroups/packagegroup-core-lsb.bb
+> >> meta/lib/oe/__pycache__/lsb.cpython-35.pyc
+> >> meta/lib/oe/__pycache__/lsb.cpython-36.pyc
+> >> meta/lib/oe/lsb.pyc
+> >> meta/lib/oe/lsb.py
+> >>
+> >> together with libpng12, to some new meta-lsb layer, preferably outside
+> >> meta-oe repository as I already have enough of this stuff.
+> >>
+> >
+> > A patch to remove them is good since you already found this out. If
+> > they get into a layer of its own
+> > can happen later when lsb interested devs chime in.
+> >
+> >> On Thu, Sep 14, 2017 at 5:03 PM, Burton, Ross <ross.burton@intel.com>
+> wrote:
+> >>
+> >>> On 14 September 2017 at 14:49, Alexander Kanavin
+> <alexander.kanavin@linux.
+> >>> intel.com> wrote:
+> >>>
+> >>>> On 09/14/2017 04:42 PM, Burton, Ross wrote:
+> >>>>
+> >>>>> On 14 September 2017 at 11:33, Martin Jansa <martin.jansa@gmail.com=
+>
+> >>>>> wrote:
+> >>>>>
+> >>>>> LSB compliance isn't a goal of meta-oe as well, otherwise we'd need
+> to
+> >>>>>> add Qt4 to meta-oe too.
+> >>>>>>
+> >>>>>>
+> >>>>> Touche.
+> >>>>>
+> >>>>> It still needs to go somewhere though...
+> >>>>>
+> >>>>
+> >>>> How about modifying the LSB tests to make the absence of libpng12 a
+> >>>> warning rather than an error?
+> >>>>
+> >>>
+> >>> Then it won't be doing a LSB test...   The LSB is the LSB, we don't
+> claim
+> >>> to support it, but there's a need for a libpng12 recipe for people wh=
+o
+> want
+> >>> to be close.  Currently it's just this one recipe that I'm aware of
+> that
+> >>> isn't already in a layer somewhere.
+> >>>
+> >>> Ross
+> >>>
+> One aspect I missed in this discussion: I there a recipe around
+> depending on libpng12 which cannot use libpng 1.6?
+> This is yet another case I get the the feeling that the priorities
+> others have do not match mine: My topmost priority is to build working
+> images and maintain them to keep them in working condition. Adding and
+> maintaining recipes for sake of outdated standards is waste of time -
+> at least for me.
+>
+> Andreas
+>
 
