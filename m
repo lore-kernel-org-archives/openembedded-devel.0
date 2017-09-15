@@ -1,38 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 87D3D78599
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 4233C77FE8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Sep 2017 19:21:02 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id d70so2006150qkc.1
+	Fri, 15 Sep 2017 19:24:45 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id i14so2017313qke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Sep 2017 12:21:03 -0700 (PDT)
+	Fri, 15 Sep 2017 12:24:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=kH5HKtu0PzvgzlrkWgf0t30r9fZtb0YrhUNRCB5FnYw=;
-	b=MMk4sW8rDh1rwNw7skerSZ5q+HjC0X5ifdJp+/PKxu2WSwkGVrDoSz3sZIDSpkeLO9
-	J8VSa+t8nBfqv9SOUxVzPTjm7l6ES/NIdS65PXPMNDNTB/9/UqihQdq300Ekp3QT7xin
-	HVTiKGMQeC2x7kG2o4A3uuWPyI58gJ3GQBdhIFnofr56WMmvlqTpXKqxBFgQcLccDfP9
-	vcxNf4nUd5Ktd4PCTMXK5JTYSAGHOErLsG/jzkToGPoOhmXn3w6NTHQA0Ra/DeOju4qO
-	An1qA9/057iiKgs/xpPdmd9xSxP/D/46aNmMVmuRl8JwCTBfChegeI1zLWEdfE+xgnYe
-	gDfQ==
-X-Gm-Message-State: AHPjjUjQnwzewcWcPbYyikFeWYY6gqK03wLkcxL4JXwvgMnRXoN0DsUo
-	TKQCrC1vyL/A7ptV7YQ=
-X-Google-Smtp-Source: AOwi7QClFxuqcMtmJOdGwnxbiBEwgsPOxP7OrpXJ+ZYUUBM4q2Ub0RKaLFqeMvBWJ52HG4Eu7ibtHQ==
-X-Received: by 10.55.131.129 with SMTP id f123mr9034180qkd.344.1505503263067; 
-	Fri, 15 Sep 2017 12:21:03 -0700 (PDT)
+	bh=gLvNTCOyJ8Tjo2vXrzQJv6wtUmWrgHYeNMhcuXrUv4Y=;
+	b=uV4wXUwXvZhFaGW/duxq0XEfpHYdQ4biufgW9fKz9uF+OpYsPnbTuCJuRZfZwnsCvn
+	fpnc9CtZNjhV+FvExxR9hkh6M1IQ9vFjcfT7/EeqiFzzXPBuNhglhpWXwxW1UJaWu/d0
+	8yKl3rqWhSJfdOnVS8b333p3UttUEY4ALDlAlE1oOdi0tw6DheMDD+4PqYwSeRaxZM7y
+	0O63jkHTO3yY1B/do80XwAsYgweeCRXPxOdiOPuWOIfr/bkqS144XS+z6tt+F4X4Jqqz
+	IiPz+nmBEd6pTkz7S59ER8NhuFzGt9izGBvR3FQK/h+FpPujTC9meD/tcVXv8pElIpDW
+	SHLg==
+X-Gm-Message-State: AHPjjUhfWDoEMmGRJM/HXFMB1PBNolRDaq9nVFuo//bcTIhOMNq7+W8l
+	I5iK5jDTJR1iRP6DdJ8=
+X-Google-Smtp-Source: AOwi7QBDSG1s5yWrTB2FCAbidWtP8Y/BsU+yuB6p4ZteyBAABVJbCqqBjTBithMMqyzJKdaSrZ2AUQ==
+X-Received: by 10.55.195.12 with SMTP id a12mr9377867qkj.157.1505503487013;
+	Fri, 15 Sep 2017 12:24:47 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id f4sm1044593qtg.35.2017.09.15.12.21.02
+	by smtp.gmail.com with ESMTPSA id
+	b202sm998007qkc.65.2017.09.15.12.24.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 15 Sep 2017 12:21:02 -0700 (PDT)
+	Fri, 15 Sep 2017 12:24:46 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 15 Sep 2017 15:20:54 -0400
-Message-Id: <1505503254-15542-1-git-send-email-derek@asterius.io>
+Date: Fri, 15 Sep 2017 15:24:39 -0400
+Message-Id: <1505503479-24867-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-django: update to version 1.11.5
+Subject: [meta-python][PATCH] python-pytest-runner: update to version 2.12.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2017 19:21:02 -0000
+X-List-Received-Date: Fri, 15 Sep 2017 19:24:46 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-django.inc                 | 4 ++--
- .../python/{python-django_1.11.4.bb => python-django_1.11.5.bb}       | 0
- .../python/{python3-django_1.11.4.bb => python3-django_1.11.5.bb}     | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-django_1.11.4.bb => python-django_1.11.5.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-django_1.11.4.bb => python3-django_1.11.5.bb} (100%)
+ meta-python/recipes-devtools/python/python-pytest-runner.inc         | 5 ++---
+ ...python-pytest-runner_2.11.1.bb => python-pytest-runner_2.12.1.bb} | 0
+ ...thon3-pytest-runner_2.11.1.bb => python3-pytest-runner_2.12.1.bb} | 0
+ 3 files changed, 2 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pytest-runner_2.11.1.bb => python-pytest-runner_2.12.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pytest-runner_2.11.1.bb => python3-pytest-runner_2.12.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index 370dc62..58fd70a 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-+++ b/meta-python/recipes-devtools/python/python-django.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
+diff --git a/meta-python/recipes-devtools/python/python-pytest-runner.inc b/meta-python/recipes-devtools/python/python-pytest-runner.inc
+index 85a8de1..c173a18 100644
+--- a/meta-python/recipes-devtools/python/python-pytest-runner.inc
++++ b/meta-python/recipes-devtools/python/python-pytest-runner.inc
+@@ -2,9 +2,8 @@ SUMMARY = "Invoke py.test as distutils command with dependency resolution"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
  
--SRC_URI[md5sum] = "c851d892cd5ad3a90808703c4f36e3fe"
--SRC_URI[sha256sum] = "abe86e67dda9897a1536a727ed57dbefb5a42b41943be3b116fe3edab4c07bb2"
-+SRC_URI[md5sum] = "8cef0d42aabacbc414ec4fbbb6056f3c"
-+SRC_URI[sha256sum] = "1836878162dfdf865492bacfdff0321e4ee8f1e7d51d93192546000b54982b29"
+-SRC_URI[md5sum] = "bdb73eb18eca2727944a2dcf963c5a81"
+-SRC_URI[sha256sum] = "983a31eab45e375240e250161a556163bc8d250edaba97960909338c273a89b3"
+-
++SRC_URI[md5sum] = "a8dd57c80cde37a587dd8c37740c1ab1"
++SRC_URI[sha256sum] = "5c9093e7a18780409d9a389f20366f2fd39acfb1db61545fdb2e90cdbd0bcae4"
  
- PYPI_PACKAGE = "Django"
  inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-django_1.11.4.bb b/meta-python/recipes-devtools/python/python-django_1.11.5.bb
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb b/meta-python/recipes-devtools/python/python-pytest-runner_2.12.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-django_1.11.4.bb
-rename to meta-python/recipes-devtools/python/python-django_1.11.5.bb
-diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.4.bb b/meta-python/recipes-devtools/python/python3-django_1.11.5.bb
+rename from meta-python/recipes-devtools/python/python-pytest-runner_2.11.1.bb
+rename to meta-python/recipes-devtools/python/python-pytest-runner_2.12.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb b/meta-python/recipes-devtools/python/python3-pytest-runner_2.12.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-django_1.11.4.bb
-rename to meta-python/recipes-devtools/python/python3-django_1.11.5.bb
+rename from meta-python/recipes-devtools/python/python3-pytest-runner_2.11.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest-runner_2.12.1.bb
 -- 
 2.7.4
 
