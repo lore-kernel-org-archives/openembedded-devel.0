@@ -1,51 +1,35 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
-	[209.85.128.169])
-	by mail.openembedded.org (Postfix) with ESMTP id EC1CF7199D;
-	Fri, 15 Sep 2017 01:16:17 +0000 (UTC)
-Received: by mail-wr0-f169.google.com with SMTP id 108so658847wra.5;
-	Thu, 14 Sep 2017 18:16:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=VjHkHrxbAU8yOZPWnjGZQUgyh7SbYsJigCqN8GLkQDk=;
-	b=qipNTNWZoNQ/HvskhYwQiF8B4ETu0/HkmZHgQntyz8EylgZRElVF6aVgZsyaNc5FF6
-	wDvMaon1QdLY65baIjhI1OLCl44P7lBEV9a1Jb7JpVTNbUbTwrXDfYTkBl3MWUTzJ6ue
-	cdAqvFVSNCHv9mcUt0ub+fS19YDNZbcmTHjFJ6zcpYPpdzumEuhT5U6ck0qILm2//vi6
-	9sqzHBkjPm7sbJPEGSAyZnAREZjE4Y2kJCPEmpwkYUNgOeMCJOtfG6dHnvvzDxNUr9fz
-	qpag7OqYt6kXWQo1asJqzwWpDM3ufCkGOqWbQqGdyIxnKyOz2JIRxgC0Vvmxt/UGtE8G
-	FE+w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=VjHkHrxbAU8yOZPWnjGZQUgyh7SbYsJigCqN8GLkQDk=;
-	b=CdsJjgn9pAQ9vcIkRDla89kqjwoZy3EG9xj1frlaUhnZ64NcaApWpiOq+3EII1fC7j
-	T2Z50d3d2b4dSHqs3fveLJlFaRYXU1BfwkwUv8UkcrJj6wtH8mcWkwC30K8VL31oks1Z
-	VT8dRsin51uaHmicqHnIMaZlmdFRVjkBDMq21w50CBQ+SkOzyuAnOI0IrVa4DlA5/SfI
-	3Hn60Vi1BvCU17WKa9ijR7+RiAz1Ji3mpoXEfRJs/3I9TsZ93B2mrgfecM69+t56Y5jw
-	V8yv11qSZkx+e5kjopsZH3tq5pMj0itMDoFU91QQF6GcCcGgBM0S+3gM3LSrigorYAvV
-	HPtQ==
-X-Gm-Message-State: AHPjjUhtUYcUkEaZz2th/XG+FKIOADlucwv5eUUFCTg3AiF3DL+CYzxY
-	dDuAXxfcZs3TQhQFqzD0LNuhXanc1aJHr6xFt0E=
-X-Google-Smtp-Source: ADKCNb7Uit5rZ83f46qCXaYd2LXGGifNrru66F60NQYK01cPZjdSvE1SIPX1+kuO8Q0yiam1a5gCWtN1105lHjgdTFQ=
-X-Received: by 10.223.145.5 with SMTP id j5mr18330892wrj.114.1505438178625;
-	Thu, 14 Sep 2017 18:16:18 -0700 (PDT)
-MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.223.134.180 with HTTP; Thu, 14 Sep 2017 18:16:16 -0700 (PDT)
-Received: by 10.223.134.180 with HTTP; Thu, 14 Sep 2017 18:16:16 -0700 (PDT)
-In-Reply-To: <5008540a-cf80-328d-1388-eedff7830ad4@gmail.com>
+Return-Path: <denis@denix.org>
+X-Greylist: delayed 497 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 15 Sep 2017 01:18:01 UTC
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id BBF117199D;
+	Fri, 15 Sep 2017 01:18:01 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id D453B20ADD;
+	Fri, 15 Sep 2017 01:09:45 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id Xcre4J_JigA9; Fri, 15 Sep 2017 01:09:45 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id AA75C207A4;
+	Fri, 15 Sep 2017 01:09:43 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 2A361162615; Thu, 14 Sep 2017 21:09:43 -0400 (EDT)
+Date: Thu, 14 Sep 2017 21:09:43 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-members@lists.openembedded.org
+Message-ID: <20170915010943.GK26405@denix.org>
 References: <CA+YB3rZCwnyLaogUF1iyX01XQuZ8MzfjFE--KSffW7YzMAAq6Q@mail.gmail.com>
 	<5008540a-cf80-328d-1388-eedff7830ad4@gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Thu, 14 Sep 2017 18:16:16 -0700
-X-Google-Sender-Auth: JVlLIut38ODsj3NP0rt5V-zRRhg
-Message-ID: <CA+YB3rbyPVfqsn2_TXzeRY3+RZ0bmC2WMYRKUU7ptA7mfszJMQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-members@lists.openembedded.org,
-	openembedded-devel@lists.openembedded.org
+MIME-Version: 1.0
+In-Reply-To: <5008540a-cf80-328d-1388-eedff7830ad4@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 Subject: Re: OEDEM : venue change
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -59,30 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Sep 2017 01:16:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 15 Sep 2017 01:18:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sep 14, 2017 4:45 PM, "akuster808" <akuster808@gmail.com> wrote:
+On Thu, Sep 14, 2017 at 04:45:04PM -0700, akuster808 wrote:
+> On 09/14/2017 11:12 AM, Jeff Osier-Mixon wrote:
+> >Reminder: the OEDEM page is at  https://www.openembedded.org/wiki/OEDEM_2017
+> >
+> >The venue has changed. OEDEM will be at the Jury's Inn, across the street
+> >from the Hilton.
+> >  Lunch and coffee etc. will be provided on site.
+> Do they have beer?
+> >
+> >Let me know if you have any questions, comments, rants, etc
 
+Thanks for taking care of this, as always!
 
-
-On 09/14/2017 11:12 AM, Jeff Osier-Mixon wrote:
-
-> Reminder: the OEDEM page is at  https://www.openembedded.org/w
-> iki/OEDEM_2017
->
-> The venue has changed. OEDEM will be at the Jury's Inn, across the street
-> from the Hilton.
->   Lunch and coffee etc. will be provided on site.
->
-Do they have beer?
-
-
-Thinking of a better place for beer afterward
-
-
-
-> Let me know if you have any questions, comments, rants, etc
->
->
+-- 
+Denys
 
