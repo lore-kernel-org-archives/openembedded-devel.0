@@ -1,49 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id D086E775DA
+Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
+	[209.85.128.175])
+	by mail.openembedded.org (Postfix) with ESMTP id C57B0775DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 12:34:45 +0000 (UTC)
-Received: by mail-wr0-f172.google.com with SMTP id l22so3447229wrc.10
+	Sat, 16 Sep 2017 12:37:44 +0000 (UTC)
+Received: by mail-wr0-f175.google.com with SMTP id a43so3420596wrc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 05:34:47 -0700 (PDT)
+	Sat, 16 Sep 2017 05:37:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ak4G9w7an0ENUPqsGwZWEfX1haJ/KJnS+y1BSvV7FgI=;
-	b=SJmcvJRAKbnokzYxzSDs2bBv7mphvfv1jVLtPQ2oQcOGjQN+9D0FzvvF3mB0gdx83e
-	XlHA95gX6JYvRdEK+MUqDGLuAUxSuIkSLPPkrMzsCSpc1+bO6+/JFdk8OsRCm+AzN/5F
-	N3S5ggy6vqu1kbWcn6L0AaJSVr16rkgCDcFLFPWkVxqpPA2Tr8q7MAqNo3TzItvPdjPd
-	KULvv8YJmd3lDWMet3cSKMSCp76KyyOalWxoy8RUIawqReelfGuupeai0EjTRdvXzSyo
-	mPUM5jVea9dLOc/UiWjyeuI+KmajI3hTMnYsrbZuiBi653+2RPavugzgah0ouI0rauh1
-	GyOA==
+	:cc; bh=mgB2pa0sxCDZbPONRlzEffLEue0zKk673JIm7LJLJU8=;
+	b=ZpQc4Yb9zUHpvEwgDPqxLdKLLpHzwu8l+B91YHuI9G4UBmQELjQEc9icgedbmBt6dQ
+	bw49exBYC92C/Q663NJyxIdPEzPiZLmRJbnPvH6Zz0xf0MWJTY64JlnkqbacV4dyg4Od
+	XsBoYPssQvF66tlZHInnyEfofgsIHi7E+CRf73am4d4DiJNmRS2YuKE+RAS4rmq4WaK5
+	F8SOZth08ODUY/wIzsE6kgS/P6QEB3gHhQqQRC9JuQmqeh6zD9PpsVdXEnvCYC+rOz7/
+	Bpw11PjCFz/kkF39OQ47etSfGYxbFyhf1kFmOXNbtpBPs9+zBJrzyOg/lgegI6rcMVsX
+	e+Ng==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=ak4G9w7an0ENUPqsGwZWEfX1haJ/KJnS+y1BSvV7FgI=;
-	b=EhQxttHgTuEAgZh1FEt//AtrgfkxBvdyskEB0iVu9P2G+4YYcRwsufTpvmUacai5/3
-	lQhUl6VUYvtPbdBOIShEkW/5uK1cfDpmS4mHaGuhqPR0ejKjEgsGhE4E7G2ELLsXzGK/
-	ByfXAGNN1NaHjNa3amCRdcZU4ysy7OsYf9ZyPucxYyw3jnq/cZY6ARlJ6Vc2PXl9Ftht
-	bSZN5kw2b6sUb3VgTsUbhYgPvV65hlC+BdjaR+eHehfVjWFs+lVqXGKAAzPLwAOP2YZH
-	alU3kcRoyrxoJRgFt3bDeIZS5GaB9b0Qvpa0WUgkRX40BrHIOThNPNya3dTJAaMPMIqD
-	ixNQ==
-X-Gm-Message-State: AHPjjUgqeZ6n8qJdy/7WMclPCB0yOdPuez095KTKECo2meYW0P4chowl
-	+Ww8Tn9+nmiGiMm0wQWIsOT1NwI/nUBN29pGGXc=
-X-Google-Smtp-Source: ADKCNb7yFR1Ynh5kdaGFQqOc/ZhaQyWiO6VbGZwQV9v7t77e23Ref317rldHxInqa+S0YAIUQ3cHReAaG6OBMlgS76g=
-X-Received: by 10.223.157.142 with SMTP id p14mr22716985wre.104.1505565286292; 
-	Sat, 16 Sep 2017 05:34:46 -0700 (PDT)
+	bh=mgB2pa0sxCDZbPONRlzEffLEue0zKk673JIm7LJLJU8=;
+	b=CE8DvmxfjUXAcBBxA/JU/03aWUxCFdgtUBz66BYwK9Por1rYtCz1PJ/iv5pNZfBax3
+	+R59R+ZysfQusTn1diqNgGCC5shPG1+DuXvCfxIHshwmCrQs/vT10H7hREZIRpRFEyNa
+	nJM+urTsN3NfHq5bAQWzz7zz+MCp7z59xnHWMFNmAKr1t7NqlGms5vlyOBArNsivgGVP
+	gTWGaVU3qI9H1t9DH46JjHtIqsMB5U0lBNOqF8Qm6tkZt2uMuEYF4kBlDj498jRgmZob
+	WMBDV8Se9RgVSj7ElhsqI+LydSHrsXihuCcNQtDrvjV0c2c6bv3MHjhQCE/djAM0km/M
+	zXdA==
+X-Gm-Message-State: AHPjjUh7Fqbg1Y/DZd4kX/l5zYfNwDqQhObHNmEIK92xZjmrZp/WFnGM
+	pvl8jU47PE6o9LZtS7NTFj4yJQLlTEjeD6pYw1Edcw==
+X-Google-Smtp-Source: ADKCNb6HWfQdTTkpCAkGlz6G15W1BguJECq+Y+wBD4IAS9pN2jNwNrglqPPkOfmkGUJkUKOHWjUV+Ex3QPPxKptr3fI=
+X-Received: by 10.223.131.66 with SMTP id 60mr23163819wrd.171.1505565465182;
+	Sat, 16 Sep 2017 05:37:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.147.202 with HTTP; Sat, 16 Sep 2017 05:34:45 -0700 (PDT)
-In-Reply-To: <20170915155547.40966-2-raj.khem@gmail.com>
-References: <20170915155547.40966-1-raj.khem@gmail.com>
-	<20170915155547.40966-2-raj.khem@gmail.com>
+Received: by 10.28.147.202 with HTTP; Sat, 16 Sep 2017 05:37:44 -0700 (PDT)
+In-Reply-To: <20170915225827.12328-2-raj.khem@gmail.com>
+References: <20170915225827.12328-1-raj.khem@gmail.com>
+	<20170915225827.12328-2-raj.khem@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 16 Sep 2017 14:34:45 +0200
-Message-ID: <CA+chaQd+vX6M1b-vFgXcyTE0rOtE1v0n7mOMtmMLu=W--qeO0w@mail.gmail.com>
+Date: Sat, 16 Sep 2017 14:37:44 +0200
+Message-ID: <CA+chaQdWxaCLaqr24=EGSueJgSEa7oPHzLHu4aWmOQh_320WZA@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH V2 2/2] breakpad: Upgrade to latest master
+Subject: Re: [meta-oe][PATCH 2/2] android-tools: Fix build with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,845 +56,595 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Sep 2017 12:34:46 -0000
+X-List-Received-Date: Sat, 16 Sep 2017 12:37:45 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Few more entries from stab.h seems to be missing:
-http://errors.yoctoproject.org/Errors/Details/156105/
+Even without this patch android-tools fail to build for qemuarm:
+http://errors.yoctoproject.org/Errors/Details/156104/
 
-On Fri, Sep 15, 2017 at 5:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
+It's probably broken for long time, the recipe was shadowed by meta-android
+copy until recently when I've removed it from meta-android (and then the
+layer as well from world builds).
 
-> Fix build with musl while here
->
+Can you please check what's going on so that I can at least build test this
+properly?
+
+On Sat, Sep 16, 2017 at 12:58 AM, Khem Raj <raj.khem@gmail.com> wrote:
+
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > ---
-> V1->V2: Fix build with musl/x86_64
->
->  .../0001-Turn-off-sign-compare-for-musl-libc.patch |  41 +++++
->  ...-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch |  24 +++
->  .../0001-lss-Match-syscalls-to-match-musl.patch    |  45 +++++
->  .../breakpad/0002-Avoid-using-basename.patch       |  29 +++
->  ...fpstate-instead-of-_libc_fpstate-on-linux.patch |  60 +++++++
->  ...nal.h-is-a-nonportable-alias-for-signal.h.patch |  26 +++
->  .../breakpad/0003-Dont-include-stab.h.patch        |  71 ++++++++
->  ...nflict-between-musl-libc-dirent.h-and-lss.patch |  35 ++++
->  ...cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch |  26 +++
->  ...-Import-necessary-definitions-from-stab.h.patch | 199
+>  .../0001-add-base64-implementation.patch           | 351
 > +++++++++++++++++++++
->  .../breakpad/0005-md2core-Replace-basename.patch   |  38 ++++
->  meta-oe/recipes-devtools/breakpad/breakpad_git.bb  |  18 +-
->  12 files changed, 607 insertions(+), 5 deletions(-)
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
-> off-sign-compare-for-musl-libc.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-
-> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
-> Match-syscalls-to-match-musl.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
-> using-basename.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
-> fpstate-instead-of-_libc_fpstate-on-linux.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
-> signal.h-is-a-nonportable-alias-for-signal.h.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
-> include-stab.h.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
-> conflict-between-musl-libc-dirent.h-and-lss.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
-> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
->  create mode 100644 meta-oe/recipes-devtools/
-> breakpad/breakpad/0005-Import-necessary-definitions-from-stab.h.patch
->  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0005-
-> md2core-Replace-basename.patch
+>  .../android-tools/0002-adb-Musl-fixes.patch        | 134 ++++++++
+>  .../android-tools/android-tools/adbd.mk            |   1 +
+>  .../android-tools/android-tools_5.1.1.r37.bb       |   2 +
+>  4 files changed, 488 insertions(+)
+>  create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/
+> 0001-add-base64-implementation.patch
+>  create mode 100644 meta-oe/recipes-devtools/android-tools/android-tools/
+> 0002-adb-Musl-fixes.patch
 >
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
-> off-sign-compare-for-musl-libc.patch b/meta-oe/recipes-devtools/
-> breakpad/breakpad/0001-Turn-off-sign-compare-for-musl-libc.patch
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/
+> 0001-add-base64-implementation.patch b/meta-oe/recipes-devtools/
+> android-tools/android-tools/0001-add-base64-implementation.patch
 > new file mode 100644
-> index 000000000..33bae1a37
+> index 000000000..680d21f3a
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
-> off-sign-compare-for-musl-libc.patch
-> @@ -0,0 +1,41 @@
-> +From ab8dcad25d0ac1f3a88814e78794e5d450de15ac Mon Sep 17 00:00:00 2001
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools/
+> 0001-add-base64-implementation.patch
+> @@ -0,0 +1,351 @@
+> +From bbeb72f11c64f190b23abbed5f44311bd021bdc9 Mon Sep 17 00:00:00 2001
 > +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 23:12:51 -0700
-> +Subject: [PATCH 1/5] Turn off sign-compare for musl-libc
+> +Date: Fri, 15 Sep 2017 15:46:38 -0700
+> +Subject: [PATCH 1/2] add base64 implementation
 > +
-> +Fix
-> +
-> +../../../../../../../workspace/sources/breakpad/src/client/linux/crash_
-> generation/crash_generation_server.cc:234:14: error:
->  comparison of integers of different signs: 'unsigned long' and 'int'
-> [-Werror,-Wsign-compare]                                          hdr =
-> CMSG_NXTHDR(&msg, hdr)) {
->
->  ^~~~~~~~~~~~~~~~~~~~~~
-> +/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-
-> linux-musleabi/breakpad/1_1.0+git999-r0/recipe-sysroot/usr/include/sys/socket.h:288:44:
-> note:
->                                                             expanded from
-> macro 'CMSG_NXTHDR'
->                                                __CMSG_LEN(cmsg) +
-> sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) \
->                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-> ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
->            1 error generated.
+> +musl needs it
 > +
 > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +---
-> + src/client/linux/crash_generation/crash_generation_server.cc | 10
-> ++++++++++
-> + 1 file changed, 10 insertions(+)
+> + system/core/adb/adb_auth_client.c |   2 +-
+> + system/core/adb/base64.c          | 315 ++++++++++++++++++++++++++++++
+> ++++++++
+> + 2 files changed, 316 insertions(+), 1 deletion(-)
+> + create mode 100644 system/core/adb/base64.c
 > +
-> +diff --git a/src/client/linux/crash_generation/crash_generation_server.cc
-> b/src/client/linux/crash_generation/crash_generation_server.cc
-> +index 2596afde..2faeb9e5 100644
-> +--- a/src/client/linux/crash_generation/crash_generation_server.cc
-> ++++ b/src/client/linux/crash_generation/crash_generation_server.cc
-> +@@ -230,8 +230,18 @@ CrashGenerationServer::ClientEvent(short revents)
-> +   // Walk the control payload and extract the file descriptor and
-> validated pid.
-> +   pid_t crashing_pid = -1;
-> +   int signal_fd = -1;
-> ++#ifndef __GLIBC__
-> ++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
-> ++  // clang to throw sign-compare warning. This is to suppress the warning
-> ++  // inline.
-> ++  #pragma clang diagnostic push
-> ++  #pragma clang diagnostic ignored "-Wsign-compare"
-> ++#endif
-> +   for (struct cmsghdr *hdr = CMSG_FIRSTHDR(&msg); hdr;
-> +        hdr = CMSG_NXTHDR(&msg, hdr)) {
-> ++#ifndef __GLIBC__
-> ++  #pragma clang diagnostic pop
-> ++#endif
-> +     if (hdr->cmsg_level != SOL_SOCKET)
-> +       continue;
-> +     if (hdr->cmsg_type == SCM_RIGHTS) {
-> +--
-> +2.14.1
+> +diff --git a/system/core/adb/adb_auth_client.c
+> b/system/core/adb/adb_auth_client.c
+> +index 55e9dca..104b413 100644
+> +--- a/system/core/adb/adb_auth_client.c
+> ++++ b/system/core/adb/adb_auth_client.c
+> +@@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode
+> *list)
+> +         if (sep)
+> +             *sep = '\0';
 > +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-
-> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0001-
-> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
-> new file mode 100644
-> index 000000000..df007956b
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-
-> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
-> @@ -0,0 +1,24 @@
-> +From 68580cb62f77117be3164c52abae68f75e8e59a1 Mon Sep 17 00:00:00 2001
-> +From: Felix Janda <felix.janda@posteo.de>
-> +Date: Sun, 1 Feb 2015 14:26:52 +0100
-> +Subject: [PATCH 1/3] include <sys/reg.h> to get __WORDSIZE on musl libc
-> +
-> +---
-> + src/common/linux/elf_core_dump.h | 1 +
-> + 1 file changed, 1 insertion(+)
-> +
-> +diff --git a/src/common/linux/elf_core_dump.h
-> b/src/common/linux/elf_core_dump.h
-> +index d03c7a88..02eb391c 100644
-> +--- a/src/common/linux/elf_core_dump.h
-> ++++ b/src/common/linux/elf_core_dump.h
-> +@@ -36,6 +36,7 @@
-> + #include <elf.h>
-> + #include <link.h>
-> + #include <stddef.h>
-> ++#include <sys/reg.h>
-> +
-> + #include "common/memory_range.h"
-> +
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
-> Match-syscalls-to-match-musl.patch b/meta-oe/recipes-devtools/
-> breakpad/breakpad/0001-lss-Match-syscalls-to-match-musl.patch
-> new file mode 100644
-> index 000000000..2b892ad64
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
-> Match-syscalls-to-match-musl.patch
-> @@ -0,0 +1,45 @@
-> +From 5f7333e4f7b7485598bd71aa80967e1a16a7f901 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 22:57:52 -0700
-> +Subject: [PATCH] lss: Match syscalls to match musl
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + linux_syscall_support.h | 3 +++
-> + 1 file changed, 3 insertions(+)
-> +
-> +Index: lss/linux_syscall_support.h
-> +===================================================================
-> +--- lss.orig/linux_syscall_support.h
-> ++++ lss/linux_syscall_support.h
-> +@@ -793,6 +793,9 @@ struct kernel_statfs {
-> + #define FUTEX_TRYLOCK_PI_PRIVATE  (FUTEX_TRYLOCK_PI | FUTEX_PRIVATE_FLAG)
-> + #endif
-> +
-> ++#ifndef __NR_fstatat
-> ++#define __NR_fstatat __NR_fstatat64
-> ++#endif
-> +
-> + #if defined(__x86_64__)
-> + #ifndef ARCH_SET_GS
-> +@@ -924,6 +927,7 @@ struct kernel_statfs {
-> + #ifndef __NR_fallocate
-> + #define __NR_fallocate          324
-> + #endif
+> +-        ret = __b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
+> ++        ret = b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
+> +         if (ret != sizeof(key->key)) {
+> +             D("%s: Invalid base64 data ret=%d\n", file, ret);
+> +             free(key);
+> +diff --git a/system/core/adb/base64.c b/system/core/adb/base64.c
+> +new file mode 100644
+> +index 0000000..95da284
+> +--- /dev/null
+> ++++ b/system/core/adb/base64.c
+> +@@ -0,0 +1,315 @@
+> ++/*
+> ++ * Copyright (c) 1996-1999 by Internet Software Consortium.
+> ++ *
+> ++ * Permission to use, copy, modify, and distribute this software for any
+> ++ * purpose with or without fee is hereby granted, provided that the above
+> ++ * copyright notice and this permission notice appear in all copies.
+> ++ *
+> ++ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM
+> DISCLAIMS
+> ++ * ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+> WARRANTIES
+> ++ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL INTERNET SOFTWARE
+> ++ * CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR
+> CONSEQUENTIAL
+> ++ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+> ++ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+> TORTIOUS
+> ++ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
+> OF THIS
+> ++ * SOFTWARE.
+> ++ */
 > ++
-> + /* End of i386 definitions
->      */
-> + #elif defined(__ARM_ARCH_3__) || defined(__ARM_EABI__)
-> + #ifndef __NR_setresuid
-> +@@ -1211,6 +1215,12 @@ struct kernel_statfs {
-> + #ifndef __NR_fallocate
-> + #define __NR_fallocate          285
-> + #endif
-> ++#ifndef __NR_pread
-> ++#define __NR_pread __NR_pread64
-> ++#endif
-> ++#ifndef __NR_pwrite
-> ++#define __NR_pwrite __NR_pwrite64
-> ++#endif
-> + /* End of x86-64 definitions
->      */
-> + #elif defined(__mips__)
-> + #if _MIPS_SIM == _MIPS_SIM_ABI32
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-using-basename.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
-> using-basename.patch
-> new file mode 100644
-> index 000000000..bc6282981
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
-> using-basename.patch
-> @@ -0,0 +1,29 @@
-> +From 806964f852773e427fea82a7716d44ce3be4498c Mon Sep 17 00:00:00 2001
-> +From: Felix Janda <felix.janda@posteo.de>
-> +Date: Sun, 1 Feb 2015 14:27:32 +0100
-> +Subject: [PATCH 2/3] Avoid using basename
-> +
-> +---
-> + src/common/linux/dump_symbols.cc | 6 +++---
-> + 1 file changed, 3 insertions(+), 3 deletions(-)
-> +
-> +diff --git a/src/common/linux/dump_symbols.cc b/src/common/linux/dump_
-> symbols.cc
-> +index d029ca14..6ac4a17b 100644
-> +--- a/src/common/linux/dump_symbols.cc
-> ++++ b/src/common/linux/dump_symbols.cc
-> +@@ -881,9 +881,9 @@ const char* ElfArchitecture(const typename
-> ElfClass::Ehdr* elf_header) {
-> + // last slash, or the whole filename if there are no slashes.
-> + string BaseFileName(const string &filename) {
-> +   // Lots of copies!  basename's behavior is less than ideal.
-> +-  char* c_filename = strdup(filename.c_str());
-> +-  string base = basename(c_filename);
-> +-  free(c_filename);
-> ++  const char *c_filename = filename.c_str();
-> ++  const char *p = strrchr(c_filename, '/');
-> ++  string base = p ? p+1 : c_filename;
-> +   return base;
-> + }
-> +
+> ++/*
+> ++ * Portions Copyright (c) 1995 by International Business Machines, Inc.
+> ++ *
+> ++ * International Business Machines, Inc. (hereinafter called IBM) grants
+> ++ * permission under its copyrights to use, copy, modify, and distribute
+> this
+> ++ * Software with or without fee, provided that the above copyright
+> notice and
+> ++ * all paragraphs of this notice appear in all copies, and that the name
+> of IBM
+> ++ * not be used in connection with the marketing of any product
+> incorporating
+> ++ * the Software or modifications thereof, without specific, written prior
+> ++ * permission.
+> ++ *
+> ++ * To the extent it has a right to do so, IBM grants an immunity from
+> suit
+> ++ * under its patents, if any, for the use, sale or manufacture of
+> products to
+> ++ * the extent that such products are used for performing Domain Name
+> System
+> ++ * dynamic updates in TCP/IP networks by means of the Software.  No
+> immunity is
+> ++ * granted for any product per se or for any other function of any
+> product.
+> ++ *
+> ++ * THE SOFTWARE IS PROVIDED "AS IS", AND IBM DISCLAIMS ALL WARRANTIES,
+> ++ * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+> ++ * PARTICULAR PURPOSE.  IN NO EVENT SHALL IBM BE LIABLE FOR ANY SPECIAL,
+> ++ * DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
+> ARISING
+> ++ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE,
+> EVEN
+> ++ * IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
+> ++ */
+> ++
+> ++#if !defined(LINT) && !defined(CODECENTER)
+> ++static const char rcsid[] = "$BINDId: base64.c,v 8.7 1999/10/13 16:39:33
+> vixie Exp $";
+> ++#endif /* not lint */
+> ++
+> ++#include <sys/types.h>
+> ++#include <sys/param.h>
+> ++#include <sys/socket.h>
+> ++
+> ++#include <netinet/in.h>
+> ++#include <arpa/inet.h>
+> ++#include <arpa/nameser.h>
+> ++
+> ++#include <ctype.h>
+> ++#include <resolv.h>
+> ++#include <stdio.h>
+> ++#include <stdlib.h>
+> ++#include <stdint.h>
+> ++#include <string.h>
+> ++
+> ++#define Assert(Cond) if (!(Cond)) abort()
+> ++
+> ++static const char Base64[] =
+> ++      "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz01234567
+> 89+/";
+> ++static const char Pad64 = '=';
+> ++
+> ++/* (From RFC1521 and draft-ietf-dnssec-secext-03.txt)
+> ++   The following encoding technique is taken from RFC 1521 by Borenstein
+> ++   and Freed.  It is reproduced here in a slightly edited form for
+> ++   convenience.
+> ++
+> ++   A 65-character subset of US-ASCII is used, enabling 6 bits to be
+> ++   represented per printable character. (The extra 65th character, "=",
+> ++   is used to signify a special processing function.)
+> ++
+> ++   The encoding process represents 24-bit groups of input bits as output
+> ++   strings of 4 encoded characters. Proceeding from left to right, a
+> ++   24-bit input group is formed by concatenating 3 8-bit input groups.
+> ++   These 24 bits are then treated as 4 concatenated 6-bit groups, each
+> ++   of which is translated into a single digit in the base64 alphabet.
+> ++
+> ++   Each 6-bit group is used as an index into an array of 64 printable
+> ++   characters. The character referenced by the index is placed in the
+> ++   output string.
+> ++
+> ++                         Table 1: The Base64 Alphabet
+> ++
+> ++      Value Encoding  Value Encoding  Value Encoding  Value Encoding
+> ++          0 A            17 R            34 i            51 z
+> ++          1 B            18 S            35 j            52 0
+> ++          2 C            19 T            36 k            53 1
+> ++          3 D            20 U            37 l            54 2
+> ++          4 E            21 V            38 m            55 3
+> ++          5 F            22 W            39 n            56 4
+> ++          6 G            23 X            40 o            57 5
+> ++          7 H            24 Y            41 p            58 6
+> ++          8 I            25 Z            42 q            59 7
+> ++          9 J            26 a            43 r            60 8
+> ++         10 K            27 b            44 s            61 9
+> ++         11 L            28 c            45 t            62 +
+> ++         12 M            29 d            46 u            63 /
+> ++         13 N            30 e            47 v
+> ++         14 O            31 f            48 w         (pad) =
+> ++         15 P            32 g            49 x
+> ++         16 Q            33 h            50 y
+> ++
+> ++   Special processing is performed if fewer than 24 bits are available
+> ++   at the end of the data being encoded.  A full encoding quantum is
+> ++   always completed at the end of a quantity.  When fewer than 24 input
+> ++   bits are available in an input group, zero bits are added (on the
+> ++   right) to form an integral number of 6-bit groups.  Padding at the
+> ++   end of the data is performed using the '=' character.
+> ++
+> ++   Since all base64 input is an integral number of octets, only the
+> ++         -------------------------------------------------
+> ++   following cases can arise:
+> ++
+> ++       (1) the final quantum of encoding input is an integral
+> ++           multiple of 24 bits; here, the final unit of encoded
+> ++         output will be an integral multiple of 4 characters
+> ++         with no "=" padding,
+> ++       (2) the final quantum of encoding input is exactly 8 bits;
+> ++           here, the final unit of encoded output will be two
+> ++         characters followed by two "=" padding characters, or
+> ++       (3) the final quantum of encoding input is exactly 16 bits;
+> ++           here, the final unit of encoded output will be three
+> ++         characters followed by one "=" padding character.
+> ++   */
+> ++
+> ++int
+> ++b64_ntop(const uint8_t* src, size_t srclength, char* target, size_t
+> targsize)
+> ++{
+> ++      size_t datalength = 0;
+> ++      uint8_t input[3];
+> ++      uint8_t output[4];
+> ++      size_t i;
+> ++
+> ++      while (2 < srclength) {
+> ++              input[0] = *src++;
+> ++              input[1] = *src++;
+> ++              input[2] = *src++;
+> ++              srclength -= 3;
+> ++
+> ++              output[0] = input[0] >> 2;
+> ++              output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+> ++              output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+> ++              output[3] = input[2] & 0x3f;
+> ++              Assert(output[0] < 64);
+> ++              Assert(output[1] < 64);
+> ++              Assert(output[2] < 64);
+> ++              Assert(output[3] < 64);
+> ++
+> ++              if (datalength + 4 > targsize)
+> ++                      return (-1);
+> ++              target[datalength++] = Base64[output[0]];
+> ++              target[datalength++] = Base64[output[1]];
+> ++              target[datalength++] = Base64[output[2]];
+> ++              target[datalength++] = Base64[output[3]];
+> ++      }
+> ++
+> ++      /* Now we worry about padding. */
+> ++      if (0 != srclength) {
+> ++              /* Get what's left. */
+> ++              input[0] = input[1] = input[2] = '\0';
+> ++              for (i = 0; i < srclength; i++)
+> ++                      input[i] = *src++;
+> ++
+> ++              output[0] = input[0] >> 2;
+> ++              output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
+> ++              output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
+> ++              Assert(output[0] < 64);
+> ++              Assert(output[1] < 64);
+> ++              Assert(output[2] < 64);
+> ++
+> ++              if (datalength + 4 > targsize)
+> ++                      return (-1);
+> ++              target[datalength++] = Base64[output[0]];
+> ++              target[datalength++] = Base64[output[1]];
+> ++              if (srclength == 1)
+> ++                      target[datalength++] = Pad64;
+> ++              else
+> ++                      target[datalength++] = Base64[output[2]];
+> ++              target[datalength++] = Pad64;
+> ++      }
+> ++      if (datalength >= targsize)
+> ++              return (-1);
+> ++      target[datalength] = '\0';      /* Returned value doesn't count
+> \0. */
+> ++      return (datalength);
+> ++}
+> ++
+> ++/* skips all whitespace anywhere.
+> ++   converts characters, four at a time, starting at (or after)
+> ++   src from base - 64 numbers into three 8 bit bytes in the target area.
+> ++   it returns the number of data bytes stored at the target, or -1 on
+> error.
+> ++ */
+> ++
+> ++int b64_pton(const char* src, uint8_t* target, size_t targsize)
+> ++{
+> ++      int tarindex, state, ch;
+> ++      char *pos;
+> ++
+> ++      state = 0;
+> ++      tarindex = 0;
+> ++
+> ++      while ((ch = *src++) != '\0') {
+> ++              if (isspace(ch))        /* Skip whitespace anywhere. */
+> ++                      continue;
+> ++
+> ++              if (ch == Pad64)
+> ++                      break;
+> ++
+> ++              pos = strchr(Base64, ch);
+> ++              if (pos == 0)           /* A non-base64 character. */
+> ++                      return (-1);
+> ++
+> ++              switch (state) {
+> ++              case 0:
+> ++                      if (target) {
+> ++                              if ((size_t)tarindex >= targsize)
+> ++                                      return (-1);
+> ++                              target[tarindex] = (pos - Base64) << 2;
+> ++                      }
+> ++                      state = 1;
+> ++                      break;
+> ++              case 1:
+> ++                      if (target) {
+> ++                              if ((size_t)tarindex + 1 >= targsize)
+> ++                                      return (-1);
+> ++                              target[tarindex]   |=  (pos - Base64) >> 4;
+> ++                              target[tarindex+1]  = ((pos - Base64) &
+> 0x0f)
+> ++                                                      << 4 ;
+> ++                      }
+> ++                      tarindex++;
+> ++                      state = 2;
+> ++                      break;
+> ++              case 2:
+> ++                      if (target) {
+> ++                              if ((size_t)tarindex + 1 >= targsize)
+> ++                                      return (-1);
+> ++                              target[tarindex]   |=  (pos - Base64) >> 2;
+> ++                              target[tarindex+1]  = ((pos - Base64) &
+> 0x03)
+> ++                                                      << 6;
+> ++                      }
+> ++                      tarindex++;
+> ++                      state = 3;
+> ++                      break;
+> ++              case 3:
+> ++                      if (target) {
+> ++                              if ((size_t)tarindex >= targsize)
+> ++                                      return (-1);
+> ++                              target[tarindex] |= (pos - Base64);
+> ++                      }
+> ++                      tarindex++;
+> ++                      state = 0;
+> ++                      break;
+> ++              default:
+> ++                      abort();
+> ++              }
+> ++      }
+> ++
+> ++      /*
+> ++       * We are done decoding Base-64 chars.  Let's see if we ended
+> ++       * on a byte boundary, and/or with erroneous trailing characters.
+> ++       */
+> ++
+> ++      if (ch == Pad64) {              /* We got a pad char. */
+> ++              ch = *src++;            /* Skip it, get next. */
+> ++              switch (state) {
+> ++              case 0:         /* Invalid = in first position */
+> ++              case 1:         /* Invalid = in second position */
+> ++                      return (-1);
+> ++
+> ++              case 2:         /* Valid, means one byte of info */
+> ++                      /* Skip any number of spaces. */
+> ++                      for ((void)NULL; ch != '\0'; ch = *src++)
+> ++                              if (!isspace(ch))
+> ++                                      break;
+> ++                      /* Make sure there is another trailing = sign. */
+> ++                      if (ch != Pad64)
+> ++                              return (-1);
+> ++                      ch = *src++;            /* Skip the = */
+> ++                      /* Fall through to "single trailing =" case. */
+> ++                      /* FALLTHROUGH */
+> ++
+> ++              case 3:         /* Valid, means two bytes of info */
+> ++                      /*
+> ++                       * We know this char is an =.  Is there anything
+> but
+> ++                       * whitespace after it?
+> ++                       */
+> ++                      for ((void)NULL; ch != '\0'; ch = *src++)
+> ++                              if (!isspace(ch))
+> ++                                      return (-1);
+> ++
+> ++                      /*
+> ++                       * Now make sure for cases 2 and 3 that the "extra"
+> ++                       * bits that slopped past the last full byte were
+> ++                       * zeros.  If we don't check them, they become a
+> ++                       * subliminal channel.
+> ++                       */
+> ++                      if (target && target[tarindex] != 0)
+> ++                              return (-1);
+> ++              }
+> ++      } else {
+> ++              /*
+> ++               * We ended by seeing the end of the string.  Make sure we
+> ++               * have no partial bytes lying around.
+> ++               */
+> ++              if (state != 0)
+> ++                      return (-1);
+> ++      }
+> ++
+> ++      return (tarindex);
+> ++}
+> ++
 > +--
 > +2.14.1
 > +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
-> fpstate-instead-of-_libc_fpstate-on-linux.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
-> fpstate-instead-of-_libc_fpstate-on-linux.patch
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/0002-adb-Musl-fixes.patch
+> b/meta-oe/recipes-devtools/android-tools/android-tools/
+> 0002-adb-Musl-fixes.patch
 > new file mode 100644
-> index 000000000..6c097cd22
+> index 000000000..c7aebb641
 > --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
-> fpstate-instead-of-_libc_fpstate-on-linux.patch
-> @@ -0,0 +1,60 @@
-> +From 0ba1b3e35e7c743b670bedc3e90001dfb868df10 Mon Sep 17 00:00:00 2001
-> +From: Felix Janda <felix.janda@posteo.de>
-> +Date: Sun, 1 Feb 2015 13:45:51 +0100
-> +Subject: [PATCH 2/6] Use _fpstate instead of _libc_fpstate on linux
-> +
-> +glibc defines both. musl libc only the former.
-> +---
-> + src/client/linux/dump_writer_common/ucontext_reader.cc | 4 ++--
-> + src/client/linux/dump_writer_common/ucontext_reader.h  | 2 +-
-> + src/client/linux/minidump_writer/minidump_writer.h     | 2 +-
-> + 3 files changed, 4 insertions(+), 4 deletions(-)
-> +
-> +Index: git/src/client/linux/dump_writer_common/ucontext_reader.cc
-> +===================================================================
-> +--- git.orig/src/client/linux/dump_writer_common/ucontext_reader.cc
-> ++++ git/src/client/linux/dump_writer_common/ucontext_reader.cc
-> +@@ -49,7 +49,7 @@ uintptr_t UContextReader::GetInstruction
-> + }
-> +
-> + void UContextReader::FillCPUContext(RawContextCPU *out, const
-> ucontext_t *uc,
-> +-                                    const struct _libc_fpstate* fp) {
-> ++                                    const struct _fpstate* fp) {
-> +   const greg_t* regs = uc->uc_mcontext.gregs;
-> +
-> +   out->context_flags = MD_CONTEXT_X86_FULL |
-> +@@ -97,7 +97,7 @@ uintptr_t UContextReader::GetInstruction
-> + }
-> +
-> + void UContextReader::FillCPUContext(RawContextCPU *out, const
-> ucontext_t *uc,
-> +-                                    const struct _libc_fpstate* fpregs) {
-> ++                                    const struct _fpstate* fpregs) {
-> +   const greg_t* regs = uc->uc_mcontext.gregs;
-> +
-> +   out->context_flags = MD_CONTEXT_AMD64_FULL;
-> +Index: git/src/client/linux/dump_writer_common/ucontext_reader.h
-> +===================================================================
-> +--- git.orig/src/client/linux/dump_writer_common/ucontext_reader.h
-> ++++ git/src/client/linux/dump_writer_common/ucontext_reader.h
-> +@@ -50,7 +50,7 @@ struct UContextReader {
-> +   //   info: the collection of register structures.
-> + #if defined(__i386__) || defined(__x86_64)
-> +   static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
-> +-                             const struct _libc_fpstate* fp);
-> ++                             const struct _fpstate* fp);
-> + #elif defined(__aarch64__)
-> +   static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
-> +                              const struct fpsimd_context* fpregs);
-> +Index: git/src/client/linux/minidump_writer/minidump_writer.h
-> +===================================================================
-> +--- git.orig/src/client/linux/minidump_writer/minidump_writer.h
-> ++++ git/src/client/linux/minidump_writer/minidump_writer.h
-> +@@ -48,7 +48,7 @@ class ExceptionHandler;
-> + #if defined(__aarch64__)
-> + typedef struct fpsimd_context fpstate_t;
-> + #elif !defined(__ARM_EABI__) && !defined(__mips__)
-> +-typedef struct _libc_fpstate fpstate_t;
-> ++typedef struct _fpstate fpstate_t;
-> + #endif
-> +
-> + // These entries store a list of memory regions that the client wants
-> included
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
-> signal.h-is-a-nonportable-alias-for-signal.h.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
-> signal.h-is-a-nonportable-alias-for-signal.h.patch
-> new file mode 100644
-> index 000000000..cfd9a9b34
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
-> signal.h-is-a-nonportable-alias-for-signal.h.patch
-> @@ -0,0 +1,26 @@
-> +From 15582e19c2545d5ffe8ff07f957d0ed602aeca74 Mon Sep 17 00:00:00 2001
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools/
+> 0002-adb-Musl-fixes.patch
+> @@ -0,0 +1,134 @@
+> +From f8653ed0ede4aa781ab758fcd44fdc05ffbe0b0a Mon Sep 17 00:00:00 2001
 > +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 23:15:09 -0700
-> +Subject: [PATCH 2/5] <sys/signal.h> is a nonportable alias for <signal.h>
+> +Date: Fri, 15 Sep 2017 15:50:57 -0700
+> +Subject: [PATCH 2/2] adb: Musl fixes
+> +
+> +__nonnull is gcc specific
+> +include sys/types.h for size_t
+> +Do not redefine close() and lseek()
 > +
 > +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > +---
-> + src/client/linux/handler/exception_handler.cc | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> + system/core/adb/adb.h                    |  2 ++
+> + system/core/adb/disable_verity_service.c | 13 ++++++++-----
+> + system/core/adb/framebuffer_service.c    |  7 ++++---
+> + system/core/adb/sysdeps.h                | 12 ++++++------
+> + 4 files changed, 20 insertions(+), 14 deletions(-)
 > +
-> +diff --git a/src/client/linux/handler/exception_handler.cc
-> b/src/client/linux/handler/exception_handler.cc
-> +index 05936d28..cca023fd 100644
-> +--- a/src/client/linux/handler/exception_handler.cc
-> ++++ b/src/client/linux/handler/exception_handler.cc
-> +@@ -78,7 +78,7 @@
-> + #include <sys/wait.h>
-> + #include <unistd.h>
+> +diff --git a/system/core/adb/adb.h b/system/core/adb/adb.h
+> +index 44e5981..bcdc49f 100644
+> +--- a/system/core/adb/adb.h
+> ++++ b/system/core/adb/adb.h
+> +@@ -18,7 +18,9 @@
+> + #define __ADB_H
 > +
-> +-#include <sys/signal.h>
-> ++#include <signal.h>
-> + #include <sys/ucontext.h>
-> + #include <sys/user.h>
-> + #include <ucontext.h>
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-include-stab.h.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
-> include-stab.h.patch
-> new file mode 100644
-> index 000000000..41bd1eac4
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
-> include-stab.h.patch
-> @@ -0,0 +1,71 @@
-> +From 569af712da94637091080943f6a0d69ccb35864e Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 23:24:08 -0700
-> +Subject: [PATCH 3/5] Dont include stab.h
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/common/stabs_reader.cc          |  1 -
-> + src/common/stabs_reader.h           | 12 +++++++++++-
-> + src/common/stabs_reader_unittest.cc |  1 -
-> + 3 files changed, 11 insertions(+), 3 deletions(-)
-> +
-> +Index: git/src/common/stabs_reader.cc
-> +===================================================================
-> +--- git.orig/src/common/stabs_reader.cc
-> ++++ git/src/common/stabs_reader.cc
-> +@@ -34,7 +34,6 @@
-> + #include "common/stabs_reader.h"
-> +
-> + #include <assert.h>
-> +-#include <stab.h>
-> + #include <string.h>
-> +
-> + #include <string>
-> +Index: git/src/common/stabs_reader.h
-> +===================================================================
-> +--- git.orig/src/common/stabs_reader.h
-> ++++ git/src/common/stabs_reader.h
-> +@@ -58,6 +58,30 @@
-> + #elif defined(HAVE_A_OUT_H)
-> + #include <a.out.h>
-> + #endif
-> ++// Definitions from <stab.h> and <a.out.h> for systems which
-> ++// do not have them
-> ++#ifndef HAVE_A_OUT_H
-> ++#undef N_UNDF
-> ++#define N_UNDF 0x0
-> ++#ifndef N_FUN
-> ++#define N_FUN 0x24
-> ++#endif
-> ++#ifndef N_SLINE
-> ++#define N_SLINE 0x44
-> ++#endif
-> ++#ifndef N_SO
-> ++#define N_SO 0x64
-> ++#endif
-> ++#ifndef N_LSYM
-> ++#define N_LSYM 0x80
-> ++#endif
-> ++#ifndef N_BINCL
-> ++#define N_BINCL 0x82
-> ++#endif
-> ++#ifndef N_SOL
-> ++#define N_SOL 0x84
-> ++#endif
-> ++#endif
-> +
-> + #include <string>
-> + #include <vector>
-> +Index: git/src/common/stabs_reader_unittest.cc
-> +===================================================================
-> +--- git.orig/src/common/stabs_reader_unittest.cc
-> ++++ git/src/common/stabs_reader_unittest.cc
-> +@@ -33,7 +33,6 @@
-> +
-> + #include <assert.h>
-> + #include <errno.h>
-> +-#include <stab.h>
-> + #include <stdarg.h>
-> + #include <stdlib.h>
-> + #include <string.h>
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
-> conflict-between-musl-libc-dirent.h-and-lss.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
-> conflict-between-musl-libc-dirent.h-and-lss.patch
-> new file mode 100644
-> index 000000000..851004704
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
-> conflict-between-musl-libc-dirent.h-and-lss.patch
-> @@ -0,0 +1,35 @@
-> +From 7aa266545dabf9934ccd44d4fc836040497159be Mon Sep 17 00:00:00 2001
-> +From: Felix Janda <felix.janda@posteo.de>
-> +Date: Sun, 1 Feb 2015 13:41:08 +0100
-> +Subject: [PATCH 3/3] Fix conflict between musl libc <dirent.h> and lss
-> +
-> +Include <dirent.h> late to avoid the macro getdents64 in musl
-> +libc's <dirent.h> to conflict with linux_sycall_support.h.
-> +---
-> + src/client/linux/crash_generation/crash_generation_server.cc | 3 ++-
-> + 1 file changed, 2 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/src/client/linux/crash_generation/crash_generation_server.cc
-> b/src/client/linux/crash_generation/crash_generation_server.cc
-> +index 26c50a5c..2596afde 100644
-> +--- a/src/client/linux/crash_generation/crash_generation_server.cc
-> ++++ b/src/client/linux/crash_generation/crash_generation_server.cc
-> +@@ -28,7 +28,6 @@
-> + // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> +
-> + #include <assert.h>
-> +-#include <dirent.h>
-> + #include <fcntl.h>
 > + #include <limits.h>
-> + #include <poll.h>
-> +@@ -49,6 +48,8 @@
-> + #include "common/linux/guid_creator.h"
-> + #include "common/linux/safe_readlink.h"
+> ++#include <sys/types.h>
 > +
-> ++#include <dirent.h>
-> ++
-> + static const char kCommandQuit = 'x';
+> ++#include "fdevent.h"
+> + #include "adb_trace.h"
+> + #include "transport.h"  /* readx(), writex() */
 > +
-> + namespace google_breakpad {
-> +--
-> +2.14.1
+> +diff --git a/system/core/adb/disable_verity_service.c
+> b/system/core/adb/disable_verity_service.c
+> +index ed3da52..29fa3d6 100644
+> +--- a/system/core/adb/disable_verity_service.c
+> ++++ b/system/core/adb/disable_verity_service.c
+> +@@ -14,25 +14,28 @@
+> +  * limitations under the License.
+> +  */
 > +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
-> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
-> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
-> new file mode 100644
-> index 000000000..60ab7a713
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
-> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
-> @@ -0,0 +1,26 @@
-> +From 680f9590d19a6e35c7c5587e3f4d8194aab0fcd2 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 23:28:36 -0700
-> +Subject: [PATCH 4/5] elf_reader.cc: include <sys/reg.h> to get __WORDSIZE
-> on
-> + musl libc
+> +-#include "sysdeps.h"
 > +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/common/dwarf/elf_reader.cc | 1 +
-> + 1 file changed, 1 insertion(+)
+> + #define  TRACE_TAG  TRACE_ADB
+> + #include "adb.h"
+> ++#include "sysdeps.h"
+> ++#include "cutils/properties.h"
+> ++#include "ext4_sb.h"
+> ++#include <fs_mgr.h>
 > +
-> +diff --git a/src/common/dwarf/elf_reader.cc
-> b/src/common/dwarf/elf_reader.cc
-> +index 4135a51a..bb58a5a1 100644
-> +--- a/src/common/dwarf/elf_reader.cc
-> ++++ b/src/common/dwarf/elf_reader.cc
-> +@@ -33,6 +33,7 @@
-> + #include <sys/types.h>
-> + #include <sys/stat.h>
-> + #include <sys/mman.h>
-> ++#include <sys/reg.h>
-> + #include <unistd.h>
-> + #include <fcntl.h>
-> + #include <string.h>
-> +--
-> +2.14.1
-> +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0005-Import-
-> necessary-definitions-from-stab.h.patch b/meta-oe/recipes-devtools/
-> breakpad/breakpad/0005-Import-necessary-definitions-from-stab.h.patch
-> new file mode 100644
-> index 000000000..80de8c684
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0005-Import-
-> necessary-definitions-from-stab.h.patch
-> @@ -0,0 +1,199 @@
-> +From fa7a3b7312307acad0045549d5f306e7fd117804 Mon Sep 17 00:00:00 2001
-> +From: Felix Janda <felix.janda@posteo.de>
-> +Date: Sun, 1 Feb 2015 14:34:44 +0100
-> +Subject: [PATCH 5/6] Import necessary definitions from stab.h
-> +
-> +---
-> + configure.ac                        |   1 -
-> + src/common/android/include/stab.h   | 100 ------------------------------
-> ------
-> + src/common/common.gyp               |   1 -
-> + src/common/stabs_reader.cc          |   1 -
-> + src/common/stabs_reader.h           |  13 +++--
-> + src/common/stabs_reader_unittest.cc |   1 -
-> + 6 files changed, 10 insertions(+), 107 deletions(-)
-> + delete mode 100644 src/common/android/include/stab.h
-> +
-> +diff --git a/configure.ac b/configure.ac
-> +index 2223920..0e55cd9 100644
-> +--- a/configure.ac
-> ++++ b/configure.ac
-> +@@ -73,7 +73,6 @@ AC_HEADER_STDC
-> + AC_SYS_LARGEFILE
-> + m4_include(m4/ax_pthread.m4)
-> + AX_PTHREAD
-> +-AC_CHECK_HEADERS([a.out.h])
-> +
-> + # Only build Linux client libs when compiling for Linux
-> + case $host in
-> +diff --git a/src/common/android/include/stab.h
-> b/src/common/android/include/stab.h
-> +deleted file mode 100644
-> +index cd92902..0000000
-> +--- a/src/common/android/include/stab.h
-> ++++ /dev/null
-> +@@ -1,100 +0,0 @@
-> +-// Copyright (c) 2012, Google Inc.
-> +-// All rights reserved.
-> +-//
-> +-// Redistribution and use in source and binary forms, with or without
-> +-// modification, are permitted provided that the following conditions are
-> +-// met:
-> +-//
-> +-//     * Redistributions of source code must retain the above copyright
-> +-// notice, this list of conditions and the following disclaimer.
-> +-//     * Redistributions in binary form must reproduce the above
-> +-// copyright notice, this list of conditions and the following disclaimer
-> +-// in the documentation and/or other materials provided with the
-> +-// distribution.
-> +-//     * Neither the name of Google Inc. nor the names of its
-> +-// contributors may be used to endorse or promote products derived from
-> +-// this software without specific prior written permission.
-> +-//
-> +-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-> +-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-> +-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-> +-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-> +-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-> +-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-> +-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-> +-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-> +-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-> +-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-> +-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-> +-
-> +-#ifndef GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
-> +-#define GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
-> +-
-> +-#include <sys/cdefs.h>
-> +-
-> +-#ifdef __BIONIC_HAVE_STAB_H
-> +-#include <stab.h>
-> +-#else
-> +-
-> +-#ifdef __cplusplus
-> +-extern "C" {
-> +-#endif  // __cplusplus
-> +-
-> +-#define _STAB_CODE_LIST       \
-> +-  _STAB_CODE_DEF(UNDF,0x00)   \
-> +-  _STAB_CODE_DEF(GSYM,0x20)   \
-> +-  _STAB_CODE_DEF(FNAME,0x22)  \
-> +-  _STAB_CODE_DEF(FUN,0x24)    \
-> +-  _STAB_CODE_DEF(STSYM,0x26)  \
-> +-  _STAB_CODE_DEF(LCSYM,0x28)  \
-> +-  _STAB_CODE_DEF(MAIN,0x2a)   \
-> +-  _STAB_CODE_DEF(PC,0x30)     \
-> +-  _STAB_CODE_DEF(NSYMS,0x32)  \
-> +-  _STAB_CODE_DEF(NOMAP,0x34)  \
-> +-  _STAB_CODE_DEF(OBJ,0x38)    \
-> +-  _STAB_CODE_DEF(OPT,0x3c)    \
-> +-  _STAB_CODE_DEF(RSYM,0x40)   \
-> +-  _STAB_CODE_DEF(M2C,0x42)    \
-> +-  _STAB_CODE_DEF(SLINE,0x44)  \
-> +-  _STAB_CODE_DEF(DSLINE,0x46) \
-> +-  _STAB_CODE_DEF(BSLINE,0x48) \
-> +-  _STAB_CODE_DEF(BROWS,0x48)  \
-> +-  _STAB_CODE_DEF(DEFD,0x4a)   \
-> +-  _STAB_CODE_DEF(EHDECL,0x50) \
-> +-  _STAB_CODE_DEF(MOD2,0x50)   \
-> +-  _STAB_CODE_DEF(CATCH,0x54)  \
-> +-  _STAB_CODE_DEF(SSYM,0x60)   \
-> +-  _STAB_CODE_DEF(SO,0x64)     \
-> +-  _STAB_CODE_DEF(LSYM,0x80)   \
-> +-  _STAB_CODE_DEF(BINCL,0x82)  \
-> +-  _STAB_CODE_DEF(SOL,0x84)    \
-> +-  _STAB_CODE_DEF(PSYM,0xa0)   \
-> +-  _STAB_CODE_DEF(EINCL,0xa2)  \
-> +-  _STAB_CODE_DEF(ENTRY,0xa4)  \
-> +-  _STAB_CODE_DEF(LBRAC,0xc0)  \
-> +-  _STAB_CODE_DEF(EXCL,0xc2)   \
-> +-  _STAB_CODE_DEF(SCOPE,0xc4)  \
-> +-  _STAB_CODE_DEF(RBRAC,0xe0)  \
-> +-  _STAB_CODE_DEF(BCOMM,0xe2)  \
-> +-  _STAB_CODE_DEF(ECOMM,0xe4)  \
-> +-  _STAB_CODE_DEF(ECOML,0xe8)  \
-> +-  _STAB_CODE_DEF(NBTEXT,0xf0) \
-> +-  _STAB_CODE_DEF(NBDATA,0xf2) \
-> +-  _STAB_CODE_DEF(NBBSS,0xf4)  \
-> +-  _STAB_CODE_DEF(NBSTS,0xf6)  \
-> +-  _STAB_CODE_DEF(NBLCS,0xf8)  \
-> +-  _STAB_CODE_DEF(LENG,0xfe)
-> +-
-> +-enum __stab_debug_code {
-> +-#define _STAB_CODE_DEF(x,y)  N_##x = y,
-> +-_STAB_CODE_LIST
-> +-#undef _STAB_CODE_DEF
-> +-};
-> +-
-> +-#ifdef __cplusplus
-> +-}  // extern "C"
-> +-#endif  // __cplusplus
-> +-
-> +-#endif  // __BIONIC_HAVE_STAB_H
-> +-
-> +-#endif  // GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
-> +diff --git a/src/common/common.gyp b/src/common/common.gyp
-> +index f01ede5..c49ff85 100644
-> +--- a/src/common/common.gyp
-> ++++ b/src/common/common.gyp
-> +@@ -46,7 +46,6 @@
-> +         'android/include/elf.h',
-> +         'android/include/link.h',
-> +         'android/include/sgidefs.h',
-> +-        'android/include/stab.h',
-> +         'android/include/sys/procfs.h',
-> +         'android/include/sys/signal.h',
-> +         'android/include/sys/user.h',
-> +diff --git a/src/common/stabs_reader.cc b/src/common/stabs_reader.cc
-> +index 6019fc7..9562caa 100644
-> +--- a/src/common/stabs_reader.cc
-> ++++ b/src/common/stabs_reader.cc
-> +@@ -34,7 +34,6 @@
-> + #include "common/stabs_reader.h"
-> +
-> + #include <assert.h>
-> +-#include <stab.h>
-> + #include <string.h>
-> +
-> + #include <string>
-> +diff --git a/src/common/stabs_reader.h b/src/common/stabs_reader.h
-> +index d89afc0..591f007 100644
-> +--- a/src/common/stabs_reader.h
-> ++++ b/src/common/stabs_reader.h
-> +@@ -53,12 +53,19 @@
-> + #include <config.h>
-> + #endif
-> +
-> +-#ifdef HAVE_A_OUT_H
-> +-#include <a.out.h>
-> +-#endif
-> + #ifdef HAVE_MACH_O_NLIST_H
-> + #include <mach-o/nlist.h>
-> + #endif
-> ++// Definitions from <stab.h> and <a.out.h> for systems which
-> ++// do not have them
-> ++#undef N_UNDF
-> ++#define N_UNDF 0x0
-> ++#define N_FUN 0x24
-> ++#define N_SLINE 0x44
-> ++#define N_SO 0x64
-> ++#define N_LSYM 0x80
-> ++#define N_BINCL 0x82
-> ++#define N_SOL 0x84
-> +
-> + #include <string>
-> + #include <vector>
-> +diff --git a/src/common/stabs_reader_unittest.cc
-> b/src/common/stabs_reader_unittest.cc
-> +index a84da1c..854ac42 100644
-> +--- a/src/common/stabs_reader_unittest.cc
-> ++++ b/src/common/stabs_reader_unittest.cc
-> +@@ -33,7 +33,6 @@
-> +
-> + #include <assert.h>
-> + #include <errno.h>
-> +-#include <stab.h>
+> + #include <stdio.h>
 > + #include <stdarg.h>
+> + #include <sys/stat.h>
+> + #include <fcntl.h>
+> + #include <inttypes.h>
+> ++#include <unistd.h>
+> ++#include <errno.h>
+> ++#include <stdbool.h>
+> +
+> +-#include "cutils/properties.h"
+> +-#include "ext4_sb.h"
+> +-#include <fs_mgr.h>
+> +
+> + #define FSTAB_PREFIX "/fstab."
+> + struct fstab *fstab;
+> +
+> +-__attribute__((__format__(printf, 2, 3))) __nonnull((2))
+> ++__attribute__((__format__(printf, 2, 3))) __attribute__((nonnull((2))))
+> + static void write_console(int fd, const char* format, ...)
+> + {
+> +     char buffer[256];
+> +diff --git a/system/core/adb/framebuffer_service.c
+> b/system/core/adb/framebuffer_service.c
+> +index 8cbe840..8f0ccfb 100644
+> +--- a/system/core/adb/framebuffer_service.c
+> ++++ b/system/core/adb/framebuffer_service.c
+> +@@ -14,6 +14,10 @@
+> +  * limitations under the License.
+> +  */
+> +
+> ++#include "fdevent.h"
+> ++#include "adb.h"
+> ++#include "sysdeps.h"
+> ++
 > + #include <stdlib.h>
-> + #include <string.h>
-> +--
-> +2.0.5
+> + #include <stdio.h>
+> + #include <unistd.h>
+> +@@ -23,9 +27,6 @@
+> + #include <sys/types.h>
+> + #include <sys/wait.h>
 > +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0005-md2core-Replace-basename.patch
-> b/meta-oe/recipes-devtools/breakpad/breakpad/0005-
-> md2core-Replace-basename.patch
-> new file mode 100644
-> index 000000000..852c1ed2c
-> --- /dev/null
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0005-
-> md2core-Replace-basename.patch
-> @@ -0,0 +1,38 @@
-> +From bbf2b5ed5d93b227df8aea5726727b48e29f6790 Mon Sep 17 00:00:00 2001
-> +From: Khem Raj <raj.khem@gmail.com>
-> +Date: Thu, 14 Sep 2017 23:35:40 -0700
-> +Subject: [PATCH 5/5] md2core: Replace basename()
-> +
-> +musl does not provide it
-> +
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +---
-> + src/tools/linux/md2core/minidump-2-core.cc | 5 ++++-
-> + 1 file changed, 4 insertions(+), 1 deletion(-)
-> +
-> +diff --git a/src/tools/linux/md2core/minidump-2-core.cc
-> b/src/tools/linux/md2core/minidump-2-core.cc
-> +index 6a9e28eb..52b81c22 100644
-> +--- a/src/tools/linux/md2core/minidump-2-core.cc
-> ++++ b/src/tools/linux/md2core/minidump-2-core.cc
-> +@@ -107,6 +107,9 @@ struct Options {
-> +
-> + static void
-> + Usage(int argc, const char* argv[]) {
-> ++  const char *c_filename = argv[0];;
-> ++  const char *p = strrchr(c_filename, '/');
-> ++  const char *base = p ? p+1 : c_filename;
-> +   fprintf(stderr,
-> +           "Usage: %s [options] <minidump file>\n"
-> +           "\n"
-> +@@ -133,7 +136,7 @@ Usage(int argc, const char* argv[]) {
-> +           "             lookups to be done in this directory rather than
-> the filesystem\n"
-> +           "             layout as it exists in the crashing image.  This
-> path should end\n"
-> +           "             with a slash if it's a directory.  e.g.
-> /var/lib/breakpad/\n"
-> +-          "", basename(argv[0]));
-> ++          "", base);
+> +-#include "fdevent.h"
+> +-#include "adb.h"
+> +-
+> + #include <linux/fb.h>
+> + #include <sys/ioctl.h>
+> + #include <sys/mman.h>
+> +diff --git a/system/core/adb/sysdeps.h b/system/core/adb/sysdeps.h
+> +index cc1f839..ea39ac3 100644
+> +--- a/system/core/adb/sysdeps.h
+> ++++ b/system/core/adb/sysdeps.h
+> +@@ -123,8 +123,8 @@ static __inline__ int  unix_close(int fd)
+> + {
+> +     return close(fd);
 > + }
+> +-#undef   close
+> +-#define  close   ____xxx_close
+> ++//#undef   close
+> ++//#define  close   ____xxx_close
 > +
-> + static void
+> + static __inline__  int  unix_read(int  fd, void*  buf, size_t  len)
+> + {
+> +@@ -369,8 +369,8 @@ static __inline__ int  adb_close(int fd)
+> + {
+> +     return close(fd);
+> + }
+> +-#undef   close
+> +-#define  close   ____xxx_close
+> ++//#undef   close
+> ++//#define  close   ____xxx_close
+> +
+> +
+> + static __inline__  int  adb_read(int  fd, void*  buf, size_t  len)
+> +@@ -392,8 +392,8 @@ static __inline__ int   adb_lseek(int  fd, int  pos,
+> int  where)
+> + {
+> +     return lseek(fd, pos, where);
+> + }
+> +-#undef   lseek
+> +-#define  lseek   ___xxx_lseek
+> ++//#undef   lseek
+> ++//#define  lseek   ___xxx_lseek
+> +
+> + static __inline__  int    adb_unlink(const char*  path)
+> + {
 > +--
 > +2.14.1
 > +
-> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> index a4f149143..9a1255594 100644
-> --- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> +++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-> @@ -17,22 +17,30 @@ PE = "1"
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+> b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+> index 84cd06b10..31452ae10 100644
+> --- a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
+> @@ -16,6 +16,7 @@ adbd_SRC_FILES += jdwp_service.c
+>  adbd_SRC_FILES += framebuffer_service.c
+>  adbd_SRC_FILES += remount_service.c
+>  adbd_SRC_FILES += disable_verity_service.c
+> +adbd_SRC_FILES += base64.c
+>  adbd_SRC_FILES += usb_linux_client.c
+>  adbd_OBJS := $(adbd_SRC_FILES:.c=.o)
 >
->  PV = "1.0+git${SRCPV}"
->
-> -SRCREV_FORMAT = "breakpad_glog_gtest_protobuf_lss_gyp"
-> +SRCREV_FORMAT = "breakpad_gtest_protobuf_lss_gyp"
->
-> -SRCREV_breakpad = "66856d617b6658ce09ef2bc1b15d457ab7b152b0"
-> -SRCREV_glog = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
-> +SRCREV_breakpad = "dea867e76f24e4a68395684b9d1cf24bcef82f20"
->  SRCREV_gtest = "ec44c6c1675c25b9827aacd08c02433cccde7780"
->  SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
->  SRCREV_lss = "a91633d172407f6c83dd69af11510b37afebb7f9"
-> -SRCREV_gyp = "e8ab0833a42691cd2184bd4c45d779e43821d3e0"
-> +SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
->
->  SRC_URI = "git://github.com/google/breakpad;name=breakpad \
-> -           git://github.com/google/glog.git;destsuffix=git/src/third_
-> party/glog;name=glog \
->             git://github.com/google/googletest.git;destsuffix=git/
-> src/testing/gtest;name=gtest \
->             git://github.com/google/protobuf.git;destsuffix=git/
-> src/third_party/protobuf/protobuf;name=protobuf \
->             git://chromium.googlesource.com/linux-syscall-support;
-> protocol=https;destsuffix=git/src/third_party/lss;name=lss \
->             git://chromium.googlesource.com/external/gyp;protocol=
-> https;destsuffix=git/src/tools/gyp;name=gyp \
->             file://0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch
-> \
-> +           file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
-> \
-> +           file://0002-Avoid-using-basename.patch \
-> +           file://0003-Fix-conflict-between-musl-libc-dirent.h-and-lss.patch
-> \
-> +           file://0001-Turn-off-sign-compare-for-musl-libc.patch \
-> +           file://0002-sys-signal.h-is-a-nonportable-alias-for-signal.h.patch
-> \
-> +           file://0003-Dont-include-stab.h.patch \
-> +           file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
-> \
-> +           file://0005-md2core-Replace-basename.patch \
-> +           file://0002-Use-_fpstate-instead-of-_libc_fpstate-on-linux.patch
-> \
-> +           file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss
-> \
->  "
->  S = "${WORKDIR}/git"
->
+> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.
+> 1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.
+> 1.1.r37.bb
+> index 34fddcbda..75f5b9e26 100644
+> --- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+> @@ -32,6 +32,8 @@ SRC_URI = " \
+>      file://define-shell-command.patch \
+>      file://implicit-declaration-function-strlcat-strlcopy.patch \
+>      file://fix-big-endian-build.patch \
+> +    file://0001-add-base64-implementation.patch \
+> +    file://0002-adb-Musl-fixes.patch \
+>      file://android-tools-adbd.service \
+>      file://.gitignore;subdir=git \
+>      file://adb.mk;subdir=${BPN} \
 > --
 > 2.14.1
 >
