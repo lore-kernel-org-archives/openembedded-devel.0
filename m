@@ -1,48 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f49.google.com (mail-wm0-f49.google.com [74.125.82.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 100D678451;
-	Sat, 16 Sep 2017 09:00:13 +0000 (UTC)
-Received: by mail-wm0-f49.google.com with SMTP id v142so12789488wmv.5;
-	Sat, 16 Sep 2017 02:00:15 -0700 (PDT)
+Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
+	[209.85.128.172])
+	by mail.openembedded.org (Postfix) with ESMTP id D086E775DA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Sep 2017 12:34:45 +0000 (UTC)
+Received: by mail-wr0-f172.google.com with SMTP id l22so3447229wrc.10
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 16 Sep 2017 05:34:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+LcivAJfnRTQRcT3Dzdp5L8StP+E56TPSOw/a7UfdpA=;
-	b=cQTiavWRaJojum1+4mzxHLKO4pTVHdYUxFdtd+XSvfhXf+62YfLJsLLzLvPApnrFmX
-	u2dG7Qgx7j7gaXIHN/FQxqw//ANwGfzHU5p/MG6Ghwyn8pjIS598JuFaIBBT8PZUuND6
-	mOgwVxFpRk1yHHr7rWQYQ1Lq0Wd8d7300WbvsL9UIU2VuYbQ1GjKI+X+XHIZdLcSOJoI
-	jL782P6VxTRKE10o7jxVMfclO/Y/LGe/qmXLPn/YDpqPhef7G0PgvT03qzOqYllIX/c0
-	5k7tADIcz23tEhAjwDPhem0f65r8UbNNs6pe3/igA/0GpudKjUFR9+9Ks+CR6cieZ7yy
-	vjXw==
+	:cc; bh=ak4G9w7an0ENUPqsGwZWEfX1haJ/KJnS+y1BSvV7FgI=;
+	b=SJmcvJRAKbnokzYxzSDs2bBv7mphvfv1jVLtPQ2oQcOGjQN+9D0FzvvF3mB0gdx83e
+	XlHA95gX6JYvRdEK+MUqDGLuAUxSuIkSLPPkrMzsCSpc1+bO6+/JFdk8OsRCm+AzN/5F
+	N3S5ggy6vqu1kbWcn6L0AaJSVr16rkgCDcFLFPWkVxqpPA2Tr8q7MAqNo3TzItvPdjPd
+	KULvv8YJmd3lDWMet3cSKMSCp76KyyOalWxoy8RUIawqReelfGuupeai0EjTRdvXzSyo
+	mPUM5jVea9dLOc/UiWjyeuI+KmajI3hTMnYsrbZuiBi653+2RPavugzgah0ouI0rauh1
+	GyOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=+LcivAJfnRTQRcT3Dzdp5L8StP+E56TPSOw/a7UfdpA=;
-	b=Sg7Pei2hXo5BpexucQqvcGwmTW0p5D69/5VhsxeRtA+ci4NWs5LWckwNCrEViP1kmQ
-	VcFgAo82oG+4gDoZX+OMTD4drMBJfcZpbLe+d/1qADKM4rAfm3BgJroGcjoyU6NslTxt
-	ap1uJvy4tJcMwSBx6sdD2CAQrgI1/WVhT/2rwfxQ2jct7ruCZyR/4DKjhH0AH4K0RoJE
-	dVIn1QgG8DcwcLdnUs9es3TZzR3oOEug7aSbpLlvi/82S/1UJXNQt5DZ+XIB7YWczTuK
-	DuufP1KYLdYhdW7eNUHFnxhG84lbchDAag3CJWBbQ9HEwuxTGuOaYdXx87YZlaeEVdtY
-	GbXg==
-X-Gm-Message-State: AHPjjUizssWafB+MsdfqJht2wM8AWYBUUhr+ClLZAaODSIyay5Vlcvzb
-	W8hk9IlQzmEscNwyzRotMc/hhm+LVWQ76d4b/jHvSQ==
-X-Google-Smtp-Source: AOwi7QCpRxh5s6jeQFYvn9eMiWaH+Og87Ty6FemDKgyItG+XCpkAuDjen4UdSN2stb51vIvFL5e+4MHC6hJyWJxgjKM=
-X-Received: by 10.28.73.134 with SMTP id w128mr4430495wma.141.1505552414121;
-	Sat, 16 Sep 2017 02:00:14 -0700 (PDT)
+	bh=ak4G9w7an0ENUPqsGwZWEfX1haJ/KJnS+y1BSvV7FgI=;
+	b=EhQxttHgTuEAgZh1FEt//AtrgfkxBvdyskEB0iVu9P2G+4YYcRwsufTpvmUacai5/3
+	lQhUl6VUYvtPbdBOIShEkW/5uK1cfDpmS4mHaGuhqPR0ejKjEgsGhE4E7G2ELLsXzGK/
+	ByfXAGNN1NaHjNa3amCRdcZU4ysy7OsYf9ZyPucxYyw3jnq/cZY6ARlJ6Vc2PXl9Ftht
+	bSZN5kw2b6sUb3VgTsUbhYgPvV65hlC+BdjaR+eHehfVjWFs+lVqXGKAAzPLwAOP2YZH
+	alU3kcRoyrxoJRgFt3bDeIZS5GaB9b0Qvpa0WUgkRX40BrHIOThNPNya3dTJAaMPMIqD
+	ixNQ==
+X-Gm-Message-State: AHPjjUgqeZ6n8qJdy/7WMclPCB0yOdPuez095KTKECo2meYW0P4chowl
+	+Ww8Tn9+nmiGiMm0wQWIsOT1NwI/nUBN29pGGXc=
+X-Google-Smtp-Source: ADKCNb7yFR1Ynh5kdaGFQqOc/ZhaQyWiO6VbGZwQV9v7t77e23Ref317rldHxInqa+S0YAIUQ3cHReAaG6OBMlgS76g=
+X-Received: by 10.223.157.142 with SMTP id p14mr22716985wre.104.1505565286292; 
+	Sat, 16 Sep 2017 05:34:46 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.147.202 with HTTP; Sat, 16 Sep 2017 02:00:13 -0700 (PDT)
-In-Reply-To: <CAMKF1soALs=ksNmvTO3vrDnP0gvRQviShq3O--iCZwRzjTB8Xg@mail.gmail.com>
-References: <CA+chaQfjWH9SHcF4S61Q2Q_qUk7jcMMehPRibXg-QO_oS_QGiw@mail.gmail.com>
-	<CAMKF1soALs=ksNmvTO3vrDnP0gvRQviShq3O--iCZwRzjTB8Xg@mail.gmail.com>
+Received: by 10.28.147.202 with HTTP; Sat, 16 Sep 2017 05:34:45 -0700 (PDT)
+In-Reply-To: <20170915155547.40966-2-raj.khem@gmail.com>
+References: <20170915155547.40966-1-raj.khem@gmail.com>
+	<20170915155547.40966-2-raj.khem@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 16 Sep 2017 11:00:13 +0200
-Message-ID: <CA+chaQdbNsKYzowonqmWYY-hp-e=GdJ_A7_hYq8jCjobw414jA@mail.gmail.com>
+Date: Sat, 16 Sep 2017 14:34:45 +0200
+Message-ID: <CA+chaQd+vX6M1b-vFgXcyTE0rOtE1v0n7mOMtmMLu=W--qeO0w@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-09-14
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH V2 2/2] breakpad: Upgrade to latest master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,657 +56,852 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Sep 2017 09:00:14 -0000
+X-List-Received-Date: Sat, 16 Sep 2017 12:34:46 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Probably is, qemux86 was built from slightly older metadata, so probably
-including previous versions of your klibc changes.
+Few more entries from stab.h seems to be missing:
+http://errors.yoctoproject.org/Errors/Details/156105/
 
-I know it's confusing in the report, but still each build takes around 24
-hours per machine and I have only 2 builders. e.g. this qemux86 build was
-started 20170912_234104
-<http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170912_234104.log/>
-as
-the log directory shows and at that time there wasn't even the latest
-version of klibc patches on ML.
+On Fri, Sep 15, 2017 at 5:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Thanks
-
-On Sat, Sep 16, 2017 at 1:02 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Fri, Sep 15, 2017 at 3:08 PM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > http://www.openembedded.org/wiki/Bitbake_World_Status
-> >
-> > == Number of issues - stats ==
-> > {| class='wikitable'
-> > !|Date      !!colspan='3'|Failed tasks     !!|Signatures
->  !!colspan='14'|QA
-> > !!Comment
-> > |-
-> > || ||qemuarm ||qemux86 ||qemux86_64 ||all ||already-stripped ||libdir
-> > ||textrel ||build-deps ||file-rdeps ||version-going-backwards
-> > ||host-user-contaminated ||installed-vs-shipped
-> ||unknown-configure-option
-> > ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags
-> > ||compile-host-path ||
-> > |-
-> > ||2017-09-14 ||3 ||6 ||2 ||0 ||0 ||0 ||5 ||0 ||0 ||91 ||3 ||0 ||0 ||0 ||0
-> > ||0 ||0 ||0 ||
-> > |}
-> >
-> > == Failed tasks 2017-09-14 ==
-> >
-> > INFO: jenkins-job.sh-1.8.29 Complete log available at
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
-> report.20170915_120505.log
-> >
-> > === common (1) ===
-> >     * meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:d
-> o_compile
-> >
-> > === common-x86 (0) ===
-> >
-> > === qemuarm (2) ===
-> >     *
-> > meta-openembedded/meta-multimedia/recipes-connectivity/libupnp/libupnp1.
-> 6_1.6.21.bb:do_fetch
-> >     *
-> > meta-openembedded/meta-oe/recipes-devtools/android-
-> tools/android-tools_5.1.1.r37.bb:do_compile
-> >
-> > === qemux86 (5) ===
-> >     *
-> > meta-openembedded/meta-initramfs/recipes-devtools/
-> mtd/ubi-utils-klibc_1.5.1.bb:do_compile
-> >     *
-> > meta-openembedded/meta-initramfs/recipes-kernel/
-> kexec/kexec-tools-klibc_2.0.2.bb:do_configure
-> >     *
-> > meta-openembedded/meta-multimedia/recipes-multimedia/
-> gerbera/gerbera_git.bb:do_configure
-> >     * meta-qt5/recipes-qt/qt5/qtlocation_git.bb:do_compile
-> >     *
-> > virtual:klibc:meta-openembedded/meta-initramfs/recipes-bsp/kexecboot/
-> kexecboot_git.bb:do_configure
-> >
+> Fix build with musl while here
 >
-> all meta-initramfs should have been fixed with latest patchset it that not
-> the case ?
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> V1->V2: Fix build with musl/x86_64
 >
-> > === qemux86_64 (1) ===
-> >     *
-> > virtual:native:meta-openembedded/meta-oe/recipes-
-> support/uim/uim_1.8.6.bb:do_install
-> >
-> > === Number of failed tasks (11) ===
-> > {| class=wikitable
-> > |-
-> > || qemuarm || 3 ||
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
-> world.qemuarm.20170914_113136.log/
-> > || http://errors.yoctoproject.org/Errors/Build/46775/
-> > |-
-> > || qemux86 || 6 ||
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
-> world.qemux86.20170912_234104.log/
-> > || http://errors.yoctoproject.org/Errors/Build/46714/
-> > |-
-> > || qemux86_64 || 2 ||
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
-> world.qemux86-64.20170914_015733.log/
-> > || http://errors.yoctoproject.org/Errors/Build/46761/
-> > |}
-> >
-> > === PNBLACKLISTs (1) ===
-> >
-> > === QA issues (99) ===
-> > {| class=wikitable
-> > !| Count ||Issue
-> > |-
-> > ||0 ||already-stripped
-> > |-
-> > ||0 ||build-deps
-> > |-
-> > ||0 ||compile-host-path
-> > |-
-> > ||0 ||file-rdeps
-> > |-
-> > ||0 ||installed-vs-shipped
-> > |-
-> > ||0 ||invalid-pkgconfig
-> > |-
-> > ||0 ||ldflags
-> > |-
-> > ||0 ||libdir
-> > |-
-> > ||0 ||pkgname
-> > |-
-> > ||0 ||symlink-to-sysroot
-> > |-
-> > ||0 ||unknown-configure-option
-> > |-
-> > ||3 ||host-user-contaminated
-> > |-
-> > ||5 ||textrel
-> > |-
-> > ||91 ||version-going-backwards
-> > |}
-> >
-> >
-> >
-> > === Incorrect PACKAGE_ARCH or sstate signatures (0) ===
-> >
-> > Complete log:
-> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
-> signatures.20170913_214906.log/
-> >
-> > No issues detected
-> >
-> >
-> > PNBLACKLISTs:
-> > openembedded-core/:
-> > meta-browser:
-> > meta-openembedded:
-> > meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:
-> PNBLACKLIST[lksctp-tools]
-> > ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN:
-> fails to
-> > link against sctp_connectx symbol", '', d)}"
-> > meta-qt5:
-> > PNBLACKLIST[android-system] = "depends on lxc from meta-virtualiazation
-> > which isn't included in my world builds"
-> > PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
-> tested
-> > so much"
-> > PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
-> tested
-> > so much"
-> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-> tested
-> > so much"
-> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
-> tested
-> > so much"
-> > PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
-> tested
-> > so much"
-> > PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
-> > directory in /home/builder/poky :/"
-> >
-> >
-> > QA issues by type:
-> > count: 0 issue: already-stripped
-> >
-> >
-> > count: 0 issue: libdir
-> >
-> >
-> > count: 5 issue: textrel
-> > chromium-54.0.2810.2: ELF binary
-> > '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/
-> packages-split/chromium/usr/bin/chromium/chrome'
-> > has relocations in .text [textrel]
-> > chromium-wayland-53.0.2785.143: ELF binary
-> > '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.
-> 143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
-> > has relocations in .text [textrel]
-> > corosync-2.4.2: ELF binary
-> > '/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-
-> split/corosync/usr/sbin/corosync'
-> > has relocations in .text [textrel]
-> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
-> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-
-> r0/packages-split/x264-bin/usr/bin/x264'
-> > has relocations in .text [textrel]
-> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
-> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-
-> r0/packages-split/x264/usr/lib/libx264.so.148'
-> > has relocations in .text [textrel]
-> >
-> >
-> > count: 0 issue: build-deps
-> >
-> >
-> > count: 0 issue: file-rdeps
-> >
-> >
-> > count: 91 issue: version-going-backwards
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dbg went
-> > backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dev went
-> > backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-doc went
-> > backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ar
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-ast
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-as
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-az
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> > gnome-keyring-locale-be+latin went backwards which would break package
-> feeds
-> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-be
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-bg
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-bn-in
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-bn
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-bs
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> > gnome-keyring-locale-ca+valencia went backwards which would break
-> package
-> > feeds from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ca
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-cs
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-cy
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-da
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-de
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-dz
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-el
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-en-ca
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-en-gb
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> > gnome-keyring-locale-en+shaw went backwards which would break package
-> feeds
-> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-es
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-et
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-eu
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-fa
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-fi
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-fr
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ga
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-gl
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-gu
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-he
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-hi
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-hr
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-hu
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-id
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-is
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-it
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ja
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ka
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-kn
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ko
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-lt
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-lv
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-mai
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-mg
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-mk
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ml
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-mn
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-mr
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ms
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-nb
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ne
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-nl
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-nn
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-oc
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-or
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-pa
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-pl
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-pt-br
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-pt
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ro
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ru
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-rw
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-si
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-sk
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-sl
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-sq
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> > gnome-keyring-locale-sr+latin went backwards which would break package
-> feeds
-> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-sr
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-sv
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-ta
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-te
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-th
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-tr
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-uk
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-vi
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-locale-xh
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-zh-cn
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-zh-hk
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package
-> gnome-keyring-locale-zh-tw
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring-staticdev
-> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > gnome-keyring-2.32.1: Package version for package gnome-keyring went
-> > backwards which would break package feeds from (0:2.32.1-r12.40 to
-> > 0:2.32.1-r12.0) [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp-dbg went backwards
-> which
-> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp-dev went backwards
-> which
-> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp-doc went backwards
-> which
-> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp-locale went backwards
-> > which would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp-staticdev went
-> backwards
-> > which would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> > libupnp-1.6.21: Package version for package libupnp went backwards which
-> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
-> > [version-going-backwards]
-> >
-> >
-> > count: 3 issue: host-user-contaminated
-> > glibc-locale-2.26: glibc-locale:
-> > /glibc-binary-localedata-ru-ru/usr/lib/locale/ru_RU/LC_CTYPE is owned
-> by uid
-> > 3004, which is the same as the user running bitbake. This may be due to
-> host
-> > contamination [host-user-contaminated]
-> > qt5-creator-3.5.1: qt5-creator:
-> > /qt5-creator/usr/lib/qt5/qtcreator/plugins/libPythonEditor.so is owned
-> by
-> > uid 3004, which is the same as the user running bitbake. This may be due
-> to
-> > host contamination [host-user-contaminated]
-> > qtdeclarative-5.9.2+gitAUTOINC+7c45b035b9: qtdeclarative:
-> > /qtdeclarative-qmlplugins/usr/lib/qt5/qml/QtQuick.2/qmldir is owned by
-> uid
-> > 3004, which is the same as the user running bitbake. This may be due to
-> host
-> > contamination [host-user-contaminated]
-> >
-> >
-> > count: 0 issue: installed-vs-shipped
-> >
-> >
-> > count: 0 issue: unknown-configure-option
-> >
-> >
-> > count: 0 issue: symlink-to-sysroot
-> >
-> >
-> > count: 0 issue: invalid-pkgconfig
-> >
-> >
-> > count: 0 issue: pkgname
-> >
-> >
-> > count: 0 issue: ldflags
-> >
-> >
-> > count: 0 issue: compile-host-path
-> >
-> >
-> >
-> > == Tested changes (not included in master yet) - bitbake ==
-> > latest upstream commit:
-> > 567f2cf server/process: ensure server failure log is limited to current
-> > session
-> > not included in master yet:
-> > 3ec2af2 world-image: add extra target
-> > 8eebabe fetch2: Allow Fetch.download() to warn instead of error
-> >
-> > == Tested changes (not included in master yet) - openembedded-core ==
-> > latest upstream commit:
-> > 8fe9fb4 python*native.bbclass: suppress user site dirs
-> > not included in master yet:
-> > 0d7ac07 report-error: Allow to upload reports automatically
-> > 20d6101 buildhistory.bbclass: metadata-revs show repo parent
-> > 202fb4c metadata-revs: provide more information
-> > b3500a7 qemux86: Add identical qemux86copy variant for tests
-> > 0de46b0 reproducible_build.bbclass: initial support for binary
-> > reproducibility
-> > d407a03 cpio: provide cpio-replacement-native
-> > c872fa6 image_types.bbclass: improve cpio image reproducibility
-> > 3fcc641 rootfs-postcommands.bbclass: support binary reproducibility
-> > a132f03 sstate.bbclass: Do not cause build failures due to setscene
-> errors
-> > 198ea0e insane.bbclass: Add do_qa_pseudo function to check for common
-> errors
-> > listed in pseudo.log
-> > 3283a1c insane.bbclass: do_qa_pseudo: don't trigger error from '^inode
-> > mismatch'
-> > beb394d insane.bbclass: do_qa_pseudo: show parts of pseudo.log in console
-> >
-> > == Tested changes (not included in master yet) - meta-openembedded ==
-> > latest upstream commit:
-> > 4a45235 opencv: Fix build with clang
-> > not included in master yet:
-> > df98f41 dnsmasq: disable the service by default
-> > fb19f49 openconnect: fix parallel compilation failure
-> > 9dafbb4 autofs: Fix build with musl
-> > 6e742d3 yp-tools: Upgrade to 4.2.2
-> > ef15059 vim: Remove xfce vim bbappend
-> > 6fff604 leveldb: Fix build with clang
-> > 2864d93 klibc: Edit out gcc hardcoding in do_compile
-> > d20ab2d klibc.bbclass: Use forcevariable override to define flags
-> > dceaa50 klibc.bbclass: Add -mfloat-abi on arm
-> > 2e68338 smbnetfs: delete blacklisted
-> > 3f06336 system-setup-keyboard: delete blacklisted
-> > 14a15c0 python-jsonschema, python3-jsonschema: add vcversioner-native
-> > dependency
-> > a9d38f7 v4l-utils: added missing dependency on udev
-> > 2b489fd ipvsadm: Add HOMEPAGE info into recipe file.
-> > cf39ab8 libidl: Add HOMEPAGE info into recipe file.
-> > 4fcda20 lvm2: Add HOMEPAGE info into recipe file.
-> > 9e601b0 tcpdump: update to 4.9.2 to fix CVEs
-> > 3dbb500 debsums: inherit gettext
-> > b972817 protobuf: update to 3.4.0
-> > 3e1748f protobuf-c: update to 1.3.0
-> > a8cf4de libgpiod: bump version to v0.3.1
-> > e9a3fd9 networkmanager: Add HOMEPAGE info into recipe file.
-> > 6a0d564 samba: Add HOMEPAGE info into recipe file.
-> > db01ddf squid: upgrade to 3.5.27
-> > 8b48a16 iproute2: Move tipc enablement to oe-core
-> > 1911f84 libmnl: Move to oe-core
-> > f02eec7 flatbuffers: add version 1.7.1
-> > 9d4b685 capnproto: add version 0.6.1
-> > a18db12 libupnp: Add recipe for version 1.8.2
-> > 90be7f5 gerbera: clean recipe
-> > 62655bc libjs-sizzle: Add HOMEPAGE info into recipe file.
-> > 6c0f9c2 liblockfile: Add HOMEPAGE info into recipe file.
-> > 87d004b daemontools: Add HOMEPAGE info into recipe file.
-> > 346b2a5 fbset: Add HOMEPAGE info into recipe file.
-> > 2fdb314 libndp: Add HOMEPAGE info into recipe file.
-> > a96fc97 gnome-keyring: Resolve conflict with gcr 3 and gold linking error
-> > 34bb6e5 drbd-utils: remove
-> > 0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
-> > 864fb16 ceres-solver: add new recipe
-> > 60b9eb6 libnih: Add HOMEPAGE info into recipe file.
-> > 20eeac7 libtdb: Add HOMEPAGE info into recipe file.
-> > 84172c0 mailcap: Add HOMEPAGE info into recipe file.
-> > 7454d72 mozjs: Add HOMEPAGE info into recipe file.
-> > 47bbfc9 numactl: Add HOMEPAGE info into recipe file.
-> > ad97869 orbit2: Add HOMEPAGE info into recipe file.
-> > f3469c8 sgpio: Add HOMEPAGE info into recipe file.
-> > 50a3814 stunnel: Add HOMEPAGE info into recipe file.
-> > d260749 leveldb: disable parallelism
-> >
-> > == Tested changes (not included in master yet) - meta-qt5 ==
-> > latest upstream commit:
-> > 743b3b9 qtbase-native: Force use of built-in pcre
-> > not included in master yet:
-> >
-> > == Tested changes (not included in master yet) - meta-browser ==
-> > latest upstream commit:
-> > 972cab7 gnome-settings-daemon: remove the bbappend for removed recipe
-> > not included in master yet:
-> > 5fcf848 chromium: hide textrel QA issues which are there for ages
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-core mailing list
-> > Openembedded-core@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
-> >
+>  .../0001-Turn-off-sign-compare-for-musl-libc.patch |  41 +++++
+>  ...-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch |  24 +++
+>  .../0001-lss-Match-syscalls-to-match-musl.patch    |  45 +++++
+>  .../breakpad/0002-Avoid-using-basename.patch       |  29 +++
+>  ...fpstate-instead-of-_libc_fpstate-on-linux.patch |  60 +++++++
+>  ...nal.h-is-a-nonportable-alias-for-signal.h.patch |  26 +++
+>  .../breakpad/0003-Dont-include-stab.h.patch        |  71 ++++++++
+>  ...nflict-between-musl-libc-dirent.h-and-lss.patch |  35 ++++
+>  ...cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch |  26 +++
+>  ...-Import-necessary-definitions-from-stab.h.patch | 199
+> +++++++++++++++++++++
+>  .../breakpad/0005-md2core-Replace-basename.patch   |  38 ++++
+>  meta-oe/recipes-devtools/breakpad/breakpad_git.bb  |  18 +-
+>  12 files changed, 607 insertions(+), 5 deletions(-)
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
+> off-sign-compare-for-musl-libc.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-
+> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
+> Match-syscalls-to-match-musl.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
+> using-basename.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
+> fpstate-instead-of-_libc_fpstate-on-linux.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
+> signal.h-is-a-nonportable-alias-for-signal.h.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
+> include-stab.h.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
+> conflict-between-musl-libc-dirent.h-and-lss.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
+> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
+>  create mode 100644 meta-oe/recipes-devtools/
+> breakpad/breakpad/0005-Import-necessary-definitions-from-stab.h.patch
+>  create mode 100644 meta-oe/recipes-devtools/breakpad/breakpad/0005-
+> md2core-Replace-basename.patch
+>
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
+> off-sign-compare-for-musl-libc.patch b/meta-oe/recipes-devtools/
+> breakpad/breakpad/0001-Turn-off-sign-compare-for-musl-libc.patch
+> new file mode 100644
+> index 000000000..33bae1a37
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-Turn-
+> off-sign-compare-for-musl-libc.patch
+> @@ -0,0 +1,41 @@
+> +From ab8dcad25d0ac1f3a88814e78794e5d450de15ac Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 23:12:51 -0700
+> +Subject: [PATCH 1/5] Turn off sign-compare for musl-libc
+> +
+> +Fix
+> +
+> +../../../../../../../workspace/sources/breakpad/src/client/linux/crash_
+> generation/crash_generation_server.cc:234:14: error:
+>  comparison of integers of different signs: 'unsigned long' and 'int'
+> [-Werror,-Wsign-compare]                                          hdr =
+> CMSG_NXTHDR(&msg, hdr)) {
+>
+>  ^~~~~~~~~~~~~~~~~~~~~~
+> +/mnt/a/oe/build/tmp/work/cortexa7hf-neon-vfpv4-bec-
+> linux-musleabi/breakpad/1_1.0+git999-r0/recipe-sysroot/usr/include/sys/socket.h:288:44:
+> note:
+>                                                             expanded from
+> macro 'CMSG_NXTHDR'
+>                                                __CMSG_LEN(cmsg) +
+> sizeof(struct cmsghdr) >= __MHDR_END(mhdr) - (unsigned char *)(cmsg) \
+>                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+> ^  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+>            1 error generated.
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/client/linux/crash_generation/crash_generation_server.cc | 10
+> ++++++++++
+> + 1 file changed, 10 insertions(+)
+> +
+> +diff --git a/src/client/linux/crash_generation/crash_generation_server.cc
+> b/src/client/linux/crash_generation/crash_generation_server.cc
+> +index 2596afde..2faeb9e5 100644
+> +--- a/src/client/linux/crash_generation/crash_generation_server.cc
+> ++++ b/src/client/linux/crash_generation/crash_generation_server.cc
+> +@@ -230,8 +230,18 @@ CrashGenerationServer::ClientEvent(short revents)
+> +   // Walk the control payload and extract the file descriptor and
+> validated pid.
+> +   pid_t crashing_pid = -1;
+> +   int signal_fd = -1;
+> ++#ifndef __GLIBC__
+> ++  // In musl-libc, CMSG_NXTHDR typecasts char* to cmsghdr* which causes
+> ++  // clang to throw sign-compare warning. This is to suppress the warning
+> ++  // inline.
+> ++  #pragma clang diagnostic push
+> ++  #pragma clang diagnostic ignored "-Wsign-compare"
+> ++#endif
+> +   for (struct cmsghdr *hdr = CMSG_FIRSTHDR(&msg); hdr;
+> +        hdr = CMSG_NXTHDR(&msg, hdr)) {
+> ++#ifndef __GLIBC__
+> ++  #pragma clang diagnostic pop
+> ++#endif
+> +     if (hdr->cmsg_level != SOL_SOCKET)
+> +       continue;
+> +     if (hdr->cmsg_type == SCM_RIGHTS) {
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-
+> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0001-
+> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
+> new file mode 100644
+> index 000000000..df007956b
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-
+> include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
+> @@ -0,0 +1,24 @@
+> +From 68580cb62f77117be3164c52abae68f75e8e59a1 Mon Sep 17 00:00:00 2001
+> +From: Felix Janda <felix.janda@posteo.de>
+> +Date: Sun, 1 Feb 2015 14:26:52 +0100
+> +Subject: [PATCH 1/3] include <sys/reg.h> to get __WORDSIZE on musl libc
+> +
+> +---
+> + src/common/linux/elf_core_dump.h | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/src/common/linux/elf_core_dump.h
+> b/src/common/linux/elf_core_dump.h
+> +index d03c7a88..02eb391c 100644
+> +--- a/src/common/linux/elf_core_dump.h
+> ++++ b/src/common/linux/elf_core_dump.h
+> +@@ -36,6 +36,7 @@
+> + #include <elf.h>
+> + #include <link.h>
+> + #include <stddef.h>
+> ++#include <sys/reg.h>
+> +
+> + #include "common/memory_range.h"
+> +
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
+> Match-syscalls-to-match-musl.patch b/meta-oe/recipes-devtools/
+> breakpad/breakpad/0001-lss-Match-syscalls-to-match-musl.patch
+> new file mode 100644
+> index 000000000..2b892ad64
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0001-lss-
+> Match-syscalls-to-match-musl.patch
+> @@ -0,0 +1,45 @@
+> +From 5f7333e4f7b7485598bd71aa80967e1a16a7f901 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 22:57:52 -0700
+> +Subject: [PATCH] lss: Match syscalls to match musl
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + linux_syscall_support.h | 3 +++
+> + 1 file changed, 3 insertions(+)
+> +
+> +Index: lss/linux_syscall_support.h
+> +===================================================================
+> +--- lss.orig/linux_syscall_support.h
+> ++++ lss/linux_syscall_support.h
+> +@@ -793,6 +793,9 @@ struct kernel_statfs {
+> + #define FUTEX_TRYLOCK_PI_PRIVATE  (FUTEX_TRYLOCK_PI | FUTEX_PRIVATE_FLAG)
+> + #endif
+> +
+> ++#ifndef __NR_fstatat
+> ++#define __NR_fstatat __NR_fstatat64
+> ++#endif
+> +
+> + #if defined(__x86_64__)
+> + #ifndef ARCH_SET_GS
+> +@@ -924,6 +927,7 @@ struct kernel_statfs {
+> + #ifndef __NR_fallocate
+> + #define __NR_fallocate          324
+> + #endif
+> ++
+> + /* End of i386 definitions
+>      */
+> + #elif defined(__ARM_ARCH_3__) || defined(__ARM_EABI__)
+> + #ifndef __NR_setresuid
+> +@@ -1211,6 +1215,12 @@ struct kernel_statfs {
+> + #ifndef __NR_fallocate
+> + #define __NR_fallocate          285
+> + #endif
+> ++#ifndef __NR_pread
+> ++#define __NR_pread __NR_pread64
+> ++#endif
+> ++#ifndef __NR_pwrite
+> ++#define __NR_pwrite __NR_pwrite64
+> ++#endif
+> + /* End of x86-64 definitions
+>      */
+> + #elif defined(__mips__)
+> + #if _MIPS_SIM == _MIPS_SIM_ABI32
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-using-basename.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
+> using-basename.patch
+> new file mode 100644
+> index 000000000..bc6282981
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Avoid-
+> using-basename.patch
+> @@ -0,0 +1,29 @@
+> +From 806964f852773e427fea82a7716d44ce3be4498c Mon Sep 17 00:00:00 2001
+> +From: Felix Janda <felix.janda@posteo.de>
+> +Date: Sun, 1 Feb 2015 14:27:32 +0100
+> +Subject: [PATCH 2/3] Avoid using basename
+> +
+> +---
+> + src/common/linux/dump_symbols.cc | 6 +++---
+> + 1 file changed, 3 insertions(+), 3 deletions(-)
+> +
+> +diff --git a/src/common/linux/dump_symbols.cc b/src/common/linux/dump_
+> symbols.cc
+> +index d029ca14..6ac4a17b 100644
+> +--- a/src/common/linux/dump_symbols.cc
+> ++++ b/src/common/linux/dump_symbols.cc
+> +@@ -881,9 +881,9 @@ const char* ElfArchitecture(const typename
+> ElfClass::Ehdr* elf_header) {
+> + // last slash, or the whole filename if there are no slashes.
+> + string BaseFileName(const string &filename) {
+> +   // Lots of copies!  basename's behavior is less than ideal.
+> +-  char* c_filename = strdup(filename.c_str());
+> +-  string base = basename(c_filename);
+> +-  free(c_filename);
+> ++  const char *c_filename = filename.c_str();
+> ++  const char *p = strrchr(c_filename, '/');
+> ++  string base = p ? p+1 : c_filename;
+> +   return base;
+> + }
+> +
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
+> fpstate-instead-of-_libc_fpstate-on-linux.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
+> fpstate-instead-of-_libc_fpstate-on-linux.patch
+> new file mode 100644
+> index 000000000..6c097cd22
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-Use-_
+> fpstate-instead-of-_libc_fpstate-on-linux.patch
+> @@ -0,0 +1,60 @@
+> +From 0ba1b3e35e7c743b670bedc3e90001dfb868df10 Mon Sep 17 00:00:00 2001
+> +From: Felix Janda <felix.janda@posteo.de>
+> +Date: Sun, 1 Feb 2015 13:45:51 +0100
+> +Subject: [PATCH 2/6] Use _fpstate instead of _libc_fpstate on linux
+> +
+> +glibc defines both. musl libc only the former.
+> +---
+> + src/client/linux/dump_writer_common/ucontext_reader.cc | 4 ++--
+> + src/client/linux/dump_writer_common/ucontext_reader.h  | 2 +-
+> + src/client/linux/minidump_writer/minidump_writer.h     | 2 +-
+> + 3 files changed, 4 insertions(+), 4 deletions(-)
+> +
+> +Index: git/src/client/linux/dump_writer_common/ucontext_reader.cc
+> +===================================================================
+> +--- git.orig/src/client/linux/dump_writer_common/ucontext_reader.cc
+> ++++ git/src/client/linux/dump_writer_common/ucontext_reader.cc
+> +@@ -49,7 +49,7 @@ uintptr_t UContextReader::GetInstruction
+> + }
+> +
+> + void UContextReader::FillCPUContext(RawContextCPU *out, const
+> ucontext_t *uc,
+> +-                                    const struct _libc_fpstate* fp) {
+> ++                                    const struct _fpstate* fp) {
+> +   const greg_t* regs = uc->uc_mcontext.gregs;
+> +
+> +   out->context_flags = MD_CONTEXT_X86_FULL |
+> +@@ -97,7 +97,7 @@ uintptr_t UContextReader::GetInstruction
+> + }
+> +
+> + void UContextReader::FillCPUContext(RawContextCPU *out, const
+> ucontext_t *uc,
+> +-                                    const struct _libc_fpstate* fpregs) {
+> ++                                    const struct _fpstate* fpregs) {
+> +   const greg_t* regs = uc->uc_mcontext.gregs;
+> +
+> +   out->context_flags = MD_CONTEXT_AMD64_FULL;
+> +Index: git/src/client/linux/dump_writer_common/ucontext_reader.h
+> +===================================================================
+> +--- git.orig/src/client/linux/dump_writer_common/ucontext_reader.h
+> ++++ git/src/client/linux/dump_writer_common/ucontext_reader.h
+> +@@ -50,7 +50,7 @@ struct UContextReader {
+> +   //   info: the collection of register structures.
+> + #if defined(__i386__) || defined(__x86_64)
+> +   static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
+> +-                             const struct _libc_fpstate* fp);
+> ++                             const struct _fpstate* fp);
+> + #elif defined(__aarch64__)
+> +   static void FillCPUContext(RawContextCPU *out, const ucontext_t *uc,
+> +                              const struct fpsimd_context* fpregs);
+> +Index: git/src/client/linux/minidump_writer/minidump_writer.h
+> +===================================================================
+> +--- git.orig/src/client/linux/minidump_writer/minidump_writer.h
+> ++++ git/src/client/linux/minidump_writer/minidump_writer.h
+> +@@ -48,7 +48,7 @@ class ExceptionHandler;
+> + #if defined(__aarch64__)
+> + typedef struct fpsimd_context fpstate_t;
+> + #elif !defined(__ARM_EABI__) && !defined(__mips__)
+> +-typedef struct _libc_fpstate fpstate_t;
+> ++typedef struct _fpstate fpstate_t;
+> + #endif
+> +
+> + // These entries store a list of memory regions that the client wants
+> included
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
+> signal.h-is-a-nonportable-alias-for-signal.h.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
+> signal.h-is-a-nonportable-alias-for-signal.h.patch
+> new file mode 100644
+> index 000000000..cfd9a9b34
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0002-sys-
+> signal.h-is-a-nonportable-alias-for-signal.h.patch
+> @@ -0,0 +1,26 @@
+> +From 15582e19c2545d5ffe8ff07f957d0ed602aeca74 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 23:15:09 -0700
+> +Subject: [PATCH 2/5] <sys/signal.h> is a nonportable alias for <signal.h>
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/client/linux/handler/exception_handler.cc | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/src/client/linux/handler/exception_handler.cc
+> b/src/client/linux/handler/exception_handler.cc
+> +index 05936d28..cca023fd 100644
+> +--- a/src/client/linux/handler/exception_handler.cc
+> ++++ b/src/client/linux/handler/exception_handler.cc
+> +@@ -78,7 +78,7 @@
+> + #include <sys/wait.h>
+> + #include <unistd.h>
+> +
+> +-#include <sys/signal.h>
+> ++#include <signal.h>
+> + #include <sys/ucontext.h>
+> + #include <sys/user.h>
+> + #include <ucontext.h>
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-include-stab.h.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
+> include-stab.h.patch
+> new file mode 100644
+> index 000000000..41bd1eac4
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Dont-
+> include-stab.h.patch
+> @@ -0,0 +1,71 @@
+> +From 569af712da94637091080943f6a0d69ccb35864e Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 23:24:08 -0700
+> +Subject: [PATCH 3/5] Dont include stab.h
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/common/stabs_reader.cc          |  1 -
+> + src/common/stabs_reader.h           | 12 +++++++++++-
+> + src/common/stabs_reader_unittest.cc |  1 -
+> + 3 files changed, 11 insertions(+), 3 deletions(-)
+> +
+> +Index: git/src/common/stabs_reader.cc
+> +===================================================================
+> +--- git.orig/src/common/stabs_reader.cc
+> ++++ git/src/common/stabs_reader.cc
+> +@@ -34,7 +34,6 @@
+> + #include "common/stabs_reader.h"
+> +
+> + #include <assert.h>
+> +-#include <stab.h>
+> + #include <string.h>
+> +
+> + #include <string>
+> +Index: git/src/common/stabs_reader.h
+> +===================================================================
+> +--- git.orig/src/common/stabs_reader.h
+> ++++ git/src/common/stabs_reader.h
+> +@@ -58,6 +58,30 @@
+> + #elif defined(HAVE_A_OUT_H)
+> + #include <a.out.h>
+> + #endif
+> ++// Definitions from <stab.h> and <a.out.h> for systems which
+> ++// do not have them
+> ++#ifndef HAVE_A_OUT_H
+> ++#undef N_UNDF
+> ++#define N_UNDF 0x0
+> ++#ifndef N_FUN
+> ++#define N_FUN 0x24
+> ++#endif
+> ++#ifndef N_SLINE
+> ++#define N_SLINE 0x44
+> ++#endif
+> ++#ifndef N_SO
+> ++#define N_SO 0x64
+> ++#endif
+> ++#ifndef N_LSYM
+> ++#define N_LSYM 0x80
+> ++#endif
+> ++#ifndef N_BINCL
+> ++#define N_BINCL 0x82
+> ++#endif
+> ++#ifndef N_SOL
+> ++#define N_SOL 0x84
+> ++#endif
+> ++#endif
+> +
+> + #include <string>
+> + #include <vector>
+> +Index: git/src/common/stabs_reader_unittest.cc
+> +===================================================================
+> +--- git.orig/src/common/stabs_reader_unittest.cc
+> ++++ git/src/common/stabs_reader_unittest.cc
+> +@@ -33,7 +33,6 @@
+> +
+> + #include <assert.h>
+> + #include <errno.h>
+> +-#include <stab.h>
+> + #include <stdarg.h>
+> + #include <stdlib.h>
+> + #include <string.h>
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
+> conflict-between-musl-libc-dirent.h-and-lss.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
+> conflict-between-musl-libc-dirent.h-and-lss.patch
+> new file mode 100644
+> index 000000000..851004704
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0003-Fix-
+> conflict-between-musl-libc-dirent.h-and-lss.patch
+> @@ -0,0 +1,35 @@
+> +From 7aa266545dabf9934ccd44d4fc836040497159be Mon Sep 17 00:00:00 2001
+> +From: Felix Janda <felix.janda@posteo.de>
+> +Date: Sun, 1 Feb 2015 13:41:08 +0100
+> +Subject: [PATCH 3/3] Fix conflict between musl libc <dirent.h> and lss
+> +
+> +Include <dirent.h> late to avoid the macro getdents64 in musl
+> +libc's <dirent.h> to conflict with linux_sycall_support.h.
+> +---
+> + src/client/linux/crash_generation/crash_generation_server.cc | 3 ++-
+> + 1 file changed, 2 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/src/client/linux/crash_generation/crash_generation_server.cc
+> b/src/client/linux/crash_generation/crash_generation_server.cc
+> +index 26c50a5c..2596afde 100644
+> +--- a/src/client/linux/crash_generation/crash_generation_server.cc
+> ++++ b/src/client/linux/crash_generation/crash_generation_server.cc
+> +@@ -28,7 +28,6 @@
+> + // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+> +
+> + #include <assert.h>
+> +-#include <dirent.h>
+> + #include <fcntl.h>
+> + #include <limits.h>
+> + #include <poll.h>
+> +@@ -49,6 +48,8 @@
+> + #include "common/linux/guid_creator.h"
+> + #include "common/linux/safe_readlink.h"
+> +
+> ++#include <dirent.h>
+> ++
+> + static const char kCommandQuit = 'x';
+> +
+> + namespace google_breakpad {
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
+> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
+> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
+> new file mode 100644
+> index 000000000..60ab7a713
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0004-elf_
+> reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
+> @@ -0,0 +1,26 @@
+> +From 680f9590d19a6e35c7c5587e3f4d8194aab0fcd2 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 23:28:36 -0700
+> +Subject: [PATCH 4/5] elf_reader.cc: include <sys/reg.h> to get __WORDSIZE
+> on
+> + musl libc
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/common/dwarf/elf_reader.cc | 1 +
+> + 1 file changed, 1 insertion(+)
+> +
+> +diff --git a/src/common/dwarf/elf_reader.cc
+> b/src/common/dwarf/elf_reader.cc
+> +index 4135a51a..bb58a5a1 100644
+> +--- a/src/common/dwarf/elf_reader.cc
+> ++++ b/src/common/dwarf/elf_reader.cc
+> +@@ -33,6 +33,7 @@
+> + #include <sys/types.h>
+> + #include <sys/stat.h>
+> + #include <sys/mman.h>
+> ++#include <sys/reg.h>
+> + #include <unistd.h>
+> + #include <fcntl.h>
+> + #include <string.h>
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0005-Import-
+> necessary-definitions-from-stab.h.patch b/meta-oe/recipes-devtools/
+> breakpad/breakpad/0005-Import-necessary-definitions-from-stab.h.patch
+> new file mode 100644
+> index 000000000..80de8c684
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0005-Import-
+> necessary-definitions-from-stab.h.patch
+> @@ -0,0 +1,199 @@
+> +From fa7a3b7312307acad0045549d5f306e7fd117804 Mon Sep 17 00:00:00 2001
+> +From: Felix Janda <felix.janda@posteo.de>
+> +Date: Sun, 1 Feb 2015 14:34:44 +0100
+> +Subject: [PATCH 5/6] Import necessary definitions from stab.h
+> +
+> +---
+> + configure.ac                        |   1 -
+> + src/common/android/include/stab.h   | 100 ------------------------------
+> ------
+> + src/common/common.gyp               |   1 -
+> + src/common/stabs_reader.cc          |   1 -
+> + src/common/stabs_reader.h           |  13 +++--
+> + src/common/stabs_reader_unittest.cc |   1 -
+> + 6 files changed, 10 insertions(+), 107 deletions(-)
+> + delete mode 100644 src/common/android/include/stab.h
+> +
+> +diff --git a/configure.ac b/configure.ac
+> +index 2223920..0e55cd9 100644
+> +--- a/configure.ac
+> ++++ b/configure.ac
+> +@@ -73,7 +73,6 @@ AC_HEADER_STDC
+> + AC_SYS_LARGEFILE
+> + m4_include(m4/ax_pthread.m4)
+> + AX_PTHREAD
+> +-AC_CHECK_HEADERS([a.out.h])
+> +
+> + # Only build Linux client libs when compiling for Linux
+> + case $host in
+> +diff --git a/src/common/android/include/stab.h
+> b/src/common/android/include/stab.h
+> +deleted file mode 100644
+> +index cd92902..0000000
+> +--- a/src/common/android/include/stab.h
+> ++++ /dev/null
+> +@@ -1,100 +0,0 @@
+> +-// Copyright (c) 2012, Google Inc.
+> +-// All rights reserved.
+> +-//
+> +-// Redistribution and use in source and binary forms, with or without
+> +-// modification, are permitted provided that the following conditions are
+> +-// met:
+> +-//
+> +-//     * Redistributions of source code must retain the above copyright
+> +-// notice, this list of conditions and the following disclaimer.
+> +-//     * Redistributions in binary form must reproduce the above
+> +-// copyright notice, this list of conditions and the following disclaimer
+> +-// in the documentation and/or other materials provided with the
+> +-// distribution.
+> +-//     * Neither the name of Google Inc. nor the names of its
+> +-// contributors may be used to endorse or promote products derived from
+> +-// this software without specific prior written permission.
+> +-//
+> +-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+> +-// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+> +-// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+> +-// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+> +-// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+> +-// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+> +-// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+> +-// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+> +-// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+> +-// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+> +-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+> +-
+> +-#ifndef GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
+> +-#define GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
+> +-
+> +-#include <sys/cdefs.h>
+> +-
+> +-#ifdef __BIONIC_HAVE_STAB_H
+> +-#include <stab.h>
+> +-#else
+> +-
+> +-#ifdef __cplusplus
+> +-extern "C" {
+> +-#endif  // __cplusplus
+> +-
+> +-#define _STAB_CODE_LIST       \
+> +-  _STAB_CODE_DEF(UNDF,0x00)   \
+> +-  _STAB_CODE_DEF(GSYM,0x20)   \
+> +-  _STAB_CODE_DEF(FNAME,0x22)  \
+> +-  _STAB_CODE_DEF(FUN,0x24)    \
+> +-  _STAB_CODE_DEF(STSYM,0x26)  \
+> +-  _STAB_CODE_DEF(LCSYM,0x28)  \
+> +-  _STAB_CODE_DEF(MAIN,0x2a)   \
+> +-  _STAB_CODE_DEF(PC,0x30)     \
+> +-  _STAB_CODE_DEF(NSYMS,0x32)  \
+> +-  _STAB_CODE_DEF(NOMAP,0x34)  \
+> +-  _STAB_CODE_DEF(OBJ,0x38)    \
+> +-  _STAB_CODE_DEF(OPT,0x3c)    \
+> +-  _STAB_CODE_DEF(RSYM,0x40)   \
+> +-  _STAB_CODE_DEF(M2C,0x42)    \
+> +-  _STAB_CODE_DEF(SLINE,0x44)  \
+> +-  _STAB_CODE_DEF(DSLINE,0x46) \
+> +-  _STAB_CODE_DEF(BSLINE,0x48) \
+> +-  _STAB_CODE_DEF(BROWS,0x48)  \
+> +-  _STAB_CODE_DEF(DEFD,0x4a)   \
+> +-  _STAB_CODE_DEF(EHDECL,0x50) \
+> +-  _STAB_CODE_DEF(MOD2,0x50)   \
+> +-  _STAB_CODE_DEF(CATCH,0x54)  \
+> +-  _STAB_CODE_DEF(SSYM,0x60)   \
+> +-  _STAB_CODE_DEF(SO,0x64)     \
+> +-  _STAB_CODE_DEF(LSYM,0x80)   \
+> +-  _STAB_CODE_DEF(BINCL,0x82)  \
+> +-  _STAB_CODE_DEF(SOL,0x84)    \
+> +-  _STAB_CODE_DEF(PSYM,0xa0)   \
+> +-  _STAB_CODE_DEF(EINCL,0xa2)  \
+> +-  _STAB_CODE_DEF(ENTRY,0xa4)  \
+> +-  _STAB_CODE_DEF(LBRAC,0xc0)  \
+> +-  _STAB_CODE_DEF(EXCL,0xc2)   \
+> +-  _STAB_CODE_DEF(SCOPE,0xc4)  \
+> +-  _STAB_CODE_DEF(RBRAC,0xe0)  \
+> +-  _STAB_CODE_DEF(BCOMM,0xe2)  \
+> +-  _STAB_CODE_DEF(ECOMM,0xe4)  \
+> +-  _STAB_CODE_DEF(ECOML,0xe8)  \
+> +-  _STAB_CODE_DEF(NBTEXT,0xf0) \
+> +-  _STAB_CODE_DEF(NBDATA,0xf2) \
+> +-  _STAB_CODE_DEF(NBBSS,0xf4)  \
+> +-  _STAB_CODE_DEF(NBSTS,0xf6)  \
+> +-  _STAB_CODE_DEF(NBLCS,0xf8)  \
+> +-  _STAB_CODE_DEF(LENG,0xfe)
+> +-
+> +-enum __stab_debug_code {
+> +-#define _STAB_CODE_DEF(x,y)  N_##x = y,
+> +-_STAB_CODE_LIST
+> +-#undef _STAB_CODE_DEF
+> +-};
+> +-
+> +-#ifdef __cplusplus
+> +-}  // extern "C"
+> +-#endif  // __cplusplus
+> +-
+> +-#endif  // __BIONIC_HAVE_STAB_H
+> +-
+> +-#endif  // GOOGLE_BREAKPAD_COMMON_ANDROID_INCLUDE_STAB_H
+> +diff --git a/src/common/common.gyp b/src/common/common.gyp
+> +index f01ede5..c49ff85 100644
+> +--- a/src/common/common.gyp
+> ++++ b/src/common/common.gyp
+> +@@ -46,7 +46,6 @@
+> +         'android/include/elf.h',
+> +         'android/include/link.h',
+> +         'android/include/sgidefs.h',
+> +-        'android/include/stab.h',
+> +         'android/include/sys/procfs.h',
+> +         'android/include/sys/signal.h',
+> +         'android/include/sys/user.h',
+> +diff --git a/src/common/stabs_reader.cc b/src/common/stabs_reader.cc
+> +index 6019fc7..9562caa 100644
+> +--- a/src/common/stabs_reader.cc
+> ++++ b/src/common/stabs_reader.cc
+> +@@ -34,7 +34,6 @@
+> + #include "common/stabs_reader.h"
+> +
+> + #include <assert.h>
+> +-#include <stab.h>
+> + #include <string.h>
+> +
+> + #include <string>
+> +diff --git a/src/common/stabs_reader.h b/src/common/stabs_reader.h
+> +index d89afc0..591f007 100644
+> +--- a/src/common/stabs_reader.h
+> ++++ b/src/common/stabs_reader.h
+> +@@ -53,12 +53,19 @@
+> + #include <config.h>
+> + #endif
+> +
+> +-#ifdef HAVE_A_OUT_H
+> +-#include <a.out.h>
+> +-#endif
+> + #ifdef HAVE_MACH_O_NLIST_H
+> + #include <mach-o/nlist.h>
+> + #endif
+> ++// Definitions from <stab.h> and <a.out.h> for systems which
+> ++// do not have them
+> ++#undef N_UNDF
+> ++#define N_UNDF 0x0
+> ++#define N_FUN 0x24
+> ++#define N_SLINE 0x44
+> ++#define N_SO 0x64
+> ++#define N_LSYM 0x80
+> ++#define N_BINCL 0x82
+> ++#define N_SOL 0x84
+> +
+> + #include <string>
+> + #include <vector>
+> +diff --git a/src/common/stabs_reader_unittest.cc
+> b/src/common/stabs_reader_unittest.cc
+> +index a84da1c..854ac42 100644
+> +--- a/src/common/stabs_reader_unittest.cc
+> ++++ b/src/common/stabs_reader_unittest.cc
+> +@@ -33,7 +33,6 @@
+> +
+> + #include <assert.h>
+> + #include <errno.h>
+> +-#include <stab.h>
+> + #include <stdarg.h>
+> + #include <stdlib.h>
+> + #include <string.h>
+> +--
+> +2.0.5
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad/0005-md2core-Replace-basename.patch
+> b/meta-oe/recipes-devtools/breakpad/breakpad/0005-
+> md2core-Replace-basename.patch
+> new file mode 100644
+> index 000000000..852c1ed2c
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad/0005-
+> md2core-Replace-basename.patch
+> @@ -0,0 +1,38 @@
+> +From bbf2b5ed5d93b227df8aea5726727b48e29f6790 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Thu, 14 Sep 2017 23:35:40 -0700
+> +Subject: [PATCH 5/5] md2core: Replace basename()
+> +
+> +musl does not provide it
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + src/tools/linux/md2core/minidump-2-core.cc | 5 ++++-
+> + 1 file changed, 4 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/src/tools/linux/md2core/minidump-2-core.cc
+> b/src/tools/linux/md2core/minidump-2-core.cc
+> +index 6a9e28eb..52b81c22 100644
+> +--- a/src/tools/linux/md2core/minidump-2-core.cc
+> ++++ b/src/tools/linux/md2core/minidump-2-core.cc
+> +@@ -107,6 +107,9 @@ struct Options {
+> +
+> + static void
+> + Usage(int argc, const char* argv[]) {
+> ++  const char *c_filename = argv[0];;
+> ++  const char *p = strrchr(c_filename, '/');
+> ++  const char *base = p ? p+1 : c_filename;
+> +   fprintf(stderr,
+> +           "Usage: %s [options] <minidump file>\n"
+> +           "\n"
+> +@@ -133,7 +136,7 @@ Usage(int argc, const char* argv[]) {
+> +           "             lookups to be done in this directory rather than
+> the filesystem\n"
+> +           "             layout as it exists in the crashing image.  This
+> path should end\n"
+> +           "             with a slash if it's a directory.  e.g.
+> /var/lib/breakpad/\n"
+> +-          "", basename(argv[0]));
+> ++          "", base);
+> + }
+> +
+> + static void
+> +--
+> +2.14.1
+> +
+> diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+> b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+> index a4f149143..9a1255594 100644
+> --- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+> +++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
+> @@ -17,22 +17,30 @@ PE = "1"
+>
+>  PV = "1.0+git${SRCPV}"
+>
+> -SRCREV_FORMAT = "breakpad_glog_gtest_protobuf_lss_gyp"
+> +SRCREV_FORMAT = "breakpad_gtest_protobuf_lss_gyp"
+>
+> -SRCREV_breakpad = "66856d617b6658ce09ef2bc1b15d457ab7b152b0"
+> -SRCREV_glog = "d8cb47f77d1c31779f3ff890e1a5748483778d6a"
+> +SRCREV_breakpad = "dea867e76f24e4a68395684b9d1cf24bcef82f20"
+>  SRCREV_gtest = "ec44c6c1675c25b9827aacd08c02433cccde7780"
+>  SRCREV_protobuf = "cb6dd4ef5f82e41e06179dcd57d3b1d9246ad6ac"
+>  SRCREV_lss = "a91633d172407f6c83dd69af11510b37afebb7f9"
+> -SRCREV_gyp = "e8ab0833a42691cd2184bd4c45d779e43821d3e0"
+> +SRCREV_gyp = "324dd166b7c0b39d513026fa52d6280ac6d56770"
+>
+>  SRC_URI = "git://github.com/google/breakpad;name=breakpad \
+> -           git://github.com/google/glog.git;destsuffix=git/src/third_
+> party/glog;name=glog \
+>             git://github.com/google/googletest.git;destsuffix=git/
+> src/testing/gtest;name=gtest \
+>             git://github.com/google/protobuf.git;destsuffix=git/
+> src/third_party/protobuf/protobuf;name=protobuf \
+>             git://chromium.googlesource.com/linux-syscall-support;
+> protocol=https;destsuffix=git/src/third_party/lss;name=lss \
+>             git://chromium.googlesource.com/external/gyp;protocol=
+> https;destsuffix=git/src/tools/gyp;name=gyp \
+>             file://0001-Replace-use-of-struct-ucontext-with-ucontext_t.patch
+> \
+> +           file://0001-include-sys-reg.h-to-get-__WORDSIZE-on-musl-libc.patch
+> \
+> +           file://0002-Avoid-using-basename.patch \
+> +           file://0003-Fix-conflict-between-musl-libc-dirent.h-and-lss.patch
+> \
+> +           file://0001-Turn-off-sign-compare-for-musl-libc.patch \
+> +           file://0002-sys-signal.h-is-a-nonportable-alias-for-signal.h.patch
+> \
+> +           file://0003-Dont-include-stab.h.patch \
+> +           file://0004-elf_reader.cc-include-sys-reg.h-to-get-__WORDSIZE-on.patch
+> \
+> +           file://0005-md2core-Replace-basename.patch \
+> +           file://0002-Use-_fpstate-instead-of-_libc_fpstate-on-linux.patch
+> \
+> +           file://0001-lss-Match-syscalls-to-match-musl.patch;patchdir=src/third_party/lss
+> \
+>  "
+>  S = "${WORKDIR}/git"
+>
+> --
+> 2.14.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
