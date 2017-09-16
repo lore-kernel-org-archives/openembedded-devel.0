@@ -1,49 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f172.google.com (mail-pf0-f172.google.com
-	[209.85.192.172])
-	by mail.openembedded.org (Postfix) with ESMTP id C7CDD6059E
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 14:31:14 +0000 (UTC)
-Received: by mail-pf0-f172.google.com with SMTP id d187so2803951pfg.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 07:31:16 -0700 (PDT)
+Received: from mail-pg0-f45.google.com (mail-pg0-f45.google.com [74.125.83.45])
+	by mail.openembedded.org (Postfix) with ESMTP id 52CA26059E;
+	Sat, 16 Sep 2017 14:32:53 +0000 (UTC)
+Received: by mail-pg0-f45.google.com with SMTP id c137so2951654pga.11;
+	Sat, 16 Sep 2017 07:32:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=20teXdVEOuMTpQiTQjNq0WFglNudeOHr1Vty/XxyTJ4=;
-	b=UZpHp2x4vOFlrneWNF08jEyEFC8FUHb5NOgakIx69Jdkrl/fHASyM3y6rz96hEeD+H
-	LSa6yLDRuDoQQtN+TL68251jVwClv/VKu76brAcsGTGvCp5gwzxpP7yv2wxGbm4tE/+x
-	omuwPi9rEVldBKQqjRNmHw5kriDCx8taEPQRsuR26eH0CzPWKt+SJOcwbxGuHJpBmSzm
-	a77UH249KYi/Q7j2KWvb4suI6DCWxz3zgBy4Xd1BbNstM5n8Hs7NL3CZ6H/fFNYhIl6/
-	xzdH61qDBjYcH/PT4ifL1+7B+xHJ5fOd3SV24yZE36hVWNqSmmSveKpVF4SGDkrIDo6+
-	jF0g==
+	:cc; bh=fmWlq2mMt8RGMvSjh3L7qiYjk7oxR/diiMW1saprPSE=;
+	b=qsm8yTi1AfiAjcTpCkZrP/acFwDKxceulfBvRp6OkL02y924NYzvEixnv3ryGaR6cF
+	AbBNWrQUL7ApVnMe/ciimB3Gs+8NHOxHjiAvAAjgGjGYXRMP4szmce3kEh166LtblW7y
+	KEty2y8y9jTWLBy4jC3OSbavapyGszF9u0BVTS6EL7owlFktScBkrZ6IkkfDsbA4fZrz
+	cZw+Av6tnXYmQTsL/CBBW6lB1QLX0PR2QSEXDqiL4LwtOHJuF8GOdQqMAFYPHnvZNpYO
+	HBiS6RZp/sBklMN/Q+B5QtjGBwqkGwqu4R4CoUpxbvRTrnQTRAEr3h3EPL7hhS3WYmxi
+	Mm+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=20teXdVEOuMTpQiTQjNq0WFglNudeOHr1Vty/XxyTJ4=;
-	b=o6KZ9BvDOJRFlTMvIVRKBus4t8GydDHNJkP5aqjRjknwLSFd44byHdAzij+VCpW+eU
-	634IIHRtUwh5+D0VopNaOoGc1m3PfKgmc2qUjHNL/QprGRhMwjLTNLQVOwREeE3EoOUs
-	Ig/B0nMoWsBnqeIM9NXe4CLb93i0+KA8HOa76yPXk7sTVYkXw/YQl/o7cjbM8f1LgQLU
-	MrRMV9WGXFBNlWUOaTmjvE4by+YzXDGq3xE1CGA+dR4MCLlYwDd5k45IfYyrkgosYzDL
-	oKWnHIU4tLdExgKNtaFVa9tAmsqK2vYuOu36pyKZsROQ0SIKOYGF4990ydifmhpehLec
-	WhKw==
-X-Gm-Message-State: AHPjjUjR7UVfSZQhxjT1vDuAs7jeuX6gsstsTlSlC+Neo3yfusMu9nIT
-	rKzYyz2OVp69lZQbqvO7er5jslSpaunIbbD8t1K9og==
-X-Google-Smtp-Source: AOwi7QDg4iBJuKbDFQ0FFLPFRvJlZckRpygCzOM5eTMlf8PJc/orIQNv+zav8scHRY0rwOUOjGP3zuUr1kIG01NQKEQ=
-X-Received: by 10.99.138.73 with SMTP id y70mr48926pgd.317.1505572275493; Sat,
-	16 Sep 2017 07:31:15 -0700 (PDT)
+	bh=fmWlq2mMt8RGMvSjh3L7qiYjk7oxR/diiMW1saprPSE=;
+	b=AnyHuw30Bjda7/zk0ns9VVsbhJ5sR4axC8M+8t49NZHJ1U/BTDmBM04ljt7ZjRtXYF
+	DRCZ1DdLGF0dvHUUXGZtaCt4vEqSvHezEUJG7MzdNfs4wjdh0ZRQq5cKB6S4QfUZVy0A
+	rN2QCFf0PITofj5+T3blOuuO201L/gvZTNGaZIWyZRMkOA8O6pcSZcM4bYbelCVwOOgL
+	BrVnPzvxBqnjI1mfXlzqJyIJc+kMyNsOfPw07jjxzD/3PGpyFMI3c1EmO9YIbEx41ikV
+	xgP4t00n7FjBWyUjS+jHt4i9wkY1KI/hUBAilOmSfVpLFfFV48h5JuphWJIJrDjwajKg
+	3Ayg==
+X-Gm-Message-State: AHPjjUiiDANdAHSwg+8EQicTGOqIettUlnKxDFiHfIUAg7bpzRgDJJSL
+	TVJ66mtyBkw/kJyM9WnX1XhWlPMxuXXdzu9X7xE=
+X-Google-Smtp-Source: ADKCNb632NFzobSv56fF3ClIZ4pa2xg5L/IQx/3DtwfvZRGM0trxFbyBuh6uVvgmxGeZuXIarEws2mZ5HXrUfEwH+Lo=
+X-Received: by 10.99.95.13 with SMTP id t13mr27372920pgb.329.1505572374343;
+	Sat, 16 Sep 2017 07:32:54 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.149.73 with HTTP; Sat, 16 Sep 2017 07:30:45 -0700 (PDT)
-In-Reply-To: <CA+chaQdWxaCLaqr24=EGSueJgSEa7oPHzLHu4aWmOQh_320WZA@mail.gmail.com>
-References: <20170915225827.12328-1-raj.khem@gmail.com>
-	<20170915225827.12328-2-raj.khem@gmail.com>
-	<CA+chaQdWxaCLaqr24=EGSueJgSEa7oPHzLHu4aWmOQh_320WZA@mail.gmail.com>
+Received: by 10.100.149.73 with HTTP; Sat, 16 Sep 2017 07:32:23 -0700 (PDT)
+In-Reply-To: <CA+chaQdbNsKYzowonqmWYY-hp-e=GdJ_A7_hYq8jCjobw414jA@mail.gmail.com>
+References: <CA+chaQfjWH9SHcF4S61Q2Q_qUk7jcMMehPRibXg-QO_oS_QGiw@mail.gmail.com>
+	<CAMKF1soALs=ksNmvTO3vrDnP0gvRQviShq3O--iCZwRzjTB8Xg@mail.gmail.com>
+	<CA+chaQdbNsKYzowonqmWYY-hp-e=GdJ_A7_hYq8jCjobw414jA@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 16 Sep 2017 07:30:45 -0700
-Message-ID: <CAMKF1sq8eEWfgafvELHuh4VvrDxyo7CjNkUmN28+X1vuax_Rcg@mail.gmail.com>
+Date: Sat, 16 Sep 2017 07:32:23 -0700
+Message-ID: <CAMKF1spWpSo4pnB+GVUGAqU0T41jKmVDtRB2cC_+1a7YAaY2vA@mail.gmail.com>
 To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 2/2] android-tools: Fix build with musl
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-09-14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,636 +55,732 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Sep 2017 14:31:15 -0000
+X-List-Received-Date: Sat, 16 Sep 2017 14:32:54 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Sat, Sep 16, 2017 at 5:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> Even without this patch android-tools fail to build for qemuarm:
-> http://errors.yoctoproject.org/Errors/Details/156104/
+On Sat, Sep 16, 2017 at 2:00 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> Probably is, qemux86 was built from slightly older metadata, so probably
+> including previous versions of your klibc changes.
 >
-> It's probably broken for long time, the recipe was shadowed by meta-android
-> copy until recently when I've removed it from meta-android (and then the
-> layer as well from world builds).
->
-> Can you please check what's going on so that I can at least build test this
-> properly?
+> I know it's confusing in the report, but still each build takes around 24
+> hours per machine and I have only 2 builders. e.g. this qemux86 build was
+> started 20170912_234104 as the log directory shows and at that time there
+> wasn't even the latest version of klibc patches on ML.
 >
 
+thats ok. May be top of build configuration would be a good thing to
+have in report. so we know which commit the results belong to.
 
-it build ok for armv7(rpi3)  its using armv6+ instructions for atomics
-which wont work for qemuarm, did it build on qemuarm ever before ?
-
-/tmp/cc7WvkQH.s: Assembler messages:
-/tmp/cc7WvkQH.s:159: Error: selected processor does not support `ldrex
-ip,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:162: Error: selected processor does not support
-`strexeq r4,r1,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:262: Error: selected processor does not support `ldrex
-ip,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:264: Error: selected processor does not support `strex
-r4,r0,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:351: Error: selected processor does not support `ldrex
-ip,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:353: Error: selected processor does not support `strex
-r4,r0,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:396: Error: selected processor does not support `ldrex
-ip,[r3]' in ARM mode
-/tmp/cc7WvkQH.s:398: Error: selected processor does not support `strex
-r4,r0,[r3]' in ARM mode
-<builtin>: recipe for target 'atomic.o' failed
-
-
-
-> On Sat, Sep 16, 2017 at 12:58 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Thanks
+>
+> On Sat, Sep 16, 2017 at 1:02 AM, Khem Raj <raj.khem@gmail.com> wrote:
 >>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->>  .../0001-add-base64-implementation.patch           | 351
->> +++++++++++++++++++++
->>  .../android-tools/0002-adb-Musl-fixes.patch        | 134 ++++++++
->>  .../android-tools/android-tools/adbd.mk            |   1 +
->>  .../android-tools/android-tools_5.1.1.r37.bb       |   2 +
->>  4 files changed, 488 insertions(+)
->>  create mode 100644
->> meta-oe/recipes-devtools/android-tools/android-tools/0001-add-base64-implementation.patch
->>  create mode 100644
->> meta-oe/recipes-devtools/android-tools/android-tools/0002-adb-Musl-fixes.patch
+>> On Fri, Sep 15, 2017 at 3:08 PM, Martin Jansa <martin.jansa@gmail.com>
+>> wrote:
+>> > http://www.openembedded.org/wiki/Bitbake_World_Status
+>> >
+>> > == Number of issues - stats ==
+>> > {| class='wikitable'
+>> > !|Date      !!colspan='3'|Failed tasks     !!|Signatures
+>> > !!colspan='14'|QA
+>> > !!Comment
+>> > |-
+>> > || ||qemuarm ||qemux86 ||qemux86_64 ||all ||already-stripped ||libdir
+>> > ||textrel ||build-deps ||file-rdeps ||version-going-backwards
+>> > ||host-user-contaminated ||installed-vs-shipped
+>> > ||unknown-configure-option
+>> > ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags
+>> > ||compile-host-path ||
+>> > |-
+>> > ||2017-09-14 ||3 ||6 ||2 ||0 ||0 ||0 ||5 ||0 ||0 ||91 ||3 ||0 ||0 ||0
+>> > ||0
+>> > ||0 ||0 ||0 ||
+>> > |}
+>> >
+>> > == Failed tasks 2017-09-14 ==
+>> >
+>> > INFO: jenkins-job.sh-1.8.29 Complete log available at
+>> >
+>> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20170915_120505.log
+>> >
+>> > === common (1) ===
+>> >     *
+>> > meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:do_compile
+>> >
+>> > === common-x86 (0) ===
+>> >
+>> > === qemuarm (2) ===
+>> >     *
+>> >
+>> > meta-openembedded/meta-multimedia/recipes-connectivity/libupnp/libupnp1.6_1.6.21.bb:do_fetch
+>> >     *
+>> >
+>> > meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb:do_compile
+>> >
+>> > === qemux86 (5) ===
+>> >     *
+>> >
+>> > meta-openembedded/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb:do_compile
+>> >     *
+>> >
+>> > meta-openembedded/meta-initramfs/recipes-kernel/kexec/kexec-tools-klibc_2.0.2.bb:do_configure
+>> >     *
+>> >
+>> > meta-openembedded/meta-multimedia/recipes-multimedia/gerbera/gerbera_git.bb:do_configure
+>> >     * meta-qt5/recipes-qt/qt5/qtlocation_git.bb:do_compile
+>> >     *
+>> >
+>> > virtual:klibc:meta-openembedded/meta-initramfs/recipes-bsp/kexecboot/kexecboot_git.bb:do_configure
+>> >
 >>
->> diff --git
->> a/meta-oe/recipes-devtools/android-tools/android-tools/0001-add-base64-implementation.patch
->> b/meta-oe/recipes-devtools/android-tools/android-tools/0001-add-base64-implementation.patch
->> new file mode 100644
->> index 000000000..680d21f3a
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-devtools/android-tools/android-tools/0001-add-base64-implementation.patch
->> @@ -0,0 +1,351 @@
->> +From bbeb72f11c64f190b23abbed5f44311bd021bdc9 Mon Sep 17 00:00:00 2001
->> +From: Khem Raj <raj.khem@gmail.com>
->> +Date: Fri, 15 Sep 2017 15:46:38 -0700
->> +Subject: [PATCH 1/2] add base64 implementation
->> +
->> +musl needs it
->> +
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> +---
->> + system/core/adb/adb_auth_client.c |   2 +-
->> + system/core/adb/base64.c          | 315
->> ++++++++++++++++++++++++++++++++++++++
->> + 2 files changed, 316 insertions(+), 1 deletion(-)
->> + create mode 100644 system/core/adb/base64.c
->> +
->> +diff --git a/system/core/adb/adb_auth_client.c
->> b/system/core/adb/adb_auth_client.c
->> +index 55e9dca..104b413 100644
->> +--- a/system/core/adb/adb_auth_client.c
->> ++++ b/system/core/adb/adb_auth_client.c
->> +@@ -75,7 +75,7 @@ static void read_keys(const char *file, struct listnode
->> *list)
->> +         if (sep)
->> +             *sep = '\0';
->> +
->> +-        ret = __b64_pton(buf, (u_char *)&key->key, sizeof(key->key) +
->> 4);
->> ++        ret = b64_pton(buf, (u_char *)&key->key, sizeof(key->key) + 4);
->> +         if (ret != sizeof(key->key)) {
->> +             D("%s: Invalid base64 data ret=%d\n", file, ret);
->> +             free(key);
->> +diff --git a/system/core/adb/base64.c b/system/core/adb/base64.c
->> +new file mode 100644
->> +index 0000000..95da284
->> +--- /dev/null
->> ++++ b/system/core/adb/base64.c
->> +@@ -0,0 +1,315 @@
->> ++/*
->> ++ * Copyright (c) 1996-1999 by Internet Software Consortium.
->> ++ *
->> ++ * Permission to use, copy, modify, and distribute this software for any
->> ++ * purpose with or without fee is hereby granted, provided that the
->> above
->> ++ * copyright notice and this permission notice appear in all copies.
->> ++ *
->> ++ * THE SOFTWARE IS PROVIDED "AS IS" AND INTERNET SOFTWARE CONSORTIUM
->> DISCLAIMS
->> ++ * ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
->> WARRANTIES
->> ++ * OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL INTERNET SOFTWARE
->> ++ * CONSORTIUM BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR
->> CONSEQUENTIAL
->> ++ * DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
->> ++ * PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
->> TORTIOUS
->> ++ * ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE
->> OF THIS
->> ++ * SOFTWARE.
->> ++ */
->> ++
->> ++/*
->> ++ * Portions Copyright (c) 1995 by International Business Machines, Inc.
->> ++ *
->> ++ * International Business Machines, Inc. (hereinafter called IBM) grants
->> ++ * permission under its copyrights to use, copy, modify, and distribute
->> this
->> ++ * Software with or without fee, provided that the above copyright
->> notice and
->> ++ * all paragraphs of this notice appear in all copies, and that the name
->> of IBM
->> ++ * not be used in connection with the marketing of any product
->> incorporating
->> ++ * the Software or modifications thereof, without specific, written
->> prior
->> ++ * permission.
->> ++ *
->> ++ * To the extent it has a right to do so, IBM grants an immunity from
->> suit
->> ++ * under its patents, if any, for the use, sale or manufacture of
->> products to
->> ++ * the extent that such products are used for performing Domain Name
->> System
->> ++ * dynamic updates in TCP/IP networks by means of the Software.  No
->> immunity is
->> ++ * granted for any product per se or for any other function of any
->> product.
->> ++ *
->> ++ * THE SOFTWARE IS PROVIDED "AS IS", AND IBM DISCLAIMS ALL WARRANTIES,
->> ++ * INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
->> ++ * PARTICULAR PURPOSE.  IN NO EVENT SHALL IBM BE LIABLE FOR ANY SPECIAL,
->> ++ * DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER
->> ARISING
->> ++ * OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE,
->> EVEN
->> ++ * IF IBM IS APPRISED OF THE POSSIBILITY OF SUCH DAMAGES.
->> ++ */
->> ++
->> ++#if !defined(LINT) && !defined(CODECENTER)
->> ++static const char rcsid[] = "$BINDId: base64.c,v 8.7 1999/10/13 16:39:33
->> vixie Exp $";
->> ++#endif /* not lint */
->> ++
->> ++#include <sys/types.h>
->> ++#include <sys/param.h>
->> ++#include <sys/socket.h>
->> ++
->> ++#include <netinet/in.h>
->> ++#include <arpa/inet.h>
->> ++#include <arpa/nameser.h>
->> ++
->> ++#include <ctype.h>
->> ++#include <resolv.h>
->> ++#include <stdio.h>
->> ++#include <stdlib.h>
->> ++#include <stdint.h>
->> ++#include <string.h>
->> ++
->> ++#define Assert(Cond) if (!(Cond)) abort()
->> ++
->> ++static const char Base64[] =
->> ++
->> "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
->> ++static const char Pad64 = '=';
->> ++
->> ++/* (From RFC1521 and draft-ietf-dnssec-secext-03.txt)
->> ++   The following encoding technique is taken from RFC 1521 by Borenstein
->> ++   and Freed.  It is reproduced here in a slightly edited form for
->> ++   convenience.
->> ++
->> ++   A 65-character subset of US-ASCII is used, enabling 6 bits to be
->> ++   represented per printable character. (The extra 65th character, "=",
->> ++   is used to signify a special processing function.)
->> ++
->> ++   The encoding process represents 24-bit groups of input bits as output
->> ++   strings of 4 encoded characters. Proceeding from left to right, a
->> ++   24-bit input group is formed by concatenating 3 8-bit input groups.
->> ++   These 24 bits are then treated as 4 concatenated 6-bit groups, each
->> ++   of which is translated into a single digit in the base64 alphabet.
->> ++
->> ++   Each 6-bit group is used as an index into an array of 64 printable
->> ++   characters. The character referenced by the index is placed in the
->> ++   output string.
->> ++
->> ++                         Table 1: The Base64 Alphabet
->> ++
->> ++      Value Encoding  Value Encoding  Value Encoding  Value Encoding
->> ++          0 A            17 R            34 i            51 z
->> ++          1 B            18 S            35 j            52 0
->> ++          2 C            19 T            36 k            53 1
->> ++          3 D            20 U            37 l            54 2
->> ++          4 E            21 V            38 m            55 3
->> ++          5 F            22 W            39 n            56 4
->> ++          6 G            23 X            40 o            57 5
->> ++          7 H            24 Y            41 p            58 6
->> ++          8 I            25 Z            42 q            59 7
->> ++          9 J            26 a            43 r            60 8
->> ++         10 K            27 b            44 s            61 9
->> ++         11 L            28 c            45 t            62 +
->> ++         12 M            29 d            46 u            63 /
->> ++         13 N            30 e            47 v
->> ++         14 O            31 f            48 w         (pad) =
->> ++         15 P            32 g            49 x
->> ++         16 Q            33 h            50 y
->> ++
->> ++   Special processing is performed if fewer than 24 bits are available
->> ++   at the end of the data being encoded.  A full encoding quantum is
->> ++   always completed at the end of a quantity.  When fewer than 24 input
->> ++   bits are available in an input group, zero bits are added (on the
->> ++   right) to form an integral number of 6-bit groups.  Padding at the
->> ++   end of the data is performed using the '=' character.
->> ++
->> ++   Since all base64 input is an integral number of octets, only the
->> ++         -------------------------------------------------
->> ++   following cases can arise:
->> ++
->> ++       (1) the final quantum of encoding input is an integral
->> ++           multiple of 24 bits; here, the final unit of encoded
->> ++         output will be an integral multiple of 4 characters
->> ++         with no "=" padding,
->> ++       (2) the final quantum of encoding input is exactly 8 bits;
->> ++           here, the final unit of encoded output will be two
->> ++         characters followed by two "=" padding characters, or
->> ++       (3) the final quantum of encoding input is exactly 16 bits;
->> ++           here, the final unit of encoded output will be three
->> ++         characters followed by one "=" padding character.
->> ++   */
->> ++
->> ++int
->> ++b64_ntop(const uint8_t* src, size_t srclength, char* target, size_t
->> targsize)
->> ++{
->> ++      size_t datalength = 0;
->> ++      uint8_t input[3];
->> ++      uint8_t output[4];
->> ++      size_t i;
->> ++
->> ++      while (2 < srclength) {
->> ++              input[0] = *src++;
->> ++              input[1] = *src++;
->> ++              input[2] = *src++;
->> ++              srclength -= 3;
->> ++
->> ++              output[0] = input[0] >> 2;
->> ++              output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
->> ++              output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
->> ++              output[3] = input[2] & 0x3f;
->> ++              Assert(output[0] < 64);
->> ++              Assert(output[1] < 64);
->> ++              Assert(output[2] < 64);
->> ++              Assert(output[3] < 64);
->> ++
->> ++              if (datalength + 4 > targsize)
->> ++                      return (-1);
->> ++              target[datalength++] = Base64[output[0]];
->> ++              target[datalength++] = Base64[output[1]];
->> ++              target[datalength++] = Base64[output[2]];
->> ++              target[datalength++] = Base64[output[3]];
->> ++      }
->> ++
->> ++      /* Now we worry about padding. */
->> ++      if (0 != srclength) {
->> ++              /* Get what's left. */
->> ++              input[0] = input[1] = input[2] = '\0';
->> ++              for (i = 0; i < srclength; i++)
->> ++                      input[i] = *src++;
->> ++
->> ++              output[0] = input[0] >> 2;
->> ++              output[1] = ((input[0] & 0x03) << 4) + (input[1] >> 4);
->> ++              output[2] = ((input[1] & 0x0f) << 2) + (input[2] >> 6);
->> ++              Assert(output[0] < 64);
->> ++              Assert(output[1] < 64);
->> ++              Assert(output[2] < 64);
->> ++
->> ++              if (datalength + 4 > targsize)
->> ++                      return (-1);
->> ++              target[datalength++] = Base64[output[0]];
->> ++              target[datalength++] = Base64[output[1]];
->> ++              if (srclength == 1)
->> ++                      target[datalength++] = Pad64;
->> ++              else
->> ++                      target[datalength++] = Base64[output[2]];
->> ++              target[datalength++] = Pad64;
->> ++      }
->> ++      if (datalength >= targsize)
->> ++              return (-1);
->> ++      target[datalength] = '\0';      /* Returned value doesn't count
->> \0. */
->> ++      return (datalength);
->> ++}
->> ++
->> ++/* skips all whitespace anywhere.
->> ++   converts characters, four at a time, starting at (or after)
->> ++   src from base - 64 numbers into three 8 bit bytes in the target area.
->> ++   it returns the number of data bytes stored at the target, or -1 on
->> error.
->> ++ */
->> ++
->> ++int b64_pton(const char* src, uint8_t* target, size_t targsize)
->> ++{
->> ++      int tarindex, state, ch;
->> ++      char *pos;
->> ++
->> ++      state = 0;
->> ++      tarindex = 0;
->> ++
->> ++      while ((ch = *src++) != '\0') {
->> ++              if (isspace(ch))        /* Skip whitespace anywhere. */
->> ++                      continue;
->> ++
->> ++              if (ch == Pad64)
->> ++                      break;
->> ++
->> ++              pos = strchr(Base64, ch);
->> ++              if (pos == 0)           /* A non-base64 character. */
->> ++                      return (-1);
->> ++
->> ++              switch (state) {
->> ++              case 0:
->> ++                      if (target) {
->> ++                              if ((size_t)tarindex >= targsize)
->> ++                                      return (-1);
->> ++                              target[tarindex] = (pos - Base64) << 2;
->> ++                      }
->> ++                      state = 1;
->> ++                      break;
->> ++              case 1:
->> ++                      if (target) {
->> ++                              if ((size_t)tarindex + 1 >= targsize)
->> ++                                      return (-1);
->> ++                              target[tarindex]   |=  (pos - Base64) >>
->> 4;
->> ++                              target[tarindex+1]  = ((pos - Base64) &
->> 0x0f)
->> ++                                                      << 4 ;
->> ++                      }
->> ++                      tarindex++;
->> ++                      state = 2;
->> ++                      break;
->> ++              case 2:
->> ++                      if (target) {
->> ++                              if ((size_t)tarindex + 1 >= targsize)
->> ++                                      return (-1);
->> ++                              target[tarindex]   |=  (pos - Base64) >>
->> 2;
->> ++                              target[tarindex+1]  = ((pos - Base64) &
->> 0x03)
->> ++                                                      << 6;
->> ++                      }
->> ++                      tarindex++;
->> ++                      state = 3;
->> ++                      break;
->> ++              case 3:
->> ++                      if (target) {
->> ++                              if ((size_t)tarindex >= targsize)
->> ++                                      return (-1);
->> ++                              target[tarindex] |= (pos - Base64);
->> ++                      }
->> ++                      tarindex++;
->> ++                      state = 0;
->> ++                      break;
->> ++              default:
->> ++                      abort();
->> ++              }
->> ++      }
->> ++
->> ++      /*
->> ++       * We are done decoding Base-64 chars.  Let's see if we ended
->> ++       * on a byte boundary, and/or with erroneous trailing characters.
->> ++       */
->> ++
->> ++      if (ch == Pad64) {              /* We got a pad char. */
->> ++              ch = *src++;            /* Skip it, get next. */
->> ++              switch (state) {
->> ++              case 0:         /* Invalid = in first position */
->> ++              case 1:         /* Invalid = in second position */
->> ++                      return (-1);
->> ++
->> ++              case 2:         /* Valid, means one byte of info */
->> ++                      /* Skip any number of spaces. */
->> ++                      for ((void)NULL; ch != '\0'; ch = *src++)
->> ++                              if (!isspace(ch))
->> ++                                      break;
->> ++                      /* Make sure there is another trailing = sign. */
->> ++                      if (ch != Pad64)
->> ++                              return (-1);
->> ++                      ch = *src++;            /* Skip the = */
->> ++                      /* Fall through to "single trailing =" case. */
->> ++                      /* FALLTHROUGH */
->> ++
->> ++              case 3:         /* Valid, means two bytes of info */
->> ++                      /*
->> ++                       * We know this char is an =.  Is there anything
->> but
->> ++                       * whitespace after it?
->> ++                       */
->> ++                      for ((void)NULL; ch != '\0'; ch = *src++)
->> ++                              if (!isspace(ch))
->> ++                                      return (-1);
->> ++
->> ++                      /*
->> ++                       * Now make sure for cases 2 and 3 that the
->> "extra"
->> ++                       * bits that slopped past the last full byte were
->> ++                       * zeros.  If we don't check them, they become a
->> ++                       * subliminal channel.
->> ++                       */
->> ++                      if (target && target[tarindex] != 0)
->> ++                              return (-1);
->> ++              }
->> ++      } else {
->> ++              /*
->> ++               * We ended by seeing the end of the string.  Make sure we
->> ++               * have no partial bytes lying around.
->> ++               */
->> ++              if (state != 0)
->> ++                      return (-1);
->> ++      }
->> ++
->> ++      return (tarindex);
->> ++}
->> ++
->> +--
->> +2.14.1
->> +
->> diff --git
->> a/meta-oe/recipes-devtools/android-tools/android-tools/0002-adb-Musl-fixes.patch
->> b/meta-oe/recipes-devtools/android-tools/android-tools/0002-adb-Musl-fixes.patch
->> new file mode 100644
->> index 000000000..c7aebb641
->> --- /dev/null
->> +++
->> b/meta-oe/recipes-devtools/android-tools/android-tools/0002-adb-Musl-fixes.patch
->> @@ -0,0 +1,134 @@
->> +From f8653ed0ede4aa781ab758fcd44fdc05ffbe0b0a Mon Sep 17 00:00:00 2001
->> +From: Khem Raj <raj.khem@gmail.com>
->> +Date: Fri, 15 Sep 2017 15:50:57 -0700
->> +Subject: [PATCH 2/2] adb: Musl fixes
->> +
->> +__nonnull is gcc specific
->> +include sys/types.h for size_t
->> +Do not redefine close() and lseek()
->> +
->> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> +---
->> + system/core/adb/adb.h                    |  2 ++
->> + system/core/adb/disable_verity_service.c | 13 ++++++++-----
->> + system/core/adb/framebuffer_service.c    |  7 ++++---
->> + system/core/adb/sysdeps.h                | 12 ++++++------
->> + 4 files changed, 20 insertions(+), 14 deletions(-)
->> +
->> +diff --git a/system/core/adb/adb.h b/system/core/adb/adb.h
->> +index 44e5981..bcdc49f 100644
->> +--- a/system/core/adb/adb.h
->> ++++ b/system/core/adb/adb.h
->> +@@ -18,7 +18,9 @@
->> + #define __ADB_H
->> +
->> + #include <limits.h>
->> ++#include <sys/types.h>
->> +
->> ++#include "fdevent.h"
->> + #include "adb_trace.h"
->> + #include "transport.h"  /* readx(), writex() */
->> +
->> +diff --git a/system/core/adb/disable_verity_service.c
->> b/system/core/adb/disable_verity_service.c
->> +index ed3da52..29fa3d6 100644
->> +--- a/system/core/adb/disable_verity_service.c
->> ++++ b/system/core/adb/disable_verity_service.c
->> +@@ -14,25 +14,28 @@
->> +  * limitations under the License.
->> +  */
->> +
->> +-#include "sysdeps.h"
->> +
->> + #define  TRACE_TAG  TRACE_ADB
->> + #include "adb.h"
->> ++#include "sysdeps.h"
->> ++#include "cutils/properties.h"
->> ++#include "ext4_sb.h"
->> ++#include <fs_mgr.h>
->> +
->> + #include <stdio.h>
->> + #include <stdarg.h>
->> + #include <sys/stat.h>
->> + #include <fcntl.h>
->> + #include <inttypes.h>
->> ++#include <unistd.h>
->> ++#include <errno.h>
->> ++#include <stdbool.h>
->> +
->> +-#include "cutils/properties.h"
->> +-#include "ext4_sb.h"
->> +-#include <fs_mgr.h>
->> +
->> + #define FSTAB_PREFIX "/fstab."
->> + struct fstab *fstab;
->> +
->> +-__attribute__((__format__(printf, 2, 3))) __nonnull((2))
->> ++__attribute__((__format__(printf, 2, 3))) __attribute__((nonnull((2))))
->> + static void write_console(int fd, const char* format, ...)
->> + {
->> +     char buffer[256];
->> +diff --git a/system/core/adb/framebuffer_service.c
->> b/system/core/adb/framebuffer_service.c
->> +index 8cbe840..8f0ccfb 100644
->> +--- a/system/core/adb/framebuffer_service.c
->> ++++ b/system/core/adb/framebuffer_service.c
->> +@@ -14,6 +14,10 @@
->> +  * limitations under the License.
->> +  */
->> +
->> ++#include "fdevent.h"
->> ++#include "adb.h"
->> ++#include "sysdeps.h"
->> ++
->> + #include <stdlib.h>
->> + #include <stdio.h>
->> + #include <unistd.h>
->> +@@ -23,9 +27,6 @@
->> + #include <sys/types.h>
->> + #include <sys/wait.h>
->> +
->> +-#include "fdevent.h"
->> +-#include "adb.h"
->> +-
->> + #include <linux/fb.h>
->> + #include <sys/ioctl.h>
->> + #include <sys/mman.h>
->> +diff --git a/system/core/adb/sysdeps.h b/system/core/adb/sysdeps.h
->> +index cc1f839..ea39ac3 100644
->> +--- a/system/core/adb/sysdeps.h
->> ++++ b/system/core/adb/sysdeps.h
->> +@@ -123,8 +123,8 @@ static __inline__ int  unix_close(int fd)
->> + {
->> +     return close(fd);
->> + }
->> +-#undef   close
->> +-#define  close   ____xxx_close
->> ++//#undef   close
->> ++//#define  close   ____xxx_close
->> +
->> + static __inline__  int  unix_read(int  fd, void*  buf, size_t  len)
->> + {
->> +@@ -369,8 +369,8 @@ static __inline__ int  adb_close(int fd)
->> + {
->> +     return close(fd);
->> + }
->> +-#undef   close
->> +-#define  close   ____xxx_close
->> ++//#undef   close
->> ++//#define  close   ____xxx_close
->> +
->> +
->> + static __inline__  int  adb_read(int  fd, void*  buf, size_t  len)
->> +@@ -392,8 +392,8 @@ static __inline__ int   adb_lseek(int  fd, int  pos,
->> int  where)
->> + {
->> +     return lseek(fd, pos, where);
->> + }
->> +-#undef   lseek
->> +-#define  lseek   ___xxx_lseek
->> ++//#undef   lseek
->> ++//#define  lseek   ___xxx_lseek
->> +
->> + static __inline__  int    adb_unlink(const char*  path)
->> + {
->> +--
->> +2.14.1
->> +
->> diff --git a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
->> b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
->> index 84cd06b10..31452ae10 100644
->> --- a/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
->> +++ b/meta-oe/recipes-devtools/android-tools/android-tools/adbd.mk
->> @@ -16,6 +16,7 @@ adbd_SRC_FILES += jdwp_service.c
->>  adbd_SRC_FILES += framebuffer_service.c
->>  adbd_SRC_FILES += remount_service.c
->>  adbd_SRC_FILES += disable_verity_service.c
->> +adbd_SRC_FILES += base64.c
->>  adbd_SRC_FILES += usb_linux_client.c
->>  adbd_OBJS := $(adbd_SRC_FILES:.c=.o)
+>> all meta-initramfs should have been fixed with latest patchset it that not
+>> the case ?
 >>
->> diff --git
->> a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
->> b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
->> index 34fddcbda..75f5b9e26 100644
->> --- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
->> +++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
->> @@ -32,6 +32,8 @@ SRC_URI = " \
->>      file://define-shell-command.patch \
->>      file://implicit-declaration-function-strlcat-strlcopy.patch \
->>      file://fix-big-endian-build.patch \
->> +    file://0001-add-base64-implementation.patch \
->> +    file://0002-adb-Musl-fixes.patch \
->>      file://android-tools-adbd.service \
->>      file://.gitignore;subdir=git \
->>      file://adb.mk;subdir=${BPN} \
->> --
->> 2.14.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> > === qemux86_64 (1) ===
+>> >     *
+>> >
+>> > virtual:native:meta-openembedded/meta-oe/recipes-support/uim/uim_1.8.6.bb:do_install
+>> >
+>> > === Number of failed tasks (11) ===
+>> > {| class=wikitable
+>> > |-
+>> > || qemuarm || 3 ||
+>> >
+>> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.20170914_113136.log/
+>> > || http://errors.yoctoproject.org/Errors/Build/46775/
+>> > |-
+>> > || qemux86 || 6 ||
+>> >
+>> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.20170912_234104.log/
+>> > || http://errors.yoctoproject.org/Errors/Build/46714/
+>> > |-
+>> > || qemux86_64 || 2 ||
+>> >
+>> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.20170914_015733.log/
+>> > || http://errors.yoctoproject.org/Errors/Build/46761/
+>> > |}
+>> >
+>> > === PNBLACKLISTs (1) ===
+>> >
+>> > === QA issues (99) ===
+>> > {| class=wikitable
+>> > !| Count ||Issue
+>> > |-
+>> > ||0 ||already-stripped
+>> > |-
+>> > ||0 ||build-deps
+>> > |-
+>> > ||0 ||compile-host-path
+>> > |-
+>> > ||0 ||file-rdeps
+>> > |-
+>> > ||0 ||installed-vs-shipped
+>> > |-
+>> > ||0 ||invalid-pkgconfig
+>> > |-
+>> > ||0 ||ldflags
+>> > |-
+>> > ||0 ||libdir
+>> > |-
+>> > ||0 ||pkgname
+>> > |-
+>> > ||0 ||symlink-to-sysroot
+>> > |-
+>> > ||0 ||unknown-configure-option
+>> > |-
+>> > ||3 ||host-user-contaminated
+>> > |-
+>> > ||5 ||textrel
+>> > |-
+>> > ||91 ||version-going-backwards
+>> > |}
+>> >
+>> >
+>> >
+>> > === Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+>> >
+>> > Complete log:
+>> >
+>> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.signatures.20170913_214906.log/
+>> >
+>> > No issues detected
+>> >
+>> >
+>> > PNBLACKLISTs:
+>> > openembedded-core/:
+>> > meta-browser:
+>> > meta-openembedded:
+>> >
+>> > meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACKLIST[lksctp-tools]
+>> > ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN: fails
+>> > to
+>> > link against sctp_connectx symbol", '', d)}"
+>> > meta-qt5:
+>> > PNBLACKLIST[android-system] = "depends on lxc from meta-virtualiazation
+>> > which isn't included in my world builds"
+>> > PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to be
+>> > tested
+>> > so much"
+>> > PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+>> > tested
+>> > so much"
+>> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+>> > tested
+>> > so much"
+>> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+>> > tested
+>> > so much"
+>> > PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to be
+>> > tested
+>> > so much"
+>> > PNBLACKLIST[build-appliance-image] = "tries to include whole downloads
+>> > directory in /home/builder/poky :/"
+>> >
+>> >
+>> > QA issues by type:
+>> > count: 0 issue: already-stripped
+>> >
+>> >
+>> > count: 0 issue: libdir
+>> >
+>> >
+>> > count: 5 issue: textrel
+>> > chromium-54.0.2810.2: ELF binary
+>> >
+>> > '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/packages-split/chromium/usr/bin/chromium/chrome'
+>> > has relocations in .text [textrel]
+>> > chromium-wayland-53.0.2785.143: ELF binary
+>> >
+>> > '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
+>> > has relocations in .text [textrel]
+>> > corosync-2.4.2: ELF binary
+>> >
+>> > '/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-split/corosync/usr/sbin/corosync'
+>> > has relocations in .text [textrel]
+>> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+>> >
+>> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264-bin/usr/bin/x264'
+>> > has relocations in .text [textrel]
+>> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+>> >
+>> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x264/usr/lib/libx264.so.148'
+>> > has relocations in .text [textrel]
+>> >
+>> >
+>> > count: 0 issue: build-deps
+>> >
+>> >
+>> > count: 0 issue: file-rdeps
+>> >
+>> >
+>> > count: 91 issue: version-going-backwards
+>> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dbg went
+>> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dev went
+>> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package gnome-keyring-doc went
+>> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ar
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ast
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-as
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-az
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-be+latin went backwards which would break package
+>> > feeds
+>> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-be
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-bg
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-bn-in
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-bn
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-bs
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ca+valencia went backwards which would break
+>> > package
+>> > feeds from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ca
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-cs
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-cy
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-da
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-de
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-dz
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-el
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-en-ca
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-en-gb
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-en+shaw went backwards which would break package
+>> > feeds
+>> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-es
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-et
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-eu
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-fa
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-fi
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-fr
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ga
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-gl
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-gu
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-he
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-hi
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-hr
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-hu
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-id
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-is
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-it
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ja
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ka
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-kn
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ko
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-lt
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-lv
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-mai
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-mg
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-mk
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ml
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-mn
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-mr
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ms
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-nb
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ne
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-nl
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-nn
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-oc
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-or
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-pa
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-pl
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-pt-br
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-pt
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ro
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ru
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-rw
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-si
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sk
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sl
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sq
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sr+latin went backwards which would break package
+>> > feeds
+>> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sr
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-sv
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-ta
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-te
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-th
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-tr
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-uk
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-vi
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-xh
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-zh-cn
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-zh-hk
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-locale-zh-tw
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package
+>> > gnome-keyring-staticdev
+>> > went backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > gnome-keyring-2.32.1: Package version for package gnome-keyring went
+>> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+>> > 0:2.32.1-r12.0) [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp-dbg went backwards
+>> > which
+>> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp-dev went backwards
+>> > which
+>> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp-doc went backwards
+>> > which
+>> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp-locale went
+>> > backwards
+>> > which would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp-staticdev went
+>> > backwards
+>> > which would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> > libupnp-1.6.21: Package version for package libupnp went backwards which
+>> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+>> > [version-going-backwards]
+>> >
+>> >
+>> > count: 3 issue: host-user-contaminated
+>> > glibc-locale-2.26: glibc-locale:
+>> > /glibc-binary-localedata-ru-ru/usr/lib/locale/ru_RU/LC_CTYPE is owned by
+>> > uid
+>> > 3004, which is the same as the user running bitbake. This may be due to
+>> > host
+>> > contamination [host-user-contaminated]
+>> > qt5-creator-3.5.1: qt5-creator:
+>> > /qt5-creator/usr/lib/qt5/qtcreator/plugins/libPythonEditor.so is owned
+>> > by
+>> > uid 3004, which is the same as the user running bitbake. This may be due
+>> > to
+>> > host contamination [host-user-contaminated]
+>> > qtdeclarative-5.9.2+gitAUTOINC+7c45b035b9: qtdeclarative:
+>> > /qtdeclarative-qmlplugins/usr/lib/qt5/qml/QtQuick.2/qmldir is owned by
+>> > uid
+>> > 3004, which is the same as the user running bitbake. This may be due to
+>> > host
+>> > contamination [host-user-contaminated]
+>> >
+>> >
+>> > count: 0 issue: installed-vs-shipped
+>> >
+>> >
+>> > count: 0 issue: unknown-configure-option
+>> >
+>> >
+>> > count: 0 issue: symlink-to-sysroot
+>> >
+>> >
+>> > count: 0 issue: invalid-pkgconfig
+>> >
+>> >
+>> > count: 0 issue: pkgname
+>> >
+>> >
+>> > count: 0 issue: ldflags
+>> >
+>> >
+>> > count: 0 issue: compile-host-path
+>> >
+>> >
+>> >
+>> > == Tested changes (not included in master yet) - bitbake ==
+>> > latest upstream commit:
+>> > 567f2cf server/process: ensure server failure log is limited to current
+>> > session
+>> > not included in master yet:
+>> > 3ec2af2 world-image: add extra target
+>> > 8eebabe fetch2: Allow Fetch.download() to warn instead of error
+>> >
+>> > == Tested changes (not included in master yet) - openembedded-core ==
+>> > latest upstream commit:
+>> > 8fe9fb4 python*native.bbclass: suppress user site dirs
+>> > not included in master yet:
+>> > 0d7ac07 report-error: Allow to upload reports automatically
+>> > 20d6101 buildhistory.bbclass: metadata-revs show repo parent
+>> > 202fb4c metadata-revs: provide more information
+>> > b3500a7 qemux86: Add identical qemux86copy variant for tests
+>> > 0de46b0 reproducible_build.bbclass: initial support for binary
+>> > reproducibility
+>> > d407a03 cpio: provide cpio-replacement-native
+>> > c872fa6 image_types.bbclass: improve cpio image reproducibility
+>> > 3fcc641 rootfs-postcommands.bbclass: support binary reproducibility
+>> > a132f03 sstate.bbclass: Do not cause build failures due to setscene
+>> > errors
+>> > 198ea0e insane.bbclass: Add do_qa_pseudo function to check for common
+>> > errors
+>> > listed in pseudo.log
+>> > 3283a1c insane.bbclass: do_qa_pseudo: don't trigger error from '^inode
+>> > mismatch'
+>> > beb394d insane.bbclass: do_qa_pseudo: show parts of pseudo.log in
+>> > console
+>> >
+>> > == Tested changes (not included in master yet) - meta-openembedded ==
+>> > latest upstream commit:
+>> > 4a45235 opencv: Fix build with clang
+>> > not included in master yet:
+>> > df98f41 dnsmasq: disable the service by default
+>> > fb19f49 openconnect: fix parallel compilation failure
+>> > 9dafbb4 autofs: Fix build with musl
+>> > 6e742d3 yp-tools: Upgrade to 4.2.2
+>> > ef15059 vim: Remove xfce vim bbappend
+>> > 6fff604 leveldb: Fix build with clang
+>> > 2864d93 klibc: Edit out gcc hardcoding in do_compile
+>> > d20ab2d klibc.bbclass: Use forcevariable override to define flags
+>> > dceaa50 klibc.bbclass: Add -mfloat-abi on arm
+>> > 2e68338 smbnetfs: delete blacklisted
+>> > 3f06336 system-setup-keyboard: delete blacklisted
+>> > 14a15c0 python-jsonschema, python3-jsonschema: add vcversioner-native
+>> > dependency
+>> > a9d38f7 v4l-utils: added missing dependency on udev
+>> > 2b489fd ipvsadm: Add HOMEPAGE info into recipe file.
+>> > cf39ab8 libidl: Add HOMEPAGE info into recipe file.
+>> > 4fcda20 lvm2: Add HOMEPAGE info into recipe file.
+>> > 9e601b0 tcpdump: update to 4.9.2 to fix CVEs
+>> > 3dbb500 debsums: inherit gettext
+>> > b972817 protobuf: update to 3.4.0
+>> > 3e1748f protobuf-c: update to 1.3.0
+>> > a8cf4de libgpiod: bump version to v0.3.1
+>> > e9a3fd9 networkmanager: Add HOMEPAGE info into recipe file.
+>> > 6a0d564 samba: Add HOMEPAGE info into recipe file.
+>> > db01ddf squid: upgrade to 3.5.27
+>> > 8b48a16 iproute2: Move tipc enablement to oe-core
+>> > 1911f84 libmnl: Move to oe-core
+>> > f02eec7 flatbuffers: add version 1.7.1
+>> > 9d4b685 capnproto: add version 0.6.1
+>> > a18db12 libupnp: Add recipe for version 1.8.2
+>> > 90be7f5 gerbera: clean recipe
+>> > 62655bc libjs-sizzle: Add HOMEPAGE info into recipe file.
+>> > 6c0f9c2 liblockfile: Add HOMEPAGE info into recipe file.
+>> > 87d004b daemontools: Add HOMEPAGE info into recipe file.
+>> > 346b2a5 fbset: Add HOMEPAGE info into recipe file.
+>> > 2fdb314 libndp: Add HOMEPAGE info into recipe file.
+>> > a96fc97 gnome-keyring: Resolve conflict with gcr 3 and gold linking
+>> > error
+>> > 34bb6e5 drbd-utils: remove
+>> > 0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
+>> > 864fb16 ceres-solver: add new recipe
+>> > 60b9eb6 libnih: Add HOMEPAGE info into recipe file.
+>> > 20eeac7 libtdb: Add HOMEPAGE info into recipe file.
+>> > 84172c0 mailcap: Add HOMEPAGE info into recipe file.
+>> > 7454d72 mozjs: Add HOMEPAGE info into recipe file.
+>> > 47bbfc9 numactl: Add HOMEPAGE info into recipe file.
+>> > ad97869 orbit2: Add HOMEPAGE info into recipe file.
+>> > f3469c8 sgpio: Add HOMEPAGE info into recipe file.
+>> > 50a3814 stunnel: Add HOMEPAGE info into recipe file.
+>> > d260749 leveldb: disable parallelism
+>> >
+>> > == Tested changes (not included in master yet) - meta-qt5 ==
+>> > latest upstream commit:
+>> > 743b3b9 qtbase-native: Force use of built-in pcre
+>> > not included in master yet:
+>> >
+>> > == Tested changes (not included in master yet) - meta-browser ==
+>> > latest upstream commit:
+>> > 972cab7 gnome-settings-daemon: remove the bbappend for removed recipe
+>> > not included in master yet:
+>> > 5fcf848 chromium: hide textrel QA issues which are there for ages
+>> >
+>> > --
+>> > _______________________________________________
+>> > Openembedded-core mailing list
+>> > Openembedded-core@lists.openembedded.org
+>> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>> >
 >
 >
 
