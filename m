@@ -1,39 +1,46 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A12EA7805C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f53.google.com (mail-pg0-f53.google.com [74.125.83.53])
+	by mail.openembedded.org (Postfix) with ESMTP id C114971B40
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 22:56:05 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id g128so3543531qke.0
+	Sun, 17 Sep 2017 03:02:33 +0000 (UTC)
+Received: by mail-pg0-f53.google.com with SMTP id b11so3377179pgn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Sep 2017 15:56:07 -0700 (PDT)
+	Sat, 16 Sep 2017 20:02:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=9cXRcy2/DPXOQiF3IzIY1J1yn0uD5E2vjp0AnbXAuyc=;
+	b=eaBGGZHFNzHf3U3BCBMBsKWQ4HqyEzMEfBy1xBz8DMmJZGcWvo+5KSB1El6dwdUVAw
+	JX56CrI7wxBahoDrJI7lgh37ixO4F3QBzLhyEzKmf6OoMkBXR9rv8Fc4Fi0wAo+fF5K/
+	28r3n4N3MQF1BbD+Ax78j86YRLnglKG8AZmozulKGLskhv3mUcvYdCj2FqGafB9NZDyq
+	o2eJX/SW6WPZMPboai8vxweIEUgmGVIsbMBvsdYkdq7cjQXBv4OvKOkQTsq4mgyfLZEe
+	ciu78SYCEldi1mlHouNM+ekG+DGaO5df80EHWQZb4elxju6W/vL+rRPEnJd2Jbtubper
+	s7Kw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=hf9yR82Cdz3y/9aVnw0oa1i/uu6HwNynFbAR0S5a53o=;
-	b=OplkrCawVObby5iJZAMvRRNGuRJpcaFgaYRVk450N9yVc6GiaRARpnCVRRW4A5k4/4
-	slNsiJHj/ThAuDuMKp9GaJqc+7B9YEtyZ1ZWESCySTQ3omu0UgNmP2b+eMS0A5/g1K5W
-	n8kPl/Go2/KmjGXmJvXmXjSKkyn9rEtEH6XSqBlWIPWgB4UztK1tBKmZrJ2Xzzfqm9Tb
-	vUVrklCsggb2476j6EO5h3m/7zQidrvFuS05Rs+1PP7/0GHi2XThATULj7xl4SeWJguk
-	18fJFnKgq69DgnAxKca76H5Tzz46cQmLw84SbU2+d5VxUfOPoArEhN4zjEdcVn6Pbo1b
-	g72A==
-X-Gm-Message-State: AHPjjUhOV9BGKRVjLG5DiTgyJFBoLMdfvFQR/wgG9HScoIfQzsbAHLmf
-	3XrslzgJH0t07EHfo4M=
-X-Google-Smtp-Source: AOwi7QA5KuF56U8fUjtlP/vFJgm+A9rnzTNrmabb0EJF+zhoEPb1NP+nbFLwKhGQ7OwwJ7gItGq5GQ==
-X-Received: by 10.55.15.65 with SMTP id z62mr14696941qkg.2.1505602566454;
-	Sat, 16 Sep 2017 15:56:06 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	u17sm2825204qtc.15.2017.09.16.15.56.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 16 Sep 2017 15:56:06 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 16 Sep 2017 18:55:58 -0400
-Message-Id: <1505602558-20989-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cython: update to version 0.26.1
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=9cXRcy2/DPXOQiF3IzIY1J1yn0uD5E2vjp0AnbXAuyc=;
+	b=DtG6aJJlT56LfW4Nmz422TzXthVTViQW0IgeVFfLiNNvHzYcQRCdVCMJcHmB+cscKm
+	/ZvkZjZ9I0LJ5hG/1jrTMxTQWwoD7K3X5PWLREwL66PJ9OaGLrvgh1C14tOifIgpKDw1
+	Zv1GFPvlox6nsL39mDNv3181Lf/3uqk84z4YY3yECoDTFkei+QzuDVf2dA7NQsjqzLwF
+	xXeVrTam/MCbUkELvN1yQhCji2sSZQfq//iwYx4j+6gis0NcIOl48kzFpXaykxwOOkdM
+	LD2quoJua1Kh+8cAu+SBlo6i9w+cgLA7Gv8/4910U0SWvXO29kkO/Gd+b+Rh02akMpmk
+	+jYA==
+X-Gm-Message-State: AHPjjUgX70dLUIr/PWWII/sfvUky4OBayWFjxwnQeo2gBY1BQC9Cru1C
+	zdst5Za5gEKF0FCU5YvYY2jpevbP857RkP8wFU0=
+X-Google-Smtp-Source: ADKCNb6EIduH4RWbsqLg18erFYF3OSZiTJ40idkhSTnLo6ZSfY/jl0FOz3LUhOGIzPmEKZlSWpQ0zFrZ6J6f363nWdM=
+X-Received: by 10.98.202.138 with SMTP id y10mr28475816pfk.151.1505617354763; 
+	Sat, 16 Sep 2017 20:02:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.149.73 with HTTP; Sat, 16 Sep 2017 20:02:04 -0700 (PDT)
+In-Reply-To: <f91877ff-3324-a484-3164-7f6441cabe25@landley.net>
+References: <f91877ff-3324-a484-3164-7f6441cabe25@landley.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 16 Sep 2017 20:02:04 -0700
+Message-ID: <CAMKF1sqppL68hDoGdeLmRpEG-m0cyTyTOo5Mw9rB+6so25b88Q@mail.gmail.com>
+To: Rob Landley <rob@landley.net>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: Openembedded toybox build hiccup in config2help.c?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,41 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 16 Sep 2017 22:56:05 -0000
+X-List-Received-Date: Sun, 17 Sep 2017 03:02:33 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
- .../python/{python-cython_0.26.bb => python-cython_0.26.1.bb}         | 0
- .../python/{python3-cython_0.26.bb => python3-cython_0.26.1.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.26.bb => python-cython_0.26.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.26.bb => python3-cython_0.26.1.bb} (100%)
+On Sat, Sep 16, 2017 at 7:52 PM, Rob Landley <rob@landley.net> wrote:
+> A couple days ago you brought up a toybox build issue on IRC, and
+> pointed me at antergos-live-iso as a quick way to get an arch linux
+> build environment to try to reproduce the issue.
+>
+> I downloded that and booted it under qemu with:
+>
+>   qemu-system-x86_64 -m 2048 -cdrom antergos-live-iso
+>
+> When the desktop came up I told it not to install and pulled up a shell
+> with a word search for "shell", then did:
+>
+>   git clone https://github.com/landley/toybox
+>   cd toybox
+>   make defconfig
+>   make
+>   ./toybox ls --help
+>   ./toybox ls -l
+>
+> But the result worked fine for me.
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 1f5ef0f..900e88a 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
- BBCLASSEXTEND = "native"
- 
--SRC_URI[md5sum] = "2fa7ea73eb9944fdad3989adbfd22088"
--SRC_URI[sha256sum] = "4c24e2c22ddaed624d35229dc5db25049e9e225c6f64f3364326836cad8f2c66"
-+SRC_URI[md5sum] = "8853dcb78749a786ad5ccdc007a8932f"
-+SRC_URI[sha256sum] = "c2e63c4794161135adafa8aa4a855d6068073f421c83ffacc39369497a189dd5"
- 
- inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.26.bb b/meta-python/recipes-devtools/python/python-cython_0.26.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.26.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.26.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.26.bb b/meta-python/recipes-devtools/python/python3-cython_0.26.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.26.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.26.1.bb
--- 
-2.7.4
+Hmm, it use to work fine for archlinux too. It started to fail few weeks ago.
+So you might have to apply all the updates to distro
 
+sudo pacman -Syyuu
+
+will do it.
+
+>
+> How do I reproduce your build issue? (You said you were having
+> openembedded build it against musl-libc...?)
+>
+> Rob
 
