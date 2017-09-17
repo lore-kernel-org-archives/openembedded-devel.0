@@ -1,48 +1,50 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 18A81719A8
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 4FAD0782A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Sep 2017 20:21:35 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id b9so4031143wra.0
+	Sun, 17 Sep 2017 20:21:38 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id e64so7066929wmi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Sep 2017 13:21:37 -0700 (PDT)
+	Sun, 17 Sep 2017 13:21:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=VX8tFAyc4cLOl1KfOX5mzkWea3GXHMZ3Av6xxAOpLXY=;
-	b=YxV09bN87fZvQOeU80WJHB4n/nIOQinV0OV6fXsmc2A0ubGI73fO0MsrzqI9I8PhWn
-	pzDFOHv4F25/1ai05bIHJ+CG/AfU+ZueR9sAb/fZ2TC8KTlJo7fh+vqFdzmoXDhYK6BZ
-	2Yf8v0tMNVh11P/L5bhT7eJEEpeQemB2jeNhh2cNKvsiUTwgW2QNNs8tHo9Orkd+zbNQ
-	w2zVUhLKqz+ys/Dg2BVJ3V1wRzsTMVMFSQfL6QbxDzIVnpKDJiSkMW3v9KkkGwN6tETR
-	a4fgkA2SlsW47dSaMa3WNSgzZ2WXCKUs9EuwJ0PSl0PL8LBCpey1K1j9gcwZY1gHJk13
-	TeIA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=H7/iEf6mW0+n07vmH0mlgrZIKMlEr2MtjpVZYEICFzo=;
+	b=LGF4igxc346IADuoLmntdagjT44xYXcYaOuiGo1ZqJ6cBt4rSu8if42zI3Zc8TTusU
+	dTKvCKD8gbxIAOaDYv7iy+Ipg/n5BH0xsrfwlzoxhLqajP6riWGGUgxQTUnwfwlmE222
+	pO6Ppoxc6O+nNGlDPn5bi//xwQiYJwjR935Mj9XnyDr54IU3iZjsW/D51p0o+85pznr9
+	gSK8Ks61EgnWQj+7yZTPoEJ//dgXkGnQkVHV9yEdHHsD57/xL7c67dwwL9i1MSUx6HMY
+	N34dh0oBdtdggcAsIY3eai0QWtIKopWxHnFkpw8XRoEZ0ntSfXibKZ3xtIl9/dwiZCpo
+	ML1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VX8tFAyc4cLOl1KfOX5mzkWea3GXHMZ3Av6xxAOpLXY=;
-	b=O37kUglkf1M56O5JQ0ZRufs3UOgxSFY9Kt63x6EtSYbq2NhRAx26SAlrBYSe3lV3ms
-	ciFvKvZEW6lF7I/kwHmuuqfW4zc5qiXQgahSUwhrYoXPbq1EyCIYoio2oRKWXh2E2klT
-	smmpwdP0H67/3GciXdJWnK5OsgKrA6RNtodhFXLDW0SeMwvB+3/TT3BIopvkzQeiBEOP
-	UAfdLNJBhRWgSMjHKL9n70ZTeifbNysPbhvnM/LBBQM1eW3avrd9E6T4ju/7d96UilbQ
-	C+qqlaP5xGJIDgmSiFa6FBzu1pNKaNBcRAsmnPVKjpmEo/l8nzhq6WYJau9tfyurLC50
-	6wKw==
-X-Gm-Message-State: AHPjjUhSQSCz03sTBsxeqRND4UTZ5L8blU49kpM6tiy4icqYPAdWmhVu
-	Lg5BRMPE1mSfscpu
-X-Google-Smtp-Source: ADKCNb6kQk7Ts5sH9YX0cKAyP2KUsZXsLOMPQ+aMHFuT1yK7JpD6vwiB9nThZvYf4af7MDUxpM343g==
-X-Received: by 10.223.184.251 with SMTP id c56mr23180498wrg.145.1505679696692; 
-	Sun, 17 Sep 2017 13:21:36 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=H7/iEf6mW0+n07vmH0mlgrZIKMlEr2MtjpVZYEICFzo=;
+	b=s97XxFRx2CiIKvCcKTGkQDS02YzAcjo6J9KYONckWp2Q/5kFCUc4xZzAWkvU4i2hFf
+	hdnMxDFY0J3Y10iwJOdvAHPcQhgPQnfdPMoEpdbu/xmHhnbAxJyD9i/Yt81MyI8snnYS
+	K3MM7tcn+TaISpYOleVn7GTo051EYmm4NfCr395b6fhuzT942l5WTalxOSUSv7BdYGql
+	4059vUmdeQQhzA0gaPj+0xV1JRYqmLpaoBBirDt957PHBae6vvHARf8ieb7nTQQUz6Lj
+	Wl4Fz0SOfiPMJ0ewSUzakE6ECBUFSCBVnndJ196m3vjEw1A2aBqh9WCQgYABf3eu+gM5
+	8rNw==
+X-Gm-Message-State: AHPjjUjCiRN0rdg7mPJw4UDY3eFHXwvWxbcamJOBLEpB6E6laAiQQKE0
+	xtPdREOn6ekQT7HQY+RfbZoxVg==
+X-Google-Smtp-Source: AOwi7QADDrTqnu64F8kTRSuhMgIP2wROeJI3wAUNQEwayxWncrQzJscLRbwOGuoPGdxEnhoyL/6k5w==
+X-Received: by 10.28.131.131 with SMTP id f125mr6574842wmd.137.1505679699860; 
+	Sun, 17 Sep 2017 13:21:39 -0700 (PDT)
 Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
 	(host224-10-dynamic.249-95-r.retail.telecomitalia.it.
 	[95.249.10.224]) by smtp.gmail.com with ESMTPSA id
-	q19sm5833025wrb.17.2017.09.17.13.21.35
+	q19sm5833025wrb.17.2017.09.17.13.21.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 17 Sep 2017 13:21:35 -0700 (PDT)
+	Sun, 17 Sep 2017 13:21:39 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Sep 2017 22:21:27 +0200
-Message-Id: <1505679691-3610-1-git-send-email-andrea.adami@gmail.com>
+Date: Sun, 17 Sep 2017 22:21:28 +0200
+Message-Id: <1505679691-3610-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-handheld][PATCH 1/5] linux-handheld-4.4: add support for f2fs
+In-Reply-To: <1505679691-3610-1-git-send-email-andrea.adami@gmail.com>
+References: <1505679691-3610-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-handheld][PATCH 2/5] linux-handheld(-kexecoot)_4.4: update to 4.4.72 stable patchset
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,90 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Sep 2017 20:21:36 -0000
+X-List-Received-Date: Sun, 17 Sep 2017 20:21:39 -0000
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- recipes-kernel/linux/linux-handheld-4.4/akita/defconfig  | 1 +
- recipes-kernel/linux/linux-handheld-4.4/c7x0/defconfig   | 1 +
- recipes-kernel/linux/linux-handheld-4.4/collie/defconfig | 1 +
- recipes-kernel/linux/linux-handheld-4.4/poodle/defconfig | 1 +
- recipes-kernel/linux/linux-handheld-4.4/spitz/defconfig  | 1 +
- recipes-kernel/linux/linux-handheld-4.4/tosa/defconfig   | 1 +
- 6 files changed, 6 insertions(+)
+ recipes-kernel/linux/linux-handheld_4.4.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/akita/defconfig b/recipes-kernel/linux/linux-handheld-4.4/akita/defconfig
-index e061aa3..1ade62d 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/akita/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/akita/defconfig
-@@ -353,6 +353,7 @@ CONFIG_DMADEVICES=y
- CONFIG_PXA_DMA=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/c7x0/defconfig b/recipes-kernel/linux/linux-handheld-4.4/c7x0/defconfig
-index 1eedf9c..43fd073 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/c7x0/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/c7x0/defconfig
-@@ -282,6 +282,7 @@ CONFIG_DMADEVICES=y
- CONFIG_PXA_DMA=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/collie/defconfig b/recipes-kernel/linux/linux-handheld-4.4/collie/defconfig
-index 32c79dd..cfa07d2 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/collie/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/collie/defconfig
-@@ -289,6 +289,7 @@ CONFIG_DMA_SA11X0=y
- CONFIG_M62332=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/poodle/defconfig b/recipes-kernel/linux/linux-handheld-4.4/poodle/defconfig
-index da2ef8e..5304843 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/poodle/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/poodle/defconfig
-@@ -289,6 +289,7 @@ CONFIG_PXA_DMA=y
- CONFIG_M62332=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/spitz/defconfig b/recipes-kernel/linux/linux-handheld-4.4/spitz/defconfig
-index e061aa3..1ade62d 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/spitz/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/spitz/defconfig
-@@ -353,6 +353,7 @@ CONFIG_DMADEVICES=y
- CONFIG_PXA_DMA=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
-diff --git a/recipes-kernel/linux/linux-handheld-4.4/tosa/defconfig b/recipes-kernel/linux/linux-handheld-4.4/tosa/defconfig
-index 0512ec3..04ee9d5 100644
---- a/recipes-kernel/linux/linux-handheld-4.4/tosa/defconfig
-+++ b/recipes-kernel/linux/linux-handheld-4.4/tosa/defconfig
-@@ -353,6 +353,7 @@ CONFIG_DMADEVICES=y
- CONFIG_PXA_DMA=y
- CONFIG_EXT2_FS=y
- CONFIG_EXT3_FS=y
-+CONFIG_F2FS_FS=y
- CONFIG_AUTOFS4_FS=y
- CONFIG_FUSE_FS=m
- CONFIG_CUSE=m
+diff --git a/recipes-kernel/linux/linux-handheld_4.4.bb b/recipes-kernel/linux/linux-handheld_4.4.bb
+index 68d1d66..a7c158e 100644
+--- a/recipes-kernel/linux/linux-handheld_4.4.bb
++++ b/recipes-kernel/linux/linux-handheld_4.4.bb
+@@ -6,12 +6,12 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
+ COMPATIBLE_MACHINE = "akita|c7x0|collie|h3600|hx4700|poodle|spitz|tosa"
+ 
+ SRC_URI = "${KERNELORG_MIRROR}/linux/kernel/v4.x/linux-${PV}.tar.xz;name=kernel \
+-           ${KERNELORG_MIRROR}/linux/kernel/v4.x/patch-${PV}.68.xz;apply=yes;name=stablepatch \
++           ${KERNELORG_MIRROR}/linux/kernel/v4.x/patch-${PV}.72.xz;apply=yes;name=stablepatch \
+            "
+ SRC_URI[kernel.md5sum] = "9a78fa2eb6c68ca5a40ed5af08142599"
+ SRC_URI[kernel.sha256sum] = "401d7c8fef594999a460d10c72c5a94e9c2e1022f16795ec51746b0d165418b2"
+-SRC_URI[stablepatch.md5sum] = "def995f7c91d6682256b24d0ba5933fb"
+-SRC_URI[stablepatch.sha256sum] = "ca4fdd5cb4336a07f8ba7ea08a812b47278b43db3060a2f76623bab91b454e1a"
++SRC_URI[stablepatch.md5sum] = "706589ba15cc3b1635c8bb1bc8938b14"
++SRC_URI[stablepatch.sha256sum] = "9343e9452502827dd92b9fc466861f48753e131167c92a008cc28e8b40a27e2b"
+ 
+ SRC_URI += "\
+            file://ASoC-pxa-fix-module-autoload-for-platform-drivers.patch \
 -- 
 2.7.4
 
