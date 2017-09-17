@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 29DA47826E;
-	Sun, 17 Sep 2017 09:35:23 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id 189so8784587wmh.1;
-	Sun, 17 Sep 2017 02:35:25 -0700 (PDT)
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 05E1B65CB6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Sep 2017 09:43:15 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id r136so6230563wmf.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 17 Sep 2017 02:43:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Nc8pQr8nkg/5sjD8qSMZOG0pc1/ksZHd64Y8jiCKiv4=;
-	b=qOeNhw2xnkDmlS5RBiGveHs2/BPhFPAkEaCcz11o8AAb1p2BEBUvcRNnnw/HFX0jkR
-	e9m8CEPVNELr7NWa2S5UEJc5WPInKHgqBBjzoXZDVToFC4491Naj0U0ylv+nIfHyyncU
-	MvGqDO62SIJ7yrVld/hl+clWpmqy+rkpHJzP3+a5zHGVBqLxzHMz/XUWN3VvZ/9HvCwc
-	RkfPN0oxgUUidRCosnUK18xhK6sHlYyOfMETT5FsVVANkqY8Mntu0NGmSJ4C8LmXhxSw
-	ZliKLl9DhtbjoQr+NVb2LgAMotRSjByc/CXFmUhOrnK1mnxvtUJKkAw9qLMoOTE2nHxq
-	Nw7g==
+	h=from:to:cc:subject:date:message-id;
+	bh=V3W1QOmSEf9jcTq7TjjSaTJFJZbzbHGIxcNJdb+7ZRU=;
+	b=JJuCE2IaO4hYb9Eds0bE3OUz/6NbjSCOp/9WTHimcrbQ7OCr2IscY/LPTERAkXIBVV
+	te4bH1WHHjMThGzBSylwe0Gd+LLxF4017S+cz0V+9piGf1OHo+GAvHlatCu/JB3h6ksF
+	+SN0NZwikLCV3QSHRn/3BYekM6DfSwDmvxwMlj4ptOcyFmmXFZOP+wlK5E6M7EDYbCwf
+	pZLez4WRm6h3j0aCIcHa+2mcA0ydndFEn+8Tv+jlasb2BerN+kBfHst6vETJY5YAOlO9
+	9M1D3PtAnvXUCKDrhrpUL45CkmpR99VDYERf+mPqMhlwP7vp3BgnTOQye8KdlCeNKYsE
+	QGqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Nc8pQr8nkg/5sjD8qSMZOG0pc1/ksZHd64Y8jiCKiv4=;
-	b=bmP+yuSnw0gHlglSKUgeXcOQ8ymQwtCDjsuHF6KEESglZbB2uS6f/o640Tq/mmTRuW
-	GpcRonFw7RjF692CjRCIICV/djfWDlbI9xftQs21y7D3Tr3jLjkKPSfHkK6UzcMwQRnT
-	xtrCD4Js8Pl6ik8v9OkDBvJHXJLPNGZGo/r5mkOFQzQYP3RxYekUY5sQ6mOWxd3pPFP0
-	4jVaZkmuP+lR8m9zhqAun7mmK0PCalo/OH9RIFGTX7K3U/OGEhsfhd/eVlV2G9lYLW7J
-	svFj/Y2soUAwwH4xUL6244L+iuANh0s/tx+5rj8vgjPD4+plp5UVxVLxd+w0JP+W8JR8
-	kdMA==
-X-Gm-Message-State: AHPjjUhy1I2HDsU03YoQHUnY5BtL2nJqzaVWZoQe/fG/DYmAvMEYxH/b
-	qMddanIOL7T2CoYVT9/3cEfuFy8S5PMW3PDcSKU=
-X-Google-Smtp-Source: AOwi7QBrZeo/gEUDFSldfGg7d/O7u3voO/EvNLcckJRX053BgsBC+GrUHhdvwM1T1cl1L0ljNJq9p5fJM20MtdcwhSU=
-X-Received: by 10.28.73.134 with SMTP id w128mr6151020wma.141.1505640924738;
-	Sun, 17 Sep 2017 02:35:24 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.28.147.202 with HTTP; Sun, 17 Sep 2017 02:35:24 -0700 (PDT)
-In-Reply-To: <20170831124153.DE910236C54@git.openembedded.org>
-References: <150418331295.10247.6347273124770785868@git.openembedded.org>
-	<20170831124153.DE910236C54@git.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 17 Sep 2017 11:35:24 +0200
-Message-ID: <CA+chaQcpJeMcLs7Scu7rvL8MpCA1fzN8pDqBrKNm__gwG=Jvdw@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] [meta-openembedded] 20/32: python-m2crypto: Upgrade to 0.26.0
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=V3W1QOmSEf9jcTq7TjjSaTJFJZbzbHGIxcNJdb+7ZRU=;
+	b=ckyQR/fyKDCwwiMVRIeSNRsqLx4Ph6oNyi+xBM2oNlesB94drqouvhuuaTxeweFaw1
+	YWXB4RMsKMGsv6Ab8VNAyfoCFgacRcsOXhtBnN+GcOBVv5VV1z0GI8ha3I8x4zRmCxBe
+	nLRxj2gpygVH2u9lUoq4uFc9zAPqG7HYKDyk9KdTR7oq7zULB7aX8b1Dozdo4tZx5bfJ
+	8Ztjv7kORifxSD/nQ7Vb2uwbftVboI//HRZ6PfUI/hnjCxRigOgJ6IMBgBvy7uSI37yu
+	PaI9OYwLOjhHUBHhD4Ngg0C2nT2WOJG5w1jLfu4vf+E7KCBBm1NSwfGNi7+a6Gdmdkek
+	M4Nw==
+X-Gm-Message-State: AHPjjUg09JY8wLow0npO64Ys4q4OVLjuKgf/fsfb5P4ydVTrtf+u82I0
+	BQPB2sSPnLBybY3f
+X-Google-Smtp-Source: ADKCNb6IHLVQSHr2ma0yYf5mPleVDegpPVlAfjpFTan7ipfhS40CuxDUsMHOeQkoVhHdSoNF2Kgc9Q==
+X-Received: by 10.80.144.102 with SMTP id z35mr24968769edz.302.1505641396201; 
+	Sun, 17 Sep 2017 02:43:16 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([123.125.90.58])
+	by smtp.gmail.com with ESMTPSA id q5sm2525414edh.24.2017.09.17.02.43.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 17 Sep 2017 02:43:15 -0700 (PDT)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Sep 2017 11:42:56 +0200
+Message-Id: <1505641376-16402-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-qt5] [PATCH] meta: drop a useless file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,158 +54,206 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Sep 2017 09:35:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 17 Sep 2017 09:43:16 -0000
 
-There is one more issue with this change. It fails to build on aarch64
-(e.g. raspberrypi3-64):
+From: Ming Liu <liu.ming50@gmail.com>
 
-building 'M2Crypto._m2crypto' extension
-swigging SWIG/_m2crypto.i to SWIG/_m2crypto_wrap.c
-swig -python -Ipython-m2crypto/0.26.0-r0/recipe-sysroot/usr/include
--Ipython-m2crypto/0.26.0-r0/recipe-sysroot/usr/include/python2.7
--Ipython-m2crypto/0.26.0-r0/recipe-sysroot/usr/include
--Ipython-m2crypto/0.26.0-r0/recipe-sysroot/include/x86_64-linux-gnu
--includeall -modern -builtin -outdir
-python-m2crypto/0.26.0-r0/M2Crypto-0.26.0/M2Crypto
--o SWIG/_m2crypto_wrap.c SWIG/_m2crypto.i
-python-m2crypto/0.26.0-r0/recipe-sysroot/usr/include/openssl/opensslconf.h:53:
-Error: Unable to find 'openssl/opensslconf-32.h'
-error: command 'swig' failed with exit status 1
-ERROR: python setup.py build execution failed.
+A useless file was added mistakenly by commit ec80b092:
+[ qtbase: Add OE clang specific mkspecs ]
 
-I've reverted this change and confirmed that it built ok with
-python-m2crypto_0.25.1.bb
+Drop it.
 
-On Thu, Aug 31, 2017 at 2:42 PM, <git@git.openembedded.org> wrote:
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
+ 0001-qtbase-Add-OE-clang-specific-mkspecs.patch | 178 ------------------------
+ 1 file changed, 178 deletions(-)
+ delete mode 100644 0001-qtbase-Add-OE-clang-specific-mkspecs.patch
 
-> This is an automated email from the git hooks/post-receive script.
->
-> martin_jansa pushed a commit to branch master
-> in repository meta-openembedded.
->
-> commit f50e344cffbf0e1513308f0a2c845e21b272f1b5
-> Author: Khem Raj <raj.khem@gmail.com>
-> AuthorDate: Mon Aug 28 19:46:06 2017 -0700
->
->     python-m2crypto: Upgrade to 0.26.0
->
->     Use proper LICENCE file for LIC_FILES_CHKSUM
->     Update homepage to point to gitlab
->     Fix cross-build arch
->
->     Signed-off-by: Khem Raj <raj.khem@gmail.com>
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
->  .../python-m2crypto/cross-compile-platform.patch   | 30
-> ++++++++++++++++++++++
->  ...2crypto_0.25.1.bb => python-m2crypto_0.26.0.bb} | 21 +++++++--------
->  2 files changed, 41 insertions(+), 10 deletions(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python-m2crypto/cross-compile-platform.patch
-> b/meta-python/recipes-devtools/python/python-m2crypto/cross-
-> compile-platform.patch
-> new file mode 100644
-> index 0000000..c6654e5
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-m2crypto/cross-
-> compile-platform.patch
-> @@ -0,0 +1,30 @@
-> +Do not compute platform, this does not work in cross compile environment
-> +since it pokes at the system for getting architecture values
-> +
-> +Upstream-Status: Inappropriate
-> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> +
-> +Index: M2Crypto-0.26.0/setup.py
-> +===================================================================
-> +--- M2Crypto-0.26.0.orig/setup.py
-> ++++ M2Crypto-0.26.0/setup.py
-> +@@ -141,19 +141,6 @@ class _M2CryptoBuildExt(build_ext.build_
-> +                 self.include_dirs.append(
-> +                     os.path.join(self.openssl, 'include', 'openssl'))
-> +
-> +-            # For RedHat-based distros, the '-D__{arch}__' option for
-> +-            # Swig needs to be normalized, particularly on i386.
-> +-            mach = platform.machine().lower()
-> +-            if mach in ('i386', 'i486', 'i586', 'i686'):
-> +-                arch = '__i386__'
-> +-            elif mach in ('ppc64', 'powerpc64'):
-> +-                arch = '__powerpc64__'
-> +-            elif mach in ('ppc', 'powerpc'):
-> +-                arch = '__powerpc__'
-> +-            else:
-> +-                arch = '__%s__' % mach
-> +-            self.swig_opts.append('-D%s' % arch)
-> +-
-> +         self.swig_opts.extend(['-I%s' % i for i in self.include_dirs])
-> +         self.swig_opts.append('-includeall')
-> +         self.swig_opts.append('-modern')
-> diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> similarity index 64%
-> rename from meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> rename to meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> index 72523bd..4b4fbbb 100644
-> --- a/meta-python/recipes-devtools/python/python-m2crypto_0.25.1.bb
-> +++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-> @@ -1,13 +1,14 @@
->  SUMMARY = "A Python crypto and SSL toolkit"
-> -HOMEPAGE = "http://chandlerproject.org/bin/view/Projects/MeTooCrypto"
-> +HOMEPAGE = "https://gitlab.com/m2crypto/m2crypto"
->
->  LICENSE = "BSD"
-> -LIC_FILES_CHKSUM = "file://PKG-INFO;md5=95295693f047bb8f76928251a6154a60"
-> +LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
->
-> -SRC_URI[md5sum] = "040234289fbef5bed4029f0f7d1dae35"
-> -SRC_URI[sha256sum] = "ac303a1881307a51c85ee8b1d8784
-> 4d9866ee823b4fdbc52f7e79187c2d9acef"
-> -
-> -SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> "
-> +SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch
-> \
-> +            file://cross-compile-platform.patch \
-> +           "
-> +SRC_URI[md5sum] = "9f02f0b88fbe225cc6ea8680945cafa0"
-> +SRC_URI[sha256sum] = "05d94fd9b2dae2fb8e072819a795f
-> 0e05d3611b09ea185f68e1630530ec09ae8"
->
->  PYPI_PACKAGE = "M2Crypto"
->  inherit pypi setuptools siteinfo
-> @@ -18,16 +19,16 @@ RDEPENDS_${PN} += "python-typing"
->  DISTUTILS_BUILD_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}
-> -I${STAGING_INCDIR}"
->  DISTUTILS_INSTALL_ARGS += "build_ext --openssl=${STAGING_DIR_HOST}"
->
-> -inherit setuptools
-> -
-> -SWIG_FEATURES_x86-64 = "-D__x86_64__"
-> -SWIG_FEATURES ?= ""
-> +SWIG_FEATURES_x86 = "-D__i386__"
-> +SWIG_FEATURES ?= "-D__${HOST_ARCH}__"
->  export SWIG_FEATURES
->
->  # Get around a problem with swig, but only if the
->  # multilib header file exists.
->  #
->  do_compile_prepend() {
-> +    ${CPP} -dM - < /dev/null | grep -v __STDC__ | grep -v
-> __REGISTER_PREFIX__ | grep -v __GNUC__ \
-> +       | sed 's/^\(#define \([^ ]*\) .*\)$/#undef \2\n\1/' >
-> SWIG/gcc_macros.h
->      if [ "${SITEINFO_BITS}" = "64" ];then
->          bit="64"
->      else
->
-> --
-> To stop receiving notification emails like this one, please contact
-> the administrator of this repository.
-> --
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->
+diff --git a/0001-qtbase-Add-OE-clang-specific-mkspecs.patch b/0001-qtbase-Add-OE-clang-specific-mkspecs.patch
+deleted file mode 100644
+index 99c5331..0000000
+--- a/0001-qtbase-Add-OE-clang-specific-mkspecs.patch
++++ /dev/null
+@@ -1,178 +0,0 @@
+-From 75aeb71530c456b9800bcc83c104e3906e47e9e4 Mon Sep 17 00:00:00 2001
+-From: Khem Raj <raj.khem@gmail.com>
+-Date: Sun, 3 Sep 2017 09:29:02 -0700
+-Subject: [PATCH] qtbase: Add OE clang specific mkspecs
+-
+-We can not piggy back clang anymore on existing
+-OE mkspecs since starting 5.9 the configure is
+-asking compiler for include paths and it needs to
+-know if platform is clang-linux or g++-linux
+-
+-Fixes:
+-ERROR: failed to parse default search paths from compiler output
+-
+-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+----
+- classes/qmake5_base.bbclass                        |  7 ++-
+- recipes-qt/qt5/qtbase-native_git.bb                |  6 +-
+- ...-Add-OE-specific-specs-for-clang-compiler.patch | 72 ++++++++++++++++++++++
+- recipes-qt/qt5/qtbase_git.bb                       |  6 +-
+- 4 files changed, 87 insertions(+), 4 deletions(-)
+- create mode 100644 recipes-qt/qt5/qtbase/0010-Add-OE-specific-specs-for-clang-compiler.patch
+-
+-diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+-index a556f4f..8e1fe20 100644
+---- a/classes/qmake5_base.bbclass
+-+++ b/classes/qmake5_base.bbclass
+-@@ -1,6 +1,9 @@
+- # hardcode linux, because that's what 0001-Add-linux-oe-g-platform.patch adds
+--OE_QMAKE_PLATFORM_NATIVE = "linux-oe-g++"
+--OE_QMAKE_PLATFORM = "linux-oe-g++"
+-+XPLATFORM_toolchain-clang = "linux-oe-clang"
+-+XPLATFORM ?= "linux-oe-g++"
+-+
+-+OE_QMAKE_PLATFORM_NATIVE = "${XPLATFORM}"
+-+OE_QMAKE_PLATFORM = "${XPLATFORM}"
+- 
+- # Add -d to show debug output from every qmake call, but it prints *a lot*, better to add it only to debugged recipe
+- OE_QMAKE_DEBUG_OUTPUT ?= ""
+-diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
+-index 54a0b78..72b977d 100644
+---- a/recipes-qt/qt5/qtbase-native_git.bb
+-+++ b/recipes-qt/qt5/qtbase-native_git.bb
+-@@ -38,10 +38,14 @@ SRC_URI += "\
+- # 5.9.meta-qt5-native.2
+- SRC_URI += " \
+-     file://0009-Always-build-uic.patch \
+-+    file://0010-Add-OE-specific-specs-for-clang-compiler.patch \
+- "
+- 
+- CLEANBROKEN = "1"
+- 
+-+XPLATFORM_toolchain-clang = "linux-oe-clang"
+-+XPLATFORM ?= "linux-oe-g++"
+-+
+- PACKAGECONFIG_CONFARGS = " \
+-     -sysroot ${STAGING_DIR_NATIVE} \
+-     -no-gcc-sysroot \
+-@@ -79,7 +83,7 @@ PACKAGECONFIG_CONFARGS = " \
+-     -nomake examples \
+-     -nomake tests \
+-     -no-rpath \
+--    -platform linux-oe-g++ \
+-+    -platform ${XPLATFORM} \
+- "
+- 
+- # for qtbase configuration we need default settings
+-diff --git a/recipes-qt/qt5/qtbase/0010-Add-OE-specific-specs-for-clang-compiler.patch b/recipes-qt/qt5/qtbase/0010-Add-OE-specific-specs-for-clang-compiler.patch
+-new file mode 100644
+-index 0000000..b019f67
+---- /dev/null
+-+++ b/recipes-qt/qt5/qtbase/0010-Add-OE-specific-specs-for-clang-compiler.patch
+-@@ -0,0 +1,72 @@
+-+From 3a46fb7b47d19c5261e1590f8d70fe41443def64 Mon Sep 17 00:00:00 2001
+-+From: Khem Raj <raj.khem@gmail.com>
+-+Date: Sun, 3 Sep 2017 09:11:44 -0700
+-+Subject: [PATCH] Add OE specific specs for clang compiler
+-+
+-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+-+---
+-+ mkspecs/linux-oe-clang/qmake.conf      | 43 ++++++++++++++++++++++++++++++++++
+-+ mkspecs/linux-oe-clang/qplatformdefs.h |  1 +
+-+ 2 files changed, 44 insertions(+)
+-+ create mode 100644 mkspecs/linux-oe-clang/qmake.conf
+-+ create mode 100644 mkspecs/linux-oe-clang/qplatformdefs.h
+-+
+-+diff --git a/mkspecs/linux-oe-clang/qmake.conf b/mkspecs/linux-oe-clang/qmake.conf
+-+new file mode 100644
+-+index 0000000000..ffc9f051db
+-+--- /dev/null
+-++++ b/mkspecs/linux-oe-clang/qmake.conf
+-+@@ -0,0 +1,43 @@
+-++#
+-++# qmake configuration for linux-g++ with modifications for building with OpenEmbedded
+-++#
+-++
+-++MAKEFILE_GENERATOR = UNIX
+-++CONFIG += incremental
+-++QMAKE_INCREMENTAL_STYLE = sublib
+-++
+-++include(../common/linux.conf)
+-++
+-++# QMAKE_<TOOL> (moc, uic, rcc) are gone, overwrite only ar and strip
+-++QMAKE_AR              = $$(OE_QMAKE_AR) cqs
+-++QMAKE_STRIP           = $$(OE_QMAKE_STRIP)
+-++QMAKE_WAYLAND_SCANNER = $$(OE_QMAKE_WAYLAND_SCANNER)
+-++
+-++include(../common/gcc-base-unix.conf)
+-++
+-++# *FLAGS from gcc-base.conf
+-++QMAKE_CFLAGS                += $$(OE_QMAKE_CFLAGS)
+-++QMAKE_CXXFLAGS              += $$(OE_QMAKE_CXXFLAGS)
+-++QMAKE_LFLAGS                += $$(OE_QMAKE_LDFLAGS)
+-++
+-++include(../common/clang.conf)
+-++
+-++# tc settings from g++-base.conf
+-++QMAKE_COMPILER = $$(OE_QMAKE_COMPILER) clang
+-++QMAKE_CC       = $$(OE_QMAKE_CC)
+-++QMAKE_CXX      = $$(OE_QMAKE_CXX)
+-++
+-++QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO += $$(OE_QMAKE_CFLAGS)
+-++
+-++QMAKE_LINK         = $$(OE_QMAKE_LINK)
+-++QMAKE_LINK_SHLIB   = $$(OE_QMAKE_LINK)
+-++QMAKE_LINK_C       = $$(OE_QMAKE_LINK)
+-++QMAKE_LINK_C_SHLIB = $$(OE_QMAKE_LINK)
+-++
+-++# for the SDK
+-++isEmpty(QMAKE_QT_CONFIG):QMAKE_QT_CONFIG = $$(OE_QMAKE_QT_CONFIG)
+-++
+-++include(../oe-device-extra.pri)
+-++
+-++load(device_config)
+-++load(qt_config)
+-+diff --git a/mkspecs/linux-oe-clang/qplatformdefs.h b/mkspecs/linux-oe-clang/qplatformdefs.h
+-+new file mode 100644
+-+index 0000000000..880c927b21
+-+--- /dev/null
+-++++ b/mkspecs/linux-oe-clang/qplatformdefs.h
+-+@@ -0,0 +1 @@
+-++#include "../linux-clang/qplatformdefs.h"
+-+-- 
+-+2.14.1
+-+
+-diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
+-index aaa59f3..25d99e8 100644
+---- a/recipes-qt/qt5/qtbase_git.bb
+-+++ b/recipes-qt/qt5/qtbase_git.bb
+-@@ -26,6 +26,7 @@ SRC_URI += "\
+-     file://0006-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERNAL_H.patch \
+-     file://0007-Delete-qlonglong-and-qulonglong.patch \
+-     file://0008-Replace-pthread_yield-with-sched_yield.patch \
+-+    file://0010-Add-OE-specific-specs-for-clang-compiler.patch \
+-     file://run-ptest \
+- "
+- 
+-@@ -160,6 +161,9 @@ QT_CONFIG_FLAGS += " \
+- # since we cannot set empty set filename to a not existent file
+- deltask generate_qt_config_file
+- 
+-+XPLATFORM_toolchain-clang = "linux-oe-clang"
+-+XPLATFORM ?= "linux-oe-g++"
+-+
+- do_configure() {
+-     # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory" during configuration
+-     touch ${S}/mkspecs/oe-device-extra.pri
+-@@ -188,7 +192,7 @@ do_configure() {
+-         -external-hostbindir ${OE_QMAKE_PATH_EXTERNAL_HOST_BINS} \
+-         -hostdatadir ${OE_QMAKE_PATH_HOST_DATA} \
+-         -platform ${OE_QMAKE_PLATFORM_NATIVE} \
+--        -xplatform linux-oe-g++ \
+-+        -xplatform ${XPLATFORM} \
+-         ${QT_CONFIG_FLAGS}
+- }
+- 
+--- 
+-2.14.1
+-
+-- 
+2.7.4
+
 
