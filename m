@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 0434F6011F
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 66EAE6011F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Sep 2017 20:11:07 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id t46so1074207qtj.3
+	Mon, 18 Sep 2017 20:21:58 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id o77so1053600qke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Sep 2017 13:11:09 -0700 (PDT)
+	Mon, 18 Sep 2017 13:21:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0hiSsIcWJVGG3kEyLa9/eKKxwWJ1/UY8Un2ZWv+0fkI=;
-	b=V3yMd013R9HtFUsQkyyfve0RDdBwEbzGK+Y58JQERanXs/dNO94RL/pjOoziGqsbmq
-	EYW88/2qIqqKxJCI5LpJRToAx66cxgqmR0ndw5EgA/4R1iEOfvUz+HqYtLsTyLCuFbfB
-	JBJz5H1acLbgJjeoyl1r4mcVoMeqCLtwWzNSD6IrHtfHWYaHwFU4eKZj1uZmYLYfNTps
-	DlW+ZRmhnvMbplCQe0ghXI1F98nZn5mY2jIA2kMzoZ+pKt3/xEBKxcDY76WhsN5MT9zW
-	0mCrgE8weVU/Lfoj8V4u4doGwbk337pTz8L63cpHW8+EO2sDJOuJYifj5DkkqquR0nph
-	MYWQ==
-X-Gm-Message-State: AHPjjUje1gX1sSAkIQu1Rb6ZnP8iNWgEWr9kzLu3ppFkfcx+ICfXe9DD
-	4V5rLsnacLxs6+2bMns=
-X-Google-Smtp-Source: AOwi7QBvREs75TI+CUeOiv0hb1zcsfyN5AiojPVfVVO9y82bDeav8Rp9w99PsxosRpZ78EWvNK88hg==
-X-Received: by 10.200.49.202 with SMTP id i10mr43116137qte.63.1505765468779;
-	Mon, 18 Sep 2017 13:11:08 -0700 (PDT)
+	bh=EcejGPRwyO9ozvLhJjrVjbQKLcprxSGPtlGRZDYpw+4=;
+	b=Uh7/TZOawcQNr0rvd9r8BPo1Ef4ZcePKRqeeOWizLJk/s4HfdcUWnY0ZYTizM970wj
+	6bGuSkrboSikl731myR907WwfgvXpdmybV6hCIyK2fRXImGlCodfSycZmZbxH0dWlSED
+	jld3qjiKKhWWC1SZr5ERkslV4IW7YXan6JzjKuBn2XLRantQ301ThjtZ/AEnVD4wKi+P
+	dg63rimH6IbWc1dODTWcK4xNbej9khvUE0dwheBTkw6XBbB12r8pZcYQPCOit63kf/sG
+	w6/RSwF0KddRtt2o2C52cILAX0OabqocQooQoCELPV96oqv1jBvBr5H3dA57e/PxYr+R
+	XtPg==
+X-Gm-Message-State: AHPjjUgtAtdO8nZ/wL23j5Tpz/bajVUA2zIP8qLiosTlCAZBbsN885aE
+	9krTPt+KYACpnhF9nrg=
+X-Google-Smtp-Source: AOwi7QCxdeS5Z5XJCVGr9uD8Z7d15H1ye3MhIBejgaGLkr+lLRQC6DkOQUaun0/ew5OsGBYOrDc9tQ==
+X-Received: by 10.55.159.80 with SMTP id i77mr22178587qke.76.1505766119122;
+	Mon, 18 Sep 2017 13:21:59 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	m93sm2559341qte.96.2017.09.18.13.11.07
+	h58sm5740222qta.82.2017.09.18.13.21.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Sep 2017 13:11:07 -0700 (PDT)
+	Mon, 18 Sep 2017 13:21:58 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Sep 2017 16:11:01 -0400
-Message-Id: <1505765461-8881-1-git-send-email-derek@asterius.io>
+Date: Mon, 18 Sep 2017 16:21:51 -0400
+Message-Id: <1505766111-14853-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-six: update to version 1.11.0
+Subject: [meta-python][PATCH] python-aws-iot-device-sdk-python: update to version 1.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,37 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Sep 2017 20:11:08 -0000
+X-List-Received-Date: Mon, 18 Sep 2017 20:21:58 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-six.inc                  | 6 +++---
- .../python/{python-six_1.10.0.bb => python-six_1.11.0.bb}           | 0
- 2 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-six_1.10.0.bb => python-six_1.11.0.bb} (100%)
+ .../recipes-devtools/python/python-aws-iot-device-sdk-python.inc      | 4 ++--
+ ...-sdk-python_1.1.2.bb => python-aws-iot-device-sdk-python_1.2.0.bb} | 0
+ ...sdk-python_1.1.2.bb => python3-aws-iot-device-sdk-python_1.2.0.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-aws-iot-device-sdk-python_1.1.2.bb => python-aws-iot-device-sdk-python_1.2.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-aws-iot-device-sdk-python_1.1.2.bb => python3-aws-iot-device-sdk-python_1.2.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-six.inc b/meta-python/recipes-devtools/python/python-six.inc
-index fe1a409..a5915c1 100644
---- a/meta-python/recipes-devtools/python/python-six.inc
-+++ b/meta-python/recipes-devtools/python/python-six.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "Python 2 and 3 compatibility library"
- HOMEPAGE = "http://pypi.python.org/pypi/six/"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=6f00d4a50713fa859858dd9abaa35b21"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=35cec5bf04dd0820d0a18533ea7c774a"
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+index a64c6c4..eaeb020 100644
+--- a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
++++ b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/aws/aws-iot-device-sdk-python"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=9ac49901b833e769c7d6f21e8dbd7b30"
  
--SRC_URI[md5sum] = "34eed507548117b2ab523ab14b2f8b55"
--SRC_URI[sha256sum] = "105f8d68616f8248e24bf0e9372ef04d3cc10104f1980f54d57b2ce73a5ad56a"
-+SRC_URI[md5sum] = "d12789f9baf7e9fb2524c0c64f1773f8"
-+SRC_URI[sha256sum] = "70e8a77beed4562e7f14fe23a786b54f6296e34344c23bc42f07b15018ff98e9"
+-SRC_URI[md5sum] = "6835982c7fb36b19aa474d346f29ec3d"
+-SRC_URI[sha256sum] = "ac98d39d7230e06fc9a30bdb3398c985a7c357b10898a769db022d315855102a"
++SRC_URI[md5sum] = "e6781f6c42bbc547d508d6fa6720ac8f"
++SRC_URI[sha256sum] = "6b2865d4f518794b96a834fc81b568428daa0ef92037da2e9288b4af5d8dd736"
  
- do_compile_append() {
-     ${PYTHON} setup.py -q bdist_egg --dist-dir ./
-diff --git a/meta-python/recipes-devtools/python/python-six_1.10.0.bb b/meta-python/recipes-devtools/python/python-six_1.11.0.bb
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.1.2.bb b/meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.2.0.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-six_1.10.0.bb
-rename to meta-python/recipes-devtools/python/python-six_1.11.0.bb
+rename from meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.1.2.bb
+rename to meta-python/recipes-devtools/python/python-aws-iot-device-sdk-python_1.2.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.1.2.bb b/meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.2.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.1.2.bb
+rename to meta-python/recipes-devtools/python/python3-aws-iot-device-sdk-python_1.2.0.bb
 -- 
 2.7.4
 
