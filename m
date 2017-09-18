@@ -1,51 +1,30 @@
-Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DB20B71AEB
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 913B977ACB
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Sep 2017 20:21:44 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id k20so4005243wre.1
+	Mon, 18 Sep 2017 04:45:27 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.42,410,1500912000"; d="scan'208";a="26727619"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Sep 2017 11:37:58 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id AE74147CA461
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Sep 2017 13:21:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=lEGvRR3sjfvQgLZnMtOloUEji9C/13LrGlq9dciiGdA=;
-	b=VRZOrlLbMOnr3LTO/r8BIua2pKT2Zh5MN8uf0wN5//1lPN00RnXlI9pr4vEDcrFUVf
-	EEgu1j7RCioiCtLnDNsHmdirTss0y+cgFg+T3y7NIE8mfWRdvFFUk5qpf51p2GGxRVLD
-	xkf/IejAohuBiIP19Ib4+QY7Q+Nl7RysRE8Oi5iP7kdolwiN+BS6/V9gQfvheMTIxob2
-	vlZbksLPpFYafAOLVXMkXrz3X+uUTjbzSY+CqYVuh3JKYJEmYoE8Z+8dUXeLeRbOu2DG
-	qF8/3GGAuenLqIaFV05jCoFfxQ3RU1n73H91VLAxv4Npq6xXpY52I0upsPDU4Keh21cY
-	O9aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=lEGvRR3sjfvQgLZnMtOloUEji9C/13LrGlq9dciiGdA=;
-	b=CKI97ovN7rAFWPNM1DwIkppNx40Yhr1ZR0/SCa5kWEU0XS9G0ds0EBYvIFNKpgkjhA
-	WQUP8ziMQU2sLDODsouOhF9rtmAHVPX9/68d/XhS0T4CZDUvBzROrUjzpL/5z24/02zt
-	eI8jK1Veg8y9+pt1mhJtfkbVxrsmz/KFy4Xy1adoycypOlzvrAel6eBaMgODwhsFw2Pr
-	RA7gTGt/io3eKHlqg15e40f4I9jIeky4ss5umk1sxW5/7cTP+MDwivPiGDhY+R58z5PU
-	zRUTPreNhSImnUCWNWzulK25BezUgkk7wNPRS4gmV8rtFrG+3CDSsD4uZaA8ZuJaWU3F
-	oPxA==
-X-Gm-Message-State: AHPjjUhDFxw9sQyQ3bjTfQ7Vns0YF4KULr5pZpd6HxgixeBKqWTIrOd3
-	6BwH+hXTHn30+B+k
-X-Google-Smtp-Source: ADKCNb6V6v3dLj3o4TW4TpEMqtMlyWLXikoOpSvDhFmG6FrJvzWhMss3eibIpmAZyviGzKF40DvUuA==
-X-Received: by 10.223.154.120 with SMTP id z111mr25903057wrb.260.1505679705975;
-	Sun, 17 Sep 2017 13:21:45 -0700 (PDT)
-Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
-	(host224-10-dynamic.249-95-r.retail.telecomitalia.it.
-	[95.249.10.224]) by smtp.gmail.com with ESMTPSA id
-	q19sm5833025wrb.17.2017.09.17.13.21.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 17 Sep 2017 13:21:45 -0700 (PDT)
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Sep 2017 22:21:31 +0200
-Message-Id: <1505679691-3610-5-git-send-email-andrea.adami@gmail.com>
+	Mon, 18 Sep 2017 11:37:56 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Mon, 18 Sep 2017 11:37:58 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 18 Sep 2017 11:38:00 +0800
+Message-ID: <1505705885-40272-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1505679691-3610-1-git-send-email-andrea.adami@gmail.com>
-References: <1505679691-3610-1-git-send-email-andrea.adami@gmail.com>
-Subject: [meta-handheld][PATCH 5/5] zaurus.inc: use gcc6 until gcc7 produces bootable kernels
+MIME-Version: 1.0
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: AE74147CA461.A789B
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] eventlog: Add HOMEPAGE info into recipe file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,32 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Sep 2017 20:21:45 -0000
+X-List-Received-Date: Mon, 18 Sep 2017 04:45:29 -0000
+Content-Type: text/plain
 
-As signaled upstream the kernels built with gcc7 fail to decompress.
-
-See https://www.spinics.net/lists/arm-kernel/msg594654.html
-ARM: pxa/corgi: armv5te kernel 4.12 fails to decompress compiled with gcc7
-
-Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- conf/machine/include/zaurus.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ meta-oe/recipes-support/eventlog/eventlog_0.2.13.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/conf/machine/include/zaurus.inc b/conf/machine/include/zaurus.inc
-index c6e9e98..c6244b9 100644
---- a/conf/machine/include/zaurus.inc
-+++ b/conf/machine/include/zaurus.inc
-@@ -33,6 +33,8 @@ XZ_COMPRESSION_LEVEL = "-2e"
- # machine tuning
- ################
- 
-+GCCVERSION = "6.%"
-+
- ARM_INSTRUCTION_SET = "thumb"
- ARM_INSTRUCTION_SET_collie = "arm"
- 
+diff --git a/meta-oe/recipes-support/eventlog/eventlog_0.2.13.bb b/meta-oe/recipes-support/eventlog/eventlog_0.2.13.bb
+index 349507d..59b01b6 100644
+--- a/meta-oe/recipes-support/eventlog/eventlog_0.2.13.bb
++++ b/meta-oe/recipes-support/eventlog/eventlog_0.2.13.bb
+@@ -1,4 +1,5 @@
+ SUMMARY = "Replacement syslog API"
++HOMEPAGE = "http://www.balabit.com/network-security/syslog-ng/opensource-logging-system"
+ DESCRIPTION = "The EventLog library aims to be a replacement of the \
+               simple syslog() API provided on UNIX systems. The \
+               major difference between EventLog and syslog is that \
 -- 
 2.7.4
+
+
 
 
