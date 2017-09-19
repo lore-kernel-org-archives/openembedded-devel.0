@@ -1,47 +1,46 @@
-Return-Path: <haris.okanovic@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 79A0471AD1
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 3606E77DB1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 07:39:22 +0000 (UTC)
-Received: from pps.filterd (m0098781.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
-	v8J7aeDw030071; Tue, 19 Sep 2017 02:39:22 -0500
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2d2xpgg747-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT); Tue, 19 Sep 2017 02:39:22 -0500
-Received: from us-aus-exch1.ni.corp.natinst.com
-	(us-aus-exch1.ni.corp.natinst.com [130.164.68.11])
-	by us-aus-skprod3.natinst.com (8.16.0.21/8.16.0.21) with ESMTPS id
-	v8J7dL9c027154
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT);
-	Tue, 19 Sep 2017 02:39:21 -0500
-Received: from us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) by
-	us-aus-exch1.ni.corp.natinst.com (130.164.68.11) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Tue, 19 Sep 2017 02:39:21 -0500
-Received: from haris-ro.emea.corp.natinst.com (130.164.49.7) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Tue, 19 Sep 2017 02:39:20 -0500
-From: Haris Okanovic <haris.okanovic@ni.com>
-To: <openembedded-devel@lists.openembedded.org>, <flihp@twobit.us>
-Date: Tue, 19 Sep 2017 10:39:32 +0300
-Message-ID: <1505806772-29423-1-git-send-email-haris.okanovic@ni.com>
-X-Mailer: git-send-email 2.1.4
+	Tue, 19 Sep 2017 08:10:14 +0000 (UTC)
+Received: by mail-io0-f171.google.com with SMTP id d16so8060731ioj.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 01:10:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=gKOgf4f+dVaGfkwQXFkhcZkbTrlFb2P2lWpXr+7r2lM=;
+	b=sTtT1wrr7CSoc23sC9Nz22ZsS+pvskB6uj6V4ES7XYEgNIlawbQMzYkZeqgqq0050C
+	/8lKH7OSHjTw7ufpq8W+kRntvUaw+wvVxNxw/DdGrsY++qEU68RVA1idMVZiBVMTcYJQ
+	Ud5a4YXMPX6UDQf9KQpZD57mukVk61gG/1jJzj1K76YQTNksuVs+LYrl5sbK94yyKEcl
+	NsHX5z5iulWKFM7uL0UCAPLxWnpd44bFpBiskEX3r7OQEJjYadMCIhUcXFAFcKXqVQoR
+	0IrIm+DH+mMIyla8W2rC86RB4lsJ7HNXFw+/wEt7A1BIRLd4VSJD7gabZaWCdYit9O27
+	L9qA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=gKOgf4f+dVaGfkwQXFkhcZkbTrlFb2P2lWpXr+7r2lM=;
+	b=Dqr60OmYQnnGfXh3Ukxu35E6Q1GRYG6iLQG92sRi3QKX8Pp2+pGV41O2YCPw+8dp8o
+	bEUc1/m0uCcb+zuCtRmXbhW5EUcUf87klg93BbIaiBwNBN/9feeNWLuXOwadwI8JZuvu
+	yoy7P5vlQ+h3hCjvU/3vrTULly/2DW+Z7/vdEjr9YmVDf+e44dGRdXNW7V7siTOEX87m
+	JuHCwj3Jtc22C11+Rq6HmFqVaA8Lk9xsbZmk6IyeOr0Z68qgbyfZFSvitaOm95glvtdS
+	63krSv6lSb+9y/f4d+ZiiDo75c9jmVytr0wRjVbPQZbKwgac/0Sx9emSn17gl0YXxlr2
+	BhDg==
+X-Gm-Message-State: AHPjjUjrq7I+9THQAwxgttyB9TtYwuBYZ7NTKPQFxfak1BMIZEgBC1Wf
+	TAZOljoP29CFyWrve4NTZmytc1wB+AR1waVE56i2zORm
+X-Google-Smtp-Source: AOwi7QBjHoQ6pzqwY4Iwuwn7fC8Z/Xw3OCw1//o7TV3rs9RWc+FNj9JRzL07xW8CTFr3Ag4i9Dr/g+/0ijqHxdKamw0=
+X-Received: by 10.107.32.70 with SMTP id g67mr807474iog.77.1505808615296; Tue,
+	19 Sep 2017 01:10:15 -0700 (PDT)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-09-19_04:, , signatures=0
-X-Proofpoint-Spam-Details: rule=outbound_policy_notspam policy=outbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=2 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1011 lowpriorityscore=0 impostorscore=0
-	adultscore=0
-	classifier=spam adjust=30 reason=mlx scancount=1
-	engine=8.0.1-1707230000 definitions=main-1709190109
-Cc: haris.okanovic@ni.com
-Subject: [PATCH] tpm2-tools_git: Fix S (source dir) to match `destsuffix` of SRC_URI
+Received: by 10.107.19.68 with HTTP; Tue, 19 Sep 2017 01:09:54 -0700 (PDT)
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 19 Sep 2017 09:09:54 +0100
+Message-ID: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Use of github /archive/ tarballs in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,30 +53,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 07:39:23 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 19 Sep 2017 08:10:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-SRC_URI defines `destsuffix=tpm2.0-tools` which doesn't match
-`S = "${WORKDIR}/${BPN}-${PV}"` defined by tpm2-tools.inc.
+Hi,
 
-Signed-off-by: Haris Okanovic <haris.okanovic@ni.com>
----
- recipes-tpm/tpm2-tools/tpm2-tools_git.bb | 1 +
- 1 file changed, 1 insertion(+)
+Some people have insisted for a long time that the dynamically generated
+/archive/ tarballs at github cannot be trusted for long-term stability, as
+they are generated using git-archive.  Others said that git-archive takes
+measures to ensure the files are identical, and basic testing does indeed
+show that.  Personally I was on the fence: a dynamically generated tarball
+that is cached *could* change, but the git-archive generates the same file
+list and the tools are stable.
 
-diff --git a/recipes-tpm/tpm2-tools/tpm2-tools_git.bb b/recipes-tpm/tpm2-tools/tpm2-tools_git.bb
-index be68a5f..dde9c84 100644
---- a/recipes-tpm/tpm2-tools/tpm2-tools_git.bb
-+++ b/recipes-tpm/tpm2-tools/tpm2-tools_git.bb
-@@ -7,6 +7,7 @@ SRCREV = "${AUTOREV}"
- PVBASE := "${PV}"
- PV = "${PVBASE}.${SRCPV}"
- 
-+S = "${WORKDIR}/tpm2.0-tools"
- SRC_URI = " \
-     git://github.com/01org/tpm2.0-tools.git;protocol=git;branch=master;name=tpm2.0-tools;destsuffix=tpm2.0-tools \
- "
--- 
-2.1.4
+Then the tarball for one of Erlang's repositories changed, and was noticed
+by the checksum in the recipe (thanks Gunnar Andersson for reporting
+this).  The extracted contents are identical, but the tarball itself has
+changed.  I'm presuming this is due to the old tarball expiring in their
+cache, and a newly generated tarball using a later version of tar.
 
+So we now have documented evidence that this can and does happen, and it's
+quite frustrating when this happens.  So, I suggest that use of github.com
+/archive/ URLs be considered a bad practise for the primary SRC_URI tarball.
+
+I'm working my way through the recipes in oe-core that use /archive/ and
+replacing them with either maintainer-generated tarballs or git clones, but
+there are a number of recipes in meta-oe which could do with fixing:
+
+$ git grep -l -E github\\.com/.*/archive/
+meta-initramfs/recipes-devtools/grubby/grubby_8.40.bb
+meta-multimedia/recipes-support/gst-instruments/gst-instruments_0.2.3.bb
+meta-multimedia/recipes-support/libsrtp/libsrtp_1.5.2.bb
+meta-networking/recipes-support/geoip/geoip-perl_1.50.bb
+meta-oe/recipes-connectivity/libuv/libuv_1.11.0.bb
+meta-oe/recipes-connectivity/libwebsockets/libwebsockets_2.1.0.bb
+meta-oe/recipes-devtools/protobuf/protobuf-c_1.2.1.bb
+meta-oe/recipes-devtools/python/python-cpuset_1.5.7.bb
+meta-oe/recipes-extended/boinc/boinc-client_7.6.33.bb
+meta-oe/recipes-graphics/libvncserver/libvncserver_0.9.11.bb
+meta-oe/recipes-graphics/openjpeg/openjpeg_2.1.1.bb
+meta-oe/recipes-kernel/crash/crash_7.1.9.bb
+meta-oe/recipes-multimedia/mplayer/mpv_0.24.0.bb
+meta-oe/recipes-support/hunspell/hunspell_1.6.1.bb
+meta-oe/recipes-support/lm_sensors/lmsensors_3.4.0.bb
+meta-oe/recipes-test/gtest/gtest_1.8.0.bb
+meta-perl/recipes-perl/libmodule/libmodule-pluggable-perl_5.2.bb
+meta-perl/recipes-perl/libmodule/libmodule-runtime-perl_0.015.bb
+
+Ross
 
