@@ -1,39 +1,38 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 299A6781D0
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C386780B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 14:33:24 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	19 Sep 2017 07:33:25 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.42,418,1500966000"; d="scan'208";a="901851522"
-Received: from rkubodac-desk.ger.corp.intel.com ([10.252.28.77])
-	by FMSMGA003.fm.intel.com with ESMTP; 19 Sep 2017 07:33:22 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Trevor Woerner <twoerner@gmail.com>
-In-Reply-To: <20170816160609.GA29490@linux-uys3> (Trevor Woerner's message of
-	"Wed, 16 Aug 2017 12:06:09 -0400")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <CALbNGRQWNNvf5kLxcWz7EvUK6CO5VMX43vMrPx28yOzCq5NV8g@mail.gmail.com>
-	<CAHiDW_GuabOEPc6rgh-vV+f502A5dYi8wFVYhRzqcZBGYHzz9g@mail.gmail.com>
-	<CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
-	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
-	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
-	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
-	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
-	<8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com>
-	<87r2wcajh6.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CALbNGRS1ywFbSNAoY976cPgJ4STQLqUEqzwq34XGaMH_CYhAaw@mail.gmail.com>
-	<20170816160609.GA29490@linux-uys3>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Tue, 19 Sep 2017 16:33:21 +0200
-Message-ID: <87tvzylpvy.fsf@rkubodac-desk.ger.corp.intel.com>
-MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: chromium detected as stripped
+	Tue, 19 Sep 2017 14:36:18 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id u48so2438773qtc.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 07:36:20 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=wFFO/jmxJK+cmS4Hm8hQxB0rc+CKFo9ZBpd4hEL/1tY=;
+	b=XF1QGSWnDzpzYH2mI2x4NASLuAQOsTWNxqUY8xoWySNXbnTjwZvrhI8NwWPYWOPurw
+	FCGtzhCThEQgAzuAsD9XiqSujTJ9UacqarsmHCBFTghFqTtFIh+JLpMlLKYpztrZUjcx
+	mKbOFE+X7nvqQop/TYxdBGsYvUQHqtXymyTZPa9AbI863qPRtlvBnbH7VQ1M5AsJ73cE
+	xAUfvrwZB5ETOwNQkQXtYRD1coEF5t+V/GpiNeY/rrJeT3GFAnRYKLhRnKv4xuHFlhv3
+	OILKxy33D+2S/qOI7aiquza83ejsom6IwH7XDjq6ovaf7AjJeF3ThtMk1nk3w0znv55C
+	osew==
+X-Gm-Message-State: AHPjjUhRf0L2OdX+Ottm8KxWHgZC2O30O9b7ngdVo5uHEEdv+NtinwNb
+	sOJYNrzbH8pM97GbYB6UKVbHfLck
+X-Google-Smtp-Source: AOwi7QDKnMDZzOIQ4rR0LPud79Bzv/7ArfX54PxjvjgaHllS6r7+zgwy4KYjsKqdctFmSDopAhLP5w==
+X-Received: by 10.237.62.129 with SMTP id n1mr2384923qtf.39.1505831779922;
+	Tue, 19 Sep 2017 07:36:19 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id w23sm7135731qtj.0.2017.09.19.07.36.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 Sep 2017 07:36:18 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Sep 2017 10:36:12 -0400
+Message-Id: <1505831772-31480-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pyasn1: update to version 0.3.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,95 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 14:33:25 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 19 Sep 2017 14:36:19 -0000
 
-Hey Trevor,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pyasn1.inc                 | 4 ++--
+ .../python/{python-pyasn1_0.3.4.bb => python-pyasn1_0.3.5.bb}         | 0
+ .../python/{python3-pyasn1_0.3.4.bb => python3-pyasn1_0.3.5.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pyasn1_0.3.4.bb => python-pyasn1_0.3.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pyasn1_0.3.4.bb => python3-pyasn1_0.3.5.bb} (100%)
 
-Trevor Woerner <twoerner@gmail.com> writes:
-> On Tue 2017-08-15 @ 11:53:42 PM, Andreas M=C3=BCller wrote:
->> On Tue, Aug 15, 2017 at 6:23 PM, Raphael Kubo da Costa
->> <raphael.kubo.da.costa@intel.com> wrote:
->> > Khem Raj <raj.khem@gmail.com> writes:
->> >
->> >> what are main architectures targetted with crosswalk ? I think scope =
-is
->> >> important, since meta-browser supports, almost all oe-core supported
->> >> architectures. including x86/arm/mips/ppc, any cross build patches are
->> >> required in anycase, but architecture patches will be additional if y=
-ou
->> >> were only considering a subset of architectures.
->
-> I was wondering the same thing myself :-) This recipe lists "armv7a" in
-> COMPATIBLE_MACHINE but the (32-bit version of) raspberrypi3, for
-> example, is armv7ve. Therefore I get:
->
-> 	ERROR: Nothing PROVIDES 'chromium'
-> 	chromium was skipped: incompatible with machine raspberrypi3 (not in COM=
-PATIBLE_MACHINE)
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1.inc b/meta-python/recipes-devtools/python/python-pyasn1.inc
+index 4166b89..4bb214f 100644
+--- a/meta-python/recipes-devtools/python/python-pyasn1.inc
++++ b/meta-python/recipes-devtools/python/python-pyasn1.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pyasn1.sourceforge.net/"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE.rst;md5=280606d9c18f200e03e0c247ac61475a"
+ 
+-SRC_URI[md5sum] = "738e645ff075c9eb95fbee0411529323"
+-SRC_URI[sha256sum] = "3946ff0ab406652240697013a89d76e388344866033864ef2b097228d1f0101a"
++SRC_URI[md5sum] = "285377a0ebc63a3fe903a08135241997"
++SRC_URI[sha256sum] = "c7a1186416bcdaf19b56f5b2506200306d7d4cf222d3d7c2d4cb600ccacdaf1b"
+ 
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-codecs \
+diff --git a/meta-python/recipes-devtools/python/python-pyasn1_0.3.4.bb b/meta-python/recipes-devtools/python/python-pyasn1_0.3.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pyasn1_0.3.4.bb
+rename to meta-python/recipes-devtools/python/python-pyasn1_0.3.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pyasn1_0.3.4.bb b/meta-python/recipes-devtools/python/python3-pyasn1_0.3.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pyasn1_0.3.4.bb
+rename to meta-python/recipes-devtools/python/python3-pyasn1_0.3.5.bb
+-- 
+2.7.4
 
-I've just pushed a change to my chromium61 branch that adds support for
-armv7ve. I've also completed a full Chromium build there with
-MACHINE=3D"raspberrypi3" (I didn't run it though).
-
-I also pushed some other GN-related fixes for ARM platforms to ensure we
-don't end up passing incompatible -mcpu and -march values to the
-compiler.
-
->> > With that said, I've tested my builds with x86, x86-64, ARMv7 (IIRC
->> > Chromium doesn't support earlier ARM processors) and aarch64.
->
-> Can you provide a list of "MACHINE =3D ..." that were used?
-
-If I still recall everything correctly, I've tested different versions
-with the following MACHINEs (with either Yocto Pyro or previous releases):
-
-* intel-corei7-64
-* qemuarm (I had to change the tune file to avoid using ARMv5).
-* qemuarm64
-* qemux86
-* qemux86-64
-* raspberrypi3
-
-> The problem I was having was in trying to force the build system to use t=
-he
-> toolchain I wanted it to use. The Igalia people solved this problem by
-> tricking the build system to think it was building for CrOS, and then
-> redefining the toolchain for CrOS to use the toolchain generated by OE. T=
-his
-> worked for x86_64 (minnowboard) but would fail for the raspberrypi3 with
-> "illegal instruction". So somewhere in the build, the specified toolchain=
- was
-> being ignored and the host's toolchain was being used instead.
-
-I think I solved this early on in my recipe. In general, in the GN world
-Chromium works with 3 different toolchains: a host one (equivalent to
-OE's build host, for tools that are supposed to run on the system
-building Chromium), a target one (for the target platform) and one for
-producing V8 snapshot files (what snapshot files are is not relevant
-here). The V8 snapshot toolchain runs on the host system, but must have
-the same "bit-width" as the target system (so a x86-64 host targeting
-ARMv6 must produce and run an i586 binary during the build).
-
-In my recipe, I've worked around the need for the V8 snapshot toolchain
-by pointing it to the target toolchain and then running the required
-binaries with qemu-wrapper. The host and target toolchains are specified
-as GN files, and they also set the right compiler/linker options etc.
-Part of the process will be simplified once M62 reaches the stable
-channel, as one of the Chromium developers (who also happens to be a
-Gentoo packager) landed a change that simplifies setting up custom
-toolchains.
-
-> I'd be happy to work on trying to integrate Raphael's excellent work into
-> meta-browser. However, it depends on nodejs, and nodejs is currently fail=
-ing
-> to build (Martin's "State of Bitbake World" just exploded in the last
-> iteration). I'm looking into that now, somewhat. node hasn't been happy s=
-ince
-> the switch to gcc7.
-
-I've got some time to work on this again. I've taken a look at the
-meta-browser recipes and checked how they differ from mine; help merging
-the recipes will certainly be appreciated :-)
 
