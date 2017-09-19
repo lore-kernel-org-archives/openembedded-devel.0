@@ -1,48 +1,39 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qt0-f182.google.com (mail-qt0-f182.google.com
-	[209.85.216.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 9FD6577ECB;
-	Tue, 19 Sep 2017 16:54:46 +0000 (UTC)
-Received: by mail-qt0-f182.google.com with SMTP id 47so230786qts.10;
-	Tue, 19 Sep 2017 09:54:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=KcGWnLEcjnM5vweGk2qshII00QGkUR8JTFmUB8GiqFM=;
-	b=JRQNEbq/a9ZCcq/J+iFRfvYRziGo0y18UIl+ff2yh3DnIBz6YAJo7lzNzrDFZXyLns
-	kubncFqms0zq+zmoSi1sLOk5oVPK4cAdoyLTWQH+JZ4FUlOEWAg+trhitoKMbOOwnUHn
-	NLm8MH8F0uiRLnQQ6hpTigJUf0PghxAnZHBQkSW1un3bDXSszYOgMJ/5k20dd7XzxBi0
-	sS7p6e0Yg36KfdRuqMMUI/B8KO0LcqcoDCdxJ5bXwqFFzrVwevBsJ1s4nY3cPcDGiYDf
-	Nxim/GlGl4FHT4XddqbwnxYKRf+YtxHz41N3NKvq+V+CTiwuBbB7rEQR4EmLDMfq0svz
-	JUGw==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A7747804A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 17:01:57 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id i14so141765qke.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 10:01:59 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=KcGWnLEcjnM5vweGk2qshII00QGkUR8JTFmUB8GiqFM=;
-	b=VMtsdrjwFS332mz0KwtbLduhWYRmXHCA3oZDLNGGIFOnHOIyTJXcQAmUJioU9kKE4P
-	8RCrRr+meGcaLcTp4SUv4AW++hrzNoKlwYvrcMmam1pZiuTEF0r++ZdFYrspEGLETZSF
-	FlWHH7Z5Mf0NFSNxswdBGBBfydicJ5PrFOU/zfq1PP9JNkqJjbJ43tRauYS0dWb9PCys
-	t40SB2tFfFkManhpmtKpmWsdRBxQHJxWBvq0CwIiKccK96GL7iHNB56Wp8TiDcWRI+SN
-	KDY1jeirFRElOotJnN5h43euyW/eZqXhJ/SxA7ZbDfdbAbsPe25DNxzsAE6qbM74xEWq
-	sqJg==
-X-Gm-Message-State: AHPjjUjQFzWbD88zDmDblQomYN0u4DVr4PB2jHiF6UFMSLDI84yemgX7
-	p/BVnZxqWA0Vs5cQdADdt0seVV/pPIpXt3TXNfQ=
-X-Google-Smtp-Source: AOwi7QBcn9Xt0iO3p7rqsI/cCaykmmgrYYalih/wO1KCzHLgJyixE84HbT6CyuWLcP0tOtK9i0NK2P7sWy+fm3TR51U=
-X-Received: by 10.200.3.4 with SMTP id q4mr2898845qtg.200.1505840087672; Tue,
-	19 Sep 2017 09:54:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.29.74 with HTTP; Tue, 19 Sep 2017 09:54:46 -0700 (PDT)
-In-Reply-To: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-References: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Tue, 19 Sep 2017 12:54:46 -0400
-Message-ID: <CAHUNapQDGe3b4Nmg6OmL0hxkMGyY9e3z=GKdkOW8VuJe9-q2Ew@mail.gmail.com>
-To: Sean Hudson <sean_hudson@mentor.com>
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: OE general meeting before OEDEM next month.
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ITdlRCTkuI7meCFj0C+51mfGfV4At+4DrKgSJ7JhgqY=;
+	b=nQj5E2t4vzfughPkaHNpBKDzVM8Icy1cOc2vAThTsVUV96IM2VCxygDeVLu/SZUD+U
+	lW/9ISscINT47ZDATc98VO9l8WEizFYaM/c904qormcxIjTPJYbXkNfht1y0jDwlllKb
+	mAUIi39ijThovbzH1hM7rqvGo/1drU+EUEcz/FeREMY/E8StBdTqT2nhDlOY2RF+sDGR
+	MrP5dHWhSkdCY1xdGvxc4WGNKgV+kwx6OSA4jEnw+jJbIEwN7ny5WN3Usy1baVBRcovs
+	6dIZrK7wt5r+LatiIlqvL9N1zj5S+ft3hohkQek5ZWyJANlGBSLqyGB3hvx7EZTaGv48
+	BeTA==
+X-Gm-Message-State: AHPjjUgTQEZT65RJ1Edk9rL2rXei0dZHyrcThpe2EV9TpbwR9XSPDdPO
+	iN1k3LdSR5L5VgqlDiGXZPBWQ0FR
+X-Google-Smtp-Source: AOwi7QCvphZcbvnMD9dgcNv4EYbCsRpx2hei0IDs5hjvEg1/mGwO5lSyovN0GjF2on9B4GoRmNwKFw==
+X-Received: by 10.55.33.75 with SMTP id h72mr2717667qkh.132.1505840518508;
+	Tue, 19 Sep 2017 10:01:58 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id
+	d22sm7142562qkj.88.2017.09.19.10.01.57
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 Sep 2017 10:01:57 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Sep 2017 13:01:50 -0400
+Message-Id: <1505840510-25930-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-perl][PATCH] adduser: update to version 3.116
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,12 +46,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 16:54:47 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 19 Sep 2017 17:01:58 -0000
 
-On Tue, Sep 19, 2017 at 11:34 AM, Sean Hudson <sean_hudson@mentor.com> wrote:
->   Meeting information, including dial-in numbers, is on the wiki. [2]
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-perl/recipes-perl/adduser/{adduser_3.115.bb => adduser_3.116.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-perl/recipes-perl/adduser/{adduser_3.115.bb => adduser_3.116.bb} (92%)
 
-In addition to the above, we could also make use of the little-used
-#oe-meeting channel on freenode (?)
+diff --git a/meta-perl/recipes-perl/adduser/adduser_3.115.bb b/meta-perl/recipes-perl/adduser/adduser_3.116.bb
+similarity index 92%
+rename from meta-perl/recipes-perl/adduser/adduser_3.115.bb
+rename to meta-perl/recipes-perl/adduser/adduser_3.116.bb
+index c211862..112a5f0 100644
+--- a/meta-perl/recipes-perl/adduser/adduser_3.115.bb
++++ b/meta-perl/recipes-perl/adduser/adduser_3.116.bb
+@@ -10,8 +10,8 @@ SRC_URI = "http://ftp.de.debian.org/debian/pool/main/a/${BPN}/${BPN}_${PV}.tar.x
+            file://adduser-add-M-option-for-useradd.patch \
+ "
+ 
+-SRC_URI[md5sum] = "6bb6d93922d281f1b56393a53f8ce5fd"
+-SRC_URI[sha256sum] = "e7288281d4d1eec2948ba3687452ca33a8224d40c98d321bc3fbaefcf6d4c0db"
++SRC_URI[md5sum] = "e042a5842b8f24312d6f5a99a1af8f2c"
++SRC_URI[sha256sum] = "72d811ad3ba17d2794b14d19acd1d6b57f9dd31d9250d51e786895dee2daeac0"
+ 
+ inherit cpan-base update-alternatives
+ 
+-- 
+2.7.4
+
 
