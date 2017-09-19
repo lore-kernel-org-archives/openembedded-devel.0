@@ -1,38 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 08E777804A
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id EADFB7804A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 17:15:41 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id l25so170921qtf.2
+	Tue, 19 Sep 2017 17:28:01 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id v142so790148wmv.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 10:15:43 -0700 (PDT)
+	Tue, 19 Sep 2017 10:28:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=aYj42WBKsTIgv0hXvUeyZXaW/RYK+fYOD8qdbyFi06U=;
+	b=JtUtbYbV1jeTZwBOBFD9k7seys+CiY+lLKjVEHkcFAYwhBufHHvo9WlzLlIpQdWLN6
+	67G3dIUDRs9MCxuSU/qy59nS2yGp4JPG2RR0UNrYPgxUskwqJ6forudsXMjvbnsn+o58
+	k2Txra5jlHN+yNvENuZ2KxJyaQtU6izGMAPB9NWiYJ98z3HVB6NskXwFdHKLR3ys5sD2
+	TWqTZrm7nseg9NoyYJPWudKW7GSKLhoPVvL8sRIHKwITTmsLBsTYqid0NyzkKmvX6I7A
+	zjkFCL6HGmO0n3RvUZA0p1YO2FFcz+daTfebox8hlBcAOy0uz7QUyIuSXIyjnYH85930
+	2P4Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LgbBiPmsjrHj+rT4KBdOHyRiyeUxHYVLFP3bHo0IbmE=;
-	b=bydszpvbiW/SB5WYvEL7rrQfmD9W0zDCGA8EwwQlgTrfHEKptxuCAIqLuwJFizRoW9
-	YgAq8AA0Go/QKIvXM3l1vF8wxuxKoxx3w1OTAzNbYhzrAbi/q6tRYPTxEnTgkuq2twpI
-	hq6Hv3+boDsENOXfI0e9CgTW+TahFu3WIpJHdcoPC+FVFQC6p2fl+XcpPPKI4iuHgxXj
-	iB3FKjxfexE9nrtpwEQXsXtNJjYMMYcjFrnvg7iX+t5+ha7kc6soVcqFmaOyffDcMgxZ
-	klNVEP12sodyFw+/ru26eFa5Nd395RIhJi2gDVvS2eY4/zUYmOaanUwhRjK0d3b4LFv2
-	995Q==
-X-Gm-Message-State: AHPjjUgrv1kUEixlsW3tUbWPOooKrcGMVD3s2wht+DI3JRpn8E64wbLc
-	Huwra8bC+T7msB0YMlz+cb8J0EP4
-X-Google-Smtp-Source: AOwi7QAfwPetph27PITN0xs2k7/FdFpNVtKmex9sDaWPhQNCKc6pIzGJVnSoLY64GyzcAA3JS+GBaA==
-X-Received: by 10.200.18.76 with SMTP id g12mr3239562qtj.201.1505841342566;
-	Tue, 19 Sep 2017 10:15:42 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id 13sm7456625qtp.74.2017.09.19.10.15.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Sep 2017 10:15:41 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 13:15:34 -0400
-Message-Id: <1505841334-2527-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-perl][PATCH] po4a: update to version 0.52
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=aYj42WBKsTIgv0hXvUeyZXaW/RYK+fYOD8qdbyFi06U=;
+	b=OvxpsWvnYx9UYpnTRbYcuTSlkrncEM3Ty9gWFbxibB5ZHUFvFZeYx9Ak8uA7fuTezW
+	FuhzydVgF8Skxqt3c0QBexKVq4/pOUjFW8LnqtGBg80KsoljtcC3hU8HyyHRxSaclLCR
+	E1qymZVfMOprBrOmxbwfB8NRvCln1yo3aRoZIh0gmzawm5L7OLR2EcXwUiSTDoC586T4
+	2riXuKg0pOk3jwp6xTQZkiYnT0u1l5KuAGlXtNfpd5GGDiJJGxkQLKQ4by4FKoluGgWK
+	c5aNtZDb0xQvBpm+7+VqokQgoHxMRp/C/Qfis8xLkcg99hKo4wnV40LBwj1kQprckr02
+	Lx6A==
+X-Gm-Message-State: AHPjjUhfAbAiN3v8PcuLSoUojnRUG9uWFEVWXmYIJ2sON7YediFKlFWH
+	uUSks1JdrHTVAHz1j0SKM6nen9OfVixT/YID9DY=
+X-Google-Smtp-Source: AOwi7QDazRMJy3JpJhPrRdQHkWdTDx2E1QXbgq8+aCzxqC5kn5z5aeyhQUB8sM230iNFCjOkdm7OhWmF3zwLKaAGlQ4=
+X-Received: by 10.28.138.148 with SMTP id m142mr1642147wmd.59.1505842082673;
+	Tue, 19 Sep 2017 10:28:02 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.147.202 with HTTP; Tue, 19 Sep 2017 10:28:01 -0700 (PDT)
+In-Reply-To: <1505841334-2527-1-git-send-email-derek@asterius.io>
+References: <1505841334-2527-1-git-send-email-derek@asterius.io>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 19 Sep 2017 19:28:01 +0200
+Message-ID: <CA+chaQfnk1t0P+omcSxwBGYgVawF=gf5my3+t8ouebHsYy9LTw@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-perl][PATCH] po4a: update to version 0.52
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,19 +54,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 17:15:42 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 17:28:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} (100%)
+Not even SRCREV update? I think this rename doesn't do anything.
 
-diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb b/meta-perl/recipes-perl/po4a/po4a_0.52.bb
-similarity index 100%
-rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
-rename to meta-perl/recipes-perl/po4a/po4a_0.52.bb
--- 
-2.7.4
+On Tue, Sep 19, 2017 at 7:15 PM, Derek Straka <derek@asterius.io> wrote:
 
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} | 0
+>  1 file changed, 0 insertions(+), 0 deletions(-)
+>  rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} (100%)
+>
+> diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
+> b/meta-perl/recipes-perl/po4a/po4a_0.52.bb
+> similarity index 100%
+> rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
+> rename to meta-perl/recipes-perl/po4a/po4a_0.52.bb
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
