@@ -1,47 +1,53 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C103577D81
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 20:36:03 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id b9so409475wra.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 13:36:05 -0700 (PDT)
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 23CCD7782F;
+	Tue, 19 Sep 2017 20:38:44 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id k20so605588wre.4;
+	Tue, 19 Sep 2017 13:38:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=c6UnD5YOl7zr+jK20WDPU3b4mee8vGdzNMYxvenUoRc=;
-	b=HXT0N/vj3Ll/MZ9DJQnBIit0xCkR1txb8Ed4lgDnMsccB07nzA+AUp9Zy84rc1e7/Y
-	/f/cqVgLQKforioPTL3i8DiNrSRRhUwOpVul8Yp8Tdu6AVj4yFPuMTbys8hk3JuM8EDp
-	Z1BMCHgkeQRpD4bPMcusGARpFx0Jev9IWSbgKTYQHMK3IwkXmhxEri2Td5WX2p/jF/aI
-	qKF6kckfv7I/2mpNwCODUXXSy8VvggesQoZMoegxezGgH4+OPgwOhjFnrwky4CQpuNas
-	kBOTMAn123UkxZKzWD0b8XcZ+5nwOBRxd5LmveNkopyO7aMPfPB1FoZ8ZHuu2vUslWGd
-	J+uQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=ZvUh44bD1/c9FyCZnnqLN6SXfboCMUYl96rPE8KNoHE=;
+	b=WKqtUt7G/+ba9acDgCJ6mnYVc9eZCF1YHevZVSx+AtEid+Ldx15DmKsWazA5P0CbvT
+	HuLJ+tc3+UhqA2mc5xDsA2gKV/wMrpvIGsuanlwNB5xvtCCXnKTIjcRBTSxdClsV8cJ+
+	hJw8rpbmJu9Wdc+70RsLfw/2gIlFrfimPiwRIz8yvUMV2qxprnbV6zawHEAZZpypKGKT
+	qVvVfAaWTb2qGtse3aLv1KoK4AhfuGeDuoXtRNt3AiQ7vPAKMDupbKE1uzfEbwWrd8tt
+	AWwNaPUPx6NSq3W55TPCsO8KXi7krxgNeMvJe/k6vtaMHPcB5RBWTS4fKSUfSV2xKK2q
+	yIPQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=c6UnD5YOl7zr+jK20WDPU3b4mee8vGdzNMYxvenUoRc=;
-	b=QOAhCNWKVJhxp3kzhOqylyPXRya3dFrn+YTPDOhe73q67AivxTGWwAZKlM+grQFVmA
-	7egCBTQudVpcNPCCKyvCz5aoEgItqgvFJ0ueYiwX84UMLXaEkTux9bEJc3cJZ7nbqckY
-	aCUdM0jmXsd/HixKKo8mCLocvRLBJMb+uKRQDvvahnoQ5XheLgukT5b6oSV0xN5qAGXY
-	3FJbXZsPAkwKl2PG2A+jKzrTyuhhHxj9XOw8IlyFuW0ljVJ/M+Y6FEBfH7qxuKEG3GIj
-	nZJys8wiVyUXcSJmtY17SJxwTXc4bGMddlAx8oWp8ZLpGYJPienI7j8lbhV+ZTKfk0bj
-	IxLA==
-X-Gm-Message-State: AHPjjUhFUVjVjYb69aXvhx4JzGCu3+7CxlHeN+bw4b0GynC3ZVwt8+S9
-	VbEbLM65LFp6Nly767e2q1/XHQ==
-X-Google-Smtp-Source: AOwi7QA1ksTiWI9Am2a4DW9h2OhsLLIDda/64JjC+uNGR8Ta2f+sJ2FI4TncFCELm76PwC9GQxuCdg==
-X-Received: by 10.223.182.166 with SMTP id j38mr2637589wre.55.1505853364279;
-	Tue, 19 Sep 2017 13:36:04 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id 10sm159073wrt.59.2017.09.19.13.36.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Sep 2017 13:36:03 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=ZvUh44bD1/c9FyCZnnqLN6SXfboCMUYl96rPE8KNoHE=;
+	b=XqS+4/SGOqplErdL7TjNC8bHXXfh2QRdMB2kSOzlZ9sBstc3MaJoE/w3/06MRDvGBQ
+	Pau972/d/BuOmy85wfH9UqVNX3xo5tE9t2DH9f9Ok6I0q3TuJKjL06Cf8SwT0EPmQLxa
+	9rz0wH1L/7lykscVCgy4S8g6WSVfO9nn2HrYl8dcDPPEx6okWZu4tawFpLb1joiOSqZs
+	qoSfmhRl3f518I1mKZQhZweqL4PORs+b4VVQY++GxyZKtWdolDPJU8hK1opkOERaQkF2
+	rD3ZIMrO6hvf413qO7A6VlKGBfdn8fAsVIAsRwq7N5lV8fsKN56WzTwAH4bBdEBa0+57
+	HKGQ==
+X-Gm-Message-State: AHPjjUjTrtGnOOdBvoY+O2dwMnM/Ib71jEt9M/08d7SatJ4GJplulcjD
+	xFjmC7jJmGpf9w9rFJ6eQJHQodouJNFwIrHM5sU=
+X-Google-Smtp-Source: AOwi7QCqsT5cCNYlOiE9FEhQBLg6lJTrxKE48hzndtR3xQfcKIlxK/2GSZtvJooz+5LuAP3YNRSC4nkJUpj87oGFNvE=
+X-Received: by 10.223.164.153 with SMTP id g25mr2694804wrb.67.1505853525554;
+	Tue, 19 Sep 2017 13:38:45 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.28.147.202 with HTTP; Tue, 19 Sep 2017 13:38:44 -0700 (PDT)
+In-Reply-To: <CAMKF1soA5UfaisQ3dqKv=R6N8nkVKLH_30JcjxncS4T-40HZWA@mail.gmail.com>
+References: <CA+chaQfjWH9SHcF4S61Q2Q_qUk7jcMMehPRibXg-QO_oS_QGiw@mail.gmail.com>
+	<CAMKF1soALs=ksNmvTO3vrDnP0gvRQviShq3O--iCZwRzjTB8Xg@mail.gmail.com>
+	<CA+chaQdbNsKYzowonqmWYY-hp-e=GdJ_A7_hYq8jCjobw414jA@mail.gmail.com>
+	<CAMKF1spWpSo4pnB+GVUGAqU0T41jKmVDtRB2cC_+1a7YAaY2vA@mail.gmail.com>
+	<CA+chaQcLPGQaFJOU+pbg=OwceGsmkE3oO8FEitfrL0BvBLmaaQ@mail.gmail.com>
+	<CAMKF1soA5UfaisQ3dqKv=R6N8nkVKLH_30JcjxncS4T-40HZWA@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 22:38:29 +0200
-Message-Id: <20170919203829.22710-1-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [meta-browser][PATCH] firefox: fix build failures
+Date: Tue, 19 Sep 2017 22:38:44 +0200
+Message-ID: <CA+chaQcJ_eFjBKFGfbG2RRqCpeM0qhuEfJ4Du9ypNj+23=Beug@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] State of bitbake world, Failed tasks 2017-09-14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,114 +60,1009 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 20:36:04 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 20:38:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* use --x-includes and --x-libraries parameters to prevent
-  using host paths
-* we cannot just disable x11 support with --without-x, because
-  cairo-gtk2 (with or without -x11 suffix) from:
-  _PLATFORM_DEFAULT_TOOLKIT=cairo-gtk2
-  explicitly sets MOZ_X11=1 which cannot be used together --without-x:
-  if test "$MOZ_X11"; then
-    if test "$WITHOUT_X11"; then
-        AC_MSG_ERROR([--without-x specified and MOZ_X11 still defined])
-    fi
-  ...
-* fixes http://errors.yoctoproject.org/Errors/Details/155964/
+Done
+https://github.com/shr-project/jenkins-jobs/commit/dbb5e4e4e2c5821381eda729ab746a21238c8801
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../firefox/firefox/remove_AC_PATH_XTRA.patch      | 59 ----------------------
- recipes-mozilla/firefox/firefox_45.9.0esr.bb       |  2 +-
- 2 files changed, 1 insertion(+), 60 deletions(-)
- delete mode 100644 recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
+On Sat, Sep 16, 2017 at 5:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch b/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
-deleted file mode 100644
-index 69d297e..0000000
---- a/recipes-mozilla/firefox/firefox/remove_AC_PATH_XTRA.patch
-+++ /dev/null
-@@ -1,59 +0,0 @@
--Drop unused X_* flags.
--
--There are actually causing harm doing cross builds since they are picking
--up $includedir which  is /usr/include and pouring that into CFLAGS in
--case of cairo, which ends up referening to build host's include paths
--
--Luckily, we have a QA check to catch such issues
--
--ERROR: firefox-45.9.0esr-r0 do_package_qa: QA Issue: firefox: The compile log indicates that host include and/or library paths were used.
--         Please check the log '/mnt/a/oe/build/tmp/work/corei7-64-bec-linux/firefox/45.9.0esr-r0/temp/log.do_compile' for more information. [compile-host-path]
--
--This patch fixes it
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
--
--Index: firefox-45.9.0esr/configure
--===================================================================
----- firefox-45.9.0esr.orig/configure
--+++ firefox-45.9.0esr/configure
--@@ -30605,10 +30605,6 @@ sed 's/$/,/' >> $CONFIG_STATUS <<EOF
--     (''' MACOS_SDK_DIR ''', r''' $MACOS_SDK_DIR ''')
--     (''' MACOS_PRIVATE_FRAMEWORKS_DIR ''', r''' $MACOS_PRIVATE_FRAMEWORKS_DIR ''')
--     (''' GMAKE ''', r''' $GMAKE ''')
---    (''' X_CFLAGS ''', r''' $X_CFLAGS ''')
---    (''' X_PRE_LIBS ''', r''' $X_PRE_LIBS ''')
---    (''' X_LIBS ''', r''' $X_LIBS ''')
---    (''' X_EXTRA_LIBS ''', r''' $X_EXTRA_LIBS ''')
--     (''' SOLARIS_SUNPRO_CC ''', r''' $SOLARIS_SUNPRO_CC ''')
--     (''' SOLARIS_SUNPRO_CXX ''', r''' $SOLARIS_SUNPRO_CXX ''')
--     (''' MOZ_THUMB2 ''', r''' $MOZ_THUMB2 ''')
--Index: firefox-45.9.0esr/js/src/configure
--===================================================================
----- firefox-45.9.0esr.orig/js/src/configure
--+++ firefox-45.9.0esr/js/src/configure
--@@ -17188,10 +17188,6 @@ sed 's/$/,/' >> $CONFIG_STATUS <<EOF
--     (''' MACOSX_DEPLOYMENT_TARGET ''', r''' $MACOSX_DEPLOYMENT_TARGET ''')
--     (''' MACOS_SDK_DIR ''', r''' $MACOS_SDK_DIR ''')
--     (''' GMAKE ''', r''' $GMAKE ''')
---    (''' X_CFLAGS ''', r''' $X_CFLAGS ''')
---    (''' X_PRE_LIBS ''', r''' $X_PRE_LIBS ''')
---    (''' X_LIBS ''', r''' $X_LIBS ''')
---    (''' X_EXTRA_LIBS ''', r''' $X_EXTRA_LIBS ''')
--     (''' MOZILLA_SYMBOLVERSION ''', r''' $MOZILLA_SYMBOLVERSION ''')
--     (''' JS_SHELL_NAME ''', r''' $JS_SHELL_NAME ''')
--     (''' JS_CONFIG_NAME ''', r''' $JS_CONFIG_NAME ''')
--Index: firefox-45.9.0esr/gfx/cairo/cairo/src/moz.build
--===================================================================
----- firefox-45.9.0esr.orig/gfx/cairo/cairo/src/moz.build
--+++ firefox-45.9.0esr/gfx/cairo/cairo/src/moz.build
--@@ -246,9 +246,6 @@ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'qt':
--     CFLAGS += CONFIG['MOZ_QT_CFLAGS']
--     CXXFLAGS += CONFIG['MOZ_QT_CFLAGS']
-- 
---if CONFIG['MOZ_X11']:
---    CFLAGS += CONFIG['XCFLAGS']
---
-- if CONFIG['MOZ_ENABLE_CAIRO_FT']:
--     CFLAGS += CONFIG['CAIRO_FT_CFLAGS']
--     CXXFLAGS += CONFIG['CAIRO_FT_CFLAGS']
-diff --git a/recipes-mozilla/firefox/firefox_45.9.0esr.bb b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-index 51b6a16..a46d8e9 100644
---- a/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-+++ b/recipes-mozilla/firefox/firefox_45.9.0esr.bb
-@@ -43,7 +43,6 @@ SRC_URI = "https://archive.mozilla.org/pub/firefox/releases/${PV}/source/firefox
-            file://0002-use-pkg-config-to-find-nspr.patch \
-            file://0003-do-not-link-against-crmf-library-it-is-not-there.patch \
-            file://gcc7.patch \
--           file://remove_AC_PATH_XTRA.patch \
-            file://add-libresolv.patch \
- "
- SRC_URI_append_libc-musl = "\
-@@ -69,6 +68,7 @@ S = "${WORKDIR}/firefox-45.9.0esr"
- MOZ_APP_BASE_VERSION = "45.9"
- 
- inherit mozilla
-+EXTRA_OECONF_append = " --x-includes=${STAGING_INCDIR} --x-libraries=${STAGING_LIBDIR}"
- EXTRA_OECONF_append_libc-musl = " --disable-jemalloc"
- 
- EXTRA_OEMAKE += "installdir=${libdir}/${PN}"
--- 
-2.14.1
-
+> On Sat, Sep 16, 2017 at 7:41 AM, Martin Jansa <martin.jansa@gmail.com>
+> wrote:
+> > Just the commit IDs from the top won't be very useful, because it's from
+> > jansa/master branches which are rebased even more often than master-next.
+> >
+> > If you really want to see them, then there are links to the build logs
+> for
+> > each MACHINE and you can see the build configuration there.
+> >
+> > That's why at the bottom is the list of last master commit (as seen in
+> > qemuarm build directory) and list of patches currently applied on top of
+> it.
+> > But to make it accurate for all MACHINEs I would either need to update
+> the
+> > branches only once in 2-3 days when the builds are all finished or to
+> repeat
+> > this section 3 times (which is sometimes quite long even when listed just
+> > for qemuarm).
+> >
+> > What I'll do is to include similar git log at the beginning of each
+> build,
+> > so if in doubt opening the individual logs will not only show the
+> > configuration as seen by bitbake, but also the master branch and applied
+> > patches.
+> >
+>
+> I think that will be useful.
+>
+> >
+> > On Sat, Sep 16, 2017 at 4:32 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> >>
+> >> On Sat, Sep 16, 2017 at 2:00 AM, Martin Jansa <martin.jansa@gmail.com>
+> >> wrote:
+> >> > Probably is, qemux86 was built from slightly older metadata, so
+> probably
+> >> > including previous versions of your klibc changes.
+> >> >
+> >> > I know it's confusing in the report, but still each build takes around
+> >> > 24
+> >> > hours per machine and I have only 2 builders. e.g. this qemux86 build
+> >> > was
+> >> > started 20170912_234104 as the log directory shows and at that time
+> >> > there
+> >> > wasn't even the latest version of klibc patches on ML.
+> >> >
+> >>
+> >> thats ok. May be top of build configuration would be a good thing to
+> >> have in report. so we know which commit the results belong to.
+> >>
+> >> > Thanks
+> >> >
+> >> > On Sat, Sep 16, 2017 at 1:02 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> >>
+> >> >> On Fri, Sep 15, 2017 at 3:08 PM, Martin Jansa <
+> martin.jansa@gmail.com>
+> >> >> wrote:
+> >> >> > http://www.openembedded.org/wiki/Bitbake_World_Status
+> >> >> >
+> >> >> > == Number of issues - stats ==
+> >> >> > {| class='wikitable'
+> >> >> > !|Date      !!colspan='3'|Failed tasks     !!|Signatures
+> >> >> > !!colspan='14'|QA
+> >> >> > !!Comment
+> >> >> > |-
+> >> >> > || ||qemuarm ||qemux86 ||qemux86_64 ||all ||already-stripped
+> ||libdir
+> >> >> > ||textrel ||build-deps ||file-rdeps ||version-going-backwards
+> >> >> > ||host-user-contaminated ||installed-vs-shipped
+> >> >> > ||unknown-configure-option
+> >> >> > ||symlink-to-sysroot ||invalid-pkgconfig ||pkgname ||ldflags
+> >> >> > ||compile-host-path ||
+> >> >> > |-
+> >> >> > ||2017-09-14 ||3 ||6 ||2 ||0 ||0 ||0 ||5 ||0 ||0 ||91 ||3 ||0 ||0
+> ||0
+> >> >> > ||0
+> >> >> > ||0 ||0 ||0 ||
+> >> >> > |}
+> >> >> >
+> >> >> > == Failed tasks 2017-09-14 ==
+> >> >> >
+> >> >> > INFO: jenkins-job.sh-1.8.29 Complete log available at
+> >> >> >
+> >> >> >
+> >> >> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> report.20170915_120505.log
+> >> >> >
+> >> >> > === common (1) ===
+> >> >> >     *
+> >> >> > meta-browser/recipes-mozilla/firefox/firefox_45.9.0esr.bb:d
+> o_compile
+> >> >> >
+> >> >> > === common-x86 (0) ===
+> >> >> >
+> >> >> > === qemuarm (2) ===
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > meta-openembedded/meta-multimedia/recipes-
+> connectivity/libupnp/libupnp1.6_1.6.21.bb:do_fetch
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > meta-openembedded/meta-oe/recipes-devtools/android-
+> tools/android-tools_5.1.1.r37.bb:do_compile
+> >> >> >
+> >> >> > === qemux86 (5) ===
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > meta-openembedded/meta-initramfs/recipes-devtools/
+> mtd/ubi-utils-klibc_1.5.1.bb:do_compile
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > meta-openembedded/meta-initramfs/recipes-kernel/
+> kexec/kexec-tools-klibc_2.0.2.bb:do_configure
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > meta-openembedded/meta-multimedia/recipes-multimedia/
+> gerbera/gerbera_git.bb:do_configure
+> >> >> >     * meta-qt5/recipes-qt/qt5/qtlocation_git.bb:do_compile
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > virtual:klibc:meta-openembedded/meta-initramfs/
+> recipes-bsp/kexecboot/kexecboot_git.bb:do_configure
+> >> >> >
+> >> >>
+> >> >> all meta-initramfs should have been fixed with latest patchset it
+> that
+> >> >> not
+> >> >> the case ?
+> >> >>
+> >> >> > === qemux86_64 (1) ===
+> >> >> >     *
+> >> >> >
+> >> >> >
+> >> >> > virtual:native:meta-openembedded/meta-oe/recipes-
+> support/uim/uim_1.8.6.bb:do_install
+> >> >> >
+> >> >> > === Number of failed tasks (11) ===
+> >> >> > {| class=wikitable
+> >> >> > |-
+> >> >> > || qemuarm || 3 ||
+> >> >> >
+> >> >> >
+> >> >> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> world.qemuarm.20170914_113136.log/
+> >> >> > || http://errors.yoctoproject.org/Errors/Build/46775/
+> >> >> > |-
+> >> >> > || qemux86 || 6 ||
+> >> >> >
+> >> >> >
+> >> >> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> world.qemux86.20170912_234104.log/
+> >> >> > || http://errors.yoctoproject.org/Errors/Build/46714/
+> >> >> > |-
+> >> >> > || qemux86_64 || 2 ||
+> >> >> >
+> >> >> >
+> >> >> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> world.qemux86-64.20170914_015733.log/
+> >> >> > || http://errors.yoctoproject.org/Errors/Build/46761/
+> >> >> > |}
+> >> >> >
+> >> >> > === PNBLACKLISTs (1) ===
+> >> >> >
+> >> >> > === QA issues (99) ===
+> >> >> > {| class=wikitable
+> >> >> > !| Count ||Issue
+> >> >> > |-
+> >> >> > ||0 ||already-stripped
+> >> >> > |-
+> >> >> > ||0 ||build-deps
+> >> >> > |-
+> >> >> > ||0 ||compile-host-path
+> >> >> > |-
+> >> >> > ||0 ||file-rdeps
+> >> >> > |-
+> >> >> > ||0 ||installed-vs-shipped
+> >> >> > |-
+> >> >> > ||0 ||invalid-pkgconfig
+> >> >> > |-
+> >> >> > ||0 ||ldflags
+> >> >> > |-
+> >> >> > ||0 ||libdir
+> >> >> > |-
+> >> >> > ||0 ||pkgname
+> >> >> > |-
+> >> >> > ||0 ||symlink-to-sysroot
+> >> >> > |-
+> >> >> > ||0 ||unknown-configure-option
+> >> >> > |-
+> >> >> > ||3 ||host-user-contaminated
+> >> >> > |-
+> >> >> > ||5 ||textrel
+> >> >> > |-
+> >> >> > ||91 ||version-going-backwards
+> >> >> > |}
+> >> >> >
+> >> >> >
+> >> >> >
+> >> >> > === Incorrect PACKAGE_ARCH or sstate signatures (0) ===
+> >> >> >
+> >> >> > Complete log:
+> >> >> >
+> >> >> >
+> >> >> > http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.
+> signatures.20170913_214906.log/
+> >> >> >
+> >> >> > No issues detected
+> >> >> >
+> >> >> >
+> >> >> > PNBLACKLISTs:
+> >> >> > openembedded-core/:
+> >> >> > meta-browser:
+> >> >> > meta-openembedded:
+> >> >> >
+> >> >> >
+> >> >> > meta-networking/recipes-support/lksctp-tools/lksctp-
+> tools_1.0.17.bb:PNBLACKLIST[lksctp-tools]
+> >> >> > ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN:
+> >> >> > fails
+> >> >> > to
+> >> >> > link against sctp_connectx symbol", '', d)}"
+> >> >> > meta-qt5:
+> >> >> > PNBLACKLIST[android-system] = "depends on lxc from
+> >> >> > meta-virtualiazation
+> >> >> > which isn't included in my world builds"
+> >> >> > PNBLACKLIST[bigbuckbunny-1080p] = "big and doesn't really need to
+> be
+> >> >> > tested
+> >> >> > so much"
+> >> >> > PNBLACKLIST[bigbuckbunny-480p] = "big and doesn't really need to be
+> >> >> > tested
+> >> >> > so much"
+> >> >> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+> >> >> > tested
+> >> >> > so much"
+> >> >> > PNBLACKLIST[bigbuckbunny-720p] = "big and doesn't really need to be
+> >> >> > tested
+> >> >> > so much"
+> >> >> > PNBLACKLIST[tearsofsteel-1080p] = "big and doesn't really need to
+> be
+> >> >> > tested
+> >> >> > so much"
+> >> >> > PNBLACKLIST[build-appliance-image] = "tries to include whole
+> >> >> > downloads
+> >> >> > directory in /home/builder/poky :/"
+> >> >> >
+> >> >> >
+> >> >> > QA issues by type:
+> >> >> > count: 0 issue: already-stripped
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: libdir
+> >> >> >
+> >> >> >
+> >> >> > count: 5 issue: textrel
+> >> >> > chromium-54.0.2810.2: ELF binary
+> >> >> >
+> >> >> >
+> >> >> > '/tmp/work/i586-oe-linux/chromium/54.0.2810.2-r0/
+> packages-split/chromium/usr/bin/chromium/chrome'
+> >> >> > has relocations in .text [textrel]
+> >> >> > chromium-wayland-53.0.2785.143: ELF binary
+> >> >> >
+> >> >> >
+> >> >> > '/tmp/work/i586-oe-linux/chromium-wayland/53.0.2785.
+> 143-r0/packages-split/chromium-wayland/usr/bin/chromium/chrome'
+> >> >> > has relocations in .text [textrel]
+> >> >> > corosync-2.4.2: ELF binary
+> >> >> >
+> >> >> >
+> >> >> > '/tmp/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-
+> split/corosync/usr/sbin/corosync'
+> >> >> > has relocations in .text [textrel]
+> >> >> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+> >> >> >
+> >> >> >
+> >> >> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-
+> r0/packages-split/x264-bin/usr/bin/x264'
+> >> >> > has relocations in .text [textrel]
+> >> >> > x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+> >> >> >
+> >> >> >
+> >> >> > '/tmp/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-
+> r0/packages-split/x264/usr/lib/libx264.so.148'
+> >> >> > has relocations in .text [textrel]
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: build-deps
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: file-rdeps
+> >> >> >
+> >> >> >
+> >> >> > count: 91 issue: version-going-backwards
+> >> >> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dbg
+> >> >> > went
+> >> >> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package gnome-keyring-dev
+> >> >> > went
+> >> >> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package gnome-keyring-doc
+> >> >> > went
+> >> >> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ar
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ast
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-as
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-az
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-be+latin went backwards which would break
+> >> >> > package
+> >> >> > feeds
+> >> >> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-be
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-bg
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-bn-in
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-bn
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-bs
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ca+valencia went backwards which would break
+> >> >> > package
+> >> >> > feeds from (0:2.32.1-r12.40 to 0:2.32.1-r12.0)
+> >> >> > [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ca
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-cs
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-cy
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-da
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-de
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-dz
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-el
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-en-ca
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-en-gb
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-en+shaw went backwards which would break
+> package
+> >> >> > feeds
+> >> >> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-es
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-et
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-eu
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-fa
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-fi
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-fr
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ga
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-gl
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-gu
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-he
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-hi
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-hr
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-hu
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-id
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-is
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-it
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ja
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ka
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-kn
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ko
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-lt
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-lv
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-mai
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-mg
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-mk
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ml
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-mn
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-mr
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ms
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-nb
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ne
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-nl
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-nn
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-oc
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-or
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-pa
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-pl
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-pt-br
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-pt
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ro
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ru
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-rw
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-si
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sk
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sl
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sq
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sr+latin went backwards which would break
+> >> >> > package
+> >> >> > feeds
+> >> >> > from (0:2.32.1-r12.40 to 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sr
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-sv
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-ta
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-te
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-th
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-tr
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-uk
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-vi
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-xh
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-zh-cn
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-zh-hk
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-locale-zh-tw
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package
+> >> >> > gnome-keyring-staticdev
+> >> >> > went backwards which would break package feeds from
+> (0:2.32.1-r12.40
+> >> >> > to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > gnome-keyring-2.32.1: Package version for package gnome-keyring
+> went
+> >> >> > backwards which would break package feeds from (0:2.32.1-r12.40 to
+> >> >> > 0:2.32.1-r12.0) [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp-dbg went
+> >> >> > backwards
+> >> >> > which
+> >> >> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp-dev went
+> >> >> > backwards
+> >> >> > which
+> >> >> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp-doc went
+> >> >> > backwards
+> >> >> > which
+> >> >> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp-locale went
+> >> >> > backwards
+> >> >> > which would break package feeds from (0:1.8.2-r0.0 to
+> 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp-staticdev went
+> >> >> > backwards
+> >> >> > which would break package feeds from (0:1.8.2-r0.0 to
+> 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> > libupnp-1.6.21: Package version for package libupnp went backwards
+> >> >> > which
+> >> >> > would break package feeds from (0:1.8.2-r0.0 to 0:1.6.21-r0.2)
+> >> >> > [version-going-backwards]
+> >> >> >
+> >> >> >
+> >> >> > count: 3 issue: host-user-contaminated
+> >> >> > glibc-locale-2.26: glibc-locale:
+> >> >> > /glibc-binary-localedata-ru-ru/usr/lib/locale/ru_RU/LC_CTYPE is
+> owned
+> >> >> > by
+> >> >> > uid
+> >> >> > 3004, which is the same as the user running bitbake. This may be
+> due
+> >> >> > to
+> >> >> > host
+> >> >> > contamination [host-user-contaminated]
+> >> >> > qt5-creator-3.5.1: qt5-creator:
+> >> >> > /qt5-creator/usr/lib/qt5/qtcreator/plugins/libPythonEditor.so is
+> >> >> > owned
+> >> >> > by
+> >> >> > uid 3004, which is the same as the user running bitbake. This may
+> be
+> >> >> > due
+> >> >> > to
+> >> >> > host contamination [host-user-contaminated]
+> >> >> > qtdeclarative-5.9.2+gitAUTOINC+7c45b035b9: qtdeclarative:
+> >> >> > /qtdeclarative-qmlplugins/usr/lib/qt5/qml/QtQuick.2/qmldir is
+> owned
+> >> >> > by
+> >> >> > uid
+> >> >> > 3004, which is the same as the user running bitbake. This may be
+> due
+> >> >> > to
+> >> >> > host
+> >> >> > contamination [host-user-contaminated]
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: installed-vs-shipped
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: unknown-configure-option
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: symlink-to-sysroot
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: invalid-pkgconfig
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: pkgname
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: ldflags
+> >> >> >
+> >> >> >
+> >> >> > count: 0 issue: compile-host-path
+> >> >> >
+> >> >> >
+> >> >> >
+> >> >> > == Tested changes (not included in master yet) - bitbake ==
+> >> >> > latest upstream commit:
+> >> >> > 567f2cf server/process: ensure server failure log is limited to
+> >> >> > current
+> >> >> > session
+> >> >> > not included in master yet:
+> >> >> > 3ec2af2 world-image: add extra target
+> >> >> > 8eebabe fetch2: Allow Fetch.download() to warn instead of error
+> >> >> >
+> >> >> > == Tested changes (not included in master yet) - openembedded-core
+> ==
+> >> >> > latest upstream commit:
+> >> >> > 8fe9fb4 python*native.bbclass: suppress user site dirs
+> >> >> > not included in master yet:
+> >> >> > 0d7ac07 report-error: Allow to upload reports automatically
+> >> >> > 20d6101 buildhistory.bbclass: metadata-revs show repo parent
+> >> >> > 202fb4c metadata-revs: provide more information
+> >> >> > b3500a7 qemux86: Add identical qemux86copy variant for tests
+> >> >> > 0de46b0 reproducible_build.bbclass: initial support for binary
+> >> >> > reproducibility
+> >> >> > d407a03 cpio: provide cpio-replacement-native
+> >> >> > c872fa6 image_types.bbclass: improve cpio image reproducibility
+> >> >> > 3fcc641 rootfs-postcommands.bbclass: support binary reproducibility
+> >> >> > a132f03 sstate.bbclass: Do not cause build failures due to setscene
+> >> >> > errors
+> >> >> > 198ea0e insane.bbclass: Add do_qa_pseudo function to check for
+> common
+> >> >> > errors
+> >> >> > listed in pseudo.log
+> >> >> > 3283a1c insane.bbclass: do_qa_pseudo: don't trigger error from
+> >> >> > '^inode
+> >> >> > mismatch'
+> >> >> > beb394d insane.bbclass: do_qa_pseudo: show parts of pseudo.log in
+> >> >> > console
+> >> >> >
+> >> >> > == Tested changes (not included in master yet) - meta-openembedded
+> ==
+> >> >> > latest upstream commit:
+> >> >> > 4a45235 opencv: Fix build with clang
+> >> >> > not included in master yet:
+> >> >> > df98f41 dnsmasq: disable the service by default
+> >> >> > fb19f49 openconnect: fix parallel compilation failure
+> >> >> > 9dafbb4 autofs: Fix build with musl
+> >> >> > 6e742d3 yp-tools: Upgrade to 4.2.2
+> >> >> > ef15059 vim: Remove xfce vim bbappend
+> >> >> > 6fff604 leveldb: Fix build with clang
+> >> >> > 2864d93 klibc: Edit out gcc hardcoding in do_compile
+> >> >> > d20ab2d klibc.bbclass: Use forcevariable override to define flags
+> >> >> > dceaa50 klibc.bbclass: Add -mfloat-abi on arm
+> >> >> > 2e68338 smbnetfs: delete blacklisted
+> >> >> > 3f06336 system-setup-keyboard: delete blacklisted
+> >> >> > 14a15c0 python-jsonschema, python3-jsonschema: add
+> vcversioner-native
+> >> >> > dependency
+> >> >> > a9d38f7 v4l-utils: added missing dependency on udev
+> >> >> > 2b489fd ipvsadm: Add HOMEPAGE info into recipe file.
+> >> >> > cf39ab8 libidl: Add HOMEPAGE info into recipe file.
+> >> >> > 4fcda20 lvm2: Add HOMEPAGE info into recipe file.
+> >> >> > 9e601b0 tcpdump: update to 4.9.2 to fix CVEs
+> >> >> > 3dbb500 debsums: inherit gettext
+> >> >> > b972817 protobuf: update to 3.4.0
+> >> >> > 3e1748f protobuf-c: update to 1.3.0
+> >> >> > a8cf4de libgpiod: bump version to v0.3.1
+> >> >> > e9a3fd9 networkmanager: Add HOMEPAGE info into recipe file.
+> >> >> > 6a0d564 samba: Add HOMEPAGE info into recipe file.
+> >> >> > db01ddf squid: upgrade to 3.5.27
+> >> >> > 8b48a16 iproute2: Move tipc enablement to oe-core
+> >> >> > 1911f84 libmnl: Move to oe-core
+> >> >> > f02eec7 flatbuffers: add version 1.7.1
+> >> >> > 9d4b685 capnproto: add version 0.6.1
+> >> >> > a18db12 libupnp: Add recipe for version 1.8.2
+> >> >> > 90be7f5 gerbera: clean recipe
+> >> >> > 62655bc libjs-sizzle: Add HOMEPAGE info into recipe file.
+> >> >> > 6c0f9c2 liblockfile: Add HOMEPAGE info into recipe file.
+> >> >> > 87d004b daemontools: Add HOMEPAGE info into recipe file.
+> >> >> > 346b2a5 fbset: Add HOMEPAGE info into recipe file.
+> >> >> > 2fdb314 libndp: Add HOMEPAGE info into recipe file.
+> >> >> > a96fc97 gnome-keyring: Resolve conflict with gcr 3 and gold linking
+> >> >> > error
+> >> >> > 34bb6e5 drbd-utils: remove
+> >> >> > 0001-drbd-8.4.4-drbd-tools-only-rmmod-if-DRBD-is-a-module.patch
+> >> >> > 864fb16 ceres-solver: add new recipe
+> >> >> > 60b9eb6 libnih: Add HOMEPAGE info into recipe file.
+> >> >> > 20eeac7 libtdb: Add HOMEPAGE info into recipe file.
+> >> >> > 84172c0 mailcap: Add HOMEPAGE info into recipe file.
+> >> >> > 7454d72 mozjs: Add HOMEPAGE info into recipe file.
+> >> >> > 47bbfc9 numactl: Add HOMEPAGE info into recipe file.
+> >> >> > ad97869 orbit2: Add HOMEPAGE info into recipe file.
+> >> >> > f3469c8 sgpio: Add HOMEPAGE info into recipe file.
+> >> >> > 50a3814 stunnel: Add HOMEPAGE info into recipe file.
+> >> >> > d260749 leveldb: disable parallelism
+> >> >> >
+> >> >> > == Tested changes (not included in master yet) - meta-qt5 ==
+> >> >> > latest upstream commit:
+> >> >> > 743b3b9 qtbase-native: Force use of built-in pcre
+> >> >> > not included in master yet:
+> >> >> >
+> >> >> > == Tested changes (not included in master yet) - meta-browser ==
+> >> >> > latest upstream commit:
+> >> >> > 972cab7 gnome-settings-daemon: remove the bbappend for removed
+> recipe
+> >> >> > not included in master yet:
+> >> >> > 5fcf848 chromium: hide textrel QA issues which are there for ages
+> >> >> >
+> >> >> > --
+> >> >> > _______________________________________________
+> >> >> > Openembedded-core mailing list
+> >> >> > Openembedded-core@lists.openembedded.org
+> >> >> > http://lists.openembedded.org/mailman/listinfo/openembedded-core
+> >> >> >
+> >> >
+> >> >
+> >
+> >
+>
 
