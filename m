@@ -1,28 +1,50 @@
-Return-Path: <Sean_Hudson@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 29DC77804A;
-	Tue, 19 Sep 2017 15:35:00 +0000 (UTC)
-Received: from svr-orw-mbx-01.mgc.mentorg.com ([147.34.90.201])
-	by relay1.mentorg.com with esmtps (TLSv1.2:ECDHE-RSA-AES256-SHA384:256)
-	id 1duKY9-0001iv-FG from Sean_Hudson@mentor.com ;
-	Tue, 19 Sep 2017 08:35:01 -0700
-Received: from [172.30.37.141] (147.34.91.1) by svr-orw-mbx-01.mgc.mentorg.com
-	(147.34.90.201) with Microsoft SMTP Server (TLS) id 15.0.1263.5;
-	Tue, 19 Sep 2017 08:34:59 -0700
-From: Sean Hudson <sean_hudson@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>,
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>
-Organization: Mentor Graphics - Embedded Software Division
-Message-ID: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-Date: Tue, 19 Sep 2017 10:34:50 -0500
-User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
-	Thunderbird/52.3.0
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
+	[209.85.223.171])
+	by mail.openembedded.org (Postfix) with ESMTP id EDB987808C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 15:55:26 +0000 (UTC)
+Received: by mail-io0-f171.google.com with SMTP id m103so63146iod.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Sep 2017 08:55:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=0083bGbJC0eCKQLacpoQcOw2BpT81PmmaYQzBBhqP6Y=;
+	b=Fj6T85NMQSC0U/R61ScpD8IMCJTI9Al4sxLHwvl7BvqDFjjTYsdTdKGowwK6woCYh7
+	PGLn5sT9PlklInygXRbDJGS/yDxs2lF7pS3rBguQZ6OtmNmEExrlWX/n8xIC2CjtJZOL
+	GZ3pG2x8M6YsGxLvdZ+DZjB8x8cBUTBY1VdoXrssMSPn7Gzp+mvDiC7dGm+IVyFLfSQ3
+	OGUNpZojkDwCvU5mJbfe2fDj+bruOBAUGBORRe9OAThACQIvuof8z9tZrT0hI9LC2GbP
+	avsjlsWVe+IE9oLuEQYFacdcoSrbdUjG+zexrnEG2lKcc8CqkJecT8XFDeEwWfaym1q9
+	NOxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=0083bGbJC0eCKQLacpoQcOw2BpT81PmmaYQzBBhqP6Y=;
+	b=MCoe7fSrmSJb1yfH+5WXmB4+1YtoEQ71cpJrx4xOZNZ5d1eVFmjSpt+O4dbvMgE7nb
+	vaMLe9IjwvlJgpQoxhVSdxxKDxAKo1X9YDWHZaVxxdke7C9FzmiuVxJX6oQvJYYvbTs9
+	E++lXwIHg9qNmgWLAQCHK81ZJY7HSJYHN9NSesTrvqPsv8ZKjY3FxUbiH5g3G5Ckxnxh
+	DTLJFj+vIZ9vheEYtFIWx0xmSlkJmSTwgeryH2yyiZKFZAEw+NWHoRzVGCQh9yVx1JzS
+	GSqt0cZ1jXbgMVEQI3vrUseu8b5ETjIGQgIRvKUaLbqvS4L8Um8AUpjyadyE67T36BrM
+	EXgg==
+X-Gm-Message-State: AHPjjUhgbA9tsMHCcvoJ4ajgZs7o7o2BTTr6a+V8bRxDBnTm5uwd4d/b
+	hkRK6J+L0h8VgSf1S2Uljqe62BsH5tDVqvIOWLEZrw==
+X-Google-Smtp-Source: AOwi7QAYDFjmhzoRxKsV1qyB7/ZtDawfg9HlAbBodcgoEaPGyMjAoCARlz6US60M5r8GFKbZ/w6gXhZy5MtbXM4QuUc=
+X-Received: by 10.107.133.92 with SMTP id h89mr2311077iod.208.1505836527886;
+	Tue, 19 Sep 2017 08:55:27 -0700 (PDT)
 MIME-Version: 1.0
-X-ClientProxiedBy: svr-orw-mbx-03.mgc.mentorg.com (147.34.90.203) To
-	svr-orw-mbx-01.mgc.mentorg.com (147.34.90.201)
-Subject: OE general meeting before OEDEM next month.
+Received: by 10.107.19.68 with HTTP; Tue, 19 Sep 2017 08:55:06 -0700 (PDT)
+In-Reply-To: <d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
+References: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
+	<d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 19 Sep 2017 16:55:06 +0100
+Message-ID: <CAJTo0LYtC2MVYqwz_LkGEAvNuDKCQByH1r5QBv-TZKBi499meQ@mail.gmail.com>
+To: OE-core <openembedded-core@lists.openembedded.org>, 
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [OE-core] Use of github /archive/ tarballs in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,67 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 15:35:00 -0000
-X-Groupsio-MsgNum: 68921
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature";
-	boundary="16t9gxbc5NriBE2enAINlsRpj2e0eQ3wq"
+X-List-Received-Date: Tue, 19 Sep 2017 15:55:27 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---16t9gxbc5NriBE2enAINlsRpj2e0eQ3wq
-Content-Type: multipart/mixed; boundary="ig7u2fvwIkJg02abIleC4RKLqWS9ngaqS";
- protected-headers="v1"
-From: Sean Hudson <sean_hudson@mentor.com>
-To: "openembedded-devel@lists.openembedded.org"
- <openembedded-devel@lists.openembedded.org>,
- "openembedded-members@lists.openembedded.org"
- <openembedded-members@lists.openembedded.org>
-Message-ID: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-Subject: OE general meeting before OEDEM next month.
+On 19 September 2017 at 15:34, Carlos Alberto Lopez Perez <clopez@igalia.com
+> wrote:
 
---ig7u2fvwIkJg02abIleC4RKLqWS9ngaqS
-Content-Type: text/plain; charset=windows-1252
-Content-Language: en-US
-Content-Transfer-Encoding: quoted-printable
+> On 19/09/17 10:09, Burton, Ross wrote:
+> > Then the tarball for one of Erlang's repositories changed, and was
+> noticed
+> > by the checksum in the recipe (thanks Gunnar Andersson for reporting
+> > this).  The extracted contents are identical, but the tarball itself has
+> > changed.  I'm presuming this is due to the old tarball expiring in their
+> > cache, and a newly generated tarball using a later version of tar.
+>
+> I don't think tar is the one to blame, but gzip.
+> I have just tested GNU tar (versions 1.29 and 1.26) and BSD tar (from
+> OpenBSD 5.8) and the 3 have produced identical archives (same md5sum)
+> when invoked like git archive does.
+>
+> However, the .tar.gz file generated was different in the case of BSD.
+> It even had a different file size.
+>
+> I bet that if you uncompress both files, the .tar will have the same
+> checksum in both cases.
+>
 
-Fellow OpenEmbedded Members,
+In the situation that I was talking to Gunnar with, the source is the tar
+itself.
 
-  The OE board will host an open, teleconference meeting for members
-next Monday, 9/25, at 7am - US-PDT.  The primary topic will be the
-upcoming developers meeting in Prague at 9am on Sunday, October 22,
-2017. [1]
+https://paste.fedoraproject.org/paste/rP67aSPn1IuYbQcz2UNY3g
 
-  Meeting information, including dial-in numbers, is on the wiki. [2]
+They have identical length
+> $ wc -c new-OTP-18.2.3.tar
+> 159068160 new-OTP-18.2.3.tar
+> 159068160 orig-OTP-18.2.3.tar
+> ...but different content
+> $ cmp new-OTP-18.2.3.tar orig-OTP-18.2.3.tar
+> $ new-OTP-18.2.3.tar orig-OTP-18.2.3.tar differ: byte 79122433, line
+> 2004431
+>
 
---
-Sean
+Basically, both tar and gzip can cause problems.
 
-[1] https://www.openembedded.org/wiki/OEDEM_2017
-[2] https://www.openembedded.org/wiki/2017-09_-_Remote_Meeting
+Ross
 
-
---ig7u2fvwIkJg02abIleC4RKLqWS9ngaqS--
-
---16t9gxbc5NriBE2enAINlsRpj2e0eQ3wq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2
-
-iQIcBAEBCAAGBQJZwTkiAAoJEC2KalNZVFwRYxIQAJ+Ym4sRbN5Dds+bfrS2xOsR
-rm+eVLO7T7splJCFsarJ6be6bwuLj4/RAf62DgIi+gOvhSxJyISEUFAvOs1Ctej7
-oh8PnEd8FvAuyi0rO0+VW8MUb+ZpK79AJsr9Z9uAKPoIYOUFOICsu1EGr7L9Lgcs
-xwv/qQdfjl86T1nRKIZUfymVsIp+X37nKY9MkJqH1x/M6+cxbqP+Vab7hv6EtwUF
-LVEwHJNeQ7zCHWQBqzga6OHgfjMJv6Mddkr4fYShCVFZDySxOtg3pVdFpP3BTHYs
-1IqvMvqcnEFpSXprcmdB/G7/ScFs581b9C+SLo0fo6JMZ754ZZNz+3iiFWw3HG+s
-+Tbo4QGnNbwG5pcN87nMk1x3C+Z7ywenQYyrzkBGs/gByFOH7ao3Qc6u1uLEQzVT
-Zn5SpOGKyxFcxLc+km81pLMoSrfwxqZcFkghIhTPTD6zvFyHCajZ6hyqvjVfZ3vq
-jYiJSe6WOjoyl/TQAKQO5v/RBrFFtUMwCRlBEr6V9bfGOiLexQgKzOff/meDpcT9
-sZmQMz9vl2U0wtOIEXsv7lvAGGc0oj4AjwRC3Kv/fsvcMU4XZP66ZTx8hzHKNoN5
-1RVKaw40HqNYpNJcqLjCEpShS6QOKta7WHK2zAQPB44GIig+YH3C7dB8/ngcX4xB
-edUHIvn90bGRcP41q5Ig
-=CEVq
------END PGP SIGNATURE-----
-
---16t9gxbc5NriBE2enAINlsRpj2e0eQ3wq--
