@@ -1,50 +1,46 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f171.google.com (mail-io0-f171.google.com
-	[209.85.223.171])
-	by mail.openembedded.org (Postfix) with ESMTP id EDB987808C
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DFB9F77ECB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 15:55:26 +0000 (UTC)
-Received: by mail-io0-f171.google.com with SMTP id m103so63146iod.13
+	Tue, 19 Sep 2017 16:32:05 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id j16so85424pga.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 08:55:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=0083bGbJC0eCKQLacpoQcOw2BpT81PmmaYQzBBhqP6Y=;
-	b=Fj6T85NMQSC0U/R61ScpD8IMCJTI9Al4sxLHwvl7BvqDFjjTYsdTdKGowwK6woCYh7
-	PGLn5sT9PlklInygXRbDJGS/yDxs2lF7pS3rBguQZ6OtmNmEExrlWX/n8xIC2CjtJZOL
-	GZ3pG2x8M6YsGxLvdZ+DZjB8x8cBUTBY1VdoXrssMSPn7Gzp+mvDiC7dGm+IVyFLfSQ3
-	OGUNpZojkDwCvU5mJbfe2fDj+bruOBAUGBORRe9OAThACQIvuof8z9tZrT0hI9LC2GbP
-	avsjlsWVe+IE9oLuEQYFacdcoSrbdUjG+zexrnEG2lKcc8CqkJecT8XFDeEwWfaym1q9
-	NOxQ==
+	Tue, 19 Sep 2017 09:32:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=aQVWN4/4mZ+nOEnQDeaU0sFdoXlVGpsbmNU4aTzWqqM=;
+	b=abF9a9NaElX9uE/GUZfuH3ha4s7PXvkH5sxaSy58FUsr1aSm4xXUetS1lSyp9QFBuW
+	UD4gBY93NUffQaSnhKgSKM9xhE3YjuRn+s5p39oM2HqhLTbPsmAp4zG3KYhHwSFPEm/5
+	viOZQFLwA1zjHxuTlH1PkAbZsSY4TfT3OYCEEfDtSYC31DWspFIMn/Onfms5UVQygU71
+	2caHXCpn2Tjzjgi1rOFU2Wkb5b0t4E0U3CTYc6mt5tD/Pe+4u6R7q52wYhishNSQXcgg
+	3MFE3k1cNZFvyjdLlaOfBMimZ46U7EAGnjYQHgPgBuKcDDjoBeG5qn1izto5pWMJDhJy
+	om1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=0083bGbJC0eCKQLacpoQcOw2BpT81PmmaYQzBBhqP6Y=;
-	b=MCoe7fSrmSJb1yfH+5WXmB4+1YtoEQ71cpJrx4xOZNZ5d1eVFmjSpt+O4dbvMgE7nb
-	vaMLe9IjwvlJgpQoxhVSdxxKDxAKo1X9YDWHZaVxxdke7C9FzmiuVxJX6oQvJYYvbTs9
-	E++lXwIHg9qNmgWLAQCHK81ZJY7HSJYHN9NSesTrvqPsv8ZKjY3FxUbiH5g3G5Ckxnxh
-	DTLJFj+vIZ9vheEYtFIWx0xmSlkJmSTwgeryH2yyiZKFZAEw+NWHoRzVGCQh9yVx1JzS
-	GSqt0cZ1jXbgMVEQI3vrUseu8b5ETjIGQgIRvKUaLbqvS4L8Um8AUpjyadyE67T36BrM
-	EXgg==
-X-Gm-Message-State: AHPjjUhgbA9tsMHCcvoJ4ajgZs7o7o2BTTr6a+V8bRxDBnTm5uwd4d/b
-	hkRK6J+L0h8VgSf1S2Uljqe62BsH5tDVqvIOWLEZrw==
-X-Google-Smtp-Source: AOwi7QAYDFjmhzoRxKsV1qyB7/ZtDawfg9HlAbBodcgoEaPGyMjAoCARlz6US60M5r8GFKbZ/w6gXhZy5MtbXM4QuUc=
-X-Received: by 10.107.133.92 with SMTP id h89mr2311077iod.208.1505836527886;
-	Tue, 19 Sep 2017 08:55:27 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.19.68 with HTTP; Tue, 19 Sep 2017 08:55:06 -0700 (PDT)
-In-Reply-To: <d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
-References: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
-	<d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 19 Sep 2017 16:55:06 +0100
-Message-ID: <CAJTo0LYtC2MVYqwz_LkGEAvNuDKCQByH1r5QBv-TZKBi499meQ@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [OE-core] Use of github /archive/ tarballs in SRC_URI
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=aQVWN4/4mZ+nOEnQDeaU0sFdoXlVGpsbmNU4aTzWqqM=;
+	b=KLuc4Pav0hGinmV7Mtcu8ceOOFCOldiPPaC5zJF4k4KMxvgwP2FKraKaNuACNhye7/
+	+ks4fPR4VuAqMTwA47R+fPCcNA7/ya1HMvakdsPP8uymXghYCEvFvwoIaocIfSeYiiAv
+	WqE5hRMCk4LiEY4rlB8Idj52DaPGqd1aEdy82qS3K+VDE5SKAMo9lOsWt0AwsFhDs6p9
+	P96s0MyhVQHmd0VC0nMbWRPERVODQEu1DYj/Iiqz3ZE99HhdFnadd0winP7Dza5ryZiR
+	tBT+1TiwTKhRx3vBk8QGhxoKRj4oSbW9AtcHmgKHb31Jgh5WtJs/p3o959wOov/+lo4/
+	I0dQ==
+X-Gm-Message-State: AHPjjUjlkbrYtD/6JgiVd2x66WOufuYhtX3C1I57zknkFxIPpNuzcjXS
+	0IDTuLRUQeLPuu/cYhUZ9Eb57w==
+X-Google-Smtp-Source: AOwi7QD3vdGTn5WQV8tiOcGqeU6i7ZKMFYpjzXEDaEbqnmQMYe4ZAcdKWIbHtPaR9QgUFm/y+CwRFg==
+X-Received: by 10.84.129.193 with SMTP id b59mr1850431plb.30.1505838726284;
+	Tue, 19 Sep 2017 09:32:06 -0700 (PDT)
+Received: from localhost.localdomain (c-73-158-54-208.hsd1.ca.comcast.net.
+	[73.158.54.208]) by smtp.gmail.com with ESMTPSA id
+	c30sm4257354pgn.33.2017.09.19.09.32.05
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 19 Sep 2017 09:32:05 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Sep 2017 09:31:57 -0700
+Message-Id: <20170919163158.38598-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH 1/2] ltrace: Fix build with musl/mips
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,48 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 15:55:27 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 19 Sep 2017 16:32:06 -0000
 
-On 19 September 2017 at 15:34, Carlos Alberto Lopez Perez <clopez@igalia.com
-> wrote:
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../0001-mips-plt.c-Delete-include-error.h.patch   | 27 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/ltrace/ltrace_git.bb      |  1 +
+ 2 files changed, 28 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/ltrace/ltrace/0001-mips-plt.c-Delete-include-error.h.patch
 
-> On 19/09/17 10:09, Burton, Ross wrote:
-> > Then the tarball for one of Erlang's repositories changed, and was
-> noticed
-> > by the checksum in the recipe (thanks Gunnar Andersson for reporting
-> > this).  The extracted contents are identical, but the tarball itself has
-> > changed.  I'm presuming this is due to the old tarball expiring in their
-> > cache, and a newly generated tarball using a later version of tar.
->
-> I don't think tar is the one to blame, but gzip.
-> I have just tested GNU tar (versions 1.29 and 1.26) and BSD tar (from
-> OpenBSD 5.8) and the 3 have produced identical archives (same md5sum)
-> when invoked like git archive does.
->
-> However, the .tar.gz file generated was different in the case of BSD.
-> It even had a different file size.
->
-> I bet that if you uncompress both files, the .tar will have the same
-> checksum in both cases.
->
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace/0001-mips-plt.c-Delete-include-error.h.patch b/meta-oe/recipes-devtools/ltrace/ltrace/0001-mips-plt.c-Delete-include-error.h.patch
+new file mode 100644
+index 000000000..76ba7de78
+--- /dev/null
++++ b/meta-oe/recipes-devtools/ltrace/ltrace/0001-mips-plt.c-Delete-include-error.h.patch
+@@ -0,0 +1,27 @@
++From 19a3e590c97420bd3952301bf376067c75d0ee32 Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Mon, 18 Sep 2017 23:45:54 -0700
++Subject: [PATCH] mips/plt.c: Delete include error.h
++
++Its not needed
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++---
++ sysdeps/linux-gnu/mips/plt.c | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/sysdeps/linux-gnu/mips/plt.c b/sysdeps/linux-gnu/mips/plt.c
++index 2d85ad9..9c3ae2f 100644
++--- a/sysdeps/linux-gnu/mips/plt.c
+++++ b/sysdeps/linux-gnu/mips/plt.c
++@@ -24,7 +24,6 @@
++ 
++ #include <sys/ptrace.h>
++ #include <errno.h>
++-#include <error.h>
++ #include <gelf.h>
++ #include <inttypes.h>
++ #include <string.h>
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+index 01b3bbe1b..abe015de2 100644
+--- a/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
++++ b/meta-oe/recipes-devtools/ltrace/ltrace_git.bb
+@@ -24,6 +24,7 @@ SRC_URI = "git://anonscm.debian.org/collab-maint/ltrace.git;branch=master \
+            file://0001-Fix-tautological-compare-warning.patch \
+            file://0001-Add-support-for-mips64-n32-n64.patch \
+            file://0001-configure-Recognise-linux-musl-as-a-host-OS.patch \
++           file://0001-mips-plt.c-Delete-include-error.h.patch \
+            "
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.14.1
 
-In the situation that I was talking to Gunnar with, the source is the tar
-itself.
-
-https://paste.fedoraproject.org/paste/rP67aSPn1IuYbQcz2UNY3g
-
-They have identical length
-> $ wc -c new-OTP-18.2.3.tar
-> 159068160 new-OTP-18.2.3.tar
-> 159068160 orig-OTP-18.2.3.tar
-> ...but different content
-> $ cmp new-OTP-18.2.3.tar orig-OTP-18.2.3.tar
-> $ new-OTP-18.2.3.tar orig-OTP-18.2.3.tar differ: byte 79122433, line
-> 2004431
->
-
-Basically, both tar and gzip can cause problems.
-
-Ross
 
