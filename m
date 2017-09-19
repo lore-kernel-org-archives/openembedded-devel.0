@@ -1,44 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
-	by mail.openembedded.org (Postfix) with ESMTP id EADFB7804A
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+X-Greylist: delayed 614 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 19 Sep 2017 17:40:43 UTC
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 314437804A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 17:28:01 +0000 (UTC)
-Received: by mail-wm0-f44.google.com with SMTP id v142so790148wmv.5
+	Tue, 19 Sep 2017 17:40:43 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1505842844; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=1qG31ydOOcxHucQaTgy+o7ZEGthSbJyHRtWyjvaCzyw=;
+	b=DWY9GGm5Wm5NI4/WtkYWkonuknE1JlAGS8xXui3oGplDMB6Zx99U7evDMQMzfeBAUmuAleV0
+	poj7Tyg+OVmJwSimmgcmeCuqPteJsMnxDz43P6Crfs4R8GRsaEo+koVGga9gYUIpeC6hr6N1
+	LJWwMdIu/G/Rc6adTN+HhfMCKqI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=BbS12w/cebbG0zU1YTi650NNH02+Bai3PZmoP4gfOE0jElPr2Lz2ZAWXLg0Xi7wGozqxZO
+	4gIuwzgdxXItKwVRhbHq3uyyxDQgnkmFT63DlCu/B9d3ZTmWr/TRsoDdRJhqERwZ3DFCuMRr
+	F+vpWEMGpVCddAzTmuOVyRsZqrQeI=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-it0-f53.google.com (mail-it0-f53.google.com
+	[209.85.214.53])
+	by mxa.mailgun.org with ESMTP id 59c1541e.7fb7ec0d59b0-smtp-out-n02;
+	Tue, 19 Sep 2017 17:30:06 -0000 (UTC)
+Received: by mail-it0-f53.google.com with SMTP id o200so388299itg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 10:28:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=aYj42WBKsTIgv0hXvUeyZXaW/RYK+fYOD8qdbyFi06U=;
-	b=JtUtbYbV1jeTZwBOBFD9k7seys+CiY+lLKjVEHkcFAYwhBufHHvo9WlzLlIpQdWLN6
-	67G3dIUDRs9MCxuSU/qy59nS2yGp4JPG2RR0UNrYPgxUskwqJ6forudsXMjvbnsn+o58
-	k2Txra5jlHN+yNvENuZ2KxJyaQtU6izGMAPB9NWiYJ98z3HVB6NskXwFdHKLR3ys5sD2
-	TWqTZrm7nseg9NoyYJPWudKW7GSKLhoPVvL8sRIHKwITTmsLBsTYqid0NyzkKmvX6I7A
-	zjkFCL6HGmO0n3RvUZA0p1YO2FFcz+daTfebox8hlBcAOy0uz7QUyIuSXIyjnYH85930
-	2P4Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=aYj42WBKsTIgv0hXvUeyZXaW/RYK+fYOD8qdbyFi06U=;
-	b=OvxpsWvnYx9UYpnTRbYcuTSlkrncEM3Ty9gWFbxibB5ZHUFvFZeYx9Ak8uA7fuTezW
-	FuhzydVgF8Skxqt3c0QBexKVq4/pOUjFW8LnqtGBg80KsoljtcC3hU8HyyHRxSaclLCR
-	E1qymZVfMOprBrOmxbwfB8NRvCln1yo3aRoZIh0gmzawm5L7OLR2EcXwUiSTDoC586T4
-	2riXuKg0pOk3jwp6xTQZkiYnT0u1l5KuAGlXtNfpd5GGDiJJGxkQLKQ4by4FKoluGgWK
-	c5aNtZDb0xQvBpm+7+VqokQgoHxMRp/C/Qfis8xLkcg99hKo4wnV40LBwj1kQprckr02
-	Lx6A==
-X-Gm-Message-State: AHPjjUhfAbAiN3v8PcuLSoUojnRUG9uWFEVWXmYIJ2sON7YediFKlFWH
-	uUSks1JdrHTVAHz1j0SKM6nen9OfVixT/YID9DY=
-X-Google-Smtp-Source: AOwi7QDazRMJy3JpJhPrRdQHkWdTDx2E1QXbgq8+aCzxqC5kn5z5aeyhQUB8sM230iNFCjOkdm7OhWmF3zwLKaAGlQ4=
-X-Received: by 10.28.138.148 with SMTP id m142mr1642147wmd.59.1505842082673;
-	Tue, 19 Sep 2017 10:28:02 -0700 (PDT)
+	Tue, 19 Sep 2017 10:30:06 -0700 (PDT)
+X-Gm-Message-State: AHPjjUi5i6y6/gbLUrxWq10U4LAP4+ldQeAilmS+nkEK/QQEEUho+unA
+	X1ghwo6GjChB8NwBimEVfqeNA6tnJ1TjTnvQtNo=
+X-Google-Smtp-Source: AOwi7QC0h4zC8sfnJwGS2Pp0Y0kNJjOaSqyJHm9QcU9cOFT3IEUDJDxMpWQ4fjf3Z37Xb0w9t39oZzhNyJ3k7zTTKpc=
+X-Received: by 10.36.61.21 with SMTP id n21mr2855352itn.121.1505842206404;
+	Tue, 19 Sep 2017 10:30:06 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.147.202 with HTTP; Tue, 19 Sep 2017 10:28:01 -0700 (PDT)
-In-Reply-To: <1505841334-2527-1-git-send-email-derek@asterius.io>
+Received: by 10.107.180.6 with HTTP; Tue, 19 Sep 2017 10:30:05 -0700 (PDT)
+In-Reply-To: <CA+chaQfnk1t0P+omcSxwBGYgVawF=gf5my3+t8ouebHsYy9LTw@mail.gmail.com>
 References: <1505841334-2527-1-git-send-email-derek@asterius.io>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 19 Sep 2017 19:28:01 +0200
-Message-ID: <CA+chaQfnk1t0P+omcSxwBGYgVawF=gf5my3+t8ouebHsYy9LTw@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
+	<CA+chaQfnk1t0P+omcSxwBGYgVawF=gf5my3+t8ouebHsYy9LTw@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Tue, 19 Sep 2017 13:30:05 -0400
+X-Gmail-Original-Message-ID: <CADNbA1qq4jp1w-xUMsgyLkfuJ1JvTV_yrzO9tW77M4mWzt3vjw@mail.gmail.com>
+Message-ID: <CADNbA1qq4jp1w-xUMsgyLkfuJ1JvTV_yrzO9tW77M4mWzt3vjw@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-perl][PATCH] po4a: update to version 0.52
@@ -54,31 +59,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 17:28:02 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 17:40:44 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Not even SRCREV update? I think this rename doesn't do anything.
+I just realized I didn't git add the update after I moved it.  v2 coming
+now.  Thanks.
 
-On Tue, Sep 19, 2017 at 7:15 PM, Derek Straka <derek@asterius.io> wrote:
+On Tue, Sep 19, 2017 at 1:28 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} | 0
->  1 file changed, 0 insertions(+), 0 deletions(-)
->  rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} (100%)
+> Not even SRCREV update? I think this rename doesn't do anything.
 >
-> diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
-> b/meta-perl/recipes-perl/po4a/po4a_0.52.bb
-> similarity index 100%
-> rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
-> rename to meta-perl/recipes-perl/po4a/po4a_0.52.bb
-> --
-> 2.7.4
+> On Tue, Sep 19, 2017 at 7:15 PM, Derek Straka <derek@asterius.io> wrote:
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>> Signed-off-by: Derek Straka <derek@asterius.io>
+>> ---
+>>  meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} | 0
+>>  1 file changed, 0 insertions(+), 0 deletions(-)
+>>  rename meta-perl/recipes-perl/po4a/{po4a_0.49.bb => po4a_0.52.bb} (100%)
+>>
+>> diff --git a/meta-perl/recipes-perl/po4a/po4a_0.49.bb
+>> b/meta-perl/recipes-perl/po4a/po4a_0.52.bb
+>> similarity index 100%
+>> rename from meta-perl/recipes-perl/po4a/po4a_0.49.bb
+>> rename to meta-perl/recipes-perl/po4a/po4a_0.52.bb
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
 >
 
