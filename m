@@ -1,38 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5290278044
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DB87780B8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 14:22:00 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id c69so2334296qke.5
+	Tue, 19 Sep 2017 14:32:35 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id t46so2426153qtj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 07:22:02 -0700 (PDT)
+	Tue, 19 Sep 2017 07:32:36 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2+YPbFtwdIiUvA354dh6C5BXrph94E1yZcuey26DQ54=;
-	b=dI85q41aLGcoazIRCm+x7WdEo/wypOnZhXStVk+7nClqNISwmLueK12mDQWXjtRV8E
-	RXXr7s9wgmkSuOhTW496Y00htjRkhrIudP5OH8ICjPNz4sm9MlugJVHSPW5s1L/QhmLl
-	HyoPmOsXqfkXl64H3Mutnbp1KOUARFYfymj4OpCAp+fzNERARhj9aCuwjClLXGJ+TFC3
-	CrfzDRT+CtuiLmOVZI56mumB1AcVqg6pQDT+FaGoLjXrUlq5e3iAkldFMTctZkK9sudl
-	zaghKYvuggwHyRnn7AH3wOupm8LVatigSJnWIa9+CxP7o/P8OdOzxQoWbc2f9ijcE/AI
-	4oIQ==
-X-Gm-Message-State: AHPjjUgzEO1rPrmDChQMYcBRCQvq7HbH/aQT5yd8eBGsm9TkSxclqgCS
-	d7ftmvA69HfZm6AsAhvyq+yEfVEp
-X-Google-Smtp-Source: AOwi7QD0UNXtzBsglrzFUIISHqPoRmDY8z//AC4eQ1iHuTZlEhXqBj/GLiEjr9hM9unlq/h3HJbNfw==
-X-Received: by 10.55.135.197 with SMTP id j188mr2099682qkd.277.1505830921852; 
-	Tue, 19 Sep 2017 07:22:01 -0700 (PDT)
+	bh=gCP+OsNcK8vIrP205MRmSIjT6aYNek8fyHHbkSNJ+fo=;
+	b=TUIQfRK6sVlJG5rg+XcnsAFu6euQ0i0+NOCMMdyfO+TL6aoEQ4L5IfI8Y0TGW4nN2G
+	JhgsGeinrGiTFIQQ2Z9zEMDqLie2I/ugqico+vjxhor0ZnlqPfL5cxO1Xrk69drQk1Jq
+	x6/xM5OPwqPAf01h1JlCN2BaLQ4D3EUMMobJGafnm8uwOBH65r6VOLBV1wUkiVlPzcVR
+	cKx87V0cIaF2EuuxIb8PV5xSQGq5Jv0cIEMzTK97DKOZF+4Uo3Up5vtBBi6vT8/5IKu1
+	YrVCtiKAdV/CKWXd6CRGlW0xkN+JGlvFU3a38VcSrVEg5KfSJwsCcXkxoZQCnBr3cH5l
+	0ZMA==
+X-Gm-Message-State: AHPjjUjYlix3sRgikSw2MBvsBRfqBRX4A5Ro8t8jJNCplgrP1R4HJ9nX
+	vAl0RPBIkJD3P7wzcYIGlicQTBk6
+X-Google-Smtp-Source: AOwi7QAqnTbuRlJcxvumH9dkztNHWCOAOpgg0UEgiz2yR405YBz34JefA/MH8HHb/eEBlMFIIrVl4g==
+X-Received: by 10.200.44.123 with SMTP id e56mr2297514qta.308.1505831556171;
+	Tue, 19 Sep 2017 07:32:36 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id y15sm7115442qtc.4.2017.09.19.07.22.01
+	by smtp.gmail.com with ESMTPSA id
+	v92sm6894981qte.69.2017.09.19.07.32.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Sep 2017 07:22:01 -0700 (PDT)
+	Tue, 19 Sep 2017 07:32:35 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 10:21:54 -0400
-Message-Id: <1505830914-25232-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Sep 2017 10:32:29 -0400
+Message-Id: <1505831549-30213-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-grpcio-tools: update to version 1.6.0
+Subject: [meta-python][PATCH] python-tornado: update to version 4.5.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 14:22:01 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 14:32:35 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{python-grpcio-tools_1.4.0.bb => python-grpcio-tools_1.6.0.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-grpcio-tools_1.4.0.bb => python-grpcio-tools_1.6.0.bb} (74%)
+ meta-python/recipes-devtools/python/python-tornado.inc                | 4 ++--
+ .../python/{python-tornado_4.4.2.bb => python-tornado_4.5.2.bb}       | 0
+ .../python/{python3-tornado_4.4.2.bb => python3-tornado_4.5.2.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-tornado_4.4.2.bb => python-tornado_4.5.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-tornado_4.4.2.bb => python3-tornado_4.5.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools_1.4.0.bb b/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb
-similarity index 74%
-rename from meta-python/recipes-devtools/python/python-grpcio-tools_1.4.0.bb
-rename to meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb
-index f9cfd99..2b82ca6 100644
---- a/meta-python/recipes-devtools/python/python-grpcio-tools_1.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb
-@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
+index 9b1cf41..2c58655 100644
+--- a/meta-python/recipes-devtools/python/python-tornado.inc
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://setup.py;startline=2;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
  
- inherit pypi setuptools
+-SRC_URI[md5sum] = "b4816ea209118667ffc52ce9ff06ac85"
+-SRC_URI[sha256sum] = "2898f992f898cd41eeb8d53b6df75495f2f423b6672890aadaf196ea1448edcc"
++SRC_URI[md5sum] = "ab41f6765d58089f30ba51e8ec084a7b"
++SRC_URI[sha256sum] = "1fb8e494cd46c674d86fac5885a3ff87b0e283937a47d74eb3c02a48c9e89ad0"
  
--SRC_URI[md5sum] = "b0d585872c69f207a05c55566e8afb38"
--SRC_URI[sha256sum] = "bddc98f063755a5df9d285666db49c49201f93d416c45d4f4924cf752b68c99c"
-+SRC_URI[md5sum] = "74a02d8218c2680a7ca10d6dec2123ef"
-+SRC_URI[sha256sum] = "6efe56bc6565edf6bc52c97f29131a7a125261716576d9e824b43cabf354bf45"
- 
- # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
- BBCLASSEXTEND = "native"
+ RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email ${PYTHON_PN}-subprocess \
+                    ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading"
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.4.2.bb b/meta-python/recipes-devtools/python/python-tornado_4.5.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-tornado_4.4.2.bb
+rename to meta-python/recipes-devtools/python/python-tornado_4.5.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb b/meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-tornado_4.4.2.bb
+rename to meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb
 -- 
 2.7.4
 
