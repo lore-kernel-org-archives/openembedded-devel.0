@@ -1,38 +1,34 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id A1E517806E
+Return-Path: <clopez@igalia.com>
+X-Greylist: delayed 2074 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 19 Sep 2017 15:08:56 UTC
+Received: from fanzine.igalia.com (fanzine.igalia.com [91.117.99.155])
+	by mail.openembedded.org (Postfix) with ESMTP id 391367806E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 14:57:36 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id t46so2473960qtj.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 07:57:38 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=2GRuF5Zyj1HY17Vo38CJiJKi0EC+V6JY3VWFdfTK+vw=;
-	b=ZViOuS5nQ5OBYDGsrQ9x+RpkVR0TVZQIg/VDU72zLmyNItR0LE1sRWtgeCO5FPV2SR
-	J/OAewzl5yMoWVMBCSO9loSvKupz/y9NZ3EWX+tJSUW42NKwNFHEpNW9zfpdvby6j0Cm
-	YsQiAFt5McItTuc7MnY+jp9gYy1nNRXLrYxeJSI2FKKtG+RgUT1/w16qkGZlRY73FdZS
-	UELuDj+6hBwvGH39HY3UsKtfRJmEhy15VI35lls+iMMytlqD6MNDli0S8dECXt+Nbgby
-	SVicMv+c7InFljF6eNaZKu4U9ihPb7BGXTtTjW3z0orStF7ErXhV/aWLj734Y4N6aH9Y
-	n0YQ==
-X-Gm-Message-State: AHPjjUi9TsVGSyLSdgF2PArlKJsVjYLXblHiDiuNA7dacyLH+tebnKdb
-	IVkYXPot5jZHWPeTcaZTX1+kcsvD
-X-Google-Smtp-Source: AOwi7QDily6qMl4eXXfz/9e3KXb31y/tCtxwnFpQrdqGzuDHbBdjagXjjB3PGuw/7YgEVBJsOVogqg==
-X-Received: by 10.200.55.40 with SMTP id o37mr2400580qtb.248.1505833057413;
-	Tue, 19 Sep 2017 07:57:37 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id q5sm7414055qkh.43.2017.09.19.07.57.35
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Sep 2017 07:57:35 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 10:57:28 -0400
-Message-Id: <1505833048-19814-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-multidict: update to version 3.2.0
+	Tue, 19 Sep 2017 15:08:56 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
+	s=20170329; 
+	h=Content-Type:In-Reply-To:MIME-Version:Date:Message-ID:From:References:To:Subject;
+	bh=dd4O0iOYqeln+9iqLKr0LDMzdDLKF6rutM0oJR4dL3k=; 
+	b=ohgIYOINxxsMQiulB5maKnW9rSwyQN/DR62jiHgeJtnqnrX8CMyMBGXRZ3FwO0YIGcYsokg6jWmfMsyZtrijTFOLttJnslg7E46j+eV7TaP9kzvGAdnHZcFseFezAosDmkdl798XocGgKa2hjopmeYZTCFiE+UzGm1lKBhGp5tbs+pxK5Z3Wb+VDjyhmn6Owr8oRivhy+myNmvt1qTtBFOP+HNS1qHu2f30OQ/snq/fu9MXOlFCgjvdkx65yl4L8KVAfAe1Zpf/tPwUv5ywjfYT9TPynMqvP714k7bV3S0KG4dQk3nbvU1w2+gonxxHzC1BAtZ9sbWJLpJznpjOkzw==;
+Received: from [192.168.10.149] by fanzine.igalia.com with esmtpsa 
+	(Cipher TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128) (Exim)
+	id 1duJbT-00074a-4Z; Tue, 19 Sep 2017 16:34:23 +0200
+To: OE-core <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+References: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+Openpgp: id=B5D2B50BC48EC7F1EE90D9AB965089CE6B95F882;
+	url=http://key.neutrino.es
+Organization: Igalia S.L.
+Mail-Followup-To: OE-core <openembedded-core@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Message-ID: <d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
+Date: Tue, 19 Sep 2017 16:34:22 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.2.1
+MIME-Version: 1.0
+In-Reply-To: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
+Subject: Re: Use of github /archive/ tarballs in SRC_URI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +41,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 14:57:36 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 15:08:57 -0000
+X-Groupsio-MsgNum: 68920
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature";
+	boundary="NNmhmt21GmdVGGagETcdhX5wJ44Fo7Dii"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../python/{python3-multidict_2.1.6.bb => python3-multidict_3.2.0.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-multidict_2.1.6.bb => python3-multidict_3.2.0.bb} (64%)
+--NNmhmt21GmdVGGagETcdhX5wJ44Fo7Dii
+Content-Type: multipart/mixed; boundary="wSMXuOcFwxqDc5X5PHoNKu8xlN7Up8R5R";
+ protected-headers="v1"
+From: Carlos Alberto Lopez Perez <clopez@igalia.com>
+To: OE-core <openembedded-core@lists.openembedded.org>,
+ OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Message-ID: <d2cf577f-a995-9cc2-380b-9a1922926abd@igalia.com>
+Subject: Re: [oe] Use of github /archive/ tarballs in SRC_URI
+References: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
+In-Reply-To: <CAJTo0LaTCgNx-g8jyhULWNs3bNiouu2JbptobWE5vbFVwgVnxQ@mail.gmail.com>
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb b/meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb
-rename to meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
-index 646cb77..c6556b3 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
- 
- inherit pypi setuptools3
- 
--SRC_URI[md5sum] = "7837353cf71008484e99737ccf55a4ea"
--SRC_URI[sha256sum] = "9ec33a1da4d2096949e29ddd66a352aae57fad6b5483087d54566a2f6345ae10"
-+SRC_URI[md5sum] = "a01da31ca1855557a1b2e053c933af2f"
-+SRC_URI[sha256sum] = "e27a7a95317371c15ecda7206f6e8c144f10a337bb2c3e61b5176deafbb88cb2"
--- 
-2.7.4
+--wSMXuOcFwxqDc5X5PHoNKu8xlN7Up8R5R
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-GB
+Content-Transfer-Encoding: quoted-printable
+
+On 19/09/17 10:09, Burton, Ross wrote:
+> Then the tarball for one of Erlang's repositories changed, and was noti=
+ced
+> by the checksum in the recipe (thanks Gunnar Andersson for reporting
+> this).  The extracted contents are identical, but the tarball itself ha=
+s
+> changed.  I'm presuming this is due to the old tarball expiring in thei=
+r
+> cache, and a newly generated tarball using a later version of tar.
+
+I don't think tar is the one to blame, but gzip.
+I have just tested GNU tar (versions 1.29 and 1.26) and BSD tar (from
+OpenBSD 5.8) and the 3 have produced identical archives (same md5sum)
+when invoked like git archive does.
+
+However, the .tar.gz file generated was different in the case of BSD.
+It even had a different file size.
+
+I bet that if you uncompress both files, the .tar will have the same
+checksum in both cases.
+
+I guess that a different version (or implementation) of gzip, or even
+different local settings like forcing a more or less aggressive
+compression can be the explanation here.
+
+Maybe an idea is that OE could gain a feature to optionally do a
+checksum of the .tar file once uncompressed that could be used as a
+fallback second check if the first one fails?
+If the first one fails but the second one passes a non-fatal WARN could
+be issued.
 
 
+--wSMXuOcFwxqDc5X5PHoNKu8xlN7Up8R5R--
+
+--NNmhmt21GmdVGGagETcdhX5wJ44Fo7Dii
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Comment: You can fetch my GnuPG key from http://key.neutrino.es
+
+iQIzBAEBCgAdFiEEtdK1C8SOx/HukNmrllCJzmuV+IIFAlnBKu4ACgkQllCJzmuV
++IJB3A//bm0k9e2CMDtkOjadhAupGtSf2c8XwKO6VajQCePG00ScrzeYD4+qhivi
+G7uPftjD7GsqreLqtCtsl5u5BJZZYmHjxATMRS/75kZjqOuMZQ/lFhUiLpEIwubr
+oU5vDc1FCwtNGlhigyRgD+S8UJWLgQAn/cUvnzU+fEeG8eBD8WfOPmxZdzct2G6P
+s3XWby2LER45/0WOzlau4VpMtM1+s8szBgD287ixB/fw0+mFsgJCMo7kz2Q+axfr
+iYGZv8rX9Ko/uMiwoKwsuY1wp4DBVl+e76Wo1iy6qhmiKvdES2EASsEmDMVBtTFB
+RgQ7ts3YAxvzrcOraSwdw0Gx9DTGgswK8ToHOxZZWTXztY/4q/T+ioGKcAGkBghw
+uVb+jtqbT5PLCPFTFLNJNucNEFdButYssh+QmbplDz6ip96IlKM+tg5IWpdv41if
+eKfANQOuifTaMOkw+A/XRBvtNSaXmILskqdG+Y6i+zvxzq/s8fkDAHZUBtG62bEU
+7gdoaVK+iV79X7rzS2nJLalIqiIty3k6Vcq34TEODdqxh+JDmBow0i82zcfNSTyk
+mHmiCDTeGEG3osu/6FgkSjD7t0rpq/srKfi5yuseVZCoUAiGFY877M69aQbfZCbs
+gzyv+dVsh2WJBW5B3wvT8i7a4mxrv5b2U3uNhuQjXIfK/4jyxYM=
+=14jD
+-----END PGP SIGNATURE-----
+
+--NNmhmt21GmdVGGagETcdhX5wJ44Fo7Dii--
