@@ -1,39 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
 	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id CB0227806E
+	by mail.openembedded.org (Postfix) with ESMTP id A1E517806E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 14:52:05 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id l25so2477356qtf.2
+	Tue, 19 Sep 2017 14:57:36 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id t46so2473960qtj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 07:52:07 -0700 (PDT)
+	Tue, 19 Sep 2017 07:57:38 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=sDU2wMLxCDOiko+bEQV7G+vc1lOCB9M0BRE7bB55xf8=;
-	b=aobyjcOl/w6hhvKIlOqALrwcwlOo8jWbTgvlUpZgwbgEIoR9ea7Bw+8a7XLLZgFIWp
-	b22rZOpcGQndNclSRX6IgGbdz4SILURyAJ6PuvAV68C82Bm7zCdo7AfUcQECdLvp1j0+
-	CMjgWyrRyR/2NYkWukgOMZG3hbpXp0SFTsKHdME+XE0/mBT1TZzDwObxsC354jfLUdjX
-	+bwyZLjtVQA8NibxVxRz71+VtPl73CbLRrhiNMuOZJMgm9b3xPbIxTRyaABNp1uK9m6+
-	gaLFct3QtMQqogx4Eq8cbglg33/cJMiJ8iaK44ugnDnuGhnUChFOs/VDVMBkK4HNDT8x
-	evYw==
-X-Gm-Message-State: AHPjjUii6jjWwrFUDBwC4TYVWOqAVSS3jrZViV6iaKYzalFrLhi8AZGn
-	WGdGCEVI/99c52QoLU41LC/OOPMs
-X-Google-Smtp-Source: AOwi7QAUgD5Za7N5AgvajvZh8dv3sjvHD+bex3yJ1D+bQ0kXZD05VAUOw7SwMXgqFgZdxWD9ixuHSQ==
-X-Received: by 10.237.34.118 with SMTP id o51mr2379111qtc.36.1505832726459;
-	Tue, 19 Sep 2017 07:52:06 -0700 (PDT)
+	bh=2GRuF5Zyj1HY17Vo38CJiJKi0EC+V6JY3VWFdfTK+vw=;
+	b=ZViOuS5nQ5OBYDGsrQ9x+RpkVR0TVZQIg/VDU72zLmyNItR0LE1sRWtgeCO5FPV2SR
+	J/OAewzl5yMoWVMBCSO9loSvKupz/y9NZ3EWX+tJSUW42NKwNFHEpNW9zfpdvby6j0Cm
+	YsQiAFt5McItTuc7MnY+jp9gYy1nNRXLrYxeJSI2FKKtG+RgUT1/w16qkGZlRY73FdZS
+	UELuDj+6hBwvGH39HY3UsKtfRJmEhy15VI35lls+iMMytlqD6MNDli0S8dECXt+Nbgby
+	SVicMv+c7InFljF6eNaZKu4U9ihPb7BGXTtTjW3z0orStF7ErXhV/aWLj734Y4N6aH9Y
+	n0YQ==
+X-Gm-Message-State: AHPjjUi9TsVGSyLSdgF2PArlKJsVjYLXblHiDiuNA7dacyLH+tebnKdb
+	IVkYXPot5jZHWPeTcaZTX1+kcsvD
+X-Google-Smtp-Source: AOwi7QDily6qMl4eXXfz/9e3KXb31y/tCtxwnFpQrdqGzuDHbBdjagXjjB3PGuw/7YgEVBJsOVogqg==
+X-Received: by 10.200.55.40 with SMTP id o37mr2400580qtb.248.1505833057413;
+	Tue, 19 Sep 2017 07:57:37 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	a125sm6843532qkg.13.2017.09.19.07.52.05
+	by smtp.gmail.com with ESMTPSA id q5sm7414055qkh.43.2017.09.19.07.57.35
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Sep 2017 07:52:05 -0700 (PDT)
+	Tue, 19 Sep 2017 07:57:35 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 10:52:00 -0400
-Message-Id: <1505832720-19049-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Sep 2017 10:57:28 -0400
+Message-Id: <1505833048-19814-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cassandra-driver: update to version 3.11.0
+Subject: [meta-python][PATCH] python3-multidict: update to version 3.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,34 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Sep 2017 14:52:06 -0000
+X-List-Received-Date: Tue, 19 Sep 2017 14:57:36 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cassandra-driver.inc       | 4 ++--
- ...3-cassandra-driver_3.8.1.bb => python3-cassandra-driver_3.11.0.bb} | 0
- 2 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.8.1.bb => python3-cassandra-driver_3.11.0.bb} (100%)
+ .../python/{python3-multidict_2.1.6.bb => python3-multidict_3.2.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-multidict_2.1.6.bb => python3-multidict_3.2.0.bb} (64%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-index 43c346d..a522e67 100644
---- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-+++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
-@@ -8,8 +8,8 @@ LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
- SRCNAME = "cassandra-driver"
+diff --git a/meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb b/meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
+similarity index 64%
+rename from meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb
+rename to meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
+index 646cb77..c6556b3 100644
+--- a/meta-python/recipes-devtools/python/python3-multidict_2.1.6.bb
++++ b/meta-python/recipes-devtools/python/python3-multidict_3.2.0.bb
+@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
  
--SRC_URI[md5sum] = "67b107df88b0a609497814609685d0a3"
--SRC_URI[sha256sum] = "2c35138c52fb85f3889a2841af1d39a0fe91e2f58a6205b1676944d2f4cbefec"
-+SRC_URI[md5sum] = "1659b074e10c613e5ba1cdf92974a57a"
-+SRC_URI[sha256sum] = "643bed0fac08ee91630f0f35556bb62c3b4b007c20d4e6e8d349f769ea648150"
+ inherit pypi setuptools3
  
- DISTUTILS_BUILD_ARGS += " \
-     --no-libev \
-diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.8.1.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.11.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.8.1.bb
-rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.11.0.bb
+-SRC_URI[md5sum] = "7837353cf71008484e99737ccf55a4ea"
+-SRC_URI[sha256sum] = "9ec33a1da4d2096949e29ddd66a352aae57fad6b5483087d54566a2f6345ae10"
++SRC_URI[md5sum] = "a01da31ca1855557a1b2e053c933af2f"
++SRC_URI[sha256sum] = "e27a7a95317371c15ecda7206f6e8c144f10a337bb2c3e61b5176deafbb88cb2"
 -- 
 2.7.4
 
