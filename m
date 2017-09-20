@@ -1,50 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 240A06093C
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id B254C77BC9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 04:14:41 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id f84so722164pfj.3
+	Wed, 20 Sep 2017 04:14:42 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id m30so977040pgn.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 21:14:43 -0700 (PDT)
+	Tue, 19 Sep 2017 21:14:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=wY0MRVriW/NOca7cDxCmr56tfpr9O+PR0PPZaDWQy7Q=;
-	b=XGOB8F1Fnb2aIuveg+OtcIWNUyrUSzsxBl/b0Th0w1ZNcVPq6pN5uLB6WvhULeLXgD
-	wX1G+Hzt2zt3iJ3AFHxx0sttFnou6x8ZwWwfVyEoQRevNbS5JkiLKrXpvIX4kxExdwm5
-	ozgBZAgWGrfsADd09Ux/FhFR3VwTVYHvvSaGZbF+EEvZFv1lPdD0WwFEbXZ10Cm60DbT
-	eG4dGUmRuAR7KoZTUv638FyM1br2sH7YuSqgWlj+axSxGOu7iJPBb7xcNefpY3PP5QKr
-	0HNhTS0/NDN6q1FczjPGO/sSRuzRSd7P2RhEOmzQB192/6Jc9kchQ0BE6jIC5JDr49Ol
-	KpCA==
+	bh=nVyhZQg3YsBZFqkKPfj4eBKKK9MUz5v/2WwcBRAK68Q=;
+	b=SC8sJTxr/uVKMTw33ENl+opwYWdi2hY5Hcmx2NgSobLr9AR7UkcwcXZZLOur4zEne0
+	59ZeSYk+af2TfzUxKIYjDNYRClDoKL500nJqXtbwH5A9zU5NrnuuwYRfDQbia1wcvNCw
+	8ObDLEhf541nlwYvvYp/jz3X+gIPTLfT4BNZ7SJES/2BRc0kPgaVLj0yXLdeWgRVEA3W
+	tX6HvdwGDp/cwWRu+//UKf9YcYdQP/kiKNqjd85CNLK9ewbN+lAzha+WbUtt+S7MOh+y
+	ArZ1mzCaR5fpN4lwi8dS7I6Z83h94+6lPant7rIIhhaO9HL1Ic6Q1fn9qbZbcBnUOMPU
+	fkHA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=wY0MRVriW/NOca7cDxCmr56tfpr9O+PR0PPZaDWQy7Q=;
-	b=NX/TfzYYWXub5SKH6pvy5cga3Z8c70j/7PEZFH8Z4GSPtlzs/02eHSIeUX3njRnHzO
-	oBHGVUhfDy1MDjjrygogvp3DTtuL6sv0cs444ExItTVG9ljSrMlXDXC75KnYE9SQg8gb
-	jxcBmS79MNAwSAEsX1o3B4Hbkt71RXh2mkVZPUhXSzPhdqBb3RZBFaY1+jDNEiYQJ1k2
-	yAX3EZbkz8MI7e/s2LcVTunostgx1JZXnF9hHbV76kU14EPNE6Ir2JycbdpcpH93Mc8G
-	PrjGqcatn0HwnM+wL24uO/By2d43EOy/qL5+xdX/WFXKo/id4aqgS5X6M9UAXjAAuu8e
-	UsDQ==
-X-Gm-Message-State: AHPjjUjpprEl8H1UBhmfx7bz/2LC8AkELuHfktwsuowc7wUnlO1fhb5L
-	SBSgm8n+nVCtAQ0QZB7RZYVThw==
-X-Google-Smtp-Source: AOwi7QB8mHJ0KvTlKCRzJHKBPvwZvIkKrE+rvJF5k07/ocytHrigxYIDsf6zVE+SYUwO51g1Rcfphw==
-X-Received: by 10.159.216.145 with SMTP id s17mr794182plp.35.1505880883111;
-	Tue, 19 Sep 2017 21:14:43 -0700 (PDT)
+	bh=nVyhZQg3YsBZFqkKPfj4eBKKK9MUz5v/2WwcBRAK68Q=;
+	b=ZqsM+4VAwGa+6O6bGyS9QwW5/dD0sg9RqltH1BM344OZpPs+RQAoIK3c2riGld0L3q
+	S8cg3BQM1UcL7RRVoBmqJxvlUtAhUKaq5JGK4gkkN9pqbrA0w5Xo25IZ5ixI/n6TEeRg
+	3Sy2E31j0+9H1ISDCAJGbl8zTAQzHrEJyzgE9rVo6EpjooPG9LJ+mxfxir/GcHM5BS4W
+	SQFXJ2UJk675M8sd3ftRj4TH8Czpy7t5keYZ3II0Q6txW9S5VUbDbxO/AX+n3Zd9Lafz
+	0ErBEHVnmh4yiqaXMZT9z3HLGaEBQ5w/yfd9KvCkm2Y9+sZNgrI141Ou649RhFvW+fBW
+	XAtA==
+X-Gm-Message-State: AHPjjUiINTEI+9WfnKPULpEk5WxTM624bYeKpW/n2CHsw6okh1SC08uA
+	qcx9fqJKb2m96VDp0GCz9rsa0g==
+X-Google-Smtp-Source: AOwi7QC95RF36mVRulW8z5z8gAXOU8P8qYZYaDXC3ucWRABFVZi0zcaeuVXfg7R1yIRZaFnZBZRK8g==
+X-Received: by 10.98.211.72 with SMTP id q69mr835901pfg.308.1505880882203;
+	Tue, 19 Sep 2017 21:14:42 -0700 (PDT)
 Received: from localhost.localdomain (c-73-158-54-208.hsd1.ca.comcast.net.
 	[73.158.54.208]) by smtp.gmail.com with ESMTPSA id
-	w12sm5277628pfk.83.2017.09.19.21.14.42
+	w12sm5277628pfk.83.2017.09.19.21.14.40
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Sep 2017 21:14:42 -0700 (PDT)
+	Tue, 19 Sep 2017 21:14:41 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 21:14:29 -0700
-Message-Id: <20170920041429.8047-3-raj.khem@gmail.com>
+Date: Tue, 19 Sep 2017 21:14:28 -0700
+Message-Id: <20170920041429.8047-2-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
 In-Reply-To: <20170920041429.8047-1-raj.khem@gmail.com>
 References: <20170920041429.8047-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 3/3] mongodb: Fix build on aarch64
+Subject: [meta-oe][PATCH 2/3] opencv: Fix build on aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,178 +58,2285 @@ List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-dev
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 20 Sep 2017 04:14:42 -0000
 
+Enable intrinsics on arm/neon with clang while here
+
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...FPMathLib20U1-Check-for-__DEFINED_wchar_t.patch | 36 ++++++++++++++++
- .../mongodb/mongodb/arm64-support.patch            | 43 +++++++++++++++++++
- .../mongodb/disable-hw-crc32-on-arm64-s390x.patch  | 50 ++++++++++++++++++++++
- meta-oe/recipes-support/mongodb/mongodb_git.bb     |  3 ++
- 4 files changed, 132 insertions(+)
- create mode 100644 meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
- create mode 100644 meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
- create mode 100644 meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
+ ...1-carotene-don-t-use-__asm__-with-aarch64.patch | 1250 ++++++++++++++++++++
+ .../opencv/0002-Do-not-enable-asm-with-clang.patch |  993 ++++++++++++++++
+ meta-oe/recipes-support/opencv/opencv_3.3.bb       |    2 +
+ 3 files changed, 2245 insertions(+)
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0001-carotene-don-t-use-__asm__-with-aarch64.patch
+ create mode 100644 meta-oe/recipes-support/opencv/opencv/0002-Do-not-enable-asm-with-clang.patch
 
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch b/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0001-carotene-don-t-use-__asm__-with-aarch64.patch b/meta-oe/recipes-support/opencv/opencv/0001-carotene-don-t-use-__asm__-with-aarch64.patch
 new file mode 100644
-index 000000000..97f5a1d43
+index 000000000..a1a56e0e4
 --- /dev/null
-+++ b/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
-@@ -0,0 +1,36 @@
-+From fbfceebce2121831904f2f7115252dd03b413a6d Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 19 Sep 2017 18:52:53 -0700
-+Subject: [PATCH] IntelRDFPMathLib20U1: Check for __DEFINED_wchar_t
++++ b/meta-oe/recipes-support/opencv/opencv/0001-carotene-don-t-use-__asm__-with-aarch64.patch
+@@ -0,0 +1,1250 @@
++From 353fc92618ce0dc6bab4a3e8bff1c13c3b613110 Mon Sep 17 00:00:00 2001
++From: Alexander Alekhin <alexander.alekhin@intel.com>
++Date: Wed, 23 Aug 2017 17:41:23 +0300
++Subject: [PATCH 1/2] carotene: don't use __asm__ with aarch64
 +
-+This is defined by musl if wchar_t is already defined
-+
-+avoids errors like
-+
-+src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h:46:15: error: typedef redefinition with different types
-+      ('int' vs 'unsigned int')
-+typedef int   wchar_t;
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Pending
++Upstream-Status: Backport
 +
-+ src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++ 3rdparty/carotene/src/channel_extract.cpp  |   4 +-
++ 3rdparty/carotene/src/channels_combine.cpp |   2 +-
++ 3rdparty/carotene/src/colorconvert.cpp     | 104 ++++++++++++++---------------
++ 3rdparty/carotene/src/convert.cpp          |  54 +++++++--------
++ 3rdparty/carotene/src/convert_scale.cpp    |  72 ++++++++++----------
++ 3rdparty/carotene/src/gaussian_blur.cpp    |   6 +-
++ 3rdparty/carotene/src/pyramid.cpp          |  20 +++---
++ 3rdparty/carotene/src/scharr.cpp           |   4 +-
++ 8 files changed, 133 insertions(+), 133 deletions(-)
 +
-+diff --git a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
-+index 2b3f76db86..cc80305775 100755
-+--- a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
-++++ b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
-+@@ -42,7 +42,7 @@
-+ #include <ctype.h>
++diff --git a/3rdparty/carotene/src/channel_extract.cpp b/3rdparty/carotene/src/channel_extract.cpp
++index f663bc6005..8238a3ece8 100644
++--- a/3rdparty/carotene/src/channel_extract.cpp
+++++ b/3rdparty/carotene/src/channel_extract.cpp
++@@ -231,7 +231,7 @@ void extract4(const Size2D &size,
++                  srcStride == dst2Stride && \
++                  srcStride == dst3Stride &&
 + 
-+ // Fix system header issue on Sun solaris and define required type by ourselves
-+-#if !defined(_WCHAR_T) && !defined(_WCHAR_T_DEFINED) && !defined(__QNX__)
-++#if !defined(_WCHAR_T) && !defined(_WCHAR_T_DEFINED) && !defined(__QNX__) && !defined(__DEFINED_wchar_t)
-+ typedef int   wchar_t;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ 
++ #define SPLIT_ASM2(sgn, bits) __asm__ ( \
++                                           "vld2." #bits " {d0, d2}, [%[in0]]            \n\t" \
++@@ -351,7 +351,7 @@ void extract4(const Size2D &size,
++     }                                                                                                   \
++ }
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ 
++ #define ALPHA_QUAD(sgn, bits) { \
++                                   internal::prefetch(src + sj); \
++diff --git a/3rdparty/carotene/src/channels_combine.cpp b/3rdparty/carotene/src/channels_combine.cpp
++index 157c8b8121..fc98fb9181 100644
++--- a/3rdparty/carotene/src/channels_combine.cpp
+++++ b/3rdparty/carotene/src/channels_combine.cpp
++@@ -77,7 +77,7 @@ namespace CAROTENE_NS {
++                  dstStride == src2Stride && \
++                  dstStride == src3Stride &&
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ 
++ #define MERGE_ASM2(sgn, bits) __asm__ ( \
++                                           "vld1." #bits " {d0-d1}, [%[in0]]             \n\t" \
++diff --git a/3rdparty/carotene/src/colorconvert.cpp b/3rdparty/carotene/src/colorconvert.cpp
++index 3037fe672a..26ae54b15c 100644
++--- a/3rdparty/carotene/src/colorconvert.cpp
+++++ b/3rdparty/carotene/src/colorconvert.cpp
++@@ -97,7 +97,7 @@ void rgb2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -116,7 +116,7 @@ void rgb2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++         for (; dj < roiw8; sj += 24, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -198,7 +198,7 @@ void rgbx2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -217,7 +217,7 @@ void rgbx2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++         for (; dj < roiw8; sj += 32, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -300,7 +300,7 @@ void bgr2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -319,7 +319,7 @@ void bgr2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++         for (; dj < roiw8; sj += 24, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -402,7 +402,7 @@ void bgrx2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -421,7 +421,7 @@ void bgrx2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++         for (; dj < roiw8; sj += 32, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -512,7 +512,7 @@ void gray2rgb(const Size2D &size,
++         for (; sj < roiw16; sj += 16, dj += 48)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++             "vld1.8 {d0-d1}, [%[in0]]            \n\t"
++             "vmov.8 q1, q0                       \n\t"
++@@ -538,7 +538,7 @@ void gray2rgb(const Size2D &size,
++ 
++         if (sj < roiw8)
++         {
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++             "vld1.8 {d0}, [%[in]]                \n\t"
++             "vmov.8 d1, d0                       \n\t"
++@@ -584,7 +584,7 @@ void gray2rgbx(const Size2D &size,
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register uint8x16_t vc255   asm ("q4") = vmovq_n_u8(255);
++ #else
++     uint8x16x4_t vRgba;
++@@ -602,7 +602,7 @@ void gray2rgbx(const Size2D &size,
++         for (; sj < roiw16; sj += 16, dj += 64)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++             "vld1.8 {d0-d1}, [%[in0]]            \n\t"
++             "vmov.8 q1, q0                       \n\t"
++@@ -628,7 +628,7 @@ void gray2rgbx(const Size2D &size,
++ 
++         if (sj < roiw8)
++         {
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++             "vld1.8 {d5}, [%[in]]                \n\t"
++             "vmov.8 d6, d5                       \n\t"
++@@ -672,7 +672,7 @@ void rgb2rgbx(const Size2D &size,
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++     register uint8x8_t vc255_0  asm ("d3") = vmov_n_u8(255);
++ #else
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++@@ -688,7 +688,7 @@ void rgb2rgbx(const Size2D &size,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 24, dj += 32, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -742,7 +742,7 @@ void rgbx2rgb(const Size2D &size,
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++-#if !defined(__GNUC__) || !defined(__arm__)
+++#if !(!defined(__aarch64__) && defined(__GNUC__) && defined(__arm__))
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++     union { uint8x16x4_t v4; uint8x16x3_t v3; } v_dst0;
++     union { uint8x8x4_t v4; uint8x8x3_t v3; } v_dst;
++@@ -754,7 +754,7 @@ void rgbx2rgb(const Size2D &size,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -805,7 +805,7 @@ void rgb2bgr(const Size2D &size,
++ {
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++-#if !defined(__GNUC__) || !defined(__arm__)
+++#if !(!defined(__aarch64__) && defined(__GNUC__) && defined(__arm__))
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++ #endif
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++@@ -817,7 +817,7 @@ void rgb2bgr(const Size2D &size,
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -874,7 +874,7 @@ void rgbx2bgrx(const Size2D &size,
++ {
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++-#if !defined(__GNUC__) || !defined(__arm__)
+++#if !(!defined(__aarch64__) && defined(__GNUC__) && defined(__arm__))
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++ #endif
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++@@ -885,7 +885,7 @@ void rgbx2bgrx(const Size2D &size,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 32, dj += 32, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -943,7 +943,7 @@ void rgbx2bgr(const Size2D &size,
++ {
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++-#if !defined(__GNUC__) || !defined(__arm__)
+++#if !(!defined(__aarch64__) && defined(__GNUC__) && defined(__arm__))
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++ #endif
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++@@ -954,7 +954,7 @@ void rgbx2bgr(const Size2D &size,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -1010,7 +1010,7 @@ void rgb2bgrx(const Size2D &size,
++ {
++     internal::assertSupportedConfiguration();
++ #ifdef CAROTENE_NEON
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++     register uint8x8_t vc255  asm ("d3") = vmov_n_u8(255);
++ #else
++     union { uint8x16x4_t v4; uint8x16x3_t v3; } vals0;
++@@ -1019,7 +1019,7 @@ void rgb2bgrx(const Size2D &size,
++     vals8.v4.val[3] = vmov_n_u8(255);
 + #endif
 + 
++-#if !defined(__GNUC__) || !defined(__arm__)
+++#if !(!defined(__aarch64__) && defined(__GNUC__) && defined(__arm__))
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++ #endif
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++@@ -1030,7 +1030,7 @@ void rgb2bgrx(const Size2D &size,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u, j = 0u;
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++         for (; j < roiw8; sj += 24, dj += 32, j += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -1409,7 +1409,7 @@ inline void convertToHSV(const s32 r, const s32 g, const s32 b,
++               "d24","d25","d26","d27","d28","d29","d30","d31"         \
++             );
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ 
++ #define YCRCB_CONSTS                                                        \
++     register int16x4_t vcYR  asm ("d31") = vmov_n_s16(4899);                \
++@@ -1555,7 +1555,7 @@ inline uint8x8x3_t convertToYCrCb( const int16x8_t& vR, const int16x8_t& vG, con
++ #define COEFF_G   (  8663)
++ #define COEFF_B   (-17705)
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ #define YUV420ALPHA3_CONST
++ #define YUV420ALPHA4_CONST register uint8x16_t c255  asm ("q13") = vmovq_n_u8(255);
++ #define YUV420ALPHA3_CONVERT
++@@ -1852,7 +1852,7 @@ void rgb2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1871,7 +1871,7 @@ void rgb2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERT_TO_HSV_ASM(vld3.8 {d0-d2}, d0, d2)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -1904,7 +1904,7 @@ void rgbx2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1923,7 +1923,7 @@ void rgbx2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERT_TO_HSV_ASM(vld4.8 {d0-d3}, d0, d2)
++ #else
++             uint8x8x4_t vRgb = vld4_u8(src + sj);
++@@ -1956,7 +1956,7 @@ void bgr2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1975,7 +1975,7 @@ void bgr2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERT_TO_HSV_ASM(vld3.8 {d0-d2}, d2, d0)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -2008,7 +2008,7 @@ void bgrx2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -2027,7 +2027,7 @@ void bgrx2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERT_TO_HSV_ASM(vld4.8 {d0-d3}, d2, d0)
++ #else
++             uint8x8x4_t vRgb = vld4_u8(src + sj);
++@@ -2068,7 +2068,7 @@ void rgbx2bgr565(const Size2D &size,
++         for (; j < roiw16; sj += 64, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++                 "vld4.8 {d2, d4, d6, d8}, [%[in0]]        @  q0       q1       q2       q3       q4       \n\t"
++                 "vld4.8 {d3, d5, d7, d9}, [%[in1]]        @  xxxxxxxx rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx \n\t"
++@@ -2122,7 +2122,7 @@ void rgb2bgr565(const Size2D &size,
++         for (; j < roiw16; sj += 48, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++                 "vld3.8 {d2, d4, d6}, [%[in0]]       @  q0       q1       q2       q3       q4       \n\t"
++                 "vld3.8 {d3, d5, d7}, [%[in1]]       @  xxxxxxxx rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx \n\t"
++@@ -2176,7 +2176,7 @@ void rgbx2rgb565(const Size2D &size,
++         for (; j < roiw16; sj += 64, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++                 "vld4.8 {d0, d2, d4, d6}, [%[in0]]    @  q0       q1       q2       q3         \n\t"
++                 "vld4.8 {d1, d3, d5, d7}, [%[in1]]    @  rrrrRRRR ggggGGGG bbbbBBBB aaaaAAAA   \n\t"
++@@ -2230,7 +2230,7 @@ void rgb2rgb565(const Size2D &size,
++         for (; j < roiw16; sj += 48, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++                 "vld3.8 {d0, d2, d4}, [%[in0]]        @  q0       q1       q2       q3         \n\t"
++                 "vld3.8 {d1, d3, d5}, [%[in1]]        @  rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx   \n\t"
++@@ -2285,7 +2285,7 @@ void rgb2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTTOYCRCB(vld3.8 {d0-d2}, d0, d1, d2)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -2329,7 +2329,7 @@ void rgbx2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTTOYCRCB(vld4.8 {d0-d3}, d0, d1, d2)
++ #else
++             uint8x8x4_t vRgba = vld4_u8(src + sj);
++@@ -2373,7 +2373,7 @@ void bgr2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTTOYCRCB(vld3.8 {d0-d2}, d2, d1, d0)
++ #else
++             uint8x8x3_t vBgr = vld3_u8(src + sj);
++@@ -2417,7 +2417,7 @@ void bgrx2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTTOYCRCB(vld4.8 {d0-d3}, d2, d1, d0)
++ #else
++             uint8x8x4_t vBgra = vld4_u8(src + sj);
++@@ -2499,7 +2499,7 @@ void yuv420sp2rgb(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(3, d1, d0, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2545,7 +2545,7 @@ void yuv420sp2rgbx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(4, d1, d0, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2591,7 +2591,7 @@ void yuv420i2rgb(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(3, d0, d1, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2637,7 +2637,7 @@ void yuv420i2rgbx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(4, d0, d1, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2683,7 +2683,7 @@ void yuv420sp2bgr(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(3, d1, d0, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2729,7 +2729,7 @@ void yuv420sp2bgrx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(4, d1, d0, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2775,7 +2775,7 @@ void yuv420i2bgr(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(3, d0, d1, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2821,7 +2821,7 @@ void yuv420i2bgrx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             CONVERTYUV420TORGB(4, d0, d1, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++diff --git a/3rdparty/carotene/src/convert.cpp b/3rdparty/carotene/src/convert.cpp
++index 403f16d86a..64b6db78ab 100644
++--- a/3rdparty/carotene/src/convert.cpp
+++++ b/3rdparty/carotene/src/convert.cpp
++@@ -101,7 +101,7 @@ CVT_FUNC(u8, s8, 16,
++      }
++ })
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(u8, u16, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);,
++ {
++@@ -135,7 +135,7 @@ CVT_FUNC(u8, u16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(u8, s32, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);
++      register uint8x16_t zero1 asm ("q2") = vmovq_n_u8(0);
++@@ -173,7 +173,7 @@ CVT_FUNC(u8, s32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(u8, f32, 16,
++ ,
++ {
++@@ -248,7 +248,7 @@ CVT_FUNC(s8, u8, 16,
++      }
++ })
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(s8, u16, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);,
++ {
++@@ -284,7 +284,7 @@ CVT_FUNC(s8, u16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s8, s16, 16,
++ ,
++ {
++@@ -323,7 +323,7 @@ CVT_FUNC(s8, s16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(s8, s32, 16,
++ ,
++ {
++@@ -377,7 +377,7 @@ CVT_FUNC(s8, s32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s8, f32, 16,
++ ,
++ {
++@@ -440,7 +440,7 @@ CVT_FUNC(s8, f32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(u16, u8, 16,
++ ,
++ {
++@@ -479,7 +479,7 @@ CVT_FUNC(u16, u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(u16, s8, 16,
++     register uint8x16_t v127 asm ("q4") = vmovq_n_u8(127);,
++ {
++@@ -522,7 +522,7 @@ CVT_FUNC(u16, s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(u16, s16, 8,
++      register uint16x8_t v32767 asm ("q4") = vmovq_n_u16(0x7FFF);,
++ {
++@@ -555,7 +555,7 @@ CVT_FUNC(u16, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(u16, s32, 8,
++      register uint16x8_t zero0 asm ("q1") = vmovq_n_u16(0);,
++ {
++@@ -589,7 +589,7 @@ CVT_FUNC(u16, s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(u16, f32, 8,
++ ,
++ {
++@@ -633,7 +633,7 @@ CVT_FUNC(u16, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s16, u8, 16,
++ ,
++ {
++@@ -672,7 +672,7 @@ CVT_FUNC(s16, u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s16, s8, 16,
++ ,
++ {
++@@ -711,7 +711,7 @@ CVT_FUNC(s16, s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVT_FUNC(s16, u16, 8,
++      register int16x8_t vZero asm ("q4") = vmovq_n_s16(0);,
++ {
++@@ -747,7 +747,7 @@ CVT_FUNC(s16, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s16, s32, 8,
++ ,
++ {
++@@ -786,7 +786,7 @@ CVT_FUNC(s16, s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s16, f32, 8,
++ ,
++ {
++@@ -829,7 +829,7 @@ CVT_FUNC(s16, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s32, u8, 8,
++ ,
++ {
++@@ -870,7 +870,7 @@ CVT_FUNC(s32, u8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s32, s8, 8,
++ ,
++ {
++@@ -911,7 +911,7 @@ CVT_FUNC(s32, s8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s32, u16, 8,
++ ,
++ {
++@@ -950,7 +950,7 @@ CVT_FUNC(s32, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s32, s16, 8,
++ ,
++ {
++@@ -989,7 +989,7 @@ CVT_FUNC(s32, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(s32, f32, 8,
++ ,
++ {
++@@ -1034,7 +1034,7 @@ CVT_FUNC(s32, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(f32, u8, 8,
++     register float32x4_t vmult asm ("q0") = vdupq_n_f32((float)(1 << 16));
++     register uint32x4_t  vmask asm ("q1") = vdupq_n_u32(1<<16);,
++@@ -1101,7 +1101,7 @@ CVT_FUNC(f32, u8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(f32, s8, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1153,7 +1153,7 @@ CVT_FUNC(f32, s8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(f32, u16, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1212,7 +1212,7 @@ CVT_FUNC(f32, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(f32, s16, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1271,7 +1271,7 @@ CVT_FUNC(f32, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++ CVT_FUNC(f32, s32, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++diff --git a/3rdparty/carotene/src/convert_scale.cpp b/3rdparty/carotene/src/convert_scale.cpp
++index 0a14a8035c..ae41a985c8 100644
++--- a/3rdparty/carotene/src/convert_scale.cpp
+++++ b/3rdparty/carotene/src/convert_scale.cpp
++@@ -135,7 +135,7 @@ namespace CAROTENE_NS {
++ 
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC1(u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -220,7 +220,7 @@ CVTS_FUNC1(u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(u8, s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -305,7 +305,7 @@ CVTS_FUNC(u8, s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(u8, u16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -389,7 +389,7 @@ CVTS_FUNC(u8, u16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(u8, s16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -473,7 +473,7 @@ CVTS_FUNC(u8, s16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u8, s32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -562,7 +562,7 @@ CVTS_FUNC(u8, s32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u8, f32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -643,7 +643,7 @@ CVTS_FUNC(u8, f32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(s8, u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -728,7 +728,7 @@ CVTS_FUNC(s8, u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC1(s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -813,7 +813,7 @@ CVTS_FUNC1(s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(s8, u16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -899,7 +899,7 @@ CVTS_FUNC(s8, u16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++ CVTS_FUNC(s8, s16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -985,7 +985,7 @@ CVTS_FUNC(s8, s16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s8, s32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1074,7 +1074,7 @@ CVTS_FUNC(s8, s32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s8, f32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1155,7 +1155,7 @@ CVTS_FUNC(s8, f32, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u16, u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1214,7 +1214,7 @@ CVTS_FUNC(u16, u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u16, s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1273,7 +1273,7 @@ CVTS_FUNC(u16, s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC1(u16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1330,7 +1330,7 @@ CVTS_FUNC1(u16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u16, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1387,7 +1387,7 @@ CVTS_FUNC(u16, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u16, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1443,7 +1443,7 @@ CVTS_FUNC(u16, s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(u16, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1495,7 +1495,7 @@ CVTS_FUNC(u16, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s16, u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1554,7 +1554,7 @@ CVTS_FUNC(s16, u8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s16, s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1613,7 +1613,7 @@ CVTS_FUNC(s16, s8, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s16, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1670,7 +1670,7 @@ CVTS_FUNC(s16, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC1(s16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1727,7 +1727,7 @@ CVTS_FUNC1(s16, 16,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s16, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1783,7 +1783,7 @@ CVTS_FUNC(s16, s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s16, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1835,7 +1835,7 @@ CVTS_FUNC(s16, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s32, u8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1893,7 +1893,7 @@ CVTS_FUNC(s32, u8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s32, s8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1951,7 +1951,7 @@ CVTS_FUNC(s32, s8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s32, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2007,7 +2007,7 @@ CVTS_FUNC(s32, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s32, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2063,7 +2063,7 @@ CVTS_FUNC(s32, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC1(s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2118,7 +2118,7 @@ CVTS_FUNC1(s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(s32, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -2169,7 +2169,7 @@ CVTS_FUNC(s32, f32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(f32, u8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)((1 << 16)*alpha));
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)((1 << 16)*beta));
++@@ -2239,7 +2239,7 @@ CVTS_FUNC(f32, u8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(f32, s8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2293,7 +2293,7 @@ CVTS_FUNC(f32, s8, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(f32, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2345,7 +2345,7 @@ CVTS_FUNC(f32, u16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(f32, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2397,7 +2397,7 @@ CVTS_FUNC(f32, s16, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC(f32, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2448,7 +2448,7 @@ CVTS_FUNC(f32, s32, 8,
++ })
++ #endif
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++ CVTS_FUNC1(f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++diff --git a/3rdparty/carotene/src/gaussian_blur.cpp b/3rdparty/carotene/src/gaussian_blur.cpp
++index 1b5399436f..f7b5f18d79 100644
++--- a/3rdparty/carotene/src/gaussian_blur.cpp
+++++ b/3rdparty/carotene/src/gaussian_blur.cpp
++@@ -327,7 +327,7 @@ void gaussianBlur5x5(const Size2D &size, s32 cn,
++                 u16* lidx1 = lane + x - 1*2;
++                 u16* lidx3 = lane + x + 1*2;
++                 u16* lidx4 = lane + x + 2*2;
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++                 __asm__ __volatile__ (
++                     "vld2.16 {d0, d2}, [%[in0]]!                              \n\t"
++                     "vld2.16 {d1, d3}, [%[in0]]                               \n\t"
++@@ -398,7 +398,7 @@ void gaussianBlur5x5(const Size2D &size, s32 cn,
++                 u16* lidx1 = lane + x - 1*3;
++                 u16* lidx3 = lane + x + 1*3;
++                 u16* lidx4 = lane + x + 2*3;
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ __volatile__ (
++                     "vld3.16 {d0, d2, d4}, [%[in0]]!                          \n\t"
++                     "vld3.16 {d1, d3, d5}, [%[in0]]                           \n\t"
++@@ -482,7 +482,7 @@ void gaussianBlur5x5(const Size2D &size, s32 cn,
++                 u16* lidx1 = lane + x - 1*4;
++                 u16* lidx3 = lane + x + 1*4;
++                 u16* lidx4 = lane + x + 2*4;
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ __volatile__ (
++                     "vld4.16 {d0, d2, d4, d6}, [%[in0]]!                      \n\t"
++                     "vld4.16 {d1, d3, d5, d7}, [%[in0]]                       \n\t"
++diff --git a/3rdparty/carotene/src/pyramid.cpp b/3rdparty/carotene/src/pyramid.cpp
++index 8ef1268933..232ccf3efd 100644
++--- a/3rdparty/carotene/src/pyramid.cpp
+++++ b/3rdparty/carotene/src/pyramid.cpp
++@@ -331,7 +331,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw8; x += 8)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++                 __asm__ (
++                     "vld2.16 {d0-d3}, [%[in0]]                               \n\t"
++                     "vld2.16 {d4-d7}, [%[in4]]                               \n\t"
++@@ -538,7 +538,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw4; x += 4)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++                 __asm__ (
++                     "vld2.32 {d0-d3}, [%[in0]]                              \n\t"
++                     "vld2.32 {d4-d7}, [%[in4]]                              \n\t"
++@@ -672,7 +672,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++     std::vector<f32> _buf(cn*(srcSize.width + 4) + 32/sizeof(f32));
++     f32* lane = internal::alignPtr(&_buf[2*cn], 32);
++ 
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++     register float32x4_t vc6d4f32  asm ("q11") = vmovq_n_f32(1.5f);  // 6/4
++     register float32x4_t vc1d4f32  asm ("q12") = vmovq_n_f32(0.25f); // 1/4
++ 
++@@ -739,7 +739,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw4; x += 4)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++                 __asm__ __volatile__ (
++                     "vld2.32 {d0-d3}, [%[in0]]                              \n\t"
++                     "vld2.32 {d8-d11}, [%[in4]]                             \n\t"
++@@ -932,7 +932,7 @@ pyrUp8uHorizontalConvolution:
++             for (; x < lim; x += 8)
++             {
++                 internal::prefetch(lane + x);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vld1.16 {d0-d1}, [%[in0]]       /*q0 = v0*/            \n\t"
++                     "vld1.16 {d2-d3}, [%[in2]]       /*q1 = v2*/            \n\t"
++@@ -973,7 +973,7 @@ pyrUp8uHorizontalConvolution:
++             for (; x < lim; x += 24)
++             {
++                 internal::prefetch(lane + x);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vmov.u16 q9, #6                                           \n\t"
++                     "vld3.16 {d0, d2, d4}, [%[in0]]        /*v0*/              \n\t"
++@@ -1064,7 +1064,7 @@ pyrUp8uHorizontalConvolution:
++             for (; x < lim; x += 8)
++             {
++                 internal::prefetch(lane + x);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vld1.16 {d0-d1}, [%[in0]]       /*q0 = v0*/            \n\t"
++                     "vld1.16 {d2-d3}, [%[in2]]       /*q1 = v2*/            \n\t"
++@@ -1210,7 +1210,7 @@ pyrUp16sHorizontalConvolution:
++             for (; x < lim; x += 4)
++             {
++                 internal::prefetch(lane + x);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vld1.32 {d0-d1}, [%[in0]]       /*q0 = v0*/            \n\t"
++                     "vld1.32 {d2-d3}, [%[in2]]       /*q1 = v2*/            \n\t"
++@@ -1251,7 +1251,7 @@ pyrUp16sHorizontalConvolution:
++             for (; x < lim; x += 12)
++             {
++                 internal::prefetch(lane + x + 3);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vmov.s32 q9, #6                                           \n\t"
++                     "vld3.32 {d0, d2, d4}, [%[in0]]        /*v0*/              \n\t"
++@@ -1343,7 +1343,7 @@ pyrUp16sHorizontalConvolution:
++             for (; x < lim; x += 4)
++             {
++                 internal::prefetch(lane + x);
++-#if defined(__GNUC__) && defined(__arm__)
+++#if !defined(__aarch64__) && defined(__GNUC__) && defined(__arm__)
++                 __asm__ (
++                     "vld1.32 {d0-d1}, [%[in0]]       /*q0 = v0*/            \n\t"
++                     "vld1.32 {d2-d3}, [%[in2]]       /*q1 = v2*/            \n\t"
++diff --git a/3rdparty/carotene/src/scharr.cpp b/3rdparty/carotene/src/scharr.cpp
++index 5695804fe4..8d3b6328b1 100644
++--- a/3rdparty/carotene/src/scharr.cpp
+++++ b/3rdparty/carotene/src/scharr.cpp
++@@ -109,7 +109,7 @@ void ScharrDeriv(const Size2D &size, s32 cn,
++             internal::prefetch(srow0 + x);
++             internal::prefetch(srow1 + x);
++             internal::prefetch(srow2 + x);
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
++             __asm__ (
++                 "vld1.8 {d0}, [%[src0]]                                \n\t"
++                 "vld1.8 {d2}, [%[src2]]                                \n\t"
++@@ -161,7 +161,7 @@ void ScharrDeriv(const Size2D &size, s32 cn,
++         x = 0;
++         for( ; x < roiw8; x += 8 )
++         {
++-#if defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
++             __asm__ (
++                 "vld1.16 {d4-d5}, [%[s2ptr]]                           \n\t"
++                 "vld1.16 {d8-d9}, [%[s4ptr]]                           \n\t"
 +-- 
 +2.14.1
 +
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch b/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
+diff --git a/meta-oe/recipes-support/opencv/opencv/0002-Do-not-enable-asm-with-clang.patch b/meta-oe/recipes-support/opencv/opencv/0002-Do-not-enable-asm-with-clang.patch
 new file mode 100644
-index 000000000..9046bb2f4
+index 000000000..22e868a03
 --- /dev/null
-+++ b/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
-@@ -0,0 +1,43 @@
-+Add alises for arm64 which is same as aarch64
++++ b/meta-oe/recipes-support/opencv/opencv/0002-Do-not-enable-asm-with-clang.patch
+@@ -0,0 +1,993 @@
++From 333f60165b6737588eb975a5e4393d847011a1cd Mon Sep 17 00:00:00 2001
++From: Khem Raj <raj.khem@gmail.com>
++Date: Tue, 19 Sep 2017 18:07:35 -0700
++Subject: [PATCH 2/2] Do not enable asm with clang
++
++clang pretends to be gcc 4.2.0 which means we will
++use inline asm for no reason, instead of builtins
++on clang when possible.
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+Upstream-Status: Pending
++---
++Upstream-Status: Submitted
++ 3rdparty/carotene/src/channel_extract.cpp  |  4 +-
++ 3rdparty/carotene/src/channels_combine.cpp |  2 +-
++ 3rdparty/carotene/src/colorconvert.cpp     | 78 +++++++++++++++---------------
++ 3rdparty/carotene/src/convert.cpp          | 54 ++++++++++-----------
++ 3rdparty/carotene/src/convert_scale.cpp    | 56 ++++++++++-----------
++ 3rdparty/carotene/src/gaussian_blur.cpp    |  2 +-
++ 3rdparty/carotene/src/pyramid.cpp          |  8 +--
++ 3rdparty/carotene/src/scharr.cpp           |  4 +-
++ 8 files changed, 104 insertions(+), 104 deletions(-)
 +
-+Index: git/SConstruct
-+===================================================================
-+--- git.orig/SConstruct
-++++ git/SConstruct
-+@@ -990,6 +990,7 @@ elif endian == "big":
-+ processor_macros = {
-+     'arm'     : { 'endian': 'little', 'defines': ('__arm__',) },
-+     'aarch64' : { 'endian': 'little', 'defines': ('__arm64__', '__aarch64__')},
-++    'arm64'   : { 'endian': 'little', 'defines': ('__arm64__', '__aarch64__')},
-+     'i386'    : { 'endian': 'little', 'defines': ('__i386', '_M_IX86')},
-+     'ppc64le' : { 'endian': 'little', 'defines': ('__powerpc64__',)},
-+     's390x'   : { 'endian': 'big',    'defines': ('__s390x__',)},
-+Index: git/src/third_party/IntelRDFPMathLib20U1/SConscript
-+===================================================================
-+--- git.orig/src/third_party/IntelRDFPMathLib20U1/SConscript
-++++ git/src/third_party/IntelRDFPMathLib20U1/SConscript
-+@@ -301,7 +301,7 @@ if processor == 'i386':
-+ elif processor == 'arm':
-+     cpp_defines['IA32'] = '1'
-+     cpp_defines['ia32'] = '1'
-+-elif processor == "aarch64":
-++elif processor == "aarch64" or processor == 'arm64':
-+     cpp_defines['efi2'] = '1'
-+     cpp_defines['EFI2'] = '1'
-+ # Using 64 bit little endian
-+Index: git/src/third_party/wiredtiger/SConscript
-+===================================================================
-+--- git.orig/src/third_party/wiredtiger/SConscript
-++++ git/src/third_party/wiredtiger/SConscript
-+@@ -139,7 +139,7 @@ condition_map = {
-+     'POSIX_HOST'   : not env.TargetOSIs('windows'),
-+     'WINDOWS_HOST' : env.TargetOSIs('windows'),
++diff --git a/3rdparty/carotene/src/channel_extract.cpp b/3rdparty/carotene/src/channel_extract.cpp
++index 8238a3ece8..ff4fb3770c 100644
++--- a/3rdparty/carotene/src/channel_extract.cpp
+++++ b/3rdparty/carotene/src/channel_extract.cpp
++@@ -231,7 +231,7 @@ void extract4(const Size2D &size,
++                  srcStride == dst2Stride && \
++                  srcStride == dst3Stride &&
 + 
-+-    'ARM64_HOST'   : env['TARGET_ARCH'] == 'aarch64',
-++    'ARM64_HOST'   : env['TARGET_ARCH'] in ('aarch64', 'arm64'),
-+     'POWERPC_HOST' : env['TARGET_ARCH'] == 'ppc64le',
-+     'X86_HOST'     : env['TARGET_ARCH'] == 'x86_64',
-+     'ZSERIES_HOST' : env['TARGET_ARCH'] == 's390x',
-diff --git a/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch b/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
-new file mode 100644
-index 000000000..5c5c20ce3
---- /dev/null
-+++ b/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
-@@ -0,0 +1,50 @@
-+imported from debian
-+
-+Upstream-Status: Pending
-+Index: git/src/third_party/wiredtiger/SConscript
-+===================================================================
-+--- git.orig/src/third_party/wiredtiger/SConscript
-++++ git/src/third_party/wiredtiger/SConscript
-+@@ -169,7 +169,9 @@ if useSnappy:
-+ # If not available at runtime, we fall back to software in some cases.
-+ #
-+ # On zSeries we may disable because SLES 11 kernel doe not support the instructions.
-+-if not (env['TARGET_ARCH'] == 's390x' and get_option("use-s390x-crc32") == "off"):
-++# Debian: disable hardware-assisted crc32 on s390x and arm64, as at least the
-++# buildd's do not support the instructions.
-++if env['TARGET_ARCH'] not in ('s390x', 'arm64', 'aarch64'):
-+     env.Append(CPPDEFINES=["HAVE_CRC32_HARDWARE"])
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
 + 
-+ wtlib = env.Library(
-+Index: git/src/third_party/wiredtiger/dist/filelist
-+===================================================================
-+--- git.orig/src/third_party/wiredtiger/dist/filelist
-++++ git/src/third_party/wiredtiger/dist/filelist
-+@@ -54,7 +54,6 @@ src/checksum/power8/crc32_wrapper.c	POWE
-+ src/checksum/software/checksum.c
-+ src/checksum/x86/crc32-x86.c		X86_HOST
-+ src/checksum/zseries/crc32-s390x.c	ZSERIES_HOST
-+-src/checksum/zseries/crc32le-vx.sx	ZSERIES_HOST
-+ src/config/config.c
-+ src/config/config_api.c
-+ src/config/config_check.c
-+Index: git/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
-+===================================================================
-+--- git.orig/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
-++++ git/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
-+@@ -78,6 +78,7 @@ unsigned int __wt_crc32c_le(unsigned int
-+ 		return crc;                                                 \
-+ 	}
-+ 
-++#if defined(HAVE_CRC32_HARDWARE)
-+ /* Main CRC-32 functions */
-+ DEFINE_CRC32_VX(__wt_crc32c_le_vx, __wt_crc32c_le_vgfm_16, __wt_crc32c_le)
-+ 
-+@@ -90,6 +91,7 @@ __wt_checksum_hw(const void *chunk, size
-+ {
-+ 	return (~__wt_crc32c_le_vx(0xffffffff, chunk, len));
++ #define SPLIT_ASM2(sgn, bits) __asm__ ( \
++                                           "vld2." #bits " {d0, d2}, [%[in0]]            \n\t" \
++@@ -351,7 +351,7 @@ void extract4(const Size2D &size,
++     }                                                                                                   \
 + }
-++#endif
 + 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ 
++ #define ALPHA_QUAD(sgn, bits) { \
++                                   internal::prefetch(src + sj); \
++diff --git a/3rdparty/carotene/src/channels_combine.cpp b/3rdparty/carotene/src/channels_combine.cpp
++index fc98fb9181..5d9251d51c 100644
++--- a/3rdparty/carotene/src/channels_combine.cpp
+++++ b/3rdparty/carotene/src/channels_combine.cpp
++@@ -77,7 +77,7 @@ namespace CAROTENE_NS {
++                  dstStride == src2Stride && \
++                  dstStride == src3Stride &&
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ 
++ #define MERGE_ASM2(sgn, bits) __asm__ ( \
++                                           "vld1." #bits " {d0-d1}, [%[in0]]             \n\t" \
++diff --git a/3rdparty/carotene/src/colorconvert.cpp b/3rdparty/carotene/src/colorconvert.cpp
++index 26ae54b15c..d3a40fe64e 100644
++--- a/3rdparty/carotene/src/colorconvert.cpp
+++++ b/3rdparty/carotene/src/colorconvert.cpp
++@@ -97,7 +97,7 @@ void rgb2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -116,7 +116,7 @@ void rgb2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++         for (; dj < roiw8; sj += 24, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -198,7 +198,7 @@ void rgbx2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -217,7 +217,7 @@ void rgbx2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++         for (; dj < roiw8; sj += 32, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -300,7 +300,7 @@ void bgr2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -319,7 +319,7 @@ void bgr2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++         for (; dj < roiw8; sj += 24, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -402,7 +402,7 @@ void bgrx2gray(const Size2D &size, COLOR_SPACE color_space,
++     const u32 G2Y = color_space == COLOR_SPACE_BT601 ? G2Y_BT601 : G2Y_BT709;
++     const u32 B2Y = color_space == COLOR_SPACE_BT601 ? B2Y_BT601 : B2Y_BT709;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register int16x4_t v_r2y asm ("d31") = vmov_n_s16(R2Y);
++     register int16x4_t v_g2y asm ("d30") = vmov_n_s16(G2Y);
++     register int16x4_t v_b2y asm ("d29") = vmov_n_s16(B2Y);
++@@ -421,7 +421,7 @@ void bgrx2gray(const Size2D &size, COLOR_SPACE color_space,
++         u8 * dst = internal::getRowPtr(dstBase, dstStride, i);
++         size_t sj = 0u, dj = 0u;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++         for (; dj < roiw8; sj += 32, dj += 8)
++         {
++             internal::prefetch(src + sj);
++@@ -512,7 +512,7 @@ void gray2rgb(const Size2D &size,
++         for (; sj < roiw16; sj += 16, dj += 48)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++             "vld1.8 {d0-d1}, [%[in0]]            \n\t"
++             "vmov.8 q1, q0                       \n\t"
++@@ -538,7 +538,7 @@ void gray2rgb(const Size2D &size,
++ 
++         if (sj < roiw8)
++         {
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++             "vld1.8 {d0}, [%[in]]                \n\t"
++             "vmov.8 d1, d0                       \n\t"
++@@ -584,7 +584,7 @@ void gray2rgbx(const Size2D &size,
++     size_t roiw16 = size.width >= 15 ? size.width - 15 : 0;
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register uint8x16_t vc255   asm ("q4") = vmovq_n_u8(255);
++ #else
++     uint8x16x4_t vRgba;
++@@ -602,7 +602,7 @@ void gray2rgbx(const Size2D &size,
++         for (; sj < roiw16; sj += 16, dj += 64)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++             "vld1.8 {d0-d1}, [%[in0]]            \n\t"
++             "vmov.8 q1, q0                       \n\t"
++@@ -628,7 +628,7 @@ void gray2rgbx(const Size2D &size,
++ 
++         if (sj < roiw8)
++         {
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++             "vld1.8 {d5}, [%[in]]                \n\t"
++             "vmov.8 d6, d5                       \n\t"
++@@ -1409,7 +1409,7 @@ inline void convertToHSV(const s32 r, const s32 g, const s32 b,
++               "d24","d25","d26","d27","d28","d29","d30","d31"         \
++             );
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ 
++ #define YCRCB_CONSTS                                                        \
++     register int16x4_t vcYR  asm ("d31") = vmov_n_s16(4899);                \
++@@ -1555,7 +1555,7 @@ inline uint8x8x3_t convertToYCrCb( const int16x8_t& vR, const int16x8_t& vG, con
++ #define COEFF_G   (  8663)
++ #define COEFF_B   (-17705)
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ #define YUV420ALPHA3_CONST
++ #define YUV420ALPHA4_CONST register uint8x16_t c255  asm ("q13") = vmovq_n_u8(255);
++ #define YUV420ALPHA3_CONVERT
++@@ -1852,7 +1852,7 @@ void rgb2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1871,7 +1871,7 @@ void rgb2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERT_TO_HSV_ASM(vld3.8 {d0-d2}, d0, d2)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -1904,7 +1904,7 @@ void rgbx2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1923,7 +1923,7 @@ void rgbx2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERT_TO_HSV_ASM(vld4.8 {d0-d3}, d0, d2)
++ #else
++             uint8x8x4_t vRgb = vld4_u8(src + sj);
++@@ -1956,7 +1956,7 @@ void bgr2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -1975,7 +1975,7 @@ void bgr2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERT_TO_HSV_ASM(vld3.8 {d0-d2}, d2, d0)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -2008,7 +2008,7 @@ void bgrx2hsv(const Size2D &size,
++ #ifdef CAROTENE_NEON
++     size_t roiw8 = size.width >= 7 ? size.width - 7 : 0;
++     const s32 hsv_shift = 12;
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register const f32 vsdiv_table = f32(255 << hsv_shift);
++     register f32 vhdiv_table = f32(hrange << hsv_shift);
++     register const s32 vhrange = hrange;
++@@ -2027,7 +2027,7 @@ void bgrx2hsv(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERT_TO_HSV_ASM(vld4.8 {d0-d3}, d2, d0)
++ #else
++             uint8x8x4_t vRgb = vld4_u8(src + sj);
++@@ -2068,7 +2068,7 @@ void rgbx2bgr565(const Size2D &size,
++         for (; j < roiw16; sj += 64, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++                 "vld4.8 {d2, d4, d6, d8}, [%[in0]]        @  q0       q1       q2       q3       q4       \n\t"
++                 "vld4.8 {d3, d5, d7, d9}, [%[in1]]        @  xxxxxxxx rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx \n\t"
++@@ -2122,7 +2122,7 @@ void rgb2bgr565(const Size2D &size,
++         for (; j < roiw16; sj += 48, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++                 "vld3.8 {d2, d4, d6}, [%[in0]]       @  q0       q1       q2       q3       q4       \n\t"
++                 "vld3.8 {d3, d5, d7}, [%[in1]]       @  xxxxxxxx rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx \n\t"
++@@ -2176,7 +2176,7 @@ void rgbx2rgb565(const Size2D &size,
++         for (; j < roiw16; sj += 64, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++                 "vld4.8 {d0, d2, d4, d6}, [%[in0]]    @  q0       q1       q2       q3         \n\t"
++                 "vld4.8 {d1, d3, d5, d7}, [%[in1]]    @  rrrrRRRR ggggGGGG bbbbBBBB aaaaAAAA   \n\t"
++@@ -2230,7 +2230,7 @@ void rgb2rgb565(const Size2D &size,
++         for (; j < roiw16; sj += 48, dj += 32, j += 16)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++                 "vld3.8 {d0, d2, d4}, [%[in0]]        @  q0       q1       q2       q3         \n\t"
++                 "vld3.8 {d1, d3, d5}, [%[in1]]        @  rrrrRRRR ggggGGGG bbbbBBBB xxxxxxxx   \n\t"
++@@ -2285,7 +2285,7 @@ void rgb2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTTOYCRCB(vld3.8 {d0-d2}, d0, d1, d2)
++ #else
++             uint8x8x3_t vRgb = vld3_u8(src + sj);
++@@ -2329,7 +2329,7 @@ void rgbx2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTTOYCRCB(vld4.8 {d0-d3}, d0, d1, d2)
++ #else
++             uint8x8x4_t vRgba = vld4_u8(src + sj);
++@@ -2373,7 +2373,7 @@ void bgr2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 24, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTTOYCRCB(vld3.8 {d0-d2}, d2, d1, d0)
++ #else
++             uint8x8x3_t vBgr = vld3_u8(src + sj);
++@@ -2417,7 +2417,7 @@ void bgrx2ycrcb(const Size2D &size,
++         for (; j < roiw8; sj += 32, dj += 24, j += 8)
++         {
++             internal::prefetch(src + sj);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTTOYCRCB(vld4.8 {d0-d3}, d2, d1, d0)
++ #else
++             uint8x8x4_t vBgra = vld4_u8(src + sj);
++@@ -2499,7 +2499,7 @@ void yuv420sp2rgb(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(3, d1, d0, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2545,7 +2545,7 @@ void yuv420sp2rgbx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(4, d1, d0, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2591,7 +2591,7 @@ void yuv420i2rgb(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(3, d0, d1, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2637,7 +2637,7 @@ void yuv420i2rgbx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(4, d0, d1, q5, q6)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2683,7 +2683,7 @@ void yuv420sp2bgr(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(3, d1, d0, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2729,7 +2729,7 @@ void yuv420sp2bgrx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(4, d1, d0, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2775,7 +2775,7 @@ void yuv420i2bgr(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(3, d0, d1, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++@@ -2821,7 +2821,7 @@ void yuv420i2bgrx(const Size2D &size,
++             internal::prefetch(uv + j);
++             internal::prefetch(y1 + j);
++             internal::prefetch(y2 + j);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             CONVERTYUV420TORGB(4, d0, d1, q6, q5)
++ #else
++             convertYUV420.ToRGB(y1 + j, y2 + j, uv + j, dst1 + dj, dst2 + dj);
++diff --git a/3rdparty/carotene/src/convert.cpp b/3rdparty/carotene/src/convert.cpp
++index 64b6db78ab..f0c2d153f2 100644
++--- a/3rdparty/carotene/src/convert.cpp
+++++ b/3rdparty/carotene/src/convert.cpp
++@@ -101,7 +101,7 @@ CVT_FUNC(u8, s8, 16,
++      }
++ })
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(u8, u16, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);,
++ {
++@@ -135,7 +135,7 @@ CVT_FUNC(u8, u16, 16,
++ })
 + #endif
 + 
-diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-index 547f60850..ab8ade127 100644
---- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
-+++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
-@@ -18,6 +18,9 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
-            file://0001-Use-strerror_r-only-on-glibc-systems.patch \
-            file://0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch \
-            file://0003-Conditionalize-glibc-specific-strerror_r.patch \
-+           file://arm64-support.patch \
-+           file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
-+           file://disable-hw-crc32-on-arm64-s390x.patch \
-            "
- SRC_URI_append_libc-musl ="\
-            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(u8, s32, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);
++      register uint8x16_t zero1 asm ("q2") = vmovq_n_u8(0);
++@@ -173,7 +173,7 @@ CVT_FUNC(u8, s32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(u8, f32, 16,
++ ,
++ {
++@@ -248,7 +248,7 @@ CVT_FUNC(s8, u8, 16,
++      }
++ })
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(s8, u16, 16,
++      register uint8x16_t zero0 asm ("q1") = vmovq_n_u8(0);,
++ {
++@@ -284,7 +284,7 @@ CVT_FUNC(s8, u16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s8, s16, 16,
++ ,
++ {
++@@ -323,7 +323,7 @@ CVT_FUNC(s8, s16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(s8, s32, 16,
++ ,
++ {
++@@ -377,7 +377,7 @@ CVT_FUNC(s8, s32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s8, f32, 16,
++ ,
++ {
++@@ -440,7 +440,7 @@ CVT_FUNC(s8, f32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(u16, u8, 16,
++ ,
++ {
++@@ -479,7 +479,7 @@ CVT_FUNC(u16, u8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(u16, s8, 16,
++     register uint8x16_t v127 asm ("q4") = vmovq_n_u8(127);,
++ {
++@@ -522,7 +522,7 @@ CVT_FUNC(u16, s8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(u16, s16, 8,
++      register uint16x8_t v32767 asm ("q4") = vmovq_n_u16(0x7FFF);,
++ {
++@@ -555,7 +555,7 @@ CVT_FUNC(u16, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(u16, s32, 8,
++      register uint16x8_t zero0 asm ("q1") = vmovq_n_u16(0);,
++ {
++@@ -589,7 +589,7 @@ CVT_FUNC(u16, s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(u16, f32, 8,
++ ,
++ {
++@@ -633,7 +633,7 @@ CVT_FUNC(u16, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s16, u8, 16,
++ ,
++ {
++@@ -672,7 +672,7 @@ CVT_FUNC(s16, u8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s16, s8, 16,
++ ,
++ {
++@@ -711,7 +711,7 @@ CVT_FUNC(s16, s8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVT_FUNC(s16, u16, 8,
++      register int16x8_t vZero asm ("q4") = vmovq_n_s16(0);,
++ {
++@@ -747,7 +747,7 @@ CVT_FUNC(s16, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s16, s32, 8,
++ ,
++ {
++@@ -786,7 +786,7 @@ CVT_FUNC(s16, s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s16, f32, 8,
++ ,
++ {
++@@ -829,7 +829,7 @@ CVT_FUNC(s16, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s32, u8, 8,
++ ,
++ {
++@@ -870,7 +870,7 @@ CVT_FUNC(s32, u8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s32, s8, 8,
++ ,
++ {
++@@ -911,7 +911,7 @@ CVT_FUNC(s32, s8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s32, u16, 8,
++ ,
++ {
++@@ -950,7 +950,7 @@ CVT_FUNC(s32, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s32, s16, 8,
++ ,
++ {
++@@ -989,7 +989,7 @@ CVT_FUNC(s32, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(s32, f32, 8,
++ ,
++ {
++@@ -1034,7 +1034,7 @@ CVT_FUNC(s32, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(f32, u8, 8,
++     register float32x4_t vmult asm ("q0") = vdupq_n_f32((float)(1 << 16));
++     register uint32x4_t  vmask asm ("q1") = vdupq_n_u32(1<<16);,
++@@ -1101,7 +1101,7 @@ CVT_FUNC(f32, u8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(f32, s8, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1153,7 +1153,7 @@ CVT_FUNC(f32, s8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(f32, u16, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1212,7 +1212,7 @@ CVT_FUNC(f32, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(f32, s16, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++@@ -1271,7 +1271,7 @@ CVT_FUNC(f32, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++ CVT_FUNC(f32, s32, 8,
++      register float32x4_t vhalf asm ("q0") = vdupq_n_f32(0.5f);,
++ {
++diff --git a/3rdparty/carotene/src/convert_scale.cpp b/3rdparty/carotene/src/convert_scale.cpp
++index ae41a985c8..d599d24c1e 100644
++--- a/3rdparty/carotene/src/convert_scale.cpp
+++++ b/3rdparty/carotene/src/convert_scale.cpp
++@@ -473,7 +473,7 @@ CVTS_FUNC(u8, s16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u8, s32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -562,7 +562,7 @@ CVTS_FUNC(u8, s32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u8, f32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -985,7 +985,7 @@ CVTS_FUNC(s8, s16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s8, s32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1074,7 +1074,7 @@ CVTS_FUNC(s8, s32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s8, f32, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1155,7 +1155,7 @@ CVTS_FUNC(s8, f32, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u16, u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1214,7 +1214,7 @@ CVTS_FUNC(u16, u8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u16, s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1273,7 +1273,7 @@ CVTS_FUNC(u16, s8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC1(u16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1330,7 +1330,7 @@ CVTS_FUNC1(u16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u16, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1387,7 +1387,7 @@ CVTS_FUNC(u16, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u16, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1443,7 +1443,7 @@ CVTS_FUNC(u16, s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(u16, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1495,7 +1495,7 @@ CVTS_FUNC(u16, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s16, u8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1554,7 +1554,7 @@ CVTS_FUNC(s16, u8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s16, s8, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1613,7 +1613,7 @@ CVTS_FUNC(s16, s8, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s16, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1670,7 +1670,7 @@ CVTS_FUNC(s16, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC1(s16, 16,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1727,7 +1727,7 @@ CVTS_FUNC1(s16, 16,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s16, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1783,7 +1783,7 @@ CVTS_FUNC(s16, s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s16, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -1835,7 +1835,7 @@ CVTS_FUNC(s16, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s32, u8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1893,7 +1893,7 @@ CVTS_FUNC(s32, u8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s32, s8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -1951,7 +1951,7 @@ CVTS_FUNC(s32, s8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s32, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2007,7 +2007,7 @@ CVTS_FUNC(s32, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s32, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2063,7 +2063,7 @@ CVTS_FUNC(s32, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC1(s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2118,7 +2118,7 @@ CVTS_FUNC1(s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(s32, f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++@@ -2169,7 +2169,7 @@ CVTS_FUNC(s32, f32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(f32, u8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)((1 << 16)*alpha));
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)((1 << 16)*beta));
++@@ -2239,7 +2239,7 @@ CVTS_FUNC(f32, u8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(f32, s8, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2293,7 +2293,7 @@ CVTS_FUNC(f32, s8, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(f32, u16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2345,7 +2345,7 @@ CVTS_FUNC(f32, u16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(f32, s16, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2397,7 +2397,7 @@ CVTS_FUNC(f32, s16, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC(f32, s32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta + 0.5f);,
++@@ -2448,7 +2448,7 @@ CVTS_FUNC(f32, s32, 8,
++ })
++ #endif
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++ CVTS_FUNC1(f32, 8,
++     register float32x4_t vscale asm ("q0") = vdupq_n_f32((f32)alpha);
++     register float32x4_t vshift asm ("q1") = vdupq_n_f32((f32)beta);,
++diff --git a/3rdparty/carotene/src/gaussian_blur.cpp b/3rdparty/carotene/src/gaussian_blur.cpp
++index f7b5f18d79..e5aa8fc75b 100644
++--- a/3rdparty/carotene/src/gaussian_blur.cpp
+++++ b/3rdparty/carotene/src/gaussian_blur.cpp
++@@ -327,7 +327,7 @@ void gaussianBlur5x5(const Size2D &size, s32 cn,
++                 u16* lidx1 = lane + x - 1*2;
++                 u16* lidx3 = lane + x + 1*2;
++                 u16* lidx4 = lane + x + 2*2;
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++                 __asm__ __volatile__ (
++                     "vld2.16 {d0, d2}, [%[in0]]!                              \n\t"
++                     "vld2.16 {d1, d3}, [%[in0]]                               \n\t"
++diff --git a/3rdparty/carotene/src/pyramid.cpp b/3rdparty/carotene/src/pyramid.cpp
++index 232ccf3efd..d4e32ea50f 100644
++--- a/3rdparty/carotene/src/pyramid.cpp
+++++ b/3rdparty/carotene/src/pyramid.cpp
++@@ -331,7 +331,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw8; x += 8)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++                 __asm__ (
++                     "vld2.16 {d0-d3}, [%[in0]]                               \n\t"
++                     "vld2.16 {d4-d7}, [%[in4]]                               \n\t"
++@@ -538,7 +538,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw4; x += 4)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++                 __asm__ (
++                     "vld2.32 {d0-d3}, [%[in0]]                              \n\t"
++                     "vld2.32 {d4-d7}, [%[in4]]                              \n\t"
++@@ -672,7 +672,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++     std::vector<f32> _buf(cn*(srcSize.width + 4) + 32/sizeof(f32));
++     f32* lane = internal::alignPtr(&_buf[2*cn], 32);
++ 
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++     register float32x4_t vc6d4f32  asm ("q11") = vmovq_n_f32(1.5f);  // 6/4
++     register float32x4_t vc1d4f32  asm ("q12") = vmovq_n_f32(0.25f); // 1/4
++ 
++@@ -739,7 +739,7 @@ void gaussianPyramidDown(const Size2D &srcSize,
++             for (; x < roiw4; x += 4)
++             {
++                 internal::prefetch(lane + 2 * x);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++                 __asm__ __volatile__ (
++                     "vld2.32 {d0-d3}, [%[in0]]                              \n\t"
++                     "vld2.32 {d8-d11}, [%[in4]]                             \n\t"
++diff --git a/3rdparty/carotene/src/scharr.cpp b/3rdparty/carotene/src/scharr.cpp
++index 8d3b6328b1..36f6b2276e 100644
++--- a/3rdparty/carotene/src/scharr.cpp
+++++ b/3rdparty/carotene/src/scharr.cpp
++@@ -109,7 +109,7 @@ void ScharrDeriv(const Size2D &size, s32 cn,
++             internal::prefetch(srow0 + x);
++             internal::prefetch(srow1 + x);
++             internal::prefetch(srow2 + x);
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 7
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 7 && !defined(__clang__)
++             __asm__ (
++                 "vld1.8 {d0}, [%[src0]]                                \n\t"
++                 "vld1.8 {d2}, [%[src2]]                                \n\t"
++@@ -161,7 +161,7 @@ void ScharrDeriv(const Size2D &size, s32 cn,
++         x = 0;
++         for( ; x < roiw8; x += 8 )
++         {
++-#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 && __GNUC_MINOR__ < 6
+++#if !defined(__aarch64__) && defined(__GNUC__) && __GNUC__ == 4 &&  __GNUC_MINOR__ < 6 && !defined(__clang__)
++             __asm__ (
++                 "vld1.16 {d4-d5}, [%[s2ptr]]                           \n\t"
++                 "vld1.16 {d8-d9}, [%[s4ptr]]                           \n\t"
++-- 
++2.14.1
++
+diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+index 25f247662..8131e4591 100644
+--- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
++++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
+@@ -50,6 +50,8 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
+     file://0002-imgcodecs-refactoring-improve-code-quality.patch \
+     file://0003-imgproc-test-add-checks-for-remove-call.patch \
+     file://0001-Dont-use-isystem.patch \
++    file://0001-carotene-don-t-use-__asm__-with-aarch64.patch \
++    file://0002-Do-not-enable-asm-with-clang.patch \
+ "
+ PV = "3.3+git${SRCPV}"
+ 
 -- 
 2.14.1
 
