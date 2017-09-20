@@ -1,42 +1,47 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id BBC3D77E8A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 5FAE777D17
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 15:11:54 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id r66so1863154qke.4
+	Wed, 20 Sep 2017 15:32:30 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id u18so1838387pgo.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 08:11:55 -0700 (PDT)
+	Wed, 20 Sep 2017 08:32:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=DR+FrgVc5uHHOZ3kN/iFv2Ci4C52CUSruFg2LSk5v2U=;
+	b=SdZ1U/Qe1UOEPL9T6qcm+hC+vIyXr6oi9g5o5X6VldDzVqtq5T9eyKjbnqvta/wvC9
+	Qb4mweEhG/+rZYW9YgNfGC/AuSJBpYueTVJ47nb2soRP9OV6Usf6bb8DgLtewAPToCP6
+	qsxpbQiknjv5JxIy59jiS/VpDBpirKH5ddKA7pOTYt8J1zMnBDHSUNjWuvLs3WEOw0WJ
+	W3vcSSD40nWndbzrt4e2rOwQIl+MNrDQ6rvJxdg41wGQCvwZ8XHvQ3jtdctYSuHsxoUq
+	fwDJn+yzVJhsg7tLLQiLr3cEXa3pNJA5SLnpJGr16TZR44aLDQyWwyeCm4eI9IPYdlkJ
+	agpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=L10aLtr+Jppt44wOhIy+/MZ3VBSPkx9LF6+kOkcW0WU=;
-	b=pGs9See7ShVal7G2PjxYOsbL/AyXgWAfVGlRejTPLty3FJ1tuzrgpWDIRcJyJZroWe
-	h0ZRnerm43IkJxwvL++jja1+IpDdu4KMTDmzvDN+iOMi7kh5dLpqMjk14EvRGN4K86Wp
-	ZGk4NC+7Fh8sk5Dl+Z8zZECks/l/Qe0NczMCbqLG/0/nnWmeQUulyj8Iu/a8rLgjdW+K
-	1MOieB0BkwlnOvSi+pNUM6DzUYEs+E4culMDaxnF3tPDGqqJH21KNfZOtxb16/WklSE0
-	USj5q9q0aYhbwUZW5Vn4eAJYm8fRHh7jSuBJ+zdO/61lMLkn7PPPQ1jFJxF/H32Jcis1
-	FUIA==
-X-Gm-Message-State: AHPjjUjHlf31xdOp9uaehf70mcpZngfi61gmXTXW5HeLeUNUotj6asH4
-	62u8tWrx88W9rlYMv1JpOIbABuLw
-X-Google-Smtp-Source: AOwi7QBwJdi2YX58GjMn8Px58ZWc816thbfwURTtILCzml0M2zo9iECGaQSdySr7WckqTrhElRRkzg==
-X-Received: by 10.55.2.131 with SMTP id v3mr7351967qkg.16.1505920315046;
-	Wed, 20 Sep 2017 08:11:55 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	e64sm1436547qkc.15.2017.09.20.08.11.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 20 Sep 2017 08:11:54 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Sep 2017 11:11:33 -0400
-Message-Id: <1505920293-28115-3-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1505920293-28115-1-git-send-email-derek@asterius.io>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=DR+FrgVc5uHHOZ3kN/iFv2Ci4C52CUSruFg2LSk5v2U=;
+	b=ewta4LCGo1L9zo4xfbkMsOYWqWliKHhdngqZn0Zmjzoqc9G6E7/q8PECw2wz3gckWa
+	1HMFmxkswVO/CY7rbeuujiMMjERnLbDXLNOT+Dmkdf2CHSL1+Xi4hyREmPqx9ZTQj42i
+	4wtKZe5QkSKYDtOjI7RM0f4IIdNrNaNUDuN8HgD568KFWzzRyWy4PgbT/b10FyNjFKhc
+	cVcPqRpPXQkIsTRnV3OshY74qX1iM+si6KyiN82ftfSiaQ/PCQgo+CG/+Quhj9Bgoj3N
+	x/GEgFIg8ASkdCvpNd4rk1Y01cuWOnFTHWjUahpEYcx5scXhX+YLT1w36K1rpNbOVhZ/
+	GZIg==
+X-Gm-Message-State: AHPjjUgylmqkV1OaAfIWDXpkyLfnsqnbIo2txZtFQfWaCEuKEXGB+VDo
+	XQ46aznOB+JYOZf5dwl7j74RmsV5hHK6o7dt6Xo=
+X-Google-Smtp-Source: AOwi7QAsZtwkPhvo8QSXyc0O6Ym4DEd25d64YgSGfjdh5eUW9CsqG7i5lXprzG1scriUNhcV9/BozktvmS+ba7x9a+Y=
+X-Received: by 10.99.51.15 with SMTP id z15mr2534852pgz.287.1505921552279;
+	Wed, 20 Sep 2017 08:32:32 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.149.73 with HTTP; Wed, 20 Sep 2017 08:32:01 -0700 (PDT)
+In-Reply-To: <1505920293-28115-3-git-send-email-derek@asterius.io>
 References: <1505920293-28115-1-git-send-email-derek@asterius.io>
-Subject: [meta-oe][PATCH 3/3] php: add libgcc to the runtime depends
+	<1505920293-28115-3-git-send-email-derek@asterius.io>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 20 Sep 2017 08:32:01 -0700
+Message-ID: <CAMKF1som+O+3KydLvPXQbE2ojDE_UUF9snru6Za3XWDydvcpSA@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 3/3] php: add libgcc to the runtime depends
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,28 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2017 15:11:55 -0000
+X-List-Received-Date: Wed, 20 Sep 2017 15:32:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Avoids issues with 'libgcc_s.so.1 must be installed for pthread_cancel to work'
+On Wed, Sep 20, 2017 at 8:11 AM, Derek Straka <derek@asterius.io> wrote:
+> Avoids issues with 'libgcc_s.so.1 must be installed for pthread_cancel to work'
+>
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>  meta-oe/recipes-devtools/php/php.inc | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+> index 0e55020..283d630 100644
+> --- a/meta-oe/recipes-devtools/php/php.inc
+> +++ b/meta-oe/recipes-devtools/php/php.inc
+> @@ -203,6 +203,7 @@ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp
+>
+>  PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
+>
+> +RDEPENDS_${PN} += "libgcc"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-oe/recipes-devtools/php/php.inc | 1 +
- 1 file changed, 1 insertion(+)
+this reminds that we need to make libgcc provide something like
+compiler/runtime which then can be depended upon by packages
+since clang also has a compiler runtime and we might have to make
+way to choose it at distro level rather
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 0e55020..283d630 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -203,6 +203,7 @@ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp
- 
- PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
- 
-+RDEPENDS_${PN} += "libgcc"
- RDEPENDS_${PN}-pear = "${PN}"
- RDEPENDS_${PN}-phar = "${PN}-cli"
- RDEPENDS_${PN}-cli = "${PN}"
--- 
-2.7.4
-
+>  RDEPENDS_${PN}-pear = "${PN}"
+>  RDEPENDS_${PN}-phar = "${PN}-cli"
+>  RDEPENDS_${PN}-cli = "${PN}"
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
