@@ -1,46 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 066C871C54
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 240A06093C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 04:14:39 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id u18so988899pgo.1
+	Wed, 20 Sep 2017 04:14:41 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id f84so722164pfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Sep 2017 21:14:41 -0700 (PDT)
+	Tue, 19 Sep 2017 21:14:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=YBNPVB2MBLsDcV3s1x4OzFsK30K3PHo3+I1/dzeljxc=;
-	b=nkK6Sx1IzyiIHN8UH/SsQkjlc6GnF4XDf1jswteOGnjy0XkNHOcBOFtZ6GvfvTb1ON
-	kcostUynAhASpCqEiiHJrB6hJ53OzIYnlLnorLbLtFwTsXlm0bJsG20zMX91Xc+FC00L
-	0UKx6FREGj5V9cXSh4QENGu871Ca7FbzI/oyPmZI0gW/ymG1L2LFcwsG/qJAmBscUnK0
-	7nnuyOusNJhMtOmnsXJJX8ihuqg3M/LWvV5C6Pa6B0w4RziNhqmy1nbXqvganS1vbUBz
-	Dss16dvn2opuEj3+vZLEfquV0zwBP0A6kL09xRszOLhXqlsKimiKNGcl6VFs86/oKRqm
-	OHMA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=wY0MRVriW/NOca7cDxCmr56tfpr9O+PR0PPZaDWQy7Q=;
+	b=XGOB8F1Fnb2aIuveg+OtcIWNUyrUSzsxBl/b0Th0w1ZNcVPq6pN5uLB6WvhULeLXgD
+	wX1G+Hzt2zt3iJ3AFHxx0sttFnou6x8ZwWwfVyEoQRevNbS5JkiLKrXpvIX4kxExdwm5
+	ozgBZAgWGrfsADd09Ux/FhFR3VwTVYHvvSaGZbF+EEvZFv1lPdD0WwFEbXZ10Cm60DbT
+	eG4dGUmRuAR7KoZTUv638FyM1br2sH7YuSqgWlj+axSxGOu7iJPBb7xcNefpY3PP5QKr
+	0HNhTS0/NDN6q1FczjPGO/sSRuzRSd7P2RhEOmzQB192/6Jc9kchQ0BE6jIC5JDr49Ol
+	KpCA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=YBNPVB2MBLsDcV3s1x4OzFsK30K3PHo3+I1/dzeljxc=;
-	b=dyqK4g4oUBf2Gkn6Oay9DDTcbuWiWFsprFxW1//abNKAxNzeG3UoQerMzeSb7sDTp1
-	GL5WXtQyOkNGy8Grx56eo+MweQqO3gImjuUmv6xnWq9SyE8DA6lbzvTE3luhDlOEoSfi
-	+HCsq35EWgd81GldIRW5RxRhHOP484V1xK2SDQZabZ8EKZs2IxAuCe3oXW46CUGcPx9X
-	GuSj+WH5nJe3qfd1A6g+jvP8Cai0t+xZH6Kxk8UJ+ceTH22H3up/fdZvwei9V8tOVHTY
-	hLAXdLShW9oGcHSYhkZ7eCAa/6bu+2Xv2BA/Vd2XwHwji7ZrMm8H7FArAHfi+huLkm4k
-	mr0Q==
-X-Gm-Message-State: AHPjjUgnvTo5l0VRUJNlBbQuwJLB7ewHlJxrolJ9+y/y6YTuyScqXYzs
-	UJcBqSW2p4QTh2Pr2IbPa2saBQ==
-X-Google-Smtp-Source: AOwi7QDuDgN+jEC6pBRewucJRp4sAWFPuvL5oeqyLkvE3GwlXPXzfGL48UKWEw/yKceSshquUzZvGw==
-X-Received: by 10.98.236.150 with SMTP id e22mr820985pfm.203.1505880880907;
-	Tue, 19 Sep 2017 21:14:40 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=wY0MRVriW/NOca7cDxCmr56tfpr9O+PR0PPZaDWQy7Q=;
+	b=NX/TfzYYWXub5SKH6pvy5cga3Z8c70j/7PEZFH8Z4GSPtlzs/02eHSIeUX3njRnHzO
+	oBHGVUhfDy1MDjjrygogvp3DTtuL6sv0cs444ExItTVG9ljSrMlXDXC75KnYE9SQg8gb
+	jxcBmS79MNAwSAEsX1o3B4Hbkt71RXh2mkVZPUhXSzPhdqBb3RZBFaY1+jDNEiYQJ1k2
+	yAX3EZbkz8MI7e/s2LcVTunostgx1JZXnF9hHbV76kU14EPNE6Ir2JycbdpcpH93Mc8G
+	PrjGqcatn0HwnM+wL24uO/By2d43EOy/qL5+xdX/WFXKo/id4aqgS5X6M9UAXjAAuu8e
+	UsDQ==
+X-Gm-Message-State: AHPjjUjpprEl8H1UBhmfx7bz/2LC8AkELuHfktwsuowc7wUnlO1fhb5L
+	SBSgm8n+nVCtAQ0QZB7RZYVThw==
+X-Google-Smtp-Source: AOwi7QB8mHJ0KvTlKCRzJHKBPvwZvIkKrE+rvJF5k07/ocytHrigxYIDsf6zVE+SYUwO51g1Rcfphw==
+X-Received: by 10.159.216.145 with SMTP id s17mr794182plp.35.1505880883111;
+	Tue, 19 Sep 2017 21:14:43 -0700 (PDT)
 Received: from localhost.localdomain (c-73-158-54-208.hsd1.ca.comcast.net.
 	[73.158.54.208]) by smtp.gmail.com with ESMTPSA id
-	w12sm5277628pfk.83.2017.09.19.21.14.40
+	w12sm5277628pfk.83.2017.09.19.21.14.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 19 Sep 2017 21:14:40 -0700 (PDT)
+	Tue, 19 Sep 2017 21:14:42 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Sep 2017 21:14:27 -0700
-Message-Id: <20170920041429.8047-1-raj.khem@gmail.com>
+Date: Tue, 19 Sep 2017 21:14:29 -0700
+Message-Id: <20170920041429.8047-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Subject: [meta-oe][PATCH 1/3] flatbuffers: Fix build with clang on big-endian machines
+In-Reply-To: <20170920041429.8047-1-raj.khem@gmail.com>
+References: <20170920041429.8047-1-raj.khem@gmail.com>
+Subject: [meta-oe][PATCH 3/3] mongodb: Fix build on aarch64
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,189 +57,180 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2017 04:14:40 -0000
+X-List-Received-Date: Wed, 20 Sep 2017 04:14:42 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- ...-Move-EndianSwap-template-to-flatbuffers-.patch | 113 +++++++++++++++++++++
- ..._builtin_bswap16-when-building-with-clang.patch |  30 ++++++
- .../flatbuffers/flatbuffers_1.7.1.bb               |   6 +-
- 3 files changed, 147 insertions(+), 2 deletions(-)
- create mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
- create mode 100644 meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
+ ...FPMathLib20U1-Check-for-__DEFINED_wchar_t.patch | 36 ++++++++++++++++
+ .../mongodb/mongodb/arm64-support.patch            | 43 +++++++++++++++++++
+ .../mongodb/disable-hw-crc32-on-arm64-s390x.patch  | 50 ++++++++++++++++++++++
+ meta-oe/recipes-support/mongodb/mongodb_git.bb     |  3 ++
+ 4 files changed, 132 insertions(+)
+ create mode 100644 meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
+ create mode 100644 meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
+ create mode 100644 meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
 
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch b/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
+diff --git a/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch b/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
 new file mode 100644
-index 000000000..d736f012b
+index 000000000..97f5a1d43
 --- /dev/null
-+++ b/meta-oe/recipes-devtools/flatbuffers/files/0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch
-@@ -0,0 +1,113 @@
-+From a614d8e20fa9e4fd16b699d581ddac2956c120f5 Mon Sep 17 00:00:00 2001
++++ b/meta-oe/recipes-support/mongodb/mongodb/0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch
+@@ -0,0 +1,36 @@
++From fbfceebce2121831904f2f7115252dd03b413a6d Mon Sep 17 00:00:00 2001
 +From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 19 Sep 2017 10:04:02 -0700
-+Subject: [PATCH 1/2] flatbuffers: Move EndianSwap template to
-+ flatbuffers/base.h
++Date: Tue, 19 Sep 2017 18:52:53 -0700
++Subject: [PATCH] IntelRDFPMathLib20U1: Check for __DEFINED_wchar_t
 +
-+Clang complains
-+call to function 'EndianSwap' that is neither visible in the template definition nor found by argument-dependent lookup
-+     return EndianSwap(t);
++This is defined by musl if wchar_t is already defined
 +
-+This seems to be due to limitation of two-phase lookup of dependent names in template definitions
++avoids errors like
 +
-+Its not being found using associated namespaces therefore
-+it has to be made visible at the template definition site as well
++src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h:46:15: error: typedef redefinition with different types
++      ('int' vs 'unsigned int')
++typedef int   wchar_t;
 +
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +---
-+Upstream-Status: Submitted
++Upstream-Status: Pending
 +
-+ include/flatbuffers/base.h        | 33 +++++++++++++++++++++++++++++++++
-+ include/flatbuffers/flatbuffers.h | 32 --------------------------------
-+ 2 files changed, 33 insertions(+), 32 deletions(-)
-+
-+diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
-+index f051755..c73fb2d 100644
-+--- a/include/flatbuffers/base.h
-++++ b/include/flatbuffers/base.h
-+@@ -150,6 +150,39 @@ typedef uintmax_t largest_scalar_t;
-+ // We support aligning the contents of buffers up to this size.
-+ #define FLATBUFFERS_MAX_ALIGNMENT 16
-+ 
-++template<typename T> T EndianSwap(T t) {
-++  #if defined(_MSC_VER)
-++    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
-++    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
-++    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
-++  #else
-++    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
-++      // __builtin_bswap16 was missing prior to GCC 4.8.
-++      #define FLATBUFFERS_BYTESWAP16(x) \
-++        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
-++    #else
-++      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
-++    #endif
-++    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
-++    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
-++  #endif
-++  if (sizeof(T) == 1) {   // Compile-time if-then's.
-++    return t;
-++  } else if (sizeof(T) == 2) {
-++    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
-++    return *reinterpret_cast<T *>(&r);
-++  } else if (sizeof(T) == 4) {
-++    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
-++    return *reinterpret_cast<T *>(&r);
-++  } else if (sizeof(T) == 8) {
-++    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
-++    return *reinterpret_cast<T *>(&r);
-++  } else {
-++    assert(0);
-++  }
-++}
-++
-++
-+ template<typename T> T EndianScalar(T t) {
-+   #if FLATBUFFERS_LITTLEENDIAN
-+     return t;
-+diff --git a/include/flatbuffers/flatbuffers.h b/include/flatbuffers/flatbuffers.h
-+index 9216cf4..f749dcb 100644
-+--- a/include/flatbuffers/flatbuffers.h
-++++ b/include/flatbuffers/flatbuffers.h
-+@@ -37,38 +37,6 @@ inline void EndianCheck() {
-+   (void)endiantest;
-+ }
-+ 
-+-template<typename T> T EndianSwap(T t) {
-+-  #if defined(_MSC_VER)
-+-    #define FLATBUFFERS_BYTESWAP16 _byteswap_ushort
-+-    #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
-+-    #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
-+-  #else
-+-    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
-+-      // __builtin_bswap16 was missing prior to GCC 4.8.
-+-      #define FLATBUFFERS_BYTESWAP16(x) \
-+-        static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
-+-    #else
-+-      #define FLATBUFFERS_BYTESWAP16 __builtin_bswap16
-+-    #endif
-+-    #define FLATBUFFERS_BYTESWAP32 __builtin_bswap32
-+-    #define FLATBUFFERS_BYTESWAP64 __builtin_bswap64
-+-  #endif
-+-  if (sizeof(T) == 1) {   // Compile-time if-then's.
-+-    return t;
-+-  } else if (sizeof(T) == 2) {
-+-    auto r = FLATBUFFERS_BYTESWAP16(*reinterpret_cast<uint16_t *>(&t));
-+-    return *reinterpret_cast<T *>(&r);
-+-  } else if (sizeof(T) == 4) {
-+-    auto r = FLATBUFFERS_BYTESWAP32(*reinterpret_cast<uint32_t *>(&t));
-+-    return *reinterpret_cast<T *>(&r);
-+-  } else if (sizeof(T) == 8) {
-+-    auto r = FLATBUFFERS_BYTESWAP64(*reinterpret_cast<uint64_t *>(&t));
-+-    return *reinterpret_cast<T *>(&r);
-+-  } else {
-+-    assert(0);
-+-  }
-+-}
-+-
-+ template<typename T> FLATBUFFERS_CONSTEXPR size_t AlignOf() {
-+   #ifdef _MSC_VER
-+     return __alignof(T);
-+-- 
-+2.14.1
-+
-diff --git a/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch b/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
-new file mode 100644
-index 000000000..460159f27
---- /dev/null
-+++ b/meta-oe/recipes-devtools/flatbuffers/files/0002-use-__builtin_bswap16-when-building-with-clang.patch
-@@ -0,0 +1,30 @@
-+From 626fe5e043de25e970ebdf061b88c646fa689113 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Tue, 19 Sep 2017 10:09:31 -0700
-+Subject: [PATCH 2/2] use __builtin_bswap16 when building with clang
-+
-+clang pretends to be gcc 4.2.0 and therefore the code does
-+not use __builtin_bswap16 but tries to synthesize it
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+Upstream-Status: Submitted
-+ include/flatbuffers/base.h | 2 +-
++ src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h | 2 +-
 + 1 file changed, 1 insertion(+), 1 deletion(-)
 +
-+diff --git a/include/flatbuffers/base.h b/include/flatbuffers/base.h
-+index c73fb2d..13e8fac 100644
-+--- a/include/flatbuffers/base.h
-++++ b/include/flatbuffers/base.h
-+@@ -156,7 +156,7 @@ template<typename T> T EndianSwap(T t) {
-+     #define FLATBUFFERS_BYTESWAP32 _byteswap_ulong
-+     #define FLATBUFFERS_BYTESWAP64 _byteswap_uint64
-+   #else
-+-    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408
-++    #if defined(__GNUC__) && __GNUC__ * 100 + __GNUC_MINOR__ < 408 && !defined(__clang__)
-+       // __builtin_bswap16 was missing prior to GCC 4.8.
-+       #define FLATBUFFERS_BYTESWAP16(x) \
-+         static_cast<uint16_t>(__builtin_bswap32(static_cast<uint32_t>(x) << 16))
++diff --git a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
++index 2b3f76db86..cc80305775 100755
++--- a/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
+++++ b/src/third_party/IntelRDFPMathLib20U1/LIBRARY/src/bid_functions.h
++@@ -42,7 +42,7 @@
++ #include <ctype.h>
++ 
++ // Fix system header issue on Sun solaris and define required type by ourselves
++-#if !defined(_WCHAR_T) && !defined(_WCHAR_T_DEFINED) && !defined(__QNX__)
+++#if !defined(_WCHAR_T) && !defined(_WCHAR_T_DEFINED) && !defined(__QNX__) && !defined(__DEFINED_wchar_t)
++ typedef int   wchar_t;
++ #endif
++ 
 +-- 
 +2.14.1
 +
-diff --git a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
-index be0bef21d..a8df44485 100644
---- a/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
-+++ b/meta-oe/recipes-devtools/flatbuffers/flatbuffers_1.7.1.bb
-@@ -13,8 +13,10 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=a873c5645c184d51e0f9b34e1d7cf559"
- SRCREV = "25a15950f5a24d7217689739ed8f6dac64912d62"
- 
- SRC_URI = "git://github.com/google/flatbuffers.git \
--    file://0001-correct-version-for-so-lib.patch \
--"
-+           file://0001-correct-version-for-so-lib.patch \
-+           file://0001-flatbuffers-Move-EndianSwap-template-to-flatbuffers-.patch \
-+           file://0002-use-__builtin_bswap16-when-building-with-clang.patch \
-+           "
- 
- # Make sure C++11 is used, required for example for GCC 4.9
- CXXFLAGS += "-std=c++11"
+diff --git a/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch b/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
+new file mode 100644
+index 000000000..9046bb2f4
+--- /dev/null
++++ b/meta-oe/recipes-support/mongodb/mongodb/arm64-support.patch
+@@ -0,0 +1,43 @@
++Add alises for arm64 which is same as aarch64
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
++
++Index: git/SConstruct
++===================================================================
++--- git.orig/SConstruct
+++++ git/SConstruct
++@@ -990,6 +990,7 @@ elif endian == "big":
++ processor_macros = {
++     'arm'     : { 'endian': 'little', 'defines': ('__arm__',) },
++     'aarch64' : { 'endian': 'little', 'defines': ('__arm64__', '__aarch64__')},
+++    'arm64'   : { 'endian': 'little', 'defines': ('__arm64__', '__aarch64__')},
++     'i386'    : { 'endian': 'little', 'defines': ('__i386', '_M_IX86')},
++     'ppc64le' : { 'endian': 'little', 'defines': ('__powerpc64__',)},
++     's390x'   : { 'endian': 'big',    'defines': ('__s390x__',)},
++Index: git/src/third_party/IntelRDFPMathLib20U1/SConscript
++===================================================================
++--- git.orig/src/third_party/IntelRDFPMathLib20U1/SConscript
+++++ git/src/third_party/IntelRDFPMathLib20U1/SConscript
++@@ -301,7 +301,7 @@ if processor == 'i386':
++ elif processor == 'arm':
++     cpp_defines['IA32'] = '1'
++     cpp_defines['ia32'] = '1'
++-elif processor == "aarch64":
+++elif processor == "aarch64" or processor == 'arm64':
++     cpp_defines['efi2'] = '1'
++     cpp_defines['EFI2'] = '1'
++ # Using 64 bit little endian
++Index: git/src/third_party/wiredtiger/SConscript
++===================================================================
++--- git.orig/src/third_party/wiredtiger/SConscript
+++++ git/src/third_party/wiredtiger/SConscript
++@@ -139,7 +139,7 @@ condition_map = {
++     'POSIX_HOST'   : not env.TargetOSIs('windows'),
++     'WINDOWS_HOST' : env.TargetOSIs('windows'),
++ 
++-    'ARM64_HOST'   : env['TARGET_ARCH'] == 'aarch64',
+++    'ARM64_HOST'   : env['TARGET_ARCH'] in ('aarch64', 'arm64'),
++     'POWERPC_HOST' : env['TARGET_ARCH'] == 'ppc64le',
++     'X86_HOST'     : env['TARGET_ARCH'] == 'x86_64',
++     'ZSERIES_HOST' : env['TARGET_ARCH'] == 's390x',
+diff --git a/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch b/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
+new file mode 100644
+index 000000000..5c5c20ce3
+--- /dev/null
++++ b/meta-oe/recipes-support/mongodb/mongodb/disable-hw-crc32-on-arm64-s390x.patch
+@@ -0,0 +1,50 @@
++imported from debian
++
++Upstream-Status: Pending
++Index: git/src/third_party/wiredtiger/SConscript
++===================================================================
++--- git.orig/src/third_party/wiredtiger/SConscript
+++++ git/src/third_party/wiredtiger/SConscript
++@@ -169,7 +169,9 @@ if useSnappy:
++ # If not available at runtime, we fall back to software in some cases.
++ #
++ # On zSeries we may disable because SLES 11 kernel doe not support the instructions.
++-if not (env['TARGET_ARCH'] == 's390x' and get_option("use-s390x-crc32") == "off"):
+++# Debian: disable hardware-assisted crc32 on s390x and arm64, as at least the
+++# buildd's do not support the instructions.
+++if env['TARGET_ARCH'] not in ('s390x', 'arm64', 'aarch64'):
++     env.Append(CPPDEFINES=["HAVE_CRC32_HARDWARE"])
++ 
++ wtlib = env.Library(
++Index: git/src/third_party/wiredtiger/dist/filelist
++===================================================================
++--- git.orig/src/third_party/wiredtiger/dist/filelist
+++++ git/src/third_party/wiredtiger/dist/filelist
++@@ -54,7 +54,6 @@ src/checksum/power8/crc32_wrapper.c	POWE
++ src/checksum/software/checksum.c
++ src/checksum/x86/crc32-x86.c		X86_HOST
++ src/checksum/zseries/crc32-s390x.c	ZSERIES_HOST
++-src/checksum/zseries/crc32le-vx.sx	ZSERIES_HOST
++ src/config/config.c
++ src/config/config_api.c
++ src/config/config_check.c
++Index: git/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
++===================================================================
++--- git.orig/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
+++++ git/src/third_party/wiredtiger/src/checksum/zseries/crc32-s390x.c
++@@ -78,6 +78,7 @@ unsigned int __wt_crc32c_le(unsigned int
++ 		return crc;                                                 \
++ 	}
++ 
+++#if defined(HAVE_CRC32_HARDWARE)
++ /* Main CRC-32 functions */
++ DEFINE_CRC32_VX(__wt_crc32c_le_vx, __wt_crc32c_le_vgfm_16, __wt_crc32c_le)
++ 
++@@ -90,6 +91,7 @@ __wt_checksum_hw(const void *chunk, size
++ {
++ 	return (~__wt_crc32c_le_vx(0xffffffff, chunk, len));
++ }
+++#endif
++ 
++ #endif
++ 
+diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+index 547f60850..ab8ade127 100644
+--- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+@@ -18,6 +18,9 @@ SRC_URI = "git://github.com/mongodb/mongo.git;branch=v3.4 \
+            file://0001-Use-strerror_r-only-on-glibc-systems.patch \
+            file://0002-Add-a-definition-for-the-macro-__ELF_NATIVE_CLASS.patch \
+            file://0003-Conditionalize-glibc-specific-strerror_r.patch \
++           file://arm64-support.patch \
++           file://0001-IntelRDFPMathLib20U1-Check-for-__DEFINED_wchar_t.patch \
++           file://disable-hw-crc32-on-arm64-s390x.patch \
+            "
+ SRC_URI_append_libc-musl ="\
+            file://0004-wiredtiger-Disable-strtouq-on-musl.patch \
 -- 
 2.14.1
 
