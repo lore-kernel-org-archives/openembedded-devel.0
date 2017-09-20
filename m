@@ -1,39 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0AF9077EAA
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f181.google.com (mail-io0-f181.google.com
+	[209.85.223.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 93B4777EAA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 14:09:47 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id o77so1755334qke.2
+	Wed, 20 Sep 2017 14:11:48 +0000 (UTC)
+Received: by mail-io0-f181.google.com with SMTP id v36so4231744ioi.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 07:09:49 -0700 (PDT)
+	Wed, 20 Sep 2017 07:11:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=GD+1ev/7CL/0TEdR5uujizVtG97sU19Ifpw4RDvF9fM=;
+	b=vohKRKq8PNnh1+CyBiHQsMxqG2J355ZpVIIqjrnJMrYx0f8NSxcfDJ5h38UWvAqaRf
+	hvXxF4qIcVcqXk9eW35BSN3I1jwVznATtiX6MGoJiBYIQ9NGl2PTPCPQZUdpMeFwFYIs
+	p+XfbUIAtiIJfe3MXOJo/5m1clb+z1aIyyNI3pNJnQLP69aDtUTp8RdRITfwtWYDg82K
+	sNhKCmunjI+EEy0moAagl0w4Of5Rtk2yXa0KKqNhTGN1Y6ZcEFsUBuie/DBP3Ji4y7It
+	IXIh+J/ZBF+X/PCtkJb2A6MmHHmPVYBzSI5eUpIcifJ4hscwagFEKIp9juTlFaZKE5iz
+	kPxg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=58wUcbaIL9LSl+iM3DOuHPKnzXwsYxB13jTO3ma2SOo=;
-	b=lG3bmq+dTiS0AAU/Udxhqukz603tsBBQKiK9qJilmvoRfDefzwtUBwoh82aVc9kiX8
-	9v6fNeouYhYNnzFp7H0uMikexVtJ87WO1YjMJ7pZYGLRSCHC5kib3yoGHvEkry52CCzb
-	gYa3aj1D6xMYRKS50OzUwp+BoVaSa1Png2WtDjWa0I0h/Z54oCYivXOb5PRmxh8pdKBg
-	HPgCzOBjrNLPAFF63kvP6VM+qufp6pWKPiwSXCahSxQRnFKQvuNP9xzx/clGIDTzQPcV
-	BIRMJMBBuiQVw9jmN+rSz6vb9Bmemq6nQv9wMDbM7fRurezdZ52KHCzVwAN63E0Q2ldW
-	oBYQ==
-X-Gm-Message-State: AHPjjUjloQom8HTjV1Y483PCHMSv5NLQPW4wKQZ2U99WevfoxlELPJW2
-	TelHSnexmQd6dcT5o4dZqTySwD/G
-X-Google-Smtp-Source: AOwi7QAJKe04QkmK6+tV23hR34ZyeuI3gvQxJdQj6ha1VZ2latOthVXoPiGmAGp/1iWc8Caeh3npqw==
-X-Received: by 10.55.42.130 with SMTP id q2mr7275220qkq.331.1505916588469;
-	Wed, 20 Sep 2017 07:09:48 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	i124sm1331460qkf.84.2017.09.20.07.09.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 20 Sep 2017 07:09:47 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Sep 2017 10:09:27 -0400
-Message-Id: <1505916567-19611-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] jsoncpp: update to version 1.8.3
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=GD+1ev/7CL/0TEdR5uujizVtG97sU19Ifpw4RDvF9fM=;
+	b=OzUtamWL4OvAiWnZ8hNFK5RxNI95kir9qCs5W32x4xmOM3rxCiiborzU1B2r5iATGy
+	bjK/PwJPvOJ2YDAB6PMRC3dqHdYu7M+LOUkYTrRS3n+P6TVS5EVBPyT9I3qapSCls9Bh
+	dKhBVMdkEWhZsh7nTEB8SNCNluYEBW8bHet6+PMVIT47Db7zYxBCEKnqquVT4OV6HIwT
+	VUaGlNztAsANsuoFhGxNuA+dzog1/KiYkTGa6RO/R9V5ROPt+TIaTb65pvdlFalNyYIW
+	PFki60QwcVRaM/QHwlaYLQIRTJQCEX7+XVdQvVyPh1OCNzbocNrrbgmB9bcNiKoCs3qT
+	wRUQ==
+X-Gm-Message-State: AHPjjUiGqiJOpu1sZkc7DXX9ZunrjCdDBn3JG2lCjAxt8b4f6SmIr+Zl
+	3BLhc7yADDveF4NQpDkiYBtUKAGT6ibr6ynCPA/P8w==
+X-Google-Smtp-Source: AOwi7QCSNASMHlb4sjukoefXcL82gle1W8wgXN7/uScXk8H4AF6dQQ1rPLZYubzT+JFeqapv04s3fOjjm6aGZwoMyco=
+X-Received: by 10.107.135.72 with SMTP id j69mr7352645iod.210.1505916709324;
+	Wed, 20 Sep 2017 07:11:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.19.68 with HTTP; Wed, 20 Sep 2017 07:11:28 -0700 (PDT)
+In-Reply-To: <1505916567-19611-1-git-send-email-derek@asterius.io>
+References: <1505916567-19611-1-git-send-email-derek@asterius.io>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Wed, 20 Sep 2017 15:11:28 +0100
+Message-ID: <CAJTo0La+DNTtgcGrO2gZ9Kgy6D5=n+7N=tetnweMVdEweupt4w@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] jsoncpp: update to version 1.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,34 +56,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2017 14:09:48 -0000
+X-List-Received-Date: Wed, 20 Sep 2017 14:11:48 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/jsoncpp/{jsoncpp_1.8.0.bb => jsoncpp_1.8.3.bb}   | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/jsoncpp/{jsoncpp_1.8.0.bb => jsoncpp_1.8.3.bb} (83%)
+On 20 September 2017 at 15:09, Derek Straka <derek@asterius.io> wrote:
 
-diff --git a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.3.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
-rename to meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.3.bb
-index fe6ae24..b7a02ef 100644
---- a/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.0.bb
-+++ b/meta-oe/recipes-devtools/jsoncpp/jsoncpp_1.8.3.bb
-@@ -9,9 +9,9 @@ HOMEPAGE = "https://github.com/open-source-parsers/jsoncpp"
- SECTION = "libs"
- 
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
- 
--SRCREV = "f700fe455940d4d325c088b9174a173e130e0fa8"
-+SRCREV = "2de18021fcb11370e9b5a1fbe7dcfd673533a134"
- SRC_URI = "git://github.com/open-source-parsers/jsoncpp"
- 
- S = "${WORKDIR}/git"
--- 
-2.7.4
+> -LIC_FILES_CHKSUM = "file://LICENSE;md5=c56ee55c03a55f8105b969d8270632ce"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=fa2a23dd1dc6c139f35105379d76df2b"
+>
 
+Always explain why the checksum needs to change in the commit message (so a
+v2, not just a reply to this message).
+
+Ross
 
