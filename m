@@ -1,51 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
-	[209.85.192.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A1F6977F34;
-	Wed, 20 Sep 2017 20:08:46 +0000 (UTC)
-Received: by mail-pf0-f169.google.com with SMTP id l188so2062483pfc.6;
-	Wed, 20 Sep 2017 13:08:48 -0700 (PDT)
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 4F26E77A62
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Sep 2017 22:32:30 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id e69so1705019pfg.4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Sep 2017 15:32:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=1gVkF4Dwl+e4yM5Z/6kcPJ4RazwYLr/jC0tepEb+Ms8=;
-	b=e2U+i1XM6BJVloOwdUl2Q99Dzb+NrM/EuzHcqf+xi6k4l1dNYutZj35p6inEbZfm3r
-	bZNme1sZ033bgNZrgaeZ9Zv0eNStQ+m7Tme5oyB6clbGNSN2tm6yqkeGYY1JKMpmt1ux
-	+b6hGuFPQYVQ9dciHYi8M25wp2ETxjshdAplP/ZMV3iBrYGVaSZFnnD83QkWion0yjMF
-	2Wi1V9c6mvXrvNTs41yeq1NsaGthp50+25dgN9LQ/2CAD45WgKvZVIUNy0N8HUvVjFjh
-	lMiuH/M++ny0r5Sj2DWhtNHp+W5bK7o1TLzCoGrtulY/OyryZ7caBn31aZ51pIbpAvqT
-	AyNQ==
+	h=from:to:cc:subject:date:message-id;
+	bh=XaUsTXjr4q/rRycZgBPCn5zYn0LHOnGefKp4vdde4iM=;
+	b=Je+ccAU6p2BPG9Z9LkjhuIO/vHtpDjel2tgnoesv+NLD3RH2+qXucvNSTduPpOPGWm
+	2dIboP7TnYwOKmh2H/fLSC+Rk7Zb6m8jk5NXLus4M9pZV5dYNv9ansLVogXJVyVSRpVf
+	O9C1FY2mIx893BjA9vr65B934ztG5jDATed53MTaj3eOWPbt1AOAy/VE/5LhslzAhakK
+	KTCif1hfmjdDYYcyMbsag4dSdSnW9nI8KZ594BsdaCDo5wgDr4BzPqoQesiEkPR76ATw
+	PoicKYNZcePRbH9gBLfGpvaaDQRLWCCsGyTBCnrEvZjVpQOe5qGUxN/ga0xBmZ1ossHG
+	fpnQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=1gVkF4Dwl+e4yM5Z/6kcPJ4RazwYLr/jC0tepEb+Ms8=;
-	b=C19apjtycKX0G6H/YHme+wEwcZsMp9yWlCXncbu/7CCV8QI/YnDm/b/qw06Wlp9GY0
-	HitpUsG+Huua3aNPho6tl/CjAbcjoaGfix4NEKIYda3CdWOd6h9OtvE7vLzDbQvU6bEx
-	/ZONBJfyU98qHq8CeGFIePidjIF8HaHrMQYcDphWdYciLmfuNpxVNs9OWVoEMP7X54XR
-	eOgbUMpzz8u4DqPAzH+RCZtPKjA8+XFuwi7iMh6vHGVQWtsBYVvdRi88wYPYmAbMRqbQ
-	/M92506RJrDoOyn0UNyRBEOZseXm30VPaxpRmhmIlQs/Z4yQIsfV9ppJnWknDd4TwCZf
-	j6ng==
-X-Gm-Message-State: AHPjjUghK6+QVqxejqry3euXX5XKkeZX0wY029mYRBI2ZlhmsdHbBlPA
-	sUwYAyK3D9X+JaqihrqEMD3S2PfswH2mozE1DhA=
-X-Google-Smtp-Source: AOwi7QBPsTs618pW8dZ3DEd7OTQmsEsEPZf7OoqQg0RLrKdq5lRWLxVkP2rLwthRRgRqsLzSwk2OLBu/PzSPhJ+h+y8=
-X-Received: by 10.101.86.196 with SMTP id w4mr1468298pgs.341.1505938127908;
-	Wed, 20 Sep 2017 13:08:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.149.73 with HTTP; Wed, 20 Sep 2017 13:08:17 -0700 (PDT)
-In-Reply-To: <CA+YB3rZv+=nB=7J98XGqemV5GHW3QkmA7siyn-vArqfK8GHKmA@mail.gmail.com>
-References: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-	<CAHUNapQDGe3b4Nmg6OmL0hxkMGyY9e3z=GKdkOW8VuJe9-q2Ew@mail.gmail.com>
-	<CAMKF1spb4tz=te84G=JA40HxiF+wX=YSJnJcK8viyx_OwZ87uw@mail.gmail.com>
-	<CA+YB3rZv+=nB=7J98XGqemV5GHW3QkmA7siyn-vArqfK8GHKmA@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XaUsTXjr4q/rRycZgBPCn5zYn0LHOnGefKp4vdde4iM=;
+	b=f/A4Q2nDZ/8P6U7OdfQb0ov7JL4EHOGdKChvxrtzoACuFE8V6dCVGHga/rojw0jOKK
+	YcjTE31cqXbXRJA0P0wuzBG+U9+hZQJo0wGyGHj5Fl5jleSgpfKRmb38E+72O1YEssDW
+	014tMthHS5l0AKjgideZZislYDAsL16zQYohjW3c8+zX9f/adBf34/QXNP6CM19SlUhg
+	3rDaaA2vvHEHOg7MND0/nj1BkGIArcLR+83YIYSyC4Cm3ixH4WLPnGof4ZPY69xI58Cp
+	JBASn8wH7pD3zo5Su+ZOjaZy1WSHO5blXrArIE9bpYrQ8wk2305HjpjEIlDZhg1SNzHQ
+	q77w==
+X-Gm-Message-State: AHPjjUiK0IqkLKBCZUng41sqZOfpwHlmLqlho2ASpMBgigC3hxGVcRlA
+	0EHKx9G73vANaK41P9+iz4gqPg==
+X-Google-Smtp-Source: AOwi7QA7scuRDhGAf9H9xMYSGdur7KX6p0HsOXj4J0OxrvHbXHszLPb/Vno770rkOQ8Wl861jvmr8w==
+X-Received: by 10.98.79.65 with SMTP id d62mr3712388pfb.324.1505946752277;
+	Wed, 20 Sep 2017 15:32:32 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::e57f])
+	by smtp.gmail.com with ESMTPSA id
+	d4sm9031277pfb.185.2017.09.20.15.32.31
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 20 Sep 2017 15:32:31 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 20 Sep 2017 13:08:17 -0700
-Message-ID: <CAMKF1so3xnW4Gfy1e-sW1Xa6SLckH=e=v3rcYh90jm02=rgN-A@mail.gmail.com>
-To: Jeff Osier-Mixon <jefro@jefro.net>
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: OE general meeting before OEDEM next month.
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 20 Sep 2017 15:32:21 -0700
+Message-Id: <20170920223222.26924-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.1
+Subject: [meta-oe][PATCH 1/2] luajit: Fix mips build with clang
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,12 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2017 20:08:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 20 Sep 2017 22:32:31 -0000
 
-On Wed, Sep 20, 2017 at 11:24 AM, Jeff Osier-Mixon <jefro@jefro.net> wrote:
-> Zoom might be easier, as people can dial in or connect online. We'll make it
-> work.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ meta-oe/recipes-devtools/luajit/luajit/clang.patch | 19 +++++++++++++++++++
+ meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb    |  1 +
+ 2 files changed, 20 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/luajit/luajit/clang.patch
 
-cool thanks.
+diff --git a/meta-oe/recipes-devtools/luajit/luajit/clang.patch b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+new file mode 100644
+index 000000000..c39ef6fd4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/luajit/luajit/clang.patch
+@@ -0,0 +1,19 @@
++clang pretends to be gcc 4.2.0 which is a big lie when it comes
++to features, its same as latest gcc
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
++
++Index: LuaJIT-2.0.5/src/lj_arch.h
++===================================================================
++--- LuaJIT-2.0.5.orig/src/lj_arch.h
+++++ LuaJIT-2.0.5/src/lj_arch.h
++@@ -313,7 +313,7 @@
++ #error "Need at least GCC 4.2 or newer"
++ #endif
++ #elif !LJ_TARGET_PS3
++-#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3)
+++#if (__GNUC__ < 4) || ((__GNUC__ == 4) && __GNUC_MINOR__ < 3) && !defined(__clang__)
++ #error "Need at least GCC 4.3 or newer"
++ #endif
++ #endif
+diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+index d7477ed98..73c38111e 100644
+--- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
++++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+@@ -5,6 +5,7 @@ HOMEPAGE = "http://luajit.org"
+ 
+ SRC_URI = "http://luajit.org/download/LuaJIT-${PV}.tar.gz \
+            file://0001-Do-not-strip-automatically-this-leaves-the-stripping.patch \
++           file://clang.patch \
+ "
+ SRC_URI[md5sum] = "48353202cbcacab84ee41a5a70ea0a2c"
+ SRC_URI[sha256sum] = "874b1f8297c697821f561f9b73b57ffd419ed8f4278c82e05b48806d30c1e979"
+-- 
+2.14.1
+
 
