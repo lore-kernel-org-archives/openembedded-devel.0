@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
 	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D2FBA77F7D
+	by mail.openembedded.org (Postfix) with ESMTP id 2E1E477E7E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 14:19:25 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id b1so1828429qtc.0
+	Wed, 20 Sep 2017 15:11:45 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id o3so1334711qte.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 07:19:27 -0700 (PDT)
+	Wed, 20 Sep 2017 08:11:47 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=BYZedNKQygBavdoRh4HM8F6dmQUpvJ14657reaKRMDo=;
-	b=hFlZ8F+1hMT+PJPICD1Y0KRU+po49yHwYNGss3eCNJqXX4cKjEa/5VePo/nh2rrMCz
-	ypCBSQuoW2p+qPAnd2KxtPnVNAFSDh9oYEC5GRVXrnl7+ZagnOpgvFbnS+mLRHnI2bQu
-	sfj8qBSqOJwdqlbbq2BbbdndgC5cjwqgYKv33fylfUBKs+byMNV0qVkuJyuSuIuk5uuo
-	Guer+J+9wTn1sWhlOZLlHjXWJ7aSVCZK6x1Hu5dZBxmavEusHoCUL2ln6Klk1vhos3S4
-	ZAUdvyHduau9ssn9LDYJ3ISRqHYJsk/aAmmvbKZbq2S0uFmiAJ8ebJ3CgUd71YE0NJC3
-	RGvg==
-X-Gm-Message-State: AHPjjUiOEzEfZAsUG9XUPvbwUmxaspEAJXnkTqukmFG44Tk8Lzyjqi7V
-	V10mtU7+lAuB1odqgu+ZcXPINVMR
-X-Google-Smtp-Source: AOwi7QAsW5vzAyAYFwNbTt1H+b8QQWQpCAvCuy2HOSj1EZMiGE+Py3xzBXaieqKsQEE/AjP/tEw09A==
-X-Received: by 10.200.15.170 with SMTP id b39mr8330946qtk.52.1505917166696;
-	Wed, 20 Sep 2017 07:19:26 -0700 (PDT)
+	bh=35cva3/JAvnbJYIAB3SlxVP8t/psdlXMLcflK4+JB90=;
+	b=I2o5fWijKVLRoCpSfGyfMkm2Mm+Od6wi8Xo05M+HqADZEKovu//umHpOb/MAS+BZId
+	0ZtIPO3lLaRrv3QH3uRNEQBpXS3rBT5tzCp0c/uTgYsqU7vvPpGdQDCKAe0pFL1yAUtk
+	Lp6D7FaypK4hz8sHT7SAS/671WJ6GPfMURDOYeu11a4+Ff0e6VGLkDfau2VKyS32QBbn
+	Y60Ozv183KHsz9TgukF/a9f8eLuhUu2NozCsjt2WpCiDl4529WliqCCZVPiIMCJk+TMo
+	+IJ/yU49+fdEZQ0BYY4dxKUCZNMnV3YSMkBAQ+NjlNdE3n4+fhd1Jx9QGye+EGiDTaQa
+	VUcg==
+X-Gm-Message-State: AHPjjUhNMRqVC5dnAElnlqd76UecnggKgWX28HmZSXyHZRjeLh86fQV7
+	Rk/h1gB5NWknJ7ltWHt/GSxL4HYD
+X-Google-Smtp-Source: AOwi7QCeLoBEMBBdWyPIe0H8sWxYyysnXnkiKLkbFCbH2f/nqye+DU4VPMlA7v+Aw/vxmmPfA9Tckg==
+X-Received: by 10.200.50.125 with SMTP id y58mr7542877qta.266.1505920306756;
+	Wed, 20 Sep 2017 08:11:46 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	o17sm1428369qkl.14.2017.09.20.07.19.25
+	e64sm1436547qkc.15.2017.09.20.08.11.46
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 20 Sep 2017 07:19:26 -0700 (PDT)
+	Wed, 20 Sep 2017 08:11:46 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 20 Sep 2017 10:19:18 -0400
-Message-Id: <1505917158-21394-1-git-send-email-derek@asterius.io>
+Date: Wed, 20 Sep 2017 11:11:31 -0400
+Message-Id: <1505920293-28115-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] msgpack-c: update to version 2.1.5
+Subject: [meta-oe][PATCH 1/3] php: update version to 7.1.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,80 +46,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Sep 2017 14:19:26 -0000
+X-List-Received-Date: Wed, 20 Sep 2017 15:11:46 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...ntentional-fallthrough-in-case-statements.patch | 39 ----------------------
- .../{msgpack-c_2.1.1.bb => msgpack-c_2.1.5.bb}     |  3 +-
- 2 files changed, 1 insertion(+), 41 deletions(-)
- delete mode 100644 meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
- rename meta-oe/recipes-devtools/msgpack/{msgpack-c_2.1.1.bb => msgpack-c_2.1.5.bb} (83%)
+ .../php/{php-7.1.8 => php-7.1.9}/0001-Specify-tag-with-libtool.patch  | 0
+ .../{php-7.1.8 => php-7.1.9}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch   | 0
+ meta-oe/recipes-devtools/php/{php_7.1.8.bb => php_7.1.9.bb}           | 4 ++--
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/php/{php-7.1.8 => php-7.1.9}/0001-Specify-tag-with-libtool.patch (100%)
+ rename meta-oe/recipes-devtools/php/{php-7.1.8 => php-7.1.9}/change-AC_TRY_RUN-to-AC_TRY_LINK.patch (100%)
+ rename meta-oe/recipes-devtools/php/{php_7.1.8.bb => php_7.1.9.bb} (79%)
 
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch b/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
-deleted file mode 100644
-index a388297..0000000
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c/0001-Comment-intentional-fallthrough-in-case-statements.patch
-+++ /dev/null
-@@ -1,39 +0,0 @@
--From 15d8bb6792c9639d85a9ffe2ac81431f1b986c21 Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Sat, 22 Apr 2017 08:53:50 -0700
--Subject: [PATCH] Comment intentional fallthrough in case statements
--
--Fixes build with gcc7
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp | 4 ++++
-- 1 file changed, 4 insertions(+)
--
--diff --git a/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp b/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
--index b35c21a7..4c463a90 100644
----- a/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
--+++ b/include/msgpack/v1/adaptor/detail/cpp03_define_array.hpp
--@@ -105,6 +105,7 @@ struct define_array<A0, A1> {
--             switch(size) {
--             default:
--             case 2: ptr[1].convert(a1);
--+            //fallthrough
--             case 1: ptr[0].convert(a0);
--             }
--         }
--@@ -193,8 +194,11 @@ struct define_array<A0, A1, A2, A3> {
--             switch(size) {
--             default:
--             case 4: ptr[3].convert(a3);
--+            //fallthrough
--             case 3: ptr[2].convert(a2);
--+            //fallthrough
--             case 2: ptr[1].convert(a1);
--+            //fallthrough
--             case 1: ptr[0].convert(a0);
--             }
--         }
---- 
--2.12.2
--
-diff --git a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-similarity index 83%
-rename from meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb
-rename to meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-index 7655d94..d9f6956 100644
---- a/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.1.bb
-+++ b/meta-oe/recipes-devtools/msgpack/msgpack-c_2.1.5.bb
-@@ -9,10 +9,9 @@ LIC_FILES_CHKSUM = "file://NOTICE;md5=7a858c074723608e08614061dc044352 \
- 
- PV .= "+git${SRCPV}"
- 
--SRCREV = "20ef1f925b007f170ab1c257e4aa61fdd0927773"
-+SRCREV = "7a98138f27f27290e680bf8fbf1f8d1b089bf138"
- 
- SRC_URI = "git://github.com/msgpack/msgpack-c \
--           file://0001-Comment-intentional-fallthrough-in-case-statements.patch \
+diff --git a/meta-oe/recipes-devtools/php/php-7.1.8/0001-Specify-tag-with-libtool.patch b/meta-oe/recipes-devtools/php/php-7.1.9/0001-Specify-tag-with-libtool.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/php/php-7.1.8/0001-Specify-tag-with-libtool.patch
+rename to meta-oe/recipes-devtools/php/php-7.1.9/0001-Specify-tag-with-libtool.patch
+diff --git a/meta-oe/recipes-devtools/php/php-7.1.8/change-AC_TRY_RUN-to-AC_TRY_LINK.patch b/meta-oe/recipes-devtools/php/php-7.1.9/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+similarity index 100%
+rename from meta-oe/recipes-devtools/php/php-7.1.8/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+rename to meta-oe/recipes-devtools/php/php-7.1.9/change-AC_TRY_RUN-to-AC_TRY_LINK.patch
+diff --git a/meta-oe/recipes-devtools/php/php_7.1.8.bb b/meta-oe/recipes-devtools/php/php_7.1.9.bb
+similarity index 79%
+rename from meta-oe/recipes-devtools/php/php_7.1.8.bb
+rename to meta-oe/recipes-devtools/php/php_7.1.9.bb
+index a66bcf8..157369e 100644
+--- a/meta-oe/recipes-devtools/php/php_7.1.8.bb
++++ b/meta-oe/recipes-devtools/php/php_7.1.9.bb
+@@ -5,8 +5,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c0af599f66d0461c5837c695fcbc5c1e"
+ SRC_URI += "file://change-AC_TRY_RUN-to-AC_TRY_LINK.patch \
+             file://0001-Specify-tag-with-libtool.patch \
             "
+-SRC_URI[md5sum] = "d22451dc20bbdf4b8bb656dc787c2a36"
+-SRC_URI[sha256sum] = "7064a00a9450565190890c7a4be04e646e0be73b2e0f8c46ae34419f343ca2f8"
++SRC_URI[md5sum] = "2397be54f3281cdf30c7ef076b28f7d0"
++SRC_URI[sha256sum] = "314dcc10dfdd7c4443edb4fe1e133a44f2b2a8351be8c9eb6ab9222d45fd9bae"
  
- inherit cmake pkgconfig
+ PACKAGECONFIG[mysql] = "--with-mysqli=${STAGING_BINDIR_CROSS}/mysql_config \
+                         --with-pdo-mysql=${STAGING_BINDIR_CROSS}/mysql_config \
 -- 
 2.7.4
 
