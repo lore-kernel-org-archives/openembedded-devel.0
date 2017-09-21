@@ -1,47 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 434C660102
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A5F4C60602
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 09:57:30 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id m127so4746002wmm.0
+	Thu, 21 Sep 2017 09:57:32 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id g50so2848250wra.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 02:57:32 -0700 (PDT)
+	Thu, 21 Sep 2017 02:57:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=9mRQH1EWGO/eXFyFeFmIUW1WE88VqmTvQGvHyzLo3zA=;
-	b=KQqLaKTjYnQ4HcbM8S1EaiuiINELuQn4Gp2PjnjZPECNYQTMjWgXaHUNK3QdlJzDBx
-	Zj2lkFb2baKLOS1BGXvA4iz0MjysvqfRAOOW4+CoOMTav0O/4Zcyyl6CAmw0wio3Yu2h
-	VEMlkNW9n5/OyjZuzzJBuJS6mf5D7wuGspgOGXgfq9I0UeheegW5gtbG3K5XUmaTRwmV
-	SijOMoKerABTVwq7Y1pOkiE2+vE87KIfhOyBV3trpjYZFfAP07kEqqmYrsg/fkTat3sx
-	yo2ujZzno6mEgDQB/ipSir4jsmgYAteC4QNRjboOr+KWTLOsy7oHZYWdRz8HvR5A6WDd
-	MFbA==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=AEBv1K0NGvknajIqwDA7oRI2O7JnIljbtoXZYdsLRc4=;
+	b=ve5SLKIwoSEVojp4Oi6/mTZFT3TRSfrWO8lSjEecqKoCaKPszkI+rnkUJaopNBz46O
+	EF3WgjWVVfkDHwNC+INWAR6poJE/rJ5oHodAkm7KJqzsdxY4hOlP+UgBO5Yxt02UdxWp
+	5rPFACs7LCbJVcgLmXbAAihx2Vi7tMvXTQqv/BHtvcwOPKA2HmCV5X8YFkCUw1rKc5KV
+	icWFyNsr796qxYjBjm8qL5s+CFYNu2MHp3D3MEGye5eSUQ8k8ZcrZb076XTSaP39+oNl
+	xdb60fJTLLNqjKvIhg1HwcYKyAzpUQJ2Y17rIMf79QkW0AaoDsLFmBaMErnh5gL8272x
+	20EA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=9mRQH1EWGO/eXFyFeFmIUW1WE88VqmTvQGvHyzLo3zA=;
-	b=Zvj28grpDyKnx5exD1jdIkyICPowNJS9PjGqHRzKCMHN0J2mk8DxggJntJA7Hfku13
-	1tHl88tod5bHHva/uG4PWIN0Vfuq6D4GB3uG7mIaa8VifcpnbnTIclNF9gaUD3f2x+lg
-	L/9G4gwJ4GSIyaAjsy6D1PRNNjtdBfs7UMBlmFYlijxQMf5nxhLAva7n4sUnRO1GIoI3
-	cX1Vu1Uiq4O+7rj1W8cKGzXB/5APYFoJSm0S1NaubNDxsVbafuzfR7tuxZPTXRYw+Pt9
-	JsHpBHxzYCbPKUsn1angq3jYwyV4QMohFfJDcPn3CWBn045AS2BN14/3Ef+2WK1H3ShA
-	ciWQ==
-X-Gm-Message-State: AHPjjUjmBo1e4zxK2IIdukptlGhzZDXMlxEd166to+FiOyarhLVabSnz
-	IXpUFjksssCLZISPhEmWKuM6lw==
-X-Google-Smtp-Source: AOwi7QA032aoXYFQYpZvWAgMhS5WCmYoM0ZobMfWVhsI4uvQ6IivRiex5hEBXYppsqEs2kfGTIPimA==
-X-Received: by 10.28.165.1 with SMTP id o1mr505988wme.31.1505987851840;
-	Thu, 21 Sep 2017 02:57:31 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=AEBv1K0NGvknajIqwDA7oRI2O7JnIljbtoXZYdsLRc4=;
+	b=H8e/VjjcEhAM0fmvBGe46JtfxQbnyjeiBRZIQAwS2bThWOP0a1MDmBM7p9J2zUdLgT
+	Z3BnpNj+macsgqy6PYnUawMa8fJJ73c+NAzMmqRYxMmOxV3B1j+VVjDoGOeqREMNmTqT
+	7fcf0tF/qiaEC6F6yilWN3DZvyDt6Kpyc4wYdZKrxva+vXUGSi2/dN86SHeWC1jGHMQd
+	OtBH8gNJrT05YnbjxxksZcx3a9KheiMjJ7b0UUU/h6r/89BRrMGBCG1nI5TGCwpeNOD3
+	oztCWuU7f0cEGcUXABTTH7ysDiVu0f1YW3p2lW4i9LzwhF1DRk8rkuYhg+73Cp+uRc4+
+	POmw==
+X-Gm-Message-State: AHPjjUjLXgvrd6fKjNtsud0JduDnmci5cA9FakNiMmsn3xEtG58fXeMU
+	ctJZPw4sPxb/WpH93uZKJJaNXQ==
+X-Google-Smtp-Source: AOwi7QBSk+eYmuFjswgrz1vfUGwiXI9hP+j19lyu4/C5iaJuTTsituGxkdt1vDFTA6bRHES5ABBdSw==
+X-Received: by 10.223.180.82 with SMTP id v18mr1534204wrd.61.1505987853014;
+	Thu, 21 Sep 2017 02:57:33 -0700 (PDT)
 Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id j2sm1060770wrj.82.2017.09.21.02.57.30
+	by smtp.gmail.com with ESMTPSA id 12sm1519610wmn.38.2017.09.21.02.57.32
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 21 Sep 2017 02:57:30 -0700 (PDT)
+	Thu, 21 Sep 2017 02:57:32 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Sep 2017 11:59:59 +0200
-Message-Id: <20170921100000.19981-1-Martin.Jansa@gmail.com>
+Date: Thu, 21 Sep 2017 12:00:00 +0200
+Message-Id: <20170921100000.19981-2-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 2.14.1
-Cc: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-Subject: [morty][PATCH 1/2] lftp: change SRC_URI source
+In-Reply-To: <20170921100000.19981-1-Martin.Jansa@gmail.com>
+References: <20170921100000.19981-1-Martin.Jansa@gmail.com>
+Subject: [morty][PATCH 2/2] opensaf: fix QA Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,45 +57,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 09:57:31 -0000
+X-List-Received-Date: Thu, 21 Sep 2017 09:57:33 -0000
 
-From: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+From: "dengke.du@windriver.com" <dengke.du@windriver.com>
 
-Changed SRC_URI source to official web-site, which keeps tarballs with
-old releases.
+Move the do_sysvinit_install contents to do_install_append.
 
-Cherry-picked from master, but without the upgrade to 4.7.5.
-
-  commit a2e075ba656a89da58ca4f849c2f08ec6d50a96f
-  Author: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
-  Date:   Mon Jan 9 15:34:07 2017 +0100
-
-    lftp: update to 4.7.5 and change SRC_URI source
-
-    Updated lftp to version 4.7.5 and changed SRC_URI source to official
-    web-site, which keeps tarballs with old releases.
-
-Signed-off-by: Oleksandr Kravchuk <oleksandr.kravchuk@pelagicore.com>
+Signed-off-by: Dengke Du <dengke.du@windriver.com>
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb | 14 +++++---------
+ 1 file changed, 5 insertions(+), 9 deletions(-)
 
-diff --git a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-index 287821194..d62453745 100644
---- a/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-+++ b/meta-networking/recipes-connectivity/lftp/lftp_4.7.3.bb
-@@ -6,7 +6,7 @@ SECTION = "console/network"
- LICENSE = "GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+diff --git a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb b/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+index da9c10520..6ceb225e9 100644
+--- a/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
++++ b/meta-networking/recipes-daemons/opensaf/opensaf_5.0.0.bb
+@@ -53,6 +53,11 @@ do_install_append() {
+     install -m 0644 ${B}/osaf/services/infrastructure/nid/config/opensafd.service \
+         ${D}${systemd_unitdir}/system
+     install -m 0644 ${B}/contrib/plmc/config/*.service ${D}/${systemd_unitdir}/system
++
++    if [ ! -d "${D}${sysconfdir}/init.d" ]; then
++        install -d ${D}${sysconfdir}/init.d
++        install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
++    fi
+ }
  
--SRC_URI = "http://fossies.org/linux/misc/lftp-${PV}.tar.gz \
-+SRC_URI = "http://lftp.yar.ru/ftp/lftp-${PV}.tar.gz \
-            file://fix-gcc-6-conflicts-signbit.patch \
-           "
- SRC_URI[md5sum] = "8eb1fe5f113126b60f172643c7f6c2e6"
+ FILES_${PN} += "${localstatedir}/run ${systemd_unitdir}/system/*.service"
+@@ -62,12 +67,3 @@ INSANE_SKIP_${PN} = "dev-so"
+ 
+ RDEPENDS_${PN} += "bash python"
+ 
+-do_sysvinit_install() {
+-    if [ ! -d "${D}${sysconfdir}/init.d" ]; then
+-       install -d ${D}${sysconfdir}/init.d
+-       install -m 0755 ${B}/osaf/services/infrastructure/nid/scripts/opensafd ${D}${sysconfdir}/init.d/
+-    fi
+-}
+-
+-addtask sysvinit_install after do_install before do_package
+-
 -- 
 2.14.1
 
