@@ -1,24 +1,30 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CF9871AE6
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id E884E7197A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 02:24:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v8L2Opgs001190
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu, 21 Sep 2017 06:41:09 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.42,424,1500912000"; d="scan'208";a="27557061"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 21 Sep 2017 14:40:54 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 54F1B47CA56C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Sep 2017 19:24:51 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 20 Sep 2017 19:24:50 -0700
-From: <kai.kang@windriver.com>
+	Thu, 21 Sep 2017 14:40:53 +0800 (CST)
+Received: from localhost.localdomain (10.167.235.93) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Thu, 21 Sep 2017 14:40:52 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Sep 2017 10:11:32 +0800
-Message-ID: <20170921021132.14819-1-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.14.1
+Date: Thu, 21 Sep 2017 14:41:03 +0800
+Message-ID: <1505976064-45756-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] opencv: fix CVE-2017-14136
+X-Originating-IP: [10.167.235.93]
+X-yoursite-MailScanner-ID: 54F1B47CA56C.A86EB
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] byacc: Add HOMEPAGE info into recipe file.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,327 +37,271 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 02:24:50 -0000
+X-List-Received-Date: Thu, 21 Sep 2017 06:41:11 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+copy byacc from meta to meta-oe.
 
-Backport patch to fix CVE-2017-14136 for opencv.
-
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
 ---
- .../opencv/opencv/CVE-2017-14136.patch             | 288 +++++++++++++++++++++
- meta-oe/recipes-support/opencv/opencv_3.3.bb       |   1 +
- 2 files changed, 289 insertions(+)
- create mode 100644 meta-oe/recipes-support/opencv/opencv/CVE-2017-14136.patch
+ meta-oe/recipes-extended/byacc/byacc.inc           |  23 +++
+ .../0001-byacc-do-not-reorder-CC-and-CFLAGS.patch  | 161 +++++++++++++++++++++
+ .../recipes-extended/byacc/byacc/byacc-open.patch  |  25 ++++
+ meta-oe/recipes-extended/byacc/byacc_20170201.bb   |  12 ++
+ 4 files changed, 221 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/byacc/byacc.inc
+ create mode 100644 meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
+ create mode 100644 meta-oe/recipes-extended/byacc/byacc/byacc-open.patch
+ create mode 100644 meta-oe/recipes-extended/byacc/byacc_20170201.bb
 
-diff --git a/meta-oe/recipes-support/opencv/opencv/CVE-2017-14136.patch b/meta-oe/recipes-support/opencv/opencv/CVE-2017-14136.patch
+diff --git a/meta-oe/recipes-extended/byacc/byacc.inc b/meta-oe/recipes-extended/byacc/byacc.inc
 new file mode 100644
-index 000000000..7ad50a2d2
+index 0000000..9bdafd2
 --- /dev/null
-+++ b/meta-oe/recipes-support/opencv/opencv/CVE-2017-14136.patch
-@@ -0,0 +1,288 @@
-+Upstream-Status: Backport [https://github.com/opencv/opencv/pull/9448/commits/aacae20]
++++ b/meta-oe/recipes-extended/byacc/byacc.inc
+@@ -0,0 +1,23 @@
++SUMMARY = "Berkeley LALR Yacc parser generator"
++HOMEPAGE = "http://invisible-island.net/byacc/"
++DESCRIPTION = "A parser generator utility that reads a grammar specification from a file and generates an LR(1) \
++parser for it.  The parsers consist of a set of LALR(1) parsing tables and a driver routine written in the C \
++programming language."
++SECTION = "devel"
++LICENSE = "PD"
 +
-+Backport patch to fix CVE-2017-14136.
++SRC_URI = "ftp://invisible-island.net/byacc/byacc-${PV}.tgz \
++           file://byacc-open.patch \
++           file://0001-byacc-do-not-reorder-CC-and-CFLAGS.patch"
 +
-+Ref: https://github.com/opencv/opencv/issues/9443
++EXTRA_OECONF += "--program-transform-name='s,^,b,'"
 +
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
++BBCLASSEXTEND = "native"
++
++inherit autotools
++
++do_configure() {
++	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.guess ${S}
++	install -m 0755 ${STAGING_DATADIR_NATIVE}/gnu-config/config.sub ${S}
++	oe_runconf
++}
+diff --git a/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch b/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
+new file mode 100644
+index 0000000..7cd2510
+--- /dev/null
++++ b/meta-oe/recipes-extended/byacc/byacc/0001-byacc-do-not-reorder-CC-and-CFLAGS.patch
+@@ -0,0 +1,161 @@
++Subject: byacc: do not reorder $CC and $CFLAGS
++
++byacc tries to process $CC and decide which part should belong to CC and which
++part should below to CFLAGS and then do reordering. It doesn't make much sense
++for OE. And it doesn't do its work correctly. Some options are dropped.
++
++Delete all these stuff so that we could have all options we need.
++
++Upstream-Status: Inappropriate [OE Specific]
++
++Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
 +---
-+From aacae2065744adb05e858d327198c7bbe7f452b0 Mon Sep 17 00:00:00 2001
-+From: Alexander Alekhin <alexander.alekhin@intel.com>
-+Date: Wed, 23 Aug 2017 15:15:27 +0300
-+Subject: [PATCH] imgcodesc: fix code problems with integer overflow / address
-+ arithmetic / UB
++ aclocal.m4 |   1 -
++ configure  | 119 -------------------------------------------------------------
++ 2 files changed, 120 deletions(-)
 +
-+---
-+ modules/imgcodecs/src/grfmt_bmp.cpp      |  8 ++---
-+ modules/imgcodecs/src/grfmt_exr.cpp      | 10 +++----
-+ modules/imgcodecs/src/grfmt_jpeg.cpp     |  2 +-
-+ modules/imgcodecs/src/grfmt_jpeg2000.cpp |  6 ++--
-+ modules/imgcodecs/src/grfmt_pam.cpp      |  2 +-
-+ modules/imgcodecs/src/grfmt_sunras.cpp   |  6 ++--
-+ modules/imgcodecs/src/utils.cpp          | 51 +++++++++++++++++++-------------
-+ modules/imgcodecs/src/utils.hpp          |  2 ++
-+ 8 files changed, 50 insertions(+), 37 deletions(-)
++diff --git a/aclocal.m4 b/aclocal.m4
++index 917a848..62ef241 100644
++--- a/aclocal.m4
+++++ b/aclocal.m4
++@@ -1021,7 +1021,6 @@ CF_GCC_VERSION
++ CF_ACVERSION_CHECK(2.52,
++ 	[AC_PROG_CC_STDC],
++ 	[CF_ANSI_CC_REQD])
++-CF_CC_ENV_FLAGS
++ ])dnl
++ dnl ---------------------------------------------------------------------------
++ dnl CF_PROG_GROFF version: 2 updated: 2015/07/04 11:16:27
++diff --git a/configure b/configure
++index 9707e50..4f0497c 100755
++--- a/configure
+++++ b/configure
++@@ -1946,125 +1946,6 @@ esac
++ # This should have been defined by AC_PROG_CC
++ : ${CC:=cc}
++ 
++-echo "$as_me:1949: checking \$CC variable" >&5
++-echo $ECHO_N "checking \$CC variable... $ECHO_C" >&6
++-case "$CC" in
++-(*[\ \	]-*)
++-	echo "$as_me:1953: result: broken" >&5
++-echo "${ECHO_T}broken" >&6
++-	{ echo "$as_me:1955: WARNING: your environment misuses the CC variable to hold CFLAGS/CPPFLAGS options" >&5
++-echo "$as_me: WARNING: your environment misuses the CC variable to hold CFLAGS/CPPFLAGS options" >&2;}
++-	# humor him...
++-	cf_flags=`echo "$CC" | sed -e 's/^.*[ 	]\(-[^ 	]\)/\1/'`
++-	CC=`echo "$CC " | sed -e 's/[ 	]-[^ 	].*$//' -e 's/[ 	]*$//'`
++-	for cf_arg in $cf_flags
++-	do
++-		case "x$cf_arg" in
++-		(x-[IUDfgOW]*)
++-
++-cf_fix_cppflags=no
++-cf_new_cflags=
++-cf_new_cppflags=
++-cf_new_extra_cppflags=
++-
++-for cf_add_cflags in $cf_flags
++-do
++-case $cf_fix_cppflags in
++-(no)
++-	case $cf_add_cflags in
++-	(-undef|-nostdinc*|-I*|-D*|-U*|-E|-P|-C)
++-		case $cf_add_cflags in
++-		(-D*)
++-			cf_tst_cflags=`echo ${cf_add_cflags} |sed -e 's/^-D[^=]*='\''\"[^"]*//'`
++-
++-			test "x${cf_add_cflags}" != "x${cf_tst_cflags}" \
++-				&& test -z "${cf_tst_cflags}" \
++-				&& cf_fix_cppflags=yes
++-
++-			if test $cf_fix_cppflags = yes ; then
++-				cf_new_extra_cppflags="$cf_new_extra_cppflags $cf_add_cflags"
++-				continue
++-			elif test "${cf_tst_cflags}" = "\"'" ; then
++-				cf_new_extra_cppflags="$cf_new_extra_cppflags $cf_add_cflags"
++-				continue
++-			fi
++-			;;
++-		esac
++-		case "$CPPFLAGS" in
++-		(*$cf_add_cflags)
++-			;;
++-		(*)
++-			case $cf_add_cflags in
++-			(-D*)
++-				cf_tst_cppflags=`echo "x$cf_add_cflags" | sed -e 's/^...//' -e 's/=.*//'`
++-
++-CPPFLAGS=`echo "$CPPFLAGS" | \
++-	sed	-e 's/-[UD]'"$cf_tst_cppflags"'\(=[^ 	]*\)\?[ 	]/ /g' \
++-		-e 's/-[UD]'"$cf_tst_cppflags"'\(=[^ 	]*\)\?$//g'`
++-
++-				;;
++-			esac
++-			cf_new_cppflags="$cf_new_cppflags $cf_add_cflags"
++-			;;
++-		esac
++-		;;
++-	(*)
++-		cf_new_cflags="$cf_new_cflags $cf_add_cflags"
++-		;;
++-	esac
++-	;;
++-(yes)
++-	cf_new_extra_cppflags="$cf_new_extra_cppflags $cf_add_cflags"
++-
++-	cf_tst_cflags=`echo ${cf_add_cflags} |sed -e 's/^[^"]*"'\''//'`
++-
++-	test "x${cf_add_cflags}" != "x${cf_tst_cflags}" \
++-		&& test -z "${cf_tst_cflags}" \
++-		&& cf_fix_cppflags=no
++-	;;
++-esac
++-done
++-
++-if test -n "$cf_new_cflags" ; then
++-
++-	CFLAGS="$CFLAGS $cf_new_cflags"
++-fi
++-
++-if test -n "$cf_new_cppflags" ; then
++-
++-	CPPFLAGS="$CPPFLAGS $cf_new_cppflags"
++-fi
++-
++-if test -n "$cf_new_extra_cppflags" ; then
++-
++-	EXTRA_CPPFLAGS="$cf_new_extra_cppflags $EXTRA_CPPFLAGS"
++-fi
++-
++-			;;
++-		(*)
++-			CC="$CC $cf_arg"
++-			;;
++-		esac
++-	done
++-	test -n "$verbose" && echo "	resulting CC: '$CC'" 1>&6
++-
++-echo "${as_me:-configure}:2051: testing resulting CC: '$CC' ..." 1>&5
++-
++-	test -n "$verbose" && echo "	resulting CFLAGS: '$CFLAGS'" 1>&6
++-
++-echo "${as_me:-configure}:2055: testing resulting CFLAGS: '$CFLAGS' ..." 1>&5
++-
++-	test -n "$verbose" && echo "	resulting CPPFLAGS: '$CPPFLAGS'" 1>&6
++-
++-echo "${as_me:-configure}:2059: testing resulting CPPFLAGS: '$CPPFLAGS' ..." 1>&5
++-
++-	;;
++-(*)
++-	echo "$as_me:2063: result: ok" >&5
++-echo "${ECHO_T}ok" >&6
++-	;;
++-esac
++-
++ echo "$as_me:2068: checking whether ${MAKE-make} sets \${MAKE}" >&5
++ echo $ECHO_N "checking whether ${MAKE-make} sets \${MAKE}... $ECHO_C" >&6
++ set dummy ${MAKE-make}; ac_make=`echo "$2" | sed 'y,./+-,__p_,'`
++-- 
++2.8.3
 +
-+diff --git a/modules/imgcodecs/src/grfmt_bmp.cpp b/modules/imgcodecs/src/grfmt_bmp.cpp
-+index 257f97c2d8b..69768e276a3 100644
-+--- a/modules/imgcodecs/src/grfmt_bmp.cpp
-++++ b/modules/imgcodecs/src/grfmt_bmp.cpp
-+@@ -193,7 +193,7 @@ bool  BmpDecoder::readHeader()
-+ bool  BmpDecoder::readData( Mat& img )
-+ {
-+     uchar* data = img.ptr();
-+-    int step = (int)img.step;
-++    int step = validateToInt(img.step);
-+     bool color = img.channels() > 1;
-+     uchar  gray_palette[256] = {0};
-+     bool   result = false;
-+@@ -206,7 +206,7 @@ bool  BmpDecoder::readData( Mat& img )
-+ 
-+     if( m_origin == IPL_ORIGIN_BL )
-+     {
-+-        data += (m_height - 1)*step;
-++        data += (m_height - 1)*(size_t)step;
-+         step = -step;
+diff --git a/meta-oe/recipes-extended/byacc/byacc/byacc-open.patch b/meta-oe/recipes-extended/byacc/byacc/byacc-open.patch
+new file mode 100644
+index 0000000..0058311
+--- /dev/null
++++ b/meta-oe/recipes-extended/byacc/byacc/byacc-open.patch
+@@ -0,0 +1,25 @@
++Ubuntu defaults to passing _FORTIFY_SOURCE=2 which breaks byacc as it doesn't
++pass enough arguments to open():
++
++ inlined from 'open_tmpfile' at byacc-20150711/main.c:588:5:
++ /usr/include/x86_64-linux-gnu/bits/fcntl2.h:50:24: error: call to '__open_missing_mode' declared with attribute error:
++ open with O_CREAT in second argument needs 3 arguments
++
++Add a mode of 0666 to fix this.
++
++Upstream-Status: Pending
++Signed-off-by: Ross Burton <ross.burton@intel.com>
++
++diff --git a/main.c b/main.c
++index 620ce3f..82071a4 100644
++--- a/main.c
+++++ b/main.c
++@@ -526,7 +526,7 @@ my_mkstemp(char *temp)
 +     }
-+ 
-+@@ -530,7 +530,7 @@ bool  BmpEncoder::write( const Mat& img, const std::vector<int>& )
-+     int  bitmapHeaderSize = 40;
-+     int  paletteSize = channels > 1 ? 0 : 1024;
-+     int  headerSize = 14 /* fileheader */ + bitmapHeaderSize + paletteSize;
-+-    int  fileSize = fileStep*height + headerSize;
-++    size_t fileSize = (size_t)fileStep*height + headerSize;
-+     PaletteEntry palette[256];
-+ 
-+     if( m_buf )
-+@@ -540,7 +540,7 @@ bool  BmpEncoder::write( const Mat& img, const std::vector<int>& )
-+     strm.putBytes( fmtSignBmp, (int)strlen(fmtSignBmp) );
-+ 
-+     // write file header
-+-    strm.putDWord( fileSize ); // file size
-++    strm.putDWord( validateToInt(fileSize) ); // file size
-+     strm.putDWord( 0 );
-+     strm.putDWord( headerSize );
-+ 
-+diff --git a/modules/imgcodecs/src/grfmt_exr.cpp b/modules/imgcodecs/src/grfmt_exr.cpp
-+index 0d2ae9fa7d2..78ffe6c7668 100644
-+--- a/modules/imgcodecs/src/grfmt_exr.cpp
-++++ b/modules/imgcodecs/src/grfmt_exr.cpp
-+@@ -195,7 +195,7 @@ bool  ExrDecoder::readData( Mat& img )
-+     bool color = img.channels() > 1;
-+ 
-+     uchar* data = img.ptr();
-+-    int step = img.step;
-++    size_t step = img.step;
-+     bool justcopy = m_native_depth;
-+     bool chromatorgb = false;
-+     bool rgbtogray = false;
-+@@ -203,8 +203,8 @@ bool  ExrDecoder::readData( Mat& img )
-+     FrameBuffer frame;
-+     int xsample[3] = {1, 1, 1};
-+     char *buffer;
-+-    int xstep;
-+-    int ystep;
-++    size_t xstep = 0;
-++    size_t ystep = 0;
-+ 
-+     xstep = m_native_depth ? 4 : 1;
-+ 
-+@@ -593,7 +593,7 @@ bool  ExrEncoder::write( const Mat& img, const std::vector<int>& )
-+     bool issigned = depth == CV_8S || depth == CV_16S || depth == CV_32S;
-+     bool isfloat = depth == CV_32F || depth == CV_64F;
-+     depth = CV_ELEM_SIZE1(depth)*8;
-+-    const int step = img.step;
-++    const size_t step = img.step;
-+ 
-+     Header header( width, height );
-+     Imf::PixelType type;
-+@@ -623,7 +623,7 @@ bool  ExrEncoder::write( const Mat& img, const std::vector<int>& )
-+     FrameBuffer frame;
-+ 
-+     char *buffer;
-+-    int bufferstep;
-++    size_t bufferstep;
-+     int size;
-+     if( type == FLOAT && depth == 32 )
++     if ((name = tempnam(dname, fname)) != 0)
 +     {
-+diff --git a/modules/imgcodecs/src/grfmt_jpeg.cpp b/modules/imgcodecs/src/grfmt_jpeg.cpp
-+index ce942ca1995..caf768d2569 100644
-+--- a/modules/imgcodecs/src/grfmt_jpeg.cpp
-++++ b/modules/imgcodecs/src/grfmt_jpeg.cpp
-+@@ -396,7 +396,7 @@ int my_jpeg_load_dht (struct jpeg_decompress_struct *info, unsigned char *dht,
-+ bool  JpegDecoder::readData( Mat& img )
-+ {
-+     volatile bool result = false;
-+-    int step = (int)img.step;
-++    size_t step = img.step;
-+     bool color = img.channels() > 1;
-+ 
-+     if( m_state && m_width && m_height )
-+diff --git a/modules/imgcodecs/src/grfmt_jpeg2000.cpp b/modules/imgcodecs/src/grfmt_jpeg2000.cpp
-+index 950ec21375f..24dfb38bb9d 100644
-+--- a/modules/imgcodecs/src/grfmt_jpeg2000.cpp
-++++ b/modules/imgcodecs/src/grfmt_jpeg2000.cpp
-+@@ -156,7 +156,7 @@ bool  Jpeg2KDecoder::readData( Mat& img )
-+     bool result = false;
-+     int color = img.channels() > 1;
-+     uchar* data = img.ptr();
-+-    int step = (int)img.step;
-++    size_t step = img.step;
-+     jas_stream_t* stream = (jas_stream_t*)m_stream;
-+     jas_image_t* image = (jas_image_t*)m_image;
-+ 
-+@@ -252,9 +252,9 @@ bool  Jpeg2KDecoder::readData( Mat& img )
-+                         if( !jas_image_readcmpt( image, cmptlut[i], 0, 0, xend / xstep, yend / ystep, buffer ))
-+                         {
-+                             if( img.depth() == CV_8U )
-+-                                result = readComponent8u( data + i, buffer, step, cmptlut[i], maxval, offset, ncmpts );
-++                                result = readComponent8u( data + i, buffer, validateToInt(step), cmptlut[i], maxval, offset, ncmpts );
-+                             else
-+-                                result = readComponent16u( ((unsigned short *)data) + i, buffer, step / 2, cmptlut[i], maxval, offset, ncmpts );
-++                                result = readComponent16u( ((unsigned short *)data) + i, buffer, validateToInt(step / 2), cmptlut[i], maxval, offset, ncmpts );
-+                             if( !result )
-+                             {
-+                                 i = ncmpts;
-+diff --git a/modules/imgcodecs/src/grfmt_pam.cpp b/modules/imgcodecs/src/grfmt_pam.cpp
-+index 11195dc342c..8eb9e012309 100644
-+--- a/modules/imgcodecs/src/grfmt_pam.cpp
-++++ b/modules/imgcodecs/src/grfmt_pam.cpp
-+@@ -479,7 +479,7 @@ bool  PAMDecoder::readData( Mat& img )
-+ {
-+     uchar* data = img.ptr();
-+     int target_channels = img.channels();
-+-    int imp_stride = (int)img.step;
-++    size_t imp_stride = img.step;
-+     int sample_depth = CV_ELEM_SIZE1(m_type);
-+     int src_elems_per_row = m_width*m_channels;
-+     int src_stride = src_elems_per_row*sample_depth;
-+diff --git a/modules/imgcodecs/src/grfmt_sunras.cpp b/modules/imgcodecs/src/grfmt_sunras.cpp
-+index aca9b369318..6d448f94ed3 100644
-+--- a/modules/imgcodecs/src/grfmt_sunras.cpp
-++++ b/modules/imgcodecs/src/grfmt_sunras.cpp
-+@@ -160,7 +160,7 @@ bool  SunRasterDecoder::readData( Mat& img )
-+ {
-+     int color = img.channels() > 1;
-+     uchar* data = img.ptr();
-+-    int step = (int)img.step;
-++    size_t step = img.step;
-+     uchar  gray_palette[256] = {0};
-+     bool   result = false;
-+     int  src_pitch = ((m_width*m_bpp + 7)/8 + 1) & -2;
-+@@ -308,11 +308,11 @@ bool  SunRasterDecoder::readData( Mat& img )
-+                         code = m_strm.getByte();
-+ 
-+                         if( color )
-+-                            data = FillUniColor( data, line_end, step, width3,
-++                            data = FillUniColor( data, line_end, validateToInt(step), width3,
-+                                                  y, m_height, len,
-+                                                  m_palette[code] );
-+                         else
-+-                            data = FillUniGray( data, line_end, step, width3,
-++                            data = FillUniGray( data, line_end, validateToInt(step), width3,
-+                                                 y, m_height, len,
-+                                                 gray_palette[code] );
-+                         if( y >= m_height )
-+diff --git a/modules/imgcodecs/src/utils.cpp b/modules/imgcodecs/src/utils.cpp
-+index 2ee5bafc712..474dae008ca 100644
-+--- a/modules/imgcodecs/src/utils.cpp
-++++ b/modules/imgcodecs/src/utils.cpp
-+@@ -42,6 +42,13 @@
-+ #include "precomp.hpp"
-+ #include "utils.hpp"
-+ 
-++int validateToInt(size_t sz)
-++{
-++    int valueInt = (int)sz;
-++    CV_Assert((size_t)valueInt == sz);
-++    return valueInt;
-++}
-++
-+ #define  SCALE  14
-+ #define  cR  (int)(0.299*(1 << SCALE) + 0.5)
-+ #define  cG  (int)(0.587*(1 << SCALE) + 0.5)
-+@@ -537,23 +544,25 @@ uchar* FillColorRow1( uchar* data, uchar* indices, int len, PaletteEntry* palett
-+ {
-+     uchar* end = data + len*3;
-+ 
-++    const PaletteEntry p0 = palette[0], p1 = palette[1];
-++
-+     while( (data += 24) < end )
-+     {
-+         int idx = *indices++;
-+-        *((PaletteEntry*)(data - 24)) = palette[(idx & 128) != 0];
-+-        *((PaletteEntry*)(data - 21)) = palette[(idx & 64) != 0];
-+-        *((PaletteEntry*)(data - 18)) = palette[(idx & 32) != 0];
-+-        *((PaletteEntry*)(data - 15)) = palette[(idx & 16) != 0];
-+-        *((PaletteEntry*)(data - 12)) = palette[(idx & 8) != 0];
-+-        *((PaletteEntry*)(data - 9)) = palette[(idx & 4) != 0];
-+-        *((PaletteEntry*)(data - 6)) = palette[(idx & 2) != 0];
-+-        *((PaletteEntry*)(data - 3)) = palette[(idx & 1) != 0];
-++        *((PaletteEntry*)(data - 24)) = (idx & 128) ? p1 : p0;
-++        *((PaletteEntry*)(data - 21)) = (idx & 64) ? p1 : p0;
-++        *((PaletteEntry*)(data - 18)) = (idx & 32) ? p1 : p0;
-++        *((PaletteEntry*)(data - 15)) = (idx & 16) ? p1 : p0;
-++        *((PaletteEntry*)(data - 12)) = (idx & 8) ? p1 : p0;
-++        *((PaletteEntry*)(data - 9)) = (idx & 4) ? p1 : p0;
-++        *((PaletteEntry*)(data - 6)) = (idx & 2) ? p1 : p0;
-++        *((PaletteEntry*)(data - 3)) = (idx & 1) ? p1 : p0;
++-	fd = open(name, O_CREAT | O_EXCL | O_RDWR);
+++      fd = open(name, O_CREAT | O_EXCL | O_RDWR, 0666);
++ 	strcpy(temp, name);
 +     }
-+ 
-+-    int idx = indices[0] << 24;
-++    int idx = indices[0];
-+     for( data -= 24; data < end; data += 3, idx += idx )
-+     {
-+-        PaletteEntry clr = palette[idx < 0];
-++        const PaletteEntry clr = (idx & 128) ? p1 : p0;
-+         WRITE_PIX( data, clr );
-+     }
-+ 
-+@@ -565,23 +574,25 @@ uchar* FillGrayRow1( uchar* data, uchar* indices, int len, uchar* palette )
-+ {
-+     uchar* end = data + len;
-+ 
-++    const uchar p0 = palette[0], p1 = palette[1];
-++
-+     while( (data += 8) < end )
-+     {
-+         int idx = *indices++;
-+-        *((uchar*)(data - 8)) = palette[(idx & 128) != 0];
-+-        *((uchar*)(data - 7)) = palette[(idx & 64) != 0];
-+-        *((uchar*)(data - 6)) = palette[(idx & 32) != 0];
-+-        *((uchar*)(data - 5)) = palette[(idx & 16) != 0];
-+-        *((uchar*)(data - 4)) = palette[(idx & 8) != 0];
-+-        *((uchar*)(data - 3)) = palette[(idx & 4) != 0];
-+-        *((uchar*)(data - 2)) = palette[(idx & 2) != 0];
-+-        *((uchar*)(data - 1)) = palette[(idx & 1) != 0];
-++        *((uchar*)(data - 8)) = (idx & 128) ? p1 : p0;
-++        *((uchar*)(data - 7)) = (idx & 64) ? p1 : p0;
-++        *((uchar*)(data - 6)) = (idx & 32) ? p1 : p0;
-++        *((uchar*)(data - 5)) = (idx & 16) ? p1 : p0;
-++        *((uchar*)(data - 4)) = (idx & 8) ? p1 : p0;
-++        *((uchar*)(data - 3)) = (idx & 4) ? p1 : p0;
-++        *((uchar*)(data - 2)) = (idx & 2) ? p1 : p0;
-++        *((uchar*)(data - 1)) = (idx & 1) ? p1 : p0;
-+     }
-+ 
-+-    int idx = indices[0] << 24;
-++    int idx = indices[0];
-+     for( data -= 8; data < end; data++, idx += idx )
-+     {
-+-        data[0] = palette[idx < 0];
-++        data[0] = (idx & 128) ? p1 : p0;
-+     }
-+ 
-+     return data;
-+diff --git a/modules/imgcodecs/src/utils.hpp b/modules/imgcodecs/src/utils.hpp
-+index cab10609db2..7af4c6174ee 100644
-+--- a/modules/imgcodecs/src/utils.hpp
-++++ b/modules/imgcodecs/src/utils.hpp
-+@@ -42,6 +42,8 @@
-+ #ifndef _UTILS_H_
-+ #define _UTILS_H_
-+ 
-++int validateToInt(size_t step);
-++
-+ struct PaletteEntry
-+ {
-+     unsigned char b, g, r, a;
-diff --git a/meta-oe/recipes-support/opencv/opencv_3.3.bb b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-index 25f247662..da078d7fa 100644
---- a/meta-oe/recipes-support/opencv/opencv_3.3.bb
-+++ b/meta-oe/recipes-support/opencv/opencv_3.3.bb
-@@ -50,6 +50,7 @@ SRC_URI = "git://github.com/opencv/opencv.git;name=opencv \
-     file://0002-imgcodecs-refactoring-improve-code-quality.patch \
-     file://0003-imgproc-test-add-checks-for-remove-call.patch \
-     file://0001-Dont-use-isystem.patch \
-+    file://CVE-2017-14136.patch \
- "
- PV = "3.3+git${SRCPV}"
- 
++     else
+diff --git a/meta-oe/recipes-extended/byacc/byacc_20170201.bb b/meta-oe/recipes-extended/byacc/byacc_20170201.bb
+new file mode 100644
+index 0000000..702c4c9
+--- /dev/null
++++ b/meta-oe/recipes-extended/byacc/byacc_20170201.bb
+@@ -0,0 +1,12 @@
++# Sigh. This is one of those places where everyone licenses it differently. Someone
++# even apply UCB to it (Free/Net/OpenBSD). The maintainer states that:
++# "I've found no reliable source which states that byacc must bear a UCB copyright."
++# Setting to PD as this is what the upstream has it as.
++
++LICENSE = "PD"
++LIC_FILES_CHKSUM = "file://package/debian/copyright;md5=9176bfb16dab43ebcb8e50d9ee9550b6"
++require byacc.inc
++
++SRC_URI[md5sum] = "4bb274bbd7b648d4251c2b9ca36ed0c9"
++SRC_URI[sha256sum] = "90b768d177f91204e6e7cef226ae1dc7cac831b625774cebd3e233a917754f91"
++
 -- 
-2.14.1
+2.7.4
+
+
 
 
