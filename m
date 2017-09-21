@@ -1,32 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 7C05977E97
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C2756006E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 06:41:11 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.42,424,1500912000"; d="scan'208";a="27557068"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 21 Sep 2017 14:40:56 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 8588247CA56C
+	Thu, 21 Sep 2017 07:00:48 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v8L70nOn022786
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 14:40:56 +0800 (CST)
-Received: from localhost.localdomain (10.167.235.93) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Thu, 21 Sep 2017 14:40:55 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Thu, 21 Sep 2017 00:00:49 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 21 Sep 2017 00:00:48 -0700
+From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Sep 2017 14:41:04 +0800
-Message-ID: <1505976064-45756-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1505976064-45756-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-References: <1505976064-45756-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Thu, 21 Sep 2017 14:47:20 +0800
+Message-ID: <20170921064721.17250-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.235.93]
-X-yoursite-MailScanner-ID: 8588247CA56C.A7BDE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] dfu-util: Add HOMEPAGE info into recipe file.
+Subject: [PATCH 0/1] lvm2: disable thin provisioning support if GPLv3 incompatible
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,27 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 06:41:12 -0000
+X-List-Received-Date: Thu, 21 Sep 2017 07:00:48 -0000
 Content-Type: text/plain
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
----
- meta-oe/recipes-support/dfu-util/dfu-util_0.9.bb | 1 +
- 1 file changed, 1 insertion(+)
+From: Kai Kang <kai.kang@windriver.com>
 
-diff --git a/meta-oe/recipes-support/dfu-util/dfu-util_0.9.bb b/meta-oe/recipes-support/dfu-util/dfu-util_0.9.bb
-index 01bca22..76e1552 100644
---- a/meta-oe/recipes-support/dfu-util/dfu-util_0.9.bb
-+++ b/meta-oe/recipes-support/dfu-util/dfu-util_0.9.bb
-@@ -1,4 +1,5 @@
- DESCRIPTION = "USB Device Firmware Upgrade utility"
-+HOMEPAGE = "http://dfu-util.sourceforge.net"
- SECTION = "devel"
- AUTHOR = "Harald Welte <laforge@openmoko.org>"
- LICENSE = "GPLv2"
+Test steps:
+1 add layer meta-gplv2 to conf/bblayers.conf
+2 echo INCOMPATIBLE_LICENSE += \"GPLv3 LGPLv3 GPLv3+ LGPLv3+ AGPL-3.0\" >> conf/local.conf
+3 bitbake lvm2
+
+Without the patch, lvm2 fails with:
+
+ERROR: Nothing RPROVIDES 'thin-provisioning-tools' (but /buildarea2/kkang/Yocto/repo/meta-openembedded/meta-oe
+/recipes-support/lvm2/lvm2_2.02.171.bb, /buildarea2/kkang/Yocto/repo/meta-openembedded/meta-oe/recipes-support
+/lvm2/libdevmapper_2.02.171.bb RDEPENDS on or otherwise requires it)
+thin-provisioning-tools was skipped: it has an incompatible license: GPLv3
+NOTE: Runtime target 'thin-provisioning-tools' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['thin-provisioning-tools']
+ERROR: Required build target 'lvm2' has no buildable providers.
+Missing or unbuildable dependency chain was: ['lvm2', 'thin-provisioning-tools']
+
+
+Kai Kang (1):
+  lvm2: disable thin provisioning support if GPLv3 incompatible
+
+ meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
 -- 
-2.7.4
-
-
+2.14.1
 
 
