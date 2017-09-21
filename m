@@ -1,23 +1,45 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 864A077D6F
+Return-Path: <fathi.boudra@linaro.org>
+Received: from mail-lf0-f41.google.com (mail-lf0-f41.google.com
+	[209.85.215.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AB6577E99
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 08:04:45 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v8L84iEV011970
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 21 Sep 2017 01:04:44 -0700 (PDT)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 21 Sep 2017 01:04:43 -0700
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 21 Sep 2017 04:04:42 -0400
-Message-ID: <1505981082-198803-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH] lvm2: fix start lvm2-monitor.service failed
+	Thu, 21 Sep 2017 08:08:52 +0000 (UTC)
+Received: by mail-lf0-f41.google.com with SMTP id l196so4999414lfl.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Sep 2017 01:08:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linaro.org; s=google;
+	h=from:to:cc:subject:date:message-id;
+	bh=Cp6UAWlrdIuka/1iXKLxAdYPJS1aBn/pWY3FeBMIwOE=;
+	b=F/l720M+1CWZkBnd316doiO1i70yKUurMtpmU3DR4vhR9ErVSlnukRtDnKhlQgNzoY
+	hmxLppJevf3q5ZSJpB6p3ynSAV+eKhXAG43hX1vnwMs7+u2B8IfRZ6xlUStEWdlhXuX4
+	dWVo1zctJnEx266ML0LngRtkbcGMK8GpShIyU=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Cp6UAWlrdIuka/1iXKLxAdYPJS1aBn/pWY3FeBMIwOE=;
+	b=ls9OKWdWw0SP+RGRY7h5KR0fxjtS0eK1GIqwPQv36BLYY9Hcr16FwM3BPhwJWr5mr8
+	VmzEsMP1AENYcPz9JKKOJY7vrtOSvQGscftVgxEcrewpzo+6cbFEuhHuazj0N6h6WVPC
+	YCFDSvGTYMhlfjdPYMWjA44ecUmYPYR84Evs6d7dkEQUqKdK0JXjRUe0958w9HAjuRqp
+	9QYncX/ONwEAFz8MNi3FSYgDxEq1fMQAIg7CIinut0fxB1GC285jItkR2O+yRyLzvEf1
+	3DdgNAIYYv8Y7yQOEYA96Eb8mtP+si5JJ/CoTq5fFivOSWECpnVcwTvWwJIiX+miqwZm
+	CQXQ==
+X-Gm-Message-State: AHPjjUhHG0FoC3d+3FPqFefNAlFU5A8LN2wJliL0HsRGUDp8whEX5LEV
+	Ru6mYDxIlUAD4IRmPYG6m8ItvO2qfmY=
+X-Google-Smtp-Source: AOwi7QBU4/TJ9Bkv9aeY6w/JBDYeEaX7SdJ+Kk09IgcIEHjGgZEADWCBflo7zKwerF7ZX8saOP/wsg==
+X-Received: by 10.25.19.197 with SMTP id 66mr485278lft.221.1505981332792;
+	Thu, 21 Sep 2017 01:08:52 -0700 (PDT)
+Received: from localhost.localdomain (a91-156-68-101.elisa-laajakaista.fi.
+	[91.156.68.101])
+	by smtp.gmail.com with ESMTPSA id h14sm128133lfe.30.2017.09.21.01.08.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 21 Sep 2017 01:08:51 -0700 (PDT)
+From: Fathi Boudra <fathi.boudra@linaro.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 21 Sep 2017 11:08:33 +0300
+Message-Id: <20170921080833.32623-1-fathi.boudra@linaro.org>
+X-Mailer: git-send-email 2.14.1
+Cc: Roy Li <rongqing.li@windriver.com>
+Subject: [meta-oe][PATCH v2] cpupower: add a new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,99 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 08:04:45 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Sep 2017 08:08:52 -0000
 
-While systemd based, start lvm2-monitor.service failed.
-...
-|Sep 21 05:37:34 qemux86-64 lvm[389]:   /var/lock: stat failed: No such
-file or directory
-|Sep 21 05:37:34 qemux86-64 systemd[1]: lvm2-monitor.service: Main
-process exited, code=exited, status=5/NOTINSTALLED
-...
-The failure of lvm2-monitor.service caused reboot hung when disk
-partion is lvm thin provision.
+cpupower is a tool to show and set processor power related values.
+In addition, it allows to run in-kernel selftests intel_pstate test.
 
-While starting lvm2-monitor.service, it reqires the existence of
-locking dir "/var/lock" which is a symlink to "../run/lock" in oe-core,
-and "/run" is created in "/etc/fstab" which have to be be after the
-start of lvm2-monitor.service.
+The recipe is based on the initial work from Roy Li <rongqing.li@windriver.com>:
+https://patchwork.openembedded.org/patch/118911/
 
-So tweak the locking dir to "/tmp/lock" and make sure the dir existence
-(after tmp.mount).
-
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
+Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
 ---
- ...tart-lvm2-monitor.service-after-tmp.mount.patch | 32 ++++++++++++++++++++++
- meta-oe/recipes-support/lvm2/files/lvm.conf        |  2 +-
- meta-oe/recipes-support/lvm2/lvm2.inc              |  1 +
- 3 files changed, 34 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
+ meta-oe/recipes-kernel/cpupower/cpupower.bb | 36 +++++++++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 meta-oe/recipes-kernel/cpupower/cpupower.bb
 
-diff --git a/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch b/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
+diff --git a/meta-oe/recipes-kernel/cpupower/cpupower.bb b/meta-oe/recipes-kernel/cpupower/cpupower.bb
 new file mode 100644
-index 0000000..0e68d62
+index 000000000..c963c8ef9
 --- /dev/null
-+++ b/meta-oe/recipes-support/lvm2/files/0006-start-lvm2-monitor.service-after-tmp.mount.patch
-@@ -0,0 +1,32 @@
-+From 24a2c47fd01dde1710f1fa66f5c30ce7010c5956 Mon Sep 17 00:00:00 2001
-+From: Hongxu Jia <hongxu.jia@windriver.com>
-+Date: Thu, 21 Sep 2017 15:28:10 +0800
-+Subject: [PATCH] start lvm2-monitor.service after tmp.mount
++++ b/meta-oe/recipes-kernel/cpupower/cpupower.bb
+@@ -0,0 +1,36 @@
++SUMMARY = "Shows and sets processor power related values"
++DESCRIPTION = "cpupower is a collection of tools to examine and tune power \
++saving related features of your processor."
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=d7810fab7487fb0aad327b76f1be7cd7"
++DEPENDS = "pciutils"
++PROVIDES = "virtual/cpupower"
 +
-+The lvm2-monitor.service reqires the existence of locking_dir
-+("/tmp/lock/lvm"), and unit tmp.mount is to mount /tmp.
-+So start lvm2-monitor.service after tmp.mount
++inherit kernelsrc kernel-arch
 +
-+Upstream-Status: Inappropriate [oe specific]
++do_populate_lic[depends] += "virtual/kernel:do_patch"
 +
-+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
-+---
-+ scripts/lvm2_monitoring_systemd_red_hat.service.in | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
++EXTRA_OEMAKE = "-C ${S}/tools/power/cpupower O=${B} CROSS=${TARGET_PREFIX} CC="${CC}" LD="${LD}" AR=${AR} ARCH=${ARCH}"
 +
-+diff --git a/scripts/lvm2_monitoring_systemd_red_hat.service.in b/scripts/lvm2_monitoring_systemd_red_hat.service.in
-+index 22238b7..93b2bee 100644
-+--- a/scripts/lvm2_monitoring_systemd_red_hat.service.in
-++++ b/scripts/lvm2_monitoring_systemd_red_hat.service.in
-+@@ -2,7 +2,7 @@
-+ Description=Monitoring of LVM2 mirrors, snapshots etc. using dmeventd or progress polling
-+ Documentation=man:dmeventd(8) man:lvcreate(8) man:lvchange(8) man:vgchange(8)
-+ Requires=dm-event.socket lvm2-lvmetad.socket
-+-After=dm-event.socket dm-event.service lvm2-lvmetad.socket lvm2-activation.service lvm2-lvmetad.service
-++After=dm-event.socket dm-event.service lvm2-lvmetad.socket lvm2-activation.service lvm2-lvmetad.service tmp.mount
-+ Before=local-fs-pre.target
-+ DefaultDependencies=no
-+ Conflicts=shutdown.target
-+-- 
-+1.8.3.1
++do_configure[depends] += "virtual/kernel:do_shared_workdir"
 +
-diff --git a/meta-oe/recipes-support/lvm2/files/lvm.conf b/meta-oe/recipes-support/lvm2/files/lvm.conf
-index 9e3b5fe..c2bb85d 100644
---- a/meta-oe/recipes-support/lvm2/files/lvm.conf
-+++ b/meta-oe/recipes-support/lvm2/files/lvm.conf
-@@ -214,7 +214,7 @@ global {
- 
-     # Local non-LV directory that holds file-based locks while commands are
-     # in progress.  A directory like /tmp that may get wiped on reboot is OK.
--    locking_dir = "/var/lock/lvm"
-+    locking_dir = "/tmp/lock/lvm"
- 
-     # Other entries can go here to allow you to load shared libraries
-     # e.g. if support for LVM1 metadata was compiled as a shared library use
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index ab8db9c..f0859ef 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -15,6 +15,7 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-            file://0004-tweak-MODPROBE_CMD-for-cross-compile.patch \
-            file://0001-Avoid-bashisms-in-init-scripts.patch \
-            file://0005-do-not-build-manual.patch \
-+           file://0006-start-lvm2-monitor.service-after-tmp.mount.patch \
-            "
- S = "${WORKDIR}/LVM2.${PV}"
- 
++do_compile() {
++    oe_runmake
++}
++
++do_install() {
++    oe_runmake DESTDIR=${D} install
++    # Do not ship headers
++    rm -rf ${D}${includedir}
++    chown -R root:root ${D}
++}
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
++
++RDEPENDS_${PN} = "bash"
++
++python do_package_prepend() {
++    d.setVar('PKGV', d.getVar("KERNEL_VERSION", True).split("-")[0])
++}
++
++B = "${WORKDIR}/${BPN}-${PV}"
 -- 
-2.8.1
+2.14.1
 
 
