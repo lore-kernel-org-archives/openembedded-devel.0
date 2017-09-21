@@ -1,47 +1,46 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B42178243
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DDC97820F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 14:17:21 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id d8so3505037pgt.3
+	Thu, 21 Sep 2017 18:32:32 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id e64so5970385wmi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 07:17:23 -0700 (PDT)
+	Thu, 21 Sep 2017 11:32:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=EWohHRXS4JBpagzXdj76Wqw6dA8/J8cBMENwG5ole/Y=;
-	b=VhjwCylgF8Fjk6erROb2CzKIz+DkXY+NnojqKa+80kjx9nvmZXq9Uo71XuS9su0RRY
-	hSJjfF2sG5Ogwgxd6bHK/iNJktzg+gH2xAalFl4gb2vQX+HNvCJAqjRLDTJfjFOoWPQW
-	iU4QQnjgdd0PnnTE1zdMEQeL86ozXDNV1wdSp9vB23T8aym1NcMvn3It1fXeAEuSnM66
-	HDPvAyEmFaEe17t3kdq7dp85wnEI702IuXftvQmLRmAmWnQCA4kd3qIQFic3Jg523hBI
-	qP7l4H7ZRISpr5y20IAiz5KBjvixfNaLEmQXODsVeXJ+1V/CWwkk19dm/aR9KL2nqJTp
-	XMEw==
+	:cc; bh=W/SVVFPx4BTo/zbGePvM+is41mYrDfbI7CSjiSFBUF0=;
+	b=ifD4iKu+sTlM1O5GfuED8U1UwqNproMYXZHS9kn4BXpMqU4HfGLyFBdBKJ4KOe7PmM
+	6maYE5AgShnJhFd6+ZgUYcc+2pOW6zbexCF9h6g05EEAOMtyEQUsGldJTkhWEIFl7Wd6
+	riTXp48VcFdgmeUJMKD5mpvEIgsxVvY17mG3Z/ESP0Zzfr2OBCsA5H+JfFvGAk6qEAXh
+	zNYdBxIicoi0K9oL2aeVi8HI3WASi9/kk3b9Hg9Y9BY72NcCbeErw0fs8oNlgtvzctjJ
+	DERekVh+2y051bwDAv9g61hg6/I8ASq/xZwCIy5WNDILne3wf8cfk6nYhG5EQxYJYKF3
+	8QgA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=EWohHRXS4JBpagzXdj76Wqw6dA8/J8cBMENwG5ole/Y=;
-	b=pEIOPz2aCebNJ/z8SDK9NWcshaUi4pix/ZBl6Fo/svYlmjfHp0rbiUJBobq/gmn+wa
-	sSKIS2eEh0IXaf8lP6TdSku6XBxPT/6sn1P0Q4757WpZLYETvJMD7rJ4nHjljhb/GpWz
-	K+M5DuH+bre7QU6PJ7eRstfHuxMi2ju7D2FYqzbpnXlhpBeemJptWIts+Uw7sJyjpfv7
-	GXZTeVP3DwLv6rkXuICBLj+btQiS0a2ZtVVa+KxaZQZo3Y8VorBoidcz4j+J8acTguF0
-	54ThuF5H2sfdCRV9VMo8NS3YZCXAaqUGvXPgjVdn34JG2TPENIuaLEbyGUnuEibis91L
-	X5Ag==
-X-Gm-Message-State: AHPjjUiPsANmPqFN2IWgDgDSGj3oTqPK0oU/VU6cE+2Fo7GijoRX5yUh
-	+ayy6dPXL1dwcLEocpCX8iWUdzSg/13igMhS8VA=
-X-Google-Smtp-Source: AOwi7QALWvtrdDhv3uJ2O9KHaEU29e0L86BNiSB+jBE0LGAm3Hc5GGXhMhD9gVQYLn7unMOPG26y/oE8p1oxcyhcRlQ=
-X-Received: by 10.98.157.74 with SMTP id i71mr5958370pfd.168.1506003443029;
-	Thu, 21 Sep 2017 07:17:23 -0700 (PDT)
+	bh=W/SVVFPx4BTo/zbGePvM+is41mYrDfbI7CSjiSFBUF0=;
+	b=k22Hu9z3T5dqyoPIP1MRpJn9B9wf6D6hyrOP3VzC59HVFzvX3nzgI6ARqTT4mqYq3G
+	FgH82byybzeVbGp6gdD0CIk2m0+OFvVUck5mv8LPI5B6pYN7Qx93gxTeS7ZAlpbC5D+4
+	1OlsNJcRNhsPIlNbZzSmS8EaUxew8m0IE7onYUrX4a03vX1yvWa9ErSdLipkbydJ5KBb
+	YuRhcfJ9sh9osZ6WR76ePIUSEymJ6rPFE3zWTHwAzNYOjD6ogolhXVyspAhPUvrnrnaW
+	7/LZ72FoPs1W5K4b9tPlDVTkhM0hv7f2CZSAzS0kEFDua9hdvWgFWFWgUnVElrbM8SNl
+	S36Q==
+X-Gm-Message-State: AHPjjUgg8G1Anxvjk6DtXPwI5dbsVElrdOKVBbBgkrdqq/aVGL+ufLvO
+	FBzIpHllDfR4STwlaXdQtgqqMtQdvyFVIfa4i6A=
+X-Google-Smtp-Source: AOwi7QBnAhpl0xIvyx4daBt6E0pZyQyYg3PCAujfkTvks/Aj6nS9HceAqkF2N7aElpVSN9Kf+nSyzhcxUueCn/nKNNY=
+X-Received: by 10.28.128.19 with SMTP id b19mr1743807wmd.136.1506018753740;
+	Thu, 21 Sep 2017 11:32:33 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.149.73 with HTTP; Thu, 21 Sep 2017 07:16:52 -0700 (PDT)
-In-Reply-To: <20170921064721.17250-2-kai.kang@windriver.com>
-References: <20170921064721.17250-1-kai.kang@windriver.com>
-	<20170921064721.17250-2-kai.kang@windriver.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 21 Sep 2017 07:16:52 -0700
-Message-ID: <CAMKF1sps70RNgvw+nRdp9uSh8Rx16Eisa+Jh5agVcXAH5ctPZw@mail.gmail.com>
-To: Kang Kai <kai.kang@windriver.com>
+Received: by 10.223.141.198 with HTTP; Thu, 21 Sep 2017 11:32:33 -0700 (PDT)
+In-Reply-To: <1505995283-14453-1-git-send-email-pascal.bach@siemens.com>
+References: <1505995283-14453-1-git-send-email-pascal.bach@siemens.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 21 Sep 2017 11:32:33 -0700
+Message-ID: <CAJ86T=WM_gReqwOCpznqzSkkGzeFtA7W72OYQzSyEGzWSyVm0Q@mail.gmail.com>
+To: Pascal Bach <pascal.bach@siemens.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 1/1] lvm2: disable thin provisioning support if GPLv3 incompatible
+Subject: Re: [meta-oe][PATCH] luajit: create developer symlinks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,32 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 14:17:22 -0000
+X-List-Received-Date: Thu, 21 Sep 2017 18:32:33 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Wed, Sep 20, 2017 at 11:47 PM,  <kai.kang@windriver.com> wrote:
-> From: Kai Kang <kai.kang@windriver.com>
+On Thu, Sep 21, 2017 at 5:01 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
+> LuaJIT tries to call ldconfig during installation which doesn't work.
+
+Presumably this stopped working recently (since host tools now need to
+be whitelisted and ldconfig is not included in HOSTTOOLS)? If so,
+maybe mention that in the commit message.
+
+> This causes the .so and .so.2 symlinks to no be created.
 >
-> Disable thin provisioning support for lvm2 if it is set GPLv3
-> incompatible.
+> By setting "LDCONFIG= :" the call will be skipped the same as on Darwin
 >
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 > ---
->  meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
+>  meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb | 1 +
+>  1 file changed, 1 insertion(+)
 >
-> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-> index ab8db9cba..9791554a9 100644
-> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
-> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-> @@ -23,7 +23,7 @@ inherit autotools-brokensep pkgconfig systemd
->  LVM2_PACKAGECONFIG = "dmeventd lvmetad"
->  LVM2_PACKAGECONFIG_append_class-target = " \
->      ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
-> -    thin-provisioning-tools \
-> +    ${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'thin-provisioning-tools', d)} \
->      udev \
+> diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> index d7477ed..1e06e34 100644
+> --- a/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> +++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.5.bb
+> @@ -52,6 +52,7 @@ EXTRA_OEMAKE = "\
+>      \
+>      'PREFIX=${prefix}' \
+>      'MULTILIB=${baselib}' \
+> +    'LDCONFIG= :' \
 >  "
-there are other strings like GPL-3.0, as well as other types of GPL 3
-derivative licenses, I wonder if this will work for all
+>
+>  do_compile () {
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
