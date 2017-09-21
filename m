@@ -1,79 +1,49 @@
-Return-Path: <kwangsub.kim@qt.io>
-X-Greylist: delayed 58970 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 21 Sep 2017 19:04:07 UTC
-Received: from EUR03-DB5-obe.outbound.protection.outlook.com
-	(mail-eopbgr40108.outbound.protection.outlook.com [40.107.4.108])
-	by mail.openembedded.org (Postfix) with ESMTP id 93A9B78233
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 958AE77FDE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 19:04:07 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=qtcompany.onmicrosoft.com; s=selector1-qt-io;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=fSCJ80OawWhTYR8QcshxasFHaumfemkUbeMoA7Ly0q0=;
-	b=TJSnv/DGwIM/HKTfKRcxYKcu5XisuRuEX6lD7CqBOoz80kr71DnS1VQYohDIm2zZ6iqsebnBKPvb0IfFoxUxFD5gVCjSx11CsRkVk5vk3nKslizq9dG1J1Vg0fWar+AnEwNHfxc7T8TIhRqfxgMxJtINZoSVOHFiM6eSi1hCf84=
-Received: from HE1PR0202MB2491.eurprd02.prod.outlook.com (10.168.183.137) by
-	HE1PR0202MB2939.eurprd02.prod.outlook.com (10.171.93.139) with
-	Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
-	15.20.56.11; Thu, 21 Sep 2017 14:31:47 +0000
-Received: from HE1PR0202MB2491.eurprd02.prod.outlook.com
-	([fe80::a191:7106:b9ab:6304]) by
-	HE1PR0202MB2491.eurprd02.prod.outlook.com
-	([fe80::a191:7106:b9ab:6304%14]) with mapi id 15.20.0077.011;
-	Thu, 21 Sep 2017 14:31:47 +0000
-From: Kwangsub Kim <kwangsub.kim@qt.io>
-To: Christian Gagneraud <chgans@gmail.com>
-Thread-Topic: [oe] [meta-qt5][PATCH] qt5: add missing commercial license
-Thread-Index: AQHTMsBwP8B5iU45RkSTg+Kq9mUZy6K/YLRA
-Date: Thu, 21 Sep 2017 14:31:47 +0000
-Message-ID: <HE1PR0202MB2491EF42CA7564345575961086660@HE1PR0202MB2491.eurprd02.prod.outlook.com>
-References: <1505961647-21967-1-git-send-email-kwangsub.kim@qt.io>
-	<CABxGUTixb-TtB0ZQh4k4oi1SCPzXsse9fhwroMh+3MujCqurmA@mail.gmail.com>
-In-Reply-To: <CABxGUTixb-TtB0ZQh4k4oi1SCPzXsse9fhwroMh+3MujCqurmA@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-authentication-results: spf=none (sender IP is )
-	smtp.mailfrom=kwangsub.kim@qt.io; 
-x-originating-ip: [182.221.180.81]
-x-ms-publictraffictype: Email
-x-microsoft-exchange-diagnostics: 1; HE1PR0202MB2939;
-	6:KbVESYkwu16iE7O9GXU0gx8xlJD7uYqisMZ0Mhujrqh4DSbzfzw9kzBTBbN3ayKqiE6xkOGxXf2+q3w5JxYto5cJkHhanmC4DSasQXTFFdEAVdTu3DAzsu/vn/C3kuVlEOrvLZXa0LIKfi9IsIfod0OjvPo2HobylOMBzk2sZdH7S1Vza0iXUSUu3HWmNrKiAA5KeDUlCr3834FfXQcfRRZCjGRpwN3NfLqoVykfxnYH1pFUgvU+7+dmh1ACCqy229J6YMM/oXzElUFPUjqbQrtk57s3A1pFBNPEjx9cAMr8LF5wk1QDcNdUzeL90VRV0Xsyq05I/EtHARpTDsb/wQ==;
-	5:mzfaig8fe5xBli2h4OJSE1XQo1TO65VqmfJpvCc5dReM7NS3vQCbhrRE1IF0mVOY0qHiowXqAbOE4ZZ6gLU/aQwQm4siTwdbxbEN4IW1pXm/19sINwRTH1NU3qtcU2pkV3/Ydg8VfPck50afY6f21A==;
-	24:0HXw+dep19pg9CLM/AuDwUVQoN1VdZb8nutrxPfYKDhC49Hg+DBPYTNvRUVRV9P0oD2qRVEXt2PH9oobO+MzzkAfaMSU7Mw6vPM8BZfokv4=;
-	7:LrLBFnEIGGpO22gChpQdooMFGAn9nT9UKAcjR5+N6YqBFoutrLlJ0ctFt9muEO33prh4s8Gp5RJUVBWXY/MvvTeXHworU0QuC3kIaWIoq/+Q/6DpwYhquljmlLs3diob/00Qxd7/fI5t5azK4W4AC61MD08iro3F9Yx+rWIjwo7ogXd29Q/XXpE9NGBSaQsI5I5HC1LbLyPreJv+oDUfJ31BusTwJGZEfIbMtsv+nq4=
-x-ms-exchange-antispam-srfa-diagnostics: SSOS;
-x-ms-office365-filtering-correlation-id: 5d17dedb-508e-4358-b61d-08d500fd7daf
-x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(300000500095)(300135000095)(300000501095)(300135300095)(22001)(300000502095)(300135100095)(2017030254152)(300000503095)(300135400095)(2017052603199)(201703131423075)(201703031133081)(201702281549075)(300000504095)(300135200095)(300000505095)(300135600095)(300000506095)(300135500095);
-	SRVR:HE1PR0202MB2939; 
-x-ms-traffictypediagnostic: HE1PR0202MB2939:
-x-exchange-antispam-report-test: UriScan:(264703809997249);
-x-microsoft-antispam-prvs: <HE1PR0202MB2939F7B0D59E4E251A64816586660@HE1PR0202MB2939.eurprd02.prod.outlook.com>
-x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(3002001)(10201501046)(100000703101)(100105400095)(93006095)(93001095)(6041248)(20161123560025)(20161123558100)(20161123564025)(20161123555025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123562025)(6072148)(201708071742011)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:HE1PR0202MB2939; BCL:0; PCL:0;
-	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:HE1PR0202MB2939; 
-x-forefront-prvs: 04371797A5
-x-forefront-antispam-report: SFV:NSPM;
-	SFS:(10019020)(6009001)(376002)(39830400002)(346002)(189002)(377454003)(24454002)(199003)(13464003)(8936002)(74316002)(81166006)(81156014)(53546010)(39060400002)(316002)(25786009)(97736004)(6246003)(86362001)(74482002)(478600001)(5660300001)(5250100002)(33656002)(8676002)(7696004)(1411001)(6306002)(3846002)(101416001)(229853002)(55016002)(99286003)(7736002)(966005)(53936002)(9686003)(66066001)(6116002)(102836003)(76176999)(54356999)(68736007)(2900100001)(105586002)(2906002)(14454004)(6916009)(3660700001)(3280700002)(4326008)(189998001)(6436002)(2950100002)(6506006)(50986999)(106356001)(305945005)(19627235001);
-	DIR:OUT; SFP:1102; SCL:1; SRVR:HE1PR0202MB2939;
-	H:HE1PR0202MB2491.eurprd02.prod.outlook.com; FPR:; SPF:None;
-	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
-received-spf: None (protection.outlook.com: qt.io does not designate permitted
-	sender hosts)
-spamdiagnosticoutput: 1:99
-spamdiagnosticmetadata: NSPM
+	Thu, 21 Sep 2017 19:44:30 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id p37so3643444wrb.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 21 Sep 2017 12:44:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=BTfpjDtMDC+cTc8SUPSHtni1gOQN7cFbeDA9jzMZoA0=;
+	b=dRGtMi4Qi3z5GrZ8PL7RpY2djLzCop+2zSYDqP0SKYXVz1leE3R1mgUkhne6PYh98V
+	V9I1jm1dqXKPMV7d8NxPy2HnqWEvu7I1NVIwMQjSf/VS9/kKLv8Y7EzHG5hLwP2v9tef
+	wOghdEVXib5yJpIztUFNh+GZo0WQEuo1AwZVJKB5HokOGuFqvS0YOyVwsj8T7v9Qzkca
+	X/ZnQSWCJI7IV7uH2sxb4WS9B7o6MJ7IwIoxhUve3/C+h+R+HCyzSaEsb9dioilsGBxn
+	tqyi4l9nAl8W3H3SbzqwpHlJN1QuQ9FLb4qYZgPNc3ELZ0BMS7JpK7/a3INVA+e2IbKg
+	YElQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=BTfpjDtMDC+cTc8SUPSHtni1gOQN7cFbeDA9jzMZoA0=;
+	b=uCGQbWtrWCGp7qdd3kquKm0KWuM8ZmYBSItESzEhpRHSGSmqqDuyQqNlyryWUYtpp5
+	d2q8wafuoHOyeyKid/7JC8QKfTR5i58PotSvfggiLTEfC116fwqy1w2MMLWw6xO80rS0
+	l7AkO3XleSu1idtXLl3u39sVtbTHffce4ELVZYHbLXnySEMunKYiGBiqx/w64YmV/+L6
+	/S1Bq8tJNrXbL7C3ZrfUYveZ1/TjpXnCw7P/okBIZVgV0hXynulhatZcv6pSbM7iIwFG
+	yuYMTjPTR4oP0yA/hZhDFCcdFECqfSSoRNo42jDv4Hec0CyzZIikOrva8l2JHmQZsMGV
+	8fYg==
+X-Gm-Message-State: AHPjjUjRBGxAbdkaAvLbrB7bHR7qTvH1Osw3POeG6l06tmpFewrC8Kjm
+	fzNB7ndsIZ27J/Z6AiapnCaCwrcBZ8G2IaWqbdw=
+X-Google-Smtp-Source: AOwi7QCev2X6+QHOO+sLPxUh0wt1e1Y+FMcrQOBrUQAY7KiPXFABtm3DOCY0XxUVztyJ6yB+xUkyeOdRSA3lZv3+bKU=
+X-Received: by 10.223.186.6 with SMTP id o6mr2610938wrg.263.1506023071331;
+	Thu, 21 Sep 2017 12:44:31 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: qt.io
-X-MS-Exchange-CrossTenant-originalarrivaltime: 21 Sep 2017 14:31:47.6936 (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 20d0b167-794d-448a-9d01-aaeccc1124ac
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: HE1PR0202MB2939
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5][PATCH] qt5: add missing commercial license
+Received: by 10.223.141.198 with HTTP; Thu, 21 Sep 2017 12:44:30 -0700 (PDT)
+In-Reply-To: <CAMKF1sps70RNgvw+nRdp9uSh8Rx16Eisa+Jh5agVcXAH5ctPZw@mail.gmail.com>
+References: <20170921064721.17250-1-kai.kang@windriver.com>
+	<20170921064721.17250-2-kai.kang@windriver.com>
+	<CAMKF1sps70RNgvw+nRdp9uSh8Rx16Eisa+Jh5agVcXAH5ctPZw@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 21 Sep 2017 12:44:30 -0700
+Message-ID: <CAJ86T=UAo6ejGQDQ9WDbRdyDcO7ATcFV9sja4MFW0v0yGugN7w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 1/1] lvm2: disable thin provisioning support if GPLv3 incompatible
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -86,48 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Sep 2017 19:04:09 -0000
-Content-Language: ko-KR
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 21 Sep 2017 19:44:30 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-KFNvcnJ5IGZvciBkdXBsaWNhdGUgZW1haWxzLiBJIHRob3VnaHQgdGhvc2Ugd2VyZSBub3QgZGVs
-aXZlcmVkLikNCg0KSSBhZ3JlZSBvbiBjbGVhcmluZyB1cCBjb21wbGV4IGxvZ2ljYWwgZXhwcmVz
-c2lvbnMgb2YgbGljZW5zZXMuIEJ1dA0KSSB0aGluayBpdCdzIGFub3RoZXIgdG9waWMgYmVjYXVz
-ZSBpdCB3b3VsZCBuZWVkIHdpZGVyIHVwZGF0ZXMgaW5jbHVkaW5nDQp0aGUgb3RoZXIgcGFja2Fn
-ZXMgdW5yZWxhdGVkIHRvIGNvbW1lcmNpYWwgbGljZW5zZSBmaXguDQpXaGF0IGFib3V0IGRpc2N1
-c3NpbmcgYWJvdXQgaXQgb24gbmV3IHRocmVhZCBhZnRlciB0aGlzIHBhdGNoPw0KDQpSZWdhcmRz
-LA0KS3dhbmdzdWINCg0KPiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBDaHJp
-c3RpYW4gR2FnbmVyYXVkIFttYWlsdG86Y2hnYW5zQGdtYWlsLmNvbV0NCj4gU2VudDogVGh1cnNk
-YXksIFNlcHRlbWJlciAyMSwgMjAxNyA3OjAwIFBNDQo+IFRvOiBLd2FuZ3N1YiBLaW0gPGt3YW5n
-c3ViLmtpbUBxdC5pbz4NCj4gQ2M6IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRk
-ZWQub3JnDQo+IFN1YmplY3Q6IFJlOiBbb2VdIFttZXRhLXF0NV1bUEFUQ0hdIHF0NTogYWRkIG1p
-c3NpbmcgY29tbWVyY2lhbCBsaWNlbnNlDQo+IA0KPiBPbiAyMSBTZXB0ZW1iZXIgMjAxNyBhdCAx
-NDo0MCwgS3dhbmdzdWIgS2ltIDxrd2FuZ3N1Yi5raW1AcXQuaW8+IHdyb3RlOg0KPiBbLi4uXQ0K
-PiA+IGRpZmYgLS1naXQgYS9yZWNpcGVzLXF0L3F0NS9xdHNlcmlhbHBvcnRfZ2l0LmJiDQo+ID4g
-Yi9yZWNpcGVzLXF0L3F0NS9xdHNlcmlhbHBvcnRfZ2l0LmJiDQo+ID4gaW5kZXggMDU2ZTIzNy4u
-MjNmMDNjZSAxMDA2NDQNCj4gPiAtLS0gYS9yZWNpcGVzLXF0L3F0NS9xdHNlcmlhbHBvcnRfZ2l0
-LmJiDQo+ID4gKysrIGIvcmVjaXBlcy1xdC9xdDUvcXRzZXJpYWxwb3J0X2dpdC5iYg0KPiA+IEBA
-IC0zLDcgKzMsNyBAQCByZXF1aXJlIHF0NS1naXQuaW5jDQo+ID4NCj4gPiAgIyB0ZXh0IG9mIExH
-UExfRVhDRVBUSU9OLnR4dCBhbmQgTElDRU5TRS5GREwgaXMgc2xpZ2h0bHkgZGlmZmVyZW50DQo+
-ID4gdGhhbiB3aGF0ICAjIG90aGVyIHF0KiBjb21wb25lbnRzIHVzZSA6LyAtTElDRU5TRSA9ICJH
-RkRMLTEuMyAmIEJTRCAmDQo+ID4gKExHUEwtMi4xICYgVGhlLVF0LUNvbXBhbnktUXQtTEdQTC1F
-eGNlcHRpb24tMS4xIHwgTEdQTC0zLjApIg0KPiA+ICtMSUNFTlNFID0gIkdGREwtMS4zICYgQlNE
-ICYgKExHUEwtMi4xICYgVGhlLVF0LUNvbXBhbnktUXQtTEdQTC0NCj4gRXhjZXB0aW9uLTEuMSB8
-IExHUEwtMy4wKSB8IFRoZS1RdC1Db21wYW55LUNvbW1lcmNpYWwiDQo+IA0KPiBFeHBsaWNpdCBi
-cmFja2V0cyB3b3VsZCBiZSBuaWNlIHRvIGRpc2FtYmlndWF0ZSAmIGFuZCB8IHByZWNlZGVuY2Uu
-DQo+IA0KPiBhcmUgd2UgdGFsa2luZywgZWc6DQo+IA0KPiAoTEdQTC0yLjEgJiBUaGUtUXQtQ29t
-cGFueS1RdC1MR1BMLUV4Y2VwdGlvbi0xLjEpIHwgTEdQTC0zLjANCj4gDQo+IG9yDQo+IA0KPiBH
-RkRMLTEuMyAmIChCU0QgJiAoTEdQTC0yLjEgJiAoVGhlLVF0LUNvbXBhbnktUXQtTEdQTC1FeGNl
-cHRpb24tMS4xIHwNCj4gTEdQTC0zLjApKSB8IFRoZS1RdC1Db21wYW55LUNvbW1lcmNpYWwpDQo+
-IA0KPiB3aGF0ZXZlciB0aGUgYW5zd2VyIGlzLCBtb3JlIGV4cGxpY2l0IGJyYWNrZXRpbmcgd291
-bGQgbWFrZSBpdCBtb3JlDQo+IG9idmlvdXMgdG8gdGVkaW91cyByZWFkZXJzLCBidXQgbWF5YmUg
-YXQgdGhlIGV4cGVuc2Ugb2YgcmVhZGFiaWxpdHkgKGlmDQo+IHRoYXQgbWFrZXMgc2Vuc2UpLg0K
-PiANCj4gSSBkb24ndCBrbm93IHdoaWNoIHBhcnQgb2YgdGhlIGNvZGUgaXMgaW4gY2hhcmdlIG9m
-IGV2YWx1YXRpbmcgdGhlc2UNCj4gZXhwcmVzc2lvbnMsIGlzIGl0IGVnLjoNCj4gaHR0cDovL2Vu
-LmNwcHJlZmVyZW5jZS5jb20vdy9jcHAvbGFuZ3VhZ2Uvb3BlcmF0b3JfcHJlY2VkZW5jZSwNCj4g
-aHR0cHM6Ly9kb2NzLnB5dGhvbi5vcmcvMy9yZWZlcmVuY2UvZXhwcmVzc2lvbnMuaHRtbCNvcGVy
-YXRvci1wcmVjZWRlbmNlLA0KPiBvciBiaXRiYWtlIG93biBzYXVjZS4uLi4NCj4gDQo+IEkgdGhp
-bmsgbGljZW5zaW5nIGlzIGltcG9ydGFudCB0byBnZXQgcmlnaHQsIGNsZWFyIGFuZCByZWxpYWJs
-ZS4NCj4gDQo+IENocmlzDQo=
+On Thu, Sep 21, 2017 at 7:16 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Wed, Sep 20, 2017 at 11:47 PM,  <kai.kang@windriver.com> wrote:
+>> From: Kai Kang <kai.kang@windriver.com>
+>>
+>> Disable thin provisioning support for lvm2 if it is set GPLv3
+>> incompatible.
+>>
+>> Signed-off-by: Kai Kang <kai.kang@windriver.com>
+>> ---
+>>  meta-oe/recipes-support/lvm2/lvm2.inc | 2 +-
+>>  1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
+>> index ab8db9cba..9791554a9 100644
+>> --- a/meta-oe/recipes-support/lvm2/lvm2.inc
+>> +++ b/meta-oe/recipes-support/lvm2/lvm2.inc
+>> @@ -23,7 +23,7 @@ inherit autotools-brokensep pkgconfig systemd
+>>  LVM2_PACKAGECONFIG = "dmeventd lvmetad"
+>>  LVM2_PACKAGECONFIG_append_class-target = " \
+>>      ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
+>> -    thin-provisioning-tools \
+>> +    ${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'thin-provisioning-tools', d)} \
+>>      udev \
+>>  "
+> there are other strings like GPL-3.0, as well as other types of GPL 3
+> derivative licenses, I wonder if this will work for all
+
+Perhaps something like:
+
+  ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)}
+
+would work more reliably?
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
