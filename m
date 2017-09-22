@@ -1,40 +1,54 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id AF51377D9F
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id A83286FF80
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 12:32:24 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	22 Sep 2017 05:32:23 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.42,427,1500966000"; d="scan'208";a="902897759"
-Received: from rkubodac-desk.ger.corp.intel.com ([10.252.56.185])
-	by FMSMGA003.fm.intel.com with ESMTP; 22 Sep 2017 05:32:21 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Trevor Woerner <twoerner@gmail.com>
-In-Reply-To: <CAHUNapT7Hj4XjuJM_PzydckY=b+X5ok-p-k2MF3VYhywJ5mh5A@mail.gmail.com>
-	(Trevor Woerner's message of "Thu, 21 Sep 2017 19:06:47 -0400")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
-	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
-	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
-	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
-	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
-	<8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com>
-	<87r2wcajh6.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CALbNGRS1ywFbSNAoY976cPgJ4STQLqUEqzwq34XGaMH_CYhAaw@mail.gmail.com>
-	<20170816160609.GA29490@linux-uys3>
-	<87tvzylpvy.fsf@rkubodac-desk.ger.corp.intel.com>
-	<20170920174336.GA19156@linux-uys3>
-	<CAHUNapT7Hj4XjuJM_PzydckY=b+X5ok-p-k2MF3VYhywJ5mh5A@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Fri, 22 Sep 2017 14:32:20 +0200
-Message-ID: <87r2uydicr.fsf@rkubodac-desk.ger.corp.intel.com>
+	Fri, 22 Sep 2017 12:52:55 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id n64so607736wrb.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Sep 2017 05:52:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=du4pNWJv4Hri8bj/r+l5/HqUkTtC4UBrqTmBT/0BN6M=;
+	b=gOcYFAcY4R/RH5Jrl2lHKlb882MoFAvB7PiGJ4XiRgmnbf/YLINOEuu0P6rJbtFeJR
+	18RWg7lJkirilqBzpfIshUnHcrVOFXKAzxjwey8qQaxZf6k49rP/Xt+L3dFlygW4COsS
+	f3pEQ3HHWfIi/RQz/30GFRBItOBg9nBFd4DZW80XL2ZRenYnl34rVMrOxpy2lb7F823R
+	EfzdHfHnP6tFXpxDFJfozeu3V3fZlhLQAXz+50jGHWVZm2L+pu6ayBo00wrQIU8FjfBo
+	+LD+d/BZHfyDoHyEz1zp7lwYPG98T/50uGSB3kH9ikBXxeSOHLDOFK7a0hEqzZfyqKFi
+	2MtA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=du4pNWJv4Hri8bj/r+l5/HqUkTtC4UBrqTmBT/0BN6M=;
+	b=ZDFe53ZsVIxFQMPkleknn7JESGy3h4TboWjC2BAhYnQil3JuELL1RCV7Dap/dH87qo
+	bGp0NZY1fa1otYW5pgGDgTcFRO0WPP2l31Yt8mcfUzpXVUvLLFO/AQWpnOF9ge+VE22h
+	26t/ypVBHy8o23ID+M/h06oyAwm/jeGjsGX9LmFs9DwG6S/M9IzojuBTPd6rJwRsG4dy
+	baOJFHhrQZeNWl7JPjaMX8K3i2dFTlkqmB7Is+5TvGpZI5pf68xdOGtxV392hwaGjsLr
+	Nogcf3zXxvHpL2g/sOasMqYZk37p/QWgRDTXo5+xGJP9O+scqbsO1yI9DBD8TZO+MehK
+	U+3g==
+X-Gm-Message-State: AHPjjUhJ+9M0etz0q64cVXiRBi7tNj+5IO8CbCXv2lVNHJfHSKhWwmvV
+	IcD4j+2OyAFjZuMenDw6sRZ7BQ==
+X-Google-Smtp-Source: AOwi7QADUohu5m/kCjMIHF8QzUWB1e2gXHKf5tNwM/IWWEQYDdk9RSs1AfYqQ+LD3kN8Yuz2QCTqCA==
+X-Received: by 10.223.154.120 with SMTP id z111mr4663019wrb.260.1506084776513; 
+	Fri, 22 Sep 2017 05:52:56 -0700 (PDT)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	y84sm2176193wmg.43.2017.09.22.05.52.55
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Fri, 22 Sep 2017 05:52:55 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Fri, 22 Sep 2017 14:55:27 +0200
+To: Mike Crowe <mac@mcrowe.com>
+Message-ID: <20170922125527.GB3815@jama>
+References: <20170908134802.13519-1-mac@mcrowe.com>
+	<20170922113415.5zum55yffbyzci7d@mcrowe.com>
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: chromium detected as stripped
+In-Reply-To: <20170922113415.5zum55yffbyzci7d@mcrowe.com>
+User-Agent: Mutt/1.9.0 (2017-09-02)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-qt5][PATCH] qtbase-native: Force use of built-in pcre
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,43 +61,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 12:32:24 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 22 Sep 2017 12:52:56 -0000
+X-Groupsio-MsgNum: 68997
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="Fba/0zbH8Xs+Fj9o"
+Content-Disposition: inline
 
-Trevor Woerner <twoerner@gmail.com> writes:
+--Fba/0zbH8Xs+Fj9o
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-> On Wed, Sep 20, 2017 at 1:43 PM, Trevor Woerner <twoerner@gmail.com> wrote:
->> When I compile chromium61 with pyro, I get a strange error. Every time the
->> python wrapper (gcc_link_wrapper.py) is called for a native compile (g++), I
->> get:
-> ...
->> This happens with both qemux86-64 and raspberrypi3. Unfortunately those log
->> files are 18M and 19M each, so I won't be attaching them. Why can't my build
->> find 'ld'? That seems quite strange. Probably some kind of ld vs gold issue?
->> I'm not using gold anywhere and have not enabled it, are you using gold?
->
->
-> Turns out, I had to install binutils-gold on my host for this to work.
-> Which suggests a hiccup in the build. Maybe the build needs to tweak
-> the python wrapper? (As if using ninja and gn weren't enough, the
-> build also wants to use a wrapper to call the compiler?!)
+On Fri, Sep 22, 2017 at 12:34:15PM +0100, Mike Crowe wrote:
+> On Friday 08 September 2017 at 14:48:02 +0100, Mike Crowe wrote:
+> > If we specify neither -system-pcre nor -qt-pcre then qtbase will first =
+see
+> > if it can find the pcre library in the system and fall back to compiling
+> > its own if that's not possible.
+> >=20
+> > Unfortunately, this means that if qtbase-native happens to be built on a
+> > machine with system pcre available then the resulting binaries such as
+> > bin/qt5/uic in sstate files won't work correctly on machines that don't
+> > have pcre available. Even ignoring that, it doesn't help for packages to
+> > build differently depending on how the build system is configured.
+> >=20
+> > We could depend on pcre-native and pass -system-pcre, but this doesn't =
+work
+> > by default because qtbase actually requires pcre16 which is an optional
+> > (via PACKAGECONFIG) feature of pcre so the default there would need to =
+be
+> > changed too.
+> >=20
+> > So, let's make qtbase-native match the default of qtbase by passing
+> > -qt-pcre in order to ensure that qtbase-native is always built with its
+> > own pcre implementation.
+> >=20
+> > Signed-off-by: Mike Crowe <mac@mcrowe.com>
+> > ---
+> >  recipes-qt/qt5/qtbase-native_git.bb | 1 +
+> >  1 file changed, 1 insertion(+)
+> >=20
+> > diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbas=
+e-native_git.bb
+> > index 54a0b78..0951ede 100644
+> > --- a/recipes-qt/qt5/qtbase-native_git.bb
+> > +++ b/recipes-qt/qt5/qtbase-native_git.bb
+> > @@ -46,6 +46,7 @@ PACKAGECONFIG_CONFARGS =3D " \
+> >      -sysroot ${STAGING_DIR_NATIVE} \
+> >      -no-gcc-sysroot \
+> >      -system-zlib \
+> > +    -qt-pcre \
+> >      -no-libjpeg \
+> >      -no-libpng \
+> >      -no-gif \
+>=20
+> Does anyone have any objections to this?
+>=20
+> We've been using it for several weeks now and it's not caused any observed
+> problems.
 
-I think I've fixed both the gold and the Breakpad issues, as described
-in my other reply.
+It's already merged:
+https://github.com/meta-qt5/meta-qt5/commit/743b3b93e17f5382fd1f9f4e0d29325=
+01c8a3c78
 
-> This still leaves the problem with my builds against master. I tried
-> downgrading the compiler to 6%, but that causes a build issue in mesa,
-> so the build can't even get close to chromium to see if that compile
-> can succeed with gcc-6 instead of the default gcc-7.
->
-> The regular procedure is to add things to master, then backport them
-> to various branches if appropriate. If we can't get master to work,
-> there won't be anything to backport. In any case meta-browser
-> currently doesn't have a pyro branch.
+>=20
+> Thanks.
+>=20
+> Mike.
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
-Can you try my recipe with master again? So far I've only tested pyro to
-avoid having the ground shift under my as I work on the recipe; I know
-that at least Chromium master builds fine with GCC 7, so any build
-errors caused by the compiler version are easily fixed with one or more
-backports.
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
+--Fba/0zbH8Xs+Fj9o
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWcUIPgAKCRA3VSO3ZXaA
+HAUWAKCaSMkYCrHJ0nBg++F8qL7wBLt+wQCfR4cEm/8gzQG7t9mp1GUK0BFDcTk=
+=VTS0
+-----END PGP SIGNATURE-----
+
+--Fba/0zbH8Xs+Fj9o--
