@@ -1,50 +1,50 @@
 Return-Path: <raj.khem@gmail.com>
 Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
 	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id ECAA478397
+	by mail.openembedded.org (Postfix) with ESMTP id F15B178357
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 03:23:27 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id a7so3247101pfj.5
+	Fri, 22 Sep 2017 03:23:28 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id f84so3253629pfj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Sep 2017 20:23:29 -0700 (PDT)
+	Thu, 21 Sep 2017 20:23:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=XekEmVXB1H/mleIjVYHIZf6DNwFPYZhqrlyISjdbYwU=;
-	b=HVL1of0zMnMHrOO//2qDQxZovkPZ3XZsl/ND19RHruXITmkxYIZAEWsuSKD0+B28Sg
-	+qeccgLGEgDpXgUAQtJk9icoxv90SISNV2pvUIL7wBJbDf8ACddPRtc5CUHq1omfZqCJ
-	Fjk33rPavmhC4z/vcO70y+qBaDqrhg0cYz7NpSbBaN5aI0V3I7nRaZyi7gOj76rGei1n
-	jrRRbXJzJfKwUCffD8RNxTCfb82y0RaIixYof5BhjFIPhtVuHiMgnMMTUTeRAGcW2KXJ
-	QI2h0xFMuiYJYogANav2AraoG/mp3zvdFkn5GOazGmLXWx1Jpc+KceFRp3k/ai6dnuzM
-	bc2Q==
+	bh=TBypkqbfEVfqqyRLwlq/Hhn68r67VdrgBIRD0dQpRF4=;
+	b=uRiRLl1i8H1ntN3V4uo4/GH+Dn1aFXwEaW8kTr7Hk/0gb0VY/SRmggX0lxemZwfFdR
+	qsRtPBFg0RiSGKUF9Rf8syEWJbMQX/LK5L3SQvi6eyEQPklnEQiDYI1G7LgItA+hsvQF
+	rHL8T1dAjuUe3TbsyF/g/tffOuCbEYug6cVUs2WiaQ5m0FkB3tH/+L4BJPQ5y7RaBFkx
+	K9R+v226zT+9s8Ka2FUAjrJgvxWraki8BUy4rwGw8OP1Shws4OiwpckNN/uuWf8XUHxT
+	xBBF2ib2h9VrNVqgymUesKFAPFQ5okYXGeMisxho7w+y5nAUzolS3AC3TaHLNzyPhIXp
+	ic1A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=XekEmVXB1H/mleIjVYHIZf6DNwFPYZhqrlyISjdbYwU=;
-	b=gaNBGyV2l0e8qUuMG7Ia39+e9d/Rwpk3UHa+mPnVPIg0nCignjLNTsbFG2o8fTbKjJ
-	B9DgJhU0u93XVg3XLT4aLNF4iqBkLiY4Xin2b/fjD7G6ElNu7YDuWMbXfaWL21sD7Cct
-	0RlhIJPNPKiP1r4XWoQg8tA/4JuSmiBN+Ka/Qu3oirS2l1vWnFPE+DOfkuKWwK+v4PJI
-	bYU/Hx6T4qOO+u/bIzbMZGFYFplSXtNHhzWed+1/6leLfljX4I4MhnR2uGz/rsViIRJZ
-	hhoZrW9fnaMm8XUbujAyJMnMtiJ8C8K9Z0uDjEgFMVzQ7eqogGehHooUO1Q7DbpmFOTP
-	wfeQ==
-X-Gm-Message-State: AHPjjUgfQ0WsMjqhnGgeOcEgJlHYyOxP5e9JSJhqBrAHk+kE8ynY3F7x
-	SIPK2FST8FbeYeUL5p0Gv18cBw==
-X-Google-Smtp-Source: AOwi7QAI2ZXkI1p0x55f8LwP/Azflzul/T/Vg1adKNkmz/K9uc8uzRS899SI+RH7QUSrt/WsNJl52w==
-X-Received: by 10.99.114.19 with SMTP id n19mr7563074pgc.300.1506050609067;
-	Thu, 21 Sep 2017 20:23:29 -0700 (PDT)
+	bh=TBypkqbfEVfqqyRLwlq/Hhn68r67VdrgBIRD0dQpRF4=;
+	b=fgD1MJV7hq8sRfXLbDrK3Bwt9+NrRCX8Le+B0GbEGFw72BDF7MRloOiPWizp7tJdov
+	eUbxnwWKTPfAOa24vK0bgq1hPVq+Pi5rUt5akQLxMX+Z/anwfe8VbAi8Q8bQmhWwi87H
+	eA/ZMmM5OPNnvUp8j5sR22s8wESsvfB3ZChPpisE8xek+yX7cbIlSxs/u9vbRrtKDtmR
+	qRLxYj3b86RH35I7HdzGNIrchFlI2ZGj+6ezRFSprrZKQiYOnS4qx74Ae8guJtqJDiWY
+	lBCrnV8lAIxKdFYxlSVSydW3X0ZCxiNkkU4vNje0aOrYYKEe8gmAktVHzDFVNOwHTQKt
+	+tdA==
+X-Gm-Message-State: AHPjjUitTcqhrkDQU2h8hl5hRpcbdk45Zwd5HRlWbhCQbW/O6BQh+svC
+	jyGsruD13GuZzljhAJjQBM4hzw==
+X-Google-Smtp-Source: AOwi7QDBHMwbbQQFfk9JJMREvfDVcU7Hsr6hE+CcJgqkAi7ioIHC9gFghMe0weUoXAjs2ZM7LMxUew==
+X-Received: by 10.84.134.164 with SMTP id 33mr1952146plh.323.1506050610458;
+	Thu, 21 Sep 2017 20:23:30 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::e57f])
 	by smtp.gmail.com with ESMTPSA id
-	o79sm4517921pfi.108.2017.09.21.20.23.28
+	o79sm4517921pfi.108.2017.09.21.20.23.29
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Sep 2017 20:23:28 -0700 (PDT)
+	Thu, 21 Sep 2017 20:23:29 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 21 Sep 2017 20:23:13 -0700
-Message-Id: <20170922032316.18616-4-raj.khem@gmail.com>
+Date: Thu, 21 Sep 2017 20:23:14 -0700
+Message-Id: <20170922032316.18616-5-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.1
 In-Reply-To: <20170922032316.18616-1-raj.khem@gmail.com>
 References: <20170922032316.18616-1-raj.khem@gmail.com>
-Subject: [meta-oe][PATCH 4/7] toybox: Upgrade to 0.7.4
+Subject: [meta-oe][PATCH 5/7] nbench-byte: Update SRC_URI to fossies.org
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,48 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 03:23:28 -0000
+X-List-Received-Date: Fri, 22 Sep 2017 03:23:29 -0000
 
-enable parallel build
+Current SRC_URI responds with 404
+
+Fix
+WARNING: nbench-byte-2.2.3-r0 do_fetch: Failed to fetch URL http://www.tux.org/~mayer/linux/nbench-byte-2.2.3.tar.gz, attempting MIRRORS if available
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../recipes-core/toybox/{toybox_0.7.3.bb => toybox_0.7.4.bb}   | 10 ++++------
- 1 file changed, 4 insertions(+), 6 deletions(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.7.3.bb => toybox_0.7.4.bb} (87%)
+ meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.3.bb b/meta-oe/recipes-core/toybox/toybox_0.7.4.bb
-similarity index 87%
-rename from meta-oe/recipes-core/toybox/toybox_0.7.3.bb
-rename to meta-oe/recipes-core/toybox/toybox_0.7.4.bb
-index 0cd44ff64..76a7af459 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.3.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_0.7.4.bb
-@@ -2,12 +2,10 @@ SUMMARY = "Toybox combines common utilities together into a single executable."
- HOMEPAGE = "http://www.landley.net/toybox/"
- DEPENDS = "attr"
+diff --git a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+index 56272d985..da2cb4b32 100644
+--- a/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
++++ b/meta-oe/recipes-benchmark/nbench-byte/nbench-byte_2.2.3.bb
+@@ -1,3 +1,4 @@
++SUMMARY = "A CPU benchmark utility"
+ DESCRIPTION = "BYTE Magazine's native benchmarks (also called BYTEmark) \
+ designed to expose the capabilities of a system's CPU, FPU, \
+ and memory system."
+@@ -6,7 +7,7 @@ LICENSE = "nbench-byte"
+ LIC_FILES_CHKSUM = "file://README;beginline=57;endline=66;md5=020ef579f8fa5746b7e307a54707834f"
+ SECTION = "console/utils"
  
--SRC_URI = " \
--    http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
-+SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
- "
--
--SRC_URI[md5sum] = "6fa2a001402cb067ba541e0d8948da50"
--SRC_URI[sha256sum] = "e6469b508224e0d2e4564dda05c4bb47aef5c28bf29d6c983bcdc6e3a0cd29d6"
-+SRC_URI[md5sum] = "55ea59a31c7da9510c8fabe70f4bc561"
-+SRC_URI[sha256sum] = "49d74ca897501e5c981516719870fe08581726f5c018abe35ef52c6f0de113e7"
+-SRC_URI = "http://www.tux.org/~mayer/linux/${BP}.tar.gz \
++SRC_URI = "https://fossies.org/linux/misc/${BP}.tar.gz \
+            file://nbench_32bits.patch \
+            file://Makefile-add-more-dependencies-to-pointer.h.patch"
  
- LICENSE = "BSD-0-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
-@@ -16,7 +14,7 @@ SECTION = "base"
- 
- TOYBOX_BIN = "generated/unstripped/toybox"
- 
--EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC} ${BUILD_CFLAGS} ${BUILD_LDFLAGS}"'
-+EXTRA_OEMAKE = 'HOSTCC="${BUILD_CC}" CPUS=${@oe.utils.cpu_count()}'
- 
- do_configure() {
-     oe_runmake defconfig
 -- 
 2.14.1
 
