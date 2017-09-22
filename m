@@ -1,52 +1,29 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id A83286FF80
+Return-Path: <mac@mcrowe.com>
+Received: from avasout05.plus.net (avasout05.plus.net [84.93.230.250])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FA4E6E671
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 12:52:55 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id n64so607736wrb.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 05:52:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=du4pNWJv4Hri8bj/r+l5/HqUkTtC4UBrqTmBT/0BN6M=;
-	b=gOcYFAcY4R/RH5Jrl2lHKlb882MoFAvB7PiGJ4XiRgmnbf/YLINOEuu0P6rJbtFeJR
-	18RWg7lJkirilqBzpfIshUnHcrVOFXKAzxjwey8qQaxZf6k49rP/Xt+L3dFlygW4COsS
-	f3pEQ3HHWfIi/RQz/30GFRBItOBg9nBFd4DZW80XL2ZRenYnl34rVMrOxpy2lb7F823R
-	EfzdHfHnP6tFXpxDFJfozeu3V3fZlhLQAXz+50jGHWVZm2L+pu6ayBo00wrQIU8FjfBo
-	+LD+d/BZHfyDoHyEz1zp7lwYPG98T/50uGSB3kH9ikBXxeSOHLDOFK7a0hEqzZfyqKFi
-	2MtA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=du4pNWJv4Hri8bj/r+l5/HqUkTtC4UBrqTmBT/0BN6M=;
-	b=ZDFe53ZsVIxFQMPkleknn7JESGy3h4TboWjC2BAhYnQil3JuELL1RCV7Dap/dH87qo
-	bGp0NZY1fa1otYW5pgGDgTcFRO0WPP2l31Yt8mcfUzpXVUvLLFO/AQWpnOF9ge+VE22h
-	26t/ypVBHy8o23ID+M/h06oyAwm/jeGjsGX9LmFs9DwG6S/M9IzojuBTPd6rJwRsG4dy
-	baOJFHhrQZeNWl7JPjaMX8K3i2dFTlkqmB7Is+5TvGpZI5pf68xdOGtxV392hwaGjsLr
-	Nogcf3zXxvHpL2g/sOasMqYZk37p/QWgRDTXo5+xGJP9O+scqbsO1yI9DBD8TZO+MehK
-	U+3g==
-X-Gm-Message-State: AHPjjUhJ+9M0etz0q64cVXiRBi7tNj+5IO8CbCXv2lVNHJfHSKhWwmvV
-	IcD4j+2OyAFjZuMenDw6sRZ7BQ==
-X-Google-Smtp-Source: AOwi7QADUohu5m/kCjMIHF8QzUWB1e2gXHKf5tNwM/IWWEQYDdk9RSs1AfYqQ+LD3kN8Yuz2QCTqCA==
-X-Received: by 10.223.154.120 with SMTP id z111mr4663019wrb.260.1506084776513; 
-	Fri, 22 Sep 2017 05:52:56 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	y84sm2176193wmg.43.2017.09.22.05.52.55
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 22 Sep 2017 05:52:55 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Fri, 22 Sep 2017 14:55:27 +0200
-To: Mike Crowe <mac@mcrowe.com>
-Message-ID: <20170922125527.GB3815@jama>
+	Fri, 22 Sep 2017 13:09:41 +0000 (UTC)
+Received: from deneb ([80.229.24.9]) by avasout05 with smtp
+	id Cd9h1w0030BmcFC01d9iTL; Fri, 22 Sep 2017 14:09:42 +0100
+X-CM-Score: 0.00
+X-CNFS-Analysis: v=2.2 cv=Iav3YSia c=1 sm=1 tr=0
+	a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
+	a=2JCJgTwv5E4A:10 a=NEAV23lmAAAA:8 a=7n4iY1JKDu4sLFP8BDkA:9
+	a=CjuIK1q_8ugA:10
+	a=QWCVzCuMMVEA:10 a=xnSvYBgHsycrTbkdtoAA:9 a=ONNS8QRKHyMA:10
+Received: from mac by deneb with local (Exim 4.89)
+	(envelope-from <mac@mcrowe.com>)
+	id 1dvNi9-0007Yq-27; Fri, 22 Sep 2017 14:09:41 +0100
+Date: Fri, 22 Sep 2017 14:09:41 +0100
+From: Mike Crowe <mac@mcrowe.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20170922130941.h542v6gkslfyn74x@mcrowe.com>
 References: <20170908134802.13519-1-mac@mcrowe.com>
 	<20170922113415.5zum55yffbyzci7d@mcrowe.com>
+	<20170922125527.GB3815@jama>
 MIME-Version: 1.0
-In-Reply-To: <20170922113415.5zum55yffbyzci7d@mcrowe.com>
-User-Agent: Mutt/1.9.0 (2017-09-02)
+In-Reply-To: <20170922125527.GB3815@jama>
+User-Agent: NeoMutt/20170113 (1.7.2)
 Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: [meta-qt5][PATCH] qtbase-native: Force use of built-in pcre
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -61,91 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 12:52:56 -0000
-X-Groupsio-MsgNum: 68997
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="Fba/0zbH8Xs+Fj9o"
+X-List-Received-Date: Fri, 22 Sep 2017 13:09:42 -0000
+X-Groupsio-MsgNum: 68998
+Content-Type: multipart/signed; micalg=pgp-sha512;
+	protocol="application/pgp-signature"; boundary="cdd2xgkudoitl5qh"
 Content-Disposition: inline
 
---Fba/0zbH8Xs+Fj9o
+--cdd2xgkudoitl5qh
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 22, 2017 at 12:34:15PM +0100, Mike Crowe wrote:
-> On Friday 08 September 2017 at 14:48:02 +0100, Mike Crowe wrote:
-> > If we specify neither -system-pcre nor -qt-pcre then qtbase will first =
-see
-> > if it can find the pcre library in the system and fall back to compiling
-> > its own if that's not possible.
-> >=20
-> > Unfortunately, this means that if qtbase-native happens to be built on a
-> > machine with system pcre available then the resulting binaries such as
-> > bin/qt5/uic in sstate files won't work correctly on machines that don't
-> > have pcre available. Even ignoring that, it doesn't help for packages to
-> > build differently depending on how the build system is configured.
-> >=20
-> > We could depend on pcre-native and pass -system-pcre, but this doesn't =
-work
-> > by default because qtbase actually requires pcre16 which is an optional
-> > (via PACKAGECONFIG) feature of pcre so the default there would need to =
-be
-> > changed too.
-> >=20
-> > So, let's make qtbase-native match the default of qtbase by passing
-> > -qt-pcre in order to ensure that qtbase-native is always built with its
-> > own pcre implementation.
-> >=20
-> > Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> > ---
-> >  recipes-qt/qt5/qtbase-native_git.bb | 1 +
-> >  1 file changed, 1 insertion(+)
-> >=20
-> > diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbas=
-e-native_git.bb
-> > index 54a0b78..0951ede 100644
-> > --- a/recipes-qt/qt5/qtbase-native_git.bb
-> > +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> > @@ -46,6 +46,7 @@ PACKAGECONFIG_CONFARGS =3D " \
-> >      -sysroot ${STAGING_DIR_NATIVE} \
-> >      -no-gcc-sysroot \
-> >      -system-zlib \
-> > +    -qt-pcre \
-> >      -no-libjpeg \
-> >      -no-libpng \
-> >      -no-gif \
->=20
-> Does anyone have any objections to this?
->=20
-> We've been using it for several weeks now and it's not caused any observed
-> problems.
+On Friday 22 September 2017 at 14:55:27 +0200, Martin Jansa wrote:
+> It's already merged:
+> https://github.com/meta-qt5/meta-qt5/commit/743b3b93e17f5382fd1f9f4e0d2932501c8a3c78
 
-It's already merged:
-https://github.com/meta-qt5/meta-qt5/commit/743b3b93e17f5382fd1f9f4e0d29325=
-01c8a3c78
+Oh, silly me, I'd got confused and was expecting it to turn up in meta-oe.
+:(
 
->=20
-> Thanks.
->=20
-> Mike.
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Sorry for the noise.
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Mike.
 
---Fba/0zbH8Xs+Fj9o
+--cdd2xgkudoitl5qh
 Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
 
 -----BEGIN PGP SIGNATURE-----
 
-iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWcUIPgAKCRA3VSO3ZXaA
-HAUWAKCaSMkYCrHJ0nBg++F8qL7wBLt+wQCfR4cEm/8gzQG7t9mp1GUK0BFDcTk=
-=VTS0
+iQKTBAABCgB9FiEEO31CUs4nZTD3gcPy5JNpcNCXLfMFAlnFC4tfFIAAAAAALgAo
+aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldDNC
+N0Q0MjUyQ0UyNzY1MzBGNzgxQzNGMkU0OTM2OTcwRDA5NzJERjMACgkQ5JNpcNCX
+LfNyww//WgQJOIW3XnhuVhCJCDQLQsn/HbGouxH8SR0CCXzA0Y1o55a4O95JvZI9
+p5HtJKBRVCgdV4cLZoG7VyjYFMNq+mx+p+eLBVpmR0jGNbfLCOfZjrpu4GtyBnDB
+qi7LyQqruWhBviUPJMTNe72LA69NB1nFaSMD6kkbdUk8Ss57dQuCBfWvxDZRH9fH
+GnWNSdtfSuyPOO9jFUwppRuRrFX6rJMUxslAVVhRjSJjUXjLB8vo5USQVV02OzbC
+5lriZ/QWREetXxNKPGcI5Oms3RpR8MStOO7wWlGP0NqqRFxwsPUkhgr/Oqwc7hyR
+Cjx8eeZMymRyAKIDTBoCFZ5bM4TefVaFPlCmaKhRsQY7g60XSMTmsbYzsszlEMw5
+pHZbpd5CU2SHCwfO/JOwxf0RF79JR9YWi/pkRvZ2AVMKkZcVyys9Ost99Z4NoqxI
+4GtDWTFoNqz48TSYgeDemu6AEj4eWTk6il1/ZmUhgfGSodhV/Mwq7d23TQvtGj/R
+WFV92cN9so/eNNO72/7+FipV1omgVQhPtOssLQOrp5EZ+LVUFCULuSnXJDketS2l
+IQfWXoxgS7BcgOFBy9SB0QGWLTz9KqSvefnxUXwUY/OaaRonfuA3Te5CXJPkO3/7
+YpBzOcZRR5kCLkaXnKPDGY5r8P6RxuzVuR9U06m2bl1jvtZGBj4=
+=1sHZ
 -----END PGP SIGNATURE-----
 
---Fba/0zbH8Xs+Fj9o--
+--cdd2xgkudoitl5qh--
