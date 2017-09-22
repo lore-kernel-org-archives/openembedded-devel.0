@@ -1,31 +1,39 @@
-Return-Path: <mac@mcrowe.com>
-X-Greylist: delayed 457 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 22 Sep 2017 11:41:53 UTC
-Received: from avasout05.plus.net (avasout05.plus.net [84.93.230.250])
-	by mail.openembedded.org (Postfix) with ESMTP id 116E27825A
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 2029877D1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 11:41:53 +0000 (UTC)
-Received: from deneb ([80.229.24.9]) by avasout05 with smtp
-	id CbaG1w0080BmcFC01baHtz; Fri, 22 Sep 2017 12:34:17 +0100
-X-CM-Score: 0.00
-X-CNFS-Analysis: v=2.2 cv=Iav3YSia c=1 sm=1 tr=0
-	a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
-	a=kj9zAlcOel0A:10 a=2JCJgTwv5E4A:10 a=-An2I_7KAAAA:8
-	a=aK6yhzPy7F0GJM5Tdf4A:9
-	a=CjuIK1q_8ugA:10 a=Sq34B_EcNBM9_nrAYB9S:22
-Received: from mac by deneb with local (Exim 4.89)
-	(envelope-from <mac@mcrowe.com>) id 1dvMDn-0003RP-IB
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 22 Sep 2017 12:34:15 +0100
-Date: Fri, 22 Sep 2017 12:34:15 +0100
-From: Mike Crowe <mac@mcrowe.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20170922113415.5zum55yffbyzci7d@mcrowe.com>
-References: <20170908134802.13519-1-mac@mcrowe.com>
+	Fri, 22 Sep 2017 12:22:18 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	22 Sep 2017 05:22:19 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.42,427,1500966000"; d="scan'208";a="152200662"
+Received: from rkubodac-desk.ger.corp.intel.com ([10.252.56.185])
+	by orsmga005.jf.intel.com with ESMTP; 22 Sep 2017 05:22:18 -0700
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Trevor Woerner <twoerner@gmail.com>
+In-Reply-To: <20170920174336.GA19156@linux-uys3> (Trevor Woerner's message of
+	"Wed, 20 Sep 2017 13:43:37 -0400")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <CAHiDW_HFgnLbvd64hR8yE107BLtkWcp3eb=mA8towH73pMbUZQ@mail.gmail.com>
+	<CALbNGRQBRFeCuz5R10qhBHQGQ3hn7WO9i1SAZ5fV=4BqGepjrQ@mail.gmail.com>
+	<CALbNGRT6v530xCdqLp3CRHKOtBZpg8JqYreOsUhFL5u-eV2O2A@mail.gmail.com>
+	<CAP9ODKrwUkwdESj-qKrPjsKMN2=W-ZsYBb_+OYhbvrfgcoht2w@mail.gmail.com>
+	<87wp65rnfk.fsf@rkubodac-desk.ger.corp.intel.com>
+	<8d04fa9f-3049-45cf-4255-bd0159b84751@gmail.com>
+	<87r2wcajh6.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CALbNGRS1ywFbSNAoY976cPgJ4STQLqUEqzwq34XGaMH_CYhAaw@mail.gmail.com>
+	<20170816160609.GA29490@linux-uys3>
+	<87tvzylpvy.fsf@rkubodac-desk.ger.corp.intel.com>
+	<20170920174336.GA19156@linux-uys3>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Fri, 22 Sep 2017 14:22:17 +0200
+Message-ID: <87vakaditi.fsf@rkubodac-desk.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <20170908134802.13519-1-mac@mcrowe.com>
-User-Agent: NeoMutt/20170113 (1.7.2)
-Subject: Re: [meta-qt5][PATCH] qtbase-native: Force use of built-in pcre
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: chromium detected as stripped
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,54 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 11:41:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Sep 2017 12:22:19 -0000
+Content-Type: text/plain
 
-On Friday 08 September 2017 at 14:48:02 +0100, Mike Crowe wrote:
-> If we specify neither -system-pcre nor -qt-pcre then qtbase will first see
-> if it can find the pcre library in the system and fall back to compiling
-> its own if that's not possible.
-> 
-> Unfortunately, this means that if qtbase-native happens to be built on a
-> machine with system pcre available then the resulting binaries such as
-> bin/qt5/uic in sstate files won't work correctly on machines that don't
-> have pcre available. Even ignoring that, it doesn't help for packages to
-> build differently depending on how the build system is configured.
-> 
-> We could depend on pcre-native and pass -system-pcre, but this doesn't work
-> by default because qtbase actually requires pcre16 which is an optional
-> (via PACKAGECONFIG) feature of pcre so the default there would need to be
-> changed too.
-> 
-> So, let's make qtbase-native match the default of qtbase by passing
-> -qt-pcre in order to ensure that qtbase-native is always built with its
-> own pcre implementation.
-> 
-> Signed-off-by: Mike Crowe <mac@mcrowe.com>
-> ---
->  recipes-qt/qt5/qtbase-native_git.bb | 1 +
->  1 file changed, 1 insertion(+)
-> 
-> diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-> index 54a0b78..0951ede 100644
-> --- a/recipes-qt/qt5/qtbase-native_git.bb
-> +++ b/recipes-qt/qt5/qtbase-native_git.bb
-> @@ -46,6 +46,7 @@ PACKAGECONFIG_CONFARGS = " \
->      -sysroot ${STAGING_DIR_NATIVE} \
->      -no-gcc-sysroot \
->      -system-zlib \
-> +    -qt-pcre \
->      -no-libjpeg \
->      -no-libpng \
->      -no-gif \
+Hey Trevor,
 
-Does anyone have any objections to this?
+Thanks again for testing the recipe and providing great feedback.
 
-We've been using it for several weeks now and it's not caused any observed
-problems.
+Trevor Woerner <twoerner@gmail.com> writes:
+> When I compile chromium61 with pyro, I get a strange error. Every time the
+> python wrapper (gcc_link_wrapper.py) is called for a native compile (g++), I
+> get:
+[...]
+> This happens with both qemux86-64 and raspberrypi3. Unfortunately those log
+> files are 18M and 19M each, so I won't be attaching them. Why can't my build
+> find 'ld'? That seems quite strange. Probably some kind of ld vs gold issue?
+> I'm not using gold anywhere and have not enabled it, are you using gold?
 
-Thanks.
+You are correct. By default, Chromium will default to using gold (and
+passing -fuse-ld=gold like it did above) in most situations for both
+host and target builds (the error you posted is from building a native
+tool), as that's what upstream uses and tests.
 
-Mike.
+I've changed my recipe to respect the ld-is-gold DISTRO_FEATURE; the
+downside is that this setting applies to both host and target, so if one
+decides to use gold it also needs to be present on the host system:
+<https://github.com/rakuco/meta-crosswalk/commit/e7cfbf616f0bc524f9487d98c6e39e30ef28a639>
+
+> Compiling chromium61 with master gives a long error in breakpad. That log file
+> is 73K so I've attached it (log.do_compile__qemux86-64__chromium61_master_breakpad).
+> It appears to be a problem with the code itself. Here is the start:
+[...]
+> 	../../breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc: In static member function 'static uintptr_t google_breakpad::UContextReader::GetStackPointer(const google_breakpad::ucontext*)':
+> 	../../breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc:92:12: error: invalid use of incomplete type 'const struct google_breakpad::ucontext'
+
+This is actually caused by glibc 2.26, which removed 'struct ucontext'
+in favor of ucontext_t
+https://sourceware.org/glibc/wiki/Release/2.26#Removal_of_.27struct_ucontext.27
+
+meta-browser was fixed by Khem Raj with commit c2e44f94636 ("chromium:
+Fix build with security flags"), but my recipe didn't have anything
+similar.
+
+It turns out upstream actually fixed this issue a few days ago, so I was
+able to just backport their fix here:
+<https://github.com/rakuco/meta-crosswalk/commit/e7cfbf616f0bc524f9487d98c6e39e30ef28a639>
 
