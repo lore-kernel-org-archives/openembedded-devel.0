@@ -1,28 +1,27 @@
 Return-Path: <guy@guy-morand.ch>
-X-Greylist: delayed 925 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 22 Sep 2017 10:40:22 UTC
 Received: from smtp-sh2.infomaniak.ch (smtp-sh2.infomaniak.ch [128.65.195.6])
-	by mail.openembedded.org (Postfix) with ESMTP id 071806E5CB
+	by mail.openembedded.org (Postfix) with ESMTP id CE7ED7839A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 10:40:22 +0000 (UTC)
+	Fri, 22 Sep 2017 10:40:23 +0000 (UTC)
 Received: from smtp5.infomaniak.ch (smtp5.infomaniak.ch [83.166.132.18])
-	by smtp-sh.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8MAOv5Y017342
+	by smtp-sh.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8MAOvcv017334
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
 	verify=FAIL); Fri, 22 Sep 2017 12:24:57 +0200
 Received: from localhost.localdomain ([62.192.30.6]) (authenticated bits=0)
-	by smtp5.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8MAOspa039131
+	by smtp5.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8MAOspZ039131
 	(version=TLSv1/SSLv3 cipher=AES128-SHA256 bits=128 verify=NO);
 	Fri, 22 Sep 2017 12:24:57 +0200
 From: Guy Morand <guy@guy-morand.ch>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Sep 2017 12:24:51 +0200
-Message-Id: <1506075891-4205-3-git-send-email-guy@guy-morand.ch>
+Date: Fri, 22 Sep 2017 12:24:50 +0200
+Message-Id: <1506075891-4205-2-git-send-email-guy@guy-morand.ch>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1506075891-4205-1-git-send-email-guy@guy-morand.ch>
 References: <1506075891-4205-1-git-send-email-guy@guy-morand.ch>
+MIME-Version: 1.0
 X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
 X-Antivirus-Code: 0x100000
-Subject: [meta-python][PATCH 3/3] Add python3 pandas
+Subject: [meta-python][PATCH 2/3] Add python3 cycler
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,53 +34,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 10:40:23 -0000
+X-List-Received-Date: Fri, 22 Sep 2017 10:40:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
 ---
- .../python/python-pandas/python-pandas.inc          | 21 +++++++++++++++++++++
- .../python/python-pandas/python3-pandas_0.20.3.bb   |  5 +++++
- 2 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pandas/python-pandas.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pandas/python3-pandas_0.20.3.bb
+ .../recipes-devtools/python/python-cycler/python-cycler.inc | 13 +++++++++++++
+ .../python/python-cycler/python3-cycler_0.10.0.bb           |  6 ++++++
+ 2 files changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-cycler/python-cycler.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-cycler/python3-cycler_0.10.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pandas/python-pandas.inc b/meta-python/recipes-devtools/python/python-pandas/python-pandas.inc
+diff --git a/meta-python/recipes-devtools/python/python-cycler/python-cycler.inc b/meta-python/recipes-devtools/python/python-cycler/python-cycler.inc
 new file mode 100644
-index 0000000..9ca3806
+index 0000000..3351b27
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pandas/python-pandas.inc
-@@ -0,0 +1,21 @@
-+SUMMARY  = "pandas library for high-performance data analysis tools"
-+DESCRIPTION = "pandas is an open source, BSD-licensed library providing \
-+high-performance, easy-to-use data structures and data analysis tools for \
-+the Python programming language."
-+HOMEPAGE = "http://pandas.pydata.org/"
++++ b/meta-python/recipes-devtools/python/python-cycler/python-cycler.inc
+@@ -0,0 +1,13 @@
++SUMMARY  = "cycler consists of a class Cycler and a concatenation"
++DESCRIPTION = "The public API of cycler consists of a class Cycler, a \
++factory function cycler(), and a concatenation function concat(). The \
++factory function provides a simple interface for creating ‘base’ \
++Cycler objects while the class takes care of the composition and \
++iteration logic."
++HOMEPAGE = "http://matplotlib.org/cycler/"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=66017d3134349017409386be85176145"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=7713fe42cd766b15c710e19392bfa811"
 +
-+PYPI_PACKAGE = "pandas"
++PYPI_PACKAGE = "cycler"
 +
 +inherit pypi
-+
-+DEPENDS += " \
-+  ${PYTHON_PN}-numpy-native \
-+  "
-+
-+RDEPENDS_${PN} += " \
-+  ${PYTHON_PN}-numpy \
-+  ${PYTHON_PN}-dateutil \
-+  ${PYTHON_PN}-pytz \
-+  "
-diff --git a/meta-python/recipes-devtools/python/python-pandas/python3-pandas_0.20.3.bb b/meta-python/recipes-devtools/python/python-pandas/python3-pandas_0.20.3.bb
+diff --git a/meta-python/recipes-devtools/python/python-cycler/python3-cycler_0.10.0.bb b/meta-python/recipes-devtools/python/python-cycler/python3-cycler_0.10.0.bb
 new file mode 100644
-index 0000000..81dd360
+index 0000000..518adba
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pandas/python3-pandas_0.20.3.bb
-@@ -0,0 +1,5 @@
++++ b/meta-python/recipes-devtools/python/python-cycler/python3-cycler_0.10.0.bb
+@@ -0,0 +1,6 @@
 +inherit setuptools3
-+require python-pandas.inc
++require python-cycler.inc
 +
-+SRC_URI[md5sum] = "4df858f28b4bf4fa07d9fbb7f2568173"
-+SRC_URI[sha256sum] = "a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
++SRC_URI[md5sum] = "4cb42917ac5007d1cdff6cccfe2d016b"
++SRC_URI[sha256sum] = "cd7b2d1018258d7247a71425e9f26463dfb444d411c39569972f4ce586b0c9d8"
++
 -- 
 2.7.4
 
