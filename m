@@ -1,44 +1,28 @@
-Return-Path: <changhyeok.bae@gmail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 843A0782C6
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 8F57171C27
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 14:22:34 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id k63so773356uak.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 07:22:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=bwUT+QlJpOsunnA7hdeC1Ks6J8dMBCYW6mtNDxLODyQ=;
-	b=LFBrFfx/ZMDWrUfwmM6WQ9jv9ezFeZiPnazW+QnRSX/DLfcvzmshgHHlGGm+V18gJH
-	2tumvkFbZInJOTWuQT9A3/xQOBth6eJXcQ0yRdexLhRrSkAnPC2BShsaBXGS2Ay57IFi
-	EyrxkoPM29huKErTY230X4tq/aRujgblRcPCpAg2fTzeJLTWlj+gkIsi6hh5+96Br9LF
-	oSYGYVuRWuqmJ+QUMSuFyn4KYIPg4Tv/rYOMmeRhQ4dvshtyiMsIYvlnLIXZV3RvNGA3
-	sqz+iMIwuTI0g8zmL19fnwfytZLhB0NGxbmMkoPbA/Cagfsvb6EYXo5JXSIlbuM7e0wZ
-	gohQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=bwUT+QlJpOsunnA7hdeC1Ks6J8dMBCYW6mtNDxLODyQ=;
-	b=jgFAiaQoJ8ok5E57BeXfT1LM8QK0WN/ROdZzadNp3ju+XzxyWck2QUnJ5Zq1FuZe7l
-	vegIT2oD4+ztT7pL4q3mREUIbgvzp2m1I2s+f70Dywcka14R0r2ebi3PcY01Tb7faoU7
-	t0NlJk96u4bDNyj7M2xV+5I6+fDTRGefcuKkbKlAzFLHHetsxSL0Lt2Rt4DXPk6aVpIH
-	tR9ybSZjCOxOQ+cSzfguIwl4UnhdLOJrY2Q9ri3JFqXbK/yzcOxbPtAJR6uLrIUdkETW
-	dwZAHdDZrOhluolhul0GdskW1xh6ll4Aj6n4fYnpeKcrn+Vanr5TT0jv2BFNJCxMnxHZ
-	RgmA==
-X-Gm-Message-State: AHPjjUj4QRw9j0JMvWwJSJ7Xg2U2YIYzv66hKUIYC9Lv6O06uwE1vAQW
-	g/W8Y+hnp5jobqcsXNJXKtxOEF2T/zweXsjYtLg=
-X-Google-Smtp-Source: AOwi7QCt4/T5TfHq3obbvxH7n3cEm/EHWYqdS058SUZoVshf7JHj53dtQVaZjCi4Pil7WCb1yL7FpMrPkVvZHh6biNI=
-X-Received: by 10.176.25.218 with SMTP id r26mr5790042uai.97.1506090155167;
-	Fri, 22 Sep 2017 07:22:35 -0700 (PDT)
+	Fri, 22 Sep 2017 15:55:16 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v8MFtFQn000648
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 22 Sep 2017 08:55:15 -0700 (PDT)
+Received: from [172.25.44.7] (172.25.44.7) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 22 Sep 2017 08:55:14 -0700
+To: Changhyeok Bae <changhyeok.bae@gmail.com>,
+	<openembedded-devel@lists.openembedded.org>
+References: <CACrLJgAyV=KOputf8o8O9=Acqu=V7gSUyY6hhBBFPBVECTFhVQ@mail.gmail.com>
+From: Randy MacLeod <randy.macleod@windriver.com>
+Message-ID: <049f79b1-0d56-554d-60fa-f60ed2a66861@windriver.com>
+Date: Fri, 22 Sep 2017 11:54:59 -0400
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.31.87.70 with HTTP; Fri, 22 Sep 2017 07:22:34 -0700 (PDT)
-From: Changhyeok Bae <changhyeok.bae@gmail.com>
-Date: Fri, 22 Sep 2017 23:22:34 +0900
-Message-ID: <CACrLJgAyV=KOputf8o8O9=Acqu=V7gSUyY6hhBBFPBVECTFhVQ@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: How to use two toolchains
+In-Reply-To: <CACrLJgAyV=KOputf8o8O9=Acqu=V7gSUyY6hhBBFPBVECTFhVQ@mail.gmail.com>
+X-Originating-IP: [172.25.44.7]
+Subject: Re: How to use two toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,16 +35,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 14:22:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 22 Sep 2017 15:55:16 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Language: en-GB
+Content-Transfer-Encoding: 8bit
 
-Hi
+On 2017-09-22 10:22 AM, Changhyeok Bae wrote:
+> Hi
+> 
+> I would like to use 64 bit for kernel and 32 bit for userspace(rootfs).
+> Toolchain is created by OE (Not prebuilt toolchain)
+> Could you recommend good way to use different toolchains to achieve my goal?
+> If you have good examples, it's very helpful to me.
+> 
+> Thanks
+> Changhyeok
+> 
 
-I would like to use 64 bit for kernel and 32 bit for userspace(rootfs).
-Toolchain is created by OE (Not prebuilt toolchain)
-Could you recommend good way to use different toolchains to achieve my goal?
-If you have good examples, it's very helpful to me.
+This is referred to as a multilib build.
+This Stack Overflow entry should get you started:
 
-Thanks
-Changhyeok
+https://stackoverflow.com/questions/37271509/how-to-get-initramfs-libraries-for-32-and-64-bit-using-yocto
+
+Also see:
+5.6.2.2. Using Multilib¶
+http://www.yoctoproject.org/docs/2.3/mega-manual/mega-manual.html
+
+s/2.3/<your version of yocto>/
+
+-- 
+# Randy MacLeod.  WR Linux
+# Wind River an Intel Company
 
