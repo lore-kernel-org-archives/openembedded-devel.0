@@ -1,31 +1,44 @@
-Return-Path: <mac@mcrowe.com>
-Received: from avasout05.plus.net (avasout05.plus.net [84.93.230.250])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FA4E6E671
+Return-Path: <changhyeok.bae@gmail.com>
+Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
+	[209.85.217.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 843A0782C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Sep 2017 13:09:41 +0000 (UTC)
-Received: from deneb ([80.229.24.9]) by avasout05 with smtp
-	id Cd9h1w0030BmcFC01d9iTL; Fri, 22 Sep 2017 14:09:42 +0100
-X-CM-Score: 0.00
-X-CNFS-Analysis: v=2.2 cv=Iav3YSia c=1 sm=1 tr=0
-	a=E/9URZZQ5L3bK/voZ0g0HQ==:117 a=E/9URZZQ5L3bK/voZ0g0HQ==:17
-	a=2JCJgTwv5E4A:10 a=NEAV23lmAAAA:8 a=7n4iY1JKDu4sLFP8BDkA:9
-	a=CjuIK1q_8ugA:10
-	a=QWCVzCuMMVEA:10 a=xnSvYBgHsycrTbkdtoAA:9 a=ONNS8QRKHyMA:10
-Received: from mac by deneb with local (Exim 4.89)
-	(envelope-from <mac@mcrowe.com>)
-	id 1dvNi9-0007Yq-27; Fri, 22 Sep 2017 14:09:41 +0100
-Date: Fri, 22 Sep 2017 14:09:41 +0100
-From: Mike Crowe <mac@mcrowe.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20170922130941.h542v6gkslfyn74x@mcrowe.com>
-References: <20170908134802.13519-1-mac@mcrowe.com>
-	<20170922113415.5zum55yffbyzci7d@mcrowe.com>
-	<20170922125527.GB3815@jama>
+	Fri, 22 Sep 2017 14:22:34 +0000 (UTC)
+Received: by mail-ua0-f169.google.com with SMTP id k63so773356uak.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Sep 2017 07:22:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=bwUT+QlJpOsunnA7hdeC1Ks6J8dMBCYW6mtNDxLODyQ=;
+	b=LFBrFfx/ZMDWrUfwmM6WQ9jv9ezFeZiPnazW+QnRSX/DLfcvzmshgHHlGGm+V18gJH
+	2tumvkFbZInJOTWuQT9A3/xQOBth6eJXcQ0yRdexLhRrSkAnPC2BShsaBXGS2Ay57IFi
+	EyrxkoPM29huKErTY230X4tq/aRujgblRcPCpAg2fTzeJLTWlj+gkIsi6hh5+96Br9LF
+	oSYGYVuRWuqmJ+QUMSuFyn4KYIPg4Tv/rYOMmeRhQ4dvshtyiMsIYvlnLIXZV3RvNGA3
+	sqz+iMIwuTI0g8zmL19fnwfytZLhB0NGxbmMkoPbA/Cagfsvb6EYXo5JXSIlbuM7e0wZ
+	gohQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=bwUT+QlJpOsunnA7hdeC1Ks6J8dMBCYW6mtNDxLODyQ=;
+	b=jgFAiaQoJ8ok5E57BeXfT1LM8QK0WN/ROdZzadNp3ju+XzxyWck2QUnJ5Zq1FuZe7l
+	vegIT2oD4+ztT7pL4q3mREUIbgvzp2m1I2s+f70Dywcka14R0r2ebi3PcY01Tb7faoU7
+	t0NlJk96u4bDNyj7M2xV+5I6+fDTRGefcuKkbKlAzFLHHetsxSL0Lt2Rt4DXPk6aVpIH
+	tR9ybSZjCOxOQ+cSzfguIwl4UnhdLOJrY2Q9ri3JFqXbK/yzcOxbPtAJR6uLrIUdkETW
+	dwZAHdDZrOhluolhul0GdskW1xh6ll4Aj6n4fYnpeKcrn+Vanr5TT0jv2BFNJCxMnxHZ
+	RgmA==
+X-Gm-Message-State: AHPjjUj4QRw9j0JMvWwJSJ7Xg2U2YIYzv66hKUIYC9Lv6O06uwE1vAQW
+	g/W8Y+hnp5jobqcsXNJXKtxOEF2T/zweXsjYtLg=
+X-Google-Smtp-Source: AOwi7QCt4/T5TfHq3obbvxH7n3cEm/EHWYqdS058SUZoVshf7JHj53dtQVaZjCi4Pil7WCb1yL7FpMrPkVvZHh6biNI=
+X-Received: by 10.176.25.218 with SMTP id r26mr5790042uai.97.1506090155167;
+	Fri, 22 Sep 2017 07:22:35 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20170922125527.GB3815@jama>
-User-Agent: NeoMutt/20170113 (1.7.2)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5][PATCH] qtbase-native: Force use of built-in pcre
+Received: by 10.31.87.70 with HTTP; Fri, 22 Sep 2017 07:22:34 -0700 (PDT)
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Fri, 22 Sep 2017 23:22:34 +0900
+Message-ID: <CACrLJgAyV=KOputf8o8O9=Acqu=V7gSUyY6hhBBFPBVECTFhVQ@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: How to use two toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,47 +51,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 13:09:42 -0000
-X-Groupsio-MsgNum: 68998
-Content-Type: multipart/signed; micalg=pgp-sha512;
-	protocol="application/pgp-signature"; boundary="cdd2xgkudoitl5qh"
-Content-Disposition: inline
+X-List-Received-Date: Fri, 22 Sep 2017 14:22:34 -0000
+Content-Type: text/plain; charset="UTF-8"
 
---cdd2xgkudoitl5qh
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Hi
 
-On Friday 22 September 2017 at 14:55:27 +0200, Martin Jansa wrote:
-> It's already merged:
-> https://github.com/meta-qt5/meta-qt5/commit/743b3b93e17f5382fd1f9f4e0d2932501c8a3c78
+I would like to use 64 bit for kernel and 32 bit for userspace(rootfs).
+Toolchain is created by OE (Not prebuilt toolchain)
+Could you recommend good way to use different toolchains to achieve my goal?
+If you have good examples, it's very helpful to me.
 
-Oh, silly me, I'd got confused and was expecting it to turn up in meta-oe.
-:(
+Thanks
+Changhyeok
 
-Sorry for the noise.
-
-Mike.
-
---cdd2xgkudoitl5qh
-Content-Type: application/pgp-signature; name="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-iQKTBAABCgB9FiEEO31CUs4nZTD3gcPy5JNpcNCXLfMFAlnFC4tfFIAAAAAALgAo
-aXNzdWVyLWZwckBub3RhdGlvbnMub3BlbnBncC5maWZ0aGhvcnNlbWFuLm5ldDNC
-N0Q0MjUyQ0UyNzY1MzBGNzgxQzNGMkU0OTM2OTcwRDA5NzJERjMACgkQ5JNpcNCX
-LfNyww//WgQJOIW3XnhuVhCJCDQLQsn/HbGouxH8SR0CCXzA0Y1o55a4O95JvZI9
-p5HtJKBRVCgdV4cLZoG7VyjYFMNq+mx+p+eLBVpmR0jGNbfLCOfZjrpu4GtyBnDB
-qi7LyQqruWhBviUPJMTNe72LA69NB1nFaSMD6kkbdUk8Ss57dQuCBfWvxDZRH9fH
-GnWNSdtfSuyPOO9jFUwppRuRrFX6rJMUxslAVVhRjSJjUXjLB8vo5USQVV02OzbC
-5lriZ/QWREetXxNKPGcI5Oms3RpR8MStOO7wWlGP0NqqRFxwsPUkhgr/Oqwc7hyR
-Cjx8eeZMymRyAKIDTBoCFZ5bM4TefVaFPlCmaKhRsQY7g60XSMTmsbYzsszlEMw5
-pHZbpd5CU2SHCwfO/JOwxf0RF79JR9YWi/pkRvZ2AVMKkZcVyys9Ost99Z4NoqxI
-4GtDWTFoNqz48TSYgeDemu6AEj4eWTk6il1/ZmUhgfGSodhV/Mwq7d23TQvtGj/R
-WFV92cN9so/eNNO72/7+FipV1omgVQhPtOssLQOrp5EZ+LVUFCULuSnXJDketS2l
-IQfWXoxgS7BcgOFBy9SB0QGWLTz9KqSvefnxUXwUY/OaaRonfuA3Te5CXJPkO3/7
-YpBzOcZRR5kCLkaXnKPDGY5r8P6RxuzVuR9U06m2bl1jvtZGBj4=
-=1sHZ
------END PGP SIGNATURE-----
-
---cdd2xgkudoitl5qh--
