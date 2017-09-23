@@ -1,56 +1,51 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
-	[209.85.128.177])
-	by mail.openembedded.org (Postfix) with ESMTP id 44EEA6059F;
-	Sat, 23 Sep 2017 01:31:43 +0000 (UTC)
-Received: by mail-wr0-f177.google.com with SMTP id z39so1989808wrb.8;
-	Fri, 22 Sep 2017 18:31:45 -0700 (PDT)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8EDE478457
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Sep 2017 03:02:59 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id u18so1644218pgo.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Sep 2017 20:03:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to; bh=L9UQ6PQlfmb4PQ1fQM0lvimJpvazpLPR4HHjnaCf9VQ=;
-	b=jenoN7Qo923yGDKhTOybPLUmNu3sCwou2sS5QKUY+TC7I20mjYgJ19tOXrigrBG1x1
-	AfjJImG+hOBNLwhrZSMRIVofvPPQMPNE6+vApoydR6KBNYjaMCm6SBOfP7mXas/wZ9uj
-	hiJ0dukuID2o0gwfkIV7IBg6cTEBCvfmCcUGiUrgQNhyu7eS8zn85wIWjnJ6It43c+tI
-	47zoOE8+JabYRA4Bjagu6CHfN20mwIoHeB1mIdLEmhQbX5RSEHNlJAMf5fx5UY9Pk51g
-	ZC3R4CUa7j+9HXSrwT8RXXCAuvRHCvEmOFmRRTVVk2Iv9adQFU07yeOWtVkRePP/24sH
-	J0ew==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LFavsx44+kfdGJLkoLi7bMYKnKcqRbiIT4wJD7exsWk=;
+	b=pIv1f7sUfol8SrPsGRfegj5siPrVF2N3zwniY9bnmm4NGn6MI/0r7ZCx5+zWFtIXZz
+	tfWwkCb0iUtfLR9EN6pR5mFJqo9OTY3OxNy04E2w13Yn1D2X9lMsxXdTFqP0ZuS4SZOL
+	R9yWzJkxZnQR5Le7nF2Cbti0ramfWCSfYaBtegobdLodi4E+utYsrOUq84js4xyZaf50
+	SoytV/fD0d8CZE9pcJrE5mg/VH8BTPA/HPqJRcsxgrQvjHYAgFcez880DJxY0/LoT8aD
+	vmmLeu+5stu6Mgc9U1s54OP97Iv/dJjfyzlVzzO7G85mlwmMBa5XvCoACcxPO59UobIr
+	MFQA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to;
-	bh=L9UQ6PQlfmb4PQ1fQM0lvimJpvazpLPR4HHjnaCf9VQ=;
-	b=k6WWu/cTpjFjJ8z8xg5NEGaC0vicsISH6zeXlEzXfqyAvdKmTZoWywSYewD1dYjHoR
-	79QiaG+LAJlaPDmzkdXqL/9JBtC5aP+qVSOpFoFbC/cjQulzwNXgdu40QQgo9E7NzoE/
-	PYbNSV3r4tzbuHEsrD02rFwpVMM5HyDlwxDhU6zS0fIaUbhPl3q839kA4ezm770+bR0T
-	BWu4CwYY6fP1DZUUOn3G1OtsCu9MPDtU4aPUqF3qHX7WwbrN89zNeDB/qSZVM1htVRHo
-	2fj0pPQgi3Xt7GzvUdfDHvhpcO7JI7hdYz1ip0c6Vb7+2omyCVHyV3j6KF7dGQABPASP
-	LHHw==
-X-Gm-Message-State: AHPjjUhNLUPLnMqhYbjAp8Sf4gDwjYRmLI9PcR+0zTYf/kRDZG9Qz8o5
-	yUxB8sG1nY/425l0WfeDgTSzmyl1P1rXPcGQIifhyXgd
-X-Google-Smtp-Source: AOwi7QBWqxMXa7ySCHHyinzDQeihvu+QWNp4ac91OhYl+mCzEBZUBES3orJuaXcT1pxp5LifPbDGwsDUTYg+YKHZbIs=
-X-Received: by 10.223.147.195 with SMTP id 61mr619115wrp.119.1506130304491;
-	Fri, 22 Sep 2017 18:31:44 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=LFavsx44+kfdGJLkoLi7bMYKnKcqRbiIT4wJD7exsWk=;
+	b=t6Ho9aH9tHW7hxND8mZYIQ4jlrOWA/kMmrRnr8V/wU7L5tHX0h8c23stW6gsJZ6ax4
+	0PJ1Z5Od0xqCODCyjZOxqBlxz09Vdfla2hPOwNl1AHGB0QtRNc2uGj2tdjtGCaqQCJWG
+	0Yw3ws4BpHIENM5D8SUgX3ZBc9NlJp5LwMXyF115at4Pq3rn7uDi4hbwDsCcZIJ23v77
+	3kKDEa0zRPsac2rxrafDL/HLSVSAgeuMJVoqkGUCcOIzXHKqAbSwKokWFvDpDzAW/nwC
+	n1PQxoG/ioFL5Qhrj9VOw0mScevBRRyg/Vt0xLJIYOnaCoRirlyJ0isvA+WFP3tBWRkn
+	P/gQ==
+X-Gm-Message-State: AHPjjUhYm/67x/30hEdZTXrAoRx0EE+NEkstlXsDcvJ+yT7hKcYuPslt
+	fxjqsusIllaxno3MmOfSuSE=
+X-Google-Smtp-Source: AOwi7QAWSWFENjShFB7b1jtXvKG095/BkNxWf/xiPfnjNaNuc3L1CSLt5GfGMWpewAVhLTEZLxF8ig==
+X-Received: by 10.101.65.77 with SMTP id x13mr995539pgp.144.1506135780478;
+	Fri, 22 Sep 2017 20:03:00 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
+	([2601:202:4001:9ea0:d126:a20b:717e:18a0])
+	by smtp.gmail.com with ESMTPSA id
+	r22sm1421829pfe.78.2017.09.22.20.02.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 22 Sep 2017 20:02:59 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Fri, 22 Sep 2017 20:02:58 -0700
+Message-Id: <1506135778-13189-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.223.134.180 with HTTP; Fri, 22 Sep 2017 18:31:23 -0700 (PDT)
-In-Reply-To: <01e52917-81d7-74c0-c899-b242e80d363c@gmail.com>
-References: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-	<CAHUNapQDGe3b4Nmg6OmL0hxkMGyY9e3z=GKdkOW8VuJe9-q2Ew@mail.gmail.com>
-	<CAMKF1spb4tz=te84G=JA40HxiF+wX=YSJnJcK8viyx_OwZ87uw@mail.gmail.com>
-	<CA+YB3rZv+=nB=7J98XGqemV5GHW3QkmA7siyn-vArqfK8GHKmA@mail.gmail.com>
-	<8eedf692-5a12-f5a6-b9da-8184849a7a50@gmail.com>
-	<CA+YB3rZd0P6eVimXD5jN0UZMB=dH2h2mdScmeB8PtjSWLZNMfg@mail.gmail.com>
-	<01e52917-81d7-74c0-c899-b242e80d363c@gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Fri, 22 Sep 2017 18:31:23 -0700
-X-Google-Sender-Auth: VV9DBTqUBxm6KzAG0JDntTkEa-Q
-Message-ID: <CA+YB3rYD8pggjS0dJbHuJvaA4jo7hcdDsavSNKuJhn5x0Y2MuQ@mail.gmail.com>
-To: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, 
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: OE general meeting before OEDEM next month.
+Subject: [rocko][PATCH][Maintainership] README: update maintainers list for rocko
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,29 +58,309 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Sep 2017 01:31:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 23 Sep 2017 03:02:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Ruslan asked - is it free to attend?
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ meta-filesystems/README     | 12 +++++++-----
+ meta-gnome/README           | 11 ++++++-----
+ meta-initramfs/README       | 10 +++++-----
+ meta-multimedia/README      | 15 +++++++--------
+ meta-networking/MAINTAINERS |  7 +++++--
+ meta-oe/README              | 10 +++++-----
+ meta-perl/README            |  9 +++++----
+ meta-python/README          |  4 ++--
+ meta-webserver/README       |  4 ++--
+ meta-xfce/README            | 11 ++++++-----
+ 10 files changed, 50 insertions(+), 43 deletions(-)
 
-Yes, it is free - the space, including network access, coffee & lunch etc.
-is donated by the Yocto project. All you need to do is make sure your name
-is on the OEDEM list on the wiki here:
+diff --git a/meta-filesystems/README b/meta-filesystems/README
+index d2716f8..9ddd09e 100644
+--- a/meta-filesystems/README
++++ b/meta-filesystems/README
+@@ -10,22 +10,22 @@ Dependencies
+ This layer depends on:
+ 
+   URI: git://git.openembedded.org/bitbake
+-  branch: master
++  branch: 1.28
+ 
+   URI: git://git.openembedded.org/openembedded-core
+   layers: meta
+-  branch: master
++  branch: rocko
+ 
+   URI: git://git.openembedded.org/meta-openembedded
+   layers: meta-oe
+-  branch: master
++  branch: rocko
+ 
+ Patches
+ =======
+ 
+ Please submit any patches against the filesystems layer to the
+ OpenEmbedded development mailing list (openembedded-devel@lists.openembedded.org)
+-with '[meta-filesystems]' in the subject.
++with '[meta-filesystems][rocko]' in the subject.
+ 
+ Maintainers List:
+   physfs      Andreas Müller <schnitzeltony@googlemail.com>
+@@ -66,8 +66,10 @@ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-filesystems][PATCH
++        --subject-prefix=meta-filesystems][rocko][PATCH
+ 
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+ 
+ Table of Contents
+ =================
+diff --git a/meta-gnome/README b/meta-gnome/README
+index 0c4fbd2..25ef85d 100644
+--- a/meta-gnome/README
++++ b/meta-gnome/README
+@@ -1,16 +1,17 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-gnome][rocko]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-gnome][rocko][PATCH'
+ 
+-Interim layer maintainer: Martin Jansa <Martin.Jansa@gmail.com>
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-initramfs/README b/meta-initramfs/README
+index e24acf9..b7dbfef 100644
+--- a/meta-initramfs/README
++++ b/meta-initramfs/README
+@@ -12,7 +12,7 @@ Dependencies
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+ 
+@@ -20,13 +20,13 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org
+-with '[meta-initramfs]' in the subject.
++with '[meta-initramfs][rocko]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-initramfs][rocko][PATCH'
+ 
+-Layer maintainers: Andrea Adami <andrea.adami@gmail.com>
+-                   Paul Eggleton <paul.eggleton@linux.intel.com>
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+ 
+ 
+ License
+diff --git a/meta-multimedia/README b/meta-multimedia/README
+index cbdc1b5..b59dfe0 100644
+--- a/meta-multimedia/README
++++ b/meta-multimedia/README
+@@ -1,21 +1,20 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-layers: meta-oe, meta-ruby
+-branch: master
++layers: meta-oe
++branch: rocko
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-multimedia][rocko]' in the subject'
+ 
+ When sending single patches, please use something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][PATCH
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-multimedia][rocko][PATCH
+ 
+ You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+ 
+-Main layer maintainers: Koen Kooi <koen@dominion.thruhere.net>
+-                        Martin Jansa <martin.jansa@gmail.com>
+-
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-networking/MAINTAINERS b/meta-networking/MAINTAINERS
+index bbb2d1b..771c73c 100644
+--- a/meta-networking/MAINTAINERS
++++ b/meta-networking/MAINTAINERS
+@@ -2,13 +2,16 @@ This file contains a list of maintainers for the meta-networking layer.
+ 
+ Please submit any patches against meta-networking to the OpenEmbedded
+ development mailing list (openembedded-devel@lists.openembedded.org) with
+-'[meta-networking]' in the subject.
++'[meta-networking][rocko]' in the subject.
+ 
+ When sending single patches, please use something like:
+ 
+    git send-email -1 -M \
+         --to openembedded-devel@lists.openembedded.org \
+-        --subject-prefix=meta-networking][PATCH
++        --subject-prefix=meta-networking][rocko][PATCH
++
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+ 
+ You may also contact the maintainers directly.
+ 
+diff --git a/meta-oe/README b/meta-oe/README
+index 6ad87c5..dabed2f 100644
+--- a/meta-oe/README
++++ b/meta-oe/README
+@@ -1,15 +1,15 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-oe][rocko]' in the subject'
+ 
+ When sending single patches, please use something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-oe][rocko][PATCH'
+ 
+ You are encouraged to fork the mirror on github https://github.com/openembedded/meta-oe/ to share your patches, this is preferred for patch sets consisting of more than one patch. Other services like gitorious, repo.or.cz or self hosted setups are of course accepted as well, 'git fetch <remote>' works the same on all of them. We recommend github because it is free, easy to use, has been proven to be reliable and has a really good web GUI.
+ 
+-Main layer maintainer: Koen Kooi <koen@dominion.thruhere.net>
+-                       Martin Jansa <martin.jansa@gmail.com>
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+diff --git a/meta-perl/README b/meta-perl/README
+index 68160a6..cc965af 100644
+--- a/meta-perl/README
++++ b/meta-perl/README
+@@ -52,7 +52,7 @@ Dependencies
+ This layer depends on:
+ 
+   URI: git://git.openembedded.org/openembedded-core
+-  branch: master
++  branch: rocko 
+   revision: HEAD
+   prio: default
+ 
+@@ -75,12 +75,13 @@ Maintenance
+ -----------
+ 
+ Send patches / pull requests to openembedded-devel@lists.openembedded.org with
+-'[meta-perl]' in the subject.
++'[meta-perl][rocko]' in the subject.
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-perl][rocko][PATCH'
+ 
+-Layer maintainer: Hongxu Jia <hongxu.jia@windriver.com>
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+ 
+ License
+ -------
+diff --git a/meta-python/README b/meta-python/README
+index 905d5ee..43740f6 100644
+--- a/meta-python/README
++++ b/meta-python/README
+@@ -17,12 +17,12 @@ The meta-python layer depends on:
+ 
+ 	URI: git://git.openembedded.org/openembedded-core
+ 	layers: meta
+-	branch: master
++	branch: rocko 
+ 	revision: HEAD
+ 
+ 	URI: git://git.openembedded.org/meta-openembedded
+ 	layers: meta-oe
+-	branch: master
++	branch:  rocko
+ 	revision: HEAD
+ 
+ Please follow the recommended setup procedures of your OE distribution.
+diff --git a/meta-webserver/README b/meta-webserver/README
+index 7b60630..f2928ab 100644
+--- a/meta-webserver/README
++++ b/meta-webserver/README
+@@ -13,14 +13,14 @@ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+ subdirectory: meta
+-branch: master
++branch: rocko 
+ revision: HEAD
+ 
+ For some recipes, the meta-oe layer is required:
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+ subdirectory: meta-oe
+-branch: master
++branch: rocko 
+ revision: HEAD
+ 
+ 
+diff --git a/meta-xfce/README b/meta-xfce/README
+index 33ef509..3367797 100644
+--- a/meta-xfce/README
++++ b/meta-xfce/README
+@@ -1,11 +1,11 @@
+ This layer depends on:
+ 
+ URI: git://github.com/openembedded/oe-core.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ 
+ URI: git://github.com/openembedded/meta-oe.git
+-branch: master
++branch: rocko
+ revision: HEAD
+ meta-xfce depends on meta-oe, meta-gnome and meta-multimedia in this repository.
+ 
+@@ -14,9 +14,10 @@ this to local.conf:
+ 
+ BBMASK = "meta-xfce/recipes-multimedia"
+ 
+-Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce]' in the subject'
++Send pull requests to openembedded-devel@lists.openembedded.org with '[meta-xfce][rocko]' in the subject'
+ 
+ When sending single patches, please using something like:
+-'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][PATCH'
++'git send-email -M -1 --to openembedded-devel@lists.openembedded.org --subject-prefix=meta-xfce][rocko][PATCH'
+ 
+-Interim layer maintainer: Andreas Müller <schnitzeltony@googlemail.com>
++rocko Branch Maintainer:
++Armin Kuster <akuster808@gmail.com>
+-- 
+2.7.4
 
-https://www.openembedded.org/wiki/OEDEM_2017
-
-and bring your wit & charm as well as your ideas. Note that we may or may
-not have a projector this year, so please also bring a laptop.
-
-This is a community effort and one way to help is to help take notes during
-the day. For the past few events, we have kept notes live in a Google doc
-so many people could edit simultaneously. We will likely do that again this
-year.
-
-I am responsible for organizing the room and amenities. At this point we
-have about 25% more people than we have had in the past, so if you add your
-name please let me know personally at jefro@jefro.net and I will make sure
-we have adequate space for you.
-
-thanks
 
