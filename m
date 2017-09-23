@@ -1,56 +1,49 @@
-Return-Path: <jefro.net@gmail.com>
-Received: from mail-wr0-f172.google.com (mail-wr0-f172.google.com
-	[209.85.128.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 9ED47783C5;
-	Fri, 22 Sep 2017 20:51:18 +0000 (UTC)
-Received: by mail-wr0-f172.google.com with SMTP id z39so1745523wrb.8;
-	Fri, 22 Sep 2017 13:51:20 -0700 (PDT)
+Return-Path: <changhyeok.bae@gmail.com>
+Received: from mail-vk0-f43.google.com (mail-vk0-f43.google.com
+	[209.85.213.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 7BBAF7839E
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 23 Sep 2017 00:15:53 +0000 (UTC)
+Received: by mail-vk0-f43.google.com with SMTP id g69so1345408vke.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 22 Sep 2017 17:15:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:sender:in-reply-to:references:from:date:message-id
-	:subject:to:cc;
-	bh=/P41Q8rFURFvmSXiAqY1ubEmMnsQXImpPHD1asQAkfk=;
-	b=NHrYcq25nU08bS1HBZO36Qy6E8ESweCdmQTuEFNFchy0QkYYHuSDSazad6ptfdX7BF
-	jweAARAt6SPvno4p0v1S8uFZjBFB6FVI+Qn+MhYJWBenyVtE4/8w2EMUH3jXvhZ+EJS4
-	GmeAYWWHVc6cImS8xQEJp33tliyXiydr5xipxPVHmkG1lLNhr/0gqDOzodr3paGkmRGm
-	ro3QD+Pqf/KLFvPbyb8hmyzv80ia5SaMke9+tE9pNfarmmvaBb3ukto1WC/P33YSQFbJ
-	ybre0N3D0mgRL4tdOMJzxfsaCRpXYZQagjyTJxJwsckIYvMJQGqiMTKoqU0WqPC/9PKE
-	CswQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=z6la+FcZdbnRLTgWEGah4Rrf8RmJTjvLiNnHoAwFvig=;
+	b=ixX4720rLSXZHH0dQWHu+eL3WkUm5Vr8FhW/0kL2XVCUvJA8y55Jl5AJVG4EmcikKh
+	ehKBwJLWhlAZ5S/nigUQpddnWxj8GG07eE8S4ITwF+ZuLEyocAvplroD+A70l8rm5+Vm
+	g0KbO5+fo1j8aGn1SvlSG84q3dV0NPB74HLjGL6Ph6MzuYaeswa5ZU+hXanDkNZ2ovSg
+	jw8ECN4E5X0m7ZZNnqTrp3rqW8m22ypbLh360alNnmh8BHn/ydTUgJP2+wo5ZC/Fsn1w
+	7att3mT08Urtw2vh9GwK+qRV8IIUoCZqKa7LAM35fqcB1hI+wObPKx06+rTuR/KvyCq2
+	Kspg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:sender:in-reply-to:references:from
-	:date:message-id:subject:to:cc;
-	bh=/P41Q8rFURFvmSXiAqY1ubEmMnsQXImpPHD1asQAkfk=;
-	b=C4unvb3QD0CxUYPZDS2BNeI7F4uyBeKHncsHWM678DbGsf/654T8wZVCEhRvZI1jdd
-	OHB1UX0flyjvqyOECHNRt9ESLAvLn3X/OjpXlUphaL5EzqoiYGV9ey4ngHM+GOfTKWA2
-	4HZYiuas6+9D8YqhZHgpqA+H6pqoSpD3TGw8vZy2D3VmJyCvRdKNuafvXUE/lvKFfBog
-	BYqwEcdKFW0qNhue8yN6qCZR+6Iyw4+IN7el93ANfKVrNo7SMT6YiuCecr3THM+7PeOD
-	oUi8DjJsM1M0mUOOzf5ZTCyRkqc6GM8zQRCeNxB5TubzpqngKO71MlaMeYDfLZeJgP1w
-	sOGg==
-X-Gm-Message-State: AHPjjUhmFrEdynaSrzL8ymQzY/2sCr8eAEcJxsWzoUHK6msme2qhgOBw
-	1c4Chb0NTnbnouhH9JO3nvMgTWSTZs1FswM4quw=
-X-Google-Smtp-Source: AOwi7QBOyEvWG03uzZbHD6oThmb0Q3H60NsY3+9iiddCnkMnoelGN/FUTVhY9n7XAtarabGFmlC3s5ryoc22ALeGX2U=
-X-Received: by 10.223.145.5 with SMTP id j5mr269803wrj.114.1506113479227; Fri,
-	22 Sep 2017 13:51:19 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=z6la+FcZdbnRLTgWEGah4Rrf8RmJTjvLiNnHoAwFvig=;
+	b=EvaEkC7Uorp/60hgfP3P5I9WeIcjiRNeXBZMGD2cGY0jldRlB4DzJmfsy1kO/LDmuN
+	tMEj+GdJHY6BVg9IGT5ypaSmRV8I2S/3zmVl1TMgx5gHTMaSU7G1Rg94bdvPVmj1B6zB
+	Zs8BxSBWVmGwykSvk0eaT6/Y/LBM1sK4hBBD5foPhC27gNf5L/yP4fWMMsZ8mJXonHsD
+	Q9fmcc2zinaR21QssJ5Mmd1mSNPlx6FuZX/esEtpbYxm+StRS8nrfD4s/s8ZU14xLwAw
+	9n+OdGV0+SUx6k/Zfi2UomSbIFUVKBqa7InZJcnN8Ukp2mZRZJj+MLnrr7fM1NXIjXkr
+	K7PA==
+X-Gm-Message-State: AHPjjUjP4ZjAacZqyeUHM6adZvIln+KEtjFIShoPEBBznHuL3qgv98Q3
+	sGWF9suCrt0kgDf0KNEqdRF1viAxZKXwZBVJiMg=
+X-Google-Smtp-Source: AOwi7QAF6z7YpWiUMsD8DCdvBotVJI09o+6oQ4ZHFbave8m1onYjXJXqbxgB/B58mnR6nmQVMB9Ktaw5Y29k2YzJe/8=
+X-Received: by 10.31.96.16 with SMTP id u16mr773337vkb.176.1506125754613; Fri,
+	22 Sep 2017 17:15:54 -0700 (PDT)
 MIME-Version: 1.0
-Sender: jefro.net@gmail.com
-Received: by 10.223.134.180 with HTTP; Fri, 22 Sep 2017 13:50:58 -0700 (PDT)
-In-Reply-To: <8eedf692-5a12-f5a6-b9da-8184849a7a50@gmail.com>
-References: <c2ec1aa7-8279-78f1-6523-c345af1ffe8f@mentor.com>
-	<CAHUNapQDGe3b4Nmg6OmL0hxkMGyY9e3z=GKdkOW8VuJe9-q2Ew@mail.gmail.com>
-	<CAMKF1spb4tz=te84G=JA40HxiF+wX=YSJnJcK8viyx_OwZ87uw@mail.gmail.com>
-	<CA+YB3rZv+=nB=7J98XGqemV5GHW3QkmA7siyn-vArqfK8GHKmA@mail.gmail.com>
-	<8eedf692-5a12-f5a6-b9da-8184849a7a50@gmail.com>
-From: Jeff Osier-Mixon <jefro@jefro.net>
-Date: Fri, 22 Sep 2017 13:50:58 -0700
-X-Google-Sender-Auth: cihyw5iEWrPXJSgS2mZDafz1JJQ
-Message-ID: <CA+YB3rZd0P6eVimXD5jN0UZMB=dH2h2mdScmeB8PtjSWLZNMfg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+Received: by 10.31.87.70 with HTTP; Fri, 22 Sep 2017 17:15:54 -0700 (PDT)
+In-Reply-To: <CAMKF1srBOJ9_E4sDx5iH8-r9b0NayX0-Wh-d4yWi9Ahjps2MNQ@mail.gmail.com>
+References: <CACrLJgAyV=KOputf8o8O9=Acqu=V7gSUyY6hhBBFPBVECTFhVQ@mail.gmail.com>
+	<CAMKF1srBOJ9_E4sDx5iH8-r9b0NayX0-Wh-d4yWi9Ahjps2MNQ@mail.gmail.com>
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Sat, 23 Sep 2017 09:15:54 +0900
+Message-ID: <CACrLJgB3TDPRuehnJ8xg8nqF_XjEVQyuVjL=NdQAWoWTwKxrgA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: OE general meeting before OEDEM next month.
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: How to use two toolchains
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,56 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Sep 2017 20:51:19 -0000
+X-List-Received-Date: Sat, 23 Sep 2017 00:15:53 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Up to 36 now. I am in touch with the venue. The table was originally set
-for 30 and could comfortably accommodate 34 in boardroom style. Given
-natural attrition of 10% I think we are okay in this regard, with
-latecomers seated around the edges. If we grow much larger I will either
-have to pay for a larger room or ask them to seat the room theater-style,
-where it can probably hold up to 50. I'll see how we do later in the cycle
-before deciding.
+Hi Khem, Randy
 
-On Wed, Sep 20, 2017 at 5:57 PM, akuster808 <akuster808@gmail.com> wrote:
+Thanks for your comment and I'll try using multilib.
 
-> Jefro,
->
-> We have 33 folks listed. Do we have room?
->
-> regards,
->
-> Armin
->
->
-> On 09/20/2017 11:24 AM, Jeff Osier-Mixon wrote:
-> > Zoom might be easier, as people can dial in or connect online. We'll make
-> > it work.
+I found another option in
+https://www.openembedded.org/wiki/Adding_a_secondary_toolchain
+
+Thanks
+Changhyeok
+
+2017-09-23 0:55 GMT+09:00 Khem Raj <raj.khem@gmail.com>:
+
+> On Fri, Sep 22, 2017 at 7:22 AM, Changhyeok Bae
+> <changhyeok.bae@gmail.com> wrote:
+> > Hi
 > >
-> > On Tue, Sep 19, 2017 at 12:13 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> >> On Tue, Sep 19, 2017 at 9:54 AM, Trevor Woerner <twoerner@gmail.com>
-> >> wrote:
-> >>> On Tue, Sep 19, 2017 at 11:34 AM, Sean Hudson <sean_hudson@mentor.com>
-> >> wrote:
-> >>>>   Meeting information, including dial-in numbers, is on the wiki. [2]
-> >>> In addition to the above, we could also make use of the little-used
-> >>> #oe-meeting channel on freenode (?)
-> >> +1
-> >>
-> >> I can dial in. Or someone can setup a zoom meeting
-> >> --
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>
-> >
-> >
+> > I would like to use 64 bit for kernel and 32 bit for userspace(rootfs).
+> > Toolchain is created by OE (Not prebuilt toolchain)
+> > Could you recommend good way to use different toolchains to achieve my
+> goal?
 >
+> I think you can look into multilib where, 64bit is default but then you
+> constuct
+> an image where rootfs is virtually just 32bit packages
 >
+> > If you have good examples, it's very helpful to me.
+> >
+> > Thanks
+> > Changhyeok
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
+
 
 
 -- 
-Jeff Osier-Mixon - Open Source Community Manager, Intel Corporation
+Thanks
+Changhyeok
 
