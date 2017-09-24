@@ -1,26 +1,46 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 488F37830A
+Return-Path: <bill.randle@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 1EF0977E0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 24 Sep 2017 01:04:56 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v8O14urw025401
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 23 Sep 2017 18:04:56 -0700 (PDT)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Sat, 23 Sep 2017 18:04:55 -0700
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Sun, 24 Sep 2017 08:51:20 +0800
-Message-ID: <20170924005120.28783-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20170924005120.28783-1-kai.kang@windriver.com>
-References: <20170924005120.28783-1-kai.kang@windriver.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 1/1] lvm2: refactoring code to disable package config thin-provisioning-tools
+	Sun, 24 Sep 2017 17:31:40 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id m30so3650325pgn.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 24 Sep 2017 10:31:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=GoNlnyxxeLW97KuW1N2jx926kTfRe+nv9bOaABA9W/8=;
+	b=buJyW4+mpHBkq1q3KWWD1LUP8e7ycn5F1pQm++oPAWDjPRCkaTAFJvSsrBi9hLGhNX
+	pWH2Hoz3MOL2sAivx8hvyLDEYoBGage5BXPA0W86GATq4SXYH9zZhWzUNEmuyL28/3vS
+	wxuAb8LfX0QvJ+Hwt05SBoGWYM5YCrfsJkDKjpwRgEbixZ9hzdgrPhBhEZjgm492JJ1Z
+	DweayL33HOBgjLNbqfYgT2EAmeaRn1h82j5uu2IncGYU1RLRa0EQ9cAAF+3eab8AMN2W
+	WWS6wFP6jZ70PKq6Q+SikM6DwQ2KCGuj6URr7lFaGCIIbI6N/ch9hgXblF1m0Rx3d2rW
+	1dng==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=GoNlnyxxeLW97KuW1N2jx926kTfRe+nv9bOaABA9W/8=;
+	b=BYr35xR6+R1XOLbW424wBa00hwCtwItGVtlKl2VJROmJhfoX2Ov62dJ4rw6N/KtZVE
+	IIAnVNYQgZtdzRxPGAAwc35DSSoMfxSVmmn0qumIrNIzESjNqCMFivzaDhEqT/1niixB
+	1YhYbBnipTFhw4BZ3FK9/3XDCEErLiy0eeC1up20nNYdVZqv7UXun98gnkYZv1Me5/HM
+	K8DPt4dv2+W/xsY9972d2jve1wz03owsAqVLtsVDqrzTAYLTXWsjDZFnGMt/r34UUhzf
+	AN/Jyj+q1cnRdYX+DGX3ayNVoY+NzL/NvccEuMA7pD9Y4SnF50fNzUiV5ZnW2q66ocFQ
+	uLGg==
+X-Gm-Message-State: AHPjjUjU23BnFgOJpuofnAe9GWptHtqe32A6QjOIMQL0ryfof4+Z+CpZ
+	OGhwdjTOk/wwOXW+yTOno9ZY7A==
+X-Google-Smtp-Source: AOwi7QDPjmUK+G3KqQbH4wJSN+69QNz21HHs6yoZ6o9Ydeih0mq0PlFcZkeh/9a9o3/aKPPzdtT8RA==
+X-Received: by 10.99.55.92 with SMTP id g28mr5215723pgn.59.1506274301648;
+	Sun, 24 Sep 2017 10:31:41 -0700 (PDT)
+Received: from neosoft.neocat.org (67-5-150-243.ptld.qwest.net. [67.5.150.243])
+	by smtp.gmail.com with ESMTPSA id
+	e66sm7743431pfb.48.2017.09.24.10.31.40
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 24 Sep 2017 10:31:41 -0700 (PDT)
+From: Bill Randle <bill.randle@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 24 Sep 2017 10:31:31 -0700
+Message-Id: <1506274291-11120-1-git-send-email-bill.randle@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] net-snmp: check that executable is used before testing for existance
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,41 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Sep 2017 01:04:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Sun, 24 Sep 2017 17:31:41 -0000
 
-From: Kai Kang <kai.kang@windriver.com>
+The recipe for net-snmp has snmpd and snmptrapd in seperate packages, so one or the other
+or both could be installed. In a common case where only snmpd is installed, the startup
+script will fail to run because the snmptrapd executable does not exist.
 
-There are 2 GPL variations 'GPLv3' and 'GPLv3.0' for canonical (SPDX) form
-of 'GPL-3.0' now. Refactoring code to use function
-incompatible_license_contains() from license.bbclass to filter them all
-to disable package config 'thin-provisioning-tools'.
+This patch simply qualifies the test by first checking to see if the executable is to
+be used.
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
+    -Bill
+
+Signed-off-by: Bill Randle <bill.randle@gmail.com>
 ---
- meta-oe/recipes-support/lvm2/lvm2.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-networking/recipes-protocols/net-snmp/files/init | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/lvm2/lvm2.inc b/meta-oe/recipes-support/lvm2/lvm2.inc
-index d2c147417..289e07d8d 100644
---- a/meta-oe/recipes-support/lvm2/lvm2.inc
-+++ b/meta-oe/recipes-support/lvm2/lvm2.inc
-@@ -19,12 +19,12 @@ SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
-            "
- S = "${WORKDIR}/LVM2.${PV}"
+diff --git a/meta-networking/recipes-protocols/net-snmp/files/init b/meta-networking/recipes-protocols/net-snmp/files/init
+index 2b8fe18..4799546 100755
+--- a/meta-networking/recipes-protocols/net-snmp/files/init
++++ b/meta-networking/recipes-protocols/net-snmp/files/init
+@@ -3,9 +3,6 @@
  
--inherit autotools-brokensep pkgconfig systemd
-+inherit autotools-brokensep pkgconfig systemd license
+ . /etc/init.d/functions
  
- LVM2_PACKAGECONFIG = "dmeventd lvmetad"
- LVM2_PACKAGECONFIG_append_class-target = " \
-     ${@bb.utils.filter('DISTRO_FEATURES', 'selinux', d)} \
--    ${@bb.utils.contains('INCOMPATIBLE_LICENSE', 'GPLv3', '', 'thin-provisioning-tools', d)} \
-+    ${@incompatible_license_contains('GPLv3', '', 'thin-provisioning-tools', d)} \
-     udev \
- "
+-test -x /usr/sbin/snmpd || exit 0
+-test -x /usr/sbin/snmptrapd || exit 0
+-
+ # Defaults
+ export MIBDIRS=/usr/share/snmp/mibs
+ SNMPDRUN=yes
+@@ -18,6 +15,9 @@ SPIDFILE=/var/run/snmptrapd.pid
+ # Reads config file if exists (will override defaults above)
+ [ -r /etc/default/snmpd ] && . /etc/default/snmpd
  
++[ "$SNMPDRUN" = "yes" ] && { test -x /usr/sbin/snmpd || exit 0; }
++[ "$TRAPDRUN" = "yes" ] && { test -x /usr/sbin/snmptrapd || exit 0; }
++
+ case "$1" in
+   start)
+     echo -n "Starting network management services:"
 -- 
-2.14.1
+2.7.4
 
 
