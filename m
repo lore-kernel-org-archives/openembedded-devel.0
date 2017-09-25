@@ -1,50 +1,49 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
-	[209.85.214.44])
-	by mail.openembedded.org (Postfix) with ESMTP id 7F68377809
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id A7F5C71B1D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 19:03:57 +0000 (UTC)
-Received: by mail-it0-f44.google.com with SMTP id c195so245501itb.4
+	Mon, 25 Sep 2017 22:19:47 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1506377989; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=iuEj+PB/TMx19GNO0i/RvK+ffRYZ+g4ba3CWwzNbMmc=;
+	b=MXPRKJn22KOGgn+8NAAQ76H7D3w6EBnuKTFpCzlm5+58mXvg7tnyMIlUpyZWIi42vJk17RHN
+	pPlyGBzD96YTqivmVlJBuyyDDWC5VHDEzJYvzCZj38265JBbzDLPVtiQaXQa0mMXEcRIMkgk
+	5HpTqlQ4G0whkM4DKxiIm53vfYI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=asterius.io; s=mailo;
+	q=dns; h=Sender: MIME-Version: In-Reply-To: References: From: Date:
+	Message-ID: Subject: To: Cc: Content-Type;
+	b=TQwuyoK+0dg4yM/6cTfuAWFzxGCB0LKQmxt2xLz08NI0txQLMdMt/mNKkEwxOwLYPWcnW3
+	dFGBbpNYDLAeuNGIX7Nnn0oU2edj5vMjUjAlm4WgOEiRFI7Lx+X1j5lS8bNjItU2P3s7LmbA
+	ZWa+S+PmLiv1Xl8hWYpofIxXRQKeQ=
+Sender: derek@asterius.io
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
+	[209.85.223.178])
+	by mxa.mailgun.org with ESMTP id 59c98103.7f69441c7470-smtp-out-n01;
+	Mon, 25 Sep 2017 22:19:47 -0000 (UTC)
+Received: by mail-io0-f178.google.com with SMTP id d16so11130888ioj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 12:03:58 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JGrfxfa2FR6c3SarK/+ih8Om8e+O5uqXmSAKMsYaHEc=;
-	b=eih4GTDUjJjsjPUId7VXwHXuuVf6vlNcBUFF/RimCwuufXZo99oL1A5jzLb0RBFSy3
-	SVVyEiDD4D9syuNUNY30CfsLNxsl9mKZ8ZvQ0jUN3gVAcDycnpvhmLd3bSiZmxTujlGc
-	XFr3AbTRpjLeDc/bgrLE1rg3nx9Hsc9dfTKpYiiJYXDdfuBp1PsZBh7JNEhLkTLrJbiQ
-	QwjboLWIoY+36Tdb5Wat87eWDLU65XabE9ylUXn5WpU2NgTZEqdB2Gkv3HE8AhTjuNBN
-	23GYJi5ihWT6W3ywBNyhI3kBo9wBEcjLW9Vi/Oon1MXZRB6xIOovpOYbBhZrxdrrQDMZ
-	rjXQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JGrfxfa2FR6c3SarK/+ih8Om8e+O5uqXmSAKMsYaHEc=;
-	b=d9QOJMg26ReuT15g9gUu06KCoKDyAxENksrpATue8u/1hEBl7FGh7QymrQWW7aeUxc
-	lDngDY4b0KLUEFrn+iwhrWBSyz5Tdj5fG6v39memrsKXF0L3ox0ftijSMN+DLLkeXLhx
-	kZtaUHjhUupquinHV9qC+aoZ0sWmWagcPqOEdSxtOU4oUCSpktmDMkvcF4edDuEs6+Ut
-	HqmDegsiokyCwVrkPmgK7QaSSmyNMs2bseI4F+XxU7O2tQ8DYgJJFZW/mhiJjXRShF8P
-	OaX2BLGGcAMMVnJbi0/LYgx5xHe5PMWDt0uSMjcE6ZkZ6kdelBGQmeXGPG0MoW+EjHAv
-	zurQ==
-X-Gm-Message-State: AHPjjUhTAMw6GH+Bz0rBhL2QNaB/hSIhc7RR+5gVFTed7E0PapZKR+/Z
-	RnNpd9cwFFWYfIAxocsu2huVeRvzjZhSvvcd/kN9BA==
-X-Google-Smtp-Source: AOwi7QD6Gtcl+fxNAtPdUo1NFj61MmYbvhYRxMviJsIKWuvt34vWibFWzWIrtJN9En0NpwrZYWW5CLYNUq1Y8Zh27Zs=
-X-Received: by 10.36.162.67 with SMTP id o3mr2205524iti.27.1506366238436; Mon,
-	25 Sep 2017 12:03:58 -0700 (PDT)
+	Mon, 25 Sep 2017 15:19:47 -0700 (PDT)
+X-Gm-Message-State: AHPjjUjMVkGpOSK/4hnNYqcOj7SIrqJrIooLIcg2NxTTxSb+5RjHpq+U
+	2fZEL6ctumLNwfcu1kIu4ZN4145jYzhIkHiq0J8=
+X-Google-Smtp-Source: AOwi7QBSyYI43e8OcFiY9JQmV3QH7oMfSIuEn2zBnBrDv005EceuuPBQGK9Sr+d8J3pnJCOtNoabHCtv1TirsyTiS8I=
+X-Received: by 10.107.164.97 with SMTP id n94mr12454208ioe.162.1506377986699; 
+	Mon, 25 Sep 2017 15:19:46 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.107.19.68 with HTTP; Mon, 25 Sep 2017 12:03:37 -0700 (PDT)
-In-Reply-To: <1506364685-32767-1-git-send-email-shantanu@senic.com>
-References: <1506364685-32767-1-git-send-email-shantanu@senic.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 25 Sep 2017 20:03:37 +0100
-Message-ID: <CAJTo0Lb7HYKLTDsToYQAgFGw-+K4NEFm0wCrTgTc46tHLEAT_g@mail.gmail.com>
-To: baali <shantanu@senic.com>
+Received: by 10.107.180.6 with HTTP; Mon, 25 Sep 2017 15:19:46 -0700 (PDT)
+In-Reply-To: <1506075891-4205-1-git-send-email-guy@guy-morand.ch>
+References: <1506075891-4205-1-git-send-email-guy@guy-morand.ch>
+From: Derek Straka <derek@asterius.io>
+Date: Mon, 25 Sep 2017 18:19:46 -0400
+X-Gmail-Original-Message-ID: <CADNbA1oKctWV7oFCMupgbL11QzhTki+LDSp1PazmP_VsLpVYzw@mail.gmail.com>
+Message-ID: <CADNbA1oKctWV7oFCMupgbL11QzhTki+LDSp1PazmP_VsLpVYzw@mail.gmail.com>
+To: Guy Morand <guy@guy-morand.ch>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	baali <baali@muse-amuse.in>
-Subject: Re: [PATCH] curl: option to enable http2 protocol support.
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 1/3] Add python3 matplotlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,26 +56,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Sep 2017 19:03:57 -0000
+X-List-Received-Date: Mon, 25 Sep 2017 22:19:48 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On 25 September 2017 at 19:38, baali <shantanu@senic.com> wrote:
+The directory layout for the .inc and python3 recipe doesn't match the rest
+of the repo.  Same for the other patches in this patchset.
 
-> From: baali <baali@muse-amuse.in>
+On Fri, Sep 22, 2017 at 6:24 AM, Guy Morand <guy@guy-morand.ch> wrote:
+
+> ---
+>  .../python-matplotlib/files/0001-fix_setup.diff    | 13 +++++++++
+>  .../python/python-matplotlib/python-matplotlib.inc | 32
+> ++++++++++++++++++++++
+>  .../python-matplotlib/python3-matplotlib_2.0.2.bb  |  6 ++++
+>  3 files changed, 51 insertions(+)
+>  create mode 100644 meta-python/recipes-devtools/python/python-matplotlib/
+> files/0001-fix_setup.diff
+>  create mode 100644 meta-python/recipes-devtools/python/python-matplotlib/
+> python-matplotlib.inc
+>  create mode 100644 meta-python/recipes-devtools/python/python-matplotlib/
+> python3-matplotlib_2.0.2.bb
 >
-> With default --without-nghttp2 flag set there was no way to get
-> http2 protocol support using nghttp2 library. Instead moved it to
-> PACKAGECONFIG options
-
-
-Wrong list: oe-core patches go to openembedded-core@ instead of -devel@.
-
-
-> +PACKAGECONFIG[nghttp2] = "--with-nghttp2,--without-nghttp2"
-
-
-The configure.ac then checks for the libnghttp2 library which isn't listed
-as a build dependency, so you'll need to add this here.
-
-Ross
+> diff --git a/meta-python/recipes-devtools/python/python-
+> matplotlib/files/0001-fix_setup.diff b/meta-python/recipes-
+> devtools/python/python-matplotlib/files/0001-fix_setup.diff
+> new file mode 100644
+> index 0000000..8f1b505
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-
+> matplotlib/files/0001-fix_setup.diff
+> @@ -0,0 +1,13 @@
+> +Index: matplotlib-2.0.2/setupext.py
+> +===================================================================
+> +--- matplotlib-2.0.2.orig/setupext.py
+> ++++ matplotlib-2.0.2/setupext.py
+> +@@ -182,7 +182,7 @@ def get_base_dirs():
+> +         'gnu0': ['/usr'],
+> +         'aix5': ['/usr/local'],
+> +         }
+> +-    return basedir_map.get(sys.platform, ['/usr/local', '/usr'])
+> ++    return basedir_map.get(sys.platform, [os.environ['STAGING_LIBDIR']])
+> +
+> +
+> + def get_include_dirs():
+> diff --git a/meta-python/recipes-devtools/python/python-
+> matplotlib/python-matplotlib.inc b/meta-python/recipes-
+> devtools/python/python-matplotlib/python-matplotlib.inc
+> new file mode 100644
+> index 0000000..74dcf97
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-
+> matplotlib/python-matplotlib.inc
+> @@ -0,0 +1,32 @@
+> +SUMMARY  = "Matplotlib produces publication quality figures"
+> +DESCRIPTION = "Matplotlib is a Python 2D plotting library which produces \
+> +publication quality figures in a variety of hardcopy formats and
+> interactive \
+> +environments across platforms. Matplotlib can be used in Python scripts,
+> the \
+> +Python and IPython shell, the jupyter notebook, web application servers,
+> and \
+> +four graphical user interface toolkits."
+> +HOMEPAGE = "https://matplotlib.org/"
+> +LICENSE = "PSF"
+> +LIC_FILES_CHKSUM = "file://LICENSE/LICENSE;md5=
+> afec61498aa5f0c45936687da9a53d74"
+> +
+> +PYPI_PACKAGE = "matplotlib"
+> +
+> +inherit pypi
+> +
+> +SRC_URI += "\
+> +  file://0001-fix_setup.diff \
+> +  "
+> +
+> +DEPENDS += " \
+> +  ${PYTHON_PN}-numpy-native \
+> +  freetype \
+> +  libpng \
+> +  "
+> +
+> +RDEPENDS_${PN} += " \
+> +  ${PYTHON_PN}-numpy \
+> +  ${PYTHON_PN}-dateutil \
+> +  ${PYTHON_PN}-pyparsing \
+> +  ${PYTHON_PN}-pytz \
+> +  ${PYTHON_PN}-six \
+> +  ${PYTHON_PN}-cycler \
+> +  "
+> diff --git a/meta-python/recipes-devtools/python/python-matplotlib/
+> python3-matplotlib_2.0.2.bb b/meta-python/recipes-devtools/python/python-
+> matplotlib/python3-matplotlib_2.0.2.bb
+> new file mode 100644
+> index 0000000..7e309b2
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-matplotlib/
+> python3-matplotlib_2.0.2.bb
+> @@ -0,0 +1,6 @@
+> +inherit setuptools3
+> +require python-matplotlib.inc
+> +
+> +SRC_URI[md5sum] = "061111784278bde89b5d4987014be4ca"
+> +SRC_URI[sha256sum] = "0ffbc44faa34a8b1704bc108c451ec
+> f87988f900ef7ce757b8e2e84383121ff1"
+> +
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
