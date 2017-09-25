@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 47294782C4
+Received: from mail-qt0-f170.google.com (mail-qt0-f170.google.com
+	[209.85.216.170])
+	by mail.openembedded.org (Postfix) with ESMTP id E3F8878260
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 22:33:42 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id g128so5783534qke.0
+	Mon, 25 Sep 2017 22:36:01 +0000 (UTC)
+Received: by mail-qt0-f170.google.com with SMTP id q4so8565094qtq.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 15:33:43 -0700 (PDT)
+	Mon, 25 Sep 2017 15:36:03 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=eE4rQ4ee709qttPjnAlPyNJq0qiJ1O8B414ZJ3B/adk=;
-	b=PvnHBowj1yeA5tM2EP85RARG+ZxLQtffFCJGwgmtS509FIlFbjdvwCc7vBauV+EC6d
-	XW0Lpoag17TCkVLtFAssSA9llctG0LHYoQ99QEXhFrkI7W3apQAUJtrK8/6cnSUGQ0eE
-	TBSrMRTz7d9P+5BNpngvTkP1coyR0SU/QEOm1EuL1C/j/I1zmmXmWGEi4afeVzTdn/p3
-	4u5nnfbnkUYVO63uUyqKUu+kR+66BwedMuSugfVkxDZnyvuA+s8G2RLTBFQddBGrA7pZ
-	cArxc2hXM7nL9lEvMEyT4xUdlhhkLV3wZuA8QP6aBYMcwC6WHHs4ibWKk9JHcLBsLTcZ
-	RAdg==
-X-Gm-Message-State: AHPjjUjPgoR43wvnTR1KO+1WzM1gkVIdX6CRkUMgUa1mOuxa1R/ep8Iu
-	V0R2vsWkeeVdfvsQjdplaj6NPwD2
-X-Google-Smtp-Source: AOwi7QDBWNN/aueXKGGPT6lqf3VitXPTl31Sh7rWeeE9a/4vw28TTjQNH1OC0D5+n6GeP2nxwJ6/Ig==
-X-Received: by 10.55.122.130 with SMTP id v124mr12793185qkc.209.1506378823095; 
-	Mon, 25 Sep 2017 15:33:43 -0700 (PDT)
+	bh=KoI2MxKKGsXxYnL7XontQgK4RtjA+wikEgv+l87aspE=;
+	b=ZvuqBuMteECxhZ//jGQVG7KFdExPvyJs0lvmvIo3GDaPJ6rhj9grxBazMBoVspSdUY
+	gD/TGkEXz8dw2Ga17h1TspuV/HixaJDhRYXOT5GK75h1lWna121ugN731smT82S4wnNy
+	jUPoQ9eCnFH1E7OgcdtSBDjOWMYlYmYvo6a88Sz8v63mNVavk8XAL9dF7vD37aKtn73O
+	c6BafF2R/NVJyG4E7X671vXdPoHKSEg3MkNKukE39sR2uD0RrrDQWy4vFZKYZTdW17qD
+	YX5pyXfdpNrZMGTlgjt60HB+qmo8G1beQ+9ao/ZXG1iy64m8krrbNdj+bZYmV3wPN5wm
+	3cBw==
+X-Gm-Message-State: AHPjjUiTvKLZt4pT13cp0qDSzwWBqg10lq4aQrqjn2UWaJoQ9XVwkIjC
+	OAAAlE/tfhZ8AiSnZmVxOWoVf0IZ
+X-Google-Smtp-Source: AOwi7QBhSsXWG+MubFAgZya0c4J29nYMNd5bUkP8qKO9rBppdnV2khPR8t9lp7zXywLihwI/P/6xbQ==
+X-Received: by 10.200.51.137 with SMTP id c9mr12543721qtb.263.1506378962922;
+	Mon, 25 Sep 2017 15:36:02 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	n20sm6014666qtc.72.2017.09.25.15.33.42
+	p126sm966392qka.61.2017.09.25.15.36.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Sep 2017 15:33:42 -0700 (PDT)
+	Mon, 25 Sep 2017 15:36:02 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Sep 2017 18:33:35 -0400
-Message-Id: <1506378815-10418-1-git-send-email-derek@asterius.io>
+Date: Mon, 25 Sep 2017 18:35:55 -0400
+Message-Id: <1506378955-10860-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-babel: update to version 2.5.1
+Subject: [meta-python][PATCH] python-pytest: update to version 3.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Sep 2017 22:33:42 -0000
+X-List-Received-Date: Mon, 25 Sep 2017 22:36:02 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-babel.inc                  | 4 ++--
- .../python/{python-babel_2.5.0.bb => python-babel_2.5.1.bb}           | 0
- .../python/{python3-babel_2.5.0.bb => python3-babel_2.5.1.bb}         | 0
+ meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
+ .../python/{python-pytest_3.2.1.bb => python-pytest_3.2.2.bb}         | 0
+ .../python/{python3-pytest_3.2.1.bb => python3-pytest_3.2.2.bb}       | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-babel_2.5.0.bb => python-babel_2.5.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-babel_2.5.0.bb => python3-babel_2.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-pytest_3.2.1.bb => python-pytest_3.2.2.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pytest_3.2.1.bb => python3-pytest_3.2.2.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
-index f671969..5e6ca3d 100644
---- a/meta-python/recipes-devtools/python/python-babel.inc
-+++ b/meta-python/recipes-devtools/python/python-babel.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://babel.edgewall.org/"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=e6eeaabc92cfc2d03f53e789324d7292"
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index ccc8232..ae1d81d 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
  
--SRC_URI[md5sum] = "03da8249c2684abcbd208a8d0f979939"
--SRC_URI[sha256sum] = "754177ee7481b6fac1bf84edeeb6338ab51640984e97e4083657d384b1c8830d"
-+SRC_URI[md5sum] = "60228b3ce93a203357158b909afe8ae1"
-+SRC_URI[sha256sum] = "6007daf714d0cd5524bbe436e2d42b3c20e68da66289559341e48d2cd6d25811"
+-SRC_URI[md5sum] = "635976c2a9b2c2599d69fb0ad5abaf7d"
+-SRC_URI[sha256sum] = "4c2159d2be2b4e13fa293e7a72bdf2f06848a017150d5c6d35112ce51cfd74ce"
++SRC_URI[md5sum] = "401c005bd57f71e63ba015ab086fe67d"
++SRC_URI[sha256sum] = "f46e49e0340a532764991c498244a60e3a37d7424a532b3ff1a6a7653f1a403a"
  
- PYPI_PACKAGE = "Babel"
+ SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch"
  
-diff --git a/meta-python/recipes-devtools/python/python-babel_2.5.0.bb b/meta-python/recipes-devtools/python/python-babel_2.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-pytest_3.2.1.bb b/meta-python/recipes-devtools/python/python-pytest_3.2.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-babel_2.5.0.bb
-rename to meta-python/recipes-devtools/python/python-babel_2.5.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-babel_2.5.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.5.1.bb
+rename from meta-python/recipes-devtools/python/python-pytest_3.2.1.bb
+rename to meta-python/recipes-devtools/python/python-pytest_3.2.2.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.2.1.bb b/meta-python/recipes-devtools/python/python3-pytest_3.2.2.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-babel_2.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-babel_2.5.1.bb
+rename from meta-python/recipes-devtools/python/python3-pytest_3.2.1.bb
+rename to meta-python/recipes-devtools/python/python3-pytest_3.2.2.bb
 -- 
 2.7.4
 
