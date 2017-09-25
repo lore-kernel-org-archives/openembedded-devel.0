@@ -1,48 +1,50 @@
-Return-Path: <shantanu@senic.com>
-Received: from mail-pg0-f46.google.com (mail-pg0-f46.google.com [74.125.83.46])
-	by mail.openembedded.org (Postfix) with ESMTP id E3C2371B57
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f44.google.com (mail-it0-f44.google.com
+	[209.85.214.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F68377809
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 18:38:37 +0000 (UTC)
-Received: by mail-pg0-f46.google.com with SMTP id k193so4471865pgc.8
+	Mon, 25 Sep 2017 19:03:57 +0000 (UTC)
+Received: by mail-it0-f44.google.com with SMTP id c195so245501itb.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 11:38:39 -0700 (PDT)
+	Mon, 25 Sep 2017 12:03:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=senic-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=AYBFJDgieuuXWeQ/gDOzwnpj2z4KCG1PYX5p+XuW+jk=;
-	b=mYIsVTJm2l8hu969a6BfKOaIQ+U6DMX7x2x9cdHturVvPTjq0NABwpsP7IDdzhwhdm
-	leRZG1YBVxNQaD2evFKWKPA+uzNsf4/owPwC3USt8nPTeNjOEC5U4k3wAT7ixFyh8fvx
-	+5Fd0dF/1aos3llGFeQ2Adm+f7m9WygKF7GEsf9N1uNxAwK8wFtuYLU2TL1udWAhCu6Y
-	9OQ9pf6jhA4oohnRCFhHEF9dBMUfAy/gjQ/oC/np4hgrF6oKGXYaSPL3W0vfGGMUAZDe
-	WcZFiPzTDLSnxnk8VpWAaWzvGOec85tA6obinN1tjpXjGrjnHfnWoTphH0DzMtc3Lms1
-	C9ZQ==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=JGrfxfa2FR6c3SarK/+ih8Om8e+O5uqXmSAKMsYaHEc=;
+	b=eih4GTDUjJjsjPUId7VXwHXuuVf6vlNcBUFF/RimCwuufXZo99oL1A5jzLb0RBFSy3
+	SVVyEiDD4D9syuNUNY30CfsLNxsl9mKZ8ZvQ0jUN3gVAcDycnpvhmLd3bSiZmxTujlGc
+	XFr3AbTRpjLeDc/bgrLE1rg3nx9Hsc9dfTKpYiiJYXDdfuBp1PsZBh7JNEhLkTLrJbiQ
+	QwjboLWIoY+36Tdb5Wat87eWDLU65XabE9ylUXn5WpU2NgTZEqdB2Gkv3HE8AhTjuNBN
+	23GYJi5ihWT6W3ywBNyhI3kBo9wBEcjLW9Vi/Oon1MXZRB6xIOovpOYbBhZrxdrrQDMZ
+	rjXQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AYBFJDgieuuXWeQ/gDOzwnpj2z4KCG1PYX5p+XuW+jk=;
-	b=B9wrk7u61v4YQoHaWV2BKFIcU9N0zCbx0QJmGkkr8tvwdL0Hp61hin5qydAEm8CYEB
-	Rjh69nOH/7fbn0S7CAotOjLaAtnDNo4shmVsfK2RFSvKg+m4C/IRoGjMLRhoru4ogJKD
-	cHVaRjw6lelem5dNAh042t+ODe5dWlmsuH7c89ryyHFYu65nhTZ/DZhNSYwUP7RH75l4
-	9ibnkCKadokLA3dLoWI1LDmw2sFDB+n8QYLOFC7Vnk228fZZVkb5sooAqDjVB3JN30yA
-	V79hwI/Qi6mip8mCXjRc51XonQTXSh+Teile7XQpqwPOrMmprJzYdV2gFrzmQxEr4b+X
-	TKig==
-X-Gm-Message-State: AHPjjUjzoOP4gYmRZqNaQFegNO5VJXszERm5L86LdvU+KTOQj0D0g+cm
-	piyD9E4JQpjNSdoWLb9v6nCGpbvK
-X-Google-Smtp-Source: AOwi7QDo8ZSEsxd9C+OWBIkUapbVtj+34nTPoYH4GgirLe76mEx2wBAWJDsHFRMOveEzulp138tkvg==
-X-Received: by 10.98.213.201 with SMTP id d192mr8514145pfg.210.1506364718477; 
-	Mon, 25 Sep 2017 11:38:38 -0700 (PDT)
-Received: from k-bhumi.domain.name ([45.126.64.155])
-	by smtp.gmail.com with ESMTPSA id
-	a7sm11890715pgc.40.2017.09.25.11.38.36
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Sep 2017 11:38:37 -0700 (PDT)
-From: baali <shantanu@senic.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Sep 2017 00:08:05 +0530
-Message-Id: <1506364685-32767-1-git-send-email-shantanu@senic.com>
-X-Mailer: git-send-email 2.7.4
-Cc: baali <baali@muse-amuse.in>
-Subject: [PATCH] curl: option to enable http2 protocol support.
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=JGrfxfa2FR6c3SarK/+ih8Om8e+O5uqXmSAKMsYaHEc=;
+	b=d9QOJMg26ReuT15g9gUu06KCoKDyAxENksrpATue8u/1hEBl7FGh7QymrQWW7aeUxc
+	lDngDY4b0KLUEFrn+iwhrWBSyz5Tdj5fG6v39memrsKXF0L3ox0ftijSMN+DLLkeXLhx
+	kZtaUHjhUupquinHV9qC+aoZ0sWmWagcPqOEdSxtOU4oUCSpktmDMkvcF4edDuEs6+Ut
+	HqmDegsiokyCwVrkPmgK7QaSSmyNMs2bseI4F+XxU7O2tQ8DYgJJFZW/mhiJjXRShF8P
+	OaX2BLGGcAMMVnJbi0/LYgx5xHe5PMWDt0uSMjcE6ZkZ6kdelBGQmeXGPG0MoW+EjHAv
+	zurQ==
+X-Gm-Message-State: AHPjjUhTAMw6GH+Bz0rBhL2QNaB/hSIhc7RR+5gVFTed7E0PapZKR+/Z
+	RnNpd9cwFFWYfIAxocsu2huVeRvzjZhSvvcd/kN9BA==
+X-Google-Smtp-Source: AOwi7QD6Gtcl+fxNAtPdUo1NFj61MmYbvhYRxMviJsIKWuvt34vWibFWzWIrtJN9En0NpwrZYWW5CLYNUq1Y8Zh27Zs=
+X-Received: by 10.36.162.67 with SMTP id o3mr2205524iti.27.1506366238436; Mon,
+	25 Sep 2017 12:03:58 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.19.68 with HTTP; Mon, 25 Sep 2017 12:03:37 -0700 (PDT)
+In-Reply-To: <1506364685-32767-1-git-send-email-shantanu@senic.com>
+References: <1506364685-32767-1-git-send-email-shantanu@senic.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 25 Sep 2017 20:03:37 +0100
+Message-ID: <CAJTo0Lb7HYKLTDsToYQAgFGw-+K4NEFm0wCrTgTc46tHLEAT_g@mail.gmail.com>
+To: baali <shantanu@senic.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	baali <baali@muse-amuse.in>
+Subject: Re: [PATCH] curl: option to enable http2 protocol support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Sep 2017 18:38:38 -0000
+X-List-Received-Date: Mon, 25 Sep 2017 19:03:57 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: baali <baali@muse-amuse.in>
+On 25 September 2017 at 19:38, baali <shantanu@senic.com> wrote:
 
-With default --without-nghttp2 flag set there was no way to get
-http2 protocol support using nghttp2 library. Instead moved it to
-PACKAGECONFIG options.
+> From: baali <baali@muse-amuse.in>
+>
+> With default --without-nghttp2 flag set there was no way to get
+> http2 protocol support using nghttp2 library. Instead moved it to
+> PACKAGECONFIG options
 
-Signed-off-by: baali <baali@muse-amuse.in>
----
- meta/recipes-support/curl/curl_7.54.1.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta/recipes-support/curl/curl_7.54.1.bb b/meta/recipes-support/curl/curl_7.54.1.bb
-index 54f3b66..c22c827 100644
---- a/meta/recipes-support/curl/curl_7.54.1.bb
-+++ b/meta/recipes-support/curl/curl_7.54.1.bb
-@@ -48,13 +48,13 @@ PACKAGECONFIG[tftp] = "--enable-tftp,--disable-tftp,"
- PACKAGECONFIG[threaded-resolver] = "--enable-threaded-resolver,--disable-threaded-resolver"
- PACKAGECONFIG[zlib] = "--with-zlib=${STAGING_LIBDIR}/../,--without-zlib,zlib"
- PACKAGECONFIG[krb5] = "--with-gssapi,--without-gssapi,krb5"
-+PACKAGECONFIG[nghttp2] = "--with-nghttp2,--without-nghttp2"
- 
- EXTRA_OECONF = " \
-     --enable-crypto-auth \
-     --with-ca-bundle=${sysconfdir}/ssl/certs/ca-certificates.crt \
-     --without-libmetalink \
-     --without-libpsl \
--    --without-nghttp2 \
- "
- 
- do_install_append() {
--- 
-2.7.4
+Wrong list: oe-core patches go to openembedded-core@ instead of -devel@.
 
+
+> +PACKAGECONFIG[nghttp2] = "--with-nghttp2,--without-nghttp2"
+
+
+The configure.ac then checks for the libnghttp2 library which isn't listed
+as a build dependency, so you'll need to add this here.
+
+Ross
 
