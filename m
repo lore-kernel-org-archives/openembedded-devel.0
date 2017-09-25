@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
 	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CD2465C5B
+	by mail.openembedded.org (Postfix) with ESMTP id 47294782C4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 22:29:00 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id d70so5764072qkc.1
+	Mon, 25 Sep 2017 22:33:42 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id g128so5783534qke.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Sep 2017 15:29:01 -0700 (PDT)
+	Mon, 25 Sep 2017 15:33:43 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=mXXmfmrCRkixzKoZwWlCwmpxyYWKyAddoxSTr9ytynA=;
-	b=R/q6UpqO67ZyOdt+wKh/fEzwiSIl8xd/lC/c30rOfmqhmCBJEcRgLXwUhKlygQmx+v
-	lclp2vqnir8G9V9vBf5MQvKsTX5OO6giCB5FqQnZdKCAmuYjrK7e2hKdpooRX7KjRIwM
-	9Pkd2pUGv+0uzaWP4woLNbWj3HfNPs6fq5Vn+G7gCzneNXO90i9jWp7dJ2wYHDnHYJKc
-	SFhZN1WEpWMDfy/IniersGlM6KjhjoymVc6mE027Pvw2PvIs9o+YzNwGdeEWbIC2PAka
-	BuGUvkiisxg5Ildul7cnntcSF1gR5Sgy0JvKHTD1PkUkoi5eM7g2QGLQUDYv9FXGP8b6
-	abQw==
-X-Gm-Message-State: AHPjjUjbA5sxN0fwCUzzVXSu4+Hxax4Jl2gzM3O5OBNPlx0YAVCai/q/
-	EFvLexC6xdEOpBneyhqsFNTY73r+
-X-Google-Smtp-Source: AOwi7QC1F0nz2kUfFh3N20i8kBgkY20wE6IXj91FMJJWlo3pk/cIc9+O2xVpcCGkKnaAnfwTsSesmw==
-X-Received: by 10.55.118.7 with SMTP id r7mr12897233qkc.276.1506378541051;
-	Mon, 25 Sep 2017 15:29:01 -0700 (PDT)
+	bh=eE4rQ4ee709qttPjnAlPyNJq0qiJ1O8B414ZJ3B/adk=;
+	b=PvnHBowj1yeA5tM2EP85RARG+ZxLQtffFCJGwgmtS509FIlFbjdvwCc7vBauV+EC6d
+	XW0Lpoag17TCkVLtFAssSA9llctG0LHYoQ99QEXhFrkI7W3apQAUJtrK8/6cnSUGQ0eE
+	TBSrMRTz7d9P+5BNpngvTkP1coyR0SU/QEOm1EuL1C/j/I1zmmXmWGEi4afeVzTdn/p3
+	4u5nnfbnkUYVO63uUyqKUu+kR+66BwedMuSugfVkxDZnyvuA+s8G2RLTBFQddBGrA7pZ
+	cArxc2hXM7nL9lEvMEyT4xUdlhhkLV3wZuA8QP6aBYMcwC6WHHs4ibWKk9JHcLBsLTcZ
+	RAdg==
+X-Gm-Message-State: AHPjjUjPgoR43wvnTR1KO+1WzM1gkVIdX6CRkUMgUa1mOuxa1R/ep8Iu
+	V0R2vsWkeeVdfvsQjdplaj6NPwD2
+X-Google-Smtp-Source: AOwi7QDBWNN/aueXKGGPT6lqf3VitXPTl31Sh7rWeeE9a/4vw28TTjQNH1OC0D5+n6GeP2nxwJ6/Ig==
+X-Received: by 10.55.122.130 with SMTP id v124mr12793185qkc.209.1506378823095; 
+	Mon, 25 Sep 2017 15:33:43 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	b26sm5790991qkj.64.2017.09.25.15.29.00
+	n20sm6014666qtc.72.2017.09.25.15.33.42
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Sep 2017 15:29:00 -0700 (PDT)
+	Mon, 25 Sep 2017 15:33:42 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Sep 2017 18:28:52 -0400
-Message-Id: <1506378532-6375-1-git-send-email-derek@asterius.io>
+Date: Mon, 25 Sep 2017 18:33:35 -0400
+Message-Id: <1506378815-10418-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cython: update to version 0.27
+Subject: [meta-python][PATCH] python-babel: update to version 2.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Sep 2017 22:29:00 -0000
+X-List-Received-Date: Mon, 25 Sep 2017 22:33:42 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
- .../python/{python-cython_0.26.1.bb => python-cython_0.27.bb}         | 0
- .../python/{python3-cython_0.26.1.bb => python3-cython_0.27.bb}       | 0
+ meta-python/recipes-devtools/python/python-babel.inc                  | 4 ++--
+ .../python/{python-babel_2.5.0.bb => python-babel_2.5.1.bb}           | 0
+ .../python/{python3-babel_2.5.0.bb => python3-babel_2.5.1.bb}         | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.26.1.bb => python-cython_0.27.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.26.1.bb => python3-cython_0.27.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-babel_2.5.0.bb => python-babel_2.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-babel_2.5.0.bb => python3-babel_2.5.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index 900e88a..38ee51f 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
- BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
+index f671969..5e6ca3d 100644
+--- a/meta-python/recipes-devtools/python/python-babel.inc
++++ b/meta-python/recipes-devtools/python/python-babel.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://babel.edgewall.org/"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=e6eeaabc92cfc2d03f53e789324d7292"
  
--SRC_URI[md5sum] = "8853dcb78749a786ad5ccdc007a8932f"
--SRC_URI[sha256sum] = "c2e63c4794161135adafa8aa4a855d6068073f421c83ffacc39369497a189dd5"
-+SRC_URI[md5sum] = "3a26a5940da1e9f95d8776eabd888b07"
-+SRC_URI[sha256sum] = "b932b5194e87a8b853d493dc1b46e38632d6846a86f55b8346eb9c6ec3bdc00b"
+-SRC_URI[md5sum] = "03da8249c2684abcbd208a8d0f979939"
+-SRC_URI[sha256sum] = "754177ee7481b6fac1bf84edeeb6338ab51640984e97e4083657d384b1c8830d"
++SRC_URI[md5sum] = "60228b3ce93a203357158b909afe8ae1"
++SRC_URI[sha256sum] = "6007daf714d0cd5524bbe436e2d42b3c20e68da66289559341e48d2cd6d25811"
  
- inherit pypi
+ PYPI_PACKAGE = "Babel"
  
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.26.1.bb b/meta-python/recipes-devtools/python/python-cython_0.27.bb
+diff --git a/meta-python/recipes-devtools/python/python-babel_2.5.0.bb b/meta-python/recipes-devtools/python/python-babel_2.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.26.1.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.27.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.26.1.bb b/meta-python/recipes-devtools/python/python3-cython_0.27.bb
+rename from meta-python/recipes-devtools/python/python-babel_2.5.0.bb
+rename to meta-python/recipes-devtools/python/python-babel_2.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-babel_2.5.0.bb b/meta-python/recipes-devtools/python/python3-babel_2.5.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.26.1.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.27.bb
+rename from meta-python/recipes-devtools/python/python3-babel_2.5.0.bb
+rename to meta-python/recipes-devtools/python/python3-babel_2.5.1.bb
 -- 
 2.7.4
 
