@@ -1,50 +1,49 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f43.google.com (mail-lf0-f43.google.com
-	[209.85.215.43])
-	by mail.openembedded.org (Postfix) with ESMTP id C5AE2780C0
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f170.google.com (mail-qk0-f170.google.com
+	[209.85.220.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 523BB65C5B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Sep 2017 14:53:15 +0000 (UTC)
-Received: by mail-lf0-f43.google.com with SMTP id d4so4825550lfj.7
+	Tue, 26 Sep 2017 19:33:21 +0000 (UTC)
+Received: by mail-qk0-f170.google.com with SMTP id s132so11191726qke.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Sep 2017 07:53:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=51B8Q7jDKtICqrP3hNtHv5GRfyt9PlX9Y3vm1lgTSBU=;
-	b=QIwDbE0FOsD+TcmLtLfKvoYJ/gRMlf0LfEneSRGTcEIJBF+FfyATxJ/gb3ZZuQRHwJ
-	kx+PJJPDxpNp9dno4cozQ+laof13Sto1+aGzX4BlKcz3NPWmaXBbSElqapqjb0Ky6plU
-	TSei1vFpsXvv23CYzzHW8EAJkT074rccC/PeYUawKf12aBJZdsaI5fC3pUO2YyK0Ofnh
-	XnmTFph6nyJAC9FzLaTLW1XHpoO/LIPt+/UeShU9XI4YVrw9hmRfwhzNop2KVYJe/aBe
-	1RLd8FihbbpXgmKKY7gJp8Er+bhZ+UQ/4tIbbRSbxaWqLOslSDg406B8cXgwtvLG3NbC
-	XvyA==
+	Tue, 26 Sep 2017 12:33:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=Rq/PaVPnM52fWRSrJ7AkmXKndJHzcVfveyRByaktwTY=;
+	b=lVEPGd2W8FYzPjGJVn3L2ad5yE814BMJAaOaGz75gKEP2YurBzzcl142O85dZHBXdj
+	vLRwKxe6xDYAO0vUyRembkKMT3VCGxQBs6wsLB1ZYC+J7wojyo6uk+kdYCt0nyFA4ee0
+	Wu4zMolB6yTNtOQX9Xhk/Mk2LzvhQ8/C6RG3ZcCyfJE2Xc6FOJmHOejRgEhoUoIvWA3A
+	hH4PRwu614GnIpV6RFjYjvXwv4qf5yw784FciDBHk7OySy7AYe8jnGz/uxRBjLECJhDb
+	kPNCIUsMu0LJSfOzgBLw+ukhum/HB2fRk5xi77eL8sYOX1JexVB9jsAeVDA0D2WOXPP9
+	FtOw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=51B8Q7jDKtICqrP3hNtHv5GRfyt9PlX9Y3vm1lgTSBU=;
-	b=dGXZsk5uXBnDHh13RVzhTpUgR4XtQ6BzQ2q0f6KNaQiX5iyRZkYWdxR7xh02o+nDF5
-	UakZ6F4Ig3I8mNaYhy3CrJ8qbhPMd7AeNx8wGZiXCZLwxds6+eyTz+WfUla6YDMNZ/8Q
-	RhfbRIDoXJdVP9/v0q00ls/RtuMtb72ZAOpwnd03gC/BxeEykijRrrp+JU7G6S6/xiql
-	igDYhpxSGf7puU1PgAkoM90F4/8C2d40RfVC7SeeJTl18aQEwJyAX7pRqeWLQkHy6rIC
-	y+yAD4R2IRj5CSSfBwiqvpXCUyComXjxFG+FG0wAm0TAXAU7UjT9InCepYtt1T+jvGH5
-	+X9g==
-X-Gm-Message-State: AHPjjUgHpvVvBBQGT7efEIKlyZRaDGsdrQqBsKC6fpW5wtwcc0oPUBdE
-	FRwfogA36cmEaoCqhAWzKLj4sUEa5RIdysnmfTHWVozz
-X-Google-Smtp-Source: AOwi7QAQFKVFPl1mItAQ9bXq0PeFtkh/1gR890aykYY2NkTPytJRjC4i4r3IthPbHxWqq2JELU84OA2Eb38nrHTu838=
-X-Received: by 10.25.90.93 with SMTP id o90mr2643846lfb.163.1506437596428;
-	Tue, 26 Sep 2017 07:53:16 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.25.83.83 with HTTP; Tue, 26 Sep 2017 07:52:55 -0700 (PDT)
-In-Reply-To: <20170926145245.GA35702@mbabyjoh-desk.ger.corp.intel.com>
-References: <20170907085136.20862-1-ricardo.ribalda@gmail.com>
-	<20170907085136.20862-2-ricardo.ribalda@gmail.com>
-	<CAPybu_08S-izqY3pUTisRRbX5MQSDcAskZpK209Kt5cC5jv48Q@mail.gmail.com>
-	<20170926145245.GA35702@mbabyjoh-desk.ger.corp.intel.com>
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-Date: Tue, 26 Sep 2017 16:52:55 +0200
-Message-ID: <CAPybu_0gBmVy8ctD2+BDKYuMUR0wbHRD3USb+3b+5xakPCDrUw@mail.gmail.com>
-To: "Maxin B. John" <maxin.john@intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java][PATCH 2/2] openjdk-8-native: Fix sigsegv with gcc7
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=Rq/PaVPnM52fWRSrJ7AkmXKndJHzcVfveyRByaktwTY=;
+	b=jT+/45zyGelf0gNALlLB8Wb72bSnT40PFbSMUINpAdYxwt3vEpUspOgpiyGDAZPbJo
+	av3aTahSX8IsY6FxYJibnIBTt6fS3x1LglQZrNKN+IT8Q0Jt0L/Q5L2EmINWrUaz6qVG
+	4uxbCPJTGmiqzEYNLQh425dBY3jAwkMFymAFT14Yr69Unflox0PrXDn7Z15GLikge2rF
+	kjfkO0Q8ZYQ30KjTj33386OGxcwVFlhgEbWNxbI1Q51WXVIcmEyvkI/Yfsjc26xBivBY
+	PE8TGiTkRc8Ii2zdyxphGI+vZTfomRSZIfQHGQxIRQYoB4+3zFHMys1RGzPExhfP5zmw
+	EIFw==
+X-Gm-Message-State: AHPjjUisDxvBZalQh9vGbV20okgpnr5p4gTsb8xwA1w7ZiHCqAVQJxMg
+	kNQtmX5O2dm6e931BCrSEYNnS4RY
+X-Google-Smtp-Source: AOwi7QDqk8Uy1NV1xCblgo9CZj2exIUqzpODV3YNDrIZAJSdaHRT/Qq/f3snF7okOdm0UlpKMp2yFQ==
+X-Received: by 10.55.48.210 with SMTP id w201mr16486865qkw.117.1506454402949; 
+	Tue, 26 Sep 2017 12:33:22 -0700 (PDT)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	u51sm7523111qth.67.2017.09.26.12.33.20
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 26 Sep 2017 12:33:21 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 26 Sep 2017 15:48:22 -0300
+Message-Id: <20170926184822.32480-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.1
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-networking][PATCH] lldpd: Update to version 0.9.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,95 +56,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Sep 2017 14:53:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 26 Sep 2017 19:33:22 -0000
 
-On Tue, Sep 26, 2017 at 4:52 PM, Maxin B. John <maxin.john@intel.com> wrote:
-> Hi,
->
-> On Tue, Sep 26, 2017 at 01:26:22PM +0200, Ricardo Ribalda Delgado wrote:
->> Ping?
->
-> Pushed these 3 patches to master-next. Sorry for the delay.
+  - Remove json packageconfig. See commit:
+  https://github.com/vincentbernat/lldpd/commit/06987a24ce053cbb57f8853bbf544bc7c067c8aa
 
-No worries :) Just wanted to make sure the patches were not lost in the wind.
+  - Add patch to use mkdir from /bin/mkdir in systemd service.
 
-Best regards!
+  - Update from lldpd (0.9.8)
+  * Changes:
+    + "Station" capability is only set if no other bit is set.
+    + Use ethtool to get permanent address for bonds and teams. This
+      might provide different results than the previous method. Some
+      devices may still use the previous method.
+    + Don't run ethtool as root. Kernels older than 2.6.19 won't get
+      link information anymore.
+    + Add "configure system hostname ." option to not use a FQDN
+      for system name.
+    + Add "-f json0" to provide a more regular/machine-parsable output
+      to JSON output, even when not compiled with --enable-json0.
+  * Fixes:
+    + Handle team interfaces like a bond. Real MAC address cannot be
+      retrieved yet.
 
->
-> Best Regards,
-> Maxin
->
->> On Thu, Sep 7, 2017 at 10:51 AM, Ricardo Ribalda Delgado
->> <ricardo.ribalda@gmail.com> wrote:
->> > OpenJDK does not build properly with GCC7. Add the same workaround that
->> > we have for GCC6.
->> >
->> > Without this patch:
->> >
->> > | #
->> > | # A fatal error has been detected by the Java Runtime Environment:
->> > | #
->> > | #  SIGSEGV (0xb) at pc=0x00007fcad0efcd5b, pid=17206, tid=0x00007fcab264c700
->> > | #
->> > | # JRE version: OpenJDK Runtime Environment (8.0_102-b14) (build 1.8.0_102-internal-b14)
->> > | # Java VM: OpenJDK 64-Bit Server VM (25.102-b14 mixed mode linux-amd64 compressed oops)
->> > | # Problematic frame:
->> > | # V  [libjvm.so+0x78bd5b]  Node::Node(unsigned int)+0x2b
->> > | #
->> > | # Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
->> > | #
->> > | # An error report file with more information is saved as:
->> > | # /home/ricardo/curro/qt5022/build-qt5022-pyro/build/tmp/work/x86_64-linux/openjdk-8-native/102b14-r0/build/hs_err_pid17206.log
->> > | [thread 140508549912320 also had an error]
->> > |
->> > | [error occurred during error reporting , id 0xb]
->> > |
->> > | #
->> > | # If you would like to submit a bug report, please visit:
->> > | #   http://bugreport.java.com/bugreport/crash.jsp
->> > | #
->> >
->> > Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->> > ---
->> >  recipes-core/openjdk/openjdk-8-common.inc | 7 ++++---
->> >  1 file changed, 4 insertions(+), 3 deletions(-)
->> >
->> > diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
->> > index def779db4d59..0c5c2c3e3d2f 100644
->> > --- a/recipes-core/openjdk/openjdk-8-common.inc
->> > +++ b/recipes-core/openjdk/openjdk-8-common.inc
->> > @@ -218,10 +218,11 @@ EXTRA_OECONF_append = "\
->> >          --with-update-version=${OPENJDK_UPDATE_VERSION} \
->> >  "
->> >
->> > -# GCC 6 sets the default C++ standard to C++14 and introduces dead store
->> > -# elimination by default. OpenJDK 8 is not ready for either of these
->> > -# changes.
->> > +# Since v6, GCC sets the default C++ standard to C++14 and introduces
->> > +# dead store elimination by default. OpenJDK 8 is not ready for either
->> > +# of these changes.
->> >  FLAGS_GCC6 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->> > +FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
->> >
->> >  # All supported cross compilers support the compiler flags that were
->> >  # added to make compilation with gcc6 work. But the host compiler for
->> > --
->> > 2.14.1
->> >
->>
->>
->>
->> --
->> Ricardo Ribalda
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+  - Updates from lldpd (0.9.7)
+  * Changes:
+    + Attach remote TTL to port instead of chassis.
+    + JSON support is now built-in and unconditionally enabled. Use
+      --enable-json0 to keep the pre-0.9.2 json-c format.
+    + When logging to syslog and daemonizing, don't log to stderr.
+    + vxlan interfaces are now ignored as they are multi-point interfaces.
+    + Maximum number of neighbors for an interface is increased from 4 to 32.
 
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ ...lldpd.service.in-Use-fixed-path-for-mkdir.patch | 32 ++++++++++++++++++++++
+ .../lldpd/{lldpd_0.9.6.bb => lldpd_0.9.8.bb}       |  6 ++--
+ 2 files changed, 35 insertions(+), 3 deletions(-)
+ create mode 100644 meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
+ rename meta-networking/recipes-daemons/lldpd/{lldpd_0.9.6.bb => lldpd_0.9.8.bb} (91%)
 
-
+diff --git a/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch b/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
+new file mode 100644
+index 000000000..4876e1794
+--- /dev/null
++++ b/meta-networking/recipes-daemons/lldpd/files/src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch
+@@ -0,0 +1,32 @@
++From f9f3e4dd31588cce5f655730da7b5c3f56a9bdc1 Mon Sep 17 00:00:00 2001
++From: Fabio Berton <fabio.berton@ossystems.com.br>
++Date: Tue, 26 Sep 2017 09:19:51 -0300
++Subject: [PATCH] src/daemon/lldpd.service.in: Use fixed path for mkdir command
++Organization: O.S. Systems Software LTDA.
++
++@mkdir_p@ is expanded to host tools path ../build/tmp/hosttools/mkdir that
++doesn't exist on target. Remove @mkdir_p@ and use /bin/mkdir -p to
++create /var/run/lldpd directory.
++
++Upstream-Status: Inappropriate [configuration]
++
++Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
++---
++ src/daemon/lldpd.service.in | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/src/daemon/lldpd.service.in b/src/daemon/lldpd.service.in
++index fdb7338..4291830 100644
++--- a/src/daemon/lldpd.service.in
+++++ b/src/daemon/lldpd.service.in
++@@ -9,7 +9,7 @@ Type=notify
++ NotifyAccess=main
++ EnvironmentFile=-/etc/default/lldpd
++ EnvironmentFile=-/etc/sysconfig/lldpd
++-ExecStartPre=@mkdir_p@ @PRIVSEP_CHROOT@
+++ExecStartPre=/bin/mkdir -p @PRIVSEP_CHROOT@
++ ExecStart=@sbindir@/lldpd $DAEMON_ARGS $LLDPD_OPTIONS
++ Restart=on-failure
++ PrivateTmp=yes
++-- 
++2.14.2
+diff --git a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb
+similarity index 91%
+rename from meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb
+rename to meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb
+index 0cd063720..dbd84cf67 100644
+--- a/meta-networking/recipes-daemons/lldpd/lldpd_0.9.6.bb
++++ b/meta-networking/recipes-daemons/lldpd/lldpd_0.9.8.bb
+@@ -9,10 +9,11 @@ SRC_URI = "\
+     http://media.luffy.cx/files/${BPN}/${BPN}-${PV}.tar.gz \
+     file://lldpd.init.d \
+     file://lldpd.default \
++    file://src-daemon-lldpd.service.in-Use-fixed-path-for-mkdir.patch \
+     "
+ 
+-SRC_URI[md5sum] = "0dcdee7c1b3c62362d73f6508c11edae"
+-SRC_URI[sha256sum] = "e74e2dd7e2a233ca1ff385c925ddae2a916d302819d1433741407d2f8fb0ddd8"
++SRC_URI[md5sum] = "8809600492f6b73149eb19158e819c1f"
++SRC_URI[sha256sum] = "9ee494e91bc33938575b2c09b26188c486ef8eac6e2155d250c189cc4e988c4f"
+ 
+ inherit autotools update-rc.d useradd systemd pkgconfig bash-completion
+ 
+@@ -29,7 +30,6 @@ EXTRA_OECONF += "--without-embedded-libevent \
+ "
+ 
+ PACKAGECONFIG ??= "cdp fdp edp sonmp lldpmed dot1 dot3"
+-PACKAGECONFIG[json] = "--with-json,--without-json,jansson"
+ PACKAGECONFIG[xml] = "--with-xml,--without-xml,libxm2"
+ PACKAGECONFIG[snmp] = "--with-snmp,--without-snmp,net-snmp"
+ PACKAGECONFIG[readline] = "--with-readline,--without-readline,readline"
 -- 
-Ricardo Ribalda
+2.14.1
+
 
