@@ -1,46 +1,52 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 3505377AB5
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-ua0-f179.google.com (mail-ua0-f179.google.com
+	[209.85.217.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 10CB3601F2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Sep 2017 19:15:32 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id u136so338144pgc.0
+	Thu, 28 Sep 2017 02:53:49 +0000 (UTC)
+Received: by mail-ua0-f179.google.com with SMTP id q29so117687uaf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Sep 2017 12:15:34 -0700 (PDT)
+	Wed, 27 Sep 2017 19:53:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=7YL8tBQVZtQ/j8ttU+UBdigZfy1Sq8934URh8ikw4W0=;
-	b=gwPbRhtG0XgaPle97G3ajjLkmI8rboqJ7Htf6e2XvC4Bgigc3aM/PlfoJpaEcgPLwF
-	ERplkQoZ/ILSXwWtR//aUvk43NkLmcEXPZogeLrRFJ/Lq4zIfWDpAEntWbFbCXk6omNc
-	e4nLd/SQJ0l7vZvnNUHy9hlnQFwcfvvpK1DXiwY2vnwawwYZ99bgpaPdDVh7sCCu+ylc
-	Isou2WQ/9SMY8bIuVC/Ed7D+a61VLaB6RLzQ9Qi1whwwwSGBIiEe07V2/BvVQiZpm9VY
-	8Zj9awpj4fTXjqM0OJQiQMJN2h2dBPcjBwZML48tZFZGAoNPgfzxJWWMrlwxWNrEHbGc
-	0OTQ==
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=XNsI94D0XAk6KNpXmUiawGVpRgPsdAV7quRspw0hjYo=;
+	b=ZwCg5RyxJrxaAldBXs5S5ESba365V+Hx/Iy73r3t3siKa3XxSzrqJJ7Y1ykUjQkNrT
+	9CigDYYYl0kassMvMUf+g7DXkMZ2fqLkY7ga1h0kZcqAby/zlR365ttB5iyrnTjTtY44
+	uh31aCPKumc21JJWPgCa0GT7fz1i0/BsKDhf/QRKhjGnLXMMu+Qn+cQlN5i/fOtJKB6y
+	UK303HyVimQDKZdWtmIamIWwyhmQl6IWh8jSnCzwrvpQP/OVWRbTMaQxBSWitfl4I6LG
+	3FeOZ1lDOZ5P/wK0eUDgcSM1BrH2OduL1HPPnaoFjAOb3DhJGisOW9LaSYk2TqX5Y6Uk
+	37Lg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7YL8tBQVZtQ/j8ttU+UBdigZfy1Sq8934URh8ikw4W0=;
-	b=aXt/QQfMCHoLxwpZczPTvi1+CF5fDsITBv8+glDFxwlYpTDAZHWcFkn1f6FLRVeRIY
-	vDn+XgvC0sqK5ii1LLV94JFuyer9v/L/BeZOvZ1DntuHXHpjGrRjN/frBv4whlbawTHU
-	TA9LHVIAgQpnhDb1/d3oWIq5FbWFWmNqx7cW5v5v64/OPW+8z1D70OrFiWEzQ7Pm2p2N
-	3r/E4z54yD15wsCvKBQvWTyku1soduPz5fa0QOeaaD8WvGB+YsJSxajmAKUt1gMGdJFL
-	Qzwx3+PgF1k2mTtJTwLKFsjiELuPUL0RasQnTL7Onuj0F9FOHFFmOYk1ekZJrtbbO4OA
-	1W+A==
-X-Gm-Message-State: AHPjjUgNIK2W2AQZqyXYQlAHzWmNFHaMKa5UJkjbWBXff6pqkaTrAm4/
-	q8GbujsBIzEoqhVW5K0j7ThBfQ==
-X-Google-Smtp-Source: AOwi7QBRO5GM3G2ihdHddfjjlapjOlmlE7+egeXV/LJySi1j7GLGpqMnK9W2DKz55XAax07aKOjZZg==
-X-Received: by 10.84.178.195 with SMTP id z61mr2048453plb.374.1506539733964;
-	Wed, 27 Sep 2017 12:15:33 -0700 (PDT)
-Received: from e6520.cablelabs.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	h9sm22222125pfh.98.2017.09.27.12.15.32
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 27 Sep 2017 12:15:32 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 27 Sep 2017 12:15:27 -0700
-Message-Id: <1506539727-32288-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][morty][PATCH] luajit: mips and mipsel are 32bit targets too
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=XNsI94D0XAk6KNpXmUiawGVpRgPsdAV7quRspw0hjYo=;
+	b=R+ZxgKDC9/qyrroYSC+WDzaEze/WRyY0Z+xLJ3zCB1pB7S+U98dn24NNhI24jGKHQr
+	qvf/rYYHcT1km97SUEWhQhAFCtyRonu2j2Vw5DE7zoR5lw8lmwZgek0HMsoMUTNoU0Og
+	fQ9viLtforcGE+LBlP5cmCjSQ690B0pfOq+a7iK+ZOzoOSeptiTicrupjewjz3eqS5of
+	wgSRji590ZvqGCL++StaOiguWyiv6f8zrC0GNK0uR+VOok7qaEgog+89goTsuLB0xR7o
+	0Wh/6lgLCFyYJseG16ljvhof/mAvP/efrRVwL2lgbM6U+a7SC3xQjyArVmfFwLWYIXYv
+	wCfw==
+X-Gm-Message-State: AHPjjUhL1tIoyRiPUApV/5IgKdIWCpH/huzulanJ3WDG5w0jVrZ/XD6p
+	h2oE4BdsYmHBntGL5PfbsG7Co81WGUQSbCGOGIqW7g==
+X-Google-Smtp-Source: AOwi7QBQfTKcAat+iaAnI3pBlXh+m/xpijnUGEuqQMsm0Q/peb9nBlVmZdgaj3SsKI11x9tp7H9hDUOoVJIDaXtFCI0=
+X-Received: by 10.159.61.140 with SMTP id c12mr2350852uai.166.1506567230513;
+	Wed, 27 Sep 2017 19:53:50 -0700 (PDT)
+MIME-Version: 1.0
+References: <1506075891-4205-1-git-send-email-guy@guy-morand.ch>
+	<CADNbA1rjSSNANYovFMQEAW3bWHbc3Ey4JtuCUPWMrZa9--MR8w@mail.gmail.com>
+	<6d06fafc-14cc-f8b1-1d73-f83b6f6436f7@guy-morand.ch>
+	<48605F2E-2616-4585-9503-3C953AE0A518@linux.intel.com>
+	<f4113b49-34d4-b3d9-13e6-176b2adff30c@guy-morand.ch>
+In-Reply-To: <f4113b49-34d4-b3d9-13e6-176b2adff30c@guy-morand.ch>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 28 Sep 2017 02:53:39 +0000
+Message-ID: <CANx9H-DBCu5LhQx_negKjjuBRJqCf-Ze_8mv2Y8pkhQGYfSmpA@mail.gmail.com>
+To: Guy Morand <guy@guy-morand.ch>,
+	Tim Orling <timothy.t.orling@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 1/3] Add python3 matplotlib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,38 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 27 Sep 2017 19:15:33 -0000
+X-List-Received-Date: Thu, 28 Sep 2017 02:53:50 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-When cross compiling, the word size of the compiler set via HOST_CC
-must match the word size of the target. That's achieved by appending
-"-m32" to BUILD_CC_ARCH if the target word size is known to be 32bits.
+On Tue, Sep 26, 2017 at 11:40 PM Guy Morand <guy@guy-morand.ch> wrote:
 
-Unfortunately the current list of over-rides (powerpc, x86 and arm)
-does not cover all cases. Add mips and mipsel to the list too (which
-is still not enough to cover all targets or corner cases such as x32,
-but better than before).
+> Tim,
+>
+>
+> Ok good about matplotlib, this one is not an easy beast :p! Have you
+> also planned to integrate pandas?
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-(cherry picked from commit 18771a9c9946c04dcd3ec89559018c8bbb15201c)
----
- meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb | 2 ++
- 1 file changed, 2 insertions(+)
 
-diff --git a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-index 964dc1d..2049846 100644
---- a/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-+++ b/meta-oe/recipes-devtools/luajit/luajit_2.0.4.bb
-@@ -24,6 +24,8 @@ BBCLASSEXTEND = "native"
- BUILD_CC_ARCH_append_powerpc = ' -m32'
- BUILD_CC_ARCH_append_x86 = ' -m32'
- BUILD_CC_ARCH_append_arm = ' -m32'
-+BUILD_CC_ARCH_append_mips = ' -m32'
-+BUILD_CC_ARCH_append_mipsel = ' -m32'
- 
- # The lua makefiles expect the TARGET_SYS to be from uname -s
- # Values: Windows, Linux, Darwin, iOS, SunOS, PS3, GNU/kFreeBSD
--- 
-1.9.1
+No plans for pandas at this time.
 
+Otherwise I will happily just send a
+> better patch just for this one!
+
+
+Go ahead and send a v2. Thank you.
+
+>
 
