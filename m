@@ -1,53 +1,46 @@
-Return-Path: <mhalstead@linuxfoundation.org>
-Received: from mail-pg0-f48.google.com (mail-pg0-f48.google.com [74.125.83.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 9F96B7198E
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2D02D71974
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Sep 2017 04:49:27 +0000 (UTC)
-Received: by mail-pg0-f48.google.com with SMTP id v23so288102pgc.5
+	Fri, 29 Sep 2017 05:27:49 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id u136so440024pgc.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 27 Sep 2017 21:49:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=linuxfoundation.org; s=google;
-	h=subject:to:references:from:organization:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=MMvFPcvdQR/rrBu2Xnlyxs4iIewbvfc6KtLEhxPB90M=;
-	b=iW10zd4S7PZnabWZz5cmQZWLN1FsaXbt/yDun5ln2lKyYVkwaAunqJoK9X+D8TamhT
-	+06Rm/ErginMNbD8ZX46GtGVr/6lJEi4mPo8zGaQrbJnqWWND/J8jr42gvvGZM1X+vtB
-	mRvSuCCoQk1VP4loIzWdJFwXnIPtv/cbWWRic=
+	Thu, 28 Sep 2017 22:27:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=l7MrkU9819zynUVD+YCpd9oBxJn/0CyghzyXv5ys8Ok=;
+	b=ssXVDzMu93fY5dJzzxpN5TKINBre0wVKDh5ktUUx1rGK2kPsGHTzv5lzu8JgUxSzjf
+	W+TTwYJ3ziL1uNMdaSwLsmHw3VkpKXYd81toeNcfDV9M0SBcC52MXk+Nk1QaXLGt0B9G
+	hQB6gfD6tfjNebQjL/PnnEZEho3sjA2L0rgiW7uYuowqRVIicvjn7LCsGM90RqtnXt/c
+	+3vC3d/txoUKZ9eUal6g7f/eR86kddoHZ57/W0u94HSmP9chnoEPdAtm5COyz1fPVwph
+	NdQGozXxJvioBCFYhUnYtpymN2Fs0C9IWdpcaatCtnZYpmgV0XWNpd5nVC22KMsGGctJ
+	bZAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:organization
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-transfer-encoding:content-language;
-	bh=MMvFPcvdQR/rrBu2Xnlyxs4iIewbvfc6KtLEhxPB90M=;
-	b=FVSiQfjZq2Jk833gaMPRqTn5fgeObOG13/gKhPMJ+J6Z4BVAuM8ilJtFfmcJL8336L
-	j1OID0yRjUdAgxnJOnVPvu2V5k6KSlKzQOQMG2fi4fzj80FM1tfevjKNkWOTjZ5gxnNH
-	UfMUnpnjNTvH5olju8DXf7Iujx5OthTU12RoklJywyFlMjHVvhAJ4XUwylrMx4EoVHC6
-	HC8dfo+kckVw4DpzfepZnZm2u1JshVVv8dUaIVooNA5TqfwKOVGiFz5O6IJK7TbkHC/5
-	DFz55V0t/mDnZ+1i6YWo2C8aRL5p1HxfyMevmsHKlt+DpZO75OKj4o4vpt752dzz1emT
-	STcQ==
-X-Gm-Message-State: AHPjjUiDIR6Lcs/eW7+ANJqdZlRl7ePtJFpNQ7szPWfcErf3ZKjll/rp
-	FUeNfkc6xtjv9wtlI5rNOqgo851Vm+o=
-X-Google-Smtp-Source: AOwi7QBx0C2cB5SA14eycUN592WrZeMIms55lqXHfJy0GZuffW81w6yBld5RxO/m5mdlSc+LD4ymxw==
-X-Received: by 10.99.117.81 with SMTP id f17mr3262523pgn.314.1506574168255;
-	Wed, 27 Sep 2017 21:49:28 -0700 (PDT)
-Received: from yct-lpt.lan ([172.58.40.225])
-	by smtp.gmail.com with ESMTPSA id s27sm756049pgo.59.2017.09.27.21.49.26
-	for <openembedded-devel@lists.openembedded.org>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=l7MrkU9819zynUVD+YCpd9oBxJn/0CyghzyXv5ys8Ok=;
+	b=sS0rpL4+F/Ikna5QqCkZKDv/8UWntMAEKaeNEukChHzxenMPGSDTJrXkguNubVxQ9l
+	cjYZPTimc0bvS27TugvC25XaVBjK2jDrgCf/fVe27WR/3lvSUeJCnGEQrVsAz7iV3loV
+	EM/mQBXyt/r9n8Pq9T1PAAtqwxaX7z6RnSJ6mhUojV2JBS6WIM2qTlrjPZKhDtwSmmTn
+	+ukTj1XhuFZG0ucvasFNB2+oF4ihts4UbuxbiGUPZniuRzGJR6BlPl0SzJ2itGMqEjzT
+	k6mLIlrcoLECSgUc4NKoMqAyE4vhVSBKTh4lTT9Dqu2WF1s5vzsckWDf0KvVAfhaWMhW
+	E+2Q==
+X-Gm-Message-State: AHPjjUg+1twthM79eTXUq4KBS9OJKIj3Zga00p07CgoEDLAXiVzPCJdp
+	nEZF83qE/xg5vrul0JFvXnAGjA==
+X-Google-Smtp-Source: AOwi7QDQzXTclZTUpUMTnhHe6RJFcm0HhbUQE3cIPHRxDpk5j0zKUaqpeeUy1mYGoAERLW2LFOY7sw==
+X-Received: by 10.99.191.75 with SMTP id i11mr6128957pgo.136.1506662871198;
+	Thu, 28 Sep 2017 22:27:51 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::1f76])
+	by smtp.gmail.com with ESMTPSA id
+	t25sm5302552pfe.96.2017.09.28.22.27.50
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 27 Sep 2017 21:49:26 -0700 (PDT)
+	Thu, 28 Sep 2017 22:27:50 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <b38b99b3-9090-a99c-06c1-396ce3baab26@linuxfoundation.org>
-	<CAHQecY5WmsyfQTpEj_ipqMVsak3LcJtr=JonpsikKW8N94eCxw@mail.gmail.com>
-From: Michael Halstead <mhalstead@linuxfoundation.org>
-Organization: Linux Foundation
-Message-ID: <d65a22dd-7d21-4e2a-412b-07d99cb5b515@linuxfoundation.org>
-Date: Wed, 27 Sep 2017 21:49:24 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.3.0
-MIME-Version: 1.0
-In-Reply-To: <CAHQecY5WmsyfQTpEj_ipqMVsak3LcJtr=JonpsikKW8N94eCxw@mail.gmail.com>
-Subject: Re: [infra] git domain name updates
+Date: Thu, 28 Sep 2017 22:27:41 -0700
+Message-Id: <20170929052741.7787-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.2
+Subject: [meta-oe][PATCH V3] mongodb: Pass computed endian variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,75 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Sep 2017 04:49:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Fri, 29 Sep 2017 05:27:50 -0000
 
-On 09/25/2017 05:38 PM, Tom King wrote:
-> I would like to do this with the OE Git as well as I see several large > spikes everyday where the server gets very busy and this would help:
-> > git.openembedded.org for read-only access > > new
-push.openembedded.org and ra.openembedded.org for those with Write >
-Access. >
-I agree, the same improvements are in order for OE as well. The new
-domains are available now.
+If not passed to SCon, it will try to guess it
+and do it by poking at build host, which wont
+work in cross environment
 
-Please update any ssh remotes to point at either push.openembedded.org
-or ra.openembedded.org. Make sure any git:// or http:// remotes are
-pointing at git.openembedded.org.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+Changes in V3: Inherit siteinfo class
 
-For example,
+ meta-oe/recipes-support/mongodb/mongodb_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-git remote set-url origin
-ssh://git@push.openembedded.org/openembedded-core-contrib
-
-Then we will be ready to accelerate OE's read-only git access when the
-OE tech committee approves.
-
-> Tom King > Infrastructure OE Project. > > > ---------- Forwarded message
----------- > From: Michael Halstead <mhalstead@linuxfoundation.org> >
-Date: Mon, Sep 25, 2017 at 5:17 PM > Subject: [yocto] [infra] git domain
-name updates > To: yocto-infrastructure@yoctoproject.org,
-yocto@yoctoproject.org > >
-> Hello,
->
-> As Yocto Project continues to grow load on our git server does as
-> well. We are going to make a few changes to our git infrastructure to
-> allow for more growth.
->
-> All read-only git operations should point at git.yoctoproject.org. For
-> example poky can be cloned from the following URLs:
->
-> git://git.yoctoproject.org/poky
-> https://git.yoctoproject.org/git/poky
->
-> If you have repositories pointed at www.yoctoproject.org,
-> git.pokylinux.org, or any other domain name please update their remotes
-> to git.yoctoproject.org.
->
-> Read-write operations via ssh will use a new domain specifically for
-> that purpose. I've added push.yoctoproject.org and ra.yoctoproject.org
-> (like ra.kernel.org).
->
-> Read-write URLs should be updated to the new domain names. I've
-> changed mine like so:
->
->
-> git remote set-url origin ssh://git@push.yoctoproject.org/poky-contrib
->
->
-> This is all ready to go right now. Please update your remotes.
->
-> We will have to make these changes required before we can start to get
-> performance benefits from them. I suggest November 1st 2017 but I need
-> more feedback before we can set a cut off date.
->
-> Thank you,
->
-> -- > _______________________________________________ > yocto mailing list
-> yocto@yoctoproject.org > https://lists.yoctoproject.org/listinfo/yocto
+diff --git a/meta-oe/recipes-support/mongodb/mongodb_git.bb b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+index d44d8d3c7..0ff7d0b59 100644
+--- a/meta-oe/recipes-support/mongodb/mongodb_git.bb
++++ b/meta-oe/recipes-support/mongodb/mongodb_git.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://GNU-AGPL-3.0.txt;md5=73f1eb20517c55bf9493b7dd6e480788
+ 
+ DEPENDS = "openssl libpcre libpcap zlib python boost"
+ 
+-inherit scons dos2unix
++inherit scons dos2unix siteinfo
+ 
+ PV = "3.4.6+git${SRCPV}"
+ SRCREV = "c55eb86ef46ee7aede3b1e2a5d184a7df4bfb5b5"
+@@ -58,6 +58,7 @@ EXTRA_OESCONS = "--prefix=${D}${prefix} \
+                  --use-system-zlib \
+                  --js-engine=none \
+                  --nostrip \
++                 --endian=${@base_conditional('SITEINFO_ENDIANNESS', 'le', 'little', 'big', d)} \
+                  ${PACKAGECONFIG_CONFARGS} \
+                  mongod mongos"
+ 
 -- 
-Michael Halstead
-Linux Foundation / SysAdmin
+2.14.2
 
 
