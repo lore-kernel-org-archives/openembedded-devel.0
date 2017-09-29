@@ -1,25 +1,38 @@
-Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AF5771B57
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 29DE26612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Sep 2017 17:37:15 +0000 (UTC)
-Received: from fmsmga004.fm.intel.com ([10.253.24.48])
-	by fmsmga105.fm.intel.com with ESMTP; 29 Sep 2017 10:37:17 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.42,453,1500966000"; d="scan'208";a="317764181"
-Received: from ttorling-mac01.jf.intel.com (HELO [10.24.14.228])
-	([10.24.14.228])
-	by fmsmga004.fm.intel.com with ESMTP; 29 Sep 2017 10:37:16 -0700
-Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
-From: Tim Orling <timothy.t.orling@linux.intel.com>
-In-Reply-To: <1506673565-17289-1-git-send-email-guy@guy-morand.ch>
-Date: Fri, 29 Sep 2017 10:37:17 -0700
-Message-Id: <47BE632C-49AC-4509-9E45-A00124619DF5@linux.intel.com>
-References: <1506673565-17289-1-git-send-email-guy@guy-morand.ch>
-To: Guy Morand <guy@guy-morand.ch>
-X-Mailer: Apple Mail (2.3273)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH] Add python pandas recipes
+	Fri, 29 Sep 2017 18:53:29 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id z14so321484qkg.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Sep 2017 11:53:31 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=28sWRV0Umd5x0aL6zuQ+iR8mAvDr5QaV46s3nMCR9Y4=;
+	b=gliFKkdp0VGfChin+frPyLs4QD1XJsvqCxAxxo77ETOeeVnz3GoIvOCtQt/UNpotqA
+	4q13MvmVo5lK6yoBE8LLMOFIoPEe6UG29v8IWPQugL4PN45f2vokROQ0EufriEHBCVW8
+	SIb1ynRwlyKXl0gfk6zgadE2Qpq0cGXFQC3NO6LA07P5XRr+EvS0K8DW/+vxkA/KBl46
+	zcWnYCOogsanSW+Ir+d5PWbCLTXc0WXqBuQtFfBj3SX3TWgRNdOiahOBjZA/OTtWXawy
+	OV1Bk3tUIBpp2+QUqs7hXlhE3oiBjWJAFj8e3ijLllajBHtWzvso41vEVX4kUxV6/Hsw
+	7cuw==
+X-Gm-Message-State: AMCzsaWaT9poJcmY84UjMcVJu6tNdoYkKFFHLIgHahmchnL5/ATjCW3Z
+	+t3LVeUu2gVbCLPUARMWfRKzKYfw
+X-Google-Smtp-Source: AOwi7QD4uZKHLjfueQoe3toWAl/AO9Mb95t+ny/vpGH1+k0e2Fg2dB7ZgLHKptnijg7qeKa52hzJYg==
+X-Received: by 10.55.96.199 with SMTP id u190mr4681961qkb.197.1506711210736;
+	Fri, 29 Sep 2017 11:53:30 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id t2sm3040176qkd.16.2017.09.29.11.53.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 29 Sep 2017 11:53:29 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 29 Sep 2017 14:53:20 -0400
+Message-Id: <1506711200-22626-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-networking][PATCH] libauthen-radius-perl: move recipe to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,67 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Sep 2017 17:37:16 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 29 Sep 2017 18:53:30 -0000
 
+Recipe depends on radius which is located in meta-networking
 
-> On Sep 29, 2017, at 1:26 AM, Guy Morand <guy@guy-morand.ch> wrote:
->=20
-> =E2=80=94
-> <snip>
-> diff --git =
-a/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb =
-b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
-> new file mode 100644
-> index 0000000..f4c486b
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
-> @@ -0,0 +1,10 @@
-> +inherit setuptools
-> +require python-pandas.inc
-> +
-> +RDEPENDS_${PN} +=3D " \
-> +  ${PYTHON_PN}-json \
-> +  ${PYTHON_PN}-importlib \
-> +  "
-> +
-> +SRC_URI[md5sum] =3D "4df858f28b4bf4fa07d9fbb7f2568173"
-> +SRC_URI[sha256sum] =3D =
-=E2=80=9Ca777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"=
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-devtools/perl}/libauthen/libauthen-radius-perl/run-ptest      | 0
+ .../perl}/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch  | 0
+ .../recipes-devtools/perl}/libauthen/libauthen-radius-perl_0.22.bb        | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-perl/recipes-perl => meta-networking/recipes-devtools/perl}/libauthen/libauthen-radius-perl/run-ptest (100%)
+ rename {meta-perl/recipes-perl => meta-networking/recipes-devtools/perl}/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch (100%)
+ rename {meta-perl/recipes-perl => meta-networking/recipes-devtools/perl}/libauthen/libauthen-radius-perl_0.22.bb (100%)
 
-
-These SRC_URI checksum lines should go in the python-pandas.inc file, =
-rather than duplicate them in both the python-pandas and python3-pandas =
-files.
-
-It is quite common now for the =E2=80=9Cversion specific=E2=80=9D files =
-to only be the =E2=80=9Cinherit=E2=80=9D line and the =E2=80=9Crequire =
-foo.inc=E2=80=9D line.
-
-DRY and KISS.
-
-> diff --git =
-a/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb =
-b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
-> new file mode 100644
-> index 0000000..81dd360
-> --- /dev/null
-> +++ b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
-> @@ -0,0 +1,5 @@
-> +inherit setuptools3
-> +require python-pandas.inc
-> +
-> +SRC_URI[md5sum] =3D "4df858f28b4bf4fa07d9fbb7f2568173"
-> +SRC_URI[sha256sum] =3D =
-"a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
-> --=20
-> 2.7.4
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl/run-ptest b/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/run-ptest
+similarity index 100%
+rename from meta-perl/recipes-perl/libauthen/libauthen-radius-perl/run-ptest
+rename to meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/run-ptest
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch b/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
+similarity index 100%
+rename from meta-perl/recipes-perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
+rename to meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl/test.pl-adjust-for-ptest.patch
+diff --git a/meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb b/meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl_0.22.bb
+similarity index 100%
+rename from meta-perl/recipes-perl/libauthen/libauthen-radius-perl_0.22.bb
+rename to meta-networking/recipes-devtools/perl/libauthen/libauthen-radius-perl_0.22.bb
+-- 
+2.7.4
 
 
