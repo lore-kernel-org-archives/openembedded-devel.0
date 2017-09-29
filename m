@@ -1,24 +1,22 @@
-Return-Path: <guy@guy-morand.ch>
-Received: from smtp-sh.infomaniak.ch (smtp-sh.infomaniak.ch [128.65.195.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 208767772F
+Return-Path: <pascal.bach@siemens.com>
+Received: from thoth.sbs.de (thoth.sbs.de [192.35.17.2])
+	by mail.openembedded.org (Postfix) with ESMTP id A81C07772F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Sep 2017 08:26:10 +0000 (UTC)
-Received: from smtp6.infomaniak.ch (smtp6.infomaniak.ch [83.166.132.19])
-	by smtp-sh.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8T8QBdr000899
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=FAIL); Fri, 29 Sep 2017 10:26:11 +0200
-Received: from localhost.localdomain ([62.192.30.6]) (authenticated bits=0)
-	by smtp6.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v8T8Q8Am055570
-	(version=TLSv1/SSLv3 cipher=AES128-SHA256 bits=128 verify=NO);
-	Fri, 29 Sep 2017 10:26:11 +0200
-From: Guy Morand <guy@guy-morand.ch>
+	Fri, 29 Sep 2017 14:54:29 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by thoth.sbs.de (8.15.2/8.15.2) with ESMTPS id v8TEsTMn002093
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 29 Sep 2017 16:54:29 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.77.178])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v8TEsToJ007987;
+	Fri, 29 Sep 2017 16:54:29 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Sep 2017 10:26:05 +0200
-Message-Id: <1506673565-17289-1-git-send-email-guy@guy-morand.ch>
-X-Mailer: git-send-email 2.7.4
-X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
-X-Antivirus-Code: 0x100000
-Subject: [meta-python][PATCH] Add python pandas recipes
+Date: Fri, 29 Sep 2017 16:54:27 +0200
+Message-Id: <1506696867-21375-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-mono][PATCH] libgdiplus: include name in downloaded file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,72 +29,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Sep 2017 08:26:12 -0000
+X-List-Received-Date: Fri, 29 Sep 2017 14:54:30 -0000
 
+Without this change the file is named ${PV}.tar.gz
+
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- .../recipes-devtools/python/python-pandas.inc       | 21 +++++++++++++++++++++
- .../recipes-devtools/python/python-pandas_0.20.3.bb | 10 ++++++++++
- .../python/python3-pandas_0.20.3.bb                 |  5 +++++
- 3 files changed, 36 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-pandas.inc
- create mode 100644 meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
+ recipes-mono/libgdiplus/libgdiplus-native_4.2.bb | 3 +--
+ recipes-mono/libgdiplus/libgdiplus_4.2.bb        | 6 +++---
+ 2 files changed, 4 insertions(+), 5 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta-python/recipes-devtools/python/python-pandas.inc
-new file mode 100644
-index 0000000..9ca3806
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pandas.inc
-@@ -0,0 +1,21 @@
-+SUMMARY  = "pandas library for high-performance data analysis tools"
-+DESCRIPTION = "pandas is an open source, BSD-licensed library providing \
-+high-performance, easy-to-use data structures and data analysis tools for \
-+the Python programming language."
-+HOMEPAGE = "http://pandas.pydata.org/"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=66017d3134349017409386be85176145"
-+
-+PYPI_PACKAGE = "pandas"
-+
-+inherit pypi
-+
-+DEPENDS += " \
-+  ${PYTHON_PN}-numpy-native \
-+  "
-+
-+RDEPENDS_${PN} += " \
-+  ${PYTHON_PN}-numpy \
-+  ${PYTHON_PN}-dateutil \
-+  ${PYTHON_PN}-pytz \
-+  "
-diff --git a/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
-new file mode 100644
-index 0000000..f4c486b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
-@@ -0,0 +1,10 @@
-+inherit setuptools
-+require python-pandas.inc
-+
-+RDEPENDS_${PN} += " \
-+  ${PYTHON_PN}-json \
-+  ${PYTHON_PN}-importlib \
-+  "
-+
-+SRC_URI[md5sum] = "4df858f28b4bf4fa07d9fbb7f2568173"
-+SRC_URI[sha256sum] = "a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
-new file mode 100644
-index 0000000..81dd360
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
-@@ -0,0 +1,5 @@
-+inherit setuptools3
-+require python-pandas.inc
-+
-+SRC_URI[md5sum] = "4df858f28b4bf4fa07d9fbb7f2568173"
-+SRC_URI[sha256sum] = "a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
+diff --git a/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb b/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
+index 4dee6a0..d3a988e 100644
+--- a/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
++++ b/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
+@@ -6,8 +6,7 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fe7364dfce9f3689eb6995e7cdd56879"
+ 
+-SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz \
+-	"
++SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz;downloadfilename=libgdiplus-${PV}.tar.gz"
+ 
+ inherit autotools pkgconfig native
+ 
+diff --git a/recipes-mono/libgdiplus/libgdiplus_4.2.bb b/recipes-mono/libgdiplus/libgdiplus_4.2.bb
+index 00eb406..03d87f7 100644
+--- a/recipes-mono/libgdiplus/libgdiplus_4.2.bb
++++ b/recipes-mono/libgdiplus/libgdiplus_4.2.bb
+@@ -12,9 +12,9 @@ PACKAGECONFIG[tiff] = "--with-libtiff,--without-libtiff,tiff"
+ PACKAGECONFIG[gif] = "--with-libgif,--without-libgif,giflib"
+ PACKAGECONFIG[exif] = "--with-libexif,--without-libexif,libexif"
+ 
+-SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz \
+-	   file://01-remove-libjpeg-path.patch \
+-	"
++SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz;downloadfilename=libgdiplus-${PV}.tar.gz \
++           file://01-remove-libjpeg-path.patch \
++          "
+ 
+ inherit autotools pkgconfig
+ 
 -- 
-2.7.4
+2.1.4
 
 
