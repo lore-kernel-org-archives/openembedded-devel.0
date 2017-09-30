@@ -1,39 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CA9C6612D
+Return-Path: <Fupan.Li@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C861460851
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Sep 2017 18:54:52 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id o3so746286qte.6
+	Sat, 30 Sep 2017 02:24:55 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v8U2OuJl025217
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Sep 2017 11:54:54 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SiJO6ttcmpDap4Z2QV1N9cYf/J7u4LXcnP/jChiPOoc=;
-	b=HlLSO3A4QU6U9OSYE1vExG/SO32eGNDVqvXZ3lKQLuJIPbW7PPI7oKDGaJRQeuRjnz
-	ArsvJmQrJaFQo7VvqK9bFDS7fcoyq0IvA1mS5z8KSyAgsoWPVPM01sOycUugxJcRt8yR
-	dwoLVLvmRyGKfMOO2/x3NVfMbXodzgRaaqxUsBelYEdFZFrAZhi1jkG/po9cWViSOyNf
-	b1sUenbJLarqCr2kqYrkdfyQXg6JOxXIWv3FLwwLB6S4Ou3lpnqqjmGkopAz61ZP74I2
-	RpWlXytNlRA8dLK0mYdpx7DXPz9F7ZxUDD06NNVDjZ5YieIr9FSrqtEILMwfgijRKEyF
-	1ezQ==
-X-Gm-Message-State: AMCzsaVla2KFLRu4KByW3WWJUHpOZCAcH2CdIIje+Z7KYJv3Ur+ihFJM
-	ubOmwuhTVdmVfBqalTlG0cfAzRH8
-X-Google-Smtp-Source: AOwi7QBfP2JdgMDuoqQuyk0sjpPH20Ob5EfQ2+0IWi8M+kZAqFJ6mWPCwZ1r9ylUHC7ndx+Al7wcLw==
-X-Received: by 10.200.48.185 with SMTP id v54mr7363605qta.245.1506711293435;
-	Fri, 29 Sep 2017 11:54:53 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	f34sm3072812qtb.40.2017.09.29.11.54.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 29 Sep 2017 11:54:52 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 29 Sep 2017 14:54:46 -0400
-Message-Id: <1506711286-24000-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-perl][PATCH] meta-perl: update layer.conf to include openembedded-layer
+	Fri, 29 Sep 2017 19:24:56 -0700
+Received: from ala-lpd-susbld2.wrs.com (147.11.105.122) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Fri, 29 Sep 2017 19:24:55 -0700
+From: <fupan.li@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Sep 2017 19:24:55 -0700
+Message-ID: <20170930022455.137406-1-fupan.li@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-java][PATCH] openjdk-8-common: Fix the issue of building failed adlc on host with gcc < 6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,26 +31,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Sep 2017 18:54:53 -0000
+X-List-Received-Date: Sat, 30 Sep 2017 02:24:55 -0000
+Content-Type: text/plain
 
-Several recipes require items that are in the openembedded layer
+From: Fupan Li <fupan.li@windriver.com>
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+The patch recipes-core/openjdk/patches-openjdk-8/openjdk8-fix-adlc-flags.patch
+had tried to fix this issue, and it tried to filter out the TARGET_FLAGS/TARGET_
+CXXFLGAS, but for the flags such as "-fno-lifetime-dse" was added to CFLAGS/CXXFLAGS,
+directly, thus that patch failed to filter it out.
+
+To fix this issue, it's better to add those GCC version specific flags to BUILD_CFLAGS/
+BUILD_CXXFLAGS and TARGET_CFLAGS/TARGET_CXXFLAGS separatedly, thus that patch can work
+as expected.
+
+Signed-off-by: Fupan Li <fupan.li@windriver.com>
 ---
- meta-perl/conf/layer.conf | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ recipes-core/openjdk/openjdk-8-common.inc | 36 ++++++++++++++++++++-----------
+ 1 file changed, 24 insertions(+), 12 deletions(-)
 
-diff --git a/meta-perl/conf/layer.conf b/meta-perl/conf/layer.conf
-index 0485ac8..a861c3e 100644
---- a/meta-perl/conf/layer.conf
-+++ b/meta-perl/conf/layer.conf
-@@ -13,4 +13,4 @@ BBFILE_PRIORITY_perl-layer = "6"
- # cause compatibility issues with other layers
- LAYERVERSION_perl-layer = "1"
+diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
+index 83828e1..c609232 100644
+--- a/recipes-core/openjdk/openjdk-8-common.inc
++++ b/recipes-core/openjdk/openjdk-8-common.inc
+@@ -231,27 +231,39 @@ FLAGS_GCC7 = "-fno-lifetime-dse -fno-delete-null-pointer-checks"
+ # version is and only add the flags that are appropriate for that GCC
+ # version.
  
--LAYERDEPENDS_perl-layer = "core"
-+LAYERDEPENDS_perl-layer = "core openembedded-layer"
+-def version_specific_cflags(d):
++def version_specific_cflags(d, toolchain):
+     extraflags = None
+     version = None
+ 
+-    if bb.data.inherits_class('native', d):
+-        from subprocess import Popen, PIPE
++    from subprocess import Popen, PIPE
++    cmd = d.expand('%s -dumpversion' % toolchain ).split()
++    cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
++    version = cc.communicate()[0].decode('utf-8')[0]
+ 
+-        cmd = d.expand('${CC} -dumpversion').split()
+-        cc = Popen(cmd, stdout=PIPE, stderr=PIPE)
+-        version = cc.communicate()[0].decode('utf-8')[0]
++    if version.isdigit():
++        extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
++        return extraflags
++    return ''
++
++python __anonymous() {
++    if bb.data.inherits_class('native', d):
++        toolchain = d.getVar('CC', True)
++        extraflags = version_specific_cflags(d, toolchain)
++        d.appendVar("CFLAGS", ' ' + extraflags) 
++        d.appendVar("CXXFLAGS", ' ' + extraflags)
+     else:
+         # in the cross case, trust that GCCVERSION is correct. This won't
+         # work if the native toolchain is Clang, but as of this writing that
+         # doesn't work anyway.
+         version = d.getVar('GCCVERSION', expand=True)[0]
+-
+-    if version.isdigit():
+         extraflags = d.getVar('FLAGS_GCC%d' % int(version), True) or ''
+-        return extraflags
+-    return ''
++        d.appendVar("TARGET_CFLAGS", ' ' + extraflags)
++        d.appendVar("TARGET_CXXFLAGS", ' ' + extraflags)
++
++        toolchain = d.getVar('BUILD_CC', True)
++        extraflags = version_specific_cflags(d, toolchain)
++        d.appendVar("BUILD_CFLAGS", ' ' + extraflags)
++        d.appendVar("BUILD_CXXFLAGS", ' ' + extraflags)
++}
+ 
+-CFLAGS_append = " ${@version_specific_cflags(d)}"
+-CXXFLAGS_append = " ${@version_specific_cflags(d)}"
+ CXX_append = " -std=gnu++98"
 -- 
-2.7.4
+2.11.0
 
 
