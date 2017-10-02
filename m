@@ -1,34 +1,21 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id E34C171D79
+Return-Path: <paul.eggleton@linux.intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 6217377794
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Oct 2017 22:25:30 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id D554A209BC;
-	Mon,  2 Oct 2017 22:25:31 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id sMX5J4VbSTtx; Mon,  2 Oct 2017 22:25:31 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id ABECE207A6;
-	Mon,  2 Oct 2017 22:25:30 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id F0F971626B2; Mon,  2 Oct 2017 18:25:29 -0400 (EDT)
-Date: Mon, 2 Oct 2017 18:25:29 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-Message-ID: <20171002222529.GE16828@denix.org>
-References: <1499835521-973-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<1499835521-973-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-MIME-Version: 1.0
-In-Reply-To: <1499835521-973-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-qt5] [PATCH v4 1/4] qt5: add qt5-ptest.inc
+	Tue,  3 Oct 2017 01:36:40 +0000 (UTC)
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+	by orsmga105.jf.intel.com with ESMTP; 02 Oct 2017 18:36:42 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.42,471,1500966000"; d="scan'208";a="158624939"
+Received: from imakwana-mobl.amr.corp.intel.com (HELO
+	peggleto-mobl.ger.corp.intel.com) ([10.255.142.79])
+	by fmsmga006.fm.intel.com with ESMTP; 02 Oct 2017 18:36:39 -0700
+From: Paul Eggleton <paul.eggleton@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Oct 2017 08:40:08 +1300
+Message-Id: <cover.1506973045.git.paul.eggleton@linux.intel.com>
+X-Mailer: git-send-email 2.9.5
+Subject: [meta-oe][PATCH v2 0/2] Add mraa/upm recipes from meta-refkit-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,120 +28,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Oct 2017 22:25:31 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 Oct 2017 01:36:41 -0000
 
-On Wed, Jul 12, 2017 at 12:58:38PM +0800, Huang Qiyu wrote:
->   Add qt5-ptest.inc file for qt ptest related tasks
->         1)      Rewrite do_compile_ptest task for qt
->         2)      Add new do_compile_ptest_base and task do_install_ptest
->         3)      Write do_populate_sysroot_append to resolve do_compile_ptest_base problem in yocto2.3
+Move in recipes from meta-refkit-core for the mraa I/O library and upm
+sensor library.
 
-Something in this order of tasks is not completely correct - I just got 
-qtxmlpatterns:do_install_ptest very early on (after fetch/unpack, but before 
-compile/install). Even before pseudo-native fnished building and installing. 
-And since do_install_ptest task marked as "fakeroot", it obviously failed:
+Changes since v1:
+* Set COMPATIBLE_HOST based upon what mraa's CMakeLists.txt checks for
 
-NOTE: Running task 614 of 7991 (/OE/master/sources/meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest)
-ERROR: Failed to spawn fakeroot worker to run /OE/master/sources/meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest: [Errno 2] No such file or directory: '/OE/master/build/tmp-glibc/sysroots-components/x86_64/pseudo-native/usr/bin/pseudo'
 
-Has anyone else seen this?
+The following changes since commit 06e8aa6bda49b4c103dcb41b059e3dba168ee37a:
+
+  mongodb: Fix build on aarch64 (2017-10-02 12:35:39 +0000)
+
+are available in the git repository at:
+
+  git://git.openembedded.org/meta-openembedded-contrib paule/mraa
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=paule/mraa
+
+Paul Eggleton (2):
+  mraa: move recipe from meta-refkit-core
+  upm: add recipe from meta-refkit-core
+
+ meta-oe/recipes-extended/mraa/mraa_git.bb          | 51 ++++++++++++++++++++
+ ...15-fixed-case-logic-in-getThresh-function.patch | 54 ++++++++++++++++++++++
+ meta-oe/recipes-extended/upm/upm_git.bb            | 45 ++++++++++++++++++
+ 3 files changed, 150 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/mraa/mraa_git.bb
+ create mode 100644 meta-oe/recipes-extended/upm/files/ads1x15-fixed-case-logic-in-getThresh-function.patch
+ create mode 100644 meta-oe/recipes-extended/upm/upm_git.bb
 
 -- 
-Denys
+2.9.5
 
-
->         The compile error log is shown as follow:
->         cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-p
-> oky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/recipe-sysroot-native/usr/bin/qt5/qmake -o M
-> akefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-poky-linux/qtxmlpatterns/5.8.0+gitA
-> UTOINC+9f7e01b582-r0/git/tests/auto/auto.pro ) && make -f Makefile
->         Project ERROR: Could not find feature xml-schema.
->         Makefile:42: recipe for target 'sub-auto-make_first' failed
-> 
-> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> ---
->  recipes-qt/qt5/qt5-ptest.inc | 62 ++++++++++++++++++++++++++++++++++++++++++++
->  1 file changed, 62 insertions(+)
->  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
-> 
-> diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> new file mode 100644
-> index 0000000..49d44ac
-> --- /dev/null
-> +++ b/recipes-qt/qt5/qt5-ptest.inc
-> @@ -0,0 +1,62 @@
-> +SRC_URI += "file://run-ptest"
-> +
-> +inherit ptest
-> +
-> +addtask do_populate_sysroot after do_install before do_compile_ptest_base
-> +deltask do_compile_ptest_base
-> +addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest
-> +addtask do_install_ptest after do_compile_ptest_base before do_package
-> +
-> +do_compile_ptest() {
-> +    cd ${S}/tests
-> +    qmake -o Makefile tests.pro
-> +    oe_runmake
-> +}
-> +
-> +do_populate_sysroot_append() {
-> +    workdir = d.getVar('WORKDIR')
-> +    srcdir = workdir + '/sysroot-destdir/usr/'
-> +    destdir = workdir + '/recipe-sysroot/usr/'
-> +    
-> +    def copyFiles(sourceDir, targetDir, filelist):
-> +        for file in os.listdir(sourceDir):
-> +            sourceFile = os.path.join(sourceDir,  file)
-> +            targetFile = os.path.join(targetDir,  file)
-> +            filelist.append(targetFile)    #record the file list
-> +            if os.path.isfile(sourceFile):
-> +                if not os.path.exists(targetDir):
-> +                    os.makedirs(targetDir)
-> +                if not os.path.exists(targetFile) or(os.path.exists(targetFile) and (os.path.getsize(targetFile) != os.path.getsize(sourceFile))):
-> +                        open(targetFile, "wb").write(open(sourceFile, "rb").read())
-> +            if os.path.isdir(sourceFile):
-> +                First_Directory = False
-> +                copyFiles(sourceFile, targetFile, filelist)
-> +    
-> +    if os.path.exists(destdir):
-> +        Tmpfilelist = []
-> +        copyFiles(srcdir, destdir, Tmpfilelist)
-> +        
-> +        fp=open(workdir + '/filelist', 'w')
-> +        for i in Tmpfilelist:
-> +            fp.write(i)
-> +            fp.write("\n")
-> +        fp.close()
-> +}
-> +
-> +fakeroot do_install_ptest() {
-> +    mkdir -p ${D}${PTEST_PATH}
-> +    t=${D}${PTEST_PATH}
-> +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
-> +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
-> +            echo ${var##*/} >> ${t}/tst_list
-> +            install -m 0644  ${var} ${t}
-> +        fi
-> +    done
-> +    for file in `cat ${WORKDIR}/filelist`; do
-> +       if [ -f $file ]; then
-> +           rm -f $file
-> +       fi
-> +    done 
-> +    rm -f ${WORKDIR}/filelist
-> +}
-> +
-> -- 
-> 2.7.4
-> 
-> 
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
