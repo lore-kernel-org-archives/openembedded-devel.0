@@ -1,49 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A9ECE71ADD
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 2489F774DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  2 Oct 2017 16:07:06 +0000 (UTC)
-Received: by mail-pg0-f66.google.com with SMTP id u27so6415526pgn.1
+	Mon,  2 Oct 2017 16:07:07 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id 124so1895662pgi.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Oct 2017 09:07:08 -0700 (PDT)
+	Mon, 02 Oct 2017 09:07:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=XkaORZkQj+4zg38KKZrXAYHLZaRCR38ewuISaePIMNA=;
-	b=Abh3zKBCVwUFFfKrEwiAFgo5KN35QZGDWwpahhATDWRiSJ9COBuLhDVjoahigWCNop
-	yhLbNwqaHdQ/8JDT5pocgbNkqq45zdolHaRIBKMSE941oMytkhs/NUv0pXwyhG576yv2
-	friae0an4/ZzV/BiYHNKUKWRL32vw8JT5YZZ1SppqkbNu7rfS8JuyOzh8HHr+7lO7JbT
-	jVt1EHqOZ150blXt9NqmESBGPzY6jcHTfthstTHx1wLm/TiXCjG6kU+tFt9paYnR6vdr
-	2tvLHM0NoiB0C6YzX8/yl1IfoycapYESPv/4bnjicDee80zn4fcRMj4DvKs7aHbtmGi0
-	xrZA==
+	bh=4BUi9g9fx4dzvEabC988L/NvesJeMvwixtf3QPxhKWs=;
+	b=hz4uf3uy0bwg5nynyUhTxyjqIG2xkQRZ2PKSn0F/KiALb0qOM4UpOW4V9CibgJprMG
+	1tDfWBwSCXuIh/yIPyTxxka89Jkow40ZBib62PfGEAU/Q53TrApvuYY4E7pm9xo/jMkN
+	nIoFXR4ePeGd+cChmxc6Kqck8iEmiaOFjBfPhs0HUKkC2h+qRuaXxRoJb7p2YU9DLGp7
+	prEatRlBEPMmoDrraUg4Yku5frYU66ksY+KBOYYPRQ6FA/OnzUJ8Av9+M3V+xvBICznE
+	N7+e/JGkcwrv0W+yXV9xj8mCh8x97vnDkTp7sd0/WpKeleADLhNH/knAudad0sIR0COS
+	K/HA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=XkaORZkQj+4zg38KKZrXAYHLZaRCR38ewuISaePIMNA=;
-	b=aOb5JdO9emxlHOZoZIS8VSPs5tq6TecqdqAsoPWwinh0qOWkv8v/9RsZN8Bk7EqD/d
-	k/xZmoNQ6CVtBDiemqsm7VkByTDJ5TbjVfjLwpeU9P+xHu/cCwEVNQCRbD8kMjYTGEby
-	Ew3FnpRt7z21st13bKo8SmWM2LFiQPw0AirfXFi4tfQzDgs9JdC+RjFP7iIy84yIo78h
-	t+gy2kgz1kR8XSBzv9OvLnPBd2XcMHBP4QdKS6Im9O7zJaa1yFen9dEYcoia1EDpYFG5
-	3nCkf5ewKT+jguNyOuqHkvXM+EgOpnH6/60Aqspak5LVHY103xfslylVWsm/Ktmk1Rud
-	jU7Q==
-X-Gm-Message-State: AHPjjUjg0fMGrwO6lfOCI1EF+iicwPKyzGmnadwKmBvHw3zbfOLN+CiO
-	jhpGasv9NjpJdxtZm3YZDtRRDg==
-X-Google-Smtp-Source: AOwi7QBiQ/VCax74+xWyDpqykB9CG/8xIAQRVwPLv9eKhUMklBMPmLLXsA17paO6O2PdiQz2tWKw3A==
-X-Received: by 10.99.180.7 with SMTP id s7mr12583276pgf.171.1506960427735;
-	Mon, 02 Oct 2017 09:07:07 -0700 (PDT)
+	bh=4BUi9g9fx4dzvEabC988L/NvesJeMvwixtf3QPxhKWs=;
+	b=VoomG7FSi/HtejbkSaOc6uRrU9C/Z4k2KWShWeQBybKhTdJnaZVPB/OZtxfP8XekOh
+	+9qxhNQxzSY5PO9YrPWKktzrwQjerqHzVdj7+D6rXaJO5666AtcHRz4zcy7S8gfLmjcA
+	dDG43QcD9oedDjVQHQC1b+mTzMm0CGpgy5BUTkNaeH6+7+xsXihkfjk8dIlNK9Jvg3RI
+	Ox2AfPUMwnLCBb51lN83VLnMeIBY85zMHnVgtb6/5E/MqH2Jwe9f+mhYk44NjSKymRPf
+	iQPrQxwaWyfVxq7XomfBvuDx0jj0cipjhsaQ8gl6yfBCQETmTm7WQWKYXQ/7RTnnHEM2
+	BjDQ==
+X-Gm-Message-State: AHPjjUgUvEyasEXOUv3OWgLFizVu8DurhFb0hOQywtuQz6IPvvpnemPJ
+	gCqYgn4bMv+zCtm6rBc00MUMwg==
+X-Google-Smtp-Source: AOwi7QAXphqbPl27FsOVIyPQx1q37dG4wpr9KqNq3KsSfIhc7Eb7c+ifGpUWH46MOlE96GJlfeazkg==
+X-Received: by 10.98.74.156 with SMTP id c28mr14737877pfj.266.1506960429054;
+	Mon, 02 Oct 2017 09:07:09 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::1f76])
 	by smtp.gmail.com with ESMTPSA id
-	f2sm17329405pfg.135.2017.10.02.09.07.06
+	f2sm17329405pfg.135.2017.10.02.09.07.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 02 Oct 2017 09:07:06 -0700 (PDT)
+	Mon, 02 Oct 2017 09:07:07 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  2 Oct 2017 09:06:54 -0700
-Message-Id: <20171002160657.39576-2-raj.khem@gmail.com>
+Date: Mon,  2 Oct 2017 09:06:55 -0700
+Message-Id: <20171002160657.39576-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.2
 In-Reply-To: <20171002160657.39576-1-raj.khem@gmail.com>
 References: <20171002160657.39576-1-raj.khem@gmail.com>
-Subject: [meta-python][PATCH 2/5] python-m2crypto: Upgrade to 0.26.4
+Subject: [meta-initramfs][PATCH 3/5] ubi-utils-klibc: Update to 1.5.2 release of mtd-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,72 +56,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Oct 2017 16:07:06 -0000
+X-List-Received-Date: Mon, 02 Oct 2017 16:07:08 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../m2crypto-0.26.4-gcc_macros.patch               | 24 ++++++++++++++++++++++
- ...2crypto_0.26.0.bb => python-m2crypto_0.26.4.bb} |  6 +++---
- 2 files changed, 27 insertions(+), 3 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
- rename meta-python/recipes-devtools/python/{python-m2crypto_0.26.0.bb => python-m2crypto_0.26.4.bb} (88%)
+ .../0001-Makefile-only-build-ubi-utils.patch       | 25 ++++++++++------------
+ .../0005-common.h-klibc-fixes-2.patch              | 22 +++++--------------
+ ...ils-klibc_1.5.1.bb => ubi-utils-klibc_1.5.2.bb} |  8 +++----
+ 3 files changed, 19 insertions(+), 36 deletions(-)
+ rename meta-initramfs/recipes-devtools/mtd/{ubi-utils-klibc_1.5.1.bb => ubi-utils-klibc_1.5.2.bb} (90%)
 
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch b/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
-new file mode 100644
-index 000000000..2d738cc94
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-m2crypto/m2crypto-0.26.4-gcc_macros.patch
-@@ -0,0 +1,24 @@
-+Imported from Fedora
-+
-+--- M2Crypto/SWIG/_m2crypto.i	2017-09-26 11:26:33.000000000 +0200
-++++ M2Crypto-0.26.4/SWIG/_m2crypto.i	2017-09-26 21:04:14.080330741 +0200
-+@@ -7,6 +7,7 @@
-+  * Copyright (c) 2009-2010 Heikki Toivonen. All rights reserved.
-+  *
-+  */
-++%import "gcc_macros.h"
-+ 
-+ %module(threads=1) m2crypto
-+ /* We really don't need threadblock (PyGILState_Ensure() etc.) anywhere.
-+@@ -15,11 +16,6 @@
-+ %nothreadblock;
-+ %nothreadallow;
-+ 
-+-#if SWIG_VERSION >= 0x030000
-+-#define __WCHAR_MAX__ __WCHAR_MAX
-+-#define __WCHAR_MIN__ __WCHAR_MIN
-+-#endif
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch
+index 9d5e4ebf0..6e1b9ff10 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0001-Makefile-only-build-ubi-utils.patch
+@@ -25,11 +25,11 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  Makefile | 24 ++----------------------
+  1 file changed, 2 insertions(+), 22 deletions(-)
+ 
+-diff --git a/Makefile b/Makefile
+-index eade234..2275865 100644
+---- a/Makefile
+-+++ b/Makefile
+-@@ -16,28 +16,13 @@ endif
++Index: git/Makefile
++===================================================================
++--- git.orig/Makefile
+++++ git/Makefile
++@@ -16,28 +16,11 @@ endif
+  
+  TESTS = tests
+  
+@@ -37,7 +37,7 @@ index eade234..2275865 100644
+ -	ftl_format flash_erase nanddump doc_loadbios \
+ -	ftl_check mkfs.jffs2 flash_lock flash_unlock \
+ -	flash_otp_info flash_otp_dump flash_otp_lock flash_otp_write \
+--	mtd_debug flashcp nandwrite nandtest \
++-	mtd_debug flashcp nandwrite nandtest mtdpart \
+ -	jffs2dump \
+ -	nftldump nftl_format docfdisk \
+ -	rfddump rfdformat \
+@@ -51,15 +51,15 @@ index eade234..2275865 100644
+ -BINS += mkfs.ubifs/mkfs.ubifs
+ -BINS += $(addprefix ubi-utils/,$(UBI_BINS))
+ -SCRIPTS = flash_eraseall
+-+BINS = $(addprefix ubi-utils/,$(UBI_BINS))
+- 
+- TARGETS = $(BINS)
 +-
-+ %{
-+ #if __GNUC__ < 5
-+ #pragma GCC diagnostic ignored "-Wunused-label"
-diff --git a/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-similarity index 88%
-rename from meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-rename to meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-index 4b4fbbb7c..272c76ca1 100644
---- a/meta-python/recipes-devtools/python/python-m2crypto_0.26.0.bb
-+++ b/meta-python/recipes-devtools/python/python-m2crypto_0.26.4.bb
-@@ -6,9 +6,10 @@ LIC_FILES_CHKSUM = "file://LICENCE;md5=b0e1f0b7d0ce8a62c18b1287b991800e"
++-TARGETS = $(BINS)
+ -TARGETS += lib/libmtd.a
+ -TARGETS += ubi-utils/libubi.a
+++BINS = $(addprefix ubi-utils/,$(UBI_BINS))
+  
+  OBJDEPS = $(BUILDDIR)/include/version.h
+  
+-@@ -61,12 +46,9 @@ endif
++@@ -61,12 +44,9 @@ endif
+  	rm -f $(BUILDDIR)/include/version.h
+  	$(MAKE) -C $(TESTS) clean
+  
+@@ -73,7 +73,7 @@ index eade234..2275865 100644
+  
+  tests::
+  	$(MAKE) -C $(TESTS)
+-@@ -91,8 +73,6 @@ LDLIBS_mkfs.jffs2  = -lz $(LZOLDLIBS)
++@@ -91,8 +71,6 @@ LDLIBS_mkfs.jffs2  = -lz $(LZOLDLIBS)
+  LDFLAGS_jffs2reader = $(ZLIBLDFLAGS) $(LZOLDFLAGS)
+  LDLIBS_jffs2reader  = -lz $(LZOLDLIBS)
+  
+@@ -82,6 +82,3 @@ index eade234..2275865 100644
+  #
+  # Common libmtd
+  #
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch
+index 2e43d5d97..6b09c14d6 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc/0005-common.h-klibc-fixes-2.patch
+@@ -22,20 +22,11 @@ Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
+  include/common.h | 10 ++++++----
+  1 file changed, 6 insertions(+), 4 deletions(-)
  
- SRC_URI += "file://0001-setup.py-link-in-sysroot-not-in-host-directories.patch \
-             file://cross-compile-platform.patch \
-+            file://m2crypto-0.26.4-gcc_macros.patch \
-            "
--SRC_URI[md5sum] = "9f02f0b88fbe225cc6ea8680945cafa0"
--SRC_URI[sha256sum] = "05d94fd9b2dae2fb8e072819a795f0e05d3611b09ea185f68e1630530ec09ae8"
-+SRC_URI[md5sum] = "5c74c25ba8b45122318a165a3a2059ad"
-+SRC_URI[sha256sum] = "5cae7acc0b34821f8c0ddf6665e482893fe1f198ad6379e61ffa9d8e65f5c199"
+-diff --git a/include/common.h b/include/common.h
+-index 77f3f7d..2cbee0f 100644
+---- a/include/common.h
+-+++ b/include/common.h
+-@@ -126,7 +126,7 @@ static char __PRIxoff_t_static_assert[sizeof(off_t) == 8 ? 1 : -1];
+- 	fprintf(stderr, "%s: warning!: " fmt "\n", PROGRAM_NAME, ##__VA_ARGS__); \
+- } while(0)
+- 
+--#if defined(__UCLIBC__)
+-+#if defined(__UCLIBC__) || defined(__KLIBC__)
+- /* uClibc versions before 0.9.34 don't have rpmatch() */
+- #if __UCLIBC_MAJOR__ == 0 && \
+- 		(__UCLIBC_MINOR__ < 9 || \
+-@@ -146,15 +146,17 @@ static inline int __rpmatch(const char *resp)
++Index: git/include/common.h
++===================================================================
++--- git.orig/include/common.h
+++++ git/include/common.h
++@@ -161,15 +161,17 @@ static inline int __rpmatch(const char *
+   */
+  static inline bool prompt(const char *msg, bool def)
+  {
+@@ -56,6 +47,3 @@ index 77f3f7d..2cbee0f 100644
+  			printf("failed to read prompt; assuming '%s'\n",
+  				def ? "yes" : "no");
+  			break;
+--- 
+-1.9.1
+-
+diff --git a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
+similarity index 90%
+rename from meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
+rename to meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
+index 8ca1ca727..518c02fc0 100644
+--- a/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.1.bb
++++ b/meta-initramfs/recipes-devtools/mtd/ubi-utils-klibc_1.5.2.bb
+@@ -9,7 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
  
- PYPI_PACKAGE = "M2Crypto"
- inherit pypi setuptools siteinfo
-@@ -46,5 +47,4 @@ do_compile_prepend() {
-     fi
+ inherit klibc
+ 
+-SRC_URI = "git://git.infradead.org/mtd-utils.git;tag=b7455d847ab4f9eeeb6a729efc306bfda7bddc99 \
++SRCREV = "aea36417067dade75192bafa03af70b6eb2677b1"
++SRC_URI = "git://git.infradead.org/mtd-utils.git \
+              file://0001-Makefile-only-build-ubi-utils.patch \
+              file://0002-common.mk-for-klibc-CC-is-klcc.patch \
+              file://0003-libubi.c-add-klibc-specific-fixes.patch \
+@@ -23,10 +24,7 @@ S = "${WORKDIR}/git/"
+ EXTRA_OEMAKE = "'CC=${CC}' 'RANLIB=${RANLIB}' 'AR=${AR}' 'CFLAGS=${CFLAGS} -I${S}include -DWITHOUT_XATTR' 'BUILDDIR=${S}'"
+ 
+ do_install () {
+-
+-    install -d ${D}${sbindir}
+-    oe_runmake DESTDIR="${D}" install
+-
++	oe_runmake install DESTDIR=${D} SBINDIR=${sbindir} MANDIR=${mandir} INCLUDEDIR=${includedir}
  }
  
--
- BBCLASSEXTEND = "native"
+ PACKAGES = "ubi-utils-klibc-dbg"
 -- 
 2.14.2
 
