@@ -1,39 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 533AC71A1A
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 037F177B20
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 17:05:58 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id a12so3571229qka.4
+	Tue,  3 Oct 2017 17:27:12 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id x54so14299806qth.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 10:05:59 -0700 (PDT)
+	Tue, 03 Oct 2017 10:27:14 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0jJtiUWbkn+b9h2tc6vJxivVl8OeY8omvZYqyQtiUFY=;
-	b=I5cJL8KZbKPJ4ztOcuCgahPptOu9vG3UqGukOiDF/GplTnC2pwYEdS4dVMpgE61tPL
-	nAD6xIVFIt8SI/IVyamk8fXgL7cEMlXfRe7/lYozH681V0xqz0WPs8exqQ4W2QKSVsKj
-	2LhXnfYO7hxFleOxdwkAVr4LdRJSPtttS6ePLlIQaYlZeZ+2DdzshTHmyxkC9l9rt6xy
-	yvol0hJADYat223uI1W88MF7GUQ5lk849xiXII23vnSd9WDZ2bQUv9d8ViIcKw3TQCX2
-	85gVOpjHAMAOqttBUEZ51cdVMddEyoQiz4MpcC4/A75Zty6D7eSr2Aj8dIX3qAVx9zxO
-	Q+ng==
-X-Gm-Message-State: AMCzsaWaukfJQsQPEJZhvHl4M98OVJ+33DyonuBSccdQFeLrt5fXv+X6
-	CTVyaXCPh4o5Wj3c18x8wAw78kNv
-X-Google-Smtp-Source: AOwi7QDJ1AWxB/L8n52GKE9lxj2iE5ZJHrMBod8EIcYmVRdPGjagrFcfVqaejrAKopD57rDI7j4hKA==
-X-Received: by 10.55.17.233 with SMTP id 102mr22123076qkr.56.1507050358756;
-	Tue, 03 Oct 2017 10:05:58 -0700 (PDT)
+	bh=OqLm0n0xhgg+NfMh4h9/hHQGUbdHjAojFPvnPSgSJdY=;
+	b=N51095HSLchalj5EDBZgynMVB2r5H2zFkGnBOL6r3271MwvgvrOEn7R8HoqFJtUfWK
+	2YeyF9o5oVeDmhA0f3EsI01kgh5mnwOCngoGARv64yX2wuhHLRLVq3VQJVLn42y+fLG4
+	SUeDge2XaY5CV+iA6oqqAJ1w9J5lLuT5PWhJS0rzM8bJFdUw3ygbM6XEsN1QGBRROYnH
+	CZkYI893r+N095PqEX+k78zwE/eliuiP9NDtDih+BM4kT1BofCkM+hSoV6HWJNWI+Jyo
+	DmY1ygnEqml8zYhen+QmQ6xKqvakvB76gONU9tQDUm60bF4T1YcLszziS9mvZM6aWRr+
+	B+rg==
+X-Gm-Message-State: AMCzsaVcdV6yhB5MwV1hlu5VQ2+dbWpqY19BRkikKDDs1DStyszMuwF9
+	cKmRBt1yybUSfkLINgRxP5DA5und
+X-Google-Smtp-Source: AOwi7QAYb7nsSvcFvhzG80Xpp7RotmOWCUpmwj8tX0dvyPZ3/ughMfVj8/x4hF/UY8Oh2owuMciP8w==
+X-Received: by 10.237.39.135 with SMTP id a7mr26009356qtd.84.1507051633395;
+	Tue, 03 Oct 2017 10:27:13 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	u133sm8491686qka.92.2017.10.03.10.05.57
+	by smtp.gmail.com with ESMTPSA id q1sm756914qti.2.2017.10.03.10.27.12
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 Oct 2017 10:05:57 -0700 (PDT)
+	Tue, 03 Oct 2017 10:27:12 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Oct 2017 13:05:51 -0400
-Message-Id: <1507050351-24774-1-git-send-email-derek@asterius.io>
+Date: Tue,  3 Oct 2017 13:27:06 -0400
+Message-Id: <1507051626-12487-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-twisted: update to version 17.9.0
+Subject: [meta-python][PATCH] python-grpcio-tools: update to version 1.6.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 17:05:58 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 17:27:13 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-twisted.inc                | 4 ++--
- .../python/{python-twisted_17.5.0.bb => python-twisted_17.9.0.bb}     | 0
- .../python/{python3-twisted_17.5.0.bb => python3-twisted_17.9.0.bb}   | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-twisted_17.5.0.bb => python-twisted_17.9.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-twisted_17.5.0.bb => python3-twisted_17.9.0.bb} (100%)
+ .../{python-grpcio-tools_1.6.0.bb => python-grpcio-tools_1.6.3.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-grpcio-tools_1.6.0.bb => python-grpcio-tools_1.6.3.bb} (74%)
 
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-index bdb3c60..fed629c 100644
---- a/meta-python/recipes-devtools/python/python-twisted.inc
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -7,8 +7,8 @@ HOMEPAGE = "http://www.twistedmatrix.com"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8a9c2fbfcba7d70504e3ba545e1820ed"
+diff --git a/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb b/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.3.bb
+similarity index 74%
+rename from meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb
+rename to meta-python/recipes-devtools/python/python-grpcio-tools_1.6.3.bb
+index 2b82ca6..0fb136b 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.0.bb
++++ b/meta-python/recipes-devtools/python/python-grpcio-tools_1.6.3.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
  
--SRC_URI[md5sum] = "cd5c287802dcbaf7be15cf937c922b71"
--SRC_URI[sha256sum] = "f198a494f0df2482f7c5f99d7f3eef33d22763ffc76641b36fec476b878002ea"
-+SRC_URI[md5sum] = "6dbedb918f0c7288a4c670f59393ecf8"
-+SRC_URI[sha256sum] = "0da1a7e35d5fcae37bc9c7978970b5feb3bc82822155b8654ec63925c05af75c"
+ inherit pypi setuptools
  
- PYPI_PACKAGE = "Twisted"
- PYPI_PACKAGE_EXT = "tar.bz2"
-diff --git a/meta-python/recipes-devtools/python/python-twisted_17.5.0.bb b/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-twisted_17.5.0.bb
-rename to meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-twisted_17.5.0.bb b/meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-twisted_17.5.0.bb
-rename to meta-python/recipes-devtools/python/python3-twisted_17.9.0.bb
+-SRC_URI[md5sum] = "74a02d8218c2680a7ca10d6dec2123ef"
+-SRC_URI[sha256sum] = "6efe56bc6565edf6bc52c97f29131a7a125261716576d9e824b43cabf354bf45"
++SRC_URI[md5sum] = "835f19142e26cb7ad68cec3a083ecda2"
++SRC_URI[sha256sum] = "57b3110ced50a18f1b2bf7da58ed011f57278b48084ed8013c67a34d42a5ca37"
+ 
+ # For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
+ BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
