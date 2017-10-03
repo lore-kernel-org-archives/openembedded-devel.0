@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id AB0CC71A1A
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 61D0171A1A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 16:58:45 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id a12so3556611qka.4
+	Tue,  3 Oct 2017 17:00:56 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id w63so4677630qkd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 09:58:47 -0700 (PDT)
+	Tue, 03 Oct 2017 10:00:57 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=lCc5HkV6R2kXEZ6y6z/HCjZR8gctfG4Zb9T3GDRiXmg=;
-	b=YnRmaEU+d+umEomv/Jth10biuWSbJs3CG6PXI/MUIDbMc64r96pC+sdG9v0u0XxFv5
-	eBEyRIDaG0XSOzsZrX0h4B168pdDVyDcjNjvUGrYiaNKcPeIu2TBEkrGwqtJJJHioWKz
-	Ly00TyqSovpVFgqBO6woBPs3XsiEgwDDu5pzi4B0d26pv8V8rG9cV05Abj8EDAjiF3f/
-	YOPe3fzFFSukmbBe3vk770gk6+JvfolBahGSYPU9xeBN3Uw+ZqVL9k6kWwr1S2DdGwuT
-	FifEFRkOaeQeMMCNV32W+PrriDzUq4MKtJHmISss6tFr0BrFEz9tHBsybnVYFvlNOybq
-	nbBw==
-X-Gm-Message-State: AMCzsaV9b4xJloGqDfJnGChOpEeBt/pt17g/QDMMLuviFIH4qAsUZbs2
-	CZygq/JeWpYPKq6YCyBoOKjtSj4J
-X-Google-Smtp-Source: AOwi7QC0brLKRRSVaJMv4RbqF37dzLwcTIdYymG3GnRJl00HA+doMYNSYIUZD/mdZUdReh0Xf1pFmw==
-X-Received: by 10.55.26.90 with SMTP id a87mr18981338qka.132.1507049926348;
-	Tue, 03 Oct 2017 09:58:46 -0700 (PDT)
+	bh=G/peIyOY8UM1WkWIFBD+Q3OYmn0JGfGPgADw2G6GjDA=;
+	b=lYRAN2Og3/MHtwQS8c9s6qAh5hu+iyt5iiNpekplLfL/SlZcivDHWzFJTW2QYsqG/J
+	40GbneNjfNYWtSgUIA5BGmF0yfBx25SDuMnIPsJfsT1k8tg1CNdOD+9kU0kTdeX9+bvt
+	jAZG6g3M2rPa3H+9mQvUgrH2ez2RsM2xtWw0IAdXoaZkBfc8dGT2VRxsieDIJDLk1+xr
+	FyWXXKQSqYTnqI/WA3IRvGLM3NZZKldm8IIrBmVOoR1v5kSb/+6BnOXuh/sUK01tG/A6
+	WtahG3BoqM+hpxUuwRJwCSWfqYtTkgQr5lHSi/JZopO7zf5wiHORpxL/sW3i7Mw9IXxc
+	E5Xg==
+X-Gm-Message-State: AMCzsaVuGJZIAu0bJkLLWVEJoDyS9wRqRZ9c2DtckI9bpgIBGK8pEhs6
+	GSJ2SDv9nVONPLC7gu3pXN+zcPoX
+X-Google-Smtp-Source: AOwi7QArhqwa143TfZRMm5uJDhwNb0oyiCJCmHnJfqlwRECYe6JrEkm+0ltYZB6PbwgrQ0FzsEb3rw==
+X-Received: by 10.55.156.141 with SMTP id f135mr11349322qke.309.1507050056472; 
+	Tue, 03 Oct 2017 10:00:56 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	s43sm9002731qta.31.2017.10.03.09.58.45
+	z187sm8477900qke.0.2017.10.03.10.00.55
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 Oct 2017 09:58:45 -0700 (PDT)
+	Tue, 03 Oct 2017 10:00:55 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Oct 2017 12:58:40 -0400
-Message-Id: <1507049920-17421-1-git-send-email-derek@asterius.io>
+Date: Tue,  3 Oct 2017 13:00:50 -0400
+Message-Id: <1507050050-4458-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask-sqlalchemy: update to version 2.3.0
+Subject: [meta-python][PATCH] python-parse-type: update to version 0.4.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,31 +46,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 16:58:45 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 17:00:56 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- ...ython-flask-sqlalchemy_2.2.bb => python-flask-sqlalchemy_2.3.0.bb} | 4 ++--
+ .../python/{python-parse-type_0.4.1.bb => python-parse-type_0.4.2.bb} | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-sqlalchemy_2.2.bb => python-flask-sqlalchemy_2.3.0.bb} (66%)
+ rename meta-python/recipes-devtools/python/{python-parse-type_0.4.1.bb => python-parse-type_0.4.2.bb} (63%)
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.2.bb b/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.0.bb
-similarity index 66%
-rename from meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.2.bb
-rename to meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.0.bb
-index 1190f34..8799767 100644
---- a/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.2.bb
-+++ b/meta-python/recipes-devtools/python/python-flask-sqlalchemy_2.3.0.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "Adds SQLAlchemy support to your Flask application."
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5ed1b8cc741515a835a7f6bf2f62ef4a"
+diff --git a/meta-python/recipes-devtools/python/python-parse-type_0.4.1.bb b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+similarity index 63%
+rename from meta-python/recipes-devtools/python/python-parse-type_0.4.1.bb
+rename to meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+index 84a9901..b516c59 100644
+--- a/meta-python/recipes-devtools/python/python-parse-type_0.4.1.bb
++++ b/meta-python/recipes-devtools/python/python-parse-type_0.4.2.bb
+@@ -3,8 +3,8 @@ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d07323820cca0f1d192cbbf8a0516f95"
+ PYPI_PACKAGE = "parse_type"
  
--SRC_URI[md5sum] = "a93e6af389afac6666733e369c06c798"
--SRC_URI[sha256sum] = "f0d8241efba723d7b878f73550f5d3c0fbb042416123b52b36640b7491fa208b"
-+SRC_URI[md5sum] = "c86449f44e90e996142872ac4b97f7ee"
-+SRC_URI[sha256sum] = "da19ff62e31f82825b5467811c76e2a1c60bba927e175fe091a6f739063dd829"
+-SRC_URI[md5sum] = "3697afc1b29f2857f6c7dc9590f25ce1"
+-SRC_URI[sha256sum] = "9a624f3b51604423f5de5321da11b0ae73f368b2a3cb4b383a6cf84ca4e4d495"
++SRC_URI[md5sum] = "b5fa59e45965d1b2896023742df2e707"
++SRC_URI[sha256sum] = "f596bdc75d3dd93036fbfe3d04127da9f6df0c26c36e01e76da85adef4336b3c"
  
- PYPI_PACKAGE = "Flask-SQLAlchemy"
+ RDEPENDS_${PN} += "python-parse"
  
 -- 
 2.7.4
