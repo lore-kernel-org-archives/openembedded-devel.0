@@ -1,50 +1,52 @@
 Return-Path: <martin.jansa@gmail.com>
 Received: from mail-wr0-f170.google.com (mail-wr0-f170.google.com
 	[209.85.128.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E23D60269
+	by mail.openembedded.org (Postfix) with ESMTP id 7568760269
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 07:52:50 +0000 (UTC)
-Received: by mail-wr0-f170.google.com with SMTP id o44so3863851wrf.11
+	Tue,  3 Oct 2017 07:53:55 +0000 (UTC)
+Received: by mail-wr0-f170.google.com with SMTP id p10so3856092wrc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 00:52:52 -0700 (PDT)
+	Tue, 03 Oct 2017 00:53:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=r0Mp/1FE0/InidU2bpc7bJGu+qt1gMurx+XdS/0F/vE=;
-	b=UHtOLZKRKyG1DiRybeta4F0gA6Bra8hIkWUTcTfWBq6Q893T7+DeX3xIMmkmR0Q0EL
-	mE84ibxLfXk6nvL3w7CuHuCkybKLA6RPPIXrbDeVOGKV52wJ0zVE3WS3T9u91eeA7pQE
-	Dwf1+9ddblqwTQVrqkBPgeyNATv3+lscKag9hcN0zhu6ff3z3XfWS0nITed6GhypJ2eA
-	uqW2+b6l7JaRp1tmJzLsp8FmmgNeqi90MEBVTdxjyBc3+NcEVfBfWXQdJFKDcRArmZmp
-	b3qY6Yvf0d1tWst9Xaq9kOVG60a2uaLo1NZ/W54BeNiN7eEM0Kf+eT3pZLyzwsCbovVl
-	fugw==
+	:cc; bh=0mLtVAhFMXL86+FxYysFEwc16rj7QoP9P3w7Th9usZY=;
+	b=TPJOnRIRb9hG+zQzzTGKyrEtjErLLKjzF0pZRUUq0nvgCAK1JavQBnj3xoDFTuGKPe
+	hql/GUPufor/XavQaQaHRR/eAT18zNmuGOyn02URzsl60jJYO+Wct1tKAIrebPNz8ThT
+	voeiCn+2lQUPFKgmrHP/bcS8rDqQ/7rP1yEYawa2Cx1ZqXnIxlvbJrf8ivIHpUSOcMnQ
+	GZYeUiC48MaFilPrGcDQCGCWCLEIGIS/+PY0ii3zqk1WYL4wBBZrtV/QL8hU8qnBsCcn
+	3S4jwwfipovT0+yWEaGI6CF5c3PQOBYqQTNwtWr2lN3w0qGbUAnD8755W0K/SYhwZ8ip
+	GWSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=r0Mp/1FE0/InidU2bpc7bJGu+qt1gMurx+XdS/0F/vE=;
-	b=hIWdxjPNTAXVcjAC7d3HYmcxBOLXCP6Q+oMqPP4Jx2FW0W7MHoh9KXCUMMgqKarBWP
-	I40TflaRBcL6o4kFSrgHN9QFZrHATcWWj3HZ4zcIHEaa2qLJqMVJvLezVdrZnDK+EbLB
-	VbIZx3oTB+H9enY52pM1vgUtHeIMRWI7R5/5bDKLzUZI9p3MciTs+biEK76jbx1ino6z
-	PKqn+4r4a9Ys0oF244K2RYbhGAhYEdNZoJ6ybBjXj7YPdZeGen3YbRzIu98rhXY4DnUh
-	ncSc3Rl8ErPUb2rV0EvBLWHP5UbNZhX0PjtnAFLbZi5gKXv5PohIUZ2tbgf3nmB1wSCM
-	C5Kg==
-X-Gm-Message-State: AMCzsaUwDyzpDzqR0FLeh0Twm1WYBdjmvq3+C/gNARWR1N2VHHIdkoyx
-	eqlh7iY2AiGrFOHZB8MV2lu5Huxi6RtVG4L5t1o=
-X-Google-Smtp-Source: AOwi7QDA00+SjxL3QQyP0IRDJfapWTnioJkLdhoRBtV+G4PCTUNZUhNp6C5FOuOR4r9eS/onyPgE6acBe3JqfDcb7BA=
-X-Received: by 10.223.158.210 with SMTP id b18mr9865543wrf.99.1507017171992;
-	Tue, 03 Oct 2017 00:52:51 -0700 (PDT)
+	bh=0mLtVAhFMXL86+FxYysFEwc16rj7QoP9P3w7Th9usZY=;
+	b=kcDv4H6qsabyNdtQ2zbAbrnsK7h/w9ZgmHzLUY3MBavBpe4hs4UeyNqUJFUjgHqG6X
+	SjXfxTRK0bVEWss73IASNhqQzmatfjGBYQM7acnqkVB330gpsccpmhPAXnv350FfvSKq
+	Rt4psxbx3rx0Cd8UEs8HgEf4xunOqKyFOJE353IwIP+YxGjyPbwcjc59mG820zpLR2gc
+	kwxaifvF1mqo7SPR63hvdhy3LKymY3qxVcwXVlI6TQS4bObSi+WkZXM0PIuEDwa+vceV
+	x1T1p6mffiLodNO8YQpxJWjib7cR7PUkfSvOwpZbxLZ9GVJL2/8LOiurvTIft4bO6Kco
+	Mzsw==
+X-Gm-Message-State: AMCzsaUSGHzyrKXDKqPibWNe/iB+32gsO1/vfwTBbqFkU127keFMnPW1
+	tUlCSoWCcXzDxbQ9Xwe6THy+PY28ZEpY8kUrdO8=
+X-Google-Smtp-Source: AOwi7QDx1JMPqe+iASg6Ba6CaWUqL9Br2n6RSFqpcd6wqQOSi9gk+Szm4TLNezR1cJxK3EFW/9lLEeD74mQDdTR3orA=
+X-Received: by 10.223.134.68 with SMTP id 4mr2460301wrw.67.1507017236652; Tue,
+	03 Oct 2017 00:53:56 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Tue, 3 Oct 2017 00:52:51 -0700 (PDT)
-In-Reply-To: <20171002222529.GE16828@denix.org>
-References: <1499835521-973-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<1499835521-973-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<20171002222529.GE16828@denix.org>
+Received: by 10.28.183.212 with HTTP; Tue, 3 Oct 2017 00:53:55 -0700 (PDT)
+In-Reply-To: <20171002215123.GD16828@denix.org>
+References: <1500946223-25865-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<97F7C8E70D26E94FA7E05578493F65C60E31BBC6@G08CNEXMBPEKD03.g08.fujitsu.local>
+	<CA+chaQd2cADxXOpPJX3NDEY3w15oTwJKKGpx8SpA6TmB-2A5BA@mail.gmail.com>
+	<20171002215123.GD16828@denix.org>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 3 Oct 2017 09:52:51 +0200
-Message-ID: <CA+chaQfoeaFsCzx3NqUWsW-_MrRuTwXzQcS2o-D95Y6EKuk7tQ@mail.gmail.com>
+Date: Tue, 3 Oct 2017 09:53:55 +0200
+Message-ID: <CA+chaQch17Fsivf7RYthxa-yFtpu6neGCUOFc1i1i+L-3_mPCQ@mail.gmail.com>
 To: Denys Dmytriyenko <denis@denix.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH v4 1/4] qt5: add qt5-ptest.inc
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH v2] qtbase: add ptest
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,145 +59,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 07:52:51 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 07:53:56 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Yes, I've seen this few times as well.
+IIRC It was merged as is with additional fix from Khem on top of that to
+resolve this build issue.
 
-On Tue, Oct 3, 2017 at 12:25 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+On Mon, Oct 2, 2017 at 11:51 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-> On Wed, Jul 12, 2017 at 12:58:38PM +0800, Huang Qiyu wrote:
-> >   Add qt5-ptest.inc file for qt ptest related tasks
-> >         1)      Rewrite do_compile_ptest task for qt
-> >         2)      Add new do_compile_ptest_base and task do_install_ptest
-> >         3)      Write do_populate_sysroot_append to resolve
-> do_compile_ptest_base problem in yocto2.3
->
-> Something in this order of tasks is not completely correct - I just got
-> qtxmlpatterns:do_install_ptest very early on (after fetch/unpack, but
-> before
-> compile/install). Even before pseudo-native fnished building and
-> installing.
-> And since do_install_ptest task marked as "fakeroot", it obviously failed:
->
-> NOTE: Running task 614 of 7991 (/OE/master/sources/meta-qt5/
-> recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest)
-> ERROR: Failed to spawn fakeroot worker to run /OE/master/sources/meta-qt5/
-> recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest: [Errno 2] No such
-> file or directory: '/OE/master/build/tmp-glibc/sysroots-components/x86_64/
-> pseudo-native/usr/bin/pseudo'
->
-> Has anyone else seen this?
->
-> --
-> Denys
+> Was this actually merged to master as is?
 >
 >
-> >         The compile error log is shown as follow:
-> >         cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/
-> work_qt/build/tmp/work/i586-p
-> > oky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/
-> recipe-sysroot-native/usr/bin/qt5/qmake -o M
-> > akefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-
-> poky-linux/qtxmlpatterns/5.8.0+gitA
-> > UTOINC+9f7e01b582-r0/git/tests/auto/auto.pro ) && make -f Makefile
-> >         Project ERROR: Could not find feature xml-schema.
-> >         Makefile:42: recipe for target 'sub-auto-make_first' failed
+> On Tue, Aug 15, 2017 at 11:22:20AM +0200, Martin Jansa wrote:
+> > pong,
 > >
-> > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > ---
-> >  recipes-qt/qt5/qt5-ptest.inc | 62 ++++++++++++++++++++++++++++++
-> ++++++++++++++
-> >  1 file changed, 62 insertions(+)
-> >  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
+> > it's failing to build as reported by me and Khem, so it won't get merged
+> in
+> > this form.
 > >
-> > diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> > new file mode 100644
-> > index 0000000..49d44ac
-> > --- /dev/null
-> > +++ b/recipes-qt/qt5/qt5-ptest.inc
-> > @@ -0,0 +1,62 @@
-> > +SRC_URI += "file://run-ptest"
-> > +
-> > +inherit ptest
-> > +
-> > +addtask do_populate_sysroot after do_install before
-> do_compile_ptest_base
-> > +deltask do_compile_ptest_base
-> > +addtask do_compile_ptest_base after do_populate_sysroot before
-> do_install_ptest
-> > +addtask do_install_ptest after do_compile_ptest_base before do_package
-> > +
-> > +do_compile_ptest() {
-> > +    cd ${S}/tests
-> > +    qmake -o Makefile tests.pro
-> > +    oe_runmake
-> > +}
-> > +
-> > +do_populate_sysroot_append() {
-> > +    workdir = d.getVar('WORKDIR')
-> > +    srcdir = workdir + '/sysroot-destdir/usr/'
-> > +    destdir = workdir + '/recipe-sysroot/usr/'
-> > +
-> > +    def copyFiles(sourceDir, targetDir, filelist):
-> > +        for file in os.listdir(sourceDir):
-> > +            sourceFile = os.path.join(sourceDir,  file)
-> > +            targetFile = os.path.join(targetDir,  file)
-> > +            filelist.append(targetFile)    #record the file list
-> > +            if os.path.isfile(sourceFile):
-> > +                if not os.path.exists(targetDir):
-> > +                    os.makedirs(targetDir)
-> > +                if not os.path.exists(targetFile)
-> or(os.path.exists(targetFile) and (os.path.getsize(targetFile) !=
-> os.path.getsize(sourceFile))):
-> > +                        open(targetFile, "wb").write(open(sourceFile,
-> "rb").read())
-> > +            if os.path.isdir(sourceFile):
-> > +                First_Directory = False
-> > +                copyFiles(sourceFile, targetFile, filelist)
-> > +
-> > +    if os.path.exists(destdir):
-> > +        Tmpfilelist = []
-> > +        copyFiles(srcdir, destdir, Tmpfilelist)
-> > +
-> > +        fp=open(workdir + '/filelist', 'w')
-> > +        for i in Tmpfilelist:
-> > +            fp.write(i)
-> > +            fp.write("\n")
-> > +        fp.close()
-> > +}
-> > +
-> > +fakeroot do_install_ptest() {
-> > +    mkdir -p ${D}${PTEST_PATH}
-> > +    t=${D}${PTEST_PATH}
-> > +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
-> > +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
-> > +            echo ${var##*/} >> ${t}/tst_list
-> > +            install -m 0644  ${var} ${t}
-> > +        fi
-> > +    done
-> > +    for file in `cat ${WORKDIR}/filelist`; do
-> > +       if [ -f $file ]; then
-> > +           rm -f $file
-> > +       fi
-> > +    done
-> > +    rm -f ${WORKDIR}/filelist
-> > +}
-> > +
-> > --
-> > 2.7.4
+> > http://lists.openembedded.org/pipermail/openembedded-devel/
+> 2017-August/114108.html
 > >
+> > On Tue, Aug 15, 2017 at 3:21 AM, Huang, Qiyu <
+> huangqy.fnst@cn.fujitsu.com>
+> > wrote:
 > >
-> >
+> > > ping
+> > >
+> > > > -----Original Message-----
+> > > > From: Huang, Qiyu
+> > > > Sent: Tuesday, July 25, 2017 9:30 AM
+> > > > To: openembedded-devel@lists.openembedded.org
+> > > > Cc: Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > > > Subject: [oe] [meta-qt5] [PATCH v2] qtbase: add ptest
+> > > >
+> > > > Add ptest for qtbase by using provided testsuite.
+> > > >
+> > > > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > > > ---
+> > > >  .../0001-Delete-qlonglong-and-qulonglong.patch     | 28
+> > > > ++++++++++++++++++++++
+> > > >  recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
+> > > >  recipes-qt/qt5/qtbase_git.bb                       | 17
+> ++++++++++++-
+> > > >  3 files changed, 50 insertions(+), 1 deletion(-)  create mode 100644
+> > > > recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+> > > >  create mode 100644 recipes-qt/qt5/qtbase/run-ptest
+> > > >
+> > > > diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
+> > > qulonglong.patch
+> > > > b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
+> > > > new file mode 100644
+> > > > index 0000000..975cd28
+> > > > --- /dev/null
+> > > > +++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
+> qulonglong.patch
+> > > > @@ -0,0 +1,28 @@
+> > > > +From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00
+> > > > 2001
+> > > > +From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > > > +Date: Wed, 7 Jun 2017 21:00:49 +0900
+> > > > +Subject: [PATCH] Delete qlonglong and qulonglong
+> > > > +
+> > > > +Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > > > +---
+> > > > + tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2 --
+> > > > + 1 file changed, 2 deletions(-)
+> > > > +
+> > > > +diff --git
+> > > > +a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > > > +b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > > > +index 09458bd..59a120e 100644
+> > > > +--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > > > ++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
+> > > > +@@ -5,10 +5,8 @@ SUBDIRS=\
+> > > > +     char32_t \
+> > > > +     int \
+> > > > +     long \
+> > > > +-    qlonglong \
+> > > > +     qptrdiff \
+> > > > +     quintptr \
+> > > > +-    qulonglong \
+> > > > +     schar \
+> > > > +     short \
+> > > > +     uchar \
+> > > > +--
+> > > > +2.7.4
+> > > > +
+> > > > diff --git a/recipes-qt/qt5/qtbase/run-ptest
+> > > b/recipes-qt/qt5/qtbase/run-ptest
+> > > > new file mode 100644 index 0000000..044f834
+> > > > --- /dev/null
+> > > > +++ b/recipes-qt/qt5/qtbase/run-ptest
+> > > > @@ -0,0 +1,6 @@
+> > > > +#!/bin/sh
+> > > > +
+> > > > +for x in ` awk '{print $1}' tst_list `;do
+> > > > +    ./${x};
+> > > > +done
+> > > > +
+> > > > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/
+> qtbase_git.bb
+> > > index
+> > > > 5cfbcfa..8464873 100644
+> > > > --- a/recipes-qt/qt5/qtbase_git.bb
+> > > > +++ b/recipes-qt/qt5/qtbase_git.bb
+> > > > @@ -23,8 +23,12 @@ SRC_URI += "\
+> > > >      file://0005-configure-bump-path-length-from-256-to-512-
+> > > character.patch
+> > > > \
+> > > >      file://0009-Disable-all-unknown-features-instead-of-
+> erroring-out.patch
+> > > \
+> > > >
+> > > > file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_
+> EXTERNAL_H.patch
+> > > > \
+> > > > +    file://0001-Delete-qlonglong-and-qulonglong.patch \
+> > > > +    file://run-ptest \
+> > > >  "
+> > > >
+> > > > +inherit ptest
+> > > > +
+> > > >  # only for target qtbase
+> > > >  SRC_URI += "\
+> > > >      file://0008-configure-paths-for-target-qmake-properly.patch \
+> @@
+> > > -48,7
+> > > > +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
+> > > >  PACKAGECONFIG_RELEASE ?= "release"
+> > > >  # This is in qt5.inc, because qtwebkit-examples are using it to
+> enable
+> > > > ca-certificates dependency  # PACKAGECONFIG_OPENSSL ?= "openssl"
+> > > > -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs
+> freetype"
+> > > > +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs
+> freetype
+> > > > tests"
+> > > >
+> > > >  PACKAGECONFIG ?= " \
+> > > >      ${PACKAGECONFIG_RELEASE} \
+> > > > @@ -171,6 +175,17 @@ do_configure() {
+> > > >          ${QT_CONFIG_FLAGS}
+> > > >  }
+> > > >
+> > > > +fakeroot do_install_ptest() {
+> > > > +    mkdir -p ${D}${PTEST_PATH}
+> > > > +    t=${D}${PTEST_PATH}
+> > > > +    for var in ` find ${B}/tests/auto/ -name tst_*`; do
+> > > > +        if [ not ` echo ${var##*/} | grep '\.'` ]; then
+> > > > +            echo ${var##*/} >> ${t}/tst_list
+> > > > +            install -m 0644 ${var} ${t}
+> > > > +        fi
+> > > > +    done
+> > > > +}
+> > > > +
+> > > >  do_install_append() {
+> > > >      # Avoid qmake error "Cannot read
+> > > > [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or
+> > > directory"
+> > > >      touch
+> > > > ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
+> > > > --
+> > > > 2.7.4
+> > >
+> > >
+> > >
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
 > > --
 > > _______________________________________________
 > > Openembedded-devel mailing list
 > > Openembedded-devel@lists.openembedded.org
 > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
