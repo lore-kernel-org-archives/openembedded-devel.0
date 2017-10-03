@@ -1,47 +1,33 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 075127751C
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A0AE71957
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 23:13:13 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id f84so10567656pfj.3
+	Tue,  3 Oct 2017 23:45:34 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id CD866209AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 16:13:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=b5ZCvBKWOEq/CM4fvMmk0GAv5bsjmeDjFgl7ifEu2Ic=;
-	b=fNT88+N8nHRtgp+bxaFPCGG59657Fzya9ITgT2AA1m/JbOHf0VweLzpzx+0GiBtJhQ
-	M658B/GqXwSa0ezFlYzaFbzdeYIjwNn4Gv1jAp04S1wrYDA2yaGjqvrS7Ns0R+pRojui
-	g9TcRNokr21NaGzmjYT94c0Y+KVJ99jR+8j8kHaOC7aiDv31wPvZzq5APFYEcCVzkrvt
-	je3O+cWqtuQ0QNHZ55tHxftNUcmzJHGki+f7+v6UTsUmNnZwUYtn2vvfuO/UT5RcBvV/
-	d6HTqQyttyPAGxMH2NcPCgfiwbaM0M2r+bS/+SLG7Xnuv1dYY8srFxBwwDpkVZnlD1oJ
-	0oMg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=b5ZCvBKWOEq/CM4fvMmk0GAv5bsjmeDjFgl7ifEu2Ic=;
-	b=dMvanGWHRqIGjRGh+lnxOS7Rtjo04oKLkUfIFOopymy2CPEWyb/9yaMRbaqO6acBjv
-	BJdfe708VtQ34ZkRaJ43MziBYeTYWE5HLbcb0kSV5ex/9s8raLnqHma0POII/w1AUb24
-	+G9QnWV9UNP7RsUligmK1q8UVLJO9/oTbr+y1VAI0LZhf1vowm34YeGuVhLrRKVSMaDd
-	7TclqEMIDL3RyEVa6jFG0qL1Zs8bBSlmv9YABduCizrbY3C438ZipDc0X1OrcS7mcRn/
-	wIz47nRV9UML54c6ko3khBv8ieuwj5bxkt6Cb/qnInHmTRKaarb1QMp3COFXL7OR1nzC
-	PE2w==
-X-Gm-Message-State: AMCzsaXMKdUOiH7f6c0jJqnr0yuUQIavtEVb/6Dt9td4AzWaOKS4lr1H
-	jSkUssCrvPM3lTIvUH/PNm9Yjg==
-X-Google-Smtp-Source: AOwi7QBPzlmfmpIQYmmnlZEHITpYk625oRR1hQMa4HR0tYeUwsx+qdFX/lA8xFZCsUTp4tn0c0ytOg==
-X-Received: by 10.98.6.3 with SMTP id 3mr4143777pfg.282.1507072394952;
-	Tue, 03 Oct 2017 16:13:14 -0700 (PDT)
-Received: from e6520.cablelabs.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	e76sm23195155pfd.149.2017.10.03.16.13.12
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 Oct 2017 16:13:13 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
+	Tue,  3 Oct 2017 23:45:35 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Eg7EnyamM3hR
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Oct 2017 23:45:35 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B38EF208C9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Oct 2017 23:45:35 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 21B0A1626DE; Tue,  3 Oct 2017 19:45:35 -0400 (EDT)
+Date: Tue, 3 Oct 2017 19:45:35 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Oct 2017 16:13:08 -0700
-Message-Id: <1507072388-8080-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] breakpad: fix typo ( minidump_cpu_arm.h -> minidump_cpu_arm64.h )
+Message-ID: <20171003234535.GG16828@denix.org>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Subject: nativesdk-qtbase 5.9.2 C++11 errors with gcc 6.3?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,27 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 23:13:14 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 23:45:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-oe/recipes-devtools/breakpad/breakpad_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Martin, Khem,
 
-diff --git a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-index a17759e..5f6d82c 100644
---- a/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-+++ b/meta-oe/recipes-devtools/breakpad/breakpad_git.bb
-@@ -80,7 +80,7 @@ do_install_append() {
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_format.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_format.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_amd64.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_amd64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_arm.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_arm.h
--        install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_arm.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_arm64.h
-+        install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_arm64.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_arm64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_mips.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_mips.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_ppc64.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_ppc64.h
-         install -m 0644 ${S}/src/google_breakpad/common/minidump_cpu_ppc.h ${D}${includedir}/breakpad/google_breakpad/common/minidump_cpu_ppc.h
--- 
-1.9.1
+Have you tried building Qt 5.9 with gcc 6.3 from oe-core? I'm seeing bunch of 
+what seems to be C++11 related errors during do_configure of nativesdk-qtbase. 
+Target qtbase builds fine and switching to gcc 7.2 seems to resolve it as well.
 
+Any ideas or pointers? Thanks!
+
+
+Errors are like these:
+
+In file included from ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1:0,
+                 from /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h: In function 'bool qnumeric_std_wrapper::__builtin_isnan(double)':
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:45: error: '__builtin_isnan' is not a member of 'std'
+ static inline bool isnan(double d) { return std::isnan(d); }
+                                             ^~~
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:45: note: suggested alternatives:
+<built-in>: note:   '__builtin_isnan'
+In file included from /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/recipe-sysroot/tmp/sdk/sysroots/x86_64-oe-linux/usr/include/c++/6.3.0/cmath:45:0,
+                 from ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:56,
+                 from ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1,
+                 from /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:20: note:   'qnumeric_std_wrapper::__builtin_isnan'
+ static inline bool isnan(double d) { return std::isnan(d); }
+                    ^
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h: At global scope:
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:105:20: error: expected ')' before '(' token
+ static inline bool isinf(double d) { return std::isinf(d); }
+                    ^
+In file included from ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1:0,
+                 from /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h: In function 'bool qnumeric_std_wrapper::__builtin_isfinite(double)':
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:106:48: error: '__builtin_isfinite' is not a member of 'std'
+ static inline bool isfinite(double d) { return std::isfinite(d); }
+                                                ^~~
+../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:106:48: note: suggested alternatives:
+<built-in>: note:   '__builtin_isfinite'
 
