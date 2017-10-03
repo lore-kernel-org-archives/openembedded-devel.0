@@ -1,46 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id DA18577ACB
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 225A060107
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 12:21:52 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q132so16495290wmd.2
+	Tue,  3 Oct 2017 16:41:29 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id v28so5216472qtv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 05:21:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=dxvDMF7/iFY9LC5BvrqFVXqOK9TF4Mv+1UDCl1NhHcY=;
-	b=RvpZd4yxUH0StAsIva2tntLufee6zzNwtb89ZncE0+6ogqHjWjLufkAZCX+dHoVHB1
-	NC+9BQZOA5xQ+zMFF2IA8a7KCzn95PcDcP5RVldzqmeQjLlUqaxeHYXY8Y3FJVwdQ0X8
-	U5PglgtrLa06Vl6FL65VQSCjrbUW2mIsKPp3Jbylv1mzDK0jRIw/PIYtB9ETC+PqLMG8
-	PNFbY//eyTbRxfxMrENUWCDDLJBClsce9Hn8V6/Cvgyt3wLEe0ffab7Cw4xwlbQ8OuCj
-	yOGt9aeUcDmpD5cNPD7GMh5IdExUS2oJu23SE4r+yGbYyXbin/klKaNYVCbJkQ9bUYa/
-	Fhxw==
+	Tue, 03 Oct 2017 09:41:31 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=dxvDMF7/iFY9LC5BvrqFVXqOK9TF4Mv+1UDCl1NhHcY=;
-	b=dTieXeXMgRETbdGif94MExLwK5V3+neFkP8XVzNIvz0tUc7lhoe1Bjozvw26MaSm0u
-	i1qeG5kh1qGeELzJ5eqNgLJmarAa+XHOKxfe68NDF5bTQ+cMKM1a9UNwaSfnaUWvScFE
-	X6rn/oAlPSTZgb9kq0pPRTlRZChHJ2GbnNpauLllWhppDnnKhzHZZbSupH4XHAagX+O7
-	lCTcr7fjiJQ3Vc0C4diL8+JrVHDWrrADoKs9wf/23QArMZPrsMlGIf67viSphD9xumox
-	mWt71wBppaQUqyK+IaT8fY2sH4vc2/bC3fpZnaCnpNfZZMZC4mlK9zfHpL2oVAO5bAOx
-	A/EQ==
-X-Gm-Message-State: AMCzsaXwgECzqTplu/Hi+wjo2CAFH3iYWef6g46qLCAGbKQ9t+L32j7P
-	4E7gIu8OLwNdFBnixUVkRgIVag==
-X-Google-Smtp-Source: AOwi7QCEYdpWI6+LTQCIordtwEtjY7UvLz1Jzh18ed25ym/8jVILeXs+t1lj3j6X/SvstP+Mq8VO8g==
-X-Received: by 10.28.62.145 with SMTP id l139mr4322300wma.150.1507033313352;
-	Tue, 03 Oct 2017 05:21:53 -0700 (PDT)
-Received: from localhost ([217.30.68.212])
-	by smtp.gmail.com with ESMTPSA id d16sm127967wrb.53.2017.10.03.05.21.52
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 03 Oct 2017 05:21:52 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	bh=vXmZFdQN0H5d6BkurUdAC/JD+Y0zRn1H6cyrgxyB46w=;
+	b=X2mFCEJb8730HEB6TsicjAM3rHb2beFle/CNtThdclE6135R1ZVHcyX/AoOBLA0EkK
+	kQr0o52IKLACdM20FdDrA5leW82oD4ql1K2OTj78LNwaisGatzQ5AXSze4FnjH0DMmj/
+	1kkaAcFrt0cWuqscZuwzNfA5pTOcIFSFAdm0cAmJrvfk+elhqOBnKv6nTRyUAO2qNOJ+
+	tgbeJDP17WV42fdlRGkyDTVvPlR9MmGMtjA16q9xYDAo8T9n8+4rZqiK7XGCesjP7Ruo
+	6DdYKBwDdgMIIlz0hL2//Y44Qj6+YBBN3uoHJhDzevyCXNOz9ZCA4iB55pf+hyPSaEav
+	EuHg==
+X-Gm-Message-State: AMCzsaXQyupR1Laog/WQg9R8PCDun+HaqERIGa3sgOU+gqmjBvUS1drn
+	z0+VLis2cpM/OsDslWvJPBXf4yAf
+X-Google-Smtp-Source: AOwi7QD2bhBXtlyx2C38ZeH8x0QuyPGSzOvep1wgNokNxerniUX45SrVZAy+8hHvjjBr/GBqurSdHA==
+X-Received: by 10.200.44.81 with SMTP id e17mr8950962qta.332.1507048890544;
+	Tue, 03 Oct 2017 09:41:30 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id p8sm4156149qki.57.2017.10.03.09.41.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 03 Oct 2017 09:41:29 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Oct 2017 12:24:40 +0000
-Message-Id: <1507033480-26116-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  3 Oct 2017 12:41:08 -0400
+Message-Id: <1507048868-6923-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] leveldb: fix parallel build II
+Subject: [meta-python][PATCH] python-pylint: update to version 1.7.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,46 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 12:21:53 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 16:41:30 -0000
 
-* I was still able to reproduce the build failure which was supposed to be
-  fixed by this patch.
-* added comment suggesting to do the same in:
-  https://github.com/google/leveldb/pull/512/commits/6a6541b339b84070f585ffa1a437ef0e2ae22c9c
-
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../leveldb/0001-Makefile-Fix-parallel-build.patch        | 15 +++++++--------
- 1 file changed, 7 insertions(+), 8 deletions(-)
+ meta-python/recipes-devtools/python/python-pylint.inc                 | 4 ++--
+ .../python/{python-pylint_1.7.2.bb => python-pylint_1.7.4.bb}         | 0
+ .../python/{python3-pylint_1.7.2.bb => python3-pylint_1.7.4.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pylint_1.7.2.bb => python-pylint_1.7.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pylint_1.7.2.bb => python3-pylint_1.7.4.bb} (100%)
 
-diff --git a/meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch b/meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
-index 5068654..3135d4d 100644
---- a/meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
-+++ b/meta-oe/recipes-extended/leveldb/leveldb/0001-Makefile-Fix-parallel-build.patch
-@@ -20,16 +20,15 @@ Upstream-Status: Submitted
-  Makefile | 4 ++--
-  1 file changed, 2 insertions(+), 2 deletions(-)
+diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
+index 3ce1cae..c55bce6 100644
+--- a/meta-python/recipes-devtools/python/python-pylint.inc
++++ b/meta-python/recipes-devtools/python/python-pylint.inc
+@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
  
--Index: git/Makefile
--===================================================================
----- git.orig/Makefile
--+++ git/Makefile
--@@ -386,7 +386,7 @@ $(STATIC_OUTDIR)/write_batch_test:db/wri
-+diff --git a/Makefile b/Makefile
-+index f7cc7d7..51a0bcd 100644
-+--- a/Makefile
-++++ b/Makefile
-+@@ -386,6 +386,7 @@ $(STATIC_OUTDIR)/write_batch_test:db/write_batch_test.cc $(STATIC_LIBOBJECTS) $(
-  $(STATIC_OUTDIR)/memenv_test:$(STATIC_OUTDIR)/helpers/memenv/memenv_test.o $(STATIC_OUTDIR)/libmemenv.a $(STATIC_OUTDIR)/libleveldb.a $(TESTHARNESS)
-  	$(XCRUN) $(CXX) $(LDFLAGS) $(STATIC_OUTDIR)/helpers/memenv/memenv_test.o $(STATIC_OUTDIR)/libmemenv.a $(STATIC_OUTDIR)/libleveldb.a $(TESTHARNESS) -o $@ $(LIBS)
-  
---$(SHARED_OUTDIR)/db_bench:$(SHARED_OUTDIR)/db/db_bench.o $(SHARED_LIBS) $(TESTUTIL)
--+$(SHARED_OUTDIR)/db_bench:$(SHARED_OUTDIR)/db $(SHARED_OUTDIR)/db/db_bench.o $(SHARED_LIBS) $(TESTUTIL)
-++$(SHARED_OUTDIR)/db/db_bench.o: | $(SHARED_OUTDIR)/db
-+ $(SHARED_OUTDIR)/db_bench:$(SHARED_OUTDIR)/db/db_bench.o $(SHARED_LIBS) $(TESTUTIL)
-  	$(XCRUN) $(CXX) $(LDFLAGS) $(CXXFLAGS) $(PLATFORM_SHARED_CFLAGS) $(SHARED_OUTDIR)/db/db_bench.o $(TESTUTIL) $(SHARED_OUTDIR)/$(SHARED_LIB3) -o $@ $(LIBS)
-  
-- .PHONY: run-shared
+-SRC_URI[md5sum] = "27ee752cdcfacb05bf4940947e6b35c6"
+-SRC_URI[sha256sum] = "ea6afb93a9ed810cf52ff3838eb3a15e2bf6a81b80de0eaede1ce442caa5ca69"
++SRC_URI[md5sum] = "98a1ee985a3ebc876a20eb7577dbab68"
++SRC_URI[sha256sum] = "1f65b3815c3bf7524b845711d54c4242e4057dd93826586620239ecdfe591fb1"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pylint_1.7.2.bb b/meta-python/recipes-devtools/python/python-pylint_1.7.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pylint_1.7.2.bb
+rename to meta-python/recipes-devtools/python/python-pylint_1.7.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.7.2.bb b/meta-python/recipes-devtools/python/python3-pylint_1.7.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pylint_1.7.2.bb
+rename to meta-python/recipes-devtools/python/python3-pylint_1.7.4.bb
 -- 
 2.7.4
 
