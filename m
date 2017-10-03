@@ -1,48 +1,51 @@
 Return-Path: <andrea.adami@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 941E77782F
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 9D9D57782F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 19:57:34 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id f12so750784wra.5
+	Tue,  3 Oct 2017 19:57:37 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id f12so750854wra.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 12:57:36 -0700 (PDT)
+	Tue, 03 Oct 2017 12:57:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=LEBGA3jAOIapmOK/KuAgDgaZNB8X7lxlPy/VCIUxm8M=;
-	b=Ian3DHRSoppKyVUL9vGEFtRzc9SIICh9dbm7h7nxqYrnFjWWA9e7wbF/ZlEnJepIQO
-	VCJYyW0HgHFuXRvDAF4JfzqOHENun/IwIwBnHNCH4ePYg26iaKQCND6fraZPARebXC39
-	z7qc4AWefxFqg9uJ3ZC4bNJda2kFgWSb+y/XXNPv6qX42KNaacqQvMPo08GkyzSoRP8F
-	+qQFd3lmeclaPDVgYj2zEHKFYlyw5FI8KWEMa+h9EbllPDjAmXW0ndONK499ZptO95if
-	HQ1zA5Fl/0TPXiv0U3CcAp5EK+a0FeY38Ly+xG0U/jCVvzH0DMOEbGCJbedUctlf43L9
-	pdZQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=XtvXivw81IiF/8T5GZrFFRz0+JJml/fxPJq6Ivaz/ZI=;
+	b=mjx5oAIIDLbn2tU+2uFBcv4U81X7MdvPiKrVlLdP3wtG5gQxVK+3PWAqBmQGV75czY
+	maQTn8qgAlWCRflo1WT7m61n4UzlsIa5arQ7Bodbye7MJiUrJpUp8CR7OOFLCIMvfH9G
+	soS1pvlHpijllFClg7kgO6PzEjt0HVFjZ3spJLLGMkVQHLX437Dw/8o0aUjNVw9WGskD
+	UE8hfd5uqco8pgy8ycXAB+EQ28f4fl87tJIqkhwhs2V2S4Vs9Axo+hDGljkjjaTVvH0K
+	EFtdKuOM0V1f51YQ5t6kkiPWoToLOB01UcxXcvh6Y1/+mk59K0roZwHcOa3/VaKA7KSG
+	7awA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LEBGA3jAOIapmOK/KuAgDgaZNB8X7lxlPy/VCIUxm8M=;
-	b=kwpITFzNQETtwdddVeMPRegGl78tDgGMP3yYFhKO6Uk7sQrLVP3AiTL59/gOd9EzVm
-	IK5w1U4bwvBPsu0lAa2gP4sQdYa9UqtdIFZXRoQ5EcAWtrhAQt8WzV8JDzezF5KGvjGa
-	j8uym0DHSpa7YUrCD1Gqca9RPVUuAWorBq29hG9HEl+rug/NdsRPedPkWOxDfAzAOAkl
-	w8RajvTkS7Jmhc2w+3x5lx29ed4xc6AiKOAw/Y5ku3M4hHFUeYBxvU4iDY3WvxtomxMP
-	d5ZevC2CamG0bx1U9/2CRSEcx/0LKFgQSWo46R+9UBb6z2tqqpiCvv58nZCqfCUwX1Qn
-	rMvw==
-X-Gm-Message-State: AMCzsaXbueGtckXeDuvrm3/IZHbxSilCR3effeF7oDWQGUCbXfryBbMU
-	qMV09K1AfEfRXFrJDsi7e0fG3TRI
-X-Google-Smtp-Source: AOwi7QBU0qvzX5s0XUo/xiuMpTwA7KMcnKrBQD4Ggn9xKmd3TbX0azb3nOA4Pu0AOTRSRIkFSQQsEA==
-X-Received: by 10.223.157.30 with SMTP id k30mr7150052wre.159.1507060655225;
-	Tue, 03 Oct 2017 12:57:35 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=XtvXivw81IiF/8T5GZrFFRz0+JJml/fxPJq6Ivaz/ZI=;
+	b=LobMaGweQpn5qDcj391gP1As6Vb1hq9uDKhUlZwDVikXwu2X5roTxROogmCQIW9oO7
+	GIaZKAS8SBPZEDeRAcI2FGsRX6qya7ew1jrM5foKPXa6v4Q+pMkX4gZ7hEws4wjjHv05
+	9da9i1GZnMSGDqSSsa1i8/nWu+hJg16wAgNr2ZNNqfv1n+Yhr7/bn0rMO75sRi/uOmef
+	m9LyFNqhd85mX583IkEWaa9KLdo0+c23WYtXDiHJIvtvI5yKjcfxKJGoi0ATITojqg2h
+	BHrwS6urFB51Qu3gf0TT+XC4qjZ/ANY3d2SjttfL7t5d9h0w3IDp3zhspXZ0hElg3e4d
+	nPnQ==
+X-Gm-Message-State: AHPjjUgRTWRXhoZTPV7CVb+mIwiqivr1FQmPnweheh2d/NjUTFPNKWjo
+	RO1EkNNSQqX9SVcg6fcQS119mryQ
+X-Google-Smtp-Source: AOwi7QCTe/jqCMIUEAuDVYmRyEabhuWolqRX8mzHtDOMpEZ6JsrXOieRiqiCe88tJCqeZI5Q29DxYw==
+X-Received: by 10.223.186.202 with SMTP id w10mr20133660wrg.132.1507060658445; 
+	Tue, 03 Oct 2017 12:57:38 -0700 (PDT)
 Received: from andrea-ThinkPad-T520.homenet.telecomitalia.it
 	(host184-216-dynamic.24-79-r.retail.telecomitalia.it.
 	[79.24.216.184]) by smtp.gmail.com with ESMTPSA id
-	b47sm15464496wra.73.2017.10.03.12.57.34
+	b47sm15464496wra.73.2017.10.03.12.57.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 03 Oct 2017 12:57:34 -0700 (PDT)
+	Tue, 03 Oct 2017 12:57:37 -0700 (PDT)
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Oct 2017 21:57:26 +0200
-Message-Id: <1507060647-10249-1-git-send-email-andrea.adami@gmail.com>
+Date: Tue,  3 Oct 2017 21:57:27 +0200
+Message-Id: <1507060647-10249-2-git-send-email-andrea.adami@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-initramfs][PATCH 1/2] initramfs-debug: replace deprecated license file
+In-Reply-To: <1507060647-10249-1-git-send-email-andrea.adami@gmail.com>
+References: <1507060647-10249-1-git-send-email-andrea.adami@gmail.com>
+Subject: [meta-initramfs][PATCH 2/2] initramfs-kexecboot-image: replace deprecated license file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,27 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 19:57:34 -0000
+X-List-Received-Date: Tue, 03 Oct 2017 19:57:37 -0000
 
 Use '${COMMON_LICENSE_DIR}/MIT' for MIT License.
 
 Signed-off-by: Andrea Adami <andrea.adami@gmail.com>
 ---
- meta-initramfs/recipes-bsp/initrdscripts/initramfs-debug_1.0.bb | 2 +-
+ meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-initramfs/recipes-bsp/initrdscripts/initramfs-debug_1.0.bb b/meta-initramfs/recipes-bsp/initrdscripts/initramfs-debug_1.0.bb
-index b7defff..667690f 100644
---- a/meta-initramfs/recipes-bsp/initrdscripts/initramfs-debug_1.0.bb
-+++ b/meta-initramfs/recipes-bsp/initrdscripts/initramfs-debug_1.0.bb
-@@ -1,6 +1,6 @@
- SUMMARY = "Extremely basic live image init script"
+diff --git a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+index 835b307..2573eb4 100644
+--- a/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
++++ b/meta-initramfs/recipes-bsp/images/initramfs-kexecboot-image.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Initramfs image for kexecboot kernel"
+ DESCRIPTION = "This image provides kexecboot (linux as bootloader) and helpers."
  LICENSE = "MIT"
 -LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
 +LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
- SRC_URI = "file://init-debug.sh"
  
- S = "${WORKDIR}"
+ inherit image
+ 
 -- 
 2.7.4
 
