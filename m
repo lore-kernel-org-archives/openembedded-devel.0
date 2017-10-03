@@ -1,36 +1,47 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B0A971993
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 8AE0E71993
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 19:19:48 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 6AC81209AE;
-	Tue,  3 Oct 2017 19:19:49 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id cgDpyout2UII; Tue,  3 Oct 2017 19:19:49 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 3A74920713;
-	Tue,  3 Oct 2017 19:19:47 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id B7D9E1626B6; Tue,  3 Oct 2017 15:19:46 -0400 (EDT)
-Date: Tue, 3 Oct 2017 15:19:46 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20171003191946.GF16828@denix.org>
-References: <1499835521-973-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<1499835521-973-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<20171002222529.GE16828@denix.org>
-	<CA+chaQfoeaFsCzx3NqUWsW-_MrRuTwXzQcS2o-D95Y6EKuk7tQ@mail.gmail.com>
+	Tue,  3 Oct 2017 19:28:46 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id m28so9957151pfi.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Oct 2017 12:28:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=/bn+q87WK7oqMIyDkWq3ji89uSSC9euEvdCGunI515w=;
+	b=CpzANkYaFm8WMTgaf//KlyUymDWdctGg79F2zcvtCX9aItlHplrOlP69QmjNRUD2Gu
+	4Y1aQuq1GD2iXpSkOqJoYclyjwoxN1judA0YloWcfsrgInG2LI66doty6qg79Fu+jbWp
+	/+CGk8cpHkTltIQ5vkiwZ3cpkCh+SVR5JE+DuPqrsm+8gXeUPKa4cZ9KmFP5yd4tWXpm
+	shuXOTK4/3/FjuYjHCGsxfHEN/Me34HJFwdgF6bH7EEBEg2jy1FbVMk4NdWEL+iYqHab
+	QxhEfD0gbBFUEMud5uSf8g3ezob7Mi18ykHqNJlXg62ClHH7y9IMjo0sOMPau8L5wGx+
+	wbVQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=/bn+q87WK7oqMIyDkWq3ji89uSSC9euEvdCGunI515w=;
+	b=ja/k069apr+X45FL/rF+WuCxJ4prFlkJ0D+LxqphlDYbkMZ7SUASTXXitJXLzx86U2
+	q+IV+TnEJ79Y/wdGHBVjwbO3PFgY14QowUMh+4XrtmFuyGlTFJk6tZPIVnPaYfa1sG9C
+	D+AuS5mRXdST+NXklxHlaQY/+MefsEGmtwOZDHjiAWC5IJulr52r+yU5vD3ij/cPbZBR
+	NfzeRZIyXg/LWjTrFjUhMQHFPJFWFLMGQqFk97j6h1NKKX/qP7+D+GkrRZPo0fUaJuKH
+	zK8sep7M/yEsahmVgCUqmLNy5Feg0DIiLnryoW1mIKPBy2Z/55XnKB7xil29NFwfic1O
+	O/1A==
+X-Gm-Message-State: AHPjjUjZbDFLEnUNA2ZKJyOcCHZVA7IAjEbSJwf9Nc5SmoMvFQ0G7nFz
+	vxXT6Z46Tvc7BEvdf0JYNVkNS2h53LU2acsSxGo=
+X-Google-Smtp-Source: AOwi7QAwMqP44zPnuuXmNSHB0v4e809lbPTLWQzK55DL0BvXj39j//DYGsOEVndMAhf2RZayF7CRbq2yxIvoaEpmANo=
+X-Received: by 10.84.138.1 with SMTP id 1mr17981729plo.404.1507058927374; Tue,
+	03 Oct 2017 12:28:47 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfoeaFsCzx3NqUWsW-_MrRuTwXzQcS2o-D95Y6EKuk7tQ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH v4 1/4] qt5: add qt5-ptest.inc
+Received: by 10.100.135.23 with HTTP; Tue, 3 Oct 2017 12:28:16 -0700 (PDT)
+In-Reply-To: <20171002160657.39576-1-raj.khem@gmail.com>
+References: <20171002160657.39576-1-raj.khem@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 3 Oct 2017 12:28:16 -0700
+Message-ID: <CAMKF1srzEnWyL54RvOQT5rQ8B=rYa_43E4Exvg8Ct3wxLx6Z7Q@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Martin Jansa <Martin.Jansa@gmail.com>
+Subject: Re: [meta-initramfs][PATCH 1/5] klibc: Pass Optimization with KLIBCOPTFLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,156 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 19:19:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 Oct 2017 19:28:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 03, 2017 at 09:52:51AM +0200, Martin Jansa wrote:
-> Yes, I've seen this few times as well.
+Martin
 
-Ok, for now I had to manually build pseudo-native to seed sstate cache to 
-overcome this issue. Otherwise building a complete image this do_install_ptest 
-task from qt5 always comes before pseudo is ready. Wonder if I'll have time to 
-look into this closer in the near future... Is there a bugzilla for this?
+This is missing in master-next
 
--- 
-Denys
-
-
-> On Tue, Oct 3, 2017 at 12:25 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > On Wed, Jul 12, 2017 at 12:58:38PM +0800, Huang Qiyu wrote:
-> > >   Add qt5-ptest.inc file for qt ptest related tasks
-> > >         1)      Rewrite do_compile_ptest task for qt
-> > >         2)      Add new do_compile_ptest_base and task do_install_ptest
-> > >         3)      Write do_populate_sysroot_append to resolve
-> > do_compile_ptest_base problem in yocto2.3
-> >
-> > Something in this order of tasks is not completely correct - I just got
-> > qtxmlpatterns:do_install_ptest very early on (after fetch/unpack, but
-> > before
-> > compile/install). Even before pseudo-native fnished building and
-> > installing.
-> > And since do_install_ptest task marked as "fakeroot", it obviously failed:
-> >
-> > NOTE: Running task 614 of 7991 (/OE/master/sources/meta-qt5/
-> > recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest)
-> > ERROR: Failed to spawn fakeroot worker to run /OE/master/sources/meta-qt5/
-> > recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest: [Errno 2] No such
-> > file or directory: '/OE/master/build/tmp-glibc/sysroots-components/x86_64/
-> > pseudo-native/usr/bin/pseudo'
-> >
-> > Has anyone else seen this?
-> >
-> > --
-> > Denys
-> >
-> >
-> > >         The compile error log is shown as follow:
-> > >         cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/
-> > work_qt/build/tmp/work/i586-p
-> > > oky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/
-> > recipe-sysroot-native/usr/bin/qt5/qmake -o M
-> > > akefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-
-> > poky-linux/qtxmlpatterns/5.8.0+gitA
-> > > UTOINC+9f7e01b582-r0/git/tests/auto/auto.pro ) && make -f Makefile
-> > >         Project ERROR: Could not find feature xml-schema.
-> > >         Makefile:42: recipe for target 'sub-auto-make_first' failed
-> > >
-> > > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
-> > > ---
-> > >  recipes-qt/qt5/qt5-ptest.inc | 62 ++++++++++++++++++++++++++++++
-> > ++++++++++++++
-> > >  1 file changed, 62 insertions(+)
-> > >  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
-> > >
-> > > diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> > > new file mode 100644
-> > > index 0000000..49d44ac
-> > > --- /dev/null
-> > > +++ b/recipes-qt/qt5/qt5-ptest.inc
-> > > @@ -0,0 +1,62 @@
-> > > +SRC_URI += "file://run-ptest"
-> > > +
-> > > +inherit ptest
-> > > +
-> > > +addtask do_populate_sysroot after do_install before
-> > do_compile_ptest_base
-> > > +deltask do_compile_ptest_base
-> > > +addtask do_compile_ptest_base after do_populate_sysroot before
-> > do_install_ptest
-> > > +addtask do_install_ptest after do_compile_ptest_base before do_package
-> > > +
-> > > +do_compile_ptest() {
-> > > +    cd ${S}/tests
-> > > +    qmake -o Makefile tests.pro
-> > > +    oe_runmake
-> > > +}
-> > > +
-> > > +do_populate_sysroot_append() {
-> > > +    workdir = d.getVar('WORKDIR')
-> > > +    srcdir = workdir + '/sysroot-destdir/usr/'
-> > > +    destdir = workdir + '/recipe-sysroot/usr/'
-> > > +
-> > > +    def copyFiles(sourceDir, targetDir, filelist):
-> > > +        for file in os.listdir(sourceDir):
-> > > +            sourceFile = os.path.join(sourceDir,  file)
-> > > +            targetFile = os.path.join(targetDir,  file)
-> > > +            filelist.append(targetFile)    #record the file list
-> > > +            if os.path.isfile(sourceFile):
-> > > +                if not os.path.exists(targetDir):
-> > > +                    os.makedirs(targetDir)
-> > > +                if not os.path.exists(targetFile)
-> > or(os.path.exists(targetFile) and (os.path.getsize(targetFile) !=
-> > os.path.getsize(sourceFile))):
-> > > +                        open(targetFile, "wb").write(open(sourceFile,
-> > "rb").read())
-> > > +            if os.path.isdir(sourceFile):
-> > > +                First_Directory = False
-> > > +                copyFiles(sourceFile, targetFile, filelist)
-> > > +
-> > > +    if os.path.exists(destdir):
-> > > +        Tmpfilelist = []
-> > > +        copyFiles(srcdir, destdir, Tmpfilelist)
-> > > +
-> > > +        fp=open(workdir + '/filelist', 'w')
-> > > +        for i in Tmpfilelist:
-> > > +            fp.write(i)
-> > > +            fp.write("\n")
-> > > +        fp.close()
-> > > +}
-> > > +
-> > > +fakeroot do_install_ptest() {
-> > > +    mkdir -p ${D}${PTEST_PATH}
-> > > +    t=${D}${PTEST_PATH}
-> > > +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
-> > > +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
-> > > +            echo ${var##*/} >> ${t}/tst_list
-> > > +            install -m 0644  ${var} ${t}
-> > > +        fi
-> > > +    done
-> > > +    for file in `cat ${WORKDIR}/filelist`; do
-> > > +       if [ -f $file ]; then
-> > > +           rm -f $file
-> > > +       fi
-> > > +    done
-> > > +    rm -f ${WORKDIR}/filelist
-> > > +}
-> > > +
-> > > --
-> > > 2.7.4
-> > >
-> > >
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+On Mon, Oct 2, 2017 at 9:06 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Overriding KLIBCOPTFLAGS also meant that -Ox flags
+> were taken off. Which results in errors like
+>
+> | usr/dash/shell.h: In function 'max_int_length':
+> | usr/dash/shell.h:103:25: error: '-mgeneral-regs-only' is incompatible with floating-point code
+> |   return (bytes * 8 - 1) * 0.30102999566398119521 + 14;
+> |          ~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~
+> | usr/dash/shell.h:103:25: error: '-mgeneral-regs-only' is incompatible with floating-point argument
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  ...arm-Do-not-set-a-fallback-march-and-mtune.patch | 33 ++++++++++++++++++++++
+>  meta-initramfs/recipes-devtools/klibc/klibc.inc    |  4 ++-
+>  2 files changed, 36 insertions(+), 1 deletion(-)
+>  create mode 100644 meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+>
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+> new file mode 100644
+> index 000000000..9c0ea6397
+> --- /dev/null
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc-2.0.4/0001-arm-Do-not-set-a-fallback-march-and-mtune.patch
+> @@ -0,0 +1,33 @@
+> +From a46a144ac883898d9cedf7a0b13aec6d10116125 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Fri, 29 Sep 2017 23:11:53 -0700
+> +Subject: [PATCH] arm: Do not set a fallback march and mtune
+> +
+> +In OE we pass the options explicitly, there is
+> +no need to set it inside the makefiles, we will
+> +need to compute values for CPU_ARCH and CPU_TUNE
+> +which is a bit harder in OE
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> +Upstream-Status: Pending
+> +
+> + usr/klibc/arch/arm/MCONFIG | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/usr/klibc/arch/arm/MCONFIG b/usr/klibc/arch/arm/MCONFIG
+> +index 53bc1dc3..857e2f2d 100644
+> +--- a/usr/klibc/arch/arm/MCONFIG
+> ++++ b/usr/klibc/arch/arm/MCONFIG
+> +@@ -10,7 +10,7 @@
+> + CPU_ARCH ?= armv4
+> + CPU_TUNE ?= strongarm
+> +
+> +-KLIBCOPTFLAGS += -Os -march=$(CPU_ARCH) -mtune=$(CPU_TUNE)
+> ++KLIBCOPTFLAGS += -Os
+> + KLIBCBITSIZE  = 32
+> + KLIBCREQFLAGS += -fno-exceptions
+> + KLIBCSTRIPFLAGS += -R .ARM.exidx
+> +--
+> +2.14.2
+> +
+> diff --git a/meta-initramfs/recipes-devtools/klibc/klibc.inc b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> index dec3d3704..30294b19a 100644
+> --- a/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> +++ b/meta-initramfs/recipes-devtools/klibc/klibc.inc
+> @@ -19,6 +19,7 @@ SRC_URI = "git://git.kernel.org/pub/scm/libs/klibc/klibc.git \
+>             file://0001-always-use-bfd-linker.patch \
+>             file://0001-Kbuild.klibc-Use-print-libgcc-file-name-instead-of-p.patch \
+>             file://0001-Kbuild.klibc-Add-path-to-compiler-headers-via-isyste.patch \
+> +           file://0001-arm-Do-not-set-a-fallback-march-and-mtune.patch \
+>  "
+>
+>  ARMPATCHES ?= ""
+> @@ -40,7 +41,8 @@ EXTRA_OEMAKE = "'KLIBCARCH=${KLIBC_ARCH}' \
+>                  'INSTALLDIR=${libdir}/klibc' \
+>                  'SHLIBDIR=${libdir}' \
+>                  '${KLIBCTHUMB}' \
+> -                'KLIBCOPTFLAGS=${TUNE_CCARGS}' \
+> +                'KLIBCOPTFLAGS=${TUNE_CCARGS} -Os' \
+> +                 V=1 \
+>                  "
+>
+>  export FIX_ARMV4_EABI_BX = "${FIX_V4BX}"
+> --
+> 2.14.2
+>
 
