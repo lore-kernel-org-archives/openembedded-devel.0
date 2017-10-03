@@ -1,53 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f175.google.com (mail-wr0-f175.google.com
-	[209.85.128.175])
-	by mail.openembedded.org (Postfix) with ESMTP id CB49760269
+Return-Path: <guy@guy-morand.ch>
+Received: from smtp-sh2.infomaniak.ch (smtp-sh2.infomaniak.ch [128.65.195.6])
+	by mail.openembedded.org (Postfix) with ESMTP id 507B56FFC8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Oct 2017 07:56:06 +0000 (UTC)
-Received: by mail-wr0-f175.google.com with SMTP id k62so5663039wrc.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Oct 2017 00:56:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=2ayIV3BSKl9iXAUKDCk0tped1p80LprQnbdqo2uSdxY=;
-	b=mc8M8TJsZTothqfOUrtDv4Vyjpej68HdwMyne9bKfi8A1PkhyS9741kZmNdZLlRz40
-	EIGXX3C1k1oLkYQTbEcGlWuBe5dEdhvAwMntCaDgowgbVi+5p82vdA74NsDnEZFZzGHP
-	Lzk/SpqnDHLEf7EwMyFfJUwVT2GzoeyDf9DrGtZwKG6riWgQrcEqHoZ2hgEONq7nwvzO
-	5Eo3yr9zlx3MOZhZXz82PYRWiSXYZiP6a4ovDAG4P0Hq7hrGNZ/Ka+pEaWX41nmE+e06
-	TluncLxGDJfJARMQM6Dsng4Xvk4GNGNrbGdhO8/zmrmq+pnL15mVNuQ7qKyvHRPe2XiT
-	Zcnw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=2ayIV3BSKl9iXAUKDCk0tped1p80LprQnbdqo2uSdxY=;
-	b=ufsbYh/emDMFL2hgLpDooO1c2yxpm7opxbYttbGxh2NQArvqM9JiDEE/MYhOygdpBb
-	5LijD8j9nLZMlMUX9nzajqEtWkk/03sDD9eNQnyNxhq7Rb6iRTw4vZRMg8Pe0QfXWd+x
-	/8sS+i/aJtrTKdkeNVT13yPEFvOaBudfnz5CKrIClVLdpxJmBK0I6wB3vl1CggizkqDB
-	bMQBqJ2mPbCty2ZqHi0lLFpAnmYPuTd88h5i1tL5ajM+JhZQ43gUAxztFY/YtLUbbDll
-	UzH6wB7UjZqDgA0u8cx648zqdQPpumjBuEvByxRf6VFuQy9xDCV/C4H0KlB6+52V1OUK
-	ba7g==
-X-Gm-Message-State: AHPjjUgJ1jmY+j6CJLnIhMOG/xtj7N0eC8M1ACYUh2H8bazhtfWEuglZ
-	4TnbXaBEpBNpcqE+Yfh9xH+gx/3U73ZLIaiKlH0=
-X-Google-Smtp-Source: AOwi7QA+ePvP7yOg5PPnD/9FLgLgc/XAIRNCcDcRaXt6sOp0eClGhaqArZtq6K2wur7a29/LQUelQRaX58miuSV4+rc=
-X-Received: by 10.223.157.142 with SMTP id p14mr15435458wre.104.1507017367580; 
-	Tue, 03 Oct 2017 00:56:07 -0700 (PDT)
+	Tue,  3 Oct 2017 08:32:18 +0000 (UTC)
+Received: from smtp5.infomaniak.ch (smtp5.infomaniak.ch [83.166.132.18])
+	by smtp-sh.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v938WBVA009531
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256
+	verify=FAIL); Tue, 3 Oct 2017 10:32:16 +0200
+Received: from [192.168.13.135] ([62.192.30.6]) (authenticated bits=0)
+	by smtp5.infomaniak.ch (8.14.5/8.14.5) with ESMTP id v938Vxum033041
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES128-SHA bits=128 verify=NO);
+	Tue, 3 Oct 2017 10:32:05 +0200
+To: Martin Jansa <martin.jansa@gmail.com>,
+	Tim Orling <timothy.t.orling@linux.intel.com>
+References: <1506673565-17289-1-git-send-email-guy@guy-morand.ch>
+	<47BE632C-49AC-4509-9E45-A00124619DF5@linux.intel.com>
+	<CA+chaQcTrzhT+2cQXwqxan7Nq6fM-K8YASJWTRXYAS7hEWEVhA@mail.gmail.com>
+From: Guy Morand <guy@guy-morand.ch>
+Message-ID: <315629b2-8e5e-c51a-64e5-b73855e3a142@guy-morand.ch>
+Date: Tue, 3 Oct 2017 10:31:55 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Tue, 3 Oct 2017 00:56:06 -0700 (PDT)
-In-Reply-To: <CA+chaQch17Fsivf7RYthxa-yFtpu6neGCUOFc1i1i+L-3_mPCQ@mail.gmail.com>
-References: <1500946223-25865-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-	<97F7C8E70D26E94FA7E05578493F65C60E31BBC6@G08CNEXMBPEKD03.g08.fujitsu.local>
-	<CA+chaQd2cADxXOpPJX3NDEY3w15oTwJKKGpx8SpA6TmB-2A5BA@mail.gmail.com>
-	<20171002215123.GD16828@denix.org>
-	<CA+chaQch17Fsivf7RYthxa-yFtpu6neGCUOFc1i1i+L-3_mPCQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 3 Oct 2017 09:56:06 +0200
-Message-ID: <CA+chaQeLcK8m8E9uV2BLVYHP3cx4p3HWjZPuQeMoJA5KTTqKzA@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] [PATCH v2] qtbase: add ptest
+In-Reply-To: <CA+chaQcTrzhT+2cQXwqxan7Nq6fM-K8YASJWTRXYAS7hEWEVhA@mail.gmail.com>
+X-Antivirus: Dr.Web (R) for Unix mail servers drweb plugin ver.6.0.2.8
+X-Antivirus-Code: 0x100000
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] Add python pandas recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,194 +39,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Oct 2017 07:56:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 03 Oct 2017 08:32:19 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-additional fix from Khem:
-https://github.com/meta-qt5/meta-qt5/commit/904296915495f7f606f5a07cb444d76903093ca0
-and disabled gold by me to resolve the issue mentioned above:
-https://github.com/meta-qt5/meta-qt5/commit/648f7b0a2eb202d4378ce50ae566b6ca450dd010
+Hi,
 
-On Tue, Oct 3, 2017 at 9:53 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+Thanks for reviwing my patch, almost there! still learning community 
+conventions :p!
 
-> IIRC It was merged as is with additional fix from Khem on top of that to
-> resolve this build issue.
->
-> On Mon, Oct 2, 2017 at 11:51 PM, Denys Dmytriyenko <denis@denix.org>
-> wrote:
->
->> Was this actually merged to master as is?
->>
->>
->> On Tue, Aug 15, 2017 at 11:22:20AM +0200, Martin Jansa wrote:
->> > pong,
->> >
->> > it's failing to build as reported by me and Khem, so it won't get
->> merged in
->> > this form.
->> >
->> > http://lists.openembedded.org/pipermail/openembedded-devel/2
->> 017-August/114108.html
->> >
->> > On Tue, Aug 15, 2017 at 3:21 AM, Huang, Qiyu <
->> huangqy.fnst@cn.fujitsu.com>
->> > wrote:
->> >
->> > > ping
->> > >
->> > > > -----Original Message-----
->> > > > From: Huang, Qiyu
->> > > > Sent: Tuesday, July 25, 2017 9:30 AM
->> > > > To: openembedded-devel@lists.openembedded.org
->> > > > Cc: Huang, Qiyu <huangqy.fnst@cn.fujitsu.com>
->> > > > Subject: [oe] [meta-qt5] [PATCH v2] qtbase: add ptest
->> > > >
->> > > > Add ptest for qtbase by using provided testsuite.
->> > > >
->> > > > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
->> > > > ---
->> > > >  .../0001-Delete-qlonglong-and-qulonglong.patch     | 28
->> > > > ++++++++++++++++++++++
->> > > >  recipes-qt/qt5/qtbase/run-ptest                    |  6 +++++
->> > > >  recipes-qt/qt5/qtbase_git.bb                       | 17
->> ++++++++++++-
->> > > >  3 files changed, 50 insertions(+), 1 deletion(-)  create mode
->> 100644
->> > > > recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
->> > > >  create mode 100644 recipes-qt/qt5/qtbase/run-ptest
->> > > >
->> > > > diff --git a/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-
->> > > qulonglong.patch
->> > > > b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong.patch
->> > > > new file mode 100644
->> > > > index 0000000..975cd28
->> > > > --- /dev/null
->> > > > +++ b/recipes-qt/qt5/qtbase/0001-Delete-qlonglong-and-qulonglong
->> .patch
->> > > > @@ -0,0 +1,28 @@
->> > > > +From c67a4af2e5db4c1e2213961e6392b59affd1959f Mon Sep 17 00:00:00
->> > > > 2001
->> > > > +From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
->> > > > +Date: Wed, 7 Jun 2017 21:00:49 +0900
->> > > > +Subject: [PATCH] Delete qlonglong and qulonglong
->> > > > +
->> > > > +Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
->> > > > +---
->> > > > + tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro | 2
->> --
->> > > > + 1 file changed, 2 deletions(-)
->> > > > +
->> > > > +diff --git
->> > > > +a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
->> > > > +b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
->> > > > +index 09458bd..59a120e 100644
->> > > > +--- a/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
->> > > > ++++ b/tests/auto/corelib/thread/qatomicinteger/qatomicinteger.pro
->> > > > +@@ -5,10 +5,8 @@ SUBDIRS=\
->> > > > +     char32_t \
->> > > > +     int \
->> > > > +     long \
->> > > > +-    qlonglong \
->> > > > +     qptrdiff \
->> > > > +     quintptr \
->> > > > +-    qulonglong \
->> > > > +     schar \
->> > > > +     short \
->> > > > +     uchar \
->> > > > +--
->> > > > +2.7.4
->> > > > +
->> > > > diff --git a/recipes-qt/qt5/qtbase/run-ptest
->> > > b/recipes-qt/qt5/qtbase/run-ptest
->> > > > new file mode 100644 index 0000000..044f834
->> > > > --- /dev/null
->> > > > +++ b/recipes-qt/qt5/qtbase/run-ptest
->> > > > @@ -0,0 +1,6 @@
->> > > > +#!/bin/sh
->> > > > +
->> > > > +for x in ` awk '{print $1}' tst_list `;do
->> > > > +    ./${x};
->> > > > +done
->> > > > +
->> > > > diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/
->> qtbase_git.bb
->> > > index
->> > > > 5cfbcfa..8464873 100644
->> > > > --- a/recipes-qt/qt5/qtbase_git.bb
->> > > > +++ b/recipes-qt/qt5/qtbase_git.bb
->> > > > @@ -23,8 +23,12 @@ SRC_URI += "\
->> > > >      file://0005-configure-bump-path-length-from-256-to-512-
->> > > character.patch
->> > > > \
->> > > >      file://0009-Disable-all-unknown-features-instead-of-erroring
->> -out.patch
->> > > \
->> > > >
->> > > > file://0010-Pretend-Qt5-wasn-t-found-if-OE_QMAKE_PATH_EXTERN
->> AL_H.patch
->> > > > \
->> > > > +    file://0001-Delete-qlonglong-and-qulonglong.patch \
->> > > > +    file://run-ptest \
->> > > >  "
->> > > >
->> > > > +inherit ptest
->> > > > +
->> > > >  # only for target qtbase
->> > > >  SRC_URI += "\
->> > > >      file://0008-configure-paths-for-target-qmake-properly.patch \
->> @@
->> > > -48,7
->> > > > +52,7 @@ PACKAGECONFIG_DISTRO ?= ""
->> > > >  PACKAGECONFIG_RELEASE ?= "release"
->> > > >  # This is in qt5.inc, because qtwebkit-examples are using it to
->> enable
->> > > > ca-certificates dependency  # PACKAGECONFIG_OPENSSL ?= "openssl"
->> > > > -PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs
->> freetype"
->> > > > +PACKAGECONFIG_DEFAULT ?= "dbus udev evdev widgets tools libs
->> freetype
->> > > > tests"
->> > > >
->> > > >  PACKAGECONFIG ?= " \
->> > > >      ${PACKAGECONFIG_RELEASE} \
->> > > > @@ -171,6 +175,17 @@ do_configure() {
->> > > >          ${QT_CONFIG_FLAGS}
->> > > >  }
->> > > >
->> > > > +fakeroot do_install_ptest() {
->> > > > +    mkdir -p ${D}${PTEST_PATH}
->> > > > +    t=${D}${PTEST_PATH}
->> > > > +    for var in ` find ${B}/tests/auto/ -name tst_*`; do
->> > > > +        if [ not ` echo ${var##*/} | grep '\.'` ]; then
->> > > > +            echo ${var##*/} >> ${t}/tst_list
->> > > > +            install -m 0644 ${var} ${t}
->> > > > +        fi
->> > > > +    done
->> > > > +}
->> > > > +
->> > > >  do_install_append() {
->> > > >      # Avoid qmake error "Cannot read
->> > > > [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or
->> > > directory"
->> > > >      touch
->> > > > ${D}/${OE_QMAKE_PATH_QT_ARCHDATA}/mkspecs/oe-device-extra.pri
->> > > > --
->> > > > 2.7.4
->> > >
->> > >
->> > >
->> > > --
->> > > _______________________________________________
->> > > Openembedded-devel mailing list
->> > > Openembedded-devel@lists.openembedded.org
->> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->> > >
->> > --
->> > _______________________________________________
->> > Openembedded-devel mailing list
->> > Openembedded-devel@lists.openembedded.org
->> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+My arguments for md5sums was if the PV changes, I guess both recipes 
+will have to be updated. Since it's DRYer and other recipes are made 
+this way, I will fix it!
+
+"-s" never hurts!
+
+I hope the third attempt will be the good one!
+
+Regards,
+
+Guy
+
+On 10/01/2017 08:41 PM, Martin Jansa wrote:
+> Also missing Signed-off-by line.
+> 
+> On Fri, Sep 29, 2017 at 7:37 PM, Tim Orling 
+> <timothy.t.orling@linux.intel.com 
+> <mailto:timothy.t.orling@linux.intel.com>> wrote:
+> 
+> 
+>      > On Sep 29, 2017, at 1:26 AM, Guy Morand <guy@guy-morand.ch
+>     <mailto:guy@guy-morand.ch>> wrote:
+>      >
+>      > —
+>      > <snip>
+>     > diff --git a/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
+>     <http://python-pandas_0.20.3.bb>
+>     b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb
+>     <http://python-pandas_0.20.3.bb>
+>     > new file mode 100644
+>     > index 0000000..f4c486b
+>     > --- /dev/null
+>     > +++ b/meta-python/recipes-devtools/python/python-pandas_0.20.3.bb <http://python-pandas_0.20.3.bb>
+>     > @@ -0,0 +1,10 @@
+>     > +inherit setuptools
+>     > +require python-pandas.inc
+>     > +
+>     > +RDEPENDS_${PN} += " \
+>     > +  ${PYTHON_PN}-json \
+>     > +  ${PYTHON_PN}-importlib \
+>     > +  "
+>     > +
+>     > +SRC_URI[md5sum] = "4df858f28b4bf4fa07d9fbb7f2568173"
+>     > +SRC_URI[sha256sum] = “a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
+> 
+>     These SRC_URI checksum lines should go in the python-pandas.inc
+>     file, rather than duplicate them in both the python-pandas and
+>     python3-pandas files.
+> 
+>     It is quite common now for the “version specific” files to only be
+>     the “inherit” line and the “require foo.inc” line.
+> 
+>     DRY and KISS.
+> 
+>      > diff --git
+>     a/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
+>     <http://python3-pandas_0.20.3.bb>
+>     b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
+>     <http://python3-pandas_0.20.3.bb>
+>      > new file mode 100644
+>      > index 0000000..81dd360
+>      > --- /dev/null
+>      > +++
+>     b/meta-python/recipes-devtools/python/python3-pandas_0.20.3.bb
+>     <http://python3-pandas_0.20.3.bb>
+>      > @@ -0,0 +1,5 @@
+>      > +inherit setuptools3
+>      > +require python-pandas.inc
+>      > +
+>      > +SRC_URI[md5sum] = "4df858f28b4bf4fa07d9fbb7f2568173"
+>      > +SRC_URI[sha256sum] =
+>     "a777e07633d83d546c55706420179551c8e01075b53c497dcf8ae4036766bc66"
+>      > --
+>      > 2.7.4
+>      >
+>      > --
+>      > _______________________________________________
+>      > Openembedded-devel mailing list
+>      > Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>      > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+> 
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+> 
+> 
 
