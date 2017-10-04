@@ -1,50 +1,22 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 44B3977D48
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Oct 2017 09:46:38 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id m81so602825ioi.13
-	for <Openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Oct 2017 02:46:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=f7I/55MnpQ3QZVsAXJWtr34dYvSNpDYxrSh+iWaRvH0=;
-	b=i8AvCLhj7HzyiAHmRRak7DwHqHeOf88gQSI8/kP/BhpWXVArSMUr3nbejlaa3ZB/pq
-	e4YXiFMBKaddUf3QGpsTREtkcU0bJTCs+qsWOPb0wEfHahoFBO29wkyxIIllKuR/jwZB
-	T6ml6t85YiOYrPI6cvU33ELXUhMJpSKoFvOs9GTdk4/VU6NYafjIpEjpN0s6Rvl8UsWf
-	eSQK8BD+bxCKWC8AYnMvHd9obK+/tX9O0vb8CJoQ+IRVsu1CQqKTsKDqDt2lWU8b6un6
-	Vjwf1vLcJYcDw+dvEWF0dbTRSXVSzH6B3cXnSb2tsHczfqlv+bnlzt8jyFnaAgYuQ4ae
-	xv4g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=f7I/55MnpQ3QZVsAXJWtr34dYvSNpDYxrSh+iWaRvH0=;
-	b=TERXkC08VxC8aOh8g26aieo23BLi37YyxMrPeA7zVwdqCnn3W3ls2XzukbQSjaPWft
-	K1lS9w6EaPZW4nAFj47dCwreKEmDScReWyia5xzr1V5Ml7Znmb22S5HuxK291tesjEiO
-	A+rpZUpkhsAOV0eP3B2Od7iXNMvc0ar9aZLd0eE3BvQHUBNDf6tHYpDIla3KGtS/Ooti
-	fSGrE+TeUKLLqC875P8GsBUQxQtcslQ7km62yDxQy1SO1Gk3ahpbro5VU6plWJHAsMd9
-	obA2p/0fFTvLqDumtpt0/atEbWXc2DFHcs3nULVyr0eLFilFFDsqWkv+3lR/1sfCIXve
-	+EAw==
-X-Gm-Message-State: AMCzsaUlzDEfOla97YpKrup2++ernl6hOZ23unexXU8MVjAHsggpWU9b
-	k9ByBlOgalu7N+uAWvA3eviGScTMFHNJF6lqMN1tjA==
-X-Google-Smtp-Source: AOwi7QAeexTvb3sTBHQHnOzOqGeYyOw34pzrmPTU2rGrk7mZTlTseNA7UzrcXYaJkUtr+DCOR1d+caDMGNIdRfjjODA=
-X-Received: by 10.107.57.3 with SMTP id g3mr761065ioa.210.1507110400276; Wed,
-	04 Oct 2017 02:46:40 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.164.134 with HTTP; Wed, 4 Oct 2017 02:46:19 -0700 (PDT)
-In-Reply-To: <1507109531.25153.6.camel@intel.com>
-References: <20171003094039.30186-1-ricardo.ribalda@gmail.com>
-	<1507109531.25153.6.camel@intel.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Wed, 4 Oct 2017 10:46:19 +0100
-Message-ID: <CAJTo0LagbKRTTh7VZ+LYZh91WGA7TAkwXY-TyWwWOfEP7_PfKg@mail.gmail.com>
-To: Patrick Ohly <patrick.ohly@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <Openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] bitbake.conf: Add sdl-config to HOSTTOOLS
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id A215A71975
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Oct 2017 11:59:43 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v94BxhTo021532
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 4 Oct 2017 13:59:43 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.76.113])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v94Bxhbb003376;
+	Wed, 4 Oct 2017 13:59:43 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Oct 2017 13:59:38 +0200
+Message-Id: <1507118378-21985-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-mono][PATCHv3] libgdiplus: use tarball from mono project instead of github
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,30 +29,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Oct 2017 09:46:39 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 04 Oct 2017 11:59:44 -0000
 
-On 4 October 2017 at 10:32, Patrick Ohly <patrick.ohly@intel.com> wrote:
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
+---
+ recipes-mono/libgdiplus/libgdiplus-native_4.2.bb |  7 +++----
+ recipes-mono/libgdiplus/libgdiplus_4.2.bb        | 10 +++++-----
+ 2 files changed, 8 insertions(+), 9 deletions(-)
 
-> On Tue, 2017-10-03 at 11:40 +0200, Ricardo Ribalda Delgado wrote:
-> > Without this patch bitbake cannot find sdl-config
-> >
-> > ERROR:  OE-core's config sanity checker detected a potential
-> > misconfiguration.
-> > Either fix the cause of this error or at your own risk disable the
-> > checker (see sanity.conf).
-> > Following is the list of potential problems / advisories:
-> >
-> > libsdl-native is set to be ASSUME_PROVIDED but sdl-config can't be
-> > found in PATH. Please either install it, or configure qemu not to
-> > require sdl.
->
-> Making sdl-config available is the wrong solution. See https://bugzilla
-> .yoctoproject.org/show_bug.cgi?id=11725
+diff --git a/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb b/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
+index 4dee6a0..cbd8e5d 100644
+--- a/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
++++ b/recipes-mono/libgdiplus/libgdiplus-native_4.2.bb
+@@ -6,15 +6,14 @@ SECTION = "libs"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=fe7364dfce9f3689eb6995e7cdd56879"
+ 
+-SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz \
+-	"
++SRC_URI = "https://download.mono-project.com/sources/libgdiplus/libgdiplus-${PV}.tar.gz"
+ 
+ inherit autotools pkgconfig native
+ 
+ DEPENDS =+ "cairo-native freetype-native fontconfig-native libxft-native libpng-native pango-native giflib-native"
+ 
+-SRC_URI[md5sum] = "925709982aba701c567850617e2206b1"
+-SRC_URI[sha256sum] = "98f8a8e58ed22e136c4ac6eaafbc860757f5a97901ecc0ea357e2b6e4cfa2be5"
++SRC_URI[md5sum] = "3e68075aa0911d5ebc2b3739e85af0ea"
++SRC_URI[sha256sum] = "f332b9b8b44fd1c50b8d8d01a7296360b806c790b8297614739b3de1edbadfeb"
+ 
+ FILES_${PN} += "${libdir}/libgdiplus.so"
+ INSANE_SKIP_${PN} += "dev-so"
+diff --git a/recipes-mono/libgdiplus/libgdiplus_4.2.bb b/recipes-mono/libgdiplus/libgdiplus_4.2.bb
+index 00eb406..644af74 100644
+--- a/recipes-mono/libgdiplus/libgdiplus_4.2.bb
++++ b/recipes-mono/libgdiplus/libgdiplus_4.2.bb
+@@ -12,16 +12,16 @@ PACKAGECONFIG[tiff] = "--with-libtiff,--without-libtiff,tiff"
+ PACKAGECONFIG[gif] = "--with-libgif,--without-libgif,giflib"
+ PACKAGECONFIG[exif] = "--with-libexif,--without-libexif,libexif"
+ 
+-SRC_URI = "https://github.com/mono/libgdiplus/archive/${PV}.tar.gz \
+-	   file://01-remove-libjpeg-path.patch \
+-	"
++SRC_URI = "https://download.mono-project.com/sources/libgdiplus/libgdiplus-${PV}.tar.gz \
++           file://01-remove-libjpeg-path.patch \
++          "
+ 
+ inherit autotools pkgconfig
+ 
+ DEPENDS =+ "cairo freetype fontconfig libxft libpng"
+ 
+-SRC_URI[md5sum] = "925709982aba701c567850617e2206b1"
+-SRC_URI[sha256sum] = "98f8a8e58ed22e136c4ac6eaafbc860757f5a97901ecc0ea357e2b6e4cfa2be5"
++SRC_URI[md5sum] = "3e68075aa0911d5ebc2b3739e85af0ea"
++SRC_URI[sha256sum] = "f332b9b8b44fd1c50b8d8d01a7296360b806c790b8297614739b3de1edbadfeb"
+ 
+ FILES_${PN} += "${libdir}/libgdiplus.so"
+ INSANE_SKIP_${PN} += "dev-so"
+-- 
+2.1.4
 
-
-I've just closed that bug because I removed the sdl-config check from
-sanity.bbclass back in June.
-
-Ross
 
