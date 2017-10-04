@@ -1,22 +1,22 @@
 Return-Path: <pascal.bach@siemens.com>
 Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E67071975
+	by mail.openembedded.org (Postfix) with ESMTP id AEB1771B32
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Oct 2017 12:02:40 +0000 (UTC)
-Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
-	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v94C2fMG005219
+	Wed,  4 Oct 2017 12:03:50 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v94C3pfF011826
 	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
-	Wed, 4 Oct 2017 14:02:41 +0200
+	Wed, 4 Oct 2017 14:03:51 +0200
 Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.76.113])
-	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v94C2fBn008446;
-	Wed, 4 Oct 2017 14:02:41 +0200
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v94C3pTS024676;
+	Wed, 4 Oct 2017 14:03:51 +0200
 From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Oct 2017 14:02:34 +0200
-Message-Id: <1507118554-23040-1-git-send-email-pascal.bach@siemens.com>
+Date: Wed,  4 Oct 2017 14:03:49 +0200
+Message-Id: <1507118629-23176-1-git-send-email-pascal.bach@siemens.com>
 X-Mailer: git-send-email 2.1.4
 Cc: Pascal Bach <pascal.bach@nextrem.ch>
-Subject: [meta-python][PATCH] python3-protobuf: add python3 version
+Subject: [meta-python][PATCH] python3-ujson: support Python 3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,70 +29,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Oct 2017 12:02:41 -0000
+X-List-Received-Date: Wed, 04 Oct 2017 12:03:51 -0000
+
+From: Pascal Bach <pascal.bach@nextrem.ch>
 
 Signed-off-by: Pascal Bach <pascal.bach@nextrem.ch>
 ---
- .../recipes-devtools/python/python-protobuf.inc        | 16 ++++++++++++++++
- .../recipes-devtools/python/python-protobuf_3.4.0.bb   | 18 ++----------------
- .../recipes-devtools/python/python3-protobuf_3.4.0.bb  |  2 ++
- 3 files changed, 20 insertions(+), 16 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-protobuf.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-protobuf_3.4.0.bb
+ meta-python/recipes-devtools/python/python-ujson.inc    | 15 +++++++++++++++
+ .../recipes-devtools/python/python-ujson_1.35.bb        | 17 ++---------------
+ .../recipes-devtools/python/python3-ujson_1.35.bb       |  2 ++
+ 3 files changed, 19 insertions(+), 15 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-ujson.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-ujson_1.35.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-protobuf.inc b/meta-python/recipes-devtools/python/python-protobuf.inc
+diff --git a/meta-python/recipes-devtools/python/python-ujson.inc b/meta-python/recipes-devtools/python/python-ujson.inc
 new file mode 100644
-index 0000000..2f59ef9
+index 0000000..9654d5a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-protobuf.inc
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "Protocol Buffers"
-+HOMEPAGE = "https://developers.google.com/protocol-buffers/"
-+SECTION = "devel/python"
++++ b/meta-python/recipes-devtools/python/python-ujson.inc
+@@ -0,0 +1,15 @@
++SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
++DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
 +
-+RDEPENDS_${PN} = "python-six"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=4f369b3c3c290b4aede8796a4065e5ab"
 +
-+LICENSE = "BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
++SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
++SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
 +
 +inherit pypi
 +
-+SRC_URI[md5sum] = "bfc0c61c156a995e909521697e755780"
-+SRC_URI[sha256sum] = "ef02609ef445987976a3a26bff77119c518e0915c96661c3a3b17856d0ef6374"
-+
-+# For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-protobuf_3.4.0.bb b/meta-python/recipes-devtools/python/python-protobuf_3.4.0.bb
-index cde62b7..f04fc48 100644
---- a/meta-python/recipes-devtools/python/python-protobuf_3.4.0.bb
-+++ b/meta-python/recipes-devtools/python/python-protobuf_3.4.0.bb
-@@ -1,16 +1,2 @@
--DESCRIPTION = "Protocol Buffers"
--HOMEPAGE = "https://developers.google.com/protocol-buffers/"
--SECTION = "devel/python"
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-numbers \
++    "
+diff --git a/meta-python/recipes-devtools/python/python-ujson_1.35.bb b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
+index 238dc92..b3c6ae6 100644
+--- a/meta-python/recipes-devtools/python/python-ujson_1.35.bb
++++ b/meta-python/recipes-devtools/python/python-ujson_1.35.bb
+@@ -1,15 +1,2 @@
+-SUMMARY  = "Ultra fast JSON encoder and decoder for Python"
+-DESCRIPTION = "UltraJSON is an ultra fast JSON encoder and decoder written in pure C with bindings for Python 2.5+ and 3."
 -
--RDEPENDS_${PN} = "python-six"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;startline=8;endline=9;md5=4f369b3c3c290b4aede8796a4065e5ab"
 -
--LICENSE = "BSD-3-Clause"
--LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
+-SRC_URI[md5sum] = "42f77b0cce686dfa4da2e68480b1dd24"
+-SRC_URI[sha256sum] = "f66073e5506e91d204ab0c614a148d5aa938bdbf104751be66f8ad7a222f5f86"
 -
 -inherit pypi setuptools
 -
--SRC_URI[md5sum] = "bfc0c61c156a995e909521697e755780"
--SRC_URI[sha256sum] = "ef02609ef445987976a3a26bff77119c518e0915c96661c3a3b17856d0ef6374"
--
--# For usage in other recipies when compiling protobuf files (e.g. by grpcio-tools)
--BBCLASSEXTEND = "native"
+-RDEPENDS_${PN} += "\
+-    ${PYTHON_PN}-datetime \
+-    ${PYTHON_PN}-numbers \
+-    "
 +inherit setuptools
-+require python-protobuf.inc
-diff --git a/meta-python/recipes-devtools/python/python3-protobuf_3.4.0.bb b/meta-python/recipes-devtools/python/python3-protobuf_3.4.0.bb
++require python-ujson.inc
+diff --git a/meta-python/recipes-devtools/python/python3-ujson_1.35.bb b/meta-python/recipes-devtools/python/python3-ujson_1.35.bb
 new file mode 100644
-index 0000000..781d1dc
+index 0000000..ae4cc0a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-protobuf_3.4.0.bb
++++ b/meta-python/recipes-devtools/python/python3-ujson_1.35.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-protobuf.inc
++require python-ujson.inc
 -- 
 2.1.4
 
