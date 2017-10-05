@@ -1,43 +1,48 @@
-Return-Path: <kowabungappl@gmail.com>
-Received: from mail-io0-f178.google.com (mail-io0-f178.google.com
-	[209.85.223.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F3F86FFCD
+Return-Path: <twoerner@gmail.com>
+Received: from mail-qt0-f181.google.com (mail-qt0-f181.google.com
+	[209.85.216.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C8E577E4E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Oct 2017 22:01:53 +0000 (UTC)
-Received: by mail-io0-f178.google.com with SMTP id d16so11812583ioj.3
+	Thu,  5 Oct 2017 00:43:14 +0000 (UTC)
+Received: by mail-qt0-f181.google.com with SMTP id o3so22612587qte.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Oct 2017 15:01:55 -0700 (PDT)
+	Wed, 04 Oct 2017 17:43:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=bnJWszhWRAO4csysdFFPkj8QOlpjnfBNsvXyIuk3M4o=;
-	b=PgHuW4BY6YgLlBWB4Jojvq9SDzxLp+QYoWfCoE2EIJ6Q1fYdBpK10ddmsFUJVY8XKj
-	B0wcJFdKy4BbuOde3s1aSqKU+U9zss9ROsrdUhZWc8l7gvqWOib7vd8cRvYRehsWWugF
-	FUgHfnlAlQnR3A276hKX2e72nZxe7/eaqy29uh9Sybgltce5cpKiN5STRSzOsg2Q/4Yq
-	69Aawwx4J+DnYmAfyjHDqmkNX00Jlz4CPsSOZ0jATAW7aQfrInVjUMNDu1DIaXqyH0Lz
-	n1rdeKLiQ3OY8IoBlQ+Qu/bTTx0Sb+pUJSeNVkwNWnkKiQW1R8EXeuSqAGEZj7JsBn5u
-	1l+w==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=a5m5ozGpwgdcq2uZZubhzRHX9bMWtZJyte+KRUShrh4=;
+	b=q9Pk3hqC7PWY/N42NKRYY8F2SVx04obtWrNyQyvuDomRQS9bMEGyfSh07MN+hXF8nh
+	f6xaoehkEqRN60rsAq+f7WUqiwzDrvXe7ReVhUbAq0+njgT8i0/Is6IzQSJ1FoJMaEEY
+	qT4FksPutuj6HYDb3w/wmxJmFeU8l3BP9E6u9X6rn2ZDgMYMQhvjq1hC5uhCsoMPx+lR
+	P7i570JmJBNaaFEjWqLOGcQL6eeC8l0wA1w+Dn18P1HQ+Wl4pYiLs+emVXK+1Tng56i+
+	rvjiUG0N1LoMMTfua7aHCEOQ3gJsTrwjgv++BJczdxX4bRkXMwFzObP0xJq991d5Ns1T
+	uzvg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=bnJWszhWRAO4csysdFFPkj8QOlpjnfBNsvXyIuk3M4o=;
-	b=JHxr68iroacZsmDBGSlYVusBVA40QWpOg52QcLNWtHQ2igtwL+I70LbdSzaCs2zCPx
-	+LFVtaQCI0cRdxk8RVLlT6NCHTNmpyjQ5vIxZT4CXsFgNojgHKLsGh/wKPNtNaQFF1gs
-	rQ1v1yYvTKP99614zyYWaSGj9OWvQwG8Wfm1RaojOlNWY+EmD3JR14p1yDhhzmqGGbBX
-	SW3/mmX6HVEiKx8gcfkUA2ljjXlUoYQ54h3Im277+B7RuwL+QEJ7LdNhmHDJjPKzwbRt
-	LeutlFdlJY84iIft0oc/6Q4kxPKUlfMZQzrhoADPCQKR3Iw7pphe9yox2RDUP4QRsJJt
-	WqaA==
-X-Gm-Message-State: AMCzsaXSacmOhQUGnaXUq4YdTh09I6ZUkEg19lMky0RnvBlRvsucCaMY
-	KW25hb0EbNfcMiRUhExIHZ8plDa9uWcmVE27Npo=
-X-Google-Smtp-Source: AOwi7QAAj3PAjYsDvyOt6i+wd8EvlNy1NO94vpvbmETH0wCoQhgeKBjbqGFvsn2tqLwFUqO69nQZwu3btwoCuRi1gHg=
-X-Received: by 10.107.57.3 with SMTP id g3mr3350973ioa.210.1507154514580; Wed,
-	04 Oct 2017 15:01:54 -0700 (PDT)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=a5m5ozGpwgdcq2uZZubhzRHX9bMWtZJyte+KRUShrh4=;
+	b=Op8b6R8o2ZA30xIlpM3+26xrVcMIahVR6uhKIBE4kN9IdXF1epGdMiiRlzMh/cmLM6
+	XnpLSDegG+4RAe1AlrT7cHH25bov433NXLPNnMTbwg7OuMKFWlP7cqbMAbhLPswshBMt
+	gBSgNiaJ0Mt84cCekGNHSgZTyG7QuXmIKUcKwnV2S/tmcVvcbczimdap7E/IZr7vW3Ki
+	t4JbAXCHCOql0VhI+wSkin7SHpUQ+NoyL+bZfMKNwB2ivFrcpDnPtArGNzRPZ4AdNsR/
+	dXOBH+/zT01OpbvvFcfaNJ8ZPkDvuq4vfIQ61inhbJBOvsGDeDjhr0PoKWb3Z9peh9J1
+	QqhQ==
+X-Gm-Message-State: AMCzsaWu5XkKHXRAIWg4oHLYerWo8h3v5oD2oufznr+OZ3djSm+hjYZT
+	0EKjymjhU/7XEhSLrVkREGdzKyZeg+mJzaHbdg4=
+X-Google-Smtp-Source: AOwi7QB3eiF5qtMsild3O9EO3uu/D335V4GflU4/wN+COIBcoxcOLwTPmI4UGL1MsSVEZtdBQShRdd9/ZWOuBQpXd7g=
+X-Received: by 10.200.63.173 with SMTP id d42mr1372401qtk.200.1507164195913;
+	Wed, 04 Oct 2017 17:43:15 -0700 (PDT)
 MIME-Version: 1.0
-From: Satya Bodduluri <skbodduluri@gmail.com>
-Date: Wed, 04 Oct 2017 22:01:43 +0000
-Message-ID: <CAGNWprvL2=xrH-ve8qF6z_AAAHjJ3WLWA5761V-fUwwhZzUrZA@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: asn1crypto dependency missing for python-cryptography
+Received: by 10.140.104.173 with HTTP; Wed, 4 Oct 2017 17:43:15 -0700 (PDT)
+In-Reply-To: <CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+From: Trevor Woerner <twoerner@gmail.com>
+Date: Wed, 4 Oct 2017 20:43:15 -0400
+Message-ID: <CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,24 +55,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Oct 2017 22:01:54 -0000
+X-List-Received-Date: Thu, 05 Oct 2017 00:43:15 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-In versions of python-cryptography >=1.8.x, it includes a dependency for
-asn1crypto and removes a dependency on pyasn1 as can be seen with this
-commit:
-https://github.com/pyca/cryptography/commit/0e6a129724b707ebf79149376251e85fad550414.
-As
-far as I can tell, asn1crypto isn't included in
-meta-openembedded/meta-python.
+Hi Jocobo,
 
-I've managed to work around this by using an older version of
-python-cryptography, but I just wanted to make note of this as it makes
-portions of the newer versions of the cryptography library (the master
-branch of meta-openembedded is using version 2.0.3 of python-cryptography)
-unusable when it can't import asn1crypto. I'm not sure when I'll have time
-to create a patch, but I can take a stab at it if no one else beats me.
+Please have a look at
+https://github.com/rakuco/meta-crosswalk/tree/chromium61/recipes-browser/chromium
+from Raphael (CCed). It is an interesting and promising approach.
 
-Thanks,
-Satya Bodduluri
+I have built against minnow (x86-64) and rpi3-32 (armv7ve)
+successfully with pyro. I haven't had time to runtime test anything
+yet. I'm still seeing a build issue with both MACHINEs against master.
+
+It's been about two weeks since I've had time to tinker with it.
+
+Best regards,
+    Trevor
 
