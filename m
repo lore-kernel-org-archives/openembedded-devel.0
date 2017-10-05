@@ -1,48 +1,48 @@
-Return-Path: <twoerner@gmail.com>
-Received: from mail-qt0-f181.google.com (mail-qt0-f181.google.com
-	[209.85.216.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C8E577E4E
+Return-Path: <shantanu@senic.com>
+Received: from mail-pf0-f177.google.com (mail-pf0-f177.google.com
+	[209.85.192.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 9046671AB9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  5 Oct 2017 00:43:14 +0000 (UTC)
-Received: by mail-qt0-f181.google.com with SMTP id o3so22612587qte.6
+	Thu,  5 Oct 2017 09:47:22 +0000 (UTC)
+Received: by mail-pf0-f177.google.com with SMTP id z84so7680155pfi.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Oct 2017 17:43:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=a5m5ozGpwgdcq2uZZubhzRHX9bMWtZJyte+KRUShrh4=;
-	b=q9Pk3hqC7PWY/N42NKRYY8F2SVx04obtWrNyQyvuDomRQS9bMEGyfSh07MN+hXF8nh
-	f6xaoehkEqRN60rsAq+f7WUqiwzDrvXe7ReVhUbAq0+njgT8i0/Is6IzQSJ1FoJMaEEY
-	qT4FksPutuj6HYDb3w/wmxJmFeU8l3BP9E6u9X6rn2ZDgMYMQhvjq1hC5uhCsoMPx+lR
-	P7i570JmJBNaaFEjWqLOGcQL6eeC8l0wA1w+Dn18P1HQ+Wl4pYiLs+emVXK+1Tng56i+
-	rvjiUG0N1LoMMTfua7aHCEOQ3gJsTrwjgv++BJczdxX4bRkXMwFzObP0xJq991d5Ns1T
-	uzvg==
+	Thu, 05 Oct 2017 02:47:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=senic-com.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=fp23V+fhrvZDpB7HK4Mgdss6Tox/WvufXjUX3E+hGG4=;
+	b=nvBgIpkRn09QcV1ymZx/8Cb6ci/lLPUs4g/d83CfieXwxLnRQvUXf/HiRgdby+MX2T
+	MhnhrrNqH4B3x6oPzzTOP5b9AeoP3gG0EH7X9kWIGrlonhJ1k4S386FYe8fMENTqGYuy
+	Srx6ZQSJLoJgMyCgIQM0NjFH3IRg8T4+5kAVbBzjAMzV0QE2lsetuhaKGskQed8Afh2p
+	FDbg5AhYzgWjqlJa8FQ6iCJt4MLrDtY1COGI6O7F+ArsYCYypCfLHp1KRCkat6kXp9tO
+	THmbQl3ddArD5RslAL3DbIlsFbPcst1l1xfCVaVSepKKb1Ig198ugEhpYnsYVTHY+PXD
+	zS+g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=a5m5ozGpwgdcq2uZZubhzRHX9bMWtZJyte+KRUShrh4=;
-	b=Op8b6R8o2ZA30xIlpM3+26xrVcMIahVR6uhKIBE4kN9IdXF1epGdMiiRlzMh/cmLM6
-	XnpLSDegG+4RAe1AlrT7cHH25bov433NXLPNnMTbwg7OuMKFWlP7cqbMAbhLPswshBMt
-	gBSgNiaJ0Mt84cCekGNHSgZTyG7QuXmIKUcKwnV2S/tmcVvcbczimdap7E/IZr7vW3Ki
-	t4JbAXCHCOql0VhI+wSkin7SHpUQ+NoyL+bZfMKNwB2ivFrcpDnPtArGNzRPZ4AdNsR/
-	dXOBH+/zT01OpbvvFcfaNJ8ZPkDvuq4vfIQ61inhbJBOvsGDeDjhr0PoKWb3Z9peh9J1
-	QqhQ==
-X-Gm-Message-State: AMCzsaWu5XkKHXRAIWg4oHLYerWo8h3v5oD2oufznr+OZ3djSm+hjYZT
-	0EKjymjhU/7XEhSLrVkREGdzKyZeg+mJzaHbdg4=
-X-Google-Smtp-Source: AOwi7QB3eiF5qtMsild3O9EO3uu/D335V4GflU4/wN+COIBcoxcOLwTPmI4UGL1MsSVEZtdBQShRdd9/ZWOuBQpXd7g=
-X-Received: by 10.200.63.173 with SMTP id d42mr1372401qtk.200.1507164195913;
-	Wed, 04 Oct 2017 17:43:15 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.140.104.173 with HTTP; Wed, 4 Oct 2017 17:43:15 -0700 (PDT)
-In-Reply-To: <CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
-References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
-	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
-From: Trevor Woerner <twoerner@gmail.com>
-Date: Wed, 4 Oct 2017 20:43:15 -0400
-Message-ID: <CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] Modern Chromium with GN
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=fp23V+fhrvZDpB7HK4Mgdss6Tox/WvufXjUX3E+hGG4=;
+	b=i2EyKN+ZgrzRkp376UaTkDCDZV6SuhIxM5688YtKv7NAZVnUp7QA8ttV9losL2cmQ/
+	3ljwP9SpzHnEAzGcWmC2R9xMaa2ZEce6y9H+HwC0kxYiAcnBADzg1fjm/2pD5u0aA2EK
+	lEVIhLN377/s8g5b9bk4MNduNtiGVrE3QJzTCY3EE8H1GgiLtqVrI9e1huD5aSmUf822
+	tcE6nbHqjgKTo7gZ0rxvCvTcNBoUwsIBZttEGWLnCSApw0dipiW6Q+3GDjlYnnk4JLUC
+	UqK0TcGTnKuWoL9vsDavq8PlGy2PZFCWu97sNqYzNrsZGrTM11xzAHz3eg6ZXkXN1taq
+	Amig==
+X-Gm-Message-State: AHPjjUiVQJAv4yr6HO+crRCha+5nuwUfBUjIX3J15Gr+mQrif+iKZTLf
+	e0eIGDZtm5koJypxKoA/vSuEYjPf
+X-Google-Smtp-Source: AOwi7QBmPn/MH16HTW8dlwweKDh119KFw43J43x9SVw4bCAYOhVjNDbIiX3grEdpuP0c714DKpk7cg==
+X-Received: by 10.98.215.18 with SMTP id b18mr23188534pfh.147.1507196843462;
+	Thu, 05 Oct 2017 02:47:23 -0700 (PDT)
+Received: from k-bhumi.domain.name ([27.56.144.226])
+	by smtp.gmail.com with ESMTPSA id
+	x26sm11460058pfh.95.2017.10.05.02.47.21
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 05 Oct 2017 02:47:22 -0700 (PDT)
+From: baali <shantanu@senic.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  5 Oct 2017 15:17:07 +0530
+Message-Id: <1507196827-16528-1-git-send-email-shantanu@senic.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH] Recipe for Nghttp2: HTTP/2 C Library.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,21 +55,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Oct 2017 00:43:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 05 Oct 2017 09:47:22 -0000
 
-Hi Jocobo,
+It is also needed for Curl to support HTTP2 protocol.
 
-Please have a look at
-https://github.com/rakuco/meta-crosswalk/tree/chromium61/recipes-browser/chromium
-from Raphael (CCed). It is an interesting and promising approach.
+Signed-off-by: baali <shantanu@senic.com>
+---
+ meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
 
-I have built against minnow (x86-64) and rpi3-32 (armv7ve)
-successfully with pyro. I haven't had time to runtime test anything
-yet. I'm still seeing a build issue with both MACHINEs against master.
+diff --git a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
+new file mode 100644
+index 0000000..3e6b10a
+--- /dev/null
++++ b/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
+@@ -0,0 +1,16 @@
++SUMMARY = "HTTP/2 C Library and tools"
++HOMEPAGE = "https://nghttp2.org/"
++SECTION = "libs"
++
++DEPENDS = "pkgconfig cunit zlib openssl libxml2 jansson c-ares"
++
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
++
++SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.bz2"
++SRC_URI[md5sum] = "926f07ad3b50f38f7d8935ced04716cf"
++SRC_URI[sha256sum] = "0df4229f4123b5aa96e834ebcfdffe954e93d986f0252fd10123d50c6f010983"
++
++inherit cmake pythonnative python-dir
++
++EXTRA_OECMAKE = ""
+-- 
+2.7.4
 
-It's been about two weeks since I've had time to tinker with it.
-
-Best regards,
-    Trevor
 
