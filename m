@@ -1,47 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id C2B487806E
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f48.google.com (mail-pg0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id E82C678242
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  6 Oct 2017 14:05:40 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id e69so16881464pfg.4
+	Fri,  6 Oct 2017 16:10:14 +0000 (UTC)
+Received: by mail-pg0-f48.google.com with SMTP id b11so10149527pgn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Oct 2017 07:05:42 -0700 (PDT)
+	Fri, 06 Oct 2017 09:10:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=c3DTZG6WWpUNhVnn4LeP1CrYV5SRB40ArgHx57TOffA=;
-	b=qKlGr40NkiNa5fAw3sbAWWlV5hqaws5oukUwCmiMxWfkSfE9jK/2y2SzxYxX/NMuah
-	4HKYo+CvpFVn/qGscAybbZuFWigUMvYxvmiGVVmhOoPxspS0+1Dpdcrj8TMKFyNx5xoX
-	a6gljXq6oneYmsAHkFHRoUCoFVoZSVhOIGIyqb1GiiaEjqVqewwDvMwXzzw/oyo6AaTi
-	bA13VAve4Cz5zMkfHq0QrwJpRv0MJxqb2WNDdTFtjxSuZ2jT44dGD9PY1qHuNABrfwuA
-	72d0sXyLcGrNrvpjPJAb075Vhh3dl8VW7fdDNmBKvURoxfuXHDuTWW+gjz8imLXhVw54
-	UPyg==
+	h=from:to:subject:date:message-id;
+	bh=Q0MNMf3gO0L8PKzRMW8DLyZWk5tuZzCz/TxNEVjRLVs=;
+	b=JJxOf9sp39920zMKfCtkfV2Vcm10BhJ/2pTxOiqd5EgYeXLbQBF3hM5f0bxx3tXozV
+	iQ1yLvH1bSO7Ylp95zbUnAVQ6YiVQ/ozj4mtxufwuLKKFkloW1kD5JLWu4k9IgIesYt6
+	k7jZzqaZW4X9gUlAHlhIcqx98z6sEDuqfS9e2R/SFm2GYMB3hFwulh3hwokCODS4EHMu
+	DfNXRONF8rHGpE4hbWG+bL/yIBO/Ko4tZrGLxrUQus+kowIBm8fib50HoJ/OONPFRTb+
+	4lWKtu2xIfgCwzeIeIu53glvk1mVUdWj4Idq+bFRJAZbjGIqvJR4Dxir6NxXH68aQ2r8
+	UmdA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=c3DTZG6WWpUNhVnn4LeP1CrYV5SRB40ArgHx57TOffA=;
-	b=ayKvFrUXLzJv1wVK3wMtEShNvuRLQ2al6zmK/WYnr1V74NvVgEBclCbJs4wxoAXiBV
-	I4A3srcWl03pxX9+KXxMrrFul5zHiS9TlZrSRAzNuZUSBzFfEJeAA6aXitE8RoFdXHVT
-	8LYVU54jTBdf2zKcyuEcxtZmFD3shsd0DnMgCGIwAg5Ex1AoTaQpbts6BmtoHqjdXv4k
-	u2ckJC+d05F8N90mnmEvLLGoFVJxbnZLMFj6QJOpeo3HK93uRodSOiAneqXlZm+Uzd3T
-	VMZgv97O6MYIBb4px2sbRWk7XK+rshkaq3S1nMkd6aXLdY27t1ZxZm3Xe8KxRWnsCV18
-	6rfg==
-X-Gm-Message-State: AMCzsaXuPK/UzRV8FWXzKD4TlCJtzInMW8qrezBogsEoWjL9UaSqQJwM
-	INDgOXlec6UyoithbeI5/6mUk0B7HgKSD1sZ89I=
-X-Google-Smtp-Source: AOwi7QBy8gCQvyfJcFijPB1RbAJgADaONnUipPdy5rq9ieoRSl2ul6W25KgmC28vMvo5nG2U2yONH+Aed02m1X3M5jo=
-X-Received: by 10.84.240.137 with SMTP id z9mr2086800plk.114.1507298741744;
-	Fri, 06 Oct 2017 07:05:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.100.135.23 with HTTP; Fri, 6 Oct 2017 07:05:11 -0700 (PDT)
-In-Reply-To: <1507289466-13238-1-git-send-email-pascal.bach@siemens.com>
-References: <1507289466-13238-1-git-send-email-pascal.bach@siemens.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 6 Oct 2017 07:05:11 -0700
-Message-ID: <CAMKF1srGvzWgLJA8muqkTWCA-ahxrKQVbN8JM7y237M8JTXsAg@mail.gmail.com>
-To: Pascal Bach <pascal.bach@siemens.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] rocksdb: add version 5.8
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=Q0MNMf3gO0L8PKzRMW8DLyZWk5tuZzCz/TxNEVjRLVs=;
+	b=P96P3J0D6lfo5rb/xaQRkJzPhGHhiaiFgiddWvgSzkbxsGVGVI/XZtfTD9ovT2LMbg
+	Ffwho2O4JEPz0fdhAn9kCfYW6gqDHeFejgXC1b9eElEwmCBQARMQ47F4sxr4eohszu4Z
+	qONLW0YnlfumM8ljVI78yRDJd7itkS0BFyK+wVqxXIGdNBPKz5F9M7jRUND9bxfpwEG3
+	drFrB45akbclv12vIAbB0EylePDY3utlRsXn77QtSpxjPka9SaFmcZOrDLBFmFNt58ns
+	+8p+vmQD1e+8aUPTItKFdS00jCeQcD0OJ3Dq0JWsPnzYcZghCKhw1/pTBalHSN1jBIwM
+	YLQg==
+X-Gm-Message-State: AMCzsaUkvW77Jgv9VRSVWdu1tfqbGbY3qR4R35cMMTxaSmiPVCc5Zyd1
+	SAm+0lqjGYwU799QPxYFTxJbag==
+X-Google-Smtp-Source: AOwi7QCzsfvbxzTJzGW+/A7HC/l04wwPGuNlm+dKO9RnYptUqDd9SwmR+qp7DxkNCHbro54YGlevoQ==
+X-Received: by 10.84.234.140 with SMTP id n12mr2429031plk.209.1507306215897;
+	Fri, 06 Oct 2017 09:10:15 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:2592:db33:fab5:1bd8])
+	by smtp.gmail.com with ESMTPSA id 5sm4042404pfe.128.2017.10.06.09.10.15
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 06 Oct 2017 09:10:15 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Fri,  6 Oct 2017 09:10:13 -0700
+Message-Id: <1507306214-16106-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/2] python-pytest: fix egg version of package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,60 +54,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Oct 2017 14:05:40 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 06 Oct 2017 16:10:15 -0000
 
-On Fri, Oct 6, 2017 at 4:31 AM, Pascal Bach <pascal.bach@siemens.com> wrote:
-> Version 5.8 does no longer includes the facebook patent grant and is
-> licensed under the Apache-2.0 license.
->
+commit "python-pytest: remove fetch during do_compile phase"
+removed the ability of the package to version it self correctly. The version ended up as
+0.0.0 which causes runtime version checking.
 
-I see leveldb as well as GPL-2.0 licence file in repo. Are they not used
+This fixed that issues.
 
-> Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
-> ---
->  meta-oe/recipes-extended/rocksdb/rocksdb_git.bb | 26 +++++++++++++++++++++++++
->  1 file changed, 26 insertions(+)
->  create mode 100644 meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
->
-> diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
-> new file mode 100644
-> index 0000000..a4fbf34
-> --- /dev/null
-> +++ b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
-> @@ -0,0 +1,26 @@
-> +SUMMARY = "RocksDB an embeddable, persistent key-value store"
-> +DESCRIPTION = "RocksDB is library that provides an embeddable, persistent key-value store for fast storage."
-> +HOMEPAGE = "http://rocksdb.org/"
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57"
-> +
-> +SRCREV = "266ac245affd69555643b735d19d3715c4eff91a"
-> +PV = "5.8+git${SRCPV}"
-> +
-> +SRC_URI = "git://github.com/facebook/${BPN}.git"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +inherit cmake
-> +
-> +PACKAGECONFIG ??= "bzip2 zlib lz4"
-> +PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
-> +PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
-> +PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
-> +PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
-> +
-> +EXTRA_OECMAKE = "\
-> +    -DPORTABLE=ON \
-> +"
-> +
-> +FILES_${PN}-dev += "${libdir}/cmake"
-> --
-> 2.1.4
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
+---
+ .../recipes-devtools/python/python-pytest.inc      |  3 +-
+ .../python/python-pytest/pytest_version_fix.patch  | 51 ++++++++++++++++++++++
+ 2 files changed, 53 insertions(+), 1 deletion(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
+
+diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
+index ae1d81d..6140250 100644
+--- a/meta-python/recipes-devtools/python/python-pytest.inc
++++ b/meta-python/recipes-devtools/python/python-pytest.inc
+@@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
+ SRC_URI[md5sum] = "401c005bd57f71e63ba015ab086fe67d"
+ SRC_URI[sha256sum] = "f46e49e0340a532764991c498244a60e3a37d7424a532b3ff1a6a7653f1a403a"
+ 
+-SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch"
++SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
++                   file://pytest_version_fix.patch "
+ 
+ RDEPENDS_${PN}_class-target += " \
+     ${PYTHON_PN}-argparse \
+diff --git a/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch b/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
+new file mode 100644
+index 0000000..908f862
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pytest/pytest_version_fix.patch
+@@ -0,0 +1,51 @@
++Upstream-Status: Inappropriate (OE specific) 
++
++python-pytest: remove fetch during do_compile phase
++commit: c974fbf9ebf185552ab65301e07af44f36517abf 
++
++introduced an issue by making the version 0.0.0
++this fixes that
++
++Signed-off-by: Armin Kuster <akuster@mvista.com>
++
++Index: pytest-3.2.2/setup.py
++===================================================================
++--- pytest-3.2.2.orig/setup.py
+++++ pytest-3.2.2/setup.py
++@@ -1,5 +1,6 @@
++ import os
++ import sys
+++import re
++ import setuptools
++ import pkg_resources
++ from setuptools import setup, Command
++@@ -22,6 +23,18 @@ classifiers = [
++ with open('README.rst') as fd:
++     long_description = fd.read()
++ 
+++def read(*names, **kwargs):
+++    with open(os.path.join( *names), 'r') as fp:
+++        return fp.read()
+++
+++def find_version(*file_paths):
+++    version_file = read(*file_paths)
+++    version_match = re.search(r"^version = ['\']([^'\"]*)['\']",
+++                              version_file, re.M)
+++
+++    if version_match:
+++        return version_match.group(1)
+++    raise RuntimeError("Unable to find version string.")
++ 
++ def has_environment_marker_support():
++     """
++@@ -59,9 +72,7 @@ def main():
++         name='pytest',
++         description='pytest: simple powerful testing with Python',
++         long_description=long_description,
++-        use_scm_version={
++-            'write_to': '_pytest/_version.py',
++-        },
+++	version=find_version("_pytest", "_version.py"),
++         url='http://pytest.org',
++         license='MIT license',
++         platforms=['unix', 'linux', 'osx', 'cygwin', 'win32'],
+-- 
+2.7.4
+
 
