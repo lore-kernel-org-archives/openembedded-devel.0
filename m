@@ -1,48 +1,27 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f54.google.com (mail-wm0-f54.google.com [74.125.82.54])
-	by mail.openembedded.org (Postfix) with ESMTP id C404B71B86
+Return-Path: <pascal.bach@siemens.com>
+Received: from goliath.siemens.de (goliath.siemens.de [192.35.17.28])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F74872F91
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2017 08:55:22 +0000 (UTC)
-Received: by mail-wm0-f54.google.com with SMTP id i124so2942671wmf.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2017 01:55:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=K8UNZFGU2wjAD/kgy0BMnCZfcyU6ryPOMZo81y6S36M=;
-	b=F3w7dkchF8w1QzKfo8i69yKpNoSoiMhdzjkKPp5IsrQ8F+4Zv7KkyX7W517GBX0Ghe
-	4M84cM6unw8+yn/tF4oMs4lyFiOSCncMZMCWvV3Om2jEHOLHL0Z+Eu6ULB6rJPNGB7yM
-	JYvwah5Z2eqKPU6rzzVI5NOF07Ef/RPFa+fc+MBT0NTDE2N0PCVoq9i+22RTCudX8eZl
-	YrccxfZQ/H0xqfOnu9EHmCVPilA2j6TlkzVhvdZwVhy6gRz8vq8BBnmPOYT0ofTOEBf3
-	O2gY4qx9dyYzwFypXByi6Rtskvo6NrjgEMxn4KM1oNBbXoYI0WMEG8t+XnGJXpd4Kyaz
-	vsNQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=K8UNZFGU2wjAD/kgy0BMnCZfcyU6ryPOMZo81y6S36M=;
-	b=RvyVkStKHWCq9VMHzV4hw0GxhdPABiebIL3hwQCFmJz6bIFSMcj75fcEtnyK1jE7Pm
-	Y+IBMc6nW3g1rKUjL92/5QZZkPTeZv1FNSxlApj+PknZjI4rxihG0Om71O8TXW1gAkor
-	c3vc854e9GCBVM2p4uRb0JMTEiXwBc0N2gKoSbiXhyojNuPFkoGIDnV4CivBDhIJb09r
-	CeiM14c968SIaV4LojrYZe1NvddzR3gTWqMlhSiUffKSgU62CoJULhxU7i3afaW7/NV2
-	6xxMVLLLwAhE3lRkWxtyj79COMkIaYA/nvxDIh0C1rjD6Zhl2z16JAxDVDRZIRBBxQwP
-	TH5Q==
-X-Gm-Message-State: AMCzsaU7kmRm2JxV/XkUeGuUxUcr10fRHuBmsMwt1ZwllhNYOEKosrHV
-	2BFF5NG7rUfKTdwqWn2xgoSck5GnYE///nHrdRY=
-X-Google-Smtp-Source: AOwi7QA1sQ5QiyXJ/Fe6y0o5AJXvIVPFBSvY9t4hfH6k4MQpYIls/2q8JdjahMrTA82geU2TfbpS9lUm2mHxlxlCk9Y=
-X-Received: by 10.223.158.208 with SMTP id b16mr3160731wrf.99.1507625723773;
-	Tue, 10 Oct 2017 01:55:23 -0700 (PDT)
+	Tue, 10 Oct 2017 13:20:22 +0000 (UTC)
+Received: from mail1.siemens.de (mail1.siemens.de [139.23.33.14])
+	by goliath.siemens.de (8.15.2/8.15.2) with ESMTPS id v9ADKLGN001669
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK); 
+	Tue, 10 Oct 2017 15:20:22 +0200
+Received: from [139.16.76.113] (MD1FZU9C.ad001.siemens.net [139.16.76.113])
+	by mail1.siemens.de (8.15.2/8.15.2) with ESMTP id v9ADKLlY021141;
+	Tue, 10 Oct 2017 15:20:21 +0200
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <1507618762-30618-1-git-send-email-pascal.bach@siemens.com>
+	<CA+chaQdHXmH_Ct7WgVO-2HyrFGSd5w6nq=cF0z33amc+TWNGBQ@mail.gmail.com>
+From: Pascal Bach <pascal.bach@siemens.com>
+Message-ID: <ca950ead-0a02-ce2b-21e9-c88fcdc1ff54@siemens.com>
+Date: Tue, 10 Oct 2017 15:20:21 +0200
+User-Agent: Mozilla/5.0 (Windows NT 6.1; WOW64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Tue, 10 Oct 2017 01:55:23 -0700 (PDT)
-In-Reply-To: <20170619010516.11453-3-raj.khem@gmail.com>
-References: <20170619010516.11453-1-raj.khem@gmail.com>
-	<20170619010516.11453-3-raj.khem@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 10 Oct 2017 10:55:23 +0200
-Message-ID: <CA+chaQeq28Y4-ZJOADaXGe6Tdt60pLLqwr7f6NZPy0k0fQf7sQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+In-Reply-To: <CA+chaQdHXmH_Ct7WgVO-2HyrFGSd5w6nq=cF0z33amc+TWNGBQ@mail.gmail.com>
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] xmlstarlet: Update to 1.6.1
+Subject: Re: [meta-oe][PATCHv2] rocksdb: add version 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,63 +34,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Oct 2017 08:55:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 10 Oct 2017 13:20:23 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Content-Language: en-US
 
-Looks like this failed again yesterday:
-http://errors.yoctoproject.org/Errors/Details/157121/
+On 10.10.2017 10:53, Martin Jansa wrote:
+> The v1 failed to build with:
+> http://errors.yoctoproject.org/Errors/Details/157120/
+>
+> If the v2 only updated LICENSE, it will need fix for this as well.
+It seems this only happens on ARMv5 as there seems to be some instructions for atomic.
+I need to dig deeper into how I can fix this.
+>
+> On Tue, Oct 10, 2017 at 8:59 AM, Pascal Bach <pascal.bach@siemens.com <mailto:pascal.bach@siemens.com>> wrote:
+>
+>     Version 5.8 does no longer includes the facebook patent grant and is
+>     licensed under the Apache-2.0 or GPL-2.0 license.
+>
+>     Signed-off-by: Pascal Bach <pascal.bach@siemens.com <mailto:pascal.bach@siemens.com>>
+>     ---
+>      meta-oe/recipes-extended/rocksdb/rocksdb_git.bb <http://rocksdb_git.bb> | 28 +++++++++++++++++++++++++
+>      1 file changed, 28 insertions(+)
+>      create mode 100644 meta-oe/recipes-extended/rocksdb/rocksdb_git.bb <http://rocksdb_git.bb>
+>
+>     diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb <http://rocksdb_git.bb> b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb <http://rocksdb_git.bb>
+>     new file mode 100644
+>     index 0000000..2e988bf
+>     --- /dev/null
+>     +++ b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb <http://rocksdb_git.bb>
+>     @@ -0,0 +1,28 @@
+>     +SUMMARY = "RocksDB an embeddable, persistent key-value store"
+>     +DESCRIPTION = "RocksDB is library that provides an embeddable, persistent key-value store for fast storage."
+>     +HOMEPAGE = "http://rocksdb.org/"
+>     +LICENSE = "(Apache-2.0 | GPL-2.0) & BSD-3-Clause"
+>     +LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
+>     +                    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
+>     +                    file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
+>     +
+>     +SRCREV = "266ac245affd69555643b735d19d3715c4eff91a"
+>     +PV = "5.8+git${SRCPV}"
+>     +
+>     +SRC_URI = "git://github.com/facebook/${BPN}.git <http://github.com/facebook/$%7BBPN%7D.git>"
+>     +
+>     +S = "${WORKDIR}/git"
+>     +
+>     +inherit cmake
+>     +
+>     +PACKAGECONFIG ??= "bzip2 zlib lz4"
+>     +PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
+>     +PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
+>     +PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
+>     +PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
+>     +
+>     +EXTRA_OECMAKE = "\
+>     +    -DPORTABLE=ON \
+>     +"
+>     +
+>     +FILES_${PN}-dev += "${libdir}/cmake"
+>     --
+>     2.1.4
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
 
-On Mon, Jun 19, 2017 at 3:05 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> Enable PARALLEL_MAKE again
->
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  .../xmlstarlet/{xmlstarlet_1.5.0.bb => xmlstarlet_1.6.1.bb}   | 11
-> ++---------
->  1 file changed, 2 insertions(+), 9 deletions(-)
->  rename meta-oe/recipes-support/xmlstarlet/{xmlstarlet_1.5.0.bb =>
-> xmlstarlet_1.6.1.bb} (69%)
->
-> diff --git a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-> b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-> similarity index 69%
-> rename from meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-> rename to meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-> index bf99aff43..e3d52e616 100644
-> --- a/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.5.0.bb
-> +++ b/meta-oe/recipes-support/xmlstarlet/xmlstarlet_1.6.1.bb
-> @@ -15,8 +15,8 @@ DEPENDS = "libxml2 libxslt"
->  SRC_URI = "${SOURCEFORGE_MIRROR}/xmlstar/${BP}.tar.gz \
->             file://configure.ac.patch \
->             file://0001-usage2c.awk-fix-wrong-basename-regexp.patch"
-> -SRC_URI[md5sum] = "0c6db295d0cf9ff0d439edb755b7e8f6"
-> -SRC_URI[sha256sum] = "47b4ed042ea2909257f2a386001af4
-> 9fceb303f84da7214779ccf99fffc6bbba"
-> +SRC_URI[md5sum] = "f3c5dfa3b1a2ee06cd57c255cc8b70a0"
-> +SRC_URI[sha256sum] = "15d838c4f3375332fd95554619179b
-> 69e4ec91418a3a5296e7c631b7ed19e7ca"
->
->  inherit autotools
->
-> @@ -24,10 +24,3 @@ inherit autotools
->  EXTRA_OECONF="--disable-build-docs \
->    --with-libxml-prefix=${STAGING_LIBDIR}/.. \
->    --with-libxslt-prefix=${STAGING_LIBDIR}/.."
-> -
-> -#Makefile:2116: recipe for target 'src/elem-usage.c' failed
-> -#make[1]: *** [src/elem-usage.c] Error 1
-> -#/bin/bash: src/escape-usage.c: No such file or directory
-> -#Makefile:2116: recipe for target 'src/escape-usage.c' failed
-> -#make[1]: *** [src/escape-usage.c] Error 1
-> -PARALLEL_MAKE = ""
-> --
-> 2.13.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
