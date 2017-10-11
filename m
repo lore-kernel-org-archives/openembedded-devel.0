@@ -1,51 +1,36 @@
-Return-Path: <limon.anibal@gmail.com>
-Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
-	[209.85.218.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 940476067D
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id EDC0E60017
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 14:31:49 +0000 (UTC)
-Received: by mail-oi0-f67.google.com with SMTP id 14so1075308oii.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 07:31:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=1PChZrfH0d6fIdMyDu4QuQkS8dH2nNlu6IvbSzuvP4I=;
-	b=HTuwP2gu7abcfxkN3/6GzhEfSieQKVDFOgCVaEVt7HyqxJjyMVXpopm/WVtqDwIkr/
-	UCO3ykO660xWnAfLlYIeF9/PyfFXg+ybcjCfxTDbOn/ZGfy4ApBPK8V23vpM8F6Cgfnw
-	FAheVmWQHDf7c6gmaB7QF/QHTippMQ5frwHBOrDEe+uZ8OypOWLFkpDXCkXEGklRuVso
-	Xro0i5zi6JkiUuSeC1Y/lZ23eVu5ZyAX4FU9fziUVOf/z9rgqEKtS2gkE6NvmQtfvAB+
-	OV+2BQw32VeGI7tIHyxzMzdheWS2hDoGUGkmw5r6FND9xI6ikDWnZbj7ffsCuyKQjjpy
-	hoZQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=1PChZrfH0d6fIdMyDu4QuQkS8dH2nNlu6IvbSzuvP4I=;
-	b=VYNJsrQ2xJAxRvBygLszxN4MqQ7Rwh7aJHRfheITvGmOylps6QLYMTDJI0RKCSiB4h
-	+kRD3Wzlp8jAj1oX/iXoygZGG0E68yqyz1Cac5Hkk7RcqOnTg/htwGdq5JueG3hmaA91
-	WzBvE920AFR9/xPMVNSgAgGuptjOYeCpKEBEFah1MOzGY5zDBtgLK9ysYZi+H1i7rgAL
-	L5QHX4ubW46P+CGcRBfR1Y3iPN6uWSMIwtfctfhlGnwe+1Ykf7pePy5Xhf0JfaBGAMiz
-	i/M1UbrIiKp4ZEkV257HVG2TzmqAO9Kg+zKKEcScJGtRseDOVE29XzyGyRWBut4g0UlS
-	QzOg==
-X-Gm-Message-State: AMCzsaWpjU21QL36auFfYQFvtGnKtD4ZXGy8Z+TKANb8tYCqEp1Zi34Q
-	ipeknyXXisrv6XeYT49NbWAc5Ge3
-X-Google-Smtp-Source: AOwi7QBgzzhQikfUD3ZY1MHhw7e10SxjS/Le6GTSz82JV6KEdlqp2JMXDj0OLh3ue3yZBdRSWQNw8g==
-X-Received: by 10.157.51.23 with SMTP id f23mr3691013otc.419.1507732310052;
-	Wed, 11 Oct 2017 07:31:50 -0700 (PDT)
-Received: from blackbox.Home ([148.240.201.158])
-	by smtp.gmail.com with ESMTPSA id
-	d185sm3060990oih.53.2017.10.11.07.31.48
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 11 Oct 2017 07:31:49 -0700 (PDT)
-From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <limon.anibal@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Oct 2017 09:31:44 -0500
-Message-Id: <20171011143144.23691-1-limon.anibal@gmail.com>
-X-Mailer: git-send-email 2.11.0
+	Wed, 11 Oct 2017 15:00:33 +0000 (UTC)
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	11 Oct 2017 08:00:34 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.43,361,1503385200"; d="scan'208";a="1024105042"
+Received: from rkubodac-desk.ger.corp.intel.com ([10.252.13.242])
+	by orsmga003.jf.intel.com with ESMTP; 11 Oct 2017 08:00:33 -0700
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Trevor Woerner <twoerner@gmail.com>
+In-Reply-To: <CAHUNapRps8ck3S=aKHYH3UmzBgsZW-VDx4x0PgY2D4zXuh88_Q@mail.gmail.com>
+	(Trevor Woerner's message of "Wed, 11 Oct 2017 08:20:44 -0400")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<87d15w4a02.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CAHUNapSvuLFcVyjc+FB4cG7U753SeedOfJ5xCtFLCx-+fK0QVQ@mail.gmail.com>
+	<1507662641.20629.9.camel@intel.com>
+	<CAHUNapRps8ck3S=aKHYH3UmzBgsZW-VDx4x0PgY2D4zXuh88_Q@mail.gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Wed, 11 Oct 2017 17:00:32 +0200
+Message-ID: <87r2u93f1r.fsf@rkubodac-desk.ger.corp.intel.com>
 MIME-Version: 1.0
-Cc: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-Subject: [PATCH] meta-oe/recipes-test: Add stress-ng recipe
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,49 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Oct 2017 14:31:49 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 11 Oct 2017 15:00:34 -0000
+Content-Type: text/plain
 
-From: Aníbal Limón <anibal.limon@linaro.org>
+Trevor Woerner <twoerner@gmail.com> writes:
 
-A tool to generate load and stress a system, currently this recipe
-is on a couple of layers [1] and is not updated, a good reason to
-have in meta-oe.
+> Hi Raphael,
+>
+> On Tue, Oct 10, 2017 at 3:10 PM, Kubo Da Costa, Raphael
+> <raphael.kubo.da.costa@intel.com> wrote:
+>> On Tue, 2017-10-10 at 14:28 -0400, Trevor Woerner wrote:
+>> I've pushed commit a0db280 to my chromium61 branch; that one allowed me
+>> to get to the end of the build without any other issues. Let me know if
+>> that's enough to get master working for you.
+>
+> Excellent! Yes, this update works for me against master :-)
+>
+> Has anyone started trying to integrate this with meta-browser?
 
-[1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=stress-ng
-
-Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
----
- meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18 ++++++++++++++++++
- 1 file changed, 18 insertions(+)
- create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-
-diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-new file mode 100644
-index 000000000..f8b0a0d27
---- /dev/null
-+++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-@@ -0,0 +1,18 @@
-+SUMMARY = "A tool to load and stress a computer system"
-+HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+DEPENDS = "zlib libaio"
-+
-+SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.gz"
-+
-+SRC_URI[md5sum] = "e0f6497a8c06f5d652bc2ad88d449c12"
-+SRC_URI[sha256sum] = "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2231c1058b1a5dd18"
-+
-+CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"' -O2"
-+
-+do_install_append() {
-+    install -d ${D}${bindir}
-+    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
-+}
--- 
-2.11.0
-
+That's the next part of my plan, I hope to get around to it this week.
 
