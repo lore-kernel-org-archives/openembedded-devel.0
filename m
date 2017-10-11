@@ -1,47 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C3866010B
+Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
+	[209.85.192.170])
+	by mail.openembedded.org (Postfix) with ESMTP id 3471D6010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 01:57:06 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id m28so670840pfi.0
+	Wed, 11 Oct 2017 01:58:19 +0000 (UTC)
+Received: by mail-pf0-f170.google.com with SMTP id b85so308426pfj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2017 18:57:08 -0700 (PDT)
+	Tue, 10 Oct 2017 18:58:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=OhzQfktFD7W3kw4MoVTaOUdI1/AtkQVnW6Rto0sVmmY=;
-	b=NcWdZeC83+QNEFLUW/uGNyHaIi12d/VCaEW9GBPRkk1E8nkTo2Y7KB+sUoO6FGOZbO
-	Clfv0BKLivzn1Ho+sA8+DCnMqu/gPbQ79IenhvERCZOQk5i+ZmWKrb/AxUNSACd9T6wS
-	i4goeotzOB3z3BKCHL/0qQv2hUoilZVNmqLKR4RqCjf9cVtCFtwo3/DavlssWmWQ+GWX
-	GmHRQp3csZSkqCyqPzuQ+l4jtjmJufXGSPZlktlyNiamWATZXiOcRIVLeQ2cfPrid7nB
-	pr71dCukhYjYCxRdRQDj6BnS3oWZxk72C4F/qvorgdeZEekWRzcZJbckhYKqcIgaA5kb
-	xbcw==
+	bh=ChV6UitU4PqfJtEV8MzSOSvIWhUbP8+Vk/AwVsS8ScI=;
+	b=tVHM/UP2uHhIivl8kBsZeeXoDKPESYdRFVXG5KHk/abakruldmCBuc3kJN2Eb0iuAs
+	f28TE7hKDB/TA+I62XkwBjt5ILfBzaW5lG1czooJZ4cUSz0eEv4ngTM0RCi4V1PSiA40
+	TDmGK150sG1rmlUWTHx+7uqn3dRRw39Sh67CR1j+Nvvm5M5zTT6nyQrH9wNx9IgGnAZ0
+	6o3cWwBLhQwC2PWolo0iM/+jLE0Uy6KxoDwEqZ+YVqnmm4sgTzSrSI4Q4AZ3U2T2/snW
+	eLKw5Yx55YG+xxI8a/JTc7HK48kQwjJR5j8M3gZssfllhabxYf0tOWEFSxBGdSM1PQrH
+	mzqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OhzQfktFD7W3kw4MoVTaOUdI1/AtkQVnW6Rto0sVmmY=;
-	b=VvLIO4WPKb+fIci2uvYVjK9sohM/jDXfULJHPYwbP7ZgST/GGdvd2rHEsUOn4GBZz9
-	6FZKjkbIq6tdr6CWhF96Zb16Rp+1VDQFtBM1lAXmlXRbGzo5PY1ocfQEh6pgtN35bF9D
-	Xg2S9nm9DZP6lAAqlS1NWBoKkxCTH8zcrbH7hDNcEwWXKlDUa8C8/VveaYM7TpLA765U
-	FcbSOPnsE6MuebAx9qjspYfvULzUW97GS+8VwF2I81tCpF9kkMB7NwHfZozoCQET2E8R
-	We8oCdw6x1Wr7ucE3tanPFciMSnJJhoFqwMOfA2OloBHMiVrlXNgjhCcVe3DrAIKTbve
-	meNg==
-X-Gm-Message-State: AMCzsaXW19nTOjRqjw6DHNZPEoQXjZYnrSlBz8r0Y4EFOUMD9fAX+rIi
-	/NTl1VMWFXS3Yw2oaMgLWibXrA==
-X-Google-Smtp-Source: AOwi7QDMhs71qhFhD3Ru/xBCxmAyYTTsufEHCqslNaUYPFARGQExMsHJzWUm2EXsorgHeXux8NLF2g==
-X-Received: by 10.98.48.195 with SMTP id w186mr15246129pfw.213.1507687028044; 
-	Tue, 10 Oct 2017 18:57:08 -0700 (PDT)
+	bh=ChV6UitU4PqfJtEV8MzSOSvIWhUbP8+Vk/AwVsS8ScI=;
+	b=kCKT+Rwh78hWPLmoxvP2LUypAfceygJ6GzygQttQK34jz1NNJuRnzuaKTXmFrGFyPS
+	o9kZv2mvi9Q8Oval9wJqtOzJaVCosKQsQSoJkzNkvAOGcIGMN3GQktf4TlAYebPbAs4m
+	1SOLpKMf+gPmjAcSGEdTstXSbeyVndVppBvEgNy4POUCSQUEHIfpuy9YA3u6K0wKZlwp
+	kO1F9t8Na4BEwRvoYvYk60wulYGuTlnASlZk6M6SBrjkJJ/HLyBkCwLqU1wYgw1dw39C
+	yUsHKFGjUNDLHQrmvGRjGqPFgomDnWRbAl7pEa3OqKLQ6kk5y4CdND1SU25UdfiVnoXM
+	YxbA==
+X-Gm-Message-State: AMCzsaXTlDh5o/LIbtwk3lI6Kk1AVYqF3+GZgnJkn2WJkBaQgW6b4asI
+	lhjYbEgRlMV6k01oPuX6n3y0zA==
+X-Google-Smtp-Source: AOwi7QBoehaQeikYI8UtdhtBYycCJ6tRsyr3O4+9i1Kt5bVHlO5MYnqitUK8tyhki288IlxgufVzuA==
+X-Received: by 10.98.58.199 with SMTP id v68mr15361152pfj.44.1507687101289;
+	Tue, 10 Oct 2017 18:58:21 -0700 (PDT)
 Received: from localhost.localdomain ([2601:646:8882:b8c::74e7])
 	by smtp.gmail.com with ESMTPSA id
-	x4sm20685317pfb.101.2017.10.10.18.57.07
+	j6sm20930735pgn.68.2017.10.10.18.58.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Oct 2017 18:57:07 -0700 (PDT)
+	Tue, 10 Oct 2017 18:58:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Oct 2017 18:57:00 -0700
-Message-Id: <20171011015700.12779-1-raj.khem@gmail.com>
+Date: Tue, 10 Oct 2017 18:58:13 -0700
+Message-Id: <20171011015813.12863-1-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.14.2
-Subject: [PATCH] toybox: Switch building from git src_uri
+Subject: [meta-oe][PATCH V2] toybox: Switch building from git src_uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,13 +54,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Oct 2017 01:57:07 -0000
+X-List-Received-Date: Wed, 11 Oct 2017 01:58:20 -0000
 
 We need a patch e.g. https://github.com/landley/toybox/commit/78289203031afc23585035c362beec10db54958d
 to fix build on archlinux
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+- Changes since V1: Added proper layer prefix to subject
+
  .../recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb}  | 13 ++++++++-----
  1 file changed, 8 insertions(+), 5 deletions(-)
  rename meta-oe/recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb} (90%)
