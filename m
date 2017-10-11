@@ -1,49 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id BE42F600EB
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C3866010B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 01:43:09 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id h28so588480pfh.5
+	Wed, 11 Oct 2017 01:57:06 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id m28so670840pfi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2017 18:43:11 -0700 (PDT)
+	Tue, 10 Oct 2017 18:57:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=6YbPbSk6cQnPg1txa5O5jacccRCCnKPA75TPCBeQw+o=;
-	b=Va2eikvlCZF8K6WtpPzgfvnRq0KugaBBSGiI+kiS1AEb3E27ud5ZxX9O9WK/EZOyG/
-	hR/WfdguBoA/oPTEdfJKo0ZkTLrrZ5ovv0wFqQfJ4not7cj0W2SeNnkWcxTAvtaQ4Wck
-	eUiYhjhhYb9RkALJvz3Q7rHG5tGivMPAJknO9DoqfDaqa9/CDhkurWhOKSPbZonyiHkt
-	nQdnqb9m+LdrV1GKhnYcSaDZpKFEQhZTi70xDjkCIXxHJWpA534h7vr8NRYLmvWHfjDP
-	GxgCfrP+Jj4JSmWvQGE088ncqxc6nVJNoWMUzubird3lFy/HgUcWXnsH9StBphR4v23m
-	QQaw==
+	h=from:to:cc:subject:date:message-id;
+	bh=OhzQfktFD7W3kw4MoVTaOUdI1/AtkQVnW6Rto0sVmmY=;
+	b=NcWdZeC83+QNEFLUW/uGNyHaIi12d/VCaEW9GBPRkk1E8nkTo2Y7KB+sUoO6FGOZbO
+	Clfv0BKLivzn1Ho+sA8+DCnMqu/gPbQ79IenhvERCZOQk5i+ZmWKrb/AxUNSACd9T6wS
+	i4goeotzOB3z3BKCHL/0qQv2hUoilZVNmqLKR4RqCjf9cVtCFtwo3/DavlssWmWQ+GWX
+	GmHRQp3csZSkqCyqPzuQ+l4jtjmJufXGSPZlktlyNiamWATZXiOcRIVLeQ2cfPrid7nB
+	pr71dCukhYjYCxRdRQDj6BnS3oWZxk72C4F/qvorgdeZEekWRzcZJbckhYKqcIgaA5kb
+	xbcw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=6YbPbSk6cQnPg1txa5O5jacccRCCnKPA75TPCBeQw+o=;
-	b=NMUT3dv7ZrCrH94t8CZr7pSkfJxllw/Gi+vxnB06NzQxTBDUwacAous9tqj6mCv4sX
-	WmSQQokFiam5KFrI8j443+iyTmTTZEUSwr84JtCSoVPZvMLuUSIi8bdPtT+Vp5Nz3n/M
-	DZa8lk7s0pW7V4u1jQmD2+OyxJ76HI50s7rq2TKcMfktNk4DKRSq0Tg/eoZ4mSMAdypR
-	RhVz1ro1ZMFCnYwlm5rg+Rky19goyVouT86oLopT1mIpPQO5rETE15njijFyGqwURNJG
-	XqiYW6S/g4Iqn//m1ueq+Cu0YRpPb6Qh/ctyyxeDqIb7COCeOCfWzwV1I6ycFZ3RIsi5
-	u7Og==
-X-Gm-Message-State: AMCzsaVZjEjtKpFuUEZYpI3Q9FBrbzpNyVdPB1BLhdlVIwPYt5qsxXk6
-	rQ4YMuZ/E71Jc61oVYyad5qb/A==
-X-Google-Smtp-Source: AOwi7QD/BS5icv+XfcQkr/Z0HIClXVZYwiNL6mhU22MJvapuCc2RWQPv1//uR168IUcCQXcs4iYVXg==
-X-Received: by 10.99.50.135 with SMTP id y129mr2914506pgy.399.1507686191046;
-	Tue, 10 Oct 2017 18:43:11 -0700 (PDT)
-Received: from akuster-ThinkPad-T460s.mvista.com
-	([2601:202:4001:9ea0:b1f1:dd8d:5df8:a2f])
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=OhzQfktFD7W3kw4MoVTaOUdI1/AtkQVnW6Rto0sVmmY=;
+	b=VvLIO4WPKb+fIci2uvYVjK9sohM/jDXfULJHPYwbP7ZgST/GGdvd2rHEsUOn4GBZz9
+	6FZKjkbIq6tdr6CWhF96Zb16Rp+1VDQFtBM1lAXmlXRbGzo5PY1ocfQEh6pgtN35bF9D
+	Xg2S9nm9DZP6lAAqlS1NWBoKkxCTH8zcrbH7hDNcEwWXKlDUa8C8/VveaYM7TpLA765U
+	FcbSOPnsE6MuebAx9qjspYfvULzUW97GS+8VwF2I81tCpF9kkMB7NwHfZozoCQET2E8R
+	We8oCdw6x1Wr7ucE3tanPFciMSnJJhoFqwMOfA2OloBHMiVrlXNgjhCcVe3DrAIKTbve
+	meNg==
+X-Gm-Message-State: AMCzsaXW19nTOjRqjw6DHNZPEoQXjZYnrSlBz8r0Y4EFOUMD9fAX+rIi
+	/NTl1VMWFXS3Yw2oaMgLWibXrA==
+X-Google-Smtp-Source: AOwi7QDMhs71qhFhD3Ru/xBCxmAyYTTsufEHCqslNaUYPFARGQExMsHJzWUm2EXsorgHeXux8NLF2g==
+X-Received: by 10.98.48.195 with SMTP id w186mr15246129pfw.213.1507687028044; 
+	Tue, 10 Oct 2017 18:57:08 -0700 (PDT)
+Received: from localhost.localdomain ([2601:646:8882:b8c::74e7])
 	by smtp.gmail.com with ESMTPSA id
-	q13sm14916613pfi.166.2017.10.10.18.43.10
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 10 Oct 2017 18:43:10 -0700 (PDT)
-From: Armin Kuster <akuster808@gmail.com>
-To: akuster@mvista.com,
-	openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Oct 2017 18:43:09 -0700
-Message-Id: <1507686189-445-1-git-send-email-akuster808@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH] wireshark: update to 2.2.10
+	x4sm20685317pfb.101.2017.10.10.18.57.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 10 Oct 2017 18:57:07 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 10 Oct 2017 18:57:00 -0700
+Message-Id: <20171011015700.12779-1-raj.khem@gmail.com>
+X-Mailer: git-send-email 2.14.2
+Subject: [PATCH] toybox: Switch building from git src_uri
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,41 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Oct 2017 01:43:09 -0000
+X-List-Received-Date: Wed, 11 Oct 2017 01:57:07 -0000
 
-The following vulnerabilities have been fixed:
-     * [1]wnpa-sec-2017-42
-       BT ATT dissector crash ([2]Bug 14049) [3]CVE-2017-15192
-     * [4]wnpa-sec-2017-43
-       MBIM dissector crash ([5]Bug 14056) [6]CVE-2017-15193
-     * [7]wnpa-sec-2017-44
-       DMP dissector crash ([8]Bug 14068) [9]CVE-2017-15191
+We need a patch e.g. https://github.com/landley/toybox/commit/78289203031afc23585035c362beec10db54958d
+to fix build on archlinux
 
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../wireshark/{wireshark_2.2.9.bb => wireshark_2.2.10.bb}             | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/wireshark/{wireshark_2.2.9.bb => wireshark_2.2.10.bb} (95%)
+ .../recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb}  | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb} (90%)
 
-diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-similarity index 95%
-rename from meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
-rename to meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-index 82c25ff..5358ba0 100644
---- a/meta-networking/recipes-support/wireshark/wireshark_2.2.9.bb
-+++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-@@ -10,8 +10,8 @@ SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
+diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.4.bb b/meta-oe/recipes-core/toybox/toybox_git.bb
+similarity index 90%
+rename from meta-oe/recipes-core/toybox/toybox_0.7.4.bb
+rename to meta-oe/recipes-core/toybox/toybox_git.bb
+index 76a7af459..08f971573 100644
+--- a/meta-oe/recipes-core/toybox/toybox_0.7.4.bb
++++ b/meta-oe/recipes-core/toybox/toybox_git.bb
+@@ -2,14 +2,17 @@ SUMMARY = "Toybox combines common utilities together into a single executable."
+ HOMEPAGE = "http://www.landley.net/toybox/"
+ DEPENDS = "attr"
  
- PE = "1"
+-SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
+-"
+-SRC_URI[md5sum] = "55ea59a31c7da9510c8fabe70f4bc561"
+-SRC_URI[sha256sum] = "49d74ca897501e5c981516719870fe08581726f5c018abe35ef52c6f0de113e7"
+-
+ LICENSE = "BSD-0-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
  
--SRC_URI[md5sum] = "7d5e65efd0714bd6248aa5b36c28320d"
--SRC_URI[sha256sum] = "c8b32c0e7d44a277e737c53d9d142ad3fe4265338f25a7fd8c891f58a7633fc2"
-+SRC_URI[md5sum] = "ae3a1a43a6e3687f44a738fd15d78021"
-+SRC_URI[sha256sum] = "8574a5e1fdec7affae640924bd46c1aed1bd866e02632fa5625e1450e4a50707"
++PV = "0.7.4+git${SRCPV}"
++
++SRCREV = "78289203031afc23585035c362beec10db54958d"
++SRC_URI = "git://github.com/landley/toybox;protocol=https \
++"
++
++S = "${WORKDIR}/git"
++
+ SECTION = "base"
  
- inherit autotools pkgconfig perlnative
- 
+ TOYBOX_BIN = "generated/unstripped/toybox"
 -- 
-2.7.4
+2.14.2
 
 
