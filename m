@@ -1,47 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f170.google.com (mail-pf0-f170.google.com
-	[209.85.192.170])
-	by mail.openembedded.org (Postfix) with ESMTP id 3471D6010B
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D5DE6E666
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 01:58:19 +0000 (UTC)
-Received: by mail-pf0-f170.google.com with SMTP id b85so308426pfj.13
+	Wed, 11 Oct 2017 04:53:21 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id u138so1041890wmu.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Oct 2017 18:58:21 -0700 (PDT)
+	Tue, 10 Oct 2017 21:53:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=ChV6UitU4PqfJtEV8MzSOSvIWhUbP8+Vk/AwVsS8ScI=;
-	b=tVHM/UP2uHhIivl8kBsZeeXoDKPESYdRFVXG5KHk/abakruldmCBuc3kJN2Eb0iuAs
-	f28TE7hKDB/TA+I62XkwBjt5ILfBzaW5lG1czooJZ4cUSz0eEv4ngTM0RCi4V1PSiA40
-	TDmGK150sG1rmlUWTHx+7uqn3dRRw39Sh67CR1j+Nvvm5M5zTT6nyQrH9wNx9IgGnAZ0
-	6o3cWwBLhQwC2PWolo0iM/+jLE0Uy6KxoDwEqZ+YVqnmm4sgTzSrSI4Q4AZ3U2T2/snW
-	eLKw5Yx55YG+xxI8a/JTc7HK48kQwjJR5j8M3gZssfllhabxYf0tOWEFSxBGdSM1PQrH
-	mzqg==
+	bh=nXfnIJwct65IpgQPBoI/nnBo0ygsLQodDL9Nmgy4BZA=;
+	b=creGmYVeZJeTLVgm3APp7oLBX9IVAMXkE20EIf20h1D5l7lYC48GzSTGl3aXEFKHEp
+	isPiHHDPteULFTqoBbjRKVhvxHimJ7yjuoHyjIz2iRlM3GD7phDDdTcwiC67L4fLpXqq
+	PT6CU8CnDUlqqqhZdIkmhG+Yyj+mb6WJlWn+TppxCYFzQQAADOKe9/pdRnhjCVfvcNgZ
+	wWW47p7TkYl/DWCDzgbG51XEy99JGO0H4J9BgteKaO8VMv35bPoEKPa1lIDMkGbXhRvf
+	hiZdNEfDvwcFhyMQK9U9HIy09o1rr7OSM/Hf739mqvChMwDOpL4lO6jvxSGaF+l5u/qx
+	4yCQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ChV6UitU4PqfJtEV8MzSOSvIWhUbP8+Vk/AwVsS8ScI=;
-	b=kCKT+Rwh78hWPLmoxvP2LUypAfceygJ6GzygQttQK34jz1NNJuRnzuaKTXmFrGFyPS
-	o9kZv2mvi9Q8Oval9wJqtOzJaVCosKQsQSoJkzNkvAOGcIGMN3GQktf4TlAYebPbAs4m
-	1SOLpKMf+gPmjAcSGEdTstXSbeyVndVppBvEgNy4POUCSQUEHIfpuy9YA3u6K0wKZlwp
-	kO1F9t8Na4BEwRvoYvYk60wulYGuTlnASlZk6M6SBrjkJJ/HLyBkCwLqU1wYgw1dw39C
-	yUsHKFGjUNDLHQrmvGRjGqPFgomDnWRbAl7pEa3OqKLQ6kk5y4CdND1SU25UdfiVnoXM
-	YxbA==
-X-Gm-Message-State: AMCzsaXTlDh5o/LIbtwk3lI6Kk1AVYqF3+GZgnJkn2WJkBaQgW6b4asI
-	lhjYbEgRlMV6k01oPuX6n3y0zA==
-X-Google-Smtp-Source: AOwi7QBoehaQeikYI8UtdhtBYycCJ6tRsyr3O4+9i1Kt5bVHlO5MYnqitUK8tyhki288IlxgufVzuA==
-X-Received: by 10.98.58.199 with SMTP id v68mr15361152pfj.44.1507687101289;
-	Tue, 10 Oct 2017 18:58:21 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::74e7])
-	by smtp.gmail.com with ESMTPSA id
-	j6sm20930735pgn.68.2017.10.10.18.58.20
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 10 Oct 2017 18:58:20 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	bh=nXfnIJwct65IpgQPBoI/nnBo0ygsLQodDL9Nmgy4BZA=;
+	b=uV4jTbkg4tWlWUZLnWDBqfEp4y4ZjbkOpqCMRgP4NSoe72FB0CV5snURoNuoVqAv2u
+	qu+UlL+lOL1PmUT7zI48unjdp4yjKLFpKNf6MDWE5hjYcqtrELAsxK9LKhBCQ4O5w31/
+	b9wcgDWTcOvO5UaGStq8cZM/wp2EOblsgiEhaHEh0oWfa26c22UuGw4jjgNzB5gicMIK
+	TzYfGcdkIzpAgf9LcUmV1tC2WyDWuwShPQ+wOD8jR5pzgcHlcdgqtRsT5+t21jF44fdY
+	CPB9twv+Mf5RqcwpfKCfFVSm/EfG1sZ8fMFKr9BrciYkNggHoPFdUwVoiLaChtph4Lpz
+	fnXA==
+X-Gm-Message-State: AMCzsaWERJFmdb50J6YFmZBPYZrcWbxVrTmPOvvc0+QY/FoJB61Odiyd
+	9OwWxaBIVlYXpTbUIDr2h4i5dA==
+X-Google-Smtp-Source: AOwi7QClBS/ygRE9oW0p1UdXdRkPeIj8sUFXZiC+BULjhVyWTDTFS5rSK955ewBCpqX9NfNwtwyp7w==
+X-Received: by 10.80.130.67 with SMTP id 61mr12264143edf.3.1507697602297;
+	Tue, 10 Oct 2017 21:53:22 -0700 (PDT)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([123.125.90.58]) by smtp.gmail.com with ESMTPSA id
+	k57sm8362739eda.53.2017.10.10.21.53.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 10 Oct 2017 21:53:20 -0700 (PDT)
+From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Oct 2017 18:58:13 -0700
-Message-Id: <20171011015813.12863-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.2
-Subject: [meta-oe][PATCH V2] toybox: Switch building from git src_uri
+Date: Wed, 11 Oct 2017 06:51:10 +0200
+Message-Id: <1507697470-18308-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-java/master-next][PATCH] openjdk-8-cross.inc: add pulseaudio PACKAGECONFIG
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,50 +54,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Oct 2017 01:58:20 -0000
+X-List-Received-Date: Wed, 11 Oct 2017 04:53:21 -0000
 
-We need a patch e.g. https://github.com/landley/toybox/commit/78289203031afc23585035c362beec10db54958d
-to fix build on archlinux
+From: Ming Liu <liu.ming50@gmail.com>
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+Add pulseaudio PACKAGECONFIG and set it by default if pulseaudio is
+enabled in DISTRO_FEATURES, this introduces a dependency DEPENDS on
+pulseaudio which is currently missing.
+
+Without this patch, jdk/jre will be built as soundless even pulseaudio is
+enabled in PACKAGECONFIG.
+
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
-- Changes since V1: Added proper layer prefix to subject
+ recipes-core/openjdk/openjdk-8-cross.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
- .../recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb}  | 13 ++++++++-----
- 1 file changed, 8 insertions(+), 5 deletions(-)
- rename meta-oe/recipes-core/toybox/{toybox_0.7.4.bb => toybox_git.bb} (90%)
-
-diff --git a/meta-oe/recipes-core/toybox/toybox_0.7.4.bb b/meta-oe/recipes-core/toybox/toybox_git.bb
-similarity index 90%
-rename from meta-oe/recipes-core/toybox/toybox_0.7.4.bb
-rename to meta-oe/recipes-core/toybox/toybox_git.bb
-index 76a7af459..08f971573 100644
---- a/meta-oe/recipes-core/toybox/toybox_0.7.4.bb
-+++ b/meta-oe/recipes-core/toybox/toybox_git.bb
-@@ -2,14 +2,17 @@ SUMMARY = "Toybox combines common utilities together into a single executable."
- HOMEPAGE = "http://www.landley.net/toybox/"
- DEPENDS = "attr"
+diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
+index ad3a44d..d21d9a7 100644
+--- a/recipes-core/openjdk/openjdk-8-cross.inc
++++ b/recipes-core/openjdk/openjdk-8-cross.inc
+@@ -34,10 +34,12 @@ PACKAGECONFIG ??= " \
+     repack \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'x11 cups', '', d)} \
+     ${@bb.utils.contains('DISTRO_FEATURES', 'alsa', 'alsa', '', d)} \
++    ${@bb.utils.contains('DISTRO_FEATURES', 'pulseaudio', 'pulseaudio', '', d)} \
+ "
+ PACKAGECONFIG[x11] = "--with-x,,libx11 xproto libxt libxext libxrender libxtst"
+ PACKAGECONFIG[cups] = "--with-cups,,cups"
+ PACKAGECONFIG[alsa] = "--with-alsa,,alsa-lib"
++PACKAGECONFIG[pulseaudio] = ",,pulseaudio"
  
--SRC_URI = "http://www.landley.net/toybox/downloads/${BPN}-${PV}.tar.gz \
--"
--SRC_URI[md5sum] = "55ea59a31c7da9510c8fabe70f4bc561"
--SRC_URI[sha256sum] = "49d74ca897501e5c981516719870fe08581726f5c018abe35ef52c6f0de113e7"
--
- LICENSE = "BSD-0-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f0b8b3dd6431bcaa245da0a08bd0d511"
+ PACKAGECONFIG[jce] = "--enable-unlimited-crypto,,"
  
-+PV = "0.7.4+git${SRCPV}"
-+
-+SRCREV = "78289203031afc23585035c362beec10db54958d"
-+SRC_URI = "git://github.com/landley/toybox;protocol=https \
-+"
-+
-+S = "${WORKDIR}/git"
-+
- SECTION = "base"
- 
- TOYBOX_BIN = "generated/unstripped/toybox"
 -- 
-2.14.2
+2.7.4
 
 
