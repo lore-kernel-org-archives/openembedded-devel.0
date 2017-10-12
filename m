@@ -1,34 +1,37 @@
 Return-Path: <denis@denix.org>
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 127AA60069
+	by mail.openembedded.org (Postfix) with ESMTP id EA29960720
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 20:53:57 +0000 (UTC)
+	Thu, 12 Oct 2017 20:57:30 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 61D1720AD5;
-	Thu, 12 Oct 2017 20:53:59 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id DE32220AD5;
+	Thu, 12 Oct 2017 20:57:31 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id Fpf435AeVEZL; Thu, 12 Oct 2017 20:53:59 +0000 (UTC)
+	with ESMTP id 9bTw6syQY4mR; Thu, 12 Oct 2017 20:57:31 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 361F52006B;
-	Thu, 12 Oct 2017 20:53:57 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id B4B082006B;
+	Thu, 12 Oct 2017 20:57:30 +0000 (UTC)
 Received: by mail.denix.org (Postfix, from userid 1000)
-	id C493C1626EC; Thu, 12 Oct 2017 16:53:56 -0400 (EDT)
-Date: Thu, 12 Oct 2017 16:53:56 -0400
+	id 4195D1626EC; Thu, 12 Oct 2017 16:57:30 -0400 (EDT)
+Date: Thu, 12 Oct 2017 16:57:30 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-To: =?iso-8859-1?Q?An=EDbal_Lim=F3n?= <limon.anibal@gmail.com>
-Message-ID: <20171012205356.GK9221@denix.org>
-References: <20171012125625.3061-1-limon.anibal@gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Message-ID: <20171012205730.GL9221@denix.org>
+References: <1499835521-973-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<1499835521-973-2-git-send-email-huangqy.fnst@cn.fujitsu.com>
+	<20171002222529.GE16828@denix.org>
+	<CA+chaQfoeaFsCzx3NqUWsW-_MrRuTwXzQcS2o-D95Y6EKuk7tQ@mail.gmail.com>
+	<20171003191946.GF16828@denix.org>
 MIME-Version: 1.0
-In-Reply-To: <20171012125625.3061-1-limon.anibal@gmail.com>
+In-Reply-To: <20171003191946.GF16828@denix.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: =?iso-8859-1?Q?An=EDbal_Lim=F3n?= <anibal.limon@linaro.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCHv2] meta-oe/recipes-test: Add stress-ng recipe
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] [PATCH v4 1/4] qt5: add qt5-ptest.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,62 +44,158 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 20:53:58 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Thu, 12 Oct 2017 20:57:31 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 12, 2017 at 07:56:25AM -0500, Aníbal Limón wrote:
-> From: Aníbal Limón <anibal.limon@linaro.org>
+On Tue, Oct 03, 2017 at 03:19:46PM -0400, Denys Dmytriyenko wrote:
+> On Tue, Oct 03, 2017 at 09:52:51AM +0200, Martin Jansa wrote:
+> > Yes, I've seen this few times as well.
 > 
-> A tool to generate load and stress a system, currently this recipe
-> is on a couple of layers [1] and is not updated, a good reason to
-> have in meta-oe.
-> 
-> [1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=stress-ng
-> 
-> Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
+> Ok, for now I had to manually build pseudo-native to seed sstate cache to 
+> overcome this issue. Otherwise building a complete image this do_install_ptest 
+> task from qt5 always comes before pseudo is ready. Wonder if I'll have time to 
+> look into this closer in the near future... Is there a bugzilla for this?
 
-Thanks for updating and upstreaming it! As the original author of the recipe [2],
-you can add my SoB here as well:
-
-Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-
-[2] http://arago-project.org/git/?p=meta-arago.git;a=history;f=meta-arago-extras/recipes-devtools/stress-ng;hb=master
+Submitted a fix for this.
 
 
-> ---
->  meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18 ++++++++++++++++++
->  1 file changed, 18 insertions(+)
->  create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> 
-> diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> new file mode 100644
-> index 000000000..86f577006
-> --- /dev/null
-> +++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> @@ -0,0 +1,18 @@
-> +SUMMARY = "A tool to load and stress a computer system"
-> +HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
-> +LICENSE = "GPLv2"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-> +
-> +DEPENDS = "zlib libaio"
-> +
-> +SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "e0f6497a8c06f5d652bc2ad88d449c12"
-> +SRC_URI[sha256sum] = "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2231c1058b1a5dd18"
-> +
-> +CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"'"
-> +
-> +do_install_append() {
-> +    install -d ${D}${bindir}
-> +    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
-> +}
-> -- 
-> 2.11.0
-> 
+> > On Tue, Oct 3, 2017 at 12:25 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> > 
+> > > On Wed, Jul 12, 2017 at 12:58:38PM +0800, Huang Qiyu wrote:
+> > > >   Add qt5-ptest.inc file for qt ptest related tasks
+> > > >         1)      Rewrite do_compile_ptest task for qt
+> > > >         2)      Add new do_compile_ptest_base and task do_install_ptest
+> > > >         3)      Write do_populate_sysroot_append to resolve
+> > > do_compile_ptest_base problem in yocto2.3
+> > >
+> > > Something in this order of tasks is not completely correct - I just got
+> > > qtxmlpatterns:do_install_ptest very early on (after fetch/unpack, but
+> > > before
+> > > compile/install). Even before pseudo-native fnished building and
+> > > installing.
+> > > And since do_install_ptest task marked as "fakeroot", it obviously failed:
+> > >
+> > > NOTE: Running task 614 of 7991 (/OE/master/sources/meta-qt5/
+> > > recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest)
+> > > ERROR: Failed to spawn fakeroot worker to run /OE/master/sources/meta-qt5/
+> > > recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest: [Errno 2] No such
+> > > file or directory: '/OE/master/build/tmp-glibc/sysroots-components/x86_64/
+> > > pseudo-native/usr/bin/pseudo'
+> > >
+> > > Has anyone else seen this?
+> > >
+> > > --
+> > > Denys
+> > >
+> > >
+> > > >         The compile error log is shown as follow:
+> > > >         cd auto/ && ( test -e Makefile || /yocto/work001/fnst/huangqy/
+> > > work_qt/build/tmp/work/i586-p
+> > > > oky-linux/qtxmlpatterns/5.8.0+gitAUTOINC+9f7e01b582-r0/
+> > > recipe-sysroot-native/usr/bin/qt5/qmake -o M
+> > > > akefile /yocto/work001/fnst/huangqy/work_qt/build/tmp/work/i586-
+> > > poky-linux/qtxmlpatterns/5.8.0+gitA
+> > > > UTOINC+9f7e01b582-r0/git/tests/auto/auto.pro ) && make -f Makefile
+> > > >         Project ERROR: Could not find feature xml-schema.
+> > > >         Makefile:42: recipe for target 'sub-auto-make_first' failed
+> > > >
+> > > > Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> > > > ---
+> > > >  recipes-qt/qt5/qt5-ptest.inc | 62 ++++++++++++++++++++++++++++++
+> > > ++++++++++++++
+> > > >  1 file changed, 62 insertions(+)
+> > > >  create mode 100644 recipes-qt/qt5/qt5-ptest.inc
+> > > >
+> > > > diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
+> > > > new file mode 100644
+> > > > index 0000000..49d44ac
+> > > > --- /dev/null
+> > > > +++ b/recipes-qt/qt5/qt5-ptest.inc
+> > > > @@ -0,0 +1,62 @@
+> > > > +SRC_URI += "file://run-ptest"
+> > > > +
+> > > > +inherit ptest
+> > > > +
+> > > > +addtask do_populate_sysroot after do_install before
+> > > do_compile_ptest_base
+> > > > +deltask do_compile_ptest_base
+> > > > +addtask do_compile_ptest_base after do_populate_sysroot before
+> > > do_install_ptest
+> > > > +addtask do_install_ptest after do_compile_ptest_base before do_package
+> > > > +
+> > > > +do_compile_ptest() {
+> > > > +    cd ${S}/tests
+> > > > +    qmake -o Makefile tests.pro
+> > > > +    oe_runmake
+> > > > +}
+> > > > +
+> > > > +do_populate_sysroot_append() {
+> > > > +    workdir = d.getVar('WORKDIR')
+> > > > +    srcdir = workdir + '/sysroot-destdir/usr/'
+> > > > +    destdir = workdir + '/recipe-sysroot/usr/'
+> > > > +
+> > > > +    def copyFiles(sourceDir, targetDir, filelist):
+> > > > +        for file in os.listdir(sourceDir):
+> > > > +            sourceFile = os.path.join(sourceDir,  file)
+> > > > +            targetFile = os.path.join(targetDir,  file)
+> > > > +            filelist.append(targetFile)    #record the file list
+> > > > +            if os.path.isfile(sourceFile):
+> > > > +                if not os.path.exists(targetDir):
+> > > > +                    os.makedirs(targetDir)
+> > > > +                if not os.path.exists(targetFile)
+> > > or(os.path.exists(targetFile) and (os.path.getsize(targetFile) !=
+> > > os.path.getsize(sourceFile))):
+> > > > +                        open(targetFile, "wb").write(open(sourceFile,
+> > > "rb").read())
+> > > > +            if os.path.isdir(sourceFile):
+> > > > +                First_Directory = False
+> > > > +                copyFiles(sourceFile, targetFile, filelist)
+> > > > +
+> > > > +    if os.path.exists(destdir):
+> > > > +        Tmpfilelist = []
+> > > > +        copyFiles(srcdir, destdir, Tmpfilelist)
+> > > > +
+> > > > +        fp=open(workdir + '/filelist', 'w')
+> > > > +        for i in Tmpfilelist:
+> > > > +            fp.write(i)
+> > > > +            fp.write("\n")
+> > > > +        fp.close()
+> > > > +}
+> > > > +
+> > > > +fakeroot do_install_ptest() {
+> > > > +    mkdir -p ${D}${PTEST_PATH}
+> > > > +    t=${D}${PTEST_PATH}
+> > > > +    for var in ` find ${S}/tests/auto/ -name tst_*`; do
+> > > > +        if [ -z ` echo ${var##*/} | grep '\.'` ]; then
+> > > > +            echo ${var##*/} >> ${t}/tst_list
+> > > > +            install -m 0644  ${var} ${t}
+> > > > +        fi
+> > > > +    done
+> > > > +    for file in `cat ${WORKDIR}/filelist`; do
+> > > > +       if [ -f $file ]; then
+> > > > +           rm -f $file
+> > > > +       fi
+> > > > +    done
+> > > > +    rm -f ${WORKDIR}/filelist
+> > > > +}
+> > > > +
+> > > > --
+> > > > 2.7.4
+> > > >
+> > > >
+> > > >
+> > > > --
+> > > > _______________________________________________
+> > > > Openembedded-devel mailing list
+> > > > Openembedded-devel@lists.openembedded.org
+> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > > --
+> > > _______________________________________________
+> > > Openembedded-devel mailing list
+> > > Openembedded-devel@lists.openembedded.org
+> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> > >
 > -- 
 > _______________________________________________
 > Openembedded-devel mailing list
