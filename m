@@ -1,49 +1,51 @@
 Return-Path: <limon.anibal@gmail.com>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 2ECFD71A92
+Received: from mail-oi0-f67.google.com (mail-oi0-f67.google.com
+	[209.85.218.67])
+	by mail.openembedded.org (Postfix) with ESMTP id BED5071A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 12:53:15 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id i124so13065354wmf.3
+	Thu, 12 Oct 2017 12:57:33 +0000 (UTC)
+Received: by mail-oi0-f67.google.com with SMTP id f66so8357150oib.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 05:53:17 -0700 (PDT)
+	Thu, 12 Oct 2017 05:57:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Ji376/Z/8BQY6sW402nLOfZfFfFzxmUKpU0zE9Nqgso=;
-	b=mVEk72TmuKeVBjoAVq5W5PHiikaoIq4Sw4Mj7J1gbFvkjZZtjkZ5XQ9sXoU786lopv
-	C2DhiA2C/txbz09UotNxegcluVc/N+7LMToLVvO9iz+T3ZKK45x/KmlitOwoX/TT4CKg
-	E4d+gO6Z7LmN+5UdbZdL8K87ikLY3OnooZZ1PA/rg54AlYHapDQI6erIspKIEs7rQDQy
-	xcLTBjY/LnPXEpSl++UsyFBDbIwadmYNBz9CE29kI9vaRFVRLThWIANZvO8x+AR1DMcu
-	baJ8x6FXbe57GLYCmXYb+xglDPUqZl+kLgqWjZBQa4uOwhyVdIEvtiNcSXFE7KcVvIIn
-	XMYg==
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xSRYpjMyHo/0y1zxDhbnAln3TQ4FjuQKiLYLpv0wXs8=;
+	b=Tv1c+EjoipoI4l8TSePhLqX6Dcc83zjdUKh2QZgkC3PU6cELYxmRo4/n7eNZtWEPDj
+	NAK6f500zF/u5h6t8qTYZx1FWBr9YFXUVVS/lLMLU3hTV+bYZ0nuxvLa4E743SK/Vwzm
+	xWj+i1zeJrlB2C/+ILil8HgErUlRFuKhqGgDQ9qQuzdGZrFmJ437payXJZOzrxaRcNja
+	Bc1CLOlyKCwhyFle+Ni+ueCiber7v3ONYFjUKmv3oDQ0LKuVW/WDSlKBuYX9w70123xJ
+	MbGUAqu/ImRsX6dLAiogaeVihSX3SxsekDqYZGJ50v3+9w6R+hVACf7epUanuTX94LsO
+	ZQSQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=Ji376/Z/8BQY6sW402nLOfZfFfFzxmUKpU0zE9Nqgso=;
-	b=lbwoC8dl9XfJMKrtbrTjWFboQ5b0iN8npXAjo+SysXRzeUyHWG0jbvp//9DxD7xpU7
-	bC6lo4HRCg/hr954QPdW2xglcjBn9vvMC5mS69KWClJ6Sun3cxOli4SC3XK/HhWxjsCU
-	3nqc6AZ2EbUo6yYmZYFf8i7f+6WKcbZSP+GbeV1UbxBu1ayAbOLb4PwKn8xvKaoQbnsA
-	2QhPwEZfMKSY90ILl/Ys+8N5qkVogC9Gvmc4P0MAAurifEDkA0gL8g55XFY2oXWtEXL/
-	A4Eq7YcbPtFr9IfqJYQ4p3lAxn9bRJ5QYVuryIOrw4jdUet7PMyYPmQc/B0N8fDK3Vat
-	tFog==
-X-Gm-Message-State: AMCzsaVpePQIOF4XUPyWEmaWNOqEU8wJ2oBuZqVxP8lKBgla8uduBynN
-	N6WH8QwkqMyeVX+ux0Kp78ixq9ltHSEEXNLp6R4=
-X-Google-Smtp-Source: AOwi7QCyKrpQhFYXFb/6rsGUmQyyz+LffepA+KsQruU9gcvFHIy6txCkt9lv9Pb265VTRWeDSYRGGnOO7TLsLl+inDM=
-X-Received: by 10.80.212.208 with SMTP id e16mr2729343edj.263.1507812797080;
-	Thu, 12 Oct 2017 05:53:17 -0700 (PDT)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=xSRYpjMyHo/0y1zxDhbnAln3TQ4FjuQKiLYLpv0wXs8=;
+	b=XzsmTsP6EhGpFrofu+dtIgT801+5LJntkJNhACsmRwwoMAlZ9cFON0fonda6ReWQz+
+	bySxEb1Xz/dbUV0GEXzwS3v+RyXWuqMV+wK5xTOgvQ+/1hpSmCrQ/+Gb1EN/ycap9izi
+	7dd/cLSGpKT/jueniuEyRHHL56wvcl4be+DzUlVTa790CA056eoogTdZjdbipDkfyT09
+	m0jze5hpC7IPPzsR+1iYUzLO2o+kC9bunOFXbMrPqoNwBOhGl5G4/qO8JXhBGaW4dm7i
+	4oBDw4rxKq9pRtXgqT2D65RnpxGcvn98gL/Ht7DNkyfVm0ozn/FfvnSRVt1p7GZmFYbO
+	mD3Q==
+X-Gm-Message-State: AMCzsaU6FSfYVsHukoysvLeb0m9ICQKUku71PjRcoZ3ek6Sez47v/2LL
+	CluFI7QxvE9HlbBi0DRqy75hDyJb
+X-Google-Smtp-Source: AOwi7QDdLG2Cmt1fCFw+DJps/fy4oqcPfLQDUhhDvE1rTilG2RvakLZGaM0sJXkBu8FzCRDo76jULw==
+X-Received: by 10.202.166.9 with SMTP id p9mr1256242oie.220.1507813054419;
+	Thu, 12 Oct 2017 05:57:34 -0700 (PDT)
+Received: from blackbox.Home ([148.240.201.158])
+	by smtp.gmail.com with ESMTPSA id
+	y90sm8199347ota.52.2017.10.12.05.57.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 12 Oct 2017 05:57:33 -0700 (PDT)
+From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <limon.anibal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 12 Oct 2017 07:56:25 -0500
+Message-Id: <20171012125625.3061-1-limon.anibal@gmail.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Received: by 10.80.142.72 with HTTP; Thu, 12 Oct 2017 05:53:16 -0700 (PDT)
-In-Reply-To: <CAMKF1spJt3boF3g=2kTu-wYzm8wZDTRo7hZ-5QzZ2YVU7R61MA@mail.gmail.com>
-References: <20171011143144.23691-1-limon.anibal@gmail.com>
-	<CAMKF1spJt3boF3g=2kTu-wYzm8wZDTRo7hZ-5QzZ2YVU7R61MA@mail.gmail.com>
-From: =?UTF-8?Q?Anibal_Lim=C3=B3n?= <limon.anibal@gmail.com>
-Date: Thu, 12 Oct 2017 07:53:16 -0500
-Message-ID: <CAPS-YPDSG3rZtTOb4hfoTOeD2V2w2NoLa=eVhHOeAAVgJqc+2A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] meta-oe/recipes-test: Add stress-ng recipe
+Cc: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
+Subject: [PATCHv2] meta-oe/recipes-test: Add stress-ng recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,78 +58,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 12:53:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Oct 2017 12:57:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Oct 12, 2017 at 12:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
+From: Aníbal Limón <anibal.limon@linaro.org>
 
-> On Wed, Oct 11, 2017 at 7:31 AM, An=C3=ADbal Lim=C3=B3n <limon.anibal@gma=
-il.com>
-> wrote:
-> > From: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
-> >
-> > A tool to generate load and stress a system, currently this recipe
-> > is on a couple of layers [1] and is not updated, a good reason to
-> > have in meta-oe.
-> >
-> > [1] https://layers.openembedded.org/layerindex/branch/master/
-> recipes/?q=3Dstress-ng
-> >
-> > Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
-> > ---
-> >  meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18
-> ++++++++++++++++++
-> >  1 file changed, 18 insertions(+)
-> >  create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> >
-> > diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> > new file mode 100644
-> > index 000000000..f8b0a0d27
-> > --- /dev/null
-> > +++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-> > @@ -0,0 +1,18 @@
-> > +SUMMARY =3D "A tool to load and stress a computer system"
-> > +HOMEPAGE =3D "http://kernel.ubuntu.com/~cking/stress-ng/"
-> > +LICENSE =3D "GPLv2"
-> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4=
-a42
-> 63"
-> > +
-> > +DEPENDS =3D "zlib libaio"
-> > +
-> > +SRC_URI =3D "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar=
-.gz
-> "
-> > +
-> > +SRC_URI[md5sum] =3D "e0f6497a8c06f5d652bc2ad88d449c12"
-> > +SRC_URI[sha256sum] =3D "37cc73e42f5bdb0e0571ba88f6a69b
-> 8f05ee28e51afcafc2231c1058b1a5dd18"
-> > +
-> > +CFLAGS +=3D "-Wall -Wextra -DVERSION=3D'"$(VERSION)"' -O2"
->
-> do we need -O2 always?
->
+A tool to generate load and stress a system, currently this recipe
+is on a couple of layers [1] and is not updated, a good reason to
+have in meta-oe.
 
-No isn't required, i will remove the flag and let the buildsystem put the
-optimization per machine.
+[1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=stress-ng
 
-Anibal
+Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
+---
+ meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
 
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+new file mode 100644
+index 000000000..86f577006
+--- /dev/null
++++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+@@ -0,0 +1,18 @@
++SUMMARY = "A tool to load and stress a computer system"
++HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "zlib libaio"
++
++SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.gz"
++
++SRC_URI[md5sum] = "e0f6497a8c06f5d652bc2ad88d449c12"
++SRC_URI[sha256sum] = "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2231c1058b1a5dd18"
++
++CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"'"
++
++do_install_append() {
++    install -d ${D}${bindir}
++    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
++}
+-- 
+2.11.0
 
-> > +
-> > +do_install_append() {
-> > +    install -d ${D}${bindir}
-> > +    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
-> > +}
-> > --
-> > 2.11.0
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
