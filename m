@@ -1,22 +1,51 @@
-Return-Path: <pascal.bach@siemens.com>
-Received: from david.siemens.de (david.siemens.de [192.35.17.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A80771A92
+Return-Path: <changhyeok.bae@gmail.com>
+Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
+	[209.85.213.67])
+	by mail.openembedded.org (Postfix) with ESMTP id B077071A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 08:20:47 +0000 (UTC)
-Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
-	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v9C8KmV0023250
-	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
+	Thu, 12 Oct 2017 12:50:18 +0000 (UTC)
+Received: by mail-vk0-f67.google.com with SMTP id t203so1349567vke.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 10:20:48 +0200
-Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.76.113])
-	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v9C8KmHt005251;
-	Thu, 12 Oct 2017 10:20:48 +0200
-From: Pascal Bach <pascal.bach@siemens.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Oct 2017 10:20:43 +0200
-Message-Id: <1507796443-11851-1-git-send-email-pascal.bach@siemens.com>
-X-Mailer: git-send-email 2.1.4
-Subject: [meta-oe][PATCHv3] rocksdb: add version 5.8
+	Thu, 12 Oct 2017 05:50:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Ni2NNQAY5vjNWZQCId7NNEV1nlarHZLzSbKgEUPBiF4=;
+	b=dbZFq7Rht9uuBzWVcZJO0E0MOaB74rZaXoYEDYeXroVvawddAd+fHQaB2snpIY/NzA
+	F4OWsuGJYZ4tmzQhaOSyaCDeFC2iVvE0M/KnVZjXSNKXu0udOMdpwZkHNKQJBH+tsHOS
+	P95YCs2q+4++rG8rTqeQMJtgBYFjYbuDUV/6OJo52jyO2m69/IOYVNJvKTWi6Wtl3SEp
+	TIrruK99TgUvHs6jGO8B8c2evJJnAQp6I0Qp+H8M7QacrdE0naIOnu7MAB6GbWSKsLv/
+	fQEDqkR9yQYCbuTrZddBgvUfQuWLHTSnhEBt8Ov91XxC3L1Kwf2HkeZVHubvsSkzEt89
+	XoZw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Ni2NNQAY5vjNWZQCId7NNEV1nlarHZLzSbKgEUPBiF4=;
+	b=FAX+60CdZrE8cVym72jQUvsNxiYPMD2FDBUsG8Q4zGJjq6HoFlN8rJlvgq90Gb0LTd
+	7uGp62k40wMA1xUJR1jVRHZjjKYgMurqsWPIeaYzBjHZNVQ+Qsr0FdFaIv5EFRrIplYf
+	3EVxng7K0p114R6AE8NodvjI/wjAmSvMp/tZXqRm71mLzbBXo4s6XPMnYgDQ1Tb5Cb1T
+	HWO3bivxrzfGpzVg1KTNQQdovOhr7HPwiBsr1mPpVqT/o+x/0w2FVD8R/nD+q0GPh6Ub
+	SSd7j3hiz1UcmXFeS6vWgjGKQBcMfQxmHea8VC00AXm/dLOA6tlFgC7h8d3Y+2Vlawew
+	Eshw==
+X-Gm-Message-State: AMCzsaVRNMZFANOCJ06h8v0sm2MmJSGf+Gfh1x1ZoQ08Pm6CWBZaP6cF
+	10QNBomJ2Ditz7OIqNxGdQPNHVkUZ1XLhk/rc9Y=
+X-Google-Smtp-Source: AOwi7QB5eUvvKeAb3xJdbN6qeDGREB4WpwZrHguIT4Wn4tAIVLSzra6s/QNPZknvpvDgDkTCr4nvnNgGAVBnbbfFVgo=
+X-Received: by 10.31.65.135 with SMTP id o129mr2324043vka.185.1507812619410;
+	Thu, 12 Oct 2017 05:50:19 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.31.76.69 with HTTP; Thu, 12 Oct 2017 05:50:18 -0700 (PDT)
+In-Reply-To: <20171012070321.i6ajfn5bcgmjnwx5@hiutale>
+References: <CACrLJgCiTiQyCjtfzSkhHzMtBTtxF6j2=cdjxQ2byb0Cihg1uQ@mail.gmail.com>
+	<20171012070321.i6ajfn5bcgmjnwx5@hiutale>
+From: Changhyeok Bae <changhyeok.bae@gmail.com>
+Date: Thu, 12 Oct 2017 21:50:18 +0900
+Message-ID: <CACrLJgAmNZNh9PkASZdW2Y+qD-zeoc5OpN9NbFz_=YL7bx0qTA@mail.gmail.com>
+To: Mikko.Rapeli@bmw.de
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: Stephen Lawrence <stephen.lawrence@renesas.com>,
+	Otavio Salvador <otavio@ossystems.com.br>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5] Keep Qt 5.6.x
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,59 +58,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 08:20:49 -0000
+X-List-Received-Date: Thu, 12 Oct 2017 12:50:18 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Version 5.8 does no longer includes the facebook patent grant and is
-licensed under the Apache-2.0 or GPL-2.0 license.
+Hi Mikko
 
-Tests and tools don't compile on armv5 so we disable them.
-The tools are never installed anyway so it doesn't make a difference for
-the resulting package.
+> I'll check if we could share our branch to bring Qt 5.6.2 base to jethro
+which is mostly just cherry-picked patches from krogoth branch.
+That's great and qt company is also managed qt 5.6.x in 5.6 branch of their
+repository (http://code.qt.io/cgit/yocto/meta-qt5.git/)
 
-Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
----
- meta-oe/recipes-extended/rocksdb/rocksdb_git.bb | 31 +++++++++++++++++++++++++
- 1 file changed, 31 insertions(+)
- create mode 100644 meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
+Thanks
+Changhyeok
 
-diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
-new file mode 100644
-index 0000000..9b19c1a
---- /dev/null
-+++ b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
-@@ -0,0 +1,31 @@
-+SUMMARY = "RocksDB an embeddable, persistent key-value store"
-+DESCRIPTION = "RocksDB is library that provides an embeddable, persistent key-value store for fast storage."
-+HOMEPAGE = "http://rocksdb.org/"
-+LICENSE = "(Apache-2.0 | GPL-2.0) & BSD-3-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
-+                    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
-+
-+SRCREV = "266ac245affd69555643b735d19d3715c4eff91a"
-+PV = "5.8+git${SRCPV}"
-+
-+SRC_URI = "git://github.com/facebook/${BPN}.git"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit cmake
-+
-+PACKAGECONFIG ??= "bzip2 zlib lz4"
-+PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
-+PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
-+PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
-+PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
-+
-+# Tools and tests currently don't compile on armv5 so we disable them
-+EXTRA_OECMAKE = "\
-+    -DPORTABLE=ON \
-+    -DWITH_TESTS=OFF \
-+    -DWITH_TOOLS=OFF \
-+"
-+
-+FILES_${PN}-dev += "${libdir}/cmake"
+2017-10-12 16:03 GMT+09:00 <Mikko.Rapeli@bmw.de>:
+
+> On Thu, Oct 12, 2017 at 10:03:01AM +0900, Changhyeok Bae wrote:
+> > Hi maintainers
+> >
+> > Qt 5.6 is LTS version and not GPL3 license.
+> > So why don't you keep v5.6.x in master branch?
+> > Many companies, opensource projects and developers would like to use Qt
+> > v5.6 in master branch to use it with latest yocto release.
+>
+> Hear, hear. Another complication is that users like us might be stuck with
+> an
+> older Yocto release.
+>
+> Even if v5.6.x were not maintained in master branch, it would make sense
+> for users of Qt v5.6.x in yocto world to share patches in meta-qt.
+>
+> I'll check if we could share our branch to bring Qt 5.6.2 base to jethro
+> which
+> is mostly just cherry-picked patches from krogoth branch.
+>
+> -Mikko
+
+
+
+
 -- 
-2.1.4
-
+Thanks
+Changhyeok
 
