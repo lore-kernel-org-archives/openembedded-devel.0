@@ -1,48 +1,22 @@
-Return-Path: <net147@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 8176D71974
+Return-Path: <pascal.bach@siemens.com>
+Received: from david.siemens.de (david.siemens.de [192.35.17.14])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A80771A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 07:25:07 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id z80so4964054pff.4
+	Thu, 12 Oct 2017 08:20:47 +0000 (UTC)
+Received: from mail3.siemens.de (mail3.siemens.de [139.25.208.14])
+	by david.siemens.de (8.15.2/8.15.2) with ESMTPS id v9C8KmV0023250
+	(version=TLSv1.2 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 00:25:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=cnz7wvL8+PyxsWf1q2yYAvlRV94AcSlVfT2RdQwonwM=;
-	b=j0sLMvKFAerfRy9FpLSIdmvSs0h/yG7DbgEijYg84YzbZqlcZhW2UFuKxEqB7r+BDa
-	3WsrRCQzIx3mEYQJfEdRb1bm3ERVI69NSgTaoVlvAl12qMTsHB4LxMZsZK/XxMhns8iy
-	tO46sCIsjrfvsZ05NG47Hq0vKTI5EHCd0QpTiKjj6mLxdZeGTwDICYLiUumluFa5cPO7
-	eU4BBBSPvFf5Jo8V7Sx3op/Elba0NGN8Fns9erHZjjoxrlaZ0nmkTCbdHlgbBzvhpsmL
-	TYFBOlqHH5Ynbf1cG2+5YzwdiUVoSpZ5FhZ+Zm2ssE7LKmRKEp0gfHi1i5nnQOGKdMJd
-	Wx3A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=cnz7wvL8+PyxsWf1q2yYAvlRV94AcSlVfT2RdQwonwM=;
-	b=rK0PEdkunjBPkWVt4tjmwYOs9lT6dAJJ04bGlgSCYaf9mb5Fhv7HSyxYeEpu5/B7xD
-	IIbgEMZHYWgO8xQt5RBpkYUm/oR+dJ8MmjL1CVPO+0hndSUM6sEhwTfk3loAbTXfzneA
-	000VazsYtRYaBdtXHzyiN3MEPDG6pJBmwv+zhPHQpahsIFyOYyOVggd71z9D5DvhefU+
-	Eu987/nA8WA6BuaPomzJIsl/hq6xrNNwDJxbltSjac2ucIZ6J9k0SyZeVgMqWdx59LWo
-	Bjw0uL6e8arIqIHsqrBHR3d/Vs4Q+I+jFtfnIy/y0jPxgoB2TkasoCSRiag9tqFUchq+
-	g5eA==
-X-Gm-Message-State: AMCzsaV+r46heXDjYtN57MfyY+3V45nFJmswnfx8bOzDo01xANGiyuvc
-	aAabNT480F5zWADSgtaQuEQ=
-X-Google-Smtp-Source: AOwi7QBDePqSnpX7sW34huT0QrzPCDugWDVlqVXjOi4Ktsn8EYfNp2cYV1UFivc0e1xSE1qwBYOeMg==
-X-Received: by 10.99.63.199 with SMTP id m190mr1302113pga.273.1507793108589;
-	Thu, 12 Oct 2017 00:25:08 -0700 (PDT)
-Received: from 60-242-179-244.static.tpgi.com.au
-	(60-242-179-244.static.tpgi.com.au. [60.242.179.244])
-	by smtp.gmail.com with ESMTPSA id
-	p17sm14873597pgc.66.2017.10.12.00.25.07
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 12 Oct 2017 00:25:07 -0700 (PDT)
-From: Jonathan Liu <net147@gmail.com>
+	Thu, 12 Oct 2017 10:20:48 +0200
+Received: from dev.sbt.siemens.com (MD1FZU9C.ad001.siemens.net [139.16.76.113])
+	by mail3.siemens.de (8.15.2/8.15.2) with ESMTP id v9C8KmHt005251;
+	Thu, 12 Oct 2017 10:20:48 +0200
+From: Pascal Bach <pascal.bach@siemens.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Oct 2017 18:25:44 +1100
-Message-Id: <20171012072544.18509-1-net147@gmail.com>
-X-Mailer: git-send-email 2.14.2
-Subject: [meta-oe][PATCH] nodejs: Add npx to nodejs-npm package
+Date: Thu, 12 Oct 2017 10:20:43 +0200
+Message-Id: <1507796443-11851-1-git-send-email-pascal.bach@siemens.com>
+X-Mailer: git-send-email 2.1.4
+Subject: [meta-oe][PATCHv3] rocksdb: add version 5.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,30 +29,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 07:25:07 -0000
+X-List-Received-Date: Thu, 12 Oct 2017 08:20:49 -0000
 
-${bindir}/npx is a symbolic link to npm-cli.js in the npm module.
-This avoids the nodejs package depending on nodejs-npm.
+Version 5.8 does no longer includes the facebook patent grant and is
+licensed under the Apache-2.0 or GPL-2.0 license.
 
-Signed-off-by: Jonathan Liu <net147@gmail.com>
+Tests and tools don't compile on armv5 so we disable them.
+The tools are never installed anyway so it doesn't make a difference for
+the resulting package.
+
+Signed-off-by: Pascal Bach <pascal.bach@siemens.com>
 ---
- meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-extended/rocksdb/rocksdb_git.bb | 31 +++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-index 5c580fb72..5bcbc0007 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.4.0.bb
-@@ -79,7 +79,7 @@ do_install_append_class-target() {
- }
- 
- PACKAGES =+ "${PN}-npm"
--FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm"
-+FILES_${PN}-npm = "${exec_prefix}/lib/node_modules ${bindir}/npm ${bindir}/npx"
- RDEPENDS_${PN}-npm = "bash python-shell python-datetime python-subprocess python-textutils"
- 
- PACKAGES =+ "${PN}-systemtap"
+diff --git a/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
+new file mode 100644
+index 0000000..9b19c1a
+--- /dev/null
++++ b/meta-oe/recipes-extended/rocksdb/rocksdb_git.bb
+@@ -0,0 +1,31 @@
++SUMMARY = "RocksDB an embeddable, persistent key-value store"
++DESCRIPTION = "RocksDB is library that provides an embeddable, persistent key-value store for fast storage."
++HOMEPAGE = "http://rocksdb.org/"
++LICENSE = "(Apache-2.0 | GPL-2.0) & BSD-3-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE.Apache;md5=3b83ef96387f14655fc854ddc3c6bd57 \
++                    file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://LICENSE.leveldb;md5=fb04ff57a14f308f2eed4a9b87d45837"
++
++SRCREV = "266ac245affd69555643b735d19d3715c4eff91a"
++PV = "5.8+git${SRCPV}"
++
++SRC_URI = "git://github.com/facebook/${BPN}.git"
++
++S = "${WORKDIR}/git"
++
++inherit cmake
++
++PACKAGECONFIG ??= "bzip2 zlib lz4"
++PACKAGECONFIG[bzip2] = "-DWITH_BZ2=ON,-DWITH_BZ2=OFF,bzip2"
++PACKAGECONFIG[lz4] = "-DWITH_LZ4=ON,-DWITH_LZ4=OFF,lz4"
++PACKAGECONFIG[zlib] = "-DWITH_ZLIB=ON,-DWITH_ZLIB=OFF,zlib"
++PACKAGECONFIG[lite] = "-DROCKSDB_LITE=ON,-DROCKSDB_LITE=OFF"
++
++# Tools and tests currently don't compile on armv5 so we disable them
++EXTRA_OECMAKE = "\
++    -DPORTABLE=ON \
++    -DWITH_TESTS=OFF \
++    -DWITH_TOOLS=OFF \
++"
++
++FILES_${PN}-dev += "${libdir}/cmake"
 -- 
-2.14.2
+2.1.4
 
 
