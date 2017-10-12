@@ -1,51 +1,49 @@
-Return-Path: <changhyeok.bae@gmail.com>
-Received: from mail-vk0-f67.google.com (mail-vk0-f67.google.com
-	[209.85.213.67])
-	by mail.openembedded.org (Postfix) with ESMTP id B077071A92
+Return-Path: <limon.anibal@gmail.com>
+Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 2ECFD71A92
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 12:50:18 +0000 (UTC)
-Received: by mail-vk0-f67.google.com with SMTP id t203so1349567vke.3
+	Thu, 12 Oct 2017 12:53:15 +0000 (UTC)
+Received: by mail-wm0-f43.google.com with SMTP id i124so13065354wmf.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 05:50:20 -0700 (PDT)
+	Thu, 12 Oct 2017 05:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=Ni2NNQAY5vjNWZQCId7NNEV1nlarHZLzSbKgEUPBiF4=;
-	b=dbZFq7Rht9uuBzWVcZJO0E0MOaB74rZaXoYEDYeXroVvawddAd+fHQaB2snpIY/NzA
-	F4OWsuGJYZ4tmzQhaOSyaCDeFC2iVvE0M/KnVZjXSNKXu0udOMdpwZkHNKQJBH+tsHOS
-	P95YCs2q+4++rG8rTqeQMJtgBYFjYbuDUV/6OJo52jyO2m69/IOYVNJvKTWi6Wtl3SEp
-	TIrruK99TgUvHs6jGO8B8c2evJJnAQp6I0Qp+H8M7QacrdE0naIOnu7MAB6GbWSKsLv/
-	fQEDqkR9yQYCbuTrZddBgvUfQuWLHTSnhEBt8Ov91XxC3L1Kwf2HkeZVHubvsSkzEt89
-	XoZw==
+	:cc; bh=Ji376/Z/8BQY6sW402nLOfZfFfFzxmUKpU0zE9Nqgso=;
+	b=mVEk72TmuKeVBjoAVq5W5PHiikaoIq4Sw4Mj7J1gbFvkjZZtjkZ5XQ9sXoU786lopv
+	C2DhiA2C/txbz09UotNxegcluVc/N+7LMToLVvO9iz+T3ZKK45x/KmlitOwoX/TT4CKg
+	E4d+gO6Z7LmN+5UdbZdL8K87ikLY3OnooZZ1PA/rg54AlYHapDQI6erIspKIEs7rQDQy
+	xcLTBjY/LnPXEpSl++UsyFBDbIwadmYNBz9CE29kI9vaRFVRLThWIANZvO8x+AR1DMcu
+	baJ8x6FXbe57GLYCmXYb+xglDPUqZl+kLgqWjZBQa4uOwhyVdIEvtiNcSXFE7KcVvIIn
+	XMYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=Ni2NNQAY5vjNWZQCId7NNEV1nlarHZLzSbKgEUPBiF4=;
-	b=FAX+60CdZrE8cVym72jQUvsNxiYPMD2FDBUsG8Q4zGJjq6HoFlN8rJlvgq90Gb0LTd
-	7uGp62k40wMA1xUJR1jVRHZjjKYgMurqsWPIeaYzBjHZNVQ+Qsr0FdFaIv5EFRrIplYf
-	3EVxng7K0p114R6AE8NodvjI/wjAmSvMp/tZXqRm71mLzbBXo4s6XPMnYgDQ1Tb5Cb1T
-	HWO3bivxrzfGpzVg1KTNQQdovOhr7HPwiBsr1mPpVqT/o+x/0w2FVD8R/nD+q0GPh6Ub
-	SSd7j3hiz1UcmXFeS6vWgjGKQBcMfQxmHea8VC00AXm/dLOA6tlFgC7h8d3Y+2Vlawew
-	Eshw==
-X-Gm-Message-State: AMCzsaVRNMZFANOCJ06h8v0sm2MmJSGf+Gfh1x1ZoQ08Pm6CWBZaP6cF
-	10QNBomJ2Ditz7OIqNxGdQPNHVkUZ1XLhk/rc9Y=
-X-Google-Smtp-Source: AOwi7QB5eUvvKeAb3xJdbN6qeDGREB4WpwZrHguIT4Wn4tAIVLSzra6s/QNPZknvpvDgDkTCr4nvnNgGAVBnbbfFVgo=
-X-Received: by 10.31.65.135 with SMTP id o129mr2324043vka.185.1507812619410;
-	Thu, 12 Oct 2017 05:50:19 -0700 (PDT)
+	bh=Ji376/Z/8BQY6sW402nLOfZfFfFzxmUKpU0zE9Nqgso=;
+	b=lbwoC8dl9XfJMKrtbrTjWFboQ5b0iN8npXAjo+SysXRzeUyHWG0jbvp//9DxD7xpU7
+	bC6lo4HRCg/hr954QPdW2xglcjBn9vvMC5mS69KWClJ6Sun3cxOli4SC3XK/HhWxjsCU
+	3nqc6AZ2EbUo6yYmZYFf8i7f+6WKcbZSP+GbeV1UbxBu1ayAbOLb4PwKn8xvKaoQbnsA
+	2QhPwEZfMKSY90ILl/Ys+8N5qkVogC9Gvmc4P0MAAurifEDkA0gL8g55XFY2oXWtEXL/
+	A4Eq7YcbPtFr9IfqJYQ4p3lAxn9bRJ5QYVuryIOrw4jdUet7PMyYPmQc/B0N8fDK3Vat
+	tFog==
+X-Gm-Message-State: AMCzsaVpePQIOF4XUPyWEmaWNOqEU8wJ2oBuZqVxP8lKBgla8uduBynN
+	N6WH8QwkqMyeVX+ux0Kp78ixq9ltHSEEXNLp6R4=
+X-Google-Smtp-Source: AOwi7QCyKrpQhFYXFb/6rsGUmQyyz+LffepA+KsQruU9gcvFHIy6txCkt9lv9Pb265VTRWeDSYRGGnOO7TLsLl+inDM=
+X-Received: by 10.80.212.208 with SMTP id e16mr2729343edj.263.1507812797080;
+	Thu, 12 Oct 2017 05:53:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.31.76.69 with HTTP; Thu, 12 Oct 2017 05:50:18 -0700 (PDT)
-In-Reply-To: <20171012070321.i6ajfn5bcgmjnwx5@hiutale>
-References: <CACrLJgCiTiQyCjtfzSkhHzMtBTtxF6j2=cdjxQ2byb0Cihg1uQ@mail.gmail.com>
-	<20171012070321.i6ajfn5bcgmjnwx5@hiutale>
-From: Changhyeok Bae <changhyeok.bae@gmail.com>
-Date: Thu, 12 Oct 2017 21:50:18 +0900
-Message-ID: <CACrLJgAmNZNh9PkASZdW2Y+qD-zeoc5OpN9NbFz_=YL7bx0qTA@mail.gmail.com>
-To: Mikko.Rapeli@bmw.de
+Received: by 10.80.142.72 with HTTP; Thu, 12 Oct 2017 05:53:16 -0700 (PDT)
+In-Reply-To: <CAMKF1spJt3boF3g=2kTu-wYzm8wZDTRo7hZ-5QzZ2YVU7R61MA@mail.gmail.com>
+References: <20171011143144.23691-1-limon.anibal@gmail.com>
+	<CAMKF1spJt3boF3g=2kTu-wYzm8wZDTRo7hZ-5QzZ2YVU7R61MA@mail.gmail.com>
+From: =?UTF-8?Q?Anibal_Lim=C3=B3n?= <limon.anibal@gmail.com>
+Date: Thu, 12 Oct 2017 07:53:16 -0500
+Message-ID: <CAPS-YPDSG3rZtTOb4hfoTOeD2V2w2NoLa=eVhHOeAAVgJqc+2A@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Stephen Lawrence <stephen.lawrence@renesas.com>,
-	Otavio Salvador <otavio@ossystems.com.br>,
+Cc: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linaro.org>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-qt5] Keep Qt 5.6.x
+Subject: Re: [PATCH] meta-oe/recipes-test: Add stress-ng recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,46 +56,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 12:50:18 -0000
+X-List-Received-Date: Thu, 12 Oct 2017 12:53:16 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Mikko
+On Thu, Oct 12, 2017 at 12:04 AM, Khem Raj <raj.khem@gmail.com> wrote:
 
-> I'll check if we could share our branch to bring Qt 5.6.2 base to jethro
-which is mostly just cherry-picked patches from krogoth branch.
-That's great and qt company is also managed qt 5.6.x in 5.6 branch of their
-repository (http://code.qt.io/cgit/yocto/meta-qt5.git/)
-
-Thanks
-Changhyeok
-
-2017-10-12 16:03 GMT+09:00 <Mikko.Rapeli@bmw.de>:
-
-> On Thu, Oct 12, 2017 at 10:03:01AM +0900, Changhyeok Bae wrote:
-> > Hi maintainers
+> On Wed, Oct 11, 2017 at 7:31 AM, An=C3=ADbal Lim=C3=B3n <limon.anibal@gma=
+il.com>
+> wrote:
+> > From: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
 > >
-> > Qt 5.6 is LTS version and not GPL3 license.
-> > So why don't you keep v5.6.x in master branch?
-> > Many companies, opensource projects and developers would like to use Qt
-> > v5.6 in master branch to use it with latest yocto release.
+> > A tool to generate load and stress a system, currently this recipe
+> > is on a couple of layers [1] and is not updated, a good reason to
+> > have in meta-oe.
+> >
+> > [1] https://layers.openembedded.org/layerindex/branch/master/
+> recipes/?q=3Dstress-ng
+> >
+> > Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
+> > ---
+> >  meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18
+> ++++++++++++++++++
+> >  1 file changed, 18 insertions(+)
+> >  create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> >
+> > diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> > new file mode 100644
+> > index 000000000..f8b0a0d27
+> > --- /dev/null
+> > +++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> > @@ -0,0 +1,18 @@
+> > +SUMMARY =3D "A tool to load and stress a computer system"
+> > +HOMEPAGE =3D "http://kernel.ubuntu.com/~cking/stress-ng/"
+> > +LICENSE =3D "GPLv2"
+> > +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4=
+a42
+> 63"
+> > +
+> > +DEPENDS =3D "zlib libaio"
+> > +
+> > +SRC_URI =3D "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar=
+.gz
+> "
+> > +
+> > +SRC_URI[md5sum] =3D "e0f6497a8c06f5d652bc2ad88d449c12"
+> > +SRC_URI[sha256sum] =3D "37cc73e42f5bdb0e0571ba88f6a69b
+> 8f05ee28e51afcafc2231c1058b1a5dd18"
+> > +
+> > +CFLAGS +=3D "-Wall -Wextra -DVERSION=3D'"$(VERSION)"' -O2"
 >
-> Hear, hear. Another complication is that users like us might be stuck with
-> an
-> older Yocto release.
+> do we need -O2 always?
 >
-> Even if v5.6.x were not maintained in master branch, it would make sense
-> for users of Qt v5.6.x in yocto world to share patches in meta-qt.
->
-> I'll check if we could share our branch to bring Qt 5.6.2 base to jethro
-> which
-> is mostly just cherry-picked patches from krogoth branch.
->
-> -Mikko
+
+No isn't required, i will remove the flag and let the buildsystem put the
+optimization per machine.
+
+Anibal
 
 
-
-
--- 
-Thanks
-Changhyeok
+> > +
+> > +do_install_append() {
+> > +    install -d ${D}${bindir}
+> > +    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
+> > +}
+> > --
+> > 2.11.0
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
