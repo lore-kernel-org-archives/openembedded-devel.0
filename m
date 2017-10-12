@@ -1,49 +1,49 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 6FACA6010B
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f169.google.com (mail-pf0-f169.google.com
+	[209.85.192.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6B4A860068
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Oct 2017 02:22:44 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id r68so3138359wmr.4
+	Thu, 12 Oct 2017 05:05:02 +0000 (UTC)
+Received: by mail-pf0-f169.google.com with SMTP id b79so3367813pfk.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Oct 2017 19:22:46 -0700 (PDT)
+	Wed, 11 Oct 2017 22:05:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/8EajzSh48K5wW5jV9CqpRMtheIqxhyJzSarbCUNTg8=;
-	b=PSvqZo9iLDwaODdCT+PwxlTARhFLPT20IdytCzLs6/0WeweYqGZZfxMOmEbq2Vw8H3
-	czeDRE5kpTie1dy2avyj42CBfp+nUFwkV8dQ6TlAS39hixOoUe2FLHTO1zWGlfEZVeys
-	+g8/mEKsIMN2Bzh5GNsHGogK8LCYu874rd/3WpZfDZZw//ElY0lIGZMXD3rmpK05SLx1
-	ie+Y897Bi42KqLu5KNS+gm6rBCtlHh5p5apRMPLZ/KUMobc3l14QP3+PP1Ya+nOj/o0D
-	yQZ7kY87skyvXVMzNcX9jVpPXz+oalbp7B3wo0OJewdWFB19tbiJKobpP68kIN1sOd80
-	GL2w==
+	:cc:content-transfer-encoding;
+	bh=XjS+AgCR7U77akL/NWMELBhesh05j+UB2zOsG674iLk=;
+	b=Nc44EtGIHAV5GlBHZ4+VNsOSDjbxACRV/JedF4vbq2c6i0/pFwCurj1p84aHV4icum
+	D+PVd5mGV/vMTtZ7iTgM/LYGFPbJqFIMPvY9wRQyrbndvZsaBQTrHBB5eZGQkOldTPh6
+	3+PEk/jqN6PO1d20t9eZW4WGD9FkXq9I8lmDLnkdG6OBWOsGvWXL6jat67JahnQTQjea
+	CyDoa2RrEaFZ/IYg3JR5le+6YKgtlNPivibmvAjjUVRxw4EcA/aL3jWWPh6V8b7QP4+T
+	5HQdq53vp8pcZxYGputJTMUryF77hu88nPyCwFFzd2qJRc8cIh2lR2MpOGJL3W2+q0cM
+	/++g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/8EajzSh48K5wW5jV9CqpRMtheIqxhyJzSarbCUNTg8=;
-	b=nrqEe+ODISmvfMpg2WU4nq8o7K8Jho4QZsKDyO8YKTnfg7wnuqG+FwDATmYxMjIl/J
-	nv2L8Y5L2IYrL59J5cs9b66nyWVgy4sXQaf65wX2Xy8+9hJJL2CBdFj+j0xF7+OPzF9b
-	piMV/7smm/I/rSTyELpKVOgGQeHYk1OHS1TtdBecw8sJ8cBC6g5VOEX3SYvpn+G1CrO9
-	VoxMClgyPjr/70yN+SOijZ3EkKJJ86ZPK8BEdJuPLfeDGwkjbHUbgmToN+PfGoIYfp08
-	31NK6XyGodl/Hg8osHwMZ3Hwv9lOfmLA1iQTKsn1sOdp4m9RCuMKYREAwofgBCWPh3nS
-	ulBQ==
-X-Gm-Message-State: AMCzsaVOKT/zduHdjF9TZkilD59xcg/R1joyk/o+F34yB7FCmNnjBI+M
-	173JTc7uDS2lPX6RlONUJIZRrOOwXMUFDTD/rWg=
-X-Google-Smtp-Source: AOwi7QA5+nXUS/pgGKPb283AP5W+vvSBjjFBnf0xSi47GKIBda/rQ1oDyc3b4BGzU+kZbGSVSSneesQBafiCjaH53zw=
-X-Received: by 10.223.143.56 with SMTP id p53mr598961wrb.179.1507774966117;
-	Wed, 11 Oct 2017 19:22:46 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=XjS+AgCR7U77akL/NWMELBhesh05j+UB2zOsG674iLk=;
+	b=G4HGLx8X5FUJP2IvdEb8PZ/LaOmnLq/YnhJfYgjVUOXcrElMn6MgE44oQNsA6gaEwE
+	dA1IaQdTaD8+26uR7I8Kq+7GpowJ7fFAz3x6r13f/fbYgc/aK4ZHzc0pl/3oZ9b+gZUF
+	NDd2zf54IeX8m4iiLYbUwJqGpaumI2H9DHLHVU5ogVG9Y76s+8RARWQcY69GNkjp7y7u
+	KzyVyDVOxl1OziIvL+P5+YwnpI2MtyMONSFoHBX69tmDFVfThdwuozOB3wbby6AURYGK
+	tUNfmqLu9PolFVMdjDcu/RHs00RDYFVwhRWmnAenFpfMmVdMLzTnJmLq5qpnHsjlFXVV
+	hd0w==
+X-Gm-Message-State: AMCzsaXKmSuB/Ga6jcRUNGIyvZtLLo/ZazCThtwl8bkp7hVY7rh/dqSq
+	x/KQ4rXfzs8vzIefebbBo3hKDUjamYlSvjA3MAA=
+X-Google-Smtp-Source: AOwi7QDF/He6whbfsbGI0xn2ZKV3lbLrLmGOzbxlhqNmNGyHqe43J9tpMwCcLUbmhOLeT7aGnTUjcp4YPULlIwAjtuA=
+X-Received: by 10.84.204.133 with SMTP id b5mr1126712ple.440.1507784703824;
+	Wed, 11 Oct 2017 22:05:03 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Wed, 11 Oct 2017 19:22:45 -0700 (PDT)
-In-Reply-To: <CACrLJgCiTiQyCjtfzSkhHzMtBTtxF6j2=cdjxQ2byb0Cihg1uQ@mail.gmail.com>
-References: <CACrLJgCiTiQyCjtfzSkhHzMtBTtxF6j2=cdjxQ2byb0Cihg1uQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 12 Oct 2017 04:22:45 +0200
-Message-ID: <CA+chaQe38aKLQakMfZVjyZvvi0eqANwHBYZaJadLFCutRe1wwg@mail.gmail.com>
-To: Changhyeok Bae <changhyeok.bae@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Stephen Lawrence <stephen.lawrence@renesas.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-qt5] Keep Qt 5.6.x
+Received: by 10.100.187.66 with HTTP; Wed, 11 Oct 2017 22:04:33 -0700 (PDT)
+In-Reply-To: <20171011143144.23691-1-limon.anibal@gmail.com>
+References: <20171011143144.23691-1-limon.anibal@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 11 Oct 2017 22:04:33 -0700
+Message-ID: <CAMKF1spJt3boF3g=2kTu-wYzm8wZDTRo7hZ-5QzZ2YVU7R61MA@mail.gmail.com>
+To: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <limon.anibal@gmail.com>
+Cc: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] meta-oe/recipes-test: Add stress-ng recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,38 +56,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Oct 2017 02:22:45 -0000
+X-List-Received-Date: Thu, 12 Oct 2017 05:05:02 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi Changhyeok,
-
-do we have a volunteer to maintain it?
-
-As you know, it's possible to use meta-qt5/krogoth (with 5.6 Qt) together
-with newer Yocto releases, currently it doesn't even need any difficult
-work arounds to make it compatible.
-
-If there is someone volunteering to maintain some meta-qt5/master-5.6
-branch, I would accept the patches. But I don't want to maintain 2 sets of
-.patch files for many qt* recipes in the same branch (and also some qt*
-projects are available in only one of these versions). I was maintaining
-multiple versions in the same branch before and it was quite painful, it's
-quite a mess even with one version and I would prefer to spend my free time
-on something else.
-
-Regards,
-
-On Thu, Oct 12, 2017 at 3:03 AM, Changhyeok Bae <changhyeok.bae@gmail.com>
-wrote:
-
-> Hi maintainers
+On Wed, Oct 11, 2017 at 7:31 AM, An=C3=ADbal Lim=C3=B3n <limon.anibal@gmail=
+.com> wrote:
+> From: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
 >
-> Qt 5.6 is LTS version and not GPL3 license.
-> So why don't you keep v5.6.x in master branch?
-> Many companies, opensource projects and developers would like to use Qt
-> v5.6 in master branch to use it with latest yocto release.
+> A tool to generate load and stress a system, currently this recipe
+> is on a couple of layers [1] and is not updated, a good reason to
+> have in meta-oe.
 >
-> Thanks
-> Changhyeok
+> [1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=
+=3Dstress-ng
 >
+> Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
+> ---
+>  meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18 +++++++++++++++=
++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+>
+> diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-o=
+e/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> new file mode 100644
+> index 000000000..f8b0a0d27
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "A tool to load and stress a computer system"
+> +HOMEPAGE =3D "http://kernel.ubuntu.com/~cking/stress-ng/"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> +
+> +DEPENDS =3D "zlib libaio"
+> +
+> +SRC_URI =3D "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.g=
+z"
+> +
+> +SRC_URI[md5sum] =3D "e0f6497a8c06f5d652bc2ad88d449c12"
+> +SRC_URI[sha256sum] =3D "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2=
+231c1058b1a5dd18"
+> +
+> +CFLAGS +=3D "-Wall -Wextra -DVERSION=3D'"$(VERSION)"' -O2"
+
+do we need -O2 always?
+
+> +
+> +do_install_append() {
+> +    install -d ${D}${bindir}
+> +    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
+> +}
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
