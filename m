@@ -1,53 +1,50 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f44.google.com (mail-pg0-f44.google.com [74.125.83.44])
-	by mail.openembedded.org (Postfix) with ESMTP id D97CF77BC3
+Return-Path: <chgans@gmail.com>
+Received: from mail-qk0-f176.google.com (mail-qk0-f176.google.com
+	[209.85.220.176])
+	by mail.openembedded.org (Postfix) with ESMTP id EBEFC6FF73
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2017 23:05:36 +0000 (UTC)
-Received: by mail-pg0-f44.google.com with SMTP id y7so2295422pgb.7
+	Sun, 15 Oct 2017 12:11:43 +0000 (UTC)
+Received: by mail-qk0-f176.google.com with SMTP id x82so9850374qkb.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Oct 2017 16:05:38 -0700 (PDT)
+	Sun, 15 Oct 2017 05:11:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=LRAu9Shii9xsFjijUsgaZbngSmAiU9WPAuuipD+rgO4=;
-	b=TslaGpDnXNj+qdFXhNffY9UD4grLjRRbBDbx1g807By6f/DHT4OZ1eJivfmsT88woL
-	XZcr8DoPgw/RU3uUauEHNrusr3wT6iiKS/AdDsHS77XZV6XOqSzQNVYMWZZX93XKSRyv
-	01WtZSbKI3PivJ//0aJqWjbPxAyEJnfSySlzgY3dynOAfsw9DpBlhz8YtgonMHS8MF1S
-	O8mKuQtqU33NGg+UhZEx1cY4Mg8WUbzoCMTT9xmZAjR5lnUxuECAOxXHQO4r+sL8+bre
-	zgbk71uqNrvnOPVZ2w7VFxLzCbylDZ2BcHEQ4oNSUusR1TxILOWANUjYm9BRDBCwuq9x
-	kzAQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=YdQKp0Ltmif3wEwBP/LOD59/CN8Qwv3AY07uqWYd3i8=;
+	b=leAorp7Kl1ESsHp0VjZT5+maAPXM0ZM0gezV6JfkiugGg8cyC2/D/hVeV9AeoejY4E
+	gSzo18QGkVpIGQf35ch8flZBOq5oFru+meG4YMx60nvbLoD+tIRBNn8y3pgpvBXuYkJZ
+	cBDOsvVDhrg8z8aseeXN+KycDNhVDfxa0nOz95lQfMx0rrwwpH5lYe0+41M77wKI7yFk
+	veD3ANPR6rxGZQSNR/Hkew/8cHIvhMNkqZ/1KySimXeecFGfsG6nmdvS0v5Hm2yqYd4W
+	hekNKg5FOGOkRjc8+TbMTa0sMYk04SnhYCliI99uBUcJHNoPnzPTQpLYTklbVCm41zA5
+	xq+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=LRAu9Shii9xsFjijUsgaZbngSmAiU9WPAuuipD+rgO4=;
-	b=jq3BkaWYCYTQ3MP/4OxMwGevI1HJMyQ2oZBd5LS9uOZXcqWZnNkZr1MYY6eBugBm9n
-	yxAnnsLiQ2AqqlQqtqP7/oZudjxv3ozP/YoU5IuEnq9aABSIvO/qhtxhcObamWJb9FpV
-	SyYRFDSgfW66qJ7h/Zm1h83F+SONNWsLw5bDDkfIb2jHSZPjA9ZQ0x9hLyyP/Ti6n5FT
-	idULOcQwG1Q+wJM/UeyEP4hiv3mGHg/XM4cDZ6eglkveeKacR4UEfBj7MVyytM4VKoym
-	um7vmvCOnLCFaOu8R2b+AugnOcCMgjS2MKUOYJLHB6YVKqSiQkmJ/RtCuycyIC2Tf53h
-	L21w==
-X-Gm-Message-State: AMCzsaV2bwXyoWn1q8jFDDwMkjfmG1YMz9kQcjggdD3NhnGn+GeQjcNY
-	2b+SHVdD306byuEuesJUdJKu1nzy2ehqxkSLI0I=
-X-Google-Smtp-Source: AOwi7QC/1NGLs44lbeIjZeQ/9G73EfQUPgohIXga+iyb3kWn5yMldM0s2JSx6DQjVSX+lCOhRuN481wAoCnBCUsDkx0=
-X-Received: by 10.98.34.85 with SMTP id i82mr2576201pfi.111.1507935937985;
-	Fri, 13 Oct 2017 16:05:37 -0700 (PDT)
+	bh=YdQKp0Ltmif3wEwBP/LOD59/CN8Qwv3AY07uqWYd3i8=;
+	b=jl4cIcGiDroS55SgeL5UE1PoLOkppuVKH9yCSl6BHfb5xJ6J9VPzD/IDCbcVXV1FNp
+	k+AsRtvUuGraSJ64lQdGP1DbcfI2ChQNFi70AMcDhEBl5G1CritGkcitOCaMNXsjd+UL
+	y3MTuo9mkMnupyWzgy86GKfmJIMM9M4c747V5e6OY+0zNvhoXPp/C3dCq4l44DGdWYF9
+	H/J9xy3q1xE5NWJLtk0LfUZ09dz9CYO0DbRtlrreUW23tfHnE3txaBDHYARMKyyedq7G
+	dRXJUNrAdWs60fpvh1AEawe/6uSWHe7gsDS9t77RInKp9pmBPL1NZs1h8q6cLTSVtIZb
+	U7lw==
+X-Gm-Message-State: AMCzsaUWNsb+pETKoVHRqqYZGBL0xTWSztG6qxMlHgACaac3Z6PpFh5j
+	5ip2jp38HOY3DGfO8gCD3bz3MAlAVvD0AXIttrPEAw==
+X-Google-Smtp-Source: AOwi7QBU2OoXeMUGCcnj3eDn3DjE7u7NETpGVei2scHAp8os1BvghCjbzXqDKIqZD6qQmKXQjHP6WorbVxD+yWIjKcQ=
+X-Received: by 10.55.75.15 with SMTP id y15mr8829513qka.321.1508069504607;
+	Sun, 15 Oct 2017 05:11:44 -0700 (PDT)
 MIME-Version: 1.0
-References: <20171003234535.GG16828@denix.org>
-	<20171013012110.GM9221@denix.org>
-	<20171013034825.ispcwc762ls3ttes@apollo>
-	<20171013173519.GO9221@denix.org>
-	<CAMKF1sr7EzrpKKL=CEVisx-p6rB2ba1F4Bncjnij=TKNAcFT6A@mail.gmail.com>
-	<20171013194729.GP9221@denix.org> <20171013203434.GQ9221@denix.org>
-	<CAMKF1soc3_+t6KL5LJjLiDy64FzdVudqshwWFxyU6kTLEfmbdQ@mail.gmail.com>
-	<20171013225833.GR9221@denix.org>
-In-Reply-To: <20171013225833.GR9221@denix.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Oct 2017 23:05:26 +0000
-Message-ID: <CAMKF1sp5rEHc9Zs2QdW7A_PVzQDZmFypeO9SkLx9Mjzc3+ynzQ@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: nativesdk-qtbase 5.9.2 C++11 errors with gcc 6.3?
+Received: by 10.140.19.138 with HTTP; Sun, 15 Oct 2017 05:11:44 -0700 (PDT)
+In-Reply-To: <HE1PR0202MB2491EF42CA7564345575961086660@HE1PR0202MB2491.eurprd02.prod.outlook.com>
+References: <1505961647-21967-1-git-send-email-kwangsub.kim@qt.io>
+	<CABxGUTixb-TtB0ZQh4k4oi1SCPzXsse9fhwroMh+3MujCqurmA@mail.gmail.com>
+	<HE1PR0202MB2491EF42CA7564345575961086660@HE1PR0202MB2491.eurprd02.prod.outlook.com>
+From: Christian Gagneraud <chgans@gmail.com>
+Date: Mon, 16 Oct 2017 01:11:44 +1300
+Message-ID: <CABxGUTgSUMy2y3OhCRbXJeVseti77DUc+-e+XsN61BjwW0jT+Q@mail.gmail.com>
+To: Kwangsub Kim <kwangsub.kim@qt.io>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qt5: add missing commercial license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,196 +57,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Oct 2017 23:05:37 -0000
+X-List-Received-Date: Sun, 15 Oct 2017 12:11:44 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Oct 13, 2017 at 3:58 PM Denys Dmytriyenko <denis@denix.org> wrote:
+On 22 September 2017 at 02:31, Kwangsub Kim <kwangsub.kim@qt.io> wrote:
+> I agree on clearing up complex logical expressions of licenses. But
+> I think it's another topic because it would need wider updates including
+> the other packages unrelated to commercial license fix.
+> What about discussing about it on new thread after this patch?
 
-> On Fri, Oct 13, 2017 at 10:14:49PM +0000, Khem Raj wrote:
-> > On Fri, Oct 13, 2017 at 1:34 PM Denys Dmytriyenko <denis@denix.org>
-> wrote:
-> >
-> > > On Fri, Oct 13, 2017 at 03:47:29PM -0400, Denys Dmytriyenko wrote:
-> > > > On Fri, Oct 13, 2017 at 11:57:17AM -0700, Khem Raj wrote:
-> > > > > On Fri, Oct 13, 2017 at 10:35 AM, Denys Dmytriyenko <
-> denis@denix.org>
-> > > wrote:
-> > > > > > On Thu, Oct 12, 2017 at 08:48:25PM -0700, Khem Raj wrote:
-> > > > > >> On Fri, Oct 13, 2017 at 01:21:10AM +0000, Denys Dmytriyenko
-> wrote:
-> > > > > >> > Khem,
-> > > > > >> >
-> > > > > >> > I tried following on your suggestion to add #include <cmath>,
-> but
-> > > it is
-> > > > > >> > already there in src/corelib/global/qnumeric_p.h
-> > > > > >> >
-> > > > > >> > Not sure why target qtbase builds fine with oe-core gcc
-> 6.3.0, but
-> > > > > >> > nativesdk-qtbase fails with this error... Any more ideas?
-> Thanks.
-> > > > > >>
-> > > > > >> Do you use uninative ? if not then try with uninative.
-> > > > > >> It seems to be mixing headers from your build host and nativesdk
-> > > sysroot
-> > > > > >> there could be several reasons for that. You can also try to
-> build
-> > > on
-> > > > > >> a different distro on host may be one which has gcc6 as host
-> gcc.
-> > > > > >
-> > > > > > Tried uninative - didn't help, same issue.
-> > > > > >
-> > > > > > I'm not so sure host headers are getting in the mix - it's Ubuntu
-> > > 16.04 with
-> > > > > > gcc 5.4 on it, while switching between gcc 6.3 and gcc 7.2 in
-> > > oe-core/master
-> > > > > > works with 7.2, but not 6.3.
-> > > > > >
-> > > > > > I can see if I can try on a host with gcc 6...
-> > > > >
-> > > > > I have gcc 6.4 recipes here
-> > > > >
-> > > > > https://github.com/kraj/openembedded-core/tree/kraj/master
-> > > > >
-> > > > >
-> > >
-> https://github.com/kraj/openembedded-core/commit/c5afea428484b8af7449e80db109913b81f40f18
-> > > > >
-> > >
-> https://github.com/kraj/openembedded-core/commit/e0c1d5bab99f6fd75fea5f89cecb7dcffdbae3bf
-> > >
-> > > And gcc 6.4 from 2 patches above didn't help on Ubuntu 16.04...
-> > >
-> > >
-> > Ok I think it could be the c++ abi change that Ubuntu headers might be
-> > having in combination with sdk
-> >
-> > Did old OE releases with gcc6 on this host  fail in same way ?
->
-> Nope, been using Ubuntu 16.04 with morty a lot w/o any issues, including
-> past
-> versions of Qt5. This is the first time I see this issue with Qt 5.9...
+Yeah, maybe. Does Yocto care about license ambiguity? My understanding
+was that yes it does.
+The pitch is that it's one of the Yocto's strength: get a clear
+picture about license issue, isn't it?
 
+I've been following and using yocto/bitbake/oe/poky/angstrom/... for a
+wee while now and i think that the current state of licensing is
+out-of-control, yet Yocto/LF pretends to be in full-control.
 
+Qt licensing is not an easy topic. The Linux Fundation needs to be
+razor sharp about it.
 
-It probably never got tested in previous versions with this particular case
-May be try reducing the testcase to small one or see if you can compile
-same version of qt with morty
+What can i access from meta-qt5 in [L]GPLv(2|3) mode?
+Is LF's meta-qt5 safer than Qt's own meta-qt5?
 
->
->
->
-> > > > BTW, tried on my Gentoo machine with gcc 6.4 as a host and it
-> worked...
-> > > > So, it does look like a host contamination in Ubuntu 16.04 with gcc
-> 5.4.
-> > > > But why didn't uninative help?
-> > > >
-> > > >
-> > > > > >> > On Tue, Oct 03, 2017 at 07:45:35PM -0400, Denys Dmytriyenko
-> wrote:
-> > > > > >> > > Martin, Khem,
-> > > > > >> > >
-> > > > > >> > > Have you tried building Qt 5.9 with gcc 6.3 from oe-core?
-> I'm
-> > > seeing bunch of
-> > > > > >> > > what seems to be C++11 related errors during do_configure of
-> > > nativesdk-qtbase.
-> > > > > >> > > Target qtbase builds fine and switching to gcc 7.2 seems to
-> > > resolve it as well.
-> > > > > >> > >
-> > > > > >> > > Any ideas or pointers? Thanks!
-> > > > > >>
-> > > > > >>
-> > > > > >> > >
-> > > > > >> > >
-> > > > > >> > > Errors are like these:
-> > > > > >> > >
-> > > > > >> > > In file included from
-> > > ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1:0,
-> > > > > >> > >                  from
-> > >
-> /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:
-> > > In function 'bool qnumeric_std_wrapper::__builtin_isnan(double)':
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:45:
-> > > error: '__builtin_isnan' is not a member of 'std'
-> > > > > >> > >  static inline bool isnan(double d) { return std::isnan(d);
-> }
-> > > > > >> > >                                              ^~~
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:45:
-> > > note: suggested alternatives:
-> > > > > >> > > <built-in>: note:   '__builtin_isnan'
-> > > > > >> > > In file included from
-> > >
-> /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/recipe-sysroot/tmp/sdk/sysroots/x86_64-oe-linux/usr/include/c++/6.3.0/cmath:45:0,
-> > > > > >> > >                  from
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:56,
-> > > > > >> > >                  from
-> > > ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1,
-> > > > > >> > >                  from
-> > >
-> /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:104:20:
-> > > note:   'qnumeric_std_wrapper::__builtin_isnan'
-> > > > > >> > >  static inline bool isnan(double d) { return std::isnan(d);
-> }
-> > > > > >> > >                     ^
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:
-> > > At global scope:
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:105:20:
-> > > error: expected ')' before '(' token
-> > > > > >> > >  static inline bool isinf(double d) { return std::isinf(d);
-> }
-> > > > > >> > >                     ^
-> > > > > >> > > In file included from
-> > > ../include/QtCore/5.9.2/QtCore/private/qnumeric_p.h:1:0,
-> > > > > >> > >                  from
-> > >
-> /OE/master/build/tmp-glibc/work/x86_64-nativesdk-oe-linux/nativesdk-qtbase/5.9.2+gitAUTOINC+73573fce29-r0/git/src/corelib/tools/qarraydata.cpp:42:
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:
-> > > In function 'bool qnumeric_std_wrapper::__builtin_isfinite(double)':
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:106:48:
-> > > error: '__builtin_isfinite' is not a member of 'std'
-> > > > > >> > >  static inline bool isfinite(double d) { return
-> > > std::isfinite(d); }
-> > > > > >> > >                                                 ^~~
-> > > > > >> > >
-> > >
-> ../include/QtCore/5.9.2/QtCore/private/../../../../../../git/src/corelib/global/qnumeric_p.h:106:48:
-> > > note: suggested alternatives:
-> > > > > >> > > <built-in>: note:   '__builtin_isfinite'
-> > > > > >> > > --
-> > > > > >> > > _______________________________________________
-> > > > > >> > > Openembedded-devel mailing list
-> > > > > >> > > Openembedded-devel@lists.openembedded.org
-> > > > > >> > >
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > > > > >>
-> > > > >
-> > > > --
-> > > > _______________________________________________
-> > > > Openembedded-devel mailing list
-> > > > Openembedded-devel@lists.openembedded.org
-> > > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
->
+What i can access with a commercial Qt license as of October 2017 is
+purely a "The Qt Company" business decision.
+
+"Hackers" wan't to know, without ambiguity, what they have access to
+given a "license" context (Open source or commercial).
+
+My 2 cents.
+Chris
 
