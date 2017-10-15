@@ -1,50 +1,47 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 1FA65600BC
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 493626E671
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2017 22:49:20 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id i124so31132908wmf.3
+	Sun, 15 Oct 2017 23:14:52 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id b189so6248810wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Oct 2017 15:49:22 -0700 (PDT)
+	Sun, 15 Oct 2017 16:14:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=wDT/MLZIHd6AUHRDvjcf9jVmvH1PUl18hD/AfpIO+TI=;
-	b=b9AeBXG3zro9EuizrCoIe+KGKp3lIv/T/esjpVpr9agzL0xXVXoJm3bCDx2SrIac/4
-	wDpqyXoEo7ADxkTvbOURgpfysrh7FaGGUQ5SnUQG80Yru4iU6VAH/qap9ZbwTU7uDt/b
-	7CqWIuTiPnpM8dg3eZikxT/8P9naUykRVHGuf4FUB56YvJ2rr7xEf/Yf/gVH8UFxNdW8
-	+GNqz17e+EOL20DUIPfy+b5LyGYuzr18Y5Z6SrphdtEvYr1uc0ZP85JnNqQpg2k4Yqt4
-	8506HNA5lX4KprpuJYiVH9LmL+ctNYACWvhGJ0xHO16uPtLghQk84gIaKvXdyMnUfFC2
-	NE6Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=nLeKeX+ndVMwwujCWlXrAzTUwWYBndu6Nocpd0SfttU=;
+	b=HYTu9u5n/10XvWhz8quy8F13ZfTzrUD+5ANNzNf5Kgy6whJMXUf/13UosTyPjwBQ91
+	ibOd9964e2WxZZcZs9knJdNv/7FACkrbBkIu0bRehvciRJ+KJp+4385VjZHF8f9kFBpv
+	isoMoIrJR3PEBnTpw8/uqTcM3EhOfG7FLU7N6KGZ3XOPHbvDcXfCyP6BtDNTvnbhtrWx
+	RwrcvC3YMaIZ17jfiej97ZH0LRFUw+G9n/YyDQndIURa8o0H/1YL33bHbA+mDDUeEaqV
+	3V2CNGiOVqA2tu2b2DXmKy89+dIROe9iX7e2tp7jyN3jB3+Bwiszb/kd7XOtpgVTdLrd
+	OKsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=wDT/MLZIHd6AUHRDvjcf9jVmvH1PUl18hD/AfpIO+TI=;
-	b=JhYiVeSfUFn4zqgCOTzdHxRQJ61CgdB3IRrh2t9hZwSUnDwIuuxfnFJI/iiNZdV35c
-	SnmhH8FJkHzKYZhpMVwkmGG6vpnhQ/jwPKMGx4ttTSXchUMsJoWRZzdEFj7eSv8zPQl+
-	UbHap0gRKaxBviYFisygsThRWAr4hPekQl9XHNrYBH0MVFMLsSv+f5zWyfkSMwAZw1Et
-	czmLU7ukX4bsuVTcv6GjVvCKtyOfK84IO4BYif0J1zo3iir8be0MhWsy1mfM7XHTVszX
-	QY2Wna5ZaD8SZCDQ+iorcXMt57WoCDy2BHwxV8ON2sImuR123LlYkPnBzoWRgeWzyBTT
-	/6rA==
-X-Gm-Message-State: AMCzsaV+5EFaxQjpCtGoR21B1lOTWsuBRhx+E+YH1QfoFqR5EijvNzd9
-	TeGUa2i5Ikz9g6zzkLDo9k+wx/DeCyrCQdu7Y4E=
-X-Google-Smtp-Source: ABhQp+QXuKh/IA5dF8HSySjwW5a1ZGCTnv7CkYG2XkMysxiJzSfeVWYZvjOjqedHfyHdhFbA/RTO5/weT4hklHqZDAw=
-X-Received: by 10.28.63.150 with SMTP id m144mr5707364wma.141.1508107761856;
-	Sun, 15 Oct 2017 15:49:21 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=nLeKeX+ndVMwwujCWlXrAzTUwWYBndu6Nocpd0SfttU=;
+	b=sZp4AuuPMXYSJQ+3VaAgxsWjVBLw3ImrGWAE0i/uUxVX6tO8KxAZtTxn3Q+1Hblpml
+	jTAbgZg2cpouUzImV6WjVmS0L+05/25w27/ChivLpkgYZBxmpkY/gTWdwDoa4k1A4vUZ
+	BeSaIIkBmRCmjk3BvhHzASq7tJYRV0dea8pmDafAgvNVguFivw0l3aLCrcI66QZlqap2
+	6427mKetUyqaLoq0Ugb3dZBq/Tl0GdmB1nabF8JydsFF4swMoAYzEi/kvRq/aSAIF9ZG
+	FLCYx/R0vbbLsKbA6LcoD4675rccSM+VvEselBnvm34KbOZy6xs+2PbCAE/EO9yXm/I9
+	DAzw==
+X-Gm-Message-State: AMCzsaUPzdzCuVKuRR+KDvV2KAAw6fgmMQVp2Tuqea8cDRZ0EJLRoGXQ
+	mzi9T/H+l6ZJJJ9lcfcd+BsLiObSt3SaM/97v1ZHhA==
+X-Google-Smtp-Source: ABhQp+QI5WdTz04ZlXCUPiIiMaRL9v41tW8dOhfUV9ULo/Ijfp4a9YWHGiAKsjdGPGR2Gx7MVaifnOuRvzrmJT3D+vc=
+X-Received: by 10.223.134.68 with SMTP id 4mr7271871wrw.67.1508109293950; Sun,
+	15 Oct 2017 16:14:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Sun, 15 Oct 2017 15:49:21 -0700 (PDT)
-In-Reply-To: <20171013025743.nlxch4j5pao44wmg@mentor.com>
-References: <CAGhGL2Bd662Mb87cei+iHMMhUw4jyaAE9_pdGfBa3pE7BMQ=TQ@mail.gmail.com>
-	<10260041.MN3fDUgrsp@peggleto-mobl.ger.corp.intel.com>
-	<CA+chaQeTz0HknzwEBTjnh=AySYPe0_oDP6Zv4M_74RjnthQRzw@mail.gmail.com>
-	<20171013025743.nlxch4j5pao44wmg@mentor.com>
+Received: by 10.28.183.212 with HTTP; Sun, 15 Oct 2017 16:14:53 -0700 (PDT)
+In-Reply-To: <20171011073521.15508-1-mikko.ylinen@linux.intel.com>
+References: <20171011073521.15508-1-mikko.ylinen@linux.intel.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 16 Oct 2017 00:49:21 +0200
-Message-ID: <CA+chaQdNB+DsZighTTg58sA-RyFMPEP0TCuJzrPG-FJNjQmdNQ@mail.gmail.com>
-To: Joe MacDonald <Joe_MacDonald@mentor.com>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Oct 2017 01:14:53 +0200
+Message-ID: <CA+chaQdLD0cS0vFugYi7xK8o1=MzyyE7pC3X4ReKCppGae_Faw@mail.gmail.com>
+To: Mikko Ylinen <mikko.ylinen@linux.intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: Yocto security responses.
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] mraa/upm: enable nodejs bindings by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,47 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Oct 2017 22:49:21 -0000
+X-List-Received-Date: Sun, 15 Oct 2017 23:14:53 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Oct 13, 2017 at 4:57 AM, Joe MacDonald <Joe_MacDonald@mentor.com>
+Breaks qemuarm builds:
+
+NOTE: Resolving any missing task queue dependencies
+ERROR: Nothing RPROVIDES 'nodejs' (but
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/mraa/mraa_git.bb,
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/upm/upm_git.bb
+RDEPENDS on or otherwise requires it)
+nodejs was skipped: incompatible with machine qemuarm (not in
+COMPATIBLE_MACHINE)
+NOTE: Runtime target 'nodejs' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['nodejs']
+NOTE: Runtime target 'upm-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['upm-dev', 'mraa', 'nodejs']
+NOTE: Runtime target 'upm' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['upm', 'mraa', 'nodejs']
+NOTE: Runtime target 'mraa' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['mraa', 'nodejs']
+ERROR: Nothing RPROVIDES 'mraa-dev' (but
+/home/jenkins/oe/world/shr-core/meta-openembedded/meta-oe/recipes-extended/mraa/mraa_git.bb
+RDEPENDS on or otherwise requires it)
+No eligible RPROVIDERs exist for 'mraa-dev'
+NOTE: Runtime target 'mraa-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['mraa-dev']
+
+
+
+On Wed, Oct 11, 2017 at 9:35 AM, Mikko Ylinen <mikko.ylinen@linux.intel.com>
 wrote:
 
-> Not to be brusque about it, but I've said all I intend to say on that
-> patch and I've regularly marked it rejected in patchwork, but it keeps
-> getting pulled back into the 'master-next' state, I assume by a script
-> of some sort, so dnsmasq continues to be something that warrants special
-> attention, because I know I manually have to tell my own automated
-> processes to ignore it.  :-/
+> HAVE_NODEJS is a leftover from meta-refkit-core where the
+> layer had to adapt to different BBLAYER combinations (some
+> where nodejs wasn't available but mraa/upm were).
 >
-
-Thanks for merge to master, the meta-networking patches are usually in
-master-next until they are merged.
-
-I just do the rebase regularly and if they are still there after rebase I
-sometimes don't dig in ML or patchwork status to find out if they are still
-in review (and should stay in master-next) or already definitely refused
-and I should drop them while rebasing.
-
-Currently there are 4 pending meta-networking changes:
-pick 6302b49 dnsmasq: disable the service by default
-pick 45559fa openconnect: fix parallel compilation failure
-pick aac7e9d squid: upgrade to 3.5.27
-pick ff5e841 libmnl: Move to oe-core
-(and my WIP spice changes which I haven't sent to ML yet).
-
-I'll drop the first now as discussed in this thread (even when
-https://patchwork.openembedded.org/patch/137644/ is still marked in
-patchwork as "Master Next" not "Rejected").
-
-I'll drop the 2nd as well based on the discussion in https://patchwork.
-openembedded.org/patch/143205/
-
-The 3rd one is for some reason marked as Changes Requested, but doesn't
-include any ML discussion in https://patchwork.
-openembedded.org/patch/143406/
-
-and the last one should imho be merged, because in last batch you've merged:
-b8210dd iproute2: Move tipc enablement to oe-core
-which already depends on libmnl in oe-core.
+> Since that check is no longer needed and nodejs is in fact
+> part of meta-oe, nodejs bindings can be enabled by default.
+>
+> Signed-off-by: Mikko Ylinen <mikko.ylinen@linux.intel.com>
+> ---
+>  meta-oe/recipes-extended/mraa/mraa_git.bb | 2 +-
+>  meta-oe/recipes-extended/upm/upm_git.bb   | 2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb
+> b/meta-oe/recipes-extended/mraa/mraa_git.bb
+> index 616048fac..56557cca8 100644
+> --- a/meta-oe/recipes-extended/mraa/mraa_git.bb
+> +++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
+> @@ -31,7 +31,7 @@ FILES_${PN}-utils = "${bindir}/"
+>  # override this in local.conf to get needed bindings.
+>  # BINDINGS_pn-mraa="python"
+>  # will result in only the python bindings being built/packaged.
+> -BINDINGS ??= "python ${@ 'nodejs' if oe.types.boolean(d.getVar('HAVE_NODEJS')
+> or '0') else '' }"
+> +BINDINGS ??= "python nodejs"
+>
+>  PACKAGECONFIG ??= "${@bb.utils.contains('PACKAGES', 'node-${PN}',
+> 'nodejs', '', d)} \
+>   ${@bb.utils.contains('PACKAGES', '${PYTHON_PN}-${PN}', 'python', '',
+> d)}"
+> diff --git a/meta-oe/recipes-extended/upm/upm_git.bb
+> b/meta-oe/recipes-extended/upm/upm_git.bb
+> index 38065ce53..a258ac8b2 100644
+> --- a/meta-oe/recipes-extended/upm/upm_git.bb
+> +++ b/meta-oe/recipes-extended/upm/upm_git.bb
+> @@ -26,7 +26,7 @@ inherit distutils3-base cmake
+>  # override this in local.conf to get needed bindings.
+>  # BINDINGS_pn-upm="python"
+>  # will result in only the python bindings being built/packaged.
+> -BINDINGS ??= "python ${@ 'nodejs' if oe.types.boolean(d.getVar('HAVE_NODEJS')
+> or '0') else '' }"
+> +BINDINGS ??= "python nodejs"
+>
+>  PACKAGECONFIG ??= "${@bb.utils.contains('PACKAGES', 'node-${PN}',
+> 'nodejs', '', d)} \
+>   ${@bb.utils.contains('PACKAGES', '${PYTHON_PN}-${PN}', 'python', '',
+> d)}"
+> --
+> 2.11.0
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
