@@ -1,50 +1,52 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DC9960807
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 965F16E671
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 10:12:48 +0000 (UTC)
-Received: by mail-wm0-f68.google.com with SMTP id q124so1509215wmb.0
+	Mon, 16 Oct 2017 10:42:36 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id m72so1776124wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 03:12:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=sfwJt0/P7nJ5t2m/wIkV+lO/pdhvHCemRSo/gqyasw4=;
-	b=QidEZ/xqTHe83UtV5MQcUZQMcd51VGV71WG9zrbnC7WJF27TFPsMCgmM67HjmrI+vg
-	D+tjPzBCl0I/3I5hcXOgCMt4ON1bXvqLC+yDWOJI2EWZPb9Pfx6tXFy2L3AgNKy8RmCA
-	FO2dsur4ODENZ6GOdz4zm7VL3IR3LG2OYgW/CXg4Mb+iAvwikxQsK34OIsXi10zfjvDF
-	Bg4DKkJCG/pSJZp7+aCHnwCDb0yXJFE6QiR/u2zhZSZsnPpSM9bosSF4aKwwn6rZUR+W
-	KcIu1CR9s2qpi0GSpIDTXO1uxoSAijcVxIZ1IQP7RGqq2bcU4o6yO+o8zopLJ4nC1e9a
-	2xRA==
+	Mon, 16 Oct 2017 03:42:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7VKMEoO8F7tV0KOVc+nJ3OSvjxUtsh8QK7U1WkDmEhY=;
+	b=QtuiaqBQppCVXtXXBA29HA1nroqNFVLmeGraOWc7N7bwe7UqpLsRf9KUvTmgXog8x3
+	Nf3FTKEGWbN0o0qYFK+w8eyQntKWbTGT25X1II21nXVp5g2fbvfZCelLBojxbTMjHRFw
+	hgE7cNq/NqGz7HV/k0+AsAfMpOUj0cufxtB9BpSchmyD4z4oRx4GezLNt97EnKwyt8Kb
+	FH8znV8bjBVDgFQyqhEuTUmeHJGrcSlPLvb5EqGQnXlSp8y9pbEcPRGH4Yi8GO9z+fD7
+	lR0XW2+AIQF2XmfLZW1PfVW2Rc710HUhrP/zLpyy1UbV7I4KOtf0a7i+B23ZOMiHB8pI
+	dzbA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=sfwJt0/P7nJ5t2m/wIkV+lO/pdhvHCemRSo/gqyasw4=;
-	b=CI4e+8d2cJ4EYyr+yj6wxz/FL/ug4ZHMqtwjK44kx4wA8/o0050yNKN20Sy+EM3eCd
-	klmZWsxEEHLIQwEClTpH2YX/f3PEm1dnahIu8gozNNfQoCqS99jR1ABTEpqt0QPBYUQR
-	jcmPoC92Bt9T8zZLrhbticmWBsBOPsjfTgXiR8eAH8bW7GjZ47txwbBdcm6MOe35lDt+
-	NwPpdEKo8GbzX4c4h9uS1IqZRPMVBfobACRKdwsKe9jTv+1/OiH9QBmQ/7ttMYlIGQ5n
-	fQlKtyLGQ/aI5hHZJwpWN8D2D5IWJ9uCgBof1bIJKGCl9tGoLokNrZ5yeZMzIMmPJZxt
-	zYwA==
-X-Gm-Message-State: AMCzsaXu3j1Q5Z0tZ6vEqux61pnikgb8c4C0d3uqg9h0rz+DrhXQyoR/
-	GBlZIYokTNhBev7fZhymlGEEMwzaHZlcU0BZHUM=
-X-Google-Smtp-Source: ABhQp+TunI7xt0PoY4MvbY2IxStKfX0n3W4BjEDEnW+89OZ3lN3jPf3g2jOjhPF/SOCG/KyGAN1m3j6kRAmytgaY3tc=
-X-Received: by 10.28.58.81 with SMTP id h78mr465059wma.10.1508148769701; Mon,
-	16 Oct 2017 03:12:49 -0700 (PDT)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=7VKMEoO8F7tV0KOVc+nJ3OSvjxUtsh8QK7U1WkDmEhY=;
+	b=Sel6pEOpi3ABJ9T+GlzevdDVysUp97/Y/7ABlgqOBe2d5IfrkbLJPhLBNZOvqJrZHT
+	39J5QaeqMCFhdyVjgeU50mleh9xEN9fwLV0DfeCKoHPT2TZUXLYnLG1laBwRlrQcVN7P
+	U0erfHoqBVLNdlVPd2/lrGT+AD7yVl1zh2lp6+VpHTMYGN1B9J/ldzMa7o+1ErZUC+dQ
+	9nRhO0vYnD/0wmCISX0/1/+qitq/FGnktBv0G3mSbmwseWqR0evCdyBtRb4xggHc96pr
+	7qSC0ETfFp/SfFRlIFtOEC6/mmhXw/SMBAgoo0cPzqK73JbCD26ljJu6QNx66aUwDmss
+	20Pw==
+X-Gm-Message-State: AMCzsaULvJTXl7/27xM2fOlX4CHrrybAXebIZiqxDsOXHy/TUwaA9w05
+	7uwclwi5fXxhmUcOHevJS3L1Lg==
+X-Google-Smtp-Source: ABhQp+RcPLowHEik8HfwK8svLQxo/lECTu0tYYaYO5A85FAJCdpMjER2by8jwom59XpU9Lz+2mOP/g==
+X-Received: by 10.223.136.44 with SMTP id d41mr196609wrd.68.1508150557738;
+	Mon, 16 Oct 2017 03:42:37 -0700 (PDT)
+Received: from mueller-a-nb-linux.zera.local
+	(ip-88-152-111-130.hsi03.unitymediagroup.de. [88.152.111.130])
+	by smtp.googlemail.com with ESMTPSA id
+	29sm5594531wrz.77.2017.10.16.03.42.36
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 16 Oct 2017 03:42:37 -0700 (PDT)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Oct 2017 12:42:28 +0200
+Message-Id: <20171016104228.18892-1-schnitzeltony@googlemail.com>
+X-Mailer: git-send-email 2.9.4
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Mon, 16 Oct 2017 03:12:49 -0700 (PDT)
-In-Reply-To: <20171016014800.GU9221@denix.org>
-References: <1507841087-145584-1-git-send-email-denis@denix.org>
-	<CA+chaQfZKN9dg9Kn5HOt7WQNcA4LEb6spfPuj8ZEEY07ysk1Yw@mail.gmail.com>
-	<20171016014800.GU9221@denix.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Mon, 16 Oct 2017 12:12:49 +0200
-Message-ID: <CA+chaQeaGfTRNchGZndnQAvNF02YRefeVSoE2zbmeMqMqSmxGA@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCH] qt5-ptest.inc: fix qtxmlpatterns:do_install_ptest out-of-order call
+Subject: [PATCH] fluidsynth: update 1.1.6 -> 1.1.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,128 +59,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2017 10:12:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Oct 2017 10:42:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-I have ptest in DISTRO_FEATURES:
-https://github.com/shr-project/jenkins-jobs/blob/master/jenkins-job.sh#L302
+* project has moved from sourceforge to github
+* autotools was replaced by cmake [1]
 
-so I believe it was set to 1.
+[1] https://github.com/FluidSynth/fluidsynth/commit/3939941c5f3fdaef6bf9258fabd5725e7666554a
 
-On Mon, Oct 16, 2017 at 3:48 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+---
+ .../fluidsynth/fluidsynth_1.1.6.bb                 | 23 ----------------------
+ .../fluidsynth/fluidsynth_1.1.8.bb                 | 19 ++++++++++++++++++
+ 2 files changed, 19 insertions(+), 23 deletions(-)
+ delete mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
+ create mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
 
-> Do you have PTEST_ENABLED set to 1 or 0?
->
->
-> On Mon, Oct 16, 2017 at 03:30:06AM +0200, Martin Jansa wrote:
-> > This seems to cause:
-> >
-> > Initialising tasks...ERROR: 1676 unbuildable tasks were found.
-> > These are usually caused by circular dependencies and any circular
-> > dependency chains found will be printed below. Increase the debug
-> > level to see a list of unbuildable tasks.
-> >
-> > Identifying dependency loops (this may take a short while)...
-> >
-> > ERROR:
-> > Dependency loop #1 found:
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtquick1_git.bb:do_compile_ptest_base
-> > (dependent Tasks ['qtquick1_git.bb:do_populate_sysroot'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtquick1_git.bb:do_install_ptest_base
-> > (dependent Tasks ['qtquick1_git.bb:do_compile_ptest_base',
-> > 'qtquick1_git.bb:do_install'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtquick1_git.bb:do_populate_sysroot
-> > (dependent Tasks ['qtquick1_git.bb:do_install',
-> > 'qtquick1_git.bb:do_install_ptest_base',
-> > 'binutils-cross_2.29.bb:do_populate_sysroot'])
-> >
-> > Dependency loop #2 found:
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtxmlpatterns_git.bb:do_compile_ptest_base
-> > (dependent Tasks ['qtxmlpatterns_git.bb:do_populate_sysroot'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtxmlpatterns_git.bb:do_install_ptest_base
-> > (dependent Tasks ['qtxmlpatterns_git.bb:do_install',
-> > 'qtxmlpatterns_git.bb:do_compile_ptest_base'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtxmlpatterns_git.bb:do_populate_sysroot
-> > (dependent Tasks ['qtxmlpatterns_git.bb:do_install',
-> > 'binutils-cross_2.29.bb:do_populate_sysroot',
-> > 'qtxmlpatterns_git.bb:do_install_ptest_base'])
-> >
-> > Dependency loop #3 found:
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtdeclarative_git.bb:do_compile_ptest_base
-> > (dependent Tasks ['qtdeclarative_git.bb:do_populate_sysroot'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtdeclarative_git.bb:do_install_ptest_base
-> > (dependent Tasks ['qtdeclarative_git.bb:do_compile_ptest_base',
-> > 'qtdeclarative_git.bb:do_install'])
-> >   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/
-> qtdeclarative_git.bb:do_populate_sysroot
-> > (dependent Tasks ['qtdeclarative_git.bb:do_install_ptest_base',
-> > 'binutils-cross_2.29.bb:do_populate_sysroot',
-> > 'qtdeclarative_git.bb:do_install'])
-> >
-> >
-> >
-> > On Thu, Oct 12, 2017 at 10:44 PM, Denys Dmytriyenko <denis@denix.org>
-> wrote:
-> >
-> > > From: Denys Dmytriyenko <denys@ti.com>
-> > >
-> > > ptest.bbclass provides a set of standard do_*_ptest_base tasks. Each of
-> > > them calls a corresponding regular do_*_ptest task, that components are
-> > > supposed to override for own implementation. When PTEST_ENABLED is not
-> > > set, an anonymous python function removes all do_*_ptest_base tasks
-> from
-> > > the queue. qt5-ptest.inc adds a special case for do_populate_sysroot
-> and
-> > > re-arranges the order or ptest tasks due to that. But, unfortunately,
-> > > do_install_ptest was added directly, not do_install_ptest_base, hence
-> when
-> > > "ptest" is disabled and all other do_*_ptest_base tasks are removed,
-> this
-> > > one do_install_ptest task is left w/o dependencies and gets scheduled
-> for
-> > > execution very early on, even before pseudo-native gets built and
-> stages
-> > > "fakeroot" functionality. The fix is to add do_install_ptest_base task,
-> > > which calls do_install_ptest only when "ptest" is enabled.
-> > >
-> > > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > > ---
-> > >  recipes-qt/qt5/qt5-ptest.inc | 2 +-
-> > >  1 file changed, 1 insertion(+), 1 deletion(-)
-> > >
-> > > diff --git a/recipes-qt/qt5/qt5-ptest.inc
-> b/recipes-qt/qt5/qt5-ptest.inc
-> > > index 4844878..480a06d 100644
-> > > --- a/recipes-qt/qt5/qt5-ptest.inc
-> > > +++ b/recipes-qt/qt5/qt5-ptest.inc
-> > > @@ -5,7 +5,7 @@ inherit ptest
-> > >  addtask do_populate_sysroot after do_install before
-> do_compile_ptest_base
-> > >  deltask do_compile_ptest_base
-> > >  addtask do_compile_ptest_base after do_populate_sysroot before
-> > > do_install_ptest
-> > > -addtask do_install_ptest after do_compile_ptest_base before do_package
-> > > +addtask do_install_ptest_base after do_compile_ptest_base before
-> > > do_package
-> > >
-> > >  do_compile_ptest() {
-> > >      cd ${S}/tests
-> > > --
-> > > 2.7.4
-> > >
-> > > --
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> > >
->
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
+deleted file mode 100644
+index 88981e4..0000000
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-SUMMARY = "Fluidsynth is a software synthesizer"
+-HOMEPAGE = "http://www.fluidsynth.org/"
+-SECTION = "libs/multimedia"
+-LICENSE = "LGPL-2.0+"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
+-
+-DEPENDS = "alsa-lib ncurses glib-2.0"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}/${BP}.tar.gz"
+-SRC_URI[md5sum] = "ae5aca6de824b4173667cbd3a310b263"
+-SRC_URI[sha256sum] = "50853391d9ebeda9b4db787efb23f98b1e26b7296dd2bb5d0d96b5bccee2171c"
+-
+-inherit autotools-brokensep pkgconfig lib_package
+-
+-PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
+-PACKAGECONFIG[sndfile] = "--enable-libsndfile-support,--disable-libsndfile-support,libsndfile1"
+-PACKAGECONFIG[jack] = "--enable-jack-support,--disable-jack-support,jack"
+-PACKAGECONFIG[pulseaudio] = "--enable-pulse-support,--disable-pulse-support,pulseaudio"
+-PACKAGECONFIG[portaudio] = "--enable-portaudio-support,--disable-portaudio-support,portaudio-v19"
+-
+-do_configure_prepend () {
+-    rm -f ${S}/m4/*
+-}
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
+new file mode 100644
+index 0000000..754fadc
+--- /dev/null
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "Fluidsynth is a software synthesizer"
++HOMEPAGE = "http://www.fluidsynth.org/"
++SECTION = "libs/multimedia"
++LICENSE = "LGPL-2.1"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
++
++DEPENDS = "alsa-lib ncurses glib-2.0"
++
++SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=1.1.x"
++SRCREV = "12e7afe3a806a6b397f28e0ca4bc6bab9ebe7047"
++S = "${WORKDIR}/git"
++
++inherit cmake pkgconfig lib_package
++
++PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
++PACKAGECONFIG[sndfile] = "-Denable-libsndfile-support=ON,-Denable-libsndfile-support=OFF,libsndfile1"
++PACKAGECONFIG[jack] = "-Denable-jack-support=ON,-Denable-jack-support=OFF,jack"
++PACKAGECONFIG[pulseaudio] = "-Denable-pulseaudio=ON,--Denable-pulseaudio=OFF,pulseaudio"
++PACKAGECONFIG[portaudio] = "-Denable-portaudio=ON,-Denable-portaudio=OFF,portaudio-v19"
+-- 
+2.9.4
+
 
