@@ -1,39 +1,36 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EF2386FEF5
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id EBDFA6FFF7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 13:50:05 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id f15so31713017qtf.7
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 06:50:07 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=S0nb3I754rP0D7cheAFbdXKbXnHaJLBQIqGzCKgepXg=;
-	b=ZXei4Plhrb92chwGydkIoGE3Kxzjv6DtR1abecFDmTmngFcGCEwJOC0Yr1s+dQgoHE
-	YODHTn4EE8jLGFZcgwgXMpnmer0HT+pgviqdO8PdTdach9+pRFZlIEtT6frTkjAMzEWm
-	wKw0XAdAs9UzEEnOdN0u2L5iNnwg1ioK+v+pYuyWrHpkrbQvbHMzeeMrF8cKrE9FnGbC
-	E5n7zH3VXZnfV/P0pEreliJ3J5mq6d2reIgajhOIx288oUwmlaUqCelJvssIu059OY3X
-	r8kd55LjYS+nHbZ6EAJr/hLdQxDfrdxMTQCc1dtJOc1pf1fePXg8HsIm5L/rYR+nvbTB
-	u6EA==
-X-Gm-Message-State: AMCzsaWsVj+18h/2nWWye4Ca8ToKEsG1/rWG77N6LuoZQdRO9R0zFTcZ
-	NIz+no0cu+oFitzvmu3cQnDSk7ob
-X-Google-Smtp-Source: ABhQp+QQvaK+xICFVQ7JQmewplCB1GmHk5/PPwr1D/AqEf1ZbR2DwSH6WTtIbxZ4cvT7dUxkBop9aQ==
-X-Received: by 10.237.62.84 with SMTP id m20mr14702592qtf.82.1508161806498;
-	Mon, 16 Oct 2017 06:50:06 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id
-	j48sm4913662qta.96.2017.10.16.06.50.05
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 16 Oct 2017 06:50:05 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Oct 2017 09:49:53 -0400
-Message-Id: <1508161793-27699-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cffi: update to version 1.11.2
+	Mon, 16 Oct 2017 14:37:48 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 Oct 2017 07:37:49 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.43,371,1503385200"; 
+   d="scan'208";a="721718"
+Received: from jaertebj-mobl.ger.corp.intel.com (HELO
+	rkubodac-desk.ger.corp.intel.com) ([10.252.14.1])
+	by orsmga001.jf.intel.com with ESMTP; 16 Oct 2017 07:37:47 -0700
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Jacobo Aragunde =?utf-8?Q?P=C3=A9rez?= <jaragunde@igalia.com>
+In-Reply-To: <5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com> ("Jacobo
+	Aragunde \=\?utf-8\?Q\?P\=C3\=A9rez\=22's\?\= message of "Thu,
+	12 Oct 2017 20:18:58 +0200")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Mon, 16 Oct 2017 16:37:46 +0200
+Message-ID: <878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
+MIME-Version: 1.0
+Cc: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,41 +43,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2017 13:50:06 -0000
+X-List-Received-Date: Mon, 16 Oct 2017 14:37:49 -0000
+X-Groupsio-MsgNum: 69207
+Content-Type: multipart/mixed; boundary="=-=-="
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-cffi.inc                   | 4 ++--
- .../python/{python-cffi_1.11.0.bb => python-cffi_1.11.2.bb}           | 0
- .../python/{python3-cffi_1.11.0.bb => python3-cffi_1.11.2.bb}         | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cffi_1.11.0.bb => python-cffi_1.11.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cffi_1.11.0.bb => python3-cffi_1.11.2.bb} (100%)
+--=-=-=
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
-index 2d1f18f..8dcdb63 100644
---- a/meta-python/recipes-devtools/python/python-cffi.inc
-+++ b/meta-python/recipes-devtools/python/python-cffi.inc
-@@ -4,8 +4,8 @@ LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=5677e2fdbf7cdda61d6dd2b57df547bf"
- DEPENDS += "libffi ${PYTHON_PN}-pycparser"
++oe-devel again
+
+Jacobo Aragunde P=C3=A9rez <jaragunde@igalia.com> writes:
+> On 05/10/17 17:26, Jacobo Aragunde P=C3=A9rez wrote:
+>> Hi everyone,
+>>
+>> I have several potential patches for Rafael's layer after having tried
+>> several builds for different hardware. I'm sending individual mails to
+>> discuss each of them.
+>>
+>
+> The second patch is a fix that I needed with a GCC 5.4.0 toolchain. The
+> fix looks harmless enough so I sent it upstream (to the webrtc project),
+> but I don't know if it will be merged.
+>
+> I have another couple patches to fix problems that only happen when
+> compiling with linaro-5.3, one of them is a backport for the compiler
+> itself. I don't think they belong in this layer so I'm finally not
+> sending them. Anyway, ask me if you are interested!
+>
+> All in all, I have created images with Rafael's layer for Raspberry Pi 3
+> and R-Car gen 3 with different toolchains: GCC 5.4.0 and 6.3.0 for the
+> former, and linaro-5.3 for the latter. Let me know if you want me to do
+> any other tests.
+
+Hey Jacobo,
+
+Thanks for all the testing so far!
+
+Can you check if the attached patch also solves the WebRTC build issue
+for you? I've tried it here with Yocto's morty branch and GCC 5.4.0.
+
+If so, I'll send it upstream, as the original approach
+(https://webrtc-review.googlesource.com/c/src/+/8641) was not accepted
+by the WebRTC maintainers.
+
+
+--=-=-=
+Content-Type: text/x-patch
+Content-Disposition: attachment; filename=webrtc-gcc5-build-fix.patch
+Content-Description: Proposed patch
+
+--- a/third_party/webrtc/modules/audio_processing/aec3/aec_state.cc	2017-10-16 16:31:47.636478663 +0200
++++ b/third_party/webrtc/modules/audio_processing/aec3/aec_state.cc	2017-10-16 16:31:45.329471819 +0200
+@@ -157,7 +157,7 @@
+   // TODO(peah): Add the delay in this computation to ensure that the render and
+   // capture signals are properly aligned.
+   RTC_DCHECK_LT(0, x.size());
+-  const float max_sample = fabs(*std::max_element(
++  const float max_sample = fabsf(*std::max_element(
+       x.begin(), x.end(), [](float a, float b) { return a * a < b * b; }));
+   const bool saturated_echo =
+       previous_max_sample_ * 100 > 1600 && SaturatedCapture();
+@@ -271,9 +271,9 @@
+   auto result_x = std::minmax_element(x.begin(), x.end());
+   auto result_s = std::minmax_element(s.begin(), s.end());
+   const float x_abs =
+-      std::max(std::abs(*result_x.first), std::abs(*result_x.second));
++      std::max(fabsf(*result_x.first), fabsf(*result_x.second));
+   const float s_abs =
+-      std::max(std::abs(*result_s.first), std::abs(*result_s.second));
++      std::max(fabsf(*result_s.first), fabsf(*result_s.second));
  
--SRC_URI[md5sum] = "2c5939cc2fa0183fe0c2fcb6a4f1994d"
--SRC_URI[sha256sum] = "5f4ff33371c6969b39b293d9771ee91e81d26f9129be093ca1b7be357fcefd15"
-+SRC_URI[md5sum] = "a731487324b501c8295221b629d3f5f3"
-+SRC_URI[sha256sum] = "ab87dd91c0c4073758d07334c1e5f712ce8fe48f007b86f8238773963ee700a6"
+   if (x_abs < 5.f) {
+     ++low_farend_counter_;
+@@ -294,7 +294,7 @@
+ void AecState::EchoAudibility::UpdateWithOutput(rtc::ArrayView<const float> e) {
+   const float e_max = *std::max_element(e.begin(), e.end());
+   const float e_min = *std::min_element(e.begin(), e.end());
+-  const float e_abs = std::max(std::abs(e_max), std::abs(e_min));
++  const float e_abs = std::max(fabsf(e_max), fabsf(e_min));
  
- RDEPENDS_${PN}_class-target = " \
-     ${PYTHON_PN}-io \
-diff --git a/meta-python/recipes-devtools/python/python-cffi_1.11.0.bb b/meta-python/recipes-devtools/python/python-cffi_1.11.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cffi_1.11.0.bb
-rename to meta-python/recipes-devtools/python/python-cffi_1.11.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cffi_1.11.0.bb b/meta-python/recipes-devtools/python/python3-cffi_1.11.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cffi_1.11.0.bb
-rename to meta-python/recipes-devtools/python/python3-cffi_1.11.2.bb
--- 
-2.7.4
+   if (max_nearend_ < e_abs) {
+     max_nearend_ = e_abs;
 
-
+--=-=-=--
