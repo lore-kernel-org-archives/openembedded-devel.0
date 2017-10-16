@@ -1,35 +1,24 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id BC9C06E5FB
+Return-Path: <Kai.Kang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id F24C977DE7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 01:48:01 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id A034D20B13;
-	Mon, 16 Oct 2017 01:48:02 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id PzEjyr3mryGF; Mon, 16 Oct 2017 01:48:02 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 74ADB20B11;
-	Mon, 16 Oct 2017 01:48:00 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 0F0C01626FE; Sun, 15 Oct 2017 21:48:00 -0400 (EDT)
-Date: Sun, 15 Oct 2017 21:48:00 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20171016014800.GU9221@denix.org>
-References: <1507841087-145584-1-git-send-email-denis@denix.org>
-	<CA+chaQfZKN9dg9Kn5HOt7WQNcA4LEb6spfPuj8ZEEY07ysk1Yw@mail.gmail.com>
+	Mon, 16 Oct 2017 06:29:43 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v9G6TivH019242
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Oct 2017 23:29:44 -0700 (PDT)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.361.1; Sun, 15 Oct 2017 23:29:43 -0700
+From: <kai.kang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 16 Oct 2017 14:14:34 +0800
+Message-ID: <20171016061434.28306-1-kai.kang@windriver.com>
+X-Mailer: git-send-email 2.14.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQfZKN9dg9Kn5HOt7WQNcA4LEb6spfPuj8ZEEY07ysk1Yw@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCH] qt5-ptest.inc: fix qtxmlpatterns:do_install_ptest out-of-order call
+Subject: [meta-oe][PATCH] imagemagick: 7.0.7-1 -> 7.0.7-7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,103 +31,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2017 01:48:02 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Oct 2017 06:29:44 -0000
+Content-Type: text/plain
 
-Do you have PTEST_ENABLED set to 1 or 0?
+From: Kai Kang <kai.kang@windriver.com>
 
+Signed-off-by: Kai Kang <kai.kang@windriver.com>
+---
+ meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-On Mon, Oct 16, 2017 at 03:30:06AM +0200, Martin Jansa wrote:
-> This seems to cause:
-> 
-> Initialising tasks...ERROR: 1676 unbuildable tasks were found.
-> These are usually caused by circular dependencies and any circular
-> dependency chains found will be printed below. Increase the debug
-> level to see a list of unbuildable tasks.
-> 
-> Identifying dependency loops (this may take a short while)...
-> 
-> ERROR:
-> Dependency loop #1 found:
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtquick1_git.bb:do_compile_ptest_base
-> (dependent Tasks ['qtquick1_git.bb:do_populate_sysroot'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtquick1_git.bb:do_install_ptest_base
-> (dependent Tasks ['qtquick1_git.bb:do_compile_ptest_base',
-> 'qtquick1_git.bb:do_install'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtquick1_git.bb:do_populate_sysroot
-> (dependent Tasks ['qtquick1_git.bb:do_install',
-> 'qtquick1_git.bb:do_install_ptest_base',
-> 'binutils-cross_2.29.bb:do_populate_sysroot'])
-> 
-> Dependency loop #2 found:
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_compile_ptest_base
-> (dependent Tasks ['qtxmlpatterns_git.bb:do_populate_sysroot'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_install_ptest_base
-> (dependent Tasks ['qtxmlpatterns_git.bb:do_install',
-> 'qtxmlpatterns_git.bb:do_compile_ptest_base'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtxmlpatterns_git.bb:do_populate_sysroot
-> (dependent Tasks ['qtxmlpatterns_git.bb:do_install',
-> 'binutils-cross_2.29.bb:do_populate_sysroot',
-> 'qtxmlpatterns_git.bb:do_install_ptest_base'])
-> 
-> Dependency loop #3 found:
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_compile_ptest_base
-> (dependent Tasks ['qtdeclarative_git.bb:do_populate_sysroot'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_install_ptest_base
-> (dependent Tasks ['qtdeclarative_git.bb:do_compile_ptest_base',
-> 'qtdeclarative_git.bb:do_install'])
->   Task /home/jenkins/oe/world/shr-core/meta-qt5/recipes-qt/qt5/qtdeclarative_git.bb:do_populate_sysroot
-> (dependent Tasks ['qtdeclarative_git.bb:do_install_ptest_base',
-> 'binutils-cross_2.29.bb:do_populate_sysroot',
-> 'qtdeclarative_git.bb:do_install'])
-> 
-> 
-> 
-> On Thu, Oct 12, 2017 at 10:44 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > ptest.bbclass provides a set of standard do_*_ptest_base tasks. Each of
-> > them calls a corresponding regular do_*_ptest task, that components are
-> > supposed to override for own implementation. When PTEST_ENABLED is not
-> > set, an anonymous python function removes all do_*_ptest_base tasks from
-> > the queue. qt5-ptest.inc adds a special case for do_populate_sysroot and
-> > re-arranges the order or ptest tasks due to that. But, unfortunately,
-> > do_install_ptest was added directly, not do_install_ptest_base, hence when
-> > "ptest" is disabled and all other do_*_ptest_base tasks are removed, this
-> > one do_install_ptest task is left w/o dependencies and gets scheduled for
-> > execution very early on, even before pseudo-native gets built and stages
-> > "fakeroot" functionality. The fix is to add do_install_ptest_base task,
-> > which calls do_install_ptest only when "ptest" is enabled.
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> >  recipes-qt/qt5/qt5-ptest.inc | 2 +-
-> >  1 file changed, 1 insertion(+), 1 deletion(-)
-> >
-> > diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> > index 4844878..480a06d 100644
-> > --- a/recipes-qt/qt5/qt5-ptest.inc
-> > +++ b/recipes-qt/qt5/qt5-ptest.inc
-> > @@ -5,7 +5,7 @@ inherit ptest
-> >  addtask do_populate_sysroot after do_install before do_compile_ptest_base
-> >  deltask do_compile_ptest_base
-> >  addtask do_compile_ptest_base after do_populate_sysroot before
-> > do_install_ptest
-> > -addtask do_install_ptest after do_compile_ptest_base before do_package
-> > +addtask do_install_ptest_base after do_compile_ptest_base before
-> > do_package
-> >
-> >  do_compile_ptest() {
-> >      cd ${S}/tests
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+diff --git a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
+index 62f0e023e..669534eaa 100644
+--- a/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
++++ b/meta-oe/recipes-support/imagemagick/imagemagick_7.0.7.bb
+@@ -6,9 +6,9 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=dad5a98f173fd3fa6958a1a58c6131c1"
+ DEPENDS = "lcms bzip2 jpeg libpng librsvg tiff zlib fftw freetype"
+ 
+ BASE_PV := "${PV}"
+-PV .= "_1"
++PV .= "_7"
+ SRC_URI = "git://github.com/ImageMagick/ImageMagick.git "
+-SRCREV = "b601ab2f2e355350b14ca72753684cbeeef7ffcf"
++SRCREV = "e12602b39b5e778240d286b6f9bbbc0fe3fb26c5"
+ 
+ S = "${WORKDIR}/git"
+ 
+-- 
+2.14.1
+
 
