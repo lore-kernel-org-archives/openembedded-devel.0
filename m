@@ -1,48 +1,26 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-ua0-f169.google.com (mail-ua0-f169.google.com
-	[209.85.217.169])
-	by mail.openembedded.org (Postfix) with ESMTP id CD5E971A50
+Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
+Received: from mga09.intel.com (mga09.intel.com [134.134.136.24])
+	by mail.openembedded.org (Postfix) with ESMTP id 55B8B77E8C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 19:44:22 +0000 (UTC)
-Received: by mail-ua0-f169.google.com with SMTP id e46so10484172uaa.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 12:44:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=1tvmsjzXiNyhqkFXGeemJ+XQv6BVbluyeAL1M+rlbH8=;
-	b=QuBBd+uAedZaOdyTkOIq3uJnRcjqMCXx2WIGehLOXNlD/YQypa90cMwC1fcfr14QGS
-	k2X1nrcsZLe7yZ+VxmgBDyOSHYXdinQeuchLqgPaOOjeAyi8R8BovuQfV7zp6ak7WXc1
-	xHckr6kZCTFU4WqhNv4YfL0fMxSqLPju6xGbaJPszcxsEKGLgRiJae7ab4ceLc/ToPzv
-	4USCLImOaSA/zc+HXUHo9E5EUItWUskIqXfIwEQSdBxNStGAMZ3DTGc5NpqGqvrsDTSN
-	FU8s7Y2O2KPsVCzCkgaloLXZJwA+LZFxYvVDYgc3ty2WKtnyhQ7DYlA8nzWHL7wUzMLM
-	sOEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=1tvmsjzXiNyhqkFXGeemJ+XQv6BVbluyeAL1M+rlbH8=;
-	b=Zmjum2j11T8AwmWJ+PNQ++xHtFL8gBPNvf4xFWIM5b9tyGDDam/iat0snu3XGcU0A4
-	16U6SAca9UraSSQrwXbxTCGUvm64h3rG6mJYvqWMxjXUU4BOvIt78CxJ5SwAY86kt1gF
-	cTeDkbzq1mQmVSHNlztVDJj6rHWv2/CsYTwou7udXuOxusP2bPx1q8CNcldWxOCBwBTe
-	pbXoYrgw8eMrcU4r06drbkEPPzL4mUJmNki0Ra/94VEdB0u+2tpe4MBEx6Cef29qCnVX
-	L8DAenO7C44ZkCzzTWt9d72mSmDXhajSmE0TIk1ddPlVFA7i4ctNXRG74Fi8XpFSnQ8T
-	GEWA==
-X-Gm-Message-State: AMCzsaVH2aQANnUYz0GajGlSwGAyOAJUgHl5WWFaWmOoKjbvV+VeDD1V
-	V/6L16jnGYVcVMAL8Yn4ed8mquScd4ARn3c0zZmLZQ==
-X-Google-Smtp-Source: AOwi7QDnIj9PtfDjgT3cnnWDP+SvpYEGWUGy37K2aoZdz7fOFgKVMMbYzi+UfAos8ISCeQsMat2n2bzFrIUDWkj7TOs=
-X-Received: by 10.176.24.74 with SMTP id j10mr8157697uag.18.1508183063718;
-	Mon, 16 Oct 2017 12:44:23 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.176.72.69 with HTTP; Mon, 16 Oct 2017 12:44:23 -0700 (PDT)
-In-Reply-To: <20171016124028.71360b0fba325a145b94bfbf@linux.intel.com>
+	Mon, 16 Oct 2017 20:55:40 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga102.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	16 Oct 2017 13:55:41 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.43,371,1503385200"; 
+   d="scan'208";a="856565"
+Received: from lsandov1-mobl2.zpn.intel.com ([10.219.128.134])
+	by orsmga001.jf.intel.com with SMTP; 16 Oct 2017 13:55:41 -0700
+Date: Mon, 16 Oct 2017 16:05:29 -0500
+From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
+To: Andreas =?ISO-8859-1?Q?M=FCller?= <schnitzeltony@googlemail.com>
+Message-Id: <20171016160529.c8698d8408842a1b6df4aea5@linux.intel.com>
+In-Reply-To: <CALbNGRSpy07F+E_Ou1_ieMAb0Y62PKDddxOBb+mvo2Qg-GG+LA@mail.gmail.com>
 References: <20171016104228.18892-1-schnitzeltony@googlemail.com>
 	<20171016124028.71360b0fba325a145b94bfbf@linux.intel.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
-Date: Mon, 16 Oct 2017 21:44:23 +0200
-Message-ID: <CALbNGRSpy07F+E_Ou1_ieMAb0Y62PKDddxOBb+mvo2Qg-GG+LA@mail.gmail.com>
-To: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+	<CALbNGRSpy07F+E_Ou1_ieMAb0Y62PKDddxOBb+mvo2Qg-GG+LA@mail.gmail.com>
+X-Mailer: Sylpheed 3.5.1 (GTK+ 2.24.31; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
 Cc: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Subject: Re: [PATCH] fluidsynth: update 1.1.6 -> 1.1.8
@@ -58,35 +36,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2017 19:44:23 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 16 Oct 2017 20:55:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Oct 16, 2017 at 7:40 PM, Leonardo Sandoval <
-leonardo.sandoval.gonzalez@linux.intel.com> wrote:
+On Mon, 16 Oct 2017 21:44:23 +0200
+Andreas M=FCller <schnitzeltony@googlemail.com> wrote:
 
-> On Mon, 16 Oct 2017 12:42:28 +0200
-> Andreas M=C3=BCller <schnitzeltony@googlemail.com> wrote:
->
-> > * project has moved from sourceforge to github
-> > * autotools was replaced by cmake [1]
->
-> Worth noting that  license changed from LGPL-2.0+ to LPGL-2.1.
+> On Mon, Oct 16, 2017 at 7:40 PM, Leonardo Sandoval <
+> leonardo.sandoval.gonzalez@linux.intel.com> wrote:
+>=20
+> > On Mon, 16 Oct 2017 12:42:28 +0200
+> > Andreas M=FCller <schnitzeltony@googlemail.com> wrote:
+> >
+> > > * project has moved from sourceforge to github
+> > > * autotools was replaced by cmake [1]
+> >
+> > Worth noting that  license changed from LGPL-2.0+ to LPGL-2.1.
+>=20
+> Yes I forgot to mention
+>=20
+> > In case you send a v2, use a lower -M value for your git-format-patch
+> > command, this may detect the rename.
+> >
+> I have
+>=20
+> [diff]
+>     renames =3D true
 
-Yes I forgot to mention
+I use git-format-patch which by defaults does renames with 50 of similarity=
+ index (defined by -M). I believe there is a git-diff-config for the latter=
+ value.
 
-> In case you send a v2, use a lower -M value for your git-format-patch
-> command, this may detect the rename.
->
-I have
+>=20
+> in my .gitconfig which does this job fine usually. I think rename due to
+> changes in almost all lines.
+>=20
+> V2 required?
 
-[diff]
-    renames =3D true
+worth it in my opinion.
 
-in my .gitconfig which does this job fine usually. I think rename due to
-changes in almost all lines.
+I just format your patch with the -M2 and this is the output, indicating th=
+at lots of stuff change but makes it easier to read.
 
-V2 required?
+diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6=
+.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
+similarity index 23%
+rename from meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.=
+bb
+rename to meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
+index 88981e44b..754fadc2e 100644
+--- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
++++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
+@@ -1,23 +1,19 @@
+ SUMMARY =3D "Fluidsynth is a software synthesizer"
+ HOMEPAGE =3D "http://www.fluidsynth.org/"
+ SECTION =3D "libs/multimedia"
+-LICENSE =3D "LGPL-2.0+"
+-LIC_FILES_CHKSUM =3D "file://COPYING;md5=3De198e9aac94943d0ec29a7dae8c2941=
+6"
++LICENSE =3D "LGPL-2.1"
++LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3Dfc178bcd425090939a8b634d1d6a959=
+4"
+=20
+ DEPENDS =3D "alsa-lib ncurses glib-2.0"
+=20
+-SRC_URI =3D "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}/${BP}.tar.gz"
+-SRC_URI[md5sum] =3D "ae5aca6de824b4173667cbd3a310b263"
+-SRC_URI[sha256sum] =3D "50853391d9ebeda9b4db787efb23f98b1e26b7296dd2bb5d0d=
+96b5bccee2171c"
++SRC_URI =3D "git://github.com/FluidSynth/fluidsynth.git;branch=3D1.1.x"
++SRCREV =3D "12e7afe3a806a6b397f28e0ca4bc6bab9ebe7047"
++S =3D "${WORKDIR}/git"
+=20
+-inherit autotools-brokensep pkgconfig lib_package
++inherit cmake pkgconfig lib_package
+=20
+ PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d=
+)}"
+-PACKAGECONFIG[sndfile] =3D "--enable-libsndfile-support,--disable-libsndfi=
+le-support,libsndfile1"
+-PACKAGECONFIG[jack] =3D "--enable-jack-support,--disable-jack-support,jack"
+-PACKAGECONFIG[pulseaudio] =3D "--enable-pulse-support,--disable-pulse-supp=
+ort,pulseaudio"
+-PACKAGECONFIG[portaudio] =3D "--enable-portaudio-support,--disable-portaud=
+io-support,portaudio-v19"
+-
+-do_configure_prepend () {
+-    rm -f ${S}/m4/*
+-}
++PACKAGECONFIG[sndfile] =3D "-Denable-libsndfile-support=3DON,-Denable-libs=
+ndfile-support=3DOFF,libsndfile1"
++PACKAGECONFIG[jack] =3D "-Denable-jack-support=3DON,-Denable-jack-support=
+=3DOFF,jack"
++PACKAGECONFIG[pulseaudio] =3D "-Denable-pulseaudio=3DON,--Denable-pulseaud=
+io=3DOFF,pulseaudio"
++PACKAGECONFIG[portaudio] =3D "-Denable-portaudio=3DON,-Denable-portaudio=
+=3DOFF,portaudio-v19"
 
-Andreas
+
+
+>=20
+> Andreas
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
+
+--=20
+Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
 
