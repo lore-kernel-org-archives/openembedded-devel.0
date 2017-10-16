@@ -1,56 +1,49 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 5253660116
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 73A9477EFE
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 21:50:40 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id i5so3684468pfe.6
+	Mon, 16 Oct 2017 22:10:51 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id b6so8399726pfh.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 14:50:42 -0700 (PDT)
+	Mon, 16 Oct 2017 15:10:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=SePHSxFNPLhAKcy2Nf9q/tU3LH8zN0ko+U+r4XOYub0=;
-	b=bcSY4uRSDqNREolxj/g/NRaUST4uEUSXfqswFda8h8dcJIH3jvR3oQv58MJKjoMbG2
-	9iOUyp1tJQIeK7Qs7NDPLwaLBQ+5oPILvQ3+YGJ6MMYMNXZiJcGds+EQmERzQT/Vog8m
-	noxxRfCc6vRurEFRDBT11F741X0po/7OU33RKpzp4AuQz2TNDKqjkgEX0Jzd2awok/hi
-	acHd7jerJYwzHxSwPEVMRkf7A4EFjAjoZSG0N7H+bs205Bsq1r8SgEqVhtyvy6W3lE80
-	95vp+0H/mvdbU8+lqcwWdoLzm8AWs9zTZofZV5U+2j5jBnB5BfsPgGVmbFrZE2cImWs1
-	Cocw==
+	h=from:to:subject:date:message-id;
+	bh=p0IWI2kv6THrygegcTKB+MqPMGaBArin0vYWFYpTBc4=;
+	b=BxRVhT2NqGCo4Zk4m3fHFC+SKQUk0oL5TN6t0ugSyJ+/N1GsGLSrcGn9U1oq0+HNX7
+	qMWJvid0arSfs0UbGjcoXeG5y+2qloNuxiF6x7RBOvh0WU/Sf2TP9bayfKg8P/qy9xvH
+	E9FclH5hBUmQldwf999E/l7gG8e/g6W+7t+SrQY2DdG1ei+S/DVm8ZhlHESdx1n1Ylqb
+	haIkjpDIMZZM0EKuLA9K0U5wwxqvQUYO1vgO4Msvt3N1mhl1W4TawmSXQunbhQiEVP7I
+	MDMT0FwqomN9CATBKXAJJ9zDqVvdEe9nZC654xK2JHpovD0VWxNaWvK0G2rXNPrL6pgg
+	A+5Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=SePHSxFNPLhAKcy2Nf9q/tU3LH8zN0ko+U+r4XOYub0=;
-	b=cc/LvGJLRmF7xZQUJTPjvZBmKLzP2/Ofp7kZpmWgtvEh9oVZWluqla4YMqbul2XBv6
-	UX1MU/Qu3oD0DesX/P6e5/86yNHKpFim6XLC8glgN4SFTwGTZgGp2glV//+tOqWn3zW0
-	BfqU7K010w0y6kjjTiMjm3dlk5vZ94Q0U7ZMxGu8NzDDF1ioT3MTdSCEvG91MeYqtpGA
-	kuzHddQ4YbDELUoGD6VW9BIitlh81HA0rEyy5g7/AV9NXXWj6ctiX6fFt7e7vnu6/o/O
-	1Y5Re/zeWEMH4mjbALnRxbAdfKeMF3JwENjjp2dux4s2yYjFhGMlotaCSpwkAQT1d5GV
-	TI2Q==
-X-Gm-Message-State: AMCzsaX9ZPypNWMDxGKRp9QqanTsFk0EBVGeqT4xnhGtlKYTNj4U0sSV
-	8mfumzOVaPxejTMZwknRr+/VAw==
-X-Google-Smtp-Source: AOwi7QCDhBpd0lDHA9B5ILXbOOJBwgq1lufPOy3U9G2snhow/YOgits4iU3/p0cPab0kRkzy0jn1bg==
-X-Received: by 10.84.241.131 with SMTP id b3mr10336775pll.103.1508190642150;
-	Mon, 16 Oct 2017 14:50:42 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:8194:6b43:14e2:94fc?
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=p0IWI2kv6THrygegcTKB+MqPMGaBArin0vYWFYpTBc4=;
+	b=tYNqhVYmRxTE8oTGNcqSJsmBjuG2aEc5OlhU3FWlJN4QDhFz1NFwfrNlyKO8je5EJn
+	EFdxzzsKugQMqlzuuTJLSqOxIrqfP1xNVRgg7OMOx0U9irGy8GsgwtXpcs9sS9601BXu
+	T9kLVlMaf4o19xdjRZVjeA819neuvqDImgk4zsbyeHc7UwOa27iNbTeFyPAyqVKhgz0p
+	uxtEz1EM8kIeUdRaTZkA93+aeQGrHa4lAaU0ln48oZuD9mIPuWPZn4ptL6OAUMnwRrJ2
+	CzorHNqetgDCz2618aGAqmO+XXLdi3uxJq7QCQqNd22U6E1HCvEzdkbeqrDtMRweO8Wk
+	B06w==
+X-Gm-Message-State: AMCzsaW3VztW28nx+uawo75vIRUD95al1EpHldLi6m7n+GU0W7SEjW7x
+	SJ0hIBuzih2V6ii57Itf0AE=
+X-Google-Smtp-Source: AOwi7QBQUGW811Se3LwNndm1zO5KpVKo/dMwVyQ3q4AuHXU2SgMWSgCS+NZAeK378iBMumzFycrd5A==
+X-Received: by 10.159.194.196 with SMTP id u4mr10202852plz.49.1508191852628;
+	Mon, 16 Oct 2017 15:10:52 -0700 (PDT)
+Received: from akuster-ThinkPad-T460s.mvista.com
 	([2601:202:4001:9ea0:8194:6b43:14e2:94fc])
 	by smtp.gmail.com with ESMTPSA id
-	e84sm16726050pfd.1.2017.10.16.14.50.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 16 Oct 2017 14:50:41 -0700 (PDT)
-To: Dan Walkes <danwalkes@trellis-logic.com>,
+	d89sm12657269pfb.121.2017.10.16.15.10.51
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 16 Oct 2017 15:10:52 -0700 (PDT)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-References: <1507489523-13556-1-git-send-email-danwalkes@trellis-logic.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <aa238651-2c5e-4407-4d62-58bdf6e5dd26@gmail.com>
-Date: Mon, 16 Oct 2017 14:50:40 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
-MIME-Version: 1.0
-In-Reply-To: <1507489523-13556-1-git-send-email-danwalkes@trellis-logic.com>
-Subject: Re: [meta-oe][PATCH] Fix gpsd Yocto pyro build for read only rootfs
+Date: Mon, 16 Oct 2017 15:10:47 -0700
+Message-Id: <cover.1508191555.git.akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [PATCH 0/2] Pyro-next pull request
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,83 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Oct 2017 21:50:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 16 Oct 2017 22:10:51 -0000
 
-Dan,
+cover leter only:
+Please merge Pyro-next to Pyro and apply these changes too.
 
 
-On 10/08/2017 12:05 PM, Dan Walkes wrote:
-> Attempting to include gpsd on Yocto pyro with IMAGE_FEATURES including
-> read-only-rootfs results in an error:
+The following changes since commit 3552877d24845689e7d4e7919ff7b372da70dd40:
 
-The subject has "pyro" in it. Is this meat for the stable branch "Pyro"
-too. It is in Rocko now.
+  wireshark: update to 2.2.9 (2017-09-18 12:06:38 -0700)
 
-BTW, 3.16 is not in Pyro. looking for clarification.
+are available in the git repository at:
 
-- armin
-> "The following packages could not be configured offline and rootfs is
-> read-only"
->
-> This stems from a failure during the do_rootfs steps where the /etc/init.d/gpsd
-> file is missing during the call to update-rc.d.
->
-> This happens because the /etc/init.d/gpsd file is installed during
-> package install for gpsd-conf instead of gpsd, and the default value for
-> INITSCRIPT_PACKAGES is PN.  To resolve, specify INITSCRIPT_PACKAGES as
-> gpsd-conf instead.
->
-> Also, as suggested on the Yocto mailing list, refactor to inherit
-> update-alternatives and use this to replace the postinst and postrm
-> steps.
->
-> Signed-off-by: Dan Walkes <danwalkes@trellis-logic.com>
-> ---
->  meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb | 17 ++++++++---------
->  1 file changed, 8 insertions(+), 9 deletions(-)
->
-> diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-> index 27a600f..f8e6a2b 100644
-> --- a/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-> +++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-> @@ -19,8 +19,9 @@ SRC_URI = "${SAVANNAH_GNU_MIRROR}/${BPN}/${BP}.tar.gz \
->  SRC_URI[md5sum] = "68691b5de4c94f82ec4062b042b5eb63"
->  SRC_URI[sha256sum] = "03579af13a4d3fe0c5b79fa44b5f75c9f3cac6749357f1d99ce5d38c09bc2029"
->  
-> -inherit scons update-rc.d python-dir pythonnative systemd bluetooth
-> +inherit scons update-rc.d python-dir pythonnative systemd bluetooth update-alternatives
->  
-> +INITSCRIPT_PACKAGES = "gpsd-conf"
->  INITSCRIPT_NAME = "gpsd"
->  INITSCRIPT_PARAMS = "defaults 35"
->  
-> @@ -86,14 +87,6 @@ do_install_append() {
->      install -m 0644 ${S}/systemd/${BPN}.socket ${D}${systemd_unitdir}/system/${BPN}.socket
->  }
->  
-> -pkg_postinst_${PN}-conf() {
-> -    update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
-> -}
-> -
-> -pkg_postrm_${PN}-conf() {
-> -    update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default
-> -}
-> -
->  PACKAGES =+ "libgps libgpsd python-pygps-dbg python-pygps gpsd-udev gpsd-conf gpsd-gpsctl gps-utils"
->  
->  FILES_${PN}-dev += "${libdir}/pkgconfdir/libgpsd.pc ${libdir}/pkgconfdir/libgps.pc \
-> @@ -133,3 +126,9 @@ RPROVIDES_${PN} += "${PN}-systemd"
->  RREPLACES_${PN} += "${PN}-systemd"
->  RCONFLICTS_${PN} += "${PN}-systemd"
->  SYSTEMD_SERVICE_${PN} = "${PN}.socket"
-> +
-> +
-> +ALTERNATIVE_${PN} = "gpsd-defaults"
-> +ALTERNATIVE_PATH = "${sysconfdir}/default/gpsd.default"
-> +ALTERNATIVE_LINK = "${sysconfdir}/default/gpsd"
-> +ALTERNATIVE_TARGET = "${sysconfdir}/default/gpsd.default"
+  git://git.openembedded.org/meta-openembedded-contrib akuster/pyro-next
+  http://cgit.openembedded.org/meta-openembedded-contrib/log/?h=akuster/pyro-next
+
+Mark Hatle (1):
+  hostapd: fix WPA2 key replay security bug
+
+Philip Balister (1):
+  sip: update recipe to 4.19.2.
+
+ .../hostapd/hostapd/key-replay-cve-multiple.patch  | 984 +++++++++++++++++++++
+ .../recipes-connectivity/hostapd/hostapd_2.6.bb    |   1 +
+ .../sip/{sip_4.19.bb => sip_4.19.2.bb}             |   4 +-
+ 3 files changed, 987 insertions(+), 2 deletions(-)
+ create mode 100644 meta-oe/recipes-connectivity/hostapd/hostapd/key-replay-cve-multiple.patch
+ rename meta-oe/recipes-devtools/sip/{sip_4.19.bb => sip_4.19.2.bb} (92%)
+
+-- 
+2.7.4
 
 
