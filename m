@@ -1,51 +1,57 @@
-Return-Path: <limon.anibal@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F4DF78303
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BE52E7833B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 18:22:19 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id k31so5566289qta.6
+	Tue, 17 Oct 2017 19:01:05 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id 17so2005223pfn.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 11:22:21 -0700 (PDT)
+	Tue, 17 Oct 2017 12:01:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lae5Os6r7hzWVyTHwEBhCWn4t4KwDwM+6iDA9LIHjdE=;
-	b=EoNv9yATOo34VX/iubulF9LY9Kwzv+ln7iLCZfqT6C4W6zYDaQbKFW+Ii6XTpqko9+
-	kz9kQbGAqNIh4pt/wmKU+Jrwo74x2X8Kq+mTQ+ZZrL2QlaxckvjbkATBkxAcamUiLNOJ
-	KWTxtNOLz1qMz5kdX500D2WQbzIHi+6ZCe+5l7A3Zf4ryzOfCDMg9+2VxCgUNffmxe5m
-	GEKA0s6gfTxBKwql9or69mPdBD6w4PL8OZX/JnM3q5FMKmV+aFx824ZryWneYZZ62qcN
-	LlfIDUTqM94wU8qShBwH0nP/kQ8XyV/zp+Gu8eBSSWRawgnjpDjo93Ri0kphdVLY5+62
-	IGvg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=hsAzFEF8mR5rLaDT0DbUie/tzoe792Hu+5+vmkN0Bgo=;
+	b=JY6Jdfcm2gJUWQVSACZRO/xY8FsS8+CDllNffPm0OThrsMVgP59uy59jypN3WSkPKs
+	wkCxUt7mXngdTrG4r+Qj2lMWEktoUOV0HGki2GQwtmAqd290oFkneOCSu1OZQxRAqODN
+	UBCBDk3kS+vwbIAt26lS4aSr3tATaDFy/frI4uIdPPE6pNgC5x7A+OCx2iwwd2BlwQfb
+	zV2aMVsNxiTuZcpo/PAvWTHOUcCxf2H1qoDEhw3LYphb60c0mVln/Xhlqv8kMbNdj1KO
+	FR6FQVe817wk/2aBnDlsKFsEQ0ygnyo4crh/yPCt4w3Zas5BoL3HL1RUITtmLjGMXpAa
+	Cliw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=lae5Os6r7hzWVyTHwEBhCWn4t4KwDwM+6iDA9LIHjdE=;
-	b=Ob5r7Wzfa6QnX4PjoOTD9aBZwIozpfB3OKxCc3y5+eGXAAGjAttct7rDpHdezSQpn4
-	oqjTMTU108qpv/rVaYmsC06huf3+Ga9BgEzA9A+Dm5Rvf9xrsejJ4jUTcjcgoCMbHpGe
-	gBv30zYcRqy5uoSjiMO3bNQsqrGIilKSYZQyva7bBMeAsXsXvj2oGK2YFYQmCyii3tc1
-	IUAEZKE0/a4aJgTCNFkx9D04TBFsz6SnNjIQnz2aFR9E+MFqVAKXtCckLZ3bql/e24uU
-	t3pO+QRDhbuBDjWgiL9svXRV3i1oZcAjNIFASZIgImI5en8xbpi6qr6UZl/0FLFJ/Lkq
-	gLRw==
-X-Gm-Message-State: AMCzsaVpGnOxncXxwF2LkeqYLtNHKEb4zatWzJAbFquwyFOGj6g80uYc
-	WckiZ8W2PUW8f25jtghsFnc1FJMs
-X-Google-Smtp-Source: AOwi7QDwBjUdLupKWMcGzpbMc7djsdEfiws2/0m9TYJreRJkBFzZsXS0eBN+LSZrkX7yr/0NCtfVpw==
-X-Received: by 10.200.24.231 with SMTP id o36mr19563956qtk.91.1508264540318;
-	Tue, 17 Oct 2017 11:22:20 -0700 (PDT)
-Received: from localhost.localdomain ([177.34.165.164])
-	by smtp.gmail.com with ESMTPSA id
-	d143sm6346018qkc.41.2017.10.17.11.22.17
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Oct 2017 11:22:19 -0700 (PDT)
-From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <limon.anibal@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Oct 2017 13:22:11 -0500
-Message-Id: <20171017182211.24743-1-limon.anibal@gmail.com>
-X-Mailer: git-send-email 2.11.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=hsAzFEF8mR5rLaDT0DbUie/tzoe792Hu+5+vmkN0Bgo=;
+	b=gmnp6a/x4dTVsed9tuJe9+r4TqEbZjBBO1FS1xTFdGp84oWykbYMT+/vnKwcA+IUt3
+	TnTlOZmJL6bZ7+rtAtx97jagbdP/el1zXzqN8SQb8JVa4AvV7vxGkdlM0NrI6kNr0BIg
+	mAs2VhxG9jfog+XuKTt0lD3tpHWt+rBHk8ceehXuZcS6x188uYs5Cc3qqDDND7X9JHfR
+	vYWI1GqlfhAgoZ1ShSde8DICL3A7Y6UL5cV0H1k4dcEObABPjPb2ve6I9DCoQZjmJD7b
+	NUbxy5dg1rh2IWr1yTRK/9p1CG6aLbAE/KUeL0MQRDOLjZNaGaffqqXj9Fzqtqosp/CK
+	SaJQ==
+X-Gm-Message-State: AMCzsaV3TXsjX5X7lsr9lM9g96lhMi3KkGylJMpAX2VFe0U6UKKZgqGd
+	CtdBvmd1ePX0VoA3E9p7e3ZiJWXXKMQk6vzn/Fg=
+X-Google-Smtp-Source: ABhQp+RiLf2LLGMzBMYj6IKWgP1Zam0E/jb6lU3GAh1kq0QoTbf/BaTeL5IXo8Ky0TAJHT44DnbF0EDkN6gX55Xhrds=
+X-Received: by 10.84.175.3 with SMTP id s3mr10012722plb.440.1508266867031;
+	Tue, 17 Oct 2017 12:01:07 -0700 (PDT)
 MIME-Version: 1.0
-Cc: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-Subject: [PATCHv4] meta-oe/recipes-test: Add stress-ng recipe
+Received: by 10.100.187.66 with HTTP; Tue, 17 Oct 2017 12:00:36 -0700 (PDT)
+In-Reply-To: <CAJ86T=Vf_0_QYFPwFK+LO+m8yq=T5iVRQZCeHxsgPu--cYaL5w@mail.gmail.com>
+References: <cover.1507147924.git.paul.eggleton@linux.intel.com>
+	<4da0611806ae98b10f6ae00200b3e292a068f940.1507147924.git.paul.eggleton@linux.intel.com>
+	<CAMKF1sp6TG-LrCUq-FMp+z_mR6Yh-CiRXT0tDvJXVsYr+97VPg@mail.gmail.com>
+	<20171017051134.GC9221@denix.org>
+	<CAMKF1sro2nuRcguZzsVOj5B2dNzw6P5KKrkK5dmuzpk_eX8e6g@mail.gmail.com>
+	<CA+chaQeZpm=FAXVETU4x9scAECJ3EURrjjo54JhddHeDBzXWkg@mail.gmail.com>
+	<CAMKF1sqfVVcvf6Hz9tPF7xobT-P64z16mbTQNQ9+t=-kSwo2-A@mail.gmail.com>
+	<20171017172327.5aipmv2frrjsszbk@mentor.com>
+	<CAMKF1sr7gGo3LVcOKsp6f6FJFeNLVZHQCt+0MLwCTRMCz9F1Ww@mail.gmail.com>
+	<CAJ86T=Vf_0_QYFPwFK+LO+m8yq=T5iVRQZCeHxsgPu--cYaL5w@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 17 Oct 2017 12:00:36 -0700
+Message-ID: <CAMKF1sp=ZB7d3CsnK-0+fM2uuc_MDHs46t8YriuS8CiztZJFxQ@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 1/1] mdns: move from meta-intel-iot-middleware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,230 +64,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 18:22:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Oct 2017 19:01:05 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Aníbal Limón <anibal.limon@linaro.org>
+On Tue, Oct 17, 2017 at 11:01 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
+> On Tue, Oct 17, 2017 at 10:23 AM, Joe MacDonald
+> <Joe_MacDonald@mentor.com> wrote:
+>> [Re: [oe] [meta-networking][PATCH 1/1] mdns: move from meta-intel-iot-middleware] On 17.10.17 (Tue 10:01) Khem Raj wrote:
+>>> I do world builds on master-next with musl on qemumips and rpi3
+>>> continuously, with a known set of failures, if a new one shows up
+>>> I tend to report.
+>>
+>> I obviously haven't been building with musl either, but if it's not that
+>> difficult to add to my autobuilder configuration, I'd be happy to.  Is
+>> https://github.com/kraj/meta-musl/blob/master/README.md the best source
+>> for how to get started with a musl build?
+>
+> Going slightly off topic, but even though sources can be patched to
+> fix build issues due to musl's lack of nss.h, it doesn't really make
+> any sense to build nss modules for musl, since these modules can only
+> ever be used by glibc.
+>
+> e.g. we have musl patches in recipes such as nss-myhostname, but the
+> real fix is probably just to not build the recipe at all for musl.
+>
+> In this particular case I don't know whether mDNSResponder is tied
+> tightly to nss or whether the nss module is an optional add-on but
+> that should probably be determined before coming up with fix.
 
-A tool to generate load and stress a system, currently this recipe
-is on a couple of layers [1] and is not updated, a good reason to
-have in meta-oe.
-
-[1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=stress-ng
-
-Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- .../0001-Several-changes-to-fix-musl-build.patch   | 170 +++++++++++++++++++++
- .../recipes-test/stress-ng/stress-ng_0.08.17.bb    |  20 +++
- 2 files changed, 190 insertions(+)
- create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
- create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-
-diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
-new file mode 100644
-index 000000000..3ed7efc7e
---- /dev/null
-+++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
-@@ -0,0 +1,170 @@
-+From d50203b233cb8820bf83b6651c2a8487e0db1fcf Mon Sep 17 00:00:00 2001
-+From: =?UTF-8?q?An=C3=ADbal=20Lim=C3=B3n?= <anibal.limon@linaro.org>
-+Date: Tue, 17 Oct 2017 10:13:20 -0500
-+Subject: [PATCH] Several changes to fix musl build
-+MIME-Version: 1.0
-+Content-Type: text/plain; charset=UTF-8
-+Content-Transfer-Encoding: 8bit
-+
-+stress-{context, stackmmap}.c: Set tests to non-implemented because uses
-+swapcontext, musl provide the definition but not the implementation due
-+  to that functions are pre-POSIX and set to be deprecated.
-+  stress-{resources, pty}.c: Doesn't include termio.h and remove stress
-+  operations that uses struct termio, musl doesn't provide that struct.
-+stress-pthread.c: Change pthread_yield to sched_yield to be more compatible.
-+stress-malloc.c: Check for definition of M_MMAP_THRESHOLD musl doesn't
-+  ptovide that constant.
-+stress-madvise.c: Add static poision_count integer, definition of
-+  MADV_SOFT_OFFLINE doesn't grauntee MADV_HWPOISON to be defined.
-+cache.c: Define GLOB_ONLYDIR not available on MUSL.
-+
-+Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
-+Upstream-status: Pending
-+---
-+ cache.c            |  4 ++++
-+ stress-context.c   |  2 +-
-+ stress-madvise.c   |  1 +
-+ stress-malloc.c    |  2 +-
-+ stress-pthread.c   |  2 +-
-+ stress-pty.c       | 18 ------------------
-+ stress-resources.c |  1 -
-+ stress-stackmmap.c |  2 +-
-+ 8 files changed, 9 insertions(+), 23 deletions(-)
-+
-+diff --git a/cache.c b/cache.c
-+index e01fad0..27870ee 100644
-+--- a/cache.c
-++++ b/cache.c
-+@@ -27,6 +27,10 @@ typedef struct {
-+ 
-+ #include <glob.h>
-+ 
-++#ifndef GLOB_ONLYDIR
-++#define GLOB_ONLYDIR    0x100
-++#endif
-++
-+ #if defined(__linux__)
-+ #define SYS_CPU_PREFIX               "/sys/devices/system/cpu"
-+ #define GLOB_PATTERN SYS_CPU_PREFIX  "/cpu[0-9]*"
-+diff --git a/stress-context.c b/stress-context.c
-+index c5f50ed..67209e5 100644
-+--- a/stress-context.c
-++++ b/stress-context.c
-+@@ -24,7 +24,7 @@
-+  */
-+ #include "stress-ng.h"
-+ 
-+-#if !defined(__OpenBSD__)
-++#if !defined(__OpenBSD__) && False
-+ 
-+ #include <ucontext.h>
-+ 
-+diff --git a/stress-madvise.c b/stress-madvise.c
-+index 43ea454..2e1f8ee 100644
-+--- a/stress-madvise.c
-++++ b/stress-madvise.c
-+@@ -141,6 +141,7 @@ static int stress_random_advise(const args_t *args)
-+ #if defined(MADV_SOFT_OFFLINE)
-+ 	if (advise == MADV_SOFT_OFFLINE) {
-+ 		static int soft_offline_count;
-++		static int poison_count;
-+ 
-+ 		/* ..and minimize number of soft offline pages */
-+ 		if ((soft_offline_count >= NUM_SOFT_OFFLINE_MAX) ||
-+diff --git a/stress-malloc.c b/stress-malloc.c
-+index 8dbe5cc..f505f32 100644
-+--- a/stress-malloc.c
-++++ b/stress-malloc.c
-+@@ -99,7 +99,7 @@ int stress_malloc(const args_t *args)
-+ 			malloc_max = MIN_MALLOC_MAX;
-+ 	}
-+ 
-+-#if defined(__GNUC__) && defined(__linux__)
-++#if defined(__GNUC__) && defined(__linux__) && defined(M_MMAP_THRESHOLD)
-+ 	if (get_setting("malloc-threshold", &malloc_threshold))
-+ 		(void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
-+ #endif
-+diff --git a/stress-pthread.c b/stress-pthread.c
-+index 323a1d4..8269f4c 100644
-+--- a/stress-pthread.c
-++++ b/stress-pthread.c
-+@@ -139,7 +139,7 @@ static void *stress_pthread_func(void *parg)
-+ 			break;
-+ 		}
-+ #if !defined(__NetBSD__) && !defined(__sun__)
-+-		(void)pthread_yield();
-++		(void)sched_yield();
-+ #endif
-+ 	}
-+ 	ret = pthread_mutex_unlock(&mutex);
-+diff --git a/stress-pty.c b/stress-pty.c
-+index 8c3edf8..518f118 100644
-+--- a/stress-pty.c
-++++ b/stress-pty.c
-+@@ -26,7 +26,6 @@
-+ 
-+ #if defined(__linux__)
-+ 
-+-#include <termio.h>
-+ #include <termios.h>
-+ 
-+ typedef struct {
-+@@ -108,7 +107,6 @@ int stress_pty(const args_t *args)
-+ 		 */
-+ 		for (i = 0; i < n; i++) {
-+ 			struct termios ios;
-+-			struct termio io;
-+ 			struct winsize ws;
-+ 			int arg;
-+ 
-+@@ -130,22 +128,6 @@ int stress_pty(const args_t *args)
-+ 			if (ioctl(ptys[i].slave, TCSETSF, &ios) < 0)
-+ 				pr_fail_err("ioctl TCSETSF on slave pty");
-+ #endif
-+-#if defined(TCGETA)
-+-			if (ioctl(ptys[i].slave, TCGETA, &io) < 0)
-+-				pr_fail_err("ioctl TCGETA on slave pty");
-+-#endif
-+-#if defined(TCSETA)
-+-			if (ioctl(ptys[i].slave, TCSETA, &io) < 0)
-+-				pr_fail_err("ioctl TCSETA on slave pty");
-+-#endif
-+-#if defined(TCSETAW)
-+-			if (ioctl(ptys[i].slave, TCSETAW, &io) < 0)
-+-				pr_fail_err("ioctl TCSETAW on slave pty");
-+-#endif
-+-#if defined(TCSETAF)
-+-			if (ioctl(ptys[i].slave, TCSETAF, &io) < 0)
-+-				pr_fail_err("ioctl TCSETAF on slave pty");
-+-#endif
-+ #if defined(TIOCGLCKTRMIOS)
-+ 			if (ioctl(ptys[i].slave, TIOCGLCKTRMIOS, &ios) < 0)
-+ 				pr_fail_err("ioctl TIOCGLCKTRMIOS on slave pty");
-+diff --git a/stress-resources.c b/stress-resources.c
-+index 182e176..880433d 100644
-+--- a/stress-resources.c
-++++ b/stress-resources.c
-+@@ -31,7 +31,6 @@
-+ #include <sys/inotify.h>
-+ #endif
-+ #if defined(__linux__)
-+-#include <termio.h>
-+ #include <termios.h>
-+ #endif
-+ #if defined(HAVE_LIB_PTHREAD) && defined(__linux__)
-+diff --git a/stress-stackmmap.c b/stress-stackmmap.c
-+index e1378e2..00d1268 100644
-+--- a/stress-stackmmap.c
-++++ b/stress-stackmmap.c
-+@@ -24,7 +24,7 @@
-+  */
-+ #include "stress-ng.h"
-+ 
-+-#if defined(__linux__)
-++#if defined(__linux__) && False
-+ 
-+ #include <ucontext.h>
-+ 
-+-- 
-+2.11.0
-+
-diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-new file mode 100644
-index 000000000..dc5b2e8eb
---- /dev/null
-+++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
-@@ -0,0 +1,20 @@
-+SUMMARY = "A tool to load and stress a computer system"
-+HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
-+
-+DEPENDS = "zlib libaio"
-+
-+SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.gz \
-+          "
-+SRC_URI_append_libc-musl = "file://0001-Several-changes-to-fix-musl-build.patch"
-+
-+SRC_URI[md5sum] = "e0f6497a8c06f5d652bc2ad88d449c12"
-+SRC_URI[sha256sum] = "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2231c1058b1a5dd18"
-+
-+CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"'"
-+
-+do_install_append() {
-+    install -d ${D}${bindir}
-+    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
-+}
--- 
-2.11.0
-
+yes musl does not have nss and its intentional. Although mDNS can be
+implemented external to libc which I believe is a good thing. I would be
+happy if the patches to add these recipes relying on nss just added musl
+to incompatible hosts for immediate OE concerns. Eventually, it could have
+a different fix upstream for the given component, if they want to make
+nss support conditional or otherwise, its best left to component
 
