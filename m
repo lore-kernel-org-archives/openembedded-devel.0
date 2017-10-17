@@ -1,53 +1,44 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id EF679782D1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 10:48:23 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id k4so3058422wmc.1
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 03:48:25 -0700 (PDT)
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 0E06F7828D;
+	Tue, 17 Oct 2017 11:43:41 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id y39so1333494wrd.4;
+	Tue, 17 Oct 2017 04:43:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:date:to:cc:subject:message-id:references:mime-version
-	:content-disposition:in-reply-to:user-agent;
-	bh=Hr9uONhzOTCjprhqixgGB8OCaN4c1DNIM1oGN3kXqyU=;
-	b=kmx8gJlXofBoozqMOGGU+Ez+qxUf5z7j4D5aXpga3oUuA1C6/gyQvb5VsMG0HE6gj2
-	YHO7+8tLi+z5Z4m8XpUSXaVaen9Aij9iNOmsS8KK9zX2FZUeChRgO1DprhH7IBnhp6VO
-	wh8LZtXcCCBmOGJpkjo6/G52bv3mTFpOUtrknlSin1Az7RdqlyO5Rb+SOnGKffctfJHR
-	Ombnw/jrciX8B69yhCzMIxzfEf5TpYWql4sQDHxTeWnFz62stYZ1AdqtWDtzZ6Ysx7o4
-	xOtUukV5b6Cz12WIuUknTYc2S1Q735S/QOe2Xg6/Qg9zI/YncY2GLFZbewxlmzxYUJ4s
-	PfSw==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=AldPGOwg6fSApppvMSrrl1ir62oTuHyn0kjZvm/PNt8=;
+	b=gBkZ+q4ZaJSlqKXO6yhAsqm4sl2GcKB9j0QWNMdTN4ar/WtEzihxkF1X/KAV8dFCPU
+	ner/Nv4Q+r5hAPsVYt6HIWjlpTmLmyMOyGiCaCxqdkAOPCLkpQPv8ndDEID/WWtm/Zss
+	Wx0BzinZAKEptZhHPLXeHOUCVolHu9IJkkzhVH5MZda23FY/yFsKMV3J1yyKMIICKSYs
+	4eqodHunR5tq8RPbpT2L81O/bmc1NcZAU4iazMSOr9XqNfLE30NFxBmRnkFS427j+HR3
+	34yllnpl6cyv0gjhQ+Vb5dH9avq7gG0gZt3qRJdHQd8vgTCpmLHPYCM9zbD4GveUNyET
+	deUw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
-	:mime-version:content-disposition:in-reply-to:user-agent;
-	bh=Hr9uONhzOTCjprhqixgGB8OCaN4c1DNIM1oGN3kXqyU=;
-	b=lIz/tqykJi8Mae5EABl1ZxMfvv+tLQrUc0qEDg/26eZqZSoYS1ers+EVjuwnmcsMZj
-	YsHTm7bPwXed6gq31Onj/Q3RMwlewp2DmFhuLe524A6kM4PstiTJ2SM67c2VnqP/MDDT
-	ytHKJzEx2RNYqlIyUxl1Ew9HuSVQGF7KqLY2dTcgm0KIOxIdeOaahN1uWkmWKvkhVJk8
-	xgOY4GjmiHFZkvbTRUR+oTydfWzxcydpkUHtnbxAew6Z+iA9MoYPK6wYSL+q1I3k0WxK
-	WZ9nQpLPP42VeHMwmnYjHXlVsPC1Pp97zdjx0feuIpBX1KNIb8E4ZQVbO2wlkffJPN87
-	JJcQ==
-X-Gm-Message-State: AMCzsaUu0Hm9ErYCau+V1UiXP+b84mn1wuD5jt2TmQMpSKisiA6PDf+W
-	PwmwRmzur5ZzjKnXxtjWWtIncQ==
-X-Google-Smtp-Source: ABhQp+SOEwtL4Z2hvQrEpb/BGtrD6m5GObmhBUgEEU25OfFwrAd45k9DhFL6uc2rOBqb0yiRjb3iTw==
-X-Received: by 10.28.27.86 with SMTP id b83mr3156637wmb.74.1508237304564;
-	Tue, 17 Oct 2017 03:48:24 -0700 (PDT)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	r44sm24556198wrb.37.2017.10.17.03.48.23
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Tue, 17 Oct 2017 03:48:23 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-Date: Tue, 17 Oct 2017 12:51:32 +0200
-To: Mikko Ylinen <mikko.ylinen@linux.intel.com>
-Message-ID: <20171017105132.GB4387@jama>
-References: <CA+chaQdLD0cS0vFugYi7xK8o1=MzyyE7pC3X4ReKCppGae_Faw@mail.gmail.com>
-	<20171017103515.13487-1-mikko.ylinen@linux.intel.com>
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=AldPGOwg6fSApppvMSrrl1ir62oTuHyn0kjZvm/PNt8=;
+	b=FL0mX6inBmEjJCn0GFgEBuAZq870E4uakx3cA3iNwS0v3WNvJbJUtzLc4lWYzOXEKt
+	4FUvrSk5SS+HcAw5H/FJAyba0wx8l1JPT84eWBuhhNq+KgjM2s89yOWuRPqn4VZfFhVI
+	IXx5Qbmq3cWzG+L9VYl21+0qJsr34PWDBiUi2Wb0XxNGMrCMDLhvvqpNJ1vZs5rv1nYm
+	7lise/mG9aNg53J5lSl52BPQfeQTSTIw+O96gKY9fz1RdsltwnhHPpUlggn3+8nRwpUA
+	FpUKbqQE/rIHudY3oQhGYtzGr7ecSCgHE0J+iUXZA+MLnMgssaUDBNr6++p7OZyvod+6
+	ZM/A==
+X-Gm-Message-State: AMCzsaVBgmp3Xk+yhzVFQzDDcFC493NvdKXOB9CUvJeI7/rbfhLQE+FJ
+	ImnbF8Y4VpAzNwTBRkdb1nRgbxXoum16zSx1W5xO5A==
+X-Google-Smtp-Source: ABhQp+RUgcvAbjflFBW0NHeggQT1NyBVxPDk90n88fxBat84cZlsgmv8fe/9Qk9kKRkbzfw/6GRDGljuFXnzVAoSIDs=
+X-Received: by 10.223.134.68 with SMTP id 4mr3679136wrw.67.1508240622199; Tue,
+	17 Oct 2017 04:43:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <20171017103515.13487-1-mikko.ylinen@linux.intel.com>
-User-Agent: Mutt/1.9.1 (2017-09-22)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v2] mraa/upm: enable nodejs bindings by default
+Received: by 10.28.183.212 with HTTP; Tue, 17 Oct 2017 04:43:41 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 17 Oct 2017 13:43:41 +0200
+Message-ID: <CA+chaQf5dHq8DPmAyidJ9+pjSyX9QS-PUgAAuKGXG03gGds0mw@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: State of bitbake world, Failed tasks 2017-10-16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,97 +51,330 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 10:48:24 -0000
-X-Groupsio-MsgNum: 69233
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="bCsyhTFzCvuiizWE"
-Content-Disposition: inline
-
---bCsyhTFzCvuiizWE
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Oct 2017 11:43:42 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Oct 17, 2017 at 01:35:15PM +0300, Mikko Ylinen wrote:
-> HAVE_NODEJS is a leftover from meta-refkit-core where the
-> layer had to adapt to different BBLAYER combinations (some
-> where nodejs wasn't available but mraa/upm were).
->=20
-> Since that check is no longer needed and nodejs is in fact
-> part of meta-oe, nodejs bindings can be enabled by default
-> (with an exception for qemuarm/armv5 where nodejs isn't
-> available).
->=20
-> Signed-off-by: Mikko Ylinen <mikko.ylinen@linux.intel.com>
-> ---
->  meta-oe/recipes-extended/mraa/mraa_git.bb | 5 ++++-
->  meta-oe/recipes-extended/upm/upm_git.bb   | 5 ++++-
->  2 files changed, 8 insertions(+), 2 deletions(-)
->=20
-> diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb b/meta-oe/recipes-=
-extended/mraa/mraa_git.bb
-> index 616048fac..b22691ca4 100644
-> --- a/meta-oe/recipes-extended/mraa/mraa_git.bb
-> +++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
-> @@ -31,7 +31,10 @@ FILES_${PN}-utils =3D "${bindir}/"
->  # override this in local.conf to get needed bindings.
->  # BINDINGS_pn-mraa=3D"python"
->  # will result in only the python bindings being built/packaged.
-> -BINDINGS ??=3D "python ${@ 'nodejs' if oe.types.boolean(d.getVar('HAVE_N=
-ODEJS') or '0') else '' }"
-> +BINDINGS ??=3D "python nodejs"
-> +
-> +# nodejs isn't available for armv5 architecture
-> +BINDINGS_qemuarm ??=3D "python"
+http://www.openembedded.org/wiki/Bitbake_World_Status
 
-qemuarm isn't the only armv4 and armv5 MACHINE OE supports, use the same
-3 overrides nodejs recipe is using.
+=3D=3D Number of issues - stats =3D=3D
+{| class=3D'wikitable'
+!|Date		     !!colspan=3D'3'|Failed tasks			    !!|Signatures	=09
+!!colspan=3D'15'|QA !!Comment
+|-
+||		||qemuarm	||qemux86	||qemux86_64	||all
+	||already-stripped	||libdir	||textrel	||build-deps	||file-rdeps	||version-=
+going-backwards	||host-user-contaminated	||installed-vs-shipped	||unknown-c=
+onfigure-option	||symlink-to-sysroot	||invalid-pkgconfig	||pkgname	||ldflag=
+s	||compile-host-path	||qa_pseudo	||
+|-
+||2017-10-16	||3	||4	||4	||0	||0		||0		||3		||0		||0		||0		||4		||1		||0		|=
+|0		||0		||0		||0		||0		||9		||
+|}
 
->  PACKAGECONFIG ??=3D "${@bb.utils.contains('PACKAGES', 'node-${PN}', 'nod=
-ejs', '', d)} \
->   ${@bb.utils.contains('PACKAGES', '${PYTHON_PN}-${PN}', 'python', '', d)=
-}"
-> diff --git a/meta-oe/recipes-extended/upm/upm_git.bb b/meta-oe/recipes-ex=
-tended/upm/upm_git.bb
-> index 38065ce53..eea5ae80a 100644
-> --- a/meta-oe/recipes-extended/upm/upm_git.bb
-> +++ b/meta-oe/recipes-extended/upm/upm_git.bb
-> @@ -26,7 +26,10 @@ inherit distutils3-base cmake
->  # override this in local.conf to get needed bindings.
->  # BINDINGS_pn-upm=3D"python"
->  # will result in only the python bindings being built/packaged.
-> -BINDINGS ??=3D "python ${@ 'nodejs' if oe.types.boolean(d.getVar('HAVE_N=
-ODEJS') or '0') else '' }"
-> +BINDINGS ??=3D "python nodejs"
-> +
-> +# nodejs isn't available for armv5 architecture
-> +BINDINGS_qemuarm ??=3D "python"
-> =20
->  PACKAGECONFIG ??=3D "${@bb.utils.contains('PACKAGES', 'node-${PN}', 'nod=
-ejs', '', d)} \
->   ${@bb.utils.contains('PACKAGES', '${PYTHON_PN}-${PN}', 'python', '', d)=
-}"
-> --=20
-> 2.11.0
->=20
-> --=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+=3D=3D Failed tasks 2017-10-16 =3D=3D
 
---=20
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+INFO: jenkins-job.sh-1.8.35 Complete log available at
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.report.20171017_00=
+2302.log
 
---bCsyhTFzCvuiizWE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
+=3D=3D=3D common (2) =3D=3D=3D
+    * meta-qt5/recipes-qt/qt5/qtnetworkauth_git.bb:do_fetch
+    * openembedded-core/meta/recipes-core/glibc/glibc-locale_2.26.bb:do_pac=
+kage_qa
 
------BEGIN PGP SIGNATURE-----
+=3D=3D=3D common-x86 (0) =3D=3D=3D
 
-iFwEARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWeXgtAAKCRA3VSO3ZXaA
-HH09AJdlGDp+SL5yojGvATv4c2Y4ubm1AKC5M5iIYmtg+U76x1BnyACCK8oj3w==
-=PdP6
------END PGP SIGNATURE-----
+=3D=3D=3D qemuarm (1) =3D=3D=3D
+    * meta-openembedded/meta-oe/recipes-devtools/android-tools/android-tool=
+s_5.1.1.r37.bb:do_compile
 
---bCsyhTFzCvuiizWE--
+=3D=3D=3D qemux86 (2) =3D=3D=3D
+    * meta-qt5/recipes-qt/qt5/qtcharts_git.bb:do_compile
+    * openembedded-core/meta/recipes-multimedia/x264/x264_git.bb:do_package=
+_qa
+
+=3D=3D=3D qemux86_64 (2) =3D=3D=3D
+    * meta-openembedded/meta-multimedia/recipes-multimedia/fluidsynth/fluid=
+synth_1.1.8.bb:do_package
+    * meta-openembedded/meta-networking/recipes-extended/corosync/corosync_=
+2.4.2.bb:do_package_qa
+
+=3D=3D=3D Number of failed tasks (11) =3D=3D=3D
+{| class=3Dwikitable
+|-
+|| qemuarm 	|| 3	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemuarm.2017=
+1016_112708.log/
+|| http://errors.yoctoproject.org/Errors/Build/47548/
+|-
+|| qemux86 	|| 4	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86.2017=
+1016_124745.log/
+|| http://errors.yoctoproject.org/Errors/Build/47549/
+|-
+|| qemux86_64 	|| 4	 ||
+http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.world.qemux86-64.2=
+0171016_153545.log/
+|| http://errors.yoctoproject.org/Errors/Build/47553/
+|}
+
+=3D=3D=3D PNBLACKLISTs (1) =3D=3D=3D
+
+=3D=3D=3D QA issues (17) =3D=3D=3D
+{| class=3Dwikitable
+!| Count		||Issue
+|-
+||0	||already-stripped
+|-
+||0	||build-deps
+|-
+||0	||compile-host-path
+|-
+||0	||file-rdeps
+|-
+||0	||invalid-pkgconfig
+|-
+||0	||ldflags
+|-
+||0	||libdir
+|-
+||0	||pkgname
+|-
+||0	||symlink-to-sysroot
+|-
+||0	||unknown-configure-option
+|-
+||0	||version-going-backwards
+|-
+||1	||installed-vs-shipped
+|-
+||3	||textrel
+|-
+||4	||host-user-contaminated
+|-
+||9	||qa_pseudo
+|}
+
+
+
+=3D=3D=3D Incorrect PACKAGE_ARCH or sstate signatures (0) =3D=3D=3D
+
+Complete log: http://logs.nslu2-linux.org/buildlogs/oe/world/rocko/log.sign=
+atures.20171016_140936.log/
+
+No issues detected
+
+
+PNBLACKLISTs:
+openembedded-core/:
+meta-browser:
+meta-openembedded:
+meta-networking/recipes-support/lksctp-tools/lksctp-tools_1.0.17.bb:PNBLACK=
+LIST[lksctp-tools]
+?=3D "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', "BROKEN:
+fails to link against sctp_connectx symbol", '', d)}"
+meta-qt5:
+PNBLACKLIST[android-system] =3D "depends on lxc from
+meta-virtualiazation which isn't included in my world builds"
+PNBLACKLIST[bigbuckbunny-1080p] =3D "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-480p] =3D "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[bigbuckbunny-720p] =3D "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[tearsofsteel-1080p] =3D "big and doesn't really need to be
+tested so much"
+PNBLACKLIST[build-appliance-image] =3D "tries to include whole downloads
+directory in /home/builder/poky :/"
+
+
+QA issues by type:
+count: 0	issue: already-stripped
+
+
+count: 0	issue: libdir
+
+
+count: 3	issue: textrel
+corosync-2.4.2: ELF binary
+'/work/core2-64-oe-linux/corosync/2.4.2-r0/packages-split/corosync/usr/sbin=
+/corosync'
+has relocations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+'/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x26=
+4-bin/usr/bin/x264'
+has relocations in .text [textrel]
+x264-r2731+gitAUTOINC+2b741f81e5: ELF binary
+'/work/i586-oe-linux/x264/r2731+gitAUTOINC+2b741f81e5-r0/packages-split/x26=
+4/usr/lib/libx264.so.148'
+has relocations in .text [textrel]
+
+
+count: 0	issue: build-deps
+
+
+count: 0	issue: file-rdeps
+
+
+count: 0	issue: version-going-backwards
+
+
+count: 4	issue: host-user-contaminated
+glibc-locale-2.26: glibc-locale:
+/glibc-binary-localedata-aa-er+saaho/usr/lib/locale/aa_ER@saaho/LC_PAPER
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+glibc-locale-2.26: glibc-locale:
+/glibc-binary-localedata-ar-dz/usr/lib/locale/ar_DZ/LC_PAPER is owned
+by uid 3004, which is the same as the user running bitbake. This may
+be due to host contamination [host-user-contaminated]
+glibc-locale-2.26: glibc-locale:
+/glibc-binary-localedata-ar-kw.iso-8859-6/usr/lib/locale/ar_KW.ISO-8859-6/L=
+C_PAPER
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+glibc-locale-2.26: glibc-locale:
+/glibc-binary-localedata-sq-al.iso-8859-1/usr/lib/locale/sq_AL.ISO-8859-1/L=
+C_MEASUREMENT
+is owned by uid 3004, which is the same as the user running bitbake.
+This may be due to host contamination [host-user-contaminated]
+
+
+count: 1	issue: installed-vs-shipped
+fluidsynth: 5 installed and not shipped files. [installed-vs-shipped]
+
+
+count: 0	issue: unknown-configure-option
+
+
+count: 0	issue: symlink-to-sysroot
+
+
+count: 0	issue: invalid-pkgconfig
+
+
+count: 0	issue: pkgname
+
+
+count: 0	issue: ldflags
+
+
+count: 0	issue: compile-host-path
+
+
+count: 9	issue: qa_pseudo
+libconnman-qt5-1.2.4+gitAUTOINC+9d98e12ed6: This
+/work/armv5te-oe-linux-gnueabi/libconnman-qt5/1.2.4+gitAUTOINC+9d98e12ed6-r=
+0/pseudo/pseudo.log
+indicates 5 errors [qa_pseudo]
+libconnman-qt5-1.2.4+gitAUTOINC+9d98e12ed6: This
+/work/i586-oe-linux/libconnman-qt5/1.2.4+gitAUTOINC+9d98e12ed6-r0/pseudo/ps=
+eudo.log
+indicates 8 errors [qa_pseudo]
+python-ndg-httpsclient-0.4.3: This
+/work/armv5te-oe-linux-gnueabi/python-ndg-httpsclient/0.4.3-r0/pseudo/pseud=
+o.log
+indicates 4 errors [qa_pseudo]
+python-snimpy-0.8.11: This
+/work/armv5te-oe-linux-gnueabi/python-snimpy/0.8.11-r0/pseudo/pseudo.log
+indicates 4 errors [qa_pseudo]
+qtquick1-5.9.2+gitAUTOINC+9bf0edd9bd: This
+/work/armv5te-oe-linux-gnueabi/qtquick1/5.9.2+gitAUTOINC+9bf0edd9bd-r0/pseu=
+do/pseudo.log
+indicates 11 errors [qa_pseudo]
+qtquick1-5.9.2+gitAUTOINC+9bf0edd9bd: This
+/work/i586-oe-linux/qtquick1/5.9.2+gitAUTOINC+9bf0edd9bd-r0/pseudo/pseudo.l=
+og
+indicates 12 errors [qa_pseudo]
+qtx11extras-5.9.2+gitAUTOINC+160435b0eb: This
+/work/armv5te-oe-linux-gnueabi/qtx11extras/5.9.2+gitAUTOINC+160435b0eb-r0/p=
+seudo/pseudo.log
+indicates 5 errors [qa_pseudo]
+qtx11extras-5.9.2+gitAUTOINC+160435b0eb: This
+/work/core2-64-oe-linux/qtx11extras/5.9.2+gitAUTOINC+160435b0eb-r0/pseudo/p=
+seudo.log
+indicates 7 errors [qa_pseudo]
+qtx11extras-5.9.2+gitAUTOINC+160435b0eb: This
+/work/i586-oe-linux/qtx11extras/5.9.2+gitAUTOINC+160435b0eb-r0/pseudo/pseud=
+o.log
+indicates 6 errors [qa_pseudo]
+
+
+
+This git log matches with the metadata as seen by qemuarm build.
+In some cases qemux86 and qemux86-64 builds are built with slightly
+different metadata, you can see the exact version near the top of each
+log.world.qemu* files linked from the report
+
+=3D=3D Tested changes (not included in master yet) - bitbake =3D=3D
+latest upstream commit:
+be393f2 toaster/highlight.pack.js: Fix corrupted file
+not included in master yet:
+3fba1ad world-image: add extra target
+c7c01bf fetch2: Allow Fetch.download() to warn instead of error
+
+=3D=3D Tested changes (not included in master yet) - openembedded-core =3D=
+=3D
+
+latest upstream commit:
+8ca61a5 bitbake.conf: add tools required by testimage to HOSTTOOLS conditio=
+nally
+not included in master yet:
+d28c0cb report-error: Allow to upload reports automatically
+ebe6522 buildhistory.bbclass: metadata-revs show repo parent
+78735b9 metadata-revs: provide more information
+a48bb4c qemux86: Add identical qemux86copy variant for tests
+582876d reproducible_build.bbclass: initial support for binary reproducibil=
+ity
+8cde606 cpio: provide cpio-replacement-native
+fa4e167 image_types.bbclass: improve cpio image reproducibility
+bd99eff rootfs-postcommands.bbclass: support binary reproducibility
+446dffa sstate.bbclass: Do not cause build failures due to setscene errors
+caba1c2 insane.bbclass: Add do_qa_pseudo function to check for common
+errors listed in pseudo.log
+633940b libsdl2: allow to build native and nativesdk
+d2a2d29 libdrm: allow to build native and nativesdk
+e407568 nativesdk-mesa,mesa-native: add new recipe to build small part of m=
+esa
+aa6ce39 libepoxy: add support for native(sdk)
+11acf2e libjpeg-turbo: provide nativesdk version
+b58f07d virglrenderer: add new recipe
+f00aa03 virglrenderer: fix target build
+b19c402 qemu: add PACKAGECONFIG for virtglrenderer, sdl2 and spice
+fbb4feb insane.bbclass: use package_qa_handle_error for do_qa_pseudo
+
+=3D=3D Tested changes (not included in master yet) - meta-openembedded =3D=
+=3D
+
+latest upstream commit:
+ed6b5da hostapd: fix WPA2 key replay security bug
+not included in master yet:
+a64b2eb squid: upgrade to 3.5.27
+bd0aef9 toybox: Switch building from git src_uri
+6440fa0 nodejs: Add npx to nodejs-npm package
+444c92e rocksdb: add version 5.8
+e76721e stress-ng: Add recipe
+d9c1b30 oprofile: move from oe-core, as it's being deprecated there
+e0cbcbb imagemagick: 7.0.7-1 -> 7.0.7-7
+a6d78e6 fluidsynth: update 1.1.6 -> 1.1.8
+52396aa python-lxml: update to version 4.1.0
+7e2dcd9 python-cffi: update to version 1.11.2
+
+=3D=3D Tested changes (not included in master yet) - meta-qt5 =3D=3D
+latest upstream commit:
+2c3ef00 qt5: add missing commercial license
+not included in master yet:
+a3df6a7 meta-qt5: Update to 5.9.2 release
+5ed1295 Revert "meta-qt5: Update to 5.9.2 release"
+5c3949e meta-qt5: Update to 5.9.2 release
+
+=3D=3D Tested changes (not included in master yet) - meta-browser =3D=3D
+
+latest upstream commit:
+26d5066 firefox: fix build failures
+not included in master yet:
+6773bf9 meta: drop ${COREBASE}/LICENSE references
+
