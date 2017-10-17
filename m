@@ -1,48 +1,48 @@
-Return-Path: <ricardo@opensourcefoundries.com>
-Received: from mail-ua0-f178.google.com (mail-ua0-f178.google.com
-	[209.85.217.178])
-	by mail.openembedded.org (Postfix) with ESMTP id DC02D78269
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 8340E780C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 01:18:32 +0000 (UTC)
-Received: by mail-ua0-f178.google.com with SMTP id z4so89645uaz.5
+	Tue, 17 Oct 2017 04:15:06 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id j3so444782pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Oct 2017 18:18:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=opensourcefoundries-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:subject:date:message-id;
-	bh=H4KaO0Lbf+D0duE27NuMDwVYSjkBiot3OcBoGc8YgFE=;
-	b=hI4djCnQdRLdMfMuZsQeEn+VzsEiRbg//pVedFegNXpKnbh0rdix82qzQ9J1s5MeiI
-	23JJVyiFhIM+b8KoafGjQxpdxRkDcAaUSfPzrSy7OdT9qFTIe9OIsbiRPC85ITqO3V62
-	jUOr7eVB5v8vKEjljK7tZqd5HCZlszgIJzqKG10y7TQTqD2uCK9CbHv4xLmZ3d08Psyj
-	AXJ3NFLSfgkb4CCbBcIZPkVBhZaFqIm7eNpCLQvGQePbhmmkQg8f570dgovB8ugjexyB
-	7l+aTNlk4OjEu6F6X2LNayDe4PRzVvdWzKOdUln4FhRwT7l3Hxd2XF+EeWx3KbKdKqkj
-	Uayw==
+	Mon, 16 Oct 2017 21:15:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=exdzC5bEhIAAY7tTtErRQdiese1Kc6zCZ2BQpf9w2Pc=;
+	b=oU7aGPg2evohCb4+JWj5zc8z2bO2fkhHQQzXAeQeT5kJswJu+eL0Dq2GkfOMS0iusw
+	daFaasuTbUwlgtAm5La6Wcw7w/62n2PWe2XdHxUpQIlKhu03XvwuZZ4k3M05Ze0R715R
+	XUQRiogfUFG6RFcbVXwxlZd/WTHaQJlyw74kZZ3r196zEE55EpivCmoJ+/kbm1uoAFWF
+	LZRhYJ/PcPokWy25x+ZZBpvKexavgEzdDBiX/7QjPMT2Rnpe61+cRLWIPf+4mwpjXlTb
+	2l+A9R8uEZStfKsVKLmrfO0Ud4CulB0twEu7y3ykiiaOTagC0ZQ1IIDSYn2F2eB6W9T6
+	MnPA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=H4KaO0Lbf+D0duE27NuMDwVYSjkBiot3OcBoGc8YgFE=;
-	b=q2IKJUHamKx0fkqKyzwdww8h7QGnbQhJcai/W+1hRVYJAp8v2LAtvqniwFpcqhCdpT
-	8yyAtqAivmcxHUOV2is3JHx6Hr66RY5ZWb22Utxm+I7j6Dgr2i0HhslX5poI+SXGcM3L
-	lcffKLhjmki/opPImLU4fKsY+1DbyiBuGpoPF8HmhI3c1InCkjCPRmsipjwlz9U+9D93
-	d1VGcBR3br4kX7K/wXnjU/MpAeVV4ey91F0NXFDb7S9JV2eXcAlXTSZEh1RwssU/ohBg
-	0hsR7tuyLiSWOiooJd6QHnMDddVEUfK1voTvkf38F+4l8mn2BRj/DpvAsglvF8WQP4N5
-	Egvg==
-X-Gm-Message-State: AMCzsaWrXQbXTwpeSIhl9w5xPL7jBYfsMK8ihn00C2mVqAnKsU0fBsVG
-	5XKILVfKLNb7k3KhTRK3DBKWcACBWw==
-X-Google-Smtp-Source: ABhQp+TXk+MYy4Cj7iFEl88ntE09qP/1gPk3njGUGNnTg0e5Kg4I7Kc4sVnOIFR+bAazZfIbKGtQRQ==
-X-Received: by 10.176.8.201 with SMTP id o9mr6896230uaf.155.1508203113237;
-	Mon, 16 Oct 2017 18:18:33 -0700 (PDT)
-Received: from localhost.localdomain ([179.223.173.46])
-	by smtp.gmail.com with ESMTPSA id g16sm2076283vkc.1.2017.10.16.18.18.31
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 16 Oct 2017 18:18:32 -0700 (PDT)
-From: Ricardo Salveti <ricardo@opensourcefoundries.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Oct 2017 23:18:26 -0200
-Message-Id: <1508203106-11857-1-git-send-email-ricardo@opensourcefoundries.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [PATCH] python3-asn1crypto: add support for Python 3
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=exdzC5bEhIAAY7tTtErRQdiese1Kc6zCZ2BQpf9w2Pc=;
+	b=liyjiQA4Cx+kzrnbiAUo8wyZjuOOCwbZDucbI9Atknf6Ns6H3Iy8e7HODye06NgOh8
+	PAzV9h4PSWuxJqm5SPo7O6sHKFsaAD4Co/AANUEGQUf2eMQPiD05w3J0mZeCv5LhThY/
+	stZKZieqMstdiU1lJljqLujoDc8WfjN2CytqK9jQ2aux7r2zScCtKJRSDTqPUweg5TLa
+	dEcUBwvaYpZoTz32zym5JYVUt1ixnglbZ9QWodT6eUcY4kDpS0lseuO/pn/AKs0fiM4A
+	F4bggMtqPQ2atwTKHtmbqGRpOqb3CbD2xXrvgReIGzU5WzHAlJsIPv7LoFbem+L0C4kA
+	pYCQ==
+X-Gm-Message-State: AMCzsaUVdO8gWTyE1/OD+u2bThsMmG3+OKTprcYDucHsHSLEyU9xJrnb
+	TSPRj3Xl2kbhZW40YkbZ0n41Oh+EGwwFcg3MCws=
+X-Google-Smtp-Source: AOwi7QDoAdTbd+yEnnKlmtE4cE3tak01c3jgISliEAgspl6GmT1l0GNJn6HvYdNOi+JS7ekOMWffTIb6w16RM70RSKo=
+X-Received: by 10.99.124.75 with SMTP id l11mr9702887pgn.439.1508213707517;
+	Mon, 16 Oct 2017 21:15:07 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.100.187.66 with HTTP; Mon, 16 Oct 2017 21:14:37 -0700 (PDT)
+In-Reply-To: <20171012125625.3061-1-limon.anibal@gmail.com>
+References: <20171012125625.3061-1-limon.anibal@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Oct 2017 21:14:37 -0700
+Message-ID: <CAMKF1spjJE4+ep_7L6_FDqQ6QxQS4esVp8Dm91ooJvAhO4wQww@mail.gmail.com>
+To: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <limon.anibal@gmail.com>
+Cc: =?UTF-8?B?QW7DrWJhbCBMaW3Ds24=?= <anibal.limon@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCHv2] meta-oe/recipes-test: Add stress-ng recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +55,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 01:18:33 -0000
+X-List-Received-Date: Tue, 17 Oct 2017 04:15:06 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-python-asn1crypto.inc already available and used by the Python 2
-version.
+On Thu, Oct 12, 2017 at 5:56 AM, An=C3=ADbal Lim=C3=B3n <limon.anibal@gmail=
+.com> wrote:
+> From: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
+>
+> A tool to generate load and stress a system, currently this recipe
+> is on a couple of layers [1] and is not updated, a good reason to
+> have in meta-oe.
+>
+> [1] https://layers.openembedded.org/layerindex/branch/master/recipes/?q=
+=3Dstress-ng
+>
+> Signed-off-by: An=C3=ADbal Lim=C3=B3n <anibal.limon@linaro.org>
+> ---
+>  meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb | 18 +++++++++++++++=
++++
+>  1 file changed, 18 insertions(+)
+>  create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+>
+> diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-o=
+e/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> new file mode 100644
+> index 000000000..86f577006
+> --- /dev/null
+> +++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+> @@ -0,0 +1,18 @@
+> +SUMMARY =3D "A tool to load and stress a computer system"
+> +HOMEPAGE =3D "http://kernel.ubuntu.com/~cking/stress-ng/"
+> +LICENSE =3D "GPLv2"
+> +LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Db234ee4d69f5fce4486a80fdaf4a4=
+263"
+> +
+> +DEPENDS =3D "zlib libaio"
+> +
+> +SRC_URI =3D "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.g=
+z"
+> +
+> +SRC_URI[md5sum] =3D "e0f6497a8c06f5d652bc2ad88d449c12"
+> +SRC_URI[sha256sum] =3D "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2=
+231c1058b1a5dd18"
+> +
+> +CFLAGS +=3D "-Wall -Wextra -DVERSION=3D'"$(VERSION)"'"
+> +
+> +do_install_append() {
+> +    install -d ${D}${bindir}
+> +    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
+> +}
 
-Signed-off-by: Ricardo Salveti <ricardo@opensourcefoundries.com>
----
- meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb | 2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
+Fails to build with musl
 
-diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
-new file mode 100644
-index 0000000..30f3404
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
-@@ -0,0 +1,2 @@
-+inherit setuptools3
-+require python-asn1crypto.inc
--- 
-2.7.4
-
+| stress-malloc.c: In function 'stress_malloc':
+| stress-malloc.c:104:9: warning: implicit declaration of function
+'mallopt' [-Wimplicit-function-declaration]
+|    (void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
+|          ^~~~~~~
+| stress-malloc.c:104:17: error: 'M_MMAP_THRESHOLD' undeclared (first
+use in this function)
+|    (void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
+|                  ^~~~~~~~~~~~~~~~
+| stress-malloc.c:104:17: note: each undeclared identifier is reported
+only once for each function it appears in
+| make: *** [Makefile:681: stress-malloc.o] Error 1
+| make: *** Waiting for unfinished jobs....
 
