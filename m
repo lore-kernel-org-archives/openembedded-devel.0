@@ -1,52 +1,49 @@
-Return-Path: <athoik@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id B497278348
+Return-Path: <danwalkes@trellis-logic.com>
+Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
+	[209.85.128.171])
+	by mail.openembedded.org (Postfix) with ESMTP id 333B47833B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 21:01:43 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id k62so3026389wrc.9
+	Tue, 17 Oct 2017 23:02:14 +0000 (UTC)
+Received: by mail-wr0-f171.google.com with SMTP id k7so3249098wre.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 14:01:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=xIPKSGJPUITQY/1LJyH2wAU5nO53UI+3BmR7rT78NTU=;
-	b=UaZDjR3tO3WAmuc9moE7B21qd2P3XwOZkGDenbf+V7pjNkWfVbwz0lcaBx/ArGKSKW
-	Nup1XonZVRerhyaIYALPgmXF8g92OmsHbYkfNIDTCZEJyZEqoEzl4ZnIzDa3HI+HDEhi
-	6VW5/3kpH44ydLGV5wJRDI5n8IPd6vGijg4HUfPDtD35BXBBgN558Q3Ik5Y4Xv9vliIO
-	/t2aVuRexgqDfT2eDISLMkcZEmii+waQbCRNG91iUCQgAkPSodrY4hJJknEav3/WhrFs
-	wT61S/gJ4Zgso//JG45O5zO4beri/7xXgZg4ctKqa8qNheO/ki1WN4rgG0peGQCZZQIl
-	o1zw==
+	Tue, 17 Oct 2017 16:02:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=trellis-logic-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=MHjCIfeVe3755YjPwqz9rKV2jHStnEmmixhLcZ+uGN8=;
+	b=b3NegsHPCfxUEwsWk3bK9HFw+EGGR5rQrE4aQH6G3J5gNRmQ7BztqTFhOgGs3J4wQB
+	e7UzK4dp48BeLhcjM8RUBkht4luRTVfqcMKiTmPcpUOnpdsntqGnSxaQBvnpJPajPHVs
+	iiFhMtnzKZX5d9UoR7bubf73eQ64EAI+jrgxmlfPMCKl14lGqhkjOUj8ZjsFAxNssTDh
+	+ZYHgjdO0SlKF7WGBGGAcHH79dPaZzSO2/za3FYW9bUapFinKNMETA50vdD8AC8oyFqg
+	lbtCOmAEF8DSCdVcW2XAdR3GQyaFrIpab+QEFdvOGcJxh8jua0ZechV8GcB0zpwjIoB8
+	ybYA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=xIPKSGJPUITQY/1LJyH2wAU5nO53UI+3BmR7rT78NTU=;
-	b=EKj2nMvY6gGy36yW3Ll6e5cVV/KZSIkL+9eB+8fdRdzmTx5qc6s0vxn1Lt/JKGH6Lk
-	sK9XzxdjyTKoN4s2MNT35rz839M3POh1o6sNgI4+rWFcZLzeHUptuOaaFydR5JyoYfCO
-	S+4S2roM/SD7rJ7TnlM7yUibYjvZfFOCrlYOCrY6G+vzXYiJ7didEQEcY9HEC6TUQy9n
-	DHJjzI1/LaZMq+/pEjuEAGXZGSe+Jb/hp+K5d89epKNCOUPeERDZD4VQAzW/kEfuO8Vh
-	xmdcbNHohGeQiBBF94YcHuMj7/ONY44T31MmmfhGk4cfwmfcxBnljNUyt/kpBbKff3+b
-	909w==
-X-Gm-Message-State: AMCzsaXMReP9pSgtKFU80HWMl6K/+A5jgf6J+Ocga13DLSYlvqZ5dhIZ
-	6qw6kXjeUeAm1vJ1reEDxo3L
-X-Google-Smtp-Source: ABhQp+TyEDl503u1PpcEWn8O9hARGHkogYhga3QjkjxZVhtnE+TFnt6+Vo2ivMyc5KNGEu72qg1xeg==
-X-Received: by 10.223.185.91 with SMTP id b27mr4593507wrg.194.1508274104426;
-	Tue, 17 Oct 2017 14:01:44 -0700 (PDT)
-Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
-	by smtp.gmail.com with ESMTPSA id v8sm8228203wrg.80.2017.10.17.14.01.43
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 17 Oct 2017 14:01:43 -0700 (PDT)
-From: Athanasios Oikonomou <athoik@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 18 Oct 2017 00:01:22 +0300
-Message-Id: <1508274082-5871-2-git-send-email-athoik@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1508274082-5871-1-git-send-email-athoik@gmail.com>
-References: <1508274082-5871-1-git-send-email-athoik@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=MHjCIfeVe3755YjPwqz9rKV2jHStnEmmixhLcZ+uGN8=;
+	b=gHIsSQViqYWSTZgj7jDPub03ADDJsA+GbhWevjaLrfo1hxdB6er+ShKwgZwgm2yWcd
+	VIvTSphfUaA92s2ZULiIe1uzlvt5T0MMtG7M2kq6Cmxqnt4qF/r2/o+wD1xwU/wpJATt
+	IUWEAB0M09MgVkYDfZFkiTJT7cMZoJJa8JyPzPtZiNK9ErLxpmvCJeNWEXQGgvJ9erYH
+	b+DuFP43w8/YszEpYTj8QZXx/zgaFfITlBCTP/BiVoqRQU9hiTeXMeIFd7y7FK1401Tx
+	+Sc7CEchEkhe8AJGBWAWbrk4GOiqvVSR3LBwh5k1tIEVTwYIt4RIVWV0JG2YgihCzPHT
+	CWRA==
+X-Gm-Message-State: AMCzsaXDAfTakGujb6GV7eGLx/UE/Kwq3sZSr6HzxHHT43MGBnL1sZFN
+	tADPy7z+TMwV/VDxg804tNv35dP7D6rFnHxWuMsU3g==
+X-Google-Smtp-Source: ABhQp+TrtienTJfHByUKgMwGVAYfSx9Tvc6K+oxfX3x2VYGsti+tGio8xW04eL4f21XkykSjRjBUB7i1vp7OMdlmtxo=
+X-Received: by 10.223.153.45 with SMTP id x42mr4925242wrb.212.1508281335899;
+	Tue, 17 Oct 2017 16:02:15 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Athanasios Oikonomou <athoik@gmail.com>
-Subject: [meta-oe][PATCH 2/2] smbnetfs: update update 0.5.3a -> 0.6.0
+Received: by 10.28.195.139 with HTTP; Tue, 17 Oct 2017 16:02:15 -0700 (PDT)
+In-Reply-To: <aa238651-2c5e-4407-4d62-58bdf6e5dd26@gmail.com>
+References: <1507489523-13556-1-git-send-email-danwalkes@trellis-logic.com>
+	<aa238651-2c5e-4407-4d62-58bdf6e5dd26@gmail.com>
+From: Dan Walkes <danwalkes@trellis-logic.com>
+Date: Tue, 17 Oct 2017 17:02:15 -0600
+Message-ID: <CAAhKrJ3At_1DyTGpLD19jUzXjam0aCtGXzg=PFnET=1hSzEoxA@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] Fix gpsd Yocto pyro build for read only rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,76 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 21:01:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Oct 2017 23:02:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-It seems that updating smbnetfs to latest revision fixes build issues.
-Also remove the blacklist allowing the plugin to build again.
-Patches reworked to apply on 0.6.0.
+On Mon, Oct 16, 2017 at 3:50 PM, akuster808 <akuster808@gmail.com> wrote:
+> Dan,
+>
+>
+> On 10/08/2017 12:05 PM, Dan Walkes wrote:
+>> Attempting to include gpsd on Yocto pyro with IMAGE_FEATURES including
+>> read-only-rootfs results in an error:
+>
+> The subject has "pyro" in it. Is this meat for the stable branch "Pyro"
+> too. It is in Rocko now.
+>
+> BTW, 3.16 is not in Pyro. looking for clarification.
+>
+Hi Armin,
+I noticed this problem originally on pyro and noticed the same issues
+with the .bb file on the master branch.  I haven't actually tried to
+build on Rocko and I'm not currently setup to build the current
+project on rocko, only on pyro, apologies if I submitted this for the
+wrong branch.  Please let me know what I should do to fix.
 
-Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
----
- .../Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch    | 6 +++---
- .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch           | 6 +++---
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb       | 4 +---
- 3 files changed, 7 insertions(+), 9 deletions(-)
-
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-index f05f09f..371ab89 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-@@ -10,10 +10,10 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-  src/Makefile.am | 3 +++
-  2 files changed, 8 insertions(+)
- 
--diff --git a/configure.in b/configure.in
-+diff --git a/configure.ac b/configure.ac
- index ce21aef..ecd7119 100644
----- a/configure.in
--+++ b/configure.in
-+--- a/configure.ac
-++++ b/configure.ac
- @@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
-      )]
-  )
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-index c80fed1..152507c 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-@@ -1,9 +1,9 @@
- Index: git/configure.in
- ===================================================================
----- git.orig/configure.in	2014-06-18 16:06:16.040721349 +0000
--+++ git/configure.in	2014-07-18 07:49:17.085552256 +0000
-+--- git.orig/configure.ac	2014-06-18 16:06:16.040721349 +0000
-++++ git/configure.ac	2014-07-18 07:49:17.085552256 +0000
- @@ -1,5 +1,5 @@
-- AC_INIT([SMBNetFS],[0.5.3а])
-+ AC_INIT([SMBNetFS],[0.6.0])
- -AM_INIT_AUTOMAKE
- +AM_INIT_AUTOMAKE([foreign])
-  AC_CONFIG_HEADERS([src/config.h])
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 6995ad3..03e6b2b 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -14,7 +14,7 @@ inherit autotools gitpkgv pkgconfig
- 
- PKGV = "${GITPKGVTAG}"
- 
--SRCREV = "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
-+SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
- 
- SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
-            file://configure.patch \
-@@ -24,5 +24,3 @@ PACKAGECONFIG ??= ""
- PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
- 
- S = "${WORKDIR}/git"
--
--PNBLACKLIST[smbnetfs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
--- 
-2.1.4
-
+Thanks
+Dan
 
