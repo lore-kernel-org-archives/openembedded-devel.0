@@ -1,21 +1,23 @@
 Return-Path: <martink@posteo.de>
 Received: from mout02.posteo.de (mout02.posteo.de [185.67.36.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 171C960721
+	by mail.openembedded.org (Postfix) with ESMTP id DADC07828E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 09:55:26 +0000 (UTC)
+	Tue, 17 Oct 2017 09:55:42 +0000 (UTC)
 Received: from submission (posteo.de [89.146.220.130]) 
-	by mout02.posteo.de (Postfix) with ESMTPS id 6151420BD4
+	by mout02.posteo.de (Postfix) with ESMTPS id CE45D20C01
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 11:55:27 +0200 (CEST)
+	Tue, 17 Oct 2017 11:55:43 +0200 (CEST)
 Received: from customer (localhost [127.0.0.1])
-	by submission (posteo.de) with ESMTPSA id 3yGVtQ2YpHzyRn;
-	Tue, 17 Oct 2017 11:55:26 +0200 (CEST)
+	by submission (posteo.de) with ESMTPSA id 3yGVtl3ZBszyxY;
+	Tue, 17 Oct 2017 11:55:43 +0200 (CEST)
 From: Martin Kepplinger <martink@posteo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Oct 2017 11:55:16 +0200
-Message-Id: <20171017095517.5597-1-martink@posteo.de>
+Date: Tue, 17 Oct 2017 11:55:17 +0200
+Message-Id: <20171017095517.5597-2-martink@posteo.de>
 X-Mailer: git-send-email 2.11.0
-Subject: [PATCH] tslib: update project homepage
+In-Reply-To: <20171017095517.5597-1-martink@posteo.de>
+References: <20171017095517.5597-1-martink@posteo.de>
+Subject: [meta-oe][PATCH] tslib: update project homepage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,7 +30,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 09:55:27 -0000
+X-List-Received-Date: Tue, 17 Oct 2017 09:55:43 -0000
 
 The berlios project has been dead for a long time. tslib is hosted and
 developed on github for years already.
