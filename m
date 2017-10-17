@@ -1,42 +1,50 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AA19782E0
+Return-Path: <athoik@gmail.com>
+Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
+	[209.85.128.196])
+	by mail.openembedded.org (Postfix) with ESMTP id DE91978341
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 21:01:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 5262E20A3B;
-	Tue, 17 Oct 2017 21:01:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id O66rGdEJYVI0; Tue, 17 Oct 2017 21:01:11 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 14115204B1;
-	Tue, 17 Oct 2017 21:01:08 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 688901626FF; Tue, 17 Oct 2017 17:01:07 -0400 (EDT)
-Date: Tue, 17 Oct 2017 17:01:07 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20171017210107.GJ9221@denix.org>
-References: <cover.1507147924.git.paul.eggleton@linux.intel.com>
-	<4da0611806ae98b10f6ae00200b3e292a068f940.1507147924.git.paul.eggleton@linux.intel.com>
-	<CAMKF1sp6TG-LrCUq-FMp+z_mR6Yh-CiRXT0tDvJXVsYr+97VPg@mail.gmail.com>
-	<20171017051134.GC9221@denix.org>
-	<CAMKF1sro2nuRcguZzsVOj5B2dNzw6P5KKrkK5dmuzpk_eX8e6g@mail.gmail.com>
-	<CA+chaQeZpm=FAXVETU4x9scAECJ3EURrjjo54JhddHeDBzXWkg@mail.gmail.com>
-	<CAMKF1sqfVVcvf6Hz9tPF7xobT-P64z16mbTQNQ9+t=-kSwo2-A@mail.gmail.com>
-	<20171017180932.GF9221@denix.org>
-	<CAMKF1sqgSSvfZYY8VwtJduZJNogFddrjv4LUeX1K6FfQFp1+1A@mail.gmail.com>
+	Tue, 17 Oct 2017 21:01:41 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id q42so3031931wrb.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Oct 2017 14:01:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BDZf4tpNhkvs2peJ1y5/5rN+eS430PdCDS//q0eG/7k=;
+	b=md27ALg5fxMFJCV7ba9nej7xx4N6mHQmveOOGZp9d+gWCiO8o4pp1AAg5H/eE2ZjaY
+	IOWSuiOpxRbcTbjVjWNLPbLVeWCHXNRmzQ0hlXMUtCdA1efI1TjDpCXlr6oIoWtGBzcg
+	9mDxjWKaWl8t3p2mXESIAdKsBvD/gZRI8I3I0KadW6F4GD0r1xXJGRvReLHj9qSAx//z
+	tj+KQzlMW+sjAp+Vlf2NoInLMknhkiG90xK7YPhkRrfyW9h8UzwQYrHJbtjBFSKplwiY
+	zPa1samCuVZyq9TailBLYSi7CM66jJP9twNbQ5F2u/Y2u4CFv9z+Zpu1cBJixsXaXPi+
+	Nbsw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=BDZf4tpNhkvs2peJ1y5/5rN+eS430PdCDS//q0eG/7k=;
+	b=Zi6u0r3aAzWssOPVQIFytJ4VgpJB+0rw6wToPHfZSq/g6pnq5vhcIUX1FhdSHeBNY3
+	AFP5wB+/iT4SayCUwGXjRsmcxzNFDVlZVuF/ZaYB49/rr4vqzhtHL85ITKn3yNQ0QlwT
+	91z7zAS0J1q2P6K2sSoyu/YeB6mx6+5yeOOwDeYNtO/wN5kkZNUXQbfRXHYsX5RBajVr
+	T1zIEIpwYMgmISbQBtm5UhyEDfFcTsUuRPafe2LnroTwbWl1Q5/Yf83xntuyOE0jscmU
+	Yf1TyigJaa5+Rqea6Upqdz+HYvA3lPbmJYuE6NU9D4fdshm22MnQOL2ESh0KclCKxy4i
+	3tBA==
+X-Gm-Message-State: AMCzsaUglPEB+pUH+vCiLeMaixnN1JIIe3L2rq1urxPwnjKsg/kTRaab
+	mHAR/UUTG3QL2jXgbQc8z2ks
+X-Google-Smtp-Source: ABhQp+RlSZ1IackbqgL3H5bBI90lrqFDsSuhFPNgArUF3EXMqAV4aGZXPxyGt/lUnYEq4NnVBj+NVg==
+X-Received: by 10.223.172.242 with SMTP id o105mr4377082wrc.242.1508274102043; 
+	Tue, 17 Oct 2017 14:01:42 -0700 (PDT)
+Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
+	by smtp.gmail.com with ESMTPSA id v8sm8228203wrg.80.2017.10.17.14.01.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 17 Oct 2017 14:01:41 -0700 (PDT)
+From: Athanasios Oikonomou <athoik@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Oct 2017 00:01:21 +0300
+Message-Id: <1508274082-5871-1-git-send-email-athoik@gmail.com>
+X-Mailer: git-send-email 2.1.4
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqgSSvfZYY8VwtJduZJNogFddrjv4LUeX1K6FfQFp1+1A@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/1] mdns: move from meta-intel-iot-middleware
+Cc: Athanasios Oikonomou <athoik@gmail.com>
+Subject: [meta-oe][PATCH 1/2] Revert "smbnetfs: delete blacklisted"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,85 +57,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 21:01:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Oct 2017 21:01:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Oct 17, 2017 at 12:05:55PM -0700, Khem Raj wrote:
-> On Tue, Oct 17, 2017 at 11:09 AM, Denys Dmytriyenko <denis@denix.org> wrote:
-> > On Tue, Oct 17, 2017 at 10:01:13AM -0700, Khem Raj wrote:
-> >> On Tue, Oct 17, 2017 at 9:58 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> >> > I agree with Khem, I've merged oprofile even when it fails with musl,
-> >> > because that was the main reason for moving it from oe-core to meta-oe, but
-> >> > we don't want to burden Khem with more new musl issues when they are
-> >> > detected soon enough (my world builds don't use musl, so I depend on Khem to
-> >> > provide feedback when he can) .
-> >> >
-> >> > On Tue, Oct 17, 2017 at 6:23 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >> >>
-> >> >> On Mon, Oct 16, 2017 at 10:11 PM, Denys Dmytriyenko <denis@denix.org>
-> >> >> wrote:
-> >> >> > On Mon, Oct 16, 2017 at 09:19:25PM -0700, Khem Raj wrote:
-> >> >> >> On Wed, Oct 4, 2017 at 1:20 PM, Paul Eggleton
-> >> >> >> <paul.eggleton@linux.intel.com> wrote:
-> >> >> >> > The following improvements have been made over the recipe that was in
-> >> >> >> > meta-intel-iot-middleware (a layer which is no longer actively
-> >> >> >> > maintained):
-> >> >> >> >
-> >> >> >> > * Upgrade to latest upstream version (765.50.9)
-> >> >> >> > * Fix compilation failures by passing CC and LD
-> >> >> >> > * Fix "no GNU hash in the ELF binary" issue
-> >> >> >> > * Point S at the correct source subdirectory so that "make clean"
-> >> >> >> > works
-> >> >> >> > * Fix lack of soname on libdns_sd.so leading to missing RDEPENDS QA
-> >> >> >> > error
-> >> >> >> > * Add SUMMARY
-> >> >> >> >
-> >> >> >>
-> >> >> >>
-> >> >> >> This has been accepted into master but it fails to build with musl
-> >> >> >
-> >> >> > Is musl a requirement for meta-oe?
-> >> >>
-> >> >> We have fixed it to a point where we have around 10-12 recipes which
-> >> >> don't compile
-> >> >> with musl, and it would be better to keep this level as such and
-> >> >> especially when we
-> >> >> know its failing. its a requirement for oe-core
-> >>
-> >> I do world builds on master-next with musl on qemumips and rpi3
-> >> continuously, with a known set of failures, if a new one shows up
-> >> I tend to report.
-> >
-> > Ok, no problem, it's just demanding someone new, submitting a patch/recipe, to
-> > go fix musl, which they probably never heard of, would result in never hearing
-> > from them again. :)
-> 
-> I think, its fair to expect some responsibility from submitters. I do
-> not encourage
-> shoot and scoot approach. Eventually it feels like dumping ground.
-> I myself have fixed plenty of recipes which were added and
-> left as it is, orphaned. I had to fix them to work with musl or clang,
-> realizing that
-> given package has had several releases ever since it was added to OE, but we
-> never update the recipe.
+This reverts commit 8159e7d528d61779b711be8b044a4ef2d1ca0ebe.
 
-I agree with your comments in general - striving for quality should be the 
-ultimate goal, just don't forget about balance and compromise... :) It all 
-boils down to available resources on both sides, but you already know that.
+Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+---
+ ...CK_MODULES-to-found-headers-and-libraries.patch | 42 ++++++++++++++++++++++
+ .../smbnetfs/smbnetfs/configure.patch              | 11 ++++++
+ .../recipes-filesystems/smbnetfs/smbnetfs_git.bb   | 28 +++++++++++++++
+ 3 files changed, 81 insertions(+)
+ create mode 100644 meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+ create mode 100644 meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
+ create mode 100644 meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
 
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+new file mode 100644
+index 0000000..f05f09f
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
+@@ -0,0 +1,42 @@
++From 7a524d49b3d4459280f18942df2980603400ec52 Mon Sep 17 00:00:00 2001
++From: Bian Naimeng <biannm@cn.fujitsu.com>
++Date: Fri, 19 Jun 2015 11:54:44 +0900
++Subject: [PATCH] Using PKG_CHECK_MODULES to found headers and libraries of
++ smbclient
++
++Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
++---
++ configure.in    | 5 +++++
++ src/Makefile.am | 3 +++
++ 2 files changed, 8 insertions(+)
++
++diff --git a/configure.in b/configure.in
++index ce21aef..ecd7119 100644
++--- a/configure.in
+++++ b/configure.in
++@@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
++     )]
++ )
++ 
+++dnl *****************************************************************
+++dnl *** Check libsmbclient by pkgconfig to get cflags and ldflags ***
+++dnl *****************************************************************
+++PKG_CHECK_MODULES(SMBCLIENT, smbclient)
+++
++ dnl ******************
++ dnl *** Final step ***
++ dnl ******************
++diff --git a/src/Makefile.am b/src/Makefile.am
++index 41519d8..9fc97e9 100644
++--- a/src/Makefile.am
+++++ b/src/Makefile.am
++@@ -16,3 +16,6 @@ smbnetfs_SOURCES = \
++ 	event.c			event.h			\
++ 	reconfigure.c		reconfigure.h		\
++ 	main.c
+++
+++smbnetfs_CFLAGS=${SMBCLIENT_CFLAGS}
+++smbnetfs_LDFLAGS=${SMBCLIENT_LDFLAGS}
++-- 
++1.8.4.2
++
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
+new file mode 100644
+index 0000000..c80fed1
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
+@@ -0,0 +1,11 @@
++Index: git/configure.in
++===================================================================
++--- git.orig/configure.in	2014-06-18 16:06:16.040721349 +0000
+++++ git/configure.in	2014-07-18 07:49:17.085552256 +0000
++@@ -1,5 +1,5 @@
++ AC_INIT([SMBNetFS],[0.5.3а])
++-AM_INIT_AUTOMAKE
+++AM_INIT_AUTOMAKE([foreign])
++ AC_CONFIG_HEADERS([src/config.h])
++ AC_PROG_CC
++ 
+diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+new file mode 100644
+index 0000000..6995ad3
+--- /dev/null
++++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+@@ -0,0 +1,28 @@
++SUMMARY = "FUSE module for mounting an entire SMB/NMB network in a single directory"
++DESCRIPTION = "SMBNetFS is a Linux/FreeBSD filesystem that allow you to use \
++               samba/microsoft network in the same manner as the network \
++               neighborhood in Microsoft Windows. Please donate me to help \
++               in SMBNetFS development."
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
++HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"
++
++DEPENDS = "fuse samba"
++
++inherit autotools gitpkgv pkgconfig
++
++PKGV = "${GITPKGVTAG}"
++
++SRCREV = "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
++
++SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
++           file://configure.patch \
++           file://Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch"
++
++PACKAGECONFIG ??= ""
++PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no,libgnome-keyring"
++
++S = "${WORKDIR}/git"
++
++PNBLACKLIST[smbnetfs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
+-- 
+2.1.4
 
-> We probably should pay attention towards such orphaned
-> packages closely.
-
-Maybe some sort of automated notification system for aging recipes? On the 
-other hand, the state of the world already provides most of that info, it's 
-just too overwhelming...
-
-
-> > Anyway, I'll look into getting some musl coverage for my submission as well...
-> >
-> > --
-> > Denys
-> 
 
