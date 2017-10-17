@@ -1,54 +1,55 @@
-Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
-	[209.85.128.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 7CBA778306
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B37978336
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 17:47:22 +0000 (UTC)
-Received: by mail-wr0-f182.google.com with SMTP id l1so2547842wrc.3
+	Tue, 17 Oct 2017 18:01:01 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id k4so5593102wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 10:47:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mx2aBNu74gZb5Af+HUXz+g9NUmygf8Lz+2trSYvyuNs=;
-	b=X/0Rwzyp3R32Udxfzeziycp+BZ+49DZVnZuXgq5x5Bmrh3u+gwfggKyy7d0v+w4Dwe
-	nevY1NqW0RNoDSQrfLcZmzDvF6BPgJtu9PTJ2a6y2mBmU4wArjMoPQM2uaqFsuNRqzEk
-	zLW+a0zsM2Mos5SZbNrJaUT6yq9kb/jzoKTAHZBFeZ8aH0HplPRFURBmBJemnycQ1V0Z
-	dTlxlv1+GPFYi1DfNbqlgupmmaS1S4qZEKM7dOxPv3T/nadeO/k+IuT7V/xDSnaaP/Dm
-	upTHoAZLfL4Cidn4LrhzZFh+ZF1nxh5APg43qrvv/l95RcboqkKxImyo718iQwnZuxTp
-	2qcg==
+	Tue, 17 Oct 2017 11:01:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=PCRzKsfABC/XoEXl0dWsf+uBuJ1ggFjB+0OibQPdya0=;
+	b=MIPsOoK313kfYHQtmqezms9us5gjXewjxnFQ/hql6Z0tZkM3bmppVXrcL24HCsoq6H
+	9gcpp0ujqBVTjhQzJjKjLU9JDGGQfl3jiOE0osiME5Er8VYvoalNCFWWXOLyLDnHwUiw
+	H7MTI7W/DcK5E5DDVPM/dGnlSMAnpAa4KiuKDTCIgEko3aBpNz0XohaVygJLOMYBx/lr
+	Lv6+ieg0V3/NdTqAChDMHZeIPhggIvWw3zhG9514rbv/ByWaF7KfMTjwLMN7Srz2XDx/
+	1GKmi/wn1/7cgAIBn85Xmy/HDXC3NbKJRHaDiZeJ5CQFitOKFiHMH+JTdxC/mYu+MvWE
+	Efbg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=mx2aBNu74gZb5Af+HUXz+g9NUmygf8Lz+2trSYvyuNs=;
-	b=ZUPROy9BK+bMlOMO59VUWwhewmaDkt3jf6YFFKKo4zIDuB5DyD5Tgn05qFUck+E75F
-	tA4adBgfgfGdoqReWLfU5l5P5Isz5x+YziznrDGCzr8sqTvuADr/yfhtbl2uNag8gmIe
-	mdldu+YDF2htww4RHMo8AfXVhbRIrBTy8AI6hvyJ68J6jZkFR+uE1MiAhJ/LnCeUfuwh
-	CxkRC7qJt58YgxI00yTd1AiRwP5cbarnuYSEoTDKsNo8hh82cVUq1OwUZXLqMQ8rezr5
-	h6Sx8VAjON80gWu8FhwtFmYyH/J0MSg2fXZDrX1tJSUvIGajQj7eVv7chLLKNXxuufAZ
-	ejdA==
-X-Gm-Message-State: AMCzsaVK+whEUuoJiE5OaDNZ2Auk0FpUfB499fpHbwp/j9kG3OFGbSdu
-	qYsZFSG+LCjUFcN+Re4M+uXQzQ==
-X-Google-Smtp-Source: ABhQp+TOCp+kL/8kCrTuuOeXxLbuJqT59rkDEzruwwIaH+x3g3xeBEw0PreP3xlw1g9HLOChGX0BOQ==
-X-Received: by 10.223.188.133 with SMTP id g5mr3970170wrh.204.1508262443781;
-	Tue, 17 Oct 2017 10:47:23 -0700 (PDT)
-Received: from PC192-168-2-116.speedport.ip
-	(p20030070ED23C4881E6F65FFFE3E7F61.dip0.t-ipconnect.de.
-	[2003:70:ed23:c488:1e6f:65ff:fe3e:7f61])
-	by smtp.googlemail.com with ESMTPSA id
-	c3sm7723804wrd.44.2017.10.17.10.47.23
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 17 Oct 2017 10:47:23 -0700 (PDT)
-From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Oct 2017 19:47:13 +0200
-Message-Id: <20171017174713.3737-1-schnitzeltony@googlemail.com>
-X-Mailer: git-send-email 2.9.5
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=PCRzKsfABC/XoEXl0dWsf+uBuJ1ggFjB+0OibQPdya0=;
+	b=BLnzyo13VTSUJ4P1hR42e6eVsR4MD/wR7oBRCBjtG6Ed/83jWG5yhzepQDfcGx02oR
+	NaX3kHKNTm830wapkQoqI5hrtP9+YtZcn/zO/5h7mDIy8qyUE4h9bb9+CEoMFnO9Sngh
+	hsvyI5MWy9ynES7VPD+Fakmr8Duz6wgRKq60VT4maocms4qX0GGlyxO51FhFG6P26HBf
+	J3orLV/gXF6RmwptEKuHkByDSz5qw348HzWthgrZSaX0BD9O0dQVh19VIAM9i2cZtCaf
+	sMx7UoVTyfIb9Gu9fwqh2KvmnEOhtJwvZa4nW3Sx2ZhdHgORkav/VUMqCVA7dk/lZcLi
+	S/oQ==
+X-Gm-Message-State: AMCzsaXu03AJjkpaDQrR7kZlEKUYQUOKtJ69kQn2nPJE3yvi798HRNxS
+	RUK1m68upioihbwByZD3AoMG0MEqo3eDroDlOtA=
+X-Google-Smtp-Source: ABhQp+Q43yEwwRp4++gVP0gkITVwAIJkE6rCf9e4dAgI/7qnwed7J/VzWYn3aZ5D/tmmrDqCeDATIhb4FtGtbw2YCoo=
+X-Received: by 10.28.167.130 with SMTP id q124mr4059179wme.136.1508263262945; 
+	Tue, 17 Oct 2017 11:01:02 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [PATCH][V2] fluidsynth: update 1.1.6 -> 1.1.8
+Received: by 10.223.166.19 with HTTP; Tue, 17 Oct 2017 11:01:02 -0700 (PDT)
+In-Reply-To: <CAMKF1sr7gGo3LVcOKsp6f6FJFeNLVZHQCt+0MLwCTRMCz9F1Ww@mail.gmail.com>
+References: <cover.1507147924.git.paul.eggleton@linux.intel.com>
+	<4da0611806ae98b10f6ae00200b3e292a068f940.1507147924.git.paul.eggleton@linux.intel.com>
+	<CAMKF1sp6TG-LrCUq-FMp+z_mR6Yh-CiRXT0tDvJXVsYr+97VPg@mail.gmail.com>
+	<20171017051134.GC9221@denix.org>
+	<CAMKF1sro2nuRcguZzsVOj5B2dNzw6P5KKrkK5dmuzpk_eX8e6g@mail.gmail.com>
+	<CA+chaQeZpm=FAXVETU4x9scAECJ3EURrjjo54JhddHeDBzXWkg@mail.gmail.com>
+	<CAMKF1sqfVVcvf6Hz9tPF7xobT-P64z16mbTQNQ9+t=-kSwo2-A@mail.gmail.com>
+	<20171017172327.5aipmv2frrjsszbk@mentor.com>
+	<CAMKF1sr7gGo3LVcOKsp6f6FJFeNLVZHQCt+0MLwCTRMCz9F1Ww@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Tue, 17 Oct 2017 11:01:02 -0700
+Message-ID: <CAJ86T=Vf_0_QYFPwFK+LO+m8yq=T5iVRQZCeHxsgPu--cYaL5w@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Paul Eggleton <paul.eggleton@linux.intel.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH 1/1] mdns: move from meta-intel-iot-middleware
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,67 +62,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 17:47:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 17 Oct 2017 18:01:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-* project has moved from sourceforge to github
-* autotools was replaced by cmake [1]
-* license was changed from LGPL-2.0+ to LGPL-2.1 [2]
+On Tue, Oct 17, 2017 at 10:23 AM, Joe MacDonald
+<Joe_MacDonald@mentor.com> wrote:
+> [Re: [oe] [meta-networking][PATCH 1/1] mdns: move from meta-intel-iot-middleware] On 17.10.17 (Tue 10:01) Khem Raj wrote:
+>> I do world builds on master-next with musl on qemumips and rpi3
+>> continuously, with a known set of failures, if a new one shows up
+>> I tend to report.
+>
+> I obviously haven't been building with musl either, but if it's not that
+> difficult to add to my autobuilder configuration, I'd be happy to.  Is
+> https://github.com/kraj/meta-musl/blob/master/README.md the best source
+> for how to get started with a musl build?
 
-[1] https://github.com/FluidSynth/fluidsynth/commit/3939941c5f3fdaef6bf9258fabd5725e7666554a
-[2] https://github.com/FluidSynth/fluidsynth/commit/1f5a3ca26e5c75e3ae54eb4c88f1f2bd21f87644
+Going slightly off topic, but even though sources can be patched to
+fix build issues due to musl's lack of nss.h, it doesn't really make
+any sense to build nss modules for musl, since these modules can only
+ever be used by glibc.
 
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
----
- .../{fluidsynth_1.1.6.bb => fluidsynth_1.1.8.bb}   | 26 ++++++++++------------
- 1 file changed, 12 insertions(+), 14 deletions(-)
- rename meta-multimedia/recipes-multimedia/fluidsynth/{fluidsynth_1.1.6.bb => fluidsynth_1.1.8.bb} (23%)
+e.g. we have musl patches in recipes such as nss-myhostname, but the
+real fix is probably just to not build the recipe at all for musl.
 
-diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
-similarity index 23%
-rename from meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
-rename to meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
-index 88981e4..ef4c606 100644
---- a/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.6.bb
-+++ b/meta-multimedia/recipes-multimedia/fluidsynth/fluidsynth_1.1.8.bb
-@@ -1,23 +1,21 @@
- SUMMARY = "Fluidsynth is a software synthesizer"
- HOMEPAGE = "http://www.fluidsynth.org/"
- SECTION = "libs/multimedia"
--LICENSE = "LGPL-2.0+"
--LIC_FILES_CHKSUM = "file://COPYING;md5=e198e9aac94943d0ec29a7dae8c29416"
-+LICENSE = "LGPL-2.1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=fc178bcd425090939a8b634d1d6a9594"
- 
- DEPENDS = "alsa-lib ncurses glib-2.0"
- 
--SRC_URI = "${SOURCEFORGE_MIRROR}/project/${BPN}/${BP}/${BP}.tar.gz"
--SRC_URI[md5sum] = "ae5aca6de824b4173667cbd3a310b263"
--SRC_URI[sha256sum] = "50853391d9ebeda9b4db787efb23f98b1e26b7296dd2bb5d0d96b5bccee2171c"
-+SRC_URI = "git://github.com/FluidSynth/fluidsynth.git;branch=1.1.x"
-+SRCREV = "12e7afe3a806a6b397f28e0ca4bc6bab9ebe7047"
-+S = "${WORKDIR}/git"
- 
--inherit autotools-brokensep pkgconfig lib_package
-+inherit cmake pkgconfig lib_package
- 
--PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
--PACKAGECONFIG[sndfile] = "--enable-libsndfile-support,--disable-libsndfile-support,libsndfile1"
--PACKAGECONFIG[jack] = "--enable-jack-support,--disable-jack-support,jack"
--PACKAGECONFIG[pulseaudio] = "--enable-pulse-support,--disable-pulse-support,pulseaudio"
--PACKAGECONFIG[portaudio] = "--enable-portaudio-support,--disable-portaudio-support,portaudio-v19"
-+EXTRA_OECMAKE = "-DLIB_SUFFIX=${@d.getVar('baselib').replace('lib', '')}"
- 
--do_configure_prepend () {
--    rm -f ${S}/m4/*
--}
-+PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'pulseaudio', d)}"
-+PACKAGECONFIG[sndfile] = "-Denable-libsndfile-support=ON,-Denable-libsndfile-support=OFF,libsndfile1"
-+PACKAGECONFIG[jack] = "-Denable-jack-support=ON,-Denable-jack-support=OFF,jack"
-+PACKAGECONFIG[pulseaudio] = "-Denable-pulseaudio=ON,--Denable-pulseaudio=OFF,pulseaudio"
-+PACKAGECONFIG[portaudio] = "-Denable-portaudio=ON,-Denable-portaudio=OFF,portaudio-v19"
--- 
-2.9.5
-
+In this particular case I don't know whether mDNSResponder is tied
+tightly to nss or whether the nss module is an optional add-on but
+that should probably be determined before coming up with fix.
 
