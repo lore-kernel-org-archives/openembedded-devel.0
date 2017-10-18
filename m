@@ -1,35 +1,31 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
-	by mail.openembedded.org (Postfix) with ESMTP id 0D6C9601D3
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 65E7571AB5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Oct 2017 14:08:59 +0000 (UTC)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by orsmga104.jf.intel.com with ESMTP; 18 Oct 2017 07:09:01 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.43,397,1503385200"; d="scan'208";a="161905632"
-Received: from jaertebj-mobl.ger.corp.intel.com (HELO
-	rkubodac-desk.ger.corp.intel.com) ([10.252.14.1])
-	by orsmga005.jf.intel.com with ESMTP; 18 Oct 2017 07:08:59 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Jacobo Aragunde =?utf-8?Q?P=C3=A9rez?= <jaragunde@igalia.com>
-In-Reply-To: <874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com> (Raphael Kubo
-	da Costa's message of "Mon, 16 Oct 2017 16:59:15 +0200")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
-	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
-	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
-	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
-	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
-	<878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
-	<874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Wed, 18 Oct 2017 16:08:59 +0200
-Message-ID: <87efq0wnt0.fsf@rkubodac-desk.ger.corp.intel.com>
-MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-browser] Modern Chromium with GN
+	Wed, 18 Oct 2017 18:42:48 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id AE565208CF;
+	Wed, 18 Oct 2017 18:42:49 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id vj7j2h_obtZh; Wed, 18 Oct 2017 18:42:49 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 8C1672010C;
+	Wed, 18 Oct 2017 18:42:48 +0000 (UTC)
+Received: from gimli.denix (gimli [192.168.0.6])
+	by mail.denix.org (Postfix) with ESMTP id 093611626FE;
+	Wed, 18 Oct 2017 14:42:48 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 18 Oct 2017 14:42:44 -0400
+Message-Id: <1508352164-79210-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 2.7.4
+Cc: Denys Dmytriyenko <denys@ti.com>
+Subject: [meta-qt5][PATCH v2] qt5-ptest.inc: fix qtxmlpatterns:do_install_ptest out-of-order call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,24 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2017 14:09:00 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 18 Oct 2017 18:42:48 -0000
 
-Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
+From: Denys Dmytriyenko <denys@ti.com>
 
-> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
->> Can you check if the attached patch also solves the WebRTC build issue
->> for you? I've tried it here with Yocto's morty branch and GCC 5.4.0.
->>
->> If so, I'll send it upstream, as the original approach
->> (https://webrtc-review.googlesource.com/c/src/+/8641) was not accepted
->> by the WebRTC maintainers.
->
-> Sorry, I'm attaching patch v2, the original version had an extra,
-> unwanted chunk.
+ptest.bbclass provides a set of standard do_*_ptest_base tasks. Each of
+them calls a corresponding regular do_*_ptest task, that components are
+supposed to override for own implementation. When PTEST_ENABLED is not
+set, an anonymous python function removes all do_*_ptest_base tasks from
+the queue. qt5-ptest.inc adds a special case for do_populate_sysroot and
+re-arranges the order or ptest tasks due to that. But, unfortunately,
+do_install_ptest was added directly, not do_install_ptest_base, hence when
+"ptest" is disabled and all other do_*_ptest_base tasks are removed, this
+one do_install_ptest task is left w/o dependencies and gets scheduled for
+execution very early on, even before pseudo-native gets built and stages
+"fakeroot" functionality. The fix is to add do_install_ptest_base task,
+which calls do_install_ptest only when "ptest" is enabled.
 
-I've upstreamed the patch and integrated it into the chromium61 branch.
+Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+---
+v2 - fix circular dependencies, delete default do_install_ptest_base
 
-Work on Chromium 62 has started, but updating is a bit slower now that
-I'm trying to test GCC 5, 7, pyro and rocko.
+ recipes-qt/qt5/qt5-ptest.inc | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
+index 4844878..97bce88 100644
+--- a/recipes-qt/qt5/qt5-ptest.inc
++++ b/recipes-qt/qt5/qt5-ptest.inc
+@@ -4,8 +4,9 @@ inherit ptest
+ 
+ addtask do_populate_sysroot after do_install before do_compile_ptest_base
+ deltask do_compile_ptest_base
+-addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest
+-addtask do_install_ptest after do_compile_ptest_base before do_package
++addtask do_compile_ptest_base after do_populate_sysroot before do_install_ptest_base
++deltask do_install_ptest_base
++addtask do_install_ptest_base after do_compile_ptest_base before do_package
+ 
+ do_compile_ptest() {
+     cd ${S}/tests
+-- 
+2.7.4
+
 
