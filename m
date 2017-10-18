@@ -1,24 +1,35 @@
-Return-Path: <Fupan.Li@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id A4F9F78272
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D6C9601D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Oct 2017 05:57:21 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v9I5vMCd014716
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 22:57:22 -0700 (PDT)
-Received: from svc-pulsar-build.wrs.com (128.224.137.13) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.361.1; Tue, 17 Oct 2017 22:57:21 -0700
-From: Fupan Li <fupan.li@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Oct 2017 05:57:21 +0000
-Message-ID: <1508306241-230482-1-git-send-email-fupan.li@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 18 Oct 2017 14:08:59 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by orsmga104.jf.intel.com with ESMTP; 18 Oct 2017 07:09:01 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.43,397,1503385200"; d="scan'208";a="161905632"
+Received: from jaertebj-mobl.ger.corp.intel.com (HELO
+	rkubodac-desk.ger.corp.intel.com) ([10.252.14.1])
+	by orsmga005.jf.intel.com with ESMTP; 18 Oct 2017 07:08:59 -0700
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Jacobo Aragunde =?utf-8?Q?P=C3=A9rez?= <jaragunde@igalia.com>
+In-Reply-To: <874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com> (Raphael Kubo
+	da Costa's message of "Mon, 16 Oct 2017 16:59:15 +0200")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
+	<878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
+	<874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Wed, 18 Oct 2017 16:08:59 +0200
+Message-ID: <87efq0wnt0.fsf@rkubodac-desk.ger.corp.intel.com>
 MIME-Version: 1.0
-Subject: [meta-java][PATCH] jamvm: fix the building issue of missing ecj-initial
+Cc: openembedded-devel@lists.openembedded.org,
+	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,45 +42,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2017 05:57:21 -0000
+X-List-Received-Date: Wed, 18 Oct 2017 14:09:00 -0000
 Content-Type: text/plain
 
-Both of building jamvm and jamvm-native need ecj-initial
-native tool, but the DEPENDS missed it, thus add ecj-initial
-to its DEPENDS. This commit will fix the following building error:
+Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
 
-linux/jamvm/2.0.0-devel+gitAUTOINC+6cef41d859-r0/recipe-sysroot-native/usr/bin/ecj-initial: No such file or directory
-| Makefile:660: recipe for target 'classes.zip' failed
-| make[6]: *** [classes.zip] Error 127
+> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
+>> Can you check if the attached patch also solves the WebRTC build issue
+>> for you? I've tried it here with Yocto's morty branch and GCC 5.4.0.
+>>
+>> If so, I'll send it upstream, as the original approach
+>> (https://webrtc-review.googlesource.com/c/src/+/8641) was not accepted
+>> by the WebRTC maintainers.
+>
+> Sorry, I'm attaching patch v2, the original version had an extra,
+> unwanted chunk.
 
-Signed-off-by: Fupan Li <fupan.li@windriver.com>
----
- recipes-core/jamvm/jamvm.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+I've upstreamed the patch and integrated it into the chromium61 branch.
 
-diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-index cad91a2..56b01a6 100644
---- a/recipes-core/jamvm/jamvm.inc
-+++ b/recipes-core/jamvm/jamvm.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://jamvm.sourceforge.net/"
- LICENSE = "GPL-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
- 
--DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native"
-+DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native classpath-initial-native ecj-initial-native"
- DEPENDS_virtclass-native = "virtual/java-initial-native classpath-initial-native zlib-native classpath-native ecj-initial-native libffi-native"
- 
- RDEPENDS_${PN} = "classpath"
-@@ -21,7 +21,7 @@ inherit java autotools update-alternatives pkgconfig relative_symlinks
- # This uses 32 bit arm, so force the instruction set to arm, not thumb
- ARM_INSTRUCTION_SET = "arm"
- 
--do_configure_append_virtclass-native() {
-+do_configure_append() {
- 	sed -i -e"s|STAGING_LIBDIR_NATIVE|${STAGING_LIBDIR_NATIVE}|g" \
- 		-e "s|STAGING_DATADIR_NATIVE|${STAGING_DATADIR_NATIVE}|g" \
- 	${WORKDIR}/java
--- 
-2.7.4
-
+Work on Chromium 62 has started, but updating is a bit slower now that
+I'm trying to test GCC 5, 7, pyro and rocko.
 
