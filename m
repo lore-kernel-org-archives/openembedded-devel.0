@@ -1,49 +1,30 @@
-Return-Path: <danwalkes@trellis-logic.com>
-Received: from mail-wr0-f171.google.com (mail-wr0-f171.google.com
-	[209.85.128.171])
-	by mail.openembedded.org (Postfix) with ESMTP id 333B47833B
+Return-Path: <huangqy.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id BB343782D1
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 23:02:14 +0000 (UTC)
-Received: by mail-wr0-f171.google.com with SMTP id k7so3249098wre.2
+	Wed, 18 Oct 2017 01:26:37 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="29327796"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 18 Oct 2017 09:26:37 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 790C548029C6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Oct 2017 16:02:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=trellis-logic-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=MHjCIfeVe3755YjPwqz9rKV2jHStnEmmixhLcZ+uGN8=;
-	b=b3NegsHPCfxUEwsWk3bK9HFw+EGGR5rQrE4aQH6G3J5gNRmQ7BztqTFhOgGs3J4wQB
-	e7UzK4dp48BeLhcjM8RUBkht4luRTVfqcMKiTmPcpUOnpdsntqGnSxaQBvnpJPajPHVs
-	iiFhMtnzKZX5d9UoR7bubf73eQ64EAI+jrgxmlfPMCKl14lGqhkjOUj8ZjsFAxNssTDh
-	+ZYHgjdO0SlKF7WGBGGAcHH79dPaZzSO2/za3FYW9bUapFinKNMETA50vdD8AC8oyFqg
-	lbtCOmAEF8DSCdVcW2XAdR3GQyaFrIpab+QEFdvOGcJxh8jua0ZechV8GcB0zpwjIoB8
-	ybYA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=MHjCIfeVe3755YjPwqz9rKV2jHStnEmmixhLcZ+uGN8=;
-	b=gHIsSQViqYWSTZgj7jDPub03ADDJsA+GbhWevjaLrfo1hxdB6er+ShKwgZwgm2yWcd
-	VIvTSphfUaA92s2ZULiIe1uzlvt5T0MMtG7M2kq6Cmxqnt4qF/r2/o+wD1xwU/wpJATt
-	IUWEAB0M09MgVkYDfZFkiTJT7cMZoJJa8JyPzPtZiNK9ErLxpmvCJeNWEXQGgvJ9erYH
-	b+DuFP43w8/YszEpYTj8QZXx/zgaFfITlBCTP/BiVoqRQU9hiTeXMeIFd7y7FK1401Tx
-	+Sc7CEchEkhe8AJGBWAWbrk4GOiqvVSR3LBwh5k1tIEVTwYIt4RIVWV0JG2YgihCzPHT
-	CWRA==
-X-Gm-Message-State: AMCzsaXDAfTakGujb6GV7eGLx/UE/Kwq3sZSr6HzxHHT43MGBnL1sZFN
-	tADPy7z+TMwV/VDxg804tNv35dP7D6rFnHxWuMsU3g==
-X-Google-Smtp-Source: ABhQp+TrtienTJfHByUKgMwGVAYfSx9Tvc6K+oxfX3x2VYGsti+tGio8xW04eL4f21XkykSjRjBUB7i1vp7OMdlmtxo=
-X-Received: by 10.223.153.45 with SMTP id x42mr4925242wrb.212.1508281335899;
-	Tue, 17 Oct 2017 16:02:15 -0700 (PDT)
+	Wed, 18 Oct 2017 09:26:36 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.125) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Wed, 18 Oct 2017 09:26:34 +0800
+From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 18 Oct 2017 09:26:35 +0800
+Message-ID: <1508289995-12611-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.28.195.139 with HTTP; Tue, 17 Oct 2017 16:02:15 -0700 (PDT)
-In-Reply-To: <aa238651-2c5e-4407-4d62-58bdf6e5dd26@gmail.com>
-References: <1507489523-13556-1-git-send-email-danwalkes@trellis-logic.com>
-	<aa238651-2c5e-4407-4d62-58bdf6e5dd26@gmail.com>
-From: Dan Walkes <danwalkes@trellis-logic.com>
-Date: Tue, 17 Oct 2017 17:02:15 -0600
-Message-ID: <CAAhKrJ3At_1DyTGpLD19jUzXjam0aCtGXzg=PFnET=1hSzEoxA@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH] Fix gpsd Yocto pyro build for read only rootfs
+X-Originating-IP: [10.167.225.125]
+X-yoursite-MailScanner-ID: 790C548029C6.A730D
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] postgresql: Update to 9.4.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,29 +37,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Oct 2017 23:02:15 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 18 Oct 2017 01:26:38 -0000
+Content-Type: text/plain
 
-On Mon, Oct 16, 2017 at 3:50 PM, akuster808 <akuster808@gmail.com> wrote:
-> Dan,
->
->
-> On 10/08/2017 12:05 PM, Dan Walkes wrote:
->> Attempting to include gpsd on Yocto pyro with IMAGE_FEATURES including
->> read-only-rootfs results in an error:
->
-> The subject has "pyro" in it. Is this meat for the stable branch "Pyro"
-> too. It is in Rocko now.
->
-> BTW, 3.16 is not in Pyro. looking for clarification.
->
-Hi Armin,
-I noticed this problem originally on pyro and noticed the same issues
-with the .bb file on the master branch.  I haven't actually tried to
-build on Rocko and I'm not currently setup to build the current
-project on rocko, only on pyro, apologies if I submitted this for the
-wrong branch.  Please let me know what I should do to fix.
+1) Upgrade pcsc-lite from 9.4.13 to 9.4.14.
 
-Thanks
-Dan
+Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+---
+ .../postgresql/{postgresql_9.4.13.bb => postgresql_9.4.14.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/postgresql/{postgresql_9.4.13.bb => postgresql_9.4.14.bb} (67%)
+
+diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
+similarity index 67%
+rename from meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
+rename to meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
+index bf97cad..5a78ea3 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
++++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
+@@ -11,5 +11,5 @@ do_compile_prepend_libc-musl() {
+     sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
+ }
+ 
+-SRC_URI[md5sum] = "dbdb9fbe1b9a394b9ac19d3113b73944"
+-SRC_URI[sha256sum] = "0080f55d65194de8b96a2dab153443f8248ff2b2b10e6ab4cda2dcadcac7f2ab"
++SRC_URI[md5sum] = "2b7e2a2b0232063b68b3f8a0a01902bd"
++SRC_URI[sha256sum] = "8e7df23a104b057b360d03180ebcb67f645e198a4a0bee94bf56b2bc9505ec6b"
+-- 
+2.7.4
+
+
+
 
