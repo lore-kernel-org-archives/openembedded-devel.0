@@ -1,30 +1,24 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id BB343782D1
+Return-Path: <Fupan.Li@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id A4F9F78272
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Oct 2017 01:26:37 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="29327796"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 18 Oct 2017 09:26:37 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 790C548029C6
+	Wed, 18 Oct 2017 05:57:21 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v9I5vMCd014716
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Oct 2017 09:26:36 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.125) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Wed, 18 Oct 2017 09:26:34 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Tue, 17 Oct 2017 22:57:22 -0700 (PDT)
+Received: from svc-pulsar-build.wrs.com (128.224.137.13) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.361.1; Tue, 17 Oct 2017 22:57:21 -0700
+From: Fupan Li <fupan.li@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Oct 2017 09:26:35 +0800
-Message-ID: <1508289995-12611-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+Date: Wed, 18 Oct 2017 05:57:21 +0000
+Message-ID: <1508306241-230482-1-git-send-email-fupan.li@windriver.com>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.125]
-X-yoursite-MailScanner-ID: 790C548029C6.A730D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-oe][PATCH] postgresql: Update to 9.4.14
+Subject: [meta-java][PATCH] jamvm: fix the building issue of missing ecj-initial
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,35 +31,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Oct 2017 01:26:38 -0000
+X-List-Received-Date: Wed, 18 Oct 2017 05:57:21 -0000
 Content-Type: text/plain
 
-1) Upgrade pcsc-lite from 9.4.13 to 9.4.14.
+Both of building jamvm and jamvm-native need ecj-initial
+native tool, but the DEPENDS missed it, thus add ecj-initial
+to its DEPENDS. This commit will fix the following building error:
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+linux/jamvm/2.0.0-devel+gitAUTOINC+6cef41d859-r0/recipe-sysroot-native/usr/bin/ecj-initial: No such file or directory
+| Makefile:660: recipe for target 'classes.zip' failed
+| make[6]: *** [classes.zip] Error 127
+
+Signed-off-by: Fupan Li <fupan.li@windriver.com>
 ---
- .../postgresql/{postgresql_9.4.13.bb => postgresql_9.4.14.bb}         | 4 ++--
+ recipes-core/jamvm/jamvm.inc | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/postgresql/{postgresql_9.4.13.bb => postgresql_9.4.14.bb} (67%)
 
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
-similarity index 67%
-rename from meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
-rename to meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
-index bf97cad..5a78ea3 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_9.4.13.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
-@@ -11,5 +11,5 @@ do_compile_prepend_libc-musl() {
-     sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
- }
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index cad91a2..56b01a6 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://jamvm.sourceforge.net/"
+ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
--SRC_URI[md5sum] = "dbdb9fbe1b9a394b9ac19d3113b73944"
--SRC_URI[sha256sum] = "0080f55d65194de8b96a2dab153443f8248ff2b2b10e6ab4cda2dcadcac7f2ab"
-+SRC_URI[md5sum] = "2b7e2a2b0232063b68b3f8a0a01902bd"
-+SRC_URI[sha256sum] = "8e7df23a104b057b360d03180ebcb67f645e198a4a0bee94bf56b2bc9505ec6b"
+-DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native"
++DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native classpath-initial-native ecj-initial-native"
+ DEPENDS_virtclass-native = "virtual/java-initial-native classpath-initial-native zlib-native classpath-native ecj-initial-native libffi-native"
+ 
+ RDEPENDS_${PN} = "classpath"
+@@ -21,7 +21,7 @@ inherit java autotools update-alternatives pkgconfig relative_symlinks
+ # This uses 32 bit arm, so force the instruction set to arm, not thumb
+ ARM_INSTRUCTION_SET = "arm"
+ 
+-do_configure_append_virtclass-native() {
++do_configure_append() {
+ 	sed -i -e"s|STAGING_LIBDIR_NATIVE|${STAGING_LIBDIR_NATIVE}|g" \
+ 		-e "s|STAGING_DATADIR_NATIVE|${STAGING_DATADIR_NATIVE}|g" \
+ 	${WORKDIR}/java
 -- 
 2.7.4
-
-
 
 
