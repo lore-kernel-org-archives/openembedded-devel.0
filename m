@@ -1,23 +1,25 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B0C0B71A05
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id BD8F478312
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Oct 2017 01:45:23 +0000 (UTC)
+	Thu, 19 Oct 2017 01:45:28 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v9J1jNRp029932
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
-	Wed, 18 Oct 2017 18:45:23 -0700
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id v9J1jRc1003937
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 18 Oct 2017 18:45:27 -0700 (PDT)
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 18 Oct 2017 18:45:21 -0700
+	Wed, 18 Oct 2017 18:45:26 -0700
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 18 Oct 2017 21:45:16 -0400
-Message-ID: <1508377517-102153-1-git-send-email-hongxu.jia@windriver.com>
+Date: Wed, 18 Oct 2017 21:45:17 -0400
+Message-ID: <1508377517-102153-2-git-send-email-hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
+In-Reply-To: <1508377517-102153-1-git-send-email-hongxu.jia@windriver.com>
+References: <1508377517-102153-1-git-send-email-hongxu.jia@windriver.com>
 MIME-Version: 1.0
-Subject: [PATCH 1/2][meta-oe] libpwquality: fix Nothing RPROVIDES 'lib32-python3-libpwquality'
+Subject: [PATCH 2/2][meta-oe] libreport: fix Nothing RPROVIDES 'lib32-python3-libreport'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,44 +32,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Oct 2017 01:45:23 -0000
+X-List-Received-Date: Thu, 19 Oct 2017 01:45:28 -0000
 Content-Type: text/plain
 
-While multilib enabled, if other recipe RDEPENDS python3-libpwquality,
+While multilib enabled, if other recipe RDEPENDS python3-libreport,
 it failed with:
 ...
-ERROR: Nothing RPROVIDES 'lib32-python3-libpwquality'
+ERROR: Nothing RPROVIDES 'lib32-python3-libreport'
 ...
 
 Do not use python3-${PN} could fix the issue.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-extended/libreport/libreport_2.9.2.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-index daf6604..2c96063 100644
---- a/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-+++ b/meta-oe/recipes-extended/libpwquality/libpwquality_1.4.0.bb
-@@ -15,7 +15,7 @@ SRC_URI[sha256sum] = "1de6ff046cf2172d265a2cb6f8da439d894f3e4e8157b056c515515232
- S = "${WORKDIR}/${SRCNAME}-${PV}"
+diff --git a/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb b/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
+index 2fdfd7d..525437b 100644
+--- a/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
++++ b/meta-oe/recipes-extended/libreport/libreport_2.9.2.bb
+@@ -26,7 +26,7 @@ REQUIRED_DISTRO_FEATURES = "systemd"
  
- DEPENDS = "cracklib virtual/gettext python3"
--RDEPENDS_python3-${PN} = "${PN}"
-+RDEPENDS_python3-libpwquality = "${PN}"
+ inherit gettext autotools python3native pkgconfig
  
- inherit autotools python3native gettext
+-RDEPENDS_${PN}-python3 += "${PN}"
++RDEPENDS_python3-libreport += "${PN}"
  
-@@ -36,7 +36,7 @@ EXTRA_OECONF += "--with-python-rev=${PYTHON_BASEVERSION} \
- PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'pam', 'pam', '', d)}"
- PACKAGECONFIG[pam] = "--enable-pam, --disable-pam, libpam"
+ do_patch[prefuncs] += "do_gen_version"
+ do_gen_version() {
+@@ -34,9 +34,9 @@ do_gen_version() {
+     ./gen-version
+ }
  
--PACKAGES += "python3-${PN} python3-${PN}-dbg"
-+PACKAGES += "python3-libpwquality python3-libpwquality-dbg"
- FILES_${PN} += "${libdir}/security/pam_pwquality.so"
- FILES_${PN}-dbg += "${libdir}/security/.debug"
- FILES_${PN}-staticdev += "${libdir}/security/pam_pwquality.a"
+-PACKAGES += "python3-${PN}"
++PACKAGES += "python3-libreport"
+ 
+ FILES_${PN} += "${datadir}/*"
+ FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug"
+-FILES_python3-${PN} = "${PYTHON_SITEPACKAGES_DIR}/*"
++FILES_python3-libreport = "${PYTHON_SITEPACKAGES_DIR}/*"
+ 
 -- 
 1.8.3.1
 
