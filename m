@@ -1,51 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C6B4762134
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 3A4437833C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 22:53:44 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id k62so12519407wrc.9
+	Fri, 20 Oct 2017 22:54:25 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id q124so460026wmb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 15:53:46 -0700 (PDT)
+	Fri, 20 Oct 2017 15:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=OeQx0rhUTSOY8us21d6Yg87NX1l+aNlL9rhRUZ1y57c=;
-	b=VQUHeGSRmMp4P9FJKg0zdHL4cAkYCZ9qwHzTthl4dLu292e82HGfMJUF1nb4jFez8H
-	Xzh28pAy3/KN45Z09qThamP4/+vKmkfo2fhT91xT4kw14L1HWNhE1zEXNcQ5fuTMgO11
-	Dp8mJw6FELSY3GAgUfukJprF/wmq9wAssmhFstm6n4vE+r0zWWn58QYYA9ok9NDPsyAo
-	qElmhPwWpsFsZLpQKyeyS7K4kiomK2OPcP7qBTwR896uaTX+1sc1oWe/aGpIEpoCeeH1
-	BlBY8ue7yNT7jvNKBw0n51f1MOzrsPZhVU6HjtExDnXiHXbSa0GSzubQqmhoF4ybeGDK
-	t/aQ==
+	:cc; bh=vri69C2IMrZ3zwI7g83IuPyStQZvC/SohLauwOJqO/8=;
+	b=EznxgnI4+fKGuNXuuQ/OTPz1kYHjuut0FROh8JlyVA02CKD/DsSMAkPxmGZnifvdij
+	xG0KfMl0iIR4baWkmmvhTUZB1rmoCsAlOtfujxpQcbAWztMNvnS42BJKUXDiPXLPJrpM
+	XPBAQxNAl/tpT08a4nl8vrtPn+dy99a+j2q+KvXnwEq1fx7HBKSkGMLDhz/ZYVkpga6s
+	JEA8+pAQNTysegCJ0pfPuzOx/Ib4BjRrA/+xhEH8Ai7wRKdZnvJEZpR5pPHDrRjKJOu2
+	pKJ4Y5/KCnuPTk/klqB0M8YzlGt9qifXIBNsX+fyyffJ6EZe+t4YqDpCQONyfoSo5L/S
+	1uuA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=OeQx0rhUTSOY8us21d6Yg87NX1l+aNlL9rhRUZ1y57c=;
-	b=RIALeJthjjzPUl/YqHWzw3360aBa8BLVl+fwdsjZigum2B9y18eOmMuWAHBENyOHaH
-	9klir/ePdlyxAHHhUATA3KCeO62nwdhVBZuwEQgPJN5qm+A8XVj9hTuUv7YVjTnxDumZ
-	BnL2n3810UWqfW2p0YC/zKRc6VY/bFEe0O6cGattgHQEk3dcWTys5y2fD9jchzqS796d
-	Vw9ZAlOoE7EI53pHqHOe2zIAQyTBziTOKQEcQjx00hdrDbWGnmH1wK6zaqPfjSdvQEOG
-	45meDuhkFOvvw68v/oLQK1xiWbP7QF/9lu2gA7V23xd6yRR78GuRL0ovtS08WLVMJQE9
-	8WFA==
-X-Gm-Message-State: AMCzsaX1y9LL4RQNvmwZV9IvB5aekzBOuxC9zgbBYsYKq6Lul1U8+G9M
-	GpIHetMH34s/5N29dbyJqPJK/e7usxq2kCNCvBg=
-X-Google-Smtp-Source: ABhQp+RSwtr8HRPSdoRkpfNfDBmLn+ekBAN4PNbXTrw3WwMC9RoYl8dNUemHvl+FVySa/JxQfX+qqN6aOPImGc+m1T8=
-X-Received: by 10.223.134.68 with SMTP id 4mr6114775wrw.67.1508540025673; Fri,
-	20 Oct 2017 15:53:45 -0700 (PDT)
+	bh=vri69C2IMrZ3zwI7g83IuPyStQZvC/SohLauwOJqO/8=;
+	b=EzyBICFhegZdU1M2eveZskfAaC5pYm8DahVb7tqAV1KJaLPDTCHRTTZX/P7y16wUzv
+	sl9ECSZ66KPdT71FGzpTtBtFjHYm5uqzaSuPantDOXDbWKZj09Dt0lSRTKB+VIY+xZW2
+	8KN7xLUzgNzjRlMzBswwtXwMIStkceRJELh6ZNlSV/wqPwY5dfTlEPR9v7sOZw791eWb
+	uj0K++O8lDVz6xaZxkW/AITz6xZO+ZdLkzMM7MjGbtMzg0yNGIxHbS1z+sDrlQ7w+AwE
+	cl6OKEpgAQ+F658/f8jpPkxrvU3X4G6hSoIwAnrb7yCxZafwucg9g7y44GLz5Gu0smkk
+	OhOQ==
+X-Gm-Message-State: AMCzsaVroq9pzSl9OFlM6lAAeNht4wEmUbrQjcm4qtMrOOclL7W5Xb8x
+	60mtqQFM0mJPYy/x7xCv7DyHiAmSt0Gg09LOBnY=
+X-Google-Smtp-Source: ABhQp+QnlbRJew7NbIXq/1tkGP/qQM7yYg8m1uusrz1svtTgPbeHtsQaAVp5gPq21f5g37IIts3KrUgGf/x9WCozRXY=
+X-Received: by 10.28.235.18 with SMTP id j18mr227941wmh.50.1508540067121; Fri,
+	20 Oct 2017 15:54:27 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Fri, 20 Oct 2017 15:53:45 -0700 (PDT)
-In-Reply-To: <25ca8a10-6ade-4852-c9e4-bb36b65e2fd6@linux.intel.com>
-References: <20171017105132.GB4387@jama>
-	<20171017115539.13778-1-mikko.ylinen@linux.intel.com>
-	<20171017120705.GC4387@jama>
-	<25ca8a10-6ade-4852-c9e4-bb36b65e2fd6@linux.intel.com>
+Received: by 10.28.183.212 with HTTP; Fri, 20 Oct 2017 15:54:26 -0700 (PDT)
+In-Reply-To: <20171017195649.8657-2-s.sonski@gmail.com>
+References: <20171017195649.8657-1-s.sonski@gmail.com>
+	<20171017195649.8657-2-s.sonski@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 21 Oct 2017 00:53:45 +0200
-Message-ID: <CA+chaQeZ+unLUOmtNLigrg1kMR7p3A_n5xG+Wx+eqM8T+q2v2g@mail.gmail.com>
-To: Mikko Ylinen <mikko.ylinen@linux.intel.com>
+Date: Sat, 21 Oct 2017 00:54:26 +0200
+Message-ID: <CA+chaQcK6+mS9SgBTaNdzgLdDS=nhoHNj1crFtPeirxnK1m87Q@mail.gmail.com>
+To: Stefan Sonski <s.sonski@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] mraa/upm: enable nodejs bindings by default
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	"Chris E. Rallis" <Chris.Rallis@ravenind.net>
+Subject: Re: [meta-qt5][PATCH 2/2] qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,66 +56,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2017 22:53:45 -0000
+X-List-Received-Date: Fri, 20 Oct 2017 22:54:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Fails to build:
-http://errors.yoctoproject.org/Errors/Details/157425/
+Either this or the ptest change seems to cause:
+http://errors.yoctoproject.org/Errors/Details/157417/
 
-On Tue, Oct 17, 2017 at 2:12 PM, Mikko Ylinen <mikko.ylinen@linux.intel.com>
-wrote:
+On Tue, Oct 17, 2017 at 9:56 PM, Stefan Sonski <s.sonski@gmail.com> wrote:
 
-> Hi,
+> From: "Chris E. Rallis" <Chris.Rallis@RavenInd.net>
 >
+> Signed-off-by: Stefan Sonski <s.sonski@gmail.com>
+> ---
+>  classes/qmake5_base.bbclass | 2 ++
+>  1 file changed, 2 insertions(+)
 >
+> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> index 8e1fe20..042008c 100644
+> --- a/classes/qmake5_base.bbclass
+> +++ b/classes/qmake5_base.bbclass
+> @@ -28,6 +28,7 @@ EXTRA_OEMAKE = " \
+>      OE_QMAKE_LINK='${OE_QMAKE_LINK}' \
+>      OE_QMAKE_LDFLAGS='${OE_QMAKE_LDFLAGS}' \
+>      OE_QMAKE_AR='${OE_QMAKE_AR}' \
+> +    OE_QMAKE_OBJCOPY='${OE_QMAKE_OBJCOPY}' \
+>      OE_QMAKE_STRIP='${OE_QMAKE_STRIP}' \
+>      OE_QMAKE_WAYLAND_SCANNER='${OE_QMAKE_WAYLAND_SCANNER}' \
+>      OE_QMAKE_INCDIR_QT='${STAGING_DIR_TARGET}/${OE_QMAKE_PATH_HEADERS}' \
+> @@ -42,6 +43,7 @@ export OE_QMAKE_CXXFLAGS = "${CXXFLAGS}"
+>  export OE_QMAKE_LINK = "${CXX}"
+>  export OE_QMAKE_LDFLAGS = "${LDFLAGS}"
+>  export OE_QMAKE_AR = "${AR}"
+> +export OE_QMAKE_OBJCOPY = "${OBJCOPY}"
+>  export OE_QMAKE_STRIP = "echo"
+>  export OE_QMAKE_WAYLAND_SCANNER = "${STAGING_BINDIR_NATIVE}/
+> wayland-scanner"
 >
-> On 17/10/17 15:07, Martin Jansa wrote:
+> --
+> 2.14.2
 >
->> On Tue, Oct 17, 2017 at 02:55:39PM +0300, Mikko Ylinen wrote:
->>
->>> HAVE_NODEJS is a leftover from meta-refkit-core where the
->>> layer had to adapt to different BBLAYER combinations (some
->>> where nodejs wasn't available but mraa/upm were).
->>>
->>> Since that check is no longer needed and nodejs is in fact
->>> part of meta-oe, nodejs bindings can be enabled by default
->>> (with exceptions for armv4 and armv5 where nodejs isn't
->>> available).
->>>
->>> Signed-off-by: Mikko Ylinen <mikko.ylinen@linux.intel.com>
->>> ---
->>>   meta-oe/recipes-extended/mraa/mraa_git.bb | 6 +++++-
->>>   meta-oe/recipes-extended/upm/upm_git.bb   | 6 +++++-
->>>   2 files changed, 10 insertions(+), 2 deletions(-)
->>>
->>> diff --git a/meta-oe/recipes-extended/mraa/mraa_git.bb
->>> b/meta-oe/recipes-extended/mraa/mraa_git.bb
->>> index 616048fac..b93fd72c8 100644
->>> --- a/meta-oe/recipes-extended/mraa/mraa_git.bb
->>> +++ b/meta-oe/recipes-extended/mraa/mraa_git.bb
->>> @@ -31,7 +31,11 @@ FILES_${PN}-utils = "${bindir}/"
->>>   # override this in local.conf to get needed bindings.
->>>   # BINDINGS_pn-mraa="python"
->>>   # will result in only the python bindings being built/packaged.
->>> -BINDINGS ??= "python ${@ 'nodejs' if oe.types.boolean(d.getVar('HAVE_NODEJS')
->>> or '0') else '' }"
->>> +BINDINGS ??= "python nodejs"
->>> +
->>> +# nodejs isn't available for armv4/armv5 architectures
->>> +BINDINGS_armv4 ??= "python"
->>> +BINDINGS_armv5 ??= "python"
->>>
->> Still missing one, aren't you?
->>
->>
-> With qemumips64 I got:
->
-> ERROR: Nothing PROVIDES 'mraa'
-> mraa was skipped: incompatible with host mips64-refkit-linux (not in
-> COMPATIBLE_HOST)
->
-> So I left it out.
->
-> -- Mikko
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
