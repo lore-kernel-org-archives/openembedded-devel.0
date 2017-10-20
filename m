@@ -1,31 +1,62 @@
-Return-Path: <Joe_MacDonald@mentor.com>
-Received: from relay1.mentorg.com (relay1.mentorg.com [192.94.38.131])
-	by mail.openembedded.org (Postfix) with ESMTP id 836F7601F6
+Return-Path: <twoerner@gmail.com>
+Received: from mail-it0-f41.google.com (mail-it0-f41.google.com
+	[209.85.214.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A8F4719C8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 12:25:50 +0000 (UTC)
-Received: from svr-orw-fem-06.mgc.mentorg.com ([147.34.97.120])
-	by relay1.mentorg.com with esmtps (TLSv1:ECDHE-RSA-AES256-SHA:256)
-	id 1e5WN5-0002aJ-E9 from Joe_MacDonald@mentor.com ;
-	Fri, 20 Oct 2017 05:25:51 -0700
-Received: from burninator.cal.mentorg.com (147.34.91.1) by
-	SVR-ORW-FEM-06.mgc.mentorg.com (147.34.97.120) with Microsoft SMTP
-	Server id 14.3.224.2; Fri, 20 Oct 2017 05:25:51 -0700
-Received: by burninator.cal.mentorg.com (Postfix, from userid 1000)	id
-	0740F580FF8; Fri, 20 Oct 2017 08:25:50 -0400 (EDT)
-Date: Fri, 20 Oct 2017 08:25:49 -0400
-From: Joe MacDonald <Joe_MacDonald@mentor.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20171020122549.fs4jigrrbfx3ukwr@mentor.com>
-References: <1508397130-81256-1-git-send-email-li.zhou@windriver.com>
-	<CAMKF1sqT6EK4f1vzUDZfi8mXfc+6_Uror0UtbfALPgQ2kDNatw@mail.gmail.com>
+	Fri, 20 Oct 2017 15:33:09 +0000 (UTC)
+Received: by mail-it0-f41.google.com with SMTP id k70so629323itk.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Oct 2017 08:33:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=TcM6dt0/nBhzvbbwC7qTCcQIRxTfR7X3KT2H+2bJoCo=;
+	b=jOQdV9RDEw7pCZE2CIloN7Uax5A5NmrhMMEkwyuqAvNTdYpDOmXPnbWhffcdpmJKh4
+	mqPgZQ2DOPIymABcUvz46/m2GpKO8WjHRM4qZZFfKg7Saro2HrvkuW8VRCqF/J5nNr/P
+	n8oW2iDUXkLkAQiy4vEp7rh70NFrkoBUwEN88ib9Rz1daxG+qyaHazU1G/GODolCo7Zx
+	nJSmOx2s2QOGvFDELVHz3uPFZX/KxvJpzJlj3+4kRSTVBk/DGz1ckO2x95nf5mwYAVmM
+	rqCtm7E4QJ9jngIfM+H0jonybQEZfFX5QHNjcYfbLAlKrhHGm3w3wgdNmDfQO/DVf6ga
+	JEqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:date:from:to:cc:subject:message-id:references
+	:mime-version:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	bh=TcM6dt0/nBhzvbbwC7qTCcQIRxTfR7X3KT2H+2bJoCo=;
+	b=hqAfPIFPW8Ix2kC8TSZ7EFwR4tQe01WGoGVE3t+elNhgMmKNqh+fd6Ir6fnrN+furI
+	Q3TLpcPsLTYCFN35EDkw/Zhty6bxKStm4WpL19NyqEWg2+FON61ZXzMwld2IHRDguNXY
+	8kRBYIgCDP26RGcWl4X0GCVMT/29sB/2PgTxeSmhA6q7KG6g2OATX0jY9OpTyLCGkc7q
+	2BpH6fZzEqIWGDwIpTom5GI7T7xcCYKWiwBcj6mpW3GAuz+ZBD/GSnLhqxvaEqmCncC0
+	v53H9yn+nlrbsiUzaA0wAMoRc7C01o3DNZ08w/cNI4FezeiD7PW58TIdqiOUFoUjTzlO
+	bKlQ==
+X-Gm-Message-State: AMCzsaVUXnlY2YYd8eWL374bzQ0AB0LzuAbgKzP7HWmlwVgPQYSWBKaw
+	DUulfRQCDKWmIV7w/mYyeuo=
+X-Google-Smtp-Source: ABhQp+QO/c9COeFdS1XXvfX+0MrQg/7sOfvyrvyuqvJSRAKJ7vrS7NixjNzQAMFN6CWREmNw7YM9eA==
+X-Received: by 10.36.105.17 with SMTP id e17mr3419117itc.46.1508513590579;
+	Fri, 20 Oct 2017 08:33:10 -0700 (PDT)
+Received: from linux-uys3 ([206.248.190.95])
+	by smtp.gmail.com with ESMTPSA id v20sm449264iob.0.2017.10.20.08.33.09
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 20 Oct 2017 08:33:09 -0700 (PDT)
+Date: Fri, 20 Oct 2017 11:33:08 -0400
+From: Trevor Woerner <twoerner@gmail.com>
+To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+Message-ID: <20171020153307.GA6636@linux-uys3>
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
+	<878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
+	<874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87efq0wnt0.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87shefnm1g.fsf@rkubodac-desk.ger.corp.intel.com>
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1sqT6EK4f1vzUDZfi8mXfc+6_Uror0UtbfALPgQ2kDNatw@mail.gmail.com>
-X-URL: http://github.com/joeythesaint/joe-s-common-environment/tree/master
-X-Configuration: git://github.com/joeythesaint/joe-s-common-environment.git
-X-Editor: Vim-800 http://www.vim.org
-User-Agent: NeoMutt/20170113 (1.7.2)
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] bridge-utils: modify the AR to cross toolchain
+In-Reply-To: <87shefnm1g.fsf@rkubodac-desk.ger.corp.intel.com>
+User-Agent: Mutt/1.6.0 (2016-04-01)
+Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,128 +69,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2017 12:25:50 -0000
-X-Groupsio-MsgNum: 69274
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="ekal3vvcc4tr5aqe"
-Content-Disposition: inline
-
---ekal3vvcc4tr5aqe
+X-List-Received-Date: Fri, 20 Oct 2017 15:33:09 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-[Re: [oe] [meta-networking][PATCH] bridge-utils: modify the AR to cross too=
-lchain] On 17.10.19 (Thu 09:06) Khem Raj wrote:
+On Thu 2017-10-19 @ 06:24:11 PM, Raphael Kubo da Costa wrote:
+> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
+> > Work on Chromium 62 has started, but updating is a bit slower now that
+> > I'm trying to test GCC 5, 7, pyro and rocko.
+> 
+> I've pushed a new branch called "chromium62". It's been test-built
+> against Yocto's pyro (with GCC 5) and rocko (with GCC 7) for x86 and
+> x86-64.
+> 
+> Additional testing is appreciated!
 
-> On Thu, Oct 19, 2017 at 12:12 AM, Li Zhou <li.zhou@windriver.com> wrote:
-> > The Makefile uses the host =E2=80=9Car=E2=80=9D tool when it should be =
-using the
-> > ar from the target toolchain.
-> >
-> > Signed-off-by: Jiwei Sun <jiwei.sun@windriver.com>
-> > Signed-off-by: Li Zhou <li.zhou@windriver.com>
-> > ---
-> >  ...ridge-Modifying-the-AR-to-cross-toolchain.patch | 34 ++++++++++++++=
-++++++++
-> >  .../bridge-utils/bridge-utils_1.5.bb               |  1 +
-> >  2 files changed, 35 insertions(+)
-> >  create mode 100644 meta-networking/recipes-support/bridge-utils/bridge=
--utils/0001-libbridge-Modifying-the-AR-to-cross-toolchain.patch
-> >
-> > diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils/=
-0001-libbridge-Modifying-the-AR-to-cross-toolchain.patch b/meta-networking/=
-recipes-support/bridge-utils/bridge-utils/0001-libbridge-Modifying-the-AR-t=
-o-cross-toolchain.patch
-> > new file mode 100644
-> > index 0000000..e477f41
-> > --- /dev/null
-> > +++ b/meta-networking/recipes-support/bridge-utils/bridge-utils/0001-li=
-bbridge-Modifying-the-AR-to-cross-toolchain.patch
-> > @@ -0,0 +1,34 @@
-> > +From 689e24ef05bd1772b2149e4eb48b058ca8361cf4 Mon Sep 17 00:00:00 2001
-> > +From: Li Zhou <li.zhou@windriver.com>
-> > +Date: Thu, 19 Oct 2017 11:34:18 +0800
-> > +Subject: [PATCH 2/2] libbridge: Modifying the AR to cross toolchain
-> > +MIME-Version: 1.0
-> > +Content-Type: text/plain; charset=3DUTF-8
-> > +Content-Transfer-Encoding: 8bit
-> > +
-> > +The Makefile uses the host =E2=80=9Car=E2=80=9D tool when it should be=
- using the
-> > +ar from the target toolchain.
-> > +
-> > +Upstream-Status: Pending
-> > +
-> > +Signed-off-by: Li Zhou <li.zhou@windriver.com>
-> > +---
-> > + libbridge/Makefile.in | 2 +-
-> > + 1 file changed, 1 insertion(+), 1 deletion(-)
-> > +
-> > +diff --git a/libbridge/Makefile.in b/libbridge/Makefile.in
-> > +index 11c0829..59d7355 100644
-> > +--- a/libbridge/Makefile.in
-> > ++++ b/libbridge/Makefile.in
-> > +@@ -1,7 +1,7 @@
-> > +
-> > + KERNEL_HEADERS=3D-I@KERNEL_HEADERS@
-> > +
-> > +-AR=3Dar
-> > ++AR?=3Dar
->=20
-> perhaps AR=3D@AR@ would be better
+It looks like something in the chromium62 build is calling my native g++ and
+expecting that this native g++ will be recent enough to support c++14:
 
-Yeah, I  agree.
 
--J.
+	| g++  -MMD -MF base/base_paths.o.d  -I/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0.3202.62-r0/chromium-62.0.3202.62/out_bootstrap/gen -I/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0.3202.62-r0/chromium-62.0.3202.62 -isystem/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0.3202.62-r0/recipe-sysroot-native/usr/include -O2 -pipe -DNO_TCMALLOC -D__STDC_FORMAT_MACROS -O2 -g0 -D_FILE_OFFSET_BITS=64 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -pthread -pipe -fno-exceptions -isystem/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0.3202.62-r0/recipe-sysroot-native/usr/include -O2 -pipe -std=c++14 -Wno-c++11-narrowing -c /z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0.3202.62-r0/chromium-62.0.3202.62/base/base_paths.cc -o base/base_paths.o
+	| g++: error: unrecognized command line option ‘-std=c++14’
 
->=20
-> > + RANLIB=3D@RANLIB@
-> > +
-> > + CC=3D@CC@
-> > +--
-> > +1.9.1
-> > +
-> > diff --git a/meta-networking/recipes-support/bridge-utils/bridge-utils_=
-1.5.bb b/meta-networking/recipes-support/bridge-utils/bridge-utils_1.5.bb
-> > index 6032ab0..723ae5f 100644
-> > --- a/meta-networking/recipes-support/bridge-utils/bridge-utils_1.5.bb
-> > +++ b/meta-networking/recipes-support/bridge-utils/bridge-utils_1.5.bb
-> > @@ -7,6 +7,7 @@ SRC_URI +=3D "\
-> >      file://0003-bridge-fix-some-build-time-warnings-errno.h.patch \
-> >      file://0004-libbridge-add-missing-include-s-fix-build-against-mu.p=
-atch \
-> >      file://0005-build-don-t-ignore-CFLAGS-from-environment.patch \
-> > +    file://0001-libbridge-Modifying-the-AR-to-cross-toolchain.patch \
-> >  "
-> >
-> >  LIC_FILES_CHKSUM =3D "file://COPYING;md5=3Df9d20a453221a1b7e32ae84694d=
-a2c37"
-> > --
-> > 1.9.1
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
---=20
--Joe MacDonald.
-:wq
 
---ekal3vvcc4tr5aqe
-Content-Type: application/pgp-signature; name="signature.asc"
+Unfortunately on my openSUSE 42.2 host this isn't the case:
 
------BEGIN PGP SIGNATURE-----
+	$ g++ -v
+	Using built-in specs.
+	COLLECT_GCC=g++
+	COLLECT_LTO_WRAPPER=/usr/lib64/gcc/x86_64-suse-linux/4.8/lto-wrapper
+	Target: x86_64-suse-linux
+	Configured with: ../configure --prefix=/usr --infodir=/usr/share/info --mandir=/usr/share/man --libdir=/usr/lib64 --libexecdir=/usr/lib64 --enable-languages=c,c++,objc,fortran,obj-c++,java,ada --enable-checking=release --with-gxx-include-dir=/usr/include/c++/4.8 --enable-ssp --disable-libssp --disable-plugin --with-bugurl=http://bugs.opensuse.org/ --with-pkgversion='SUSE Linux' --disable-libgcj --disable-libmudflap --with-slibdir=/lib64 --with-system-zlib --enable-__cxa_atexit --enable-libstdcxx-allocator=new --disable-libstdcxx-pch --enable-version-specific-runtime-libs --enable-linker-build-id --enable-linux-futex --program-suffix=-4.8 --without-system-libunwind --with-arch-32=i586 --with-tune=generic --build=x86_64-suse-linux --host=x86_64-suse-linux
+	Thread model: posix
+	gcc version 4.8.5 (SUSE Linux)
 
-iQEzBAABCAAdFiEEkMd/b97HINT8/zEqSfx99yw59pYFAlnp600ACgkQSfx99yw5
-9par+Af+JU/K44IJsceoCRMXCo+BfgvUlOAQ3rlrY6QgYLHSB2W+H0GfCznIJts9
-n2WkG8K+VOIrzWifNvLEran+3q0UkE5tHjTuXPRdLDIMhYycUIOhDcAnLP140M0X
-oynsfY11LYSV28l+0nRvXnTLYJZthvnZkUPe4CASQUOmeZzlvxZxmtQu69htmSH9
-1HLc8ZOQhxSizSO6mCnxSbpH4Oe2ikfhrKo4ha7+yDLwGBluKsZYCcPMobICeX2K
-9f0LPQXjvW5KOFuytHumnNUfXyb89wZTqo0oizAgU4FIUWMhUbvTAF2NQ4+kDLjL
-Mz58XBkNhpXqyN5tHBkxim//RtAZ7g==
-=zNNp
------END PGP SIGNATURE-----
 
---ekal3vvcc4tr5aqe--
+Is there any way to intercept these calls and have it call OE's gcc-native
+instead?
+
