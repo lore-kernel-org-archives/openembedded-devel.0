@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CA9765C8F
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 97F1A6022E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Oct 2017 00:37:32 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id r25so7831763pgn.4
+	Sat, 21 Oct 2017 15:30:18 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id j3so8732639pga.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 17:37:34 -0700 (PDT)
+	Sat, 21 Oct 2017 08:30:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=rbQZsOIIVnCbmGWRT0NvTI0CLQW5YLNMUrh8iSbd1Ys=;
-	b=jeRRQbel3Kd7iCN74yT4Fm5VHoAekyI9a1WS1QlvlskFZaHbZwfT44ImMMn6fMiM2S
-	XvXl2v3ih30WONYoPXKSB26+IOhXzpiIoKBWcj+u4imnY5ljBmKwnrTESFejoac4ml16
-	2kvy/cggmeSsk+XwzAR0XKNFbHjJDDFAzd9MuFXQFRwDMW2rEA+EvQ/FBZBhVqtE8HT2
-	4cYUS1qaQvEzn7201YDypMQGfM0iK5PO4cm2ZwQKbWljKxHP6YopXr4C7xiZPyPgI6Ok
-	5EfGAjXwdAatGoTaOykcI59Azu0HoScMfK6RvUzHxpMICYstllJ0JRs1CZKDGau/anHI
-	mMBw==
+	:cc:content-transfer-encoding;
+	bh=1+5gSRQ6yzw8lN2DYjZQfN/19BaENrNiFyUIPh6/wnE=;
+	b=TAKToLwUdu5Cp1GSxEbH+JY7348pThqg6QITLGSmVnnPMfUW3GZEl38AIXP/JsqFXh
+	DwdaTS2Afu6a8fVgamy93lgyZLAZS7dhV/Y4mIRSqcQPwb1tvgG4AIHDlrNLnjR9yrWL
+	eYahDlbeepFZrN0ga73oj6S5EWZE7ilyR1Py1AxLWST1cebt6OC24pEUEATQJN3PIMP1
+	6eeK/p/jwBvVXK9I1lhXFGhbvEF8/uZKlzaAoU9x7yPS8LD7Xl9gx6VDvJcp21LCCzmd
+	1ljGWcGWzoNdUaySNw3R5yHxSkSMRYnWgpiuucSslJy19xJOyzNfzqZlZVtpjeLgbmKI
+	SA9Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=rbQZsOIIVnCbmGWRT0NvTI0CLQW5YLNMUrh8iSbd1Ys=;
-	b=oHQAKag1n0STpsULSR5uTvNJrNTuAwz/bhI184jBllLwSPzZ8nvNU35nBDEMbDbEJ7
-	Q5CK8jtlUeDiOCvZyDeY6M9gteLH869Ky+zfiGveXGZHRNJ/cucFxaTUC1eV+kEUTfX/
-	UxRFXWY4wLLZ9ANxW170aRJLDKqU6TEkmTRBXSXxFSK0nFTO9LMyiVEPUQVTURtuy38I
-	t7rqHyuNDYGCAYTVpM9L0/UWVz/QWCr6nJTU0YPTspa9vmr15pzxvwBRmXQeyqK/TM/o
-	8ZWwTwf9I992eik4x50ptiZfvCf7FOFSHirLUENixh2gaQoXXbWV8P5dxB4G3OVEY+Ra
-	LIsw==
-X-Gm-Message-State: AMCzsaWWisBCKkzoryxkOjdiucCKkrgaMe9A1ssKzYKmnH4yst7s04QA
-	GtuVznenXAydrbmLbecUEjwQCAWSzjfkJjcx47E=
-X-Google-Smtp-Source: ABhQp+QPZ08zJ0017WbtX6u6DZwr0Iqmg8jTyVhSHZtQEm2LtYL1/z3z20/9t8g/xp2S5yOu1AWEoci+P4MMmXJJyis=
-X-Received: by 10.84.151.70 with SMTP id i64mr5351508pli.114.1508546253571;
-	Fri, 20 Oct 2017 17:37:33 -0700 (PDT)
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=1+5gSRQ6yzw8lN2DYjZQfN/19BaENrNiFyUIPh6/wnE=;
+	b=FrErCgQIMb9MLhoEVpbehqianyPicVFH/FEqrI34/NPe3135AmpqeyOIUiaF6TZT9o
+	Qe6Vk69e4P0t1oDhEi0qxnvu+8vNaFRBdD9Z3oCDTmyFVLGcYsBOWdTCrhcMb8LT0B+G
+	RmKg71sIMPmiwjXQdz7WM5/MSjaWX1y/H/kBeaU73bogwzFB7JPPwbiGfjMVJrZy7oll
+	PRWeALDUV5nnFSIpJ1zfWRWFg5c/Hl0Rzg9/d2ajXhrNOM8ywVR56+tWnvr6yBaXWAe1
+	IcpJQwrorQdRt8iKEXlYqlvXD20ony1YVP2LOBil5evPcZ5oBRYWQ8byP2hEbgr7Snln
+	gD2w==
+X-Gm-Message-State: AMCzsaWKyGDgK3Yi0zKuuLulcv2enSL0cO+B4VsjfUu2wfttBKeVyJQk
+	9cnaUBoAjwkrTCAisbsfvkSjjiaPvtObN8imIj+Okg==
+X-Google-Smtp-Source: ABhQp+Ty3tmJVWIdow/Kp3RcScRyCRjtClWtY1jBbMpwI785o2cln/Z4nXb48OvpKwgRJD+P6eu1QvNMq72Z6mBI66Y=
+X-Received: by 10.98.166.205 with SMTP id r74mr8072900pfl.285.1508599819477;
+	Sat, 21 Oct 2017 08:30:19 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.187.66 with HTTP; Fri, 20 Oct 2017 17:37:03 -0700 (PDT)
-In-Reply-To: <CAJ86T=UPOCnjPbeR3Kg_Tn-bYKy=Zoze=x9eaANdv_qFZbhwcQ@mail.gmail.com>
-References: <1508538555-12051-1-git-send-email-armccurdy@gmail.com>
-	<CAMKF1sqAdkRhgMhuh0JsYcFyGMmbz42WUEDwM8coowqW8qQynQ@mail.gmail.com>
-	<CAJ86T=UPOCnjPbeR3Kg_Tn-bYKy=Zoze=x9eaANdv_qFZbhwcQ@mail.gmail.com>
+Received: by 10.100.187.66 with HTTP; Sat, 21 Oct 2017 08:29:48 -0700 (PDT)
+In-Reply-To: <1508274082-5871-2-git-send-email-athoik@gmail.com>
+References: <1508274082-5871-1-git-send-email-athoik@gmail.com>
+	<1508274082-5871-2-git-send-email-athoik@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 20 Oct 2017 17:37:03 -0700
-Message-ID: <CAMKF1sqoy9b3cdLYcRFFzaLs62tCG-bcqkWL03TMSs1deJhmjw@mail.gmail.com>
-To: Andre McCurdy <armccurdy@gmail.com>
+Date: Sat, 21 Oct 2017 08:29:48 -0700
+Message-ID: <CAMKF1sqe0QA+pBO3K22ww6NML4Qnv8up86_rCM_jH1MxfxzkOw@mail.gmail.com>
+To: Athanasios Oikonomou <athoik@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] ssmtp: misc recipe updates + add Debian "partial loss of message body" fix
+Subject: Re: [meta-oe][PATCH 2/2] smbnetfs: update update 0.5.3a -> 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,34 +55,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Oct 2017 00:37:32 -0000
+X-List-Received-Date: Sat, 21 Oct 2017 15:30:18 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Oct 20, 2017 at 5:27 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Fri, Oct 20, 2017 at 5:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> On Fri, Oct 20, 2017 at 3:29 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->>>  - Backport Debian fix for "partial loss of message body, sending
->>>    message to wrong recipicients" issue:
->>>
->>>      https://sources.debian.net/patches/ssmtp/2.64-8/ssmtp-bug584162-fix.patch/
->>>
->>>  - Control ipv6 support based on ipv6 DISTRO feature.
->>>  - Enable ssl support by default (and add PACKAGECONFIG option to
->>>    control it).
->>>  - Drop inetutils dependency (inetutils provides only applications,
->>>    not libraries or header files, so a build dependency on it doesn't
->>>    make sense).
->>>  - Drop pkgconfig class (the ssmtp configure script etc doesn't make
->>>    any use of pkg-config).
->>>
->>> ...
->>>
->>> -inherit autotools pkgconfig
->>> +inherit autotools
->>
->> Is this intentional to drop pkgconfig ?
+On Tue, Oct 17, 2017 at 2:01 PM, Athanasios Oikonomou <athoik@gmail.com> wr=
+ote:
+> It seems that updating smbnetfs to latest revision fixes build issues.
+> Also remove the blacklist allowing the plugin to build again.
+> Patches reworked to apply on 0.6.0.
 >
-> Yes, see commit message.
 
-Yeah thanks. I need a mobile phone with bigger screen.
+This fails to build for musl
+
+| ../../git/src/common.c:7:10: fatal error: execinfo.h: No such file
+or directory
+|  #include <execinfo.h>
+|           ^~~~~~~~~~~~
+| compilation terminated.
+| make[2]: *** [Makefile:429: smbnetfs-common.o] Error 1
+
+you might want to add dependency DEPENDS_append_libc-musl =3D "
+libexecinfo" and also make sure that -lexecinfo is added to linker
+cmdline
+
+> Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
+> ---
+>  .../Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch    | 6 =
++++---
+>  .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch           | 6 =
++++---
+>  meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb       | 4 =
++---
+>  3 files changed, 7 insertions(+), 9 deletions(-)
+>
+> diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using=
+-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch b/meta-filesystems/=
+recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-head=
+ers-and-libraries.patch
+> index f05f09f..371ab89 100644
+> --- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CH=
+ECK_MODULES-to-found-headers-and-libraries.patch
+> +++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CH=
+ECK_MODULES-to-found-headers-and-libraries.patch
+> @@ -10,10 +10,10 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
+>   src/Makefile.am | 3 +++
+>   2 files changed, 8 insertions(+)
+>
+> -diff --git a/configure.in b/configure.in
+> +diff --git a/configure.ac b/configure.ac
+>  index ce21aef..ecd7119 100644
+> ---- a/configure.in
+> -+++ b/configure.in
+> +--- a/configure.ac
+> ++++ b/configure.ac
+>  @@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
+>       )]
+>   )
+> diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/confi=
+gure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configu=
+re.patch
+> index c80fed1..152507c 100644
+> --- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.pa=
+tch
+> +++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.pa=
+tch
+> @@ -1,9 +1,9 @@
+>  Index: git/configure.in
+>  =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> ---- git.orig/configure.in      2014-06-18 16:06:16.040721349 +0000
+> -+++ git/configure.in   2014-07-18 07:49:17.085552256 +0000
+> +--- git.orig/configure.ac      2014-06-18 16:06:16.040721349 +0000
+> ++++ git/configure.ac   2014-07-18 07:49:17.085552256 +0000
+>  @@ -1,5 +1,5 @@
+> - AC_INIT([SMBNetFS],[0.5.3=D0=B0])
+> + AC_INIT([SMBNetFS],[0.6.0])
+>  -AM_INIT_AUTOMAKE
+>  +AM_INIT_AUTOMAKE([foreign])
+>   AC_CONFIG_HEADERS([src/config.h])
+> diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.b=
+b b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+> index 6995ad3..03e6b2b 100644
+> --- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+> +++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
+> @@ -14,7 +14,7 @@ inherit autotools gitpkgv pkgconfig
+>
+>  PKGV =3D "${GITPKGVTAG}"
+>
+> -SRCREV =3D "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
+> +SRCREV =3D "21c63ed60202e5540613d4c822a57a0b81764499"
+>
+>  SRC_URI =3D "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetf=
+s;branch=3Dmaster \
+>             file://configure.patch \
+> @@ -24,5 +24,3 @@ PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[gnome-keyring] =3D "--with-gnome-keyring=3Dyes,--with-gnom=
+e-keyring=3Dno,libgnome-keyring"
+>
+>  S =3D "${WORKDIR}/git"
+> -
+> -PNBLACKLIST[smbnetfs] ?=3D "Fails to build with RSS http://errors.yoctop=
+roject.org/Errors/Details/132827/ - the recipe will be removed on 2017-09-0=
+1 unless the issue is fixed"
+> --
+> 2.1.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
