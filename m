@@ -1,48 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 912AC78355
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 72E9971974
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 22:54:40 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id q124so460502wmb.0
+	Sat, 21 Oct 2017 00:15:08 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id n14so13188825pfh.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Oct 2017 15:54:42 -0700 (PDT)
+	Fri, 20 Oct 2017 17:15:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=rluq8iJS5RZQDzKI0FEV7IYDmT3y25iaUMYvF5JrkKM=;
-	b=MKlJN+nJXNkCGRyfEKEmZNLiES6W+yl+I6YbM+3OcnoAm8mVp+EFDMlRxQEz/xB8B3
-	kJzV+rsxBYnT6YplSPeiKKyC9uFTEzTK+sq3VNZj/QWKKX4yNfp46CppFLsEydz6rjLW
-	fbtZG2oPUwNRMKPihdCsB+leqZyzUwDn6WSY5N3wUJ4HNwN2WwIeMC/ZeBclAyrw87Sb
-	Rvl+uXxca3P5017hz/RTE4TucWhiPwxaI9pe5W2oE1KcKjGl3MH+mEvQLoTjkZta8IWC
-	pLuIdJCeWPW7s2Air03pPMXaveXtGK2jbBbhnn16bHOiX7wOo6HN0pNfD0TFw3ZpRiHv
-	JJYg==
+	:cc; bh=ipe4w/2xIM/rY9fAkDfJ+yX172aZQQ23NKdNuypiFAU=;
+	b=dlZgKDmVE+2fXaQ0FH/IYtpAzgRFZteoHe+ll6r7EISpZQLb7WV9r/anN9l/ZTGkeT
+	cVuRV7/Z0imSfrUgcQbDxmaGCc20ZDUpOszMfD+2dG3z439iJZAGhJAFh5e1O68LhhNo
+	7YesTjb8wXaiDiRODJZ0+NqL2sXc4JdXdwKkA4A9Ov8FRyD2IEe1pkt5Cv3iHw57tw/k
+	NRl9lgmsZ2HQOSs1d7s5CJNA/gRSUvGgsaCa4KGlXu+hl8GjPB02hEZXEMelhygJuIDn
+	tBNlNvhRBSmTIrL3es/SilQjRlWtIY4KOiq+IkeEZHAYuESVKuD67LjHmKOoPFuPFX1m
+	SMoQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=rluq8iJS5RZQDzKI0FEV7IYDmT3y25iaUMYvF5JrkKM=;
-	b=kz4JnBu2zy1orIpiq2t4vehqdqRDFsDHqCslNULGRk/3ghHWn04KwXyRy/3SNBQsrV
-	tb1LP/O+gi34ade4xhausP0U+0ihPUM8MJ76hWFV16+XJqxGyIMt4Ewg7HIJrs4x2wz9
-	7Zp3sV8ZJjIqIdamgoov4oRfJ1ERqD1Z154JVQPztIphmtExxLYBqRaKUCOIVnF4JMfT
-	a9dkoEuNq/gSi1umaych1vk/3xtbk6TAGEgfmpO0DS5L4SnuXtBrEGqQFG1DG9AfCua8
-	1TGayc7xLIhfMmaKMKMVqRgILxUbQcdavvsJgKtvWQPkkimqmPPjewjB4SFZJ7BJNWlJ
-	+qcA==
-X-Gm-Message-State: AMCzsaX+jpezAsM+Cpz4eIIo+Uu5lKixDNsbo/1Q5C6j26UNCVUsSDUw
-	79+Qy0SXHnIYOSJqtMkYwyJRPCZW470cQh8/Lnd7tA==
-X-Google-Smtp-Source: ABhQp+Qo5YnNPTHsT2YXtP6iC2ZLBvlaNPQD2BfUw7XXJjb95cacE/me72pZrafE8aRiVhSUhFUOK0Z11GVQ9w88dE0=
-X-Received: by 10.28.168.83 with SMTP id r80mr195267wme.59.1508540081609; Fri,
-	20 Oct 2017 15:54:41 -0700 (PDT)
+	bh=ipe4w/2xIM/rY9fAkDfJ+yX172aZQQ23NKdNuypiFAU=;
+	b=keZrF97vg2jNLe5SgmSHFaplb9/sG707Vhp7DryGSJe2UyZm4KnSxBKffJT5KuSEiA
+	CxQgIsk6HOwzksSBnCMgwXx53k7pVOMNfjuH2QBHVb/7w95OaEkeyKkIHWUceD8q/IgN
+	vR4VbAAFG9lPvnNTbcEWD4AOIZNF5PzAyGuVvPGJIzCajJpE4DHSSEXbJ+pspecNWy9u
+	ABuN/m+65BTe5f5HU9n0+41A2Zft3EN8MosITaR7z2kYEGiS/KOZwXlWBZz7dHeybk5w
+	E4CPDwqsjtgaIP3aaSBB9/8b2pFDA6yCKsyKOIvBzu4NDy/kbkY/ecyMmQdCJGl+gEnB
+	mE/A==
+X-Gm-Message-State: AMCzsaVB4h4Vku37jc7uGZOTuEXOsuKN5QvAKv6/JpygbJuAP+226bl9
+	Fb2QCujx8jw09EGq1I4flf1UMVX2yzZxdQhthuY=
+X-Google-Smtp-Source: ABhQp+SY97wGo+O923HhS38kbKJayrSHutSzk9cYCnekeYSNwNQ6cdF8HFmPlT6Gsw3b295QTBhmu8bFpoalS+IG3gA=
+X-Received: by 10.99.107.197 with SMTP id g188mr5860719pgc.341.1508544910033; 
+	Fri, 20 Oct 2017 17:15:10 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Fri, 20 Oct 2017 15:54:41 -0700 (PDT)
-In-Reply-To: <1508352164-79210-1-git-send-email-denis@denix.org>
-References: <1508352164-79210-1-git-send-email-denis@denix.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sat, 21 Oct 2017 00:54:41 +0200
-Message-ID: <CA+chaQf0XPuueHsgsMA10kURjf0ZHVbX1Ms9bbhmdi79LeWS1Q@mail.gmail.com>
-To: Denys Dmytriyenko <denis@denix.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCH v2] qt5-ptest.inc: fix qtxmlpatterns:do_install_ptest out-of-order call
+Received: by 10.100.187.66 with HTTP; Fri, 20 Oct 2017 17:14:39 -0700 (PDT)
+In-Reply-To: <1508538555-12051-1-git-send-email-armccurdy@gmail.com>
+References: <1508538555-12051-1-git-send-email-armccurdy@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 20 Oct 2017 17:14:39 -0700
+Message-ID: <CAMKF1sqAdkRhgMhuh0JsYcFyGMmbz42WUEDwM8coowqW8qQynQ@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] ssmtp: misc recipe updates + add Debian "partial loss of message body" fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,62 +54,216 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Oct 2017 22:54:41 -0000
+X-List-Received-Date: Sat, 21 Oct 2017 00:15:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Either this or the objcopy change seems to cause:
-http://errors.yoctoproject.org/Errors/Details/157417/
-
-On Wed, Oct 18, 2017 at 8:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-
-> From: Denys Dmytriyenko <denys@ti.com>
+On Fri, Oct 20, 2017 at 3:29 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+>  - Backport Debian fix for "partial loss of message body, sending
+>    message to wrong recipicients" issue:
 >
-> ptest.bbclass provides a set of standard do_*_ptest_base tasks. Each of
-> them calls a corresponding regular do_*_ptest task, that components are
-> supposed to override for own implementation. When PTEST_ENABLED is not
-> set, an anonymous python function removes all do_*_ptest_base tasks from
-> the queue. qt5-ptest.inc adds a special case for do_populate_sysroot and
-> re-arranges the order or ptest tasks due to that. But, unfortunately,
-> do_install_ptest was added directly, not do_install_ptest_base, hence when
-> "ptest" is disabled and all other do_*_ptest_base tasks are removed, this
-> one do_install_ptest task is left w/o dependencies and gets scheduled for
-> execution very early on, even before pseudo-native gets built and stages
-> "fakeroot" functionality. The fix is to add do_install_ptest_base task,
-> which calls do_install_ptest only when "ptest" is enabled.
+>      https://sources.debian.net/patches/ssmtp/2.64-8/ssmtp-bug584162-fix.patch/
 >
-> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+>  - Control ipv6 support based on ipv6 DISTRO feature.
+>  - Enable ssl support by default (and add PACKAGECONFIG option to
+>    control it).
+>  - Drop inetutils dependency (inetutils provides only applications,
+>    not libraries or header files, so a build dependency on it doesn't
+>    make sense).
+>  - Drop pkgconfig class (the ssmtp configure script etc doesn't make
+>    any use of pkg-config).
+>
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
 > ---
-> v2 - fix circular dependencies, delete default do_install_ptest_base
+>  .../ssmtp/ssmtp/ssmtp-bug584162-fix.patch          | 126 +++++++++++++++++++++
+>  .../recipes-support/ssmtp/ssmtp_2.64.bb            |  24 ++--
+>  2 files changed, 140 insertions(+), 10 deletions(-)
+>  create mode 100644 meta-networking/recipes-support/ssmtp/ssmtp/ssmtp-bug584162-fix.patch
 >
->  recipes-qt/qt5/qt5-ptest.inc | 5 +++--
->  1 file changed, 3 insertions(+), 2 deletions(-)
+> diff --git a/meta-networking/recipes-support/ssmtp/ssmtp/ssmtp-bug584162-fix.patch b/meta-networking/recipes-support/ssmtp/ssmtp/ssmtp-bug584162-fix.patch
+> new file mode 100644
+> index 0000000..e087bc7
+> --- /dev/null
+> +++ b/meta-networking/recipes-support/ssmtp/ssmtp/ssmtp-bug584162-fix.patch
+> @@ -0,0 +1,126 @@
+> +Bug-Debian: http://bugs.debian.org/584162
+> +Reported-By: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+> +Forwarded: not-needed
+> +Reviewed-By: Anibal Monsalve Salazar <anibal@debian.org>
+> +Last-Update: 2014-08-15
+> +
+> +From: "Daniel Richard G." <skunk@iSKUNK.ORG>
+> +Subject: Re: ssmtp: Partial loss of message body, sending message to wrong recipicients
+> +Date: Thu, 19 Jun 2014 14:44:30 -0400
+> +
+> +Attached is a patch against the original 2.64 source that should address
+> +this bug, and hopefully not break anything. An overview of my changes:
+> +
+> +* Added code to standarise() to drop the trailing '\r' if the line
+> +  originally ended with "\r\n".
+> +
+> +* Added a check to header_parse() that effectively converts an "\r\n" in
+> +  the input into '\n'.
+> +
+> +* Added a conditional so that header_parse() doesn't pass the empty
+> +  string to header_save()---a behavior I observed in testing, at the end
+> +  of a header block with "\r\n" line endings.
+> +
+> +* Simplified the last if(in_header) conditional in header_parse(),
+> +  because it erroneously assumes that if in_header == True, then c could
+> +  have some value other than EOF. (See the condition on the previous
+> +  "while" loop, and the lack of any other way to exit said loop.)
+> +
+> +  header_parse() will now properly grab a header if fed a message
+> +  without a body (i.e. no "\n\n" ending the header block), although this
+> +  code will still drop a header if there is no newline at the end.
+> +
+> +Christoph, thank you for your excellent analysis, and the test cases. I
+> +made use of them, and with my changes sSMTP appears to do the right
+> +thing.
+> +
+> +Debian patch from: https://sources.debian.net/patches/ssmtp/2.64-8/
+> +
+> +Upstream-Status: Backport [debian]
+> +
+> +Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> +
+> +Index: ssmtp-2.64/ssmtp.c
+> +===================================================================
+> +--- ssmtp-2.64.orig/ssmtp.c
+> ++++ ssmtp-2.64/ssmtp.c
+> +@@ -375,6 +375,12 @@ bool_t standardise(char *str, bool_t *li
+> +       if((p = strchr(str, '\n'))) {
+> +               *p = (char)NULL;
+> +               *linestart = True;
+> ++
+> ++              /* If the line ended in "\r\n", then drop the '\r' too */
+> ++              sl = strlen(str);
+> ++              if(sl >= 1 && str[sl - 1] == '\r') {
+> ++                      str[sl - 1] = (char)NULL;
+> ++              }
+> +       }
+> +       return(leadingdot);
+> + }
+> +@@ -768,6 +774,14 @@ void header_parse(FILE *stream)
+> +               }
+> +               len++;
+> +
+> ++              if(l == '\r' && c == '\n') {
+> ++                      /* Properly handle input that already has "\r\n"
+> ++                         line endings; see https://bugs.debian.org/584162 */
+> ++                      l = (len >= 2 ? *(q - 2) : '\n');
+> ++                      q--;
+> ++                      len--;
+> ++              }
+> ++
+> +               if(l == '\n') {
+> +                       switch(c) {
+> +                               case ' ':
+> +@@ -790,7 +804,9 @@ void header_parse(FILE *stream)
+> +                                               if((q = strrchr(p, '\n'))) {
+> +                                                       *q = (char)NULL;
+> +                                               }
+> +-                                              header_save(p);
+> ++                                              if(len > 0) {
+> ++                                                      header_save(p);
+> ++                                              }
+> +
+> +                                               q = p;
+> +                                               len = 0;
+> +@@ -800,35 +816,12 @@ void header_parse(FILE *stream)
+> +
+> +               l = c;
+> +       }
+> +-      if(in_header) {
+> +-              if(l == '\n') {
+> +-                      switch(c) {
+> +-                              case ' ':
+> +-                              case '\t':
+> +-                                              /* Must insert '\r' before '\n's embedded in header
+> +-                                                 fields otherwise qmail won't accept our mail
+> +-                                                 because a bare '\n' violates some RFC */
+> +-
+> +-                                              *(q - 1) = '\r';        /* Replace previous \n with \r */
+> +-                                              *q++ = '\n';            /* Insert \n */
+> +-                                              len++;
+> +-
+> +-                                              break;
+> +-
+> +-                              case '\n':
+> +-                                              in_header = False;
+> +-
+> +-                              default:
+> +-                                              *q = (char)NULL;
+> +-                                              if((q = strrchr(p, '\n'))) {
+> +-                                                      *q = (char)NULL;
+> +-                                              }
+> +-                                              header_save(p);
+> +-
+> +-                                              q = p;
+> +-                                              len = 0;
+> +-                      }
+> ++      if(in_header && l == '\n') {
+> ++              /* Got EOF while reading the header */
+> ++              if((q = strrchr(p, '\n'))) {
+> ++                      *q = (char)NULL;
+> +               }
+> ++              header_save(p);
+> +       }
+> +       (void)free(p);
+> + }
+> diff --git a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+> index 9d4864d..07e3ffe 100644
+> --- a/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+> +++ b/meta-networking/recipes-support/ssmtp/ssmtp_2.64.bb
+> @@ -1,25 +1,29 @@
+>  SUMMARY = "extremely simple MTA to get mail off the system to a mail hub"
+>  HOMEPAGE = "http://packages.qa.debian.org/s/ssmtp.html"
+> -
+>  LICENSE = "GPLv2"
+>  LIC_FILES_CHKSUM = "file://COPYING;md5=0c56db0143f4f80c369ee3af7425af6e"
 >
-> diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> index 4844878..97bce88 100644
-> --- a/recipes-qt/qt5/qt5-ptest.inc
-> +++ b/recipes-qt/qt5/qt5-ptest.inc
-> @@ -4,8 +4,9 @@ inherit ptest
+> -SRC_URI = "\
+> -           ${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.bz2 \
+> +SRC_URI = "${DEBIAN_MIRROR}/main/s/${BPN}/${BPN}_${PV}.orig.tar.bz2 \
+> +           file://ssmtp-bug584162-fix.patch \
+>             file://build-ouside_srcdir.patch \
+>             file://use-DESTDIR.patch \
+> -          "
+> -
+> -EXTRA_OECONF += "--mandir=${mandir}"
+> -
+> -EXTRA_OEMAKE = "GEN_CONFIG='/bin/true'"
+> +"
 >
->  addtask do_populate_sysroot after do_install before do_compile_ptest_base
->  deltask do_compile_ptest_base
-> -addtask do_compile_ptest_base after do_populate_sysroot before
-> do_install_ptest
-> -addtask do_install_ptest after do_compile_ptest_base before do_package
-> +addtask do_compile_ptest_base after do_populate_sysroot before
-> do_install_ptest_base
-> +deltask do_install_ptest_base
-> +addtask do_install_ptest_base after do_compile_ptest_base before
-> do_package
+>  SRC_URI[md5sum] = "65b4e0df4934a6cd08c506cabcbe584f"
+>  SRC_URI[sha256sum] = "22c37dc90c871e8e052b2cab0ad219d010fa938608cd66b21c8f3c759046fa36"
 >
->  do_compile_ptest() {
->      cd ${S}/tests
+> -inherit autotools pkgconfig
+> +inherit autotools
+
+Is this intentional to drop pkgconfig ?
+
+> +
+> +PACKAGECONFIG ?= "ssl ${@bb.utils.filter('DISTRO_FEATURES', 'ipv6', d)}"
+> +
+> +PACKAGECONFIG[ssl] = "--enable-ssl,--disable-ssl,openssl"
+> +PACKAGECONFIG[ipv6] = "--enable-inet6,--disable-inet6"
+> +
+> +EXTRA_OECONF += "--mandir=${mandir}"
+> +
+> +EXTRA_OEMAKE = "GEN_CONFIG='/bin/true'"
+>
+> -DEPENDS += "openssl inetutils"
+> +LDFLAGS += "${@bb.utils.contains('PACKAGECONFIG', 'ssl', '-lssl -lcrypto', '', d)}"
+>
+>  do_install_append () {
+>      install -d ${D}${mandir}/
 > --
-> 2.7.4
+> 1.9.1
 >
 > --
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
