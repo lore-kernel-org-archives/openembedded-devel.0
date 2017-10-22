@@ -1,52 +1,50 @@
 Return-Path: <athoik@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id CDA35719E7
+Received: from mail-yw0-f195.google.com (mail-yw0-f195.google.com
+	[209.85.161.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 70F2B60621
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Oct 2017 22:16:57 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id q132so3596570wmd.2
+	Sun, 22 Oct 2017 07:48:59 +0000 (UTC)
+Received: by mail-yw0-f195.google.com with SMTP id z195so3194850ywz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Oct 2017 15:16:59 -0700 (PDT)
+	Sun, 22 Oct 2017 00:49:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=opTBoMncK9DwSvOHks/KcKHxy7kHBIhMzwhpJh4g6PU=;
-	b=XgDot2JMjI1B+8FRgn5J1rBQUiVx/CHyNyfeC3mmAcuu988jDfbTSRmzTArGT4oPkf
-	eisIccO1bVU4wA3G+4ErYQ9UKQe85JzDOPLKA5XYjEv45sJMb+y6pwn790E5tYsA+up6
-	rP1lv6p2Ckt5dzXWhvRAYSLPQbDwD0vLNa5uZs14VMuDQ77j18nTkm17YA8HCs6s7kLC
-	Y2GI+KJoca1uXWC0T68ywtQhCk/5K8iO33o4jW/ewfcxFqSbh7xyZPeWsdwPffT23EI2
-	S3qMu8L9DxB14yxbCCrAOETFp4nPLtLdc+joyp1Ye9+b9/z+mSRwpQXN2dpaEKpC8Hc9
-	f0Qg==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=wKaPKd2W3NWIDBe25HsymO+To4cG21MKXYKplBEI/vk=;
+	b=G/Jjo/85onfbLdQMzkeGjfxSTa8cjrL2wbXUOtGf4gGpqDVOpRMAS0GvGlMnRyKQqz
+	HBwupl2PecCT6JAuwfDmwxkRrEtWA3Y9aA6+4B7Y2iQQJvQR/afxRXRGn/BYLZfTBJow
+	atH4XkeNaxZH7h6QaUw1R5v/NXSNW4C8kxTfPwZMNrpf4aMuEVYhH36PEiTX1sLcl8eL
+	C9BJt9RYFbAS/OWWI8mfk1mJY8INrxNjdTzjtHEcyWqGpILO0M9e9nE0NTVclGeyOwzb
+	C61QB7zpiWKeuPKtUbICgZPRrJrbD+6wgPqgMocN8nfRwkl20Kmj/S5Nj+0UbhRb7m8X
+	FWBw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=opTBoMncK9DwSvOHks/KcKHxy7kHBIhMzwhpJh4g6PU=;
-	b=VGpmEyGWF+ZfTRJOyomlHX8qAm6nQrRo/e3+lmNoWeWwxmH98terirv2qDnf3NMqyC
-	pCVrOB8Eeq28/rW7iw2p5ELqv8xMJ2PoAAXKmusK0QnsTxNXyiXIjYGdOwPLx1bVKFGT
-	k0PKr3OypzR/koNf0My9W1OIwd5PSKdAn9YcmuBkdi7XeQfa7ZWQHV7ZZzeJIiN1cVe7
-	Xvc60G/hyt2RJF8mo8+L238tFIAnP1jCvWNNlnplgBWS/V+PdX6J33eTFd7PQoZ7sw51
-	se+5rEBjLMwjYeIcFDGUQMhPCUV6U+Zjur21qjenzT/ejlDW41wrqE2aftcw/F0TglbB
-	v9mg==
-X-Gm-Message-State: AMCzsaVSfKkj4zK6gLsfP8b0hJRIjhUiDqTG7ZnjDP7pFTxo7WYiaidS
-	pfKpLFbKEWWgW7ldSf6fjH1i
-X-Google-Smtp-Source: ABhQp+T8Qa6r54FYDQqrXX+SZDYZVChBsRIHjzhjhtqwumVQzVilMtjrfYh87kH4nlqfAx7BRgXu9g==
-X-Received: by 10.28.29.130 with SMTP id d124mr2275408wmd.73.1508624218354;
-	Sat, 21 Oct 2017 15:16:58 -0700 (PDT)
-Received: from images.net (ns380618.ip-188-165-252.eu. [188.165.252.42])
-	by smtp.gmail.com with ESMTPSA id
-	e77sm3764305wmi.16.2017.10.21.15.16.57
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 21 Oct 2017 15:16:57 -0700 (PDT)
-From: Athanasios Oikonomou <athoik@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Oct 2017 01:16:32 +0300
-Message-Id: <1508624192-6257-2-git-send-email-athoik@gmail.com>
-X-Mailer: git-send-email 2.1.4
-In-Reply-To: <1508624192-6257-1-git-send-email-athoik@gmail.com>
-References: <1508624192-6257-1-git-send-email-athoik@gmail.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=wKaPKd2W3NWIDBe25HsymO+To4cG21MKXYKplBEI/vk=;
+	b=LaFH0gb+4LdeHdH1/LNr5pOLnm4wBXryJHuL+flCvZNkAQOvtNerrUBD6V97e9LjW1
+	2n0a0BzNID+jgzlqBUN+FGhNTmuGCF4/6qfwCoNdFyilrUzjbCQWilDuhJnCphQlTBHu
+	eL7Bn731IheLpXCEUKNANsiBPIcI/xKsmFPd9THXoPhKux7JYFVKYPHpnvm7KIYNwww+
+	Y3wqFi/4ZffNeCGiUMj0nPb3H0HVeZNIp30tWkVcmx7g1q//55g+qA6Gbexx2EWk8fat
+	+DgiUXwHH8WijZYuZpD7Y4I1w7Edlikppdm3tCwti1r12ctfsWb22Zb53oiH9JbatNzn
+	jHhA==
+X-Gm-Message-State: AMCzsaWfWNZiqmhqoowdz/+h5igO782rVdeEMn0c4Xsn5RCbhRVHwQpK
+	xPVjnnHVdtIHSMKzedmP4laZVVLosYmT90WF3Q==
+X-Google-Smtp-Source: ABhQp+Sf2Id/gv16QwKUWjbAqFYK5IBQLsrTdw7/WYMr0oiUbY4hyt0dDtS9GFVawBLnZ7q/Gr/k2hLJWDVTiygrpI8=
+X-Received: by 10.37.209.200 with SMTP id i191mr6094255ybg.225.1508658540493; 
+	Sun, 22 Oct 2017 00:49:00 -0700 (PDT)
 MIME-Version: 1.0
-Cc: Athanasios Oikonomou <athoik@gmail.com>
-Subject: [meta-oe][PATCH v2 2/2] smbnetfs: update update 0.5.3a -> 0.6.0
+Received: by 10.37.203.21 with HTTP; Sun, 22 Oct 2017 00:48:59 -0700 (PDT)
+In-Reply-To: <CAMKF1sqe0QA+pBO3K22ww6NML4Qnv8up86_rCM_jH1MxfxzkOw@mail.gmail.com>
+References: <1508274082-5871-1-git-send-email-athoik@gmail.com>
+	<1508274082-5871-2-git-send-email-athoik@gmail.com>
+	<CAMKF1sqe0QA+pBO3K22ww6NML4Qnv8up86_rCM_jH1MxfxzkOw@mail.gmail.com>
+From: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
+	<athoik@gmail.com>
+Date: Sun, 22 Oct 2017 10:48:59 +0300
+Message-ID: <CANDbA3coqHx=fEXZrVNyBSsPeTHM5pYNN46LNwXeoheqbOdsCw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] smbnetfs: update update 0.5.3a -> 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,87 +57,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Oct 2017 22:16:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 22 Oct 2017 07:48:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-It seems that updating smbnetfs to latest revision fixes build issues.
-Also remove the blacklist allowing the plugin to build again.
-Patches reworked to apply on 0.6.0.
+2017-10-21 18:29 GMT+03:00 Khem Raj <raj.khem@gmail.com>:
+>
+> This fails to build for musl
+>
+> | ../../git/src/common.c:7:10: fatal error: execinfo.h: No such file
+> or directory
+> |  #include <execinfo.h>
+> |           ^~~~~~~~~~~~
+> | compilation terminated.
+> | make[2]: *** [Makefile:429: smbnetfs-common.o] Error 1
+>
+> you might want to add dependency DEPENDS_append_libc-musl = "
+> libexecinfo" and also make sure that -lexecinfo is added to linker
+> cmdline
+>
 
-Additionally handle missing libexecinfo (DEPENDS and LDFLAGS)
-when building with musl else we are getting the following error:
-| ../../git/src/common.c:7:10: fatal error: execinfo.h: No such file or directory
-|  #include <execinfo.h>
+Hi,
 
-Signed-off-by: Athanasios Oikonomou <athoik@gmail.com>
----
- .../Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch    | 6 +++---
- .../recipes-filesystems/smbnetfs/smbnetfs/configure.patch           | 6 +++---
- meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb       | 5 +++--
- 3 files changed, 9 insertions(+), 8 deletions(-)
+I created a newer revision of the patches with the extra DEPENDS and
+LDFLAGS for execinfo. Tested with musl using instructions from here:
+https://github.com/kraj/meta-musl and build doesn't produce the error
+any more.
 
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-index f05f09f..371ab89 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/Using-PKG_CHECK_MODULES-to-found-headers-and-libraries.patch
-@@ -10,10 +10,10 @@ Signed-off-by: Bian Naimeng <biannm@cn.fujitsu.com>
-  src/Makefile.am | 3 +++
-  2 files changed, 8 insertions(+)
- 
--diff --git a/configure.in b/configure.in
-+diff --git a/configure.ac b/configure.ac
- index ce21aef..ecd7119 100644
----- a/configure.in
--+++ b/configure.in
-+--- a/configure.ac
-++++ b/configure.ac
- @@ -125,6 +125,11 @@ AC_CHECK_LIB(smbclient, smbc_setOptionUserData,
-      )]
-  )
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-index c80fed1..152507c 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs/configure.patch
-@@ -1,9 +1,9 @@
- Index: git/configure.in
- ===================================================================
----- git.orig/configure.in	2014-06-18 16:06:16.040721349 +0000
--+++ git/configure.in	2014-07-18 07:49:17.085552256 +0000
-+--- git.orig/configure.ac	2014-06-18 16:06:16.040721349 +0000
-++++ git/configure.ac	2014-07-18 07:49:17.085552256 +0000
- @@ -1,5 +1,5 @@
-- AC_INIT([SMBNetFS],[0.5.3а])
-+ AC_INIT([SMBNetFS],[0.6.0])
- -AM_INIT_AUTOMAKE
- +AM_INIT_AUTOMAKE([foreign])
-  AC_CONFIG_HEADERS([src/config.h])
-diff --git a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-index 6995ad3..0fcfd6a 100644
---- a/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-+++ b/meta-filesystems/recipes-filesystems/smbnetfs/smbnetfs_git.bb
-@@ -9,12 +9,13 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=eb723b61539feef013de476e68b5c50a"
- HOMEPAGE ="http://sourceforge.net/projects/smbnetfs"
- 
- DEPENDS = "fuse samba"
-+DEPENDS_append_libc-musl = " libexecinfo"
- 
- inherit autotools gitpkgv pkgconfig
- 
- PKGV = "${GITPKGVTAG}"
- 
--SRCREV = "ace1c519d45fe488b9b7e6cc77a2bcadb6c83464"
-+SRCREV = "21c63ed60202e5540613d4c822a57a0b81764499"
- 
- SRC_URI = "git://smbnetfs.git.sourceforge.net/gitroot/smbnetfs/smbnetfs;branch=master \
-            file://configure.patch \
-@@ -25,4 +26,4 @@ PACKAGECONFIG[gnome-keyring] = "--with-gnome-keyring=yes,--with-gnome-keyring=no
- 
- S = "${WORKDIR}/git"
- 
--PNBLACKLIST[smbnetfs] ?= "Fails to build with RSS http://errors.yoctoproject.org/Errors/Details/132827/ - the recipe will be removed on 2017-09-01 unless the issue is fixed"
-+LDFLAGS_append_libc-musl = " -lexecinfo"
--- 
-2.1.4
+If that's fine please cherry-pick also the commit into pyro if
+possible (the revert not required).
 
+Thanks,
+Athanasios
 
