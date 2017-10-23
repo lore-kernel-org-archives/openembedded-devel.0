@@ -1,46 +1,37 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f182.google.com (mail-pf0-f182.google.com
-	[209.85.192.182])
-	by mail.openembedded.org (Postfix) with ESMTP id E40806FFD4
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 42C0D70016
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Oct 2017 05:16:26 +0000 (UTC)
-Received: by mail-pf0-f182.google.com with SMTP id d28so16251688pfe.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Oct 2017 22:16:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=6QnabFyyqhG6IXOawSwqCl9mC7qvcy5YAmBeW8VlUU8=;
-	b=DhRNA8XNioWL2+KAZRPEZhFfZO4WgzNPvg1KxHDoGv4BfPDM6RvXY3/esd1O2EPqKU
-	5siz1htD3Lh25P59yfiV44ebAUVzUYDvdifcPaaL71wLyjFOPFKqK4qnkYvPKrGaCsgC
-	N3KMwlhKKEkCd1sY7T03OpCta5tb72zksJM5hToCtYsYqdeaggmVbTme2XcY7e/Ofq11
-	i4+i+tlKj54mTOsHDhd2wsZ1LLNkBTI9NfEF08wvuMDz++xQN8yz3xOS4+lp5pOz4ae3
-	CQFBac4o6c2mSdCsC6kHO1yhy5z106BIOeC9/UWsEFI+4lHmZXNOIgRtbc6uzMELBBDs
-	ORZw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=6QnabFyyqhG6IXOawSwqCl9mC7qvcy5YAmBeW8VlUU8=;
-	b=JxjAMPvsihljd1a5OQ6uJeQ6lkgwbAqxLNsGrvG/htOGxJ6u0lxIJnQaGr3RXBKLMG
-	fPufGMWK95IPgGKcCAUNe/J0aiGJjMZ5X6W2ck0DNJu9BZ5HIeZd3KeIVzzKOLYgcvVm
-	jCUY3pNe1XfECRX4EKzYhnIXOz3Hzt3o6hdKB/XCa/UYjwtSk1UwM+S0vJSSnMkK6sOm
-	UWgdZ3nvMycyBuRXCO9wYVV4VLJwAxueGnPzpr4VVGGo5lyr7k5DIMZ5mZrGG6U83GLh
-	cJqdO8yN72UQBVnOmWLpIR8d1O0H3V4qdGkaIbqJiykGbujyApoOKorAp9kwDtNAXaPO
-	QmfQ==
-X-Gm-Message-State: AMCzsaXOs2Iht7xOOD/x0vh4Cl5eMDKWckpITqZHghak9HxmmCt+qKjH
-	qilIzsRLWMvjS4l2/bj/Re/qQg==
-X-Google-Smtp-Source: ABhQp+THpiKq3T4i1dhYDvwa+DonnNc7PC3ljkUH7QuY1n7Ok1TC+JskYE7lAxG6fRtxy4uMxJFjCw==
-X-Received: by 10.98.49.135 with SMTP id x129mr11993344pfx.315.1508735787793; 
-	Sun, 22 Oct 2017 22:16:27 -0700 (PDT)
-Received: from localhost.localdomain ([2601:646:8882:b8c::d2ab])
-	by smtp.gmail.com with ESMTPSA id t9sm9376560pgr.3.2017.10.22.22.16.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 22 Oct 2017 22:16:27 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Oct 2017 22:16:19 -0700
-Message-Id: <20171023051619.37072-1-raj.khem@gmail.com>
-X-Mailer: git-send-email 2.14.2
-Subject: [meta-networking][PATCH] dovecot: Fix parallel build
+	Mon, 23 Oct 2017 11:06:19 +0000 (UTC)
+Received: from fmsmga004.fm.intel.com ([10.253.24.48])
+	by orsmga104.jf.intel.com with ESMTP; 23 Oct 2017 04:06:21 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.43,422,1503385200"; d="scan'208";a="326512784"
+Received: from rkubodac-desk.ger.corp.intel.com ([10.252.17.104])
+	by fmsmga004.fm.intel.com with ESMTP; 23 Oct 2017 04:06:19 -0700
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Trevor Woerner <twoerner@gmail.com>
+In-Reply-To: <20171020153307.GA6636@linux-uys3> (Trevor Woerner's message of
+	"Fri, 20 Oct 2017 11:33:08 -0400")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
+	<878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
+	<874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87efq0wnt0.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87shefnm1g.fsf@rkubodac-desk.ger.corp.intel.com>
+	<20171020153307.GA6636@linux-uys3>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Mon, 23 Oct 2017 13:06:19 +0200
+Message-ID: <87lgk2nmxg.fsf@rkubodac-desk.ger.corp.intel.com>
+MIME-Version: 1.0
+Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,75 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Oct 2017 05:16:27 -0000
+X-List-Received-Date: Mon, 23 Oct 2017 11:06:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../dovecot/0001-doveadm-Fix-parallel-build.patch  | 38 ++++++++++++++++++++++
- .../recipes-support/dovecot/dovecot_2.2.29.bb      |  4 ++-
- 2 files changed, 41 insertions(+), 1 deletion(-)
- create mode 100644 meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
+Trevor Woerner <twoerner@gmail.com> writes:
 
-diff --git a/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch b/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
-new file mode 100644
-index 000000000..65ae9bf91
---- /dev/null
-+++ b/meta-networking/recipes-support/dovecot/dovecot/0001-doveadm-Fix-parallel-build.patch
-@@ -0,0 +1,38 @@
-+From be9b3809b86fe593dbb16f0b981b3d315a27b799 Mon Sep 17 00:00:00 2001
-+From: Khem Raj <raj.khem@gmail.com>
-+Date: Sun, 22 Oct 2017 22:10:41 -0700
-+Subject: [PATCH] doveadm: Fix parallel build
-+
-+Sometimes dovetail build fails with errors like
-+
-+doveadm-util.o: file not recognized: File truncated
-+collect2: error: ld returned 1 exit status
-+make[4]: *** [Makefile:812: test-doveadm-util] Error 1
-+
-+This is partial backport from
-+
-+https://github.com/dovecot/core/commit/b200bc3875fa06d42c8619865cc306c3297fcacc
-+
-+Signed-off-by: Khem Raj <raj.khem@gmail.com>
-+---
-+ src/doveadm/Makefile.am | 4 ++--
-+ 1 file changed, 2 insertions(+), 2 deletions(-)
-+
-+diff --git a/src/doveadm/Makefile.am b/src/doveadm/Makefile.am
-+index c644646..6ae9144 100644
-+--- a/src/doveadm/Makefile.am
-++++ b/src/doveadm/Makefile.am
-+@@ -180,8 +180,8 @@ test_libs = \
-+ 	../lib/liblib.la
-+ test_deps = $(noinst_LTLIBRARIES) $(test_libs)
-+ 
-+-test_doveadm_util_SOURCES = test-doveadm-util.c
-+-test_doveadm_util_LDADD = doveadm-util.o $(test_libs) $(MODULE_LIBS)
-++test_doveadm_util_SOURCES = doveadm-util.c test-doveadm-util.c
-++test_doveadm_util_LDADD = $(test_libs) $(MODULE_LIBS)
-+ test_doveadm_util_DEPENDENCIES = $(test_deps)
-+ 
-+ check: check-am check-test
-+-- 
-+2.14.2
-+
-diff --git a/meta-networking/recipes-support/dovecot/dovecot_2.2.29.bb b/meta-networking/recipes-support/dovecot/dovecot_2.2.29.bb
-index d834bef71..166340873 100644
---- a/meta-networking/recipes-support/dovecot/dovecot_2.2.29.bb
-+++ b/meta-networking/recipes-support/dovecot/dovecot_2.2.29.bb
-@@ -8,7 +8,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=a981379bd0f1c362f8d1d21515e5b30b"
- SRC_URI = "http://dovecot.org/releases/2.2/dovecot-${PV}.tar.gz \
-            file://0001-configure.ac-convert-AC_TRY_RUN-to-AC_TRY_LINK-state.patch \
-            file://dovecot.service \
--           file://dovecot.socket"
-+           file://dovecot.socket \
-+           file://0001-doveadm-Fix-parallel-build.patch \
-+           "
- 
- SRC_URI[md5sum] = "ff95486a5c43025a2c3f5a712e7962b9"
- SRC_URI[sha256sum] = "d939ea99126eb8a8c6955390b422b6e27ec0fa43a3b59b2b3218cb5ad67139a6"
--- 
-2.14.2
+> On Thu 2017-10-19 @ 06:24:11 PM, Raphael Kubo da Costa wrote:
+>> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
+>> > Work on Chromium 62 has started, but updating is a bit slower now that
+>> > I'm trying to test GCC 5, 7, pyro and rocko.
+>>
+>> I've pushed a new branch called "chromium62". It's been test-built
+>> against Yocto's pyro (with GCC 5) and rocko (with GCC 7) for x86 and
+>> x86-64.
+>>
+>> Additional testing is appreciated!
+>
+> It looks like something in the chromium62 build is calling my native g++ =
+and
+> expecting that this native g++ will be recent enough to support c++14:
+>
+>
+> 	| g++ -MMD -MF base/base_paths.o.d
+> 	| -I/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62=
+.0.3202.62-r0/chromium-62.0.3202.62/out_bootstrap/gen
+> 	| -I/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62=
+.0.3202.62-r0/chromium-62.0.3202.62
+> 	| -isystem/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-nat=
+ive/62.0.3202.62-r0/recipe-sysroot-native/usr/include
+> 	| -O2 -pipe -DNO_TCMALLOC -D__STDC_FORMAT_MACROS -O2 -g0
+> 	| -D_FILE_OFFSET_BITS=3D64 -D__STDC_CONSTANT_MACROS
+> 	| -D__STDC_FORMAT_MACROS -pthread -pipe -fno-exceptions
+> 	| -isystem/z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-nat=
+ive/62.0.3202.62-r0/recipe-sysroot-native/usr/include
+> 	| -O2 -pipe -std=3Dc++14 -Wno-c++11-narrowing -c
+> 	| /z/chromium/crosswalk/build/tmp-glibc/work/x86_64-linux/gn-native/62.0=
+.3202.62-r0/chromium-62.0.3202.62/base/base_paths.cc
+> 	| -o base/base_paths.o
+> 	| g++: error: unrecognized command line option =E2=80=98-std=3Dc++14=E2=
+=80=99
 
+Ouch :( That's a new kind of issue I was not expecting.
+
+> [...]
+
+> Is there any way to intercept these calls and have it call OE's gcc-native
+> instead?
+
+Do you have an example of that being done in another recipe?
 
