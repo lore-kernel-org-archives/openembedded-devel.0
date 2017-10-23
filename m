@@ -1,35 +1,52 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id 3C086605BA
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 965326FF56
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Oct 2017 09:56:09 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id 37C8D209AE;
-	Sun, 22 Oct 2017 09:56:11 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id mQmhhhJiZKLH; Sun, 22 Oct 2017 09:56:11 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 0D6BB2088D;
-	Sun, 22 Oct 2017 09:56:09 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 86C58162706; Sun, 22 Oct 2017 05:56:08 -0400 (EDT)
-Date: Sun, 22 Oct 2017 05:56:08 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Martin Jansa <martin.jansa@gmail.com>
-Message-ID: <20171022095608.GS9221@denix.org>
-References: <1508352164-79210-1-git-send-email-denis@denix.org>
-	<CA+chaQf0XPuueHsgsMA10kURjf0ZHVbX1Ms9bbhmdi79LeWS1Q@mail.gmail.com>
+	Mon, 23 Oct 2017 01:05:29 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id n14so15857978pfh.8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 22 Oct 2017 18:05:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=kZzT+k0Pcvbin5Bwqj+vV9wljyKGwHZOoC1SFUDEOUw=;
+	b=ql/GZqDh5TsHbtvvr+Z6bbiuIo+MU/BvexjNujT2P0fYvKGtyH1jhYJxtKcYUSPW/1
+	yrUKtk5CRyZx+eDN8phddVxXU3oPcEDuPwvOtN4/u1/RXAD9GqtuFXC2JWmJZUTGY+cJ
+	F4rrHlQ0FcoGL9HInAsCuIKoReb23AxKwhbv/Hr0XfbayKK0zIR3peWR2rVgkvc8XeiC
+	EozqRKfTEhtW1xF3aG4ZgQK+gVtGmClevqcj166mQea4wjAir+sJchNY7f6SimjXVyJe
+	yx4Ff8qPRxMiMlU2nY9w20JMA78EkicCrRffZHXSqyfv4Qkjw+tvkuufS7QfWl/wQVN7
+	KYQA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=kZzT+k0Pcvbin5Bwqj+vV9wljyKGwHZOoC1SFUDEOUw=;
+	b=YZ1isJPpd/AfWaJTfau5/Bq74n21IPZjdfpWwmfq87FsCsc4QZCydV4QqkQuQuWC5v
+	CvhKwDYfZO2lZiRJRhDJiYh3iv/uxemT2f9iMHGM7tI1NAvc8PBkORTkMty9SpvkDA0p
+	422+4c61ichZ9OBXrgD2Ca+4Lq0tY/b3u0umxicuhFVWbbRE0ivozBHXO/lBP5G2x3mb
+	BpTknZdeqGIZ23rP/YBVILYJ6nU7YQpUPthFJwug9iAUWwVXzJ7GCxFl6tmYmqEfzyFS
+	uKJhoViJd0882ou3GWQj/v4xyQxf1wMcn3Ki3aC0Sm0uohSI00Ga1khRdETHUZ4DIZ3y
+	1kQA==
+X-Gm-Message-State: AMCzsaUJm0IkGCGD3XmGZT/yEQ1nlF+C6946AKsWNhzWQzBdPfVmGkYL
+	91HAH5a/v6NlKBznzy3pbsRGKpvYQGehoxbYpsE=
+X-Google-Smtp-Source: ABhQp+RXPVGx1ERgZ6Ar65De/09O9SsZ4CWtL7E+uNtz/2pGyPIyCsFNucG4emEOJW+UDfMlAHXUy8Zss9iJ8V60NpU=
+X-Received: by 10.98.166.205 with SMTP id r74mr11546787pfl.285.1508720730529; 
+	Sun, 22 Oct 2017 18:05:30 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQf0XPuueHsgsMA10kURjf0ZHVbX1Ms9bbhmdi79LeWS1Q@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Denys Dmytriyenko <denys@ti.com>
-Subject: Re: [meta-qt5][PATCH v2] qt5-ptest.inc: fix qtxmlpatterns:do_install_ptest out-of-order call
+Received: by 10.100.187.66 with HTTP; Sun, 22 Oct 2017 18:04:59 -0700 (PDT)
+In-Reply-To: <CANDbA3coqHx=fEXZrVNyBSsPeTHM5pYNN46LNwXeoheqbOdsCw@mail.gmail.com>
+References: <1508274082-5871-1-git-send-email-athoik@gmail.com>
+	<1508274082-5871-2-git-send-email-athoik@gmail.com>
+	<CAMKF1sqe0QA+pBO3K22ww6NML4Qnv8up86_rCM_jH1MxfxzkOw@mail.gmail.com>
+	<CANDbA3coqHx=fEXZrVNyBSsPeTHM5pYNN46LNwXeoheqbOdsCw@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 22 Oct 2017 18:04:59 -0700
+Message-ID: <CAMKF1spscYsv8azfzKMgHmZFrQvG=SwUzb=zOcOJ4otcqPW2qw@mail.gmail.com>
+To: =?UTF-8?B?zpHOuM6xzr3OrM+DzrnOv8+CIM6fzrnOus6/zr3PjM68zr/PhQ==?=
+	<athoik@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH 2/2] smbnetfs: update update 0.5.3a -> 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,68 +59,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Oct 2017 09:56:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 23 Oct 2017 01:05:29 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I've seen some breakage, not exactly this one, when trying to build with this 
-change - had to clean sstate for some reason, then it worked...
+On Sun, Oct 22, 2017 at 12:48 AM, =CE=91=CE=B8=CE=B1=CE=BD=CE=AC=CF=83=CE=
+=B9=CE=BF=CF=82 =CE=9F=CE=B9=CE=BA=CE=BF=CE=BD=CF=8C=CE=BC=CE=BF=CF=85 <ath=
+oik@gmail.com> wrote:
+> 2017-10-21 18:29 GMT+03:00 Khem Raj <raj.khem@gmail.com>:
+>>
+>> This fails to build for musl
+>>
+>> | ../../git/src/common.c:7:10: fatal error: execinfo.h: No such file
+>> or directory
+>> |  #include <execinfo.h>
+>> |           ^~~~~~~~~~~~
+>> | compilation terminated.
+>> | make[2]: *** [Makefile:429: smbnetfs-common.o] Error 1
+>>
+>> you might want to add dependency DEPENDS_append_libc-musl =3D "
+>> libexecinfo" and also make sure that -lexecinfo is added to linker
+>> cmdline
+>>
+>
+> Hi,
+>
+> I created a newer revision of the patches with the extra DEPENDS and
+> LDFLAGS for execinfo. Tested with musl using instructions from here:
+> https://github.com/kraj/meta-musl and build doesn't produce the error
+> any more.
+>
+> If that's fine please cherry-pick also the commit into pyro if
+> possible (the revert not required).
 
+Yes this patch is better. Martin please pull this in.
 
-On Sat, Oct 21, 2017 at 12:54:41AM +0200, Martin Jansa wrote:
-> Either this or the objcopy change seems to cause:
-> http://errors.yoctoproject.org/Errors/Details/157417/
-> 
-> On Wed, Oct 18, 2017 at 8:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> 
-> > From: Denys Dmytriyenko <denys@ti.com>
-> >
-> > ptest.bbclass provides a set of standard do_*_ptest_base tasks. Each of
-> > them calls a corresponding regular do_*_ptest task, that components are
-> > supposed to override for own implementation. When PTEST_ENABLED is not
-> > set, an anonymous python function removes all do_*_ptest_base tasks from
-> > the queue. qt5-ptest.inc adds a special case for do_populate_sysroot and
-> > re-arranges the order or ptest tasks due to that. But, unfortunately,
-> > do_install_ptest was added directly, not do_install_ptest_base, hence when
-> > "ptest" is disabled and all other do_*_ptest_base tasks are removed, this
-> > one do_install_ptest task is left w/o dependencies and gets scheduled for
-> > execution very early on, even before pseudo-native gets built and stages
-> > "fakeroot" functionality. The fix is to add do_install_ptest_base task,
-> > which calls do_install_ptest only when "ptest" is enabled.
-> >
-> > Signed-off-by: Denys Dmytriyenko <denys@ti.com>
-> > ---
-> > v2 - fix circular dependencies, delete default do_install_ptest_base
-> >
-> >  recipes-qt/qt5/qt5-ptest.inc | 5 +++--
-> >  1 file changed, 3 insertions(+), 2 deletions(-)
-> >
-> > diff --git a/recipes-qt/qt5/qt5-ptest.inc b/recipes-qt/qt5/qt5-ptest.inc
-> > index 4844878..97bce88 100644
-> > --- a/recipes-qt/qt5/qt5-ptest.inc
-> > +++ b/recipes-qt/qt5/qt5-ptest.inc
-> > @@ -4,8 +4,9 @@ inherit ptest
-> >
-> >  addtask do_populate_sysroot after do_install before do_compile_ptest_base
-> >  deltask do_compile_ptest_base
-> > -addtask do_compile_ptest_base after do_populate_sysroot before
-> > do_install_ptest
-> > -addtask do_install_ptest after do_compile_ptest_base before do_package
-> > +addtask do_compile_ptest_base after do_populate_sysroot before
-> > do_install_ptest_base
-> > +deltask do_install_ptest_base
-> > +addtask do_install_ptest_base after do_compile_ptest_base before
-> > do_package
-> >
-> >  do_compile_ptest() {
-> >      cd ${S}/tests
-> > --
-> > 2.7.4
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >
+>
+> Thanks,
+> Athanasios
 
