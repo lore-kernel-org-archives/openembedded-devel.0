@@ -1,47 +1,47 @@
-Return-Path: <fffonion@gmail.com>
-Received: from mail-yw0-f176.google.com (mail-yw0-f176.google.com
-	[209.85.161.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 0658E60746
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f41.google.com (mail-wm0-f41.google.com [74.125.82.41])
+	by mail.openembedded.org (Postfix) with ESMTP id 717E260049
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 18:29:02 +0000 (UTC)
-Received: by mail-yw0-f176.google.com with SMTP id t11so15894567ywg.12
+	Tue, 24 Oct 2017 18:46:35 +0000 (UTC)
+Received: by mail-wm0-f41.google.com with SMTP id u138so18232567wmu.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 11:29:04 -0700 (PDT)
+	Tue, 24 Oct 2017 11:46:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=BDxF//tX9EuWujP5X2ew7VeRbHiGKfgLAT4dZlSLWC4=;
-	b=NDEIRV31fKRiJqvXEgAAkSQr65bcq8oS+JHYPOUaZSkk6daXOYQGGE+lIdgEa27Ern
-	fjM3F+Qo2BdnJnFYZz7F10y+tlxp8Vf+Zbi0ATCeEqQluRR5cno5D9qHGegJlNqsRYnB
-	Ec4AOSDlmLZvElP6c1I84k4y9URgauadwcZQq94O7/di0AvXmOMZW0W4egYIUvUFugDd
-	wmw+luyTw5tQLa+qDUa5UHJJKY/RcguelupahzFRH334wlfXN8+IJnIC+/qdMZ1Wctex
-	E9DPzSvq3YxqBeVlo7xPgZ0T28DtqVEpma9T+dQ06PfWu9g/btbfnfXj+8JoOUHrYWnl
-	cg/Q==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=pSJyDpKyclUAw+oBYWNvUo1HmsFcmFW9xcqsNCNvNqI=;
+	b=rET3CmvT8Wu3mIsqUajoVge9UGT0gr5XKjjwfOBovm8fU8b+Rzau3tTLkYactwfPh4
+	UB3yD6BmKZc1KKaps0iM4AbHf00GAb9pMKhyWRm0X5NksadxPhz3d7So6gL1dOfWmEQ6
+	xljIpHO0ZIld/BKucnQhj7sMaPWaSQ7M2oGNGHbvLeG7dpuBydBBQa32JjDzomVPKgTt
+	F0o2qDHtZF1qKEfPdpL1praB7uSDzCQh2tpemHbA22K1LcC9XcdTFyc0WcB3yT/L2IQr
+	nFyYv5M8IeVo48IQMLpFiZTF1WDrNKoxN6PChFYLhrJRG5RO7t7tD4nSxN2yY8vwgF47
+	nTDg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=BDxF//tX9EuWujP5X2ew7VeRbHiGKfgLAT4dZlSLWC4=;
-	b=KRQaEf+lQ+DfYiPzpKhP+cQ36C8JUOxcvyprqcJZplUGWkqS9ii+8fATFPLsLlN0R9
-	S4wRGStbAu6Qaqa/awzV/iCAfyVceiWVKDesYpPVlrVaIbIhLayydzd0IfSVJanPPLmh
-	dWnkGDQA2uWgdEDDNWO53WNkfj9W78oCr/6kTruNB4Zbn5hMrwJcmZJQ7H6B39rYWkfo
-	NysHIpnBb4rknmWErJjgKdd9wBmWON4AkkQqs7HPzWfCfiCKShrATkhb/OYWbwkLVFrZ
-	U63a2a80D4+2ZOsDkZ1Rh/UvjXSw/uA7LFuyk5vecV+7g3WzrbNWG0QonqWBO/P59oQJ
-	D/Tg==
-X-Gm-Message-State: AMCzsaWPfp9TZfPZVETxJu1vjtPTPnr3Z/WdAtUU4tywIoeFRs7oYRQn
-	ojCxofxcwnt0IDlRr88o3Bt/L0ebyuVHoIzrtouGmw==
-X-Google-Smtp-Source: ABhQp+Q4WAkNhKtd/YtBkT8UFxpvUe3lLT8KIH/MWMfYsxtVrutIyRNMDcGQS8aWwhuOzJZZHf9/ROzvP04cpr0tx3s=
-X-Received: by 10.37.200.134 with SMTP id y128mr11686778ybf.43.1508869743862; 
-	Tue, 24 Oct 2017 11:29:03 -0700 (PDT)
+	:message-id:subject:to:cc;
+	bh=pSJyDpKyclUAw+oBYWNvUo1HmsFcmFW9xcqsNCNvNqI=;
+	b=iYQGovuckgR6GVPIFoHiyMmRtAgMz5B3W16UecyS0owBPDZ+f9WUif3Kd1HYihLZUk
+	+N1H5NAANMhkEIAFO3Tp3Zs/+WpWJVzM/LSW2Ijmy4KNLDQEyAat2p5A6N4gUujKnSH6
+	Op9mIAh/wXkG2aA1Er/Wyi9W4gYviesHCa5xsXCBDVMIWaEpASHeumowCOpLwsZqjpaP
+	oDf91NR0QFtaFSuaoHti06yZjzATppJQIJez6NZJEu5DjVvKlZKoHPJ23hEWvDi53bEh
+	SBIXchNENcek2DSqmQTWtokmRZfkYFvpZzN10BV0pGZO3yYm0O4pUyvWwGPryKYoDIhH
+	7r6A==
+X-Gm-Message-State: AMCzsaVI5akvRmO3oXZpa2u27Ld1rEEv/rRa0xFnPblgJLeVl+OuPpQe
+	SNZEo3lbQIBnODy6Vg+gVerPSM31AKE+kBNPpLM=
+X-Google-Smtp-Source: ABhQp+Sciy/kzVfA2v00Nt30cLSE6W7/r2FcXbLC/hCl71OqMFzKHHvNRQInwtqqhas4s6lY9WePJ+AbAw7GDBbT/VI=
+X-Received: by 10.28.168.83 with SMTP id r80mr6922wme.59.1508870796213; Tue,
+	24 Oct 2017 11:46:36 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.129.80.133 with HTTP; Tue, 24 Oct 2017 11:28:23 -0700 (PDT)
-In-Reply-To: <CABR-LLePnTZhs_WjxRbvh61Xxj6sp+5nWPO34vS2-dv8aoB1FQ@mail.gmail.com>
-References: <CABR-LLePnTZhs_WjxRbvh61Xxj6sp+5nWPO34vS2-dv8aoB1FQ@mail.gmail.com>
-From: Wangchong Zhou <fffonion@gmail.com>
-Date: Tue, 24 Oct 2017 14:28:23 -0400
-Message-ID: <CABR-LLcPJyhzXh7DN19OVVxFODHhqM0WuCSGoNcpz_TQYYDgew@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.28.183.212 with HTTP; Tue, 24 Oct 2017 11:46:35 -0700 (PDT)
+In-Reply-To: <20171024155108.20649-1-daniel@zonque.org>
+References: <20171024155108.20649-1-daniel@zonque.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 24 Oct 2017 20:46:35 +0200
+Message-ID: <CA+chaQdioSabeoRub37Lf92xJ3-3oXf6Bjg8LwMn_ya+tYTtSQ@mail.gmail.com>
+To: Daniel Mack <daniel@zonque.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-webserver] [PATCH] fix nginx with large files support
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-qt5][PATCH] qtwebengine: make test suite succeed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,38 +54,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Oct 2017 18:29:03 -0000
+X-List-Received-Date: Tue, 24 Oct 2017 18:46:35 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi,
-The nginx receipt hardcoded size of off_t to be same as ptrsize, which can
-break large files support on 32bit machines. The http range header will
-fail with a code 416 on files bigger than 2G. Changing it to 8 will fix the
-problem.
+Please resend with your Signed-off-by line.
 
-I don't think hardcode off_t to 8 is a neat way of fixing this. Is there a
-better way to detect large files support?
+On Tue, Oct 24, 2017 at 5:51 PM, Daniel Mack <daniel@zonque.org> wrote:
 
-
-Author: Wangchong Zhou <fffonion@gmail.com>
-Date:   Tue Oct 24 14:21:35 2017 -0400
-
-    fix large files support in nginx by setting off_t to 8 bytes
-
-    Signed-off-by: Wangchong Zhou <fffonion@gmail.com>
-
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 4a97e2670..4cdf892c7 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -57,7 +57,7 @@ do_configure () {
-     --with-ptr-size=${PTRSIZE} \
-     --with-sig-atomic-t=${PTRSIZE} \
-     --with-size-t=${PTRSIZE} \
--    --with-off-t=${PTRSIZE} \
-+    --with-off-t=8 \
-     --with-time-t=${PTRSIZE} \
-     --with-sys-nerr=132 \
-     --conf-path=${sysconfdir}/nginx/nginx.conf \
+> Make the qtwebengine test suite succeed when Qt was built without
+> accessibility features.
+>
+> Upstream bug report: https://bugreports.qt.io/browse/QTBUG-64015
+> ---
+>  ...ests-make-accessibility-tests-conditional.patch | 37
+> ++++++++++++++++++++++
+>  recipes-qt/qt5/qtwebengine_git.bb                  |  1 +
+>  2 files changed, 38 insertions(+)
+>  create mode 100644 recipes-qt/qt5/qtwebengine/
+> 0005-tests-make-accessibility-tests-conditional.patch
+>
+> diff --git a/recipes-qt/qt5/qtwebengine/0005-tests-make-accessibility-tests-conditional.patch
+> b/recipes-qt/qt5/qtwebengine/0005-tests-make-accessibility-
+> tests-conditional.patch
+> new file mode 100644
+> index 0000000..8b82010
+> --- /dev/null
+> +++ b/recipes-qt/qt5/qtwebengine/0005-tests-make-accessibility-
+> tests-conditional.patch
+> @@ -0,0 +1,37 @@
+> +From 006f08373cbaa8485311f491ab8e67433c0e9ad6 Mon Sep 17 00:00:00 2001
+> +From: Daniel Mack <daniel@zonque.org>
+> +Date: Tue, 24 Oct 2017 15:46:19 +0200
+> +Subject: [PATCH] tests: make accessibility tests conditional
+> +
+> +Only test the accessibility functions if accessibility was enabled in the
+> Qt
+> +config.
+> +---
+> + tests/auto/widgets/widgets.pro | 5 ++++-
+> + 1 file changed, 4 insertions(+), 1 deletion(-)
+> +
+> +diff --git a/tests/auto/widgets/widgets.pro b/tests/auto/widgets/widgets.
+> pro
+> +index 441eea0f..7bab18f0 100644
+> +--- a/tests/auto/widgets/widgets.pro
+> ++++ b/tests/auto/widgets/widgets.pro
+> +@@ -1,7 +1,6 @@
+> + TEMPLATE = subdirs
+> +
+> + SUBDIRS += \
+> +-    qwebengineaccessibility \
+> +     qwebenginedefaultsurfaceformat \
+> +     qwebenginedownloads \
+> +     qwebenginefaviconmanager \
+> +@@ -14,6 +13,10 @@ SUBDIRS += \
+> +     qwebenginesettings \
+> +     qwebengineview
+> +
+> ++qtConfig(accessibility) {
+> ++    SUBDIRS += qwebengineaccessibility
+> ++}
+> ++
+> + contains(WEBENGINE_CONFIG, use_spellchecker):!cross_compile {
+> +     !contains(WEBENGINE_CONFIG, use_native_spellchecker) {
+> +         SUBDIRS += qwebenginespellcheck
+> +--
+> +2.13.6
+> +
+> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/
+> qtwebengine_git.bb
+> index 4bc4cdb..519ccb4 100644
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> @@ -138,6 +138,7 @@ SRC_URI += " \
+>      file://0002-WebEngine-qquickwebengineview_p_p.h-add-include-QCol.patch
+> \
+>      file://0003-Include-dependency-to-QCoreApplication-translate.patch \
+>      file://0004-Force-host-toolchain-configuration.patch \
+> +    file://0005-tests-make-accessibility-tests-conditional.patch \
+>  "
+>
+>  # Patches from https://github.com/meta-qt5/qtwebengine-chromium/commits/
+> 56-based
+> --
+> 2.13.6
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
