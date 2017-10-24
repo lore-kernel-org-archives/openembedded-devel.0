@@ -1,44 +1,39 @@
-Return-Path: <fffonion@gmail.com>
-Received: from mail-yw0-f171.google.com (mail-yw0-f171.google.com
-	[209.85.161.171])
-	by mail.openembedded.org (Postfix) with ESMTP id F22D96FF73
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 91F5C719E2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 22:28:10 +0000 (UTC)
-Received: by mail-yw0-f171.google.com with SMTP id w2so16466494ywa.9
+	Tue, 24 Oct 2017 23:58:08 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id z50so32690721qtj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 15:28:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=jYYBL6Zznj8QVF/BeyJ4EhD6Hnh8DLIDMJYwHEQtue8=;
-	b=J17/NKfkAiF9m5Rvj6njHX8rRd8QwQMlw8mLLByn7GGDXcy1eyz8zI8mU3JjAKxo+w
-	nWFKu6AMVsRKHYuEn6SfPbFOyCo+GwoZD8ZpQaZWvWd/4eGguSbWcBym/xq2rrwCi3Kd
-	XxlLQQKeeFQHrGAklVlWC4u3wmYBmJewJSaUPBqu6iqJ58mQ1h3GMz2EV3oJeJqEx/FM
-	u84MoprcGkrLQFwXlWkajBaEvwiS6mhsiSHl4pkYvQJnVoQWpef6uQCQvI8q94QPY84y
-	Hi4B750eQ92ugt/Z8Bvudmp2VR/g68RnbrRToMvc3ypWTEPU0ifhaaqqzqCOa2wi2vIj
-	fXaA==
+	Tue, 24 Oct 2017 16:58:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=jYYBL6Zznj8QVF/BeyJ4EhD6Hnh8DLIDMJYwHEQtue8=;
-	b=p58u7xtoltUWzM0vouzQoJu3jNE63AS/iCjJzYuTsupA6ZQutmXAQDY9XI4vfctA/G
-	ww+0/Mg1YEBg75STYUeHBw+ALfonIXUXOSm7DLzjZW6BCz+ksuaBEP6xjb8lrf4uDTU8
-	ZMqK4hFOs3lTIpjYnIGDRWQs0k7OabdjTgCSQqYcc8zlXyFm1iGZxj1dylFH8D4SL0SD
-	3/flwz/9WVg+cUVxcM0eIFUrxVBOjX49u4Xxi0jpItNgKmB8ob7YZl2yfFg/2QhvCBPv
-	nCP9ykTNWJMiCFToiFOUiJTh2c3cF1/CocC95gSw3n6U9RHK3BS72O5OnntDIxvVKh6g
-	BS2Q==
-X-Gm-Message-State: AMCzsaUcCI7mAY89zxUfxQAcwqxe8vBLsjbK1W987niJjrZ3rmX6VgGS
-	ABuRjiAUNtPmN//IZFdqenxZ93nxF4YpLK3dKrf34w==
-X-Google-Smtp-Source: ABhQp+SuRE9uw1hCCf7HvxgPwqHZOQMKa417akf7KKbTUJ9kcUI5xzjF4Gxj5V++BqZO7DyUg/MCqPHxXtf0GoVSJPg=
-X-Received: by 10.129.4.77 with SMTP id 74mr11965837ywe.137.1508884091855;
-	Tue, 24 Oct 2017 15:28:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.129.80.133 with HTTP; Tue, 24 Oct 2017 15:27:31 -0700 (PDT)
-From: Wangchong Zhou <fffonion@gmail.com>
-Date: Tue, 24 Oct 2017 18:27:31 -0400
-Message-ID: <CABR-LLfMQQQvADAH6Z__-L+Pw0BEGnwn+-_E_C36XUwV+X9_8A@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=sHMXTW/V6yWbCid2tX8LUw/rDTZA5TOqqz34ubvlap0=;
+	b=EuU0bkIF4FN9SYbjI+/VJUWAR1VDQKGQTh5+mj8n3BLtRr9xdxjp4mQBR89YnenWmw
+	xToBBbnmcSYe0qqpC9mAVp5F0Uvxnz90a+HX6M3T3GyzaA/8OHVcqzpRA3dqZahOdMK1
+	LsVseNeJ4oQNIvM6x13/f+hjdqc4AViXDePwcxeXmDTE0wzXsbcqphPpJQrWCcGWfhD1
+	RF8kVa79JagFLMQoEuOIz7kQP9C0G4pGVx3WxbFelkXO1tzMud60gfjNNmS9tV2C5zkd
+	oBWXxK4X/3URbc0g348CUeO4sLDL/MRyK6hDWJMFEfjmC1IthZPJAxfvhz3C2NZ0nCgO
+	9iyA==
+X-Gm-Message-State: AMCzsaW47OLEy0/wzQNM6J2+rfCJhsk0Ym/9fha1w+G7yN9syotqTdpk
+	e64o/fzTd5/LMH4IVTY1KkA1j8vw
+X-Google-Smtp-Source: ABhQp+TwipfnBc7wQJcQBQfV0JucoomShEFebh5y+owcZBho5X/JkZ9LRiprH0YLy/CBwkf5ECXaiA==
+X-Received: by 10.200.63.100 with SMTP id w33mr15005688qtk.214.1508889489113; 
+	Tue, 24 Oct 2017 16:58:09 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id
+	d143sm1010579qkc.41.2017.10.24.16.58.08
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 24 Oct 2017 16:58:08 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-webserver] [PATCH] fix nginx with large files support
+Date: Tue, 24 Oct 2017 19:57:59 -0400
+Message-Id: <1508889479-18673-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-bcrypt: update to version 3.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -51,75 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Oct 2017 22:28:11 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 24 Oct 2017 23:58:08 -0000
 
-Resend a patch using largefile DISTRO_FEATURES.
-
-
-Signed-off-by: Wangchong Zhou <fffonion@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-webserver/recipes-httpd/nginx/nginx.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-bcrypt.inc                 | 4 ++--
+ .../python/{python-bcrypt_3.1.3.bb => python-bcrypt_3.1.4.bb}         | 0
+ .../python/{python3-bcrypt_3.1.3.bb => python3-bcrypt_3.1.4.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-bcrypt_3.1.3.bb => python-bcrypt_3.1.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-bcrypt_3.1.3.bb => python3-bcrypt_3.1.4.bb} (100%)
 
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 4a97e2670..84ce0fb4d 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -57,7 +57,7 @@ do_configure () {
-     --with-ptr-size=${PTRSIZE} \
-     --with-sig-atomic-t=${PTRSIZE} \
-     --with-size-t=${PTRSIZE} \
--    --with-off-t=${PTRSIZE} \
-+
- --with-off-t=${@bb.utils.contains('DISTRO_FEATURES','largefile','8','4',d)};
-\
-     --with-time-t=${PTRSIZE} \
-     --with-sys-nerr=132 \
-     --conf-path=${sysconfdir}/nginx/nginx.conf \
---
-2.13.5
-
-On Tue, Oct 24, 2017 at 2:28 PM, Wangchong Zhou <fffonion@gmail.com> wrote:
->
-> Hi,
-> The nginx receipt hardcoded size of off_t to be same as ptrsize, which
-can break large files support on 32bit machines. The http range header will
-fail with a code 416 on files bigger than 2G. Changing it to 8 will fix the
-problem.
->
-> I don't think hardcode off_t to 8 is a neat way of fixing this. Is there
-a better way to detect large files support?
->
->
-> Author: Wangchong Zhou <fffonion@gmail.com>
-> Date:   Tue Oct 24 14:21:35 2017 -0400
->
->     fix large files support in nginx by setting off_t to 8 bytes
->
->     Signed-off-by: Wangchong Zhou <fffonion@gmail.com>
->
-> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
-b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> index 4a97e2670..4cdf892c7 100644
-> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-> @@ -57,7 +57,7 @@ do_configure () {
->      --with-ptr-size=${PTRSIZE} \
->      --with-sig-atomic-t=${PTRSIZE} \
->      --with-size-t=${PTRSIZE} \
-> -    --with-off-t=${PTRSIZE} \
-> +    --with-off-t=8 \
->      --with-time-t=${PTRSIZE} \
->      --with-sys-nerr=132 \
->      --conf-path=${sysconfdir}/nginx/nginx.conf \
->
->
-
-
-
+diff --git a/meta-python/recipes-devtools/python/python-bcrypt.inc b/meta-python/recipes-devtools/python/python-bcrypt.inc
+index 667a3fb..1ea62a3 100644
+--- a/meta-python/recipes-devtools/python/python-bcrypt.inc
++++ b/meta-python/recipes-devtools/python/python-bcrypt.inc
+@@ -4,8 +4,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=8f7bb094c7232b058c7e9f2e431f389c"
+ 
+ DEPENDS += "${PYTHON_PN}-cffi-native"
+ 
+-SRC_URI[md5sum] = "20da8b40790caad99c4086dba533154b"
+-SRC_URI[sha256sum] = "6645c8d0ad845308de3eb9be98b6fd22a46ec5412bfc664a423e411cdd8f5488"
++SRC_URI[md5sum] = "8408abc974446e64862a9742104e97b6"
++SRC_URI[sha256sum] = "67ed1a374c9155ec0840214ce804616de49c3df9c5bc66740687c1c9b1cd9e8d"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-bcrypt_3.1.3.bb b/meta-python/recipes-devtools/python/python-bcrypt_3.1.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-bcrypt_3.1.3.bb
+rename to meta-python/recipes-devtools/python/python-bcrypt_3.1.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-bcrypt_3.1.3.bb b/meta-python/recipes-devtools/python/python3-bcrypt_3.1.4.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-bcrypt_3.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-bcrypt_3.1.4.bb
 -- 
-Regards
-fffonion (B607 2745 84E8 D5E5)
+2.7.4
+
 
