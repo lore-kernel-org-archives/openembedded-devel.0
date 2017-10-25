@@ -1,23 +1,39 @@
-Return-Path: <Zhenbo.Gao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 531066067D
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id E3C37700F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 08:00:15 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v9P80GNg009798
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 25 Oct 2017 01:00:16 -0700 (PDT)
-Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 25 Oct 2017 01:00:15 -0700
-From: Zhenbo Gao <zhenbo.gao@windriver.com>
-To: <lans.zhang2008@gmail.com>, <openembedded-devel@lists.openembedded.org>
-Date: Wed, 25 Oct 2017 15:59:30 +0800
-Message-ID: <1508918370-176147-1-git-send-email-zhenbo.gao@windriver.com>
-X-Mailer: git-send-email 1.9.1
-MIME-Version: 1.0
-Subject: [meta-integrity][PATCH] util-linux: fix compile issue with ipk packaging
+	Wed, 25 Oct 2017 13:06:04 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id q83so30357337qke.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Oct 2017 06:06:06 -0700 (PDT)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Dd24Xv/k/OlaRfFwpVxjVLPfi8dZZFRwp+Jbp4PYbbs=;
+	b=Z2LZ7394YQKGmiAWKwk7xy8GQ0gRZAXs6t09xsWIRK2pxeMJfckmGiBZNGqCXXdA9l
+	HxCrGvcG0HuA3f5KoZ2f3FRrrFFVDNOKSb7RbpI9Sq12+BktxpXcKPb44emNEstq6Jn1
+	taf/XwoITiPQGYdb8zx4LD6CKhXVd8dEZK85PoC9iUncR3QHRGrPrYUMI1fCPBSBC1bl
+	4f0tFcETyO6NUCPq8EpFw4jj7kz0fs/Hd5MF1/Q5SpqXiOzJKG2GG64jb2RKHeMFUtx8
+	1bNDOifpjzR7rRTHub2Zqu96lKZ2ZUSsdkkmQ+DKPSDXV2VTIc+6tMPYDoeO96dn9DrH
+	rlBg==
+X-Gm-Message-State: AMCzsaWOrSMnVnQA4H1Jf2gq8jhsfhWCbpv1ueqHNYGJY3O6/woQLKD+
+	MvINrDiC/0tIETd9XWegcbfPs1IP
+X-Google-Smtp-Source: ABhQp+SlJHy8aRDm5uIbsZSXZLI4UjZQs/6wgJ+2WMx7XAGU1+LTXjO0x7JYnX8O/7aUi0FtiXC6TQ==
+X-Received: by 10.55.79.74 with SMTP id d71mr2726150qkb.5.1508936765597;
+	Wed, 25 Oct 2017 06:06:05 -0700 (PDT)
+Received: from sparta.ny.asterius.io
+	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
+	by smtp.gmail.com with ESMTPSA id
+	p41sm1825052qkp.94.2017.10.25.06.06.04
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 25 Oct 2017 06:06:04 -0700 (PDT)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 25 Oct 2017 09:05:57 -0400
+Message-Id: <1508936757-18342-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-paho-mqtt: update to version 1.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,38 +46,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 08:00:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 25 Oct 2017 13:06:05 -0000
 
-opkg-build has its rules for package names which should
-not contain capital letters or underscores, so use character
-hyphen instead of underscore to make opkg-build happy.
-
-Signed-off-by: Zhenbo Gao <zhenbo.gao@windriver.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- recipes-core/util-linux/util-linux_%.bbappend | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-python/recipes-devtools/python/python-paho-mqtt.inc              | 4 ++--
+ .../python/{python-paho-mqtt_1.3.0.bb => python-paho-mqtt_1.3.1.bb}   | 0
+ .../python/{python3-paho-mqtt_1.3.0.bb => python3-paho-mqtt_1.3.1.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-paho-mqtt_1.3.0.bb => python-paho-mqtt_1.3.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-paho-mqtt_1.3.0.bb => python3-paho-mqtt_1.3.1.bb} (100%)
 
-diff --git a/recipes-core/util-linux/util-linux_%.bbappend b/recipes-core/util-linux/util-linux_%.bbappend
-index 62e22a1..17f17a0 100644
---- a/recipes-core/util-linux/util-linux_%.bbappend
-+++ b/recipes-core/util-linux/util-linux_%.bbappend
-@@ -2,7 +2,7 @@
- # Copyright (C) 2017 Wind River Systems, Inc.
- #
+diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt.inc b/meta-python/recipes-devtools/python/python-paho-mqtt.inc
+index ad1ce6a..9efbd2f 100644
+--- a/meta-python/recipes-devtools/python/python-paho-mqtt.inc
++++ b/meta-python/recipes-devtools/python/python-paho-mqtt.inc
+@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=eb48c6ee2cb9f5b8b9fe75e6f817bdfc \
+ SRCNAME = "paho-mqtt"
  
--PACKAGES =+ "${PN}-switch_root.static"
-+PACKAGES =+ "${PN}-switch-root.static"
+ inherit pypi
+-SRC_URI[md5sum] = "b9338236e2836e8579ef140956189cc4"
+-SRC_URI[sha256sum] = "2c9ef5494cfc1e41a9fff6544c5a2cd59ea5d401d9119a06ecf7fad6a2ffeb93"
++SRC_URI[md5sum] = "2cc27d8b369700b1fc99325add0dadd2"
++SRC_URI[sha256sum] = "31911f6031de306c27ed79dc77b690d7c55b0dcb0f0434ca34ec6361d0371122"
  
- CFLAGS_remove += "-pie -fpie"
+ DEPENDS += "${PYTHON_PN}-pytest-runner-native"
  
-@@ -17,4 +17,4 @@ do_install_append_class-target() {
-     install -m 0700 ${B}/switch_root.static ${D}${sbindir}/switch_root.static
- }
- 
--FILES_${PN}-switch_root.static = "${sbindir}/switch_root.static"
-+FILES_${PN}-switch-root.static = "${sbindir}/switch_root.static"
+diff --git a/meta-python/recipes-devtools/python/python-paho-mqtt_1.3.0.bb b/meta-python/recipes-devtools/python/python-paho-mqtt_1.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-paho-mqtt_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python-paho-mqtt_1.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-paho-mqtt_1.3.0.bb b/meta-python/recipes-devtools/python/python3-paho-mqtt_1.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-paho-mqtt_1.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-paho-mqtt_1.3.1.bb
 -- 
-1.9.1
+2.7.4
 
 
