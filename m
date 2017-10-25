@@ -1,39 +1,39 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 02DCE71A32
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id F24D371A74
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 00:16:23 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id w134so28546541qkb.0
+	Wed, 25 Oct 2017 00:22:07 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id y23so28541509qkb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 17:16:25 -0700 (PDT)
+	Tue, 24 Oct 2017 17:22:09 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=LkapF1G2cE5oeRL0IAdqRXhsxnOJgkbGN96vRFWVVKo=;
-	b=W7+LQioMGH1PN5dcQbYbInnEmLX+AcNQNMxd8+JHw1uSeAuKTEPq4j2Gl+zl2AJ6Oq
-	1yAQphuCf/Y61XJe+mMqNaBieF2g7ZxlVfmr4F+RTQ9a5vg04lzs4nTG/06LglOWhdOr
-	Zr4ZJLru7bBkfB67aV5ZSza16ZPXXLJviMGPcymRq32UsrnDJws60M4aYEvehSM2ucI1
-	J5Lu3THOHcFkB1mEGSrBlrXpCQsE1YaU46RcQuJ1B5qASo8fJH+6yF/cT0EfVixS1jnS
-	0h1MUEfuRk9syrI23OGZHfzJEirTmzpwFitXdudgFLleW6SlbSDZi/ZZvI5itoc/zB99
-	QHvA==
-X-Gm-Message-State: AMCzsaX66OXwzjqjEyjUWWZRkcEXNBmPwH0hfU4sIqI/ziPVL7vKqBPf
-	F5bGCAyrPENdLXAfCK9vqQglVLiE
-X-Google-Smtp-Source: ABhQp+TO4MYd26TkLBhYOBouy9azE36Bnc1pOs5CmzrH4scVfhtkfc8yw2bLSki9uwoJFaMQP32fGA==
-X-Received: by 10.55.103.15 with SMTP id b15mr631880qkc.224.1508890584614;
-	Tue, 24 Oct 2017 17:16:24 -0700 (PDT)
+	bh=5xAVqeqsn6DskebSR1ipggdt8trX8um4VdBrCanH5m8=;
+	b=nzsga8GDX6OtKwD4sqoOeleCXxBjsMDwlRyUH8BNQ7aLk9cVOrjHws+kr5yotwF7We
+	fctw4qYqNd9P65y891fXd114pdbtbWlFGxI//ZxtZjkMkVxBYyOag8aXKCa3Bl5Ab7Zi
+	fUoiUZP9Zx9LyhMJaN8Q7xFzndVPz1/faveu125miaxOgFTC1EKOEa9VqNnwFAF/7Jlr
+	q2y7hWMGJuEnccpjgNOCWwolO8tr3OyjUI3Cd5NOfxBWRJmWrKH9j+MY95N0f4bb0a0u
+	bDTHkq9EQQRqxBld1mixymLK085ZVxiNNx7NnCTV1/515gG4F6+YVO6JzXNryY/iWhvA
+	ByIg==
+X-Gm-Message-State: AMCzsaVOWX2L61JC5k8uBBbFKi3djxftFtr0TQAKYijnkH2HYPdrDmVA
+	gXKe8eJNbePBzF45s/7Annk51RwA
+X-Google-Smtp-Source: ABhQp+RH/xOZo0txoc1u0mFC5JGvMVa9YSQzw6dRPk+sNh149B3caWTLfZZq38K0q+9DZmPezPVoIA==
+X-Received: by 10.55.39.5 with SMTP id n5mr607794qkn.106.1508890928640;
+	Tue, 24 Oct 2017 17:22:08 -0700 (PDT)
 Received: from sparta.ny.asterius.io
 	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
 	by smtp.gmail.com with ESMTPSA id
-	o138sm1005843qke.76.2017.10.24.17.16.23
+	l207sm994606qke.97.2017.10.24.17.22.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 24 Oct 2017 17:16:24 -0700 (PDT)
+	Tue, 24 Oct 2017 17:22:08 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 24 Oct 2017 20:16:16 -0400
-Message-Id: <1508890576-20370-1-git-send-email-derek@asterius.io>
+Date: Tue, 24 Oct 2017 20:22:00 -0400
+Message-Id: <1508890920-5689-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-psutil: update to version 5.4.0
+Subject: [meta-python][PATCH] python-mprpc: update to version 0.1.16
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,40 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 00:16:24 -0000
+X-List-Received-Date: Wed, 25 Oct 2017 00:22:08 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-psutil.inc                 | 4 ++--
- .../python/{python-psutil_5.3.1.bb => python-psutil_5.4.0.bb}         | 0
- .../python/{python3-psutil_5.3.1.bb => python3-psutil_5.4.0.bb}       | 0
+ meta-python/recipes-connectivity/python-mprpc/python-mprpc.inc        | 4 ++--
+ .../python-mprpc/{python-mprpc_0.1.14.bb => python-mprpc_0.1.16.bb}   | 0
+ .../python-mprpc/{python3-mprpc_0.1.14.bb => python3-mprpc_0.1.16.bb} | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-psutil_5.3.1.bb => python-psutil_5.4.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-psutil_5.3.1.bb => python3-psutil_5.4.0.bb} (100%)
+ rename meta-python/recipes-connectivity/python-mprpc/{python-mprpc_0.1.14.bb => python-mprpc_0.1.16.bb} (100%)
+ rename meta-python/recipes-connectivity/python-mprpc/{python3-mprpc_0.1.14.bb => python3-mprpc_0.1.16.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-psutil.inc b/meta-python/recipes-devtools/python/python-psutil.inc
-index c9a7f6d..4170ea4 100644
---- a/meta-python/recipes-devtools/python/python-psutil.inc
-+++ b/meta-python/recipes-devtools/python/python-psutil.inc
-@@ -2,8 +2,8 @@ SUMMARY = "A cross-platform process and system utilities module for Python"
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=0f02e99f7f3c9a7fe8ecfc5d44c2be62"
+diff --git a/meta-python/recipes-connectivity/python-mprpc/python-mprpc.inc b/meta-python/recipes-connectivity/python-mprpc/python-mprpc.inc
+index b9535fc..05fbae4 100644
+--- a/meta-python/recipes-connectivity/python-mprpc/python-mprpc.inc
++++ b/meta-python/recipes-connectivity/python-mprpc/python-mprpc.inc
+@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4ba825394aec026b5f94edca44426859"
+ DEPENDS += "${PYTHON_PN}-gevent"
+ RDEPENDS_${PN} += "${PYTHON_PN}-gevent ${PYTHON_PN}-msgpack ${PYTHON_PN}-gsocketpool"
  
--SRC_URI[md5sum] = "529244aea5d32fb0c2ea46d80ce54abc"
--SRC_URI[sha256sum] = "12dd9c8abbad15f055e9579130035b38617020ce176f4a498b7870e6321ffa67"
-+SRC_URI[md5sum] = "01af6219b1e8fcfd53603023967713bf"
-+SRC_URI[sha256sum] = "8e6397ec24a2ec09751447d9f169486b68b37ac7a8d794dca003ace4efaafc6a"
+-SRC_URI[md5sum] = "66e6cf367ea71cfed8938a27e9c183c3"
+-SRC_URI[sha256sum] = "5ccada6526d48ac4d95a7bbdc093586663841560337032a503f57ccfae69d7bf"
++SRC_URI[md5sum] = "acde1f346411997d76ab89790a356823"
++SRC_URI[sha256sum] = "e8ddd47e7a2fb2d3b203fcc522443ee5be56c8f7e2c6d915c047445951cef1fb"
  
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-shell \
-diff --git a/meta-python/recipes-devtools/python/python-psutil_5.3.1.bb b/meta-python/recipes-devtools/python/python-psutil_5.4.0.bb
+ inherit pypi
+diff --git a/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.14.bb b/meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.16.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-psutil_5.3.1.bb
-rename to meta-python/recipes-devtools/python/python-psutil_5.4.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-psutil_5.3.1.bb b/meta-python/recipes-devtools/python/python3-psutil_5.4.0.bb
+rename from meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.14.bb
+rename to meta-python/recipes-connectivity/python-mprpc/python-mprpc_0.1.16.bb
+diff --git a/meta-python/recipes-connectivity/python-mprpc/python3-mprpc_0.1.14.bb b/meta-python/recipes-connectivity/python-mprpc/python3-mprpc_0.1.16.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-psutil_5.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-psutil_5.4.0.bb
+rename from meta-python/recipes-connectivity/python-mprpc/python3-mprpc_0.1.14.bb
+rename to meta-python/recipes-connectivity/python-mprpc/python3-mprpc_0.1.16.bb
 -- 
 2.7.4
 
