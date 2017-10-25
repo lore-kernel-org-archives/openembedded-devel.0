@@ -1,27 +1,23 @@
-Return-Path: <philip@balister.org>
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with ESMTP id 785776FF69
+Return-Path: <Zhenbo.Gao@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 531066067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 06:25:49 +0000 (UTC)
-Received: (qmail 8092 invoked by uid 1003); 25 Oct 2017 06:25:51 -0000
-Received: from unknown (HELO ?192.168.0.158?) (philip@opensdr.com@94.113.76.12)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	25 Oct 2017 06:25:50 -0000
-To: Martin Jansa <martin.jansa@gmail.com>, akuster808 <akuster808@gmail.com>
-References: <20170426184422.GG3258@jama>
-	<a05fd59e-cbf1-291c-c2fa-63d3ba5b1d6e@gmail.com>
-	<CA+chaQfO+UJ9rm5u20hi9+68qafdnwhJ9Q0WXMnZC7XfLUbNMA@mail.gmail.com>
-	<82e2e61c-68ae-1c53-ae70-9b509ee0dfaf@gmail.com>
-	<CA+chaQetSQ6QYP0weCCw6DW2HPB=AuHduAtq8qcJY9YZBLrOaQ@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <3e784abe-0017-3436-00e3-9c46f35102ab@balister.org>
-Date: Wed, 25 Oct 2017 08:25:47 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.3.0
+	Wed, 25 Oct 2017 08:00:15 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id v9P80GNg009798
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Wed, 25 Oct 2017 01:00:16 -0700 (PDT)
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 25 Oct 2017 01:00:15 -0700
+From: Zhenbo Gao <zhenbo.gao@windriver.com>
+To: <lans.zhang2008@gmail.com>, <openembedded-devel@lists.openembedded.org>
+Date: Wed, 25 Oct 2017 15:59:30 +0800
+Message-ID: <1508918370-176147-1-git-send-email-zhenbo.gao@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQetSQ6QYP0weCCw6DW2HPB=AuHduAtq8qcJY9YZBLrOaQ@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: pyro branch for meta-openembedded, meta-qt5 / maintainer wanted
+Subject: [meta-integrity][PATCH] util-linux: fix compile issue with ipk packaging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,39 +30,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 06:25:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Oct 2017 08:00:16 -0000
+Content-Type: text/plain
 
-On 10/25/2017 08:20 AM, Martin Jansa wrote:
-> On Wed, Oct 25, 2017 at 7:46 AM, akuster808 <akuster808@gmail.com> wrote:
-> 
->>
->>
->> On 05/04/2017 07:02 AM, Martin Jansa wrote:
->>
->> As always, thanks armin!
->>
->> If there are more people willing to step-up and maintain some layers or
->> whole meta-oe for master branch, then I would be happy to share it.
->>
->>
->> After some careful thought, I have decided to help maintain meta-oe and
->> beyond.
->>
->> regards,
->> Armin
->>
-> 
-> Thank you Armin!
-> 
-> Acked-By: Martin Jansa <Martin.Jansa@gmail.com>
-> 
-> Please send your key to Michael and Tom King.
-> 
+opkg-build has its rules for package names which should
+not contain capital letters or underscores, so use character
+hyphen instead of underscore to make opkg-build happy.
 
-Thanks Armin, and thanks for all you have done for us Martin!
+Signed-off-by: Zhenbo Gao <zhenbo.gao@windriver.com>
+---
+ recipes-core/util-linux/util-linux_%.bbappend | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-Philip
+diff --git a/recipes-core/util-linux/util-linux_%.bbappend b/recipes-core/util-linux/util-linux_%.bbappend
+index 62e22a1..17f17a0 100644
+--- a/recipes-core/util-linux/util-linux_%.bbappend
++++ b/recipes-core/util-linux/util-linux_%.bbappend
+@@ -2,7 +2,7 @@
+ # Copyright (C) 2017 Wind River Systems, Inc.
+ #
+ 
+-PACKAGES =+ "${PN}-switch_root.static"
++PACKAGES =+ "${PN}-switch-root.static"
+ 
+ CFLAGS_remove += "-pie -fpie"
+ 
+@@ -17,4 +17,4 @@ do_install_append_class-target() {
+     install -m 0700 ${B}/switch_root.static ${D}${sbindir}/switch_root.static
+ }
+ 
+-FILES_${PN}-switch_root.static = "${sbindir}/switch_root.static"
++FILES_${PN}-switch-root.static = "${sbindir}/switch_root.static"
+-- 
+1.9.1
+
 
