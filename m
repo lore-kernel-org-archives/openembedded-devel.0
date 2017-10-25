@@ -1,49 +1,50 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id CB1F571A3E
+Return-Path: <fffonion@gmail.com>
+Received: from mail-yw0-f169.google.com (mail-yw0-f169.google.com
+	[209.85.161.169])
+	by mail.openembedded.org (Postfix) with ESMTP id DB87671A3E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 03:04:05 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id y39so22533014wrd.4
+	Wed, 25 Oct 2017 03:06:50 +0000 (UTC)
+Received: by mail-yw0-f169.google.com with SMTP id y75so16873549ywg.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Oct 2017 20:04:07 -0700 (PDT)
+	Tue, 24 Oct 2017 20:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=iS+OrgThSyhRntmj5xOusfkJCbHoGz9Clj5pCYH6mVM=;
-	b=M5I9mOAL6f3Erwao1gwg5qXsFBKLM5FO4Ar/FhF7SlwQGiGkOWpYsfoyiBtC31bId9
-	+yT4JtCsYJhj7dYvN4PkxDXkr9iLGCZe1yzwyxkz4pDJAJv8+iPYgpmJbXgH8dCg5CDC
-	7Gt5uq2ZIR9FDvos/6j0SwZ5ODeeMrFgx6p6yyN2nZCnxq0R6UntZ1ECjIyDosx8LRg4
-	chQMpwLRoo91FGrtvdG6Osmybtmy8IYU33cylDkHmx1HxtmA4dUbOZ0zuQyuNwp3h86s
-	KOSjPe+wbK5LU/PViZ70bm7j48rDfSNtmpVycqBrJjIvzDrTLfOX7JtCrF1Eos7fKaor
-	Ld/g==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=3Zu3C3S8PmPnRXQd+8xXEmoy986x3prEqFCU7SkAtWQ=;
+	b=B6m7YcdLphoMh8em6F2ySb+7DBU0royIotdzme+8wAc5RtiUvJd3HV6Sn0ygjajS3+
+	0Y3hBL9ZHsXCNeNnvbhO5usDgMlOuYm8EUfWwoSjEWw2r5F67vZdt96QAZqQFrDpL+XU
+	qFFhpoIJzHUfXlaOQ3/SmZTxD7nDyyqBbvSOJ/469lVR3BKXdYHeyoDj67AcokzuJtek
+	gGUA3AcbJebvmSA77xbsfDbUbn1njrP8y4wPUjGzz7Cb1yBYefXYIYrtSbxeRe/ib+6N
+	9dySW9s8nyh0BqEN2iIwh1LZfMtTysVD+Vjtsu7Rof6/U4ZX2C56n5bpibzEcAXp5nki
+	4ueA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=iS+OrgThSyhRntmj5xOusfkJCbHoGz9Clj5pCYH6mVM=;
-	b=a2OMWLjYQNKDY2yGTC6/9ksvR6Xbzpu0fzuKjBhPf3iqWhnFGE3smOUGWiOgfLnHgs
-	89IdkjY4arwjvvp/eeIW4xkJNM5BnCAA19fq285DFwKinq+mBX28glvYCQyLsB9rft7J
-	smCsFF0W2knIuCLEo9UyghP3iyXEvq+XwDbPuUpxp5Zm1b3s8BGovf8ZlUyTPkEFhk3f
-	06vl1pDbqvJdBAWkV7NEhHe+GEwFZiRxuYBoeb86X8JNiekwVw92bLkMtooDFC3Tp20G
-	fePVRh0AI+MqW4318AQ7VbYPM1f941XTDmS3WZ4QuwgIc3L9wBBn7pBtdHhUEX3WdpcC
-	+AAQ==
-X-Gm-Message-State: AMCzsaU1GBvIAP1MG4e95I+K8vNtVPJsxKHIBsQ841sVtTvr2VF/9JoQ
-	tHM+gL562jCy7Gf9yUXqb1C2umIafkcM0dEGtRc=
-X-Google-Smtp-Source: ABhQp+QHFSGlcnxiMjNi9zXI8/tgnm0Nu/lwOPM4zwfJ/4ZhgBkmr/nADo1nxy20RWIGN/zg0J+kCCL+2oaz4Pbbl0k=
-X-Received: by 10.223.145.165 with SMTP id 34mr468162wri.140.1508900646565;
-	Tue, 24 Oct 2017 20:04:06 -0700 (PDT)
+	:message-id:subject:to;
+	bh=3Zu3C3S8PmPnRXQd+8xXEmoy986x3prEqFCU7SkAtWQ=;
+	b=iy3UZcnsi/I/lfpacb8Ogs8zIN3Nrzwm67Kfs7CPWMlVmuLsgBOewm5rzV0CJ7zEmF
+	Fh0ye/Cp+7SFIvbmZ/uBrvEBsPWKs7ZvK0j8NH1m2OgMG2WcjkyGalwcZR/lELy7hp2X
+	MtMVbFZwsQfjE6D54+EdnXT9a1wuL8eQur/C/lPTAkkBJcoGg4pwaLqjUtbyUlJwx7wi
+	0WYkKyg050TqvguIWIgDBKrxDbLe49Q2/8ZUqhcFN/QA/JRZfZz46Tw2gt+/LaOAI80o
+	fS2fKPh8u/Mh1Kkxk32fr6U5R3xLMMd8E1OpDKcau9jQAmcTI33STXhQ5SKqJJ47a1UQ
+	v6/g==
+X-Gm-Message-State: AMCzsaVqIkP9jOBghl9QjnRBwlyiv63D04hlICRsEpVjdBb3dzmQqgAl
+	5wz1Vsp6naqJyQkXSnbTuVwF4WotHAUqVq+e4QE=
+X-Google-Smtp-Source: ABhQp+R0TbBXVAi/CnE+wqPxnuqpXvSothcnzCtwGHsvFhE5BCjnZ3XMLT2ya6iAuoXcDH6XirdLmw2x12rNxQwBrYI=
+X-Received: by 10.37.179.40 with SMTP id l40mr416481ybj.456.1508900811693;
+	Tue, 24 Oct 2017 20:06:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.166.19 with HTTP; Tue, 24 Oct 2017 20:04:05 -0700 (PDT)
-In-Reply-To: <CAMKF1spgp2wy04B+7YXN047HUBJaD9G1JyEV8L_9RN2K6iXNvQ@mail.gmail.com>
+Received: by 10.129.80.133 with HTTP; Tue, 24 Oct 2017 20:06:11 -0700 (PDT)
+In-Reply-To: <CAJ86T=U9L2-+xZ_1_8u3NJjHsWgh=Xhs4wGun06AizHyPThMuw@mail.gmail.com>
 References: <CABR-LLfMQQQvADAH6Z__-L+Pw0BEGnwn+-_E_C36XUwV+X9_8A@mail.gmail.com>
 	<CAMKF1soLSiKO1kxSr0nt8HkYjzn_PpJdLmfRRWp6U6szML-YnA@mail.gmail.com>
 	<CABR-LLfXBspMaoGXaJnT2iE=zAdyfMWE=zctbzarzfJbXFS1kg@mail.gmail.com>
-	<CAMKF1spgp2wy04B+7YXN047HUBJaD9G1JyEV8L_9RN2K6iXNvQ@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Tue, 24 Oct 2017 20:04:05 -0700
-Message-ID: <CAJ86T=WCjedqHjZ0Fr8hTYySUzJOV1SsHQTcUmRLCoXQympzxA@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+	<CAJ86T=U9L2-+xZ_1_8u3NJjHsWgh=Xhs4wGun06AizHyPThMuw@mail.gmail.com>
+From: Wangchong Zhou <fffonion@gmail.com>
+Date: Tue, 24 Oct 2017 23:06:11 -0400
+Message-ID: <CABR-LLcV-gfq4Vix_FDaf4xrybW9MXP0mJecGnOUau8rpvFSLg@mail.gmail.com>
+To: Andre McCurdy <armccurdy@gmail.com>, Khem Raj <raj.khem@gmail.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Subject: Re: [meta-webserver] [PATCH] fix nginx with large files support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
@@ -57,38 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 03:04:06 -0000
+X-List-Received-Date: Wed, 25 Oct 2017 03:06:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Tue, Oct 24, 2017 at 7:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Tue, Oct 24, 2017 at 6:47 PM, Wangchong Zhou <fffonion@gmail.com> wrote:
->> Thanks! This should work.
->>
->> Signed-off-by: Wangchong Zhou <fffonion@gmail.com>
->> ---
->>  meta-webserver/recipes-httpd/nginx/nginx.inc | 8 +++++++-
->>  1 file changed, 7 insertions(+), 1 deletion(-)
->>
->> diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc
->> b/meta-webserver/recipes-httpd/nginx/nginx.inc
->> index 4a97e2670..00ce132b3 100644
->> --- a/meta-webserver/recipes-httpd/nginx/nginx.inc
->> +++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
->> @@ -41,6 +41,12 @@ do_configure () {
->>      else
->>          PTRSIZE=4
->>      fi
->> +    if ${@bb.utils.contains('DISTRO_FEATURES', 'largefile', 'true',
->> 'false', d)}; then
->> +        OFFTSIZE=8
->> +    else
->> +        OFFTSIZE=${PTRSIZE}
->> +    fi
->> +
+On Tue, Oct 24, 2017 at 11:01 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
 >
-> I was looking for something like
 >
->  --with-off-t=${@bb.utils.contains('DISTRO_FEATURES','largefile','8','${PTRSIZE}',d)};
+> Note that disabling the largefile distro feature isn't supported in
+> oe-core any more (the conditional tests have been removed, so all
+> recipes in oe-core build with LFS enabled even if you disable the
+> largefile distro feature).
+>
+>   http://git.openembedded.org/openembedded-core/commit/?id=
+> a75ccaea77c8aad8d46e87e8ed4af2e2e0ad5327
+>
+> It's perhaps not the right approach to be adding new conditional tests
+> now in meta-oe.
 
-That won't work since PTRSIZE is a shell variable, not a bitbake variable.
+
+So guess we are safe to hardcode off_t to be 8?
+
+On Tue, Oct 24, 2017 at 10:55 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> I was looking for something like
+>>
+>>  --with-off-t=${@bb.utils.contains('DISTRO_FEATURES','
+>> largefile','8','${PTRSIZE}',d)};
+>
+>
+I tried this but bb reports a bad substitution error (from bash I think).
+Not sure if I missed anything.
 
