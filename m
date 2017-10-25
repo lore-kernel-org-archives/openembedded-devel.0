@@ -1,32 +1,56 @@
-Return-Path: <mikko.ylinen@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 2728A6FF78
+Return-Path: <akuster808@gmail.com>
+Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 6DD026E688
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 04:42:52 +0000 (UTC)
-Received: from fmsmga003.fm.intel.com ([10.253.24.29])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	24 Oct 2017 21:42:54 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.43,430,1503385200"; d="scan'208";a="913440506"
-Received: from rmitura-mobl.ger.corp.intel.com (HELO [10.252.7.74])
-	([10.252.7.74])
-	by FMSMGA003.fm.intel.com with ESMTP; 24 Oct 2017 21:42:52 -0700
-To: Khem Raj <raj.khem@gmail.com>, Martin Jansa <martin.jansa@gmail.com>
-References: <20171017105132.GB4387@jama>
-	<20171017115539.13778-1-mikko.ylinen@linux.intel.com>
-	<20171017120705.GC4387@jama>
-	<25ca8a10-6ade-4852-c9e4-bb36b65e2fd6@linux.intel.com>
-	<CA+chaQeZ+unLUOmtNLigrg1kMR7p3A_n5xG+Wx+eqM8T+q2v2g@mail.gmail.com>
-	<CAMKF1srpmrdiufg005CUOcq67cS2BhXkfGjfRGTkJG4ZXSbXnA@mail.gmail.com>
-From: Mikko Ylinen <mikko.ylinen@linux.intel.com>
-Message-ID: <f60334c3-ac46-3ba1-c844-112600ba7de8@linux.intel.com>
-Date: Wed, 25 Oct 2017 07:42:49 +0300
+	Wed, 25 Oct 2017 05:46:54 +0000 (UTC)
+Received: by mail-wm0-f65.google.com with SMTP id t139so476094wmt.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Oct 2017 22:46:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=wdJoafuBS6Sd5FCdezyB+jITSi9jrcya9PtoRueiE28=;
+	b=PQ3FCrqLE/xC2PXYA6SaDKqDTQCtFCzoZJMwiyYl4Slx1/4QN7EiKau1lqLBFOtDdu
+	XNpNULR91I9UHV6ct9G7zNxTB7OZkrQ8guNgdc3eA6vOIiOEKTbvUtNs8SlMgcgmMe0x
+	twCKsp1KJy6SH1znIbJ6SNn03LmxD5lRZXtOh3nptUMTwsrz5pc30YhWD5wgXv5yJzqI
+	RZAlt/XrS3W3XxP8RqH6xWYq96c/Cfu2W7XcP0n45X0injXLK6FPJX6W7JtackuBsRWh
+	DmKCNKL9sBE7W6af440Tb+dv4Rq+Zr5ERIjeGMbMTFv6y+mriQswwUMYuguAryBDhC6O
+	9ikA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=wdJoafuBS6Sd5FCdezyB+jITSi9jrcya9PtoRueiE28=;
+	b=UQ7nTjZmrnoR8J8Pmg/QxGXeqrl6R3fCwquVfX8EaQyF5Exbh1QtLrU6KROgJofFwJ
+	D8x576G/2hHPf1CrhtKg+P6NXyTrysslf2IynynYMSguQr2tO07fy/8Q/44xIChFWRRq
+	LqytgwuhePDjdTWZ6/t3xManNqkrJOmj9whx7uV3i5n4oxEY9JkpNiNTSIlssl2Uy2cQ
+	VYnBOi4psbX3Qt/KfzMr0sSkR1tDwsOT+nSozaMCq2uQqdt3QEx+f8bviIpNSvbbQb/E
+	54FkW2aYqQLnBvDL29v0iySMw6ia2QQ4kxErQamAI+CwbaS+bGerwD7m6nEiuuSUnC7c
+	EokA==
+X-Gm-Message-State: AMCzsaVfgLGltzkILKOwdvTdQcje5Csn8eVwOV3j7bzm3/g5Nwk5z149
+	Zz96QQsl5eE4/qOZFHlMn0jTFQ==
+X-Google-Smtp-Source: ABhQp+Q0kVK0Ohk8axXvPVBlahMIpKBLANfkXKno708q4TJ+Pc3ZpyV6aQ82tqGTr+gLxIxxwgTckg==
+X-Received: by 10.80.220.202 with SMTP id v10mr22555060edk.226.1508910415875; 
+	Tue, 24 Oct 2017 22:46:55 -0700 (PDT)
+Received: from [10.253.10.43] ([62.168.35.105])
+	by smtp.gmail.com with ESMTPSA id
+	o60sm1140026eda.48.2017.10.24.22.46.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 24 Oct 2017 22:46:55 -0700 (PDT)
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20170426184422.GG3258@jama>
+	<a05fd59e-cbf1-291c-c2fa-63d3ba5b1d6e@gmail.com>
+	<CA+chaQfO+UJ9rm5u20hi9+68qafdnwhJ9Q0WXMnZC7XfLUbNMA@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <82e2e61c-68ae-1c53-ae70-9b509ee0dfaf@gmail.com>
+Date: Tue, 24 Oct 2017 22:46:54 -0700
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.3.0
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-In-Reply-To: <CAMKF1srpmrdiufg005CUOcq67cS2BhXkfGjfRGTkJG4ZXSbXnA@mail.gmail.com>
+In-Reply-To: <CA+chaQfO+UJ9rm5u20hi9+68qafdnwhJ9Q0WXMnZC7XfLUbNMA@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] mraa/upm: enable nodejs bindings by default
+Subject: Re: pyro branch for meta-openembedded, meta-qt5 / maintainer wanted
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,37 +63,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 04:42:53 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Oct 2017 05:46:55 -0000
 Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
 
-On 21/10/17 18:39, Khem Raj wrote:
-> On Fri, Oct 20, 2017 at 3:53 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> Fails to build:
->> http://errors.yoctoproject.org/Errors/Details/157425/
->>
-> and fails on musl too
+On 05/04/2017 07:02 AM, Martin Jansa wrote:
+> As always, thanks armin!
 >
-> http://errors.yoctoproject.org/Errors/Build/47646/
+> If there are more people willing to step-up and maintain some layers
+> or whole meta-oe for master branch, then I would be happy to share it.
+
+After some careful thought, I have decided to help maintain meta-oe and
+beyond.
+
+regards,
+Armin
+>
+> Any kind of help counts: reviewing changes on ML, sending consolidated
+> pull-requests for layers or recipes you care about or just generally
+> helping to fix the issues detected and reported in world builds.
+>
+> Cheers,
+>
+> On Wed, Apr 26, 2017 at 10:24 PM, akuster808 <akuster808@gmail.com
+> <mailto:akuster808@gmail.com>> wrote:
+>
+>     On 4/26/17 11:44 AM, Martin Jansa wrote:
+>     > Hello,
+>     >
+>     > as every 6 months I'm looking for some volunteer(s) to step-up an=
+d
+>     > maintain "pyro" release branch.
+>     put me down. I will be sending patches shortly.
+>     -armin
+>     >
+>     > You can sign-up by replying to this thread and then one of you
+>     need to
+>     > send README update like this:
+>     >
+>     https://github.com/openembedded/meta-openembedded/commit/3082e30da5=
+8df0711182cf114c71a8c6a093aeae
+>     <https://github.com/openembedded/meta-openembedded/commit/3082e30da=
+58df0711182cf114c71a8c6a093aeae>
+>     >
+>     > More details in thread searching for daisy maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2014-Apr=
+il/095601.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2014-Ap=
+ril/095601.html>
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2014-May=
+/095694.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2014-Ma=
+y/095694.html>
+>     > or dizzy maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2014-Oct=
+ober/098441.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2014-Oc=
+tober/098441.html>
+>     > or fido maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2015-Mar=
+ch/100901.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2015-Ma=
+rch/100901.html>
+>     > or jethro maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2015-Oct=
+ober/103810.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2015-Oc=
+tober/103810.html>
+>     > or krogoth maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2016-Apr=
+il/106952.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2016-Ap=
+ril/106952.html>
+>     > or morty maintainer:
+>     >
+>     http://lists.openembedded.org/pipermail/openembedded-devel/2016-Oct=
+ober/109452.html
+>     <http://lists.openembedded.org/pipermail/openembedded-devel/2016-Oc=
+tober/109452.html>
+>     >
+>     > Regards,
+>     >
+>     >
 >
 >
-
-We've been using nodejs bindings via HAVE_NODEJS but
-with nodejs 6.x (which I used in my testing too).
-
-It looks the errors are because nodejs >7.x- break
-swig bindings: https://github.com/swig/swig/pull/968
-
-Until oe-core gets the new version of swig, we'll have to
-keep the nodejs bindings disabled. Let's scratch my previous
-patches and I'll submit a new one that just cleans out that
-HAVE_NODEJS leftover.
-
--- Mikko
-
 
 
