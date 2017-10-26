@@ -1,46 +1,37 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 35C6D71D79
+Return-Path: <denis@denix.org>
+Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
+	by mail.openembedded.org (Postfix) with ESMTP id 555A077E76
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 19:12:02 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id m18so712457pgd.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Oct 2017 12:12:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=7/1WhFNomRqrf7ewulQb2i41k12lfDQ9GniPRot0oTs=;
-	b=d8zg1cfiVkDRMPEF/7/KSB3uFm3rppQlsCfvnYuypxtE3gHhMcI7vuwlgnWZ70uvzo
-	f0iYCir2HDe4jAToZi0H4PnrdNVv7jSAuk1m8sCiVdeCRpezBzWl+h5hmW8LfZWXoC7X
-	2YoccjjtZ1bLTYD0jMgjR0L0pG28istoT4yt46Y4T8FFqm0PoHRfmKTziBsQpkGb6gEn
-	5jXOOU0mZwhx1nvpYKe5jJahPBcUlBbfn8zBsn2UUngwXvdpig4IMjVJTo4OpZ0WRT6y
-	xPsohJ1W44Z7z6Mjy+dF/vsjEJX90TyMRfY1wphv/GYR6aeMPzAQX+mAO+Tpjkv+k6ue
-	R0EQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=7/1WhFNomRqrf7ewulQb2i41k12lfDQ9GniPRot0oTs=;
-	b=bTIDnqkC6G+6YNCnQfDNswfVZ/HTb7qJksszGlzN7iTUstYhpPoa4zNy5KwjOltAnt
-	nMYTDN91oj42kmlwgh/m+6I8OO+E/pNyZ1vftTZixBI/+4jPlLL121DF1Jr5ZljtbJBJ
-	i+JBdwkFmbOBESe/CSIp/f830LhQJPkoHpchRJtEDExU/cx5xzrecO0sH4g/vUTcpcEX
-	Qtu8HgZqFmL5FXKjHT6qJ1IiXxiTgP3DKGrs5jB7tkMWHJ/gkpxFQxiLXIHkARNloOu3
-	oFB+Z3A8Nv6Xf1DlgnfkOyKoQyCwjfQMbQwFqTp66s00judMTuNgSB0u8zbYk4v3U8o7
-	hPfw==
-X-Gm-Message-State: AMCzsaW5X777P/dqoUdf2cPL8sRDulJZTrRivgYlsSpkLvqrJCJuCYzS
-	/K2wp0fw4FbduN7cD9dzaTo2EQ==
-X-Google-Smtp-Source: ABhQp+QSJasOKrdkqbTCAxrtomytWLDd1p/1dXhBndyuHznTcy9edC12vnP9TSxAlVPz2z3BU5L1Mw==
-X-Received: by 10.98.89.219 with SMTP id k88mr3041576pfj.229.1508958724047;
-	Wed, 25 Oct 2017 12:12:04 -0700 (PDT)
-Received: from e6520.cablelabs.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	m25sm7059411pfg.49.2017.10.25.12.12.02
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 25 Oct 2017 12:12:03 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Oct 2017 12:11:57 -0700
-Message-Id: <1508958717-31769-1-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-networking][PATCH] dnsmasq: update SRC_URI for versions 2.69 and earlier
+	Thu, 26 Oct 2017 12:55:08 +0000 (UTC)
+Received: from localhost (localhost [127.0.0.1])
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 58CEC20A4B;
+	Thu, 26 Oct 2017 12:55:10 +0000 (UTC)
+Received: from mailout4.zoneedit.com ([127.0.0.1])
+	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with ESMTP id xULjcEcid5Ti; Thu, 26 Oct 2017 12:55:10 +0000 (UTC)
+Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
+	[100.15.85.143])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 1D5EE2087C;
+	Thu, 26 Oct 2017 12:55:06 +0000 (UTC)
+Received: by mail.denix.org (Postfix, from userid 1000)
+	id 9A50A162705; Thu, 26 Oct 2017 08:55:05 -0400 (EDT)
+Date: Thu, 26 Oct 2017 08:55:05 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: Daniel Mack <daniel@zonque.org>
+Message-ID: <20171026125505.GW9221@denix.org>
+References: <20171017195649.8657-1-s.sonski@gmail.com>
+	<20171017195649.8657-2-s.sonski@gmail.com>
+	<CA+chaQcK6+mS9SgBTaNdzgLdDS=nhoHNj1crFtPeirxnK1m87Q@mail.gmail.com>
+	<8cfe1d21-f003-031b-ae42-024f3be91910@zonque.org>
+MIME-Version: 1.0
+In-Reply-To: <8cfe1d21-f003-031b-ae42-024f3be91910@zonque.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	"Chris E. Rallis" <Chris.Rallis@ravenind.net>
+Subject: Re: [meta-qt5][PATCH 2/2] qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,31 +44,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Oct 2017 19:12:03 -0000
+X-List-Received-Date: Thu, 26 Oct 2017 12:55:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Versions 2.16 to 2.69 have now also moved into the archives folder.
+On Tue, Oct 24, 2017 at 03:33:10PM +0200, Daniel Mack wrote:
+> Hi,
+> 
+> On Saturday, October 21, 2017 12:54 AM, Martin Jansa wrote:
+> > Either this or the ptest change seems to cause:
+> > http://errors.yoctoproject.org/Errors/Details/157417/
+> 
+> FTR, I see the same error locally. Reverting both 8fd20e8b1
+> ("nativesdk-qtbase Enable objcopy for qmake") and 5ec6b97a8
+> ("qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY") in the master-next
+> branch of meta-qt5 fixes things for me.
 
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- meta-networking/recipes-support/dnsmasq/dnsmasq.inc | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+Have you tried bisecting by any chance?
 
-diff --git a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-index ef79c5f..4f4bbf1 100644
---- a/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-+++ b/meta-networking/recipes-support/dnsmasq/dnsmasq.inc
-@@ -6,8 +6,8 @@ LICENSE = "GPLv2 | GPLv3"
- LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3 \
-                     file://COPYING-v3;md5=d32239bcb673463ab874e80d47fae504"
- 
--#at least versions 2.15 and prior are moved to the archive folder on the server
--SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 15]}dnsmasq-${PV}.tar.gz;name=dnsmasq-${PV} \
-+#at least versions 2.69 and prior are moved to the archive folder on the server
-+SRC_URI = "http://www.thekelleys.org.uk/dnsmasq/${@['archive/', ''][float(d.getVar('PV').split('.')[1]) > 69]}dnsmasq-${PV}.tar.gz;name=dnsmasq-${PV} \
-            file://init \
-            file://dnsmasq.conf \
-            file://dnsmasq-resolvconf.service \
--- 
-1.9.1
 
+> > On Tue, Oct 17, 2017 at 9:56 PM, Stefan Sonski <s.sonski@gmail.com> wrote:
+> > 
+> >> From: "Chris E. Rallis" <Chris.Rallis@RavenInd.net>
+> >>
+> >> Signed-off-by: Stefan Sonski <s.sonski@gmail.com>
+> >> ---
+> >>  classes/qmake5_base.bbclass | 2 ++
+> >>  1 file changed, 2 insertions(+)
+> >>
+> >> diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
+> >> index 8e1fe20..042008c 100644
+> >> --- a/classes/qmake5_base.bbclass
+> >> +++ b/classes/qmake5_base.bbclass
+> >> @@ -28,6 +28,7 @@ EXTRA_OEMAKE = " \
+> >>      OE_QMAKE_LINK='${OE_QMAKE_LINK}' \
+> >>      OE_QMAKE_LDFLAGS='${OE_QMAKE_LDFLAGS}' \
+> >>      OE_QMAKE_AR='${OE_QMAKE_AR}' \
+> >> +    OE_QMAKE_OBJCOPY='${OE_QMAKE_OBJCOPY}' \
+> >>      OE_QMAKE_STRIP='${OE_QMAKE_STRIP}' \
+> >>      OE_QMAKE_WAYLAND_SCANNER='${OE_QMAKE_WAYLAND_SCANNER}' \
+> >>      OE_QMAKE_INCDIR_QT='${STAGING_DIR_TARGET}/${OE_QMAKE_PATH_HEADERS}' \
+> >> @@ -42,6 +43,7 @@ export OE_QMAKE_CXXFLAGS = "${CXXFLAGS}"
+> >>  export OE_QMAKE_LINK = "${CXX}"
+> >>  export OE_QMAKE_LDFLAGS = "${LDFLAGS}"
+> >>  export OE_QMAKE_AR = "${AR}"
+> >> +export OE_QMAKE_OBJCOPY = "${OBJCOPY}"
+> >>  export OE_QMAKE_STRIP = "echo"
+> >>  export OE_QMAKE_WAYLAND_SCANNER = "${STAGING_BINDIR_NATIVE}/
+> >> wayland-scanner"
+> >>
+> >> --
+> >> 2.14.2
+> >>
+> >> --
+> >> _______________________________________________
+> >> Openembedded-devel mailing list
+> >> Openembedded-devel@lists.openembedded.org
+> >> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>
+> 
+> -- 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
