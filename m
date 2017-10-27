@@ -1,34 +1,32 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym04.jp.fujitsu.com (mgwym04.jp.fujitsu.com [211.128.242.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 135747197A
+Return-Path: <daniel@zonque.org>
+Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 46A0E7197A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 08:46:38 +0000 (UTC)
-Received: from yt-mxoi2.gw.nic.fujitsu.com (unknown [192.168.229.69]) by
-	mgwym04.jp.fujitsu.com with smtp
-	id 7ce6_1bb2_cbbf5a42_b7fb_42d8_9c1b_a8b5a856a4e2;
-	Fri, 27 Oct 2017 17:46:37 +0900
-Received: from g01jpfmpwkw03.exch.g01.fujitsu.local
-	(g01jpfmpwkw03.exch.g01.fujitsu.local [10.0.193.57])
-	by yt-mxoi2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7AC81AC0095
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:46:36 +0900 (JST)
-Received: from g01jpexchkw37.g01.fujitsu.local (unknown [10.0.193.4])
-	by g01jpfmpwkw03.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	5EE8CBD68C1 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:46:35 +0900 (JST)
-Received: from localhost.localdomain (10.54.205.122) by
-	g01jpexchkw37.g01.fujitsu.local (10.0.193.67) with Microsoft SMTP
-	Server id 14.3.352.0; Fri, 27 Oct 2017 17:46:34 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Oct 2017 17:46:28 +0900
-Message-ID: <1509093988-29131-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 27 Oct 2017 08:49:41 +0000 (UTC)
+Received: from [192.168.24.183] (p54AC5F3C.dip0.t-ipconnect.de [84.172.95.60])
+	by mail.bugwerft.de (Postfix) with ESMTPSA id 93B36280903;
+	Fri, 27 Oct 2017 08:46:35 +0000 (UTC)
+To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>,
+	Trevor Woerner <twoerner@gmail.com>
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<87d15w4a02.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CAHUNapSvuLFcVyjc+FB4cG7U753SeedOfJ5xCtFLCx-+fK0QVQ@mail.gmail.com>
+	<1507662641.20629.9.camel@intel.com>
+	<CAHUNapRps8ck3S=aKHYH3UmzBgsZW-VDx4x0PgY2D4zXuh88_Q@mail.gmail.com>
+	<87r2u93f1r.fsf@rkubodac-desk.ger.corp.intel.com>
+From: Daniel Mack <daniel@zonque.org>
+Message-ID: <b8acd1ce-4c60-ac3d-4c48-fca5d9b43f26@zonque.org>
+Date: Fri, 27 Oct 2017 10:49:41 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
-X-TM-AS-MML: disable
-Subject: [meta-selinux][PATCH] audit: upgrade 2.7.6 -> 2.8.1
+In-Reply-To: <87r2u93f1r.fsf@rkubodac-desk.ger.corp.intel.com>
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,35 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 08:46:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Oct 2017 08:49:42 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
----
- recipes-security/audit/{audit_2.7.6.bb => audit_2.8.1.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename recipes-security/audit/{audit_2.7.6.bb => audit_2.8.1.bb} (96%)
+Hi,
 
-diff --git a/recipes-security/audit/audit_2.7.6.bb b/recipes-security/audit/audit_2.8.1.bb
-similarity index 96%
-rename from recipes-security/audit/audit_2.7.6.bb
-rename to recipes-security/audit/audit_2.8.1.bb
-index 5bfda7b..52ae4bf 100644
---- a/recipes-security/audit/audit_2.7.6.bb
-+++ b/recipes-security/audit/audit_2.8.1.bb
-@@ -15,8 +15,8 @@ SRC_URI = "http://people.redhat.com/sgrubb/${BPN}/${BPN}-${PV}.tar.gz \
-            file://auditd.service \
-            file://audit-volatile.conf \
- "
--SRC_URI[md5sum] = "55a81bbed973b58a90590c949e71dc3e"
--SRC_URI[sha256sum] = "fa65289cffdc95a25bfbdba541f43ee1b12c707090a38fd027dcf9354b9014e7"
-+SRC_URI[md5sum] = "76ce8b6a00a1dd0b52a87312eaec0e8e"
-+SRC_URI[sha256sum] = "1becde92ff6e81798fa8878820ab2497d867036a6596f55109504b37c8b33b6c"
- 
- inherit autotools pythonnative update-rc.d systemd
- 
--- 
-2.7.4
+On Wednesday, October 11, 2017 05:00 PM, Raphael Kubo da Costa wrote:
+> Trevor Woerner <twoerner@gmail.com> writes:
+>> Hi Raphael,
+>>
+>> On Tue, Oct 10, 2017 at 3:10 PM, Kubo Da Costa, Raphael
+>> <raphael.kubo.da.costa@intel.com> wrote:
+>>> On Tue, 2017-10-10 at 14:28 -0400, Trevor Woerner wrote:
+>>> I've pushed commit a0db280 to my chromium61 branch; that one allowed me
+>>> to get to the end of the build without any other issues. Let me know if
+>>> that's enough to get master working for you.
+>>
+>> Excellent! Yes, this update works for me against master :-)
+>>
+>> Has anyone started trying to integrate this with meta-browser?
+> 
+> That's the next part of my plan, I hope to get around to it this week.
+
+I'd like to give Chromium 62 a shot on arm64, but the recipes currently
+only support x11, is that correct? My platform is based on wayland, any
+plans on supporting that?
 
 
+Thanks,
+Daniel
 
