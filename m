@@ -1,20 +1,21 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
-	by mail.openembedded.org (Postfix) with ESMTP id 020BD78304
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id AB83E71984
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 14:42:48 +0000 (UTC)
-Received: from fmsmga001.fm.intel.com ([10.253.24.23])
-	by orsmga105.jf.intel.com with ESMTP; 27 Oct 2017 07:42:50 -0700
+	Fri, 27 Oct 2017 14:45:28 +0000 (UTC)
+Received: from fmsmga006.fm.intel.com ([10.253.24.20])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Oct 2017 07:45:29 -0700
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,304,1505804400"; d="scan'208";a="1210890710"
+X-IronPort-AV: E=Sophos;i="5.44,304,1505804400"; d="scan'208";a="168452832"
 Received: from wrath.jf.intel.com ([10.54.70.9])
-	by fmsmga001.fm.intel.com with ESMTP; 27 Oct 2017 07:42:49 -0700
+	by fmsmga006.fm.intel.com with ESMTP; 27 Oct 2017 07:45:29 -0700
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Oct 2017 07:42:47 -0700
-Message-Id: <20171027144247.17837-1-timothy.t.orling@linux.intel.com>
+Date: Fri, 27 Oct 2017 07:45:26 -0700
+Message-Id: <20171027144526.17966-1-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.13.5
-Subject: [meta-perl][PATCH] README: add self as maintainer
+Subject: [meta-perl][PATCH v2] README: add self as maintainer
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -27,9 +28,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 14:42:49 -0000
+X-List-Received-Date: Fri, 27 Oct 2017 14:45:28 -0000
 
-I have been, in practice, maintinaing meta-perl for several
+I have been, in practice, maintaining meta-perl for several
 years now. Given discussion at OEDEM, make it official.
 
 Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
