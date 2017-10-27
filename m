@@ -1,24 +1,50 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C56560685
+Return-Path: <armccurdy@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 97020719A4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Oct 2017 21:43:31 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id v9QLhWWr013974
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	Fri, 27 Oct 2017 01:05:08 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id p75so637265wmg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Oct 2017 14:43:33 -0700
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
-	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 26 Oct 2017 14:43:30 -0700
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 26 Oct 2017 14:43:31 -0700
-Message-ID: <20171026214331.174436-1-jslater@windriver.com>
-X-Mailer: git-send-email 2.13.0
+	Thu, 26 Oct 2017 18:05:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=mF/eejQ7ejpqNmqujTUeGj2L/Gst9oXxlqEp4vJRpU0=;
+	b=WR608l5yJyxomL8fz0hPHm/zVykpZeuFXrVtH07tWosl8Zx6vMicBOm+SlVOUdUnLh
+	0UkV0B0TRNMNTy+i35dL4qA8CBzSLsbtDCBCnuwZ9IWnPR7zMt7bN1KzTV32DQTQo3go
+	uUp+Ti2tRSfnLgdC7E/JXU4FlI5lIYWSCw3RekhXw1nAVJfxB4UPRMfMOiau0+H+yvDO
+	jOSyxC3Sau6+xvLjJVa06J238fp+at3VZy7UTgGS/eDX+4ZOQkBGeNTKbKzFP91K26/q
+	2J0ieXhMfl/qJPCT/HGyC6i84bBjLhoYwH4ux0zfkoXmRD9Ypdli+evcgftuXKdq2+qp
+	Dmdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=mF/eejQ7ejpqNmqujTUeGj2L/Gst9oXxlqEp4vJRpU0=;
+	b=cxezadNJc69YhFccHJXYYtLnJdRUqymcemZmhVev+/4JMx2F95MrYfHMfEjmfCo9PG
+	E5ecGYkJtaph7dL8uxZKI7EY0e2aMhLdKvHxuGA2dHE+AMX9DxGFcFJ+NV1Nb6ZOo3gn
+	uv4xyl+WDAF1OkW2UoawZxci59mALPw2yZdisAfgj3KRU2uT60swtN7SZzQQPNjG+cVM
+	yPHFhwnat0//ifTFfjaCMWKcmzzlY0UegjL2NlKIkcmyw4RptuZLC9a5yUd5WDzUW+No
+	7qKw+KZ90k20Vccg/ILJtL64mtlXPSBJoCpydPmr9ESmTboUPYQCgf7Zvf0XGBSdpqdQ
+	0Ewg==
+X-Gm-Message-State: AMCzsaVqNn/EzFVUNYMSF+1v5s35bhEryJds/WVzn8rYodsojYu9GSkT
+	nuZkvzA2SBvQeaQZRWCj4l81ZCpzHbIWqqBtwEU=
+X-Google-Smtp-Source: ABhQp+S9jMRSzYR3z0zb+07iQsXyUKUqdWbVPkPijCnpPJaIQY7Yvo2BskvAcWcXBBV1ly0ziR2hRownVb/oBxWIjwg=
+X-Received: by 10.28.167.130 with SMTP id q124mr450486wme.136.1509066309227;
+	Thu, 26 Oct 2017 18:05:09 -0700 (PDT)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 1/1] postfix: fix send mail failure and eliminate warning
+Received: by 10.223.166.19 with HTTP; Thu, 26 Oct 2017 18:05:08 -0700 (PDT)
+In-Reply-To: <CABR-LLcV-gfq4Vix_FDaf4xrybW9MXP0mJecGnOUau8rpvFSLg@mail.gmail.com>
+References: <CABR-LLfMQQQvADAH6Z__-L+Pw0BEGnwn+-_E_C36XUwV+X9_8A@mail.gmail.com>
+	<CAMKF1soLSiKO1kxSr0nt8HkYjzn_PpJdLmfRRWp6U6szML-YnA@mail.gmail.com>
+	<CABR-LLfXBspMaoGXaJnT2iE=zAdyfMWE=zctbzarzfJbXFS1kg@mail.gmail.com>
+	<CAJ86T=U9L2-+xZ_1_8u3NJjHsWgh=Xhs4wGun06AizHyPThMuw@mail.gmail.com>
+	<CABR-LLcV-gfq4Vix_FDaf4xrybW9MXP0mJecGnOUau8rpvFSLg@mail.gmail.com>
+From: Andre McCurdy <armccurdy@gmail.com>
+Date: Thu, 26 Oct 2017 18:05:08 -0700
+Message-ID: <CAJ86T=V_iz3794cAjC3BdEzWNa9=MDsJUzpTL2hq_Rs4Fi+QKA@mail.gmail.com>
+To: Wangchong Zhou <fffonion@gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-webserver] [PATCH] fix nginx with large files support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,156 +57,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Oct 2017 21:43:32 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Oct 2017 01:05:08 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Yi Zhao <yi.zhao@windriver.com>
+On Tue, Oct 24, 2017 at 8:06 PM, Wangchong Zhou <fffonion@gmail.com> wrote:
+> On Tue, Oct 24, 2017 at 11:01 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
+>> Note that disabling the largefile distro feature isn't supported in
+>> oe-core any more (the conditional tests have been removed, so all
+>> recipes in oe-core build with LFS enabled even if you disable the
+>> largefile distro feature).
+>>
+>> http://git.openembedded.org/openembedded-core/commit/?id=a75ccaea77c8aad8d46e87e8ed4af2e2e0ad5327
+>>
+>> It's perhaps not the right approach to be adding new conditional tests
+>> now in meta-oe.
+>
+> So guess we are safe to hardcode off_t to be 8?
 
-* Update main.cf for postfix 3.x to eliminate startup warning
-* Set daemon_directory from ${libexecdir} to ${libexecdir}/postfix
-* Using absolute path for newaliases and postmap to generate the correct
-  db file in pkg_postinst
-* Remove duplicate SRC_URI lines in postfix_3.2.2.bb
-
-(LOCAL REV: NOT UPSTREAM) -- will sent to oe-devel later
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
-
-* Move use of newaliases and postmap on host to install phase
-  because absolute path might not exist at rootfs build time.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
----
- .../postfix/files/{main.cf_2.0 => main.cf}         |  3 +++
- .../recipes-daemons/postfix/postfix.inc            | 28 ++++++++++++----------
- .../recipes-daemons/postfix/postfix_3.2.2.bb       | 17 ++++---------
- 3 files changed, 22 insertions(+), 26 deletions(-)
- rename meta-networking/recipes-daemons/postfix/files/{main.cf_2.0 => main.cf} (98%)
-
-diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 b/meta-networking/recipes-daemons/postfix/files/main.cf
-similarity index 98%
-rename from meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-rename to meta-networking/recipes-daemons/postfix/files/main.cf
-index dc7feb5..2371ace 100644
---- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
-+++ b/meta-networking/recipes-daemons/postfix/files/main.cf
-@@ -1,3 +1,6 @@
-+compatibility_level = 2
-+smtputf8_enable = no
-+
- # Configure your domain and accounts
- #mydomain=sample.com
- #FQDN from gethostname
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index a588bd3..8dad45f 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
- SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
-     file://makedefs.patch \
-     file://install.patch \
--    file://main.cf_2.0 \
-+    file://main.cf \
-     file://postfix \
-     file://internal_recipient \
-     file://postfix.service \
-@@ -135,7 +135,7 @@ SYSTEMD_SERVICE_${PN} = "postfix.service"
- do_install () {
-     sh ./postfix-install 'install_root=${D}' \
-         'config_directory=${sysconfdir}/postfix' \
--        'daemon_directory=${libexecdir}' \
-+        'daemon_directory=${libexecdir}/postfix' \
-         'command_directory=${sbindir}' \
-         'queue_directory=${localstatedir}/spool/postfix' \
-         'sendmail_path=${sbindir}/sendmail.postfix' \
-@@ -149,8 +149,8 @@ do_install () {
-     mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
-     install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
-     install -d ${D}${sysconfdir}/init.d
--    install -m 644 ${WORKDIR}/main.cf_2.0 ${D}${sysconfdir}/postfix/main.cf
--    sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
-+    install -m 644 ${WORKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
-+    sed -i 's#@LIBEXECDIR@#${libexecdir}/postfix#' ${D}${sysconfdir}/postfix/main.cf
- 
-     install -m 755 ${WORKDIR}/check_hostname.sh ${D}${sbindir}/
- 
-@@ -159,11 +159,11 @@ do_install () {
- 
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
--    sed -i -e 's#@LIBEXECDIR@#${libexecdir}#g' ${D}${systemd_unitdir}/system/postfix.service
-+    sed -i -e 's#@LIBEXECDIR@#${libexecdir}/postfix#g' ${D}${systemd_unitdir}/system/postfix.service
-     sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/postfix.service
-     sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/postfix.service
- 
--    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}
-+    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}/postfix
- 
-     install -m 770 -d ${D}${localstatedir}/spool/postfix
-     chown postfix:postfix ${D}${localstatedir}/spool/postfix
-@@ -217,6 +217,12 @@ do_install_append_class-native() {
- do_install_append_class-target() {
-     # Remove references to buildmachine paths in target makedefs.out
-     sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
-+    # Since we are building recipe postfix, newaliases and postmap come from our sysroot_native.
-+    touch ${D}/etc/aliases
-+    newaliases -C ${D}/etc/postfix/main.cf -oA${D}/etc/aliases
-+    touch ${D}/etc/postfix/virtual_alias
-+    postmap -c ${D}/etc/postfix ${D}/etc/postfix/virtual_alias
-+
- }
- 
- NATIVE_INSTALL_WORKS = "1"
-@@ -240,13 +246,8 @@ pkg_postinst_${PN} () {
-         touch /etc/postfix/virtual_alias
-         postmap /etc/postfix/virtual_alias
-     else
--        touch $D/etc/aliases
--        newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases
--        touch $D/etc/postfix/virtual_alias
--        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
--
-         if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES', False) else 'false'}; then
--            # /usr/lib/sendmial is required by LSB core test
-+            # /usr/lib/sendmail is required by LSB core test
-             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
-         fi
-     fi
-@@ -255,4 +256,5 @@ pkg_postinst_${PN} () {
- # Exclude .debug directories from the main package
- FILES_${PN} = "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}/* \
-                ${libexecdir}/* ${systemd_unitdir}/*"
--FILES_${PN}-dbg += "${libexecdir}/.debug"
-+CONFFILES_${PN} = "/etc/aliases /etc/postfix/virtual_alias*"
-+FILES_${PN}-dbg += "${libexecdir}/postfix/.debug"
-diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb b/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-index 439ede9..89af406 100644
---- a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-+++ b/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-@@ -1,18 +1,9 @@
- require postfix.inc
- 
--SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
--           file://makedefs.patch \
--           file://install.patch \
--           file://main.cf_2.0 \
--           file://postfix \
--           file://internal_recipient \
--           file://postfix.service \
--           file://aliasesdb \
--           file://check_hostname.sh \
--           file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
--           file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
--           file://postfix-install.patch \
--           file://icu-config.patch \
-+SRC_URI += "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
-+            file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
-+            file://postfix-install.patch \
-+            file://icu-config.patch \
-            "
- SRC_URI[md5sum] = "aea073a9b0bea5bdb590460a270a4aa0"
- SRC_URI[sha256sum] = "d06849418d119d09366997b2b481bb23f737629769b4e4a52da42fb3ad8b0576"
--- 
-2.7.4
-
+Yes, I think so.
 
