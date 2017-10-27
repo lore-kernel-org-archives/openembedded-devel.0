@@ -1,50 +1,37 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 97020719A4
+Return-Path: <fan.xin@jp.fujitsu.com>
+X-Greylist: delayed 679 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 27 Oct 2017 03:36:56 UTC
+Received: from mgwym02.jp.fujitsu.com (mgwym02.jp.fujitsu.com [211.128.242.41])
+	by mail.openembedded.org (Postfix) with ESMTP id AAED778226
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 01:05:08 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id p75so637265wmg.3
+	Fri, 27 Oct 2017 03:36:56 +0000 (UTC)
+Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
+	mgwym02.jp.fujitsu.com with smtp
+	id 51d7_3565_9fed500b_1d0c_4d9d_b082_27c02b1b71b1;
+	Fri, 27 Oct 2017 12:25:33 +0900
+Received: from g01jpfmpwyt03.exch.g01.fujitsu.local
+	(g01jpfmpwyt03.exch.g01.fujitsu.local [10.128.193.57])
+	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 7E578AC00A6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Oct 2017 18:05:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mF/eejQ7ejpqNmqujTUeGj2L/Gst9oXxlqEp4vJRpU0=;
-	b=WR608l5yJyxomL8fz0hPHm/zVykpZeuFXrVtH07tWosl8Zx6vMicBOm+SlVOUdUnLh
-	0UkV0B0TRNMNTy+i35dL4qA8CBzSLsbtDCBCnuwZ9IWnPR7zMt7bN1KzTV32DQTQo3go
-	uUp+Ti2tRSfnLgdC7E/JXU4FlI5lIYWSCw3RekhXw1nAVJfxB4UPRMfMOiau0+H+yvDO
-	jOSyxC3Sau6+xvLjJVa06J238fp+at3VZy7UTgGS/eDX+4ZOQkBGeNTKbKzFP91K26/q
-	2J0ieXhMfl/qJPCT/HGyC6i84bBjLhoYwH4ux0zfkoXmRD9Ypdli+evcgftuXKdq2+qp
-	Dmdg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=mF/eejQ7ejpqNmqujTUeGj2L/Gst9oXxlqEp4vJRpU0=;
-	b=cxezadNJc69YhFccHJXYYtLnJdRUqymcemZmhVev+/4JMx2F95MrYfHMfEjmfCo9PG
-	E5ecGYkJtaph7dL8uxZKI7EY0e2aMhLdKvHxuGA2dHE+AMX9DxGFcFJ+NV1Nb6ZOo3gn
-	uv4xyl+WDAF1OkW2UoawZxci59mALPw2yZdisAfgj3KRU2uT60swtN7SZzQQPNjG+cVM
-	yPHFhwnat0//ifTFfjaCMWKcmzzlY0UegjL2NlKIkcmyw4RptuZLC9a5yUd5WDzUW+No
-	7qKw+KZ90k20Vccg/ILJtL64mtlXPSBJoCpydPmr9ESmTboUPYQCgf7Zvf0XGBSdpqdQ
-	0Ewg==
-X-Gm-Message-State: AMCzsaVqNn/EzFVUNYMSF+1v5s35bhEryJds/WVzn8rYodsojYu9GSkT
-	nuZkvzA2SBvQeaQZRWCj4l81ZCpzHbIWqqBtwEU=
-X-Google-Smtp-Source: ABhQp+S9jMRSzYR3z0zb+07iQsXyUKUqdWbVPkPijCnpPJaIQY7Yvo2BskvAcWcXBBV1ly0ziR2hRownVb/oBxWIjwg=
-X-Received: by 10.28.167.130 with SMTP id q124mr450486wme.136.1509066309227;
-	Thu, 26 Oct 2017 18:05:09 -0700 (PDT)
+	Fri, 27 Oct 2017 12:25:32 +0900 (JST)
+Received: from G01JPEXCHYT15.g01.fujitsu.local
+	(G01JPEXCHYT15.g01.fujitsu.local [10.128.194.54])
+	by g01jpfmpwyt03.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	78FBD46E889 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2017 12:25:31 +0900 (JST)
+Received: from localhost.localdomain (10.24.19.99) by
+	G01JPEXCHYT15.g01.fujitsu.local (10.128.194.54) with Microsoft SMTP
+	Server id 14.3.352.0; Fri, 27 Oct 2017 12:25:16 +0900
+From: Fan Xin <fan.xin@jp.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 27 Oct 2017 12:25:12 +0900
+Message-ID: <1509074712-5704-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-Received: by 10.223.166.19 with HTTP; Thu, 26 Oct 2017 18:05:08 -0700 (PDT)
-In-Reply-To: <CABR-LLcV-gfq4Vix_FDaf4xrybW9MXP0mJecGnOUau8rpvFSLg@mail.gmail.com>
-References: <CABR-LLfMQQQvADAH6Z__-L+Pw0BEGnwn+-_E_C36XUwV+X9_8A@mail.gmail.com>
-	<CAMKF1soLSiKO1kxSr0nt8HkYjzn_PpJdLmfRRWp6U6szML-YnA@mail.gmail.com>
-	<CABR-LLfXBspMaoGXaJnT2iE=zAdyfMWE=zctbzarzfJbXFS1kg@mail.gmail.com>
-	<CAJ86T=U9L2-+xZ_1_8u3NJjHsWgh=Xhs4wGun06AizHyPThMuw@mail.gmail.com>
-	<CABR-LLcV-gfq4Vix_FDaf4xrybW9MXP0mJecGnOUau8rpvFSLg@mail.gmail.com>
-From: Andre McCurdy <armccurdy@gmail.com>
-Date: Thu, 26 Oct 2017 18:05:08 -0700
-Message-ID: <CAJ86T=V_iz3794cAjC3BdEzWNa9=MDsJUzpTL2hq_Rs4Fi+QKA@mail.gmail.com>
-To: Wangchong Zhou <fffonion@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-webserver] [PATCH] fix nginx with large files support
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-Encrypted: FENCE-Mail/3.1.1
+X-TM-AS-MML: disable
+Subject: [PATCH] openvpn: Upgrade 2.4.3 -> 2.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,22 +44,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 01:05:08 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 27 Oct 2017 03:36:57 -0000
+Content-Type: text/plain
 
-On Tue, Oct 24, 2017 at 8:06 PM, Wangchong Zhou <fffonion@gmail.com> wrote:
-> On Tue, Oct 24, 2017 at 11:01 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
->> Note that disabling the largefile distro feature isn't supported in
->> oe-core any more (the conditional tests have been removed, so all
->> recipes in oe-core build with LFS enabled even if you disable the
->> largefile distro feature).
->>
->> http://git.openembedded.org/openembedded-core/commit/?id=a75ccaea77c8aad8d46e87e8ed4af2e2e0ad5327
->>
->> It's perhaps not the right approach to be adding new conditional tests
->> now in meta-oe.
->
-> So guess we are safe to hardcode off_t to be 8?
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+---
+ .../recipes-support/openvpn/{openvpn_2.4.3.bb => openvpn_2.4.4.bb}    | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-networking/recipes-support/openvpn/{openvpn_2.4.3.bb => openvpn_2.4.4.bb} (95%)
 
-Yes, I think so.
+diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
+similarity index 95%
+rename from meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb
+rename to meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
+index 90097f3..4cad998 100644
+--- a/meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb
++++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
+@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
+            file://openvpn@.service \
+            file://openvpn-volatile.conf"
+ 
+-SRC_URI[md5sum] = "e1929f82aff40f3d105e5f72aacff9c1"
+-SRC_URI[sha256sum] = "cee3d3ca462960a50a67c0ebd186e01b6d13db70275205663695152c9aca8579"
++SRC_URI[md5sum] = "705a79d005558d94fa1e2b74e4413e97"
++SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785099fc3"
+ 
+ SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
+ SYSTEMD_AUTO_ENABLE = "disable"
+-- 
+2.7.4
+
+
 
