@@ -1,43 +1,28 @@
-Return-Path: <matt.hoosier@gmail.com>
-Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C959782E4
+Return-Path: <leonardo.sandoval.gonzalez@linux.intel.com>
+Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
+	by mail.openembedded.org (Postfix) with ESMTP id 11EF9782E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 16:41:44 +0000 (UTC)
-Received: by mail-wm0-f52.google.com with SMTP id y83so4879668wmc.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 09:41:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=y0Rjcc/mXRB79j23QhgB0ZIVa8l5nMSYSMflWAjrALI=;
-	b=KLt4bpvomkZ5tuGT0bLmyfKcRTtRu2he/3AcEeGpoyOCm9vhxQnajqzLbmrvwPp4/y
-	x4EqMt8W1tPL4ZG6talaLBqWI2RvnxNWCYow/6q2lrlD/b8is82qAe/dstH7QNptGszE
-	OCqRGJr8V8NSR0DPlqQK3ioMq5yrkU8q53+J7P0osqdC5f4OGP4SJPvgzMjWVgGn5ARA
-	13hmKaBA9Ri+/Lwr4aIxhKMN5scejbPLTK+hiQoQyH+sAyCtCnsK7yMhA4AUn2aXXTP8
-	guAIzEoF7z9JvLLxxMdLR+tw7EJeu9u0hyQOFaZqNixLppa84CYL+hJxII+6wbx2ZtnS
-	7Ngw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=y0Rjcc/mXRB79j23QhgB0ZIVa8l5nMSYSMflWAjrALI=;
-	b=dfpT34t3ZW93j0T1BNLG9k7YVi6zU61/CvELuRdr56h38rTM7l+sSlL603FhjiSYhe
-	euv6Z9qjL2wvy7MCG3jQp/jO/QzVueo/FLt2IOJgsWxqbAx0wpSUCD9icv4RFeePTHkR
-	xSmbcsGy90tUEnxkU5jLh1mdaRR9f/UKGymXrYJrV98iIgI3jgaCqLF9YEfCliTivms8
-	XfUN61Mqx6sX4ZgMxKg0jffo1OZm3LkryIs8KxqlJwZV8/ORrRpASHqIRMm32RsWnYcY
-	Nu6tf2TKzydxFg1ojYUPzxk1wjRoOtCWlDStFAEdfpgwG/GrsfehYj/K59RqetGtIPPL
-	vrAw==
-X-Gm-Message-State: AMCzsaVPkhe6i1D40pbTOzDMX3HriShhtMADUkvPX5XUrK6fvikdFiRh
-	QRhVFq/LqKxIhhDVznpOwwwQ7gwZAm9ETPkbyG0QHg==
-X-Google-Smtp-Source: ABhQp+RFr8Z79yoPRurNhiQyhmefVzIZjv5+xilyduATVWt1MDvAlhkGUSxa8jXhhv/5IxI5C4Ed3O909uOVPEwkCk4=
-X-Received: by 10.28.101.4 with SMTP id z4mr933013wmb.77.1509122505716; Fri,
-	27 Oct 2017 09:41:45 -0700 (PDT)
+	Fri, 27 Oct 2017 17:06:56 +0000 (UTC)
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	27 Oct 2017 10:06:57 -0700
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.44,304,1505804400"; 
+	d="scan'208,217";a="143010646"
+Received: from lsandov1-mobl2.zpn.intel.com (HELO [10.219.128.134])
+	([10.219.128.134])
+	by orsmga004.jf.intel.com with ESMTP; 27 Oct 2017 10:06:56 -0700
+Date: Fri, 27 Oct 2017 12:17:00 -0500
+From: Leonardo Sandoval <leonardo.sandoval.gonzalez@linux.intel.com>
+To: Fan Xin <fan.xin@jp.fujitsu.com>
+Message-Id: <1509124620.11251.30@fm-out.intel.com>
+In-Reply-To: <14dedd60-c1ec-f23c-407e-764eb2ada48f@jp.fujitsu.com>
+References: <14dedd60-c1ec-f23c-407e-764eb2ada48f@jp.fujitsu.com>
+X-Mailer: geary/0.11.3
 MIME-Version: 1.0
-Received: by 10.28.231.10 with HTTP; Fri, 27 Oct 2017 09:41:05 -0700 (PDT)
-From: Matt Hoosier <matt.hoosier@gmail.com>
-Date: Fri, 27 Oct 2017 11:41:05 -0500
-Message-ID: <CAJgxT3_POtfz1FBsNRCAj2aH7ng2VWFRgVfTwKOYoJ4CN4oZww@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Method for specifying which among a recipe's multiple available licenses is desired?
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: openjdk checksum wrong
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,40 +35,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 16:41:45 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 27 Oct 2017 17:06:57 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
 
-Hi,
 
-I'm searching for an annotation that I can insert (perhaps with a
-.bbappend) into a recipe that indicates which of the multiple licensing
-terms I elect to use for a given recipe.
 
-The regular LICENSE_FLAGS_WHITELIST variable is somewhat related, but it
-works in the opposite way: make an exception to global preference against a
-license.
+On Fri, Oct 27, 2017 at 3:03 AM, Fan Xin <fan.xin@jp.fujitsu.com> wrote:
+> Hello,
+> 
+> I am trying to build openjdk-8 based jethro, and I use the recipe 
+> file from meta-java.
+> 
+> I meet the following error message.
+> 
+> ERROR: Fetcher failure for URL: 
+> 'http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/archive/48c99b423839.tar.bz2;name=jdk;unpack=false'. 
+> Checksum mismatch!
+> File: '/downloads/48c99b423839.tar.bz2' has md5 checksum 
+> 7cde47e80f540aa01d51376affe6b8b0 when 
+> 316fc871a823ff8f1db39a2fca51bd12 was expected
+> File: '/downloads/48c99b423839.tar.bz2' has sha256 checksum 
+> 8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90 when 
+> bca18458ba0a0b8d79639829b8a71cdf65dd788b5c28658102b6b4691a47a420 was 
+> expected
+> If this change is expected (e.g. you have upgraded to a new version 
+> without updating the checksums) then you can use these lines within 
+> the recipe:
+> SRC_URI[jdk.md5sum] = "7cde47e80f540aa01d51376affe6b8b0"
+> SRC_URI[jdk.sha256sum] = 
+> "8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90"
+> Otherwise you should retry the download and/or check with upstream to 
+> determine if the file has become corrupted or otherwise unexpectedly 
+> modified.
+> 
+> It said the checksum mismatch, but I did not modify the recipe file 
+> and archive file. I just download the recipe file and try to build it.
+> 
+> Cound anyone tell me what is wrong I have done? or how to modify this.
+> 
+> By the way, if I modify the recipe file with the new md5sum code, the 
+> build will fail at the unpack phase and get the "Data integrity 
+> error".
 
-What I had in mind would work as follows. Suppose foo.bb has:
 
-  LICENSE="MIT BSD LGPLv2 LGPLv3"
+create a patch to fix the checksums (and send it to the mailing list) 
+and for the other issue, start a new thread with the problem.
 
-If I choose to take only the MIT or LGPLv2 terms of use for this one
-package (not as an overall global prohibition against the remaining
-licenses), the idea is that I would write something like:
-
-  LICENSE_CHOSEN="MIT LGPLv2"
-
-The main desired outcome is that the build/tmp/deploy/license/<pn>
-directory will only contain the texts of the license terms that I actually
-accepted, rather than all conceivable ones under which Foo is offered.
-
-It would be a bonus if some Bitbake magic behind the scenes would validate
-that there is a nonempty intersection between ${LICENSE} and
-${LICENSE_CHOSEN}. If there's no overlap, an explicit fatal error would be
-nice. But this isn't a deal-breaker; I can infer this from an empty
-build/tmp/deploy/license/<pn> directory.
-
-Are there any existing add-on bbclass'es that might do this? I had a brief
-try at rolling my own, but parsing the nested LICENSE text involving && and
-|| operators looks non-trivial.
+> 
+> 
+> Best Regards,
+> Fan Xin
+> 
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
