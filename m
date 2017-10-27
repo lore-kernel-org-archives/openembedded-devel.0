@@ -1,37 +1,30 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-X-Greylist: delayed 679 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 27 Oct 2017 03:36:56 UTC
-Received: from mgwym02.jp.fujitsu.com (mgwym02.jp.fujitsu.com [211.128.242.41])
-	by mail.openembedded.org (Postfix) with ESMTP id AAED778226
+Return-Path: <daniel@zonque.org>
+Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 4C42D6FEE0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 03:36:56 +0000 (UTC)
-Received: from yt-mxq.gw.nic.fujitsu.com (unknown [192.168.229.66]) by
-	mgwym02.jp.fujitsu.com with smtp
-	id 51d7_3565_9fed500b_1d0c_4d9d_b082_27c02b1b71b1;
-	Fri, 27 Oct 2017 12:25:33 +0900
-Received: from g01jpfmpwyt03.exch.g01.fujitsu.local
-	(g01jpfmpwyt03.exch.g01.fujitsu.local [10.128.193.57])
-	by yt-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id 7E578AC00A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 12:25:32 +0900 (JST)
-Received: from G01JPEXCHYT15.g01.fujitsu.local
-	(G01JPEXCHYT15.g01.fujitsu.local [10.128.194.54])
-	by g01jpfmpwyt03.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	78FBD46E889 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 12:25:31 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	G01JPEXCHYT15.g01.fujitsu.local (10.128.194.54) with Microsoft SMTP
-	Server id 14.3.352.0; Fri, 27 Oct 2017 12:25:16 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Oct 2017 12:25:12 +0900
-Message-ID: <1509074712-5704-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+	Fri, 27 Oct 2017 05:53:02 +0000 (UTC)
+Received: from [192.168.178.170] (pD95EF8B4.dip0.t-ipconnect.de
+	[217.94.248.180])
+	by mail.bugwerft.de (Postfix) with ESMTPSA id C5DB7280910;
+	Fri, 27 Oct 2017 05:49:55 +0000 (UTC)
+To: Denys Dmytriyenko <denis@denix.org>
+References: <20171017195649.8657-1-s.sonski@gmail.com>
+	<20171017195649.8657-2-s.sonski@gmail.com>
+	<CA+chaQcK6+mS9SgBTaNdzgLdDS=nhoHNj1crFtPeirxnK1m87Q@mail.gmail.com>
+	<8cfe1d21-f003-031b-ae42-024f3be91910@zonque.org>
+	<20171026125505.GW9221@denix.org>
+	<689fd8ec-97bf-2451-0c7a-1bc4606458e5@zonque.org>
+	<20171026133646.GX9221@denix.org>
+From: Daniel Mack <daniel@zonque.org>
+Message-ID: <50f1d37c-2b92-e26b-2403-57c438b43381@zonque.org>
+Date: Fri, 27 Oct 2017 07:53:02 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
-X-TM-AS-MML: disable
-Subject: [PATCH] openvpn: Upgrade 2.4.3 -> 2.4.4
+In-Reply-To: <20171026133646.GX9221@denix.org>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	"Chris E. Rallis" <Chris.Rallis@ravenind.net>
+Subject: Re: [meta-qt5][PATCH 2/2] qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,35 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 03:36:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Oct 2017 05:53:02 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
----
- .../recipes-support/openvpn/{openvpn_2.4.3.bb => openvpn_2.4.4.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-networking/recipes-support/openvpn/{openvpn_2.4.3.bb => openvpn_2.4.4.bb} (95%)
+On Thursday, October 26, 2017 03:36 PM, Denys Dmytriyenko wrote:
+> On Thu, Oct 26, 2017 at 03:07:36PM +0200, Daniel Mack wrote:
+>> On Thursday, October 26, 2017 02:55 PM, Denys Dmytriyenko wrote:
+>>> On Tue, Oct 24, 2017 at 03:33:10PM +0200, Daniel Mack wrote:
+>>>> Hi,
+>>>>
+>>>> On Saturday, October 21, 2017 12:54 AM, Martin Jansa wrote:
+>>>>> Either this or the ptest change seems to cause:
+>>>>> http://errors.yoctoproject.org/Errors/Details/157417/
+>>>>
+>>>> FTR, I see the same error locally. Reverting both 8fd20e8b1
+>>>> ("nativesdk-qtbase Enable objcopy for qmake") and 5ec6b97a8
+>>>> ("qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY") in the master-next
+>>>> branch of meta-qt5 fixes things for me.
+>>>
+>>> Have you tried bisecting by any chance?
+>>
+>> bisect what exactly? If I take your patch out of my stack, qtbase
+>> builds. If I don't it doesn't. Can I provide more information somehow?
+> 
+> That's not what you said above - we are trying to figure out which of the 2 
+> (*two*) patches causes the breakage, hence the question about bisecting...
 
-diff --git a/meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-similarity index 95%
-rename from meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb
-rename to meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-index 90097f3..4cad998 100644
---- a/meta-networking/recipes-support/openvpn/openvpn_2.4.3.bb
-+++ b/meta-networking/recipes-support/openvpn/openvpn_2.4.4.bb
-@@ -12,8 +12,8 @@ SRC_URI = "http://swupdate.openvpn.org/community/releases/${BP}.tar.gz \
-            file://openvpn@.service \
-            file://openvpn-volatile.conf"
- 
--SRC_URI[md5sum] = "e1929f82aff40f3d105e5f72aacff9c1"
--SRC_URI[sha256sum] = "cee3d3ca462960a50a67c0ebd186e01b6d13db70275205663695152c9aca8579"
-+SRC_URI[md5sum] = "705a79d005558d94fa1e2b74e4413e97"
-+SRC_URI[sha256sum] = "1ae883d9522c9fa6d189e5e4aaa058a93edd3d0b897e3c2664107c4785099fc3"
- 
- SYSTEMD_SERVICE_${PN} += "openvpn@loopback-server.service openvpn@loopback-client.service"
- SYSTEMD_AUTO_ENABLE = "disable"
--- 
-2.7.4
+Ah, sorry, my bad.
+
+Only reverting "qmake5_base: add OE_QMAKE_OBJCOPY from OBJCOPY" fixes a
+build that does not have a native sdk target. I assume the 2nd patch
+would break a native sdk, but I can't tell.
+
+I can provide full build logs if you want.
 
 
+Thanks,
+Daniel
 
