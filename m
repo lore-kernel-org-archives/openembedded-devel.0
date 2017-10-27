@@ -1,34 +1,35 @@
 Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym01.jp.fujitsu.com (mgwym01.jp.fujitsu.com [211.128.242.40])
-	by mail.openembedded.org (Postfix) with ESMTP id B67AB78213
+X-Greylist: delayed 668 seconds by postgrey-1.34 at layers.openembedded.org;
+	Fri, 27 Oct 2017 08:14:31 UTC
+Received: from mgwkm01.jp.fujitsu.com (mgwkm01.jp.fujitsu.com [202.219.69.168])
+	by mail.openembedded.org (Postfix) with ESMTP id 2E0DE719F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 08:12:33 +0000 (UTC)
-Received: from yt-mxoi2.gw.nic.fujitsu.com (unknown [192.168.229.69]) by
-	mgwym01.jp.fujitsu.com with smtp
-	id 1708_46cd_15341342_dded_4757_a5ba_1b8d8a61d9c2;
-	Fri, 27 Oct 2017 17:12:28 +0900
-Received: from g01jpfmpwyt01.exch.g01.fujitsu.local
-	(g01jpfmpwyt01.exch.g01.fujitsu.local [10.128.193.38])
-	by yt-mxoi2.gw.nic.fujitsu.com (Postfix) with ESMTP id 6BA4BAC0120
+	Fri, 27 Oct 2017 08:14:31 +0000 (UTC)
+Received: from kw-mxq.gw.nic.fujitsu.com (unknown [192.168.231.130]) by
+	mgwkm01.jp.fujitsu.com with smtp
+	id 16a6_608c_8414fca9_7db3_4b7d_8422_84dd627c0f75;
+	Fri, 27 Oct 2017 17:03:19 +0900
+Received: from m3050.s.css.fujitsu.com (msm.b.css.fujitsu.com [10.134.21.208])
+	by kw-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id E73BAAC0132
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:12:27 +0900 (JST)
-Received: from g01jpexchyt38.g01.fujitsu.local (unknown [10.128.193.4])
-	by g01jpfmpwyt01.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	66CFB6D6486 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:12:26 +0900 (JST)
-Received: from localhost.localdomain (10.54.205.122) by
-	g01jpexchyt38.g01.fujitsu.local (10.128.193.68) with Microsoft SMTP
-	Server id 14.3.352.0; Fri, 27 Oct 2017 17:12:26 +0900
+	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
+Received: from omame (omame.fct.css.fujitsu.com [10.24.14.171])
+	by m3050.s.css.fujitsu.com (Postfix) with ESMTP id D6C534CE
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
+Received: from [10.24.19.99] (fan1.utsfd.cs.fujitsu.co.jp [10.24.19.99])
+	by omame (Postfix) with ESMTPSA id BDDDC1E0074
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
 From: Fan Xin <fan.xin@jp.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 27 Oct 2017 17:12:11 +0900
-Message-ID: <1509091931-30490-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Message-ID: <14dedd60-c1ec-f23c-407e-764eb2ada48f@jp.fujitsu.com>
+Date: Fri, 27 Oct 2017 17:03:18 +0900
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
 X-TM-AS-MML: disable
-Subject: [PATCH] openjdk: correct the typo mistake
+Subject: openjdk checksum wrong
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,27 +42,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 08:12:35 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 27 Oct 2017 08:14:32 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
----
- recipes-core/openjdk/openjdk-8-common.inc | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+Hello,
 
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index def779d..4c45e36 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Java runtime based upon the OpenJDK Project"
--HOMEPAGE = "http://http://openjdk.java.net/"
-+HOMEPAGE = "http://openjdk.java.net/"
- LICENSE  = "GPL-2.0-with-classpath-exception"
- 
- LIC_FILES_CHKSUM = "file://LICENSE;md5=7b4baeedfe2d40cb03536573bc2c89b1"
--- 
-2.7.4
+I am trying to build openjdk-8 based jethro, and I use the recipe file 
+from meta-java.
 
+I meet the following error message.
+
+ERROR: Fetcher failure for URL: 
+'http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/archive/48c99b423839.tar.bz2;name=jdk;unpack=false'. 
+Checksum mismatch!
+File: '/downloads/48c99b423839.tar.bz2' has md5 checksum 
+7cde47e80f540aa01d51376affe6b8b0 when 316fc871a823ff8f1db39a2fca51bd12 
+was expected
+File: '/downloads/48c99b423839.tar.bz2' has sha256 checksum 
+8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90 when 
+bca18458ba0a0b8d79639829b8a71cdf65dd788b5c28658102b6b4691a47a420 was 
+expected
+If this change is expected (e.g. you have upgraded to a new version 
+without updating the checksums) then you can use these lines within the 
+recipe:
+SRC_URI[jdk.md5sum] = "7cde47e80f540aa01d51376affe6b8b0"
+SRC_URI[jdk.sha256sum] = 
+"8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90"
+Otherwise you should retry the download and/or check with upstream to 
+determine if the file has become corrupted or otherwise unexpectedly 
+modified.
+
+It said the checksum mismatch, but I did not modify the recipe file and 
+archive file. I just download the recipe file and try to build it.
+
+Cound anyone tell me what is wrong I have done? or how to modify this.
+
+By the way, if I modify the recipe file with the new md5sum code, the 
+build will fail at the unpack phase and get the "Data integrity error".
+
+Best Regards,
+Fan Xin
 
 
