@@ -1,35 +1,34 @@
 Return-Path: <fan.xin@jp.fujitsu.com>
-X-Greylist: delayed 668 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 27 Oct 2017 08:14:31 UTC
-Received: from mgwkm01.jp.fujitsu.com (mgwkm01.jp.fujitsu.com [202.219.69.168])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E0DE719F7
+Received: from mgwym04.jp.fujitsu.com (mgwym04.jp.fujitsu.com [211.128.242.43])
+	by mail.openembedded.org (Postfix) with ESMTP id 135747197A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 08:14:31 +0000 (UTC)
-Received: from kw-mxq.gw.nic.fujitsu.com (unknown [192.168.231.130]) by
-	mgwkm01.jp.fujitsu.com with smtp
-	id 16a6_608c_8414fca9_7db3_4b7d_8422_84dd627c0f75;
-	Fri, 27 Oct 2017 17:03:19 +0900
-Received: from m3050.s.css.fujitsu.com (msm.b.css.fujitsu.com [10.134.21.208])
-	by kw-mxq.gw.nic.fujitsu.com (Postfix) with ESMTP id E73BAAC0132
+	Fri, 27 Oct 2017 08:46:38 +0000 (UTC)
+Received: from yt-mxoi2.gw.nic.fujitsu.com (unknown [192.168.229.69]) by
+	mgwym04.jp.fujitsu.com with smtp
+	id 7ce6_1bb2_cbbf5a42_b7fb_42d8_9c1b_a8b5a856a4e2;
+	Fri, 27 Oct 2017 17:46:37 +0900
+Received: from g01jpfmpwkw03.exch.g01.fujitsu.local
+	(g01jpfmpwkw03.exch.g01.fujitsu.local [10.0.193.57])
+	by yt-mxoi2.gw.nic.fujitsu.com (Postfix) with ESMTP id 7AC81AC0095
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
-Received: from omame (omame.fct.css.fujitsu.com [10.24.14.171])
-	by m3050.s.css.fujitsu.com (Postfix) with ESMTP id D6C534CE
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
-Received: from [10.24.19.99] (fan1.utsfd.cs.fujitsu.co.jp [10.24.19.99])
-	by omame (Postfix) with ESMTPSA id BDDDC1E0074
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Oct 2017 17:03:18 +0900 (JST)
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+	Fri, 27 Oct 2017 17:46:36 +0900 (JST)
+Received: from g01jpexchkw37.g01.fujitsu.local (unknown [10.0.193.4])
+	by g01jpfmpwkw03.exch.g01.fujitsu.local (Postfix) with ESMTP id
+	5EE8CBD68C1 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Oct 2017 17:46:35 +0900 (JST)
+Received: from localhost.localdomain (10.54.205.122) by
+	g01jpexchkw37.g01.fujitsu.local (10.0.193.67) with Microsoft SMTP
+	Server id 14.3.352.0; Fri, 27 Oct 2017 17:46:34 +0900
 From: Fan Xin <fan.xin@jp.fujitsu.com>
-Message-ID: <14dedd60-c1ec-f23c-407e-764eb2ada48f@jp.fujitsu.com>
-Date: Fri, 27 Oct 2017 17:03:18 +0900
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 27 Oct 2017 17:46:28 +0900
+Message-ID: <1509093988-29131-1-git-send-email-fan.xin@jp.fujitsu.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
+X-SecurityPolicyCheck-GC: OK by FENCE-Mail
+X-Encrypted: FENCE-Mail/3.1.1
 X-TM-AS-MML: disable
-Subject: openjdk checksum wrong
+Subject: [meta-selinux][PATCH] audit: upgrade 2.7.6 -> 2.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,47 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Oct 2017 08:14:32 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Oct 2017 08:46:39 -0000
+Content-Type: text/plain
 
-Hello,
+Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+---
+ recipes-security/audit/{audit_2.7.6.bb => audit_2.8.1.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename recipes-security/audit/{audit_2.7.6.bb => audit_2.8.1.bb} (96%)
 
-I am trying to build openjdk-8 based jethro, and I use the recipe file 
-from meta-java.
+diff --git a/recipes-security/audit/audit_2.7.6.bb b/recipes-security/audit/audit_2.8.1.bb
+similarity index 96%
+rename from recipes-security/audit/audit_2.7.6.bb
+rename to recipes-security/audit/audit_2.8.1.bb
+index 5bfda7b..52ae4bf 100644
+--- a/recipes-security/audit/audit_2.7.6.bb
++++ b/recipes-security/audit/audit_2.8.1.bb
+@@ -15,8 +15,8 @@ SRC_URI = "http://people.redhat.com/sgrubb/${BPN}/${BPN}-${PV}.tar.gz \
+            file://auditd.service \
+            file://audit-volatile.conf \
+ "
+-SRC_URI[md5sum] = "55a81bbed973b58a90590c949e71dc3e"
+-SRC_URI[sha256sum] = "fa65289cffdc95a25bfbdba541f43ee1b12c707090a38fd027dcf9354b9014e7"
++SRC_URI[md5sum] = "76ce8b6a00a1dd0b52a87312eaec0e8e"
++SRC_URI[sha256sum] = "1becde92ff6e81798fa8878820ab2497d867036a6596f55109504b37c8b33b6c"
+ 
+ inherit autotools pythonnative update-rc.d systemd
+ 
+-- 
+2.7.4
 
-I meet the following error message.
-
-ERROR: Fetcher failure for URL: 
-'http://hg.openjdk.java.net/jdk8u/jdk8u/jdk/archive/48c99b423839.tar.bz2;name=jdk;unpack=false'. 
-Checksum mismatch!
-File: '/downloads/48c99b423839.tar.bz2' has md5 checksum 
-7cde47e80f540aa01d51376affe6b8b0 when 316fc871a823ff8f1db39a2fca51bd12 
-was expected
-File: '/downloads/48c99b423839.tar.bz2' has sha256 checksum 
-8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90 when 
-bca18458ba0a0b8d79639829b8a71cdf65dd788b5c28658102b6b4691a47a420 was 
-expected
-If this change is expected (e.g. you have upgraded to a new version 
-without updating the checksums) then you can use these lines within the 
-recipe:
-SRC_URI[jdk.md5sum] = "7cde47e80f540aa01d51376affe6b8b0"
-SRC_URI[jdk.sha256sum] = 
-"8627e3e19ac6cfd250e435be659fbfdf65f3cb2c6c9678c9e5ec0db2ae1fcc90"
-Otherwise you should retry the download and/or check with upstream to 
-determine if the file has become corrupted or otherwise unexpectedly 
-modified.
-
-It said the checksum mismatch, but I did not modify the recipe file and 
-archive file. I just download the recipe file and try to build it.
-
-Cound anyone tell me what is wrong I have done? or how to modify this.
-
-By the way, if I modify the recipe file with the new md5sum code, the 
-build will fail at the unpack phase and get the "Data integrity error".
-
-Best Regards,
-Fan Xin
 
 
