@@ -1,38 +1,33 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id DBFF278299
+Return-Path: <daniel@zonque.org>
+Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
+	by mail.openembedded.org (Postfix) with ESMTP id 2113D71975
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Oct 2017 12:47:24 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id 1so11466806qtn.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Oct 2017 05:47:26 -0700 (PDT)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=GzMP5AtsY11Oa5e44aulLbfy1rLZ8PYplEwkxZtoqas=;
-	b=D0kE915cRGJNH7r2j2upSIyqF5ijx0IB6IIH5if4P2jdzuJtUHgJJeItlIjjKIMl8p
-	Mvb5MhZ27hlezQQUMpsrrhhGLKBGpjLXHdCCPUfaHbdDvOpe928hiBo3N5AGORNMYnlh
-	0h3jM+HiDo4o5Joy4ML0OfY2ovsNBxpjbtQSyffeavmD97dxvakYF8sIotV25ZbqqrEf
-	I7rhpAk+7MBdt5SrB268M3ryw5b20NujLhLssb0+sL00DSAJsFqNd17UreEkBD+VMncN
-	S+ttjipi8U9omQxhlMHMPcV8NBfTDOxIGRvsdBYN5rYkadQjB0Kd0IbXF5l8768D6E78
-	90Zg==
-X-Gm-Message-State: AMCzsaWMHhIk5Cv833s7RA+WaOMYEO4Q5TY54FMQvcZ9YTSmxZHl5xqx
-	2d4Ghj4ZcxmpNOzHGOXZ6bDMglG1
-X-Google-Smtp-Source: ABhQp+QhYdNUp0vNU0QwqZ8rz2cDQZ4SamgcV7pCjoys+INlcVEtH8h30kBu/LFxpsHSXUSzyJr0jQ==
-X-Received: by 10.200.4.169 with SMTP id s41mr5686710qtg.212.1509194845830;
-	Sat, 28 Oct 2017 05:47:25 -0700 (PDT)
-Received: from sparta.ny.asterius.io
-	(pool-108-30-199-218.nycmny.fios.verizon.net. [108.30.199.218])
-	by smtp.gmail.com with ESMTPSA id i1sm7052454qta.19.2017.10.28.05.47.25
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sat, 28 Oct 2017 05:47:25 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Oct 2017 08:47:17 -0400
-Message-Id: <1509194837-3156-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-perl][PATCH] libxml-libxml-perl: update to version 2.0131
+	Sat, 28 Oct 2017 16:13:23 +0000 (UTC)
+Received: from [192.168.178.170] (pD95EFDA0.dip0.t-ipconnect.de
+	[217.94.253.160])
+	by mail.bugwerft.de (Postfix) with ESMTPSA id 175F3280321;
+	Sat, 28 Oct 2017 16:10:16 +0000 (UTC)
+To: =?UTF-8?Q?Jacobo_Aragunde_P=c3=a9rez?= <jaragunde@igalia.com>,
+	openembedded-devel@lists.openembedded.org
+References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
+	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
+	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
+	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
+	<87d15w4a02.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CAHUNapSvuLFcVyjc+FB4cG7U753SeedOfJ5xCtFLCx-+fK0QVQ@mail.gmail.com>
+	<1507662641.20629.9.camel@intel.com>
+	<CAHUNapRps8ck3S=aKHYH3UmzBgsZW-VDx4x0PgY2D4zXuh88_Q@mail.gmail.com>
+	<87r2u93f1r.fsf@rkubodac-desk.ger.corp.intel.com>
+	<b8acd1ce-4c60-ac3d-4c48-fca5d9b43f26@zonque.org>
+	<26a54d7c-1c81-8ba9-9d1f-3a62803a85a8@igalia.com>
+From: Daniel Mack <daniel@zonque.org>
+Message-ID: <12b79fae-1807-1f2e-8d9b-527cdf8a7ee4@zonque.org>
+Date: Sat, 28 Oct 2017 18:13:23 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.3.0
+MIME-Version: 1.0
+In-Reply-To: <26a54d7c-1c81-8ba9-9d1f-3a62803a85a8@igalia.com>
+Subject: Re: [meta-browser] Modern Chromium with GN
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Oct 2017 12:47:25 -0000
+X-List-Received-Date: Sat, 28 Oct 2017 16:13:24 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../{libxml-libxml-perl_2.0129.bb => libxml-libxml-perl_2.0131.bb}    | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-perl/recipes-perl/libxml/{libxml-libxml-perl_2.0129.bb => libxml-libxml-perl_2.0131.bb} (90%)
+On Friday, October 27, 2017 11:19 AM, Jacobo Aragunde Pérez wrote:
+> On 27/10/17 10:49, Daniel Mack wrote:
+>>
+>> I'd like to give Chromium 62 a shot on arm64, but the recipes currently
+>> only support x11, is that correct? My platform is based on wayland, any
+>> plans on supporting that?
+>>
+> 
+> The problem is that upstream Chromium does not support Wayland natively
+> yet. There is a fork under development to implement this support, which
+> is quite advanced now: https://github.com/Igalia/chromium
+> 
+> Patches from the fork will start pouring into upstream Chromium shortly.
+> 
 
-diff --git a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0131.bb
-similarity index 90%
-rename from meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb
-rename to meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0131.bb
-index a8cc269..4105249 100644
---- a/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0129.bb
-+++ b/meta-perl/recipes-perl/libxml/libxml-libxml-perl_2.0131.bb
-@@ -27,8 +27,8 @@ SRC_URI = "http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/XML-LibXML-${PV}.
- LIC_FILES_CHKSUM = "file://debian/copyright;md5=64eda1bc135f0ece1d1187f2a8ac82c1 \
-     file://LICENSE;md5=97871bde150daeb5e61ad95137ff2446 \
- "
--SRC_URI[libxml.md5sum] = "5806b69d54a2d7884b8d22b395888436"
--SRC_URI[libxml.sha256sum] = "5ca0269ba06800c84061a7f3333c85fab5584d69cd7b4e0641963da7fd36b366"
-+SRC_URI[libxml.md5sum] = "4dd1efcda5159c9e73139a4546190665"
-+SRC_URI[libxml.sha256sum] = "b04c77dea55f9f270e1040e3a1d4f79b81dcdcd4da3e648f92dcf6c80bbe19df"
- 
- S = "${WORKDIR}/XML-LibXML-${PV}"
- 
--- 
-2.7.4
+I see, thanks for explaining. I'll wait for these upstream patches and
+your recipes to land then!
 
+
+Thanks,
+Daniel
 
