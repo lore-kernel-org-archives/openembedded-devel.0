@@ -1,48 +1,48 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f175.google.com (mail-pf0-f175.google.com
-	[209.85.192.175])
-	by mail.openembedded.org (Postfix) with ESMTP id B378D605BF
+Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
+	by mail.openembedded.org (Postfix) with ESMTP id BA725605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 23:14:55 +0000 (UTC)
-Received: by mail-pf0-f175.google.com with SMTP id i5so12239638pfe.6
+	Mon, 30 Oct 2017 23:15:58 +0000 (UTC)
+Received: by mail-pg0-f65.google.com with SMTP id g6so12978274pgn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 16:14:57 -0700 (PDT)
+	Mon, 30 Oct 2017 16:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=u9D9PI8+8clyi5+EwsWy48+RR0F7Vj/eYTT+bUGVZLU=;
-	b=I91ThedDgaztlPDKJ+Y1mzWXnraE3YgY0JYm8NtIJl7qNEqNK7Hqcb5a8hde4sEODz
-	S/bGZcRr2nIjKV2rd0gPOiSpAt03NvkO2mYOSK/AWR8EU3vKio1mk8Ci9oczMbWufnRC
-	ZJ3ir6O7pqtnT2RFME5fqT8Pvw0gvBcMazUOhVVk1HYHXyQtADwzMW8ycRvIkDkK8VJQ
-	GvAO+8chUFB1oBBlQABcaRazoQqbhwV+Pp69k+Pb/gMSRR+qn/RbegG92K9D5wd6PeWg
-	FnwWTTUTBGg0u4XJMwC4l68Jwmx27MMThqQhkXKU+5j/xcTkcDaVXVOGczsaugNw8r6B
-	lsSA==
+	:cc; bh=7qfk8RKnJPTe995Sv+rsirNAIZwCeG2zo6/AasPgY4A=;
+	b=GJPB5IL2xe14uOh7WaOIYWkMn1Q/KeX0qlylbiJ/IU168us+vxnIjdjEZQkZ28l/Gq
+	eNR/h99RwbV8xN9S49gsoVEQ7jFm4DQ13XHWpe7VmSGghp2EUOi5nv6UIoXi35eh1pmn
+	QAZQ4fuNp+O2W24BcBJ7K5RDHvAVeCA1Xz5vHhXDwkGFd4fAmzw4sDukf8uKK5dSKCxX
+	byvPiyMmNDVRZ76ECuslNAg+YpFAT8ijVRRrEfsvXY9IZcMb5YCohXGYfzac3qiXyaVT
+	UOx5YyAcBY0NHCwvElf6ul9G4Thkl4uohalqsfM3gG7MbX7x3EqQakN1KOU+Al/Qcviv
+	PEOA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=u9D9PI8+8clyi5+EwsWy48+RR0F7Vj/eYTT+bUGVZLU=;
-	b=YlXGNUDhCK0V6PyvdzhGfYYPXawrHcBPRE9uM8I9KVaF99Wt4453MsVunwdczGN2HT
-	luLlZ69W7BM5WxVLCBymBa4y7NhH7nlEwslPC5QGf5ku/2pMYEw+tj+xiCnTyoLXPALN
-	FVG9vOPa1w+3bWAiB33cqNJdlCWIMw7nqJtTDg7yeCbped/f+LFQuuLqSx7L2LcG/8RZ
-	7GPVmZe7+j+FKK81WJJ1K4mWYDBFdNUJvUXBr515jlg/JEiPAyUGMKJNEp+/Jya7+Sid
-	/ja8Bs0pRqULGQnjP8U7icw9tZnqqgacOYWFRGPgFW1nz215TmrqBWpi14mZAtCePHxr
-	QL2A==
-X-Gm-Message-State: AMCzsaXfLxBCwba0qMNJghVlf0udY0iW7I+0V8V8mALdgZYf3Rb/N8a2
-	8c/asuC/Y2Hu8KKnLyi0n9cm2rxN1ECsfJaQRns=
-X-Google-Smtp-Source: ABhQp+QgQ7bewe/9K+G/QYmvMiMCR2UUB5FwgYuZ94W/au0wXXPZliZ8Bha4qxTvpuRV1fpehra13hswvvRKUHhUbx0=
-X-Received: by 10.98.148.9 with SMTP id m9mr10116416pfe.111.1509405296439;
-	Mon, 30 Oct 2017 16:14:56 -0700 (PDT)
+	bh=7qfk8RKnJPTe995Sv+rsirNAIZwCeG2zo6/AasPgY4A=;
+	b=g3UP7OM7f3P4mWda4rNPrk4Xd+ZzOa0lCYxM+Ne1rKXJxu6azuuCLvv5ynxbCWNu2c
+	ioyPYswVzktJGKZCU3NMNcXBMY08OGgcIOBKKnFtdQcEzLucOr1MBKvUpCxoEAaeVJfi
+	DzKcBOsMojfvTmTSfHCdMc58TUeynrPupar1+K/4UlsO3iT7sAIKAH5mIeuCfNo5zaoI
+	154hOMWiu9l4ctlDjTiSF13+4fm4qHK+efwY7XbSj+hsffzdQDH3RyGW8q7pou5hh6g8
+	OV0AoDwxIYe1GT0T7h00qC7pcw7PDUnEvy2C+DhUbBoUfjFo5l/HpSYZ1VGCIhHUbrSk
+	v1ZA==
+X-Gm-Message-State: AMCzsaUEx+EVtYTGOljwOHJQV9NcAvaDpRfQMZsMDismbj6uJc5yKBo8
+	gfojGpve8FwY8U3XzlApjAsRuwcYHzkFcwzgsYg=
+X-Google-Smtp-Source: ABhQp+QG0iPY+xxMgqywJILUBH7wPDP5L6zkLvpx8/P+ma5wTv5uBUAX+iU+TDOR5cb42ZTWSwDAanEsi2Ss1K3lkas=
+X-Received: by 10.99.51.72 with SMTP id z69mr9290032pgz.317.1509405359779;
+	Mon, 30 Oct 2017 16:15:59 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.187.66 with HTTP; Mon, 30 Oct 2017 16:14:26 -0700 (PDT)
-In-Reply-To: <1509387073-21934-2-git-send-email-joe_macdonald@mentor.com>
-References: <1509387073-21934-1-git-send-email-joe_macdonald@mentor.com>
-	<1509387073-21934-2-git-send-email-joe_macdonald@mentor.com>
+Received: by 10.100.187.66 with HTTP; Mon, 30 Oct 2017 16:15:29 -0700 (PDT)
+In-Reply-To: <d2eb9f63-12b3-387a-c9a4-572c52231c3b@gmail.com>
+References: <CAMKF1sohPCP07Hx-aHdoKDqtrTXWO+3atWDX-MMLP80RsdxRNg@mail.gmail.com>
+	<1509338753-23099-1-git-send-email-fan.xin@jp.fujitsu.com>
+	<d2eb9f63-12b3-387a-c9a4-572c52231c3b@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 30 Oct 2017 16:14:26 -0700
-Message-ID: <CAMKF1spKpcdiGpxLcFhUniOULxWeiST-d20r85pkOepo_7awNw@mail.gmail.com>
-To: Joe MacDonald <joe_macdonald@mentor.com>
+Date: Mon, 30 Oct 2017 16:15:29 -0700
+Message-ID: <CAMKF1sr6DCgLwf8fj7vw8cQnL2B+ipizk5+jcGZJK2WbnzDxmg@mail.gmail.com>
+To: akuster808 <akuster808@gmail.com>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH 1/6] ddclient: new package
+Subject: Re: [PATCH v3] spi-tools: Add version info
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,102 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2017 23:14:55 -0000
+X-List-Received-Date: Mon, 30 Oct 2017 23:15:58 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 30, 2017 at 11:11 AM, Joe MacDonald
-<joe_macdonald@mentor.com> wrote:
-> From: "Kinsella, Ray" <ray.kinsella@intel.com>
+On Mon, Oct 30, 2017 at 1:06 PM, akuster808 <akuster808@gmail.com> wrote:
 >
-> Adding the package ddclient. DDClient updates Dynamic DNS servers with an IP address.
-> Recipe is based on the original OE recipe found here.
 >
-> http://cgit.openembedded.org/openembedded/tree/recipes/ddclient/ddclient_3.6.3.bb
+> On 10/29/2017 09:45 PM, Fan Xin wrote:
+>> Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+>> ---
+>>  meta-oe/recipes-support/spitools/spitools_git.bb | 2 ++
+>>  1 file changed, 2 insertions(+)
+>>
+>> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
+>> index f808125..168f0f3 100644
+>> --- a/meta-oe/recipes-support/spitools/spitools_git.bb
+>> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
+>> @@ -4,6 +4,8 @@ AUTHOR = "Christophe BLAESS"
+>>  LICENSE="GPLv2"
+>>  LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
+>>
+>> +PV = "0.8.1"
+>> +
+>>  S = "${WORKDIR}/git"
 >
-> with modifications based on the recipe at:
+> Should we think of converting these kinds recipes to spitools_0.8.1.bb
+> to avoid the need for PV ?  Maybe a best practices on the recipes naming??
 >
-> https://github.com/cshoredaniel/meta-cshored/blob/master/recipes-connectivity/ddclient/ddclient_3.8.3.bb
->
-> DDClient version has been updated to 3.8.3.
->
-> Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
-> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
-> ---
->  .../recipes-daemons/ddclient/ddclient_3.8.3.bb     | 44 ++++++++++++++++++++++
->  .../recipes-daemons/ddclient/files/ip-up           |  4 ++
->  .../recipes-daemons/ddclient/files/persistent      |  1 +
->  3 files changed, 49 insertions(+)
->  create mode 100644 meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
->  create mode 100644 meta-networking/recipes-daemons/ddclient/files/ip-up
->  create mode 100644 meta-networking/recipes-daemons/ddclient/files/persistent
->
-> diff --git a/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
-> new file mode 100644
-> index 0000000..d83a4d4
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
-> @@ -0,0 +1,44 @@
-> +SECTION = "net/misc"
-> +DESCRIPTION = "Ddclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Services"
-> +HOMEPAGE = "http://ddclient.sourceforge.net/"
-> +LICENSE = "GPLv2"
-> +
-> +SRC_URI = "\
-> +    ${SOURCEFORGE_MIRROR}/ddclient/ddclient-${PV}.tar.bz2 \
-> +    file://ip-up"
-> +
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
-> +
-> +RDEPENDS_${PN} = "\
-> +    perl-module-getopt-long \
-> +    perl-module-sys-hostname \
-> +    perl-module-io-socket \
-> +    perl-module-vars \
-> +    perl-module-overload \
-> +    perl-module-overloading \
-> +    perl-module-config \
-> +    perl-module-integer \
-> +    perl-module-exporter-heavy \
-> +    perl-module-symbol \
-> +    perl-module-selectsaver \
-> +    bash \
-> +    perl \
-> +    libio-socket-ssl-perl"
-> +
-> +do_install() {
-> +    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient ${D}${sysconfdir}/init.d
-> +    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d ${D}${docdir}/ddclient
-> +    install -m 755 ${S}/ddclient ${D}${sbindir}
-> +    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/ddclient.conf
-> +    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/ddclient
-> +    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g' ${S}/sample-etc_rc.d_init.d_ddclient > ${S}/rc_init
-> +    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
-> +    install ${S}/README* ${D}${docdir}/ddclient
-> +    install ${S}/COPY* ${D}${docdir}/ddclient
-> +    install ${S}/sample* ${D}${docdir}/ddclient
-> +}
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/ddclient/ddclient.conf"
-> +
-> +SRC_URI[md5sum] = "3b426ae52d509e463b42eeb08fb89e0b"
-> +SRC_URI[sha256sum] = "d40e2f1fd3f4bff386d27bbdf4b8645199b1995d27605a886b8c71e44d819591"
-> diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up b/meta-networking/recipes-daemons/ddclient/files/ip-up
-> new file mode 100644
-> index 0000000..4411db9
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
-> @@ -0,0 +1,4 @@
-> +#!/bin/sh
-> +
-> +logger -t ddclient $PPP_IFACE $PPP_LOCAL
-> +ddclient -daemon=0 -syslog -use=if -if=$PPP_IFACE >/dev/null 2>&1
-> diff --git a/meta-networking/recipes-daemons/ddclient/files/persistent b/meta-networking/recipes-daemons/ddclient/files/persistent
-> new file mode 100644
-> index 0000000..b721272
-> --- /dev/null
-> +++ b/meta-networking/recipes-daemons/ddclient/files/persistent
-> @@ -0,0 +1 @@
-> +l root root 0644 /etc/ddclient.conf /var/persistent/etc/ddclient.conf
 
-this file seems to be unused. Can we delete it if no needed.
+I think yes. on the downside its convenient for git log to have same
+file name but then we do have
+git log --follow
+
+> - armin
+>>
+>>  SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
