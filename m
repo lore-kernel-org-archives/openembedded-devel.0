@@ -1,41 +1,49 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga01.intel.com (mga01.intel.com [192.55.52.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 80CF471B40
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 8506F600EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 13:23:25 +0000 (UTC)
-Received: from fmsmga006.fm.intel.com ([10.253.24.20])
-	by fmsmga101.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	30 Oct 2017 06:23:26 -0700
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,320,1505804400"; d="scan'208";a="169520343"
-Received: from rkubodac-desk.ger.corp.intel.com ([10.252.13.114])
-	by fmsmga006.fm.intel.com with ESMTP; 30 Oct 2017 06:23:25 -0700
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: Trevor Woerner <twoerner@gmail.com>
-In-Reply-To: <CAHUNapSQ1otDzx4kRVqpW6GFQdVWVhcZcWuWL4Q8n8qLHPyB5Q@mail.gmail.com>
-	(Trevor Woerner's message of "Fri, 27 Oct 2017 11:44:36 -0400")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <cc8aeb58-0a29-de25-29b2-d6f1620409f9@igalia.com>
-	<CAP9ODKq_x-xT_ux1tmcgDBuaUc2ekw36YAjQ66=iR3OBRgebJA@mail.gmail.com>
-	<CAHUNapS+dr5Uc4upvd00vve+WubDT0Fgsc16vQmWXh3O1ErcLw@mail.gmail.com>
-	<4e71f40e-63cb-0857-f292-ec3a120776c1@igalia.com>
-	<5612aa4c-d986-89f7-7667-14898b5f7bfc@igalia.com>
-	<878tgbxio5.fsf@rkubodac-desk.ger.corp.intel.com>
-	<874lqzxhoc.fsf@rkubodac-desk.ger.corp.intel.com>
-	<87efq0wnt0.fsf@rkubodac-desk.ger.corp.intel.com>
-	<87shefnm1g.fsf@rkubodac-desk.ger.corp.intel.com>
-	<20171020153307.GA6636@linux-uys3>
-	<87lgk2nmxg.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CAP9ODKqqSJDKNsoPoYR0oFUVynQqpey_jaSjLeEAPxYV3fpNPA@mail.gmail.com>
-	<87y3o2m1iy.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CAHUNapSQ1otDzx4kRVqpW6GFQdVWVhcZcWuWL4Q8n8qLHPyB5Q@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Mon, 30 Oct 2017 14:23:25 +0100
-Message-ID: <87376093ci.fsf@rkubodac-desk.ger.corp.intel.com>
-MIME-Version: 1.0
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] Modern Chromium with GN
+	Mon, 30 Oct 2017 17:32:39 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id b15so17112675qkg.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Oct 2017 10:32:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=RDk4GflL+nvV1VFNxIwaodNSN6Qaal2KQ1dfBJU9hOI=;
+	b=dEEJm6z0PXbKH80jADG5KzfKxxjf/2BWe5zcJpGXqrq4V+3l2F989K2Doz1y4WmOPN
+	P6lMhX9ImzG7VvLL9UvsQFcM2Rn2bG3JOecLYtlUq4gcXxoV6rPaUpp9a/k1PDOLioB1
+	cKi/OWUmWIZhjFQOckO1glnfpkAZwCyvmujurGiVMBQKCueifO5YjpyRi0B8HNKBTMSE
+	iZIsSBCnau6Lq6ls1yOGMFYuchOlbaYrVZcwZE43p2DdME6BrW2d9N71u87Cu3eBwONM
+	PHcZJQBn7wQ6uEWV5lVfdiq7OaALZeYkumPev9wW+ofgM/c9HsooDfTwdpKut0bS9mOE
+	9e6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=RDk4GflL+nvV1VFNxIwaodNSN6Qaal2KQ1dfBJU9hOI=;
+	b=ZQ0IFqmpQvjJEwv+jWAM2XPgz0OvhII78rRh7iWtSxbbKCFunOa/uJEOC5FQCFXw2t
+	3FllPjDjFHE0RGhVADDSoHSj3rP2oxRIXrjzCsI7dIzOcOWFhp6IVCMG3U3RPBiUjo5t
+	WZ4M2lg6n+pOlDjrc9JLG9rM25lQSDubsvzcH6uGVHTEeFk+o6Kkr2/wn7pg7VjZHGjH
+	xuPCKCZLgZY7vl049czBzcB92ZyhSkJrABBXTITQTGkTYIH5f+8LAXK+AcCWSA20/kzw
+	yhGlE+jfGYB3bBKO/haQRJJi6iQHNFpz8FE4PVv+r7zQXGcPnL2s4KRzDf8AmA40OMw3
+	ezWQ==
+X-Gm-Message-State: AMCzsaWJ8YPYlr6nKNF0V02h32MjhTs8fQQp1WecAcFgHxoAbrztzz8X
+	xXcJhKhKVm9IHXChBRy8KHbrF1Yz
+X-Google-Smtp-Source: ABhQp+RUWL6euYcrLDKNlzYfVa6OSXhPeKwUWkUnrOkDM/dYmbzriYkprIjJOXxah8wt0MBi2I9x1A==
+X-Received: by 10.55.37.67 with SMTP id x64mr13717508qkg.259.1509384760148;
+	Mon, 30 Oct 2017 10:32:40 -0700 (PDT)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	n131sm9704986qke.48.2017.10.30.10.32.37
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 30 Oct 2017 10:32:39 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Oct 2017 15:32:13 -0200
+Message-Id: <20171030173213.16752-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.2
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-networking][PATCH] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,28 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2017 13:23:25 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 30 Oct 2017 17:32:39 -0000
 
-Trevor Woerner <twoerner@gmail.com> writes:
+We need to set DESTDIR variable and run eo_runmake install to install all
+arptables files. Without this the only file installed in package is
+systemd unit.
 
-> I was able to successfully build for the minnow board (x86_64), but
-> when I tried building for the 32-bit variant for raspberrypi3 I got:
->
->     | install: cannot stat 'swiftshader/libEGL.so': No such file or directory
->
-> during the do_install step for chromium itself. Odd, I thought egl
-> came from mesa? (but then again I thought OE built its own
-> gcc-native... :-S
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ meta-networking/recipes-support/arptables/arptables_git.bb | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-Thanks for spotting that, I've fixed it in commit de21170 ("chromium:
-Install SwiftShader only when building for Intel architectures"). I've
-now checked the M62 build on pyro with GCC 5.4.0 and
-MACHINE="raspberrypi3".
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index 274a55d91..55903e450 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -21,9 +21,10 @@ SYSTEMD_SERVICE_${PN} = "arptables.service"
+ 
+ inherit systemd
+ 
+-EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
++EXTRA_OEMAKE += "'DESTDIR=${D}' 'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+ 
+-do_install_append() {
++do_install() {
++    oe_runmake install
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
+-- 
+2.14.2
 
-As for the EGL question: as far as I know, the SwiftShader stuff [1] is
-a CPU-based OpenGL implementation that's used when hardware acceleration
-is not available.
-
-[1] https://github.com/google/swiftshader
 
