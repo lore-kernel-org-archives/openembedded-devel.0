@@ -1,53 +1,53 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
-	[209.85.223.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 15AB371B32
+Received: from mail-io0-f169.google.com (mail-io0-f169.google.com
+	[209.85.223.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 50F3171CB3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 18:11:19 +0000 (UTC)
-Received: by mail-io0-f182.google.com with SMTP id e89so29189127ioi.11
+	Mon, 30 Oct 2017 18:11:20 +0000 (UTC)
+Received: by mail-io0-f169.google.com with SMTP id j17so29217637iod.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 11:11:21 -0700 (PDT)
+	Mon, 30 Oct 2017 11:11:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
 	h=sender:from:to:subject:date:message-id:in-reply-to:references;
-	bh=EqgYFSEOFSneufnK3aT1nC+pBYkcpQaj/WqL7MeN2ZY=;
-	b=Lpo8R1y8xvZ9TTBRUEFV+u6/Uip5RuMl+GkKeyKd1f9FrysGimd1UVbxx5F0gXPTg2
-	7sqPed+WPo4PxdfP2DbxfukRkPQmKiTQUfLCKCtWCs3Sf4RDgx/oXtwLK+W2MLijJUiV
-	tgAR0RiJvo6pMmUrhZhMD50kb1xz4zFoTXB7Fr5B5wDB/RM43SpVhOJGPJKWYtm+sa7P
-	UDIOyBQYWD9S1otIJxU3FAZgtUgPJKQML6ys8BHQhY17u7nDDiVDQoyK0AE4/goEHFsZ
-	q5Lbs9zjt7Is9Q0l4tFBowZXfisLS9AcRPwgMg2xZxYgWtOkaFCAuiZFhP1bwLq/L62l
-	bjKw==
+	bh=UoyndAvm7PQSHi7DU+q9RT+UkwZvgSTKGwgiwYVPaYY=;
+	b=1++JuFrU/ACozwlFbhgCD8UMltAy1JcMN5/StaoieacxzezxuQJe1sNhjwMUSSLgXv
+	S5FIfLKEGlH20g48xFIWknlXaZYSvXblDdmD+r+6jkOGeXh1pzz5IhYgdpL1lhGkAPmS
+	yMsR1KZ5/o0oFx9cP3m9gZVBp4Q/gXMPzoW5nYwe/dynDzgbPBuz+mLhZXwtFPubtk8q
+	oZMxMmTqxOsFlZzrIKfibGN3dq8Lq4NpnnpzxExCqg3Qfc4MbuFV1Ud+lGzunIOKJtnh
+	rBNZOSS8oLHTaWTY/nvYWbWRmhqfnkJvoSyDSqmBySzxcPfkhk8Dd8wCOL/pQkk7wcTV
+	Rtew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:sender:from:to:subject:date:message-id
 	:in-reply-to:references;
-	bh=EqgYFSEOFSneufnK3aT1nC+pBYkcpQaj/WqL7MeN2ZY=;
-	b=Gphj8McBDpArgy/SNTm1B12PZxH/KiGuCVuX+mo7qQCzPLWrvdLP0UPr9Dv+60MlqY
-	qqvI6URWn53xlr1+EzHvWBHiUTneq3SUtrZeQwY/ZC3jfQf6LKTS3qaro6m1VoHWDI4O
-	M8yueY28BFC7a5A3BltBxG+Ukhy0fjTD33yW5gHyVMpDgwAcDRwrCOsiX3VAKhw22XgW
-	AzZPyHgioAMuTLH80ZBwc8TMZq5H/CrqegXOWVIp66pSgdLEsY4eX4/b6mFUGfRByQTE
-	M4lRLuiHGMuQebuIH2m2x77QzeRWAVcUKwkqs5mM7AFpwiVNAPpkKtvHYyOTOifFmDQf
-	fzEw==
-X-Gm-Message-State: AMCzsaVwC+Z+nXz6XHX/8Ao7BK/7Q6IfM7xzva0dQzsnC/iZ10VY/S9I
-	dhfKE5ftOaxhY+BcFCtwHcJXcVn9
-X-Google-Smtp-Source: ABhQp+QaeqOEzMWBAILY5fhwENE3ztgNaLjE408biY37xy5CgfjjuGKkQ0zKTjPAyHJWoXfC5Fc9MQ==
-X-Received: by 10.36.209.2 with SMTP id w2mr7279714itg.130.1509387080237;
-	Mon, 30 Oct 2017 11:11:20 -0700 (PDT)
+	bh=UoyndAvm7PQSHi7DU+q9RT+UkwZvgSTKGwgiwYVPaYY=;
+	b=cD6orsn9QjN3PPBen1sd1WWlnAJj0+sELcPSajTBfIjpvmR8AcJ+1opts5teYdrvhe
+	Zl4qP8cwycYt4t1zrR2xdkR0DvgiCq2kwe2PCaRCS7E9B7oqMDLRm+QoT+h3Q+U+1PVV
+	moNyKvNcygjBjl5AWo2YzSy0e7qQu7rAZMw9iIhBsMHWEQA7MVYufDiWlZCuUTWLuLVS
+	chS/zRtBlqdLDrSr04Y3KePAWOgRjqFhdaNR+DnljMAeMFuyP0YDr01TuIy8T+SJBWa5
+	owluuW9QZstcuMpU5kZbDxb2ysOqD1aJvZvVxd94CENUB0oYnP2gOxn8J9luPx108y+j
+	nbQw==
+X-Gm-Message-State: AMCzsaXFroqrkQJIMK2F9FcVCV7QOlhLwwREgrtJVPXKAraoXyzyUeJM
+	gJgvVilVbpBmGOFHqwG+hYY3PVm5
+X-Google-Smtp-Source: ABhQp+Tozzh9IJoq+EJP6F/kjfdnPb/6PKvmPcDZDx/vyb/VV0o71IiXML1hE9gNNuPBpZFqf6K3og==
+X-Received: by 10.36.118.210 with SMTP id z201mr7299658itb.78.1509387081288;
+	Mon, 30 Oct 2017 11:11:21 -0700 (PDT)
 Received: from mir.deserted.net (23-233-29-148.cpe.pppoe.ca. [23.233.29.148])
 	by smtp.gmail.com with ESMTPSA id
-	81sm2182416itl.20.2017.10.30.11.11.19
+	81sm2182416itl.20.2017.10.30.11.11.20
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 30 Oct 2017 11:11:19 -0700 (PDT)
+	Mon, 30 Oct 2017 11:11:20 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Oct 2017 14:11:10 -0400
-Message-Id: <1509387073-21934-4-git-send-email-joe_macdonald@mentor.com>
+Date: Mon, 30 Oct 2017 14:11:11 -0400
+Message-Id: <1509387073-21934-5-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1509387073-21934-1-git-send-email-joe_macdonald@mentor.com>
 References: <1509387073-21934-1-git-send-email-joe_macdonald@mentor.com>
-Subject: [meta-networking][PATCH 3/6] freediameter: add new recipe
+Subject: [meta-networking][PATCH 4/6] net-snmp: support openssl without 3des
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,596 +64,84 @@ X-List-Received-Date: Mon, 30 Oct 2017 18:11:20 -0000
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-freeDiameter is an open source Diameter protocol
-implementation. It provides an extensible platform
-for deploying a Diameter network for your Authentication,
-Authorization and Accounting needs.
+net-snmp enables 3des support by default and fails to build with distro
+feature openssl-no-weak-ciphers:
+
+| ../../net-snmp-5.7.3/snmplib/scapi.c:82:25: fatal error: openssl/des.h: No such file or directory
+|  #include <openssl/des.h>
+
+To fix the issue:
+* add a patch to include des.h only if it's found in openssl
+* disable des when openssl-no-weak-ciphers is enabled
 
 Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
 ---
- ...murhash-algorithm-with-Robert-Jenkin-s-ha.patch | 223 +++++++++++++++++++++
- .../freediameter/files/freediameter.init           |  72 +++++++
- .../freediameter/files/freediameter.service        |  11 +
- .../freediameter/files/install_test.patch          |  22 ++
- .../freediameter/files/pass-ptest-env.patch        |  72 +++++++
- .../recipes-protocols/freediameter/files/run-ptest |  11 +
- .../freediameter/freediameter.inc                  |  98 +++++++++
- .../freediameter/freediameter_1.2.1.bb             |   7 +
- 8 files changed, 516 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
- create mode 100755 meta-networking/recipes-protocols/freediameter/files/freediameter.init
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/freediameter.service
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/install_test.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/run-ptest
- create mode 100644 meta-networking/recipes-protocols/freediameter/freediameter.inc
- create mode 100644 meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
+ .../net-snmp/net-snmp-fix-for-disable-des.patch    | 32 ++++++++++++++++++++++
+ .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |  4 ++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
 
-diff --git a/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch b/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
 new file mode 100644
-index 0000000..71a5a1a
+index 0000000..25eb9c9
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
-@@ -0,0 +1,223 @@
-+Replace murmurhash algorithm with Robert Jenkin's hash algorithm
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
+@@ -0,0 +1,32 @@
++From 270e952f58a7e5ddeabe5a15e3ddaaadf40017d0 Mon Sep 17 00:00:00 2001
++From: Jackie Huang <jackie.huang@windriver.com>
++Date: Thu, 22 Jun 2017 10:25:08 +0800
++Subject: [PATCH] net-snmp: fix for --disable-des
 +
-+Upstream-Status: Pending
++Include des.h only if it's found in openssl so that
++the --disable-des works correctly.
 +
-+From test result, murmurhash algorithm does not work in big endian
-+processor, so replace it with Robert Jenkin's hash which has worked
-+in linux kernel for many years and has more adaptability.
++Upstream-Status: Submitted [net-snmp-coders@lists.sourceforge.net]
 +
-+Signed-off-by: Roy.Li <rongqing.li@windriver.com>
++Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 +---
-+ libfdproto/ostr.c |  192 +++++++++++++++++++++--------------------------------
-+ 1 file changed, 74 insertions(+), 118 deletions(-)
++ snmplib/scapi.c | 2 ++
++ 1 file changed, 2 insertions(+)
 +
-+diff --git a/libfdproto/ostr.c b/libfdproto/ostr.c
-+index 8f29b48..ce1f4dd 100644
-+--- a/libfdproto/ostr.c
-++++ b/libfdproto/ostr.c
-+@@ -430,128 +430,84 @@ after_proto:
-+ 
-+ 
-+ /********************************************************************************************************/
-+-/* Hash function -- credits to Austin Appleby, thank you ^^ */
-+-/* See http://murmurhash.googlepages.com for more information on this function */
-+-
-+-/* the strings are NOT always aligned properly (ex: received in RADIUS message), so we use the aligned MurmurHash2 function as needed */
-+-#define _HASH_MIX(h,k,m) { k *= m; k ^= k >> r; k *= m; h *= m; h ^= k; }
-+-uint32_t fd_os_hash ( uint8_t * string, size_t len )
-++/*
-++ * Robert Jenkin's hash function.
-++ * http://burtleburtle.net/bob/hash/evahash.html
-++ * This is in the public domain.
-++ */
-++#define mix(a, b, c)						\
-++	do {							\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 13);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 8);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 13);	\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 12);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 16);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 5);	\
-++		a = a - b;  a = a - c;  a = a ^ (c >> 3);	\
-++		b = b - c;  b = b - a;  b = b ^ (a << 10);	\
-++		c = c - a;  c = c - b;  c = c ^ (b >> 15);	\
-++	} while (0)
-++
-++unsigned hash_rjenkins(const char *str, unsigned length)
-+ {
-+-	uint32_t hash = len;
-+-	uint8_t * data = string;
-+-	
-+-	const unsigned int m = 0x5bd1e995;
-+-	const int r = 24;
-+-	int align = (long)string & 3;
-+-	
-+-	if (!align || (len < 4)) {
-+-		/* In case data is aligned, MurmurHash2 function */
-+-		while(len >= 4)
-+-		{
-+-			/* Mix 4 bytes at a time into the hash */
-+-			uint32_t k = *(uint32_t *)data;	/* We don't care about the byte order */
-+-
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			data += 4;
-+-			len -= 4;
-+-		}
-+-
-+-		/* Handle the last few bytes of the input */
-+-		switch(len) {
-+-			case 3: hash ^= data[2] << 16;
-+-			case 2: hash ^= data[1] << 8;
-+-			case 1: hash ^= data[0];
-+-	        		hash *= m;
-+-		}
-+-		
-+-	} else {
-+-		/* Unaligned data, use alignment-safe slower version */
-+-		
-+-		/* Pre-load the temp registers */
-+-		uint32_t t = 0, d = 0;
-+-		switch(align)
-+-		{
-+-			case 1: t |= data[2] << 16;
-+-			case 2: t |= data[1] << 8;
-+-			case 3: t |= data[0];
-+-		}
-+-		t <<= (8 * align);
-+-
-+-		data += 4-align;
-+-		len -= 4-align;
-+-		
-+-		/* From this point, "data" can be read by chunks of 4 bytes */
-+-		
-+-		int sl = 8 * (4-align);
-+-		int sr = 8 * align;
-+-
-+-		/* Mix */
-+-		while(len >= 4)
-+-		{
-+-			uint32_t k;
-+-			
-+-			d = *(unsigned int *)data;
-+-			k = (t >> sr) | (d << sl);
-+-
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			t = d;
-+-
-+-			data += 4;
-+-			len -= 4;
-+-		}
-+-
-+-		/* Handle leftover data in temp registers */
-+-		d = 0;
-+-		if(len >= align)
-+-		{
-+-			uint32_t k;
-+-			
-+-			switch(align)
-+-			{
-+-			case 3: d |= data[2] << 16;
-+-			case 2: d |= data[1] << 8;
-+-			case 1: d |= data[0];
-+-			}
-+-
-+-			k = (t >> sr) | (d << sl);
-+-			_HASH_MIX(hash, k, m);
-+-
-+-			data += align;
-+-			len -= align;
-+-
-+-			/* Handle tail bytes */
-+-
-+-			switch(len)
-+-			{
-+-			case 3: hash ^= data[2] << 16;
-+-			case 2: hash ^= data[1] << 8;
-+-			case 1: hash ^= data[0];
-+-					hash *= m;
-+-			};
-+-		}
-+-		else
-+-		{
-+-			switch(len)
-+-			{
-+-			case 3: d |= data[2] << 16;
-+-			case 2: d |= data[1] << 8;
-+-			case 1: d |= data[0];
-+-			case 0: hash ^= (t >> sr) | (d << sl);
-+-					hash *= m;
-+-			}
-+-		}
-+-
-++	const unsigned char *k = (const unsigned char *)str;
-++	uint32_t a, b, c;  /* the internal state */
-++	uint32_t len;      /* how many key bytes still need mixing */
-++
-++	/* Set up the internal state */
-++	len = length;
-++	a = 0x9e3779b9;      /* the golden ratio; an arbitrary value */
-++	b = a;
-++	c = 0;               /* variable initialization of internal state */
-++
-++	/* handle most of the key */
-++	while (len >= 12) {
-++		a = a + (k[0] + ((uint32_t)k[1] << 8) + ((uint32_t)k[2] << 16) +
-++			 ((uint32_t)k[3] << 24));
-++		b = b + (k[4] + ((uint32_t)k[5] << 8) + ((uint32_t)k[6] << 16) +
-++			 ((uint32_t)k[7] << 24));
-++		c = c + (k[8] + ((uint32_t)k[9] << 8) + ((uint32_t)k[10] << 16) +
-++			 ((uint32_t)k[11] << 24));
-++		mix(a, b, c);
-++		k = k + 12;
-++		len = len - 12;
-++	}
-+ 
-++	/* handle the last 11 bytes */
-++	c = c + length;
-++	switch (len) {            /* all the case statements fall through */
-++	case 11:
-++		c = c + ((uint32_t)k[10] << 24);
-++	case 10:
-++		c = c + ((uint32_t)k[9] << 16);
-++	case 9:
-++		c = c + ((uint32_t)k[8] << 8);
-++		/* the first byte of c is reserved for the length */
-++	case 8:
-++		b = b + ((uint32_t)k[7] << 24);
-++	case 7:
-++		b = b + ((uint32_t)k[6] << 16);
-++	case 6:
-++		b = b + ((uint32_t)k[5] << 8);
-++	case 5:
-++		b = b + k[4];
-++	case 4:
-++		a = a + ((uint32_t)k[3] << 24);
-++	case 3:
-++		a = a + ((uint32_t)k[2] << 16);
-++	case 2:
-++		a = a + ((uint32_t)k[1] << 8);
-++	case 1:
-++		a = a + k[0];
-++		/* case 0: nothing left to add */
-+ 	}
-++	mix(a, b, c);
-+ 
-+-	/* Do a few final mixes of the hash to ensure the last few
-+-	   bytes are well-incorporated. */
-+-	hash ^= hash >> 13;
-+-	hash *= m;
-+-	hash ^= hash >> 15;
-++	return c;
-++}
-+ 
-+-	return hash;
-++uint32_t fd_os_hash ( uint8_t * string, size_t len )
-++{
-++	return hash_rjenkins(string, len); 
-+ } 
-+ 
++diff --git a/snmplib/scapi.c b/snmplib/scapi.c
++index 16ac829..271684b 100644
++--- a/snmplib/scapi.c
+++++ b/snmplib/scapi.c
++@@ -79,7 +79,9 @@ netsnmp_feature_child_of(usm_scapi, usm_support)
++ #include <openssl/hmac.h>
++ #include <openssl/evp.h>
++ #include <openssl/rand.h>
+++#ifdef HAVE_OPENSSL_DES_H
++ #include <openssl/des.h>
+++#endif
++ #ifdef HAVE_AES
++ #include <openssl/aes.h>
++ #endif
 +-- 
-+1.7.10.4
++2.11.0
 +
-diff --git a/meta-networking/recipes-protocols/freediameter/files/freediameter.init b/meta-networking/recipes-protocols/freediameter/files/freediameter.init
-new file mode 100755
-index 0000000..e63a42a
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/freediameter.init
-@@ -0,0 +1,72 @@
-+#!/bin/sh
-+#
-+### BEGIN INIT INFO
-+# Provides:          freediameter
-+# Default-Start:     2 3 4 5
-+# Default-Stop:      0 1 6
-+# Required-Start:    $remote_fs $syslog
-+# Required-Stop:     $remote_fs $syslog
-+# Short-Description: Start freeDiameter daemon at boot time
-+# Description:       Start the freeDiameter daemon at boot time.
-+#       freeDiameter is an extensible implementation of the Diameter protocol,
-+#       designed for Authentication, Authorization and Accounting. Diameter is
-+#       an evolution of the RADIUS protocol.
-+### END INIT INFO#
-+DAEMON=/usr/bin/freeDiameterd
-+CONF=/etc/freeDiameter/freeDiameter.conf
-+NAME=freediameter
-+DESC="freeDiameter daemon"
-+
-+. /etc/init.d/functions
-+start() {
-+	[ -x $DAEMON ] || exit 5
-+	echo -n $"Starting $DAEMON: "
-+	start-stop-daemon -S -b -x ${DAEMON} && success || failure
-+	retval=$?
-+	echo ""
-+	return $retval
-+}
-+
-+stop() {
-+	echo -n $"Stopping $prog: "
-+	start-stop-daemon -K -x $DAEMON
-+	retval=$?
-+	echo ""
-+	return $retval
-+}
-+
-+restart() {
-+	stop
-+	sleep 3
-+	start
-+}
-+
-+rh_status() {
-+	status $DAEMON
-+}
-+
-+rh_status_q() {
-+	rh_status > /dev/null 2>&1
-+}
-+
-+case "$1" in
-+  start)
-+	rh_status_q && exit 0
-+	start
-+	;;
-+  stop)
-+	rh_status_q || exit 0
-+	stop
-+	;;
-+  restart)
-+	restart
-+	;;
-+  status)
-+	rh_status
-+	;;
-+  *)
-+	echo $"Usage: $prog {start|stop|status|restart}"
-+	exit 2
-+esac
-+
-+exit $?
-diff --git a/meta-networking/recipes-protocols/freediameter/files/freediameter.service b/meta-networking/recipes-protocols/freediameter/files/freediameter.service
-new file mode 100644
-index 0000000..514481b
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/freediameter.service
-@@ -0,0 +1,11 @@
-+[Unit]
-+Description=freediameter daemon
-+After=network.target
-+
-+[Service]
-+Type=simple
-+PIDFile=/var/run/freediameter.pid
-+ExecStart=@BINDIR@/freeDiameterd
-+
-+[Install]
-+WantedBy=multi-user.target
-diff --git a/meta-networking/recipes-protocols/freediameter/files/install_test.patch b/meta-networking/recipes-protocols/freediameter/files/install_test.patch
-new file mode 100644
-index 0000000..151037d
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/install_test.patch
-@@ -0,0 +1,22 @@
-+CMakeLists: add an option to install tests
-+
-+Upstream-Status: Inappropriate [OE ptest specific]
-+
-+Original author: Yao Zhao <yao.zhao@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+diff --git a/tests/CMakeLists.txt b/tests/CMakeLists.txt
-+index da8da1b..de04059 100644
-+--- a/tests/CMakeLists.txt
-++++ b/tests/CMakeLists.txt
-+@@ -113,4 +113,9 @@ ENDFOREACH( TEST )
-+ ####
-+ ## INSTALL section ##
-+ 
-+-# we do not install the tests
-++# install the tests
-++SET(INSTALL_TEST_SUFFIX       /opt/${FD_PROJECT_NAME}-tests   CACHE PATH "Directory where the test binary is installed.")
-++
-++INSTALL(TARGETS ${TEST_LIST}
-++        RUNTIME DESTINATION ${INSTALL_TEST_SUFFIX}
-++        COMPONENT freeDiameter-common)
-diff --git a/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch b/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
-new file mode 100644
-index 0000000..ea857af
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
-@@ -0,0 +1,72 @@
-+freediameter ptest cases testmesg_stress.c and testloadext.c need load
-+extensions both build time and runtime. Then they search extensions with
-+build directory that causes runtime failures.
-+
-+Pass an environment variable to define runtime extension path.
-+
-+Upstream-Status: Inappropriate [OE ptest specific]
-+
-+Signed-off-by: Kai Kang <kai.kang@windriver.com>
-+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
-+
-+diff -Nur freeDiameter-1.2.0.orig/tests/testloadext.c freeDiameter-1.2.0/tests/testloadext.c
-+--- freeDiameter-1.2.0.orig/tests/testloadext.c	2014-02-19 17:33:24.785405032 +0800
-++++ freeDiameter-1.2.0/tests/testloadext.c	2014-02-19 20:08:03.871403924 +0800
-+@@ -49,7 +49,7 @@
-+ {
-+ 	DIR *dir;
-+ 	struct dirent *dp;
-+-	char fullname[512];
-++	char fullname[1024];
-+ 	int pathlen;
-+ 
-+ 	/* First, initialize the daemon modules */
-+@@ -57,11 +57,16 @@
-+ 	CHECK( 0, fd_queues_init()  );
-+ 	CHECK( 0, fd_msg_init()  );
-+ 	CHECK( 0, fd_rtdisp_init()  );
-+-	
-++
-++	char *ext_dir = getenv("EXTENSIONS_DIR");
-++	if (ext_dir)
-++		pathlen = snprintf(fullname, sizeof(fullname), "%s", ext_dir);
-++	else
-++		pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++
-+ 	/* Find all extensions which have been compiled along the test */
-+-	TRACE_DEBUG(INFO, "Loading from: '%s'", BUILD_DIR "/extensions");
-+-	CHECK( 0, (dir = opendir (BUILD_DIR "/extensions")) == NULL ? 1 : 0 );
-+-	pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++	TRACE_DEBUG(INFO, "Loading from: '%s'", fullname);
-++	CHECK( 0, (dir = opendir (fullname)) == NULL ? 1 : 0 );
-+ 	
-+ 	while ((dp = readdir (dir)) != NULL) {
-+ 		char * dot = strrchr(dp->d_name, '.');
-+diff -Nur freeDiameter-1.2.0.orig/tests/testmesg_stress.c freeDiameter-1.2.0/tests/testmesg_stress.c
-+--- freeDiameter-1.2.0.orig/tests/testmesg_stress.c	2014-02-19 17:33:24.785405032 +0800
-++++ freeDiameter-1.2.0/tests/testmesg_stress.c	2014-02-19 20:08:03.928403924 +0800
-+@@ -67,15 +67,20 @@
-+ {
-+ 	DIR *dir;
-+ 	struct dirent *dp;
-+-	char fullname[512];
-++	char fullname[1024];
-+ 	int pathlen;
-+ 	struct fd_list all_extensions = FD_LIST_INITIALIZER(all_extensions);
-+ 	struct fd_list ext_with_depends = FD_LIST_INITIALIZER(ext_with_depends);
-+ 
-++	char *ext_dir = getenv("EXTENSIONS_DIR");
-++	if (ext_dir)
-++		pathlen = snprintf(fullname, sizeof(fullname), "%s", ext_dir);
-++	else
-++		pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++
-+ 	/* Find all extensions which have been compiled along the test */
-+-	LOG_D("Loading %s*.fdx from: '%s'", BUILD_DIR "/extensions", prefix ?: "");
-+-	CHECK( 0, (dir = opendir (BUILD_DIR "/extensions")) == NULL ? 1 : 0 );
-+-	pathlen = snprintf(fullname, sizeof(fullname), BUILD_DIR "/extensions/");
-++	TRACE_DEBUG(INFO, "Loading from: '%s'", fullname);
-++	CHECK( 0, (dir = opendir (fullname)) == NULL ? 1 : 0 );
-+ 	
-+ 	while ((dp = readdir (dir)) != NULL) {
-+ 		char * dot = strrchr(dp->d_name, '.');
-diff --git a/meta-networking/recipes-protocols/freediameter/files/run-ptest b/meta-networking/recipes-protocols/freediameter/files/run-ptest
-new file mode 100644
-index 0000000..d0ca8d9
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/files/run-ptest
-@@ -0,0 +1,11 @@
-+#!/bin/sh
-+
-+if ! lsmod | grep -q sctp && ! modprobe sctp 2>/dev/null; then
-+        echo "Couldn't load kernel module sctp."
-+        echo "Test cases testsctp and testcnx will fail."
-+        echo
-+fi
-+
-+export EXTENSIONS_DIR=$EXTENSIONS_DIR
-+cmake  -E cmake_echo_color --cyan "Running tests..."
-+ctest --force-new-ctest-process
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter.inc b/meta-networking/recipes-protocols/freediameter/freediameter.inc
-new file mode 100644
-index 0000000..6880d26
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter.inc
-@@ -0,0 +1,98 @@
-+SUMMARY = "An open source implementation of the diameter protocol"
-+DESCRIPTION = "\
-+freeDiameter is an open source Diameter protocol implementation. It \
-+provides an extensible platform for deploying a Diameter network for \
-+your Authentication, Authorization and Accounting needs."
-+
-+HOMEPAGE = "http://www.freediameter.net"
-+
-+DEPENDS = "flex bison cmake-native libgcrypt gnutls libidn lksctp-tools"
-+
-+pkgname = "freeDiameter"
-+
-+SRC_URI = "http://www.freediameter.net/hg/${pkgname}/archive/${PV}.tar.gz;downloadfilename=${pkgname}-${PV}.tar.gz \
-+           file://Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch \
-+           file://freediameter.service \
-+           file://freediameter.init \
-+           \
-+           ${@bb.utils.contains('DISTRO_FEATURES', 'ptest', \
-+           'file://install_test.patch \
-+            file://run-ptest \
-+            file://pass-ptest-env.patch', '', d)} \
-+           "
-+
-+S = "${WORKDIR}/${pkgname}-${PV}"
-+
-+PTEST_PATH = "${libdir}/${pkgname}/ptest"
-+
-+inherit cmake update-rc.d ptest systemd
-+
-+EXTRA_OECMAKE = " \
-+    -DDEFAULT_CONF_PATH:PATH=${sysconfdir}/${pkgname} \
-+    -DBUILD_DBG_MONITOR:BOOL=ON  \
-+    -DBUILD_TEST_APP:BOOL=ON \
-+    -DBUILD_TESTING:BOOL=ON \
-+    -DBUILD_APP_RADGW:BOOL=ON \
-+    -DBUILD_APP_REDIRECT:BOOL=ON \
-+    -DBUILD_TEST_ACCT:BOOL=ON \
-+    -DBUILD_TEST_NETEMUL:BOOL=ON \
-+    -DBUILD_TEST_RT_ANY:BOOL=ON \
-+    -DINSTALL_LIBRARY_SUFFIX:PATH=${baselib} \
-+    -DINSTALL_EXTENSIONS_SUFFIX:PATH=${baselib}/${pkgname} \
-+    -DINSTALL_TEST_SUFFIX:PATH=${PTEST_PATH}-tests \
-+    -DCMAKE_SKIP_RPATH:BOOL=ON \
+diff --git a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+index af6fd1b..849ae07 100644
+--- a/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
++++ b/meta-networking/recipes-protocols/net-snmp/net-snmp_5.7.3.bb
+@@ -31,6 +31,7 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/net-snmp/net-snmp-${PV}.zip \
+            file://0003-CHANGES-BUG-2712-Fix-Perl-module-compilation.patch \
+            file://0004-configure-fix-incorrect-variable.patch \
+            file://net-snmp-5.7.2-fix-engineBoots-value-on-SIGHUP.patch \
++           file://net-snmp-fix-for-disable-des.patch \
+            "
+ SRC_URI[md5sum] = "9f682bd70c717efdd9f15b686d07baee"
+ SRC_URI[sha256sum] = "e8dfc79b6539b71a6ff335746ce63d2da2239062ad41872fff4354cafed07a3e"
+@@ -59,7 +60,8 @@ EXTRA_OECONF = "--enable-shared \
+                 --with-defaults \
+                 --with-install-prefix=${D} \
+                 --with-persistent-directory=${localstatedir}/lib/net-snmp \
+-                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)}"
++                ${@base_conditional('SITEINFO_ENDIANNESS', 'le', '--with-endianness=little', '--with-endianness=big', d)} \
 +"
-+# INSTALL_LIBRARY_SUFFIX is relative to CMAKE_INSTALL_PREFIX
-+# specify it on cmd line will fix the SET bug in CMakeList.txt
-+
-+# -DBUILD_APP_ACCT:BOOL=ON This needs POSTGRESQL support
-+
-+# -DBUILD_APP_DIAMEAP:BOOL=ON  -DBUILD_APP_SIP:BOOL=ON -DBUILD_TEST_SIP:BOOL=ON
-+# These need MySQL support
-+
-+# -DBUILD_DBG_INTERACTIVE:BOOL=ON This needs SWIG support
-+
-+# -DALL_EXTENSIONS=ON will enable all
-+
-+do_install_append() {
-+    # install the sample configuration file
-+    install -d -m 0755 ${D}${sysconfdir}/${pkgname}
-+    for i in ${S}/doc/*.conf.sample; do
-+        install -m 0644 $i ${D}${sysconfdir}/${pkgname}/
-+    done
-+    mv ${D}${sysconfdir}/${pkgname}/freediameter.conf.sample \
-+      ${D}${sysconfdir}/${pkgname}/freeDiameter.conf.sample
-+
-+    # install daemon init related files
-+    install -d -m 0755 ${D}${sysconfdir}/default
-+    install -d -m 0755 ${D}${sysconfdir}/init.d
-+    install -m 0644 ${S}/contrib/debian/freediameter-daemon.default \
-+      ${D}${sysconfdir}/default/${BPN}
-+    install -m 0755 ${WORKDIR}/freediameter.init ${D}${sysconfdir}/init.d/${BPN}
-+
-+    # install for systemd
-+    install -d ${D}${systemd_system_unitdir}
-+    install -m 0644 ${WORKDIR}/freediameter.service ${D}${systemd_system_unitdir}
-+    sed -i -e 's,@BINDIR@,${bindir},g' ${D}${systemd_system_unitdir}/*.service
-+}
-+
-+do_install_ptest() {
-+    sed -i "s#\(EXTENSIONS_DIR=\).*\$#\1${libdir}/${pkgname}/#" ${D}${PTEST_PATH}/run-ptest
-+    mv ${D}${PTEST_PATH}-tests/* ${D}${PTEST_PATH}/
-+    rmdir ${D}${PTEST_PATH}-tests
-+    install -m 0644 ${B}/tests/CTestTestfile.cmake ${D}${PTEST_PATH}/
-+}
-+
-+FILES_${PN}-dbg += "${libdir}/${pkgname}/.debug/*"
-+
-+# include the extensions in main package
-+FILES_${PN} += "${libdir}/${pkgname}/*"
-+
-+RDEPENDS_${PN} = "glib-2.0 gnutls libidn"
-+RDEPENDS_${PN}-ptest = "cmake"
-+
-+INITSCRIPT_NAME = "${BPN}"
-+INITSCRIPT_PARAMS = "start 30 . stop 70 0 1 2 3 4 5 6 ."
-+
-+SYSTEMD_SERVICE_${PN} = "freediameter.service"
-+SYSTEMD_AUTO_ENABLE = "disable"
-diff --git a/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-new file mode 100644
-index 0000000..3fb929a
---- /dev/null
-+++ b/meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
-@@ -0,0 +1,7 @@
-+include freediameter.inc
-+
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=892b2ed6ae815488a08416ff7ee74a35"
-+
-+SRC_URI[md5sum] = "61b1062aa144b5f12eed514611e6d697"
-+SRC_URI[sha256sum] = "bd7f105542e9903e776aa006c6931c1f5d3d477cb59af33a9162422efa477097"
+ 
+ # net-snmp needs to have mib-modules=smux enabled to enable quagga to support snmp
+ EXTRA_OECONF += "--with-mib-modules=smux"
 -- 
 2.7.4
 
