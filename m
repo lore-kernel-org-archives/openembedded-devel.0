@@ -1,55 +1,47 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id B885F6011F
+Return-Path: <gizero@gmail.com>
+Received: from mail-wm0-f44.google.com (mail-wm0-f44.google.com [74.125.82.44])
+	by mail.openembedded.org (Postfix) with ESMTP id 0AF4071B2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 20:06:22 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id s2so12575897pge.10
+	Mon, 30 Oct 2017 22:04:06 +0000 (UTC)
+Received: by mail-wm0-f44.google.com with SMTP id p75so18731522wmg.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 13:06:24 -0700 (PDT)
+	Mon, 30 Oct 2017 15:04:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=RK08+/giVVHOj5ZrF+vSlka1NGKZKm6HoBKzm/MeFiQ=;
-	b=gskn4prdaVegRRh65GjoYAVBstQ/Fdi1Ul8giJ1NpZE0i2qppUVrHCASB5u1nSawFS
-	UVIj8nF/TNbSyo2tATAkQLKiALXJylP7ADppKsrN3o7XB3QBhzf71cVFDLDc9bSCfG8Q
-	p+lneVI6UY0Zz6tWWbSlk1aIz4nduarG7RR13p5gx1cxA/PqpuqXt02PbW27KbceNoVS
-	pv52b8r/DacUdymidciLhqevRMeGp6WXkRNlwfZIpxTg8+rnvWS0K9iBgqBp1J1En8PO
-	Uhj7mnlyIE37u0UDO8dITfKPCE7LFppF/N8C6BzhUNGFuHR9zY7mI4wEdZfhyMXhRZXi
-	PGXg==
+	h=from:to:cc:subject:date:message-id;
+	bh=g6HlW37H/aLX6sa4ViVeQviOTFmPiZ8XEgVouHj8vsk=;
+	b=D2/Jhak/wuUbR3VjEx9wOLowYKRZCP3HvSPViK6F3Ws9rj7hwTpPh3HShij2Iake7u
+	bNDN68UAiW9ockBP7RAdnyUNGe//Xeh0/9wQ34iQ0h5Y9QbtFvJJraxcyInDjDHcBxGJ
+	rzzHMcpn8Wpm2li9ohKyjqezQnEu2XMJvldETQshFA6nkAoYAoMc+mcq6mdu2669VYLA
+	E1c08qHxtbIGqDh01ku7xuDWZCKXpZo08+WKBXi0qcGn4Q5wigeh8vSf/kizTRuU9lio
+	67d2BlK6tQj2Kkp4i+KnnNBglsiLEF5uzqcPYmYD02lLdPIPhyC1a/ohcRScGTA80zI+
+	c8AQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=RK08+/giVVHOj5ZrF+vSlka1NGKZKm6HoBKzm/MeFiQ=;
-	b=O54rIjC2AiKLqCdD4f3NI84noHK7xmnEwj0L13LurH3Sonb8J1yL14RCPVg7tJosVF
-	Mdj0L8MbTP07nkaClwr0SYy7qsDohihS8ubO3nP7QDtZsm62vPON0wf/S0RBCKlpDRl/
-	A3QQqD2jo+o15j5N4ZaEjDBg2D8ScksfgHJFmAe70QzAnTZd+NMEeG2sWsqvSNdabpP6
-	GZcFIdlsLhiu/2b4/6bKx8K8gI6fjIcRMy+TQdwct19E5Tm8S7nWGlAKxxXfbT98lMYO
-	6k4Idl17IHnbtU2caT3U09rtX10CdVAqP3JH0eGXTc3Rk0SJkjXfebW5L57Acd9lM7db
-	cQLQ==
-X-Gm-Message-State: AMCzsaXdJ6ZsvERTlv7R2tsbzv3RGLjUS8uKCGA/cU3Zjcex8WK3Rf/t
-	bJyvLib7mQ2FPMUxul/4JTVbEw==
-X-Google-Smtp-Source: ABhQp+TaBBrb0dZbznK1KUXnYfe7zOSy9xaD3mCXUhqhsxqPYV0wnqwuOps78OhCH0DG4EFabmcOsg==
-X-Received: by 10.98.133.10 with SMTP id u10mr9939956pfd.22.1509393983425;
-	Mon, 30 Oct 2017 13:06:23 -0700 (PDT)
-Received: from ?IPv6:2601:202:4001:9ea0:28d1:6486:c536:9d44?
-	([2601:202:4001:9ea0:28d1:6486:c536:9d44])
-	by smtp.gmail.com with ESMTPSA id
-	i11sm29620578pgc.88.2017.10.30.13.06.22
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 30 Oct 2017 13:06:22 -0700 (PDT)
-To: Fan Xin <fan.xin@jp.fujitsu.com>, openembedded-devel@lists.openembedded.org
-References: <CAMKF1sohPCP07Hx-aHdoKDqtrTXWO+3atWDX-MMLP80RsdxRNg@mail.gmail.com>
-	<1509338753-23099-1-git-send-email-fan.xin@jp.fujitsu.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <d2eb9f63-12b3-387a-c9a4-572c52231c3b@gmail.com>
-Date: Mon, 30 Oct 2017 13:06:21 -0700
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
-MIME-Version: 1.0
-In-Reply-To: <1509338753-23099-1-git-send-email-fan.xin@jp.fujitsu.com>
-Subject: Re: [PATCH v3] spi-tools: Add version info
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=g6HlW37H/aLX6sa4ViVeQviOTFmPiZ8XEgVouHj8vsk=;
+	b=ipw/CwQqleLO8pycBqRQexdr+o+inXPf0NVUrVUtsZRZ1LIMpjGOkJaDYe1kXWtFTw
+	zDXZkPzBym4j9zzj+PpRVyQ66+4hRoDfjOgdRspSEXmCTel24aDZHWLlFm2wZaa6THlF
+	j6eDBHIEIpGs8bHm1mGEXc/kktCbGMw1QgrxYQwiG5Hgl5wXWpvAJ+lvdKNouaWW+lXv
+	4WZk8dmFjmXplE+05ceMwhtiKcWkpEvDirWhAimiLXC94/nKEAktDtoOeQbmoO3w4CtZ
+	S8vOYeQhpeYQ5NHgerNhCKbpFPucOIquMm7xaI8o2/S8Dt60owkTvWtW/9Q15c82mibm
+	eVtw==
+X-Gm-Message-State: AMCzsaWDXUK9jvG0seGQrCar34yIN8rUh6e2wzfzk/1XcdPHv+tIvFLV
+	hVw3so6dO46XT1FVUA1wQ/SJjw==
+X-Google-Smtp-Source: ABhQp+RGxemOagFpIEvkCI5SugOg4zGjpIrw9R/8Bt0hOKlGVf0xMh1fPuqJwWHeFlQDqwa2psDEDQ==
+X-Received: by 10.28.31.21 with SMTP id f21mr133480wmf.18.1509401047311;
+	Mon, 30 Oct 2017 15:04:07 -0700 (PDT)
+Received: from gizero-desktop.tw.it
+	(host193-245-static.58-79-b.business.telecomitalia.it.
+	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
+	z35sm27162088wrc.9.2017.10.30.15.04.06
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 30 Oct 2017 15:04:06 -0700 (PDT)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 30 Oct 2017 23:03:48 +0100
+Message-Id: <20171030220348.5236-1-gizero@gmail.com>
+X-Mailer: git-send-email 2.14.2
+Subject: [meta-oe][PATCH] can-isotp: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,36 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2017 20:06:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 30 Oct 2017 22:04:07 -0000
 
+Linux Kernel Module for ISO 15765-2:2016 CAN transport protocol.
 
+CAN Transport Protocol offers support for segmented Point-to-Point
+communication between CAN nodes via two defined CAN Identifiers. This protocol
+driver implements data transfers according to ISO 15765-2.
 
-On 10/29/2017 09:45 PM, Fan Xin wrote:
-> Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
-> ---
->  meta-oe/recipes-support/spitools/spitools_git.bb | 2 ++
->  1 file changed, 2 insertions(+)
->
-> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
-> index f808125..168f0f3 100644
-> --- a/meta-oe/recipes-support/spitools/spitools_git.bb
-> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-> @@ -4,6 +4,8 @@ AUTHOR = "Christophe BLAESS"
->  LICENSE="GPLv2"
->  LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
->  
-> +PV = "0.8.1"
-> +
->  S = "${WORKDIR}/git"
+This recipe provides can-isotp.ko kernel module.
 
-Should we think of converting these kinds recipes to spitools_0.8.1.bb
-to avoid the need for PV ?  Maybe a best practices on the recipes naming??
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
+---
+ meta-oe/recipes-extended/socketcan/can-isotp_git.bb | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/socketcan/can-isotp_git.bb
 
-- armin
->  
->  SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+diff --git a/meta-oe/recipes-extended/socketcan/can-isotp_git.bb b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+new file mode 100644
+index 000000000..3c019eb7c
+--- /dev/null
++++ b/meta-oe/recipes-extended/socketcan/can-isotp_git.bb
+@@ -0,0 +1,12 @@
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=72d977d697c3c05830fdff00a7448931"
++SRCREV = "d1248b0f22ea8dc3b9d84a61bd35a83309bdb4b4"
++PV = "1.0+git${SRCPV}"
++
++SRC_URI = "git://github.com/hartkopp/can-isotp.git;protocol=https"
++
++S = "${WORKDIR}/git"
++
++inherit module
++
++EXTRA_OEMAKE += "KERNELDIR=${STAGING_KERNEL_DIR}"
+-- 
+2.14.2
 
 
