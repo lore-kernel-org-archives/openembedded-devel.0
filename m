@@ -1,48 +1,47 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f65.google.com (mail-pg0-f65.google.com [74.125.83.65])
-	by mail.openembedded.org (Postfix) with ESMTP id BA725605BF
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 7F9D3605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 23:15:58 +0000 (UTC)
-Received: by mail-pg0-f65.google.com with SMTP id g6so12978274pgn.6
+	Mon, 30 Oct 2017 23:19:28 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id b85so12223567pfj.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Oct 2017 16:16:00 -0700 (PDT)
+	Mon, 30 Oct 2017 16:19:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=7qfk8RKnJPTe995Sv+rsirNAIZwCeG2zo6/AasPgY4A=;
-	b=GJPB5IL2xe14uOh7WaOIYWkMn1Q/KeX0qlylbiJ/IU168us+vxnIjdjEZQkZ28l/Gq
-	eNR/h99RwbV8xN9S49gsoVEQ7jFm4DQ13XHWpe7VmSGghp2EUOi5nv6UIoXi35eh1pmn
-	QAZQ4fuNp+O2W24BcBJ7K5RDHvAVeCA1Xz5vHhXDwkGFd4fAmzw4sDukf8uKK5dSKCxX
-	byvPiyMmNDVRZ76ECuslNAg+YpFAT8ijVRRrEfsvXY9IZcMb5YCohXGYfzac3qiXyaVT
-	UOx5YyAcBY0NHCwvElf6ul9G4Thkl4uohalqsfM3gG7MbX7x3EqQakN1KOU+Al/Qcviv
-	PEOA==
+	:cc; bh=o3gUmc/DZo25mU17wn4QyR4MDyZWO3SGT0xMQRQgmrs=;
+	b=TbJpDRUVGtaVTfifwlOQcxtCwH4GwIowEyX1AzYYTK1Arn1kbgQTdcjKeVRodeCIsY
+	Hel8xcMrX6Y02mEljiYgC6RZ//eSD2sdr02JF+WEt06NYDAfzQQBE9I7TMqdb9vjZhxl
+	jRoutSTzLcG8plxvwdy0w/k3zjKlW2M5p5bgKknB3/5gJGcy6xcffvkuHmKHbJWfWDq0
+	QzCpakAludxR61erCl7BTYkfVlIC2EwtNOnvdY2IRSZg8gbjn/UdHI6JjfSdpo6Yi9FJ
+	qutC3O2/CjR8emLUk1YME+hLk4pN8BlaIc1prdz+HNgX5MjW6jq5fDNIQUgsa8v9eJwE
+	nSew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=7qfk8RKnJPTe995Sv+rsirNAIZwCeG2zo6/AasPgY4A=;
-	b=g3UP7OM7f3P4mWda4rNPrk4Xd+ZzOa0lCYxM+Ne1rKXJxu6azuuCLvv5ynxbCWNu2c
-	ioyPYswVzktJGKZCU3NMNcXBMY08OGgcIOBKKnFtdQcEzLucOr1MBKvUpCxoEAaeVJfi
-	DzKcBOsMojfvTmTSfHCdMc58TUeynrPupar1+K/4UlsO3iT7sAIKAH5mIeuCfNo5zaoI
-	154hOMWiu9l4ctlDjTiSF13+4fm4qHK+efwY7XbSj+hsffzdQDH3RyGW8q7pou5hh6g8
-	OV0AoDwxIYe1GT0T7h00qC7pcw7PDUnEvy2C+DhUbBoUfjFo5l/HpSYZ1VGCIhHUbrSk
-	v1ZA==
-X-Gm-Message-State: AMCzsaUEx+EVtYTGOljwOHJQV9NcAvaDpRfQMZsMDismbj6uJc5yKBo8
-	gfojGpve8FwY8U3XzlApjAsRuwcYHzkFcwzgsYg=
-X-Google-Smtp-Source: ABhQp+QG0iPY+xxMgqywJILUBH7wPDP5L6zkLvpx8/P+ma5wTv5uBUAX+iU+TDOR5cb42ZTWSwDAanEsi2Ss1K3lkas=
-X-Received: by 10.99.51.72 with SMTP id z69mr9290032pgz.317.1509405359779;
-	Mon, 30 Oct 2017 16:15:59 -0700 (PDT)
+	bh=o3gUmc/DZo25mU17wn4QyR4MDyZWO3SGT0xMQRQgmrs=;
+	b=NVxZR3SsyoWphx7hH69/ytP/m11P4E05HsQh98mDltL4WOkZFdR4iGkn+gbtShRPqY
+	Wah6yup6CHGSrymGvel0O83JSouuVq4C8UwsrGoQ0iWDd18V9UW3jp758Q4iVskK4r+a
+	/6Ve++BWkgvCdAQOfrcN9opgC2ramVVwjexSomUw3hnIF735sjmaRCRA+Jm6RGzUB6vi
+	QJ2vvLWP1V+5soivNYoSWi+nbaUBEyZx8p5is5aqV6TBq4KyCDUwiY/svJKDxqUrnxp9
+	IS+Ul5kkaZEEzh8VxxvAk+1b8OJQx+23GlsY+8MkBfDUvc+JwmMnZrgcRV9UPbVQBjF/
+	U+zg==
+X-Gm-Message-State: AMCzsaVGrs64CK2p2eQ4Vi14DWpRVTd10sceS/2IUCh95+BCJN5HnD5z
+	nU3tekIvZV85DiezFg5u3fi3QDcGLwxcAQ45wJo=
+X-Google-Smtp-Source: ABhQp+SNOYTCk/rdu7B41rbEn28IGcowxxZtkr2g80mEb8XnnC12Mgped94UDAJ/K/URvMHj7aJaBU4dBg/yGjN3V6I=
+X-Received: by 10.84.128.97 with SMTP id 88mr3872pla.161.1509405569552; Mon,
+	30 Oct 2017 16:19:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.187.66 with HTTP; Mon, 30 Oct 2017 16:15:29 -0700 (PDT)
-In-Reply-To: <d2eb9f63-12b3-387a-c9a4-572c52231c3b@gmail.com>
-References: <CAMKF1sohPCP07Hx-aHdoKDqtrTXWO+3atWDX-MMLP80RsdxRNg@mail.gmail.com>
-	<1509338753-23099-1-git-send-email-fan.xin@jp.fujitsu.com>
-	<d2eb9f63-12b3-387a-c9a4-572c52231c3b@gmail.com>
+Received: by 10.100.187.66 with HTTP; Mon, 30 Oct 2017 16:18:59 -0700 (PDT)
+In-Reply-To: <20171030173213.16752-1-fabio.berton@ossystems.com.br>
+References: <20171030173213.16752-1-fabio.berton@ossystems.com.br>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 30 Oct 2017 16:15:29 -0700
-Message-ID: <CAMKF1sr6DCgLwf8fj7vw8cQnL2B+ipizk5+jcGZJK2WbnzDxmg@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
+Date: Mon, 30 Oct 2017 16:18:59 -0700
+Message-ID: <CAMKF1spzjAV6Qd6MDa7M5a=-rse+2nOZoHWoaAp=3ORhQHPrzA@mail.gmail.com>
+To: Fabio Berton <fabio.berton@ossystems.com.br>
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH v3] spi-tools: Add version info
+Subject: Re: [meta-networking][PATCH] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,41 +54,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Oct 2017 23:15:58 -0000
+X-List-Received-Date: Mon, 30 Oct 2017 23:19:28 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 30, 2017 at 1:06 PM, akuster808 <akuster808@gmail.com> wrote:
+On Mon, Oct 30, 2017 at 10:32 AM, Fabio Berton
+<fabio.berton@ossystems.com.br> wrote:
+> We need to set DESTDIR variable and run eo_runmake install to install all
+                                                                        ^^
+typo
+
+> arptables files. Without this the only file installed in package is
+> systemd unit.
 >
+> Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> ---
+>  meta-networking/recipes-support/arptables/arptables_git.bb | 5 +++--
+>  1 file changed, 3 insertions(+), 2 deletions(-)
 >
-> On 10/29/2017 09:45 PM, Fan Xin wrote:
->> Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
->> ---
->>  meta-oe/recipes-support/spitools/spitools_git.bb | 2 ++
->>  1 file changed, 2 insertions(+)
->>
->> diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
->> index f808125..168f0f3 100644
->> --- a/meta-oe/recipes-support/spitools/spitools_git.bb
->> +++ b/meta-oe/recipes-support/spitools/spitools_git.bb
->> @@ -4,6 +4,8 @@ AUTHOR = "Christophe BLAESS"
->>  LICENSE="GPLv2"
->>  LIC_FILES_CHKSUM = "file://LICENSE;md5=8c16666ae6c159876a0ba63099614381"
->>
->> +PV = "0.8.1"
->> +
->>  S = "${WORKDIR}/git"
+> diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+> index 274a55d91..55903e450 100644
+> --- a/meta-networking/recipes-support/arptables/arptables_git.bb
+> +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+> @@ -21,9 +21,10 @@ SYSTEMD_SERVICE_${PN} = "arptables.service"
 >
-> Should we think of converting these kinds recipes to spitools_0.8.1.bb
-> to avoid the need for PV ?  Maybe a best practices on the recipes naming??
+>  inherit systemd
+>
+> -EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+> +EXTRA_OEMAKE += "'DESTDIR=${D}' 'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
 >
 
-I think yes. on the downside its convenient for git log to have same
-file name but then we do have
-git log --follow
+if its needed just during install then we could pass it directly in
+oe_runmake in do_install below
 
-> - armin
->>
->>  SRC_URI = "git://github.com/cpb-/spi-tools.git;protocol=git"
+> -do_install_append() {
+> +do_install() {
+> +    oe_runmake install
+>      if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+>          install -d ${D}${systemd_unitdir}/system
+>          install -m 644 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
+> --
+> 2.14.2
 >
 > --
 > _______________________________________________
