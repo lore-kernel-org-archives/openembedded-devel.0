@@ -1,53 +1,48 @@
 Return-Path: <fabio.berton@ossystems.com.br>
-Received: from mail-io0-f174.google.com (mail-io0-f174.google.com
-	[209.85.223.174])
-	by mail.openembedded.org (Postfix) with ESMTP id AA3B97197E
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 2410978220
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 19:51:37 +0000 (UTC)
-Received: by mail-io0-f174.google.com with SMTP id 134so1428883ioo.0
+	Tue, 31 Oct 2017 19:51:40 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id w134so205104qkb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 12:51:38 -0700 (PDT)
+	Tue, 31 Oct 2017 12:51:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JE4s8UrjHaLVtCCXy9u+cplOYD7P3ofq2zXzuUF395E=;
-	b=jIsV9AOONjZWZkeuUdeD80sqHcqIdPBB/4rcr933IVS+1UFUcMK+CNSN9xnuEbpZmc
-	n3BSUVSIa09r9sECVBjPzd5ZuY7JTqZdHM5HI4uxLlDAhFTLhfKvyJkKsn1J81P+8tTo
-	HywYpPnNFb3WxyPW2staC8mDlVSHiZJbFVwtGIEGgrL1aYwcGIgoVCb4B7OrThboPKiH
-	5hL6sTLoPp/8LwotUFnZ9w/MEFRwuylQs+aM5bsP5+EJqXNSd2Y0KlfRB/KZTcV0WTL/
-	FTfEkcb1YmeATsZ8XpMXjtJkYDtRh7lYAG4C94wFdTmX/mM5EIJjt5xUFBTnuLlTmnmb
-	Budg==
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=ycY4W0AJfUX+t5EvL5XJWe3BkaX+tUbwusn5l6Pj6Ow=;
+	b=HeDgpiwM4zEULtS/KA1Cdl+mzYkSm21KNuPU2wkW4QIWtxwPeYLl29kA9w0dZueUlc
+	mvq9/brBnR6Zfbng29URzsjkOHSKZEuQ69LcLPvsd6QbxzxCsUvlgZlwWgPXaeZIQ5OC
+	u0J7l+lBg3+uC9vBS8Y0FwYfJhPXeKT+gN2wosv2M+PCzsIZbpF1Iymq0igaYQUgG45H
+	OWoecYiv+ojqUh04m/IFD0zOK4IopV6LzOs5WZy7wjZ4UwSvj4Nzf2TQCqv01ql0Zzi9
+	hvCHMcq7dlwvT21Z/O1/E6eo8TcF/h+h3z2pbLoBzYsFFGJu9RsdKO/sTO7OAIJevc75
+	gQqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=JE4s8UrjHaLVtCCXy9u+cplOYD7P3ofq2zXzuUF395E=;
-	b=ZGzxND2ABOVpP/qxCZj6k+u/bMYtFEtNHg/UaYR4K1qSaQyCACVis+2hOFqlYuOoyZ
-	g+J46m9uMUWunxy7PK9GmG/zldiRtwUgOB/48K9W8YUdVGU5kJ3bhhWPgiMzPc6jcT1P
-	9zVlhwYWZ6dEfaeqy4JbTeSn5nMpojtc0txNufONfLZ1OTViONcl4qkJyWKK2ymbdbZx
-	5hl7yjFaN7/wZGM4UIyRw+BpXjvSBJXKHcXRFFCzd4KtuxK7siaYFOcRfPRk5v6ePvD5
-	IKamTmN113I+tx45VIdQMqcDNyXZWRXZP6OzL46GuYP3A6uuV/Hc1eyclUdf5X3j9OXv
-	ikHQ==
-X-Gm-Message-State: AMCzsaVNmQ9Umn7z3sTze4gsxjeeVr2zlJd5R5aCBwHgUNUF7wNzdPIY
-	jVfFbkD9FCodXzRMCzBWrjbqLdDX3nki+PkTpebdVg==
-X-Google-Smtp-Source: ABhQp+SISYfWu+TkwqxC5kwrGN4+HDgWx+V9bkbr9kCzIZmo3p2ldouvTFWS6xJKdsvTArSNRIyLA+y8w3b4ni79Tvc=
-X-Received: by 10.36.189.196 with SMTP id x187mr4681694ite.85.1509479498547;
-	Tue, 31 Oct 2017 12:51:38 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.107.48.205 with HTTP; Tue, 31 Oct 2017 12:51:18 -0700 (PDT)
-X-Originating-IP: [181.220.79.73]
-In-Reply-To: <CAMKF1sp09fUtdT4Wn=CjJ2s4cRs2+38zKQNxkh=XupboXKiy8w@mail.gmail.com>
-References: <20171030173213.16752-1-fabio.berton@ossystems.com.br>
-	<CAMKF1spzjAV6Qd6MDa7M5a=-rse+2nOZoHWoaAp=3ORhQHPrzA@mail.gmail.com>
-	<CAAPZna2QXiR0NiTkpA-2of4jEa+P6OrQ06W6MzVsFgvv_3iyQA@mail.gmail.com>
-	<CAMKF1sp09fUtdT4Wn=CjJ2s4cRs2+38zKQNxkh=XupboXKiy8w@mail.gmail.com>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=ycY4W0AJfUX+t5EvL5XJWe3BkaX+tUbwusn5l6Pj6Ow=;
+	b=hPvIoSx9NvcGKYDFq2reUg/OGlCnzl8c6wGdcJHt0MwpDEEMEDjaEm7jCWqxBjJZWH
+	Nc5bvbT14VPdY4UGX72tw7S5LPwYiOC9OuC1eAv5pF5GZSOOyONUqFomC7vLQoX6qrbK
+	MycUfmWhMZqzWVnAMt8sCqx5iSLZLe09pHu/sfqiVA5WLZ7tZ1gdtpBbZMcusisLAKCp
+	jjEkjzGI7933ZBX08OzDZZ/ykQXDjIf5G5pqFA01AARJTqTa7qewBYL3PFwpkOom5yjg
+	rs/lY8HCFYsbvFBV2uu4Yq1+RHAfNeWSq1qXaweyGPieEOFPko3nvRetmDscd7xfp9Gz
+	XhxQ==
+X-Gm-Message-State: AMCzsaUWv75159hQ/Z8w85BeefwJ9UH5ueuaUJYLabDXC1oxTdD1LtyN
+	/WTneQQdEBJZbF3GqzuBSrulaGPd
+X-Google-Smtp-Source: ABhQp+SVufDr2TPVeWTBHfHyI+foXz9DGv2pCKrr8AZSsY9HJQOdUKhxuok2SDpvBc0ux2C0XEYk0Q==
+X-Received: by 10.233.221.66 with SMTP id r63mr4654640qkf.79.1509479501707;
+	Tue, 31 Oct 2017 12:51:41 -0700 (PDT)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id l1sm1455841qtf.5.2017.10.31.12.51.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 31 Oct 2017 12:51:40 -0700 (PDT)
 From: Fabio Berton <fabio.berton@ossystems.com.br>
-Date: Tue, 31 Oct 2017 17:51:18 -0200
-Message-ID: <CAAPZna2Xz-ErK3gAh0x8xy649kU50dDcnfJshNWLckurLVgvgQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH] arptables: Fix do_install task
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 31 Oct 2017 17:51:22 -0200
+Message-Id: <20171031195122.23729-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.2
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-networking][PATCH v3] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,80 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 19:51:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 31 Oct 2017 19:51:41 -0000
 
-You right, work using oe_runmake install DESTDIR=${D} and DESTDIR is not
-using when compiling.
+We need to run oe_runmake install with DESTDIR variable to install all
+arptables files. Without this the only file installed in package is
+systemd unit.
 
-Thanks
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+---
+ meta-networking/recipes-support/arptables/arptables_git.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-On Tue, Oct 31, 2017 at 5:07 PM, Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index 274a55d91..cec1d1f77 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -23,7 +23,8 @@ inherit systemd
+ 
+ EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+ 
+-do_install_append() {
++do_install() {
++    oe_runmake install DESTDIR=${D}
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${systemd_unitdir}/system
+         install -m 644 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
+-- 
+2.14.2
 
->
-> On Tue, Oct 31, 2017 at 4:24 AM Fabio Berton <
-> fabio.berton@ossystems.com.br> wrote:
->
->> Hi Khem,
->>
->> do_compile task uses these EXTRA_OEMAKE variables too.
->>
->
-> Yes, however the question is do we use DESTDIR when compiling
->
->>
->> On Mon, Oct 30, 2017 at 9:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>
->>> On Mon, Oct 30, 2017 at 10:32 AM, Fabio Berton
->>> <fabio.berton@ossystems.com.br> wrote:
->>> > We need to set DESTDIR variable and run eo_runmake install to install
->>> all
->>>
->>> ^^
->>> typo
->>>
->>> > arptables files. Without this the only file installed in package is
->>> > systemd unit.
->>> >
->>> > Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
->>> > ---
->>> >  meta-networking/recipes-support/arptables/arptables_git.bb | 5 +++--
->>> >  1 file changed, 3 insertions(+), 2 deletions(-)
->>> >
->>> > diff --git a/meta-networking/recipes-support/arptables/arptables_
->>> git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
->>> > index 274a55d91..55903e450 100644
->>> > --- a/meta-networking/recipes-support/arptables/arptables_git.bb
->>> > +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
->>> > @@ -21,9 +21,10 @@ SYSTEMD_SERVICE_${PN} = "arptables.service"
->>> >
->>> >  inherit systemd
->>> >
->>> > -EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
->>> > +EXTRA_OEMAKE += "'DESTDIR=${D}' 'BINDIR=${sbindir}'
->>> 'MANDIR=${mandir}'"
->>> >
->>>
->>> if its needed just during install then we could pass it directly in
->>> oe_runmake in do_install below
->>>
->>> > -do_install_append() {
->>> > +do_install() {
->>> > +    oe_runmake install
->>> >      if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
->>> 'false', d)}; then
->>> >          install -d ${D}${systemd_unitdir}/system
->>> >          install -m 644 ${WORKDIR}/arptables.service
->>> ${D}${systemd_unitdir}/system
->>> > --
->>> > 2.14.2
->>> >
->>> > --
->>> > _______________________________________________
->>> > Openembedded-devel mailing list
->>> > Openembedded-devel@lists.openembedded.org
->>> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
 
