@@ -1,48 +1,22 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 88CEB78276
+Return-Path: <dv@pseudoterminal.org>
+X-Greylist: delayed 316 seconds by postgrey-1.34 at layers.openembedded.org;
+	Tue, 31 Oct 2017 10:16:25 UTC
+Received: from ptmx.org (ptmx.org [178.63.28.110])
+	by mail.openembedded.org (Postfix) with ESMTP id A4ECD782A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 10:02:46 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id p75so21248273wmg.3
+	Tue, 31 Oct 2017 10:16:25 +0000 (UTC)
+Received: from [172.16.1.14] (62-178-118-86.cable.dynamic.surfer.at
+	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id EDDEC55790
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 03:02:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=EwCtkVKn2+inEVgvR0N3tQLJWwbuyoYgnYfTgHfYYGs=;
-	b=UrU5eozyNJ7wbcR4uSia5KzkyIjC/S3+2bSMARQdkHw6ofeqbx2Tc4ufAwO4obER8l
-	+wkMwtm16C9x0MqsHicuxpW8Df7aQLpjM8d8t8OubA46aTWLYW7sFixkj2n5MGFIi7ZT
-	XFc/kNEdYGOHi9XAxaVu8ID8p39pbqKDJqWTIQsVhYpDwEnwba8S9MmxjQz+tosNYmNo
-	PDX/Pp9Ag+K7x7snFNbRiLoCetCp6jTkKgPk9XV7ZlVMHvTRbwXyQqR6b0JAH+Fttao5
-	mtRKavTclKL5gBIKa925XxtHsHV59fPCVafGb+GbEuKfU3/rWgv5YdxyZ6TXz/3WyL4y
-	eZxw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EwCtkVKn2+inEVgvR0N3tQLJWwbuyoYgnYfTgHfYYGs=;
-	b=L8aarR21MxW8PLkb3RjqWZZX61AkXaEA7AhZzy7u4boAPbZ4CX7D2mxZ0W8PvfSJ5h
-	dP9OwoNk0jn6y5/VgBcoRDl2nGRJaisWFruPJoofJcS0D2QG6/ny4gNBsA7FefvR9D99
-	ywy6n23zMVseiK/9UmK1c6Bw+Jz4xgjSMr/+kMDSVe8XSm7KCQDN153wCSgVwpwZuUrH
-	s3324OlyO1HhsFijpmi6c/GHr36+mT4mIzIC7ZtJbYMW3IZM7rSqvvoVPvTRumxph2OQ
-	k8f7iMK93yZocrTb/FPbwzis5UF7GDscAarhbtmDSewrAcE+cjSzyo4f9S5OzfDSm//g
-	TUlg==
-X-Gm-Message-State: AMCzsaW0I2d0DJ0AAKaGnCvQarbbFTUq4VRcY66hJ5yTUUdtX9RJWPrt
-	qkHLLcttHHhTpJgkbaCP9IFMNd2qh94=
-X-Google-Smtp-Source: ABhQp+SNt7waCNUMuF2bHBOQY9+NAkyihDVEUrH0uRw1WZxQA2LzvemivShD0C1RyAVutMFGpNcD8A==
-X-Received: by 10.28.143.212 with SMTP id r203mr1325584wmd.44.1509444167725;
-	Tue, 31 Oct 2017 03:02:47 -0700 (PDT)
-Received: from localhost.localdomain ([90.63.244.31])
-	by smtp.gmail.com with ESMTPSA id u7sm926250wmf.15.2017.10.31.03.02.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Oct 2017 03:02:47 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: openembedded-devel@lists.openembedded.org,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 31 Oct 2017 11:02:45 +0100
-Message-Id: <20171031100245.1868-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.13.2
-Subject: [PATCH] libgpiod: bump version to v0.3.2
+	Tue, 31 Oct 2017 11:11:07 +0100 (CET)
+To: openembedded-devel@lists.openembedded.org
+From: Carlos Rafael Giani <dv@pseudoterminal.org>
+Message-ID: <eb34c8f1-1c8a-f6cf-46ef-8b91159b44d3@pseudoterminal.org>
+Date: Tue, 31 Oct 2017 11:11:06 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
+MIME-Version: 1.0
+Subject: [meta-qt5] Exec format error while building webengine 5.9 (rocko branch)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,43 +29,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 10:02:47 -0000
+X-List-Received-Date: Tue, 31 Oct 2017 10:16:25 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-Bug fix release:
-- correctly handle signal interrupts when polling in gpiod_simple_event_loop()
-- fix the linking order when building with static libraries
-- pass the correct consumer string to gpiod_simple_get_value_multiple() in
-  gpioget
-- fix a line test case: don't use open-drain or open-source flags for input
-  mode
-- fix the flags passed to ar in order to supress a build warning
-- set the last error code in gpiod_chip_open_by_label() to ENOENT if a chip
-  can't be found
+I am having problems building the current WebEngine. Initially, it 
+builds some tools. It seems that it does so by using the cross compiler, 
+and not the host one, which could explain the problem I experience:
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
- meta-oe/recipes-support/libgpiod/libgpiod.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-index c50605775..6aa27ad57 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
- 
- SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
- 
--SRC_URI[md5sum] = "5f9d855352b1a5272cf6f1c2e20689d2"
--SRC_URI[sha256sum] = "6dfd6aeb544e8b7baf484a05c9ae0e67022c109362a41d87005393046b6beacf"
-+SRC_URI[md5sum] = "9c1966bea7dffd59bd099a8b2930e2ea"
-+SRC_URI[sha256sum] = "50c7862428ca90b58672e2475aea66d33a6fc86c6bab1928c0660f3aedf44a37"
- 
--PV = "0.3.1"
-+PV = "0.3.2"
- 
- inherit autotools pkgconfig
- 
--- 
-2.13.2
+Once GN is built:
+
+[321/330] CC base/third_party/superfasthash/superfasthash.o
+[322/330] CC base/third_party/dynamic_annotations/dynamic_annotations.o
+[323/330] AR dynamic_annotations.a
+[324/330] CXX tools/gn/command_clean.o
+[325/330] CXX tools/gn/loader.o
+[326/330] CXX tools/gn/gn_main.o
+[327/330] CXX tools/gn/bundle_data_target_generator.o
+[328/330] CXX tools/gn/desc_builder.o
+[329/330] AR gn_lib.a
+[330/330] LINK gn
+Building gn manually in a temporary directory for bootstrapping...
+Building gn using itself to out/Release...
+
+
+I get this error:
+
+OSError: [Errno 8] Exec format error
+Project ERROR: GN build error!
+
+
+Running "file" on build/src/3rdparty/chromium/tools/gn/out/Release/gn 
+indeed shows that this was built with the wrong compiler:
+
+build/src/3rdparty/chromium/tools/gn/out/Release/gn: ELF 32-bit LSB 
+executable, ARM, EABI5 version 1 (GNU/Linux), dynamically linked
+
+
+So, anybody experienced the same problem?
 
 
