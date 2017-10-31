@@ -1,48 +1,51 @@
-Return-Path: <brgl@bgdev.pl>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 2B9E57824C
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 6A51877E88
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 10:47:03 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id s66so21392044wmf.5
+	Tue, 31 Oct 2017 11:24:35 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id 134so34231755ioo.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 03:47:05 -0700 (PDT)
+	Tue, 31 Oct 2017 04:24:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=VTqAiv3/Jxn+K4XUzRZqzfdwzK2MzIrkwXureJT15nA=;
-	b=HOQ03RRvxJ92k5zx+qJ8ZzL/btR32zxMEKj31aikga0DeiPcE9pawZu080g8heDKtv
-	oA4ZGY/aqfOnlKYb7rttoffZFQBBqssTxaGUAlxjsQSTIcIPdjL6db6EEtlc2nKZCFHV
-	JTisV1/ffIMYE0DcISYTX/yrAe1n7Lho9hh5QXFMKJ1zvkGmtW9udDPcRP3WOuoKI2F+
-	T69MDGKnmFKRj7/gvKcOGTjVbn3OwGHqbr3xB1BmB8ltNQ7CdDYt/01S4ZGCuHOO7wYM
-	umGgUWaFTk7zwGQHQiZmPbwyaI8CmH7DMPMOwmjQnOBA0/0eu0ApLhKGAAfVTKNJbZRr
-	doIg==
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=a1hVUHH0xQ+RpcIpkAOk5zqk19V+yAugCRfoAhTTSLQ=;
+	b=crxY0TrvXCKZ+1PpnT9IZsCYko60sw7846OiP8ZB/gQh7nbxsC27gaNOXVxBnHLNd7
+	4Xt1oZOM8cigdETqXLt9dk/WPG8wr4YTM6dJDmOA36wfjQHz5I/qAW2xAy0ohyO22y7y
+	Qu1clcnTrwKlGqb/jIDlfgUPHoo5kEcH+VoGSP3K7Ur9xs41YzSzkgC0ZE7Pllp8UWfs
+	mJSw367pIQxrQtYoTxvzQUtmxXCwY9tcYCSvrq17mBv/9T0IYuy5ZjeYSJvdyhfVc/ah
+	/99m6/HQunRoDkRh9jI3xvfKVT+DLZwIcW+ES17j36iElUPWe6VZ60BfiiVUWixgXEUw
+	Y1Sw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=VTqAiv3/Jxn+K4XUzRZqzfdwzK2MzIrkwXureJT15nA=;
-	b=aof2yttxcMjPwu4T+hQP6ZQutgjGwBr/NWPwx4l0YHu+FFHJ7bY8x3rgzvpdS3ks9p
-	aS+c6ntvXBijL8Sg46GRIm5RyrvHj4RNuQwSIohiSzfZzrHipGhzQiWQy7oViFvpOlFG
-	8sQViLY3oJBarRYF9ganV0Zlp/HEcpqs8IHASdpOIUPYz/ZgKtBGqgzbDNQ9Qa3lkjeD
-	uV2m9y0jJY0zsv9pTOMqXOmRyHrTalvsxBZngCG2E/EbqeTmtJOUhfCuifDqgKsi3O1H
-	/GHHiQp7czizVnRMArpuIFCz8Z0tknjnWloJGrdmJrGinFiI8hdJSsGc+ORFKYuIHgsM
-	k5Bw==
-X-Gm-Message-State: AMCzsaUTaLJ7Q+2Epa5I5kWwsnwSSyyasmtXUeYZeZFOdrHbY8jLrj7t
-	rKAcUl5U0LqcfkDMxHnJK/gVH+ozfTo=
-X-Google-Smtp-Source: ABhQp+TZb/D02Q68fkiPkeV11V5ewdBeXclbK60ViPfF2viy552Ti+8vhAWuEW8BTgfc/IuX4ko8Mg==
-X-Received: by 10.28.30.2 with SMTP id e2mr484385wme.36.1509446824669;
-	Tue, 31 Oct 2017 03:47:04 -0700 (PDT)
-Received: from localhost.localdomain ([90.63.244.31])
-	by smtp.gmail.com with ESMTPSA id r23sm614929wrc.93.2017.10.31.03.47.03
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 31 Oct 2017 03:47:04 -0700 (PDT)
-From: Bartosz Golaszewski <brgl@bgdev.pl>
-To: openembedded-devel@lists.openembedded.org,
-	Koen Kooi <koen@dominion.thruhere.net>,
-	Martin Jansa <martin.jansa@gmail.com>
-Date: Tue, 31 Oct 2017 11:47:02 +0100
-Message-Id: <20171031104702.2094-1-brgl@bgdev.pl>
-X-Mailer: git-send-email 2.13.2
-Subject: [meta-oe][PATCH] libgpiod: bump version to v0.3.2
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=a1hVUHH0xQ+RpcIpkAOk5zqk19V+yAugCRfoAhTTSLQ=;
+	b=tMU3kvp8JN9uLBVxmR7EEm5m9x+lzVXtGLTKjKGfRH3L0qO3sTBMBUEjjBO1av/d5O
+	m1WOaIxU6+QCkHZ15uL0eO1Dl8/fpxOgYGWuWYra8NLbCbUUgApnL3RnJAmRt794JyI1
+	7MFpF33vWwUWccz39i9BLyDLeRKDZVkfAhMl6UwTBRx5dOrwKFx8IkC2Qtg2HMeCmH2D
+	temkbz/LJzOCYLj1eUYwRidwglIC01Ao2MeFzOX3kk4rGCnhpK9Q1q2AQiNmbgckI4+8
+	Rkr51XOU0hbftAGPNCrs/CN7bGe7QDaUvL4bDadpOlIoVwjuoxztDiqJnmX/EHygIevD
+	kVjA==
+X-Gm-Message-State: AMCzsaXYNO0dKZaMbJI66MtB6cWTuVsZY6Z4N6qBCahOYWxndj+PtwXu
+	+i6LSFEV1FtoZMHF6Mn3UVR2HwpUdJGlZE45XuY6Pw==
+X-Google-Smtp-Source: ABhQp+QCKoGcydKzCyO0do+moylHqVGo1IR7t+S5yQlQ3F7BoimH40Qg7DyedThvraWZ6buupkjbevFxxQcIw4PrGwI=
+X-Received: by 10.107.14.15 with SMTP id 15mr1893093ioo.127.1509449076447;
+	Tue, 31 Oct 2017 04:24:36 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.107.48.205 with HTTP; Tue, 31 Oct 2017 04:24:16 -0700 (PDT)
+X-Originating-IP: [181.220.79.73]
+In-Reply-To: <CAMKF1spzjAV6Qd6MDa7M5a=-rse+2nOZoHWoaAp=3ORhQHPrzA@mail.gmail.com>
+References: <20171030173213.16752-1-fabio.berton@ossystems.com.br>
+	<CAMKF1spzjAV6Qd6MDa7M5a=-rse+2nOZoHWoaAp=3ORhQHPrzA@mail.gmail.com>
+From: Fabio Berton <fabio.berton@ossystems.com.br>
+Date: Tue, 31 Oct 2017 09:24:16 -0200
+Message-ID: <CAAPZna2QXiR0NiTkpA-2of4jEa+P6OrQ06W6MzVsFgvv_3iyQA@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,45 +58,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 10:47:04 -0000
+X-List-Received-Date: Tue, 31 Oct 2017 11:24:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Bug fix release:
-- correctly handle signal interrupts when polling in gpiod_simple_event_loop()
-- fix the linking order when building with static libraries
-- pass the correct consumer string to gpiod_simple_get_value_multiple() in
-  gpioget
-- fix a line test case: don't use open-drain or open-source flags for input
-  mode
-- fix the flags passed to ar in order to supress a build warning
-- set the last error code in gpiod_chip_open_by_label() to ENOENT if a chip
-  can't be found
+Hi Khem,
 
-Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
----
-NOTE: resent due to missing meta-oe tag
+do_compile task uses these EXTRA_OEMAKE variables too.
 
- meta-oe/recipes-support/libgpiod/libgpiod.bb | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
+On Mon, Oct 30, 2017 at 9:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-index c50605775..6aa27ad57 100644
---- a/meta-oe/recipes-support/libgpiod/libgpiod.bb
-+++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
-@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
- 
- SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
- 
--SRC_URI[md5sum] = "5f9d855352b1a5272cf6f1c2e20689d2"
--SRC_URI[sha256sum] = "6dfd6aeb544e8b7baf484a05c9ae0e67022c109362a41d87005393046b6beacf"
-+SRC_URI[md5sum] = "9c1966bea7dffd59bd099a8b2930e2ea"
-+SRC_URI[sha256sum] = "50c7862428ca90b58672e2475aea66d33a6fc86c6bab1928c0660f3aedf44a37"
- 
--PV = "0.3.1"
-+PV = "0.3.2"
- 
- inherit autotools pkgconfig
- 
--- 
-2.13.2
-
+> On Mon, Oct 30, 2017 at 10:32 AM, Fabio Berton
+> <fabio.berton@ossystems.com.br> wrote:
+> > We need to set DESTDIR variable and run eo_runmake install to install all
+>                                                                         ^^
+> typo
+>
+> > arptables files. Without this the only file installed in package is
+> > systemd unit.
+> >
+> > Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+> > ---
+> >  meta-networking/recipes-support/arptables/arptables_git.bb | 5 +++--
+> >  1 file changed, 3 insertions(+), 2 deletions(-)
+> >
+> > diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb
+> b/meta-networking/recipes-support/arptables/arptables_git.bb
+> > index 274a55d91..55903e450 100644
+> > --- a/meta-networking/recipes-support/arptables/arptables_git.bb
+> > +++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+> > @@ -21,9 +21,10 @@ SYSTEMD_SERVICE_${PN} = "arptables.service"
+> >
+> >  inherit systemd
+> >
+> > -EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+> > +EXTRA_OEMAKE += "'DESTDIR=${D}' 'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
+> >
+>
+> if its needed just during install then we could pass it directly in
+> oe_runmake in do_install below
+>
+> > -do_install_append() {
+> > +do_install() {
+> > +    oe_runmake install
+> >      if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true',
+> 'false', d)}; then
+> >          install -d ${D}${systemd_unitdir}/system
+> >          install -m 644 ${WORKDIR}/arptables.service
+> ${D}${systemd_unitdir}/system
+> > --
+> > 2.14.2
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
