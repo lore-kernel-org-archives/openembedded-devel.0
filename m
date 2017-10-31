@@ -1,37 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 6763377DCC
+Return-Path: <fabio.berton@ossystems.com.br>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1DCEF71A32
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 15:03:42 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id l194so20779036qke.13
+	Tue, 31 Oct 2017 15:34:13 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id p1so21216402qtg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 08:03:44 -0700 (PDT)
+	Tue, 31 Oct 2017 08:34:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id:organization;
+	bh=fAo1VMAFmragSbHWaIaG/Mr/YwaXAmEhR3C9ei5uwVE=;
+	b=waA1HjV2PDoKH5egvhRfPVU+LG0VkFm+feRAeYPcN0zuR4liAi0gVFW+VCqwjlQ1oK
+	ehW3AkQ9Fy6d5Y87gmgh18NInPC5en0zZKv068+/+Ps/Hp26pfLCeN56ycvxsOuUjmL9
+	uH48rd1gOgvYLouFxwEsqqfD877ncUAciOsIr5RWzZEAgJT1oosb/8fnu2ntb7+LuKBW
+	lRvSjh0z1tweYUg63F/VUgJ8YIi0LtwldQWhwJRaFHq5E2CE0mTTMWhJF6PgIbU4dkKT
+	EhSckKUhOqjrAVRCv0cU7EKyQSBsTA6qlk47/hFPT4LeKVquVe6QRDSt6rDPheGnwNVN
+	D0zQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=YafMzjttUrDM+ZdlwIZdoOgt+f5o67JCXInOr56PRHA=;
-	b=UIw+zHaOQfeRd2O+eV/qR/bVtWAQTTP4X1MxF5j3vg8/0JOudCCnR6TY/B9OxV/2RU
-	eYwVkax+nkTznAdNnX/FXT6FayqyhVcc0fD4FHvRV6GW0Eut6l5Q250Yv0n3R9iD2r9h
-	yWLh2TKq7Mw1Aq2ivNX04Bxom0kbFk2kQ5kySrrXYTxEczAZKzJxntfHIl7+n+xzV+JZ
-	QStjJdo1VZZPvFBjl4ltRUKxVErBheCJN8B1ve7w6iELPiHHTazj0RicB3N5+4NGMdAn
-	at6vTzxSPqqjGhOh4SmOp8dM5JhId9EVWpouskPNhpR/0PhUKPUEHRtMh7hlcX95q70P
-	bnKA==
-X-Gm-Message-State: AMCzsaUGoPwd5J6gddcaPb1sTA02nigG/FbSNZypNpweiyWcHWPERn3D
-	8inmdh1k0eM+jgITHWuOeCb0X0Ki
-X-Google-Smtp-Source: ABhQp+RgLhMftQrOOeXbG59YRCek0pQLaTpWFIQjzSSKHszoxjQ3nusn21HcAFNDZcnGpvmOnlqrxw==
-X-Received: by 10.55.33.150 with SMTP id f22mr2933043qki.207.1509462223469;
-	Tue, 31 Oct 2017 08:03:43 -0700 (PDT)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id 188sm945865qkm.89.2017.10.31.08.03.42
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 31 Oct 2017 08:03:42 -0700 (PDT)
-From: Derek Straka <derek@asterius.io>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=fAo1VMAFmragSbHWaIaG/Mr/YwaXAmEhR3C9ei5uwVE=;
+	b=UepgOFvv+nhTtdNpBWBLfKo4z63/k9Eh8Dn710m0J6G4j0ZFWvDoQJ+u1yzG8rVCDJ
+	PsD+8CX5PVVk/9Su+GeuFxAIZtrcCg/ud3YUabLNu3NX7FKum9mzn7RmHa60UPNMcUwa
+	W2aExj9EAije3b0edyDi+Ua4jQ6laQHd9MHwR599X/6inkQaLrZC/yKReoyfmU25772O
+	Ow7I2aPy1OoESltP4GXnoKMTka1EbhdkCnoYzse3z6YkuoBp0uDFWAbutYpQb63SOgLG
+	YmAWwYaKwfPEopkxxoPQqsjGgWcQwH3koHOTpd++CRuy9xweLbDCkEBuY4V51bB/ekoa
+	EdkA==
+X-Gm-Message-State: AMCzsaXdDefB+8/G7uCldXSK4O+1lNU15NiOcFSWTBcOVzj46n2+mbnW
+	ob+MMPziwV1F9SglgNr1wWGKcg1x
+X-Google-Smtp-Source: ABhQp+SZim2AUEY5mTSORGYjHwhdwqfPVK0wVbl2WvWmQdHzquJECYwa6ElzcqSXM52fexrQxloL0Q==
+X-Received: by 10.237.63.17 with SMTP id p17mr3534080qtf.235.1509464054611;
+	Tue, 31 Oct 2017 08:34:14 -0700 (PDT)
+Received: from centrium.lab.ossystems ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id
+	a26sm1063718qta.50.2017.10.31.08.34.12
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 31 Oct 2017 08:34:13 -0700 (PDT)
+From: Fabio Berton <fabio.berton@ossystems.com.br>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Oct 2017 11:03:36 -0400
-Message-Id: <1509462216-13065-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] netdata: update to version 1.8.0
+Date: Tue, 31 Oct 2017 13:33:47 -0200
+Message-Id: <20171031153347.18989-1-fabio.berton@ossystems.com.br>
+X-Mailer: git-send-email 2.14.2
+Organization: O.S. Systems Software LTDA.
+Subject: [meta-networking][PATCH v2] arptables: Fix do_install task
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,66 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 15:03:43 -0000
+X-List-Received-Date: Tue, 31 Oct 2017 15:34:14 -0000
 
-Update license checksum for copyright updates
-Rebase existing patch to remove contrib dir from the build
+We need to set DESTDIR variable and run oe_runmake install to install all
+arptables files. Without this the only file installed in package is
+systemd unit.
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
 ---
- .../netdata/netdata/0001-makefile-Do-not-build-contrib-dir.patch    | 6 +++---
- meta-webserver/recipes-webadmin/netdata/netdata_git.bb              | 6 +++---
- 2 files changed, 6 insertions(+), 6 deletions(-)
+ meta-networking/recipes-support/arptables/arptables_git.bb | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
 
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata/0001-makefile-Do-not-build-contrib-dir.patch b/meta-webserver/recipes-webadmin/netdata/netdata/0001-makefile-Do-not-build-contrib-dir.patch
-index 9a3a4a5..6a0d75e 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata/0001-makefile-Do-not-build-contrib-dir.patch
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata/0001-makefile-Do-not-build-contrib-dir.patch
-@@ -11,17 +11,17 @@ Signed-off-by: Khem Raj <raj.khem@gmail.com>
-  1 file changed, 1 deletion(-)
+diff --git a/meta-networking/recipes-support/arptables/arptables_git.bb b/meta-networking/recipes-support/arptables/arptables_git.bb
+index 274a55d91..99d8de90f 100644
+--- a/meta-networking/recipes-support/arptables/arptables_git.bb
++++ b/meta-networking/recipes-support/arptables/arptables_git.bb
+@@ -21,12 +21,13 @@ SYSTEMD_SERVICE_${PN} = "arptables.service"
  
- diff --git a/Makefile.am b/Makefile.am
--index 3ccf82f8..a852e529 100644
-+index 2ea9e40..acb1bd8 100644
- --- a/Makefile.am
- +++ b/Makefile.am
--@@ -52,7 +52,6 @@ SUBDIRS = \
-+@@ -56,7 +56,6 @@ SUBDIRS = \
-  	src \
-  	system \
-  	web \
- -	contrib \
-+ 	tests \
-  	$(NULL)
-  
-- dist_noinst_DATA= \
- -- 
- 2.13.2
+ inherit systemd
  
-diff --git a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-index 1003662..b0f1602 100644
---- a/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-+++ b/meta-webserver/recipes-webadmin/netdata/netdata_git.bb
-@@ -1,15 +1,15 @@
- HOMEPAGE = "https://github.com/firehol/netdata/"
- SUMMARY = "Real-time performance monitoring"
- LICENSE = "GPLv3"
--LIC_FILES_CHKSUM = "file://LICENSE.md;md5=a4a3b650ea3f74269cdfd45a3550e219 \
-+LIC_FILES_CHKSUM = "file://LICENSE.md;md5=95b49e9ea979a337578f13c2a3ab9535 \
-                     file://COPYING;md5=d32239bcb673463ab874e80d47fae504 \
-                    "
+-EXTRA_OEMAKE = "'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
++EXTRA_OEMAKE += "'DESTDIR=${D}' 'BINDIR=${sbindir}' 'MANDIR=${mandir}'"
  
- SRC_URI = "git://github.com/firehol/netdata.git;protocol=https \
-            file://0001-makefile-Do-not-build-contrib-dir.patch \
- "
--SRCREV = "f5fa346a188e906a8f2cce3c2cf32a88ce81c666"
--PV = "1.6.0+git${SRCPV}"
-+SRCREV = "89ed309252981ddd50f697fde4fe93019cb3e652"
-+PV = "1.8.0+git${SRCPV}"
+-do_install_append() {
++do_install() {
++    oe_runmake install
+     if ${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'true', 'false', d)}; then
+         install -d ${D}${systemd_unitdir}/system
+-        install -m 644 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
++        install -m 0755 ${WORKDIR}/arptables.service ${D}${systemd_unitdir}/system
+     fi
+ }
  
- # patch to disable timeout because timeout are not available with actual version
- # of core-utils
 -- 
-2.7.4
+2.14.2
 
 
