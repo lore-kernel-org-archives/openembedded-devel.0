@@ -1,22 +1,48 @@
-Return-Path: <dv@pseudoterminal.org>
-X-Greylist: delayed 316 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 31 Oct 2017 10:16:25 UTC
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id A4ECD782A0
+Return-Path: <brgl@bgdev.pl>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 2B9E57824C
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 10:16:25 +0000 (UTC)
-Received: from [172.16.1.14] (62-178-118-86.cable.dynamic.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id EDDEC55790
+	Tue, 31 Oct 2017 10:47:03 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id s66so21392044wmf.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 11:11:07 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-Message-ID: <eb34c8f1-1c8a-f6cf-46ef-8b91159b44d3@pseudoterminal.org>
-Date: Tue, 31 Oct 2017 11:11:06 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
-MIME-Version: 1.0
-Subject: [meta-qt5] Exec format error while building webengine 5.9 (rocko branch)
+	Tue, 31 Oct 2017 03:47:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=bgdev-pl.20150623.gappssmtp.com; s=20150623;
+	h=from:to:cc:subject:date:message-id;
+	bh=VTqAiv3/Jxn+K4XUzRZqzfdwzK2MzIrkwXureJT15nA=;
+	b=HOQ03RRvxJ92k5zx+qJ8ZzL/btR32zxMEKj31aikga0DeiPcE9pawZu080g8heDKtv
+	oA4ZGY/aqfOnlKYb7rttoffZFQBBqssTxaGUAlxjsQSTIcIPdjL6db6EEtlc2nKZCFHV
+	JTisV1/ffIMYE0DcISYTX/yrAe1n7Lho9hh5QXFMKJ1zvkGmtW9udDPcRP3WOuoKI2F+
+	T69MDGKnmFKRj7/gvKcOGTjVbn3OwGHqbr3xB1BmB8ltNQ7CdDYt/01S4ZGCuHOO7wYM
+	umGgUWaFTk7zwGQHQiZmPbwyaI8CmH7DMPMOwmjQnOBA0/0eu0ApLhKGAAfVTKNJbZRr
+	doIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=VTqAiv3/Jxn+K4XUzRZqzfdwzK2MzIrkwXureJT15nA=;
+	b=aof2yttxcMjPwu4T+hQP6ZQutgjGwBr/NWPwx4l0YHu+FFHJ7bY8x3rgzvpdS3ks9p
+	aS+c6ntvXBijL8Sg46GRIm5RyrvHj4RNuQwSIohiSzfZzrHipGhzQiWQy7oViFvpOlFG
+	8sQViLY3oJBarRYF9ganV0Zlp/HEcpqs8IHASdpOIUPYz/ZgKtBGqgzbDNQ9Qa3lkjeD
+	uV2m9y0jJY0zsv9pTOMqXOmRyHrTalvsxBZngCG2E/EbqeTmtJOUhfCuifDqgKsi3O1H
+	/GHHiQp7czizVnRMArpuIFCz8Z0tknjnWloJGrdmJrGinFiI8hdJSsGc+ORFKYuIHgsM
+	k5Bw==
+X-Gm-Message-State: AMCzsaUTaLJ7Q+2Epa5I5kWwsnwSSyyasmtXUeYZeZFOdrHbY8jLrj7t
+	rKAcUl5U0LqcfkDMxHnJK/gVH+ozfTo=
+X-Google-Smtp-Source: ABhQp+TZb/D02Q68fkiPkeV11V5ewdBeXclbK60ViPfF2viy552Ti+8vhAWuEW8BTgfc/IuX4ko8Mg==
+X-Received: by 10.28.30.2 with SMTP id e2mr484385wme.36.1509446824669;
+	Tue, 31 Oct 2017 03:47:04 -0700 (PDT)
+Received: from localhost.localdomain ([90.63.244.31])
+	by smtp.gmail.com with ESMTPSA id r23sm614929wrc.93.2017.10.31.03.47.03
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Tue, 31 Oct 2017 03:47:04 -0700 (PDT)
+From: Bartosz Golaszewski <brgl@bgdev.pl>
+To: openembedded-devel@lists.openembedded.org,
+	Koen Kooi <koen@dominion.thruhere.net>,
+	Martin Jansa <martin.jansa@gmail.com>
+Date: Tue, 31 Oct 2017 11:47:02 +0100
+Message-Id: <20171031104702.2094-1-brgl@bgdev.pl>
+X-Mailer: git-send-email 2.13.2
+Subject: [meta-oe][PATCH] libgpiod: bump version to v0.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -29,45 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 10:16:25 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Tue, 31 Oct 2017 10:47:04 -0000
 
-I am having problems building the current WebEngine. Initially, it 
-builds some tools. It seems that it does so by using the cross compiler, 
-and not the host one, which could explain the problem I experience:
+Bug fix release:
+- correctly handle signal interrupts when polling in gpiod_simple_event_loop()
+- fix the linking order when building with static libraries
+- pass the correct consumer string to gpiod_simple_get_value_multiple() in
+  gpioget
+- fix a line test case: don't use open-drain or open-source flags for input
+  mode
+- fix the flags passed to ar in order to supress a build warning
+- set the last error code in gpiod_chip_open_by_label() to ENOENT if a chip
+  can't be found
 
+Signed-off-by: Bartosz Golaszewski <brgl@bgdev.pl>
+---
+NOTE: resent due to missing meta-oe tag
 
-Once GN is built:
+ meta-oe/recipes-support/libgpiod/libgpiod.bb | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
 
-[321/330] CC base/third_party/superfasthash/superfasthash.o
-[322/330] CC base/third_party/dynamic_annotations/dynamic_annotations.o
-[323/330] AR dynamic_annotations.a
-[324/330] CXX tools/gn/command_clean.o
-[325/330] CXX tools/gn/loader.o
-[326/330] CXX tools/gn/gn_main.o
-[327/330] CXX tools/gn/bundle_data_target_generator.o
-[328/330] CXX tools/gn/desc_builder.o
-[329/330] AR gn_lib.a
-[330/330] LINK gn
-Building gn manually in a temporary directory for bootstrapping...
-Building gn using itself to out/Release...
-
-
-I get this error:
-
-OSError: [Errno 8] Exec format error
-Project ERROR: GN build error!
-
-
-Running "file" on build/src/3rdparty/chromium/tools/gn/out/Release/gn 
-indeed shows that this was built with the wrong compiler:
-
-build/src/3rdparty/chromium/tools/gn/out/Release/gn: ELF 32-bit LSB 
-executable, ARM, EABI5 version 1 (GNU/Linux), dynamically linked
-
-
-So, anybody experienced the same problem?
+diff --git a/meta-oe/recipes-support/libgpiod/libgpiod.bb b/meta-oe/recipes-support/libgpiod/libgpiod.bb
+index c50605775..6aa27ad57 100644
+--- a/meta-oe/recipes-support/libgpiod/libgpiod.bb
++++ b/meta-oe/recipes-support/libgpiod/libgpiod.bb
+@@ -5,10 +5,10 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=2caced0b25dfefd4c601d92bd15116de"
+ 
+ SRC_URI = "https://www.kernel.org/pub/software/libs/libgpiod/${BP}.tar.xz"
+ 
+-SRC_URI[md5sum] = "5f9d855352b1a5272cf6f1c2e20689d2"
+-SRC_URI[sha256sum] = "6dfd6aeb544e8b7baf484a05c9ae0e67022c109362a41d87005393046b6beacf"
++SRC_URI[md5sum] = "9c1966bea7dffd59bd099a8b2930e2ea"
++SRC_URI[sha256sum] = "50c7862428ca90b58672e2475aea66d33a6fc86c6bab1928c0660f3aedf44a37"
+ 
+-PV = "0.3.1"
++PV = "0.3.2"
+ 
+ inherit autotools pkgconfig
+ 
+-- 
+2.13.2
 
 
