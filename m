@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 1754A7782F
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8D25E70101
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 16:20:09 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id l194so21114706qke.13
+	Tue, 31 Oct 2017 16:46:20 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id f8so21531977qta.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Oct 2017 09:20:11 -0700 (PDT)
+	Tue, 31 Oct 2017 09:46:21 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4X9eJu+QRpIXx2WdRdpVmbjqzjJdTAk83B/u1oY4MGg=;
-	b=Js4fjp8ALqowJqevccZ9sD1P2PKDXPNvYjFxTnzEhCvj25g8Kzyvs87oLz/ZRCY78r
-	VWXJyZRZlGRk7jX5tOtRKaHkmaIgA1KVgy/4f3b5SnBFHMPN3A4gnsYCCLPAUqaDivwm
-	tD3BA84G2E0ja1DqUwuyw0vsCqZNMMbME/c32/sPDfnAXwQRJaNdyVL9NA2dpvlKpex9
-	YTHkaHsIlf+33fnU7qXB78btZhT8zfHPZIIJeFqbJRU/XADGHdCSivqz30dncO8TzGiC
-	gnAYJ/c9fu8VEUiNckgjhbZvMNxJ6wUaHFTM6KScKAFH4qhgc9fAgtYaw/S4Pn1ep+PI
-	Bp6Q==
-X-Gm-Message-State: AMCzsaUJ85xkGAjJehhev2E3FVkfr1ITsDu1W5YHH+wzsIxwIhU/s7om
-	LSoQjnT8VaaXGHB22oDrucCe+0Bx
-X-Google-Smtp-Source: ABhQp+S0KxpIm2xNg9haUPU+FTkEJh8zRVs4KqqLUBuqQEMq5dXXMrrzgclXApFffMvdhnTCQQw1ZQ==
-X-Received: by 10.55.136.67 with SMTP id k64mr3658437qkd.26.1509466810608;
-	Tue, 31 Oct 2017 09:20:10 -0700 (PDT)
+	bh=pCK7gEfPS+E4GKxgyFHHlqxP4QeofognVYj/pClO2ac=;
+	b=W1Knw9pZXQtANmQBXRvLcmyODtPMmrmbsMga9PfoOfhlcICcDe0V8+i3fbGxZhqDJ+
+	M3uxLLi4FhIdH2XrGZWUYrLHh8x2Pmzenq+H+rvtltw3vYkGYTqeW8yN4+lTjumMMy4c
+	jELG5d+LrLg2sXem4gXhM8DnmrxoHQHAz73delRpdR2yPu5/TEqM04yf5++0oWAim+px
+	a9zkdZ4szaq4bs6y0qEO/3f3ileDKAO7GveFJrB+OcW1O8xgUF6nLB/CaENWkeaD7qIh
+	j9u1WyAMdNe2T6OVB2xSg5vGiPm72b2u9xipEgH3WwtwHVKSnW6BOXnPpENKPf9Oh9N0
+	F9OA==
+X-Gm-Message-State: AMCzsaV3O2lHHYTn0YHYkIaO7TLBL1AGQmRhRIV35zcaps6+LIlQ4yDi
+	pxp7FGXCv+R59pdaWWrmK9moaUk/
+X-Google-Smtp-Source: ABhQp+Tt61BIRTT5SXatZlWUFe62od5scA4Kz+Kv1ylvj+4oi67KeH3+si8ROs8i0IL0o56UX+ER7A==
+X-Received: by 10.200.35.42 with SMTP id a39mr3940383qta.9.1509468381112;
+	Tue, 31 Oct 2017 09:46:21 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	t93sm1076071qtd.45.2017.10.31.09.20.09
+	b72sm1182602qka.26.2017.10.31.09.46.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 31 Oct 2017 09:20:10 -0700 (PDT)
+	Tue, 31 Oct 2017 09:46:20 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Oct 2017 12:20:03 -0400
-Message-Id: <1509466803-14445-1-git-send-email-derek@asterius.io>
+Date: Tue, 31 Oct 2017 12:46:12 -0400
+Message-Id: <1509468372-29386-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyusb: update to version 1.0.2
+Subject: [meta-python][PATCH] python-ply: update to use the pypi class
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,59 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Oct 2017 16:20:11 -0000
-
-Update license checksum for copyright year update
+X-List-Received-Date: Tue, 31 Oct 2017 16:46:20 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pyusb.inc                | 6 +++---
- .../python/{python-pyusb_1.0.0b2.bb => python-pyusb_1.0.2.bb}       | 2 +-
- .../python/{python3-pyusb_1.0.0b2.bb => python3-pyusb_1.0.2.bb}     | 2 +-
- 3 files changed, 5 insertions(+), 5 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pyusb_1.0.0b2.bb => python-pyusb_1.0.2.bb} (56%)
- rename meta-python/recipes-devtools/python/{python3-pyusb_1.0.0b2.bb => python3-pyusb_1.0.2.bb} (55%)
+ meta-python/recipes-devtools/python/python-ply_3.10.bb | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyusb.inc b/meta-python/recipes-devtools/python/python-pyusb.inc
-index af20109..30bbe85 100644
---- a/meta-python/recipes-devtools/python/python-pyusb.inc
-+++ b/meta-python/recipes-devtools/python/python-pyusb.inc
-@@ -1,10 +1,10 @@
- SUMMARY = "PyUSB provides USB access on the Python language"
- HOMEPAGE = "http://pyusb.sourceforge.net/"
+diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+index 8e61efa..9d019ae 100644
+--- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
++++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+@@ -5,13 +5,7 @@ SECTION = "devel/python"
  LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=50d46bda6248a0b4a46a6d59a66ee08e"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=51691ed11cc2c7ae93e383f60ed49b0f"
- DEPENDS += "libusb1"
+ LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
  
--SRC_URI[md5sum] = "bc12e83ff3ef1045d4306d13a9955fc1"
--SRC_URI[sha256sum] = "14ec66077bdcd6f1aa9e892a0a35a54bb3c1ec56aa740ead64349c18f0186d19"
-+SRC_URI[md5sum] = "862b56452c64948c787ad8ef9498590b"
-+SRC_URI[sha256sum] = "4e9b72cc4a4205ca64fbf1f3fff39a335512166c151ad103e55c8223ac147362"
+-SRCNAME = "ply"
+-
+-SRC_URI = "https://files.pythonhosted.org/packages/source/p/${SRCNAME}/${SRCNAME}-${PV}.tar.gz"
+-
+ SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
+ SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
  
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-pyusb_1.0.0b2.bb b/meta-python/recipes-devtools/python/python-pyusb_1.0.2.bb
-similarity index 56%
-rename from meta-python/recipes-devtools/python/python-pyusb_1.0.0b2.bb
-rename to meta-python/recipes-devtools/python/python-pyusb_1.0.2.bb
-index bb73d9f..99a795b 100644
---- a/meta-python/recipes-devtools/python/python-pyusb_1.0.0b2.bb
-+++ b/meta-python/recipes-devtools/python/python-pyusb_1.0.2.bb
-@@ -1,2 +1,2 @@
--inherit distutils
-+inherit setuptools
- require python-pyusb.inc
-diff --git a/meta-python/recipes-devtools/python/python3-pyusb_1.0.0b2.bb b/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
-similarity index 55%
-rename from meta-python/recipes-devtools/python/python3-pyusb_1.0.0b2.bb
-rename to meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
-index 813e6f0..1ecede7 100644
---- a/meta-python/recipes-devtools/python/python3-pyusb_1.0.0b2.bb
-+++ b/meta-python/recipes-devtools/python/python3-pyusb_1.0.2.bb
-@@ -1,2 +1,2 @@
--inherit distutils3
-+inherit setuptools3
- require python-pyusb.inc
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+-inherit setuptools
++inherit pypi setuptools
 -- 
 2.7.4
 
