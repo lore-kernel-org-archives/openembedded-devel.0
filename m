@@ -1,50 +1,53 @@
 Return-Path: <joe@deserted.net>
-Received: from mail-io0-f194.google.com (mail-io0-f194.google.com
-	[209.85.223.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 37A656FFC7
+Received: from mail-io0-f182.google.com (mail-io0-f182.google.com
+	[209.85.223.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D12B6FFC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Nov 2017 13:23:44 +0000 (UTC)
-Received: by mail-io0-f194.google.com with SMTP id p186so5924594ioe.12
+	Wed,  1 Nov 2017 13:23:45 +0000 (UTC)
+Received: by mail-io0-f182.google.com with SMTP id e89so5931778ioi.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Nov 2017 06:23:45 -0700 (PDT)
+	Wed, 01 Nov 2017 06:23:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=deserted-net.20150623.gappssmtp.com; s=20150623;
-	h=sender:from:to:subject:date:message-id;
-	bh=TkJdJgiYNhmiywBWomaF28y91YSa8FNv6RqpLfFIFuE=;
-	b=Ic4WPjft3TiEmT48yrvpb7WQKbY8eNKALfQdMa5xo8+jp5FkecErITQ7mh7lwveiFk
-	lhSRqSjMjFRvE8JRrkoElWdpk1r6DdzrvMMclpSI+1ia0aSKlKZUOeB0rMZ8dWkb+LtB
-	VpZ3sb+BSI/oRolo2ikbeRrkg0tXVCddF591Y3t/TtcbOnuupsGrHoEBNBINpxJb4Z3D
-	6fB8oUkj7TRMsD21UqpISDGgiSmBc+9BNIFOoeV2vTocZAN8BeVwQJ/m3R13gtysux/K
-	canaGP8i/aR75HJ8jZAXXFaIHMpfu2GUJNnjpPuAwkNI4/tq29Cq52PmmdpQaBWV9TA8
-	Z6Dg==
+	h=sender:from:to:subject:date:message-id:in-reply-to:references;
+	bh=MzsQBZ1hxD6wEp8NqTnLjbBXG/3JtSMssc1HpLZSjX0=;
+	b=U/9OtDx/6kC9F6LX+8a3fvJC/ROXD/WMZWv76JaYBmIiT6a9GfH9BLJzKDbSaSt61v
+	H+Xsgz47GdOr6/8oIMzRYBOmz6z7yFfU57bHqxh5iVyzkga14DCHG65flqne3wWC28ax
+	XIXmhV5xkxCdnKQSrqpHcTujtjy549cSRjInl2aBiO1Zhu7Wd11+gKxeLh7dH5gSlWic
+	qx4T7cCorwqBNwYK8DpkHI80GEiyz7bkkvlTpHtS3DpdJngtLSYYeAmTO3yQj+dHMbne
+	xNn0wUd7U+A9ALGScQjvd2nKUHZ8hq/o2OKq/LmJ5VXBZ7wn9SNbN7VrZ97YgP9G2XCu
+	8HSw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:sender:from:to:subject:date:message-id;
-	bh=TkJdJgiYNhmiywBWomaF28y91YSa8FNv6RqpLfFIFuE=;
-	b=JM4sVKrUzhQEyAgkR2U1xuxN+ir193Y3fYbBpGpy1s1Ffa9YxJ0i4jjp7giy3Y56+N
-	tp3Edg7D+yCNfkLpvsWqlq/JFceW+WtnzfMssOsSZabrqxKIYJ0XLYzcbpXivegOplXt
-	bGwGXGY7Fwpq77Du0PhuDH+6lDJdekM8nqxAUZhgg48GxBb7tmIPG0ZjnIO+8o/VJQxq
-	lLV/5rbhpAFVFvTJcaM5M1rDMkGduHxoSxkWJgYu7dYsog0PP7sqOB60pm4CQqniWdag
-	qldreeRCwKTybwzs6vnilwFoG67S8BbQ39zWfpmJXK9LeVA5h6R4SIfOvbWjoXNJy6xV
-	tj8g==
-X-Gm-Message-State: AMCzsaUh83fVGd5qnuLeqVycUNuS+E6xLRlVS5/xspQoO8Qt5Ki0jxz8
-	MMTVt81L18IMMLQj8Ah/IDHyv8Bx
-X-Google-Smtp-Source: ABhQp+SqLf8/01XnzvlVYh8ZDPL8TpE35AqQA5YOivHQp6XdHvWMA4upsIMZLhyK53YCb758HjiWbQ==
-X-Received: by 10.107.17.209 with SMTP id 78mr6895874ior.247.1509542624711;
-	Wed, 01 Nov 2017 06:23:44 -0700 (PDT)
+	h=x-gm-message-state:sender:from:to:subject:date:message-id
+	:in-reply-to:references;
+	bh=MzsQBZ1hxD6wEp8NqTnLjbBXG/3JtSMssc1HpLZSjX0=;
+	b=tr+Vp/K9j8ZFUZFWfteba4h1JwD/xxymv3uhy7jHBDccR0RHNgem/5uxAG71XvLZ7T
+	vmgeaAfnM9yMpHCg/AsmsHVWg8m3O6gx6Zu2eG4TFHXNNa8rvYnhH6PN5o80TvHBcyTw
+	nsv+A/ScvLFao/U9j4xf2dIj5xlZ9mjuOTsCnYaHTQ8DTJz5O96E9lLmL8X6kYj9ciTG
+	73p2ehgZvwbpNQTSVGBFqIxlpJFjCKRX3KJLldspedt1eQqmyzMryuxAsq7tY5Ee49ik
+	We5axOM0G9QImaIliv9+qYY4GGhxSjk9vdXrWtjVDHRqPvKoSE0CrjlyWpqo8kKyxwjO
+	BrIA==
+X-Gm-Message-State: AMCzsaWo6GIHEKrsn1zx36OF1iuFK0xhDdsriB/dMHVMxmZtNvmbY0sa
+	FNrB7XegR0vFIbRkU5oniTurHe8/
+X-Google-Smtp-Source: ABhQp+SwjShuzls0HUuJpiz4Aa1kUueW0iJDw3mcHi5Be83jll+hL4xGthGTgubsYNMpfXIGL9Bmcw==
+X-Received: by 10.107.62.65 with SMTP id l62mr7354007ioa.153.1509542625640;
+	Wed, 01 Nov 2017 06:23:45 -0700 (PDT)
 Received: from mir.deserted.net (23-233-29-148.cpe.pppoe.ca. [23.233.29.148])
 	by smtp.gmail.com with ESMTPSA id
-	d129sm256232ioe.1.2017.11.01.06.23.43
+	d129sm256232ioe.1.2017.11.01.06.23.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 Nov 2017 06:23:43 -0700 (PDT)
+	Wed, 01 Nov 2017 06:23:45 -0700 (PDT)
 Sender: Joe MacDonald <joe@deserted.net>
 From: Joe MacDonald <joe_macdonald@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Nov 2017 09:23:36 -0400
-Message-Id: <1509542622-20015-1-git-send-email-joe_macdonald@mentor.com>
+Date: Wed,  1 Nov 2017 09:23:37 -0400
+Message-Id: <1509542622-20015-2-git-send-email-joe_macdonald@mentor.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-networking][PATCH v2 0/6] meta-networking patchwork cleanup
+In-Reply-To: <1509542622-20015-1-git-send-email-joe_macdonald@mentor.com>
+References: <1509542622-20015-1-git-send-email-joe_macdonald@mentor.com>
+Subject: [meta-networking][PATCH v2 1/6] ddclient: new package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,115 +60,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Nov 2017 13:23:44 -0000
+X-List-Received-Date: Wed, 01 Nov 2017 13:23:45 -0000
 
-New in v2:
+From: "Kinsella, Ray" <ray.kinsella@intel.com>
 
-   - Correctly installed persistent file in ddclient recipe
-   
-   - Added commit hash to PV for lksctp-tools
+Adding the package ddclient. DDClient updates Dynamic DNS servers with an IP address.
+Recipe is based on the original OE recipe found here.
 
-   - Merged freediameter recipe updates from meta-security, once this has
-     settled, I'll follow up with a patch to remove freediameter from
-     meta-security
+http://cgit.openembedded.org/openembedded/tree/recipes/ddclient/ddclient_3.6.3.bb
 
-v1:
+with modifications based on the recipe at:
 
-  When I started comparing the state of meta-networking/master to
-  master-next and to patchwork's own view of pending meta-networking
-  patches I found some disconnects.  So I've been chipping away at this
-  for the last few days, trying to bring everything in sync.
+https://github.com/cshoredaniel/meta-cshored/blob/master/recipes-connectivity/ddclient/ddclient_3.8.3.bb
 
-  I've rejected/accepted the patches in patchwork that I was able to
-  verify have either been rejected or merged already.
+DDClient version has been updated to 3.8.3.
 
-  ddclient died on the vine for no particular reason, so I refreshed it
-  and added the persistence support as noted in the patch itself.
-
-  Following that was Jackie's update to include freediameter, but it
-  depended on the currently-broken lksctp-tools, so I took a stab at
-  fixing that.
-
-  There was a pending update to bridge-utils for using the xtools AR, but
-  that needed rework, so I did the rework and updated bridge-utils at the
-  same time.
-
-  Finally, most of openssl-no-weak-cyphers was thrown away for good
-  reason, but two of the patches still made sense to include in
-  meta-networking, IMO, with just some minor rework, so I did that too.
-
-  Here's the report:
-
-
-Jackie Huang (2):
-  freediameter: add new recipe
-  net-snmp: support openssl without 3des
-
-Joe MacDonald (2):
-  lksctp-tools: update and remove from blacklist
-  bridge-utils: update to v1.6
-
-Kai Kang (1):
-  stunnel: fix compile error when openssl disable des support
-
-Kinsella, Ray (1):
-  ddclient: new package
-
- .../recipes-daemons/ddclient/ddclient_3.8.3.bb     |  45 ++++
- .../recipes-daemons/ddclient/files/ip-up           |   4 +
- .../recipes-daemons/ddclient/files/persistent      |   1 +
- ...murhash-algorithm-with-Robert-Jenkin-s-ha.patch | 223 ++++++++++++++++++
- .../freediameter/files/freeDiameter.conf           | 250 +++++++++++++++++++++
- .../freediameter/files/freediameter.init           |  72 ++++++
- .../freediameter/files/freediameter.service        |  11 +
- .../freediameter/files/install_test.patch          |  22 ++
- .../freediameter/files/pass-ptest-env.patch        |  72 ++++++
- .../recipes-protocols/freediameter/files/run-ptest |  11 +
- .../freediameter/freediameter_1.2.1.bb             | 136 +++++++++++
- .../net-snmp/net-snmp-fix-for-disable-des.patch    |  32 +++
- .../recipes-protocols/net-snmp/net-snmp_5.7.3.bb   |   4 +-
- .../recipes-support/bridge-utils/bridge-utils.inc  |  28 ---
- ...ld-error-out-correctly-if-a-submake-fails.patch |  69 ------
- ...idge-fix-some-build-time-warnings-fcntl.h.patch |  64 ------
- ...idge-fix-some-build-time-warnings-errno.h.patch |  46 ----
- ...dd-missing-include-s-fix-build-against-mu.patch |  47 ----
- ...uild-don-t-ignore-CFLAGS-from-environment.patch |  29 +--
- ...ridge-Modifying-the-AR-to-cross-toolchain.patch |  51 +++++
- ...5-check-error-returns-from-write-to-sysfs.patch |  87 -------
- ...5-fix-error-message-for-incorrect-command.patch |  33 ---
- ...utils-1.5-fix-incorrect-command-in-manual.patch |  33 ---
- .../bridge-utils/bridge-utils/kernel-headers.patch |  29 ++-
- .../bridge-utils/bridge-utils_1.5.bb               |  16 --
- .../bridge-utils/bridge-utils_1.6.bb               |  35 +++
- .../lksctp-tools/lksctp-tools_1.0.17.bb            |  21 +-
- .../stunnel/stunnel/fix-openssl-no-des.patch       |  54 +++++
- .../recipes-support/stunnel/stunnel_5.35.bb        |   4 +-
- 29 files changed, 1062 insertions(+), 467 deletions(-)
+Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
+Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
+---
+ .../recipes-daemons/ddclient/ddclient_3.8.3.bb     | 45 ++++++++++++++++++++++
+ .../recipes-daemons/ddclient/files/ip-up           |  4 ++
+ .../recipes-daemons/ddclient/files/persistent      |  1 +
+ 3 files changed, 50 insertions(+)
  create mode 100644 meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
  create mode 100644 meta-networking/recipes-daemons/ddclient/files/ip-up
  create mode 100644 meta-networking/recipes-daemons/ddclient/files/persistent
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/Replace-murmurhash-algorithm-with-Robert-Jenkin-s-ha.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/freeDiameter.conf
- create mode 100755 meta-networking/recipes-protocols/freediameter/files/freediameter.init
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/freediameter.service
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/install_test.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/pass-ptest-env.patch
- create mode 100644 meta-networking/recipes-protocols/freediameter/files/run-ptest
- create mode 100644 meta-networking/recipes-protocols/freediameter/freediameter_1.2.1.bb
- create mode 100644 meta-networking/recipes-protocols/net-snmp/net-snmp/net-snmp-fix-for-disable-des.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils.inc
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/0001-build-error-out-correctly-if-a-submake-fails.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/0002-libbridge-fix-some-build-time-warnings-fcntl.h.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/0003-bridge-fix-some-build-time-warnings-errno.h.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/0004-libbridge-add-missing-include-s-fix-build-against-mu.patch
- create mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/0006-libbridge-Modifying-the-AR-to-cross-toolchain.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-check-error-returns-from-write-to-sysfs.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-error-message-for-incorrect-command.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils/bridge-utils-1.5-fix-incorrect-command-in-manual.patch
- delete mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils_1.5.bb
- create mode 100644 meta-networking/recipes-support/bridge-utils/bridge-utils_1.6.bb
- create mode 100644 meta-networking/recipes-support/stunnel/stunnel/fix-openssl-no-des.patch
 
+diff --git a/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+new file mode 100644
+index 0000000..f4ef536
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
+@@ -0,0 +1,45 @@
++SECTION = "net/misc"
++DESCRIPTION = "Ddclient is a Perl client used to update dynamic DNS entries for accounts on Dynamic DNS Network Services"
++HOMEPAGE = "http://ddclient.sourceforge.net/"
++LICENSE = "GPLv2"
++
++SRC_URI = "\
++    ${SOURCEFORGE_MIRROR}/ddclient/ddclient-${PV}.tar.bz2 \
++    file://ip-up"
++
++LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
++
++RDEPENDS_${PN} = "\
++    perl-module-getopt-long \
++    perl-module-sys-hostname \
++    perl-module-io-socket \
++    perl-module-vars \
++    perl-module-overload \
++    perl-module-overloading \
++    perl-module-config \
++    perl-module-integer \
++    perl-module-exporter-heavy \
++    perl-module-symbol \
++    perl-module-selectsaver \
++    bash \
++    perl \
++    libio-socket-ssl-perl"
++
++do_install() {
++    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient ${D}${sysconfdir}/init.d ${D}${sysconfdir}/default/persistent
++    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d ${D}${docdir}/ddclient
++    install -m 755 ${S}/ddclient ${D}${sbindir}
++    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/ddclient.conf
++    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/ddclient
++    install -m 0644 ${WORKDIR}/persistent ${D}/${sysconfdir}/default/persistent/50_ddclient
++    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g' ${S}/sample-etc_rc.d_init.d_ddclient > ${S}/rc_init
++    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
++    install ${S}/README* ${D}${docdir}/ddclient
++    install ${S}/COPY* ${D}${docdir}/ddclient
++    install ${S}/sample* ${D}${docdir}/ddclient
++}
++
++CONFFILES_${PN} = "${sysconfdir}/ddclient/ddclient.conf"
++
++SRC_URI[md5sum] = "3b426ae52d509e463b42eeb08fb89e0b"
++SRC_URI[sha256sum] = "d40e2f1fd3f4bff386d27bbdf4b8645199b1995d27605a886b8c71e44d819591"
+diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up b/meta-networking/recipes-daemons/ddclient/files/ip-up
+new file mode 100644
+index 0000000..4411db9
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
+@@ -0,0 +1,4 @@
++#!/bin/sh
++
++logger -t ddclient $PPP_IFACE $PPP_LOCAL
++ddclient -daemon=0 -syslog -use=if -if=$PPP_IFACE >/dev/null 2>&1
+diff --git a/meta-networking/recipes-daemons/ddclient/files/persistent b/meta-networking/recipes-daemons/ddclient/files/persistent
+new file mode 100644
+index 0000000..b721272
+--- /dev/null
++++ b/meta-networking/recipes-daemons/ddclient/files/persistent
+@@ -0,0 +1 @@
++l root root 0644 /etc/ddclient.conf /var/persistent/etc/ddclient.conf
 -- 
 2.7.4
 
