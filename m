@@ -1,50 +1,81 @@
-Return-Path: <armccurdy@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 72CBF77BC1
+Return-Path: <MANJUKUM@xilinx.com>
+Received: from NAM01-BN3-obe.outbound.protection.outlook.com
+	(mail-bn3nam01on0061.outbound.protection.outlook.com [104.47.33.61])
+	by mail.openembedded.org (Postfix) with ESMTP id D7FCE71E4B
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Nov 2017 22:08:47 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id a8so2997255pfc.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Nov 2017 15:08:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ES5SXPdKJWVLo+N9i238JGbeVfd2moeyOj/z7m+S/DU=;
-	b=kko+ob+J8sdUqqMYbY8mKtZ3/PTgNNfWKXCE6rZ6eohzwTIltUIfhshVXKtoat0Hbb
-	gdwfp7hpThkQwge4JtInhbmHuDxUxc3amDjmA2Fc76MbrHCZXfs7IBSPSu75xI2MFJF8
-	HidJw6+CIr7EpBvfa1ApyachTKpCNaOsiVMR2leUYH2U4KqkGKeO87P41F47g0dxxoGc
-	O83J3pFS+0iZRGsSYaHUBaroChapObkfiJcTyW/XV1iyGxwr+Oql4kB3xJ4cYkT9uRU+
-	f1JiuWXBcsyf8E9+0zXe6DF+gwMH3FRayTOdibXdtdFwNhexDs0GWqqUw9eShhIexxxz
-	01zw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=ES5SXPdKJWVLo+N9i238JGbeVfd2moeyOj/z7m+S/DU=;
-	b=NW2dLNS/A+GUAK8/HDfqsCirAYNb8ZhBt3weQUWQU7rXx9S+tiWfnklfy2HnYE7Bd1
-	AjVVjbKFyLEQyg3I61Enxp/gsuLWcOrK0MFYM3p1s6f4Xrfh4ZbGVXPwYsNUoZp9z5VK
-	/t6ZXVBjJfIDHw52VJgJzt1UOmD8wGsi3iAfgbYEPM4w2CdbCn6nrL6E6HLjXGqYr+16
-	4NF59n3XDdvsSx+z0C/bDEsFY4Z+N+N8Aun0QaQM0VyD94pJj0niQXuSTuS1MFTMjAva
-	6FxlIOr7eo+lWpFN0kxkWGsMqTiGXbjxJy5OQLJHpiCmP1m8Cx3hSt18fAHtr3HMqj03
-	8mAw==
-X-Gm-Message-State: AMCzsaXBMh+u2pz0/s1zxb6oOR5HAQniVjK5cMl/s8gO8ivQyVhBd9eC
-	rizOyO0VpHJIh7/H8XtT6rvq0g==
-X-Google-Smtp-Source: ABhQp+Q9tshaJ7BYZrJ0h3mO77KsdbqdvaWcvBLEt5C9dAq2UK/nzRBbSok6APBS7lPjJc2Sbflh3A==
-X-Received: by 10.98.217.78 with SMTP id s75mr1395576pfg.40.1509574128125;
-	Wed, 01 Nov 2017 15:08:48 -0700 (PDT)
-Received: from e6520.guest-wifi.scl.liberty.com ([4.16.80.121])
-	by smtp.gmail.com with ESMTPSA id
-	i187sm2613991pfc.96.2017.11.01.15.08.46
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 Nov 2017 15:08:47 -0700 (PDT)
-From: Andre McCurdy <armccurdy@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Nov 2017 15:08:37 -0700
-Message-Id: <1509574117-5004-2-git-send-email-armccurdy@gmail.com>
-X-Mailer: git-send-email 1.9.1
-In-Reply-To: <1509574117-5004-1-git-send-email-armccurdy@gmail.com>
-References: <1509574117-5004-1-git-send-email-armccurdy@gmail.com>
-Subject: [meta-oe][PATCH 2/2] iksemel: reinstate recipe with build fixes and update 1.4 -> 1.5
+	Wed,  1 Nov 2017 22:37:58 +0000 (UTC)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
+	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
+	bh=2JoP9U+7CgTw0Vix1ALVebBmuFE5di8N33XI56pByEE=;
+	b=zVzWaIKqv+BzjrLuHJ15oZmo+bSBit+fpCLkg16bim35aSJv4snCl2zaYXeAh3K/T4Qdu0wnXALhYBG713UKUmeaoGW1nCYng4t6Z5oiinY4RrXd8pKsmIR1yhSTktJWZ32arVlybkjJkLFUonGZVp1BrKcD1VmYmPCkUNk1o0Q=
+Received: from BL2PR02MB2163.namprd02.prod.outlook.com (10.167.97.25) by
+	BL2PR02MB2163.namprd02.prod.outlook.com (10.167.97.25) with Microsoft
+	SMTP Server (version=TLS1_2,
+	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
+	15.20.178.6; Wed, 1 Nov 2017 22:04:36 +0000
+Received: from BL2PR02MB2163.namprd02.prod.outlook.com
+	([fe80::a426:106c:5e1:52a6]) by BL2PR02MB2163.namprd02.prod.outlook.com
+	([fe80::a426:106c:5e1:52a6%13]) with mapi id 15.20.0178.014;
+	Wed, 1 Nov 2017 22:04:36 +0000
+From: Manjukumar Harthikote Matha <MANJUKUM@xilinx.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Thread-Topic: [oe] [meta-oe][PATCH v2] whetstone_1.2.bb: Add whetstone
+	benchmark
+Thread-Index: AQHTTcTnSWgf4HU48Um4S+4IlIkgC6MAHvpw
+Date: Wed, 1 Nov 2017 22:04:35 +0000
+Message-ID: <BL2PR02MB216333B40F256CAAE56FFCDAB95F0@BL2PR02MB2163.namprd02.prod.outlook.com>
+References: <1508957346-6324-1-git-send-email-manjukumar.harthikote-matha@xilinx.com>
+	<CA+chaQcB-cw8tRBPoVoGq0Dn54Czh7RMuHpSFRcHq=VgMWt08g@mail.gmail.com>
+In-Reply-To: <CA+chaQcB-cw8tRBPoVoGq0Dn54Czh7RMuHpSFRcHq=VgMWt08g@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+authentication-results: spf=none (sender IP is )
+	smtp.mailfrom=MANJUKUM@xilinx.com; 
+x-originating-ip: [149.199.62.254]
+x-ms-publictraffictype: Email
+x-microsoft-exchange-diagnostics: 1; BL2PR02MB2163;
+	6:J+mtkH6AHazo8e1RkFTDoLIyU60M6GTlYtJ9xqOzF15ELE6UfiwOEv3VcpfCJykPeGFSv3xKpaLxin8zaI+CmPEAwx7rT/c4meEhqwEdOj27oGNlfLguxdkJwpCL4hQ/JSdleib5ZRX+teJD7aysx8lkZqPU5O6OkCUgC4wCdzbdyUf1XBbjrU7xIwwTWkmOLuA5xG4CeOHgQ2Q/iqWOdUfgxivWyeqU1TXVncO4shUP6ku4EZYKon5+NKb3wnqaa0HWiHzbp/wshgOLmYsAMFtlheHKCOePRXdOIMDp+dPeTBYz7vO+8V0cJYKa7kxCzoX8ugX2gjLujqSAmG0iOuTk1RhERa1G+c3FHBYI3Pg=;
+	5:Etqk3Si0XlmO5PDMMqxyg8PVZPZf/wsHSiFMRYSWOC4LcuHww0pdxCewEJCa9KLGBSDO4cEm/vFl4Uj94CLg2UrRd4icWsh8v/p+UNiQ/CWj8z4PG0WIyD61CsoMIMLjlpW7g4NTmk1bYaOnCVs6+gJyD1VJE0R93fgS5fV7ZKE=;
+	24:CJcmOfD4gSQ9DbxlrZZvy0nEe5hEzCtFy9kREuWQ8MaFU5ObFL6CWvD2PcfwKDNNXWSBirfrUrcQEjYnjPLBgzRCZbW21POE8xoD5AObcGw=;
+	7:GqARKY9uIjDKIWLU/XzdMjlcgxSbT6Zv/JBCo9xPqkPUrv+4VLawz4kiyeWSdAVekDhj7d/sCDYdY0ap7DgxXZo7jFuvYtzxv6QO9oxdC13Ns2aql84GgZvPei/0673SXkTJArxf7jurppjsKT+L3BHwrjsEWcGnoReFkHzMbsjGA7PEzcUYTbA0C6yjUibfO1CgYEdtCVEt1s1vjS77GWYl2EVemTxWW3h+XQ73gZpfJ9PnlBzC9rjDBXdz3CeN
+x-ms-exchange-antispam-srfa-diagnostics: SSOS;
+x-ms-office365-filtering-correlation-id: 9baa729e-e5ca-43a1-a21e-08d521748a2f
+x-ms-office365-filtering-ht: Tenant
+x-microsoft-antispam: UriScan:; BCL:0; PCL:0;
+	RULEID:(22001)(48565401081)(4534020)(4602075)(2017052603199);
+	SRVR:BL2PR02MB2163; 
+X-MS-TrafficTypeDiagnostic: BL2PR02MB2163:|BL2PR02MB2163:
+x-exchange-antispam-report-test: UriScan:(264703809997249)(192813158149592)(21748063052155); 
+x-microsoft-antispam-prvs: <BL2PR02MB21639CF9D7B1C197AD27CBFDB95F0@BL2PR02MB2163.namprd02.prod.outlook.com>
+x-exchange-antispam-report-cfa-test: BCL:0; PCL:0;
+	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(93006095)(93001095)(10201501046)(3231020)(3002001)(100000703101)(100105400095)(6055026)(6041248)(20161123562025)(20161123560025)(20161123564025)(20161123555025)(20161123558100)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(6072148)(201708071742011)(100000704101)(100105200095)(100000705101)(100105500095);
+	SRVR:BL2PR02MB2163; BCL:0; PCL:0;
+	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
+	SRVR:BL2PR02MB2163; 
+x-forefront-prvs: 0478C23FE0
+x-forefront-antispam-report: SFV:NSPM;
+	SFS:(10009020)(346002)(376002)(189002)(24454002)(199003)(68736007)(5660300001)(6916009)(6436002)(105586002)(2950100002)(6506006)(7696004)(101416001)(189998001)(33656002)(106356001)(2900100001)(81156014)(81166006)(229853002)(7736002)(25786009)(8676002)(4326008)(316002)(74316002)(6246003)(19273905006)(53386004)(5250100002)(97736004)(14454004)(478600001)(966005)(39060400002)(54356999)(50986999)(76176999)(606006)(53936002)(72206003)(53546010)(86362001)(55016002)(102836003)(3846002)(6116002)(790700001)(3660700001)(9326002)(66066001)(236005)(8936002)(9686003)(6306002)(19609705001)(54896002)(2906002)(3280700002)(99286004)(563064011);
+	DIR:OUT; SFP:1101; SCL:1; SRVR:BL2PR02MB2163;
+	H:BL2PR02MB2163.namprd02.prod.outlook.com; FPR:; SPF:None;
+	PTR:InfoNoRecords; MX:1; A:1; LANG:en; 
+received-spf: None (protection.outlook.com: xilinx.com does not designate
+	permitted sender hosts)
+spamdiagnosticoutput: 1:99
+spamdiagnosticmetadata: NSPM
+MIME-Version: 1.0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9baa729e-e5ca-43a1-a21e-08d521748a2f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 01 Nov 2017 22:04:35.9218 (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 657af505-d5df-48d0-8300-c31994686c5c
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL2PR02MB2163
+X-Microsoft-Exchange-Diagnostics: 1; BL2PR02MB2163;
+	23:LGnKAVWHH0YcdThccfU1o7dzM49PZZZckadG8KC2rBUEDP+up5Yp80snUjX9XoSANFpGvc5eR1GSZ5Lsc1bb5pecP6pu2mCk+tyZeTebp8td1TOub6o9CHzO0VAQd+B/RiMnDvw7BnfIoUUDlZCuJQ==
+X-OriginatorOrg: xilinx.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v2] whetstone_1.2.bb: Add whetstone benchmark
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,185 +88,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Nov 2017 22:08:47 -0000
+X-List-Received-Date: Wed, 01 Nov 2017 22:37:59 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-The recipe for iksemel 1.4 was blacklisted and eventually removed as
-it depended on an older version of gnutls which was no longer
-available in oe-core.
-
-Reinstate iksemel with a new recipe for iksemel 1.5, which can use
-either openssl or gnutls for TLS support. Fix build issues.
-
-Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
----
- .../iksemel/avoid-obsolete-gnutls-apis.patch       | 55 +++++++++++++++++++
- .../iksemel/fix-configure-option-parsing.patch     | 62 ++++++++++++++++++++++
- meta-oe/recipes-support/iksemel/iksemel_1.5.bb     | 24 +++++++++
- 3 files changed, 141 insertions(+)
- create mode 100644 meta-oe/recipes-support/iksemel/iksemel/avoid-obsolete-gnutls-apis.patch
- create mode 100644 meta-oe/recipes-support/iksemel/iksemel/fix-configure-option-parsing.patch
- create mode 100644 meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-
-diff --git a/meta-oe/recipes-support/iksemel/iksemel/avoid-obsolete-gnutls-apis.patch b/meta-oe/recipes-support/iksemel/iksemel/avoid-obsolete-gnutls-apis.patch
-new file mode 100644
-index 0000000..41fccc3
---- /dev/null
-+++ b/meta-oe/recipes-support/iksemel/iksemel/avoid-obsolete-gnutls-apis.patch
-@@ -0,0 +1,55 @@
-+From 7136a908a056d0e36c89b6e1c39adff8ce2bb1d4 Mon Sep 17 00:00:00 2001
-+From: Andre McCurdy <armccurdy@gmail.com>
-+Date: Wed, 1 Nov 2017 13:17:34 -0700
-+Subject: [PATCH] avoid obsolete gnutls apis
-+
-+The gnutls_*_set_priority() family of functions was marked deprecated
-+in gnutls 2.12.x and removed completely in 3.5.x. These functions
-+have been superceded by gnutls_priority_set_direct(), which was added
-+in gnutls 2.2.0 (released 2007-12-14).
-+
-+Rather than simply update the custom gnutls_*_set_priority() calls to
-+use gnutls_priority_set_direct(), drop the custom priority selection
-+completely and use the recommended approach of letting gnutls pick a
-+reasonable set of defaults.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-+---
-+ src/tls-gnutls.c | 12 ++----------
-+ 1 file changed, 2 insertions(+), 10 deletions(-)
-+
-+diff --git a/src/tls-gnutls.c b/src/tls-gnutls.c
-+index d7b7c91..749e9ef 100644
-+--- a/src/tls-gnutls.c
-++++ b/src/tls-gnutls.c
-+@@ -48,11 +48,6 @@ tls_pull (struct ikstls_data *data, char *buffer, size_t len)
-+ static int
-+ tls_handshake (struct ikstls_data **datap, ikstransport *trans, void *sock)
-+ {
-+-	const int protocol_priority[] = { GNUTLS_TLS1, GNUTLS_SSL3, 0 };
-+-	const int kx_priority[] = { GNUTLS_KX_RSA, 0 };
-+-	const int cipher_priority[] = { GNUTLS_CIPHER_3DES_CBC, GNUTLS_CIPHER_ARCFOUR, 0};
-+-	const int comp_priority[] = { GNUTLS_COMP_ZLIB, GNUTLS_COMP_NULL, 0 };
-+-	const int mac_priority[] = { GNUTLS_MAC_SHA, GNUTLS_MAC_MD5, 0 };
-+ 	struct ikstls_data *data;
-+ 	int ret;
-+ 
-+@@ -81,11 +76,8 @@ tls_handshake (struct ikstls_data **datap, ikstransport *trans, void *sock)
-+ 		return IKS_NOMEM;
-+ 	}
-+ 
-+-	gnutls_protocol_set_priority (data->sess, protocol_priority);
-+-	gnutls_cipher_set_priority(data->sess, cipher_priority);
-+-	gnutls_compression_set_priority(data->sess, comp_priority);
-+-	gnutls_kx_set_priority(data->sess, kx_priority);
-+-	gnutls_mac_set_priority(data->sess, mac_priority);
-++	gnutls_set_default_priority (data->sess);
-++
-+ 	gnutls_credentials_set (data->sess, GNUTLS_CRD_CERTIFICATE, data->cred);
-+ 
-+ 	gnutls_transport_set_push_function (data->sess, (gnutls_push_func) tls_push);
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/iksemel/iksemel/fix-configure-option-parsing.patch b/meta-oe/recipes-support/iksemel/iksemel/fix-configure-option-parsing.patch
-new file mode 100644
-index 0000000..05accdd
---- /dev/null
-+++ b/meta-oe/recipes-support/iksemel/iksemel/fix-configure-option-parsing.patch
-@@ -0,0 +1,62 @@
-+From 17a5cf8f70b86d8a2195562e2d9dcccb4fa35c83 Mon Sep 17 00:00:00 2001
-+From: Andre McCurdy <armccurdy@gmail.com>
-+Date: Tue, 31 Oct 2017 20:05:58 -0700
-+Subject: [PATCH] fix configure option parsing
-+
-+Don't over-write with_openssl etc by trying to set to $enablevar
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
-+---
-+ configure.ac | 14 +++++++-------
-+ 1 file changed, 7 insertions(+), 7 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 82e6d2d..823e6c1 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -56,17 +56,17 @@ fi
-+ dnl Options for overriding TLS checks
-+ AC_ARG_WITH([openssl],
-+   AS_HELP_STRING([--without-openssl],[disable checking for openssl]),
-+-  [with_openssl=$enableval],
-+-  [with_openssl=yes]
-++  [],
-++  [with_openssl=auto]
-+ )
-+ AC_ARG_WITH([gnutls],
-+   AS_HELP_STRING([--without-gnutls],[disable checking for GNU TLS]),
-+-  [with_gnutls=$enableval],
-+-  [with_gnutls=yes]
-++  [],
-++  [with_gnutls=auto]
-+ )
-+ 
-+ dnl Check OpenSSL
-+-if test "x$with_openssl" = "xyes"; then
-++if test "x$with_openssl" != "xno"; then
-+   PKG_CHECK_MODULES([OPENSSL], openssl >= 0.9.8, have_openssl=yes, have_openssl=no)
-+   if test "x$have_openssl" = "xyes"; then
-+     LIBOPENSSL_CFLAGS="$OPENSSL_CFLAGS"
-+@@ -78,7 +78,7 @@ if test "x$with_openssl" = "xyes"; then
-+ fi
-+ 
-+ dnl Check GNU TLS
-+-if test "x$with_gnutls" = "xyes"; then
-++if test "x$with_gnutls" != "xno"; then
-+   if test "x$have_openssl" != "xyes"; then
-+     PKG_CHECK_MODULES([GNUTLS], gnutls >= 2.0.0, have_gnutls=yes, have_gnutls=no)
-+     if test "x$have_gnutls" = "xyes"; then
-+@@ -94,7 +94,7 @@ fi
-+ dnl Option for overriding Python check
-+ AC_ARG_ENABLE([python],
-+   AS_HELP_STRING([--disable-python],[disable checking for Python bindings]),
-+-  [with_python=$enableval],
-++  [],
-+   [with_python=yes]
-+ )
-+ 
-+-- 
-+1.9.1
-+
-diff --git a/meta-oe/recipes-support/iksemel/iksemel_1.5.bb b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-new file mode 100644
-index 0000000..0903e90
---- /dev/null
-+++ b/meta-oe/recipes-support/iksemel/iksemel_1.5.bb
-@@ -0,0 +1,24 @@
-+SUMMARY = "Fast and portable XML parser and Jabber protocol library"
-+HOMEPAGE = "https://github.com/meduketto/iksemel"
-+SECTION = "libs"
-+LICENSE = "LGPLv2.1"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=d8045f3b8f929c1cb29a1e3fd737b499"
-+
-+SRCREV = "978b733462e41efd5db72bc9974cb3b0d1d5f6fa"
-+PV = "1.5+git${SRCPV}"
-+
-+SRC_URI = "git://github.com/meduketto/iksemel.git;protocol=https \
-+           file://fix-configure-option-parsing.patch \
-+           file://avoid-obsolete-gnutls-apis.patch"
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools pkgconfig lib_package
-+
-+# TLS support requires either openssl or gnutls (if both are enabled openssl will be used).
-+PACKAGECONFIG ?= "gnutls"
-+
-+PACKAGECONFIG[gnutls] = "--with-gnutls,--without-gnutls,gnutls"
-+PACKAGECONFIG[openssl] = "--with-openssl,--without-openssl,openssl"
-+
-+EXTRA_OECONF = "--disable-python"
--- 
-1.9.1
-
+SGkgTWFydGluLA0KDQpXaWxsIHNlbmQgYSB2MyB3aXRoIGhlYWRlciBmb3IgbGljZW5zZSBjaGVj
+a3N1bS4NCkhvd2V2ZXIsIEkgZG9u4oCZdCB0aGluayB0aGVzZSByZWNpcGVzIHdpbGwgYmUgdXBn
+cmFkZWQgaW4gbmVhciBmdXR1cmUuDQoNClRoYW5rcywNCk1hbmp1DQoNCkZyb206IE1hcnRpbiBK
+YW5zYSBbbWFpbHRvOm1hcnRpbi5qYW5zYUBnbWFpbC5jb21dDQpTZW50OiBXZWRuZXNkYXksIE9j
+dG9iZXIgMjUsIDIwMTcgMTI6MTAgUE0NClRvOiBNYW5qdWt1bWFyIEhhcnRoaWtvdGUgTWF0aGEg
+PE1BTkpVS1VNQHhpbGlueC5jb20+DQpDYzogb3BlbmVtYmVkZGVkLWRldmVsIDxvcGVuZW1iZWRk
+ZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZz4NClN1YmplY3Q6IFJlOiBbb2VdIFttZXRh
+LW9lXVtQQVRDSCB2Ml0gd2hldHN0b25lXzEuMi5iYjogQWRkIHdoZXRzdG9uZSBiZW5jaG1hcmsN
+Cg0KV2h5IGRvbid0IHlvdSByZWZlcmVuY2UgdGhlIGxpY2Vuc2UgZnJvbSB0aGUgd2hldHN0b25l
+LmMgaGVhZGVyPw0KDQpVc2luZyBDT01NT05fTElDRU5TRV9ESVIgd29uJ3QgcmVhbGx5IHdvcmsg
+Zm9yIExJQ19GSUxFU19DSEtTVU0gdG8gY2F0Y2ggZGlmZmVyZW50IGxpY2Vuc2UgaWYgdGhpcyBy
+ZWNpcGUgaXMgZXZlciB1cGdyYWRlZCB0byBkaWZmZXJlbnQgdmVyc2lvbi4NCg0KVGhlIHNhbWUg
+ZG9lcyBhcHBseSB0byB5b3VyIDJuZCByZXZpZXcuDQoNCk9uIFdlZCwgT2N0IDI1LCAyMDE3IGF0
+IDg6NDkgUE0sIE1hbmp1a3VtYXIgTWF0aGEgPG1hbmp1a3VtYXIuaGFydGhpa290ZS1tYXRoYUB4
+aWxpbnguY29tPG1haWx0bzptYW5qdWt1bWFyLmhhcnRoaWtvdGUtbWF0aGFAeGlsaW54LmNvbT4+
+IHdyb3RlOg0KVGhlIFdoZXRzdG9uZSBiZW5jaG1hcmsgaXMgYSBzeW50aGV0aWMgYmVuY2htYXJr
+IGZvciBldmFsdWF0aW5nIHRoZQ0KcGVyZm9ybWFuY2Ugb2YgY29tcHV0ZXJzLg0KDQpodHRwczov
+L2VuLndpa2lwZWRpYS5vcmcvd2lraS9XaGV0c3RvbmVfKGJlbmNobWFyaykNCg0KU2lnbmVkLW9m
+Zi1ieTogTWFuanVrdW1hciBNYXRoYSA8bWFuanVrdW1hci5oYXJ0aGlrb3RlLW1hdGhhQHhpbGlu
+eC5jb208bWFpbHRvOm1hbmp1a3VtYXIuaGFydGhpa290ZS1tYXRoYUB4aWxpbnguY29tPj4NCi0t
+LQ0KIG1ldGEtb2UvcmVjaXBlcy1iZW5jaG1hcmsvd2hldHN0b25lL3doZXRzdG9uZV8xLjIuYmI8
+aHR0cDovL3doZXRzdG9uZV8xLjIuYmI+IHwgMTggKysrKysrKysrKysrKysrKysrDQogMSBmaWxl
+IGNoYW5nZWQsIDE4IGluc2VydGlvbnMoKykNCiBjcmVhdGUgbW9kZSAxMDA2NDQgbWV0YS1vZS9y
+ZWNpcGVzLWJlbmNobWFyay93aGV0c3RvbmUvd2hldHN0b25lXzEuMi5iYjxodHRwOi8vd2hldHN0
+b25lXzEuMi5iYj4NCg0KZGlmZiAtLWdpdCBhL21ldGEtb2UvcmVjaXBlcy1iZW5jaG1hcmsvd2hl
+dHN0b25lL3doZXRzdG9uZV8xLjIuYmI8aHR0cDovL3doZXRzdG9uZV8xLjIuYmI+IGIvbWV0YS1v
+ZS9yZWNpcGVzLWJlbmNobWFyay93aGV0c3RvbmUvd2hldHN0b25lXzEuMi5iYjxodHRwOi8vd2hl
+dHN0b25lXzEuMi5iYj4NCm5ldyBmaWxlIG1vZGUgMTAwNjQ0DQppbmRleCAwMDAwMDAwLi5lOTMx
+OGViDQotLS0gL2Rldi9udWxsDQorKysgYi9tZXRhLW9lL3JlY2lwZXMtYmVuY2htYXJrL3doZXRz
+dG9uZS93aGV0c3RvbmVfMS4yLmJiPGh0dHA6Ly93aGV0c3RvbmVfMS4yLmJiPg0KQEAgLTAsMCAr
+MSwxOCBAQA0KK0RFU0NSSVBUSU9OID0gIkNQVSBiZW5jaG1hcmsgdG8gbWVhc3VyZSBmbG9hdGlu
+ZyBwb2ludCBwZXJmb3JtYW5jZSINCitMSUNFTlNFID0gIlBEIg0KK0xJQ19GSUxFU19DSEtTVU0g
+PSJmaWxlOi8vJHtDT01NT05fTElDRU5TRV9ESVJ9L1BEO21kNT1iMzU5N2QxMjk0Njg4MWUxM2Ni
+M2I1NDhkMTE3Mzg1MTxmaWxlOi8vL1xcJCU3YkNPTU1PTl9MSUNFTlNFX0RJUiU3ZFxQRDttZDU9
+YjM1OTdkMTI5NDY4ODFlMTNjYjNiNTQ4ZDExNzM4NTE+Ig0KKw0KK1NSQ19VUkkgPSAiaHR0cDov
+L3d3dy5uZXRsaWIub3JnL2JlbmNobWFyay93aGV0c3RvbmUuYyINCitTUkNfVVJJW21kNXN1bV0g
+PSAiZDhlYjJjZDcxMDRiYjVhMTJkNjE0YWM2ZDNmMWY5ZmIiDQorU1JDX1VSSVtzaGEyNTZzdW1d
+ID0gIjMzM2U0Y2VjYTA0MmMxNDZmNjNlZWM2MDU1NzNkMTZhZThiMDcxNjZjYmM0NGExN2JlYzFl
+YTk3YzZmMWVmYmYiDQorDQorUyA9ICIke1dPUktESVJ9Ig0KKw0KK2RvX2NvbXBpbGUgKCkgew0K
+KyAgICAgICAke0NDfSAke0NGTEFHU30gJHtMREZMQUdTfSAtT2Zhc3QgLW8gd2hldHN0b25lIHdo
+ZXRzdG9uZS5jIC1sbQ0KK30NCisNCitkb19pbnN0YWxsICgpIHsNCisgICAgICAgaW5zdGFsbCAt
+RG0gMDc1NSB3aGV0c3RvbmUgJHtEfSR7YmluZGlyfS93aGV0c3RvbmUNCit9DQorDQotLQ0KMi43
+LjQNCg0KLS0NCl9fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+DQpPcGVuZW1iZWRkZWQtZGV2ZWwgbWFpbGluZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlz
+dHMub3BlbmVtYmVkZGVkLm9yZzxtYWlsdG86T3BlbmVtYmVkZGVkLWRldmVsQGxpc3RzLm9wZW5l
+bWJlZGRlZC5vcmc+DQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWlsbWFuL2xpc3Rp
+bmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQo=
 
