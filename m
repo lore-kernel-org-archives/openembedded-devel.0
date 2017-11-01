@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f174.google.com (mail-qt0-f174.google.com
-	[209.85.216.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 46C5677F34
+Received: from mail-qt0-f176.google.com (mail-qt0-f176.google.com
+	[209.85.216.176])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B3546E5FC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  1 Nov 2017 15:37:58 +0000 (UTC)
-Received: by mail-qt0-f174.google.com with SMTP id 8so3165760qtv.1
+	Wed,  1 Nov 2017 16:14:21 +0000 (UTC)
+Received: by mail-qt0-f176.google.com with SMTP id j58so3310134qtj.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Nov 2017 08:38:00 -0700 (PDT)
+	Wed, 01 Nov 2017 09:14:23 -0700 (PDT)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=sdjUshUZttu+JRAwznyqyOmNSoNI5rjaDYFTH1233FI=;
-	b=dNWfnGFWZKawmO0uabKhHm3UhWxuBoqAJQLLgSKKRiHhSnaFCCSgYz6ptWuHVwRBnb
-	rOngoaljFNpA8Nd+on7ZvX59gOLvDzp+KVvPm4skav537o/9mKDWxzfEHuXXvAONVViz
-	MU5pPvTPNnOcL+Qhe7eDetY8rCua9NO8GW5066yPEgYesgSMwlRlzhGRfvEySVaWsuQP
-	84hiTKY3cqQVuSH56C8vILcaZh2JfnSwji3MKa88LTSlq4eVS1Eqk4rUSkyIAgWdN4ea
-	nk+l1rbs+6iwbPa3YaG2TFc9R4XgM4MRSHavCpmHv0uTTjwRl3v8rY/WrFBE0YSSfM0k
-	EF6A==
-X-Gm-Message-State: AMCzsaW5KcaNqt0/c3/eCTTlM0Msu1QNWRwbny7LULb7tafr8djSE6NN
-	F09EvwQyHZT+Y7XUVgUvjaC3aMIi
-X-Google-Smtp-Source: ABhQp+Q3rnif9/zhMo/VvzbM4VJIz9rd4Q4q95x8gXZG9xDKJWLzN8LPb7gooYrD4x//UvjGcEfkzg==
-X-Received: by 10.237.42.230 with SMTP id t93mr369888qtd.317.1509550679728;
-	Wed, 01 Nov 2017 08:37:59 -0700 (PDT)
+	bh=gmincQmYEaP98j2l7SlCR17Sl/cU0a0tVGzmWNSQz/w=;
+	b=imcXEZN+qJhD9o/09z4PfqVvsJs4zXsJbQpymzHED5rSxeI7xKme8lQ+2f2v7LCigU
+	pI9v3buEz30ul+Y+6tbOAPBUnlLveXkG8cd1Gt8FGNxeqdPHK+gWUevMbKoHRfFrFZRs
+	TbSI1kdWPCwa/Uyci+KOhTlf0ed+e7ohyf5tJE8ETrAtnVTyAAIYOU+FwLzelhid/NS2
+	d3XdUo78vO5f05YJfVWVPaAEK9sHpBTK8ERdF/K3oAQ5VkHc/90fU6kMptEzjfNeRSeG
+	JAR9OLnc+O545lQLlymmI+oL9Zit/sXvEmUFIGUsjTb06bCK1c7Fkf2xv3Egd2K37ZsE
+	FqjQ==
+X-Gm-Message-State: AMCzsaXZmCrTYhXA8Mjv0QgJ/JpIpdyUa2dY4DoQxnrBUHj74gvpuMBG
+	ET3GFpS7giO0KofGP3sgw54rtSb6
+X-Google-Smtp-Source: ABhQp+TVDLIg1DzbNdAP8o23q/kllW2R3eX5EIGCyjFhCAudj3xfp+geLxbQILaQVanx/58M+/MBiQ==
+X-Received: by 10.237.36.189 with SMTP id t58mr614632qtc.332.1509552862704;
+	Wed, 01 Nov 2017 09:14:22 -0700 (PDT)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	d193sm604809qkg.88.2017.11.01.08.37.59
+	n131sm651001qke.48.2017.11.01.09.14.21
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 01 Nov 2017 08:37:59 -0700 (PDT)
+	Wed, 01 Nov 2017 09:14:22 -0700 (PDT)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Nov 2017 11:37:51 -0400
-Message-Id: <1509550671-22502-1-git-send-email-derek@asterius.io>
+Date: Wed,  1 Nov 2017 12:14:11 -0400
+Message-Id: <1509552851-19539-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-hyperlink: add a recipe for version 17.3.1
+Subject: [meta-python][PATCH] python-attr: add initial recipe for version 0.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,59 +45,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Nov 2017 15:37:59 -0000
+X-List-Received-Date: Wed, 01 Nov 2017 16:14:22 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-hyperlink.inc        | 17 +++++++++++++++++
- .../recipes-devtools/python/python-hyperlink_17.3.1.bb  |  2 ++
- .../recipes-devtools/python/python3-hyperlink_17.3.1.bb |  4 ++++
- 3 files changed, 23 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-hyperlink.inc
- create mode 100644 meta-python/recipes-devtools/python/python-hyperlink_17.3.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
+ meta-python/recipes-devtools/python/python-attr.inc       | 9 +++++++++
+ meta-python/recipes-devtools/python/python-attr_0.2.0.bb  | 2 ++
+ meta-python/recipes-devtools/python/python3-attr_0.2.0.bb | 2 ++
+ 3 files changed, 13 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-attr.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-attr_0.2.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-attr_0.2.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-hyperlink.inc b/meta-python/recipes-devtools/python/python-hyperlink.inc
+diff --git a/meta-python/recipes-devtools/python/python-attr.inc b/meta-python/recipes-devtools/python/python-attr.inc
 new file mode 100644
-index 0000000..2b5b0a0
+index 0000000..8ebf9b9
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-hyperlink.inc
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "A featureful, correct URL for Python"
-+HOMEPAGE = "https://github.com/python-hyper/hyperlink"
++++ b/meta-python/recipes-devtools/python/python-attr.inc
+@@ -0,0 +1,9 @@
++DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
++HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3893d4ed05dcc823f8ed685a9ea19bcb"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=598841c0e09b76883d9ff37a3b6100bf"
 +
-+SRC_URI[md5sum] = "eaccb9845b559817e838846669cbc68a"
-+SRC_URI[sha256sum] = "bc4ffdbde9bdad204d507bd8f554f16bba82dd356f6130cb16f41422909c33bc"
++SRC_URI[md5sum] = "de69ad11c8872a6dfdbdace7eb81efb4"
++SRC_URI[sha256sum] = "826135ffdd4d0b4bc8a580ce491c33fd90b55e169217539c34b7bfdbe2086ee3"
 +
 +inherit pypi
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-stringold ${PYTHON_PN}-netclient"
-+
-+PACKAGES =. "${PN}-test "
-+
-+FILES_${PN}-test += " \
-+        ${PYTHON_SITEPACKAGES_DIR}/hyperlinkt/test \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-hyperlink_17.3.1.bb b/meta-python/recipes-devtools/python/python-hyperlink_17.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python-attr_0.2.0.bb
 new file mode 100644
-index 0000000..59a9a5c
+index 0000000..979d6cb
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-hyperlink_17.3.1.bb
++++ b/meta-python/recipes-devtools/python/python-attr_0.2.0.bb
 @@ -0,0 +1,2 @@
 +inherit setuptools
-+require python-hyperlink.inc
-diff --git a/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
++require python-attr.inc
+diff --git a/meta-python/recipes-devtools/python/python3-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python3-attr_0.2.0.bb
 new file mode 100644
-index 0000000..3d30af2
+index 0000000..e80648c
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-hyperlink_17.3.1.bb
-@@ -0,0 +1,4 @@
++++ b/meta-python/recipes-devtools/python/python3-attr_0.2.0.bb
+@@ -0,0 +1,2 @@
 +inherit setuptools3
-+require python-hyperlink.inc
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-selectors ${PYTHON_PN}-enum"
++require python-attr.inc
 -- 
 2.7.4
 
