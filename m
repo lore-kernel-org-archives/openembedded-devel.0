@@ -1,128 +1,33 @@
-Return-Path: <MANJUKUM@xilinx.com>
-Received: from NAM01-BY2-obe.outbound.protection.outlook.com
-	(mail-by2nam01on0088.outbound.protection.outlook.com [104.47.34.88])
-	by mail.openembedded.org (Postfix) with ESMTP id 7613977F34
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id C146271A8E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Nov 2017 04:32:56 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=xilinx.onmicrosoft.com; s=selector1-xilinx-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=BZmHBfH1fRhoZ3tBC2+lfZ8ZzIWOqR8KIqdNmDJblDw=;
-	b=rFVzaAKugnWDROPfL78gX9cCKmt6/c045jCekFpk2Yza+6S9kKpWnhDVRzfnUzsKE1eRyTsiCR3uRu1sLKID7tNWNwT4Zz0Y2zfxaBrchp21PF75EzcuxQQvBaIJmkqf/YcCwp2nP7FIVqhXPDzXVuUjdAYojyFZPnAyZgV0rnI=
-Received: from CY4PR02CA0034.namprd02.prod.outlook.com (10.175.57.148) by
-	CY4PR02MB3382.namprd02.prod.outlook.com (10.165.89.153) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
-	15.20.178.6; Thu, 2 Nov 2017 04:32:57 +0000
-Received: from BL2NAM02FT058.eop-nam02.prod.protection.outlook.com
-	(2a01:111:f400:7e46::202) by CY4PR02CA0034.outlook.office365.com
-	(2603:10b6:903:117::20) with Microsoft SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384) id 15.20.178.6 via
-	Frontend Transport; Thu, 2 Nov 2017 04:32:57 +0000
-Authentication-Results: spf=pass (sender IP is 149.199.60.83)
-	smtp.mailfrom=xilinx.com; lists.openembedded.org; dkim=none (message not
-	signed) header.d=none; lists.openembedded.org;
-	dmarc=bestguesspass action=none header.from=xilinx.com;
-Received-SPF: Pass (protection.outlook.com: domain of xilinx.com designates
-	149.199.60.83 as permitted sender) receiver=protection.outlook.com;
-	client-ip=149.199.60.83; helo=xsj-pvapsmtpgw01;
-Received: from xsj-pvapsmtpgw01 (149.199.60.83) by
-	BL2NAM02FT058.mail.protection.outlook.com (10.152.76.176) with
-	Microsoft SMTP Server (version=TLS1_0,
-	cipher=TLS_RSA_WITH_AES_256_CBC_SHA) id 15.20.178.5
-	via Frontend Transport; Thu, 2 Nov 2017 04:32:56 +0000
-Received: from unknown-38-66.xilinx.com ([149.199.38.66] helo=xsj-pvapsmtp01)
-	by xsj-pvapsmtpgw01 with esmtp (Exim 4.63)
-	(envelope-from <manjukumar.harthikote-matha@xilinx.com>)
-	id 1eA7BY-0001Gd-Ap for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Nov 2017 21:32:56 -0700
-Received: from [127.0.0.1] (helo=localhost)
-	by xsj-pvapsmtp01 with smtp (Exim 4.63)
-	(envelope-from <manjukumar.harthikote-matha@xilinx.com>)
-	id 1eA7BY-0007mf-7t for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Nov 2017 21:32:56 -0700
-Received: from xsj-pvapsmtp01 (smtp3.xilinx.com [149.199.38.66])
-	by xsj-smtp-dlp1.xlnx.xilinx.com (8.13.8/8.13.1) with ESMTP id
-	vA24Wke9003449; Wed, 1 Nov 2017 21:32:46 -0700
-Received: from [172.19.2.216] (helo=xsjmanjukum50.xilinx.com)
-	by xsj-pvapsmtp01 with esmtp (Exim 4.63)
-	(envelope-from <manjukumar.harthikote-matha@xilinx.com>)
-	id 1eA7BO-0007mO-5e; Wed, 01 Nov 2017 21:32:46 -0700
-From: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 1 Nov 2017 21:27:06 -0700
-Message-ID: <1509596826-21204-1-git-send-email-manjukumar.harthikote-matha@xilinx.com>
-X-Mailer: git-send-email 2.7.4
-X-RCIS-Action: ALLOW
-X-TM-AS-Product-Ver: IMSS-7.1.0.1224-8.1.0.1062-23430.004
-X-TM-AS-User-Approved-Sender: Yes;Yes
-X-EOPAttributedMessage: 0
-X-MS-Office365-Filtering-HT: Tenant
-X-Forefront-Antispam-Report: CIP:149.199.60.83; IPV:NLI; CTRY:US; EFV:NLI;
-	SFV:NSPM;
-	SFS:(10009020)(6009001)(39860400002)(346002)(376002)(2980300002)(438002)(189002)(199003)(47776003)(63266004)(50986999)(36386004)(316002)(16586007)(77096006)(6306002)(5003940100001)(106466001)(575784001)(8936002)(50466002)(48376002)(8676002)(305945005)(81156014)(2351001)(81166006)(356003)(107886003)(50226002)(2906002)(106002)(4326008)(478600001)(36756003)(6666003)(72206003)(6916009)(33646002)(966005)(9786002)(5660300001)(189998001)(107986001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:CY4PR02MB3382; H:xsj-pvapsmtpgw01;
-	FPR:; SPF:Pass; PTR:unknown-60-83.xilinx.com; MX:1; A:1; LANG:en;
-X-Microsoft-Exchange-Diagnostics: 1; BL2NAM02FT058;
-	1:BQ6xJl3Aix7cMHZv9VwoMnDzsJ9X+1eJZIYNO62b872xHxZk4IlKEfUc8qYrHxqiaffoI5XqfAI645IYDVqPwfNT9jOqglXg0ik8qekn4lcwqVJ33PozQ6hIOZQUVwMt
+	Thu,  2 Nov 2017 07:19:04 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vA27J5Js011855
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Nov 2017 00:19:05 -0700 (PDT)
+Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.97]) by
+	ALA-HCA.corp.ad.wrs.com ([147.11.189.40]) with mapi id 14.03.0361.001;
+	Thu, 2 Nov 2017 00:19:04 -0700
+From: "Huang, Jie (Jackie)" <Jackie.Huang@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-networking][PATCH 2/2] samba: fix for AD DC service
+Thread-Index: AQHTTKGRRV81zg6PxE6lI8AXHR5xFaMAsrog
+Date: Thu, 2 Nov 2017 07:19:03 +0000
+Message-ID: <1B858668EC6A94408DCA5225FDFA85AA014B8FE444@ALA-MBC.corp.ad.wrs.com>
+References: <cover.1508833120.git.jackie.huang@windriver.com>
+	<7f688c0976cd2b29a52adf42ab60729caf3648ab.1508833120.git.jackie.huang@windriver.com>
+In-Reply-To: <7f688c0976cd2b29a52adf42ab60729caf3648ab.1508833120.git.jackie.huang@windriver.com>
+Accept-Language: en-US, zh-CN
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.177.126]
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: a7f01365-dd21-40b4-deda-08d521aacaa0
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(22001)(8251501002)(4534020)(4602075)(2017052603199);
-	SRVR:CY4PR02MB3382; 
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3382;
-	3:w3q9QCFDJO3dmWjKerBldxA4hJ5f+N3rJXF7lWD/P58oOeoZvfT9RSOzE/l8FksXvx/IzE/wLddeAz+NZUdLNnDlgRT0VyeijpS6tNylnzd9lkgyPzndNiyk1Pcl6+lkUOa4wL9uYWaxdbLsZ2TqPxgN39+L7wXDUU0g2U4fSOaEYF9P3bADwJnm77EH6R1rUGvFJm/VLkUb2+oEJjaOVWvcrMiKqMCOZ64iK1w+e6ud3yNaBL5xQu7K/CMsEFYupEg3onH/Z9ChJPotYDTdUhbQWw/xHoLxsN1b5KEJ0r27pA8ETpKC+aT/bHVWmm6IITKVaXydXZgYZOnBBgxvhnhrq/EJUe48VXGDmHP3vKM=;
-	25:kovemZ6Kuhf06go9UMR+Wm5J0BwjeVCyysn4/ABSy7C7SUOT3GHWxnSJek+Wu3g28iqPPUhc/C+2NUSS27bRjSr+QH0WAS7A4raZFQ/fnaCSLr42LZ/B3SA2nQ2gVLlZIPTWgXXCkU3NGF39qVzsqPIUpd7IYaKK/dFwm30ZpCu9RKbSOnZqOVTDpOz0r4gx/t4GfTUxRUM0TCPg/pNDJTwF0nPDHLgKCekLfE05lGoeO3hGF0owLbEVNRaTx6datrE0jeCfyqD6csN5PItmnGFKuZ91Y/I1UrsL+osUKWUXKqL489GEcO9LYm5QL2TE0IbGd3DiyOEG9ezyukylZg==
-X-MS-TrafficTypeDiagnostic: CY4PR02MB3382:
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3382;
-	31:UiGDidDKIcD2jzW6a3JnWPQzAz30h5Q1dfz4916lrlYMctlBbsuzeYgrUMacPoboNmNamt35jp1TsxP4NhBe+1Ki0yiDk96YVrtXb8oBiRohkHtlQM8MwwXeVse/KfAfcHHBUmWZBQT5P+FWQP7u2NpAyZlRjTjoJ+zyra6v1HCS+5sViIKCrKihndPyQkmSu7+W6SkgUsMP03Gx7bBfPsni+oGDctv71hBTd7zQ7Z4=;
-	20:TyIZOmceM0KltxJ84uXWrP6k6tbZqdxDSK70g8NBWsR+I9d3NASbo94lDkeD5fzDCaDKr2vKLa3+KzMUt3JEOiCLJ9orCiofE4xdELUcfehG5sTxqY4IJQBNma8ZNeEkbHSCUYAHSTU5a5fVmfyeJVlLZUrMrULuBjNuw368gkBhoGGnZLHcZpAIRdEzdw/dheLN9YytvhzdHMQuN6ZNvQbuVglouWdfEE8j16vjJEEg+nQqCUC4UTYud2dcFjQbxGj6VfATuszqeQVT6MLvbp/rWL56kIiAjfD0ObUiCr5CR8W/iQLKF7ZlvN0uAEMGjktHMWvRLMnnjdziFeSNqZAhGRoupO77M2mKQlv/ARZJnj0QeJmRLo0lHx2xgB6I/X+IT7s/9FcbvOTeZRod7BMs+0/jp3F1BaxqNU5edDV7nCD+6io76EAzOj5McfAq6LqOgQgizf7hgbx23ZEtXT8fKuAHqxJfAhlOO6NKAym22OlLcImUNGzucJlOKSVi
-X-Exchange-Antispam-Report-Test: UriScan:(192813158149592);
-X-Microsoft-Antispam-PRVS: <CY4PR02MB33822A2935FE3652104E1C4AB95C0@CY4PR02MB3382.namprd02.prod.outlook.com>
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(100000703101)(100105400095)(3002001)(3231020)(10201501046)(93006095)(93004095)(6055026)(6041248)(20161123558100)(20161123562025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123555025)(20161123560025)(20161123564025)(6072148)(201708071742011)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:CY4PR02MB3382; BCL:0; PCL:0;
-	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:CY4PR02MB3382; 
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3382;
-	4:kuwFCMej8WdmHvoex/HB+oUFpapPxgMCn8MjUl8DTKWqAvtui1HsQo0+en74+WZubJVkFfvZrgp+OW5ffH18a0+d7WlwWso8frWpxeQsQ4ZWknPU3PKPz98pxUVD/KUnAvAitXymLehqfJkmYC+3gSr9NbOwMNwJIG1+DIVfjbNq47T6bz+xWhwXoVUxZEbF/42SQmm9i13Zm7G7yhL46e6sMak2VFs7vCPV9ZM9B+zxWtKfYQ85HUWb5gIqTqdWB2qES+wC5k0Bmp8BodPMY6d4UywHt+JX4WGOTjYcb/iNprgh05V9O+oBdm6e5mOI
-X-Forefront-PRVS: 047999FF16
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; CY4PR02MB3382;
-	23:KGYPC6BEnTMUw3t+1uvaaIx4lJuryWHoqW4gJTqIl?=
-	=?us-ascii?Q?RspofB32xIZrnmhC5AEAhy+Vk/YhmYVUPnXT7J7RbZoYzV5cph6H100Kt/EI?=
-	=?us-ascii?Q?vUJ7Yi0COS6iDdQoCHChUfmoFgPRpEjGkhXg/8mGHzzvQcqmmy3QZ4aMdc4I?=
-	=?us-ascii?Q?11OVF9laoxCopcJFiuEIkZek/gi0+HVx3YZdVCa1PV7ODBGqyUUnIWPupLvh?=
-	=?us-ascii?Q?6REDdqvFmq0oaoXaLCOR4QkYtGJm59SlSPctrZxsgHkOVl26CPpuRoupVpvj?=
-	=?us-ascii?Q?dyw/jVPNKeVe0TMlX2o6/PQnhCDK7Iscww/9iRWReig5LLTRGI10eUXNGMDa?=
-	=?us-ascii?Q?oeXrRJ1FF8KoOgdolP5674GBI5MTHRMmQoBvO4lXIJdkpWrDN0I2FkdK4HQ8?=
-	=?us-ascii?Q?UvXzvRU3FY0wyWJb00xkGYz4/F52gV0Z0HkDo/ThXvz7jj+Pnq/fa4e0pPyA?=
-	=?us-ascii?Q?UM9rZb8zm902rGbLcmjdOPUF0rK/CIET9S4Immt9+1GhkuIda6Gnp4ey5S38?=
-	=?us-ascii?Q?qSwpagiE3umnmziJxfXZ+imcdx0z8PwfxsGh1V6YdSeKXwEPVCy6XiDDCqOV?=
-	=?us-ascii?Q?xm+Aj/R6XVyzukELzmQg822BJFM/g81fj49NFkjkJZ2crdpMisYYbsnDDqi1?=
-	=?us-ascii?Q?IdZuysdkNECiCBMQNgqvocHCPaLTrdp4g6xVphCbt6vd9b5MPkNnZ5w90ntH?=
-	=?us-ascii?Q?kP+mhZOTn6pBvipO4RSpGdakiMMQe38zA4RfimFkO/aWv1PI8idelyClNBIg?=
-	=?us-ascii?Q?wXHgPdsPEMnTzXGLmFO4UuG8b4p0yEaj/xhxrQPZjGo5jefHLWKKSM02TBo9?=
-	=?us-ascii?Q?eh9Rq6aZP+PHfC7btemkMe0SOmgFXvao8NKQepyidTPvByBDx3KhMxiJFudW?=
-	=?us-ascii?Q?YuUPIef+xAbwSTIAGScQejjN0Zb1qVEv8Z+IfUmKSR2DBB4qk/Z3KWlQ/vMS?=
-	=?us-ascii?Q?0NhjVvZ1O5MpCwLMcQ5PPOpagT7sUK5exHRETg0cqbq0kqamhBS4vKQAhX62?=
-	=?us-ascii?Q?CHABYI+ijFQPoECEl9TgMcWF7a0URYhRdFod1FqQb5NSw=3D=3D?=
-X-Microsoft-Exchange-Diagnostics: 1; CY4PR02MB3382;
-	6:xGP7UkiAjjKlbETOvqTGSB37YgTkf+oR8DjH/N714ssLbWXleKC8+siSNBfauxdJBrgXkITiMZTbB6DBwRvkIyl6Ryuy3dIYGGUKd7x9j+e72fYusMXgysYY7UQZ57KyJmNU/pdNN/C5woq1meDjVKrEev3QycCvHttAAJXy1VW3lXkQ1hhdxaDR9XtgeqSSGNDKdA9NRG8j3LP7kN4yk443xMA6aIiLQEEUmThCtVWOjyIhUeFz1mX/K1juzXsDt3JrJP8jOzUfevUPp/uzW5JhCEj6NQsIn9CPfAuJ/uLAJrhmwZjjA0+L740pZQHGLpgmxZ4dG9tfIwXZfXnmpY2tOrzenPYsYrElovb+A5Q=;
-	5:iZiVSdoRnt/+yILJ0mpLEYGGjQCACeX8C/UGlrZzNkLiyOe0aySj2ABEUY+GFvf/HY/IlMHvguF1kpFcui1f9VcXzEcKd0rh/VTvDBcQ71oB+S1V+JFLJSPpR6Xujhtcm86Qeshaif/jJ3aiKWKphvW3/6FBN8WN8C41xZiPl0c=;
-	24:y+ycLeKKgiBpKXPwiC85azrb384VTasIOsRJx8JqBUcD/hdHo4D2gc2Qe/XTjARakxvK859c6kGgEBq7/vg6T1caXeLl82QmQPesfnuJI0A=;
-	7:VMAdrG48Uzw7CMIA/QtX2u0fD9vT9GU2VTOHs2e/zeYhIyx9YQdzzQpwT5ylkV9QEIzyWmqANgAxmL9Luns2Q2daeS0lK9ezNBh7u4kv3PaFWt2ofDxf00gLL64409MqHDeRopHHLU/gWHZavXjSBycurqYtLww2keOPDmWBeTOJfUQ4JjbPAAIjVKokCe5PkBMydsr75kT9kMWRGrwPqP4P8+gvvqPsIqrEIQ6IGbhST9JOiXuSwDM+64v7/u2k
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: xilinx.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 02 Nov 2017 04:32:56.8615 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a7f01365-dd21-40b4-deda-08d521aacaa0
-X-MS-Exchange-CrossTenant-Id: 657af505-d5df-48d0-8300-c31994686c5c
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=657af505-d5df-48d0-8300-c31994686c5c;
-	Ip=[149.199.60.83]; Helo=[xsj-pvapsmtpgw01]
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY4PR02MB3382
-Subject: [meta-oe][PATCH v3] linpack_1.0.bb: Add linpack benchmark
+Subject: Re: [meta-networking][PATCH 2/2] samba: fix for AD DC service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -135,49 +40,207 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2017 04:32:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 02 Nov 2017 07:19:04 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-The LINPACK Benchmarks are a measure of a system's floating point
-computing power. Introduced by Jack Dongarra, they measure how fast a
-computer solves a dense n by n system of linear equations Ax = b, which
-is a common task in engineering.
 
-https://en.wikipedia.org/wiki/LINPACK_benchmarks
+Please ignore this since we found an issue after disabling mitkrb5:
 
-Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
----
- meta-oe/recipes-benchmark/linpack/linpack_1.0.bb | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
+Samba can be built with either:
+- system_mitkrb5        (--with-system-mitkrb5)
+- embedded_heimdal =20
+- system_heimdal
 
-diff --git a/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
-new file mode 100644
-index 0000000..aed95cd
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/linpack/linpack_1.0.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "LINPACK Benchmarks are a measure of a system's floating point computing power"
-+SUMMARY = "LINPACK is a software library for performing numerical linear algebra on digital computers"
-+
-+LICENSE = "PD"
-+LIC_FILES_CHKSUM ="file://${WORKDIR}/linpacknew.c;beginline=1;endline=23;md5=aa025e3bc44190c71e4c5e3b084fed87"
-+
-+SRC_URI = "http://www.netlib.org/benchmark/linpackc.new;downloadfilename=linpacknew.c"
-+SRC_URI[md5sum] = "1c5d0b6a31264685d2e651c920e3cdf4"
-+SRC_URI[sha256sum] = "a63f2ec86512959f1fd926bfafb85905b2d7b7402942ffae3af374d48745e97e"
-+
-+S = "${WORKDIR}"
-+
-+do_compile () {
-+	${CC} ${CFLAGS} ${LDFLAGS} -o linpack linpacknew.c -lm
-+}
-+
-+do_install () {
-+	install -Dm 0755 linpack ${D}${bindir}/linpack
-+}
-+
--- 
-2.7.4
+If we don't set --with-system-mitkrb5, it will find if there is system_heim=
+dal , if not,
+It will built with embedded_heimdal which seems only builds for x86 and x86=
+-64,
+and it needs libbsd on the host, it will fail when build for x86 and there =
+is no 32bit libbsd
+on the host:
 
+tmp-glibc/work/core2-32-wrsmllib32-linux/lib32-samba/4.6.7-r0/samba-4.6.7/b=
+in/asn1_compile: error while loading shared libraries: libbsd.so.0: cannot =
+open shared object file: No such file or directory
+
+So I will re-work the patch to turn back to mitkrb5, but ad-dc will need to=
+ be disabled by default since another know issue I mentioned in the comment=
+s.
+And someone from WR might work on the above issue.
+
+Thanks,
+Jackie
+
+
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> jackie.huang@windriver.com
+> Sent: Tuesday, October 24, 2017 16:23
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] [meta-networking][PATCH 2/2] samba: fix for AD DC service
+>=20
+> From: Jackie Huang <jackie.huang@windriver.com>
+>=20
+> The AD DC service is installed by default since the commit:
+> """
+> commit 28b8edc760d5e0664ad4861464f5de06f5fc305a
+> samba: install all systemd unit files
+> This includes samba.service, which other major distributions install, too=
+.
+> """
+>=20
+> But lack of required executable since ad-dc feature is disabled by defaul=
+t.
+>=20
+> To fix the issue:
+> - Add PACKAGECONFIG for ad-dc and enable by default.
+> - Add PACKAGECONFIG for gnutls which is required by ad-dc and
+>   enable by default.
+> - Add PACKAGECONFIG for mitkrb5 but disable by default because
+>   of an known issue:
+>   http://samba.2283325.n4.nabble.com/samba-4-6-6-Unknown-dependency-
+> kdc-in-service-kdc-objlist-td4722096.html
+> - Don't install samba.service if ad-dc is disabled.
+> - Re-package ad-dc service and executable into a new package samba-ad-dc
+>=20
+> Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+> ---
+>  .../recipes-connectivity/samba/samba_4.6.7.bb      | 35 ++++++++++++++++=
++----
+> -
+>  1 file changed, 27 insertions(+), 8 deletions(-)
+>=20
+> diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> index 2b227c95d..9372ea34a 100644
+> --- a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> +++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+> @@ -34,7 +34,7 @@ inherit systemd waf-samba cpan-base perlnative update-
+> rc.d
+>  # remove default added RDEPENDS on perl
+>  RDEPENDS_${PN}_remove =3D "perl"
+>=20
+> -DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb libte=
+vent libldb
+> krb5 libbsd libaio libpam"
+> +DEPENDS +=3D "readline virtual/libiconv zlib popt libtalloc libtdb libte=
+vent libldb
+> libbsd libaio libpam"
+>  DEPENDS_append_libc-musl =3D " libtirpc"
+>  CFLAGS_append_libc-musl =3D " -I${STAGING_INCDIR}/tirpc"
+>  LDFLAGS_append_libc-musl =3D " -ltirpc"
+> @@ -45,12 +45,18 @@ LSB_linuxstdbase =3D "lsb"
+>  INITSCRIPT_NAME =3D "samba"
+>  INITSCRIPT_PARAMS =3D "start 20 3 5 . stop 20 0 1 6 ."
+>=20
+> -SYSTEMD_PACKAGES =3D "${PN}-base winbind"
+> +SYSTEMD_PACKAGES =3D "${PN}-base ${PN}-ad-dc winbind"
+>  SYSTEMD_SERVICE_${PN}-base =3D "nmb.service smb.service"
+> +SYSTEMD_SERVICE_${PN}-ad-dc =3D "samba.service"
+>  SYSTEMD_SERVICE_winbind =3D "winbind.service"
+>=20
+> +# There are prerequisite settings to enable ad-dc, so disable the servic=
+e by
+> default.
+> +# Reference:
+> +#
+> https://wiki.samba.org/index.php/Setting_up_Samba_as_an_Active_Directory_
+> Domain_Controller
+> +SYSTEMD_AUTO_ENABLE_${PN}-ad-dc =3D "disable"
+> +
+>  PACKAGECONFIG ??=3D "${@bb.utils.filter('DISTRO_FEATURES', 'systemd
+> zeroconf', d)} \
+> -                   acl cups ldap \
+> +                   acl ad-dc cups gnutls ldap \
+>  "
+>=20
+>  RDEPENDS_${PN}-base +=3D "${LSB}"
+> @@ -68,6 +74,15 @@ PACKAGECONFIG[valgrind] =3D ",--without-
+> valgrind,valgrind,"
+>  PACKAGECONFIG[lttng] =3D "--with-lttng, --without-lttng,lttng-ust"
+>  PACKAGECONFIG[archive] =3D "--with-libarchive, --without-libarchive, lib=
+archive"
+>=20
+> +# Building the AD (Active Directory) DC (Domain Controller) requires Gnu=
+TLS,
+> +# And ad-dc doesn't work with mitkrb5 for versions prior to 4.7.0 accord=
+ing to:
+> +# http://samba.2283325.n4.nabble.com/samba-4-6-6-Unknown-dependency-
+> kdc-in-service-kdc-objlist-td4722096.html
+> +# So the working combination is:
+> +# 1) ad-dc: enable, gnutls: enable, mitkrb5: disable
+> +# 2) ad-dc: disable, gnutls: enable/disable, mitkrb5: enable
+> +PACKAGECONFIG[ad-dc] =3D ",--without-ad-dc,,"
+> +PACKAGECONFIG[gnutls] =3D "--enable-gnutls,--disable-gnutls,gnutls,"
+> +PACKAGECONFIG[mitkrb5] =3D "--with-system-mitkrb5,,krb5,"
+>=20
+>=20
+> SAMBA4_IDMAP_MODULES=3D"idmap_ad,idmap_rid,idmap_adex,idmap_hash,id
+> map_tdb2"
+>=20
+> SAMBA4_PDB_MODULES=3D"pdb_tdbsam,${@bb.utils.contains('PACKAGECONFIG',
+> 'ldap', 'pdb_ldap,', '', d)}pdb_ads,pdb_smbpasswd,pdb_wbc_sam,pdb_samba4"
+> @@ -82,12 +97,9 @@ EXTRA_OECONF +=3D "--enable-fhs \
+>                   --with-modulesdir=3D${libdir}/samba \
+>                   --with-lockdir=3D${localstatedir}/lib/samba \
+>                   --with-cachedir=3D${localstatedir}/lib/samba \
+> -                 --disable-gnutls \
+>                   --disable-rpath-install \
+>                   --with-shared-modules=3D${SAMBA4_MODULES} \
+>                   --bundled-libraries=3D${SAMBA4_LIBS} \
+> -                 --with-system-mitkrb5 \
+> -                 --without-ad-dc \
+>                   ${@base_conditional('TARGET_ARCH', 'x86_64', '', '--dis=
+able-glusterfs',
+> d)} \
+>                   --with-cluster-support \
+>                   --with-profiling-data \
+> @@ -113,6 +125,10 @@ do_install_append() {
+>          -e 's,/etc/sysconfig/samba,${sysconfdir}/default/samba,' \
+>          -i ${D}${systemd_system_unitdir}/*.service
+>=20
+> +    if [ "${@bb.utils.contains('PACKAGECONFIG', 'ad-dc', 'yes', 'no', d)=
+}" =3D "no" ];
+> then
+> +        rm -f ${D}${systemd_system_unitdir}/samba.service
+> +    fi
+> +
+>      install -d ${D}${sysconfdir}/tmpfiles.d
+>      install -m644 packaging/systemd/samba.conf.tmp
+> ${D}${sysconfdir}/tmpfiles.d/samba.conf
+>      echo "d ${localstatedir}/log/samba 0755 root root -" \
+> @@ -161,7 +177,7 @@ do_install_append() {
+>  PACKAGES =3D+ "${PN}-python ${PN}-pidl \
+>               ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
+>               winbind \
+> -             ${PN}-common ${PN}-base ${PN}-ctdb-tests \
+> +             ${PN}-common ${PN}-base ${PN}-ad-dc ${PN}-ctdb-tests \
+>               smbclient"
+>=20
+>  python samba_populate_packages() {
+> @@ -196,9 +212,12 @@ FILES_${PN}-base =3D "${sbindir}/nmbd \
+>                      ${localstatedir}/nmbd \
+>                      ${localstatedir}/spool/samba \
+>                      ${systemd_system_unitdir}/nmb.service \
+> -                    ${systemd_system_unitdir}/samba.service \
+>                      ${systemd_system_unitdir}/smb.service"
+>=20
+> +FILES_${PN}-ad-dc =3D "${sbindir}/samba \
+> +                     ${systemd_system_unitdir}/samba.service \
+> +                    "
+> +
+>  FILES_${PN}-ctdb-tests =3D "${bindir}/ctdb_run_tests \
+>                            ${bindir}/ctdb_run_cluster_tests \
+>                            ${sysconfdir}/ctdb/nodes \
+> --
+> 2.11.0
+>=20
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
