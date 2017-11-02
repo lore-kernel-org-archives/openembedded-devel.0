@@ -1,55 +1,55 @@
 Return-Path: <schnitzeltony@googlemail.com>
 Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
 	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 3E1A278259
+	by mail.openembedded.org (Postfix) with ESMTP id 7B15A78259
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Nov 2017 10:31:55 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id r79so4503774wrb.13
+	Thu,  2 Nov 2017 10:31:57 +0000 (UTC)
+Received: by mail-wr0-f196.google.com with SMTP id o44so4507852wrf.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Nov 2017 03:31:57 -0700 (PDT)
+	Thu, 02 Nov 2017 03:31:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=LWqcTtjTImg8aTOaKusN/OXfKooPNsBsXBzzkFAmdiY=;
-	b=st3/1Ty3iKskbUZr4Oj7HTwewuRAfe5NOuyZslKGHDhNXXVjvu+l62tuQCWcOt7sJg
-	4HzG7PHomMEelCigDenwzslX9d0dZNXJsDrGEbNH45rpESQ6mClRqm2yUhZWWAXaxf2P
-	4fCdIVYZUQCQjiFoCD6xnk7qlBknNxzlJncFoHUhD8cW52EJJkVAO/PMAoP3NHH8kB+I
-	WpFuNfKQ6pzOuBpq2DkiWctzBe6yzZWXUd09PsrqRTHxN3uZ6BqaRBOnUYAGbSquQM3L
-	xzZe6ftstKYr59McNb2q4SW+yNGxO8/QS6bfSBCJQpDCv9PhAcLWzfQsIBG8IsI8JvQu
-	UALA==
+	bh=yC50S/e1m8Ws1lxZOHOeAGaLZRRXrsQJS1ec829EHx4=;
+	b=J+omr8pAQ+xOah6wlBe0E5T8QbsB8KcHKJipXjtCxePptv/fOhE93oimk4pw+rMi3m
+	wn2vS4/3LrIkGgvPgqwYTppa/UK/xT4Yf9Ia1rDkAUhZ5jQdEjxXUfkJB6M/Fc3geezx
+	3ORgMmFoWQXl+w5quewKjmOzPbo1GZBMjnXh/VRHqJ0xppzsMYarZ8NxPyyPpTHACiSR
+	RrL8Y+OlSO32AJVZaJwA6pmKSBe7kcDM/Unh91ah4cNRwu9PlFZNdrMKKw/fPTFC3SPR
+	iXL9/01mOMh/9Uwoj8prwgJywUImIyQZ5owzwLNY06pWCXXpSL+QbLI+jBtD3hbQLU1+
+	TAZg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=LWqcTtjTImg8aTOaKusN/OXfKooPNsBsXBzzkFAmdiY=;
-	b=qB5Xql2haAoo8il9mstOKKeoq5JC68oUrONsztZ1k/YdizCkWt+A0ZR+17nMviB9dT
-	MF0KMz4nxu1OFTBoHYGBfw7Q7MsvNFYZ/qhz4S5SrywVdrwIuXjtUzrlqP7ybRhAVXhJ
-	Un+I9LpalWqfT0Yswpkwzzo1VExhKufhobM4Y/9V6+bMAnozMML0Zw26Av7ynjxomZv7
-	zd5pPMgNAg/XluNRCSURHyhX+yjNiyMdV52DrcAxTxHwUS4pp1L1J1UIOTmHuKIO6o5K
-	QYP2MDUz8mFfwpbpjP5SKEmhqivINm+YK0Ij0Q6LlggxS5k3RJtxQh9UQiO+CDLBqWL+
-	3BxQ==
-X-Gm-Message-State: AMCzsaVnez2vLSSRvMtlCdSNsM2l+jckXuAIlZsc+Z1UFp1ox54Wd60Z
-	ZxYYjjBJMrF68aan4b9HKCTcCg==
-X-Google-Smtp-Source: ABhQp+QK3CC1OJSjFHSZTnIq5vVPyq3OXlY9rJWjXrFVrq+9O1dWgUr9MSBUKsao0OnXJZKE0Bl9Zg==
-X-Received: by 10.223.173.165 with SMTP id w34mr2459492wrc.22.1509618715972;
-	Thu, 02 Nov 2017 03:31:55 -0700 (PDT)
+	bh=yC50S/e1m8Ws1lxZOHOeAGaLZRRXrsQJS1ec829EHx4=;
+	b=ukK8sxKOqhwzWapRoxG55s1c+ftis1Hrk+asCDm7+SSFqAfeTjphIhDwMKpUhGQU6D
+	SXXCSHuEDd1KMOQOheLUXLbt5Lp0aignYQRNNV8dkhm0saSDbgcHsTHi8dMbLu0DG8Hs
+	whKl+YbwyaTozH/UA2S6Skuc/vL1B0fMStOqn5epDgnNvGFV5gQkwSCW+rtfkioVaQuF
+	6sUE3+yzb8bFhJSk+Anaw6iCVkwSiWfDvwVXfmDkP/pHZmLWpuMLKT92fzq0wW1Gsfns
+	O9CpQChQm8h3wgM1zLPIzghuOYmqTEr80gnbTSIvKvU2SHbqb7BpzgcNtkL5cWD7k/qV
+	dGmg==
+X-Gm-Message-State: AMCzsaU/Ie/YMGpdCh1XyjLZtYmRSVgaDPAznFcLBtwLF9qpONx+31R1
+	ENmpho7tatOELUaxCRWn0h+v7g==
+X-Google-Smtp-Source: ABhQp+RIxPd5JQXXYwhROvoF12De0UYsHuvvfFQwNhpQfzw/ONQfJDnINDrUXahprQNbbrzj2e6esg==
+X-Received: by 10.223.146.101 with SMTP id 92mr2229653wrj.21.1509618718328;
+	Thu, 02 Nov 2017 03:31:58 -0700 (PDT)
 Received: from mueller-a-nb-linux.zera.local
 	(ip-88-152-111-130.hsi03.unitymediagroup.de. [88.152.111.130])
 	by smtp.googlemail.com with ESMTPSA id
-	g68sm340440wmc.22.2017.11.02.03.31.54
+	g68sm340440wmc.22.2017.11.02.03.31.57
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Nov 2017 03:31:55 -0700 (PDT)
+	Thu, 02 Nov 2017 03:31:57 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Nov 2017 11:31:26 +0100
-Message-Id: <20171102103129.3703-8-schnitzeltony@googlemail.com>
+Date: Thu,  2 Nov 2017 11:31:28 +0100
+Message-Id: <20171102103129.3703-10-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.5
 In-Reply-To: <20171102103129.3703-1-schnitzeltony@googlemail.com>
 References: <20171102103129.3703-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 07/10] xfce4-weather-plugin: update 0.8.9 -> 0.8.10
+Subject: [PATCH 09/10] xfce4-appfinder: update 4.12.0 -> 4.13.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,33 +62,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2017 10:31:55 -0000
+X-List-Received-Date: Thu, 02 Nov 2017 10:31:57 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
+It is a development version but this was tested and considered stable.
+
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-weather-plugin_0.8.9.bb => xfce4-weather-plugin_0.8.10.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.9.bb => xfce4-weather-plugin_0.8.10.bb} (72%)
+ .../{xfce4-appfinder_4.12.0.bb => xfce4-appfinder_4.13.0.bb}        | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.12.0.bb => xfce4-appfinder_4.13.0.bb} (54%)
 
-diff --git a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.10.bb
-similarity index 72%
-rename from meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb
-rename to meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.10.bb
-index d9ed2ce..649eaaa 100644
---- a/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.9.bb
-+++ b/meta-xfce/recipes-panel-plugins/weather/xfce4-weather-plugin_0.8.10.bb
-@@ -7,7 +7,7 @@ inherit xfce-panel-plugin
+diff --git a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.0.bb
+similarity index 54%
+rename from meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb
+rename to meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.0.bb
+index 175a827..7e73911 100644
+--- a/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.12.0.bb
++++ b/meta-xfce/recipes-xfce/xfce4-appfinder/xfce4-appfinder_4.13.0.bb
+@@ -2,13 +2,13 @@ DESCRIPTION="Xfce4 Application Finder"
+ SECTION = "x11"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
+-DEPENDS="glib-2.0 gtk+ libxfce4util libxfce4ui garcon dbus-glib xfconf"
++DEPENDS="glib-2.0 gtk+3 libxfce4util libxfce4ui garcon dbus-glib xfconf"
  
- DEPENDS += "libsoup-2.4 dbus-glib upower"
+ inherit xfce distro_features_check
  
--SRC_URI[md5sum] = "0c56c057e1c354b30409b7871ab6f314"
--SRC_URI[sha256sum] = "0e15d14b3e18c3da46ad23ee3158a25220f1474a48b611de96edb56221aecee5"
-+SRC_URI[md5sum] = "bba7f750b97c8fc3656715268edad792"
-+SRC_URI[sha256sum] = "ee6d43c444904631c240470e15e96215c2ce451158bfdbf234bce892bf60eab8"
+ REQUIRED_DISTRO_FEATURES = "x11"
  
- FILES_${PN} += "${datadir}/xfce4/weather"
+-SRC_URI[md5sum] = "0b238b30686388c507c119b12664f1a1"
+-SRC_URI[sha256sum] = "2ad4a58019a76a6b64a816050db25f96854917c2f2e89d6a9df6c18e6c84c567"
++SRC_URI[md5sum] = "6b6cf080c891f7945953f8084a901552"
++SRC_URI[sha256sum] = "c0eb3b29eba3cfa9175ed35174e83a21faa2a2423ddb79501fe8846cc430e3ae"
+ 
+ FILES_${PN} += "${datadir}/appdata"
 -- 
 2.9.5
 
