@@ -1,27 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Haiqing.Bai@windriver.com>
 Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1905E71AC1
+	by mail.openembedded.org (Postfix) with ESMTP id 0269F71AC1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Nov 2017 08:46:30 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA28kWK0019157
+	Thu,  2 Nov 2017 08:54:20 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA28sL97019700
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Nov 2017 01:46:32 -0700 (PDT)
-Received: from [128.224.163.194] (128.224.163.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 2 Nov 2017 01:46:31 -0700
+	Thu, 2 Nov 2017 01:54:22 -0700 (PDT)
+Received: from pek-lpgtest5.wrs.com (128.224.153.85) by
+	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 2 Nov 2017 01:54:21 -0700
+From: Haiqing Bai <Haiqing.Bai@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-References: <20171102082543.3698-1-kai.kang@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <c48f52a6-7ec8-24ac-fb93-d8237a7aa7e3@windriver.com>
-Date: Thu, 2 Nov 2017 16:52:22 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+Date: Thu, 2 Nov 2017 16:33:12 +0800
+Message-ID: <1509611592-22825-1-git-send-email-Haiqing.Bai@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-In-Reply-To: <20171102082543.3698-1-kai.kang@windriver.com>
-Subject: Re: [meta-networking] [PATCH] corosync: 2.4.2 -> 2.4.3
+Subject: [meta-java][PATCH] openjdk-8-native, icedtea7-native: use JAVA_TOOL_OPTIONS from environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -34,132 +31,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2017 08:46:31 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Thu, 02 Nov 2017 08:54:21 -0000
+Content-Type: text/plain
 
-Forgot layer info in title. :(
+Solution on how to be able to build openjdk for a build
+host that need the environment variable JAVA_TOOL_OPTIONS.
+Use JAVA_TOOL_OPTIONS from environment. On some machines this is needed
+in order to start java when the amount of RAM is limited for the user.
 
---Kai
+Author: Peter Bergin <peter.bergin@windriver.com>
+Signed-off-by: Haiqing Bai <Haiqing.Bai@windriver.com>
+---
+ recipes-core/icedtea/icedtea7-native.inc                |  4 ++++
+ recipes-core/openjdk/openjdk-8-native.inc               | 10 ++++++++++
+ .../openjdk/patches-openjdk-8/handle_extra_output.patch | 17 +++++++++++++++++
+ 3 files changed, 31 insertions(+)
+ create mode 100644 recipes-core/openjdk/patches-openjdk-8/handle_extra_output.patch
 
-On 2017年11月02日 16:25, kai.kang@windriver.com wrote:
-> From: Kai Kang <kai.kang@windriver.com>
->
-> Upgrade corosync from 2.4.2 to 2.4.3.
->
-> * remove patch which is merged by upstream
-> * disable autostart of corosync. It only works after configured and config file
->    /etc/corosync/corosync.conf exists.
-> * use bb.utils.filter
-> * corosync init script requires command pidof. But pidof from busybox doesn't
->    work well to filter calling process, so update runtime dependency
->
-> Signed-off-by: Kai Kang <kai.kang@windriver.com>
-> ---
->   ...001-Include-fcntl.h-for-F_-and-O_-defines.patch | 28 ----------------------
->   .../{corosync_2.4.2.bb => corosync_2.4.3.bb}       | 19 +++++++--------
->   2 files changed, 9 insertions(+), 38 deletions(-)
->   delete mode 100644 meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
->   rename meta-networking/recipes-extended/corosync/{corosync_2.4.2.bb => corosync_2.4.3.bb} (84%)
->
-> diff --git a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch b/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
-> deleted file mode 100644
-> index fe4b0793f..000000000
-> --- a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -From 85ea47fedbc96ed9180e08b0d371d9966e3a88da Mon Sep 17 00:00:00 2001
-> -From: Khem Raj <raj.khem@gmail.com>
-> -Date: Wed, 30 Aug 2017 17:28:55 -0700
-> -Subject: [PATCH] Include fcntl.h for F_* and O_* defines
-> -
-> -Fixes errors like
-> -utils.c:95:22: error: use of undeclared identifier 'O_WRONLY'
-> -
-> -Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ----
-> - qdevices/utils.c | 1 +
-> - 1 file changed, 1 insertion(+)
-> -
-> -diff --git a/qdevices/utils.c b/qdevices/utils.c
-> -index 41850b8c..87090853 100644
-> ---- a/qdevices/utils.c
-> -+++ b/qdevices/utils.c
-> -@@ -39,6 +39,7 @@
-> -
-> - #include <err.h>
-> - #include <errno.h>
-> -+#include <fcntl.h>
-> - #include <inttypes.h>
-> - #include <libgen.h>
-> - #include <stdio.h>
-> ---
-> -2.14.1
-> -
-> diff --git a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-> similarity index 84%
-> rename from meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-> rename to meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-> index 33e74e2ff..52d2a1098 100644
-> --- a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-> +++ b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-> @@ -7,11 +7,10 @@ SECTION = "base"
->   
->   inherit autotools pkgconfig systemd useradd
->   
-> -SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
-> -           file://0001-Include-fcntl.h-for-F_-and-O_-defines.patch \
-> -          "
-> -SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
-> -SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
-> +SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
-> +
-> +SRC_URI[md5sum] = "bf0ede13018aadc8a046183bc593b0e0"
-> +SRC_URI[sha256sum] = "b1e7e422e8d2f7af8e5315fa329b1dbd1175fff32efaa55e8054584c80a2c597"
->   
->   LICENSE = "BSD"
->   LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
-> @@ -22,7 +21,7 @@ SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
->                            ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
->                            ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'corosync-qnetd.service', '', d)} \
->   "
-> -SYSTEMD_AUTO_ENABLE = "enable"
-> +SYSTEMD_AUTO_ENABLE = "disable"
->   
->   INITSCRIPT_NAME = "corosync-daemon"
->   
-> @@ -55,22 +54,22 @@ do_install_append() {
->       install -d ${D}${sysconfdir}/default/volatiles
->       echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
->   
-> -    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-> +    if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ]; then
->           chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
->           echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >> ${D}${sysconfdir}/default/volatiles/05_corosync
->       fi
->   
-> -    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-> +    if [ ${@bb.utils.filter('DISTRO_FEATURES','systemd',d)} ]; then
->           install -d ${D}${sysconfdir}/tmpfiles.d
->           echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
->   
-> -        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-> +        if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ]; then
->               install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
->           fi
->       fi
->   }
->   
-> -RDEPENDS_${PN} += "bash"
-> +RDEPENDS_${PN} += "bash ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'sysvinit-pidof', 'procps', d)}"
->   
->   FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
->   FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
-
-
+diff --git a/recipes-core/icedtea/icedtea7-native.inc b/recipes-core/icedtea/icedtea7-native.inc
+index 7d625eb..d4cf7ac 100644
+--- a/recipes-core/icedtea/icedtea7-native.inc
++++ b/recipes-core/icedtea/icedtea7-native.inc
+@@ -170,6 +170,10 @@ EXTRA_OEMAKE = ' \
+                '
+ 
+ do_compile() {
++	# Use JAVA_TOOL_OPTIONS from environment. On some machines this is needed
++	# in order to start java when the amount of RAM is limited for the user.
++	export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS}"
++
+ 	# OpenJDK uses slightly different names for certain arches. We need to know
+ 	#	this to create some files which are expected by the build.
+ 	case "${TRANSLATED_TARGET_ARCH}" in
+diff --git a/recipes-core/openjdk/openjdk-8-native.inc b/recipes-core/openjdk/openjdk-8-native.inc
+index fd97eff..20e1743 100644
+--- a/recipes-core/openjdk/openjdk-8-native.inc
++++ b/recipes-core/openjdk/openjdk-8-native.inc
+@@ -9,6 +9,8 @@ DEPENDS = "\
+     ca-certificates-native openssl-native coreutils-native \
+ "
+ 
++SRC_URI_append += "file://handle_extra_output.patch"
++
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[x11] = "--with-x,,libx11-native xproto-native libxt-native libxext-native libxrender-native"
+ PACKAGECONFIG[cups] = "--with-cups,,cups"
+@@ -47,6 +49,14 @@ EXTRA_OEMAKE_append = ' \
+     images \
+ '
+ 
++do_configure_prepend() {
++    export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS}"
++}
++
++do_compile_prepend() {
++    export JAVA_TOOL_OPTIONS="${JAVA_TOOL_OPTIONS}"
++}
++
+ do_compile_append() {
+     set -x
+     mkdir -p ${B}/certs
+diff --git a/recipes-core/openjdk/patches-openjdk-8/handle_extra_output.patch b/recipes-core/openjdk/patches-openjdk-8/handle_extra_output.patch
+new file mode 100644
+index 0000000..52aad95
+--- /dev/null
++++ b/recipes-core/openjdk/patches-openjdk-8/handle_extra_output.patch
+@@ -0,0 +1,17 @@
++When adding the environment variable JAVA_TOOL_OPTIONS an extra line
++in the output from 'java -version' is produced. As this output is
++parsed by configure script the extra line has to be filtered out.
++
++Index: jdk8u-e8bed1496ff2/common/autoconf/boot-jdk.m4
++===================================================================
++--- jdk8u-e8bed1496ff2.orig/common/autoconf/boot-jdk.m4
+++++ jdk8u-e8bed1496ff2/common/autoconf/boot-jdk.m4
++@@ -51,7 +51,7 @@ AC_DEFUN([BOOTJDK_DO_CHECK],
++             BOOT_JDK_FOUND=no
++           else
++             # Oh, this is looking good! We probably have found a proper JDK. Is it the correct version?
++-            BOOT_JDK_VERSION=`"$BOOT_JDK/bin/java" -version 2>&1 | head -n 1`
+++            BOOT_JDK_VERSION=`"$BOOT_JDK/bin/java" -version 2>&1 | grep -v JAVA_TOOL_OPTIONS | head -n 1`
++ 
++             # Extra M4 quote needed to protect [] in grep expression.
++             [FOUND_VERSION_78=`echo $BOOT_JDK_VERSION | grep  '\"1\.[78]\.'`]
 -- 
-Regards,
-Neil | Kai Kang
+1.9.1
 
 
