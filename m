@@ -1,55 +1,54 @@
 Return-Path: <schnitzeltony@googlemail.com>
-Received: from mail-wr0-f196.google.com (mail-wr0-f196.google.com
-	[209.85.128.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1994D7822B
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 8A2647822B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Nov 2017 10:31:52 +0000 (UTC)
-Received: by mail-wr0-f196.google.com with SMTP id p96so4516396wrb.7
+	Thu,  2 Nov 2017 10:31:54 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id m72so10008733wmc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Nov 2017 03:31:54 -0700 (PDT)
+	Thu, 02 Nov 2017 03:31:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=googlemail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=sMLyvZe/3n6yEqGjto479vNG81VEMFZx4grKDMhJ9aA=;
-	b=SpqIUkvPJ/t1wUW6NYUkBPcpPPNxf2vRQ9/p1V89DYiMqFLGVofSoApGuMwWfDFtQI
-	bKuldCzXC+tecD7M3CaWdou9qoewTYI0rVsfPWYvXWSW2msjaiXy7hV5S0VaY2vJS6Jx
-	KgYB/l8n9onhs9qhM7l7j9EAi6sLNl2Mb3O6NhQ+e9MPO0Fb1p5d2/WfWUjM30xApLyi
-	YkGT0ywcUhgPxatq0M6vTLzsQzoXj9lsRuFJveDflo8p4DGBGf7oDca7L62+ZBkOfsFo
-	Ks6FiG0guUbq0sYxBTkvXLx7m4+oOPwGnIU8jXqbwqRMcnzgXA30PlLKSAtIo0vzs7AV
-	wmIQ==
+	bh=7/EIupalSGA8vxecqlIWQG4hqxxFbN/Tc7fLh4uDszU=;
+	b=kt1+gb91E3lHwDxZR2MmgzcLxuFiIv/W8anFpJ/o5xHD/Zq6Z58A73tkFO7t0jICMy
+	hfxwwbyJw4IVuKYbzEdaT5+YmH3k6jlLYsDef5nCq0MdE5Bq2YSQnBjDNIAl2tzam9M+
+	bOC/4CP/ufL8a+CtTlE53rRfOCvDgS15oEyGUaHeDQdZeRGVMr/QnR8MpIaFcinWGE4/
+	kGhh/Z6R2BZDlAv843kgmDnR7O/NXPKabIpR9zN/C/eq0GvHG2z7Vl+xXuzmKwQKZMET
+	CZr6JbwIKVe3uu4Roj8Qsv3CmnsZDbcE44yH0nNTc3rgAupzBjLKb+URdleR7+luiUAo
+	6PMw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=sMLyvZe/3n6yEqGjto479vNG81VEMFZx4grKDMhJ9aA=;
-	b=GpKeV758uM/keFkaObK4EbXso2z/zwJO09XeRNOwKqB4qFlZ5o7mG1XZIoW6uiA3zj
-	DY5pyyT6+HPUUClvywYGIbv0pYi/zeEGiA9KyRgHQc+83XsX1KkUjmygD7H6z+Wcodpf
-	Ak6KPOUZ3zz5N7ncfPXiw0lAUWZHX7fQ4Fvn1Yn6VFXcHCLVUOMv0fC//snt93/CaNLD
-	BS2Ux9/lGuzoeq7sYxXza3PLEbbQT7TqAfSEExCn9BECiPLMSc//4YtDmy0Q/H0wA3Gy
-	WE3Tg1WJYTAG2ZudZrdJd/o0u9BfcFpVBjeWSc1niv2xwW2AUmRyT20bhYMoY7sSnmUe
-	7c2g==
-X-Gm-Message-State: AMCzsaXl4JfYTghY7vZLQBVXHgfABTt+3v1zdolwFB8Aatuk1PsByFwp
-	czSmepHVP8JfqoMhm+ruUVkzRQ==
-X-Google-Smtp-Source: ABhQp+QQSyjatzQ8OfrzeL0Z9+jLMigcCobBFJ9tL5yXJWJCV6rt0ysziuN06c+Ubli92mTEkJyCQg==
-X-Received: by 10.223.170.154 with SMTP id h26mr2380251wrc.87.1509618713493;
-	Thu, 02 Nov 2017 03:31:53 -0700 (PDT)
+	bh=7/EIupalSGA8vxecqlIWQG4hqxxFbN/Tc7fLh4uDszU=;
+	b=AaBBpptFrsdrFwWwDbiYC81V7WWovJr8Qus5cSaWBV4pUvf6BvVeQVavNDakBKPpEV
+	zUDA+eEmpR2k2ex23y1kgzjHOEwd3viabYE8amuMjX0bYgP2+hdlzOlLHTPEpyo/hBbp
+	R7zM2u8s5d3uNd5FHok3TcVFCSCM3EMCBsh4yDT9MEH7A7wy2BmH8AYe2scJ5OoOESFI
+	b7alb5kps8QBQwCjvR0z32f7x7o+ySSk22uQYm3mVYKZab2Lnp505ru2F6DpWchrxIWh
+	MM10NDh+wv/mGj9ViXwDTa+WIiWbSJEWb1lK5/nwkAFkyRLS1sMfGePRN+8/JD3B0JAm
+	AFBQ==
+X-Gm-Message-State: AMCzsaVtlvAn9CeKbl0iorx15OSeUc3scaD6Wx0N+UpGnRNAfJcQmUpB
+	2ruxLC+4nrEsTDgt8rpvs02sDg==
+X-Google-Smtp-Source: ABhQp+RDE7Eg4kw/D/5kK85pyOrNLJspWtqfcE7RNa2zdMggrQLcB6Ny2PkC2MUZFr6dgzVjgQhEKA==
+X-Received: by 10.28.157.83 with SMTP id g80mr1297654wme.9.1509618714841;
+	Thu, 02 Nov 2017 03:31:54 -0700 (PDT)
 Received: from mueller-a-nb-linux.zera.local
 	(ip-88-152-111-130.hsi03.unitymediagroup.de. [88.152.111.130])
 	by smtp.googlemail.com with ESMTPSA id
-	g68sm340440wmc.22.2017.11.02.03.31.52
+	g68sm340440wmc.22.2017.11.02.03.31.53
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 02 Nov 2017 03:31:52 -0700 (PDT)
+	Thu, 02 Nov 2017 03:31:53 -0700 (PDT)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@googlemail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Nov 2017 11:31:24 +0100
-Message-Id: <20171102103129.3703-6-schnitzeltony@googlemail.com>
+Date: Thu,  2 Nov 2017 11:31:25 +0100
+Message-Id: <20171102103129.3703-7-schnitzeltony@googlemail.com>
 X-Mailer: git-send-email 2.9.5
 In-Reply-To: <20171102103129.3703-1-schnitzeltony@googlemail.com>
 References: <20171102103129.3703-1-schnitzeltony@googlemail.com>
 MIME-Version: 1.0
-Subject: [PATCH 05/10] xfce4-notifyd: update 0.3.6 -> 0.4.0
+Subject: [PATCH 06/10] xfce4-pulseaudio-plugin: update 0.2.4 -> 0.3.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,60 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2017 10:31:53 -0000
+X-List-Received-Date: Thu, 02 Nov 2017 10:31:54 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-While at it rework dependencies.
-
 Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
 ---
- .../{xfce4-notifyd_0.3.6.bb => xfce4-notifyd_0.4.0.bb}   | 16 ++++++++++++----
- 1 file changed, 12 insertions(+), 4 deletions(-)
- rename meta-xfce/recipes-apps/xfce4-notifyd/{xfce4-notifyd_0.3.6.bb => xfce4-notifyd_0.4.0.bb} (58%)
+ ...e4-pulseaudio-plugin_0.2.4.bb => xfce4-pulseaudio-plugin_0.3.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.2.4.bb => xfce4-pulseaudio-plugin_0.3.2.bb} (73%)
 
-diff --git a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.6.bb b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.0.bb
-similarity index 58%
-rename from meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.6.bb
-rename to meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.0.bb
-index ac2360a..0ec6b63 100644
---- a/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.6.bb
-+++ b/meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.0.bb
-@@ -2,14 +2,21 @@ SUMMARY = "Easily themable notification daemon with transparency effects"
- HOMEPAGE = "http://goodies.xfce.org/projects/applications/xfce4-notifyd"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
--DEPENDS = "libxfce4util libxfce4ui xfconf gtk+ dbus dbus-glib libnotify \
-+DEPENDS = " \
-+    dbus \
-+    dbus-glib \
-     dbus-glib-native \
-+    libnotify \
-+    libxfce4util \
-+    libxfce4ui \
-+    xfconf \
-+    xfce4-panel \
- "
+diff --git a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.2.bb
+similarity index 73%
+rename from meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb
+rename to meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.2.bb
+index 4c7ca70..ad0b54a 100644
+--- a/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.2.4.bb
++++ b/meta-xfce/recipes-panel-plugins/pulseaudio/xfce4-pulseaudio-plugin_0.3.2.bb
+@@ -8,8 +8,8 @@ REQUIRED_DISTRO_FEATURES = "pulseaudio x11"
  
- inherit xfce-app
+ DEPENDS += "pulseaudio"
  
--SRC_URI[md5sum] = "19e602fa5e33afaf7563f069261ae1db"
--SRC_URI[sha256sum] = "f4ca7c0dadd3d4cdf8cd3c8ae60ccea77b8cf409f8517161796364eb1d766cf9"
-+SRC_URI[md5sum] = "c2de09c30b06eaf2d3faaf3e509d656a"
-+SRC_URI[sha256sum] = "2771871f67effc0bb80f656cf4aa3cd71fe0ea0f4c04b5d8e97bb1752faf36c9"
+-SRC_URI[md5sum] = "e0ffde419fa030f1f9bd0b56e3264a1c"
+-SRC_URI[sha256sum] = "8d9330ddf1d44a864a36d566cce4b76d4f859c5984bba7653d7dc39aa24d5c3e"
++SRC_URI[md5sum] = "da70bb47755cccf8898dc5cfbe31a6f2"
++SRC_URI[sha256sum] = "fd4ae178912dc17ffb16ce887db24545624c7f423a02bd2eab47d52758fa99d8"
  
- do_compile_prepend() {
-     mkdir -p xfce4-notifyd
-@@ -17,7 +24,8 @@ do_compile_prepend() {
- 
- FILES_${PN} += " \
-     ${systemd_user_unitdir} \
--    ${libdir}/xfce4/notifyd \
-+    ${datadir}/xfce4 \
-     ${datadir}/themes \
-     ${datadir}/dbus-1 \
-+    ${libdir}/xfce4 \
- "
+ PACKAGECONFIG ??= ""
+ PACKAGECONFIG[libnotify] = "--enable-libnotify,--disable-libnotify,libnotify"
 -- 
 2.9.5
 
