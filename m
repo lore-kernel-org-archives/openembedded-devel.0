@@ -1,40 +1,49 @@
-Return-Path: <michael.davis@essvote.com>
-X-Greylist: delayed 901 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 02 Nov 2017 16:08:55 UTC
-Received: from m2.essvote.com (m2.essvote.com [66.37.226.14])
-	by mail.openembedded.org (Postfix) with ESMTP id 23824782D2
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f180.google.com (mail-pf0-f180.google.com
+	[209.85.192.180])
+	by mail.openembedded.org (Postfix) with ESMTP id BBD69782D7
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Nov 2017 16:08:55 +0000 (UTC)
-X-AuditID: 0a00029b-c8dff70000007b66-83-59fb3f8fd6ca
-Received: from ESS-EX01.essvote.corp.local (Unknown_Domain [172.16.110.40])
-	by m2.essvote.com (Symantec Messaging Gateway) with SMTP id
-	0B.8A.31590.F8F3BF95; Thu,  2 Nov 2017 10:53:54 -0500 (CDT)
-Received: from ESS-EX01.essvote.corp.local ([::1]) by
-	ESS-EX01.essvote.corp.local ([::1]) with mapi id 14.03.0301.000;
-	Thu, 2 Nov 2017 10:53:51 -0500
-From: "Davis, Michael" <michael.davis@essvote.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-oe][PATCH] nodejs: Update to 8.9.0
-Thread-Index: AQHTU/LGER+wibFihkGyhamPU3CZsA==
-Date: Thu, 2 Nov 2017 15:53:50 +0000
-Message-ID: <20171102155307.7360-1-michael.davis@essvote.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.1.20.97]
+	Thu,  2 Nov 2017 16:31:19 +0000 (UTC)
+Received: by mail-pf0-f180.google.com with SMTP id b85so54969pfj.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Nov 2017 09:31:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=+4tzdYVUP5VTZfs+t3SX+44eRDW3QsVHYuifQ58CJ+U=;
+	b=opJErhTj7KzG834fTDAHyuZvEgixGr5wdq47LEr0dTEMr5ovccnxjeGucv500IBbNr
+	3efNWjrCgsJN/m7PkY6uraA9m0yudKlhRiT2+SynwMhNrFLGwN7yCcMZJ+b6zMbPiWls
+	vCAHpbJ1mQojVJxlp9InAgnJoKFy10vlCI5cB+qSMLbxenx4sAmq/9165HhZH2+Ay5OU
+	bEvpNfu1cAQEdYgnmnSGX/UoVWkkm6w61VWEKkv3DhhXQWz73yOCtqV6e+3dBshXUuZ/
+	YeYk98Bt1Jr70DEBVHclQURAlv4204QSMkKFo1ZxV8uiI52cM8zJMr1du5kBj/qlQXzh
+	7X9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=+4tzdYVUP5VTZfs+t3SX+44eRDW3QsVHYuifQ58CJ+U=;
+	b=mqsF1sxLRWqytZwSpw+z0WokQ1eqXiawh/+IK8JDpXvgz/Fi2NDe6Ldx9OcKDpo9A9
+	eYWORKNOdJucNSraQqD/9PEkrWzQSWHyqJZ+LYDS8mhZWh6p3QZQ/ol/xSoRtcd+sT1U
+	9lejOU6ekrJwg7nYnDGwO8kol2a0FDr2sb/DCdJSNygNqqDsnvFy/8JdUimplgN8hOXA
+	gRjuZtNGeB5IadSIr4sgOj52bDkOOZ+WsYmffx497XKtDpYuTLdaaBMgfye2MX+etmMA
+	TO6Tegro8OS99/vhiKU633NYhNWGI3QYaWy7e6WgsmLngCsWmWNhBwPGp6y/wgdnvrHS
+	oC1A==
+X-Gm-Message-State: AMCzsaV3AqUOaSRuWluYym2uPlwwqdUJUHgqd2F/PnwKtJ8tuskEr55g
+	/AXm+gMGW5Ii/sr0+3Z2oipp50P+YLJoKE6nbE0=
+X-Google-Smtp-Source: ABhQp+QyuuEB3R9W33f1CDebMdGj2mP/cF9X6iGuccJgxEZaWP4JF00VCl6TDq0OpUkldg9xaDnsGbJoPA+cR3X2GhM=
+X-Received: by 10.84.128.97 with SMTP id 88mr3885387pla.161.1509640280597;
+	Thu, 02 Nov 2017 09:31:20 -0700 (PDT)
 MIME-Version: 1.0
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFtrLLMWRmVeSWpSXmKPExsWyRiBPQ3eS/e9Ig6lPOS0uHl7K7MDocW7j
-	CsYAxigum5TUnMyy1CJ9uwSujO0fX7IXnOSpmHr/AGMDYy93FyMnh4SAicTvuWcZuxi5OIQE
-	jjJKbPv4FMqZySjR0HaaDaSKTcBI4tz1TYwgtohArMS8TTOZQGxmAQOJd5s3snYxcnAICxhK
-	PP0rB1FiJjHh9xtmCFtPYtu15WCtLAIqEi1TV7OA2LwCthK91yeC1TAKiEl8P7UGaqS4xK0n
-	85kgjhOQWLLnPDOELSrx8vE/VghbTuLB39NQ9XoSN6ZOYYOwtSWWLXzNDDFfUOLkzCcsExiF
-	ZyEZOwtJyywkLbOQtCxgZFnFyJdrpJdaXFyWX5Kql5yfu4kRGNRcDEyzdzD2NMUeYhTgYFTi
-	4T2g/itSiDWxrLgy9xCjNAeLkjjv4mudkUIC6YklqdmpqQWpRfFFpTmpxYcYmTg4QQSXVAMj
-	P/OaRJPlL+tOyZv+npm2Mlftxue3O9ZIztDNfCrntaPFsSbSO/7euwJrg7V+cWwWette54hs
-	7FS51X5261aDD/zv+uQVOffvrTYN+C9Zc+Hzc+Z4R5Gzf6ZvDEr9/+PS5OAqs+sJ5a+XL3ZI
-	nHhia/3KQx//2224XOgbrrjU49CDt86FxrMuK7EUZyQaajEXFScCAHLsBk9QAgAA
-Subject: [meta-oe][PATCH] nodejs: Update to 8.9.0
+Received: by 10.100.187.66 with HTTP; Thu, 2 Nov 2017 09:30:50 -0700 (PDT)
+In-Reply-To: <20171102103129.3703-2-schnitzeltony@googlemail.com>
+References: <20171102103129.3703-1-schnitzeltony@googlemail.com>
+	<20171102103129.3703-2-schnitzeltony@googlemail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Nov 2017 09:30:50 -0700
+Message-ID: <CAMKF1spbF2bJDQK_htfwpEKRgh1MzZEpkxpyde1x1dfoaqNYhw@mail.gmail.com>
+To: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 01/10] tumbler: make thumbnails work again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,51 +56,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Nov 2017 16:08:56 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 02 Nov 2017 16:31:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Update nodejs to latest stable release 8.9.0.
----
- .../recipes-devtools/nodejs/{nodejs_8.7.0.bb =3D> nodejs_8.9.0.bb}    | 6 =
-+++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/nodejs/{nodejs_8.7.0.bb =3D> nodejs_8.9.0.=
-bb} (94%)
+On Thu, Nov 2, 2017 at 3:31 AM, Andreas M=C3=BCller
+<schnitzeltony@googlemail.com> wrote:
+> fixes:
+> | Failed to load the cache plugin "tumbler-cache-plugin.so": /usr/lib/tum=
+bler-1/plugins/cache/tumbler-cache-plugin.so: cannot open shared object fil=
+e: No such file or directory
+>
+> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
+> ---
+>  meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce=
+/recipes-xfce/tumbler/tumbler_0.1.31.bb
+> index 1f5419a..fe331cb 100644
+> --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+> +++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+> @@ -15,6 +15,10 @@ INSANE_SKIP_${PN} =3D "dev-so"
+>  PACKAGECONFIG ??=3D ""
+>  PACKAGECONFIG[gstreamer-thumbnailer] =3D "--enable-gstreamer-thumbnailer=
+,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
+>
+> +do_install_appen() {
 
-diff --git a/meta-oe/recipes-devtools/nodejs/nodejs_8.7.0.bb b/meta-oe/reci=
-pes-devtools/nodejs/nodejs_8.9.0.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/nodejs/nodejs_8.7.0.bb
-rename to meta-oe/recipes-devtools/nodejs/nodejs_8.9.0.bb
-index 3ef4e6a1c..1cab6a497 100644
---- a/meta-oe/recipes-devtools/nodejs/nodejs_8.7.0.bb
-+++ b/meta-oe/recipes-devtools/nodejs/nodejs_8.9.0.bb
-@@ -1,7 +1,7 @@
- DESCRIPTION =3D "nodeJS Evented I/O for V8 JavaScript"
- HOMEPAGE =3D "http://nodejs.org"
- LICENSE =3D "MIT & BSD & Artistic-2.0"
--LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D23bbe20ee15d74b4c56e57f73e9c039=
-b"
-+LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D14045ee6ae930d784435884f8aa1be0=
-d"
-=20
- DEPENDS =3D "openssl10 zlib"
-=20
-@@ -12,8 +12,8 @@ COMPATIBLE_MACHINE_mips64 =3D "(!.*mips64).*"
- SRC_URI =3D "http://nodejs.org/dist/v${PV}/node-v${PV}.tar.xz \
-            file://0001-Disable-running-gyp-files-for-bundled-deps.patch \
- "
--SRC_URI[md5sum] =3D "78c297b4a23f7f9c0c031baa77702402"
--SRC_URI[sha256sum] =3D "5a17d08c68ee7c1e748fd32534edda766cb57c13ed98e693f3=
-075bc9d9a0b59a"
-+SRC_URI[md5sum] =3D "49001b4037b2ddf10c2174c38a40f112"
-+SRC_URI[sha256sum] =3D "ae8258f89e127a76d4b4aff6fdb8dc395b7da0069cba054b91=
-3dfc36b3c91189"
-=20
- S =3D "${WORKDIR}/node-v${PV}"
-=20
---=20
-2.13.6
+typo
+
+> +    ln -sf tumbler-cache-plugin.so ${D}${libdir}/tumbler-1/plugins/cache=
+/tumbler-xdg-cache.so
+> +}
+> +
+>  FILES_${PN} +=3D "${datadir}/dbus-1/services \
+>                  ${libdir}/tumbler-1/tumblerd \
+>                  ${libdir}/tumbler-1/plugins/*.so \
+> --
+> 2.9.5
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
