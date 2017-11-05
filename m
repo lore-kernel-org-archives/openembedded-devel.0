@@ -1,33 +1,47 @@
-Return-Path: <denis@denix.org>
-Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id DEE4C78345
+Return-Path: <dariusz.pelowski@gmail.com>
+Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
+	[209.85.215.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 72F357197A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Nov 2017 17:22:23 +0000 (UTC)
-Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id C81FF20AA4;
-	Fri,  3 Nov 2017 17:22:24 +0000 (UTC)
-Received: from mailout4.zoneedit.com ([127.0.0.1])
-	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
-	port 10024)
-	with ESMTP id 2LKVZ3xauU0g; Fri,  3 Nov 2017 17:22:24 +0000 (UTC)
-Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
-	[100.15.85.143])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id A6DA3204D6;
-	Fri,  3 Nov 2017 17:22:23 +0000 (UTC)
-Received: by mail.denix.org (Postfix, from userid 1000)
-	id 278E7162714; Fri,  3 Nov 2017 13:22:23 -0400 (EDT)
-Date: Fri, 3 Nov 2017 13:22:23 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
-Message-ID: <20171103172223.GO9221@denix.org>
-References: <1509684158-12893-1-git-send-email-manjukumar.harthikote-matha@xilinx.com>
-MIME-Version: 1.0
-In-Reply-To: <1509684158-12893-1-git-send-email-manjukumar.harthikote-matha@xilinx.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][PATCH v4] whetstone_1.2.bb: Add whetstone benchmark
+	Sun,  5 Nov 2017 11:06:46 +0000 (UTC)
+Received: by mail-lf0-f66.google.com with SMTP id 90so7540120lfs.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Nov 2017 03:06:48 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=ZLcK9gtVvAbdwcuePVHTYmVbwbR+DOdeOZLnJ/bzPY0=;
+	b=FUPkpdGJjzJwH+ahCloB17pXBa89EEdRNB5TT/e6OeoxfORmppRrX9uhoi25WJnhv2
+	rk3Jes1S9+k4EgabMODq+e8+CvCScNpUVMRk5KAv0ImWDTff2FJHdK17OhZI0H4bv67y
+	J1BIViwbGCOBS/QTc6O9j9oI3CWs4cnGWbrfuBWMNc3vIEaMRfJQlJ5u/JwLJ+duzf/C
+	PucIDfrRXQauB3rwJ2a7JLMuP2namaIaGZrzjC5FJeR2hYP4GDDuQfvf35uIOYL0xgJe
+	yf2wYdwUrI1E3Tvx7taFNOkQ5/7icxPWp3KfmCjo/PjlLYLp0yGci0y4DOek81GJETqy
+	aZVw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=ZLcK9gtVvAbdwcuePVHTYmVbwbR+DOdeOZLnJ/bzPY0=;
+	b=Ct64uxxxeSFRbs1YfGNQ8xt+Z1BSRRtCHC8OGsba/7rlv9YUezYZpdIvjdaVgE0Chn
+	O8OMQx5q2TXNGbuNLBweZQv5bVRRhQVLuyB5HD48Pf00Cc0it0i8x4ilknzSka8FtOxS
+	ADoXe+oyGsI5PtUa3HmiuGlm3FSDzT6Rto7PV/sRbIY6+5n/+nbwxYGGLcJEGBaVTmUy
+	GKdzTfYK0JKLOtBwl2A94Oj86sJWN5SYIsqqJOwDlvS5M7X0fMaa4RTjQovmGGfsgZDn
+	kMeCrGJQVf6vx2fZxE2ZN0IDhaewZd1S0bHtZARwMmKfa7FGbv7n7yRYO00A3HDdaDSa
+	fuIw==
+X-Gm-Message-State: AMCzsaXr/ofNdft3VzG9YY6Mldi5mSFNX4PBtLMdYW1ircwlGvdpmnHR
+	94phstvKO5V3Y3X9zElxbOQN/sLW
+X-Google-Smtp-Source: ABhQp+QlmXjcdGsvuGZ7Ifrnpt2mTFhKQ2MTW6PJeWrxU7UBpVte05npDh23lIedTv3VrHM3A4VRaQ==
+X-Received: by 10.46.67.14 with SMTP id q14mr5067812lja.73.1509880006841;
+	Sun, 05 Nov 2017 03:06:46 -0800 (PST)
+Received: from duzy.lan (user-188-33-218-82.play-internet.pl. [188.33.218.82])
+	by smtp.gmail.com with ESMTPSA id
+	y191sm1853359lfd.51.2017.11.05.03.06.45
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 05 Nov 2017 03:06:46 -0800 (PST)
+From: Dariusz Pelowski <dariusz.pelowski@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun,  5 Nov 2017 12:06:39 +0100
+Message-Id: <20171105110639.8103-1-dariusz.pelowski@gmail.com>
+X-Mailer: git-send-email 2.14.3
+Subject: [meta-oe][PATCH] android-tools: do_unpack_extra task removed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -40,58 +54,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Nov 2017 17:22:24 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 05 Nov 2017 11:06:47 -0000
 
-On Thu, Nov 02, 2017 at 09:42:38PM -0700, Manjukumar Matha wrote:
-> The Whetstone benchmark is a synthetic benchmark for evaluating the
-> performance of computers.
-> 
-> https://en.wikipedia.org/wiki/Whetstone_(benchmark)
-> 
-> Signed-off-by: Manjukumar Matha <manjukumar.harthikote-matha@xilinx.com>
+When user don't have properly configured git user.email and user.name
+compilation fails on do_unpack_extra step when executing "git commit" command.
 
-Acked-by: Denys Dmytriyenko <denys@ti.com>
+This patch removes whole do_unpack_extra task as it's unusual operation
+for the recipe to remove .git directories and initialize new git repository
+after do_unpack task.
 
+Signed-off-by: Dariusz Pelowski <dariusz.pelowski@gmail.com>
+---
+ .../android-tools/android-tools_5.1.1.r37.bb           | 18 ------------------
+ 1 file changed, 18 deletions(-)
 
-> ---
->  meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb | 20 ++++++++++++++++++++
->  1 file changed, 20 insertions(+)
->  create mode 100644 meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
-> 
-> diff --git a/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb b/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
-> new file mode 100644
-> index 0000000..8fad04e
-> --- /dev/null
-> +++ b/meta-oe/recipes-benchmark/whetstone/whetstone_1.2.bb
-> @@ -0,0 +1,20 @@
-> +DESCRIPTION = "Whetstone benchmark is a synthetic benchmark for evaluating the performance of computers"
-> +SUMMARY = "CPU benchmark to measure floating point performance"
-> +
-> +LICENSE = "PD"
-> +LIC_FILES_CHKSUM ="file://${WORKDIR}/whetstone.c;beginline=1;endline=52;md5=c795edc15e7e1d92ca8f88ad718449f5"
-> +
-> +SRC_URI = "http://www.netlib.org/benchmark/whetstone.c"
-> +SRC_URI[md5sum] = "d8eb2cd7104bb5a12d614ac6d3f1f9fb"
-> +SRC_URI[sha256sum] = "333e4ceca042c146f63eec605573d16ae8b07166cbc44a17bec1ea97c6f1efbf"
-> +
-> +S = "${WORKDIR}"
-> +
-> +do_compile () {
-> +	${CC} ${CFLAGS} ${LDFLAGS} -Ofast -o whetstone whetstone.c -lm
-> +}
-> +
-> +do_install () {
-> +	install -Dm 0755 whetstone ${D}${bindir}/whetstone
-> +}
-> +
-> -- 
-> 2.7.4
-> 
-> -- 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+index 75f5b9e26..d3ccd1d06 100644
+--- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
++++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
+@@ -54,24 +54,6 @@ inherit systemd
+ 
+ SYSTEMD_SERVICE_${PN} = "android-tools-adbd.service"
+ 
+-# Get rid of files uneeded to build Android tools
+-do_unpack_extra() {
+-    cd ${S}
+-    rm -rf \
+-      system/core/.git \
+-      system/extras/.git \
+-      hardware/libhardware/.git \
+-      external/libselinux/.git \
+-      build/.git
+-    git init
+-    git add .
+-    git commit -m \
+-      "Initial import - committed ${ANDROID_TAG}"
+-    git clean -fdx
+-}
+-
+-addtask unpack_extra after do_unpack before do_patch
+-
+ # Find libbsd headers during native builds
+ CC_append_class-native = " -I${STAGING_INCDIR}"
+ CC_append_class-nativesdk = " -I${STAGING_INCDIR}"
+-- 
+2.14.3
+
 
