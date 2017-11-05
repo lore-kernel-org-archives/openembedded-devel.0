@@ -1,47 +1,47 @@
-Return-Path: <dariusz.pelowski@gmail.com>
-Received: from mail-lf0-f66.google.com (mail-lf0-f66.google.com
-	[209.85.215.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 72F357197A
+Return-Path: <pbarker@toganlabs.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id C5E6C782D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Nov 2017 11:06:46 +0000 (UTC)
-Received: by mail-lf0-f66.google.com with SMTP id 90so7540120lfs.13
+	Sun,  5 Nov 2017 22:08:17 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id b9so10718741wmh.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Nov 2017 03:06:48 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	Sun, 05 Nov 2017 14:08:19 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
 	h=from:to:cc:subject:date:message-id;
-	bh=ZLcK9gtVvAbdwcuePVHTYmVbwbR+DOdeOZLnJ/bzPY0=;
-	b=FUPkpdGJjzJwH+ahCloB17pXBa89EEdRNB5TT/e6OeoxfORmppRrX9uhoi25WJnhv2
-	rk3Jes1S9+k4EgabMODq+e8+CvCScNpUVMRk5KAv0ImWDTff2FJHdK17OhZI0H4bv67y
-	J1BIViwbGCOBS/QTc6O9j9oI3CWs4cnGWbrfuBWMNc3vIEaMRfJQlJ5u/JwLJ+duzf/C
-	PucIDfrRXQauB3rwJ2a7JLMuP2namaIaGZrzjC5FJeR2hYP4GDDuQfvf35uIOYL0xgJe
-	yf2wYdwUrI1E3Tvx7taFNOkQ5/7icxPWp3KfmCjo/PjlLYLp0yGci0y4DOek81GJETqy
-	aZVw==
+	bh=0iPjURyKxx5fxnX/m2c3/iMwfRhImhV0zEdK2cjBWe8=;
+	b=hdSUrWdz5lYU/nEiVbJIFNSydQfclDwG1DockAHrbVY1TXqlvM3lx49l29lGDuver4
+	d4S6/CewpojihxVOPqNJm9k8GySY7EREioMVYeSDfIOreSp2Lz+91YaqWWlxWIik7X8f
+	gafw8IneW0CJJYCVESwPATefLXyMgvuuy7qhiy69D3niCUu+HfIcZHgb8QrWt/KT6pPD
+	JuvJQWE3cPtk9a4QrrWyUFtG4J6mLwY3PdwUSd/aboTe2IVhU9o7r9Ts36JzMfnx5oPF
+	efeMuE403JLPYo9+alFrE4VugZpO+sldgfYYalso1/axObsGuPVca/yldc1fzDAOP2on
+	AoNQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=ZLcK9gtVvAbdwcuePVHTYmVbwbR+DOdeOZLnJ/bzPY0=;
-	b=Ct64uxxxeSFRbs1YfGNQ8xt+Z1BSRRtCHC8OGsba/7rlv9YUezYZpdIvjdaVgE0Chn
-	O8OMQx5q2TXNGbuNLBweZQv5bVRRhQVLuyB5HD48Pf00Cc0it0i8x4ilknzSka8FtOxS
-	ADoXe+oyGsI5PtUa3HmiuGlm3FSDzT6Rto7PV/sRbIY6+5n/+nbwxYGGLcJEGBaVTmUy
-	GKdzTfYK0JKLOtBwl2A94Oj86sJWN5SYIsqqJOwDlvS5M7X0fMaa4RTjQovmGGfsgZDn
-	kMeCrGJQVf6vx2fZxE2ZN0IDhaewZd1S0bHtZARwMmKfa7FGbv7n7yRYO00A3HDdaDSa
-	fuIw==
-X-Gm-Message-State: AMCzsaXr/ofNdft3VzG9YY6Mldi5mSFNX4PBtLMdYW1ircwlGvdpmnHR
-	94phstvKO5V3Y3X9zElxbOQN/sLW
-X-Google-Smtp-Source: ABhQp+QlmXjcdGsvuGZ7Ifrnpt2mTFhKQ2MTW6PJeWrxU7UBpVte05npDh23lIedTv3VrHM3A4VRaQ==
-X-Received: by 10.46.67.14 with SMTP id q14mr5067812lja.73.1509880006841;
-	Sun, 05 Nov 2017 03:06:46 -0800 (PST)
-Received: from duzy.lan (user-188-33-218-82.play-internet.pl. [188.33.218.82])
+	bh=0iPjURyKxx5fxnX/m2c3/iMwfRhImhV0zEdK2cjBWe8=;
+	b=G2LjF2GtrlgEeCuByYFjjW3L+Y8Ll2uFtpNi1rAQBYmsiM67AnRvgNlCRRnObv6fAF
+	0qt74rD4XmAxoiS2czowXKxZO2+j9ZdvnTpaQKrjXofD/cGJJBaHe4US6TXDiiaOH5aA
+	PeL39wcBuMBcILUwlU36xfEv2QTlUntaKoGIXnlNq0jn5FdhRyaSLObHmAU1q/+G2Agh
+	UgFUs0ujp6akPcK5xk1RHwGfpv+6INlxvb/JAGCgQkvYsmtHa4QtSeYGXhscyCn0WmGE
+	kOLW+2wfrDmkcaVE9FdG7pXwv724xDFZhFqqIMndv/nqHlzTbI0sXAs0aj3ZR8OpnEyF
+	bsJg==
+X-Gm-Message-State: AJaThX5vO49wsb6YW2gqhACjwggFGw/bRx2Jz/P0tFgteWmupVs80WOH
+	Rh46UyEZtPk+IPWRM5l4WPWclZFQ
+X-Google-Smtp-Source: ABhQp+SunCweV8VZZN6gkTWxiMxao2RavTwxsgHDo0WAE1GsnWvt8ns+2Iv9/lS7hdyIsvHyC9cRhQ==
+X-Received: by 10.28.141.194 with SMTP id p185mr3954082wmd.149.1509919698068; 
+	Sun, 05 Nov 2017 14:08:18 -0800 (PST)
+Received: from build1.toganlabs.com (build1.toganlabs.com. [88.99.240.167])
 	by smtp.gmail.com with ESMTPSA id
-	y191sm1853359lfd.51.2017.11.05.03.06.45
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 05 Nov 2017 03:06:46 -0800 (PST)
-From: Dariusz Pelowski <dariusz.pelowski@gmail.com>
+	q124sm13845688wmg.18.2017.11.05.14.08.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 05 Nov 2017 14:08:16 -0800 (PST)
+From: Paul Barker <pbarker@toganlabs.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Nov 2017 12:06:39 +0100
-Message-Id: <20171105110639.8103-1-dariusz.pelowski@gmail.com>
-X-Mailer: git-send-email 2.14.3
-Subject: [meta-oe][PATCH] android-tools: do_unpack_extra task removed
+Date: Sun,  5 Nov 2017 22:07:24 +0000
+Message-Id: <1509919652-31388-1-git-send-email-pbarker@toganlabs.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 0/8] Recipe updates and an addition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,50 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Nov 2017 11:06:47 -0000
+X-List-Received-Date: Sun, 05 Nov 2017 22:08:18 -0000
 
-When user don't have properly configured git user.email and user.name
-compilation fails on do_unpack_extra step when executing "git commit" command.
+All updated and new recipes have been build tested on qemux86, qemux86-64 and
+various raspberrypi models as well as very minimally runtime tested on qemux86.
 
-This patch removes whole do_unpack_extra task as it's unusual operation
-for the recipe to remove .git directories and initialize new git repository
-after do_unpack task.
+Paul Barker (8):
+  toybox: Switch to v0.7.5 release
+  mercurial: Update to v4.4
+  mercurial: Support building for target
+  dash: Update to v0.5.9.1
+  ddrescue: Update to v1.22
+  htop: Update to v2.0.2
+  tmux: Update to v2.6
+  dumb-init: New recipe
 
-Signed-off-by: Dariusz Pelowski <dariusz.pelowski@gmail.com>
----
- .../android-tools/android-tools_5.1.1.r37.bb           | 18 ------------------
- 1 file changed, 18 deletions(-)
+ .../toybox/{toybox_git.bb => toybox_0.7.5.bb}      |  10 +-
+ .../mercurial/files/mercurial-CVE-2017-9462.patch  | 135 ---------------------
+ ...{mercurial-native_4.0.1.bb => mercurial_4.4.bb} |  17 +--
+ .../dash/{dash_0.5.8.bb => dash_0.5.9.1.bb}        |   4 +-
+ .../{ddrescue_1.19.bb => ddrescue_1.22.bb}         |   4 +-
+ .../recipes-extended/dumb-init/dumb-init_1.2.0.bb  |  15 +++
+ meta-oe/recipes-extended/tmux/tmux_2.1.bb          |  21 ----
+ meta-oe/recipes-extended/tmux/tmux_2.6.bb          |  23 ++++
+ .../htop/files/0001-Use-pkg-config.patch           |  46 +++++++
+ .../htop/{htop_1.0.3.bb => htop_2.0.2.bb}          |   9 +-
+ 10 files changed, 107 insertions(+), 177 deletions(-)
+ rename meta-oe/recipes-core/toybox/{toybox_git.bb => toybox_0.7.5.bb} (90%)
+ delete mode 100644 meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+ rename meta-oe/recipes-devtools/mercurial/{mercurial-native_4.0.1.bb => mercurial_4.4.bb} (57%)
+ rename meta-oe/recipes-extended/dash/{dash_0.5.8.bb => dash_0.5.9.1.bb} (86%)
+ rename meta-oe/recipes-extended/ddrescue/{ddrescue_1.19.bb => ddrescue_1.22.bb} (90%)
+ create mode 100644 meta-oe/recipes-extended/dumb-init/dumb-init_1.2.0.bb
+ delete mode 100644 meta-oe/recipes-extended/tmux/tmux_2.1.bb
+ create mode 100644 meta-oe/recipes-extended/tmux/tmux_2.6.bb
+ create mode 100644 meta-oe/recipes-support/htop/files/0001-Use-pkg-config.patch
+ rename meta-oe/recipes-support/htop/{htop_1.0.3.bb => htop_2.0.2.bb} (58%)
 
-diff --git a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-index 75f5b9e26..d3ccd1d06 100644
---- a/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-+++ b/meta-oe/recipes-devtools/android-tools/android-tools_5.1.1.r37.bb
-@@ -54,24 +54,6 @@ inherit systemd
- 
- SYSTEMD_SERVICE_${PN} = "android-tools-adbd.service"
- 
--# Get rid of files uneeded to build Android tools
--do_unpack_extra() {
--    cd ${S}
--    rm -rf \
--      system/core/.git \
--      system/extras/.git \
--      hardware/libhardware/.git \
--      external/libselinux/.git \
--      build/.git
--    git init
--    git add .
--    git commit -m \
--      "Initial import - committed ${ANDROID_TAG}"
--    git clean -fdx
--}
--
--addtask unpack_extra after do_unpack before do_patch
--
- # Find libbsd headers during native builds
- CC_append_class-native = " -I${STAGING_INCDIR}"
- CC_append_class-nativesdk = " -I${STAGING_INCDIR}"
 -- 
-2.14.3
+2.7.4
 
 
