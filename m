@@ -1,31 +1,53 @@
-Return-Path: <Kai.Kang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id B0D7278371
+Return-Path: <schnitzeltony@googlemail.com>
+Received: from mail-yw0-f169.google.com (mail-yw0-f169.google.com
+	[209.85.161.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 810C778453
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Nov 2017 09:40:17 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA69eIcp012913
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 6 Nov 2017 01:40:18 -0800 (PST)
-Received: from [128.224.163.194] (128.224.163.194) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Mon, 6 Nov 2017 01:40:17 -0800
-To: Khem Raj <raj.khem@gmail.com>
-References: <20171102082543.3698-1-kai.kang@windriver.com>
-	<c48f52a6-7ec8-24ac-fb93-d8237a7aa7e3@windriver.com>
-	<CA+chaQcrgvC2J3CrCCmpZLRQJ_H2=iYvK3dRvAyAxODp0BxbHQ@mail.gmail.com>
-	<018e7ab7-27cb-e85a-3b18-8ec1b81912d2@windriver.com>
-From: Kang Kai <Kai.Kang@windriver.com>
-Message-ID: <e5f25f81-b129-8556-424e-f3dd7eadde49@windriver.com>
-Date: Mon, 6 Nov 2017 17:47:35 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.2.1
+	Mon,  6 Nov 2017 11:50:57 +0000 (UTC)
+Received: by mail-yw0-f169.google.com with SMTP id z195so7539506ywz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Nov 2017 03:50:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=WcZGBvTc9poi/zSzY7vbZcLMyWPNNmd909NbY98OZtk=;
+	b=uzGx54lAyBE3CpmxqW880eirxXHX8vICVCjxiZ7ESMa+4yuFwuYE2/1t3aUCcqs6CC
+	i0yQiidacQF6vSMtJk+zW/v3Ge/1543CvttKluHu2kbLage57Tm/enrig6f4tUfuBtnk
+	YQVc7MkQWR0ZH1p5z7W7a9VPFrkZSnBDikhI9AzYFknqcMwS5VKk1bJoXPBJpyYdgqhL
+	eFewjD+2KjOjTzWXRqymeUaspxCVRVcqZVSwrKtuVCpIJW72+gpkFphai3zmhaONjZNy
+	GMAWHJ+QL7yMkB43rI2QzpuoTr+gMBnnuVgVgsXs8hCX4dIfnB667TPTbULUmWVAXr4J
+	jFMg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=WcZGBvTc9poi/zSzY7vbZcLMyWPNNmd909NbY98OZtk=;
+	b=Lz8HnmIP7QRt6QLfZhxltI/cBfrQ+D+N+LUHes51fG/M7ujk0PTXjbjE4/IB9HxISq
+	51u9HM8dZSCHsDA9Ucr5ujcxFKIFOtCc6KRWHW0fkmOtB5qkQPKA6Zlb8cnqJ6EN+gvQ
+	wLlq8qA+UgyTPjYNusZuZapLgYnmmLSNBULBPXWmLqCcx7WMYBoJiXMv99SWIvQYdHxb
+	Hu9J0ryZVq8hekuME4x5EzBWAzEiaxAxiqfEcxIfTH4OhqtjAalW2RL7XI/hYsAyrJ61
+	Vo7ydT7rriq+Jv2KHqkdlmJPOblxlV9A76eKzmoevwcH6YcXj3TYn5sGXmeVbJ3zadjL
+	aaug==
+X-Gm-Message-State: AMCzsaWuEw5D7ij2XOPEcDaeTYRnkh7IjOqHCqEOHBpfIf0v4SyHk26c
+	1ByRG5cv1isx1bS/CJhroY8dNeWIFHHzNxcy54k=
+X-Google-Smtp-Source: ABhQp+RfPsC0GIjgBKkbX+GVkEyl+3SIqaXRuAD+Wr1LcJ2Tu0a64BZ3f9cUoIBlbkUCLJCC4tEbAftpNlqb2AuGVZU=
+X-Received: by 10.37.188.197 with SMTP id l5mr9583357ybm.365.1509969059341;
+	Mon, 06 Nov 2017 03:50:59 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <018e7ab7-27cb-e85a-3b18-8ec1b81912d2@windriver.com>
+Received: by 10.37.162.136 with HTTP; Mon, 6 Nov 2017 03:50:58 -0800 (PST)
+In-Reply-To: <CALbNGRSy0-Y=oLGbR+ON0jSitnEzkyMJevYtMhf--1+i-p7JhA@mail.gmail.com>
+References: <20171102103129.3703-1-schnitzeltony@googlemail.com>
+	<20171102103129.3703-2-schnitzeltony@googlemail.com>
+	<CAMKF1spbF2bJDQK_htfwpEKRgh1MzZEpkxpyde1x1dfoaqNYhw@mail.gmail.com>
+	<CALbNGRRrpSkAy8vkVQ33P-ONLdWqXnT_Oa1tViORfBx2R_Wjbw@mail.gmail.com>
+	<CALbNGRSy0-Y=oLGbR+ON0jSitnEzkyMJevYtMhf--1+i-p7JhA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@googlemail.com>
+Date: Mon, 6 Nov 2017 12:50:58 +0100
+Message-ID: <CALbNGRTFUBUKNtZueSi_cDWOMiqMPxf482NR3kjyvduTA33oMg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking] [PATCH] corosync: 2.4.2 -> 2.4.3
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 01/10] tumbler: make thumbnails work again
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,242 +60,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2017 09:40:18 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 Nov 2017 11:50:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 2017年11月03日 09:54, Kang Kai wrote:
-> On 2017年11月02日 19:22, Martin Jansa wrote:
->> Does this fix the textrel QA issue reported in every world build in 
->> last couple months?
->>
->> http://errors.yoctoproject.org/Errors/Details/157987/
+On Thu, Nov 2, 2017 at 6:07 PM, Andreas M=C3=BCller <schnitzeltony@googlema=
+il.com
+> wrote:
+
+> >  PACKAGECONFIG[gstreamer-thumbnailer] =3D "--enable-gstreamer-thumbnail=
+e
+> r,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
 >
-> I built for qemux86-64 and qemuarm64 and didn't meet such issue. And I 
-> just searched the maillist, and after append:
+>> >
+>>> > +do_install_appen() {
+>>>
+>>> typo
+>>>
+>>> Thanks and LOL: In this way this patch does simply nothing and I could
+>> swear having tested it. @Martin: Can you please ignore this one until I
+>> checked and come back with V2 (if really necessary).
+>>
+>> I checked: This patch (created on April 4th) was a leftover and does not
+> make sense: Link is created properly / thumbs work fine.
 >
-> LDFLAGS += "-fuse-ld=gold"
-
-Hi Khem,
-
-I didn't figure out what causes textrel QA issue with gold. Would you 
-like to give some advices please? Thanks.
-And is it acceptable to only use ld.bfd for corosync as some other 
-recipes do:
-
-LDFLAGS += "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' 
--fuse-ld=bfd ', '', d)}"
-
-
-Regards,
-Kai
-
-
-
+> Thanks Khem for eagle eye :)
 >
-> which was provided by Khem, I could reproduce the QA warning. I will 
-> try to fix it.
->
->
-> Regards,
-> Kai
->
->>
->> On Thu, Nov 2, 2017 at 9:52 AM, Kang Kai <Kai.Kang@windriver.com 
->> <mailto:Kai.Kang@windriver.com>> wrote:
->>
->>     Forgot layer info in title. :(
->>
->>     --Kai
->>
->>
->>     On 2017年11月02日 16:25, kai.kang@windriver.com
->>     <mailto:kai.kang@windriver.com> wrote:
->>
->>         From: Kai Kang <kai.kang@windriver.com
->>         <mailto:kai.kang@windriver.com>>
->>
->>         Upgrade corosync from 2.4.2 to 2.4.3.
->>
->>         * remove patch which is merged by upstream
->>         * disable autostart of corosync. It only works after
->>         configured and config file
->>            /etc/corosync/corosync.conf exists.
->>         * use bb.utils.filter
->>         * corosync init script requires command pidof. But pidof from
->>         busybox doesn't
->>            work well to filter calling process, so update runtime
->>         dependency
->>
->>         Signed-off-by: Kai Kang <kai.kang@windriver.com
->>         <mailto:kai.kang@windriver.com>>
->>         ---
->>           ...001-Include-fcntl.h-for-F_-and-O_-defines.patch | 28
->>         ----------------------
->>           .../{corosync_2.4.2.bb <http://corosync_2.4.2.bb> =>
->>         corosync_2.4.3.bb <http://corosync_2.4.3.bb>}      | 19
->>         +++++++--------
->>           2 files changed, 9 insertions(+), 38 deletions(-)
->>           delete mode 100644
->>         meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
->>           rename
->>         meta-networking/recipes-extended/corosync/{corosync_2.4.2.bb
->>         <http://corosync_2.4.2.bb> => corosync_2.4.3.bb
->>         <http://corosync_2.4.3.bb>} (84%)
->>
->>         diff --git
->>         a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
->>         b/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
->>         deleted file mode 100644
->>         index fe4b0793f..000000000
->>         ---
->>         a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
->>         +++ /dev/null
->>         @@ -1,28 +0,0 @@
->>         -From 85ea47fedbc96ed9180e08b0d371d9966e3a88da Mon Sep 17
->>         00:00:00 2001
->>         -From: Khem Raj <raj.khem@gmail.com <mailto:raj.khem@gmail.com>>
->>         -Date: Wed, 30 Aug 2017 17:28:55 -0700
->>         -Subject: [PATCH] Include fcntl.h for F_* and O_* defines
->>         -
->>         -Fixes errors like
->>         -utils.c:95:22: error: use of undeclared identifier 'O_WRONLY'
->>         -
->>         -Signed-off-by: Khem Raj <raj.khem@gmail.com
->>         <mailto:raj.khem@gmail.com>>
->>         ----
->>         - qdevices/utils.c | 1 +
->>         - 1 file changed, 1 insertion(+)
->>         -
->>         -diff --git a/qdevices/utils.c b/qdevices/utils.c
->>         -index 41850b8c..87090853 100644
->>         ---- a/qdevices/utils.c
->>         -+++ b/qdevices/utils.c
->>         -@@ -39,6 +39,7 @@
->>         -
->>         - #include <err.h>
->>         - #include <errno.h>
->>         -+#include <fcntl.h>
->>         - #include <inttypes.h>
->>         - #include <libgen.h>
->>         - #include <stdio.h>
->>         ---
->>         -2.14.1
->>         -
->>         diff --git
->>         a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
->>         <http://corosync_2.4.2.bb>
->>         b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
->>         <http://corosync_2.4.3.bb>
->>         similarity index 84%
->>         rename from
->>         meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
->>         <http://corosync_2.4.2.bb>
->>         rename to
->>         meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
->>         <http://corosync_2.4.3.bb>
->>         index 33e74e2ff..52d2a1098 100644
->>         ---
->>         a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
->>         <http://corosync_2.4.2.bb>
->>         +++
->>         b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
->>         <http://corosync_2.4.3.bb>
->>         @@ -7,11 +7,10 @@ SECTION = "base"
->>             inherit autotools pkgconfig systemd useradd
->>           -SRC_URI =
->>         "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz
->>         <http://build.clusterlabs.org/corosync/releases/$%7BBP%7D.tar.gz>
->>         \
->>         - file://0001-Include-fcntl.h-for-F_-and-O_-defines.patch \
->>         -          "
->>         -SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
->>         -SRC_URI[sha256sum] =
->>         "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
->>         +SRC_URI =
->>         "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz
->>         <http://build.clusterlabs.org/corosync/releases/$%7BBP%7D.tar.gz>"
->>         +
->>         +SRC_URI[md5sum] = "bf0ede13018aadc8a046183bc593b0e0"
->>         +SRC_URI[sha256sum] =
->>         "b1e7e422e8d2f7af8e5315fa329b1dbd1175fff32efaa55e8054584c80a2c597"
->>             LICENSE = "BSD"
->>           LIC_FILES_CHKSUM =
->>         "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
->>         @@ -22,7 +21,7 @@ SYSTEMD_SERVICE_${PN} = "corosync.service
->>         corosync-notifyd.service \
->>          ${@bb.utils.contains('PACKAGECONFIG', 'qdevice',
->>         'corosync-qdevice.service', '', d)} \
->>          ${@bb.utils.contains('PACKAGECONFIG', 'qnetd',
->>         'corosync-qnetd.service', '', d)} \
->>           "
->>         -SYSTEMD_AUTO_ENABLE = "enable"
->>         +SYSTEMD_AUTO_ENABLE = "disable"
->>             INITSCRIPT_NAME = "corosync-daemon"
->>           @@ -55,22 +54,22 @@ do_install_append() {
->>               install -d ${D}${sysconfdir}/default/volatiles
->>               echo "d root root 0755 ${localstatedir}/log/cluster
->>         none" > ${D}${sysconfdir}/default/volatiles/05_corosync
->>           -    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd',
->>         'true', 'false', d)}; then
->>         +    if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ];
->>         then
->>                   chown -R coroqnetd:coroqnetd
->>         ${D}${sysconfdir}/${BPN}/qnetd
->>                   echo "d coroqnetd coroqnetd 0770
->>         /var/run/corosync-qnetd none" >>
->>         ${D}${sysconfdir}/default/volatiles/05_corosync
->>               fi
->>           -    if
->>         ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)};
->>         then
->>         +    if [ ${@bb.utils.filter('DISTRO_FEATURES','systemd',d)}
->>         ]; then
->>                   install -d ${D}${sysconfdir}/tmpfiles.d
->>                   echo "d ${localstatedir}/log/cluster - - - -" >
->>         ${D}${sysconfdir}/tmpfiles.d/corosync.conf
->>           -        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd',
->>         'true', 'false', d)}; then
->>         +        if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd',
->>         d)} ]; then
->>                       install -m 0644
->>         ${S}/conf/tmpfiles.d/corosync-qnetd.conf
->>         ${D}${sysconfdir}/tmpfiles.d
->>                   fi
->>               fi
->>           }
->>           -RDEPENDS_${PN} += "bash"
->>         +RDEPENDS_${PN} += "bash
->>         ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit',
->>         'sysvinit-pidof', 'procps', d)}"
->>             FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
->>           FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
->>
->>
->>
->>     -- 
->>     Regards,
->>     Neil | Kai Kang
->>
->>
->>     -- 
->>     _______________________________________________
->>     Openembedded-devel mailing list
->>     Openembedded-devel@lists.openembedded.org
->>     <mailto:Openembedded-devel@lists.openembedded.org>
->>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->>
->>
->
-> -- 
-> Regards,
-> Neil | Kai Kang
+> FWIW: I removed the patch from git repo mentioned in pull request.
 
-
--- 
-Regards,
-Neil | Kai Kang
-
+Andreas
 
