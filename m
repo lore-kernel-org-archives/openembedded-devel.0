@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 2DE187843A
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C1AB678447
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Nov 2017 05:45:57 +0000 (UTC)
+	Tue,  7 Nov 2017 05:45:59 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vA75jxvK004983
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA75k0TS027778
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Nov 2017 21:45:59 -0800 (PST)
+	Mon, 6 Nov 2017 21:46:00 -0800
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Mon, 6 Nov 2017 21:45:58 -0800
+	14.3.361.1; Mon, 6 Nov 2017 21:45:59 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Nov 2017 13:44:22 +0800
-Message-ID: <cover.1510033036.git.jackie.huang@windriver.com>
+Date: Tue, 7 Nov 2017 13:44:23 +0800
+Message-ID: <78455e865a4e4aa10b2f9ee26333ac052fb4d284.1510033036.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.1510033036.git.jackie.huang@windriver.com>
+References: <cover.1510033036.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 0/2 v2] samba: fixes for AD DC service
+Subject: [meta-networking][PATCH 1/2 v2] samba: add missing RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,31 +33,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2017 05:45:58 -0000
+X-List-Received-Date: Tue, 07 Nov 2017 05:46:00 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
-v2 comments:
-* disable ad-dc and enable mitkrb5 by default to avoid an known issue.
+* samba-tool requires the python modules from samba-python
+  or it fails with:
 
---
-The following changes since commit 5d6d21e98ed594809169d2b2f6964e90a3369a96:
+  Traceback (most recent call last):
+    File "/usr/bin/samba-tool", line 33, in <module>
+      from samba.netcmd.main import cmd_sambatool
+  ImportError: No module named samba.netcmd.main
 
-  libreport: fix Nothing RPROVIDES 'lib32-python3-libreport' (2017-10-27 16:39:34 +0000)
+* Provisioning with samba-tool requires samba-dsdb-modules
+  or it fails with:
 
-are available in the git repository at:
+  Setting up secrets.ldb
+  ldb: unable to stat module /usr/lib64/samba/ldb : No such file or directory
+  WARNING: Module [samba_secrets] not found - do you need to set LDB_MODULES_PATH?
+  Unable to load modules for /var/lib/samba/private/secrets.ldb: (null)
+  ERROR(ldb): uncaught exception - None
 
-  git://git.pokylinux.org/poky-contrib.git jhuang0/d_samba-ad-dc-v2_171107_0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_samba-ad-dc-v2_171107_0
+* samba-python requires pytalloc and python-tdb or it fails with:
 
-Jackie Huang (2):
-  samba: add missing RDEPENDS
-  samba: fix for AD DC service
+  TypeError: pytalloc: unable to get talloc.BaseObject type
+  ERROR(<type 'exceptions.ImportError'>): uncaught exception - No module named tdb
 
- .../recipes-connectivity/samba/samba_4.6.7.bb      | 43 +++++++++++++++++-----
- 1 file changed, 34 insertions(+), 9 deletions(-)
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-networking/recipes-connectivity/samba/samba_4.6.7.bb | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
+diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+index 59d7425c8..2b227c95d 100644
+--- a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
++++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
+@@ -186,7 +186,8 @@ python samba_populate_packages() {
+ 
+ PACKAGESPLITFUNCS_prepend = "samba_populate_packages "
+ 
+-RDEPENDS_${PN} += "${PN}-base"
++RDEPENDS_${PN} += "${PN}-base ${PN}-python ${PN}-dsdb-modules"
++RDEPENDS_${PN}-python += "pytalloc python-tdb"
+ 
+ FILES_${PN}-base = "${sbindir}/nmbd \
+                     ${sbindir}/smbd \
 -- 
 2.11.0
 
