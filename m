@@ -1,24 +1,28 @@
-Return-Path: <Mark.Asselstine@windriver.com>
+Return-Path: <Qi.Chen@windriver.com>
 Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 768316FFA1
+	by mail.openembedded.org (Postfix) with ESMTP id 348CC70016
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Nov 2017 20:54:54 +0000 (UTC)
+	Tue,  7 Nov 2017 02:09:01 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA6KstsM014359
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA7293Nn023016
 	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 6 Nov 2017 12:54:55 -0800
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Mon, 6 Nov 2017 12:54:54 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
+	Mon, 6 Nov 2017 18:09:03 -0800
+Received: from [128.224.163.189] (128.224.163.189) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Mon, 6 Nov 2017 18:09:02 -0800
 To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 6 Nov 2017 15:54:54 -0500
-Message-ID: <1510001694-24323-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+References: <1508833184-28676-1-git-send-email-Qi.Chen@windriver.com>
+From: ChenQi <Qi.Chen@windriver.com>
+Message-ID: <55eb9098-4794-addc-b7b1-150da89a56de@windriver.com>
+Date: Tue, 7 Nov 2017 10:10:23 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-scrypt: add new package
+In-Reply-To: <1508833184-28676-1-git-send-email-Qi.Chen@windriver.com>
+X-Originating-IP: [128.224.163.189]
+Subject: Re: [meta-oe][PATCH] gnome-common: add PACKAGECONFIG for autoconf-archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,59 +35,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Nov 2017 20:54:54 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 07 Nov 2017 02:09:02 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-This python package provides bindings for the scrypt key derivation
-function library. (https://bitbucket.org/mhallin/py-scrypt/overview)
+ping
 
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
- meta-python/recipes-devtools/python/python-scrypt.inc       | 12 ++++++++++++
- meta-python/recipes-devtools/python/python-scrypt_0.8.0.bb  |  3 +++
- meta-python/recipes-devtools/python/python3-scrypt_0.8.0.bb |  3 +++
- 3 files changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-scrypt.inc
- create mode 100644 meta-python/recipes-devtools/python/python-scrypt_0.8.0.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-scrypt_0.8.0.bb
+On 10/24/2017 04:19 PM, Qi.Chen@windriver.com wrote:
+> From: Chen Qi <Qi.Chen@windriver.com>
+>
+> Add PACKAGECONFIG for autoconf-archive. Default to enable it to avoid
+> m4 file conflicts between gnome-common and autoconf-archive.
+>
+> e.g.
+> IMAGE_INSTALL_append = " gnome-common autoconf-archive-dev"
+> bitbake <image>
+>
+> We enable autoconf-archive PACKAGECONFIG to avoid the following error.
+>
+> Error: Transaction check error:
+>    file /usr/share/aclocal/ax_check_enable_debug.m4 conflicts between attempted installs of gnome-common-3.18.0-r0.noarch and autoconf-archive-dev-2016.09.16-r0.core2_64
+>    file /usr/share/aclocal/ax_code_coverage.m4 conflicts between attempted installs of gnome-common-3.18.0-r0.noarch and autoconf-archive-dev-2016.09.16-r0.core2_64
+>
+> Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+> ---
+>   meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb | 4 ++++
+>   1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> index 06f3bb3..d874164 100644
+> --- a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> +++ b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> @@ -14,6 +14,10 @@ SRC_URI[archive.sha256sum] = "22569e370ae755e04527b76328befc4c73b62bfd4a572499fd
+>   EXTRA_AUTORECONF = ""
+>   DEPENDS = ""
+>   
+> +# Default to enable autoconf-archive to avoid conflicts
+> +PACKAGECONFIG ??= "autoconf-archive"
+> +PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive, --without-autoconf-archive, autoconf-archive"
+> +
+>   FILES_${PN} += "${datadir}/aclocal"
+>   FILES_${PN}-dev = ""
+>   
 
-diff --git a/meta-python/recipes-devtools/python/python-scrypt.inc b/meta-python/recipes-devtools/python/python-scrypt.inc
-new file mode 100644
-index 0000000..85f1d27
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-scrypt.inc
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "Bindings for the scrypt key derivation function library"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-2-Clause;md5=8bef8e6712b1be5aa76af1ebde9d6378"
-+HOMEPAGE="https://bitbucket.org/mhallin/py-scrypt/overview"
-+
-+SRC_URI[md5sum] = "0704e59cc3afb3845c27bb3827baeea9"
-+SRC_URI[sha256sum] = "d4a5a4f53450b8ef629bbf1ee4be6105c69936e49b3d8bc621ac2287f0c86020"
-+
-+inherit pypi
-+
-+RDEPENDS_${PN}_class-target += "\
-+"
-diff --git a/meta-python/recipes-devtools/python/python-scrypt_0.8.0.bb b/meta-python/recipes-devtools/python/python-scrypt_0.8.0.bb
-new file mode 100644
-index 0000000..9fbd00e
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-scrypt_0.8.0.bb
-@@ -0,0 +1,3 @@
-+inherit setuptools python-dir
-+require python-scrypt.inc
-+
-diff --git a/meta-python/recipes-devtools/python/python3-scrypt_0.8.0.bb b/meta-python/recipes-devtools/python/python3-scrypt_0.8.0.bb
-new file mode 100644
-index 0000000..f496653
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-scrypt_0.8.0.bb
-@@ -0,0 +1,3 @@
-+inherit setuptools3 python3-dir
-+require python-scrypt.inc
-+
--- 
-2.7.4
 
 
