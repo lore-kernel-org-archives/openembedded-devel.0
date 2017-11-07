@@ -1,26 +1,24 @@
-Return-Path: <Kai.Kang@windriver.com>
+Return-Path: <Jackie.Huang@windriver.com>
 Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B96060807
+	by mail.openembedded.org (Postfix) with ESMTP id 2DE187843A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Nov 2017 05:38:49 +0000 (UTC)
-Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
-	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vA75coub004968
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 6 Nov 2017 21:38:50 -0800 (PST)
-Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
-	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Mon, 6 Nov 2017 21:38:49 -0800
-From: <kai.kang@windriver.com>
-To: <martin.jansa@gmail.com>
-Date: Tue, 7 Nov 2017 13:22:03 +0800
-Message-ID: <20171107052203.26227-2-kai.kang@windriver.com>
-X-Mailer: git-send-email 2.14.1
-In-Reply-To: <20171107052203.26227-1-kai.kang@windriver.com>
-References: <20171107052203.26227-1-kai.kang@windriver.com>
+	Tue,  7 Nov 2017 05:45:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vA75jxvK004983
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 6 Nov 2017 21:45:59 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Mon, 6 Nov 2017 21:45:58 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Nov 2017 13:44:22 +0800
+Message-ID: <cover.1510033036.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [meta-networking][PATCH V2 1/1] corosync: 2.4.2 -> 2.4.3
+Subject: [meta-networking][PATCH 0/2 v2] samba: fixes for AD DC service
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,133 +31,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Nov 2017 05:38:50 -0000
+X-List-Received-Date: Tue, 07 Nov 2017 05:45:58 -0000
 Content-Type: text/plain
 
-From: Kai Kang <kai.kang@windriver.com>
+From: Jackie Huang <jackie.huang@windriver.com>
 
-Upgrade corosync from 2.4.2 to 2.4.3.
+v2 comments:
+* disable ad-dc and enable mitkrb5 by default to avoid an known issue.
 
-* remove patch which is merged by upstream
-* remove gcc option '-fpie' by append configure cache value 'ap_cv_cc_pie=no'
-  to fix TEXTREL QA issue for linker gold
-* disable autostart of corosync. It only works after configured and config file
-  /etc/corosync/corosync.conf exists.
-* use bb.utils.filter
-* corosync init script requires command pidof. But pidof from busybox doesn't
-  work well to filter the calling process itself, so update runtime dependency
+--
+The following changes since commit 5d6d21e98ed594809169d2b2f6964e90a3369a96:
 
-Signed-off-by: Kai Kang <kai.kang@windriver.com>
----
- ...001-Include-fcntl.h-for-F_-and-O_-defines.patch | 28 ----------------------
- .../{corosync_2.4.2.bb => corosync_2.4.3.bb}       | 21 ++++++++--------
- 2 files changed, 10 insertions(+), 39 deletions(-)
- delete mode 100644 meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
- rename meta-networking/recipes-extended/corosync/{corosync_2.4.2.bb => corosync_2.4.3.bb} (82%)
+  libreport: fix Nothing RPROVIDES 'lib32-python3-libreport' (2017-10-27 16:39:34 +0000)
 
-diff --git a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch b/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
-deleted file mode 100644
-index fe4b0793f..000000000
---- a/meta-networking/recipes-extended/corosync/corosync/0001-Include-fcntl.h-for-F_-and-O_-defines.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--From 85ea47fedbc96ed9180e08b0d371d9966e3a88da Mon Sep 17 00:00:00 2001
--From: Khem Raj <raj.khem@gmail.com>
--Date: Wed, 30 Aug 2017 17:28:55 -0700
--Subject: [PATCH] Include fcntl.h for F_* and O_* defines
--
--Fixes errors like
--utils.c:95:22: error: use of undeclared identifier 'O_WRONLY'
--
--Signed-off-by: Khem Raj <raj.khem@gmail.com>
-----
-- qdevices/utils.c | 1 +
-- 1 file changed, 1 insertion(+)
--
--diff --git a/qdevices/utils.c b/qdevices/utils.c
--index 41850b8c..87090853 100644
----- a/qdevices/utils.c
--+++ b/qdevices/utils.c
--@@ -39,6 +39,7 @@
-- 
-- #include <err.h>
-- #include <errno.h>
--+#include <fcntl.h>
-- #include <inttypes.h>
-- #include <libgen.h>
-- #include <stdio.h>
---- 
--2.14.1
--
-diff --git a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-similarity index 82%
-rename from meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-rename to meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-index 33e74e2ff..9673fa362 100644
---- a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
-+++ b/meta-networking/recipes-extended/corosync/corosync_2.4.3.bb
-@@ -7,11 +7,10 @@ SECTION = "base"
- 
- inherit autotools pkgconfig systemd useradd
- 
--SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
--           file://0001-Include-fcntl.h-for-F_-and-O_-defines.patch \
--          "
--SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
--SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
-+SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz"
-+
-+SRC_URI[md5sum] = "bf0ede13018aadc8a046183bc593b0e0"
-+SRC_URI[sha256sum] = "b1e7e422e8d2f7af8e5315fa329b1dbd1175fff32efaa55e8054584c80a2c597"
- 
- LICENSE = "BSD"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=a85eb4ce24033adb6088dd1d6ffc5e5d"
-@@ -22,7 +21,7 @@ SYSTEMD_SERVICE_${PN} = "corosync.service corosync-notifyd.service \
-                          ${@bb.utils.contains('PACKAGECONFIG', 'qdevice', 'corosync-qdevice.service', '', d)} \
-                          ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'corosync-qnetd.service', '', d)} \
- "
--SYSTEMD_AUTO_ENABLE = "enable"
-+SYSTEMD_AUTO_ENABLE = "disable"
- 
- INITSCRIPT_NAME = "corosync-daemon"
- 
-@@ -37,7 +36,7 @@ PACKAGECONFIG[rdma] = "--enable-rdma,--disable-rdma"
- PACKAGECONFIG[snmp] = "--enable-snmp,--disable-snmp,net-snmp"
- PACKAGECONFIG[systemd] = "--enable-systemd --with-systemddir=${systemd_system_unitdir},--disable-systemd --without-systemddir,systemd"
- 
--EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash"
-+EXTRA_OECONF = "ac_cv_path_BASHPATH=${base_bindir}/bash ap_cv_cc_pie=no"
- EXTRA_OEMAKE = "tmpfilesdir_DATA="
- 
- do_configure_prepend() {
-@@ -55,22 +54,22 @@ do_install_append() {
-     install -d ${D}${sysconfdir}/default/volatiles
-     echo "d root root 0755 ${localstatedir}/log/cluster none" > ${D}${sysconfdir}/default/volatiles/05_corosync
- 
--    if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-+    if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ]; then
-         chown -R coroqnetd:coroqnetd ${D}${sysconfdir}/${BPN}/qnetd
-         echo "d coroqnetd coroqnetd 0770 /var/run/corosync-qnetd none" >> ${D}${sysconfdir}/default/volatiles/05_corosync
-     fi
- 
--    if ${@bb.utils.contains('DISTRO_FEATURES','systemd','true','false',d)}; then
-+    if [ ${@bb.utils.filter('DISTRO_FEATURES','systemd',d)} ]; then
-         install -d ${D}${sysconfdir}/tmpfiles.d
-         echo "d ${localstatedir}/log/cluster - - - -" > ${D}${sysconfdir}/tmpfiles.d/corosync.conf
- 
--        if ${@bb.utils.contains('PACKAGECONFIG', 'qnetd', 'true', 'false', d)}; then
-+        if [ ${@bb.utils.filter('PACKAGECONFIG', 'qnetd', d)} ]; then
-             install -m 0644 ${S}/conf/tmpfiles.d/corosync-qnetd.conf ${D}${sysconfdir}/tmpfiles.d
-         fi
-     fi
- }
- 
--RDEPENDS_${PN} += "bash"
-+RDEPENDS_${PN} += "bash ${@bb.utils.contains('DISTRO_FEATURES', 'sysvinit', 'sysvinit-pidof', 'procps', d)}"
- 
- FILES_${PN}-dbg += "${libexecdir}/lcrso/.debug"
- FILES_${PN}-doc += "${datadir}/snmp/mibs/COROSYNC-MIB.txt"
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/d_samba-ad-dc-v2_171107_0
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_samba-ad-dc-v2_171107_0
+
+Jackie Huang (2):
+  samba: add missing RDEPENDS
+  samba: fix for AD DC service
+
+ .../recipes-connectivity/samba/samba_4.6.7.bb      | 43 +++++++++++++++++-----
+ 1 file changed, 34 insertions(+), 9 deletions(-)
+
 -- 
-2.14.1
+2.11.0
 
 
