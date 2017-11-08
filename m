@@ -1,24 +1,26 @@
 Return-Path: <joe.slater@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 2E71771B2E
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 02C0F7841A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Nov 2017 19:58:04 +0000 (UTC)
+	Wed,  8 Nov 2017 19:58:08 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA8Jw6xZ018784
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA8Jw7rr026294
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Nov 2017 11:58:06 -0800
+	Wed, 8 Nov 2017 11:58:09 -0800 (PST)
 Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCB.corp.ad.wrs.com
 	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 8 Nov 2017 11:58:05 -0800
+	Wed, 8 Nov 2017 11:58:06 -0800
 From: Joe Slater <jslater@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 8 Nov 2017 11:58:00 -0800
-Message-ID: <20171108195805.136677-1-jslater@windriver.com>
+Date: Wed, 8 Nov 2017 11:58:01 -0800
+Message-ID: <20171108195805.136677-2-jslater@windriver.com>
 X-Mailer: git-send-email 2.13.0
+In-Reply-To: <20171108195805.136677-1-jslater@windriver.com>
+References: <20171108195805.136677-1-jslater@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 0/5] update to samba 4.7.0
+Subject: [meta-networking][PATCH 1/5] libtalloc: update to version 2.1.10
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,43 +33,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Nov 2017 19:58:05 -0000
+X-List-Received-Date: Wed, 08 Nov 2017 19:58:09 -0000
 Content-Type: text/plain
 
-Currently supported version.  Apply the patches in order.  You
-can stop after patch 3.  When you apply 4, immediately apply 5
-because samba 4.6.7 will generate a library that is also generated
-by libldb (it refuses to use libldb 1.2.2).
+Version needed to build samba 4.7.0.
 
-Joe Slater (5):
-  libtalloc: update to version 2.1.10
-  libtevent: update to version 0.99.33
-  libtdb: update to version 1.3.15
-  libldb: update to version 1.2.2
-  samba: move to version 4.7.0
-
- .../samba/samba/dnsserver-4.7.0.patch              | 19 ++++++
- .../samba/samba/iconv-4.7.0.patch                  | 25 ++++++++
- .../samba/samba/smb_conf-4.7.0.patch               | 19 ++++++
- .../samba/{samba_4.6.7.bb => samba_4.7.0.bb}       | 67 +++++++++++++++++-----
- .../libldb/{libldb_1.1.29.bb => libldb_1.2.2.bb}   |  6 +-
- ...ons-for-packages.patch => options-2.1.10.patch} | 17 +++---
- .../{libtalloc_2.1.9.bb => libtalloc_2.1.10.bb}    |  7 ++-
- .../libtdb/{libtdb_1.3.14.bb => libtdb_1.3.15.bb}  |  4 +-
- ...ons-for-packages.patch => options-0.9.33.patch} | 28 ++++-----
- .../{libtevent_0.9.31.bb => libtevent_0.9.33.bb}   |  6 +-
- 10 files changed, 153 insertions(+), 45 deletions(-)
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/dnsserver-4.7.0.patch
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/iconv-4.7.0.patch
- create mode 100644 meta-networking/recipes-connectivity/samba/samba/smb_conf-4.7.0.patch
- rename meta-networking/recipes-connectivity/samba/{samba_4.6.7.bb => samba_4.7.0.bb} (79%)
- rename meta-networking/recipes-support/libldb/{libldb_1.1.29.bb => libldb_1.2.2.bb} (92%)
+Signed-off-by: Joe Slater <jslater@windriver.com>
+---
+ ...-options-for-packages.patch => options-2.1.10.patch} | 17 ++++++++++-------
+ .../{libtalloc_2.1.9.bb => libtalloc_2.1.10.bb}         |  7 ++++---
+ 2 files changed, 14 insertions(+), 10 deletions(-)
  rename meta-networking/recipes-support/libtalloc/libtalloc/{talloc-Add-configure-options-for-packages.patch => options-2.1.10.patch} (95%)
  rename meta-networking/recipes-support/libtalloc/{libtalloc_2.1.9.bb => libtalloc_2.1.10.bb} (90%)
- rename meta-networking/recipes-support/libtdb/{libtdb_1.3.14.bb => libtdb_1.3.15.bb} (91%)
- rename meta-networking/recipes-support/libtevent/libtevent/{tevent-Add-configure-options-for-packages.patch => options-0.9.33.patch} (90%)
- rename meta-networking/recipes-support/libtevent/{libtevent_0.9.31.bb => libtevent_0.9.33.bb} (87%)
 
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
+similarity index 95%
+rename from meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
+rename to meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
+index 46b2405..35f8eaf 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc/talloc-Add-configure-options-for-packages.patch
++++ b/meta-networking/recipes-support/libtalloc/libtalloc/options-2.1.10.patch
+@@ -14,6 +14,11 @@ Add configure options for the following packages:
+ Upstream-Status: Inappropriate [oe deterministic build specific]
+ 
+ Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
++
++Modified to apply to version 2.1.10.
++
++Signed-off-by: Joe Slater <joe.slater@windriver.com>
++
+ ---
+  lib/replace/system/wscript_configure |  6 ++-
+  lib/replace/wscript                  | 85 ++++++++++++++++++++++++++++--------
+@@ -154,14 +159,12 @@ index fc43e1a..12d2a70 100644
+  
+      conf.CHECK_CODE('''
+                  struct ucred cred;
+-diff --git a/wscript b/wscript
+-index 41f3be7..556c1c8 100644
+ --- a/wscript
+ +++ b/wscript
+-@@ -35,7 +35,12 @@ def set_options(opt):
+-         opt.add_option('--disable-python',
+-                        help=("disable the pytalloc module"),
+-                        action="store_true", dest='disable_python', default=False)
++@@ -32,7 +32,12 @@ def set_options(opt):
++         opt.add_option('--enable-talloc-compat1',
++                        help=("Build talloc 1.x.x compat library [False]"),
++                        action="store_true", dest='TALLOC_COMPAT1', default=False)
+ -
+ +        opt.add_option('--with-valgrind',
+ +                       help=("enable use of valgrind"),
+@@ -169,7 +172,7 @@ index 41f3be7..556c1c8 100644
+ +        opt.add_option('--without-valgrind',
+ +                       help=("disable use of valgrind"),
+ +                       action="store_false", dest='enable_valgrind', default=False)
+- 
++
+  def configure(conf):
+      conf.RECURSE('lib/replace')
+ -- 
+diff --git a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.10.bb
+similarity index 90%
+rename from meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb
+rename to meta-networking/recipes-support/libtalloc/libtalloc_2.1.10.bb
+index d80af50..23dca15 100644
+--- a/meta-networking/recipes-support/libtalloc/libtalloc_2.1.9.bb
++++ b/meta-networking/recipes-support/libtalloc/libtalloc_2.1.10.bb
+@@ -7,10 +7,11 @@ LIC_FILES_CHKSUM = "file://talloc.h;beginline=3;endline=27;md5=a301712782cad6dd6
+ 
+ 
+ SRC_URI = "https://samba.org/ftp/talloc/talloc-${PV}.tar.gz \
+-           file://talloc-Add-configure-options-for-packages.patch \
++           file://options-2.1.10.patch \
+ "
+-SRC_URI[md5sum] = "19ba14eba97d79a169fa92ea824d2b9e"
+-SRC_URI[sha256sum] = "f0aad4cb88a3322207c82136ddc07bed48a37c2c21f82962d6c5ccb422711062"
++
++SRC_URI[md5sum] = "48b8822a76797bb143e3e38ed738c320"
++SRC_URI[sha256sum] = "c985e94bebd6ec2f6af3d95dcc3fcb192a2ddb7781a021d70ee899e26221f619"
+ 
+ inherit waf-samba
+ 
 -- 
 2.7.4
 
