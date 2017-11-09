@@ -1,35 +1,24 @@
-Return-Path: <fan.xin@jp.fujitsu.com>
-Received: from mgwym04.jp.fujitsu.com (mgwym04.jp.fujitsu.com [211.128.242.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 25C897850A
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 4B8B37850C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 02:15:39 +0000 (UTC)
-Received: from yt-mxoi2.gw.nic.fujitsu.com (unknown [192.168.229.69]) by
-	mgwym04.jp.fujitsu.com with smtp
-	id 17c2_3445_d850bf07_c514_4eae_be48_76464094b965;
-	Thu, 09 Nov 2017 11:15:33 +0900
-Received: from g01jpfmpwyt03.exch.g01.fujitsu.local
-	(g01jpfmpwyt03.exch.g01.fujitsu.local [10.128.193.57])
-	by yt-mxoi2.gw.nic.fujitsu.com (Postfix) with ESMTP id AC880AC0171
+	Thu,  9 Nov 2017 03:14:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA93E4Fq020036
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 11:15:31 +0900 (JST)
-Received: from G01JPEXCHYT14.g01.fujitsu.local
-	(G01JPEXCHYT14.g01.fujitsu.local [10.128.194.53])
-	by g01jpfmpwyt03.exch.g01.fujitsu.local (Postfix) with ESMTP id
-	A35C246E806 for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 11:15:30 +0900 (JST)
-Received: from localhost.localdomain (10.24.19.99) by
-	G01JPEXCHYT14.g01.fujitsu.local (10.128.194.53) with Microsoft SMTP
-	Server id 14.3.352.0; Thu, 9 Nov 2017 11:15:30 +0900
-From: Fan Xin <fan.xin@jp.fujitsu.com>
+	Wed, 8 Nov 2017 19:14:05 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Wed, 8 Nov 2017 19:14:04 -0800
+From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Nov 2017 11:15:27 +0900
-Message-ID: <1510193727-5550-1-git-send-email-fan.xin@jp.fujitsu.com>
-X-Mailer: git-send-email 1.9.1
+Date: Thu, 9 Nov 2017 11:12:29 +0800
+Message-ID: <20171109031229.21299-1-jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-X-SecurityPolicyCheck-GC: OK by FENCE-Mail
-X-Encrypted: FENCE-Mail/3.1.1
-X-TM-AS-MML: disable
-Subject: [PATCH] spi-tools: Add version info
+Subject: [meta-networking][PATCH] xfce4-screenshooter: create src dir before build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -42,21 +31,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 02:15:40 -0000
+X-List-Received-Date: Thu, 09 Nov 2017 03:14:04 -0000
 Content-Type: text/plain
 
-Signed-off-by: Fan Xin <fan.xin@jp.fujitsu.com>
+From: Catalin Enache <catalin.enache@windriver.com>
+
+In some case the output directory for xfce4-screenshooter.appdata.xml file
+doesn't exist.
+
+Create directory before build.
+
+Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
 ---
- meta-oe/recipes-support/spitools/{spitools_git.bb => spitools_0.8.1.bb} | 0
- 1 file changed, 0 insertions(+), 0 deletions(-)
- rename meta-oe/recipes-support/spitools/{spitools_git.bb => spitools_0.8.1.bb} (100%)
+ meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_0.8.1.bb
-similarity index 100%
-rename from meta-oe/recipes-support/spitools/spitools_git.bb
-rename to meta-oe/recipes-support/spitools/spitools_0.8.1.bb
+diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
+index 06dea64b3..e449dceed 100644
+--- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
++++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
+@@ -12,6 +12,7 @@ SRC_URI[sha256sum] = "e62b31d9cf06a7414a26400c2ebe7a2ae7c2b22aa60f997f25145ea9eb
+ 
+ do_compile_prepend() {
+     mkdir -p lib
++    mkdir -p src
+ }
+ 
+ FILES_${PN} += " \
 -- 
-2.7.4
-
+2.11.0
 
 
