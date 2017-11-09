@@ -1,48 +1,24 @@
-Return-Path: <ticotimo@gmail.com>
-Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
-	[209.85.217.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 8285560620
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 280D2605BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 05:52:32 +0000 (UTC)
-Received: by mail-ua0-f182.google.com with SMTP id j14so3604066uag.11
+	Thu,  9 Nov 2017 06:21:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vA96LAqc000714
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Nov 2017 21:52:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=4jKsesvFmQ5U0RI0QwNZ52o/W3O7H88FSS+E2E8eM8s=;
-	b=pwgBX5ZD0SXhvjvjhA2p3xJ14SscD8WB6HXpuFTGV4uPfyQP4g79y6nA3DcCRGKrIQ
-	02meJe9Gyy60UpGTDI3fuSysvqn8jYWKHV5puCLiRjVb3grB7te/4/XvB7rCGcV/9mhz
-	DaHWpICJe0cGCXmAuzidMKNNKWhrnXcvRtCIk9Bs1Xv3vwR6mFsojmZKEZvzfmEj7CSq
-	/c78tDcACt4TpSKrxGmmCmVXKgeH3ANx7MD62iF5LOcT+69XI5Aexxn+BXAkCV+Vzm0k
-	1/59SNyXAZBLQ18/CqxGihi+twmy5vmOz4sqDahyjrbb2ItwrrbOYEZwxDnbYjAbtxoZ
-	02dA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=4jKsesvFmQ5U0RI0QwNZ52o/W3O7H88FSS+E2E8eM8s=;
-	b=kGUGiPvBcMU0Rx4cptBiqoVi8pXMFGLM8SebEVTUyN0ha31j67nSE+MmIgaQz24ZOS
-	99C2mHRvOsUwcPhX1QvY1KRUlFMxzNst58NERoUDF4VNdFX9wA+xB8cqYqfJ8Wsf4fwW
-	5NV1oRLx3cm2mscR+ItCvZbaHQcIzbWE//IGsbHzXwxnsf4rvPwHiMXsD4ONWdRJmwlh
-	wjuqu+uTf6E07jZs3doqD7DDMHPvodlUGwnxqcLYuYi+Lajh7kT21Jy3Yn8SwSWryNxy
-	VfdNn+Gtvv9Hh6eoCLPnjdSz3y+XRnRHJDwPDGzECqvyF7fHdCnVLOXc8yxf0hVVzFLG
-	/r/A==
-X-Gm-Message-State: AJaThX5CY509JU67uXS06HLB8M7S+p9hRPLIP4yWh2OS9AxWNTI63dzd
-	oSf+vtg/QzDWRAfjxd2Bx9Nx0aveszAw5UwAglY=
-X-Google-Smtp-Source: ABhQp+T4AXU9SUBfzbUgLf2HJBg4n/1m+dJc6s/oQDkQYAOpM6F/5PBlboO8RET2UcV0GXGeejOu1hINpAECNATXTf4=
-X-Received: by 10.159.50.112 with SMTP id y45mr2629535uad.166.1510206753262;
-	Wed, 08 Nov 2017 21:52:33 -0800 (PST)
+	Wed, 8 Nov 2017 22:21:11 -0800 (PST)
+Received: from pek-lpggp2.wrs.com (128.224.153.75) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 8 Nov 2017 22:21:09 -0800
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 9 Nov 2017 14:20:23 +0800
+Message-ID: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 1.9.1
 MIME-Version: 1.0
-References: <20171024192754.19623-1-alex.stewart@ni.com>
-	<34e1dd1c-e88a-7891-dc26-745946508deb@ni.com>
-In-Reply-To: <34e1dd1c-e88a-7891-dc26-745946508deb@ni.com>
-From: Tim Orling <ticotimo@gmail.com>
-Date: Thu, 09 Nov 2017 05:52:22 +0000
-Message-ID: <CANx9H-A512DWX0O0aTcTzmvWKivmTxic9B1KwJZ9L1dU_nwZEw@mail.gmail.com>
-To: Alex Stewart <alex.stewart@ni.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-oe][meta-python][PATCH] python-future: add new recipe
+Subject: [meta-oe][PATCH] mercurial: Upgrade to 4.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,26 +31,238 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 05:52:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Nov 2017 06:21:10 -0000
+Content-Type: text/plain
 
-On Wed, Nov 8, 2017 at 9:43 AM Alex Stewart <alex.stewart@ni.com> wrote:
+* Upgrade to the latest release to fix some CVEs:
+ - CVE-2017-1000115: missing symlink check that can malicious repositories
+                     to modify files outside the repository
+ - CVE-2017-1000116: did not adequately sanitize hostnames passed to ssh,
+                     leading to possible shell-injection attacks.
 
-> Bump.
->
-> Is there an ETA on when this patch can be pulled or is a fixup needed?
->
+* For other changes please see: https://www.mercurial-scm.org/wiki/WhatsNew
 
-It is in staging:
-http://git.openembedded.org/meta-openembedded-contrib/commit/?h=stagging/master-next&id=a890147a94b48fe817e1cffda300795b9448f52c
+* Update SRC_URI with the new download link
 
-And therefore likely to be merged in the next few days. We are in the
-process of handing off some of the meta-openembedded maintenance, as
-discussed in the OEDEM meeting.
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+---
+ .../mercurial/files/mercurial-CVE-2017-9462.patch  | 135 ---------------------
+ .../mercurial/mercurial-native_4.0.1.bb            |  28 -----
+ .../mercurial/mercurial-native_4.4.1.bb            |  27 +++++
+ 3 files changed, 27 insertions(+), 163 deletions(-)
+ delete mode 100644 meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+ delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+ create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
 
->
-> Thanks,
->
->
->
+diff --git a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch b/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+deleted file mode 100644
+index 3564661..0000000
+--- a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
++++ /dev/null
+@@ -1,135 +0,0 @@
+-# HG changeset patch
+-# User Augie Fackler <augie@google.com>
+-# Date 1492021435 25200
+-#      Wed Apr 12 11:23:55 2017 -0700
+-# Branch stable
+-# Node ID 77eaf9539499a1b8be259ffe7ada787d07857f80
+-# Parent  68f263f52d2e3e2798b4f1e55cb665c6b043f93b
+-dispatch: protect against malicious 'hg serve --stdio' invocations (sec)
+-
+-Some shared-ssh installations assume that 'hg serve --stdio' is a safe
+-command to run for minimally trusted users. Unfortunately, the messy
+-implementation of argument parsing here meant that trying to access a
+-repo named '--debugger' would give the user a pdb prompt, thereby
+-sidestepping any hoped-for sandboxing. Serving repositories over HTTP(S)
+-is unaffected.
+-
+-We're not currently hardening any subcommands other than 'serve'. If
+-your service exposes other commands to users with arbitrary repository
+-names, it is imperative that you defend against repository names of
+-'--debugger' and anything starting with '--config'.
+-
+-The read-only mode of hg-ssh stopped working because it provided its hook
+-configuration to "hg serve --stdio" via --config parameter. This is banned for
+-security reasons now. This patch switches it to directly call ui.setconfig().
+-If your custom hosting infrastructure relies on passing --config to
+-"hg serve --stdio", you'll need to find a different way to get that configuration
+-into Mercurial, either by using ui.setconfig() as hg-ssh does in this patch,
+-or by placing an hgrc file someplace where Mercurial will read it.
+-
+-mitrandir@fb.com provided some extra fixes for the dispatch code and
+-for hg-ssh in places that I overlooked.
+-
+-CVE: CVE-2017-9462
+-
+-Upstream-Status: Backport
+-
+-diff --git a/contrib/hg-ssh b/contrib/hg-ssh
+---- a/contrib/hg-ssh
+-+++ b/contrib/hg-ssh
+-@@ -32,7 +32,7 @@
+- # enable importing on demand to reduce startup time
+- from mercurial import demandimport; demandimport.enable()
+- 
+--from mercurial import dispatch
+-+from mercurial import dispatch, ui as uimod
+- 
+- import sys, os, shlex
+- 
+-@@ -61,14 +61,15 @@
+-         repo = os.path.normpath(os.path.join(cwd, os.path.expanduser(path)))
+-         if repo in allowed_paths:
+-             cmd = ['-R', repo, 'serve', '--stdio']
+-+            req = dispatch.request(cmd)
+-             if readonly:
+--                cmd += [
+--                    '--config',
+--                    'hooks.pretxnopen.hg-ssh=python:__main__.rejectpush',
+--                    '--config',
+--                    'hooks.prepushkey.hg-ssh=python:__main__.rejectpush'
+--                    ]
+--            dispatch.dispatch(dispatch.request(cmd))
+-+                if not req.ui:
+-+                    req.ui = uimod.ui.load()
+-+                req.ui.setconfig('hooks', 'pretxnopen.hg-ssh',
+-+                                 'python:__main__.rejectpush', 'hg-ssh')
+-+                req.ui.setconfig('hooks', 'prepushkey.hg-ssh',
+-+                                 'python:__main__.rejectpush', 'hg-ssh')
+-+            dispatch.dispatch(req)
+-         else:
+-             sys.stderr.write('Illegal repository "%s"\n' % repo)
+-             sys.exit(255)
+-diff --git a/mercurial/dispatch.py b/mercurial/dispatch.py
+---- a/mercurial/dispatch.py
+-+++ b/mercurial/dispatch.py
+-@@ -155,6 +155,37 @@
+-         pass # happens if called in a thread
+- 
+-     def _runcatchfunc():
+-+        realcmd = None
+-+        try:
+-+            cmdargs = fancyopts.fancyopts(req.args[:], commands.globalopts, {})
+-+            cmd = cmdargs[0]
+-+            aliases, entry = cmdutil.findcmd(cmd, commands.table, False)
+-+            realcmd = aliases[0]
+-+        except (error.UnknownCommand, error.AmbiguousCommand,
+-+                IndexError, getopt.GetoptError):
+-+            # Don't handle this here. We know the command is
+-+            # invalid, but all we're worried about for now is that
+-+            # it's not a command that server operators expect to
+-+            # be safe to offer to users in a sandbox.
+-+            pass
+-+        if realcmd == 'serve' and '--stdio' in cmdargs:
+-+            # We want to constrain 'hg serve --stdio' instances pretty
+-+            # closely, as many shared-ssh access tools want to grant
+-+            # access to run *only* 'hg -R $repo serve --stdio'. We
+-+            # restrict to exactly that set of arguments, and prohibit
+-+            # any repo name that starts with '--' to prevent
+-+            # shenanigans wherein a user does something like pass
+-+            # --debugger or --config=ui.debugger=1 as a repo
+-+            # name. This used to actually run the debugger.
+-+            if (len(req.args) != 4 or
+-+                req.args[0] != '-R' or
+-+                req.args[1].startswith('--') or
+-+                req.args[2] != 'serve' or
+-+                req.args[3] != '--stdio'):
+-+                raise error.Abort(
+-+                    _('potentially unsafe serve --stdio invocation: %r') %
+-+                    (req.args,))
+-+
+-         try:
+-             debugger = 'pdb'
+-             debugtrace = {
+-diff --git a/tests/test-ssh.t b/tests/test-ssh.t
+---- a/tests/test-ssh.t
+-+++ b/tests/test-ssh.t
+-@@ -357,6 +357,19 @@
+-   abort: destination 'a repo' is not empty
+-   [255]
+- 
+-+Make sure hg is really paranoid in serve --stdio mode. It used to be
+-+possible to get a debugger REPL by specifying a repo named --debugger.
+-+  $ hg -R --debugger serve --stdio
+-+  abort: potentially unsafe serve --stdio invocation: ['-R', '--debugger', 'serve', '--stdio']
+-+  [255]
+-+  $ hg -R --config=ui.debugger=yes serve --stdio
+-+  abort: potentially unsafe serve --stdio invocation: ['-R', '--config=ui.debugger=yes', 'serve', '--stdio']
+-+  [255]
+-+Abbreviations of 'serve' also don't work, to avoid shenanigans.
+-+  $ hg -R narf serv --stdio
+-+  abort: potentially unsafe serve --stdio invocation: ['-R', 'narf', 'serv', '--stdio']
+-+  [255]
+-+
+- Test hg-ssh using a helper script that will restore PYTHONPATH (which might
+- have been cleared by a hg.exe wrapper) and invoke hg-ssh with the right
+- parameters:
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+deleted file mode 100644
+index a08acd9..0000000
+--- a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
++++ /dev/null
+@@ -1,28 +0,0 @@
+-SUMMARY = "The Mercurial distributed SCM"
+-HOMEPAGE = "http://mercurial.selenic.com/"
+-SECTION = "console/utils"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-DEPENDS = "python-native"
+-
+-SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
+-           file://mercurial-CVE-2017-9462.patch \
+-"
+-SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
+-SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
+-
+-S = "${WORKDIR}/mercurial-${PV}"
+-
+-inherit native
+-
+-EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+-    PREFIX=${prefix}"
+-
+-do_configure_append () {
+-    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
+-}
+-
+-do_install () {
+-    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
+-}
+-
+diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+new file mode 100644
+index 0000000..db2f3c4
+--- /dev/null
++++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+@@ -0,0 +1,27 @@
++SUMMARY = "The Mercurial distributed SCM"
++HOMEPAGE = "http://mercurial.selenic.com/"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++DEPENDS = "python-native"
++
++SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
++"
++SRC_URI[md5sum] = "37974a416d1d9525e1375c92025b16d9"
++SRC_URI[sha256sum] = "8f2a5512d6cc2ffb08988aef639330a2f0378e4ac3ee0e1fbbdb64d9fff56246"
++
++S = "${WORKDIR}/mercurial-${PV}"
++
++inherit native
++
++EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
++    PREFIX=${prefix}"
++
++do_configure_append () {
++    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
++}
++
++do_install () {
++    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
++}
++
+-- 
+1.9.1
+
 
