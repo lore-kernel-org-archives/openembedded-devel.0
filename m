@@ -1,48 +1,45 @@
 Return-Path: <armccurdy@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id AC9EB78537
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id A62507834C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 20:34:45 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id b189so19591166wmd.4
+	Thu,  9 Nov 2017 20:43:51 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id t139so20318310wmt.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Nov 2017 12:34:47 -0800 (PST)
+	Thu, 09 Nov 2017 12:43:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=ykvDFROKtbe+72POEhLRAZSubeU+S9OFmAxTeAgQkCM=;
-	b=oOa7V3IMNbtqxo2YovUPOp+uIjE1lLPYX5pqOWemDzmV0PYSMrQSkM+I2oWW30zpY9
-	aYlhcZkkdMwNF1qedgd0ZiCyt/FBqFBTWJEb4B0dzRDo3tGraWW67wNz4Z84VboxZ5Jj
-	1zOxcH0b+CDt1oRAJ93u6cXbbVGg2pOHvnxe7BzHD3tvHRBa4zfr1NO5zhaaN2ACqTio
-	hJznQsarL3Yg9KMKscyQY2vllmkMjiRiYsuTby3DkoheqamL4yie2xOChzIPFeXOecZJ
-	x+9kbyby2ZFkajg0JrhELY2dzh2y/+6h8k8lbQ9QHM0lX8OWodJGMBx0aIXNY34zTAny
-	8Zkw==
+	:cc; bh=+WO1rB1tYA9yEFe85UhsScQ42z7+FHTBBYfJBnj4UAk=;
+	b=aYgOl++GJK0YnKJYdL08UGXQd2VZ3W3PbEsvLeUVcWkUi0VHQpbC7ng0mJo9BONeoV
+	yJv4WLbqjj9guJVtWbavuagHG6nXwUUVtacI46Y9GPoUUtBPwhZx/7X59yaSGgq+ZmBq
+	aOjmyze+E3xmTxBcByETshtvy8p4GPc/4xCokltS3VK26Q94q3TW10pFLTEXeqk2zV9f
+	sNxiw+6T7sUmISX8zwbkQhZvYCF8U/2wWA8DIKWXcL5cffvsqbmkmV/aQFr/6Oa9FWBp
+	/S/dKD4/NChQd5kRNK4ujFLSHon8q0om6XdNxFBs2gop6denQUXz5abkun0V3pyTxNr0
+	sxKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=ykvDFROKtbe+72POEhLRAZSubeU+S9OFmAxTeAgQkCM=;
-	b=YQ3Telc6L5KwUfo9CtgnyWZC2DDdfoj8x/N7bu9Un73IGq5qlAg/CTA8yZNY18g3n4
-	5UKYG74MW6NlcLrCQcm4KRjEX+4E+Yw1USXc7Vt/hLzlUcxLX0WAZxApKKMBJwsMptPi
-	52V3pelT9vCbqPzd3o06xtX4xu3LZG430txUoVOxf/FNcLcFk+XdSoKDIHWIR86SqyuV
-	s7zxr7xtPa5r/IQeFoFnQF/KE8WBpzxlHckGq9dNBSf6P6oH/wJBfGRcnQGO9WoWtfkm
-	XcvN1whAUJxnhr33d+NGFSB7fuBJ2OyJ2ESH+aqBl6mTVcR6cmjacJgb36koj/u5PMzL
-	fwqg==
-X-Gm-Message-State: AJaThX4RvhHDLL2HKBJ+F9eEqO3kdmVfsz/9mpGffDJXlnquuVLPxCTq
-	iRu121PG0BPzhMadqXtXrvB/JRkkXoVuhG6mVYw=
-X-Google-Smtp-Source: AGs4zMaFC+1OzvEuUa+XUDubEkPuFGfMK0D8C0F1+3v57Omx9cPic+KipkZsUggIGGuwX/7VSpYcqgiFOmB2M63FwNI=
-X-Received: by 10.28.11.138 with SMTP id 132mr842287wml.89.1510259686311; Thu,
-	09 Nov 2017 12:34:46 -0800 (PST)
+	bh=+WO1rB1tYA9yEFe85UhsScQ42z7+FHTBBYfJBnj4UAk=;
+	b=W78CZxrQkyV5UzROMbN8ZaDjTOXphUJ2HIZaNo3XikbVnGf8V1Ce8ryujOAR6f+pW1
+	9rt1VmZNAjJYtzeYc8N9/Wuia38DibnoIzcVI7Eiw3tWypVx+bStE60CqrVgMyLimz0P
+	FdOaVMQFPpooX5U9wt9ZE8SK1pb699IULzN4H5O1EFkkD9WVSsImScG6OA+Y1b+Xtlh9
+	uHxRVXexy6uP9eKZiWmtunZ1rdHSN5nZbDbYGqHTlSkiiCHZetPMaJkSzTTHcqFH5Q8w
+	H6kkdP8bN89FLDZiSxDdv5Zy+X8JWxYrwEu5IdgZezvV38zZ5XhN0hEGOf103hlp/+g2
+	RoFw==
+X-Gm-Message-State: AJaThX6PpZqX9MsP56fRJAVpkEZLW/uQeJgpN9SlggcKjVrsHLEipJl2
+	T2sdAwz1hbfKbgQohJVSBpVwjhI/pXVscy33JEU=
+X-Google-Smtp-Source: AGs4zMa5mI0OLBoj+/7sG/ARxO5p1mkcMuvP0dbVMBkqF5VuuBVKwifMyp8VjfYv7h5aDnty9H48t0NdLy6w7HC7G3U=
+X-Received: by 10.28.54.89 with SMTP id d86mr810432wma.101.1510260232053; Thu,
+	09 Nov 2017 12:43:52 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.199.140 with HTTP; Thu, 9 Nov 2017 12:34:45 -0800 (PST)
-In-Reply-To: <CAJ86T=Wc6-kb_YFATTj58XCeUYfGAkMsoBAuh=yiws5md2L3dg@mail.gmail.com>
-References: <1505920293-28115-1-git-send-email-derek@asterius.io>
-	<1505920293-28115-3-git-send-email-derek@asterius.io>
-	<CAJ86T=Wc6-kb_YFATTj58XCeUYfGAkMsoBAuh=yiws5md2L3dg@mail.gmail.com>
+Received: by 10.223.199.140 with HTTP; Thu, 9 Nov 2017 12:43:51 -0800 (PST)
+In-Reply-To: <1507143118-9319-1-git-send-email-armccurdy@gmail.com>
+References: <1507143118-9319-1-git-send-email-armccurdy@gmail.com>
 From: Andre McCurdy <armccurdy@gmail.com>
-Date: Thu, 9 Nov 2017 12:34:45 -0800
-Message-ID: <CAJ86T=W+-YPoxPoUuHKDX_s5Oh86zAARjyb=qjxY4KKozWM7Ng@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH 3/3] php: add libgcc to the runtime depends
+Date: Thu, 9 Nov 2017 12:43:51 -0800
+Message-ID: <CAJ86T=Xfmmszw6aqEnGPpZkLwFzSST_gWmDTGxmyNzWJ1VcriQ@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][morty][PATCH] mariadb: Do not use ucontext_* APIs with musl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,39 +52,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 20:34:46 -0000
+X-List-Received-Date: Thu, 09 Nov 2017 20:43:51 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Oct 30, 2017 at 6:31 PM, Andre McCurdy <armccurdy@gmail.com> wrote:
-> On Wed, Sep 20, 2017 at 8:11 AM, Derek Straka <derek@asterius.io> wrote:
->> Avoids issues with 'libgcc_s.so.1 must be installed for pthread_cancel to work'
+On Wed, Oct 4, 2017 at 11:51 AM, Andre McCurdy <armccurdy@gmail.com> wrote:
+> From: Khem Raj <raj.khem@gmail.com>
 >
-> Does passing the "--enable-libgcc" php configure option fix that too?
-> If so, maybe it's a better fix?
+> musl has ucontext.h header but does not implement the APIs
 
-To answer my own question, configuring with --enable-libgcc doesn't work.
+Ping. CCing Armin.
 
-The php configure script detects the path to libgcc by running "gcc
---print-libgcc-file-name" which doesn't work when cross compiling (or
-when building natively if ${CC} is set to something other than gcc).
-
->> Signed-off-by: Derek Straka <derek@asterius.io>
->> ---
->>  meta-oe/recipes-devtools/php/php.inc | 1 +
->>  1 file changed, 1 insertion(+)
->>
->> diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
->> index 0e55020..283d630 100644
->> --- a/meta-oe/recipes-devtools/php/php.inc
->> +++ b/meta-oe/recipes-devtools/php/php.inc
->> @@ -203,6 +203,7 @@ MODPHP_PACKAGE = "${@bb.utils.contains('PACKAGECONFIG', 'apache2', '${PN}-modphp
->>
->>  PACKAGES = "${PN}-dbg ${PN}-cli ${PN}-cgi ${PN}-fpm ${PN}-fpm-apache2 ${PN}-pear ${PN}-phar ${MODPHP_PACKAGE} ${PN}-dev ${PN}-staticdev ${PN}-doc ${PN}"
->>
->> +RDEPENDS_${PN} += "libgcc"
->>  RDEPENDS_${PN}-pear = "${PN}"
->>  RDEPENDS_${PN}-phar = "${PN}-cli"
->>  RDEPENDS_${PN}-cli = "${PN}"
->> --
->> 2.7.4
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> (cherry picked from commit b545c0643d2b2a1f1a816e789ff67116c613de5b)
+> Signed-off-by: Andre McCurdy <armccurdy@gmail.com>
+> ---
+>  meta-oe/recipes-support/mysql/mariadb.inc          |  1 +
+>  .../mariadb/0001-disable-ucontext-on-musl.patch    | 28 ++++++++++++++++++++++
+>  2 files changed, 29 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch
+>
+> diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
+> index 689b8ab..f3eb4c7 100644
+> --- a/meta-oe/recipes-support/mysql/mariadb.inc
+> +++ b/meta-oe/recipes-support/mysql/mariadb.inc
+> @@ -16,6 +16,7 @@ SRC_URI = "http://downloads.mariadb.com/MariaDB/mariadb-${PV}/source/mariadb-${P
+>             file://configure.cmake-fix-valgrind.patch \
+>             file://fix-a-building-failure.patch \
+>             file://change-cc-to-cc-version.patch \
+> +           file://0001-disable-ucontext-on-musl.patch \
+>            "
+>  SRC_URI[md5sum] = "fca86f1eaed2163b4bdce4f98f472324"
+>  SRC_URI[sha256sum] = "e142f9459507b97c5848042863b313ce70750118446bb4e35e5c07fe66007293"
+> diff --git a/meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch b/meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch
+> new file mode 100644
+> index 0000000..60e9199
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/mysql/mariadb/0001-disable-ucontext-on-musl.patch
+> @@ -0,0 +1,28 @@
+> +From 5bc3e7ef9700d12054e0125a126f1bb093f01ef9 Mon Sep 17 00:00:00 2001
+> +From: Khem Raj <raj.khem@gmail.com>
+> +Date: Sun, 26 Mar 2017 14:30:33 -0700
+> +Subject: [PATCH] disable ucontext on musl
+> +
+> +musl does not have *contex() APIs even though it has ucontext.h header
+> +
+> +Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> +---
+> + include/my_context.h | 2 +-
+> + 1 file changed, 1 insertion(+), 1 deletion(-)
+> +
+> +diff --git a/include/my_context.h b/include/my_context.h
+> +index dd44103..9b28c17 100644
+> +--- a/include/my_context.h
+> ++++ b/include/my_context.h
+> +@@ -31,7 +31,7 @@
+> + #define MY_CONTEXT_USE_X86_64_GCC_ASM
+> + #elif defined(__GNUC__) && __GNUC__ >= 3 && defined(__i386__)
+> + #define MY_CONTEXT_USE_I386_GCC_ASM
+> +-#elif defined(HAVE_UCONTEXT_H)
+> ++#elif defined(__GLIBC__) && defined(HAVE_UCONTEXT_H)
+> + #define MY_CONTEXT_USE_UCONTEXT
+> + #else
+> + #define MY_CONTEXT_DISABLE
+> +--
+> +2.12.1
+> +
+> --
+> 1.9.1
+>
 
