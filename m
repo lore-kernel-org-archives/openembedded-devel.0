@@ -1,24 +1,48 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B8B37850C
+Return-Path: <ticotimo@gmail.com>
+Received: from mail-ua0-f182.google.com (mail-ua0-f182.google.com
+	[209.85.217.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 8285560620
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 03:14:03 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA93E4Fq020036
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  9 Nov 2017 05:52:32 +0000 (UTC)
+Received: by mail-ua0-f182.google.com with SMTP id j14so3604066uag.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Nov 2017 19:14:05 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 8 Nov 2017 19:14:04 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Nov 2017 11:12:29 +0800
-Message-ID: <20171109031229.21299-1-jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
+	Wed, 08 Nov 2017 21:52:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
+	:cc; bh=4jKsesvFmQ5U0RI0QwNZ52o/W3O7H88FSS+E2E8eM8s=;
+	b=pwgBX5ZD0SXhvjvjhA2p3xJ14SscD8WB6HXpuFTGV4uPfyQP4g79y6nA3DcCRGKrIQ
+	02meJe9Gyy60UpGTDI3fuSysvqn8jYWKHV5puCLiRjVb3grB7te/4/XvB7rCGcV/9mhz
+	DaHWpICJe0cGCXmAuzidMKNNKWhrnXcvRtCIk9Bs1Xv3vwR6mFsojmZKEZvzfmEj7CSq
+	/c78tDcACt4TpSKrxGmmCmVXKgeH3ANx7MD62iF5LOcT+69XI5Aexxn+BXAkCV+Vzm0k
+	1/59SNyXAZBLQ18/CqxGihi+twmy5vmOz4sqDahyjrbb2ItwrrbOYEZwxDnbYjAbtxoZ
+	02dA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
+	:message-id:subject:to:cc;
+	bh=4jKsesvFmQ5U0RI0QwNZ52o/W3O7H88FSS+E2E8eM8s=;
+	b=kGUGiPvBcMU0Rx4cptBiqoVi8pXMFGLM8SebEVTUyN0ha31j67nSE+MmIgaQz24ZOS
+	99C2mHRvOsUwcPhX1QvY1KRUlFMxzNst58NERoUDF4VNdFX9wA+xB8cqYqfJ8Wsf4fwW
+	5NV1oRLx3cm2mscR+ItCvZbaHQcIzbWE//IGsbHzXwxnsf4rvPwHiMXsD4ONWdRJmwlh
+	wjuqu+uTf6E07jZs3doqD7DDMHPvodlUGwnxqcLYuYi+Lajh7kT21Jy3Yn8SwSWryNxy
+	VfdNn+Gtvv9Hh6eoCLPnjdSz3y+XRnRHJDwPDGzECqvyF7fHdCnVLOXc8yxf0hVVzFLG
+	/r/A==
+X-Gm-Message-State: AJaThX5CY509JU67uXS06HLB8M7S+p9hRPLIP4yWh2OS9AxWNTI63dzd
+	oSf+vtg/QzDWRAfjxd2Bx9Nx0aveszAw5UwAglY=
+X-Google-Smtp-Source: ABhQp+T4AXU9SUBfzbUgLf2HJBg4n/1m+dJc6s/oQDkQYAOpM6F/5PBlboO8RET2UcV0GXGeejOu1hINpAECNATXTf4=
+X-Received: by 10.159.50.112 with SMTP id y45mr2629535uad.166.1510206753262;
+	Wed, 08 Nov 2017 21:52:33 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH] xfce4-screenshooter: create src dir before build
+References: <20171024192754.19623-1-alex.stewart@ni.com>
+	<34e1dd1c-e88a-7891-dc26-745946508deb@ni.com>
+In-Reply-To: <34e1dd1c-e88a-7891-dc26-745946508deb@ni.com>
+From: Tim Orling <ticotimo@gmail.com>
+Date: Thu, 09 Nov 2017 05:52:22 +0000
+Message-ID: <CANx9H-A512DWX0O0aTcTzmvWKivmTxic9B1KwJZ9L1dU_nwZEw@mail.gmail.com>
+To: Alex Stewart <alex.stewart@ni.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][meta-python][PATCH] python-future: add new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,35 +55,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 03:14:04 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Nov 2017 05:52:32 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Catalin Enache <catalin.enache@windriver.com>
+On Wed, Nov 8, 2017 at 9:43 AM Alex Stewart <alex.stewart@ni.com> wrote:
 
-In some case the output directory for xfce4-screenshooter.appdata.xml file
-doesn't exist.
+> Bump.
+>
+> Is there an ETA on when this patch can be pulled or is a fixup needed?
+>
 
-Create directory before build.
+It is in staging:
+http://git.openembedded.org/meta-openembedded-contrib/commit/?h=stagging/master-next&id=a890147a94b48fe817e1cffda300795b9448f52c
 
-Signed-off-by: Catalin Enache <catalin.enache@windriver.com>
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb | 1 +
- 1 file changed, 1 insertion(+)
+And therefore likely to be merged in the next few days. We are in the
+process of handing off some of the meta-openembedded maintenance, as
+discussed in the OEDEM meeting.
 
-diff --git a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
-index 06dea64b3..e449dceed 100644
---- a/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
-+++ b/meta-xfce/recipes-apps/xfce4-screenshooter/xfce4-screenshooter_1.9.1.bb
-@@ -12,6 +12,7 @@ SRC_URI[sha256sum] = "e62b31d9cf06a7414a26400c2ebe7a2ae7c2b22aa60f997f25145ea9eb
- 
- do_compile_prepend() {
-     mkdir -p lib
-+    mkdir -p src
- }
- 
- FILES_${PN} += " \
--- 
-2.11.0
-
+>
+> Thanks,
+>
+>
+>
 
