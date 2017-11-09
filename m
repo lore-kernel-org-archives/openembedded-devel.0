@@ -1,29 +1,58 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 89D55785B8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 17:08:15 +0000 (UTC)
-Received: from fmsmga002.fm.intel.com ([10.253.24.26])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	09 Nov 2017 09:08:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,370,1505804400"; d="scan'208";a="1242101474"
-Received: from rkubodac-desk.ger.corp.intel.com ([10.252.1.2])
-	by fmsmga002.fm.intel.com with ESMTP; 09 Nov 2017 09:08:15 -0800
-From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-To: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <CAP9ODKrE_NpWXKR8mZ=y3pa0A4DLd9a7iLE7dVK1RgoUVK1SuA@mail.gmail.com>
-	(Otavio Salvador's message of "Thu, 9 Nov 2017 14:54:39 -0200")
-Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
-	Amsterdam
-References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CAP9ODKrE_NpWXKR8mZ=y3pa0A4DLd9a7iLE7dVK1RgoUVK1SuA@mail.gmail.com>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
-Date: Thu, 09 Nov 2017 18:08:15 +0100
-Message-ID: <87375nbcsg.fsf@rkubodac-desk.ger.corp.intel.com>
+Return-Path: <akuster808@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 90ECC60290;
+	Thu,  9 Nov 2017 19:43:32 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id v137so9202214qkb.1;
+	Thu, 09 Nov 2017 11:43:34 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=YbImLVS4nGebx8Au0rHEy27BmytjLPaTRLuHDZ40/yY=;
+	b=DuRTQBgB4ocrVEBGgJlFjnvh8fB6p9ClszhoC/JsyIZ9pXeIiu4SPmHzCdwxsDWl85
+	XSRKrtMw1jwh1X3aSE0FaN4JnxCPh7OkqKWCkhunEE6MjlS5fsyFc2+TIra9r6YmAseF
+	nKCvoF14XnS2QMxVc+Jrfx6FsflvOsP6pw/NRze9UUBi3KjiThWMPm9AUhBBGegVowOJ
+	lnh6XgNyEcDii0crkR4LuwFJKTGHV/P1i9Z2zXS/d5liolxPhW3o12gfRqGDapUJN1iC
+	6fFFXcO6h40ETO8rbIz2T+vefkCjWmvzcyZ+UNJCYN3QLSCV5+k7RLhzYrYmH/fGxiWt
+	Ttfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=YbImLVS4nGebx8Au0rHEy27BmytjLPaTRLuHDZ40/yY=;
+	b=uAgxe3PpmFfHfK6zyZ7ArxfCIt7hXKR/cvBpOQ7Ui9vR84JyN7bTDvoTgxZzmysicT
+	nQlWc9kp75AV9lXpXk7EUc8AM8LSdgIiv3eY1Fq7jms8ItMfXZSj+Ci5BwbsGCzOOmj6
+	JqpWnOZIvO+pvIIhiQr+S/23vJlc6d7ywP/w0q8zR6jk4Q98id1/x3appkLhanLtIwPC
+	BlFjt0xzSJW+xYPf+H2mzlzOOjCDtOdvjcV58S8zS8AxLYPoKHoHNIaHPblWWF8QtcTI
+	WIQhB6bkvTOLFeJ/cUgk5JYGExXZmOf1RBb59El4I8w6hZCcqRRN+ffT5SJu8tw17FGi
+	G3Ug==
+X-Gm-Message-State: AJaThX5uVqZSZG4ZQ1B1TUU3bVVEHpeX6gseZhXPK5NGODWgRvR95IZU
+	zxBnAKi8c3vSxUCFuSVane+cOg==
+X-Google-Smtp-Source: AGs4zMbiwT6KkHPsmQ0OXV7YauIW3p2JGa7eCSiitMAf5EY6Wtad1ZdWt1w/5aB19ebR/XR2qXFs/Q==
+X-Received: by 10.55.151.4 with SMTP id z4mr2740342qkd.173.1510256613342;
+	Thu, 09 Nov 2017 11:43:33 -0800 (PST)
+Received: from [10.43.100.234] (50-233-148-156-static.hfc.comcastbusiness.net.
+	[50.233.148.156]) by smtp.gmail.com with ESMTPSA id
+	g47sm5161373qtk.37.2017.11.09.11.43.32
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 09 Nov 2017 11:43:32 -0800 (PST)
+To: Denys Dmytriyenko <denis@denix.org>
+References: <8075716d-066a-ec38-3787-fd64bb9c61d5@gmail.com>
+	<20171106164345.GQ9221@denix.org>
+	<18f73e9e-6c8f-2c36-f9fc-6d6e53ef179d@gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <808d5b44-4ecb-2da6-0dc3-0600afb2a759@gmail.com>
+Date: Thu, 9 Nov 2017 11:43:31 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>
-Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
+In-Reply-To: <18f73e9e-6c8f-2c36-f9fc-6d6e53ef179d@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
+	openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>,
+	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [yocto] [Openembedded-architecture] [RFC] stable branch naming scheme
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,45 +65,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 17:08:15 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Nov 2017 19:43:32 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hey Otavio, thanks for the quick response!
+Any more comments?
 
-Otavio Salvador <otavio.salvador@ossystems.com.br> writes:
-> Hello Raphael,
+
+I started to use stable/{branch}-next in all the contrib repos. Poky
+will be constructed from oe-contrib repos.
+
+
+thanks for all the feedback.
+
+regards,
+
+Armin
+
+
+On 11/06/2017 10:14 AM, akuster808 wrote:
 >
->> I'd like people to look at my commits and let me know if there's any big
->> issue that would prevent those changes from landing into meta-browser.
->> If everything's OK, I'd then start sending the patches to the list (or
->> pull requests on GitHub, whichever is preferred).
 >
-> I went through all the commits, one by one. There are few that might
-> need minor adjustments (as for example the removal of cups support
-> which should be moved to a PACKAGECONFIG) but in general, they are all
-> good. You did a great job making it very granular and well documented
-> :-)
 >
-> I think this is huge enough that using a pull request so we can track
-> comments and progress makes sense. Do you mind creating one?
+> On 11/06/2017 08:43 AM, Denys Dmytriyenko wrote:
+>> On Fri, Nov 03, 2017 at 09:20:43AM -0700, akuster808 wrote:
+>>> Hello,
+>>>
+>>> The problem I hope to solve is that a Maintainer can stage changes in=
+
+>>> any branch in the contrib repos making it difficult for folks to trac=
+k
+>>> their back port requests. The also makes it harder to automate any ki=
+nd
+>>> of build automation.
+>>>
+>>> I would like to propose a contrib naming scheme for the stable releas=
+e
+>>> branches. I am thinking of the following:
+>>>
+>>> stable/{version}-next or {special char}_stable/{version}-next.
+>>>
+>>> =C2=A0=C2=A0 "version" is either the code name or numeric like in bit=
+bake.
+>>>
+>>> =C2=A0=C2=A0 "special char" would be used to have these branches at t=
+he top of th
+>>> list, if we wont that.
+>> I like this branch unification!
+>>
+>> I know we discussed this at OEDEM and there was some convenience reaso=
+n given,=20
+>> but can we also standardize on the tree? I.e. openembedded-core-contri=
+b vs.=20
+>> poky-contrib?
 >
-> I think we will end picking individual commits on the beginning to
-> reduce the delta and keep going until we have the bump done. Do you
-> think it is a good way to handle this?
+> The current Poky maintenance process talks about deconstructing
+> "stable-next":
+> https://wiki.yoctoproject.org/wiki/Stable_branch_maintenance#Stable_bra=
+nch_maintainers
+> =C2=A0
+> # Split out any bitbake changes and send them to the bitbake-devel
+> mailing list (marking them with the appropriate stable version in the
+> subject line e.g. [1.20])
+> # Split out OE-Core changes and create an openembedded-core-contrib
+> branch containing them; send the cover letter only (marking it as such
+> in the subject) to the openembedded-core mailing list.
+> The above has been happening via=C2=A0 a script Richard runs.=C2=A0 I p=
+ersonally
+> think it the workflow should be for OE -> Yocto. This does add more
+> work for the maintainer but is cleaner.=C2=A0 I did ask Richard to crea=
+te
+> bitbake-contrib for this purpose but am lazy as he uses his script ; )
+>
+> The reason I choose "stable/" branching is that the "-next" branches
+> are out of sync and not being used correctly or not defined on their
+> purpose. another subject for another time.
+>
+> - armin
+>
+>>> We can apply this to all OE / Yocto repos that have stable branch
+>>> maintenance process.
+>>>
+>>> If we standardize on a naming scheme, We can then document this so
+>>> contributers can monitor their requests more easily. The community ca=
+n
+>>> see what changes are being backport.=C2=A0 This will enable the possi=
+bility
+>>> to automate builds, etc.=C2=A0
+>>>
+>>> let me know what you think.
+>>>
+>>> Kind regards,
+>>>
+>>> Armin
+>>>
+>>>
+>>>
+>>> _______________________________________________
+>>> Openembedded-architecture mailing list
+>>> Openembedded-architecture@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-architect=
+ure
+>
 
-I think that works, and it matches what I originally had in mind:
-* Get people to look at the existing commits and raise any objections to
-  any major "architectural" issues with the changes.
-* Once everyone's on the same page, start sending patches in chunks
-  (e.g. all dependency changes in one pull request).
-* Once the clean-ups and bug fixes are in, send the big PRs (move to GN
-  and update to M62).
-
-I'll start splitting that branch into smaller ones for PRs, but I'll
-also wait a little bit for others (such as Jacobo, Trevor and Khem) to
-chime in as well.
-
-The only bummer is that I'll be on holidays from 17th November to 8th
-December so it may take a little longer than usual for me to get all the
-changes landed.
 
