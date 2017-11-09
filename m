@@ -1,50 +1,25 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 3B66665CBB
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C74B1784DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  8 Nov 2017 21:37:43 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id j15so3727235wre.8
+	Thu,  9 Nov 2017 00:39:08 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA90d9sJ025445
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Nov 2017 13:37:45 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=aGV/Z+GKf9eGxheizfmb9rlbFpBJ9ClmwMmTMOYMwNc=;
-	b=Zcu6r+icK7j9iOvyxOD846jo1nL3Xopuo6xXT0jl7WDGBwUJT9r/u8cQCOE3wiMyJx
-	BK9d5sRq9oTD6/D2RqRm2syXfhrqrbUhjdHbZifgQsuCovEM6FX9EtNUG+7x3G1qAl28
-	7RQBMFd+GfVLUzSQsiuVxUEB3HIfmG4euwQSN1ZPl58+e88nLBmDO13Iu4P3krt9pVIz
-	raDkFO3lqMGGNBog+6PNlwfOGxGzWhACmcJ26DoOBlh6b0t6dZGthNE0t7FoXah5zxaW
-	LfiCf+v+rdIQ3TfT9bYB8yz5yNKcin9bNzcd6y8IDFkLDWInleqCT0IM+/eK1eSxzV9W
-	siWA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=aGV/Z+GKf9eGxheizfmb9rlbFpBJ9ClmwMmTMOYMwNc=;
-	b=P7B7p40y/gXrlz4MlqmICDkx9VRx2uZffyBPk2x5BKiWTjmCNmsKV8bRgn2gjmEcxv
-	h/v65UWhQjiBpRzL5OxIO31VfGYIiTIoWdsxkqPDuGyCJxVVHwZTon4Jj20GA27m/Hp+
-	vQI6iuHavyhavGrusrj8l3ODK/5z7WZkzp+rdaIUKCe2VYrQB3ppIcRaFgUQMo8ItAi3
-	gWf0WDqm3xA1dIzY8AMd7JNsuvpm69BVDsfeMiX+VD2QoPgVUW9ZehM/30sB6yS9VAZR
-	XaN62kPC2IdUJp7VZbxWEITLZOwsaP1lAXG3KI7ibf/Noj74PMEfATCCkMwSSxd4XcHW
-	etYw==
-X-Gm-Message-State: AJaThX5mgEugRvdo+5k4nzamJ/7FQQ0ugC5HFMK4UfQxvw6GB7saMtKY
-	eA1Sn0wjqGt/0i4Nvk16YYh2EycgTgifHdHcTvHFKA==
-X-Google-Smtp-Source: ABhQp+RUCQKgVi7DC70pITICjQaxJfNW4pXy3BC/v0BXtKjYjW2bJayv0vGmaKUEpsn4u5B+vj5UP930gkgfWbXydRA=
-X-Received: by 10.223.169.135 with SMTP id b7mr1521480wrd.171.1510177064787;
-	Wed, 08 Nov 2017 13:37:44 -0800 (PST)
+	Wed, 8 Nov 2017 16:39:10 -0800
+Received: from localhost (128.224.163.244) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Wed, 8 Nov 2017 16:39:09 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 9 Nov 2017 08:37:14 +0800
+Message-ID: <1510187834-14779-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-Received: by 10.28.183.212 with HTTP; Wed, 8 Nov 2017 13:37:44 -0800 (PST)
-In-Reply-To: <CA+chaQeKUJT0MBZ3S7uFpj9j_49_Fda=KynqnH9vkF6NsOZxxA@mail.gmail.com>
-References: <1509542622-20015-1-git-send-email-joe_macdonald@mentor.com>
-	<1509542622-20015-2-git-send-email-joe_macdonald@mentor.com>
-	<CA+chaQeKUJT0MBZ3S7uFpj9j_49_Fda=KynqnH9vkF6NsOZxxA@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 8 Nov 2017 22:37:44 +0100
-Message-ID: <CA+chaQeKAwPkE1zZkF1=qSYmC365GJ9jKMFyEgSBOYygi=BJWg@mail.gmail.com>
-To: Joe MacDonald <joe_macdonald@mentor.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-networking][PATCH v2 1/6] ddclient: new package
+X-Originating-IP: [128.224.163.244]
+Subject: [meta-networking][PATCH] postfix: update to 3.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,140 +32,166 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Nov 2017 21:37:44 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Nov 2017 00:39:08 -0000
+Content-Type: text/plain
 
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-February/111447.html
+* Update main.cf for postfix 3.x to eliminate startup warning
+* Change daemon_directory from ${libexecdir} to ${libexecdir}/postfix
+* Add postfix-native to PACKAGE_WRITE_DEPS to make sure newaliases and
+  postmap can be found in pkg_postinst
+* Remove duplicate SRC_URI lines in bb file
 
-On Wed, Nov 8, 2017 at 10:35 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../postfix/files/{main.cf_2.0 => main.cf}             |  5 ++++-
+ .../recipes-daemons/postfix/files/postfix.service      |  2 +-
+ meta-networking/recipes-daemons/postfix/postfix.inc    | 13 +++++++------
+ .../recipes-daemons/postfix/postfix_3.2.2.bb           | 18 ------------------
+ .../recipes-daemons/postfix/postfix_3.2.4.bb           |  9 +++++++++
+ 5 files changed, 21 insertions(+), 26 deletions(-)
+ rename meta-networking/recipes-daemons/postfix/files/{main.cf_2.0 => main.cf} (97%)
+ delete mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+ create mode 100644 meta-networking/recipes-daemons/postfix/postfix_3.2.4.bb
 
-> libio-socket-ssl-perl is in meta-perl and meta-networking doesn't depend
-> on meta-perl.
->
-> See my review from Feb 22
->
-> On Wed, Nov 1, 2017 at 2:23 PM, Joe MacDonald <joe_macdonald@mentor.com>
-> wrote:
->
->> From: "Kinsella, Ray" <ray.kinsella@intel.com>
->>
->> Adding the package ddclient. DDClient updates Dynamic DNS servers with an
->> IP address.
->> Recipe is based on the original OE recipe found here.
->>
->> http://cgit.openembedded.org/openembedded/tree/recipes/ddcli
->> ent/ddclient_3.6.3.bb
->>
->> with modifications based on the recipe at:
->>
->> https://github.com/cshoredaniel/meta-cshored/blob/master/
->> recipes-connectivity/ddclient/ddclient_3.8.3.bb
->>
->> DDClient version has been updated to 3.8.3.
->>
->> Signed-off-by: Ray Kinsella <ray.kinsella@intel.com>
->> Signed-off-by: Joe MacDonald <joe_macdonald@mentor.com>
->> ---
->>  .../recipes-daemons/ddclient/ddclient_3.8.3.bb     | 45
->> ++++++++++++++++++++++
->>  .../recipes-daemons/ddclient/files/ip-up           |  4 ++
->>  .../recipes-daemons/ddclient/files/persistent      |  1 +
->>  3 files changed, 50 insertions(+)
->>  create mode 100644 meta-networking/recipes-daemons/ddclient/
->> ddclient_3.8.3.bb
->>  create mode 100644 meta-networking/recipes-daemons/ddclient/files/ip-up
->>  create mode 100644 meta-networking/recipes-daemon
->> s/ddclient/files/persistent
->>
->> diff --git a/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
->> b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
->> new file mode 100644
->> index 0000000..f4ef536
->> --- /dev/null
->> +++ b/meta-networking/recipes-daemons/ddclient/ddclient_3.8.3.bb
->> @@ -0,0 +1,45 @@
->> +SECTION = "net/misc"
->> +DESCRIPTION = "Ddclient is a Perl client used to update dynamic DNS
->> entries for accounts on Dynamic DNS Network Services"
->> +HOMEPAGE = "http://ddclient.sourceforge.net/"
->> +LICENSE = "GPLv2"
->> +
->> +SRC_URI = "\
->> +    ${SOURCEFORGE_MIRROR}/ddclient/ddclient-${PV}.tar.bz2 \
->> +    file://ip-up"
->> +
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
->> +
->> +RDEPENDS_${PN} = "\
->> +    perl-module-getopt-long \
->> +    perl-module-sys-hostname \
->> +    perl-module-io-socket \
->> +    perl-module-vars \
->> +    perl-module-overload \
->> +    perl-module-overloading \
->> +    perl-module-config \
->> +    perl-module-integer \
->> +    perl-module-exporter-heavy \
->> +    perl-module-symbol \
->> +    perl-module-selectsaver \
->> +    bash \
->> +    perl \
->> +    libio-socket-ssl-perl"
->> +
->> +do_install() {
->> +    install -d ${D}${sbindir} ${D}${sysconfdir}/ddclient
->> ${D}${sysconfdir}/init.d ${D}${sysconfdir}/default/persistent
->> +    install -d ${D}${sysconfdir}/ppp/ip-up.d/ install -d
->> ${D}${docdir}/ddclient
->> +    install -m 755 ${S}/ddclient ${D}${sbindir}
->> +    install ${S}/sample-etc_ddclient.conf ${D}${sysconfdir}/ddclient/ddc
->> lient.conf
->> +    install -m 755 ${WORKDIR}/ip-up ${D}${sysconfdir}/ppp/ip-up.d/
->> ddclient
->> +    install -m 0644 ${WORKDIR}/persistent ${D}/${sysconfdir}/default/per
->> sistent/50_ddclient
->> +    sed -e 's|/etc/ddclient.conf|/etc/ddclient/ddclient.conf|g'
->> ${S}/sample-etc_rc.d_init.d_ddclient > ${S}/rc_init
->> +    install -m 755 ${S}/rc_init ${D}${sysconfdir}/init.d/ddclient
->> +    install ${S}/README* ${D}${docdir}/ddclient
->> +    install ${S}/COPY* ${D}${docdir}/ddclient
->> +    install ${S}/sample* ${D}${docdir}/ddclient
->> +}
->> +
->> +CONFFILES_${PN} = "${sysconfdir}/ddclient/ddclient.conf"
->> +
->> +SRC_URI[md5sum] = "3b426ae52d509e463b42eeb08fb89e0b"
->> +SRC_URI[sha256sum] = "d40e2f1fd3f4bff386d27bbdf4b86
->> 45199b1995d27605a886b8c71e44d819591"
->> diff --git a/meta-networking/recipes-daemons/ddclient/files/ip-up
->> b/meta-networking/recipes-daemons/ddclient/files/ip-up
->> new file mode 100644
->> index 0000000..4411db9
->> --- /dev/null
->> +++ b/meta-networking/recipes-daemons/ddclient/files/ip-up
->> @@ -0,0 +1,4 @@
->> +#!/bin/sh
->> +
->> +logger -t ddclient $PPP_IFACE $PPP_LOCAL
->> +ddclient -daemon=0 -syslog -use=if -if=$PPP_IFACE >/dev/null 2>&1
->> diff --git a/meta-networking/recipes-daemons/ddclient/files/persistent
->> b/meta-networking/recipes-daemons/ddclient/files/persistent
->> new file mode 100644
->> index 0000000..b721272
->> --- /dev/null
->> +++ b/meta-networking/recipes-daemons/ddclient/files/persistent
->> @@ -0,0 +1 @@
->> +l root root 0644 /etc/ddclient.conf /var/persistent/etc/ddclient.conf
->> --
->> 2.7.4
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
+diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0 b/meta-networking/recipes-daemons/postfix/files/main.cf
+similarity index 97%
+rename from meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+rename to meta-networking/recipes-daemons/postfix/files/main.cf
+index dc7feb5..e75c6fc 100644
+--- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
++++ b/meta-networking/recipes-daemons/postfix/files/main.cf
+@@ -1,3 +1,6 @@
++compatibility_level = 2
++smtputf8_enable = no
++
+ # Configure your domain and accounts
+ #mydomain=sample.com
+ #FQDN from gethostname
+@@ -30,7 +33,7 @@ queue_directory = /var/spool/postfix
+ mail_spool_directory = /var/spool/mail
+ readme_directory = no
+ command_directory = /usr/sbin
+-daemon_directory = @LIBEXECDIR@
++daemon_directory = @LIBEXECDIR@/postfix
+ mail_owner = postfix
+ setgid_group = postdrop
+ unknown_local_recipient_reject_code = 450
+diff --git a/meta-networking/recipes-daemons/postfix/files/postfix.service b/meta-networking/recipes-daemons/postfix/files/postfix.service
+index 3a9a0a1..30d54a4 100644
+--- a/meta-networking/recipes-daemons/postfix/files/postfix.service
++++ b/meta-networking/recipes-daemons/postfix/files/postfix.service
+@@ -7,7 +7,7 @@ Conflicts=sendmail.service exim.service
+ Type=forking
+ PIDFile=@LOCALSTATEDIR@/spool/postfix/pid/master.pid
+ ExecStartPre=-@SBINDIR@/check_hostname.sh
+-ExecStartPre=-@LIBEXECDIR@/aliasesdb
++ExecStartPre=-@LIBEXECDIR@/postfix/aliasesdb
+ ExecStart=@SBINDIR@/postfix start
+ ExecReload=@SBINDIR@/postfix reload
+ ExecStop=@SBINDIR@/postfix stop
+diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
+index a588bd3..5e11794 100644
+--- a/meta-networking/recipes-daemons/postfix/postfix.inc
++++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+@@ -18,7 +18,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
+ SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
+     file://makedefs.patch \
+     file://install.patch \
+-    file://main.cf_2.0 \
++    file://main.cf \
+     file://postfix \
+     file://internal_recipient \
+     file://postfix.service \
+@@ -135,7 +135,7 @@ SYSTEMD_SERVICE_${PN} = "postfix.service"
+ do_install () {
+     sh ./postfix-install 'install_root=${D}' \
+         'config_directory=${sysconfdir}/postfix' \
+-        'daemon_directory=${libexecdir}' \
++        'daemon_directory=${libexecdir}/postfix' \
+         'command_directory=${sbindir}' \
+         'queue_directory=${localstatedir}/spool/postfix' \
+         'sendmail_path=${sbindir}/sendmail.postfix' \
+@@ -149,7 +149,7 @@ do_install () {
+     mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sample-main.cf
+     install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
+     install -d ${D}${sysconfdir}/init.d
+-    install -m 644 ${WORKDIR}/main.cf_2.0 ${D}${sysconfdir}/postfix/main.cf
++    install -m 644 ${WORKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
+     sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
+ 
+     install -m 755 ${WORKDIR}/check_hostname.sh ${D}${sbindir}/
+@@ -163,7 +163,7 @@ do_install () {
+     sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/postfix.service
+     sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/postfix.service
+ 
+-    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}
++    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}/postfix
+ 
+     install -m 770 -d ${D}${localstatedir}/spool/postfix
+     chown postfix:postfix ${D}${localstatedir}/spool/postfix
+@@ -231,6 +231,7 @@ ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
+ ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
+ ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
+ 
++PACKAGE_WRITE_DEPS += "postfix-native"
+ pkg_postinst_${PN} () {
+     if [ "x$D" = "x" ]; then
+         touch /etc/aliases
+@@ -246,7 +247,7 @@ pkg_postinst_${PN} () {
+         postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+ 
+         if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES', False) else 'false'}; then
+-            # /usr/lib/sendmial is required by LSB core test
++            # /usr/lib/sendmail is required by LSB core test
+             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
+         fi
+     fi
+@@ -255,4 +256,4 @@ pkg_postinst_${PN} () {
+ # Exclude .debug directories from the main package
+ FILES_${PN} = "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}/* \
+                ${libexecdir}/* ${systemd_unitdir}/*"
+-FILES_${PN}-dbg += "${libexecdir}/.debug"
++FILES_${PN}-dbg += "${libexecdir}/postfix/.debug"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb b/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+deleted file mode 100644
+index 439ede9..0000000
+--- a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
++++ /dev/null
+@@ -1,18 +0,0 @@
+-require postfix.inc
+-
+-SRC_URI = "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-${PV}.tar.gz \
+-           file://makedefs.patch \
+-           file://install.patch \
+-           file://main.cf_2.0 \
+-           file://postfix \
+-           file://internal_recipient \
+-           file://postfix.service \
+-           file://aliasesdb \
+-           file://check_hostname.sh \
+-           file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
+-           file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
+-           file://postfix-install.patch \
+-           file://icu-config.patch \
+-           "
+-SRC_URI[md5sum] = "aea073a9b0bea5bdb590460a270a4aa0"
+-SRC_URI[sha256sum] = "d06849418d119d09366997b2b481bb23f737629769b4e4a52da42fb3ad8b0576"
+diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.4.bb b/meta-networking/recipes-daemons/postfix/postfix_3.2.4.bb
+new file mode 100644
+index 0000000..8edd035
+--- /dev/null
++++ b/meta-networking/recipes-daemons/postfix/postfix_3.2.4.bb
+@@ -0,0 +1,9 @@
++require postfix.inc
++
++SRC_URI += "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_RECV_MS.patch \
++            file://0001-makedefs-Use-native-compiler-to-build-makedefs.test.patch \
++            file://postfix-install.patch \
++            file://icu-config.patch \
++           "
++SRC_URI[md5sum] = "60d8418278ef9f3c7d1251480ea84a42"
++SRC_URI[sha256sum] = "ec55ebaa2aa464792af8d5ee103eb68b27a42dc2b36a02fee42dafbf9740c7f6"
+-- 
+2.7.4
+
 
