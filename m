@@ -1,24 +1,26 @@
 Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F41277811
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id ECE8978520
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 11:06:26 +0000 (UTC)
+	Thu,  9 Nov 2017 11:06:28 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vA9B6SeI007064
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA9B6TG2015567
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Nov 2017 03:06:28 -0800
+	Thu, 9 Nov 2017 03:06:29 -0800 (PST)
 Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
 	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Thu, 9 Nov 2017 03:06:27 -0800
+	14.3.361.1; Thu, 9 Nov 2017 03:06:28 -0800
 From: <jackie.huang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Nov 2017 19:04:49 +0800
-Message-ID: <cover.1510225386.git.jackie.huang@windriver.com>
+Date: Thu, 9 Nov 2017 19:04:50 +0800
+Message-ID: <323038dad742b8f7a04d629e877a5ad2177afbbb.1510225386.git.jackie.huang@windriver.com>
 X-Mailer: git-send-email 2.11.0
+In-Reply-To: <cover.1510225386.git.jackie.huang@windriver.com>
+References: <cover.1510225386.git.jackie.huang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 0/3] iscsi-initiator-utils/open-isns: fix for sysvinit
+Subject: [meta-networking][PATCH 1/3] open-isns: add sysvinit support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,30 +33,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 11:06:27 -0000
+X-List-Received-Date: Thu, 09 Nov 2017 11:06:29 -0000
 Content-Type: text/plain
 
 From: Jackie Huang <jackie.huang@windriver.com>
 
---
-The following changes since commit 5d6d21e98ed594809169d2b2f6964e90a3369a96:
+It's not mandatory to depend on systemd for open-isns,
+the sysvinit script is also provided in open-isns source
+code, so add it to support sysvinit and remove the
+distro_features_check.
 
-  libreport: fix Nothing RPROVIDES 'lib32-python3-libreport' (2017-10-27 16:39:34 +0000)
+Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
+---
+ meta-networking/recipes-support/open-isns/open-isns_0.97.bb | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-are available in the git repository at:
-
-  git://git.pokylinux.org/poky-contrib.git jhuang0/d_iscsi-openisns_171109_0
-  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_iscsi-openisns_171109_0
-
-Jackie Huang (3):
-  open-isns: add sysvinit support
-  iscsi-initiator-utils: remove the distro_features_check
-  iscsi-initiator-utils: check file existence before moving
-
- .../iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb   |  8 ++++----
- meta-networking/recipes-support/open-isns/open-isns_0.97.bb  | 12 ++++++++----
- 2 files changed, 12 insertions(+), 8 deletions(-)
-
+diff --git a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+index 420ef5be0..9ee1f87c8 100644
+--- a/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
++++ b/meta-networking/recipes-support/open-isns/open-isns_0.97.bb
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2+ & LGPLv2+"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=321bf41f280cf805086dd5a720b37785"
+ SECTION = "net"
+ 
+-DEPENDS = "openssl systemd"
++DEPENDS = "openssl"
+ 
+ SRC_URI = " \
+     git://github.com/open-iscsi/open-isns \
+@@ -21,9 +21,7 @@ SRCREV ?= "09954404e948e41eb0fce8e28836018b4ce3d20d"
+ 
+ S = "${WORKDIR}/git"
+ 
+-inherit systemd autotools-brokensep distro_features_check
+-# depends on systemd
+-REQUIRED_DISTRO_FEATURES = "systemd"
++inherit systemd autotools-brokensep update-rc.d
+ 
+ EXTRA_OECONF = " --prefix=${prefix} --enable-shared"
+ EXTRA_OEMAKE += "SYSTEMDDIR=${D}${systemd_unitdir}/system"
+@@ -31,6 +29,12 @@ EXTRA_OEMAKE += "SYSTEMDDIR=${D}${systemd_unitdir}/system"
+ do_install_append () {
+     oe_runmake INCDIR=${D}${includedir}/libisns/ install_hdrs
+     oe_runmake LIBDIR=${D}${libdir} install_lib
++
++    install -D -m 755 ${S}/etc/openisns.init ${D}${sysconfdir}/init.d/openisns
++    sed -i 's|daemon isnsd|start-stop-daemon --start --quiet --oknodo --exec ${sbindir}/isnsd --|' \
++        ${D}${sysconfdir}/init.d/openisns
+ }
+ 
+ FILES_${PN} += "${libdir} ${systemd_unitdir}"
++
++INITSCRIPT_NAME = "openisns"
 -- 
 2.11.0
 
