@@ -1,26 +1,48 @@
-Return-Path: <Jackie.Huang@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1974E6FF56
+Return-Path: <pbarker@toganlabs.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CF29D7853D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  9 Nov 2017 11:06:31 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vA9B6WZC015683
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Thu,  9 Nov 2017 14:14:01 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id z3so17993089wme.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Nov 2017 03:06:32 -0800 (PST)
-Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
-	14.3.361.1; Thu, 9 Nov 2017 03:06:31 -0800
-From: <jackie.huang@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Nov 2017 19:04:52 +0800
-Message-ID: <0361a1ae28b114f359d7cc1cd7ab3983939c69a0.1510225386.git.jackie.huang@windriver.com>
-X-Mailer: git-send-email 2.11.0
-In-Reply-To: <cover.1510225386.git.jackie.huang@windriver.com>
-References: <cover.1510225386.git.jackie.huang@windriver.com>
+	Thu, 09 Nov 2017 06:14:03 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-transfer-encoding;
+	bh=lMWUXlA8ZpvDUCIg69wfaPKCBk8PEEPwodgqYP5ULCk=;
+	b=kZcONJguakUKIFEBMiRAkzrl5b2iKo8obrcvl/Cqx445PJf8BhUOWD9UUq4QFY1gyW
+	J7hf9TwnmjBeVZfNGGjHX2EoWtYA0n0K6DQz+H/n5sWBLphd7kkigV7I281j++SJ3Qqd
+	3On7ZvIaQtsDR0G/IO41slgRv7JXlSnbTyXdHEOMLk9A/o5vFpLqWhVmtnbA1Iku/hhb
+	FxzvjBijVgUj/MRRhrc6FMmkhETiGfIY4ageG6UgIjXeig4H8y3bidJLgWuHMBoEjpJe
+	EWD23h4rxoXooOX0y8Fyylk9l1EgBmY9tpn97JS6FCEg1USAu8EYDNQW2dTOhwDe7XMn
+	KiMQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc:content-transfer-encoding;
+	bh=lMWUXlA8ZpvDUCIg69wfaPKCBk8PEEPwodgqYP5ULCk=;
+	b=iFblbOK69WzQ48PS8mKEmyv9PTH/xTAzqOGqyu4mibi9CcJDcBYadcLVj49wzKt91O
+	YfrHRtUj2FzMwPXjCUmpau2hTkHsafTLCcdy3k22yKVfJT+jeSeXh9uv0r4Wmwnxo6gK
+	L8lC4rlawqD5ysbUzGDh8t3nHROiJSaVpfC76Hx3XgjKCVheTtbnHjHVTsG3JMXyxFTl
+	7Gzj+gG8XgOJw5vu4wAdd+yvzNGX/KbU63SZvel8QLkUwDjneJE85LP71m9X57g0M+bm
+	AyaxKHq4y6RJW1eW1y1lw+ri0ug0FDUXsuDgGBHzS/5S8mzHRi+dih5ngzmZwD6mrw1K
+	chuw==
+X-Gm-Message-State: AJaThX5xTlakADYibZZyjd3YUiVzHT0Dkh153otHWxeEWtXKdip5YaEn
+	OD9vHBz80OEFloCTBLwZOsX6sOZcfX6wZtr1gI9XVA==
+X-Google-Smtp-Source: ABhQp+QFf2mCDjI+s9A5wxvb3INn+CQiV2qhSOZ2Ppb2IMey2ynGV0I+BSwSrXLU4mdCtExSKsnhkDoFH2zZ6t5okko=
+X-Received: by 10.28.156.67 with SMTP id f64mr14872wme.42.1510236842498; Thu,
+	09 Nov 2017 06:14:02 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-networking][PATCH 3/3] iscsi-initiator-utils: check file existence before moving
+Received: by 10.223.153.49 with HTTP; Thu, 9 Nov 2017 06:14:01 -0800 (PST)
+In-Reply-To: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
+References: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
+From: Paul Barker <pbarker@toganlabs.com>
+Date: Thu, 9 Nov 2017 14:14:01 +0000
+Message-ID: <CAPyrkgzMXTeGmX2trqXbkhGc2S5XyDrW+e_uBVi=YTwZdoiTxg@mail.gmail.com>
+To: Zhixiong Chi <zhixiong.chi@windriver.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-oe][PATCH] mercurial: Upgrade to 4.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,36 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Nov 2017 11:06:31 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 09 Nov 2017 14:14:02 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Jackie Huang <jackie.huang@windriver.com>
+On Thu, Nov 9, 2017 at 6:20 AM, Zhixiong Chi <zhixiong.chi@windriver.com> w=
+rote:
+> * Upgrade to the latest release to fix some CVEs:
+>  - CVE-2017-1000115: missing symlink check that can malicious repositorie=
+s
+>                      to modify files outside the repository
+>  - CVE-2017-1000116: did not adequately sanitize hostnames passed to ssh,
+>                      leading to possible shell-injection attacks.
+>
+> * For other changes please see: https://www.mercurial-scm.org/wiki/WhatsN=
+ew
+>
+> * Update SRC_URI with the new download link
+>
+> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
 
-Check the file existence before moving to avoid the error:
-| mv: cannot stat /<build_dir>/git/utils/fwparam_ibft/prom_lex.l:
-| No such file or directory
+I sent a similar patch a few days ago which is already staged here:
+http://git.openembedded.org/meta-openembedded-contrib/log/?h=3Djansa/master
 
-Signed-off-by: Jackie Huang <jackie.huang@windriver.com>
----
- .../iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb            | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+Thanks,
 
-diff --git a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-index 50aadb6b6..95848d0b3 100644
---- a/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-+++ b/meta-networking/recipes-daemons/iscsi-initiator-utils/iscsi-initiator-utils_2.0.874.bb
-@@ -57,7 +57,9 @@ do_configure () {
- 
- do_compile () {
-     # Make sure we DO NOT regenerate prom_lex.c.
--    mv ${S}/utils/fwparam_ibft/prom_lex.l ${S}/utils/fwparam_ibft/prom_lex.l.unused
-+    if [ -f ${S}/utils/fwparam_ibft/prom_lex.l ]; then
-+        mv ${S}/utils/fwparam_ibft/prom_lex.l ${S}/utils/fwparam_ibft/prom_lex.l.unused
-+    fi
-     oe_runmake -C ${S} ${EXTRA_OEMAKE} user
- }
- 
--- 
-2.11.0
-
+--=20
+Paul Barker
+Tog=C3=A1n Labs Ltd
 
