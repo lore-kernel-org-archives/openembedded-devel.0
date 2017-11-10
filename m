@@ -1,48 +1,46 @@
 Return-Path: <samuli.piippo@qt.io>
-X-Greylist: delayed 10770 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 10 Nov 2017 14:45:49 UTC
-Received: from EUR01-VE1-obe.outbound.protection.outlook.com
-	(mail-ve1eur01on0136.outbound.protection.outlook.com [104.47.1.136])
-	by mail.openembedded.org (Postfix) with ESMTP id 2456B78618
+Received: from EUR01-DB5-obe.outbound.protection.outlook.com
+	(mail-db5eur01on0093.outbound.protection.outlook.com [104.47.2.93])
+	by mail.openembedded.org (Postfix) with ESMTP id DA4387858D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Nov 2017 14:45:49 +0000 (UTC)
+	Fri, 10 Nov 2017 16:44:22 +0000 (UTC)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=qtcompany.onmicrosoft.com; s=selector1-qt-io;
 	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=fUd4F2SvoktJWhXB8Y4THmkpA5StZZcx8IlHcOCZuyA=;
-	b=bS0D9TeP0/EBGwFIognAA+OdBM5GPBjR+hB4OJlHVSDJhJMCIkrWy6JVKBHaChTPcR3mTugPCyKffIG4YMP/o4kXXKTE9K8kMQUsWQZY4iAtTa/xL+XcjT2/kpvmGWEM6VQih6VyJ0XuuQ3EqfC1kBEndOAt0mwOthLb1kLRWJ0=
+	bh=fYw49e7jmOc4Kksn5j5JPTg0tYsFFDhir/elrMqA3R4=;
+	b=f8PREokwbA247TtQvKmS3ykyWXIgpUtGPfT/ve6WFi8luiDw4Z/9qAlCzlbDkCqp0vCcHRz94+MxnKx9JrjXhOjtd4OedpCFvIQaDDSQFP7PusEaGxavWW+I1JH8OybG3ad19WRAH+4YD/4XQfKBom3DR22/nRT/30Agvvvk1rU=
 Authentication-Results: spf=none (sender IP is )
 	smtp.mailfrom=samuli.piippo@qt.io; 
 Received: from piippo.intra.qt (192.89.120.53) by
 	DB6PR0202MB2584.eurprd02.prod.outlook.com (2603:10a6:4:1b::18) with
 	Microsoft SMTP Server (version=TLS1_2,
 	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id 15.20.218.12;
-	Fri, 10 Nov 2017 07:13:49 +0000
+	Fri, 10 Nov 2017 07:11:07 +0000
 From: Samuli Piippo <samuli.piippo@qt.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Nov 2017 09:13:38 +0200
-Message-Id: <1510298018-882-1-git-send-email-samuli.piippo@qt.io>
+Date: Fri, 10 Nov 2017 09:10:53 +0200
+Message-Id: <1510297853-716-1-git-send-email-samuli.piippo@qt.io>
 X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
 X-Originating-IP: [192.89.120.53]
-X-ClientProxiedBy: AM5PR0402CA0021.eurprd04.prod.outlook.com
-	(2603:10a6:203:90::31) To DB6PR0202MB2584.eurprd02.prod.outlook.com
+X-ClientProxiedBy: HE1PR0202CA0008.eurprd02.prod.outlook.com
+	(2603:10a6:3:8c::18) To DB6PR0202MB2584.eurprd02.prod.outlook.com
 	(2603:10a6:4:1b::18)
 X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: eabc2c8c-5634-4728-698d-08d5280a9790
+X-MS-Office365-Filtering-Correlation-Id: fc8ddc2c-e995-40fe-cfc5-08d5280a36c0
 X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
 	RULEID:(22001)(4534020)(4602075)(4627115)(201703031133081)(201702281549075)(2017052603199);
 	SRVR:DB6PR0202MB2584; 
 X-Microsoft-Exchange-Diagnostics: 1; DB6PR0202MB2584;
-	3:jQR/sqaRSt4gTLal7hWrhL8cONdtMrnWIVYt7ljom+RQSf84sM8Q/aHcUvYGQEBCm58FZL2Jm0uWwksMO3Dwrq9+i67ZWnICTCX6ci1By/qmCefx8622yZxX17a9mscSn1cRV9rGbZMgF+61AaExijJnZ2bTTiYls6kcX917qFWq1fRQ+i0LJGAIJT82uK7tAxOXKK8WKjMu8ip012AlSDCDTsqqpG5dytDZkMqPD/zIV+nuDahrdd4GajOYosih;
-	25:4PFPal8oPDZZ/73NoujhKmZvuT7Yfhx81e+mQK5n60RIk7wK8Uq1UUrmtbpFHqJYtqGAdNqOvZGmd1aPj3nQXQlECwwaXZMUghdGRDnJ7ks76C2A95IPFwH1oEcZSxBr7PWHOIwcnfnLWPZ7FoSUURwtp4ti+j1lnAswgIAkptZf36ix9VhZ14cNxeJdjtJbDqdavkgoM1PtY9F3+SUiWu+G+0c/EbM4trID6E6eEJXozZDaZDJH/ADO06pAN0iILVtqAEuEq96blMLW4b8Sj42NlNu/TuAcTgk9LT/DDiTD4YbDvzLcpQlkCn33Gb/aRMTPljWf/ms65b2TTqOzXA==;
-	31:UR9rk7noPbivuSCgTFIqD0NQXDrmCAchGVPbJgRp8Vve6ZogN3vJ6MnC4rY6bniNvrg+OxF1ncRqWAf8vp0Sthy0zD9FnhtFXVNbWPora+qvZI7Lp1Nhkjsr5v38Kad6V3WcSgibI2y4s92jZ+CTLrSt7zQ83pcPUlh88oFqiem6mTO8UUplTYemN9uJ+VzbWo+Mk4Yf1C7HRg31un3XIt1YcSu2xR7waAb5xOdAKvM=
+	3:p1x8yOBiAVuARY6WYokzCDyLO1EteySwP3MPChFd3YA8iZkpTVb4wS3W9Ry9L17TuRTSnx7AHPlHlpk4u8g6/MygQpKF4yPeMukgK3SwBtEURVDkHjT2mOZ6BbA0Enz+x/qZ3B1G5JIttkeSBE71r0t3cgJDXAb6Pv2My0JPMRCodPOE0dm4aoWsMIzSfNPVX5lIAh6rrE+29NxjTIpaIaVTE6yC1FKQw4czTtFZbHnXnIQzDCLX7pQ0G9zCyScV;
+	25:hBGL+S7w1ik0RU+2jLX5pjB5s30oVzTINn1LUq8mbbURwXJBdcK7ixICxf6EG4d5bECWw9+kjAY8vF9QIbnjjxtUYnTJsr4Gzq6zTsxLuLV/MzC8C7iHwQUyImlEWU6tDzg7SwvEXrYtfsFSkzsWgkvtPK57wnhyW6KzC1tQeS5x5CS7IFFRUUzCBcBqlF6yvx+P+wydNhN29xrH571tlQWmwn6hm2P9og0DpHkH98/AHwb7wBaNbXJnLfN0OlAlAp71Fg9HYwbEt1pI+yajN6nT3ZN77x9qbnbs3fk9G358N41doZ1iQyfJ08DdwyhsU/6nu/AAJ2b/sX4eqhZ4Rw==;
+	31:GZ//LYVK4WcKXpCmpCwts4E4fuwfktc9c+JZKRQv1EXPHJ7sO96RIFWyXLOId9A6/WCPZVyAlNmSGbSCwytaEF42+rBmAr0h6t4sgFnw9U6oeNI34/YJFPJeRTwIT82r6NoJq8Cpnz+8E2HnHh6zOpjag7nv79fCUn2GDmNXjOL+kXW0UlRQ7640+4WWTxfS6ooVxNx2fj+0njaVeamFj5LjsVEd5NQ5No7SWNT88tU=
 X-MS-TrafficTypeDiagnostic: DB6PR0202MB2584:
 X-Microsoft-Exchange-Diagnostics: 1; DB6PR0202MB2584;
-	20:a3e+IVcsNq71v592moZ7r2VAmuzvDBOjSZ7YX/9zdnfeWh0OalvShosYH17cNH9/QcutHkL2y0+/t6eUPNDZE6mw8OI6KXrmHEfw82C6xbNtAOzV2DNoHuI6wrM2yOrmUcDUTiRC5U8IHujis2G2+04s8wa2V1yt30jMaH0qSVeAnkIPU4UJlmLT7xxvTzzTYxqD8IIFqK8ioL1SmEv4NUMlX9WGzq9QEU4SiAAZKc1r86E7SIci4npU7EUtRW5b7OfufBrFpNMwejFe1Vz0VeLiI8kGUrQzDcCu2YsjtTy218b3EdbNW8f8fld3+OdMSpaJhty/vbiZKrKhM42bPHAiWPKZvDHqqFST2ThTQkkVXh6ugJk4+leJfyz4nCfTcKHeGSMcQlOxrRkKg8GvbtRvDL9RQrymzmf89NW4lIsD7bAPKMW9NWH4P8S9lS5FNiYcT/eXV1G65SE33+PXwojrr49L+dO0BeOV5Zpwbx6E43cW0uoXlKjjjNYmC9/g;
-	4:AL68Lf9CNW9Y/x0T90dw8x7Z/BK7Xv0zXBVIpqZ/j6NL8ksLW7D7GEXjH2ekq6ywywYqsHXzaboYewTMq1lAiQXg4dNln9UUD2N1l5R/4dgoY8AyiUEpmUyJdP3Oh2oVtoeoUD2xhzF61RsX0j2OA3wlvHgQJOMpCViBVpWIcnM2ECAUchDXmZUL36w9pCbu8YxF5HlQrx90ePzLTAJMQoMIRPYJCSfjYFyAhMposUldAgGJRax+iGSMRqdbhubHSlmudB7DhuN9Kd66AbcE6Q==
+	20:5V7it3rc4EDwZDnYl23HEyTNmnmpRHIMZD5cStVx6bxaxHIzA7rDAAl3uGyzHnyc7xNlhvxSTXX804Kf8A9ypxWIqQp3+EIK2s8CllY1hq4QR7if5AFe/njpdGwy9XxONSdQ8U+8fs58rjTBMfImGiA3cCcNNpxekIN3esAC59cHsCZvTvSNPyA71tEgfCTHBAMEwY8K5RWb7InXTIx+vPp0mG53/ocxoDpxZ1AJMuo1V8ZiMbODxPpD31qVxpDywoMRIxcBuMCGcsGtJqwl2QcSyqjL6qPaISpbtQE8rVfA59uF/TT5ADFVyE8OixbNY0plYCkdvuO8DD8e63OXufRy7NlFCri8efmFA0huIJwDomiB6Brz3zXHsYRoWJXdc6DpLMKrM34P2OBZA0DbbqfwaO14lYiS4rw50CAsoc6Oi8kR7WrdBsUM2Mrzmu1+/KezyWgqx1+jc39qoqpr/IIqpsyvHBwUWHmfDOxWMXoa6Y5BBAFrTJOL7KSJFAIW;
+	4:SXFx3OPf4jLo/zWQlWyI9F8v/tkbjlZCgiXaJnwKq7g/0ItT2ZjALIavsHyoc69+6BNZjH3PTj1oin52I/yzw/9DZdKpC0XsBtOL7yWeNguVRBPhP1eUEMDrMSnH6i1+Lneg1sNrH9S1YSG5RjEeMdY7BWxQ1EPS/svtTtkV4d/yHXJlwizFcS0Wz8VdZDavjwycGRhamOHmQY6c4yby7A2tSHMScd4H3nDQj2ZoP9lbQwcNBqQLVSWl9vv1oB9kuzoFdUyIXDzHQGKzsEPJTw==
 X-Exchange-Antispam-Report-Test: UriScan:;
-X-Microsoft-Antispam-PRVS: <DB6PR0202MB25843B8FBECA374E960CCA7CE9540@DB6PR0202MB2584.eurprd02.prod.outlook.com>
+X-Microsoft-Antispam-PRVS: <DB6PR0202MB25846F0C0AB6754369DB1C28E9540@DB6PR0202MB2584.eurprd02.prod.outlook.com>
 X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
 	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(5005006)(8121501046)(10201501046)(3231021)(100000703101)(100105400095)(93006095)(93001095)(3002001)(6041248)(20161123555025)(20161123560025)(20161123562025)(20161123564025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123558100)(6072148)(201708071742011)(100000704101)(100105200095)(100000705101)(100105500095);
 	SRVR:DB6PR0202MB2584; BCL:0; PCL:0;
@@ -57,40 +55,40 @@ X-Forefront-Antispam-Report: SFV:NSPM;
 Received-SPF: None (protection.outlook.com: qt.io does not designate permitted
 	sender hosts)
 X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; DB6PR0202MB2584;
-	23:lg8iyFk95fGw9gwLjg5b2d7kzrGekzr72EAW9s3?=
-	=?us-ascii?Q?2tos+nIrnSY+e+z52Xa2ZxshB0CINBMwFpjkAP9VFLr4zEM0umj9SYwON9Wx?=
-	=?us-ascii?Q?429SRiM3DQQ593JnZhjtfMkUktZOgO+3bMNguhG7O2Vzs8YW4h5HzX07RsUx?=
-	=?us-ascii?Q?1q4AmVMwF+MKJKbyuEdr5viecEZ4zplUm1MyRSsEu4PwncLPDcn7WeyHj9DJ?=
-	=?us-ascii?Q?nN7nd59XMoJQq7+uIW+uDjpfJsCFFvqyD38D/u0CGP7eBLCZ4GVr6bHmwMEa?=
-	=?us-ascii?Q?i+S+i1qfMbx44gsn2AOvWRyaXsGWMEAjLa6IBbPVFGYoDyqNnRlTUyY5lqfh?=
-	=?us-ascii?Q?lQK/9b7/bp5fKkDcxpvOuyjvzK55eR/NFUJ28kuoNs7ISFUVFw+pOjrFRhlI?=
-	=?us-ascii?Q?OEaPLTZCQ5UO4BFtDiI0fJBRTSZ/6Rgw8WKBj4DkGhqPH0A/qC4IeIeKnrFc?=
-	=?us-ascii?Q?J0Dmy2jErv/SDYqT9Y1YEhrzV7X9Zga4iI1lpICjZUJhO0FY03w0g54JMSWU?=
-	=?us-ascii?Q?XBced8IdB0IJ3SP/bhQV4ut03TO2BW3wZtgtj1HrlMaovzgiBgQYp8vlLOd5?=
-	=?us-ascii?Q?h3wroMXF5CBnU28EVvhETtc6zwXWjG3CQNwfgsMd0rnZcoEbYPhhff1FjOaZ?=
-	=?us-ascii?Q?crgjsdYodAKRRlxL1rzAnkU0DYr0uIpbHH1D54Z1Xa3VR9EkbzJhRUEBbB85?=
-	=?us-ascii?Q?uH5H3ReVmB2zZV5s/75NBVwYbp4uj/HZisN/roBRdO0GSKyNwZwBDKE2W/4T?=
-	=?us-ascii?Q?nb/ceGjPMYb4Qy83LEaZjvbdYUlDS5Gs4/lxjLrJyh8P68tsP2vU2U9oBEYo?=
-	=?us-ascii?Q?lWWGyxx3QsfeBeWTPafWKeZRQr8KJlWL8dk3HbN6AUgAQS2yEAX6fh1FuOrL?=
-	=?us-ascii?Q?N53zKV9HKy5jL0iamTpN++vTn+KrzG/MqnpDhNsmjveI1lMh9OXqUFMqxI0n?=
-	=?us-ascii?Q?ddYIWKIMOHVYch6vZ8xUFd3meGFDNUxQcn75HnHUNjc9xpfe/FV13Y9aDgAx?=
-	=?us-ascii?Q?IS38sh4WsRGIfauZPtEnAsqDoCleWWNwJQYdk8+wO0IwqIoDyRb6IW8tetNp?=
-	=?us-ascii?Q?MwoBH0QTEgpWCklPny7PcWmJ+nz7zenGpte/hvbkk6y3DGFTiX0xrZa//J8l?=
-	=?us-ascii?Q?MGHtljULU3RQ=3D?=
+	23:vMvJz29Ic4dUcEuX+8GnFbmbfOUb0OLKopB1rpU?=
+	=?us-ascii?Q?x4AcmeujJZkROMHMXbe2C/wnmzNi1KWoc3Y22WzSn70ADry05jbzFfYPmQU0?=
+	=?us-ascii?Q?Ri5+w0FecXXgwh8RncpgoILdbaN35nxqR4NslcQ0aIzvLOXj+3voizCxTu2U?=
+	=?us-ascii?Q?kUYRksQBT/Ep6SBS+3J8Rwk2g42alt5ecG8Pb8QP89SVjvHuq9wup7IcIPxK?=
+	=?us-ascii?Q?9wXCqJkNM1R2Lia1KXGPxmX6otQMENcb6NokmGIyyjLydHMFKo2gvTOZu5MA?=
+	=?us-ascii?Q?0nKVdIF47j+IO5TC8B33hTociOh2KJ4xQCmNz5wmcKjQDdedAi6kUR3WUtyB?=
+	=?us-ascii?Q?mJOwB7GrVB7sP4pTwnpZLEZcX3ajfpa/ki3kOJp780w2njH9HByliGkPdDTC?=
+	=?us-ascii?Q?UYdsFvy1f8xgkbuVIb6gEGp8JpzueNryR6R+/iWa1aT+oCJCZw72qBXqQFta?=
+	=?us-ascii?Q?uvpNNV0TKkAU9sHQCg1cqRTyhWi6aKW9m2rK9gD0RGeNhi/1gEB59zjDdTj5?=
+	=?us-ascii?Q?A9N8jR5UVmZZM8eBM7dIVo+mlk5r1W6s/Xnb07J5wOsIFZqHyoB2lp9jDsFP?=
+	=?us-ascii?Q?CkoVpNczGD6ZAn8zLyw76wppxTmW8k2HIwBrmXYuaaSoUDjcp47bqd1mSfOz?=
+	=?us-ascii?Q?KSUSkkc1dzy54BACc9unwgmQ0RzscvOEvL7URU5mvAR2XuEAkk35bD5lgK/F?=
+	=?us-ascii?Q?dsH5aIXx3VGCQfgVfNoKAe7GGuVpbU3n2K6h50V9YHLmlUyTj+qtHmgcgAdi?=
+	=?us-ascii?Q?qcr9ZuJdgcciijzahThkiX7JqvBzBGvdis+qkwu5uJ6mir2ualOvqy9XIjXe?=
+	=?us-ascii?Q?MAMPkqyYL1sxcFs7L8w/+NbWzS1n096ZtonEtw1MuqykRbM0ON0HWF81vVsx?=
+	=?us-ascii?Q?TmNFszvDeA2wnpzxy4clTbOGki0EwcbMn2lsRs8nPlXs3wDj/gz6jYXyL4mf?=
+	=?us-ascii?Q?M5oaJAWWsCq8oBw+lPtbbv/1uFEdirjKGO062dsOURngVQlqSsBO6tYatpsT?=
+	=?us-ascii?Q?jJj8DHqL7Ejile32GFHJAHIDm3og+RhYsVgYu05Ne2vPqJlo18AQPeUlM8ft?=
+	=?us-ascii?Q?q+Y9AvPjdLAKyVmqywsHkgY72YAhTlwS8GLgobEw5Zxl2MkxqBYCrmTRQVGy?=
+	=?us-ascii?Q?kp5Y8zfu0aY8=3D?=
 X-Microsoft-Exchange-Diagnostics: 1; DB6PR0202MB2584;
-	6:LHcC663AAb0AlsZqtw+mBndozOM3pfq20b4K+B5lwIQfxCWWEXBSZwMbWK+33F/72bla1Gg93hC/SDuRUr3z6p003n9lipudMJgk8xMp+I1uhnFnMPVy+Absn9uKLVvqQ6KWstV4PoU864dc1t8TpMwLzka8Ji0BpcnGnOLosyV5mQcEY+kxNy1Eat8Yc007Q9PCDfwSWZC+yJQwiSH4frcu+JRYvBFMdYcmcnEHeTQ5kxmnTZJMukr8mEP75f5wp3k0E7Pf8/U9y0IoG+Yw8H3eaV4xxjORPdV6EbcYOTRF/tyiJPo5XYdMVCLZmIsfbvgtqZ/dZNuCXQEjXI1R2H56EnKUFTLX3A8ljOaKtBY=;
-	5:ykVb2IzWmktMAOg6SyWAqTLOQOrMOTj9nw4Dn/ViMGHJ0jD0IQU/d7ZhLjFMgAe687uVeV09wix9oaD7AdS9g7h4hbsmCjBZmhJk9TlHU+RJpNXZ99yl17WRUwruRu3viQO3Wg7L+FJN0OFhQih4wCFY67cFVuPmRyMjNDKVehw=;
-	24:3rAUFor1fuUuc/18XiO5n/HexYaLYLfvBKKFVQ0SHXpq9G7RXgDJyqnBKgSSc/lNAMGq1BN69vedxaEeQzzb+HJzp1M7myvCsqLwmPtck/U=;
-	7:LdV+JUCN4y6N6A3cHM5oCpjROI/RKIKuvLf/VnocnGG5BwLWiwueoY9k8nIRZ2Hq5wBqSYxhROU60ayna9DhITws25n9371kx8rhKHyQFfpH4I8bQuHAM/hIC7BmRSnj48S+G6jad9p3q8dOGXFxyieC0Cs5bS1DVXMWCrfZEr+cwZWU1gLDJ1y1z8k99albd+H8iNOOc+rN5dUL2lwrIUK01xkQeMugP43x4TSxxZFLWY7SjM30v+flW4Zt0YPH
+	6:NmRoOUAdww1rhkHiukhI48qMUQj2SKX6u3oLulHTfr19TRCJTo3UXdmSu+rFgLXksXJ+rcCm3OosLVMJsl75hz8JAmDM2rdeZVWL85l9FVj75qUt86F/HtS0Gu8TMxt+8q4AsaTjm+CsDAzKvhNHpJAQRnGU/MnbiCxQQBhmGVqVvv67JzH28NLStlNf1UA0fCM31a6N2bCV3Po5ABR7/TGt+TeMTcOE62rXOIiOTec2OmvpGW/8AIJWdMq+gB7D8KcK9O1fDSvcFS1aXqCNc5o+pQV/II9flf9zYZmMAeMsnP6lrF/yDeusIom32Indic0KbkHzI7ydxoqXsqLSgilIsx/dSfJCwD5TqIWH1g8=;
+	5:xs+HF6r4LT4G3U8RpoXblZJB6lLNdmAdug+Gy58ABxOoLf5rkfCaCWOrngx9Xuww0CH+zzteGtL8MmLkkYfwf0kdo7hbNdjfpjarbBnWWmuB3/Sq84PRnFlHRQlrY5wtyXpopArOMcUTuQN0IjiVbPWPC41V9JTRAu5nY/6z3Dc=;
+	24:Nuk6huIB6WnQC4rnN7Srb74lnXOiWEF8vYRWIlQUrSjKTXg+8PthxDhkTuiYuaT36V7Eq4ky5OPZUqW2L43SrjwXXnUX9qvc17V9Aqr+cpk=;
+	7:z3wXYl43JEexkmpCK0fAvSFVpQ8qX0aUlOaqTwNP//wGqqGQSph+7b3MD1xTBboFnrIPESBUFGJeS8d0lLHyrpbbMfezfbkQ0NAuusIuoZH4vG7EawvRgqAo6tzS+ipRNWuzsTCZg6WelqKAJ9KxVCnwDjndTKkw3ygkAJ55YzEsgEI7yAHFWJ7UhcJCZO+NVkHRQZ+KxP2RERsv0DjuOTJPAyfmJbQuHd+mUJpprfDndzayFpdrGCeSejpx3UnF
 SpamDiagnosticOutput: 1:99
 SpamDiagnosticMetadata: NSPM
 X-OriginatorOrg: qt.io
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2017 07:13:49.7901 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: eabc2c8c-5634-4728-698d-08d5280a9790
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Nov 2017 07:11:07.3682 (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: fc8ddc2c-e995-40fe-cfc5-08d5280a36c0
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 20d0b167-794d-448a-9d01-aaeccc1124ac
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB6PR0202MB2584
-Subject: [meta-qt5][PATCH] qt5: remove use of OE_QMAKE_WAYLAND_SCANNER
+Subject: [meta-qt5][PATCH] qtlocation: correct PACKAGECONFIG for mapboxgl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -103,77 +101,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Nov 2017 14:45:50 -0000
+X-List-Received-Date: Fri, 10 Nov 2017 16:44:23 -0000
 Content-Type: text/plain
 
-This was never defined for nativesdk, which then broke sdk which
-had nativesdk-qtwayland included. Rather than add it there, remove
-its use everywhere, since it was not adding anything meaningful to
-the build.
+Previous patch was removed, but PACKAGECONFIG was not changed
+to match the new feature flag.
 
 Signed-off-by: Samuli Piippo <samuli.piippo@qt.io>
 ---
- classes/qmake5_base.bbclass                              | 2 --
- recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch | 9 ++++-----
- 2 files changed, 4 insertions(+), 7 deletions(-)
+ recipes-qt/qt5/qtlocation_git.bb | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/classes/qmake5_base.bbclass b/classes/qmake5_base.bbclass
-index 8e1fe20..29e8cff 100644
---- a/classes/qmake5_base.bbclass
-+++ b/classes/qmake5_base.bbclass
-@@ -29,7 +29,6 @@ EXTRA_OEMAKE = " \
-     OE_QMAKE_LDFLAGS='${OE_QMAKE_LDFLAGS}' \
-     OE_QMAKE_AR='${OE_QMAKE_AR}' \
-     OE_QMAKE_STRIP='${OE_QMAKE_STRIP}' \
--    OE_QMAKE_WAYLAND_SCANNER='${OE_QMAKE_WAYLAND_SCANNER}' \
-     OE_QMAKE_INCDIR_QT='${STAGING_DIR_TARGET}/${OE_QMAKE_PATH_HEADERS}' \
- "
+diff --git a/recipes-qt/qt5/qtlocation_git.bb b/recipes-qt/qt5/qtlocation_git.bb
+index baa25d8..cce6601 100644
+--- a/recipes-qt/qt5/qtlocation_git.bb
++++ b/recipes-qt/qt5/qtlocation_git.bb
+@@ -17,9 +17,8 @@ PACKAGECONFIG ??= ""
+ # older geoclue 0.12.99 is needed
+ PACKAGECONFIG[geoclue] = ",,geoclue"
+ PACKAGECONFIG[gypsy] = "-feature-gypsy,-no-feature-gypsy,gconf gypsy"
+-PACKAGECONFIG[mapboxgl] = ""
++PACKAGECONFIG[geoservices_mapboxgl] = "-feature-geoservices_mapboxgl,-no-feature-geoservices_mapboxgl"
  
-@@ -43,7 +42,6 @@ export OE_QMAKE_LINK = "${CXX}"
- export OE_QMAKE_LDFLAGS = "${LDFLAGS}"
- export OE_QMAKE_AR = "${AR}"
- export OE_QMAKE_STRIP = "echo"
--export OE_QMAKE_WAYLAND_SCANNER = "${STAGING_BINDIR_NATIVE}/wayland-scanner"
+-EXTRA_QMAKEVARS_PRE += "${@bb.utils.contains('PACKAGECONFIG', 'mapboxgl', 'CONFIG+=mapboxgl', '', d)}"
+ EXTRA_QMAKEVARS_CONFIGURE += "${PACKAGECONFIG_CONFARGS}"
  
- # qmake reads if from shell environment
- export OE_QMAKE_QTCONF_PATH = "${WORKDIR}/qt.conf"
-diff --git a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-index a8fe433..4d555be 100644
---- a/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-+++ b/recipes-qt/qt5/qtbase/0001-Add-linux-oe-g-platform.patch
-@@ -23,9 +23,9 @@ Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-  configure                            |  2 +-
-  mkspecs/features/configure.prf       |  4 ++--
-  mkspecs/features/qt_functions.prf    |  2 +-
-- mkspecs/linux-oe-g++/qmake.conf      | 43 ++++++++++++++++++++++++++++++++++++
-+ mkspecs/linux-oe-g++/qmake.conf      | 42 ++++++++++++++++++++++++++++++++++++
-  mkspecs/linux-oe-g++/qplatformdefs.h |  1 +
-- 5 files changed, 48 insertions(+), 4 deletions(-)
-+ 5 files changed, 47 insertions(+), 4 deletions(-)
-  create mode 100644 mkspecs/linux-oe-g++/qmake.conf
-  create mode 100644 mkspecs/linux-oe-g++/qplatformdefs.h
- 
-@@ -78,10 +78,10 @@ index c00fdb73f8..0cf4de7b49 100644
-              cmd = perl -w $$system_path($${cmd}.pl)
- diff --git a/mkspecs/linux-oe-g++/qmake.conf b/mkspecs/linux-oe-g++/qmake.conf
- new file mode 100644
--index 0000000000..c1837e6d55
-+index 0000000..30d31ed
- --- /dev/null
- +++ b/mkspecs/linux-oe-g++/qmake.conf
--@@ -0,0 +1,43 @@
-+@@ -0,0 +1,42 @@
- +#
- +# qmake configuration for linux-g++ with modifications for building with OpenEmbedded
- +#
-@@ -95,7 +95,6 @@ index 0000000000..c1837e6d55
- +# QMAKE_<TOOL> (moc, uic, rcc) are gone, overwrite only ar and strip
- +QMAKE_AR              = $$(OE_QMAKE_AR) cqs
- +QMAKE_STRIP           = $$(OE_QMAKE_STRIP)
--+QMAKE_WAYLAND_SCANNER = $$(OE_QMAKE_WAYLAND_SCANNER)
- +
- +include(../common/gcc-base-unix.conf)
- +
+ # The same issue as in qtbase:
 -- 
 2.7.4
 
