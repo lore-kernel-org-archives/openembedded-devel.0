@@ -1,51 +1,53 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-qk0-f178.google.com (mail-qk0-f178.google.com
-	[209.85.220.178])
-	by mail.openembedded.org (Postfix) with ESMTP id E9A1478436
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C8C467852B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Nov 2017 00:10:15 +0000 (UTC)
-Received: by mail-qk0-f178.google.com with SMTP id v137so13917683qkb.1
+	Sat, 11 Nov 2017 13:30:00 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id u40so10746273wrf.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Nov 2017 16:10:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=mPsd7OFksWRXYdDa4hCYk3GDmrejym4Tz4elPchUB+0=;
-	b=HwNJn16DZe1PVSIM90MwUqZIyTe2SgaIPXsFY7BOXV4GeRhi2Ih9g5orsLiR2koA7+
-	uI0W0IzKmmWM2v1jMNh2Rrw1qXNe+4WQetkCx+g3G+IDyBmlZxyhEHl1WN6tuaLU43Ca
-	YAIi9pjvDVcPikJNScNyHruQlXY3hOLde1sa9E+FneQn0bHzVRU7qFpZA2XZa42qEN1R
-	q+K/eHmqaigjsYn/pbW6oj9OkgDXxHOKPUSBWxU6Jgq5rHhJBwLjIRi2O125U5iUNTFx
-	Wk/8YyzhyTdZE0Ljs/6rVQWktTTmKiGnrdG+JDbFJnsJ2rr7wN/N21jNIRAS1cq8w6u8
-	Qong==
+	Sat, 11 Nov 2017 05:30:02 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tsN16U16mc5VjLQ4u8gN4k89C1fVMjhtVBb16DghRtE=;
+	b=EKuJIbVc2h6nCGuaX9XJBD6FRwmut7ugHF2FPT1zWkU+5wLUHEv+uvAqiJAvHHAQhg
+	ez1xjostLLR1wFSmPRqhElQrT58n9+dqI8y16EDYWSO1NBUg1WMO5gWUkT8lYs+Yj1DV
+	XF/43MYDe3jn/1uYh039y11lSv24SEXPY48df7hTmZwxd7fktnd7uuVGGDGKQzZ7/NAm
+	lmrdfhaGTg3BV3SkkQc8JvNym7qyH7mD2TMu1hFj5MWraP9PtkRefYIDQq2yCxH65kJ4
+	qsruyh4ytFiInBp+CB03ztwyq35H1Bu3D9zQv9JwKRUhS4RsDkgcSsncBJ4Y3Qya4jSK
+	16Qg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=mPsd7OFksWRXYdDa4hCYk3GDmrejym4Tz4elPchUB+0=;
-	b=CtUVsgMa4WzRzB/V8fmbI0PjtY7dSvqpgVjDenwMJUAR+cOpKHdb5NRwvXwGQaZsOP
-	I+AvMQPNC+L+lqHUU6FwZ36GSjmiYBcJiwo0eI+wZWn5uk/gcjj+iq/Tp0DG6cc02KwU
-	t5j1z2KP0P6bRGw/cLz6gHtMomtEG+W7NChYR1LXpolYgUrI57be0dmnewlpSkueMUcF
-	f36PkOMNqKeCjWOvSozAEnx8C5crSL7MERADv2JRdK8weWVQnaQEm3N3OMVl2B2gleFp
-	mVs7L6rQv/jGE5VLLK4GLAtRz4+ylwWlEFdfcquYkLzM1iPtmYPz9e9JxuGCtnAZMSXO
-	358Q==
-X-Gm-Message-State: AJaThX6mLxJky9jrx6tS1C4cVlsEv+kk/i+H2r1wx7Ovau99aVQ1/wOS
-	FhywQc6C5BR3jfR7QJgZgNnYEe46RCZdHy8iakD4Rw==
-X-Google-Smtp-Source: AGs4zMZPchFHpdefWY3EBlpVhiGnCTJOowtkF/JfckZ2rkdy1+xIXgJn+ZqdAmQODAq6pOVhL5j1jBion2QlPq1VzvY=
-X-Received: by 10.55.180.132 with SMTP id d126mr3514575qkf.268.1510359016867; 
-	Fri, 10 Nov 2017 16:10:16 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=tsN16U16mc5VjLQ4u8gN4k89C1fVMjhtVBb16DghRtE=;
+	b=KEihN4SyRtLc2df4wwirc/Pm4ckFzesoFbPNItlWjGJcjbMAMOrSPUooznnldhC50j
+	HIwOVWWIxgzaB8NaD3mIGrvMJTsVOn4ERQk5YTTq8f+JaxWNoLs6nqOFl5YSY6TsX9mE
+	sEwYSQdGveJ6m65AAcibl7PRxw5LXt0G41hKyIcoXNtLFIfwkuVOKR6f9+8cDP5gkuNA
+	FV1Bmly5BMssEpWGntJUGaTSbmq2vbQv3PbsHIJ9pbPnlgOPsf/IRlHy+jbvYhGCoB4K
+	wPZsmGUiLePIIXZGML/DOeESIKoTj65xMi0XhZGeXjMvWkjBYgu/+dtga90U030wAdC2
+	YPrg==
+X-Gm-Message-State: AJaThX7SroNBoS/Ex1EUbumRjZqhEzrjQEG2o7lfVQvZl88VQR7LO4bg
+	QUxIaFu0PihhcXsY9QSN/U/2fg==
+X-Google-Smtp-Source: AGs4zMZRABSBa/rc0lXv4G0n9qMCOIY4pz16RaO5sUHYNg3R64Vfh/SUVxb7kW7jL0Ui47thf1laIw==
+X-Received: by 10.223.195.203 with SMTP id d11mr3181015wrg.39.1510407000943;
+	Sat, 11 Nov 2017 05:30:00 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p20030070ED074A591E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:70:ed07:4a59:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id
+	195sm16189805wmj.3.2017.11.11.05.29.59
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sat, 11 Nov 2017 05:30:00 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sat, 11 Nov 2017 14:29:37 +0100
+Message-Id: <20171111132950.12570-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.9.5
 MIME-Version: 1.0
-Received: by 10.200.37.203 with HTTP; Fri, 10 Nov 2017 16:10:16 -0800 (PST)
-In-Reply-To: <CAHUNapRKjZZ=yCYpfrm3CDVZez0JbLeaKHaZg2J3WhjBvRR6jg@mail.gmail.com>
-References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CAHUNapRKjZZ=yCYpfrm3CDVZez0JbLeaKHaZg2J3WhjBvRR6jg@mail.gmail.com>
-From: Ian Coolidge <ian@boundarydevices.com>
-Date: Fri, 10 Nov 2017 16:10:16 -0800
-Message-ID: <CADseiP=dhrkCrqBnO+g-HZQZaGgf1ywZwFcd-0bpE9K-qhALPQ@mail.gmail.com>
-To: Trevor Woerner <twoerner@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Otavio Salvador <otavio.salvador@ossystems.com.br>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
+Subject: [PATCH][v2 00/13] recipe fixes and updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,90 +60,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Nov 2017 00:10:16 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 11 Nov 2017 13:30:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi All,
+v1-> v2
+* Changed my email address to avoid getting spam
+* Tumbler fix reworked. Confusion was caused because effect is sporadic
+* xfce4-notifyd: Update makes a simple fix possible for images with KDE
+  installed in parallel. This bugged me for a very long time.
 
-For what it's worth, I built this chromium62 for the nitrogen6x and I'm
-getting Alignment traps when loading webpages.
+I know it is a bit late but I would be very happy if the xfce patches
+would make their way into rocko. At least the last four patches are
+fixing ugly issues and most of them I have in my images for a while
+without issues.
 
-Are there any obvious flags or compile options I'm missing here? I haven't
-tied debugging into this yet, which is my next step here. Just wanted to
-know if I was missing something obvious.
+The following changes since commit 5d6d21e98ed594809169d2b2f6964e90a3369a96:
 
-Thanks!
--Ian Coolidge
+  libreport: fix Nothing RPROVIDES 'lib32-python3-libreport' (2017-10-27 16:39:34 +0000)
 
-On Fri, Nov 10, 2017 at 11:49 AM, Trevor Woerner <twoerner@gmail.com> wrote:
+are available in the git repository at:
 
-> Raphael,
->
-> On Thu, Nov 9, 2017 at 11:28 AM, Raphael Kubo da Costa
-> <raphael.kubo.da.costa@intel.com> wrote:
-> > There are 60 new commits in my "chromium62" branch
->
-> This work is utterly *brilliant*! BRAVO! Thanks so much for sticking with
-> it.
->
-> > Possibly controversial issues:
-> > - The ozone-wayland recipe has been removed (this is actually commit
-> >   #1). The ozone-wayland project Intel used to maintain has not been
-> >   maintained in a very long time, and it is impossible to just get it to
-> >   work with Chromium 62. I'd also rather not keep Chromium 53 around
-> >   just because of it due to A) increased maintenance costs 2) we'd be
-> >   shipping an ancient Chromium release with tons of security issues.
->
-> No issues from me. Originally there was only one recipe that included
-> both wayland and x11 support together. I had proposed, then done the
-> work, to separate them out into two recipes because keeping them in
-> sync wasn't working. If nobody is keeping ozone-wayland working, it
-> doesn't work, and/or it's not being worked on upstream, then I have no
-> issues with it being removed. Just to be clear: if somebody finds it
-> useful and wants to support it, I'd be happy to see it come back. But
-> at this point it appears to be dead and I don't think it's worth
-> blacklisting.
->
-> > - musl support is currently broken. I've sent a few patches upstream
-> >   lately and added a few musl-related changes to the Chromium 62 recipe,
-> >   but getting the code to build requires a lot of time and
-> >   determination, and if we don't have someone actively working with
-> >   upstream it's just going to be an uphill battle that I am not willing
-> >   to take upon myself.
->
-> I'll have to defer to Khem on this one. As I've said before, I
-> strongly don't believe meta-browser (or any other layer other than
-> meta-musl) is the right place for musl support. Musl support should be
-> in meta-musl and not spread throughout the ecosystem for everyone else
-> to worry about. But I don't get the feeling that I "won" this
-> discussion in the past... ;-)
->
-> > - The 'ignore-lost-context' PACKAGECONFIG knob was removed. The patch
-> >   it required no longer applies cleanly, its context refers a 5-year-old
-> >   discussion and it is not clear if it is still necessary at all.
->
-> This seems fine to me. If anyone still wants to use the
-> --gpu-no-context-lost cmdline argument (or any other cmdline argument,
-> for that matter) without the patch, they can simply add it to the
-> chromium-wrapper.
->
-> > - In the future, I'd like to revisit the other PACKAGECONFIG knobs as
-> >   well. In particular, it is not clear to me if 'impl-side-painting' and
-> >   'use-egl' are still needed at all,
->
-> Sounds good.
->
-> > and I'd like to drop
-> >   'component-build' to simplify the recipe and prevent anyone from using
-> >   this option in production.
->
-> Yes! And if you wanted to remove DEBUG_BUILD too, I'd be okay with
-> that as well. I'm confused as to the status of DEBUG_BUILD, it seems
-> to be removed, but you're setting debug flags?
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+  https://github.com/schnitzeltony/meta-openembedded.git patches
+
+for you to fetch changes up to f3b40da9b93a34fa688c0951708cd96b310378f9:
+
+  xfce4-notifyd: avoid trouble starting daemon for images with multiple desktops (2017-11-11 14:26:32 +0100)
+
+----------------------------------------------------------------
+Andreas Müller (13):
+      gparted: update 0.28.1 -> 0.30.0
+      libgphoto2: update 2.5.8 -> 2.5.14
+      gphoto2: update 2.5.8 -> 2.5.14
+      xfce4-settings: update to 4.12.1
+      xfce4-pulseaudio-plugin: update 0.2.4 -> 0.3.2
+      xfce4-weather-plugin: update 0.8.9 -> 0.8.10
+      xfce4-xkb-plugin: update 0.8.0 -> 0.8.1
+      xfce4-appfinder: update 4.12.0 -> 4.13.0
+      xfdesktop: update 4.12.3 -> 4.12.4
+      tumbler: ensure thumbnails work properly
+      tumbler: update 0.1.31 to 0.2.0
+      xfce4-notifyd: update 0.3.6 -> 0.4.0
+      xfce4-notifyd: avoid trouble starting daemon for images with multiple desktops
+
+ meta-gnome/recipes-extended/gparted/{gparted_0.28.1.bb => gparted_0.30.0.bb}                                      |   4 +-
+ meta-oe/recipes-graphics/gphoto2/{gphoto2-2.5.8 => gphoto2}/0001-configure.ac-remove-AM_PO_SUBDIRS.patch          |   0
+ .../recipes-graphics/gphoto2/{gphoto2-2.5.8 => gphoto2}/0002-Look-for-popt-with-GP_CHECK_LIBRARY-function.patch   |   0
+ meta-oe/recipes-graphics/gphoto2/{gphoto2_2.5.8.bb => gphoto2_2.5.14.bb}                                          |   4 +-
+ meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch                              | 149 ----------------------------------------------------------
+ meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0002-correct-jpeg-memsrcdest-support.patch                      |  54 ---------------------
+ meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch                                       | 133 ---------------------------------------------------
+ meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/0001-configure.ac-remove-AM_PO_SUBDIRS.patch    |   0
+ meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/10-camera-libgphoto2-device.fdi                 |   0
+ meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/10-camera-libgphoto2.fdi                        |   0
+ meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/40-libgphoto2.rules                             |   0
+ meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.8.bb => libgphoto2_2.5.14.bb}                                    |   8 ++--
+ meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Add-a-configure-option-to-start-daemon-by-autostart-.patch        | 105 +++++++++++++++++++++++++++++++++++++++++
+ meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.6.bb                                                       |  23 ---------
+ meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.0.bb                                                       |  36 ++++++++++++++
+ meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.2.4.bb => xfce4-pulseaudio-plugin_0.3.2.bb} |   4 +-
+ meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.9.bb => xfce4-weather-plugin_0.8.10.bb}         |   4 +-
+ meta-xfce/recipes-panel-plugins/xkb/{xfce4-xkb-plugin_0.8.0.bb => xfce4-xkb-plugin_0.8.1.bb}                      |   4 +-
+ meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.31.bb => tumbler_0.2.0.bb}                                            |  10 +++-
+ meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.12.0.bb => xfce4-appfinder_4.13.0.bb}                   |   6 +--
+ meta-xfce/recipes-xfce/xfce4-settings/xfce4-settings_git.bb                                                       |   6 +--
+ meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.12.3.bb => xfdesktop_4.12.4.bb}                                     |   4 +-
+ 22 files changed, 170 insertions(+), 384 deletions(-)
+ rename meta-gnome/recipes-extended/gparted/{gparted_0.28.1.bb => gparted_0.30.0.bb} (90%)
+ rename meta-oe/recipes-graphics/gphoto2/{gphoto2-2.5.8 => gphoto2}/0001-configure.ac-remove-AM_PO_SUBDIRS.patch (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{gphoto2-2.5.8 => gphoto2}/0002-Look-for-popt-with-GP_CHECK_LIBRARY-function.patch (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{gphoto2_2.5.8.bb => gphoto2_2.5.14.bb} (79%)
+ delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0001-scripts-remove-bashisms.patch
+ delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/0002-correct-jpeg-memsrcdest-support.patch
+ delete mode 100644 meta-oe/recipes-graphics/gphoto2/libgphoto2-2.5.8/avoid_using_sprintf.patch
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/0001-configure.ac-remove-AM_PO_SUBDIRS.patch (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/10-camera-libgphoto2-device.fdi (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/10-camera-libgphoto2.fdi (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2-2.5.8 => libgphoto2}/40-libgphoto2.rules (100%)
+ rename meta-oe/recipes-graphics/gphoto2/{libgphoto2_2.5.8.bb => libgphoto2_2.5.14.bb} (85%)
+ create mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/files/0001-Add-a-configure-option-to-start-daemon-by-autostart-.patch
+ delete mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.3.6.bb
+ create mode 100644 meta-xfce/recipes-apps/xfce4-notifyd/xfce4-notifyd_0.4.0.bb
+ rename meta-xfce/recipes-panel-plugins/pulseaudio/{xfce4-pulseaudio-plugin_0.2.4.bb => xfce4-pulseaudio-plugin_0.3.2.bb} (73%)
+ rename meta-xfce/recipes-panel-plugins/weather/{xfce4-weather-plugin_0.8.9.bb => xfce4-weather-plugin_0.8.10.bb} (72%)
+ rename meta-xfce/recipes-panel-plugins/xkb/{xfce4-xkb-plugin_0.8.0.bb => xfce4-xkb-plugin_0.8.1.bb} (75%)
+ rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.31.bb => tumbler_0.2.0.bb} (74%)
+ rename meta-xfce/recipes-xfce/xfce4-appfinder/{xfce4-appfinder_4.12.0.bb => xfce4-appfinder_4.13.0.bb} (54%)
+ rename meta-xfce/recipes-xfce/xfdesktop/{xfdesktop_4.12.3.bb => xfdesktop_4.12.4.bb} (77%)
+
+-- 
+2.9.5
+
 
