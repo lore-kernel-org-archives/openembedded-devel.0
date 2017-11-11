@@ -1,54 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
-	by mail.openembedded.org (Postfix) with ESMTP id 96D357863B
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 875527863B
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Nov 2017 13:30:11 +0000 (UTC)
-Received: by mail-wm0-f53.google.com with SMTP id 9so1935786wme.4
+	Sat, 11 Nov 2017 13:30:12 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r68so7450759wmr.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Nov 2017 05:30:13 -0800 (PST)
+	Sat, 11 Nov 2017 05:30:14 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=DVrfzYv7XYL2Y+N34sB77d61ANmpqQ+o10aJjQqcAsw=;
-	b=THCW4IUJPLTfVBFNQ1GxZP01IBdBHIIq1WnBYqhFZS39W0DvR/hhWoXt2XDYsQyULG
-	lZWPduLsLRkrh3x01nemd5zG5Df2R0ngibvjElPiqGKECRolfPoDhSclRZMyvutDW6ep
-	yEm4l5xm9h9lcyJ7Fjr0P7g0D2G1pPzjvhZ5aaFayuwOx20L8MfxWtwRjaR3YdqDB/QL
-	zuO0EZNUZ0AJovVMyFLdeLOKSOFeFRVBSFnqEKFz5itIWIOXQEXfTQn5PbOPinQVw9Mm
-	pege4T29nmgX3uBB0AZIyw7TxMDaMnyuhXUYY5EiBoWD3BBCBOpNj5eLYnBb8h2q/5iH
-	gq2A==
+	bh=meocHJLMj/PZzwMH0REvRI/UX3hujrwVPh1jxAxWaCo=;
+	b=f1T0XRf/EW8afwsVYbfku2P/PnwqWtSynwdGObOHV6fCTeSsu/wpmK+vpgeMWZ8OGp
+	06VN/B0QguFw6MJssruierwNUZS3WlnBM75VdwNH2OgnfhiXB0tnXd/RcM4+slqikBQ9
+	Sy54GG/LdUq//1PuoYfo+9KOat10670/1tWZYxhQcnMJQVrkOJMLITIdyb6mehM0iu+v
+	yuyKevA+2ek1IhLAcYUGpV35k5ffX6yhqstmL6qbHzb/oiT0x1gqH5GRsXisYLy6SXDM
+	MXZl04CFb99cyMw8p7euHcGLyxDS7vDhyurgQ4IPyNTXrLdQX8kaVxhve96axoty3HVo
+	/dtg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
 	:references:mime-version:content-transfer-encoding;
-	bh=DVrfzYv7XYL2Y+N34sB77d61ANmpqQ+o10aJjQqcAsw=;
-	b=AquexBUpqy7zvSxlk162gdQEUV36d9hZSthnw3BNzKQhndNysVi5w96itI1T21lCO/
-	3FNzOrbtpkSFzfLyZnJi4FqxDM96zM3/4oJr+ORHlEb35Vixw2xgEBqXg7ZenizzZ3IN
-	9Vtl2mj9IY4hbtZmrH73NxxckzGcM+gR/aJsWhjmjUs1UF9AVlmfXl/TjPhHJ+T/AY/u
-	mT5ZMpIi10UQpB4B7mOkl2L65OQtqu4J/mMWzf+GHHbd3WRSCpPfxr8qBKQ4XflB0E3f
-	OqeyKQGHPEt4mNFLuuV4Ul5Lm6GEmplpCeQsSccQxiQHHEBgok5IKmVWId18SO86cfPC
-	uo3Q==
-X-Gm-Message-State: AJaThX6C8A8QjyFg684egcIz9q0j5hPAJdSlA7ctsw2NgTEiqB/HfeTH
-	QNEUrRLReqTJi/gbXAEj0ajF1Q==
-X-Google-Smtp-Source: AGs4zMaGyF9q9Q0ZzjTiKEs3TrDsh/r2sAQJdPouN4AfTl1STX0UPxrPq5efD93Yj316i5bApd2Wlg==
-X-Received: by 10.28.101.4 with SMTP id z4mr2673260wmb.77.1510407012713;
-	Sat, 11 Nov 2017 05:30:12 -0800 (PST)
+	bh=meocHJLMj/PZzwMH0REvRI/UX3hujrwVPh1jxAxWaCo=;
+	b=mfaDvDYcG1NydjA8I7WuA75oPGkPbESbSrelf61BKiHwP1KUSHsJMDh8LJxqN50nMX
+	32/jm8r4nlMcCD+hkrfxMORb2WbxURt22JZQhJfOGxo4ARPXU2rIEVge7bbF/DTK5aA5
+	dpWrbkRt5kMC2ihm5JFLy9fyBjf8P1K8zOOTnw9te9/aljJ3Q23sMKb8YjZoCjWmOjox
+	8V7yWSkrzeq+2hJ2wsVirLmQvFSI/6UAnF4xSO35bSXihrCkRO6pP4S+MuJn/aKYAumb
+	xh+sukQQHPv8ij/0cgcsR8vr1l9krwVtR2g7RxoJ8Gb5lV9shB/+HAl8b67YjyiRXGsb
+	qrlQ==
+X-Gm-Message-State: AJaThX7DnDCfLxyRrz1FeC7brp3HlpG4MOZ4MNIYLENLmssdCmFZKwS7
+	Pyf1v0O3s0O0bBOa5QCRHAVBIA==
+X-Google-Smtp-Source: AGs4zMY85D8apGQqOCnrT1cgSgHcUUFMcem2Nirf8LAjhJM1SyPh03pf+yPjrCDwJoD6upqFCbFjQw==
+X-Received: by 10.28.227.139 with SMTP id a133mr2718720wmh.104.1510407013799; 
+	Sat, 11 Nov 2017 05:30:13 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p20030070ED074A591E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:70:ed07:4a59:1e6f:65ff:fe3e:7f61])
 	by smtp.gmail.com with ESMTPSA id
-	195sm16189805wmj.3.2017.11.11.05.30.11
+	195sm16189805wmj.3.2017.11.11.05.30.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 11 Nov 2017 05:30:11 -0800 (PST)
+	Sat, 11 Nov 2017 05:30:13 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Nov 2017 14:29:47 +0100
-Message-Id: <20171111132950.12570-11-schnitzeltony@gmail.com>
+Date: Sat, 11 Nov 2017 14:29:48 +0100
+Message-Id: <20171111132950.12570-12-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.9.5
 In-Reply-To: <20171111132950.12570-1-schnitzeltony@gmail.com>
 References: <20171111132950.12570-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][v2 10/13] tumbler: ensure thumbnails work properly
+Subject: [PATCH][v2 11/13] tumbler: update 0.1.31 to 0.2.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -61,37 +61,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Nov 2017 13:30:12 -0000
+X-List-Received-Date: Sat, 11 Nov 2017 13:30:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-From: Andreas Müller <schnitzeltony@googlemail.com>
-
-After some builds link tumbler-cache-plugin.so is not prperly created causing:
-| Failed to load the cache plugin "tumbler-cache-plugin.so": /usr/lib/tumbler-1/plugins/cache/tumbler-cache-plugin.so: cannot open shared object file: No such file or directory
-
-Signed-off-by: Andreas Müller <schnitzeltony@googlemail.com>
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
 ---
- meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb | 6 ++++++
- 1 file changed, 6 insertions(+)
+ .../recipes-xfce/tumbler/{tumbler_0.1.31.bb => tumbler_0.2.0.bb}      | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-xfce/recipes-xfce/tumbler/{tumbler_0.1.31.bb => tumbler_0.2.0.bb} (90%)
 
-diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-index 1f5419a..1786eff 100644
+diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb b/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.0.bb
+similarity index 90%
+rename from meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
+rename to meta-xfce/recipes-xfce/tumbler/tumbler_0.2.0.bb
+index 1786eff..7e0c555 100644
 --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-+++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-@@ -15,6 +15,12 @@ INSANE_SKIP_${PN} = "dev-so"
- PACKAGECONFIG ??= ""
- PACKAGECONFIG[gstreamer-thumbnailer] = "--enable-gstreamer-thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0 gstreamer1.0-plugins-base"
++++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.2.0.bb
+@@ -6,8 +6,8 @@ DEPENDS = "dbus-glib dbus-glib-native freetype gdk-pixbuf poppler curl xfce4-dev
  
-+do_install_append() {
-+    # Makefile seems to race on creation of symlink. So ensure creation here
-+    # until fixed properly
-+    ln -sf tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/plugins/cache/tumbler-cache-plugin.so
-+}
-+
- FILES_${PN} += "${datadir}/dbus-1/services \
-                 ${libdir}/tumbler-1/tumblerd \
-                 ${libdir}/tumbler-1/plugins/*.so \
+ inherit xfce gtk-doc
+ 
+-SRC_URI[md5sum] = "0067054e6f1f90a13f90faadfca1e89e"
+-SRC_URI[sha256sum] = "d0fd329273ff6ac98885eade4c3d8c87a4dd0816f713646130808bfa90b87173"
++SRC_URI[md5sum] = "dd5f9bae6a2470eb5fff0dc9edd3ea09"
++SRC_URI[sha256sum] = "4e27a59694b0a5cc69ebccbdb00c724e670b5b7c30bc4dc0b461aac93f234fac"
+ SRC_URI += "file://0001-configure-use-pkg-config-for-freetype2.patch"
+ 
+ INSANE_SKIP_${PN} = "dev-so"
 -- 
 2.9.5
 
