@@ -1,49 +1,38 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f45.google.com (mail-wm0-f45.google.com [74.125.82.45])
-	by mail.openembedded.org (Postfix) with ESMTP id 3696478480;
-	Sun, 12 Nov 2017 11:48:45 +0000 (UTC)
-Received: by mail-wm0-f45.google.com with SMTP id z3so130333wme.3;
-	Sun, 12 Nov 2017 03:48:47 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=yMZkMXaufdZHBqwzaoKL97v3NFgUXfqjZLsSbAX3vmY=;
-	b=M516lXWQ1ZXJruhaeAvIBHV2DRXh70/oOzlsr9xapKF4tKoXcYOdYEP6HkFRuN3wUv
-	JF12M3asfp0359j9KVJgR/VR7mzbFoy88wmf7Vr1ODqxsBMc0mm5EVeKEH6kYAw8IJRm
-	FMwx73sbz1J3yxURahiLI/tBS+9fDwcVqU1fkkq0exaxwqjf8m+JL9DmZxE3BZ6W/WFH
-	mUiD2uFmFQx3SkPC0xYt7K2DEG1hDJF/o77AUyyutjrJKDhBzZWVznVBJSGS/PZHGAVR
-	kNs8/K8R9RpiK0EOhidT5vHsQeaJOtI36vNyH015a744T5O8gCwJkgcgQtllQK5uMfSg
-	sMjg==
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 04E27782CC
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Nov 2017 15:14:33 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id p7so16995987qkd.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 12 Nov 2017 07:14:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=yMZkMXaufdZHBqwzaoKL97v3NFgUXfqjZLsSbAX3vmY=;
-	b=X1ivopGckjD4/f+JUcQT2HCeEgEnpP6jcnJoxEB9Du6cDbzC6x2G6U4z3/LAuBibv6
-	qqR6V6PwKLoWH4+3qVOIF0yQ9G/yojdPvwDp6PzJC9B0VfC76MR7O65cRRdb8/EnKe6X
-	eRfbzX6pcSgpsomI8bhg8gZnD/YfNoGzhh3kShjSu/VxNs64f66xxvm6LOwm2193oWkB
-	eV9oCdVmAqf/0s3Q2UgE/F6WcuWilIpwVdPZ1aJODVdNrlhfzaLVz9rLpqVKAXa9c3tv
-	jbv9PiEFZQR01jniYM1o4/j+yc0m5uqL3xWgZTjS9n4hP0JINzQCdYOQkCdksjT0RI98
-	czcQ==
-X-Gm-Message-State: AJaThX76xmXg3OzfZYISirhbKTOMYw08o0lFR9C+vUVBSIxONlv0xhj0
-	xoRTCsHn7CNr2OQbL9Iffqkl7MEtBSn5NQBmqic=
-X-Google-Smtp-Source: AGs4zMZBA5lfcUdlXnq6E7g67EayTOeFiOIkLCxEDRNas9/BDHObjm6w1lW1AabLErGIvvSkFu62i7c9TxUrRaezCOQ=
-X-Received: by 10.28.118.1 with SMTP id r1mr2746428wmc.10.1510487326423; Sun,
-	12 Nov 2017 03:48:46 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.173.139 with HTTP; Sun, 12 Nov 2017 03:48:45 -0800 (PST)
-In-Reply-To: <CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
-References: <151032511199.27841.6992651845996774565@git.openembedded.org>
-	<20171110144512.3538E233675@git.openembedded.org>
-	<CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Sun, 12 Nov 2017 12:48:45 +0100
-Message-ID: <CA+chaQc5S7D_gbcwPNR2+TmoB+Qxh1X3OdwzJNc5HSPDjMuAZg@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Ross Burton <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] [openembedded-core] 04/44: db: don't provide virtual/db
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=7yWh52kw3Va7PsQFS3xCEjEZSTkdfBTMGRVNn3V/Ad0=;
+	b=HtXhhYU/girploo74virtxx9zlB1guBuht5ozKY4Z/hQZKt0N5S3u50UkkaPzgS3lm
+	TPeOZAE2ttyYX+HvVAuNMdLEvMyHk98lUqufpSdOa4Icy3Dcqpp9955b1pcrKMqUwkJ+
+	HNMkpVzjxBEeLNk7I+VqVHSsx7kHH2JWOX20Pg0yfMdn4c2Shg1dGy0WqW2Du9JN5S4Z
+	+YtEwfT6Afkk5wrpfjyREbe6pKitgW0wwv6WeQs3ic1SRecbQhKYU8s3gBBSJ7AKVuT6
+	TuMxAPB1my/LWQ0zdwwTZcz8zJiSEPbF/1InTfCz0Ul1OrwbCCJz0X89q4L90pWk4FuX
+	AUtg==
+X-Gm-Message-State: AJaThX5riX0f5xPNfoohjDwMqiXUdAx4mIbZM0oZ7Lcq/UybAd70hNMG
+	iHnCNRZwS0yoS4uYL8RyEiUJXCvn
+X-Google-Smtp-Source: AGs4zMZdjU7+WKk95sQZisUFv+xZZd1cY5R0ERrnFRv4z92anjSBH9GA+zL0L93704IVIxVZJkDEFA==
+X-Received: by 10.55.20.105 with SMTP id e102mr10013237qkh.89.1510499674459;
+	Sun, 12 Nov 2017 07:14:34 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	y29sm9537983qtk.64.2017.11.12.07.14.33
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 12 Nov 2017 07:14:33 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 12 Nov 2017 10:14:21 -0500
+Message-Id: <1510499661-15677-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python3-certifi: update to version 2017.11.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,88 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Nov 2017 11:48:46 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 12 Nov 2017 15:14:34 -0000
 
-Also, was this ever sent to ML for review? I haven't found it in my maildir
-and google haven't found it in ML archive as well.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-certifi.inc                | 4 ++--
+ .../{python-certifi_2017.7.27.1.bb => python-certifi_2017.11.5.bb}    | 0
+ .../{python3-certifi_2017.7.27.1.bb => python3-certifi_2017.11.5.bb}  | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-certifi_2017.7.27.1.bb => python-certifi_2017.11.5.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-certifi_2017.7.27.1.bb => python3-certifi_2017.11.5.bb} (100%)
 
-On Sat, Nov 11, 2017 at 11:45 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-python/recipes-devtools/python/python-certifi.inc b/meta-python/recipes-devtools/python/python-certifi.inc
+index e550f7e..97be1fb 100644
+--- a/meta-python/recipes-devtools/python/python-certifi.inc
++++ b/meta-python/recipes-devtools/python/python-certifi.inc
+@@ -7,7 +7,7 @@ HOMEPAGE = " http://certifi.io/"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f77f61d14ee6feac4228d3ebd26cc1f1"
+ 
+-SRC_URI[md5sum] = "48e8370da8b370a16e223ee9c7b6b063"
+-SRC_URI[sha256sum] = "40523d2efb60523e113b44602298f0960e900388cf3bb6043f645cf57ea9e3f5"
++SRC_URI[md5sum] = "c15ac46ed1fe4b607ff3405928f9a992"
++SRC_URI[sha256sum] = "5ec74291ca1136b40f0379e1128ff80e866597e4e2c1e755739a913bbc3613c0"
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-certifi_2017.7.27.1.bb b/meta-python/recipes-devtools/python/python-certifi_2017.11.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-certifi_2017.7.27.1.bb
+rename to meta-python/recipes-devtools/python/python-certifi_2017.11.5.bb
+diff --git a/meta-python/recipes-devtools/python/python3-certifi_2017.7.27.1.bb b/meta-python/recipes-devtools/python/python3-certifi_2017.11.5.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-certifi_2017.7.27.1.bb
+rename to meta-python/recipes-devtools/python/python3-certifi_2017.11.5.bb
+-- 
+2.7.4
 
-> Hi,
->
-> will you please send fix for:
-> ERROR: Nothing PROVIDES 'virtual/db' (but meta-oe/meta-networking/
-> recipes-daemons/postfix/postfix_3.2.2.bb meta-oe/meta-networking/
-> recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb DEPENDS on or otherwise
-> requires it).
->
-> Thanks
->
-> On Fri, Nov 10, 2017 at 3:45 PM, <git@git.openembedded.org> wrote:
->
->> This is an automated email from the git hooks/post-receive script.
->>
->> rpurdie pushed a commit to branch master-next
->> in repository openembedded-core.
->>
->> commit dcbc45aa3fe72c528fe4d47a783da4b4ed5ff38e
->> Author: Ross Burton <ross.burton@intel.com>
->> AuthorDate: Tue Oct 31 21:10:13 2017 +0000
->>
->>     db: don't provide virtual/db
->>
->>     As there are no alternative providers for virtual/db remove the
->> PROVIDES and
->>     recipes can just depend on db.
->>
->>     Signed-off-by: Ross Burton <ross.burton@intel.com>
->> ---
->>  meta/recipes-support/db/db_5.3.28.bb | 10 ----------
->>  1 file changed, 10 deletions(-)
->>
->> diff --git a/meta/recipes-support/db/db_5.3.28.bb
->> b/meta/recipes-support/db/db_5.3.28.bb
->> index fb4befb..fe71967 100644
->> --- a/meta/recipes-support/db/db_5.3.28.bb
->> +++ b/meta/recipes-support/db/db_5.3.28.bb
->> @@ -12,7 +12,6 @@ SECTION = "libs"
->>  SUMMARY = "Berkeley Database v5"
->>  HOMEPAGE = "http://www.oracle.com/technetwork/database/database-technol
->> ogies/berkeleydb/overview/index.html"
->>  LICENSE = "Sleepycat"
->> -VIRTUAL_NAME ?= "virtual/db"
->>  RCONFLICTS_${PN} = "db3"
->>
->>  PR = "r1"
->> @@ -37,15 +36,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1158e314
->> 37f4f87cdd4ab2b8613955"
->>
->>  inherit autotools
->>
->> -# Put virtual/db in any appropriate provider of a
->> -# relational database, use it as a dependency in
->> -# place of a specific db and use:
->> -#
->> -# PREFERRED_PROVIDER_virtual/db
->> -#
->> -# to select the correct db in the build (distro) .conf
->> -PROVIDES += "${VIRTUAL_NAME}"
->> -
->>  # The executables go in a separate package - typically there
->>  # is no need to install these unless doing real database
->>  # management on the system.
->>
->> --
->> To stop receiving notification emails like this one, please contact
->> the administrator of this repository.
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->>
->
->
 
