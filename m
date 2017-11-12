@@ -1,38 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 064B560796
+Received: from mail-qt0-f169.google.com (mail-qt0-f169.google.com
+	[209.85.216.169])
+	by mail.openembedded.org (Postfix) with ESMTP id EF7B56093D
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Nov 2017 16:20:21 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id 1so16985439qtn.3
+	Sun, 12 Nov 2017 16:35:26 +0000 (UTC)
+Received: by mail-qt0-f169.google.com with SMTP id f8so17011889qta.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Nov 2017 08:20:23 -0800 (PST)
+	Sun, 12 Nov 2017 08:35:28 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QjhXEiRsR0GVTKKXyvM2SflAlCVtvXQYaGRQf+M5B9Q=;
-	b=G0RKyUKqC5kh1jjloGzB6EXJydB3Spai9TokGGvJuXpTklC5tPk4q4VG6I47lDyVLA
-	+AXPbLywhc74e5KRq9s8Q/1LDo2thnDPoKhRedZ4jeFU5PExDwawK28f5PSS4JvjhDr1
-	tGI3bQ8gxU+Ticr+qBAXcdw2PIcYT08KiZuFxKA9ZBm64vPaUumDOwyf7uWNFwPujsFh
-	vimS881O24VPnbVMIBSDev50Cxw+TMfLPXnwsPu/2XXTkzaBO7O+Of6k0cGsS4eGipZM
-	et/Njqo3FkVY3X9iJD269gRuv7fRgm+IVqWzjKI2HqXR1IZUks7xg2lDuUeQY/UYTCnP
-	3ZoA==
-X-Gm-Message-State: AJaThX6HXbYfDM+Zz1SAuMpBPoFuQOyqElEQ6PnyzWtE/SQ0swtpr8J6
-	TsQzV6ZcpjWfE8ev8pMrP6VhTkqL
-X-Google-Smtp-Source: AGs4zMbZ6d2+OG4w+jbpgff6sGlJiv6+OJO+drBb6VaobrvwXlZSYl8sEGN8/ScF/XbPefy8BP66pg==
-X-Received: by 10.237.60.120 with SMTP id u53mr9547568qte.202.1510503622553;
-	Sun, 12 Nov 2017 08:20:22 -0800 (PST)
+	bh=+HhYJFhpHu90uPCCxGtel16jeRGwtVVyIGrYY8OH5CU=;
+	b=gznMon1PI+olib6fGfaP04WIg4oNrdDLnj6Xr0EQS8PZsQvUQR9c0XWjQg/hMyW0rt
+	DVSR+rE4CINRreng/RcIQ8yvL9ft+RAI2kL7Ks8IhGmy/pIUXD7KG2yRoyc2lZmJ+jNg
+	kVJdLh9E7oeTgoThpGFC2cRoYatd5qyCFncapArxOkFZYdndz1ReuzL1VWUuJgyN/Nlc
+	Ol287VhDwwfgdqrtR1a+rZwxnwwaZNSd+6oJdstF5kg229deb6psaeNjLCSUeDVx/Nu/
+	qA2vEUcsUUVbBAaqvq1ItPfshX6V4uTED+FAIkILHM6uTo+MGbpFW4D5zPbDQpEWr1Pc
+	jIpA==
+X-Gm-Message-State: AJaThX4Z3X4BOoAh0nwr1XzDvEin2PoyBy98K7IrYCAAFUzXDK4pIMpK
+	ZuyDejiqDPEvEF3ZL3lrFskO1C1p
+X-Google-Smtp-Source: AGs4zMYwAsQsWJQmQajEzublHvJOQ87EPLKFezQUqXGsiRoFnlR6BuHJlPvKY2vn0yyC9xvldyKPgw==
+X-Received: by 10.200.26.216 with SMTP id h24mr10244391qtk.175.1510504527624; 
+	Sun, 12 Nov 2017 08:35:27 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	s51sm9638268qtk.32.2017.11.12.08.20.21
+	by smtp.gmail.com with ESMTPSA id o49sm2506111qtf.4.2017.11.12.08.35.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 12 Nov 2017 08:20:21 -0800 (PST)
+	Sun, 12 Nov 2017 08:35:27 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Nov 2017 11:17:47 -0500
-Message-Id: <1510503467-28767-1-git-send-email-derek@asterius.io>
+Date: Sun, 12 Nov 2017 11:35:10 -0500
+Message-Id: <1510504510-2170-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-multidict: update to version 3.3.2
+Subject: [meta-python][PATCH] python-pymisp: update to version 2.4.82
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,29 +44,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Nov 2017 16:20:22 -0000
+X-List-Received-Date: Sun, 12 Nov 2017 16:35:27 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../python/{python3-multidict_3.3.0.bb => python3-multidict_3.3.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-multidict_3.3.0.bb => python3-multidict_3.3.2.bb} (64%)
+ meta-python/recipes-devtools/python/python-pymisp.inc                 | 4 ++--
+ .../python/{python-pymisp_2.4.81.2.bb => python-pymisp_2.4.82.bb}     | 0
+ .../python/{python3-pymisp_2.4.81.2.bb => python3-pymisp_2.4.82.bb}   | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pymisp_2.4.81.2.bb => python-pymisp_2.4.82.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.81.2.bb => python3-pymisp_2.4.82.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-multidict_3.3.0.bb b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-similarity index 64%
-rename from meta-python/recipes-devtools/python/python3-multidict_3.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-index 1a3eb0a..7f9cd55 100644
---- a/meta-python/recipes-devtools/python/python3-multidict_3.3.0.bb
-+++ b/meta-python/recipes-devtools/python/python3-multidict_3.3.2.bb
-@@ -5,5 +5,5 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=e74c98abe0de8f798ca609137f9cef4a"
+diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
+index bb9305a..1a0f869 100644
+--- a/meta-python/recipes-devtools/python/python-pymisp.inc
++++ b/meta-python/recipes-devtools/python/python-pymisp.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
- inherit pypi setuptools3
+-SRC_URI[md5sum] = "77c6276039a7e48d8ae1d335564f20c9"
+-SRC_URI[sha256sum] = "2ce6d8a9c59fe5f63b406b667fd40df8ebba0dee63844dfec95fb9d2892ae6af"
++SRC_URI[md5sum] = "160988f4f6bd56670b28c9791f8a8b55"
++SRC_URI[sha256sum] = "21834f562632cbb87c867c5cd4839799832b5714cc3c8e2797e56c4a72f6e26c"
  
--SRC_URI[md5sum] = "7ecd7c2807fd76ba7ca83e4e0c7fdf5f"
--SRC_URI[sha256sum] = "e76909da2fad6966281d4e0e4ccfd3c3025699ebcc30806afa09fa1384c3532b"
-+SRC_URI[md5sum] = "06ca91d993de2d04c7ee6df0cbb44ea2"
-+SRC_URI[sha256sum] = "f82e61c7408ed0dce1862100db55595481911f159d6ddec0b375d35b6449509b"
+ RDEPENDS_${PN} += " ${PYTHON_PN}-requests ${PYTHON_PN}-json ${PYTHON_PN}-jsonschema"
+diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.81.2.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.82.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pymisp_2.4.81.2.bb
+rename to meta-python/recipes-devtools/python/python-pymisp_2.4.82.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.81.2.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.82.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.81.2.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.82.bb
 -- 
 2.7.4
 
