@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
 	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C3212780BD
+	by mail.openembedded.org (Postfix) with ESMTP id 9A6B6780BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Nov 2017 15:23:52 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id 31so16892722qtz.9
+	Sun, 12 Nov 2017 15:29:31 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id v41so16880521qtv.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Nov 2017 07:23:54 -0800 (PST)
+	Sun, 12 Nov 2017 07:29:33 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=JOVXpJUwmr8oK2pBKKDdkHl3k73GLMx+aadM2+ryQ4k=;
-	b=aFO11JpSK0G1bry+DUQkQdiEbGwS81pmBUgDx+JUwmFe+GDKmW2NK4Sw8IuBPEk1/L
-	i2Q/3JHvJtmhmKdc3hwsfZvJk6TCqyWkgJdjTPoQBnHpihmDQWJq8VmfrotLcvK4EeTL
-	ZcpwoKG3Vy7+e6k/43QyF86yVJIERu117XP8lXWfI3TFHEem2ewsdBGtlbMr40JHWooV
-	PVD0/45If7oUZLz1c0osD3NAHjtzsYpgrK8IawfF2HfJJGO+4K1XAxQ0aTSke+yOdp8T
-	/OFZeszDP3SFZGp6m9Ol48n+rGNWK3y0EXH2MSmjbwvzjNmQsa9mNyoZaWJaI4ztSR1L
-	1Oww==
-X-Gm-Message-State: AJaThX69cCfc0Y1m+hSSfX9A1jzbqXnGVJRlCOtI7lR193j2XzE6xbbs
-	Kz5iHJ9CmQpGddRp1aSkZm/vKeEt
-X-Google-Smtp-Source: AGs4zMYtXlv1m9dM02N7oQrewilMfeVXkXfTOT9+lmzds8P490efzzLi0nOu/SUw2NvefautYstW5Q==
-X-Received: by 10.200.9.43 with SMTP id t40mr10305904qth.257.1510500233416;
-	Sun, 12 Nov 2017 07:23:53 -0800 (PST)
+	bh=xCkF+Ywy0cFug6DNygaEiz6Ft/V65Q4uRPMq6Dildlw=;
+	b=r0U8Aa+0Q2R4std2w0WalCjZdn87SCT3MH7ilFFLdNokRrTv6Ijb8idvkj2Svj4xZu
+	cf6+AsA2d9TreFgrP6G5i/VEKWVPA43b5kav1AMwicDJPpAnAzTZUcqDddyoLwWtxVe8
+	prFr+KwqDmEZ4jcYjnR/gu7PNE/4XxxkwOZLCJ8jR5iDnwAq8YQ0rq6fyWN5znOVH1pM
+	2hMpAiJp659v9kK5mDUqd9AJo0vgYwQWQKQjk4DE8IBUaK+Peuy03RcZaz71u7v9r+Eu
+	ZTnTQ9COebrggj+V3iWeicg2lFZgR/QvHQNtt3FZJNXa//qL/cBj5MoGTQLje2PyEGCz
+	qqhA==
+X-Gm-Message-State: AJaThX5p7NZfGsY66CmbtlsB7lWIHnGkQVnFa6veFIC4i51JwNRimlqK
+	ftgKHnZqhLIJlGihYhfqijZq/ZAG
+X-Google-Smtp-Source: AGs4zMaiJOBpe2XVlJU52hgx4Touopi5jAnjuzlGZm4K7ThYZauZvUwXomx8228qmAROxzqFcvWmaw==
+X-Received: by 10.200.24.171 with SMTP id s40mr9695852qtj.292.1510500572791;
+	Sun, 12 Nov 2017 07:29:32 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	a66sm9238864qkf.49.2017.11.12.07.23.52
+	j90sm4330253qtb.19.2017.11.12.07.29.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 12 Nov 2017 07:23:52 -0800 (PST)
+	Sun, 12 Nov 2017 07:29:32 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 12 Nov 2017 10:23:45 -0500
-Message-Id: <1510500225-20843-1-git-send-email-derek@asterius.io>
+Date: Sun, 12 Nov 2017 10:29:24 -0500
+Message-Id: <1510500564-23251-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cython: update to version 0.27.3
+Subject: [meta-python][PATCH] python-lxml: update to version 4.1.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Nov 2017 15:23:52 -0000
+X-List-Received-Date: Sun, 12 Nov 2017 15:29:32 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cython.inc                 | 4 ++--
- .../python/{python-cython_0.27.2.bb => python-cython_0.27.3.bb}       | 0
- .../python/{python3-cython_0.27.2.bb => python3-cython_0.27.3.bb}     | 0
+ meta-python/recipes-devtools/python/python-lxml.inc                   | 4 ++--
+ .../python/{python-lxml_4.1.0.bb => python-lxml_4.1.1.bb}             | 0
+ .../python/{python3-lxml_4.1.0.bb => python3-lxml_4.1.1.bb}           | 0
  3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-cython_0.27.2.bb => python-cython_0.27.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-cython_0.27.2.bb => python3-cython_0.27.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python-lxml_4.1.0.bb => python-lxml_4.1.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-lxml_4.1.0.bb => python3-lxml_4.1.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cython.inc b/meta-python/recipes-devtools/python/python-cython.inc
-index f830557..8d8f27c 100644
---- a/meta-python/recipes-devtools/python/python-cython.inc
-+++ b/meta-python/recipes-devtools/python/python-cython.inc
-@@ -7,8 +7,8 @@ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=e23fadd6ceef8c618fc1c65191d846fa"
- PYPI_PACKAGE = "Cython"
- BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-lxml.inc b/meta-python/recipes-devtools/python/python-lxml.inc
+index 7c0a7d7..f153c0a 100644
+--- a/meta-python/recipes-devtools/python/python-lxml.inc
++++ b/meta-python/recipes-devtools/python/python-lxml.inc
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://LICENSES.txt;md5=e4c045ebad958ead4b48008f70838403 \
  
--SRC_URI[md5sum] = "64abe5847736eb413a525b70b48afd7f"
--SRC_URI[sha256sum] = "265dacf64ed8c0819f4be9355c39beaa13dc2ad2f85237a2c4e478f5ce644b48"
-+SRC_URI[md5sum] = "6149238287d662bd5d5e572482252493"
-+SRC_URI[sha256sum] = "6a00512de1f2e3ce66ba35c5420babaef1fe2d9c43a8faab4080b0dbcc26bc64"
+ DEPENDS += "libxml2 libxslt"
  
- inherit pypi
+-SRC_URI[md5sum] = "247580bd5d942872bd972ad0086e5cbf"
+-SRC_URI[sha256sum] = "be3aaeb5f468a49f523f16736ccff7d82af2b4b303292ba3d052b5b28f3fbe47"
++SRC_URI[md5sum] = "0265ad6701951347f2dbbb470e3d1512"
++SRC_URI[sha256sum] = "940caef1ec7c78e0c34b0f6b94fe42d0f2022915ffc78643d28538a5cfd0f40e"
  
-diff --git a/meta-python/recipes-devtools/python/python-cython_0.27.2.bb b/meta-python/recipes-devtools/python/python-cython_0.27.3.bb
+ DISTUTILS_BUILD_ARGS += " \
+                      --with-xslt-config='pkg-config libxslt' \
+diff --git a/meta-python/recipes-devtools/python/python-lxml_4.1.0.bb b/meta-python/recipes-devtools/python/python-lxml_4.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-cython_0.27.2.bb
-rename to meta-python/recipes-devtools/python/python-cython_0.27.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-cython_0.27.2.bb b/meta-python/recipes-devtools/python/python3-cython_0.27.3.bb
+rename from meta-python/recipes-devtools/python/python-lxml_4.1.0.bb
+rename to meta-python/recipes-devtools/python/python-lxml_4.1.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-lxml_4.1.0.bb b/meta-python/recipes-devtools/python/python3-lxml_4.1.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-cython_0.27.2.bb
-rename to meta-python/recipes-devtools/python/python3-cython_0.27.3.bb
+rename from meta-python/recipes-devtools/python/python3-lxml_4.1.0.bb
+rename to meta-python/recipes-devtools/python/python3-lxml_4.1.1.bb
 -- 
 2.7.4
 
