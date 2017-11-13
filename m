@@ -1,53 +1,49 @@
-Return-Path: <ian@boundarydevices.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 8F59A70016
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
+	[209.85.223.196])
+	by mail.openembedded.org (Postfix) with ESMTP id EC017786C7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 21:56:42 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id 78so21709418qkz.0
+	Mon, 13 Nov 2017 22:34:28 +0000 (UTC)
+Received: by mail-io0-f196.google.com with SMTP id p186so22365713ioe.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 13:56:44 -0800 (PST)
+	Mon, 13 Nov 2017 14:34:30 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=JCHO5FHZ+r9mnTjRKnSM/8q5lUmIK8W1h5JnzCgn5d0=;
-	b=XA9FPG3JnPtVJDZfGHNxl1k9ojSa1gxRppHdonOnZdEYr5ExQPy8GNqKkHHv90Y4Yi
-	QrNb4CO5HtxMlT5od6seYyUVCjYVwgm+CSv0vozlUPnxc6+02Hl/jROQR6tKOgUmzGBf
-	FPoMGMuz9C7ZNWXunpF3poyy5PooZHaeXp6NQvTOuep6WFTyFss/uzbGsn+yO5rq+Cn/
-	QKFQLFXQLmvYe47/tNuSma5IryE1Glqisp7lZSyXKbpP+fNqdgvKz/rGJz80yE2pCjmi
-	kbqAmZP54Q0ZPrPKAvl16QqPxTfWj2NWrj3R8jz2wg3lpLT9FtXTeAUa1nLsFxdJHz4L
-	OO4g==
+	:cc; bh=ZP+3D13WWZwzlbutBR/WgqDX79nRIVVKVZUJG+OBYGE=;
+	b=UyCKqSIjJQNxOShw46dL3qmHKCcU/5d1EeFp4MWIKlhbj57Br+zlMzUzXbbwL0Dsy4
+	QQf8wm3gNQ0jFW4WOPlk65jrNLXhs12EFgDOVsN097HBAozxZc92FGocHWn+On0uciCa
+	ffjbD4mFIGd68HbARhjuAbZXASnV5f20+t6JsH7j9vYNxuaRuIgEJ4kNL35gU2SwmBV1
+	X8T1I6azxMNhbfiIAJLwoo0V5BSLAFrGMlrv5JfNafVJvu7eCrYaZgN7GE44DO7rJD7a
+	Gpe3pckL7f7G9OA+J/FCxHvBi5Xwnld3JDQIwFy49yhEdc9CpBWjI4EN1uf+TfgOmdCX
+	NvLA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=JCHO5FHZ+r9mnTjRKnSM/8q5lUmIK8W1h5JnzCgn5d0=;
-	b=hEB8c/0V11ew207in0PK61cW7gyK9M/MZhzOK0EmoQvlag7vZ2ZpaN1KPm7+4uWd/+
-	V3o/bdvAJPsCH0Ewz3vZimXmTAMCQxvZfhgB1vOHPxY8jMJJs+UlVTwyOBo2N4qvbd4Z
-	7+/sXelBnejD/SzNjFeJ5ZMOh93C8hzaGf32xsYn/VyKRAwoZEFNMyhY/H81q4jpKxh3
-	tTna+zruH9Jobyf87DUlCW+hF5yQv4lfnQ7VW9dFQU/AbyUcC0yn+++MuPQhcUTVfX+t
-	3Mhru459UzOAfwmxEY+tj7ePBi5Q9+T+s46djE8QnlGlH/dt0/BPghr0q8YR82kaMrHm
-	A1bQ==
-X-Gm-Message-State: AJaThX60trlYhCgApu6Afbd1FQbwaFuM5eNepnOts1pdBAqcko6b9kKi
-	79w3wSLBs9UDeozGPTODvD5DxPomaQyIwTCmdsCuVw==
-X-Google-Smtp-Source: AGs4zMZASg/XqmLsTDLphKwSt2zMzYOcA5/i0MEB8raXoydULK7o/kdqPO3QJh157JjMvbA7Zyais5dbLAnhSpXlZho=
-X-Received: by 10.55.102.207 with SMTP id a198mr8021873qkc.345.1510610203460; 
-	Mon, 13 Nov 2017 13:56:43 -0800 (PST)
+	bh=ZP+3D13WWZwzlbutBR/WgqDX79nRIVVKVZUJG+OBYGE=;
+	b=UVY7oPEYv2VwwrjiGFlay0zOug4LE5YggXCGnZ/h1OrMb4SqWbfIyzQNAdojasHR7y
+	y3aPAvsNeQFvf/thwF9B8QkfLC3Lx17NHLqq96T/6aE/H99gVhPj4YoMqwmlavG6fQlI
+	EgkjBk+hNI2lW8Cbg0mFzYpGD45vb+NVjYwpboz0n08ZdpKNXEzvDtEoOc68LEY/rohs
+	vHE5im6qdcq4lgh7OWCxekwf/HPA9uQyWo2Us0/AS58kud82E9EccFPttls0vIckYLbA
+	VslSCkg5VSIJ40fVQIE/ViIrVLIdIEPS8TeoGM9kazzBD6veFa/XOa0H5P/dEgYLQMrW
+	wQ+w==
+X-Gm-Message-State: AJaThX7nadFajSVy7tU04Uyd2lQ4swNZOqgIW/EEhpZ2eN0hu4LGsr2j
+	7wcUNGSC0BLxhwspKIakWHKcsOURzw9xza5vSdHZ5g==
+X-Google-Smtp-Source: AGs4zMZQ64rh844D8ILAWdbgfABmilG9jxmtrF2u0rpPbNwN0Cfx+dtNS4FdxJwQL5+w91UFQOCON0bn8oU/9f0Tc+0=
+X-Received: by 10.107.32.199 with SMTP id g190mr11509974iog.217.1510612469631; 
+	Mon, 13 Nov 2017 14:34:29 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.200.37.203 with HTTP; Mon, 13 Nov 2017 13:56:42 -0800 (PST)
-In-Reply-To: <CADseiPnGDYTz-Ht=kTxGt+UpfeNx-Q6dGY-jOa=11JgvOEcuGQ@mail.gmail.com>
-References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CAHUNapRKjZZ=yCYpfrm3CDVZez0JbLeaKHaZg2J3WhjBvRR6jg@mail.gmail.com>
-	<CADseiP=dhrkCrqBnO+g-HZQZaGgf1ywZwFcd-0bpE9K-qhALPQ@mail.gmail.com>
-	<CAP9ODKqhY9miP9wf0rv_mhtyn9_dV6-Cm3=J6yOhmx-Y6qpGiw@mail.gmail.com>
-	<CADseiPnGDYTz-Ht=kTxGt+UpfeNx-Q6dGY-jOa=11JgvOEcuGQ@mail.gmail.com>
-From: Ian Coolidge <ian@boundarydevices.com>
-Date: Mon, 13 Nov 2017 13:56:42 -0800
-Message-ID: <CADseiP=TheGrsE+Pc=G8NAgVcmRx9e+VhNa4fbRSdN_miZhk4A@mail.gmail.com>
-To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Received: by 10.107.171.196 with HTTP; Mon, 13 Nov 2017 14:34:09 -0800 (PST)
+In-Reply-To: <20171113205305.24661-1-daniel@zonque.org>
+References: <20171113205305.24661-1-daniel@zonque.org>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Mon, 13 Nov 2017 22:34:09 +0000
+Message-ID: <CAJTo0LaoaDX-cVAVOmr9Li=RFAiJ3EA9vySOmdE6R2MpJhk2Gg@mail.gmail.com>
+To: Daniel Mack <daniel@zonque.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta][PATCH] connman: bump to version 1.35
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -60,52 +56,263 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Nov 2017 21:56:42 -0000
+X-List-Received-Date: Mon, 13 Nov 2017 22:34:29 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Nevermind, found it. I'll test that.
+oe-core patches go to openembedded-core@ not -devel@.
 
-On Mon, Nov 13, 2017 at 1:51 PM, Ian Coolidge <ian@boundarydevices.com>
-wrote:
+Ross
 
-> Where is this commit? I don't see 568227133be3f9f015679df3525f6c4f86304fd0
-> in meta-browser?
+On 13 November 2017 at 20:53, Daniel Mack <daniel@zonque.org> wrote:
+
+> Two patches are no longer needed, remove them.
 >
-> On Sat, Nov 11, 2017 at 9:25 AM, Otavio Salvador <
-> otavio.salvador@ossystems.com.br> wrote:
+> Signed-off-by: Daniel Mack <daniel@zonque.org>
+> ---
+>  ...ll-nftables-fix-build-with-libnftnl-1.0.7.patch | 72
+> ------------------
+>  .../connman/connman/CVE-2017-12865.patch           | 87
+> ----------------------
+>  .../connman/{connman_1.34.bb => connman_1.35.bb}   |  6 +-
+>  3 files changed, 2 insertions(+), 163 deletions(-)
+>  delete mode 100644 meta/recipes-connectivity/
+> connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+>  delete mode 100644 meta/recipes-connectivity/connman/connman/CVE-2017-
+> 12865.patch
+>  rename meta/recipes-connectivity/connman/{connman_1.34.bb =>
+> connman_1.35.bb} (67%)
 >
->> On Fri, Nov 10, 2017 at 10:10 PM, Ian Coolidge <ian@boundarydevices.com>
->> wrote:
->> ...
->> > Are there any obvious flags or compile options I'm missing here? I
->> haven't
->> > tied debugging into this yet, which is my next step here. Just wanted to
->> > know if I was missing something obvious.
->>
->> Maybe this fixes it?
->>
->> commit 568227133be3f9f015679df3525f6c4f86304fd0
->> Author: Khem Raj <raj.khem@gmail.com>
->> Date:   Tue Nov 7 15:26:52 2017 -0800
->>
->>     gcc7/gcc6: Fix unaligned STRD issue on ARM
->>
->>     Backport
->>     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82445
->>
->>     Fixes [YOCTO 12297]
->>
->>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>     Signed-off-by: Ross Burton <ross.burton@intel.com>
->>
->> Please check if it helps you, otherwise please open a github issue so
->> we can keep track of it.
->>
->> --
->> Otavio Salvador                             O.S. Systems
->> http://www.ossystems.com.br        http://code.ossystems.com.br
->> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
->>
+> diff --git a/meta/recipes-connectivity/connman/connman/0001-firewall-
+> nftables-fix-build-with-libnftnl-1.0.7.patch b/meta/recipes-connectivity/
+> connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+> deleted file mode 100644
+> index cfafbd1271..0000000000
+> --- a/meta/recipes-connectivity/connman/connman/0001-firewall-
+> nftables-fix-build-with-libnftnl-1.0.7.patch
+> +++ /dev/null
+> @@ -1,72 +0,0 @@
+> -From 4058ce3186a99fd5f03350fc11a7fc8d38b6a381 Mon Sep 17 00:00:00 2001
+> -From: "Maxin B. John" <maxin.john@intel.com>
+> -Date: Mon, 8 May 2017 10:53:18 +0300
+> -Subject: [PATCH] firewall-nftables: fix build with libnftnl-1.0.7
+> -
+> -We need these updates to accommodate the changes caused by the following
+> -commit in libnftnl-1.0.7
+> -
+> -commit 907a9f8e5a93f5bcd449643eb3916a656d634758
+> -Author: Pablo Neira Ayuso <pablo@netfilter.org>
+> -Date:   Tue Dec 20 13:47:11 2016 +0100
+> -
+> -src: get rid of aliases and compat
+> -
+> -This machinery was introduced to avoid sudden compilation breakage of
+> -old nftables releases. With the upcoming release of 0.7 (and 0.6 which
+> -is now 6 months old) this is not required anymore.
+> -
+> -Moreover, users gain nothing from older releases since they are
+> -half-boiled and buggy.
+> -
+> -So let's get rid of aliases now. Bump LIBVERSION and update map file.
+> -
+> -Upstream-Status: Submitted
+> -
+> -Signed-off-by: Maxin B. John <maxin.john@intel.com>
+> ----
+> - src/firewall-nftables.c | 14 +++++++-------
+> - 1 file changed, 7 insertions(+), 7 deletions(-)
+> -
+> -diff --git a/src/firewall-nftables.c b/src/firewall-nftables.c
+> -index 583d1c4..83b137b 100644
+> ---- a/src/firewall-nftables.c
+> -+++ b/src/firewall-nftables.c
+> -@@ -387,9 +387,9 @@ static int add_cmp(struct nftnl_rule *rule, uint32_t
+> sreg, uint32_t op,
+> -         if (!expr)
+> -                 return -ENOMEM;
+> -
+> --        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_SREG, sreg);
+> --        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_OP, op);
+> --        nftnl_expr_set(expr, NFT_EXPR_CMP_DATA, data, data_len);
+> -+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_SREG, sreg);
+> -+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_OP, op);
+> -+        nftnl_expr_set(expr, NFTNL_EXPR_CMP_DATA, data, data_len);
+> -
+> -         nftnl_rule_add_expr(rule, expr);
+> -
+> -@@ -575,8 +575,8 @@ static int build_rule_nat(const char *address,
+> unsigned char prefixlen,
+> -       expr = nftnl_expr_alloc("meta");
+> -       if (!expr)
+> -               goto err;
+> --      nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIFNAME);
+> --      nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
+> -+      nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIFNAME);
+> -+      nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
+> -       nftnl_rule_add_expr(rule, expr);
+> -       err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, interface,
+> -                       strlen(interface) + 1);
+> -@@ -677,8 +677,8 @@ static int build_rule_snat(int index, const char
+> *address,
+> -       expr = nftnl_expr_alloc("meta");
+> -       if (!expr)
+> -               goto err;
+> --      nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIF);
+> --      nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
+> -+      nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIF);
+> -+      nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
+> -       nftnl_rule_add_expr(rule, expr);
+> -       err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, &index, sizeof(index));
+> -       if (err < 0)
+> ---
+> -2.4.0
+> -
+> diff --git a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+> b/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+> deleted file mode 100644
+> index 45f78f10ea..0000000000
+> --- a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+> +++ /dev/null
+> @@ -1,87 +0,0 @@
+> -From 5c281d182ecdd0a424b64f7698f32467f8f67b71 Mon Sep 17 00:00:00 2001
+> -From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+> -Date: Wed, 9 Aug 2017 10:16:46 +0300
+> -Subject: dnsproxy: Fix crash on malformed DNS response
+> -
+> -If the response query string is malformed, we might access memory
+> -pass the end of "name" variable in parse_response().
+> -
+> -CVE: CVE-2017-12865
+> -Upstream-Status: Backport [https://git.kernel.org/pub/
+> scm/network/connman/connman.git/patch/?id=5c281d182ecdd0a424b64f7698f324
+> 67f8f67b71]
+> -
+> -Signed-off-by: Sona Sarmadi <sona.sarmadi@enea.com>
+> ----
+> - src/dnsproxy.c | 16 ++++++++++------
+> - 1 file changed, 10 insertions(+), 6 deletions(-)
+> -
+> -diff --git a/src/dnsproxy.c b/src/dnsproxy.c
+> -index 38ac5bf..40b4f15 100644
+> ---- a/src/dnsproxy.c
+> -+++ b/src/dnsproxy.c
+> -@@ -838,7 +838,7 @@ static struct cache_entry *cache_check(gpointer
+> request, int *qtype, int proto)
+> - static int get_name(int counter,
+> -               unsigned char *pkt, unsigned char *start, unsigned char
+> *max,
+> -               unsigned char *output, int output_max, int *output_len,
+> --              unsigned char **end, char *name, int *name_len)
+> -+              unsigned char **end, char *name, size_t max_name, int
+> *name_len)
+> - {
+> -       unsigned char *p;
+> -
+> -@@ -859,7 +859,7 @@ static int get_name(int counter,
+> -
+> -                       return get_name(counter + 1, pkt, pkt + offset,
+> max,
+> -                                       output, output_max, output_len,
+> end,
+> --                                      name, name_len);
+> -+                                      name, max_name, name_len);
+> -               } else {
+> -                       unsigned label_len = *p;
+> -
+> -@@ -869,6 +869,9 @@ static int get_name(int counter,
+> -                       if (*output_len > output_max)
+> -                               return -ENOBUFS;
+> -
+> -+                      if ((*name_len + 1 + label_len + 1) > max_name)
+> -+                              return -ENOBUFS;
+> -+
+> -                       /*
+> -                        * We need the original name in order to check
+> -                        * if this answer is the correct one.
+> -@@ -900,14 +903,14 @@ static int parse_rr(unsigned char *buf, unsigned
+> char *start,
+> -                       unsigned char *response, unsigned int
+> *response_size,
+> -                       uint16_t *type, uint16_t *class, int *ttl, int
+> *rdlen,
+> -                       unsigned char **end,
+> --                      char *name)
+> -+                      char *name, size_t max_name)
+> - {
+> -       struct domain_rr *rr;
+> -       int err, offset;
+> -       int name_len = 0, output_len = 0, max_rsp = *response_size;
+> -
+> -       err = get_name(0, buf, start, max, response, max_rsp,
+> --              &output_len, end, name, &name_len);
+> -+                      &output_len, end, name, max_name, &name_len);
+> -       if (err < 0)
+> -               return err;
+> -
+> -@@ -1033,7 +1036,8 @@ static int parse_response(unsigned char *buf, int
+> buflen,
+> -               memset(rsp, 0, sizeof(rsp));
+> -
+> -               ret = parse_rr(buf, ptr, buf + buflen, rsp, &rsp_len,
+> --                      type, class, ttl, &rdlen, &next, name);
+> -+                      type, class, ttl, &rdlen, &next, name,
+> -+                      sizeof(name) - 1);
+> -               if (ret != 0) {
+> -                       err = ret;
+> -                       goto out;
+> -@@ -1099,7 +1103,7 @@ static int parse_response(unsigned char *buf, int
+> buflen,
+> -                        */
+> -                       ret = get_name(0, buf, next - rdlen, buf + buflen,
+> -                                       rsp, rsp_len, &output_len, &end,
+> --                                      name, &name_len);
+> -+                                      name, sizeof(name) - 1, &name_len);
+> -                       if (ret != 0) {
+> -                               /* just ignore the error at this point */
+> -                               ptr = next;
+> ---
+> -cgit v1.1
+> -
+> diff --git a/meta/recipes-connectivity/connman/connman_1.34.bb
+> b/meta/recipes-connectivity/connman/connman_1.35.bb
+> similarity index 67%
+> rename from meta/recipes-connectivity/connman/connman_1.34.bb
+> rename to meta/recipes-connectivity/connman/connman_1.35.bb
+> index dc2c688f49..950946fe76 100644
+> --- a/meta/recipes-connectivity/connman/connman_1.34.bb
+> +++ b/meta/recipes-connectivity/connman/connman_1.35.bb
+> @@ -2,17 +2,15 @@ require connman.inc
 >
+>  SRC_URI  = "${KERNELORG_MIRROR}/linux/network/${BPN}/${BP}.tar.xz \
+>              file://0001-plugin.h-Change-visibility-to-default-for-debug-symb.patch
+> \
+> -            file://0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+> \
+>              file://0001-connman.service-stop-systemd-resolved-when-we-use-co.patch
+> \
+>              file://connman \
+>              file://no-version-scripts.patch \
+>              file://includes.patch \
+> -            file://CVE-2017-12865.patch \
+>              "
+>  SRC_URI_append_libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch
+> \
+>                               "
+>
+> -SRC_URI[md5sum] = "e200028702c831d5f535d20d61e608ef"
+> -SRC_URI[sha256sum] = "a9a0808c729c1f348fc36d8cecb52d
+> 19b72bc34cb411c502608cb0e0190fc71e"
+> +SRC_URI[md5sum] = "bae37b45ee9b3db5ec8115188f8a7652"
+> +SRC_URI[sha256sum] = "66d7deb98371545c6e417239a9b3b3
+> e3201c1529d08eedf40afbc859842cf2aa"
+>
+>  RRECOMMENDS_${PN} = "connman-conf"
+> --
+> 2.13.6
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
