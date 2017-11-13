@@ -1,46 +1,52 @@
-Return-Path: <george.mccollister@gmail.com>
-Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
-	[209.85.214.65])
-	by mail.openembedded.org (Postfix) with ESMTP id E702E786C5
+Return-Path: <ian@boundarydevices.com>
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 87E5A786BC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 21:13:07 +0000 (UTC)
-Received: by mail-it0-f65.google.com with SMTP id n134so2558580itg.3
+	Mon, 13 Nov 2017 21:51:17 +0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id 136so10836407qkd.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 13:13:09 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=TPfGVdouK/FQxNO7ZBOCiMgQghQuM7z2P2/hAkppBhE=;
-	b=ZyAmceC6aMb9JvpYvkeil2LKdafY6tkiA5wzMks5ZHOQU1GiRoigwrBpwSe/Hsw/Eb
-	YaLtvY8WnU1/Tgq8Cv8tULYO2TpoYMrzRqgkFtvegLRkNGBUyJlEdbT0Eu54the/qfsH
-	FzneoPnDOY4lwt+eJXHLdqlg/i+mMhhOyEy5URKfoskoyY1m5hSYxNq6LfMAJIGwVFHP
-	6asMnVdVGIFs3q/L1pciJmibsW+I8SWnNRQLJDZIprGqmezLjgd8mY9i3npQKo0D4f1y
-	8R9P6sCtd+qMu7hDo+jkldjRoI1I7aruCms6JVIgjanEMfzlY0GQDClmoSwF/XbZl1Aa
-	5SAw==
+	Mon, 13 Nov 2017 13:51:18 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=boundarydevices-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=J61OJ7YM5t8SlS9M9SZ9ZWRHJ0NKbkumVc7OxK/B8Oc=;
+	b=SjnAnhEYvR4MumTXiiwa7f/si66lceP7ecjHoX74Er4obfoGtvrF//T7h71leCOe++
+	W5QJ9klQn2V0extIiud+QxLxy9AfEeGYnC9f2Y90DIHJDpKJX1sAA89DMRGnSHReI72P
+	3Hz8fqCcKH8eAgXewNrbT9g6kpzXabVXRtkz2YLLuM1HS39kRa/TWQIAV24WHf9S2BPI
+	2aInXzSs5NnZheiPoCDG68ZBL1+yfQ3FqEMgRz0zgHXGh6QAwJpbIWMf8aZxyIEJT+l3
+	MjUO2NIctW7xeZJcgTTCDRsnVmAnjPcn8XfjHbKCYtXMK/negcnn+TFcEoGz/RXtxero
+	HGtA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=TPfGVdouK/FQxNO7ZBOCiMgQghQuM7z2P2/hAkppBhE=;
-	b=D0LQymXzayU4LtqcOLQ1L/mvjjLu49ACA6h2DWKzSuy1QjJ1kaho/O9TmmgAskegJc
-	PFW22f2GGJjjvSAGoNeZVmlx5wG03yi8CXPmFwEysqtENl4zYHqSaXF0RKMWPtd5dh2S
-	Ou5F5MtYfSF42b64MgAOXuzIiSDT/AIl+rWBgzTOnkUqWhLDChmh1m7C3US1rA/q1IGM
-	AnX40iH3UG4w8/CrEMY3Y+WUsaZLHjBQLNOMyo6iTi2fEG7oMqh+fNc8FPSnws9QEadr
-	qZyNBlyUp6gEskkrCQCb00boyAK3O6rhVXs8C6uPrjbK8A21ES67rPr/lVa1eDDcbYRj
-	amnw==
-X-Gm-Message-State: AJaThX5D2wWA0M7meTjtqCAXAu0qwNnCoMIOYhxgFdT597UebYpMLS2z
-	J7MoZG8HAblAVEa/F2IVsJN9
-X-Google-Smtp-Source: AGs4zMYlCQMrtDm0u0hQZQ+WczckwDXClmc2MkDpCiUMUsTdjH6Klo94VWewr95DQmxmhA1SFXwdQw==
-X-Received: by 10.36.208.207 with SMTP id m198mr11858255itg.131.1510607588713; 
-	Mon, 13 Nov 2017 13:13:08 -0800 (PST)
-Received: from localhost.localdomain ([216.21.169.52])
-	by smtp.gmail.com with ESMTPSA id k66sm4611181ita.6.2017.11.13.13.13.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 13 Nov 2017 13:13:08 -0800 (PST)
-From: George McCollister <george.mccollister@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Nov 2017 15:13:00 -0600
-Message-Id: <20171113211300.30138-1-george.mccollister@gmail.com>
-X-Mailer: git-send-email 2.15.0
-Subject: [meta-oe][PATCH] postgresql: Update to 9.4.15
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=J61OJ7YM5t8SlS9M9SZ9ZWRHJ0NKbkumVc7OxK/B8Oc=;
+	b=TGTctZw5qPs6Ph12Rw+L/9L+AwBAOgGXVagjKFtWhW5vjOBSQCjHnKk0bUKM4KkpHs
+	C8hi/i1kxWrJuw+pAG73/xlai1oXzzPlAV2lKkMinroK4Uv9bj1HP7SbMWiSgL7FgAnN
+	0XQGneT3m1/LdP7Rj7gZSQbpuoB81VuyrZfrzgp5/hTwQhLhIm5rFlt/zX5EKcvGMO65
+	1DEcd8j07Ka5Up5bNjRFT15XPPKvcGO7t4r3Vt2VUlD0lVfON6FXORAf/SbI1hX0QlIf
+	LlpqYMCWcxe3pBTZ7gwccTVUsASx06+/cgoV+d4X4oXtIqq/uiTTT3t7/+Hv9goghnw8
+	6SqQ==
+X-Gm-Message-State: AJaThX6Z4u5ZLkHaJglf7GUOtsfMWXHRUtofWqZAq/WuLU0rTDNRxvqC
+	x/oJLV4vK8zDD71Q527YZfcLCBhBbLoR6DUKC3AAXw==
+X-Google-Smtp-Source: AGs4zMZHJi7TwB6UwyE2I6eZ3BkfMsicfFmjNdS0y/O6DQzolroITu7CS2x1S0U68e5cCERWtmXLg53xEWbVviCwa1o=
+X-Received: by 10.55.156.74 with SMTP id f71mr16260335qke.27.1510609878325;
+	Mon, 13 Nov 2017 13:51:18 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.200.37.203 with HTTP; Mon, 13 Nov 2017 13:51:17 -0800 (PST)
+In-Reply-To: <CAP9ODKqhY9miP9wf0rv_mhtyn9_dV6-Cm3=J6yOhmx-Y6qpGiw@mail.gmail.com>
+References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CAHUNapRKjZZ=yCYpfrm3CDVZez0JbLeaKHaZg2J3WhjBvRR6jg@mail.gmail.com>
+	<CADseiP=dhrkCrqBnO+g-HZQZaGgf1ywZwFcd-0bpE9K-qhALPQ@mail.gmail.com>
+	<CAP9ODKqhY9miP9wf0rv_mhtyn9_dV6-Cm3=J6yOhmx-Y6qpGiw@mail.gmail.com>
+From: Ian Coolidge <ian@boundarydevices.com>
+Date: Mon, 13 Nov 2017 13:51:17 -0800
+Message-ID: <CADseiPnGDYTz-Ht=kTxGt+UpfeNx-Q6dGY-jOa=11JgvOEcuGQ@mail.gmail.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,39 +59,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Nov 2017 21:13:08 -0000
+X-List-Received-Date: Mon, 13 Nov 2017 21:51:17 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Update to 9.4.15 to pickup "a variety of fixes" from 9.4.14.
-Included are fixes for CVE-2017-15098 and CVE-2017-12172.
+Where is this commit? I don't see 568227133be3f9f015679df3525f6c4f86304fd0
+in meta-browser?
 
-Upstream release notes:
-https://www.postgresql.org/docs/9.4/static/release-9-4-15.html
+On Sat, Nov 11, 2017 at 9:25 AM, Otavio Salvador <
+otavio.salvador@ossystems.com.br> wrote:
 
-Backporting all supported stable branches to this version should be
-considered.
-
-Signed-off-by: George McCollister <george.mccollister@gmail.com>
----
- .../postgresql/{postgresql_9.4.14.bb => postgresql_9.4.15.bb}         | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-support/postgresql/{postgresql_9.4.14.bb => postgresql_9.4.15.bb} (67%)
-
-diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
-similarity index 67%
-rename from meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
-rename to meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
-index 5a78ea3ed..eec099a12 100644
---- a/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
-+++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
-@@ -11,5 +11,5 @@ do_compile_prepend_libc-musl() {
-     sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
- }
- 
--SRC_URI[md5sum] = "2b7e2a2b0232063b68b3f8a0a01902bd"
--SRC_URI[sha256sum] = "8e7df23a104b057b360d03180ebcb67f645e198a4a0bee94bf56b2bc9505ec6b"
-+SRC_URI[md5sum] = "0aada0833a9208ae5fab966c73c39379"
-+SRC_URI[sha256sum] = "12bfb3c7e8e45515ef921ad365e122682a5c4935dcc0032644433af2de31acc4"
--- 
-2.15.0
-
+> On Fri, Nov 10, 2017 at 10:10 PM, Ian Coolidge <ian@boundarydevices.com>
+> wrote:
+> ...
+> > Are there any obvious flags or compile options I'm missing here? I
+> haven't
+> > tied debugging into this yet, which is my next step here. Just wanted to
+> > know if I was missing something obvious.
+>
+> Maybe this fixes it?
+>
+> commit 568227133be3f9f015679df3525f6c4f86304fd0
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Tue Nov 7 15:26:52 2017 -0800
+>
+>     gcc7/gcc6: Fix unaligned STRD issue on ARM
+>
+>     Backport
+>     https://gcc.gnu.org/bugzilla/show_bug.cgi?id=82445
+>
+>     Fixes [YOCTO 12297]
+>
+>     Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>     Signed-off-by: Ross Burton <ross.burton@intel.com>
+>
+> Please check if it helps you, otherwise please open a github issue so
+> we can keep track of it.
+>
+> --
+> Otavio Salvador                             O.S. Systems
+> http://www.ossystems.com.br        http://code.ossystems.com.br
+> Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+>
 
