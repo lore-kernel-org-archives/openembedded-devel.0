@@ -1,18 +1,46 @@
-Return-Path: <daniel@zonque.org>
-Received: from mail.bugwerft.de (mail.bugwerft.de [46.23.86.59])
-	by mail.openembedded.org (Postfix) with ESMTP id F2D0E71B99
+Return-Path: <george.mccollister@gmail.com>
+Received: from mail-it0-f65.google.com (mail-it0-f65.google.com
+	[209.85.214.65])
+	by mail.openembedded.org (Postfix) with ESMTP id E702E786C5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 20:53:26 +0000 (UTC)
-Received: from localhost.localdomain (pD95EFCD5.dip0.t-ipconnect.de
-	[217.94.252.213])
-	by mail.bugwerft.de (Postfix) with ESMTPSA id C29942800CF;
-	Mon, 13 Nov 2017 20:53:17 +0000 (UTC)
-From: Daniel Mack <daniel@zonque.org>
+	Mon, 13 Nov 2017 21:13:07 +0000 (UTC)
+Received: by mail-it0-f65.google.com with SMTP id n134so2558580itg.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Nov 2017 13:13:09 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=TPfGVdouK/FQxNO7ZBOCiMgQghQuM7z2P2/hAkppBhE=;
+	b=ZyAmceC6aMb9JvpYvkeil2LKdafY6tkiA5wzMks5ZHOQU1GiRoigwrBpwSe/Hsw/Eb
+	YaLtvY8WnU1/Tgq8Cv8tULYO2TpoYMrzRqgkFtvegLRkNGBUyJlEdbT0Eu54the/qfsH
+	FzneoPnDOY4lwt+eJXHLdqlg/i+mMhhOyEy5URKfoskoyY1m5hSYxNq6LfMAJIGwVFHP
+	6asMnVdVGIFs3q/L1pciJmibsW+I8SWnNRQLJDZIprGqmezLjgd8mY9i3npQKo0D4f1y
+	8R9P6sCtd+qMu7hDo+jkldjRoI1I7aruCms6JVIgjanEMfzlY0GQDClmoSwF/XbZl1Aa
+	5SAw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=TPfGVdouK/FQxNO7ZBOCiMgQghQuM7z2P2/hAkppBhE=;
+	b=D0LQymXzayU4LtqcOLQ1L/mvjjLu49ACA6h2DWKzSuy1QjJ1kaho/O9TmmgAskegJc
+	PFW22f2GGJjjvSAGoNeZVmlx5wG03yi8CXPmFwEysqtENl4zYHqSaXF0RKMWPtd5dh2S
+	Ou5F5MtYfSF42b64MgAOXuzIiSDT/AIl+rWBgzTOnkUqWhLDChmh1m7C3US1rA/q1IGM
+	AnX40iH3UG4w8/CrEMY3Y+WUsaZLHjBQLNOMyo6iTi2fEG7oMqh+fNc8FPSnws9QEadr
+	qZyNBlyUp6gEskkrCQCb00boyAK3O6rhVXs8C6uPrjbK8A21ES67rPr/lVa1eDDcbYRj
+	amnw==
+X-Gm-Message-State: AJaThX5D2wWA0M7meTjtqCAXAu0qwNnCoMIOYhxgFdT597UebYpMLS2z
+	J7MoZG8HAblAVEa/F2IVsJN9
+X-Google-Smtp-Source: AGs4zMYlCQMrtDm0u0hQZQ+WczckwDXClmc2MkDpCiUMUsTdjH6Klo94VWewr95DQmxmhA1SFXwdQw==
+X-Received: by 10.36.208.207 with SMTP id m198mr11858255itg.131.1510607588713; 
+	Mon, 13 Nov 2017 13:13:08 -0800 (PST)
+Received: from localhost.localdomain ([216.21.169.52])
+	by smtp.gmail.com with ESMTPSA id k66sm4611181ita.6.2017.11.13.13.13.07
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Nov 2017 13:13:08 -0800 (PST)
+From: George McCollister <george.mccollister@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Nov 2017 21:53:05 +0100
-Message-Id: <20171113205305.24661-1-daniel@zonque.org>
-X-Mailer: git-send-email 2.13.6
-Subject: [meta][PATCH] connman: bump to version 1.35
+Date: Mon, 13 Nov 2017 15:13:00 -0600
+Message-Id: <20171113211300.30138-1-george.mccollister@gmail.com>
+X-Mailer: git-send-email 2.15.0
+Subject: [meta-oe][PATCH] postgresql: Update to 9.4.15
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -25,219 +53,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Nov 2017 20:53:27 -0000
+X-List-Received-Date: Mon, 13 Nov 2017 21:13:08 -0000
 
-Two patches are no longer needed, remove them.
+Update to 9.4.15 to pickup "a variety of fixes" from 9.4.14.
+Included are fixes for CVE-2017-15098 and CVE-2017-12172.
 
-Signed-off-by: Daniel Mack <daniel@zonque.org>
+Upstream release notes:
+https://www.postgresql.org/docs/9.4/static/release-9-4-15.html
+
+Backporting all supported stable branches to this version should be
+considered.
+
+Signed-off-by: George McCollister <george.mccollister@gmail.com>
 ---
- ...ll-nftables-fix-build-with-libnftnl-1.0.7.patch | 72 ------------------
- .../connman/connman/CVE-2017-12865.patch           | 87 ----------------------
- .../connman/{connman_1.34.bb => connman_1.35.bb}   |  6 +-
- 3 files changed, 2 insertions(+), 163 deletions(-)
- delete mode 100644 meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
- delete mode 100644 meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
- rename meta/recipes-connectivity/connman/{connman_1.34.bb => connman_1.35.bb} (67%)
+ .../postgresql/{postgresql_9.4.14.bb => postgresql_9.4.15.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/postgresql/{postgresql_9.4.14.bb => postgresql_9.4.15.bb} (67%)
 
-diff --git a/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch b/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
-deleted file mode 100644
-index cfafbd1271..0000000000
---- a/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
-+++ /dev/null
-@@ -1,72 +0,0 @@
--From 4058ce3186a99fd5f03350fc11a7fc8d38b6a381 Mon Sep 17 00:00:00 2001
--From: "Maxin B. John" <maxin.john@intel.com>
--Date: Mon, 8 May 2017 10:53:18 +0300
--Subject: [PATCH] firewall-nftables: fix build with libnftnl-1.0.7
--
--We need these updates to accommodate the changes caused by the following
--commit in libnftnl-1.0.7
--
--commit 907a9f8e5a93f5bcd449643eb3916a656d634758
--Author: Pablo Neira Ayuso <pablo@netfilter.org>
--Date:   Tue Dec 20 13:47:11 2016 +0100
--
--src: get rid of aliases and compat
--
--This machinery was introduced to avoid sudden compilation breakage of
--old nftables releases. With the upcoming release of 0.7 (and 0.6 which
--is now 6 months old) this is not required anymore.
--
--Moreover, users gain nothing from older releases since they are
--half-boiled and buggy.
--
--So let's get rid of aliases now. Bump LIBVERSION and update map file.
--
--Upstream-Status: Submitted
--
--Signed-off-by: Maxin B. John <maxin.john@intel.com>
-----
-- src/firewall-nftables.c | 14 +++++++-------
-- 1 file changed, 7 insertions(+), 7 deletions(-)
--
--diff --git a/src/firewall-nftables.c b/src/firewall-nftables.c
--index 583d1c4..83b137b 100644
----- a/src/firewall-nftables.c
--+++ b/src/firewall-nftables.c
--@@ -387,9 +387,9 @@ static int add_cmp(struct nftnl_rule *rule, uint32_t sreg, uint32_t op,
--         if (!expr)
--                 return -ENOMEM;
-- 
---        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_SREG, sreg);
---        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_OP, op);
---        nftnl_expr_set(expr, NFT_EXPR_CMP_DATA, data, data_len);
--+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_SREG, sreg);
--+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_OP, op);
--+        nftnl_expr_set(expr, NFTNL_EXPR_CMP_DATA, data, data_len);
-- 
--         nftnl_rule_add_expr(rule, expr);
-- 
--@@ -575,8 +575,8 @@ static int build_rule_nat(const char *address, unsigned char prefixlen,
-- 	expr = nftnl_expr_alloc("meta");
-- 	if (!expr)
-- 		goto err;
---	nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIFNAME);
---	nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
--+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIFNAME);
--+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
-- 	nftnl_rule_add_expr(rule, expr);
-- 	err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, interface,
-- 			strlen(interface) + 1);
--@@ -677,8 +677,8 @@ static int build_rule_snat(int index, const char *address,
-- 	expr = nftnl_expr_alloc("meta");
-- 	if (!expr)
-- 		goto err;
---	nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIF);
---	nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
--+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIF);
--+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
-- 	nftnl_rule_add_expr(rule, expr);
-- 	err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, &index, sizeof(index));
-- 	if (err < 0)
---- 
--2.4.0
--
-diff --git a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch b/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
-deleted file mode 100644
-index 45f78f10ea..0000000000
---- a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
-+++ /dev/null
-@@ -1,87 +0,0 @@
--From 5c281d182ecdd0a424b64f7698f32467f8f67b71 Mon Sep 17 00:00:00 2001
--From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
--Date: Wed, 9 Aug 2017 10:16:46 +0300
--Subject: dnsproxy: Fix crash on malformed DNS response
--
--If the response query string is malformed, we might access memory
--pass the end of "name" variable in parse_response().
--
--CVE: CVE-2017-12865
--Upstream-Status: Backport [https://git.kernel.org/pub/scm/network/connman/connman.git/patch/?id=5c281d182ecdd0a424b64f7698f32467f8f67b71]
--
--Signed-off-by: Sona Sarmadi <sona.sarmadi@enea.com>
-----
-- src/dnsproxy.c | 16 ++++++++++------
-- 1 file changed, 10 insertions(+), 6 deletions(-)
--
--diff --git a/src/dnsproxy.c b/src/dnsproxy.c
--index 38ac5bf..40b4f15 100644
----- a/src/dnsproxy.c
--+++ b/src/dnsproxy.c
--@@ -838,7 +838,7 @@ static struct cache_entry *cache_check(gpointer request, int *qtype, int proto)
-- static int get_name(int counter,
-- 		unsigned char *pkt, unsigned char *start, unsigned char *max,
-- 		unsigned char *output, int output_max, int *output_len,
---		unsigned char **end, char *name, int *name_len)
--+		unsigned char **end, char *name, size_t max_name, int *name_len)
-- {
-- 	unsigned char *p;
-- 
--@@ -859,7 +859,7 @@ static int get_name(int counter,
-- 
-- 			return get_name(counter + 1, pkt, pkt + offset, max,
-- 					output, output_max, output_len, end,
---					name, name_len);
--+					name, max_name, name_len);
-- 		} else {
-- 			unsigned label_len = *p;
-- 
--@@ -869,6 +869,9 @@ static int get_name(int counter,
-- 			if (*output_len > output_max)
-- 				return -ENOBUFS;
-- 
--+			if ((*name_len + 1 + label_len + 1) > max_name)
--+				return -ENOBUFS;
--+
-- 			/*
-- 			 * We need the original name in order to check
-- 			 * if this answer is the correct one.
--@@ -900,14 +903,14 @@ static int parse_rr(unsigned char *buf, unsigned char *start,
-- 			unsigned char *response, unsigned int *response_size,
-- 			uint16_t *type, uint16_t *class, int *ttl, int *rdlen,
-- 			unsigned char **end,
---			char *name)
--+			char *name, size_t max_name)
-- {
-- 	struct domain_rr *rr;
-- 	int err, offset;
-- 	int name_len = 0, output_len = 0, max_rsp = *response_size;
-- 
-- 	err = get_name(0, buf, start, max, response, max_rsp,
---		&output_len, end, name, &name_len);
--+			&output_len, end, name, max_name, &name_len);
-- 	if (err < 0)
-- 		return err;
-- 
--@@ -1033,7 +1036,8 @@ static int parse_response(unsigned char *buf, int buflen,
-- 		memset(rsp, 0, sizeof(rsp));
-- 
-- 		ret = parse_rr(buf, ptr, buf + buflen, rsp, &rsp_len,
---			type, class, ttl, &rdlen, &next, name);
--+			type, class, ttl, &rdlen, &next, name,
--+			sizeof(name) - 1);
-- 		if (ret != 0) {
-- 			err = ret;
-- 			goto out;
--@@ -1099,7 +1103,7 @@ static int parse_response(unsigned char *buf, int buflen,
-- 			 */
-- 			ret = get_name(0, buf, next - rdlen, buf + buflen,
-- 					rsp, rsp_len, &output_len, &end,
---					name, &name_len);
--+					name, sizeof(name) - 1, &name_len);
-- 			if (ret != 0) {
-- 				/* just ignore the error at this point */
-- 				ptr = next;
---- 
--cgit v1.1
--
-diff --git a/meta/recipes-connectivity/connman/connman_1.34.bb b/meta/recipes-connectivity/connman/connman_1.35.bb
+diff --git a/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb b/meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
 similarity index 67%
-rename from meta/recipes-connectivity/connman/connman_1.34.bb
-rename to meta/recipes-connectivity/connman/connman_1.35.bb
-index dc2c688f49..950946fe76 100644
---- a/meta/recipes-connectivity/connman/connman_1.34.bb
-+++ b/meta/recipes-connectivity/connman/connman_1.35.bb
-@@ -2,17 +2,15 @@ require connman.inc
+rename from meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
+rename to meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
+index 5a78ea3ed..eec099a12 100644
+--- a/meta-oe/recipes-support/postgresql/postgresql_9.4.14.bb
++++ b/meta-oe/recipes-support/postgresql/postgresql_9.4.15.bb
+@@ -11,5 +11,5 @@ do_compile_prepend_libc-musl() {
+     sed -i -e 's/\-lnsl//g' ${B}/src/Makefile.global
+ }
  
- SRC_URI  = "${KERNELORG_MIRROR}/linux/network/${BPN}/${BP}.tar.xz \
-             file://0001-plugin.h-Change-visibility-to-default-for-debug-symb.patch \
--            file://0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch \
-             file://0001-connman.service-stop-systemd-resolved-when-we-use-co.patch \
-             file://connman \
-             file://no-version-scripts.patch \
-             file://includes.patch \
--            file://CVE-2017-12865.patch \
-             "
- SRC_URI_append_libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch \
-                              "
- 
--SRC_URI[md5sum] = "e200028702c831d5f535d20d61e608ef"
--SRC_URI[sha256sum] = "a9a0808c729c1f348fc36d8cecb52d19b72bc34cb411c502608cb0e0190fc71e"
-+SRC_URI[md5sum] = "bae37b45ee9b3db5ec8115188f8a7652"
-+SRC_URI[sha256sum] = "66d7deb98371545c6e417239a9b3b3e3201c1529d08eedf40afbc859842cf2aa"
- 
- RRECOMMENDS_${PN} = "connman-conf"
+-SRC_URI[md5sum] = "2b7e2a2b0232063b68b3f8a0a01902bd"
+-SRC_URI[sha256sum] = "8e7df23a104b057b360d03180ebcb67f645e198a4a0bee94bf56b2bc9505ec6b"
++SRC_URI[md5sum] = "0aada0833a9208ae5fab966c73c39379"
++SRC_URI[sha256sum] = "12bfb3c7e8e45515ef921ad365e122682a5c4935dcc0032644433af2de31acc4"
 -- 
-2.13.6
+2.15.0
 
 
