@@ -1,23 +1,24 @@
-Return-Path: <dv@pseudoterminal.org>
-Received: from ptmx.org (ptmx.org [178.63.28.110])
-	by mail.openembedded.org (Postfix) with ESMTP id 2329678411
+Return-Path: <Jackie.Huang@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id A674871D9F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Nov 2017 23:41:59 +0000 (UTC)
-Received: from [172.16.1.14] (62-178-118-86.cable.dynamic.surfer.at
-	[62.178.118.86]) by ptmx.org (Postfix) with ESMTPSA id 525C74D0A2
+	Mon, 13 Nov 2017 08:05:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vAD85wBg001400
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 00:41:58 +0100 (CET)
-To: openembedded-devel@lists.openembedded.org
-References: <eb34c8f1-1c8a-f6cf-46ef-8b91159b44d3@pseudoterminal.org>
-	<171541e3-15ee-6043-c63d-6631bed98809@zonque.org>
-From: Carlos Rafael Giani <dv@pseudoterminal.org>
-Message-ID: <a0679398-21f0-7e4d-a413-ec01fcdc8b22@pseudoterminal.org>
-Date: Mon, 13 Nov 2017 00:41:53 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
+	Mon, 13 Nov 2017 00:05:58 -0800 (PST)
+Received: from pek-hostel-deb01.wrs.com (128.224.153.151) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Mon, 13 Nov 2017 00:05:57 -0800
+From: <jackie.huang@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 13 Nov 2017 16:04:17 +0800
+Message-ID: <cover.1510560146.git.jackie.huang@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <171541e3-15ee-6043-c63d-6631bed98809@zonque.org>
-Subject: Re: [meta-qt5] Exec format error while building webengine 5.9 (rocko branch)
+Subject: [meta-networking][PATCH 0/2] networkmanager/polkit: add consolekit only when x11 is enabled
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,75 +31,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Nov 2017 23:42:00 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 13 Nov 2017 08:05:57 -0000
+Content-Type: text/plain
 
-I dug deeper in this, and there is something odd going on with the patch 
-functionality. This problem is caused by 
-recipes-qt/qt5/qtwebengine/0002-chromium-Force-host-toolchain-configuration.patch 
-not being applied - but only if I add to SRC_URI another patch in a 
-different layer. What is even weirder is that if I modify this patches' 
-internal paths instead of adding "patchdir=src/3rdparty/" to the SRC_URI 
-line, the problem does not occur.
+From: Jackie Huang <jackie.huang@windriver.com>
 
-I tracked it down to a problem in patch_do_patch in 
-meta/classes/patch.bbclass. For this patch, the "if not patchdir in 
-classes:" check apparently fails. The end result is that quilt push is 
-called, but not pop, and somehow, this messes up quilt, so this patch 
-isn't applied. I currently do not know why.
+--
+The following changes since commit 5d6d21e98ed594809169d2b2f6964e90a3369a96:
 
+  libreport: fix Nothing RPROVIDES 'lib32-python3-libreport' (2017-10-27 16:39:34 +0000)
 
-On 2017-11-09 08:22, Daniel Mack wrote:
-> On Tuesday, October 31, 2017 11:11 AM, Carlos Rafael Giani wrote:
->> I am having problems building the current WebEngine. Initially, it
->> builds some tools. It seems that it does so by using the cross compiler,
->> and not the host one, which could explain the problem I experience:
->>
->>
->> Once GN is built:
->>
->> [321/330] CC base/third_party/superfasthash/superfasthash.o
->> [322/330] CC base/third_party/dynamic_annotations/dynamic_annotations.o
->> [323/330] AR dynamic_annotations.a
->> [324/330] CXX tools/gn/command_clean.o
->> [325/330] CXX tools/gn/loader.o
->> [326/330] CXX tools/gn/gn_main.o
->> [327/330] CXX tools/gn/bundle_data_target_generator.o
->> [328/330] CXX tools/gn/desc_builder.o
->> [329/330] AR gn_lib.a
->> [330/330] LINK gn
->> Building gn manually in a temporary directory for bootstrapping...
->> Building gn using itself to out/Release...
->>
->>
->> I get this error:
->>
->> OSError: [Errno 8] Exec format error
->> Project ERROR: GN build error!
-> FWIW, I just ran a build on x86_64 for aarch64 with poky, meta-oe and
-> meta-qt5 in their 'rocky' branches, and it worked just fine.
->
->> Running "file" on build/src/3rdparty/chromium/tools/gn/out/Release/gn
->> indeed shows that this was built with the wrong compiler:
->>
->> build/src/3rdparty/chromium/tools/gn/out/Release/gn: ELF 32-bit LSB
->> executable, ARM, EABI5 version 1 (GNU/Linux), dynamically linked
-> On my machine:
->
->    build/src/3rdparty/chromium/tools/gn/out/Release/gn: ELF 64-bit LSB
-> executable, x86-64, version 1 (GNU/Linux), dynamically linked,
-> interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32,
-> BuildID[sha1]=aae0a9a51c01e07511994ab36a0a6d4d2a645364, stripped
->
->> So, anybody experienced the same problem?
-> I can't tell you what's wrong on your end, but at least it doesn't seem
-> to be a general problem.
->
->
-> HTH,
-> Daniel
->
+are available in the git repository at:
+
+  git://git.pokylinux.org/poky-contrib.git jhuang0/d_consolekit_171113_1
+  http://git.pokylinux.org/cgit.cgi//log/?h=jhuang0/d_consolekit_171113_1
+
+Jackie Huang (2):
+  networkmanager: add consolekit only when x11 is enabled
+  polkit: add consolekit only when x11 is enabled
+
+ .../recipes-connectivity/networkmanager/networkmanager_1.4.4.bb       | 3 ++-
+ meta-oe/recipes-extended/polkit/polkit_0.113.bb                       | 4 +++-
+ 2 files changed, 5 insertions(+), 2 deletions(-)
+
+-- 
+2.11.0
 
 
