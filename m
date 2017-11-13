@@ -1,55 +1,49 @@
 Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f196.google.com (mail-io0-f196.google.com
-	[209.85.223.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 55C5D78658
+Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
+	[209.85.128.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9220178670
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 10:46:17 +0000 (UTC)
-Received: by mail-io0-f196.google.com with SMTP id d66so20148248ioe.5
+	Mon, 13 Nov 2017 13:21:30 +0000 (UTC)
+Received: by mail-wr0-f195.google.com with SMTP id u97so14435741wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Nov 2017 02:46:18 -0800 (PST)
+	Mon, 13 Nov 2017 05:21:32 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=AXZwlrv2vCYKl73FGTyRBAcJ7C+DmTQQJ4GxD5cGLO8=;
-	b=Nn0he7NmJSwXOHNfGiTSruQAAqdm+othD87LRJIb5BGIxwmPzROogfNwPer5w+BvDD
-	gE8h3g08MX2wcF4NufdyWGYbmSZP9DVqrhwtQ2irCLhsbOYD1uKxkteIwGhDRoqoHu+m
-	J2xwYg5EDWgt2XYp+kfPLkbXNpWe8gdYdEqmYlRk6Yrb2lMvvWsSFGJR/FjTxGe04OYc
-	Bxgw3SkGdfBn6Y1pIgZnGWt2WGSUf34+lGCSAyHPgRo7cxWqXwVO7NEN1ZqmSuowHF6a
-	5juAyo9XUN1qsuU5UECbL5X88akNcdofKiUQBTrEdszxgMQMDPXiipBlWbXshJp6Kdso
-	PiMA==
+	h=from:to:subject:date:message-id;
+	bh=S8D1QULhfBnFYA2dHTy9et0eHNWKBoigMpBUAwhoflE=;
+	b=M2QXbYvrNa0Xn69xgXcGDkvRAlLvMOokPnC71kmTpoodeSkQWZj1MQ2+HCRBz9CF9w
+	1J1fb+4ADSLd+5sDmqrFa0wkCU6MLq4kqqol46LTBJeUPru0Ax1qaoRNWJiGxL2zLdT8
+	7TJvOANow4qYz0WDK9udmGoDiTtn9Cguxg+tDVqNF52ie/mq5fT27kdhd4qMoMwORTok
+	GYBwJ31conssAUSQmcGlElxJFjWJrgblEW/pd/mg9RoTfTV2zm94UNQptBRg+e1Abel+
+	z7As8WJinud0cY0wBkas4q+jBk1IIkemo0sAAl3rhnL/NL4C/ydO9cun5h1Ne0wlZkJc
+	lN9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=AXZwlrv2vCYKl73FGTyRBAcJ7C+DmTQQJ4GxD5cGLO8=;
-	b=OjAJ8kTccGrxszqgGCtFdbsUwsl5sUoySAeJOx2kAH50ds41qvUA/DupIUz/W70jRm
-	R6LeiKV2SieTQKsqll7F3Yiz3rJTe4uqGheAIzarZWJsDoafBTbSd4WfM37eTZk6HRwk
-	/kn05To83BdGcJR7NLsLQcbsHjH4tGI2wHbUtW2Ikz1OlqGoEnuRq/rE8D6RhfeIKcsD
-	9YLd0MCvK1E35moznRkaKnvxSIhiF0K8wgCF73w8efBd9+D1RfzJPC3F581zTXFtf9As
-	XTUXf5DYtbh67W0najYZ8c06hyIvl5UCr7IXV+APzyMjG7IRfk+RzcPLyEZ67QJUIi7n
-	L/Cg==
-X-Gm-Message-State: AJaThX77WZhsi9bICrp1ReoKvNEYwgDljp3IqiX/eIVKVpzznIyctuCt
-	LXZgkqdq+R5P3CsUCYOIuTv6CF3nmx2jTZDpz4L60A==
-X-Google-Smtp-Source: AGs4zMYqeIrWE9+CqZQsyqdLeUnUvLyFVr4upg6M1NywmDbaqE6/NK58zPfyns9YbTu4arNwL/NLyZsVSWqFEqzH+f8=
-X-Received: by 10.107.11.228 with SMTP id 97mr6269894iol.227.1510569978491;
-	Mon, 13 Nov 2017 02:46:18 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.107.171.196 with HTTP; Mon, 13 Nov 2017 02:45:58 -0800 (PST)
-In-Reply-To: <CAMKF1srK9j6UVu=9dHQOSREauBm_Pv89TF+fen_xXpFT3=C4Ng@mail.gmail.com>
-References: <151032511199.27841.6992651845996774565@git.openembedded.org>
-	<20171110144512.3538E233675@git.openembedded.org>
-	<CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
-	<CA+chaQc5S7D_gbcwPNR2+TmoB+Qxh1X3OdwzJNc5HSPDjMuAZg@mail.gmail.com>
-	<CAMKF1srK9j6UVu=9dHQOSREauBm_Pv89TF+fen_xXpFT3=C4Ng@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Mon, 13 Nov 2017 10:45:58 +0000
-Message-ID: <CAJTo0LZFVJMx02aUtpfwaKPQ7bf6NfNDdCgLf4-SHhR2Dm59oQ@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [oe-commits] [openembedded-core] 04/44: db: don't provide virtual/db
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=S8D1QULhfBnFYA2dHTy9et0eHNWKBoigMpBUAwhoflE=;
+	b=hw2Lt5IKnopg1MoEV0Z87xsKYc5YFpQNqJcGpDkOn+90qf8hnTZbFIj33U9fLM15kL
+	Odbe9QSBgP6XcsiffUa5aC71BmzX/eev7cxoS/cgms5n7rBIqnBDupVfkT8pL53CWGaG
+	C7XkiehtQTreqWguzsqO2AQX3XHtxI4JeWIs0hY8prX4c6vmIDfr3W9TjtaSoWfWMvrb
+	m9EvWVzzTICaFQI4+8184LpMIGPimJxfbtD5szwBTdNCyARzySBpP+Gtr9T+M4W+JnaE
+	RUT8TMOIRDYgfH0ZJMKJGdhYNrfoHCzvN4j/ocMqoNx0eGiopGcb0HHCZxpSZjZsPfwM
+	VkzQ==
+X-Gm-Message-State: AJaThX4TGpP/7+Bpnns1CRqbv9JqzgTxEo0EThc+AeCnB73y11aNJ9vu
+	niZaovDobZWviALpf13P4BSzh69o
+X-Google-Smtp-Source: AGs4zMZoadvWPSYJ3Q+6VaXMMcs1DzYIbdetbmSJ+alRxJcQJiBgX5vWV4qn5CT16SWOIB0sr4uPzw==
+X-Received: by 10.223.184.42 with SMTP id h39mr7593377wrf.38.1510579290898;
+	Mon, 13 Nov 2017 05:21:30 -0800 (PST)
+Received: from flashheart.burtonini.com (home.burtonini.com. [81.2.106.35])
+	by smtp.gmail.com with ESMTPSA id
+	m198sm19788050wmg.20.2017.11.13.05.21.29
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Mon, 13 Nov 2017 05:21:30 -0800 (PST)
+From: Ross Burton <ross.burton@intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 13 Nov 2017 13:21:26 +0000
+Message-Id: <20171113132126.30759-1-ross.burton@intel.com>
+X-Mailer: git-send-email 2.11.0
+Subject: [PATCH] pcmciautils: add (from oe-core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,111 +56,254 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Nov 2017 10:46:17 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 13 Nov 2017 13:21:30 -0000
 
-Apologies, I must have failed to submit that series after it passed an
-autobuilder run.  Patches for meta-oe sent.
+Modern hardware doesn't really use PCMCIA so the support has been moved out of
+oe-core.  Move into meta-oe for people who still want it.
 
-Ross
+Signed-off-by: Ross Burton <ross.burton@intel.com>
+---
+ .../pcmciautils/pcmciautils/lex_sys_types.patch    |  21 +++++
+ .../pcmciautils/pcmciautils/makefile_fix.patch     | 101 +++++++++++++++++++++
+ .../pcmciautils/pcmciautils/makefile_race.patch    |  43 +++++++++
+ meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb |  41 +++++++++
+ 4 files changed, 206 insertions(+)
+ create mode 100644 meta-oe/recipes-bsp/pcmciautils/pcmciautils/lex_sys_types.patch
+ create mode 100644 meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_fix.patch
+ create mode 100644 meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
+ create mode 100644 meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
 
-On 12 November 2017 at 17:22, Khem Raj <raj.khem@gmail.com> wrote:
+diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils/lex_sys_types.patch b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/lex_sys_types.patch
+new file mode 100644
+index 000000000..d4c2bed15
+--- /dev/null
++++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/lex_sys_types.patch
+@@ -0,0 +1,21 @@
++Include sys/types.h for u_long definition
++
++Fix errors like
++In file included from src/lex_config.l:34:0:
++src/yacc_config.y:45:5: error: unknown type name 'u_long'
++     u_long num;
++
++Signed-off-by: Khem Raj <raj.khem@gmail.com>
++Upstream-Status: Pending
++Index: pcmciautils-018/src/lex_config.l
++===================================================================
++--- pcmciautils-018.orig/src/lex_config.l
+++++ pcmciautils-018/src/lex_config.l
++@@ -22,6 +22,7 @@
++ #include <unistd.h>
++ #include <string.h>
++ #include <syslog.h>
+++#include <sys/types.h>
++ 
++ #ifdef HAS_WORDEXP
++ #include <wordexp.h>
+diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_fix.patch b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_fix.patch
+new file mode 100644
+index 000000000..7b0ce2119
+--- /dev/null
++++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_fix.patch
+@@ -0,0 +1,101 @@
++Upstream-Status: Inappropriate [configuration]
++
++Hardcoded paths are bad...
++This lets us use the install from OE's native sysroot
++rebase the patch to 018, removing hardcoded path for true
++as well. Removing of -D in install invocation is a little
++questionable, is it some GNU extention?
++
++-Khem Raj <raj.khem@gmail.com>
++
++Index: pcmciautils-018/Makefile
++===================================================================
++--- pcmciautils-018.orig/Makefile
+++++ pcmciautils-018/Makefile
++@@ -76,7 +76,7 @@ sbindir =	${exec_prefix}/sbin
++ mandir =	${prefix}/usr/share/man
++ udevdir =	${prefix}/lib/udev
++ 
++-INSTALL = /usr/bin/install -c
+++INSTALL = install -c
++ INSTALL_PROGRAM = ${INSTALL}
++ INSTALL_DATA  = ${INSTALL} -m 644
++ INSTALL_SCRIPT = ${INSTALL_PROGRAM}
++@@ -180,7 +180,7 @@ endif
++ # if DEBUG is enabled, then we do not strip or optimize
++ ifeq ($(strip $(DEBUG)),true)
++ 	CFLAGS  += -O1 -g -DDEBUG -D_GNU_SOURCE
++-	STRIPCMD = /bin/true -Since_we_are_debugging
+++	STRIPCMD = true -Since_we_are_debugging
++ else
++ 	CFLAGS  += $(OPTIMIZATION) -fomit-frame-pointer -D_GNU_SOURCE
++ 	STRIPCMD = $(STRIP) -s --remove-section=.note --remove-section=.comment
++@@ -273,30 +273,32 @@ clean:
++ 
++ install-hotplug:
++ 	$(INSTALL) -d $(DESTDIR)$(hotplugdir)
++-	$(INSTALL_PROGRAM) -D hotplug/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.agent
++-	$(INSTALL_PROGRAM) -D hotplug/pcmcia.rc $(DESTDIR)$(hotplugdir)/pcmcia.rc
+++	$(INSTALL_PROGRAM) hotplug/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.agent
+++	$(INSTALL_PROGRAM) hotplug/pcmcia.rc $(DESTDIR)$(hotplugdir)/pcmcia.rc
++ 
++ uninstall-hotplug:
++ 	- rm -f $(DESTDIR)$(hotplugdir)/pcmcia.agent $(DESTDIR)$(hotplugdir)/pcmcia.rc
++ 
++ install-socket-hotplug:
++-	$(INSTALL_PROGRAM) -D hotplug/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent
++-	$(INSTALL_PROGRAM) -D hotplug/pcmcia_socket.rc $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
+++	$(INSTALL_PROGRAM) hotplug/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent
+++	$(INSTALL_PROGRAM) hotplug/pcmcia_socket.rc $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
++ 
++ uninstall-socket-hotplug:
++ 	- rm -f $(DESTDIR)$(hotplugdir)/pcmcia_socket.agent $(DESTDIR)$(hotplugdir)/pcmcia_socket.rc
++ 
++ install-socket-tools:
++-	$(INSTALL_PROGRAM) -D $(PCMCIA_SOCKET_STARTUP) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
+++	$(INSTALL) -d $(DESTDIR)$(udevhelperdir)
+++	$(INSTALL_PROGRAM) $(PCMCIA_SOCKET_STARTUP) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
++ 
++ uninstall-socket-tools:
++ 	- rm -f $(DESTDIR)$(udevhelperdir)/$(PCMCIA_SOCKET_STARTUP)
++ 
++ install-tools:
++ 	$(INSTALL) -d $(DESTDIR)$(sbindir)
++-	$(INSTALL_PROGRAM) -D $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(PCCARDCTL)
+++	$(INSTALL) -d $(DESTDIR)$(udevhelperdir)
+++	$(INSTALL_PROGRAM) $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(PCCARDCTL)
++ 	$(SYMLINK) $(PCCARDCTL) $(DESTDIR)$(sbindir)/$(LSPCMCIA)
++-	$(INSTALL_PROGRAM) -D $(PCMCIA_CHECK_BROKEN_CIS) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_CHECK_BROKEN_CIS)
+++	$(INSTALL_PROGRAM) $(PCMCIA_CHECK_BROKEN_CIS) $(DESTDIR)$(udevhelperdir)/$(PCMCIA_CHECK_BROKEN_CIS)
++ 
++ uninstall-tools:
++ 	- rm -f $(DESTDIR)$(sbindir)/$(PCCARDCTL)
++@@ -305,22 +307,24 @@ uninstall-tools:
++ 
++ install-config:
++ 	$(INSTALL) -d $(DESTDIR)$(pcmciaconfdir)
++-	$(INSTALL_DATA)  -D config/config.opts $(DESTDIR)$(pcmciaconfdir)/config.opts
+++	$(INSTALL_DATA)  config/config.opts $(DESTDIR)$(pcmciaconfdir)/config.opts
++ 	if [ -f config/config.opts.$(ARCH) ]; then \
++-		$(INSTALL_DATA) -D config/config.opts.$(ARCH) $(DESTDIR)$(pcmciaconfdir)/config.opts; \
+++		$(INSTALL_DATA) config/config.opts.$(ARCH) $(DESTDIR)$(pcmciaconfdir)/config.opts; \
++ 	fi
++ 
++ uninstall-config:
++ #	- rm -f $(DESTDIR)$(pcmciaconfdir)/config.opts
++ 
++ install-udev:
++-	$(INSTALL_DATA) -D $(UDEV_RULES_FILE) $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
+++	$(INSTALL) -d $(DESTDIR)$(udevrulesdir)
+++	$(INSTALL_DATA) $(UDEV_RULES_FILE) $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
++ 
++ uninstall-udev:
++ 	- rm -f $(DESTDIR)$(udevrulesdir)/60-pcmcia.rules
++ 
++ install-man:
++-	$(INSTALL_DATA) -D man/man8/pccardctl.8 $(DESTDIR)$(mandir)/man8/pccardctl.8
+++	$(INSTALL) -d $(DESTDIR)$(mandir)/man8
+++	$(INSTALL_DATA) man/man8/pccardctl.8 $(DESTDIR)$(mandir)/man8/pccardctl.8
++ 	$(SYMLINK) pccardctl.8 $(DESTDIR)$(mandir)/man8/lspcmcia.8
++ 
++ uninstall-man:
+diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
+new file mode 100644
+index 000000000..f5a518ff7
+--- /dev/null
++++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils/makefile_race.patch
+@@ -0,0 +1,43 @@
++"make src/lex_config.o"
++
++results in:
++
++src/lex_config.l:35:25: fatal error: yacc_config.h: No such file or directory
++
++so add missing dependency through a missing rule. Also remove a rule which
++doesn't appear to do anything.
++
++RP
++2016/1/31
++
++Upstream-Status: Pending
++
++Index: pcmciautils-018/Makefile
++===================================================================
++--- pcmciautils-018.orig/Makefile
+++++ pcmciautils-018/Makefile
++@@ -249,6 +249,9 @@ $(PCMCIA_SOCKET_STARTUP): $(LIBC) src/st
++ yacc_config.o lex_config.o: %.o: %.c src/yacc_config.h
++ 	$(CC) -c -MD -O -pipe $(CPPFLAGS) $<
++ 
+++src/lex_config.o : src/lex_config.c src/yacc_config.h
+++	$(QUIET) $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
+++
++ debugtools: ccdv $(CBDUMP) $(CISDUMP)
++ 
++ $(CBDUMP): $(LIBC) debug/cbdump.o
++Index: pcmciautils-018/Makefile
++===================================================================
++--- pcmciautils-018.orig/Makefile
+++++ pcmciautils-018/Makefile
++@@ -246,8 +246,8 @@ $(PCMCIA_SOCKET_STARTUP): $(LIBC) src/st
++ 	$(QUIET) $(LD) $(LDFLAGS) -o $@ $(CRT0) src/startup.o src/yacc_config.o src/lex_config.o $(LIB_OBJS) $(ARCH_LIB_OBJS)
++ 	$(QUIET) $(STRIPCMD) $@
++ 
++-yacc_config.o lex_config.o: %.o: %.c
++-	$(CC) -c -MD -O -pipe $(CPPFLAGS) $<
+++src/lex_config.o : src/lex_config.c src/yacc_config.h ccdv
+++	$(QUIET) $(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
++ 
++ debugtools: ccdv $(CBDUMP) $(CISDUMP)
++ 
+diff --git a/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb b/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
+new file mode 100644
+index 000000000..2e59f05c2
+--- /dev/null
++++ b/meta-oe/recipes-bsp/pcmciautils/pcmciautils_018.bb
+@@ -0,0 +1,41 @@
++SUMMARY = "Linux kernel userland utilities for the PCMCIA subsystem"
++HOMEPAGE = "https://www.kernel.org/pub/linux/utils/kernel/pcmcia/"
++SECTION = "kernel/userland"
++
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++DEPENDS = "udev sysfsutils flex-native"
++RDEPENDS_${PN} = "udev module-init-tools"
++
++PR = "r1"
++
++SRC_URI = "${KERNELORG_MIRROR}/linux/utils/kernel/pcmcia/${BP}.tar.xz \
++           file://makefile_fix.patch \
++           file://makefile_race.patch \
++           file://lex_sys_types.patch \
++"
++
++SRC_URI[md5sum] = "885431c3cefb76ffdad8cb985134e996"
++SRC_URI[sha256sum] = "57c27be8f04ef4d535bcfa988567316cc57659fe69068327486dab53791e6558"
++
++inherit pkgconfig
++
++export HOSTCC = "${BUILD_CC}"
++export etcdir = "${sysconfdir}"
++export sbindir = "${base_sbindir}"
++export pcmciaconfdir = "${sysconfdir}/pcmcia"
++export udevdir = "`pkg-config --variable=udevdir udev`"
++export udevrulesdir = "`pkg-config --variable=udevdir udev`/rules.d"
++export UDEV = "1"
++LD = "${CC}"
++CFLAGS =+ "-I${S}/src"
++CFLAGS =+ "-DPCMCIAUTILS_VERSION=\\"${PV}\\""
++
++EXTRA_OEMAKE = "-e 'STRIP=echo' 'LIB_OBJS=-lc -lsysfs' 'LEX=flex'"
++
++do_install () {
++	oe_runmake 'DESTDIR=${D}' install
++}
++
++CONFFILES_${PN} += "${sysconfdir}/pcmcia/config.opts"
+-- 
+2.11.0
 
-> On Sun, Nov 12, 2017 at 3:48 AM, Martin Jansa <martin.jansa@gmail.com>
-> wrote:
-> > Also, was this ever sent to ML for review? I haven't found it in my
-> maildir
-> > and google haven't found it in ML archive as well.
-> >
->
-> Its not on patchwork it seems to have slipped in probably by an overisight
-> but I think fix is right. Probably a simple fix for meta-oe recipes to
-> depend on
-> db will be what we need
->
-> > On Sat, Nov 11, 2017 at 11:45 PM, Martin Jansa <martin.jansa@gmail.com>
-> > wrote:
-> >
-> >> Hi,
-> >>
-> >> will you please send fix for:
-> >> ERROR: Nothing PROVIDES 'virtual/db' (but meta-oe/meta-networking/
-> >> recipes-daemons/postfix/postfix_3.2.2.bb meta-oe/meta-networking/
-> >> recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb DEPENDS on or otherwise
-> >> requires it).
-> >>
-> >> Thanks
-> >>
-> >> On Fri, Nov 10, 2017 at 3:45 PM, <git@git.openembedded.org> wrote:
-> >>
-> >>> This is an automated email from the git hooks/post-receive script.
-> >>>
-> >>> rpurdie pushed a commit to branch master-next
-> >>> in repository openembedded-core.
-> >>>
-> >>> commit dcbc45aa3fe72c528fe4d47a783da4b4ed5ff38e
-> >>> Author: Ross Burton <ross.burton@intel.com>
-> >>> AuthorDate: Tue Oct 31 21:10:13 2017 +0000
-> >>>
-> >>>     db: don't provide virtual/db
-> >>>
-> >>>     As there are no alternative providers for virtual/db remove the
-> >>> PROVIDES and
-> >>>     recipes can just depend on db.
-> >>>
-> >>>     Signed-off-by: Ross Burton <ross.burton@intel.com>
-> >>> ---
-> >>>  meta/recipes-support/db/db_5.3.28.bb | 10 ----------
-> >>>  1 file changed, 10 deletions(-)
-> >>>
-> >>> diff --git a/meta/recipes-support/db/db_5.3.28.bb
-> >>> b/meta/recipes-support/db/db_5.3.28.bb
-> >>> index fb4befb..fe71967 100644
-> >>> --- a/meta/recipes-support/db/db_5.3.28.bb
-> >>> +++ b/meta/recipes-support/db/db_5.3.28.bb
-> >>> @@ -12,7 +12,6 @@ SECTION = "libs"
-> >>>  SUMMARY = "Berkeley Database v5"
-> >>>  HOMEPAGE = "http://www.oracle.com/technetwork/database/database-
-> technol
-> >>> ogies/berkeleydb/overview/index.html"
-> >>>  LICENSE = "Sleepycat"
-> >>> -VIRTUAL_NAME ?= "virtual/db"
-> >>>  RCONFLICTS_${PN} = "db3"
-> >>>
-> >>>  PR = "r1"
-> >>> @@ -37,15 +36,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=ed1158e314
-> >>> 37f4f87cdd4ab2b8613955"
-> >>>
-> >>>  inherit autotools
-> >>>
-> >>> -# Put virtual/db in any appropriate provider of a
-> >>> -# relational database, use it as a dependency in
-> >>> -# place of a specific db and use:
-> >>> -#
-> >>> -# PREFERRED_PROVIDER_virtual/db
-> >>> -#
-> >>> -# to select the correct db in the build (distro) .conf
-> >>> -PROVIDES += "${VIRTUAL_NAME}"
-> >>> -
-> >>>  # The executables go in a separate package - typically there
-> >>>  # is no need to install these unless doing real database
-> >>>  # management on the system.
-> >>>
-> >>> --
-> >>> To stop receiving notification emails like this one, please contact
-> >>> the administrator of this repository.
-> >>> --
-> >>> _______________________________________________
-> >>> Openembedded-commits mailing list
-> >>> Openembedded-commits@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
-> >>>
-> >>
-> >>
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
