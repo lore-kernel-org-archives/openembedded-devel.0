@@ -1,48 +1,49 @@
-Return-Path: <ricardo.ribalda@gmail.com>
-Received: from mail-lf0-f49.google.com (mail-lf0-f49.google.com
-	[209.85.215.49])
-	by mail.openembedded.org (Postfix) with ESMTP id 0C9CE71A18
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 3ADBE71A18
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 14:15:17 +0000 (UTC)
-Received: by mail-lf0-f49.google.com with SMTP id w21so26358772lfc.6
+	Wed, 15 Nov 2017 14:20:05 +0000 (UTC)
+Received: by mail-wm0-f48.google.com with SMTP id b189so3328037wmd.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 06:15:19 -0800 (PST)
+	Wed, 15 Nov 2017 06:20:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=z9H9CJmCVsSyGlyhC+yZwOYyODhTbfrGSFYTLcuqn60=;
-	b=RNcvGs9BdQgedWl/Hb3hzAJzUnU6o1J4qK9/5f0vxNpaUCKy0ILbXPVk1LQC86WcS5
-	sb2dsUYZ10HlfJkeBeKnZTJ8p8rjvg8Hi3raiRUzPpQJ5q2YhJ+W5g7wBWLpkSKA4g+d
-	O9lrAsO1TpDcKcAR+1HvHGCE2x0qXyG1oPmo/y+wawbdXryUGKpM2osbxqm1QsAsalh6
-	MGi0bSSjyweL59t4BzaxJrlNx+pSJYXarDFrAKPm1vmAF2OnkV61QTdEKgUjxo0ACmVb
-	v8x4NCepUjQQ5E0OSJN3r/IZmgUjx+E0yLC+hi5/UE7hcLLqoi1IuDQxpZejXPYt0Nyk
-	trsw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=NW+8hTmmHP7t/q+ksiK8EoF0v6finmpjqZd1zxNbJpc=;
+	b=N2AbVIUEE0BB3QdQAZKNz8Kbbb1JOEs9i0+nLYr9nNw/vNzU4TVQdBKDMa8bda4sD/
+	FKGIlRR/AnT//adh1tqz+/ZO+24q0bIsJN2hQ7gCnIiu2YRJMsza+rO5PNJmlIPviFbJ
+	cW7Jk1tB5RpjDErUjFGx8D1By2eYcqwNLahw94SksUem/TyyfHors7yK7/ghWX8xgfiY
+	cyl9+SQmVl+5fIYWZDNhvmK0HNVeSSYQk8y/FYEnut0DqClp1EkxiSTT32NtxdkcKw7j
+	SVwStyygi0uYDmIdxLiuji3Q0UoX6H6GN4ATSXVPUqn9MUegZ/NcgW78/LrWRYDaU40Z
+	NH1g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=z9H9CJmCVsSyGlyhC+yZwOYyODhTbfrGSFYTLcuqn60=;
-	b=BPhwLWUVFgAxxYc9s3ynenPPrm0LMGHVYLRVghPMSzUMpGj4uBjD/GAfEeXa8oZHO2
-	GMc6Wz/zHv3L7zp+rK1/eBpVuOL+i1+Kbr8Lrd3yO1PmMe7WbMXHdi99k9nGoTYYzH5P
-	ey6AyeuJ7IZJjQ/VOmh4M+PJwmhex5dc/ogXy9EmVOGTX1qADg85BfaASXYB9nl6V+Kc
-	dW86oupJD7A2oLFWD77WZOt9YSXQkKx15tuMRs9lYwAqNcHu2DwBr1TXJkCggCig8BVo
-	ogy5gEYHgKO5+LXAOGxMAUJa5a24/cURzJy7obgIrFI6APspSipigQPGtP1DF2z56ZcN
-	Sohg==
-X-Gm-Message-State: AJaThX4RQ9csmlgZg4HItRvQxy1zQaQrCy3Bo0srP1JUgHt/46bTWLRT
-	nk8snvCSVZb4gBhK/h/k7l4xdDkL
-X-Google-Smtp-Source: AGs4zMYYCv5HwP1jJu5PgovXjTq0AwKC5cY3uV2mOgNYeKkhek+A3qVnLLmjHnO3NlUTJ36fxZViFQ==
-X-Received: by 10.46.84.4 with SMTP id i4mr4078048ljb.60.1510755318111;
-	Wed, 15 Nov 2017 06:15:18 -0800 (PST)
-Received: from neopili.qtec.com
-	(cpe.xe-3-0-1-778.vbrnqe10.dk.customer.tdc.net. [80.197.57.18])
-	by smtp.gmail.com with ESMTPSA id
-	f14sm3730344lfg.53.2017.11.15.06.15.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Nov 2017 06:15:16 -0800 (PST)
-From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Nov 2017 15:15:02 +0100
-Message-Id: <20171115141502.21516-1-ricardo.ribalda@gmail.com>
-X-Mailer: git-send-email 2.15.0
-Subject: [meta-oe][PATCH] meson: update meson to 0.43.0
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=NW+8hTmmHP7t/q+ksiK8EoF0v6finmpjqZd1zxNbJpc=;
+	b=l7UJ4bQzD7fadwSAiqaFZxc4DhGeMStnJTH9So6v0i43hxmyJTUSzuAq3xlvxT67RO
+	+5Lzihzb4X4x1yDW89au+w7pOT9bkaZMY2NysdVCrRiQLUS904WCfj4ePI/nzqdEoKyn
+	vl5DXBxMonETnQCRbQjdRgxGiJizlaCCyyFdqmKppSbu1CKDivBHG0AaZKeTstIZEQ4B
+	yS+6g6ZgqdvJcT6FYavK5d32t2cJjsDkVdWWUj+0ZHBmc5grOJf1rcirKPN4xJkIbJtg
+	pTMnlD+dXMbuUCQboPu114VUPL/xdKXvKS01nGBX5NzLyG2FVoZSSkaIX35x87VPe42D
+	P+1A==
+X-Gm-Message-State: AJaThX4mB5b4HrZ9VQK000SR+Af0PCxaNRuRDh5UlY86UM4RLN5JHCF5
+	4nDFvNEwIJA+DwxlnusSbNnz8KqibRwJq4IQMU4=
+X-Google-Smtp-Source: AGs4zMaCzGlioLQw21UqAd05qrqnMGAnomOsW+T7PIjWvGLAVRIvXNh6xvVr/0DQL+cD5eJbXw6YMDcCWD0cVo6gRds=
+X-Received: by 10.28.118.19 with SMTP id r19mr1891021wmc.10.1510755606908;
+	Wed, 15 Nov 2017 06:20:06 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.173.139 with HTTP; Wed, 15 Nov 2017 06:20:06 -0800 (PST)
+In-Reply-To: <CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 15 Nov 2017 15:20:06 +0100
+Message-ID: <CA+chaQdu0YSkvx9cX9rOR81ihqpqS6f7MbkkADSw64VijQGTzA@mail.gmail.com>
+To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,136 +56,137 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 14:15:18 -0000
+X-List-Received-Date: Wed, 15 Nov 2017 14:20:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
----
- .../meson/meson/native_bindir.patch                | 59 ++++++++++++++--------
- .../meson/{meson_0.40.1.bb => meson_0.43.0.bb}     |  2 +-
- 2 files changed, 39 insertions(+), 22 deletions(-)
- rename meta-oe/recipes-devtools/meson/{meson_0.40.1.bb => meson_0.43.0.bb} (88%)
+With the DEPENDS fix applied it still fails to build with musl:
 
-diff --git a/meta-oe/recipes-devtools/meson/meson/native_bindir.patch b/meta-oe/recipes-devtools/meson/meson/native_bindir.patch
-index 993e9750e33e..805c1f6a50dc 100644
---- a/meta-oe/recipes-devtools/meson/meson/native_bindir.patch
-+++ b/meta-oe/recipes-devtools/meson/meson/native_bindir.patch
-@@ -1,22 +1,32 @@
-+From 01dd18c9c9c042268b87d576624c16fc74253cd9 Mon Sep 17 00:00:00 2001
-+From: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-+Date: Wed, 15 Nov 2017 15:05:01 +0100
-+Subject: [PATCH] native_bindir
-+
- There are some discussions upstream to merge this patch, but I presonaly believe
- that is is OE only. https://github.com/mesonbuild/meson/issues/1849#issuecomment-303730323
- 
- Upstream-Status: Inappropriate [OE specific]
- Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
--diff --git a/mesonbuild/dependencies.py b/mesonbuild/dependencies.py
--index 04a22f985941..3e33bc4a79e7 100644
----- a/mesonbuild/dependencies.py
--+++ b/mesonbuild/dependencies.py
--@@ -95,7 +95,7 @@ class Dependency:
-+---
-+ mesonbuild/dependencies/base.py | 14 +++++++++-----
-+ mesonbuild/dependencies/ui.py   |  6 +++---
-+ 2 files changed, 12 insertions(+), 8 deletions(-)
-+
-+diff --git a/mesonbuild/dependencies/base.py b/mesonbuild/dependencies/base.py
-+index 0d9742d426cb..0c8e79a8e9e3 100644
-+--- a/mesonbuild/dependencies/base.py
-++++ b/mesonbuild/dependencies/base.py
-+@@ -114,7 +114,7 @@ class Dependency:
-      def need_threads(self):
-          return False
-  
- -    def get_pkgconfig_variable(self, variable_name):
- +    def get_pkgconfig_variable(self, variable_name, use_native=False):
--         raise MesonException('Tried to get a pkg-config variable from a non-pkgconfig dependency.')
-+         raise NotImplementedError('{!r} is not a pkgconfig dependency'.format(self.name))
-+ 
-  
-- class InternalDependency(Dependency):
--@@ -224,8 +224,12 @@ class PkgConfigDependency(Dependency):
-+@@ -256,8 +256,12 @@ class PkgConfigDependency(ExternalDependency):
-          return s.format(self.__class__.__name__, self.name, self.is_found,
-                          self.version_reqs)
-  
-@@ -31,9 +41,9 @@ index 04a22f985941..3e33bc4a79e7 100644
-          return p.returncode, out.strip()
-  
-      def _set_cargs(self):
--@@ -259,8 +263,8 @@ class PkgConfigDependency(Dependency):
-+@@ -291,8 +295,8 @@ class PkgConfigDependency(ExternalDependency):
-                  self.is_libtool = True
--             self.libs.append(lib)
-+             self.link_args.append(lib)
-  
- -    def get_pkgconfig_variable(self, variable_name):
- -        ret, out = self._call_pkgbin(['--variable=' + variable_name, self.name])
-@@ -42,7 +52,11 @@ index 04a22f985941..3e33bc4a79e7 100644
-          variable = ''
-          if ret != 0:
-              if self.required:
--@@ -1091,7 +1095,7 @@ class QtBaseDependency(Dependency):
-+diff --git a/mesonbuild/dependencies/ui.py b/mesonbuild/dependencies/ui.py
-+index 8f183e54d4d2..34ef33e79ad9 100644
-+--- a/mesonbuild/dependencies/ui.py
-++++ b/mesonbuild/dependencies/ui.py
-+@@ -239,7 +239,7 @@ class QtBaseDependency(ExternalDependency):
-          self.bindir = self.get_pkgconfig_host_bins(core)
-          if not self.bindir:
-              # If exec_prefix is not defined, the pkg-config file is broken
-@@ -51,16 +65,7 @@ index 04a22f985941..3e33bc4a79e7 100644
-              if prefix:
-                  self.bindir = os.path.join(prefix, 'bin')
-  
--@@ -1202,7 +1206,7 @@ class Qt5Dependency(QtBaseDependency):
--         QtBaseDependency.__init__(self, 'qt5', env, kwargs)
-- 
--     def get_pkgconfig_host_bins(self, core):
---        return core.get_pkgconfig_variable('host_bins')
--+        return core.get_pkgconfig_variable('host_bins', use_native=True)
-- 
-- class Qt4Dependency(QtBaseDependency):
--     def __init__(self, env, kwargs):
--@@ -1216,7 +1220,7 @@ class Qt4Dependency(QtBaseDependency):
-+@@ -359,7 +359,7 @@ class Qt4Dependency(QtBaseDependency):
-          applications = ['moc', 'uic', 'rcc', 'lupdate', 'lrelease']
-          for application in applications:
-              try:
-@@ -69,3 +74,15 @@ index 04a22f985941..3e33bc4a79e7 100644
-              except MesonException:
-                  pass
-  
-+@@ -369,7 +369,7 @@ class Qt5Dependency(QtBaseDependency):
-+         QtBaseDependency.__init__(self, 'qt5', env, kwargs)
-+ 
-+     def get_pkgconfig_host_bins(self, core):
-+-        return core.get_pkgconfig_variable('host_bins')
-++        return core.get_pkgconfig_variable('host_bins', use_native=True)
-+ 
-+ 
-+ # There are three different ways of depending on SDL2:
-+-- 
-+2.15.0
-+
-diff --git a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb b/meta-oe/recipes-devtools/meson/meson_0.43.0.bb
-similarity index 88%
-rename from meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-rename to meta-oe/recipes-devtools/meson/meson_0.43.0.bb
-index 14644ba9ba0a..0953eadc7e7d 100644
---- a/meta-oe/recipes-devtools/meson/meson_0.40.1.bb
-+++ b/meta-oe/recipes-devtools/meson/meson_0.43.0.bb
-@@ -9,7 +9,7 @@ SRC_URI = " \
-     file://native_bindir.patch \
- "
- 
--SRCREV = "b25d3e4d3f2b4d37029a507cc089bdde643c6240"
-+SRCREV = "5626df46453e73b63827c4542aae36443fbd928b"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.15.0
+http://errors.yoctoproject.org/Errors/Build/48408/
+| In file included from ../../third_party/ffmpeg/libavutil/autorename_
+libavutil_cpu.c:2:0:
+| ../../third_party/ffmpeg/libavutil/cpu.c:42:10: fatal error:
+sys/sysctl.h: No such file or directory
+|  #include <sys/sysctl.h>
+|           ^~~~~~~~~~~~~~
+| compilation terminated.
 
+I'm doing local qemuarm64 build now to see what happens before that out of
+memory crash.
+
+
+On Wed, Nov 15, 2017 at 1:38 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
+
+> Thanks for very good changes.
+>
+> Yesterday I've tried to build this on "bitbake world" servers and the
+> build for qemuarm64 failed with:
+>
+> | [30609/30609] python "../../build/toolchain/gcc_link_wrapper.py"
+> --output="./chrome" -- aarch64-oe-linux-g++  -fstack-protector-strong
+> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
+> --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/work/
+> aarch64-oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot -pie
+> -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack
+> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -Wl,--no-as-needed -lpthread
+> -Wl,--as-needed -fuse-ld=gold -B -Wl,--icf=all -Wl,-O1 -Wl,--gc-sections
+> -Wl,-rpath-link=. -Wl,--disable-new-dtags -Wl,--export-dynamic -Wl,-O1
+> -Wl,--hash-style=gnu -Wl,--as-needed -fstack-protector-strong
+> -Wl,-z,relro,-z,now -o "./chrome" -Wl,--start-group @"./chrome.rsp"
+> -Wl,--end-group   -ldl -lpthread -lrt -lpangocairo-1.0 -lpango-1.0
+> -lgobject-2.0 -lglib-2.0 -lcairo -lX11 -lX11-xcb -lxcb -lXcomposite
+> -lXcursor -lXdamage -lXext -lXfixes -lXi -lXrender -lXtst -lgmodule-2.0
+> -lgthread-2.0 -lsmime3 -lnss3 -lsoftokn3 -lnssutil3 -lplds4 -lplc4 -lnspr4
+> -lxml2 -lexpat -lfontconfig -ldbus-1 -latomic -lXss -lfreetype -ljpeg
+> -lwebp -lwebpdemux -lwebpmux -lXrandr -lresolv -lgio-2.0 -lpci -lasound -lm
+> -lz -latk-1.0 -lFLAC -lgtk-3 -lgdk-3 -lcairo-gobject -lgdk_pixbuf-2.0 -lxslt
+> | FAILED: chrome
+> | python "../../build/toolchain/gcc_link_wrapper.py" --output="./chrome"
+> -- aarch64-oe-linux-g++  -fstack-protector-strong  -D_FORTIFY_SOURCE=2
+> -Wformat -Wformat-security -Werror=format-security
+> --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/work/
+> aarch64-oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot -pie
+> -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack
+> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -Wl,--no-as-needed -lpthread
+> -Wl,--as-needed -fuse-ld=gold -B -Wl,--icf=all -Wl,-O1 -Wl,--gc-sections
+> -Wl,-rpath-link=. -Wl,--disable-new-dtags -Wl,--export-dynamic -Wl,-O1
+> -Wl,--hash-style=gnu -Wl,--as-needed -fstack-protector-strong
+> -Wl,-z,relro,-z,now -o "./chrome" -Wl,--start-group @"./chrome.rsp"
+> -Wl,--end-group   -ldl -lpthread -lrt -lpangocairo-1.0 -lpango-1.0
+> -lgobject-2.0 -lglib-2.0 -lcairo -lX11 -lX11-xcb -lxcb -lXcomposite
+> -lXcursor -lXdamage -lXext -lXfixes -lXi -lXrender -lXtst -lgmodule-2.0
+> -lgthread-2.0 -lsmime3 -lnss3 -lsoftokn3 -lnssutil3 -lplds4 -lplc4 -lnspr4
+> -lxml2 -lexpat -lfontconfig -ldbus-1 -latomic -lXss -lfreetype -ljpeg
+> -lwebp -lwebpdemux -lwebpmux -lXrandr -lresolv -lgio-2.0 -lpci -lasound -lm
+> -lz -latk-1.0 -lFLAC -lgtk-3 -lgdk-3 -lcairo-gobject -lgdk_pixbuf-2.0 -lxslt
+> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/aarch64-
+> oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot-native/
+> usr/bin/aarch64-oe-linux/../../libexec/aarch64-oe-linux/gcc/
+> aarch64-oe-linux/7.2.0/ld.gold: out of memory
+> | collect2: error: ld returned 1 exit status
+> | ninja: build stopped: subcommand failed.
+>
+> longer log in http://errors.yoctoproject.org/Errors/Details/158898/
+>
+> I know what linking needs *a lot* of memory, but this server has 219GB
+> available and "only" 128GB from it can be taken by tmpfs, so there should
+> be still plenty RAM for successful linkage.
+>
+> Build for x86_64 (on similar server) was successful.
+>
+> Build for x86 + musl failed even before start, because there is missing
+> space in the append:
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86 =
+> "yasm-native"
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86-64 =
+> "yasm-native"
+>
+> and unlike x86_64 it doesn't have trailing space in previous DEPENDS,
+> because of:
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_libc-musl
+> = " libexecinfo"
+>
+> Causing:
+> ERROR: Nothing PROVIDES 'libexecinfoyasm-native' (but
+> /home/jenkins/oe/world/shr-core/meta-browser/recipes-browser/chromium/
+> chromium_62.0.3202.89.bb DEPENDS on or otherwise requires it). Close
+> matches:
+>   libxinerama-native
+>   texinfo-native
+>   libyaml-native
+>
+> I'll fix that missing space, but any other ideas why it might fail with
+> out of memory? Are you building for aarch64 as well?
+>
+> Regards,
+>
+>
+>
+> On Wed, Nov 15, 2017 at 1:04 PM, Raphael Kubo da Costa <
+> raphael.kubo.da.costa@intel.com> wrote:
+>
+>> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
+>> > I believe this has finally reached a stage where it's ready for public
+>> > consumption, hence the CFT:
+>> >
+>> >     https://github.com/rakuco/meta-browser/tree/chromium62
+>> >
+>> > I'd like people to look at my commits and let me know if there's any big
+>> > issue that would prevent those changes from landing into meta-browser.
+>> > If everything's OK, I'd then start sending the patches to the list (or
+>> > pull requests on GitHub, whichever is preferred).
+>>
+>> Thanks to everyone who chimed in on GitHub and Otavio for merging my
+>> pull requests.
+>>
+>> We now have Chromium 62 in meta-browser, and I intend to keep the recipe
+>> up-to-date from now on.
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
