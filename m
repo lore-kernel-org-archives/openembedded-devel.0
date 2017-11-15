@@ -1,46 +1,48 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id CDAA67851F
+Return-Path: <max.oss.09@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 23EDF6FFC7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 12:39:41 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id r68so2725712wmr.1
+	Wed, 15 Nov 2017 13:02:23 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id t139so2870486wmt.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 04:39:42 -0800 (PST)
+	Wed, 15 Nov 2017 05:02:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id;
-	bh=pEQxyTOJc8xeQxQRG9ZB6RPka958iqfWNP6lltosueo=;
-	b=EmtNzzf7QDasuVmGe/PkMXY890or89LDqNvEJDLPQDcasFKLC35zMYclT4wXRiuW2l
-	UQzEiBIzE+nJjQwHTOMx/zf7hTjPhNjbghAhpdzoqEkDWV6NGJdsjaoRFYdObgHQBDSv
-	SFscRviSns8tAUC26BTNbTaEjVisH6NW0ItciAoJs7IAGB9W88p2k1uZVvCs8q4mRUCV
-	UYSFWTy7hlJMwruHsdxZnXkxOgpBT94xzxf8EB241Wp00xaf4eYDvqKfEcv4ZieHjnP8
-	Fbtol30vcO7U0YPMoWlTcAg6nWKO/CrH5dIvDKzL5Qn+Aas5MCDLrfdJO1sj4m5RPBT8
-	p/+g==
+	bh=Frw8Rd8G/clChkM86W7cnJw6zmSYw5UAhV3IQ1dSLYo=;
+	b=iIjgB/NzeImIPoMbsdxG9qUi2NZfGzEF5RTOKHaXJNO4fVyLBrcKVDeofuS8U3uYfP
+	O4HnY2fNyfzJ0MraPAmxtAAL8W67rRDSmk37ng76FNpWku61HLJUFlVzpaElkxWsZOEc
+	aI0em6PRR75FkSubP43koRtxXB3kEyJjhd0PPmc60kC7MyhT+gIYdQpzgc/RJmbYluDV
+	zMFNQZsT3LdThFd75OqBJxPkPuWyIaJJ8wVb41RMjFErVbCPqMRVK0OJRhfZh6e2LAvQ
+	PjWUUj5BrpEmyVu74HBu9gNNdChfdjI8kFpwEsY5Tf0wO6PN0ZCE1WaxB1gYv+rXjnSn
+	ASJQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=pEQxyTOJc8xeQxQRG9ZB6RPka958iqfWNP6lltosueo=;
-	b=c4QwWfAgnMffXHJRgNqVmpUWnLtOF6flAybrhmYvVcKwccWRSfGst8O0fEpNoJQ/LV
-	kXdQ0AUBJrp9Vx6hub97VwSGsiWBwodM6C5OXZafOUO7KH9AAUWU2seTjVFwvORN4zAo
-	s/aBW2NYx50nKLOyW1ETtSw1hm62OoLayww+CEzK8vr2mZ09ADPnr00d9OHRctSIJvx2
-	ue6b+wV0zgt48YCTibb672pxTE9Ay5uowuEd/uWXOYPPzikbpSijCOW4zCzE+MK5wvWP
-	blSTBe/piH5sYDCbna1siX8iZOf/WotxupQhOHTlODe1d326xEKdaOSZJDS7VwA8756s
-	eTPA==
-X-Gm-Message-State: AJaThX6f0jz1Ai3dBjKRG+sQ6WuURVwc54u/bB/XoRJhapMpd5Q7odz5
-	II/M+ikhvnOkASJyq88Stc2FUQ==
-X-Google-Smtp-Source: AGs4zMbcU4/Dui7K61Z508rhMWN3+bFWFFE7AugbLdFTt3ods5KViB/+/e+1m+y7dD+RygVE/YYIVQ==
-X-Received: by 10.28.5.148 with SMTP id 142mr11785467wmf.142.1510749582155;
-	Wed, 15 Nov 2017 04:39:42 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	69sm12313852wmp.37.2017.11.15.04.39.41
+	bh=Frw8Rd8G/clChkM86W7cnJw6zmSYw5UAhV3IQ1dSLYo=;
+	b=Q7RJaJ62eDVEP1osDPdJ8fBA5RBCJbhJqhlUXr3RmYFK9gka3nxj+QppNs+I/H0Yk0
+	wUHcePN668ex9+CTxa+k4vB2UGmkfPUY4vr3ALPIRD6OMtwDU/zriYJCVZ9st5WhMJgv
+	hNJHW1a1Gg9dVJ2sgHK5aGp9St3ZaQVEZ71tSZ12XdGkDh29AQAUk8MjdVKIhxVzN2yY
+	q6evq3myiqM1YnbCsPNup8QoVrLASbF+SaY66UtmVwS4Vy7A2YxpmuBKMyoEr2yRvwGV
+	wmBSzzW0S02oUrwxfdueJqZE3S01mag2uzgrmO5nbWzsz6AdCa7hFT/XBfEz1bH8y7Px
+	iV2g==
+X-Gm-Message-State: AJaThX5rmHl1MtZVg97w47iuz6RoT1TKtz9ah7TIME3m/ObSBHuR755O
+	uAvwMAESbEo6heF98ptvSqKIHg==
+X-Google-Smtp-Source: AGs4zMagdzkar6vt38XfV22QuYIk/KO/6XjYcj1QJ98U/TIbdnDxEnnbXUsRZk2ueu9/thG+MRbcNQ==
+X-Received: by 10.28.13.135 with SMTP id 129mr12285984wmn.24.1510750944464;
+	Wed, 15 Nov 2017 05:02:24 -0800 (PST)
+Received: from linuxdev.toradex.int ([46.140.72.82])
+	by smtp.gmail.com with ESMTPSA id
+	o8sm62050571wrc.10.2017.11.15.05.02.22
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Nov 2017 04:39:41 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+	Wed, 15 Nov 2017 05:02:23 -0800 (PST)
+From: Max Krummenacher <max.oss.09@gmail.com>
+X-Google-Original-From: Max Krummenacher <max.krummenacher@toradex.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Nov 2017 12:43:34 +0000
-Message-Id: <1510749814-110-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-browser][PATCH] chromium: fix DEPENDS
+Date: Wed, 15 Nov 2017 14:01:32 +0100
+Message-Id: <20171115130132.17427-1-max.krummenacher@toradex.com>
+X-Mailer: git-send-email 2.9.5
+Cc: Max Krummenacher <max.krummenacher@toradex.com>
+Subject: [meta-qt5][PATCH] packagegroup-qt5-qtcreator-debug: remove qtdeclarative-plugins
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,32 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 12:39:42 -0000
+X-List-Received-Date: Wed, 15 Nov 2017 13:02:24 -0000
 
-* there is missing space in append, causing:
-  ERROR: Nothing PROVIDES 'libexecinfoyasm-native' (but /home/jenkins/oe/world/shr-core/meta-browser/recipes-browser/chromium/chromium_62.0.3202.89.bb DEPENDS on or otherwise requires it)
+This package is no longer created, it was also removed when moving to qt 5.8
+with commit 333949a8239dfa7788b35f1059614733e11a6a25 from
+packagegroup-qt5-toolchain-target.bb.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+As the packagegroup was added for a target providing cross-debugging services
+for qtcreator (commit 53242713da6ae01f2b1f7e674b00517390fe2bcb) and maybe the
+package parent qtdeclarative is still needed, add that one instead.
+
+Signed-off-by: Max Krummenacher <max.krummenacher@toradex.com>
 ---
- recipes-browser/chromium/chromium_62.0.3202.89.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/recipes-browser/chromium/chromium_62.0.3202.89.bb b/recipes-browser/chromium/chromium_62.0.3202.89.bb
-index ca6c086..640c6fe 100644
---- a/recipes-browser/chromium/chromium_62.0.3202.89.bb
-+++ b/recipes-browser/chromium/chromium_62.0.3202.89.bb
-@@ -53,8 +53,8 @@ DEPENDS += " \
-     virtual/libgl \
+diff --git a/recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb b/recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb
+index b34dbff..5894955 100644
+--- a/recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb
++++ b/recipes-qt/packagegroups/packagegroup-qt5-qtcreator-debug.bb
+@@ -12,5 +12,5 @@ RDEPENDS_${PN} = " \
+     gdbserver \
+     ${VIRTUAL-RUNTIME_qtcreator-debug-ssh-daemon} \
+     openssh-sftp-server \
+-    qtdeclarative-plugins \
++    qtdeclarative \
  "
- DEPENDS_append_libc-musl = " libexecinfo"
--DEPENDS_append_x86 = "yasm-native"
--DEPENDS_append_x86-64 = "yasm-native"
-+DEPENDS_append_x86 = " yasm-native"
-+DEPENDS_append_x86-64 = " yasm-native"
- 
- # The wrapper script we use from upstream requires bash.
- RDEPENDS_${PN} = "bash"
 -- 
-2.7.4
+2.9.5
 
 
