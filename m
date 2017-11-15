@@ -1,47 +1,31 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id C75FF71A0F
+Return-Path: <raphael.kubo.da.costa@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 0C35C6FFD3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 14:43:29 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id l8so3428294wmg.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 06:43:31 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=jlkwEyFQGVNORc1HO+QsYD/EnjoPXcdFomzSpXi4FT8=;
-	b=PJe7MGy2ZAXGl323vv3kJG4tMm7z20B2WFIbHGVPVFgW7y9jxbyBbL4Z73BVkscMgS
-	rDI2wtywgR+CQEzHawzZZB27GN0k3zq9FuIsPEMTj0qAf19enr8YV6oI2HegkqYEi9po
-	HoEc9tTU8pVdG+4AbxWHKP5dhJw/9VfPyqzfGCKhnoopjNm7v241Nly98U10IScKaOn7
-	BB8mJFIbDM5FR+9xrspR13O+RLt6DXDFDrLTBItop+sLafQcCPlXRCf2sBgkM+2tFUm/
-	QGlwJcpBqZnsAwIpqXeks322HTPtVN3xC/hU42rQPZOrmIBrGVmJ0B2HWvQrVZTC8pf+
-	wenw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=jlkwEyFQGVNORc1HO+QsYD/EnjoPXcdFomzSpXi4FT8=;
-	b=dlk6bE1K1JsdFY7rCpB4fx8U6GaD9ZRIglfYjNtYM+qq8RUdEbnJLRukc+qGhjp/zM
-	LzWQg8FfIu19588jNdJVch/qdtZlwSnpDTcRMcijbZ97DiC+bfVhI49sXUyRkqmWgT/i
-	tgJOzM61dBvOMSuT1izdphIKSJ7na9gycfz/OxSUL7Z+wTdHWPs21L5NbXUxxaAdIGJv
-	x5zvKvQr4nCNXt1vcJhYcVLppq8+1AO2lGJZP3PPjpk3phDXfVcsQqb6aoIiQYvzlYwA
-	uIuLGm8V9h4T2s1smmF5H7kGh94i4GbdNQnL31CKhA3XYU/BrZAfgCqpnywNoiE3ifWj
-	P2HA==
-X-Gm-Message-State: AJaThX7YG0sI7Xd9ykt3ADurYzLsb2jRs3sqrtpXOndJ4MligEXKz3VZ
-	5PC2RKh3Zk2PEx1MFb1u1lAfJQ==
-X-Google-Smtp-Source: AGs4zMYboinEkBQvzhURBabmT5DQMhbXcMiN312fo/P6H/LpHocjSQUz0nm2te50ihoUkAtyWkOsww==
-X-Received: by 10.80.244.141 with SMTP id s13mr15793156edm.222.1510757010573; 
-	Wed, 15 Nov 2017 06:43:30 -0800 (PST)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([123.125.90.58]) by smtp.gmail.com with ESMTPSA id
-	s26sm18151660eds.68.2017.11.15.06.43.26
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 15 Nov 2017 06:43:29 -0800 (PST)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Nov 2017 15:41:16 +0100
-Message-Id: <1510756876-27098-1-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-oe] [PATCH] libc-bench: add recipe
+	Wed, 15 Nov 2017 17:08:50 +0000 (UTC)
+Received: from fmsmga003.fm.intel.com ([10.253.24.29])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	15 Nov 2017 09:08:51 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.44,399,1505804400"; 
+   d="scan'208";a="2187181"
+Received: from rkubodac-desk.ger.corp.intel.com ([10.252.1.231])
+	by FMSMGA003.fm.intel.com with ESMTP; 15 Nov 2017 09:08:50 -0800
+From: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+In-Reply-To: <CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+	(Martin Jansa's message of "Wed, 15 Nov 2017 13:38:10 +0100")
+Organization: Intel International BV - KvK 34098535 - Capronilaan 37 1119NG
+	Amsterdam
+References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/25.3 (gnu/linux)
+Date: Wed, 15 Nov 2017 18:08:49 +0100
+Message-ID: <877eur1nby.fsf@rkubodac-desk.ger.corp.intel.com>
+MIME-Version: 1.0
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,52 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 14:43:30 -0000
+X-List-Received-Date: Wed, 15 Nov 2017 17:08:51 -0000
+Content-Type: text/plain
 
-From: Ming Liu <liu.ming50@gmail.com>
+Thanks for testing!
 
-libc-bench is a set of time- and memory-efficiency tests to compare
-implementations of various C/POSIX standard library functions.
+Martin Jansa <martin.jansa@gmail.com> writes:
+> Thanks for very good changes.
+>
+> Yesterday I've tried to build this on "bitbake world" servers and the build
+> for qemuarm64 failed with:
+[...]
+> longer log in http://errors.yoctoproject.org/Errors/Details/158898/
+[...]
+> I know what linking needs *a lot* of memory, but this server has 219GB
+> available and "only" 128GB from it can be taken by tmpfs, so there should
+> be still plenty RAM for successful linkage.
 
-Coverage includes:
-- Malloc throughput with varying degrees and forms of contention between
-  threads.
-- Malloc overhead and ability to return freed memory to the OS.
-- Literal string and regular expression searches.
-- Thread creation and joining throughput.
-- UTF-8 decoding.
-- Stdio buffered reads and writes.
+It had been a while since I'd last done an aarch64 build. I launched one
+here and linking failed with relocation errors. I've pushed 4e5abf8
+("chromium: Apply -g -> -g1 workaround for aarch64 as well"), which is
+the same workaround I've been applying for other architectures, and
+everything went fine.
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- .../recipes-benchmark/libc-bench/libc-bench_20110206.bb | 17 +++++++++++++++++
- 1 file changed, 17 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
+> Build for x86_64 (on similar server) was successful.
+>
+> Build for x86 + musl failed even before start, because there is missing
+> space in the append:
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86 =
+> "yasm-native"
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86-64 =
+> "yasm-native"
+>
+> and unlike x86_64 it doesn't have trailing space in previous DEPENDS,
+> because of:
+> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_libc-musl
+> = " libexecinfo"
+>
+> Causing:
+> ERROR: Nothing PROVIDES 'libexecinfoyasm-native' (but
+> /home/jenkins/oe/world/shr-core/meta-browser/recipes-browser/chromium/
+> chromium_62.0.3202.89.bb DEPENDS on or otherwise requires it). Close
+> matches:
+>   libxinerama-native
+>   texinfo-native
+>   libyaml-native
 
-diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb b/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
-new file mode 100644
-index 0000000..f534c73
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
-@@ -0,0 +1,17 @@
-+SUMMARY = "Tests to compare standard functions of different libc implementations"
-+DESCRIPTION = "libc-bench is a set of time- and memory-efficiency tests to compare \
-+implementations of various C/POSIX standard library functions."
-+HOMEPAGE = "http://www.etalabs.net/libc-bench.html"
-+SECTION = "console/utils"
-+LICENSE = "GPLv2"
-+LIC_FILES_CHKSUM = "file://Makefile;md5=e12f113da27dfe9cfb6c2c537da8d8df"
-+
-+SRC_URI = "http://www.etalabs.net/releases/${BPN}-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "f763de90f95fe68e4e03e5b6f49698ac"
-+SRC_URI[sha256sum] = "6825260aa5f15f4fbc7957ec578e9c859cbbe210e025ec74c4a0d05677523794"
-+
-+do_install () {
-+    install -d ${D}${bindir}
-+    install -m 0755 ${B}/libc-bench ${D}${bindir}
-+}
--- 
-2.7.4
+Thanks for fixing the yasm bit.
 
+As for musl: like I said in my original email and on GitHub, the musl
+build is currently broken. Carrying tons of patches in the recipe is an
+uphill battle, so unless someone takes the time to work with upstream I
+don't think it makes much sense to try to keep the build working.
 
