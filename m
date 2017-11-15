@@ -1,48 +1,50 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A73AD78697;
-	Wed, 15 Nov 2017 18:03:11 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id z3so4719258wme.3;
-	Wed, 15 Nov 2017 10:03:13 -0800 (PST)
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f43.google.com (mail-pg0-f43.google.com [74.125.83.43])
+	by mail.openembedded.org (Postfix) with ESMTP id AB5F07831C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Nov 2017 19:35:01 +0000 (UTC)
+Received: by mail-pg0-f43.google.com with SMTP id 207so15922718pgc.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Nov 2017 11:35:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=BVofOp/bXBsNVbNK8+16dLl8sEbo44uVXXxMwi0JyqE=;
-	b=HiI1P9OJ6DCtOh7VqYBcs7JTN09tSj8CxUXP45a0Q3MsEGzRNz+EwNmmxWI11ydHa7
-	3U8+Emt7H8TLBWZQmSV/GyPe+/kyytXpvFmGuA09uBWUz4grUmFr+KlVVUjMe2NQ34qd
-	MwKd6flnhYERAN+AqMrfF6Uy6d79MD7kOtHDTJ8DQSF/7zeX68xDAvLV9urxj6z/jnzF
-	FVkDkl1nANrPyBcbo5G09cm0wmt+T4/e1NGY6/UlT1J4FKFei/08q9/kTKMqd6ucGgkB
-	y1O19T8s67M9/FxK/YJyq8sd/cCV4vUr/Cro1B+S7yu4xKUcRWwJZGSxHZyeapi5Prde
-	qrxQ==
+	:cc; bh=dWu1iy/q0pqFFwD6lKMzz93r9KP26Ef7EaKVM2B5ZCQ=;
+	b=KMP27C92BZ3c2cec4wxk6Rn+C/N2ZVLlQzZesUf6N9/RQmo+Lo3QMq4ciuFx1Ric7U
+	0x/sMQmq9A8BSTdJ7ZoE5Ew5f5qoDUlLzbz1epgjs1h0BL9T9UgMK+l0PzuAS+iezRmh
+	oJP8JHgBWd4EDPRDBd1SkxLOEuqUzuiNCEFdzBcIeQum6U95fYtDLU8qBGfJ+Ik5VXeM
+	ySqo9vAvIfbuq/7MF1WRUNjNqDZqjjJflZaby/0XKOx/P3ZEU6K4jINVNH5pHu0cws+6
+	Ro1Z3gp62ssY2FcS5lsuaHX8DfOHkE4SVQ5J/B6V0RIpYHzgBd+y1H0NBXAMaw4sZ41y
+	ipqg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=BVofOp/bXBsNVbNK8+16dLl8sEbo44uVXXxMwi0JyqE=;
-	b=uk9ftMzgKnY4bKZJO8WA7ieGNFigXqtXpk90KK6D8W6Po0u4ObweqdnttpFgtmeJdg
-	zk0eeEdhp9o/UcY4nV3oyKXlvl/s0bl78b6ImbTg8yBtgsI+WvXTHvXobpQfOwb+iZCv
-	KohDbEzgsvROPa51pn/kharl/Zs8VgpYqYN3eQeREX82FR623j0QcIf3FlXhJF9RmcrD
-	s2mb4Gs+uHyW0JeMlpiq4ZY7fsz2fKzcxL/3Zx6cyEojAoVHyIu6loDTZdZk5xQrxRKj
-	K2fZAvkmrFmt87ALE/fLwKqYOvxGth6hwFrW0C1VdXN7zwS3ytWyUkNTqr4sgIFqdMwE
-	hQQw==
-X-Gm-Message-State: AJaThX6oTl3wQZeVWFV8CpfbmnbmJeQ/HDTqpUMR5al7QgM6VcJ9mmjZ
-	xTWKHPl/226XiYjTQO80DyfcRKdXzkWkYk0p0zA=
-X-Google-Smtp-Source: AGs4zMbPmz/ywwZERiDlBLWSescgV49PCUtAT42HLbVjSeNL4VMacwn9sv/KCMgwiIbja4GrharrzcXB4uPFnhj/hBk=
-X-Received: by 10.28.231.19 with SMTP id e19mr12429722wmh.1.1510768992051;
-	Wed, 15 Nov 2017 10:03:12 -0800 (PST)
+	bh=dWu1iy/q0pqFFwD6lKMzz93r9KP26Ef7EaKVM2B5ZCQ=;
+	b=PeTgN8nzs35EJWnIAi3kpmfQcixA2ZfQT/5SB6bPxzCP8Cgh075F262a5uYJ5hM673
+	4EZUsPRFTLE+pT3fvrjV2e7iGST8Cc02i71RUC5oV8qEOYN7vc1+H2EUDKj2YO/urg9W
+	ELl1FXC4CuuuO+gB6l2VDeZxqYGLdSyNgqDvorPfOqbAtTM049q7i3f00678gsAt8YJ4
+	eP9p3zCTvvIwLSc05os7wCNnhQn2DQp3TLwv3RDr3TMxzlUimf+K95t3ckfWHYyNd2EE
+	paCmvr45ohmT/vaffYcsJD8wbdGB+2P77gpoTrNo8+UosRAPxBfJrLAFPLohyhJhK42j
+	NDbA==
+X-Gm-Message-State: AJaThX7M9E9QEToHYIt/jeWb85pKDnCB97F4SPVsFLrgZrUAMK9LTG99
+	eFhhD1xll4rhlvpvQW69ITX4HCLZjy8LwX66sJY=
+X-Google-Smtp-Source: AGs4zMbNtTbEuTJ3ouyd3P6wPTbh0cDc7s2KrpCS6iSH4Mg2Jt3G+5LqQ+Q5xhiLwRAGwv9dNdfZxRKDg3k/HUJgw4M=
+X-Received: by 10.84.179.67 with SMTP id a61mr15798102plc.338.1510774502976;
+	Wed, 15 Nov 2017 11:35:02 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.173.139 with HTTP; Wed, 15 Nov 2017 10:03:11 -0800 (PST)
-In-Reply-To: <20171115173600.2DB4123487F@git.openembedded.org>
-References: <151076735962.17716.13874149682187371186@git.openembedded.org>
-	<20171115173600.2DB4123487F@git.openembedded.org>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 15 Nov 2017 19:03:11 +0100
-Message-ID: <CA+chaQeO8N9B0o6s8QtdqrR7oWv1i=95afJsQpBXtxhwU_jA=g@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	Chen Qi <Qi.Chen@windriver.com>, akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] [meta-openembedded] 05/84: gnome-common: add PACKAGECONFIG for autoconf-archive
+Received: by 10.100.167.106 with HTTP; Wed, 15 Nov 2017 11:34:32 -0800 (PST)
+In-Reply-To: <20171115174136.GA4530@jama>
+References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+	<877eur1nby.fsf@rkubodac-desk.ger.corp.intel.com>
+	<20171115174136.GA4530@jama>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 15 Nov 2017 11:34:32 -0800
+Message-ID: <CAMKF1soYSpfBApFPmBa1zj1U6nkqJ9+nqPckRser8Y3eWPmRmg@mail.gmail.com>
+To: Martin Jansa <martin.jansa@gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,73 +57,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 18:03:12 -0000
+X-List-Received-Date: Wed, 15 Nov 2017 19:35:02 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Please don't merge this one until autoconf-archive is changed in oe-core.
+>> As for musl: like I said in my original email and on GitHub, the musl
+>> build is currently broken. Carrying tons of patches in the recipe is an
+>> uphill battle, so unless someone takes the time to work with upstream I
+>> don't think it makes much sense to try to keep the build working.
+>
 
-On Wed, Nov 15, 2017 at 6:36 PM, <git@git.openembedded.org> wrote:
+musl is relatively newer and support for various components may not be upstream
+but it is getting there. There is no alternative than to carry patches
+as of now.
+and keep forward porting them as the versions advance. We may never get all
+of them upstreamed as is the case with many other large packages.
 
-> This is an automated email from the git hooks/post-receive script.
->
-> armin_kuster pushed a commit to branch master-next
-> in repository meta-openembedded.
->
-> commit f852f042d60103de7fc7424e60b46aa0f24a7bd9
-> Author: Chen Qi <Qi.Chen@windriver.com>
-> AuthorDate: Tue Oct 24 16:19:44 2017 +0800
->
->     gnome-common: add PACKAGECONFIG for autoconf-archive
->
->     Add PACKAGECONFIG for autoconf-archive. Default to enable it to avoid
->     m4 file conflicts between gnome-common and autoconf-archive.
->
->     e.g.
->     IMAGE_INSTALL_append = " gnome-common autoconf-archive-dev"
->     bitbake <image>
->
->     We enable autoconf-archive PACKAGECONFIG to avoid the following error.
->
->     Error: Transaction check error:
->       file /usr/share/aclocal/ax_check_enable_debug.m4 conflicts between
-> attempted installs of gnome-common-3.18.0-r0.noarch and
-> autoconf-archive-dev-2016.09.16-r0.core2_64
->       file /usr/share/aclocal/ax_code_coverage.m4 conflicts between
-> attempted installs of gnome-common-3.18.0-r0.noarch and
-> autoconf-archive-dev-2016.09.16-r0.core2_64
->
->     Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
->     Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb | 4 ++++
->  1 file changed, 4 insertions(+)
->
-> diff --git a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-> b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-> index 06f3bb3..d874164 100644
-> --- a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-> +++ b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
-> @@ -14,6 +14,10 @@ SRC_URI[archive.sha256sum] = "
-> 22569e370ae755e04527b76328befc4c73b62bfd4a572499fd
->  EXTRA_AUTORECONF = ""
->  DEPENDS = ""
->
-> +# Default to enable autoconf-archive to avoid conflicts
-> +PACKAGECONFIG ??= "autoconf-archive"
-> +PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive,
-> --without-autoconf-archive, autoconf-archive"
-> +
->  FILES_${PN} += "${datadir}/aclocal"
->  FILES_${PN}-dev = ""
->
->
-> --
-> To stop receiving notification emails like this one, please contact
-> the administrator of this repository.
-> --
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->
+> OK, fair enough, maybe Khem will again chime in and fix it for musl (in
+> the meantime we might blacklist it for musl that people don't wait for
+> the build to fail).
+
+The patches needs to be redone mostly. Its ok to blacklist it from now.
+I wish someone besides me would have cared too.
 
