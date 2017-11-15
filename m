@@ -1,49 +1,47 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id 3ADBE71A18
+Return-Path: <liu.ming50@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id C75FF71A0F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 14:20:05 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id b189so3328037wmd.0
+	Wed, 15 Nov 2017 14:43:29 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id l8so3428294wmg.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 06:20:07 -0800 (PST)
+	Wed, 15 Nov 2017 06:43:31 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=NW+8hTmmHP7t/q+ksiK8EoF0v6finmpjqZd1zxNbJpc=;
-	b=N2AbVIUEE0BB3QdQAZKNz8Kbbb1JOEs9i0+nLYr9nNw/vNzU4TVQdBKDMa8bda4sD/
-	FKGIlRR/AnT//adh1tqz+/ZO+24q0bIsJN2hQ7gCnIiu2YRJMsza+rO5PNJmlIPviFbJ
-	cW7Jk1tB5RpjDErUjFGx8D1By2eYcqwNLahw94SksUem/TyyfHors7yK7/ghWX8xgfiY
-	cyl9+SQmVl+5fIYWZDNhvmK0HNVeSSYQk8y/FYEnut0DqClp1EkxiSTT32NtxdkcKw7j
-	SVwStyygi0uYDmIdxLiuji3Q0UoX6H6GN4ATSXVPUqn9MUegZ/NcgW78/LrWRYDaU40Z
-	NH1g==
+	h=from:to:cc:subject:date:message-id;
+	bh=jlkwEyFQGVNORc1HO+QsYD/EnjoPXcdFomzSpXi4FT8=;
+	b=PJe7MGy2ZAXGl323vv3kJG4tMm7z20B2WFIbHGVPVFgW7y9jxbyBbL4Z73BVkscMgS
+	rDI2wtywgR+CQEzHawzZZB27GN0k3zq9FuIsPEMTj0qAf19enr8YV6oI2HegkqYEi9po
+	HoEc9tTU8pVdG+4AbxWHKP5dhJw/9VfPyqzfGCKhnoopjNm7v241Nly98U10IScKaOn7
+	BB8mJFIbDM5FR+9xrspR13O+RLt6DXDFDrLTBItop+sLafQcCPlXRCf2sBgkM+2tFUm/
+	QGlwJcpBqZnsAwIpqXeks322HTPtVN3xC/hU42rQPZOrmIBrGVmJ0B2HWvQrVZTC8pf+
+	wenw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=NW+8hTmmHP7t/q+ksiK8EoF0v6finmpjqZd1zxNbJpc=;
-	b=l7UJ4bQzD7fadwSAiqaFZxc4DhGeMStnJTH9So6v0i43hxmyJTUSzuAq3xlvxT67RO
-	+5Lzihzb4X4x1yDW89au+w7pOT9bkaZMY2NysdVCrRiQLUS904WCfj4ePI/nzqdEoKyn
-	vl5DXBxMonETnQCRbQjdRgxGiJizlaCCyyFdqmKppSbu1CKDivBHG0AaZKeTstIZEQ4B
-	yS+6g6ZgqdvJcT6FYavK5d32t2cJjsDkVdWWUj+0ZHBmc5grOJf1rcirKPN4xJkIbJtg
-	pTMnlD+dXMbuUCQboPu114VUPL/xdKXvKS01nGBX5NzLyG2FVoZSSkaIX35x87VPe42D
-	P+1A==
-X-Gm-Message-State: AJaThX4mB5b4HrZ9VQK000SR+Af0PCxaNRuRDh5UlY86UM4RLN5JHCF5
-	4nDFvNEwIJA+DwxlnusSbNnz8KqibRwJq4IQMU4=
-X-Google-Smtp-Source: AGs4zMaCzGlioLQw21UqAd05qrqnMGAnomOsW+T7PIjWvGLAVRIvXNh6xvVr/0DQL+cD5eJbXw6YMDcCWD0cVo6gRds=
-X-Received: by 10.28.118.19 with SMTP id r19mr1891021wmc.10.1510755606908;
-	Wed, 15 Nov 2017 06:20:06 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.173.139 with HTTP; Wed, 15 Nov 2017 06:20:06 -0800 (PST)
-In-Reply-To: <CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
-References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
-	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 15 Nov 2017 15:20:06 +0100
-Message-ID: <CA+chaQdu0YSkvx9cX9rOR81ihqpqS6f7MbkkADSw64VijQGTzA@mail.gmail.com>
-To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=jlkwEyFQGVNORc1HO+QsYD/EnjoPXcdFomzSpXi4FT8=;
+	b=dlk6bE1K1JsdFY7rCpB4fx8U6GaD9ZRIglfYjNtYM+qq8RUdEbnJLRukc+qGhjp/zM
+	LzWQg8FfIu19588jNdJVch/qdtZlwSnpDTcRMcijbZ97DiC+bfVhI49sXUyRkqmWgT/i
+	tgJOzM61dBvOMSuT1izdphIKSJ7na9gycfz/OxSUL7Z+wTdHWPs21L5NbXUxxaAdIGJv
+	x5zvKvQr4nCNXt1vcJhYcVLppq8+1AO2lGJZP3PPjpk3phDXfVcsQqb6aoIiQYvzlYwA
+	uIuLGm8V9h4T2s1smmF5H7kGh94i4GbdNQnL31CKhA3XYU/BrZAfgCqpnywNoiE3ifWj
+	P2HA==
+X-Gm-Message-State: AJaThX7YG0sI7Xd9ykt3ADurYzLsb2jRs3sqrtpXOndJ4MligEXKz3VZ
+	5PC2RKh3Zk2PEx1MFb1u1lAfJQ==
+X-Google-Smtp-Source: AGs4zMYboinEkBQvzhURBabmT5DQMhbXcMiN312fo/P6H/LpHocjSQUz0nm2te50ihoUkAtyWkOsww==
+X-Received: by 10.80.244.141 with SMTP id s13mr15793156edm.222.1510757010573; 
+	Wed, 15 Nov 2017 06:43:30 -0800 (PST)
+Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
+	([123.125.90.58]) by smtp.gmail.com with ESMTPSA id
+	s26sm18151660eds.68.2017.11.15.06.43.26
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 15 Nov 2017 06:43:29 -0800 (PST)
+From: liu.ming50@gmail.com
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 15 Nov 2017 15:41:16 +0100
+Message-Id: <1510756876-27098-1-git-send-email-liu.ming50@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: Ming Liu <liu.ming50@gmail.com>
+Subject: [meta-oe] [PATCH] libc-bench: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,137 +54,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 14:20:06 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 15 Nov 2017 14:43:30 -0000
 
-With the DEPENDS fix applied it still fails to build with musl:
+From: Ming Liu <liu.ming50@gmail.com>
 
-http://errors.yoctoproject.org/Errors/Build/48408/
-| In file included from ../../third_party/ffmpeg/libavutil/autorename_
-libavutil_cpu.c:2:0:
-| ../../third_party/ffmpeg/libavutil/cpu.c:42:10: fatal error:
-sys/sysctl.h: No such file or directory
-|  #include <sys/sysctl.h>
-|           ^~~~~~~~~~~~~~
-| compilation terminated.
+libc-bench is a set of time- and memory-efficiency tests to compare
+implementations of various C/POSIX standard library functions.
 
-I'm doing local qemuarm64 build now to see what happens before that out of
-memory crash.
+Coverage includes:
+- Malloc throughput with varying degrees and forms of contention between
+  threads.
+- Malloc overhead and ability to return freed memory to the OS.
+- Literal string and regular expression searches.
+- Thread creation and joining throughput.
+- UTF-8 decoding.
+- Stdio buffered reads and writes.
 
+Signed-off-by: Ming Liu <liu.ming50@gmail.com>
+---
+ .../recipes-benchmark/libc-bench/libc-bench_20110206.bb | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
 
-On Wed, Nov 15, 2017 at 1:38 PM, Martin Jansa <martin.jansa@gmail.com>
-wrote:
+diff --git a/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb b/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
+new file mode 100644
+index 0000000..f534c73
+--- /dev/null
++++ b/meta-oe/recipes-benchmark/libc-bench/libc-bench_20110206.bb
+@@ -0,0 +1,17 @@
++SUMMARY = "Tests to compare standard functions of different libc implementations"
++DESCRIPTION = "libc-bench is a set of time- and memory-efficiency tests to compare \
++implementations of various C/POSIX standard library functions."
++HOMEPAGE = "http://www.etalabs.net/libc-bench.html"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://Makefile;md5=e12f113da27dfe9cfb6c2c537da8d8df"
++
++SRC_URI = "http://www.etalabs.net/releases/${BPN}-${PV}.tar.gz"
++
++SRC_URI[md5sum] = "f763de90f95fe68e4e03e5b6f49698ac"
++SRC_URI[sha256sum] = "6825260aa5f15f4fbc7957ec578e9c859cbbe210e025ec74c4a0d05677523794"
++
++do_install () {
++    install -d ${D}${bindir}
++    install -m 0755 ${B}/libc-bench ${D}${bindir}
++}
+-- 
+2.7.4
 
-> Thanks for very good changes.
->
-> Yesterday I've tried to build this on "bitbake world" servers and the
-> build for qemuarm64 failed with:
->
-> | [30609/30609] python "../../build/toolchain/gcc_link_wrapper.py"
-> --output="./chrome" -- aarch64-oe-linux-g++  -fstack-protector-strong
-> -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security
-> --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/work/
-> aarch64-oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot -pie
-> -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack
-> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -Wl,--no-as-needed -lpthread
-> -Wl,--as-needed -fuse-ld=gold -B -Wl,--icf=all -Wl,-O1 -Wl,--gc-sections
-> -Wl,-rpath-link=. -Wl,--disable-new-dtags -Wl,--export-dynamic -Wl,-O1
-> -Wl,--hash-style=gnu -Wl,--as-needed -fstack-protector-strong
-> -Wl,-z,relro,-z,now -o "./chrome" -Wl,--start-group @"./chrome.rsp"
-> -Wl,--end-group   -ldl -lpthread -lrt -lpangocairo-1.0 -lpango-1.0
-> -lgobject-2.0 -lglib-2.0 -lcairo -lX11 -lX11-xcb -lxcb -lXcomposite
-> -lXcursor -lXdamage -lXext -lXfixes -lXi -lXrender -lXtst -lgmodule-2.0
-> -lgthread-2.0 -lsmime3 -lnss3 -lsoftokn3 -lnssutil3 -lplds4 -lplc4 -lnspr4
-> -lxml2 -lexpat -lfontconfig -ldbus-1 -latomic -lXss -lfreetype -ljpeg
-> -lwebp -lwebpdemux -lwebpmux -lXrandr -lresolv -lgio-2.0 -lpci -lasound -lm
-> -lz -latk-1.0 -lFLAC -lgtk-3 -lgdk-3 -lcairo-gobject -lgdk_pixbuf-2.0 -lxslt
-> | FAILED: chrome
-> | python "../../build/toolchain/gcc_link_wrapper.py" --output="./chrome"
-> -- aarch64-oe-linux-g++  -fstack-protector-strong  -D_FORTIFY_SOURCE=2
-> -Wformat -Wformat-security -Werror=format-security
-> --sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/work/
-> aarch64-oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot -pie
-> -Wl,--fatal-warnings -Wl,--build-id=sha1 -fPIC -Wl,-z,noexecstack
-> -Wl,-z,now -Wl,-z,relro -Wl,-z,defs -Wl,--no-as-needed -lpthread
-> -Wl,--as-needed -fuse-ld=gold -B -Wl,--icf=all -Wl,-O1 -Wl,--gc-sections
-> -Wl,-rpath-link=. -Wl,--disable-new-dtags -Wl,--export-dynamic -Wl,-O1
-> -Wl,--hash-style=gnu -Wl,--as-needed -fstack-protector-strong
-> -Wl,-z,relro,-z,now -o "./chrome" -Wl,--start-group @"./chrome.rsp"
-> -Wl,--end-group   -ldl -lpthread -lrt -lpangocairo-1.0 -lpango-1.0
-> -lgobject-2.0 -lglib-2.0 -lcairo -lX11 -lX11-xcb -lxcb -lXcomposite
-> -lXcursor -lXdamage -lXext -lXfixes -lXi -lXrender -lXtst -lgmodule-2.0
-> -lgthread-2.0 -lsmime3 -lnss3 -lsoftokn3 -lnssutil3 -lplds4 -lplc4 -lnspr4
-> -lxml2 -lexpat -lfontconfig -ldbus-1 -latomic -lXss -lfreetype -ljpeg
-> -lwebp -lwebpdemux -lwebpmux -lXrandr -lresolv -lgio-2.0 -lpci -lasound -lm
-> -lz -latk-1.0 -lFLAC -lgtk-3 -lgdk-3 -lcairo-gobject -lgdk_pixbuf-2.0 -lxslt
-> | /home/jenkins/oe/world/shr-core/tmp-glibc/work/aarch64-
-> oe-linux/chromium/62.0.3202.89-r0/recipe-sysroot-native/
-> usr/bin/aarch64-oe-linux/../../libexec/aarch64-oe-linux/gcc/
-> aarch64-oe-linux/7.2.0/ld.gold: out of memory
-> | collect2: error: ld returned 1 exit status
-> | ninja: build stopped: subcommand failed.
->
-> longer log in http://errors.yoctoproject.org/Errors/Details/158898/
->
-> I know what linking needs *a lot* of memory, but this server has 219GB
-> available and "only" 128GB from it can be taken by tmpfs, so there should
-> be still plenty RAM for successful linkage.
->
-> Build for x86_64 (on similar server) was successful.
->
-> Build for x86 + musl failed even before start, because there is missing
-> space in the append:
-> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86 =
-> "yasm-native"
-> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_x86-64 =
-> "yasm-native"
->
-> and unlike x86_64 it doesn't have trailing space in previous DEPENDS,
-> because of:
-> recipes-browser/chromium/chromium_62.0.3202.89.bb:DEPENDS_append_libc-musl
-> = " libexecinfo"
->
-> Causing:
-> ERROR: Nothing PROVIDES 'libexecinfoyasm-native' (but
-> /home/jenkins/oe/world/shr-core/meta-browser/recipes-browser/chromium/
-> chromium_62.0.3202.89.bb DEPENDS on or otherwise requires it). Close
-> matches:
->   libxinerama-native
->   texinfo-native
->   libyaml-native
->
-> I'll fix that missing space, but any other ideas why it might fail with
-> out of memory? Are you building for aarch64 as well?
->
-> Regards,
->
->
->
-> On Wed, Nov 15, 2017 at 1:04 PM, Raphael Kubo da Costa <
-> raphael.kubo.da.costa@intel.com> wrote:
->
->> Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com> writes:
->> > I believe this has finally reached a stage where it's ready for public
->> > consumption, hence the CFT:
->> >
->> >     https://github.com/rakuco/meta-browser/tree/chromium62
->> >
->> > I'd like people to look at my commits and let me know if there's any big
->> > issue that would prevent those changes from landing into meta-browser.
->> > If everything's OK, I'd then start sending the patches to the list (or
->> > pull requests on GitHub, whichever is preferred).
->>
->> Thanks to everyone who chimed in on GitHub and Otavio for merging my
->> pull requests.
->>
->> We now have Chromium 62 in meta-browser, and I intend to keep the recipe
->> up-to-date from now on.
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
->
 
