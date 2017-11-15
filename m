@@ -1,26 +1,29 @@
-Return-Path: <jhaws@sdl.usu.edu>
-X-Greylist: delayed 308 seconds by postgrey-1.34 at layers.openembedded.org;
-	Tue, 14 Nov 2017 23:21:21 UTC
-Received: from Perses.usurf.usu.edu (unknown [129.123.197.145])
-	by mail.openembedded.org (Postfix) with ESMTP id 2377F784B4
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga07.intel.com (mga07.intel.com [134.134.136.100])
+	by mail.openembedded.org (Postfix) with ESMTP id 9793378524
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Nov 2017 23:21:21 +0000 (UTC)
-Received: from EK.usurf.usu.edu (172.31.35.73) by Perses.usurf.usu.edu
-	(172.31.35.68) with Microsoft SMTP Server (TLS) id 15.0.1293.2;
-	Tue, 14 Nov 2017 16:16:15 -0700
-Received: from PERSES.usurf.usu.edu (172.31.35.68) by Ek.usurf.usu.edu
-	(172.31.35.73) with Microsoft SMTP Server (TLS) id 15.0.1293.2;
-	Tue, 14 Nov 2017 16:16:14 -0700
-Received: from yocto14.usurf.usu.edu (172.31.22.137) by PERSES.usurf.usu.edu
-	(172.31.35.68) with Microsoft SMTP Server id 15.0.1293.2 via Frontend
-	Transport; Tue, 14 Nov 2017 16:16:14 -0700
-From: Jonathan Haws <jhaws@sdl.usu.edu>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 14 Nov 2017 16:16:14 -0700
-Message-ID: <1510701374-4005-1-git-send-email-jhaws@sdl.usu.edu>
-X-Mailer: git-send-email 1.9.1
+	Wed, 15 Nov 2017 10:05:30 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga105.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	15 Nov 2017 02:05:31 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.44,398,1505804400"; 
+   d="scan'208";a="5181254"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga001.jf.intel.com with ESMTP; 15 Nov 2017 02:05:30 -0800
+To: Martin Kelly <mkelly@xevo.com>, openembedded-devel@lists.openembedded.org
+References: <20171113192711.12926-1-mkelly@xevo.com>
+	<ed834096-8445-261d-3989-d97746c53ddc@linux.intel.com>
+	<a07f0309-e598-0188-58a6-8592fdf036a0@xevo.com>
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+Message-ID: <4f3b5824-0625-ad62-95fa-8b1fae4a9c24@linux.intel.com>
+Date: Wed, 15 Nov 2017 12:05:44 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH] [meta-oe][PATCHv2] [meta-oe] mariadb: Added missing installation of mysqld_safe_helper to FILES_${PN}-server
+In-Reply-To: <a07f0309-e598-0188-58a6-8592fdf036a0@xevo.com>
+Subject: Re: [meta-oe][PATCH] meson: export native env only for native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,32 +36,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Nov 2017 23:21:22 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 15 Nov 2017 10:05:30 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-Per issue MDEV-14044 on https://jira.mariadb.org/browse/MDEV-14044, mysqld_safe_helper
-needs to be installed with the server, but was absent from the mariadb.inc file feeding
-the recipes. This resulted in a broken mariadb installation. Installing
-mysqld_safe_helper alongside mysqld_safe resolves this problem.
+On 11/14/2017 08:23 PM, Martin Kelly wrote:
 
-Signed-off-by: Jonathan Haws <jhaws@sdl.usu.edu>
----
- meta-oe/recipes-support/mysql/mariadb.inc | 1 +
- 1 file changed, 1 insertion(+)
+> For native builds:
+> - Keep the defaults (which use native tools), but export 
+> PKG_CONFIG=pkg-config-native instead of pkg-config.
+> 
+> For target builds:
+> - Set CC, CXX, LD, and AR, but *not* CFLAGS, CXXFLAGS, LDFLAGS etc. We 
+> need CC, CXX etc. so meson finds the native tools for its build sanity 
+> tests, but we don't want to set the flags, as meson will slurp them in 
+> and apply them to the cross build. Note that even though we set CC, etc. 
+> meson will correctly override them in the cross file for the actual 
+> target build.
 
-diff --git a/meta-oe/recipes-support/mysql/mariadb.inc b/meta-oe/recipes-support/mysql/mariadb.inc
-index 16dd9f9..263b313 100644
---- a/meta-oe/recipes-support/mysql/mariadb.inc
-+++ b/meta-oe/recipes-support/mysql/mariadb.inc
-@@ -258,6 +258,7 @@ FILES_${PN}-server = "\
-     ${bindir}/mysqlbinlog \
-     ${bindir}/mysqld_multi \
-     ${bindir}/mysqld_safe \
-+    ${bindir}/mysqld_safe_helper \
-     ${bindir}/mysqlhotcopy \
-     ${bindir}/mysqltest \
-     ${bindir}/ndb_delete_all \
--- 
-1.9.1
+Thanks for looking - can you make a patch for these things against my 
+branch in poky-contrib, and send it to oe-core list? I will send the 
+patchset any day now, and there will be a corresponding patch to remove 
+meson recipe and class from meta-oe. So now is the good point to have it 
+all fixed so that the transition is smooth.
 
+
+Alex
 
