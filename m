@@ -1,39 +1,48 @@
-Return-Path: <raphael.kubo.da.costa@intel.com>
-Received: from mga05.intel.com (mga05.intel.com [192.55.52.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 7A5DD7847F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 17:49:44 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga105.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	15 Nov 2017 09:49:46 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,399,1505804400"; 
-   d="scan'208";a="5326261"
-Received: from irsmsx152.ger.corp.intel.com ([163.33.192.66])
-	by orsmga001.jf.intel.com with ESMTP; 15 Nov 2017 09:49:45 -0800
-Received: from irsmsx104.ger.corp.intel.com ([169.254.5.248]) by
-	IRSMSX152.ger.corp.intel.com ([169.254.6.87]) with mapi id
-	14.03.0319.002; Wed, 15 Nov 2017 17:49:45 +0000
-From: "Kubo Da Costa, Raphael" <raphael.kubo.da.costa@intel.com>
-To: "martin.jansa@gmail.com" <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-browser] CFT: Chromium 62 in meta-browser
-Thread-Index: AQHTXjRnj8Fex1OQW0aoFoUSdF6fZKMVtY4AgAACRYA=
-Date: Wed, 15 Nov 2017 17:49:44 +0000
-Message-ID: <1510768183.37595.10.camel@intel.com>
-References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
-	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
-	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
-	<877eur1nby.fsf@rkubodac-desk.ger.corp.intel.com>
-	<20171115174136.GA4530@jama>
-In-Reply-To: <20171115174136.GA4530@jama>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.252.1.231]
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id A73AD78697;
+	Wed, 15 Nov 2017 18:03:11 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id z3so4719258wme.3;
+	Wed, 15 Nov 2017 10:03:13 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=BVofOp/bXBsNVbNK8+16dLl8sEbo44uVXXxMwi0JyqE=;
+	b=HiI1P9OJ6DCtOh7VqYBcs7JTN09tSj8CxUXP45a0Q3MsEGzRNz+EwNmmxWI11ydHa7
+	3U8+Emt7H8TLBWZQmSV/GyPe+/kyytXpvFmGuA09uBWUz4grUmFr+KlVVUjMe2NQ34qd
+	MwKd6flnhYERAN+AqMrfF6Uy6d79MD7kOtHDTJ8DQSF/7zeX68xDAvLV9urxj6z/jnzF
+	FVkDkl1nANrPyBcbo5G09cm0wmt+T4/e1NGY6/UlT1J4FKFei/08q9/kTKMqd6ucGgkB
+	y1O19T8s67M9/FxK/YJyq8sd/cCV4vUr/Cro1B+S7yu4xKUcRWwJZGSxHZyeapi5Prde
+	qrxQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=BVofOp/bXBsNVbNK8+16dLl8sEbo44uVXXxMwi0JyqE=;
+	b=uk9ftMzgKnY4bKZJO8WA7ieGNFigXqtXpk90KK6D8W6Po0u4ObweqdnttpFgtmeJdg
+	zk0eeEdhp9o/UcY4nV3oyKXlvl/s0bl78b6ImbTg8yBtgsI+WvXTHvXobpQfOwb+iZCv
+	KohDbEzgsvROPa51pn/kharl/Zs8VgpYqYN3eQeREX82FR623j0QcIf3FlXhJF9RmcrD
+	s2mb4Gs+uHyW0JeMlpiq4ZY7fsz2fKzcxL/3Zx6cyEojAoVHyIu6loDTZdZk5xQrxRKj
+	K2fZAvkmrFmt87ALE/fLwKqYOvxGth6hwFrW0C1VdXN7zwS3ytWyUkNTqr4sgIFqdMwE
+	hQQw==
+X-Gm-Message-State: AJaThX6oTl3wQZeVWFV8CpfbmnbmJeQ/HDTqpUMR5al7QgM6VcJ9mmjZ
+	xTWKHPl/226XiYjTQO80DyfcRKdXzkWkYk0p0zA=
+X-Google-Smtp-Source: AGs4zMbPmz/ywwZERiDlBLWSescgV49PCUtAT42HLbVjSeNL4VMacwn9sv/KCMgwiIbja4GrharrzcXB4uPFnhj/hBk=
+X-Received: by 10.28.231.19 with SMTP id e19mr12429722wmh.1.1510768992051;
+	Wed, 15 Nov 2017 10:03:12 -0800 (PST)
 MIME-Version: 1.0
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
+Received: by 10.28.173.139 with HTTP; Wed, 15 Nov 2017 10:03:11 -0800 (PST)
+In-Reply-To: <20171115173600.2DB4123487F@git.openembedded.org>
+References: <151076735962.17716.13874149682187371186@git.openembedded.org>
+	<20171115173600.2DB4123487F@git.openembedded.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 15 Nov 2017 19:03:11 +0100
+Message-ID: <CA+chaQeO8N9B0o6s8QtdqrR7oWv1i=95afJsQpBXtxhwU_jA=g@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Chen Qi <Qi.Chen@windriver.com>, akuster808 <akuster808@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [oe-commits] [meta-openembedded] 05/84: gnome-common: add PACKAGECONFIG for autoconf-archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -46,41 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 17:49:45 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B341FEF762861C4B84D8E9A79F2F644B@intel.com>
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 15 Nov 2017 18:03:12 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-T24gV2VkLCAyMDE3LTExLTE1IGF0IDE4OjQxICswMTAwLCBNYXJ0aW4gSmFuc2Egd3JvdGU6DQo+
-IE9uIFdlZCwgTm92IDE1LCAyMDE3IGF0IDA2OjA4OjQ5UE0gKzAxMDAsIFJhcGhhZWwgS3VibyBk
-YSBDb3N0YQ0KPiB3cm90ZToNCj4gPiBUaGFua3MgZm9yIHRlc3RpbmchDQo+ID4gDQo+ID4gTWFy
-dGluIEphbnNhIDxtYXJ0aW4uamFuc2FAZ21haWwuY29tPiB3cml0ZXM6DQo+ID4gPiBUaGFua3Mg
-Zm9yIHZlcnkgZ29vZCBjaGFuZ2VzLg0KPiA+ID4gDQo+ID4gPiBZZXN0ZXJkYXkgSSd2ZSB0cmll
-ZCB0byBidWlsZCB0aGlzIG9uICJiaXRiYWtlIHdvcmxkIiBzZXJ2ZXJzIGFuZA0KPiA+ID4gdGhl
-IGJ1aWxkDQo+ID4gPiBmb3IgcWVtdWFybTY0IGZhaWxlZCB3aXRoOg0KPiA+IA0KPiA+IFsuLi5d
-DQo+ID4gPiBsb25nZXIgbG9nIGluIGh0dHA6Ly9lcnJvcnMueW9jdG9wcm9qZWN0Lm9yZy9FcnJv
-cnMvRGV0YWlscy8xNTg4OQ0KPiA+ID4gOC8NCj4gPiANCj4gPiBbLi4uXQ0KPiA+ID4gSSBrbm93
-IHdoYXQgbGlua2luZyBuZWVkcyAqYSBsb3QqIG9mIG1lbW9yeSwgYnV0IHRoaXMgc2VydmVyIGhh
-cw0KPiA+ID4gMjE5R0INCj4gPiA+IGF2YWlsYWJsZSBhbmQgIm9ubHkiIDEyOEdCIGZyb20gaXQg
-Y2FuIGJlIHRha2VuIGJ5IHRtcGZzLCBzbw0KPiA+ID4gdGhlcmUgc2hvdWxkDQo+ID4gPiBiZSBz
-dGlsbCBwbGVudHkgUkFNIGZvciBzdWNjZXNzZnVsIGxpbmthZ2UuDQo+ID4gDQo+ID4gSXQgaGFk
-IGJlZW4gYSB3aGlsZSBzaW5jZSBJJ2QgbGFzdCBkb25lIGFuIGFhcmNoNjQgYnVpbGQuIEkNCj4g
-PiBsYXVuY2hlZCBvbmUNCj4gPiBoZXJlIGFuZCBsaW5raW5nIGZhaWxlZCB3aXRoIHJlbG9jYXRp
-b24gZXJyb3JzLiBJJ3ZlIHB1c2hlZCA0ZTVhYmY4DQo+ID4gKCJjaHJvbWl1bTogQXBwbHkgLWcg
-LT4gLWcxIHdvcmthcm91bmQgZm9yIGFhcmNoNjQgYXMgd2VsbCIpLCB3aGljaA0KPiA+IGlzDQo+
-ID4gdGhlIHNhbWUgd29ya2Fyb3VuZCBJJ3ZlIGJlZW4gYXBwbHlpbmcgZm9yIG90aGVyIGFyY2hp
-dGVjdHVyZXMsIGFuZA0KPiA+IGV2ZXJ5dGhpbmcgd2VudCBmaW5lLg0KPiANCj4gV2l0aCB0aGUg
-bGF0ZXN0IHZlcnNpb24gZnJvbSB5b3UgKDYyLjAuMzIwMi45NCkgSSBhbHNvIGdvdCByZWxvY2F0
-aW9uDQo+IGVycm9ycyBpbnN0ZWFkIG9mIHRoZSBvdXQtb2YtbWVtb3J5IG9uZSwgc2VlOg0KPiAN
-Cj4gaHR0cDovL2Vycm9ycy55b2N0b3Byb2plY3Qub3JnL0Vycm9ycy9CdWlsZC80ODQyNi8NCj4g
-DQo+IEknbSB0cnlpbmcgbm93IHdpdGggZzEgYXMgeW91IHN1Z2dlc3RlZC4NCg0KLjk0IGlzIHN0
-aWxsIHVuZGVyIHJldmlldyBvbiBHaXRIdWIsIGJ1dCBpdCdzIHdoYXQgSSB0ZXN0ZWQNCm5vbmV0
-aGVsZXNzLiBUaGUgcmVsb2NhdGlvbiBlcnJvciBzaG91bGRuJ3QgaGFwcGVuIGFueW1vcmUsIHBs
-ZWFzZSBtYWtlDQpzdXJlIHRoYXQgY29tbWl0IEkgbWVudGlvbmVkIGlzIGluY2x1ZGVkIGluIHlv
-dXIgdGVzdHMuDQoNCj4gKGluIHRoZSBtZWFudGltZSB3ZSBtaWdodCBibGFja2xpc3QgaXQgZm9y
-IG11c2wgdGhhdCBwZW9wbGUgZG9uJ3QNCj4gd2FpdCBmb3IgdGhlIGJ1aWxkIHRvIGZhaWwpLg0K
-DQpTb3VuZHMgbGlrZSBhIHBsYW4gdG8gbWUsIGp1c3QgbGV0IG1lIGtub3cgaWYgeW91J2QgbGlr
-ZSB0byBkbyB0aGF0DQp5b3Vyc2VsZiwgb3RoZXJ3aXNlIEknbGwgZ2V0IGFyb3VuZCB0byBpdCB0
-b21vcnJvdy4=
+Please don't merge this one until autoconf-archive is changed in oe-core.
+
+On Wed, Nov 15, 2017 at 6:36 PM, <git@git.openembedded.org> wrote:
+
+> This is an automated email from the git hooks/post-receive script.
+>
+> armin_kuster pushed a commit to branch master-next
+> in repository meta-openembedded.
+>
+> commit f852f042d60103de7fc7424e60b46aa0f24a7bd9
+> Author: Chen Qi <Qi.Chen@windriver.com>
+> AuthorDate: Tue Oct 24 16:19:44 2017 +0800
+>
+>     gnome-common: add PACKAGECONFIG for autoconf-archive
+>
+>     Add PACKAGECONFIG for autoconf-archive. Default to enable it to avoid
+>     m4 file conflicts between gnome-common and autoconf-archive.
+>
+>     e.g.
+>     IMAGE_INSTALL_append = " gnome-common autoconf-archive-dev"
+>     bitbake <image>
+>
+>     We enable autoconf-archive PACKAGECONFIG to avoid the following error.
+>
+>     Error: Transaction check error:
+>       file /usr/share/aclocal/ax_check_enable_debug.m4 conflicts between
+> attempted installs of gnome-common-3.18.0-r0.noarch and
+> autoconf-archive-dev-2016.09.16-r0.core2_64
+>       file /usr/share/aclocal/ax_code_coverage.m4 conflicts between
+> attempted installs of gnome-common-3.18.0-r0.noarch and
+> autoconf-archive-dev-2016.09.16-r0.core2_64
+>
+>     Signed-off-by: Chen Qi <Qi.Chen@windriver.com>
+>     Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>
+> diff --git a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> index 06f3bb3..d874164 100644
+> --- a/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> +++ b/meta-oe/recipes-gnome/gnome-common/gnome-common_3.18.0.bb
+> @@ -14,6 +14,10 @@ SRC_URI[archive.sha256sum] = "
+> 22569e370ae755e04527b76328befc4c73b62bfd4a572499fd
+>  EXTRA_AUTORECONF = ""
+>  DEPENDS = ""
+>
+> +# Default to enable autoconf-archive to avoid conflicts
+> +PACKAGECONFIG ??= "autoconf-archive"
+> +PACKAGECONFIG[autoconf-archive] = "--with-autoconf-archive,
+> --without-autoconf-archive, autoconf-archive"
+> +
+>  FILES_${PN} += "${datadir}/aclocal"
+>  FILES_${PN}-dev = ""
+>
+>
+> --
+> To stop receiving notification emails like this one, please contact
+> the administrator of this repository.
+> --
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>
 
