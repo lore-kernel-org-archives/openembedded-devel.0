@@ -1,42 +1,48 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 5AE497876B
+Return-Path: <gizero@gmail.com>
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 36A3A787BA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 17:03:46 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id r39so28112576qtr.13
+	Thu, 16 Nov 2017 17:15:29 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id a63so1715731wrc.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 09:03:48 -0800 (PST)
+	Thu, 16 Nov 2017 09:15:31 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=JADaPSjTNfLSQAEaYSSOTOd4a0KB4EjpjMPDi7XZ+WQ=;
+	b=mOVg+d0rHWCLVeiluO8iLqTQGemxkv/xqTQmqDaNthkl5dO81ucDpS/KjmGb9LOPhs
+	NEtQTUQ6511afBO9VAsCIDMcazIcBs8YxwCP0yd6nolL0dS1f9Ha3geqMJvKeqPLQd/e
+	/PO5IFlwKXFlqefe7kmIk3dSjPlaICvy0YRUL58t4IYD7/K6FKkiu9I+bQt9UsfbOD71
+	MeXg1z5h9F5QW7/B8au/pVGLVzxkrdSXFrdHFMTSikGvV1JVW8sUW/WXJdGvq9z2dRNh
+	RSQYBFrxEMdJcQmqyyr8Y31c/xLUv4JDM/Ns6fWsVRzbPmsxx1YpMRJ7uG6AjE/2aFU2
+	UJGA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
-	bh=btHdxgMf/g6gmjSlSqyxCc4BkGe/TT4yHmjTLdcwrDk=;
-	b=MImgV45DwxIpbzMwCK3u7trG7e39Ivqc8F/YUpIB4ghrO8mp7ftYbuA/ch5vzCcVrz
-	OmeExWdyCA1wDLSR41Xp0HEv+n0lRfUr9L57c/UnckRb7wjC3Qqd811iz+ciBNbdDZkr
-	vQC+nmHMW7pjoTfIB6d4TxktCM/pXj0bSZUsYll14OhDDFN7E1F/uuZXiq8Ud8DETEjG
-	p/OUR+PZdtg2IO7h+KJNmsuFe17uxo2Kbc2bY5ePjkC5OKmLSnbHxXl2tYQMEZnwJWFQ
-	MMbO9DNgbHuZhyNXQZ6/r8D+Arg43OJh/Qca4CtYtb6RwU/cCvUWrLVTT9bzM1tbTlxX
-	s3TQ==
-X-Gm-Message-State: AJaThX7oFSiXHL4zM9zkW52ISiakqkG5S80Fh0lkZaR+FsrlOVvlGEQF
-	bxhCwDzkvN9Fs1F1HPF9ZZ3Zjw==
-X-Google-Smtp-Source: AGs4zMYILrAqRH4NH/W7soY1GIEtdER+rYWrlaHdRBfXJeWyM0cjpwgV4TV2gfzvp/y4Xo2XJPIOrA==
-X-Received: by 10.55.27.70 with SMTP id b67mr3559233qkb.356.1510851827720;
-	Thu, 16 Nov 2017 09:03:47 -0800 (PST)
-Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id m1sm1107254qkl.93.2017.11.16.09.03.44
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Thu, 16 Nov 2017 09:03:46 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Thu, 16 Nov 2017 15:03:38 -0200
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 16 Nov 2017 15:03:37 -0200
-Message-Id: <20171116170337.23228-1-otavio@ossystems.com.br>
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=JADaPSjTNfLSQAEaYSSOTOd4a0KB4EjpjMPDi7XZ+WQ=;
+	b=KHxXiWYInGT6BEeNv9lFWY4BHgMpjyuf9ZCGrgG2rcH7GcP9/DlxVcZL/4STPWi1UE
+	msKbXbUe+/DR9wSJAjHV5e5A+DCCNDHl3/tIhmV0TxoLHUlP/UTssNKhL/J9b/DC2jUa
+	NbF32dKgpuBBh61OzRCUq9tOzkM1aROwTF9OeyWVrgEaL/dAaDjDXRkgY7pq4z9VwEu+
+	iI/L9V1T+IoEUqnnDG6JSvHwGDjSKPz/ulL6sp8os3yqSZyEvyfIrNeSRKAhjIsk5UFs
+	u2qCRDU1wULHNLAENLKgTpIjPyoJR2LqHkkcOBz0a6JPmcX46Qj5O2/ExA5eXteghW19
+	QbNg==
+X-Gm-Message-State: AJaThX7tHMvU7sr0M7dt0rqN31J/s1uV+psy70OgucN0sSLJDmAghCto
+	5bz0rcDuoGCqJzaWtHpiPk79DA==
+X-Google-Smtp-Source: AGs4zMa3bwJfFl10Yc5PYW7d/BxOxJQDkuhdJU4pHnpLoz0N1cPCFdWgd/RyOdihMNDziLE+WVXNbw==
+X-Received: by 10.223.175.49 with SMTP id z46mr328671wrc.12.1510852530628;
+	Thu, 16 Nov 2017 09:15:30 -0800 (PST)
+Received: from gizero-desktop.tw.it
+	(host193-245-static.58-79-b.business.telecomitalia.it.
+	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
+	y48sm1616015wrb.41.2017.11.16.09.15.29
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 16 Nov 2017 09:15:29 -0800 (PST)
+From: Andrea Galbusera <gizero@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Nov 2017 18:15:17 +0100
+Message-Id: <20171116171517.19632-1-gizero@gmail.com>
 X-Mailer: git-send-email 2.15.0
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-python PATCH] python-asn1crypto: Add native and nativesdk variants
+Subject: [meta-oe][PATCH] drop redundant 'inherit allarch' from packagegroups
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,24 +55,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 17:03:47 -0000
+X-List-Received-Date: Thu, 16 Nov 2017 17:15:30 -0000
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+packagegroup bbclass already takes care of this
+
+Signed-off-by: Andrea Galbusera <gizero@gmail.com>
 ---
+ meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb     | 2 +-
+ meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
 
- meta-python/recipes-devtools/python/python-asn1crypto.inc | 2 ++
- 1 file changed, 2 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python-asn1crypto.inc b/meta-python/recipes-devtools/python/python-asn1crypto.inc
-index 3bdb4b235..7accbba18 100644
---- a/meta-python/recipes-devtools/python/python-asn1crypto.inc
-+++ b/meta-python/recipes-devtools/python/python-asn1crypto.inc
-@@ -10,3 +10,5 @@ SRC_URI[md5sum] = "97d54665c397b72b165768398dfdd876"
- SRC_URI[sha256sum] = "0874981329cfebb366d6584c3d16e913f2a0eb026c9463efcc4aaf42a9d94d70"
+diff --git a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
+index 1be7f6aff..53fc159c8 100644
+--- a/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
++++ b/meta-oe/recipes-devtools/packagegroups/packagegroup-sdk-target.bb
+@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
  
- inherit pypi
-+
-+BBCLASSEXTEND = "native nativesdk"
+ PR = "r1"
+ 
+-inherit packagegroup allarch
++inherit packagegroup
+ 
+ RPROVIDES_${PN} += "packagegroup-native-sdk"
+ RREPLACES_${PN} += "packagegroup-native-sdk"
+diff --git a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
+index 632e7d433..3069d2ded 100644
+--- a/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
++++ b/meta-oe/recipes-graphics/packagegroups/packagegroup-fonts-truetype.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384
+ PV = "1.0"
+ PR = "r2"
+ 
+-inherit packagegroup allarch
++inherit packagegroup
+ 
+ PACKAGES += "\
+     ${PN}-core \
 -- 
 2.15.0
 
