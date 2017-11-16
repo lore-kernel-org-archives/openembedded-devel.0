@@ -1,48 +1,54 @@
-Return-Path: <gizero@gmail.com>
-Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
-	[209.85.128.194])
-	by mail.openembedded.org (Postfix) with ESMTP id EAD89787BA
+Return-Path: <patrick.ohly@intel.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D1FA787AF
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 18:06:00 +0000 (UTC)
-Received: by mail-wr0-f194.google.com with SMTP id u40so23597159wrf.10
+	Thu, 16 Nov 2017 18:28:06 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id b189so1984013wmd.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 10:06:02 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=gu3Z1qBhDV8RR0474wGnv2djb/26ut+n45liQGI/+Kg=;
-	b=T0KaLe+/uQiILyRdK8xcJ8Z8IjhOermymMDOuD71hluare9z7c6Ksn6DEtD0nXoWWS
-	FupHaFKbqWfRjjfoS8q1vdgKRA/FspSrIbTAUaovcykEWJu57XE1o8WMU2oui7NgKiju
-	4OxvEefkv4OAcethQwQpU6eh8VnykgLUWIx3XSLeXYdYfeB8toPT71ok7hGGRrKciLcn
-	QKwngKdMNheTffOdSKFMNTIzu62fF2z5PT0N2OhQjTwySwtqc1EtV+E291QMFHyOIgye
-	VCT0t1eB+KQkttQ4STHhfAiQH6ESI/rjGS219XrWRgpBLT5rc8ae8IhovmhfrPcMcO84
-	XH8Q==
+	Thu, 16 Nov 2017 10:28:08 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=message-id:subject:from:to:date:in-reply-to:references:organization
+	:mime-version:content-transfer-encoding;
+	bh=bO9cysob6WuVH6IQbwL+uhslY9s/ufhetla75Wg7dvY=;
+	b=xLh2L3j1fVFPU/ZOWklEHCuVXDd3SVRa10ZGSY1DDusZkw/83+EzmRnVIddKBg+RyM
+	M35uZ1JkaQ4nzqPaOQGY8VnHdFMVSYAHSxu8G6k6ecBFuZP5aP1/Ce+Jw5XoPVLfgY6m
+	61BrzqKfmgjYt3Y8GEx2QCJTuF+AuS25eQ6tGnUXeFJSZy4PyS1t/9AQyMLWz4aem48d
+	q/HN+5cBqCzYXG3GeFkyUO63WQY8zu33sDFfXG4kokoM/lrk4JCD6C6D+lEZ4/eVdD3g
+	8T/4uAyhvrmwQuSYLlh7aUbBctJ2VC2S7uhcX3o3wrub+mj2M5cWWTI0vYi3dHJxbhSe
+	t/Wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=gu3Z1qBhDV8RR0474wGnv2djb/26ut+n45liQGI/+Kg=;
-	b=bwam5qPlOvFgnG+x7OnTbgw0QMv6kMM6hIwAJJ2JwpLYIK9yuQV4CFzREl9PgaAbMt
-	AyNqVY+64eSamaTteAGHQV9TwORDh7yjCTiyWled3Q4AizIolT8ng2+og17cjmwjymQc
-	SLCOzfrSkTCxXNHJYiNLWRduNrQKgYb755qKSW2Ueh3tgBkmoaTW+pFWz/YeQPZJ3TXd
-	lEc1xA/L37MrHQAukyN8LfD+Eq+1ySVSQH54frZJ6KHgPJ9pXk5Nt/gJ0KB1go8aUmn0
-	H1fiPmZfpmVsT+d21e7gDX+7DTLeo5iK42mPlJnmHnDTMkYnFqlr3sgqfAoFwJLfjU/1
-	AXMQ==
-X-Gm-Message-State: AJaThX4WybGe9rzgejGU4lBolQJ06TVNF5DJsOwtoLEYh97YSp0YzLVL
-	mrFfQiFxIFn26XX0SUPK8kk9EQ==
-X-Google-Smtp-Source: AGs4zMZqManuGFqogBhAUjjAS/7I0Wm/m63cjb2pgVz5mu/IvYiLT466O2KtFedW/Y607mO3gxmsaw==
-X-Received: by 10.223.177.131 with SMTP id q3mr2402379wra.269.1510855561221;
-	Thu, 16 Nov 2017 10:06:01 -0800 (PST)
-Received: from gizero-desktop.tw.it
-	(host193-245-static.58-79-b.business.telecomitalia.it.
-	[79.58.245.193]) by smtp.gmail.com with ESMTPSA id
-	e131sm2904771wmg.1.2017.11.16.10.06.00
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 16 Nov 2017 10:06:00 -0800 (PST)
-From: Andrea Galbusera <gizero@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 16 Nov 2017 19:05:53 +0100
-Message-Id: <20171116180553.9385-1-gizero@gmail.com>
-X-Mailer: git-send-email 2.15.0
-Subject: [meta-oe][PATCH] hiredis: fix paths in pkgconfig conf file
+	h=x-gm-message-state:message-id:subject:from:to:date:in-reply-to
+	:references:organization:mime-version:content-transfer-encoding;
+	bh=bO9cysob6WuVH6IQbwL+uhslY9s/ufhetla75Wg7dvY=;
+	b=Nvw2KUAmNvr2m+muMyHFwFPvVCtCuBHbGDpjo6BgIiQuOoUn52cwibAy7xRCASwtkQ
+	DifxkfpBOizaIyaYvdzVVzEW7NgjzEYrjRNhozdlxoIs776rOgWnwdaECsnzE8F2nsA7
+	ZoLCqAGvIliZKzARyAQPMedwyB/ZN5MElz+6RsaUMVr6d3q8xcp1ZdmFNQKFcsRveWgp
+	1LhKCTottm2FaFrmAK4YJDze00FUw5o65Alccl4uz+8S5GjQaGsei8UnJhPjId+Dm8cU
+	ehN/piuaKe+M0n8clILl1v1DsSDlBlXdo9gYIadPKGv+WodhhzPuYEPUpvUNlgUZ78/1
+	ISjw==
+X-Gm-Message-State: AJaThX62pNZcqeDiHjRz9Jf1f8fUWal32/HIMxPGTamOf+P0VdJTV4th
+	NvSATENqRKp9JPy0XnNiPwlW
+X-Google-Smtp-Source: AGs4zMaBEOpJyQ/Qwp6aO14QJtuacHJxEf0XF9w4VIWGADPzERc4ca0+8k4r5qPyR3KBSVhXOsJ12A==
+X-Received: by 10.28.20.147 with SMTP id 141mr2110818wmu.132.1510856888132;
+	Thu, 16 Nov 2017 10:28:08 -0800 (PST)
+Received: from pohly-mobl1 (p54BD58EA.dip0.t-ipconnect.de. [84.189.88.234])
+	by smtp.gmail.com with ESMTPSA id
+	r15sm1412500wrc.36.2017.11.16.10.28.07
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 16 Nov 2017 10:28:07 -0800 (PST)
+Message-ID: <1510856886.5979.34.camel@intel.com>
+From: Patrick Ohly <patrick.ohly@intel.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>, 
+	openembedded-devel@lists.openembedded.org
+Date: Thu, 16 Nov 2017 19:28:06 +0100
+In-Reply-To: <1510845589-10848-1-git-send-email-mark.asselstine@windriver.com>
+References: <1510845589-10848-1-git-send-email-mark.asselstine@windriver.com>
+Organization: Intel GmbH, Dornacher Strasse 1, D-85622 Feldkirchen/Munich
+X-Mailer: Evolution 3.22.6-1+deb9u1 
+Mime-Version: 1.0
+Subject: Re: [meta-webserver][PATCH] meta-webserver: apache2 allow SYSTEMD_AUTO_ENABLE to be overwritten
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,35 +61,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 18:06:01 -0000
+X-List-Received-Date: Thu, 16 Nov 2017 18:28:07 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Set PREFIX via EXTRA_OEMAKE instead of exporting it in do_install_prepend():
-than ensuring the correct prefix gets into hiredis.pc, which is generated by
-upstream makefile at do_compile() time.
+On Thu, 2017-11-16 at 10:19 -0500, Mark Asselstine wrote:
+> The current assignment does not allow a bbappend to be used to
+> overwrite the SYSTEMD_AUTO_ENABLE value in order to have apache2 auto
+> start.
 
-Signed-off-by: Andrea Galbusera <gizero@gmail.com>
----
- meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+Why does SYSTEMD_AUTO_ENABLE_${PN} = "enable" in a apache2_*.bb not
+work? It works fine for me with wpa-supplicant:
 
-diff --git a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
-index 96b86f9a0..fae30d771 100644
---- a/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
-+++ b/meta-oe/recipes-extended/hiredis/hiredis_0.13.1.bb
-@@ -12,10 +12,11 @@ S = "${WORKDIR}/git"
- 
- inherit autotools-brokensep pkgconfig
- 
-+EXTRA_OEMAKE = "PREFIX=${prefix}"
-+
- # By default INSTALL variable in Makefile is equal to 'cp -a', which preserves
- # ownership and causes host-user-contamination QA issue.
- # And PREFIX defaults to /usr/local.
- do_install_prepend() {
--  export PREFIX=${prefix}
-   export INSTALL='cp -r'
- }
+wpa-supplicant_2.6.bb: SYSTEMD_AUTO_ENABLE = "disable"
+wpa-supplicant_2.6.bbappend: SYSTEMD_AUTO_ENABLE = "enable"
+=> bitbake -e shows "enable"
+
 -- 
-2.15.0
+Best Regards, Patrick Ohly
+
+The content of this message is my personal opinion only and although
+I am an employee of Intel, the statements I make here in no way
+represent Intel's position on the issue, nor am I authorized to speak
+on behalf of Intel on this matter.
+
 
 
