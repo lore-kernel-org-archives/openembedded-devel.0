@@ -1,94 +1,54 @@
-Return-Path: <mkelly@xevo.com>
-Received: from NAM03-DM3-obe.outbound.protection.outlook.com
-	(mail-dm3nam03on0085.outbound.protection.outlook.com [104.47.41.85])
-	by mail.openembedded.org (Postfix) with ESMTP id CACBF786A7
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f48.google.com (mail-pg0-f48.google.com [74.125.83.48])
+	by mail.openembedded.org (Postfix) with ESMTP id 04D757877C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Nov 2017 21:21:49 +0000 (UTC)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=uievolution.onmicrosoft.com; s=selector1-xevo-com;
-	h=From:Date:Subject:Message-ID:Content-Type:MIME-Version;
-	bh=8iXfDrNcEWhzVjRxVyTWgTdBHqUoFBYHw5UXq/4MA9M=;
-	b=CiyEkd/zf3Z2MdTNE2ql4UYL2T10KLdzvSQlrA7JDuh/kNsQWw/KaO7AQ792dnaTGPFQ4OyXvKA4QqhuJjGY7cdL4UXib9IwfuM9lfzET/Ee7ZdpSR+45QNCf93POH0LvobXCpeJKWL/yov93uD0sZXQ3S87ZKzJ5xs3lm3S7OI=
-Authentication-Results: spf=none (sender IP is )
-	smtp.mailfrom=mkelly@xevo.com; 
-Received: from willamette.Home (71.35.172.156) by
-	BN6PR0101MB2929.prod.exchangelabs.com (10.174.87.138) with Microsoft
-	SMTP Server (version=TLS1_2,
-	cipher=TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384_P256) id
-	15.20.218.12; Wed, 15 Nov 2017 21:21:48 +0000
-From: Martin Kelly <mkelly@xevo.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Nov 2017 13:21:36 -0800
-Message-Id: <20171115212136.16472-1-mkelly@xevo.com>
-X-Mailer: git-send-email 2.11.0
+	Thu, 16 Nov 2017 02:19:19 +0000 (UTC)
+Received: by mail-pg0-f48.google.com with SMTP id 4so10557269pge.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Nov 2017 18:19:21 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=rMvOwiPglWDNQYeHFo67aL7mzHq5U60Sku7XaGrRqpM=;
+	b=q+XRjOgJmj4TqRpETbehoYnpgser87NEQ/TF4/RMZ8h/Ut6WJsJJHC8axWqzKGZJjH
+	sBIm/WTu27EnqkaoEThWR/Smh/CuSgHSecIfhT71YkNSGJl4gNiVJGtdfMU2bhKaJdUU
+	mQKN1LDAtxrxyv8p5D+BeU4/m/iT0oXgElO9pgH6kLwGsSoOPUkXbscC6y78qGQI222L
+	xru0AmN6Sr4JQjaK/iRd0QCBy6u0F2mwYeHIWoQNnR6LswfdS9dvASuYTrnWbewUab5s
+	9aPCuA/Mq6qvrKsU1KcRV5SLh2rfDbY5D0hErLTVS9L6C4Aic5HI8AKC2S5jv4Cbw2zf
+	cPLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=rMvOwiPglWDNQYeHFo67aL7mzHq5U60Sku7XaGrRqpM=;
+	b=EDX5IcwiKZ7H3v1ZEDR5ytolL0TMrngSlvfpVQ+NtAPOkxQJM3fHhq1jkQ2E+5/3QA
+	/F3vQjWgbNWe2FP3eCez5J4xw3NPH6C3Cs2QDuJbuQAZe+QI6ohhZWt8EIgfwm4E7Ifl
+	9TvmuPyATwbEn3f9FwZDGOlUUkyPaItUUtMKVwFZc2GQOsrKstq12UCdFxenLtxK0OSO
+	CI+Ioww1yFJuAaDog4woJ7AC04Md7cUFMI3ulvV8OVDDuGNytVxLYmOZ1Z38hhkOm2XA
+	DSA1PdEFX79n23AUDxfdtx5onbWJTr8ZKXsTaoH88jZyGOcg9ajaRNHbw/BcJqSE3Vmv
+	IUXA==
+X-Gm-Message-State: AJaThX4JJPOrMEucxGSzZ8Lq7i8ZRNzhtsp8PWw6xWYr6xFT7BNvPx7Q
+	7f5OIaboX3d1DrjLFCclYZStAQ==
+X-Google-Smtp-Source: AGs4zMZImSHQlX+3n3nyHOC52yoM/1ro4Gf2ZujHNckUHpxkWegaQNqp3lFtybJabuym749xoyGdYw==
+X-Received: by 10.99.6.23 with SMTP id 23mr128950pgg.276.1510798760222;
+	Wed, 15 Nov 2017 18:19:20 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0?
+	([2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0])
+	by smtp.gmail.com with ESMTPSA id w15sm33691pgc.77.2017.11.15.18.19.19
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 15 Nov 2017 18:19:19 -0800 (PST)
+To: Zhixiong Chi <zhixiong.chi@windriver.com>,
+	openembedded-devel@lists.openembedded.org
+References: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <9569cc40-d759-ed8f-09f7-61a07a433359@gmail.com>
+Date: Wed, 15 Nov 2017 18:19:18 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-X-Originating-IP: [71.35.172.156]
-X-ClientProxiedBy: MWHPR1201CA0004.namprd12.prod.outlook.com (10.174.253.14)
-	To BN6PR0101MB2929.prod.exchangelabs.com (10.174.87.138)
-X-MS-PublicTrafficType: Email
-X-MS-Office365-Filtering-Correlation-Id: 2f2b000b-f405-4ba8-b063-08d52c6ee214
-X-Microsoft-Antispam: UriScan:; BCL:0; PCL:0;
-	RULEID:(22001)(4534020)(4602075)(4627115)(201703031133081)(201702281549075)(2017052603258);
-	SRVR:BN6PR0101MB2929; 
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2929;
-	3:K4Q+84rZN1hs7V21w5g6bN4AujmcudCTUF2RMsEctGS9CBTdAF1U+miXEsyBuM+1Ovf+ActfuNeui2+/tHUWaig+MaQoe8O8XrG+wHD/UV5yZhUeLMfDszXVFeTGFdfxXEqms8wEPPW2xIXYIkTLhEG8Cemf+MxH9B6PLBhX5YR/YFAP1ncx5XlrzwkTEXUTKW7Tn92k4V6L6KlU4Ii2ZvT65LHOth9XyFkLrt9jS2YO2pBlMwmUhaX1y6s7q5SR;
-	25:6G5eWaoLtkO1BvR3BirtHouBS/SqPank9BRql8gQWawkffX5VG4bxe966nEwsuw02146guUvhOobCpR/Y2G0g93rLMgvER76nA0Io7478kI/9gwfm5RkyKIYHh5ugTLpG8f1DAm0mS5XuSahfQlPlzW8bnKJ/ctPAkUKBhcpM70cRg+V2bXTIygKYtey04bC+tsQZOYNXR2ya7lY/bv0fQtEZPkAlTbjLwJZ1A3o9s3MjhSf0eAr0OnEBY3wAlYWZaldDW322L9KxwbI6ANTfHdWugWsKRdD7p3ga7QK0T3G9qhO1m6vZ6FRg7nCBYVpoJqq/WlxRpcDJECuUA45Kw==;
-	31:VBMVR2O1YWcc2rxYgtTIARcRPiZrfEeSHUaEtl0DK9XTXLPD62dz/hZ15ZzvQ9grkfap10KiZJtyX+0stzJKjBhA9j0UM78PjOFNdQf4HbdENpIVf3P2KTvEVBOZnOHyRGhjFHrM3Z1Pk9Jhtf4814+nsOho/IxNArc2wiZuI2sgE/tsLtCePRdqfI5hVcHyRklj0QzQhpXzOjzJg85fLw4iMIB96bAZ6tOw0Avl8dY=
-X-MS-TrafficTypeDiagnostic: BN6PR0101MB2929:
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2929;
-	20:qT/Q8Z/suVZ+l3P89XkK7XM/E/LRyDlzkFYlCigwexU5ZcqgO4FCHqnj+/O9f2Olgp95sHJc0J9zjxJUmMsQhRz/mxxNS0MwJe+/rBO+61OdVepyLHE37T0o5blth7sLuli4p8JFK3KlmoBdIM74jIjDYzGCF80gFq13c/d1oS3B5OCEkknjGw4fUBTHADfvv+B9HmYlvRo0u9P9Xt6nSz1JmIVbEBcT2VMJ6Bo6hQCps9upeFyPUw/V+Nk2QguEaVDh0tYwujRO2Zk3oIJXBnpePHB2epNBnFgM1yZjG4U9hw0jWTeG2Re2vpPOQNMi2va5hRVsdA+A4+w3iJEAGTB71BJRCLN/TgDs25emd/TiAGjxQEP8vsXbP7+dbOTgzfqW9JfNiDcKfpVxCXflsk9w/XaIMxi3eJ+J7v/F0rk=;
-	4:AgtZtwIqnOjed/0z3QjZZeDVANf6VIZNp0TyVFcQKcT3KGPgodsT5dryt4IpWpZOK8iIky08U55x87Lw7dlzYWaPsKcTBR7h5p1Bb9EK5FZ/SfEbGa3I3rujy6Fh4ALmPdEMq5kfKrQW4i3vDSKMFitmpzRQehd2dYBWLoo5BmNWxpT+O1cnTbXq7cqVjiquy8g9cWoiUsUi0kR3F5IHr0q3yoPX2muojSw7apu9EgnL5R5eJQwZh+OcwMEt8VpTn49lbZj0IUjrm050cewBwg==
-X-Microsoft-Antispam-PRVS: <BN6PR0101MB2929A20B98987CA8E544FC48AB290@BN6PR0101MB2929.prod.exchangelabs.com>
-X-Exchange-Antispam-Report-Test: UriScan:;
-X-Exchange-Antispam-Report-CFA-Test: BCL:0; PCL:0;
-	RULEID:(100000700101)(100105000095)(100000701101)(100105300095)(100000702101)(100105100095)(6040450)(2401047)(8121501046)(5005006)(3231022)(100000703101)(100105400095)(3002001)(10201501046)(93006095)(93001095)(6041248)(20161123560025)(20161123564025)(20161123558100)(20161123555025)(201703131423075)(201702281528075)(201703061421075)(201703061406153)(20161123562025)(6072148)(201708071742011)(100000704101)(100105200095)(100000705101)(100105500095);
-	SRVR:BN6PR0101MB2929; BCL:0; PCL:0;
-	RULEID:(100000800101)(100110000095)(100000801101)(100110300095)(100000802101)(100110100095)(100000803101)(100110400095)(100000804101)(100110200095)(100000805101)(100110500095);
-	SRVR:BN6PR0101MB2929; 
-X-Forefront-PRVS: 0492FD61DD
-X-Forefront-Antispam-Report: SFV:NSPM;
-	SFS:(10009020)(6009001)(39830400002)(376002)(346002)(199003)(189002)(6666003)(6486002)(305945005)(6916009)(3846002)(47776003)(6506006)(68736007)(50986999)(50226002)(101416001)(69596002)(86362001)(1076002)(21086003)(105586002)(36756003)(54906003)(189998001)(5003940100001)(6116002)(66066001)(478600001)(39060400002)(316002)(8936002)(81166006)(81156014)(97736004)(4326008)(53936002)(107886003)(6512007)(25786009)(106356001)(2906002)(5660300001)(33646002)(16526018)(16586007)(50466002)(2361001)(8676002)(7736002)(48376002)(2351001);
-	DIR:OUT; SFP:1101; SCL:1; SRVR:BN6PR0101MB2929;
-	H:willamette.Home; FPR:; SPF:None; PTR:InfoNoRecords; A:1; MX:1;
-	LANG:en; 
-Received-SPF: None (protection.outlook.com: xevo.com does not designate
-	permitted sender hosts)
-X-Microsoft-Exchange-Diagnostics: =?us-ascii?Q?1; BN6PR0101MB2929;
-	23:yPKcyexAD5Tlg2tCEVgM/5ZryULtprL5f3Ck6bM?=
-	=?us-ascii?Q?ksMrT3UGkmZU+8XRPjNvmQJxMxoq2rph9HNwG7GoK/WOCNCz3XrbMqPLj35X?=
-	=?us-ascii?Q?azuxIRLjW4lpx0vs4gSwkYZQStfVXakrLAleE8ky1LDCpra1DwvqhQ4a98yW?=
-	=?us-ascii?Q?xlbVHhknezzQLOPeKbu0aDvRoehLuW2UkBJzbopM7pK5IKW2YSj3hi1k32Td?=
-	=?us-ascii?Q?MHsU75waPw+V4B8+8qbRWeFkmzZ/7IokzDgSs8Gzs9n+MZIRJeqU+UiJbdLD?=
-	=?us-ascii?Q?twsWzl3zVDDo0CiTRawBWvfDa3IBBub7mKCXGRTLu/xumwDjTH3L7AliHXCj?=
-	=?us-ascii?Q?AlH7sXgN/T+UuZBg7EKuoBP5H2UqZTrgET7YtJC0k4hmXNJTNi7AOW/QVUCw?=
-	=?us-ascii?Q?lV19dF5EDFA2Z0J7FD6RUs20aSfoiggCloI9dpHj38qx5L46r7aunrkN+3lT?=
-	=?us-ascii?Q?e1pr/87pxBH3yW9dlcl3Y8O0ofiqvRTpFjgue2UJ01tjJmIWHuaEdCKfpXaT?=
-	=?us-ascii?Q?O/quFzb5Uwp0axA2QH3Y/eKiQ0DykGwIBdKzQUO8CB0380rxYxPd9/De2+a1?=
-	=?us-ascii?Q?53wG+nKBCKlAJ4NuWaHH6AGgvh4Yf0h84xO+eEkg5MtOb0dKo1LJ5ABFcP97?=
-	=?us-ascii?Q?e54yInQ/8oZ/O1GWwlCA3SU4+JfIoLCsdkGGbgPlgWPGJh+stvCW54Zf68ru?=
-	=?us-ascii?Q?IW7OGbF99O4aThW67LwSunmjdMgIidoEujUuS1RQnb6rmNDxsFJGSAOIc2es?=
-	=?us-ascii?Q?BZfflcBqyfTKH5PM0XfkuZmEyuoa123zgeRigXy2P/H3t3mPOdrm9Zbjz/Iy?=
-	=?us-ascii?Q?4G+61jWHrS06aUtJBzJdjBnPVWinpaXNalG4RFW1IkQ41SuTVA3+IjLjT1YO?=
-	=?us-ascii?Q?EymQVKsQH0mJ09yNKMfuxFpTq5pEGIP/eQWSx6AzCd9+phsJUKRRaJeEXSHN?=
-	=?us-ascii?Q?bRh1DkEzAv0mVzg5Jn6JOhCou0CaPJ7av2YHE8+9DN1JI9YLpMDjJxPN41xH?=
-	=?us-ascii?Q?BDtTmL2OK1OONQtYylnIMiadtDu/UeJ7mGm6dBLHttQy76aVKo9dtoAcZ875?=
-	=?us-ascii?Q?rU9Dr4w9KSxSzf4G+IApHNSC6F/axMFbu2o6qSeTptfYGmLuMAGF8CDLEGqQ?=
-	=?us-ascii?Q?OKyUZvlHaJHYaFxhU4LkUS0oGsThxv2qXqJeukNIpQtmRki+cKDUQatufzhn?=
-	=?us-ascii?Q?sJ1duAANE0OhudScsQ22XN0RyswT+AnRjVB0n?=
-X-Microsoft-Exchange-Diagnostics: 1; BN6PR0101MB2929;
-	6:B4Ecc1nZY16sTOiEH/mZHaePpiPOxeQP2EMBJRQy6Y0QbyMQ2IsGsbx+TPQlUyaGqSGiQ9Y2pLDOScXVhqd2ah6GlTbgBX+RTdl6e5Jd+DWzuUALDWCHSFMIm7l8DdA0N+sc0s5FU1G4Q005tmdgRvsouZkO+2zhpoKL7DJjJ4vAw1s7EJb6A/9aW04lBgyyU9gQCxum1sWh3C+Zr47WnhNaBi2vggYHeGXgSKTEClqYWfPQ/UrK4Oty0xRqpdyCvU8apC8Lnf42ZixcZP+J5zC9G8HhOuUNhZdQju+G8U7vrSx3jJIoR8DIY8a5DU0dHDbku4Oq5fIGwG6Sek8+b4Hhn/ujDIGddyqOaE8esd4=;
-	5:GLdSYzTl3omZRruB1c/nkSdneQAS2f5FcO9802r6b2hYaBR9l77v13lx22zSLDlZ9sWHaVte8ToxC2Dq8fHvQITCC8MsJe7TuKzgCW9uOsDjvYR6oSBQqfbTwV8zYuSraEu/no9FSXS2t+1wZK5w5krqlmpwmo0W59tZWbGn6xg=;
-	24:il0OyZ+B99lb+8bDh9aGmwA2DaW+brjcmiCAOpffrIHZx8BldGvyqUpwYiDOIhm4nsE/2HGjEaBmuwnXPeMObLn5OfUtdlfBbtN6IsQRx9c=;
-	7:tLVhOiIM7s7rG/06cGk/1Fb0fpdGMALcjCp8Jlv0u2sXpH2gBWD0Nt3pLeami/+rSGBmjRvYpKQSDXxuG1w4n4MPd9aW0ar99dwkoawdEzxq5+pd5SU3DpRqJOEHpiY4mpdDt+7FTdnZ+bxS/9fXPUWlLAQfHtpGWs6eM0SuM7YAoSlMgWqVh/FSCrNar74J4k88hBo79TzL57xJx8Po3vXrB1ogsiQhzHRyuNLnppj/g0JdYuElDJCzI+VzX+Ds
-SpamDiagnosticOutput: 1:99
-SpamDiagnosticMetadata: NSPM
-X-OriginatorOrg: xevo.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Nov 2017 21:21:48.9651 (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2f2b000b-f405-4ba8-b063-08d52c6ee214
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: e0a7ca1f-2458-4cd6-a7c7-d733c07495ab
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN6PR0101MB2929
-Subject: [meta-oe][PATCH] gpsd: fix /etc/default/gpsd ALTERNATIVES logic
+In-Reply-To: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
+Subject: Re: [meta-oe][PATCH] mercurial: Upgrade to 4.4.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -101,37 +61,245 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Nov 2017 21:21:50 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 16 Nov 2017 02:19:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
-The ALTERNATIVES logic for the /etc/default/gpsd file is broken,
-specifying ALTERNATIVE_LINK without brackets. In addition, it refers to
-ALTERNATIVE_PATH, which update-alternatives.bbclass doesn't use.
 
-With this patch, /etc/default/gpsd correctly gets a default link
-pointing to /etc/default/gpsd.default. Currently, no such link gets
-created, and gpsd starts off disabled by default since it's missing this
-config file.
 
-Signed-off-by: Martin Kelly <mkelly@xevo.com>
----
- meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb | 5 ++---
- 1 file changed, 2 insertions(+), 3 deletions(-)
+On 11/08/2017 10:20 PM, Zhixiong Chi wrote:
+> * Upgrade to the latest release to fix some CVEs:
+>  - CVE-2017-1000115: missing symlink check that can malicious repositories
+>                      to modify files outside the repository
+>  - CVE-2017-1000116: did not adequately sanitize hostnames passed to ssh,
+>                      leading to possible shell-injection attacks.
+>
+> * For other changes please see: https://www.mercurial-scm.org/wiki/WhatsNew
+>
+> * Update SRC_URI with the new download link
+>
+> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+> ---
+>  .../mercurial/files/mercurial-CVE-2017-9462.patch  | 135 ---------------------
+>  .../mercurial/mercurial-native_4.0.1.bb            |  28 -----
+>  .../mercurial/mercurial-native_4.4.1.bb            |  27 +++++
+4.4 was already in the pipe line and is in master. If you still want
+4.4.1, please rebase and resend
 
-diff --git a/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb b/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-index f8e6a2b13..47fed2d97 100644
---- a/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-+++ b/meta-oe/recipes-navigation/gpsd/gpsd_3.16.bb
-@@ -129,6 +129,5 @@ SYSTEMD_SERVICE_${PN} = "${PN}.socket"
- 
- 
- ALTERNATIVE_${PN} = "gpsd-defaults"
--ALTERNATIVE_PATH = "${sysconfdir}/default/gpsd.default"
--ALTERNATIVE_LINK = "${sysconfdir}/default/gpsd"
--ALTERNATIVE_TARGET = "${sysconfdir}/default/gpsd.default"
-+ALTERNATIVE_LINK_NAME[gpsd-defaults] = "${sysconfdir}/default/gpsd"
-+ALTERNATIVE_TARGET[gpsd-defaults] = "${sysconfdir}/default/gpsd.default"
--- 
-2.11.0
+- armin
+>  3 files changed, 27 insertions(+), 163 deletions(-)
+>  delete mode 100644 meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+>  delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+>  create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+>
+> diff --git a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch b/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+> deleted file mode 100644
+> index 3564661..0000000
+> --- a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
+> +++ /dev/null
+> @@ -1,135 +0,0 @@
+> -# HG changeset patch
+> -# User Augie Fackler <augie@google.com>
+> -# Date 1492021435 25200
+> -#      Wed Apr 12 11:23:55 2017 -0700
+> -# Branch stable
+> -# Node ID 77eaf9539499a1b8be259ffe7ada787d07857f80
+> -# Parent  68f263f52d2e3e2798b4f1e55cb665c6b043f93b
+> -dispatch: protect against malicious 'hg serve --stdio' invocations (sec)
+> -
+> -Some shared-ssh installations assume that 'hg serve --stdio' is a safe
+> -command to run for minimally trusted users. Unfortunately, the messy
+> -implementation of argument parsing here meant that trying to access a
+> -repo named '--debugger' would give the user a pdb prompt, thereby
+> -sidestepping any hoped-for sandboxing. Serving repositories over HTTP(S)
+> -is unaffected.
+> -
+> -We're not currently hardening any subcommands other than 'serve'. If
+> -your service exposes other commands to users with arbitrary repository
+> -names, it is imperative that you defend against repository names of
+> -'--debugger' and anything starting with '--config'.
+> -
+> -The read-only mode of hg-ssh stopped working because it provided its hook
+> -configuration to "hg serve --stdio" via --config parameter. This is banned for
+> -security reasons now. This patch switches it to directly call ui.setconfig().
+> -If your custom hosting infrastructure relies on passing --config to
+> -"hg serve --stdio", you'll need to find a different way to get that configuration
+> -into Mercurial, either by using ui.setconfig() as hg-ssh does in this patch,
+> -or by placing an hgrc file someplace where Mercurial will read it.
+> -
+> -mitrandir@fb.com provided some extra fixes for the dispatch code and
+> -for hg-ssh in places that I overlooked.
+> -
+> -CVE: CVE-2017-9462
+> -
+> -Upstream-Status: Backport
+> -
+> -diff --git a/contrib/hg-ssh b/contrib/hg-ssh
+> ---- a/contrib/hg-ssh
+> -+++ b/contrib/hg-ssh
+> -@@ -32,7 +32,7 @@
+> - # enable importing on demand to reduce startup time
+> - from mercurial import demandimport; demandimport.enable()
+> - 
+> --from mercurial import dispatch
+> -+from mercurial import dispatch, ui as uimod
+> - 
+> - import sys, os, shlex
+> - 
+> -@@ -61,14 +61,15 @@
+> -         repo = os.path.normpath(os.path.join(cwd, os.path.expanduser(path)))
+> -         if repo in allowed_paths:
+> -             cmd = ['-R', repo, 'serve', '--stdio']
+> -+            req = dispatch.request(cmd)
+> -             if readonly:
+> --                cmd += [
+> --                    '--config',
+> --                    'hooks.pretxnopen.hg-ssh=python:__main__.rejectpush',
+> --                    '--config',
+> --                    'hooks.prepushkey.hg-ssh=python:__main__.rejectpush'
+> --                    ]
+> --            dispatch.dispatch(dispatch.request(cmd))
+> -+                if not req.ui:
+> -+                    req.ui = uimod.ui.load()
+> -+                req.ui.setconfig('hooks', 'pretxnopen.hg-ssh',
+> -+                                 'python:__main__.rejectpush', 'hg-ssh')
+> -+                req.ui.setconfig('hooks', 'prepushkey.hg-ssh',
+> -+                                 'python:__main__.rejectpush', 'hg-ssh')
+> -+            dispatch.dispatch(req)
+> -         else:
+> -             sys.stderr.write('Illegal repository "%s"\n' % repo)
+> -             sys.exit(255)
+> -diff --git a/mercurial/dispatch.py b/mercurial/dispatch.py
+> ---- a/mercurial/dispatch.py
+> -+++ b/mercurial/dispatch.py
+> -@@ -155,6 +155,37 @@
+> -         pass # happens if called in a thread
+> - 
+> -     def _runcatchfunc():
+> -+        realcmd = None
+> -+        try:
+> -+            cmdargs = fancyopts.fancyopts(req.args[:], commands.globalopts, {})
+> -+            cmd = cmdargs[0]
+> -+            aliases, entry = cmdutil.findcmd(cmd, commands.table, False)
+> -+            realcmd = aliases[0]
+> -+        except (error.UnknownCommand, error.AmbiguousCommand,
+> -+                IndexError, getopt.GetoptError):
+> -+            # Don't handle this here. We know the command is
+> -+            # invalid, but all we're worried about for now is that
+> -+            # it's not a command that server operators expect to
+> -+            # be safe to offer to users in a sandbox.
+> -+            pass
+> -+        if realcmd == 'serve' and '--stdio' in cmdargs:
+> -+            # We want to constrain 'hg serve --stdio' instances pretty
+> -+            # closely, as many shared-ssh access tools want to grant
+> -+            # access to run *only* 'hg -R $repo serve --stdio'. We
+> -+            # restrict to exactly that set of arguments, and prohibit
+> -+            # any repo name that starts with '--' to prevent
+> -+            # shenanigans wherein a user does something like pass
+> -+            # --debugger or --config=ui.debugger=1 as a repo
+> -+            # name. This used to actually run the debugger.
+> -+            if (len(req.args) != 4 or
+> -+                req.args[0] != '-R' or
+> -+                req.args[1].startswith('--') or
+> -+                req.args[2] != 'serve' or
+> -+                req.args[3] != '--stdio'):
+> -+                raise error.Abort(
+> -+                    _('potentially unsafe serve --stdio invocation: %r') %
+> -+                    (req.args,))
+> -+
+> -         try:
+> -             debugger = 'pdb'
+> -             debugtrace = {
+> -diff --git a/tests/test-ssh.t b/tests/test-ssh.t
+> ---- a/tests/test-ssh.t
+> -+++ b/tests/test-ssh.t
+> -@@ -357,6 +357,19 @@
+> -   abort: destination 'a repo' is not empty
+> -   [255]
+> - 
+> -+Make sure hg is really paranoid in serve --stdio mode. It used to be
+> -+possible to get a debugger REPL by specifying a repo named --debugger.
+> -+  $ hg -R --debugger serve --stdio
+> -+  abort: potentially unsafe serve --stdio invocation: ['-R', '--debugger', 'serve', '--stdio']
+> -+  [255]
+> -+  $ hg -R --config=ui.debugger=yes serve --stdio
+> -+  abort: potentially unsafe serve --stdio invocation: ['-R', '--config=ui.debugger=yes', 'serve', '--stdio']
+> -+  [255]
+> -+Abbreviations of 'serve' also don't work, to avoid shenanigans.
+> -+  $ hg -R narf serv --stdio
+> -+  abort: potentially unsafe serve --stdio invocation: ['-R', 'narf', 'serv', '--stdio']
+> -+  [255]
+> -+
+> - Test hg-ssh using a helper script that will restore PYTHONPATH (which might
+> - have been cleared by a hg.exe wrapper) and invoke hg-ssh with the right
+> - parameters:
+> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+> deleted file mode 100644
+> index a08acd9..0000000
+> --- a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
+> +++ /dev/null
+> @@ -1,28 +0,0 @@
+> -SUMMARY = "The Mercurial distributed SCM"
+> -HOMEPAGE = "http://mercurial.selenic.com/"
+> -SECTION = "console/utils"
+> -LICENSE = "GPLv2"
+> -LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> -DEPENDS = "python-native"
+> -
+> -SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
+> -           file://mercurial-CVE-2017-9462.patch \
+> -"
+> -SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
+> -SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
+> -
+> -S = "${WORKDIR}/mercurial-${PV}"
+> -
+> -inherit native
+> -
+> -EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+> -    PREFIX=${prefix}"
+> -
+> -do_configure_append () {
+> -    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
+> -}
+> -
+> -do_install () {
+> -    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
+> -}
+> -
+> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+> new file mode 100644
+> index 0000000..db2f3c4
+> --- /dev/null
+> +++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+> @@ -0,0 +1,27 @@
+> +SUMMARY = "The Mercurial distributed SCM"
+> +HOMEPAGE = "http://mercurial.selenic.com/"
+> +SECTION = "console/utils"
+> +LICENSE = "GPLv2"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+> +DEPENDS = "python-native"
+> +
+> +SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
+> +"
+> +SRC_URI[md5sum] = "37974a416d1d9525e1375c92025b16d9"
+> +SRC_URI[sha256sum] = "8f2a5512d6cc2ffb08988aef639330a2f0378e4ac3ee0e1fbbdb64d9fff56246"
+> +
+> +S = "${WORKDIR}/mercurial-${PV}"
+> +
+> +inherit native
+> +
+> +EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
+> +    PREFIX=${prefix}"
+> +
+> +do_configure_append () {
+> +    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
+> +}
+> +
+> +do_install () {
+> +    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
+> +}
+> +
 
 
