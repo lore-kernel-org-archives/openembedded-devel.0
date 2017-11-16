@@ -1,28 +1,58 @@
-Return-Path: <Zhixiong.Chi@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id DFDE2786AA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 02:23:58 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vAG2Nw5L018005
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 15 Nov 2017 18:23:58 -0800 (PST)
-Received: from [128.224.162.209] (128.224.162.209) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 15 Nov 2017 18:23:57 -0800
-To: akuster808 <akuster808@gmail.com>,
-	<openembedded-devel@lists.openembedded.org>
-References: <1510208423-222002-1-git-send-email-zhixiong.chi@windriver.com>
-	<9569cc40-d759-ed8f-09f7-61a07a433359@gmail.com>
-From: Zhixiong Chi <zhixiong.chi@windriver.com>
-Message-ID: <5A0CF6BB.5000407@windriver.com>
-Date: Thu, 16 Nov 2017 10:23:55 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:38.0) Gecko/20100101
-	Thunderbird/38.6.0
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id C2BED7807C;
+	Thu, 16 Nov 2017 02:25:59 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id j28so16158118pfk.8;
+	Wed, 15 Nov 2017 18:26:01 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-transfer-encoding:content-language;
+	bh=y2MLTh989p0hkxb0jlcQTT9lni+9tIOb67CyCXPZAwc=;
+	b=cWB9kXcAjX8SMDRKnK/yMmaXa7ToAxczgCUu47QnnGNd6lGQK9SUOO6E33Nmj1aSP6
+	maxMUn9r47gMcLhlsG9eusV1l9cIUQ5uCXmkofV8teM3SSjvfl7QAdSLG1idPZggDNIg
+	KQEVsY9jodKrd8x3foot1IgVaGYotCRhm9bQmk1Vc8Bt3+uv9SRSgeQGsrpNdY7vIJ2K
+	fmXK+VbWyDl7rqlCwV5+pHu3Ah+WVGCkZtx84gbPTQgFhzvvXBQ2mA9fqa5u1dV6rnGm
+	X/Bv+eACmXiOUm3uWejp/cF8R8iLxUR28Bs+i6C17+GF6NyH+Cq+6pjpkRiqc8zFWegd
+	w3NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-transfer-encoding
+	:content-language;
+	bh=y2MLTh989p0hkxb0jlcQTT9lni+9tIOb67CyCXPZAwc=;
+	b=fwycixxexflCHUknbFRMrWFc1ODtAflServtf9/6glrNgasT66UizkV5Gl5rMJidWB
+	uqzyPhmuJoNdOOEgA9T1tNKSO4TYVqIGrN5/VoKj6SHtC3rXYYTcA2Wh74ck7XoDwzmD
+	gXgZ0VDlMO4hFaKGxfmuS6oNP21uOw60yV5lBwJ1wdoWc7H5tfo3dcrRVE2AyGGYIh0u
+	APdwPzXYyJoq8FbpYj2pdYPPFa1nLi4fHHll2pkw7L8kVqBb0zL4Kwj6i8reJx56xz2N
+	SitpZ0jxZz8jJVNMFRb4q8rbZXKxeVXh1aACotzKdo/HU4BX7UhJQ/R0OQiNKGMV88X7
+	lp3g==
+X-Gm-Message-State: AJaThX4hEs+GfPooNjhg+f0hLbbPwPcODczr+TjrBrXIvW9odwAEfIRa
+	EVtL2N5U5StyUy61yW5XhiCp9Q==
+X-Google-Smtp-Source: AGs4zMY/xxw9j8osDfth7LhSLNzKmoOgm/pBy41ywEk9/vXCSGrwDg40xcaoFj0P61hTFRC2DjeEiA==
+X-Received: by 10.98.192.7 with SMTP id x7mr162736pff.142.1510799160754;
+	Wed, 15 Nov 2017 18:26:00 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0?
+	([2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0])
+	by smtp.gmail.com with ESMTPSA id u7sm45357pfh.142.2017.11.15.18.25.59
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Wed, 15 Nov 2017 18:26:00 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>,
+	openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Ross Burton <ross.burton@intel.com>
+References: <151032511199.27841.6992651845996774565@git.openembedded.org>
+	<20171110144512.3538E233675@git.openembedded.org>
+	<CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <aa53f8a2-995d-8ce1-6cca-36c11043068c@gmail.com>
+Date: Wed, 15 Nov 2017 18:25:59 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
 MIME-Version: 1.0
-In-Reply-To: <9569cc40-d759-ed8f-09f7-61a07a433359@gmail.com>
-Subject: Re: [meta-oe][PATCH] mercurial: Upgrade to 4.4.1
+In-Reply-To: <CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
+Cc: "openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
+Subject: Re: [oe-commits] [openembedded-core] 04/44: db: don't provide virtual/db
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,257 +65,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 02:23:59 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 16 Nov 2017 02:26:00 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+Content-Language: en-US
 
 
 
-On 2017年11月16日 10:19, akuster808 wrote:
+On 11/11/2017 02:45 PM, Martin Jansa wrote:
+> Hi,
 >
-> On 11/08/2017 10:20 PM, Zhixiong Chi wrote:
->> * Upgrade to the latest release to fix some CVEs:
->>   - CVE-2017-1000115: missing symlink check that can malicious repositories
->>                       to modify files outside the repository
->>   - CVE-2017-1000116: did not adequately sanitize hostnames passed to ssh,
->>                       leading to possible shell-injection attacks.
+> will you please send fix for:
+> ERROR: Nothing PROVIDES 'virtual/db' (but
+> meta-oe/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+> meta-oe/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+> DEPENDS on or otherwise requires it).
+
+there are two commits pending
+https://patchwork.openembedded.org/patch/145728/
+https://patchwork.openembedded.org/patch/145729/
+
+which I will take now.
+
+- armin
+>
+> Thanks
+>
+> On Fri, Nov 10, 2017 at 3:45 PM, <git@git.openembedded.org> wrote:
+>
+>> This is an automated email from the git hooks/post-receive script.
 >>
->> * For other changes please see: https://www.mercurial-scm.org/wiki/WhatsNew
+>> rpurdie pushed a commit to branch master-next
+>> in repository openembedded-core.
 >>
->> * Update SRC_URI with the new download link
+>> commit dcbc45aa3fe72c528fe4d47a783da4b4ed5ff38e
+>> Author: Ross Burton <ross.burton@intel.com>
+>> AuthorDate: Tue Oct 31 21:10:13 2017 +0000
 >>
->> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+>>     db: don't provide virtual/db
+>>
+>>     As there are no alternative providers for virtual/db remove the
+>> PROVIDES and
+>>     recipes can just depend on db.
+>>
+>>     Signed-off-by: Ross Burton <ross.burton@intel.com>
 >> ---
->>   .../mercurial/files/mercurial-CVE-2017-9462.patch  | 135 ---------------------
->>   .../mercurial/mercurial-native_4.0.1.bb            |  28 -----
->>   .../mercurial/mercurial-native_4.4.1.bb            |  27 +++++
-> 4.4 was already in the pipe line and is in master. If you still want
-> 4.4.1, please rebase and resend
-I just send this patch for the CVE-2017-1000115 and CVE-2017-1000116, 
-the 4.4 version has included
-the patches, this please ignore this patch.
-
-Thanks.
-> - armin
->>   3 files changed, 27 insertions(+), 163 deletions(-)
->>   delete mode 100644 meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
->>   delete mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
->>   create mode 100644 meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
+>>  meta/recipes-support/db/db_5.3.28.bb | 10 ----------
+>>  1 file changed, 10 deletions(-)
 >>
->> diff --git a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch b/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
->> deleted file mode 100644
->> index 3564661..0000000
->> --- a/meta-oe/recipes-devtools/mercurial/files/mercurial-CVE-2017-9462.patch
->> +++ /dev/null
->> @@ -1,135 +0,0 @@
->> -# HG changeset patch
->> -# User Augie Fackler <augie@google.com>
->> -# Date 1492021435 25200
->> -#      Wed Apr 12 11:23:55 2017 -0700
->> -# Branch stable
->> -# Node ID 77eaf9539499a1b8be259ffe7ada787d07857f80
->> -# Parent  68f263f52d2e3e2798b4f1e55cb665c6b043f93b
->> -dispatch: protect against malicious 'hg serve --stdio' invocations (sec)
+>> diff --git a/meta/recipes-support/db/db_5.3.28.bb
+>> b/meta/recipes-support/db/db_5.3.28.bb
+>> index fb4befb..fe71967 100644
+>> --- a/meta/recipes-support/db/db_5.3.28.bb
+>> +++ b/meta/recipes-support/db/db_5.3.28.bb
+>> @@ -12,7 +12,6 @@ SECTION = "libs"
+>>  SUMMARY = "Berkeley Database v5"
+>>  HOMEPAGE = "http://www.oracle.com/technetwork/database/database-
+>> technologies/berkeleydb/overview/index.html"
+>>  LICENSE = "Sleepycat"
+>> -VIRTUAL_NAME ?= "virtual/db"
+>>  RCONFLICTS_${PN} = "db3"
+>>
+>>  PR = "r1"
+>> @@ -37,15 +36,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=
+>> ed1158e31437f4f87cdd4ab2b8613955"
+>>
+>>  inherit autotools
+>>
+>> -# Put virtual/db in any appropriate provider of a
+>> -# relational database, use it as a dependency in
+>> -# place of a specific db and use:
+>> -#
+>> -# PREFERRED_PROVIDER_virtual/db
+>> -#
+>> -# to select the correct db in the build (distro) .conf
+>> -PROVIDES += "${VIRTUAL_NAME}"
 >> -
->> -Some shared-ssh installations assume that 'hg serve --stdio' is a safe
->> -command to run for minimally trusted users. Unfortunately, the messy
->> -implementation of argument parsing here meant that trying to access a
->> -repo named '--debugger' would give the user a pdb prompt, thereby
->> -sidestepping any hoped-for sandboxing. Serving repositories over HTTP(S)
->> -is unaffected.
->> -
->> -We're not currently hardening any subcommands other than 'serve'. If
->> -your service exposes other commands to users with arbitrary repository
->> -names, it is imperative that you defend against repository names of
->> -'--debugger' and anything starting with '--config'.
->> -
->> -The read-only mode of hg-ssh stopped working because it provided its hook
->> -configuration to "hg serve --stdio" via --config parameter. This is banned for
->> -security reasons now. This patch switches it to directly call ui.setconfig().
->> -If your custom hosting infrastructure relies on passing --config to
->> -"hg serve --stdio", you'll need to find a different way to get that configuration
->> -into Mercurial, either by using ui.setconfig() as hg-ssh does in this patch,
->> -or by placing an hgrc file someplace where Mercurial will read it.
->> -
->> -mitrandir@fb.com provided some extra fixes for the dispatch code and
->> -for hg-ssh in places that I overlooked.
->> -
->> -CVE: CVE-2017-9462
->> -
->> -Upstream-Status: Backport
->> -
->> -diff --git a/contrib/hg-ssh b/contrib/hg-ssh
->> ---- a/contrib/hg-ssh
->> -+++ b/contrib/hg-ssh
->> -@@ -32,7 +32,7 @@
->> - # enable importing on demand to reduce startup time
->> - from mercurial import demandimport; demandimport.enable()
->> -
->> --from mercurial import dispatch
->> -+from mercurial import dispatch, ui as uimod
->> -
->> - import sys, os, shlex
->> -
->> -@@ -61,14 +61,15 @@
->> -         repo = os.path.normpath(os.path.join(cwd, os.path.expanduser(path)))
->> -         if repo in allowed_paths:
->> -             cmd = ['-R', repo, 'serve', '--stdio']
->> -+            req = dispatch.request(cmd)
->> -             if readonly:
->> --                cmd += [
->> --                    '--config',
->> --                    'hooks.pretxnopen.hg-ssh=python:__main__.rejectpush',
->> --                    '--config',
->> --                    'hooks.prepushkey.hg-ssh=python:__main__.rejectpush'
->> --                    ]
->> --            dispatch.dispatch(dispatch.request(cmd))
->> -+                if not req.ui:
->> -+                    req.ui = uimod.ui.load()
->> -+                req.ui.setconfig('hooks', 'pretxnopen.hg-ssh',
->> -+                                 'python:__main__.rejectpush', 'hg-ssh')
->> -+                req.ui.setconfig('hooks', 'prepushkey.hg-ssh',
->> -+                                 'python:__main__.rejectpush', 'hg-ssh')
->> -+            dispatch.dispatch(req)
->> -         else:
->> -             sys.stderr.write('Illegal repository "%s"\n' % repo)
->> -             sys.exit(255)
->> -diff --git a/mercurial/dispatch.py b/mercurial/dispatch.py
->> ---- a/mercurial/dispatch.py
->> -+++ b/mercurial/dispatch.py
->> -@@ -155,6 +155,37 @@
->> -         pass # happens if called in a thread
->> -
->> -     def _runcatchfunc():
->> -+        realcmd = None
->> -+        try:
->> -+            cmdargs = fancyopts.fancyopts(req.args[:], commands.globalopts, {})
->> -+            cmd = cmdargs[0]
->> -+            aliases, entry = cmdutil.findcmd(cmd, commands.table, False)
->> -+            realcmd = aliases[0]
->> -+        except (error.UnknownCommand, error.AmbiguousCommand,
->> -+                IndexError, getopt.GetoptError):
->> -+            # Don't handle this here. We know the command is
->> -+            # invalid, but all we're worried about for now is that
->> -+            # it's not a command that server operators expect to
->> -+            # be safe to offer to users in a sandbox.
->> -+            pass
->> -+        if realcmd == 'serve' and '--stdio' in cmdargs:
->> -+            # We want to constrain 'hg serve --stdio' instances pretty
->> -+            # closely, as many shared-ssh access tools want to grant
->> -+            # access to run *only* 'hg -R $repo serve --stdio'. We
->> -+            # restrict to exactly that set of arguments, and prohibit
->> -+            # any repo name that starts with '--' to prevent
->> -+            # shenanigans wherein a user does something like pass
->> -+            # --debugger or --config=ui.debugger=1 as a repo
->> -+            # name. This used to actually run the debugger.
->> -+            if (len(req.args) != 4 or
->> -+                req.args[0] != '-R' or
->> -+                req.args[1].startswith('--') or
->> -+                req.args[2] != 'serve' or
->> -+                req.args[3] != '--stdio'):
->> -+                raise error.Abort(
->> -+                    _('potentially unsafe serve --stdio invocation: %r') %
->> -+                    (req.args,))
->> -+
->> -         try:
->> -             debugger = 'pdb'
->> -             debugtrace = {
->> -diff --git a/tests/test-ssh.t b/tests/test-ssh.t
->> ---- a/tests/test-ssh.t
->> -+++ b/tests/test-ssh.t
->> -@@ -357,6 +357,19 @@
->> -   abort: destination 'a repo' is not empty
->> -   [255]
->> -
->> -+Make sure hg is really paranoid in serve --stdio mode. It used to be
->> -+possible to get a debugger REPL by specifying a repo named --debugger.
->> -+  $ hg -R --debugger serve --stdio
->> -+  abort: potentially unsafe serve --stdio invocation: ['-R', '--debugger', 'serve', '--stdio']
->> -+  [255]
->> -+  $ hg -R --config=ui.debugger=yes serve --stdio
->> -+  abort: potentially unsafe serve --stdio invocation: ['-R', '--config=ui.debugger=yes', 'serve', '--stdio']
->> -+  [255]
->> -+Abbreviations of 'serve' also don't work, to avoid shenanigans.
->> -+  $ hg -R narf serv --stdio
->> -+  abort: potentially unsafe serve --stdio invocation: ['-R', 'narf', 'serv', '--stdio']
->> -+  [255]
->> -+
->> - Test hg-ssh using a helper script that will restore PYTHONPATH (which might
->> - have been cleared by a hg.exe wrapper) and invoke hg-ssh with the right
->> - parameters:
->> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
->> deleted file mode 100644
->> index a08acd9..0000000
->> --- a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.0.1.bb
->> +++ /dev/null
->> @@ -1,28 +0,0 @@
->> -SUMMARY = "The Mercurial distributed SCM"
->> -HOMEPAGE = "http://mercurial.selenic.com/"
->> -SECTION = "console/utils"
->> -LICENSE = "GPLv2"
->> -LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->> -DEPENDS = "python-native"
->> -
->> -SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
->> -           file://mercurial-CVE-2017-9462.patch \
->> -"
->> -SRC_URI[md5sum] = "22a9b1d7c0c06a53f0ae5b386d536d08"
->> -SRC_URI[sha256sum] = "6aa4ade93c1b5e11937820880a466ebf1c824086d443cd799fc46e2617250d40"
->> -
->> -S = "${WORKDIR}/mercurial-${PV}"
->> -
->> -inherit native
->> -
->> -EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
->> -    PREFIX=${prefix}"
->> -
->> -do_configure_append () {
->> -    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
->> -}
->> -
->> -do_install () {
->> -    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
->> -}
->> -
->> diff --git a/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
->> new file mode 100644
->> index 0000000..db2f3c4
->> --- /dev/null
->> +++ b/meta-oe/recipes-devtools/mercurial/mercurial-native_4.4.1.bb
->> @@ -0,0 +1,27 @@
->> +SUMMARY = "The Mercurial distributed SCM"
->> +HOMEPAGE = "http://mercurial.selenic.com/"
->> +SECTION = "console/utils"
->> +LICENSE = "GPLv2"
->> +LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
->> +DEPENDS = "python-native"
->> +
->> +SRC_URI = "https://www.mercurial-scm.org/release/${BP}.tar.gz \
->> +"
->> +SRC_URI[md5sum] = "37974a416d1d9525e1375c92025b16d9"
->> +SRC_URI[sha256sum] = "8f2a5512d6cc2ffb08988aef639330a2f0378e4ac3ee0e1fbbdb64d9fff56246"
->> +
->> +S = "${WORKDIR}/mercurial-${PV}"
->> +
->> +inherit native
->> +
->> +EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
->> +    PREFIX=${prefix}"
->> +
->> +do_configure_append () {
->> +    sed -i -e 's:PYTHON=python:PYTHON=${STAGING_BINDIR_NATIVE}/python-native/python:g' ${S}/Makefile
->> +}
->> +
->> +do_install () {
->> +    oe_runmake -e install-bin DESTDIR=${D} PREFIX=${prefix}
->> +}
->> +
->
-
--- 
----------------------
-Thanks,
-Zhixiong Chi
-Tel: +86-10-8477-7036
+>>  # The executables go in a separate package - typically there
+>>  # is no need to install these unless doing real database
+>>  # management on the system.
+>>
+>> --
+>> To stop receiving notification emails like this one, please contact
+>> the administrator of this repository.
+>> --
+>> _______________________________________________
+>> Openembedded-commits mailing list
+>> Openembedded-commits@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+>>
 
 
