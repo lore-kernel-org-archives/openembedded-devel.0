@@ -1,50 +1,50 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6C0CA787C0
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id 342C371A18
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 18:55:51 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id o88so13317wrb.6
+	Thu, 16 Nov 2017 18:57:51 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id w95so30132wrc.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 10:55:53 -0800 (PST)
+	Thu, 16 Nov 2017 10:57:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=YyWYBbEVVzxKA+xD6xY46pxCjp9lMU3o95eEIJimkrg=;
-	b=dVPcyqP32rhHafwyu/xR8lwALjT5OQg2kkvc2jlXvF+f7OFEzhrgM+IgKvnWRnXO4X
-	VhP4Fz3K0qrmPV7IkMdHs88BRipVeAMaTuyYwoo+GiVIeUCFG/s00s8s2parT0ieyJ9Y
-	bsTgonTs56hvGF6MdJurp1hp3e06nKgcpiqq5NJDFhgjvCt56/6whIORnMHiip+0O/b+
-	H7hNwNT9a0qvhG0D/BoYwsNyBOPTf4ehq2JZ8o7y7NEaj4jYjAa3Xw9pNjjXueQsXgQ/
-	NeKBNSpFJsfLMuEevOqYYogKRw4b/iCGahCdkZirfYhsNIJbv70QMa5iktcCR9p5nQXm
-	3R2g==
+	:cc; bh=hjToI5Hfx+HByam3Ky6Qy9U+AdXHMx5Lvio02B55rE8=;
+	b=IkRHhXnwhS/QW7weee/e4adpVZ+ZskYtp5y84T8YCPyFki37VVuVm4v3WkAjC9mvpb
+	Mz/LQZ+Z5uK9LAI06iuJaOMRHmYNexA78sPgC8hJoxKFOjfmR6+EEMTYdMZf97aMM4Yd
+	j0Bm39Dgcqlg/ShZt7sUFc+4Ia78cbKJf2YK4xTK6aBu/n2hHKdim//heleYSz7TIdAg
+	Qq2r0a8P+nAkQyYHHAsfNqVZ/HrupCL3jwHcOhsdtoxIT35F4DF3F+8S3pVqj+megMpA
+	s2ZpTMwdY4G/znPaUNzK+kyLqAc1Xw0d2XH8mflmCXiaX+XBLta3UhgNM46PL/z/nFq2
+	ePRA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=YyWYBbEVVzxKA+xD6xY46pxCjp9lMU3o95eEIJimkrg=;
-	b=TOXGZG9yAKR+8apYZpvVFaWauNJJTXQlBlrqHYQDADEUeHDl1QtUd2vTyNirAhpryA
-	BAoC0EiYcGJlkjElr6e2QaJVNgVQK+7GYdOvOjcrX24ANCeGzoCOp3WjAow0euEmgu2i
-	tdZxW6NVqGBwxPVVGsUhMm4SbHAekD8RL5zMkQ6RU3q17J5K9BXDW/jPCHH+Wj+71wWn
-	LKiULY7teRtLERK037ZL+OVjGZ2A+KpuIumFInlRN2CmV2UXSOqWa5sr92LvdBKPMZEi
-	CP0zxig2/uRWAiwENp9zQC6ffCO5JPUsgoL174AQLvl409dU92z3Uiv3e0MBgUq2LsjT
-	t1Wg==
-X-Gm-Message-State: AJaThX5U7Ensv4cag/dHOznjmlYgGOTXJRVgPvQEkE3gZElbQLuAgohg
-	eKbAodElRY8ImO+tM07/obaqK0RImSDUWnve3+Q=
-X-Google-Smtp-Source: AGs4zMYmd8+bXPoeuFnjLXW8kDFLdYuOC7cOOGE0ZJCxwZqiNir+PDmQ6Zm5TBbz4u9eIjGbzZCEofVnVeK4zShzLDk=
-X-Received: by 10.223.196.179 with SMTP id m48mr2478409wrf.67.1510858552520;
-	Thu, 16 Nov 2017 10:55:52 -0800 (PST)
+	bh=hjToI5Hfx+HByam3Ky6Qy9U+AdXHMx5Lvio02B55rE8=;
+	b=WepiESRdqEM6eb9N4nHu+ZPLPgNpCCCBa2kLAYCagJZabg4SU8zmF/GsXLZ+1rGPdC
+	r39aJM+AtQMKyp/Yxgajl0HhIhAry8oBUq+XAMv07fE5EKIYkk6pswV/rv8ptAbokhFN
+	oXx8xLEPQERl9j3BWxm/OMVytwaMxvZERbKTG7zKYyWxqAPkhvVn8moCK0tNlskcXtuI
+	2prC8ZUcZHNqrtA6QJQLapS4CTzoOtSXAxi1A4aNGEBcO+0O6F0EPZm9fOBGbVcgKTdi
+	rw5a7G9T0AoJxDQxzG0ueB87isFTqjiFxJDkMVl2Jg+GU0YiIASTAhoohNJWXCKvlyrK
+	QpFg==
+X-Gm-Message-State: AJaThX5N2AWt8i0jrw3k3UQsCw3fpcy4UfncThM5L7L/4x0hvKKgRg8S
+	mmrZaK+Ga4xNW5vJ4FYynwajsny4Ide9gl1NRNU=
+X-Google-Smtp-Source: AGs4zMaLGOuGCRmao+4ucuzaByuoo2/dWkz+66SjZ5BfYHGjpGZ/NMhOvGQL81TE9b6p/0wkmWwmAVvjTFZVuzT4E/g=
+X-Received: by 10.223.143.66 with SMTP id p60mr2157626wrb.99.1510858673188;
+	Thu, 16 Nov 2017 10:57:53 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.173.139 with HTTP; Thu, 16 Nov 2017 10:55:51 -0800 (PST)
-In-Reply-To: <1510857125-8109-3-git-send-email-akuster808@gmail.com>
+Received: by 10.28.173.139 with HTTP; Thu, 16 Nov 2017 10:57:52 -0800 (PST)
+In-Reply-To: <1510857125-8109-2-git-send-email-akuster808@gmail.com>
 References: <1510857125-8109-1-git-send-email-akuster808@gmail.com>
-	<1510857125-8109-3-git-send-email-akuster808@gmail.com>
+	<1510857125-8109-2-git-send-email-akuster808@gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 16 Nov 2017 19:55:51 +0100
-Message-ID: <CA+chaQf3+UzZQZNLr7B6XS+2+-GcMQJvjBZx2642Lay-mc4C8A@mail.gmail.com>
+Date: Thu, 16 Nov 2017 19:57:52 +0100
+Message-ID: <CA+chaQf0yutP8Tfb8Er65DU0M=k8BQ__EU7pc-E5qn3-BWjqsQ@mail.gmail.com>
 To: Armin Kuster <akuster808@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "akuster@mvista" <akuster@mvista.com>,
 	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][morty 3/3] system-setup-keyboard: fix QA issue
+Subject: Re: [meta-oe][morty 2/3] flite-alsa: Fix QA issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,41 +57,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 18:55:52 -0000
+X-List-Received-Date: Thu, 16 Nov 2017 18:57:52 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-FWIW: this doesn't fix the QA issue, it only hides it.
+does this issue exist in master as well? IIRC I haven't seen it in recent
+reports.
 
-The same problem existed in master as well before it was removed:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-August/114478.html
+You might want to use ${PN} as in PACKAGES:
+PACKAGES += "lib${PN} lib${PN}-vox8 lib${PN}-vox16"
+
 
 On Thu, Nov 16, 2017 at 7:32 PM, Armin Kuster <akuster808@gmail.com> wrote:
 
-> ERROR: system-setup-keyboard-0.8.8-r0 do_package_qa: QA Issue: No GNU_HASH
-> in the elf binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
-> system-setup-keyboard/0.8.8-r0/packages-split/system-
-> setup-keyboard/usr/bin/system-setup-keyboard' [ldflags]
+> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
+> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
+> flite-alsa/1.3-r1/packages-split/libflite-alsa/usr/lib/
+> libflite_cmulex.so.1.3'
 >
+> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
+> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
+> flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/
+> lib/libflite_cmu_us_kal.so.1.3' [ldflags]
+>
+> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
+> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
+> flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/
+> lib/libflite_cmu_us_kal16.so.1.3' [ldflags]
 > Signed-off-by: Armin Kuster <akuster808@gmail.com>
 > ---
->  .../system-setup-keyboard/system-setup-keyboard_0.8.8.bb
-> | 2 ++
->  1 file changed, 2 insertions(+)
+>  meta-oe/recipes-support/flite/flite-alsa_1.3.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
 >
-> diff --git a/meta-oe/recipes-support/system-setup-keyboard/system-
-> setup-keyboard_0.8.8.bb b/meta-oe/recipes-support/system-setup-keyboard/
-> system-setup-keyboard_0.8.8.bb
-> index fbbfa3d..3407b73 100644
-> --- a/meta-oe/recipes-support/system-setup-keyboard/system-
-> setup-keyboard_0.8.8.bb
-> +++ b/meta-oe/recipes-support/system-setup-keyboard/system-
-> setup-keyboard_0.8.8.bb
-> @@ -29,3 +29,5 @@ do_install() {
->  }
+> diff --git a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+> b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+> index 51012e6..19d789e 100644
+> --- a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+> +++ b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+> @@ -10,3 +10,7 @@ SRC_URI = "http://www.speech.cs.cmu.edu/
+> flite/packed/flite-${PV}/flite-${PV}-rel
 >
->  FILES_${PN} += "${systemd_unitdir}/system/${BPN}.service"
+>  SRC_URI[md5sum] = "ae0aca1cb7b4801f4372f3a75a9e52b5"
+>  SRC_URI[sha256sum] = "922225f7001e57a0fbace8833b0a48
+> 790a68f6c7b491f2d47c78ad537ab78a8b"
 > +
-> +INSANE_SKIP_${PN} = "ldflags"
+> +INSANE_SKIP_libflite-alsa = "ldflags"
+> +INSANE_SKIP_libflite-alsa-vox8 = "ldflags"
+> +INSANE_SKIP_libflite-alsa-vox16 = "ldflags"
 > --
 > 2.7.4
 >
