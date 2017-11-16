@@ -1,28 +1,24 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
-	by mail.openembedded.org (Postfix) with ESMTP id 13D937867C
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id F22A478775
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 10:08:10 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 Nov 2017 02:08:10 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,402,1505804400"; 
-   d="scan'208";a="5629837"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 16 Nov 2017 02:08:09 -0800
-To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20171115141502.21516-1-ricardo.ribalda@gmail.com>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <4f5c0b05-f8a5-d542-7a20-c40dd5100ae6@linux.intel.com>
-Date: Thu, 16 Nov 2017 12:08:24 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
+	Thu, 16 Nov 2017 15:19:53 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vAGFJs3C016381
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Nov 2017 07:19:55 -0800
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Thu, 16 Nov 2017 07:19:54 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Nov 2017 10:19:49 -0500
+Message-ID: <1510845589-10848-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <20171115141502.21516-1-ricardo.ribalda@gmail.com>
-Subject: Re: [meta-oe][PATCH] meson: update meson to 0.43.0
+Subject: [meta-webserver][PATCH] meta-webserver: apache2 allow SYSTEMD_AUTO_ENABLE to be overwritten
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,17 +31,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 10:08:11 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Nov 2017 15:19:54 -0000
+Content-Type: text/plain
 
-On 11/15/2017 04:15 PM, Ricardo Ribalda Delgado wrote:
-> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
+The current assignment does not allow a bbappend to be used to
+overwrite the SYSTEMD_AUTO_ENABLE value in order to have apache2 auto
+start. You would have to resort to 'manually' creating a link in
+do_install or a postinst. Using the '?=' assignment will correct this.
 
-Meson is being moved to oe-core; can you please check the patches posted 
-to oe-core list?
+One might argue that if apache2 is being installed it would be
+desirable to have it auto run, so this setting should be removed in
+favor of the default in systemd.bbclass (enable). In order not to
+surprise users of this recipe with this change in behavior we opt to
+keep this as disabled but overwrite-able.
 
+Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+---
+ meta-webserver/recipes-httpd/apache2/apache2_2.4.29.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-Alex
+diff --git a/meta-webserver/recipes-httpd/apache2/apache2_2.4.29.bb b/meta-webserver/recipes-httpd/apache2/apache2_2.4.29.bb
+index f0298b9..60fc411 100644
+--- a/meta-webserver/recipes-httpd/apache2/apache2_2.4.29.bb
++++ b/meta-webserver/recipes-httpd/apache2/apache2_2.4.29.bb
+@@ -32,7 +32,7 @@ S = "${WORKDIR}/httpd-${PV}"
+ inherit autotools update-rc.d pkgconfig systemd
+ 
+ SYSTEMD_SERVICE_${PN} = "apache2.service"
+-SYSTEMD_AUTO_ENABLE_${PN} = "disable"
++SYSTEMD_AUTO_ENABLE_${PN} ?= "disable"
+ 
+ SSTATE_SCAN_FILES += "apxs config_vars.mk config.nice"
+ 
+-- 
+2.7.4
+
 
