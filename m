@@ -1,46 +1,54 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 342C371A18
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DB4F7017B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 18:57:51 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id w95so30132wrc.2
+	Thu, 16 Nov 2017 19:24:41 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id t10so74362pgo.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 10:57:53 -0800 (PST)
+	Thu, 16 Nov 2017 11:24:43 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=hjToI5Hfx+HByam3Ky6Qy9U+AdXHMx5Lvio02B55rE8=;
-	b=IkRHhXnwhS/QW7weee/e4adpVZ+ZskYtp5y84T8YCPyFki37VVuVm4v3WkAjC9mvpb
-	Mz/LQZ+Z5uK9LAI06iuJaOMRHmYNexA78sPgC8hJoxKFOjfmR6+EEMTYdMZf97aMM4Yd
-	j0Bm39Dgcqlg/ShZt7sUFc+4Ia78cbKJf2YK4xTK6aBu/n2hHKdim//heleYSz7TIdAg
-	Qq2r0a8P+nAkQyYHHAsfNqVZ/HrupCL3jwHcOhsdtoxIT35F4DF3F+8S3pVqj+megMpA
-	s2ZpTMwdY4G/znPaUNzK+kyLqAc1Xw0d2XH8mflmCXiaX+XBLta3UhgNM46PL/z/nFq2
-	ePRA==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=/queBhdymLAC9REvUL8YH867lTGk6X50pGEErymvCWs=;
+	b=CcZIEjbSyGxRjEKW+6hhaS0+NoE0xypbG33zkCQYFgw3r2JwMpN/e4fJgMTzetrD6s
+	ELwBGAxDbBmpCW0aURYYztCOaV6uxWKSV4W9wpFxtDaONMDBH4U4aX/XA1Ce2ArsdbUU
+	ai2UTXqyctm1PfYJQU2l75oF+YSjcpN4FBcVQ72ptZ03PlsV+obC6t+nO1eY3dEm1Ko3
+	gJyQqYKZ1AIT3HLMBfEX8okOXji16XUG9rY6JwntHWjQtEbpz6koyj02ZM3ttyqDcaUF
+	OzHEdmYWUXvqnYtyVYRkVyD+L1kTaT7BmY9Ef7DiWBHCthtUbCEjCZ6As4yquHuX3SK8
+	TWvQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=hjToI5Hfx+HByam3Ky6Qy9U+AdXHMx5Lvio02B55rE8=;
-	b=WepiESRdqEM6eb9N4nHu+ZPLPgNpCCCBa2kLAYCagJZabg4SU8zmF/GsXLZ+1rGPdC
-	r39aJM+AtQMKyp/Yxgajl0HhIhAry8oBUq+XAMv07fE5EKIYkk6pswV/rv8ptAbokhFN
-	oXx8xLEPQERl9j3BWxm/OMVytwaMxvZERbKTG7zKYyWxqAPkhvVn8moCK0tNlskcXtuI
-	2prC8ZUcZHNqrtA6QJQLapS4CTzoOtSXAxi1A4aNGEBcO+0O6F0EPZm9fOBGbVcgKTdi
-	rw5a7G9T0AoJxDQxzG0ueB87isFTqjiFxJDkMVl2Jg+GU0YiIASTAhoohNJWXCKvlyrK
-	QpFg==
-X-Gm-Message-State: AJaThX5N2AWt8i0jrw3k3UQsCw3fpcy4UfncThM5L7L/4x0hvKKgRg8S
-	mmrZaK+Ga4xNW5vJ4FYynwajsny4Ide9gl1NRNU=
-X-Google-Smtp-Source: AGs4zMaLGOuGCRmao+4ucuzaByuoo2/dWkz+66SjZ5BfYHGjpGZ/NMhOvGQL81TE9b6p/0wkmWwmAVvjTFZVuzT4E/g=
-X-Received: by 10.223.143.66 with SMTP id p60mr2157626wrb.99.1510858673188;
-	Thu, 16 Nov 2017 10:57:53 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.173.139 with HTTP; Thu, 16 Nov 2017 10:57:52 -0800 (PST)
-In-Reply-To: <1510857125-8109-2-git-send-email-akuster808@gmail.com>
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=/queBhdymLAC9REvUL8YH867lTGk6X50pGEErymvCWs=;
+	b=r3ssEfjMzqIHDJvKOqknAoDylJD4BmX73hcG2ncqXsj5CAn8BkhvdADIzhLl2o+r+q
+	/Z0Mwt6hLWGbOqHzdDlZyMglsBHL9NqIyJ/kP4S+Pbz1A70ow14MWta3x8RGjF2dFTBO
+	re0PTkutBpGZ0hl0Gq4MgUiQ6XNb6RDWcWlK4IHDDk++V9LSG62hMdjEgNuvYepIyAMY
+	9lZkbnCCXjbNYode6eOIfsU3xjRb3y7D/DnW2/3j4LkxHUie6lloqg+8CvzFnys1mr3s
+	5LhlGwQxDn63X9izn1Xzq9zgENMVZGWwkeUk6XL4Rlr086s3/h0yPr6GFMQE5G41KZhP
+	sCMQ==
+X-Gm-Message-State: AJaThX5B2rEowVYlTkoTVUROrudqqw/PzQBNh9dlTNv7/qMc4wIPUJtj
+	DrkLW/bMSXuP7B6ylhwM3A64LQ==
+X-Google-Smtp-Source: AGs4zMbdI/OZDUkdpH/xXVB3T+A/v+dzEY1h07DklhoGdlL5Isz4V/VZhzAFyDz31hKIELX45JvGlw==
+X-Received: by 10.99.3.146 with SMTP id 140mr2663809pgd.275.1510860282789;
+	Thu, 16 Nov 2017 11:24:42 -0800 (PST)
+Received: from ?IPv6:2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0?
+	([2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0])
+	by smtp.gmail.com with ESMTPSA id
+	m11sm3453819pfh.35.2017.11.16.11.24.41
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 16 Nov 2017 11:24:42 -0800 (PST)
+To: Martin Jansa <martin.jansa@gmail.com>
 References: <1510857125-8109-1-git-send-email-akuster808@gmail.com>
 	<1510857125-8109-2-git-send-email-akuster808@gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 16 Nov 2017 19:57:52 +0100
-Message-ID: <CA+chaQf0yutP8Tfb8Er65DU0M=k8BQ__EU7pc-E5qn3-BWjqsQ@mail.gmail.com>
-To: Armin Kuster <akuster808@gmail.com>
+	<CA+chaQf0yutP8Tfb8Er65DU0M=k8BQ__EU7pc-E5qn3-BWjqsQ@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <d59e9039-a93c-b0e0-5f83-d2569360e707@gmail.com>
+Date: Thu, 16 Nov 2017 11:24:40 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQf0yutP8Tfb8Er65DU0M=k8BQ__EU7pc-E5qn3-BWjqsQ@mail.gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: "akuster@mvista" <akuster@mvista.com>,
 	openembedded-devel <openembedded-devel@lists.openembedded.org>
@@ -57,59 +65,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 18:57:52 -0000
-Content-Type: text/plain; charset="UTF-8"
-
-does this issue exist in master as well? IIRC I haven't seen it in recent
-reports.
-
-You might want to use ${PN} as in PACKAGES:
-PACKAGES += "lib${PN} lib${PN}-vox8 lib${PN}-vox16"
+X-List-Received-Date: Thu, 16 Nov 2017 19:24:42 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
 
-On Thu, Nov 16, 2017 at 7:32 PM, Armin Kuster <akuster808@gmail.com> wrote:
 
-> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
-> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
-> flite-alsa/1.3-r1/packages-split/libflite-alsa/usr/lib/
-> libflite_cmulex.so.1.3'
+On 11/16/2017 10:57 AM, Martin Jansa wrote:
+> does this issue exist in master as well? IIRC I haven't seen it in
+> recent reports.
+I have not either. Double checking on my local build system. I still
+need to check pyro & rocko.
+
 >
-> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
-> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
-> flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/
-> lib/libflite_cmu_us_kal.so.1.3' [ldflags]
+> You might want to use ${PN} as in PACKAGES:
+> PACKAGES += "lib${PN} lib${PN}-vox8 lib${PN}-vox16"
+thanks for the idea.
+- armin
 >
-> ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in the elf
-> binary: '/build/build_artifacts/morty/tmp/work/i586-poky-linux/
-> flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/
-> lib/libflite_cmu_us_kal16.so.1.3' [ldflags]
-> Signed-off-by: Armin Kuster <akuster808@gmail.com>
-> ---
->  meta-oe/recipes-support/flite/flite-alsa_1.3.bb | 4 ++++
->  1 file changed, 4 insertions(+)
 >
-> diff --git a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
-> b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
-> index 51012e6..19d789e 100644
-> --- a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
-> +++ b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
-> @@ -10,3 +10,7 @@ SRC_URI = "http://www.speech.cs.cmu.edu/
-> flite/packed/flite-${PV}/flite-${PV}-rel
+> On Thu, Nov 16, 2017 at 7:32 PM, Armin Kuster <akuster808@gmail.com
+> <mailto:akuster808@gmail.com>> wrote:
 >
->  SRC_URI[md5sum] = "ae0aca1cb7b4801f4372f3a75a9e52b5"
->  SRC_URI[sha256sum] = "922225f7001e57a0fbace8833b0a48
-> 790a68f6c7b491f2d47c78ad537ab78a8b"
-> +
-> +INSANE_SKIP_libflite-alsa = "ldflags"
-> +INSANE_SKIP_libflite-alsa-vox8 = "ldflags"
-> +INSANE_SKIP_libflite-alsa-vox16 = "ldflags"
-> --
-> 2.7.4
+>     ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in
+>     the elf binary:
+>     '/build/build_artifacts/morty/tmp/work/i586-poky-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa/usr/lib/libflite_cmulex.so.1.3'
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in
+>     the elf binary:
+>     '/build/build_artifacts/morty/tmp/work/i586-poky-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox8/usr/lib/libflite_cmu_us_kal.so.1.3'
+>     [ldflags]
 >
+>     ERROR: flite-alsa-1.3-r1 do_package_qa: QA Issue: No GNU_HASH in
+>     the elf binary:
+>     '/build/build_artifacts/morty/tmp/work/i586-poky-linux/flite-alsa/1.3-r1/packages-split/libflite-alsa-vox16/usr/lib/libflite_cmu_us_kal16.so.1.3'
+>     [ldflags]
+>     Signed-off-by: Armin Kuster <akuster808@gmail.com
+>     <mailto:akuster808@gmail.com>>
+>     ---
+>      meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+>     <http://flite-alsa_1.3.bb> | 4 ++++
+>      1 file changed, 4 insertions(+)
+>
+>     diff --git a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+>     <http://flite-alsa_1.3.bb>
+>     b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+>     <http://flite-alsa_1.3.bb>
+>     index 51012e6..19d789e 100644
+>     --- a/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+>     <http://flite-alsa_1.3.bb>
+>     +++ b/meta-oe/recipes-support/flite/flite-alsa_1.3.bb
+>     <http://flite-alsa_1.3.bb>
+>     @@ -10,3 +10,7 @@ SRC_URI =
+>     "http://www.speech.cs.cmu.edu/flite/packed/flite-${PV}/flite-${PV}-rel
+>     <http://www.speech.cs.cmu.edu/flite/packed/flite-$%7BPV%7D/flite-$%7BPV%7D-rel>
+>
+>      SRC_URI[md5sum] = "ae0aca1cb7b4801f4372f3a75a9e52b5"
+>      SRC_URI[sha256sum] =
+>     "922225f7001e57a0fbace8833b0a48790a68f6c7b491f2d47c78ad537ab78a8b"
+>     +
+>     +INSANE_SKIP_libflite-alsa = "ldflags"
+>     +INSANE_SKIP_libflite-alsa-vox8 = "ldflags"
+>     +INSANE_SKIP_libflite-alsa-vox16 = "ldflags"
+>     --
+>     2.7.4
+>
+>     --
+>     _______________________________________________
+>     Openembedded-devel mailing list
+>     Openembedded-devel@lists.openembedded.org
+>     <mailto:Openembedded-devel@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
+>
+>
+
 
