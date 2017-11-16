@@ -1,58 +1,54 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
-	[209.85.192.194])
-	by mail.openembedded.org (Postfix) with ESMTP id C2BED7807C;
-	Thu, 16 Nov 2017 02:25:59 +0000 (UTC)
-Received: by mail-pf0-f194.google.com with SMTP id j28so16158118pfk.8;
-	Wed, 15 Nov 2017 18:26:01 -0800 (PST)
+Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
+	[209.85.192.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 7614378777
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Nov 2017 02:29:01 +0000 (UTC)
+Received: by mail-pf0-f196.google.com with SMTP id r62so5902829pfd.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Nov 2017 18:29:03 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-transfer-encoding:content-language;
-	bh=y2MLTh989p0hkxb0jlcQTT9lni+9tIOb67CyCXPZAwc=;
-	b=cWB9kXcAjX8SMDRKnK/yMmaXa7ToAxczgCUu47QnnGNd6lGQK9SUOO6E33Nmj1aSP6
-	maxMUn9r47gMcLhlsG9eusV1l9cIUQ5uCXmkofV8teM3SSjvfl7QAdSLG1idPZggDNIg
-	KQEVsY9jodKrd8x3foot1IgVaGYotCRhm9bQmk1Vc8Bt3+uv9SRSgeQGsrpNdY7vIJ2K
-	fmXK+VbWyDl7rqlCwV5+pHu3Ah+WVGCkZtx84gbPTQgFhzvvXBQ2mA9fqa5u1dV6rnGm
-	X/Bv+eACmXiOUm3uWejp/cF8R8iLxUR28Bs+i6C17+GF6NyH+Cq+6pjpkRiqc8zFWegd
-	w3NA==
+	h=subject:to:references:from:message-id:date:user-agent:mime-version
+	:in-reply-to:content-transfer-encoding:content-language;
+	bh=dZSfLMPjyTpyGrifBO2n/a5mWpAwAIWckor91z2Hb2k=;
+	b=aVcEs0NdmFy4RB3cLg5jj9xD3PGALlOcP/OBT/yIMQGhQAEUv1QJ8FIi3ZeCeAz2YY
+	Eo9De39xAIx7qaNyIFHa1AKj749ibKbiMt/NPSRCZiBBPO1C/Vi6oOoMrBGRfkJAMjLe
+	rrJNT1f2racmBAT8hSmHngjgHPU0aFsSlp3IaGwzim4hC3xTjQh6GUSD+dS0yocuagkT
+	g8OYurHYLvjqYvwM5OeZsWGX+yKUFyQavY7JBf5JzNQZigBCRZ7rXFqLvGb00tfzhOc0
+	0ZEBfwCQXrYhG5uvnpaLyLcvkKah38ZZvZMiYNqDPSpeEp+57QtMBXyAI1ebA6kJXRv1
+	4vYg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=y2MLTh989p0hkxb0jlcQTT9lni+9tIOb67CyCXPZAwc=;
-	b=fwycixxexflCHUknbFRMrWFc1ODtAflServtf9/6glrNgasT66UizkV5Gl5rMJidWB
-	uqzyPhmuJoNdOOEgA9T1tNKSO4TYVqIGrN5/VoKj6SHtC3rXYYTcA2Wh74ck7XoDwzmD
-	gXgZ0VDlMO4hFaKGxfmuS6oNP21uOw60yV5lBwJ1wdoWc7H5tfo3dcrRVE2AyGGYIh0u
-	APdwPzXYyJoq8FbpYj2pdYPPFa1nLi4fHHll2pkw7L8kVqBb0zL4Kwj6i8reJx56xz2N
-	SitpZ0jxZz8jJVNMFRb4q8rbZXKxeVXh1aACotzKdo/HU4BX7UhJQ/R0OQiNKGMV88X7
-	lp3g==
-X-Gm-Message-State: AJaThX4hEs+GfPooNjhg+f0hLbbPwPcODczr+TjrBrXIvW9odwAEfIRa
-	EVtL2N5U5StyUy61yW5XhiCp9Q==
-X-Google-Smtp-Source: AGs4zMY/xxw9j8osDfth7LhSLNzKmoOgm/pBy41ywEk9/vXCSGrwDg40xcaoFj0P61hTFRC2DjeEiA==
-X-Received: by 10.98.192.7 with SMTP id x7mr162736pff.142.1510799160754;
-	Wed, 15 Nov 2017 18:26:00 -0800 (PST)
+	bh=dZSfLMPjyTpyGrifBO2n/a5mWpAwAIWckor91z2Hb2k=;
+	b=ZKAx6pBC7YtXpI8JtH5pNCySTW+v8qDx/Vbd+UMTR8U8G4eqKFo3fcr/DPmE+P1Hvx
+	VojtAfTcE3+Bygdwa9X1uguG2f03yOTPtNPmLBLO0lsfjfQG5MoAJINqHg6beOILWjND
+	AAREtC+AUlgxqQTYkzns6YuWUR7TTpBPnYjTmw1ilrp89GCepX+gLo+t3+eLcPGFh3mu
+	5Ajt60jG3HXNDv2Ql/5obnd/6LLWiXExy6HrnEffVm5mCU0HidnbDgAVkxzLyYM2iNa1
+	Ot+Y5RbfXPlU77evaKG63RDGfTFvmrGXAdjVAWXcjkVLaS+FjEbPoO2ahyNyhTeMUWdO
+	Wrdw==
+X-Gm-Message-State: AJaThX6IgK5bAsHA9UMDcM0AtiBhJh94JaKmRZqMaJP0os96woUa2omr
+	m1dU1dZiWiKtmhweN5uQ1n63NQ==
+X-Google-Smtp-Source: AGs4zMa1LPwZNc/jxI+ZPz2YDv3j6YhK0yQ/CDiX5Ne6iVz8otrQ3zijKhBcGS86pCx/UKwCxSI/0Q==
+X-Received: by 10.98.79.86 with SMTP id d83mr184857pfb.26.1510799343140;
+	Wed, 15 Nov 2017 18:29:03 -0800 (PST)
 Received: from ?IPv6:2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0?
 	([2601:202:4001:9ea0:a90f:c0e3:b57a:b8e0])
-	by smtp.gmail.com with ESMTPSA id u7sm45357pfh.142.2017.11.15.18.25.59
+	by smtp.gmail.com with ESMTPSA id c9sm71882pfj.76.2017.11.15.18.29.02
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 15 Nov 2017 18:26:00 -0800 (PST)
-To: Martin Jansa <martin.jansa@gmail.com>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Ross Burton <ross.burton@intel.com>
-References: <151032511199.27841.6992651845996774565@git.openembedded.org>
-	<20171110144512.3538E233675@git.openembedded.org>
-	<CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
+	Wed, 15 Nov 2017 18:29:02 -0800 (PST)
+To: Daniel Mack <daniel@zonque.org>, openembedded-devel@lists.openembedded.org
+References: <20171113205305.24661-1-daniel@zonque.org>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <aa53f8a2-995d-8ce1-6cca-36c11043068c@gmail.com>
-Date: Wed, 15 Nov 2017 18:25:59 -0800
+Message-ID: <b77dfd0c-ce66-f194-e944-0134182be2a2@gmail.com>
+Date: Wed, 15 Nov 2017 18:29:01 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.4.0
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcCtC+UZsTFVtiQF+-rPuGSk7-0nTz+raXvv6SxcQ=N0w@mail.gmail.com>
-Cc: "openembedded-commits@lists.openembedded.org"
-	<openembedded-commits@lists.openembedded.org>
-Subject: Re: [oe-commits] [openembedded-core] 04/44: db: don't provide virtual/db
+In-Reply-To: <20171113205305.24661-1-daniel@zonque.org>
+Subject: Re: [meta][PATCH] connman: bump to version 1.35
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -65,94 +61,226 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 02:26:00 -0000
+X-List-Received-Date: Thu, 16 Nov 2017 02:29:02 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 11/11/2017 02:45 PM, Martin Jansa wrote:
-> Hi,
+On 11/13/2017 12:53 PM, Daniel Mack wrote:
+> Two patches are no longer needed, remove them.
 >
-> will you please send fix for:
-> ERROR: Nothing PROVIDES 'virtual/db' (but
-> meta-oe/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
-> meta-oe/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> DEPENDS on or otherwise requires it).
-
-there are two commits pending
-https://patchwork.openembedded.org/patch/145728/
-https://patchwork.openembedded.org/patch/145729/
-
-which I will take now.
+> Signed-off-by: Daniel Mack <daniel@zonque.org>
+I believe this is the wrong ML should be sent to core
 
 - armin
+> ---
+>  ...ll-nftables-fix-build-with-libnftnl-1.0.7.patch | 72 ------------------
+>  .../connman/connman/CVE-2017-12865.patch           | 87 ----------------------
+>  .../connman/{connman_1.34.bb => connman_1.35.bb}   |  6 +-
+>  3 files changed, 2 insertions(+), 163 deletions(-)
+>  delete mode 100644 meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+>  delete mode 100644 meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+>  rename meta/recipes-connectivity/connman/{connman_1.34.bb => connman_1.35.bb} (67%)
 >
-> Thanks
->
-> On Fri, Nov 10, 2017 at 3:45 PM, <git@git.openembedded.org> wrote:
->
->> This is an automated email from the git hooks/post-receive script.
->>
->> rpurdie pushed a commit to branch master-next
->> in repository openembedded-core.
->>
->> commit dcbc45aa3fe72c528fe4d47a783da4b4ed5ff38e
->> Author: Ross Burton <ross.burton@intel.com>
->> AuthorDate: Tue Oct 31 21:10:13 2017 +0000
->>
->>     db: don't provide virtual/db
->>
->>     As there are no alternative providers for virtual/db remove the
->> PROVIDES and
->>     recipes can just depend on db.
->>
->>     Signed-off-by: Ross Burton <ross.burton@intel.com>
->> ---
->>  meta/recipes-support/db/db_5.3.28.bb | 10 ----------
->>  1 file changed, 10 deletions(-)
->>
->> diff --git a/meta/recipes-support/db/db_5.3.28.bb
->> b/meta/recipes-support/db/db_5.3.28.bb
->> index fb4befb..fe71967 100644
->> --- a/meta/recipes-support/db/db_5.3.28.bb
->> +++ b/meta/recipes-support/db/db_5.3.28.bb
->> @@ -12,7 +12,6 @@ SECTION = "libs"
->>  SUMMARY = "Berkeley Database v5"
->>  HOMEPAGE = "http://www.oracle.com/technetwork/database/database-
->> technologies/berkeleydb/overview/index.html"
->>  LICENSE = "Sleepycat"
->> -VIRTUAL_NAME ?= "virtual/db"
->>  RCONFLICTS_${PN} = "db3"
->>
->>  PR = "r1"
->> @@ -37,15 +36,6 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=
->> ed1158e31437f4f87cdd4ab2b8613955"
->>
->>  inherit autotools
->>
->> -# Put virtual/db in any appropriate provider of a
->> -# relational database, use it as a dependency in
->> -# place of a specific db and use:
->> -#
->> -# PREFERRED_PROVIDER_virtual/db
->> -#
->> -# to select the correct db in the build (distro) .conf
->> -PROVIDES += "${VIRTUAL_NAME}"
->> -
->>  # The executables go in a separate package - typically there
->>  # is no need to install these unless doing real database
->>  # management on the system.
->>
->> --
->> To stop receiving notification emails like this one, please contact
->> the administrator of this repository.
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->>
+> diff --git a/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch b/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+> deleted file mode 100644
+> index cfafbd1271..0000000000
+> --- a/meta/recipes-connectivity/connman/connman/0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch
+> +++ /dev/null
+> @@ -1,72 +0,0 @@
+> -From 4058ce3186a99fd5f03350fc11a7fc8d38b6a381 Mon Sep 17 00:00:00 2001
+> -From: "Maxin B. John" <maxin.john@intel.com>
+> -Date: Mon, 8 May 2017 10:53:18 +0300
+> -Subject: [PATCH] firewall-nftables: fix build with libnftnl-1.0.7
+> -
+> -We need these updates to accommodate the changes caused by the following
+> -commit in libnftnl-1.0.7
+> -
+> -commit 907a9f8e5a93f5bcd449643eb3916a656d634758
+> -Author: Pablo Neira Ayuso <pablo@netfilter.org>
+> -Date:   Tue Dec 20 13:47:11 2016 +0100
+> -
+> -src: get rid of aliases and compat
+> -
+> -This machinery was introduced to avoid sudden compilation breakage of
+> -old nftables releases. With the upcoming release of 0.7 (and 0.6 which
+> -is now 6 months old) this is not required anymore.
+> -
+> -Moreover, users gain nothing from older releases since they are
+> -half-boiled and buggy.
+> -
+> -So let's get rid of aliases now. Bump LIBVERSION and update map file.
+> -
+> -Upstream-Status: Submitted
+> -
+> -Signed-off-by: Maxin B. John <maxin.john@intel.com>
+> ----
+> - src/firewall-nftables.c | 14 +++++++-------
+> - 1 file changed, 7 insertions(+), 7 deletions(-)
+> -
+> -diff --git a/src/firewall-nftables.c b/src/firewall-nftables.c
+> -index 583d1c4..83b137b 100644
+> ---- a/src/firewall-nftables.c
+> -+++ b/src/firewall-nftables.c
+> -@@ -387,9 +387,9 @@ static int add_cmp(struct nftnl_rule *rule, uint32_t sreg, uint32_t op,
+> -         if (!expr)
+> -                 return -ENOMEM;
+> - 
+> --        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_SREG, sreg);
+> --        nftnl_expr_set_u32(expr, NFT_EXPR_CMP_OP, op);
+> --        nftnl_expr_set(expr, NFT_EXPR_CMP_DATA, data, data_len);
+> -+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_SREG, sreg);
+> -+        nftnl_expr_set_u32(expr, NFTNL_EXPR_CMP_OP, op);
+> -+        nftnl_expr_set(expr, NFTNL_EXPR_CMP_DATA, data, data_len);
+> - 
+> -         nftnl_rule_add_expr(rule, expr);
+> - 
+> -@@ -575,8 +575,8 @@ static int build_rule_nat(const char *address, unsigned char prefixlen,
+> - 	expr = nftnl_expr_alloc("meta");
+> - 	if (!expr)
+> - 		goto err;
+> --	nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIFNAME);
+> --	nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
+> -+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIFNAME);
+> -+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
+> - 	nftnl_rule_add_expr(rule, expr);
+> - 	err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, interface,
+> - 			strlen(interface) + 1);
+> -@@ -677,8 +677,8 @@ static int build_rule_snat(int index, const char *address,
+> - 	expr = nftnl_expr_alloc("meta");
+> - 	if (!expr)
+> - 		goto err;
+> --	nftnl_expr_set_u32(expr, NFT_EXPR_META_KEY, NFT_META_OIF);
+> --	nftnl_expr_set_u32(expr, NFT_EXPR_META_DREG, NFT_REG_1);
+> -+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_KEY, NFT_META_OIF);
+> -+	nftnl_expr_set_u32(expr, NFTNL_EXPR_META_DREG, NFT_REG_1);
+> - 	nftnl_rule_add_expr(rule, expr);
+> - 	err = add_cmp(rule, NFT_REG_1, NFT_CMP_EQ, &index, sizeof(index));
+> - 	if (err < 0)
+> --- 
+> -2.4.0
+> -
+> diff --git a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch b/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+> deleted file mode 100644
+> index 45f78f10ea..0000000000
+> --- a/meta/recipes-connectivity/connman/connman/CVE-2017-12865.patch
+> +++ /dev/null
+> @@ -1,87 +0,0 @@
+> -From 5c281d182ecdd0a424b64f7698f32467f8f67b71 Mon Sep 17 00:00:00 2001
+> -From: Jukka Rissanen <jukka.rissanen@linux.intel.com>
+> -Date: Wed, 9 Aug 2017 10:16:46 +0300
+> -Subject: dnsproxy: Fix crash on malformed DNS response
+> -
+> -If the response query string is malformed, we might access memory
+> -pass the end of "name" variable in parse_response().
+> -
+> -CVE: CVE-2017-12865
+> -Upstream-Status: Backport [https://git.kernel.org/pub/scm/network/connman/connman.git/patch/?id=5c281d182ecdd0a424b64f7698f32467f8f67b71]
+> -
+> -Signed-off-by: Sona Sarmadi <sona.sarmadi@enea.com>
+> ----
+> - src/dnsproxy.c | 16 ++++++++++------
+> - 1 file changed, 10 insertions(+), 6 deletions(-)
+> -
+> -diff --git a/src/dnsproxy.c b/src/dnsproxy.c
+> -index 38ac5bf..40b4f15 100644
+> ---- a/src/dnsproxy.c
+> -+++ b/src/dnsproxy.c
+> -@@ -838,7 +838,7 @@ static struct cache_entry *cache_check(gpointer request, int *qtype, int proto)
+> - static int get_name(int counter,
+> - 		unsigned char *pkt, unsigned char *start, unsigned char *max,
+> - 		unsigned char *output, int output_max, int *output_len,
+> --		unsigned char **end, char *name, int *name_len)
+> -+		unsigned char **end, char *name, size_t max_name, int *name_len)
+> - {
+> - 	unsigned char *p;
+> - 
+> -@@ -859,7 +859,7 @@ static int get_name(int counter,
+> - 
+> - 			return get_name(counter + 1, pkt, pkt + offset, max,
+> - 					output, output_max, output_len, end,
+> --					name, name_len);
+> -+					name, max_name, name_len);
+> - 		} else {
+> - 			unsigned label_len = *p;
+> - 
+> -@@ -869,6 +869,9 @@ static int get_name(int counter,
+> - 			if (*output_len > output_max)
+> - 				return -ENOBUFS;
+> - 
+> -+			if ((*name_len + 1 + label_len + 1) > max_name)
+> -+				return -ENOBUFS;
+> -+
+> - 			/*
+> - 			 * We need the original name in order to check
+> - 			 * if this answer is the correct one.
+> -@@ -900,14 +903,14 @@ static int parse_rr(unsigned char *buf, unsigned char *start,
+> - 			unsigned char *response, unsigned int *response_size,
+> - 			uint16_t *type, uint16_t *class, int *ttl, int *rdlen,
+> - 			unsigned char **end,
+> --			char *name)
+> -+			char *name, size_t max_name)
+> - {
+> - 	struct domain_rr *rr;
+> - 	int err, offset;
+> - 	int name_len = 0, output_len = 0, max_rsp = *response_size;
+> - 
+> - 	err = get_name(0, buf, start, max, response, max_rsp,
+> --		&output_len, end, name, &name_len);
+> -+			&output_len, end, name, max_name, &name_len);
+> - 	if (err < 0)
+> - 		return err;
+> - 
+> -@@ -1033,7 +1036,8 @@ static int parse_response(unsigned char *buf, int buflen,
+> - 		memset(rsp, 0, sizeof(rsp));
+> - 
+> - 		ret = parse_rr(buf, ptr, buf + buflen, rsp, &rsp_len,
+> --			type, class, ttl, &rdlen, &next, name);
+> -+			type, class, ttl, &rdlen, &next, name,
+> -+			sizeof(name) - 1);
+> - 		if (ret != 0) {
+> - 			err = ret;
+> - 			goto out;
+> -@@ -1099,7 +1103,7 @@ static int parse_response(unsigned char *buf, int buflen,
+> - 			 */
+> - 			ret = get_name(0, buf, next - rdlen, buf + buflen,
+> - 					rsp, rsp_len, &output_len, &end,
+> --					name, &name_len);
+> -+					name, sizeof(name) - 1, &name_len);
+> - 			if (ret != 0) {
+> - 				/* just ignore the error at this point */
+> - 				ptr = next;
+> --- 
+> -cgit v1.1
+> -
+> diff --git a/meta/recipes-connectivity/connman/connman_1.34.bb b/meta/recipes-connectivity/connman/connman_1.35.bb
+> similarity index 67%
+> rename from meta/recipes-connectivity/connman/connman_1.34.bb
+> rename to meta/recipes-connectivity/connman/connman_1.35.bb
+> index dc2c688f49..950946fe76 100644
+> --- a/meta/recipes-connectivity/connman/connman_1.34.bb
+> +++ b/meta/recipes-connectivity/connman/connman_1.35.bb
+> @@ -2,17 +2,15 @@ require connman.inc
+>  
+>  SRC_URI  = "${KERNELORG_MIRROR}/linux/network/${BPN}/${BP}.tar.xz \
+>              file://0001-plugin.h-Change-visibility-to-default-for-debug-symb.patch \
+> -            file://0001-firewall-nftables-fix-build-with-libnftnl-1.0.7.patch \
+>              file://0001-connman.service-stop-systemd-resolved-when-we-use-co.patch \
+>              file://connman \
+>              file://no-version-scripts.patch \
+>              file://includes.patch \
+> -            file://CVE-2017-12865.patch \
+>              "
+>  SRC_URI_append_libc-musl = " file://0002-resolve-musl-does-not-implement-res_ninit.patch \
+>                               "
+>  
+> -SRC_URI[md5sum] = "e200028702c831d5f535d20d61e608ef"
+> -SRC_URI[sha256sum] = "a9a0808c729c1f348fc36d8cecb52d19b72bc34cb411c502608cb0e0190fc71e"
+> +SRC_URI[md5sum] = "bae37b45ee9b3db5ec8115188f8a7652"
+> +SRC_URI[sha256sum] = "66d7deb98371545c6e417239a9b3b3e3201c1529d08eedf40afbc859842cf2aa"
+>  
+>  RRECOMMENDS_${PN} = "connman-conf"
 
 
