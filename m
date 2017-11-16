@@ -1,30 +1,42 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CF3B78726
+Return-Path: <otavio.salvador@gmail.com>
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AE497876B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Nov 2017 15:40:48 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	16 Nov 2017 07:40:49 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,404,1505804400"; 
-   d="scan'208";a="5744557"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 16 Nov 2017 07:40:48 -0800
-To: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
-References: <20171115141502.21516-1-ricardo.ribalda@gmail.com>
-	<4f5c0b05-f8a5-d542-7a20-c40dd5100ae6@linux.intel.com>
-	<CAPybu_3CD3bRmYu97GD2gwOj0oX7xN2_Rkq0F3EfiWToMySJxw@mail.gmail.com>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <e4e86915-7e8e-5cb3-cc46-f2e9ce94f68b@linux.intel.com>
-Date: Thu, 16 Nov 2017 17:41:04 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
-MIME-Version: 1.0
-In-Reply-To: <CAPybu_3CD3bRmYu97GD2gwOj0oX7xN2_Rkq0F3EfiWToMySJxw@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] meson: update meson to 0.43.0
+	Thu, 16 Nov 2017 17:03:46 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id r39so28112576qtr.13
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Nov 2017 09:03:48 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=btHdxgMf/g6gmjSlSqyxCc4BkGe/TT4yHmjTLdcwrDk=;
+	b=MImgV45DwxIpbzMwCK3u7trG7e39Ivqc8F/YUpIB4ghrO8mp7ftYbuA/ch5vzCcVrz
+	OmeExWdyCA1wDLSR41Xp0HEv+n0lRfUr9L57c/UnckRb7wjC3Qqd811iz+ciBNbdDZkr
+	vQC+nmHMW7pjoTfIB6d4TxktCM/pXj0bSZUsYll14OhDDFN7E1F/uuZXiq8Ud8DETEjG
+	p/OUR+PZdtg2IO7h+KJNmsuFe17uxo2Kbc2bY5ePjkC5OKmLSnbHxXl2tYQMEZnwJWFQ
+	MMbO9DNgbHuZhyNXQZ6/r8D+Arg43OJh/Qca4CtYtb6RwU/cCvUWrLVTT9bzM1tbTlxX
+	s3TQ==
+X-Gm-Message-State: AJaThX7oFSiXHL4zM9zkW52ISiakqkG5S80Fh0lkZaR+FsrlOVvlGEQF
+	bxhCwDzkvN9Fs1F1HPF9ZZ3Zjw==
+X-Google-Smtp-Source: AGs4zMYILrAqRH4NH/W7soY1GIEtdER+rYWrlaHdRBfXJeWyM0cjpwgV4TV2gfzvp/y4Xo2XJPIOrA==
+X-Received: by 10.55.27.70 with SMTP id b67mr3559233qkb.356.1510851827720;
+	Thu, 16 Nov 2017 09:03:47 -0800 (PST)
+Received: from localhost.localdomain ([181.220.79.73])
+	by smtp.gmail.com with ESMTPSA id m1sm1107254qkl.93.2017.11.16.09.03.44
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Thu, 16 Nov 2017 09:03:46 -0800 (PST)
+Received: by localhost.localdomain (sSMTP sendmail emulation);
+	Thu, 16 Nov 2017 15:03:38 -0200
+From: Otavio Salvador <otavio@ossystems.com.br>
+To: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 16 Nov 2017 15:03:37 -0200
+Message-Id: <20171116170337.23228-1-otavio@ossystems.com.br>
+X-Mailer: git-send-email 2.15.0
+Organization: O.S. Systems Software LTDA.
+Cc: Otavio Salvador <otavio@ossystems.com.br>
+Subject: [meta-python PATCH] python-asn1crypto: Add native and nativesdk variants
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,26 +49,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Nov 2017 15:40:48 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Nov 2017 17:03:47 -0000
 
-On 11/16/2017 05:37 PM, Ricardo Ribalda Delgado wrote:
+Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
+---
 
->>>
->>> Signed-off-by: Ricardo Ribalda Delgado <ricardo.ribalda@gmail.com>
->>
->>
->> Meson is being moved to oe-core; can you please check the patches posted to
->> oe-core list?
-> 
-> Do you mean review the patches on oe-core , or port my patches to oe-core?
-> 
+ meta-python/recipes-devtools/python/python-asn1crypto.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-Check if any of your changes need to be rebased on top of my oe-core 
-patchset, and if so, send the rebased patches there. And generally test 
-my patchset.
+diff --git a/meta-python/recipes-devtools/python/python-asn1crypto.inc b/meta-python/recipes-devtools/python/python-asn1crypto.inc
+index 3bdb4b235..7accbba18 100644
+--- a/meta-python/recipes-devtools/python/python-asn1crypto.inc
++++ b/meta-python/recipes-devtools/python/python-asn1crypto.inc
+@@ -10,3 +10,5 @@ SRC_URI[md5sum] = "97d54665c397b72b165768398dfdd876"
+ SRC_URI[sha256sum] = "0874981329cfebb366d6584c3d16e913f2a0eb026c9463efcc4aaf42a9d94d70"
+ 
+ inherit pypi
++
++BBCLASSEXTEND = "native nativesdk"
+-- 
+2.15.0
 
-Alex
 
