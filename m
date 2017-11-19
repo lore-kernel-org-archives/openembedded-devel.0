@@ -1,49 +1,51 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id CC7DB7016E
+Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 98A7578766
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Nov 2017 18:41:39 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id n89so5611934pfk.11
+	Sun, 19 Nov 2017 18:41:40 +0000 (UTC)
+Received: by mail-pg0-f67.google.com with SMTP id u3so5615496pgn.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Nov 2017 10:41:41 -0800 (PST)
+	Sun, 19 Nov 2017 10:41:42 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id;
-	bh=FMiKUt9lzyQZkmXOUWQIQPJYOuNiJpOVF3O6qT9mxYc=;
-	b=pkHTIK2pjyHZVMtw+5xlGAKfpYg9o9CN31aSE6/6RnG5zoAp2RTIdQqgiY/sGQR68l
-	F4t5hC8o0vwwMI73/JiNiXsmy/iiDTWSQUnPVVbL3+Tu3Q5p44YLr08xEb0/jzZQ2oHF
-	ze49odaqWCK5Rfg+aGhexwzv8kPwj/rh/NzEKouPGrXqVxhvmzq04nlvuKTbG4ZaMExN
-	KSS/TEtift3v6p1v6nPIehB36HbSxeqvIZgtU7EDXSQkP7wbrxX3+ySR44TxM9yNIyTL
-	pUs65CKu1a9kvtbXK8ykjZNvPb6l6uQ/diQOtNOT1xeNq/S3sc9O/33KU/EvXgGqVjB0
-	HQqg==
+	h=from:to:subject:date:message-id:in-reply-to:references;
+	bh=294WSFK5MTTrSmIDdYVHlaZdnkO+VNqcXzwHrLn5IwY=;
+	b=E25u1bhP4R/X5lJh9TfJwMI5haMW+HRnESxC37tzm5czMvGny35oGk+pmqaDB1JBWX
+	yPqAo+k37gVnLAWfNU/o2RaX4Ns4S+nQv0Jt2+9IRTCkZ5209eCOA8Nf2XegwBi+x48w
+	voq8HUePM+MEvlWEVeLyA0zyyEzSjX0t/NzEZE9alXQ7irJIXRVPGmrQ+ItDkhVQB088
+	aZthZSQbBhTYrs5o+pO5+F0GjBg+cJRU8Mtb3ftZ/3eyHrDrpimbiOyhol8ayp6g1b5H
+	ZQ/A8mLWEfHthmM60Yt1Pfv7h/PKH024Sv//kkhetwCeQ0LC0r8DLhdSonLePW3DtS7l
+	3InA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id;
-	bh=FMiKUt9lzyQZkmXOUWQIQPJYOuNiJpOVF3O6qT9mxYc=;
-	b=FwModaxTkW2G/fdkm+EMyxCzmUdaMulz8bZnPPz+zRQs23VJdOCa7SVhnetnyLk1zb
-	J6CvFPuzP/eHnvj4ufJh6tHYo5P+ed12bHNcpr82GYRPk5650/uXDMu95SowY9e5itu2
-	rPQ6tOfJ2Iu5HyzDJBkAem+0PMapWCzcXs67CPXN1p/oli4ZRH6L9tbNPUavvej17R1B
-	WbWuDqXKs4du7dP9pg6IWbHzxuyptScELv5Zrk7scboXgxUOdw9Hx+hMF4b0T/Ef2eag
-	JqNC3q4IvRV01HyK61zkGEzLbpDn8efX6XhYB+nW6dSpUFupVrYa1voEwC16BJ+Rvpnu
-	Wgyw==
-X-Gm-Message-State: AJaThX7jpmLqBHqjaBLFz/oysHfgvIflBCuC1K5if6Qonvf3FwNZ6hAt
-	H+v0xrPp1ZI05Xgn8pgkRaA=
-X-Google-Smtp-Source: AGs4zMazjaTNYgbyh7YrtvTpwDkS93vt1X5bO5xgfc453YZ/wr3Q+TMHmqPKlr4KKfLcRnEJSQUn6Q==
-X-Received: by 10.84.211.79 with SMTP id b73mr11502164pli.419.1511116900733;
-	Sun, 19 Nov 2017 10:41:40 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references;
+	bh=294WSFK5MTTrSmIDdYVHlaZdnkO+VNqcXzwHrLn5IwY=;
+	b=JIMLnKH4TTVzyoTo0wS2PFOyqaLzDLkBGtx2Bj0c6JDz8/Rnr/Zz3fWIvCGKT0v3RX
+	jnb/Wof5Vc7Tqa9YOjov3jP5uRS4pU4gsnvrJNSXg7N9/d+ml891sKrZ0KqOkwspcKlQ
+	jZRUXTksKAnXBhvr91By5FtHQmYtYcsYRC/TmLFzOgDPjSsMoDZr8aS99oe8tngFQqrc
+	rrCGZnuNlp5z+MzhZaoU57+dm2Hv5ah8gO4Qq62qqZbIF6MjS1r8ENEsv5Sw9nrswgpD
+	rJSkfPATNdMY5Quh0z82lLdqiV3DeuqbPpd3AFIYYeGnyWaYgTZd6caJvjM4Vlq3hRVI
+	OL1g==
+X-Gm-Message-State: AJaThX4lGnTZBtrBtyUyVcES1u0a3h8cDqHtb0qN8y9jM2EvGW1z41j6
+	Wgqyv0Bvtvo0LtH8mLlxEINesQ==
+X-Google-Smtp-Source: AGs4zMabGB3BvnqvV0LolwRZB1XwVEvP1BGhpD9GO/Jutp/qdQA9mN5pt51rbQeMbluPwKoZQ8djpg==
+X-Received: by 10.84.233.207 with SMTP id m15mr11342502pln.424.1511116901774; 
+	Sun, 19 Nov 2017 10:41:41 -0800 (PST)
 Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
 	([2601:202:4001:9ea0:ed06:7472:604f:b02a])
 	by smtp.gmail.com with ESMTPSA id
-	s68sm1164971pfj.81.2017.11.19.10.41.39
+	s68sm1164971pfj.81.2017.11.19.10.41.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 19 Nov 2017 10:41:40 -0800 (PST)
+	Sun, 19 Nov 2017 10:41:41 -0800 (PST)
 From: Armin Kuster <akuster808@gmail.com>
 To: akuster@mvista.com,
 	openembedded-devel@lists.openembedded.org
-Date: Sun, 19 Nov 2017 10:41:38 -0800
-Message-Id: <1511116899-6122-1-git-send-email-akuster808@gmail.com>
+Date: Sun, 19 Nov 2017 10:41:39 -0800
+Message-Id: <1511116899-6122-2-git-send-email-akuster808@gmail.com>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH 1/2] UFL: add missing license
+In-Reply-To: <1511116899-6122-1-git-send-email-akuster808@gmail.com>
+References: <1511116899-6122-1-git-send-email-akuster808@gmail.com>
+Subject: [meta-oe][PATCH 2/2] debootstrap: change license to MIT
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,122 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Nov 2017 18:41:39 -0000
+X-List-Received-Date: Sun, 19 Nov 2017 18:41:40 -0000
 
-fixes
-WARNING: ttf-ubuntu-font-family-0.80-r1 do_populate_lic: ttf-ubuntu-font-family: No generic license file exists for: UFL in any provider
+The closest thing to a license is found in the http://metadata.ftp-master.debian.org/changelogs/main/d/debootstrap/debootstrap_1.0.92_copyright
 
-http://font.ubuntu.com/ufl/ubuntu-font-licence-1.0.txt
+The verbage looks very close to MIT so seems reasonable make to change the license to MIT instead of
+creating a custom entry for debootstrap-custom-license. This follows what Redhat, Mandriva and Suse have for this package. (see rpmfind)
+
+will fix: WARNING: debootstrap-1.0.67-r0 do_populate_lic: debootstrap: No generic license file exists for: debootstrap-custom-license in any provider
 
 Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- meta-oe/licenses/UFL | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 97 insertions(+)
- create mode 100644 meta-oe/licenses/UFL
+ meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/licenses/UFL b/meta-oe/licenses/UFL
-new file mode 100644
-index 0000000..e78ac4a
---- /dev/null
-+++ b/meta-oe/licenses/UFL
-@@ -0,0 +1,97 @@
-+-------------------------------
-+UBUNTU FONT LICENCE Version 1.0
-+-------------------------------
-+
-+PREAMBLE
-+This licence allows the licensed fonts to be used, studied, modified and
-+redistributed freely. The fonts, including any derivative works, can be
-+bundled, embedded, and redistributed provided the terms of this licence
-+are met. The fonts and derivatives, however, cannot be released under
-+any other licence. The requirement for fonts to remain under this
-+licence does not require any document created using the fonts or their
-+derivatives to be published under this licence, as long as the primary
-+purpose of the document is not to be a vehicle for the distribution of
-+the fonts.
-+
-+DEFINITIONS
-+"Font Software" refers to the set of files released by the Copyright
-+Holder(s) under this licence and clearly marked as such. This may
-+include source files, build scripts and documentation.
-+
-+"Original Version" refers to the collection of Font Software components
-+as received under this licence.
-+
-+"Modified Version" refers to any derivative made by adding to, deleting,
-+or substituting -- in part or in whole -- any of the components of the
-+Original Version, by changing formats or by porting the Font Software to
-+a new environment.
-+
-+"Copyright Holder(s)" refers to all individuals and companies who have a
-+copyright ownership of the Font Software.
-+
-+"Substantially Changed" refers to Modified Versions which can be easily
-+identified as dissimilar to the Font Software by users of the Font
-+Software comparing the Original Version with the Modified Version.
-+
-+To "Propagate" a work means to do anything with it that, without
-+permission, would make you directly or secondarily liable for
-+infringement under applicable copyright law, except executing it on a
-+computer or modifying a private copy. Propagation includes copying,
-+distribution (with or without modification and with or without charging
-+a redistribution fee), making available to the public, and in some
-+countries other activities as well.
-+
-+PERMISSION & CONDITIONS
-+This licence does not grant any rights under trademark law and all such
-+rights are reserved.
-+
-+Permission is hereby granted, free of charge, to any person obtaining a
-+copy of the Font Software, to propagate the Font Software, subject to
-+the below conditions:
-+
-+1) Each copy of the Font Software must contain the above copyright
-+notice and this licence. These can be included either as stand-alone
-+text files, human-readable headers or in the appropriate machine-
-+readable metadata fields within text or binary files as long as those
-+fields can be easily viewed by the user.
-+
-+2) The font name complies with the following:
-+(a) The Original Version must retain its name, unmodified.
-+(b) Modified Versions which are Substantially Changed must be renamed to
-+avoid use of the name of the Original Version or similar names entirely.
-+(c) Modified Versions which are not Substantially Changed must be
-+renamed to both (i) retain the name of the Original Version and (ii) add
-+additional naming elements to distinguish the Modified Version from the
-+Original Version. The name of such Modified Versions must be the name of
-+the Original Version, with "derivative X" where X represents the name of
-+the new work, appended to that name.
-+
-+3) The name(s) of the Copyright Holder(s) and any contributor to the
-+Font Software shall not be used to promote, endorse or advertise any
-+Modified Version, except (i) as required by this licence, (ii) to
-+acknowledge the contribution(s) of the Copyright Holder(s) or (iii) with
-+their explicit written permission.
-+
-+4) The Font Software, modified or unmodified, in part or in whole, must
-+be distributed entirely under this licence, and must not be distributed
-+under any other licence. The requirement for fonts to remain under this
-+licence does not affect any document created using the Font Software,
-+except any version of the Font Software extracted from a document
-+created using the Font Software may only be distributed under this
-+licence.
-+
-+TERMINATION
-+This licence becomes null and void if any of the above conditions are
-+not met.
-+
-+DISCLAIMER
-+THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
-+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
-+COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
-+COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-+INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
-+DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-+FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER
-+DEALINGS IN THE FONT SOFTWARE.
-+
+diff --git a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
+index 62b2796..8472aca 100644
+--- a/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
++++ b/meta-oe/recipes-devtools/debootstrap/debootstrap_1.0.67.bb
+@@ -1,7 +1,7 @@
+ SUMMARY = "Install a Debian system into a subdirectory"
+ HOMEPAGE = "https://wiki.debian.org/Debootstrap"
+ SECTION = "devel"
+-LICENSE = "debootstrap-custom-license"
++LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://debian/copyright;md5=1e68ced6e1689d4cd9dac75ff5225608"
+ 
+ inherit pkgconfig
 -- 
 2.7.4
 
