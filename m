@@ -1,26 +1,49 @@
-Return-Path: <robert.joslyn@redrectangle.org>
-X-Greylist: delayed 1427 seconds by postgrey-1.34 at layers.openembedded.org;
-	Sat, 18 Nov 2017 18:38:00 UTC
-Received: from slow1-d.mail.gandi.net (slow1-d.mail.gandi.net [217.70.178.86])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E46571AC5
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
+	[209.85.192.193])
+	by mail.openembedded.org (Postfix) with ESMTP id CC7DB7016E
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Nov 2017 18:38:00 +0000 (UTC)
-Received: from relay2-d.mail.gandi.net (relay2-d.mail.gandi.net
-	[217.70.183.194])
-	by slow1-d.mail.gandi.net (Postfix) with ESMTP id 39EE347F946
+	Sun, 19 Nov 2017 18:41:39 +0000 (UTC)
+Received: by mail-pf0-f193.google.com with SMTP id n89so5611934pfk.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Nov 2017 19:08:22 +0100 (CET)
-X-Originating-IP: 50.37.84.26
-Received: from xps13.bob (50-37-84-26.mscw.id.frontiernet.net [50.37.84.26])
-	(Authenticated sender: robert.joslyn@redrectangle.org)
-	by relay2-d.mail.gandi.net (Postfix) with ESMTPSA id 63990C5A5C;
-	Sat, 18 Nov 2017 19:08:18 +0100 (CET)
-From: Robert Joslyn <robert.joslyn@redrectangle.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Nov 2017 10:07:36 -0800
-Message-Id: <20171118180736.6230-1-robert.joslyn@redrectangle.org>
-X-Mailer: git-send-email 2.13.6
-Subject: [meta-networking][PATCH] chrony: Update to version 3.2
+	Sun, 19 Nov 2017 10:41:41 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:subject:date:message-id;
+	bh=FMiKUt9lzyQZkmXOUWQIQPJYOuNiJpOVF3O6qT9mxYc=;
+	b=pkHTIK2pjyHZVMtw+5xlGAKfpYg9o9CN31aSE6/6RnG5zoAp2RTIdQqgiY/sGQR68l
+	F4t5hC8o0vwwMI73/JiNiXsmy/iiDTWSQUnPVVbL3+Tu3Q5p44YLr08xEb0/jzZQ2oHF
+	ze49odaqWCK5Rfg+aGhexwzv8kPwj/rh/NzEKouPGrXqVxhvmzq04nlvuKTbG4ZaMExN
+	KSS/TEtift3v6p1v6nPIehB36HbSxeqvIZgtU7EDXSQkP7wbrxX3+ySR44TxM9yNIyTL
+	pUs65CKu1a9kvtbXK8ykjZNvPb6l6uQ/diQOtNOT1xeNq/S3sc9O/33KU/EvXgGqVjB0
+	HQqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id;
+	bh=FMiKUt9lzyQZkmXOUWQIQPJYOuNiJpOVF3O6qT9mxYc=;
+	b=FwModaxTkW2G/fdkm+EMyxCzmUdaMulz8bZnPPz+zRQs23VJdOCa7SVhnetnyLk1zb
+	J6CvFPuzP/eHnvj4ufJh6tHYo5P+ed12bHNcpr82GYRPk5650/uXDMu95SowY9e5itu2
+	rPQ6tOfJ2Iu5HyzDJBkAem+0PMapWCzcXs67CPXN1p/oli4ZRH6L9tbNPUavvej17R1B
+	WbWuDqXKs4du7dP9pg6IWbHzxuyptScELv5Zrk7scboXgxUOdw9Hx+hMF4b0T/Ef2eag
+	JqNC3q4IvRV01HyK61zkGEzLbpDn8efX6XhYB+nW6dSpUFupVrYa1voEwC16BJ+Rvpnu
+	Wgyw==
+X-Gm-Message-State: AJaThX7jpmLqBHqjaBLFz/oysHfgvIflBCuC1K5if6Qonvf3FwNZ6hAt
+	H+v0xrPp1ZI05Xgn8pgkRaA=
+X-Google-Smtp-Source: AGs4zMazjaTNYgbyh7YrtvTpwDkS93vt1X5bO5xgfc453YZ/wr3Q+TMHmqPKlr4KKfLcRnEJSQUn6Q==
+X-Received: by 10.84.211.79 with SMTP id b73mr11502164pli.419.1511116900733;
+	Sun, 19 Nov 2017 10:41:40 -0800 (PST)
+Received: from akuster-ThinkPad-T460s.hsd1.ca.comcast.net
+	([2601:202:4001:9ea0:ed06:7472:604f:b02a])
+	by smtp.gmail.com with ESMTPSA id
+	s68sm1164971pfj.81.2017.11.19.10.41.39
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Sun, 19 Nov 2017 10:41:40 -0800 (PST)
+From: Armin Kuster <akuster808@gmail.com>
+To: akuster@mvista.com,
+	openembedded-devel@lists.openembedded.org
+Date: Sun, 19 Nov 2017 10:41:38 -0800
+Message-Id: <1511116899-6122-1-git-send-email-akuster808@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-oe][PATCH 1/2] UFL: add missing license
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,117 +56,123 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Nov 2017 18:38:00 -0000
+X-List-Received-Date: Sun, 19 Nov 2017 18:41:39 -0000
 
-Signed-of-by: Robert Joslyn <robert.joslyn@redrectangle.org>
+fixes
+WARNING: ttf-ubuntu-font-family-0.80-r1 do_populate_lic: ttf-ubuntu-font-family: No generic license file exists for: UFL in any provider
+
+http://font.ubuntu.com/ufl/ubuntu-font-licence-1.0.txt
+
+Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-support/chrony/chrony/arm_eabi.patch   | 36 +++++++++++++---------
- .../chrony/{chrony_2.4.bb => chrony_3.2.bb}        |  6 ++--
- 2 files changed, 24 insertions(+), 18 deletions(-)
- rename meta-networking/recipes-support/chrony/{chrony_2.4.bb => chrony_3.2.bb} (96%)
+ meta-oe/licenses/UFL | 97 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+ create mode 100644 meta-oe/licenses/UFL
 
-diff --git a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-index d1586bba4..92a2dbd93 100644
---- a/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-+++ b/meta-networking/recipes-support/chrony/chrony/arm_eabi.patch
-@@ -1,48 +1,54 @@
-     chrony: fix build failure for arma9
--    
+diff --git a/meta-oe/licenses/UFL b/meta-oe/licenses/UFL
+new file mode 100644
+index 0000000..e78ac4a
+--- /dev/null
++++ b/meta-oe/licenses/UFL
+@@ -0,0 +1,97 @@
++-------------------------------
++UBUNTU FONT LICENCE Version 1.0
++-------------------------------
 +
-     Eliminate references to syscalls not available
-     for ARM_EABI.  Also add a dependency on libseccomp
-     which is needed for scfilter to work.
--    
++PREAMBLE
++This licence allows the licensed fonts to be used, studied, modified and
++redistributed freely. The fonts, including any derivative works, can be
++bundled, embedded, and redistributed provided the terms of this licence
++are met. The fonts and derivatives, however, cannot be released under
++any other licence. The requirement for fonts to remain under this
++licence does not require any document created using the fonts or their
++derivatives to be published under this licence, as long as the primary
++purpose of the document is not to be a vehicle for the distribution of
++the fonts.
 +
-     Set PACKAGECONFIG to not enable scfilter, since
-     kernel CONFIG_SECCOMP is unlikely to be set.  This
-     aligns the usage of libseccomp with that of other packages.
- 
-     Upstream-Status: Pending
--    
++DEFINITIONS
++"Font Software" refers to the set of files released by the Copyright
++Holder(s) under this licence and clearly marked as such. This may
++include source files, build scripts and documentation.
 +
-     Signed-off-by: Joe Slater <jslater@windriver.com>
- 
-+    Refresh patch for new upstream version.
++"Original Version" refers to the collection of Font Software components
++as received under this licence.
 +
-+    Signed-off-by: Robert Joslyn <robert.joslyn@redrectangle.org>
++"Modified Version" refers to any derivative made by adding to, deleting,
++or substituting -- in part or in whole -- any of the components of the
++Original Version, by changing formats or by porting the Font Software to
++a new environment.
 +
- --- a/sys_linux.c
- +++ b/sys_linux.c
--@@ -453,13 +453,12 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+@@ -465,14 +465,14 @@ SYS_Linux_EnableSystemCallFilter(int lev
-    const int syscalls[] = {
-      /* Clock */
--     SCMP_SYS(adjtimex), SCMP_SYS(gettimeofday), SCMP_SYS(settimeofday),
---    SCMP_SYS(time),
-+     SCMP_SYS(adjtimex), SCMP_SYS(clock_gettime), SCMP_SYS(gettimeofday),
-+-    SCMP_SYS(settimeofday), SCMP_SYS(time),
-++    SCMP_SYS(settimeofday),
-      /* Process */
---    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getrlimit),
--+    SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group),
--     SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn), SCMP_SYS(rt_sigprocmask),
--     SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn), SCMP_SYS(wait4),
-+     SCMP_SYS(clone), SCMP_SYS(exit), SCMP_SYS(exit_group), SCMP_SYS(getpid),
-+-    SCMP_SYS(getrlimit), SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn),
-++    SCMP_SYS(rt_sigaction), SCMP_SYS(rt_sigreturn),
-+     SCMP_SYS(rt_sigprocmask), SCMP_SYS(set_tid_address), SCMP_SYS(sigreturn),
-+     SCMP_SYS(wait4),
-      /* Memory */
- -    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap), SCMP_SYS(mmap2),
- +    SCMP_SYS(brk), SCMP_SYS(madvise), SCMP_SYS(mmap2),
-      SCMP_SYS(mprotect), SCMP_SYS(mremap), SCMP_SYS(munmap), SCMP_SYS(shmdt),
-      /* Filesystem */
-      SCMP_SYS(access), SCMP_SYS(chmod), SCMP_SYS(chown), SCMP_SYS(chown32),
--@@ -470,14 +469,21 @@ SYS_Linux_EnableSystemCallFilter(int lev
-+@@ -483,14 +483,21 @@
-      SCMP_SYS(bind), SCMP_SYS(connect), SCMP_SYS(getsockname),
--     SCMP_SYS(recvfrom), SCMP_SYS(recvmsg), SCMP_SYS(sendmmsg),
--     SCMP_SYS(sendmsg), SCMP_SYS(sendto),
-+     SCMP_SYS(recvfrom), SCMP_SYS(recvmmsg), SCMP_SYS(recvmsg),
-+     SCMP_SYS(sendmmsg), SCMP_SYS(sendmsg), SCMP_SYS(sendto),
- -    /* TODO: check socketcall arguments */
- -    SCMP_SYS(socketcall),
-      /* General I/O */
--     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(pipe),
-+     SCMP_SYS(_newselect), SCMP_SYS(close), SCMP_SYS(open), SCMP_SYS(openat), SCMP_SYS(pipe),
- -    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex), SCMP_SYS(select),
- +    SCMP_SYS(poll), SCMP_SYS(read), SCMP_SYS(futex),
-      SCMP_SYS(set_robust_list), SCMP_SYS(write),
-      /* Miscellaneous */
--     SCMP_SYS(uname),
-+     SCMP_SYS(getrandom), SCMP_SYS(sysinfo), SCMP_SYS(uname),
- +    /* not always available */
- +#if ! defined(__ARM_EABI__)
- +    SCMP_SYS(time),
-diff --git a/meta-networking/recipes-support/chrony/chrony_2.4.bb b/meta-networking/recipes-support/chrony/chrony_3.2.bb
-similarity index 96%
-rename from meta-networking/recipes-support/chrony/chrony_2.4.bb
-rename to meta-networking/recipes-support/chrony/chrony_3.2.bb
-index 71431f4b7..8b90a354e 100644
---- a/meta-networking/recipes-support/chrony/chrony_2.4.bb
-+++ b/meta-networking/recipes-support/chrony/chrony_3.2.bb
-@@ -25,7 +25,7 @@ This recipe produces two binary packages: 'chrony' which contains chronyd, \
- the configuration file and the init script, and 'chronyc' which contains \
- the client program only."
- 
--HOMEPAGE = "http://chrony.tuxfamily.org/"
-+HOMEPAGE = "https://chrony.tuxfamily.org/"
- SECTION = "net"
- LICENSE = "GPLv2"
- LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
-@@ -35,8 +35,8 @@ SRC_URI = "https://download.tuxfamily.org/chrony/chrony-${PV}.tar.gz \
-     file://chronyd \
-     file://arm_eabi.patch \
- "
--SRC_URI[md5sum] = "d0598aa8a9be8faccef9386f6fc0d5f2"
--SRC_URI[sha256sum] = "8d04e7cda2333289c2104b731d39c3c1db94816e43bae35d7ee4e7ae8af6391f"
-+SRC_URI[md5sum] = "f4c4eb0dc92f35ee4bb7d3dcd8029ecb"
-+SRC_URI[sha256sum] = "329f6718dd8c3ece3eee78be1f4821cbbeb62608e7d23f25da293cfa433c4116"
- 
- DEPENDS = "pps-tools"
- 
++"Copyright Holder(s)" refers to all individuals and companies who have a
++copyright ownership of the Font Software.
++
++"Substantially Changed" refers to Modified Versions which can be easily
++identified as dissimilar to the Font Software by users of the Font
++Software comparing the Original Version with the Modified Version.
++
++To "Propagate" a work means to do anything with it that, without
++permission, would make you directly or secondarily liable for
++infringement under applicable copyright law, except executing it on a
++computer or modifying a private copy. Propagation includes copying,
++distribution (with or without modification and with or without charging
++a redistribution fee), making available to the public, and in some
++countries other activities as well.
++
++PERMISSION & CONDITIONS
++This licence does not grant any rights under trademark law and all such
++rights are reserved.
++
++Permission is hereby granted, free of charge, to any person obtaining a
++copy of the Font Software, to propagate the Font Software, subject to
++the below conditions:
++
++1) Each copy of the Font Software must contain the above copyright
++notice and this licence. These can be included either as stand-alone
++text files, human-readable headers or in the appropriate machine-
++readable metadata fields within text or binary files as long as those
++fields can be easily viewed by the user.
++
++2) The font name complies with the following:
++(a) The Original Version must retain its name, unmodified.
++(b) Modified Versions which are Substantially Changed must be renamed to
++avoid use of the name of the Original Version or similar names entirely.
++(c) Modified Versions which are not Substantially Changed must be
++renamed to both (i) retain the name of the Original Version and (ii) add
++additional naming elements to distinguish the Modified Version from the
++Original Version. The name of such Modified Versions must be the name of
++the Original Version, with "derivative X" where X represents the name of
++the new work, appended to that name.
++
++3) The name(s) of the Copyright Holder(s) and any contributor to the
++Font Software shall not be used to promote, endorse or advertise any
++Modified Version, except (i) as required by this licence, (ii) to
++acknowledge the contribution(s) of the Copyright Holder(s) or (iii) with
++their explicit written permission.
++
++4) The Font Software, modified or unmodified, in part or in whole, must
++be distributed entirely under this licence, and must not be distributed
++under any other licence. The requirement for fonts to remain under this
++licence does not affect any document created using the Font Software,
++except any version of the Font Software extracted from a document
++created using the Font Software may only be distributed under this
++licence.
++
++TERMINATION
++This licence becomes null and void if any of the above conditions are
++not met.
++
++DISCLAIMER
++THE FONT SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO ANY WARRANTIES OF
++MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT OF
++COPYRIGHT, PATENT, TRADEMARK, OR OTHER RIGHT. IN NO EVENT SHALL THE
++COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
++INCLUDING ANY GENERAL, SPECIAL, INDIRECT, INCIDENTAL, OR CONSEQUENTIAL
++DAMAGES, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
++FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM OTHER
++DEALINGS IN THE FONT SOFTWARE.
++
 -- 
-2.13.6
+2.7.4
 
 
