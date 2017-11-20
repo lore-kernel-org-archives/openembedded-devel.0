@@ -1,49 +1,51 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f176.google.com (mail-yw0-f176.google.com
-	[209.85.161.176])
-	by mail.openembedded.org (Postfix) with ESMTP id 3A9D77876F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Nov 2017 23:20:08 +0000 (UTC)
-Received: by mail-yw0-f176.google.com with SMTP id z125so2196611ywb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Nov 2017 15:20:10 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f52.google.com (mail-wm0-f52.google.com [74.125.82.52])
+	by mail.openembedded.org (Postfix) with ESMTP id E8232788C2;
+	Mon, 20 Nov 2017 09:07:08 +0000 (UTC)
+Received: by mail-wm0-f52.google.com with SMTP id b189so16917597wmd.5;
+	Mon, 20 Nov 2017 01:07:10 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=2o4fGDXdHnfnm2Rxj2TmY8kewFd/37TpLFey2lk2Suk=;
-	b=Ou0eZCX9i5LGHGEXtwfbgSbHVb/DgYc06Hdt/UDcatzCn98nQKz/QrW2UvXLBuPOFt
-	Vo4aNpfBHQJolVgLkqyfOCh/fhK1lovW0s5gewINtYB9/wnWvf+dMwlPFC0FuVwlVyY7
-	yz4trzrX7SyOZO7RsMu/nlDHwkuAWUbqzJco/LAvtkkJeM0AkmrTa0cidbpTnIZxlNZq
-	fBbVZ3WKobzuWIzoXBdlPaS9oRsCPqcKVFWwfpJRHbYj78wi+/APzDreP4bvnqnsrLb0
-	CmKl/svrCOIEBlvUaDobEqxFJQy7kn1dTzlB9G2S3YfRv08K61UmtRcVuYxtr6TUVfgt
-	TREA==
+	bh=xzuN1PAxZ/8b+XBuoqZgRQYynORUSQjb9r5aY0YzVoY=;
+	b=TBLuPR2NkESnEkO2wsCvY1A8Nu1j+0U9CbdjoGCIV708GLOHgq3YtFyu7Ca94ZT96z
+	t6UOjCPg822UgdR0pYnGVe7kgIqjeCbpLHk5BSDFF69tz9bBdsmxuY3WTvJKLWIGKAf7
+	MtQo9wfy0pbMcUexSMg+qY7kvUx+QBBOVXa4W2bThOL5aPnfwHlGJtgMnk8AuzQPLVSO
+	OtYLiGY0XQ4AmtN3gAnzX4d5zEaqYJ+0z3r3nphtS/dUwGeTPUhhOJpBv5MKFi9aKQKW
+	FTmp1aBonaKT/gRS5t0qrzEqisuQDEhgeIwH2zNwsJPl49VCsypW9kXXfP63JV2l4yNG
+	P3/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to;
-	bh=2o4fGDXdHnfnm2Rxj2TmY8kewFd/37TpLFey2lk2Suk=;
-	b=Ityzm8VWiK3ulGDiDHOdSO1uiab3OU/JvBf4EqG4VcJOxd8GsHgcqUeANpnDT6kVYQ
-	qd/y5qBN32J2zLDwttLgXb7FbEgH5mAI1Cd/iK2NAoFVaZJDe1vBCIMrQ0hEYPQMoCBn
-	YR/nYiuWW1Fy0fdlOmpi9nTARt/R90nmTO++rH/Cpdwxrb1M23/rAIyT56c69yY/QscE
-	OQ0gAmK9YC8M057ufqkAKVmSzGbCO+yZIXr6l6PKEJZSW1BtK3L7sRYKGLA+aNTlaiD1
-	6TrIl9e/jYpHd05IH0QdJonaI+0ZKSxF00hU0VlnRU0+XjqvUx1vpf5Mr0ciT0BSL9+g
-	a2dA==
-X-Gm-Message-State: AJaThX5OLYgsS4wrfVJI4nOnD5hkDqn0nRtnTaVadDtzFbN92cxlVtc1
-	XggdOFgBO6pLPQS6wSPuaLyUOv7/26nNlamng24=
-X-Google-Smtp-Source: AGs4zMaNTU6tGU659k6+QBBQ40pxizaChr9aAWGJIaSW4DkWem254DmPLtQnhPw/D5PyGNEMb4rJJLq5VGaD/a87hhE=
-X-Received: by 10.129.158.149 with SMTP id v143mr7632374ywg.49.1511133609725; 
-	Sun, 19 Nov 2017 15:20:09 -0800 (PST)
+	bh=xzuN1PAxZ/8b+XBuoqZgRQYynORUSQjb9r5aY0YzVoY=;
+	b=B5dAZ+jwx8Vl8XqKcPthTZhdpEXyEppIN2RIb4+BEABz73dTL7Scowgalj0tFu0q+j
+	5XA+vGS00el6TPEGmsQxWiBaIFqlr1z5H4ObNK2XbA0s6BxxO8vUMK7VPJF3X3pJZcDp
+	Xqs8okeEjeWSegn7D84Fns5vyXebqdyxAKzxaiNiYcOYYbtxeVZsoByU6Tbz3MwykjzJ
+	2elgrYOUJ+LD3izKbz6G5KaY97MrL3QmdQ9WcfdBGXVoz83CV3D/+AcoF9JXgS3hJnZb
+	wNqaaUYEFHqUorThmRLSxgjyRbHR+wK8mDTjDCdUxh2iL3UVbCO9o5GAYb4cG4k/ab/g
+	nCxQ==
+X-Gm-Message-State: AJaThX5BaIf1FIQp5e6n/5JCsqPC5yh6bdxJ0CCKPyWdWpWXS1+yRYrP
+	w0omvZTKW3Qetgo/bTH2DZ5QB/wlFcL5GVCWW24=
+X-Google-Smtp-Source: AGs4zMY6eBrhc3XSDF3Kpc+Sv1jN/F93JxVu20OcgagnBHdcNpVaJ5gkELrTEkEacn4L+ltQ11/rT52RM/ZwsEh8L5c=
+X-Received: by 10.28.18.145 with SMTP id 139mr1414905wms.43.1511168829711;
+	Mon, 20 Nov 2017 01:07:09 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.37.102.17 with HTTP; Sun, 19 Nov 2017 15:20:09 -0800 (PST)
-In-Reply-To: <20171111132950.12570-11-schnitzeltony@gmail.com>
-References: <20171111132950.12570-1-schnitzeltony@gmail.com>
-	<20171111132950.12570-11-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 20 Nov 2017 00:20:09 +0100
-Message-ID: <CALbNGRRSPjQLS3Ht+vtJadLSJ0xpCa+OHoc+jJVg7Bv26FF+QQ@mail.gmail.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
+Received: by 10.28.112.12 with HTTP; Mon, 20 Nov 2017 01:07:09 -0800 (PST)
+In-Reply-To: <31babd29-5bc3-2a7c-215b-6c811de9bb33@windriver.com>
+References: <151112655849.28895.8951102454646542771@git.openembedded.org>
+	<20171119212238.E418E2349AE@git.openembedded.org>
+	<31babd29-5bc3-2a7c-215b-6c811de9bb33@windriver.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 20 Nov 2017 10:07:09 +0100
+Message-ID: <CA+chaQe8mZWW=XfEhH1g=hnwnu4EP+=cFmOCn_nJdKwf1O1kxQ@mail.gmail.com>
+To: Yi Zhao <yi.zhao@windriver.com>, 
+	openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	Joe MacDonald <joe_macdonald@mentor.com>,
+	Sean Hudson <darknighte@gmail.com>, akuster808 <akuster808@gmail.com>, 
+	"openembedded-commits@lists.openembedded.org"
+	<openembedded-commits@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [PATCH][v2 10/13] tumbler: ensure thumbnails work properly
+Subject: Re: [oe-commits] [meta-openembedded] 05/67: postfix: fix send mail failure and eliminate warning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,67 +58,219 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Nov 2017 23:20:09 -0000
+X-List-Received-Date: Mon, 20 Nov 2017 09:07:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Nov 11, 2017 at 2:29 PM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om>
-wrote:
+Hi Yi,
 
-> From: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
->
-> After some builds link tumbler-cache-plugin.so is not prperly created
-> causing:
-> | Failed to load the cache plugin "tumbler-cache-plugin.so":
-> /usr/lib/tumbler-1/plugins/cache/tumbler-cache-plugin.so: cannot open
-> shared object file: No such file or directory
->
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@googlemail.com>
-> ---
->  meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb | 6 ++++++
->  1 file changed, 6 insertions(+)
->
-> diff --git a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-> b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-> index 1f5419a..1786eff 100644
-> --- a/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-> +++ b/meta-xfce/recipes-xfce/tumbler/tumbler_0.1.31.bb
-> @@ -15,6 +15,12 @@ INSANE_SKIP_${PN} =3D "dev-so"
->  PACKAGECONFIG ??=3D ""
->  PACKAGECONFIG[gstreamer-thumbnailer] =3D "--enable-gstreamer-
-> thumbnailer,--disable-gstreamer-thumbnailer,gstreamer1.0
-> gstreamer1.0-plugins-base"
->
-> +do_install_append() {
-> +    # Makefile seems to race on creation of symlink. So ensure creation
-> here
-> +    # until fixed properly
-> +    ln -sf tumbler-xdg-cache.so ${D}${libdir}/tumbler-1/
-> plugins/cache/tumbler-cache-plugin.so
-> +}
-> +
->  FILES_${PN} +=3D "${datadir}/dbus-1/services \
->                  ${libdir}/tumbler-1/tumblerd \
->                  ${libdir}/tumbler-1/plugins/*.so \
-> --
-> 2.9.5
->
-> Just saw that this was not applied. For clarification: The first version
-of this patch was buggy and Khem pointed that out. Later I checked further:
-The problem persists and is sporadic (some race in Makefile?). So at the
-time I created the patch I thought it fixed the problem but fix was random
-only. Then I fixed the patch and sent it in V2.
+Joe is maintainer of meta-networking. meta-oe is now maintained by Armin
+and Sean.
 
-My suggestion:
-* I will rebase this patch (tumbler was updated) and resend again for
-master.
-* Later when rebased version is in master I will send this to apply for
-rocko.
+Including all 3 and the ML where it belongs.
 
-Is that OK or is there anything else wrong with this patch?
+Regards,
 
-Regards
+On Mon, Nov 20, 2017 at 1:03 AM, Yi Zhao <yi.zhao@windriver.com> wrote:
 
-Andreas
+> Hi Marting,
+>
+>
+> Could you drop this patch since it could cause a build error on the host
+> which didn't install postfix. You can apply my postfix update to 3.24 pat=
+ch
+> directly.
+>
+>
+> Thanks,
+>
+> Yi
+>
+>
+>
+> =E5=9C=A8 2017=E5=B9=B411=E6=9C=8820=E6=97=A5 05:22, git@git.openembedded=
+.org =E5=86=99=E9=81=93:
+>
+>> This is an automated email from the git hooks/post-receive script.
+>>
+>> armin_kuster pushed a commit to branch master-next
+>> in repository meta-openembedded.
+>>
+>> commit baeae27a9c81a64ab7eadc57541bf087a115a43a
+>> Author: Yi Zhao <yi.zhao@windriver.com>
+>> AuthorDate: Thu Oct 26 14:43:31 2017 -0700
+>>
+>>      postfix: fix send mail failure and eliminate warning
+>>           * Update main.cf for postfix 3.x to eliminate startup warning
+>>      * Set daemon_directory from ${libexecdir} to ${libexecdir}/postfix
+>>      * Using absolute path for newaliases and postmap to generate the
+>> correct
+>>        db file in pkg_postinst
+>>      * Remove duplicate SRC_URI lines in postfix_3.2.2.bb
+>>           (LOCAL REV: NOT UPSTREAM) -- will sent to oe-devel later
+>>           Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>           * Move use of newaliases and postmap on host to install phase
+>>        because absolute path might not exist at rootfs build time.
+>>           Signed-off-by: Joe Slater <jslater@windriver.com>
+>>      Signed-off-by: Armin Kuster <akuster808@gmail.com>
+>> ---
+>>   .../postfix/files/{main.cf_2.0 =3D> main.cf}         |  3 +++
+>>   .../recipes-daemons/postfix/postfix.inc            | 28
+>> ++++++++++++----------
+>>   .../recipes-daemons/postfix/postfix_3.2.2.bb       | 17 ++++---------
+>>   3 files changed, 22 insertions(+), 26 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+>> b/meta-networking/recipes-daemons/postfix/files/main.cf
+>> similarity index 98%
+>> rename from meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+>> rename to meta-networking/recipes-daemons/postfix/files/main.cf
+>> index dc7feb5..2371ace 100644
+>> --- a/meta-networking/recipes-daemons/postfix/files/main.cf_2.0
+>> +++ b/meta-networking/recipes-daemons/postfix/files/main.cf
+>> @@ -1,3 +1,6 @@
+>> +compatibility_level =3D 2
+>> +smtputf8_enable =3D no
+>> +
+>>   # Configure your domain and accounts
+>>   #mydomain=3Dsample.com
+>>   #FQDN from gethostname
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> index a588bd3..8dad45f 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> @@ -18,7 +18,7 @@ LIC_FILES_CHKSUM =3D "file://LICENSE;md5=3D64375f3743
+>> 1336ea1b1b3005fe3fa354"
+>>   SRC_URI =3D "ftp://ftp.porcupine.org/mirrors/postfix-release/official/
+>> postfix-${PV}.tar.gz \
+>>       file://makedefs.patch \
+>>       file://install.patch \
+>> -    file://main.cf_2.0 \
+>> +    file://main.cf \
+>>       file://postfix \
+>>       file://internal_recipient \
+>>       file://postfix.service \
+>> @@ -135,7 +135,7 @@ SYSTEMD_SERVICE_${PN} =3D "postfix.service"
+>>   do_install () {
+>>       sh ./postfix-install 'install_root=3D${D}' \
+>>           'config_directory=3D${sysconfdir}/postfix' \
+>> -        'daemon_directory=3D${libexecdir}' \
+>> +        'daemon_directory=3D${libexecdir}/postfix' \
+>>           'command_directory=3D${sbindir}' \
+>>           'queue_directory=3D${localstatedir}/spool/postfix' \
+>>           'sendmail_path=3D${sbindir}/sendmail.postfix' \
+>> @@ -149,8 +149,8 @@ do_install () {
+>>       mv ${D}${sysconfdir}/postfix/main.cf ${D}${sysconfdir}/postfix/sam=
+p
+>> le-main.cf
+>>       install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
+>>       install -d ${D}${sysconfdir}/init.d
+>> -    install -m 644 ${WORKDIR}/main.cf_2.0 ${D}${sysconfdir}/postfix/mai=
+n
+>> .cf
+>> -    sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/
+>> main.cf
+>> +    install -m 644 ${WORKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
+>> +    sed -i 's#@LIBEXECDIR@#${libexecdir}/postfix#'
+>> ${D}${sysconfdir}/postfix/main.cf
+>>         install -m 755 ${WORKDIR}/check_hostname.sh ${D}${sbindir}/
+>>   @@ -159,11 +159,11 @@ do_install () {
+>>         install -d ${D}${systemd_unitdir}/system
+>>       install -m 0644 ${WORKDIR}/postfix.service
+>> ${D}${systemd_unitdir}/system
+>> -    sed -i -e 's#@LIBEXECDIR@#${libexecdir}#g'
+>> ${D}${systemd_unitdir}/system/postfix.service
+>> +    sed -i -e 's#@LIBEXECDIR@#${libexecdir}/postfix#g'
+>> ${D}${systemd_unitdir}/system/postfix.service
+>>       sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g'
+>> ${D}${systemd_unitdir}/system/postfix.service
+>>       sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system=
+/
+>> postfix.service
+>>   -    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}
+>> +    install -m 0755 ${WORKDIR}/aliasesdb ${D}${libexecdir}/postfix
+>>         install -m 770 -d ${D}${localstatedir}/spool/postfix
+>>       chown postfix:postfix ${D}${localstatedir}/spool/postfix
+>> @@ -217,6 +217,12 @@ do_install_append_class-native() {
+>>   do_install_append_class-target() {
+>>       # Remove references to buildmachine paths in target makedefs.out
+>>       sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=3D${STAGING_DIR_=
+TARGET}::g'
+>> ${D}/etc/postfix/makedefs.out
+>> +    # Since we are building recipe postfix, newaliases and postmap come
+>> from our sysroot_native.
+>> +    touch ${D}/etc/aliases
+>> +    newaliases -C ${D}/etc/postfix/main.cf -oA${D}/etc/aliases
+>> +    touch ${D}/etc/postfix/virtual_alias
+>> +    postmap -c ${D}/etc/postfix ${D}/etc/postfix/virtual_alias
+>> +
+>>   }
+>>     NATIVE_INSTALL_WORKS =3D "1"
+>> @@ -240,13 +246,8 @@ pkg_postinst_${PN} () {
+>>           touch /etc/postfix/virtual_alias
+>>           postmap /etc/postfix/virtual_alias
+>>       else
+>> -        touch $D/etc/aliases
+>> -        newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases
+>> -        touch $D/etc/postfix/virtual_alias
+>> -        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+>> -
+>>           if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES',
+>> False) else 'false'}; then
+>> -            # /usr/lib/sendmial is required by LSB core test
+>> +            # /usr/lib/sendmail is required by LSB core test
+>>               [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail
+>> $D/usr/lib/
+>>           fi
+>>       fi
+>> @@ -255,4 +256,5 @@ pkg_postinst_${PN} () {
+>>   # Exclude .debug directories from the main package
+>>   FILES_${PN} =3D "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}=
+/* \
+>>                  ${libexecdir}/* ${systemd_unitdir}/*"
+>> -FILES_${PN}-dbg +=3D "${libexecdir}/.debug"
+>> +CONFFILES_${PN} =3D "/etc/aliases /etc/postfix/virtual_alias*"
+>> +FILES_${PN}-dbg +=3D "${libexecdir}/postfix/.debug"
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+>> b/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+>> index 439ede9..89af406 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix_3.2.2.bb
+>> @@ -1,18 +1,9 @@
+>>   require postfix.inc
+>>   -SRC_URI =3D "ftp://ftp.porcupine.org/mirrors/postfix-release/official=
+/
+>> postfix-${PV}.tar.gz \
+>> -           file://makedefs.patch \
+>> -           file://install.patch \
+>> -           file://main.cf_2.0 \
+>> -           file://postfix \
+>> -           file://internal_recipient \
+>> -           file://postfix.service \
+>> -           file://aliasesdb \
+>> -           file://check_hostname.sh \
+>> -           file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_REC=
+V_MS.patch
+>> \
+>> -           file://0001-makedefs-Use-native-compiler-to-build-makedefs.t=
+est.patch
+>> \
+>> -           file://postfix-install.patch \
+>> -           file://icu-config.patch \
+>> +SRC_URI +=3D "file://0001-Check-for-glibc-before-setting-CANT_USE_SEND_=
+RECV_MS.patch
+>> \
+>> +            file://0001-makedefs-Use-native-compiler-to-build-makedefs.=
+test.patch
+>> \
+>> +            file://postfix-install.patch \
+>> +            file://icu-config.patch \
+>>              "
+>>   SRC_URI[md5sum] =3D "aea073a9b0bea5bdb590460a270a4aa0"
+>>   SRC_URI[sha256sum] =3D "d06849418d119d09366997b2b481b
+>> b23f737629769b4e4a52da42fb3ad8b0576"
+>>
+>>
+>
 
