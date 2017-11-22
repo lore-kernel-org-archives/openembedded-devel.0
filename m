@@ -1,54 +1,30 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pg0-f52.google.com (mail-pg0-f52.google.com [74.125.83.52])
-	by mail.openembedded.org (Postfix) with ESMTP id 8DEAC787CA;
-	Tue, 21 Nov 2017 20:10:31 +0000 (UTC)
-Received: by mail-pg0-f52.google.com with SMTP id r12so11021941pgu.10;
-	Tue, 21 Nov 2017 12:10:33 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language;
-	bh=3uBFX+V7iqcYgZm/a0ftCZtMZoU3HnpQbZ/Tfog7sDw=;
-	b=K/Scvo4fwuKr7zAFhSDQXnCIV3e1DDE8y1wd1pTouv2j9HpLkUWAJmi8HQyryezDHe
-	vKNgVsqQDjbGi6iegZvjZG6g2sVRcieKAgD+B27S+ejOwCKD4OKlGYw8xcBAwLQr4aAu
-	+fAFUXKLVIG0tM4ykTOhtZy1YiYgC3xRpqJDzvEsbhrvx3WrVDVL8Ss5VrrNpHWYmYhK
-	vpsmvcuTrC1Xu/dTOdwBSyuc/6yqOOR3cevVA9popwCHUJ/dOVuc0a5sOJKKQ6KwxkIV
-	No6RC0D8fUG5KvSLix5LPa/icHBqiU2h0cw8azoXPvECWVpNOuKfkRXrtS1+ca/0wIfL
-	EnFg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language;
-	bh=3uBFX+V7iqcYgZm/a0ftCZtMZoU3HnpQbZ/Tfog7sDw=;
-	b=ZmTWGSXFt/L7Uhmj61oo9IZVQ9Ggprz+xYj6FgVSCA6YEJWfZxQaeaeFKR8DtgLFWQ
-	reUq1EeWdwgWY2VLvwW1lJc0SaWWoFQgA+GCs6HaYFImFw3n3PZNigwye0MshczbDfGi
-	1JeBualu2lMSWCA7YriLoIj4QA2vVH+SGL5f5CHz9bXjwwttz6IS2XHtXaBNX4ITXzRt
-	Eqoyc7mKN/CJbeDb0BKIy4iwkOU+ficbgWSuOAwelwk7bZqomgE6WgDaJrApfOJhOEqE
-	/4ECPe49uxCQanGzj05d+fVIfa8lFVFy+42WTEczZylXnH7eViiTSzdHwi5FGLswu5DM
-	4uww==
-X-Gm-Message-State: AJaThX7HYzMLi1U/rHrQWP9f6L7hrGyEkci2xMzc1T9OaqmZyLJqd55C
-	b5z4pZmOzP9rXr+MQz6r935Huw==
-X-Google-Smtp-Source: AGs4zMaQyPO3cwxKWx2OskIIrfzuaC+xImmx8WUhlNWYOwEZIbHDwWLuBlNbyq/oM4wftEpCqCIW4A==
-X-Received: by 10.99.121.4 with SMTP id u4mr8711381pgc.235.1511295032542;
-	Tue, 21 Nov 2017 12:10:32 -0800 (PST)
-Received: from [10.43.100.234] (50-233-148-156-static.hfc.comcastbusiness.net.
-	[50.233.148.156]) by smtp.gmail.com with ESMTPSA id
-	s71sm27500531pfa.147.2017.11.21.12.10.31
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Tue, 21 Nov 2017 12:10:31 -0800 (PST)
-To: Hongxu Jia <hongxu.jia@windriver.com>, yocto@yoctoproject.org
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id C1DDA78682
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 22 Nov 2017 02:08:05 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vAM284wC032524
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Tue, 21 Nov 2017 18:08:04 -0800
+Received: from [128.224.162.147] (128.224.162.147) by ALA-HCB.corp.ad.wrs.com
+	(147.11.189.41) with Microsoft SMTP Server id 14.3.361.1;
+	Tue, 21 Nov 2017 18:08:03 -0800
+To: akuster808 <akuster808@gmail.com>, Martin Jansa <martin.jansa@gmail.com>, 
+	Khem Raj <raj.khem@gmail.com>
 References: <bfbfad0b-af40-5448-4aed-fc70eeb95c6c@windriver.com>
 	<7bdd24ea-febf-86b4-e770-6f7533205d73@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <37b787d0-ef5a-d821-0c09-a8547c58c52d@gmail.com>
-Date: Tue, 21 Nov 2017 12:10:31 -0800
+	<37b787d0-ef5a-d821-0c09-a8547c58c52d@gmail.com>
+From: Hongxu Jia <hongxu.jia@windriver.com>
+Message-ID: <e9e12bfb-1b89-d9f1-619e-1896e83837cb@windriver.com>
+Date: Wed, 22 Nov 2017 10:10:22 +0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.4.0
 MIME-Version: 1.0
-In-Reply-To: <7bdd24ea-febf-86b4-e770-6f7533205d73@windriver.com>
+In-Reply-To: <37b787d0-ef5a-d821-0c09-a8547c58c52d@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>,
-	+lpd-cdc-core-dev <lpd-cdc-core-dev@windriver.com>,
+Cc: +lpd-cdc-core-dev <lpd-cdc-core-dev@windriver.com>,
 	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
 Subject: Re: [yocto] Contribute meta-installer to yocto
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -63,92 +39,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Nov 2017 20:10:31 -0000
+X-List-Received-Date: Wed, 22 Nov 2017 02:08:05 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset=utf-8
+Content-Type: text/plain; charset="utf-8"; format=flowed
 Content-Transfer-Encoding: 8bit
 
-Hello,
+On 2017年11月22日 04:10, akuster808 wrote:
+>
+> Hello,
+>
+>>
+>> The repository of meta-installer is temporary on the github
+>> for review:
+>> https://github.com/jiahongxujia/meta-installer
+>>
+>> In above github, the logo picture is undefined, if yocto
+>> could accept this layer, I will update the picture with
+>> "Yocto project Compatible".
+>>
+>> The attachments are the snapshots of a package based
+>> installation.
+>>
+>> Hopefully it is helpful for yocto, and any feedback is
+>> appreciated.
+>
+> I believe it can go beyond helping Yocto and help the overall OE 
+> community.
+>
+> CC'ing oe mailings lists
+>
+>>
+>> If yocto is interested in this layer and will accept it,
+>> I could send pull request or some one directly fetch
+>> from above github master branch.
+> If Yocto isn't I am sure OE will be.
+>
 
+Hi Armin,
 
+I am very glad to submit this layer to OE, previously I have
+added/submitted 40+ recipes to OE for the preparation of
+meta-instaler public (just in case public failed and still most
+of them are available in OE)
 
-On 11/21/2017 12:55 AM, Hongxu Jia wrote:
-> Hi all,
->
-> Wind River has maintained meta-installer for several years,
-> and now we want to contribute it to yocto community.
->
-> This layer provides an installation program based on
-> OE platform. The installation program is anaconda from
-> fedora, which is the installer of distribution Fedora,
-> RedHat and Centos.
->
-> The version of anaconda in meta-installer is 26.21.11
-> which is based on Fedora 26.
->
-> The meta-insatller requires:
-> - systemd as init manager
-> - python3
-> - dnf2/rpm4
-> - gobject-introspection which requires qemu-usermode
->   in MACHINE_FEATURES
->
-> The meta-installer provides:
-> - graphic install and text install.
->
-> - package based (dnf/rpm) install and image (copy)
->   based install.
->
-> - package based (dnf/rpm) install from local and
->   remote rpm sources such as CDs and DVDs, images
->   stored on a hard drive, NFS, HTTP, and FTP.
->
-> - kickstart install which provides a fully unattended
->   installation that can be duplicated on scores of machines.
->
-> - install over VNC on headless machines.
->
-> - timezone setting.
->
-> - root password setting.
->
-> - user account creation.
->
-> - a variety of advanced storage devices including
->   LVM, Btrfs, Ext4, and filesystem encryption.
->
-> The repository of meta-installer is temporary on the github
-> for review:
-> https://github.com/jiahongxujia/meta-installer
->
-> In above github, the logo picture is undefined, if yocto
-> could accept this layer, I will update the picture with
-> "Yocto project Compatible".
->
-> The attachments are the snapshots of a package based
-> installation.
->
-> Hopefully it is helpful for yocto, and any feedback is
-> appreciated.
+http://cgit.openembedded.org/meta-openembedded/log/?qt=grep&q=hongxu
 
-I believe it can go beyond helping Yocto and help the overall OE community.
+If OE could accept meta-installer, it is very convenience to maintain
+all of them in one place. (My 2018 1st half year TODO plan is to
+upgrade anaconda and its required recipes to sync with Fedora 27)
 
-CC'ing oe mailings lists
+Hi Martin, Khem, Armin and the OE maintainers concerned
 
+If it is OK, I will send pull request to OE for review, and
+my opinion is to suggest to create meta-installer sub layer in OE.
+
+Do you have suggestions or ideas?
+
+//Hongxu
+
+> Thank you Wind River for contributing your hard work for the greater 
+> good of the community.
 >
-> If yocto is interested in this layer and will accept it,
-> I could send pull request or some one directly fetch
-> from above github master branch.
-If Yocto isn't I am sure OE will be.
-
-Thank you Wind River for contributing your hard work for the greater
-good of the community.
-
-kind regards,
-Armin
->
-> //Hongxu
->
+> kind regards,
+> Armin
+>>
+>> //Hongxu
+>>
+>>
 >
 
 
