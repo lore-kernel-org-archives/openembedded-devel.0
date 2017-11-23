@@ -1,31 +1,49 @@
-Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id CFA19786DA
+Return-Path: <ross.burton@intel.com>
+Received: from mail-it0-f66.google.com (mail-it0-f66.google.com
+	[209.85.214.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 0D969782D3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 13:39:16 +0000 (UTC)
-Received: from orsmga001.jf.intel.com ([10.7.209.18])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	23 Nov 2017 05:39:17 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,441,1505804400"; 
-   d="scan'208";a="8668998"
-Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
-	([10.237.68.161])
-	by orsmga001.jf.intel.com with ESMTP; 23 Nov 2017 05:39:16 -0800
-To: Martin Jansa <martin.jansa@gmail.com>
-References: <20171122163030.10224-1-alexander.kanavin@linux.intel.com>
-	<20171122174718.GA4166@jama>
-	<ecdbb200-afed-2a2d-f390-3de7d4122721@linux.intel.com>
-	<CA+chaQf6LKVf5vRBSAmUxue2wb253o2bHs5XjN2CoL2t0Ox4MQ@mail.gmail.com>
-From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Message-ID: <5f24aa16-b33b-6e44-c23c-aefbbc8c7117@linux.intel.com>
-Date: Thu, 23 Nov 2017 15:39:39 +0200
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
+	Thu, 23 Nov 2017 14:43:30 +0000 (UTC)
+Received: by mail-it0-f66.google.com with SMTP id m11so12542157iti.1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 23 Nov 2017 06:43:32 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=AoAFSfLlj7ggxAofTB93B785C1lMkWnyRm9GQXCtN6g=;
+	b=koBwQCQthjo3LDpdcEfKma/ux3v4yaHBT4Lsf3lEh9XIFACuxwUP+TCETvnz5GiKM6
+	bkasdW5pQXLdsCSv6gmB8eV3hI25h//TDJ4isC8GykMEJl54p3QXEAE9k8YRdtD895/B
+	8XEj6kxWzPuv6fq3xKTvjcIhLkOCsQpqOLwJ9sqy0DLMYRr79aBbSEYpIXhdKPSzOpNv
+	yUfhIzoMVDGga+h3cJQe44kZi6A2f33U2Qwy4J9TJKLPVcCyM2eRA/7gMV9EnRRFFzGk
+	8raXMxqokKHdfh9LdCAfZ0CcFDFLKD0pcs25MNsB7cwlgS1e9WPVkKwtjKGodokh/yGl
+	Sj1A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=AoAFSfLlj7ggxAofTB93B785C1lMkWnyRm9GQXCtN6g=;
+	b=QgD3uiOuvfJG8lFFcLVOr2eO82TsQiNQLM99sWDWzr81qYBolzLEn2cNhlTpf8ICmU
+	5xIRLFu8zWbR6/APbvO6A8G0hBtESJLKTBA2iDUDtaC8a7dbiCQAnnTV5+g57dzxXFiG
+	jodyebBhYsE1fXAslVXDeVP9x4s2oSjvBXwmY5DaOwk8b8yy0MNNJ7nCbql+3w1uKV+y
+	5hTL1fXYIBOwzjIIGYEn9kylPyfqiT+45pOopWplFjKBtCUbgOFJpFYoz3NV+XH+VyqY
+	UFP4w6j5QwuqsbuEHXbjpv5BoPpQTAWdrpifLNSyv4C2PH55C6Fmg1J9+o7wTIJh7xHM
+	Q6Ow==
+X-Gm-Message-State: AJaThX7mVdJGlWim/iGjiXv5iYRdK/d/xj3O7TJuplXepOpnFwktLVaN
+	ODZAxoLq/Cf2C8un2vW/yrAdiQ1ZNs92sfyxWK23lw==
+X-Google-Smtp-Source: AGs4zMaG686ALfkaG/rHI3f43LtEpKFp8YTz0IfuXNdAHRYLuqe2jp0zfypjNHveu+695JloPX4OojRkdAJK1M/PZTM=
+X-Received: by 10.36.147.198 with SMTP id y189mr12003881itd.6.1511448212167;
+	Thu, 23 Nov 2017 06:43:32 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQf6LKVf5vRBSAmUxue2wb253o2bHs5XjN2CoL2t0Ox4MQ@mail.gmail.com>
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH] neon: add the recipe from oe-core
+Received: by 10.107.171.132 with HTTP; Thu, 23 Nov 2017 06:43:11 -0800 (PST)
+In-Reply-To: <1511443538-32104-1-git-send-email-vladan.jovanovic@gmail.com>
+References: <1511443538-32104-1-git-send-email-vladan.jovanovic@gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 23 Nov 2017 14:43:11 +0000
+Message-ID: <CAJTo0LYXU4mMY3pm6r7cZhRQ3=erY=j5+nkO-Bfnr0cLfx6vOg@mail.gmail.com>
+To: Vladan Jovanovic <vladan.jovanovic@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] Fix PACKAGES assignment for fftw
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,18 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Nov 2017 13:39:17 -0000
-Content-Type: text/plain; charset=utf-8; format=flowed
-Content-Language: en-US
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 23 Nov 2017 14:43:31 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 11/23/2017 02:06 PM, Martin Jansa wrote:
-> https://www.openembedded.org/wiki/Styleguide#Format_Guidelines
+You should explain why its the wrong operator, as =+ is as valid as += is.
 
-Alright. I resent the patch, as I don't want to start a style war, but 
-(as discussed previously) I will resist any attempts to enforce 
-indentation in oe-core. We need to prioritize what we spend our time on 
-ruthlessly, considering the project is constantly under-staffed.
+Ross
 
-Alex
+On 23 November 2017 at 13:25, Vladan Jovanovic <vladan.jovanovic@gmail.com>
+wrote:
+
+> fftw recipe using wrong operator for modifying PACKAGES variable.
+> ---
+>  meta-oe/recipes-support/fftw/fftw_3.3.6.bb | 4 ++--
+>  1 file changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
+> b/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
+> index ed14e16..e13684c 100644
+> --- a/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
+> +++ b/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
+> @@ -65,12 +65,12 @@ do_install() {
+>  }
+>
+>
+> -PACKAGES =+ "libfftw libfftwl libfftwf"
+> +PACKAGES += "libfftw libfftwl libfftwf"
+>  FILES_libfftw = "${libdir}/libfftw3.so.* ${libdir}/libfftw3_*.so.*"
+>  FILES_libfftwl = "${libdir}/libfftw3l.so.* ${libdir}/libfftw3l_*.so.*"
+>  FILES_libfftwf = "${libdir}/libfftw3f.so.* ${libdir}/libfftw3f_*.so.*"
+>
+> -PACKAGES =+ "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
+> +PACKAGES += "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
+>  FILES_fftw-wisdom = "${bindir}/fftw-wisdom"
+>  FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
+>  FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
+> --
+> 1.9.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
