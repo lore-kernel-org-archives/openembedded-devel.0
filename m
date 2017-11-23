@@ -1,26 +1,26 @@
 Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A7AC78836
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 0B1CD7884B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 12:09:37 +0000 (UTC)
+	Thu, 23 Nov 2017 12:09:39 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vANC9cQg013312
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Thu, 23 Nov 2017 04:09:38 -0800 (PST)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vANC9exC014618
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Thu, 23 Nov 2017 04:09:40 -0800
 Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
 	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Thu, 23 Nov 2017 04:09:36 -0800
+	Thu, 23 Nov 2017 04:09:39 -0800
 From: Hongxu Jia <hongxu.jia@windriver.com>
 To: <Martin.Jansa@gmail.com>, <akuster808@gmail.com>, <raj.khem@gmail.com>
-Date: Thu, 23 Nov 2017 07:09:09 -0500
-Message-ID: <d543cde85ded7792c5f46df684ae6867f334a56e.1511437794.git.hongxu.jia@windriver.com>
+Date: Thu, 23 Nov 2017 07:09:10 -0500
+Message-ID: <ff4f87d20f9fe76c9bb4bb4208c3eff7a9b2f8d5.1511437794.git.hongxu.jia@windriver.com>
 X-Mailer: git-send-email 2.8.1
 In-Reply-To: <cover.1511437793.git.hongxu.jia@windriver.com>
 References: <cover.1511437793.git.hongxu.jia@windriver.com>
 MIME-Version: 1.0
 Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH 09/15] meta-installer: add multipath-tools bbappend
+Subject: [PATCH 10/15] meta-installer: add recipe packagegroup-installer-x11-anaconda
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,34 +33,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Nov 2017 12:09:37 -0000
+X-List-Received-Date: Thu, 23 Nov 2017 12:09:40 -0000
 Content-Type: text/plain
 
-- Explicitly disable auto service to help installer work
-
-- Copy multipath.conf from example
-
-The bbappend works only if DISTRO = "anaconda".
+It provides desktop X11 applications to support anaconda.
 
 Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../recipes-support/multipath-tools/multipath-tools_%.bbappend    | 8 ++++++++
- 1 file changed, 8 insertions(+)
- create mode 100644 meta-installer/recipes-support/multipath-tools/multipath-tools_%.bbappend
+ .../packagegroup-installer-x11-anaconda.bb         | 28 ++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 meta-installer/recipes-installer/packagegroups/packagegroup-installer-x11-anaconda.bb
 
-diff --git a/meta-installer/recipes-support/multipath-tools/multipath-tools_%.bbappend b/meta-installer/recipes-support/multipath-tools/multipath-tools_%.bbappend
+diff --git a/meta-installer/recipes-installer/packagegroups/packagegroup-installer-x11-anaconda.bb b/meta-installer/recipes-installer/packagegroups/packagegroup-installer-x11-anaconda.bb
 new file mode 100644
-index 0000000..5bd2b03
+index 0000000..5255b3a
 --- /dev/null
-+++ b/meta-installer/recipes-support/multipath-tools/multipath-tools_%.bbappend
-@@ -0,0 +1,8 @@
-+SYSTEMD_AUTO_ENABLE_anaconda = "disable"
++++ b/meta-installer/recipes-installer/packagegroups/packagegroup-installer-x11-anaconda.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "Tasks for desktop X11 applications to support anaconda"
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda2f7b4f302"
 +
-+do_install_append_anaconda () {
-+    install -d ${D}${sysconfdir}/multipath
-+    install -m 0644 ${WORKDIR}/multipath.conf.example \
-+    ${D}${sysconfdir}/multipath.conf
-+}
++inherit packagegroup distro_features_check
++REQUIRED_DISTRO_FEATURES = "x11"
++
++XSERVER ??= ""
++
++RDEPENDS_packagegroup-installer-x11-anaconda = "\
++    dbus \
++    xinput-calibrator \
++    xserver-nodm-init \
++    ${XSERVER} \
++    liberation-fonts \
++    xauth \
++    xhost \
++    xset \
++    settings-daemon \
++    xrandr \
++    libsdl \
++    metacity \
++    gnome-themes \
++    adwaita-icon-theme \
++    pango \
++    pango-modules \
++    createrepo-c"
 +
 -- 
 2.8.1
