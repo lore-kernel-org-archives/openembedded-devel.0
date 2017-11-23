@@ -1,48 +1,21 @@
-Return-Path: <vladan.jovanovic@gmail.com>
-Received: from mail-lf0-f46.google.com (mail-lf0-f46.google.com
-	[209.85.215.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 33784786FE
+Return-Path: <alexander.kanavin@linux.intel.com>
+Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
+	by mail.openembedded.org (Postfix) with ESMTP id 1674478301
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 13:25:40 +0000 (UTC)
-Received: by mail-lf0-f46.google.com with SMTP id f134so22012457lfg.8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 05:25:42 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=OnuGaZZnMKlkRQ5zYjG8/AH4hkEREuwAb0hGig9rnl0=;
-	b=WcMvqgUGkiXTGoKYXAsDrXuZBArP+eV9sjdw334WTT5z45gHK13+IprAAEv/Qtu7qv
-	WN3SfZOJ5W61InI1k9bMgcyT2vvbmxnq1kkTyfH5781OZ8sNGWgNVq4YTxp+2W++7/t6
-	84n4I7Rt6mUEspnt1UUyXBz8zqiEfqrbmHHgVyaN1P4c2ykKn4pvPa9Lhssj3SXryYgp
-	r0gQCH/RANVwSYcAGrCK7GvGviRAGVH6n9v4acB97m1vNgOzirHcK6h1rSMJS4lugOQQ
-	QPsFDqFHJOLnCd/T3IMF+uKvOpfLqVlNiUYCBw5m8zcV1qAE0nrXVLjIgxGVNJGtuksQ
-	VNpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=OnuGaZZnMKlkRQ5zYjG8/AH4hkEREuwAb0hGig9rnl0=;
-	b=FgYFRSUKG9lW71YN81aI4SEEjeA18Rs1KVCKLNYFii/FoLhwMevnpi4CQNVWChcR9B
-	yZ31XfslXRllVS9sxlpX8qfmGyqBqQd4nL9PbwjxWQUJ6Jy2tfDPpt4fGoSkVbqP3KXM
-	z/WUFxAknLLb8zA0qjuFETK9MjG9eT2H7gxMjvd9jukK+FAvDZ9Tp/CR26BL41PSS0WV
-	qNHCquY6bhxcHjPzQ1x2cMoKB1XNclLFdmd/sYNCaTvB/53QRH2ABK7cA4ZWcxRVguN8
-	izvnn6jsFydFl1NLGxDrWn9zTJsjNzdV0mDf7+XivTCq3MMxS76pGaKmN/2klaLrqDEe
-	KYaA==
-X-Gm-Message-State: AJaThX6H9/iqGQl8rnDtCX7JC/kp7ykLd1Dvv2i+ROBTZHYrvS75QE+x
-	7X6q2w5ZaLl9nZufRSi6sJhf/qZd
-X-Google-Smtp-Source: AGs4zMY0v9GpJgri4pIVGvazRyZXxfbuhpV5Y4Y9jkCVi3/ze+z/MF58Dw9Mwwwdls+gW2wGjqPq4w==
-X-Received: by 10.25.234.26 with SMTP id i26mr8045958lfh.188.1511443541275;
-	Thu, 23 Nov 2017 05:25:41 -0800 (PST)
-Received: from hallainvuori-server.zyxel.com
-	(a88-113-233-10.elisa-laajakaista.fi. [88.113.233.10])
-	by smtp.gmail.com with ESMTPSA id
-	s76sm3312920lfi.56.2017.11.23.05.25.40
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 23 Nov 2017 05:25:40 -0800 (PST)
-From: Vladan Jovanovic <vladan.jovanovic@gmail.com>
+	Thu, 23 Nov 2017 13:36:05 +0000 (UTC)
+Received: from orsmga005.jf.intel.com ([10.7.209.41])
+	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	23 Nov 2017 05:36:05 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.44,441,1505804400"; d="scan'208";a="176957834"
+Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
+	by orsmga005.jf.intel.com with ESMTP; 23 Nov 2017 05:36:04 -0800
+From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Nov 2017 15:25:38 +0200
-Message-Id: <1511443538-32104-1-git-send-email-vladan.jovanovic@gmail.com>
-X-Mailer: git-send-email 1.9.1
-Subject: [meta-oe][PATCH] Fix PACKAGES assignment for fftw
+Date: Thu, 23 Nov 2017 15:36:26 +0200
+Message-Id: <20171123133626.13587-1-alexander.kanavin@linux.intel.com>
+X-Mailer: git-send-email 2.15.0
+Subject: [PATCH] neon: add the recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,33 +28,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Nov 2017 13:25:41 -0000
+X-List-Received-Date: Thu, 23 Nov 2017 13:36:06 -0000
 
-fftw recipe using wrong operator for modifying PACKAGES variable.
+It is still required by libmusicbrainz, but is no longer needed
+by oe-core. Switch the upstream to debian as webdav.org is down.
+
+Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
 ---
- meta-oe/recipes-support/fftw/fftw_3.3.6.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ meta-oe/recipes-support/neon/neon/pkgconfig.patch | 15 +++++++++
+ meta-oe/recipes-support/neon/neon_0.30.2.bb       | 38 +++++++++++++++++++++++
+ 2 files changed, 53 insertions(+)
+ create mode 100644 meta-oe/recipes-support/neon/neon/pkgconfig.patch
+ create mode 100644 meta-oe/recipes-support/neon/neon_0.30.2.bb
 
-diff --git a/meta-oe/recipes-support/fftw/fftw_3.3.6.bb b/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
-index ed14e16..e13684c 100644
---- a/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
-+++ b/meta-oe/recipes-support/fftw/fftw_3.3.6.bb
-@@ -65,12 +65,12 @@ do_install() {
- }
- 
- 
--PACKAGES =+ "libfftw libfftwl libfftwf"
-+PACKAGES += "libfftw libfftwl libfftwf"
- FILES_libfftw = "${libdir}/libfftw3.so.* ${libdir}/libfftw3_*.so.*"
- FILES_libfftwl = "${libdir}/libfftw3l.so.* ${libdir}/libfftw3l_*.so.*"
- FILES_libfftwf = "${libdir}/libfftw3f.so.* ${libdir}/libfftw3f_*.so.*"
- 
--PACKAGES =+ "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
-+PACKAGES += "fftw-wisdom fftwl-wisdom fftwf-wisdom fftw-wisdom-to-conf"
- FILES_fftw-wisdom = "${bindir}/fftw-wisdom"
- FILES_fftwl-wisdom = "${bindir}/fftwl-wisdom"
- FILES_fftwf-wisdom = "${bindir}/fftwf-wisdom"
+diff --git a/meta-oe/recipes-support/neon/neon/pkgconfig.patch b/meta-oe/recipes-support/neon/neon/pkgconfig.patch
+new file mode 100644
+index 000000000..239dba8e2
+--- /dev/null
++++ b/meta-oe/recipes-support/neon/neon/pkgconfig.patch
+@@ -0,0 +1,15 @@
++Upstream-Status: Inappropriate [configuration]
++
++---
++ neon.pc.in |    2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++--- neon-0.30.1.orig/neon.pc.in
+++++ neon-0.30.1/neon.pc.in
++@@ -7,5 +7,5 @@ Name: neon
++ Description: HTTP/WebDAV client library
++ Version: @NEON_VERSION@
++ Libs: -L${libdir} -lneon @NEON_PC_LIBS@
++-Libs.private: @NEON_LIBS@
+++Libs.private: -L${libdir} -lz -lgcrypt -lgpg-error -lexpat -lgnutls
++ Cflags: -I${includedir}/neon @NEON_CFLAGS@
+diff --git a/meta-oe/recipes-support/neon/neon_0.30.2.bb b/meta-oe/recipes-support/neon/neon_0.30.2.bb
+new file mode 100644
+index 000000000..00b79f633
+--- /dev/null
++++ b/meta-oe/recipes-support/neon/neon_0.30.2.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "An HTTP and WebDAV client library with a C interface"
++HOMEPAGE = "http://www.webdav.org/neon/"
++SECTION = "libs"
++LICENSE = "LGPLv2+"
++LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
++                    file://src/ne_utils.h;beginline=1;endline=20;md5=2caca609538eddaa6f6adf120a218037"
++
++SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
++           file://pkgconfig.patch \
++          "
++
++SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
++SRC_URI[sha256sum] = "db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d1b15d3d967fbca"
++
++inherit autotools binconfig-disabled lib_package pkgconfig
++
++# Enable gnutls or openssl, not both
++PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib"
++PACKAGECONFIG_class-native = "expat gnutls webdav zlib"
++
++PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
++PACKAGECONFIG[gnutls] = "--with-ssl=gnutls,,gnutls"
++PACKAGECONFIG[gssapi] = "--with-gssapi,--without-gssapi,krb5"
++PACKAGECONFIG[libproxy] = "--with-libproxy,--without-libproxy,libproxy"
++PACKAGECONFIG[libxml2] = "--with-libxml2,--without-libxml2,libxml2"
++PACKAGECONFIG[openssl] = "--with-ssl=openssl,,openssl"
++PACKAGECONFIG[webdav] = "--enable-webdav,--disable-webdav,"
++PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
++
++EXTRA_OECONF += "--enable-shared"
++
++do_compile_append() {
++    oe_runmake -C test
++}
++
++BINCONFIG = "${bindir}/neon-config"
++
++BBCLASSEXTEND = "native"
 -- 
-1.9.1
+2.15.0
 
 
