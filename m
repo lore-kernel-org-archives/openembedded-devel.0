@@ -1,21 +1,31 @@
 Return-Path: <alexander.kanavin@linux.intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 1674478301
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id CFA19786DA
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 13:36:05 +0000 (UTC)
-Received: from orsmga005.jf.intel.com ([10.7.209.41])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	23 Nov 2017 05:36:05 -0800
+	Thu, 23 Nov 2017 13:39:16 +0000 (UTC)
+Received: from orsmga001.jf.intel.com ([10.7.209.18])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	23 Nov 2017 05:39:17 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.44,441,1505804400"; d="scan'208";a="176957834"
-Received: from kanavin-desktop.fi.intel.com ([10.237.68.161])
-	by orsmga005.jf.intel.com with ESMTP; 23 Nov 2017 05:36:04 -0800
+X-IronPort-AV: E=Sophos;i="5.44,441,1505804400"; 
+   d="scan'208";a="8668998"
+Received: from kanavin-desktop.fi.intel.com (HELO [10.237.68.161])
+	([10.237.68.161])
+	by orsmga001.jf.intel.com with ESMTP; 23 Nov 2017 05:39:16 -0800
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <20171122163030.10224-1-alexander.kanavin@linux.intel.com>
+	<20171122174718.GA4166@jama>
+	<ecdbb200-afed-2a2d-f390-3de7d4122721@linux.intel.com>
+	<CA+chaQf6LKVf5vRBSAmUxue2wb253o2bHs5XjN2CoL2t0Ox4MQ@mail.gmail.com>
 From: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 23 Nov 2017 15:36:26 +0200
-Message-Id: <20171123133626.13587-1-alexander.kanavin@linux.intel.com>
-X-Mailer: git-send-email 2.15.0
-Subject: [PATCH] neon: add the recipe from oe-core
+Message-ID: <5f24aa16-b33b-6e44-c23c-aefbbc8c7117@linux.intel.com>
+Date: Thu, 23 Nov 2017 15:39:39 +0200
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.4.0
+MIME-Version: 1.0
+In-Reply-To: <CA+chaQf6LKVf5vRBSAmUxue2wb253o2bHs5XjN2CoL2t0Ox4MQ@mail.gmail.com>
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] neon: add the recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,85 +38,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 23 Nov 2017 13:36:06 -0000
+X-List-Received-Date: Thu, 23 Nov 2017 13:39:17 -0000
+Content-Type: text/plain; charset=utf-8; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 7bit
 
-It is still required by libmusicbrainz, but is no longer needed
-by oe-core. Switch the upstream to debian as webdav.org is down.
+On 11/23/2017 02:06 PM, Martin Jansa wrote:
+> https://www.openembedded.org/wiki/Styleguide#Format_Guidelines
 
-Signed-off-by: Alexander Kanavin <alexander.kanavin@linux.intel.com>
----
- meta-oe/recipes-support/neon/neon/pkgconfig.patch | 15 +++++++++
- meta-oe/recipes-support/neon/neon_0.30.2.bb       | 38 +++++++++++++++++++++++
- 2 files changed, 53 insertions(+)
- create mode 100644 meta-oe/recipes-support/neon/neon/pkgconfig.patch
- create mode 100644 meta-oe/recipes-support/neon/neon_0.30.2.bb
+Alright. I resent the patch, as I don't want to start a style war, but 
+(as discussed previously) I will resist any attempts to enforce 
+indentation in oe-core. We need to prioritize what we spend our time on 
+ruthlessly, considering the project is constantly under-staffed.
 
-diff --git a/meta-oe/recipes-support/neon/neon/pkgconfig.patch b/meta-oe/recipes-support/neon/neon/pkgconfig.patch
-new file mode 100644
-index 000000000..239dba8e2
---- /dev/null
-+++ b/meta-oe/recipes-support/neon/neon/pkgconfig.patch
-@@ -0,0 +1,15 @@
-+Upstream-Status: Inappropriate [configuration]
-+
-+---
-+ neon.pc.in |    2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+--- neon-0.30.1.orig/neon.pc.in
-++++ neon-0.30.1/neon.pc.in
-+@@ -7,5 +7,5 @@ Name: neon
-+ Description: HTTP/WebDAV client library
-+ Version: @NEON_VERSION@
-+ Libs: -L${libdir} -lneon @NEON_PC_LIBS@
-+-Libs.private: @NEON_LIBS@
-++Libs.private: -L${libdir} -lz -lgcrypt -lgpg-error -lexpat -lgnutls
-+ Cflags: -I${includedir}/neon @NEON_CFLAGS@
-diff --git a/meta-oe/recipes-support/neon/neon_0.30.2.bb b/meta-oe/recipes-support/neon/neon_0.30.2.bb
-new file mode 100644
-index 000000000..00b79f633
---- /dev/null
-+++ b/meta-oe/recipes-support/neon/neon_0.30.2.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "An HTTP and WebDAV client library with a C interface"
-+HOMEPAGE = "http://www.webdav.org/neon/"
-+SECTION = "libs"
-+LICENSE = "LGPLv2+"
-+LIC_FILES_CHKSUM = "file://src/COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a \
-+                    file://src/ne_utils.h;beginline=1;endline=20;md5=2caca609538eddaa6f6adf120a218037"
-+
-+SRC_URI = "${DEBIAN_MIRROR}/main/n/neon27/neon27_${PV}.orig.tar.gz \
-+           file://pkgconfig.patch \
-+          "
-+
-+SRC_URI[md5sum] = "e28d77bf14032d7f5046b3930704ef41"
-+SRC_URI[sha256sum] = "db0bd8cdec329b48f53a6f00199c92d5ba40b0f015b153718d1b15d3d967fbca"
-+
-+inherit autotools binconfig-disabled lib_package pkgconfig
-+
-+# Enable gnutls or openssl, not both
-+PACKAGECONFIG ?= "expat gnutls libproxy webdav zlib"
-+PACKAGECONFIG_class-native = "expat gnutls webdav zlib"
-+
-+PACKAGECONFIG[expat] = "--with-expat,--without-expat,expat"
-+PACKAGECONFIG[gnutls] = "--with-ssl=gnutls,,gnutls"
-+PACKAGECONFIG[gssapi] = "--with-gssapi,--without-gssapi,krb5"
-+PACKAGECONFIG[libproxy] = "--with-libproxy,--without-libproxy,libproxy"
-+PACKAGECONFIG[libxml2] = "--with-libxml2,--without-libxml2,libxml2"
-+PACKAGECONFIG[openssl] = "--with-ssl=openssl,,openssl"
-+PACKAGECONFIG[webdav] = "--enable-webdav,--disable-webdav,"
-+PACKAGECONFIG[zlib] = "--with-zlib,--without-zlib,zlib"
-+
-+EXTRA_OECONF += "--enable-shared"
-+
-+do_compile_append() {
-+    oe_runmake -C test
-+}
-+
-+BINCONFIG = "${bindir}/neon-config"
-+
-+BBCLASSEXTEND = "native"
--- 
-2.15.0
-
+Alex
 
