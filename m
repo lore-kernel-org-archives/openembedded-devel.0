@@ -1,48 +1,34 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 5F231784F5
+Return-Path: <Haiqing.Bai@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BDC77852C
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Nov 2017 00:35:24 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id q63so2774041pfd.7
+	Fri, 24 Nov 2017 01:52:29 +0000 (UTC)
+Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
+	[147.11.189.41])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vAO1qUhp017584
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 23 Nov 2017 16:35:26 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:references:in-reply-to:from:date:message-id:subject:to
-	:cc; bh=x2cv8bmvgsBQ9+4sWO56AT9cfdcBXj9MWmYxygArsD4=;
-	b=C0Vj/UHf60trlSk11B/b/bDa0SJ1EvkBDhHaWU79iEafKV8nCkQFmVozaXptpZpcsS
-	6QJkyn4J8LuP4WA12lUq0TWj+2eJo5MOytmDrOMeVuTgm9j9DTT3LbopzQTsW0/iV6K1
-	Uy6BJKKcneRJbZgJcnDwlKzJ3x7ZXbR/LrlRZkepcv3NY71Ot3YkV+6MS6G78YXBru8/
-	MgcrWFMOnM2ArmD0ObmVqWYKrM2XZCxzgy+j4T4St4qKMgM0VHmKoxo3dJtzHf8vz/HH
-	spZFN6N/vn7kp+Jm9H7pnSPfzF6QaN3AR5wOFq3m9ibYg2r49Jh0ijq9cmiY1xz9TKsr
-	gFpQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:references:in-reply-to:from:date
-	:message-id:subject:to:cc;
-	bh=x2cv8bmvgsBQ9+4sWO56AT9cfdcBXj9MWmYxygArsD4=;
-	b=OZI4GV5ojVCW5mJZYBZ4HuNFVH1MVO7LeXfb5MSiZWdlftKkFHtEZr5/or3a/8wq2D
-	ZTDp3uISpt56hr90fukdynRMCcVglF6IswHU0U8mBPa6sEXiY33Sxo+b8bY+J5GoJMt3
-	i+wvZwirO4HZNaSLmQ2upYaw+ywoQgAHe56dbcrIhLOZPFQpz19jIpzK/YlPUSsoD96L
-	SEZPmI0iXKrjOzf/vdE5krmwPZRoNvur/siKRw2LmdvivJbughY9u2FZFgZDZM1bgr2J
-	G6XHxxCjHLgtl6m5TN5PvgsK/TBMbu5IfGN11V7cUzejJ95tOlSFIoq0DJnQXQYZc4An
-	2B6Q==
-X-Gm-Message-State: AJaThX5yyGmUIS3SX0atYspV5TjgfX6T5uS5zRyLSKLWKp6asKkK9sQ2
-	gEck/EsB1ec1xbfxdfh8IK07VT/HLkzicpKMHh0=
-X-Google-Smtp-Source: AGs4zMZYJNpgpWfvJracl0zKNr9Sjla2WYi+eqZ6f8ggPrvim5t64RNZo6Ap6cRdSlWZAobMvWkWm8HljXniOPrncWc=
-X-Received: by 10.99.109.2 with SMTP id i2mr26379396pgc.269.1511483725951;
-	Thu, 23 Nov 2017 16:35:25 -0800 (PST)
+	Thu, 23 Nov 2017 17:52:30 -0800 (PST)
+Received: from ALA-MBC.corp.ad.wrs.com ([169.254.1.128]) by
+	ALA-HCB.corp.ad.wrs.com ([147.11.189.41]) with mapi id 14.03.0361.001;
+	Thu, 23 Nov 2017 17:52:30 -0800
+From: "Bai, Haiqing" <Haiqing.Bai@windriver.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [meta-java][PATCH] openjdk-8-native,	icedtea7-native: use
+	JAVA_TOOL_OPTIONS from environment
+Thread-Index: AQHTU7g55Grug5GoUkKC4cYvjgCkC6Mi5Cag
+Date: Fri, 24 Nov 2017 01:52:28 +0000
+Message-ID: <C2A454FDE6C23F41BD5011E2458C46C9CEEEBCDF@ALA-MBC.corp.ad.wrs.com>
+References: <1509611592-22825-1-git-send-email-Haiqing.Bai@windriver.com>
+In-Reply-To: <1509611592-22825-1-git-send-email-Haiqing.Bai@windriver.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-originating-ip: [128.224.162.223]
 MIME-Version: 1.0
-References: <cover.1511437793.git.hongxu.jia@windriver.com>
-	<CAJTo0La5+dpVjgmDnkqP3wX+M2L-1sk11-wxreL1+7xR1anYfg@mail.gmail.com>
-In-Reply-To: <CAJTo0La5+dpVjgmDnkqP3wX+M2L-1sk11-wxreL1+7xR1anYfg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 24 Nov 2017 00:35:15 +0000
-Message-ID: <CAMKF1sp96uZ5JY9NDPg=+eEmx7qivCe=5sJ=2gSxjO83k98vqw@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/15] create meta-installer layer
+Cc: "Tiplea, Marius" <Marius.Tiplea@windriver.com>
+Subject: Re: [meta-java][PATCH] openjdk-8-native, icedtea7-native: use JAVA_TOOL_OPTIONS from environment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,452 +41,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Nov 2017 00:35:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 24 Nov 2017 01:52:30 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-On Thu, Nov 23, 2017 at 4:15 AM Burton, Ross <ross.burton@intel.com> wrote:
-
-> I honestly don't see why this has to belong in meta-openembedded and can't
-> live in a standalone repository.
->
-
-I share the same opinion it should probably be
- Repo of its own
-
-
-> Ross
->
-> On 23 November 2017 at 12:09, Hongxu Jia <hongxu.jia@windriver.com> wrote:
->
->> The meta-installer layer provides a collection of installation
->> programs based on OE platform.
->>
->> One implementation is the target installer 'anaconda', the version
->> is 26.21.11 which is based on Fedora 26.
->>
->> The anacoda requires:
->> - systemd as init manager
->> - python3
->> - dnf2/rpm4
->> - gobject-introspection which requires qemu-usermode
->>   in MACHINE_FEATURES
->>
->> The anaconda provides:
->> - graphic install and text install.
->>
->> - package based (dnf/rpm) install and image (copy)
->>   based install.
->>
->> - package based (dnf/rpm) install from local and
->>   remote rpm sources such as CDs and DVDs, images
->>   stored on a hard drive, NFS, HTTP, and FTP.
->>
->> - kickstart install which provides a fully unattended
->>   installation that can be duplicated on scores of machines.
->>
->> - install over VNC on headless machines.
->>
->> - timezone setting.
->>
->> - root password setting.
->>
->> - user account creation.
->>
->> - a variety of advanced storage devices including
->>   LVM, Btrfs, Ext4, and filesystem encryption.
->>
->> TODO (currently not support):
->> - keyboard setting
->>
->> - language support setting
->>
->> - network & host name setting
->>
->> //Hongxu
->>
->> The following changes since commit
->> 34aa4c3202b427f59f843dc43a4e1afda4f81d13:
->>
->>   usb-modeswitch: add usb-modeswitch@.service (2017-11-19 13:45:38 -0800)
->>
->> are available in the git repository at:
->>
->>   git://git.openembedded.org/openembedded-core-contrib
->> hongxu/meta-installer
->>
->> http://cgit.openembedded.org/openembedded-core-contrib/log/?h=hongxu/meta-installer
->>
->> Hongxu Jia (15):
->>   meta-installer: create layer
->>   meta-installer: add kernel config
->>   meta-installer: add anaconda support for target build
->>   meta-installer: add distro anaconda for host build
->>   meta-installer: add systemd/systemd-serialgetty bbappend
->>   meta-installer: add gtk+3 bbappend
->>   meta-installer: add initramfs-live-boot bbappend
->>   meta-installer: add xserver-xf86-config bbappend
->>   meta-installer: add multipath-tools bbappend
->>   meta-installer: add recipe packagegroup-installer-x11-anaconda
->>   meta-installer: add recipe yocto-compat-logos
->>   meta-installer: add recipe anaconda-init
->>   meta-installer: add recipe anaconda 26.21.11
->>   meta-installer: add recipe core-image-anaconda
->>   meta-installer: add recipe core-image-anaconda-initramfs
->>
->>  meta-installer/COPYING.MIT                         |  17 +
->>  meta-installer/README                              |  47 ++
->>  meta-installer/README.anaconda                     | 341 ++++++++++++
->>  meta-installer/classes/anaconda_image.bbclass      | 321 +++++++++++
->>  meta-installer/classes/anaconda_kernel.bbclass     |  14 +
->>  .../classes/anaconda_support_image.bbclass         |  40 ++
->>  .../classes/anaconda_support_kernel.bbclass        |   8 +
->>  meta-installer/conf/distro/anaconda.conf           |  33 ++
->>  meta-installer/conf/layer.conf                     |  31 ++
->>  meta-installer/licenses/FLTK                       | 530
->> ++++++++++++++++++
->>  .../systemd/files/serial-getty@.service            |  40 ++
->>  .../systemd/files/serial-screen-anaconda.sh        |   5 +
->>  .../systemd/systemd-serialgetty.bbappend           |  12 +
->>  .../recipes-core/systemd/systemd_%.bbappend        |   6 +
->>  ...for-anaconda-installer-while-loading-libA.patch |  84 +++
->>  .../recipes-gnome/gtk+/gtk+3_%.%.%.bbappend        |   3 +
->>  .../xorg-xserver/xserver-xf86-config_0.1.bbappend  |  12 +
->>  .../anaconda-init/anaconda-init.bb                 |  77 +++
->>  .../anaconda-init/anaconda-init/COPYING            | 339 ++++++++++++
->>  .../anaconda-init/anaconda-init/Xusername          |   1 +
->>  .../anaconda-init/anaconda-init/anaconda-init      | 362 +++++++++++++
->>  .../anaconda-init/anaconda-init-screen@.service    |  22 +
->>  .../anaconda-init/anaconda-init.service            |  13 +
->>  .../anaconda-init/anaconda-init.target             |   6 +
->>  .../anaconda/files/0001-do-not-support-po.patch    |  41 ++
->>  ...02-widgets-Makefile.am-do-not-compile-doc.patch |  28 +
->>  ...t-Use-system-Python-when-running-Anaconda.patch |  42 ++
->>  ...4-pyanaconda-flags.py-drop-selinux-module.patch |  48 ++
->>  ...ckage-site-dir-for-installclass-searching.patch |  38 ++
->>  ...06-do-not-load-the-system-wide-Xresources.patch |  53 ++
->>  .../0007-tweak-iso-mount-dir-and-kernel-name.patch |  95 ++++
->>  .../0008-dnfpayload.py-customize-for-WRLinux.patch | 597
->> +++++++++++++++++++++
->>  ...cessary-noverifyssl-for-http-ftp-protocol.patch |  32 ++
->>  .../0010-dynamic-detect-workable-locale.patch      |  77 +++
->>  .../files/0011-improve-thread-monitor.patch        |  55 ++
->>  .../anaconda/files/0012-disable-audit.patch        |  64 +++
->>  ...py-Change-grub2-settings-to-match-oe-core.patch | 137 +++++
->>  .../files/0014-tweak-detect-kernel-version.patch   |  96 ++++
->>  .../0015-tweak-grub-config-file-for-WRLinux.patch  |  28 +
->>  ...time.tzset-to-apply-timezone-changes-when.patch |  66 +++
->>  ...rt-Authconfig-Firewall-Firstboot-Timezone.patch | 216 ++++++++
->>  .../files/0018-invisible-help-button.patch         |  32 ++
->>  .../0019-disable-non-implemented-functions.patch   |  41 ++
->>  .../files/0020-disable-geoloc-by-default.patch     |  30 ++
->>  .../anaconda/files/0021-support-UEFI-boot.patch    |  38 ++
->>  ...o-not-verify-ssl-certification-by-default.patch |  44 ++
->>  .../files/0023-tweak-default-nfs-mount-point.patch |  30 ++
->>  .../0024-fix-quoted-empty-string-failed.patch      |  46 ++
->>  ...support-ISO-hold-by-hard-drive-partitions.patch |  31 ++
->>  ...x-cannot-stat-usr-share-gettext-gettext.h.patch |  27 +
->>  .../0027-fix-Wind-River-boot-menu-not-work.patch   |  35 ++
->>  .../files/0028-tweak-bootloader-fs-type.patch      |  31 ++
->>  .../files/0029-support-timezone-setting.patch      |  95 ++++
->>  .../anaconda/files/0030-disable-ntp-support.patch  | 230 ++++++++
->>  .../0031-do-not-support-manually-set-time.patch    |  32 ++
->>  .../files/0032-support-user-account-creation.patch |  73 +++
->>  .../files/0033-detect-existence-of-Xorg.patch      |  45 ++
->>  ...-write-network-conf-failed-while-liveinst.patch |  40 ++
->>  ...mmits-to-support-reboot-for-live-installs.patch |  72 +++
->>  ...tory-setting-do-not-support-local-ISO-fil.patch |  72 +++
->>  ...ext-repository-setting-support-http-proxy.patch |  95 ++++
->>  ...-set-keyboard-xlayouts-with-us-by-default.patch |  50 ++
->>  ...xt-do-not-support-network-setting-for-now.patch |  33 ++
->>  .../0040-tweak-boot-storage-sanity-check.patch     |  31 ++
->>  ...tart-do-not-support-network-configuration.patch |  29 +
->>  ...042-support-to-get-kickstart-from-network.patch |  48 ++
->>  ...0043-support-authentication-for-kickstart.patch | 133 +++++
->>  ...nloading-file-from-http-ftp-server-to-tar.patch | 175 ++++++
->>  .../0045-live-install-supports-kickstart.patch     |  47 ++
->>  .../files/0046-support-initramfs-boot.patch        |  48 ++
->>  ...47-fix-hang-while-installed-system-reboot.patch |  30 ++
->>  ...talled-system-boot-from-encrypt-fs-failed.patch |  48 ++
->>  ...n-destination-disable-iSCSI-network-disks.patch |  29 +
->>  .../0050-update-region-while-city-changes.patch    |  32 ++
->>  .../0051-timezone-fix-set-US-Alaska-failed.patch   |  38 ++
->>  ...remove-incorrect-prefix-of-addon-repo-url.patch |  42 ++
->>  .../0053-fix-write-sysconfig-network-failed.patch  |  32 ++
->>  ...naconda-ui-gui-utils.py-tweak-mouse-arrow.patch |  31 ++
->>  ...5-tweak-search-location-of-new-kernel-pkg.patch |  30 ++
->>  .../0056-always-write-fstab-after-install.patch    |  31 ++
->>  ...e-grub-install-to-generate-efi-filesystem.patch |  60 +++
->>  .../files/0058-do-not-support-closest-mirror.patch |  96 ++++
->>  .../0059-tweak-MAX_TREEINFO_DOWNLOAD_RETRIES.patch |  42 ++
->>  .../anaconda/files/0060-tweak-time-setting.patch   | 106 ++++
->>  ...62-Add-dracut-args-for-home-to-bootloader.patch |  35 ++
->>  .../files/0063-do-not-customize-window-theme.patch |  55 ++
->>  .../files/0064-tweak-product-short-name.patch      |  33 ++
->>  .../anaconda/files/0065-disable-dmraid.patch       |  57 ++
->>  .../files/0066-tweak-shebang-of-bash.patch         |  25 +
->>  .../anaconda/files/0067-Tweak-label-name.patch     |  56 ++
->>  ...068-livepayload.py-copy-grub-from-host-os.patch |  51 ++
->>  .../files/0069-test-existence-of-noverifyssl.patch |  31 ++
->>  .../anaconda/files/81-edit-sudoers.ks              |   3 +
->>  .../recipes-installer/anaconda/files/wrlinux.py    | 112 ++++
->>  .../anaconda/python3-anaconda_26.21.11.bb          | 161 ++++++
->>  .../images/core-image-anaconda-initramfs.bb        |  33 ++
->>  .../images/core-image-anaconda.bb                  |  34 ++
->>  .../initrdscripts/files/init-live.sh               | 249 +++++++++
->>  .../initrdscripts/initramfs-live-boot_1.0.bbappend |   5 +
->>  .../recipes-installer/logos/yocto-compat-logos.bb  |  24 +
->>  .../logos/yocto-compat-logos/COPYING               | 339 ++++++++++++
->>  .../logos/yocto-compat-logos/banner_yocto1.png     | Bin 0 -> 44650 bytes
->>  .../logos/yocto-compat-logos/banner_yocto2.png     | Bin 0 -> 39223 bytes
->>  .../logos/yocto-compat-logos/sidebar-logo.png      | Bin 0 -> 17651 bytes
->>  .../logos/yocto-compat-logos/topbar-bg.png         | Bin 0 -> 77956 bytes
->>  .../packagegroup-installer-x11-anaconda.bb         |  28 +
->>  .../packagegroups/packagegroup-anaconda-support.bb |  26 +
->>  .../recipes-kernel/linux/files/crypt.cfg           |   2 +
->>  .../recipes-kernel/linux/files/crypt.scc           |   1 +
->>  .../recipes-kernel/linux/files/dmthin.cfg          |   1 +
->>  .../recipes-kernel/linux/files/dmthin.scc          |   1 +
->>  .../recipes-kernel/linux/files/efivars.cfg         |   1 +
->>  .../recipes-kernel/linux/files/efivars.scc         |   1 +
->>  meta-installer/recipes-kernel/linux/files/ide.cfg  |   5 +
->>  meta-installer/recipes-kernel/linux/files/ide.scc  |   1 +
->>  .../recipes-kernel/linux/files/liveinstall.cfg     |   5 +
->>  .../recipes-kernel/linux/files/liveinstall.scc     |   1 +
->>  .../recipes-kernel/linux/files/multipath.cfg       |   3 +
->>  .../recipes-kernel/linux/files/multipath.scc       |   1 +
->>  .../multipath-tools/multipath-tools_%.bbappend     |   8 +
->>  120 files changed, 7845 insertions(+)
->>  create mode 100644 meta-installer/COPYING.MIT
->>  create mode 100644 meta-installer/README
->>  create mode 100644 meta-installer/README.anaconda
->>  create mode 100644 meta-installer/classes/anaconda_image.bbclass
->>  create mode 100644 meta-installer/classes/anaconda_kernel.bbclass
->>  create mode 100644 meta-installer/classes/anaconda_support_image.bbclass
->>  create mode 100644 meta-installer/classes/anaconda_support_kernel.bbclass
->>  create mode 100644 meta-installer/conf/distro/anaconda.conf
->>  create mode 100644 meta-installer/conf/layer.conf
->>  create mode 100644 meta-installer/licenses/FLTK
->>  create mode 100644
->> meta-installer/recipes-core/systemd/files/serial-getty@.service
->>  create mode 100644
->> meta-installer/recipes-core/systemd/files/serial-screen-anaconda.sh
->>  create mode 100644
->> meta-installer/recipes-core/systemd/systemd-serialgetty.bbappend
->>  create mode 100644 meta-installer/recipes-core/systemd/systemd_%.bbappend
->>  create mode 100644
->> meta-installer/recipes-gnome/gtk+/files/workaround-for-anaconda-installer-while-loading-libA.patch
->>  create mode 100644 meta-installer/recipes-gnome/gtk+/gtk+3_%.%.%.bbappend
->>  create mode 100644
->> meta-installer/recipes-graphics/xorg-xserver/xserver-xf86-config_0.1.bbappend
->>  create mode 100644 meta-installer/recipes-installer/anaconda-init/
->> anaconda-init.bb
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/COPYING
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/Xusername
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/anaconda-init
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/anaconda-init-screen@
->> .service
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/anaconda-init.service
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda-init/anaconda-init/anaconda-init.target
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0001-do-not-support-po.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0002-widgets-Makefile.am-do-not-compile-doc.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0003-Revert-Use-system-Python-when-running-Anaconda.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0004-pyanaconda-flags.py-drop-selinux-module.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0005-add-package-site-dir-for-installclass-searching.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0006-do-not-load-the-system-wide-Xresources.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0007-tweak-iso-mount-dir-and-kernel-name.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0008-dnfpayload.py-customize-for-WRLinux.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0009-Remove-unnecessary-noverifyssl-for-http-ftp-protocol.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0010-dynamic-detect-workable-locale.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0011-improve-thread-monitor.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0012-disable-audit.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0013-bootloader.py-Change-grub2-settings-to-match-oe-core.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0014-tweak-detect-kernel-version.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0015-tweak-grub-config-file-for-WRLinux.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0016-Revert-Use-time.tzset-to-apply-timezone-changes-when.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0017-kickstart-Authconfig-Firewall-Firstboot-Timezone.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0018-invisible-help-button.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0019-disable-non-implemented-functions.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0020-disable-geoloc-by-default.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0021-support-UEFI-boot.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0022-do-not-verify-ssl-certification-by-default.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0023-tweak-default-nfs-mount-point.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0024-fix-quoted-empty-string-failed.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0025-do-not-support-ISO-hold-by-hard-drive-partitions.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0026-fix-cannot-stat-usr-share-gettext-gettext.h.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0027-fix-Wind-River-boot-menu-not-work.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0028-tweak-bootloader-fs-type.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0029-support-timezone-setting.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0030-disable-ntp-support.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0031-do-not-support-manually-set-time.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0032-support-user-account-creation.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0033-detect-existence-of-Xorg.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0034-fix-write-network-conf-failed-while-liveinst.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0035-revert-commits-to-support-reboot-for-live-installs.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0036-text-repository-setting-do-not-support-local-ISO-fil.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0037-text-repository-setting-support-http-proxy.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0038-set-keyboard-xlayouts-with-us-by-default.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0039-text-do-not-support-network-setting-for-now.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0040-tweak-boot-storage-sanity-check.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0041-kickstart-do-not-support-network-configuration.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0042-support-to-get-kickstart-from-network.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0043-support-authentication-for-kickstart.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0044-support-downloading-file-from-http-ftp-server-to-tar.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0045-live-install-supports-kickstart.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0046-support-initramfs-boot.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0047-fix-hang-while-installed-system-reboot.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0048-fix-installed-system-boot-from-encrypt-fs-failed.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0049-installation-destination-disable-iSCSI-network-disks.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0050-update-region-while-city-changes.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0051-timezone-fix-set-US-Alaska-failed.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0052-remove-incorrect-prefix-of-addon-repo-url.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0053-fix-write-sysconfig-network-failed.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0054-pyanaconda-ui-gui-utils.py-tweak-mouse-arrow.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0055-tweak-search-location-of-new-kernel-pkg.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0056-always-write-fstab-after-install.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0057-invoke-grub-install-to-generate-efi-filesystem.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0058-do-not-support-closest-mirror.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0059-tweak-MAX_TREEINFO_DOWNLOAD_RETRIES.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0060-tweak-time-setting.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0062-Add-dracut-args-for-home-to-bootloader.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0063-do-not-customize-window-theme.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0064-tweak-product-short-name.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0065-disable-dmraid.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0066-tweak-shebang-of-bash.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0067-Tweak-label-name.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0068-livepayload.py-copy-grub-from-host-os.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/0069-test-existence-of-noverifyssl.patch
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/81-edit-sudoers.ks
->>  create mode 100644
->> meta-installer/recipes-installer/anaconda/files/wrlinux.py
->>  create mode 100755 meta-installer/recipes-installer/anaconda/
->> python3-anaconda_26.21.11.bb
->>  create mode 100644 meta-installer/recipes-installer/images/
->> core-image-anaconda-initramfs.bb
->>  create mode 100644 meta-installer/recipes-installer/images/
->> core-image-anaconda.bb
->>  create mode 100644
->> meta-installer/recipes-installer/initrdscripts/files/init-live.sh
->>  create mode 100644
->> meta-installer/recipes-installer/initrdscripts/initramfs-live-boot_1.0.bbappend
->>  create mode 100644 meta-installer/recipes-installer/logos/
->> yocto-compat-logos.bb
->>  create mode 100644
->> meta-installer/recipes-installer/logos/yocto-compat-logos/COPYING
->>  create mode 100644
->> meta-installer/recipes-installer/logos/yocto-compat-logos/banner_yocto1.png
->>  create mode 100644
->> meta-installer/recipes-installer/logos/yocto-compat-logos/banner_yocto2.png
->>  create mode 100644
->> meta-installer/recipes-installer/logos/yocto-compat-logos/sidebar-logo.png
->>  create mode 100644
->> meta-installer/recipes-installer/logos/yocto-compat-logos/topbar-bg.png
->>  create mode 100644 meta-installer/recipes-installer/packagegroups/
->> packagegroup-installer-x11-anaconda.bb
->>  create mode 100644 meta-installer/recipes-installersupport/packagegroups/
->> packagegroup-anaconda-support.bb
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/crypt.cfg
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/crypt.scc
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/dmthin.cfg
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/dmthin.scc
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/efivars.cfg
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/efivars.scc
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/ide.cfg
->>  create mode 100644 meta-installer/recipes-kernel/linux/files/ide.scc
->>  create mode 100644
->> meta-installer/recipes-kernel/linux/files/liveinstall.cfg
->>  create mode 100644
->> meta-installer/recipes-kernel/linux/files/liveinstall.scc
->>  create mode 100644
->> meta-installer/recipes-kernel/linux/files/multipath.cfg
->>  create mode 100644
->> meta-installer/recipes-kernel/linux/files/multipath.scc
->>  create mode 100644
->> meta-installer/recipes-support/multipath-tools/multipath-tools_%.bbappend
->>
->
->> --
->> 2.8.1
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
->
+QW55IGZlZWRiYWNrIG9yIGNvbW1lbnRzIG9mIHRoaXM/ICAgdGhhbmtzIC4NCg0KLS0tLS1Pcmln
+aW5hbCBNZXNzYWdlLS0tLS0NCkZyb206IG9wZW5lbWJlZGRlZC1kZXZlbC1ib3VuY2VzQGxpc3Rz
+Lm9wZW5lbWJlZGRlZC5vcmcgW21haWx0bzpvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0BsaXN0
+cy5vcGVuZW1iZWRkZWQub3JnXSBPbiBCZWhhbGYgT2YgSGFpcWluZyBCYWkNClNlbnQ6IDIwMTfE
+6jEx1MIyyNUgMTY6MzMNClRvOiBvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVk
+Lm9yZw0KU3ViamVjdDogW29lXSBbbWV0YS1qYXZhXVtQQVRDSF0gb3Blbmpkay04LW5hdGl2ZSwg
+aWNlZHRlYTctbmF0aXZlOiB1c2UgSkFWQV9UT09MX09QVElPTlMgZnJvbSBlbnZpcm9ubWVudA0K
+DQpTb2x1dGlvbiBvbiBob3cgdG8gYmUgYWJsZSB0byBidWlsZCBvcGVuamRrIGZvciBhIGJ1aWxk
+IGhvc3QgdGhhdCBuZWVkIHRoZSBlbnZpcm9ubWVudCB2YXJpYWJsZSBKQVZBX1RPT0xfT1BUSU9O
+Uy4NClVzZSBKQVZBX1RPT0xfT1BUSU9OUyBmcm9tIGVudmlyb25tZW50LiBPbiBzb21lIG1hY2hp
+bmVzIHRoaXMgaXMgbmVlZGVkIGluIG9yZGVyIHRvIHN0YXJ0IGphdmEgd2hlbiB0aGUgYW1vdW50
+IG9mIFJBTSBpcyBsaW1pdGVkIGZvciB0aGUgdXNlci4NCg0KQXV0aG9yOiBQZXRlciBCZXJnaW4g
+PHBldGVyLmJlcmdpbkB3aW5kcml2ZXIuY29tPg0KU2lnbmVkLW9mZi1ieTogSGFpcWluZyBCYWkg
+PEhhaXFpbmcuQmFpQHdpbmRyaXZlci5jb20+DQotLS0NCiByZWNpcGVzLWNvcmUvaWNlZHRlYS9p
+Y2VkdGVhNy1uYXRpdmUuaW5jICAgICAgICAgICAgICAgIHwgIDQgKysrKw0KIHJlY2lwZXMtY29y
+ZS9vcGVuamRrL29wZW5qZGstOC1uYXRpdmUuaW5jICAgICAgICAgICAgICAgfCAxMCArKysrKysr
+KysrDQogLi4uL29wZW5qZGsvcGF0Y2hlcy1vcGVuamRrLTgvaGFuZGxlX2V4dHJhX291dHB1dC5w
+YXRjaCB8IDE3ICsrKysrKysrKysrKysrKysrDQogMyBmaWxlcyBjaGFuZ2VkLCAzMSBpbnNlcnRp
+b25zKCspDQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMtY29yZS9vcGVuamRrL3BhdGNoZXMt
+b3Blbmpkay04L2hhbmRsZV9leHRyYV9vdXRwdXQucGF0Y2gNCg0KZGlmZiAtLWdpdCBhL3JlY2lw
+ZXMtY29yZS9pY2VkdGVhL2ljZWR0ZWE3LW5hdGl2ZS5pbmMgYi9yZWNpcGVzLWNvcmUvaWNlZHRl
+YS9pY2VkdGVhNy1uYXRpdmUuaW5jDQppbmRleCA3ZDYyNWViLi5kNGNmN2FjIDEwMDY0NA0KLS0t
+IGEvcmVjaXBlcy1jb3JlL2ljZWR0ZWEvaWNlZHRlYTctbmF0aXZlLmluYw0KKysrIGIvcmVjaXBl
+cy1jb3JlL2ljZWR0ZWEvaWNlZHRlYTctbmF0aXZlLmluYw0KQEAgLTE3MCw2ICsxNzAsMTAgQEAg
+RVhUUkFfT0VNQUtFID0gJyBcDQogICAgICAgICAgICAgICAgJw0KIA0KIGRvX2NvbXBpbGUoKSB7
+DQorCSMgVXNlIEpBVkFfVE9PTF9PUFRJT05TIGZyb20gZW52aXJvbm1lbnQuIE9uIHNvbWUgbWFj
+aGluZXMgdGhpcyBpcyBuZWVkZWQNCisJIyBpbiBvcmRlciB0byBzdGFydCBqYXZhIHdoZW4gdGhl
+IGFtb3VudCBvZiBSQU0gaXMgbGltaXRlZCBmb3IgdGhlIHVzZXIuDQorCWV4cG9ydCBKQVZBX1RP
+T0xfT1BUSU9OUz0iJHtKQVZBX1RPT0xfT1BUSU9OU30iDQorDQogCSMgT3BlbkpESyB1c2VzIHNs
+aWdodGx5IGRpZmZlcmVudCBuYW1lcyBmb3IgY2VydGFpbiBhcmNoZXMuIFdlIG5lZWQgdG8ga25v
+dw0KIAkjCXRoaXMgdG8gY3JlYXRlIHNvbWUgZmlsZXMgd2hpY2ggYXJlIGV4cGVjdGVkIGJ5IHRo
+ZSBidWlsZC4NCiAJY2FzZSAiJHtUUkFOU0xBVEVEX1RBUkdFVF9BUkNIfSIgaW4NCmRpZmYgLS1n
+aXQgYS9yZWNpcGVzLWNvcmUvb3Blbmpkay9vcGVuamRrLTgtbmF0aXZlLmluYyBiL3JlY2lwZXMt
+Y29yZS9vcGVuamRrL29wZW5qZGstOC1uYXRpdmUuaW5jDQppbmRleCBmZDk3ZWZmLi4yMGUxNzQz
+IDEwMDY0NA0KLS0tIGEvcmVjaXBlcy1jb3JlL29wZW5qZGsvb3Blbmpkay04LW5hdGl2ZS5pbmMN
+CisrKyBiL3JlY2lwZXMtY29yZS9vcGVuamRrL29wZW5qZGstOC1uYXRpdmUuaW5jDQpAQCAtOSw2
+ICs5LDggQEAgREVQRU5EUyA9ICJcDQogICAgIGNhLWNlcnRpZmljYXRlcy1uYXRpdmUgb3BlbnNz
+bC1uYXRpdmUgY29yZXV0aWxzLW5hdGl2ZSBcICAiDQogDQorU1JDX1VSSV9hcHBlbmQgKz0gImZp
+bGU6Ly9oYW5kbGVfZXh0cmFfb3V0cHV0LnBhdGNoIg0KKw0KIFBBQ0tBR0VDT05GSUcgPz89ICIi
+DQogUEFDS0FHRUNPTkZJR1t4MTFdID0gIi0td2l0aC14LCxsaWJ4MTEtbmF0aXZlIHhwcm90by1u
+YXRpdmUgbGlieHQtbmF0aXZlIGxpYnhleHQtbmF0aXZlIGxpYnhyZW5kZXItbmF0aXZlIg0KIFBB
+Q0tBR0VDT05GSUdbY3Vwc10gPSAiLS13aXRoLWN1cHMsLGN1cHMiDQpAQCAtNDcsNiArNDksMTQg
+QEAgRVhUUkFfT0VNQUtFX2FwcGVuZCA9ICcgXA0KICAgICBpbWFnZXMgXA0KICcNCiANCitkb19j
+b25maWd1cmVfcHJlcGVuZCgpIHsNCisgICAgZXhwb3J0IEpBVkFfVE9PTF9PUFRJT05TPSIke0pB
+VkFfVE9PTF9PUFRJT05TfSINCit9DQorDQorZG9fY29tcGlsZV9wcmVwZW5kKCkgew0KKyAgICBl
+eHBvcnQgSkFWQV9UT09MX09QVElPTlM9IiR7SkFWQV9UT09MX09QVElPTlN9Ig0KK30NCisNCiBk
+b19jb21waWxlX2FwcGVuZCgpIHsNCiAgICAgc2V0IC14DQogICAgIG1rZGlyIC1wICR7Qn0vY2Vy
+dHMNCmRpZmYgLS1naXQgYS9yZWNpcGVzLWNvcmUvb3Blbmpkay9wYXRjaGVzLW9wZW5qZGstOC9o
+YW5kbGVfZXh0cmFfb3V0cHV0LnBhdGNoIGIvcmVjaXBlcy1jb3JlL29wZW5qZGsvcGF0Y2hlcy1v
+cGVuamRrLTgvaGFuZGxlX2V4dHJhX291dHB1dC5wYXRjaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQN
+CmluZGV4IDAwMDAwMDAuLjUyYWFkOTUNCi0tLSAvZGV2L251bGwNCisrKyBiL3JlY2lwZXMtY29y
+ZS9vcGVuamRrL3BhdGNoZXMtb3Blbmpkay04L2hhbmRsZV9leHRyYV9vdXRwdXQucGF0Y2gNCkBA
+IC0wLDAgKzEsMTcgQEANCitXaGVuIGFkZGluZyB0aGUgZW52aXJvbm1lbnQgdmFyaWFibGUgSkFW
+QV9UT09MX09QVElPTlMgYW4gZXh0cmEgbGluZSBpbiANCit0aGUgb3V0cHV0IGZyb20gJ2phdmEg
+LXZlcnNpb24nIGlzIHByb2R1Y2VkLiBBcyB0aGlzIG91dHB1dCBpcyBwYXJzZWQgDQorYnkgY29u
+ZmlndXJlIHNjcmlwdCB0aGUgZXh0cmEgbGluZSBoYXMgdG8gYmUgZmlsdGVyZWQgb3V0Lg0KKw0K
+K0luZGV4OiBqZGs4dS1lOGJlZDE0OTZmZjIvY29tbW9uL2F1dG9jb25mL2Jvb3QtamRrLm00DQor
+PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09
+PT09PT09PT09PQ0KKy0tLSBqZGs4dS1lOGJlZDE0OTZmZjIub3JpZy9jb21tb24vYXV0b2NvbmYv
+Ym9vdC1qZGsubTQNCisrKysgamRrOHUtZThiZWQxNDk2ZmYyL2NvbW1vbi9hdXRvY29uZi9ib290
+LWpkay5tNA0KK0BAIC01MSw3ICs1MSw3IEBAIEFDX0RFRlVOKFtCT09USkRLX0RPX0NIRUNLXSwN
+CisgICAgICAgICAgICAgQk9PVF9KREtfRk9VTkQ9bm8NCisgICAgICAgICAgIGVsc2UNCisgICAg
+ICAgICAgICAgIyBPaCwgdGhpcyBpcyBsb29raW5nIGdvb2QhIFdlIHByb2JhYmx5IGhhdmUgZm91
+bmQgYSBwcm9wZXIgSkRLLiBJcyBpdCB0aGUgY29ycmVjdCB2ZXJzaW9uPw0KKy0gICAgICAgICAg
+ICBCT09UX0pES19WRVJTSU9OPWAiJEJPT1RfSkRLL2Jpbi9qYXZhIiAtdmVyc2lvbiAyPiYxIHwg
+aGVhZCAtbiAxYA0KKysgICAgICAgICAgICBCT09UX0pES19WRVJTSU9OPWAiJEJPT1RfSkRLL2Jp
+bi9qYXZhIiAtdmVyc2lvbiAyPiYxIHwgDQorKyBncmVwIC12IEpBVkFfVE9PTF9PUFRJT05TIHwg
+aGVhZCAtbiAxYA0KKyANCisgICAgICAgICAgICAgIyBFeHRyYSBNNCBxdW90ZSBuZWVkZWQgdG8g
+cHJvdGVjdCBbXSBpbiBncmVwIGV4cHJlc3Npb24uDQorICAgICAgICAgICAgIFtGT1VORF9WRVJT
+SU9OXzc4PWBlY2hvICRCT09UX0pES19WRVJTSU9OIHwgZ3JlcCAgDQorICdcIjFcLls3OF1cLidg
+XQ0KLS0NCjEuOS4xDQoNCi0tDQpfX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fXw0KT3BlbmVtYmVkZGVkLWRldmVsIG1haWxpbmcgbGlzdA0KT3BlbmVtYmVkZGVk
+LWRldmVsQGxpc3RzLm9wZW5lbWJlZGRlZC5vcmcNCmh0dHA6Ly9saXN0cy5vcGVuZW1iZWRkZWQu
+b3JnL21haWxtYW4vbGlzdGluZm8vb3BlbmVtYmVkZGVkLWRldmVsDQo=
 
