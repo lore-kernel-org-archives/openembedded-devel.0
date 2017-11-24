@@ -1,32 +1,30 @@
-Return-Path: <huangqy.fnst@cn.fujitsu.com>
-X-Greylist: delayed 600 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 24 Nov 2017 04:10:48 UTC
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id B08EE7879C
+	by mail.openembedded.org (Postfix) with ESMTP id 0CCB271C14
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Nov 2017 04:10:48 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30420222"
+	Fri, 24 Nov 2017 08:10:31 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30427144"
 Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 24 Nov 2017 12:00:48 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id CA16D489C475
+	by heian.cn.fujitsu.com with ESMTP; 24 Nov 2017 16:10:32 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id A1BA4487F16D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 24 Nov 2017 12:00:46 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.125) by
-	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Fri, 24 Nov 2017 12:00:47 +0800
-From: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+	Fri, 24 Nov 2017 16:10:28 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.116) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Fri, 24 Nov 2017 16:10:30 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 24 Nov 2017 12:00:49 +0800
-Message-ID: <1511496049-796-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 2.7.4
+Date: Fri, 24 Nov 2017 16:10:21 +0800
+Message-ID: <1511511021-50020-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.125]
-X-yoursite-MailScanner-ID: CA16D489C475.A6A31
+X-Originating-IP: [10.167.225.116]
+X-yoursite-MailScanner-ID: A1BA4487F16D.A5ADC
 X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: huangqy.fnst@cn.fujitsu.com
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-networking][PATCH] quagga: 1.2.1 -> 1.2.2
+Subject: [meta-oe][PATCH] xrdp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,27 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 24 Nov 2017 04:10:49 -0000
+X-List-Received-Date: Fri, 24 Nov 2017 08:10:33 -0000
 Content-Type: text/plain
 
-Update quagga from 1.2.1 to 1.2.2
+Add a new recipe xrdp_0.9.4.bb.
 
-Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb | 4 ++++
- 1 file changed, 4 insertions(+)
- create mode 100644 meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
 
-diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb b/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
 new file mode 100644
-index 0000000..653f46b
+index 0000000..5700936
 --- /dev/null
-+++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
-@@ -0,0 +1,4 @@
-+require quagga.inc
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -0,0 +1,11 @@
++DESCRIPTION = "An open source remote desktop protocol(rdp) server."
 +
-+SRC_URI[md5sum] = "e84be2938c26c0c872792090f1a6a866"
-+SRC_URI[sha256sum] = "522e22f2beee64e3f0c2cde3d0155f3b8103f4f6fc8abef92cb40bc3a4cc2931"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
++"
++
++DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
++
++SRC_URI = "https://github.com/neutrinolabs/xrdp/releases/download/v${PV}/${BPN}-${PV}.tar.gz"
++SRC_URI[md5sum] = "44598489561125182f6e2e0c33ac8e19"
++SRC_URI[sha256sum] = "059e362db550b58a108117e6538363d90f07edd0a54810affae977a6b0bb6ea7"
 -- 
 2.7.4
 
