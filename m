@@ -1,34 +1,46 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 66CF571B2A
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pg0-f49.google.com (mail-pg0-f49.google.com [74.125.83.49])
+	by mail.openembedded.org (Postfix) with ESMTP id C8D5F606A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 25 Nov 2017 08:55:50 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vAP8tlMZ012455
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sat, 25 Nov 2017 00:55:47 -0800 (PST)
-Received: from [128.224.162.151] (128.224.162.151) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Sat, 25 Nov 2017 00:55:46 -0800
-To: akuster808 <akuster808@gmail.com>, Khem Raj <raj.khem@gmail.com>,
-	"Burton, Ross" <ross.burton@intel.com>, Michael Halstead
-	<michael@yoctoproject.org>
-References: <cover.1511437793.git.hongxu.jia@windriver.com>
-	<CAJTo0La5+dpVjgmDnkqP3wX+M2L-1sk11-wxreL1+7xR1anYfg@mail.gmail.com>
-	<CAMKF1sp96uZ5JY9NDPg=+eEmx7qivCe=5sJ=2gSxjO83k98vqw@mail.gmail.com>
-	<aa13bf27-012d-1a09-fd47-1f36dd2742d1@windriver.com>
-	<6c10d513-d9f2-ccb8-c81d-47e66e457192@gmail.com>
-From: Hongxu Jia <hongxu.jia@windriver.com>
-Message-ID: <a4477d5e-ce73-7dfb-0f56-7424048c1b2d@windriver.com>
-Date: Sat, 25 Nov 2017 16:58:26 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.4.0
+	Mon, 27 Nov 2017 01:38:34 +0000 (UTC)
+Received: by mail-pg0-f49.google.com with SMTP id 207so17971647pgc.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 26 Nov 2017 17:38:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=PYnNHWTuxMGrtTOuXuOOWg7CJah1sebDvfhr9P0idns=;
+	b=U+q5AGH5iJX3CMAmwHSrm/mLuRK1Zx9pyINlccVVuN5/RW+TDS2bCOEVzbEgOX+yQN
+	YS8ZhJ6Yf4ZGMcNZVfvFyv/ZF7bZBhBTWNU6M+ShfIZmPBuZVyPqdaOnE5v9Vuu/o9uz
+	p5cMlPXKIpoyqNJJN2EWSbvrQ4AHfgNlqr7jGs95IsOvgauBqKb/oOUN6lempJzz2Uzi
+	U6a2oV7oKi12TBMKCrdqou3pD7RRyc1Xr0slv62ZwNqFuLKCNWbc6URMSnYXhkEP3Lqg
+	Oo7t3mu7KRj4pe43IbAr9SrNMWiWB9GDYQnTn99POr2171rVMrfsxm0IEfiRQH4JBHfQ
+	Os+A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=PYnNHWTuxMGrtTOuXuOOWg7CJah1sebDvfhr9P0idns=;
+	b=iFYYr1LHJYzfOuMn0KSPfDpWRhsr/zR9Xd5orx1StTeW5EVsHODl/p12aOQwfpCIKR
+	jKmhcI+wHRFbegqAfN+ZBAXLhBy5luSqj/eJjYuLgHiXFwOX0kWIocr6qzJy6+VpOcvq
+	peIuXkqmRF/AtKZmnS1cREBlnC80ng7PEEB7SDzazAXuOoyQ+30qjPs6TuTuPmTraPsK
+	4VyRwXAPxh0KvnkWKseIdeB4Wu+Mw6B2uUGIGSkJRkfgJDRXzVcIQJuBtJ/k2JUrw5Yd
+	V8tEzoEecy4j7Y3oI0m0eY6vgMjLx8vUy8/xPhReHn8tG05A7oqPtDa+un6M/VXPuLa8
+	dAUQ==
+X-Gm-Message-State: AJaThX5jpcU/GTU31myBKIEFhkZwJFuUtk3xNQMLMIpPwz0n/gM7GWTa
+	hPUJ0W3YjX61Kn2DLasxHsZpErH70axLV4PBpw8=
+X-Google-Smtp-Source: AGs4zMYrgfXommqpbG1nXPdhpRro4n3W7ciw+9PKGxWeJDnyEZfToXYxMTSA/rQZtiHwcKmnsJ4JwMSd4TV577dHKB0=
+X-Received: by 10.98.129.4 with SMTP id t4mr34748213pfd.125.1511746715607;
+	Sun, 26 Nov 2017 17:38:35 -0800 (PST)
 MIME-Version: 1.0
-In-Reply-To: <6c10d513-d9f2-ccb8-c81d-47e66e457192@gmail.com>
-Cc: "yocto@yoctoproject.org" <yocto@yoctoproject.org>,
-	OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 00/15] create meta-installer layer
+Received: by 10.100.159.15 with HTTP; Sun, 26 Nov 2017 17:38:05 -0800 (PST)
+In-Reply-To: <1511496049-796-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+References: <1511496049-796-1-git-send-email-huangqy.fnst@cn.fujitsu.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 26 Nov 2017 17:38:05 -0800
+Message-ID: <CAMKF1sqJUOC-Uw4vACzqwV4WPg5CA3hJ4_sk0nV5TbS2+K=Rrw@mail.gmail.com>
+To: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] quagga: 1.2.1 -> 1.2.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -41,23 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 25 Nov 2017 08:55:51 -0000
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Mon, 27 Nov 2017 01:38:34 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 2017年11月25日 03:34, akuster808 wrote:
+On Thu, Nov 23, 2017 at 8:00 PM, Huang Qiyu <huangqy.fnst@cn.fujitsu.com> wrote:
+> Update quagga from 1.2.1 to 1.2.2
 >
-> These are sitting in the meta-openembedded patch queue. Did I miss the 
-> reject request?
+
+I dont see deleting 1.2.1 recipes here. Is that a separate patch ? if
+so please squash and resend.
+
+> Signed-off-by: Huang Qiyu <huangqy.fnst@cn.fujitsu.com>
+> ---
+>  meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb | 4 ++++
+>  1 file changed, 4 insertions(+)
+>  create mode 100644 meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
 >
-> - armin
-
-I marked them as `rejected' in OE's patch work, I have applied to submit
-
-meta-anaconda to yocto as a standalone repository.
-
-
-//Hongxu
-
+> diff --git a/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb b/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
+> new file mode 100644
+> index 0000000..653f46b
+> --- /dev/null
+> +++ b/meta-networking/recipes-protocols/quagga/quagga_1.2.2.bb
+> @@ -0,0 +1,4 @@
+> +require quagga.inc
+> +
+> +SRC_URI[md5sum] = "e84be2938c26c0c872792090f1a6a866"
+> +SRC_URI[sha256sum] = "522e22f2beee64e3f0c2cde3d0155f3b8103f4f6fc8abef92cb40bc3a4cc2931"
+> --
+> 2.7.4
+>
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
