@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id D18196FFCD
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 2BC4378259
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Nov 2017 21:56:06 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id r39so41120872qtr.13
+	Mon, 27 Nov 2017 22:27:33 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id u42so41215209qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Nov 2017 13:56:08 -0800 (PST)
+	Mon, 27 Nov 2017 14:27:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=inJTIv/aWU7ixBZ5y6g9XnHsezdFNKyP7N1msr2SVg8=;
-	b=GhVaasw4O08hqTezV/ERQSSHWpsxpycwqZ9LMwpVMCt8haKsiE3R/K/jHnfh3zLtAT
-	t+wclIvQkO7YlHZJKkSqpXevShQod2QPwHiy1CZmheG1M9j3T/i3Hc+DFzKJn6AhVae7
-	/jIcw1xDQtjVd1FdtzX+4oHYxfuQ0d140rj2f50pYx7MIlwzIO0zaxMdEZTUi7/DJpy8
-	uuds2ROU9qCAaqbrDsfViPD9YtKRy4s+DA93dP8W0q4Lyf8mQ6NKSJA5pgmGzOuG5Wji
-	qeMcl3s1Qxgu1XFJVFfeHxo7iVSbslTME7aNnOUCCEnswTzMiPbJsm93ulLD443APVn8
-	b87Q==
-X-Gm-Message-State: AJaThX73oJd5Y1UdFnXgaSCLOHZbyerlyfF82XnFP2w+ORaEyF51v5FZ
-	wpres2esSIvTPRXeFpaXHgmGtYfc
-X-Google-Smtp-Source: AGs4zMZ3gtkZOMIYUzXeoyAm8ySDJJUTEBZx02ad6H6flVcHKqESdPv6YapET2QfTk7RdZbcmQPjIA==
-X-Received: by 10.200.26.171 with SMTP id x40mr39349434qtj.43.1511819767413;
-	Mon, 27 Nov 2017 13:56:07 -0800 (PST)
+	bh=7zWbDWfwOsYbS24v5I4E8wES+dzlOILuwMgHPJNbuRc=;
+	b=nOUrMb5pWN4xSxuYOdpaQixb9ivK0/dVD+GCFS9/uZxviu9vcFp2nmEUdf06YMCHSG
+	MfvWrohXZCThj4CrfokMBqmHnPZuQq3jy0ufSY8En3TzyJWtId+IDrqtakTNzISOPU0L
+	5XOvP0MME1ggCgIkNzWsOFSDzqCDxJMEs5kBWsmqaK2Qj0N1MnbWA7eBXjrE6RaNhZC9
+	3OJD939JzhZEANiwt46j1zmGzzjmBsBrgqMTYTqI32tMRdiGHs1Ys4TDvVTB6EcD4DjL
+	BS4eFJShNd8A7pImw0170LRxsV45UorDmJTg9mMihPkpEL4Lt8zrjKm1VXPml0lHTRKH
+	mPsQ==
+X-Gm-Message-State: AJaThX40XM5d7dG5xe5W2dethJ8kjGbrm3zLWs9Y3HI4gomCjJszAzVq
+	GX3fXh4eq0Zod1q+9X2Cs4ideq7O
+X-Google-Smtp-Source: AGs4zMa5wV5wf+cWDbQ4qEnw+GdBK3RvAze1oDHaEiH05uS9n+zm1lToDcGQxwtPezpFmB3Y3KxBOA==
+X-Received: by 10.200.34.239 with SMTP id g44mr64496748qta.11.1511821654926;
+	Mon, 27 Nov 2017 14:27:34 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	k1sm17867034qtf.11.2017.11.27.13.56.06
+	s27sm14878623qtj.42.2017.11.27.14.27.34
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 Nov 2017 13:56:06 -0800 (PST)
+	Mon, 27 Nov 2017 14:27:34 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Nov 2017 16:55:53 -0500
-Message-Id: <1511819753-30312-1-git-send-email-derek@asterius.io>
+Date: Mon, 27 Nov 2017 17:27:24 -0500
+Message-Id: <1511821644-30673-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][rocko][PATCH] python-cryptography: add -pthread to LD_FLAGS
+Subject: [meta-oe][PATCH] dos2unix: update to version 7.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,38 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Nov 2017 21:56:07 -0000
-
-The OpenSSL bindings require pthread to avoid runtime issues that end in stack traces:
-
-File "/usr/lib/python2.7/site-packages/OpenSSL/__init__.py", line 8, in <module>
-    from OpenSSL import crypto, SSL
-  File "/usr/lib/python2.7/site-packages/OpenSSL/crypto.py", line 16, in <module>
-    from OpenSSL._util import (
-  File "/usr/lib/python2.7/site-packages/OpenSSL/_util.py", line 6, in <module>
-    from cryptography.hazmat.bindings.openssl.binding import Binding
-  File "/usr/lib/python2.7/site-packages/cryptography/hazmat/bindings/openssl/binding.py", line 13, in <module>
-    from cryptography.hazmat.bindings._openssl import ffi, lib
-ImportError: /usr/lib/python2.7/site-packages/cryptography/hazmat/bindings/_openssl.so: undefined symbol: pthread_atfork
-
-[YOCTO #12339]
+X-List-Received-Date: Mon, 27 Nov 2017 22:27:34 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-cryptography.inc | 2 ++
- 1 file changed, 2 insertions(+)
+ .../recipes-support/dos2unix/{dos2unix_7.3.4.bb => dos2unix_7.4.0.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-support/dos2unix/{dos2unix_7.3.4.bb => dos2unix_7.4.0.bb} (93%)
 
-diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
-index a4d1bbb..87ff16c 100644
---- a/meta-python/recipes-devtools/python/python-cryptography.inc
-+++ b/meta-python/recipes-devtools/python/python-cryptography.inc
-@@ -55,4 +55,6 @@ FILES_${PN}-dbg += " \
-     ${libdir}/${PYTHON_PN}2.7/site-packages/${SRCNAME}/hazmat/bindings/.debug \
- "
+diff --git a/meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb b/meta-oe/recipes-support/dos2unix/dos2unix_7.4.0.bb
+similarity index 93%
+rename from meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb
+rename to meta-oe/recipes-support/dos2unix/dos2unix_7.4.0.bb
+index abf7d1c..8d3c578 100644
+--- a/meta-oe/recipes-support/dos2unix/dos2unix_7.3.4.bb
++++ b/meta-oe/recipes-support/dos2unix/dos2unix_7.4.0.bb
+@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://COPYING.txt;md5=1b78fca784db24f4a40e30b300787f3f"
  
-+LDFLAGS_append = " -pthread"
-+
- BBCLASSEXTEND = "native nativesdk"
+ SRC_URI = "git://git.code.sf.net/p/dos2unix/dos2unix"
+ 
+-# Release 7.3.4
+-SRCREV = "8381ba4e1c4cd5ce98ebd9c24726d51cb203cde0"
++# Release 7.4.0
++SRCREV = "1182533bde3c1fe65be2ead465e87671faa2c027"
+ 
+ S = "${WORKDIR}/git/dos2unix"
+ 
 -- 
 2.7.4
 
