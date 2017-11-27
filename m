@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 4552D7830D
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D18196FFCD
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Nov 2017 21:51:48 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id v137so34494491qkb.1
+	Mon, 27 Nov 2017 21:56:06 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id r39so41120872qtr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 27 Nov 2017 13:51:50 -0800 (PST)
+	Mon, 27 Nov 2017 13:56:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Vg2sFGx9nHTANUGOb5MITK9gmVRphDtp9W5IscUszIQ=;
-	b=Tzouc57aGVAZAyM8CbD1jgWjNhFYjHikQapaVWnfp1z7J8gm31MDQJwVqMY9/21nrd
-	VmdJ2ExXJxTYxEKQKhPnWdREXoLmfBvZ2Ywia20aOX8ic6QVgQhFnw+pSo9hscRoXPk7
-	X6ZXLtt7WCGQqMBV9L9M4Vj0YMx+s7qsEyV68yKOThKX7ZC+9J2Vh6BoeOOz3RecMT3M
-	dxZ9WAaIyulBVz5RAb30gZJW89POLPXN2T3DBvmOdmqG28LU389ecb0VijnEnNugI8t6
-	G2ws2Rtd8t/H1hccEDXF8h9bZVO16H+YYJtA02Z13q1i9Dtp2L3NcnN7qN356ad5IexZ
-	UalQ==
-X-Gm-Message-State: AJaThX7Z+NgePSb0DeHSXFXHxCYtoMMuEDsR/+qI08x6hkguxjFW1BIM
-	uwAxg0WB+KizuNBaCfFJ2WSZL49a
-X-Google-Smtp-Source: AGs4zMZQOXd/mNH8+S42MX09mhZUnp1pq1vf4TD9PYDgrsskczch4Mx3O84keZH4kz7h8EBRhS+qeA==
-X-Received: by 10.55.33.13 with SMTP id h13mr61551614qkh.176.1511819509741;
-	Mon, 27 Nov 2017 13:51:49 -0800 (PST)
+	bh=inJTIv/aWU7ixBZ5y6g9XnHsezdFNKyP7N1msr2SVg8=;
+	b=GhVaasw4O08hqTezV/ERQSSHWpsxpycwqZ9LMwpVMCt8haKsiE3R/K/jHnfh3zLtAT
+	t+wclIvQkO7YlHZJKkSqpXevShQod2QPwHiy1CZmheG1M9j3T/i3Hc+DFzKJn6AhVae7
+	/jIcw1xDQtjVd1FdtzX+4oHYxfuQ0d140rj2f50pYx7MIlwzIO0zaxMdEZTUi7/DJpy8
+	uuds2ROU9qCAaqbrDsfViPD9YtKRy4s+DA93dP8W0q4Lyf8mQ6NKSJA5pgmGzOuG5Wji
+	qeMcl3s1Qxgu1XFJVFfeHxo7iVSbslTME7aNnOUCCEnswTzMiPbJsm93ulLD443APVn8
+	b87Q==
+X-Gm-Message-State: AJaThX73oJd5Y1UdFnXgaSCLOHZbyerlyfF82XnFP2w+ORaEyF51v5FZ
+	wpres2esSIvTPRXeFpaXHgmGtYfc
+X-Google-Smtp-Source: AGs4zMZ3gtkZOMIYUzXeoyAm8ySDJJUTEBZx02ad6H6flVcHKqESdPv6YapET2QfTk7RdZbcmQPjIA==
+X-Received: by 10.200.26.171 with SMTP id x40mr39349434qtj.43.1511819767413;
+	Mon, 27 Nov 2017 13:56:07 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	t188sm441830qkf.69.2017.11.27.13.51.49
+	k1sm17867034qtf.11.2017.11.27.13.56.06
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 27 Nov 2017 13:51:49 -0800 (PST)
+	Mon, 27 Nov 2017 13:56:06 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 27 Nov 2017 16:51:36 -0500
-Message-Id: <1511819496-28013-1-git-send-email-derek@asterius.io>
+Date: Mon, 27 Nov 2017 16:55:53 -0500
+Message-Id: <1511819753-30312-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-cryptography: add -pthread to LD_FLAGS
+Subject: [meta-python][rocko][PATCH] python-cryptography: add -pthread to LD_FLAGS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,7 +45,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 27 Nov 2017 21:51:49 -0000
+X-List-Received-Date: Mon, 27 Nov 2017 21:56:07 -0000
 
 The OpenSSL bindings require pthread to avoid runtime issues that end in stack traces:
 
@@ -67,7 +67,7 @@ Signed-off-by: Derek Straka <derek@asterius.io>
  1 file changed, 2 insertions(+)
 
 diff --git a/meta-python/recipes-devtools/python/python-cryptography.inc b/meta-python/recipes-devtools/python/python-cryptography.inc
-index c21c59d..dd71fe0 100644
+index a4d1bbb..87ff16c 100644
 --- a/meta-python/recipes-devtools/python/python-cryptography.inc
 +++ b/meta-python/recipes-devtools/python/python-cryptography.inc
 @@ -55,4 +55,6 @@ FILES_${PN}-dbg += " \
