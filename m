@@ -1,51 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f169.google.com (mail-yb0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id B4028782A9
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id D00F4601D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Nov 2017 08:34:20 +0000 (UTC)
-Received: by mail-yb0-f169.google.com with SMTP id g2so8139470ybb.7
+	Tue, 28 Nov 2017 11:03:55 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30514616"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 28 Nov 2017 19:03:54 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 6A34A489C472
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Nov 2017 00:34:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=xFsBywSRxcRsRZoJob0F0rs/E//FccpOu3xfmCHpw2c=;
-	b=rVgTXytnASJ3JpddnvcRbVRWpSuDtJhMkXZOAjBugtffr5/l4L5/G4kh00fDqjjOVG
-	ci5JoOP6Li76tM8YBtc20BXuvfe7PRP1jXQqE0T2/EZFkdHXzBACqA0Lsgg6Uzpva2rf
-	J7TVHQtnw9BWeYdDVC8yiW68fhAv5SJygL/qB4DZQcE5WqbZBpc/A2f5ddkOLbIbUY6H
-	N4mol1Yl1BnV+GsADqv9YYFrtox/pG10QiU6Gjvdk73NmNGVWzznojd0Vax39ns2DfuZ
-	YdUniPk3iHyHOhjD4qUHnAIoy5U++8Q3Fvkw4olpuY2rSmQ8aeBJZ56AWpbYgC5lyqeW
-	Q6mQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=xFsBywSRxcRsRZoJob0F0rs/E//FccpOu3xfmCHpw2c=;
-	b=bMxc+RaHu0bezYyRroBnPReO2+zin/2KGoPeW4KLggURfKoCKdaHGQYGUxgJE0r5Oz
-	pAf1jaR+niipgsiES1R7JX0T1fKjYlfiUMVL+YgQlB0W+4Jk/d7yAd8VqYHtH1oJ1wi4
-	Jz6cMtdOnPIDria1eZSXa/KnexeRRpHOGpt1drynPn0smAXJ/Tf/1JFPh7KTORT22mEj
-	o8SzTokfYq+NrzvSULa7eYjbyba+RsGULtxCplFdQ26sixeKmTe0GE4g5g/qENs9m2Ih
-	ebmsl0iGJ8Xx+urlad22Ys3wPqiiJCbSbyd1PGoZJ2xhftzCVtRpYMzP9tJ1GhBP5wSx
-	19tg==
-X-Gm-Message-State: AJaThX7K463IK5Ufpwr8Eg5kXc6AAtoGl0XXFvSZGq1S1CW0iODbPKB/
-	xGp6M3wlH4sldyFubYtPwsONIqeII8ArKx1k3u8=
-X-Google-Smtp-Source: AGs4zMYh71+dWRJz5CopslCWtDJnsw4wPkB0S6RpB3ryeiqt3X+Wf7yleY+CUayPVaa8yUp6L+sc1XJRUoRuQsaQpr0=
-X-Received: by 10.37.124.193 with SMTP id x184mr4064692ybc.219.1511858061712; 
-	Tue, 28 Nov 2017 00:34:21 -0800 (PST)
+	Tue, 28 Nov 2017 19:03:52 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.116) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Tue, 28 Nov 2017 19:03:51 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 28 Nov 2017 19:03:26 +0800
+Message-ID: <1511867006-5638-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Received: by 10.37.98.21 with HTTP; Tue, 28 Nov 2017 00:34:21 -0800 (PST)
-In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF732EEA3E0F@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1511511021-50020-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CALbNGRQZzzwRJgGUR=Cx_KY=SahwuRiYGFHv2Zeq4-PpT2BF=g@mail.gmail.com>
-	<33D4DBCAC5F2D74E96B07F6E7632BF732EEA3E0F@G08CNEXMBPEKD01.g08.fujitsu.local>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 28 Nov 2017 09:34:21 +0100
-Message-ID: <CALbNGRR47Sp734uF6B-w7H3Dx1Qa0wW2H-tgdoKSCxz5ngwKGA@mail.gmail.com>
-To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] xrdp: new recipe
+X-Originating-IP: [10.167.225.116]
+X-yoursite-MailScanner-ID: 6A34A489C472.A5740
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH v2] xrdp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,23 +37,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 28 Nov 2017 08:34:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 28 Nov 2017 11:03:56 -0000
+Content-Type: text/plain
 
-On Tue, Nov 28, 2017 at 3:34 AM, Zheng, Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-wrote:
-Hi Ruoqin,
+Add a new recipe xrdp_0.9.4.bb.
 
-> Hi Andreas:
->
->     Do you mean use git SRC_URI and SRCREV instead of tarballs?
->
-Yes please. There were some discussions - the last I found is at [1]
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
 
-[1]
-http://lists.openembedded.org/pipermail/openembedded-core/2017-September/142519.html
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+new file mode 100644
+index 0000000..62311ad
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -0,0 +1,15 @@
++DESCRIPTION = "An open source remote desktop protocol(rdp) server."
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
++"
++
++DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
++
++SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
++
++SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
++
++PV = "0.9.4+git${SRCPV}"
++
++S = "${WORKDIR}/git"
+-- 
+2.7.4
 
-Regards
 
-Andreas
+
 
