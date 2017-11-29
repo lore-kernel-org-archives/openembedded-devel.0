@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A02926060F
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DBE871A60
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 22:34:16 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id b184so6514522qkc.13
+	Wed, 29 Nov 2017 22:45:27 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id u42so6493501qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 14:34:18 -0800 (PST)
+	Wed, 29 Nov 2017 14:45:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=QvOViMjDPDF6zTuwQsqzDJTCY7bPS/3Mra1dusQmsu8=;
-	b=OtXqYBrTYktwC4jtgMFotXo+cALM8kVEkWPO+dEIvgjnUMAax/e23BS3LwgQ/WdocC
-	TsrjZ58S6ajq/s5pwX4PyeH3UryTKkVSSAeRFcJ84KsVb0DFjtNgZ7zRQDKNDbY7fkkw
-	u8qIPKcphfi+WJSL0TqNjZylbgH4p3SUTvVkVUiPg/rMUO7+HlSyG0Yq6RHFaDmfLWNB
-	kNsBCdZTa6JLJgc6YCv9ENm6LaCKBWd4eeChO3CXa6chiJz/eGWxy0tPnkJUc/FSyddL
-	90t1pzXz1QXVLyZHPmlaiB7NYosB0OvjHGHNks0UhxwPS03DJMPUaRvvxrcHz4YxlcbX
-	cw/g==
-X-Gm-Message-State: AKGB3mLaUa/QHfqkt9xhvj94lSStzrTIHWqFanzSkJ909WAv8XVNutGP
-	Vx9JUL/XG/sWr5pBdnI7exLEice+
-X-Google-Smtp-Source: AGs4zMZPJr7UHG8y4YZC3kGTQBII2IcY9xfspFOqi2abH89+nbH5/tX/xzB7Z3X7tZY/ICJrj0sXbQ==
-X-Received: by 10.55.3.130 with SMTP id 124mr620305qkd.197.1511994857440;
-	Wed, 29 Nov 2017 14:34:17 -0800 (PST)
+	bh=I8KU6zAtlTl3sP/Vzu//t1iwUhgMPspw3qhHq/aIgMk=;
+	b=OfBkym/Kz7DKY2k5W1yVp/erbh8EIVIUZ6AGog7pi7Jmwy476I+NU/1O1iKS54ta8W
+	VcznW9GZrGgsbLSuMMGqDvYDGxQGwgoI1NkQvEQvaJ6MCY1GgobZYDY3nHqk+6rvRumf
+	myxJsg+P3cDVJuy0/Kz39FS/Fkr6mxCAVZZpJ8iw1iHqFGki1YMm+02qA46ngGsOzHIB
+	T48n99Q4Wymw0v9YrXkCu2QB6IaBxuDiC1rPKBm6xBxRf34FCqkFExZ976mvJlm+JuTw
+	WHlNf6PUgjMjrGjZTe3ch4qWjM+WEXo5cd58c56jGP09T4hrYVihfS8IbT9PdqfLYjWz
+	cgCg==
+X-Gm-Message-State: AKGB3mKTaIFyDmkXGCeZQ5tv6xpDtkYwfEw7GHCzZiFQHgmZp2Ogdall
+	5P0OI0Du3vQ8Nd6ew2AF4gy27uvd
+X-Google-Smtp-Source: AGs4zMbfauJ5eNqE0uki70EdevoEMRcNA5i6Uf6rptkKBl3D45GFhisgD+blAJKxOri29vMZ8kSaKA==
+X-Received: by 10.200.49.173 with SMTP id h42mr736356qte.147.1511995528409;
+	Wed, 29 Nov 2017 14:45:28 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	e96sm1930094qtb.84.2017.11.29.14.34.16
+	j129sm1939341qke.11.2017.11.29.14.45.27
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 29 Nov 2017 14:34:16 -0800 (PST)
+	Wed, 29 Nov 2017 14:45:28 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Nov 2017 17:34:11 -0500
-Message-Id: <1511994851-25043-1-git-send-email-derek@asterius.io>
+Date: Wed, 29 Nov 2017 17:45:21 -0500
+Message-Id: <1511995521-8415-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-bcrypt: correct the RDEPENDS to work on a minimal python install
+Subject: [meta-python][PATCH] python-cffi: correct the RDEPENDS to work on a minimal python install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +45,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 22:34:16 -0000
+X-List-Received-Date: Wed, 29 Nov 2017 22:45:28 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-bcrypt.inc | 3 +++
+ meta-python/recipes-devtools/python/python-cffi.inc | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-bcrypt.inc b/meta-python/recipes-devtools/python/python-bcrypt.inc
-index 1ea62a3..3e6fa7a 100644
---- a/meta-python/recipes-devtools/python/python-bcrypt.inc
-+++ b/meta-python/recipes-devtools/python/python-bcrypt.inc
-@@ -11,5 +11,8 @@ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-cffi.inc b/meta-python/recipes-devtools/python/python-cffi.inc
+index 8dcdb63..78addb6 100644
+--- a/meta-python/recipes-devtools/python/python-cffi.inc
++++ b/meta-python/recipes-devtools/python/python-cffi.inc
+@@ -8,7 +8,10 @@ SRC_URI[md5sum] = "a731487324b501c8295221b629d3f5f3"
+ SRC_URI[sha256sum] = "ab87dd91c0c4073758d07334c1e5f712ce8fe48f007b86f8238773963ee700a6"
  
- RDEPENDS_${PN}_class-target += "\
-     ${PYTHON_PN}-cffi \
+ RDEPENDS_${PN}_class-target = " \
 +    ${PYTHON_PN}-ctypes \
+     ${PYTHON_PN}-io \
 +    ${PYTHON_PN}-shell \
-     ${PYTHON_PN}-six \
 +    ${PYTHON_PN}-subprocess \
  "
+ 
+ BBCLASSEXTEND = "native nativesdk"
 -- 
 2.7.4
 
