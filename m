@@ -1,38 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 7AAD077D16
+Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
+	[209.85.216.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 9C18677E76
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 18:31:09 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id w10so5562121qtb.10
+	Wed, 29 Nov 2017 18:59:55 +0000 (UTC)
+Received: by mail-qt0-f196.google.com with SMTP id j5so5658197qth.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 10:31:10 -0800 (PST)
+	Wed, 29 Nov 2017 10:59:57 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=wp/CYmCJTGk2VrrBTI2vW6AihK+7TYpBpwP3eOBL5cg=;
-	b=IVN/ysXtaL2k9am/S1QQL/bnrbuG4CqgqLo72Zoi4zjVjqH+thBcukGF97Mu2UE9P8
-	6nZ9TumV/8/VhxE/ma/Ecl6QEGS1GNgHn+WAIpU3ldOUtT0XcczffID+igVepZBd4ikE
-	YmjyGhsCbOSRL8jlldo3hJK8QSzc8BiuouJ/xDEueVpY7eN9A8CWAp+xNd6BKwk7T8jC
-	sh4ItBLvpFLgjeX1D/fg7eKV7ucvqd0ViIlVsjIBdQ5wheEr5nlosxFs9N/YJf7dNgoD
-	nK+r5afNXLyIsUvEv7OOLPeRbJycpQP2A7VIUd2hR1lUQURo5EAy3J8amuMWP9j7S6xo
-	HfQw==
-X-Gm-Message-State: AJaThX6319kEDOfZrnXvt6cBzqjcykL1QuCLTlJ/GqzjuVuKk5ybIvD1
-	ELg5c1cZv0qF9/n5kfpQAHKJnRYW
-X-Google-Smtp-Source: AGs4zMaRg5vS8g3Y4N8i/kNOYHDJbiK1tbxaI0+DR82TRUTjAA/A+T8KBIg/ktYmUEQS7kDoUXbsxQ==
-X-Received: by 10.200.48.68 with SMTP id g4mr5880367qte.313.1511980270189;
-	Wed, 29 Nov 2017 10:31:10 -0800 (PST)
+	bh=E0eshiKYu2mwzxkNGVVAGBzyoBEP4QLbZszh9F2a4Rw=;
+	b=EbMf+dtSv09HPnb8KJLffVNjFPI087RKggmwB0aymW6C0DXZnv+Wm9ffL1wTyMp3Cj
+	py92j9XzNVL/8DAgeuaJQtX1BJoP6D0wlNcGHe4eVZSLWOdvKHgDIkxajUqQTIUHzHih
+	b2sk/CCjXPG+IKEjE0/mrVIdOByK69X3ZYgqfnYP/bTKAmx6nhLLTJDwl/08W9O/3dnq
+	0PqX/piORdlZaXrbsC1Ah8zDv7tfbhM8VdpY8ZbFoc+0FTNY73sKCi0g8/UEnACDnMKF
+	b62kWq3/4NoxlyJdtHw9oDV/oBXNqzraFOmyR7DDw1gtWbPKwG6T15wZtWidnllPmnS5
+	oueQ==
+X-Gm-Message-State: AJaThX5enz30XTCoX6jp7/aS5M7Dp2o+qkCg2BcCTH5IGGyijBX5n2Ab
+	Dxgnx94WebZH3HggsQiY+FlKxgee
+X-Google-Smtp-Source: AGs4zMau1v0Ep6PXpAbdJP6Tsc+ba4vHT9pVc7h1zNSoORneiKd0avZNaM9VZIihY9p6WQINSeh69Q==
+X-Received: by 10.237.54.227 with SMTP id f90mr6120995qtb.121.1511981996501;
+	Wed, 29 Nov 2017 10:59:56 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	n94sm1723663qkh.50.2017.11.29.10.31.09
+	by smtp.gmail.com with ESMTPSA id y9sm1655799qkj.85.2017.11.29.10.59.55
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 29 Nov 2017 10:31:09 -0800 (PST)
+	Wed, 29 Nov 2017 10:59:55 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Nov 2017 13:31:04 -0500
-Message-Id: <1511980264-21640-1-git-send-email-derek@asterius.io>
+Date: Wed, 29 Nov 2017 13:59:48 -0500
+Message-Id: <1511981988-9478-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-langtable: update RDEPENDS to work on minimal python install
+Subject: [meta-python][PATCH] python-simplejson: add the tests into their own package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,30 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 18:31:09 -0000
+X-List-Received-Date: Wed, 29 Nov 2017 18:59:55 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python3-langtable_0.0.37.bb        | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ meta-python/recipes-devtools/python/python-simplejson.inc | 7 +++++++
+ 1 file changed, 7 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-index 362ca1a..4a3b2a9 100644
---- a/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-+++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-@@ -20,3 +20,13 @@ DISTUTILS_INSTALL_ARGS = "--prefix=${D}/${prefix} \
-     --install-data=${D}/${datadir}/langtable"
- 
- FILES_${PN} += "${datadir}/*"
+diff --git a/meta-python/recipes-devtools/python/python-simplejson.inc b/meta-python/recipes-devtools/python/python-simplejson.inc
+index 7f436f2..50524f3 100644
+--- a/meta-python/recipes-devtools/python/python-simplejson.inc
++++ b/meta-python/recipes-devtools/python/python-simplejson.inc
+@@ -15,3 +15,10 @@ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-numbers \
+ "
 +
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-compression \
-+    ${PYTHON_PN}-doctest \
-+    ${PYTHON_PN}-enum \
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-signal \
-+    ${PYTHON_PN}-xml \
++PACKAGES =+ "${PN}-tests"
++RDEPENDS_${PN}-tests = "${PN} ${PYTHON_PN}-unittest"
++FILES_${PN}-tests+= " \
++    ${PYTHON_SITEPACKAGES_DIR}/simplejson/tests \
++    ${PYTHON_SITEPACKAGES_DIR}/simplejson/tool.py* \
 +"
 -- 
 2.7.4
