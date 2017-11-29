@@ -1,47 +1,37 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 1F06965D35
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 1D37F6612D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 09:13:11 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id i11so4393293wmf.4
+	Wed, 29 Nov 2017 17:57:48 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id j5so5404345qth.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 01:13:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=BaGo9cSeuVbuXWMqsaP20MZAtCbLISK4BasUQtXm1Lg=;
-	b=hV4PnKJI6K5/tWlOL5sZFqJnu9Qc5rC89WY7twJRyTcZRdaeHwHyR0fI1quWnpjtc4
-	BGeoQYB+zUAgWbpwo0YA2pqH5RvN6yJcPhM1f4ZtIfZzg/NA9W8id64+C3DTQrHllPNk
-	YnPzcrfqgjT5JPoZNGvotAvag9n3JWWSjBxe+lZ/WUrGh4TSmm57Df1vwJlDZBePi7yp
-	2zZPjfS4fvMNPmvnnkQvMHmvnlQWsHwsUzNH+iShcpDgQGAp5aYr/Dm9hc9oJ2VH1vne
-	q90Y510Re8rAWijust8OqORUGNC1e/bzE+rmNAFr78itMqQlz4uF22hlNBb8AqV60MpT
-	xWxQ==
+	Wed, 29 Nov 2017 09:57:50 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=BaGo9cSeuVbuXWMqsaP20MZAtCbLISK4BasUQtXm1Lg=;
-	b=QKgJxSnK45QSP7eOktyuee1cOQMtR8GFOENm46V86x38BoTLV7zVFI8yAz2Az2LL/5
-	15oKHt91vCii7IhiBCV76CCka+/bswWPO8KF1UHoiOYTJA4/6hd0jd+Vc+TP5w9zgyGM
-	jj3NPAOKfnpO2UwHFAt/EGa/+jh/twU3EA6i6iAq9/jkq3ZuhCzU/VzoBslF39LuIkqN
-	SiXlovAUuNIxy+5CiMgvQttTTIyUOJtk0On7fJVJP0vDU7MFjiDVY3jkq3jVKEu89R7H
-	6D7e2VSs4rxQ/Enhrt8HjwOByRe10bmz7VU0jhMCTXGsBSUjN95bNqNWMPf0PpB5RwQh
-	iWpg==
-X-Gm-Message-State: AJaThX6+jCTghewdK5zpcYfxu+m3N6z3lG4jZjM1VK+1D2QQQb44BkNx
-	jkwNJAJCeMS7oVcJO2aiIPOA+tRwXmBFehvaAdI=
-X-Google-Smtp-Source: AGs4zMZCT5N4osenf6b4jinvyDiNcVK9NXNQed0pvkkg3wo1UdF1LtGxYh5ITqWHBUfpsqI80tj2mgaZlH+0UwUUSCo=
-X-Received: by 10.28.173.199 with SMTP id w190mr1892023wme.69.1511946792867;
-	Wed, 29 Nov 2017 01:13:12 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.122.19 with HTTP; Wed, 29 Nov 2017 01:13:12 -0800 (PST)
-In-Reply-To: <1511925300-19926-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-References: <1511925300-19926-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 29 Nov 2017 10:13:12 +0100
-Message-ID: <CA+chaQejZPaMESxLo2do+ik0SCc72tyzqo2bKXSJGokCHNF0Sg@mail.gmail.com>
-To: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v3] xrdp: new recipe
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=dwm11aQQHtOmtbVEKWVqpcTJF2I3As+36LTXNQpyCSY=;
+	b=fwSv0Ee0J49bD4kW03a5AAgmnQ6dLWfslqHrX3xA9Q0ogNAeUY43rtZr8IEDl5neyL
+	uHHXMwdVx1h2WQzSJsxm9jH/GIKouisfUFBwoo3RrWaF98XcyuoeLkYaGu7r7vsUvM0w
+	hqHRDYva0dSNXnI7xkeQlY1WnjCk4n8jZ2UuXsDUS4ocCm+hlmrTVoAtbKoDd5zTwQxm
+	ZaQKNDlZHaZD3YUDfYYxle0O9VvsaCu7eJmc18a9NGTF1bFDN1RiVFLffcnqaj6zU8a6
+	zRP1DAfWJZvND18DOYCS4EeTTaaX3APeOxgYjR9aEQM3qvlYGg3Yazmpd6am+QkdgOU+
+	GhTQ==
+X-Gm-Message-State: AJaThX4PKhYEOAPZ8stOQo1XRYDJ+F/fpNocrsqD0uAI+1Mu9T/ELSNQ
+	daN3AkcD8OAXK2/68bRAbhSO8kAK
+X-Google-Smtp-Source: AGs4zMaJ1r+eom6XN5KQaveW483vqKhPO1Or3TviyPfnoe9Wat6z4h0yslxb88CJ9kMlJKtv8zgJYQ==
+X-Received: by 10.200.45.215 with SMTP id q23mr5791723qta.57.1511978269631;
+	Wed, 29 Nov 2017 09:57:49 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id z7sm1616209qtz.40.2017.11.29.09.57.48
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 29 Nov 2017 09:57:48 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 29 Nov 2017 12:57:41 -0500
+Message-Id: <1511978261-7116-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python3-ntplib: add the correct RDEPENDS for the package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,56 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 09:13:12 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 29 Nov 2017 17:57:49 -0000
 
-You need to inherit distro_features_check as well for
-REQUIRED_DISTRO_FEATURES to work.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-On Wed, Nov 29, 2017 at 4:15 AM, zhengrq <zhengrq.fnst@cn.fujitsu.com>
-wrote:
+diff --git a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+index 35440bc..080372c 100644
+--- a/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
++++ b/meta-python/recipes-devtools/python/python3-ntplib_0.3.3.bb
+@@ -10,3 +10,5 @@ SRC_URI[sha256sum] = "c4621b64d50be9461d9bd9a71ba0b4af06fbbf818bbd483752d95c1a4e
+ S = "${WORKDIR}/${SRCNAME}-${PV}"
+ 
+ inherit setuptools3 python3native pypi
++
++RDEPENDS_${PN} += "${PYTHON_PN}-datetime ${PYTHON_PN}-selectors ${PYTHON_PN}-enum"
+-- 
+2.7.4
 
-> Add a new recipe xrdp_0.9.4.bb.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 17 +++++++++++++++++
->  1 file changed, 17 insertions(+)
->  create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
->
-> diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> new file mode 100644
-> index 0000000..4164936
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> @@ -0,0 +1,17 @@
-> +SUMMARY = "An open source remote desktop protocol(rdp) server."
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
-> +"
-> +
-> +DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
-> +
-> +SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
-> +
-> +PV = "0.9.4+git${SRCPV}"
-> +
-> +S = "${WORKDIR}/git"
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
