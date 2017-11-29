@@ -1,49 +1,47 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pg0-f47.google.com (mail-pg0-f47.google.com [74.125.83.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 6D7C478200
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id 1F06965D35
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 07:47:31 +0000 (UTC)
-Received: by mail-pg0-f47.google.com with SMTP id w7so1148099pgv.6
+	Wed, 29 Nov 2017 09:13:11 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id i11so4393293wmf.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 28 Nov 2017 23:47:33 -0800 (PST)
+	Wed, 29 Nov 2017 01:13:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-transfer-encoding;
-	bh=Jwz7GiV6MCfC2QcRmGZbHqF/J9H/iD5Eywp9wJ3CSmc=;
-	b=sGT9aiSX75nwOeol+MIAt3v1aWHxoEZbdc4k7Amc5A2F7migmyfdBYpM52ooxOgtaz
-	oM0Pmduq0ZJBGQZUR2SNOkYutdzRrcZdNctEDKFj8mpIwiDdE3HQN9HPYw8Fp0Mq0PXJ
-	7/IxMe5sMrUTA49heQN3iEbAVSI+9lsIyULaJsGbC6uhEEPmscwhqqBNvcLZdQvnc13z
-	ozTJV7Wm3iYtC+oUpSGOsIeXHDMMIcsDT6p18QmmN/vb1Q3G6AnNgCa/gLd9QSQ4tWkt
-	2QUDcW35ORwjRWuZqxfDcjkPeDVPxWIto7NkyrJAwWrCbnuOU2jATp5QtO4oxGID7lo+
-	ktwQ==
+	:cc; bh=BaGo9cSeuVbuXWMqsaP20MZAtCbLISK4BasUQtXm1Lg=;
+	b=hV4PnKJI6K5/tWlOL5sZFqJnu9Qc5rC89WY7twJRyTcZRdaeHwHyR0fI1quWnpjtc4
+	BGeoQYB+zUAgWbpwo0YA2pqH5RvN6yJcPhM1f4ZtIfZzg/NA9W8id64+C3DTQrHllPNk
+	YnPzcrfqgjT5JPoZNGvotAvag9n3JWWSjBxe+lZ/WUrGh4TSmm57Df1vwJlDZBePi7yp
+	2zZPjfS4fvMNPmvnnkQvMHmvnlQWsHwsUzNH+iShcpDgQGAp5aYr/Dm9hc9oJ2VH1vne
+	q90Y510Re8rAWijust8OqORUGNC1e/bzE+rmNAFr78itMqQlz4uF22hlNBb8AqV60MpT
+	xWxQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc:content-transfer-encoding;
-	bh=Jwz7GiV6MCfC2QcRmGZbHqF/J9H/iD5Eywp9wJ3CSmc=;
-	b=IiTk0Jx9JWGkzkt+HUgPZ1fUEVWMRYKBG74jBENhMU4KLtPJpPRNA+oY/cKm3mDzje
-	NDtrRnCalCxyNOgq9086Liotc/tnSfDArLSJSp2oKqIBve47EdU2OknWZNB3cD2y0X2y
-	tc+qG/xlBLq+q0Jmq/o4HdEDKpgREFEHpyvb0WL00+fD0+CzmYSRIM63yBxs/eNkE30X
-	SGlx29am/O7NW2woSmIgtkn/BO6M2lwSIsgf1ogNf1xnv8//YSpDZ4UsRJwyRW2Vjso0
-	kjTYQOaOkTr33ni2WUVrDh4/3sd1s95sf6Z59b88DPwLuqQf1YA+NPdov/1Jc1/8abu+
-	245Q==
-X-Gm-Message-State: AJaThX4jYJaGOuHYkwv+U+6Ir0/2XNC9qWbH28ZUA3oK6XdS8HA7BLtN
-	4omDE/9LUh7J8LXRXv9FbPblb4fIQPtZ2VIKZ24=
-X-Google-Smtp-Source: AGs4zMbGbXX+iOkT3yQxdIeb5vw6xgRyh66NPcgp7jdCnHWs+aK+/iTjqcJ7hZh8tuZUTb59t4oafJW3l+hy+n7kTTA=
-X-Received: by 10.101.74.136 with SMTP id b8mr1948559pgu.341.1511941653309;
-	Tue, 28 Nov 2017 23:47:33 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=BaGo9cSeuVbuXWMqsaP20MZAtCbLISK4BasUQtXm1Lg=;
+	b=QKgJxSnK45QSP7eOktyuee1cOQMtR8GFOENm46V86x38BoTLV7zVFI8yAz2Az2LL/5
+	15oKHt91vCii7IhiBCV76CCka+/bswWPO8KF1UHoiOYTJA4/6hd0jd+Vc+TP5w9zgyGM
+	jj3NPAOKfnpO2UwHFAt/EGa/+jh/twU3EA6i6iAq9/jkq3ZuhCzU/VzoBslF39LuIkqN
+	SiXlovAUuNIxy+5CiMgvQttTTIyUOJtk0On7fJVJP0vDU7MFjiDVY3jkq3jVKEu89R7H
+	6D7e2VSs4rxQ/Enhrt8HjwOByRe10bmz7VU0jhMCTXGsBSUjN95bNqNWMPf0PpB5RwQh
+	iWpg==
+X-Gm-Message-State: AJaThX6+jCTghewdK5zpcYfxu+m3N6z3lG4jZjM1VK+1D2QQQb44BkNx
+	jkwNJAJCeMS7oVcJO2aiIPOA+tRwXmBFehvaAdI=
+X-Google-Smtp-Source: AGs4zMZCT5N4osenf6b4jinvyDiNcVK9NXNQed0pvkkg3wo1UdF1LtGxYh5ITqWHBUfpsqI80tj2mgaZlH+0UwUUSCo=
+X-Received: by 10.28.173.199 with SMTP id w190mr1892023wme.69.1511946792867;
+	Wed, 29 Nov 2017 01:13:12 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.100.159.15 with HTTP; Tue, 28 Nov 2017 23:47:02 -0800 (PST)
-In-Reply-To: <CADNbA1rrAwaRWDFb9HZbw+mTSErnGoeX9A8N6Y6mpp1KXX-HJQ@mail.gmail.com>
-References: <1511798104-16019-1-git-send-email-derek@asterius.io>
-	<5a08d5c2-ca51-49d2-4939-f151035d3d0a@gmail.com>
-	<CADNbA1rrAwaRWDFb9HZbw+mTSErnGoeX9A8N6Y6mpp1KXX-HJQ@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 28 Nov 2017 23:47:02 -0800
-Message-ID: <CAMKF1srR4GS=qk8TRVrZjMJrtDiOyWAdj4Eah6ASx+Et-7sTFQ@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-grpcio: only modify the compiler arguments on the target build
+Received: by 10.28.122.19 with HTTP; Wed, 29 Nov 2017 01:13:12 -0800 (PST)
+In-Reply-To: <1511925300-19926-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+References: <1511925300-19926-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Wed, 29 Nov 2017 10:13:12 +0100
+Message-ID: <CA+chaQejZPaMESxLo2do+ik0SCc72tyzqo2bKXSJGokCHNF0Sg@mail.gmail.com>
+To: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH v3] xrdp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,133 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 07:47:32 -0000
+X-List-Received-Date: Wed, 29 Nov 2017 09:13:12 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Nov 27, 2017 at 11:36 AM, Derek Straka <derek@asterius.io> wrote:
-> Sure.  The change you had originally made removed the -std=3Dc++11
-> (https://patchwork.openembedded.org/patch/142706/ -
-> 2d07918e9cc6e03f8f864605c84290b66b81e998). The -std=3Dc++11 is required t=
-o
-> build native on Ubuntu 16.04 with gcc 5.4.0 since the default mode was
-> -std=3Dgnu++98 for gcc before 6.0.  Is there a standard way to query the =
-build
-> host compiler version and add the -std=3Dc++11?  I can also just drop the
-> -std=3Dgnu99 portion, but I assume you wanted them both removed?
+You need to inherit distro_features_check as well for
+REQUIRED_DISTRO_FEATURES to work.
+
+On Wed, Nov 29, 2017 at 4:15 AM, zhengrq <zhengrq.fnst@cn.fujitsu.com>
+wrote:
+
+> Add a new recipe xrdp_0.9.4.bb.
 >
-
-I think its ok to not apply this patch for native builds.
-
-> On another note, any idea if recipes created with BBCLASSEXTEND =3D "nati=
-ve"
-> are included in the world build?  I'd expect to see a failure here becaus=
-e I
-> believe Martin was using 16.04.
+> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> ---
+>  meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 17 +++++++++++++++++
+>  1 file changed, 17 insertions(+)
+>  create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
 >
-
-If its not in the depchain for target packages its wont be built.
-
-> On Mon, Nov 27, 2017 at 1:14 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>
->>
->>
->> On 11/27/17 7:55 AM, Derek Straka wrote:
->>>
->>> The modification causes issues with the native builds of the package:
->>>
->>> src/core/lib/surface/lame_client.cc: In function =E2=80=98grpc_channel*
->>> grpc_lame_client_channel_create(const char*, grpc_status_code, const
->>> char*)=E2=80=99:
->>> src/core/lib/surface/lame_client.cc:178:3: warning: =E2=80=98auto=E2=80=
-=99 changes
->>> meaning in C++11; please remove it [-Wc++0x-compat]
->>>      auto chand =3D reinterpret_cast<grpc_core::ChannelData
->>> *>(elem->channel_data);
->>>      ^
->>> src/core/lib/surface/lame_client.cc:178:8: error: =E2=80=98chand=E2=80=
-=99 does not name a
->>> type
->>>      auto chand =3D reinterpret_cast<grpc_core::ChannelData
->>> *>(elem->channel_data);
->>>
->>
->> This looks like an option issue for different compiler version on your
->> build host. The patch is trying to paper over it. I think it will be bet=
-ter
->> if we could fix the code to be using right options across different comp=
-iler
->> versions.
->>
->>
->>> Signed-off-by: Derek Straka <derek@asterius.io>
->>> ---
->>>   meta-python/recipes-devtools/python/python-grpcio_1.7.0.bb
->>> | 2 +-
->>>   meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.b=
-b
->>> | 2 --
->>>   meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.=
-bb
->>> | 2 --
->>>   3 files changed, 1 insertion(+), 5 deletions(-)
->>>
->>> diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.7.0.bb
->>> b/meta-python/recipes-devtools/python/python-grpcio_1.7.0.bb
->>> index 3ca7d53..d4d869d 100644
->>> --- a/meta-python/recipes-devtools/python/python-grpcio_1.7.0.bb
->>> +++ b/meta-python/recipes-devtools/python/python-grpcio_1.7.0.bb
->>> @@ -4,7 +4,7 @@ SECTION =3D "devel/python"
->>>     DEPENDS =3D "python-protobuf"
->>>   -SRC_URI +=3D
->>> "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
->>> +SRC_URI_append_class-target =3D
->>> "file://0001-setup.py-Do-not-mix-C-and-C-compiler-options.patch \
->>>              "
->>>   RDEPENDS_${PN} =3D "python-enum34 \
->>>                     python-futures \
->>> diff --git
->>> a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.b=
-b
->>> b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.b=
-b
->>> index 8a15a89..81d61c6 100644
->>> ---
->>> a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.b=
-b
->>> +++
->>> b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.b=
-b
->>> @@ -1,7 +1,5 @@
->>>   require python-pyparted.inc
->>>   -DEPENDS +=3D "python-re"
->>> -
->>>   PV =3D "3.10.7+git${SRCPV}"
->>>     inherit distutils
->>> diff --git
->>> a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.=
-bb
->>> b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.=
-bb
->>> index ff72c2a..4d6f97b 100644
->>> ---
->>> a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.=
-bb
->>> +++
->>> b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.=
-bb
->>> @@ -1,7 +1,5 @@
->>>   require python-pyparted.inc
->>>   -DEPENDS +=3D "python3-re"
->>> -
->>>   PV =3D "3.10.7+git${SRCPV}"
->>>     inherit distutils3
->>>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+> b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+> new file mode 100644
+> index 0000000..4164936
+> --- /dev/null
+> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+> @@ -0,0 +1,17 @@
+> +SUMMARY = "An open source remote desktop protocol(rdp) server."
+> +
+> +LICENSE = "Apache-2.0"
+> +LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
+> +"
+> +
+> +DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
+> +
+> +REQUIRED_DISTRO_FEATURES = "x11"
+> +
+> +SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
+> +
+> +SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
+> +
+> +PV = "0.9.4+git${SRCPV}"
+> +
+> +S = "${WORKDIR}/git"
+> --
+> 2.7.4
 >
+>
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
