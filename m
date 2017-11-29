@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
 	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 222AC6025E
+	by mail.openembedded.org (Postfix) with ESMTP id A331878055
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 22:20:37 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id u184so6512524qkd.6
+	Wed, 29 Nov 2017 22:21:27 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id i130so6521437qke.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 14:20:39 -0800 (PST)
+	Wed, 29 Nov 2017 14:21:29 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=AQroJOfa/ofNEtkbRXOmAF6A4MRuz0XvGf/Nj+vpiRE=;
-	b=kxgpo2HI5n079FinkomTFqpqtHbkrmyCwlA0thHKfQ2HF/3ibXnkFRXLiow6pm2Ss1
-	qy4JN29SHwtRR57jwFK0gh4JapM7oKRz2Qjul65uEWYmpQ7NBwEamXQDulRF+lWdpjXe
-	qeanylvFtYyxTz1VePnpZQVILx5zhIOPYx9222EJANHaayarzRT1gj+p14g7r9aMAFN8
-	mrMJnCZRBYQc1JZ5vySdZdtGMMonSh8gNRnFiRgi9hdS8zTCHwl9ADwmwunWz70/lAx1
-	shVj0iX9t9DCFkvbqrbPqpVK5Hz2eRwyKwxApcRZ8oEUPj8Kcu8JHJ/TLRyCIGB8+HYq
-	gkkA==
-X-Gm-Message-State: AKGB3mKxVRAYotPihegljhhphd/dRXcb09FmOAS7L1mPLFCfFo0I5kIv
-	K9nHd4Uz9u0bhYPB9LihYbV9nFMQ
-X-Google-Smtp-Source: AGs4zMZxmhl7jLcNgRI7k92wJm9XEx6Wo/lw/0eHoGcoOW5qPh7W0TLvguU++vpzVXKxkrbYILI+7g==
-X-Received: by 10.55.119.197 with SMTP id s188mr578890qkc.233.1511994038746;
-	Wed, 29 Nov 2017 14:20:38 -0800 (PST)
+	bh=jJs/fepl5a95IfSn6cwXpzmt4ENsAtAGhC9b5npO1eA=;
+	b=neKSpJ187THs8Zabx0bMcqBkraG2yPNKScA9zXBObgxSrxKVDoFbTVCLA/QXhgJALZ
+	b0SlOYv4nctm+IWgRv0I16u9pmxIj9usqLDhoaLEKd5ApxRjyXkV1a0odfxFWSgYDn+2
+	gMxV6htgf10vdCDZOkYFZrzq7ovUa10tJpxNTw7vyNMxx0se5XFZsEHEggMShjuxEhW5
+	ODpa3Ps3qhXHoHowPtTcCtWHQ75CryC7r717aCUtM/EKEA/EGmSx1irjFVZ6cN/4qLp+
+	P/NxvZXIpme0+oI+jk6Z99HPkxsKUTZDj9fqG7Qr1q/SjPY0bPiyXDzonhgl78QLHfjC
+	l69w==
+X-Gm-Message-State: AKGB3mLAy2YXo0W2TZ0NvD/KEEdJIbAWCM4TmCh+zpyHWnPscr7ZH+/t
+	Fnmw7EQXAp+xnN6yqXf0CX3zzx/w
+X-Google-Smtp-Source: AGs4zMZ1aJaY7+6QKRwz6IAnxz9B6ZGxHTEN1rz2eTqZ6LR9zuh2IYzXs2+jkZ4/85ZPVxHqSZcW8w==
+X-Received: by 10.55.192.19 with SMTP id o19mr608206qki.148.1511994088570;
+	Wed, 29 Nov 2017 14:21:28 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	v82sm1918286qka.44.2017.11.29.14.20.37
+	k75sm2066032qkk.19.2017.11.29.14.21.28
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 29 Nov 2017 14:20:38 -0800 (PST)
+	Wed, 29 Nov 2017 14:21:28 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Nov 2017 17:20:30 -0500
-Message-Id: <1511994030-18446-1-git-send-email-derek@asterius.io>
+Date: Wed, 29 Nov 2017 17:21:21 -0500
+Message-Id: <1511994081-18517-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-babel: correct the RDEPENDS to work on a minimal python install
+Subject: [meta-python][PATCH] python-pytz: correct the RDEPENDS to work on a minimal python install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +45,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 22:20:38 -0000
+X-List-Received-Date: Wed, 29 Nov 2017 22:21:27 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-babel.inc | 6 ++++++
- 1 file changed, 6 insertions(+)
+ meta-python/recipes-devtools/python/python-pytz.inc | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-babel.inc b/meta-python/recipes-devtools/python/python-babel.inc
-index 5e6ca3d..6d8c05d 100644
---- a/meta-python/recipes-devtools/python/python-babel.inc
-+++ b/meta-python/recipes-devtools/python/python-babel.inc
-@@ -13,8 +13,14 @@ inherit pypi
- CLEANBROKEN = "1"
+diff --git a/meta-python/recipes-devtools/python/python-pytz.inc b/meta-python/recipes-devtools/python/python-pytz.inc
+index 026489a..e79f433 100644
+--- a/meta-python/recipes-devtools/python/python-pytz.inc
++++ b/meta-python/recipes-devtools/python/python-pytz.inc
+@@ -11,7 +11,9 @@ SRC_URI[sha256sum] = "fae4cffc040921b8a2d60c6cf0b5d662c1190fe54d718271db4eb17d44
  
- RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-codecs \
-+    ${PYTHON_PN}-difflib \
-+    ${PYTHON_PN}-distutils \
-+    ${PYTHON_PN}-netserver \
-     ${PYTHON_PN}-numbers \
-     ${PYTHON_PN}-pickle \
-     ${PYTHON_PN}-pytz \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-subprocess \
+ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-doctest \
+     ${PYTHON_PN}-io \
++    ${PYTHON_PN}-pprint \
      ${PYTHON_PN}-threading \
  "
+ 
 -- 
 2.7.4
 
