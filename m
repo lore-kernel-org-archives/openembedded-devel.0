@@ -1,41 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
-	[209.85.220.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 0B39C780A0
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id B8DD878055
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 20:01:39 +0000 (UTC)
-Received: by mail-qk0-f194.google.com with SMTP id d141so5985098qkc.12
+	Wed, 29 Nov 2017 20:17:23 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id a16so6025634qtj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 12:01:41 -0800 (PST)
+	Wed, 29 Nov 2017 12:17:25 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=y/86hdpAmfW6D+KKmqByl/FFfkTuM+avrraYkGTz+9A=;
-	b=EPbeEOC2Oot1aRr9DcTnojrzsfxI+bwr3JwYqMEPhnbgpkzrbNw/c6yzhLsLz4eIwC
-	j6q9i9W/z2kELgFjvJfuP5shIHb0KZGIR6gzLVl5zmdSipeb4asHgJlcSCJpWfNfGjMd
-	Aq+nXRCkrdYkM1G6jI7LvgVhX3wlH5/wbCE+CrWtaEihn3l7Jwoxc+wY+c74gUsJRBG2
-	w/1zdJIsl3M0KpjtXspnsmQYe09qrSDV5uFxMWpKS/Fn7WKf0H7VNhhP3rmFtpuNDVVn
-	vQz0nt2HBCCXHBk0LsiN/HZBDax2FzgGeGsRZ9JfeTPjCgd6foiJ7WVPQSRzDJZ7qswf
-	KFQQ==
-X-Gm-Message-State: AKGB3mLzdtcL6aLf9HWnFoU1SNmEaKTMR4gBAg34WO7G4ya1EtkSf/V+
-	PVEkK+Fo+Rpt9Bd6TZ3O1Pn5I2oI
-X-Google-Smtp-Source: AGs4zMYc9M4s+nVIItKPZ758UcZPrm9Ce7aNTsl8CqqPPB7xI9dT6nDfaOmCFbE2QWxg9ZO74SzJ5w==
-X-Received: by 10.55.58.14 with SMTP id h14mr74405qka.132.1511985700921;
-	Wed, 29 Nov 2017 12:01:40 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Bo+bt5kV26AxMN1KWGJN9lUszpLvHcv6/IvFnqSuZHA=;
+	b=iN4hBVKu9jETaxZ8FNAt00bMx0+Eayj3MPgB0CQ8rdhrAwu8H2O7Qd5LjxH2sPzNpH
+	E/8BpyHtF+etLnQVU7G7BQ8tnFn5G/UwS+NOyx+bXSBb8W9TPCCHZZid/942TlXcHvbi
+	61gEI7HrwSw1C7xEtVQCRbF5h/8cNf3WL5yvMAnoPHX0MDV/OK0R/teZnZaqTbsKI7OT
+	II19xJsw/yVXgJ9bMZnHx3PmTKGJ1Kbc7fvTI1vXGbkUaRO3d//XPSFD3kP4gyfxEYoy
+	hNRXPuUroNsQOlCRa0wcfny3wjCFSQ1tnvYThNT/lOISa3eeFI5pUgSfhkUd0qTq778I
+	T6Qw==
+X-Gm-Message-State: AKGB3mLP/RdNprwRFcfs0V5oynYlQuTksB+Y9DnfDKxaOr8HagKXunUT
+	HFFqiS4r4fDRAAbN4zkjw6KuYCpZ
+X-Google-Smtp-Source: AGs4zMalEc109Dr0Kzu494JwSdHDJ/rGHxXULKBh0ZHvbiGLLCSa3mAic1tBaIsjIZfoppjU7UK5JQ==
+X-Received: by 10.200.51.46 with SMTP id t43mr136357qta.75.1511986644331;
+	Wed, 29 Nov 2017 12:17:24 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	y135sm1734219qka.48.2017.11.29.12.01.40
+	by smtp.gmail.com with ESMTPSA id d9sm1343894qti.94.2017.11.29.12.17.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 29 Nov 2017 12:01:40 -0800 (PST)
+	Wed, 29 Nov 2017 12:17:23 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Nov 2017 15:01:34 -0500
-Message-Id: <1511985694-17530-2-git-send-email-derek@asterius.io>
+Date: Wed, 29 Nov 2017 15:17:16 -0500
+Message-Id: <1511986636-24853-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1511985694-17530-1-git-send-email-derek@asterius.io>
-References: <1511985694-17530-1-git-send-email-derek@asterius.io>
-Subject: [meta-python][PATCH 2/2] python-chardet: fix the RDEPENDS to work on a minimal python install
+Subject: [meta-python][PATCH] pyrtm: break samples and unit tests into separate packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,25 +44,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 29 Nov 2017 20:01:40 -0000
+X-List-Received-Date: Wed, 29 Nov 2017 20:17:24 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-chardet.inc | 5 +++++
- 1 file changed, 5 insertions(+)
+ meta-python/recipes-devtools/python/pyrtm_0.4.2.bb | 21 ++++++++++++++++++++-
+ 1 file changed, 20 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-chardet.inc b/meta-python/recipes-devtools/python/python-chardet.inc
-index 316e2c1..246a65a 100644
---- a/meta-python/recipes-devtools/python/python-chardet.inc
-+++ b/meta-python/recipes-devtools/python/python-chardet.inc
-@@ -17,3 +17,8 @@ RDEPENDS_${PN}-cli = "${PN} "
- FILES_${PN}-cli += " \
-     ${PYTHON_SITEPACKAGES_DIR}/chardet/cli \
- "
+diff --git a/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb b/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
+index 72f0921..2272da9 100644
+--- a/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
++++ b/meta-python/recipes-devtools/python/pyrtm_0.4.2.bb
+@@ -10,7 +10,26 @@ SRC_URI[sha256sum] = "b2d701b25ad3f9a1542057f3eb492c5c1d7dbe2b8d1e8f763043dcc14e
+ 
+ inherit pypi setuptools
+ 
++PACKAGES =+ "${PN}-tests ${PN}-samples"
 +
-+RDEPENDS_${PN}_class-target += " \
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-logging \
++FILES_${PN}-samples += " \
++    ${PYTHON_SITEPACKAGES_DIR}/rtm/samples \
++"
++
++FILES_${PN}-tests += " \
++    ${PYTHON_SITEPACKAGES_DIR}/rtm/tests \
++"
++
+ RDEPENDS_${PN} += "\
+     ${PYTHON_PN}-json \
+     ${PYTHON_PN}-netclient \
+-    "
++"
++
++RDEPENDS_${PN}-samples += " \
++    ${PN} \
++"
++
++RDEPENDS_${PN}-tests += " \
++    ${PN} \
++    ${PYTHON_PN}-unittest \
 +"
 -- 
 2.7.4
