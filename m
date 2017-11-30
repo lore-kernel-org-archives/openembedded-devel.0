@@ -1,47 +1,32 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f47.google.com (mail-wm0-f47.google.com [74.125.82.47])
-	by mail.openembedded.org (Postfix) with ESMTP id CC0E2784E6
+Return-Path: <gabriel.pickl@posteo.net>
+Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
+	by mail.openembedded.org (Postfix) with ESMTP id 585D678258
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 10:03:18 +0000 (UTC)
-Received: by mail-wm0-f47.google.com with SMTP id i11so11244883wmf.4
+	Thu, 30 Nov 2017 16:34:08 +0000 (UTC)
+Received: from submission (posteo.de [89.146.220.130]) 
+	by mout01.posteo.de (Postfix) with ESMTPS id 0E84021063
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 02:03:20 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=CslZ3GMVfH7U4DY89y1xknfUUAZ/YtTEOIED7N08iDE=;
-	b=XI2FZrr0eREPElqKmyyy2RXnD6UtqTq7PEP7CIKrw0bP3UDiGFhH/CHXXxBaDb4v4D
-	cDw8z2MQ0HJI6txb8plm5Xa/ITtk4kQG8o8iOuJTit8yVkYZrFOMicWYGNW2fvMOuVUm
-	5mKfECW2KVPWrbp4VmRHKnlat0ghuDuQ+cn/hAGCp+HU7t40MzAtjGA01WnTnrsOza4+
-	EpxwKiEHa6xz8gwdicNxFvPOsgTy07u2wzdz5LQzQL6DcnPejNmxAur2J5PbxJv8jdD7
-	qeB8suNKDkRNK5Dn1P4nx1zyGWQiXPI/wtYedHS/9DhLZXp9YYQy7IXfzB/ZG2bDPJvB
-	pdhw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=CslZ3GMVfH7U4DY89y1xknfUUAZ/YtTEOIED7N08iDE=;
-	b=SB8/7R4J0rFURRmbeo9Xl3dzrM7TbSc62xM8NShTZMKAHAVa+w0z9yY7F897Rzh4jz
-	0LKfbcyxCOYnQ+2mt9gaO2cm/TnANsXsZngTDwDlwtPfpC7Cz9kdefDwbFpUVCQ/0aIp
-	cR31v2eAnw9TAmbhD3CPVvQgcrr0/Mnp4Ppe0kqTecSekr1cZ6asT8YETpVdfyhS+cqs
-	rYs78KQxYrlMKuCb9TijQEW0A2YqMSQZgqtGAvReZo3Mw5S9tKlXoJBR8MRsnft+st0m
-	Zi7V+orFr/20MvkSRXjKz0jicHaLMtrRQn7h/OktVcDfhP5OF/0jjpUeN0yC5vVSS2gc
-	CWrw==
-X-Gm-Message-State: AJaThX6BDgpD282/uSFS2Wn6pAwAw4RolH9s1bjTuiCMjx6AN98dxxK1
-	PQHlS4X5zYlWEhopPFPqaqGIWqrITankQDu2ypU=
-X-Google-Smtp-Source: AGs4zMZ+iK08SJukTYdik0gEuCmGjh0wSh0dmnAG/vchSJMQgvkDG+AeMCOOmqR0z7jT9ypruK88aOxSY6jnXhxTBHk=
-X-Received: by 10.28.65.65 with SMTP id o62mr76886wma.112.1512036199330; Thu,
-	30 Nov 2017 02:03:19 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.28.105.70 with HTTP; Thu, 30 Nov 2017 02:03:17 -0800 (PST)
-In-Reply-To: <1512018832-43434-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-References: <1512018832-43434-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-From: Martin Jansa <martin.jansa@gmail.com>
-Date: Thu, 30 Nov 2017 11:03:17 +0100
-Message-ID: <CA+chaQdMZeuwrJNeD5McBuT3GbRfg_kxAFfK81BLwADFvqAhoA@mail.gmail.com>
-To: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH v4] xrdp: new recipe
+	Thu, 30 Nov 2017 17:34:09 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
+	t=1512059649; bh=q1A+IaH+/a3CpaC9IUmCM7+ZyDT9WpWboNtO6qiV10s=;
+	h=From:Subject:Date:To:From;
+	b=GLmRTUvq6Fl2IJ5ufMJrlUdTz7XbY1lUnCtsP+1gcl+x/Yq6u7q6oPOhzTpcS4WDN
+	mJQ5acCZsBzq+brbZ8u6rJBflQUDixUWbc2C/hnC2K1mcsGF5MaGJrP49bKDodaciT
+	O7FvZOELCz9KiO+mUn2pIjT4AZxMVdmVgQU8XW1JvOGYJxP3dcGcTNLipEKEUYmHM9
+	2B8i37lA7iGeoxSJQKThkPaB04LOIlK1ySkvLizL72icbzRX341/f7lJlMaD/gCOyY
+	h6yrdhllFYno59HpbJCBw/lnS7Pxt8TfS/t4MB+Jknc/s2LjM/OvaFWaVZBn5mxy6j
+	Bjt5iSEiSfNWg==
+Received: from customer (localhost [127.0.0.1])
+	by submission (posteo.de) with ESMTPSA id 3ynjf820G1z9rxD
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 30 Nov 2017 17:34:08 +0100 (CET)
+From: Gabriel Pickl <gabriel.pickl@posteo.net>
+Mime-Version: 1.0 (Mac OS X Mail 11.1 \(3445.4.7\))
+Message-Id: <569AF590-BC14-451F-873E-84622993D7D1@posteo.net>
+Date: Thu, 30 Nov 2017 17:34:07 +0100
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.3445.4.7)
+Subject: [meta-openembedded] Samba update-rc.d does fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,57 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 10:03:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 30 Nov 2017 16:34:08 -0000
+Content-Type: text/plain;
+	charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Now DESCRIPTION somehow is back.
+Hello everyone,
 
-On Thu, Nov 30, 2017 at 6:13 AM, zhengrq <zhengrq.fnst@cn.fujitsu.com>
-wrote:
+I=E2=80=99ve run into a problem using the samba recipe in =
+meta-networking.
+The recipe installs fine, but it is not set to autostart when I boot the =
+system on my machine.
 
-> Add a new recipe xrdp_0.9.4.bb.
->
-> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-> ---
->  meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 19 +++++++++++++++++++
->  1 file changed, 19 insertions(+)
->  create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
->
-> diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> new file mode 100644
-> index 0000000..92c2289
-> --- /dev/null
-> +++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "An open source remote desktop protocol(rdp) server."
-> +
-> +LICENSE = "Apache-2.0"
-> +LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
-> +"
-> +
-> +inherit distro_features_check
-> +
-> +DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
-> +
-> +REQUIRED_DISTRO_FEATURES = "x11"
-> +
-> +SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
-> +
-> +SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
-> +
-> +PV = "0.9.4+git${SRCPV}"
-> +
-> +S = "${WORKDIR}/git"
-> --
-> 2.7.4
->
->
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
+The reason: the `updatercd_postinst` call to update-rc.d fails with:
+
+```
+update-rc.d: =
+<builddir>/tmp/work/raspberrypi-poky-linux-gnueabi/rpi-netbios-image/1.0-r=
+0/rootfs/etc/init.d/samba.sh: file does not exist
+```
+
+I=E2=80=99ve dug a bit into the script and it seems like the samba.sh =
+script really does not exist at the time `updatercd_postinst` is run, =
+but does exist in the same directory after the build has completed.
+
+This means for some reason the file gets copied to the rootfs too late, =
+but I can=E2=80=99t figure out why. Does anyone have any ideas why this =
+could be?
+
+System data:
+branch: morty
+commit: b40116cf457b88a2db14b86fda9627fb34d56ae6
+machine: raspberrypi
+init system: sysv
+
+Greetings,
+
+Gabriel
+
+PS: I apologize if this mail arrives more than once, I had some trouble =
+subscribing to the mailing list first.=
 
