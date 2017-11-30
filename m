@@ -1,50 +1,51 @@
 Return-Path: <bill.randle@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 5C37878532
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id E8F1D7853A
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 05:48:08 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id e14so2577346pgr.9
+	Thu, 30 Nov 2017 05:48:09 +0000 (UTC)
+Received: by mail-pl0-f68.google.com with SMTP id b12so3621950plm.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 29 Nov 2017 21:48:09 -0800 (PST)
+	Wed, 29 Nov 2017 21:48:11 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=UstiTsEZLKhozOQnKBzLL8wayua4lN3eVilR1HMGZ4o=;
-	b=DALPlHqRw4aWo13CIQNmKzeRH9rNZt2IwwLidxxPcFew6/OsXg1OBq2YdMqQj7/Dtk
-	m7dFzM0CwpuZ2EpWwZTlaGE+6gZkqt7Mtl6/rIdDyXBttTtKIwCCKhJ69nKkLex5sjq2
-	lFfBoQaH3TThoT2s7zoR1CfbsL6ummBwPOAniLn8ug8vHIbNl0JvyBAGKFOPQ/WNE7nR
-	rejMw5p2WNiRy/GRqin/Ay2Vp/2rj3SWEOCfrPGFOpgFQu2REPodu+LaSTEzwwTWRIFS
-	16Yjdd+Fg6jfRVp5Qyczc6sI+cjTNzsLAQsKibLilB+sxDXYr8+DNGkCMjc5h7hoFcJs
-	gPBg==
+	bh=NKjkkKrfp6dMjNSRJiKi1Rc3ZI3wVTXO1FIMAMMroXg=;
+	b=bRJFqvVXrnG9BUhlABrHFpYBhgOrSMqEDF1MakyaG47i/80gLz+r1nCN210Np5Q6fK
+	5jVFMtN8SdiM8w6kl8gvaWRSi/5vrthA8ryZYIlLUCFqG0pjkTMEDpaba+5nAZlsu7Jb
+	K6R69dXLrfHjsuBCz9BDZBUDzZD2hDJFx0cLlTLh3Jcqd9eZHRXGcpcTaqI/nzVkEXoU
+	Ug0ZnQwJd5pBY2k60I9AgWqOVDaCO4WEUZkk8LPVSjCXiu09PYJA3C+TagVJLQE1GCXn
+	HCed0rTOyEqi2b29JC+htX7DIXbPHq4Z77P02j/WEVw1PxL50PqVygnz5ay0Ze4gtQD1
+	vd1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=UstiTsEZLKhozOQnKBzLL8wayua4lN3eVilR1HMGZ4o=;
-	b=lhvnhps5dm9dGehX5E45mYGp5B3UeAGHZqGP3J8/JbPdmM0nBXAl6SEIYoSsXg6ODR
-	dJydBujU8zlBGq2hFsb1+yxnHK6AZJv0nzNqYxZV1dhuwCQnJHYg/KJBoWJFYkyCrNVZ
-	i7pcVKQPrBQUZ9/4PW411poSdGJgILDNaz9H2ZWsbDIzHAYZfxxfIGYvDaiGvlm4gB4/
-	mVSavl8HXFWvhDp8zQLfVgUMa+mczcWPfCl7ydzFJ7mfQxMCiDZjqwOoI0ArsXd2BLGU
-	vZhl8NitMtU3eRVXZ/IuOvd0pDGhFMN0dZPpOQzB5xeBEibYlV3szAJvFqIJ30fz/Mv5
-	2e8Q==
-X-Gm-Message-State: AJaThX4ConoxGpPLA1ToXkKtWVPt/HUU+e98/UoQjMWvO6dGCswZSmPz
-	Irw0A8ZjOeN8VcRc5arb/EOwQw==
-X-Google-Smtp-Source: AGs4zMbxkdHnLN1zCgIRh79ir3t+UGddOmkjcV1lI3U2RCazVWfMi5RyzU++52pHUKOVUIm2zoL+/w==
-X-Received: by 10.99.119.67 with SMTP id s64mr1307250pgc.390.1512020889321;
-	Wed, 29 Nov 2017 21:48:09 -0800 (PST)
+	bh=NKjkkKrfp6dMjNSRJiKi1Rc3ZI3wVTXO1FIMAMMroXg=;
+	b=fHdSW8zhKK6kImYFI/7xOkvGIZ4SSCOZ3Rxj3Sa0NO95qEkFisC0043ZV0MGqMvBD5
+	iu2HgFk2PVZrUIWBer57Mvuv1uW7MNWygPGWXkojDCbPeMZr1lPE91443s0d1Lig9mMt
+	1He93Cvnb6ojRSTreU80ycLJRkY+hkpiegjTdLQFiaHBfnupTTYX4nb2FfIp/spxwzKH
+	vsdyDGo9GwaNE1UaHS5pBnhdDc55nrTxzjzcUp+ByZMqE2LgglFukyVXLKEPDL3UMbbt
+	P8BwBlVV1yHM2gDc6IxI8qo1zzwnpvoYD20kKQjbZJt1Bpa4l+fwOkaw/sZIe1/andIh
+	xwJA==
+X-Gm-Message-State: AJaThX69GxBTCLXTPP+qhjHkevI1xx1PKwN765LQysfNDQnXfLkYr/g8
+	JewDabz8uo3VIptO4/iDga3Yyw==
+X-Google-Smtp-Source: AGs4zMZxCgcM6kY/q+Yt0+iKgt9SgJjvY6Gb2yngj3focYGH0u3WVfCnpj6kqGkl7xmZu+DQ1mgonA==
+X-Received: by 10.84.128.76 with SMTP id 70mr1407592pla.171.1512020890684;
+	Wed, 29 Nov 2017 21:48:10 -0800 (PST)
 Received: from neosoft.neocat.org (184-100-239-238.ptld.qwest.net.
 	[184.100.239.238]) by smtp.gmail.com with ESMTPSA id
-	s68sm6387336pfj.81.2017.11.29.21.48.08
+	s68sm6387336pfj.81.2017.11.29.21.48.09
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 29 Nov 2017 21:48:08 -0800 (PST)
+	Wed, 29 Nov 2017 21:48:09 -0800 (PST)
 From: Bill Randle <bill.randle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 29 Nov 2017 21:47:02 -0800
-Message-Id: <1512020828-4040-4-git-send-email-bill.randle@gmail.com>
+Date: Wed, 29 Nov 2017 21:47:03 -0800
+Message-Id: <1512020828-4040-5-git-send-email-bill.randle@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1512020828-4040-1-git-send-email-bill.randle@gmail.com>
 References: <1512020828-4040-1-git-send-email-bill.randle@gmail.com>
 Cc: ticotim@gmail.com
-Subject: [meta-python][PATCH 03/12] python-flask-bootstrap: move core of recipe to a .inc file
+Subject: [meta-python][PATCH 04/12] python3-flask-bootstrap: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,56 +58,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 05:48:08 -0000
+X-List-Received-Date: Thu, 30 Nov 2017 05:48:10 -0000
 
 Signed-off-by: Bill Randle <bill.randle@gmail.com>
 ---
- .../recipes-devtools/python/python-flask-bootstrap.inc   | 14 ++++++++++++++
- .../python/python-flask-bootstrap_3.3.7.1.bb             | 16 +---------------
- 2 files changed, 15 insertions(+), 15 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-flask-bootstrap.inc
+ meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap.inc b/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
+diff --git a/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb b/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
 new file mode 100644
-index 0000000..0723b97
+index 0000000..877c754
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-bootstrap.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
-+
-+SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
-+SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
-+
-+PYPI_PACKAGE = "Flask-Bootstrap"
-+
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-dominate \
-+    ${PYTHON_PN}-flask \
-+    ${PYTHON_PN}-visitor \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
-index 2b2a6f9..eeaade9 100644
---- a/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
-+++ b/meta-python/recipes-devtools/python/python-flask-bootstrap_3.3.7.1.bb
-@@ -1,16 +1,2 @@
--DESCRIPTION = "An extension that includes Bootstrap in your project, without any boilerplate code."
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=a03749709f06118a17349deb5a210619"
--
--SRC_URI[md5sum] = "e40d50f5c5b6438c1c6200a6f2871f81"
--SRC_URI[sha256sum] = "cb08ed940183f6343a64e465e83b3a3f13c53e1baabb8d72b5da4545ef123ac8"
--
--PYPI_PACKAGE = "Flask-Bootstrap"
--
- inherit pypi setuptools
--
--RDEPENDS_${PN} += "\
--    ${PYTHON_PN}-dominate \
--    ${PYTHON_PN}-flask \
--    ${PYTHON_PN}-visitor \
--    "
++++ b/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
+@@ -0,0 +1,2 @@
++inherit pypi setuptools3
 +require python-flask-bootstrap.inc
 -- 
 2.7.4
