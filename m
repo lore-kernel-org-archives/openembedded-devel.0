@@ -1,37 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 1CCA478682
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 15BFE78682
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 19:02:11 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id d4so10099277qtj.5
+	Thu, 30 Nov 2017 19:07:57 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id d4so10123517qtj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 11:02:13 -0800 (PST)
+	Thu, 30 Nov 2017 11:07:59 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=GxDRIhg6+lqLY2Qi1z7vbo6EL4Ib00stpP+olCzFZgc=;
-	b=NbeOcBf4CFPwhEa54qntWFIB6dCyX8svYDXZnFnoJekm0QqBym8fytpIRRrPejwU3p
-	ilWatb4vIb7N3hI3djv64p8IxKJHMylK8lAJ1oQJJCSwyNdIqyhV5omvpO/6RUhjg3wK
-	Klo0zQSZh5mTkH/EurgyaXwVizDnKlSOJHka5+q/4jXGqgp8dGgpnFw21OMQqJuqC/p7
-	0FmcBJHBQMHqFJNfFwTcNevB1UZaiLtFXsdt6AIOISSeJ8ri5xQD1P1HlMNTCN2Lf0Io
-	iIsMB7gHT0MJ/wVr4NBhtr5xZ6NlI7k9SHpF9if8B7abF+87lmY2hDVbycyuNbvnnib9
-	jWVQ==
-X-Gm-Message-State: AKGB3mISTDXr1e1eHDZNjVD0Jm1CCligPq8h53Ft7w2F0RvfbLizIuN3
-	N7Ed2yKYImgTpGD0HepLjhC/xZEI
-X-Google-Smtp-Source: AGs4zMYHW3VzzVM/lzfeYXu2dhll1lnP5JfGGTKqqO5OTwSHdlc4wL6iBg9euM5Te1HFKj1JM4DH2Q==
-X-Received: by 10.200.44.187 with SMTP id 56mr5194562qtw.238.1512068532789;
-	Thu, 30 Nov 2017 11:02:12 -0800 (PST)
+	bh=EwVNxTbG210yilBIn/nflPNOJv4WhDfgw/nSS5iCXJE=;
+	b=Bj+UlzZtxPmczCHLyPUplC8f5SlK65LJ9A5P0pRgM0oq/u8Yft3Yg5rlJ8d44hZftK
+	O31sIQdS/tbUguMZK+tS2c4q69frdqq+u8yHlI569aNj18UX9ivk1JMuJgc48V4GYJgR
+	eQpmBG5GuLGbKRiwO/RW3UU4g4OJg7M+8hfVhEkc6PEm84bdAC7pr/MMi2jjePom4edR
+	14lb8c9Ek5Q4l07gS0wjDHiM3iYL1HPRS8XUQOY3sxh6onyDS6m2DvB4Eb0kiOa26c8W
+	2CkOAMpk5tu2/pWrIKzNHRWAcZzicWticrtsJfUQM7Ipx2Y6xJ5Vjai7s3KxJce02xE8
+	Sq1A==
+X-Gm-Message-State: AKGB3mIyP1NPbGVrTxwJrGQ43O+Xmpa4WYjw//cEQr8EcnLSDC93XPvE
+	zz3JTud9NXfY3VMW0Pj4tOXe7ymN
+X-Google-Smtp-Source: AGs4zMaycDT3/68sm9uDfdPt0PWvwUlyCIj4lJ3OkRFfGY8OwXhOEt88D7euHtAfaZk5NHLziEUIjg==
+X-Received: by 10.237.53.235 with SMTP id d40mr5169957qte.40.1512068878587;
+	Thu, 30 Nov 2017 11:07:58 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id u3sm3380644qka.39.2017.11.30.11.02.12
+	by smtp.gmail.com with ESMTPSA id
+	u83sm3379062qkl.13.2017.11.30.11.07.58
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 30 Nov 2017 11:02:12 -0800 (PST)
+	Thu, 30 Nov 2017 11:07:58 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Nov 2017 14:02:05 -0500
-Message-Id: <1512068525-10107-1-git-send-email-derek@asterius.io>
+Date: Thu, 30 Nov 2017 14:07:51 -0500
+Message-Id: <1512068871-20922-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pylint: add a test package for unit tests
+Subject: [meta-python][PATCH] python-yappi: correct the RDEPENDS to work on a minimal python install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,54 +45,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 19:02:13 -0000
+X-List-Received-Date: Thu, 30 Nov 2017 19:07:58 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-pylint.inc      | 26 +++++++++++++---------
- 1 file changed, 16 insertions(+), 10 deletions(-)
+ meta-python/recipes-devtools/python/python-yappi_0.98.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
-index c55bce6..5398ca1 100644
---- a/meta-python/recipes-devtools/python/python-pylint.inc
-+++ b/meta-python/recipes-devtools/python/python-pylint.inc
-@@ -10,16 +10,6 @@ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-yappi_0.98.bb b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
+index 51308c8..651ce77 100644
+--- a/meta-python/recipes-devtools/python/python-yappi_0.98.bb
++++ b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
+@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "5f657129e1b9b952379ffbc009357d0dcdb58c50f3bfe88ffbb992e4b2
+ inherit pypi setuptools
  
- DEPENDS += "${PYTHON_PN}-pytest-runner-native"
- 
--RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
--                   ${PYTHON_PN}-isort \
--                   ${PYTHON_PN}-numbers \
--                   ${PYTHON_PN}-shell \
--                   ${PYTHON_PN}-json \
--                   ${PYTHON_PN}-pkgutil \
--                   ${PYTHON_PN}-difflib \
--                   ${PYTHON_PN}-netserver \
--                  "
--
- do_install_append(){
-     rm ${D}${bindir}/pylint
-     cat >> ${D}${bindir}/pylint <<EOF
-@@ -30,3 +20,19 @@ EOF
-     chmod 755 ${D}${bindir}/pylint
-     sed -i -e 's:^#!/usr/bin/python:#!/usr/bin/env\ ${PYTHON_PN}:g' ${D}/${PYTHON_SITEPACKAGES_DIR}/pylint/test/data/ascript
- }
-+
-+PACKAGES =+ "${PN}-tests"
-+FILES_${PN}-tests+= " \
-+    ${PYTHON_SITEPACKAGES_DIR}/pylint/test/ \
-+    ${PYTHON_SITEPACKAGES_DIR}/pylint/testutils.py \
-+"
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-astroid \
-+                   ${PYTHON_PN}-isort \
-+                   ${PYTHON_PN}-numbers \
-+                   ${PYTHON_PN}-shell \
-+                   ${PYTHON_PN}-json \
-+                   ${PYTHON_PN}-pkgutil \
-+                   ${PYTHON_PN}-difflib \
-+                   ${PYTHON_PN}-netserver \
-+                  "
+ RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-pickle \
+     ${PYTHON_PN}-threading \
+     "
 -- 
 2.7.4
 
