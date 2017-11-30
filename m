@@ -1,38 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 4A715780B5
+Return-Path: <zuloch@gmail.com>
+Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
+	[209.85.128.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 90BCD780B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 18:18:15 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id b10so2194447qti.11
+	Thu, 30 Nov 2017 18:19:43 +0000 (UTC)
+Received: by mail-wr0-f178.google.com with SMTP id v105so7530078wrc.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 10:18:17 -0800 (PST)
+	Thu, 30 Nov 2017 10:19:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=zSvTRpjzBGKpDgP2Yy5CJ5Ed40zNb1+qxRmtnYZeJow=;
+	b=jX9NSVFE4ZrlCxGC5j3ZmeXrKZXk3dpLiZVK1ZRBawx5pjpwmXJYHpwHWoYG+funuo
+	ZCYaSpoIal1tDTo7YABFv9gm8VTqaJFax9wB/j/oIL7b+/QWCkq+3JC4aKwwbKR0KAUC
+	4TLTHBW20JrKpn+0wSjA/U+4K5HtZuDnFHsreaGonIcQBJ5k9e/aLKoIKw4RHjHh3pfx
+	Wzara5UaSjnmiB7GdbKg4k/jeoHqCRfNTlvaiB38UPUbOo42NaaMEdYkyTEGZFipkvOe
+	BcgjingnBAQt69sEJbkzZ5oXVbvTpfxWhmaND+m7CmjF5forWIcRp5BP8ZkkBAAoJYdV
+	Cx+w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=tWp1o4XSqJ4Ddr/vIVftW55t8N8xkn0uXl0Jop8JBZs=;
-	b=B/jTyjo46PHxcZl9l1cLQ2Gz9EU4Xmjzs9jhvZI5dDshhJ8+MSOCnSV13PMjEB4Hhd
-	fl7MfBaPUYbHBxqrxZqJQ5rzuBp5JR0mmJ/bO7LSmxW/zhYLNPprxpCQ1U4qUpmy4hwc
-	WFL3kxC3PvivA4CDk0+t1lp9yqurU3TMpSllByymzV7nGuThdh8QabEhzi8p+IEhL94t
-	OLjjIfZCq2GVqCk7B4PkH6cBo2/1X3WlIkIsECzX29QvH9CmWqDWQOdF+qAmFs3/5Oau
-	drw09stLlTSSfyOoxHcXw+zojnDDC80PKgCOvoytsAUl0WSx7ctpzw+MSeAiuVHUcJ0M
-	ae1g==
-X-Gm-Message-State: AKGB3mJBjAkxi1nNSLOmRzZSw/tJmfDVuyje7LrqVApUTlWjRDQWLRqQ
-	6Ckg9h3pK4TBjn2sBibWyYZcH3wk
-X-Google-Smtp-Source: AGs4zMa4fRCt1fEsgskt1CDiuDqJBy6ut6lCvIoyp5kMhXFDkwEf2DH0yU2a54yTzJQ8matFlOLu3g==
-X-Received: by 10.200.28.82 with SMTP id j18mr4926327qtk.133.1512065896788;
-	Thu, 30 Nov 2017 10:18:16 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
+	bh=zSvTRpjzBGKpDgP2Yy5CJ5Ed40zNb1+qxRmtnYZeJow=;
+	b=rS3wzWwbcyIaEZTOH/2rVQsStgpDfZ11d6UMKHmECEiksKi2UW4jaG9mIhLqZtLD3t
+	uINvPX3HiJJeCcVaP7/DwczqftynbR+ghKLarEZN6XiXvO/Kk1GtbvFBL90N04f/E18I
+	P4tOSe8Z7WZAkXUB8XQnc+ARkUTOS8NqKR9tw2kwdtKnbTZkTkzDXxou2q1tGgMJIMTg
+	lKfridA5wkihJ+PIyZ1rtHt0sDhrzF5Ptj5a6xmK++m3CKg9fepz7dpsvWQlUyIOP9rO
+	moD7sKWdhyJY6FvIg9C/haQZmNy6OCPkch3tSZ7yBTNIGXBKT+Y0um6QLxWBpwOI/AIe
+	kRVQ==
+X-Gm-Message-State: AJaThX7HrCoFef29HVz8ZP2a/gl8umnVSz0KF7bG+n7OKEvffgiaRplc
+	mGAjVliz3i5DFUipWTaUjoMMY9D8
+X-Google-Smtp-Source: AGs4zMYGZSVIQ06UJlAIASjSnotwK2pnQ+niZitaTg7rRE4E1ZQ/TCazqkkfdQ6xmiHaUlCh7LYnyQ==
+X-Received: by 10.223.160.184 with SMTP id m53mr2928414wrm.126.1512065984174; 
+	Thu, 30 Nov 2017 10:19:44 -0800 (PST)
+Received: from euler.localdomain ([5.170.72.227])
 	by smtp.gmail.com with ESMTPSA id
-	g32sm3424256qkh.74.2017.11.30.10.18.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 30 Nov 2017 10:18:16 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
+	r71sm5094526wmd.20.2017.11.30.10.19.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 30 Nov 2017 10:19:43 -0800 (PST)
+From: Lorenzo Chianura <zuloch@gmail.com>
+X-Google-Original-From: Lorenzo Chianura <lorenzo.chianura@abinsula.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Nov 2017 13:18:07 -0500
-Message-Id: <1512065887-29802-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-werkzeug: add a test package for the unit and integration tests
+Date: Thu, 30 Nov 2017 19:19:49 +0100
+Message-Id: <20171130181949.22184-1-lorenzo.chianura@abinsula.com>
+X-Mailer: git-send-email 2.15.0
+Cc: Lorenzo Chianura <lorenzo.chianura@abinsula.com>
+Subject: [meta-qt5][PATCH] Fix missing OE_QMAKE_STRIP env variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,42 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 18:18:16 -0000
+X-List-Received-Date: Thu, 30 Nov 2017 18:19:44 -0000
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Using Qt based SDK for stripping ARM binaries results in errors.
+Generated Makefile contains:
+
+  STRIP         = \$(OE_QMAKE_STRIP)
+
+but due to the missing export of OE_QMAKE_STRIP variable STRIP will be unset and
+no strip will be perfomed:
+
+  install -m 755 -p lib/libSigUdev.so.1.0.0 /opt/poky/2.2.1/sysroots/cortexa9hf-neon-poky-linux-gnueabi/usr/lib/libSigUdev.so.1.0.0
+  strip-unneeded /opt/poky/2.2.1/sysroots/cortexa9hf-neon-poky-linux-gnueabi/usr/lib/libSigUdev.so.1.0.0
+  make: strip-unneeded: Command not found
+  Makefile:576: recipe for target 'install_target' failed
+  make: [install_target] Error 127 (ignored)
+
+adding OE_QMAKE_STRIP=$STRIP to generated qt5.sh solve the issue.
 ---
- meta-python/recipes-devtools/python/python-werkzeug.inc | 13 +++++++++++++
- 1 file changed, 13 insertions(+)
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 1 +
+ 1 file changed, 1 insertion(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta-python/recipes-devtools/python/python-werkzeug.inc
-index b2949a3..e0b524c 100644
---- a/meta-python/recipes-devtools/python/python-werkzeug.inc
-+++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
-@@ -17,6 +17,14 @@ PYPI_PACKAGE = "Werkzeug"
- 
- CLEANBROKEN = "1"
- 
-+PACKAGES =+ "${PN}-tests"
-+FILES_${PN}-tests+= " \
-+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/test* \
-+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/__pycache__/test* \
-+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/test* \
-+    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/__pycache__/test* \
-+"
-+
- RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-difflib \
-@@ -32,3 +40,8 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-threading \
-     ${PYTHON_PN}-unixadmin \
- "
-+
-+RDEPENDS_${PN}-tests = " \
-+    ${PN} \
-+    ${PYTHON_PN}-unittest \
-+"
+diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+index 87bd501..ef8b729 100644
+--- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
++++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
+@@ -179,6 +179,7 @@ fakeroot do_generate_qt_environment_file() {
+     echo 'export OE_QMAKE_CXX=$CXX' >> $script
+     echo 'export OE_QMAKE_LINK=$CXX' >> $script
+     echo 'export OE_QMAKE_AR=$AR' >> $script
++    echo 'export OE_QMAKE_STRIP=$STRIP' >> $script
+     echo 'export QT_CONF_PATH=${OE_QMAKE_PATH_HOST_BINS}/qt.conf' >> $script
+     echo 'export OE_QMAKE_LIBDIR_QT=`qmake -query QT_INSTALL_LIBS`' >> $script
+     echo 'export OE_QMAKE_INCDIR_QT=`qmake -query QT_INSTALL_HEADERS`' >> $script
 -- 
-2.7.4
+2.15.0
 
 
