@@ -1,32 +1,38 @@
-Return-Path: <gabriel.pickl@posteo.net>
-Received: from mout01.posteo.de (mout01.posteo.de [185.67.36.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 585D678258
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 4A715780B5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 16:34:08 +0000 (UTC)
-Received: from submission (posteo.de [89.146.220.130]) 
-	by mout01.posteo.de (Postfix) with ESMTPS id 0E84021063
+	Thu, 30 Nov 2017 18:18:15 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id b10so2194447qti.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 17:34:09 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=posteo.net; s=2017;
-	t=1512059649; bh=q1A+IaH+/a3CpaC9IUmCM7+ZyDT9WpWboNtO6qiV10s=;
-	h=From:Subject:Date:To:From;
-	b=GLmRTUvq6Fl2IJ5ufMJrlUdTz7XbY1lUnCtsP+1gcl+x/Yq6u7q6oPOhzTpcS4WDN
-	mJQ5acCZsBzq+brbZ8u6rJBflQUDixUWbc2C/hnC2K1mcsGF5MaGJrP49bKDodaciT
-	O7FvZOELCz9KiO+mUn2pIjT4AZxMVdmVgQU8XW1JvOGYJxP3dcGcTNLipEKEUYmHM9
-	2B8i37lA7iGeoxSJQKThkPaB04LOIlK1ySkvLizL72icbzRX341/f7lJlMaD/gCOyY
-	h6yrdhllFYno59HpbJCBw/lnS7Pxt8TfS/t4MB+Jknc/s2LjM/OvaFWaVZBn5mxy6j
-	Bjt5iSEiSfNWg==
-Received: from customer (localhost [127.0.0.1])
-	by submission (posteo.de) with ESMTPSA id 3ynjf820G1z9rxD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 17:34:08 +0100 (CET)
-From: Gabriel Pickl <gabriel.pickl@posteo.net>
-Mime-Version: 1.0 (Mac OS X Mail 11.1 \(3445.4.7\))
-Message-Id: <569AF590-BC14-451F-873E-84622993D7D1@posteo.net>
-Date: Thu, 30 Nov 2017 17:34:07 +0100
+	Thu, 30 Nov 2017 10:18:17 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=tWp1o4XSqJ4Ddr/vIVftW55t8N8xkn0uXl0Jop8JBZs=;
+	b=B/jTyjo46PHxcZl9l1cLQ2Gz9EU4Xmjzs9jhvZI5dDshhJ8+MSOCnSV13PMjEB4Hhd
+	fl7MfBaPUYbHBxqrxZqJQ5rzuBp5JR0mmJ/bO7LSmxW/zhYLNPprxpCQ1U4qUpmy4hwc
+	WFL3kxC3PvivA4CDk0+t1lp9yqurU3TMpSllByymzV7nGuThdh8QabEhzi8p+IEhL94t
+	OLjjIfZCq2GVqCk7B4PkH6cBo2/1X3WlIkIsECzX29QvH9CmWqDWQOdF+qAmFs3/5Oau
+	drw09stLlTSSfyOoxHcXw+zojnDDC80PKgCOvoytsAUl0WSx7ctpzw+MSeAiuVHUcJ0M
+	ae1g==
+X-Gm-Message-State: AKGB3mJBjAkxi1nNSLOmRzZSw/tJmfDVuyje7LrqVApUTlWjRDQWLRqQ
+	6Ckg9h3pK4TBjn2sBibWyYZcH3wk
+X-Google-Smtp-Source: AGs4zMa4fRCt1fEsgskt1CDiuDqJBy6ut6lCvIoyp5kMhXFDkwEf2DH0yU2a54yTzJQ8matFlOLu3g==
+X-Received: by 10.200.28.82 with SMTP id j18mr4926327qtk.133.1512065896788;
+	Thu, 30 Nov 2017 10:18:16 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	g32sm3424256qkh.74.2017.11.30.10.18.16
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Thu, 30 Nov 2017 10:18:16 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.3445.4.7)
-Subject: [meta-openembedded] Samba update-rc.d does fails
+Date: Thu, 30 Nov 2017 13:18:07 -0500
+Message-Id: <1512065887-29802-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-werkzeug: add a test package for the unit and integration tests
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,44 +45,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 16:34:08 -0000
-Content-Type: text/plain;
-	charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 30 Nov 2017 18:18:16 -0000
 
-Hello everyone,
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-werkzeug.inc | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
 
-I=E2=80=99ve run into a problem using the samba recipe in =
-meta-networking.
-The recipe installs fine, but it is not set to autostart when I boot the =
-system on my machine.
+diff --git a/meta-python/recipes-devtools/python/python-werkzeug.inc b/meta-python/recipes-devtools/python/python-werkzeug.inc
+index b2949a3..e0b524c 100644
+--- a/meta-python/recipes-devtools/python/python-werkzeug.inc
++++ b/meta-python/recipes-devtools/python/python-werkzeug.inc
+@@ -17,6 +17,14 @@ PYPI_PACKAGE = "Werkzeug"
+ 
+ CLEANBROKEN = "1"
+ 
++PACKAGES =+ "${PN}-tests"
++FILES_${PN}-tests+= " \
++    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/test* \
++    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/__pycache__/test* \
++    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/test* \
++    ${PYTHON_SITEPACKAGES_DIR}/werkzeug/contrib/__pycache__/test* \
++"
++
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-datetime \
+     ${PYTHON_PN}-difflib \
+@@ -32,3 +40,8 @@ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-threading \
+     ${PYTHON_PN}-unixadmin \
+ "
++
++RDEPENDS_${PN}-tests = " \
++    ${PN} \
++    ${PYTHON_PN}-unittest \
++"
+-- 
+2.7.4
 
-The reason: the `updatercd_postinst` call to update-rc.d fails with:
-
-```
-update-rc.d: =
-<builddir>/tmp/work/raspberrypi-poky-linux-gnueabi/rpi-netbios-image/1.0-r=
-0/rootfs/etc/init.d/samba.sh: file does not exist
-```
-
-I=E2=80=99ve dug a bit into the script and it seems like the samba.sh =
-script really does not exist at the time `updatercd_postinst` is run, =
-but does exist in the same directory after the build has completed.
-
-This means for some reason the file gets copied to the rootfs too late, =
-but I can=E2=80=99t figure out why. Does anyone have any ideas why this =
-could be?
-
-System data:
-branch: morty
-commit: b40116cf457b88a2db14b86fda9627fb34d56ae6
-machine: raspberrypi
-init system: sysv
-
-Greetings,
-
-Gabriel
-
-PS: I apologize if this mail arrives more than once, I had some trouble =
-subscribing to the mailing list first.=
 
