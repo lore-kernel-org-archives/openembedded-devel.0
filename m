@@ -1,64 +1,50 @@
-Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ot0-f178.google.com (mail-ot0-f178.google.com
-	[74.125.82.178])
-	by mail.openembedded.org (Postfix) with ESMTP id 6E5C6786D6
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
+	[209.85.213.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 1A997786BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Dec 2017 16:21:56 +0000 (UTC)
-Received: by mail-ot0-f178.google.com with SMTP id j64so9439612otj.12
+	Fri,  1 Dec 2017 17:35:45 +0000 (UTC)
+Received: by mail-yb0-f196.google.com with SMTP id g187so4279210yba.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 08:21:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
-	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=itA0JN+vPHXL+00UzlHPL9ytwuxA5cYIQa1clkSL96Y=;
-	b=lVaRGTgw5MSC+AHR0oqfEzFvH5FMLhdCV99d36XIhbOI+VZqrAI9OIRsoaRTq4EYGy
-	EaCjhb8PxQu5g95qDBZnGwAyvv2J/+ykbbW6IBW1PN48qyygZF/m3yHbJj0JXweWhD42
-	U5PnTCbeHIkPZ+dXTgMlrXENNUvGZcD9l/gtxGplarnJ8qauOsy26pOuo1MrLgwo60U7
-	OhhlZ4WElImvaCSDB+K6j702cVxtH7uzXy537M7P20mnaixU2DGqfGZe5uqiUokSx6k2
-	MkRTYOIuZACrfK6Enp2UE3C1gORprrQr/i+LKOjylDN9TiVx7JA5j///YgGRjUPVykn+
-	DWzQ==
+	Fri, 01 Dec 2017 09:35:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=hhduzSYszvJSOzMSK7DkAXnMLbjJAU4U8tuc3qLpPpQ=;
+	b=n8DAMeOV3bcu4eA8A0Z1OLpz1mWsvdyB44BEqzLt2ebzG6M4QKvoJ1bFUpbeh00mdW
+	Q1a2BfBAFKIuEYSw+lzR2BI3Tq/iJw7NON32uSbCZWV1UxSNbohG4zFnN9w19wdbf0EB
+	isNua7dCHovybc3RRTYtZsGkP3v+IJoKdEMJGPxLfS8wKXrktujnaW4ktZafF5ZlHmwg
+	mx86WaoxfjpVWHyhlaEpDex2BAeuPrLSINw5moXUbaaIXWBnwAxRpXatsyCtUxQJxhwb
+	RFYMRrl43LNuu8bp0zQKfMEH2TZ0uLWa0KD7gaFJrsXKW/mrIgBhbrt+qLBbpel4i/ix
+	JDjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=itA0JN+vPHXL+00UzlHPL9ytwuxA5cYIQa1clkSL96Y=;
-	b=p20E0ueUMeZhfKWQVB24NnZuAtQ9hQjHytDO2aDr5ZFhNQa/a4cvt5aNWZA8uPAvZx
-	jv/dwQW9Oywmc1X4PIIGCa4jw3RZFOHDQ3juRyrItiMUhp9Al7dNYdF4Y7qXzGtq3Yg7
-	AJ4OhW99nXlTL6Tljt0BFKkwh1AbJAGhERA3jz007e8edR6R+CMChL7Tjx67zn48EhsT
-	EOCZ0e1UGij41HtyE5CjZT3oNNcsbsT/cFkmf2Ll8yXE6APet1LXUTND2gWHwWQey/mF
-	7sX2e1edB+yPSfxiA0vNrxv+eaj2Ea4PCIxJP5mlsIQCMKXdKUG7dNDAfaqtlkqd+2Na
-	BZ0A==
-X-Gm-Message-State: AJaThX5X2EwVlNS/djJtVNLPX86fXDFz/7Ss1NIFl38ZsST3K9Vh9cse
-	5T/mghWOMzGCfVf+JDPBpZf1Df8H
-X-Google-Smtp-Source: AGs4zMZa2ZCj9EOpjkAf7H99jBrb/fkIP+c3KaK1BaoUEY+EAFPQwYmIJlAemwYVMSRfDTlX49eo8Q==
-X-Received: by 10.157.56.93 with SMTP id r29mr8541309otd.244.1512145317047;
-	Fri, 01 Dec 2017 08:21:57 -0800 (PST)
-Received: from mail-ot0-f173.google.com (mail-ot0-f173.google.com.
-	[74.125.82.173])
-	by smtp.gmail.com with ESMTPSA id d8sm2853711oig.42.2017.12.01.08.21.55
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
-From: Otavio Salvador <otavio.salvador@ossystems.com.br>
-X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-ot0-f173.google.com with SMTP id v21so9476059oth.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
-X-Received: by 10.157.65.213 with SMTP id v21mr8765922oti.392.1512145315213;
-	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
+	bh=hhduzSYszvJSOzMSK7DkAXnMLbjJAU4U8tuc3qLpPpQ=;
+	b=gZLxUZKKk12ZEEauFYeaU3mligF81Y5dXIMVUN6Sql83IXreZFVux9pEVD+6SF2c7S
+	o9kE/hBtc58D8AjK5/eqacITeW1Zy0luBK2yr0D8sBoOaKXSFiMZyE+9n9s3yZAIASKL
+	zunbXH3HEdukVldr4XwKmqpMTAjM7z/cI1toYGNJ+++FA9ue1fVUwOFFK0gBYPrsj8y8
+	HST/Q+a2f2YS4KdU3YZ7T+Bbbtp+T4/B+mJP4sS7BpfAkA1FBScq+36YMWfMRWXY5wT0
+	+Kwx0S3/GoC6r9YrpYM3Yu4CIuvdf9BYiCoXFt6AttJHuYVcgJWgJM23wnRDacjbDEEW
+	yKLA==
+X-Gm-Message-State: AJaThX47qdSbqIjpYgC1qIntiqYalj4hHkQUyKKkvUb/32He9yqR6zYf
+	92oW+PuLJAfcbKci51NDFnKkqg49r3z9vtiJu2w=
+X-Google-Smtp-Source: AGs4zMZ8Avfp8QNhygeXG3gBaQmPLBJqcWtEjo64LRsWXWq5ZQG9897bGyarmwcVRiBg2TZuQmx4Ifo14kIgAmesKm8=
+X-Received: by 10.37.20.9 with SMTP id 9mr4220597ybu.283.1512149747132; Fri,
+	01 Dec 2017 09:35:47 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.157.17.210 with HTTP; Fri, 1 Dec 2017 08:21:54 -0800 (PST)
-In-Reply-To: <CAMKF1sp8GeD-4c1ungSZeWDhhQ2cbMrmRGd2+MJBrDFZKK4ggQ@mail.gmail.com>
-References: <20171201124658.19036-1-otavio@ossystems.com.br>
-	<CAMKF1sp8GeD-4c1ungSZeWDhhQ2cbMrmRGd2+MJBrDFZKK4ggQ@mail.gmail.com>
-Date: Fri, 1 Dec 2017 14:21:54 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKqtN+q7bvd3N-W8crWrymFRO17dOhYVtPbm2k=CdLVXEg@mail.gmail.com>
-Message-ID: <CAP9ODKqtN+q7bvd3N-W8crWrymFRO17dOhYVtPbm2k=CdLVXEg@mail.gmail.com>
+Received: by 10.37.98.21 with HTTP; Fri, 1 Dec 2017 09:35:46 -0800 (PST)
+In-Reply-To: <CAMKF1spQVcCKkpfBng=BdfvTyGyESKtMABy7gn_qqBK-2Fv5aA@mail.gmail.com>
+References: <20171201110816.13519-1-schnitzeltony@gmail.com>
+	<20171201110816.13519-5-schnitzeltony@gmail.com>
+	<CAMKF1spQVcCKkpfBng=BdfvTyGyESKtMABy7gn_qqBK-2Fv5aA@mail.gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Fri, 1 Dec 2017 18:35:46 +0100
+Message-ID: <CALbNGRQXaw9wwhv_-uBJbRfUhSJScrmRJ9JSEWGazbX4zdQtHQ@mail.gmail.com>
 To: Khem Raj <raj.khem@gmail.com>
-Cc: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>,
-	Otavio Salvador <otavio@ossystems.com.br>
-Subject: Re: [meta-oe PATCH v2 1/2] nghttp2: Move to meta-networking
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH 04/10] fluidsynth: performance improvements
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -71,22 +57,167 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Dec 2017 16:21:56 -0000
+X-List-Received-Date: Fri, 01 Dec 2017 17:35:46 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Dec 1, 2017 at 12:54 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Fri, Dec 1, 2017 at 4:46 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
->> The nghttp2 depends on c-ares which is provided by meta-networking
->> layer, so it should be moved there as well.
+On Fri, Dec 1, 2017 at 3:49 PM, Khem Raj <raj.khem@gmail.com> wrote:
+
+> On Fri, Dec 1, 2017 at 3:08 AM, Andreas M=C3=BCller <schnitzeltony@gmail.=
+com>
+> wrote:
+> > * Use floats instead of double for sound calculations. This improves
+> >   performance notable and was default for version 1.1.6 using autotools=
+.
+> > * Fix buffer overrun when using floats
+> > * Make use of ARM NEON for multithreading enabled
+> >
+> > Performance and sound correctnes was tested with qtractor and a reworke=
+d
+> > version of fluidsynth-dssi [1-2]. Tests were performed for single- and
+> > multithreading enabled.
+> >
+> > [1] https://github.com/schnitzeltony/fluidsynth-dssi/commit/
+> bad09c6f5c5508c5f5330aa5188510f975e50c50
+> > [2] https://github.com/schnitzeltony/meta-qt5-extra/
+> blob/master/recipes-misc/recipes-multimedia/fluidsynth/
+> fluidsynth-dssi_1.0.0.bb
+> >
+> > Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > ---
+> >  ...uffer-overrun-in-fluid_synth_nwrite_float.patch | 32 +++++++++
+> >  ...N-accelaration-for-float-multithreaded-se.patch | 76
+> ++++++++++++++++++++++
+> >  .../fluidsynth/fluidsynth_1.1.8.bb                 |  8 ++-
+> >  3 files changed, 114 insertions(+), 2 deletions(-)
+> >  create mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/files=
+/
+> 0001-avoid-buffer-overrun-in-fluid_synth_nwrite_float.patch
+> >  create mode 100644 meta-multimedia/recipes-multimedia/fluidsynth/files=
+/
+> 0002-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch
+> >
+> > diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/files/
+> 0001-avoid-buffer-overrun-in-fluid_synth_nwrite_float.patch
+> b/meta-multimedia/recipes-multimedia/fluidsynth/files/
+> 0001-avoid-buffer-overrun-in-fluid_synth_nwrite_float.patch
+> > new file mode 100644
+> > index 0000000..dda76cf
+> > --- /dev/null
+> > +++ b/meta-multimedia/recipes-multimedia/fluidsynth/files/
+> 0001-avoid-buffer-overrun-in-fluid_synth_nwrite_float.patch
+> > @@ -0,0 +1,32 @@
+> > +From a13cb63103aa56b5e8bad816c7d13d6e01c0cd9f Mon Sep 17 00:00:00 2001
+> > +From: derselbst <tom.mbrt@googlemail.com>
+> > +Date: Sun, 26 Nov 2017 22:12:12 +0100
+> > +Subject: [PATCH 1/2] avoid buffer overrun in fluid_synth_nwrite_float(=
+)
+> > +
+> > +Upstream-Status: Backport [1]
+> > +
+> > +[1] https://github.com/FluidSynth/fluidsynth/commit/
+> a13cb63103aa56b5e8bad816c7d13d6e01c0cd9f
+> > +---
+> > + src/synth/fluid_synth.c | 4 ++--
+> > + 1 file changed, 2 insertions(+), 2 deletions(-)
+> > +
+> > +diff --git a/src/synth/fluid_synth.c b/src/synth/fluid_synth.c
+> > +index 266d759..14f6b21 100644
+> > +--- a/src/synth/fluid_synth.c
+> > ++++ b/src/synth/fluid_synth.c
+> > +@@ -2752,10 +2752,10 @@ fluid_synth_nwrite_float(fluid_synth_t* synth,
+> int len,
+> > +     {
+> > + #ifdef WITH_FLOAT
+> > +       if(fx_left !=3D NULL)
+> > +-        FLUID_MEMCPY(fx_left[i + count], fx_left_in[i], bytes);
+> > ++        FLUID_MEMCPY(fx_left[i] + count, fx_left_in[i], bytes);
+> > +
+> > +       if(fx_right !=3D NULL)
+> > +-        FLUID_MEMCPY(fx_right[i + count], fx_right_in[i], bytes);
+> > ++        FLUID_MEMCPY(fx_right[i] + count, fx_right_in[i], bytes);
+> > + #else //WITH_FLOAT
+> > +       int j;
+> > +       if(fx_left !=3D NULL) {
+> > +--
+> > +2.9.5
+> > +
+> > diff --git a/meta-multimedia/recipes-multimedia/fluidsynth/files/
+> 0002-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch
+> b/meta-multimedia/recipes-multimedia/fluidsynth/files/0002-Use-ARM-NEON-
+> accelaration-for-float-multithreaded-se.patch
+> > new file mode 100644
+> > index 0000000..0e1846e
+> > --- /dev/null
+> > +++ b/meta-multimedia/recipes-multimedia/fluidsynth/files/
+> 0002-Use-ARM-NEON-accelaration-for-float-multithreaded-se.patch
+> > @@ -0,0 +1,76 @@
+> > +From 2de7e128fbdf528716b500cf27ed9a4358c931c9 Mon Sep 17 00:00:00 2001
+> > +From: =3D?UTF-8?q?Andreas=3D20M=3DC3=3DBCller?=3D <schnitzeltony@gmail=
+.com>
+> > +Date: Fri, 24 Nov 2017 00:05:35 +0100
+> > +Subject: [PATCH 2/2] Use ARM-NEON accelaration for float-multithreaded
+> setups
+> > +MIME-Version: 1.0
+> > +Content-Type: text/plain; charset=3DUTF-8
+> > +Content-Transfer-Encoding: 8bit
+> > +
+> > +Upstream-Status: Pending
+> > +
+> > +Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
+> > +---
+> > + src/rvoice/fluid_rvoice_mixer.c | 26 ++++++++++++++++++++++++++
+> > + 1 file changed, 26 insertions(+)
+> > +
+> > +diff --git a/src/rvoice/fluid_rvoice_mixer.c b/src/rvoice/fluid_rvoice=
+_
+> mixer.c
+> > +index 9616518..dbf8057 100644
+> > +--- a/src/rvoice/fluid_rvoice_mixer.c
+> > ++++ b/src/rvoice/fluid_rvoice_mixer.c
+> > +@@ -27,6 +27,10 @@
+> > + #include "fluid_ladspa.h"
+> > + #include "fluid_synth.h"
+> > +
+> > ++#if defined(__ARM_NEON__)
+> > ++#include "arm_neon.h"
+> > ++#endif
+> > ++
+> > +
+> > + #define ENABLE_MIXER_THREADS 1
+> > +
+> > +@@ -794,20 +798,42 @@ fluid_mixer_buffers_mix(fluid_mixer_buffers_t*
+> dest, fluid_mixer_buffers_t* src)
+> > +   if (minbuf > src->buf_count)
+> > +     minbuf =3D src->buf_count;
+> > +   for (i=3D0; i < minbuf; i++) {
+> > ++#if defined(__ARM_NEON__) && defined(WITH_FLOAT)
+> > ++    for (j=3D0; j < scount; j+=3D4) {
+> > ++        float32x4_t vleft =3D vld1q_f32(&dest->left_buf[i][j]);
+> > ++        float32x4_t vright =3D vld1q_f32(&dest->right_buf[i][j]);
+> > ++        vleft =3D vaddq_f32(vleft, vld1q_f32(&src->left_buf[i][j]));
+> > ++        vright =3D vaddq_f32(vright, vld1q_f32(&src->right_buf[i][j])=
+);
+> > ++        vst1q_f32(&dest->left_buf[i][j], vleft);
+> > ++        vst1q_f32(&dest->right_buf[i][j], vright);
+> > ++    }
 >
-> perhaps meta-webserver is better suited for this recipe.
+> > I wonder if gcc could be initiated to see if it can vectorize the code,
+> here
+> > have you tried setting cmdline options or may be pragma hints
+>
+>
+I've sent patches like these to some projects. If I remember correctly
+first one was jack2 [1]. For that I wrote some performance tests [2] and
+tested vectorizing either but with disappointing results. This is ~ a year
+ago and I think intrinsics are still the option performing better.
 
-The root reason to move to meta-networking is because it requires
-c-ares. If meta-webserver already depends on meta-networking I can
-move it there otherwise we will have a hard dependency.
+[1]
+https://github.com/jackaudio/jack2/commit/77bb8be12e0d856fbc004cf57185ab36a=
+2df04c2
+[2]
+https://github.com/jackaudio/jack2/commit/c32b823860bc8e887774ab10bc3e9bd76=
+e85e3f3
 
--- 
-Otavio Salvador                             O.S. Systems
-http://www.ossystems.com.br        http://code.ossystems.com.br
-Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
+Andreas
 
