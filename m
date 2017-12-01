@@ -1,37 +1,64 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mail.openembedded.org (Postfix) with ESMTP id 28554783C9
+Return-Path: <otavio.salvador@ossystems.com.br>
+Received: from mail-ot0-f178.google.com (mail-ot0-f178.google.com
+	[74.125.82.178])
+	by mail.openembedded.org (Postfix) with ESMTP id 6E5C6786D6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Dec 2017 15:42:54 +0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id t187so13667782qkh.3
+	Fri,  1 Dec 2017 16:21:56 +0000 (UTC)
+Received: by mail-ot0-f178.google.com with SMTP id j64so9439612otj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 07:42:56 -0800 (PST)
+	Fri, 01 Dec 2017 08:21:57 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
+	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
+	:cc; bh=itA0JN+vPHXL+00UzlHPL9ytwuxA5cYIQa1clkSL96Y=;
+	b=lVaRGTgw5MSC+AHR0oqfEzFvH5FMLhdCV99d36XIhbOI+VZqrAI9OIRsoaRTq4EYGy
+	EaCjhb8PxQu5g95qDBZnGwAyvv2J/+ykbbW6IBW1PN48qyygZF/m3yHbJj0JXweWhD42
+	U5PnTCbeHIkPZ+dXTgMlrXENNUvGZcD9l/gtxGplarnJ8qauOsy26pOuo1MrLgwo60U7
+	OhhlZ4WElImvaCSDB+K6j702cVxtH7uzXy537M7P20mnaixU2DGqfGZe5uqiUokSx6k2
+	MkRTYOIuZACrfK6Enp2UE3C1gORprrQr/i+LKOjylDN9TiVx7JA5j///YgGRjUPVykn+
+	DWzQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=RhKQ4bCZu473FAVmBRKy1sACs0pS8hqJ4qkTdjvTAWs=;
-	b=mhYZxU5oqqhsx0Sr/o9zVKkfmhle/+rmtr0/s6SqpaWdY9JK7VRHGEY/jqKgBy+Fg/
-	SkPXG1QsLFDudF6zBxqJpVSv9LqSjiMYgdT3hHgnZN+wZFx7Xtpj/KLTCXLLk2arCicQ
-	KDk5ldhyqv2u5H80MaFQEUfHLm0Djqtm03hnM7mm8iDT7hTJ1fOx1IvC7KeTmdNlGBRi
-	SKKxWLrkdS/xyx/AB8qC/WMATT88QMlJ/qEm7NHPThypQYmrvoOCb0ASBlzvMi+uN4tl
-	x5v18GfTbl54Jz6OodVmVdbIrTuNI0NasuC+w4A4ni+p13VApZP7Hy1rbzRHH2ot6Ks2
-	TR6g==
-X-Gm-Message-State: AKGB3mKosLTDSJkES7DOwBAA+lh3CYMswf7Kwvp0EP1iPY37JPAyarom
-	K8Jo8qDoASC1EZQxiu4srBVnvYD/
-X-Google-Smtp-Source: AGs4zMZTBHclubI464wy02+l2vpwYoVuNxPoVkk/2ABRwcOqUtKP27YCa9PQlCUwWvX1rKVpGoaKkQ==
-X-Received: by 10.55.6.133 with SMTP id 127mr7987539qkg.219.1512142975872;
-	Fri, 01 Dec 2017 07:42:55 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id y9sm4617445qkl.17.2017.12.01.07.42.54
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 01 Dec 2017 07:42:55 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Dec 2017 10:42:48 -0500
-Message-Id: <1512142968-18809-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] nginx: correctly set the endianness of the target
+	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
+	:message-id:subject:to:cc;
+	bh=itA0JN+vPHXL+00UzlHPL9ytwuxA5cYIQa1clkSL96Y=;
+	b=p20E0ueUMeZhfKWQVB24NnZuAtQ9hQjHytDO2aDr5ZFhNQa/a4cvt5aNWZA8uPAvZx
+	jv/dwQW9Oywmc1X4PIIGCa4jw3RZFOHDQ3juRyrItiMUhp9Al7dNYdF4Y7qXzGtq3Yg7
+	AJ4OhW99nXlTL6Tljt0BFKkwh1AbJAGhERA3jz007e8edR6R+CMChL7Tjx67zn48EhsT
+	EOCZ0e1UGij41HtyE5CjZT3oNNcsbsT/cFkmf2Ll8yXE6APet1LXUTND2gWHwWQey/mF
+	7sX2e1edB+yPSfxiA0vNrxv+eaj2Ea4PCIxJP5mlsIQCMKXdKUG7dNDAfaqtlkqd+2Na
+	BZ0A==
+X-Gm-Message-State: AJaThX5X2EwVlNS/djJtVNLPX86fXDFz/7Ss1NIFl38ZsST3K9Vh9cse
+	5T/mghWOMzGCfVf+JDPBpZf1Df8H
+X-Google-Smtp-Source: AGs4zMZa2ZCj9EOpjkAf7H99jBrb/fkIP+c3KaK1BaoUEY+EAFPQwYmIJlAemwYVMSRfDTlX49eo8Q==
+X-Received: by 10.157.56.93 with SMTP id r29mr8541309otd.244.1512145317047;
+	Fri, 01 Dec 2017 08:21:57 -0800 (PST)
+Received: from mail-ot0-f173.google.com (mail-ot0-f173.google.com.
+	[74.125.82.173])
+	by smtp.gmail.com with ESMTPSA id d8sm2853711oig.42.2017.12.01.08.21.55
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
+From: Otavio Salvador <otavio.salvador@ossystems.com.br>
+X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
+Received: by mail-ot0-f173.google.com with SMTP id v21so9476059oth.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
+X-Received: by 10.157.65.213 with SMTP id v21mr8765922oti.392.1512145315213;
+	Fri, 01 Dec 2017 08:21:55 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.157.17.210 with HTTP; Fri, 1 Dec 2017 08:21:54 -0800 (PST)
+In-Reply-To: <CAMKF1sp8GeD-4c1ungSZeWDhhQ2cbMrmRGd2+MJBrDFZKK4ggQ@mail.gmail.com>
+References: <20171201124658.19036-1-otavio@ossystems.com.br>
+	<CAMKF1sp8GeD-4c1ungSZeWDhhQ2cbMrmRGd2+MJBrDFZKK4ggQ@mail.gmail.com>
+Date: Fri, 1 Dec 2017 14:21:54 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKqtN+q7bvd3N-W8crWrymFRO17dOhYVtPbm2k=CdLVXEg@mail.gmail.com>
+Message-ID: <CAP9ODKqtN+q7bvd3N-W8crWrymFRO17dOhYVtPbm2k=CdLVXEg@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Cc: Meta-OpenEmbedded Mailing listing
+	<openembedded-devel@lists.openembedded.org>,
+	Otavio Salvador <otavio@ossystems.com.br>
+Subject: Re: [meta-oe PATCH v2 1/2] nghttp2: Move to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,125 +71,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Dec 2017 15:42:55 -0000
+X-List-Received-Date: Fri, 01 Dec 2017 16:21:56 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add an inherit for siteinfo to get access to SITEINFO_ENDIANNESS
-Add a patch to have nginx actually use the user provided --with-endian
+On Fri, Dec 1, 2017 at 12:54 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Fri, Dec 1, 2017 at 4:46 AM, Otavio Salvador <otavio@ossystems.com.br> wrote:
+>> The nghttp2 depends on c-ares which is provided by meta-networking
+>> layer, so it should be moved there as well.
+>
+> perhaps meta-webserver is better suited for this recipe.
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- ...verriding-of-the-endianness-via-the-confi.patch | 80 ++++++++++++++++++++++
- meta-webserver/recipes-httpd/nginx/nginx.inc       |  3 +-
- 2 files changed, 82 insertions(+), 1 deletion(-)
- create mode 100644 meta-webserver/recipes-httpd/nginx/files/0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch
+The root reason to move to meta-networking is because it requires
+c-ares. If meta-webserver already depends on meta-networking I can
+move it there otherwise we will have a hard dependency.
 
-diff --git a/meta-webserver/recipes-httpd/nginx/files/0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch b/meta-webserver/recipes-httpd/nginx/files/0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch
-new file mode 100644
-index 0000000..ffd5ee3
---- /dev/null
-+++ b/meta-webserver/recipes-httpd/nginx/files/0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch
-@@ -0,0 +1,80 @@
-+From be9970aa16c5142ef814531d74a07990a8e9eb14 Mon Sep 17 00:00:00 2001
-+From: Derek Straka <derek@asterius.io>
-+Date: Fri, 1 Dec 2017 10:32:29 -0500
-+Subject: [PATCH] Allow the overriding of the endianness via the configure flag
-+ --with-endian
-+
-+The existing configure options contain the --with-endian; however, the command
-+line flag does not actually function.  It does not set the endianness and it
-+appears to do nothing.
-+
-+Upstream-Status: Pending
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+
-+diff --git a/auto/endianness b/auto/endianness
-+index 1b552b6..be84487 100644
-+--- a/auto/endianness
-++++ b/auto/endianness
-+@@ -13,7 +13,13 @@ checking for system byte ordering
-+ END
-+ 
-+ 
-+-cat << END > $NGX_AUTOTEST.c
-++if [ ".$NGX_WITH_ENDIAN" = ".little" ]; then
-++    echo " little endian"
-++    have=NGX_HAVE_LITTLE_ENDIAN . auto/have
-++elif [ ".$NGX_WITH_ENDIAN" = ".big" ]; then
-++    echo " big endian"
-++else
-++    cat << END > $NGX_AUTOTEST.c
-+ 
-+ int main(void) {
-+     int i = 0x11223344;
-+@@ -26,25 +32,26 @@ int main(void) {
-+ 
-+ END
-+ 
-+-ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
-+-          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
-++    ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
-++              -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
-+ 
-+-eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
-++    eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
-+ 
-+-if [ -x $NGX_AUTOTEST ]; then
-+-    if $NGX_AUTOTEST >/dev/null 2>&1; then
-+-        echo " little endian"
-+-        have=NGX_HAVE_LITTLE_ENDIAN . auto/have
-+-    else
-+-        echo " big endian"
-+-    fi
-++    if [ -x $NGX_AUTOTEST ]; then
-++        if $NGX_AUTOTEST >/dev/null 2>&1; then
-++            echo " little endian"
-++            have=NGX_HAVE_LITTLE_ENDIAN . auto/have
-++        else
-++            echo " big endian"
-++        fi
-+ 
-+-    rm -rf $NGX_AUTOTEST*
-++        rm -rf $NGX_AUTOTEST*
-+ 
-+-else
-+-    rm -rf $NGX_AUTOTEST*
-++    else
-++        rm -rf $NGX_AUTOTEST*
-+ 
-+-    echo
-+-    echo "$0: error: cannot detect system byte ordering"
-+-    exit 1
-++        echo
-++        echo "$0: error: cannot detect system byte ordering"
-++        exit 1
-++    fi
-+ fi
-+-- 
-+2.7.4
-+
-+
-diff --git a/meta-webserver/recipes-httpd/nginx/nginx.inc b/meta-webserver/recipes-httpd/nginx/nginx.inc
-index 4a97e26..51523b6 100644
---- a/meta-webserver/recipes-httpd/nginx/nginx.inc
-+++ b/meta-webserver/recipes-httpd/nginx/nginx.inc
-@@ -14,13 +14,14 @@ DEPENDS = "libpcre zlib openssl"
- SRC_URI = " \
-     http://nginx.org/download/nginx-${PV}.tar.gz \
-     file://nginx-cross.patch \
-+    file://0001-Allow-the-overriding-of-the-endianness-via-the-confi.patch \
-     file://nginx.conf \
-     file://nginx.init \
-     file://nginx-volatile.conf \
-     file://nginx.service \
- "
- 
--inherit update-rc.d useradd systemd
-+inherit siteinfo update-rc.d useradd systemd
- 
- SYSTEMD_SERVICE_${PN} = "nginx.service"
- 
 -- 
-2.7.4
-
+Otavio Salvador                             O.S. Systems
+http://www.ossystems.com.br        http://code.ossystems.com.br
+Mobile: +55 (53) 9981-7854            Mobile: +1 (347) 903-9750
 
