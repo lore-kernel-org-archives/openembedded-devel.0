@@ -1,38 +1,30 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
-	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 15BFE78682
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id B0DBC71951
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 19:07:57 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id d4so10123517qtj.5
+	Fri,  1 Dec 2017 02:15:22 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30629304"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 01 Dec 2017 10:15:21 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 192C948AE725
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 30 Nov 2017 11:07:59 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=EwVNxTbG210yilBIn/nflPNOJv4WhDfgw/nSS5iCXJE=;
-	b=Bj+UlzZtxPmczCHLyPUplC8f5SlK65LJ9A5P0pRgM0oq/u8Yft3Yg5rlJ8d44hZftK
-	O31sIQdS/tbUguMZK+tS2c4q69frdqq+u8yHlI569aNj18UX9ivk1JMuJgc48V4GYJgR
-	eQpmBG5GuLGbKRiwO/RW3UU4g4OJg7M+8hfVhEkc6PEm84bdAC7pr/MMi2jjePom4edR
-	14lb8c9Ek5Q4l07gS0wjDHiM3iYL1HPRS8XUQOY3sxh6onyDS6m2DvB4Eb0kiOa26c8W
-	2CkOAMpk5tu2/pWrIKzNHRWAcZzicWticrtsJfUQM7Ipx2Y6xJ5Vjai7s3KxJce02xE8
-	Sq1A==
-X-Gm-Message-State: AKGB3mIyP1NPbGVrTxwJrGQ43O+Xmpa4WYjw//cEQr8EcnLSDC93XPvE
-	zz3JTud9NXfY3VMW0Pj4tOXe7ymN
-X-Google-Smtp-Source: AGs4zMaycDT3/68sm9uDfdPt0PWvwUlyCIj4lJ3OkRFfGY8OwXhOEt88D7euHtAfaZk5NHLziEUIjg==
-X-Received: by 10.237.53.235 with SMTP id d40mr5169957qte.40.1512068878587;
-	Thu, 30 Nov 2017 11:07:58 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	u83sm3379062qkl.13.2017.11.30.11.07.58
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 30 Nov 2017 11:07:58 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 30 Nov 2017 14:07:51 -0500
-Message-Id: <1512068871-20922-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-yappi: correct the RDEPENDS to work on a minimal python install
+	Fri,  1 Dec 2017 10:15:17 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.116) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Fri, 1 Dec 2017 10:15:16 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 1 Dec 2017 10:14:36 +0800
+Message-ID: <1512094476-49196-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
+MIME-Version: 1.0
+X-Originating-IP: [10.167.225.116]
+X-yoursite-MailScanner-ID: 192C948AE725.A5148
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH v5] xrdp: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,26 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 30 Nov 2017 19:07:58 -0000
+X-List-Received-Date: Fri, 01 Dec 2017 02:15:23 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+Add a new recipe xrdp_0.9.4.bb.
+
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- meta-python/recipes-devtools/python/python-yappi_0.98.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-yappi_0.98.bb b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
-index 51308c8..651ce77 100644
---- a/meta-python/recipes-devtools/python/python-yappi_0.98.bb
-+++ b/meta-python/recipes-devtools/python/python-yappi_0.98.bb
-@@ -10,6 +10,7 @@ SRC_URI[sha256sum] = "5f657129e1b9b952379ffbc009357d0dcdb58c50f3bfe88ffbb992e4b2
- inherit pypi setuptools
- 
- RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-datetime \
-     ${PYTHON_PN}-pickle \
-     ${PYTHON_PN}-threading \
-     "
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+new file mode 100644
+index 0000000..92c2289
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -0,0 +1,19 @@
++SUMMARY = "An open source remote desktop protocol(rdp) server."
++
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
++"
++
++inherit distro_features_check
++
++DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
++
++REQUIRED_DISTRO_FEATURES = "x11"
++
++SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
++
++SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
++
++PV = "0.9.4+git${SRCPV}"
++
++S = "${WORKDIR}/git"
 -- 
 2.7.4
+
+
 
 
