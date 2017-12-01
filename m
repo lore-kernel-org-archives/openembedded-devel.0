@@ -1,45 +1,43 @@
 Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 71615786B4
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 6704A78654
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Dec 2017 12:45:26 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id d15so12796140qte.4
+	Fri,  1 Dec 2017 12:47:04 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id c13so12978147qke.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 04:45:28 -0800 (PST)
+	Fri, 01 Dec 2017 04:47:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:organization;
-	bh=e4FJOQLwuxtXJO/ohkCpAZrP/avo9jQcPuZQP41DIYE=;
-	b=FAT8sOEKIjZD8r+XhPGRS2GkNZzfSO6+iEuabqiDUrZy4PGo/H69RKgemzZ3mvZhQI
-	ilDYvM4a/TNpeI7leNltSuXfPiYeZgY3PMtC1BbSuKU3+SS8wbXRiqsnaeaoQiySu71q
-	1CwaNY1pjsPEMAy4nHrKeamO/xoE5vsb1Tz8V3JxuP6EO5BQkJIohk7hpF1fPukngZ8n
-	GPbB+uZtJvxWAZbpi6K5KjKu5F2VK+6n6OptCbVqrfiA4o0qw+2XVTyg5/zSkDXgCR/n
-	pPO3UULA1eDTMmHurd41NFOoOWufg8nStoDmapMTpe5xHPBrm+tLS5LwV5SVnE6hiYdS
-	PUdg==
-X-Gm-Message-State: AKGB3mIXJkodWnRpj5xxL9DSmtlyCo17C/a2wE31Wog8cf9nUY7svTET
-	Q2AZvFFIykdDLcJ4hK7Sjd8oKQ==
-X-Google-Smtp-Source: AGs4zMaNxwOvRTwYkItO/5AH/dAtjshr8iyGBO5IgEjoWoFeAe5WN7lcGz/riNPsiSbjBPVTEcuoKQ==
-X-Received: by 10.200.4.154 with SMTP id s26mr8772622qtg.156.1512132328102;
-	Fri, 01 Dec 2017 04:45:28 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:organization;
+	bh=NSfueM6jJ5oY75oRO8/EZXim5eoTNnS8Mnis/gQcdjg=;
+	b=GX5QTWh8FaJS0H+7AdTPFh4jslgcmcuFOBk5UDVM1wqsz1KN5n0s7j08wqSwoYbT41
+	DeWK+TFW1UNhOR4KjIE3+qFT93fSUzkmkgz4uXMRPiVYpzAwbWysOnSL1eAYvHMmTPgd
+	EMRDJy2zQNYVHu1+1HjVQKUarc2aOmLDuFASbBaHzvQhv2xqx3lQf9+nPuvjWUzE/AJj
+	MU4JiCDNwEuSN7dC3DV4UBVpRGR8bZG/Bqv5zYs9cWHPoJB+F55C/lEx7qMgQB8Qzsvs
+	RyuOqpcUB2BIHkD7Ao2Pszg5ovy9oC+6ZLrM89SksJoJph5nNQjJ0nKxoKh0XMSer+rR
+	AVuQ==
+X-Gm-Message-State: AKGB3mLfQILq27nt44W4NuIAiFa6Zzr+XpclnKL2Q91r+hcLVWsOiwpK
+	wFtzy/fe9cnN1kMQSjpfwzyYpA==
+X-Google-Smtp-Source: AGs4zMaOWH/i70o/MYaGTGqL3e3iDaD3BC5Kz3GmEiPLNNB09y+Vu9OGDcffrfMM+b9AMeN/dIcxbg==
+X-Received: by 10.55.37.67 with SMTP id x64mr7503934qkg.116.1512132425108;
+	Fri, 01 Dec 2017 04:47:05 -0800 (PST)
 Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id y9sm4441046qti.63.2017.12.01.04.45.24
+	by smtp.gmail.com with ESMTPSA id
+	v17sm4523642qtj.35.2017.12.01.04.47.02
 	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Fri, 01 Dec 2017 04:45:27 -0800 (PST)
+	Fri, 01 Dec 2017 04:47:04 -0800 (PST)
 Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Fri, 01 Dec 2017 10:45:21 -0200
+	Fri, 01 Dec 2017 10:46:58 -0200
 From: Otavio Salvador <otavio@ossystems.com.br>
 To: Meta-OpenEmbedded Mailing listing
 	<openembedded-devel@lists.openembedded.org>
-Date: Fri,  1 Dec 2017 10:45:02 -0200
-Message-Id: <20171201124502.18190-3-otavio@ossystems.com.br>
+Date: Fri,  1 Dec 2017 10:46:57 -0200
+Message-Id: <20171201124658.19036-1-otavio@ossystems.com.br>
 X-Mailer: git-send-email 2.15.0
-In-Reply-To: <20171201124502.18190-1-otavio@ossystems.com.br>
-References: <20171201124502.18190-1-otavio@ossystems.com.br>
 Organization: O.S. Systems Software LTDA.
 Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [meta-python PATCH v2 3/3] python3-pycrypto: Add recipe
+Subject: [meta-oe PATCH v2 1/2] nghttp2: Move to meta-networking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -52,32 +50,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Dec 2017 12:45:27 -0000
+X-List-Received-Date: Fri, 01 Dec 2017 12:47:04 -0000
+
+The nghttp2 depends on c-ares which is provided by meta-networking
+layer, so it should be moved there as well.
 
 Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
 ---
 
-Changes in v2: None
+Changes in v2:
+ - rebase on top of master
 
- meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb | 9 +++++++++
- 1 file changed, 9 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
+ {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ rename {meta-oe => meta-networking}/recipes-support/nghttp2/nghttp2_1.26.0.bb (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-new file mode 100644
-index 000000000..0f0999955
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-pycrypto_2.6.1.bb
-@@ -0,0 +1,9 @@
-+inherit distutils3
-+require python-pycrypto.inc
-+
-+# We explicitly call distutils3_do_install, since we want it to run, but
-+# *don't* want the autotools install to run, since this package doesn't
-+# provide a "make install" target.
-+do_install() {
-+       distutils3_do_install
-+}
+diff --git a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
+similarity index 100%
+rename from meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
+rename to meta-networking/recipes-support/nghttp2/nghttp2_1.26.0.bb
 -- 
 2.15.0
 
