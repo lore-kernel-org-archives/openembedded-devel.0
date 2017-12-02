@@ -1,50 +1,51 @@
 Return-Path: <bill.randle@gmail.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A1A2786F4
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A8A66786EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Dec 2017 05:13:10 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id k134so5369157pga.3
+	Sat,  2 Dec 2017 05:13:11 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id p84so5549221pfd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 21:13:12 -0800 (PST)
+	Fri, 01 Dec 2017 21:13:13 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=pwixQW6OdoteleWsxCaaHSLOSR81+/4j6rO1rhnVUCc=;
-	b=g2PuCdEFiMcrlsvOQ+Ju2HK7gagIi5LAhpYP6ZQkHmOkJgCdsugx4Y27UFBFy0n+cB
-	G3PLx0OQqX62/fzV/6fzq9584msGXSfT4upZpOx3wf58jUAj8Fgm8t0Cc9fAYpZjbxY6
-	1EgHXvlqvjbDJECYtl9q3+sMfN6Oe2UAJaaTv0YOvtT4l6DPbUnI8hLRqX7GZUDjcouW
-	Niwnspu+WwJlvzkhICd2ealfbqyfi/Vw45GqjWS7tGmOHO8z33KsngWdwcE2tFwI0O9R
-	EZXCejbRDLtFxvA/A7dLmmn5MO8us8/PZ010J9kn1yhM3HP6QNEryHEK1RNyeu+zDm67
-	inQw==
+	bh=ts67ehOBSspbo4l6zZc9EcYXN9h+dxNQjT5ZO0dczS0=;
+	b=THbrJx8NzM8fkfBZScqA+DfY0365VVnwNY2ZYoTisj7bqwKprz4d4UXhAZGs61yK3e
+	+tlCAn+0f+O8jkPBxv64put7lz1nSApSt2RrRw45h3j8FKwYLzrIa1Wxndot8HovmBvE
+	XxI9Pi4lT9zIOT2FEEBYfpy3L/DPO50P7rw5tuydQdrwveGCgVigs5W+V9jcSZCGgeb7
+	6Sfl/ztM4HoLDi9d0y9NlrMtr1wXFfqoku6qvzbCcwMKAY42GqRRTajGJ961IX2OSsuS
+	oIQwYpgU3amkdSnFOHqrBWKFY5yz5MkNeXtKYfJftLx1LzyDpYT4nzk4qaBNNN+nqqDJ
+	ohAw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=pwixQW6OdoteleWsxCaaHSLOSR81+/4j6rO1rhnVUCc=;
-	b=Sme7sYxTNG6mo05ci8+oAjmZ66eMDR2IQeiqtZlQeuaHceqcR4EnV1Vi9GlE6q4vbL
-	wJK87bsVgwTDN+3qAhYTj+ZjpcrTui0gO/60Nn4HR/RSpEE5ZiP4JYV2lxjeSxO16eZD
-	mYML9pW+xkVcabrIxj0cSCcoJ1K0iP8sZ+eD33mVeq9CfJxT5+WO4+fCv04F0fL+aMtI
-	4eTCLGV43wnbQJqWKHjyGzP/OkoC977fClbiGWhAK1gJ7y5c4TSZN0uXL2sEA6zr+HU/
-	JjgaBcrGF22C+7DzPV27kSTfshIR0HBRjNyiW3eZKmnSW5DJbzyN0wdYz8PJcDh9XKE2
-	1A5Q==
-X-Gm-Message-State: AJaThX5hHijT4AtmatRiEO6I5yT9eso5dOqb+7XmvMbcWs9uo02HdN1Q
-	dvji3ZHrCFex9VmIWglQCUn4pg==
-X-Google-Smtp-Source: AGs4zMYulMlJ0QYz0DOYAwEv5iAhEGxqEonVKtaqTnXcA8Jn+6LFzuXyugXW3WM5yawYa+6ni1MAlw==
-X-Received: by 10.99.176.76 with SMTP id z12mr7929269pgo.358.1512191591575;
-	Fri, 01 Dec 2017 21:13:11 -0800 (PST)
+	bh=ts67ehOBSspbo4l6zZc9EcYXN9h+dxNQjT5ZO0dczS0=;
+	b=O9QyjDFH6N58211ygQyKqZnxbt7bkslgOMIxSWMR7iLbCaVW61/aA6gRnLGw8jJPiH
+	WxiGRdFNhIB/0toRQMA2R+lawbWk4WaY/ugpznBiSmnVGcZdttJP9GkruvU0GTjm2Tpx
+	4iqty52mvnv+WppwajH+9brXjz2bfq4qA5xiYtZ6YfcFz+j1t/7jlp6Pl9TrtILVrAm3
+	rzWdgUBIzETSP8frSkm+t634Xfa/lqdZrgUqqug9w9CntFste3KOGF9pAxGTmDZqTp9Z
+	Hgz3qtJlOnuCdKwBAKYmbCA13g1/zxWtlkhs3MiDqoRM4TOpq5nupA+uS1Dm5WDqtzZF
+	mMvg==
+X-Gm-Message-State: AJaThX7JqTBqPT3fg9kPFWx+pd5cM9jdDC9ZKyGriMWSWff53swSPCY/
+	6EJCHA0A3mavo9wAdoDGOV2/Eg==
+X-Google-Smtp-Source: AGs4zMYC81lM+VbClB8vqkd/qBd6mJZXQJi38GUxjFN1sDHjUbiDIKSFUotQO3V3kpSjk9wM5HKzVA==
+X-Received: by 10.99.171.13 with SMTP id p13mr3233837pgf.30.1512191592573;
+	Fri, 01 Dec 2017 21:13:12 -0800 (PST)
 Received: from neosoft.neocat.org (184-100-225-25.ptld.qwest.net.
 	[184.100.225.25]) by smtp.gmail.com with ESMTPSA id
-	r1sm14681137pfg.98.2017.12.01.21.13.10
+	r1sm14681137pfg.98.2017.12.01.21.13.11
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 01 Dec 2017 21:13:10 -0800 (PST)
+	Fri, 01 Dec 2017 21:13:11 -0800 (PST)
 From: Bill Randle <bill.randle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Dec 2017 21:12:47 -0800
-Message-Id: <1512191576-2302-5-git-send-email-bill.randle@gmail.com>
+Date: Fri,  1 Dec 2017 21:12:48 -0800
+Message-Id: <1512191576-2302-6-git-send-email-bill.randle@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
 References: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
 Cc: ticotim@gmail.com
-Subject: [meta-python][PATCH 04/13] python[3]-flask-nav: new recipes
+Subject: [meta-python][PATCH 05/13] python[3]-flask-uploads: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,53 +58,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Dec 2017 05:13:10 -0000
+X-List-Received-Date: Sat, 02 Dec 2017 05:13:11 -0000
 
 Signed-off-by: Bill Randle <bill.randle@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-flask-nav.inc    | 13 +++++++++++++
- meta-python/recipes-devtools/python/python-flask-nav_0.6.bb |  2 ++
- .../recipes-devtools/python/python3-flask-nav_0.6.bb        |  2 ++
- 3 files changed, 17 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-flask-nav.inc
- create mode 100644 meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
+ meta-python/recipes-devtools/python/python-flask-uploads.inc | 12 ++++++++++++
+ .../recipes-devtools/python/python-flask-uploads_0.2.1.bb    |  2 ++
+ .../recipes-devtools/python/python3-flask-uploads_0.2.1.bb   |  2 ++
+ 3 files changed, 16 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-uploads.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-uploads_0.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-nav.inc b/meta-python/recipes-devtools/python/python-flask-nav.inc
+diff --git a/meta-python/recipes-devtools/python/python-flask-uploads.inc b/meta-python/recipes-devtools/python/python-flask-uploads.inc
 new file mode 100644
-index 0000000..932ccdf
+index 0000000..cd7ac1a
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-nav.inc
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "Easily create navigation for Flask applications."
++++ b/meta-python/recipes-devtools/python/python-flask-uploads.inc
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Flexible and efficient upload handling for Flask"
 +LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2729ee82259d601d90d28b0574d12416"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=b712ac634b39469660c9bdfb8d03421c"
 +
-+SRC_URI[md5sum] = "4d51cfd06d58f8d0fe85775a6696c0e5"
-+SRC_URI[sha256sum] = "44e40b755380a1e68ab521a2f9174de259a2c94ddcdaabf36b3aca2e110a33f4"
++SRC_URI[md5sum] = "e5eee34aa92b64a4d22847672b3858a1"
++SRC_URI[sha256sum] = "53ecbd6033667d50ae02b63adebbaa33c7fc56c09e5293025810cf9d841ecb02"
 +
-+PYPI_PACKAGE = "flask-nav"
++PYPI_PACKAGE = "Flask-Uploads"
 +
 +RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-blinker \
 +    ${PYTHON_PN}-flask \
 +    "
-diff --git a/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
+diff --git a/meta-python/recipes-devtools/python/python-flask-uploads_0.2.1.bb b/meta-python/recipes-devtools/python/python-flask-uploads_0.2.1.bb
 new file mode 100644
-index 0000000..30b5b3b
+index 0000000..d39b07f
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
++++ b/meta-python/recipes-devtools/python/python-flask-uploads_0.2.1.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools
-+require python-flask-nav.inc
-diff --git a/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
++require python-flask-uploads.inc
+diff --git a/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb b/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
 new file mode 100644
-index 0000000..d251152
+index 0000000..758c2ac
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
++++ b/meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools3
-+require python-flask-nav.inc
++require python-flask-uploads.inc
 -- 
 2.7.4
 
