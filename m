@@ -1,52 +1,47 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f182.google.com (mail-yw0-f182.google.com
-	[209.85.161.182])
-	by mail.openembedded.org (Postfix) with ESMTP id C1F7378411
+Return-Path: <bill.randle@gmail.com>
+Received: from mail-pg0-f66.google.com (mail-pg0-f66.google.com [74.125.83.66])
+	by mail.openembedded.org (Postfix) with ESMTP id DA71177811
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  1 Dec 2017 18:23:53 +0000 (UTC)
-Received: by mail-yw0-f182.google.com with SMTP id t204so4374732ywe.9
+	Sat,  2 Dec 2017 05:12:10 +0000 (UTC)
+Received: by mail-pg0-f66.google.com with SMTP id y6so5364003pgp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 10:23:55 -0800 (PST)
+	Fri, 01 Dec 2017 21:12:12 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=7tTN4CwcIGU6qCmve2WcxBGIJOPHTOw+c6mefSxLLJs=;
-	b=Wo9HYdw/sgPMKm6yHANK3Z/knhuBHzcEdlBIasGwDFi0Mcipl2YTc/poHqNncD8CvG
-	XUyXCEGfRHvq5hKhObWDZYQTW+vYu8AHlV+wSPk8xNxYNYD5Ro2nxPq2RpLueIbAZyB2
-	PoHhTXvU4pC+Cggv4Ejtl9AQkZPgiPnJ6zLO2csNfNckaXIwRy0ZOaHwlPG0vyCHYXXm
-	Im7heNDRgNziExfvkI+pOSfuP9caLHeO6uFEiFUAP7pO72MDGrZ1JQlb0BzldTVM24kA
-	oczx1KKdvrk7fFKlcjH4vBlkou6/li6GaXl3L968qmJc84BBei3lUpxZAxPsiyaiJOd2
-	g3iw==
+	h=from:to:cc:subject:date:message-id;
+	bh=3NHOucNjlqlmwXluvSrYuZzgu200stOmR34dIC+HAYQ=;
+	b=LDrFMLkJlFMpluX9YqCPGxj/s+xegFBJPrSUfMqOOQ4JB2ReV6L1j3laYr8BzOrebF
+	WonvramuE6VLa7Qvks7qnsBtz0+1PChrQC/iwAusoLzVq/2AxIwy7AuhnlcWCiQHYgvI
+	Xv1qJta7dqjC1u2Gnjc+VPgs1uXItwr7MlT0joVjdQiwe3IBMhNjjCme+P2i2PwHQzLc
+	3LnwbqVlKueY9k15zMFctSga6jHtilaygYb1qdOa5+69yU2eu80sRcUo3beQ8V12tWxg
+	Mxm426xkkrnUyUCaHn1cJdGulR+rZC3JCjEOZlo85Us2s66RJlvOjtBn5AuU359wM+3+
+	rhhA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=7tTN4CwcIGU6qCmve2WcxBGIJOPHTOw+c6mefSxLLJs=;
-	b=VKH3EYOIwvPiRZSK+wIFcIGkSWWw5IWtImoq98LDjy74USUNXmyUl8ZDL7yi1nK5UI
-	aVZFSRTsR1uPpbpxBe7UmYGgWqIhhGSaTl7dbwlANHXdgke9m/wCkO7llHHaEKBPUCeW
-	1ahSWdaLbRrKGaMbpjdkxtoCzRCn9OtTb3t8Bk1MtsUPCyGngeGCcsG0gUEKL8XHf5X+
-	tKNMmV/SiLC43dFc0qKoeJy9VKG+k1p+Maagt7LdQOEme9ALMQ5S7EayBz6hziV8Er6P
-	Rk3+/zBHGhFpSjVgAH1To0WW1NDJflM7pOkt6b2rdPzNly6tte9SVUWasFCgz/SSGNgv
-	9vfA==
-X-Gm-Message-State: AJaThX4HEooGG+Ia2JRQwqQljkb0EeL8PHXd88Vdcs2eZLOBqvPc4giK
-	nOKLsyHDlzDz3SCQQ+33R4fBk3PUYIzssHBwEm0=
-X-Google-Smtp-Source: AGs4zMaERSIOxk9SzYYulxkhf+qKWV3QHinGUkalHG1Tq/HmxxnV2g36g9+EsjDU/+Z2cmLyJfrlb9a7RFC0KACRq6U=
-X-Received: by 10.129.58.3 with SMTP id h3mr4624848ywa.236.1512152634526; Fri,
-	01 Dec 2017 10:23:54 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.37.98.21 with HTTP; Fri, 1 Dec 2017 10:23:53 -0800 (PST)
-In-Reply-To: <CAMKF1sqnSJnwFr9fsruGkW2btnS7hDuUKGpSg0tYwx9mJ2UwiQ@mail.gmail.com>
-References: <20171201110816.13519-1-schnitzeltony@gmail.com>
-	<20171201110816.13519-5-schnitzeltony@gmail.com>
-	<CAMKF1spQVcCKkpfBng=BdfvTyGyESKtMABy7gn_qqBK-2Fv5aA@mail.gmail.com>
-	<CALbNGRQXaw9wwhv_-uBJbRfUhSJScrmRJ9JSEWGazbX4zdQtHQ@mail.gmail.com>
-	<CAMKF1sqnSJnwFr9fsruGkW2btnS7hDuUKGpSg0tYwx9mJ2UwiQ@mail.gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Fri, 1 Dec 2017 19:23:53 +0100
-Message-ID: <CALbNGRTaPxAxJrMWW1b0A7pPyFwymLo0-nAMaN+63UTgVk8M0A@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [PATCH 04/10] fluidsynth: performance improvements
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=3NHOucNjlqlmwXluvSrYuZzgu200stOmR34dIC+HAYQ=;
+	b=nIcXjBvp7UGzX0skQR/Bo8aHXgiBLwFPyCsFJFO7EEZRNdttCtUYm0uEVgeCEBo7u9
+	ibQwkfz9KPj+IGP/Gb/Rkkw3g8pAvmgggeyYvJn2BPpr2xmgHf+m5T1KKWKNIYskSOa4
+	rb+EoUhfqvdo254WzoZqgPjxzxRZ900wbO5PH3gNRpNOKvxOGCpmzp8xJq6HAzP7k9kE
+	7an2U0uOEVgcxLVgLE5KUNLpnPbuO7+rqw6G+Lyr38VmjP4o6aWqT6Nc0aLHKYQMDvpd
+	Z+Pua+/npqLZJ+mEh038EUmPwZK5QforJoUSP2quB+oFgUcYF/DF2A5C02KKX+HFdIO/
+	9KMw==
+X-Gm-Message-State: AJaThX7DLBVHhWtCFJlxtwxiwehCCaCl3aE+nmMlKabyND3WSL/KbnoO
+	5oi3KgiNRbozzJeQF5A4bzkAhw==
+X-Google-Smtp-Source: AGs4zMaOEkqJB7LW8yVzYJgC9/mAkg3qGQDoUIwUT+/4K/g5GSwqUD3kjZMw12yO0xSE3oiRVl8TAw==
+X-Received: by 10.98.216.193 with SMTP id e184mr12420355pfg.98.1512191531421; 
+	Fri, 01 Dec 2017 21:12:11 -0800 (PST)
+Received: from neosoft.neocat.org (184-100-225-25.ptld.qwest.net.
+	[184.100.225.25]) by smtp.gmail.com with ESMTPSA id
+	r1sm15070855pfe.99.2017.12.01.21.12.10
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Fri, 01 Dec 2017 21:12:10 -0800 (PST)
+From: Bill Randle <bill.randle@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri,  1 Dec 2017 21:11:53 -0800
+Message-Id: <1512191514-1791-1-git-send-email-bill.randle@gmail.com>
+X-Mailer: git-send-email 2.7.4
+Cc: ticotim@gmail.com
+Subject: [meta-python][PATCH 1/2] python-blinker: move core recipe code to .inc file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -59,57 +54,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 01 Dec 2017 18:23:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 02 Dec 2017 05:12:11 -0000
 
-On Fri, Dec 1, 2017 at 6:52 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Signed-off-by: Bill Randle <bill.randle@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-blinker.inc    | 7 +++++++
+ meta-python/recipes-devtools/python/python-blinker_1.4.bb | 8 +-------
+ 2 files changed, 8 insertions(+), 7 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-blinker.inc
 
->
-> >>
-> >> > I wonder if gcc could be initiated to see if it can vectorize the
-> code,
-> >> > here
-> >> > have you tried setting cmdline options or may be pragma hints
-> >>
-> >
-> > I've sent patches like these to some projects. If I remember correctly
-> first
-> > one was jack2 [1]. For that I wrote some performance tests [2] and tested
-> > vectorizing either but with disappointing results. This is ~ a year ago
-> and
-> > I think intrinsics are still the option performing better.
-> >
-> > [1]
-> > https://github.com/jackaudio/jack2/commit/77bb8be12e0d856fbc004cf57185ab
-> 36a2df04c2
-> > [2]
-> > https://github.com/jackaudio/jack2/commit/c32b823860bc8e887774ab10bc3e9b
-> d76e85e3f3
->
-> interesting. does it mean that vectorization sucks in gcc form arm ?
-> and works ok on other architectures
->
-I am not using other arches than ARM so I cannot help you here.
+diff --git a/meta-python/recipes-devtools/python/python-blinker.inc b/meta-python/recipes-devtools/python/python-blinker.inc
+new file mode 100644
+index 0000000..eaf3908
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-blinker.inc
+@@ -0,0 +1,7 @@
++DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
++LICENSE = "MIT"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
++
++SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
++SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
++
+diff --git a/meta-python/recipes-devtools/python/python-blinker_1.4.bb b/meta-python/recipes-devtools/python/python-blinker_1.4.bb
+index 0ce141f..bc4164e 100644
+--- a/meta-python/recipes-devtools/python/python-blinker_1.4.bb
++++ b/meta-python/recipes-devtools/python/python-blinker_1.4.bb
+@@ -1,8 +1,2 @@
+-DESCRIPTION = "Fast, simple object-to-object and broadcast signaling."
+-LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=946d7e89af6f7733aeaebed5635d2682"
+-
+-SRC_URI[md5sum] = "8b3722381f83c2813c52de3016b68d33"
+-SRC_URI[sha256sum] = "471aee25f3992bd325afa3772f1063dbdbbca947a041b8b89466dc00d606f8b6"
+-
+ inherit pypi setuptools
++require python-blinker.inc
+-- 
+2.7.4
 
-What I can say is that this patch together with setting fluidsynth to multi
-threaded operation [1] helped me to play MIDI arrangements with >20 tracks
-on Raspi3 without audible issues. Before it was a nightmare: Output was
-distorted totally and XRUNS reached numbers > 1000 very soon.
-
-A bit off-topic (but only a bit :) At the moment I am writing an extension
-to qjackctl: Some chart for so called DSP performance and XRUN frequency to
-gather reproducible numbers. So I can see exactly what change is an
-enhancement and how much it increases performance. Once this is done I plan
-to send this patch (and maybe others) upstream. I could try vectorizing
-once again then.
-
-Ahh - maybe I should mention: The patch causes effect only for fluidsynth
-in multi threaded mode.
-
-[1]
-https://github.com/schnitzeltony/fluidsynth-dssi/commit/bad09c6f5c5508c5f5330aa5188510f975e50c50
-
-Cheers
-
-Andreas
 
