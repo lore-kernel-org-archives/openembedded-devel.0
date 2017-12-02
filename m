@@ -1,51 +1,51 @@
 Return-Path: <bill.randle@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 8AAC8786C8
+Received: from mail-pl0-f68.google.com (mail-pl0-f68.google.com
+	[209.85.160.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FE24786C8
 	for <openembedded-devel@lists.openembedded.org>;
 	Sat,  2 Dec 2017 05:13:07 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id d21so7419519pll.1
+Received: by mail-pl0-f68.google.com with SMTP id f6so7442781pln.12
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 01 Dec 2017 21:13:09 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=ThV/zo/6epujHUYrHGh8S3rp+eKHDPnT653sq6UmZr0=;
-	b=T5YRLepJHIddGueR+k/1iT39jhnZANvFwm2wJn/Bx/gq1EDcFeDWO+Qnq+lrsDeH7s
-	RFc4BiSQaDbnSSAEU5SdTtodNp84Of+V1ithAMeYUYDkP2aP9nzdRDVuL5Nod29Z0rN7
-	8HhMzWDTXvHGk3SbtWizrVO5G1/0B6IQiEYSvcLq3MJZP41J3hnglseUBIADoUdD76Iv
-	kMN/vr6FDJ81fwvNrN1YFkMCioBE+9E/R6i40W2RjhwYK7icZcPcpbSSHf63r9HlUVhF
-	Qc3Kx3np7Om48WRJeOv7+RViUEC9rdanuCEZMfgEUsY0+2MwfKTpclUmZQ24Cp7+9ZrE
-	NRnQ==
+	bh=XtrGRe/pvl1acjX3gcMazGetQr1j7BVWmtuktMTTD9E=;
+	b=Tomhb0DveY6NX6ROnEQwKpfG9axxWvOwskwavSEwHo6So6LBg0GVA6m3jqTqv3b7ex
+	afhVvBuy+hZf9y+XLICyif0oKPfFyHwtV3CLCaBLHERp+w2SQYNRPLf0cR6iLeGbvCTb
+	LKav2RNVJmCrwOIWVs2TJ+9+lE3lO06BxzLyyYresDo2o0Ry9mGGyitYcWwdxOoJEURk
+	+XbDQ9IPWsVz6wP6uk6NPJ80skp0S8EXsyhCyTFkf473Uod0myenwUxVnnL6uMgzkjkV
+	R5Ss/SjAwvt6EZTjqxQqfiTz6ndK2+L+lv5nuw4yWJgOJ541fx3chkPd2PEO5mU8Wy1K
+	mCCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=ThV/zo/6epujHUYrHGh8S3rp+eKHDPnT653sq6UmZr0=;
-	b=HTqwfLnyoazYhmeKfeUMTPkJLDtJ9ACbaarLtq9EhZSEY9TAUSF0b2hMYe1aQ3K6zA
-	scGT6Cse7gaa550GFdeBQ8mM8v1wB1HRGnhj/z7OJOD5XJuy944QtK+vdsLbgVLrQsN5
-	LGWUoowCc4Y5jva86kBAvy/4WoSDl4o2EYD5u8M/S3KWkXZ3imuP1uQ28n0AIOF20xo/
-	Ih0Og51OyW4XFVPLWHBcZUioxgkLVRXJYxMZYd3+32vC8uKWEzhE6JFgl7VelRvd7cUZ
-	zBPO8pe8T9KlIO1sZNNi593bv/PEXdYdrGFEPkRSJM2gLm/ERecvxjlmSlMqrvRPjf9O
-	OseQ==
-X-Gm-Message-State: AJaThX6KrHInkUU69++Jpw29W9vW4giZ0Iw5SdIpe1wOOvlG9un2asMj
-	QI5wMqZq5m42c7apBER4jNIldQ==
-X-Google-Smtp-Source: AGs4zMZRE9GRwTT1NTZh0iLdtRAQxRpOMi8myf6/3yNLx6NBhr4NyOuETqqWDzCfvsViMX7Qlxp/0A==
-X-Received: by 10.84.248.145 with SMTP id q17mr8070034pll.416.1512191588408;
-	Fri, 01 Dec 2017 21:13:08 -0800 (PST)
+	bh=XtrGRe/pvl1acjX3gcMazGetQr1j7BVWmtuktMTTD9E=;
+	b=ba68BZP5pP0txu2ifsYsopj0xBHTit27KLQAZj5ieLocJmIBDkrIK807qxOt2GiwVl
+	6QQLcGH9Xw963v8QPPxwTvU87j/ccuD88T1cw/vBnt5nLcPcwnUfOTiwvfonlgTHmlDw
+	DJLHHEDiZXNB51wUNEDE6vXiLL947iw3R7dxftFbcqRZP+3P8GK9FkjQhlXFHa/p/AVW
+	0jv8whiF8qlk6mTGWS4EKgSvDMJbP/sbmlkS7ds3yv2qCc49/OVKa9RFxG9eDt+1XZ5y
+	+Gh4MrjhuhtcLqHrjgnOFaeJp9Jgcu5JjL7aJI8Zj6o8hwMwF+Ue2rxk41SLVXle6GhF
+	qBHQ==
+X-Gm-Message-State: AJaThX6i1V66xD0zE1c08qnE4y0jrFsMtWlrcu5kEhlOmxSlWBiYvc9W
+	fGk6QK2wBRn1sadkGbJ9VcFyxA==
+X-Google-Smtp-Source: AGs4zMbL6uUNb6zkDX6UppDP8YB3Y9O4AZEafsVIWFlMOWLAFgSLdE2FRia+i/IVoZNstQd6370Rhg==
+X-Received: by 10.84.217.2 with SMTP id o2mr8350305pli.338.1512191589175;
+	Fri, 01 Dec 2017 21:13:09 -0800 (PST)
 Received: from neosoft.neocat.org (184-100-225-25.ptld.qwest.net.
 	[184.100.225.25]) by smtp.gmail.com with ESMTPSA id
-	r1sm14681137pfg.98.2017.12.01.21.13.07
+	r1sm14681137pfg.98.2017.12.01.21.13.08
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 01 Dec 2017 21:13:07 -0800 (PST)
+	Fri, 01 Dec 2017 21:13:08 -0800 (PST)
 From: Bill Randle <bill.randle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Dec 2017 21:12:44 -0800
-Message-Id: <1512191576-2302-2-git-send-email-bill.randle@gmail.com>
+Date: Fri,  1 Dec 2017 21:12:45 -0800
+Message-Id: <1512191576-2302-3-git-send-email-bill.randle@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
 References: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
 Cc: ticotim@gmail.com
-Subject: [meta-python][PATCH 01/13] python[3]-editor: new recipes
+Subject: [meta-python][PATCH 02/13] python[3]-alembic: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,49 +58,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Dec 2017 05:13:07 -0000
+X-List-Received-Date: Sat, 02 Dec 2017 05:13:08 -0000
 
 Signed-off-by: Bill Randle <bill.randle@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-editor.inc       | 9 +++++++++
- meta-python/recipes-devtools/python/python-editor_1.0.3.bb  | 2 ++
- meta-python/recipes-devtools/python/python3-editor_1.0.3.bb | 2 ++
- 3 files changed, 13 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-editor.inc
- create mode 100644 meta-python/recipes-devtools/python/python-editor_1.0.3.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-editor_1.0.3.bb
+ meta-python/recipes-devtools/python/python-alembic.inc      | 13 +++++++++++++
+ meta-python/recipes-devtools/python/python-alembic_0.9.6.bb |  2 ++
+ .../recipes-devtools/python/python3-alembic_0.9.6.bb        |  2 ++
+ 3 files changed, 17 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-alembic.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-alembic_0.9.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-editor.inc b/meta-python/recipes-devtools/python/python-editor.inc
+diff --git a/meta-python/recipes-devtools/python/python-alembic.inc b/meta-python/recipes-devtools/python/python-alembic.inc
 new file mode 100644
-index 0000000..30650bd
+index 0000000..2ca6023
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-editor.inc
-@@ -0,0 +1,9 @@
-+DESCRIPTION = "Programmatically open and editor, capture the result"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=d2794c0df5b907fdace235a619d80314"
++++ b/meta-python/recipes-devtools/python/python-alembic.inc
+@@ -0,0 +1,13 @@
++DESCRIPTION = "A database migration tool for SQLAlchemy"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=d07407716fd24408b5747b0fa2262775"
 +
-+SRC_URI[md5sum] = "0aca5f2ef176ce68e98a5b7e31372835"
-+SRC_URI[sha256sum] = "a3c066acee22a1c94f63938341d4fb374e3fdd69366ed6603d7b24bed1efc565"
++SRC_URI[md5sum] = "fcb096bccc87c8770bd07a04606cb989"
++SRC_URI[sha256sum] = "042851ebe9efa07be6dc1395b1793b6c1d8964a39b73a0ce1649e2bcd41ea732"
 +
-+PYPI_PACKAGE = "python-editor"
++PYPI_PACKAGE = "alembic"
 +
-diff --git a/meta-python/recipes-devtools/python/python-editor_1.0.3.bb b/meta-python/recipes-devtools/python/python-editor_1.0.3.bb
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-editor \
++    ${PYTHON_PN}-sqlalchemy \
++    "
+diff --git a/meta-python/recipes-devtools/python/python-alembic_0.9.6.bb b/meta-python/recipes-devtools/python/python-alembic_0.9.6.bb
 new file mode 100644
-index 0000000..f7a9a8c
+index 0000000..efcb2b1
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-editor_1.0.3.bb
++++ b/meta-python/recipes-devtools/python/python-alembic_0.9.6.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools
-+require python-editor.inc
-diff --git a/meta-python/recipes-devtools/python/python3-editor_1.0.3.bb b/meta-python/recipes-devtools/python/python3-editor_1.0.3.bb
++require python-alembic.inc
+diff --git a/meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb b/meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb
 new file mode 100644
-index 0000000..8ad2b86
+index 0000000..e248fe7
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-editor_1.0.3.bb
++++ b/meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools3
-+require python-editor.inc
++require python-alembic.inc
 -- 
 2.7.4
 
