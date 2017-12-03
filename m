@@ -1,51 +1,37 @@
-Return-Path: <bill.randle@gmail.com>
-Received: from mail-pl0-f65.google.com (mail-pl0-f65.google.com
-	[209.85.160.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CA1878757
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A32E5601D4
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  2 Dec 2017 05:13:20 +0000 (UTC)
-Received: by mail-pl0-f65.google.com with SMTP id b12so7439682plm.3
+	Sun,  3 Dec 2017 19:53:54 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id 33so18882623qtv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 01 Dec 2017 21:13:22 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=sWNL0zqu6qovPOtVUXRJ1iw04XjTU654NwIwRkrpWpw=;
-	b=YD55kfhn265dxQ9D58EIg2E6GIHnIJ+Vaw68OuuZdAkKHJtgGMC+ACX8Q2+Z02SaHQ
-	y/zxzGAfyaRFNy7mxTcIZEik7ZgY3gKGPo5cSPe9EsdVBM3jxiGwTbl7FM00lnq2/Ndm
-	aE+NGJDm7kg1dFhtBkmDYjftbAC6ak+y8lcLacBXHsAGQMSq2XH79a/bR3svUzyu4ePI
-	6YBo3AZnWshVhFKTxwbUZhewWwyhOONSaFc+MF+Ho6Elm3tqx5Ae/LnkAarztTSay8Uw
-	9Lv94ZIDpyfjXHx0aMeRFwxVjtDFlmjk5DiFgSQ78WR4eiEMubkU3z7tXlCYByDLsQ0j
-	3/lw==
+	Sun, 03 Dec 2017 11:53:56 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=sWNL0zqu6qovPOtVUXRJ1iw04XjTU654NwIwRkrpWpw=;
-	b=NbZZsqnDPuWXoWrLP8LYFaz4xTpXcomoZiobTYS2j3460E6jS+ky79x4HKffF/gWOb
-	Bum7HG8N5k7i5SfoyLvKTcOkTE0acXK8jVr5onTdj76YtfQ4ASlK2DAZbcW5ArEGXu8u
-	5APMkslvS+1vQeu7mGoQ0sVqb6oFgPLRrtlcG+FvQOD1ULMhUKiokR73dIoHP6nuLVdP
-	p+lwdxxBa+RKyOLj5DOPWPmliUTxIXVIdNV87DkPXq9ClAwaOTwshPHKqLeyOniaJrRA
-	CKAwyQmC3nRZ6WX5jrbqkuTp1J6HhzO+xjokdbN+YYjL2Qkqg2ZzYKxJArdLxD34iV2+
-	nWsQ==
-X-Gm-Message-State: AJaThX6GqYm/EN9iZWfuIR0B9xkYuybBcXAtpIqGmNPv4lewjzeflNkP
-	AT7lQIpIt624363hIBY1o4uQRw==
-X-Google-Smtp-Source: AGs4zMYrAaOXsRaStdD0aTmghPWC12qH8OJQLpNqzkLYAJPHO7LdAS22ca9WZhQqo6sv98+uxml41Q==
-X-Received: by 10.159.231.22 with SMTP id w22mr8149691plq.125.1512191601893;
-	Fri, 01 Dec 2017 21:13:21 -0800 (PST)
-Received: from neosoft.neocat.org (184-100-225-25.ptld.qwest.net.
-	[184.100.225.25]) by smtp.gmail.com with ESMTPSA id
-	r1sm14681137pfg.98.2017.12.01.21.13.20
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=0GLifpJT0BEKBp4j8tsiAx/OXa2T0I3PLQtPZ6xkEMk=;
+	b=pKFoyFC74+DxOiyVR33i3JSpfdDkeF4ZvuN6VKkrTR4mI2PFG4l6mswmpHwuswAtqT
+	1A3iLkmM2qdg+jpCtfT9gEWiR1dmIWZpKKf9axocQsHH+2nYXLSRVzotXyexZaGXjoFG
+	r5At3KI1C7s8tw3diHEL8B0Wwod7ag0DSZ14UUrxyOgfkCS2vgWzZc2htTa5N6Uv3VaS
+	97YQrjbonDcZTX/eOaWj/0VC8r09qYXuZCi6meJBce00x9u59TSAPaLO/voNfyP931qQ
+	ibvSunvlsETLau+XqmeGR6tzq95u52Yl9MxI6TmBxtIkq+RAs3jqgQnaLOaQAauUdsTP
+	Wz/Q==
+X-Gm-Message-State: AKGB3mJ1R0hdOl8tmf9Dhm9xTCGTgujHVRXJMJGZ6aAcyUN448+Ea3kk
+	2M8sA5715nyJOvVUC9mwRIkFaxdu
+X-Google-Smtp-Source: AGs4zMZAhtNZj1Q4ZKerQF9Ery1sMeRwbBV9skhRiuHfts9O86GzAw96JS7GD3ozIZ7MHF4yRdLNpQ==
+X-Received: by 10.200.28.7 with SMTP id a7mr18569302qtk.206.1512330835290;
+	Sun, 03 Dec 2017 11:53:55 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id b10sm975345qti.76.2017.12.03.11.53.54
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 01 Dec 2017 21:13:21 -0800 (PST)
-From: Bill Randle <bill.randle@gmail.com>
+	Sun, 03 Dec 2017 11:53:54 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  1 Dec 2017 21:12:56 -0800
-Message-Id: <1512191576-2302-14-git-send-email-bill.randle@gmail.com>
+Date: Sun,  3 Dec 2017 14:53:47 -0500
+Message-Id: <1512330827-4290-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
-References: <1512191576-2302-1-git-send-email-bill.randle@gmail.com>
-Cc: ticotim@gmail.com
-Subject: [meta-python][PATCH 13/13] python[3]-flask-xstatic: new recipes
+Subject: [meta-python][PATCH] python-ply: add a python3 version of the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,70 +44,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 02 Dec 2017 05:13:22 -0000
+X-List-Received-Date: Sun, 03 Dec 2017 19:53:54 -0000
 
-Signed-off-by: Bill Randle <bill.randle@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-devtools/python/python-flask-xstatic.inc      | 15 +++++++++++++++
- .../python/python-flask-xstatic/remove-pip-requires.patch |  7 +++++++
- .../recipes-devtools/python/python-flask-xstatic_0.0.1.bb |  2 ++
- .../python/python3-flask-xstatic_0.0.1.bb                 |  2 ++
- 4 files changed, 26 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic.inc
- create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic/remove-pip-requires.patch
- create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic_0.0.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-flask-xstatic_0.0.1.bb
+ meta-python/recipes-devtools/python/python-ply.inc     | 18 ++++++++++++++++++
+ meta-python/recipes-devtools/python/python-ply_3.10.bb | 13 ++-----------
+ .../recipes-devtools/python/python3-ply_3.10.bb        |  6 ++++++
+ 3 files changed, 26 insertions(+), 11 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-ply.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-ply_3.10.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-xstatic.inc b/meta-python/recipes-devtools/python/python-flask-xstatic.inc
+diff --git a/meta-python/recipes-devtools/python/python-ply.inc b/meta-python/recipes-devtools/python/python-ply.inc
 new file mode 100644
-index 0000000..d992f53
+index 0000000..a6cdf4b
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-xstatic.inc
-@@ -0,0 +1,15 @@
-+DESCRIPTION = "XStatic support for flask"
++++ b/meta-python/recipes-devtools/python/python-ply.inc
+@@ -0,0 +1,18 @@
++SUMMARY = "Python Lex and Yacc"
++DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
++HOMEPAGE = "https://pypi.python.org/pypi/ply"
++SECTION = "devel/python"
 +LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=659968f6ebd4b70b6c3190d20b4a924c"
++LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
 +
-+SRC_URI[md5sum] = "2f56023e1444c8bd1fec41afe93de743"
-+SRC_URI[sha256sum] = "226ea8e97065a9488b59bfe5c94af4c6e2ea70a25052e301fb231a1381490133"
++SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
++SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
 +
-+SRC_URI += "file://remove-pip-requires.patch"
++inherit pypi
 +
-+PYPI_PACKAGE = "Flask-XStatic"
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-shell \
++"
 +
-+RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-flask \
-+    ${PYTHON_PN}-xstatic \
-+    "
-diff --git a/meta-python/recipes-devtools/python/python-flask-xstatic/remove-pip-requires.patch b/meta-python/recipes-devtools/python/python-flask-xstatic/remove-pip-requires.patch
++BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+index 9d019ae..2b6165c 100644
+--- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
++++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
+@@ -1,11 +1,2 @@
+-SUMMARY = "Python Lex and Yacc"
+-DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
+-HOMEPAGE = "https://pypi.python.org/pypi/ply"
+-SECTION = "devel/python"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
+-
+-SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
+-SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
+-
+-inherit pypi setuptools
++require python-ply.inc
++inherit setuptools
+diff --git a/meta-python/recipes-devtools/python/python3-ply_3.10.bb b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
 new file mode 100644
-index 0000000..a2d620a
+index 0000000..de8881d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-xstatic/remove-pip-requires.patch
-@@ -0,0 +1,7 @@
-+--- Flask-XStatic-0.0.1/setup.py.orig	2015-01-30 08:01:56.000000000 -0800
-++++ Flask-XStatic-0.0.1/setup.py	2017-04-17 21:40:32.570181626 -0700
-+@@ -1,4 +1,3 @@
-+-from pip.req import parse_requirements
-+ import setuptools
-+ 
-+ with open('README.rst') as f:
-diff --git a/meta-python/recipes-devtools/python/python-flask-xstatic_0.0.1.bb b/meta-python/recipes-devtools/python/python-flask-xstatic_0.0.1.bb
-new file mode 100644
-index 0000000..dff14a8
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-flask-xstatic_0.0.1.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools
-+require python-flask-xstatic.inc
-diff --git a/meta-python/recipes-devtools/python/python3-flask-xstatic_0.0.1.bb b/meta-python/recipes-devtools/python/python3-flask-xstatic_0.0.1.bb
-new file mode 100644
-index 0000000..5412bef
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-flask-xstatic_0.0.1.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools3
-+require python-flask-xstatic.inc
++++ b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
+@@ -0,0 +1,6 @@
++require python-ply.inc
++inherit setuptools3
++
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-enum \
++"
 -- 
 2.7.4
 
