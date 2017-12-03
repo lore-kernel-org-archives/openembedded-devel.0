@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id A32E5601D4
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id 482B878258
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  3 Dec 2017 19:53:54 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id 33so18882623qtv.1
+	Sun,  3 Dec 2017 20:04:22 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id r184so19080133qke.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 03 Dec 2017 11:53:56 -0800 (PST)
+	Sun, 03 Dec 2017 12:04:24 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0GLifpJT0BEKBp4j8tsiAx/OXa2T0I3PLQtPZ6xkEMk=;
-	b=pKFoyFC74+DxOiyVR33i3JSpfdDkeF4ZvuN6VKkrTR4mI2PFG4l6mswmpHwuswAtqT
-	1A3iLkmM2qdg+jpCtfT9gEWiR1dmIWZpKKf9axocQsHH+2nYXLSRVzotXyexZaGXjoFG
-	r5At3KI1C7s8tw3diHEL8B0Wwod7ag0DSZ14UUrxyOgfkCS2vgWzZc2htTa5N6Uv3VaS
-	97YQrjbonDcZTX/eOaWj/0VC8r09qYXuZCi6meJBce00x9u59TSAPaLO/voNfyP931qQ
-	ibvSunvlsETLau+XqmeGR6tzq95u52Yl9MxI6TmBxtIkq+RAs3jqgQnaLOaQAauUdsTP
-	Wz/Q==
-X-Gm-Message-State: AKGB3mJ1R0hdOl8tmf9Dhm9xTCGTgujHVRXJMJGZ6aAcyUN448+Ea3kk
-	2M8sA5715nyJOvVUC9mwRIkFaxdu
-X-Google-Smtp-Source: AGs4zMZAhtNZj1Q4ZKerQF9Ery1sMeRwbBV9skhRiuHfts9O86GzAw96JS7GD3ozIZ7MHF4yRdLNpQ==
-X-Received: by 10.200.28.7 with SMTP id a7mr18569302qtk.206.1512330835290;
-	Sun, 03 Dec 2017 11:53:55 -0800 (PST)
+	bh=+crZKBdVk5mGw44HE00xm4F9/sSZY9q9sf8RbPnMvWw=;
+	b=JGH3u0Q3g1BS1LZmp+XnSVgSpKJsMgq4pb2e3j8A7BDb2H/6Zvux+HDI3ZcxJ5R5oR
+	GG3pmD7vpi1yonDKzCLN9fzXS7AsO/64XE0jYVlXGLbq5hTiL2Q3eyZlSkXV59KskAVa
+	HbAjFf4ecwlaups8/F17Hr5pzHO6Is3+/ETEsQVIYDokleRzpOhpSO9SJoGrsuAmtE7o
+	7GIcBao+DJx2jQI/WMTiRW6DHaHSGjhdEx37TUGPsBLo4yo7ranIv4dGxYkMrS7W9zRz
+	YLeQNGMnZtLBwkUnYU2wjLtKUb+GAgDwZ2mFtQnt4Ld3eAO0IIvXe5oar4QlajaruQfw
+	+Yww==
+X-Gm-Message-State: AKGB3mJUVn64QeCyg35p32dfWqlJic54fRPVaN1OkmwFQHJydMfsAti/
+	K7hmYXdDj3cH+KEv9E82b/uXvkEn
+X-Google-Smtp-Source: AGs4zMZAdgOxctFlBXBJmzN99f8TH2mqWIcQ3KIyxzN8We8GQ9Yy3C3R+o1FGWC9nUKpKP+fC5oYhA==
+X-Received: by 10.55.162.130 with SMTP id l124mr1466255qke.168.1512331463926; 
+	Sun, 03 Dec 2017 12:04:23 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id b10sm975345qti.76.2017.12.03.11.53.54
+	by smtp.gmail.com with ESMTPSA id k3sm2708831qtj.40.2017.12.03.12.04.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 03 Dec 2017 11:53:54 -0800 (PST)
+	Sun, 03 Dec 2017 12:04:23 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  3 Dec 2017 14:53:47 -0500
-Message-Id: <1512330827-4290-1-git-send-email-derek@asterius.io>
+Date: Sun,  3 Dec 2017 15:04:17 -0500
+Message-Id: <1512331457-13213-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-ply: add a python3 version of the recipe
+Subject: [meta-python][PATCH] python-pywbem: update to version 0.11.0 and add a python3 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,70 +44,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 03 Dec 2017 19:53:54 -0000
+X-List-Received-Date: Sun, 03 Dec 2017 20:04:23 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-ply.inc     | 18 ++++++++++++++++++
- meta-python/recipes-devtools/python/python-ply_3.10.bb | 13 ++-----------
- .../recipes-devtools/python/python3-ply_3.10.bb        |  6 ++++++
- 3 files changed, 26 insertions(+), 11 deletions(-)
- create mode 100644 meta-python/recipes-devtools/python/python-ply.inc
- create mode 100644 meta-python/recipes-devtools/python/python3-ply_3.10.bb
+ .../pywbem/{pywbem_0.8.0.bb => python-pywbem.inc}  | 37 +++++++++++++++-------
+ .../pywbem/python-pywbem_0.11.0.bb                 | 11 +++++++
+ .../pywbem/python3-pywbem_0.11.0.bb                |  8 +++++
+ 3 files changed, 44 insertions(+), 12 deletions(-)
+ rename meta-python/recipes-extended/pywbem/{pywbem_0.8.0.bb => python-pywbem.inc} (58%)
+ create mode 100644 meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb
+ create mode 100644 meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-ply.inc b/meta-python/recipes-devtools/python/python-ply.inc
-new file mode 100644
-index 0000000..a6cdf4b
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-ply.inc
-@@ -0,0 +1,18 @@
-+SUMMARY = "Python Lex and Yacc"
-+DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
-+HOMEPAGE = "https://pypi.python.org/pypi/ply"
-+SECTION = "devel/python"
-+LICENSE = "BSD"
-+LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
-+
-+SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
-+SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
-+
-+inherit pypi
-+
+diff --git a/meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb b/meta-python/recipes-extended/pywbem/python-pywbem.inc
+similarity index 58%
+rename from meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb
+rename to meta-python/recipes-extended/pywbem/python-pywbem.inc
+index 7f1986e..325131f 100644
+--- a/meta-python/recipes-extended/pywbem/pywbem_0.8.0.bb
++++ b/meta-python/recipes-extended/pywbem/python-pywbem.inc
+@@ -12,25 +12,38 @@ at http://www.dmtf.org/standards/wbem. \
+ \
+ It also provides a Python provider interface, and is the fastest and easiest \
+ way to write providers on the planet."
+-HOMEPAGE = "http://pywbem.sf.net/"
+-LICENSE = "LGPLv2"
++HOMEPAGE = "http://pywbem.github.io"
++LICENSE = "LGPLv2.1"
+ LIC_FILES_CHKSUM = "file://pywbem/LICENSE.txt;md5=fbc093901857fcd118f065f900982c24"
+-SECTION = "Development/Libraries"
+-DEPENDS = "python-m2crypto-native python-typing-native"
+-SRC_URI = "http://jaist.dl.sourceforge.net/project/${BPN}/${BPN}/${BP}/${BP}-dev.r704.zip"
+-SRC_URI[md5sum] = "84072451dcdd1aa9ee82363848faf7ad"
+-SRC_URI[sha256sum] = "898035866d3cc741bbcd62c4ac26e633ad07b7c11d89db2472b9f923f3fd3ed8"
++SRC_URI[md5sum] = "1465dfa92e4cbe558c773838b9b00711"
++SRC_URI[sha256sum] = "2a05f2c1a6ab4b08560a6da55fdaabd0f52f4d1e6df6e288b9ed927bf5c289ed"
+ 
+-S = "${WORKDIR}/${BP}-dev"
++inherit pypi 
+ 
+-inherit setuptools python-dir
++DEPENDS += " \
++    ${PYTHON_PN}-ply-native \
++    ${PYTHON_PN}-pyyaml-native \
++    ${PYTHON_PN}-six-native \
++"
+ 
+ do_install_append() {
+     mv ${D}${bindir}/wbemcli.py ${D}${bindir}/pywbemcli
+-    mv ${D}${bindir}/mof_compiler.py ${D}${bindir}/mofcomp
+ 
+-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/wbemcli.py*
+-    rm ${D}${libdir}/python2.7/site-packages/${BPN}/mof_compiler.py*
++    rm -f ${D}${bindir}/*.bat
+ }
+ 
 +RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-argparse \
++    ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-io \
 +    ${PYTHON_PN}-netclient \
-+    ${PYTHON_PN}-shell \
++    ${PYTHON_PN}-ply \
++    ${PYTHON_PN}-pyyaml \
++    ${PYTHON_PN}-six \
++    ${PYTHON_PN}-stringold \
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-unixadmin \
++    ${PYTHON_PN}-xml \
 +"
 +
-+BBCLASSEXTEND = "native"
-diff --git a/meta-python/recipes-devtools/python/python-ply_3.10.bb b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-index 9d019ae..2b6165c 100644
---- a/meta-python/recipes-devtools/python/python-ply_3.10.bb
-+++ b/meta-python/recipes-devtools/python/python-ply_3.10.bb
-@@ -1,11 +1,2 @@
--SUMMARY = "Python Lex and Yacc"
--DESCRIPTION = "Python ply: PLY is yet another implementation of lex and yacc for Python"
--HOMEPAGE = "https://pypi.python.org/pypi/ply"
--SECTION = "devel/python"
--LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://README.md;beginline=3;endline=30;md5=fcb04bc2f765e46ab7084d6ab6e452bb"
--
--SRC_URI[md5sum] = "1d63c166ab250bab87d8dcc42dcca70e"
--SRC_URI[sha256sum] = "96e94af7dd7031d8d6dd6e2a8e0de593b511c211a86e28a9c9621c275ac8bacb"
--
--inherit pypi setuptools
-+require python-ply.inc
-+inherit setuptools
-diff --git a/meta-python/recipes-devtools/python/python3-ply_3.10.bb b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
+ BBCLASSEXTEND = "native"
+diff --git a/meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb b/meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb
 new file mode 100644
-index 0000000..de8881d
+index 0000000..963a137
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-ply_3.10.bb
-@@ -0,0 +1,6 @@
-+require python-ply.inc
++++ b/meta-python/recipes-extended/pywbem/python-pywbem_0.11.0.bb
+@@ -0,0 +1,11 @@
++require python-pywbem.inc
++inherit setuptools
++
++DEPENDS += " \
++    ${PYTHON_PN}-m2crypto-native \
++    ${PYTHON_PN}-typing-native \
++"
++
++RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-m2crypto \
++"
+diff --git a/meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb b/meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb
+new file mode 100644
+index 0000000..de2a6f5
+--- /dev/null
++++ b/meta-python/recipes-extended/pywbem/python3-pywbem_0.11.0.bb
+@@ -0,0 +1,8 @@
++require python-pywbem.inc
 +inherit setuptools3
 +
 +RDEPENDS_${PN}_class-target += "\
 +    ${PYTHON_PN}-enum \
++    ${PYTHON_PN}-selectors \
++    ${PYTHON_PN}-subprocess \
 +"
 -- 
 2.7.4
