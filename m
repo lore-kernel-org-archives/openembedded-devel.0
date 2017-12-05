@@ -1,30 +1,34 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id D609160939
+Return-Path: <s.mueller-klieser@phytec.de>
+Received: from root.phytec.de (mail.phycard.de [217.6.246.34])
+	by mail.openembedded.org (Postfix) with ESMTP id E1EFF71B2A
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Dec 2017 09:33:38 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30726821"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 05 Dec 2017 17:33:38 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 1D7B3486A761
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  5 Dec 2017 17:33:37 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.116) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Tue, 5 Dec 2017 17:33:35 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 5 Dec 2017 17:33:07 +0800
-Message-ID: <1512466387-8999-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Tue,  5 Dec 2017 11:33:41 +0000 (UTC)
+Received: from idefix.phytec.de (idefix.phytec.de [172.16.0.10])
+	by root.phytec.de (Postfix) with ESMTP id 9CF66A00273;
+	Tue,  5 Dec 2017 12:35:49 +0100 (CET)
+Received: from [172.16.26.141] ([172.16.26.141])
+	by idefix.phytec.de (IBM Domino Release 9.0.1FP7)
+	with ESMTP id 2017120512334181-46667 ;
+	Tue, 5 Dec 2017 12:33:41 +0100 
+From: =?UTF-8?Q?Stefan_M=c3=bcller-Klieser?= <s.mueller-klieser@phytec.de>
+To: Khem Raj <raj.khem@gmail.com>
+References: <1512125321-16818-1-git-send-email-s.mueller-klieser@phytec.de>
+	<CAMKF1sq_bpdNvfeSB_kGEJEZcvTsLdPvdj907MeUdyf0mQHz=A@mail.gmail.com>
+	<21cfce60-9b13-c382-20d7-d50fb98c2c46@phytec.de>
+Organization: PHYTEC Messtechnik GmbH
+Message-ID: <e5844c4d-c2ac-01f6-5612-96a7783cc1bc@phytec.de>
+Date: Tue, 5 Dec 2017 12:34:02 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.1.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.116]
-X-yoursite-MailScanner-ID: 1D7B3486A761.A3E16
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
+In-Reply-To: <21cfce60-9b13-c382-20d7-d50fb98c2c46@phytec.de>
+X-MIMETrack: Itemize by SMTP Server on Idefix/Phytec(Release 9.0.1FP7|August
+	17, 2016) at 05.12.2017 12:33:41,
+	Serialize by Router on Idefix/Phytec(Release 9.0.1FP7|August  17,
+	2016) at 05.12.2017 12:33:41
+X-TNEFEvaluated: 1
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] dfu-utils-native: fix do_deploy sstate handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,54 +41,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 05 Dec 2017 09:33:39 -0000
-Content-Type: text/plain
+X-List-Received-Date: Tue, 05 Dec 2017 11:33:42 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: quoted-printable
 
-Add packagegroup for samba, for there are too many rpms in samba and it's hard to manage.
+Hi Khem,
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../packagegroups/packagegroup-samba.bb            | 28 ++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
- create mode 100644 meta-networking/recipes-connectivity/packagegroups/packagegroup-samba.bb
+On 01.12.2017 16:13, Stefan M=C3=BCller-Klieser wrote:
+> On 01.12.2017 15:46, Khem Raj wrote:
+>> On Fri, Dec 1, 2017 at 2:48 AM, Stefan M=C3=BCller-Klieser
+>> <s.mueller-klieser@phytec.de> wrote:
+>>> We need to install to the sstate input dir and not the output dir, so
+>>> sstate handling will work correctly.
+>>>
+>>
+>> how can we validate this fix ? do you have steps
+>=20
+> I guess the easiest test would be to run a -c clean. If all files are
+> removed, sstate is working, if not, you moved some files out of sstate
+> control.
 
-diff --git a/meta-networking/recipes-connectivity/packagegroups/packagegroup-samba.bb b/meta-networking/recipes-connectivity/packagegroups/packagegroup-samba.bb
-new file mode 100644
-index 0000000..6177691
---- /dev/null
-+++ b/meta-networking/recipes-connectivity/packagegroups/packagegroup-samba.bb
-@@ -0,0 +1,28 @@
-+SUMMARY = "samba package groups"
-+PV = "1.0"
-+PR = "r2"
-+
-+inherit packagegroup
-+
-+PROVIDES = "${PACKAGES}"
-+PACKAGES = "${PN}-server ${PN}-client ${PN}-ctdb-tests ${PN}-pidl"
-+
-+SUMMARY_${PN}-client = " samba client"
-+RDEPENDS_${PN}-client = "\
-+    smbclient \
-+    samba-common \
-+    winbind \
-+    registry-tools \
-+    "
-+
-+SUMMARY_${PN}-server = " samba server"
-+RDEPENDS_${PN}-server = "\
-+    samba \
-+    samba-common \
-+    "
-+
-+SUMMARY_${PN}-ctdb-tests = " samba ctdb-tests"
-+RDEPENDS_${PN}-ctdb-tests = "samba-ctdb-tests"
-+
-+SUMMARY_${PN}-pidl = "samba-pidl"
-+RDEPENDS_${PN}-pidl = "samba-pidl"
--- 
-2.7.4
+Ok. I already found a bug in this patch. When two machines want to build
+the dfu recipe, sstate clashes with the providers conflicting. So apparently
+the original code was a workaround for the fact that you cannot handle those
+conflicts at the recipe level.
+This patch cannot go in until some handling in deploy.bbclass is implemente=
+d.
+Any tips may help. I will try to find a solution.
 
+Regards, Stefan
 
-
+>=20
+>>
+>>> Signed-off-by: Stefan M=C3=BCller-Klieser <s.mueller-klieser@phytec.de>
+>>> ---
+>>>  meta-oe/recipes-support/dfu-util/dfu-util-native=5F0.9.bb | 7 +++----
+>>>  1 file changed, 3 insertions(+), 4 deletions(-)
+>>>
+>>> diff --git a/meta-oe/recipes-support/dfu-util/dfu-util-native=5F0.9.bb =
+b/meta-oe/recipes-support/dfu-util/dfu-util-native=5F0.9.bb
+>>> index 7a7a662..aeca23b 100644
+>>> --- a/meta-oe/recipes-support/dfu-util/dfu-util-native=5F0.9.bb
+>>> +++ b/meta-oe/recipes-support/dfu-util/dfu-util-native=5F0.9.bb
+>>> @@ -8,9 +8,8 @@ SRC=5FURI +=3D "file://0001-Revert-Makefile.am-Drop-sta=
+tic-dfu-util.patch"
+>>>
+>>>  do=5Fdeploy[sstate-outputdirs] =3D "${DEPLOY=5FDIR=5FTOOLS}"
+>>>  do=5Fdeploy() {
+>>> -    install -d ${DEPLOY=5FDIR=5FTOOLS}
+>>> -    install -m 0755 src/dfu-util=5Fstatic ${DEPLOY=5FDIR=5FTOOLS}/dfu-=
+util-${PV}
+>>> -    rm -f ${DEPLOY=5FDIR=5FTOOLS}/dfu-util
+>>> -    ln -sf ./dfu-util-${PV} ${DEPLOY=5FDIR=5FTOOLS}/dfu-util
+>>> +    install -m 0755 src/dfu-util=5Fstatic ${DEPLOYDIR}/dfu-util-${PV}
+>>> +    rm -f ${DEPLOYDIR}/dfu-util
+>>> +    ln -sf ./dfu-util-${PV} ${DEPLOYDIR}/dfu-util
+>>>  }
+>>>  addtask deploy before do=5Fpackage after do=5Finstall
+>>> --
+>>> 2.7.4
+>>>
+>>> --
+>>> =5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=
+=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F=5F
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
