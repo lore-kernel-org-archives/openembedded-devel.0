@@ -1,41 +1,29 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 28374786BF
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id D5FC971AC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Dec 2017 03:30:35 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30748860"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 06 Dec 2017 11:30:35 +0800
-Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
-	by cn.fujitsu.com (Postfix) with ESMTP id 78E9C482D017;
-	Wed,  6 Dec 2017 11:30:35 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
-	14.03.0361.001; Wed, 6 Dec 2017 11:30:34 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: Andreas Oberritter <obi@opendreambox.org>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
-Thread-Index: AQHTbc4xyMs8oWh/ckOWvYqZdU3Sk6M1pNNA
-Date: Wed, 6 Dec 2017 03:30:32 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF732EEA53C1@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1512466387-8999-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<20171205142903.6443ab7e@t460p>
-In-Reply-To: <20171205142903.6443ab7e@t460p>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-originating-ip: [10.167.225.116]
-MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 78E9C482D017.A8DA9
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Re: [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
+	Wed,  6 Dec 2017 04:03:07 +0000 (UTC)
+Received: from fmsmga008.fm.intel.com ([10.253.24.58])
+	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	05 Dec 2017 20:03:08 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.45,366,1508828400"; 
+   d="scan'208";a="357324"
+Received: from janowski-mobl.amr.corp.intel.com ([10.254.184.126])
+	by fmsmga008.fm.intel.com with ESMTP; 05 Dec 2017 20:03:07 -0800
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+In-Reply-To: <2c075ea2-9526-2e2c-2136-523fecd5419b@gmail.com>
+Date: Tue, 5 Dec 2017 22:03:07 -0600
+Message-Id: <C4DB09BE-713D-4A21-83E3-FBDEB809547D@linux.intel.com>
+References: <1512020828-4040-1-git-send-email-bill.randle@gmail.com>
+	<1512020828-4040-8-git-send-email-bill.randle@gmail.com>
+	<2c075ea2-9526-2e2c-2136-523fecd5419b@gmail.com>
+To: Bill Randle <bill.randle@gmail.com>
+X-Mailer: Apple Mail (2.3273)
+Cc: ticotim@gmail.com,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH 07/12] python-flask-wtf: move core of recipe to a .inc file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,86 +36,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Dec 2017 03:30:37 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 06 Dec 2017 04:03:08 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-SGkgQW5kcmVhc6OhDQogICBJIGhhdmUgc29tZSBxdWVzdGlvbnMgaGVyZToN
-Cg0KICAgMS4gV2h5IGRvbid0IHlvdSBqdXN0IGNyZWF0ZSBhIHNhbWJhLWNs
-aWVudCBtZXRhIHBhY2thZ2UgaW5zaWRlIHRoZSBzYW1iYSByZWNpcGUgaW5z
-dGVhZD8NCiAgICAgIFdlbGwsIEkgZG9uJ3Qga25vdyBob3cgdG8gY3JlYXRl
-IGEgc2FtYmEtY2xpZW50IG1ldGEgcGFja2FnZSwgYW5kIGNvdWxkIHlvdSBo
-ZWxwIG1lPw0KDQogICAyLiBBbGwgc2FtYmEgbGlicmFyaWVzIGFscmVhZHkg
-ZGVwZW5kIG9uIHNhbWJhLWNvbW1vbiwgc28gc2FtYmEgZGVwZW5kcyBvbiBp
-dCBpbmRpcmVjdGx5LiBUaGVyZWZvcmUgdGhpcyAicGFja2FnZSBncm91cCIg
-ZG9lc24ndCBzZWVtIHRvIGJlIG5lY2Vzc2FyeS4NCiAgICAgICBZZXMsIEkg
-Zm91bmQgaXQsIHRoYW5rIHlvdS4NCg0KPiArDQo+ICtTVU1NQVJZXyR7UE59
-LWN0ZGItdGVzdHMgPSAiIHNhbWJhIGN0ZGItdGVzdHMiDQo+ICtSREVQRU5E
-U18ke1BOfS1jdGRiLXRlc3RzID0gInNhbWJhLWN0ZGItdGVzdHMiDQo+ICsN
-Cj4gK1NVTU1BUllfJHtQTn0tcGlkbCA9ICJzYW1iYS1waWRsIg0KPiArUkRF
-UEVORFNfJHtQTn0tcGlkbCA9ICJzYW1iYS1waWRsIg0KDQogICAzLiBUaGVz
-ZSB0d28gc2VlbSB0byBiZSB1bm5lY2Vzc2FyeSwgdG9vLg0KICAgICAgVGVz
-dHN1aXRlIGZvciBzYW1iYSBpcyB1bm5lY2Vzc2FyeSBmb3IgdGhlIHBhY2th
-Z2Vncm91cCwgd2h5Pw0KICAgICAgQW5kIGNhbiB5b3UgZ2l2ZSBtZSBhIGFk
-dmljZSBhYm91dCBob3cgdG8gZGVhbCB3aXRoIHNhbWJhLXBpZGw/UHV0IGl0
-IGludG8gY2xpZW50Pw0KDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmpp
-bmcgRnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5T
-VCkNCkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUs
-DQogICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5n
-cnEuZm5zdEBjbi5mdWppc3R1LmNvbQ0KDQoNCi0tLS0tT3JpZ2luYWwgTWVz
-c2FnZS0tLS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0Bs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxm
-IE9mIEFuZHJlYXMgT2JlcnJpdHRlcg0KU2VudDogVHVlc2RheSwgRGVjZW1i
-ZXIgMDUsIDIwMTcgOToyOSBQTQ0KVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBs
-aXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbUEFU
-Q0hdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBwYWNrYWdlZ3JvdXAtc2Ft
-YmE6IG5ldyBhZGQNCg0KSGkgWmhlbmcsDQoNCk9uIFR1ZSwgNSBEZWMgMjAx
-NyAxNzozMzowNyArMDgwMA0KemhlbmdycSA8emhlbmdycS5mbnN0QGNuLmZ1
-aml0c3UuY29tPiB3cm90ZToNCg0KPiBBZGQgcGFja2FnZWdyb3VwIGZvciBz
-YW1iYSwgZm9yIHRoZXJlIGFyZSB0b28gbWFueSBycG1zIGluIHNhbWJhIGFu
-ZCBpdCdzIGhhcmQgdG8gbWFuYWdlLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
-WmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQo+
-IC0tLQ0KPiAgLi4uL3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLXNhbWJh
-LmJiICAgICAgICAgICAgfCAyOCArKysrKysrKysrKysrKysrKysrKysrDQo+
-ICAxIGZpbGUgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRl
-IG1vZGUgMTAwNjQ0IA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25u
-ZWN0aXZpdHkvcGFja2FnZWdyb3Vwcy9wYWNrYWdlZ3JvdXAtc2FtYmEuDQo+
-IGJiDQo+IA0KPiBkaWZmIC0tZ2l0IA0KPiBhL21ldGEtbmV0d29ya2luZy9y
-ZWNpcGVzLWNvbm5lY3Rpdml0eS9wYWNrYWdlZ3JvdXBzL3BhY2thZ2Vncm91
-cC1zYW1iDQo+IGEuYmIgDQo+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
-Y29ubmVjdGl2aXR5L3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLXNhbWIN
-Cj4gYS5iYg0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAw
-MDAwLi42MTc3NjkxDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1u
-ZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3BhY2thZ2Vncm91cHMv
-cGFja2FnZWdyb3VwLQ0KPiArKysgc2FtYmEuYmINCj4gQEAgLTAsMCArMSwy
-OCBAQA0KPiArU1VNTUFSWSA9ICJzYW1iYSBwYWNrYWdlIGdyb3VwcyINCj4g
-K1BWID0gIjEuMCINCj4gK1BSID0gInIyIg0KPiArDQo+ICtpbmhlcml0IHBh
-Y2thZ2Vncm91cA0KPiArDQo+ICtQUk9WSURFUyA9ICIke1BBQ0tBR0VTfSIN
-Cj4gK1BBQ0tBR0VTID0gIiR7UE59LXNlcnZlciAke1BOfS1jbGllbnQgJHtQ
-Tn0tY3RkYi10ZXN0cyAke1BOfS1waWRsIg0KPiArDQo+ICtTVU1NQVJZXyR7
-UE59LWNsaWVudCA9ICIgc2FtYmEgY2xpZW50Ig0KPiArUkRFUEVORFNfJHtQ
-Tn0tY2xpZW50ID0gIlwNCj4gKyAgICBzbWJjbGllbnQgXA0KPiArICAgIHNh
-bWJhLWNvbW1vbiBcDQo+ICsgICAgd2luYmluZCBcDQo+ICsgICAgcmVnaXN0
-cnktdG9vbHMgXA0KPiArICAgICINCg0KV2h5IGRvbid0IHlvdSBqdXN0IGNy
-ZWF0ZSBhIHNhbWJhLWNsaWVudCBtZXRhIHBhY2thZ2UgaW5zaWRlIHRoZSBz
-YW1iYSByZWNpcGUgaW5zdGVhZD8NCg0KPiArDQo+ICtTVU1NQVJZXyR7UE59
-LXNlcnZlciA9ICIgc2FtYmEgc2VydmVyIg0KPiArUkRFUEVORFNfJHtQTn0t
-c2VydmVyID0gIlwNCj4gKyAgICBzYW1iYSBcDQo+ICsgICAgc2FtYmEtY29t
-bW9uIFwNCj4gKyAgICAiDQoNCkFsbCBzYW1iYSBsaWJyYXJpZXMgYWxyZWFk
-eSBkZXBlbmQgb24gc2FtYmEtY29tbW9uLCBzbyBzYW1iYSBkZXBlbmRzIG9u
-IGl0IGluZGlyZWN0bHkuIFRoZXJlZm9yZSB0aGlzICJwYWNrYWdlIGdyb3Vw
-IiBkb2Vzbid0IHNlZW0gdG8gYmUgbmVjZXNzYXJ5Lg0KDQo+ICsNCj4gK1NV
-TU1BUllfJHtQTn0tY3RkYi10ZXN0cyA9ICIgc2FtYmEgY3RkYi10ZXN0cyIN
-Cj4gK1JERVBFTkRTXyR7UE59LWN0ZGItdGVzdHMgPSAic2FtYmEtY3RkYi10
-ZXN0cyINCj4gKw0KPiArU1VNTUFSWV8ke1BOfS1waWRsID0gInNhbWJhLXBp
-ZGwiDQo+ICtSREVQRU5EU18ke1BOfS1waWRsID0gInNhbWJhLXBpZGwiDQoN
-ClRoZXNlIHR3byBzZWVtIHRvIGJlIHVubmVjZXNzYXJ5LCB0b28uDQoNClJl
-Z2FyZHMsDQpBbmRyZWFzDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBt
-YWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
-ZWRkZWQub3JnDQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWls
-bWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoNCgoK
+
+> On Dec 5, 2017, at 7:57 PM, akuster808 <akuster808@gmail.com> wrote:
+>=20
+>=20
+>=20
+> On 11/29/2017 09:47 PM, Bill Randle wrote:
+>> Signed-off-by: Bill Randle <bill.randle@gmail.com>
+>> ---
+>> .../recipes-devtools/python/python-flask-wtf.inc        | 15 =
++++++++++++++++
+>> .../recipes-devtools/python/python-flask-wtf_0.12.bb    | 17 =
++----------------
+>> 2 files changed, 16 insertions(+), 16 deletions(-)
+>> create mode 100644 =
+meta-python/recipes-devtools/python/python-flask-wtf.inc
+>=20
+> I am getting this error:
+>=20
+> WARNING:
+> =
+/home/akuster/OE/master/meta-openembedded/meta-python/recipes-devtools/pyt=
+hon/python3-flask-xstatic_0.0.1.bb:
+> Unable to get checksum for python3-flask-xstatic SRC_URI entry
+> remove-pip-requires.patch: file could not be found
+> WARNING:
+> =
+/home/akuster/OE/master/meta-openembedded/meta-python/recipes-devtools/pyt=
+hon/python3-flask-wtf_0.12.bb:
+> Unable to get checksum for python3-flask-wtf SRC_URI entry
+> import-simplejson-as-json.patch: file could not be found
+
+If you are trying to use a common patch file in, for instance, =
+python-flask-wtf directory, you will need to add FILESEXTRAPATHS_prepend =
+to the .inc so that the patch will be picked up by python3 version. One =
+of the few cases where we want FILESEXTRAPATHS in an actual recipe, or =
+at least the .inc (rather than a bbappend).
+
+=E2=80=94Tim
+
+> ERROR: ParseError in python-flask-migrate: not a BitBake file
+>=20
+> - armin
+>>=20
+>> diff --git a/meta-python/recipes-devtools/python/python-flask-wtf.inc =
+b/meta-python/recipes-devtools/python/python-flask-wtf.inc
+>> new file mode 100644
+>> index 0000000..e42f7c1
+>> --- /dev/null
+>> +++ b/meta-python/recipes-devtools/python/python-flask-wtf.inc
+>> @@ -0,0 +1,15 @@
+>> +DESCRIPTION =3D "Simple integration of Flask and WTForms."
+>> +LICENSE =3D "BSD"
+>> +LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D507e8635f25a06dc4f041a3a1b3359b3"
+>> +
+>> +SRC_URI[md5sum] =3D "c53a74e8ba481bf53405fd5efdf0339e"
+>> +SRC_URI[sha256sum] =3D =
+"bd99316c97ed1d1cb90b8f0c242c86420a891a6a2058f20717e424bf5b0bb80e"
+>> +
+>> +SRC_URI +=3D " file://import-simplejson-as-json.patch"
+>> +
+>> +PYPI_PACKAGE =3D "Flask-WTF"
+>> +
+>> +RDEPENDS_${PN} =3D "\
+>> +    ${PYTHON_PN}-wtforms \
+>> +    ${PYTHON_PN}-simplejson \
+>> +"
+>> diff --git =
+a/meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb =
+b/meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb
+>> index 79afaf6..dbf091b 100644
+>> --- a/meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb
+>> +++ b/meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb
+>> @@ -1,17 +1,2 @@
+>> -DESCRIPTION =3D "Simple integration of Flask and WTForms."
+>> -LICENSE =3D "BSD"
+>> -LIC_FILES_CHKSUM =3D =
+"file://LICENSE;md5=3D507e8635f25a06dc4f041a3a1b3359b3"
+>> -
+>> -SRC_URI[md5sum] =3D "c53a74e8ba481bf53405fd5efdf0339e"
+>> -SRC_URI[sha256sum] =3D =
+"bd99316c97ed1d1cb90b8f0c242c86420a891a6a2058f20717e424bf5b0bb80e"
+>> -
+>> -SRC_URI +=3D " file://import-simplejson-as-json.patch"
+>> -
+>> -PYPI_PACKAGE =3D "Flask-WTF"
+>> -
+>> inherit pypi setuptools
+>> -
+>> -RDEPENDS_${PN} =3D "\
+>> -    python-wtforms \
+>> -    python-simplejson \
+>> -"
+>> +require python-flask-wtf.inc
+>=20
+> --=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
