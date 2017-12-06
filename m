@@ -1,48 +1,41 @@
-Return-Path: <bill.randle@gmail.com>
-Received: from mail-ot0-f180.google.com (mail-ot0-f180.google.com
-	[74.125.82.180])
-	by mail.openembedded.org (Postfix) with ESMTP id B3B08786A2
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 28374786BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  6 Dec 2017 03:17:07 +0000 (UTC)
-Received: by mail-ot0-f180.google.com with SMTP id d27so2198098ote.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 05 Dec 2017 19:17:08 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=De1HeyaXnchON9neUlS+GHfwbfqbBHxEIx9/Mif/5vs=;
-	b=hIrCeLIz8lOUon5XAscCKMi1euQ8OI5XCFb1sEq8udyaShV/mXjBLooHpgdGShJFtX
-	t88PUrGAt8/xHDJHJmZ5OOUIe3vldTsGxDA2+mgv+QtGeu/oQFIA+QZ+43Ai/QquiQNw
-	AKH6FPLuG7DzDxaEIt8G09H3og5aQIjv83K/jd0Q7Ajz7sj2E3/C1Dbyzt2VmRAFkNTS
-	npIEgh4Xm2T3epbb1z8b5Nd74iCPX4i79b+8sKHEqsnPLDGRSjIZwd59m/Zxjq55WExV
-	yIHQscVsTHYvncxpeyFueHVhYL13hJkd1aHqK5D3KIeWN3ae2YV3ncBz5kEHdF1MgzO7
-	YTEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=De1HeyaXnchON9neUlS+GHfwbfqbBHxEIx9/Mif/5vs=;
-	b=Px4tjNAC9wfpAKuH0oQQPicdVbWdwC4atpAunUEHGY8yHSr3geMEgu5Pomxc4gmagG
-	QwE5xf1eS35/2RdOBvp87wGtDBxDOamTrhc1jFknDxCIzDV/Gg1eFcUuA2x2lbXiSh5V
-	skOevVSIahkavpwuVVMujYp7/dx/USGFn8WJBmuLBgq7hOYhn4x9Abm20b7CqpD+cFZK
-	e3LZlG110w8PM3bkeIBl6qfbHmBBtY7mpk1iALE/O3wUZyIyJSDmn9E3qnoRjT8vDlA4
-	1TUj5bKGU/bS4zT+VUIYjV6JleQvV5+vD0Gb2nXMyoZG1jBWG/8c/W0Yp3TwqbpjFWkr
-	bKgw==
-X-Gm-Message-State: AKGB3mKFS0fiIEfCsr4ctwltwcMkRs1u3ptc57OnrBN77ATtnE7c3Opa
-	NBzPjRUsx4WS1q+Krv5RT7mOOfoNsB5kjLNXX30=
-X-Google-Smtp-Source: AGs4zMYA/nPA664s6VeK5qB8Bzax8e634c2OPYfN5ug+b/xTvU37MHWONEGT8/TwObdFzRV0bdWOgdL7AyXBVMO4BfI=
-X-Received: by 10.157.62.180 with SMTP id b49mr10715421otc.325.1512530228067; 
-	Tue, 05 Dec 2017 19:17:08 -0800 (PST)
+	Wed,  6 Dec 2017 03:30:35 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="30748860"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 06 Dec 2017 11:30:35 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 78E9C482D017;
+	Wed,  6 Dec 2017 11:30:35 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD03.g08.fujitsu.local ([10.167.33.85]) with mapi id
+	14.03.0361.001; Wed, 6 Dec 2017 11:30:34 +0800
+From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+To: Andreas Oberritter <obi@opendreambox.org>,
+	"openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: [oe] [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
+Thread-Index: AQHTbc4xyMs8oWh/ckOWvYqZdU3Sk6M1pNNA
+Date: Wed, 6 Dec 2017 03:30:32 +0000
+Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF732EEA53C1@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1512466387-8999-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<20171205142903.6443ab7e@t460p>
+In-Reply-To: <20171205142903.6443ab7e@t460p>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.0.116
+dlp-reaction: no-action
+x-originating-ip: [10.167.225.116]
 MIME-Version: 1.0
-Received: by 10.202.221.194 with HTTP; Tue, 5 Dec 2017 19:17:07 -0800 (PST)
-In-Reply-To: <a8e4345d-9f1c-2e94-ba70-d66981bbce6d@gmail.com>
-References: <1512020828-4040-1-git-send-email-bill.randle@gmail.com>
-	<a8e4345d-9f1c-2e94-ba70-d66981bbce6d@gmail.com>
-From: Bill Randle <bill.randle@gmail.com>
-Date: Tue, 5 Dec 2017 19:17:07 -0800
-Message-ID: <CA+n--H9DjDrHHGejs92_QmGW1SC97yDS9ieCZb--00N9nssMrQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-Cc: Tim Smart <ticotim@gmail.com>, openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-python][PATCH 00/12] Create Python3 recipies for several existing Python2 recipes
+X-yoursite-MailScanner-ID: 78E9C482D017.A8DA9
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Re: [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,105 +48,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 06 Dec 2017 03:17:07 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 06 Dec 2017 03:30:37 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="gb2312"
+Content-Transfer-Encoding: base64
 
-On Tue, Dec 5, 2017 at 6:48 PM, akuster808 <akuster808@gmail.com> wrote:
-> Bill,
->
->
-> On 11/29/2017 09:46 PM, Bill Randle wrote:
->> This set of patches creates the Python3 variant of several existing Python2 packages.
->> It first moves the core of the existing recipe(s) into a .inc file, then creates
->> python-*-.bb and python3-*.bb files that reference the new .inc file.
->>
->> Bill Randle (12):
->>   python-dominate: move core of recipe to a .inc file
->>   python3-dominate: new recipe
->>   python-flask-bootstrap: move core of recipe to a .inc file
->>   python3-flask-bootstrap: new recipe
->>   python-flask-sqlalchemy: move core of recipe to a .inc file
->>   python3-flask-sqlalchemy: new recipe
->>   python-flask-wtf: move core of recipe to a .inc file
->>   python3-flask-wtf: new recipe
->>   python-visitor: move core of recipe to a .inc file
->>   python3-visitor: new recipe
->>   python-wtforms: move core of recipe to a .inc file
->>   python3-wtforms: new recipe
->
-> I am seeing these additional issues:
->
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: Nothing RPROVIDES 'python3-wtforms' (but
-> /home/akuster/OE/master/meta-openembedded/meta-python/recipes-devtools/python/python3-flask-wtf_0.12.bb
-> RDEPENDS on or otherwise requires it)
-> NOTE: Runtime target 'python3-wtforms' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-wtforms']
-> NOTE: Runtime target 'python3-flask-wtf' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-flask-wtf',
-> 'python3-wtforms']
-> ERROR: Nothing RPROVIDES 'python3-flask-wtf-dev' (but
-> /home/akuster/OE/master/meta-openembedded/meta-python/recipes-devtools/python/python3-flask-wtf_0.12.bb
-> RDEPENDS on or otherwise requires it)
-> No eligible RPROVIDERs exist for 'python3-flask-wtf-dev'
-> NOTE: Runtime target 'python3-flask-wtf-dev' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-flask-wtf-dev']
-> ERROR: Nothing RPROVIDES 'python3-visitor' (but
-> /home/akuster/OE/master/meta-openembedded/meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
-> RDEPENDS on or otherwise requires it)
-> NOTE: Runtime target 'python3-visitor' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-visitor']
-> NOTE: Runtime target 'python3-flask-bootstrap-dev' is unbuildable,
-> removing...
-> Missing or unbuildable dependency chain was:
-> ['python3-flask-bootstrap-dev', 'python3-visitor']
-> NOTE: Runtime target 'python3-flask-bootstrap' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-flask-bootstrap',
-> 'python3-visitor']
->
->
-> please check. still running local world build so not sure what else will
-> pop up.
->
-> - armin
->>
->>  .../recipes-devtools/python/python-dominate.inc        | 11 +++++++++++
->>  .../recipes-devtools/python/python-dominate_2.3.1.bb   | 13 +------------
->>  .../recipes-devtools/python/python-flask-bootstrap.inc | 14 ++++++++++++++
->>  .../python/python-flask-bootstrap_3.3.7.1.bb           | 16 +---------------
->>  .../python/python-flask-sqlalchemy.inc                 | 10 ++++++++++
->>  .../python/python-flask-sqlalchemy_2.3.2.bb            | 12 +-----------
->>  .../recipes-devtools/python/python-flask-wtf.inc       | 15 +++++++++++++++
->>  .../recipes-devtools/python/python-flask-wtf_0.12.bb   | 17 +----------------
->>  meta-python/recipes-devtools/python/python-visitor.inc |  6 ++++++
->>  .../recipes-devtools/python/python-visitor_0.1.3.bb    |  8 +-------
->>  meta-python/recipes-devtools/python/python-wtforms.inc | 16 ++++++++++++++++
->>  .../recipes-devtools/python/python-wtforms_2.1.bb      | 18 +-----------------
->>  .../recipes-devtools/python/python3-dominate_2.3.1.bb  |  2 ++
->>  .../python/python3-flask-bootstrap_3.3.7.1.bb          |  2 ++
->>  .../python/python3-flask-sqlalchemy_2.3.2.bb           |  2 ++
->>  .../recipes-devtools/python/python3-flask-wtf_0.12.bb  |  2 ++
->>  .../recipes-devtools/python/python3-visitor_0.1.3.bb   |  2 ++
->>  .../recipes-devtools/python/python3-wtforms_2.1.bb     |  2 ++
->>  18 files changed, 90 insertions(+), 78 deletions(-)
->>  create mode 100644 meta-python/recipes-devtools/python/python-dominate.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-flask-bootstrap.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-flask-sqlalchemy.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-flask-wtf.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-visitor.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python-wtforms.inc
->>  create mode 100644 meta-python/recipes-devtools/python/python3-dominate_2.3.1.bb
->>  create mode 100644 meta-python/recipes-devtools/python/python3-flask-bootstrap_3.3.7.1.bb
->>  create mode 100644 meta-python/recipes-devtools/python/python3-flask-sqlalchemy_2.3.2.bb
->>  create mode 100644 meta-python/recipes-devtools/python/python3-flask-wtf_0.12.bb
->>  create mode 100644 meta-python/recipes-devtools/python/python3-visitor_0.1.3.bb
->>  create mode 100644 meta-python/recipes-devtools/python/python3-wtforms_2.1.bb
->>
->
-
-Thanks, Armin. I'll go back through them all and make sure everything
-builds cleanly. It was working at one time, but I obviously messed
-something up when rebasing against master and submitting.
-
-    -Bill
+SGkgQW5kcmVhc6OhDQogICBJIGhhdmUgc29tZSBxdWVzdGlvbnMgaGVyZToN
+Cg0KICAgMS4gV2h5IGRvbid0IHlvdSBqdXN0IGNyZWF0ZSBhIHNhbWJhLWNs
+aWVudCBtZXRhIHBhY2thZ2UgaW5zaWRlIHRoZSBzYW1iYSByZWNpcGUgaW5z
+dGVhZD8NCiAgICAgIFdlbGwsIEkgZG9uJ3Qga25vdyBob3cgdG8gY3JlYXRl
+IGEgc2FtYmEtY2xpZW50IG1ldGEgcGFja2FnZSwgYW5kIGNvdWxkIHlvdSBo
+ZWxwIG1lPw0KDQogICAyLiBBbGwgc2FtYmEgbGlicmFyaWVzIGFscmVhZHkg
+ZGVwZW5kIG9uIHNhbWJhLWNvbW1vbiwgc28gc2FtYmEgZGVwZW5kcyBvbiBp
+dCBpbmRpcmVjdGx5LiBUaGVyZWZvcmUgdGhpcyAicGFja2FnZSBncm91cCIg
+ZG9lc24ndCBzZWVtIHRvIGJlIG5lY2Vzc2FyeS4NCiAgICAgICBZZXMsIEkg
+Zm91bmQgaXQsIHRoYW5rIHlvdS4NCg0KPiArDQo+ICtTVU1NQVJZXyR7UE59
+LWN0ZGItdGVzdHMgPSAiIHNhbWJhIGN0ZGItdGVzdHMiDQo+ICtSREVQRU5E
+U18ke1BOfS1jdGRiLXRlc3RzID0gInNhbWJhLWN0ZGItdGVzdHMiDQo+ICsN
+Cj4gK1NVTU1BUllfJHtQTn0tcGlkbCA9ICJzYW1iYS1waWRsIg0KPiArUkRF
+UEVORFNfJHtQTn0tcGlkbCA9ICJzYW1iYS1waWRsIg0KDQogICAzLiBUaGVz
+ZSB0d28gc2VlbSB0byBiZSB1bm5lY2Vzc2FyeSwgdG9vLg0KICAgICAgVGVz
+dHN1aXRlIGZvciBzYW1iYSBpcyB1bm5lY2Vzc2FyeSBmb3IgdGhlIHBhY2th
+Z2Vncm91cCwgd2h5Pw0KICAgICAgQW5kIGNhbiB5b3UgZ2l2ZSBtZSBhIGFk
+dmljZSBhYm91dCBob3cgdG8gZGVhbCB3aXRoIHNhbWJhLXBpZGw/UHV0IGl0
+IGludG8gY2xpZW50Pw0KDQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
+LS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmpp
+bmcgRnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5T
+VCkNCkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUs
+DQogICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5n
+cnEuZm5zdEBjbi5mdWppc3R1LmNvbQ0KDQoNCi0tLS0tT3JpZ2luYWwgTWVz
+c2FnZS0tLS0tDQpGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwtYm91bmNlc0Bs
+aXN0cy5vcGVuZW1iZWRkZWQub3JnIFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxm
+IE9mIEFuZHJlYXMgT2JlcnJpdHRlcg0KU2VudDogVHVlc2RheSwgRGVjZW1i
+ZXIgMDUsIDIwMTcgOToyOSBQTQ0KVG86IG9wZW5lbWJlZGRlZC1kZXZlbEBs
+aXN0cy5vcGVuZW1iZWRkZWQub3JnDQpTdWJqZWN0OiBSZTogW29lXSBbUEFU
+Q0hdIFttZXRhLW5ldHdvcmtpbmddW1BBVENIXSBwYWNrYWdlZ3JvdXAtc2Ft
+YmE6IG5ldyBhZGQNCg0KSGkgWmhlbmcsDQoNCk9uIFR1ZSwgNSBEZWMgMjAx
+NyAxNzozMzowNyArMDgwMA0KemhlbmdycSA8emhlbmdycS5mbnN0QGNuLmZ1
+aml0c3UuY29tPiB3cm90ZToNCg0KPiBBZGQgcGFja2FnZWdyb3VwIGZvciBz
+YW1iYSwgZm9yIHRoZXJlIGFyZSB0b28gbWFueSBycG1zIGluIHNhbWJhIGFu
+ZCBpdCdzIGhhcmQgdG8gbWFuYWdlLg0KPiANCj4gU2lnbmVkLW9mZi1ieTog
+WmhlbmcgUnVvcWluIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+DQo+
+IC0tLQ0KPiAgLi4uL3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLXNhbWJh
+LmJiICAgICAgICAgICAgfCAyOCArKysrKysrKysrKysrKysrKysrKysrDQo+
+ICAxIGZpbGUgY2hhbmdlZCwgMjggaW5zZXJ0aW9ucygrKQ0KPiAgY3JlYXRl
+IG1vZGUgMTAwNjQ0IA0KPiBtZXRhLW5ldHdvcmtpbmcvcmVjaXBlcy1jb25u
+ZWN0aXZpdHkvcGFja2FnZWdyb3Vwcy9wYWNrYWdlZ3JvdXAtc2FtYmEuDQo+
+IGJiDQo+IA0KPiBkaWZmIC0tZ2l0IA0KPiBhL21ldGEtbmV0d29ya2luZy9y
+ZWNpcGVzLWNvbm5lY3Rpdml0eS9wYWNrYWdlZ3JvdXBzL3BhY2thZ2Vncm91
+cC1zYW1iDQo+IGEuYmIgDQo+IGIvbWV0YS1uZXR3b3JraW5nL3JlY2lwZXMt
+Y29ubmVjdGl2aXR5L3BhY2thZ2Vncm91cHMvcGFja2FnZWdyb3VwLXNhbWIN
+Cj4gYS5iYg0KPiBuZXcgZmlsZSBtb2RlIDEwMDY0NA0KPiBpbmRleCAwMDAw
+MDAwLi42MTc3NjkxDQo+IC0tLSAvZGV2L251bGwNCj4gKysrIGIvbWV0YS1u
+ZXR3b3JraW5nL3JlY2lwZXMtY29ubmVjdGl2aXR5L3BhY2thZ2Vncm91cHMv
+cGFja2FnZWdyb3VwLQ0KPiArKysgc2FtYmEuYmINCj4gQEAgLTAsMCArMSwy
+OCBAQA0KPiArU1VNTUFSWSA9ICJzYW1iYSBwYWNrYWdlIGdyb3VwcyINCj4g
+K1BWID0gIjEuMCINCj4gK1BSID0gInIyIg0KPiArDQo+ICtpbmhlcml0IHBh
+Y2thZ2Vncm91cA0KPiArDQo+ICtQUk9WSURFUyA9ICIke1BBQ0tBR0VTfSIN
+Cj4gK1BBQ0tBR0VTID0gIiR7UE59LXNlcnZlciAke1BOfS1jbGllbnQgJHtQ
+Tn0tY3RkYi10ZXN0cyAke1BOfS1waWRsIg0KPiArDQo+ICtTVU1NQVJZXyR7
+UE59LWNsaWVudCA9ICIgc2FtYmEgY2xpZW50Ig0KPiArUkRFUEVORFNfJHtQ
+Tn0tY2xpZW50ID0gIlwNCj4gKyAgICBzbWJjbGllbnQgXA0KPiArICAgIHNh
+bWJhLWNvbW1vbiBcDQo+ICsgICAgd2luYmluZCBcDQo+ICsgICAgcmVnaXN0
+cnktdG9vbHMgXA0KPiArICAgICINCg0KV2h5IGRvbid0IHlvdSBqdXN0IGNy
+ZWF0ZSBhIHNhbWJhLWNsaWVudCBtZXRhIHBhY2thZ2UgaW5zaWRlIHRoZSBz
+YW1iYSByZWNpcGUgaW5zdGVhZD8NCg0KPiArDQo+ICtTVU1NQVJZXyR7UE59
+LXNlcnZlciA9ICIgc2FtYmEgc2VydmVyIg0KPiArUkRFUEVORFNfJHtQTn0t
+c2VydmVyID0gIlwNCj4gKyAgICBzYW1iYSBcDQo+ICsgICAgc2FtYmEtY29t
+bW9uIFwNCj4gKyAgICAiDQoNCkFsbCBzYW1iYSBsaWJyYXJpZXMgYWxyZWFk
+eSBkZXBlbmQgb24gc2FtYmEtY29tbW9uLCBzbyBzYW1iYSBkZXBlbmRzIG9u
+IGl0IGluZGlyZWN0bHkuIFRoZXJlZm9yZSB0aGlzICJwYWNrYWdlIGdyb3Vw
+IiBkb2Vzbid0IHNlZW0gdG8gYmUgbmVjZXNzYXJ5Lg0KDQo+ICsNCj4gK1NV
+TU1BUllfJHtQTn0tY3RkYi10ZXN0cyA9ICIgc2FtYmEgY3RkYi10ZXN0cyIN
+Cj4gK1JERVBFTkRTXyR7UE59LWN0ZGItdGVzdHMgPSAic2FtYmEtY3RkYi10
+ZXN0cyINCj4gKw0KPiArU1VNTUFSWV8ke1BOfS1waWRsID0gInNhbWJhLXBp
+ZGwiDQo+ICtSREVQRU5EU18ke1BOfS1waWRsID0gInNhbWJhLXBpZGwiDQoN
+ClRoZXNlIHR3byBzZWVtIHRvIGJlIHVubmVjZXNzYXJ5LCB0b28uDQoNClJl
+Z2FyZHMsDQpBbmRyZWFzDQotLQ0KX19fX19fX19fX19fX19fX19fX19fX19f
+X19fX19fX19fX19fX19fX19fX19fX18NCk9wZW5lbWJlZGRlZC1kZXZlbCBt
+YWlsaW5nIGxpc3QNCk9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1i
+ZWRkZWQub3JnDQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVkLm9yZy9tYWls
+bWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoNCgoK
 
