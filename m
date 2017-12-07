@@ -1,47 +1,24 @@
-Return-Path: <shantanu@senic.com>
-Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
-	by mail.openembedded.org (Postfix) with ESMTP id 88B2578678
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id CD616601F6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 03:50:51 +0000 (UTC)
-Received: by mail-pg0-f68.google.com with SMTP id f12so3554300pgo.5
+	Thu,  7 Dec 2017 06:09:40 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vB769fDc014196
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 06 Dec 2017 19:50:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=senic-com.20150623.gappssmtp.com; s=20150623;
-	h=from:to:cc:subject:date:message-id;
-	bh=xYmLtAqz6Lu12m3vqtnbKDMy4QT2QvNpL48k8QoMBGM=;
-	b=HCx7pY+2iOHBoTsK9BFRp/RBbjVBjkgltL4oqpIgDN8N5S7s/zM7BQcPbDW7ZkYiMU
-	lLD22BOW7J8AhRi9curkvuC4I5dFvn2HEe7Qsd5Z2CoycbiGsdLSqcCJ+hd/sujgOKYY
-	88wf2E84xdqTawuDfqMiplzEmPQbZHLsPdxw8Pf91oQP0LOxBcoF9+u/MTg4WA3+u9h8
-	15tcdgILcJ5Ov9nj2FXbHKgRM9Wv6DDSABvZ98CLl2Do8R836Pe1Py8kg+/pNYXVK82N
-	pSjA2t1YcYLF08FXZWhdZ8tOYhJTCUtyjUeNNGNdjJsCTZkOYHBH5RNQFIGDKk5EeD9G
-	5tiQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=xYmLtAqz6Lu12m3vqtnbKDMy4QT2QvNpL48k8QoMBGM=;
-	b=OW3G2uMTP+9e32NkzdqPRavKUVbTNFDmJqWiRurMMZRWD88tUmp/an949pl59Ri4l+
-	cu+8J0vbRHQJxWRXFJu/fzUd+aHOkAAyOmeTVdC9LvgimWdWzOXV5aJjMqkSaPXvRNyk
-	tpbHTDMvi0vS817QqxpZwam0+hpBF/xBq6sq9uj87jYoNF87iBIYKQ8vyOmhocd/iZJn
-	bpNWE6GiRUX7Ur0wnDxLhK/u1bczR8zQeMth8EbKVxcEIZbdQciaTHN9A3xYjOvqghOR
-	Tb2Q7x6NzrAM6dq+b6ggSdr1e+K019HBmFZcE2616171/5HfEyhX63C15w5he/UCG/ct
-	VvVQ==
-X-Gm-Message-State: AJaThX5XmpD6e4/sw0sO3VYCdL6STitG1gntxNDXs5G1TFmaW+EI92av
-	Fgzahg3ZrtkELsKlIdMp6oPuTVVM
-X-Google-Smtp-Source: AGs4zMY+LQrbU7yyKhqu3wsSDEjBz2PNAE56tcz/znYhOfEMvLwgLQaOn4mhpj/3FlOIFvASht/sdQ==
-X-Received: by 10.99.119.15 with SMTP id s15mr23159240pgc.90.1512618652325;
-	Wed, 06 Dec 2017 19:50:52 -0800 (PST)
-Received: from matar-kulcha.domain.name ([59.92.138.162])
-	by smtp.gmail.com with ESMTPSA id
-	s11sm6036894pgn.80.2017.12.06.19.50.49
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 06 Dec 2017 19:50:51 -0800 (PST)
-From: Shantanu <shantanu@senic.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Dec 2017 09:20:37 +0530
-Message-Id: <20171207035037.6093-1-shantanu@senic.com>
-X-Mailer: git-send-email 2.14.1
-Subject: [PATCH] nghttp: cleaned up the recipe
+	Wed, 6 Dec 2017 22:09:41 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Wed, 6 Dec 2017 22:09:40 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 7 Dec 2017 13:50:51 +0800
+Message-ID: <20171207055051.22129-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.13.3
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] passwdqc: add pam-passwdqc to RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,41 +31,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Dec 2017 03:50:51 -0000
+X-List-Received-Date: Thu, 07 Dec 2017 06:09:41 -0000
+Content-Type: text/plain
 
-Fixes in the recipe as suggested by Andre in the comments here:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-October/115154.html
+From: Mingli Yu <Mingli.Yu@windriver.com>
 
-Signed-off-by: Shantanu <shantanu@senic.com>
+Some basic function such as password change invoked
+by programs such as passwd depends on pam_passwdqc.so
+which is provided by subpackage pam-passwdqc.
+
+Add pam-passwdqc to RDEPENDS for passwdqc.
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
 ---
- meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb | 9 +++------
- 1 file changed, 3 insertions(+), 6 deletions(-)
+ meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb b/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
-index 3e6b10a43..3ccd486be 100644
---- a/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
-+++ b/meta-oe/recipes-support/nghttp2/nghttp2_1.26.0.bb
-@@ -1,16 +1,13 @@
- SUMMARY = "HTTP/2 C Library and tools"
- HOMEPAGE = "https://nghttp2.org/"
- SECTION = "libs"
--
--DEPENDS = "pkgconfig cunit zlib openssl libxml2 jansson c-ares"
--
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://${COREBASE}/meta/COPYING.MIT;md5=3da9cfbcb788c80a0384361b4de20420"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=764abdf30b2eadd37ce47dcbce0ea1ec"
+diff --git a/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb b/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
+index b8f923c29..198db3ce7 100644
+--- a/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
++++ b/meta-oe/recipes-support/passwdqc/passwdqc_1.3.1.bb
+@@ -59,5 +59,5 @@ FILES_lib${BPN} = "${base_libdir}/libpasswdqc.so.0"
+ FILES_pam-${BPN} = "${base_libdir}/security/pam_passwdqc.so"
+ FILES_${PN}-dbg += "${base_libdir}/security/.debug"
  
- SRC_URI = "https://github.com/nghttp2/nghttp2/releases/download/v${PV}/nghttp2-${PV}.tar.bz2"
- SRC_URI[md5sum] = "926f07ad3b50f38f7d8935ced04716cf"
- SRC_URI[sha256sum] = "0df4229f4123b5aa96e834ebcfdffe954e93d986f0252fd10123d50c6f010983"
- 
--inherit cmake pythonnative python-dir
-+DEPENDS = "libxml2 openssl zlib jansson cunit c-ares"
- 
--EXTRA_OECMAKE = ""
-+inherit cmake pythonnative python-dir
+-RDEPENDS_${PN} = "lib${BPN}"
++RDEPENDS_${PN} = "lib${BPN} pam-${BPN}"
+ RDEPENDS_pam-${BPN} = "lib${BPN}"
 -- 
-2.14.1
+2.13.3
 
 
