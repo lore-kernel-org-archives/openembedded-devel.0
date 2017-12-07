@@ -1,62 +1,36 @@
-Return-Path: <peter.kjellerstedt@axis.com>
-Received: from bastet.se.axis.com (bastet.se.axis.com [195.60.68.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 457F4784E2
+Return-Path: <obi@opendreambox.org>
+Received: from mail.dream-property.net (mail.dream-property.net
+	[82.149.226.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 8587077F34
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 14:51:27 +0000 (UTC)
+	Thu,  7 Dec 2017 18:43:04 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by bastet.se.axis.com (Postfix) with ESMTP id 7AE53180FF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:28 +0100 (CET)
-X-Virus-Scanned: Debian amavisd-new at bastet.se.axis.com
-Received: from bastet.se.axis.com ([IPv6:::ffff:127.0.0.1])
-	by localhost (bastet.se.axis.com [::ffff:127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP id hOIv8lMfwiKK
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:27 +0100 (CET)
-Received: from boulder02.se.axis.com (boulder02.se.axis.com [10.0.8.16])
-	by bastet.se.axis.com (Postfix) with ESMTPS id 09D4218454
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:27 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id D41C11A072
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:26 +0100 (CET)
-Received: from boulder02.se.axis.com (unknown [127.0.0.1])
-	by IMSVA (Postfix) with ESMTP id C774A1A069
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:26 +0100 (CET)
-Received: from seth.se.axis.com (unknown [10.0.2.172])
-	by boulder02.se.axis.com (Postfix) with ESMTP
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:26 +0100 (CET)
-Received: from XBOX03.axis.com (xbox03.axis.com [10.0.5.17])
-	by seth.se.axis.com (Postfix) with ESMTP id BB1F12A9A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  7 Dec 2017 15:51:26 +0100 (CET)
-Received: from XBOX02.axis.com (10.0.5.16) by XBOX03.axis.com (10.0.5.17) with
-	Microsoft SMTP Server (TLS) id 15.0.1263.5;
-	Thu, 7 Dec 2017 15:51:26 +0100
-Received: from XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776]) by
-	XBOX02.axis.com ([fe80::50c3:4d2f:4507:7776%21]) with mapi id
-	15.00.1263.000; Thu, 7 Dec 2017 15:51:26 +0100
-From: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [oe] [PATCH] sstate.bbclass: Add progress bars when removing
-	from	the sysroots
-Thread-Index: AQHTb2qNXa8KA+Uh+0isiUfMl2xhQqM39nKQ
-Date: Thu, 7 Dec 2017 14:51:26 +0000
-Message-ID: <80a7627594d542c3a0caa9adad0be224@XBOX02.axis.com>
-References: <20171207143951.21325-1-pkj@axis.com>
-In-Reply-To: <20171207143951.21325-1-pkj@axis.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-ms-exchange-transport-fromentityheader: Hosted
-x-originating-ip: [10.0.5.60]
+	by mail.dream-property.net (Postfix) with ESMTP id AE41F31A6D64;
+	Thu,  7 Dec 2017 19:43:04 +0100 (CET)
+X-Virus-Scanned: Debian amavisd-new at mail.dream-property.net
+Received: from mail.dream-property.net ([127.0.0.1])
+	by localhost (mail.dream-property.net [127.0.0.1]) (amavisd-new,
+	port 10024)
+	with LMTP id OaRySiGY5vcy; Thu,  7 Dec 2017 19:43:02 +0100 (CET)
+Received: from t460p (p57A61C94.dip0.t-ipconnect.de [87.166.28.148])
+	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
+	(No client certificate requested)
+	by mail.dream-property.net (Postfix) with ESMTPSA id E230B31A6D5E;
+	Thu,  7 Dec 2017 19:43:01 +0100 (CET)
+Date: Thu, 7 Dec 2017 19:43:00 +0100
+From: Andreas Oberritter <obi@opendreambox.org>
+To: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
+Message-ID: <20171207194300.6ceeaadd@t460p>
+In-Reply-To: <33D4DBCAC5F2D74E96B07F6E7632BF732EEA567B@G08CNEXMBPEKD01.g08.fujitsu.local>
+References: <1512466387-8999-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<20171205142903.6443ab7e@t460p>
+	<33D4DBCAC5F2D74E96B07F6E7632BF732EEA53C1@G08CNEXMBPEKD01.g08.fujitsu.local>
+	<20171206121342.647dd19e@t460p>
+	<33D4DBCAC5F2D74E96B07F6E7632BF732EEA567B@G08CNEXMBPEKD01.g08.fujitsu.local>
 MIME-Version: 1.0
-X-TM-AS-GCONF: 00
-Subject: Re: [PATCH] sstate.bbclass: Add progress bars when removing from	the sysroots
+Cc: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Subject: Re: [PATCH] [meta-networking][PATCH] packagegroup-samba: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,122 +43,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 07 Dec 2017 14:51:27 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 07 Dec 2017 18:43:04 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-And this was of course intended to go to the openembedded-core list.
+On Thu, 7 Dec 2017 01:20:58 +0000
+"Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com> wrote:
 
-//Peter
+> Hi Andreas=EF=BC=81
+>     Thank you for your description.
+>     And what about samba-server?
 
+It's called "samba". If it's confusing, maybe adding a comment inside the r=
+ecipe
+or to the package summary of "samba" might help.
+
+Regards,
+Andreas
+
+
+>=20
+> --------------------------------------------------
+> Zheng Ruoqin
+> Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
+> ADDR.: No.6 Wenzhu Road, Software Avenue,
+>        Nanjing, 210012, China
+> MAIL : zhengrq.fnst@cn.fujistu.com
+>=20
+>=20
 > -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Peter Kjellerstedt
-> Sent: den 7 december 2017 15:40
-> To: openembedded-devel@lists.openembedded.org
-> Subject: [oe] [PATCH] sstate.bbclass: Add progress bars when removing
-> from the sysroots
+> From: Andreas Oberritter [mailto:obi@opendreambox.org]=20
+> Sent: Wednesday, December 06, 2017 7:14 PM
+> To: Zheng, Ruoqin/=E9=83=91 =E8=8B=A5=E9=92=A6 <zhengrq.fnst@cn.fujitsu.c=
+om>
+> Cc: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH] [meta-networking][PATCH] packagegroup-samba: ne=
+w add
 >=20
-> If there are many recipes that should be cleaned out from the
-> sysroots, it can actually take some time. This adds a progress bar to
-> give a visual clue that the clean up is actually progressing.
+> Hi Zheng,
 >=20
-> Signed-off-by: Peter Kjellerstedt <peter.kjellerstedt@axis.com>
-> ---
->  meta/classes/sstate.bbclass | 36 ++++++++++++++++++++++--------------
->  1 file changed, 22 insertions(+), 14 deletions(-)
+> On Wed, 6 Dec 2017 03:30:32 +0000
+> "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com> wrote:
 >=20
-> diff --git a/meta/classes/sstate.bbclass b/meta/classes/sstate.bbclass
-> index e30fbe1280..6e41b56861 100644
-> --- a/meta/classes/sstate.bbclass
-> +++ b/meta/classes/sstate.bbclass
-> @@ -845,7 +845,7 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash,
-> sq_hashfn, d, siginfo=3DFalse):
->                  missed.append(task)
->                  bb.debug(2, "SState: Unsuccessful fetch test for %s" %
-> srcuri)
->                  pass
-> -            bb.event.fire(bb.event.ProcessProgress("Checking sstate
-> mirror object availability", len(tasklist) -
-> thread_worker.tasks.qsize()), d)
-> +            bb.event.fire(bb.event.ProcessProgress(msg, len(tasklist)
-> - thread_worker.tasks.qsize()), d)
+> > Hi Andreas=EF=BC=81
+> >    I have some questions here:
+> >=20
+> >    1. Why don't you just create a samba-client meta package inside the =
+samba recipe instead?
+> >       Well, I don't know how to create a samba-client meta package, and=
+ could you help me? =20
 >=20
->          tasklist =3D []
->          for task in range(len(sq_fn)):
-> @@ -856,7 +856,8 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash,
-> sq_hashfn, d, siginfo=3DFalse):
->              tasklist.append((task, sstatefile))
+> do it the same way you did here, but put it into samba_*.bb, i.e. add ${P=
+N}-client to PACKAGES and create RDEPENDS_${PN}-client.
 >=20
->          if tasklist:
-> -            bb.event.fire(bb.event.ProcessStarted("Checking sstate
-> mirror object availability", len(tasklist)), d)
-> +            msg =3D "Checking sstate mirror object availability"
-> +            bb.event.fire(bb.event.ProcessStarted(msg, len(tasklist)),
-> d)
+> You may need to add ALLOW_EMPTY_${PN}-client =3D "1", because the package=
+ won't contain any files.
 >=20
->              import multiprocessing
->              nproc =3D min(multiprocessing.cpu_count(), len(tasklist))
-> @@ -870,7 +871,7 @@ def sstate_checkhashes(sq_fn, sq_task, sq_hash,
-> sq_hashfn, d, siginfo=3DFalse):
->              pool.wait_completion()
->              bb.event.disable_threadlock()
+> Don't forget to remove samba-common.
 >=20
-> -            bb.event.fire(bb.event.ProcessFinished("Checking sstate
-> mirror object availability"), d)
-> +            bb.event.fire(bb.event.ProcessFinished(msg), d)
+> >=20
+> >    2. All samba libraries already depend on samba-common, so samba depe=
+nds on it indirectly. Therefore this "package group" doesn't seem to be nec=
+essary.
+> >        Yes, I found it, thank you.
+> >  =20
+> > > +
+> > > +SUMMARY_${PN}-ctdb-tests =3D " samba ctdb-tests"
+> > > +RDEPENDS_${PN}-ctdb-tests =3D "samba-ctdb-tests"
+> > > +
+> > > +SUMMARY_${PN}-pidl =3D "samba-pidl"
+> > > +RDEPENDS_${PN}-pidl =3D "samba-pidl"   =20
+> >=20
+> >    3. These two seem to be unnecessary, too.
+> >       Testsuite for samba is unnecessary for the packagegroup, why?
+> >       And can you give me a advice about how to deal with samba-pidl?Pu=
+t it into client? =20
 >=20
->      inheritlist =3D d.getVar("INHERIT")
->      if "toaster" in inheritlist:
-> @@ -1038,18 +1039,25 @@ python sstate_eventhandler2() {
->                          seen.append(stamp)
+> Put it nowhere. Installing packagegroup-samba-pidl is in no way easier th=
+an installing samba-pidl directly. The summary doesn't add any value either.
 >=20
->          if toremove:
-> -            bb.note("There are %d recipes to be removed from sysroot
-> %s, removing..." % (len(toremove), a))
-> +            msg =3D "Removing %d recipes from the %s sysroot" %
-> (len(toremove), a)
-> +            bb.event.fire(bb.event.ProcessStarted(msg, len(toremove)),
-> d)
-> +
-> +            removed =3D 0
-> +            for r in toremove:
-> +                (stamp, manifest, workdir) =3D r.split()
-> +                for m in glob.glob(manifest + ".*"):
-> +                    if m.endswith(".postrm"):
-> +                        continue
-> +                    sstate_clean_manifest(m, d)
-> +                bb.utils.remove(stamp + "*")
-> +                if removeworkdir:
-> +                    bb.utils.remove(workdir, recurse =3D True)
-> +                lines.remove(r)
-> +                removed =3D removed + 1
-> +                bb.event.fire(bb.event.ProcessProgress(msg, removed),
-> d)
-> +
-> +            bb.event.fire(bb.event.ProcessFinished(msg), d)
+> The same holds true for samba-ctdb-tests.
 >=20
-> -        for r in toremove:
-> -            (stamp, manifest, workdir) =3D r.split()
-> -            for m in glob.glob(manifest + ".*"):
-> -                if m.endswith(".postrm"):
-> -                    continue
-> -                sstate_clean_manifest(m, d)
-> -            bb.utils.remove(stamp + "*")
-> -            if removeworkdir:
-> -                bb.utils.remove(workdir, recurse =3D True)
-> -            lines.remove(r)
->          with open(i, "w") as f:
->              for l in lines:
->                  f.write(l)
-> --
-> 2.12.0
+> Generally, package groups are meta packages that combine many packages fr=
+om different recipes. They don't make sense if they install only one packag=
+e, and they aren't necessary if all used packages come from exactly one rec=
+ipe.
 >=20
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Regards,
+> Andreas
+>=20
+> >=20
+> >=20
+> > --------------------------------------------------
+> > Zheng Ruoqin
+> > Nanjing Fujitsu Nanda Software Tech. Co., Ltd.(FNST)
+> > ADDR.: No.6 Wenzhu Road, Software Avenue,
+> >        Nanjing, 210012, China
+> > MAIL : zhengrq.fnst@cn.fujistu.com
+> >=20
+> >=20
+> > -----Original Message-----
+> > From: openembedded-devel-bounces@lists.openembedded.org=20
+> > [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf=20
+> > Of Andreas Oberritter
+> > Sent: Tuesday, December 05, 2017 9:29 PM
+> > To: openembedded-devel@lists.openembedded.org
+> > Subject: Re: [oe] [PATCH] [meta-networking][PATCH] packagegroup-samba:=
+=20
+> > new add
+> >=20
+> > Hi Zheng,
+> >=20
+> > On Tue, 5 Dec 2017 17:33:07 +0800
+> > zhengrq <zhengrq.fnst@cn.fujitsu.com> wrote:
+> >  =20
+> > > Add packagegroup for samba, for there are too many rpms in samba and =
+it's hard to manage.
+> > >=20
+> > > Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+> > > ---
+> > >  .../packagegroups/packagegroup-samba.bb            | 28 ++++++++++++=
+++++++++++
+> > >  1 file changed, 28 insertions(+)
+> > >  create mode 100644
+> > > meta-networking/recipes-connectivity/packagegroups/packagegroup-samba.
+> > > bb
+> > >=20
+> > > diff --git
+> > > a/meta-networking/recipes-connectivity/packagegroups/packagegroup-sa
+> > > mb
+> > > a.bb
+> > > b/meta-networking/recipes-connectivity/packagegroups/packagegroup-sa
+> > > mb
+> > > a.bb
+> > > new file mode 100644
+> > > index 0000000..6177691
+> > > --- /dev/null
+> > > +++ b/meta-networking/recipes-connectivity/packagegroups/packagegrou
+> > > +++ p-
+> > > +++ samba.bb
+> > > @@ -0,0 +1,28 @@
+> > > +SUMMARY =3D "samba package groups"
+> > > +PV =3D "1.0"
+> > > +PR =3D "r2"
+> > > +
+> > > +inherit packagegroup
+> > > +
+> > > +PROVIDES =3D "${PACKAGES}"
+> > > +PACKAGES =3D "${PN}-server ${PN}-client ${PN}-ctdb-tests ${PN}-pidl"
+> > > +
+> > > +SUMMARY_${PN}-client =3D " samba client"
+> > > +RDEPENDS_${PN}-client =3D "\
+> > > +    smbclient \
+> > > +    samba-common \
+> > > +    winbind \
+> > > +    registry-tools \
+> > > +    "   =20
+> >=20
+> > Why don't you just create a samba-client meta package inside the samba =
+recipe instead?
+> >  =20
+> > > +
+> > > +SUMMARY_${PN}-server =3D " samba server"
+> > > +RDEPENDS_${PN}-server =3D "\
+> > > +    samba \
+> > > +    samba-common \
+> > > +    "   =20
+> >=20
+> > All samba libraries already depend on samba-common, so samba depends on=
+ it indirectly. Therefore this "package group" doesn't seem to be necessary.
+> >  =20
+> > > +
+> > > +SUMMARY_${PN}-ctdb-tests =3D " samba ctdb-tests"
+> > > +RDEPENDS_${PN}-ctdb-tests =3D "samba-ctdb-tests"
+> > > +
+> > > +SUMMARY_${PN}-pidl =3D "samba-pidl"
+> > > +RDEPENDS_${PN}-pidl =3D "samba-pidl"   =20
+> >=20
+> > These two seem to be unnecessary, too.
+> >=20
+> > Regards,
+> > Andreas
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >=20
+> >=20
+> >=20
+> >  =20
+>=20
+>=20
+>=20
+>=20
+>=20
+
 
