@@ -1,49 +1,50 @@
 Return-Path: <bill.randle@gmail.com>
-Received: from mail-pg0-f67.google.com (mail-pg0-f67.google.com [74.125.83.67])
-	by mail.openembedded.org (Postfix) with ESMTP id 63349786CB
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CC20A78709
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri,  8 Dec 2017 05:49:35 +0000 (UTC)
-Received: by mail-pg0-f67.google.com with SMTP id b11so6166386pgu.13
+Received: by mail-pf0-f194.google.com with SMTP id p84so6528865pfd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Dec 2017 21:49:36 -0800 (PST)
+	Thu, 07 Dec 2017 21:49:37 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=kGkddZ1WVgvnKXVofreLBRwAXxMTduMKo4HvGCKhUkw=;
-	b=HMzg2835qhXKjztF4Bf/uFmAAv76yrkjrWnZ80aKmLLS5DfchtoxY9stoIsIbxLvDr
-	v50CRRULlCSwa/1tlTWrArx/fkqqAJ09B/e0oS7ZfDcc9Tu+mAsClAk9aFY9hCY+gpbe
-	ncd7yyboT+8t3i+FhMhH7pj0tSM6YkEEMU9YsLVQ346yNr6xw/tCTgdNWgx3JpMUvzRp
-	Cxx67+U6ykfCKKSc3zJ8ZzgZPsAPyhHWDmMsNWDGOOLTeuFSMayc9LamL/hdVpFWkr2w
-	oVLXYJCFnOOvz0OHv6PrW8TCQZlbd7gcuVIia2bTR9rnE6xsOqIah9jxTBMab6fGU3Yf
-	HWdw==
+	bh=wj0dOG1X4GZkEloCY0lhSFF848jFCenCeUXxaf8dPNs=;
+	b=q2XXKfgjSHEPpGbzfFe05lBe1PXOaU9GHLDtyh7Yl2Bvy6y+XVJcUM4WlDecQNBa1t
+	aD0Sh+1VqHIJ3HzzdgLn6Oc3ScIxKMzQI203yT3v4/ewoE9fzo/KJYOZPxG7UWrXxnuT
+	rGn3OXG323pjbzYixQqQAJwju2sB1DZrSaLq6wFAitms5EytY7Jfkr6uo5pbQJtsLkIR
+	uMf1UxRVTRUTYtel5Dw0X4t1tO64yHq/VH/lEk5tCor7JT9vCiNJdXDZWcSsiekMpTgI
+	rQuD7OynKqQld4nwBGppj0bXP6/uspwhoLynRMVcqKLB2rYRsA7TAk7lj0zRTiDLLaoP
+	EqGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=kGkddZ1WVgvnKXVofreLBRwAXxMTduMKo4HvGCKhUkw=;
-	b=pHe/yuPN78nR9cGQeA6J6uFEz+90PH7+8ckrhY/N0hW83waGND4LZAUynRREHmhiDQ
-	x6zA5kYvb6poJ2qatSIG+WLFkK8Jx9VarItOkLg7ZIF1+ghTukapdaKBxiSWad3ZSEhD
-	BK8ZtKFbXgRWQEg83wuVkU+8oLzgMJNl1NGIAHCC/CrMPEXuNr66bMjQ3Xl5VJK16Dm7
-	aMG+1d9FjZ8J5nPmpZyB3KHJ9koSBynNXNa2+1a2f6LrMzTr52sgrsBHnS6Jbqu3cmHM
-	RINsx/d+0NOXNEPmIvaNS5XejIJRYQ4sfgAPfxN2Mi1o8LtgPJL0h7oIoa4LTPG9AUmj
-	VC6w==
-X-Gm-Message-State: AKGB3mKSa/hQjv9uorhD+n20hiOpc0NEeuJ6npZigFCeJuB/HA3SHjAH
-	lCA8Y7nF9HVGrx9i2vlJsvTm1Q==
-X-Google-Smtp-Source: AGs4zMb/Wc0KqkIY7K1zC2VXmB+86QQZ1mR0fsntQPpP2HHzyJMJyiL7hWi4vV5l691nxqhsgu6RvA==
-X-Received: by 10.84.132.33 with SMTP id 30mr19972266ple.292.1512712176085;
-	Thu, 07 Dec 2017 21:49:36 -0800 (PST)
+	bh=wj0dOG1X4GZkEloCY0lhSFF848jFCenCeUXxaf8dPNs=;
+	b=pxTmiyl4ceC7xcjAALBSRjM1fhjXB6lP0oGLomeFUcGz9mMRfXZAROWPwaKsbIOXXz
+	3SFRoDtomiQBWnMQVCAF4nelieOxjgwCV0GfnN4m1O3tcVFZ/itefw+38v5sVHFUHKtJ
+	/d3eQn7xWN9Nh6GADYyY5qIK65anSDgsNKjDeGdu1ThZez/rBJWM5/Lp6j1o3wxdk1pr
+	7UFCxH4eA0bdyPU9Vz6L41BNQkTqTytI1EnqS6xvY2u9bqWb90/iNlMuY3E2ZQGO+mZT
+	yj91O7FulPsxNlXCso/XQHOxb0gOaP/1lo5/WwIK4OpqYCcWackl4H6i227qu7Gr8Er6
+	4JXw==
+X-Gm-Message-State: AKGB3mK7aasSa+RBJUNFRgcLKLBX1MPM/hBODR1EOTd8ZFZt5qffl9BH
+	3usisjcn7q3y9L6uKQhgbU8+tw==
+X-Google-Smtp-Source: AGs4zMayWJzwke6ikKPC/wLn8UCJ/FaSY6c9ovRGwhaoOCG0/PBkXYdVY2B45X/3crGkh78o3VJ0Bg==
+X-Received: by 10.101.80.138 with SMTP id r10mr4310922pgp.428.1512712177003;
+	Thu, 07 Dec 2017 21:49:37 -0800 (PST)
 Received: from neosoft.neocat.org (67-5-135-101.ptld.qwest.net. [67.5.135.101])
 	by smtp.gmail.com with ESMTPSA id
-	y5sm12500814pfd.63.2017.12.07.21.49.35
+	y5sm12500814pfd.63.2017.12.07.21.49.36
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Dec 2017 21:49:35 -0800 (PST)
+	Thu, 07 Dec 2017 21:49:36 -0800 (PST)
 From: Bill Randle <bill.randle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Dec 2017 21:49:09 -0800
-Message-Id: <20171208054911.27014-12-bill.randle@gmail.com>
+Date: Thu,  7 Dec 2017 21:49:10 -0800
+Message-Id: <20171208054911.27014-13-bill.randle@gmail.com>
 X-Mailer: git-send-email 2.13.6
 In-Reply-To: <20171208054911.27014-1-bill.randle@gmail.com>
 References: <20171208054911.27014-1-bill.randle@gmail.com>
-Subject: [meta-python][V2 PATCH 11/13] python[3]-xstatic: new recipes
+Subject: [meta-python][V2 PATCH 12/13] python[3]-xstatic-font-awesome: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,54 +57,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2017 05:49:35 -0000
+X-List-Received-Date: Fri, 08 Dec 2017 05:49:36 -0000
 
 Signed-off-by: Bill Randle <bill.randle@gmail.com>
 ---
- meta-python/recipes-devtools/python/python-xstatic.inc     | 14 ++++++++++++++
- .../recipes-devtools/python/python-xstatic_1.0.1.bb        |  2 ++
- .../recipes-devtools/python/python3-xstatic_1.0.1.bb       |  2 ++
- 3 files changed, 18 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-xstatic.inc
- create mode 100644 meta-python/recipes-devtools/python/python-xstatic_1.0.1.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-xstatic_1.0.1.bb
+ .../python/python-xstatic-font-awesome.inc              | 17 +++++++++++++++++
+ .../python/python-xstatic-font-awesome_4.7.0.0.bb       |  2 ++
+ .../python/python3-xstatic-font-awesome_4.7.0.0.bb      |  2 ++
+ 3 files changed, 21 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic-font-awesome.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic-font-awesome_4.7.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-xstatic.inc b/meta-python/recipes-devtools/python/python-xstatic.inc
+diff --git a/meta-python/recipes-devtools/python/python-xstatic-font-awesome.inc b/meta-python/recipes-devtools/python/python-xstatic-font-awesome.inc
 new file mode 100644
-index 0000000..f7c7db9
+index 0000000..d13cb83
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-xstatic.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "XStatic base package with minimal support code"
-+HOMEPAGE = "https://pypi.python.org/pypi/XStatic"
++++ b/meta-python/recipes-devtools/python/python-xstatic-font-awesome.inc
+@@ -0,0 +1,17 @@
++DESCRIPTION = "Font Awesome icons packaged for setuptools (easy_install) / pip."
++HOMEPAGE = "https://pypi.python.org/pypi/XStatic-Font-Awesome"
 +SECTION = "devel/python"
-+LICENSE = "MIT"
-+LIC_FILES_CHKSUM = "file://README.txt;md5=36a1e7eaa71e1bd07b8d2247839f228e"
++LICENSE = "Apache-2"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=313d021898694cd2b0ea6508bdfe51a2"
 +
-+PYPI_PACKAGE = "XStatic"
++PYPI_PACKAGE = "XStatic-Font-Awesome"
 +
-+SRC_URI[md5sum] = "7064b5ea7fd1ee990e0ae0538301d9bc"
-+SRC_URI[sha256sum] = "0ec93d7c66ebb9e0d31b664753437dc8634cb66e13310cb47c9eb1e0bc66d726"
++inherit pypi
++
++SRC_URI[md5sum] = "141a0e9a7e21e82f922573a00ae0c166"
++SRC_URI[sha256sum] = "e01fb480caaa7c7963dcb3328a4700e631bef6070db0e8b685816d220e685f6c"
 +
 +DEPENDS += " \
++        ${PYTHON_PN}-xstatic \
 +        ${PYTHON_PN}-pip \
 +        "
-diff --git a/meta-python/recipes-devtools/python/python-xstatic_1.0.1.bb b/meta-python/recipes-devtools/python/python-xstatic_1.0.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-xstatic-font-awesome_4.7.0.0.bb b/meta-python/recipes-devtools/python/python-xstatic-font-awesome_4.7.0.0.bb
 new file mode 100644
-index 0000000..8073037
+index 0000000..41e85f4
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-xstatic_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python-xstatic-font-awesome_4.7.0.0.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools
-+require python-xstatic.inc
-diff --git a/meta-python/recipes-devtools/python/python3-xstatic_1.0.1.bb b/meta-python/recipes-devtools/python/python3-xstatic_1.0.1.bb
++require python-xstatic-font-awesome.inc
+diff --git a/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
 new file mode 100644
-index 0000000..76cb702
+index 0000000..639f80d
 --- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-xstatic_1.0.1.bb
++++ b/meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
 @@ -0,0 +1,2 @@
 +inherit pypi setuptools3
-+require python-xstatic.inc
++require python-xstatic-font-awesome.inc
 -- 
 2.7.4
 
