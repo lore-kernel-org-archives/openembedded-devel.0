@@ -1,49 +1,46 @@
 Return-Path: <bill.randle@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 7E037785A6
+Received: from mail-pg0-f50.google.com (mail-pg0-f50.google.com [74.125.83.50])
+	by mail.openembedded.org (Postfix) with ESMTP id CC4D477E76
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  8 Dec 2017 05:46:35 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id v26so6514076pfl.7
+	Fri,  8 Dec 2017 05:49:23 +0000 (UTC)
+Received: by mail-pg0-f50.google.com with SMTP id y6so6176089pgp.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 07 Dec 2017 21:46:36 -0800 (PST)
+	Thu, 07 Dec 2017 21:49:25 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=WvHVRvYNf1dSUUnbBTOnkw7cP47K9ot2dHjCYcILjJk=;
-	b=kv7GJO9ut4v14+e3VU4Y51E8WQr4n3/OfKsb73Km6NTDy3XyJ/+XYFvwYq1DmnE5Jt
-	yTG4d5xD5Q3DtD1vxf40xxK8red8Y1CdAXAN9XIjtNRFxMAYqZkUfQkNSL5CIf9Cv/f0
-	/kMP3BUV6qt+lWaJIaj4k7OLf8jXcqBTzkwnP5DQoY3uqiRvd8ob1C5XyKUvJGJQNGsI
-	0V1sOvuXItdOTE6ar0pu+i12JFyXqBtwnKldFXYSwWUOl80288eJ7kcHDLsXG1BWoXQc
-	ZVijLUJNyCl8yyNClj9Iv2jYbWuSgLePCr3TvdQmu0j7QSjOhnL6kDTT8hNp+I+g/d/0
-	4teg==
+	h=from:to:cc:subject:date:message-id;
+	bh=39C3+ZnGojyD/+PLRDVYMaV9nfgnZ9SYjJbJXl08tm8=;
+	b=Uaw3BiZV/SG1H7pr1J5mloBWBfVq4WM3wStrfzKkyZwjuSQGCKRgpFS0QHxeLFeK+0
+	kzOUb3ruqnWuBnPwBnTC/pWXJai7QlqH1jKaq8fttLacFfhWJnF+mWZ0qSm6NvqQaC9p
+	otOhkOyuZjNiusT7UMZYqEKsn32veEhu3uR0PcIgDpYEmjwrG3qBs79sd6FMMrDrVILN
+	GUMS4Bw+yGG9Uushtoter110oGo2n8QHAXZWFkHA1QC0roihs3xvrKy+mbwiUqPO7Hnt
+	XAfFG+TTiqIvwvhyTSICunRkCS8GyikRzNPm8GMVh0sg3AoDqv/lVwO4jxHn7jdkZX8U
+	UmnA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=WvHVRvYNf1dSUUnbBTOnkw7cP47K9ot2dHjCYcILjJk=;
-	b=rHCJ2aBm/zUupXVVFF9G4gqRYAuBb+gYjBJS2wutviQLHFnWBrpz4q/aHTh1KwC0Hu
-	F5hBSgGgfvqGYlCUfUAgqP4DQdQ4rZHFFzPr6NV4PEsdvjzJS9RdnU/7usMVLKSn68FY
-	hZ1VfnVzZ91ftTPdAQrRz0c3JaE04bEL3YhsHju4aX/r8mw2w4ElVr+/A7waRb1uu6cm
-	BgFKu1//tNtQ2oBZxei0BmvERxAn8miTSF7jbaTXNY6eWdSL/CnBqW7x24qBsrwhNMES
-	LhoqzgQC+wQDwLTF8BCXOuKfH7Xt/7MSDaq/hH/S3Gc6pnRDcDDXPdkGpjYfa7/rnJ6l
-	5VbA==
-X-Gm-Message-State: AJaThX5arvhuGFbN+R6DcCJbw4qQzOGeGPbQb1pRd61aPA+HwIMZyijD
-	flysC+mSuDGxhGyluYrnhdwmiw==
-X-Google-Smtp-Source: AGs4zMZyOjM/78ki8WBfaG76SOeXTwwBtT6rTccBNSUx6bT84z0QQckySrNSPk0Q4lXFySBet6buaQ==
-X-Received: by 10.159.195.72 with SMTP id z8mr28703742pln.183.1512711996330;
-	Thu, 07 Dec 2017 21:46:36 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=39C3+ZnGojyD/+PLRDVYMaV9nfgnZ9SYjJbJXl08tm8=;
+	b=XxJN8iKnG8xhrQj4d6Ktnd+mPr71Ws7HEu07gRjOKvZCsrADBxTgts+iVcnwoEli72
+	d5ffXE+EIqqJbJqevdsgQlr8twCtkPXjOAu3x7svuyBgZrX48IkDw/k5IOi3Q98znfYY
+	Vl5HRAH4D7nPmrPp8fWSztTx3P1QZk9Aw+KBuj7aD2oqCpnZi6LwgcKTxEwAuHZmkMff
+	zT/gSpY/1eDzPx2VgglXSb6zXxyz36jHBhKp8/+1aej6lkz4zXD9b7UwlybKJQgiXCZK
+	uo8UloiJUHNswL4WG8Dg24NMnK+bECtBOPdhqqtuLPZlzd6tVinqrp52+lD0T+Bs7X9Y
+	ipdw==
+X-Gm-Message-State: AJaThX5RJzKd8OnaF05zs2tB+DQMTEDr77QaF7LWX86LhPwAzcG9Txou
+	kzSn0qCwC0SBJYeqhFqt3XSqqQ==
+X-Google-Smtp-Source: AGs4zMbBFjTRNvFCN4eq2tgwfEmGceVusluJ3fLoQPzjyg102gUIhU8oYce03YS2VOr5Da0peXo8mA==
+X-Received: by 10.159.244.12 with SMTP id x12mr29478799plr.312.1512712164423; 
+	Thu, 07 Dec 2017 21:49:24 -0800 (PST)
 Received: from neosoft.neocat.org (67-5-135-101.ptld.qwest.net. [67.5.135.101])
-	by smtp.gmail.com with ESMTPSA id w12sm75701pge.59.2017.12.07.21.46.35
+	by smtp.gmail.com with ESMTPSA id
+	y5sm12500814pfd.63.2017.12.07.21.49.23
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 07 Dec 2017 21:46:35 -0800 (PST)
+	Thu, 07 Dec 2017 21:49:23 -0800 (PST)
 From: Bill Randle <bill.randle@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  7 Dec 2017 21:45:48 -0800
-Message-Id: <20171208054548.26218-13-bill.randle@gmail.com>
+Date: Thu,  7 Dec 2017 21:48:58 -0800
+Message-Id: <20171208054911.27014-1-bill.randle@gmail.com>
 X-Mailer: git-send-email 2.13.6
-In-Reply-To: <20171208054548.26218-1-bill.randle@gmail.com>
-References: <20171208054548.26218-1-bill.randle@gmail.com>
-Subject: [meta-python][V2 PATCH 12/12] python3-wtforms: new recipe
+Subject: [meta-python][V2 PATCH 00/13] New recipes for additional flask extensions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,22 +53,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 08 Dec 2017 05:46:35 -0000
+X-List-Received-Date: Fri, 08 Dec 2017 05:49:23 -0000
 
-Signed-off-by: Bill Randle <bill.randle@gmail.com>
----
- meta-python/recipes-devtools/python/python3-wtforms_2.1.bb | 2 ++
- 1 file changed, 2 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python3-wtforms_2.1.bb
+The basic flask recipes and recipes for a few flask extensions are currently
+present in meta-python. This patch adds several more flask extensions and their
+dependencies, useful for building full featured web sites. Both python and
+python3 receipes are provided.
 
-diff --git a/meta-python/recipes-devtools/python/python3-wtforms_2.1.bb b/meta-python/recipes-devtools/python/python3-wtforms_2.1.bb
-new file mode 100644
-index 0000000..add59cf
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-wtforms_2.1.bb
-@@ -0,0 +1,2 @@
-+inherit pypi setuptools3
-+require python-wtforms.inc
+V2: fix patches in 03/13 (flask-migrate) and 13/13 (flask-xstatic). The rest
+are unchanged.
+
+Bill Randle (13):
+  python[3]-editor: new recipes
+  python[3]-alembic: new recipes
+  python[3]-fask-migrate: new recipes
+  python[3]-flask-nav: new recipes
+  python[3]-flask-uploads: new recipes
+  python[3]-flask-script: new recipes
+  python[3]-flask-mail: new recipes
+  python[3]-flask-user: new recipes
+  python[3]-speaklater: new recipes
+  python[3]-flask-babel: new recipes
+  python[3]-xstatic: new recipes
+  python[3]-xstatic-font-awesome: new recipes
+  python[3]-flask-xstatic: new recipes
+
+ meta-python/recipes-devtools/python/python-alembic.inc  | 13 +++++++++++++
+ .../recipes-devtools/python/python-alembic_0.9.6.bb     |  2 ++
+ meta-python/recipes-devtools/python/python-editor.inc   |  9 +++++++++
+ .../recipes-devtools/python/python-editor_1.0.3.bb      |  2 ++
+ .../recipes-devtools/python/python-flask-babel.inc      | 16 ++++++++++++++++
+ .../python/python-flask-babel_0.11.2.bb                 |  2 ++
+ .../recipes-devtools/python/python-flask-mail.inc       | 12 ++++++++++++
+ .../recipes-devtools/python/python-flask-mail_0.9.1.bb  |  2 ++
+ .../recipes-devtools/python/python-flask-migrate.inc    | 14 ++++++++++++++
+ .../python/python-flask-migrate_2.1.1.bb                |  2 ++
+ .../recipes-devtools/python/python-flask-nav.inc        | 13 +++++++++++++
+ .../recipes-devtools/python/python-flask-nav_0.6.bb     |  2 ++
+ .../recipes-devtools/python/python-flask-script.inc     | 12 ++++++++++++
+ .../python/python-flask-script_2.0.6.bb                 |  2 ++
+ .../recipes-devtools/python/python-flask-uploads.inc    | 12 ++++++++++++
+ .../python/python-flask-uploads_0.2.1.bb                |  2 ++
+ .../recipes-devtools/python/python-flask-user.inc       | 17 +++++++++++++++++
+ .../recipes-devtools/python/python-flask-user_0.6.19.bb |  2 ++
+ .../recipes-devtools/python/python-flask-xstatic.inc    | 16 ++++++++++++++++
+ .../python-flask-xstatic/remove-pip-requires.patch      |  7 +++++++
+ .../python/python-flask-xstatic_0.0.1.bb                |  2 ++
+ .../recipes-devtools/python/python-speaklater.inc       |  9 +++++++++
+ .../recipes-devtools/python/python-speaklater_1.3.bb    |  2 ++
+ .../python/python-xstatic-font-awesome.inc              | 17 +++++++++++++++++
+ .../python/python-xstatic-font-awesome_4.7.0.0.bb       |  2 ++
+ meta-python/recipes-devtools/python/python-xstatic.inc  | 14 ++++++++++++++
+ .../recipes-devtools/python/python-xstatic_1.0.1.bb     |  2 ++
+ .../recipes-devtools/python/python3-alembic_0.9.6.bb    |  2 ++
+ .../recipes-devtools/python/python3-editor_1.0.3.bb     |  2 ++
+ .../python/python3-flask-babel_0.11.2.bb                |  2 ++
+ .../recipes-devtools/python/python3-flask-mail_0.9.1.bb |  2 ++
+ .../python/python3-flask-migrate_2.1.1.bb               |  2 ++
+ .../recipes-devtools/python/python3-flask-nav_0.6.bb    |  2 ++
+ .../python/python3-flask-script_2.0.6.bb                |  2 ++
+ .../python/python3-flask-uploads_0.2.1.bb               |  2 ++
+ .../python/python3-flask-user_0.6.19.bb                 |  2 ++
+ .../python/python3-flask-xstatic_0.0.1.bb               |  2 ++
+ .../recipes-devtools/python/python3-speaklater_1.3.bb   |  2 ++
+ .../python/python3-xstatic-font-awesome_4.7.0.0.bb      |  2 ++
+ .../recipes-devtools/python/python3-xstatic_1.0.1.bb    |  2 ++
+ 40 files changed, 232 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-alembic.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-alembic_0.9.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-editor.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-editor_1.0.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-babel.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-babel_0.11.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-mail.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-mail_0.9.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-migrate.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-migrate_2.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-nav.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-script.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-script_2.0.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-uploads.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-uploads_0.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-user.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-user_0.6.19.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic/remove-pip-requires.patch
+ create mode 100644 meta-python/recipes-devtools/python/python-flask-xstatic_0.0.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-speaklater.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-speaklater_1.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic-font-awesome.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic-font-awesome_4.7.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-xstatic_1.0.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-alembic_0.9.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-editor_1.0.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-babel_0.11.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-mail_0.9.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-migrate_2.1.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-script_2.0.6.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-uploads_0.2.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-user_0.6.19.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-flask-xstatic_0.0.1.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-speaklater_1.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-xstatic-font-awesome_4.7.0.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-xstatic_1.0.1.bb
+
 -- 
 2.7.4
 
