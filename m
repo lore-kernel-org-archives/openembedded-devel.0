@@ -1,30 +1,24 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8A3DA7860F
+Return-Path: <Hongxu.Jia@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 67600786E8
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 05:21:42 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="31047079"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2017 13:21:41 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id C6D69486A76C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 13:21:41 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.116) by
-	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Mon, 11 Dec 2017 13:21:41 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 11 Dec 2017 22:21:35 +0800
-Message-ID: <1513002095-5152-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Mon, 11 Dec 2017 07:10:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBB7A9bB023621
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Sun, 10 Dec 2017 23:10:10 -0800 (PST)
+Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Sun, 10 Dec 2017 23:10:09 -0800
+From: Hongxu Jia <hongxu.jia@windriver.com>
+To: <Martin.Jansa@gmail.com>, <akuster808@gmail.com>
+Date: Mon, 11 Dec 2017 02:10:07 -0500
+Message-ID: <1512976207-77362-1-git-send-email-hongxu.jia@windriver.com>
+X-Mailer: git-send-email 2.8.1
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.116]
-X-yoursite-MailScanner-ID: C6D69486A76C.A6B1D
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCHv2] samba: Add packagegroup
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH][meta-oe] glade: 3.20.0 -> 3.20.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,53 +31,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 05:21:44 -0000
+X-List-Received-Date: Mon, 11 Dec 2017 07:10:10 -0000
 Content-Type: text/plain
 
-Add packagegroup for samba, for there are too many rpms in samba and it's hard to manage.
+Since glib-2.0 updated to 2.54.2, build glade 3.20.0 failed
+...
+|../../glade-3.20.0/gladeui/glade-signal-model.c:68:1:
+error: conflicting types for 'g_ptr_array_find'
+| g_ptr_array_find (GPtrArray *array, gpointer data)
+...
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+The following commit in the new version fixed the issue.
+...
+commit cb87c89745c93969c3742e7a8a11d546c00107c8
+Author: Juan Pablo Ugarte <juanpablougarte@gmail.com>
+Date:   Fri Aug 11 18:17:18 2017 -0300
+
+    GladeSignalModel: rename g_ptr_array_find() to prt_array_find()
+
+    GLib 2.54 introduced g_ptr_array_find() which clashes with our own
+function
+
+ gladeui/glade-signal-model.c | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+...
+
+Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
 ---
- .../recipes-connectivity/samba/samba_4.6.7.bb         | 19 ++++++++++++++++++-
- 1 file changed, 18 insertions(+), 1 deletion(-)
+ meta-oe/recipes-devtools/glade/{glade_3.20.0.bb => glade_3.20.2.bb} | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-oe/recipes-devtools/glade/{glade_3.20.0.bb => glade_3.20.2.bb} (86%)
 
-diff --git a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
-index 2b227c9..0bacb02 100644
---- a/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
-+++ b/meta-networking/recipes-connectivity/samba/samba_4.6.7.bb
-@@ -162,7 +162,7 @@ PACKAGES =+ "${PN}-python ${PN}-pidl \
-              ${PN}-dsdb-modules ${PN}-testsuite registry-tools \
-              winbind \
-              ${PN}-common ${PN}-base ${PN}-ctdb-tests \
--             smbclient"
-+             smbclient ${PN}-client ${PN}-test"
+diff --git a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb b/meta-oe/recipes-devtools/glade/glade_3.20.2.bb
+similarity index 86%
+rename from meta-oe/recipes-devtools/glade/glade_3.20.0.bb
+rename to meta-oe/recipes-devtools/glade/glade_3.20.2.bb
+index f33b6e3..ad91ca3 100644
+--- a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb
++++ b/meta-oe/recipes-devtools/glade/glade_3.20.2.bb
+@@ -14,8 +14,8 @@ inherit autotools pkgconfig gnomebase gobject-introspection
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
+            file://remove-yelp-help-rules-var.patch \
+           "
+-SRC_URI[md5sum] = "9964a2da14c5f845eae363889586ca43"
+-SRC_URI[sha256sum] = "82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe"
++SRC_URI[md5sum] = "d3dd9ba33c7d7c854ab207e1ba844dda"
++SRC_URI[sha256sum] = "07d1545570951aeded20e9fdc6d3d8a56aeefe2538734568c5335be336c6abed"
  
- python samba_populate_packages() {
-     def module_hook(file, pkg, pattern, format, basename):
-@@ -254,3 +254,20 @@ FILES_smbclient = "${bindir}/cifsdd \
+ EXTRA_OECONF += "--disable-man-pages"
  
- RDEPENDS_${PN}-pidl_append = " perl"
- FILES_${PN}-pidl = "${bindir}/pidl ${datadir}/perl5/Parse"
-+
-+SUMMARY_${PN}-client = "samba client"
-+RDEPENDS_${PN}-client = "\
-+    smbclient \
-+    winbind \
-+    registry-tools \
-+    ${PN}-pidl \
-+    " 
-+
-+ALLOW_EMPTY_${PN}-client = "1"
-+
-+RDEPENDS_${PN}-test = "\
-+    ${PN}-ctdb-tests \
-+    ${PN}-testsuite \
-+    "
-+
-+ALLOW_EMPTY_${PN}-test = "1"
 -- 
-2.7.4
-
-
+2.8.1
 
 
