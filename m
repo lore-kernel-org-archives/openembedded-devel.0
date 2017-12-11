@@ -1,51 +1,40 @@
-Return-Path: <pbarker@toganlabs.com>
-Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
-	by mail.openembedded.org (Postfix) with ESMTP id BB15A7873C
+Return-Path: <leimaohui@cn.fujitsu.com>
+X-Greylist: delayed 608 seconds by postgrey-1.34 at layers.openembedded.org;
+	Mon, 11 Dec 2017 09:18:07 UTC
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C995F785E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 08:55:05 +0000 (UTC)
-Received: by mail-wm0-f42.google.com with SMTP id t8so12882798wmc.3
+	Mon, 11 Dec 2017 09:18:07 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="31063924"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2017 17:07:59 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 328C2486A76B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 00:55:07 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=jofgHTLCnZnFhJi7XJyCZJ20UzVGvEvB/izKzJBFm4c=;
-	b=PBlTkQfhJCXsS07RLg6R/dukXMtw4LpSOrpXB6lavZliWUYBuJNDE60v9ZKIJVrrtk
-	CF7T1b0z27pzCJ6+R9+mdzW10Sl5kzJAqDAiXl8SUXB3OmOoHqkaqAOsvuZdFg9vWTyw
-	L77iOT8NoKtk3P5z6swfExMa5o69tHt40Dv6Yt3S8ga0puGPToDWrVK1HCGGX0iRizGG
-	y6kQziljeWmrkvnMENZododlX+a8SRWSgB0og5w9fsB/4Iyw36hsRATnA8xT1NyieNeI
-	/++qI/AV55h0ewPF+tMbS/wLwgoaZy8dKamBlR4poHAvRpN5EEMMaP1CsBvuXB2ZQgtW
-	22bQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=jofgHTLCnZnFhJi7XJyCZJ20UzVGvEvB/izKzJBFm4c=;
-	b=Giixi6J5OWrfurOOPP2grNT86mxvvsHw5le1c/5eIuBOfqfPIZn6sm7KFYnA2B6eD8
-	z4izFx4B3sn1QWRiemNYuU5I5bLDAUCdELSmQZkMqODi1CCXSdYuJTWtG4W9IJ8Y3Q0z
-	evPzhIqylOSvs6gJiZnJDttLpEd16Mlct92m2XX6+r3wKQzBmU49UmUQ5+aHzn2X19rm
-	53gLLTOXcPb/tZMhBIMbhj6254ngaHbu86Hj/WqN0Vw8K2P6Z8XCfcTRZrxhVSq+015I
-	SFWXiaLdgHWEO87/sg5N0Aad5xTfdcl2WSLYLcF1hHMDHmz2HdIY6s735bc8PNtBdp+Q
-	kzxg==
-X-Gm-Message-State: AKGB3mLfwnPlCvKlkU33641BI00mNN2+FXirj2erfVSET5loLBI0c2r2
-	hdHff9BUOSBL3u0vckshbk94RF3WhhU3MMpcTcEn9S25
-X-Google-Smtp-Source: ACJfBos4UGVwgAvPDmgo7oEazFrvY9Uh80uzN/1BRs0QYG+H3Z8tntOqe4U6HMaE5n2m1aUSDK0fyGXQF0XzWuSrNaM=
-X-Received: by 10.28.71.5 with SMTP id u5mr96737wma.84.1512982506308; Mon, 11
-	Dec 2017 00:55:06 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.223.199.199 with HTTP; Mon, 11 Dec 2017 00:55:05 -0800 (PST)
-From: Paul Barker <pbarker@toganlabs.com>
-Date: Mon, 11 Dec 2017 08:55:05 +0000
-Message-ID: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
+	Mon, 11 Dec 2017 17:07:56 +0800 (CST)
+Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
+	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
+	14.03.0361.001; Mon, 11 Dec 2017 17:07:56 +0800
+From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
 To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>, 
-	openembedded-core <openembedded-core@lists.openembedded.org>, 
-	"openembedded-members@lists.openembedded.org"
-	<openembedded-members@lists.openembedded.org>, openembedded-architecture
-	<openembedded-architecture@lists.openembedded.org>, 
-	Yocto Project <yocto@yoctoproject.org>
-Subject: OpenEmbedded stand at FOSDEM 2018
+	<openembedded-devel@lists.openembedded.org>
+Thread-Topic: Why was lldpad removed.
+Thread-Index: AdNyTM1DyRmrASEWRiOQNDfwSkQi8w==
+Date: Mon, 11 Dec 2017 09:07:54 +0000
+Message-ID: <1B56A49860EB2D45ADE3731B15C959FD013C30FB72@G08CNEXMBPEKD01.g08.fujitsu.local>
+Accept-Language: zh-CN, en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+dlp-product: dlpe-windows
+dlp-version: 11.0.0.116
+dlp-reaction: no-action
+x-originating-ip: [10.167.225.25]
+MIME-Version: 1.0
+X-yoursite-MailScanner-ID: 328C2486A76B.AA3BE
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
+X-Spam-Status: No
+Subject: Why was lldpad removed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,44 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 08:55:06 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 11 Dec 2017 09:18:08 -0000
+Content-Language: zh-CN
+Content-Type: text/plain; charset="shift_jis"
+Content-Transfer-Encoding: base64
 
-Hi all,
-
-We've got confirmation for an OpenEmbedded stand at FOSDEM 2018! We're
-in the AW building as usual, you can see the full list of stands and
-location details here: https://fosdem.org/2018/stands/
-
-What we need:
-
-* People to help out on the stand and chat about the project. If
-you're going to FOSDEM and don't know many people in the OE project
-this is a great way to get to know some. Even if you can only help out
-for an hour or two this would be much appreciated!
-
-* Device/product demos which show off the features of OE. We only have
-one table this year so please let us know if you're bringing hardware,
-that way we can make sure everything fits. Preference will go to
-hobbyist projects as this is FOSDEM but we're happy with commercial
-projects as long as they're not an explicit sales pitch.
-
-* Build system demo. I really want us to show off toaster again as
-that got a lot of interest last time we demo'd it at FOSDEM.
-Unfortunately I'm on holiday before FOSDEM and I'm not travelling
-directly from home so I'll be unable to bring something to run this
-demo on. So if someone could bring a laptop or mini-PC/monitor/etc to
-run a build system demo on that would be excellent. If not I'll see if
-I can get something shipped to Brussels.
-
-I've created a wiki page here:
-https://www.openembedded.org/wiki/FOSDEM_2018. Please add to this if
-you're planning to bring anything or just attend.
-
-Look forward to seeing many of you in Feb :)
-
---=20
-Paul Barker
-Tog=C3=A1n Labs Ltd
+SGkgYWxsDQoNCkkgbm90aWNlZCB0aGF0IGxsZHBhZCBoYXMgYmVlbiByZW1v
+dmVkLiBBbmQgdGhlIGNvbW1pdCBsb2cgaXMgOiANCiAgICIgQmFzZWQgb24g
+dGhpcyB0aHJlYWQ6DQoNCiAgICAgICAgICAgIGh0dHA6Ly9jb21tZW50cy5n
+bWFuZS5vcmcvZ21hbmUuY29tcC5oYW5kaGVsZHMub3BlbmVtYmVkZGVkLzcw
+ODkwDQoNCiAgICBpdCBzZWVtcyB0aGF0IGxsZHBkIGlzIGEgbW9yZSBjb21w
+bGV0ZSBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgTExEUA0KICAgIHByb3RvY29s
+LiAgUmVtb3ZlIHRoaXMgaW1wbGVtZW50YXRpb24gdG8gcHJvdmlkZSBiZXR0
+ZXIgZGlyZWN0aW9uIHRvDQogICAgbmV3Y29tZXJzIGFuZCB0byBhdHRlbXB0
+IHRvIGZvY3VzIHN1cHBvcnQgZm9yIGEgc2luZ2xlIGltcGxlbWVudGF0aW9u
+IGluDQogICAgdGhlIG1ldGEtbmV0d29ya2luZyBsYXllci4NCiAgICAiIA0K
+DQpCdXQgcmVmZXJlbmNlIHRvIHRoZSBob21lcGFnZSBvZiBsbGRwYWQsIGl0
+IGlzIG5vdCBvbmx5IGFuIGltcGxlbWVudGF0aW9uIG9mIHRoZSBMTERQIHBy
+b3RvY29sLCB0aGUgbW9zdCBpbXBvcnRhbnQgY2FwYWJpbGl0aWVzIGFyZToN
+CiAqIE9wZXJhdGlvbiBvZiB0aGUgRENCWCBwcm90b2NvbChJRUVFIDgwMi4x
+UWF6KSBmb3IgaW50ZXJmYWNlcyB3aGljaCBzdXBwb3J0IHRoZSBEQ0IgcnRu
+ZXRsaW5rIGludGVyZmFjZS4NCiAqIENvbmZpZ3VyaW5nIHRoZSBEQ0Igc2V0
+dGluZ3Mgb2YgdGhlIG5ldHdvcmsgZHJpdmVyIGJhc2VkIG9uIHRoZSBvcGVy
+YXRpb24gb2YgRENCWC4NCg0KQW5kIGluIEZlZG9yYSBhbmQgVWJ1bnR1LCBs
+bGRwYWQgYW5kIGxsZHBkIGFyZSBwcm92aWRlZCBhdCB0aGUgc2FtZSB0aW1l
+LiBTbywgZm9yIHVzZXJzIHdobyB3YW50IERDQlgsIGl0IHNlZW1zIGEgcGl0
+eSB0byByZW1vdmUgbGxkcGFkIGluIG1ldGEtb2UuDQoNCkJlc3QgcmVnYXJk
+cw0KTGVpIE1hb2h1aQ0KCgo=
 
