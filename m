@@ -1,40 +1,56 @@
-Return-Path: <leimaohui@cn.fujitsu.com>
-X-Greylist: delayed 608 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 11 Dec 2017 09:18:07 UTC
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id C995F785E6
+Return-Path: <ayoub.zaki@googlemail.com>
+Received: from mail-vk0-f50.google.com (mail-vk0-f50.google.com
+	[209.85.213.50])
+	by mail.openembedded.org (Postfix) with ESMTP id 3CAD6785E7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 09:18:07 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="31063924"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Dec 2017 17:07:59 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 328C2486A76B
+	Mon, 11 Dec 2017 11:35:45 +0000 (UTC)
+Received: by mail-vk0-f50.google.com with SMTP id x140so10591107vke.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 17:07:56 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0361.001; Mon, 11 Dec 2017 17:07:56 +0800
-From: "Lei, Maohui" <leimaohui@cn.fujitsu.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: Why was lldpad removed.
-Thread-Index: AdNyTM1DyRmrASEWRiOQNDfwSkQi8w==
-Date: Mon, 11 Dec 2017 09:07:54 +0000
-Message-ID: <1B56A49860EB2D45ADE3731B15C959FD013C30FB72@G08CNEXMBPEKD01.g08.fujitsu.local>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-originating-ip: [10.167.225.25]
+	Mon, 11 Dec 2017 03:35:47 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=VYBLcfZxQghGeKnU1vOxMpm8p+AsUMIKZV3rXfO4l4M=;
+	b=veEQqyT/k0G5ZR/xbAuP5rECRh3fKeQmnC6lgsewXv3vh/+tuoqriIbduXhOqScfc2
+	pIJIlen3KJ20JfxdxIEJbfqTckCBqRw4Xk2VsCySmKNWfld7nqOAne7LepyDbsIpBJd9
+	fepzZPv6fDuTtkGL2/N6ijsZH7fv/31nFBH+yndReTKlYEJr/i+jjfhHenO+LEnKZ1xp
+	h473WPnep535F037lUkpv3P72tmddakUMzkfZ3y2lf1sBaCIlzJqpFQQ/2s7x/bIxNnu
+	/Uk63eDl3zIyaOGHfV7n9Jh9ylqc70bu18Z4QrEqmMofR/lSUa8dmtAxnW2adIUkOEL8
+	0mzQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=VYBLcfZxQghGeKnU1vOxMpm8p+AsUMIKZV3rXfO4l4M=;
+	b=kopy271s5ju0tTtRxAqgnQGX2HplcuZ5caN4wEEAEZ0bpSm4oojCdqLLXcGfq1Gak0
+	HtH5FIDVAUSZ1zVNTLoRF2F+hKurPf9WOd9kxY5iiAseEWM+JcDE09OIGXnBNEDfu+L7
+	yz5XEVJHcbDCeczFzj5RUBiVlbZ3SjlaTllDYdDO1GoeOE0Y33iPdVg0r0EZXW8XBRya
+	VXNUwccf+38/ygnW9/oIjeSMi5y5s0kFNRO8wDo10pezqaGhdn5U2YBiEhCaQgU9Kmh6
+	23+qgS2eaCGl+alqgtL9a+pUiobfpRowkM60UQzWOTL1Gx3maqCnig3w8SwcCO7Qbz9o
+	iexg==
+X-Gm-Message-State: AKGB3mI6g041JGT2q3z5QyhGHmefwrXW2sjKcn4kK+UDJMCXv5Tpj6n2
+	SBarKvsaK3Ep53x6vnmYyMZRJEe9TkgIho/JT88=
+X-Google-Smtp-Source: ACJfBotFVK+EXlakb3P7gqXBlT5FQjJrB2BbPZzVFvYX/A2sCOmSetCpHNCznR/rUY4CkPs0BhVwgMPTMhP7iBInn18=
+X-Received: by 10.31.175.141 with SMTP id y135mr95615vke.36.1512992146737;
+	Mon, 11 Dec 2017 03:35:46 -0800 (PST)
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 328C2486A76B.AA3BE
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: leimaohui@cn.fujitsu.com
-X-Spam-Status: No
-Subject: Why was lldpad removed.
+Received: by 10.176.71.67 with HTTP; Mon, 11 Dec 2017 03:35:46 -0800 (PST)
+In-Reply-To: <87o9n5a4dk.fsf@rkubodac-desk.ger.corp.intel.com>
+References: <877euzbem2.fsf@rkubodac-desk.ger.corp.intel.com>
+	<87h8tv21fw.fsf@rkubodac-desk.ger.corp.intel.com>
+	<CA+chaQd9i+Hn_7E0F5zVxP4AY5d3s5gaEJcnBUGF4+y_ghkxYQ@mail.gmail.com>
+	<877eur1nby.fsf@rkubodac-desk.ger.corp.intel.com>
+	<20171115174136.GA4530@jama>
+	<CAMKF1soYSpfBApFPmBa1zj1U6nkqJ9+nqPckRser8Y3eWPmRmg@mail.gmail.com>
+	<CA+-BmJYi0W7whu3T5BneZGdt2me2J7iJBDXMy9FsoaKrnJvF3A@mail.gmail.com>
+	<87o9n5a4dk.fsf@rkubodac-desk.ger.corp.intel.com>
+From: Ayoub Zaki <ayoub.zaki@googlemail.com>
+Date: Mon, 11 Dec 2017 12:35:46 +0100
+Message-ID: <CA+-BmJakBB5Pk72M1eMSS19U2-SDtw3gRfHuSYwG9Yh1wjqBBA@mail.gmail.com>
+To: Raphael Kubo da Costa <raphael.kubo.da.costa@intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-browser] CFT: Chromium 62 in meta-browser
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -47,31 +63,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 09:18:08 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="shift_jis"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Mon, 11 Dec 2017 11:35:46 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-SGkgYWxsDQoNCkkgbm90aWNlZCB0aGF0IGxsZHBhZCBoYXMgYmVlbiByZW1v
-dmVkLiBBbmQgdGhlIGNvbW1pdCBsb2cgaXMgOiANCiAgICIgQmFzZWQgb24g
-dGhpcyB0aHJlYWQ6DQoNCiAgICAgICAgICAgIGh0dHA6Ly9jb21tZW50cy5n
-bWFuZS5vcmcvZ21hbmUuY29tcC5oYW5kaGVsZHMub3BlbmVtYmVkZGVkLzcw
-ODkwDQoNCiAgICBpdCBzZWVtcyB0aGF0IGxsZHBkIGlzIGEgbW9yZSBjb21w
-bGV0ZSBpbXBsZW1lbnRhdGlvbiBvZiB0aGUgTExEUA0KICAgIHByb3RvY29s
-LiAgUmVtb3ZlIHRoaXMgaW1wbGVtZW50YXRpb24gdG8gcHJvdmlkZSBiZXR0
-ZXIgZGlyZWN0aW9uIHRvDQogICAgbmV3Y29tZXJzIGFuZCB0byBhdHRlbXB0
-IHRvIGZvY3VzIHN1cHBvcnQgZm9yIGEgc2luZ2xlIGltcGxlbWVudGF0aW9u
-IGluDQogICAgdGhlIG1ldGEtbmV0d29ya2luZyBsYXllci4NCiAgICAiIA0K
-DQpCdXQgcmVmZXJlbmNlIHRvIHRoZSBob21lcGFnZSBvZiBsbGRwYWQsIGl0
-IGlzIG5vdCBvbmx5IGFuIGltcGxlbWVudGF0aW9uIG9mIHRoZSBMTERQIHBy
-b3RvY29sLCB0aGUgbW9zdCBpbXBvcnRhbnQgY2FwYWJpbGl0aWVzIGFyZToN
-CiAqIE9wZXJhdGlvbiBvZiB0aGUgRENCWCBwcm90b2NvbChJRUVFIDgwMi4x
-UWF6KSBmb3IgaW50ZXJmYWNlcyB3aGljaCBzdXBwb3J0IHRoZSBEQ0IgcnRu
-ZXRsaW5rIGludGVyZmFjZS4NCiAqIENvbmZpZ3VyaW5nIHRoZSBEQ0Igc2V0
-dGluZ3Mgb2YgdGhlIG5ldHdvcmsgZHJpdmVyIGJhc2VkIG9uIHRoZSBvcGVy
-YXRpb24gb2YgRENCWC4NCg0KQW5kIGluIEZlZG9yYSBhbmQgVWJ1bnR1LCBs
-bGRwYWQgYW5kIGxsZHBkIGFyZSBwcm92aWRlZCBhdCB0aGUgc2FtZSB0aW1l
-LiBTbywgZm9yIHVzZXJzIHdobyB3YW50IERDQlgsIGl0IHNlZW1zIGEgcGl0
-eSB0byByZW1vdmUgbGxkcGFkIGluIG1ldGEtb2UuDQoNCkJlc3QgcmVnYXJk
-cw0KTGVpIE1hb2h1aQ0KCgo=
+Hi Raphael,
+
+Yes you are right, it  built better with using rocko branch, now Chromium
+is up and running.
+Thanks  again for the amazing work :-)
+
+best regards,
+
+On Mon, Dec 11, 2017 at 12:30 PM, Raphael Kubo da Costa <
+raphael.kubo.da.costa@intel.com> wrote:
+
+> Ayoub Zaki <ayoub.zaki@googlemail.com> writes:
+>
+> > Hello all,
+> >
+> > I'm trying to build from the latest commit meta-browser:
+> > a8bb1e779bc3565beacceadc4414816670f33475 with an imx6 using yocto pyro
+> > branch with meta-freescale, however the build fails :
+>
+> FWIW, the errors reported below seem to be coming from Node. I guess the
+> node.js version in your pyro branch is too old and does not support all
+> the JS features present in the Chromium code.
+>
 
