@@ -1,24 +1,51 @@
-Return-Path: <Hongxu.Jia@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 67600786E8
+Return-Path: <pbarker@toganlabs.com>
+Received: from mail-wm0-f42.google.com (mail-wm0-f42.google.com [74.125.82.42])
+	by mail.openembedded.org (Postfix) with ESMTP id BB15A7873C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 07:10:09 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBB7A9bB023621
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Sun, 10 Dec 2017 23:10:10 -0800 (PST)
-Received: from pek-lpggp1.wrs.com (128.224.153.74) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Sun, 10 Dec 2017 23:10:09 -0800
-From: Hongxu Jia <hongxu.jia@windriver.com>
-To: <Martin.Jansa@gmail.com>, <akuster808@gmail.com>
-Date: Mon, 11 Dec 2017 02:10:07 -0500
-Message-ID: <1512976207-77362-1-git-send-email-hongxu.jia@windriver.com>
-X-Mailer: git-send-email 2.8.1
+	Mon, 11 Dec 2017 08:55:05 +0000 (UTC)
+Received: by mail-wm0-f42.google.com with SMTP id t8so12882798wmc.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 11 Dec 2017 00:55:07 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=jofgHTLCnZnFhJi7XJyCZJ20UzVGvEvB/izKzJBFm4c=;
+	b=PBlTkQfhJCXsS07RLg6R/dukXMtw4LpSOrpXB6lavZliWUYBuJNDE60v9ZKIJVrrtk
+	CF7T1b0z27pzCJ6+R9+mdzW10Sl5kzJAqDAiXl8SUXB3OmOoHqkaqAOsvuZdFg9vWTyw
+	L77iOT8NoKtk3P5z6swfExMa5o69tHt40Dv6Yt3S8ga0puGPToDWrVK1HCGGX0iRizGG
+	y6kQziljeWmrkvnMENZododlX+a8SRWSgB0og5w9fsB/4Iyw36hsRATnA8xT1NyieNeI
+	/++qI/AV55h0ewPF+tMbS/wLwgoaZy8dKamBlR4poHAvRpN5EEMMaP1CsBvuXB2ZQgtW
+	22bQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
+	:content-transfer-encoding;
+	bh=jofgHTLCnZnFhJi7XJyCZJ20UzVGvEvB/izKzJBFm4c=;
+	b=Giixi6J5OWrfurOOPP2grNT86mxvvsHw5le1c/5eIuBOfqfPIZn6sm7KFYnA2B6eD8
+	z4izFx4B3sn1QWRiemNYuU5I5bLDAUCdELSmQZkMqODi1CCXSdYuJTWtG4W9IJ8Y3Q0z
+	evPzhIqylOSvs6gJiZnJDttLpEd16Mlct92m2XX6+r3wKQzBmU49UmUQ5+aHzn2X19rm
+	53gLLTOXcPb/tZMhBIMbhj6254ngaHbu86Hj/WqN0Vw8K2P6Z8XCfcTRZrxhVSq+015I
+	SFWXiaLdgHWEO87/sg5N0Aad5xTfdcl2WSLYLcF1hHMDHmz2HdIY6s735bc8PNtBdp+Q
+	kzxg==
+X-Gm-Message-State: AKGB3mLfwnPlCvKlkU33641BI00mNN2+FXirj2erfVSET5loLBI0c2r2
+	hdHff9BUOSBL3u0vckshbk94RF3WhhU3MMpcTcEn9S25
+X-Google-Smtp-Source: ACJfBos4UGVwgAvPDmgo7oEazFrvY9Uh80uzN/1BRs0QYG+H3Z8tntOqe4U6HMaE5n2m1aUSDK0fyGXQF0XzWuSrNaM=
+X-Received: by 10.28.71.5 with SMTP id u5mr96737wma.84.1512982506308; Mon, 11
+	Dec 2017 00:55:06 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH][meta-oe] glade: 3.20.0 -> 3.20.2
+Received: by 10.223.199.199 with HTTP; Mon, 11 Dec 2017 00:55:05 -0800 (PST)
+From: Paul Barker <pbarker@toganlabs.com>
+Date: Mon, 11 Dec 2017 08:55:05 +0000
+Message-ID: <CAPyrkgwxYUBGb4wLa83Bcm5dRDFh0m7X3o0tZx9sCYy2PEZV=A@mail.gmail.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>, 
+	openembedded-core <openembedded-core@lists.openembedded.org>, 
+	"openembedded-members@lists.openembedded.org"
+	<openembedded-members@lists.openembedded.org>, openembedded-architecture
+	<openembedded-architecture@lists.openembedded.org>, 
+	Yocto Project <yocto@yoctoproject.org>
+Subject: OpenEmbedded stand at FOSDEM 2018
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,56 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 07:10:10 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 11 Dec 2017 08:55:06 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Since glib-2.0 updated to 2.54.2, build glade 3.20.0 failed
-...
-|../../glade-3.20.0/gladeui/glade-signal-model.c:68:1:
-error: conflicting types for 'g_ptr_array_find'
-| g_ptr_array_find (GPtrArray *array, gpointer data)
-...
+Hi all,
 
-The following commit in the new version fixed the issue.
-...
-commit cb87c89745c93969c3742e7a8a11d546c00107c8
-Author: Juan Pablo Ugarte <juanpablougarte@gmail.com>
-Date:   Fri Aug 11 18:17:18 2017 -0300
+We've got confirmation for an OpenEmbedded stand at FOSDEM 2018! We're
+in the AW building as usual, you can see the full list of stands and
+location details here: https://fosdem.org/2018/stands/
 
-    GladeSignalModel: rename g_ptr_array_find() to prt_array_find()
+What we need:
 
-    GLib 2.54 introduced g_ptr_array_find() which clashes with our own
-function
+* People to help out on the stand and chat about the project. If
+you're going to FOSDEM and don't know many people in the OE project
+this is a great way to get to know some. Even if you can only help out
+for an hour or two this would be much appreciated!
 
- gladeui/glade-signal-model.c | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-...
+* Device/product demos which show off the features of OE. We only have
+one table this year so please let us know if you're bringing hardware,
+that way we can make sure everything fits. Preference will go to
+hobbyist projects as this is FOSDEM but we're happy with commercial
+projects as long as they're not an explicit sales pitch.
 
-Signed-off-by: Hongxu Jia <hongxu.jia@windriver.com>
----
- meta-oe/recipes-devtools/glade/{glade_3.20.0.bb => glade_3.20.2.bb} | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-oe/recipes-devtools/glade/{glade_3.20.0.bb => glade_3.20.2.bb} (86%)
+* Build system demo. I really want us to show off toaster again as
+that got a lot of interest last time we demo'd it at FOSDEM.
+Unfortunately I'm on holiday before FOSDEM and I'm not travelling
+directly from home so I'll be unable to bring something to run this
+demo on. So if someone could bring a laptop or mini-PC/monitor/etc to
+run a build system demo on that would be excellent. If not I'll see if
+I can get something shipped to Brussels.
 
-diff --git a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb b/meta-oe/recipes-devtools/glade/glade_3.20.2.bb
-similarity index 86%
-rename from meta-oe/recipes-devtools/glade/glade_3.20.0.bb
-rename to meta-oe/recipes-devtools/glade/glade_3.20.2.bb
-index f33b6e3..ad91ca3 100644
---- a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb
-+++ b/meta-oe/recipes-devtools/glade/glade_3.20.2.bb
-@@ -14,8 +14,8 @@ inherit autotools pkgconfig gnomebase gobject-introspection
- SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
-            file://remove-yelp-help-rules-var.patch \
-           "
--SRC_URI[md5sum] = "9964a2da14c5f845eae363889586ca43"
--SRC_URI[sha256sum] = "82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe"
-+SRC_URI[md5sum] = "d3dd9ba33c7d7c854ab207e1ba844dda"
-+SRC_URI[sha256sum] = "07d1545570951aeded20e9fdc6d3d8a56aeefe2538734568c5335be336c6abed"
- 
- EXTRA_OECONF += "--disable-man-pages"
- 
--- 
-2.8.1
+I've created a wiki page here:
+https://www.openembedded.org/wiki/FOSDEM_2018. Please add to this if
+you're planning to bring anything or just attend.
 
+Look forward to seeing many of you in Feb :)
+
+--=20
+Paul Barker
+Tog=C3=A1n Labs Ltd
 
