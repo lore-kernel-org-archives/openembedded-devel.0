@@ -1,47 +1,48 @@
-Return-Path: <guy.shapiro@mobi-wize.com>
-X-Greylist: delayed 1470 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 11 Dec 2017 13:18:14 UTC
-Received: from gateway23.websitewelcome.com (gateway23.websitewelcome.com
-	[192.185.50.129])
-	by mail.openembedded.org (Postfix) with ESMTP id B7E7271985
+Return-Path: <raj.khem@gmail.com>
+Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
+	[209.85.192.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 60F987864B
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 13:18:14 +0000 (UTC)
-Received: from cm15.websitewelcome.com (cm15.websitewelcome.com [100.42.49.9])
-	by gateway23.websitewelcome.com (Postfix) with ESMTP id 583AEE855
+	Mon, 11 Dec 2017 17:28:34 +0000 (UTC)
+Received: by mail-pf0-f195.google.com with SMTP id u19so12033228pfa.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 06:53:46 -0600 (CST)
-Received: from gator3269.hostgator.com ([198.57.247.233]) by cmsmtp with SMTP
-	id ONabeS1UEmzEzONacezPRJ; Mon, 11 Dec 2017 06:53:46 -0600
-Received: from [213.57.90.22] (port=46704 helo=coyote.mobiwize)
-	by gator3269.hostgator.com with esmtpsa
-	(TLSv1.2:ECDHE-RSA-AES128-SHA256:128) (Exim 4.89)
-	(envelope-from <guy.shapiro@mobi-wize.com>)
-	id 1eONab-0034p4-7p; Mon, 11 Dec 2017 06:53:45 -0600
-From: Guy Shapiro <guy.shapiro@mobi-wize.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 11 Dec 2017 14:53:11 +0200
-Message-Id: <1512996791-31471-1-git-send-email-guy.shapiro@mobi-wize.com>
-X-Mailer: git-send-email 2.1.4
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - gator3269.hostgator.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - mobi-wize.com
-X-BWhitelist: no
-X-Source-IP: 213.57.90.22
-X-Source-L: No
-X-Exim-ID: 1eONab-0034p4-7p
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-Source-Sender: (coyote.mobiwize) [213.57.90.22]:46704
-X-Source-Auth: guy.shapiro@mobi-wize.com
-X-Email-Count: 9
-X-Source-Cap: bW9iaXdpemU7bW9iaXdpemU7Z2F0b3IzMjY5Lmhvc3RnYXRvci5jb20=
-X-Local-Domain: yes
-Cc: Srinivasa Rao Ragolu <sragolu@mvista.com>, Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-java][PATCH v2] openjdk-8: recipe for jdk8u121-b13-aarch32
+	Mon, 11 Dec 2017 09:28:36 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=IaoF9/mrxbrEF/MNop/HVv9iD5bzGz633VHoysRYjOw=;
+	b=Vuh3hQ69c45TY/D4X4vdTzGbQ+oiECHV5H8NQqKlMsVDuBFwB2lp4kVdPeAFWCn0Jn
+	mEWwWl4gG0BltiRLV1tr/i5CRtRwE2aZpiddn8jjC5WxITbnR1gZ/jUrluzDIYTyLIi7
+	BvK1yLVwri7N4kjMu6HQL0Qri8ehYkwo2p4R7PHTMbY25qH8XtWyY5jyqjQvRvXJmjJD
+	+g+ljO0H2rO5F5GIULwaSUooyUGrQL/AtCHABiEiccRBtLCCNND1UULGdeRXTOGgTBoA
+	+qBQdRZWBinI7/5SVsijmPMTpBbnWjxXrSJk667NSGmrmzvzUvUitzaPEgc2ZsOlDXcG
+	PSoQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=IaoF9/mrxbrEF/MNop/HVv9iD5bzGz633VHoysRYjOw=;
+	b=FR+UUHik+g9XzXqrg//dpxYDyf+IULK7/tyTQ6gFnj+zQPkC7ni2Ra/aCOuWAGY3xi
+	DX9xKXiW/Woqp3RiqXiAQ22NkLt596zn772ZaeUk7jIqGJg1AuJsHbbbyQ/Y8DBVfEIa
+	ayOCIJMdMYP+gfYr+QJS1Y5Ppn9uUgR8205zwSUn4LQ2On8E6G7kVkKwU/CIHtT8Nj2x
+	J4uiAVt3o8f/vAIdLbBxjP6VjaR/Rx8seajGi9G/Vl9cq71EPbscUEDsHRp4pBftrS2u
+	rD1WzNsAa/hOdXuu/NP4GIOVYN+3+dKi0QCGE+shKKAt6tvrO/9fKTy7jG5MyN8HLFGl
+	Ucsw==
+X-Gm-Message-State: AKGB3mLddW7hG/Woy5lVpe0pg9seMJsPgdN4JRCJdh0+fKl3yFAUOzia
+	V5cUiNT6dZcZh9Dga7fOHeKXdN4ShXpR7gRoicQ=
+X-Google-Smtp-Source: ACJfBovnVluUKToGZo/ILLbQX5sSzIRQk+76oo/+3QxXoTByu/5Oh3S/frKa7SyziOPdWMPpBlE6VXz8LGNOvdu5DjY=
+X-Received: by 10.84.241.137 with SMTP id b9mr1012000pll.441.1513013316129;
+	Mon, 11 Dec 2017 09:28:36 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.100.159.15 with HTTP; Mon, 11 Dec 2017 09:28:05 -0800 (PST)
+In-Reply-To: <20171210110531.89035-1-fathi.boudra@linaro.org>
+References: <20171210110531.89035-1-fathi.boudra@linaro.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 11 Dec 2017 09:28:05 -0800
+Message-ID: <CAMKF1sqKii2bZG+VcB5iHVsUOmeZ5ms36qCJxxY3KQhG5M6x-A@mail.gmail.com>
+To: Fathi Boudra <fathi.boudra@linaro.org>
+Cc: naresh.kamboju@linaro.org, Koen Kooi <koen.kooi@linaro.org>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] libhugetlbfs: use next branch instead of master
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,330 +55,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 13:18:14 -0000
+X-List-Received-Date: Mon, 11 Dec 2017 17:28:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Main changes:
-- Fetch the code from the aarch32-port repository. This repository
-  contains the C1 (Client) JIT, making it much faster than the
-  currently used version.
-- Compile using the newly available Client JVM variant.
-- Don't apply some old patches that prevents the code from being
-  compiled.
-- Do not install modified jvm.cfg. Keep the built one instead.
+On Sun, Dec 10, 2017 at 3:05 AM, Fathi Boudra <fathi.boudra@linaro.org> wrote:
+> Master hasn't been updated since 2 years (December 2015). Next branch
+> received some fixes/updates and is only 23 commits ahead of master.
+>
+> Switch from master to next branch:
 
-Main issues:
-- The license file change (address update) breaks the build of old
-  versions.
-- This patch was only tested on arm platform. It might break other
-  platforms.
+next branches are prone to rebase and can be problematic. Its probably better
+to have each patch backported on top of master.
 
-Signed-off-by: Guy Shapiro <guy.shapiro@mobi-wize.com>
----
-Change since v0:
-Rebased on the patches by Ming Lug on
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-April/112441.html
-
-Those patches fix issues with headful build.
-They also move the patch list to the *-cross.inc file.
-This commit version removes the redundant patches explicitly.
----
- recipes-core/openjdk/openjdk-8-common.inc         |  4 +-
- recipes-core/openjdk/openjdk-8-cross.inc          |  1 +
- recipes-core/openjdk/openjdk-8-native_121b13.bb   |  2 +
- recipes-core/openjdk/openjdk-8-release-121b13.inc | 83 ++++++++++++++++++++
- recipes-core/openjdk/openjdk-8_121b13.bb          | 93 +++++++++++++++++++++++
- recipes-core/openjdk/openjre-8_121b13.bb          | 48 ++++++++++++
- 6 files changed, 230 insertions(+), 1 deletion(-)
- create mode 100644 recipes-core/openjdk/openjdk-8-native_121b13.bb
- create mode 100644 recipes-core/openjdk/openjdk-8-release-121b13.inc
- create mode 100644 recipes-core/openjdk/openjdk-8_121b13.bb
- create mode 100644 recipes-core/openjdk/openjre-8_121b13.bb
-
-diff --git a/recipes-core/openjdk/openjdk-8-common.inc b/recipes-core/openjdk/openjdk-8-common.inc
-index 83828e1..8d2d630 100644
---- a/recipes-core/openjdk/openjdk-8-common.inc
-+++ b/recipes-core/openjdk/openjdk-8-common.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Java runtime based upon the OpenJDK Project"
- HOMEPAGE = "http://http://openjdk.java.net/"
- LICENSE  = "GPL-2.0-with-classpath-exception"
- 
--LIC_FILES_CHKSUM = "file://LICENSE;md5=7b4baeedfe2d40cb03536573bc2c89b1"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3e0b59f8fac05c3c03d4a26bbda13f8f"
- 
- inherit java autotools gettext qemu pkgconfig
- 
-@@ -196,6 +196,8 @@ def get_jdk_arch(d):
-     jdk_arch = d.getVar('TRANSLATED_TARGET_ARCH', True)
-     if jdk_arch == "x86-64":
-         jdk_arch = "amd64"
-+    elif jdk_arch == "arm":
-+        jdk_arch = "aarch32"
-     elif jdk_arch == "powerpc":
-         jdk_arch = "ppc"
-     elif jdk_arch == "powerpc64":
-diff --git a/recipes-core/openjdk/openjdk-8-cross.inc b/recipes-core/openjdk/openjdk-8-cross.inc
-index ad3a44d..8516a52 100644
---- a/recipes-core/openjdk/openjdk-8-cross.inc
-+++ b/recipes-core/openjdk/openjdk-8-cross.inc
-@@ -47,6 +47,7 @@ PACKAGECONFIG[gif] = "--with-giflib=system,--with-giflib=bundled,giflib,"
- export WANT_LLVM_RELEASE = "3.5.2"
- PACKAGECONFIG[zero] = "--with-jvm-variants=zero,,,"
- PACKAGECONFIG[shark] = "--with-jvm-variants=zeroshark,,llvm3.5,"
-+PACKAGECONFIG[client] = "--with-jvm-variants=client,,,"
- 
- PACKAGECONFIG[repack] = ",,,"
- 
-diff --git a/recipes-core/openjdk/openjdk-8-native_121b13.bb b/recipes-core/openjdk/openjdk-8-native_121b13.bb
-new file mode 100644
-index 0000000..f75cfc8
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-8-native_121b13.bb
-@@ -0,0 +1,2 @@
-+require openjdk-8-release-121b13.inc
-+require openjdk-8-native.inc
-diff --git a/recipes-core/openjdk/openjdk-8-release-121b13.inc b/recipes-core/openjdk/openjdk-8-release-121b13.inc
-new file mode 100644
-index 0000000..441ee1f
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-8-release-121b13.inc
-@@ -0,0 +1,83 @@
-+PATCHES_URI="\
-+    file://remove-shell-variables-from-autoheader.patch;striplevel=0 \
-+    file://filter-aclocal-copy-too.patch;striplevel=0 \
-+    file://dont-expect-fqpn-for-make.patch;striplevel=0 \
-+    file://openjdk8-no-genx11-in-headless.patch;apply=no \
-+    file://openjdk8-no-unused-deps.patch;apply=no \
-+    file://openjdk8-find-compiler-fix-env-respect.patch;apply=no \
-+    file://openjdk8-prevent-debuginfo-in-favour-of-openembedded-package-split.patch;apply=no \
-+"
-+
-+# Name of the directory containing the compiled output
-+BUILD_DIR = "openjdk.build"
-+BUILD_DIR_ECJ = "openjdk.build-ecj"
-+
-+# Force arm mode for now
-+ARM_INSTRUCTION_SET_armv4t = "ARM"
-+
-+# readdir_r was deprecated in glibc-2.24. Ignore the error for now
-+# NOTE: When updating the recipe, please check if this is still needed
-+CFLAGS_append = " -Wno-error=deprecated-declarations"
-+
-+# Currently the arm port supports only the client JIT (or the Zero interpreter)
-+# For details see (http://mail.openjdk.java.net/pipermail/aarch32-port-dev/2017-February/000750.html)
-+PACKAGECONFIG_append_arm = " client"
-+
-+CORBA_CHANGESET = "093c20d822cc"
-+SRC_URI[corba.md5sum] = "978bd5ebaf495bb99f5a436d60f39587"
-+SRC_URI[corba.sha256sum] = "571826a06659b5afbe3ec0ea22178c53a6b029ad1b17a763cbe1537d78a3f19e"
-+
-+HOTSPOT_CHANGESET = "2d40c68f1daa"
-+SRC_URI[hotspot.md5sum] = "58013c035b578f8f11c4d00ac6ac4e95"
-+SRC_URI[hotspot.sha256sum] = "2577cfe778f4eab3e392d3772149176936792238e8cfcc5b82bd743007655ca0"
-+
-+JAXP_CHANGESET = "1bd8db5ce718"
-+SRC_URI[jaxp.md5sum] = "d6de6091c26dbe0ae2aa7951a677edeb"
-+SRC_URI[jaxp.sha256sum] = "dcace543a0a61db258e2b05859e63ebdba79910501a29f84f6605e4c1c9010d5"
-+
-+JAXWS_CHANGESET = "7ed8fcc10d0c"
-+SRC_URI[jaxws.md5sum] = "a22232cfabb1c6684a9792c1ac5648f6"
-+SRC_URI[jaxws.sha256sum] = "ed818fab52b5db9ba785ba064ebaff494837205a3c271ff8569a668dac6708a8"
-+
-+JDK_CHANGESET = "16729db11724"
-+SRC_URI[jdk.md5sum] = "852107da4bf27fcb93d27bb8752a93fb"
-+SRC_URI[jdk.sha256sum] = "c011db48e85757615557e04b205c8ebd48a3e249ae0235e172e4ac5a30d34ce4"
-+
-+LANGTOOLS_CHANGESET = "e371a84a0763"
-+SRC_URI[langtools.md5sum] = "d73c0ff9d58ffce38ef4bca64868b4e8"
-+SRC_URI[langtools.sha256sum] = "0c238dc6c6f50c6b1b08d37102c188f70bb04c4628e9b49e6d753db62429e24c"
-+
-+NASHORN_CHANGESET = "931298dbe3cf"
-+SRC_URI[nashorn.md5sum] = "61008a331b72d5afbdf52375acd45956"
-+SRC_URI[nashorn.sha256sum] = "33f3877f81c80150b62cd53fe815eac8ec7fdee6a116f5cedc6208e35380295d"
-+
-+OPENJDK_CHANGESET = "cb8f12bf1e86"
-+SRC_URI[openjdk.md5sum] = "0738a58b7f0dd77a638d1127f17a19c3"
-+SRC_URI[openjdk.sha256sum] = "0b0af46573ed08cedbde4a5bdefa1e8cda63bdb679b5d46be789ec602911fce4"
-+
-+OPENJDK_HG_U = "jdk8u"
-+OPENJDK_HG_URL = "http://hg.openjdk.java.net/aarch32-port/${OPENJDK_HG_U}"
-+
-+OPENJDK_FILE = "${OPENJDK_CHANGESET}.tar.bz2"
-+OPENJDK_URI = "${OPENJDK_HG_URL}/archive/${OPENJDK_FILE};name=openjdk"
-+
-+HOTSPOT_FILE = "${HOTSPOT_CHANGESET}.tar.bz2"
-+HOTSPOT_URI = "${OPENJDK_HG_URL}/hotspot/archive/${HOTSPOT_FILE};name=hotspot;unpack=false"
-+
-+CORBA_FILE = "${CORBA_CHANGESET}.tar.bz2"
-+CORBA_URI = "${OPENJDK_HG_URL}/corba/archive/${CORBA_FILE};name=corba;unpack=false"
-+
-+JAXP_FILE = "${JAXP_CHANGESET}.tar.bz2"
-+JAXP_URI = "${OPENJDK_HG_URL}/jaxp/archive/${JAXP_FILE};name=jaxp;unpack=false"
-+
-+JAXWS_FILE = "${JAXWS_CHANGESET}.tar.bz2"
-+JAXWS_URI = "${OPENJDK_HG_URL}/jaxws/archive/${JAXWS_FILE};name=jaxws;unpack=false"
-+
-+JDK_FILE = "${JDK_CHANGESET}.tar.bz2"
-+JDK_URI = "${OPENJDK_HG_URL}/jdk/archive/${JDK_FILE};name=jdk;unpack=false"
-+
-+LANGTOOLS_FILE = "${LANGTOOLS_CHANGESET}.tar.bz2"
-+LANGTOOLS_URI = "${OPENJDK_HG_URL}/langtools/archive/${LANGTOOLS_FILE};name=langtools;unpack=false"
-+
-+NASHORN_FILE = "${NASHORN_CHANGESET}.tar.bz2"
-+NASHORN_URI = "${OPENJDK_HG_URL}/nashorn/archive/${NASHORN_FILE};name=nashorn;unpack=false"
-diff --git a/recipes-core/openjdk/openjdk-8_121b13.bb b/recipes-core/openjdk/openjdk-8_121b13.bb
-new file mode 100644
-index 0000000..9b4c07a
---- /dev/null
-+++ b/recipes-core/openjdk/openjdk-8_121b13.bb
-@@ -0,0 +1,93 @@
-+require openjdk-8-release-121b13.inc
-+require openjdk-8-cross.inc
-+
-+# the following patches can't be applyed on the 121b13 aarch32 sources
-+PATCHES_URI_remove = "file://openjdk8-fix-shark-build.patch;apply=no"
-+PATCHES_URI_remove = "file://openjdk8-fix-shark-stdc++11.patch;apply=no"
-+PATCHES_URI_remove = "file://openjdk8-fix-zero-mode-crash.patch;apply=no"
-+
-+do_install() {
-+    rm -rf ${D}${JDK_HOME}
-+    mkdir -p ${D}${JDK_HOME}
-+    cp -rp ${B}/images/j2sdk-image/* ${D}${JDK_HOME}
-+    chown -R root:root ${D}${JDK_HOME}
-+    find ${D}${JDK_HOME} -name "*.debuginfo" -print0 | xargs -0 rm
-+}
-+
-+PACKAGES_append = " \
-+    ${PN}-demo-dbg \
-+    ${PN}-demo \
-+    ${PN}-source \
-+"
-+
-+FILES_${PN}_append = "\
-+    ${JDK_HOME}/bin/[a-z]* \
-+    ${JDK_HOME}/lib/[a-z]* \
-+    ${JDK_HOME}/jre/bin/[a-z]* \
-+    ${JDK_HOME}/jre/lib/[a-z]* \
-+    ${JDK_HOME}/LICENSE \
-+    ${JDK_HOME}/jre/LICENSE \
-+    ${JDK_HOME}/release \
-+"
-+
-+FILES_${PN}-dev_append = "\
-+    ${JDK_HOME}/include \
-+"
-+
-+FILES_${PN}-dbg_append = "\
-+    ${JDK_HOME}/bin/.debug/ \
-+    ${JDK_HOME}/lib/.debug/ \
-+    ${JDK_HOME}/lib/${JDK_ARCH}/.debug/ \
-+    ${JDK_HOME}/lib/${JDK_ARCH}/jli/.debug/ \
-+    ${JDK_HOME}/jre/bin/.debug/ \
-+    ${JDK_HOME}/jre/lib/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/jli/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/native_threads/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/server/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/headless/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/xawt/.debug/ \
-+    ${JDK_HOME}/jre/lib/${JDK_ARCH}/client/.debug/ \
-+"
-+
-+FILES_${PN}-demo = " ${JDK_HOME}/demo ${JDK_HOME}/sample "
-+RDEPENDS_${PN}-demo = " ${PN} "
-+
-+FILES_${PN}-demo-dbg = "\
-+    ${JDK_HOME}/demo/jvmti/gctest/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/heapTracker/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/heapViewer/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/hprof/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/minst/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/mtrace/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/versionCheck/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/waiters/lib/.debug/ \
-+    ${JDK_HOME}/demo/jvmti/compiledMethodLoad/lib/.debug/ \
-+"
-+
-+FILES_${PN}-doc_append = "\
-+    ${JDK_HOME}/man \
-+    ${JDK_HOME}/ASSEMBLY_EXCEPTION \
-+    ${JDK_HOME}/THIRD_PARTY_README \
-+    ${JDK_HOME}/jre/ASSEMBLY_EXCEPTION \
-+    ${JDK_HOME}/jre/THIRD_PARTY_README \
-+    ${JDK_HOME}/man \
-+"
-+
-+FILES_${PN}-source = " ${JDK_HOME}/src.zip "
-+
-+RPROVIDES_${PN} = "java2-vm"
-+PROVIDES_${PN} = "java2-vm"
-+RPROVIDES_${PN} = "java2-runtime"
-+PROVIDES_${PN} = "java2-runtime"
-+
-+inherit update-alternatives
-+
-+ALTERNATIVE_PRIORITY = "100"
-+
-+ALTERNATIVE_${PN} = "java javac"
-+ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
-+ALTERNATIVE_TARGET[java] = "${JDK_HOME}/bin/java"
-+
-+ALTERNATIVE_LINK_NAME[javac] = "${bindir}/javac"
-+ALTERNATIVE_TARGET[javac] = "${JDK_HOME}/bin/javac"
-diff --git a/recipes-core/openjdk/openjre-8_121b13.bb b/recipes-core/openjdk/openjre-8_121b13.bb
-new file mode 100644
-index 0000000..d24e5b1
---- /dev/null
-+++ b/recipes-core/openjdk/openjre-8_121b13.bb
-@@ -0,0 +1,48 @@
-+require openjdk-8-release-121b13.inc
-+require openjdk-8-cross.inc
-+
-+# the following patches can't be applyed on the 121b13 aarch32 sources
-+PATCHES_URI_remove = "file://openjdk8-fix-shark-build.patch;apply=no"
-+PATCHES_URI_remove = "file://openjdk8-fix-shark-stdc++11.patch;apply=no"
-+PATCHES_URI_remove = "file://openjdk8-fix-zero-mode-crash.patch;apply=no"
-+
-+do_install() {
-+    rm -rf ${D}${JRE_HOME}
-+    mkdir -p ${D}${JRE_HOME}
-+    cp -rp ${B}/images/j2re-image/* ${D}${JRE_HOME}
-+    chown -R root:root ${D}${JRE_HOME}
-+    find ${D}${JRE_HOME} -name "*.debuginfo" -print0 | xargs -0 rm
-+}
-+
-+FILES_${PN}_append = "\
-+    ${JRE_HOME}/bin/[a-z]* \
-+    ${JRE_HOME}/lib/[a-z]* \
-+    ${JRE_HOME}/LICENSE \
-+    ${JRE_HOME}/release \
-+"
-+
-+FILES_${PN}-dbg_append = "\
-+    ${JRE_HOME}/bin/.debug/ \
-+    ${JRE_HOME}/lib/.debug/ \
-+    ${JRE_HOME}/lib/${JDK_ARCH}/.debug/ \
-+    ${JRE_HOME}/lib/${JDK_ARCH}/jli/.debug/ \
-+    ${JRE_HOME}/lib/${JDK_ARCH}/server/.debug/ \
-+"
-+
-+FILES_${PN}-doc_append = "\
-+    ${JRE_HOME}/man \
-+    ${JRE_HOME}/ASSEMBLY_EXCEPTION \
-+    ${JRE_HOME}/THIRD_PARTY_README \
-+"
-+
-+RPROVIDES_${PN} = "java2-vm"
-+PROVIDES_${PN} = "java2-vm"
-+RPROVIDES_${PN} = "java2-runtime"
-+PROVIDES_${PN} = "java2-runtime"
-+
-+inherit update-alternatives
-+
-+ALTERNATIVE_${PN} = "java"
-+ALTERNATIVE_LINK_NAME[java] = "${bindir}/java"
-+ALTERNATIVE_TARGET[java] = "${JRE_HOME}/bin/java"
-+ALTERNATIVE_PRIORITY[java] = "100"
--- 
-2.1.4
-
+> * update PV to include SRCPV and "+next" string
+> * update SRCREV
+> * update SRC_URI to use next branch
+> * drop Force-text-segment-alignment-to-0x08000000-for-i386-.patch which is
+>   a backported patch from next branch
+>
+> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
+> ---
+>  ...segment-alignment-to-0x08000000-for-i386-.patch | 92 ----------------------
+>  .../libhugetlbfs/libhugetlbfs_git.bb               |  7 +-
+>  2 files changed, 3 insertions(+), 96 deletions(-)
+>  delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
+>
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
+> deleted file mode 100644
+> index ce6974d7c..000000000
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
+> +++ /dev/null
+> @@ -1,92 +0,0 @@
+> -From 3c6f8d0e3c0694f79244ec6ad5ad9ba3ca26bc0a Mon Sep 17 00:00:00 2001
+> -From: Yang Shi <yang.shi@linaro.org>
+> -Date: Mon, 7 Dec 2015 14:12:13 -0800
+> -Subject: [PATCH] Force text segment alignment to 0x08000000 for i386 with gold
+> - linker
+> -
+> -Upstream-Status: Backport
+> -
+> -When build libhugetlbfs tests with gold linker for i386, the below error occurs:
+> -
+> -i586-oe-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu
+> --Wl,--as-needed
+> ---sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86 -I..
+> --O2
+> --Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
+> -| i586-oe-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu
+> --Wl,--as-needed
+> ---sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86
+> --B./obj32
+> --Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,noexecstack -ldl
+> --L../obj32
+> --o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl -lhugetlbfs_privutils
+> --Wl,--hugetlbfs-align obj32/linkhuge_rw.o obj32/testutils.o
+> -| i586-oe-linux-ld: internal error in do_write, at
+> -/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-oe-linux/binutils-cross-i586/2.25-r0/git/gold/output.cc:464
+> -| collect2: error: ld returned 1 exit status
+> -
+> -But, it works well with GNU linker. --hugetlbfs-align flag passes
+> -"-zcommon-page-size=$SLICE_SIZE -zmax-page-size=$SLICE_SIZE", that are supported by gold linker too.
+> -But, it looks gold linker deal with them in a different way from gnu linker for i586.
+> -
+> -The readelf shows the below result with GNU linker:
+> -
+> -Elf file type is EXEC (Executable file)
+> -Entry point 0x8048fbd
+> -There are 8 program headers, starting at offset 52
+> -
+> -Program Headers:
+> -  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+> -  PHDR           0x000034 0x08000034 0x08000034 0x00100 0x00100 R E 0x4
+> -  INTERP         0x048134 0x08048134 0x08048134 0x00013 0x00013 R   0x1
+> -      [Requesting program interpreter: /lib/ld-linux.so.2]
+> -  LOAD           0x000000 0x08000000 0x08000000 0x5a5bc 0x5a5bc R E 0x400000
+> -  LOAD           0x05a5bc 0x0845a5bc 0x0845a5bc 0x1028c 0x202cc RW 0x400000
+> -  DYNAMIC        0x05a5d0 0x0845a5d0 0x0845a5d0 0x000e8 0x000e8 RW  0x4
+> -  NOTE           0x048148 0x08048148 0x08048148 0x00044 0x00044 R   0x4
+> -  GNU_EH_FRAME   0x059e5c 0x08059e5c 0x08059e5c 0x0009c 0x0009c R   0x4
+> -  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+> -
+> -"--relax" linker option doesn't solve this problem.
+> -Forced textsegment alignment to 0x08000000 with gold linker, the build will pass and
+> -readelf shows the same result with GNU linker:
+> -
+> -Elf file type is EXEC (Executable file)
+> -Entry point 0x8048fbd
+> -There are 8 program headers, starting at offset 52
+> -
+> -Program Headers:
+> -  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+> -  PHDR           0x000034 0x08000034 0x08000034 0x00100 0x00100 R E 0x4
+> -  INTERP         0x048134 0x08048134 0x08048134 0x00013 0x00013 R   0x1
+> -      [Requesting program interpreter: /lib/ld-linux.so.2]
+> -  LOAD           0x000000 0x08000000 0x08000000 0x5a5bc 0x5a5bc R E 0x400000
+> -  LOAD           0x05a5bc 0x0845a5bc 0x0845a5bc 0x1028c 0x202cc RW 0x400000
+> -  DYNAMIC        0x05a5d0 0x0845a5d0 0x0845a5d0 0x000e8 0x000e8 RW  0x4
+> -  NOTE           0x048148 0x08048148 0x08048148 0x00044 0x00044 R   0x4
+> -  GNU_EH_FRAME   0x059e5c 0x08059e5c 0x08059e5c 0x0009c 0x0009c R   0x4
+> -  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
+> -
+> -The fix just have impact on hugelink_rw test case, which needs --hugetlbfs-align flag.
+> -
+> -Signed-off-by: Yang Shi <yang.shi@linaro.org>
+> -Signed-off-by: Eric B Munson <emunson@mgebm.net>
+> ----
+> - ld.hugetlbfs | 1 +
+> - 1 file changed, 1 insertion(+)
+> -
+> -diff --git a/ld.hugetlbfs b/ld.hugetlbfs
+> -index 4417442..32bc6fb 100755
+> ---- a/ld.hugetlbfs
+> -+++ b/ld.hugetlbfs
+> -@@ -98,6 +98,7 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
+> -       # otherwise it will be NULL.
+> -       case "$EMU" in
+> -       armelf*_linux_eabi)     HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE" ;;
+> -+      elf_i386)               HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
+> -       esac
+> - fi
+> -
+> ---
+> -2.0.2
+> -
+> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> index a63494a62..499e99f91 100644
+> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
+> @@ -7,18 +7,17 @@ DEPENDS = "sysfsutils perl"
+>  RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource ${PN}-perl"
+>  RDEPENDS_${PN}-tests += "bash"
+>
+> -PV = "2.20"
+> +PV = "2.20+git${SRCPV}+next"
+>  PE = "1"
+>
+> -SRCREV = "e44180072b796c0e28e53c4d01ef6279caaa2a99"
+> +SRCREV = "02df38e93e25e07f4d54edae94fb4ec90b7a2824"
+>  SRC_URI = " \
+> -    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
+> +    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https;branch=next \
+>      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
+>      file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
+>      file://tests-Makefile-install-static-4G-edge-testcases.patch \
+>      file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
+>      file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
+> -    file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
+>  "
+>
+>  S = "${WORKDIR}/git"
+> --
+> 2.15.1
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
