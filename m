@@ -1,48 +1,30 @@
-Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f195.google.com (mail-pf0-f195.google.com
-	[209.85.192.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 60F987864B
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 55ED178869
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 17:28:34 +0000 (UTC)
-Received: by mail-pf0-f195.google.com with SMTP id u19so12033228pfa.12
+	Tue, 12 Dec 2017 05:37:10 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="31247088"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 12 Dec 2017 13:37:10 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id 55709486A78E
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 11 Dec 2017 09:28:36 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=IaoF9/mrxbrEF/MNop/HVv9iD5bzGz633VHoysRYjOw=;
-	b=Vuh3hQ69c45TY/D4X4vdTzGbQ+oiECHV5H8NQqKlMsVDuBFwB2lp4kVdPeAFWCn0Jn
-	mEWwWl4gG0BltiRLV1tr/i5CRtRwE2aZpiddn8jjC5WxITbnR1gZ/jUrluzDIYTyLIi7
-	BvK1yLVwri7N4kjMu6HQL0Qri8ehYkwo2p4R7PHTMbY25qH8XtWyY5jyqjQvRvXJmjJD
-	+g+ljO0H2rO5F5GIULwaSUooyUGrQL/AtCHABiEiccRBtLCCNND1UULGdeRXTOGgTBoA
-	+qBQdRZWBinI7/5SVsijmPMTpBbnWjxXrSJk667NSGmrmzvzUvUitzaPEgc2ZsOlDXcG
-	PSoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=IaoF9/mrxbrEF/MNop/HVv9iD5bzGz633VHoysRYjOw=;
-	b=FR+UUHik+g9XzXqrg//dpxYDyf+IULK7/tyTQ6gFnj+zQPkC7ni2Ra/aCOuWAGY3xi
-	DX9xKXiW/Woqp3RiqXiAQ22NkLt596zn772ZaeUk7jIqGJg1AuJsHbbbyQ/Y8DBVfEIa
-	ayOCIJMdMYP+gfYr+QJS1Y5Ppn9uUgR8205zwSUn4LQ2On8E6G7kVkKwU/CIHtT8Nj2x
-	J4uiAVt3o8f/vAIdLbBxjP6VjaR/Rx8seajGi9G/Vl9cq71EPbscUEDsHRp4pBftrS2u
-	rD1WzNsAa/hOdXuu/NP4GIOVYN+3+dKi0QCGE+shKKAt6tvrO/9fKTy7jG5MyN8HLFGl
-	Ucsw==
-X-Gm-Message-State: AKGB3mLddW7hG/Woy5lVpe0pg9seMJsPgdN4JRCJdh0+fKl3yFAUOzia
-	V5cUiNT6dZcZh9Dga7fOHeKXdN4ShXpR7gRoicQ=
-X-Google-Smtp-Source: ACJfBovnVluUKToGZo/ILLbQX5sSzIRQk+76oo/+3QxXoTByu/5Oh3S/frKa7SyziOPdWMPpBlE6VXz8LGNOvdu5DjY=
-X-Received: by 10.84.241.137 with SMTP id b9mr1012000pll.441.1513013316129;
-	Mon, 11 Dec 2017 09:28:36 -0800 (PST)
+	Tue, 12 Dec 2017 13:37:07 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.116) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Tue, 12 Dec 2017 13:37:07 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 12 Dec 2017 22:36:50 +0800
+Message-ID: <1513089410-7758-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Received: by 10.100.159.15 with HTTP; Mon, 11 Dec 2017 09:28:05 -0800 (PST)
-In-Reply-To: <20171210110531.89035-1-fathi.boudra@linaro.org>
-References: <20171210110531.89035-1-fathi.boudra@linaro.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 11 Dec 2017 09:28:05 -0800
-Message-ID: <CAMKF1sqKii2bZG+VcB5iHVsUOmeZ5ms36qCJxxY3KQhG5M6x-A@mail.gmail.com>
-To: Fathi Boudra <fathi.boudra@linaro.org>
-Cc: naresh.kamboju@linaro.org, Koen Kooi <koen.kooi@linaro.org>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libhugetlbfs: use next branch instead of master
+X-Originating-IP: [10.167.225.116]
+X-yoursite-MailScanner-ID: 55709486A78E.A7594
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] xrdp: Add some scripts and patches
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,161 +37,299 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 11 Dec 2017 17:28:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 12 Dec 2017 05:37:12 -0000
+Content-Type: text/plain
 
-On Sun, Dec 10, 2017 at 3:05 AM, Fathi Boudra <fathi.boudra@linaro.org> wrote:
-> Master hasn't been updated since 2 years (December 2015). Next branch
-> received some fixes/updates and is only 23 commits ahead of master.
->
-> Switch from master to next branch:
+Add some scripts and patches for xrdp to make it work properly.
 
-next branches are prone to rebase and can be problematic. Its probably better
-to have each patch backported on top of master.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ ...istinguished_name-in-etc-xrdp-openssl.con.patch | 33 +++++++++
+ .../xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch    | 75 +++++++++++++++++++
+ .../xrdp/xrdp/0001-Fix-the-compile-error.patch     | 35 +++++++++
+ meta-oe/recipes-support/xrdp/xrdp/xrdp.sysconfig   |  4 ++
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb         | 83 +++++++++++++++++++++-
+ 5 files changed, 227 insertions(+), 3 deletions(-)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fix-the-compile-error.patch
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/xrdp.sysconfig
 
-> * update PV to include SRCPV and "+next" string
-> * update SRCREV
-> * update SRC_URI to use next branch
-> * drop Force-text-segment-alignment-to-0x08000000-for-i386-.patch which is
->   a backported patch from next branch
->
-> Signed-off-by: Fathi Boudra <fathi.boudra@linaro.org>
-> ---
->  ...segment-alignment-to-0x08000000-for-i386-.patch | 92 ----------------------
->  .../libhugetlbfs/libhugetlbfs_git.bb               |  7 +-
->  2 files changed, 3 insertions(+), 96 deletions(-)
->  delete mode 100644 meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
->
-> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch b/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
-> deleted file mode 100644
-> index ce6974d7c..000000000
-> --- a/meta-oe/recipes-benchmark/libhugetlbfs/files/Force-text-segment-alignment-to-0x08000000-for-i386-.patch
-> +++ /dev/null
-> @@ -1,92 +0,0 @@
-> -From 3c6f8d0e3c0694f79244ec6ad5ad9ba3ca26bc0a Mon Sep 17 00:00:00 2001
-> -From: Yang Shi <yang.shi@linaro.org>
-> -Date: Mon, 7 Dec 2015 14:12:13 -0800
-> -Subject: [PATCH] Force text segment alignment to 0x08000000 for i386 with gold
-> - linker
-> -
-> -Upstream-Status: Backport
-> -
-> -When build libhugetlbfs tests with gold linker for i386, the below error occurs:
-> -
-> -i586-oe-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu
-> --Wl,--as-needed
-> ---sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86 -I..
-> --O2
-> --Wall -g -o obj32/linkhuge_rw.o -c linkhuge_rw.c
-> -| i586-oe-linux-gcc  -m32 -march=i586 -Wl,-O1 -Wl,--hash-style=gnu
-> --Wl,--as-needed
-> ---sysroot=/home/jenkins/oe/world/shr-core/tmp-glibc/sysroots/qemux86
-> --B./obj32
-> --Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,noexecstack -ldl
-> --L../obj32
-> --o obj32/linkhuge_rw -Wl,--no-as-needed -lpthread -ldl -lhugetlbfs_privutils
-> --Wl,--hugetlbfs-align obj32/linkhuge_rw.o obj32/testutils.o
-> -| i586-oe-linux-ld: internal error in do_write, at
-> -/home/jenkins/oe/world/shr-core/tmp-glibc/work/x86_64-oe-linux/binutils-cross-i586/2.25-r0/git/gold/output.cc:464
-> -| collect2: error: ld returned 1 exit status
-> -
-> -But, it works well with GNU linker. --hugetlbfs-align flag passes
-> -"-zcommon-page-size=$SLICE_SIZE -zmax-page-size=$SLICE_SIZE", that are supported by gold linker too.
-> -But, it looks gold linker deal with them in a different way from gnu linker for i586.
-> -
-> -The readelf shows the below result with GNU linker:
-> -
-> -Elf file type is EXEC (Executable file)
-> -Entry point 0x8048fbd
-> -There are 8 program headers, starting at offset 52
-> -
-> -Program Headers:
-> -  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-> -  PHDR           0x000034 0x08000034 0x08000034 0x00100 0x00100 R E 0x4
-> -  INTERP         0x048134 0x08048134 0x08048134 0x00013 0x00013 R   0x1
-> -      [Requesting program interpreter: /lib/ld-linux.so.2]
-> -  LOAD           0x000000 0x08000000 0x08000000 0x5a5bc 0x5a5bc R E 0x400000
-> -  LOAD           0x05a5bc 0x0845a5bc 0x0845a5bc 0x1028c 0x202cc RW 0x400000
-> -  DYNAMIC        0x05a5d0 0x0845a5d0 0x0845a5d0 0x000e8 0x000e8 RW  0x4
-> -  NOTE           0x048148 0x08048148 0x08048148 0x00044 0x00044 R   0x4
-> -  GNU_EH_FRAME   0x059e5c 0x08059e5c 0x08059e5c 0x0009c 0x0009c R   0x4
-> -  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
-> -
-> -"--relax" linker option doesn't solve this problem.
-> -Forced textsegment alignment to 0x08000000 with gold linker, the build will pass and
-> -readelf shows the same result with GNU linker:
-> -
-> -Elf file type is EXEC (Executable file)
-> -Entry point 0x8048fbd
-> -There are 8 program headers, starting at offset 52
-> -
-> -Program Headers:
-> -  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
-> -  PHDR           0x000034 0x08000034 0x08000034 0x00100 0x00100 R E 0x4
-> -  INTERP         0x048134 0x08048134 0x08048134 0x00013 0x00013 R   0x1
-> -      [Requesting program interpreter: /lib/ld-linux.so.2]
-> -  LOAD           0x000000 0x08000000 0x08000000 0x5a5bc 0x5a5bc R E 0x400000
-> -  LOAD           0x05a5bc 0x0845a5bc 0x0845a5bc 0x1028c 0x202cc RW 0x400000
-> -  DYNAMIC        0x05a5d0 0x0845a5d0 0x0845a5d0 0x000e8 0x000e8 RW  0x4
-> -  NOTE           0x048148 0x08048148 0x08048148 0x00044 0x00044 R   0x4
-> -  GNU_EH_FRAME   0x059e5c 0x08059e5c 0x08059e5c 0x0009c 0x0009c R   0x4
-> -  GNU_STACK      0x000000 0x00000000 0x00000000 0x00000 0x00000 RW  0x10
-> -
-> -The fix just have impact on hugelink_rw test case, which needs --hugetlbfs-align flag.
-> -
-> -Signed-off-by: Yang Shi <yang.shi@linaro.org>
-> -Signed-off-by: Eric B Munson <emunson@mgebm.net>
-> ----
-> - ld.hugetlbfs | 1 +
-> - 1 file changed, 1 insertion(+)
-> -
-> -diff --git a/ld.hugetlbfs b/ld.hugetlbfs
-> -index 4417442..32bc6fb 100755
-> ---- a/ld.hugetlbfs
-> -+++ b/ld.hugetlbfs
-> -@@ -98,6 +98,7 @@ if [ "$HTLB_ALIGN" == "slice" ]; then
-> -       # otherwise it will be NULL.
-> -       case "$EMU" in
-> -       armelf*_linux_eabi)     HTLBOPTS="$HTLBOPTS -Ttext-segment=$SLICE_SIZE" ;;
-> -+      elf_i386)               HTLBOPTS="$HTLBOPTS -Ttext-segment=0x08000000" ;;
-> -       esac
-> - fi
-> -
-> ---
-> -2.0.2
-> -
-> diff --git a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> index a63494a62..499e99f91 100644
-> --- a/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> +++ b/meta-oe/recipes-benchmark/libhugetlbfs/libhugetlbfs_git.bb
-> @@ -7,18 +7,17 @@ DEPENDS = "sysfsutils perl"
->  RDEPENDS_${PN} += "bash perl python python-io python-lang python-subprocess python-resource ${PN}-perl"
->  RDEPENDS_${PN}-tests += "bash"
->
-> -PV = "2.20"
-> +PV = "2.20+git${SRCPV}+next"
->  PE = "1"
->
-> -SRCREV = "e44180072b796c0e28e53c4d01ef6279caaa2a99"
-> +SRCREV = "02df38e93e25e07f4d54edae94fb4ec90b7a2824"
->  SRC_URI = " \
-> -    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https \
-> +    git://github.com/libhugetlbfs/libhugetlbfs.git;protocol=https;branch=next \
->      file://skip-checking-LIB32-and-LIB64-if-they-point-to-the-s.patch \
->      file://libhugetlbfs-avoid-search-host-library-path-for-cros.patch \
->      file://tests-Makefile-install-static-4G-edge-testcases.patch \
->      file://0001-run_test.py-not-use-hard-coded-path-.-obj-hugeadm.patch \
->      file://libhugetlbfs-elf_i386-avoid-search-host-library-path.patch \
-> -    file://Force-text-segment-alignment-to-0x08000000-for-i386-.patch \
->  "
->
->  S = "${WORKDIR}/git"
-> --
-> 2.15.1
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch
+new file mode 100644
+index 0000000..5e7fca0
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch
+@@ -0,0 +1,33 @@
++From d705b1d666cb8713d86ea6fb2fc45c424128285a Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Fri, 1 Dec 2017 10:24:50 +0900
++Subject: [PATCH] Added  req_distinguished_name in /etc/xrdp/openssl.conf,
++ otherwise, cert.pem can't be created.
++
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ keygen/openssl.conf | 8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++diff --git a/keygen/openssl.conf b/keygen/openssl.conf
++index 09db6c2..f077d72 100644
++--- a/keygen/openssl.conf
+++++ b/keygen/openssl.conf
++@@ -4,6 +4,14 @@ distinguished_name = req_distinguished_name
++ x509_extensions = v3_ca
++ 
++ [req_distinguished_name]
+++# Certificate subject
+++#countryName = US
+++#stateOrProvinceName = CA
+++#localityName = Sunnyvale
+++#organizationName = xrdp
+++#organizationalUnitName =
+++commonName = XRDP
+++#emailAddress =
++ 
++ [v3_ca]
++ # Extensions for a typical CA - PKIX recommendation.
++-- 
++1.8.4.2
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
+new file mode 100644
+index 0000000..deaadde
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-sesman.ini-and-xrdp.ini.patch
+@@ -0,0 +1,75 @@
++From a9c460f158d68c1b3de6a31ce853de5379977695 Mon Sep 17 00:00:00 2001
++From: Lei Maohui <leimaohui@cn.fujitsu.com>
++Date: Thu, 30 Nov 2017 11:10:04 +0900
++Subject: [PATCH] Fix sesman.ini and xrdp.ini
++
++Signed-off-by: Lei Maohui <leimaohui@cn.fujitsu.com>
++---
++ sesman/sesman.ini | 20 ++++++--------------
++ xrdp/xrdp.ini     | 10 ----------
++ 2 files changed, 6 insertions(+), 24 deletions(-)
++
++diff --git a/sesman/sesman.ini b/sesman/sesman.ini
++index 8225ee4..c09189e 100644
++--- a/sesman/sesman.ini
+++++ b/sesman/sesman.ini
++@@ -54,12 +54,14 @@ LogLevel=DEBUG
++ EnableSyslog=1
++ SyslogLevel=DEBUG
++ 
++-[X11rdp]
++-param=X11rdp
++-param=-bs
+++[Xorg]
+++param=Xorg
+++param=-config
+++param=xrdp/xorg.conf
+++param=-noreset
++ param=-nolisten
++ param=tcp
++-param=-uds
+++
++ 
++ [Xvnc]
++ param=Xvnc
++@@ -70,16 +72,6 @@ param=-localhost
++ param=-dpi
++ param=96
++ 
++-[Xorg]
++-param=Xorg
++-param=-config
++-param=xrdp/xorg.conf
++-param=-noreset
++-param=-nolisten
++-param=tcp
++-param=-logfile
++-param=.xorgxrdp.%s.log
++-
++ [Chansrv]
++ ; drive redirection, defaults to xrdp_client if not set
++ FuseMountName=thinclient_drives
++diff --git a/xrdp/xrdp.ini b/xrdp/xrdp.ini
++index cb6d7c3..9f63a69 100644
++--- a/xrdp/xrdp.ini
+++++ b/xrdp/xrdp.ini
++@@ -157,16 +157,6 @@ ip=127.0.0.1
++ port=-1
++ code=20
++ 
++-[X11rdp]
++-name=X11rdp
++-lib=libxup.so
++-username=ask
++-password=ask
++-ip=127.0.0.1
++-port=-1
++-xserverbpp=24
++-code=10
++-
++ [Xvnc]
++ name=Xvnc
++ lib=libvnc.so
++-- 
++1.8.4.2
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-the-compile-error.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-the-compile-error.patch
+new file mode 100644
+index 0000000..82b2790
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-the-compile-error.patch
+@@ -0,0 +1,35 @@
++Subject: [PATCH] Fix the make error
++
++Fix the compile error:
++ *** No rule to make target '../librfxcodec/src/.libs/librfxencode.a', needed by 'xrdp'.  Stop..
++
++Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
++---
++ xrdp/Makefile.am | 4 ++--
++ 1 file changed, 2 insertions(+), 2 deletions(-)
++
++diff --git a/xrdp/Makefile.am b/xrdp/Makefile.am
++index a259ef3..d5505b2 100644
++--- a/xrdp/Makefile.am
+++++ b/xrdp/Makefile.am
++@@ -23,7 +23,7 @@ endif
++ if XRDP_RFXCODEC
++ AM_CPPFLAGS += -DXRDP_RFXCODEC
++ AM_CPPFLAGS += -I$(top_srcdir)/librfxcodec/include
++-XRDP_EXTRA_LIBS += $(top_builddir)/librfxcodec/src/.libs/librfxencode.a
+++XRDP_EXTRA_LIBS += $(top_builddir)/librfxcodec/src/.libs/librfxencode.la
++ endif
++ 
++ if XRDP_PIXMAN
++@@ -35,7 +35,7 @@ endif
++ if XRDP_PAINTER
++ AM_CPPFLAGS += -DXRDP_PAINTER
++ AM_CPPFLAGS += -I$(top_srcdir)/libpainter/include
++-XRDP_EXTRA_LIBS += $(top_builddir)/libpainter/src/.libs/libpainter.a
+++XRDP_EXTRA_LIBS += $(top_builddir)/libpainter/src/.libs/libpainter.la
++ endif
++ 
++ sbin_PROGRAMS = \
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/xrdp.sysconfig b/meta-oe/recipes-support/xrdp/xrdp/xrdp.sysconfig
+new file mode 100644
+index 0000000..39f500a
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/xrdp.sysconfig
+@@ -0,0 +1,4 @@
++# put some options here
++
++XRDP_OPTIONS=""
++SESMAN_OPTIONS=""
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+index f6fe42a..e7a77e4 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -4,16 +4,93 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=72cfbe4e7bd33a0a1de9630c91195c21 \
+ "
+ 
+-inherit distro_features_check
++inherit distro_features_check autotools pkgconfig useradd systemd
+ 
+-DEPENDS = "openssl virtual/libx11 libxfixes libxrandr"
++DEPENDS = "openssl virtual/libx11 libxfixes libxrandr libpam nasm-native"
+ 
+ REQUIRED_DISTRO_FEATURES = "x11"
+ 
+-SRC_URI = "git://github.com/neutrinolabs/xrdp.git"
++SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
++           file://xrdp.sysconfig \
++           file://0001-Fix-sesman.ini-and-xrdp.ini.patch \
++           file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
++           file://0001-Fix-the-compile-error.patch \
++           "
+ 
+ SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
+ 
+ PV = "0.9.4+git${SRCPV}"
+ 
+ S = "${WORKDIR}/git"
++
++USERADD_PACKAGES = "${PN}"
++GROUPADD_PARAM_${PN} = "--system xrdp"
++USERADD_PARAM_${PN}  = "--system --home /var/run/xrdp -g xrdp \
++                        --no-create-home --shell /bin/false xrdp"
++
++FILES_${PN} += "${datadir}/dbus-1/services/*.service \
++                ${datadir}/dbus-1/accessibility-services/*.service "
++
++FILES_${PN}-dev += "${libdir}/xrdp/libcommon.so \
++                    ${libdir}/xrdp/libxrdp.so \
++                    ${libdir}/xrdp/libscp.so \
++                    ${libdir}/xrdp/libxrdpapi.so "
++
++#EXTRA_OECONF = "--disable-rfxcodec --disable-painter"
++
++do_configure_prepend() {
++    cd ${S}
++    ./bootstrap
++    cd -
++}
++
++do_compile_prepend() {
++    sed -i 's/(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am/(MAKE) $(AM_MAKEFLAGS) install-exec-am/g' ${S}/keygen/Makefile.in
++}
++
++
++do_install_append() {
++	install -d ${D}${sysconfdir} 
++	install -d ${D}${sysconfdir}/xrdp
++	install -d ${D}${sysconfdir}/xrdp/pam.d
++	install -d ${D}${sysconfdir}/sysconfig/xrdp
++   
++	# deal with systemd unit files
++	install -d ${D}${systemd_unitdir}/system
++	install -m 0644 ${S}/instfiles/xrdp.service.in ${D}${systemd_unitdir}/system/xrdp.service
++	install -m 0644 ${S}/instfiles/xrdp-sesman.service.in ${D}${systemd_unitdir}/system/xrdp-sesman.service 
++	sed -i -e 's,@localstatedir@,${localstatedir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
++	sed -i -e 's,@sysconfdir@,${sysconfdir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
++	sed -i -e 's,@sbindir@,${sbindir},g' ${D}${systemd_unitdir}/system/xrdp.service ${D}${systemd_unitdir}/system/xrdp-sesman.service
++
++	install -m 0644 ${S}/instfiles/*.ini ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/instfiles/pam.d/xrdp-sesman.debian ${D}${sysconfdir}/xrdp/pam.d/xrdp-sesman
++	install -m 0644 ${S}/sesman/sesman.ini ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/sesman/startwm.sh ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/xrdp/xrdp.ini ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/xrdp/xrdp_keyboard.ini ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/instfiles/xrdp.sh ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${S}/keygen/openssl.conf ${D}${sysconfdir}/xrdp/
++	install -m 0644 ${WORKDIR}/xrdp.sysconfig ${D}${sysconfdir}/sysconfig/xrdp/
++	chown xrdp:xrdp ${D}${sysconfdir}/xrdp
++}
++
++SYSTEMD_SERVICE_${PN} = "xrdp.service xrdp-sesman.service"
++
++pkg_postinst_${PN}() {
++	if test -z "$D"
++	then
++		if test -x ${bindir}/xrdp-keygen
++		then
++			${bindir}/xrdp-keygen xrdp ${sysconfdir}/xrdp/rsakeys.ini >/dev/null
++                fi
++		if test ! -s ${sysconfdir}/xrdp/cert.pem
++		then
++			openssl req -x509 -newkey rsa:2048 -sha256 -nodes -days 3652 \
++			-keyout ${sysconfdir}/xrdp/key.pem \
++			-out ${sysconfdir}/xrdp/cert.pem \
++			-config ${sysconfdir}/xrdp/openssl.conf >/dev/null 2>&1
++			chmod 400 ${sysconfdir}/xrdp/key.pem
++		fi			
++        fi
++}
+-- 
+2.7.4
+
+
+
 
