@@ -1,50 +1,52 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wm0-f50.google.com (mail-wm0-f50.google.com [74.125.82.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 70FA07865F
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 2CC227887D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2017 10:09:59 +0000 (UTC)
-Received: by mail-wm0-f50.google.com with SMTP id g75so10276773wme.0
+	Thu, 14 Dec 2017 10:10:05 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id 9so10169338wme.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2017 02:10:01 -0800 (PST)
+	Thu, 14 Dec 2017 02:10:07 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=BbQsaB/6WcZIkUNH1shwC3bJvrLYAalD2eGWgTKf/0M=;
-	b=RCm+Kn/E6Q3oTkSCkckilexToWjmGJLKHLzmYTDh4A+gK3RILnG0o0hbu0X5yNhfUn
-	RepuFBrE1ev3Dh/CWwYNTPoyYZR49Oor236iZ5taE0gK28HgiCuVo4ds13sxeuaLSfuE
-	fz7bS6CyyI/i7++yKewbB8r7tDH53yOMXkerDqJGhbfZO+zG9i4H8mpQCqGNg+vb12el
-	E2wXr7/8iyT1UVMPuv2xBLPK5TaWpKed4oNoPBgK3euU2V/7N2JbSRww6NaZIx8BQF9V
-	v0hs53rz/bxW9seR6Y3eKzudb39mBKw8zOJOyKtOjMEm0Yew8vFOZvArL702hd6inJ4W
-	Gwrw==
+	bh=eeD/MlfIEoWIbmxneNJDxxMxDub1Ihl+UYTIm3LZvvU=;
+	b=BI+iV7gvU1XWUKFO7uiHRVvqCbopowWo/yj03lRh0Sbbq4rPULUK+Ph55e1TLN42lV
+	j09x/6renLGsdZXZWi45sixNKfAgnIOBghqO+XojhpoJungHGzqM/H06Fs39yylbQeyY
+	9vvPbUFCLDSPRaGzVw+w1Z1wPd5BRODUPDQ0ussUjhfHw5I+ODdz5D5rRG9KbKQCnySu
+	4kuteUpda7WyXsdllNW72xlswx2hXUXEPyPss43RqEb9Wd4hs5ULoi2zI3LVoe5IuUA1
+	giNhHsaCYvIHACL/zCu4QMpbVRrYiqLSEdXTZNuPsrT+/WgVLJLveenj+nhTBYFweEA0
+	JAEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=BbQsaB/6WcZIkUNH1shwC3bJvrLYAalD2eGWgTKf/0M=;
-	b=D3I/H13iozAUp8KxcqlPShNik+5npHuNA3Vgx+qQHbm2hTRB9JDZ8//f6qROTC/1od
-	Tj2RSisfq5Oz0+HMDStmTvUJUVI/4NP7qF8vl74Wcp1SwUP6Oc13bCfBmYqIIeORmDHL
-	7zQPF3aF/TcuKxHPma3DmyoJzivhMsGnB5QUVdQsFCCfn9kWqrTA+8T0zjSorHxLP/bj
-	opGbuDYS50yb0YQI3Be+EVcg9imfgtlMqxKOB49iKL490FxEpDH/Xf1mCkvVZHJuXvXs
-	rSwi277QkL3AgHfu2KqK7DyPVTnZ4c3kxtl7blr0lmoHr4O4/b7a5+wGJ0ipbrDRXpOd
-	8LLA==
-X-Gm-Message-State: AKGB3mL7GA6Wxv4GRucNnT6wQx14fJXOuBh+YG0CFwteR1SXE65mJump
-	T+ddGTys3AI+CqKivRFyuH8mCA==
-X-Google-Smtp-Source: ACJfBotHNSWuuM5GQzqm4VYzFJGkT92iuEIhBCoiOlnORcnN3vuYDnFk98TuMMT98M5qyy3A4MFrHw==
-X-Received: by 10.28.8.67 with SMTP id 64mr1647315wmi.34.1513246200509;
-	Thu, 14 Dec 2017 02:10:00 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=eeD/MlfIEoWIbmxneNJDxxMxDub1Ihl+UYTIm3LZvvU=;
+	b=LlJaogcDt3wkWHKHG51CjIidGb5HAl0ID8PVkf5E16mTU+xWUtV+HEFTsHTVQCkuQw
+	YTWdJF68uX81aw2wyUnZ7rQ/dvMcXJKit6vgkX9cned7SDQrCvzctkosw1tgQak8fNLK
+	5RPqaPJ3K7d6FvP2Z2n5F5lwecFRpxN3onbB8ZuACjzlxDi07g3D2/z0URCe/qBSL4+8
+	cK4GA5SFReSUuovn2dmmAvkW9XofQI1i2ctHABMsELobbLje8jUjBf3u6efr8vScjBes
+	t+l9czsEZ3P+7va/w71chT+UM/KH31KnLvK+WhaINnZxKfuqjfVUnVLC1nMx/iwJCoNo
+	vzMA==
+X-Gm-Message-State: AKGB3mL4pztqDMe+T+GAOJySg3JIVCRGxnQt4hCDHem1Qro0ZyXnNFlF
+	H8koAmr1lAkArVXm2waOZ/a3IA==
+X-Google-Smtp-Source: ACJfBosC1FBiQapgg0i+s2HJTTc/amPPxfBe9ZaMkxEbMwoComBiRWoF5F582uI69VdZXfiYLGaZwg==
+X-Received: by 10.28.111.218 with SMTP id c87mr1656459wmi.91.1513246206546;
+	Thu, 14 Dec 2017 02:10:06 -0800 (PST)
 Received: from mueller-a-nb-linux.zera.local
 	(ip-88-152-111-130.hsi03.unitymediagroup.de. [88.152.111.130])
-	by smtp.gmail.com with ESMTPSA id c3sm1840174wrf.21.2017.12.14.02.09.55
+	by smtp.gmail.com with ESMTPSA id c3sm1840174wrf.21.2017.12.14.02.10.01
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Dec 2017 02:09:59 -0800 (PST)
+	Thu, 14 Dec 2017 02:10:05 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Dec 2017 11:09:24 +0100
-Message-Id: <20171214100929.11094-1-schnitzeltony@gmail.com>
+Date: Thu, 14 Dec 2017 11:09:25 +0100
+Message-Id: <20171214100929.11094-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.9.5
+In-Reply-To: <20171214100929.11094-1-schnitzeltony@gmail.com>
+References: <20171214100929.11094-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH 0/5] few fixes
+Subject: [PATCH 1/5] fltk: add -fPIC to compile flags
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,38 +59,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2017 10:10:00 -0000
+X-List-Received-Date: Thu, 14 Dec 2017 10:10:06 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-The following changes since commit acfb8417e370d017e7307872e61564deeda76a13:
+Building yoshimi failes otherwise with many errors as:
+| error: <sysroot>/usr/lib/libfltk.a(Fl_File_Browser.cxx.o): requires unsupported dynamic reloc R_ARM_THM_MOVW_ABS_NC; recompile with -fPIC
 
-  python3-dominate: new recipe (2017-12-11 07:58:58 -0800)
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-oe/recipes-support/fltk/fltk.bb | 4 ++++
+ 1 file changed, 4 insertions(+)
 
-are available in the git repository at:
-
-  https://github.com/schnitzeltony/meta-openembedded.git patches
-
-for you to fetch changes up to 77a0b0909e81f350e7c00d0e3b613a49656a0ed7:
-
-  plymouth: fix path to systemd-tty-ask-password-agent (2017-12-14 11:02:54 +0100)
-
-----------------------------------------------------------------
-Andreas Müller (5):
-      fltk: add -fPIC to compile flags
-      gvfs: update 1.32.1 -> 1.34.1
-      plymouth: do not install systemd units manually
-      plymouth: packageconfig gtk needs gtk+3 as depends
-      plymouth: fix path to systemd-tty-ask-password-agent
-
- meta-gnome/recipes-gnome/gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb}                                    |  7 ++-----
- meta-oe/recipes-core/plymouth/files/0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch | 34 ++++++++++++++++++++++++++++++++++
- meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb                                                     | 12 ++++++------
- meta-oe/recipes-support/fltk/fltk.bb                                                                |  4 ++++
- 4 files changed, 46 insertions(+), 11 deletions(-)
- rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb} (88%)
- create mode 100644 meta-oe/recipes-core/plymouth/files/0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch
-
+diff --git a/meta-oe/recipes-support/fltk/fltk.bb b/meta-oe/recipes-support/fltk/fltk.bb
+index 542fd66..be76062 100644
+--- a/meta-oe/recipes-support/fltk/fltk.bb
++++ b/meta-oe/recipes-support/fltk/fltk.bb
+@@ -14,6 +14,10 @@ EXTRA_OECMAKE = " \
+ 
+ PACKAGECONFIG ??= "${@bb.utils.filter('DISTRO_FEATURES', 'opengl', d)}"
+ 
++# for sake of other packages linking against fltk libs
++CFLAGS += "-fPIC"
++CXXFLAGS += "-fPIC"
++
+ PACKAGECONFIG[examples] = "-DOPTION_BUILD_EXAMPLES=ON,-DOPTION_BUILD_EXAMPLES=OFF,"
+ PACKAGECONFIG[opengl] = "-DOPTION_USE_GL=ON,-DOPTION_USE_GL=OFF,virtual/libgl"
+ PACKAGECONFIG[xinerama] = "-DOPTION_USE_XINERAMA=ON,-DOPTION_USE_XINERAMA=OFF,libxinerama"
 -- 
 2.9.5
 
