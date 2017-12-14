@@ -1,51 +1,49 @@
 Return-Path: <raj.khem@gmail.com>
-Received: from mail-pf0-f196.google.com (mail-pf0-f196.google.com
-	[209.85.192.196])
-	by mail.openembedded.org (Postfix) with ESMTP id D8D3678821
+Received: from mail-pf0-f194.google.com (mail-pf0-f194.google.com
+	[209.85.192.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 53A4F78821
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2017 17:36:44 +0000 (UTC)
-Received: by mail-pf0-f196.google.com with SMTP id m26so4093505pfj.11
+	Thu, 14 Dec 2017 17:36:45 +0000 (UTC)
+Received: by mail-pf0-f194.google.com with SMTP id p84so4110335pfd.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 14 Dec 2017 09:36:46 -0800 (PST)
+	Thu, 14 Dec 2017 09:36:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references
-	:mime-version:content-transfer-encoding;
-	bh=UzDHQDyYbsWYq8e0S1qM9SLOaelaiz/1TzJuSzguyr8=;
-	b=FwhP7MzwOqMcDn1RQOU9ryGda/MYtQmi7rdP5ORXLqWOt6SmfXLymBbbVyx1wRWSYO
-	w602Dz2tMvJsrTQTTN7GW1JDKcWzVBdGnutJeHULqZrsUP/t8e0s+7U7zt1inikvpkPm
-	ILd9XP5khAvQgi6DM/AZxksTERusy6AsMGTzbTGAIo7oaui/zjdamPM39cbCqy1sKAto
-	1bADvy9vYe1qNwIOXc19hdYZC6cGDjmNLcXeW1mZY9VmMywPNvKGCBs4AKPeJHSfHu7W
-	Ncxn7grVZBZmrtzShj6vrLCn9dgVDeht0p5+N5DFwpLtjKb3Ip5YPFiVXvzGDiQ7lWly
-	zUHQ==
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	bh=5b/YV/+0qgkaevwdGenRWATaqdqFyjexiDroTp9dJ1M=;
+	b=tLlhUhgSHKQ0vVuABYEdqYNMoYtlVQdVlc+ah7d6bYhnYhlX0j+Wk+IBbTUeXAntMy
+	a7ehgJvNnofqViHs19w1Sg3IyDhzaRBDWBXRI2zXO9owlDNcXqP+XK/xZ6MHzH9sqp3H
+	o1Ku0fkc6luYOxwHxx53AcehooRtlh74BsC47WYbpdtVz1+iOjZxVlLJv4G221cCIEZ3
+	a7BpdWA7IFS+iiM8Fj3kKzfTwK0OvDWYTdq4gnY7+1J69UzxpVlpDa1cpNyUhRvPVou7
+	qPAuTXZBLNvRvdf7CMUShylSTZgyItm+F++sLwnCXYp98jkWmzi53WkM9Y+PskmRa1Rz
+	2g/g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:mime-version:content-transfer-encoding;
-	bh=UzDHQDyYbsWYq8e0S1qM9SLOaelaiz/1TzJuSzguyr8=;
-	b=J8a8EFPoYNbUdTnVA00Ph02WIYpvf+7lipt8Ul/8alP1MpC+RH9c46zGrRQ9eRvcsW
-	5XZqdoMqK5QcvRXK16lccmPhU/NczC1phltkPB0uz9dQKBa2KICj7vKkKmhZMtYFj6Pg
-	Q/38annMfClVd5vJrSNdygh0aVxhGucnOYpjm24nk0X9wrxuFAXPIBQTdnhiSMDD0yt9
-	n1JlWOJVPB3uB6XWMJNvhgWDliHW3iWt8ZGmW2cMf7eoGfZ/htfC3XV7igE5byjfdc2i
-	+0NhJrsgRb4EGmyR8FoviN8WvqSGuz3ZFo6/rgL18HmN3PyamGVBjLbpb/Zj1JeApaUW
-	YVhQ==
-X-Gm-Message-State: AKGB3mIuOKWeFS7rmLA9QFGC7UQcygKEyw7FHnSGl1RwFCcINMhZQ13Q
-	2U1Xekb1Zy0Qj9Ho5gK14if5Bw==
-X-Google-Smtp-Source: ACJfBotm7gAv9KtasrAXH+E578LW/UDVNs6PzJpwJVF2ARl8v3utJjN5zlnFCCM4sWk2SxAiaqpxSQ==
-X-Received: by 10.84.253.150 with SMTP id a22mr10114658plm.65.1513273005749;
-	Thu, 14 Dec 2017 09:36:45 -0800 (PST)
+	:references;
+	bh=5b/YV/+0qgkaevwdGenRWATaqdqFyjexiDroTp9dJ1M=;
+	b=noSnYIfqinK0IWdPMWm9t2g8hrFnBVyStmDAUqqOBg786K1/6n3rI0Mnyd464yyepw
+	7Kmq3gPndFH0y+q5JLOgeRVtPEX/S0GD0n46fOoQCO07Nj3tJ7U/HZPTFWBHyM46EcOM
+	eCv5Oy+h4Juz0GsEAHoJ8kDE5YRaf/Ae0ldN8+PA8aFTRelK1qjTPu8G2m2hUffibUQH
+	3LysOFJaDlh0KBB7V6kfMRGjFlWoAfzO0KobLPfXu6lhxP6U3QwOe3sEHqZGvSTjiMVT
+	qkj8QqhisbsmBk6RbzYiP0Ae/jYUL8NFUzJmtSrU78LFkfkW0FM0ga7ZjqsAOkoDSJ53
+	Rimg==
+X-Gm-Message-State: AKGB3mLRTNgV/enH0u4U1UuBhu/h6vnQdeqThC75MET0BFei+5H4pRT/
+	O2k/1FbFRAEUBkMWX0eiRR5fdQ==
+X-Google-Smtp-Source: ACJfBosu7c6ZtjMCg9zADUj9IrwVyvIoiz1txC4bihoZtsRw+0K/AjCd6hPJEZUa+MabR9HhMlGxfQ==
+X-Received: by 10.84.214.136 with SMTP id j8mr10283778pli.408.1513273007235;
+	Thu, 14 Dec 2017 09:36:47 -0800 (PST)
 Received: from localhost.localdomain ([2601:646:8880:466c::c579])
-	by smtp.gmail.com with ESMTPSA id l14sm7437748pgn.9.2017.12.14.09.36.43
+	by smtp.gmail.com with ESMTPSA id l14sm7437748pgn.9.2017.12.14.09.36.45
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 14 Dec 2017 09:36:43 -0800 (PST)
+	Thu, 14 Dec 2017 09:36:45 -0800 (PST)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 14 Dec 2017 09:36:30 -0800
-Message-Id: <20171214173633.16405-2-raj.khem@gmail.com>
+Date: Thu, 14 Dec 2017 09:36:31 -0800
+Message-Id: <20171214173633.16405-3-raj.khem@gmail.com>
 X-Mailer: git-send-email 2.15.1
 In-Reply-To: <20171214173633.16405-1-raj.khem@gmail.com>
 References: <20171214173633.16405-1-raj.khem@gmail.com>
-MIME-Version: 1.0
-Subject: [meta-xfce][PATCH 2/5] gtk-xfce-engine: Fix build with glib-2.0 > 2.53
+Subject: [meta-oe][PATCH 3/5] glade: Fix build with glib-2.0 > 2.53.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,63 +56,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 14 Dec 2017 17:36:45 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 14 Dec 2017 17:36:46 -0000
 
-Fixes errors like
-UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd6 in position 980: invalid continuation byte
-Makefile:737: recipe for target 'xfce_typebuiltin.h' failed
+Fixes
+| ../../glade-3.20.0/gladeui/glade-signal-model.c:68:1: error: conflicting types for 'g_ptr_array_find'
+|  g_ptr_array_find (GPtrArray *array, gpointer data)
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- .../gtk-xfce-engine/glib-2.54-ftbfs.patch          | 23 ++++++++++++++++++++++
- .../gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb       |  2 ++
- 2 files changed, 25 insertions(+)
- create mode 100644 meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
+ .../0001-Use-g_ptr_array_find-from-GLib.patch      | 93 ++++++++++++++++++++++
+ meta-oe/recipes-devtools/glade/glade_3.20.0.bb     |  1 +
+ 2 files changed, 94 insertions(+)
+ create mode 100644 meta-oe/recipes-devtools/glade/glade/0001-Use-g_ptr_array_find-from-GLib.patch
 
-diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
+diff --git a/meta-oe/recipes-devtools/glade/glade/0001-Use-g_ptr_array_find-from-GLib.patch b/meta-oe/recipes-devtools/glade/glade/0001-Use-g_ptr_array_find-from-GLib.patch
 new file mode 100644
-index 000000000..fb8910204
+index 000000000..d2071f5d2
 --- /dev/null
-+++ b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine/glib-2.54-ftbfs.patch
-@@ -0,0 +1,23 @@
-+Description: Fix FTBFS with glib 2.54
-+ glib-mkenums now expects input files to be UTF-8,
-+ fix the encoding of libgnomeui/gnome-scores.h
-+Author: Adrian Bunk <bunk@debian.org>
++++ b/meta-oe/recipes-devtools/glade/glade/0001-Use-g_ptr_array_find-from-GLib.patch
+@@ -0,0 +1,93 @@
 +
-+ported from: https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=870738
++m 8a73d114ca5b4d37a770d0b6b69dd17a366dbcf4 Mon Sep 17 00:00:00 2001
++From: Jonh Wendell <jonh.wendell@redhat.com>
++Date: Thu, 4 May 2017 11:05:48 -0300
++Subject: Use g_ptr_array_find() from GLib
 +
-+Upstream-Status: Pending
++https://bugzilla.gnome.org/show_bug.cgi?id=782161
++---
++Upstream-Status: Backport
 +Signed-off-by: Khem Raj <raj.khem@gmail.com>
 +
-+Index: gtk-xfce-engine-3.2.0/gtk-3.0/xfce_style_types.h
-+===================================================================
-+--- gtk-xfce-engine-3.2.0.orig/gtk-3.0/xfce_style_types.h
-++++ gtk-xfce-engine-3.2.0/gtk-3.0/xfce_style_types.h
-+@@ -19,7 +19,7 @@
-+  *
-+  *  Portions based Thinice port by 
-+  *                       Tim Gerla <timg@rrv.net>,
-+- *                       Tomas Ögren <stric@ing.umu.se,
-++ *                       Tomas Ã–gren <stric@ing.umu.se>,
-+  *                       Richard Hult <rhult@codefactory.se>
-+  *  Portions based on Smooth theme by
-+  *                       Andrew Johnson <ajgenius@ajgenius.us>
-diff --git a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-index ae7f99f5a..ef4f4bfa8 100644
---- a/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-+++ b/meta-xfce/recipes-xfce/gtk-xfce-engine/gtk-xfce-engine_3.2.0.bb
-@@ -8,6 +8,8 @@ inherit xfce distro_features_check
- 
- REQUIRED_DISTRO_FEATURES = "x11"
- 
-+SRC_URI += "file://glib-2.54-ftbfs.patch"
++ configure.ac                 |  2 ++
++ gladeui/glade-signal-model.c | 30 ++++++++++--------------------
++ 2 files changed, 12 insertions(+), 20 deletions(-)
 +
- SRC_URI[md5sum] = "363d6c16a48a00e26d45c45c2e1fd739"
- SRC_URI[sha256sum] = "875c9c3bda96faf050a2224649cc42129ffb662c4de33add8c0fd1fb860b47ed"
++Index: glade-3.20.0/configure.ac
++===================================================================
++--- glade-3.20.0.orig/configure.ac
+++++ glade-3.20.0/configure.ac
++@@ -146,8 +146,10 @@ dnl ====================================
++ dnl Check for gtk+
++ dnl ================================================================
++ GTK_REQUIRED=3.20.0
+++GLIB_REQUIRED=2.53.2
++ PKG_CHECK_MODULES([GTK],[
++   gtk+-3.0 >= $GTK_REQUIRED
+++  glib-2.0 >= $GLIB_REQUIRED
++   gmodule-2.0
++   libxml-2.0 >= 2.4.0
++ ])
++Index: glade-3.20.0/gladeui/glade-signal-model.c
++===================================================================
++--- glade-3.20.0.orig/gladeui/glade-signal-model.c
+++++ glade-3.20.0/gladeui/glade-signal-model.c
++@@ -64,18 +64,6 @@ G_DEFINE_TYPE_WITH_CODE (GladeSignalMode
++                          G_IMPLEMENT_INTERFACE (GTK_TYPE_TREE_DRAG_SOURCE,
++                                                 gtk_tree_drag_source_iface_init))
++ 
++-static gint
++-g_ptr_array_find (GPtrArray *array, gpointer data)
++-{
++-  gint i;
++-  for (i = 0; i < array->len; i++)
++-    {
++-      if (array->pdata[i] == data)
++-	return i;
++-    }
++-  return -1;
++-}
++-
++ static void
++ glade_signal_model_init (GladeSignalModel *object)
++ {
++@@ -524,13 +512,11 @@ glade_signal_model_get_path (GtkTreeMode
++ 	    {
++ 	      if (handlers)
++ 		{
++-		  gint handler_index = g_ptr_array_find (handlers, handler);
++-		  if (handler_index == -1) /* dummy handler */
++-		    {
++-		      index1 += handlers->len;
++-		    }
++-		  else
+++		  guint handler_index;
+++		  if (g_ptr_array_find (handlers, handler, &handler_index))
++ 		    index1 += handler_index;
+++		  else
+++		    index1 += handlers->len;
++ 		}
++ 	      break;
++ 	    }
++@@ -582,7 +568,8 @@ glade_signal_model_get_value (GtkTreeMod
++         {
++           GPtrArray *handlers = g_hash_table_lookup (sig_model->priv->signals,
++                                                      glade_signal_get_name (signal));
++-          if (!handlers || !handlers->len || g_ptr_array_find (handlers, signal) == 0)
+++          guint index;
+++          if (!handlers || !handlers->len || (g_ptr_array_find (handlers, signal, &index) && index == 0))
++             g_value_set_boolean (value, TRUE);
++           else
++             g_value_set_boolean (value, FALSE);
++@@ -718,7 +705,10 @@ glade_signal_model_iter_next (GtkTreeMod
++ 	}
++       else if (handlers)
++ 	{
++-	  gint new_index = g_ptr_array_find (handlers, handler) + 1;
+++	  guint new_index = 0;
+++	  if (g_ptr_array_find (handlers, handler, &new_index))
+++	    new_index++;
+++
++ 	  if (new_index < handlers->len)
++ 	    {
++ 	      glade_signal_model_create_signal_iter (sig_model, widget,
+diff --git a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb b/meta-oe/recipes-devtools/glade/glade_3.20.0.bb
+index f33b6e31b..ff6dcce26 100644
+--- a/meta-oe/recipes-devtools/glade/glade_3.20.0.bb
++++ b/meta-oe/recipes-devtools/glade/glade_3.20.0.bb
+@@ -13,6 +13,7 @@ inherit autotools pkgconfig gnomebase gobject-introspection
  
+ SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/glade/3.20/glade-${PV}.tar.xz \
+            file://remove-yelp-help-rules-var.patch \
++           file://0001-Use-g_ptr_array_find-from-GLib.patch \
+           "
+ SRC_URI[md5sum] = "9964a2da14c5f845eae363889586ca43"
+ SRC_URI[sha256sum] = "82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe"
 -- 
 2.15.1
 
