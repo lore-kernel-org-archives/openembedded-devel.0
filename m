@@ -1,26 +1,50 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 9D56878852
+Return-Path: <asselsm@gmail.com>
+Received: from mail-yb0-f195.google.com (mail-yb0-f195.google.com
+	[209.85.213.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 541627882D
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 20:22:19 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vBFKMLha023623
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Fri, 15 Dec 2017 20:31:36 +0000 (UTC)
+Received: by mail-yb0-f195.google.com with SMTP id b15so3389845ybn.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 12:22:21 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Fri, 15 Dec 2017 12:22:20 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 15 Dec 2017 15:22:01 -0500
-Message-ID: <1513369321-18274-9-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Fri, 15 Dec 2017 12:31:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:reply-to:sender:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=HlbokxStSAbP0KYyNCFJ1OavK3MeSA+1+KfYjsKa+Rw=;
+	b=A6mKqmuPv+gWAo1lGU/29iq24hKQ3yRC2963/qCxR4NDeI9c/bx3/9iU07At5WoPLn
+	Z6yKC8QFFsDM3KPm/+9/NPbgk6T/kCwByEtvwZxqqWnvdyNC+HZzxpakqr572rSTajbM
+	TDnFirCppyJediqLESRq4Zhd9+vcTPg2TECLpWn17DbXMZguJnNxeNApksG97pMsgCSX
+	Y1NWWNruDeXuNI7yhH7DnA4mG1bUPNND1iZBLE0nxqBiTfo9gXuC0jTQ+k1oiL/nighk
+	J4itglC5Rp/gDMT0L0GznQmKHqBY5v71wRG7CvrciYoDWX8KkHRA1txai9OxL00EFJ1U
+	NKyA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:from:date:message-id:subject:to;
+	bh=HlbokxStSAbP0KYyNCFJ1OavK3MeSA+1+KfYjsKa+Rw=;
+	b=J398GsL9jTIbLsYwyAhRF/nr7nKxa/Vx4MYEnZmzAYzjx+sRqzB9db6YvdrgKxE4Zw
+	JR5Q4sxJUsFNeVKivxQLu0FtNzpYNCs+0GpSJYqB9koXIUhykjVkH/aobtgjPxn198/V
+	YOyBuooP3rjxIxuhn4n/ptAC+1S5ekgcWdelUbZIibSIU8M9ATxZximUnR98bAgZOdfL
+	IQM/huXKsDi2Qq9YsiyiPeuYGHDzlKDz9sMPJDeeVfGvlN67Jm0Fdy5yZMzsFDri7viL
+	nIxM5oHTUzAXspBuHm5m9nt2GX4cV+SkBLWs0qCQZvQOcZrYtoA0pTEhnudj3YKXxIF1
+	qzFg==
+X-Gm-Message-State: AKGB3mJWPXw8G1K1CMSfd8W8egicaabuU4s3UjfcaKLwxIxwBLjDBtch
+	VoHXWRC2BtxtKo3hL3cxRFdJALRL0AxwQCnXAf7NZQ==
+X-Google-Smtp-Source: ACJfBotTCfSeMhwkCMJ/79i05g2/B9NfsVlBkjeaJyw3XZGaB/X0vklFBz/z5v66PA5nvYxwfIRKehjOOj699bVuhnk=
+X-Received: by 10.13.236.203 with SMTP id v194mr7649154ywe.339.1513369898017; 
+	Fri, 15 Dec 2017 12:31:38 -0800 (PST)
+MIME-Version: 1.0
+Reply-To: mark.asselstine@windriver.com
+Sender: asselsm@gmail.com
+Received: by 10.37.56.83 with HTTP; Fri, 15 Dec 2017 12:31:37 -0800 (PST)
 In-Reply-To: <1513369321-18274-1-git-send-email-mark.asselstine@windriver.com>
 References: <1513369321-18274-1-git-send-email-mark.asselstine@windriver.com>
-MIME-Version: 1.0
-Subject: [meta-python][v2][rocko][PATCH 8/8] python-attrs: update to version 17.3.0
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Fri, 15 Dec 2017 15:31:37 -0500
+X-Google-Sender-Auth: b03csaEJ2hV8hGHdmHVnhL02z34
+Message-ID: <CAPuovEJxuOSAOFRDHb9WvgYbvy9MRO7GsHy0mTp2dRdSaZBFAQ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][v2][rocko][PATCH 1/8] python-twisted: restore RDEPENDS on -news for py2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -33,47 +57,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2017 20:22:19 -0000
-Content-Type: text/plain
+X-List-Received-Date: Fri, 15 Dec 2017 20:31:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Derek Straka <derek@asterius.io>
+Sorry, this should be 0/8. And apologies for anyone viewing these on
+gmail, it seems to have merged things with my V1 series. Patches 1 and
+2 from the V1 are the same here if you are trying to decipher the
+gmail mess.
 
-Signed-off-by: Derek Straka <derek@asterius.io>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
----
+Mark
 
-Cherry-pick from master
-87618f32736c1ee5f29e7458973b75c5b0b124f7
-                                                                                                                                                                                                                  meta-python/recipes-devtools/python/python-attrs.inc                  | 4 ++--
- .../python/{python-attrs_17.2.0.bb => python-attrs_17.3.0.bb}         | 0
- .../python/{python3-attrs_17.2.0.bb => python3-attrs_17.3.0.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-attrs_17.2.0.bb => python-attrs_17.3.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-attrs_17.2.0.bb => python3-attrs_17.3.0.bb} (100%)
-
-diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
-index 85073e9..edde79e 100644
---- a/meta-python/recipes-devtools/python/python-attrs.inc
-+++ b/meta-python/recipes-devtools/python/python-attrs.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://www.attrs.org/"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
- 
--SRC_URI[md5sum] = "3b7136a570f3ff8a4ff42e7360073f9f"
--SRC_URI[sha256sum] = "5d4d1b99f94d69338f485984127e4473b3ab9e20f43821b0e546cc3b2302fd11"
-+SRC_URI[md5sum] = "4314f784ca3174d91956da9828248960"
-+SRC_URI[sha256sum] = "c78f53e32d7cf36d8597c8a2c7e3c0ad210f97b9509e152e4c37fa80869f823c"
- 
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-attrs_17.2.0.bb b/meta-python/recipes-devtools/python/python-attrs_17.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-attrs_17.2.0.bb
-rename to meta-python/recipes-devtools/python/python-attrs_17.3.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-attrs_17.2.0.bb b/meta-python/recipes-devtools/python/python3-attrs_17.3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-attrs_17.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-attrs_17.3.0.bb
--- 
-2.7.4
-
+On Fri, Dec 15, 2017 at 3:21 PM, Mark Asselstine
+<mark.asselstine@windriver.com> wrote:
+>
+> V1 of this series was incomplete. Thus following up with a V2 which
+> includes additional cherry-picks from master. Cherry-pick commit IDs
+> are listed in the temporary comment section of the individual commits.
+>
+> When building images using rocko that include python-twisted you will
+> get an error:
+> nothing provides python3-twisted-news needed by python3-twisted-17.9.0-r0.corei7_64
+>
+> Basically upstream marked the -news plugin as unavailable in py3 (See
+> src/twisted/python/_setup.py -- notPortedModules). This leaves the
+> -news package empty, thus no RPM or similar is built and the
+> dependency can't be satisfied. Backporting patches 1,3-8 fix this
+> issue. Patch 1 is the main fix but also introduces missing
+> dependencies, which are added in patches 3-8. However, the -news
+> package is still available in py2 thus patch 2 re-adds this to the
+> RDEPENDS of ${PN} (the super package which can be used if you don't
+> want to select individual component packages).
+>
+> Patch 2 should also be applied to master.
+>
+> Mark
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
