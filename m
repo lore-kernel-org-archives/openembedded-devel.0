@@ -1,51 +1,45 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
-	[209.85.213.193])
-	by mail.openembedded.org (Postfix) with ESMTP id A6F33784DF
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 50A52784DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 19:08:15 +0000 (UTC)
-Received: by mail-yb0-f193.google.com with SMTP id 5so6839458ybp.4
+	Fri, 15 Dec 2017 19:19:16 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1513365558; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=rNzzKmQtDHFcJUh5eN0nhccV1BP3o1ah7w4ZlzmYQ4k=;
+	b=OYanfq5xrNV6fuxdzr4TGMhDwwpCd44roaAQU1KnMy5NOwPcEB16FxIpDcpn8r8iUplLE7zh
+	UkDfZVxwwGeclwthFFeAkn+YL14dAvJXRDndF6Mabc9TjWQUG+1Viy77AWeGCXkS0UHvpBTd
+	zTLDqdFyBSh4xBortcsrAk1cbQM=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-qk0-f175.google.com (mail-qk0-f175.google.com
+	[209.85.220.175])
+	by mxa.mailgun.org with ESMTP id 5a342035.7fab16c095b0-smtp-out-n03;
+	Fri, 15 Dec 2017 19:19:17 -0000 (UTC)
+Received: by mail-qk0-f175.google.com with SMTP id 8so11620868qkj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 11:08:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=RRUfX4Fk0qeXG32CBR1lTk8ejm4zA6ZSy9ESHtyDGuQ=;
-	b=b6DIqODAi6NxqJ/7uPzAGlZJ01Zi3JZc7ZGd1ISldgNmwYOyJbtmBzs8UrwEkFaVf4
-	1CjqoVQWI5SdUF8ybTcXi5cZO5PlcQXtDAhZqJo64G9JgmlbJc4K+i8f1ZG2ietsN0lb
-	HkxqcGUgx2p83SHAd2ih+fDcbExD6y3cGrHs9e2QF37bjUcRI1tLCkVePPPtATSsoJGE
-	vk5WfV/789cRNeT0CbOJ3VVfq3Dd0EFKu/SBv/AWeq6ae4P+YwP4c9tW7dWMoDFX0v6W
-	b5OMHZXfkfv9ho3wDwTD6hP29Whkt2EBnPt2wQF/sxfuPacj6tDNGRu/6COEFwHOY/mD
-	PXuA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
-	:references:from:date:message-id:subject:to:cc;
-	bh=RRUfX4Fk0qeXG32CBR1lTk8ejm4zA6ZSy9ESHtyDGuQ=;
-	b=Km/wU8YMKl3InItahm5yA9qnI2S64i2hkN8jaImk2zm1CmtkEN2O0u4YbcOJyyuCHB
-	Bv+UOw8To6BNK1GosgHBd2DQVUUGuGA14jbOA0CHm//QIpHg2jtXeMLwu6TWo50o7dcE
-	nX7iRDiz33VNE0QfK14P1zegMOc05h+1byWn+iqNzegGdXwJGC6umdPBeoDOfAyBgy+X
-	r1iBXm4n08w1sBygB6ICRA2BqDYz3+luU5GmWWK3Ohr9FT68xG3jnELHDde9Hcd8MlUe
-	/A/bi6QperFAQfFMopfE2dKSBnmfvxfBUs7ugE7kBX+WAypWZfHWaXBHx8BfHayrYQvP
-	gC9w==
-X-Gm-Message-State: AKGB3mJ55xr07OLHk4/tK1nBDpYwjHYEHtDP6MYpAoZAmC+2FPZjXxQ3
-	O/zna+J9ndyHkXvCAB7UvKFkz75K0G5OhwY4EJBcFQ==
-X-Google-Smtp-Source: ACJfBosByOkNIMfh8p4nEkaPwHnElM/XGdCH3gVRcwf+Z4li4hIzK3bx8Eo3bAwkGaGf++5fKHBrGdxt8t3OPmt6uUY=
-X-Received: by 10.129.155.209 with SMTP id s200mr7803204ywg.173.1513364896375; 
-	Fri, 15 Dec 2017 11:08:16 -0800 (PST)
+	Fri, 15 Dec 2017 11:19:17 -0800 (PST)
+X-Gm-Message-State: AKGB3mKDyl6J8gsaeVoFxI4bpGUqeNU6VwK5Q3f921R+1xM/OwC6T4aD
+	meeIBaIxVeQcEb/2EcJ4G6HDSwC4/nL2ThD7PVA=
+X-Google-Smtp-Source: ACJfBot2f4+L4wPf3TZlskHYteHoNUCjvZhpHRQlKrNXbqQXW9SGlxKJ+AyMPSP08ln1bFwhcoENkNVpFAi0bNrKV68=
+X-Received: by 10.55.21.35 with SMTP id f35mr19722867qkh.153.1513365556806;
+	Fri, 15 Dec 2017 11:19:16 -0800 (PST)
 MIME-Version: 1.0
-Reply-To: mark.asselstine@windriver.com
-Sender: asselsm@gmail.com
-Received: by 10.37.56.83 with HTTP; Fri, 15 Dec 2017 11:08:15 -0800 (PST)
-In-Reply-To: <CADNbA1ruiCp4u810eg9LcLXzWdAAaMY5aC-5KVyeViq4jSKxKg@mail.gmail.com>
+Received: by 10.140.21.177 with HTTP; Fri, 15 Dec 2017 11:19:16 -0800 (PST)
+Received: by 10.140.21.177 with HTTP; Fri, 15 Dec 2017 11:19:16 -0800 (PST)
+In-Reply-To: <CAPuovEJCQwFBiFsG5_7miubOgteakgkSzXL5H+3qLYcWqPeo+w@mail.gmail.com>
 References: <1513359926-17087-1-git-send-email-mark.asselstine@windriver.com>
 	<1513359926-17087-3-git-send-email-mark.asselstine@windriver.com>
 	<CADNbA1ruiCp4u810eg9LcLXzWdAAaMY5aC-5KVyeViq4jSKxKg@mail.gmail.com>
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Fri, 15 Dec 2017 14:08:15 -0500
-X-Google-Sender-Auth: X2_rsMMZfaS-RNgvMsT5j-byMEI
-Message-ID: <CAPuovEJCQwFBiFsG5_7miubOgteakgkSzXL5H+3qLYcWqPeo+w@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
+	<CAPuovEJCQwFBiFsG5_7miubOgteakgkSzXL5H+3qLYcWqPeo+w@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Fri, 15 Dec 2017 14:19:16 -0500
+X-Gmail-Original-Message-ID: <CADNbA1oB3Mmq5B9SNX5OCG8uzmTdTx2kQ8EChZu1_JpntweSNQ@mail.gmail.com>
+Message-ID: <CADNbA1oB3Mmq5B9SNX5OCG8uzmTdTx2kQ8EChZu1_JpntweSNQ@mail.gmail.com>
+To: mark.asselstine@windriver.com
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
 Subject: Re: [meta-python][rocko][PATCH 2/2] python-twisted: restore RDEPENDS on -news for py2
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -60,8 +54,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2017 19:08:15 -0000
+X-List-Received-Date: Fri, 15 Dec 2017 19:19:17 -0000
 Content-Type: text/plain; charset="UTF-8"
+
+Sure.  I wasn't clear and even then I misread the 1/2 patch and thought I
+removed news from core and not the base package RDEPENDS.
+
+On Dec 15, 2017 2:08 PM, "Mark Asselstine" <mark.asselstine@windriver.com>
+wrote:
 
 The RDEPENDS are not for core, these are RDEPENDS_${PN}, ie. if you
 don't know what parts you want you install ${PN} and get everything.
@@ -75,14 +75,16 @@ On Fri, Dec 15, 2017 at 1:32 PM, Derek Straka <derek@asterius.io> wrote:
 > Is it actually required for core?  I thought I went through and verified
 > that news was a stand alone module.
 >
-> On Dec 15, 2017 12:46 PM, "Mark Asselstine" <mark.asselstine@windriver.com>
+> On Dec 15, 2017 12:46 PM, "Mark Asselstine" <mark.asselstine@windriver.com
+>
 > wrote:
 >
 >> Although this plugin has not yet been ported to py3 it is available in
 >> py2. The previous commit isn't clear about what is being addressed but
 >> I assume it is:
 >>
->> nothing provides python3-twisted-news needed by python3-twisted-17.9.0-r0.
+>> nothing provides python3-twisted-news needed by
+python3-twisted-17.9.0-r0.
 >> corei7_64
 >>
 >> For py2 this package is valid and so we should maintain the RDEPENDS,
