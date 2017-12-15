@@ -1,21 +1,24 @@
-Return-Path: <sjl@vctlabs.com>
-X-Greylist: delayed 415 seconds by postgrey-1.34 at layers.openembedded.org;
-	Fri, 15 Dec 2017 07:18:13 UTC
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id 9079E782CC
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 073FD71996
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 07:18:13 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 977A128023F; Thu, 14 Dec 2017 23:13:51 -0800 (PST)
-Date: Thu, 14 Dec 2017 23:13:51 -0800
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20171215071351.GL27580@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	openembedded-devel@lists.openembedded.org
+	Fri, 15 Dec 2017 17:45:29 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBFHjUFn001984
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 15 Dec 2017 09:45:31 -0800 (PST)
+Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 15 Dec 2017 09:45:30 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 15 Dec 2017 12:45:24 -0500
+Message-ID: <1513359926-17087-1-git-send-email-mark.asselstine@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Subject: [meta-networking] [PATCH] tinyproxy: 'nobody' should belong to 'nogroup'
+Subject: [meta-python][rocko][PATCH 0/2] python-twisted: fixup news plugin RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -28,40 +31,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2017 07:18:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 15 Dec 2017 17:45:30 -0000
+Content-Type: text/plain
 
-The classic 'nobody' user is supposed to belong to 'nogroup' group.
-Without this change, it will get a 'nobody' group created as its
-default group instead.
 
-Ensuring the existing 'nogroup' is used as default group solves
-following sort of complaint by useradd-staticids.bbclass (when static ids
-are enabled):
+The following two changes fix builds of python[3]-twisted. Patch 1/2
+is a backport of e410b5c54373ce9539f2df9840e3d987f319ee6c from
+master. This patch addresses a failure which presents as:
 
-  tinyproxy: Changing groupname nobody's gid from (65534) to (1000),
-             verify configuration files!
+nothing provides python3-twisted-news needed by python3-twisted-17.9.0-r0.corei7_64
 
-Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
----
- meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+This is caused by python3-twisted-news producing no installable
+package since it is empty. It is empty because upstream implemented a
+notPortedModules API which excludes part of the package which are yet
+to be ported to py3. Unfortunately the change in 1/2 breaks the py2
+case. Thus the 2/2. Patch 2/2 should be applied to master as well.
 
-diff --git a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-index e8025c4..efc0acf 100644
---- a/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-+++ b/meta-networking/recipes-support/tinyproxy/tinyproxy_1.8.4.bb
-@@ -23,7 +23,7 @@ inherit autotools systemd useradd
- 
- #User specific
- USERADD_PACKAGES = "${PN}"
--USERADD_PARAM_${PN} = "nobody"
-+USERADD_PARAM_${PN} = "nobody -g nogroup"
- GROUPADD_PARAM_${PN} = "--system tinyproxy"
- 
- SYSTEMD_PACKAGES += "${BPN}"
--- 
-1.9.4
-
+Regards,
+Mark
 
