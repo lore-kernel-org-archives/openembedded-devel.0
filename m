@@ -1,50 +1,19 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yb0-f195.google.com (mail-yb0-f195.google.com
-	[209.85.213.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 541627882D
+Return-Path: <sjl@vctlabs.com>
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id CCDF8786F4
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 20:31:36 +0000 (UTC)
-Received: by mail-yb0-f195.google.com with SMTP id b15so3389845ybn.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 15 Dec 2017 12:31:38 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=HlbokxStSAbP0KYyNCFJ1OavK3MeSA+1+KfYjsKa+Rw=;
-	b=A6mKqmuPv+gWAo1lGU/29iq24hKQ3yRC2963/qCxR4NDeI9c/bx3/9iU07At5WoPLn
-	Z6yKC8QFFsDM3KPm/+9/NPbgk6T/kCwByEtvwZxqqWnvdyNC+HZzxpakqr572rSTajbM
-	TDnFirCppyJediqLESRq4Zhd9+vcTPg2TECLpWn17DbXMZguJnNxeNApksG97pMsgCSX
-	Y1NWWNruDeXuNI7yhH7DnA4mG1bUPNND1iZBLE0nxqBiTfo9gXuC0jTQ+k1oiL/nighk
-	J4itglC5Rp/gDMT0L0GznQmKHqBY5v71wRG7CvrciYoDWX8KkHRA1txai9OxL00EFJ1U
-	NKyA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
-	:references:from:date:message-id:subject:to;
-	bh=HlbokxStSAbP0KYyNCFJ1OavK3MeSA+1+KfYjsKa+Rw=;
-	b=J398GsL9jTIbLsYwyAhRF/nr7nKxa/Vx4MYEnZmzAYzjx+sRqzB9db6YvdrgKxE4Zw
-	JR5Q4sxJUsFNeVKivxQLu0FtNzpYNCs+0GpSJYqB9koXIUhykjVkH/aobtgjPxn198/V
-	YOyBuooP3rjxIxuhn4n/ptAC+1S5ekgcWdelUbZIibSIU8M9ATxZximUnR98bAgZOdfL
-	IQM/huXKsDi2Qq9YsiyiPeuYGHDzlKDz9sMPJDeeVfGvlN67Jm0Fdy5yZMzsFDri7viL
-	nIxM5oHTUzAXspBuHm5m9nt2GX4cV+SkBLWs0qCQZvQOcZrYtoA0pTEhnudj3YKXxIF1
-	qzFg==
-X-Gm-Message-State: AKGB3mJWPXw8G1K1CMSfd8W8egicaabuU4s3UjfcaKLwxIxwBLjDBtch
-	VoHXWRC2BtxtKo3hL3cxRFdJALRL0AxwQCnXAf7NZQ==
-X-Google-Smtp-Source: ACJfBotTCfSeMhwkCMJ/79i05g2/B9NfsVlBkjeaJyw3XZGaB/X0vklFBz/z5v66PA5nvYxwfIRKehjOOj699bVuhnk=
-X-Received: by 10.13.236.203 with SMTP id v194mr7649154ywe.339.1513369898017; 
-	Fri, 15 Dec 2017 12:31:38 -0800 (PST)
+	Sat, 16 Dec 2017 01:15:53 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id ED2962804D6; Fri, 15 Dec 2017 17:18:26 -0800 (PST)
+Date: Fri, 15 Dec 2017 17:18:26 -0800
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20171216011826.GO27580@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
-Reply-To: mark.asselstine@windriver.com
-Sender: asselsm@gmail.com
-Received: by 10.37.56.83 with HTTP; Fri, 15 Dec 2017 12:31:37 -0800 (PST)
-In-Reply-To: <1513369321-18274-1-git-send-email-mark.asselstine@windriver.com>
-References: <1513369321-18274-1-git-send-email-mark.asselstine@windriver.com>
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Fri, 15 Dec 2017 15:31:37 -0500
-X-Google-Sender-Auth: b03csaEJ2hV8hGHdmHVnhL02z34
-Message-ID: <CAPuovEJxuOSAOFRDHb9WvgYbvy9MRO7GsHy0mTp2dRdSaZBFAQ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][v2][rocko][PATCH 1/8] python-twisted: restore RDEPENDS on -news for py2
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Subject: [meta-networking] [PATCH] cifs-utils: mount.cifs should build without samba dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,43 +26,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 15 Dec 2017 20:31:37 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 16 Dec 2017 01:15:53 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Sorry, this should be 0/8. And apologies for anyone viewing these on
-gmail, it seems to have merged things with my V1 series. Patches 1 and
-2 from the V1 are the same here if you are trying to decipher the
-gmail mess.
+fix following build error when cifsidmap and cifsacl are turned off
+in PACKAGECONFIG :
 
-Mark
+| In file included from ../git/mount.cifs.c:64:0:
+| ../git/data_blob.h:26:10: fatal error: talloc.h: No such file or directory
 
-On Fri, Dec 15, 2017 at 3:21 PM, Mark Asselstine
-<mark.asselstine@windriver.com> wrote:
->
-> V1 of this series was incomplete. Thus following up with a V2 which
-> includes additional cherry-picks from master. Cherry-pick commit IDs
-> are listed in the temporary comment section of the individual commits.
->
-> When building images using rocko that include python-twisted you will
-> get an error:
-> nothing provides python3-twisted-news needed by python3-twisted-17.9.0-r0.corei7_64
->
-> Basically upstream marked the -news plugin as unavailable in py3 (See
-> src/twisted/python/_setup.py -- notPortedModules). This leaves the
-> -news package empty, thus no RPM or similar is built and the
-> dependency can't be satisfied. Backporting patches 1,3-8 fix this
-> issue. Patch 1 is the main fix but also introduces missing
-> dependencies, which are added in patches 3-8. However, the -news
-> package is still available in py2 thus patch 2 re-adds this to the
-> RDEPENDS of ${PN} (the super package which can be used if you don't
-> want to select individual component packages).
->
-> Patch 2 should also be applied to master.
->
-> Mark
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+cifs-utils 3.7 had an unneeded header creep into mount.cifs source
+that pulled in samba headers. This has been cleaned up already
+in cifs-utils master, so apply (trivial) upstream patch to fix this
+compile error.
+
+Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
+---
+ .../recipes-support/cifs/cifs-utils_git.bb         |  4 ++-
+ ...001-mount.cifs-Remove-data_blob.h-include.patch | 32 ++++++++++++++++++++++
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
+
+diff --git a/meta-networking/recipes-support/cifs/cifs-utils_git.bb b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+index 3ca5b78..198e3ef 100644
+--- a/meta-networking/recipes-support/cifs/cifs-utils_git.bb
++++ b/meta-networking/recipes-support/cifs/cifs-utils_git.bb
+@@ -7,7 +7,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
+ PV = "6.7"
+ 
+ SRCREV = "8101a07871f185c7044fa2ca221b282ab4607c8b"
+-SRC_URI = "git://git.samba.org/cifs-utils.git"
++SRC_URI = "git://git.samba.org/cifs-utils.git \
++           file://0001-mount.cifs-Remove-data_blob.h-include.patch \
++          "
+ 
+ S = "${WORKDIR}/git"
+ DEPENDS += "libtalloc"
+diff --git a/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch b/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
+new file mode 100644
+index 0000000..07f2a57
+--- /dev/null
++++ b/meta-networking/recipes-support/cifs/files/0001-mount.cifs-Remove-data_blob.h-include.patch
+@@ -0,0 +1,32 @@
++Upstream-Status: Backport
++Signed-off-by: S. Lockwood-Childs <sjl@vctlabs.com>
++
++From 272d523a57a4e8791d625a479128613be5e401f5 Mon Sep 17 00:00:00 2001
++From: Thomas Witt <pyromaniac@exherbo.org>
++Date: Wed, 15 Mar 2017 20:20:44 +0000
++Subject: [PATCH] mount.cifs: Remove data_blob.h include
++
++data_blob.h includes talloc.h from libtalloc, but that is only marked as
++a dependency for cifs.upcall. No symbols from that header are used by
++cifs.mount, so remove it to avoid the libtalloc dependency
++
++Signed-off-by: Thomas Witt <pyromaniac@exherbo.org>
++---
++ mount.cifs.c | 1 -
++ 1 file changed, 1 deletion(-)
++
++diff --git a/mount.cifs.c b/mount.cifs.c
++index 13b71ef..2612feb 100644
++--- a/mount.cifs.c
+++++ b/mount.cifs.c
++@@ -61,7 +61,6 @@
++ #include "mount.h"
++ #include "util.h"
++ #include "resolve_host.h"
++-#include "data_blob.h"
++ 
++ #ifndef MS_MOVE 
++ #define MS_MOVE 8192 
++-- 
++1.9.4
++
+-- 
+1.9.4
+
 
