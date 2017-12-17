@@ -1,48 +1,52 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f177.google.com (mail-yb0-f177.google.com
-	[209.85.213.177])
-	by mail.openembedded.org (Postfix) with ESMTP id EE5D160123
+Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
+	[209.85.128.181])
+	by mail.openembedded.org (Postfix) with ESMTP id AD21460269
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Dec 2017 16:48:45 +0000 (UTC)
-Received: by mail-yb0-f177.google.com with SMTP id 69so9457086ybc.6
+	Sun, 17 Dec 2017 18:21:55 +0000 (UTC)
+Received: by mail-wr0-f181.google.com with SMTP id y21so12151394wrc.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Dec 2017 08:48:47 -0800 (PST)
+	Sun, 17 Dec 2017 10:21:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=NK9q15+dQVNxo5mCXkKUyBdAPSej8WgoNTtU+rwDSGY=;
-	b=uD032G4pFgLyZoVJFwAfbx54Rv4hBNPis1iKgjoYz2sttunwcwQdSXfXU2U9ZsStn/
-	OBP9GFF/t9+BskpY59xtglAz4CEXWCc1PpnSPLcDcWL8DHLEmgdqUM2jQ7V59Kwuhd5i
-	H86Gchn8aAnsgtQdY9RPSTaW+jsktGzXayvGyop3VhK8mw5ZMSehu2YRrElzlBG7sFQ/
-	g7Sncy9o+VmOt2GaDbExoZp3CNtjHiL9jVkh/xkbI4GX0qRnuOGgKyhVesrovTYzTQUH
-	3gNv4j2UQZ0ic99QQhZlfdmgFSdKwwTo0BwgmGocBnwTH3ZtZpQplIdmKSL4K4F1Am1E
-	OMFQ==
+	h=from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=U+eE1MHZ6+DzRUPd4bmKqncEvEJnZrdGH4ah4/Mgluw=;
+	b=Ra1aiYF33AQIjd2WFGnvZva5cWsYgJ3fnVBZe5OlqV6KXdVsj1MAn+LVyFV45WYXsm
+	JY7gQMwwrRYE/+j+3hZF6L3gMT8WwT0x9Wt8FwI8/7SvZlHNm1exI45yeR4T5dHKQj1U
+	0AzoNu5w2VsM5Nfb+elEm63LKp540QEVU5QTEmG+8BRKZOK1K/aUkfWDzNJTUdW7T53V
+	8by53TOgMItRw5pjS84GNbWXRxGjvW3G/9a8OCLLgmeuxTxJpEOytI5aC/QpgeMLLY3u
+	UkowYXKa8Bv2SBBw1CHFdfUJ0T0BA/aX/yA38+KQkDF12tJbFN4KFlYSpU/n2nhrwG5w
+	AFXA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=NK9q15+dQVNxo5mCXkKUyBdAPSej8WgoNTtU+rwDSGY=;
-	b=T+jwsWxdCmTZpKgDTmYE0Y4Lfq1swg3l3nqaUGlIX8dpGMkKzJFl1bPAz6j7OjN4ok
-	ZZibSTNg65E43P64Y6HMWRlonvmRB6TzCwp3PLXNyV/VxFkGxxYQv+GU9L0Sd5xwZh/p
-	Ywv2F1BHRYHVqRzMxysmJbvF7wja9a9fCZhm8L9yOvuqrESsdN2n2wKzDXfZ/iXNXwot
-	qiZQ6UWau+bEGh7hWcTAzvL5FDZC7oUjSOFnKEDoNi7mSlfq9TUfsXHGx6s3dDtGTtu1
-	iXmRVtuq5ElvRy3YgFaPKVkjTttoUfbusc+oo7pp+gYExgQ2TK6TmMu+HyEI3eQsi6TS
-	xmeA==
-X-Gm-Message-State: AKGB3mKEoPICywaEgAcJ6ctu90YTD91W7Ui6BLFTfFwIz54D+BrcnOOE
-	I83NvPlPjlbm6k0mNpbSelJ5wWcjS/T/l86OMDI=
-X-Google-Smtp-Source: ACJfBou3U5TeAtYzUgyZJZXhjZS3PGDwwb7+yILsl+TGzzKowRemtrTa18jMyl9AcEHCCe9sCRAJ0lGPnyZmOS6vlAU=
-X-Received: by 10.37.197.143 with SMTP id v137mr3203237ybe.368.1513529326669; 
-	Sun, 17 Dec 2017 08:48:46 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=U+eE1MHZ6+DzRUPd4bmKqncEvEJnZrdGH4ah4/Mgluw=;
+	b=D814o42MeYHxQhTSVxzJnXLXX2wPTtaFx5K5lZj16EwMNc090eEK5Fe0JS6vQpiKo9
+	093J/DVY1PPQq+Ii6tWdkEH6wOnNPFx/s1HJlaYh7CXkOwduvrfNsntVVXpsJze1D1KW
+	u/6EnAA/XkbakDL09PbmNL/BzktJXMsCo0ln4aI8a7WjIRPRK1V7fMp4V+GeZt9Hum49
+	nTApfesDke1YopbGSlLim0ffYvPi+tNA+IfcwR9vVUxoAL5b/WZJKEs9xXgcIg16Lnj3
+	O3HSxF2UQ66DBT9VunkP/HA5jM+iZsYJ+CA2x9aL+YcJ6DM2Nxj73ME7yLqCeXAdc0GM
+	9ZZw==
+X-Gm-Message-State: AKGB3mIyIKvx3jJQP6fqtqUcWbHUnxjvofJmOy9ZxL/mj/p3vkmiFy76
+	L0hOGiZFUZoeVD0F4z6jqaZ05w==
+X-Google-Smtp-Source: ACJfBovKP649UUMjdsK8Dn88lhbZSA7ZbJRdKuVpJVX9o7CTfGN9ajbTKB42HiURI9UQiL/h4XusRg==
+X-Received: by 10.223.150.61 with SMTP id b58mr3820750wra.185.1513534915939;
+	Sun, 17 Dec 2017 10:21:55 -0800 (PST)
+Received: from PC192-168-2-116.speedport.ip
+	(p200300F07BC3E4151E6F65FFFE3E7F61.dip0.t-ipconnect.de.
+	[2003:f0:7bc3:e415:1e6f:65ff:fe3e:7f61])
+	by smtp.gmail.com with ESMTPSA id 139sm7762637wmp.7.2017.12.17.10.21.54
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Sun, 17 Dec 2017 10:21:55 -0800 (PST)
+From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 17 Dec 2017 19:21:36 +0100
+Message-Id: <20171217182144.21123-1-schnitzeltony@gmail.com>
+X-Mailer: git-send-email 2.9.5
 MIME-Version: 1.0
-Received: by 10.37.97.6 with HTTP; Sun, 17 Dec 2017 08:48:46 -0800 (PST)
-In-Reply-To: <20171214100929.11094-1-schnitzeltony@gmail.com>
-References: <20171214100929.11094-1-schnitzeltony@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 17 Dec 2017 17:48:46 +0100
-Message-ID: <CALbNGRTV2evX1efqP-76=AzQegO4OXv5x10pCjdKkHSmhM2P6A@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: akuster <akuster@mvista.com>
-Subject: Re: [PATCH 0/5] few fixes
+Subject: [PATCH][V2 0/8] few fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,38 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Dec 2017 16:48:46 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 17 Dec 2017 18:21:56 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Dec 14, 2017 at 11:09 AM, Andreas M=C3=BCller <schnitzeltony@gmail.=
-com>
-wrote:
+V1 -> V2: fltk correct packing of shared libs / cleanup
 
-> The following changes since commit acfb8417e370d017e7307872e61564
-> deeda76a13:
->
->   python3-dominate: new recipe (2017-12-11 07:58:58 -0800)
->
-> are available in the git repository at:
->
->   https://github.com/schnitzeltony/meta-openembedded.git patches
->
-> for you to fetch changes up to 77a0b0909e81f350e7c00d0e3b613a49656a0ed7:
->
->   plymouth: fix path to systemd-tty-ask-password-agent (2017-12-14
-> 11:02:54 +0100)
->
-> ----------------------------------------------------------------
-> Andreas M=C3=BCller (5):
->       fltk: add -fPIC to compile flags
->       gvfs: update 1.32.1 -> 1.34.1
->       plymouth: do not install systemd units manually
->       plymouth: packageconfig gtk needs gtk+3 as depends
->       plymouth: fix path to systemd-tty-ask-password-agent
->
-> Please ignore this series. I will send out reworked V2 within the next
-hours.
+Andreas Müller (8):
+  gvfs: update 1.32.1 -> 1.34.1
+  plymouth: do not install systemd units manually
+  plymouth: packageconfig gtk needs gtk+3 as depends
+  plymouth: fix path to systemd-tty-ask-password-agent
+  fltk-native: remove fltk-config from image
+  fltk: remove fltk-native from DEPENDS
+  fltk: do not suffix shared library names with '_SHARED'
+  Add FLTK to licenses to avoid warning when building fltk / fltk-native
 
-Andreas
+ .../gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb}        |   7 +-
+ meta-oe/licenses/FLTK                              | 530 +++++++++++++++++++++
+ ...ath-to-systemd-tty-ask-password-agent-con.patch |  34 ++
+ meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb    |  12 +-
+ meta-oe/recipes-support/fltk/fltk-native.bb        |   5 +
+ meta-oe/recipes-support/fltk/fltk.bb               |   5 +-
+ ...d-Force-shared-libs-with-unsuffixed-names.patch |  41 ++
+ 7 files changed, 622 insertions(+), 12 deletions(-)
+ rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb} (88%)
+ create mode 100644 meta-oe/licenses/FLTK
+ create mode 100644 meta-oe/recipes-core/plymouth/files/0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch
+ create mode 100644 meta-oe/recipes-support/fltk/fltk/0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch
+
+-- 
+2.9.5
+
 
