@@ -1,47 +1,48 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f172.google.com (mail-yb0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 53719782A0
+Received: from mail-yb0-f177.google.com (mail-yb0-f177.google.com
+	[209.85.213.177])
+	by mail.openembedded.org (Postfix) with ESMTP id EE5D160123
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Dec 2017 00:03:23 +0000 (UTC)
-Received: by mail-yb0-f172.google.com with SMTP id w1so923819ybe.10
+	Sun, 17 Dec 2017 16:48:45 +0000 (UTC)
+Received: by mail-yb0-f177.google.com with SMTP id 69so9457086ybc.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 16 Dec 2017 16:03:25 -0800 (PST)
+	Sun, 17 Dec 2017 08:48:47 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=AcsqhD3IP+ZBp5sJy3DPbpq/z08AVQx0TlZXzPasV1U=;
-	b=BTByH/0xo6vppsCJI//PfhnE1Ami6g0KaqqNWk6yWVk5S84Q7LJSOeYcAH7IjFMSSe
-	AwFeQB5JvwbZmyplTRRE3CDcpI0Rr+0XM/ojZPFJ0FvBP+pbtYzD2VWUZH6nrVgI9xoO
-	xhMEJA3uEp0rbryvmBdPE+RY82/YO/W68l1tvEZsMls3v9nwn60ERTbCmZnrnzHgIEhS
-	tX24HoSurvIxJWREW3jJWjJzUUilEjkNR8Nw/Xyqg62b1cZqhP6YbFf9t/MFlsvAyEd6
-	6IbbJSckuEqv4hcdiPrdBdf5DGCS8CJa0C4AWyXU/FUlupz0dZ5fNmJ6SbrZ2UC1+pzb
-	yYkw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=NK9q15+dQVNxo5mCXkKUyBdAPSej8WgoNTtU+rwDSGY=;
+	b=uD032G4pFgLyZoVJFwAfbx54Rv4hBNPis1iKgjoYz2sttunwcwQdSXfXU2U9ZsStn/
+	OBP9GFF/t9+BskpY59xtglAz4CEXWCc1PpnSPLcDcWL8DHLEmgdqUM2jQ7V59Kwuhd5i
+	H86Gchn8aAnsgtQdY9RPSTaW+jsktGzXayvGyop3VhK8mw5ZMSehu2YRrElzlBG7sFQ/
+	g7Sncy9o+VmOt2GaDbExoZp3CNtjHiL9jVkh/xkbI4GX0qRnuOGgKyhVesrovTYzTQUH
+	3gNv4j2UQZ0ic99QQhZlfdmgFSdKwwTo0BwgmGocBnwTH3ZtZpQplIdmKSL4K4F1Am1E
+	OMFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=AcsqhD3IP+ZBp5sJy3DPbpq/z08AVQx0TlZXzPasV1U=;
-	b=bym78yz4qagykCl2viEDdMbwyl5aYghF9llIVMgkuzkcTRTFBPqeE1b17/2CYN1g3M
-	J/qFyPRO7Fm5y6TZOkU9qK1ZUI8TzsiDgqCNxB9xdkwd42ubqJEoSThuzmw1dm6KJZXA
-	g1DeZxjvU7dqxtL3t5wJBAApvfSr19Bmhu8xPjCyi2QA2V0/H9DDk563EMMk0j2LCcnV
-	zeb+esaWgiQ2+JX/pb8NXLl7OcSfcPaqoFBCdI4bS3e6aXQKT5jTrxpBQclVHIR8KNg9
-	WwQY5JubWebKDS2HA5WLWS7aLlwuh2GAatkxRjiq0Q7iBIgZ/ZwDnYe2z/CfGQ87ORsQ
-	s1kg==
-X-Gm-Message-State: AKGB3mJCct7H0fFmcMr+HsdAGRu46FUHc4iLTTViYzvcIFZhfOxQAQwr
-	QKy6Kephc+hb5Gx37pGPpNqoPjc1tte77AZ9/2g=
-X-Google-Smtp-Source: ACJfBovooeugJgMeNyjYIb+SaKTQ4X0tYO52GKK6Fob1Qf5SZUZl8QkhBs1VMFnIgy10xNNQqYVBWbM8hqamowEaonc=
-X-Received: by 10.129.85.132 with SMTP id j126mr9929351ywb.295.1513469005080; 
-	Sat, 16 Dec 2017 16:03:25 -0800 (PST)
+	:message-id:subject:to:cc;
+	bh=NK9q15+dQVNxo5mCXkKUyBdAPSej8WgoNTtU+rwDSGY=;
+	b=T+jwsWxdCmTZpKgDTmYE0Y4Lfq1swg3l3nqaUGlIX8dpGMkKzJFl1bPAz6j7OjN4ok
+	ZZibSTNg65E43P64Y6HMWRlonvmRB6TzCwp3PLXNyV/VxFkGxxYQv+GU9L0Sd5xwZh/p
+	Ywv2F1BHRYHVqRzMxysmJbvF7wja9a9fCZhm8L9yOvuqrESsdN2n2wKzDXfZ/iXNXwot
+	qiZQ6UWau+bEGh7hWcTAzvL5FDZC7oUjSOFnKEDoNi7mSlfq9TUfsXHGx6s3dDtGTtu1
+	iXmRVtuq5ElvRy3YgFaPKVkjTttoUfbusc+oo7pp+gYExgQ2TK6TmMu+HyEI3eQsi6TS
+	xmeA==
+X-Gm-Message-State: AKGB3mKEoPICywaEgAcJ6ctu90YTD91W7Ui6BLFTfFwIz54D+BrcnOOE
+	I83NvPlPjlbm6k0mNpbSelJ5wWcjS/T/l86OMDI=
+X-Google-Smtp-Source: ACJfBou3U5TeAtYzUgyZJZXhjZS3PGDwwb7+yILsl+TGzzKowRemtrTa18jMyl9AcEHCCe9sCRAJ0lGPnyZmOS6vlAU=
+X-Received: by 10.37.197.143 with SMTP id v137mr3203237ybe.368.1513529326669; 
+	Sun, 17 Dec 2017 08:48:46 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.37.97.6 with HTTP; Sat, 16 Dec 2017 16:03:24 -0800 (PST)
-In-Reply-To: <20171130081026.25414-1-schnitzeltony@gmail.com>
-References: <20171130081026.25414-1-schnitzeltony@gmail.com>
+Received: by 10.37.97.6 with HTTP; Sun, 17 Dec 2017 08:48:46 -0800 (PST)
+In-Reply-To: <20171214100929.11094-1-schnitzeltony@gmail.com>
+References: <20171214100929.11094-1-schnitzeltony@gmail.com>
 From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Sun, 17 Dec 2017 01:03:24 +0100
-Message-ID: <CALbNGRRptpj43Qxej6UrmJ3yBynjR9AjuUaOJwy=RZW7j6mEEw@mail.gmail.com>
+Date: Sun, 17 Dec 2017 17:48:46 +0100
+Message-ID: <CALbNGRTV2evX1efqP-76=AzQegO4OXv5x10pCjdKkHSmhM2P6A@mail.gmail.com>
 To: openembeded-devel <openembedded-devel@lists.openembedded.org>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-qt5][PATCH] qwt-qt5: rewrite completely
+Cc: akuster <akuster@mvista.com>
+Subject: Re: [PATCH 0/5] few fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,31 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 17 Dec 2017 00:03:24 -0000
+X-List-Received-Date: Sun, 17 Dec 2017 16:48:46 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Nov 30, 2017 at 9:10 AM, Andreas M=C3=BCller <schnitzeltony@gmail.c=
-om>
+On Thu, Dec 14, 2017 at 11:09 AM, Andreas M=C3=BCller <schnitzeltony@gmail.=
+com>
 wrote:
 
-> * install pkgconfig
-> * fix examples
-> * DESCRIPTION -> SUMMARY
-> * overall cleanup
+> The following changes since commit acfb8417e370d017e7307872e61564
+> deeda76a13:
 >
-> Signed-off-by: Andreas M=C3=BCller <schnitzeltony@gmail.com>
-> ---
->  recipes-qt/qwt/qwt-qt5.inc                         | 48 ---------------
->  ...h-from-binaries-they-point-to-buuild-area.patch | 69
-> ++++++++++++++++++++++
->  recipes-qt/qwt/qwt-qt5/remove_rpath.patch          | 17 ------
->  recipes-qt/qwt/qwt-qt5_6.1.3.bb                    | 45 +++++++++++++-
->  4 files changed, 112 insertions(+), 67 deletions(-)
->  delete mode 100644 recipes-qt/qwt/qwt-qt5.inc
->  create mode 100644 recipes-qt/qwt/qwt-qt5/0001-
-> Remove-rpath-from-binaries-they-point-to-buuild-area.patch
->  delete mode 100644 recipes-qt/qwt/qwt-qt5/remove_rpath.patch
+>   python3-dominate: new recipe (2017-12-11 07:58:58 -0800)
 >
-> ping?
+> are available in the git repository at:
+>
+>   https://github.com/schnitzeltony/meta-openembedded.git patches
+>
+> for you to fetch changes up to 77a0b0909e81f350e7c00d0e3b613a49656a0ed7:
+>
+>   plymouth: fix path to systemd-tty-ask-password-agent (2017-12-14
+> 11:02:54 +0100)
+>
+> ----------------------------------------------------------------
+> Andreas M=C3=BCller (5):
+>       fltk: add -fPIC to compile flags
+>       gvfs: update 1.32.1 -> 1.34.1
+>       plymouth: do not install systemd units manually
+>       plymouth: packageconfig gtk needs gtk+3 as depends
+>       plymouth: fix path to systemd-tty-ask-password-agent
+>
+> Please ignore this series. I will send out reworked V2 within the next
+hours.
+
+Andreas
 
