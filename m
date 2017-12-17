@@ -1,52 +1,54 @@
 Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-wr0-f181.google.com (mail-wr0-f181.google.com
-	[209.85.128.181])
-	by mail.openembedded.org (Postfix) with ESMTP id AD21460269
+Received: from mail-wr0-f182.google.com (mail-wr0-f182.google.com
+	[209.85.128.182])
+	by mail.openembedded.org (Postfix) with ESMTP id 7A14360269
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 17 Dec 2017 18:21:55 +0000 (UTC)
-Received: by mail-wr0-f181.google.com with SMTP id y21so12151394wrc.1
+	Sun, 17 Dec 2017 18:21:56 +0000 (UTC)
+Received: by mail-wr0-f182.google.com with SMTP id w95so1247372wrc.11
 	for <openembedded-devel@lists.openembedded.org>;
 	Sun, 17 Dec 2017 10:21:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:subject:date:message-id:mime-version
+	h=from:to:subject:date:message-id:in-reply-to:references:mime-version
 	:content-transfer-encoding;
-	bh=U+eE1MHZ6+DzRUPd4bmKqncEvEJnZrdGH4ah4/Mgluw=;
-	b=Ra1aiYF33AQIjd2WFGnvZva5cWsYgJ3fnVBZe5OlqV6KXdVsj1MAn+LVyFV45WYXsm
-	JY7gQMwwrRYE/+j+3hZF6L3gMT8WwT0x9Wt8FwI8/7SvZlHNm1exI45yeR4T5dHKQj1U
-	0AzoNu5w2VsM5Nfb+elEm63LKp540QEVU5QTEmG+8BRKZOK1K/aUkfWDzNJTUdW7T53V
-	8by53TOgMItRw5pjS84GNbWXRxGjvW3G/9a8OCLLgmeuxTxJpEOytI5aC/QpgeMLLY3u
-	UkowYXKa8Bv2SBBw1CHFdfUJ0T0BA/aX/yA38+KQkDF12tJbFN4KFlYSpU/n2nhrwG5w
-	AFXA==
+	bh=SqeNAA7BRkHkH6qfsK/k/5N9CIYlc4TRxoVzaPjPZrc=;
+	b=Lpi3HnPQDfr2O/As2VMx5LDPiXY8HAx7PqtVeJyC0CIs0ahwyDLvBkbBzwfYk59TeC
+	wMcK3rFx9GMKX5c7nC3C/gkZr208AWv0qNMZdmgKX2IEzwSdmu0LuaFz8Et1Qgx1boUd
+	asboS1T6wD2kjUCfQxHsT6tbGVKh6JgQNAytkVxuS44kenjTXp/R0nhxQDssk1eX3MvT
+	e5sUZiWn4MFvTBE6LE/yhmXQ6cKAJJCiGyTVC8Cf+2I61uuz4aODK5cPJepMjvYSP5Zo
+	sJWiSwJ14Osf0g8qWcOlDhNrzwOc1Ag8wDz1QNwwMaqtv0alUEzmxc6TA5FgewIO5mEy
+	NDCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=U+eE1MHZ6+DzRUPd4bmKqncEvEJnZrdGH4ah4/Mgluw=;
-	b=D814o42MeYHxQhTSVxzJnXLXX2wPTtaFx5K5lZj16EwMNc090eEK5Fe0JS6vQpiKo9
-	093J/DVY1PPQq+Ii6tWdkEH6wOnNPFx/s1HJlaYh7CXkOwduvrfNsntVVXpsJze1D1KW
-	u/6EnAA/XkbakDL09PbmNL/BzktJXMsCo0ln4aI8a7WjIRPRK1V7fMp4V+GeZt9Hum49
-	nTApfesDke1YopbGSlLim0ffYvPi+tNA+IfcwR9vVUxoAL5b/WZJKEs9xXgcIg16Lnj3
-	O3HSxF2UQ66DBT9VunkP/HA5jM+iZsYJ+CA2x9aL+YcJ6DM2Nxj73ME7yLqCeXAdc0GM
-	9ZZw==
-X-Gm-Message-State: AKGB3mIyIKvx3jJQP6fqtqUcWbHUnxjvofJmOy9ZxL/mj/p3vkmiFy76
-	L0hOGiZFUZoeVD0F4z6jqaZ05w==
-X-Google-Smtp-Source: ACJfBovKP649UUMjdsK8Dn88lhbZSA7ZbJRdKuVpJVX9o7CTfGN9ajbTKB42HiURI9UQiL/h4XusRg==
-X-Received: by 10.223.150.61 with SMTP id b58mr3820750wra.185.1513534915939;
-	Sun, 17 Dec 2017 10:21:55 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=SqeNAA7BRkHkH6qfsK/k/5N9CIYlc4TRxoVzaPjPZrc=;
+	b=jMGXBZie8ZMUpjo3kSJ44eKwk5I3yiXhBWyPq14ASD0jGWgIoGGm3E7TdjkOQhVooX
+	acfVDT1EgTORqWOn0hTymjEhQIh+3lWG9potZ0JK1grXGkmUDbcnIvQ8f4WRsqz1l9/2
+	XefR8G+/L4ryjW2PlclVNd3KIJhKI/HreF/WARSN12VmAdS7kqakD2DCKtpXxoDeqLst
+	u83AwS4zVQ7OJQ7vtXNCwSNABcC5Mx4A6ejgVGqpZm1Apc1b/oGtmCsoDZYSEyGPEPuF
+	VP44v45xBtCWjbZLIU2Qz3jGnxiqHOWOJGTxBoSf40x1PDFUUCVx0Bqa0kzCmYv0aIVi
+	Oa1Q==
+X-Gm-Message-State: AKGB3mLZP/BlPAUTK7CR0ytdxIA9i/n9qCcKdz37WlTCKc6FTJC8C1mQ
+	2+SYK4idA7OknOX6NdnzywwtNQ==
+X-Google-Smtp-Source: ACJfBouKnlXcjWOsNiGveXchJpABJEsVYKSVU8KZZsmdo/22wOOcdjkKDoGAXzYLyBdS86NqDvI6Yg==
+X-Received: by 10.223.182.19 with SMTP id f19mr14677615wre.81.1513534916965;
+	Sun, 17 Dec 2017 10:21:56 -0800 (PST)
 Received: from PC192-168-2-116.speedport.ip
 	(p200300F07BC3E4151E6F65FFFE3E7F61.dip0.t-ipconnect.de.
 	[2003:f0:7bc3:e415:1e6f:65ff:fe3e:7f61])
-	by smtp.gmail.com with ESMTPSA id 139sm7762637wmp.7.2017.12.17.10.21.54
+	by smtp.gmail.com with ESMTPSA id 139sm7762637wmp.7.2017.12.17.10.21.55
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 17 Dec 2017 10:21:55 -0800 (PST)
+	Sun, 17 Dec 2017 10:21:56 -0800 (PST)
 From: =?UTF-8?q?Andreas=20M=C3=BCller?= <schnitzeltony@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 17 Dec 2017 19:21:36 +0100
-Message-Id: <20171217182144.21123-1-schnitzeltony@gmail.com>
+Date: Sun, 17 Dec 2017 19:21:37 +0100
+Message-Id: <20171217182144.21123-2-schnitzeltony@gmail.com>
 X-Mailer: git-send-email 2.9.5
+In-Reply-To: <20171217182144.21123-1-schnitzeltony@gmail.com>
+References: <20171217182144.21123-1-schnitzeltony@gmail.com>
 MIME-Version: 1.0
-Subject: [PATCH][V2 0/8] few fixes
+Subject: [PATCH][V2 1/8] gvfs: update 1.32.1 -> 1.34.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,31 +65,54 @@ X-List-Received-Date: Sun, 17 Dec 2017 18:21:56 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-V1 -> V2: fltk correct packing of shared libs / cleanup
+* --with-archive-includes and --with-archive-libs were removed in [1]
+* --enable-gtk was removed in [2]
+* build tested with full (except cdda) and empty PACKAGECONFIG
+* run tested with PACKAGECONFIG = "archive gcr libmtp libgphoto2 samba systemd"
+* fixes long delay when unmounting memory sticks
 
-Andreas Müller (8):
-  gvfs: update 1.32.1 -> 1.34.1
-  plymouth: do not install systemd units manually
-  plymouth: packageconfig gtk needs gtk+3 as depends
-  plymouth: fix path to systemd-tty-ask-password-agent
-  fltk-native: remove fltk-config from image
-  fltk: remove fltk-native from DEPENDS
-  fltk: do not suffix shared library names with '_SHARED'
-  Add FLTK to licenses to avoid warning when building fltk / fltk-native
+[1] https://git.gnome.org/browse/gvfs/commit/configure.ac?id=03fbe16aebced70118f070f898d7b459e1125580
+[2] https://git.gnome.org/browse/gvfs/commit/configure.ac?id=dff13283c943c8b10265bd3925d86f17cdc4be6f
 
- .../gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb}        |   7 +-
- meta-oe/licenses/FLTK                              | 530 +++++++++++++++++++++
- ...ath-to-systemd-tty-ask-password-agent-con.patch |  34 ++
- meta-oe/recipes-core/plymouth/plymouth_0.9.2.bb    |  12 +-
- meta-oe/recipes-support/fltk/fltk-native.bb        |   5 +
- meta-oe/recipes-support/fltk/fltk.bb               |   5 +-
- ...d-Force-shared-libs-with-unsuffixed-names.patch |  41 ++
- 7 files changed, 622 insertions(+), 12 deletions(-)
+Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
+---
+ meta-gnome/recipes-gnome/gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb} | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
  rename meta-gnome/recipes-gnome/gvfs/{gvfs_1.32.1.bb => gvfs_1.34.1.bb} (88%)
- create mode 100644 meta-oe/licenses/FLTK
- create mode 100644 meta-oe/recipes-core/plymouth/files/0001-Make-full-path-to-systemd-tty-ask-password-agent-con.patch
- create mode 100644 meta-oe/recipes-support/fltk/fltk/0003-CMake-build-Force-shared-libs-with-unsuffixed-names.patch
 
+diff --git a/meta-gnome/recipes-gnome/gvfs/gvfs_1.32.1.bb b/meta-gnome/recipes-gnome/gvfs/gvfs_1.34.1.bb
+similarity index 88%
+rename from meta-gnome/recipes-gnome/gvfs/gvfs_1.32.1.bb
+rename to meta-gnome/recipes-gnome/gvfs/gvfs_1.34.1.bb
+index d380688..8d7865f 100644
+--- a/meta-gnome/recipes-gnome/gvfs/gvfs_1.32.1.bb
++++ b/meta-gnome/recipes-gnome/gvfs/gvfs_1.34.1.bb
+@@ -8,15 +8,13 @@ DEPENDS += "libsecret glib-2.0 gconf intltool-native libgudev udisks2 polkit sha
+ 
+ SRC_URI = "https://download.gnome.org/sources/${BPN}/${@gnome_verdir("${PV}")}/${BPN}-${PV}.tar.xz;name=archive"
+ 
+-SRC_URI[archive.md5sum] = "cbe766b46f324e17d7abcfb4a89a1684"
+-SRC_URI[archive.sha256sum] = "d0b6c9edab09d52472355657a2f0a14831b2e6c58caba395f721ab683f836ade"
++SRC_URI[archive.md5sum] = "44012824aa75797a7d272cd60f07b488"
++SRC_URI[archive.sha256sum] = "7ef9b2aec234004271a575118a0e35b3c36ce3309e5f9da109635651843372b4"
+ 
+ EXTRA_OECONF = " \
+     --disable-gdu \
+     --enable-udisks2 \
+     --disable-documentation \
+-    --with-archive-includes=${STAGING_INCDIR} \
+-    --with-archive-libs=${STAGING_LIBDIR} \
+ "
+ 
+ PACKAGES =+ "gvfsd-ftp gvfsd-sftp gvfsd-trash"
+@@ -46,7 +44,6 @@ PACKAGECONFIG[afc] = "--enable-afc, --disable-afc, libimobiledevice libplist"
+ PACKAGECONFIG[archive] = "--enable-archive, --disable-archive, libarchive"
+ PACKAGECONFIG[avahi] = "--enable-avahi, --disable-avahi, avahi"
+ PACKAGECONFIG[gcr] = "--enable-gcr, --disable-gcr, gcr"
+-PACKAGECONFIG[gtk] = "--enable-gtk, --disable-gtk, gtk+3"
+ PACKAGECONFIG[http] = "--enable-http, --disable-http, libsoup-2.4"
+ PACKAGECONFIG[libmtp] = "--enable-libmtp, --disable-libmtp, libmtp"
+ PACKAGECONFIG[libgphoto2] = "--enable-gphoto2, --disable-gphoto2, libgphoto2"
 -- 
 2.9.5
 
