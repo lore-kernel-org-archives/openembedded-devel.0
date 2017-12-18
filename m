@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
-	[209.85.220.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 32EEB7808D
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 500497808D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 20:43:41 +0000 (UTC)
-Received: by mail-qk0-f172.google.com with SMTP id 8so19990450qkj.3
+	Mon, 18 Dec 2017 20:47:03 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id 33so21731086qtv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 12:43:43 -0800 (PST)
+	Mon, 18 Dec 2017 12:47:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=8eaMYaBiR3QTFT/oOMkYSxf3eyNNOE9ua5rgOtLnbrs=;
-	b=G81mMA5b4v/z+SJwzF8fhSbmlnTpcv/eMo0fGVNq2ME7N/WkvOLegPM6VliJ22iDPM
-	Fpoz04HHOTNgxhrh0w5pV8NanAkGOWixEe90fbScs5eBPpzMufb654K0leR0UN2Uy2bs
-	HUF1D4TMmcH142o5ZWlIQtUKO6sgJ2CppcKBmmK4aVjM7eB3CNfo1z+Vt2V3JSe1NQyw
-	PH+j2IZ3NLqRKeQz3fyHKc/WFGSPQW67zSq//oAj86rPE1ayBP66q7aRISGyWAKBokL/
-	lADUU5UkbaMT1u6iD6ht85SmCmt0FrTjXUktENmrFSjTpc1PS5gO+B9TJszrVCotTQvd
-	TL+g==
-X-Gm-Message-State: AKGB3mJk7KFED6h6q4G93Q1vDLh+s+edWe5+YkGPp1Yqa+hXb6RIvUoB
-	wXe5r7GvA4evC4AWCqeT4xFFPpLs
-X-Google-Smtp-Source: ACJfBouBfYS+NhfH8xjYCTHbiidg1CsxP8ygT/ga5e7vuW+KXCyPyV6QKddq/YOiqYeTrG0ZWiC7bg==
-X-Received: by 10.55.175.135 with SMTP id y129mr1608159qke.128.1513629822634; 
-	Mon, 18 Dec 2017 12:43:42 -0800 (PST)
+	bh=4vBrt49JmZvS0NRBq393z71Tz2tZAuYJ3lTm8Dg88po=;
+	b=IB+EALdmXQbdRD/okUShfs5QISb39XP34ExQoP++I+lxiLiS7AHwYMtZRlGzxfXDsf
+	jMoVb192ezt7485Yj+9AFuUJAmyrBowysRZ8oiVVR2yKyBsQ2VSTwRk8RSS8IHcHLDAT
+	7uZTz7tVCHEwCgnyecNzkbsPKeQAy341/86jRsU3zSZx4l2YJIYR+htZ5BOuQIgjzkRN
+	4C3ZSZjAHrS3btnBvurwZzgOqr9dU8PJDiJGg+Wz5kUD1VHH2DPLIHJ7Iw+iuZBRmwrp
+	UUo1EbrBygcTKxDtcOGbgh7V4TNOUmeXm6P4HLOB+mUN3KXaJtsRTobgls4TIpCikPsd
+	9Dqw==
+X-Gm-Message-State: AKGB3mLbB3hvAcNLhxaEQGz960/QaivThxdTIdAk120sj0OUzg/TycMa
+	ce57LvqPV94MRKxLI70KLIpKjlRb
+X-Google-Smtp-Source: ACJfBovDMNH7zE05CRzvnhjxWiNVhoT4ydw3eswfq322XeqOeT8Z2hQP4X6+spdcFmzz7OpVzMlkow==
+X-Received: by 10.237.56.197 with SMTP id k63mr1528598qte.308.1513630024830;
+	Mon, 18 Dec 2017 12:47:04 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	y62sm3919659qkb.54.2017.12.18.12.43.42
+	b75sm1295967qkj.10.2017.12.18.12.47.04
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Dec 2017 12:43:42 -0800 (PST)
+	Mon, 18 Dec 2017 12:47:04 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Dec 2017 15:43:21 -0500
-Message-Id: <1513629801-30098-1-git-send-email-derek@asterius.io>
+Date: Mon, 18 Dec 2017 15:46:57 -0500
+Message-Id: <1513630017-3742-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-webserver][PATCH] phpmyadmin: update to version 4.7.6
+Subject: [meta-webserver][PATCH] nginx: update to version 1.13.7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,58 +45,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 20:43:42 -0000
+X-List-Received-Date: Mon, 18 Dec 2017 20:47:04 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb     | 38 ++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
- create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
+ .../recipes-httpd/nginx/{nginx_1.13.6.bb => nginx_1.13.7.bb}          | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-webserver/recipes-httpd/nginx/{nginx_1.13.6.bb => nginx_1.13.7.bb} (64%)
 
-diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
-new file mode 100644
-index 0000000..672db58
---- /dev/null
-+++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
-@@ -0,0 +1,38 @@
-+SUMMARY = "Web-based MySQL administration interface"
-+HOMEPAGE = "http://www.phpmyadmin.net"
-+# Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
-+LICENSE = "GPLv2 & LGPLv3 & MIT"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
-+                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c \
-+                    file://js/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
-+"
-+
-+SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
-+           file://apache.conf \
-+"
-+
-+SRC_URI[md5sum] = "a9aec05d44c68b4ac5e4987118d70cd7"
-+SRC_URI[sha256sum] = "5fab6b92336386646bbb189d55817799487b5c27b06cab0cdfdcab3c88f5988f"
-+
-+S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
-+
-+inherit allarch
-+
-+do_install() {
-+    install -d ${D}${datadir}/${BPN}
-+    cp -R --no-dereference --preserve=mode,links -v * ${D}${datadir}/${BPN}
-+    chown -R root:root ${D}${datadir}/${BPN}
-+    # Don't install patches to target
-+    rm -rf ${D}${datadir}/${BPN}/patches
-+
-+    install -d ${D}${sysconfdir}/apache2/conf.d
-+    install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
-+
-+    # Remove a few scripts that explicitly require bash (!)
-+    rm -f ${D}${datadir}/phpmyadmin/libraries/transformations/*.sh
-+}
-+
-+FILES_${PN} = "${datadir}/${BPN} \
-+               ${sysconfdir}/apache2/conf.d"
-+
-+RDEPENDS_${PN} += "bash"
+diff --git a/meta-webserver/recipes-httpd/nginx/nginx_1.13.6.bb b/meta-webserver/recipes-httpd/nginx/nginx_1.13.7.bb
+similarity index 64%
+rename from meta-webserver/recipes-httpd/nginx/nginx_1.13.6.bb
+rename to meta-webserver/recipes-httpd/nginx/nginx_1.13.7.bb
+index d255f1f..23e7846 100644
+--- a/meta-webserver/recipes-httpd/nginx/nginx_1.13.6.bb
++++ b/meta-webserver/recipes-httpd/nginx/nginx_1.13.7.bb
+@@ -6,5 +6,5 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=903753de5f86a1ee0341fd2f9491b282"
+ 
+-SRC_URI[md5sum] = "f84d3f782c168bfdfb734700e51a929f"
+-SRC_URI[sha256sum] = "8512fc6f986a20af293b61f33b0e72f64a72ea5b1acbcc790c4c4e2d6f63f8f8"
++SRC_URI[md5sum] = "5fcd056b40cb5c47b053fb14a2a89e7d"
++SRC_URI[sha256sum] = "beb732bc7da80948c43fd0bf94940a21a21b1c1ddfba0bd99a4b88e026220f5c"
 -- 
 2.7.4
 
