@@ -1,49 +1,50 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f169.google.com (mail-yb0-f169.google.com
-	[209.85.213.169])
-	by mail.openembedded.org (Postfix) with ESMTP id 5858E71D9F
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id E9E3D78087
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 17:38:32 +0000 (UTC)
-Received: by mail-yb0-f169.google.com with SMTP id z62so11628763yba.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 09:38:34 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=nsRUjdms6tFLZltG7Mihj7FXcnTzXiq5AGwRbaQdZNw=;
-	b=OnZAcCfbsILC9BqSoqUX71MEpo+GHlUXmmq6Qs5WkgZxY4U5PEgCYs6MbrUA7H7+ba
-	/dY9XDqkm+UfDzp7MSdlM2woKSa2jazMHhoRMMn6+DxSfDgjgEvgaN6l2kgmImF8zVaK
-	qNlCYk0YO2V/8tKrgEI9olGm4FY2ylECrtNN3AXXpdHgJzZHOPy60S3mfniYgjNK3A8J
-	NQP0EbklIpGf2HCk+JfklY+fHkApyx8w+sRavZKceryjA1mxd933tvV3qQml1zlMznYf
-	ZoK8OMlmYaIko41YFrgRC8Cz8gjUaMkjwczX4R4IGzwMVLPNxzYyJlz+mv2fbrB1oXml
-	WCAg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=nsRUjdms6tFLZltG7Mihj7FXcnTzXiq5AGwRbaQdZNw=;
-	b=bEZ5i65gT7PAHsYcRDOJ1qVnfJX66VckUOvr+PvQAnWCrBm4f9pG1Vi3foZtCQOF8X
-	3I9rgaFrr0W8liPb6/FOPc6Man3pI+4TaWPu0uHYPQH8m3Q1GQDDU9sZwqnZN9eLDcmc
-	Yxg/njh0wf5SYwFJWRoV0mXnLvHkprBgLar25ChiOCK9E21EIrSFkp+mIYVFB/1UJNlp
-	6T/YOf9dCkK9iFp3Eh0xziMK/7hzvGcCkpFI9RPiRUkA/Bk/8qLWB7BJ9dY3XPwqXmLh
-	K3bICXo7y5Y0zGXIgqAFDIlmxaA+LyX/IiA5ifcoKbclHCZgidyOFc8TeichruetnJdG
-	riQA==
-X-Gm-Message-State: AKGB3mJfR5S2Fu+zhuPdmsgzmXb8jPUFr78tLENOTV5a19iXbAQqAxQD
-	l47ODbHRQMr0zrMPDLCgxR9+De9FxTiFDum57Sc=
-X-Google-Smtp-Source: ACJfBovHtSf8j0VznyTGgyE0yiJ8hOuNAYKCRbX+DSiO2FDHwZdpvTjXahmBnFNDKbSezyq9w5lr6kCjB1XOLC1r4U4=
-X-Received: by 10.129.99.4 with SMTP id x4mr403557ywb.225.1513618714110; Mon,
-	18 Dec 2017 09:38:34 -0800 (PST)
+	Mon, 18 Dec 2017 20:17:25 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1513628246; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=TlT8DV6lEbciyXkU3uMwGxWhs+c2de1Wn7AIWUK0Quw=;
+	b=h4R/REceDNUg8DzBcJGm/EWNzTCDMW1gI1EfQCFFMDRMbhttrpiYRrQ2mKGRgcqZHwoY0erh
+	8uec7gk8vVMHK4mamJY03TOYVT3I+AYROqJOPTxC8zfD+RgbA2tro+eEgugLy/AJfAHOpWda
+	WypNYjTr7WKMmGkVm7wtANXgy70=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
+	[209.85.220.171])
+	by mxa.mailgun.org with ESMTP id 5a382256.7f8506e057f0-smtp-out-n02;
+	Mon, 18 Dec 2017 20:17:26 -0000 (UTC)
+Received: by mail-qk0-f171.google.com with SMTP id r184so12245384qke.8;
+	Mon, 18 Dec 2017 12:17:26 -0800 (PST)
+X-Gm-Message-State: AKGB3mK2rGsks0ztrcv+xm6SL+atDV6jAt8uEBaM4CD2z/isLozdQ2YZ
+	TR5q3/2JHaTDd8lLh6wMwW6o0JEmykrVEdTfxBE=
+X-Google-Smtp-Source: ACJfBosFYZ1C+jtreLxTtDGD3rl3fdDW0Vgd3jlHeh73EQBw+N1MMtiuctQRPsnJqCCOq4cn79i8516Nzot4QO7z3Hg=
+X-Received: by 10.55.191.1 with SMTP id p1mr1465742qkf.152.1513628246281; Mon,
+	18 Dec 2017 12:17:26 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.37.97.6 with HTTP; Mon, 18 Dec 2017 09:38:33 -0800 (PST)
-In-Reply-To: <20171214173633.16405-2-raj.khem@gmail.com>
-References: <20171214173633.16405-1-raj.khem@gmail.com>
-	<20171214173633.16405-2-raj.khem@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Mon, 18 Dec 2017 18:38:33 +0100
-Message-ID: <CALbNGRTpjb5cGpe2OPAVr5AL6cZ3oNt28c-SiptkDZsYc=Yepw@mail.gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
+Received: by 10.140.21.177 with HTTP; Mon, 18 Dec 2017 12:17:25 -0800 (PST)
+In-Reply-To: <CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
+References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
+	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
+	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
+	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
+	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
+	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
+	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Mon, 18 Dec 2017 15:17:25 -0500
+X-Gmail-Original-Message-ID: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
+Message-ID: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
+To: Mark Asselstine <mark.asselstine@windriver.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-xfce][PATCH 2/5] gtk-xfce-engine: Fix build with glib-2.0 > 2.53
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,18 +57,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 17:38:33 -0000
+X-List-Received-Date: Mon, 18 Dec 2017 20:17:26 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Thu, Dec 14, 2017 at 6:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
+I have several customers who have optimized for space and would like to see
+the capability maintained unless core removes the ability to split python
+packages out.  They also remove the *.py files in favor of *.pyo files (via
+a custom packaging mechanism).  I have automated tests that go through the
+module importing on each of the meta-python packages to ensure it works on
+minimal python installations.  When other contributors don't do provide
+that functionality, I either catch it when I do package update or when it
+breaks for one of my customers.  I'm fine if you don't want to perform the
+checks yourself and it breaks my use case with missing dependencies, but I
+would prefer that you don't remove the dependencies that are currently in
+place.  Thanks.
 
-> Fixes errors like
-> UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd6 in position 980:
-> invalid continuation byte
-> Makefile:737: recipe for target 'xfce_typebuiltin.h' failed
+-Derek
+
+On Mon, Dec 18, 2017 at 11:56 AM, Mark Asselstine <
+mark.asselstine@windriver.com> wrote:
+
+> On Mon, Dec 18, 2017 at 11:37 AM, Alexander Kanavin
+> <alexander.kanavin@linux.intel.com> wrote:
+> > On 12/18/2017 06:15 PM, Mark Asselstine wrote:
+> >>
+> >> On Mon, Dec 18, 2017 at 10:36 AM, Christopher Larson <kergoth@gmail.com
+> >
+> >> wrote:
+> >>>
+> >>> All our python recipes should be explicitly listing the python module
+> >>> packages they require. No python module recipes should be depending on
+> >>> python-modules or python3-modules, but explicitly what they require.
+> >>
+> >>
+> >> This is a giant PITA for little gain in my opinion. The typical python
+> >> 'vehicles' to define dependencies, things like setup.py, requires.txt,
+> >> requirements.txt..., never bother to list stdlibs. These are standard
+> >> libs that are just expected to be there. If a system is being
+> >> installed with only select python modules it will behave differently
+> >> than python found on any other system violating the rule of least
+> >> surprise. On top of this most of these modules are ~40K in size and
+> >> there are roughly 60 in the stdlib so the size gain in installing a
+> >> few vs. all of them is extremely negligible. All of this seems to add
+> >> way more work and churn that outweighs any real benefit.
+> >
+> >
+> > I tend to agree with this. Add also the situation that the yocto project
+> > needs to upgrade oe-core to python 3.6 as soon as possible, and to 3.7
+> soon
+> > after, no one has enough time to do this rather non-trivial job, and I'm
+> > beginning to wonder if the best way out is to remove the module splitting
+> > altogether, and write a clean, simple and maintainable python3 recipe
+> from
+> > scratch with minimal amount of custom patching and hopefully no
+> write-only
+> > hacks.
+> >
+> > Alex
 >
-> Seems patch 2-5 of this series did not make it into patchwork (->
-master-next).
-
-Andreas
+> Thanks Alex for the support. To get a better idea as to what the size
+> delta is I took the installed sizes from a rootfs logfile and the
+> total size for all modules (python2.7) is 6.5M python-misc is almost
+> 2M of this and python-codecs contributing over 0.5M. The savings will
+> never be the full 6.5M as there will always be python-lang and some
+> other modules needed. There was a time where 32M restrictions existed
+> are some systems but are we really seeing devices with these
+> restrictions any more? what about exploring not shipping the pyc
+> files? I would much rather see this than imposing so much work and
+> churn for very little gain. Anyways, maybe this isn't the best forum
+> for this and it should be brought up to the architecture group.
+>
+> Mark
+>
+> >
+> > --
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
