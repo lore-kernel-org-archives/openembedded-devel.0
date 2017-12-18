@@ -1,28 +1,53 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 1C5887833C
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id BB966781DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 21:01:49 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vBIL1mU9021902
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Mon, 18 Dec 2017 13:01:48 -0800 (PST)
-Received: from yow-masselst-lx1.localnet (128.224.25.142) by
-	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
-	14.3.361.1; Mon, 18 Dec 2017 13:01:47 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: Tim Orling <ticotimo@gmail.com>
-Date: Mon, 18 Dec 2017 16:01:46 -0500
-Message-ID: <21648831.s208P8NGHT@yow-masselst-lx1>
-Organization: Wind River
-In-Reply-To: <1712771F-CFE1-4566-BC40-FD3D8D72F729@gmail.com>
-References: <1513359926-17087-1-git-send-email-mark.asselstine@windriver.com>
-	<CADNbA1qS8U_+PraE2zBc7T28XhADftoo+7ffmbQhT2Jg674bbg@mail.gmail.com>
-	<1712771F-CFE1-4566-BC40-FD3D8D72F729@gmail.com>
+	Mon, 18 Dec 2017 21:07:44 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1513631265; h=Content-Type: To: Subject: Message-ID: Date:
+	From: References: In-Reply-To: MIME-Version: Sender;
+	bh=Gj+Bkeh0XEZm3v6guioCYjrmm36755dGlvnpMjNIvyQ=;
+	b=bA/Tp8UUgV6K3vkjPAYs4F+cHael8L+anEq293+vaN/cS3Ovo4PtqJdNZ0jXFSlkq5xxTzHB
+	mBsrqiKsY3YHKaBSaODq+tqu1dDmiSkbY77g+rKJgUCAzTm+WiT65D18Gk8EvwbotSn8eWD0
+	qQ5PRRk6WDA6Wlo4ZT+a3JhwY7s=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-qt0-f173.google.com (mail-qt0-f173.google.com
+	[209.85.216.173])
+	by mxa.mailgun.org with ESMTP id 5a382e21.7fc858738630-smtp-out-n01;
+	Mon, 18 Dec 2017 21:07:45 -0000 (UTC)
+Received: by mail-qt0-f173.google.com with SMTP id g10so21726908qtj.12;
+	Mon, 18 Dec 2017 13:07:45 -0800 (PST)
+X-Gm-Message-State: AKGB3mI7ML/2oG2oy5xjvolYKYU5n8p9sZIzQQHnjOwdqy0JigHJFKqz
+	YS+ePpRNj7RXVZctCI1I/afMvnP03dWgw30sUiA=
+X-Google-Smtp-Source: ACJfBosxDmM7mT4Ay7ypf2k0Q0lbYi1Z+zF5/K2rvbXIC8kPcV/G2BHHYpb0VnxURAwpGAibuOSmjBQWHr2O6LzxY+c=
+X-Received: by 10.200.15.155 with SMTP id b27mr1646699qtk.151.1513631264643;
+	Mon, 18 Dec 2017 13:07:44 -0800 (PST)
 MIME-Version: 1.0
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-python][rocko][PATCH 2/2] python-twisted: restore RDEPENDS on -news for py2
+Received: by 10.140.21.177 with HTTP; Mon, 18 Dec 2017 13:07:44 -0800 (PST)
+In-Reply-To: <20171218210256.GQ27580@vctlabs.com>
+References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
+	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
+	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
+	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
+	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
+	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
+	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
+	<CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
+	<20171218210256.GQ27580@vctlabs.com>
+From: Derek Straka <derek@asterius.io>
+Date: Mon, 18 Dec 2017 16:07:44 -0500
+X-Gmail-Original-Message-ID: <CADNbA1qZ=m2MwE78Er4MjBr3jEcQtgE+a4Z-FCDWxLSw1Tc=Eg@mail.gmail.com>
+Message-ID: <CADNbA1qZ=m2MwE78Er4MjBr3jEcQtgE+a4Z-FCDWxLSw1Tc=Eg@mail.gmail.com>
+To: "S. Lockwood-Childs" <sjl@vctlabs.com>, Derek Straka <derek@asterius.io>, 
+	Mark Asselstine <mark.asselstine@windriver.com>, 
+	openembeded-devel <openembedded-devel@lists.openembedded.org>, 
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -35,175 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 21:01:50 -0000
-Content-Transfer-Encoding: 7Bit
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 18 Dec 2017 21:07:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On Friday, December 15, 2017 10:33:10 PM EST Tim Orling wrote:
-> > On Dec 15, 2017, at 12:01 PM, Derek Straka <derek@asterius.io> wrote:
-> > 
-> > That would be useful.  I'm working through automated tests that build
-> > every
-> > package into a minimal rootfs and then attempt to perform all of imports
-> > to
-> > make sure everything is available for use.  I'm hoping to roll that out in
-> > the next couple of weeks.  Thanks for catching this regression.
-> 
-> The same type of testing is needed in OE-core. One would hope not, but then
-> there is reality.
+I also need to look at the UPSTREAM_CHECK_URI for this recipe since it
+isn't finding the latest version and telling me to update the package.
 
-Tim,
+On Mon, Dec 18, 2017 at 4:02 PM, S. Lockwood-Childs <sjl@vctlabs.com> wrote:
 
-Not sure if you are following the discussion on my other patch series (python-
-pyroute2). But yes, if there is an effort to force python recipes to list 
-stdlibs this is the only valid approach as the python "vehicles" (setup.py, 
-requirements.txt...) don't _ever_ list stdlibs. Even with an automated 
-approach I am not enthusiastic about forcing the listing of required stdlibs 
-for the sake of a few MB of space.
-
-Mark
-
-> > On Dec 15, 2017 2:35 PM, "Mark Asselstine" <mark.asselstine@windriver.com>
-> > 
-> > wrote:
-> >> I work with a lot of python recipes in meta-cloud-services and
-> >> especially the openstack packages have a large number of dependencies.
-> >> Find attached a basic script I have written to help parse
-> >> requirements.txt files. It might help you out with this work.
-> >> 
-> >> Anyway, I will send out a V2 with the additional cherrypicks.
-> >> 
-> >>> On Fri, Dec 15, 2017 at 2:30 PM, Derek Straka <derek@asterius.io> wrote:
-> >>> Yeah.  Agreed.  These commits are me cleaning up the RDEPENDS to work
-> >> 
-> >> with
-> >> 
-> >>> minimal python installs.  Meta-python has been pretty bad about setting
-> >> 
-> >> the
-> >> 
-> >>> dependencies.  I just missed the news package.  Thanks.
-> >>> 
-> >>> On Dec 15, 2017 2:22 PM, "Mark Asselstine" <
-> >> 
-> >> mark.asselstine@windriver.com>
-> >> 
-> >>> wrote:
-> >>>> No problem. Unfortunately your commit log was thin on information so I
-> >>>> had to make some assumptions as to what you were doing in the commit.
-> >>>> I could have easily misinterpreted.
-> >>>> 
-> >>>> On Fri, Dec 15, 2017 at 2:19 PM, Derek Straka <derek@asterius.io>
-> >> 
-> >> wrote:
-> >>>>> Sure.  I wasn't clear and even then I misread the 1/2 patch and
-> >> 
-> >> thought I
-> >> 
-> >>>>> removed news from core and not the base package RDEPENDS.
-> >>>>> 
-> >>>>> On Dec 15, 2017 2:08 PM, "Mark Asselstine" <
-> >>>> 
-> >>>> mark.asselstine@windriver.com>
-> >>>> 
-> >>>>> wrote:
-> >>>>> 
-> >>>>> The RDEPENDS are not for core, these are RDEPENDS_${PN}, ie. if you
-> >>>>> don't know what parts you want you install ${PN} and get everything.
-> >>>>> We can straighten this up though if my thoughts are incorrect. I have
-> >>>>> to send a V2 anyway as I was hasty and missed the cherrypick of a
-> >>>>> bunch of dependencies you added for automat and others.
-> >>>>> 
-> >>>>> Mark
-> >>>>> 
-> >>>>> On Fri, Dec 15, 2017 at 1:32 PM, Derek Straka <derek@asterius.io>
-> >> 
-> >> wrote:
-> >>>>>> Is it actually required for core?  I thought I went through and
-> >> 
-> >> verified
-> >> 
-> >>>>>> that news was a stand alone module.
-> >>>>>> 
-> >>>>>> On Dec 15, 2017 12:46 PM, "Mark Asselstine" <
-> >>>> 
-> >>>> mark.asselstine@windriver.com
-> >>>> 
-> >>>>>> wrote:
-> >>>>>>> Although this plugin has not yet been ported to py3 it is available
-> >> 
-> >> in
-> >> 
-> >>>>>>> py2. The previous commit isn't clear about what is being addressed
-> >> 
-> >> but
-> >> 
-> >>>>>>> I assume it is:
-> >>>>>>> 
-> >>>>>>> nothing provides python3-twisted-news needed by
-> >>>>> 
-> >>>>> python3-twisted-17.9.0-r0.
-> >>>>> 
-> >>>>>>> corei7_64
-> >>>>>>> 
-> >>>>>>> For py2 this package is valid and so we should maintain the
-> >> 
-> >> RDEPENDS,
-> >> 
-> >>>>>>> restore this RDEPENDS for py2.
-> >>>>>>> 
-> >>>>>>> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
-> >>>>>>> ---
-> >>>>>>> meta-python/recipes-devtools/python/python-twisted_17.9.0.bb | 6
-> >>>> 
-> >>>> ++++++
-> >>>> 
-> >>>>>>> 1 file changed, 6 insertions(+)
-> >>>>>>> 
-> >>>>>>> diff --git a/meta-python/recipes-devtools/python/python-
-> >>>> 
-> >>>> twisted_17.9.0.bb
-> >>>> 
-> >>>>>>> b/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
-> >>>>>>> index 2be1709..7fc8c65 100644
-> >>>>>>> --- a/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
-> >>>>>>> +++ b/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
-> >>>>>>> @@ -2,3 +2,9 @@ inherit pypi setuptools
-> >>>>>>> require python-twisted.inc
-> >>>>>>> 
-> >>>>>>> RDEPENDS_${PN}-core += "${PYTHON_PN}-contextlib"
-> >>>>>>> +
-> >>>>>>> +# Not yet ported to py3 yet available in py2
-> >>>>>>> +# See src/twisted/python/_setup.py -- notPortedModules
-> >>>>>>> +RDEPENDS_${PN} += "\
-> >>>>>>> +    ${PN}-news \
-> >>>>>>> +    "
-> >>>>>>> --
-> >>>>>>> 2.7.4
-> >>>>>>> 
-> >>>>>>> --
-> >>>>>>> _______________________________________________
-> >>>>>>> Openembedded-devel mailing list
-> >>>>>>> Openembedded-devel@lists.openembedded.org
-> >>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>>>> 
-> >>>>>> --
-> >>>>>> _______________________________________________
-> >>>>>> Openembedded-devel mailing list
-> >>>>>> Openembedded-devel@lists.openembedded.org
-> >>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>>>> 
-> >>>>> --
-> >>>>> _______________________________________________
-> >>>>> Openembedded-devel mailing list
-> >>>>> Openembedded-devel@lists.openembedded.org
-> >>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> >>> 
-> >>> --
-> >>> _______________________________________________
-> >>> Openembedded-devel mailing list
-> >>> Openembedded-devel@lists.openembedded.org
-> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-
-
+> On Mon, Dec 18, 2017 at 03:17:25PM -0500, Derek Straka wrote:
+> > I have several customers who have optimized for space and would like to
+> see
+> > the capability maintained unless core removes the ability to split python
+> > packages out.  They also remove the *.py files in favor of *.pyo files
+> (via
+> > a custom packaging mechanism).  I have automated tests that go through
+> the
+> > module importing on each of the meta-python packages to ensure it works
+> on
+> > minimal python installations.  When other contributors don't do provide
+> > that functionality, I either catch it when I do package update or when it
+> > breaks for one of my customers.  I'm fine if you don't want to perform
+> the
+> > checks yourself and it breaks my use case with missing dependencies, but
+> I
+> > would prefer that you don't remove the dependencies that are currently in
+> > place.  Thanks.
+>
+> Me too -- some of my projects still use NAND for rootfs, where space is
+> tight and
+> ability to split out python modules is very useful. Thus it is not an
+> unused
+> feature, though many projects have SD/eMMC for rootfs and those ones
+> generally
+> will not care about it.
+>
 
