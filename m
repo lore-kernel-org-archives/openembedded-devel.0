@@ -1,56 +1,49 @@
-Return-Path: <asselsm@gmail.com>
-Received: from mail-yb0-f195.google.com (mail-yb0-f195.google.com
-	[209.85.213.195])
-	by mail.openembedded.org (Postfix) with ESMTP id C5E2771C7A;
-	Mon, 18 Dec 2017 16:56:31 +0000 (UTC)
-Received: by mail-yb0-f195.google.com with SMTP id r4so11512838ybd.12;
-	Mon, 18 Dec 2017 08:56:33 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yb0-f169.google.com (mail-yb0-f169.google.com
+	[209.85.213.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 5858E71D9F
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Dec 2017 17:38:32 +0000 (UTC)
+Received: by mail-yb0-f169.google.com with SMTP id z62so11628763yba.11
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Dec 2017 09:38:34 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:reply-to:sender:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=fSXQcpNz4o/WLBFWK/Bbn9QMGLR6p7GsgT/3gL9KsWU=;
-	b=p8N2QdjpJpcsILuwj8hWCOk+EQ0G4pA5f69eYIFqtF2GamDCIj+X8Axvj1lys1Cs6t
-	/AArUswAjEe8ZdQIfgHjZfkoq9YR/HfXkV+zF6jPzV5o6MtwcMjvACKk/THB3HnrOQKB
-	SCPaof7hQUIvMpjdLKMjr6MtL9CMAg5pNFEJZq2s5ZbkqeJGEsS4zbLPyEs5xPU+L7Tw
-	w7sAO+Xd20t/dxA0m/aJwCw8v9rVZgBHfZmoEJhdMrOoXQm/NN59/6tJPDg6ltXrJpK0
-	PnFtZm7xBkhsT1k/Y8uv9IcTXz8raPYZ85MVpaUSDugB4t4ziOgos2aQbDJcrJ/fEPK7
-	rLRQ==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=nsRUjdms6tFLZltG7Mihj7FXcnTzXiq5AGwRbaQdZNw=;
+	b=OnZAcCfbsILC9BqSoqUX71MEpo+GHlUXmmq6Qs5WkgZxY4U5PEgCYs6MbrUA7H7+ba
+	/dY9XDqkm+UfDzp7MSdlM2woKSa2jazMHhoRMMn6+DxSfDgjgEvgaN6l2kgmImF8zVaK
+	qNlCYk0YO2V/8tKrgEI9olGm4FY2ylECrtNN3AXXpdHgJzZHOPy60S3mfniYgjNK3A8J
+	NQP0EbklIpGf2HCk+JfklY+fHkApyx8w+sRavZKceryjA1mxd933tvV3qQml1zlMznYf
+	ZoK8OMlmYaIko41YFrgRC8Cz8gjUaMkjwczX4R4IGzwMVLPNxzYyJlz+mv2fbrB1oXml
+	WCAg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
-	:references:from:date:message-id:subject:to:cc;
-	bh=fSXQcpNz4o/WLBFWK/Bbn9QMGLR6p7GsgT/3gL9KsWU=;
-	b=ESyll3pUYFsEnnKotR9DEhH3zerhuAbW+h5TogPzpbDDyLRlW3sypE/oehE/GInP3g
-	rpZbARZFsUNyO83wxj50+pw+TCsDEef199f2/xY6tEfEqoNE89lkLqHANJjm0fIrh0Th
-	XG33gFXozxPYx53bCwp747bNV6DS45OLB0n9d7CgjxDbfW24x97fDWKyY5q1bmiThTd4
-	uTgB3b3VphBNlW5UcTicIq1hJPQNvVZMPeSp9aTVZqk9f0dqIkVFxgmGtYBj1tL4cK5N
-	qP7/dCZIiTSIHyiOdTAg7cxuJQOQZT4Oxm00NOA4FO2iO+bY+aB4DZ414gj3+f7hDL5f
-	LzFQ==
-X-Gm-Message-State: AKGB3mJoiRhRky3E3RuGpeB2Z79XIrbLrBOpA05b0efrokQa21Rp32SO
-	HWdcK8X8xVfRSxd8Cr7+T20jsoHyY7+AFAQc7Kg=
-X-Google-Smtp-Source: ACJfBotnPLJkubc0s99F4v7FMuZ4xX7gmRhr//O0/ZUXQD+c8x5P+lg6kdziqSiIcs/oAiuHw0/J2wNjncglcisB+ko=
-X-Received: by 10.37.244.82 with SMTP id p18mr353560ybe.6.1513616192789; Mon,
-	18 Dec 2017 08:56:32 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=nsRUjdms6tFLZltG7Mihj7FXcnTzXiq5AGwRbaQdZNw=;
+	b=bEZ5i65gT7PAHsYcRDOJ1qVnfJX66VckUOvr+PvQAnWCrBm4f9pG1Vi3foZtCQOF8X
+	3I9rgaFrr0W8liPb6/FOPc6Man3pI+4TaWPu0uHYPQH8m3Q1GQDDU9sZwqnZN9eLDcmc
+	Yxg/njh0wf5SYwFJWRoV0mXnLvHkprBgLar25ChiOCK9E21EIrSFkp+mIYVFB/1UJNlp
+	6T/YOf9dCkK9iFp3Eh0xziMK/7hzvGcCkpFI9RPiRUkA/Bk/8qLWB7BJ9dY3XPwqXmLh
+	K3bICXo7y5Y0zGXIgqAFDIlmxaA+LyX/IiA5ifcoKbclHCZgidyOFc8TeichruetnJdG
+	riQA==
+X-Gm-Message-State: AKGB3mJfR5S2Fu+zhuPdmsgzmXb8jPUFr78tLENOTV5a19iXbAQqAxQD
+	l47ODbHRQMr0zrMPDLCgxR9+De9FxTiFDum57Sc=
+X-Google-Smtp-Source: ACJfBovHtSf8j0VznyTGgyE0yiJ8hOuNAYKCRbX+DSiO2FDHwZdpvTjXahmBnFNDKbSezyq9w5lr6kCjB1XOLC1r4U4=
+X-Received: by 10.129.99.4 with SMTP id x4mr403557ywb.225.1513618714110; Mon,
+	18 Dec 2017 09:38:34 -0800 (PST)
 MIME-Version: 1.0
-Reply-To: mark.asselstine@windriver.com
-Sender: asselsm@gmail.com
-Received: by 10.37.189.69 with HTTP; Mon, 18 Dec 2017 08:56:32 -0800 (PST)
-In-Reply-To: <711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
-References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
-	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
-	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
-	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
-	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
-	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
-From: Mark Asselstine <mark.asselstine@windriver.com>
-Date: Mon, 18 Dec 2017 11:56:32 -0500
-X-Google-Sender-Auth: 7KDeyj1Kob7xAfUSkbXGKF4_03k
-Message-ID: <CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
+Received: by 10.37.97.6 with HTTP; Mon, 18 Dec 2017 09:38:33 -0800 (PST)
+In-Reply-To: <20171214173633.16405-2-raj.khem@gmail.com>
+References: <20171214173633.16405-1-raj.khem@gmail.com>
+	<20171214173633.16405-2-raj.khem@gmail.com>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Mon, 18 Dec 2017 18:38:33 +0100
+Message-ID: <CALbNGRTpjb5cGpe2OPAVr5AL6cZ3oNt28c-SiptkDZsYc=Yepw@mail.gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-xfce][PATCH 2/5] gtk-xfce-engine: Fix build with glib-2.0 > 2.53
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,61 +56,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 16:56:32 -0000
+X-List-Received-Date: Mon, 18 Dec 2017 17:38:33 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Mon, Dec 18, 2017 at 11:37 AM, Alexander Kanavin
-<alexander.kanavin@linux.intel.com> wrote:
-> On 12/18/2017 06:15 PM, Mark Asselstine wrote:
->>
->> On Mon, Dec 18, 2017 at 10:36 AM, Christopher Larson <kergoth@gmail.com>
->> wrote:
->>>
->>> All our python recipes should be explicitly listing the python module
->>> packages they require. No python module recipes should be depending on
->>> python-modules or python3-modules, but explicitly what they require.
->>
->>
->> This is a giant PITA for little gain in my opinion. The typical python
->> 'vehicles' to define dependencies, things like setup.py, requires.txt,
->> requirements.txt..., never bother to list stdlibs. These are standard
->> libs that are just expected to be there. If a system is being
->> installed with only select python modules it will behave differently
->> than python found on any other system violating the rule of least
->> surprise. On top of this most of these modules are ~40K in size and
->> there are roughly 60 in the stdlib so the size gain in installing a
->> few vs. all of them is extremely negligible. All of this seems to add
->> way more work and churn that outweighs any real benefit.
->
->
-> I tend to agree with this. Add also the situation that the yocto project
-> needs to upgrade oe-core to python 3.6 as soon as possible, and to 3.7 soon
-> after, no one has enough time to do this rather non-trivial job, and I'm
-> beginning to wonder if the best way out is to remove the module splitting
-> altogether, and write a clean, simple and maintainable python3 recipe from
-> scratch with minimal amount of custom patching and hopefully no write-only
-> hacks.
->
-> Alex
+On Thu, Dec 14, 2017 at 6:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Thanks Alex for the support. To get a better idea as to what the size
-delta is I took the installed sizes from a rootfs logfile and the
-total size for all modules (python2.7) is 6.5M python-misc is almost
-2M of this and python-codecs contributing over 0.5M. The savings will
-never be the full 6.5M as there will always be python-lang and some
-other modules needed. There was a time where 32M restrictions existed
-are some systems but are we really seeing devices with these
-restrictions any more? what about exploring not shipping the pyc
-files? I would much rather see this than imposing so much work and
-churn for very little gain. Anyways, maybe this isn't the best forum
-for this and it should be brought up to the architecture group.
-
-Mark
-
+> Fixes errors like
+> UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd6 in position 980:
+> invalid continuation byte
+> Makefile:737: recipe for target 'xfce_typebuiltin.h' failed
 >
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> Seems patch 2-5 of this series did not make it into patchwork (->
+master-next).
+
+Andreas
 
