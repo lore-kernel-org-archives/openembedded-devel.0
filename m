@@ -1,48 +1,52 @@
-Return-Path: <adrian.ratiu@ni.com>
-Received: from mx0b-00010702.pphosted.com (mx0a-00010702.pphosted.com
-	[148.163.156.75])
-	by mail.openembedded.org (Postfix) with ESMTP id 1291378213
+Return-Path: <asselsm@gmail.com>
+Received: from mail-yb0-f193.google.com (mail-yb0-f193.google.com
+	[209.85.213.193])
+	by mail.openembedded.org (Postfix) with ESMTP id DE95671C42
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 14:00:50 +0000 (UTC)
-Received: from pps.filterd (m0098780.ppops.net [127.0.0.1])
-	by mx0a-00010702.pphosted.com (8.16.0.21/8.16.0.21) with SMTP id
-	vBIDuVjc008494 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 08:00:51 -0600
-Received: from ni.com (skprod3.natinst.com [130.164.80.24])
-	by mx0a-00010702.pphosted.com with ESMTP id 2ew1vuvfx4-1
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256
-	verify=NOT) for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 08:00:51 -0600
-Received: from us-aus-exhub1.ni.corp.natinst.com
-	(us-aus-exhub1.ni.corp.natinst.com [130.164.68.41])
-	by us-aus-skprod3.natinst.com (8.16.0.21/8.16.0.21) with ESMTPS id
-	vBIE0mYw009439
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES256-SHA384 bits=256 verify=NOT)
+	Mon, 18 Dec 2017 15:33:36 +0000 (UTC)
+Received: by mail-yb0-f193.google.com with SMTP id g198so4771932yba.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 08:00:48 -0600
-Received: from us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) by
-	us-aus-exhub1.ni.corp.natinst.com (130.164.68.41) with Microsoft SMTP
-	Server (TLS) id 15.0.1156.6; Mon, 18 Dec 2017 08:00:48 -0600
-Received: from ionel-work.natinst.com (130.164.49.7) by
-	us-aus-exhub2.ni.corp.natinst.com (130.164.68.32) with Microsoft SMTP
-	Server
-	id 15.0.1156.6 via Frontend Transport; Mon, 18 Dec 2017 08:00:47 -0600
-From: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Mon, 18 Dec 2017 16:01:09 +0200
-Message-ID: <20171218140110.1395-1-adrian.ratiu@ni.com>
-X-Mailer: git-send-email 2.15.1
+	Mon, 18 Dec 2017 07:33:38 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:reply-to:sender:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=wLJV/Ljy9P0//Zi+98Q/FFwovVzI4H7QBoMnG8Hfrz0=;
+	b=pVWO9/ns+38g6x4AUMoOSsd60QqDbkob/DTx6dFSNPKsEpZl0+8jWpfnbiVDMRt6Yq
+	gfXmCS8qRI431ia2ftxx4hnGtP+el0D+G4agX34sYrJD68Q9YyMP/5LdGITcfa4//0yf
+	yx0MusMLg8s8NV+FuDuDpDtMF6gYZ60nirlQEHzcgCASMfn+YOm6s9ePcilGzwR7JFgR
+	7Z0Uev9iBCTFJaeniuw0XI8QARlVmItA8vFnahvCUagP94LqG9BdD1+CzNP2Twn55Tv7
+	K7gbnTtJn98KyUtDr+lv47udNqZB4IynwBVFWgDOY7VaItUWqx1mNzfsoWuz+MyJeHFb
+	/+kA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:reply-to:sender:in-reply-to
+	:references:from:date:message-id:subject:to:cc;
+	bh=wLJV/Ljy9P0//Zi+98Q/FFwovVzI4H7QBoMnG8Hfrz0=;
+	b=g5H23wWFDZ95jxYEDK/t5BzNrDcX3qbim4q+WEnT3tIQjthhfe/xJ2UOMQRZ9qWSul
+	08HPB/DG9oiOBSqvKqtlksB5u46CAk1uZpJgpzX1doLWIdEIer7+Q9G+gDCESakq1qdL
+	wDFRDPdvbizg9H9m9X6P+0IOGrKs7shFFW+fE7tmIFqMiiThfbYz6CmCTtMCc976B1hz
+	zLkNzhPt3dXIxdaD/35r3bQv7kg8m08ptzzvmPcmfBvO2R3YTgGOOPnLOumeI3sKKZda
+	IlKgkhmNje5R+St2F2zRh/U7xe65ahArWFon8OfePo3sUJRe+nGL3tJfywptfEZpubYV
+	uNJg==
+X-Gm-Message-State: AKGB3mI9YMowiILGpSVYo+0r2uir6xkDmGagh5ON4BeeTf9zy98SEsdo
+	E1jJKOdI12ObopZUjNGL9A+gyeSkQb8TZsywIIPtI64i
+X-Google-Smtp-Source: ACJfBotDGKmHH1PMsJhe5RA8ju+WYmbIrjaWH8K+ENUr/MVI9dXt1p8DVGiZ4S28SfyCYBIF08aWrvyFJBW4UbKMslU=
+X-Received: by 10.129.97.5 with SMTP id v5mr115720ywb.394.1513611217647; Mon,
+	18 Dec 2017 07:33:37 -0800 (PST)
 MIME-Version: 1.0
-X-Proofpoint-Virus-Version: vendor=fsecure engine=2.50.10432:, ,
-	definitions=2017-12-18_10:, , signatures=0
-X-Proofpoint-Spam-Details: rule=inbound_policy_notspam policy=inbound_policy
-	score=30
-	priorityscore=1501 malwarescore=0 suspectscore=4 phishscore=0
-	bulkscore=0
-	spamscore=0 clxscore=1011 lowpriorityscore=0 mlxscore=0 impostorscore=0
-	mlxlogscore=999 adultscore=0 classifier=spam adjust=30 reason=mlx
-	scancount=1 engine=8.0.1-1711220000 definitions=main-1712180186
-Subject: [meta-oe][PATCH 1/2] Revert "iperf: remove depricated package"
+Reply-To: mark.asselstine@windriver.com
+Sender: asselsm@gmail.com
+Received: by 10.37.189.69 with HTTP; Mon, 18 Dec 2017 07:33:36 -0800 (PST)
+In-Reply-To: <CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
+References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
+	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
+From: Mark Asselstine <mark.asselstine@windriver.com>
+Date: Mon, 18 Dec 2017 10:33:36 -0500
+X-Google-Sender-Auth: fHpv5AbnFDAnMjb3M-BQByh6FyM
+Message-ID: <CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,155 +59,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 14:00:51 -0000
-Content-Type: text/plain
+X-List-Received-Date: Mon, 18 Dec 2017 15:33:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-This reverts commit 2b6cad9522582b0816251b5efbbc4601d037ae0e.
+On Sat, Dec 16, 2017 at 4:58 PM, Derek Straka <derek@asterius.io> wrote:
+> On Mon, Dec 4, 2017 at 2:00 PM, Mark Asselstine <
+> mark.asselstine@windriver.com> wrote:
+>
+>> Drop the json<-->simplejson patch instead opting to depend on
+>> python-json (part of core python libs). Beyond this the uprev is
+>> straightforward.
+>>
+>> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+>> ---
+>>  .../recipes-devtools/python/python-pyroute2.inc    | 23
+>> +++++--------------
+>>  .../import-simplejson-as-json.patch                | 26
+>> ----------------------
+>>  ...yroute2_0.3.22.bb => python-pyroute2_0.4.21.bb} |  0
+>>  ...route2_0.3.22.bb => python3-pyroute2_0.4.21.bb} |  0
+>>  4 files changed, 6 insertions(+), 43 deletions(-)
+>>  delete mode 100644 meta-python/recipes-devtools/
+>> python/python-pyroute2/import-simplejson-as-json.patch
+>>  rename meta-python/recipes-devtools/python/{python-pyroute2_0.3.22.bb =>
+>> python-pyroute2_0.4.21.bb} (100%)
+>>  rename meta-python/recipes-devtools/python/{python3-pyroute2_0.3.22.bb
+>> => python3-pyroute2_0.4.21.bb} (100%)
+>>
+>> diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc
+>> b/meta-python/recipes-devtools/python/python-pyroute2.inc
+>> index da1d4cd..521162c 100644
+>> --- a/meta-python/recipes-devtools/python/python-pyroute2.inc
+>> +++ b/meta-python/recipes-devtools/python/python-pyroute2.inc
+>> @@ -1,26 +1,15 @@
+>>  SUMMARY = "A pure Python netlink and Linux network configuration library"
+>>  LICENSE = "GPLv2 & Apache-2.0"
+>>  LIC_FILES_CHKSUM = "file://LICENSE.GPL.v2;md5=
+>> b234ee4d69f5fce4486a80fdaf4a4263 \
+>> -                    file://LICENSE.Apache.v2;md5=
+>> 3b83ef96387f14655fc854ddc3c6bd57"
+>> +                    file://LICENSE.Apache.v2;md5=
+>> 34281e312165f843a2b7d1f114fe65ce"
+>>
+>> -SRC_URI[md5sum] = "733adb362b6603c7269c0b3df3045a55"
+>> -SRC_URI[sha256sum] = "5cdf44656cf623369f0cbf183d9d14
+>> a1a50ebdffbd50d4e30ffda62c0a05d7b3"
+>> -
+>> -SRC_URI += "file://import-simplejson-as-json.patch"
+>> +SRC_URI[md5sum] = "9c251543c4282a2f8b1a8d6aa8afc688"
+>> +SRC_URI[sha256sum] = "7afad28ee0a0f3e7c34adaa9f953d0
+>> 0560ed9910203e93f107833b6e8d151171"
+>>
+>>
+> Can we remove the extra path prepend now?
+>
+>>  FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyroute2:"
 
-iperf3 is a complete rewrite which does not have full parity with
-iperf2 and in some cases it's intentionally backwards incompatble so
-moving to iperf3 is not possible for everyone. That's why the project
-got forked.
+Sure. I will send a V2 once we get agreement on the RDEPENDS.
 
-These recipes/packages can live side by side because their projects
-are now independent (separate codebases and maintainers).
+>>
+>>  inherit pypi
+>>
+>> -RDEPENDS_${PN} += "\
+>> -  ${PYTHON_PN}-distutils \
 
-Signed-off-by: Ioan-Adrian Ratiu <adrian.ratiu@ni.com>
----
- .../iperf-2.0.5/0001-fix-out-of-tree-config.patch  | 52 ++++++++++++++++++++++
- .../iperf/iperf-2.0.5/0002-fix-bool-size-m4.patch  | 16 +++++++
- .../iperf/iperf-2.0.5/iperf-2.0.5_ManPage.patch    |  8 ++++
- meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb     | 23 ++++++++++
- 4 files changed, 99 insertions(+)
- create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
- create mode 100644 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0002-fix-bool-size-m4.patch
- create mode 100755 meta-oe/recipes-benchmark/iperf/iperf-2.0.5/iperf-2.0.5_ManPage.patch
- create mode 100644 meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
+stdlib
 
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
-new file mode 100644
-index 000000000..e8a029790
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0001-fix-out-of-tree-config.patch
-@@ -0,0 +1,52 @@
-+iperf: fix out of tree configuration
-+
-+The configure step uses a package header to check for support of types/declares,
-+this package header encapsulates all the required system header for providing
-+the needed resources. When configured from an out of tree directory the package
-+header is not found due to the hard path.
-+We now make the path for package header relative to our 'srcdir' so it is
-+found appropriately.
-+
-+Signed-off-by: Awais Belal <awais_belal@mentor.com>
-+---
-+diff --git a/configure.ac b/configure.ac
-+index 2b3fd20..d420f9e 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -176,8 +176,8 @@ dnl Check for system services
-+ 
-+ dnl check for multicast
-+ if test "$ac_cv_multicast" != no; then
-+-  AC_CHECK_TYPES(struct ip_mreq,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct ip_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_DECLS(IP_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
-+   AC_MSG_CHECKING(for multicast support)
-+   ac_cv_multicast=no
-+   if test "$ac_cv_have_decl_IP_ADD_MEMBERSHIP" = yes; then
-+@@ -193,9 +193,9 @@ fi
-+ 
-+ dnl check for IPv6
-+ if test "$ac_cv_have_ipv6" != no; then
-+-  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "compat/headers_slim.h"])
-+-  AC_CHECK_DECLS(AF_INET6,,,[#include "compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct sockaddr_storage,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_TYPES(struct sockaddr_in6,,,[#include "${srcdir}/compat/headers_slim.h"])
-++  AC_CHECK_DECLS(AF_INET6,,,[#include "${srcdir}/compat/headers_slim.h"])
-+   AC_MSG_CHECKING(for IPv6 headers and structures)
-+   ac_cv_have_ipv6=no
-+   if test "$ac_cv_type_struct_sockaddr_storage" = yes; then
-+@@ -211,9 +211,9 @@ fi
-+ 
-+ if test "$ac_cv_have_ipv6" = yes; then
-+   if test "$ac_cv_multicast" = yes; then
-+-    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "compat/headers_slim.h"])
-+-    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "compat/headers_slim.h"])
-+-    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "compat/headers_slim.h"])
-++    AC_CHECK_TYPES(struct ipv6_mreq,,,[#include "${srcdir}/compat/headers_slim.h"])
-++    AC_CHECK_DECLS(IPV6_ADD_MEMBERSHIP,,,[#include "${srcdir}/compat/headers_slim.h"])
-++    AC_CHECK_DECLS(IPV6_MULTICAST_HOPS,,,[#include "${srcdir}/compat/headers_slim.h"])
-+     AC_MSG_CHECKING(for IPv6 multicast support)
-+     ac_cv_have_ipv6_multicast=no
-+     if test "$ac_cv_type_struct_ipv6_mreq" = yes; then
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0002-fix-bool-size-m4.patch b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0002-fix-bool-size-m4.patch
-new file mode 100644
-index 000000000..348e316ce
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/0002-fix-bool-size-m4.patch
-@@ -0,0 +1,16 @@
-+--- iperf-2.0.5/m4/dast.m4.orig	2016-06-15 11:42:03.945581785 -0400
-++++ iperf-2.0.5/m4/dast.m4	2016-06-15 11:42:11.053581641 -0400
-+@@ -11,7 +11,12 @@
-+ 
-+ AC_DEFUN(DAST_CHECK_BOOL, [
-+ 
-+-AC_CHECK_SIZEOF(bool)
-++if test "$ac_cv_header_stdbool_h" = yes; then
-++  AC_CHECK_SIZEOF(bool,,[#include <stdbool.h>])
-++else
-++    AC_CHECK_SIZEOF(bool)
-++fi
-++
-+ if test "$ac_cv_sizeof_bool" = 0 ; then
-+   AC_DEFINE(bool, int)
-+ fi
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/iperf-2.0.5_ManPage.patch b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/iperf-2.0.5_ManPage.patch
-new file mode 100755
-index 000000000..12e8f4631
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf/iperf-2.0.5/iperf-2.0.5_ManPage.patch
-@@ -0,0 +1,8 @@
-+diff --git iperf-2.0.5/man/Makefile.am iperf-2.0.5/man/Makefile.am
-+ index ed97bc6..728873f 100644
-+--- iperf-2.0.5/man/Makefile.am
-++++ iperf-2.0.5/man/Makefile.am
-+@@ -1,2 +1 @@
-+-man_MANS = iperf.1
-+-dist_man_MANS = $(man_MANS)
-++dist_man_MANS = iperf.1
-diff --git a/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
-new file mode 100644
-index 000000000..9981d8275
---- /dev/null
-+++ b/meta-oe/recipes-benchmark/iperf/iperf_2.0.5.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Iperf is a tool to measure maximum TCP bandwidth, allowing the tuning of various parameters and UDP characteristics"
-+HOMEPAGE = "http://dast.nlanr.net/Projects/Iperf/"
-+SECTION = "console/network"
-+LICENSE = "BSD-2-Clause"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=e8478eae9f479e39bc34975193360298"
-+
-+SRC_URI = " ${SOURCEFORGE_MIRROR}/iperf/${BP}.tar.gz \
-+            file://iperf-2.0.5_ManPage.patch \
-+            file://0001-fix-out-of-tree-config.patch \
-+            file://0002-fix-bool-size-m4.patch \
-+          "
-+
-+SRC_URI[md5sum] = "44b5536b67719f4250faed632a3cd016"
-+SRC_URI[sha256sum] = "636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b"
-+
-+S = "${WORKDIR}/${BP}"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF = "--exec-prefix=${STAGING_DIR_HOST}${layout_exec_prefix}"
-+
-+PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'ipv6', 'ipv6', '', d)}"
-+PACKAGECONFIG[ipv6] = "--enable-ipv6,--disable-ipv6,"
--- 
-2.15.1
+>> -  ${PYTHON_PN}-simplejson \
 
+per the commit log, use json instead to match upstream expectations.
+
+>> -  ${PYTHON_PN}-multiprocessing \
+
+stdlib
+
+>> -  ${PYTHON_PN}-io ${PYTHON_PN}-pprint \
+
+stdlib
+
+>> -  ${PYTHON_PN}-pickle \
+
+stdlib
+
+>> -  ${PYTHON_PN}-logging \
+
+stdlib
+
+>> -  ${PYTHON_PN}-threading \
+
+stdlib
+
+>> -  ${PYTHON_PN}-textutils \
+
+No reference in this version of pyroute2
+
+>> -  ${PYTHON_PN}-subprocess \
+
+stdlib
+
+>> -  ${PYTHON_PN}-netclient \
+
+No reference in this version of pyroute2
+
+>> -"
+>>
+> None of these other dependencies are needed for a minimal python install?
+
+Sorry, I should have covered this in my commit log. This was a mistake on my
+part but was intentional since these are all stdlib modules as I have show
+above and as is described in the the pyroute2 README:
+"Pyroute2 is a pure Python **netlink** library. It requires only Python stdlib"
+
+All stdlib modules are listed as RDEPENDS in python[3]-modules so we are
+only making work for ourselves breaking these out here. I will put them back
+but if we go this route, of listed stdlib RDEPENDS, then there is a lot of work
+to ensure this is consistent across all our python recipes.
+
+
+Mark
+
+
+>
+>> +RDEPENDS_${PN} += " \
+>> +    ${PYTHON_PN}-json \
+>> +    "
+>> diff --git a/meta-python/recipes-devtools/python/python-
+>> pyroute2/import-simplejson-as-json.patch b/meta-python/recipes-
+>> devtools/python/python-pyroute2/import-simplejson-as-json.patch
+>> deleted file mode 100644
+>> index d73da07..0000000
+>> --- a/meta-python/recipes-devtools/python/python-
+>> pyroute2/import-simplejson-as-json.patch
+>> +++ /dev/null
+>> @@ -1,26 +0,0 @@
+>> -Upstream-Status: Inappropriate [wrong dependency]
+>> -
+>> -Subject: [PATCH] import simplejson as json
+>> -
+>> -At runtime python-pyroute2 tries to import json, but the module is not
+>> -available, import simplejson as json solve the issue.
+>> -
+>> -Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
+>> ----
+>> - pyroute2/netlink/rtnl/ifinfmsg.py | 2 +-
+>> - 1 file changed, 1 insertion(+), 1 deletion(-)
+>> -
+>> -diff --git a/pyroute2/netlink/rtnl/ifinfmsg.py b/pyroute2/netlink/rtnl/
+>> ifinfmsg.py
+>> -index 4f14f25..55643eb 100644
+>> ---- a/pyroute2/netlink/rtnl/ifinfmsg.py
+>> -+++ b/pyroute2/netlink/rtnl/ifinfmsg.py
+>> -@@ -1,5 +1,5 @@
+>> - import os
+>> --import json
+>> -+import simplejson as json
+>> - import errno
+>> - import select
+>> - import struct
+>> ---
+>> -2.1.4
+>> -
+>> diff --git a/meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb
+>> b/meta-python/recipes-devtools/python/python-pyroute2_0.4.21.bb
+>> similarity index 100%
+>> rename from meta-python/recipes-devtools/python/python-pyroute2_0.3.22.bb
+>> rename to meta-python/recipes-devtools/python/python-pyroute2_0.4.21.bb
+>> diff --git a/meta-python/recipes-devtools/python/python3-
+>> pyroute2_0.3.22.bb b/meta-python/recipes-devtools/python/python3-
+>> pyroute2_0.4.21.bb
+>> similarity index 100%
+>> rename from meta-python/recipes-devtools/python/python3-pyroute2_0.3.22.bb
+>> rename to meta-python/recipes-devtools/python/python3-pyroute2_0.4.21.bb
+>> --
+>> 2.7.4
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
