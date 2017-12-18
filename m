@@ -1,38 +1,36 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
-	[209.85.216.194])
-	by mail.openembedded.org (Postfix) with ESMTP id DA6EA78087
+Return-Path: <sjl@vctlabs.com>
+Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
+	by mail.openembedded.org (Postfix) with ESMTP id DB74E7808D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 20:55:10 +0000 (UTC)
-Received: by mail-qt0-f194.google.com with SMTP id m59so21684668qte.11
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 12:55:12 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=/SX0XAVMWWJ9cD1J+Mh43VS/QAS6tuGfh7XKywMhRiw=;
-	b=HvC53b0t5whHUmwBYcCR7HmJ0WRJVvgVQIjHFy5Xd5sk7073vOD6BL7SEIPPQZZirN
-	Mk34DSMcG1q6NOYLcY2j3T1W/IMyB0LBQxGXc7nys3UCDjPwksdl0PBqmcVCkImDJDV/
-	BW7O7ZEO1gpQq/vPNIfYt3O6OimO6PytzHddFx2Uajp2sk8wptDwwfzqZBXdkysBWBJL
-	GSMrybCW9G6wxR1onxKpJnatW7gqfggq5lOIv69LUn6yBLV24d/MhvMUYbV20UXRVu8h
-	tVHdiTYztBB4oz3mLaRnR3kBI0tAvI8q8ArG8d4CC4+oyA2zwkX0KNjQGBV1HK+8CZ0d
-	E7LA==
-X-Gm-Message-State: AKGB3mLyZPC6tJRKB+rfb/nNJWrrYIbSGoV/JABWknz1FD3by6Z/zCMX
-	xzkO5KoNa61hAUH5nEZo7h3YYYpt
-X-Google-Smtp-Source: ACJfBosizWh6m7LnVq0mhE3sJ/IyU2FIyfv2001xGe0QKVAHrBKypa64vJe+qj+F09S4vg2vkSimgw==
-X-Received: by 10.200.8.11 with SMTP id u11mr1622668qth.315.1513630511759;
-	Mon, 18 Dec 2017 12:55:11 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	b47sm8816514qtb.89.2017.12.18.12.55.11
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Dec 2017 12:55:11 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Dec 2017 15:55:04 -0500
-Message-Id: <1513630504-19177-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask-login: update to version 0.4.1
+	Mon, 18 Dec 2017 21:00:22 +0000 (UTC)
+Received: by dent.vctlabs.com (Postfix, from userid 1000)
+	id 6A17728020A; Mon, 18 Dec 2017 13:02:56 -0800 (PST)
+Date: Mon, 18 Dec 2017 13:02:56 -0800
+From: "S. Lockwood-Childs" <sjl@vctlabs.com>
+To: Derek Straka <derek@asterius.io>
+Message-ID: <20171218210256.GQ27580@vctlabs.com>
+Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
+	Derek Straka <derek@asterius.io>,
+	Mark Asselstine <mark.asselstine@windriver.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
+	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
+	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
+	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
+	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
+	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
+	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
+	<CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
+User-Agent: Mutt/1.5.23 (2014-03-12)
+Cc: Mark Asselstine <mark.asselstine@windriver.com>,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,41 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 20:55:11 -0000
+X-List-Received-Date: Mon, 18 Dec 2017 21:00:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-flask-login.inc            | 4 ++--
- .../{python-flask-login_0.4.0.bb => python-flask-login_0.4.1.bb}      | 0
- .../{python3-flask-login_0.4.0.bb => python3-flask-login_0.4.1.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-flask-login_0.4.0.bb => python-flask-login_0.4.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-login_0.4.0.bb => python3-flask-login_0.4.1.bb} (100%)
+On Mon, Dec 18, 2017 at 03:17:25PM -0500, Derek Straka wrote:
+> I have several customers who have optimized for space and would like to see
+> the capability maintained unless core removes the ability to split python
+> packages out.  They also remove the *.py files in favor of *.pyo files (via
+> a custom packaging mechanism).  I have automated tests that go through the
+> module importing on each of the meta-python packages to ensure it works on
+> minimal python installations.  When other contributors don't do provide
+> that functionality, I either catch it when I do package update or when it
+> breaks for one of my customers.  I'm fine if you don't want to perform the
+> checks yourself and it breaks my use case with missing dependencies, but I
+> would prefer that you don't remove the dependencies that are currently in
+> place.  Thanks.
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-login.inc b/meta-python/recipes-devtools/python/python-flask-login.inc
-index 7dddba0..59eb64f 100644
---- a/meta-python/recipes-devtools/python/python-flask-login.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-login.inc
-@@ -6,8 +6,8 @@ HOMEPAGE = " https://github.com/maxcountryman/flask-login"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=8aa87a1cd9fa41d969ad32cfdac2c596"
- 
--SRC_URI[md5sum] = "e050efaa2c4dbc2d97f480a70f4d44aa"
--SRC_URI[sha256sum] = "d25e356b14a59f52da0ab30c31c2ad285fa23a840f0f6971df7ed247c77082a7"
-+SRC_URI[md5sum] = "25b34c74bd509792f291c16e184225df"
-+SRC_URI[sha256sum] = "c815c1ac7b3e35e2081685e389a665f2c74d7e077cb93cecabaea352da4752ec"
- 
- PYPI_PACKAGE = "Flask-Login"
- 
-diff --git a/meta-python/recipes-devtools/python/python-flask-login_0.4.0.bb b/meta-python/recipes-devtools/python/python-flask-login_0.4.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-login_0.4.0.bb
-rename to meta-python/recipes-devtools/python/python-flask-login_0.4.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-login_0.4.0.bb b/meta-python/recipes-devtools/python/python3-flask-login_0.4.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-login_0.4.0.bb
-rename to meta-python/recipes-devtools/python/python3-flask-login_0.4.1.bb
--- 
-2.7.4
-
+Me too -- some of my projects still use NAND for rootfs, where space is tight and
+ability to split out python modules is very useful. Thus it is not an unused
+feature, though many projects have SD/eMMC for rootfs and those ones generally
+will not care about it.
 
