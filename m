@@ -1,38 +1,28 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id C94957808D
+Return-Path: <Mark.Asselstine@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id 1C5887833C
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 21:01:18 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id x7so2655366qkb.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 13:01:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=Z8LGIrqlCQvo8ttBel1OroQ3sfYF2lMjOC2W63hQOYU=;
-	b=cGiBMmn7inD7etFHoF4Mbq+QYdmAqocQHRUkit2sBY3+YZSzRKlGIEuZbwEtsdi1c1
-	CMDroXJgpkz1yO1J84mSf9bAxAHCuxmj9533b6RB8To6C4mmFc2I4j4dm0XxGe2wLaSV
-	sJyvcMS2ET9SmkT/RoVPS6eMsQtzoBOo2wuUXREV8S+gnLw5xUuHv4FSfGy9AvSojINY
-	lfAOtFPf6yHURJdRFncimvqoZAafileYqoW5Ypw1DCEN1fYaIz4OwadQOHyP+nR87oJK
-	bNmgOorjMBDyL9jGTGSwkxe6cAmT9mHq+EkmGpKo9b7lFoF5HUZwDkjbYgqM1PPpOMkN
-	5wtQ==
-X-Gm-Message-State: AKGB3mKEP9AUU+ADJLKi55BaRfpXWM/rjtoBlW2yw3Yf4r9xlFWf/EpL
-	O73/IXB5X9Grqhqtb+8cJHV32ec4
-X-Google-Smtp-Source: ACJfBouqmPhXxUivw4C1eUCqvIZsuU+rjvn+T2W7sZEJbO7ZflkxDgfstAeSMPvB/h7PLwlMxGrCvA==
-X-Received: by 10.55.43.89 with SMTP id r86mr1520088qkh.33.1513630879498;
-	Mon, 18 Dec 2017 13:01:19 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	d205sm8534157qke.21.2017.12.18.13.01.18
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 18 Dec 2017 13:01:19 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 18 Dec 2017 16:00:50 -0500
-Message-Id: <1513630850-17087-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pexpect: update to version 4.3.1
+	Mon, 18 Dec 2017 21:01:49 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id vBIL1mU9021902
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Mon, 18 Dec 2017 13:01:48 -0800 (PST)
+Received: from yow-masselst-lx1.localnet (128.224.25.142) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.50) with Microsoft SMTP Server id
+	14.3.361.1; Mon, 18 Dec 2017 13:01:47 -0800
+From: Mark Asselstine <mark.asselstine@windriver.com>
+To: Tim Orling <ticotimo@gmail.com>
+Date: Mon, 18 Dec 2017 16:01:46 -0500
+Message-ID: <21648831.s208P8NGHT@yow-masselst-lx1>
+Organization: Wind River
+In-Reply-To: <1712771F-CFE1-4566-BC40-FD3D8D72F729@gmail.com>
+References: <1513359926-17087-1-git-send-email-mark.asselstine@windriver.com>
+	<CADNbA1qS8U_+PraE2zBc7T28XhADftoo+7ffmbQhT2Jg674bbg@mail.gmail.com>
+	<1712771F-CFE1-4566-BC40-FD3D8D72F729@gmail.com>
+MIME-Version: 1.0
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][rocko][PATCH 2/2] python-twisted: restore RDEPENDS on -news for py2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,48 +35,175 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 21:01:18 -0000
+X-List-Received-Date: Mon, 18 Dec 2017 21:01:50 -0000
+Content-Transfer-Encoding: 7Bit
+Content-Type: text/plain; charset="us-ascii"
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- meta-python/recipes-devtools/python/python-pexpect.inc            | 8 ++------
- .../python/{python-pexpect_4.3.0.bb => python-pexpect_4.3.1.bb}   | 0
- .../python/{python3-pexpect_4.3.0.bb => python3-pexpect_4.3.1.bb} | 0
- 3 files changed, 2 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pexpect_4.3.0.bb => python-pexpect_4.3.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pexpect_4.3.0.bb => python3-pexpect_4.3.1.bb} (100%)
+On Friday, December 15, 2017 10:33:10 PM EST Tim Orling wrote:
+> > On Dec 15, 2017, at 12:01 PM, Derek Straka <derek@asterius.io> wrote:
+> > 
+> > That would be useful.  I'm working through automated tests that build
+> > every
+> > package into a minimal rootfs and then attempt to perform all of imports
+> > to
+> > make sure everything is available for use.  I'm hoping to roll that out in
+> > the next couple of weeks.  Thanks for catching this regression.
+> 
+> The same type of testing is needed in OE-core. One would hope not, but then
+> there is reality.
 
-diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
-index dc8bcc9..28d7b60 100644
---- a/meta-python/recipes-devtools/python/python-pexpect.inc
-+++ b/meta-python/recipes-devtools/python/python-pexpect.inc
-@@ -4,15 +4,11 @@ SECTION = "devel/python"
- LICENSE = "ISC"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
- 
--SRCNAME = "pexpect"
--
--SRC_URI[md5sum] = "047a486dcd26134b74f2e67046bb61a0"
--SRC_URI[sha256sum] = "00ab0872f80f5db740499e7a1283a7c3b97bea542d72df84d83dea17d0afd2d9"
-+SRC_URI[md5sum] = "16aa4549136b2d1b2bf1e0e9788d75a6"
-+SRC_URI[sha256sum] = "8e287b171dbaf249d0b06b5f2e88cb7e694651d2d0b8c15bccb83170d3c55575"
- 
- UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pexpect"
- 
--S = "${WORKDIR}/${SRCNAME}-${PV}"
--
- RDEPENDS_${PN} = "\
-     ${PYTHON_PN}-core \
-     ${PYTHON_PN}-io \
-diff --git a/meta-python/recipes-devtools/python/python-pexpect_4.3.0.bb b/meta-python/recipes-devtools/python/python-pexpect_4.3.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pexpect_4.3.0.bb
-rename to meta-python/recipes-devtools/python/python-pexpect_4.3.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pexpect_4.3.0.bb b/meta-python/recipes-devtools/python/python3-pexpect_4.3.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pexpect_4.3.0.bb
-rename to meta-python/recipes-devtools/python/python3-pexpect_4.3.1.bb
--- 
-2.7.4
+Tim,
+
+Not sure if you are following the discussion on my other patch series (python-
+pyroute2). But yes, if there is an effort to force python recipes to list 
+stdlibs this is the only valid approach as the python "vehicles" (setup.py, 
+requirements.txt...) don't _ever_ list stdlibs. Even with an automated 
+approach I am not enthusiastic about forcing the listing of required stdlibs 
+for the sake of a few MB of space.
+
+Mark
+
+> > On Dec 15, 2017 2:35 PM, "Mark Asselstine" <mark.asselstine@windriver.com>
+> > 
+> > wrote:
+> >> I work with a lot of python recipes in meta-cloud-services and
+> >> especially the openstack packages have a large number of dependencies.
+> >> Find attached a basic script I have written to help parse
+> >> requirements.txt files. It might help you out with this work.
+> >> 
+> >> Anyway, I will send out a V2 with the additional cherrypicks.
+> >> 
+> >>> On Fri, Dec 15, 2017 at 2:30 PM, Derek Straka <derek@asterius.io> wrote:
+> >>> Yeah.  Agreed.  These commits are me cleaning up the RDEPENDS to work
+> >> 
+> >> with
+> >> 
+> >>> minimal python installs.  Meta-python has been pretty bad about setting
+> >> 
+> >> the
+> >> 
+> >>> dependencies.  I just missed the news package.  Thanks.
+> >>> 
+> >>> On Dec 15, 2017 2:22 PM, "Mark Asselstine" <
+> >> 
+> >> mark.asselstine@windriver.com>
+> >> 
+> >>> wrote:
+> >>>> No problem. Unfortunately your commit log was thin on information so I
+> >>>> had to make some assumptions as to what you were doing in the commit.
+> >>>> I could have easily misinterpreted.
+> >>>> 
+> >>>> On Fri, Dec 15, 2017 at 2:19 PM, Derek Straka <derek@asterius.io>
+> >> 
+> >> wrote:
+> >>>>> Sure.  I wasn't clear and even then I misread the 1/2 patch and
+> >> 
+> >> thought I
+> >> 
+> >>>>> removed news from core and not the base package RDEPENDS.
+> >>>>> 
+> >>>>> On Dec 15, 2017 2:08 PM, "Mark Asselstine" <
+> >>>> 
+> >>>> mark.asselstine@windriver.com>
+> >>>> 
+> >>>>> wrote:
+> >>>>> 
+> >>>>> The RDEPENDS are not for core, these are RDEPENDS_${PN}, ie. if you
+> >>>>> don't know what parts you want you install ${PN} and get everything.
+> >>>>> We can straighten this up though if my thoughts are incorrect. I have
+> >>>>> to send a V2 anyway as I was hasty and missed the cherrypick of a
+> >>>>> bunch of dependencies you added for automat and others.
+> >>>>> 
+> >>>>> Mark
+> >>>>> 
+> >>>>> On Fri, Dec 15, 2017 at 1:32 PM, Derek Straka <derek@asterius.io>
+> >> 
+> >> wrote:
+> >>>>>> Is it actually required for core?  I thought I went through and
+> >> 
+> >> verified
+> >> 
+> >>>>>> that news was a stand alone module.
+> >>>>>> 
+> >>>>>> On Dec 15, 2017 12:46 PM, "Mark Asselstine" <
+> >>>> 
+> >>>> mark.asselstine@windriver.com
+> >>>> 
+> >>>>>> wrote:
+> >>>>>>> Although this plugin has not yet been ported to py3 it is available
+> >> 
+> >> in
+> >> 
+> >>>>>>> py2. The previous commit isn't clear about what is being addressed
+> >> 
+> >> but
+> >> 
+> >>>>>>> I assume it is:
+> >>>>>>> 
+> >>>>>>> nothing provides python3-twisted-news needed by
+> >>>>> 
+> >>>>> python3-twisted-17.9.0-r0.
+> >>>>> 
+> >>>>>>> corei7_64
+> >>>>>>> 
+> >>>>>>> For py2 this package is valid and so we should maintain the
+> >> 
+> >> RDEPENDS,
+> >> 
+> >>>>>>> restore this RDEPENDS for py2.
+> >>>>>>> 
+> >>>>>>> Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
+> >>>>>>> ---
+> >>>>>>> meta-python/recipes-devtools/python/python-twisted_17.9.0.bb | 6
+> >>>> 
+> >>>> ++++++
+> >>>> 
+> >>>>>>> 1 file changed, 6 insertions(+)
+> >>>>>>> 
+> >>>>>>> diff --git a/meta-python/recipes-devtools/python/python-
+> >>>> 
+> >>>> twisted_17.9.0.bb
+> >>>> 
+> >>>>>>> b/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
+> >>>>>>> index 2be1709..7fc8c65 100644
+> >>>>>>> --- a/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
+> >>>>>>> +++ b/meta-python/recipes-devtools/python/python-twisted_17.9.0.bb
+> >>>>>>> @@ -2,3 +2,9 @@ inherit pypi setuptools
+> >>>>>>> require python-twisted.inc
+> >>>>>>> 
+> >>>>>>> RDEPENDS_${PN}-core += "${PYTHON_PN}-contextlib"
+> >>>>>>> +
+> >>>>>>> +# Not yet ported to py3 yet available in py2
+> >>>>>>> +# See src/twisted/python/_setup.py -- notPortedModules
+> >>>>>>> +RDEPENDS_${PN} += "\
+> >>>>>>> +    ${PN}-news \
+> >>>>>>> +    "
+> >>>>>>> --
+> >>>>>>> 2.7.4
+> >>>>>>> 
+> >>>>>>> --
+> >>>>>>> _______________________________________________
+> >>>>>>> Openembedded-devel mailing list
+> >>>>>>> Openembedded-devel@lists.openembedded.org
+> >>>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>>>> 
+> >>>>>> --
+> >>>>>> _______________________________________________
+> >>>>>> Openembedded-devel mailing list
+> >>>>>> Openembedded-devel@lists.openembedded.org
+> >>>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>>>> 
+> >>>>> --
+> >>>>> _______________________________________________
+> >>>>> Openembedded-devel mailing list
+> >>>>> Openembedded-devel@lists.openembedded.org
+> >>>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+> >>> 
+> >>> --
+> >>> _______________________________________________
+> >>> Openembedded-devel mailing list
+> >>> Openembedded-devel@lists.openembedded.org
+> >>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+
 
 
