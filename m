@@ -1,50 +1,38 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id E9E3D78087
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f172.google.com (mail-qk0-f172.google.com
+	[209.85.220.172])
+	by mail.openembedded.org (Postfix) with ESMTP id 32EEB7808D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 20:17:25 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1513628246; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=TlT8DV6lEbciyXkU3uMwGxWhs+c2de1Wn7AIWUK0Quw=;
-	b=h4R/REceDNUg8DzBcJGm/EWNzTCDMW1gI1EfQCFFMDRMbhttrpiYRrQ2mKGRgcqZHwoY0erh
-	8uec7gk8vVMHK4mamJY03TOYVT3I+AYROqJOPTxC8zfD+RgbA2tro+eEgugLy/AJfAHOpWda
-	WypNYjTr7WKMmGkVm7wtANXgy70=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-qk0-f171.google.com (mail-qk0-f171.google.com
-	[209.85.220.171])
-	by mxa.mailgun.org with ESMTP id 5a382256.7f8506e057f0-smtp-out-n02;
-	Mon, 18 Dec 2017 20:17:26 -0000 (UTC)
-Received: by mail-qk0-f171.google.com with SMTP id r184so12245384qke.8;
-	Mon, 18 Dec 2017 12:17:26 -0800 (PST)
-X-Gm-Message-State: AKGB3mK2rGsks0ztrcv+xm6SL+atDV6jAt8uEBaM4CD2z/isLozdQ2YZ
-	TR5q3/2JHaTDd8lLh6wMwW6o0JEmykrVEdTfxBE=
-X-Google-Smtp-Source: ACJfBosFYZ1C+jtreLxTtDGD3rl3fdDW0Vgd3jlHeh73EQBw+N1MMtiuctQRPsnJqCCOq4cn79i8516Nzot4QO7z3Hg=
-X-Received: by 10.55.191.1 with SMTP id p1mr1465742qkf.152.1513628246281; Mon,
-	18 Dec 2017 12:17:26 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.21.177 with HTTP; Mon, 18 Dec 2017 12:17:25 -0800 (PST)
-In-Reply-To: <CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
-References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
-	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
-	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
-	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
-	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
-	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
-	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
+	Mon, 18 Dec 2017 20:43:41 +0000 (UTC)
+Received: by mail-qk0-f172.google.com with SMTP id 8so19990450qkj.3
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Dec 2017 12:43:43 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=8eaMYaBiR3QTFT/oOMkYSxf3eyNNOE9ua5rgOtLnbrs=;
+	b=G81mMA5b4v/z+SJwzF8fhSbmlnTpcv/eMo0fGVNq2ME7N/WkvOLegPM6VliJ22iDPM
+	Fpoz04HHOTNgxhrh0w5pV8NanAkGOWixEe90fbScs5eBPpzMufb654K0leR0UN2Uy2bs
+	HUF1D4TMmcH142o5ZWlIQtUKO6sgJ2CppcKBmmK4aVjM7eB3CNfo1z+Vt2V3JSe1NQyw
+	PH+j2IZ3NLqRKeQz3fyHKc/WFGSPQW67zSq//oAj86rPE1ayBP66q7aRISGyWAKBokL/
+	lADUU5UkbaMT1u6iD6ht85SmCmt0FrTjXUktENmrFSjTpc1PS5gO+B9TJszrVCotTQvd
+	TL+g==
+X-Gm-Message-State: AKGB3mJk7KFED6h6q4G93Q1vDLh+s+edWe5+YkGPp1Yqa+hXb6RIvUoB
+	wXe5r7GvA4evC4AWCqeT4xFFPpLs
+X-Google-Smtp-Source: ACJfBouBfYS+NhfH8xjYCTHbiidg1CsxP8ygT/ga5e7vuW+KXCyPyV6QKddq/YOiqYeTrG0ZWiC7bg==
+X-Received: by 10.55.175.135 with SMTP id y129mr1608159qke.128.1513629822634; 
+	Mon, 18 Dec 2017 12:43:42 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	y62sm3919659qkb.54.2017.12.18.12.43.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 18 Dec 2017 12:43:42 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Mon, 18 Dec 2017 15:17:25 -0500
-X-Gmail-Original-Message-ID: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
-Message-ID: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
-To: Mark Asselstine <mark.asselstine@windriver.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Dec 2017 15:43:21 -0500
+Message-Id: <1513629801-30098-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-webserver][PATCH] phpmyadmin: update to version 4.7.6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,88 +45,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 20:17:26 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 18 Dec 2017 20:43:42 -0000
 
-I have several customers who have optimized for space and would like to see
-the capability maintained unless core removes the ability to split python
-packages out.  They also remove the *.py files in favor of *.pyo files (via
-a custom packaging mechanism).  I have automated tests that go through the
-module importing on each of the meta-python packages to ensure it works on
-minimal python installations.  When other contributors don't do provide
-that functionality, I either catch it when I do package update or when it
-breaks for one of my customers.  I'm fine if you don't want to perform the
-checks yourself and it breaks my use case with missing dependencies, but I
-would prefer that you don't remove the dependencies that are currently in
-place.  Thanks.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ .../recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb     | 38 ++++++++++++++++++++++
+ 1 file changed, 38 insertions(+)
+ create mode 100644 meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
 
--Derek
+diff --git a/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
+new file mode 100644
+index 0000000..672db58
+--- /dev/null
++++ b/meta-webserver/recipes-php/phpmyadmin/phpmyadmin_4.7.6.bb
+@@ -0,0 +1,38 @@
++SUMMARY = "Web-based MySQL administration interface"
++HOMEPAGE = "http://www.phpmyadmin.net"
++# Main code is GPLv2, vendor/tecnickcom/tcpdf is under LGPLv3, js/jquery is under MIT
++LICENSE = "GPLv2 & LGPLv3 & MIT"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=b234ee4d69f5fce4486a80fdaf4a4263 \
++                    file://vendor/tecnickcom/tcpdf/LICENSE.TXT;md5=5c87b66a5358ebcc495b03e0afcd342c \
++                    file://js/jquery/MIT-LICENSE.txt;md5=e43aa437a6a1ba421653bd5034333bf9 \
++"
++
++SRC_URI = "https://files.phpmyadmin.net/phpMyAdmin/${PV}/phpMyAdmin-${PV}-all-languages.tar.xz \
++           file://apache.conf \
++"
++
++SRC_URI[md5sum] = "a9aec05d44c68b4ac5e4987118d70cd7"
++SRC_URI[sha256sum] = "5fab6b92336386646bbb189d55817799487b5c27b06cab0cdfdcab3c88f5988f"
++
++S = "${WORKDIR}/phpMyAdmin-${PV}-all-languages"
++
++inherit allarch
++
++do_install() {
++    install -d ${D}${datadir}/${BPN}
++    cp -R --no-dereference --preserve=mode,links -v * ${D}${datadir}/${BPN}
++    chown -R root:root ${D}${datadir}/${BPN}
++    # Don't install patches to target
++    rm -rf ${D}${datadir}/${BPN}/patches
++
++    install -d ${D}${sysconfdir}/apache2/conf.d
++    install -m 0644 ${WORKDIR}/apache.conf ${D}${sysconfdir}/apache2/conf.d/phpmyadmin.conf
++
++    # Remove a few scripts that explicitly require bash (!)
++    rm -f ${D}${datadir}/phpmyadmin/libraries/transformations/*.sh
++}
++
++FILES_${PN} = "${datadir}/${BPN} \
++               ${sysconfdir}/apache2/conf.d"
++
++RDEPENDS_${PN} += "bash"
+-- 
+2.7.4
 
-On Mon, Dec 18, 2017 at 11:56 AM, Mark Asselstine <
-mark.asselstine@windriver.com> wrote:
-
-> On Mon, Dec 18, 2017 at 11:37 AM, Alexander Kanavin
-> <alexander.kanavin@linux.intel.com> wrote:
-> > On 12/18/2017 06:15 PM, Mark Asselstine wrote:
-> >>
-> >> On Mon, Dec 18, 2017 at 10:36 AM, Christopher Larson <kergoth@gmail.com
-> >
-> >> wrote:
-> >>>
-> >>> All our python recipes should be explicitly listing the python module
-> >>> packages they require. No python module recipes should be depending on
-> >>> python-modules or python3-modules, but explicitly what they require.
-> >>
-> >>
-> >> This is a giant PITA for little gain in my opinion. The typical python
-> >> 'vehicles' to define dependencies, things like setup.py, requires.txt,
-> >> requirements.txt..., never bother to list stdlibs. These are standard
-> >> libs that are just expected to be there. If a system is being
-> >> installed with only select python modules it will behave differently
-> >> than python found on any other system violating the rule of least
-> >> surprise. On top of this most of these modules are ~40K in size and
-> >> there are roughly 60 in the stdlib so the size gain in installing a
-> >> few vs. all of them is extremely negligible. All of this seems to add
-> >> way more work and churn that outweighs any real benefit.
-> >
-> >
-> > I tend to agree with this. Add also the situation that the yocto project
-> > needs to upgrade oe-core to python 3.6 as soon as possible, and to 3.7
-> soon
-> > after, no one has enough time to do this rather non-trivial job, and I'm
-> > beginning to wonder if the best way out is to remove the module splitting
-> > altogether, and write a clean, simple and maintainable python3 recipe
-> from
-> > scratch with minimal amount of custom patching and hopefully no
-> write-only
-> > hacks.
-> >
-> > Alex
->
-> Thanks Alex for the support. To get a better idea as to what the size
-> delta is I took the installed sizes from a rootfs logfile and the
-> total size for all modules (python2.7) is 6.5M python-misc is almost
-> 2M of this and python-codecs contributing over 0.5M. The savings will
-> never be the full 6.5M as there will always be python-lang and some
-> other modules needed. There was a time where 32M restrictions existed
-> are some systems but are we really seeing devices with these
-> restrictions any more? what about exploring not shipping the pyc
-> files? I would much rather see this than imposing so much work and
-> churn for very little gain. Anyways, maybe this isn't the best forum
-> for this and it should be brought up to the architecture group.
->
-> Mark
->
-> >
-> > --
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.openembedded.org/mailman/listinfo/openembedded-devel
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->
 
