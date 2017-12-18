@@ -1,36 +1,38 @@
-Return-Path: <sjl@vctlabs.com>
-Received: from dent.vctlabs.com (net-cf9a4187.iis.impulse.net [207.154.65.135])
-	by mail.openembedded.org (Postfix) with ESMTP id DB74E7808D
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id C94957808D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 18 Dec 2017 21:00:22 +0000 (UTC)
-Received: by dent.vctlabs.com (Postfix, from userid 1000)
-	id 6A17728020A; Mon, 18 Dec 2017 13:02:56 -0800 (PST)
-Date: Mon, 18 Dec 2017 13:02:56 -0800
-From: "S. Lockwood-Childs" <sjl@vctlabs.com>
-To: Derek Straka <derek@asterius.io>
-Message-ID: <20171218210256.GQ27580@vctlabs.com>
-Mail-Followup-To: "S. Lockwood-Childs" <sjl@vctlabs.com>,
-	Derek Straka <derek@asterius.io>,
-	Mark Asselstine <mark.asselstine@windriver.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
-	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
-	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
-	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
-	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
-	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
-	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
-	<CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
-User-Agent: Mutt/1.5.23 (2014-03-12)
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [meta-python][PATCH] python-pyroute2: uprev to v0.4.21 (from 0.3.22)
+	Mon, 18 Dec 2017 21:01:18 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id x7so2655366qkb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 18 Dec 2017 13:01:20 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=Z8LGIrqlCQvo8ttBel1OroQ3sfYF2lMjOC2W63hQOYU=;
+	b=cGiBMmn7inD7etFHoF4Mbq+QYdmAqocQHRUkit2sBY3+YZSzRKlGIEuZbwEtsdi1c1
+	CMDroXJgpkz1yO1J84mSf9bAxAHCuxmj9533b6RB8To6C4mmFc2I4j4dm0XxGe2wLaSV
+	sJyvcMS2ET9SmkT/RoVPS6eMsQtzoBOo2wuUXREV8S+gnLw5xUuHv4FSfGy9AvSojINY
+	lfAOtFPf6yHURJdRFncimvqoZAafileYqoW5Ypw1DCEN1fYaIz4OwadQOHyP+nR87oJK
+	bNmgOorjMBDyL9jGTGSwkxe6cAmT9mHq+EkmGpKo9b7lFoF5HUZwDkjbYgqM1PPpOMkN
+	5wtQ==
+X-Gm-Message-State: AKGB3mKEP9AUU+ADJLKi55BaRfpXWM/rjtoBlW2yw3Yf4r9xlFWf/EpL
+	O73/IXB5X9Grqhqtb+8cJHV32ec4
+X-Google-Smtp-Source: ACJfBouqmPhXxUivw4C1eUCqvIZsuU+rjvn+T2W7sZEJbO7ZflkxDgfstAeSMPvB/h7PLwlMxGrCvA==
+X-Received: by 10.55.43.89 with SMTP id r86mr1520088qkh.33.1513630879498;
+	Mon, 18 Dec 2017 13:01:19 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	d205sm8534157qke.21.2017.12.18.13.01.18
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Mon, 18 Dec 2017 13:01:19 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 18 Dec 2017 16:00:50 -0500
+Message-Id: <1513630850-17087-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pexpect: update to version 4.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -43,25 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 18 Dec 2017 21:00:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 18 Dec 2017 21:01:18 -0000
 
-On Mon, Dec 18, 2017 at 03:17:25PM -0500, Derek Straka wrote:
-> I have several customers who have optimized for space and would like to see
-> the capability maintained unless core removes the ability to split python
-> packages out.  They also remove the *.py files in favor of *.pyo files (via
-> a custom packaging mechanism).  I have automated tests that go through the
-> module importing on each of the meta-python packages to ensure it works on
-> minimal python installations.  When other contributors don't do provide
-> that functionality, I either catch it when I do package update or when it
-> breaks for one of my customers.  I'm fine if you don't want to perform the
-> checks yourself and it breaks my use case with missing dependencies, but I
-> would prefer that you don't remove the dependencies that are currently in
-> place.  Thanks.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pexpect.inc            | 8 ++------
+ .../python/{python-pexpect_4.3.0.bb => python-pexpect_4.3.1.bb}   | 0
+ .../python/{python3-pexpect_4.3.0.bb => python3-pexpect_4.3.1.bb} | 0
+ 3 files changed, 2 insertions(+), 6 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pexpect_4.3.0.bb => python-pexpect_4.3.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pexpect_4.3.0.bb => python3-pexpect_4.3.1.bb} (100%)
 
-Me too -- some of my projects still use NAND for rootfs, where space is tight and
-ability to split out python modules is very useful. Thus it is not an unused
-feature, though many projects have SD/eMMC for rootfs and those ones generally
-will not care about it.
+diff --git a/meta-python/recipes-devtools/python/python-pexpect.inc b/meta-python/recipes-devtools/python/python-pexpect.inc
+index dc8bcc9..28d7b60 100644
+--- a/meta-python/recipes-devtools/python/python-pexpect.inc
++++ b/meta-python/recipes-devtools/python/python-pexpect.inc
+@@ -4,15 +4,11 @@ SECTION = "devel/python"
+ LICENSE = "ISC"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1c7a725251880af8c6a148181665385b"
+ 
+-SRCNAME = "pexpect"
+-
+-SRC_URI[md5sum] = "047a486dcd26134b74f2e67046bb61a0"
+-SRC_URI[sha256sum] = "00ab0872f80f5db740499e7a1283a7c3b97bea542d72df84d83dea17d0afd2d9"
++SRC_URI[md5sum] = "16aa4549136b2d1b2bf1e0e9788d75a6"
++SRC_URI[sha256sum] = "8e287b171dbaf249d0b06b5f2e88cb7e694651d2d0b8c15bccb83170d3c55575"
+ 
+ UPSTREAM_CHECK_URI = "https://pypi.python.org/pypi/pexpect"
+ 
+-S = "${WORKDIR}/${SRCNAME}-${PV}"
+-
+ RDEPENDS_${PN} = "\
+     ${PYTHON_PN}-core \
+     ${PYTHON_PN}-io \
+diff --git a/meta-python/recipes-devtools/python/python-pexpect_4.3.0.bb b/meta-python/recipes-devtools/python/python-pexpect_4.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pexpect_4.3.0.bb
+rename to meta-python/recipes-devtools/python/python-pexpect_4.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pexpect_4.3.0.bb b/meta-python/recipes-devtools/python/python3-pexpect_4.3.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pexpect_4.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-pexpect_4.3.1.bb
+-- 
+2.7.4
+
 
