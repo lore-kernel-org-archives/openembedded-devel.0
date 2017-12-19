@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id B44407842D
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id B1D2978480
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 17:55:50 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id i190so3173146qka.5
+	Tue, 19 Dec 2017 18:29:19 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id u42so25333701qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 09:55:52 -0800 (PST)
+	Tue, 19 Dec 2017 10:29:21 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=f68Q4NUMfQd1boTZgih3+mLgl+ae0ono8Kb8GAjsxyo=;
-	b=FbbzMnIT4Pg11reZiesrTkLe9eyCpw9V7zm56NJH8yhWoy13msId2bXeinpQZBSFUq
-	sVoyUQ3WHfJV89Al3RL9NbuJPguLkm9r5mUrEhRqoXb+fUeIgzP7CVvCp2arSLzs+eq5
-	5sFMopXX6zmcThGP6WC2e6nV5wAWGWyCn9GyGqZ1KXfshZiAUsXyDJwcInmsMN17jiIR
-	TxjNnfDNObuDeh6ZFtPEXaTigKYL2ysCqBWe1DH620ir0295KJQbwP5xPlhWnFoxZrpz
-	gsACcvirrq8J+2nwXHq+ziqYYw9eoB/hHGNsf6cQjVhGWyZZByuv8WG0EyvT6CsUULX6
-	A7BA==
-X-Gm-Message-State: AKGB3mJ8+jKLB11st8Dm9ZUZVSBCfleeC+QrCqYUKRO8VQx99HPXRJ/z
-	rAWB/SChssbVUljem3XiM/s4+ehN
-X-Google-Smtp-Source: ACJfBouOt/WOiWHWnZ9iJTsu6Zzaiuaj1AE2FT+2aQiUo3S0RMiQXkfHhPfkzi0w+8dvlt0uJIplww==
-X-Received: by 10.55.100.201 with SMTP id y192mr4107357qkb.265.1513706151325; 
-	Tue, 19 Dec 2017 09:55:51 -0800 (PST)
+	bh=BARiMAfz+E6ZdXOWJVjLjbkuo7DyQKRMr19Jp3onLO8=;
+	b=qCEuV8T7KzXBn3qLgrtcQ8u7vPZCbDdS9d5Sr13V4cLzUn1d42ZvZkwpDC8DN5lWZi
+	0B4sE3pmHPfl7MNU93XX9eZAMdAeXnPLje345e+mO7ycwmrPuYcwTO0dt6P9XkoAoXXl
+	1H4mD5KcxqdpuTOw1eqTEqnHLMauSzPm9F4pvZd8eAMpqnIi23uCVy8xL16o4+f6dF8a
+	cz8nxwIXc2GfopFTb3LRNxK6R9HGFZvLsQ2D9VW0ALbnXjvoBW/em161uRy5GgU/NZ5G
+	BH+YR4i+oWxYJXZsjcDbu7gpd8M6j0vuM4JVpD0dH7NFCCUFS/Zz2XQKyVHcRbymKEZg
+	KsXw==
+X-Gm-Message-State: AKGB3mJPxHRJOt0Umw4geplUDy87IveauKn1u2ZUgYtAAvIBr9d9F+go
+	hb/nfpI/UfC5dkvjclpWSTndn/oc
+X-Google-Smtp-Source: ACJfBotjqfIZN/zRQ2aIpdVWhVhWaHEp4djKp4mzw9wdJ4x9kAx+MNAT3LfIsHBkvGaUnf1GlOMVYA==
+X-Received: by 10.200.42.70 with SMTP id l6mr6026248qtl.110.1513708160320;
+	Tue, 19 Dec 2017 10:29:20 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	e62sm9741192qkd.91.2017.12.19.09.55.50
+	w126sm9945140qkb.71.2017.12.19.10.29.19
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Dec 2017 09:55:50 -0800 (PST)
+	Tue, 19 Dec 2017 10:29:19 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Dec 2017 12:55:45 -0500
-Message-Id: <1513706145-30948-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Dec 2017 13:29:13 -0500
+Message-Id: <1513708153-1614-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pycparser: update RDEPENDS to add ply
+Subject: [meta-python][PATCH] python-webencodings: update RDEPENDS to include lxml
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,25 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 17:55:50 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 18:29:19 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pycparser.inc | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python-webencodings.inc | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-pycparser.inc b/meta-python/recipes-devtools/python/python-pycparser.inc
-index 6b05482..af82583 100644
---- a/meta-python/recipes-devtools/python/python-pycparser.inc
-+++ b/meta-python/recipes-devtools/python/python-pycparser.inc
-@@ -9,6 +9,7 @@ SRC_URI[sha256sum] = "99a8ca03e29851d96616ad0404b4aad7d9ee16f25c9f9708a11faf2810
- BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-webencodings.inc b/meta-python/recipes-devtools/python/python-webencodings.inc
+index ed57c52..74b7517 100644
+--- a/meta-python/recipes-devtools/python/python-webencodings.inc
++++ b/meta-python/recipes-devtools/python/python-webencodings.inc
+@@ -7,4 +7,7 @@ SRC_URI[sha256sum] = "b36a1c245f2d304965eb4e0a82848379241dc04b865afcc4aab1674858
  
- RDEPENDS_${PN}_class-target += "\
-+    ${PYTHON_PN}-ply \
-     ${PYTHON_PN}-subprocess \
-     cpp \
-     cpp-symlinks \
+ inherit pypi
+ 
+-RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-codecs \
++    ${PYTHON_PN}-json \
++"
 -- 
 2.7.4
 
