@@ -1,41 +1,33 @@
-Return-Path: <ross.burton@intel.com>
-Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
-	[209.85.223.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 6CCB7780FA
+Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
+Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
+	[104.130.122.4])
+	by mail.openembedded.org (Postfix) with ESMTP id 696DB783DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 13:44:09 +0000 (UTC)
-Received: by mail-io0-f179.google.com with SMTP id x67so7503893ioi.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 05:44:11 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=intel-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=k4adPwaR8pJ4pcLx3PRQm7cqtsZZMut1kLHzJDsbg7s=;
-	b=aChQv7AyWMoED4yIyTPROZZWvU6dlRemN4ZJsh+OxIMyYGka1qFznDwspUVDa3SrPR
-	2cdmZc/N3rcVsOROlO0aFK0U8YdT84oFOcHS/z0epKy+vXSqS4EaHWkPx9VpCFv8o+zh
-	lT0qGCrskM9kEsPsjdeTYHxtYzRlgM9JnaEh8WVVkiBKFYJ1ya+eNGTwEpY0y4JApyGR
-	z6SMQxiWePDK83XYF4brhxmk6VyTZ/T/6fGSQdWUFs7Hc24JTptLh7NbE6Z8iWgdUhb5
-	lqd8CyuqEqQEdT0SdoIoR/KTbfKb5FOohfGIIePYNnHKGcpOPjK7+xmHQFHjVbqpSdGx
-	YLtg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=k4adPwaR8pJ4pcLx3PRQm7cqtsZZMut1kLHzJDsbg7s=;
-	b=D2u2CzAqWagAschvALgw8gZOf7yhk3scE5GGyWoyygT01nmgZcGpvAOT7SOzCR3Aei
-	JrsMe+5JkCCKLweEyeemcXC4au1x8O70t4suxqVGlcdAxG51RShtL/tQ5PDAjphoSOvo
-	M3kZULA+bHYlG9d56qsBZZ0OeiSECuDHYxCl0QhysnBXzqB/dBg+f1M4X//JDQzK1AbL
-	5ujbx7nP1NSPQ6+mkINiV5b1YlG8Lid4VqOswlRHBj/wjm2oHyTzYoafQM2JsRVbMVYN
-	uR+QilxkYMNbgX7x8ULBcSCq2h0qP+61wAwLOUSNqumKYE5JqSkk6mH7BXt4c8YHEE94
-	lgcQ==
-X-Gm-Message-State: AKGB3mL8sbcSXWqlZoU0CNoZEv6BOuhfOXFOvEosVsGYL/oMYG0Dp1ty
-	KXbfkdHyY/HS3erHJL/R0WG3iWHury4ZwAXz1GLx1w==
-X-Google-Smtp-Source: ACJfBouGm0kbKweoDSXumd+w51B+xFAJbxN/HA/hJbks1evUb1Fh2QEqmuma7X1cOu/Edwa2G7atmUr7cQRdRoUIG7U=
-X-Received: by 10.107.137.15 with SMTP id l15mr3898684iod.52.1513691051209;
-	Tue, 19 Dec 2017 05:44:11 -0800 (PST)
+	Tue, 19 Dec 2017 14:02:18 +0000 (UTC)
+DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
+	s=mailo; t=1513692140; h=Content-Type: Cc: To: Subject: Message-ID:
+	Date: From: References: In-Reply-To: MIME-Version: Sender;
+	bh=tlvqrve3mrK8wzQYRMxmrc1soHtED/+jOVRvMS0z5W4=;
+	b=abuhJULdpTbz6rXiigO2eMdJt0eSzJhLP+lRihNynQRaPmbfy9A0a/1eFBUkgsnzpDQ8xTAh
+	N2527XBQoMa6E7Zs557rLkRtiIgzLvTL4Hz7gUwZ/PeQKXeBUogUBOBeSpRNjp8WxevTpvPl
+	DasCvy7x/TDYQVBGty0/wb3aN2o=
+X-Mailgun-Sending-Ip: 104.130.122.4
+X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
+Sender: derek@asterius.io
+Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
+	[209.85.220.180])
+	by mxa.mailgun.org with ESMTP id 5a391bec.7fec94b93870-smtp-out-n02;
+	Tue, 19 Dec 2017 14:02:20 -0000 (UTC)
+Received: by mail-qk0-f180.google.com with SMTP id d66so22599437qkg.1;
+	Tue, 19 Dec 2017 06:02:19 -0800 (PST)
+X-Gm-Message-State: AKGB3mLlc2udvtM2LALS/2Rh0ArAejkUhw3aS0mCZjCctqzNTqYdKZt8
+	1WaQ8ZPUsvRrHKjR1OKs4a87edOMVQTEjc6xWW4=
+X-Google-Smtp-Source: ACJfBov4OP2cx62hmt4IZKHjVJKtN0NLZi/9M9BGQaNIbBG4H7xnLwema65hxjw2atccEYD8b4vs84cc9eF0L7Ir7w8=
+X-Received: by 10.55.153.194 with SMTP id b185mr1692428qke.230.1513692139150; 
+	Tue, 19 Dec 2017 06:02:19 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.107.141.20 with HTTP; Tue, 19 Dec 2017 05:43:50 -0800 (PST)
-In-Reply-To: <CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
+Received: by 10.140.21.177 with HTTP; Tue, 19 Dec 2017 06:02:18 -0800 (PST)
+In-Reply-To: <CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
 References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
 	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
 	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
@@ -49,10 +41,12 @@ References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
 	<CADNbA1oCH=x1SoZn-pb50bZabf+rurd1w_o7D9P9FM4u=FXXsQ@mail.gmail.com>
 	<32cbea3c-5275-cd8e-e7ef-7654e1e94bfa@linux.intel.com>
 	<CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
-From: "Burton, Ross" <ross.burton@intel.com>
-Date: Tue, 19 Dec 2017 13:43:50 +0000
-Message-ID: <CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
-To: Derek Straka <derek@asterius.io>
+	<CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
+From: Derek Straka <derek@asterius.io>
+Date: Tue, 19 Dec 2017 09:02:18 -0500
+X-Gmail-Original-Message-ID: <CADNbA1pLbXO=Wqz_M6LD801YgR266n=5tndBgSqZz49g-hQdsQ@mail.gmail.com>
+Message-ID: <CADNbA1pLbXO=Wqz_M6LD801YgR266n=5tndBgSqZz49g-hQdsQ@mail.gmail.com>
+To: "Burton, Ross" <ross.burton@intel.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Mark Asselstine <mark.asselstine@windriver.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
@@ -70,18 +64,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 13:44:10 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 14:02:19 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On 19 December 2017 at 13:23, Derek Straka <derek@asterius.io> wrote:
+Thanks for the heads up.  I'll pull the changeset into my testing branch
+and touch up all the meta-python recipes to remove the now non-existent
+packages.
 
-> Cool.  Works for me.  Thanks.
+On Tue, Dec 19, 2017 at 8:43 AM, Burton, Ross <ross.burton@intel.com> wrote:
+
+> On 19 December 2017 at 13:23, Derek Straka <derek@asterius.io> wrote:
 >
-
-There's an epic patch on the list which I'm reviewing right now that
-drastically changes how the core Python library is packaged.  If you'd like
-to have a look, the almost-final (my bandaid fixes need to be squashed) is
-at poky-contrib:ross/py.
-
-Ross
+>> Cool.  Works for me.  Thanks.
+>>
+>
+> There's an epic patch on the list which I'm reviewing right now that
+> drastically changes how the core Python library is packaged.  If you'd like
+> to have a look, the almost-final (my bandaid fixes need to be squashed) is
+> at poky-contrib:ross/py.
+>
+> Ross
+>
 
