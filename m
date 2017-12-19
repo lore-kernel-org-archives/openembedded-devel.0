@@ -1,33 +1,41 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id C830D782A9
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f179.google.com (mail-io0-f179.google.com
+	[209.85.223.179])
+	by mail.openembedded.org (Postfix) with ESMTP id 6CCB7780FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 13:23:15 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1513689796; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=FD+i3cjybryhnWzXg9eCSkuNhL6NIQzTocaWxO6SZvc=;
-	b=sdIwFnnuw9SRZ2bQISQHM3M5eW1Jm0NsTfaliDxZJh5uyq3QLA8iNZgX2K8ciqjjfUii+5Px
-	shlZnbNtt6IXroGyv4eiejAiAu+7RFkVrGKLDsYd7cNopZq9KK26eWZnDrOvKdXDnNBeacVd
-	mn3c6Jxzn30OaAdZevtDZWdJL0A=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-qk0-f174.google.com (mail-qk0-f174.google.com
-	[209.85.220.174])
-	by mxa.mailgun.org with ESMTP id 5a3912c4.7f7f6d6847b0-smtp-out-n02;
-	Tue, 19 Dec 2017 13:23:16 -0000 (UTC)
-Received: by mail-qk0-f174.google.com with SMTP id 143so7718633qki.2;
-	Tue, 19 Dec 2017 05:23:16 -0800 (PST)
-X-Gm-Message-State: AKGB3mI200OzzmcPkBeoFjNung9/UCk1tLU3SY+08rZhy60bHR3Me3gN
-	SeFtsUxtq3IxqbCcZcjUIbhDM2gcF40FtYcz6lk=
-X-Google-Smtp-Source: ACJfBotBpbqg7DOlnlgi0BusXQ/JNmhN0TmtLV0XQbcwJi0eIR9yRtMkFIIe0cnx1OjNlRFgZHRM2LbUJ1/I5Aq7MQE=
-X-Received: by 10.55.191.1 with SMTP id p1mr4750329qkf.152.1513689796193; Tue,
-	19 Dec 2017 05:23:16 -0800 (PST)
+	Tue, 19 Dec 2017 13:44:09 +0000 (UTC)
+Received: by mail-io0-f179.google.com with SMTP id x67so7503893ioi.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Dec 2017 05:44:11 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=k4adPwaR8pJ4pcLx3PRQm7cqtsZZMut1kLHzJDsbg7s=;
+	b=aChQv7AyWMoED4yIyTPROZZWvU6dlRemN4ZJsh+OxIMyYGka1qFznDwspUVDa3SrPR
+	2cdmZc/N3rcVsOROlO0aFK0U8YdT84oFOcHS/z0epKy+vXSqS4EaHWkPx9VpCFv8o+zh
+	lT0qGCrskM9kEsPsjdeTYHxtYzRlgM9JnaEh8WVVkiBKFYJ1ya+eNGTwEpY0y4JApyGR
+	z6SMQxiWePDK83XYF4brhxmk6VyTZ/T/6fGSQdWUFs7Hc24JTptLh7NbE6Z8iWgdUhb5
+	lqd8CyuqEqQEdT0SdoIoR/KTbfKb5FOohfGIIePYNnHKGcpOPjK7+xmHQFHjVbqpSdGx
+	YLtg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=k4adPwaR8pJ4pcLx3PRQm7cqtsZZMut1kLHzJDsbg7s=;
+	b=D2u2CzAqWagAschvALgw8gZOf7yhk3scE5GGyWoyygT01nmgZcGpvAOT7SOzCR3Aei
+	JrsMe+5JkCCKLweEyeemcXC4au1x8O70t4suxqVGlcdAxG51RShtL/tQ5PDAjphoSOvo
+	M3kZULA+bHYlG9d56qsBZZ0OeiSECuDHYxCl0QhysnBXzqB/dBg+f1M4X//JDQzK1AbL
+	5ujbx7nP1NSPQ6+mkINiV5b1YlG8Lid4VqOswlRHBj/wjm2oHyTzYoafQM2JsRVbMVYN
+	uR+QilxkYMNbgX7x8ULBcSCq2h0qP+61wAwLOUSNqumKYE5JqSkk6mH7BXt4c8YHEE94
+	lgcQ==
+X-Gm-Message-State: AKGB3mL8sbcSXWqlZoU0CNoZEv6BOuhfOXFOvEosVsGYL/oMYG0Dp1ty
+	KXbfkdHyY/HS3erHJL/R0WG3iWHury4ZwAXz1GLx1w==
+X-Google-Smtp-Source: ACJfBouGm0kbKweoDSXumd+w51B+xFAJbxN/HA/hJbks1evUb1Fh2QEqmuma7X1cOu/Edwa2G7atmUr7cQRdRoUIG7U=
+X-Received: by 10.107.137.15 with SMTP id l15mr3898684iod.52.1513691051209;
+	Tue, 19 Dec 2017 05:44:11 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.140.21.177 with HTTP; Tue, 19 Dec 2017 05:23:15 -0800 (PST)
-In-Reply-To: <32cbea3c-5275-cd8e-e7ef-7654e1e94bfa@linux.intel.com>
+Received: by 10.107.141.20 with HTTP; Tue, 19 Dec 2017 05:43:50 -0800 (PST)
+In-Reply-To: <CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
 References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
 	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
 	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
@@ -40,11 +48,11 @@ References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
 	<2bc1c40c-3f63-7311-b8a3-81bd05ea474f@linux.intel.com>
 	<CADNbA1oCH=x1SoZn-pb50bZabf+rurd1w_o7D9P9FM4u=FXXsQ@mail.gmail.com>
 	<32cbea3c-5275-cd8e-e7ef-7654e1e94bfa@linux.intel.com>
-From: Derek Straka <derek@asterius.io>
-Date: Tue, 19 Dec 2017 08:23:15 -0500
-X-Gmail-Original-Message-ID: <CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
-Message-ID: <CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
-To: Alexander Kanavin <alexander.kanavin@linux.intel.com>
+	<CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Tue, 19 Dec 2017 13:43:50 +0000
+Message-ID: <CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
+To: Derek Straka <derek@asterius.io>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: Mark Asselstine <mark.asselstine@windriver.com>,
 	openembeded-devel <openembedded-devel@lists.openembedded.org>,
@@ -62,31 +70,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 13:23:16 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 13:44:10 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Cool.  Works for me.  Thanks.
+On 19 December 2017 at 13:23, Derek Straka <derek@asterius.io> wrote:
 
--Derek
+> Cool.  Works for me.  Thanks.
+>
 
-On Tue, Dec 19, 2017 at 8:12 AM, Alexander Kanavin <
-alexander.kanavin@linux.intel.com> wrote:
+There's an epic patch on the list which I'm reviewing right now that
+drastically changes how the core Python library is packaged.  If you'd like
+to have a look, the almost-final (my bandaid fixes need to be squashed) is
+at poky-contrib:ross/py.
 
-> On 12/19/2017 02:31 PM, Derek Straka wrote:
->
->> Well, I've been able to do it just fine for the majority of packages in
->> meta-python by myself.  Since I contribute the majority of the patches and
->> maintain the layer, I want this capability maintained in meta-python.  If
->> you plan on removing that functionality in oe-core, I'd like to have the
->> opportunity to maintain the python recipes there as well rather than have a
->> feature unilaterally removed.  I don't consider it a burden and my
->> customers find it valuable to split things out.
->>
->
-> If you're able to take over the maintenance of oe-core's python packages,
-> then that's great and much appreciated! I'll send a patch that assigns them
-> to you in a moment.
->
-> Alex
->
+Ross
 
