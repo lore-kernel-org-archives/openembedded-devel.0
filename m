@@ -1,38 +1,41 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
-	[209.85.216.175])
-	by mail.openembedded.org (Postfix) with ESMTP id 0DC0578312
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 1B23B600EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 15:51:30 +0000 (UTC)
-Received: by mail-qt0-f175.google.com with SMTP id i40so24692017qti.8
+	Tue, 19 Dec 2017 16:15:07 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id f2so24792777qtj.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 07:51:32 -0800 (PST)
+	Tue, 19 Dec 2017 08:15:08 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=nqFYDWHauwBfIrJ3nvvANPkERLnAwYRvFPEZffXDmyE=;
-	b=TeB4JXu2SvGhb7bQE5n8Nyt8U6w/VgDcwYTLRFNbzWf0u6m3QqaGXBObEQH3GP+VqP
-	Sv13KDGuCOzGscJSMSTkiOD5ALsP4xExvBxzp5d0ADhcbcFuhc9bqG9wf5cXIOEPohGh
-	5+PvIr9XqTcQmJxM6gM/di5DlZTfLcSBVmJYJiEenJ/U1uXy7bQIQkqHDD3AoO92zsPz
-	gTRgDfT4c+hl6dvAm4TruqCjddNKIezqHbQGb0SawtLK+pODIr3qhExo188N8NRhifz0
-	GGAWD4JRPaBjLRt/fW/OT23zXWTDIJxlkroZCxrHa7znUzz8InKVxnRlQdG699qywLLB
-	yQVA==
-X-Gm-Message-State: AKGB3mJIgIdn841K/MRV0t1YvO01uIFhBuvwaNzptP25a2BYZVq3W46g
-	tpWOuchYb+iMhpzjWGpMtD8BYwl1
-X-Google-Smtp-Source: ACJfBov8zTI03soqJ+5ajollmIHun+KU+pGU7dHc+RGEaP13HzI5yxYjYDFE9uFsCal2mtpzqP4Llg==
-X-Received: by 10.200.3.8 with SMTP id q8mr5597694qtg.212.1513698691728;
-	Tue, 19 Dec 2017 07:51:31 -0800 (PST)
+	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
+	:references;
+	bh=63ENS20PdlkGEDtLf9AVNYxFeKPoulWblKgJERI3SYU=;
+	b=PpJr4CvrmZ0iO6I+4dHWPk7ZXw0YADt0KHsyHZMLv0SxLYbWlnsf2xYbcANko8rsRY
+	9hZtJklyfVFX8afsO/CsJCGBF7t73I2vbBturOHlKQ2oPqwpOCwlTu7jU+N2oKznT5zh
+	6hJ73b4rS62+IRr3zag37vpNe7LyKHorA3pxKeEMyCHaPNab2nm+nUnmVp7exFK6yfW2
+	QdHopkiqRc2U1+dlvN9CfETCJ6Lrs+gsdBtl/s6UEafx5c/ukgFi6Ty1LCfTHMsJIB7a
+	SMa9VNxk7K8MhN12Kn98VmgUeCYswAR87mqCtgf1atEBouBz/91XiYOcOOkR0rbr/rPn
+	yrxQ==
+X-Gm-Message-State: AKGB3mLgoeHTNyfgskUzrLWkCEuZY9BWkVmUsETW1Tc05OMLK9n6Vw7W
+	E5koWRe9U3txvVuDgVn1ANyxFEN3
+X-Google-Smtp-Source: ACJfBosuKEnotTSGS/krYQ1s4d6e7MqEb60NGsygR8swjeCb6HGd2hf7dQEDAQ6mOS5U3yrVUF+KKw==
+X-Received: by 10.200.8.11 with SMTP id u11mr5917095qth.315.1513700108176;
+	Tue, 19 Dec 2017 08:15:08 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	g47sm9721300qtc.69.2017.12.19.07.51.30
+	b47sm10004058qtb.89.2017.12.19.08.15.07
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Dec 2017 07:51:31 -0800 (PST)
+	Tue, 19 Dec 2017 08:15:07 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Dec 2017 10:51:24 -0500
-Message-Id: <1513698684-4588-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Dec 2017 11:15:00 -0500
+Message-Id: <1513700100-1658-2-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-attr: update to version 0.3.1
+In-Reply-To: <1513700100-1658-1-git-send-email-derek@asterius.io>
+References: <1513700100-1658-1-git-send-email-derek@asterius.io>
+Subject: [meta-python][PATCH 2/2] python-cryptography-vectors: update to version 2.1.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 15:51:31 -0000
-
-Update license file checksum and verify MIT still applies
+X-List-Received-Date: Tue, 19 Dec 2017 16:15:07 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-attr.inc                 | 6 +++---
- .../python/{python-attr_0.2.0.bb => python-attr_0.3.1.bb}           | 0
- .../python/{python3-attr_0.2.0.bb => python3-attr_0.3.1.bb}         | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-attr_0.2.0.bb => python-attr_0.3.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-attr_0.2.0.bb => python3-attr_0.3.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-cryptography-vectors.inc   | 4 ++--
+ ...tography-vectors_2.1.3.bb => python-cryptography-vectors_2.1.4.bb} | 0
+ ...ography-vectors_2.1.3.bb => python3-cryptography-vectors_2.1.4.bb} | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cryptography-vectors_2.1.3.bb => python-cryptography-vectors_2.1.4.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-cryptography-vectors_2.1.3.bb => python3-cryptography-vectors_2.1.4.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-attr.inc b/meta-python/recipes-devtools/python/python-attr.inc
-index 8ebf9b9..1d93dd7 100644
---- a/meta-python/recipes-devtools/python/python-attr.inc
-+++ b/meta-python/recipes-devtools/python/python-attr.inc
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
- HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://PKG-INFO;md5=598841c0e09b76883d9ff37a3b6100bf"
-+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=59805a0285f4d2b6abdedae73db4f5c1"
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+index 922ef5a..00bb87b 100644
+--- a/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
++++ b/meta-python/recipes-devtools/python/python-cryptography-vectors.inc
+@@ -8,8 +8,8 @@ DEPENDS += " \
+     ${PYTHON_PN}-cryptography \
+ "
  
--SRC_URI[md5sum] = "de69ad11c8872a6dfdbdace7eb81efb4"
--SRC_URI[sha256sum] = "826135ffdd4d0b4bc8a580ce491c33fd90b55e169217539c34b7bfdbe2086ee3"
-+SRC_URI[md5sum] = "68b9a503991241fb2df28488686b0e1e"
-+SRC_URI[sha256sum] = "9091548058d17f132596e61fa7518e504f76b9a4c61ca7d86e1f96dbf7d4775d"
+-SRC_URI[md5sum] = "32e8bd5d5f6a9329a6753dabc8db1e5b"
+-SRC_URI[sha256sum] = "2de4957fdfd567d69e179d6e9ecf54a085387c953e20abf97a35a5c313aa3053"
++SRC_URI[md5sum] = "ef115b870cc8d8b9f0f4189b512bc170"
++SRC_URI[sha256sum] = "78c4b4f3f84853ea5d038e2f53d355229dd8119fe9cf949c3e497c85c760a5ca"
  
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python-attr_0.3.1.bb
+ PYPI_PACKAGE = "cryptography_vectors"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.3.bb b/meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-attr_0.2.0.bb
-rename to meta-python/recipes-devtools/python/python-attr_0.3.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
+rename from meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.3.bb
+rename to meta-python/recipes-devtools/python/python-cryptography-vectors_2.1.4.bb
+diff --git a/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.3.bb b/meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.4.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-attr_0.2.0.bb
-rename to meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
+rename from meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.3.bb
+rename to meta-python/recipes-devtools/python/python3-cryptography-vectors_2.1.4.bb
 -- 
 2.7.4
 
