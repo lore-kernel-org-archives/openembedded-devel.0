@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id AE7AE782A9
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id AA08C783F7
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 15:15:41 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id i40so24540694qti.8
+	Tue, 19 Dec 2017 15:28:37 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id r39so24542089qtr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 07:15:43 -0800 (PST)
+	Tue, 19 Dec 2017 07:28:39 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=H/tl8H0JYdzEhExRrTQvh6rnuDQ4UrPl9VNvDbrskZM=;
-	b=JxG38B1J97Gp7wv/Zdk3K67IBzNbVHoE/X44eHjOniREGMBclNWpFW9/E0ZJPySy9j
-	Rh6CuVscV2S643vuCMnU3wxxpro3s0Ycv0sHdVhG0pH6tDnzMTAc2qnPDg6qnCzR+Sdu
-	UEFYulgwJ/Fqg4cFy6s4ijUrWHfROW/xIxGQ02j8kX509POTlADb1RHsZ66WoHNcq8uc
-	nZsIzAz4b66+JL8sVl+z8DAqPWd+/3bgPmMDU/QfVfCisZ/hX5hKgslpc8/POE294JN8
-	oQHc4QZvhs43fiq3D5yhOIRxtbtHP96xnQc2ilxso3LeAgE2zq4efAVWcJFk0X7ey5rR
-	zOWw==
-X-Gm-Message-State: AKGB3mJpPLKJF7q3yDPsfdb81QBtL5aEX4gThaSuiWeW8n0diZqTvcPB
-	Zl9PhBmkB3SA8aua0luBssjrjKXk
-X-Google-Smtp-Source: ACJfBoufYH3IneOCVxn4BysQ9xYz28oohuLhNurHx4eJfw6msGzGCPWAidX8alEE782omYfdRglyWg==
-X-Received: by 10.200.55.185 with SMTP id d54mr5718142qtc.105.1513696542467;
-	Tue, 19 Dec 2017 07:15:42 -0800 (PST)
+	bh=qAK39LRtz50VivimWSUJiiOJIvNtQjTQr9J9+INMwq0=;
+	b=g70yBIV8krEakAGKTRRMUJn7ubUgO2rh3TWBZgMytwmvkmmJbY+FHWOa5pvDw+dhEP
+	ZqrPj24UjbOuGfIjDFnaQ7mtBTIvVaTwW9uWnMNs9kgtRqHSjagPjdaZclXilZGnXzmZ
+	jHc7QC/uhBEWA3SQFO1GskPJU9SNX0649UJhxD4UCajAjfm+dEJ3/K5vRbk5tO2ockya
+	0Kad5wElx7OYBXAb4Yg70ISMb7hcjbLk6ZP1jeS/797QxfI2h8ZkhwGxU2L69xrWMpRa
+	RM8gB5/3xVCvAkb0/hRQmtHvJWQ2+G93v9n84LK1OofZkVFg6VjeyQWfPkswNJ0HJfXL
+	cvpA==
+X-Gm-Message-State: AKGB3mJaaoFh3up6af2R8MWyJfWyCn1ZsKV0KnqMdcc/LzlGvLew86TJ
+	IqucolaV34UVBjKY1eMmxPPKniQA
+X-Google-Smtp-Source: ACJfBot8sWIJpKNS3dLsxXlNXCEUepfT0v5bj4F7bm0JUl8Sv3608KIwUuIfFs42AkSSzVLkzo7hPg==
+X-Received: by 10.200.4.130 with SMTP id s2mr5483150qtg.170.1513697318388;
+	Tue, 19 Dec 2017 07:28:38 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	f184sm9534328qke.40.2017.12.19.07.15.41
+	s27sm9949073qtj.42.2017.12.19.07.28.37
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Dec 2017 07:15:41 -0800 (PST)
+	Tue, 19 Dec 2017 07:28:38 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Dec 2017 10:15:32 -0500
-Message-Id: <1513696532-12309-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Dec 2017 10:28:31 -0500
+Message-Id: <1513697311-7253-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pandas: update to version 0.21.1
+Subject: [meta-python][PATCH] python-simplejson: update to version 3.13.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,53 +45,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 15:15:41 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 15:28:37 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pandas.inc                | 5 ++---
- .../python/{python-pandas_0.21.0.bb => python-pandas_0.21.1.bb}      | 1 +
- .../python/{python3-pandas_0.21.0.bb => python3-pandas_0.21.1.bb}    | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pandas_0.21.0.bb => python-pandas_0.21.1.bb} (82%)
- rename meta-python/recipes-devtools/python/{python3-pandas_0.21.0.bb => python3-pandas_0.21.1.bb} (100%)
+ meta-python/recipes-devtools/python/python-simplejson.inc        | 4 ++--
+ meta-python/recipes-devtools/python/python-simplejson_3.13.2.bb  | 2 ++
+ meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb | 7 +++++++
+ 3 files changed, 11 insertions(+), 2 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-simplejson_3.13.2.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta-python/recipes-devtools/python/python-pandas.inc
-index 4c00a1a..266f8b7 100644
---- a/meta-python/recipes-devtools/python/python-pandas.inc
-+++ b/meta-python/recipes-devtools/python/python-pandas.inc
-@@ -6,10 +6,9 @@ HOMEPAGE = "http://pandas.pydata.org/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
+diff --git a/meta-python/recipes-devtools/python/python-simplejson.inc b/meta-python/recipes-devtools/python/python-simplejson.inc
+index 50524f3..95df3f3 100644
+--- a/meta-python/recipes-devtools/python/python-simplejson.inc
++++ b/meta-python/recipes-devtools/python/python-simplejson.inc
+@@ -4,8 +4,8 @@ HOMEPAGE = "http://cheeseshop.python.org/pypi/simplejson"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=c6338d7abd321c0b50a2a547e441c52e"
  
--SRC_URI[md5sum] = "6f14884caaa87a0824b5e93fe032b904"
--SRC_URI[sha256sum] = "5cd5cb30e72eeaf202f0e5e180780b897570e889d2db328c689a5a263405c559"
-+SRC_URI[md5sum] = "42ae7f81b81a86c3f91f663b66c525f7"
-+SRC_URI[sha256sum] = "c5f5cba88bf0659554c41c909e1f78139f6fce8fa9315a29a23692b38ff9788a"
+-SRC_URI[md5sum] = "048548acae58984b3e939b3bcf182c8e"
+-SRC_URI[sha256sum] = "df5e38f5e0a24abe0e02276aa5c3f8504150047a51c0b6b848b8153e6e6d395e"
++SRC_URI[md5sum] = "870bf6257465ce2ee8cad14e2394f7eb"
++SRC_URI[sha256sum] = "4c4ecf20e054716cc1e5a81cadc44d3f4027108d8dd0861d8b1e3bd7a32d4f0a"
  
--PYPI_PACKAGE = "pandas"
  inherit pypi
  
- DEPENDS += " \
-diff --git a/meta-python/recipes-devtools/python/python-pandas_0.21.0.bb b/meta-python/recipes-devtools/python/python-pandas_0.21.1.bb
-similarity index 82%
-rename from meta-python/recipes-devtools/python/python-pandas_0.21.0.bb
-rename to meta-python/recipes-devtools/python/python-pandas_0.21.1.bb
-index 20973c8..355074c 100644
---- a/meta-python/recipes-devtools/python/python-pandas_0.21.0.bb
-+++ b/meta-python/recipes-devtools/python/python-pandas_0.21.1.bb
-@@ -2,6 +2,7 @@ inherit setuptools
- require python-pandas.inc
- 
- RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-future \
-     ${PYTHON_PN}-json \
-     ${PYTHON_PN}-importlib \
- "
-diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.21.0.bb b/meta-python/recipes-devtools/python/python3-pandas_0.21.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pandas_0.21.0.bb
-rename to meta-python/recipes-devtools/python/python3-pandas_0.21.1.bb
+diff --git a/meta-python/recipes-devtools/python/python-simplejson_3.13.2.bb b/meta-python/recipes-devtools/python/python-simplejson_3.13.2.bb
+new file mode 100644
+index 0000000..e33edfe
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-simplejson_3.13.2.bb
+@@ -0,0 +1,2 @@
++inherit setuptools
++require python-simplejson.inc
+diff --git a/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb b/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
+new file mode 100644
+index 0000000..d44bc15
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-simplejson_3.13.2.bb
+@@ -0,0 +1,7 @@
++inherit setuptools3
++require python-simplejson.inc
++
++# Requires _pydecimal which is in misc
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-misc \
++"
 -- 
 2.7.4
 
