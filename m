@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 02EFE6E671
+Received: from mail-qt0-f175.google.com (mail-qt0-f175.google.com
+	[209.85.216.175])
+	by mail.openembedded.org (Postfix) with ESMTP id 0DC0578312
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 15:42:11 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id r184so15342748qke.8
+	Tue, 19 Dec 2017 15:51:30 +0000 (UTC)
+Received: by mail-qt0-f175.google.com with SMTP id i40so24692017qti.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 07:42:13 -0800 (PST)
+	Tue, 19 Dec 2017 07:51:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=REYwf8Ihn+RMWv4Mdwb2YaAU9UxIYUsJ3GzYcA66XEs=;
-	b=gt/G1fGUay4h6J7c5yfUVokhQKnkCKLh0Ct6ehRjV+n7rdbA/2vfDreaRCvcfbmw1/
-	pwbRPlPw+/qx3txQuLjLIL13zpr3jf/d0jV9iug/vYfr6p9DpzuF/hKmIHOowDk7u8/7
-	I8cKQGpvM4rH44+n3WJj+ErrHEE4mgjN7eDtvYyP7JQrhblV6dZ5JuRDh/N18JgwIl+I
-	6kKzzkFwMzy2lKtEzF+4g+6i7bWsl0wbc7zPul1mfF+5S3s0oV0SO8UnDA1kSNvlpjnU
-	2sSRxlryyds0j2+BzlQqmBEOIJzlZK1fKLt3upD+wc3u/36d6pYQFUYEQtxug5jgQhV9
-	pL5Q==
-X-Gm-Message-State: AKGB3mImatXvJRx2zYJfVgevhO3sC4Ew48M/Og6fSn5wON9X8fSDldge
-	X+vmqiDF58vpbQu5bzeG4vSVqkOQ
-X-Google-Smtp-Source: ACJfBoskQ5oYaDsmvxg1F986QOZbOiE//1ukDFBKChdDCHuB98sD7ZYzGF68+0GDKrcXRjhJuCtmnA==
-X-Received: by 10.55.70.77 with SMTP id t74mr5303774qka.342.1513698132744;
-	Tue, 19 Dec 2017 07:42:12 -0800 (PST)
+	bh=nqFYDWHauwBfIrJ3nvvANPkERLnAwYRvFPEZffXDmyE=;
+	b=TeB4JXu2SvGhb7bQE5n8Nyt8U6w/VgDcwYTLRFNbzWf0u6m3QqaGXBObEQH3GP+VqP
+	Sv13KDGuCOzGscJSMSTkiOD5ALsP4xExvBxzp5d0ADhcbcFuhc9bqG9wf5cXIOEPohGh
+	5+PvIr9XqTcQmJxM6gM/di5DlZTfLcSBVmJYJiEenJ/U1uXy7bQIQkqHDD3AoO92zsPz
+	gTRgDfT4c+hl6dvAm4TruqCjddNKIezqHbQGb0SawtLK+pODIr3qhExo188N8NRhifz0
+	GGAWD4JRPaBjLRt/fW/OT23zXWTDIJxlkroZCxrHa7znUzz8InKVxnRlQdG699qywLLB
+	yQVA==
+X-Gm-Message-State: AKGB3mJIgIdn841K/MRV0t1YvO01uIFhBuvwaNzptP25a2BYZVq3W46g
+	tpWOuchYb+iMhpzjWGpMtD8BYwl1
+X-Google-Smtp-Source: ACJfBov8zTI03soqJ+5ajollmIHun+KU+pGU7dHc+RGEaP13HzI5yxYjYDFE9uFsCal2mtpzqP4Llg==
+X-Received: by 10.200.3.8 with SMTP id q8mr5597694qtg.212.1513698691728;
+	Tue, 19 Dec 2017 07:51:31 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	124sm9882199qkf.96.2017.12.19.07.42.12
+	g47sm9721300qtc.69.2017.12.19.07.51.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 19 Dec 2017 07:42:12 -0800 (PST)
+	Tue, 19 Dec 2017 07:51:31 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 19 Dec 2017 10:42:06 -0500
-Message-Id: <1513698126-22522-1-git-send-email-derek@asterius.io>
+Date: Tue, 19 Dec 2017 10:51:24 -0500
+Message-Id: <1513698684-4588-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-asn1crypto: update to version 0.24.0
+Subject: [meta-python][PATCH] python-attr: update to version 0.3.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 15:42:12 -0000
+X-List-Received-Date: Tue, 19 Dec 2017 15:51:31 -0000
+
+Update license file checksum and verify MIT still applies
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-asn1crypto.inc             | 4 ++--
- .../{python-asn1crypto_0.23.0.bb => python-asn1crypto_0.24.0.bb}      | 0
- .../{python3-asn1crypto_0.23.0.bb => python3-asn1crypto_0.24.0.bb}    | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-asn1crypto_0.23.0.bb => python-asn1crypto_0.24.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-asn1crypto_0.23.0.bb => python3-asn1crypto_0.24.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-attr.inc                 | 6 +++---
+ .../python/{python-attr_0.2.0.bb => python-attr_0.3.1.bb}           | 0
+ .../python/{python3-attr_0.2.0.bb => python3-attr_0.3.1.bb}         | 0
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-attr_0.2.0.bb => python-attr_0.3.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-attr_0.2.0.bb => python3-attr_0.3.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-asn1crypto.inc b/meta-python/recipes-devtools/python/python-asn1crypto.inc
-index 92c7198..0d3ee41 100644
---- a/meta-python/recipes-devtools/python/python-asn1crypto.inc
-+++ b/meta-python/recipes-devtools/python/python-asn1crypto.inc
-@@ -6,8 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=52010cd3c7d7bd965b55721ef4d93ec2"
+diff --git a/meta-python/recipes-devtools/python/python-attr.inc b/meta-python/recipes-devtools/python/python-attr.inc
+index 8ebf9b9..1d93dd7 100644
+--- a/meta-python/recipes-devtools/python/python-attr.inc
++++ b/meta-python/recipes-devtools/python/python-attr.inc
+@@ -1,9 +1,9 @@
+ DESCRIPTION = "Simple decorator to set attributes of target function or class in a DRY way"
+ HOMEPAGE = "https://github.com/denis-ryzhkov/attr"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://PKG-INFO;md5=598841c0e09b76883d9ff37a3b6100bf"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=59805a0285f4d2b6abdedae73db4f5c1"
  
- PYPI_PACKAGE = "asn1crypto"
- 
--SRC_URI[md5sum] = "97d54665c397b72b165768398dfdd876"
--SRC_URI[sha256sum] = "0874981329cfebb366d6584c3d16e913f2a0eb026c9463efcc4aaf42a9d94d70"
-+SRC_URI[md5sum] = "de3520426e81a6581352d4366f310eb1"
-+SRC_URI[sha256sum] = "9d5c20441baf0cb60a4ac34cc447c6c189024b6b4c6cd7877034f4965c464e49"
+-SRC_URI[md5sum] = "de69ad11c8872a6dfdbdace7eb81efb4"
+-SRC_URI[sha256sum] = "826135ffdd4d0b4bc8a580ce491c33fd90b55e169217539c34b7bfdbe2086ee3"
++SRC_URI[md5sum] = "68b9a503991241fb2df28488686b0e1e"
++SRC_URI[sha256sum] = "9091548058d17f132596e61fa7518e504f76b9a4c61ca7d86e1f96dbf7d4775d"
  
  inherit pypi
- 
-diff --git a/meta-python/recipes-devtools/python/python-asn1crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python-asn1crypto_0.24.0.bb
+diff --git a/meta-python/recipes-devtools/python/python-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python-attr_0.3.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-asn1crypto_0.23.0.bb
-rename to meta-python/recipes-devtools/python/python-asn1crypto_0.24.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb b/meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
+rename from meta-python/recipes-devtools/python/python-attr_0.2.0.bb
+rename to meta-python/recipes-devtools/python/python-attr_0.3.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-attr_0.2.0.bb b/meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-asn1crypto_0.23.0.bb
-rename to meta-python/recipes-devtools/python/python3-asn1crypto_0.24.0.bb
+rename from meta-python/recipes-devtools/python/python3-attr_0.2.0.bb
+rename to meta-python/recipes-devtools/python/python3-attr_0.3.1.bb
 -- 
 2.7.4
 
