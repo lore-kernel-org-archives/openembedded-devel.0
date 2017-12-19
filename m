@@ -1,57 +1,38 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id 696DB783DE
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 152D06025F
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 14:02:18 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1513692140; h=Content-Type: Cc: To: Subject: Message-ID:
-	Date: From: References: In-Reply-To: MIME-Version: Sender;
-	bh=tlvqrve3mrK8wzQYRMxmrc1soHtED/+jOVRvMS0z5W4=;
-	b=abuhJULdpTbz6rXiigO2eMdJt0eSzJhLP+lRihNynQRaPmbfy9A0a/1eFBUkgsnzpDQ8xTAh
-	N2527XBQoMa6E7Zs557rLkRtiIgzLvTL4Hz7gUwZ/PeQKXeBUogUBOBeSpRNjp8WxevTpvPl
-	DasCvy7x/TDYQVBGty0/wb3aN2o=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-qk0-f180.google.com (mail-qk0-f180.google.com
-	[209.85.220.180])
-	by mxa.mailgun.org with ESMTP id 5a391bec.7fec94b93870-smtp-out-n02;
-	Tue, 19 Dec 2017 14:02:20 -0000 (UTC)
-Received: by mail-qk0-f180.google.com with SMTP id d66so22599437qkg.1;
-	Tue, 19 Dec 2017 06:02:19 -0800 (PST)
-X-Gm-Message-State: AKGB3mLlc2udvtM2LALS/2Rh0ArAejkUhw3aS0mCZjCctqzNTqYdKZt8
-	1WaQ8ZPUsvRrHKjR1OKs4a87edOMVQTEjc6xWW4=
-X-Google-Smtp-Source: ACJfBov4OP2cx62hmt4IZKHjVJKtN0NLZi/9M9BGQaNIbBG4H7xnLwema65hxjw2atccEYD8b4vs84cc9eF0L7Ir7w8=
-X-Received: by 10.55.153.194 with SMTP id b185mr1692428qke.230.1513692139150; 
-	Tue, 19 Dec 2017 06:02:19 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.21.177 with HTTP; Tue, 19 Dec 2017 06:02:18 -0800 (PST)
-In-Reply-To: <CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
-References: <1512414044-1012-1-git-send-email-mark.asselstine@windriver.com>
-	<CADNbA1qnmF3-MKo=fqQQeWEedE5A-wzkUkCgdCNArOePjMaXQw@mail.gmail.com>
-	<CAPuovEKdqQP35XwP3bgBrE4EFbM2LwpHrHzxF3my9qaWfAaCbA@mail.gmail.com>
-	<CABcZANku-aE5a69GpJxXmd2F0+uYVhiRZB3Uut7F2RG1e3R9EA@mail.gmail.com>
-	<CAPuovEJNf=qefXX6wKJGaH+HkM6aan49AgVQ3TEWVWPSCn3cNw@mail.gmail.com>
-	<711527ad-77fa-947f-2186-1d7835e1783e@linux.intel.com>
-	<CAPuovE+yd0kA_MmT4GuqXgvNDASsKLszL4uiypKDSa31icwgXg@mail.gmail.com>
-	<CADNbA1psOtOeCcsLaSM4VWJV5PXqe=HmE9BuxcR4UYkJp5Erdw@mail.gmail.com>
-	<20171218210256.GQ27580@vctlabs.com>
-	<2bc1c40c-3f63-7311-b8a3-81bd05ea474f@linux.intel.com>
-	<CADNbA1oCH=x1SoZn-pb50bZabf+rurd1w_o7D9P9FM4u=FXXsQ@mail.gmail.com>
-	<32cbea3c-5275-cd8e-e7ef-7654e1e94bfa@linux.intel.com>
-	<CADNbA1rNAafn+pUCuWJQ0AgrtwJpB4EUNfF7M1czOqVag7TL8Q@mail.gmail.com>
-	<CAJTo0LZ0e2iX84X_cOKxi9ziu9EgapG9_4MOKkPBEhKE=teCzg@mail.gmail.com>
+	Tue, 19 Dec 2017 14:06:34 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id i190so2211558qka.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 19 Dec 2017 06:06:36 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=XejBckLGnO7s3taq8ipF/mnRubXSd7NnAPdHejvqonM=;
+	b=CNnGfd7ZEH3IZSwfG4aL/jxpT9SnGJBGW7Mi2Nthb68HamNTj3udgwK2ceOMH2H21E
+	jflvGhhbMWvfBsl1DrfsyfBy0mL+Z2sb7+NtSJsgWw8MMZH/2XaZjpTS4E+EbvSxuQnp
+	FxUZKjPcjRUKZwV8JhKaJM1/8xju7MzKmADSTExc+ICdb03wC9HfkMsWrGsTw6v+1T21
+	qzvb7rGRFOyWkbefZRdw2UQ7U2Hjt2nvoaDAI/g0XwJx9luMzYAGLN7pa9Qdw/US30Nt
+	5V0PEJCWJpFNvf3kWUf1ne9a5yuqPHI3cg7JOH1CmzEkGFc3uvya/Gt45E9EpPUEt4Hg
+	IY0A==
+X-Gm-Message-State: AKGB3mIeStKbsqTwUfxmHbRNidQa6SDPhePA/OG41k9aezJDBmUg54hs
+	DSq1npcfPHLat68WwY9uvXliYsHL
+X-Google-Smtp-Source: ACJfBosPHMP1SSchdJgUleSQLgPB9VqO5ysXxedbsq/6JCRUom7zVIfOf8voc7a2q22ubUJe++Q/tw==
+X-Received: by 10.55.167.73 with SMTP id q70mr5008969qke.47.1513692395679;
+	Tue, 19 Dec 2017 06:06:35 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	s58sm9632811qtb.41.2017.12.19.06.06.35
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 Dec 2017 06:06:35 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Tue, 19 Dec 2017 09:02:18 -0500
-X-Gmail-Original-Message-ID: <CADNbA1pLbXO=Wqz_M6LD801YgR266n=5tndBgSqZz49g-hQdsQ@mail.gmail.com>
-Message-ID: <CADNbA1pLbXO=Wqz_M6LD801YgR266n=5tndBgSqZz49g-hQdsQ@mail.gmail.com>
-To: "Burton, Ross" <ross.burton@intel.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Mark Asselstine <mark.asselstine@windriver.com>,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: splitting python's standard library
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Dec 2017 09:06:14 -0500
+Message-Id: <1513692374-7434-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-astroid: update to version 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,25 +45,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 14:02:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 19 Dec 2017 14:06:35 -0000
 
-Thanks for the heads up.  I'll pull the changeset into my testing branch
-and touch up all the meta-python recipes to remove the now non-existent
-packages.
+Split out the test packages
+Update the RDEPENDS for minimal python installs
 
-On Tue, Dec 19, 2017 at 8:43 AM, Burton, Ross <ross.burton@intel.com> wrote:
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-astroid.inc   | 16 ++++++++++++++--
+ .../recipes-devtools/python/python-astroid_1.5.3.bb      |  7 -------
+ .../recipes-devtools/python/python-astroid_1.6.0.bb      |  9 +++++++++
+ ...python3-astroid_1.5.3.bb => python3-astroid_1.6.0.bb} |  0
+ 4 files changed, 23 insertions(+), 9 deletions(-)
+ delete mode 100644 meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
+ create mode 100644 meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
+ rename meta-python/recipes-devtools/python/{python3-astroid_1.5.3.bb => python3-astroid_1.6.0.bb} (100%)
 
-> On 19 December 2017 at 13:23, Derek Straka <derek@asterius.io> wrote:
->
->> Cool.  Works for me.  Thanks.
->>
->
-> There's an epic patch on the list which I'm reviewing right now that
-> drastically changes how the core Python library is packaged.  If you'd like
-> to have a look, the almost-final (my bandaid fixes need to be squashed) is
-> at poky-contrib:ross/py.
->
-> Ross
->
+diff --git a/meta-python/recipes-devtools/python/python-astroid.inc b/meta-python/recipes-devtools/python/python-astroid.inc
+index 4cb1a3c..971aaf4 100644
+--- a/meta-python/recipes-devtools/python/python-astroid.inc
++++ b/meta-python/recipes-devtools/python/python-astroid.inc
+@@ -4,11 +4,18 @@ SECTION = "devel/python"
+ LICENSE = "LGPL-2.1"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=751419260aa954499f7abaabaa882bbe"
+ 
+-SRC_URI[md5sum] = "6f65e4ea8290ec032320460905afb828"
+-SRC_URI[sha256sum] = "492c2a2044adbf6a84a671b7522e9295ad2f6a7c781b899014308db25312dd35"
++SRC_URI[md5sum] = "6f8f60b316218455726958f08c6e17f1"
++SRC_URI[sha256sum] = "71dadba2110008e2c03f9fde662ddd2053db3c0489d0e03c94e828a0399edd4f"
+ 
+ inherit pypi
+ 
++PACKAGES =+ "${PN}-tests"
++
++FILES_${PN}-tests += " \
++    ${PYTHON_SITEPACKAGES_DIR}/astroid/test* \
++    ${PYTHON_SITEPACKAGES_DIR}/astroid/__pycache__/test* \
++"
++
+ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-distutils \
+     ${PYTHON_PN}-lazy-object-proxy \
+@@ -18,3 +25,8 @@ RDEPENDS_${PN}_class-target += "\
+     ${PYTHON_PN}-re \
+     ${PYTHON_PN}-setuptools \
+ "
++
++RDEPENDS_${PN}-tests_class-target += "\
++    ${PYTHON_PN}-unittest \
++    ${PYTHON_PN}-xml \
++"
+diff --git a/meta-python/recipes-devtools/python/python-astroid_1.5.3.bb b/meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
+deleted file mode 100644
+index f7a0a5e..0000000
+--- a/meta-python/recipes-devtools/python/python-astroid_1.5.3.bb
++++ /dev/null
+@@ -1,7 +0,0 @@
+-inherit setuptools
+-require python-astroid.inc
+-
+-RDEPENDS_${PN}_class-target += "${PYTHON_PN}-enum34 \
+-                                ${PYTHON_PN}-importlib \
+-                                ${PYTHON_PN}-singledispatch \
+-                               "
+diff --git a/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb b/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
+new file mode 100644
+index 0000000..3ced19a
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-astroid_1.6.0.bb
+@@ -0,0 +1,9 @@
++inherit setuptools
++require python-astroid.inc
++
++RDEPENDS_${PN}_class-target += " \
++    ${PYTHON_PN}-enum34 \
++    ${PYTHON_PN}-backports-functools-lru-cache \
++    ${PYTHON_PN}-importlib \
++    ${PYTHON_PN}-singledispatch \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-astroid_1.5.3.bb b/meta-python/recipes-devtools/python/python3-astroid_1.6.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-astroid_1.5.3.bb
+rename to meta-python/recipes-devtools/python/python3-astroid_1.6.0.bb
+-- 
+2.7.4
+
 
