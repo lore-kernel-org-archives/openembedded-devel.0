@@ -1,42 +1,38 @@
-Return-Path: <bounce+4d9b4d.3a5685-openembedded-devel=lists.openembedded.org@asterius.io>
-Received: from mail4.static.mailgun.info (mail4.static.mailgun.info
-	[104.130.122.4])
-	by mail.openembedded.org (Postfix) with ESMTP id B2EE178312
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 73B4478480
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 18:32:36 +0000 (UTC)
-DKIM-Signature: a=rsa-sha256; v=1; c=relaxed/relaxed; d=asterius.io; q=dns/txt;
-	s=mailo; t=1513708357; h=Content-Type: To: Subject: Message-ID: Date:
-	From: References: In-Reply-To: MIME-Version: Sender;
-	bh=syzbp0IjfwBuWUOAaAfNGiwid564RwYRBeyZKUtWLiM=;
-	b=HveeL4PDq9m+KUvYhhjsvmURtIzL8HXztlYdKWdGpC/t8h/uYnYC2eVHuIL0Q4BP8D7BZ/cw
-	RWxfhUA/F0ZICTNtzCSoNJpRr6T6fWZtl8jyFEVujx7fhchdEtBJtpvP762522DmjMssIe2Q
-	BNmTW220xDTA6alPZWNyT339NKE=
-X-Mailgun-Sending-Ip: 104.130.122.4
-X-Mailgun-Sid: WyIzN2NkMyIsICJvcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZyIsICIzYTU2ODUiXQ==
-Sender: derek@asterius.io
-Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
-	[209.85.220.182])
-	by mxa.mailgun.org with ESMTP id 5a395b45.7f1b90255e30-smtp-out-n02;
-	Tue, 19 Dec 2017 18:32:37 -0000 (UTC)
-Received: by mail-qk0-f182.google.com with SMTP id a193so15028382qkc.9
+	Tue, 19 Dec 2017 18:48:54 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id i190so3379680qka.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 10:32:37 -0800 (PST)
-X-Gm-Message-State: AKGB3mLlp8gCjA+17Ou7H4Covjb7eSwL2x0tQxW3BJwTo2SgDTgTtiXB
-	V4SQVj3WT5t18LqmiJ2UZT3m8dcTxTDY60jR6CY=
-X-Google-Smtp-Source: ACJfBosjJKG4z/17sG+4K8uBiK4Bl8iOg1nZhpF1MtBwuhC7IHkR1gSCdMdOwW9HKrnDD7zFfUqtFxyOfo+A7FB3JQs=
-X-Received: by 10.55.214.194 with SMTP id p63mr6256487qkl.153.1513708356153;
-	Tue, 19 Dec 2017 10:32:36 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.140.21.177 with HTTP; Tue, 19 Dec 2017 10:32:35 -0800 (PST)
-In-Reply-To: <1513708153-1614-1-git-send-email-derek@asterius.io>
-References: <1513708153-1614-1-git-send-email-derek@asterius.io>
+	Tue, 19 Dec 2017 10:48:55 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=EYXYP1aa/04KzXHUwSnnnVlgQFmK2tFVKlwjYkkj/8Q=;
+	b=QUyusCfbWJ6/gV4Z/ve5Khq6mMgmGr/133PJ9KSO1obWT7bxXWP1da0koKGlC/AXOW
+	hr7SE0ZPHcBcbrySVmWpXIL075Q75njUByPpnnVtZQw7+yXAC+hCBCtqIwj9dT8iGGDU
+	00lhTDkFzV8C39kQEPTJc7Ixma1GuclXra6dtKbl0dhEmzLuFQE10wmGjhnpnhSWGDVq
+	FEr+KpL2/CpUYSwcDmQu34CXnF3F5MZ7iQITQY4VwNnozoNq7F1zArHRE3+cCaruHnbZ
+	a3nS5kYhUt6EyKQ7o4WAq/cPq520WchYlUcVZ9yPajmBElQJIAvemOMSl4DrdUV/Uwos
+	HgOA==
+X-Gm-Message-State: AKGB3mJl5Pm96CkXm95/JsgjILRa+QqG8/c4bQ1oJorHcP71/rVdGblF
+	rA8Cdv3/7VjnrOyAVHFgKMC0XZLm
+X-Google-Smtp-Source: ACJfBotfBwWeJOIIP1D94HLVTySxj450W3k2uzwwcfZ90w0UwBfhrUnNnS46pzt2d1SYgfd4AdQn1g==
+X-Received: by 10.55.129.134 with SMTP id c128mr6010178qkd.162.1513709335161; 
+	Tue, 19 Dec 2017 10:48:55 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	h32sm10014573qtk.8.2017.12.19.10.48.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Tue, 19 Dec 2017 10:48:54 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
-Date: Tue, 19 Dec 2017 13:32:35 -0500
-X-Gmail-Original-Message-ID: <CADNbA1rPeqStVHV4nMAP5rX240f6OWvMZ5zKkEwckrfEyPGbsw@mail.gmail.com>
-Message-ID: <CADNbA1rPeqStVHV4nMAP5rX240f6OWvMZ5zKkEwckrfEyPGbsw@mail.gmail.com>
-To: openembeded-devel <openembedded-devel@lists.openembedded.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: Re: [meta-python][PATCH] python-webencodings: update RDEPENDS to include lxml
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 19 Dec 2017 13:48:47 -0500
+Message-Id: <1513709327-19749-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pylint: update to version 1.8.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -49,36 +45,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 18:32:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 19 Dec 2017 18:48:55 -0000
 
-Drop this one in favor of the v2 that has the correct package in the commit
-msg
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pylint.inc                 | 4 ++--
+ .../python/{python-pylint_1.7.4.bb => python-pylint_1.8.1.bb}         | 0
+ .../python/{python3-pylint_1.7.4.bb => python3-pylint_1.8.1.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pylint_1.7.4.bb => python-pylint_1.8.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pylint_1.7.4.bb => python3-pylint_1.8.1.bb} (100%)
 
-On Tue, Dec 19, 2017 at 1:29 PM, Derek Straka <derek@asterius.io> wrote:
+diff --git a/meta-python/recipes-devtools/python/python-pylint.inc b/meta-python/recipes-devtools/python/python-pylint.inc
+index 5398ca1..9dd1d65 100644
+--- a/meta-python/recipes-devtools/python/python-pylint.inc
++++ b/meta-python/recipes-devtools/python/python-pylint.inc
+@@ -3,8 +3,8 @@ HOMEPAGE= "http://www.pylint.org/"
+ LICENSE = "GPLv2"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=4325afd396febcb659c36b49533135d4"
+ 
+-SRC_URI[md5sum] = "98a1ee985a3ebc876a20eb7577dbab68"
+-SRC_URI[sha256sum] = "1f65b3815c3bf7524b845711d54c4242e4057dd93826586620239ecdfe591fb1"
++SRC_URI[md5sum] = "b7cca873fb60d420a4db8d3bfa4824b1"
++SRC_URI[sha256sum] = "3035e44e37cd09919e9edad5573af01d7c6b9c52a0ebb4781185ae7ab690458b"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pylint_1.7.4.bb b/meta-python/recipes-devtools/python/python-pylint_1.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pylint_1.7.4.bb
+rename to meta-python/recipes-devtools/python/python-pylint_1.8.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pylint_1.7.4.bb b/meta-python/recipes-devtools/python/python3-pylint_1.8.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pylint_1.7.4.bb
+rename to meta-python/recipes-devtools/python/python3-pylint_1.8.1.bb
+-- 
+2.7.4
 
-> Signed-off-by: Derek Straka <derek@asterius.io>
-> ---
->  meta-python/recipes-devtools/python/python-webencodings.inc | 5 ++++-
->  1 file changed, 4 insertions(+), 1 deletion(-)
->
-> diff --git a/meta-python/recipes-devtools/python/python-webencodings.inc
-> b/meta-python/recipes-devtools/python/python-webencodings.inc
-> index ed57c52..74b7517 100644
-> --- a/meta-python/recipes-devtools/python/python-webencodings.inc
-> +++ b/meta-python/recipes-devtools/python/python-webencodings.inc
-> @@ -7,4 +7,7 @@ SRC_URI[sha256sum] = "b36a1c245f2d304965eb4e0a828483
-> 79241dc04b865afcc4aab1674858
->
->  inherit pypi
->
-> -RDEPENDS_${PN} += "${PYTHON_PN}-codecs"
-> +RDEPENDS_${PN} += " \
-> +    ${PYTHON_PN}-codecs \
-> +    ${PYTHON_PN}-json \
-> +"
-> --
-> 2.7.4
->
->
 
