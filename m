@@ -1,48 +1,30 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yb0-f172.google.com (mail-yb0-f172.google.com
-	[209.85.213.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D5C378563
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id C096D781DF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 22:29:42 +0000 (UTC)
-Received: by mail-yb0-f172.google.com with SMTP id j7so14794364ybl.3
+	Wed, 20 Dec 2017 05:35:39 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="31880914"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 20 Dec 2017 13:35:39 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id A495D486A76E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 14:29:44 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=j135rvSZjAS7Klf6elGbbeYYWvZPrwMyfX2hmyNy78s=;
-	b=eI4rYaLaVDczT/udym6n8MDjECeD4WN22oDEKiNnQX9fZROEcOA8AqDqVRw3U4ZKD6
-	Ofgutbg1bh/Jt7aMuIROBw/jafZmZYYiakzhT2wN45/CkHBz0zEVYG+p7U+N8Cl0EkUF
-	Xh+0Pv9wQ3gyc1FsXGIEqgqul9dUK6/iLSDaeVHRhcNsy8jGQSByc1Tdz2xtXEHRaHYJ
-	W863iNf3C9PsDHgAWV57ifb6KyyHPqkk4hWEX5AxkJDyKbppj2ISU3DjkVjk7PnRnSoA
-	l3KgVDSbhjDIK3iXgykVVdWAAj6WMf2zyWijh9qCrPlVZXvyoyTOaS88pYsXhDNZkuMG
-	PMNw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=j135rvSZjAS7Klf6elGbbeYYWvZPrwMyfX2hmyNy78s=;
-	b=sh+DlL80o+l+7uXuRsYQ+ds2rVLSfynza6dSNIOr/vjc8zTASj0JpVbMLbWpg6IWc9
-	PSpZ32ImkNM5FxAqE5yKbqPmRit4zbbYWXhXj3fSRyziRlZfookza4ypG93JXmSrwGKM
-	qKtkpj4+7/cjbMOJqYlRkAjqhiPPnGikOc2cn6To4r7fn95VEL2lZhJVmdt0ik2PR7AA
-	xw2ZGFELSOzpBGNjZIwXtzFTRUnjHtggjHX2kj/FQMJH6DE6ILC8nHimu+xRLFINzK3b
-	5x2LFyry02+pfZRkQBkW5rVjFroOgZrQ1nvN7JBPGeiXSU4ZQd6NlfdziAJyhkmxJs8c
-	4Plw==
-X-Gm-Message-State: AKGB3mITKr1rDgFo41b0NwbEJOBqfnWc5aV5lVM/kr0aSTcjjfZaH6MT
-	jxJPBgTq0MDxpSfnIUXxHW0ND4X2jzDOxYgxrYU=
-X-Google-Smtp-Source: ACJfBotfWk+IYwg3Qwmp38k07zZfdQeJs+z0SHG5IUZ2Zestu0ypJHX47ceoRztxZMzFrqWEOXXkJZSX1+7dHzDpNPY=
-X-Received: by 10.37.244.3 with SMTP id q3mr3931714ybd.247.1513722584142; Tue,
-	19 Dec 2017 14:29:44 -0800 (PST)
+	Wed, 20 Dec 2017 13:35:40 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.35) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Wed, 20 Dec 2017 13:35:44 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 20 Dec 2017 22:35:09 +0800
+Message-ID: <1513780509-29610-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Received: by 10.37.97.6 with HTTP; Tue, 19 Dec 2017 14:29:43 -0800 (PST)
-In-Reply-To: <1f1db4cf-17aa-d1e3-4b0d-305d37dd029d@gmail.com>
-References: <1f1db4cf-17aa-d1e3-4b0d-305d37dd029d@gmail.com>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Tue, 19 Dec 2017 23:29:43 +0100
-Message-ID: <CALbNGRQYJc1fxOYL6+fE3GcxD-PDJnNMePba1DRn=j02Yvuv1g@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: State of bitbake world, Failed tasks 2017-12-17
+X-Originating-IP: [10.167.225.35]
+X-yoursite-MailScanner-ID: A495D486A76E.A62AD
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] libyui: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,49 +37,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 19 Dec 2017 22:29:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 20 Dec 2017 05:35:40 -0000
+Content-Type: text/plain
 
-On Tue, Dec 19, 2017 at 8:49 PM, akuster808 <akuster808@gmail.com> wrote:
+Add a new recipe libyui, which is a rdepend for dnfdragora.
 
-> This build included some meta-python changes that had v2 after the build
-> started.
->
->
-> == Failed tasks 2017-12-17 ==
->
-> INFO: jenkins-job.sh-1.8.43 Complete log available at
-> http://logs.nslu2-linux.org/buildlogs/oe/world/sumo/log.
-> report.20171219_092527.log
->
-> === common (7) ===
->     * meta-openembedded/meta-gnome/recipes-gnome/eds/evolution-
-> data-server_git.bb:do_compile
->
-^Have a patch prepared - it is at test currently
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ meta-oe/recipes-graphics/libyui/libyui_git.bb | 39 +++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
+ create mode 100644 meta-oe/recipes-graphics/libyui/libyui_git.bb
 
->     * meta-openembedded/meta-gnome/recipes-gnome/libgnome/
-> libgnome_2.32.1.bb:do_compile
->
-^Khem sent working fix
+diff --git a/meta-oe/recipes-graphics/libyui/libyui_git.bb b/meta-oe/recipes-graphics/libyui/libyui_git.bb
+new file mode 100644
+index 0000000..9b1d1d8
+--- /dev/null
++++ b/meta-oe/recipes-graphics/libyui/libyui_git.bb
+@@ -0,0 +1,39 @@
++SUMMARY = "Libyui is a widget abstraction library providing Qt, GTK and ncurses frontends."
++LICENSE = "LGPLv3"
++LIC_FILES_CHKSUM = "file://COPYING.gpl-3;md5=d32239bcb673463ab874e80d47fae504 \
++                    file://COPYING.lgpl-2.1;md5=4fbd65380cdd255951079008b364516c \
++                    file://COPYING.lgpl-3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
++                   "
++
++SRC_URI = "git://github.com/libyui/libyui.git \
++           "
++
++PV = "3.3.3+git"
++SRCREV = "f4ccea39f6b6f37eabd0a4df49db5f9bcb3c013a"
++
++S = "${WORKDIR}/git"
++
++inherit cmake gettext pkgconfig
++
++DEPENDS += "boost"
++
++BBCLASSEXTEND = "native nativesdk"
++
++do_configure_prepend () {
++        cd ${S}
++        ./bootstrap.sh
++        cd -
++}
++
++do_install_append () {
++        if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d ${D}/usr/lib64 ]; then
++            mv ${D}/usr/lib64 ${D}/usr/lib
++        fi
++}
++
++do_install_append_class-nativesdk () {
++        mkdir -p ${D}/${base_prefix}
++        mv ${D}/usr ${D}/${base_prefix}
++}
++
++FILES_${PN}-dev = "${libdir}/* ${includedir}/yui*"
+-- 
+2.7.4
 
->     * meta-openembedded/meta-networking/recipes-daemons/
-> keepalived/keepalived_1.3.5.bb:do_configure
->     * meta-openembedded/meta-networking/recipes-daemons/
-> postfix/postfix_3.2.2.bb:do_install
->     * meta-openembedded/meta-networking/recipes-support/
-> ntop/ntop_5.0.1.bb:do_configure
->     * meta-openembedded/meta-networking/recipes-support/
-> tinyproxy/tinyproxy_1.8.4.bb:do_prepare_recipe_sysroot
->     * meta-openembedded/meta-xfce/recipes-xfce/gtk-xfce-engine/
-> gtk-xfce-engine_3.2.0.bb:do_compile
->
-^Khem sent working fix
 
-FWIW: As mentioned earlier: Some of Khem's patches were refused by
-patchwork. I cherry-picked them form his git repo branch [1]
 
-[1] https://github.com/kraj/meta-openembedded/tree/kraj/master
-
-Andreas
 
