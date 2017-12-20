@@ -1,48 +1,49 @@
 Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wm0-f48.google.com (mail-wm0-f48.google.com [74.125.82.48])
-	by mail.openembedded.org (Postfix) with ESMTP id C4C566011C
+Received: from mail-wr0-f179.google.com (mail-wr0-f179.google.com
+	[209.85.128.179])
+	by mail.openembedded.org (Postfix) with ESMTP id CBA6C6011C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Dec 2017 06:47:29 +0000 (UTC)
-Received: by mail-wm0-f48.google.com with SMTP id f140so7652399wmd.2
+	Wed, 20 Dec 2017 06:48:37 +0000 (UTC)
+Received: by mail-wr0-f179.google.com with SMTP id p69so12513746wrb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 19 Dec 2017 22:47:31 -0800 (PST)
+	Tue, 19 Dec 2017 22:48:39 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=jsirHYZUG8jl8vLVoscIcsinEuQxxzj0YuFXHqc9zG8=;
-	b=cQJ3R09/WKe3L3fAx4J1D6j6WD+c6Afsw9xTZnt2G8tCEmqD3AWzqw4wJCZWNdaSOa
-	ttSIlj+Q4pg1PyuHLk6XaNvC18ndl++taWDTaf/ab1+Wfzx6A8ZhBZJJeEiKNXVBh8SL
-	N7Ln7DdVMoGF8pvTMZwaxRX8dZQ/t95ZlHFWeFxdUYPIMck3iIdmUzXca0p9bvHsMeyN
-	+9FaMPyEkKp3x6nIbXb2HyEeuhPWwWhrv83sKucV86ZFfLnPSq1U4ReXiOHBDW6lf0Wm
-	Z7+a4/TumkBRqB/of+qnyvUCd+DeBAJKFckbnzVrlPEv5gCkwbryqyLiNVqbFnxsGq7b
-	pQ3g==
+	:cc; bh=Gx+kRbYW3V93K3YpdMjBzWq+3dGK09Xi+FCzqpyqdNc=;
+	b=WxCCB2A86xd1h10Js6nlxIM+jxR2oxiudzPPsgmiFmmFlXqmsDQ61x2I8svrkFzYIL
+	WSZSBBx4JJaBuA4+rf20zqN90Cg53k7kCsYBCb+pX1XHJHg1WX2beYuH+it82EJ5uuFO
+	mT8Jnh1HXOZM3XObSSggYL22wb+zBARQcllRV2Pe+/MfntH3hoOVRsKLBJIZD9+WsB4n
+	KtYeL5kpYMIrdTi+j0fR4qztc2ttIxXs9PKKPF9zqqiwbwdrSNMhb3yF2O0uNKlbMjqc
+	iNT9PQLRFU4VGdrgReatRh7AH/XTuhKUkRKXagJYZyLf77M3Gsdj7u7moicAIVXWQADa
+	hLCg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
 	:message-id:subject:to:cc;
-	bh=jsirHYZUG8jl8vLVoscIcsinEuQxxzj0YuFXHqc9zG8=;
-	b=RtQz8ClcGg2/7xQYWFyKov76U98tiW3hjLuDa7qamt1GdxKvnyMHSfw4TbkapQNf1i
-	TDxUKBJ5L+OEUw0N6x7RxFJrS9TZDsuBXtfr31G19Ia92lbCxl1NWaDLihWBGZo6Gwuz
-	D+NK8N+muc+6jKYSAyqEAzuITB9k5NxS1Iw755PLWNepFeerWqcThZJDS5MQwl3YmOTQ
-	HpLETIsNuGdhvV/+vGTCaYwu9krd/mqanOCzETPwJBB3qMjq0DtIrI6QBy/UCPLdUabB
-	Zhu5E3UdAqqX07PS0kYw9hu1Kv7jGHfZDgIdrQUFRP32vl2uC9swGi9HMfJIoposS4c4
-	nwiQ==
-X-Gm-Message-State: AKGB3mL4zpS2Ab8miToruk87xK81fAL9cCVcI0DBDSjUBxtIh9iSJqxq
-	rhrBa6vn1olftY5JzzvzITYvLjnEHN2l/FyNcBE=
-X-Google-Smtp-Source: ACJfBouEwrUnZBuaxxcPLRAi/9EXevmHPIidfeg0V8bBrvYoLQwL33Ytif+HjVAVrG+qu2e3i5h+TTZlPeMDvSZtbuc=
-X-Received: by 10.28.65.65 with SMTP id o62mr6025204wma.112.1513752450489;
-	Tue, 19 Dec 2017 22:47:30 -0800 (PST)
+	bh=Gx+kRbYW3V93K3YpdMjBzWq+3dGK09Xi+FCzqpyqdNc=;
+	b=FxlYJC2Z0AzLL471WrC5JoyYBDZSRhkeL35s0D0cijofUHnoMzSe02g0BJ/dbU/zP/
+	YDZvI5h43otVliEgY1j3w5bKr+0+IJhC6NP4jrVwWa/ENS17/zQ7+wnyjHO3Agqcb1m8
+	J8EN0R+Ku/GNBe0Dhyup0dOKq8xGnQTNZVza/+qOHTQXmiBi9pHLsOYVCLvdub3RfgOi
+	QFt+Hc85oYtZf45XuEQvXswA2GFzu0w/VNiUpt9UmcMYpe3rgMuWrJ+MBrOL12cBMAmW
+	x3tG7WqdHpoDyJCO3aDzGCpN5nsxW4xO53tz3xFVpQHm0FBTz+TMyOS4ZunztD+9E1gk
+	ozsA==
+X-Gm-Message-State: AKGB3mL4bMaE2XU3Hx2FNEzAhUpnze5axTr76r7nZOXgghRwythDpFx1
+	Gyeler/gMDt+ZeUgMoC/dNWP3ABfZ6SnBYEb8Wipzg==
+X-Google-Smtp-Source: ACJfBotvYFt9i72VVqKRWcSHWCSZ/dwje5cGZJTQOnzaJj8bfZH3TQNreNzynOzIyZoFE5jZ9e5ZBtNA8tS7Yv27zLE=
+X-Received: by 10.223.161.158 with SMTP id u30mr587567wru.200.1513752518600;
+	Tue, 19 Dec 2017 22:48:38 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.28.122.19 with HTTP; Tue, 19 Dec 2017 22:47:29 -0800 (PST)
-In-Reply-To: <1513748750-15017-1-git-send-email-B40290@freescale.com>
-References: <1513748750-15017-1-git-send-email-B40290@freescale.com>
+Received: by 10.28.122.19 with HTTP; Tue, 19 Dec 2017 22:48:38 -0800 (PST)
+In-Reply-To: <CA+chaQc4TeOyEnpWhYJi6m_6FNk47JYb3Z6eZ3oz=oFK23TW6w@mail.gmail.com>
+References: <20171216104544.23324-1-dariusz.pelowski@gmail.com>
+	<CA+chaQc4TeOyEnpWhYJi6m_6FNk47JYb3Z6eZ3oz=oFK23TW6w@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
-Date: Wed, 20 Dec 2017 07:47:29 +0100
-Message-ID: <CA+chaQco_7PigdHqWJHMtv0JCm2FBtzjAsCVCHnwj2QAjXSLZg@mail.gmail.com>
-To: Chunrong Guo <B40290@freescale.com>
+Date: Wed, 20 Dec 2017 07:48:38 +0100
+Message-ID: <CA+chaQfr5S5XvS3+fotQnycDfEz2oUDp65yJC16R1ksnKJ+o+Q@mail.gmail.com>
+To: Dariusz Pelowski <dariusz.pelowski@gmail.com>
 X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Chunrong Guo <chunrong.guo@nxp.com>
-Subject: Re: [meta-networking][PATCH] cyrus-sasl: depend on db
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-networking][PATCH] meta-networking: virtual/db dependency corrected to db
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,48 +56,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Dec 2017 06:47:30 -0000
+X-List-Received-Date: Wed, 20 Dec 2017 06:48:38 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-There is fix for this already:
+https://patchwork.openembedded.org/patch/145728/
 https://patchwork.openembedded.org/patch/145729/
 
-On Wed, Dec 20, 2017 at 6:45 AM, Chunrong Guo <B40290@freescale.com> wrote:
+On Sat, Dec 16, 2017 at 2:51 PM, Martin Jansa <martin.jansa@gmail.com>
+wrote:
 
-> From: Chunrong Guo <chunrong.guo@nxp.com>
+> There are already pending changes for this.
 >
-> *db don't provide virtual/db
+> On Sat, Dec 16, 2017 at 11:45 AM, Dariusz Pelowski <
+> dariusz.pelowski@gmail.com> wrote:
 >
-> https://git.yoctoproject.org/cgit/cgit.cgi/poky/commit/?id=
-> fe10cad66932c23812f344c6551cdb4f9e0b867b
+>> db doesn't provides virtual/db anymore
+>>
+>> Signed-off-by: Dariusz Pelowski <dariusz.pelowski@gmail.com>
+>> ---
+>>  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 2 +-
+>>  meta-networking/recipes-daemons/postfix/postfix.inc             | 4 ++--
+>>  2 files changed, 3 insertions(+), 3 deletions(-)
+>>
+>> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.
+>> 26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> index eaa453d91..64d1a76d6 100644
+>> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
+>> @@ -1,7 +1,7 @@
+>>  SUMMARY = "Generic client/server library for SASL authentication"
+>>  SECTION = "libs"
+>>  HOMEPAGE = "http://asg.web.cmu.edu/sasl/"
+>> -DEPENDS = "openssl virtual/db"
+>> +DEPENDS = "openssl db"
+>>  LICENSE = "BSD"
+>>  LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
+>>
+>> diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> index a588bd347..75cf13795 100644
+>> --- a/meta-networking/recipes-daemons/postfix/postfix.inc
+>> +++ b/meta-networking/recipes-daemons/postfix/postfix.inc
+>> @@ -6,11 +6,11 @@ has a definite Sendmail-ish flavor, but the inside is
+>> completely different."
+>>
+>>  HOMEPAGE= "http://www.postfix.org"
+>>  SECTION = "mail"
+>> -DEPENDS = "virtual/db icu libpcre openssl postfix-native \
+>> +DEPENDS = "db icu libpcre openssl postfix-native \
+>>      ${@bb.utils.contains('DISTRO_FEATURES', 'ldap', 'openldap', '', d)}
+>> \
+>>      ${@bb.utils.contains('DISTRO_FEATURES', 'sasl', 'cyrus-sasl', '',
+>> d)} \
+>>  "
+>> -DEPENDS_class-native = "virtual/db-native icu-native openssl-native
+>> libpcre-native"
+>> +DEPENDS_class-native = "db-native icu-native openssl-native
+>> libpcre-native"
+>>
+>>  LICENSE = "IPL-1.0"
+>>  LIC_FILES_CHKSUM = "file://LICENSE;md5=64375f37431336ea1b1b3005fe3fa354"
+>> --
+>> 2.15.0
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 >
-> Signed-off-by: Chunrong Guo <chunrong.guo@nxp.com>
-> ---
->  meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb | 2 +-
->  1 file changed, 1 insertion(+), 1 deletion(-)
->
-> diff --git a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_
-> 2.1.26.bb b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_
-> 2.1.26.bb
-> index eaa453d..64d1a76 100644
-> --- a/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> +++ b/meta-networking/recipes-daemons/cyrus-sasl/cyrus-sasl_2.1.26.bb
-> @@ -1,7 +1,7 @@
->  SUMMARY = "Generic client/server library for SASL authentication"
->  SECTION = "libs"
->  HOMEPAGE = "http://asg.web.cmu.edu/sasl/"
-> -DEPENDS = "openssl virtual/db"
-> +DEPENDS = "openssl db"
->  LICENSE = "BSD"
->  LIC_FILES_CHKSUM = "file://COPYING;md5=3f55e0974e3d6db00ca6f57f2d206396"
->
-> --
-> 1.9.0
->
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 >
 
