@@ -1,23 +1,43 @@
-Return-Path: <Mark.Asselstine@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id A25576E5CB
+Return-Path: <bill.randle@gmail.com>
+Received: from mail-ot0-f169.google.com (mail-ot0-f169.google.com
+	[74.125.82.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 6502E60806
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 20 Dec 2017 19:29:57 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBKJTutT019656
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Wed, 20 Dec 2017 11:29:56 -0800 (PST)
-Received: from yow-dellw-ma.wrs.com (128.224.56.18) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 20 Dec 2017 11:29:55 -0800
-From: Mark Asselstine <mark.asselstine@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 20 Dec 2017 14:29:50 -0500
-Message-ID: <1513798190-31437-1-git-send-email-mark.asselstine@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Thu, 21 Dec 2017 04:26:58 +0000 (UTC)
+Received: by mail-ot0-f169.google.com with SMTP id q3so21476335oth.2
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 20 Dec 2017 20:26:59 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:from:date:message-id:subject:to;
+	bh=XrXK8PnCJrQvwYXhm0g5YKEisZxfuJ0SwGjjj6wQuUQ=;
+	b=gZKBPdg4xlxHddYGtEFTI/ksYeay/hDMubGplCpRwvHjtsVPJbH8nxE88lf3gV5cnb
+	2kJ9oXB92V8ZRf/m1ZDwVmCxERpICfWEooZhkidHmhiRrwJnLI1ko9S2hchIsOfMCpUZ
+	cvZTYvc98x5AeFi4Zv2EDQW3pCvUE3ncfL2+Ybpc8FdZyZr3GvRSZNNfwZhallupnTu9
+	jXF3ERobac1Yehln/9eFs/Unt3fAH83vBo6+7azG4fA0AZkmL2I4PiyJeRJ2mxdSC0a7
+	2P+5+87YNqOPpMrUOiOwaxUJhGh2wcXZe4Dh7uj620WfsSjuJSEvb8uK7l+hppYUiPOI
+	RASw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=XrXK8PnCJrQvwYXhm0g5YKEisZxfuJ0SwGjjj6wQuUQ=;
+	b=sP64Sz6q4i8DmKyfm5lF9ooI9yTB08l04iduOXroLJKW9Q39ErB5b0DoUN8/PjrY+/
+	Vx+VJDkNC8ZCmQ48Ecc1oft1xM/GCUU0Nru+I5uxFFNxXaHVKwmsWhdVuikkis3CIaDn
+	4U0HPkPam/dePI6Mb1nInp6Aa4NoVL/FpxG/1MqMh5LlDK+addgmut36ZGMOBijdvZf0
+	zKoMBIdBRV3SRwNhiKgXQ2YDSy7KDBpDzQL4jV7U5ojkJniJ1tzLXYMZRceCt4vV1gAP
+	hTFACou2EbvvhO3Z1UWbwv5tVz4g+4T8wEj2/AJD22/QKEahaYwn8wJV7gxg1CCdIass
+	0FHA==
+X-Gm-Message-State: AKGB3mJJB1rv70kkT37KwQlr5tqRQtgvCeNqheZrelwkGjhINSr6tjXA
+	jdlmwbDfK5nKgiIDdpGWG/bBK4165LQ/kZEcJ18=
+X-Google-Smtp-Source: ACJfBou+ov8JvkywrRqa2yvE4/t8vk32QKRApdfoZ+k1e5bVIwckxen5Eew8b/Fx51kI95OMtjXvIo77Q3tLTKWO4bI=
+X-Received: by 10.157.14.89 with SMTP id n25mr7688477otd.224.1513830419146;
+	Wed, 20 Dec 2017 20:26:59 -0800 (PST)
 MIME-Version: 1.0
-Subject: [meta-python][PATCH] python-twisted: avoid downloading build dependencies
+Received: by 10.202.221.194 with HTTP; Wed, 20 Dec 2017 20:26:58 -0800 (PST)
+From: Bill Randle <bill.randle@gmail.com>
+Date: Wed, 20 Dec 2017 20:26:58 -0800
+Message-ID: <CA+n--H-+5egfyDravS4qDVHiwEXknty4Dvb=TykyuLLqn=ZOEw@mail.gmail.com>
+To: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: [meta-oe] smstools3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -30,67 +50,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 20 Dec 2017 19:29:57 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 21 Dec 2017 04:26:58 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-setup.py will attempt to download python-incremental, as it is not
-present in the sysroot. This is at the least wrong since some random
-version of python-incremental will be used to build against (akin to
-host contamination) and at most a build failure (when network access
-is unavailable). So make python-incrementa-native available and a
-DEPENDS.
+When smstools3 was added to meta-oe/recipes-connectivity in 2015, a
+patch was included to the init script to change to 'ps' options used
+to find the pid during stop. The original (as distributed by the
+author) has PSOPT="-e" and the patch changes it to PSOPT="". The way
+it is used is:
+    if  "ps $PSOPT | grep smsd | grep -v grep >/dev/null; then
+       do stuff
+    fi
 
-Unfortunately python-incremental has a dependency on python-twisted
-and vice versa. So we need to forcefully break this circular
-dependency. Fortunately this doesn't affect the build of
-python-twisted. Unfortunately if anyone else attempts to use
-python-incremental-native there might be issues should it ever run the
-code that does the import of twisted. This is not an issue now and a
-comment has been added to hopefully make this issue known to anyone
-else coming along at a later time.
-
-Signed-off-by: Mark Asselstine <mark.asselstine@windriver.com>
----
-
-*NOTE*
-This should be applied to the rocko branch as well after
-my previous 8 patch python-twisted series is applied.
-
-
- meta-python/recipes-devtools/python/python-incremental.inc | 6 ++++++
- meta-python/recipes-devtools/python/python-twisted.inc     | 4 ++++
- 2 files changed, 10 insertions(+)
-
-diff --git a/meta-python/recipes-devtools/python/python-incremental.inc b/meta-python/recipes-devtools/python/python-incremental.inc
-index 3675458..b63fac9 100644
---- a/meta-python/recipes-devtools/python/python-incremental.inc
-+++ b/meta-python/recipes-devtools/python/python-incremental.inc
-@@ -12,3 +12,9 @@ RDEPENDS_${PN} += " \
-     ${PYTHON_PN}-twisted \
-     ${PYTHON_PN}-click \
- "
-+
-+# -native is needed to build python[3]-twisted, however, we need to take steps to
-+# prevent a circular dependency. The build apparently does not use the part of
-+# python-incremental which uses python-twisted, so this hack is OK.
-+RDEPENDS_${PYTHON_PN}-incremental-native_remove = "${PYTHON_PN}-twisted-native"
-+BBCLASSEXTEND = "native nativesdk"
-diff --git a/meta-python/recipes-devtools/python/python-twisted.inc b/meta-python/recipes-devtools/python/python-twisted.inc
-index 0dd584f..6480ad5 100644
---- a/meta-python/recipes-devtools/python/python-twisted.inc
-+++ b/meta-python/recipes-devtools/python/python-twisted.inc
-@@ -39,6 +39,10 @@ PACKAGES =+ "\
-     ${PN}-bin \
- "
- 
-+DEPENDS += " \
-+    ${PYTHON_PN}-incremental-native \
-+"
-+
- RDEPENDS_${PN} = "\
-     ${PN}-bin \
-     ${PN}-core \
--- 
-2.7.4
-
+I'm considering submitting a patch to update the recipe from version
+3.15 to 3.21, but before I do, I like to know why PSOPT was changed.
+On my busybox test system, a "ps | grep smsd" returns nothing. I need
+to use the "-e" option. So, I would like to drop this patch. Comments?
 
