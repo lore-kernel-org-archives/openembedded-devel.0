@@ -1,57 +1,49 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-lf0-f65.google.com (mail-lf0-f65.google.com
-	[209.85.215.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 1BB377875B
+Return-Path: <ross.burton@intel.com>
+Received: from mail-io0-f195.google.com (mail-io0-f195.google.com
+	[209.85.223.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 5A159787F3
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Dec 2017 09:54:28 +0000 (UTC)
-Received: by mail-lf0-f65.google.com with SMTP id r143so27152005lfe.13
+	Thu, 21 Dec 2017 11:39:43 +0000 (UTC)
+Received: by mail-io0-f195.google.com with SMTP id w127so20748384iow.11
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Dec 2017 01:54:30 -0800 (PST)
+	Thu, 21 Dec 2017 03:39:45 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dresearch-fe-de.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:followup-to:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=Iekzc71zgvAntixQm3vIAS9D7Wz0SUp45yohRZjVh8U=;
-	b=PyJNkGKvdRyx7CIxsB+AUUwv3nQHqn5UgoL1Fiykud4OglebWjMoYeK8OfU8y2+IeA
-	MeQgFN344epmv2TsU/xGen2FKLA7OJkoFM1159z8/08usW5RQFsHfxQO939gsYPZYvHX
-	uwq2jAlLb3FaiTor1jiWoWAHrxNH5+JjsUC6Fd7bbgP7rFeV6Sq5+Bblw3Ws8JGTYKEX
-	EyYyy8QKxZX+7iJI2paARcLWXZ3CBazS1kwTIOLumEEF+LD/Q+2F2rPe9JOXOy+16KPj
-	zdXmKZ/5iYxEYoG7iOFw5cnRKdgahovvWgBOd1+1AKjLvCR81OQRZsN3txXz6oswNP7j
-	vaVw==
+	d=intel-com.20150623.gappssmtp.com; s=20150623;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=c70EhqYpccA+EMS5WqrViTfwHJfuUQX4pL5VKr9KrZ8=;
+	b=vTcuCG9axnTUZOuzoE2uizRUcV/HY7XR9iVy0mdZP587mZxlXz0d4y1uvsMmlxEqAB
+	YXoqvbaqtJcVgrj9x3xqYvmtQICqVfTvSFeS5V/LW6ke6WxW2vkmk48aYCLAFo10Ja/X
+	ePcvTh+qDYA2T9r5G3x2dAG/AwXlsj+nongG3+CQ3pVTyhzPPna5ayPbqZ4XiEG3ryjt
+	sAooRcwybO/eC5cPITEyPtMPy4vz2ZSBrnUX/kGiMcUoL8OVbYA9+TH3KRAmnMLd2dQ+
+	K4LGA/pKG+Ga3AqMpcigt/NBMYo2uSCjxDqZ/mYv6mWIUdxpaILmBS4Nn2Xlx84ty5b1
+	NTHQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:followup-to:from
-	:message-id:date:user-agent:mime-version:in-reply-to
-	:content-language:content-transfer-encoding;
-	bh=Iekzc71zgvAntixQm3vIAS9D7Wz0SUp45yohRZjVh8U=;
-	b=Ibpns0Xpi2fbqEk9mR4CUiC30j6ih5oFm2dOdmUiKOadplfXUTME3XF3t60yp+BGfw
-	XvRy77CMDASGQWcbm7lshjFFBdTRlYU4SkQHv7BEf9SrA6lcTnOLYo2tYlzHGtjKM+RB
-	qWmjzI0Jze6QcvysxEa3hcu9fHYuNen4yhl/WAFeId1Ks/lcmXaP9P0Jt015MvbqpJNJ
-	ZzqPpVvYQu7tKyqh5Lt3Gi+d0trEgxW6LKGfFePJN++AK9h2NShNguojSWGNBD/zVQ51
-	c5Juc7jpk1XkMBGM8TGERfK+SZ7lPcK5L/FWOUSGeF5OnHK8Eu3NfN+t+FVp/W1a3X+G
-	MFgA==
-X-Gm-Message-State: AKGB3mI8pWMfzQBwesFeGSbpImrPhYH9BMPLMz7Xq2gU7TWLam/5bZ+Z
-	DIQZExPDW//9iM1X5wNQL89gFw==
-X-Google-Smtp-Source: ACJfBotvtOuJ+xUa9FtJYxeu5xMS/Zx2QNioRuUqwgrrXIvM7qochjgOKMpBVtUzsi22pqr17OATwA==
-X-Received: by 10.46.89.129 with SMTP id g1mr6657727ljf.12.1513850069454;
-	Thu, 21 Dec 2017 01:54:29 -0800 (PST)
-Received: from ?IPv6:2003:a:31:4300::46? ([2003:a:31:4300::46])
-	by smtp.googlemail.com with ESMTPSA id
-	g192sm3788688lfg.58.2017.12.21.01.54.27
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Thu, 21 Dec 2017 01:54:28 -0800 (PST)
-To: "Burton, Ross" <ross.burton@intel.com>
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=c70EhqYpccA+EMS5WqrViTfwHJfuUQX4pL5VKr9KrZ8=;
+	b=OF89wF2K2x3EzYwhPy+ISGOb+65kAx6mY+lS/dE3nFrs3KsZck4A+IK4OXA70CGsXh
+	1ckPMXXChdRTV7USkRjeRacN45AXYYLTTIfNGWf1LNT8B6y/nrE/aH/MeRyUbqnS0Rui
+	aC4fy/A/9NbpJE9nk1Ng1AgTT3fuxpL8zfTd/F/yvlvp6dGcefXhYF+LiCQPvyfiEq3J
+	61KROy8N8f2WDyifRF4PmlqnJD9cAwroA0sb7xRuUks+mlC9XPy3+LyyHxlbdjSp+JAo
+	uTuGoaQGfJQ9IRge2epYnpmA5fKaGlKytpCAPVDiRPStnwmJjsF/SXSSuEfQVisvNsjy
+	4FCg==
+X-Gm-Message-State: AKGB3mJXG0eU/rg/nRYf0XcOsYS100FuIVTwFq+1Y22WN5xecXKlCKpV
+	f1VBCU52Doo0MmMelMwEhEv8ZwoUJO1VDYhutnyoYg==
+X-Google-Smtp-Source: ACJfBosEm1PsJNKWc9nY3UuvYIHALvnlm1IQdSIlTsINSVAEhCXL9aThxTbwkc7tJhklPoKIH92Kuolmz7gOqQ39bwc=
+X-Received: by 10.107.47.1 with SMTP id j1mr12649485ioo.217.1513856385339;
+	Thu, 21 Dec 2017 03:39:45 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.107.34.140 with HTTP; Thu, 21 Dec 2017 03:39:24 -0800 (PST)
+In-Reply-To: <6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
 References: <460be213-a6c9-59fa-f8e3-d3f7e6232ca4@dresearch-fe.de>
 	<CAJTo0LaHXJMMNg8VmqFNne_8rgEV9TER5saUzUXudRgvzggWNw@mail.gmail.com>
-Followup-To: openembedded-core <openembedded-core@lists.openembedded.org>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
-Date: Thu, 21 Dec 2017 10:54:26 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
-MIME-Version: 1.0
-In-Reply-To: <CAJTo0LaHXJMMNg8VmqFNne_8rgEV9TER5saUzUXudRgvzggWNw@mail.gmail.com>
+	<6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
+From: "Burton, Ross" <ross.burton@intel.com>
+Date: Thu, 21 Dec 2017 11:39:24 +0000
+Message-ID: <CAJTo0LYWwMnj4Wb6JC1y7uw4ZrPv6=SynfkSc0TU0dwi9Dezjw@mail.gmail.com>
+To: Steffen Sledz <sledz@dresearch-fe.de>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] MS Windows machine?
@@ -67,21 +59,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 21 Dec 2017 09:54:29 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 21 Dec 2017 11:39:44 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-On 21.12.2017 10:08, Burton, Ross wrote:
-> On 21 December 2017 at 06:40, Steffen Sledz <sledz@dresearch-fe.de> wrote:
->> Anyone tried to cross-compile for MS Windows target with Yocto/OE?
-> 
-> Yes, see meta-mingw.
+On 21 December 2017 at 09:54, Steffen Sledz <sledz@dresearch-fe.de> wrote:
 
+> On 21.12.2017 10:08, Burton, Ross wrote:
+> > On 21 December 2017 at 06:40, Steffen Sledz <sledz@dresearch-fe.de>
+> wrote:
+> >> Anyone tried to cross-compile for MS Windows target with Yocto/OE?
+> >
+> > Yes, see meta-mingw.
+>
+> A misunderstanding?
+>
+> I like to build *for* MS Windows, not *at* MS Windows.
+>
 
-A misunderstanding?
+"OpenEmbedded meta layer for mingw based SDKs"
 
-I like to build *for* MS Windows, not *at* MS Windows.
+Running bitbake on Windows isn't possible.  It's getting closer with the
+new Subsystem for Linux thing but that's not ready yet.
 
-Steffen
+meta-mingw lets you build SDKs *for* Windows.  We've used it to build cross
+compilers that run on Windows that generate Linux binaries.
+
+If you want to build for a Windows target then that should be possible but
+nobody as far as I'm aware has made the work public.  meta-mingw will
+contain most of the changes needed as that does build Windows binaries.
+
+Ross
 
