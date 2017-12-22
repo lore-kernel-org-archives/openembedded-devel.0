@@ -1,43 +1,46 @@
 Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-wr0-f178.google.com (mail-wr0-f178.google.com
-	[209.85.128.178])
-	by mail.openembedded.org (Postfix) with ESMTP id AC9C6788A0
+Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
+	[209.85.128.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 0A0FB787C9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 07:55:36 +0000 (UTC)
-Received: by mail-wr0-f178.google.com with SMTP id o2so27168511wro.5
+	Fri, 22 Dec 2017 09:30:17 +0000 (UTC)
+Received: by mail-wr0-f193.google.com with SMTP id o2so27375034wro.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 21 Dec 2017 23:55:38 -0800 (PST)
+	Fri, 22 Dec 2017 01:30:19 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:from:date:message-id:subject:to;
-	bh=anH66ambFn6SpVFOT4/f5hseTDxzcSm2efe85++leKw=;
-	b=Q4ngT+qfJ3Y+9rxEjSsw20eUvOGBTpHav9BqmtDfOEham5tokKIuOH6g1YzAMeZ9qt
-	La3w9s5co4OTtL/u0mguDrHfkiDAMl1UEVnMQbD/00WO4DmNCjxiHOX094lW683akYPn
-	x/o3eVYDN5q68qqjwzxFeS1AKs37QHr3I5Jaz+w23NhuLcSMt/zr6IN/wQOEsYCCK7OH
-	3ROccYoHTDtzHO8yZpiBuVokgWUC4wKKsPH1g5rOLbsVvt89x9Dd/J6zZ8KRXYDn1/9z
-	GZv56qA4LNW/Mkzy74kmG0qR3QTXeh/JZ6TOcqlL3Dst9Xq5XqgoRgRXnVOHrke6a8h8
-	VEzA==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
+	bh=ltn3rQp3iJklmKClZ5uVnw38vZKVl0ds+BuV5ZiB1nQ=;
+	b=NhK8Exm0KEeBIjdImjcZ2TtKmaSMwlSzZEl+llbUFB+Zvz4HwJKqIUcEn3G2vvLA5/
+	Uc5WClHhNRPoA5LJjB+hWow+6A3IsBCbfTlMZCnzka9i210TzKqIM99kEjrvLAktn5vn
+	/Hpfj62Zas1NwPVd9aJgMcpORI+IX23kFDas8gq7FBN79S/bNdSW1URuRhiqsVrgw4sX
+	KX62wPJ+9nH8bvS7WvK5gySfr31QAIp7WcNRUEzqnK8Ps0/Eh0UALLbBAxfYtDKKxoUD
+	f2Vy/O3Qzk6m3Md46fFwLTTQ38g4o/s4iw8THmWdg3SbLUoWpPGLmoAAS67iN5Mbugt0
+	t69A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
-	bh=anH66ambFn6SpVFOT4/f5hseTDxzcSm2efe85++leKw=;
-	b=mFkNw6PA815dLW1T/wdRkCf65aNSHTP297iC3W5m3rJY2nSmM52f7Xuet0wyBS7LFi
-	2X5Dj1IgzJjk8r7jfVJYo2656g5skVExRositjgdn9AM1g6MZcqBfn57WF09WyrD4/vV
-	tZvpMUcrOV1c/hQ6D1jGHz4Zi7VV3X2r0uE83YYYH8B5B2nX9t/Ndp2Sjm/Ki021Wwz0
-	Xf/WZPygWOwcgVJmN9JYXx/KZ3RCtZHtIA4Mba6jPMhfIUi6xy545g5HfK/q3pdEKCFh
-	SCKmrg8GoYpNJOlh7w+lZNqUL3RyF7KsdCg8dZmIu0DqOD5B3Y/HO0t0P3NvL4Nn7l04
-	W/cg==
-X-Gm-Message-State: AKGB3mIQDplibFXH08KoWc11THrLiMGOhWI5ZQjkdm3QMJAFkJ+RZH3r
-	9qIMQkqJthagNEYTBg2EUxC89MTqsPz6r+JVw/027g==
-X-Google-Smtp-Source: ACJfBovGaJrs8JPuwP03RlDFM75bN+70DnyiYq8apEjyYc6Lnaf4s197knebz1L+T3FJ5EOqy4NA1Ncd3ftyKjDE8uI=
-X-Received: by 10.223.177.150 with SMTP id q22mr13968250wra.87.1513929337144; 
-	Thu, 21 Dec 2017 23:55:37 -0800 (PST)
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to;
+	bh=ltn3rQp3iJklmKClZ5uVnw38vZKVl0ds+BuV5ZiB1nQ=;
+	b=LTTPziVGygJ3FfMiOEnznn59o6XpI+De6EIjXoxtAMTGwCqI3FnWFZhqrcQnGua/8W
+	EADdaKDXxcAGRqXtqFU7wKxCSMXU8e4okCishlX0WBCoYTI0zBgx3i2aYlBZ/b/WG+av
+	N91TrzyvzGYh63XeGlA8QMwl1z8aveGnCpbTPWZOymVn2YYNXjPXk+QDa+W/jAn7TnNn
+	nieHCcp27tybIS+a0ac3lVFnHy+rAHKHVb6bW0BueIKVNebyui5MHmwB/aiOJEC0FnsI
+	SbM8hxeqRd4NP6jQ+bVqcAz6zyEA0Gajq0XzRdbWcsWIlYPpHJywaRxPds77Jnf+yBsE
+	6YbQ==
+X-Gm-Message-State: AKGB3mJl6HjOf7bu2CyDkBQMwQQx48oiAfWMIj51GhZ1kgUAzOKdRJt3
+	yfmcckQCA88XvQ638U3S482wW3MwzF0p/qqPfygcEg==
+X-Google-Smtp-Source: ACJfBov/mwK4YjIZetvsWmrRJo6t+zHcG3f9fWcUpRA4nK/KxmPkfOt6IKocEm1jPZC10Xm1PtrDM2UGHgNL57Vjfzg=
+X-Received: by 10.223.167.70 with SMTP id e6mr13915404wrd.235.1513935018439;
+	Fri, 22 Dec 2017 01:30:18 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.223.162.211 with HTTP; Thu, 21 Dec 2017 23:55:36 -0800 (PST)
+Received: by 10.223.162.211 with HTTP; Fri, 22 Dec 2017 01:30:17 -0800 (PST)
+In-Reply-To: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
+References: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
 From: Jacob Kroon <jacob.kroon@gmail.com>
-Date: Fri, 22 Dec 2017 08:55:36 +0100
-Message-ID: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
+Date: Fri, 22 Dec 2017 10:30:17 +0100
+Message-ID: <CAPbeDC=7U8UMCzDnL2MoQW18JMDpLPBnSbHKf=mmOk0GnSiBKw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Subject: [meta-java] pyro, rocko and per-recipe sysroots
+Subject: Re: [meta-java] pyro, rocko and per-recipe sysroots
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -50,24 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 07:55:37 -0000
+X-List-Received-Date: Fri, 22 Dec 2017 09:30:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi all,
+Hi,
 
-I'm trying to get a recent yocto build together with meta-java up and
-running, but ran into some problems:
+On Fri, Dec 22, 2017 at 8:55 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
+> Hi all,
+>
+> I'm trying to get a recent yocto build together with meta-java up and
+> running, but ran into some problems:
+>
+> 1. For rocko, I don't see the corresponding branch in meta-java,
+> should I use "master" ?
+> 2. For pyro, there is a branch in meta-java, but the build fails
+> unless I backport the patch in commit
+> c4b9b97c7c60ad5c0c3392ccf143b2e4e6c7df24:
+>
+> "java-library.bbclass: compatibility with per-recipe sysroots"
+>
+> Could we get this patch officially backported to pyro ?
+>
 
-1. For rocko, I don't see the corresponding branch in meta-java,
-should I use "master" ?
-2. For pyro, there is a branch in meta-java, but the build fails
-unless I backport the patch in commit
-c4b9b97c7c60ad5c0c3392ccf143b2e4e6c7df24:
+One more patch I needed backported for pyro to build:
 
-"java-library.bbclass: compatibility with per-recipe sysroots"
+2a706cd2d656a203ecb83bef1c687703c969732e
+"icedtea-native: Fix segmentation build during build"
 
-Could we get this patch officially backported to pyro ?
+since I'm on Fedora with a recent gcc7 I assume.
 
-Thanks
-Jacob
+/Jacob
 
