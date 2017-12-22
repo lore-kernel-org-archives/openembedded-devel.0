@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 3F063788CF
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id A0DCD77FEC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 20:52:02 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id k19so37677968qtj.6
+	Fri, 22 Dec 2017 21:13:33 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id g10so37692441qtj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 12:52:04 -0800 (PST)
+	Fri, 22 Dec 2017 13:13:35 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=SnHZMAHMIlRKdi4tsIZvENZZwRjL3nRG8v4bXliTeug=;
-	b=OzCf+G0wbg9eHPp+nnR2uLd+tELi17M33tzYJeV7RA90SnaF4DjSmKqc6bvh142+vI
-	BLhJIBUtC/ZGdVxl+l6gylN+iZVjwoEVGSnyApuYktlbYGDahuaQfd6xSaoA8OItpsVw
-	PXDd1KmJGW4EgrY1mUxfadc+82nN675a9m+1w7sjgx9FGkBdrnw4VYrqiEJIwywCAFtK
-	inx8x91LBAU9NN4R2wHIjEywvE/j2gFZU/7AeORDyaAKqWEQvUNDyaGjh/LPoW1FGX/m
-	OY4vv1nE74Or0kenKwBbT9xEOLXYqlj/DRRn7uyqb8+jpn+q6fbR3xua1JwdTc/AxpnV
-	dW2g==
-X-Gm-Message-State: AKGB3mLNQeE8zYs5e8m7xox7PyWALbeFP7Vvpxd+M8qG09/KrJQ6gCyp
-	uL/QW88rpOKRzMpIQLxapmaWO3x+
-X-Google-Smtp-Source: ACJfBotcCEyVsrhKB/pGysSjyfBzhoBd+9u5pOEg02MLB0vXqNUIbs1eeZI7mRcVw+luRdmxKazs8A==
-X-Received: by 10.200.63.208 with SMTP id v16mr21616166qtk.249.1513975924010; 
-	Fri, 22 Dec 2017 12:52:04 -0800 (PST)
+	bh=aNdMobCPv89vlkI1hQNT+vR9O7EIbHlMp8VN1xqTzhE=;
+	b=NXeW852Cd5qZQ13zTIv45jZ65AVc8oJlXUURz2yhFKslYvXTjgeAKwpaXzLxpnrkrw
+	dIyRlu4Kl5647WOB3l/psByOvkUBC2bEoLarSdEkHk8nL6djjZ81bRT54N5MIUq1GCqa
+	cp5zlXOXKIR8ISaBfqnRdNJS4Pi8/LNvYMJVetwkFiTkBniVorIJOELe2sP1n3Qspudj
+	V8AcfxVbWopWrn8o/p5AGpd/pKsspjwZStd7hV54ihOHeRGY0ySxJisEZt4ffsAHiCPv
+	M2JDdgAA6/eQN2CVp2NC6FvDXfo2+kBAQRQcfq2YPN/RUlVtqxFdDba9YG9ZTMO4djjk
+	mtHA==
+X-Gm-Message-State: AKGB3mJLjVRHqBlImKq0czNI5dV+cMpi5a8Ykj5V3g8u9kZsKBWZrHFd
+	BwODplmeRHuXbEvCnfDkWmfV7NXL
+X-Google-Smtp-Source: ACJfBoviTaxIES41VY21CT1sdnqBtN9wUdBQUKT1sbt1ULpCqARUYa3s/xZv/2QL28wi2SiuHCJysg==
+X-Received: by 10.237.33.205 with SMTP id m13mr22691785qtc.131.1513977214427; 
+	Fri, 22 Dec 2017 13:13:34 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	h55sm15106037qta.75.2017.12.22.12.52.03
+	x40sm14756009qtb.77.2017.12.22.13.13.33
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Dec 2017 12:52:03 -0800 (PST)
+	Fri, 22 Dec 2017 13:13:33 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Dec 2017 15:51:57 -0500
-Message-Id: <1513975917-10491-1-git-send-email-derek@asterius.io>
+Date: Fri, 22 Dec 2017 16:12:36 -0500
+Message-Id: <1513977156-29239-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-django: update to version 1.11.8
+Subject: [meta-python][PATCH] python3-cassandra-driver: update to version 3.12.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,91 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 20:52:03 -0000
+X-List-Received-Date: Fri, 22 Dec 2017 21:13:33 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-django.inc  | 18 ++++++++++++++----
- ...python-django_1.11.5.bb => python-django_1.11.8.bb} |  2 ++
- .../recipes-devtools/python/python3-django_1.11.5.bb   |  2 --
- .../recipes-devtools/python/python3-django_1.11.8.bb   |  7 +++++++
- 4 files changed, 23 insertions(+), 6 deletions(-)
- rename meta-python/recipes-devtools/python/{python-django_1.11.5.bb => python-django_1.11.8.bb} (53%)
- delete mode 100644 meta-python/recipes-devtools/python/python3-django_1.11.5.bb
- create mode 100644 meta-python/recipes-devtools/python/python3-django_1.11.8.bb
+ meta-python/recipes-devtools/python/python-cassandra-driver.inc       | 4 ++--
+ ...-cassandra-driver_3.11.0.bb => python3-cassandra-driver_3.12.0.bb} | 0
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python3-cassandra-driver_3.11.0.bb => python3-cassandra-driver_3.12.0.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index e4ed860..fec5379 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-+++ b/meta-python/recipes-devtools/python/python-django.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
+diff --git a/meta-python/recipes-devtools/python/python-cassandra-driver.inc b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+index a522e67..d11e657 100644
+--- a/meta-python/recipes-devtools/python/python-cassandra-driver.inc
++++ b/meta-python/recipes-devtools/python/python-cassandra-driver.inc
+@@ -8,8 +8,8 @@ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
+ SRCNAME = "cassandra-driver"
  
--SRC_URI[md5sum] = "8cef0d42aabacbc414ec4fbbb6056f3c"
--SRC_URI[sha256sum] = "1836878162dfdf865492bacfdff0321e4ee8f1e7d51d93192546000b54982b29"
-+SRC_URI[md5sum] = "e8b68d44b87a3de36e13547ec2722af2"
-+SRC_URI[sha256sum] = "fed3e79bb5a3a8d5eb054c7a1ec1de229ef3f43335a67821cc3e489e9582f711"
+-SRC_URI[md5sum] = "1659b074e10c613e5ba1cdf92974a57a"
+-SRC_URI[sha256sum] = "643bed0fac08ee91630f0f35556bb62c3b4b007c20d4e6e8d349f769ea648150"
++SRC_URI[md5sum] = "33bfaebe3245bc9f9be3993baf67962f"
++SRC_URI[sha256sum] = "cbd9504e241c6b16d8e50b32ccca2a48b04bb3b855741f010a92b3f3bbbc5627"
  
- PYPI_PACKAGE = "Django"
- inherit pypi
-@@ -14,11 +14,21 @@ FILES_${PN} += "${datadir}/django"
- BBCLASSEXTEND = "native nativesdk"
- 
- RDEPENDS_${PN} += "\
-+    ${PYTHON_PN}-argparse \
-+    ${PYTHON_PN}-compression \
-+    ${PYTHON_PN}-ctypes \
-     ${PYTHON_PN}-datetime \
-+    ${PYTHON_PN}-email \
-+    ${PYTHON_PN}-html \
-     ${PYTHON_PN}-importlib \
-+    ${PYTHON_PN}-json \
-+    ${PYTHON_PN}-multiprocessing \
-+    ${PYTHON_PN}-netserver \
-     ${PYTHON_PN}-numbers \
--    ${PYTHON_PN}-pip \
-     ${PYTHON_PN}-pkgutil \
-+    ${PYTHON_PN}-pytz \
-     ${PYTHON_PN}-subprocess \
-     ${PYTHON_PN}-threading \
--    "
-+    ${PYTHON_PN}-unixadmin \
-+    ${PYTHON_PN}-xml \
-+"
-diff --git a/meta-python/recipes-devtools/python/python-django_1.11.5.bb b/meta-python/recipes-devtools/python/python-django_1.11.8.bb
-similarity index 53%
-rename from meta-python/recipes-devtools/python/python-django_1.11.5.bb
-rename to meta-python/recipes-devtools/python/python-django_1.11.8.bb
-index ccd7714..ed92c9b 100644
---- a/meta-python/recipes-devtools/python/python-django_1.11.5.bb
-+++ b/meta-python/recipes-devtools/python/python-django_1.11.8.bb
-@@ -1,2 +1,4 @@
- require python-django.inc
- inherit setuptools
-+
-+RDEPENDS_${PN} += "${PYTHON_PN}-zlib"
-diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.5.bb b/meta-python/recipes-devtools/python/python3-django_1.11.5.bb
-deleted file mode 100644
-index e1e38c3..0000000
---- a/meta-python/recipes-devtools/python/python3-django_1.11.5.bb
-+++ /dev/null
-@@ -1,2 +0,0 @@
--require python-django.inc
--inherit setuptools3
-diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.8.bb b/meta-python/recipes-devtools/python/python3-django_1.11.8.bb
-new file mode 100644
-index 0000000..ef77603
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python3-django_1.11.8.bb
-@@ -0,0 +1,7 @@
-+require python-django.inc
-+inherit setuptools3
-+
-+# Requires _pydecimal which is in misc
-+RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-misc \
-+"
+ DISTUTILS_BUILD_ARGS += " \
+     --no-libev \
+diff --git a/meta-python/recipes-devtools/python/python3-cassandra-driver_3.11.0.bb b/meta-python/recipes-devtools/python/python3-cassandra-driver_3.12.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-cassandra-driver_3.11.0.bb
+rename to meta-python/recipes-devtools/python/python3-cassandra-driver_3.12.0.bb
 -- 
 2.7.4
 
