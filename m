@@ -1,48 +1,38 @@
-Return-Path: <changhyeok.bae@gmail.com>
-Received: from mail-pl0-f66.google.com (mail-pl0-f66.google.com
-	[209.85.160.66])
-	by mail.openembedded.org (Postfix) with ESMTP id A9E97788DF
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f194.google.com (mail-qt0-f194.google.com
+	[209.85.216.194])
+	by mail.openembedded.org (Postfix) with ESMTP id D72D9788BF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 14:51:11 +0000 (UTC)
-Received: by mail-pl0-f66.google.com with SMTP id bi12so13016185plb.6
+	Fri, 22 Dec 2017 15:06:03 +0000 (UTC)
+Received: by mail-qt0-f194.google.com with SMTP id u42so36583536qte.7
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 06:51:13 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=a6CsFZ2RFZuxYzNcBklAbpPYz4kJy44sUDviTJk1+Gw=;
-	b=iV2PuZdibkbM8i4O7T6mH21tMHRcFWC7BRjBZf7HWQuOrMEu6E+O4qtRCScJoIp57l
-	DcznpgYRsUTjse6clG4lTR5ypbAioSk53tKTLGdd8OODNlkcvCkDPmovQTY9NNQFQB7c
-	lNkL3DT8BUJayey/dt4IutLo0oeddGjB8E1GvO+9+kiVeyChw2BE6BAdH/QPU8O/CAUV
-	VCITtRZQV6YQxEfL59aOI8L7fCNSu5Bp3vAaUWkMVy4iGGwZfp4FRowuDpDz8esM/Ax3
-	64op/Jr/RTGS9VmPyM9McoLnkT4HPB9pPFlrzc5hL+hFY5YpEyL0+oKNm2WzjIG29qIR
-	PMWg==
+	Fri, 22 Dec 2017 07:06:05 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=a6CsFZ2RFZuxYzNcBklAbpPYz4kJy44sUDviTJk1+Gw=;
-	b=lTi1JA1iB7IyTMEOKNnI/OS16oBNQs/Q6QX2FkGU6QfClzTkhKM062tq8e6CGmt4Kp
-	3IjDVTCqBAP4ZII33/1+sjAMj0/qJP+SAQSM51DQNhuF0/BGKOi449ZGMn7Wb+jVxECz
-	7jA40JeKloadSAT05tDhBSrff7+Oz9RzyXWhY/6Da2ENnv4YoMK+40UcKjDidRgtPXC9
-	hYEs2Ws9GcZ6hDdJyCsommy30wj6uRs9IP3vkgfvZxegs5GtDwy6JlYIQO4mLYuRxtI7
-	PA78gaRFJfnQ8JjjrjRnsL752nt5Hb3BMGQOYewJRAZ4WRijxrbr1uKf6WxYUXWEgV0+
-	TkgA==
-X-Gm-Message-State: AKGB3mJUjMcq5glEeElqUtQR5W/CLSZsniCmP26ChWJwecJ+eIg+sI6v
-	jF06Kg+L3UUeub0Mydm0LgjCZA==
-X-Google-Smtp-Source: ACJfBovLVMzIa3m0Xxl7c8YRfXrNODzQNKMwYwNLVDrEZeWm8UX5uHLL/KAGSxr0JJelUHGFmQGA9Q==
-X-Received: by 10.159.242.196 with SMTP id x4mr14645591plw.342.1513954272487; 
-	Fri, 22 Dec 2017 06:51:12 -0800 (PST)
-Received: from ip-172-31-1-64.ap-northeast-2.compute.internal
-	(ec2-13-124-121-69.ap-northeast-2.compute.amazonaws.com.
-	[13.124.121.69]) by smtp.gmail.com with ESMTPSA id
-	k9sm36504249pgo.53.2017.12.22.06.51.10
+	bh=w+NFC6DY6U23Msq3xTlwryi9k1wiiv9HP7/yIsihytU=;
+	b=kJLHt8ZihHUInlfrDu4jMzt6pzrcAeC6z/KTLKXAtVZ/FdPMS4SGl5xpVQH/t+ot8A
+	RL+xVa1WW8UJNLvWn55Cy9wxPs2avk8r5sAt2dTHoejs3l2HZlCi3fv9XdetC3+z91ED
+	ANm8ikTO/hLxSigB7i3c7WcsILhflG6ehNeUAfjHoNTCXeX5A3TSlPqbjh2J1jZWv9dC
+	LBT8u6TSUaqwm0Yc6M/fuWFek0b8XtsV5N8WCduPp8VOQ+PyRC5/YyjuJaS8IIZQ8GWh
+	H2HkBXiuyqxSHNGfl1o+N2MZ06rhsjH0CEldyr47vE8WWG2SvlLVR/c47lj/JSmyIiAe
+	dpDg==
+X-Gm-Message-State: AKGB3mLaK//BdVgLI9ICElAPG4WXgcS28myvnLdxh2mYx7Rx45n3rHti
+	rE890TNhryTKzikNtq1qEIoSiqGy
+X-Google-Smtp-Source: ACJfBotAO638eaEuHFQEDAcfL25/myi6IZ17k5s/wcXO7/ut9IkxBuUnJzeGNUy9MiInhQDPR0tFDQ==
+X-Received: by 10.200.33.185 with SMTP id 54mr20427241qty.236.1513955164450;
+	Fri, 22 Dec 2017 07:06:04 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	c21sm14584142qkg.64.2017.12.22.07.06.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Dec 2017 06:51:11 -0800 (PST)
-From: Changhyeok Bae <changhyeok.bae@gmail.com>
+	Fri, 22 Dec 2017 07:06:03 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Dec 2017 14:51:06 +0000
-Message-Id: <1513954266-110130-1-git-send-email-changhyeok.bae@gmail.com>
+Date: Fri, 22 Dec 2017 10:05:57 -0500
+Message-Id: <1513955157-15278-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-multimedia][PATCH] rygel: Add lms PACKAGECONFIG item
+Subject: [meta-python][PATCH] python-pysocks: update to version 1.6.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,25 +45,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 14:51:11 -0000
+X-List-Received-Date: Fri, 22 Dec 2017 15:06:04 -0000
 
-Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb | 1 +
- 1 file changed, 1 insertion(+)
+ meta-python/recipes-devtools/python/python-pysocks.inc             | 7 +++++--
+ .../python/{python-pysocks_1.6.7.bb => python-pysocks_1.6.8.bb}    | 0
+ .../python/{python3-pysocks_1.6.7.bb => python3-pysocks_1.6.8.bb}  | 0
+ 3 files changed, 5 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pysocks_1.6.7.bb => python-pysocks_1.6.8.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pysocks_1.6.7.bb => python3-pysocks_1.6.8.bb} (100%)
 
-diff --git a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-index d2eda6b..e94c9ff 100644
---- a/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-+++ b/meta-multimedia/recipes-connectivity/rygel/rygel_0.34.0.bb
-@@ -30,6 +30,7 @@ PACKAGECONFIG[ruih] = "--enable-ruih-plugin,--disable-ruih-plugin"
- PACKAGECONFIG[media-export] = "--enable-media-export-plugin,--disable-media-export-plugin"
- PACKAGECONFIG[gst-launch] = "--enable-gst-launch-plugin,--disable-gst-launch-plugin"
- PACKAGECONFIG[gtk+3] = ",--without-ui,gtk+3"
-+PACKAGECONFIG[lms] = "--enable-lms-plugin,--disable-lms-plugin"
+diff --git a/meta-python/recipes-devtools/python/python-pysocks.inc b/meta-python/recipes-devtools/python/python-pysocks.inc
+index cf9509a..53ec1b7 100644
+--- a/meta-python/recipes-devtools/python/python-pysocks.inc
++++ b/meta-python/recipes-devtools/python/python-pysocks.inc
+@@ -3,13 +3,16 @@ HOMEPAGE = "http://python-requests.org"
+ LICENSE = "BSD"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=1d457bcffb9661b45f799d4efee72f16"
  
- LIBV = "2.6"
+-SRC_URI[md5sum] = "07007ec7ed46292dab06013f2e3af365"
+-SRC_URI[sha256sum] = "d00329f27efa157db7efe3ca26fcd69033cd61f83822461ee3f8a353b48e33cf"
++SRC_URI[md5sum] = "441c4e3bf5b042f7e70613cd871df26c"
++SRC_URI[sha256sum] = "3fe52c55890a248676fd69dc9e3c4e811718b777834bcaab7a8125cf9deac672"
  
+ PYPI_PACKAGE = "PySocks"
+ 
+ RDEPENDS_${PN}_class-target += "\
++    ${PYTHON_PN}-email \
+     ${PYTHON_PN}-io \
++    ${PYTHON_PN}-netclient \
++    ${PYTHON_PN}-shell \
+ "
+ 
+ BBCLASSEXTEND = "native nativesdk"
+diff --git a/meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb b/meta-python/recipes-devtools/python/python-pysocks_1.6.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pysocks_1.6.7.bb
+rename to meta-python/recipes-devtools/python/python-pysocks_1.6.8.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb b/meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pysocks_1.6.7.bb
+rename to meta-python/recipes-devtools/python/python3-pysocks_1.6.8.bb
 -- 
 2.7.4
 
