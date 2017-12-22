@@ -1,62 +1,62 @@
 Return-Path: <otavio.salvador@ossystems.com.br>
-Received: from mail-ot0-f179.google.com (mail-ot0-f179.google.com
-	[74.125.82.179])
-	by mail.openembedded.org (Postfix) with ESMTP id 7079B7888C
+Received: from mail-ot0-f195.google.com (mail-ot0-f195.google.com
+	[74.125.82.195])
+	by mail.openembedded.org (Postfix) with ESMTP id DE11E788E6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 12:26:30 +0000 (UTC)
-Received: by mail-ot0-f179.google.com with SMTP id n18so15711272otd.1
+	Fri, 22 Dec 2017 12:32:13 +0000 (UTC)
+Received: by mail-ot0-f195.google.com with SMTP id h9so25032024oti.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 04:26:31 -0800 (PST)
+	Fri, 22 Dec 2017 04:32:15 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=ossystems-com-br.20150623.gappssmtp.com; s=20150623;
 	h=from:mime-version:in-reply-to:references:date:message-id:subject:to
-	:cc; bh=mS3qbjDN6s+IT0SzMygHg7Xh4an9JS30HMXrn+y8Zr4=;
-	b=ctbX0GKS6J22nQdfoniqrfTUMcDDLgzYn0PfkO/Etfw9p+9e+Q8bGTwai5YX/b2EEW
-	aZFu9u5SRewEeHRWQ6fR7qfdjWhyqYshFIAT1kk/neXe3EH2h3T4tS2j5lxMUZsDzXYZ
-	CHvuHeazUDWmRcUyOYdT/iwmtI6nOyFmn7Sjc/Rl+iBGfA6gdnu7raai9iPtkgtQqxn5
-	1RPO2lFFaiU/FjC0oqw88cqZBHCMDwib3kUkIlXCgLz+i66TlNc+Nb+Rz02ibP7mfUMa
-	oD8e2JsK8YwUjbwjg16IJqtNlno46sQzS5fTzPf6+1cCFlRKXQxu4q5ttuhCIjIDT4F6
-	Ofsg==
+	:cc; bh=AtLMLel7kI9weOjFSZPw5tta0Oqp8c9XdHEDH5W8A+s=;
+	b=CAJITpkJvp2xQUY4X2yA5EYc+/MLp+kdItfsK1zb5I0f3QvBpzPmWw0faboMDsRkox
+	ZMykar5SAAltvnC+ONIYEEduHzzTEoRGaVR7R8a/rCVOtEtjzNLfqtRSno8IyDVIldN/
+	a/FdM3+VhksvI4NGe5sXz17SCS1xWrJEppuT6JXhvIX33mwJWRI2VfodAVJv+4OhXlxN
+	/dipw0hfVbZfPZ3sIA8gG3F3gXixceDFOfygJZ26s2WKwWI2PHU4fZ5vXnByndDOmdNC
+	/49qtQFrqJq6LkB5Zok9Tb6LvOH6bg03iPs/q9yvudVEr5d8bKZt4SDo1/JtT/I2KnYi
+	fDSA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:mime-version:in-reply-to:references:date
 	:message-id:subject:to:cc;
-	bh=mS3qbjDN6s+IT0SzMygHg7Xh4an9JS30HMXrn+y8Zr4=;
-	b=fT0uMxOJpR0KvxVsjjzgnhLGx+KPZE7I1W5w0KbbrmiAcynwG+RoJJKh+8xVmjTlSH
-	EDegedA5GvmT61gj3XbC3S2BQ84huRRtrMELnrXv8agAmv/4m/a2yxxpYx8dqGzCrul6
-	oayDEvpUn4eQVTjb/W6KjiBUVPA2iTZxbL+VVPYDLYkYzrjSNIdkUS3qvMy7em71yjpA
-	I83hZYaKQc+F6uIBsiiBzArgrzV89V0q1+U06kY81Js/JA9kPEhwr2iRr5VWiQ2QHPrs
-	qqqelCcDg3OefpoBGchAGQjLvfL0gilWB8JLSdzENDnJJhXt6qpFeYfp76QQLvLr5XtC
-	662w==
-X-Gm-Message-State: AKGB3mLHlgHoD2Uplu/Gv6p9kHlsN31AAAwRIXnCasHNuh1/Y6syzE8G
-	pkMNSSpUvapOp1iXXb6ngCBFIcGQ
-X-Google-Smtp-Source: ACJfBovXbuIDxXonl+jnVAHX6rP8bjuC0YRv6NwvkDXz40MjDXNfWZ/aMCJzsRvmjqsNatXVc6WfqQ==
-X-Received: by 10.157.10.72 with SMTP id 66mr3238156otg.133.1513945591030;
-	Fri, 22 Dec 2017 04:26:31 -0800 (PST)
-Received: from mail-oi0-f51.google.com (mail-oi0-f51.google.com.
-	[209.85.218.51]) by smtp.gmail.com with ESMTPSA id
-	u19sm10618962otu.41.2017.12.22.04.26.28
+	bh=AtLMLel7kI9weOjFSZPw5tta0Oqp8c9XdHEDH5W8A+s=;
+	b=pnQIPrBqX2pN3JY0iKzu2TWpjNkl5uNGd3i4KP6kr2XvBUsrgiZJI+HRw1X+SuTpVm
+	+ENF/eYdHcAXJ9twAfSms5pSvjQakpS4Djoyb2hfsTU5lJVaqz3tcEeZ51QaVkHwzM8H
+	BoCJUPG9mERNYb7Ci1TKe6Eyc3zf9G3ghuBEQoXFKcp7jnJKELvemtdmaHkDLAvWoiZu
+	gYCr6ORv+cEsVOiDYR81zB/dGfPk6zXEE8QQZtGUBuhhd2HAHVYJmv4MlluKqcKFNAHP
+	oOb5YLC3kQmhapXO4OYjWAq6Be03+BobplwytNxga/AK7NE7m0M8DkSV/u+A1IxlUXio
+	pmCg==
+X-Gm-Message-State: AKGB3mKZbiz2L5ts/C5eZq1JArt2tvrCXWBMNz5UnPGCRmcbGvDhwzZh
+	8Ef7mNbz+vdBSQobx1Lz/vqghCBW
+X-Google-Smtp-Source: ACJfBosgZPdN0z9pIezhy9o2y2RXwEjn+E5WvZGrQKvNIghkVFz7S6dkLq2lge1mTaGIuQhjhmDPqA==
+X-Received: by 10.157.4.231 with SMTP id 94mr11634336otm.141.1513945934723;
+	Fri, 22 Dec 2017 04:32:14 -0800 (PST)
+Received: from mail-ot0-f180.google.com (mail-ot0-f180.google.com.
+	[74.125.82.180])
+	by smtp.gmail.com with ESMTPSA id 68sm9987262oik.1.2017.12.22.04.32.12
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 22 Dec 2017 04:26:29 -0800 (PST)
+	Fri, 22 Dec 2017 04:32:12 -0800 (PST)
 From: Otavio Salvador <otavio.salvador@ossystems.com.br>
 X-Google-Original-From: Otavio Salvador <otavio@ossystems.com.br>
-Received: by mail-oi0-f51.google.com with SMTP id j14so7622864oih.3
+Received: by mail-ot0-f180.google.com with SMTP id q39so18583958otb.8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 04:26:28 -0800 (PST)
-X-Received: by 10.202.182.196 with SMTP id g187mr10601603oif.216.1513945588527;
-	Fri, 22 Dec 2017 04:26:28 -0800 (PST)
+	Fri, 22 Dec 2017 04:32:12 -0800 (PST)
+X-Received: by 10.157.14.215 with SMTP id 81mr11465898otj.284.1513945932098;
+	Fri, 22 Dec 2017 04:32:12 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.157.41.233 with HTTP; Fri, 22 Dec 2017 04:26:27 -0800 (PST)
-In-Reply-To: <CAPbeDC=7U8UMCzDnL2MoQW18JMDpLPBnSbHKf=mmOk0GnSiBKw@mail.gmail.com>
-References: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
-	<CAPbeDC=7U8UMCzDnL2MoQW18JMDpLPBnSbHKf=mmOk0GnSiBKw@mail.gmail.com>
-Date: Fri, 22 Dec 2017 10:26:27 -0200
-X-Gmail-Original-Message-ID: <CAP9ODKriaPa3BsT8WnM8iG69m5aMvEf=0=iYKk0ngOndsu_43w@mail.gmail.com>
-Message-ID: <CAP9ODKriaPa3BsT8WnM8iG69m5aMvEf=0=iYKk0ngOndsu_43w@mail.gmail.com>
-To: Jacob Kroon <jacob.kroon@gmail.com>
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-java] pyro, rocko and per-recipe sysroots
+Received: by 10.157.41.233 with HTTP; Fri, 22 Dec 2017 04:32:11 -0800 (PST)
+In-Reply-To: <1512996791-31471-1-git-send-email-guy.shapiro@mobi-wize.com>
+References: <1512996791-31471-1-git-send-email-guy.shapiro@mobi-wize.com>
+Date: Fri, 22 Dec 2017 10:32:11 -0200
+X-Gmail-Original-Message-ID: <CAP9ODKruozGHrY9Jo2-kG+0E7uqZP-UZGURGGN-N1SQSCTa4CA@mail.gmail.com>
+Message-ID: <CAP9ODKruozGHrY9Jo2-kG+0E7uqZP-UZGURGGN-N1SQSCTa4CA@mail.gmail.com>
+To: Guy Shapiro <guy.shapiro@mobi-wize.com>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Srinivasa Rao Ragolu <sragolu@mvista.com>, Ming Liu <liu.ming50@gmail.com>
+Subject: Re: [meta-java][PATCH v2] openjdk-8: recipe for jdk8u121-b13-aarch32
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -69,38 +69,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 12:26:30 -0000
+X-List-Received-Date: Fri, 22 Dec 2017 12:32:14 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-On Fri, Dec 22, 2017 at 7:30 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
-> Hi,
+On Mon, Dec 11, 2017 at 10:53 AM, Guy Shapiro <guy.shapiro@mobi-wize.com> wrote:
+> Main changes:
+> - Fetch the code from the aarch32-port repository. This repository
+>   contains the C1 (Client) JIT, making it much faster than the
+>   currently used version.
+> - Compile using the newly available Client JVM variant.
+> - Don't apply some old patches that prevents the code from being
+>   compiled.
+> - Do not install modified jvm.cfg. Keep the built one instead.
 >
-> On Fri, Dec 22, 2017 at 8:55 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
->> Hi all,
->>
->> I'm trying to get a recent yocto build together with meta-java up and
->> running, but ran into some problems:
->>
->> 1. For rocko, I don't see the corresponding branch in meta-java,
->> should I use "master" ?
->> 2. For pyro, there is a branch in meta-java, but the build fails
->> unless I backport the patch in commit
->> c4b9b97c7c60ad5c0c3392ccf143b2e4e6c7df24:
->>
->> "java-library.bbclass: compatibility with per-recipe sysroots"
->>
->> Could we get this patch officially backported to pyro ?
->>
+> Main issues:
+> - The license file change (address update) breaks the build of old
+>   versions.
+> - This patch was only tested on arm platform. It might break other
+>   platforms.
 >
-> One more patch I needed backported for pyro to build:
->
-> 2a706cd2d656a203ecb83bef1c687703c969732e
-> "icedtea-native: Fix segmentation build during build"
->
-> since I'm on Fedora with a recent gcc7 I assume.
+> Signed-off-by: Guy Shapiro <guy.shapiro@mobi-wize.com>
 
-I backported both for pyro; please try rocko using master ... I've
-been using it without problem for few customers.
+Thanks for looking at this, please:
+
+ - remove old versions of openjdk-8 when doing the upgrade
+ - please do a minimal test in other platforms so we can get it merged
+
 
 -- 
 Otavio Salvador                             O.S. Systems
