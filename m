@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 639F87867B
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 3F063788CF
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 19:14:56 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id j137so18129808qke.10
+	Fri, 22 Dec 2017 20:52:02 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id k19so37677968qtj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 11:14:57 -0800 (PST)
+	Fri, 22 Dec 2017 12:52:04 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qSoL8YhTmxnD7/IvexWWVW9CoOMIE50ta/7aDmzBXOg=;
-	b=Iak7h5BkFoy4NBpKd62HGlawIYv8oXXl1I6ffbdn/Mdygjixg3jiudY2ZQrnc31yX4
-	+pLQmyFqC3/DxjD8xFhPWWFTyTGSp9ou9pcKYemvD2Vv9iNVQn5hoOvhAdCqU+FpDNE4
-	y/MSeaOBt/C/AlmJKgXv2AtH9YVLuC7t8WVw8qel9lj0DxESP72/jzOOtbP+LHdErpQ0
-	0t2Y4C+A4UkDvkmXoaMocIjIoMk3YcvEAFE6bn5SnlkCSInEiYvCClQWA4bMkB9RAulP
-	AgI8B1WW867nAJR94A9z2rP25DowGhRe1tegRsTwAqU3OiZrxyqqwfjcZUJj7m4F8cEt
-	XaVg==
-X-Gm-Message-State: AKGB3mI0HniE8RGPdl6ALZhysTcYjtgj+Lz2fFbl51zCMzid302nHm4t
-	043YvZsdi385Jc61YDGjX0Xhrpb4
-X-Google-Smtp-Source: ACJfBouhkDI4GZnuVe6bZR4N7kiSxmbxnFZWVYahJRjX0/HAL/WJMXu/P+KX9deD75IWOU6xN79ybg==
-X-Received: by 10.55.22.167 with SMTP id 39mr20848330qkw.297.1513970097190;
-	Fri, 22 Dec 2017 11:14:57 -0800 (PST)
+	bh=SnHZMAHMIlRKdi4tsIZvENZZwRjL3nRG8v4bXliTeug=;
+	b=OzCf+G0wbg9eHPp+nnR2uLd+tELi17M33tzYJeV7RA90SnaF4DjSmKqc6bvh142+vI
+	BLhJIBUtC/ZGdVxl+l6gylN+iZVjwoEVGSnyApuYktlbYGDahuaQfd6xSaoA8OItpsVw
+	PXDd1KmJGW4EgrY1mUxfadc+82nN675a9m+1w7sjgx9FGkBdrnw4VYrqiEJIwywCAFtK
+	inx8x91LBAU9NN4R2wHIjEywvE/j2gFZU/7AeORDyaAKqWEQvUNDyaGjh/LPoW1FGX/m
+	OY4vv1nE74Or0kenKwBbT9xEOLXYqlj/DRRn7uyqb8+jpn+q6fbR3xua1JwdTc/AxpnV
+	dW2g==
+X-Gm-Message-State: AKGB3mLNQeE8zYs5e8m7xox7PyWALbeFP7Vvpxd+M8qG09/KrJQ6gCyp
+	uL/QW88rpOKRzMpIQLxapmaWO3x+
+X-Google-Smtp-Source: ACJfBotcCEyVsrhKB/pGysSjyfBzhoBd+9u5pOEg02MLB0vXqNUIbs1eeZI7mRcVw+luRdmxKazs8A==
+X-Received: by 10.200.63.208 with SMTP id v16mr21616166qtk.249.1513975924010; 
+	Fri, 22 Dec 2017 12:52:04 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	102sm10000282qkx.85.2017.12.22.11.14.56
+	h55sm15106037qta.75.2017.12.22.12.52.03
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Dec 2017 11:14:56 -0800 (PST)
+	Fri, 22 Dec 2017 12:52:03 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Dec 2017 14:14:50 -0500
-Message-Id: <1513970090-2130-1-git-send-email-derek@asterius.io>
+Date: Fri, 22 Dec 2017 15:51:57 -0500
+Message-Id: <1513975917-10491-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pytest-runner: update to version 3.0
+Subject: [meta-python][PATCH] python-django: update to version 1.11.8
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,44 +45,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 19:14:56 -0000
-
-Verified license terms remain the same and updated checksum for copyright data modification
+X-List-Received-Date: Fri, 22 Dec 2017 20:52:03 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pytest-runner.inc        | 6 +++---
- .../{python-pytest-runner_2.12.1.bb => python-pytest-runner_3.0.bb} | 0
- ...python3-pytest-runner_2.12.1.bb => python3-pytest-runner_3.0.bb} | 0
- 3 files changed, 3 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytest-runner_2.12.1.bb => python-pytest-runner_3.0.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytest-runner_2.12.1.bb => python3-pytest-runner_3.0.bb} (100%)
+ meta-python/recipes-devtools/python/python-django.inc  | 18 ++++++++++++++----
+ ...python-django_1.11.5.bb => python-django_1.11.8.bb} |  2 ++
+ .../recipes-devtools/python/python3-django_1.11.5.bb   |  2 --
+ .../recipes-devtools/python/python3-django_1.11.8.bb   |  7 +++++++
+ 4 files changed, 23 insertions(+), 6 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-django_1.11.5.bb => python-django_1.11.8.bb} (53%)
+ delete mode 100644 meta-python/recipes-devtools/python/python3-django_1.11.5.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-django_1.11.8.bb
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest-runner.inc b/meta-python/recipes-devtools/python/python-pytest-runner.inc
-index c173a18..262448d 100644
---- a/meta-python/recipes-devtools/python/python-pytest-runner.inc
-+++ b/meta-python/recipes-devtools/python/python-pytest-runner.inc
-@@ -1,9 +1,9 @@
- SUMMARY = "Invoke py.test as distutils command with dependency resolution"
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=e38b971c2b4c33b978d1b9c9ece9ae63"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=a33f38bbf47d48c70fe0d40e5f77498e"
+diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
+index e4ed860..fec5379 100644
+--- a/meta-python/recipes-devtools/python/python-django.inc
++++ b/meta-python/recipes-devtools/python/python-django.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
  
--SRC_URI[md5sum] = "a8dd57c80cde37a587dd8c37740c1ab1"
--SRC_URI[sha256sum] = "5c9093e7a18780409d9a389f20366f2fd39acfb1db61545fdb2e90cdbd0bcae4"
-+SRC_URI[md5sum] = "8f8363a52bbabc4cedd5e239beb2ba11"
-+SRC_URI[sha256sum] = "0f7c3a3cf5aead13f54baaa01ceb49e5ae92aba5d3ff1928e81e189c40bc6703"
+-SRC_URI[md5sum] = "8cef0d42aabacbc414ec4fbbb6056f3c"
+-SRC_URI[sha256sum] = "1836878162dfdf865492bacfdff0321e4ee8f1e7d51d93192546000b54982b29"
++SRC_URI[md5sum] = "e8b68d44b87a3de36e13547ec2722af2"
++SRC_URI[sha256sum] = "fed3e79bb5a3a8d5eb054c7a1ec1de229ef3f43335a67821cc3e489e9582f711"
  
+ PYPI_PACKAGE = "Django"
  inherit pypi
+@@ -14,11 +14,21 @@ FILES_${PN} += "${datadir}/django"
+ BBCLASSEXTEND = "native nativesdk"
  
-diff --git a/meta-python/recipes-devtools/python/python-pytest-runner_2.12.1.bb b/meta-python/recipes-devtools/python/python-pytest-runner_3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest-runner_2.12.1.bb
-rename to meta-python/recipes-devtools/python/python-pytest-runner_3.0.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytest-runner_2.12.1.bb b/meta-python/recipes-devtools/python/python3-pytest-runner_3.0.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytest-runner_2.12.1.bb
-rename to meta-python/recipes-devtools/python/python3-pytest-runner_3.0.bb
+ RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-argparse \
++    ${PYTHON_PN}-compression \
++    ${PYTHON_PN}-ctypes \
+     ${PYTHON_PN}-datetime \
++    ${PYTHON_PN}-email \
++    ${PYTHON_PN}-html \
+     ${PYTHON_PN}-importlib \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-multiprocessing \
++    ${PYTHON_PN}-netserver \
+     ${PYTHON_PN}-numbers \
+-    ${PYTHON_PN}-pip \
+     ${PYTHON_PN}-pkgutil \
++    ${PYTHON_PN}-pytz \
+     ${PYTHON_PN}-subprocess \
+     ${PYTHON_PN}-threading \
+-    "
++    ${PYTHON_PN}-unixadmin \
++    ${PYTHON_PN}-xml \
++"
+diff --git a/meta-python/recipes-devtools/python/python-django_1.11.5.bb b/meta-python/recipes-devtools/python/python-django_1.11.8.bb
+similarity index 53%
+rename from meta-python/recipes-devtools/python/python-django_1.11.5.bb
+rename to meta-python/recipes-devtools/python/python-django_1.11.8.bb
+index ccd7714..ed92c9b 100644
+--- a/meta-python/recipes-devtools/python/python-django_1.11.5.bb
++++ b/meta-python/recipes-devtools/python/python-django_1.11.8.bb
+@@ -1,2 +1,4 @@
+ require python-django.inc
+ inherit setuptools
++
++RDEPENDS_${PN} += "${PYTHON_PN}-zlib"
+diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.5.bb b/meta-python/recipes-devtools/python/python3-django_1.11.5.bb
+deleted file mode 100644
+index e1e38c3..0000000
+--- a/meta-python/recipes-devtools/python/python3-django_1.11.5.bb
++++ /dev/null
+@@ -1,2 +0,0 @@
+-require python-django.inc
+-inherit setuptools3
+diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.8.bb b/meta-python/recipes-devtools/python/python3-django_1.11.8.bb
+new file mode 100644
+index 0000000..ef77603
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-django_1.11.8.bb
+@@ -0,0 +1,7 @@
++require python-django.inc
++inherit setuptools3
++
++# Requires _pydecimal which is in misc
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-misc \
++"
 -- 
 2.7.4
 
