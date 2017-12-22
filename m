@@ -1,38 +1,49 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f182.google.com (mail-qk0-f182.google.com
-	[209.85.220.182])
-	by mail.openembedded.org (Postfix) with ESMTP id 4B57560557
+Return-Path: <jacob.kroon@gmail.com>
+Received: from mail-wr0-f194.google.com (mail-wr0-f194.google.com
+	[209.85.128.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 3D48B78355
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 14:16:16 +0000 (UTC)
-Received: by mail-qk0-f182.google.com with SMTP id p13so18871395qke.4
+	Fri, 22 Dec 2017 14:17:38 +0000 (UTC)
+Received: by mail-wr0-f194.google.com with SMTP id a41so28009695wra.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 06:16:18 -0800 (PST)
+	Fri, 22 Dec 2017 06:17:40 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=pO7rMRPk/uGA2Sf3BIxyr9RYeshEuiZyf+oXcrW0nxI=;
+	b=HPG14bBMSUNo87M6TPPN9aeDdVmt168yHqjTICrQ/IZnFrBEzpkhisw4vrHkkjUFfW
+	RIwBkyZMUi5sXPvZetjg84juIUymBIxlS6UySM+lwOWbkxZ6+VJ+D6absF0STx+/QBgc
+	DNVTiqU0cvlaN9r2ogmVUY3k8QWWbekUgeSXe6Wt41vpq9VrRIVb8+R6A44ewhNDe3aU
+	e3XDTfmpFtz6jfFuyVg9EII6HReaJDAjFS8N9zR3tZUsYh/05916EvfCkJZwHePm7ZoK
+	wnap6U8XjTudiuqf7kD9eTmsgmN6fbgJpv5WlmHHrjjx8pvbludBXYvJobKCe4QPenby
+	tRjg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=r42X9GqSt65pNZ6VJAIZDA/oEI6Q2d6AUWzZc806hwg=;
-	b=Tfl6kSwaOtmevlCGPf/sbs+DlhOlC6abI5wWMYe8uAdeHes5vbeKXADtQZTCBCmTFJ
-	EAaYXUJNSwQH0Zf/D7aC8K+Zf+btNNfL5gA1OoYf3ppyWhn9Z7UkPYVgs8GemTYUeaG9
-	CMdI7VXkIlquNNDLqOVZUQ8aMYtxzSaUHSYYF+vAHZJB4B9aI2vjnJK+tg4onjY6Gseb
-	FcAu2qIq4g+jvEwwe1NlFlvSNNgKRPkZWpuAdik80FTulu9uxUwhjCx+JrBXb2x4TEBV
-	MCt7/BEt/zKox7M0EMi1/3W986czMtQqojWSrzbmptWkJsvrcrmhG2MLInRrqhgoHpGx
-	tcdQ==
-X-Gm-Message-State: AKGB3mL/wAfpA2o9DZdXzN+ZvfhSk66BI3BbACyowic3lwPW3Un+NHdX
-	PU4VIsxR9Y2F/jwPfrMYzCJlJlLh
-X-Google-Smtp-Source: ACJfBovgQ3MrLkDc5/OqoD8aW7F/09TxbGzOgi71DU6bRQGAT1XqkYw9tNTD2tpB50D7tsRWKTVktg==
-X-Received: by 10.55.128.196 with SMTP id b187mr10161121qkd.87.1513952178046; 
-	Fri, 22 Dec 2017 06:16:18 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	46sm14566229qtx.65.2017.12.22.06.16.16
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Fri, 22 Dec 2017 06:16:17 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 22 Dec 2017 09:16:06 -0500
-Message-Id: <1513952166-4501-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-automat: fix build dependencies to avoid download during do_compile
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=pO7rMRPk/uGA2Sf3BIxyr9RYeshEuiZyf+oXcrW0nxI=;
+	b=Mu1O+tgc5OCoTcFsTLLAuseYqsifA1Mt6/QTWNLHHRa/hsdPPv/Lvl5eHilh09YQyL
+	1qi7I4+Y+eXMQrZXQSvEkOEPYdA6u17jhF3f467FE+6Dyr/kbzPZmn2qxjr4Mu2j+wE9
+	qvIACsLno1wL6KmNgBOQda14XTzB+/EHm0AOUPp9jz1La7dTNgB4yB2Mn4f/S6+PXo7v
+	oRUeNUGtOLAxAGZHuc/EQ0A9F0ZA9Y9GR74KggRa3W62sYQVpW6/ZOs/BoKkg15/tu+x
+	JM00utuxcDaM+9AtJpulH9dDpLeym2XAGgAe3GVxam59PLc6MXN4SqFAwnkNWdr0iRGN
+	u28w==
+X-Gm-Message-State: AKGB3mLqQvlRF6awNfVxSmcQAAPHIgWW/s2dXIbBFWCLnN729IugdFFb
+	LmJd4VNTu3mFyk/H6M0bWhsX2WTI59hmhkDYtB3ucw==
+X-Google-Smtp-Source: ACJfBotzQZW5+/jnuPs7HVNo5mGi65LlCFhmsZ5ZuRFGQYF/1MiT7t9oHD6SrILN4XuRi8EVdB6cdHFweJc2dSGJ8ZM=
+X-Received: by 10.223.167.70 with SMTP id e6mr14727898wrd.235.1513952259991;
+	Fri, 22 Dec 2017 06:17:39 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.223.162.211 with HTTP; Fri, 22 Dec 2017 06:17:39 -0800 (PST)
+In-Reply-To: <CAP9ODKriaPa3BsT8WnM8iG69m5aMvEf=0=iYKk0ngOndsu_43w@mail.gmail.com>
+References: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
+	<CAPbeDC=7U8UMCzDnL2MoQW18JMDpLPBnSbHKf=mmOk0GnSiBKw@mail.gmail.com>
+	<CAP9ODKriaPa3BsT8WnM8iG69m5aMvEf=0=iYKk0ngOndsu_43w@mail.gmail.com>
+From: Jacob Kroon <jacob.kroon@gmail.com>
+Date: Fri, 22 Dec 2017 15:17:39 +0100
+Message-ID: <CAPbeDC=6wyEYz0GjekHoY=VzVsSqzV6DpHE7Opd5-yg8yrv9PQ@mail.gmail.com>
+To: Otavio Salvador <otavio.salvador@ossystems.com.br>
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-java] pyro, rocko and per-recipe sysroots
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,103 +56,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 14:16:17 -0000
+X-List-Received-Date: Fri, 22 Dec 2017 14:17:39 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-Add the correct version of python{3}-setuptools-scm-native
-Remove the dependency on m2r
+Hi Otavio,
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-automat.inc     |  8 ++++
- ...001-setup.py-remove-the-dependency-on-m2r.patch | 52 ++++++++++++++++++++++
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
+On Fri, Dec 22, 2017 at 1:26 PM, Otavio Salvador
+<otavio.salvador@ossystems.com.br> wrote:
+> On Fri, Dec 22, 2017 at 7:30 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
+>> Hi,
+>>
+>> On Fri, Dec 22, 2017 at 8:55 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
+>>> Hi all,
+>>>
+>>> I'm trying to get a recent yocto build together with meta-java up and
+>>> running, but ran into some problems:
+>>>
+>>> 1. For rocko, I don't see the corresponding branch in meta-java,
+>>> should I use "master" ?
+>>> 2. For pyro, there is a branch in meta-java, but the build fails
+>>> unless I backport the patch in commit
+>>> c4b9b97c7c60ad5c0c3392ccf143b2e4e6c7df24:
+>>>
+>>> "java-library.bbclass: compatibility with per-recipe sysroots"
+>>>
+>>> Could we get this patch officially backported to pyro ?
+>>>
+>>
+>> One more patch I needed backported for pyro to build:
+>>
+>> 2a706cd2d656a203ecb83bef1c687703c969732e
+>> "icedtea-native: Fix segmentation build during build"
+>>
+>> since I'm on Fedora with a recent gcc7 I assume.
+>
+> I backported both for pyro; please try rocko using master ... I've
+> been using it without problem for few customers.
 
-diff --git a/meta-python/recipes-devtools/python/python-automat.inc b/meta-python/recipes-devtools/python/python-automat.inc
-index 1ac5d3b..43b9ce9 100644
---- a/meta-python/recipes-devtools/python/python-automat.inc
-+++ b/meta-python/recipes-devtools/python/python-automat.inc
-@@ -3,6 +3,8 @@ HOMEPAGE = "https://github.com/glyph/Automat"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
- 
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-automat:"
-+
- SRC_URI[md5sum] = "ad7bba58d262d8956d732330cb5ef53d"
- SRC_URI[sha256sum] = "3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8"
- 
-@@ -10,6 +12,12 @@ PYPI_PACKAGE = "Automat"
- 
- inherit pypi
- 
-+SRC_URI_append = " \
-+    file://0001-setup.py-remove-the-dependency-on-m2r.patch \
-+"
-+
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+
- RDEPENDS_${PN} += "\
-    ${PYTHON_PN}-attrs \
-    ${PYTHON_PN}-six \
-diff --git a/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch b/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-new file mode 100644
-index 0000000..0ebb220
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-@@ -0,0 +1,52 @@
-+From d5ebe479fc8fe11c5c75e7f35484849320349222 Mon Sep 17 00:00:00 2001
-+From: Derek Straka <derek@asterius.io>
-+Date: Fri, 22 Dec 2017 09:07:00 -0500
-+Subject: [PATCH] setup.py: remove the dependency on m2r
-+
-+The dependency on m2r is removed here as it only provides the
-+long_description value that is optional.  This item is just the
-+text that would be present on PyPi, so it doesn't provide much
-+value in this case
-+
-+Upstream-Status: Inappropriate (OE specific)
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+---
-+ setup.py | 10 ----------
-+ 1 file changed, 10 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index d360c64..7b4180a 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -4,14 +4,6 @@ Setup file for automat
-+ 
-+ from setuptools import setup, find_packages
-+ 
-+-try:
-+-    from m2r import parse_from_file
-+-    long_description = parse_from_file('README.md')
-+-except(IOError, ImportError):
-+-    print("\n\n!!! m2r not found, long_description is bad, don't upload this to PyPI !!!\n\n")
-+-    import io
-+-    long_description = io.open('README.md', encoding="utf-8").read()
-+-
-+ setup(
-+     name='Automat',
-+     use_scm_version=True,
-+@@ -19,12 +11,10 @@ setup(
-+     description="""
-+     Self-service finite-state machines for the programmer on the go.
-+     """.strip(),
-+-    long_description=long_description,
-+     packages=find_packages(exclude=[]),
-+     package_dir={'automat': 'automat'},
-+     setup_requires=[
-+         'setuptools-scm',
-+-        'm2r',
-+     ],
-+     install_requires=[
-+         "attrs>=16.1.0",
-+-- 
-+2.7.4
-+
--- 
-2.7.4
+Thanks, with those pyro is building fine now, will try rocko with
+meta-java/master next.
 
+/Jacob
 
