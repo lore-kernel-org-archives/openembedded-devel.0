@@ -1,46 +1,28 @@
-Return-Path: <jacob.kroon@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0A0FB787C9
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 5AA22788B6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 09:30:17 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id o2so27375034wro.5
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 22 Dec 2017 01:30:19 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to; 
-	bh=ltn3rQp3iJklmKClZ5uVnw38vZKVl0ds+BuV5ZiB1nQ=;
-	b=NhK8Exm0KEeBIjdImjcZ2TtKmaSMwlSzZEl+llbUFB+Zvz4HwJKqIUcEn3G2vvLA5/
-	Uc5WClHhNRPoA5LJjB+hWow+6A3IsBCbfTlMZCnzka9i210TzKqIM99kEjrvLAktn5vn
-	/Hpfj62Zas1NwPVd9aJgMcpORI+IX23kFDas8gq7FBN79S/bNdSW1URuRhiqsVrgw4sX
-	KX62wPJ+9nH8bvS7WvK5gySfr31QAIp7WcNRUEzqnK8Ps0/Eh0UALLbBAxfYtDKKxoUD
-	f2Vy/O3Qzk6m3Md46fFwLTTQ38g4o/s4iw8THmWdg3SbLUoWpPGLmoAAS67iN5Mbugt0
-	t69A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to;
-	bh=ltn3rQp3iJklmKClZ5uVnw38vZKVl0ds+BuV5ZiB1nQ=;
-	b=LTTPziVGygJ3FfMiOEnznn59o6XpI+De6EIjXoxtAMTGwCqI3FnWFZhqrcQnGua/8W
-	EADdaKDXxcAGRqXtqFU7wKxCSMXU8e4okCishlX0WBCoYTI0zBgx3i2aYlBZ/b/WG+av
-	N91TrzyvzGYh63XeGlA8QMwl1z8aveGnCpbTPWZOymVn2YYNXjPXk+QDa+W/jAn7TnNn
-	nieHCcp27tybIS+a0ac3lVFnHy+rAHKHVb6bW0BueIKVNebyui5MHmwB/aiOJEC0FnsI
-	SbM8hxeqRd4NP6jQ+bVqcAz6zyEA0Gajq0XzRdbWcsWIlYPpHJywaRxPds77Jnf+yBsE
-	6YbQ==
-X-Gm-Message-State: AKGB3mJl6HjOf7bu2CyDkBQMwQQx48oiAfWMIj51GhZ1kgUAzOKdRJt3
-	yfmcckQCA88XvQ638U3S482wW3MwzF0p/qqPfygcEg==
-X-Google-Smtp-Source: ACJfBov/mwK4YjIZetvsWmrRJo6t+zHcG3f9fWcUpRA4nK/KxmPkfOt6IKocEm1jPZC10Xm1PtrDM2UGHgNL57Vjfzg=
-X-Received: by 10.223.167.70 with SMTP id e6mr13915404wrd.235.1513935018439;
-	Fri, 22 Dec 2017 01:30:18 -0800 (PST)
+	Fri, 22 Dec 2017 09:53:09 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBM9r9q4016080
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
+	Fri, 22 Dec 2017 01:53:10 -0800 (PST)
+Received: from [128.224.162.167] (128.224.162.167) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Fri, 22 Dec 2017 01:53:08 -0800
+To: Derek Straka <derek@asterius.io>,
+	<openembedded-devel@lists.openembedded.org>
+References: <1509554484-22352-1-git-send-email-derek@asterius.io>
+From: ChenQi <Qi.Chen@windriver.com>
+Message-ID: <cd040284-bf17-756a-3243-a59ecd609ffd@windriver.com>
+Date: Fri, 22 Dec 2017 17:54:55 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
 MIME-Version: 1.0
-Received: by 10.223.162.211 with HTTP; Fri, 22 Dec 2017 01:30:17 -0800 (PST)
-In-Reply-To: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
-References: <CAPbeDCmTsCfrCAya_XQhN+Y5tKW7QnHQjeQThh6iT5ecneLEsw@mail.gmail.com>
-From: Jacob Kroon <jacob.kroon@gmail.com>
-Date: Fri, 22 Dec 2017 10:30:17 +0100
-Message-ID: <CAPbeDC=7U8UMCzDnL2MoQW18JMDpLPBnSbHKf=mmOk0GnSiBKw@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [meta-java] pyro, rocko and per-recipe sysroots
+In-Reply-To: <1509554484-22352-1-git-send-email-derek@asterius.io>
+X-Originating-IP: [128.224.162.167]
+Subject: Re: [meta-python][PATCH] python-automat: add an initial recipe for version 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,34 +35,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 22 Dec 2017 09:30:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 22 Dec 2017 09:53:10 -0000
+Content-Type: text/plain; charset="windows-1252"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi Derek,
 
-On Fri, Dec 22, 2017 at 8:55 AM, Jacob Kroon <jacob.kroon@gmail.com> wrote:
-> Hi all,
+I noticed in Automat's setup.py script:
+
+     setup_requires=[
+         'setuptools-scm',
+         'm2r',
+     ],
+     install_requires=[
+         "attrs",
+         "six",
+     ],
+
+Now the installed_requires entry is handled by the RDEPENDS meta data in 
+recipe.
+How about the setup_requires entry? Do you know how to handle it in recipe?
+
+I'm asking this because when I build python-automat on my host, I met 
+do_compile error because of being able to download the m2r and 
+setuptools-scm.
+
+Ideally, we should be able to compile a recipe out without reaching out 
+to the Internet, as long as the recipe's tarball is available in the DL_DIR.
+
+Best Regards,
+Chen Qi
+
+
+On 11/02/2017 12:41 AM, Derek Straka wrote:
+> Signed-off-by: Derek Straka <derek@asterius.io>
+> ---
+>   meta-python/recipes-devtools/python/python-automat.inc   | 16 ++++++++++++++++
+>   .../recipes-devtools/python/python-automat_0.6.0.bb      |  2 ++
+>   .../recipes-devtools/python/python3-automat_0.6.0.bb     |  4 ++++
+>   3 files changed, 22 insertions(+)
+>   create mode 100644 meta-python/recipes-devtools/python/python-automat.inc
+>   create mode 100644 meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+>   create mode 100644 meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
 >
-> I'm trying to get a recent yocto build together with meta-java up and
-> running, but ran into some problems:
->
-> 1. For rocko, I don't see the corresponding branch in meta-java,
-> should I use "master" ?
-> 2. For pyro, there is a branch in meta-java, but the build fails
-> unless I backport the patch in commit
-> c4b9b97c7c60ad5c0c3392ccf143b2e4e6c7df24:
->
-> "java-library.bbclass: compatibility with per-recipe sysroots"
->
-> Could we get this patch officially backported to pyro ?
->
+> diff --git a/meta-python/recipes-devtools/python/python-automat.inc b/meta-python/recipes-devtools/python/python-automat.inc
+> new file mode 100644
+> index 0000000..1ac5d3b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-automat.inc
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Self-service finite-state machines for the programmer on the go"
+> +HOMEPAGE = "https://github.com/glyph/Automat"
+> +LICENSE = "MIT"
+> +LIC_FILES_CHKSUM = "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
+> +
+> +SRC_URI[md5sum] = "ad7bba58d262d8956d732330cb5ef53d"
+> +SRC_URI[sha256sum] = "3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8"
+> +
+> +PYPI_PACKAGE = "Automat"
+> +
+> +inherit pypi
+> +
+> +RDEPENDS_${PN} += "\
+> +   ${PYTHON_PN}-attrs \
+> +   ${PYTHON_PN}-six \
+> +"
+> diff --git a/meta-python/recipes-devtools/python/python-automat_0.6.0.bb b/meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+> new file mode 100644
+> index 0000000..8ac8c9c
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+> @@ -0,0 +1,2 @@
+> +inherit setuptools
+> +require python-automat.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb b/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+> new file mode 100644
+> index 0000000..0469e61
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+> @@ -0,0 +1,4 @@
+> +inherit setuptools3
+> +require python-automat.inc
+> +
+> +RDEPENDS_${PN} += "${PYTHON_PN}-enum "
 
-One more patch I needed backported for pyro to build:
 
-2a706cd2d656a203ecb83bef1c687703c969732e
-"icedtea-native: Fix segmentation build during build"
-
-since I'm on Fedora with a recent gcc7 I assume.
-
-/Jacob
 
