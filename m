@@ -1,48 +1,53 @@
-Return-Path: <bill.randle@gmail.com>
-Received: from mail-ua0-f196.google.com (mail-ua0-f196.google.com
-	[209.85.217.196])
-	by mail.openembedded.org (Postfix) with ESMTP id F3A4078876
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Dec 2017 20:05:15 +0000 (UTC)
-Received: by mail-ua0-f196.google.com with SMTP id g4so14339523ual.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 23 Dec 2017 12:05:17 -0800 (PST)
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f169.google.com (mail-wr0-f169.google.com
+	[209.85.128.169])
+	by mail.openembedded.org (Postfix) with ESMTP id 63C9878678;
+	Sun, 24 Dec 2017 07:34:42 +0000 (UTC)
+Received: by mail-wr0-f169.google.com with SMTP id w68so18692024wrc.10;
+	Sat, 23 Dec 2017 23:34:44 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=fxCCTON1F/TjEKaymrBoJVlEkMgkpZQAFtaRPzGwwSs=;
-	b=YDL1ONPWMMv23Jke9TMg0KHNcCljItKtuGphegCE+R2jCeBz3vZjOiQMB8+1S6J8HL
-	pNdxV6IKdR755zBzHJGghduDE2aDE5NryLH/pnCP1clOTyjtkkt9nZmLDAOAIZk94t/8
-	F19IaeiE8ESs8QfPWvT3iMumjDl7ia4VOj94stCfKYiHtI1FedX4pf5psSuJEL6105/r
-	+ZoXUIV8mwy7Lk8CBVXEROdd1CffQdtE9AYQlAstsYz45cje75gXln1/kqzrMil4fImE
-	Xi2JhrLUi2P2Rq+wkNRnCw8rGjiIR9Gy4HpieOVkvqzLN8Yl5DcTvE2g9IVBhI0Pk76Y
-	tgZg==
+	h=from:date:to:cc:subject:message-id:references:mime-version
+	:content-disposition:in-reply-to:user-agent;
+	bh=+rTXY25kEks5lyJ9WxqT5TAsMgl6H7lh1udB/ekjsjc=;
+	b=fe1+LsNnmNNyNiQplEyceaZxIzGcTkYlTH7oeuEAOM8iG6QO0Ik3nAcV0mWkV10c+O
+	ZRGySsUkQLf8E/8bzSxCGiYvjaC5aNiAkJQ6HduEXeKZNbbRl3u9eJLnqDdvMX0zIJmX
+	yRVOJULjczIuq/hpD2S8TcX0fjcuc0+aPNwXVSGf7goWeKpa6FKCZ4ued80YXYzSSh6k
+	Cj0M9CihArH4chZTGAMjg0k1hKZs6X/j7G14rgmFWFuIVP9f+0mvF90DwkGR7Ur6uiBJ
+	MmCVgDDRSnq7miwYyPrMVbw0XKMPBAinJuPh165BJsh5SmwU8Mjdvno96tOPHUcdIqEl
+	vjqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=fxCCTON1F/TjEKaymrBoJVlEkMgkpZQAFtaRPzGwwSs=;
-	b=mtEhPvQmJipzOsIuqjegX8JCgkx6CjiMqqnZVxNFRnzLgEo6zLD8Kjyj3P7ZFWEjr9
-	iFHsBiXA0xVJv/MDMbLxNAhCbBmg0dmo1+MX+tBk8aRD2o1y42A+6mhrA2g5V6ALkrqO
-	eR/ts7ANkHDVhJhyv0cqO6Aa+wgoH4skFWKdYjw4YSc5xiBsnqQCSLrMOM1Of6jghRKL
-	squiT2zmDly4iC4vLYS98MTcVdpl9tekC2p/C6H4RpKc4CZLCnSzClkjMntJPxkpsg21
-	VD7u1mbGPwQE/E7ZQuCFfVEmaptRms9Ko1F/UGNQkEJbeiQm3nizPgeZhoMxIrNBOvkZ
-	i70Q==
-X-Gm-Message-State: AKGB3mKekKRU9CeNy9iKGllx55JhyvqQXLB2IUt21rdPfRFm0YKbcqpy
-	uqdId5AFgpnM36xuvHpK/lzaTA==
-X-Google-Smtp-Source: ACJfBosXY0xtrirLAY1K6AaUkzLS1e9zVQzUgfzdKbZsOyR8aTb8inXy5Vz2VdgBZUK3uCYFL9ITjQ==
-X-Received: by 10.176.94.166 with SMTP id y38mr19952208uag.112.1514059516492; 
-	Sat, 23 Dec 2017 12:05:16 -0800 (PST)
-Received: from neosoft.neocat.org (184-100-130-3.ptld.qwest.net.
-	[184.100.130.3]) by smtp.gmail.com with ESMTPSA id
-	y11sm5094634uae.41.2017.12.23.12.05.14
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sat, 23 Dec 2017 12:05:15 -0800 (PST)
-From: Bill Randle <bill.randle@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 23 Dec 2017 12:04:50 -0800
-Message-Id: <20171223200450.17938-1-bill.randle@gmail.com>
-X-Mailer: git-send-email 2.13.6
-Cc: koen@dominion.thruhere.net
-Subject: [meta-oe][PATCH] smstools3: update to 3.1.21; drop uneeded patches
+	h=x-gm-message-state:from:date:to:cc:subject:message-id:references
+	:mime-version:content-disposition:in-reply-to:user-agent;
+	bh=+rTXY25kEks5lyJ9WxqT5TAsMgl6H7lh1udB/ekjsjc=;
+	b=SgNSAMe95pONVFu8IWjJkfUMu8+A2rHtwVB9dE+kT3uLJ2pOSMl4iiOIWfciunvN4+
+	KRez5uC4vBBAcBkgx9qAVtutwO3Xc9rlme3XWB6FsceesYLHMe2Scwl8LAuk4QE+KTaE
+	OkPfQn4+W7JmJtVkkM1bG+s1YJquSpxZ8PXQFmrmeqL0bBcG4yQOZfYyTLZHkAjW4oAD
+	b4EDYF33yraTr1Wsud/cF7km2+xjj9bjYOApqqKWYDqkPPAl9mTr8uzUG3GkBXPB/BRI
+	NDWY189eX+8SOuf+GzOs0g7quhPNCqA629vXjclbc1bXJQDH2dFCVcoIlYlx7OyXzOPR
+	wsug==
+X-Gm-Message-State: AKGB3mIz8HEg62whJ+Ygti0e6fs4fQ7fMt3ahsrO+3uCBM3f23ALwKBb
+	TODKXuOJ1qzFzxkoq9unv+ZvGw==
+X-Google-Smtp-Source: ACJfBotn32l7P8hV+/9xY/Vza+pb+ZhFpawSX19jPgLeWrTS3ROH6XBpUFrFBqjF0mkephbjQ1g6nw==
+X-Received: by 10.223.148.194 with SMTP id 60mr16891405wrr.39.1514100883479;
+	Sat, 23 Dec 2017 23:34:43 -0800 (PST)
+Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
+	s86sm9499583wma.29.2017.12.23.23.34.42
+	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
+	Sat, 23 Dec 2017 23:34:42 -0800 (PST)
+From: Martin Jansa <martin.jansa@gmail.com>
+X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Sun, 24 Dec 2017 08:34:43 +0100
+To: openembedded-devel@lists.openembedded.org,
+	Armin Kuster <akuster808@gmail.com>, Bill Randle <bill.randle@gmail.com>
+Message-ID: <20171224073443.GA4127@jama>
+References: <151400211887.5101.9516674106915358280@git.openembedded.org>
+	<20171223040839.6971C2355DB@git.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <20171223040839.6971C2355DB@git.openembedded.org>
+User-Agent: Mutt/1.9.2 (2017-12-15)
+Cc: openembedded-commits@lists.openembedded.org
+Subject: Re: [oe-commits] [meta-openembedded] 14/30: python[3]-flask-nav: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,98 +60,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 23 Dec 2017 20:05:16 -0000
+X-List-Received-Date: Sun, 24 Dec 2017 07:34:43 -0000
+X-Groupsio-MsgNum: 70098
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="FCuugMFkClbJLl1L"
+Content-Disposition: inline
 
-Update smstools3 to latest version and drop some patches that no longer
-seem to be required. (Builds and runs fine on poky.)
+--FCuugMFkClbJLl1L
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Bill Randle <bill.randle@gmail.com>
----
- .../smstools3/fix-makefile-override.patch          | 24 ----------------------
- ...s_binpath_and_psops.patch => sms_binpath.patch} |  5 +----
- .../{smstools3_3.1.15.bb => smstools3_3.1.21.bb}   |  8 +++-----
- 3 files changed, 4 insertions(+), 33 deletions(-)
- delete mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/fix-makefile-override.patch
- rename meta-oe/recipes-connectivity/smstools3/smstools3/{sms_binpath_and_psops.patch => sms_binpath.patch} (90%)
- rename meta-oe/recipes-connectivity/smstools3/{smstools3_3.1.15.bb => smstools3_3.1.21.bb} (84%)
+On Sat, Dec 23, 2017 at 04:08:52AM +0000, git@git.openembedded.org wrote:
+> This is an automated email from the git hooks/post-receive script.
+>=20
+> armin_kuster pushed a commit to branch master
+> in repository meta-openembedded.
 
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/fix-makefile-override.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/fix-makefile-override.patch
-deleted file mode 100644
-index f0a1d33c9..000000000
---- a/meta-oe/recipes-connectivity/smstools3/smstools3/fix-makefile-override.patch
-+++ /dev/null
-@@ -1,24 +0,0 @@
--Upstream-Status: Backport [debian]
--
----- a/src/Makefile
--+++ b/src/Makefile
--@@ -37,16 +37,15 @@
-- # Use the following only on GNU/Linux and only if you need ps listing like "smsd: MAINPROCESS" and "smsd: GSM1"
-- # CFLAGS += -D USE_LINUX_PS_TRICK
-- 
---all: smsd 
---
---smsd: smsd.c extras.o locking.o cfgfile.o logging.o alarm.o smsd_cfg.o charset.o stats.o blacklist.o whitelist.o modeminit.o pdu.o
---
-- ifneq (,$(findstring SOLARIS,$(CFLAGS)))
-- ifeq (,$(findstring DISABLE_INET_SOCKET,$(CFLAGS)))
-- override LFLAGS += -lsocket -lnsl
-- endif
-- endif
-- 
--+all: smsd 
--+
--+smsd: smsd.c extras.o locking.o cfgfile.o logging.o alarm.o smsd_cfg.o charset.o stats.o blacklist.o whitelist.o modeminit.o pdu.o
-- ifneq (,$(findstring NOSTATS,$(CFLAGS)))
-- 	$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
-- else 
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-similarity index 90%
-rename from meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-rename to meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-index ffcaa0971..622044632 100644
---- a/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath_and_psops.patch
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3/sms_binpath.patch
-@@ -12,8 +12,5 @@ Index: smstools3/scripts/sms3
- -RESETMODEMS=/usr/local/bin/smsd_resetmodems
- +RESETMODEMS=/usr/bin/smsd_resetmodems
-  NAME=smsd
---PSOPT="-e"
--+PSOPT=""
-+ PSOPT="-e"
-  ECHO=echo
-- case `uname` in
--   *BSD|Darwin)
-diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-similarity index 84%
-rename from meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-rename to meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-index 310a13c22..9885f351b 100644
---- a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.15.bb
-+++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-@@ -6,18 +6,16 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
- HOMEPAGE = "http://smstools3.kekekasvi.com"
- 
- SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
--           file://sms_binpath_and_psops.patch \
--           file://fix-makefile-override.patch"
-+           file://sms_binpath.patch"
- 
--SRC_URI[md5sum] = "0241ef60e646fac1a06254a848e61ed7"
--SRC_URI[sha256sum] = "ed00ffaeaa312a5b4f969f4e97a64603a866bbe16e393ea02f5bf05234814d59"
-+SRC_URI[md5sum] = "6a9f038fb38a49cc3a4f8f14a88fb8af"
-+SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e49"
- 
- 
- S = "${WORKDIR}/${BPN}"
- 
- EXTRA_OEMAKE += "LFLAGS='${LDFLAGS}'"
- 
--RDEPENDS_${PN} = "bash"
- INITSCRIPT_NAME = "sms3"
- INITSCRIPT_PARAMS = "defaults"
- 
--- 
-2.13.6
+Hi,
 
+This depends on 2 python-blinker reviews which weren't merged with this
+batch, causing:
 
+ERROR: Nothing RPROVIDES 'python3-blinker' (but meta-python/recipes-devtool=
+s/python/python3-flask-nav_0.6.bb RDEPENDS on or otherwise requires it)
+NOTE: Runtime target 'python3-blinker' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python3-blinker']
+NOTE: Runtime target 'python3-flask-nav' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python3-flask-nav', 'python3=
+-blinker']
+NOTE: Runtime target 'python3-flask-nav-dev' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['python3-flask-nav-dev', 'pyt=
+hon3-blinker']
+
+Regards,
+
+> commit 55d77b7e3f81dff333cbaa3361d02249943a8fec
+> Author: Bill Randle <bill.randle@gmail.com>
+> AuthorDate: Thu Dec 7 21:49:02 2017 -0800
+>=20
+>     python[3]-flask-nav: new recipes
+>    =20
+>     Signed-off-by: Bill Randle <bill.randle@gmail.com>
+>     Signed-off-by: Armin Kuster <akuster808@gmail.com>
+> ---
+>  meta-python/recipes-devtools/python/python-flask-nav.inc    | 13 +++++++=
+++++++
+>  meta-python/recipes-devtools/python/python-flask-nav_0.6.bb |  2 ++
+>  .../recipes-devtools/python/python3-flask-nav_0.6.bb        |  2 ++
+>  3 files changed, 17 insertions(+)
+>=20
+> diff --git a/meta-python/recipes-devtools/python/python-flask-nav.inc b/m=
+eta-python/recipes-devtools/python/python-flask-nav.inc
+> new file mode 100644
+> index 0000000..932ccdf
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-flask-nav.inc
+> @@ -0,0 +1,13 @@
+> +DESCRIPTION =3D "Easily create navigation for Flask applications."
+> +LICENSE =3D "MIT"
+> +LIC_FILES_CHKSUM =3D "file://PKG-INFO;md5=3D2729ee82259d601d90d28b0574d1=
+2416"
+> +
+> +SRC_URI[md5sum] =3D "4d51cfd06d58f8d0fe85775a6696c0e5"
+> +SRC_URI[sha256sum] =3D "44e40b755380a1e68ab521a2f9174de259a2c94ddcdaabf3=
+6b3aca2e110a33f4"
+> +
+> +PYPI_PACKAGE =3D "flask-nav"
+> +
+> +RDEPENDS_${PN} +=3D "\
+> +    ${PYTHON_PN}-blinker \
+> +    ${PYTHON_PN}-flask \
+> +    "
+> diff --git a/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb =
+b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
+> new file mode 100644
+> index 0000000..30b5b3b
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
+> @@ -0,0 +1,2 @@
+> +inherit pypi setuptools
+> +require python-flask-nav.inc
+> diff --git a/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb=
+ b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
+> new file mode 100644
+> index 0000000..d251152
+> --- /dev/null
+> +++ b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
+> @@ -0,0 +1,2 @@
+> +inherit pypi setuptools3
+> +require python-flask-nav.inc
+>=20
+> --=20
+> To stop receiving notification emails like this one, please contact
+> the administrator of this repository.
+> --=20
+> _______________________________________________
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
+
+--=20
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+--FCuugMFkClbJLl1L
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+
+-----BEGIN PGP SIGNATURE-----
+
+iF0EARECAB0WIQRU+ejDffEzV2Je2oc3VSO3ZXaAHAUCWj9YkgAKCRA3VSO3ZXaA
+HAhAAJ97BQoC9buOE1z5epbb0aEwIFp0RACbB49xkwdzbCNZw6S3Ro2IXkNGTDE=
+=0Y7n
+-----END PGP SIGNATURE-----
+
+--FCuugMFkClbJLl1L--
