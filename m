@@ -1,48 +1,30 @@
-Return-Path: <bill.randle@gmail.com>
-Received: from mail-ot0-f194.google.com (mail-ot0-f194.google.com
-	[74.125.82.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 3D31C787C1;
-	Sun, 24 Dec 2017 16:03:19 +0000 (UTC)
-Received: by mail-ot0-f194.google.com with SMTP id a42so6364975otj.5;
-	Sun, 24 Dec 2017 08:03:21 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=/bEvEyFBqSy0PE30bkuDDbtmvEUZON8ajVQxgBJaL+k=;
-	b=tug04Ra39q6vaZIzdqN3Y4WNJDfdIaYcfFw4flgrCz6gWxb93GSkuF5sc7j2SW6CRz
-	dOSouu8lZY5gMh6ZWPi+RtA/YId8FZv9REOUW7est9vt1ivLXsnfZfd3oAyLA5yAucTu
-	x77IP8b2+f8Aw7/Bh/m4LDBraa/NN7CG5GAmLHahxk/u62yXzkZQkITemzOM4wZT6WMq
-	yBX1RAblElmFZhy0T3LDe1bNkl4O2g6SKjn8g+cDrI37mo0X+C4cw3hU05RMJXnBUQDz
-	hr2JjyuS8lmhiqGb0AOG975VnnfE7oyoJZPYfzszh9GmiitVH+wQxI9M+8cLbBbHbgYt
-	NAjw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=/bEvEyFBqSy0PE30bkuDDbtmvEUZON8ajVQxgBJaL+k=;
-	b=exbBgV4+1dd6KM422EDI5MCW7JTqiBpi9soS2saGIimvx6Bbgj010Pfonbm6xCmFBD
-	XdyDHCXVobX18OUeaPIHeUHk8wKUFZYr0K+S988LPgu9AkrWgWBWfMinOX0Zqr8S4Uh6
-	YgJ032wNGh/FbPDKGDfaY2nhQggF2XQ/leymFkoktl1m6cfQrbNYXp6rs8hJ6+dB+geA
-	fLBdfcFMcLOgQpKN6c4saGiIREQowX4OouHTlO4rrQ9p3vD5TDGK7e91UORdGJxNCrZg
-	10daoOxWixYGYpA6yNRE1uy/dz4Q+v9TkRtIWa0WWEIGKwaRMnMo6LIgUFe0eMM0WuQo
-	IRmQ==
-X-Gm-Message-State: AKGB3mLpiI517YdfToDPqqJcTEPtIVJjwKjlbQjio3OT9Vog0paipuXV
-	VdL9CRUxS3MFdZv5gFKcVNTFC/+RghPmKaY9e+U=
-X-Google-Smtp-Source: ACJfBoshHk2Jl8wtRJXzDI9mbIMzGJNWX6XA5DDT6dTdnABeLA/o67ZkZ6PbrYPypsQyJM5PYGOT42lj+cyKrBPLBhI=
-X-Received: by 10.157.46.105 with SMTP id c38mr14483017otd.213.1514131400626; 
-	Sun, 24 Dec 2017 08:03:20 -0800 (PST)
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id 6343160616
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Dec 2017 01:30:42 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="32572656"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 25 Dec 2017 09:30:42 +0800
+Received: from G08CNEXCHPEKD03.g08.fujitsu.local (unknown [10.167.33.85])
+	by cn.fujitsu.com (Postfix) with ESMTP id 16633486A799
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 25 Dec 2017 09:30:42 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.55) by
+	G08CNEXCHPEKD03.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Mon, 25 Dec 2017 09:30:45 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 25 Dec 2017 18:30:16 +0800
+Message-ID: <1514197816-84459-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Received: by 10.202.221.194 with HTTP; Sun, 24 Dec 2017 08:03:20 -0800 (PST)
-In-Reply-To: <20171224073443.GA4127@jama>
-References: <151400211887.5101.9516674106915358280@git.openembedded.org>
-	<20171223040839.6971C2355DB@git.openembedded.org>
-	<20171224073443.GA4127@jama>
-From: Bill Randle <bill.randle@gmail.com>
-Date: Sun, 24 Dec 2017 08:03:20 -0800
-Message-ID: <CA+n--H-o6pUnaLH73wYjYXt6Qs6iTuYx7_SKRN0=CFf+E0f4bQ@mail.gmail.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-commits@lists.openembedded.org
-Subject: Re: [oe-commits] [meta-openembedded] 14/30: python[3]-flask-nav: new recipes
+X-Originating-IP: [10.167.225.55]
+X-yoursite-MailScanner-ID: 16633486A799.A3385
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH] xrdp: CVE-2017-16927
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,99 +37,187 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 24 Dec 2017 16:03:20 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 25 Dec 2017 01:30:44 -0000
+Content-Type: text/plain
 
-On Sat, Dec 23, 2017 at 11:34 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> On Sat, Dec 23, 2017 at 04:08:52AM +0000, git@git.openembedded.org wrote:
->> This is an automated email from the git hooks/post-receive script.
->>
->> armin_kuster pushed a commit to branch master
->> in repository meta-openembedded.
->
-> Hi,
->
-> This depends on 2 python-blinker reviews which weren't merged with this
-> batch, causing:
->
-> ERROR: Nothing RPROVIDES 'python3-blinker' (but meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb RDEPENDS on or otherwise requires it)
-> NOTE: Runtime target 'python3-blinker' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-blinker']
-> NOTE: Runtime target 'python3-flask-nav' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-flask-nav', 'python3-blinker']
-> NOTE: Runtime target 'python3-flask-nav-dev' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['python3-flask-nav-dev', 'python3-blinker']
->
-> Regards,
+Fix of CVE-2017-16927
 
-That would be this patch:
-http://lists.openembedded.org/pipermail/openembedded-devel/2017-December/115865.html
-posted on the mailing list five days earlier than the patch for
-flask-nav. I should have perhaps put a note in the patch series that
-the previously submitted patch was also required as a prerequisite.
-I'll to do that in the future.
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch     | 148 +++++++++++++++++++++
+ meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb         |   1 +
+ 2 files changed, 149 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
 
-    -Bill
+diff --git a/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
+new file mode 100644
+index 0000000..4c93647
+--- /dev/null
++++ b/meta-oe/recipes-support/xrdp/xrdp/0001-Fix-of-CVE-2017-16927.patch
+@@ -0,0 +1,148 @@
++Subject: [PATCH] Fix CVE-2017-16927
++
++sesman: scpv0, accept variable length data fields
++
++Upstream-Status: Backport 
++
++---
++ sesman/libscp/libscp_v0.c | 32 +++++++++++++++++++++++++-------
++ 1 file changed, 25 insertions(+), 7 deletions(-)
++
++diff --git a/sesman/libscp/libscp_v0.c b/sesman/libscp/libscp_v0.c
++index 5a0c8bf..5693407 100644
++--- a/sesman/libscp/libscp_v0.c
+++++ b/sesman/libscp/libscp_v0.c
++@@ -161,7 +161,7 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++     struct SCP_SESSION *session = 0;
++     tui16 sz;
++     tui32 code = 0;
++-    char buf[257];
+++    char *buf = 0;
++ 
++     if (!skipVchk)
++     {
++@@ -226,27 +226,31 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++ 
++         /* reading username */
++         in_uint16_be(c->in_s, sz);
++-        buf[sz] = '\0';
+++        buf = g_new0(char, sz);
++         in_uint8a(c->in_s, buf, sz);
++-
+++        buf[sz] = '\0';
++         if (0 != scp_session_set_username(session, buf))
++         {
++             scp_session_destroy(session);
++             log_message(LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting username", __LINE__);
+++            g_free(buf);
++             return SCP_SERVER_STATE_INTERNAL_ERR;
++         }
+++        g_free(buf);
++ 
++         /* reading password */
++         in_uint16_be(c->in_s, sz);
++-        buf[sz] = '\0';
+++        buf = g_new0(char, sz);
++         in_uint8a(c->in_s, buf, sz);
++-
+++        buf[sz] = '\0';
++         if (0 != scp_session_set_password(session, buf))
++         {
++             scp_session_destroy(session);
++             log_message(LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting password", __LINE__);
+++            g_free(buf);
++             return SCP_SERVER_STATE_INTERNAL_ERR;
++         }
+++        g_free(buf);
++ 
++         /* width */
++         in_uint16_be(c->in_s, sz);
++@@ -272,9 +276,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++ 
++             if (sz > 0)
++             {
+++                buf = g_new0(char, sz);
++                 in_uint8a(c->in_s, buf, sz);
++                 buf[sz] = '\0';
++                 scp_session_set_domain(session, buf);
+++                g_free(buf);
++             }
++         }
++ 
++@@ -285,9 +291,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++ 
++             if (sz > 0)
++             {
+++                buf = g_new0(char, sz);
++                 in_uint8a(c->in_s, buf, sz);
++                 buf[sz] = '\0';
++                 scp_session_set_program(session, buf);
+++                g_free(buf);
++             }
++         }
++ 
++@@ -298,9 +306,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++ 
++             if (sz > 0)
++             {
+++                buf = g_new0(char, sz);
++                 in_uint8a(c->in_s, buf, sz);
++                 buf[sz] = '\0';
++                 scp_session_set_directory(session, buf);
+++                g_free(buf);
++             }
++         }
++ 
++@@ -311,9 +321,11 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++ 
++             if (sz > 0)
++             {
+++                buf = g_new0(char, sz);
++                 in_uint8a(c->in_s, buf, sz);
++                 buf[sz] = '\0';
++                 scp_session_set_client_ip(session, buf);
+++                g_free(buf);
++             }
++         }
++     }
++@@ -332,29 +344,35 @@ scp_v0s_accept(struct SCP_CONNECTION *c, struct SCP_SESSION **s, int skipVchk)
++         scp_session_set_type(session, SCP_GW_AUTHENTICATION);
++         /* reading username */
++         in_uint16_be(c->in_s, sz);
++-        buf[sz] = '\0';
+++        buf = g_new0(char, sz);
++         in_uint8a(c->in_s, buf, sz);
+++        buf[sz] = '\0';
++ 
++         /* g_writeln("Received user name: %s",buf); */
++         if (0 != scp_session_set_username(session, buf))
++         {
++             scp_session_destroy(session);
++             /* until syslog merge log_message(s_log, LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting        username", __LINE__);*/
+++            g_free(buf);
++             return SCP_SERVER_STATE_INTERNAL_ERR;
++         }
+++        g_free(buf);
++ 
++         /* reading password */
++         in_uint16_be(c->in_s, sz);
++-        buf[sz] = '\0';
+++        buf = g_new0(char, sz);
++         in_uint8a(c->in_s, buf, sz);
+++        buf[sz] = '\0';
++ 
++         /* g_writeln("Received password: %s",buf); */
++         if (0 != scp_session_set_password(session, buf))
++         {
++             scp_session_destroy(session);
++             /* until syslog merge log_message(s_log, LOG_LEVEL_WARNING, "[v0:%d] connection aborted: error setting password", __LINE__); */
+++            g_free(buf);
++             return SCP_SERVER_STATE_INTERNAL_ERR;
++         }
+++        g_free(buf);
++     }
++     else
++     {
++-- 
++2.7.4
++
+diff --git a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+index e7a77e4..ccc8e35 100644
+--- a/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
++++ b/meta-oe/recipes-support/xrdp/xrdp_0.9.4.bb
+@@ -15,6 +15,7 @@ SRC_URI = "git://github.com/neutrinolabs/xrdp.git \
+            file://0001-Fix-sesman.ini-and-xrdp.ini.patch \
+            file://0001-Added-req_distinguished_name-in-etc-xrdp-openssl.con.patch \
+            file://0001-Fix-the-compile-error.patch \
++           file://0001-Fix-of-CVE-2017-16927.patch \
+            "
+ 
+ SRCREV = "c295dd61b882e8b56677cf12791f43634f9190b5"
+-- 
+2.7.4
 
->> commit 55d77b7e3f81dff333cbaa3361d02249943a8fec
->> Author: Bill Randle <bill.randle@gmail.com>
->> AuthorDate: Thu Dec 7 21:49:02 2017 -0800
->>
->>     python[3]-flask-nav: new recipes
->>
->>     Signed-off-by: Bill Randle <bill.randle@gmail.com>
->>     Signed-off-by: Armin Kuster <akuster808@gmail.com>
->> ---
->>  meta-python/recipes-devtools/python/python-flask-nav.inc    | 13 +++++++++++++
->>  meta-python/recipes-devtools/python/python-flask-nav_0.6.bb |  2 ++
->>  .../recipes-devtools/python/python3-flask-nav_0.6.bb        |  2 ++
->>  3 files changed, 17 insertions(+)
->>
->> diff --git a/meta-python/recipes-devtools/python/python-flask-nav.inc b/meta-python/recipes-devtools/python/python-flask-nav.inc
->> new file mode 100644
->> index 0000000..932ccdf
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-flask-nav.inc
->> @@ -0,0 +1,13 @@
->> +DESCRIPTION = "Easily create navigation for Flask applications."
->> +LICENSE = "MIT"
->> +LIC_FILES_CHKSUM = "file://PKG-INFO;md5=2729ee82259d601d90d28b0574d12416"
->> +
->> +SRC_URI[md5sum] = "4d51cfd06d58f8d0fe85775a6696c0e5"
->> +SRC_URI[sha256sum] = "44e40b755380a1e68ab521a2f9174de259a2c94ddcdaabf36b3aca2e110a33f4"
->> +
->> +PYPI_PACKAGE = "flask-nav"
->> +
->> +RDEPENDS_${PN} += "\
->> +    ${PYTHON_PN}-blinker \
->> +    ${PYTHON_PN}-flask \
->> +    "
->> diff --git a/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
->> new file mode 100644
->> index 0000000..30b5b3b
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python-flask-nav_0.6.bb
->> @@ -0,0 +1,2 @@
->> +inherit pypi setuptools
->> +require python-flask-nav.inc
->> diff --git a/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
->> new file mode 100644
->> index 0000000..d251152
->> --- /dev/null
->> +++ b/meta-python/recipes-devtools/python/python3-flask-nav_0.6.bb
->> @@ -0,0 +1,2 @@
->> +inherit pypi setuptools3
->> +require python-flask-nav.inc
->>
->> --
->> To stop receiving notification emails like this one, please contact
->> the administrator of this repository.
->> --
->> _______________________________________________
->> Openembedded-commits mailing list
->> Openembedded-commits@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-commits
->
-> --
-> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+
 
