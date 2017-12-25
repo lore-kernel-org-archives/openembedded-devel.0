@@ -1,48 +1,38 @@
-Return-Path: <changhyeok.bae@gmail.com>
-Received: from mail-pf0-f193.google.com (mail-pf0-f193.google.com
-	[209.85.192.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 7B4687857A
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id A2C3D60766
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Dec 2017 15:58:15 +0000 (UTC)
-Received: by mail-pf0-f193.google.com with SMTP id u25so17967545pfg.5
+	Mon, 25 Dec 2017 18:09:01 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id d202so17255595qkc.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Dec 2017 07:58:17 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=+iQufJBpx7gWjr4KiIZVDMWtnhViVvLJgbxlJxActxQ=;
-	b=Gf3IRXZjQSATLw4nm8q71MZkF2EgYE3UgUg45dTcEgXrZrZJSdMkSHBC+KmKGyn0tM
-	j4ITb606pcX9j8ZqL/3KB84mD01/LE4DnUJGVj56STLI235amcyNsla1ga0lhIiHvuSU
-	0Lqk0UR6OibnDwvbjQvGMw/h4lKIBz+vOLWJk0blHfmgRd/yurG1keOEyetM0vpUbUwq
-	Ef/0v69JqHqZPCYtiti16L1MFO96SXUMfuGgaq1ydAuM3lqmiTmExyLKlIWaMjn2eh7T
-	kaTOn5K+qFDSi6LAGA0KQ/UK9QudIYhRwa/q4KJndZBccZVXwu/nWLtHOp5/VC01JOKp
-	huLQ==
+	Mon, 25 Dec 2017 10:09:02 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+iQufJBpx7gWjr4KiIZVDMWtnhViVvLJgbxlJxActxQ=;
-	b=ukLpY0vYD+jVOiBr7OaA7m86YNhZqj6N3kpEUXPohILu/aEPx1EXa5yRR1GRIdKiqh
-	0VEerQpiG/aOfhIWe/YukiF4mkF+1bz5pOLr6Ekpf2TDcTP1vsKwCz25ZvVy++6sntsL
-	Nt3w6YSroovwKs3B5xNVi7cYSOclXB8iWRBW/96BCsEW1BqLxJypDedo+QcqpXLQHfVv
-	sqn9Lc7aRhp/aRWSV1lxFUAfAIPV7L+G5KD64OGMsjXWXifi5f4AJt9MBBlZArhH5R06
-	NFo9ECBnb5u1WJjW+OXte5eG+EfCC3ooOamAR70XFVyPnbufRZnxIyRALU4okdHklwxp
-	f5zQ==
-X-Gm-Message-State: AKGB3mJp0FWhM0D+l8EmU2H5uYrBWMtWFTZPGgMDioRu93Z/XZezBLYf
-	BMzq4r4wTOnBbHnTvO4yQgqibg==
-X-Google-Smtp-Source: ACJfBosgme2pEyLVgK7x8uPYEgRQVNZOLef9p3Y8VW/XcRWezxchkxlv+TvfCNfiRkTfdXwsMth4hg==
-X-Received: by 10.99.186.70 with SMTP id l6mr20244517pgu.443.1514217496517;
-	Mon, 25 Dec 2017 07:58:16 -0800 (PST)
-Received: from ip-172-31-1-64.ap-northeast-2.compute.internal
-	(ec2-13-124-121-69.ap-northeast-2.compute.amazonaws.com.
-	[13.124.121.69]) by smtp.gmail.com with ESMTPSA id
-	p87sm58755808pfi.95.2017.12.25.07.58.14
+	bh=6X7FYpbEROqjMqTRUOxqSDtEnkiNhNr7Dy/Lq1RKl1o=;
+	b=r0JodqLhZSB91mvVAadmJhqAnxK4PM/sHSVHk0UaXwohNxhGAy2BKaZl9mSd/4lqf0
+	yXM61YN1MI0qlrScRa5Fa1ePx2oZ46zbVSyQihWTOMjW38tWtGNfqjFILrrs+H2kgf0c
+	cwhgRKjCw2GOor3GZDSs+8e7dWmqnSZ1OsvpXV+PsjEfib6lHHCfcfIa0Pv2rIC9+hn6
+	qTKhTAQJ7ZiAb5wxEe6NOkwIo4HDxVe+7t5YXnNShgCU5LC4f4jMOERH9y7/A2p00IB9
+	EcZXyEzJxjZbuuVYMJHuG+3R0wHlo6eyDbSaAjjR3pYpg/8LtP8w/yWAc5wF81ssXR/t
+	nH1g==
+X-Gm-Message-State: AKGB3mJzeTGGZTiEs8gA63usmajpggxEAdjcveRrQ9DEih+XRufSP8sX
+	cO9cGHKE0iagK9hCmG78ydM2PFee
+X-Google-Smtp-Source: ACJfBouSa9JnATSG4jV13CTvNIWjeyrVU7KS/+iZZhPLHU8fBqRGipZDnLNJDgzM7G/2xjz0uqX7dQ==
+X-Received: by 10.55.26.84 with SMTP id a81mr29125074qka.303.1514225342013;
+	Mon, 25 Dec 2017 10:09:02 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	t48sm18365484qtc.10.2017.12.25.10.09.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Dec 2017 07:58:15 -0800 (PST)
-From: Changhyeok Bae <changhyeok.bae@gmail.com>
+	Mon, 25 Dec 2017 10:09:01 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Dec 2017 15:58:09 +0000
-Message-Id: <1514217489-56636-1-git-send-email-changhyeok.bae@gmail.com>
+Date: Mon, 25 Dec 2017 13:08:52 -0500
+Message-Id: <1514225332-25796-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-qt5][pyro][PATCH] qtwebengine: Fix GCC 7 buile errors
+Subject: [meta-python][PATCH] python-pymisc: update to version 2.4.85
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -55,65 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Dec 2017 15:58:15 -0000
+X-List-Received-Date: Mon, 25 Dec 2017 18:09:01 -0000
 
-Update latest version in 53-based branch of chromium to fix build error
-in GCC-7.
-
-4210035 [Backport] [url_formatter] Update aspirational_scripts per
-        Unicode 9
-4934412 Fix build with GCC 7.0
-772f05b [Backport] [runtime] Follow-up fix for "Better encapsulation of
-        dictionary objects handling in lookup iterator."
-        BUG=chromium:626715
-675c165 Fix not working pkg-config on some older distros
-015d648 Fix Linux kernel lacking
-        V4L2_CID_POWER_LINE_FREQUENCY_AUTO
-589f21d Allow using quota management API for non-standard URLs
-c83a47c Fix build with use_glib=false and use_x11=true
-b0bb028 Fix debug builds compilation
-cd3417b Override xcode min version to 0721
-d67d4bb Remove pending messages DCHECK to stop certain tests from crashing
-1fd9f11 Remove linking with libatomic
-fa90180 Fix missing dependency on libffi
-b5a3338 Fix broken unit test for gn
-70ea2bc Fix gn compilation for rhel6.6, rhel7.2
-f408e89 Improve .pri output
-492b20a Remove gtk2 dependency in tests
-42e3484 Allow Service Workers without HTTP headers
-7a1be30 Do not require gnome-keyring
-11e5c2d Revert "Add mus and catapult project files"
-891fb3a Remove various test and telemetry dependencies
-ddd6053 Do not use last_commit_position for gn build
-e85719e Windows and macOS GN integration
-8fda2ae Make more features configurable
-93db377 [Backport] Don't schedule wholeSubtreeInvalid sets.
-0fa2e06 Fix convert dict tool build
-d6c9e61 Add support for creating pri link information
-965b67f Enable virtual keyboard on Qt supported platforms
-5cf4c44 Fix macOS build when plugins are disabled
-662a4a1 Fix false dependency on mus, tracing and mojo_runner
-128e6f6 FIXUP: Fix dependencies on ANGLE
-b41aa16 Fix building with use_gio=false
-
-Signed-off-by: Changhyeok Bae <changhyeok.bae@gmail.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- recipes-qt/qt5/qtwebengine_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-pymisp.inc                 | 4 ++--
+ .../python/{python-pymisp_2.4.84.bb => python-pymisp_2.4.85.bb}       | 0
+ .../python/{python3-pymisp_2.4.84.bb => python3-pymisp_2.4.85.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pymisp_2.4.84.bb => python-pymisp_2.4.85.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pymisp_2.4.84.bb => python3-pymisp_2.4.85.bb} (100%)
 
-diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index deb336f..80d6133 100644
---- a/recipes-qt/qt5/qtwebengine_git.bb
-+++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -118,7 +118,7 @@ SRC_URI += " \
- "
+diff --git a/meta-python/recipes-devtools/python/python-pymisp.inc b/meta-python/recipes-devtools/python/python-pymisp.inc
+index 4abaf97..6e248dc 100644
+--- a/meta-python/recipes-devtools/python/python-pymisp.inc
++++ b/meta-python/recipes-devtools/python/python-pymisp.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "https://github.com/MISP/PyMISP"
+ LICENSE = "BSD-2-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=a3639cf5780f71b125d3e9d1dc127c20"
  
- SRCREV_qtwebengine = "d740d6a7dbfec387752c7bc8a8b06db0e757c9dc"
--SRCREV_chromium = "15d257fd921f37b32ef643225f21df0ea24c8302"
-+SRCREV_chromium = "4210035e25d6832c217aab56d4e15b3183ca4f79"
- SRCREV = "${SRCREV_qtwebengine}"
+-SRC_URI[md5sum] = "0fe33de8e87120a46f917cb6bfa7baee"
+-SRC_URI[sha256sum] = "6f228e4050252002bd9093378e687cf5eb963fd8fdf3e561453376eda7bc396a"
++SRC_URI[md5sum] = "5191db549c454af2ff05d82ce789052e"
++SRC_URI[sha256sum] = "571f1c9b0f0a1df8837c1b4f2ce4fadb8ad78e572a91d83cfedc3300753f21b8"
  
- SRCREV_FORMAT = "qtwebengine_chromium"
+ RDEPENDS_${PN} += " \
+     ${PYTHON_PN}-json \
+diff --git a/meta-python/recipes-devtools/python/python-pymisp_2.4.84.bb b/meta-python/recipes-devtools/python/python-pymisp_2.4.85.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pymisp_2.4.84.bb
+rename to meta-python/recipes-devtools/python/python-pymisp_2.4.85.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pymisp_2.4.84.bb b/meta-python/recipes-devtools/python/python3-pymisp_2.4.85.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pymisp_2.4.84.bb
+rename to meta-python/recipes-devtools/python/python3-pymisp_2.4.85.bb
 -- 
 2.7.4
 
