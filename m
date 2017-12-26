@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id D7CB371A32
+Received: from mail-qk0-f194.google.com (mail-qk0-f194.google.com
+	[209.85.220.194])
+	by mail.openembedded.org (Postfix) with ESMTP id CDFC17199E
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Dec 2017 15:45:45 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id q14so31043380qke.7
+	Tue, 26 Dec 2017 16:12:38 +0000 (UTC)
+Received: by mail-qk0-f194.google.com with SMTP id b132so13851306qkc.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Dec 2017 07:45:47 -0800 (PST)
+	Tue, 26 Dec 2017 08:12:40 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=0uVaCyWXDr+2ZG44iIrcOT76pqAaZjhURnJvXIwc7bU=;
-	b=OXNX5Qi4yn56PRlY7AAeNKnwosJfPlsgMFxIsAdSqNkSeOSuxGZ8DBqbf/GUFD+oXO
-	d2mUYmSzrUaqocao8JkPcUyiMzc+KVLQxiOA40cXIAHuj2HKmMzmQZXCABVN9xQtnDKs
-	sEOmiptbEmySDtOhs8CFAscA0scEt+9Z65/vq9L9JwK2zDyrjKMNROSeYpeLfk+L6G8a
-	Fji/hOGT40YiRL8hmA/dEDXrBP3BS9TexRHxUZxf+iIBx+Tkcp7RvSSCEhe4LzMLWgwy
-	wjYWceCULDtCR1AsN30qRNX99o08T8Q/FaCJMrZXwqS+WjB99FCJ7es7oFyX6h/2xXRr
-	vkEA==
-X-Gm-Message-State: AKGB3mJh0aVgw1669mcpPiNorj0xFpqjTOZnnGLAeSSONM5HYPaANtLM
-	ODFUi/hcD2OzM+g6370aC7HefSD5
-X-Google-Smtp-Source: ACJfBouxn3URs4+jTVJnrqBy5htY9iJeqiOYm90HrG70aqox9bea9t8gDBD/LU4md/M6GbNqi7tzDw==
-X-Received: by 10.55.98.65 with SMTP id w62mr27436982qkb.322.1514303146699;
-	Tue, 26 Dec 2017 07:45:46 -0800 (PST)
+	bh=iayD+wIBNgVOoi5SZEomkXX/vnKe1k4XrYEQ85V03J4=;
+	b=fhMMSvTyzUMOWqI58DNuLWdt1l0YA7zVT6h1fFw34tyD30MNpN1pPyIQTHIHggSSrc
+	9EG5NDAokyA8GAtZSoOSzT37Ja+a5/hW0vs3CQ4VTG1gpkdVyZTWg1YJuWXhJ4ZYPf7h
+	jaL1M0Qq1mF+ZKFKZ1cDR1r1btzN1LF043tmgb/IwmYnPwmvfNas7sMtsxzeQiavA/Jz
+	enu3GQEcX+Hwei5ugVav3fpO2cb+AboYFQ/qqzT5/8PQB9N0hgW7GyGBa8CFWzxJrKXN
+	49WxYlfeWtGiCff4WlK2ct9eY+3jn+tQXPxGon+6Yvv9MoMoEJXBbUNCP5BXdbiVFUyW
+	50xg==
+X-Gm-Message-State: AKGB3mJ0NAdITIriR64Es9w+yeyQcGOXmMgbsO7tCygOAoLt3qja4KNc
+	03jpqeXH7JNbBAv+L/OgOYfV35kJ
+X-Google-Smtp-Source: ACJfBot3K7fMEnoyBKuBAxI/L0EnsUgN8SbExSIB7V1b5jKdFT85zQplSY5gTVV91yto5cmyPx6fzQ==
+X-Received: by 10.55.80.7 with SMTP id e7mr8964668qkb.230.1514304759372;
+	Tue, 26 Dec 2017 08:12:39 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	185sm13752741qkd.1.2017.12.26.07.45.46
+	n30sm19517256qtb.56.2017.12.26.08.12.38
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 26 Dec 2017 07:45:46 -0800 (PST)
+	Tue, 26 Dec 2017 08:12:39 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Dec 2017 10:45:40 -0500
-Message-Id: <1514303140-7737-1-git-send-email-derek@asterius.io>
+Date: Tue, 26 Dec 2017 11:12:29 -0500
+Message-Id: <1514304749-5938-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python3-langtable: update to version 0.0.38
+Subject: [meta-python][PATCH] python-pyperclip: add an initial recipe for version 1.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,32 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Dec 2017 15:45:46 -0000
+X-List-Received-Date: Tue, 26 Dec 2017 16:12:39 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../{python3-langtable_0.0.37.bb => python3-langtable_0.0.38.bb}      | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python3-langtable_0.0.37.bb => python3-langtable_0.0.38.bb} (90%)
+ meta-python/recipes-devtools/python/python-pyperclip.inc    | 13 +++++++++++++
+ .../recipes-devtools/python/python-pyperclip_1.6.0.bb       |  4 ++++
+ .../recipes-devtools/python/python3-pyperclip_1.6.0.bb      |  2 ++
+ 3 files changed, 19 insertions(+)
+ create mode 100644 meta-python/recipes-devtools/python/python-pyperclip.inc
+ create mode 100644 meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb
+ create mode 100644 meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb
 
-diff --git a/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb b/meta-python/recipes-devtools/python/python3-langtable_0.0.38.bb
-similarity index 90%
-rename from meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-rename to meta-python/recipes-devtools/python/python3-langtable_0.0.38.bb
-index 4a3b2a9..177a2b5 100644
---- a/meta-python/recipes-devtools/python/python3-langtable_0.0.37.bb
-+++ b/meta-python/recipes-devtools/python/python3-langtable_0.0.38.bb
-@@ -9,8 +9,8 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- S = "${WORKDIR}/git"
- B = "${S}"
- 
--SRCREV = "3f001eef027ba69ef2fdb35c670b7da26b79b5e2"
--PV = "0.0.37+git${SRCPV}"
-+SRCREV = "35687ca957b746f153a6872139462b1443f8cad1"
-+PV = "0.0.38+git${SRCPV}"
- SRC_URI = "git://github.com/mike-fabian/langtable.git;branch=master \
- "
- 
+diff --git a/meta-python/recipes-devtools/python/python-pyperclip.inc b/meta-python/recipes-devtools/python/python-pyperclip.inc
+new file mode 100644
+index 0000000..c712fdd
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyperclip.inc
+@@ -0,0 +1,13 @@
++DESCRIPTION = "A cross-platform clipboard module for Python. (only handles plain text for now)"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://PKG-INFO;md5=1ed92115c8f96b19ec34ed09df586e51"
++
++SRC_URI[md5sum] = "d2f6a3129cd6f2518b52bb0b8deeeda7"
++SRC_URI[sha256sum] = "ce829433a9af640e08ee89b20f7c62132714bcc5d77df114044d0fccb8c3b3b8"
++
++inherit pypi
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-ctypes \
++    ${PYTHON_PN}-subprocess \
++"
+diff --git a/meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb b/meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb
+new file mode 100644
+index 0000000..6e93b81
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-pyperclip_1.6.0.bb
+@@ -0,0 +1,4 @@
++inherit setuptools
++require python-pyperclip.inc
++
++RDEPENDS_${PN} += "${PYTHON_PN}-contextlib"
+diff --git a/meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb b/meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb
+new file mode 100644
+index 0000000..ee6f88b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-pyperclip_1.6.0.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-pyperclip.inc
 -- 
 2.7.4
 
