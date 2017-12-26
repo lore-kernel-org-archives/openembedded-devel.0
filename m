@@ -1,38 +1,31 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f172.google.com (mail-qt0-f172.google.com
-	[209.85.216.172])
-	by mail.openembedded.org (Postfix) with ESMTP id 5D90071B27
+Return-Path: <Qi.Chen@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1FDA260721
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Dec 2017 18:25:18 +0000 (UTC)
-Received: by mail-qt0-f172.google.com with SMTP id e2so43282722qti.0
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 25 Dec 2017 10:25:20 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=+0WKpe7KKoGvY0e7fprO64ub23qAuuk2RECyoCOC6KY=;
-	b=kZYhi8SOAxf2EVXxKASsnauibPJUb7EyiZUQi4nsJbnawuw48eO/MEh8uTK39NLIdd
-	BL8/urptDRUNuk2SLlG4AsCfsFs9YmZk62w3aTKdDkYEOhexJPyg/I6PksmKGaf+T4Ew
-	APmhFJ8POFmV60j7jp22TeYL7UQLjaYWO96GLtzRK6PiRVT7L/K/RMsz+tx/rGOf6G8A
-	Tl/fOm2OdgrzFHAFiojaA8NezUirCTMJ9We7bbm74eCB5+z8Xcp5tctde5ANS5o1brVI
-	7r4WNe+cZIANJXK2rvQZZhprhjrVs6zJuOFnjhMjDdLPbEx3ou1vgYML9+Wm9FlQX3yF
-	Ye0w==
-X-Gm-Message-State: AKGB3mJVGqXO38+dDBD5Mi7hRWE75z0kubBU4jtHpt6uLgVYLsRVM+TE
-	o6dYnJpGIUEwJ1AI5CYIE0QQVuws
-X-Google-Smtp-Source: ACJfBosCXAsukhHwwRIaG6q6JHrSIg8ncCmCijx7XT5cdnTyLXSOWxSOYlAZ7j6I9gOO4oqCm86cSA==
-X-Received: by 10.237.37.89 with SMTP id w25mr31767632qtc.160.1514226319922;
-	Mon, 25 Dec 2017 10:25:19 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	k21sm18835246qta.27.2017.12.25.10.25.19
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Mon, 25 Dec 2017 10:25:19 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 25 Dec 2017 13:25:13 -0500
-Message-Id: <1514226313-14562-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-flask-wtf: update to version 0.14.2
+	Tue, 26 Dec 2017 01:44:57 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id vBQ1ivUq016934
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK);
+	Mon, 25 Dec 2017 17:44:57 -0800
+Received: from [128.224.162.167] (128.224.162.167) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Mon, 25 Dec 2017 17:44:55 -0800
+To: Derek Straka <derek@asterius.io>
+References: <1509554484-22352-1-git-send-email-derek@asterius.io>
+	<cd040284-bf17-756a-3243-a59ecd609ffd@windriver.com>
+	<CADNbA1pBRxme+0BcWt8Mfx0L++SneTh4qXPggLBtFEqQiYNUhw@mail.gmail.com>
+From: ChenQi <Qi.Chen@windriver.com>
+Message-ID: <116bf520-c8a6-cb3c-db77-6416fa23a329@windriver.com>
+Date: Tue, 26 Dec 2017 09:46:48 +0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101
+	Thunderbird/45.4.0
+MIME-Version: 1.0
+In-Reply-To: <CADNbA1pBRxme+0BcWt8Mfx0L++SneTh4qXPggLBtFEqQiYNUhw@mail.gmail.com>
+X-Originating-IP: [128.224.162.167]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-python][PATCH] python-automat: add an initial recipe for version 0.6.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,89 +38,142 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 25 Dec 2017 18:25:19 -0000
+X-List-Received-Date: Tue, 26 Dec 2017 01:44:58 -0000
+Content-Type: text/plain; charset="utf-8"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Derek Straka <derek@asterius.io>
----
- .../recipes-devtools/python/python-flask-wtf.inc   | 13 +++++-----
- .../import-simplejson-as-json.patch                | 28 ----------------------
- ...lask-wtf_0.12.bb => python-flask-wtf_0.14.2.bb} |  0
- ...ask-wtf_0.12.bb => python3-flask-wtf_0.14.2.bb} |  0
- 4 files changed, 6 insertions(+), 35 deletions(-)
- delete mode 100644 meta-python/recipes-devtools/python/python-flask-wtf/import-simplejson-as-json.patch
- rename meta-python/recipes-devtools/python/{python-flask-wtf_0.12.bb => python-flask-wtf_0.14.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-flask-wtf_0.12.bb => python3-flask-wtf_0.14.2.bb} (100%)
+On 12/22/2017 10:18 PM, Derek Straka wrote:
+> Chen,
+>
+> Thanks for bringing this up.  Take a look here to see if this proposed 
+> patchset fixes your issue: 
+> http://lists.openembedded.org/pipermail/openembedded-devel/2017-December/116094.html.
+>
+> -Derek
+>
 
-diff --git a/meta-python/recipes-devtools/python/python-flask-wtf.inc b/meta-python/recipes-devtools/python/python-flask-wtf.inc
-index 3a959ae..3c90656 100644
---- a/meta-python/recipes-devtools/python/python-flask-wtf.inc
-+++ b/meta-python/recipes-devtools/python/python-flask-wtf.inc
-@@ -1,16 +1,15 @@
- DESCRIPTION = "Simple integration of Flask and WTForms."
- LICENSE = "BSD"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=507e8635f25a06dc4f041a3a1b3359b3"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=3ca6bb31670492f791e6a9f2fb9f8a80"
- 
--SRC_URI[md5sum] = "c53a74e8ba481bf53405fd5efdf0339e"
--SRC_URI[sha256sum] = "bd99316c97ed1d1cb90b8f0c242c86420a891a6a2058f20717e424bf5b0bb80e"
--
--FILESEXTRAPATHS_prepend := "${THISDIR}/python-flask-wtf:"
--SRC_URI += " file://import-simplejson-as-json.patch"
-+SRC_URI[md5sum] = "586f50f233926cade42e3d744aca3e8f"
-+SRC_URI[sha256sum] = "5d14d55cfd35f613d99ee7cba0fc3fbbe63ba02f544d349158c14ca15561cc36"
- 
- PYPI_PACKAGE = "Flask-WTF"
- 
- RDEPENDS_${PN} = "\
-+    ${PYTHON_PN}-flask \
-+    ${PYTHON_PN}-itsdangerous \
-+    ${PYTHON_PN}-json \
-     ${PYTHON_PN}-wtforms \
--    ${PYTHON_PN}-simplejson \
- "
-diff --git a/meta-python/recipes-devtools/python/python-flask-wtf/import-simplejson-as-json.patch b/meta-python/recipes-devtools/python/python-flask-wtf/import-simplejson-as-json.patch
-deleted file mode 100644
-index 678f706..0000000
---- a/meta-python/recipes-devtools/python/python-flask-wtf/import-simplejson-as-json.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Inappropriate [configuration]
--
--Subject: [PATCH] import simplejson as json
--
--At runtime python-Flask-WTF tries to import json, but the module is not 
--available, import simplejson as json solve the issue.
--
--Signed-off-by: Fabio Berton <fabio.berton@ossystems.com.br>
-----
-- flask_wtf/recaptcha/validators.py | 2 +-
-- 1 file changed, 1 insertion(+), 1 deletion(-)
--
--diff --git a/flask_wtf/recaptcha/validators.py b/flask_wtf/recaptcha/validators.py
--index bcff23d..4a244bb 100644
----- a/flask_wtf/recaptcha/validators.py
--+++ b/flask_wtf/recaptcha/validators.py
--@@ -8,7 +8,7 @@ from flask import request, current_app
-- from wtforms import ValidationError
-- from werkzeug import url_encode
-- from .._compat import to_bytes, to_unicode
---import json
--+import simplejson as json
-- 
-- RECAPTCHA_VERIFY_SERVER = 'https://www.google.com/recaptcha/api/siteverify'
-- RECAPTCHA_ERROR_CODES = {
---- 
--2.1.4
--
-diff --git a/meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb b/meta-python/recipes-devtools/python/python-flask-wtf_0.14.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-flask-wtf_0.12.bb
-rename to meta-python/recipes-devtools/python/python-flask-wtf_0.14.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-flask-wtf_0.12.bb b/meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-flask-wtf_0.12.bb
-rename to meta-python/recipes-devtools/python/python3-flask-wtf_0.14.2.bb
--- 
-2.7.4
+Derek,
+
+Thanks!
+Your patch works.
+
+Best Regards,
+Chen Qi
+
+> On Fri, Dec 22, 2017 at 4:54 AM, ChenQi <Qi.Chen@windriver.com 
+> <mailto:Qi.Chen@windriver.com>> wrote:
+>
+>     Hi Derek,
+>
+>     I noticed in Automat's setup.py script:
+>
+>         setup_requires=[
+>             'setuptools-scm',
+>             'm2r',
+>         ],
+>         install_requires=[
+>             "attrs",
+>             "six",
+>         ],
+>
+>     Now the installed_requires entry is handled by the RDEPENDS meta
+>     data in recipe.
+>     How about the setup_requires entry? Do you know how to handle it
+>     in recipe?
+>
+>     I'm asking this because when I build python-automat on my host, I
+>     met do_compile error because of being able to download the m2r and
+>     setuptools-scm.
+>
+>     Ideally, we should be able to compile a recipe out without
+>     reaching out to the Internet, as long as the recipe's tarball is
+>     available in the DL_DIR.
+>
+>     Best Regards,
+>     Chen Qi
+>
+>
+>     On 11/02/2017 12:41 AM, Derek Straka wrote:
+>
+>         Signed-off-by: Derek Straka <derek@asterius.io
+>         <mailto:derek@asterius.io>>
+>         ---
+>           meta-python/recipes-devtools/python/python-automat.inc  | 16
+>         ++++++++++++++++
+>           .../recipes-devtools/python/python-automat_0.6.0.bb
+>         <http://python-automat_0.6.0.bb>      | 2 ++
+>           .../recipes-devtools/python/python3-automat_0.6.0.bb
+>         <http://python3-automat_0.6.0.bb>     | 4 ++++
+>           3 files changed, 22 insertions(+)
+>           create mode 100644
+>         meta-python/recipes-devtools/python/python-automat.inc
+>           create mode 100644
+>         meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+>         <http://python-automat_0.6.0.bb>
+>           create mode 100644
+>         meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+>         <http://python3-automat_0.6.0.bb>
+>
+>         diff --git
+>         a/meta-python/recipes-devtools/python/python-automat.inc
+>         b/meta-python/recipes-devtools/python/python-automat.inc
+>         new file mode 100644
+>         index 0000000..1ac5d3b
+>         --- /dev/null
+>         +++ b/meta-python/recipes-devtools/python/python-automat.inc
+>         @@ -0,0 +1,16 @@
+>         +DESCRIPTION = "Self-service finite-state machines for the
+>         programmer on the go"
+>         +HOMEPAGE = "https://github.com/glyph/Automat
+>         <https://github.com/glyph/Automat>"
+>         +LICENSE = "MIT"
+>         +LIC_FILES_CHKSUM =
+>         "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
+>         +
+>         +SRC_URI[md5sum] = "ad7bba58d262d8956d732330cb5ef53d"
+>         +SRC_URI[sha256sum] =
+>         "3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8"
+>         +
+>         +PYPI_PACKAGE = "Automat"
+>         +
+>         +inherit pypi
+>         +
+>         +RDEPENDS_${PN} += "\
+>         +   ${PYTHON_PN}-attrs \
+>         +   ${PYTHON_PN}-six \
+>         +"
+>         diff --git
+>         a/meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+>         <http://python-automat_0.6.0.bb>
+>         b/meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+>         <http://python-automat_0.6.0.bb>
+>         new file mode 100644
+>         index 0000000..8ac8c9c
+>         --- /dev/null
+>         +++
+>         b/meta-python/recipes-devtools/python/python-automat_0.6.0.bb
+>         <http://python-automat_0.6.0.bb>
+>         @@ -0,0 +1,2 @@
+>         +inherit setuptools
+>         +require python-automat.inc
+>         diff --git
+>         a/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+>         <http://python3-automat_0.6.0.bb>
+>         b/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+>         <http://python3-automat_0.6.0.bb>
+>         new file mode 100644
+>         index 0000000..0469e61
+>         --- /dev/null
+>         +++
+>         b/meta-python/recipes-devtools/python/python3-automat_0.6.0.bb
+>         <http://python3-automat_0.6.0.bb>
+>         @@ -0,0 +1,4 @@
+>         +inherit setuptools3
+>         +require python-automat.inc
+>         +
+>         +RDEPENDS_${PN} += "${PYTHON_PN}-enum "
+>
+>
+>
 
 
