@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f169.google.com (mail-qk0-f169.google.com
-	[209.85.220.169])
-	by mail.openembedded.org (Postfix) with ESMTP id A8B2F71A0F
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 9681360807
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Dec 2017 14:19:28 +0000 (UTC)
-Received: by mail-qk0-f169.google.com with SMTP id u184so43571729qkd.6
+	Tue, 26 Dec 2017 15:34:01 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id g10so45190292qtj.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 26 Dec 2017 06:19:30 -0800 (PST)
+	Tue, 26 Dec 2017 07:34:03 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=sOCqRDGDzKyE379kEGiATFcdIdvUiLWjXZaGk3/4UMY=;
-	b=GhUwN+UmY1JU83a4tp+jsa1M/a5E7MoefI993F+3MSqWcgI7APrdGJ9IIAyMwBrSD8
-	rxTZ8jjH/2eW+4+Y4DMUxVFWVGT2rR/Y2whAGQFay7sxvcyEsFxJij2hcE41Njt9ELs9
-	mL6bl+OZaLsRLBaZ1qOfNcP70VJKTkYuerHyTTwgGYl/97QAo2MLDiT5aIcUCvtKqyXg
-	BYZnLstoZtybjH518VPJKHzWNxBRmkRTWJ5jtivB/T2gVATg2nRPj6OyEnBzNbSBuxof
-	8bGeVnfYWFYjqd1hjOFAxS1HNan46hfvHh5NuaJ/jQHrY0zS7ByS2PidJxPpwKIOIgWS
-	2zEQ==
-X-Gm-Message-State: AKGB3mI2mDVFf5kMLytWuhoB12bWTH+6Ky/YbFVkHuwqxsMrbJJGQNji
-	mHTAIMJRg/5BDlfW9qUqBi1rpLNv
-X-Google-Smtp-Source: ACJfBotYamI8pkG021/h4EQwVJlqmdIle0B0V59Uvbe+WM3+CzFycvr3I+8hQ6+H8Zw4rrwUk/2xrw==
-X-Received: by 10.55.168.151 with SMTP id r145mr11076121qke.199.1514297969204; 
-	Tue, 26 Dec 2017 06:19:29 -0800 (PST)
+	bh=8XzRUGSQKKgUYN4yg9bXX2Fgw5RrNrAgavYkvLCPOcs=;
+	b=Qf2UYBpXQgeYmmkT/AsQA5ySX5TfXGYLJ3asbI9caT430MyNKVIF/6DyfQwiEoFvXL
+	OUhh6l5GUCDAo5FDYB5UfoxkWKwVreJPw0cnOVHZEVHhz/Eq5IwuATFmCwbH/IqruBV6
+	t+NOsMTGbh4Wdc1grJSlUXOyfw9J1PLq6dDQZBF4Xv5ooXGLBI4Hzt5I/583Ty0QFl44
+	4Quuf5xVQzRGhVKGE20x1Y2Fs/LOWzjt85quc0lGozI3lDOhiVC8OTBZtbTxo52egQPK
+	wYIZEu7pitpIaKKr9OlSG/V+CUspwLmlav5K6dI8dAKsGIyb8SNGvhwj97Fvp2Gyffka
+	4wjQ==
+X-Gm-Message-State: AKGB3mJjOghCrBnJAwpPuqafj4nNJkfj8jUncsOta/2vOEXRjK8NI1D8
+	0bqi86mAF+9JXUocXFQx/MQ/3oXM
+X-Google-Smtp-Source: ACJfBos7B1ADda1rzAkg7QZGpeMUwZrNYFIgsGbUqR8rpEsBwITZvWkpOiubRXBeYk88Bw3T+o1Gcw==
+X-Received: by 10.200.45.89 with SMTP id o25mr31907804qta.227.1514302442310;
+	Tue, 26 Dec 2017 07:34:02 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	n24sm19832011qta.50.2017.12.26.06.19.28
+	z126sm19876780qka.70.2017.12.26.07.34.01
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 26 Dec 2017 06:19:28 -0800 (PST)
+	Tue, 26 Dec 2017 07:34:01 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 26 Dec 2017 09:19:11 -0500
-Message-Id: <1514297951-7675-1-git-send-email-derek@asterius.io>
+Date: Tue, 26 Dec 2017 10:33:55 -0500
+Message-Id: <1514302435-23373-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][rocko][PATCH] python-automat: fix build dependencies to avoid download during do_compile
+Subject: [meta-python][PATCH] python-parted: update to version 3.11.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,103 +45,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 26 Dec 2017 14:19:29 -0000
+X-List-Received-Date: Tue, 26 Dec 2017 15:34:01 -0000
 
-Add the correct version of python{3}-setuptools-scm-native
-Remove the dependency on m2r
+Update github hash for the release
+Add correct RDEPENDS for the minimal python installs
+Remove a patch no longer required
 
 Signed-off-by: Derek Straka <derek@asterius.io>
-Signed-off-by: Armin Kuster <akuster808@gmail.com>
 ---
- .../recipes-devtools/python/python-automat.inc     |  8 ++++
- ...001-setup.py-remove-the-dependency-on-m2r.patch | 52 ++++++++++++++++++++++
- 2 files changed, 60 insertions(+)
- create mode 100644 meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
+ .../python-pyparted/python-pyparted.inc            | 12 +++++-----
+ .../0001-fix-version-float-check.patch             | 26 ----------------------
+ ...yparted_3.10.7.bb => python-pyparted_3.11.1.bb} |  0
+ .../0001-fix-version-float-check.patch             | 26 ----------------------
+ ...parted_3.10.7.bb => python3-pyparted_3.11.1.bb} |  0
+ 5 files changed, 7 insertions(+), 57 deletions(-)
+ delete mode 100644 meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
+ rename meta-python/recipes-extended/python-pyparted/{python-pyparted_3.10.7.bb => python-pyparted_3.11.1.bb} (100%)
+ delete mode 100644 meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
+ rename meta-python/recipes-extended/python-pyparted/{python3-pyparted_3.10.7.bb => python3-pyparted_3.11.1.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-automat.inc b/meta-python/recipes-devtools/python/python-automat.inc
-index 1ac5d3b..43b9ce9 100644
---- a/meta-python/recipes-devtools/python/python-automat.inc
-+++ b/meta-python/recipes-devtools/python/python-automat.inc
-@@ -3,6 +3,8 @@ HOMEPAGE = "https://github.com/glyph/Automat"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=4ad213bcca81688e94593e5f60c87477"
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
+index 65f8ca1..2192179 100644
+--- a/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
++++ b/meta-python/recipes-extended/python-pyparted/python-pyparted.inc
+@@ -11,11 +11,13 @@ LIC_FILES_CHKSUM = "\
+ DEPENDS += "parted"
  
-+FILESEXTRAPATHS_prepend := "${THISDIR}/python-automat:"
+ # upstream only publishes releases in github archives which are discouraged
+-SRCREV = "69c4a478e43d3eff6ae3a0116fa38da06776d5f5"
+-SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https \
+-           file://0001-fix-version-float-check.patch \
+-"
++SRCREV = "1fdb15120f35f5da1dc7ec116522f0c796a8376a"
++SRC_URI = "git://github.com/rhinstaller/pyparted.git;protocol=https"
 +
- SRC_URI[md5sum] = "ad7bba58d262d8956d732330cb5ef53d"
- SRC_URI[sha256sum] = "3c1fd04ecf08ac87b4dd3feae409542e9bf7827257097b2b6ed5692f69d6f6a8"
+ S = "${WORKDIR}/git"
  
-@@ -10,6 +12,12 @@ PYPI_PACKAGE = "Automat"
- 
- inherit pypi
- 
-+SRC_URI_append = " \
-+    file://0001-setup.py-remove-the-dependency-on-m2r.patch \
+-RDEPENDS_${PN} += "parted (>= 2.3)"
++RDEPENDS_${PN}_class-target += " \
++    parted (>= 2.3) \
++    ${PYTHON_PN}-subprocess \
 +"
-+
-+DEPENDS += "${PYTHON_PN}-setuptools-scm-native"
-+
- RDEPENDS_${PN} += "\
-    ${PYTHON_PN}-attrs \
-    ${PYTHON_PN}-six \
-diff --git a/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch b/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-new file mode 100644
-index 0000000..0ebb220
---- /dev/null
-+++ b/meta-python/recipes-devtools/python/python-automat/0001-setup.py-remove-the-dependency-on-m2r.patch
-@@ -0,0 +1,52 @@
-+From d5ebe479fc8fe11c5c75e7f35484849320349222 Mon Sep 17 00:00:00 2001
-+From: Derek Straka <derek@asterius.io>
-+Date: Fri, 22 Dec 2017 09:07:00 -0500
-+Subject: [PATCH] setup.py: remove the dependency on m2r
-+
-+The dependency on m2r is removed here as it only provides the
-+long_description value that is optional.  This item is just the
-+text that would be present on PyPi, so it doesn't provide much
-+value in this case
-+
-+Upstream-Status: Inappropriate (OE specific)
-+
-+Signed-off-by: Derek Straka <derek@asterius.io>
-+---
-+ setup.py | 10 ----------
-+ 1 file changed, 10 deletions(-)
-+
-+diff --git a/setup.py b/setup.py
-+index d360c64..7b4180a 100644
-+--- a/setup.py
-++++ b/setup.py
-+@@ -4,14 +4,6 @@ Setup file for automat
-+ 
-+ from setuptools import setup, find_packages
-+ 
-+-try:
-+-    from m2r import parse_from_file
-+-    long_description = parse_from_file('README.md')
-+-except(IOError, ImportError):
-+-    print("\n\n!!! m2r not found, long_description is bad, don't upload this to PyPI !!!\n\n")
-+-    import io
-+-    long_description = io.open('README.md', encoding="utf-8").read()
-+-
-+ setup(
-+     name='Automat',
-+     use_scm_version=True,
-+@@ -19,12 +11,10 @@ setup(
-+     description="""
-+     Self-service finite-state machines for the programmer on the go.
-+     """.strip(),
-+-    long_description=long_description,
-+     packages=find_packages(exclude=[]),
-+     package_dir={'automat': 'automat'},
-+     setup_requires=[
-+         'setuptools-scm',
-+-        'm2r',
-+     ],
-+     install_requires=[
-+         "attrs>=16.1.0",
-+-- 
-+2.7.4
-+
+ RDEPENDS_${PN}_class-native = ""
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch b/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
+deleted file mode 100644
+index db3ab9f..0000000
+--- a/meta-python/recipes-extended/python-pyparted/python-pyparted/0001-fix-version-float-check.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-check_mod_version breaks if module version is of x.y.z form
+-use a regex to help cast x.y.z version to a float
+-
+-Upstream-Status: Pending
+-
+-Index: git/setup.py
+-===================================================================
+---- git.orig/setup.py
+-+++ git/setup.py
+-@@ -25,6 +25,7 @@ import glob
+- import os
+- import platform
+- import sys
+-+import re
+- from distutils.ccompiler import new_compiler
+- from distutils.errors import CompileError
+- from distutils.errors import LinkError
+-@@ -51,6 +52,8 @@ def pkgconfig(*packages, **kwargs):
+- 
+- def check_mod_version(module, version):
+-     modversion = subprocess.check_output(["pkg-config", "--modversion", module])
+-+    match = re.search('([0-9]+\.[0-9]+)', modversion)
+-+    modversion = match.group(0)
+-     if not float(modversion) >= float(version):
+-         sys.stderr.write("*** Minimum required %s version: %s, found: %s\n" % (module, version, modversion,))
+-         sys.exit(1)
+diff --git a/meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb b/meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.1.bb
+similarity index 100%
+rename from meta-python/recipes-extended/python-pyparted/python-pyparted_3.10.7.bb
+rename to meta-python/recipes-extended/python-pyparted/python-pyparted_3.11.1.bb
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch b/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
+deleted file mode 100644
+index 14fb0bb..0000000
+--- a/meta-python/recipes-extended/python-pyparted/python3-pyparted/0001-fix-version-float-check.patch
++++ /dev/null
+@@ -1,26 +0,0 @@
+-check_mod_version breaks if module version is of x.y.z form
+-use a regex to help cast x.y.z version to a float
+-
+-Upstream-Status: Pending
+-
+-Index: git/setup.py
+-===================================================================
+---- git.orig/setup.py
+-+++ git/setup.py
+-@@ -25,6 +25,7 @@ import glob
+- import os
+- import platform
+- import sys
+-+import re
+- from distutils.ccompiler import new_compiler
+- from distutils.errors import CompileError
+- from distutils.errors import LinkError
+-@@ -51,6 +52,8 @@ def pkgconfig(*packages, **kwargs):
+- 
+- def check_mod_version(module, version):
+-     modversion = subprocess.check_output(["pkg-config", "--modversion", module])
+-+    match = re.search(b'([0-9]+\.[0-9]+)', modversion)
+-+    modversion = match.group(0)
+-     if not float(modversion) >= float(version):
+-         sys.stderr.write("*** Minimum required %s version: %s, found: %s\n" % (module, version, modversion,))
+-         sys.exit(1)
+diff --git a/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb b/meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.1.bb
+similarity index 100%
+rename from meta-python/recipes-extended/python-pyparted/python3-pyparted_3.10.7.bb
+rename to meta-python/recipes-extended/python-pyparted/python3-pyparted_3.11.1.bb
 -- 
 2.7.4
 
