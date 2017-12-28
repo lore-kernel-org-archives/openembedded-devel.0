@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
 	[209.85.216.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 0F41C78087
+	by mail.openembedded.org (Postfix) with ESMTP id 85C4871ABD
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Dec 2017 18:09:50 +0000 (UTC)
-Received: by mail-qt0-f193.google.com with SMTP id g9so51952026qth.9
+	Thu, 28 Dec 2017 18:24:15 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id r39so51938427qtr.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 28 Dec 2017 10:09:52 -0800 (PST)
+	Thu, 28 Dec 2017 10:24:16 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=n1FU0h/MJ3OP+tGh/G3DCOa5E4oSbWyYMOvcJ+P5e5s=;
-	b=AHFCuXx9Qs1P8ggLtcZgwLNL50gxmdksssg0EXN/TMjgXuR9NdqBF041NUdIBgmSZg
-	/59+GWeCtgW2jiHIEB0TVScsDS9KBafn4p8ssoAIMB2QYfHeE0GYZ28Og5H3QciTIycc
-	qizv0GeMi1mgLM5B4Z0IbXJyIDtoTEslhy/ntNGuMb8u4qL1AZ1GF3AtvGzf3bISB+dB
-	Kc9gJAv5m+mHXqawkRZ9KFIXYi5ErZJuaRJ6ey4+xcOuqjOyrwpfrZeDDaHmXBVwl2Ih
-	o9O2NZO1uKBqzyPfdou5XtGbgbFSZMbWlA0N4YqZPLixjHVVxaArjlUH8VzGzkJ9f1SM
-	pQNw==
-X-Gm-Message-State: AKGB3mKNnrO6e/sz4hsoy8G4S7JpFqv4s2kEHfYCOlGbLIArzOC413VL
-	Hi6osw0NOGt33wUZQoG5yR3PI2V4
-X-Google-Smtp-Source: ACJfBovgV+SboPwXEzOmLgO3Uc2MSVgfu6ZQLdyRsNEwspXJaHKctsXmzXHRO+h6Tf2sp6XmRgXXag==
-X-Received: by 10.200.40.15 with SMTP id 15mr41972571qtq.74.1514484591636;
-	Thu, 28 Dec 2017 10:09:51 -0800 (PST)
+	bh=S39YpgVIqyn1w5qjsNIByYbcuNQ+FUQbsc57Afc9aHM=;
+	b=ixrCsTf0iD3/ynh44aXtLQZKVROX2UgpQii429kMPYvhwNuvAOLk9LcelRDcMcXA3m
+	dJkeBRhZlr9ID6+CsybYtdnqMoeHpaj6q8Bh5U3bcx4FGBTgBsHVon7EwhgTmy2zWSXq
+	wJdn4o1CJKoYwALFtsjAePFc9bghu/hJVP5a1IsiGdJ43cABJ8LJycrlUe67Z6D9l65p
+	doaCuSYKvkfHAPqDJ342rYbbH5xMz72wurJKkqYC04Yzr+zf377MATx35U0YQVSPLKpN
+	M7fAacb2B5ek+4SUN0fq2JemqppMs04HhqY5Y1yPcpIknhbJ1q7qIc8+Y4zn5lwj2Qmj
+	gEmQ==
+X-Gm-Message-State: AKGB3mJaOXt/7y9/APuYq/8qpeKuhKzyJDms3PkkeYOTaA9G90h/A03L
+	4c/+q2hQZXAyUHxsoqCAFMWAc6eG
+X-Google-Smtp-Source: ACJfBou2t9OURzRD2aVJCPdQwioaXA2q5Mnme389bnfIJIfDKD58S/3lcKBMd5/iPBuFsNj862/evA==
+X-Received: by 10.200.3.8 with SMTP id q8mr44184108qtg.212.1514485456231;
+	Thu, 28 Dec 2017 10:24:16 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	w56sm22752159qta.60.2017.12.28.10.09.50
+	g47sm22674519qtc.69.2017.12.28.10.24.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 28 Dec 2017 10:09:51 -0800 (PST)
+	Thu, 28 Dec 2017 10:24:15 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 28 Dec 2017 13:09:43 -0500
-Message-Id: <1514484583-924-1-git-send-email-derek@asterius.io>
+Date: Thu, 28 Dec 2017 13:24:10 -0500
+Message-Id: <1514485450-23196-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pyroute2: re-add the RDEPENDS that were removed and verify on the latest release
+Subject: [meta-python][PATCH] python-netaddr: update to RDEPENDS to work on minimal python installs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,33 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 28 Dec 2017 18:09:51 -0000
+X-List-Received-Date: Thu, 28 Dec 2017 18:24:15 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pyroute2.inc | 12 +++++++++++-
- 1 file changed, 11 insertions(+), 1 deletion(-)
+ meta-python/recipes-devtools/python/python-netaddr.inc        | 6 ++++++
+ meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb | 5 +++++
+ 2 files changed, 11 insertions(+)
 
-diff --git a/meta-python/recipes-devtools/python/python-pyroute2.inc b/meta-python/recipes-devtools/python/python-pyroute2.inc
-index 521162c..f63ccbd 100644
---- a/meta-python/recipes-devtools/python/python-pyroute2.inc
-+++ b/meta-python/recipes-devtools/python/python-pyroute2.inc
-@@ -11,5 +11,15 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/python-pyroute2:"
- inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-netaddr.inc b/meta-python/recipes-devtools/python/python-netaddr.inc
+index 26b0f1e..486bfc6 100644
+--- a/meta-python/recipes-devtools/python/python-netaddr.inc
++++ b/meta-python/recipes-devtools/python/python-netaddr.inc
+@@ -6,3 +6,9 @@ SRC_URI[md5sum] = "51019ef59c93f3979bcb37d3b8527e07"
+ SRC_URI[sha256sum] = "38aeec7cdd035081d3a4c306394b19d677623bf76fa0913f6695127c7753aefd"
  
- RDEPENDS_${PN} += " \
-+    ${PYTHON_PN}-ctypes \
-+    ${PYTHON_PN}-distutils \
-+    ${PYTHON_PN}-importlib \
-     ${PYTHON_PN}-json \
--    "
-+    ${PYTHON_PN}-logging \
-+    ${PYTHON_PN}-multiprocessing \
-+    ${PYTHON_PN}-pkgutil \
+ inherit pypi
++
++RDEPENDS_${PN} += " \
 +    ${PYTHON_PN}-pprint \
-+    ${PYTHON_PN}-shell \
-+    ${PYTHON_PN}-subprocess \
-+    ${PYTHON_PN}-unixadmin \
++    ${PYTHON_PN}-textutils \
++    ${PYTHON_PN}-xml \
++"
+diff --git a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+index 30416a4..a64abcc 100644
+--- a/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
++++ b/meta-python/recipes-devtools/python/python3-netaddr_0.7.19.bb
+@@ -1,2 +1,7 @@
+ require python-netaddr.inc
+ inherit setuptools3
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-enum \
++    ${PYTHON_PN}-selectors \
 +"
 -- 
 2.7.4
