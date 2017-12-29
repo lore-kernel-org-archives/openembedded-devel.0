@@ -1,41 +1,24 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id CC057719F7
+Return-Path: <Mingli.Yu@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 439DD78268
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 29 Dec 2017 05:35:45 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208,217";a="33484365"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 29 Dec 2017 13:35:46 +0800
-Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id 5C02F486A793;
-	Fri, 29 Dec 2017 13:35:42 +0800 (CST)
-Received: from G08CNEXMBPEKD01.g08.fujitsu.local ([10.167.33.81]) by
-	G08CNEXCHPEKD01.g08.fujitsu.local ([10.167.33.80]) with mapi id
-	14.03.0361.001; Fri, 29 Dec 2017 13:35:41 +0800
-From: "Zheng, Ruoqin" <zhengrq.fnst@cn.fujitsu.com>
-To: Martin Jansa <martin.jansa@gmail.com>
-Thread-Topic: [oe] [meta-oe][PATCH] libyui-ncurses: new add
-Thread-Index: AQHTf6nmI0d+5aMh9U6bUiiQKKzgkqNZzgdg
-Date: Fri, 29 Dec 2017 05:35:41 +0000
-Message-ID: <33D4DBCAC5F2D74E96B07F6E7632BF7363A907B8@G08CNEXMBPEKD01.g08.fujitsu.local>
-References: <1513780518-29657-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
-In-Reply-To: <CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
-Accept-Language: zh-CN, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-originating-ip: [10.167.225.55]
+	Fri, 29 Dec 2017 06:05:03 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id vBT654Lb001936
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 28 Dec 2017 22:05:04 -0800 (PST)
+Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
+	ALA-HCA.corp.ad.wrs.com (147.11.189.40) with Microsoft SMTP Server id
+	14.3.361.1; Thu, 28 Dec 2017 22:05:03 -0800
+From: <mingli.yu@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 29 Dec 2017 13:44:35 +0800
+Message-ID: <20171229054435.31450-1-mingli.yu@windriver.com>
+X-Mailer: git-send-email 2.13.3
 MIME-Version: 1.0
-X-yoursite-MailScanner-ID: 5C02F486A793.A7A8F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] libyui-ncurses: new add
+Subject: [meta-networking][PATCH] corosync: add corosync.conf.example
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -48,168 +31,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 29 Dec 2017 05:35:49 -0000
-Content-Language: zh-CN
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Fri, 29 Dec 2017 06:05:04 -0000
+Content-Type: text/plain
 
-SEkgTWFydGluOg0KICAgICBDb3VsZCB5b3UgdGVsbCBtZSB3aGF04oCZcyB0
-aGUgbWVhbmluZyBvZiDigJxQbGVhc2UgdXNlIDQgc3BhY2VzIGZvciBpbmRl
-bnRhdGlvbi7igJ0/DQoNCi0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-LS0tLS0tLS0tLS0tLS0tLS0tLS0tDQpaaGVuZyBSdW9xaW4NCk5hbmppbmcg
-RnVqaXRzdSBOYW5kYSBTb2Z0d2FyZSBUZWNoLiBDby4sIEx0ZC4oRk5TVCkN
-CkFERFIuOiBOby42IFdlbnpodSBSb2FkLCBTb2Z0d2FyZSBBdmVudWUsDQog
-ICAgICAgTmFuamluZywgMjEwMDEyLCBDaGluYQ0KTUFJTCA6IHpoZW5ncnEu
-Zm5zdEBjbi5mdWppc3R1LmNvbQ0KDQpGcm9tOiBNYXJ0aW4gSmFuc2EgW21h
-aWx0bzptYXJ0aW4uamFuc2FAZ21haWwuY29tXQ0KU2VudDogVGh1cnNkYXks
-IERlY2VtYmVyIDI4LCAyMDE3IDM6MDMgUE0NClRvOiBaaGVuZywgUnVvcWlu
-L+mDkSDoi6XpkqYgPHpoZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbT4NCkNj
-OiBvcGVuZW1iZWRkZWQtZGV2ZWwgPG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0
-cy5vcGVuZW1iZWRkZWQub3JnPg0KU3ViamVjdDogUmU6IFtvZV0gW21ldGEt
-b2VdW1BBVENIXSBsaWJ5dWktbmN1cnNlczogbmV3IGFkZA0KDQpUaGlzIGlz
-IG1pc3NpbmcgaW4gbWFzdGVyIG5vdywgYmVjYXVzZSBkbmZkcmFnb3JhIHdh
-cyBtZXJnZWQuDQoNClBsZWFzZSB1c2UgNCBzcGFjZXMgZm9yIGluZGVudGF0
-aW9uLg0KDQpPbiBXZWQsIERlYyAyMCwgMjAxNyBhdCAzOjM1IFBNLCB6aGVu
-Z3JxIDx6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb208bWFpbHRvOnpoZW5n
-cnEuZm5zdEBjbi5mdWppdHN1LmNvbT4+IHdyb3RlOg0KQWRkIGEgbmV3IHJl
-Y2lwZSBsaWJ5dWktbmN1cnNlcywgd2hpY2ggaXMgYSByZGVwZW5kIGZvciBk
-bmZkcmFnb3JhLg0KDQpTaWduZWQtb2ZmLWJ5OiBaaGVuZyBSdW9xaW4gPHpo
-ZW5ncnEuZm5zdEBjbi5mdWppdHN1LmNvbTxtYWlsdG86emhlbmdycS5mbnN0
-QGNuLmZ1aml0c3UuY29tPj4NCi0tLQ0KIC4uLjEtRml4LXRoZS1lcnJvci1v
-Zi1jYW4tdC1maW5kLWhlYWRlci1maWxlLnBhdGNoIHwgMTAwICsrKysrKysr
-KysrKysrKysrKysrKw0KIC4uLi9yZWNpcGVzLWdyYXBoaWNzL2xpYnl1aS9s
-aWJ5dWktbmN1cnNlc19naXQuYmI8aHR0cDovL2xpYnl1aS1uY3Vyc2VzX2dp
-dC5iYj4gIHwgIDUwICsrKysrKysrKysrDQogMiBmaWxlcyBjaGFuZ2VkLCAx
-NTAgaW5zZXJ0aW9ucygrKQ0KIGNyZWF0ZSBtb2RlIDEwMDY0NCBtZXRhLW9l
-L3JlY2lwZXMtZ3JhcGhpY3MvbGlieXVpL2xpYnl1aS1uY3Vyc2VzLzAwMDEt
-Rml4LXRoZS1lcnJvci1vZi1jYW4tdC1maW5kLWhlYWRlci1maWxlLnBhdGNo
-DQogY3JlYXRlIG1vZGUgMTAwNjQ0IG1ldGEtb2UvcmVjaXBlcy1ncmFwaGlj
-cy9saWJ5dWkvbGlieXVpLW5jdXJzZXNfZ2l0LmJiPGh0dHA6Ly9saWJ5dWkt
-bmN1cnNlc19naXQuYmI+DQoNCmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lw
-ZXMtZ3JhcGhpY3MvbGlieXVpL2xpYnl1aS1uY3Vyc2VzLzAwMDEtRml4LXRo
-ZS1lcnJvci1vZi1jYW4tdC1maW5kLWhlYWRlci1maWxlLnBhdGNoIGIvbWV0
-YS1vZS9yZWNpcGVzLWdyYXBoaWNzL2xpYnl1aS9saWJ5dWktbmN1cnNlcy8w
-MDAxLUZpeC10aGUtZXJyb3Itb2YtY2FuLXQtZmluZC1oZWFkZXItZmlsZS5w
-YXRjaA0KbmV3IGZpbGUgbW9kZSAxMDA2NDQNCmluZGV4IDAwMDAwMDAuLjI2
-YjRjMTcNCi0tLSAvZGV2L251bGwNCisrKyBiL21ldGEtb2UvcmVjaXBlcy1n
-cmFwaGljcy9saWJ5dWkvbGlieXVpLW5jdXJzZXMvMDAwMS1GaXgtdGhlLWVy
-cm9yLW9mLWNhbi10LWZpbmQtaGVhZGVyLWZpbGUucGF0Y2gNCkBAIC0wLDAg
-KzEsMTAwIEBADQorRnJvbSBlYjAwODZkYzRlYThmZTljZGEwNjk0NTYyODdi
-M2EyOWEyNjMxZDMwIE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQ0KK0Zyb206
-IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3UuY29tPG1h
-aWx0bzp6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KK0RhdGU6IFdl
-ZCwgMTMgRGVjIDIwMTcgMTY6MTg6NDUgKzA5MDANCitTdWJqZWN0OiBbUEFU
-Q0hdIEZpeCB0aGUgZXJyb3Igb2YgY2FuJ3QgZmluZCBoZWFkZXIgZmlsZQ0K
-Kw0KK1RoaXMgZml4IGlzIGp1c3QgZm9yIHlvY3RvLg0KKw0KK1NpZ25lZC1v
-ZmYtYnk6IFpoZW5nIFJ1b3FpbiA8emhlbmdycS5mbnN0QGNuLmZ1aml0c3Uu
-Y29tPG1haWx0bzp6aGVuZ3JxLmZuc3RAY24uZnVqaXRzdS5jb20+Pg0KKy0t
-LQ0KKyBzcmMvTkNBcHBsaWNhdGlvbi5jYyB8IDIgKy0NCisgc3JjL05Dc3R5
-bGUuaCAgICAgICAgfCAyICstDQorIHNyYy9OQ3Vyc2VzLmggICAgICAgIHwg
-MiArLQ0KKyBzcmMvbmN1cnNlc3AuaCAgICAgICB8IDIgKy0NCisgc3JjL25j
-dXJzZXN3LmNjICAgICAgfCAyICstDQorIHNyYy9uY3Vyc2Vzdy5oICAgICAg
-IHwgNCArKy0tDQorIDYgZmlsZXMgY2hhbmdlZCwgNyBpbnNlcnRpb25zKCsp
-LCA3IGRlbGV0aW9ucygtKQ0KKw0KK2RpZmYgLS1naXQgYS9zcmMvTkNBcHBs
-aWNhdGlvbi5jYyBiL3NyYy9OQ0FwcGxpY2F0aW9uLmNjDQoraW5kZXggNWJj
-Zjk2OS4uNTEwZjAzNCAxMDA2NDQNCistLS0gYS9zcmMvTkNBcHBsaWNhdGlv
-bi5jYw0KKysrKyBiL3NyYy9OQ0FwcGxpY2F0aW9uLmNjDQorQEAgLTIzLDcg
-KzIzLDcgQEANCisNCisgLy0qLw0KKw0KKy0jaW5jbHVkZSA8bmN1cnNlc3cv
-Y3Vyc2VzLmg+DQorKyNpbmNsdWRlIDxjdXJzZXMuaD4NCisNCisgI2RlZmlu
-ZSAgWVVJTG9nQ29tcG9uZW50ICJuY3Vyc2VzIg0KKyAjaW5jbHVkZSA8eXVp
-L1lVSUxvZy5oPg0KK2RpZmYgLS1naXQgYS9zcmMvTkNzdHlsZS5oIGIvc3Jj
-L05Dc3R5bGUuaA0KK2luZGV4IGE0MGQ1YTguLjM2NTc5MTcgMTAwNjQ0DQor
-LS0tIGEvc3JjL05Dc3R5bGUuaA0KKysrKyBiL3NyYy9OQ3N0eWxlLmgNCitA
-QCAtMjUsNyArMjUsNyBAQA0KKyAjaWZuZGVmIE5Dc3R5bGVfaA0KKyAjZGVm
-aW5lIE5Dc3R5bGVfaA0KKw0KKy0jaW5jbHVkZSA8bmN1cnNlc3cvbmN1cnNl
-cy5oPg0KKysjaW5jbHVkZSA8bmN1cnNlcy5oPg0KKw0KKyAjaW5jbHVkZSA8
-aW9zZndkPg0KKyAjaW5jbHVkZSA8c3RyaW5nPg0KK2RpZmYgLS1naXQgYS9z
-cmMvTkN1cnNlcy5oIGIvc3JjL05DdXJzZXMuaA0KK2luZGV4IGEwN2M2YmYu
-LmQxN2QzYzMgMTAwNjQ0DQorLS0tIGEvc3JjL05DdXJzZXMuaA0KKysrKyBi
-L3NyYy9OQ3Vyc2VzLmgNCitAQCAtMzQsNyArMzQsNyBAQA0KKyAjaW5jbHVk
-ZSA8eXVpL1lXaWRnZXQuaD4NCisgI2luY2x1ZGUgPHl1aS9ZTWVudUl0ZW0u
-aD4NCisNCistI2luY2x1ZGUgPG5jdXJzZXN3L2N1cnNlcy5oPiAgLyogY3Vy
-c2VzLmg6ICNkZWZpbmUgIE5DVVJTRVNfQ0hfVCBjY2hhcl90ICovDQorKyNp
-bmNsdWRlIDxjdXJzZXMuaD4gICAvKiBjdXJzZXMuaDogI2RlZmluZSAgTkNV
-UlNFU19DSF9UIGNjaGFyX3QgKi8NCisgI2luY2x1ZGUgPHdjaGFyLmg+DQor
-DQorICNpbmNsdWRlICJuY3Vyc2Vzdy5oIg0KK2RpZmYgLS1naXQgYS9zcmMv
-bmN1cnNlc3AuaCBiL3NyYy9uY3Vyc2VzcC5oDQoraW5kZXggZDQ3ODM0Ny4u
-MmZjZmVhNSAxMDA2NDQNCistLS0gYS9zcmMvbmN1cnNlc3AuaA0KKysrKyBi
-L3NyYy9uY3Vyc2VzcC5oDQorQEAgLTI4LDcgKzI4LDcgQEANCisgI2luY2x1
-ZGUgPGlvc2Z3ZD4NCisNCisgI2luY2x1ZGUgIm5jdXJzZXN3LmgiDQorLSNp
-bmNsdWRlIDxuY3Vyc2Vzdy9wYW5lbC5oPg0KKysjaW5jbHVkZSA8cGFuZWwu
-aD4NCisNCisgY2xhc3MgTkN1cnNlc1BhbmVsIDogcHVibGljIE5DdXJzZXNX
-aW5kb3cNCisgew0KK2RpZmYgLS1naXQgYS9zcmMvbmN1cnNlc3cuY2MgYi9z
-cmMvbmN1cnNlc3cuY2MNCitpbmRleCAzYzc3MWFmLi5iYjgzMjEwIDEwMDY0
-NA0KKy0tLSBhL3NyYy9uY3Vyc2Vzdy5jYw0KKysrKyBiL3NyYy9uY3Vyc2Vz
-dy5jYw0KK0BAIC00Nyw3ICs0Nyw3IEBADQorICNpbmNsdWRlIDxpb3N0cmVh
-bT4NCisgI2luY2x1ZGUgPHN0ZGxpYi5oPg0KKyAjaW5jbHVkZSA8c3RyaW5n
-Lmg+DQorLSNpbmNsdWRlIDxuY3Vyc2Vzdy90ZXJtLmg+DQorKyNpbmNsdWRl
-IDx0ZXJtLmg+DQorICN1bmRlZiBsaW5lDQorICN1bmRlZiBjb2x1bW5zDQor
-DQorZGlmZiAtLWdpdCBhL3NyYy9uY3Vyc2Vzdy5oIGIvc3JjL25jdXJzZXN3
-LmgNCitpbmRleCBkMjU5MjNhLi5jMTQwZDM3IDEwMDY0NA0KKy0tLSBhL3Ny
-Yy9uY3Vyc2Vzdy5oDQorKysrIGIvc3JjL25jdXJzZXN3LmgNCitAQCAtMjcs
-OCArMjcsOCBAQA0KKw0KKyAjaW5jbHVkZSA8aW9zZndkPg0KKw0KKy0jaW5j
-bHVkZSA8bmN1cnNlc3cvY3Vyc2VzLmg+DQorLSNpbmNsdWRlIDxuY3Vyc2Vz
-dy9ldGlwLmg+DQorKyNpbmNsdWRlIDxjdXJzZXMuaD4NCisrI2luY2x1ZGUg
-PGV0aXAuaD4NCisgI2luY2x1ZGUgPGNzdGRpbz4NCisgI2luY2x1ZGUgPGNz
-dGRhcmc+DQorICNpbmNsdWRlIDxjbGltaXRzPg0KKy0tDQorMi43LjQNCisN
-CmRpZmYgLS1naXQgYS9tZXRhLW9lL3JlY2lwZXMtZ3JhcGhpY3MvbGlieXVp
-L2xpYnl1aS1uY3Vyc2VzX2dpdC5iYjxodHRwOi8vbGlieXVpLW5jdXJzZXNf
-Z2l0LmJiPiBiL21ldGEtb2UvcmVjaXBlcy1ncmFwaGljcy9saWJ5dWkvbGli
-eXVpLW5jdXJzZXNfZ2l0LmJiPGh0dHA6Ly9saWJ5dWktbmN1cnNlc19naXQu
-YmI+DQpuZXcgZmlsZSBtb2RlIDEwMDY0NA0KaW5kZXggMDAwMDAwMC4uZjM3
-ODcwMQ0KLS0tIC9kZXYvbnVsbA0KKysrIGIvbWV0YS1vZS9yZWNpcGVzLWdy
-YXBoaWNzL2xpYnl1aS9saWJ5dWktbmN1cnNlc19naXQuYmI8aHR0cDovL2xp
-Ynl1aS1uY3Vyc2VzX2dpdC5iYj4NCkBAIC0wLDAgKzEsNTAgQEANCitTVU1N
-QVJZID0gIkNoYXJhY3RlciBCYXNlZCBVc2VyIEludGVyZmFjZSBmb3IgbGli
-eXVpIg0KK0xJQ0VOU0UgPSAiTEdQTHYzIg0KK0xJQ19GSUxFU19DSEtTVU0g
-PSAiZmlsZTovL0NPUFlJTkcubGdwbC0zO21kNT1lNmE2MDBmZDVlMWQ5Y2Jk
-ZTJkOTgzNjgwMjMzYWQwMiBcDQorICAgICAgICAgICAgICAgICAgICBmaWxl
-Oi8vQ09QWUlORy5sZ3BsLTIuMTttZDU9NGZiZDY1MzgwY2RkMjU1OTUxMDc5
-MDA4YjM2NDUxNmMgXA0KKyAgICAgICAgICAgICAgICAgICA8ZmlsZTovLy9c
-XENPUFlJTkcubGdwbC0zO21kNT1lNmE2MDBmZDVlMWQ5Y2JkZTJkOTgzNjgw
-MjMzYWQwMiUyMFwlMGIrwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgJTIw
-wqAlMjDCoCUyMMKgJTIwwqAlMjBmaWxlOlxDT1BZSU5HLmxncGwtMi4xO21k
-NT00ZmJkNjUzODBjZGQyNTU5NTEwNzkwMDhiMzY0NTE2YyUyMFwlMGIrwqAl
-MjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgJTIwwqAlMjDCoCUyMMKgJTIwwqA+
-ICINCisNCitTUkNfVVJJID0gImdpdDovL2dpdGh1Yi5jb20vbGlieXVpL2xp
-Ynl1aS1uY3Vyc2VzLmdpdDxodHRwOi8vZ2l0aHViLmNvbS9saWJ5dWkvbGli
-eXVpLW5jdXJzZXMuZ2l0PiBcDQorICAgICAgICAgICAiDQorDQorU1JDX1VS
-SV9hcHBlbmRfY2xhc3MtdGFyZ2V0ICs9ICIgZmlsZTovLzAwMDEtRml4LXRo
-ZS1lcnJvci1vZi1jYW4tdC1maW5kLWhlYWRlci1maWxlLnBhdGNoPGZpbGU6
-Ly8vXFwwMDAxLUZpeC10aGUtZXJyb3Itb2YtY2FuLXQtZmluZC1oZWFkZXIt
-ZmlsZS5wYXRjaD4iDQorDQorUFYgPSAiMi40OC4zK2dpdCINCitTUkNSRVYg
-PSAiN2IyNTFjMmZmNTQxZGY2MTM5ZjNkMjEwZDBhMGEyN2QwNDI5MjZiZCIN
-CisNCitTID0gIiR7V09SS0RJUn0vZ2l0Ig0KKw0KK2luaGVyaXQgY21ha2Ug
-Z2V0dGV4dCBwa2djb25maWcNCisNCitERVBFTkRTICs9ICJib29zdCBsaWJ5
-dWkgbmN1cnNlcyINCisNCitCQkNMQVNTRVhURU5EID0gIm5hdGl2ZXNkayIN
-CisNCitkb19jb25maWd1cmVfcHJlcGVuZCAoKSB7DQorICAgICAgICAgY2Qg
-JHtTfQ0KKyAgICAgICAgIGdpdCBjaGVja291dCBib290c3RyYXAuc2gNCisg
-ICAgICAgICBzZWQgLWkgInMjL3VzciMke1BLR19DT05GSUdfU1lTUk9PVF9E
-SVJ9JHtiYXNlX3ByZWZpeH0mIyIgYm9vdHN0cmFwLnNoDQorICAgICAgICAg
-Li9ib290c3RyYXAuc2gNCisgICAgICAgICBta2RpciAtcCAke1BLR19DT05G
-SUdfU1lTUk9PVF9ESVJ9JHtiYXNlX3ByZWZpeH0vdXNyL2xpYjY0Lw0KKyAg
-ICAgICAgIGNwICR7UEtHX0NPTkZJR19TWVNST09UX0RJUn0ke2Jhc2VfcHJl
-Zml4fS91c3IvbGliL2xpYnl1aS5zbyogJHtQS0dfQ09ORklHX1NZU1JPT1Rf
-RElSfSR7YmFzZV9wcmVmaXh9L3Vzci9saWI2NC8NCisgICAgICAgICBjZCAt
-DQorICAgICAgICAgc2VkIC1pICJzI1wke1lQUkVGSVh9I1wke1BLR19DT05G
-SUdfU1lTUk9PVF9ESVJ9JHtiYXNlX3ByZWZpeH0mIyIgJHtTfS9DTWFrZUxp
-c3RzLnR4dA0KKyAgICAgICAgIHNlZCAtaSAicyMvdXNyIyR7UEtHX0NPTkZJ
-R19TWVNST09UX0RJUn0ke2Jhc2VfcHJlZml4fSYjIiAke1BLR19DT05GSUdf
-U1lTUk9PVF9ESVJ9JHtsaWJkaXJ9L2NtYWtlL2xpYnl1aS9MaWJ5dWlMaWJy
-YXJ5RGVwZW5kcy1yZWxlYXNlLmNtYWtlDQorfQ0KKw0KK2RvX2luc3RhbGxf
-YXBwZW5kICgpIHsNCisgICAgICAgIGlmIFsgIiR7bGliZGlyfSIgPSAiJHti
-YXNlX3ByZWZpeH0vdXNyL2xpYiIgXSAmJiBbIC1kICR7RH0vdXNyL2xpYjY0
-IF07IHRoZW4NCisgICAgICAgICAgICBtdiAke0R9L3Vzci9saWI2NCAke0R9
-L3Vzci9saWINCisgICAgICAgIGZpDQorfQ0KKw0KK2RvX2luc3RhbGxfYXBw
-ZW5kX2NsYXNzLW5hdGl2ZXNkayAoKSB7DQorICAgICAgICBta2RpciAtcCAk
-e0R9LyR7YmFzZV9wcmVmaXh9DQorICAgICAgICBtdiAke0R9L3VzciAke0R9
-LyR7YmFzZV9wcmVmaXh9DQorfQ0KKw0KK0ZJTEVTXyR7UE59ICs9ICIke2Rh
-dGFkaXJ9LyoiDQorDQorRklMRVNfJHtQTn0tZGV2ICs9ICIke2xpYmRpcn0v
-KiINCi0tDQoyLjcuNA0KDQoNCg0KLS0NCl9fX19fX19fX19fX19fX19fX19f
-X19fX19fX19fX19fX19fX19fX19fX19fX19fDQpPcGVuZW1iZWRkZWQtZGV2
-ZWwgbWFpbGluZyBsaXN0DQpPcGVuZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3Bl
-bmVtYmVkZGVkLm9yZzxtYWlsdG86T3BlbmVtYmVkZGVkLWRldmVsQGxpc3Rz
-Lm9wZW5lbWJlZGRlZC5vcmc+DQpodHRwOi8vbGlzdHMub3BlbmVtYmVkZGVk
-Lm9yZy9tYWlsbWFuL2xpc3RpbmZvL29wZW5lbWJlZGRlZC1kZXZlbA0KDQoK
-Cg==
+From: Mingli Yu <Mingli.Yu@windriver.com>
+
+* Add corosync.conf.example as the template for
+  /etc/corosync/corosync.conf to make the cluster
+  works as the previous default config doesn't work
+  as below output:
+
+  root@host1:/# crm status
+  Stack: unknown
+  Current DC: NONE
+  Last updated: Mon Dec 25 05:30:59 2017
+  Last change: Mon Dec 25 05:30:32 2017 by root via cibadmin on host1
+
+  0 nodes configured
+  1 resource configured
+
+  Full list of resources:
+
+  WebSite	(ocf::heartbeat:apache):	Stopped
+
+Signed-off-by: Mingli Yu <Mingli.Yu@windriver.com>
+---
+ .../corosync/corosync/corosync.conf                | 58 ++++++++++++++++++++++
+ .../recipes-extended/corosync/corosync_2.4.2.bb    |  2 +
+ 2 files changed, 60 insertions(+)
+ create mode 100644 meta-networking/recipes-extended/corosync/corosync/corosync.conf
+
+diff --git a/meta-networking/recipes-extended/corosync/corosync/corosync.conf b/meta-networking/recipes-extended/corosync/corosync/corosync.conf
+new file mode 100644
+index 000000000..e65b89426
+--- /dev/null
++++ b/meta-networking/recipes-extended/corosync/corosync/corosync.conf
+@@ -0,0 +1,58 @@
++# Starting point for cluster with pacemaker/openais
++compatibility: none
++
++corosync {
++	 user:  root
++	 group: root
++}
++
++aisexec {
++	with Pacemaker
++	user:  root
++	group: root
++}
++
++service {
++	name: pacemaker
++	ver: 1
++}
++
++totem {
++	version: 2
++	secauth: off
++	threads: 0
++	interface {
++		ringnumber: 0
++		# Cluster network address
++		bindnetaddr: 192.168.10.0
++		# Should be fine in most cases, don't forget to allow
++		# packets for this address/port in netfilter if there
++		# is restrictive policy set for cluster network
++		mcastaddr: 226.94.1.1
++		mcastport: 5405
++	}
++}
++
++logging {
++	fileline: off
++	to_stderr: no
++	to_logfile: yes
++	to_syslog: yes
++	logfile: /var/log/cluster/corosync.log
++	debug: off
++	timestamp: on
++	logger_subsys {
++		subsys: AMF
++		debug: off
++	}
++}
++
++amf {
++	mode: disabled
++}
++
++quorum {
++        # Quorum for the Pacemaker Cluster Resource Manager
++        provider: corosync_votequorum
++        expected_votes: 1
++}
+diff --git a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb b/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
+index 33e74e2ff..20dbcd8ab 100644
+--- a/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
++++ b/meta-networking/recipes-extended/corosync/corosync_2.4.2.bb
+@@ -9,6 +9,7 @@ inherit autotools pkgconfig systemd useradd
+ 
+ SRC_URI = "http://build.clusterlabs.org/corosync/releases/${BP}.tar.gz \
+            file://0001-Include-fcntl.h-for-F_-and-O_-defines.patch \
++           file://corosync.conf \
+           "
+ SRC_URI[md5sum] = "547fa78704da53aa35912be58d31035f"
+ SRC_URI[sha256sum] = "f26e3011309fe4bcce94b1dc20ea8c462f19483a73f3ca62f13b925d011a4ba9"
+@@ -46,6 +47,7 @@ do_configure_prepend() {
+ }
+ 
+ do_install_append() {
++    install -D -m 0644 ${WORKDIR}/corosync.conf ${D}/${sysconfdir}/corosync/corosync.conf.example
+     install -d ${D}${sysconfdir}/sysconfig/
+     install -m 0644 ${S}/init/corosync.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync
+     install -m 0644 ${S}/tools/corosync-notifyd.sysconfig.example ${D}${sysconfdir}/sysconfig/corosync-notifyd
+-- 
+2.13.3
+
 
