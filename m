@@ -1,56 +1,57 @@
 Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f50.google.com (mail-pl0-f50.google.com
-	[209.85.160.50])
-	by mail.openembedded.org (Postfix) with ESMTP id 5DB5171BA6
+Received: from mail-pl0-f47.google.com (mail-pl0-f47.google.com
+	[209.85.160.47])
+	by mail.openembedded.org (Postfix) with ESMTP id 8869F71BA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2017 23:01:51 +0000 (UTC)
-Received: by mail-pl0-f50.google.com with SMTP id bi12so26213350plb.6
+	Sun, 31 Dec 2017 23:02:50 +0000 (UTC)
+Received: by mail-pl0-f47.google.com with SMTP id bi12so26214432plb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2017 15:01:52 -0800 (PST)
+	Sun, 31 Dec 2017 15:02:52 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=subject:to:references:from:message-id:date:user-agent:mime-version
 	:in-reply-to:content-transfer-encoding:content-language;
-	bh=pLyizFMEyImehndMIePFoR7qDa6/Kc64kPpIV5ysf0Y=;
-	b=XbJFvOGM6s9hXs+Q0DNQr44RDlzeb5SJ/sYrJENBFpfclehcjkEQ0k8EdzJa1hjmnU
-	av3j5M5e/8kI3jjyLMK4oox/TMawpSwGFeAI1oXwlhrKjEJNoXci0BLbBqQOYMPuUEBt
-	wIMOyy0+nmaJmYa86RBNhQ5lMuEWdXG48DyNIwnfozp/tblfiLfpA+AoAxvwIVQdWsO/
-	tyMT8TiRNJO4WQHM0Gdg/tze+UJiwLAigyEIYX3VOxmPk63tHAk6lv0x0ADLFydrklrh
-	WusX230YpwJWcvEZot/ZnpqCvZ1zmSs+uiw2ZzGR6k8CB4XGU0iq5rt0307LNl8luZ02
-	WbsQ==
+	bh=/aZkaO4/yR6i0Z3F69fQzwtaLpS06MGV2FRz7pWQi/g=;
+	b=gwMFJjxNeO1S35UQaogyUC5ZtgJVHjThJD4MQV/uNLpUaoa9Egw7QJFMwC88DQ4pa8
+	PXmWyR7cE8HV/vLf/xppr2q3C2aIcJHDyIcnq4iqNpo5DFrlzG/Jz+AGsF3FQZolwCfQ
+	nlSUBxfm/hdF0IlTdAZUNXgcvOV6GolKpsl/CcCruYTMmsxQTK5ufG9+qYFdhaFdlGBn
+	r1XcBLcds52vovCX56GbmAbTkzNPDJbeF3RaPmqVUtZXJqe5Gb9nfyo9YscTtO2ESgm8
+	kehKUT7wHMA7xz+kGjKwfGjvRLtd7JeKoEuE6sJK34sIPdBBb+/g4Nt+MmsnrZn5EFpI
+	IznA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:subject:to:references:from:message-id:date
 	:user-agent:mime-version:in-reply-to:content-transfer-encoding
 	:content-language;
-	bh=pLyizFMEyImehndMIePFoR7qDa6/Kc64kPpIV5ysf0Y=;
-	b=fVuEsqLhVK8UV2T8SWKMl98YJxRvt5kzvbSxZUfe6QB6i7mnCRWSAnFInhYE+lvGAD
-	KOt3cHIUv/pyMRDq3ZmOOu5mrQpVsU3qo/bj3SqYOtWaWgN2t7syxqvriq8u0bcyeUAa
-	JRAeVuMT3xj6omGtbi3snO6MqUW74fqM2XmkgHWP5qzxKTumCFUBHZxz8ehiJAazwi6w
-	bQ3PgTpbV85z2mmb4VzjvPDvODt0i5D/8vM9hyUAGBqFPz3Zxx5Ed7QVdmrqbffRX1GE
-	EW3536N1J3txUsytmpEEk7PvpXx5mHJoV377BLhz3jLX4Z6Oc1KiypIUFBp6iOe8j+7A
-	yVnA==
-X-Gm-Message-State: AKGB3mLIpNSoVixOHbJrAmsUCbMHxJzjz1lheW/KsA1p05GWEsx//i3q
-	4W6NHgq1kP8r5fJwBxvsWfQFZQ==
-X-Google-Smtp-Source: ACJfBovM2eqFVKtDbw9BijPd4BwCjbIzgc/VLz6IDPM3osF+SziEbgk/VF+telVphRGDiH56O5CTTw==
-X-Received: by 10.159.247.193 with SMTP id v1mr40541979plz.102.1514761312339; 
-	Sun, 31 Dec 2017 15:01:52 -0800 (PST)
+	bh=/aZkaO4/yR6i0Z3F69fQzwtaLpS06MGV2FRz7pWQi/g=;
+	b=kMPsJjpavPUvHTZ6n1I8w+nuP8C8h+0U83eA0IGmDOzzjG6SD5NG7BBKBJhi3Uk/Wo
+	JTjBhmaL7yMfejtP2kHElAU2b2TDV9lyfAsS5xBAHZzS/gwuBKSj69FkW7b7mSek+OE1
+	WL56GH8EiackCY8naHgT6JPcuNULA6t76+tkM1VBYPd4AVQI6bNBj9PHnC4kGemr2iPk
+	deqbg9PhoXXujUvQfjKTGAN3QQ98PzYawnTpP1psDzYhqYYryHIyWKylGeqr4fcLtVHS
+	OxCeTd0sCW0Gu3aV5rMf47K4AIa61Lseesy8mg13tdqM9tCceu2rKrD8by+mqn8NCQk3
+	G4sw==
+X-Gm-Message-State: AKGB3mIGsIz8dnUrlHktH1+Z4OVAlhQ9mj5zKhZdbdih0KUUQ7/nIfLc
+	S3+TcUICwUckD5nIqoo40l4Vxg==
+X-Google-Smtp-Source: ACJfBotpN/xpwIHLYHhRzVHMSO8mBrQ5zZI29v4VcdLlC69e5hjwp2FN53SsOUUd5VYNKKyfYi+Rhw==
+X-Received: by 10.84.194.163 with SMTP id h32mr40125171pld.335.1514761371613; 
+	Sun, 31 Dec 2017 15:02:51 -0800 (PST)
 Received: from ?IPv6:2601:202:4000:1184:20c4:d690:9df8:7161?
 	([2601:202:4000:1184:20c4:d690:9df8:7161])
 	by smtp.gmail.com with ESMTPSA id
-	q9sm92318146pfl.116.2017.12.31.15.01.50
+	r86sm91304305pfk.114.2017.12.31.15.02.50
+	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 31 Dec 2017 15:01:51 -0800 (PST)
-To: Bill Randle <bill.randle@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20171231170823.29570-1-bill.randle@gmail.com>
+	Sun, 31 Dec 2017 15:02:51 -0800 (PST)
+To: openembedded-devel@lists.openembedded.org
+References: <1513780518-29657-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+	<CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
 From: akuster808 <akuster808@gmail.com>
-Message-ID: <cc55814b-99f8-8598-7c54-74558253efa3@gmail.com>
-Date: Sun, 31 Dec 2017 15:01:50 -0800
+Message-ID: <59833560-334b-6ede-c412-a12b4a5040d2@gmail.com>
+Date: Sun, 31 Dec 2017 15:02:50 -0800
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
 	Thunderbird/52.5.0
 MIME-Version: 1.0
-In-Reply-To: <20171231170823.29570-1-bill.randle@gmail.com>
-Subject: Re: [meta-oe][PATCH] smstools3: remove bash dependency on packaged scripts
+In-Reply-To: <CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
+Subject: Re: [meta-oe][PATCH] libyui-ncurses: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -63,85 +64,220 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2017 23:01:51 -0000
+X-List-Received-Date: Sun, 31 Dec 2017 23:02:50 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 7bit
 Content-Language: en-US
 
 
 
-On 12/31/2017 09:08 AM, Bill Randle wrote:
-> An earlier patch to update smstools3 to v3.1.21 dropped the RDEPENDS for
-> bash, which caused qc errors during packaging, since the example scripts
-> still used /bin/bash as the command executor. This patch updates the scripts
-> to use /bin/sh instead. No known bash-only syntax is present in the packaged
-> scripts and they run ok under Busybox.
+On 12/27/2017 11:02 PM, Martin Jansa wrote:
+> This is missing in master now, because dnfdragora was merged.
+This should be in master now.
 
-Thanks. Your fix is much better than what I was looking at.
-
-kind regards and Happy New Year.
-
-- Armin
+- armin
 >
-> Upstream-Status: Submitted [http://smstools3.kekekasvi.com/topic.php?post=6188#post6188]
-> Signed-off-by: Bill Randle <bill.randle@gmail.com>
-> ---
->  .../smstools3/smstools3/scripts_no_bash.patch      | 32 ++++++++++++++++++++++
->  .../smstools3/smstools3_3.1.21.bb                  |  3 +-
->  2 files changed, 34 insertions(+), 1 deletion(-)
->  create mode 100644 meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
+> Please use 4 spaces for indentation.
 >
-> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch b/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
-> new file mode 100644
-> index 000000000..f7529d8cb
-> --- /dev/null
-> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3/scripts_no_bash.patch
-> @@ -0,0 +1,32 @@
-> +--- smstools3.orig/scripts/sendsms	2006-02-04 11:52:06.000000000 -0800
-> ++++ smstools3/scripts/sendsms	2017-12-30 15:40:28.009169106 -0800
-> +@@ -1,4 +1,4 @@
-> +-#!/bin/bash
-> ++#!/bin/sh
-> + # This script send a text sms at the command line by creating
-> + # a sms file in the outgoing queue.
-> + 
-> +--- smstools3.orig/scripts/sms2html	2006-02-04 11:52:06.000000000 -0800
-> ++++ smstools3/scripts/sms2html	2017-12-30 15:39:17.496694390 -0800
-> +@@ -1,4 +1,4 @@
-> +-#!/bin/bash
-> ++#!/bin/sh
-> + 
-> + # This script converts a received sms file into a html file. 
-> + 
-> +--- smstools3.orig/scripts/sms2unicode	2006-02-04 11:52:06.000000000 -0800
-> ++++ smstools3/scripts/sms2unicode	2017-12-30 15:33:14.477250179 -0800
-> +@@ -1,4 +1,4 @@
-> +-#!/bin/bash
-> ++#!/bin/sh
-> + 
-> + # This script converts a received sms file into a pure unicode text file.
-> + 
-> +--- smstools3/scripts/unicode2sms	2006-02-04 11:52:06.000000000 -0800
-> ++++ smstools3/scripts/unicode2sms.new	2017-12-30 15:33:56.918536044 -0800
-> +@@ -1,4 +1,4 @@
-> +-#!/bin/bash
-> ++#!/bin/sh
-> + 
-> + # This script converts a pure unicode text file into an sms file for sending.
-> + 
-> diff --git a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-> index 86c8ede1d..6e6413b4b 100644
-> --- a/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-> +++ b/meta-oe/recipes-connectivity/smstools3/smstools3_3.1.21.bb
-> @@ -6,7 +6,8 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=4d21efa1bb2a186360dde4035f860682"
->  HOMEPAGE = "http://smstools3.kekekasvi.com"
->  
->  SRC_URI = "http://smstools3.kekekasvi.com/packages/${BP}.tar.gz \
-> -           file://sms_binpath.patch"
-> +           file://sms_binpath.patch \
-> +           file://scripts_no_bash.patch"
->  
->  SRC_URI[md5sum] = "6a9f038fb38a49cc3a4f8f14a88fb8af"
->  SRC_URI[sha256sum] = "a26ba4c02b16f6cf13177bffca6c9230dc5fefaeba8e3030cd4e4905f6a92084"
+> On Wed, Dec 20, 2017 at 3:35 PM, zhengrq <zhengrq.fnst@cn.fujitsu.com>
+> wrote:
+>
+>> Add a new recipe libyui-ncurses, which is a rdepend for dnfdragora.
+>>
+>> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>> ---
+>>  ...1-Fix-the-error-of-can-t-find-header-file.patch | 100
+>> +++++++++++++++++++++
+>>  .../recipes-graphics/libyui/libyui-ncurses_git.bb  |  50 +++++++++++
+>>  2 files changed, 150 insertions(+)
+>>  create mode 100644 meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
+>> Fix-the-error-of-can-t-find-header-file.patch
+>>  create mode 100644 meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
+>>
+>> diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
+>> Fix-the-error-of-can-t-find-header-file.patch b/meta-oe/recipes-graphics/
+>> libyui/libyui-ncurses/0001-Fix-the-error-of-can-t-find-header-file.patch
+>> new file mode 100644
+>> index 0000000..26b4c17
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
+>> Fix-the-error-of-can-t-find-header-file.patch
+>> @@ -0,0 +1,100 @@
+>> +From eb0086dc4ea8fe9cda069456287b3a29a2631d30 Mon Sep 17 00:00:00 2001
+>> +From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>> +Date: Wed, 13 Dec 2017 16:18:45 +0900
+>> +Subject: [PATCH] Fix the error of can't find header file
+>> +
+>> +This fix is just for yocto.
+>> +
+>> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+>> +---
+>> + src/NCApplication.cc | 2 +-
+>> + src/NCstyle.h        | 2 +-
+>> + src/NCurses.h        | 2 +-
+>> + src/ncursesp.h       | 2 +-
+>> + src/ncursesw.cc      | 2 +-
+>> + src/ncursesw.h       | 4 ++--
+>> + 6 files changed, 7 insertions(+), 7 deletions(-)
+>> +
+>> +diff --git a/src/NCApplication.cc b/src/NCApplication.cc
+>> +index 5bcf969..510f034 100644
+>> +--- a/src/NCApplication.cc
+>> ++++ b/src/NCApplication.cc
+>> +@@ -23,7 +23,7 @@
+>> +
+>> + /-*/
+>> +
+>> +-#include <ncursesw/curses.h>
+>> ++#include <curses.h>
+>> +
+>> + #define  YUILogComponent "ncurses"
+>> + #include <yui/YUILog.h>
+>> +diff --git a/src/NCstyle.h b/src/NCstyle.h
+>> +index a40d5a8..3657917 100644
+>> +--- a/src/NCstyle.h
+>> ++++ b/src/NCstyle.h
+>> +@@ -25,7 +25,7 @@
+>> + #ifndef NCstyle_h
+>> + #define NCstyle_h
+>> +
+>> +-#include <ncursesw/ncurses.h>
+>> ++#include <ncurses.h>
+>> +
+>> + #include <iosfwd>
+>> + #include <string>
+>> +diff --git a/src/NCurses.h b/src/NCurses.h
+>> +index a07c6bf..d17d3c3 100644
+>> +--- a/src/NCurses.h
+>> ++++ b/src/NCurses.h
+>> +@@ -34,7 +34,7 @@
+>> + #include <yui/YWidget.h>
+>> + #include <yui/YMenuItem.h>
+>> +
+>> +-#include <ncursesw/curses.h>  /* curses.h: #define  NCURSES_CH_T cchar_t
+>> */
+>> ++#include <curses.h>   /* curses.h: #define  NCURSES_CH_T cchar_t */
+>> + #include <wchar.h>
+>> +
+>> + #include "ncursesw.h"
+>> +diff --git a/src/ncursesp.h b/src/ncursesp.h
+>> +index d478347..2fcfea5 100644
+>> +--- a/src/ncursesp.h
+>> ++++ b/src/ncursesp.h
+>> +@@ -28,7 +28,7 @@
+>> + #include <iosfwd>
+>> +
+>> + #include "ncursesw.h"
+>> +-#include <ncursesw/panel.h>
+>> ++#include <panel.h>
+>> +
+>> + class NCursesPanel : public NCursesWindow
+>> + {
+>> +diff --git a/src/ncursesw.cc b/src/ncursesw.cc
+>> +index 3c771af..bb83210 100644
+>> +--- a/src/ncursesw.cc
+>> ++++ b/src/ncursesw.cc
+>> +@@ -47,7 +47,7 @@
+>> + #include <iostream>
+>> + #include <stdlib.h>
+>> + #include <string.h>
+>> +-#include <ncursesw/term.h>
+>> ++#include <term.h>
+>> + #undef line
+>> + #undef columns
+>> +
+>> +diff --git a/src/ncursesw.h b/src/ncursesw.h
+>> +index d25923a..c140d37 100644
+>> +--- a/src/ncursesw.h
+>> ++++ b/src/ncursesw.h
+>> +@@ -27,8 +27,8 @@
+>> +
+>> + #include <iosfwd>
+>> +
+>> +-#include <ncursesw/curses.h>
+>> +-#include <ncursesw/etip.h>
+>> ++#include <curses.h>
+>> ++#include <etip.h>
+>> + #include <cstdio>
+>> + #include <cstdarg>
+>> + #include <climits>
+>> +--
+>> +2.7.4
+>> +
+>> diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
+>> b/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
+>> new file mode 100644
+>> index 0000000..f378701
+>> --- /dev/null
+>> +++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
+>> @@ -0,0 +1,50 @@
+>> +SUMMARY = "Character Based User Interface for libyui"
+>> +LICENSE = "LGPLv3"
+>> +LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=
+>> e6a600fd5e1d9cbde2d983680233ad02 \
+>> +                    file://COPYING.lgpl-2.1;md5=
+>> 4fbd65380cdd255951079008b364516c \
+>> +                   "
+>> +
+>> +SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
+>> +           "
+>> +
+>> +SRC_URI_append_class-target += " file://0001-Fix-the-error-of-
+>> can-t-find-header-file.patch"
+>> +
+>> +PV = "2.48.3+git"
+>> +SRCREV = "7b251c2ff541df6139f3d210d0a0a27d042926bd"
+>> +
+>> +S = "${WORKDIR}/git"
+>> +
+>> +inherit cmake gettext pkgconfig
+>> +
+>> +DEPENDS += "boost libyui ncurses"
+>> +
+>> +BBCLASSEXTEND = "nativesdk"
+>> +
+>> +do_configure_prepend () {
+>> +         cd ${S}
+>> +         git checkout bootstrap.sh
+>> +         sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
+>> bootstrap.sh
+>> +         ./bootstrap.sh
+>> +         mkdir -p ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
+>> +         cp ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so*
+>> ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
+>> +         cd -
+>> +         sed -i "s#\${YPREFIX}#\${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
+>> ${S}/CMakeLists.txt
+>> +         sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
+>> ${PKG_CONFIG_SYSROOT_DIR}${libdir}/cmake/libyui/
+>> LibyuiLibraryDepends-release.cmake
+>> +}
+>> +
+>> +do_install_append () {
+>> +        if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d
+>> ${D}/usr/lib64 ]; then
+>> +            mv ${D}/usr/lib64 ${D}/usr/lib
+>> +        fi
+>> +}
+>> +
+>> +do_install_append_class-nativesdk () {
+>> +        mkdir -p ${D}/${base_prefix}
+>> +        mv ${D}/usr ${D}/${base_prefix}
+>> +}
+>> +
+>> +FILES_${PN} += "${datadir}/*"
+>> +
+>> +FILES_${PN}-dev += "${libdir}/*"
+>> --
+>> 2.7.4
+>>
+>>
+>>
+>> --
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>
 
 
