@@ -1,32 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id C7E3371B57
+Return-Path: <Zhixiong.Chi@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id DBB706067D
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 01:54:13 +0000 (UTC)
+	Wed,  3 Jan 2018 08:34:12 +0000 (UTC)
 Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
 	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w031sDOL026818
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 2 Jan 2018 17:54:13 -0800 (PST)
-Received: from [128.224.162.134] (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Tue, 2 Jan 2018 17:54:11 -0800
-To: Derek Straka <derek@asterius.io>
-References: <1514941115-27329-1-git-send-email-yi.zhao@windriver.com>
-	<CADNbA1pszSeHvab_oNg9MzqNz4owuxcGc2jZWBWBKjDeiv9Fkw@mail.gmail.com>
-	<fa40d465-6b8a-1cee-00ed-c349d30ae0a7@windriver.com>
-	<CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
-From: Yi Zhao <yi.zhao@windriver.com>
-Message-ID: <1b1a68a2-d197-ebeb-f7ea-68466104fdc6@windriver.com>
-Date: Wed, 3 Jan 2018 09:52:32 +0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w038YCq3016919
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 3 Jan 2018 00:34:13 -0800
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 3 Jan 2018 00:34:12 -0800
+From: Zhixiong Chi <zhixiong.chi@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 3 Jan 2018 00:34:12 -0800
+Message-ID: <20180103083412.9689-1-zhixiong.chi@windriver.com>
+X-Mailer: git-send-email 2.11.0
 MIME-Version: 1.0
-In-Reply-To: <CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
-X-Originating-IP: [128.224.162.134]
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] stat: add the recipe from oe-core
+Subject: [meta-networking][PATCH] wireshark: CVE-2017-17935
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -39,251 +31,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 01:54:13 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Jan 2018 08:34:13 -0000
+Content-Type: text/plain
 
+Backport patch from the upstream:
+https://code.wireshark.org/review/gitweb?p=wireshark.git;
+a=commit;h=137ab7d5681486c6d6cc8faac4300b7cd4ec0cf1
+https://nvd.nist.gov/vuln/detail/CVE-2017-17935
 
+The File_read_line function in epan/wslua/wslua_file.c in Wireshark
+through 2.2.11 does not properly strip '\n' characters, which allows
+remote attackers to cause a denial of service (buffer underflow and
+application crash) via a crafted packet that triggers the attempted
+processing of an empty line.
 
-在 2018年01月03日 09:47, Derek Straka 写道:
-> Makes sense.  I'm all for letting someone add it back if they'd like 
-> to use it over coreutils (understanding that it isn't maintained), but 
-> we can let others chime in.
+Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
+---
+ .../wireshark/wireshark/CVE-2017-17935.patch       | 37 ++++++++++++++++++++++
+ .../recipes-support/wireshark/wireshark_2.2.10.bb  |  4 ++-
+ 2 files changed, 40 insertions(+), 1 deletion(-)
+ create mode 100644 meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
 
-Sounds good to me.
-
-Yi
-
->
-> -Derek
->
-> On Tue, Jan 2, 2018 at 8:38 PM, Yi Zhao <yi.zhao@windriver.com 
-> <mailto:yi.zhao@windriver.com>> wrote:
->
->
->
->     在 2018年01月03日 09:20, Derek Straka 写道:
->>     Is there any compelling reason to include it in meta-oe at all? 
->>     It seems like dropping it altogether would be a better approach.
->
->     I have no objection  to drop it. But I'm not sure if someone else
->     use it ...
->
->     Yi
->
->
->>
->>     -Derek
->>
->>     On Tue, Jan 2, 2018 at 7:58 PM, Yi Zhao <yi.zhao@windriver.com
->>     <mailto:yi.zhao@windriver.com>> wrote:
->>
->>         The stat hasn't any update since 2002. All modern Linux
->>         distributions
->>         use stat from coreutils as default. It is no longer needed by
->>         oe-core.
->>         Move it to meta-oe.
->>
->>         Signed-off-by: Yi Zhao <yi.zhao@windriver.com
->>         <mailto:yi.zhao@windriver.com>>
->>         ---
->>          .../stat/stat-3.3/fix-error-return.patch          | 16 +++++
->>          .../stat/stat-3.3/fix-security-format.patch       | 68
->>         ++++++++++++++++++++++
->>          meta-oe/recipes-extended/stat/stat_3.3.bb
->>         <http://stat_3.3.bb>         | 35 +++++++++++
->>          3 files changed, 119 insertions(+)
->>          create mode 100644
->>         meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>          create mode 100644
->>         meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>          create mode 100644 meta-oe/recipes-extended/stat/stat_3.3.bb
->>         <http://stat_3.3.bb>
->>
->>         diff --git
->>         a/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>         b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>         new file mode 100644
->>         index 0000000..032995d
->>         --- /dev/null
->>         +++
->>         b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>         @@ -0,0 +1,16 @@
->>         +This patch fixies the wrong return code of stat -h.
->>         +
->>         +Upstream-Status: Pending
->>         +Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com
->>         <mailto:zhangle.yang@windriver.com>>
->>         +
->>         +--- stat-3.3/stat.c.orig       2013-08-22 10:49:45.000000000
->>         +0800
->>         ++++ stat-3.3/stat.c    2013-08-22 10:50:31.000000000 +0800
->>         +@@ -845,7 +845,7 @@
->>         +     fprintf(stderr, "\t\t%%S - Security ID in SE-Linux\n");
->>         +     fprintf(stderr, "\t\t%%C - Security context in
->>         SE-Linux\n");
->>         +     fprintf(stderr, "\t\t%%d - Free file nodes in file
->>         system\n");
->>         +-    exit(1);
->>         ++    exit(0);
->>         + }
->>         +
->>         +
->>         diff --git
->>         a/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>         b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>         new file mode 100644
->>         index 0000000..0c01ed0
->>         --- /dev/null
->>         +++
->>         b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>         @@ -0,0 +1,68 @@
->>         +stat: Fixing security formatting issues
->>         +
->>         +Fix security formatting issues related to printf without
->>         NULL argument
->>         +
->>         +stat.c: In function 'print_human_access':
->>         +stat.c:292:13: error: format not a string literal and no
->>         format arguments [-Werror=format-security]
->>         +     printf (access);
->>         +             ^
->>         +stat.c: In function 'print_human_time':
->>         +stat.c:299:57: error: format not a string literal and no
->>         format arguments [-Werror=format-security]
->>         +   if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
->>         +            ^
->>         +stat.c: In function 'print_it':
->>         +stat.c:613:6: error: format not a string literal and no
->>         format arguments [-Werror=format-security]
->>         +      printf(b);
->>         +      ^
->>         +stat.c:642:6: error: format not a string literal and no
->>         format arguments [-Werror=format-security]
->>         +      printf(b);
->>         +      ^
->>         +
->>         +[YOCTO #9550]
->>         +[https://bugzilla.yoctoproject.org/show_bug.cgi?id=9550
->>         <https://bugzilla.yoctoproject.org/show_bug.cgi?id=9550>]
->>         +
->>         +Upstream-Status: Pending
->>         +
->>         +Signed-off-by: Edwin Plauchu
->>         <edwin.plauchu.camacho@intel.com
->>         <mailto:edwin.plauchu.camacho@intel.com>>
->>         +
->>         +diff --git a/stat.c b/stat.c
->>         +index 1ed07a9..2be6f62 100644
->>         +--- a/stat.c
->>         ++++ b/stat.c
->>         +@@ -289,15 +289,15 @@ void print_human_access(struct stat
->>         *statbuf)
->>         +     default:
->>         +       access[0] = '?';
->>         +     }
->>         +-    printf (access);
->>         ++    fputs(access,stdout);
->>         + }
->>         +
->>         + void print_human_time(time_t *t)
->>         + {
->>         +   char str[40];
->>         +
->>         +-  if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
->>         +-  else printf("Cannot calculate human readable time, sorry");
->>         ++  if (strftime(str, 40, "%c", localtime(t)) > 0)
->>         fputs(str,stdout);
->>         ++  else fputs("Cannot calculate human readable time,
->>         sorry",stdout);
->>         + }
->>         +
->>         + /* print statfs info */
->>         +@@ -610,7 +610,7 @@ void print_it(char *masterformat, char
->>         *filename,
->>         +       {
->>         +           strcpy (pformat, "%");
->>         +           *m++ = '\0';
->>         +-          printf(b);
->>         ++          fputs(b,stdout);
->>         +
->>         +           /* copy all format specifiers to our format string */
->>         +           while (isdigit(*m) || strchr("#0-+. I", *m))
->>         +@@ -639,7 +639,7 @@ void print_it(char *masterformat, char
->>         *filename,
->>         +       }
->>         +       else
->>         +       {
->>         +-          printf(b);
->>         ++          fputs(b,stdout);
->>         +           b = NULL;
->>         +       }
->>         +     }
->>         diff --git a/meta-oe/recipes-extended/stat/stat_3.3.bb
->>         <http://stat_3.3.bb>
->>         b/meta-oe/recipes-extended/stat/stat_3.3.bb <http://stat_3.3.bb>
->>         new file mode 100644
->>         index 0000000..8ac8e89
->>         --- /dev/null
->>         +++ b/meta-oe/recipes-extended/stat/stat_3.3.bb
->>         <http://stat_3.3.bb>
->>         @@ -0,0 +1,35 @@
->>         +SUMMARY = "Command line file status display utility"
->>         +HOMEPAGE = "http://www.ibiblio.org/pub/Linux/utils/file/
->>         <http://www.ibiblio.org/pub/Linux/utils/file/>"
->>         +DESCRIPTION = "Displays all information about a file that
->>         the stat() call provides and all information about a
->>         filesystem that statfs() provides."
->>         +SECTION = "console/utils"
->>         +LICENSE = "GPLv2"
->>         +LIC_FILES_CHKSUM =
->>         "file://COPYRIGHT;md5=39886b077fd072e876e5c4c16310b631 \
->>         + file://GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
->>         +
->>         +SRC_URI =
->>         "http://www.ibiblio.org/pub/Linux/utils/file/${BP}.tar.gz
->>         <http://www.ibiblio.org/pub/Linux/utils/file/$%7BBP%7D.tar.gz> \
->>         + file://fix-security-format.patch \
->>         + file://fix-error-return.patch"
->>         +
->>         +SRC_URI[md5sum] = "37e247e8e400ad9205f1b0500b728fd3"
->>         +SRC_URI[sha256sum] =
->>         "7071f0384a423a938dd542c1f08547a02824f6359acd3ef3f944b2c4c2d1ee09"
->>         +
->>         +EXTRA_OEMAKE = "-e MAKEFLAGS="
->>         +
->>         +do_install() {
->>         +       install -d ${D}${base_bindir} ${D}${mandir}/man1
->>         +       install -m 755 stat ${D}${base_bindir}/stat.stat
->>         +       install -m 644 stat.1 ${D}${mandir}/man1
->>         +}
->>         +
->>         +inherit update-alternatives
->>         +
->>         +ALTERNATIVE_${PN} = "stat"
->>         +ALTERNATIVE_PRIORITY[stat] = "200"
->>         +ALTERNATIVE_LINK_NAME[stat] = "${base_bindir}/stat"
->>         +ALTERNATIVE_TARGET[stat] = "${base_bindir}/stat.stat"
->>         +
->>         +ALTERNATIVE_${PN}-doc = "stat.1"
->>         +ALTERNATIVE_LINK_NAME[stat.1] = "${mandir}/man1/stat.1"
->>         +
->>         +BBCLASSEXTEND = "native"
->>         +
->>         --
->>         2.7.4
->>
->>         --
->>         _______________________________________________
->>         Openembedded-devel mailing list
->>         Openembedded-devel@lists.openembedded.org
->>         <mailto:Openembedded-devel@lists.openembedded.org>
->>         http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>         <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>
->>
->>
->
->
+diff --git a/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch b/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
+new file mode 100644
+index 000000000..46ad83ea0
+--- /dev/null
++++ b/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
+@@ -0,0 +1,37 @@
++From 137ab7d5681486c6d6cc8faac4300b7cd4ec0cf1 Mon Sep 17 00:00:00 2001
++From: Martin Mathieson <martin.r.mathieson@googlemail.com>
++Date: Tue, 26 Dec 2017 11:48:04 +0000
++Subject: [PATCH 1/1] potential buffer underflow in File_read_line function in
++ epan/wslua/wslua_file.c
++
++Putting up for review, though I am not completely convinced that
++file_gets() can return an empty line.
++
++Bug: 14295
++Change-Id: If36761ea511b66c01a9f167809a218a7eadbfcc5
++Reviewed-on: https://code.wireshark.org/review/24997
++Petri-Dish: Martin Mathieson <martin.r.mathieson@googlemail.com>
++Tested-by: Petri Dish Buildbot
++Reviewed-by: Anders Broman <a.broman58@gmail.com>
++
++Upstream-Status: Backport
++Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
++---
++ epan/wslua/wslua_file.c | 2 +-
++ 1 file changed, 1 insertion(+), 1 deletion(-)
++
++diff --git a/epan/wslua/wslua_file.c b/epan/wslua/wslua_file.c
++index 79bf4f7..73bacc6 100644
++--- a/epan/wslua/wslua_file.c
+++++ b/epan/wslua/wslua_file.c
++@@ -192,7 +192,7 @@ static int File_read_line(lua_State *L, FILE_T ft) {
++     length = (gint)(file_tell(ft) - pos_before);
++ 
++     /* ...but don't want to include newline in line length */
++-    if (linebuff[length-1] == '\n') {
+++    if (length > 0 && linebuff[length-1] == '\n') {
++         length--;
++         /* Nor do we want '\r' (as will be written when log is created on windows) */
++         if (length > 0 && linebuff[length - 1] == '\r') {
++-- 
++2.7.4
+diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
+index 5358ba07f..e3915d203 100644
+--- a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
++++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
+@@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
+ 
+ DEPENDS = "pcre expat glib-2.0 glib-2.0-native"
+ 
+-SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
++SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2 \
++           file://CVE-2017-17935.patch \
++"
+ 
+ PE = "1"
+ 
+-- 
+2.11.0
 
 
