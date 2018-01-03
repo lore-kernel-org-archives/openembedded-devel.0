@@ -1,55 +1,38 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f42.google.com (mail-pl0-f42.google.com
-	[209.85.160.42])
-	by mail.openembedded.org (Postfix) with ESMTP id 1551C78258
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
+	[209.85.216.195])
+	by mail.openembedded.org (Postfix) with ESMTP id BFD696E650
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 22:23:41 +0000 (UTC)
-Received: by mail-pl0-f42.google.com with SMTP id s3so2069743plp.4
+	Wed,  3 Jan 2018 22:39:42 +0000 (UTC)
+Received: by mail-qt0-f195.google.com with SMTP id u10so4019567qtg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jan 2018 14:23:43 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=u1Px3iY39oajHFatBgCQ7q7t88AtYX0JEaoVmtJG64U=;
-	b=nb4lEqUpqYfy1i/w1TPw/Zc7bVafIKJ/9hjWzLIWtuM0NiUGjSeqCm6juX/Z5DZY4g
-	kATKvviFeMcIy4eBA0DkTW/bULYktCXzakamoTxvqDFfbNoFhhDjALhWOJ6T8T9MrBVo
-	6PVXydzlxbL1w6h8dCALDE/7KeNLCsJDHIZ9E+8Shro0vaowtrNd9I42SMSJEdOG74se
-	TJ8Me2aulWwgojR9z7LwrLBRmvLli7WmGNOz/piXT14so9ZVs2qh91lAKlekP68Rkcji
-	MGWrS2BobKjPboUNp5EZk38QHrVRJVOvufvrIJWD2PIOsiE5I2fpEuPAuZx1XZTzjhP1
-	47yw==
+	Wed, 03 Jan 2018 14:39:44 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=u1Px3iY39oajHFatBgCQ7q7t88AtYX0JEaoVmtJG64U=;
-	b=AAHKq5kvuZ5rDorpnsuhDGDFMtVFBz9oQP6HpwJKl7Ed7bB4Xt96ssEmp7zzck9kl+
-	p8/hbBvno7WC8Ok73z2NIMR7StH04HcGgUzmUKUBV8uaSsgYhklrVY4FC8tkYkpAqXFf
-	mv8fVYtWYGLbM8DwKGgtZPAZilaI+IoqMi3RuIghrU08Cn999gswBHgnZQlyWRpIIQcK
-	4DrW81/TqUPkf80TksyYxRUVBU/dVcICqHVitbmo+HgXauWsxcIg5qNEyi7wRChIiULK
-	DnBiBdnUU5EUYBFzbxg1y+/jRVwVm9644r1e9KKDonNCVS/A5Ef8ZrBQKZG/Yb23dvxe
-	4XwQ==
-X-Gm-Message-State: AKGB3mJPSLNbTvBcGrA1r3PAxGzl9Bic47Jew2QXQ62TDGG1kb0PkIhk
-	Nt/3cCzKDi5qILCerL+OEY87fA==
-X-Google-Smtp-Source: ACJfBosCooeaIt8gFSwdn95gQ5/h3SjgooRWMNdHsVFKobcQJwfm+ruCQhcflyYtI29mAd5ELPfyOQ==
-X-Received: by 10.84.197.35 with SMTP id m32mr2673417pld.214.1515018222777;
-	Wed, 03 Jan 2018 14:23:42 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:118f:a6ff:8496:e77b?
-	([2601:202:4000:1184:118f:a6ff:8496:e77b])
-	by smtp.gmail.com with ESMTPSA id r1sm4674164pfg.98.2018.01.03.14.23.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Wed, 03 Jan 2018 14:23:42 -0800 (PST)
-To: Zhixiong Chi <zhixiong.chi@windriver.com>,
-	openembedded-devel@lists.openembedded.org
-References: <20180103083412.9689-1-zhixiong.chi@windriver.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <5125ab2e-8aba-4381-6bd1-4275f58a815e@gmail.com>
-Date: Wed, 3 Jan 2018 14:23:40 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
-MIME-Version: 1.0
-In-Reply-To: <20180103083412.9689-1-zhixiong.chi@windriver.com>
-Subject: Re: [meta-networking][PATCH] wireshark: CVE-2017-17935
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=TyU7Du/NQ0nkSBQBXp6RkESFbxk8e8ZN/lQ4kpZI3FM=;
+	b=F1fVSDd1PQU2+yeFOWKxZn7iMZgCmhC6UTsSEZ7UUsgp2oUImd4BuGhh3Xgkw5hu7C
+	Cn2W8ZAZWqv68nXA5sCyOWqRr59xvrX86eUL78DfwCPb0RciXUSsW6BuF/LIkcZwfjBz
+	DlyN9sFS/cx1NTDdVT7qYgBr3qyYcuEVqMDQ74/ZKJ8A2hFFfk04IBY4kcXzX0xyxdr+
+	OntLQhE/YYj0WqJYNWqckuU4VHEICTpxv+Y7q3YaJ9S3OwBSvv/816Hhu+JQVaCWMGk4
+	K03HXp8SI3QmOUsQ40ewEONY4EhzcDzS3KMdnalD1ZL8AlRYRkb1jhDNiQNphYp+NY5M
+	EuSg==
+X-Gm-Message-State: AKGB3mI4c1oFYRU4w/h07zlavt6X2gH7/40vWTjEXe6gXzaaPXXrqeWM
+	pttE00rfOicYdj/AtXP8GYSchDVO
+X-Google-Smtp-Source: ACJfBotfeRWBHSfJc58NbmZqUik6WyDoiRxyWFKxMT2jo4gDO7V2agmtDo6WaxEI798OMb5T3U2Aog==
+X-Received: by 10.200.44.243 with SMTP id 48mr3568863qtx.99.1515019183271;
+	Wed, 03 Jan 2018 14:39:43 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	s41sm1241142qtk.37.2018.01.03.14.39.42
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 03 Jan 2018 14:39:42 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  3 Jan 2018 17:39:32 -0500
+Message-Id: <1515019174-24971-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH 1/3] python-jsonpointer: add a python3 version of the recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -62,95 +45,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 22:23:42 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 03 Jan 2018 22:39:42 -0000
 
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-jsonpointer.inc | 14 ++++++++++++++
+ .../recipes-devtools/python/python-jsonpointer_1.14.bb     | 13 ++-----------
+ .../recipes-devtools/python/python3-jsonpointer_1.14.bb    |  2 ++
+ 3 files changed, 18 insertions(+), 11 deletions(-)
+ create mode 100644 meta-python/recipes-devtools/python/python-jsonpointer.inc
+ create mode 100644 meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb
 
-
-On 01/03/2018 12:34 AM, Zhixiong Chi wrote:
-> Backport patch from the upstream:
-> https://code.wireshark.org/review/gitweb?p=wireshark.git;
-> a=commit;h=137ab7d5681486c6d6cc8faac4300b7cd4ec0cf1
-> https://nvd.nist.gov/vuln/detail/CVE-2017-17935
->
-> The File_read_line function in epan/wslua/wslua_file.c in Wireshark
-> through 2.2.11 does not properly strip '\n' characters, which allows
-> remote attackers to cause a denial of service (buffer underflow and
-> application crash) via a crafted packet that triggers the attempted
-> processing of an empty line.
-Thank you for the security patch.
-
-In master-next is an update to wireshark to version 2.2.11.  I think
-this wont be necessary once the update hits master.
-
-- armin
->
-> Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-> ---
->  .../wireshark/wireshark/CVE-2017-17935.patch       | 37 ++++++++++++++++++++++
->  .../recipes-support/wireshark/wireshark_2.2.10.bb  |  4 ++-
->  2 files changed, 40 insertions(+), 1 deletion(-)
->  create mode 100644 meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
->
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch b/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
-> new file mode 100644
-> index 000000000..46ad83ea0
-> --- /dev/null
-> +++ b/meta-networking/recipes-support/wireshark/wireshark/CVE-2017-17935.patch
-> @@ -0,0 +1,37 @@
-> +From 137ab7d5681486c6d6cc8faac4300b7cd4ec0cf1 Mon Sep 17 00:00:00 2001
-> +From: Martin Mathieson <martin.r.mathieson@googlemail.com>
-> +Date: Tue, 26 Dec 2017 11:48:04 +0000
-> +Subject: [PATCH 1/1] potential buffer underflow in File_read_line function in
-> + epan/wslua/wslua_file.c
-> +
-> +Putting up for review, though I am not completely convinced that
-> +file_gets() can return an empty line.
-> +
-> +Bug: 14295
-> +Change-Id: If36761ea511b66c01a9f167809a218a7eadbfcc5
-> +Reviewed-on: https://code.wireshark.org/review/24997
-> +Petri-Dish: Martin Mathieson <martin.r.mathieson@googlemail.com>
-> +Tested-by: Petri Dish Buildbot
-> +Reviewed-by: Anders Broman <a.broman58@gmail.com>
-> +
-> +Upstream-Status: Backport
-> +Signed-off-by: Zhixiong Chi <zhixiong.chi@windriver.com>
-> +---
-> + epan/wslua/wslua_file.c | 2 +-
-> + 1 file changed, 1 insertion(+), 1 deletion(-)
-> +
-> +diff --git a/epan/wslua/wslua_file.c b/epan/wslua/wslua_file.c
-> +index 79bf4f7..73bacc6 100644
-> +--- a/epan/wslua/wslua_file.c
-> ++++ b/epan/wslua/wslua_file.c
-> +@@ -192,7 +192,7 @@ static int File_read_line(lua_State *L, FILE_T ft) {
-> +     length = (gint)(file_tell(ft) - pos_before);
-> + 
-> +     /* ...but don't want to include newline in line length */
-> +-    if (linebuff[length-1] == '\n') {
-> ++    if (length > 0 && linebuff[length-1] == '\n') {
-> +         length--;
-> +         /* Nor do we want '\r' (as will be written when log is created on windows) */
-> +         if (length > 0 && linebuff[length - 1] == '\r') {
-> +-- 
-> +2.7.4
-> diff --git a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-> index 5358ba07f..e3915d203 100644
-> --- a/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-> +++ b/meta-networking/recipes-support/wireshark/wireshark_2.2.10.bb
-> @@ -6,7 +6,9 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=6e271234ba1a13c6e512e76b94ac2f77"
->  
->  DEPENDS = "pcre expat glib-2.0 glib-2.0-native"
->  
-> -SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2"
-> +SRC_URI = "https://2.na.dl.wireshark.org/src/all-versions/${BP}.tar.bz2 \
-> +           file://CVE-2017-17935.patch \
-> +"
->  
->  PE = "1"
->  
+diff --git a/meta-python/recipes-devtools/python/python-jsonpointer.inc b/meta-python/recipes-devtools/python/python-jsonpointer.inc
+new file mode 100644
+index 0000000..e678198
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python-jsonpointer.inc
+@@ -0,0 +1,14 @@
++SUMMARY = "Resolve JSON Pointers in Python"
++HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
++LICENSE = "BSD"
++LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b15c843b7a329130f4e266a281ebb3"
++
++inherit pypi
++
++SRC_URI[md5sum] = "190aeb8afcb0efddfe831a4e533e163b"
++SRC_URI[sha256sum] = "c681af823545c731b7b38aedd5d4eee4c5eff87bc0f25e0ff25444a4189eac4d"
++
++RDEPENDS_${PN} += " \
++    ${PYTHON_PN}-json \
++    ${PYTHON_PN}-re \
++"
+diff --git a/meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb b/meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb
+index 96b71e3..064bd6c 100644
+--- a/meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb
++++ b/meta-python/recipes-devtools/python/python-jsonpointer_1.14.bb
+@@ -1,11 +1,2 @@
+-SUMMARY = "Resolve JSON Pointers in Python"
+-HOMEPAGE = "https://github.com/stefankoegl/python-json-pointer"
+-LICENSE = "BSD"
+-LIC_FILES_CHKSUM = "file://LICENSE.txt;md5=32b15c843b7a329130f4e266a281ebb3"
+-
+-inherit pypi setuptools
+-
+-SRC_URI[md5sum] = "190aeb8afcb0efddfe831a4e533e163b"
+-SRC_URI[sha256sum] = "c681af823545c731b7b38aedd5d4eee4c5eff87bc0f25e0ff25444a4189eac4d"
+-
+-RDEPENDS_${PN} += "python-re python-json"
++inherit setuptools
++require python-jsonpointer.inc
+diff --git a/meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb b/meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb
+new file mode 100644
+index 0000000..8d0a09b
+--- /dev/null
++++ b/meta-python/recipes-devtools/python/python3-jsonpointer_1.14.bb
+@@ -0,0 +1,2 @@
++inherit setuptools3
++require python-jsonpointer.inc
+-- 
+2.7.4
 
 
