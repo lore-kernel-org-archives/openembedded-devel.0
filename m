@@ -1,51 +1,51 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-yb0-f196.google.com (mail-yb0-f196.google.com
-	[209.85.213.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9A2D677E88
+Received: from mail-yb0-f194.google.com (mail-yb0-f194.google.com
+	[209.85.213.194])
+	by mail.openembedded.org (Postfix) with ESMTP id DFFA777EA6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 01:47:48 +0000 (UTC)
-Received: by mail-yb0-f196.google.com with SMTP id 5so95185ybp.4
+	Wed,  3 Jan 2018 01:47:51 +0000 (UTC)
+Received: by mail-yb0-f194.google.com with SMTP id f201so93300ybg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jan 2018 17:47:50 -0800 (PST)
+	Tue, 02 Jan 2018 17:47:53 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=9LTHdhmK/guHQdbzLRYn6mbZm8AA/JPhnu7qHuovXb4=;
-	b=jKkg1QJDKWvr35nn2TB+PSyb7kuzVD/fTwd4D6CRpTG67JiE8HEH+h4rcpfJw4t1sS
-	1tl08ja2SLVrIU410OFmuLEMzIQlOm85u0vZl7+9uOY3kNMc1csf2XyTg7MSuETSGfSi
-	+EnqQ6FeaklVHjCENo+HPkCni1oVCFJbq7bkMxw3+CEc3WwhCSnxftacDv8vzIixqOhX
-	28GvbV9fDJlJ1HS8z2JtGYxVs5zZSAdq/LRzqkvXefRbQVfg/dwVuenMytKnvIeDVnDh
-	lAUcuDWoTHpy6Bu2LdhTKVX3nVHquwI9u8JsKoqr8xiwstBCPqt2yTTAenS4DmCIT9UC
-	LHJQ==
+	bh=7QRxq7KPsUoh08MAkZD+uVdBI2+XMT/JZ8Kh7RvVpGc=;
+	b=BGtuHd/+jCIr1Uro8k0GU11w5j3WB68yQ/Il1IFIOecTCyQZPFRW+HzBT97UU8JIdG
+	gEWSGW/A5+6g+ZjSiTg7F4nOP66qNNW40m1aiBifQdApSzsqTP73SW8jEz/wYjR0DuYd
+	3CuwWTnNYcegHPF5thlptvGkZgzva/5nKzPZX8bUjkUwljRnUW/N4z8kSRpNFqh0m4IW
+	+vu7RZBqYoKBrvspxKUTHbbiQ5X4dP0VPDXmSd0l+97gbZvt3GvrFGIKybPaY7tF+THA
+	k5NdWtS991WThYY0qjXoL7VxJvInmq2/JdEUphdAjTMAARNbU32JFvq8zMJDJuAfitaW
+	4tqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=9LTHdhmK/guHQdbzLRYn6mbZm8AA/JPhnu7qHuovXb4=;
-	b=Q4CK32YIYWCocF0PFSA3aLV/ChTEvLxObSaQNAP98HMIE50fu+3bKthPK2cpCWq7XX
-	JLTLl6ST3z0ZXZa9+jPX6nL2CuY7rJO4ObP9BINuQ/QopW+HbRzOXhVvKwa9I22lnmmE
-	44+r4WyQNsWg/hRuWICfolGgBIEHluYTuGD2EZ7i7VxOFukfIUNdqzgEYhHqL0n05dYE
-	w5JIABnKCl61nl2iXR52P/AgKCVz9h2RAI3Jq87xvxE8ZCBbq3dzM5u4UE8v5GJRuI6X
-	UH6uDyJh2F7zC+c/RxuuQdwcFjRvVXMXEta5j8O/yphAML8sHw9uIq5ELzUX/y95BoWU
-	3RSw==
-X-Gm-Message-State: AKGB3mIuRTHJ71qweAbGg8wCNYdp44n+cU4PUPzl0IT1auVd+f25i3H+
-	b9CgDxoLOpeyephn5gK3VHDvuK7u
-X-Google-Smtp-Source: ACJfBouHHEQVCOqb9SFXVkysu6EnydJ5tYVMi20Wuv75AoybkvXSA9xkisNMAW/NUVyT1UYPkE/16A==
-X-Received: by 10.37.85.133 with SMTP id j127mr19889958ybb.361.1514944069391; 
-	Tue, 02 Jan 2018 17:47:49 -0800 (PST)
+	bh=7QRxq7KPsUoh08MAkZD+uVdBI2+XMT/JZ8Kh7RvVpGc=;
+	b=J1E7TFtwBAK0p+lOMKfErgfq+jriQ2uVH1oL31Ld/fAW0jcVHYb606MyO/N0Ykr50g
+	khTKIAQI7uJQXthPX5t9x13aw5YnixAfMnQSHVWw8JYDdm/qjsUhYjD/WFxPTk/zpHrU
+	h9a/POXEa4CN8jr296iPQIp2HVzcCGgwrRbBkMw4dTWkxrD5xSA5LnUDCb0gcdt7P0HP
+	sWvDGKpN+XdRzQf5FRDubuPiPD9MnPSvc+SLnZp2s+pQUo2VAG2HD1rKNzwKyeaWWE95
+	aK9p9+wrN+Eo5taP8gBONxpuy77I6FHNy/BgnlgTKGRAP5YKJLhb4WKXJHR3WCMnPnyn
+	gw3g==
+X-Gm-Message-State: AKGB3mKw/mZh38dreNDE3IwFTjyBGrF54dg3HFVvbpPAaW8qph7e9TKw
+	AOt2Dl/xattToTUyZypPpVyqO/X/
+X-Google-Smtp-Source: ACJfBos5f7QmeitePnguR2zL9XGEoimskPZQgPzw+XmHHv4Y/Z3f5BaWFXYqLhRenEo2dhQamN1NIg==
+X-Received: by 10.37.108.10 with SMTP id h10mr33117494ybc.80.1514944073205;
+	Tue, 02 Jan 2018 17:47:53 -0800 (PST)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([45.77.34.21]) by smtp.gmail.com with ESMTPSA id
-	h133sm20457657ywb.52.2018.01.02.17.47.47
+	h133sm20457657ywb.52.2018.01.02.17.47.51
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 Jan 2018 17:47:48 -0800 (PST)
+	Tue, 02 Jan 2018 17:47:52 -0800 (PST)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Jan 2018 02:47:24 +0100
-Message-Id: <1514944050-12039-2-git-send-email-liu.ming50@gmail.com>
+Date: Wed,  3 Jan 2018 02:47:25 +0100
+Message-Id: <1514944050-12039-3-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1514944050-12039-1-git-send-email-liu.ming50@gmail.com>
 References: <1514944050-12039-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-java][PATCH 1/7] meta: drop redundant DEPENDS_virtcalss-native definitions
+Subject: [meta-java][PATCH 2/7] meta: drop deprecated virtclass-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,147 +58,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 01:47:48 -0000
+X-List-Received-Date: Wed, 03 Jan 2018 01:47:52 -0000
 
 From: Ming Liu <liu.ming50@gmail.com>
 
-The DEPENDS would be handled in native.bbclass, it's not necessary to
-set them explicitly in recipes.
+Replaces them with class-native.
 
 Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- recipes-core/bcel/bcel_5.2.bb                           | 2 --
- recipes-core/jakarta-commons/commons-logging_1.1.1.bb   | 1 -
- recipes-core/jakarta-commons/commons-net_1.4.1.bb       | 1 -
- recipes-core/jakarta-libs/bsf_2.4.0.bb                  | 1 -
- recipes-core/jakarta-libs/log4j1.2_1.2.17.bb            | 1 -
- recipes-core/jakarta-libs/logkit_1.2.2.bb               | 1 -
- recipes-core/jcraft/jsch_0.1.40.bb                      | 1 -
- recipes-core/xalan-j/xalan-j_2.7.1.bb                   | 3 ---
- recipes-core/xerces-j/xerces-j_2.11.0.bb                | 1 -
- recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb | 1 -
- 10 files changed, 13 deletions(-)
+ recipes-core/cup/cup_0.10k.bb                     |  2 +-
+ recipes-core/jakarta-commons/commons-net_1.4.1.bb |  2 +-
+ recipes-core/jamvm/jamvm.inc                      | 14 +++++++-------
+ recipes-core/jcraft/jsch_0.1.40.bb                |  2 +-
+ recipes-core/jikes/jikes_1.22.bb                  |  4 ++--
+ recipes-core/jlex/jlex_1.2.6.bb                   |  2 +-
+ recipes-core/rhino/rhino_1.7r4.bb                 |  2 +-
+ recipes-core/xerces-j/xerces-j_2.11.0.bb          |  2 +-
+ 8 files changed, 15 insertions(+), 15 deletions(-)
 
-diff --git a/recipes-core/bcel/bcel_5.2.bb b/recipes-core/bcel/bcel_5.2.bb
-index 6ff345d..89a9a61 100644
---- a/recipes-core/bcel/bcel_5.2.bb
-+++ b/recipes-core/bcel/bcel_5.2.bb
-@@ -8,8 +8,6 @@ SRC_URI = "http://archive.apache.org/dist/jakarta/bcel/source/${BP}-src.tar.gz"
+diff --git a/recipes-core/cup/cup_0.10k.bb b/recipes-core/cup/cup_0.10k.bb
+index 2a957f9..afe5c38 100644
+--- a/recipes-core/cup/cup_0.10k.bb
++++ b/recipes-core/cup/cup_0.10k.bb
+@@ -5,7 +5,7 @@ LIC_FILES_CHKSUM = "file://${WORKDIR}/LICENSE;md5=2c9db91c00f38e52cfc8e67bafaa7c
+ 
+ 
+ RDEPENDS_${PN} = "java2-runtime"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
+ 
  inherit java-library
- 
- DEPENDS = "xerces-j regexp"
--DEPENDS_virtclass-native = "xerces-j-native regexp-native"
--
- 
- do_compile() {
-   mkdir -p build
-diff --git a/recipes-core/jakarta-commons/commons-logging_1.1.1.bb b/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-index b3b508a..79f041e 100644
---- a/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-+++ b/recipes-core/jakarta-commons/commons-logging_1.1.1.bb
-@@ -7,7 +7,6 @@ DESCRIPTION = "Java Internet protocol suite library"
- SRC_URI = "http://archive.apache.org/dist/commons/logging/source/${BP}-src.tar.gz"
- 
- DEPENDS += "log4j1.2 servlet2.3 logkit"
--DEPENDS_virtclass-native += "log4j1.2-native servlet2.3-native logkit-native"
- 
- CP = "log4j-1.2 servlet-2.3 logkit"
  
 diff --git a/recipes-core/jakarta-commons/commons-net_1.4.1.bb b/recipes-core/jakarta-commons/commons-net_1.4.1.bb
-index 275ebb9..239907e 100644
+index 239907e..ec8a3df 100644
 --- a/recipes-core/jakarta-commons/commons-net_1.4.1.bb
 +++ b/recipes-core/jakarta-commons/commons-net_1.4.1.bb
-@@ -10,7 +10,6 @@ SRC_URI = "http://archive.apache.org/dist/commons/net/source/${BP}-src.tar.gz"
- S = "${WORKDIR}/${BP}"
- 
+@@ -12,7 +12,7 @@ S = "${WORKDIR}/${BP}"
  DEPENDS += "oro"
--DEPENDS_virtclass-native += "oro-native"
  
  RDEPENDS_${PN} = "liboro-java"
- RDEPENDS_${PN}_virtclass-native = ""
-diff --git a/recipes-core/jakarta-libs/bsf_2.4.0.bb b/recipes-core/jakarta-libs/bsf_2.4.0.bb
-index 0213004..b312c42 100644
---- a/recipes-core/jakarta-libs/bsf_2.4.0.bb
-+++ b/recipes-core/jakarta-libs/bsf_2.4.0.bb
-@@ -9,7 +9,6 @@ SRC_URI = "http://archive.apache.org/dist/jakarta/bsf/source/bsf-src-${PV}.tar.g
- inherit java-library
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
  
- DEPENDS = "jacl commons-logging rhino xalan-j bcel"
--DEPENDS_virtclass-native = "jacl-native commons-logging-native rhino-native xalan-j-native bcel-native"
+ CP = "oro"
  
- do_compile() {
-   mkdir -p build
-diff --git a/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb b/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
-index b4ccd2c..2f04e96 100644
---- a/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
-+++ b/recipes-core/jakarta-libs/log4j1.2_1.2.17.bb
-@@ -10,7 +10,6 @@ SRC_URI = "http://archive.apache.org/dist/logging/log4j/${PV}/log4j-${PV}.tar.gz
- inherit java-library
+diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
+index cad91a2..da1ca29 100644
+--- a/recipes-core/jamvm/jamvm.inc
++++ b/recipes-core/jamvm/jamvm.inc
+@@ -4,14 +4,14 @@ LICENSE = "GPL-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=0636e73ff0215e8d672dc4c32c317bb3"
  
- DEPENDS = "gnumail gnujaf"
--DEPENDS_virtclass-native = "gnumail-native gnujaf-native"
+ DEPENDS = "zlib classpath virtual/javac-native libffi virtual/java-initial-native"
+-DEPENDS_virtclass-native = "virtual/java-initial-native classpath-initial-native zlib-native classpath-native ecj-initial-native libffi-native"
++DEPENDS_class-native = "virtual/java-initial-native classpath-initial-native zlib-native classpath-native ecj-initial-native libffi-native"
  
- S = "${WORKDIR}/apache-log4j-${PV}"
+ RDEPENDS_${PN} = "classpath"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
  
-diff --git a/recipes-core/jakarta-libs/logkit_1.2.2.bb b/recipes-core/jakarta-libs/logkit_1.2.2.bb
-index c3b612b..8b4de11 100644
---- a/recipes-core/jakarta-libs/logkit_1.2.2.bb
-+++ b/recipes-core/jakarta-libs/logkit_1.2.2.bb
-@@ -11,7 +11,6 @@ inherit java-library
- S = "${WORKDIR}/${BP}-dev"
+-PROVIDES_virtclass-native = "virtual/java-native"
++PROVIDES_class-native = "virtual/java-native"
+ RPROVIDES_${PN} = "java2-runtime"
+-RPROVIDES_${PN}_virtclass-native = ""
++RPROVIDES_${PN}_class-native = ""
  
- DEPENDS = "oro servlet2.3 gnumail gnujaf log4j1.2 avalon-framework-api"
--DEPENDS_virtclass-native = "oro-native servlet2.3-native gnumail-native gnujaf-native log4j1.2-native avalon-framework-api-native"
+ BBCLASSEXTEND = "native"
  
- do_compile() {
-   mkdir -p build
+@@ -21,7 +21,7 @@ inherit java autotools update-alternatives pkgconfig relative_symlinks
+ # This uses 32 bit arm, so force the instruction set to arm, not thumb
+ ARM_INSTRUCTION_SET = "arm"
+ 
+-do_configure_append_virtclass-native() {
++do_configure_append_class-native() {
+ 	sed -i -e"s|STAGING_LIBDIR_NATIVE|${STAGING_LIBDIR_NATIVE}|g" \
+ 		-e "s|STAGING_DATADIR_NATIVE|${STAGING_DATADIR_NATIVE}|g" \
+ 	${WORKDIR}/java
+@@ -31,14 +31,14 @@ do_configure_append_virtclass-native() {
+ EXTRA_OECONF = "--with-classpath-install-dir=${prefix} --libdir=${libdir}/jamvm --enable-ffi"
+ 
+ # Needed for big compilation targets like OpenJDK
+-CFLAGS_append_virtclass-native = " -DDEFAULT_MAX_HEAP=1024*MB"
++CFLAGS_append_class-native = " -DDEFAULT_MAX_HEAP=1024*MB"
+ 
+ # Enforce usage of ecj-initial.
+ EXTRA_OEMAKE = "JAVAC=${STAGING_BINDIR_NATIVE}/ecj-initial \
+                 GLIBJ_ZIP=${STAGING_DATADIR_NATIVE}/classpath/glibj.zip \
+                "
+ 
+-do_install_append_virtclass-native() {
++do_install_append_class-native() {
+ 	install -d ${D}${bindir}
+ 	install -m 0755 ${WORKDIR}/java ${D}${bindir}/java
+ 
 diff --git a/recipes-core/jcraft/jsch_0.1.40.bb b/recipes-core/jcraft/jsch_0.1.40.bb
-index 337a8eb..0be0883 100644
+index 0be0883..6450540 100644
 --- a/recipes-core/jcraft/jsch_0.1.40.bb
 +++ b/recipes-core/jcraft/jsch_0.1.40.bb
-@@ -8,7 +8,6 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/jsch/jsch-${PV}.zip"
- inherit java-library
- 
+@@ -10,7 +10,7 @@ inherit java-library
  DEPENDS = "jzlib"
--DEPENDS_virtclass-native = "jzlib-native"
  
  RDEPENDS_${PN} = "libjzlib-java"
- RDEPENDS_${PN}_virtclass-native = ""
-diff --git a/recipes-core/xalan-j/xalan-j_2.7.1.bb b/recipes-core/xalan-j/xalan-j_2.7.1.bb
-index 317b3c9..f7ee260 100644
---- a/recipes-core/xalan-j/xalan-j_2.7.1.bb
-+++ b/recipes-core/xalan-j/xalan-j_2.7.1.bb
-@@ -10,9 +10,6 @@ HOMEPAGE = "http://xml.apache.org/xalan-j"
- PR = "r1"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
  
- DEPENDS = "xerces-j regexp jlex cup jaxp1.3 bcel"
--DEPENDS_virtclass-native = " \
--	xerces-j-native regexp-native jlex-native cup-native jaxp1.3-native bcel-native \
--	"
+ do_compile() {
+   mkdir -p build
+diff --git a/recipes-core/jikes/jikes_1.22.bb b/recipes-core/jikes/jikes_1.22.bb
+index a35cfcf..8f97a1c 100644
+--- a/recipes-core/jikes/jikes_1.22.bb
++++ b/recipes-core/jikes/jikes_1.22.bb
+@@ -14,8 +14,8 @@ inherit autotools update-alternatives relative_symlinks
+ BBCLASSEXTEND = "native"
  
- SRC_URI = "\
- 	http://archive.apache.org/dist/xml/${BPN}/${BPN}_2_7_1-src.tar.gz;name=archive \
+ RDEPENDS_${PN} = "classpath"
+-PROVIDES_virtclass-native = ""
+-RDEPENDS_${PN}_virtclass-native = ""
++PROVIDES_class-native = ""
++RDEPENDS_${PN}_class-native = ""
+ 
+ EXTRA_OECONF = "--disable-fp-emulation --enable-source15"
+ 
+diff --git a/recipes-core/jlex/jlex_1.2.6.bb b/recipes-core/jlex/jlex_1.2.6.bb
+index bb67a46..8cb0316 100644
+--- a/recipes-core/jlex/jlex_1.2.6.bb
++++ b/recipes-core/jlex/jlex_1.2.6.bb
+@@ -4,7 +4,7 @@ LICENSE = "JLEX"
+ LIC_FILES_CHKSUM = "file://Main.java;beginline=148;endline=166;md5=9bf4a6a951053991db64f9d7330d648a"
+ 
+ RDEPENDS_${PN} = "java2-runtime"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
+ 
+ inherit java-library
+ 
+diff --git a/recipes-core/rhino/rhino_1.7r4.bb b/recipes-core/rhino/rhino_1.7r4.bb
+index 30d5a62..df6a0f7 100644
+--- a/recipes-core/rhino/rhino_1.7r4.bb
++++ b/recipes-core/rhino/rhino_1.7r4.bb
+@@ -20,7 +20,7 @@ PACKAGES = "${JPN} rhino"
+ 
+ FILES_${PN} = "${bindir}/rhino ${bindir}/rhino-jsc"
+ RDEPENDS_${PN} = "java2-runtime ${JPN}"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
+ 
+ do_compile() {
+ 	mkdir -p build
 diff --git a/recipes-core/xerces-j/xerces-j_2.11.0.bb b/recipes-core/xerces-j/xerces-j_2.11.0.bb
-index 4a0cc91..1b96f00 100644
+index 1b96f00..98ef32f 100644
 --- a/recipes-core/xerces-j/xerces-j_2.11.0.bb
 +++ b/recipes-core/xerces-j/xerces-j_2.11.0.bb
-@@ -21,7 +21,6 @@ inherit java-library
- JPN = "libxerces2-java"
- 
+@@ -23,7 +23,7 @@ JPN = "libxerces2-java"
  DEPENDS = "fastjar-native jaxp1.3 xml-commons-resolver1.1"
--DEPENDS_virtclass-native = "fastjar-native jaxp1.3-native xml-commons-resolver1.1-native"
  
  RDEPENDS_${PN} = "libjaxp1.3-java libxml-commons-resolver1.1-java"
- RDEPENDS_${PN}_virtclass-native = ""
-diff --git a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-index 77556fc..42ce703 100644
---- a/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-+++ b/recipes-core/xml-commons/xml-commons-resolver1.1_1.2.bb
-@@ -11,7 +11,6 @@ inherit java-library
- S = "${WORKDIR}/xml-commons-resolver-${PV}"
- 
- DEPENDS = "fastjar-native jaxp1.3"
--DEPENDS_virtclass-native = "fastjar-native jaxp1.3-native"
+-RDEPENDS_${PN}_virtclass-native = ""
++RDEPENDS_${PN}_class-native = ""
  
  do_unpackpost[dirs] = "${B}"
  do_unpackpost() {
