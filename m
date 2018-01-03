@@ -1,47 +1,29 @@
-Return-Path: <pbarker@toganlabs.com>
-Received: from mail-wm0-f46.google.com (mail-wm0-f46.google.com [74.125.82.46])
-	by mail.openembedded.org (Postfix) with ESMTP id 0E47B78295
+Return-Path: <philip@balister.org>
+X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
+	Wed, 03 Jan 2018 15:56:20 UTC
+Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
+	by mail.openembedded.org (Postfix) with ESMTP id D496A6FFD4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 14:47:50 +0000 (UTC)
-Received: by mail-wm0-f46.google.com with SMTP id f140so3085138wmd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jan 2018 06:47:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=toganlabs-com.20150623.gappssmtp.com; s=20150623;
-	h=mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=1UdmsqLukuVdEZ7qTxlJJp8oG2bKnbu3stWANeqSLLI=;
-	b=BT0Gv0TxfrgNIPfgkzcN02ccJwjs/tcYSAnt7LpJuiv+hNhVs9TP1wIqfgllBOHYbJ
-	jms0qG1eI5PfBT+fefimKN0O40NcvZaRqg1a3bCehGpZmp00l8QrQ/91YtY2tjBEiTPY
-	m1YKdRbqdER8iQ5QVFqmc7qOtaLMtvLVR8H7yynBLflp9PIUshfk5wleb/VPUjhsARRe
-	L1NEa4TNeWqrhN84vPVHUgQ2d/R3ypHPVL6SPG0nsdPZiasRr8ZT38bLBtC7FbDb47wn
-	ODV8jrH3B4U/mCADOPVZNTzx+bEyrBR1BVHARmshSHXSrf5X+SFmZHVTl8FYm5OYlZkH
-	NAJQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:from:date:message-id:subject:to
-	:content-transfer-encoding;
-	bh=1UdmsqLukuVdEZ7qTxlJJp8oG2bKnbu3stWANeqSLLI=;
-	b=SJXLGORTLDqdnwZobVkhKQAmmTd2L7mwNegL5b09QivTanTLDa0dqE3Z88viDo6ZOW
-	cB34HUxgPH5hMLuyQoMGdV/o4IoSRReY30V1s3IgV23bb+nzaM1T+6J5yN/5U5XbNzCa
-	nbh6M73nN3s9OVvIlofALlQ9pvWG5vKpyn/827q6L9zWE+q2dwPfP58lYjxV7JPhenBB
-	DGTVUSnd9qoZl2vxI4dzMwXhW7DFrxCyGBSKyadjGtomLIDpQnhozCaxh08t7iTqUg9m
-	QbMbxkf3lRuJWIzajs/Isk4PCjTY7eY8IgBDrGIlSD+6J3hkyZEhqy9VNC7GgWxTSUCJ
-	V2vA==
-X-Gm-Message-State: AKGB3mIgCTfSfocYtE9ss0u2rb/hfo7qR+NzCBWMXvRslfyAYnHl3ahu
-	q1uLHtmazQbvstkRj/X2IlMwjiN9BnP1rVF2tybHfg==
-X-Google-Smtp-Source: ACJfBosIWSn5L+ngjXd85hM5gnXuAKUDpRdfq6v1XGHDSfz65drjjQ+hb1r2/iJem+KGZSndZY/55uwZsgQlVgNit1M=
-X-Received: by 10.28.156.10 with SMTP id f10mr1782855wme.128.1514990871665;
-	Wed, 03 Jan 2018 06:47:51 -0800 (PST)
+	Wed,  3 Jan 2018 15:56:20 +0000 (UTC)
+Received: (qmail 25293 invoked by uid 1003); 3 Jan 2018 15:49:40 -0000
+Received: from unknown (HELO ?192.168.11.142?)
+	(philip@opensdr.com@108.44.109.186)
+	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
+	3 Jan 2018 15:49:39 -0000
+To: Derek Straka <derek@asterius.io>, Yi Zhao <yi.zhao@windriver.com>
+References: <1514941115-27329-1-git-send-email-yi.zhao@windriver.com>
+	<CADNbA1pszSeHvab_oNg9MzqNz4owuxcGc2jZWBWBKjDeiv9Fkw@mail.gmail.com>
+	<fa40d465-6b8a-1cee-00ed-c349d30ae0a7@windriver.com>
+	<CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
+From: Philip Balister <philip@balister.org>
+Message-ID: <0e15500b-cb21-4a4b-a2d0-23b486906e48@balister.org>
+Date: Wed, 3 Jan 2018 10:49:35 -0500
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.0
 MIME-Version: 1.0
-Received: by 10.223.182.79 with HTTP; Wed, 3 Jan 2018 06:47:51 -0800 (PST)
-From: Paul Barker <pbarker@toganlabs.com>
-Date: Wed, 3 Jan 2018 14:47:51 +0000
-Message-ID: <CAPyrkgxupO+=0+bmA=+JO+zs=t_i=Pm06GJyRFvYfTb5sXjSBA@mail.gmail.com>
-To: OE-core <openembedded-core@lists.openembedded.org>, 
-	openembedded-devel@lists.openembedded.org, 
-	openembedded-members@lists.openembedded.org, yocto <yocto@yoctoproject.org>
-Subject: Slideshow for FOSDEM
+In-Reply-To: <CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
+Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Re: [meta-oe][PATCH] stat: add the recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,36 +36,222 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 14:47:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 03 Jan 2018 15:56:21 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-MW
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+On 01/02/2018 08:47 PM, Derek Straka wrote:
+> Makes sense.  I'm all for letting someone add it back if they'd like to use
+> it over coreutils (understanding that it isn't maintained), but we can let
+> others chime in.
 
-As we've only got one table at FOSDEM this year we're not going to
-have space for as many bits of hardware as usual. I'd still like us to
-show off the project and what people are building with OpenEmbedded &
-Yocto Project though. Given the limited space I think the best way to
-do this would be to put a slideshow on my laptop.
+meta-oe is not a place to dump recipes for unmaintained software. The
+recipe will end up failing, getting blacklisted and removed. Let's save
+the maintainers time. If someone needs it that badly, let them carry it
+in their own layer.
 
-I've made a start on this here:
-https://docs.google.com/presentation/d/1KYxhsxO-8GxhAreE0GKnTOCPdY6_4uXYIEp=
-6Lc55MB8/edit?usp=3Dsharing
+Philip
 
-I've made this publicly editable so please feel free to add slides for
-any OE features you want to show off and any projects (professional or
-hobbyist) built with OE. If anyone can add a slide on project history
-that would also be great. I'd also like a slide on the latest release
-and the new features added. Photos of hardware projects using OE and
-features like Toaster would be especially welcome!
-
-I'll give this a final edit before FOSDEM and the put it on rotation
-on a laptop at the stand. Hopefully it will be useful for future
-events as well.
-
-Thanks all,
-
---=20
-Paul Barker
-Tog=C3=A1n Labs Ltd
+> 
+> -Derek
+> 
+> On Tue, Jan 2, 2018 at 8:38 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+> 
+>>
+>>
+>> 在 2018年01月03日 09:20, Derek Straka 写道:
+>>
+>> Is there any compelling reason to include it in meta-oe at all?  It seems
+>> like dropping it altogether would be a better approach.
+>>
+>>
+>> I have no objection  to drop it. But I'm not sure if someone else use it
+>> ...
+>>
+>> Yi
+>>
+>>
+>>
+>> -Derek
+>>
+>> On Tue, Jan 2, 2018 at 7:58 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
+>>
+>>> The stat hasn't any update since 2002. All modern Linux distributions
+>>> use stat from coreutils as default. It is no longer needed by oe-core.
+>>> Move it to meta-oe.
+>>>
+>>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+>>> ---
+>>>  .../stat/stat-3.3/fix-error-return.patch           | 16 +++++
+>>>  .../stat/stat-3.3/fix-security-format.patch        | 68
+>>> ++++++++++++++++++++++
+>>>  meta-oe/recipes-extended/stat/stat_3.3.bb          | 35 +++++++++++
+>>>  3 files changed, 119 insertions(+)
+>>>  create mode 100644 meta-oe/recipes-extended/stat/
+>>> stat-3.3/fix-error-return.patch
+>>>  create mode 100644 meta-oe/recipes-extended/stat/
+>>> stat-3.3/fix-security-format.patch
+>>>  create mode 100644 meta-oe/recipes-extended/stat/stat_3.3.bb
+>>>
+>>> diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+>>> b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+>>> new file mode 100644
+>>> index 0000000..032995d
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+>>> @@ -0,0 +1,16 @@
+>>> +This patch fixies the wrong return code of stat -h.
+>>> +
+>>> +Upstream-Status: Pending
+>>> +Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
+>>> +
+>>> +--- stat-3.3/stat.c.orig       2013-08-22 10:49:45.000000000 +0800
+>>> ++++ stat-3.3/stat.c    2013-08-22 10:50:31.000000000 +0800
+>>> +@@ -845,7 +845,7 @@
+>>> +     fprintf(stderr, "\t\t%%S - Security ID in SE-Linux\n");
+>>> +     fprintf(stderr, "\t\t%%C - Security context in SE-Linux\n");
+>>> +     fprintf(stderr, "\t\t%%d - Free file nodes in file system\n");
+>>> +-    exit(1);
+>>> ++    exit(0);
+>>> + }
+>>> +
+>>> +
+>>> diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+>>> b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+>>> new file mode 100644
+>>> index 0000000..0c01ed0
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+>>> @@ -0,0 +1,68 @@
+>>> +stat: Fixing security formatting issues
+>>> +
+>>> +Fix security formatting issues related to printf without NULL argument
+>>> +
+>>> +stat.c: In function 'print_human_access':
+>>> +stat.c:292:13: error: format not a string literal and no format
+>>> arguments [-Werror=format-security]
+>>> +     printf (access);
+>>> +             ^
+>>> +stat.c: In function 'print_human_time':
+>>> +stat.c:299:57: error: format not a string literal and no format
+>>> arguments [-Werror=format-security]
+>>> +   if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
+>>> +                                                         ^
+>>> +stat.c: In function 'print_it':
+>>> +stat.c:613:6: error: format not a string literal and no format arguments
+>>> [-Werror=format-security]
+>>> +      printf(b);
+>>> +      ^
+>>> +stat.c:642:6: error: format not a string literal and no format arguments
+>>> [-Werror=format-security]
+>>> +      printf(b);
+>>> +      ^
+>>> +
+>>> +[YOCTO #9550]
+>>> +[https://bugzilla.yoctoproject.org/show_bug.cgi?id=9550]
+>>> +
+>>> +Upstream-Status: Pending
+>>> +
+>>> +Signed-off-by: Edwin Plauchu <edwin.plauchu.camacho@intel.com>
+>>> +
+>>> +diff --git a/stat.c b/stat.c
+>>> +index 1ed07a9..2be6f62 100644
+>>> +--- a/stat.c
+>>> ++++ b/stat.c
+>>> +@@ -289,15 +289,15 @@ void print_human_access(struct stat *statbuf)
+>>> +     default:
+>>> +       access[0] = '?';
+>>> +     }
+>>> +-    printf (access);
+>>> ++    fputs(access,stdout);
+>>> + }
+>>> +
+>>> + void print_human_time(time_t *t)
+>>> + {
+>>> +   char str[40];
+>>> +
+>>> +-  if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
+>>> +-  else printf("Cannot calculate human readable time, sorry");
+>>> ++  if (strftime(str, 40, "%c", localtime(t)) > 0) fputs(str,stdout);
+>>> ++  else fputs("Cannot calculate human readable time, sorry",stdout);
+>>> + }
+>>> +
+>>> + /* print statfs info */
+>>> +@@ -610,7 +610,7 @@ void print_it(char *masterformat, char *filename,
+>>> +       {
+>>> +           strcpy (pformat, "%");
+>>> +           *m++ = '\0';
+>>> +-          printf(b);
+>>> ++          fputs(b,stdout);
+>>> +
+>>> +           /* copy all format specifiers to our format string */
+>>> +           while (isdigit(*m) || strchr("#0-+. I", *m))
+>>> +@@ -639,7 +639,7 @@ void print_it(char *masterformat, char *filename,
+>>> +       }
+>>> +       else
+>>> +       {
+>>> +-          printf(b);
+>>> ++          fputs(b,stdout);
+>>> +           b = NULL;
+>>> +       }
+>>> +     }
+>>> diff --git a/meta-oe/recipes-extended/stat/stat_3.3.bb
+>>> b/meta-oe/recipes-extended/stat/stat_3.3.bb
+>>> new file mode 100644
+>>> index 0000000..8ac8e89
+>>> --- /dev/null
+>>> +++ b/meta-oe/recipes-extended/stat/stat_3.3.bb
+>>> @@ -0,0 +1,35 @@
+>>> +SUMMARY = "Command line file status display utility"
+>>> +HOMEPAGE = "http://www.ibiblio.org/pub/Linux/utils/file/"
+>>> +DESCRIPTION = "Displays all information about a file that the stat()
+>>> call provides and all information about a filesystem that statfs()
+>>> provides."
+>>> +SECTION = "console/utils"
+>>> +LICENSE = "GPLv2"
+>>> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39886b077fd072e876e5c4c16310b631
+>>> \
+>>> +                    file://GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
+>>> +
+>>> +SRC_URI = "http://www.ibiblio.org/pub/Linux/utils/file/${BP}.tar.gz \
+>>> +           file://fix-security-format.patch \
+>>> +           file://fix-error-return.patch"
+>>> +
+>>> +SRC_URI[md5sum] = "37e247e8e400ad9205f1b0500b728fd3"
+>>> +SRC_URI[sha256sum] = "7071f0384a423a938dd542c1f0854
+>>> 7a02824f6359acd3ef3f944b2c4c2d1ee09"
+>>> +
+>>> +EXTRA_OEMAKE = "-e MAKEFLAGS="
+>>> +
+>>> +do_install() {
+>>> +       install -d ${D}${base_bindir} ${D}${mandir}/man1
+>>> +       install -m 755 stat ${D}${base_bindir}/stat.stat
+>>> +       install -m 644 stat.1 ${D}${mandir}/man1
+>>> +}
+>>> +
+>>> +inherit update-alternatives
+>>> +
+>>> +ALTERNATIVE_${PN} = "stat"
+>>> +ALTERNATIVE_PRIORITY[stat] = "200"
+>>> +ALTERNATIVE_LINK_NAME[stat] = "${base_bindir}/stat"
+>>> +ALTERNATIVE_TARGET[stat] = "${base_bindir}/stat.stat"
+>>> +
+>>> +ALTERNATIVE_${PN}-doc = "stat.1"
+>>> +ALTERNATIVE_LINK_NAME[stat.1] = "${mandir}/man1/stat.1"
+>>> +
+>>> +BBCLASSEXTEND = "native"
+>>> +
+>>> --
+>>> 2.7.4
+>>>
+>>> --
+>>> _______________________________________________
+>>> Openembedded-devel mailing list
+>>> Openembedded-devel@lists.openembedded.org
+>>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>>>
+>>
+>>
+>>
 
