@@ -1,51 +1,51 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-yb0-f194.google.com (mail-yb0-f194.google.com
-	[209.85.213.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 486D277FC9
+Received: from mail-yw0-f193.google.com (mail-yw0-f193.google.com
+	[209.85.161.193])
+	by mail.openembedded.org (Postfix) with ESMTP id D327B7807A
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 01:47:56 +0000 (UTC)
-Received: by mail-yb0-f194.google.com with SMTP id 5so95260ybp.4
+	Wed,  3 Jan 2018 01:47:59 +0000 (UTC)
+Received: by mail-yw0-f193.google.com with SMTP id v190so89428ywg.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 02 Jan 2018 17:47:57 -0800 (PST)
+	Tue, 02 Jan 2018 17:48:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=vNIX0b8UzBXSu2MWmWQ9p92Afg8tfv/JGi845eEbUSw=;
-	b=Bl9hhH02CUHok5cJtHpnpkmOQJYr3rWF+yuEd2KrIXjkXxMUrLq//4iSwlS3oqVSS6
-	VBIvsEzP3gUUhmIsBT3IyCETyYCjJtbOmFEKOJkn2M1tvTfkAYmnpdtozGMHfmvqK9dT
-	hOcjBbBgYD/kFIB8Ne0qO7A8gKjToZ8k7LAARai+ZRlwRUv6CdbEpAkpyo89ZLb008Rr
-	Eh+qVCQ2qwWjOAmZlMRCKz/eBRsHk6rYDtln5q5JL2qktPTMbO9Y9hbDCmIHIKPw9mB1
-	FMoTBVQvVpKOCbUSFmOp2iLlrKZG7kI3XCWU7u7xJjkL622Pwj+yHrxV/KplrKRMRcfA
-	DW9Q==
+	bh=MoILLBGe8x1Y1zjd7WyHaqHbsmimkwBeqGnBc1KgAz8=;
+	b=JOUGOX6LvLQhjblwffFXMfc4SJo4U8TO+4g0VXjY7vwbmxXWMPKH5VXS93X8oHy6yn
+	c/xxcTTjgifwAKRJNK2gduXdViyMe91W5ra0qn8OdsKAuv1pA9VMsCprmL6pzyHgzCsv
+	NBBCSK5uqjH9ker4nAJho53BH1LGx3rOf9IF+o9NCpVonmDek966YYHBTJAluGOgLGMV
+	NL5+9MWfI/kJvzxtg+neyeW5DsRK+UQMG5aHYsCDtyXp7K79nv7AsVCcvwebEoreUuzf
+	Oz40+24MF5sbCNaYJEBmUaFFw55JgtrnKtoZpdNEAm87UqvLPnGLeMkxO7CTkhAU+Vcy
+	m4Gw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=vNIX0b8UzBXSu2MWmWQ9p92Afg8tfv/JGi845eEbUSw=;
-	b=gYqCNi7ftQKLMustTuLn4nT/l0x6KvhGk4yzd7EfYuNohxAn7TQuq5T1qQs6sOOC6f
-	FNOa5znhmJ6E8ed/LV/cehwsxd8xf2T6qa1SU5n86VXNMBtK9JMxCYyZqn7LBZHYNh2A
-	LQ0+6LgpEH7U8ghQRAtefyKLeywUXV9MbrusaeDEB3VeJBzIqfFMFlQtNj7ld54sDMJL
-	UW6igMpqrq8dLD+YmlAflMqto8lm/gKi4KVA6qTS9KyJB10/YqnZ7ZaIshM2Bl4xbQN+
-	G4Ei7cD+SaVAa6QbpHoQnIhKeb3iUGIBCSpqw/VygQMrQEuz4lcQ5usZ/WiIpmx1r2dx
-	n8Cw==
-X-Gm-Message-State: AKGB3mJyydgwf5J+SEWx7Vf0C5qX5jpIatlEmQVL8rR1Yk12EcszMVm9
-	4TEl2d4Vgd0o8DdJIwCrNQR95UdX
-X-Google-Smtp-Source: ACJfBotMVAmIxQeW0Dax2rt6kDDFRkw+TZBTqiMpMIOix+LQU71r6LINStSxMFhx7hq2JGOyZ9tPKQ==
-X-Received: by 10.37.38.19 with SMTP id m19mr36178508ybm.45.1514944077404;
-	Tue, 02 Jan 2018 17:47:57 -0800 (PST)
+	bh=MoILLBGe8x1Y1zjd7WyHaqHbsmimkwBeqGnBc1KgAz8=;
+	b=Z/g+QIcHTowvVJIi5QnXxmORxrR+mcep76KCeCg99e+RQLAhxrTpz52giNfuDuvx5t
+	/JEJmzw6eQhRrqhzydPq2nKw9mnw9bSBgeMqFnLRALY+avy/QIbhxxdJVixkAQ2h7IZ/
+	+bqaiu8zv72WHnpGpFfgsOzacS2r2p5+IuloiGziz7d5FU7F4kdDx6e0+0mZaOEjDhTa
+	3wku47+itZ4O8DVaAyTJnxkg17VKJzLBwUIjgC4iXdlf1A8OyDSpiDtPanOqhnM7aFn+
+	EUcRpMzsPxcu+l186jAuLM7R8w3NLHeAZYIv+abW3IOHdorbTR/5dHMTrp5A5cy2WU7i
+	mysA==
+X-Gm-Message-State: AKGB3mJaExqRyT8kT5THuMoZm4TjtfU3VQ6DsbKm7eY/bDabccTY4jVW
+	dwPvEBdG8prjR+a5Z3Z4Jy6OvzKV
+X-Google-Smtp-Source: ACJfBougERXv8BQAXHfvI1mZ7nE4kbt6hyO+SzVvvoP674IVjsP6oKBlsF3JiL9OgSQcrRvWutVKtQ==
+X-Received: by 10.129.58.1 with SMTP id h1mr34745049ywa.2.1514944080799;
+	Tue, 02 Jan 2018 17:48:00 -0800 (PST)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([45.77.34.21]) by smtp.gmail.com with ESMTPSA id
-	h133sm20457657ywb.52.2018.01.02.17.47.55
+	h133sm20457657ywb.52.2018.01.02.17.47.59
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Tue, 02 Jan 2018 17:47:56 -0800 (PST)
+	Tue, 02 Jan 2018 17:48:00 -0800 (PST)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Jan 2018 02:47:26 +0100
-Message-Id: <1514944050-12039-4-git-send-email-liu.ming50@gmail.com>
+Date: Wed,  3 Jan 2018 02:47:27 +0100
+Message-Id: <1514944050-12039-5-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1514944050-12039-1-git-send-email-liu.ming50@gmail.com>
 References: <1514944050-12039-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-java][PATCH 3/7] commons-cli: extend native bbclass
+Subject: [meta-java][PATCH 4/7] commons-codec: extend native bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -58,27 +58,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 01:47:56 -0000
+X-List-Received-Date: Wed, 03 Jan 2018 01:48:00 -0000
 
 From: Ming Liu <liu.ming50@gmail.com>
 
 Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- recipes-core/jakarta-commons/commons-cli_1.1.bb | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ recipes-core/jakarta-commons/commons-codec_1.3.bb | 2 ++
+ 1 file changed, 2 insertions(+)
 
-diff --git a/recipes-core/jakarta-commons/commons-cli_1.1.bb b/recipes-core/jakarta-commons/commons-cli_1.1.bb
-index 52dc0ce..68ba187 100644
---- a/recipes-core/jakarta-commons/commons-cli_1.1.bb
-+++ b/recipes-core/jakarta-commons/commons-cli_1.1.bb
-@@ -7,7 +7,7 @@ DESCRIPTION = "Java argument parsing helper classes"
+diff --git a/recipes-core/jakarta-commons/commons-codec_1.3.bb b/recipes-core/jakarta-commons/commons-codec_1.3.bb
+index 0377168..fa74f6c 100644
+--- a/recipes-core/jakarta-commons/commons-codec_1.3.bb
++++ b/recipes-core/jakarta-commons/commons-codec_1.3.bb
+@@ -11,3 +11,5 @@ S = "${WORKDIR}/${BP}"
  
- SRC_URI = "http://archive.apache.org/dist/commons/cli/source/${BP}-src.tar.gz"
- 
--
--
- SRC_URI[md5sum] = "ccc1aa194132e2387557bbb7f65391f4"
- SRC_URI[sha256sum] = "929eb140c136673e7f5029cd206c81b3c1f5e66bba0dfdcd021b9dd5596356d2"
+ SRC_URI[md5sum] = "af3c3acf618de6108d65fcdc92b492e1"
+ SRC_URI[sha256sum] = "12effcf3fea025bd34edbfec60a6216ca453fb27e781d8e5783caf75fd33d90e"
 +
 +BBCLASSEXTEND = "native"
 -- 
