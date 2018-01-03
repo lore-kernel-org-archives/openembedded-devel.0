@@ -1,57 +1,25 @@
-Return-Path: <akuster808@gmail.com>
-Received: from mail-pl0-f47.google.com (mail-pl0-f47.google.com
-	[209.85.160.47])
-	by mail.openembedded.org (Postfix) with ESMTP id 8869F71BA6
+Return-Path: <Yi.Zhao@windriver.com>
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id CBA5B71C71
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2017 23:02:50 +0000 (UTC)
-Received: by mail-pl0-f47.google.com with SMTP id bi12so26214432plb.6
+	Wed,  3 Jan 2018 01:00:14 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w0310Fbq006619
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 31 Dec 2017 15:02:52 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=subject:to:references:from:message-id:date:user-agent:mime-version
-	:in-reply-to:content-transfer-encoding:content-language;
-	bh=/aZkaO4/yR6i0Z3F69fQzwtaLpS06MGV2FRz7pWQi/g=;
-	b=gwMFJjxNeO1S35UQaogyUC5ZtgJVHjThJD4MQV/uNLpUaoa9Egw7QJFMwC88DQ4pa8
-	PXmWyR7cE8HV/vLf/xppr2q3C2aIcJHDyIcnq4iqNpo5DFrlzG/Jz+AGsF3FQZolwCfQ
-	nlSUBxfm/hdF0IlTdAZUNXgcvOV6GolKpsl/CcCruYTMmsxQTK5ufG9+qYFdhaFdlGBn
-	r1XcBLcds52vovCX56GbmAbTkzNPDJbeF3RaPmqVUtZXJqe5Gb9nfyo9YscTtO2ESgm8
-	kehKUT7wHMA7xz+kGjKwfGjvRLtd7JeKoEuE6sJK34sIPdBBb+/g4Nt+MmsnrZn5EFpI
-	IznA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-transfer-encoding
-	:content-language;
-	bh=/aZkaO4/yR6i0Z3F69fQzwtaLpS06MGV2FRz7pWQi/g=;
-	b=kMPsJjpavPUvHTZ6n1I8w+nuP8C8h+0U83eA0IGmDOzzjG6SD5NG7BBKBJhi3Uk/Wo
-	JTjBhmaL7yMfejtP2kHElAU2b2TDV9lyfAsS5xBAHZzS/gwuBKSj69FkW7b7mSek+OE1
-	WL56GH8EiackCY8naHgT6JPcuNULA6t76+tkM1VBYPd4AVQI6bNBj9PHnC4kGemr2iPk
-	deqbg9PhoXXujUvQfjKTGAN3QQ98PzYawnTpP1psDzYhqYYryHIyWKylGeqr4fcLtVHS
-	OxCeTd0sCW0Gu3aV5rMf47K4AIa61Lseesy8mg13tdqM9tCceu2rKrD8by+mqn8NCQk3
-	G4sw==
-X-Gm-Message-State: AKGB3mIGsIz8dnUrlHktH1+Z4OVAlhQ9mj5zKhZdbdih0KUUQ7/nIfLc
-	S3+TcUICwUckD5nIqoo40l4Vxg==
-X-Google-Smtp-Source: ACJfBotpN/xpwIHLYHhRzVHMSO8mBrQ5zZI29v4VcdLlC69e5hjwp2FN53SsOUUd5VYNKKyfYi+Rhw==
-X-Received: by 10.84.194.163 with SMTP id h32mr40125171pld.335.1514761371613; 
-	Sun, 31 Dec 2017 15:02:51 -0800 (PST)
-Received: from ?IPv6:2601:202:4000:1184:20c4:d690:9df8:7161?
-	([2601:202:4000:1184:20c4:d690:9df8:7161])
-	by smtp.gmail.com with ESMTPSA id
-	r86sm91304305pfk.114.2017.12.31.15.02.50
-	for <openembedded-devel@lists.openembedded.org>
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Sun, 31 Dec 2017 15:02:51 -0800 (PST)
-To: openembedded-devel@lists.openembedded.org
-References: <1513780518-29657-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-	<CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
-From: akuster808 <akuster808@gmail.com>
-Message-ID: <59833560-334b-6ede-c412-a12b4a5040d2@gmail.com>
-Date: Sun, 31 Dec 2017 15:02:50 -0800
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
+	Tue, 2 Jan 2018 17:00:15 -0800
+Received: from localhost (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Tue, 2 Jan 2018 17:00:14 -0800
+From: Yi Zhao <yi.zhao@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 3 Jan 2018 08:58:35 +0800
+Message-ID: <1514941115-27329-1-git-send-email-yi.zhao@windriver.com>
+X-Mailer: git-send-email 2.7.4
 MIME-Version: 1.0
-In-Reply-To: <CA+chaQcxkcjy=GJFM5YjXpY_c9yOTsSypOQfzAQOSGnDQq3c8w@mail.gmail.com>
-Subject: Re: [meta-oe][PATCH] libyui-ncurses: new add
+X-Originating-IP: [128.224.162.134]
+Subject: [meta-oe][PATCH] stat: add the recipe from oe-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -64,220 +32,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 31 Dec 2017 23:02:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
-Content-Language: en-US
+X-List-Received-Date: Wed, 03 Jan 2018 01:00:14 -0000
+Content-Type: text/plain
 
+The stat hasn't any update since 2002. All modern Linux distributions
+use stat from coreutils as default. It is no longer needed by oe-core.
+Move it to meta-oe.
 
+Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+---
+ .../stat/stat-3.3/fix-error-return.patch           | 16 +++++
+ .../stat/stat-3.3/fix-security-format.patch        | 68 ++++++++++++++++++++++
+ meta-oe/recipes-extended/stat/stat_3.3.bb          | 35 +++++++++++
+ 3 files changed, 119 insertions(+)
+ create mode 100644 meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+ create mode 100644 meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+ create mode 100644 meta-oe/recipes-extended/stat/stat_3.3.bb
 
-On 12/27/2017 11:02 PM, Martin Jansa wrote:
-> This is missing in master now, because dnfdragora was merged.
-This should be in master now.
-
-- armin
->
-> Please use 4 spaces for indentation.
->
-> On Wed, Dec 20, 2017 at 3:35 PM, zhengrq <zhengrq.fnst@cn.fujitsu.com>
-> wrote:
->
->> Add a new recipe libyui-ncurses, which is a rdepend for dnfdragora.
->>
->> Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->> ---
->>  ...1-Fix-the-error-of-can-t-find-header-file.patch | 100
->> +++++++++++++++++++++
->>  .../recipes-graphics/libyui/libyui-ncurses_git.bb  |  50 +++++++++++
->>  2 files changed, 150 insertions(+)
->>  create mode 100644 meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
->> Fix-the-error-of-can-t-find-header-file.patch
->>  create mode 100644 meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
->>
->> diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
->> Fix-the-error-of-can-t-find-header-file.patch b/meta-oe/recipes-graphics/
->> libyui/libyui-ncurses/0001-Fix-the-error-of-can-t-find-header-file.patch
->> new file mode 100644
->> index 0000000..26b4c17
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses/0001-
->> Fix-the-error-of-can-t-find-header-file.patch
->> @@ -0,0 +1,100 @@
->> +From eb0086dc4ea8fe9cda069456287b3a29a2631d30 Mon Sep 17 00:00:00 2001
->> +From: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->> +Date: Wed, 13 Dec 2017 16:18:45 +0900
->> +Subject: [PATCH] Fix the error of can't find header file
->> +
->> +This fix is just for yocto.
->> +
->> +Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
->> +---
->> + src/NCApplication.cc | 2 +-
->> + src/NCstyle.h        | 2 +-
->> + src/NCurses.h        | 2 +-
->> + src/ncursesp.h       | 2 +-
->> + src/ncursesw.cc      | 2 +-
->> + src/ncursesw.h       | 4 ++--
->> + 6 files changed, 7 insertions(+), 7 deletions(-)
->> +
->> +diff --git a/src/NCApplication.cc b/src/NCApplication.cc
->> +index 5bcf969..510f034 100644
->> +--- a/src/NCApplication.cc
->> ++++ b/src/NCApplication.cc
->> +@@ -23,7 +23,7 @@
->> +
->> + /-*/
->> +
->> +-#include <ncursesw/curses.h>
->> ++#include <curses.h>
->> +
->> + #define  YUILogComponent "ncurses"
->> + #include <yui/YUILog.h>
->> +diff --git a/src/NCstyle.h b/src/NCstyle.h
->> +index a40d5a8..3657917 100644
->> +--- a/src/NCstyle.h
->> ++++ b/src/NCstyle.h
->> +@@ -25,7 +25,7 @@
->> + #ifndef NCstyle_h
->> + #define NCstyle_h
->> +
->> +-#include <ncursesw/ncurses.h>
->> ++#include <ncurses.h>
->> +
->> + #include <iosfwd>
->> + #include <string>
->> +diff --git a/src/NCurses.h b/src/NCurses.h
->> +index a07c6bf..d17d3c3 100644
->> +--- a/src/NCurses.h
->> ++++ b/src/NCurses.h
->> +@@ -34,7 +34,7 @@
->> + #include <yui/YWidget.h>
->> + #include <yui/YMenuItem.h>
->> +
->> +-#include <ncursesw/curses.h>  /* curses.h: #define  NCURSES_CH_T cchar_t
->> */
->> ++#include <curses.h>   /* curses.h: #define  NCURSES_CH_T cchar_t */
->> + #include <wchar.h>
->> +
->> + #include "ncursesw.h"
->> +diff --git a/src/ncursesp.h b/src/ncursesp.h
->> +index d478347..2fcfea5 100644
->> +--- a/src/ncursesp.h
->> ++++ b/src/ncursesp.h
->> +@@ -28,7 +28,7 @@
->> + #include <iosfwd>
->> +
->> + #include "ncursesw.h"
->> +-#include <ncursesw/panel.h>
->> ++#include <panel.h>
->> +
->> + class NCursesPanel : public NCursesWindow
->> + {
->> +diff --git a/src/ncursesw.cc b/src/ncursesw.cc
->> +index 3c771af..bb83210 100644
->> +--- a/src/ncursesw.cc
->> ++++ b/src/ncursesw.cc
->> +@@ -47,7 +47,7 @@
->> + #include <iostream>
->> + #include <stdlib.h>
->> + #include <string.h>
->> +-#include <ncursesw/term.h>
->> ++#include <term.h>
->> + #undef line
->> + #undef columns
->> +
->> +diff --git a/src/ncursesw.h b/src/ncursesw.h
->> +index d25923a..c140d37 100644
->> +--- a/src/ncursesw.h
->> ++++ b/src/ncursesw.h
->> +@@ -27,8 +27,8 @@
->> +
->> + #include <iosfwd>
->> +
->> +-#include <ncursesw/curses.h>
->> +-#include <ncursesw/etip.h>
->> ++#include <curses.h>
->> ++#include <etip.h>
->> + #include <cstdio>
->> + #include <cstdarg>
->> + #include <climits>
->> +--
->> +2.7.4
->> +
->> diff --git a/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
->> b/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
->> new file mode 100644
->> index 0000000..f378701
->> --- /dev/null
->> +++ b/meta-oe/recipes-graphics/libyui/libyui-ncurses_git.bb
->> @@ -0,0 +1,50 @@
->> +SUMMARY = "Character Based User Interface for libyui"
->> +LICENSE = "LGPLv3"
->> +LIC_FILES_CHKSUM = "file://COPYING.lgpl-3;md5=
->> e6a600fd5e1d9cbde2d983680233ad02 \
->> +                    file://COPYING.lgpl-2.1;md5=
->> 4fbd65380cdd255951079008b364516c \
->> +                   "
->> +
->> +SRC_URI = "git://github.com/libyui/libyui-ncurses.git \
->> +           "
->> +
->> +SRC_URI_append_class-target += " file://0001-Fix-the-error-of-
->> can-t-find-header-file.patch"
->> +
->> +PV = "2.48.3+git"
->> +SRCREV = "7b251c2ff541df6139f3d210d0a0a27d042926bd"
->> +
->> +S = "${WORKDIR}/git"
->> +
->> +inherit cmake gettext pkgconfig
->> +
->> +DEPENDS += "boost libyui ncurses"
->> +
->> +BBCLASSEXTEND = "nativesdk"
->> +
->> +do_configure_prepend () {
->> +         cd ${S}
->> +         git checkout bootstrap.sh
->> +         sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
->> bootstrap.sh
->> +         ./bootstrap.sh
->> +         mkdir -p ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
->> +         cp ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib/libyui.so*
->> ${PKG_CONFIG_SYSROOT_DIR}${base_prefix}/usr/lib64/
->> +         cd -
->> +         sed -i "s#\${YPREFIX}#\${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
->> ${S}/CMakeLists.txt
->> +         sed -i "s#/usr#${PKG_CONFIG_SYSROOT_DIR}${base_prefix}&#"
->> ${PKG_CONFIG_SYSROOT_DIR}${libdir}/cmake/libyui/
->> LibyuiLibraryDepends-release.cmake
->> +}
->> +
->> +do_install_append () {
->> +        if [ "${libdir}" = "${base_prefix}/usr/lib" ] && [ -d
->> ${D}/usr/lib64 ]; then
->> +            mv ${D}/usr/lib64 ${D}/usr/lib
->> +        fi
->> +}
->> +
->> +do_install_append_class-nativesdk () {
->> +        mkdir -p ${D}/${base_prefix}
->> +        mv ${D}/usr ${D}/${base_prefix}
->> +}
->> +
->> +FILES_${PN} += "${datadir}/*"
->> +
->> +FILES_${PN}-dev += "${libdir}/*"
->> --
->> 2.7.4
->>
->>
->>
->> --
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>
+diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+new file mode 100644
+index 0000000..032995d
+--- /dev/null
++++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
+@@ -0,0 +1,16 @@
++This patch fixies the wrong return code of stat -h.
++
++Upstream-Status: Pending
++Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
++
++--- stat-3.3/stat.c.orig	2013-08-22 10:49:45.000000000 +0800
+++++ stat-3.3/stat.c	2013-08-22 10:50:31.000000000 +0800
++@@ -845,7 +845,7 @@
++     fprintf(stderr, "\t\t%%S - Security ID in SE-Linux\n");
++     fprintf(stderr, "\t\t%%C - Security context in SE-Linux\n");
++     fprintf(stderr, "\t\t%%d - Free file nodes in file system\n");
++-    exit(1);
+++    exit(0);
++ }
++   
++ 
+diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+new file mode 100644
+index 0000000..0c01ed0
+--- /dev/null
++++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
+@@ -0,0 +1,68 @@
++stat: Fixing security formatting issues
++
++Fix security formatting issues related to printf without NULL argument 
++
++stat.c: In function 'print_human_access':
++stat.c:292:13: error: format not a string literal and no format arguments [-Werror=format-security]
++     printf (access);
++             ^
++stat.c: In function 'print_human_time':
++stat.c:299:57: error: format not a string literal and no format arguments [-Werror=format-security]
++   if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
++                                                         ^
++stat.c: In function 'print_it':
++stat.c:613:6: error: format not a string literal and no format arguments [-Werror=format-security]
++      printf(b);
++      ^
++stat.c:642:6: error: format not a string literal and no format arguments [-Werror=format-security]
++      printf(b);
++      ^
++
++[YOCTO #9550]
++[https://bugzilla.yoctoproject.org/show_bug.cgi?id=9550]
++
++Upstream-Status: Pending
++
++Signed-off-by: Edwin Plauchu <edwin.plauchu.camacho@intel.com>
++
++diff --git a/stat.c b/stat.c
++index 1ed07a9..2be6f62 100644
++--- a/stat.c
+++++ b/stat.c
++@@ -289,15 +289,15 @@ void print_human_access(struct stat *statbuf)
++     default:
++       access[0] = '?';
++     }
++-    printf (access);
+++    fputs(access,stdout);
++ }
++ 
++ void print_human_time(time_t *t)
++ {
++   char str[40];
++   
++-  if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
++-  else printf("Cannot calculate human readable time, sorry");
+++  if (strftime(str, 40, "%c", localtime(t)) > 0) fputs(str,stdout);
+++  else fputs("Cannot calculate human readable time, sorry",stdout);
++ }
++ 
++ /* print statfs info */
++@@ -610,7 +610,7 @@ void print_it(char *masterformat, char *filename,
++ 	{
++ 	    strcpy (pformat, "%");
++ 	    *m++ = '\0';
++-	    printf(b);
+++	    fputs(b,stdout);
++ 
++ 	    /* copy all format specifiers to our format string */
++ 	    while (isdigit(*m) || strchr("#0-+. I", *m))
++@@ -639,7 +639,7 @@ void print_it(char *masterformat, char *filename,
++ 	}
++ 	else
++ 	{
++-	    printf(b);
+++	    fputs(b,stdout);
++ 	    b = NULL;
++ 	}
++     }
+diff --git a/meta-oe/recipes-extended/stat/stat_3.3.bb b/meta-oe/recipes-extended/stat/stat_3.3.bb
+new file mode 100644
+index 0000000..8ac8e89
+--- /dev/null
++++ b/meta-oe/recipes-extended/stat/stat_3.3.bb
+@@ -0,0 +1,35 @@
++SUMMARY = "Command line file status display utility"
++HOMEPAGE = "http://www.ibiblio.org/pub/Linux/utils/file/"
++DESCRIPTION = "Displays all information about a file that the stat() call provides and all information about a filesystem that statfs() provides."
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39886b077fd072e876e5c4c16310b631 \
++                    file://GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
++
++SRC_URI = "http://www.ibiblio.org/pub/Linux/utils/file/${BP}.tar.gz \
++           file://fix-security-format.patch \
++           file://fix-error-return.patch"
++
++SRC_URI[md5sum] = "37e247e8e400ad9205f1b0500b728fd3"
++SRC_URI[sha256sum] = "7071f0384a423a938dd542c1f08547a02824f6359acd3ef3f944b2c4c2d1ee09"
++
++EXTRA_OEMAKE = "-e MAKEFLAGS="
++
++do_install() {
++	install -d ${D}${base_bindir} ${D}${mandir}/man1
++	install -m 755 stat ${D}${base_bindir}/stat.stat
++	install -m 644 stat.1 ${D}${mandir}/man1
++}
++
++inherit update-alternatives
++
++ALTERNATIVE_${PN} = "stat"
++ALTERNATIVE_PRIORITY[stat] = "200"
++ALTERNATIVE_LINK_NAME[stat] = "${base_bindir}/stat"
++ALTERNATIVE_TARGET[stat] = "${base_bindir}/stat.stat"
++
++ALTERNATIVE_${PN}-doc = "stat.1"
++ALTERNATIVE_LINK_NAME[stat.1] = "${mandir}/man1/stat.1"
++
++BBCLASSEXTEND = "native"
++
+-- 
+2.7.4
 
 
