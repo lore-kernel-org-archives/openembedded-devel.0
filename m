@@ -1,37 +1,37 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qt0-f195.google.com (mail-qt0-f195.google.com
-	[209.85.216.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 06F4D78276
+Received: from mail-qt0-f193.google.com (mail-qt0-f193.google.com
+	[209.85.216.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 6993E71B2E
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 14:24:27 +0000 (UTC)
-Received: by mail-qt0-f195.google.com with SMTP id f2so2259420qtj.4
+	Wed,  3 Jan 2018 14:37:21 +0000 (UTC)
+Received: by mail-qt0-f193.google.com with SMTP id 33so2323749qtv.1
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 03 Jan 2018 06:24:29 -0800 (PST)
+	Wed, 03 Jan 2018 06:37:22 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=4+SHxJFge4roBH2c4QfUiD4sdYT6RKGqmrIrBhTIy0k=;
-	b=bjHOWcyOhQDA4OSpDLvQeQr0321q3CCavb2j3spNk/6mbWbeqQgumse1xr0NfSYnml
-	SvRfQLYSNBGp01+DLJEaYKPCwrvkb4X6p0EG7rbsT+Mna07bL7Jf8SdJCHNunWzC3Gff
-	FsDrR8/jJrv+5q+UNiF/S+5tZfaTpmy9kOLMNeIwTl3qncP2edrdDAUjnRaozSPD4dGl
-	lN7stm4zLXvVEvrh9pnDTU0Iu718bE3rAK1lITXQ6+uoq+uR8miNaBiNZaWvlCm9xJrI
-	AI8R6R4O1+GOCqba+PBHdq8IGLdVtunwRekqAVYHRr5dn0fVBz/K4dTN7qwSMh8k0+S/
-	dZCw==
-X-Gm-Message-State: AKGB3mJ/KuPBf9sQaXe1RSXDByJjIEPCzjt3no/7LLLzMpBabt8z4ExR
-	/sdloo9tQcA4+/oTaPAiRJo0/qW0
-X-Google-Smtp-Source: ACJfBos2+p2A2l/t5lytOIt7NJJ67w8Bs0nXVy2hpo55+wmgyD5WFWSw+svl1foltynL7D90Ooq2FA==
-X-Received: by 10.200.6.76 with SMTP id e12mr1817591qth.217.1514989468734;
-	Wed, 03 Jan 2018 06:24:28 -0800 (PST)
+	bh=r+/9xQe1j6+Wo84UPcSe7ccLlUsB9B18Lk6UojlQIu8=;
+	b=K/BREBikbHRsC6VGyBSP0QeJmOY8MKWjdX2+gD6InoON2eHPg+4Dc0uvcoddvl9lE/
+	lwO7IybhHSl3vOXSOjb5RZEC/RiuTxrTP+Li27rMiRyy+nZTS8zF094WRLbBFTADruHa
+	F5hBsJ3dtu1mSKYOcSLUe3dTUJV2cK38dLgVICmBSKYhkT464G2RP+0fHGfryH4gbd7y
+	01XOCl36TDqcvE68bqkkxIQzxm7KtyUomp7tsknaNJi1b+lRf2jCJdXiqWL6fndSfcsT
+	HvKVaVnnR8qOb1xMw9yBvwGgUpkueo+s6NNVNhth7o1hY6PblZ2lr7xgUtNIWr91+6Dj
+	M5xQ==
+X-Gm-Message-State: AKGB3mJ+wh6Aex2J6/eTNaIv4m5rCpJlsRNns+ApVMur0I9znaWT8wur
+	ZbXLwCqbf1640j8FYDuRSXw9+swg
+X-Google-Smtp-Source: ACJfBotuECVkizq+455yDFsQjt8HxhEDo7D7nC2CoOtvrpXEbVzXSlkG47S2d6ToRO6dGIbwEegj2w==
+X-Received: by 10.200.47.55 with SMTP id j52mr1959107qta.26.1514990242138;
+	Wed, 03 Jan 2018 06:37:22 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id u4sm628916qtg.33.2018.01.03.06.24.27
+	by smtp.gmail.com with ESMTPSA id j17sm716665qkh.6.2018.01.03.06.37.20
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 03 Jan 2018 06:24:28 -0800 (PST)
+	Wed, 03 Jan 2018 06:37:21 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  3 Jan 2018 09:24:24 -0500
-Message-Id: <1514989464-10963-1-git-send-email-derek@asterius.io>
+Date: Wed,  3 Jan 2018 09:37:16 -0500
+Message-Id: <1514990236-24921-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] protobuf: update to version 3.5.1
+Subject: [meta-python][PATCH] python-attrs: update to version 17.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -44,36 +44,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 14:24:28 -0000
+X-List-Received-Date: Wed, 03 Jan 2018 14:37:21 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- .../protobuf/{protobuf_3.4.1.bb => protobuf_3.5.1.bb}               | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
- rename meta-oe/recipes-devtools/protobuf/{protobuf_3.4.1.bb => protobuf_3.5.1.bb} (94%)
+ meta-python/recipes-devtools/python/python-attrs.inc                  | 4 ++--
+ .../python/{python-attrs_17.3.0.bb => python-attrs_17.4.0.bb}         | 0
+ .../python/{python3-attrs_17.3.0.bb => python3-attrs_17.4.0.bb}       | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-attrs_17.3.0.bb => python-attrs_17.4.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-attrs_17.3.0.bb => python3-attrs_17.4.0.bb} (100%)
 
-diff --git a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb b/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
-similarity index 94%
-rename from meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-rename to meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
-index 1407d08..1ffb79d 100644
---- a/meta-oe/recipes-devtools/protobuf/protobuf_3.4.1.bb
-+++ b/meta-oe/recipes-devtools/protobuf/protobuf_3.5.1.bb
-@@ -16,11 +16,11 @@ RDEPENDS_${PN}-ptest = "bash python-protobuf"
+diff --git a/meta-python/recipes-devtools/python/python-attrs.inc b/meta-python/recipes-devtools/python/python-attrs.inc
+index 486a4e9..ea8d3bf 100644
+--- a/meta-python/recipes-devtools/python/python-attrs.inc
++++ b/meta-python/recipes-devtools/python/python-attrs.inc
+@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.attrs.org/"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=d4ab25949a73fe7d4fdee93bcbdbf8ff"
  
- LIC_FILES_CHKSUM = "file://LICENSE;md5=35953c752efc9299b184f91bef540095"
+-SRC_URI[md5sum] = "4314f784ca3174d91956da9828248960"
+-SRC_URI[sha256sum] = "c78f53e32d7cf36d8597c8a2c7e3c0ad210f97b9509e152e4c37fa80869f823c"
++SRC_URI[md5sum] = "d7a89063b2e0fd36bd82389c4d82821d"
++SRC_URI[sha256sum] = "1c7960ccfd6a005cd9f7ba884e6316b5e430a3f1a6c37c5f87d8b43f83b54ec9"
  
--SRCREV = "b04e5cba356212e4e8c66c61bbe0c3a20537c5b9"
-+SRCREV = "106ffc04be1abf3ff3399f54ccf149815b287dd9"
+ inherit pypi
  
--PV = "3.4.1+git${SRCPV}"
-+PV = "3.5.1+git${SRCPV}"
- 
--SRC_URI = "git://github.com/google/protobuf.git;branch=3.4.x \
-+SRC_URI = "git://github.com/google/protobuf.git;branch=3.5.x \
- 	   file://run-ptest \
-           "
- 
+diff --git a/meta-python/recipes-devtools/python/python-attrs_17.3.0.bb b/meta-python/recipes-devtools/python/python-attrs_17.4.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-attrs_17.3.0.bb
+rename to meta-python/recipes-devtools/python/python-attrs_17.4.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-attrs_17.3.0.bb b/meta-python/recipes-devtools/python/python3-attrs_17.4.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-attrs_17.3.0.bb
+rename to meta-python/recipes-devtools/python/python3-attrs_17.4.0.bb
 -- 
 2.7.4
 
