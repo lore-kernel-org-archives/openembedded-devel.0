@@ -1,29 +1,37 @@
-Return-Path: <philip@balister.org>
-X-Greylist: delayed 400 seconds by postgrey-1.34 at layers.openembedded.org;
-	Wed, 03 Jan 2018 15:56:20 UTC
-Received: from starfish.geekisp.com (starfish.geekisp.com [216.168.135.166])
-	by mail.openembedded.org (Postfix) with ESMTP id D496A6FFD4
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
+	[209.85.220.195])
+	by mail.openembedded.org (Postfix) with ESMTP id 17554780FA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  3 Jan 2018 15:56:20 +0000 (UTC)
-Received: (qmail 25293 invoked by uid 1003); 3 Jan 2018 15:49:40 -0000
-Received: from unknown (HELO ?192.168.11.142?)
-	(philip@opensdr.com@108.44.109.186)
-	by mail.geekisp.com with (DHE-RSA-AES128-SHA encrypted) SMTP;
-	3 Jan 2018 15:49:39 -0000
-To: Derek Straka <derek@asterius.io>, Yi Zhao <yi.zhao@windriver.com>
-References: <1514941115-27329-1-git-send-email-yi.zhao@windriver.com>
-	<CADNbA1pszSeHvab_oNg9MzqNz4owuxcGc2jZWBWBKjDeiv9Fkw@mail.gmail.com>
-	<fa40d465-6b8a-1cee-00ed-c349d30ae0a7@windriver.com>
-	<CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
-From: Philip Balister <philip@balister.org>
-Message-ID: <0e15500b-cb21-4a4b-a2d0-23b486906e48@balister.org>
-Date: Wed, 3 Jan 2018 10:49:35 -0500
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.0
-MIME-Version: 1.0
-In-Reply-To: <CADNbA1qBnd-szzOfajLv0ADkpEf=HH=bL5RkGzJjBWBBJ52AqA@mail.gmail.com>
-Cc: openembeded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [meta-oe][PATCH] stat: add the recipe from oe-core
+	Wed,  3 Jan 2018 16:28:13 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id d202so2172111qkc.9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 03 Jan 2018 08:28:15 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=We1SEIRUPQHx4A8LgTvNqEVw4EmmDdkZhBoF2Wjud/Y=;
+	b=Qh+gAQETBYaXfLItRNkFgp/2c8U9A5/tnvhUwC2JFF/3e14kznvGAbLkL3NIWKq3EC
+	II/FW5WqL4i4yjrb+KAxnGhYK0qZytahXplXZfUnSW56TPyVsQrYqwlRP9alnbRneJfJ
+	CkytW+I7FngEbHroi9ZBk0WuSQgGO1Rsg6Y5dab6XeAbTvPCDfCwxRLm1NseYcu7PYjS
+	M/qaLjmDGBIhhqtwhEywlqerxA2Qb/8Xe38CUC/t7ibeN8DouENNYf1xenyvZ+tlM1ra
+	zp4abz3hXnqZ1r/aDMZfmkGcnzt5lIqRkGfQhYXk0ZbuMLpCxOrYXziRVwL2RqRUd0UZ
+	/vIw==
+X-Gm-Message-State: AKGB3mJVeTy5W36ypIIS08mKmglYh45fYMCTwn1FOfdMjN+TLLOO7sFJ
+	YWpc30QQRcKuRCCoBHCIttvKW8JK
+X-Google-Smtp-Source: ACJfBotzcHUSd5btSL3XBvSzgP2OJ1O8hi6Tyt5f0SEOPd/JCAsgHg7icIGtZbfXKIHHF9oIWDU4hw==
+X-Received: by 10.55.3.14 with SMTP id 14mr2263316qkd.234.1514996894685;
+	Wed, 03 Jan 2018 08:28:14 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id j40sm778515qtj.79.2018.01.03.08.28.13
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 03 Jan 2018 08:28:13 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed,  3 Jan 2018 11:28:08 -0500
+Message-Id: <1514996888-29854-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-pandas: update to version 0.22.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,222 +44,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 03 Jan 2018 15:56:21 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: en-MW
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 03 Jan 2018 16:28:14 -0000
 
-On 01/02/2018 08:47 PM, Derek Straka wrote:
-> Makes sense.  I'm all for letting someone add it back if they'd like to use
-> it over coreutils (understanding that it isn't maintained), but we can let
-> others chime in.
+Signed-off-by: Derek Straka <derek@asterius.io>
+---
+ meta-python/recipes-devtools/python/python-pandas.inc                 | 4 ++--
+ .../python/{python-pandas_0.21.1.bb => python-pandas_0.22.0.bb}       | 0
+ .../python/{python3-pandas_0.21.1.bb => python3-pandas_0.22.0.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-pandas_0.21.1.bb => python-pandas_0.22.0.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-pandas_0.21.1.bb => python3-pandas_0.22.0.bb} (100%)
 
-meta-oe is not a place to dump recipes for unmaintained software. The
-recipe will end up failing, getting blacklisted and removed. Let's save
-the maintainers time. If someone needs it that badly, let them carry it
-in their own layer.
+diff --git a/meta-python/recipes-devtools/python/python-pandas.inc b/meta-python/recipes-devtools/python/python-pandas.inc
+index 266f8b7..3a41e8b 100644
+--- a/meta-python/recipes-devtools/python/python-pandas.inc
++++ b/meta-python/recipes-devtools/python/python-pandas.inc
+@@ -6,8 +6,8 @@ HOMEPAGE = "http://pandas.pydata.org/"
+ LICENSE = "BSD-3-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=ee0470f2de336c370a71c2f8d5e81c11"
+ 
+-SRC_URI[md5sum] = "42ae7f81b81a86c3f91f663b66c525f7"
+-SRC_URI[sha256sum] = "c5f5cba88bf0659554c41c909e1f78139f6fce8fa9315a29a23692b38ff9788a"
++SRC_URI[md5sum] = "c7a2757b607748255f3270221ac61d59"
++SRC_URI[sha256sum] = "44a94091dd71f05922eec661638ec1a35f26d573c119aa2fad964f10a2880e6c"
+ 
+ inherit pypi
+ 
+diff --git a/meta-python/recipes-devtools/python/python-pandas_0.21.1.bb b/meta-python/recipes-devtools/python/python-pandas_0.22.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-pandas_0.21.1.bb
+rename to meta-python/recipes-devtools/python/python-pandas_0.22.0.bb
+diff --git a/meta-python/recipes-devtools/python/python3-pandas_0.21.1.bb b/meta-python/recipes-devtools/python/python3-pandas_0.22.0.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-pandas_0.21.1.bb
+rename to meta-python/recipes-devtools/python/python3-pandas_0.22.0.bb
+-- 
+2.7.4
 
-Philip
-
-> 
-> -Derek
-> 
-> On Tue, Jan 2, 2018 at 8:38 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
-> 
->>
->>
->> 在 2018年01月03日 09:20, Derek Straka 写道:
->>
->> Is there any compelling reason to include it in meta-oe at all?  It seems
->> like dropping it altogether would be a better approach.
->>
->>
->> I have no objection  to drop it. But I'm not sure if someone else use it
->> ...
->>
->> Yi
->>
->>
->>
->> -Derek
->>
->> On Tue, Jan 2, 2018 at 7:58 PM, Yi Zhao <yi.zhao@windriver.com> wrote:
->>
->>> The stat hasn't any update since 2002. All modern Linux distributions
->>> use stat from coreutils as default. It is no longer needed by oe-core.
->>> Move it to meta-oe.
->>>
->>> Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
->>> ---
->>>  .../stat/stat-3.3/fix-error-return.patch           | 16 +++++
->>>  .../stat/stat-3.3/fix-security-format.patch        | 68
->>> ++++++++++++++++++++++
->>>  meta-oe/recipes-extended/stat/stat_3.3.bb          | 35 +++++++++++
->>>  3 files changed, 119 insertions(+)
->>>  create mode 100644 meta-oe/recipes-extended/stat/
->>> stat-3.3/fix-error-return.patch
->>>  create mode 100644 meta-oe/recipes-extended/stat/
->>> stat-3.3/fix-security-format.patch
->>>  create mode 100644 meta-oe/recipes-extended/stat/stat_3.3.bb
->>>
->>> diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>> b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>> new file mode 100644
->>> index 0000000..032995d
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-error-return.patch
->>> @@ -0,0 +1,16 @@
->>> +This patch fixies the wrong return code of stat -h.
->>> +
->>> +Upstream-Status: Pending
->>> +Signed-off-by: Zhangle Yang <zhangle.yang@windriver.com>
->>> +
->>> +--- stat-3.3/stat.c.orig       2013-08-22 10:49:45.000000000 +0800
->>> ++++ stat-3.3/stat.c    2013-08-22 10:50:31.000000000 +0800
->>> +@@ -845,7 +845,7 @@
->>> +     fprintf(stderr, "\t\t%%S - Security ID in SE-Linux\n");
->>> +     fprintf(stderr, "\t\t%%C - Security context in SE-Linux\n");
->>> +     fprintf(stderr, "\t\t%%d - Free file nodes in file system\n");
->>> +-    exit(1);
->>> ++    exit(0);
->>> + }
->>> +
->>> +
->>> diff --git a/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>> b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>> new file mode 100644
->>> index 0000000..0c01ed0
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/stat/stat-3.3/fix-security-format.patch
->>> @@ -0,0 +1,68 @@
->>> +stat: Fixing security formatting issues
->>> +
->>> +Fix security formatting issues related to printf without NULL argument
->>> +
->>> +stat.c: In function 'print_human_access':
->>> +stat.c:292:13: error: format not a string literal and no format
->>> arguments [-Werror=format-security]
->>> +     printf (access);
->>> +             ^
->>> +stat.c: In function 'print_human_time':
->>> +stat.c:299:57: error: format not a string literal and no format
->>> arguments [-Werror=format-security]
->>> +   if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
->>> +                                                         ^
->>> +stat.c: In function 'print_it':
->>> +stat.c:613:6: error: format not a string literal and no format arguments
->>> [-Werror=format-security]
->>> +      printf(b);
->>> +      ^
->>> +stat.c:642:6: error: format not a string literal and no format arguments
->>> [-Werror=format-security]
->>> +      printf(b);
->>> +      ^
->>> +
->>> +[YOCTO #9550]
->>> +[https://bugzilla.yoctoproject.org/show_bug.cgi?id=9550]
->>> +
->>> +Upstream-Status: Pending
->>> +
->>> +Signed-off-by: Edwin Plauchu <edwin.plauchu.camacho@intel.com>
->>> +
->>> +diff --git a/stat.c b/stat.c
->>> +index 1ed07a9..2be6f62 100644
->>> +--- a/stat.c
->>> ++++ b/stat.c
->>> +@@ -289,15 +289,15 @@ void print_human_access(struct stat *statbuf)
->>> +     default:
->>> +       access[0] = '?';
->>> +     }
->>> +-    printf (access);
->>> ++    fputs(access,stdout);
->>> + }
->>> +
->>> + void print_human_time(time_t *t)
->>> + {
->>> +   char str[40];
->>> +
->>> +-  if (strftime(str, 40, "%c", localtime(t)) > 0) printf(str);
->>> +-  else printf("Cannot calculate human readable time, sorry");
->>> ++  if (strftime(str, 40, "%c", localtime(t)) > 0) fputs(str,stdout);
->>> ++  else fputs("Cannot calculate human readable time, sorry",stdout);
->>> + }
->>> +
->>> + /* print statfs info */
->>> +@@ -610,7 +610,7 @@ void print_it(char *masterformat, char *filename,
->>> +       {
->>> +           strcpy (pformat, "%");
->>> +           *m++ = '\0';
->>> +-          printf(b);
->>> ++          fputs(b,stdout);
->>> +
->>> +           /* copy all format specifiers to our format string */
->>> +           while (isdigit(*m) || strchr("#0-+. I", *m))
->>> +@@ -639,7 +639,7 @@ void print_it(char *masterformat, char *filename,
->>> +       }
->>> +       else
->>> +       {
->>> +-          printf(b);
->>> ++          fputs(b,stdout);
->>> +           b = NULL;
->>> +       }
->>> +     }
->>> diff --git a/meta-oe/recipes-extended/stat/stat_3.3.bb
->>> b/meta-oe/recipes-extended/stat/stat_3.3.bb
->>> new file mode 100644
->>> index 0000000..8ac8e89
->>> --- /dev/null
->>> +++ b/meta-oe/recipes-extended/stat/stat_3.3.bb
->>> @@ -0,0 +1,35 @@
->>> +SUMMARY = "Command line file status display utility"
->>> +HOMEPAGE = "http://www.ibiblio.org/pub/Linux/utils/file/"
->>> +DESCRIPTION = "Displays all information about a file that the stat()
->>> call provides and all information about a filesystem that statfs()
->>> provides."
->>> +SECTION = "console/utils"
->>> +LICENSE = "GPLv2"
->>> +LIC_FILES_CHKSUM = "file://COPYRIGHT;md5=39886b077fd072e876e5c4c16310b631
->>> \
->>> +                    file://GPL;md5=94d55d512a9ba36caa9b7df079bae19f"
->>> +
->>> +SRC_URI = "http://www.ibiblio.org/pub/Linux/utils/file/${BP}.tar.gz \
->>> +           file://fix-security-format.patch \
->>> +           file://fix-error-return.patch"
->>> +
->>> +SRC_URI[md5sum] = "37e247e8e400ad9205f1b0500b728fd3"
->>> +SRC_URI[sha256sum] = "7071f0384a423a938dd542c1f0854
->>> 7a02824f6359acd3ef3f944b2c4c2d1ee09"
->>> +
->>> +EXTRA_OEMAKE = "-e MAKEFLAGS="
->>> +
->>> +do_install() {
->>> +       install -d ${D}${base_bindir} ${D}${mandir}/man1
->>> +       install -m 755 stat ${D}${base_bindir}/stat.stat
->>> +       install -m 644 stat.1 ${D}${mandir}/man1
->>> +}
->>> +
->>> +inherit update-alternatives
->>> +
->>> +ALTERNATIVE_${PN} = "stat"
->>> +ALTERNATIVE_PRIORITY[stat] = "200"
->>> +ALTERNATIVE_LINK_NAME[stat] = "${base_bindir}/stat"
->>> +ALTERNATIVE_TARGET[stat] = "${base_bindir}/stat.stat"
->>> +
->>> +ALTERNATIVE_${PN}-doc = "stat.1"
->>> +ALTERNATIVE_LINK_NAME[stat.1] = "${mandir}/man1/stat.1"
->>> +
->>> +BBCLASSEXTEND = "native"
->>> +
->>> --
->>> 2.7.4
->>>
->>> --
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
->>>
->>
->>
->>
 
