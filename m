@@ -1,50 +1,49 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
-	by mail.openembedded.org (Postfix) with ESMTP id 216D7787CE
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jan 2018 13:19:48 +0000 (UTC)
-Received: by mail-wm0-f66.google.com with SMTP id f140so3376060wmd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2018 05:19:50 -0800 (PST)
+Return-Path: <schnitzeltony@gmail.com>
+Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
+	[209.85.161.194])
+	by mail.openembedded.org (Postfix) with ESMTP id 8BBAF78672;
+	Thu,  4 Jan 2018 13:22:55 +0000 (UTC)
+Received: by mail-yw0-f194.google.com with SMTP id v187so558382ywc.2;
+	Thu, 04 Jan 2018 05:22:57 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=V5eyWGlxKVI8A6tMnz0Tr92ic4Ibl/P7u7MCMYhYdCM=;
-	b=eVUXBqiQVAQihAaeKr/HDKCMns2S9oqzAGsttRP51QzTSyC+fOqwpJlvW+SDgv10Bk
-	PBubyYVgxT72nf5GMCFtRfBQc+he0NZmvuUh9KUed0dVTIoIISoVxKy6v4QKi8mb/pN4
-	qXNqI7vpJZnDlC/RYtfwled3DLth9z3z+7fuKoBTkYp6Fg99eOKd5iSO7BYubENlahEv
-	WXh8czTKMt1cNm+WaLsILpe1RDG0C6QSaKEfYidEOHTEwK/d2bKjcffn586lChstrzwc
-	JvxoLyyqiLDbLbGVQjYSTuJAtoxfD3J6BBBKkt/qsxFrFvfPrTvNxuYaV7RR5BrnW1Q6
-	ivRw==
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=umhAv1cjADcVjy6XP8TmP0M0h1Qs+R40NeYgzNSENdY=;
+	b=Oc4g91spIkY4vDN3bj1UByJDSKBUL4RXUU6Noy53kQBaZE22NbEDWl8Le06FlEcBRL
+	EIebQv7GvUszB9+RQ8GVecrJ0zp2cE+KYYXUqbYSzK6HDVnnwU5PYtq8mSKjyaOZ8P1u
+	TmmFGwESPM2Tavcg+Zx1x6xCPq0joWvkmC4IayGBI39o1Q84hhxgADi00a2R8kI1p17H
+	VEDdOFn70roIJQBPplLPKII/rloDWkeHwTGqL2oSpIMXBUlK/zVWdWEvtLnKx046VPgy
+	1cJxxwpv0WKwwJr0tEKpNFqoJX3g79BDe3XBl1hp7xkq6m0hoYUSiwruDp/sDOrRAdY2
+	036A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references;
-	bh=V5eyWGlxKVI8A6tMnz0Tr92ic4Ibl/P7u7MCMYhYdCM=;
-	b=VrZhqJ42YUfypY6U6Uu+Mll3OJLdpHrYUKLJxALs66/a0L4GEkULIsm7SZy8u1h188
-	3zTFSDCyCvqDpreL2QvZSwDGyEV0L4xwcqPMUxx7XrKaYaN+Ud2wm2B0/fTLjjJ6+0U5
-	+G+912JGX8gV2SJsMrYJN/Mz05U48Z8PUQR7qKzAvKyUA6Q1AgSy70WjXAx/gAOsEWGd
-	mkSz7Qf/7xZHWBC3OzXkar9XNuaPEEwnclH+I9CjRq/Ap2e6F5d2ATf1pPf882mQ/WPW
-	ta6ZLqdg/s+6hHPZ5dRscDnKaZ8wLnPqndySoq2SUSPKgxy1Tb7c/e4/UMCEafxzb2Jl
-	EYmw==
-X-Gm-Message-State: AKGB3mK+7CjxiHiOU9pux61+GcJEAhkyjEPv1qXo577pLBDLIFBvxtlC
-	RBOCyNzFMimO/hYiCN3bwGYV+A==
-X-Google-Smtp-Source: ACJfBosdOxJo3DaY8+Uh2X6jQHQ7zub5u29l8qlTXXA9NZRYLcXAKqDaRz306WpqmHMGviFa7Bcfbg==
-X-Received: by 10.80.240.138 with SMTP id v10mr7394723edl.52.1515071989862;
-	Thu, 04 Jan 2018 05:19:49 -0800 (PST)
-Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
-	([123.125.90.58]) by smtp.gmail.com with ESMTPSA id
-	m23sm2107083edc.27.2018.01.04.05.19.47
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jan 2018 05:19:49 -0800 (PST)
-From: liu.ming50@gmail.com
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jan 2018 14:19:10 +0100
-Message-Id: <1515071950-15401-8-git-send-email-liu.ming50@gmail.com>
-X-Mailer: git-send-email 2.7.4
-In-Reply-To: <1515071950-15401-1-git-send-email-liu.ming50@gmail.com>
-References: <1515071950-15401-1-git-send-email-liu.ming50@gmail.com>
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-java][PATCH 7/7] ant-contrib-native: add recipe
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=umhAv1cjADcVjy6XP8TmP0M0h1Qs+R40NeYgzNSENdY=;
+	b=Sd6TY1oLzl9bnmSCkAeR12aiZs1JJrhbhFjgXgZGG3xRBBvIB6rZs8LvQRCQzkWNYF
+	zyU35DPC3vhEagM2w9rt+8CLWH6h77IwxG/ZZbUG5rcEGKcP52KLaV9UxtcxXGxRJJWD
+	xqCsZfSqgkJSiFq6QpYL9EfKuX4KR/m/rJL0NdF9zbfst4WxkQ+YJi/vkc+igQaM6dG5
+	vuzrZjmj6St7u6UF1Zf3O7CYBBqZ0JcpUzEB7P5UpkD1XHmDY6NPuqYQifqGZw6ngGl+
+	SnlSgBi4TQxWq9Lb87WcFh3tOKaE/2kGxE5uwDEUNTfcjiiz9D1EmofVxp0DgGtNv7d8
+	MKHg==
+X-Gm-Message-State: AKGB3mIbhbZD0N5JbVJ+Bot3OcdQ7Uq1Uy//yHMPpL7F1n89qNkep/yu
+	rvW5M7qSGW/XyMcO9vHxQ6uZ7/Qa1fvFO96TKbI=
+X-Google-Smtp-Source: ACJfBotLSN5ehnMSqVwVGai520hLRaeJp1K/zaQPhmVqmSAIK42KT0PZzhJK4OJ7aQKEzVZJFEoBQ72rl31Tijt225M=
+X-Received: by 10.13.242.6 with SMTP id b6mr4059142ywf.254.1515072176308; Thu,
+	04 Jan 2018 05:22:56 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.37.130.136 with HTTP; Thu, 4 Jan 2018 05:22:55 -0800 (PST)
+In-Reply-To: <1a0bbfc2-7b0a-c347-23eb-7cb1087ffb33@balister.org>
+References: <CAPyrkgxupO+=0+bmA=+JO+zs=t_i=Pm06GJyRFvYfTb5sXjSBA@mail.gmail.com>
+	<1a0bbfc2-7b0a-c347-23eb-7cb1087ffb33@balister.org>
+From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
+Date: Thu, 4 Jan 2018 14:22:55 +0100
+Message-ID: <CALbNGRSz59HjuPX3=TLxxVoJEPrKnSmYMZu9RBf0YnCKU_SJOQ@mail.gmail.com>
+To: Philip Balister <philip@balister.org>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: yocto <yocto@yoctoproject.org>, openembedded-members@lists.openembedded.org,
+	openembeded-devel <openembedded-devel@lists.openembedded.org>,
+	OE-core <openembedded-core@lists.openembedded.org>
+Subject: Re: Slideshow for FOSDEM
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,63 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 13:19:49 -0000
+X-List-Received-Date: Thu, 04 Jan 2018 13:22:55 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-From: Ming Liu <liu.ming50@gmail.com>
+On Wed, Jan 3, 2018 at 6:29 PM, Philip Balister <philip@balister.org> wrote:
 
-The Ant-Contrib project is a collection of tasks (and at one point
-maybe types and other tools) for Apache Ant.
+> On 01/03/2018 09:47 AM, Paul Barker wrote:
+> > Hi all,
+> >
+> > As we've only got one table at FOSDEM this year we're not going to
+> > have space for as many bits of hardware as usual. I'd still like us to
+> > show off the project and what people are building with OpenEmbedded &
+> > Yocto Project though. Given the limited space I think the best way to
+> > do this would be to put a slideshow on my laptop.
+> >
+> > I've made a start on this here:
+> > https://docs.google.com/presentation/d/1KYxhsxO-8GxhAreE0GKnTOCPdY6_
+> 4uXYIEp6Lc55MB8/edit?usp=sharing
+> >
+> > I've made this publicly editable so please feel free to add slides for
+> > any OE features you want to show off and any projects (professional or
+> > hobbyist) built with OE. If anyone can add a slide on project history
+> > that would also be great. I'd also like a slide on the latest release
+> > and the new features added. Photos of hardware projects using OE and
+> > features like Toaster would be especially welcome!
+> >
+> > I'll give this a final edit before FOSDEM and the put it on rotation
+> > on a laptop at the stand. Hopefully it will be useful for future
+> > events as well.
+>
+> Can we build a small board with a largish screen so we can run the show
+> on a device running an image built by OpenEmbedded?
+>
+> Philip
+>
+> Hi,
 
-Signed-off-by: Ming Liu <liu.ming50@gmail.com>
----
- .../ant-contrib/ant-contrib-native_1.0b3.bb        | 37 ++++++++++++++++++++++
- 1 file changed, 37 insertions(+)
- create mode 100644 recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
+currently I am putting together something like a
+'diy-rpi-notebook-on-tripod' - WIP no photos yet. Would like to put a music
+keyboard in front of it. Area required 1-2 square meters - no table
+required. Is such thing accepted / of interest?
 
-diff --git a/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb b/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
-new file mode 100644
-index 0000000..2a44ea2
---- /dev/null
-+++ b/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
-@@ -0,0 +1,37 @@
-+SUMMARY = "(java): collection of tasks, types and other tools for Apache Ant"
-+DESCRIPTION = "The Ant-Contrib project is a collection of tasks (and at one \
-+point maybe types and other tools) for Apache Ant."
-+HOMEPAGE = "http://ant-contrib.sourceforge.net"
-+PRIORITY = "optional"
-+SECTION = "libs"
-+LICENSE = "Apache-2.0"
-+LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=f84919efee8dbf5c7730927c5b8716f9"
-+
-+DEPENDS = "ant-native commons-cli-native commons-codec-native \
-+           commons-httpclient-native commons-logging-native \
-+           oro-native bcel-native xerces-j-native \
-+          "
-+
-+inherit java-library java-native
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/ant-contrib/ant-contrib-${PV}-src.zip"
-+
-+SRC_URI[md5sum] = "07b23539bef04ec56970c876a33f7665"
-+SRC_URI[sha256sum] = "ba3621f397af14d5a19375f391ec9bf2908c46c5558ca0df8365e04fe3ac3633"
-+
-+S = "${WORKDIR}/ant-contrib"
-+
-+do_compile() {
-+    mkdir -p build
-+
-+    oe_makeclasspath cp -s ant commons-cli commons-codec commons-httpclient commons-logging oro bcel xercesImpl
-+    cp=build:${S}/lib/ivy/jars/ivy-1.3.1.jar:$cp
-+
-+    find src/java -name "*.java" > java_files
-+
-+    javac -sourcepath src/java -cp $cp -d build @java_files
-+
-+    (cd src/java && find . \( -name "*.properties" -or -name "*.xml" -or -name "*.mf" \) -exec cp {} ../../build/{} \;)
-+
-+    fastjar cf ${JARFILENAME} -C build .
-+}
--- 
-2.7.4
-
+Andreas
 
