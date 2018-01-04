@@ -1,31 +1,46 @@
-Return-Path: <richard.purdie@linuxfoundation.org>
-Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
-	by mail.openembedded.org (Postfix) with ESMTP id 8266E7780D;
-	Thu,  4 Jan 2018 14:39:59 +0000 (UTC)
-Received: from hex ([192.168.3.34]) (authenticated bits=0)
-	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
-	w04EdsRG015078
-	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
-	verify=NOT); Thu, 4 Jan 2018 14:39:56 GMT
-Message-ID: <1515076794.5525.196.camel@linuxfoundation.org>
-From: Richard Purdie <richard.purdie@linuxfoundation.org>
-To: Steffen Sledz <sledz@dresearch-fe.de>, "Burton, Ross"
-	<ross.burton@intel.com>
-Date: Thu, 04 Jan 2018 14:39:54 +0000
-In-Reply-To: <9d1c1e79-5eab-941c-0d30-314f9df51de1@dresearch-fe.de>
-References: <460be213-a6c9-59fa-f8e3-d3f7e6232ca4@dresearch-fe.de>
-	<CAJTo0LaHXJMMNg8VmqFNne_8rgEV9TER5saUzUXudRgvzggWNw@mail.gmail.com>
-	<6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
-	<CAJTo0LYWwMnj4Wb6JC1y7uw4ZrPv6=SynfkSc0TU0dwi9Dezjw@mail.gmail.com>
-	<8926eabe-78fe-dfaa-d123-5d4ed39e0001@dresearch-fe.de>
-	<9d1c1e79-5eab-941c-0d30-314f9df51de1@dresearch-fe.de>
-X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
-Mime-Version: 1.0
-X-Virus-Scanned: clamav-milter 0.99.2 at dan
-X-Virus-Status: Clean
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	openembedded-core <openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] MS Windows machine?
+Return-Path: <rjpdasilva@gmail.com>
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id CE3BB786BC
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  4 Jan 2018 15:35:43 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id f206so4089237wmf.5
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 04 Jan 2018 07:35:45 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=from:to:cc:subject:date:message-id;
+	bh=p+K+l44UlwoNqlU90LAWFSfEBU8fNwC3i+GLjM6Jhio=;
+	b=MR0kWS+dzXFLoBsmUDetEDGzsI1wb7WVCFh+QvCRSqh9jP0ILwT+oHCokju2nMxyqj
+	efj7IgFFbbe7l7wfn8oEQ58VOuvA4hHkBeBsTnKg94+P9gCZn9w7VSKKlVTe0jzeww3x
+	G1tCGZbvvXJ74EuT4K0yhaE5f+Wnkd+pvo223m71COv61+XRqyjRvwap5LpMZ4VRYfAq
+	IvsKbi07Vr8xoXe8z9DTG06FJTWpRtHHNSV1LHLIovGjQIclNyFcmQ2SxWyWLLjuzpnj
+	D3KHfmD12Mqv11cnvKkepEbVLfofBpkDtY4oNdsd50p4EL2lUu2V9o3LHR8H++9nNtVG
+	5nKg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=p+K+l44UlwoNqlU90LAWFSfEBU8fNwC3i+GLjM6Jhio=;
+	b=CwtaJnDG3sdJAqRkTw9L9hjjfKOMouh6sHknaa6+RXrn9mTJPHMqPIlOWjQ5QHxjhr
+	QRwuRyd93FzHYqLVXoDKPZKiFDjY+ujvODRtRWK26PHnzsPGXLWdS5I2W4oeLxg9iR82
+	sDPpl/paIMBWBaY7IOTbPlYEpJTI9GvA+Ts2il/dVYzcRv5xZtoUp4MnnXYqjr6sFb7D
+	dNDs4V1zvjmIg0b3np3uYBja55xhCMcM2QOeLeHMam+i0T2//+dwBMy8EiLngrcnQr5S
+	gscDrLUSzHoY9JFZzK67eXhUMotEAMabDSqlFEQafl+sGd9IF6O6YWJcd2JzRo4b9+Bh
+	zMfA==
+X-Gm-Message-State: AKGB3mLQedySIA2femkN1jSREBmgz2LkfuhCiyscCdQdG0g+OY18/haS
+	mvwrTAdePqLEa4SkXYV9ywiSlA==
+X-Google-Smtp-Source: ACJfBotT1iGPDzenWjZMhNSVqvhk6zn8+DXMd0wgjR9LqLPhkdQNHn9xxnyCD0VNQKPL4trZ3RjzxQ==
+X-Received: by 10.28.126.201 with SMTP id z192mr4807903wmc.121.1515080144188; 
+	Thu, 04 Jan 2018 07:35:44 -0800 (PST)
+Received: from localhost.localdomain ([2001:8a0:6606:9100:7f03:4efc:e311:2e44])
+	by smtp.googlemail.com with ESMTPSA id
+	o107sm7402735wrc.63.2018.01.04.07.35.43
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Jan 2018 07:35:43 -0800 (PST)
+From: Ricardo Silva <rjpdasilva@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  4 Jan 2018 15:35:20 +0000
+Message-Id: <20180104153520.20167-1-rjpdasilva@gmail.com>
+X-Mailer: git-send-email 2.15.1
+Subject: [meta-python][PATCH] pyinotify: Fix support for different python versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,46 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 14:40:00 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 04 Jan 2018 15:35:44 -0000
 
-On Thu, 2018-01-04 at 07:31 +0100, Steffen Sledz wrote:
-> On 21.12.2017 14:00, Steffen Sledz wrote:
-> > 
-> > On 21.12.2017 12:39, Burton, Ross wrote:
-> > > 
-> > > If you want to build for a Windows target then that should be
-> > > possible but
-> > > nobody as far as I'm aware has made the work public.  meta-mingw
-> > > will
-> > > contain most of the changes needed as that does build Windows
-> > > binaries.
-> > That's exactly what we like to to.
-> > 
-> > So has anyone tried this before?
-> > 
-> > What else would be needed to build e.g. for MACHINE=i686-mingw32?
-> Is someone able to create a machine definition for this? I'm not
-> really familiar with this job.
+The runtime dependencies for pyinotify are defined in
+python-pyinotify.inc file, which gets included from both the python2 and
+the python3 recipes for pyinotify.
 
-In basic terms, you need a machine which:
+Since the include file is used for both python2 and python3 recipes, it
+must use the '${PYTHON_PN}-' prefix instead of just 'python-' for
+listing the dependencies in RDEPENDS, otherwise it is forcing python2
+modules to be selected from a python3 recipe, so fix that.
 
-* Sets TARGET_ARCH to the right thing (i686 or x86_64)
-* Sets TARGET_OS to mingw32
+For example, use '${PYTHON_PN}-threading' instead of 'python-threading'
+for specifying a dependency from the 'threading' module.
 
-and then some distro config which sets up the toolchain when mingw is
-the target os to the values like meta-mingw/conf/machine-sdk/i686-
-mingw32.conf sets.
+While at it, also use line separation and indentation on RDEPENDS for
+better readability.
 
-You'd need need to look through the bbappends which are in meta-mingw
-and add them to the appropriate pieces you need for target binaries
-rather than sdk binaries.
+Signed-off-by: Ricardo Silva <rjpdasilva@gmail.com>
+---
+ meta-python/recipes-devtools/python/python-pyinotify.inc | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
 
-I did once do this for darwin so it is possible, I've never tried it
-for windows though.
+diff --git a/meta-python/recipes-devtools/python/python-pyinotify.inc b/meta-python/recipes-devtools/python/python-pyinotify.inc
+index 0168f1a87..7fcbb1850 100644
+--- a/meta-python/recipes-devtools/python/python-pyinotify.inc
++++ b/meta-python/recipes-devtools/python/python-pyinotify.inc
+@@ -2,7 +2,13 @@ DESCRIPTION = "Python pyinotify: Linux filesystem events monitoring"
+ LICENSE = "MIT"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=ab173cade7965b411528464589a08382"
+ 
+-RDEPENDS_${PN} += "python-threading python-io python-subprocess python-misc python-shell"
++RDEPENDS_${PN} += "\
++    ${PYTHON_PN}-threading \
++    ${PYTHON_PN}-io \
++    ${PYTHON_PN}-subprocess \
++    ${PYTHON_PN}-misc \
++    ${PYTHON_PN}-shell \
++"
+ 
+ SRC_URI[md5sum] = "8e580fa1ff3971f94a6f81672b76c406"
+ SRC_URI[sha256sum] = "9c998a5d7606ca835065cdabc013ae6c66eb9ea76a00a1e3bc6e0cfe2b4f71f4"
+-- 
+2.15.1
 
-Cheers,
-
-Richard
 
