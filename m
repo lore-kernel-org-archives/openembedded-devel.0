@@ -1,60 +1,29 @@
-Return-Path: <Jose.DiazdeGrenu@digi.com>
-X-Greylist: delayed 424 seconds by postgrey-1.34 at layers.openembedded.org;
-	Thu, 04 Jan 2018 16:52:09 UTC
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.15])
-	by mail.openembedded.org (Postfix) with ESMTP id 617E678787
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga11.intel.com (mga11.intel.com [192.55.52.93])
+	by mail.openembedded.org (Postfix) with ESMTP id 7C22871B31
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jan 2018 16:52:09 +0000 (UTC)
-Received: from [216.82.251.44] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-15.bemta-12.messagelabs.com id CA/99-07966-21A5E4A5;
-	Thu, 04 Jan 2018 16:45:06 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFmpkleJIrShJLcpLzFFi42Jx8l0noCsU5Rd
-	lsGm5gsXFw0uZHRg9zm1cwRjAGMWamZeUX5HAmnH+o2bBeaaKR4/cGxgnMnUxcnEICaxilDjQ
-	s4IdwlnNKNFyYgMjhLOYUeLq3Z8sXYycHGwC5hLTDh8Es0UEYiSWnj/P1sXIwSEsYCkxpzMDx
-	BQRsJPomBIBYepJ/P6rBFLMIqAi8WH6P0YQm1fAV+LjhpPsIDajgKzEyvOnweLMAuISt57MZw
-	KxJQQEJJbsOc8MYYtKvHz8jxXCVpBo+3SPFaJeR2LB7k9sELa2xLKFr5kh5gtKnJz5BOxIIQE
-	1ibY5E5gnMArPQrJiFpL2WUjaZyFpX8DIsopRozi1qCy1SNfIVC+pKDM9oyQ3MTNH19DQSC83
-	tbg4MT01JzGpWC85P3cTIzDw6xkYGHcwbmn0OsQoycGkJMobru4XJcSXlJ9SmZFYnBFfVJqTW
-	nyIUYODQ6Dl4smDTFIsefl5qUoSvN8igOoEi1LTUyvSMnOAsQlTKsHBoyTC2w+S5i0uSMwtzk
-	yHSJ1iNOa48fD6HyaOZzNfNzALgU2SEueVjgQqFQApzSjNgxsESxmXGGWlhHkZGRgYhHgKUot
-	yM0tQ5V8xinMwKgnzBoJM4cnMK4Hb9wroFCagU1Yd8QU5pSQRISXVwGjTx7vNqGzCV5UZ9Zc0
-	9/D8Y29pXLHaZcmpvb+PypvocTd1TWVwfBx6de7ihYtFZy1wFfqXs2nLquqNB2U3rqkXTl218
-	6JsoNnMi3FMx1bNN/R8fN/f56K5nHFM49Oq4+Gq0aqTDm06NX2/yDkbqU8WDP2MF4/GZumdU/
-	zeHB/86q/4xqm32hcrsRRnJBpqMRcVJwIA81BpdhQDAAA=
-X-Env-Sender: Jose.DiazdeGrenu@digi.com
-X-Msg-Ref: server-16.tower-200.messagelabs.com!1515084306!45469275!1
-X-Originating-IP: [66.77.174.16]
-X-StarScan-Received: 
-X-StarScan-Version: 9.4.45; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10982 invoked from network); 4 Jan 2018 16:45:06 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-16.tower-200.messagelabs.com with SMTP;
-	4 Jan 2018 16:45:06 -0000
-Received: from MTK-SMS-XCH04.digi.com (10.10.8.198) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Thu, 4 Jan 2018 10:45:03 -0600
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MTK-SMS-XCH04.digi.com
-	(10.10.8.198) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Thu, 4 Jan 2018 10:45:02 -0600
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0361.001;
-	Thu, 4 Jan 2018 17:45:01 +0100
-From: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-java] morty branch not compiling with GCC6
-Thread-Index: AdOFexvjjqZfujXARu+anxgG/Lzn/g==
-Date: Thu, 4 Jan 2018 16:44:59 +0000
-Message-ID: <0B2EBCD48D33654381E736352034C70C01B450F4@dor-sms-xch01.digi.com>
-Accept-Language: es-ES, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.101.2.179]
-MIME-Version: 1.0
-Subject: [meta-java] morty branch not compiling with GCC6
+	Thu,  4 Jan 2018 16:56:21 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga003.jf.intel.com ([10.7.209.27])
+	by fmsmga102.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	04 Jan 2018 08:56:16 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.46,314,1511856000"; d="scan'208";a="17496879"
+Received: from lattal-mobl6.amr.corp.intel.com ([10.254.35.187])
+	by orsmga003.jf.intel.com with ESMTP; 04 Jan 2018 08:56:15 -0800
+Mime-Version: 1.0 (Mac OS X Mail 10.3 \(3273\))
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+In-Reply-To: <048780aa-783c-21f8-d54e-afca1545d943@gmail.com>
+Date: Thu, 4 Jan 2018 08:56:15 -0800
+Message-Id: <1E32C484-99E3-4DDB-B996-2C85D07D79AB@linux.intel.com>
+References: <20180104160623.23830-1-rjpdasilva@gmail.com>
+	<C86C34FA-F934-44CA-8A2B-64478F87AD82@linux.intel.com>
+	<048780aa-783c-21f8-d54e-afca1545d943@gmail.com>
+To: Ricardo Silva <rjpdasilva@gmail.com>
+X-Mailer: Apple Mail (2.3273)
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] pycrypto: Add recipe to have support on python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,19 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 16:52:09 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 04 Jan 2018 16:56:22 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
-Currently the compilation of openjdk7 in the morty branch with GCC 6 is fai=
-ling. I noticed that the following commit in master fixes the problem:
+> On Jan 4, 2018, at 8:51 AM, Ricardo Silva <rjpdasilva@gmail.com> =
+wrote:
+>=20
+>>=20
+>> Rather than duplicate the SRC_URI in both python2- and python3- =
+recipes, we should add them to python-pycrypto.inc and add the following =
+to python-pycrypto.inc
+>>=20
+>> FILESEXTRAPATHS_prepend :=3D "${THISDIR}/python-pycrypto:=E2=80=9D
+>>=20
+>=20
+> Agree.
+> Shall I send a v2 with your suggested changes?
+>=20
 
-Commit 65041a6c:  "openjdk-7: fix compile errors with current poky master (=
-gcc6)"
+Yes, please. If you don=E2=80=99t mind (it will need to remove the extra =
+SRC_URI lines from python2 recipe, add the SRC_URI lines and =
+FILESEXTRAPATHS to .inc and then add the python3 recipe).
 
-Is there a reason why this has not be cherry-picked to the morty branch? Co=
-uld we do that?=20
+> Regards,
+>=20
+> Ricardo Silva
+
 
