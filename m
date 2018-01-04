@@ -1,49 +1,31 @@
-Return-Path: <schnitzeltony@gmail.com>
-Received: from mail-yw0-f194.google.com (mail-yw0-f194.google.com
-	[209.85.161.194])
-	by mail.openembedded.org (Postfix) with ESMTP id 8BBAF78672;
-	Thu,  4 Jan 2018 13:22:55 +0000 (UTC)
-Received: by mail-yw0-f194.google.com with SMTP id v187so558382ywc.2;
-	Thu, 04 Jan 2018 05:22:57 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=umhAv1cjADcVjy6XP8TmP0M0h1Qs+R40NeYgzNSENdY=;
-	b=Oc4g91spIkY4vDN3bj1UByJDSKBUL4RXUU6Noy53kQBaZE22NbEDWl8Le06FlEcBRL
-	EIebQv7GvUszB9+RQ8GVecrJ0zp2cE+KYYXUqbYSzK6HDVnnwU5PYtq8mSKjyaOZ8P1u
-	TmmFGwESPM2Tavcg+Zx1x6xCPq0joWvkmC4IayGBI39o1Q84hhxgADi00a2R8kI1p17H
-	VEDdOFn70roIJQBPplLPKII/rloDWkeHwTGqL2oSpIMXBUlK/zVWdWEvtLnKx046VPgy
-	1cJxxwpv0WKwwJr0tEKpNFqoJX3g79BDe3XBl1hp7xkq6m0hoYUSiwruDp/sDOrRAdY2
-	036A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=umhAv1cjADcVjy6XP8TmP0M0h1Qs+R40NeYgzNSENdY=;
-	b=Sd6TY1oLzl9bnmSCkAeR12aiZs1JJrhbhFjgXgZGG3xRBBvIB6rZs8LvQRCQzkWNYF
-	zyU35DPC3vhEagM2w9rt+8CLWH6h77IwxG/ZZbUG5rcEGKcP52KLaV9UxtcxXGxRJJWD
-	xqCsZfSqgkJSiFq6QpYL9EfKuX4KR/m/rJL0NdF9zbfst4WxkQ+YJi/vkc+igQaM6dG5
-	vuzrZjmj6St7u6UF1Zf3O7CYBBqZ0JcpUzEB7P5UpkD1XHmDY6NPuqYQifqGZw6ngGl+
-	SnlSgBi4TQxWq9Lb87WcFh3tOKaE/2kGxE5uwDEUNTfcjiiz9D1EmofVxp0DgGtNv7d8
-	MKHg==
-X-Gm-Message-State: AKGB3mIbhbZD0N5JbVJ+Bot3OcdQ7Uq1Uy//yHMPpL7F1n89qNkep/yu
-	rvW5M7qSGW/XyMcO9vHxQ6uZ7/Qa1fvFO96TKbI=
-X-Google-Smtp-Source: ACJfBotLSN5ehnMSqVwVGai520hLRaeJp1K/zaQPhmVqmSAIK42KT0PZzhJK4OJ7aQKEzVZJFEoBQ72rl31Tijt225M=
-X-Received: by 10.13.242.6 with SMTP id b6mr4059142ywf.254.1515072176308; Thu,
-	04 Jan 2018 05:22:56 -0800 (PST)
-MIME-Version: 1.0
-Received: by 10.37.130.136 with HTTP; Thu, 4 Jan 2018 05:22:55 -0800 (PST)
-In-Reply-To: <1a0bbfc2-7b0a-c347-23eb-7cb1087ffb33@balister.org>
-References: <CAPyrkgxupO+=0+bmA=+JO+zs=t_i=Pm06GJyRFvYfTb5sXjSBA@mail.gmail.com>
-	<1a0bbfc2-7b0a-c347-23eb-7cb1087ffb33@balister.org>
-From: =?UTF-8?Q?Andreas_M=C3=BCller?= <schnitzeltony@gmail.com>
-Date: Thu, 4 Jan 2018 14:22:55 +0100
-Message-ID: <CALbNGRSz59HjuPX3=TLxxVoJEPrKnSmYMZu9RBf0YnCKU_SJOQ@mail.gmail.com>
-To: Philip Balister <philip@balister.org>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: yocto <yocto@yoctoproject.org>, openembedded-members@lists.openembedded.org,
-	openembeded-devel <openembedded-devel@lists.openembedded.org>,
-	OE-core <openembedded-core@lists.openembedded.org>
-Subject: Re: Slideshow for FOSDEM
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id 8266E7780D;
+	Thu,  4 Jan 2018 14:39:59 +0000 (UTC)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
+	w04EdsRG015078
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
+	verify=NOT); Thu, 4 Jan 2018 14:39:56 GMT
+Message-ID: <1515076794.5525.196.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Steffen Sledz <sledz@dresearch-fe.de>, "Burton, Ross"
+	<ross.burton@intel.com>
+Date: Thu, 04 Jan 2018 14:39:54 +0000
+In-Reply-To: <9d1c1e79-5eab-941c-0d30-314f9df51de1@dresearch-fe.de>
+References: <460be213-a6c9-59fa-f8e3-d3f7e6232ca4@dresearch-fe.de>
+	<CAJTo0LaHXJMMNg8VmqFNne_8rgEV9TER5saUzUXudRgvzggWNw@mail.gmail.com>
+	<6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
+	<CAJTo0LYWwMnj4Wb6JC1y7uw4ZrPv6=SynfkSc0TU0dwi9Dezjw@mail.gmail.com>
+	<8926eabe-78fe-dfaa-d123-5d4ed39e0001@dresearch-fe.de>
+	<9d1c1e79-5eab-941c-0d30-314f9df51de1@dresearch-fe.de>
+X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
+Mime-Version: 1.0
+X-Virus-Scanned: clamav-milter 0.99.2 at dan
+X-Virus-Status: Clean
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	openembedded-core <openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] MS Windows machine?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,46 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 13:22:55 -0000
+X-List-Received-Date: Thu, 04 Jan 2018 14:40:00 -0000
 Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
 
-On Wed, Jan 3, 2018 at 6:29 PM, Philip Balister <philip@balister.org> wrote:
+On Thu, 2018-01-04 at 07:31 +0100, Steffen Sledz wrote:
+> On 21.12.2017 14:00, Steffen Sledz wrote:
+> > 
+> > On 21.12.2017 12:39, Burton, Ross wrote:
+> > > 
+> > > If you want to build for a Windows target then that should be
+> > > possible but
+> > > nobody as far as I'm aware has made the work public.  meta-mingw
+> > > will
+> > > contain most of the changes needed as that does build Windows
+> > > binaries.
+> > That's exactly what we like to to.
+> > 
+> > So has anyone tried this before?
+> > 
+> > What else would be needed to build e.g. for MACHINE=i686-mingw32?
+> Is someone able to create a machine definition for this? I'm not
+> really familiar with this job.
 
-> On 01/03/2018 09:47 AM, Paul Barker wrote:
-> > Hi all,
-> >
-> > As we've only got one table at FOSDEM this year we're not going to
-> > have space for as many bits of hardware as usual. I'd still like us to
-> > show off the project and what people are building with OpenEmbedded &
-> > Yocto Project though. Given the limited space I think the best way to
-> > do this would be to put a slideshow on my laptop.
-> >
-> > I've made a start on this here:
-> > https://docs.google.com/presentation/d/1KYxhsxO-8GxhAreE0GKnTOCPdY6_
-> 4uXYIEp6Lc55MB8/edit?usp=sharing
-> >
-> > I've made this publicly editable so please feel free to add slides for
-> > any OE features you want to show off and any projects (professional or
-> > hobbyist) built with OE. If anyone can add a slide on project history
-> > that would also be great. I'd also like a slide on the latest release
-> > and the new features added. Photos of hardware projects using OE and
-> > features like Toaster would be especially welcome!
-> >
-> > I'll give this a final edit before FOSDEM and the put it on rotation
-> > on a laptop at the stand. Hopefully it will be useful for future
-> > events as well.
->
-> Can we build a small board with a largish screen so we can run the show
-> on a device running an image built by OpenEmbedded?
->
-> Philip
->
-> Hi,
+In basic terms, you need a machine which:
 
-currently I am putting together something like a
-'diy-rpi-notebook-on-tripod' - WIP no photos yet. Would like to put a music
-keyboard in front of it. Area required 1-2 square meters - no table
-required. Is such thing accepted / of interest?
+* Sets TARGET_ARCH to the right thing (i686 or x86_64)
+* Sets TARGET_OS to mingw32
 
-Andreas
+and then some distro config which sets up the toolchain when mingw is
+the target os to the values like meta-mingw/conf/machine-sdk/i686-
+mingw32.conf sets.
+
+You'd need need to look through the bbappends which are in meta-mingw
+and add them to the appropriate pieces you need for target binaries
+rather than sdk binaries.
+
+I did once do this for darwin so it is possible, I've never tried it
+for windows though.
+
+Cheers,
+
+Richard
 
