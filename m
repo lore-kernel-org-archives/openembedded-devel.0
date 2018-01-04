@@ -1,24 +1,26 @@
 Return-Path: <Kai.Kang@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 5863371A32
+Received: from mail5.wrs.com (mail5.windriver.com [192.103.53.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 99DFD784DC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jan 2018 07:19:52 +0000 (UTC)
+	Thu,  4 Jan 2018 07:19:54 +0000 (UTC)
 Received: from ALA-HCB.corp.ad.wrs.com (ala-hcb.corp.ad.wrs.com
 	[147.11.189.41])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w047JsBU010249
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	by mail5.wrs.com (8.15.2/8.15.2) with ESMTPS id w047Jttg016949
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=OK)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 3 Jan 2018 23:19:54 -0800 (PST)
+	Wed, 3 Jan 2018 23:19:56 -0800
 Received: from pek-hostel-deb02.wrs.com (128.224.153.152) by
 	ALA-HCB.corp.ad.wrs.com (147.11.189.41) with Microsoft SMTP Server id
-	14.3.361.1; Wed, 3 Jan 2018 23:19:40 -0800
+	14.3.361.1; Wed, 3 Jan 2018 23:19:54 -0800
 From: <kai.kang@windriver.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Thu, 4 Jan 2018 14:58:45 +0800
-Message-ID: <20180104065846.20541-1-kai.kang@windriver.com>
+Date: Thu, 4 Jan 2018 14:58:46 +0800
+Message-ID: <20180104065846.20541-2-kai.kang@windriver.com>
 X-Mailer: git-send-email 2.14.1
+In-Reply-To: <20180104065846.20541-1-kai.kang@windriver.com>
+References: <20180104065846.20541-1-kai.kang@windriver.com>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] cfengine-masterfiles: 3.9.0 -> 3.10.2
+Subject: [meta-oe][PATCH 2/2] cfengine: 3.9.0 -> 3.10.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,101 +33,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 07:19:53 -0000
+X-List-Received-Date: Thu, 04 Jan 2018 07:19:55 -0000
 Content-Type: text/plain
 
 From: Kai Kang <kai.kang@windriver.com>
 
-Upgrade cfengine-masterfiles from 3.9.0 to lastest lts version 3.10.2.
-
-* year info has been updated in license file so md5 checksum changed
-* remove remove-policy-of-usr-local-sbin.patch which has been done in upstream already
-* correct install prefix
+Upgrade cfengine from 3.9.0 to lastest lts version 3.10.2.
 
 Signed-off-by: Kai Kang <kai.kang@windriver.com>
 ---
- .../remove-policy-of-usr-local-sbin.patch          | 28 ----------------------
- ...les_3.9.0.bb => cfengine-masterfiles_3.10.2.bb} | 17 +++++++------
- 2 files changed, 8 insertions(+), 37 deletions(-)
- delete mode 100644 meta-oe/recipes-extended/cfengine/cfengine-masterfiles/remove-policy-of-usr-local-sbin.patch
- rename meta-oe/recipes-extended/cfengine/{cfengine-masterfiles_3.9.0.bb => cfengine-masterfiles_3.10.2.bb} (64%)
+ .../cfengine/{cfengine_3.9.0.bb => cfengine_3.10.2.bb}      | 13 ++++++++-----
+ 1 file changed, 8 insertions(+), 5 deletions(-)
+ rename meta-oe/recipes-extended/cfengine/{cfengine_3.9.0.bb => cfengine_3.10.2.bb} (82%)
 
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/remove-policy-of-usr-local-sbin.patch b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/remove-policy-of-usr-local-sbin.patch
-deleted file mode 100644
-index 3f8debc28..000000000
---- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles/remove-policy-of-usr-local-sbin.patch
-+++ /dev/null
-@@ -1,28 +0,0 @@
--Upstream-Status: Inappropriate [configuration]
--
--Directory /usr/local is not used for us. Remove the policy that not to install
--binaries to /usr/local/sbin.
--
--Signed-off-by: Kai Kang <kai.kang@windriver.com>
-----
--diff --git a/cfe_internal/update/update_bins.cf b/cfe_internal/update/update_bins.cf
--index 1796caa..697af0d 100644
----- a/cfe_internal/update/update_bins.cf
--+++ b/cfe_internal/update/update_bins.cf
--@@ -55,16 +55,6 @@ bundle agent cfe_internal_bins
--       depth_search => u_recurse_basedir("inf"),
--       action => u_immediate;
-- 
---      "/usr/local/sbin/$(agents)"
---      comment => "Create symlinks of CFE binaries in /usr/local/sbin",
---      handle => canonify("cfe_internal_bins_files_sbin_$(agents)"),
---      move_obstructions => "true",
---      link_from => u_ln_s("$(sys.workdir)/bin/$(agents)");
---
---      "/usr/local/sbin/$(agents).cfsaved"
---      comment => "Remove all .cfsaved file extension",
---      handle => canonify("cfe_internal_bins_files_remove_$(agent)_cfsaved"),
---      delete => u_tidy;
-- }
-- 
-- bundle agent cfe_internal_update_bins
-diff --git a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.9.0.bb b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
-similarity index 64%
-rename from meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.9.0.bb
-rename to meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
-index 9d01c5128..b52e7cc08 100644
---- a/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.9.0.bb
-+++ b/meta-oe/recipes-extended/cfengine/cfengine-masterfiles_3.10.2.bb
+diff --git a/meta-oe/recipes-extended/cfengine/cfengine_3.9.0.bb b/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
+similarity index 82%
+rename from meta-oe/recipes-extended/cfengine/cfengine_3.9.0.bb
+rename to meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
+index 4aa8dedc4..b86b0a1f1 100644
+--- a/meta-oe/recipes-extended/cfengine/cfengine_3.9.0.bb
++++ b/meta-oe/recipes-extended/cfengine/cfengine_3.10.2.bb
 @@ -1,5 +1,5 @@
  #
 -# Copyright (C) 2014 - 2016 Wind River Systems, Inc.
 +# Copyright (C) 2014 - 2017 Wind River Systems, Inc.
  #
- SUMMARY = "Base policy for CFEngine"
+ SUMMARY = "CFEngine is an IT infrastructure automation framework"
  
-@@ -18,20 +18,19 @@ or wherever `$(sys.masterdir)` points. \
+@@ -11,7 +11,7 @@ its lifecycle. CFEngine takes systems from Build to Deploy, Manage and Audit."
  HOMEPAGE = "http://cfengine.com"
  
- LICENSE = "MIT"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=52cd3d13af93180822888ab0088e9328"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=9f76426f9ef8c6f6739fadd21d817a4f"
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=cd59c3650c8b7ff36bab1cc6587b097a"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=f8b34828ab373d6b1bb4b0fc60a78494"
  
--SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz \
--           file://remove-policy-of-usr-local-sbin.patch \
--"
--SRC_URI[md5sum] = "b101ddcd546738af6ec91be5c297cb24"
--SRC_URI[sha256sum] = "63dec2f8649f5f2788cd463dccf47f8dbe941522acfcf3093517f983bbfa0606"
-+SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz"
-+
-+SRC_URI[md5sum] = "1247ef4e8f3cee5efa98da50c326e5a4"
-+SRC_URI[sha256sum] = "5d18a8d71f451d0b5dd1f5e579452b29b99b664f2bb0827dbba9a615f2764df6"
+ DEPENDS = "attr tokyocabinet"
  
- inherit autotools
+@@ -20,14 +20,17 @@ SRC_URI = "https://cfengine-package-repos.s3.amazonaws.com/tarballs/${BP}.tar.gz
+            file://set-path-of-default-config-file.patch \
+ "
+ 
+-SRC_URI[md5sum] = "63da39655cfca30ca885fcc4a1bf8aa4"
+-SRC_URI[sha256sum] = "32a38aedf1199c2361e1335e0d4a1d98f9efa7cd591bcb647f35c7395bb66f2d"
++SRC_URI[md5sum] = "c16baf08189a1af6fcf2e2ff61102992"
++SRC_URI[sha256sum] = "d4fa9ac7276dba7b85d6757aab2f0929ab8d3b115cb0e7b0cf984760347429d7"
+ 
+ inherit autotools systemd
  
  export EXPLICIT_VERSION="${PV}"
  
--EXTRA_OECONF = "--prefix=${localstatedir}/cfengine"
-+EXTRA_OECONF = "--prefix=${datadir}/cfengine"
+-SYSTEMD_SERVICE_${PN} = "cfengine3.service cfengine3-web.service"
++SYSTEMD_SERVICE_${PN} = "cfengine3.service cf-apache.service cf-hub.service cf-postgres.service \
++                         cf-runalerts.service cf-consumer.service cf-execd.service \
++                         cf-monitord.service  cf-redis-server.service  cf-serverd.service \
++"
+ SYSTEMD_AUTO_ENABLE_${PN} = "disable"
  
--FILES_${PN} += "${localstatedir}/cfengine"
-+FILES_${PN} = "${datadir}/cfengine"
- 
- RDEPENDS_${PN} += "python-core"
+ PACKAGECONFIG ??= "libpcre openssl \
 -- 
 2.14.1
 
