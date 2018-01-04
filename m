@@ -1,47 +1,59 @@
-Return-Path: <texier.pj2@gmail.com>
-Received: from mail-wr0-f193.google.com (mail-wr0-f193.google.com
-	[209.85.128.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 9707B60191
+Return-Path: <rjpdasilva@gmail.com>
+Received: from mail-wr0-f173.google.com (mail-wr0-f173.google.com
+	[209.85.128.173])
+	by mail.openembedded.org (Postfix) with ESMTP id CF8D560191
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jan 2018 17:14:28 +0000 (UTC)
-Received: by mail-wr0-f193.google.com with SMTP id p17so2133820wre.7
+	Thu,  4 Jan 2018 17:27:25 +0000 (UTC)
+Received: by mail-wr0-f173.google.com with SMTP id w107so2158111wrb.9
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2018 09:14:29 -0800 (PST)
+	Thu, 04 Jan 2018 09:27:27 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=qWlY8PUgiZQyM4u6PuAHcSzDHnci+Boh1TDH6JzxkVc=;
-	b=VIYvJ+4+/ifhesqFkdMUMKkWkAGlvNPWYzJiFJmu+ZX7ajuAgh46jhP6xAStKsbSQ4
-	0qhtal3jWQQZcA/QpLI7XOcMmxZCLdxTQ5HxlZbNZWIpgrzqGXHAWVrqxzEqWdWBTwl5
-	kcnJ9pITQa/7qPwg1wmrKZMyyje2QXsAn3c6d4dhFFdiziJeaSKS/5TEnmrK2kZweoT5
-	bj1oeCWU9xg6l6od/5TOWGmvFEoT9XrL7IoMgpAEvCgzQK1BpmsmNOjaNuA6VzRhQpOU
-	xROas6/UL8EvJFK/czg1eMKrBy6rz1/dTNeS/PUMu1hi3chmH+tjGYsX+BP3AmPl0AC3
-	nM+g==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language:content-transfer-encoding;
+	bh=x+lmqYFQTQ7iof7FYMBYy8DCrqcdAqqDCKZF9C5k8bo=;
+	b=PzjSZ/sPvRhEnP2LasO7InV9Mmc1rgCivsVXIqY8aFxKOvZjD3yUAdEXb9LN14hhZA
+	R7JIJ2ycMtHOwVlnF1xDIzRRLMUOPZLSMTSr9+cpwC5TL/hI9bGPlCJ2nvRYsp0jfo9k
+	ADRCzg6984jotwDpyEOa4q9QMLA0BC1qNhzVG4fjidFDRZa/Cs+wvl2EpxHEdbklbND3
+	hio0tBBgt5B+tUb8bKoBfzaQIB2DIgU01hLD59L62t7ddmrimfPuz1dvsnIhOMV0JifQ
+	SVw9d1wuF0zrX9syyA0MUW7d73bJfSs9myp22HqsFZjvvxoGtkOnfm8+dQ6XOqlBpvaf
+	TicA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=qWlY8PUgiZQyM4u6PuAHcSzDHnci+Boh1TDH6JzxkVc=;
-	b=SqKf2uxcbp8+k6u9Cq9FB0bAsYO+k8F8Kqpdra14+aVyDc+uxTd0z1D2m+IYWMOY6k
-	m9hgjXmbd5FuDAQXpqibr4rdp+f+TbCZidu3dBaZe+c6n7gqxZ8ty2RbFkaFG7XP1UAE
-	qYcARD2+DsDfA84NJRfnUKO2Lo1rvUSLiwGMb+9MyUhul8OMzmzFIXbSeB7xQ4Knz85P
-	pflxsnwfQkalotT026N4GlzCqcf9hwi/Tmdx/7fx1iOu9dNTWcQJQ0EIKGdRimLYuox+
-	rhlOyHdFbyIPwKnhLQDYgbVemD3AOT9xCFcZVPsKOP1IV5PGI3q1pMbLkAAGHZDBUkmN
-	66Rw==
-X-Gm-Message-State: AKGB3mJsQ202/2Ixxv+MA2OGs/Ed7krhIezXyYYVfLdWqdj8ePsJagMb
-	sfP//Imh5SEPjb9tR81cH5kQ4O2I
-X-Google-Smtp-Source: ACJfBouyr9xSP+gMjllPqV3ZuK60h0TFMbXutPJ43SJaj5Uhs62hSgztW1xwDSHQsrxSM5fY5QTRQA==
-X-Received: by 10.223.139.18 with SMTP id n18mr280858wra.0.1515086069111;
-	Thu, 04 Jan 2018 09:14:29 -0800 (PST)
-Received: from menoah.home ([2a01:cb19:190:c500:9568:103c:a64a:ed73])
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language
+	:content-transfer-encoding;
+	bh=x+lmqYFQTQ7iof7FYMBYy8DCrqcdAqqDCKZF9C5k8bo=;
+	b=R0N4B5U8bMTFpOEXbbXapZdS7PCk4Kt7SlMSI8m9NeIhHKKFmbfDWbwUifWPap7NKU
+	EGufMR3QDcmAZ5rIkERltwb0lrRsanQpBBDbIYOHWNxh/uFWl4xLGa6YIwHubhH67muD
+	bIZylquBKojB19hP5LYbr0GMI1yM1oyotxZ5++tJHCu82cySNsMBYRKyuwOHiPLv14o5
+	GszXsX4/CySFKpi6kT6SQCR57qMauvGul7GDnjX/sq0xUYcuvvdqOoH3Qv4mI3qUyUZ2
+	GGU37ZtMRb8TthMZWd9uWs0Jr3ivCrxePiq9UXVjP9zSdhkLa+a/thxlopJUKx2dqmNa
+	RNHw==
+X-Gm-Message-State: AKGB3mJt6i8u7J03CLOcYanzHejXVHRzjUVUYCO5DOAtae5sQxCeLK3y
+	wMyglBXkhTU1Bv9Tf0QA9vkprQ==
+X-Google-Smtp-Source: ACJfBot+AufemrfCHUvAcFVD0aGi6zy6hvucmGO3NEhhWLkZYHt8wrR38SqydpUNkdeT4hlnn9erCg==
+X-Received: by 10.223.192.65 with SMTP id c1mr287891wrf.58.1515086846423;
+	Thu, 04 Jan 2018 09:27:26 -0800 (PST)
+Received: from ?IPv6:2001:8a0:6606:9100:7f03:4efc:e311:2e44?
+	([2001:8a0:6606:9100:7f03:4efc:e311:2e44])
 	by smtp.googlemail.com with ESMTPSA id
-	e21sm3341013wre.28.2018.01.04.09.14.28
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jan 2018 09:14:28 -0800 (PST)
-From: Pierre-Jean TEXIER <texier.pj2@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jan 2018 18:14:16 +0100
-Message-Id: <1515086056-5102-1-git-send-email-texier.pj2@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][PATCH] spitools: bump git revision
+	p90sm3462402wmf.3.2018.01.04.09.27.25
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Thu, 04 Jan 2018 09:27:25 -0800 (PST)
+To: Tim Orling <timothy.t.orling@linux.intel.com>
+References: <20180104160623.23830-1-rjpdasilva@gmail.com>
+	<C86C34FA-F934-44CA-8A2B-64478F87AD82@linux.intel.com>
+	<048780aa-783c-21f8-d54e-afca1545d943@gmail.com>
+	<1E32C484-99E3-4DDB-B996-2C85D07D79AB@linux.intel.com>
+From: Ricardo Silva <rjpdasilva@gmail.com>
+Message-ID: <959a3d8f-9d9e-bd45-083d-46a9605dab68@gmail.com>
+Date: Thu, 4 Jan 2018 17:27:25 +0000
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.2
+MIME-Version: 1.0
+In-Reply-To: <1E32C484-99E3-4DDB-B996-2C85D07D79AB@linux.intel.com>
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [meta-python][PATCH] pycrypto: Add recipe to have support on python3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,29 +66,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 17:14:28 -0000
+X-List-Received-Date: Thu, 04 Jan 2018 17:27:26 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-The new revision implement the wait option to keep the file descriptor open and avoid speed reset on close.
+Hi Tim,
 
-Signed-off-by: Pierre-Jean TEXIER <texier.pj2@gmail.com>
----
- meta-oe/recipes-support/spitools/spitools_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+On 01/04/2018 04:56 PM, Tim Orling wrote:
+> 
+>> On Jan 4, 2018, at 8:51 AM, Ricardo Silva <rjpdasilva@gmail.com> wrote:
+>>
+>>>
+>>> Rather than duplicate the SRC_URI in both python2- and python3- recipes, we should add them to python-pycrypto.inc and add the following to python-pycrypto.inc
+>>>
+>>> FILESEXTRAPATHS_prepend := "${THISDIR}/python-pycrypto:”
+>>>
+>>
+>> Agree.
+>> Shall I send a v2 with your suggested changes?
+>>
+> 
+> Yes, please. If you don’t mind (it will need to remove the extra SRC_URI lines from python2 recipe, add the SRC_URI lines and FILESEXTRAPATHS to .inc and then add the python3 recipe).
 
-diff --git a/meta-oe/recipes-support/spitools/spitools_git.bb b/meta-oe/recipes-support/spitools/spitools_git.bb
-index 2eedf8c..3f6cdc6 100644
---- a/meta-oe/recipes-support/spitools/spitools_git.bb
-+++ b/meta-oe/recipes-support/spitools/spitools_git.bb
-@@ -8,7 +8,7 @@ PR = "r0"
- 
- BPV = "0.8.1"
- PV = "${BPV}"
--SRCREV = "03405ab45884e4264dfa0371c032b2baaeeaaa98"
-+SRCREV = "318bcae5249722873bf58b27afdd20473c7047cc"
- 
- S = "${WORKDIR}/git"
- 
--- 
-2.7.4
+Glad to. You mean the changes should be split over a patch series, or OK
+to have a single patch with all the changes?
 
+Also note that the .inc file already had :
+	FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
+so I would just change that to:
+	FILESEXTRAPATHS_prepend := "${THISDIR}/python-pycrypto:"
+
+Regards,
+
+Ricardo Silva
 
