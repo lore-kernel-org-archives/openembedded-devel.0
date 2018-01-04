@@ -1,50 +1,50 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id D481A787C3
+Received: from mail-wm0-f66.google.com (mail-wm0-f66.google.com [74.125.82.66])
+	by mail.openembedded.org (Postfix) with ESMTP id 216D7787CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  4 Jan 2018 13:19:44 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id g75so3492191wme.0
+	Thu,  4 Jan 2018 13:19:48 +0000 (UTC)
+Received: by mail-wm0-f66.google.com with SMTP id f140so3376060wmd.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 04 Jan 2018 05:19:46 -0800 (PST)
+	Thu, 04 Jan 2018 05:19:50 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=BpC7nFPiyyiQ+ea2afDyi7+wFZklT4SPAKRbqeJgqOM=;
-	b=Ip4KFwHwSLxiursdwSLYF3cwbH6iN6Ug+h6OiQBErPL8DyDH4Bbsqbl5lu2lYKr2Pw
-	U2uD4VVSbuO3FFJDMVfGqT2rlGOyibQpvda88PcmK2nWmolCehFb4NrSN1BkRlrK3kxr
-	R7v6WgQ0yVOD2YGgCFc4f1ZqfbOAff7hog5xNZNrtAo3UU3rhMD9LrFhfC/9izUOcYZH
-	Qms9za6hdueWrAQ9oDhUsjKukCDfMNk4yEE4vzK1vUWaubgU3f4tnqPjUaBz9QA4F87U
-	s18jk/BCkDahssoljV86Y3jEfGlutWY/aX83CXcLKEA6cFpJDvvNUqW1iJ+1LhGAAZWE
-	ViEA==
+	bh=V5eyWGlxKVI8A6tMnz0Tr92ic4Ibl/P7u7MCMYhYdCM=;
+	b=eVUXBqiQVAQihAaeKr/HDKCMns2S9oqzAGsttRP51QzTSyC+fOqwpJlvW+SDgv10Bk
+	PBubyYVgxT72nf5GMCFtRfBQc+he0NZmvuUh9KUed0dVTIoIISoVxKy6v4QKi8mb/pN4
+	qXNqI7vpJZnDlC/RYtfwled3DLth9z3z+7fuKoBTkYp6Fg99eOKd5iSO7BYubENlahEv
+	WXh8czTKMt1cNm+WaLsILpe1RDG0C6QSaKEfYidEOHTEwK/d2bKjcffn586lChstrzwc
+	JvxoLyyqiLDbLbGVQjYSTuJAtoxfD3J6BBBKkt/qsxFrFvfPrTvNxuYaV7RR5BrnW1Q6
+	ivRw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=BpC7nFPiyyiQ+ea2afDyi7+wFZklT4SPAKRbqeJgqOM=;
-	b=mOcRo4ISI1lk5891MdwUCAAVl0iKmNEvLvx/jSMLzlVMEIVI5luweyyw2c9DMEuJPF
-	9+gkAtSpUlvKACV0WQxjnGLPAnP9NLpAKMdYcrN0OQguLFltdJe25aayf3Fnr0/mR/Py
-	dYZropddtWhcXhqb6hoRDsv1lNs1dItVkflzCDnZJX4wSnZ7JHxMj44Jf0lGGcdyyQ8D
-	NZLBepK6FgSiG3VisguhJswD6nkZID/eIQLouSi0AGOI0yziUl7F1AelmidVPEAIAOic
-	7XZnYKp7WdLxrh5HTP6UDSz1C+Z5e2UCGmAodWoYVUBev2KL9PismUGZQNJSBYOo8QTJ
-	HE3w==
-X-Gm-Message-State: AKGB3mLe4qMdIBm0Vl7uky4TJyG3fyHJ4ketHyhzDhG0iIcWvQFU7OLb
-	g9NMpNB3Xx+pQEfoxFRfRAhRRA==
-X-Google-Smtp-Source: ACJfBov5IM8PZZcY7S9XVfAfc4cJmJf8DpKm8of6EJZ+9zm26eUZyW9VNA8f11XSoTmGj7dmdIBO8Q==
-X-Received: by 10.80.245.26 with SMTP id t26mr7269586edm.301.1515071985730;
-	Thu, 04 Jan 2018 05:19:45 -0800 (PST)
+	bh=V5eyWGlxKVI8A6tMnz0Tr92ic4Ibl/P7u7MCMYhYdCM=;
+	b=VrZhqJ42YUfypY6U6Uu+Mll3OJLdpHrYUKLJxALs66/a0L4GEkULIsm7SZy8u1h188
+	3zTFSDCyCvqDpreL2QvZSwDGyEV0L4xwcqPMUxx7XrKaYaN+Ud2wm2B0/fTLjjJ6+0U5
+	+G+912JGX8gV2SJsMrYJN/Mz05U48Z8PUQR7qKzAvKyUA6Q1AgSy70WjXAx/gAOsEWGd
+	mkSz7Qf/7xZHWBC3OzXkar9XNuaPEEwnclH+I9CjRq/Ap2e6F5d2ATf1pPf882mQ/WPW
+	ta6ZLqdg/s+6hHPZ5dRscDnKaZ8wLnPqndySoq2SUSPKgxy1Tb7c/e4/UMCEafxzb2Jl
+	EYmw==
+X-Gm-Message-State: AKGB3mK+7CjxiHiOU9pux61+GcJEAhkyjEPv1qXo577pLBDLIFBvxtlC
+	RBOCyNzFMimO/hYiCN3bwGYV+A==
+X-Google-Smtp-Source: ACJfBosdOxJo3DaY8+Uh2X6jQHQ7zub5u29l8qlTXXA9NZRYLcXAKqDaRz306WpqmHMGviFa7Bcfbg==
+X-Received: by 10.80.240.138 with SMTP id v10mr7394723edl.52.1515071989862;
+	Thu, 04 Jan 2018 05:19:49 -0800 (PST)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([123.125.90.58]) by smtp.gmail.com with ESMTPSA id
-	m23sm2107083edc.27.2018.01.04.05.19.43
+	m23sm2107083edc.27.2018.01.04.05.19.47
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Thu, 04 Jan 2018 05:19:45 -0800 (PST)
+	Thu, 04 Jan 2018 05:19:49 -0800 (PST)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  4 Jan 2018 14:19:09 +0100
-Message-Id: <1515071950-15401-7-git-send-email-liu.ming50@gmail.com>
+Date: Thu,  4 Jan 2018 14:19:10 +0100
+Message-Id: <1515071950-15401-8-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1515071950-15401-1-git-send-email-liu.ming50@gmail.com>
 References: <1515071950-15401-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-java][PATCH 6/7] jamvm: avoid checking x11 distro feature for native build
+Subject: [meta-java][PATCH 7/7] ant-contrib-native: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,50 +57,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 04 Jan 2018 13:19:45 -0000
+X-List-Received-Date: Thu, 04 Jan 2018 13:19:49 -0000
 
 From: Ming Liu <liu.ming50@gmail.com>
 
-x11 is not a mandatory distro feature for building jamvm-native, so
-avoid checking it for native build, or else it would lead parsing
-errors.
+The Ant-Contrib project is a collection of tasks (and at one point
+maybe types and other tools) for Apache Ant.
 
 Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- recipes-core/jamvm/jamvm.inc    | 3 ++-
- recipes-core/jamvm/jamvm_git.bb | 4 ----
- 2 files changed, 2 insertions(+), 5 deletions(-)
+ .../ant-contrib/ant-contrib-native_1.0b3.bb        | 37 ++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+ create mode 100644 recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
 
-diff --git a/recipes-core/jamvm/jamvm.inc b/recipes-core/jamvm/jamvm.inc
-index da1ca29..7a6b6b6 100644
---- a/recipes-core/jamvm/jamvm.inc
-+++ b/recipes-core/jamvm/jamvm.inc
-@@ -15,8 +15,9 @@ RPROVIDES_${PN}_class-native = ""
- 
- BBCLASSEXTEND = "native"
- 
-+inherit java autotools update-alternatives pkgconfig relative_symlinks distro_features_check
- 
--inherit java autotools update-alternatives pkgconfig relative_symlinks
-+REQUIRED_DISTRO_FEATURES_class-target = "x11"
- 
- # This uses 32 bit arm, so force the instruction set to arm, not thumb
- ARM_INSTRUCTION_SET = "arm"
-diff --git a/recipes-core/jamvm/jamvm_git.bb b/recipes-core/jamvm/jamvm_git.bb
-index 6bbfa52..1762ade 100644
---- a/recipes-core/jamvm/jamvm_git.bb
-+++ b/recipes-core/jamvm/jamvm_git.bb
-@@ -3,10 +3,6 @@
- 
- require jamvm.inc
- 
--inherit distro_features_check
--
--REQUIRED_DISTRO_FEATURES = "x11"
--
- SRCREV = "6cef41d859fbc9ce7868a97cb2cb5dd2b10b9103"
- PV = "2.0.0-devel+git${SRCPV}"
- 
+diff --git a/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb b/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
+new file mode 100644
+index 0000000..2a44ea2
+--- /dev/null
++++ b/recipes-core/ant-contrib/ant-contrib-native_1.0b3.bb
+@@ -0,0 +1,37 @@
++SUMMARY = "(java): collection of tasks, types and other tools for Apache Ant"
++DESCRIPTION = "The Ant-Contrib project is a collection of tasks (and at one \
++point maybe types and other tools) for Apache Ant."
++HOMEPAGE = "http://ant-contrib.sourceforge.net"
++PRIORITY = "optional"
++SECTION = "libs"
++LICENSE = "Apache-2.0"
++LIC_FILES_CHKSUM = "file://docs/LICENSE.txt;md5=f84919efee8dbf5c7730927c5b8716f9"
++
++DEPENDS = "ant-native commons-cli-native commons-codec-native \
++           commons-httpclient-native commons-logging-native \
++           oro-native bcel-native xerces-j-native \
++          "
++
++inherit java-library java-native
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/ant-contrib/ant-contrib-${PV}-src.zip"
++
++SRC_URI[md5sum] = "07b23539bef04ec56970c876a33f7665"
++SRC_URI[sha256sum] = "ba3621f397af14d5a19375f391ec9bf2908c46c5558ca0df8365e04fe3ac3633"
++
++S = "${WORKDIR}/ant-contrib"
++
++do_compile() {
++    mkdir -p build
++
++    oe_makeclasspath cp -s ant commons-cli commons-codec commons-httpclient commons-logging oro bcel xercesImpl
++    cp=build:${S}/lib/ivy/jars/ivy-1.3.1.jar:$cp
++
++    find src/java -name "*.java" > java_files
++
++    javac -sourcepath src/java -cp $cp -d build @java_files
++
++    (cd src/java && find . \( -name "*.properties" -or -name "*.xml" -or -name "*.mf" \) -exec cp {} ../../build/{} \;)
++
++    fastjar cf ${JARFILENAME} -C build .
++}
 -- 
 2.7.4
 
