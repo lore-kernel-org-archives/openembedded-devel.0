@@ -1,50 +1,30 @@
-Return-Path: <bruce.ashfield@gmail.com>
-Received: from mail-qt0-f181.google.com (mail-qt0-f181.google.com
-	[209.85.216.181])
-	by mail.openembedded.org (Postfix) with ESMTP id 2FEDA6093F;
-	Mon,  8 Jan 2018 23:20:58 +0000 (UTC)
-Received: by mail-qt0-f181.google.com with SMTP id u10so15738043qtg.2;
-	Mon, 08 Jan 2018 15:21:00 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=+yKHHVb56C/3Rs8UxiKVrwy4rdBx+eByWsjbw+OWQz8=;
-	b=Abj4U/t0jzddmNqeNw4leO6udgxwBWpyD4GsTSM1IE9CG7kCryStgXqeEvT+yWwz/r
-	MZ+oiBPJk4P7t/gtZArtjHPE/vHIN1Lr19bZk4UDd+yUiEZzXm3ihMsGWCNcApIgXC63
-	paap8wwdbyWfY6HKQignG1XVy5vlmZd/FaMqy71lZYEozrhSHzw4N0NDV9p2+bjck0bH
-	kbU3/ddxYWiDxlSRhur7CzRFCnl0XgK6HqNwhBgf+f4Ndw2G317g89o/q7ZuvZXZPEg7
-	Xj59CiZwwCaPc4nypkf2d+JNC5vn/mvedCvwnWV/EvbXAfMKZfddKwZR0iy5ZEJhgpzm
-	6pXg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=+yKHHVb56C/3Rs8UxiKVrwy4rdBx+eByWsjbw+OWQz8=;
-	b=jwTzvUz8GCfi+9QBQ9zq76ifPKM9Jqi4Ab1hmNtgsR+ca+xXHSwF4V9bGlM0PnS057
-	mZFztipoSmisFpjR06wRQ3WItB1vPjJQDdHdnj2FG+k5T/w3q6hxN0yHW23tRSo1nxvH
-	cpHVyKpx5Xdx0FSL96mjEq6ENKqox9QHZfXnx91KEepQd1y0IO6vzRqxqheZ88+Albrp
-	4OMM1NY5OeqcPGofGRWEC3wfWvg0wDFV7ePIZoYOxvlp/hNF85i8lPfoy4aXE1knqZKP
-	Z8OKSRbGy8XIFUM5ieoGjzfId4Pz+se2WZizC1RVMkBBcmfYRayox01ZxVZlMc941q7d
-	ppRA==
-X-Gm-Message-State: AKGB3mJUGWncgaE3qAuauP7INd6qjVvS12NjOAPOCENNIwMlsuDgIlYp
-	A7y2Z3D4EUVhTBGrySadhcy9KLDwz4KdPl26Snk=
-X-Google-Smtp-Source: ACJfBot2vIRkB+/hKmroyPwD6KM8ZtlNE64w0P79m6oW38+giIjEJHOiMPzOYxtDnJ4CB2qqTMop4xUdR3d7hhWuwxo=
-X-Received: by 10.200.14.130 with SMTP id v2mr18908879qti.289.1515453660049;
-	Mon, 08 Jan 2018 15:21:00 -0800 (PST)
+Return-Path: <zhengrq.fnst@cn.fujitsu.com>
+Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
+	by mail.openembedded.org (Postfix) with ESMTP id DC20260721
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Jan 2018 01:49:16 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35011964"
+Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2018 09:49:16 +0800
+Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
+	by cn.fujitsu.com (Postfix) with ESMTP id BB637486A76D
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  9 Jan 2018 09:49:16 +0800 (CST)
+Received: from localhost.localdomain (10.167.225.152) by
+	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
+	Server (TLS) id 14.3.361.1; Tue, 9 Jan 2018 09:49:17 +0800
+From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Jan 2018 12:20:19 +0800
+Message-ID: <1515126019-117327-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
-Received: by 10.12.182.96 with HTTP; Mon, 8 Jan 2018 15:20:59 -0800 (PST)
-In-Reply-To: <90d7f4e2-5b44-34ad-6403-d843e244299b@gmail.com>
-References: <161986bc-e04c-3cdd-c744-5cebff1d4fb7@gmail.com>
-	<CADkTA4M_b8e3d3bRCE+jY44F_atCy6ej51wdVEmFKE5y12nKVA@mail.gmail.com>
-	<90d7f4e2-5b44-34ad-6403-d843e244299b@gmail.com>
-From: Bruce Ashfield <bruce.ashfield@gmail.com>
-Date: Mon, 8 Jan 2018 18:20:59 -0500
-Message-ID: <CADkTA4Oxu+kDQEsjidRsGT_hXZvR5D3FAYoQZzVrrS_26-sYXQ@mail.gmail.com>
-To: akuster808 <akuster808@gmail.com>
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
-	Patches and discussions about the oe-core layer
-	<openembedded-core@lists.openembedded.org>
-Subject: Re: [OE-core] Yocto vrs K.O kernel, wireguard go Boom
+X-Originating-IP: [10.167.225.152]
+X-yoursite-MailScanner-ID: BB637486A76D.A8E49
+X-yoursite-MailScanner: Found to be clean
+X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
+X-Spam-Status: No
+Subject: [meta-oe][PATCH]nautilus: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,92 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 23:20:59 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 09 Jan 2018 01:49:17 -0000
+Content-Type: text/plain
 
-On Mon, Jan 8, 2018 at 4:57 PM, akuster808 <akuster808@gmail.com> wrote:
+Add a new recipe nautilus.
 
->
->
-> On 01/08/2018 08:01 AM, Bruce Ashfield wrote:
->
->
->
-> On Mon, Jan 8, 2018 at 10:08 AM, akuster808 <akuster808@gmail.com> wrote:
->
->> Hello,
->>
->> Wireguard in meta-networking is failing do to compat.h issues on newer
->> kernels. I have updated the package and it fixed  my problem on 4.14 K.O
->> kernel. Now I build it with the Yocko 4.12 and it fails. It wont fail with
->> a 4.12 K.O kernel. The is one commit that was backported from 4.13 K.O to
->> yocto 4.12 which is causing the issue.
->>
->> random: add get_random_{bytes,u32,u64,int,long,once}_wait family
->>
->> 6e4990d8d226e1861a5a2b632cf93bc70feab3af
->> <http://git.yoctoproject.org/cgit/cgit.cgi/linux-yocto-4.12/commit/include/linux/random.h?h=standard/base&id=6e4990d8d226e1861a5a2b632cf93bc70feab3af>
->>
->>
->>
-> If you try the 4.9 kernel, does it also have issues ? Either way, it is
-> likely just a -stable
-> fix that hasn't made it into our 4.12 maintenance cycle yet, and that is
-> something we
-> can fix by adding anything that is required to get things building again.
->
-> But knowing the 4.9 status would be a good data point, since I have more
-> -stable
-> updates queued (and not sent).
->
-> 4.9 works fine with current wireguard and updated version.
->
+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
+---
+ .../recipes-gnome/nautilus/nautilus_3.18.5.bb       | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
 
-ok. Thanks for doing that test. I'll do a check of the two -stable queues
-and see what's up.
-
-Bruce
-
-
->
-> - armin
->
-> So if it blows up, and then doesn't with AUTOREV,
-> we have a small set of commits to look at.
->
-> Bruce
->
->
->>
->>  I know Yocto is maintaining the 4.12 beyond the K.O release process so I
->> don't know if this a kernel bug or if I need to come up with some other
->> solution.
->>
->>
->> regards,
->> Armin
->>
->>
->>
->>
->> --
->> _______________________________________________
->> Openembedded-core mailing list
->> Openembedded-core@lists.openembedded.org
->> http://lists.openembedded.org/mailman/listinfo/openembedded-core
->>
->>
->
->
-> --
-> "Thou shalt not follow the NULL pointer, for chaos and madness await thee
-> at its end"
->
->
->
-
-
+diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+new file mode 100644
+index 0000000..a7774fa
+--- /dev/null
++++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+@@ -0,0 +1,21 @@
++SUMMARY = "File manager for GNOME"
++SECTION = "x11/gnome"
++
++LICENSE="GPLv3"
++LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
++                    file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
++                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++
++SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
++
++SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
++SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
++
++DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
++
++inherit distro_features_check autotools pkgconfig
++REQUIRED_DISTRO_FEATURES = "x11"
++
++EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --disable-nst-extension --enable-tracker=no --disable-schemas-compile --enable-xmp=no --disable-nls --enable-libexif=no --enable-introspection=no"
++
++FILES_${PN} += "${datadir}/*"
 -- 
-"Thou shalt not follow the NULL pointer, for chaos and madness await thee
-at its end"
+2.7.4
+
+
+
 
