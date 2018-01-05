@@ -1,30 +1,30 @@
 Return-Path: <zhengrq.fnst@cn.fujitsu.com>
 Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id DC20260721
+	by mail.openembedded.org (Postfix) with ESMTP id 4B60B784A2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jan 2018 01:49:16 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35011964"
-Received: from localhost (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2018 09:49:16 +0800
+	Tue,  9 Jan 2018 06:14:11 +0000 (UTC)
+X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35023663"
+Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
+	by heian.cn.fujitsu.com with ESMTP; 09 Jan 2018 14:14:11 +0800
 Received: from G08CNEXCHPEKD01.g08.fujitsu.local (unknown [10.167.33.80])
-	by cn.fujitsu.com (Postfix) with ESMTP id BB637486A76D
+	by cn.fujitsu.com (Postfix) with ESMTP id E8DF748AEA0B
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  9 Jan 2018 09:49:16 +0800 (CST)
+	Tue,  9 Jan 2018 14:14:09 +0800 (CST)
 Received: from localhost.localdomain (10.167.225.152) by
 	G08CNEXCHPEKD01.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Tue, 9 Jan 2018 09:49:17 +0800
+	Server (TLS) id 14.3.361.1; Tue, 9 Jan 2018 14:14:11 +0800
 From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
 To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 5 Jan 2018 12:20:19 +0800
-Message-ID: <1515126019-117327-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
+Date: Fri, 5 Jan 2018 16:45:13 +0800
+Message-ID: <1515141913-120084-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
 X-Mailer: git-send-email 1.8.3.1
 MIME-Version: 1.0
 X-Originating-IP: [10.167.225.152]
-X-yoursite-MailScanner-ID: BB637486A76D.A8E49
+X-yoursite-MailScanner-ID: E8DF748AEA0B.AB267
 X-yoursite-MailScanner: Found to be clean
 X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
 X-Spam-Status: No
-Subject: [meta-oe][PATCH]nautilus: new add
+Subject: [meta-oe][PATCH v2] xorgxrdp: new add
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,44 +37,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 09 Jan 2018 01:49:17 -0000
+X-List-Received-Date: Tue, 09 Jan 2018 06:14:14 -0000
 Content-Type: text/plain
 
-Add a new recipe nautilus.
+Add a new recipe xorgxrdp_0.2.5.bb.
 
 Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
 ---
- .../recipes-gnome/nautilus/nautilus_3.18.5.bb       | 21 +++++++++++++++++++++
- 1 file changed, 21 insertions(+)
- create mode 100644 meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+ .../recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb    | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
 
-diff --git a/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
+diff --git a/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
 new file mode 100644
-index 0000000..a7774fa
+index 0000000..20cf45f
 --- /dev/null
-+++ b/meta-gnome/recipes-gnome/nautilus/nautilus_3.18.5.bb
-@@ -0,0 +1,21 @@
-+SUMMARY = "File manager for GNOME"
-+SECTION = "x11/gnome"
++++ b/meta-oe/recipes-support/xorg-xrdp/xorgxrdp_0.2.5.bb
+@@ -0,0 +1,22 @@
++SUMMARY = "Xorg drivers for xrdp."
 +
-+LICENSE="GPLv3"
-+LIC_FILES_CHKSUM = "file://COPYING;md5=36cf660aea2b8beffba7945f44a7e748 \
-+                    file://COPYING.EXTENSIONS;md5=7579d6678402a1868631bf82c93ff0d4 \
-+                    file://COPYING.LIB;md5=f30a9716ef3762e3467a2f62bf790f0a"
++LICENSE = "X11"
++LIC_FILES_CHKSUM = "file://COPYING;md5=a2523660329fdca3d954c0a87390e007 \
++"
 +
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/nautilus/3.18/nautilus-${PV}.tar.xz"
++inherit autotools pkgconfig 
 +
-+SRC_URI[md5sum] = "0f578bda5655c0ce204befafca5803d7"
-+SRC_URI[sha256sum] = "60a927c0522b4cced9d8f62baed2ee5e2fd4305be4523eb5bc44805971a6cc15"
++DEPENDS = "virtual/libx11 xserver-xorg xrdp nasm-native"
 +
-+DEPENDS = "gtk+3 gnome-desktop3 gsettings-desktop-schemas glib-2.0-native intltool-native pango"
++SRC_URI = "git://github.com/neutrinolabs/xorgxrdp.git \
++           "
 +
-+inherit distro_features_check autotools pkgconfig
-+REQUIRED_DISTRO_FEATURES = "x11"
++SRCREV = "c122544f184d4031bbae1ad80fbab554c34a9427"
 +
-+EXTRA_OECONF = " --disable-gtk-doc  --disable-update-mimedb --disable-nst-extension --enable-tracker=no --disable-schemas-compile --enable-xmp=no --disable-nls --enable-libexif=no --enable-introspection=no"
++PV = "0.2.5+git${SRCPV}"
 +
-+FILES_${PN} += "${datadir}/*"
++S = "${WORKDIR}/git"
++
++FILES_${PN} += "${libdir}/xorg/modules/*"
++
++INSANE_SKIP_${PN} += "xorg-driver-abi"
 -- 
 2.7.4
 
