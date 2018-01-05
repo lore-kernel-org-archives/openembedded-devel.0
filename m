@@ -1,29 +1,24 @@
-Return-Path: <maxin.john@intel.com>
-Received: from mga04.intel.com (mga04.intel.com [192.55.52.120])
-	by mail.openembedded.org (Postfix) with ESMTP id 036BD71D79
+Return-Path: <Randy.MacLeod@windriver.com>
+Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
+	by mail.openembedded.org (Postfix) with ESMTP id EEF15787F8
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jan 2018 14:32:05 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from fmsmga007.fm.intel.com ([10.253.24.52])
-	by fmsmga104.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	05 Jan 2018 06:32:07 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,318,1511856000"; 
-   d="scan'208";a="7506463"
-Received: from linux.intel.com ([10.54.29.200])
-	by fmsmga007.fm.intel.com with ESMTP; 05 Jan 2018 06:32:06 -0800
-Received: from mbabyjoh-desk.fi.intel.com (mbabyjoh-desk.fi.intel.com
-	[10.237.72.84])
-	by linux.intel.com (Postfix) with ESMTP id 34DF858030D
+	Fri,  5 Jan 2018 17:48:11 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w05HmCgM028341
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jan 2018 06:32:06 -0800 (PST)
-From: "Maxin B. John" <maxin.john@intel.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri,  5 Jan 2018 16:33:09 +0200
-Message-Id: <1515162789-35322-1-git-send-email-maxin.john@intel.com>
-X-Mailer: git-send-email 2.4.0
-Subject: [PATCH] ell: Upgrade SRCREV
+	Fri, 5 Jan 2018 09:48:12 -0800 (PST)
+Received: from ala-lpggp2.wrs.com (147.11.105.123) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Fri, 5 Jan 2018 09:48:12 -0800
+From: Randy MacLeod <Randy.MacLeod@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 5 Jan 2018 09:48:12 -0800
+Message-ID: <20180105174812.107850-1-Randy.MacLeod@windriver.com>
+X-Mailer: git-send-email 2.11.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH] zile: update to 2.14
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -36,33 +31,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2018 14:32:06 -0000
+X-List-Received-Date: Fri, 05 Jan 2018 17:48:12 -0000
+Content-Type: text/plain
 
-Upgrade to:
-8192131 : dbus: Fix setup in l_dbus_proxy_method_call
+Mostly minor build and documentation changes.
+The COPYING file changes due to switching URLs from http to https.
 
-This is a requirement for BTP client tool support in Bluez5.
-https://git.kernel.org/pub/scm/bluetooth/bluez.git/commit/?id=f68235b2c03235695837abfb6d7ceebacbf14dd9
-
-Signed-off-by: Maxin B. John <maxin.john@intel.com>
+Signed-off-by: Randy MacLeod <Randy.MacLeod@windriver.com>
 ---
- meta-oe/recipes-core/ell/ell_git.bb | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ meta-oe/recipes-support/zile/{zile_2.4.11.bb => zile_2.4.14.bb} | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-oe/recipes-support/zile/{zile_2.4.11.bb => zile_2.4.14.bb} (70%)
 
-diff --git a/meta-oe/recipes-core/ell/ell_git.bb b/meta-oe/recipes-core/ell/ell_git.bb
-index 10df6e1..4354974 100644
---- a/meta-oe/recipes-core/ell/ell_git.bb
-+++ b/meta-oe/recipes-core/ell/ell_git.bb
-@@ -7,7 +7,7 @@ SECTION = "libs"
+diff --git a/meta-oe/recipes-support/zile/zile_2.4.11.bb b/meta-oe/recipes-support/zile/zile_2.4.14.bb
+similarity index 70%
+rename from meta-oe/recipes-support/zile/zile_2.4.11.bb
+rename to meta-oe/recipes-support/zile/zile_2.4.14.bb
+index d663f44b9..515cf4136 100644
+--- a/meta-oe/recipes-support/zile/zile_2.4.11.bb
++++ b/meta-oe/recipes-support/zile/zile_2.4.14.bb
+@@ -3,14 +3,14 @@ HOMEPAGE = "http://zile.sourceforge.net/"
+ DEPENDS = "ncurses bdwgc"
+ 
+ LICENSE = "GPLv3"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
++LIC_FILES_CHKSUM = "file://COPYING;md5=1ebbd3e34237af26da5dc08a4e440464"
+ 
+ SRC_URI = "http://ftp.gnu.org/gnu/zile/${BP}.tar.gz \
+            file://remove-help2man.patch \
+ "
+ 
+-SRC_URI[md5sum] = "7a460ccec64e3bec2835697b2eae533c"
+-SRC_URI[sha256sum] = "1fd27bbddc61491b1fbb29a345d0d344734aa9e80cfa07b02892eedf831fa9cc"
++SRC_URI[md5sum] = "c7d7eec93231c6878f255978d9747a73"
++SRC_URI[sha256sum] = "7a78742795ca32480f2bab697fd5e328618d9997d6f417cf1b14e9da9af26b74"
+ 
  inherit autotools pkgconfig
  
- S = "${WORKDIR}/git"
--SRCREV = "7b7c15c2e5caff88fc45e7a8b874a47196a0eddd"
-+SRCREV = "8192131685be0f27d6f51b14b78ef93fa7f3c692"
- SRC_URI = "git://git.kernel.org/pub/scm/libs/ell/ell.git"
- 
- do_configure_prepend () {
 -- 
-2.4.0
+2.11.0
 
 
