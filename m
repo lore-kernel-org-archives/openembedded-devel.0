@@ -1,47 +1,18 @@
-Return-Path: <sledz@dresearch-fe.de>
-Received: from mail-wm0-f43.google.com (mail-wm0-f43.google.com [74.125.82.43])
-	by mail.openembedded.org (Postfix) with ESMTP id 9347A780FA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  5 Jan 2018 11:29:08 +0000 (UTC)
-Received: by mail-wm0-f43.google.com with SMTP id f140so1888214wmd.2
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 05 Jan 2018 03:29:10 -0800 (PST)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=dresearch-fe-de.20150623.gappssmtp.com; s=20150623;
-	h=subject:to:cc:references:from:message-id:date:user-agent
-	:mime-version:in-reply-to:content-language:content-transfer-encoding;
-	bh=JYjKZtTMIf2Td/xbhm96JcfW6xKs7IXO8zHZak+2QGo=;
-	b=w053Je87iOnvatRymgdCZBWrkvU0WcoNzLRk9n7JVUda1dw3VFXDnD4TT61TpeXovN
-	IxOLDa/aBrUOdb1T281Vp/fFOIB0k4ZcaJAVX1oN6EB3/blHrBctD0DNOBkTjVhONwlz
-	lj/nurI383cODXC4cGR06D8Ju0+gNzXAmkVtx0hBNvhdL9ERpT9U5xXF3qP1D8lelght
-	9of/Iw+J2i0RvtWj6aEeT9VamPcAJdEn112PGu7v00x/8zm1K5L1wa1m7dWzttRIF25i
-	HW0H0Ycdd+MA3TWQJjKRjJ86fgf3u63gjRsbJBVxq13C7wt6HbDYEia7C5og/CVeN4Lr
-	bFaQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
-	:user-agent:mime-version:in-reply-to:content-language
-	:content-transfer-encoding;
-	bh=JYjKZtTMIf2Td/xbhm96JcfW6xKs7IXO8zHZak+2QGo=;
-	b=OHFzwkYKwoq2UTocLs5iVW25wV7FVHKKo9Djk5yVjjS3P8mdS/jNOXLBUzwnXfqzuS
-	xQMzVGh/adYjHXid3Dcd8bLZDyd+EuDK8D3GqgXhW2lxKh3zbswTpfUIzIbIcMeygG/v
-	OctXUeDIoQUXyoW3gDf3lFWtYtP6Y0HLT4iqt/w74ohy/0yGYu3d/EMdo9rfN24MSK1H
-	LIfqm1+t702QPX3ItsrfOMkrcDc2SqvGTZerS9gff1KOlnxE6jm6nrF720zRiNOmjgWs
-	SyqlwuRkF/rQ6DBWHZ2aBX19RHXeik2cRnXtLMD0gVKTmjWJfIGJH/EAoVhz/sP9Cs7I
-	53pw==
-X-Gm-Message-State: AKGB3mL4n13KemH/ij0TU3z1TKh3MYn86wrdkY2GQwTB2XXe4CcOkBMA
-	F86gkeB+LF1dsVoEnIRm6xG+7g==
-X-Google-Smtp-Source: ACJfBovldWCrXJ1PSiM6CmnKf/XiBMof97x8+bfi/tUjI4QPIZAZ55bxIQZ5uA3MNdw1O2vR0u196g==
-X-Received: by 10.80.205.73 with SMTP id d9mr3689405edj.107.1515151749243;
-	Fri, 05 Jan 2018 03:29:09 -0800 (PST)
-Received: from ?IPv6:2003:a:31:4300::46? ([2003:a:31:4300::46])
-	by smtp.googlemail.com with ESMTPSA id
-	a5sm3596728edm.47.2018.01.05.03.29.07
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 05 Jan 2018 03:29:07 -0800 (PST)
-To: Richard Purdie <richard.purdie@linuxfoundation.org>,
-	"Burton, Ross" <ross.burton@intel.com>,
-	Otavio Salvador <otavio.salvador@ossystems.com.br>
+Return-Path: <richard.purdie@linuxfoundation.org>
+Received: from dan.rpsys.net (5751f4a1.skybroadband.com [87.81.244.161])
+	by mail.openembedded.org (Postfix) with ESMTP id A5CFF780FA;
+	Fri,  5 Jan 2018 12:22:46 +0000 (UTC)
+Received: from hex ([192.168.3.34]) (authenticated bits=0)
+	by dan.rpsys.net (8.15.2/8.15.2/Debian-3) with ESMTPSA id
+	w05CMa7b024631
+	(version=TLSv1.2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128
+	verify=NOT); Fri, 5 Jan 2018 12:22:37 GMT
+Message-ID: <1515154956.30291.30.camel@linuxfoundation.org>
+From: Richard Purdie <richard.purdie@linuxfoundation.org>
+To: Steffen Sledz <sledz@dresearch-fe.de>, "Burton, Ross"
+	<ross.burton@intel.com>, Otavio Salvador <otavio.salvador@ossystems.com.br>
+Date: Fri, 05 Jan 2018 12:22:36 +0000
+In-Reply-To: <cad1f9fe-e682-a5f6-72ab-71a7738ea46a@dresearch-fe.de>
 References: <460be213-a6c9-59fa-f8e3-d3f7e6232ca4@dresearch-fe.de>
 	<CAJTo0LaHXJMMNg8VmqFNne_8rgEV9TER5saUzUXudRgvzggWNw@mail.gmail.com>
 	<6d1905cf-26d2-49cf-d0bb-248cbf4a071d@dresearch-fe.de>
@@ -49,13 +20,11 @@ References: <460be213-a6c9-59fa-f8e3-d3f7e6232ca4@dresearch-fe.de>
 	<8926eabe-78fe-dfaa-d123-5d4ed39e0001@dresearch-fe.de>
 	<9d1c1e79-5eab-941c-0d30-314f9df51de1@dresearch-fe.de>
 	<1515076794.5525.196.camel@linuxfoundation.org>
-From: Steffen Sledz <sledz@dresearch-fe.de>
-Message-ID: <cad1f9fe-e682-a5f6-72ab-71a7738ea46a@dresearch-fe.de>
-Date: Fri, 5 Jan 2018 12:29:06 +0100
-User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
-	Thunderbird/52.5.2
-MIME-Version: 1.0
-In-Reply-To: <1515076794.5525.196.camel@linuxfoundation.org>
+	<cad1f9fe-e682-a5f6-72ab-71a7738ea46a@dresearch-fe.de>
+X-Mailer: Evolution 3.18.5.2-0ubuntu3.2 
+Mime-Version: 1.0
+X-Virus-Scanned: clamav-milter 0.99.2 at dan
+X-Virus-Status: Clean
 Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
 	openembedded-core <openembedded-core@lists.openembedded.org>
 Subject: Re: [OE-core] MS Windows machine?
@@ -71,20 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 05 Jan 2018 11:29:08 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Language: de-DE
+X-List-Received-Date: Fri, 05 Jan 2018 12:22:47 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 04.01.2018 15:39, Richard Purdie wrote:
-> In basic terms, you need a machine which:
-> 
-> * Sets TARGET_ARCH to the right thing (i686 or x86_64)
-> * Sets TARGET_OS to mingw32
-> 
-> and then some distro config which sets up the toolchain when mingw is
-> the target os to the values like meta-mingw/conf/machine-sdk/i686-
-> mingw32.conf sets.
+On Fri, 2018-01-05 at 12:29 +0100, Steffen Sledz wrote:
+> On 04.01.2018 15:39, Richard Purdie wrote:
+> > 
+> > In basic terms, you need a machine which:
+> > 
+> > * Sets TARGET_ARCH to the right thing (i686 or x86_64)
+> > * Sets TARGET_OS to mingw32
+> > 
+> > and then some distro config which sets up the toolchain when mingw
+> > is
+> > the target os to the values like meta-mingw/conf/machine-sdk/i686-
+> > mingw32.conf sets.
+> Do you have a sample distro config which we can use as a template?
 
-Do you have a sample distro config which we can use as a template?
+No, sorry. As I said, I've not tried this before. Its not a trivial
+thing to do, equally it shouldn't be too bad given what we already
+have...
+
+Sadly I don't have the time available to play with something like that
+either, much as I do quite enjoy it...
+
+Cheers,
+
+Richard
 
