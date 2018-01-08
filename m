@@ -1,60 +1,43 @@
-Return-Path: <Jose.DiazdeGrenu@digi.com>
-X-Greylist: delayed 395 seconds by postgrey-1.34 at layers.openembedded.org;
-	Mon, 08 Jan 2018 12:12:02 UTC
-Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
-	[216.82.243.193])
-	by mail.openembedded.org (Postfix) with ESMTP id 6A75278931
+Return-Path: <anuj.mittal@intel.com>
+Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
+	by mail.openembedded.org (Postfix) with ESMTP id 9CBF57864F
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jan 2018 12:12:02 +0000 (UTC)
-Received: from [216.82.241.196] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-1.bemta-8.messagelabs.com id E4/B8-05333-88E535A5;
-	Mon, 08 Jan 2018 12:05:28 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFupmleJIrShJLcpLzFFi42Jx8l0noNsRFxx
-	lcGQKn8XFw0uZLX6+tXFg8ji3cQWjx/a1V5kCmKJYM/OS8isSWDPOPTrBXnBFoGLZ2oIGxh0C
-	XYxcHEICKxklHn76ygjhLGaUODV3P3sXIycHm4C5xLTDB1lAEiICPYwSn5ZsYwZJCAvESTy/s
-	RHMFhGIl9jxaiYLhG0ksfzSfbA4i4CKxL3uK2wgNq+Ar8SSKRfB4kICtRJdLycAbePg4BSwl1
-	j8IQYkzCggK7Hy/GlGEJtZQFzi1pP5TCC2hICAxJI955khbFGJl4//sULYihJ3n5xlBhnDLKA
-	psX6XPkSrosSU7ofsEFsFJU7OfMICsVVNom3OBOYJjCKzkGyYhdA9C0n3LCTdCxhZVjFqFKcW
-	laUW6Rqa6iUVZaZnlOQmZuboGhpY6OWmFhcnpqfmJCYV6yXn525iBEZJPQMD4w7GA8/dDzFKc
-	jApifKKOgdECfEl5adUZiQWZ8QXleakFh9ilOHgUJLgPRIbHCUkWJSanlqRlpkDjFeYtAQHj5
-	II72yQNG9xQWJucWY6ROoUozHHk2vz/jJxPJv5uoFZiCUvPy9VSpx3MkipAEhpRmke3CBYGrn
-	EKCslzMvIwMAgxFOQWpSbWYIq/4pRnINRSZi3BmQKT2ZeCdy+V0CnMAGd8m5fIMgpJYkIKakG
-	Rne9xjLXFf4ZryPZVcqmzrsRG8TsIzCz8o/ux0WX/z3oOyv+vpyV+YQBzwFXcWUmjmUJNiFf3
-	+goTBYKyRNPVLo36xiP5fuvFdwNvxUei/yM8hORmTvxxH7BNi7VAKs7dyoWMa46wXplcnjDwU
-	Aj/ocMZt2eualzp3EfeX7E9vNUL27OJi5WJZbijERDLeai4kQAuQ0tUR4DAAA=
-X-Env-Sender: Jose.DiazdeGrenu@digi.com
-X-Msg-Ref: server-15.tower-46.messagelabs.com!1515413128!87736304!1
-X-Originating-IP: [66.77.174.16]
-X-StarScan-Received: 
-X-StarScan-Version: 9.4.45; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 1810 invoked from network); 8 Jan 2018 12:05:28 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-15.tower-46.messagelabs.com with SMTP;
-	8 Jan 2018 12:05:28 -0000
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Mon, 8 Jan 2018 06:05:24 -0600
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0361.001;
-	Mon, 8 Jan 2018 13:05:23 +0100
-From: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>
-To: Richard Leitner <richard.leitner@skidata.com>,
-	"openembedded-devel@lists.openembedded.org"
+	Mon,  8 Jan 2018 12:16:34 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga007.jf.intel.com ([10.7.209.58])
+	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	08 Jan 2018 04:16:35 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.46,330,1511856000"; 
+   d="scan'208";a="8713340"
+Received: from pgsmsx104.gar.corp.intel.com ([10.221.44.91])
+	by orsmga007.jf.intel.com with ESMTP; 08 Jan 2018 04:16:34 -0800
+Received: from pgsmsx105.gar.corp.intel.com ([169.254.4.167]) by
+	PGSMSX104.gar.corp.intel.com ([169.254.3.6]) with mapi id
+	14.03.0319.002; Mon, 8 Jan 2018 20:16:33 +0800
+From: "Mittal, Anuj" <anuj.mittal@intel.com>
+To: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>, Richard Leitner
+	<richard.leitner@skidata.com>, "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-java][PATCH] openjdk-7: fix compile errors with current
-	poky master (gcc6)
-Thread-Index: AQHTiHfmC7rQ8quTT02S07Ax9CtdnaNp4L9A
-Date: Mon, 8 Jan 2018 12:05:22 +0000
-Message-ID: <0B2EBCD48D33654381E736352034C70C01B5E467@dor-sms-xch01.digi.com>
+Thread-Topic: [oe] [meta-java][PATCH] openjdk-7: fix compile errors with
+	current poky master (gcc6)
+Thread-Index: AQHTiHlRfU0+aCwVs0K46wpq7Len46NpWtwAgACIy+A=
+Date: Mon, 8 Jan 2018 12:16:33 +0000
+Message-ID: <C0207330DF60C5409302EC78C3FE68F34A3961@PGSMSX105.gar.corp.intel.com>
 References: <1515412157-30726-1-git-send-email-Jose.DiazdeGrenu@digi.com>
 	<fca0add8-d2b2-2ab1-02d1-d6232e668105@skidata.com>
-In-Reply-To: <fca0add8-d2b2-2ab1-02d1-d6232e668105@skidata.com>
-Accept-Language: es-ES, en-US
+	<0B2EBCD48D33654381E736352034C70C01B5E467@dor-sms-xch01.digi.com>
+In-Reply-To: <0B2EBCD48D33654381E736352034C70C01B5E467@dor-sms-xch01.digi.com>
+Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-x-originating-ip: [10.101.11.101]
+dlp-product: dlpe-windows
+dlp-version: 11.0.0.116
+dlp-reaction: no-action
+x-ctpclassification: CTP_NT
+x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiMDMyNjBkMDItN2YxYi00ZDU3LWI0M2EtNGVlNDBlMmJiZDM0IiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjIuNS4xOCIsIlRydXN0ZWRMYWJlbEhhc2giOiJmT0JlRlNXQ0MxSSt6Z3R0a3RRVVoyVTdMdGVUU1dSdDNDK0lUeUtxbkdjWXVJNmxQVzc4MDhTQzlWXC9hQVc1dSJ9
+x-originating-ip: [172.30.20.206]
 MIME-Version: 1.0
 Subject: Re: [meta-java][PATCH] openjdk-7: fix compile errors with current poky master (gcc6)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -69,37 +52,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 12:12:02 -0000
+X-List-Received-Date: Mon, 08 Jan 2018 12:16:34 -0000
 Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-U29ycnksIEkgbWVhbnQgdG8gYXNrIHRvIG1lcmdlIHRoaXMgaW50byB0aGUgJ21vcnR5JyBicmFu
-Y2guDQoNCkkgYW0gbm90IHVzZWQgdG8gdXNpbmcgbWFpbGluZyBsaXN0cyB0byBzZW5kIHBhdGNo
-ZXMuIENvdWxkIHlvdSB0ZWxsIG1lIGhvdyB0byBpbmRpY2F0ZSB0aGUgZGVzdGluYXRpb24gYnJh
-bmNoIHdoZW4gc2VuZGluZyBhIHBhdGNoPw0KDQpUaGFuayB5b3UNCg0KLS0tLS1PcmlnaW5hbCBN
-ZXNzYWdlLS0tLS0NCkZyb206IFJpY2hhcmQgTGVpdG5lciBbbWFpbHRvOnJpY2hhcmQubGVpdG5l
-ckBza2lkYXRhLmNvbV0gDQpTZW50OiBNb25kYXksIEphbnVhcnkgOCwgMjAxOCAxMjo1OCBQTQ0K
-VG86IERpYXogZGUgR3JlbnUsIEpvc2UgPEpvc2UuRGlhemRlR3JlbnVAZGlnaS5jb20+OyBvcGVu
-ZW1iZWRkZWQtZGV2ZWxAbGlzdHMub3BlbmVtYmVkZGVkLm9yZw0KU3ViamVjdDogUmU6IFttZXRh
-LWphdmFdW1BBVENIXSBvcGVuamRrLTc6IGZpeCBjb21waWxlIGVycm9ycyB3aXRoIGN1cnJlbnQg
-cG9reSBtYXN0ZXIgKGdjYzYpDQoNCkhpIEpvc2UsDQoNCk9uIDAxLzA4LzIwMTggMTI6NDkgUE0s
-IEpvc2UgRGlheiBkZSBHcmVudSB3cm90ZToNCj4gRnJvbTogUmljaGFyZCBMZWl0bmVyIDxyaWNo
-YXJkLmxlaXRuZXJAc2tpZGF0YS5jb20+DQo+IA0KPiBVc2luZyB0aGUgY3VycmVudCBwb2t5IG1h
-c3RlciBvcGVuamRrLTcgd2Fzbid0IGJ1aWxkYWJsZS4gVGhpcyBwYXRjaCANCj4gZml4ZXMgdGhv
-c2UgcHJvYmxlbXMgYnkgYWRkaW5nIHRocmVlIG1vcmUgcGF0Y2hlcyB0byBvcGVuamRrLTcuDQo+
-IA0KPiBUaGVzZSBwYXRjaGVzIGJhc2ljYWxseSBhZGQvZml4IEdDQzYgc3VwcG9ydC4gRnVydGhl
-cm1vcmUgdGhlIA0KPiBMREZMQUdTX0hBU0hfU1RZTEUgdmFyaWFibGUgKHdoaWNoIHdhcyByZW1v
-dmVkIGJ5IHRoZQ0KPiBpY2VkdGVhLWNyb3NzY29tcGlsZS1maXgucGF0Y2gpIGlzIHJlLWludHJv
-ZHVjZWQgYW5kIHNldCB0byAiYm90aCIgZm9yIA0KPiBjb21wYXRpYmlsaXR5IHJlYXNvbnMuDQo+
-IA0KPiBGb2xsb3dpbmcgdHdvIHBhdGNoZXMgd2VyZSBvcmlnaW5hbGx5IHdyaXR0ZW4gYnkgQWJk
-dXIgUmVobWFuIGFuZCANCj4gdGFrZW4gZnJvbSBtZXRhLW1lbnRvciBbMV06DQo+IAlpY2VkdGVh
-LWZsYWdzLXRvLWNvbXBpbGUtd2l0aC1HQ0MtNi5wYXRjaA0KPiAJaWNlZHRlYS1zcGVjaWZ5LW92
-ZXJsb2FkZWQtdmFyaWFudC1vZi1mbW9kLnBhdGNoDQo+IA0KPiBbMV0gaHR0cHM6Ly9naXRodWIu
-Y29tL01lbnRvckVtYmVkZGVkL21ldGEtbWVudG9yDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBSaWNo
-YXJkIExlaXRuZXIgPHJpY2hhcmQubGVpdG5lckBza2lkYXRhLmNvbT4NCj4gU2lnbmVkLW9mZi1i
-eTogTWF4aW4gQi4gSm9obiA8bWF4aW4uam9obkBpbnRlbC5jb20+DQo+IFNpZ25lZC1vZmYtYnk6
-IEpvc2UgRGlheiBkZSBHcmVudSA8Sm9zZS5EaWF6ZGVHcmVudUBkaWdpLmNvbT4NCg0KQUZBSUsg
-dGhpcyBwYXRjaCB3YXMgYWxyZWFkeSBtZXJnZWQgdG8gbWV0YS1qYXZhL21hc3Rlci4uLg0KU28g
-d2h5IHRoZSByZXNlbmQ/DQoNCnJlZ2FyZHM7UmljaGFyZC5MDQo=
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of D=
+iaz
+> de Grenu, Jose
+> Sent: Monday, January 8, 2018 8:05 PM
+> To: Richard Leitner <richard.leitner@skidata.com>; openembedded-
+> devel@lists.openembedded.org
+> Subject: Re: [oe] [meta-java][PATCH] openjdk-7: fix compile errors with c=
+urrent poky
+> master (gcc6)
+>=20
+> Sorry, I meant to ask to merge this into the 'morty' branch.
+>=20
+> I am not used to using mailing lists to send patches. Could you tell me h=
+ow to indicate
+> the destination branch when sending a patch?
+
+You can prefix your subject with branch name like [morty][PATCH] ...
+
+>=20
+> Thank you
+>=20
+> -----Original Message-----
+> From: Richard Leitner [mailto:richard.leitner@skidata.com]
+> Sent: Monday, January 8, 2018 12:58 PM
+> To: Diaz de Grenu, Jose <Jose.DiazdeGrenu@digi.com>; openembedded-
+> devel@lists.openembedded.org
+> Subject: Re: [meta-java][PATCH] openjdk-7: fix compile errors with curren=
+t poky
+> master (gcc6)
+>=20
+> Hi Jose,
+>=20
+> On 01/08/2018 12:49 PM, Jose Diaz de Grenu wrote:
+> > From: Richard Leitner <richard.leitner@skidata.com>
+> >
+> > Using the current poky master openjdk-7 wasn't buildable. This patch
+> > fixes those problems by adding three more patches to openjdk-7.
+> >
+> > These patches basically add/fix GCC6 support. Furthermore the
+> > LDFLAGS_HASH_STYLE variable (which was removed by the
+> > icedtea-crosscompile-fix.patch) is re-introduced and set to "both" for
+> > compatibility reasons.
+> >
+> > Following two patches were originally written by Abdur Rehman and
+> > taken from meta-mentor [1]:
+> > 	icedtea-flags-to-compile-with-GCC-6.patch
+> > 	icedtea-specify-overloaded-variant-of-fmod.patch
+> >
+> > [1] https://github.com/MentorEmbedded/meta-mentor
+> >
+> > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
+> > Signed-off-by: Maxin B. John <maxin.john@intel.com>
+> > Signed-off-by: Jose Diaz de Grenu <Jose.DiazdeGrenu@digi.com>
+>=20
+> AFAIK this patch was already merged to meta-java/master...
+> So why the resend?
+>=20
+> regards;Richard.L
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
 
