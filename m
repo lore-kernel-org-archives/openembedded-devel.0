@@ -1,43 +1,61 @@
-Return-Path: <anuj.mittal@intel.com>
-Received: from mga02.intel.com (mga02.intel.com [134.134.136.20])
-	by mail.openembedded.org (Postfix) with ESMTP id 9CBF57864F
+Return-Path: <Jose.DiazdeGrenu@digi.com>
+Received: from mail1.bemta8.messagelabs.com (mail1.bemta8.messagelabs.com
+	[216.82.243.195])
+	by mail.openembedded.org (Postfix) with ESMTP id D1EEF78942
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jan 2018 12:16:34 +0000 (UTC)
-X-Amp-Result: SKIPPED(no attachment in message)
-X-Amp-File-Uploaded: False
-Received: from orsmga007.jf.intel.com ([10.7.209.58])
-	by orsmga101.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	08 Jan 2018 04:16:35 -0800
-X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,330,1511856000"; 
-   d="scan'208";a="8713340"
-Received: from pgsmsx104.gar.corp.intel.com ([10.221.44.91])
-	by orsmga007.jf.intel.com with ESMTP; 08 Jan 2018 04:16:34 -0800
-Received: from pgsmsx105.gar.corp.intel.com ([169.254.4.167]) by
-	PGSMSX104.gar.corp.intel.com ([169.254.3.6]) with mapi id
-	14.03.0319.002; Mon, 8 Jan 2018 20:16:33 +0800
-From: "Mittal, Anuj" <anuj.mittal@intel.com>
-To: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>, Richard Leitner
+	Mon,  8 Jan 2018 12:22:14 +0000 (UTC)
+Received: from [216.82.241.196] (using TLSv1.2 with cipher
+	DHE-RSA-AES256-GCM-SHA384 (256 bits))
+	by server-3.bemta-8.messagelabs.com id D0/26-20095-772635A5;
+	Mon, 08 Jan 2018 12:22:15 +0000
+X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprDKsWRWlGSWpSXmKPExsXi5LtOQLc8KTj
+	KYMtlGYvp5/6yW1w8vJTZ4udbGwdmj8V7XjJ5nNu4gtFj+9qrTAHMUayZeUn5FQmsGXt//2At
+	2MZY8aFvImMD4xzGLkYuDiGBlYwSmw98Y+li5ARyFjNKPP+eDmKzCZhLTDt8kAWkSERgC6PE5
+	Os7GUESwgLJEjNeL2UFsUUEUiSu/lwBFOcAsp0kXm6LBQmzCKhIPJz3kwnE5hXwlfjQ8pIRYn
+	47k8T5v1ogNqdAkMStX4eZQWxGAVmJledPg9UwC4hL3HoyH6xXQkBAYsme88wQtqjEy8f/WCF
+	sRYm7T84yQ9TrSCzY/YkNwtaWWLbwNTPEXkGJkzOfQP2lJtE2ZwLzBEaRWUhWzELSPgtJ+ywk
+	7QsYWVYxqhenFpWlFuma6CUVZaZnlOQmZuboGhpY6OWmFhcnpqfmJCYV6yXn525iBMYOAxDsY
+	LzT53yIUZKDSUmUV9Q5IEqILyk/pTIjsTgjvqg0J7X4EKMMB4eSBG9NYnCUkGBRanpqRVpmDj
+	CKYdISHDxKIryzQNK8xQWJucWZ6RCpU4yWHD0rLv5h4rjx8DqQfDbzdQOzEEtefl6qlDhvL0i
+	DAEhDRmke3DhYornEKCslzMsIdKAQT0FqUW5mCar8K0ZxDkYlYV4mkCk8mXklcFtfAR3EBHTQ
+	u32BIAeVJCKkpBoYZd1e5Vw7mV/JzJwdUrBGedchhZUbYm51GTVINJ7aXPhw+qbZqp8YlFa7L
+	j5tLNt2KUdg+vxHnY63v2bnbY1O2imudbnkuUTyUf/VGy8zxNtPquDyWTC55bvY1GA2i4KvQU
+	K3HKtr11o/+R2y77Rs9iqndyoHnrfVbsswlLHbouvjuT2za7akEktxRqKhFnNRcSIApTrxly8
+	DAAA=
+X-Env-Sender: Jose.DiazdeGrenu@digi.com
+X-Msg-Ref: server-4.tower-46.messagelabs.com!1515414134!84700368!3
+X-Originating-IP: [66.77.174.16]
+X-StarScan-Received: 
+X-StarScan-Version: 9.4.45; banners=-,-,-
+X-VirusChecked: Checked
+Received: (qmail 601 invoked from network); 8 Jan 2018 12:22:15 -0000
+Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
+	by server-4.tower-46.messagelabs.com with SMTP;
+	8 Jan 2018 12:22:15 -0000
+Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MCL-VMS-XCH01.digi.com
+	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.361.1;
+	Mon, 8 Jan 2018 06:22:12 -0600
+Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
+	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0361.001;
+	Mon, 8 Jan 2018 13:22:11 +0100
+From: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>
+To: "Mittal, Anuj" <anuj.mittal@intel.com>, Richard Leitner
 	<richard.leitner@skidata.com>, "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
 Thread-Topic: [oe] [meta-java][PATCH] openjdk-7: fix compile errors with
 	current poky master (gcc6)
-Thread-Index: AQHTiHlRfU0+aCwVs0K46wpq7Len46NpWtwAgACIy+A=
-Date: Mon, 8 Jan 2018 12:16:33 +0000
-Message-ID: <C0207330DF60C5409302EC78C3FE68F34A3961@PGSMSX105.gar.corp.intel.com>
+Thread-Index: AQHTiHfmC7rQ8quTT02S07Ax9CtdnaNp4L9A///ymICAABIkYA==
+Date: Mon, 8 Jan 2018 12:22:11 +0000
+Message-ID: <0B2EBCD48D33654381E736352034C70C01B5E52C@dor-sms-xch01.digi.com>
 References: <1515412157-30726-1-git-send-email-Jose.DiazdeGrenu@digi.com>
 	<fca0add8-d2b2-2ab1-02d1-d6232e668105@skidata.com>
 	<0B2EBCD48D33654381E736352034C70C01B5E467@dor-sms-xch01.digi.com>
-In-Reply-To: <0B2EBCD48D33654381E736352034C70C01B5E467@dor-sms-xch01.digi.com>
-Accept-Language: en-US
+	<C0207330DF60C5409302EC78C3FE68F34A3961@PGSMSX105.gar.corp.intel.com>
+In-Reply-To: <C0207330DF60C5409302EC78C3FE68F34A3961@PGSMSX105.gar.corp.intel.com>
+Accept-Language: es-ES, en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
-dlp-product: dlpe-windows
-dlp-version: 11.0.0.116
-dlp-reaction: no-action
-x-ctpclassification: CTP_NT
-x-titus-metadata-40: eyJDYXRlZ29yeUxhYmVscyI6IiIsIk1ldGFkYXRhIjp7Im5zIjoiaHR0cDpcL1wvd3d3LnRpdHVzLmNvbVwvbnNcL0ludGVsMyIsImlkIjoiMDMyNjBkMDItN2YxYi00ZDU3LWI0M2EtNGVlNDBlMmJiZDM0IiwicHJvcHMiOlt7Im4iOiJDVFBDbGFzc2lmaWNhdGlvbiIsInZhbHMiOlt7InZhbHVlIjoiQ1RQX05UIn1dfV19LCJTdWJqZWN0TGFiZWxzIjpbXSwiVE1DVmVyc2lvbiI6IjE3LjIuNS4xOCIsIlRydXN0ZWRMYWJlbEhhc2giOiJmT0JlRlNXQ0MxSSt6Z3R0a3RRVVoyVTdMdGVUU1dSdDNDK0lUeUtxbkdjWXVJNmxQVzc4MDhTQzlWXC9hQVc1dSJ9
-x-originating-ip: [172.30.20.206]
+x-originating-ip: [10.101.11.101]
 MIME-Version: 1.0
 Subject: Re: [meta-java][PATCH] openjdk-7: fix compile errors with current poky master (gcc6)
 X-BeenThere: openembedded-devel@lists.openembedded.org
@@ -52,74 +70,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 12:16:34 -0000
+X-List-Received-Date: Mon, 08 Jan 2018 12:22:15 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of D=
-iaz
-> de Grenu, Jose
-> Sent: Monday, January 8, 2018 8:05 PM
-> To: Richard Leitner <richard.leitner@skidata.com>; openembedded-
-> devel@lists.openembedded.org
-> Subject: Re: [oe] [meta-java][PATCH] openjdk-7: fix compile errors with c=
-urrent poky
-> master (gcc6)
->=20
-> Sorry, I meant to ask to merge this into the 'morty' branch.
->=20
-> I am not used to using mailing lists to send patches. Could you tell me h=
-ow to indicate
-> the destination branch when sending a patch?
+-----Original Message-----
+From: Mittal, Anuj [mailto:anuj.mittal@intel.com]=20
 
-You can prefix your subject with branch name like [morty][PATCH] ...
+> You can prefix your subject with branch name like [morty][PATCH] ...
 
->=20
-> Thank you
->=20
-> -----Original Message-----
-> From: Richard Leitner [mailto:richard.leitner@skidata.com]
-> Sent: Monday, January 8, 2018 12:58 PM
-> To: Diaz de Grenu, Jose <Jose.DiazdeGrenu@digi.com>; openembedded-
-> devel@lists.openembedded.org
-> Subject: Re: [meta-java][PATCH] openjdk-7: fix compile errors with curren=
-t poky
-> master (gcc6)
->=20
-> Hi Jose,
->=20
-> On 01/08/2018 12:49 PM, Jose Diaz de Grenu wrote:
-> > From: Richard Leitner <richard.leitner@skidata.com>
-> >
-> > Using the current poky master openjdk-7 wasn't buildable. This patch
-> > fixes those problems by adding three more patches to openjdk-7.
-> >
-> > These patches basically add/fix GCC6 support. Furthermore the
-> > LDFLAGS_HASH_STYLE variable (which was removed by the
-> > icedtea-crosscompile-fix.patch) is re-introduced and set to "both" for
-> > compatibility reasons.
-> >
-> > Following two patches were originally written by Abdur Rehman and
-> > taken from meta-mentor [1]:
-> > 	icedtea-flags-to-compile-with-GCC-6.patch
-> > 	icedtea-specify-overloaded-variant-of-fmod.patch
-> >
-> > [1] https://github.com/MentorEmbedded/meta-mentor
-> >
-> > Signed-off-by: Richard Leitner <richard.leitner@skidata.com>
-> > Signed-off-by: Maxin B. John <maxin.john@intel.com>
-> > Signed-off-by: Jose Diaz de Grenu <Jose.DiazdeGrenu@digi.com>
->=20
-> AFAIK this patch was already merged to meta-java/master...
-> So why the resend?
->=20
-> regards;Richard.L
-> --
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+Thanks!
+
+Should I resend it?
 
