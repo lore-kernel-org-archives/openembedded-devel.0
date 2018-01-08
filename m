@@ -1,50 +1,50 @@
 Return-Path: <liu.ming50@gmail.com>
-Received: from mail-wm0-f65.google.com (mail-wm0-f65.google.com [74.125.82.65])
-	by mail.openembedded.org (Postfix) with ESMTP id 9204378968
+Received: from mail-wm0-f68.google.com (mail-wm0-f68.google.com [74.125.82.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 0701078976
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jan 2018 05:54:12 +0000 (UTC)
-Received: by mail-wm0-f65.google.com with SMTP id g130so14371240wme.0
+	Mon,  8 Jan 2018 05:54:16 +0000 (UTC)
+Received: by mail-wm0-f68.google.com with SMTP id g130so14371359wme.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 07 Jan 2018 21:54:14 -0800 (PST)
+	Sun, 07 Jan 2018 21:54:18 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
 	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	bh=iNmh5uqnJVUPdMbyhWWzzJ23q1NfpMZM73YGGfFTb3M=;
-	b=nZnEH1AlyGCi609/3Q6E787xEDzJSfZysIRn6XaKGvwES4KvxowSIuyRIsYIfoVFs0
-	niaWTVQFBit9V8/d/FueXJH3PBrBv6nUmEnKoGODyozKzFDIxD4bnT+GwZ3I3bw4PONh
-	A8kCRPfZWMDVZWpfaQU/IGOOcQwbgjxuvkN/vv3GYEOkjlr/tPIj0AAqbfDa78+xitev
-	+9Z0h2nqqM6uOHO09CgACyfVpjFPbifgoWAhzzLshvfsHHVhrsm4siC1HQCWWGJq0GnZ
-	L/gynYlO7hMxOD5C0k+1J1mAk8rHiKC11wa1H1KOPalEXei6GvkIWPYvdiFJzrVsrLS2
-	1QbQ==
+	bh=SfFmplofWS1oGfMtEd2+HNGFfntG7NBUMeZDWQrj4ZQ=;
+	b=NN3dy4M3PpPduJRgZERyIQ4bcdc9gZ5pfBrmOjhB5EuRA4RAZULmH/VOBsxxU5LrDs
+	RmC6z2142VFI2UyqApUVKk40fDt2mNWFCQLzUpX63MVgIbGifdj+e97/bbg8lhorxNgK
+	AA1SQ9OUttjTco/W5u1N4bp3FR6cWxgAexwDOEFL+Qls9SqRxhV3h8ib1xu7Kq5bIzKs
+	HjY3TFu6nBjpoI5PPh6YT2bROXUWBnpA1zrpvOa1QAZ0huqtGeuErr5+nNJw2FxMdgWy
+	z3u0j+yLUjNLq1B14XnRBnbXQJHUU/iXAra1uHr4SjZeQim3qHBqcMmSyTG2n4v8ySD4
+	iTNg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
 	:references;
-	bh=iNmh5uqnJVUPdMbyhWWzzJ23q1NfpMZM73YGGfFTb3M=;
-	b=NOC5iHhXaRKN6ASgc4T9r8DmRcDGLorqzXyO6dHd3vjFWZGtSpZNEX0DgxYBQPumDH
-	OYlSCfXQL8wvX8Y+61qlH9d96/ev6nu2omjwdEPLM3a1wfEWJo8Da8Kg2tpVBCBQ2HTN
-	pwwoS1izetmJXpvuyDrFbLdlX1VwOWXasda861Jr8ASMdQd6HggfYy/F9nhNxf7vQcs1
-	WUSJWzdxxnFR1QSDqwbdEu0ivIyuj8drdgUTPrL6C6jwH+IXuyHZVeOoqnb1ac8ZpIde
-	YlFiQku69GNTT4R9FWndgXtHXeumKQaURuivLyI991OX49ZsxF9nwSdPRCqf6C4su9o5
-	1Ayw==
-X-Gm-Message-State: AKGB3mLBNChwsUYOgEHeln1Cqg81NOoGqdhZppkongos7dPqRMRu1KfW
-	Cm6FxsFuAFyIR30j9kHIqqVoxlFWd4I=
-X-Google-Smtp-Source: ACJfBot6+ThmtDVEbkXrB9tSQ13h3OaGp2SP2k89e8jVu8+OTcfskDUlJ/OBRepF14PE4MMLW+whyw==
-X-Received: by 10.80.213.7 with SMTP id u7mr14647771edi.224.1515390853306;
-	Sun, 07 Jan 2018 21:54:13 -0800 (PST)
+	bh=SfFmplofWS1oGfMtEd2+HNGFfntG7NBUMeZDWQrj4ZQ=;
+	b=NBhfrHKC8tqzku+rmh2TgXxPfEYSZxUlZjLPC4CUTPudV9zRouPuXdfQ2/1S2+tt3l
+	2oBZhNjBq/AUIgHYy/zkKUE+/qeD3Znky8U+1NlRaLkbRQdYyfF5gdNm/TdKq8K60Whn
+	PhKe730JdfOsVMyTjqXPy9noYh45vY3ezJAgBW+YgBLRxj9D0nvteNmfzRlqHLcpsqY6
+	ruXx8UklQitgFBVkNQE/2o48u/Lh4px69dx33QjHBBSduGtYYf0uPC2V51fRMk1cxhUI
+	35Hfz17pSNj8v2K87YfFV26NMF0lWuOFemt0/5u0ogAx9khFuzuy3l53cq2TEGd/hRVn
+	Pjlw==
+X-Gm-Message-State: AKGB3mJ+3XWvqnuudMnH2LLXgpRckp7rR9tVx+yEbfEcFVfWafxDfM4J
+	7Di7Qq8KajDK5+Bl+guDYBQUmoqVJfQ=
+X-Google-Smtp-Source: ACJfBosoqqw9qIqHIg9tJboDxXl2bWH/xOUchtEzQ/Zmg+5e8kXd5I2pK+omU6NjGCziUSFdAG6pBw==
+X-Received: by 10.80.203.135 with SMTP id k7mr15315738edi.69.1515390857616;
+	Sun, 07 Jan 2018 21:54:17 -0800 (PST)
 Received: from peterliu-Precision-M4800.emea.group.atlascopco.com
 	([111.207.81.199]) by smtp.gmail.com with ESMTPSA id
-	e46sm7344354edb.93.2018.01.07.21.54.10
+	e46sm7344354edb.93.2018.01.07.21.54.15
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Sun, 07 Jan 2018 21:54:12 -0800 (PST)
+	Sun, 07 Jan 2018 21:54:17 -0800 (PST)
 From: liu.ming50@gmail.com
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jan 2018 06:52:06 +0100
-Message-Id: <1515390727-15579-2-git-send-email-liu.ming50@gmail.com>
+Date: Mon,  8 Jan 2018 06:52:07 +0100
+Message-Id: <1515390727-15579-3-git-send-email-liu.ming50@gmail.com>
 X-Mailer: git-send-email 2.7.4
 In-Reply-To: <1515390727-15579-1-git-send-email-liu.ming50@gmail.com>
 References: <1515390727-15579-1-git-send-email-liu.ming50@gmail.com>
 Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: [meta-qt5][PATCH 1/2] meta: introduce QT_EDITION
+Subject: [meta-qt5][PATCH 2/2] meta: fix a regression
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -57,69 +57,111 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 05:54:12 -0000
+X-List-Received-Date: Mon, 08 Jan 2018 05:54:17 -0000
 
 From: Ming Liu <liu.ming50@gmail.com>
 
-QT_EDITION defaults to 'opensource', but the end users could override
-it with 'commercial' if they want.
+A flaw was introduced by commit b8a236df:
+[ qt5: Fix cmake config files ]
+
+Removing ${S}/include must be done before configure script being
+called, but it's not in that case for qtbase-native recipe after
+the commit, that is saying, ${S}/include was removed after configure
+being called, which causes compiling issues for native build.
+
+Further more, the logic introduced by commit b8a236df should only apply
+to qtbase recipes, so they should be moved to qtbase recipes as well.
 
 Signed-off-by: Ming Liu <liu.ming50@gmail.com>
 ---
- conf/layer.conf                        | 1 +
- recipes-qt/qt5/nativesdk-qtbase_git.bb | 2 +-
- recipes-qt/qt5/qtbase-native_git.bb    | 2 +-
- recipes-qt/qt5/qtbase_git.bb           | 2 +-
- 4 files changed, 4 insertions(+), 3 deletions(-)
+ recipes-qt/qt5/nativesdk-qtbase_git.bb | 5 +++++
+ recipes-qt/qt5/qt5-native.inc          | 7 -------
+ recipes-qt/qt5/qt5.inc                 | 7 -------
+ recipes-qt/qt5/qtbase-native_git.bb    | 5 +++++
+ recipes-qt/qt5/qtbase_git.bb           | 5 +++++
+ 5 files changed, 15 insertions(+), 14 deletions(-)
 
-diff --git a/conf/layer.conf b/conf/layer.conf
-index 7eb3b2d..7751ce2 100644
---- a/conf/layer.conf
-+++ b/conf/layer.conf
-@@ -36,3 +36,4 @@ IMAGE_FEATURES[validitems] += "qtcreator-debug"
- QT_GIT ?= "git://github.com/qt"
- QT_LABS_GIT ?= "git://github.com/qt-labs"
- QT_GIT_PROTOCOL ?= "git"
-+QT_EDITION ?= "opensource"
 diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-index 33be99e..3aeb2ab 100644
+index 3aeb2ab..4f4a0c3 100644
 --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
 +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-@@ -103,7 +103,7 @@ deltask generate_qt_config_file
+@@ -102,6 +102,11 @@ OE_QMAKE_PATH_HOST_LIBS = "${libdir}"
+ deltask generate_qt_config_file
  
  do_configure() {
++    # Regenerate header files when they are included in source tarball
++    # Otherwise cmake files don't set PRIVATE_HEADERS correctly
++    rm -rf ${S}/include
++    mkdir -p ${S}/.git || true
++
      ${S}/configure -v \
--        -opensource -confirm-license \
-+        -${QT_EDITION} -confirm-license \
+         -${QT_EDITION} -confirm-license \
          -sysroot ${STAGING_DIR_TARGET} \
-         -no-gcc-sysroot \
-         -system-zlib \
+diff --git a/recipes-qt/qt5/qt5-native.inc b/recipes-qt/qt5/qt5-native.inc
+index 8535028..7681602 100644
+--- a/recipes-qt/qt5/qt5-native.inc
++++ b/recipes-qt/qt5/qt5-native.inc
+@@ -10,10 +10,3 @@ OE_QMAKE_PATH_DOCS = "${OE_QMAKE_PATH_QT_DOCS}"
+ OE_QMAKE_PATH_SETTINGS = "${OE_QMAKE_PATH_QT_SETTINGS}"
+ OE_QMAKE_PATH_EXAMPLES = "${OE_QMAKE_PATH_QT_EXAMPLES}"
+ OE_QMAKE_PATH_TESTS = "${OE_QMAKE_PATH_QT_TESTS}"
+-
+-# Regenerate header files when they are included in source tarball
+-# Otherwise cmake files don't set PRIVATE_HEADERS correctly
+-do_configure_prepend() {
+-    rm -rf ${S}/include
+-    mkdir -p ${S}/.git || true
+-}
+diff --git a/recipes-qt/qt5/qt5.inc b/recipes-qt/qt5/qt5.inc
+index 4b5fe8a..95e3854 100644
+--- a/recipes-qt/qt5/qt5.inc
++++ b/recipes-qt/qt5/qt5.inc
+@@ -35,13 +35,6 @@ python __anonymous() {
+             d.setVar("PACKAGE_ARCH", tarch)
+ }
+ 
+-# Regenerate header files when they are included in source tarball
+-# Otherwise cmake files don't set PRIVATE_HEADERS correctly
+-do_configure_prepend() {
+-    rm -rf ${S}/include
+-    mkdir -p ${S}/.git || true
+-}
+-
+ # Many examples come with libraries installed outside of standard libdir,
+ # suppress QA check complaining
+ INSANE_SKIP_${PN}-dbg += "libdir"
 diff --git a/recipes-qt/qt5/qtbase-native_git.bb b/recipes-qt/qt5/qtbase-native_git.bb
-index 4c6b701..597b45e 100644
+index 597b45e..7c76c25 100644
 --- a/recipes-qt/qt5/qtbase-native_git.bb
 +++ b/recipes-qt/qt5/qtbase-native_git.bb
-@@ -103,7 +103,7 @@ do_configure_prepend() {
+@@ -100,6 +100,11 @@ PACKAGECONFIG_CONFARGS = " \
+ deltask generate_qt_config_file
+ 
+ do_configure_prepend() {
++    # Regenerate header files when they are included in source tarball
++    # Otherwise cmake files don't set PRIVATE_HEADERS correctly
++    rm -rf ${S}/include
++    mkdir -p ${S}/.git || true
++
      # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory"
      touch ${S}/mkspecs/oe-device-extra.pri
  
--    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -opensource -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
-+    MAKEFLAGS="${PARALLEL_MAKE}" ${S}/configure -${QT_EDITION} -confirm-license ${PACKAGECONFIG_CONFARGS} || die "Configuring qt failed. PACKAGECONFIG_CONFARGS was ${PACKAGECONFIG_CONFARGS}"
- }
- 
- do_install() {
 diff --git a/recipes-qt/qt5/qtbase_git.bb b/recipes-qt/qt5/qtbase_git.bb
-index 4e8dc4c..e2784d8 100644
+index e2784d8..7047f6c 100644
 --- a/recipes-qt/qt5/qtbase_git.bb
 +++ b/recipes-qt/qt5/qtbase_git.bb
-@@ -171,7 +171,7 @@ do_configure() {
+@@ -167,6 +167,11 @@ XPLATFORM_toolchain-clang = "linux-oe-clang"
+ XPLATFORM ?= "linux-oe-g++"
+ 
+ do_configure() {
++    # Regenerate header files when they are included in source tarball
++    # Otherwise cmake files don't set PRIVATE_HEADERS correctly
++    rm -rf ${S}/include
++    mkdir -p ${S}/.git || true
++
+     # Avoid qmake error "Cannot read [...]/usr/lib/qt5/mkspecs/oe-device-extra.pri: No such file or directory" during configuration
      touch ${S}/mkspecs/oe-device-extra.pri
  
-     ${S}/configure -v \
--        -opensource -confirm-license \
-+        -${QT_EDITION} -confirm-license \
-         -sysroot ${STAGING_DIR_TARGET} \
-         -prefix ${OE_QMAKE_PATH_PREFIX} \
-         -bindir ${OE_QMAKE_PATH_BINS} \
 -- 
 2.7.4
 
