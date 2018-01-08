@@ -1,47 +1,56 @@
-Return-Path: <martin.jansa@gmail.com>
-Received: from mail-wr0-f195.google.com (mail-wr0-f195.google.com
-	[209.85.128.195])
-	by mail.openembedded.org (Postfix) with ESMTP id 23BDB78948
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  8 Jan 2018 21:09:36 +0000 (UTC)
-Received: by mail-wr0-f195.google.com with SMTP id g21so6342214wrb.13
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 08 Jan 2018 13:09:38 -0800 (PST)
+Return-Path: <akuster808@gmail.com>
+Received: from mail-pg0-f68.google.com (mail-pg0-f68.google.com [74.125.83.68])
+	by mail.openembedded.org (Postfix) with ESMTP id 7B21D77DB5;
+	Mon,  8 Jan 2018 21:57:49 +0000 (UTC)
+Received: by mail-pg0-f68.google.com with SMTP id j4so6493693pgp.1;
+	Mon, 08 Jan 2018 13:57:51 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=from:to:cc:subject:date:message-id;
-	bh=MdFUEe3H0ujs3JENCmc+pUtmNhSeRFdNXIoDMhvobg0=;
-	b=EvsPiIUStE3U9w3Nz1C2+gm14HBlRfx1hwDswoheYL2fDHSM/RUUcXyE8PVfnD/PMo
-	ehV6Ccbsg9SjkzaqtSfdh9slx7dHmtRP21fUR2ZFpyOEQbxBTsnkKOKqI77t2s5S92NM
-	TV9046d83dTROC/CUU8gjGV6SSWaZeP+TL8HKoMlQm6Dz6hlFXtBW/b7qZpDRd0efF44
-	fJMpsuXLSFdZudYLfJHkA969V7RQbaVQ4B6w4YBeAQl2OmdlZfWRjjf63Fhl1QYlCpN7
-	/Pxkskw2pWpbSKanhLG3uFyxkDpDh6jikTP2BPxXh4/YCHwdN/72+0geDmHsgtp6/vEo
-	sUkw==
+	h=subject:to:cc:references:from:message-id:date:user-agent
+	:mime-version:in-reply-to:content-language;
+	bh=FY1ylrHv2ztXpm+1QX601X+DUw3EewlEFHRqalA+UgM=;
+	b=iSFlCwVdBxiZXZmaHlaOyFfUoFKEY+njZvaElzphj5XHiXk5ZrfMB1rF4v3oHWmPua
+	LCe84xMk00dnYR6eK2+gFl+brYDiLehHY1VsGlag7zDpV11xkPNHIf6MpgCXWJywPT/A
+	4W3L6oikgJ2PylEVQ8GMJFM8rhHwsjm7zlosxOxsRsuxaItcqFfrEA+LXt9KmuxmHJ96
+	txTEUQ7lcKRpXNsu3sATKJPS3aCvX66MLdd+MiFdeGH63MsDhX0Y1XeaAHwKIxjDmW/D
+	cnmT43N1H9j2xZgFic2yP1Rn6pKbaDFkLvtjK5/cQpWd+82kCH8TUZBH7FclBKb4qkuZ
+	1htQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=MdFUEe3H0ujs3JENCmc+pUtmNhSeRFdNXIoDMhvobg0=;
-	b=PqTjv4eiSAKr59Swg3IIcgKXjw89tyScP9/YOWlh89DEPqenNecNuUdqBph0H6F6c9
-	FFf/Qbdrd5cUVylVyculA9Jcol3qrYK8Y8kl+yy3FbF6xOdogRz2XevtMfvh1wh3BfiW
-	SOAB/mecc6NozOBD51HyFgE4RTuxMQFldsOwqPdmendBHcJ0Ei79tCyery9U0aAzRFdc
-	+hZEDlfm2Abu5POTKv74aQ1yIPUmTnx0AW04a47X4GSHxY2qM/hOph3bP9aVV0ZPV2Pe
-	SSsG/IaVbgpnYjoBB6o4PyXpIVjyW+JmYf0U+U7VHO4T7EQSWj3f7+lhdl86uMxzD5VI
-	biEQ==
-X-Gm-Message-State: AKGB3mLAOT/VKNNrNmK0qAagdi/7OP5SIp04QWp4xc4G9cQJulZWJ8wy
-	SCPDu7u2rsZrHskfavUULjVXHQ==
-X-Google-Smtp-Source: ACJfBospeXBQaFOUmfKv+a6bkfEftI8GYpc2hcY70nlFTqiYek7UlaJW2lFjr9Bnn9RvheEtboTw8w==
-X-Received: by 10.223.158.136 with SMTP id a8mr11494274wrf.72.1515445777799;
-	Mon, 08 Jan 2018 13:09:37 -0800 (PST)
-Received: from localhost ([217.30.68.212]) by smtp.gmail.com with ESMTPSA id
-	d23sm14538033wma.48.2018.01.08.13.09.36
+	h=x-gm-message-state:subject:to:cc:references:from:message-id:date
+	:user-agent:mime-version:in-reply-to:content-language;
+	bh=FY1ylrHv2ztXpm+1QX601X+DUw3EewlEFHRqalA+UgM=;
+	b=p5q/fE03pXkRxCVXcVse7H8yHBMVTpgOqWXyo6dJ7wAiuMj43UOkk6BZrb4xsugFCa
+	pCsjkmgOME1iBfT+Q7Pryo7ErgdYyQCmw+en3BXsaYgQKshruJG0uUi0EtxKpugNsvMX
+	HFarkmxv74zxi+6urOZVCbnrjPNzWKbQ7n9llO49iaJ58cjOE9qzbdmZe/B36iLASkgL
+	4zXdJzGNbs3HHRXvW0mn4o6sayuc4kuGyCpb146PiVXObVigStkV+m6pqeGZ9/qe2I6q
+	R29FCpWdx9pH3FaNfJlPkYPt9iUejXSrcc4YtT117ySSzTOq2wDuJqntX1o5yqx4cdiQ
+	m6wA==
+X-Gm-Message-State: AKGB3mI9vhhSxYZoCqAzuClNynUfmWbaQLt0q/RZRhRuuqzMU/kW2aI2
+	t7mdfu+cYBBNZGxv1iw6W1POhA==
+X-Google-Smtp-Source: ACJfBotToObBCx60UUfIC+RUOforkeHMKlUEXqs7xl7mv5eTGmE4qDJOjmwlDjvbqxeTBhU8N+tzeA==
+X-Received: by 10.124.25.19 with SMTP id c19mr6557245plz.402.1515448670539;
+	Mon, 08 Jan 2018 13:57:50 -0800 (PST)
+Received: from ?IPv6:2601:202:4000:1184:9491:79df:6f19:2655?
+	([2601:202:4000:1184:9491:79df:6f19:2655])
+	by smtp.gmail.com with ESMTPSA id
+	v186sm4030026pfb.5.2018.01.08.13.57.49
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Mon, 08 Jan 2018 13:09:36 -0800 (PST)
-From: Martin Jansa <martin.jansa@gmail.com>
-X-Google-Original-From: Martin Jansa <Martin.Jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  8 Jan 2018 21:09:34 +0000
-Message-Id: <1515445774-768-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-oe][pyro][PATCH] fluentbit: backport one patch from 0.12.0 to fix aarch64 build
+	Mon, 08 Jan 2018 13:57:49 -0800 (PST)
+To: Bruce Ashfield <bruce.ashfield@gmail.com>
+References: <161986bc-e04c-3cdd-c744-5cebff1d4fb7@gmail.com>
+	<CADkTA4M_b8e3d3bRCE+jY44F_atCy6ej51wdVEmFKE5y12nKVA@mail.gmail.com>
+From: akuster808 <akuster808@gmail.com>
+Message-ID: <90d7f4e2-5b44-34ad-6403-d843e244299b@gmail.com>
+Date: Mon, 8 Jan 2018 13:57:48 -0800
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.0
+MIME-Version: 1.0
+In-Reply-To: <CADkTA4M_b8e3d3bRCE+jY44F_atCy6ej51wdVEmFKE5y12nKVA@mail.gmail.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: OpenEmbedded Devel List <openembedded-devel@lists.openembedded.org>,
+	Patches and discussions about the oe-core layer
+	<openembedded-core@lists.openembedded.org>
+Subject: Re: [OE-core] Yocto vrs K.O kernel, wireguard go Boom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -54,104 +63,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 08 Jan 2018 21:09:37 -0000
+X-List-Received-Date: Mon, 08 Jan 2018 21:57:49 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-* rocko and newer already have a version newer than 0.12.0
-  so this change isn't needed there and 0.7.2 in morty doesn't
-  need it as well.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../fluentbit/fluentbit/aarch64.patch              | 64 ++++++++++++++++++++++
- .../recipes-extended/fluentbit/fluentbit_0.11.3.bb |  3 +-
- 2 files changed, 66 insertions(+), 1 deletion(-)
- create mode 100644 meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch b/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
-new file mode 100644
-index 0000000..071dff1
---- /dev/null
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit/aarch64.patch
-@@ -0,0 +1,64 @@
-+From a9af19d2679442b679536b51276334149b0b6655 Mon Sep 17 00:00:00 2001
-+From: Eduardo Silva <eduardo@treasure-data.com>
-+Date: Wed, 19 Apr 2017 12:35:53 -0600
-+Subject: [PATCH] lib: flb_libco: merged changes for aarch64 support (#228)
-+
-+This patch merge the following changes:
-+
-+ - 534e405 armv8: on arm64 (aarch64) use sjlj backend
-+ - fdcb558 sjlj: include missing settings and adapt API
-+ - 9dab058 settings: tweak for Windows build
-+
-+These changes needs further testing on a armv8 platform.
-+
-+Upstream-Status: Backport [from 0.12.0 https://github.com/fluent/fluent-bit/commit/a9af19d2679442b679536b51276334149b0b6655]
-+
-+Signed-off-by: Eduardo Silva <eduardo@treasure-data.com>
-+---
-+ lib/flb_libco/libco.c | 2 ++
-+ lib/flb_libco/sjlj.c  | 5 ++++-
-+ 2 files changed, 6 insertions(+), 1 deletion(-)
-+
-+diff --git a/lib/flb_libco/libco.c b/lib/flb_libco/libco.c
-+index 13eb2379..2db92e95 100755
-+--- a/lib/flb_libco/libco.c
-++++ b/lib/flb_libco/libco.c
-+@@ -14,6 +14,8 @@
-+     #include "amd64.c"
-+   #elif defined(__arm__)
-+     #include "arm.c"
-++  #elif defined(__aarch64__)
-++    #include "sjlj.c"
-+   #elif defined(_ARCH_PPC)
-+     #include "ppc.c"
-+   #elif defined(_WIN32)
-+diff --git a/lib/flb_libco/sjlj.c b/lib/flb_libco/sjlj.c
-+index dfa0aa45..36d110b7 100755
-+--- a/lib/flb_libco/sjlj.c
-++++ b/lib/flb_libco/sjlj.c
-+@@ -15,6 +15,7 @@
-+ #include <stdlib.h>
-+ #include <signal.h>
-+ #include <setjmp.h>
-++#include "settings.h"
-+ 
-+ #ifdef __cplusplus
-+ extern "C" {
-+@@ -41,7 +42,8 @@ cothread_t co_active() {
-+   return (cothread_t)co_running;
-+ }
-+ 
-+-cothread_t co_create(unsigned int size, void (*coentry)(void)) {
-++cothread_t co_create(unsigned int size, void (*coentry)(void),
-++                     size_t *out_size) {
-+   if(!co_running) co_running = &co_primary;
-+ 
-+   cothread_struct *thread = (cothread_struct*)malloc(sizeof(cothread_struct));
-+@@ -78,6 +80,7 @@ cothread_t co_create(unsigned int size, void (*coentry)(void)) {
-+     }
-+   }
-+ 
-++  *out_size = size;
-+   return (cothread_t)thread;
-+ }
-+ 
-diff --git a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
-index 8d756e6..a9433c2 100644
---- a/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
-+++ b/meta-oe/recipes-extended/fluentbit/fluentbit_0.11.3.bb
-@@ -5,7 +5,8 @@ BUGTRACKER = "https://github.com/fluent/fluent-bit/issues"
- SRC_URI = "http://fluentbit.io/releases/0.11/fluent-bit-${PV}.tar.gz \
-            file://0001-CMakeLists.txt-Add-AUTOCONF_HOST_OPT-to-help-cross-c.patch \
-            file://0002-msgpack-Add-comment-for-intended-fallthrough.patch \
--           "
-+           file://aarch64.patch \
-+"
- SRC_URI[md5sum] = "9383262339412782b80cc49e7ad15609"
- SRC_URI[sha256sum] = "eb8a85c656fa60682b0bf8dd1ad58d848cd251dab4f35a6777acd552c65b0511"
- 
--- 
-2.7.4
+On 01/08/2018 08:01 AM, Bruce Ashfield wrote:
+>
+>
+> On Mon, Jan 8, 2018 at 10:08 AM, akuster808 <akuster808@gmail.com
+> <mailto:akuster808@gmail.com>> wrote:
+>
+>     Hello,
+>
+>     Wireguard in meta-networking is failing do to compat.h issues on
+>     newer kernels. I have updated the package and it fixed  my problem
+>     on 4.14 K.O kernel. Now I build it with the Yocko 4.12 and it
+>     fails. It wont fail with a 4.12 K.O kernel. The is one commit that
+>     was backported from 4.13 K.O to yocto 4.12 which is causing the issue.
+>
+>     random: add get_random_{bytes,u32,u64,int,long,once}_wait family
+>
+>
+>     	6e4990d8d226e1861a5a2b632cf93bc70feab3af
+>     <http://git.yoctoproject.org/cgit/cgit.cgi/linux-yocto-4.12/commit/include/linux/random.h?h=standard/base&id=6e4990d8d226e1861a5a2b632cf93bc70feab3af>
+>
+>
+>
+>
+>     	
+>
+>
+> If you try the 4.9 kernel, does it also have issues ? Either way, it
+> is likely just a -stable
+> fix that hasn't made it into our 4.12 maintenance cycle yet, and that
+> is something we
+> can fix by adding anything that is required to get things building again.
+>
+> But knowing the 4.9 status would be a good data point, since I have
+> more -stable 
+> updates queued (and not sent).
+4.9 works fine with current wireguard and updated version.
+
+- armin
+> So if it blows up, and then doesn't with AUTOREV,
+> we have a small set of commits to look at.
+>
+> Bruce
+>  
+>
+>
+>      I know Yocto is maintaining the 4.12 beyond the K.O release
+>     process so I don't know if this a kernel bug or if I need to come
+>     up with some other solution.
+>
+>
+>     regards,
+>     Armin
+>
+>
+>
+>
+>     --
+>     _______________________________________________
+>     Openembedded-core mailing list
+>     Openembedded-core@lists.openembedded.org
+>     <mailto:Openembedded-core@lists.openembedded.org>
+>     http://lists.openembedded.org/mailman/listinfo/openembedded-core
+>     <http://lists.openembedded.org/mailman/listinfo/openembedded-core>
+>
+>
+>
+>
+> -- 
+> "Thou shalt not follow the NULL pointer, for chaos and madness await
+> thee at its end"
 
 
