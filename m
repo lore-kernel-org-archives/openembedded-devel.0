@@ -1,24 +1,25 @@
 Return-Path: <timothy.t.orling@linux.intel.com>
-Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
-	by mail.openembedded.org (Postfix) with ESMTP id 98CEF62133
+Received: from mga06.intel.com (mga06.intel.com [134.134.136.31])
+	by mail.openembedded.org (Postfix) with ESMTP id 0896C7827F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 04:14:24 +0000 (UTC)
+	Wed, 10 Jan 2018 04:15:44 +0000 (UTC)
 X-Amp-Result: SKIPPED(no attachment in message)
 X-Amp-File-Uploaded: False
-Received: from orsmga004.jf.intel.com ([10.7.209.38])
-	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
-	09 Jan 2018 20:14:25 -0800
+Received: from orsmga008.jf.intel.com ([10.7.209.65])
+	by orsmga104.jf.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Jan 2018 20:15:46 -0800
 X-ExtLoop1: 1
-X-IronPort-AV: E=Sophos;i="5.46,338,1511856000"; d="scan'208";a="165545237"
+X-IronPort-AV: E=Sophos;i="5.46,338,1511856000"; 
+   d="scan'208";a="9541665"
 Received: from chiron.jf.intel.com ([10.7.159.61])
-	by orsmga004.jf.intel.com with ESMTP; 09 Jan 2018 20:14:25 -0800
+	by orsmga008.jf.intel.com with ESMTP; 09 Jan 2018 20:15:45 -0800
 From: Tim Orling <timothy.t.orling@linux.intel.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  9 Jan 2018 20:14:07 -0800
-Message-Id: <20180110041407.11817-1-timothy.t.orling@linux.intel.com>
+Date: Tue,  9 Jan 2018 20:15:39 -0800
+Message-Id: <20180110041539.11889-1-timothy.t.orling@linux.intel.com>
 X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-Subject: [PATCH] stress-ng: upgrade to 0.09.09 and fix musl build
+Subject: [meta-oe][PATCH] stress-ng: upgrade to 0.09.09 and fix musl build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,7 +32,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 04:14:24 -0000
+X-List-Received-Date: Wed, 10 Jan 2018 04:15:45 -0000
 Content-Type: text/plain; charset=y
 Content-Transfer-Encoding: 8bit
 
