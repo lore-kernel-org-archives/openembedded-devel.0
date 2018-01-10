@@ -1,38 +1,24 @@
-Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
-	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id E4FA878837
+Return-Path: <joe.slater@windriver.com>
+Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
+	by mail.openembedded.org (Postfix) with ESMTP id 1684078837
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 20:15:41 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id j185so635671qkc.5
+	Wed, 10 Jan 2018 20:21:06 +0000 (UTC)
+Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
+	[147.11.189.40])
+	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w0AKL7U6004298
+	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 12:15:43 -0800 (PST)
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=J5yZijmr/Eq0TTSpmdRqvQ9729J3VBy/ffeEMikkX9E=;
-	b=Uu8lTIizon1cIbhxXtb4gASsW3iCESpBw8a3zFzco9jUZANygFJ2SlHgLAZ3zMU/e0
-	wDVgJsn6n2IGOyVgGi1RT21ESN8ijCaW8xbMgrzg1vFB8UhqKzCBWJ87xRp3OJjlZi/G
-	4vjBS39NvumDEDHsFUJy/s+H/5THop+RRWjwglmh0OrJLZDy8MiR9ois14kdnntW4k2C
-	OZb6x8vsgZ0CG06hzIsQDD+0PDzMKC9XPVks34tYX2C+lz4iX87nfLAQz2HrPu15wKRt
-	LYe0wa2pFjmOBLt5OFf+3tJ5ONRZOYwgvxOqax0VuKUc3ehtfv8E+6PbuLZO33Rx/cAl
-	4oGQ==
-X-Gm-Message-State: AKwxyteap5eSjF1vT/MHu4TDAvBcrEfqwsdXXgaUqSPMswm/cA50Sozj
-	MmIF2nibRU8VAODxILVtlS8Dl/zf
-X-Google-Smtp-Source: ACJfBosZBpN3FxF13VdfnpCPISwdJnXIOeD+lMgLXU0v0Jjdel9YKQTo5IQCDOLdd4QUxQF8NQWaxQ==
-X-Received: by 10.200.46.69 with SMTP id s5mr9319694qta.205.1515615342591;
-	Wed, 10 Jan 2018 12:15:42 -0800 (PST)
-Received: from sparta.ny.asterius.io ([68.132.72.199])
-	by smtp.gmail.com with ESMTPSA id
-	c50sm11094174qte.38.2018.01.10.12.15.41
-	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Jan 2018 12:15:42 -0800 (PST)
-From: Derek Straka <derek@asterius.io>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2018 15:15:32 -0500
-Message-Id: <1515615332-9157-1-git-send-email-derek@asterius.io>
-X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-tornado: update to version 4.5.3
+	Wed, 10 Jan 2018 12:21:08 -0800 (PST)
+Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
+	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
+	Wed, 10 Jan 2018 12:21:07 -0800
+From: Joe Slater <jslater@windriver.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 10 Jan 2018 12:21:07 -0800
+Message-ID: <20180110202107.248032-1-jslater@windriver.com>
+X-Mailer: git-send-email 2.13.0
+MIME-Version: 1.0
+Subject: [meta-oe][PATCH 1/1] php-native: eliminate SSTATEPOSTINSTFUNCS use
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,45 +31,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 20:15:42 -0000
+X-List-Received-Date: Wed, 10 Jan 2018 20:21:07 -0000
+Content-Type: text/plain
 
-Signed-off-by: Derek Straka <derek@asterius.io>
+The use of SSTATEPOSTINSTFUNCS has been deprecated and is not
+needed for php-native.  The current function always fails, forcing
+a re-build of php-native.
+
+Signed-off-by: Joe Slater <jslater@windriver.com>
 ---
- meta-python/recipes-devtools/python/python-tornado.inc             | 7 ++++---
- .../python/{python-tornado_4.5.2.bb => python-tornado_4.5.3.bb}    | 0
- .../python/{python3-tornado_4.5.2.bb => python3-tornado_4.5.3.bb}  | 0
- 3 files changed, 4 insertions(+), 3 deletions(-)
- rename meta-python/recipes-devtools/python/{python-tornado_4.5.2.bb => python-tornado_4.5.3.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-tornado_4.5.2.bb => python3-tornado_4.5.3.bb} (100%)
+ meta-oe/recipes-devtools/php/php.inc | 12 ------------
+ 1 file changed, 12 deletions(-)
 
-diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
-index 2c58655..b9a99c7 100644
---- a/meta-python/recipes-devtools/python/python-tornado.inc
-+++ b/meta-python/recipes-devtools/python/python-tornado.inc
-@@ -6,11 +6,12 @@ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://setup.py;startline=2;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
+diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
+index 283d630..e466cda 100644
+--- a/meta-oe/recipes-devtools/php/php.inc
++++ b/meta-oe/recipes-devtools/php/php.inc
+@@ -253,18 +253,6 @@ do_install_append_class-native() {
+         PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
+ }
  
--SRC_URI[md5sum] = "ab41f6765d58089f30ba51e8ec084a7b"
--SRC_URI[sha256sum] = "1fb8e494cd46c674d86fac5885a3ff87b0e283937a47d74eb3c02a48c9e89ad0"
-+SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
-+SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
+-SSTATEPOSTINSTFUNCS_append_class-native = " php_sstate_postinst "
+-
+-php_sstate_postinst() {
+-    if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
+-    then
+-        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
+-        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`; do
+-            echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = ";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
+-        done >> ${sysconfdir}/pear.tmp.conf
+-        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
+-    fi
+-}
  
- RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email ${PYTHON_PN}-subprocess \
--                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading"
-+                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
-+                   ${PYTHON_PN}-ctypes"
- 
- RDEPENDS_${PN}-test += "${PN} ${PYTHON_PN}-unittest"
- 
-diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.2.bb b/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-tornado_4.5.2.bb
-rename to meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
-diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb b/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb
-rename to meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
+ # Fails to build with thumb-1 (qemuarm)
+ # | {standard input}: Assembler messages:
 -- 
 2.7.4
 
