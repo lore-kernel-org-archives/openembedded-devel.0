@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
 Received: from mail-qk0-f195.google.com (mail-qk0-f195.google.com
 	[209.85.220.195])
-	by mail.openembedded.org (Postfix) with ESMTP id B855B7881B
+	by mail.openembedded.org (Postfix) with ESMTP id E4FA878837
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 20:03:07 +0000 (UTC)
-Received: by mail-qk0-f195.google.com with SMTP id r8so520043qke.6
+	Wed, 10 Jan 2018 20:15:41 +0000 (UTC)
+Received: by mail-qk0-f195.google.com with SMTP id j185so635671qkc.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 12:03:09 -0800 (PST)
+	Wed, 10 Jan 2018 12:15:43 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=vZrSRU637PVmsAGNw+k9qIFrIsSOI0h3qkLPgEN0h6M=;
-	b=mJjkX4Tuy1pL2K/U6VU3e7/sSZgMUXJj6PpjXtA03UXKF4kuwFyeP5YYMqsgXPnkbh
-	o61tni0U2UjFZM7xD7cOcjM6rvzMJd4DB6duIKuryBCYz7V5AuD8tXEANjrUVgdxKkSI
-	uW5ZbQ2ApZJdbTRIdl3Zrzyo3Mxi5NTwFN941oWMza0ytwUxFnJ5mYSAUYCsewwY4tum
-	PD+35mFZlPg7MSrBvrEWXtSGWornxOkHNSeYnIkCX8EPMHG9tsfu5rpNiRD/hC8aeKU3
-	pDIwBIsWbJKl/mSHJmJXOuDSY8iQJTf5HV3SZ7AzGYcyn3CNxuk5eSA1lwV7WPUxhi4d
-	Fbyw==
-X-Gm-Message-State: AKwxyteSsOFxAM9BGyNcvzF3UCdZshRfVm/RddBB0DyCu+9bIbAmG+KL
-	P0Mpp8vQ7Bu6yRVrP2qo/gw67Rwe
-X-Google-Smtp-Source: ACJfBotPFWoYAFIN461YrFs13RV3vepkg2795u6knopXkjHFRiCxY/TFvcdakzVu1Ib4pzgz8QZgYQ==
-X-Received: by 10.237.49.195 with SMTP id 61mr28902868qth.27.1515614588520;
-	Wed, 10 Jan 2018 12:03:08 -0800 (PST)
+	bh=J5yZijmr/Eq0TTSpmdRqvQ9729J3VBy/ffeEMikkX9E=;
+	b=Uu8lTIizon1cIbhxXtb4gASsW3iCESpBw8a3zFzco9jUZANygFJ2SlHgLAZ3zMU/e0
+	wDVgJsn6n2IGOyVgGi1RT21ESN8ijCaW8xbMgrzg1vFB8UhqKzCBWJ87xRp3OJjlZi/G
+	4vjBS39NvumDEDHsFUJy/s+H/5THop+RRWjwglmh0OrJLZDy8MiR9ois14kdnntW4k2C
+	OZb6x8vsgZ0CG06hzIsQDD+0PDzMKC9XPVks34tYX2C+lz4iX87nfLAQz2HrPu15wKRt
+	LYe0wa2pFjmOBLt5OFf+3tJ5ONRZOYwgvxOqax0VuKUc3ehtfv8E+6PbuLZO33Rx/cAl
+	4oGQ==
+X-Gm-Message-State: AKwxyteap5eSjF1vT/MHu4TDAvBcrEfqwsdXXgaUqSPMswm/cA50Sozj
+	MmIF2nibRU8VAODxILVtlS8Dl/zf
+X-Google-Smtp-Source: ACJfBosZBpN3FxF13VdfnpCPISwdJnXIOeD+lMgLXU0v0Jjdel9YKQTo5IQCDOLdd4QUxQF8NQWaxQ==
+X-Received: by 10.200.46.69 with SMTP id s5mr9319694qta.205.1515615342591;
+	Wed, 10 Jan 2018 12:15:42 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	c2sm11298052qkf.39.2018.01.10.12.03.07
+	c50sm11094174qte.38.2018.01.10.12.15.41
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Jan 2018 12:03:07 -0800 (PST)
+	Wed, 10 Jan 2018 12:15:42 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2018 15:03:01 -0500
-Message-Id: <1515614581-13525-1-git-send-email-derek@asterius.io>
+Date: Wed, 10 Jan 2018 15:15:32 -0500
+Message-Id: <1515615332-9157-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-pytest: update to version 3.3.2
+Subject: [meta-python][PATCH] python-tornado: update to version 4.5.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 20:03:07 -0000
+X-List-Received-Date: Wed, 10 Jan 2018 20:15:42 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-pytest.inc                 | 4 ++--
- .../python/{python-pytest_3.3.1.bb => python-pytest_3.3.2.bb}         | 0
- .../python/{python3-pytest_3.3.1.bb => python3-pytest_3.3.2.bb}       | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-pytest_3.3.1.bb => python-pytest_3.3.2.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-pytest_3.3.1.bb => python3-pytest_3.3.2.bb} (100%)
+ meta-python/recipes-devtools/python/python-tornado.inc             | 7 ++++---
+ .../python/{python-tornado_4.5.2.bb => python-tornado_4.5.3.bb}    | 0
+ .../python/{python3-tornado_4.5.2.bb => python3-tornado_4.5.3.bb}  | 0
+ 3 files changed, 4 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-tornado_4.5.2.bb => python-tornado_4.5.3.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-tornado_4.5.2.bb => python3-tornado_4.5.3.bb} (100%)
 
-diff --git a/meta-python/recipes-devtools/python/python-pytest.inc b/meta-python/recipes-devtools/python/python-pytest.inc
-index 90d1a56..17d8233 100644
---- a/meta-python/recipes-devtools/python/python-pytest.inc
-+++ b/meta-python/recipes-devtools/python/python-pytest.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://pytest.org"
- LICENSE = "MIT"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=c39b24965f4aef64222cb35de9d47cc4"
+diff --git a/meta-python/recipes-devtools/python/python-tornado.inc b/meta-python/recipes-devtools/python/python-tornado.inc
+index 2c58655..b9a99c7 100644
+--- a/meta-python/recipes-devtools/python/python-tornado.inc
++++ b/meta-python/recipes-devtools/python/python-tornado.inc
+@@ -6,11 +6,12 @@ HOMEPAGE = "http://www.tornadoweb.org/en/stable/"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://setup.py;startline=2;endline=15;md5=5ab7571a79ad62d0ca7aea308bac7560"
  
--SRC_URI[md5sum] = "6c056c2c41dfd2a0766682b942abf39c"
--SRC_URI[sha256sum] = "cf8436dc59d8695346fcd3ab296de46425ecab00d64096cebe79fb51ecb2eb93"
-+SRC_URI[md5sum] = "c3757fbdfebd5d8f402fdd5fc1dcb9b5"
-+SRC_URI[sha256sum] = "53548280ede7818f4dc2ad96608b9f08ae2cc2ca3874f2ceb6f97e3583f25bc4"
+-SRC_URI[md5sum] = "ab41f6765d58089f30ba51e8ec084a7b"
+-SRC_URI[sha256sum] = "1fb8e494cd46c674d86fac5885a3ff87b0e283937a47d74eb3c02a48c9e89ad0"
++SRC_URI[md5sum] = "a5fc7fd4aea94867609a491ce65786f1"
++SRC_URI[sha256sum] = "6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a"
  
- SRC_URI_append = " file://0001-setup.py-remove-the-setup_requires-for-setuptools-scm.patch \
-                    file://pytest_version_fix.patch "
-diff --git a/meta-python/recipes-devtools/python/python-pytest_3.3.1.bb b/meta-python/recipes-devtools/python/python-pytest_3.3.2.bb
+ RDEPENDS_${PN} += "${PYTHON_PN}-compression ${PYTHON_PN}-numbers ${PYTHON_PN}-email ${PYTHON_PN}-subprocess \
+-                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading"
++                   ${PYTHON_PN}-pkgutil ${PYTHON_PN}-html ${PYTHON_PN}-json ${PYTHON_PN}-certifi ${PYTHON_PN}-threading \
++                   ${PYTHON_PN}-ctypes"
+ 
+ RDEPENDS_${PN}-test += "${PN} ${PYTHON_PN}-unittest"
+ 
+diff --git a/meta-python/recipes-devtools/python/python-tornado_4.5.2.bb b/meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python-pytest_3.3.1.bb
-rename to meta-python/recipes-devtools/python/python-pytest_3.3.2.bb
-diff --git a/meta-python/recipes-devtools/python/python3-pytest_3.3.1.bb b/meta-python/recipes-devtools/python/python3-pytest_3.3.2.bb
+rename from meta-python/recipes-devtools/python/python-tornado_4.5.2.bb
+rename to meta-python/recipes-devtools/python/python-tornado_4.5.3.bb
+diff --git a/meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb b/meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
 similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-pytest_3.3.1.bb
-rename to meta-python/recipes-devtools/python/python3-pytest_3.3.2.bb
+rename from meta-python/recipes-devtools/python/python3-tornado_4.5.2.bb
+rename to meta-python/recipes-devtools/python/python3-tornado_4.5.3.bb
 -- 
 2.7.4
 
