@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
-	[209.85.220.193])
-	by mail.openembedded.org (Postfix) with ESMTP id E8B5B7883F
+Received: from mail-qk0-f179.google.com (mail-qk0-f179.google.com
+	[209.85.220.179])
+	by mail.openembedded.org (Postfix) with ESMTP id DC5287827F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 21:16:57 +0000 (UTC)
-Received: by mail-qk0-f193.google.com with SMTP id u76so1012961qku.11
+	Wed, 10 Jan 2018 21:26:30 +0000 (UTC)
+Received: by mail-qk0-f179.google.com with SMTP id l64so1054413qke.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 13:16:59 -0800 (PST)
+	Wed, 10 Jan 2018 13:26:32 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=V0mcISZihIViW9TvPsw6jm04N+aaAX3543fHaK6ErnM=;
-	b=EABth5kOTroUn3qh/J0jnijLx0iBJ9rZJH0kMp440xCGZ+lznXzEfzpuyYJY6jE3jr
-	S80A40Ulv691aSZ806MbRKp2Uxpf70jX2jJM4igHp1U2nFVbTSxui+dZapRVc3IHhY/d
-	7up7NewiZlKtZm/qLzY0pe3C/Q8dgxAdyKRbCvLkpMTZ211rR0jIzKNntBm8103Luz/o
-	pXMLclf13MDqoGrTeM1g8GEMK/n6RKbYVXlGqFPIw/l20uu2UpmJGSfCNfcqu0A2VpfZ
-	aTFFtWE2eKCbhCMgZwwGwFZPLz74jceWCRbwF+S0omw2EYqoqr4p/ibLkDOggyJ5KGyw
-	z9yQ==
-X-Gm-Message-State: AKwxytcv5P14G+7Z8n4/mI2BbjUIeWVmiEOD5MfdkSXYsBf+5QJrqsQZ
-	jrBOEzGN7mBlwoNSju9wR49fS50e
-X-Google-Smtp-Source: ACJfBoscf3QlywnRf+jtyt4NOCKBg2uo6n00T/K63ImXPTUjCcREGDae9XurwdwPtvN03hTNkjjv4g==
-X-Received: by 10.200.64.219 with SMTP id f27mr4004678qtm.227.1515619018627;
-	Wed, 10 Jan 2018 13:16:58 -0800 (PST)
+	bh=EQb+SCzbvMqq30DJR4fX9cvhmAYPpUOVE9eE86sxRFk=;
+	b=N2Plze5cIGxp3e9bmQ9sGkX2FmD8udti2c++qAMF0KHXKvXlQbf0fcJmlosFWNVuhY
+	pbb0mXoOLSf/3EeooCFjBeIbYcY+qI/QPyRyTz0BuTPWyEEyLdVLAG8cX9WQMqw+0hxV
+	T7v7zVrkllOmgrXViRxhqcTeOnhjlJtZUsUuYgNZv4C3EnQE8PrUuVvoyWe1FeDCU7ab
+	ctSzuwYHicfmj4L6yBg9SI8Aza6IH8BzequRPJiY4wwD2d3sS6fp7gy9u1gLnmcBYJQ/
+	mVevV9Qm9GkYjmkzxERlWQ2xI02AVk2cS/qGwWrFdQ51QxuNGrPYKTcSq/2Yk3+Na+SR
+	n0Dg==
+X-Gm-Message-State: AKwxytey3T4gXy9fugMRyciYfZl6C2hrYd49f6ZSY1tTgPxSyQiDc7Sb
+	vCsnwRLTt/iPRz/G1UkNE6cv1KXP
+X-Google-Smtp-Source: ACJfBouzhXY4Mb530x/5CQeMRq439DagmeuAwrTHOAS9sWF4btMeGIq8MZUjedJ3XgdvkKS9anbuvA==
+X-Received: by 10.237.42.198 with SMTP id t64mr27597494qtd.132.1515619591516; 
+	Wed, 10 Jan 2018 13:26:31 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	w73sm11505095qkb.70.2018.01.10.13.16.58
+	n73sm11268151qka.79.2018.01.10.13.26.30
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Jan 2018 13:16:58 -0800 (PST)
+	Wed, 10 Jan 2018 13:26:30 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2018 16:16:52 -0500
-Message-Id: <1515619012-8188-1-git-send-email-derek@asterius.io>
+Date: Wed, 10 Jan 2018 16:26:25 -0500
+Message-Id: <1515619585-9434-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-django: update to version 1.11.9
+Subject: [meta-python][PATCH] python-cmd2: update to version 0.7.9
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 21:16:58 -0000
+X-List-Received-Date: Wed, 10 Jan 2018 21:26:31 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-django.inc                 | 4 ++--
- .../python/{python-django_1.11.8.bb => python-django_1.11.9.bb}       | 0
- .../python/{python3-django_1.11.8.bb => python3-django_1.11.9.bb}     | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-django_1.11.8.bb => python-django_1.11.9.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-django_1.11.8.bb => python3-django_1.11.9.bb} (100%)
+ .../python/{python-cmd2_0.7.8.bb => python-cmd2_0.7.9.bb}           | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-cmd2_0.7.8.bb => python-cmd2_0.7.9.bb} (69%)
 
-diff --git a/meta-python/recipes-devtools/python/python-django.inc b/meta-python/recipes-devtools/python/python-django.inc
-index fec5379..8fff75d 100644
---- a/meta-python/recipes-devtools/python/python-django.inc
-+++ b/meta-python/recipes-devtools/python/python-django.inc
-@@ -3,8 +3,8 @@ HOMEPAGE = "http://www.djangoproject.com/"
- LICENSE = "BSD-3-Clause"
- LIC_FILES_CHKSUM = "file://LICENSE;md5=f09eb47206614a4954c51db8a94840fa"
+diff --git a/meta-python/recipes-devtools/python/python-cmd2_0.7.8.bb b/meta-python/recipes-devtools/python/python-cmd2_0.7.9.bb
+similarity index 69%
+rename from meta-python/recipes-devtools/python/python-cmd2_0.7.8.bb
+rename to meta-python/recipes-devtools/python/python-cmd2_0.7.9.bb
+index 96a1b39..e740099 100644
+--- a/meta-python/recipes-devtools/python/python-cmd2_0.7.8.bb
++++ b/meta-python/recipes-devtools/python/python-cmd2_0.7.9.bb
+@@ -1,10 +1,10 @@
+ SUMMARY = "Extra features for standard library's cmd module"
+ HOMEPAGE = "http://packages.python.org/cmd2/"
+ LICENSE = "MIT"
+-LIC_FILES_CHKSUM = "file://setup.py;beginline=49;endline=49;md5=0f13c9cfc75288223cf7edd2f3b985a2"
++LIC_FILES_CHKSUM = "file://setup.py;beginline=50;endline=50;md5=0f13c9cfc75288223cf7edd2f3b985a2"
  
--SRC_URI[md5sum] = "e8b68d44b87a3de36e13547ec2722af2"
--SRC_URI[sha256sum] = "fed3e79bb5a3a8d5eb054c7a1ec1de229ef3f43335a67821cc3e489e9582f711"
-+SRC_URI[md5sum] = "08ad028fc50ee961dea35e1e1f657b65"
-+SRC_URI[sha256sum] = "353d129f22e1d24980d6061666f435781141c2dfd852f14ffc8a670175821034"
+-SRC_URI[md5sum] = "afa5c55fd94bb4a38a01232a511585eb"
+-SRC_URI[sha256sum] = "e132db7d1f5a2faf2310606ee4b2e49c7b4e1e5ed533f1e4ca9474c51475eb0f"
++SRC_URI[md5sum] = "eeb80d5c29715b4ac39ecc032842a25f"
++SRC_URI[sha256sum] = "f518d30c641483c8d6c246afae6e4447f816f8300befc6a11c476eeb62a496e6"
  
- PYPI_PACKAGE = "Django"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-django_1.11.8.bb b/meta-python/recipes-devtools/python/python-django_1.11.9.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-django_1.11.8.bb
-rename to meta-python/recipes-devtools/python/python-django_1.11.9.bb
-diff --git a/meta-python/recipes-devtools/python/python3-django_1.11.8.bb b/meta-python/recipes-devtools/python/python3-django_1.11.9.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-django_1.11.8.bb
-rename to meta-python/recipes-devtools/python/python3-django_1.11.9.bb
+ inherit pypi setuptools
+ 
 -- 
 2.7.4
 
