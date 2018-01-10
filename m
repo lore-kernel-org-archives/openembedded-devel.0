@@ -1,24 +1,38 @@
-Return-Path: <joe.slater@windriver.com>
-Received: from mail.windriver.com (mail.windriver.com [147.11.1.11])
-	by mail.openembedded.org (Postfix) with ESMTP id 1684078837
+Return-Path: <straka.derek@gmail.com>
+Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
+	[209.85.220.196])
+	by mail.openembedded.org (Postfix) with ESMTP id BF2BD78837
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 20:21:06 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail.windriver.com (8.15.2/8.15.1) with ESMTPS id w0AKL7U6004298
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL)
+	Wed, 10 Jan 2018 20:21:54 +0000 (UTC)
+Received: by mail-qk0-f196.google.com with SMTP id j137so630365qke.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 12:21:08 -0800 (PST)
-Received: from ala-lpggp5.wrs.com (147.11.105.121) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.40) with Microsoft SMTP Server id 14.3.361.1;
-	Wed, 10 Jan 2018 12:21:07 -0800
-From: Joe Slater <jslater@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 10 Jan 2018 12:21:07 -0800
-Message-ID: <20180110202107.248032-1-jslater@windriver.com>
-X-Mailer: git-send-email 2.13.0
-MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/1] php-native: eliminate SSTATEPOSTINSTFUNCS use
+	Wed, 10 Jan 2018 12:21:56 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:cc:subject:date:message-id;
+	bh=PpJYojoAClYJlLRcw0ZNs/PTwdLXEOpbCEMp2g7WSgc=;
+	b=pP13JOmJvYoWF/tCqdduSdmJbgU6XLQ7Wr253VSTUB/56HoLMkj4sOqEaXZAwN5v9n
+	qk0H9joWrzpmS9peRhlw9EBJQPBrm0bKnl+gbvVwZIBkPBev9p7iUAzoTCwcE68qwcMa
+	arOx9ek2wUDbXRPK41sUiBsSyHRyWZW6dJLDPLgpo6E9VmsCeH0ORK+5aPlRPfGpNZ4y
+	APOuGCUnK6GPHiAloXhe66nM3vbbJTQYCeEl3qTRkFOV23X3trsCdTDelrF7XINR8nGp
+	6wNmnxy35hLcuXkWyh5Ku0c51OZ35qR6t3lBcNJl6YZiBmWidAcvyNhp86UBbqm/CuUp
+	cshw==
+X-Gm-Message-State: AKwxytcurFpP1TNTY+aXzaPofOugu1Djnv70jWl+HAl1ePh8iZNRswrF
+	/vFDLJJRrE9vB3UYLasDxp+A2tKF
+X-Google-Smtp-Source: ACJfBovIlekEqQZt2EyCMlH9/pdSTKYSTxfvdViOS5BgqowpaMuCHRaJ0IFicKGYhWIS4YU4KJDYUQ==
+X-Received: by 10.55.155.209 with SMTP id d200mr15089432qke.272.1515615715415; 
+	Wed, 10 Jan 2018 12:21:55 -0800 (PST)
+Received: from sparta.ny.asterius.io ([68.132.72.199])
+	by smtp.gmail.com with ESMTPSA id
+	p187sm4338770qkf.41.2018.01.10.12.21.54
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
+	Wed, 10 Jan 2018 12:21:55 -0800 (PST)
+From: Derek Straka <derek@asterius.io>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 10 Jan 2018 15:21:49 -0500
+Message-Id: <1515615709-23920-1-git-send-email-derek@asterius.io>
+X-Mailer: git-send-email 2.7.4
+Subject: [meta-python][PATCH] python-msgpack: update to version 0.5.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -31,41 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 20:21:07 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Jan 2018 20:21:54 -0000
 
-The use of SSTATEPOSTINSTFUNCS has been deprecated and is not
-needed for php-native.  The current function always fails, forcing
-a re-build of php-native.
-
-Signed-off-by: Joe Slater <jslater@windriver.com>
+Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-oe/recipes-devtools/php/php.inc | 12 ------------
- 1 file changed, 12 deletions(-)
+ meta-python/recipes-devtools/python/python-msgpack.inc                | 4 ++--
+ .../python/{python-msgpack_0.4.8.bb => python-msgpack_0.5.1.bb}       | 0
+ .../python/{python3-msgpack_0.4.8.bb => python3-msgpack_0.5.1.bb}     | 0
+ 3 files changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-msgpack_0.4.8.bb => python-msgpack_0.5.1.bb} (100%)
+ rename meta-python/recipes-devtools/python/{python3-msgpack_0.4.8.bb => python3-msgpack_0.5.1.bb} (100%)
 
-diff --git a/meta-oe/recipes-devtools/php/php.inc b/meta-oe/recipes-devtools/php/php.inc
-index 283d630..e466cda 100644
---- a/meta-oe/recipes-devtools/php/php.inc
-+++ b/meta-oe/recipes-devtools/php/php.inc
-@@ -253,18 +253,6 @@ do_install_append_class-native() {
-         PHP_PEAR_SYSCONF_DIR=${sysconfdir}/
- }
+diff --git a/meta-python/recipes-devtools/python/python-msgpack.inc b/meta-python/recipes-devtools/python/python-msgpack.inc
+index c2a8583..2729c6a 100644
+--- a/meta-python/recipes-devtools/python/python-msgpack.inc
++++ b/meta-python/recipes-devtools/python/python-msgpack.inc
+@@ -2,8 +2,8 @@ SUMMARY = "MessagePack (de)serializer"
+ LICENSE = "Apache-2.0"
+ LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
  
--SSTATEPOSTINSTFUNCS_append_class-native = " php_sstate_postinst "
--
--php_sstate_postinst() {
--    if [ "${BB_CURRENTTASK}" = "populate_sysroot_setscene" ]
--    then
--        head -n1 ${sysconfdir}/pear.conf > ${sysconfdir}/pear.tmp.conf
--        for p in `tail -n1  ${sysconfdir}/pear.conf | sed -s 's/;/ /g'`; do
--            echo $p | awk -F: 'BEGIN {OFS = ":"; ORS = ";"}{if(NF==3){print $1, length($3)-2*match($3, /^"/), $3} else {print $0}}';
--        done >> ${sysconfdir}/pear.tmp.conf
--        mv -f ${sysconfdir}/pear.tmp.conf ${sysconfdir}/pear.conf
--    fi
--}
+-SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
+-SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
++SRC_URI[md5sum] = "29ef230aab635b7d3daaa349c735a1a0"
++SRC_URI[sha256sum] = "69aa1eb0e13be1d3bd495ca937eae66df4431126f5cfd5491dc40370e5644853"
  
- # Fails to build with thumb-1 (qemuarm)
- # | {standard input}: Assembler messages:
+ PYPI_PACKAGE = "msgpack-python"
+ inherit pypi
+diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python-msgpack_0.5.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
+rename to meta-python/recipes-devtools/python/python-msgpack_0.5.1.bb
+diff --git a/meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python3-msgpack_0.5.1.bb
+similarity index 100%
+rename from meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb
+rename to meta-python/recipes-devtools/python/python3-msgpack_0.5.1.bb
 -- 
 2.7.4
 
