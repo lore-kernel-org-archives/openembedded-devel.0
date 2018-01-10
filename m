@@ -1,25 +1,24 @@
-Return-Path: <Yi.Zhao@windriver.com>
-Received: from mail1.windriver.com (mail1.windriver.com [147.11.146.13])
-	by mail.openembedded.org (Postfix) with ESMTP id 79C9D6093F
+Return-Path: <timothy.t.orling@linux.intel.com>
+Received: from mga14.intel.com (mga14.intel.com [192.55.52.115])
+	by mail.openembedded.org (Postfix) with ESMTP id 98CEF62133
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 03:11:43 +0000 (UTC)
-Received: from ALA-HCA.corp.ad.wrs.com (ala-hca.corp.ad.wrs.com
-	[147.11.189.40])
-	by mail1.windriver.com (8.15.2/8.15.1) with ESMTPS id w0A3Bg4I012944
-	(version=TLSv1 cipher=AES128-SHA bits=128 verify=FAIL);
-	Tue, 9 Jan 2018 19:11:43 -0800 (PST)
-Received: from localhost (128.224.162.134) by ALA-HCA.corp.ad.wrs.com
-	(147.11.189.50) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Tue, 9 Jan 2018 19:11:42 -0800
-From: Yi Zhao <yi.zhao@windriver.com>
-To: <openembedded-devel@lists.openembedded.org>, <martin.jansa@gmail.com>,
-	<macdonald@mentor.com>
-Date: Wed, 10 Jan 2018 11:09:56 +0800
-Message-ID: <1515553796-22399-1-git-send-email-yi.zhao@windriver.com>
-X-Mailer: git-send-email 2.7.4
+	Wed, 10 Jan 2018 04:14:24 +0000 (UTC)
+X-Amp-Result: SKIPPED(no attachment in message)
+X-Amp-File-Uploaded: False
+Received: from orsmga004.jf.intel.com ([10.7.209.38])
+	by fmsmga103.fm.intel.com with ESMTP/TLS/DHE-RSA-AES256-GCM-SHA384;
+	09 Jan 2018 20:14:25 -0800
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="5.46,338,1511856000"; d="scan'208";a="165545237"
+Received: from chiron.jf.intel.com ([10.7.159.61])
+	by orsmga004.jf.intel.com with ESMTP; 09 Jan 2018 20:14:25 -0800
+From: Tim Orling <timothy.t.orling@linux.intel.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue,  9 Jan 2018 20:14:07 -0800
+Message-Id: <20180110041407.11817-1-timothy.t.orling@linux.intel.com>
+X-Mailer: git-send-email 2.14.3
 MIME-Version: 1.0
-X-Originating-IP: [128.224.162.134]
-Subject: [meta-networking][PATCH] postfix: fix generating aliases db files
+Subject: [PATCH] stress-ng: upgrade to 0.09.09 and fix musl build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -32,112 +31,244 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 03:11:43 -0000
-Content-Type: text/plain
+X-List-Received-Date: Wed, 10 Jan 2018 04:14:24 -0000
+Content-Type: text/plain; charset=y
+Content-Transfer-Encoding: 8bit
 
-When generating aliases db files, the newaliases tries to chdir
-/var/spool/postfix on the host. It would cause a failure if the host
-doesn't install postfix:
-newaliases: fatal: chdir /var/spool/postfix: No such file or directory
+* Upstream tarballs are now xz compressed
+* Patch 0001 modified:
+  - stress-pthread and stress-context change not needed
+* Add patch to fix stress-fcntl for musl
+* Add patch to fix syntax errors in stress-fcntl
+  - Accepted upstream
+* Add UPSTREAM_CHECK_URI and UPSTREAM_CHECK_REGEX
 
-Move this step from do_install to pkg_postinst to make sure newaliases
-and postmap run during the image creation.
-
-Signed-off-by: Yi Zhao <yi.zhao@windriver.com>
+Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 ---
- meta-networking/recipes-daemons/postfix/files/main.cf   |  2 +-
- .../recipes-daemons/postfix/files/postfix.service       |  2 +-
- meta-networking/recipes-daemons/postfix/postfix.inc     | 17 ++++++++---------
- 3 files changed, 10 insertions(+), 11 deletions(-)
+ .../0001-Several-changes-to-fix-musl-build.patch   | 31 +-------------
+ .../0002-stress-fcntl-fix-build-for-musl.patch     | 27 +++++++++++++
+ .../0003-stress-fcntl.c-fix-syntax-errors.patch    | 47 ++++++++++++++++++++++
+ .../recipes-test/stress-ng/stress-ng_0.08.17.bb    | 20 ---------
+ .../recipes-test/stress-ng/stress-ng_0.09.09.bb    | 26 ++++++++++++
+ 5 files changed, 102 insertions(+), 49 deletions(-)
+ create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+ create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng/0003-stress-fcntl.c-fix-syntax-errors.patch
+ delete mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+ create mode 100644 meta-oe/recipes-test/stress-ng/stress-ng_0.09.09.bb
 
-diff --git a/meta-networking/recipes-daemons/postfix/files/main.cf b/meta-networking/recipes-daemons/postfix/files/main.cf
-index 2371ace..e75c6fc 100644
---- a/meta-networking/recipes-daemons/postfix/files/main.cf
-+++ b/meta-networking/recipes-daemons/postfix/files/main.cf
-@@ -33,7 +33,7 @@ queue_directory = /var/spool/postfix
- mail_spool_directory = /var/spool/mail
- readme_directory = no
- command_directory = /usr/sbin
--daemon_directory = @LIBEXECDIR@
-+daemon_directory = @LIBEXECDIR@/postfix
- mail_owner = postfix
- setgid_group = postdrop
- unknown_local_recipient_reject_code = 450
-diff --git a/meta-networking/recipes-daemons/postfix/files/postfix.service b/meta-networking/recipes-daemons/postfix/files/postfix.service
-index 3a9a0a1..30d54a4 100644
---- a/meta-networking/recipes-daemons/postfix/files/postfix.service
-+++ b/meta-networking/recipes-daemons/postfix/files/postfix.service
-@@ -7,7 +7,7 @@ Conflicts=sendmail.service exim.service
- Type=forking
- PIDFile=@LOCALSTATEDIR@/spool/postfix/pid/master.pid
- ExecStartPre=-@SBINDIR@/check_hostname.sh
--ExecStartPre=-@LIBEXECDIR@/aliasesdb
-+ExecStartPre=-@LIBEXECDIR@/postfix/aliasesdb
- ExecStart=@SBINDIR@/postfix start
- ExecReload=@SBINDIR@/postfix reload
- ExecStop=@SBINDIR@/postfix stop
-diff --git a/meta-networking/recipes-daemons/postfix/postfix.inc b/meta-networking/recipes-daemons/postfix/postfix.inc
-index e48fc39..fa5eef9 100644
---- a/meta-networking/recipes-daemons/postfix/postfix.inc
-+++ b/meta-networking/recipes-daemons/postfix/postfix.inc
-@@ -150,7 +150,7 @@ do_install () {
-     install -m 755 ${S}/bin/smtp-sink ${D}/${sbindir}/
-     install -d ${D}${sysconfdir}/init.d
-     install -m 644 ${WORKDIR}/main.cf ${D}${sysconfdir}/postfix/main.cf
--    sed -i 's#@LIBEXECDIR@#${libexecdir}/postfix#' ${D}${sysconfdir}/postfix/main.cf
-+    sed -i 's#@LIBEXECDIR@#${libexecdir}#' ${D}${sysconfdir}/postfix/main.cf
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+index 3ed7efc7e..f90e704f0 100644
+--- a/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0001-Several-changes-to-fix-musl-build.patch
+@@ -11,7 +11,6 @@ swapcontext, musl provide the definition but not the implementation due
+   to that functions are pre-POSIX and set to be deprecated.
+   stress-{resources, pty}.c: Doesn't include termio.h and remove stress
+   operations that uses struct termio, musl doesn't provide that struct.
+-stress-pthread.c: Change pthread_yield to sched_yield to be more compatible.
+ stress-malloc.c: Check for definition of M_MMAP_THRESHOLD musl doesn't
+   ptovide that constant.
+ stress-madvise.c: Add static poision_count integer, definition of
+@@ -19,13 +18,13 @@ stress-madvise.c: Add static poision_count integer, definition of
+ cache.c: Define GLOB_ONLYDIR not available on MUSL.
  
-     install -m 755 ${WORKDIR}/check_hostname.sh ${D}${sbindir}/
- 
-@@ -159,7 +159,7 @@ do_install () {
- 
-     install -d ${D}${systemd_unitdir}/system
-     install -m 0644 ${WORKDIR}/postfix.service ${D}${systemd_unitdir}/system
--    sed -i -e 's#@LIBEXECDIR@#${libexecdir}/postfix#g' ${D}${systemd_unitdir}/system/postfix.service
-+    sed -i -e 's#@LIBEXECDIR@#${libexecdir}#g' ${D}${systemd_unitdir}/system/postfix.service
-     sed -i -e 's#@LOCALSTATEDIR@#${localstatedir}#g' ${D}${systemd_unitdir}/system/postfix.service
-     sed -i -e 's#@SBINDIR@#${sbindir}#g' ${D}${systemd_unitdir}/system/postfix.service
- 
-@@ -217,12 +217,6 @@ do_install_append_class-native() {
- do_install_append_class-target() {
-     # Remove references to buildmachine paths in target makedefs.out
-     sed -i 's:-fdebug-prefix-map[^ ]*::g; s:--sysroot=${STAGING_DIR_TARGET}::g' ${D}/etc/postfix/makedefs.out
--    # Since we are building recipe postfix, newaliases and postmap come from our sysroot_native.
--    touch ${D}/etc/aliases
--    newaliases -C ${D}/etc/postfix/main.cf -oA${D}/etc/aliases
--    touch ${D}/etc/postfix/virtual_alias
--    postmap -c ${D}/etc/postfix ${D}/etc/postfix/virtual_alias
--
- }
- 
- ALTERNATIVE_${PN} = "sendmail"
-@@ -235,6 +229,7 @@ ALTERNATIVE_LINK_NAME[mailq.1] = "${mandir}/man1/mailq.1"
- ALTERNATIVE_LINK_NAME[newaliases.1] = "${mandir}/man1/newaliases.1"
- ALTERNATIVE_LINK_NAME[sendmail.1] = "${mandir}/man1/sendmail.1"
- 
-+PACKAGE_WRITE_DEPS += "postfix-native"
- pkg_postinst_${PN} () {
-     if [ "x$D" = "x" ]; then
-         touch /etc/aliases
-@@ -244,6 +239,11 @@ pkg_postinst_${PN} () {
-         touch /etc/postfix/virtual_alias
-         postmap /etc/postfix/virtual_alias
-     else
-+        touch $D/etc/aliases
-+        newaliases -C $D/etc/postfix/main.cf -oA$D/etc/aliases
-+        touch $D/etc/postfix/virtual_alias
-+        postmap -c $D/etc/postfix $D/etc/postfix/virtual_alias
+ Signed-off-by: Aníbal Limón <anibal.limon@linaro.org>
++Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
 +
-         if ${@'true' if 'linuxstdbase' in d.getVar('DISTROOVERRIDES', False) else 'false'}; then
-             # /usr/lib/sendmail is required by LSB core test
-             [ ! -L $D/usr/lib/sendmail ] && ln -sf ${sbindir}/sendmail $D/usr/lib/
-@@ -254,5 +254,4 @@ pkg_postinst_${PN} () {
- # Exclude .debug directories from the main package
- FILES_${PN} = "${sysconfdir} ${localstatedir} ${bindir}/* ${sbindir}/* \
-                ${libexecdir}/* ${systemd_unitdir}/*"
--CONFFILES_${PN} = "/etc/aliases /etc/postfix/virtual_alias*"
- FILES_${PN}-dbg += "${libexecdir}/postfix/.debug"
+ Upstream-status: Pending
+ ---
+  cache.c            |  4 ++++
+- stress-context.c   |  2 +-
+  stress-madvise.c   |  1 +
+  stress-malloc.c    |  2 +-
+- stress-pthread.c   |  2 +-
+  stress-pty.c       | 18 ------------------
+  stress-resources.c |  1 -
+  stress-stackmmap.c |  2 +-
+@@ -46,19 +45,6 @@ index e01fad0..27870ee 100644
+  #if defined(__linux__)
+  #define SYS_CPU_PREFIX               "/sys/devices/system/cpu"
+  #define GLOB_PATTERN SYS_CPU_PREFIX  "/cpu[0-9]*"
+-diff --git a/stress-context.c b/stress-context.c
+-index c5f50ed..67209e5 100644
+---- a/stress-context.c
+-+++ b/stress-context.c
+-@@ -24,7 +24,7 @@
+-  */
+- #include "stress-ng.h"
+- 
+--#if !defined(__OpenBSD__)
+-+#if !defined(__OpenBSD__) && False
+- 
+- #include <ucontext.h>
+- 
+ diff --git a/stress-madvise.c b/stress-madvise.c
+ index 43ea454..2e1f8ee 100644
+ --- a/stress-madvise.c
+@@ -84,19 +70,6 @@ index 8dbe5cc..f505f32 100644
+  	if (get_setting("malloc-threshold", &malloc_threshold))
+  		(void)mallopt(M_MMAP_THRESHOLD, (int)malloc_threshold);
+  #endif
+-diff --git a/stress-pthread.c b/stress-pthread.c
+-index 323a1d4..8269f4c 100644
+---- a/stress-pthread.c
+-+++ b/stress-pthread.c
+-@@ -139,7 +139,7 @@ static void *stress_pthread_func(void *parg)
+- 			break;
+- 		}
+- #if !defined(__NetBSD__) && !defined(__sun__)
+--		(void)pthread_yield();
+-+		(void)sched_yield();
+- #endif
+- 	}
+- 	ret = pthread_mutex_unlock(&mutex);
+ diff --git a/stress-pty.c b/stress-pty.c
+ index 8c3edf8..518f118 100644
+ --- a/stress-pty.c
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+new file mode 100644
+index 000000000..826340169
+--- /dev/null
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0002-stress-fcntl-fix-build-for-musl.patch
+@@ -0,0 +1,27 @@
++From 7be4680930e2867cefd5c8fe27a4ae81a4ae2628 Mon Sep 17 00:00:00 2001
++From: Tim Orling <timothy.t.orling@linux.intel.com>
++Date: Tue, 9 Jan 2018 18:38:45 -0800
++Subject: [PATCH] stress-fcntl: fix build for musl
++
++Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
++
++Upstream-status: Pending
++---
++ stress-fcntl.c | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/stress-fcntl.c b/stress-fcntl.c
++index b7eade2..9fa5c38 100644
++--- a/stress-fcntl.c
+++++ b/stress-fcntl.c
++@@ -413,6 +413,7 @@ ofd_lock_abort:	{ /* Nowt */ }
++ 
++ #if defined(F_GET_FILE_RW_HINT) && defined(F_SET_FILE_RW_HINT)
++ 	{
+++		int ret;
++ 		size_t i;
++ 		unsigned long hint;
++ 		static const unsigned long hints[] = {
++-- 
++2.14.3
++
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng/0003-stress-fcntl.c-fix-syntax-errors.patch b/meta-oe/recipes-test/stress-ng/stress-ng/0003-stress-fcntl.c-fix-syntax-errors.patch
+new file mode 100644
+index 000000000..4b6a9b391
+--- /dev/null
++++ b/meta-oe/recipes-test/stress-ng/stress-ng/0003-stress-fcntl.c-fix-syntax-errors.patch
+@@ -0,0 +1,47 @@
++From 8537dcafb12be4d986b571f1e1d9f3ceecdc8e63 Mon Sep 17 00:00:00 2001
++From: Tim Orling <timothy.t.orling@linux.intel.com>
++Date: Sun, 7 Jan 2018 21:29:12 -0800
++Subject: [PATCH] stress-fcntl.c: fix syntax errors
++
++Signed-off-by: Tim Orling <timothy.t.orling@linux.intel.com>
++
++Upstream-status: Accepted
++(commit 61d93d6857256cd49df6a6302caf6e7bb69b0f46)
++---
++ stress-fcntl.c | 6 +++---
++ 1 file changed, 3 insertions(+), 3 deletions(-)
++
++diff --git a/stress-fcntl.c b/stress-fcntl.c
++index 7c15d28..b7eade2 100644
++--- a/stress-fcntl.c
+++++ b/stress-fcntl.c
++@@ -173,7 +173,7 @@ static int do_fcntl(const args_t *args, const int fd)
++ 		owner.pid = getpgrp();
++ 		ret = fcntl(fd, F_SETOWN_EX, &owner);
++ 		check_return(args, ret, "F_SETOWN_EX, F_OWNER_PGRP");
++-#else if defined(HAVE_GETPGRP) && defined(F_OWNER_GID)
+++#elif defined(HAVE_GETPGRP) && defined(F_OWNER_GID)
++ 		owner.type = F_OWNER_GID;
++ 		owner.pid = getpgrp();
++ 		ret = fcntl(fd, F_SETOWN_EX, &owner);
++@@ -202,7 +202,7 @@ static int do_fcntl(const args_t *args, const int fd)
++ 		owner.type = F_OWNER_PGRP;
++ 		ret = fcntl(fd, F_GETOWN_EX, &owner);
++ 		check_return(args, ret, "F_GETOWN_EX, F_OWNER_PGRP");
++-#ele if defined(F_OWNER_GID)
+++#elif defined(F_OWNER_GID)
++ 		owner.type = F_OWNER_GID;
++ 		ret = fcntl(fd, F_GETOWN_EX, &owner);
++ 		check_return(args, ret, "F_GETOWN_EX, F_OWNER_GID");
++@@ -436,7 +436,7 @@ ofd_lock_abort:	{ /* Nowt */ }
++ #endif
++ 		};
++ 
++-		ret = fcntl(fd, F_GET_FILE_RW_HINT, &hint)
+++		ret = fcntl(fd, F_GET_FILE_RW_HINT, &hint);
++ 		if (ret == 0) {
++ 			for (i = 0; i < SIZEOF_ARRAY(hints); i++) {
++ 				hint = hints[i];
++-- 
++2.14.3
++
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
+deleted file mode 100644
+index dc5b2e8eb..000000000
+--- a/meta-oe/recipes-test/stress-ng/stress-ng_0.08.17.bb
++++ /dev/null
+@@ -1,20 +0,0 @@
+-SUMMARY = "A tool to load and stress a computer system"
+-HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
+-
+-DEPENDS = "zlib libaio"
+-
+-SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.gz \
+-          "
+-SRC_URI_append_libc-musl = "file://0001-Several-changes-to-fix-musl-build.patch"
+-
+-SRC_URI[md5sum] = "e0f6497a8c06f5d652bc2ad88d449c12"
+-SRC_URI[sha256sum] = "37cc73e42f5bdb0e0571ba88f6a69b8f05ee28e51afcafc2231c1058b1a5dd18"
+-
+-CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"'"
+-
+-do_install_append() {
+-    install -d ${D}${bindir}
+-    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
+-}
+diff --git a/meta-oe/recipes-test/stress-ng/stress-ng_0.09.09.bb b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.09.bb
+new file mode 100644
+index 000000000..24f55ada2
+--- /dev/null
++++ b/meta-oe/recipes-test/stress-ng/stress-ng_0.09.09.bb
+@@ -0,0 +1,26 @@
++SUMMARY = "A tool to load and stress a computer system"
++HOMEPAGE = "http://kernel.ubuntu.com/~cking/stress-ng/"
++LICENSE = "GPLv2"
++LIC_FILES_CHKSUM = "file://COPYING;md5=b234ee4d69f5fce4486a80fdaf4a4263"
++
++DEPENDS = "zlib libaio"
++
++SRC_URI = "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/${BP}.tar.xz \
++          "
++SRC_URI_append_libc-musl = " \
++    file://0001-Several-changes-to-fix-musl-build.patch \
++    file://0002-stress-fcntl-fix-build-for-musl.patch \
++    file://0003-stress-fcntl.c-fix-syntax-errors.patch"
++
++SRC_URI[md5sum] = "6e4df71095e780654ccc0a713b8423fe"
++SRC_URI[sha256sum] = "e993fddb1d990a0cdb23b2af6cf6c417a1c09e155ada7c558ad80eae8a5feed3"
++
++UPSTREAM_CHECK_URI ?= "http://kernel.ubuntu.com/~cking/tarballs/${BPN}/"
++UPSTREAM_CHECK_REGEX ?= "(?P<pver>\d+(\.\d+)+)\.tar"
++
++CFLAGS += "-Wall -Wextra -DVERSION='"$(VERSION)"'"
++
++do_install_append() {
++    install -d ${D}${bindir}
++    install -m 755 ${S}/stress-ng ${D}${bindir}/stress-ng
++}
 -- 
-2.7.4
+2.14.3
 
 
