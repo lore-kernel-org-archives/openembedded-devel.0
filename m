@@ -1,38 +1,38 @@
 Return-Path: <straka.derek@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id BF2BD78837
+Received: from mail-qk0-f193.google.com (mail-qk0-f193.google.com
+	[209.85.220.193])
+	by mail.openembedded.org (Postfix) with ESMTP id 7D04C787CE
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 20:21:54 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id j137so630365qke.10
+	Wed, 10 Jan 2018 20:56:33 +0000 (UTC)
+Received: by mail-qk0-f193.google.com with SMTP id d21so938054qkj.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 10 Jan 2018 12:21:56 -0800 (PST)
+	Wed, 10 Jan 2018 12:56:34 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
 	h=x-gm-message-state:from:to:cc:subject:date:message-id;
-	bh=PpJYojoAClYJlLRcw0ZNs/PTwdLXEOpbCEMp2g7WSgc=;
-	b=pP13JOmJvYoWF/tCqdduSdmJbgU6XLQ7Wr253VSTUB/56HoLMkj4sOqEaXZAwN5v9n
-	qk0H9joWrzpmS9peRhlw9EBJQPBrm0bKnl+gbvVwZIBkPBev9p7iUAzoTCwcE68qwcMa
-	arOx9ek2wUDbXRPK41sUiBsSyHRyWZW6dJLDPLgpo6E9VmsCeH0ORK+5aPlRPfGpNZ4y
-	APOuGCUnK6GPHiAloXhe66nM3vbbJTQYCeEl3qTRkFOV23X3trsCdTDelrF7XINR8nGp
-	6wNmnxy35hLcuXkWyh5Ku0c51OZ35qR6t3lBcNJl6YZiBmWidAcvyNhp86UBbqm/CuUp
-	cshw==
-X-Gm-Message-State: AKwxytcurFpP1TNTY+aXzaPofOugu1Djnv70jWl+HAl1ePh8iZNRswrF
-	/vFDLJJRrE9vB3UYLasDxp+A2tKF
-X-Google-Smtp-Source: ACJfBovIlekEqQZt2EyCMlH9/pdSTKYSTxfvdViOS5BgqowpaMuCHRaJ0IFicKGYhWIS4YU4KJDYUQ==
-X-Received: by 10.55.155.209 with SMTP id d200mr15089432qke.272.1515615715415; 
-	Wed, 10 Jan 2018 12:21:55 -0800 (PST)
+	bh=KkTTMxorIPpV0YONMg1U4BhvO8NWAPI/8GzUlZAi7Gk=;
+	b=ZujSglA727Yn0fEftxfqutr9sUwrL26QT5tYSe5l0XbgRbYPsUeye6hfQXJHx7BTyT
+	wmJ5dI7/0lh41Sf3X5iorSWfkmqTt5Cu1eYC5dJ6SOD6L+NqmrQEaOJ0DTc/CLuT1irP
+	isGRt8pv9dmdKgRMkv/C2q3zTsLBRvZYzjG1LQTFI5VCqLkjdKmFrE++dFuY2HqmZ7KV
+	AQT4/cNX7lPbhN3MFWbXjBNvlyn3sSRdo1SHplpgdPXF26ULdpke794V7k3lG/UkJNOY
+	dRk8FNJZRHFu0Mxx/iJv38nNYKzyhGz3nm+t22hzZ97Fc4TctEJkAjLYUAcC4qfijPqB
+	5DBw==
+X-Gm-Message-State: AKwxytcmCDF46MGZmV0JAT4d/AS24k3PPRFJqV/oixAKBK431R/FE+CW
+	GOhXlDv0Fjw8DeOxcAqZk1/7wM+q
+X-Google-Smtp-Source: ACJfBovsk4/IyT38O6YPMm2d1BmiVB/K/Hy2VKXmTsxc2kxS+0YZQBLXWfoxFrovhIRrXrWpPbx/Jw==
+X-Received: by 10.55.245.19 with SMTP id l19mr26460491qkk.184.1515617794041;
+	Wed, 10 Jan 2018 12:56:34 -0800 (PST)
 Received: from sparta.ny.asterius.io ([68.132.72.199])
 	by smtp.gmail.com with ESMTPSA id
-	p187sm4338770qkf.41.2018.01.10.12.21.54
+	w41sm11148076qtc.19.2018.01.10.12.56.32
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-SHA bits=128/128);
-	Wed, 10 Jan 2018 12:21:55 -0800 (PST)
+	Wed, 10 Jan 2018 12:56:33 -0800 (PST)
 From: Derek Straka <derek@asterius.io>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2018 15:21:49 -0500
-Message-Id: <1515615709-23920-1-git-send-email-derek@asterius.io>
+Date: Wed, 10 Jan 2018 15:56:25 -0500
+Message-Id: <1515617786-1202-1-git-send-email-derek@asterius.io>
 X-Mailer: git-send-email 2.7.4
-Subject: [meta-python][PATCH] python-msgpack: update to version 0.5.1
+Subject: [meta-python][PATCH 1/2] python-grpcio: update to version 1.8.3
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -45,40 +45,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 10 Jan 2018 20:21:54 -0000
+X-List-Received-Date: Wed, 10 Jan 2018 20:56:33 -0000
 
 Signed-off-by: Derek Straka <derek@asterius.io>
 ---
- meta-python/recipes-devtools/python/python-msgpack.inc                | 4 ++--
- .../python/{python-msgpack_0.4.8.bb => python-msgpack_0.5.1.bb}       | 0
- .../python/{python3-msgpack_0.4.8.bb => python3-msgpack_0.5.1.bb}     | 0
- 3 files changed, 2 insertions(+), 2 deletions(-)
- rename meta-python/recipes-devtools/python/{python-msgpack_0.4.8.bb => python-msgpack_0.5.1.bb} (100%)
- rename meta-python/recipes-devtools/python/{python3-msgpack_0.4.8.bb => python3-msgpack_0.5.1.bb} (100%)
+ .../python/{python-grpcio_1.8.2.bb => python-grpcio_1.8.3.bb}         | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ rename meta-python/recipes-devtools/python/{python-grpcio_1.8.2.bb => python-grpcio_1.8.3.bb} (82%)
 
-diff --git a/meta-python/recipes-devtools/python/python-msgpack.inc b/meta-python/recipes-devtools/python/python-msgpack.inc
-index c2a8583..2729c6a 100644
---- a/meta-python/recipes-devtools/python/python-msgpack.inc
-+++ b/meta-python/recipes-devtools/python/python-msgpack.inc
-@@ -2,8 +2,8 @@ SUMMARY = "MessagePack (de)serializer"
- LICENSE = "Apache-2.0"
- LIC_FILES_CHKSUM = "file://COPYING;md5=cd9523181d9d4fbf7ffca52eaa2a5751"
+diff --git a/meta-python/recipes-devtools/python/python-grpcio_1.8.2.bb b/meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb
+similarity index 82%
+rename from meta-python/recipes-devtools/python/python-grpcio_1.8.2.bb
+rename to meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb
+index 5b0724e..ab0b85c 100644
+--- a/meta-python/recipes-devtools/python/python-grpcio_1.8.2.bb
++++ b/meta-python/recipes-devtools/python/python-grpcio_1.8.3.bb
+@@ -18,8 +18,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD-3-Clause;md5=550794465ba0ec
  
--SRC_URI[md5sum] = "dcd854fb41ee7584ebbf35e049e6be98"
--SRC_URI[sha256sum] = "1a2b19df0f03519ec7f19f826afb935b202d8979b0856c6fb3dc28955799f886"
-+SRC_URI[md5sum] = "29ef230aab635b7d3daaa349c735a1a0"
-+SRC_URI[sha256sum] = "69aa1eb0e13be1d3bd495ca937eae66df4431126f5cfd5491dc40370e5644853"
+ inherit pypi setuptools
  
- PYPI_PACKAGE = "msgpack-python"
- inherit pypi
-diff --git a/meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python-msgpack_0.5.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python-msgpack_0.4.8.bb
-rename to meta-python/recipes-devtools/python/python-msgpack_0.5.1.bb
-diff --git a/meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb b/meta-python/recipes-devtools/python/python3-msgpack_0.5.1.bb
-similarity index 100%
-rename from meta-python/recipes-devtools/python/python3-msgpack_0.4.8.bb
-rename to meta-python/recipes-devtools/python/python3-msgpack_0.5.1.bb
+-SRC_URI[md5sum] = "4d4ce91b5a56d724227aa116f971402c"
+-SRC_URI[sha256sum] = "1ea1336f0d1158c4e00e96a94df84b75f6bbff9816abb6cc68cbdc9442a9ac55"
++SRC_URI[md5sum] = "a611ac877a1e613ba7dc24dc06d9bf88"
++SRC_URI[sha256sum] = "6ce5fd3093ddc09a152981d5c477ac645eda19dfcc819e45d8c57da6b743bd53"
+ 
+ # For usage in other recipes when compiling protobuf files (e.g. by grpcio-tools)
+ BBCLASSEXTEND = "native"
 -- 
 2.7.4
 
