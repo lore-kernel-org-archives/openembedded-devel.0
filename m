@@ -1,31 +1,31 @@
 Return-Path: <denis@denix.org>
 Received: from mailout4.zoneedit.com (mailout4.zoneedit.com [64.68.198.17])
-	by mail.openembedded.org (Postfix) with ESMTP id CF51B6007A
+	by mail.openembedded.org (Postfix) with ESMTP id 8FD187885B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jan 2018 01:44:53 +0000 (UTC)
+	Thu, 11 Jan 2018 01:45:27 +0000 (UTC)
 Received: from localhost (localhost [127.0.0.1])
-	by mailout4.zoneedit.com (Postfix) with ESMTP id F036220B35;
-	Thu, 11 Jan 2018 01:44:54 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTP id 2B1D320B35;
+	Thu, 11 Jan 2018 01:45:29 +0000 (UTC)
 Received: from mailout4.zoneedit.com ([127.0.0.1])
 	by localhost (zmo03-pco.easydns.vpn [127.0.0.1]) (amavisd-new,
 	port 10024)
-	with ESMTP id lPNJrWglPSec; Thu, 11 Jan 2018 01:44:54 +0000 (UTC)
+	with ESMTP id 3g-oidpCCWie; Thu, 11 Jan 2018 01:45:29 +0000 (UTC)
 Received: from mail.denix.org (pool-100-15-85-143.washdc.fios.verizon.net
 	[100.15.85.143])
 	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
 	(No client certificate requested)
-	by mailout4.zoneedit.com (Postfix) with ESMTPSA id CEE9020481;
-	Thu, 11 Jan 2018 01:44:53 +0000 (UTC)
+	by mailout4.zoneedit.com (Postfix) with ESMTPSA id 10A5A20481;
+	Thu, 11 Jan 2018 01:45:28 +0000 (UTC)
 Received: from gimli.denix (gimli [192.168.0.6])
-	by mail.denix.org (Postfix) with ESMTP id 52BF2163255;
-	Wed, 10 Jan 2018 20:44:53 -0500 (EST)
+	by mail.denix.org (Postfix) with ESMTP id C0885163255;
+	Wed, 10 Jan 2018 20:45:27 -0500 (EST)
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 10 Jan 2018 20:44:52 -0500
-Message-Id: <1515635092-19139-1-git-send-email-denis@denix.org>
+Date: Wed, 10 Jan 2018 20:45:26 -0500
+Message-Id: <1515635126-19293-1-git-send-email-denis@denix.org>
 X-Mailer: git-send-email 2.7.4
 Cc: Denys Dmytriyenko <denys@ti.com>
-Subject: [meta-qt5][PATCH] qtwebengine: explicitly depend on bison-native
+Subject: [meta-qt5][rocko][PATCH] qtwebengine: explicitly depend on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -38,7 +38,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jan 2018 01:44:54 -0000
+X-List-Received-Date: Thu, 11 Jan 2018 01:45:27 -0000
 
 From: Denys Dmytriyenko <denys@ti.com>
 
@@ -68,11 +68,11 @@ Signed-off-by: Denys Dmytriyenko <denys@ti.com>
  1 file changed, 1 insertion(+)
 
 diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/qtwebengine_git.bb
-index f88e5e7..3a6a37e 100644
+index 1f53e4a..ed179de 100644
 --- a/recipes-qt/qt5/qtwebengine_git.bb
 +++ b/recipes-qt/qt5/qtwebengine_git.bb
-@@ -18,6 +18,7 @@ DEPENDS += " \
-     nspr-native \
+@@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = " \
+ DEPENDS += " \
      ninja-native \
      yasm-native \
 +    bison-native \
