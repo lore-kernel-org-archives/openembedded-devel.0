@@ -1,30 +1,61 @@
-Return-Path: <zhengrq.fnst@cn.fujitsu.com>
-Received: from heian.cn.fujitsu.com (mail.cn.fujitsu.com [183.91.158.132])
-	by mail.openembedded.org (Postfix) with ESMTP id 8CBDA783C6
+Return-Path: <zboszor@pr.hu>
+X-Greylist: delayed 1845 seconds by postgrey-1.34 at layers.openembedded.org;
+	Thu, 11 Jan 2018 14:38:32 UTC
+Received: from mail6.pr.hu (mail6.pr.hu [87.242.0.6])
+	by mail.openembedded.org (Postfix) with ESMTP id 102BA78262
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jan 2018 08:28:46 +0000 (UTC)
-X-IronPort-AV: E=Sophos;i="5.43,368,1503331200"; d="scan'208";a="35171402"
-Received: from bogon (HELO cn.fujitsu.com) ([10.167.33.5])
-	by heian.cn.fujitsu.com with ESMTP; 11 Jan 2018 16:28:46 +0800
-Received: from G08CNEXCHPEKD02.g08.fujitsu.local (unknown [10.167.33.83])
-	by cn.fujitsu.com (Postfix) with ESMTP id 755CD48AEA13
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 11 Jan 2018 16:28:47 +0800 (CST)
-Received: from localhost.localdomain (10.167.225.156) by
-	G08CNEXCHPEKD02.g08.fujitsu.local (10.167.33.89) with Microsoft SMTP
-	Server (TLS) id 14.3.361.1; Thu, 11 Jan 2018 16:28:45 +0800
-From: zhengrq <zhengrq.fnst@cn.fujitsu.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Sun, 7 Jan 2018 18:59:40 +0800
-Message-ID: <1515322780-20975-1-git-send-email-zhengrq.fnst@cn.fujitsu.com>
-X-Mailer: git-send-email 1.8.3.1
+	Thu, 11 Jan 2018 14:38:32 +0000 (UTC)
+Received: from [2a02:808:3:101::5] (helo=mail.pr.hu)
+	by frontdoor.pr.hu with esmtps
+	(TLS1.2:ECDHE_RSA_AES_256_GCM_SHA384:256) (Exim 4.89)
+	(envelope-from <zboszor@pr.hu>) id 1eZdWG-0007Fs-3c
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Jan 2018 15:07:48 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=pr.hu;
+	s=pr20170203;
+	h=Content-Transfer-Encoding:Content-Type:MIME-Version:Date:
+	Message-ID:Subject:From:To:Sender:Reply-To:Cc:Content-ID:Content-Description:
+	Resent-Date:Resent-From:Resent-Sender:Resent-To:Resent-Cc:Resent-Message-ID:
+	In-Reply-To:References:List-Id:List-Help:List-Unsubscribe:List-Subscribe:
+	List-Post:List-Owner:List-Archive;
+	bh=udHq8TEciqmBoT1I94KDNeHX5azd+n88ByGFF0S4OPY=;
+	b=HHRRkadF7UPQCVvjCaOWT20JSl
+	n4EWvmmNCqDiZbcAZC46oEImFZ+ZAkX/QTO2ffhN2czU3P+JVlt9z2bJOHMNOTPO3pZf+CFFV9i3W
+	hiq1/A8DUywaB6ICvelNpGpas6v6Bjd0EPS5o7z9BYRstPX9tb/9SDth9MJxqMhXaqYo20X3CbU69
+	ennPvgUGtXMfP+pXAVoi0NDiO+7k/2AWt4u4N9BbddTYT5XQ1OyJqpbgPCqljmsEskKovdHjqnXMQ
+	5bsPBSldmThZPGCto0rgtmx8yN9SYH8Dw5TJtsGcyAqn5yQyLZIwr6t7mrkKRp8Sa1c97Vqeb7fbV
+	eJW4eYvg==;
+Received: from host-87-242-32-111.prtelecom.hu ([87.242.32.111]
+	helo=s002.sicom.com)
+	by mail.pr.hu with esmtpsa (TLS1.2:ECDHE_RSA_AES_128_GCM_SHA256:128)
+	(Exim 4.89) (envelope-from <zboszor@pr.hu>) id 1eZdWC-0002Es-0y
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 11 Jan 2018 15:07:46 +0100
+To: openembedded-devel@lists.openembedded.org
+From: =?UTF-8?B?QsO2c3rDtnJtw6lueWkgWm9sdMOhbg==?= <zboszor@pr.hu>
+Message-ID: <9f004ada-4627-0a82-cb3f-7ee9e38791b7@pr.hu>
+Date: Thu, 11 Jan 2018 15:07:41 +0100
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
+	Thunderbird/52.5.0
 MIME-Version: 1.0
-X-Originating-IP: [10.167.225.156]
-X-yoursite-MailScanner-ID: 755CD48AEA13.A881F
-X-yoursite-MailScanner: Found to be clean
-X-yoursite-MailScanner-From: zhengrq.fnst@cn.fujitsu.com
-X-Spam-Status: No
-Subject: [meta-networking][PATCH] lldpad: new add
+X-Spam-Score: 2.3 (++)
+X-Spam-Report-Back: Spamchecker on "prspamd4.pr.hu" has DOESN'T believe this
+	is spam.
+	pts rule name              description  (score: __SCORE__ points)
+	---- ----------------------
+	--------------------------------------------------
+	-0.2 ALL_TRUSTED Passed through trusted hosts only via SMTP
+	3.5 BAYES_99               BODY: Bayes spam probability is 99 to 100%
+	[score: 1.0000]
+	0.2 BAYES_999 BODY: Bayes spam probability is 99.9 to 100%
+	[score: 1.0000]
+	-1.2 AWL AWL: Adjusted score from AWL reputation of From: address
+	Preview: Hi, I have been using Yocto since 1.6 and I have found a bug
+	in the automatic recording in the shlib dependencies. The problem is
+	that shlib dependencies are not recorded with PE+PV. [...]
+X-Scan-Signature: bac636d383641ecc82643dbc9c1f3bb5
+X-Spam-Tracer: backend.mail.pr.hu 2.3 20180111140746Z
+Subject: RFC: Record PE for shlib dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -37,196 +68,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 11 Jan 2018 08:28:48 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 11 Jan 2018 14:38:33 -0000
+Content-Type: text/plain; charset=iso-8859-2; format=flowed
+Content-Language: en-US
+Content-Transfer-Encoding: 8bit
 
-Add a new recipe lldpad_git.bb.
+Hi,
 
-Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
----
- .../lldpad/lldpad/0001-fix-build-warnings.patch    | 94 ++++++++++++++++++++++
- .../lldpad/0002-Change-CFLAGS-to-avoid-error.patch | 25 ++++++
- .../recipes-daemons/lldpad/lldpad_git.bb           | 35 ++++++++
- 3 files changed, 154 insertions(+)
- create mode 100644 meta-networking/recipes-daemons/lldpad/lldpad/0001-fix-build-warnings.patch
- create mode 100644 meta-networking/recipes-daemons/lldpad/lldpad/0002-Change-CFLAGS-to-avoid-error.patch
- create mode 100644 meta-networking/recipes-daemons/lldpad/lldpad_git.bb
+I have been using Yocto since 1.6 and I have found a bug
+in the automatic recording in the shlib dependencies.
 
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad/0001-fix-build-warnings.patch b/meta-networking/recipes-daemons/lldpad/lldpad/0001-fix-build-warnings.patch
-new file mode 100644
-index 0000000..52c0978
---- /dev/null
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad/0001-fix-build-warnings.patch
-@@ -0,0 +1,94 @@
-+From: Chris Leech <cleech@redhat.com>
-+Date: Wed, 17 Jun 2015 10:40:34 -0700
-+Subject: [PATCH] fix build warnings
-+
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+---
-+ include/lldp_8021qaz.h | 6 ------
-+ lldp/agent.c           | 5 +++++
-+ lldp/agent.h           | 6 +++---
-+ lldp_util.c            | 4 ++--
-+ 4 files changed, 10 insertions(+), 11 deletions(-)
-+
-+diff --git a/include/lldp_8021qaz.h b/include/lldp_8021qaz.h
-+index 55353b8..09dee20 100644
-+--- a/include/lldp_8021qaz.h
-++++ b/include/lldp_8021qaz.h
-+@@ -218,9 +218,6 @@ int ieee8021qaz_mod_app(struct app_tlv_head *head, int peer,
-+ 			u8 prio, u8 sel, u16 proto, u32 ops);
-+ int ieee8021qaz_app_sethw(char *ifname, struct app_tlv_head *head);
-+ 
-+-inline int get_prio_map(u32 prio_map, int tc);
-+-inline void set_prio_map(u32 *prio_map, u8 prio, int tc);
-+-
-+ struct ieee8021qaz_tlvs *ieee8021qaz_data(const char *);
-+ 
-+ int ieee8021qaz_tlvs_rxed(const char *ifname);
-+@@ -234,9 +231,6 @@ int ieee8021qaz_rchange(struct port *port, struct lldp_agent *,
-+ void ieee8021qaz_ifup(char *ifname, struct lldp_agent *);
-+ void ieee8021qaz_ifdown(char *ifname, struct lldp_agent *);
-+ u8 ieee8021qaz_mibDeleteObject(struct port *port, struct lldp_agent *);
-+-inline int ieee8021qaz_clif_cmd(void *data, struct sockaddr_un *from,
-+-				socklen_t fromlen, char *ibuf, int ilen,
-+-				char *rbuf);
-+ int ieee8021qaz_check_operstate(void);
-+ int get_dcbx_hw(const char *ifname, __u8 *dcbx);
-+ 
-+diff --git a/lldp/agent.c b/lldp/agent.c
-+index 4bc5394..45def9a 100644
-+--- a/lldp/agent.c
-++++ b/lldp/agent.c
-+@@ -36,6 +36,11 @@
-+ #include "lldp_mand_clif.h"
-+ #include "lldp/agent.h"
-+ 
-++/* IEEE 802.1AB-2009 - Table 7-1: group MAC addresses used by LLDP */
-++const u8 nearest_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x0e};
-++const u8 nearest_nontpmr_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x03};
-++const u8 nearest_customer_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x00};
-++
-+ static const u8 * agent_groupmacs[AGENT_MAX] = {
-+ 	nearest_bridge,
-+ 	nearest_nontpmr_bridge,
-+diff --git a/lldp/agent.h b/lldp/agent.h
-+index a54f72f..90da3e0 100644
-+--- a/lldp/agent.h
-++++ b/lldp/agent.h
-+@@ -48,9 +48,9 @@ enum agent_type {
-+ };
-+ 
-+ /* IEEE 802.1AB-2009 - Table 7-1: group MAC addresses used by LLDP */
-+-static const u8 nearest_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x0e};
-+-static const u8 nearest_nontpmr_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x03};
-+-static const u8 nearest_customer_bridge[ETH_ALEN] = {0x01,0x80,0xc2,0x00,0x00,0x00};
-++extern const u8 nearest_bridge[ETH_ALEN];
-++extern const u8 nearest_nontpmr_bridge[ETH_ALEN];
-++extern const u8 nearest_customer_bridge[ETH_ALEN];
-+ 
-+ struct agenttimers {
-+ /* Tx */
-+diff --git a/lldp_util.c b/lldp_util.c
-+index 754b0cd..304ddc5 100644
-+--- a/lldp_util.c
-++++ b/lldp_util.c
-+@@ -1177,7 +1177,7 @@ int check_link_status(const char *ifname)
-+ int get_arg_val_list(char *ibuf, int ilen, int *ioff,
-+ 			    char **args, char **argvals)
-+ {
-+-	u8 arglen;
-++	u8 arglen = 0;
-+ 	u16 argvalue_len;
-+ 	int *arglens = NULL;
-+ 	int *argvallens = NULL;
-+@@ -1245,7 +1245,7 @@ int get_arg_val_list(char *ibuf, int ilen, int *ioff,
-+ 
-+ int get_arg_list(char *ibuf, int ilen, int *ioff, char **args)
-+ {
-+-	u8 arglen;
-++	u8 arglen = 0;
-+ 	int *arglens = NULL;
-+ 	int *p;
-+ 	int numargs;
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad/0002-Change-CFLAGS-to-avoid-error.patch b/meta-networking/recipes-daemons/lldpad/lldpad/0002-Change-CFLAGS-to-avoid-error.patch
-new file mode 100644
-index 0000000..5cb2a0a
---- /dev/null
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad/0002-Change-CFLAGS-to-avoid-error.patch
-@@ -0,0 +1,25 @@
-+Subject: [PATCH] Change CFLAGS to avoid error
-+Fix compile error like: warning: this statement may fall
-+ through [-Wimplicit-fallthrough=]
-+
-+Signed-off-by: Zheng Ruoqin <zhengrq.fnst@cn.fujitsu.com>
-+---
-+ Makefile.am | 2 +-
-+ 1 file changed, 1 insertion(+), 1 deletion(-)
-+
-+diff --git a/Makefile.am b/Makefile.am
-+index 4889d32..321bd7c 100644
-+--- a/Makefile.am
-++++ b/Makefile.am
-+@@ -16,7 +16,7 @@ ACLOCAL_AMFLAGS = -I m4
-+ parse_cli.o: CFLAGS+=-U_FORTIFY_SOURCE -Wno-error
-+ 
-+ ## system requires a shared libconfig
-+-AM_CFLAGS = -Wall -Werror -Wextra -Wformat=2 $(LIBCONFIG_CFLAGS) $(LIBNL_CFLAGS)
-++AM_CFLAGS = -Wall -Wno-error -Wextra -Wformat=2 $(LIBCONFIG_CFLAGS) $(LIBNL_CFLAGS)
-+ AM_LDFLAGS = $(LIBCONFIG_LIBS) $(LIBNL_LIBS)
-+ 
-+ ## header files to be installed, for programs using the client interface to lldpad 
-+-- 
-+2.7.4
-+
-diff --git a/meta-networking/recipes-daemons/lldpad/lldpad_git.bb b/meta-networking/recipes-daemons/lldpad/lldpad_git.bb
-new file mode 100644
-index 0000000..5203eb1
---- /dev/null
-+++ b/meta-networking/recipes-daemons/lldpad/lldpad_git.bb
-@@ -0,0 +1,35 @@
-+SUMMARY = "Intel LLDP Agent"
-+DESCRIPTION = "\
-+This package contains the Linux user space daemon and configuration tool for \
-+Intel LLDP Agent with Enhanced Ethernet support for the Data Center."
-+
-+HOMEPAGE = "http://open-lldp.org/"
-+SECTION = "System Environment/Daemons"
-+LICENSE = "GPLv2"
-+
-+LIC_FILES_CHKSUM = "file://COPYING;md5=8c2bc283e65df398ced5f5b747e78162"
-+DEPENDS = "libconfig libnl readline"
-+
-+SRC_URI = "git://open-lldp.org/open-lldp.git \
-+           file://0001-fix-build-warnings.patch \
-+           file://0002-Change-CFLAGS-to-avoid-error.patch \
-+          "
-+
-+SRCREV = "2b7e05cff2b461efd0fb3e6e73b1bb0a23a330c1"
-+
-+PV = "1.0.1+git${SRCPV}"
-+S = "${WORKDIR}/git"
-+
-+inherit autotools-brokensep pkgconfig systemd
-+
-+do_configure_prepend () {
-+        ${S}/bootstrap.sh
-+}
-+
-+do_install_append () {
-+    install -m 0755 -d ${D}${systemd_unitdir}
-+    mv ${D}${prefix}${systemd_unitdir}/* ${D}${systemd_unitdir}/
-+    rmdir ${D}${prefix}${systemd_unitdir}
-+}
-+
-+FILES_${PN} += "${systemd_unitdir}"
--- 
-2.7.4
+The problem is that shlib dependencies are not recorded with PE+PV.
 
+My use case was that I forked Angstrom into a custom distro layer
+which at the time was based on Yocto 1.6.
 
+Although I built the OS for x86-64, it was using libc6_linaro-2.19
+from EGLIBC.
 
+Now, as the time has passed, we had to add localization to the
+systems and the old EGLIBC 2.19 was not good enough.
+
+So, I have switched to Yocto 2.2 and rebased my custom layer on it.
+
+You can already see my problem: linaro-2.19 > 2.24.
+
+The obvious step was to add PE = "1" in a bbappend file for GLIBC.
+
+This made the libc6 package upgradable, but the (>= 1:2.24) dependency
+was not encoded in dependant packages, only (>= 2.24), which was
+satisfied by linaro-2.19.
+
+Because of this, many times a larger opkg upgrade was cut in the
+middle because a post-install scriptlet died when it ran a newly
+installed binary that needed the new libc6 and it crashed.
+
+So, upgrades must have been carefully scripted in this and similar cases.
+
+I have started moving to Yocto 2.4 about a week ago and I found
+that this bug still exists.
+
+Since my itch was too big now, I have proverbially scratched it.
+I have created a PR against Rocko here:
+https://github.com/openembedded/openembedded-core/pull/28/files
+
+Please comment whether it's the right approach.
+
+But it has already survived a large-ish bitbake session with
+about 2000 runqueue tasks and all the right (>= PE:PV) are there
+for shlib dependencies where the dependency has a PE value set.
+
+Best regards,
+Zoltán Böszörményi
 
