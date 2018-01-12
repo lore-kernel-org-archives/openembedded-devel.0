@@ -1,60 +1,40 @@
-Return-Path: <Jose.DiazdeGrenu@digi.com>
-Received: from mail1.bemta12.messagelabs.com (mail1.bemta12.messagelabs.com
-	[216.82.251.8])
-	by mail.openembedded.org (Postfix) with ESMTP id 583F5786FA
+Return-Path: <andre.draszik@gmail.com>
+Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
+	by mail.openembedded.org (Postfix) with ESMTP id D345277BC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jan 2018 11:54:03 +0000 (UTC)
-Received: from [216.82.251.44] (using TLSv1.2 with cipher
-	DHE-RSA-AES256-GCM-SHA384 (256 bits))
-	by server-8.bemta-12.messagelabs.com id 7C/9E-02572-DD1A85A5;
-	Fri, 12 Jan 2018 11:54:05 +0000
-X-Brightmail-Tracker: H4sIAAAAAAAAA+NgFprDKsWRWlGSWpSXmKPExsXi5LtOQPfOwog
-	og8sntCwuHl7K7MDocW7jCsYAxijWzLyk/IoE1oz+yQdYCg4bVvy6f5axgfGrThcjJ4eQwGpG
-	ic2tGRD2GkaJW7tkuhi5gOwljBKPunezgCTYBMwlph0+CGaLCMRILD1/ng3EFhaIlXh+aStUP
-	Eli8o1GKFtPYvWHLWA1LAKqEvu2TGUEsXkFfCVa1y4CizMKyEqsPH8aLM4sIC5x68l8JhBbQk
-	BAYsme88wQtqjEy8f/WCFseYlX544wQdTnSfxeNQdqpqDEyZlPWCAeUJNomzOBeQKj0CwkY2c
-	haZmFpAUiriOxYPcnNghbW2LZwtfMMPaZA4+ZkMUXMLKvYtQoTi0qSy3SNTbQSyrKTM8oyU3M
-	zNE1NDTSy00tLk5MT81JTCrWS87P3cQIjJd6BgbGHYy///seYpTkYFIS5d2THh4lxJeUn1KZk
-	VicEV9UmpNafIhRhoNDSYJ3wYKIKCHBotT01Iq0zBxg5MKkJTh4lER4J4OkeYsLEnOLM9MhUq
-	cY7TmaHjxoY+bY8uglkDwAJm+8eN3GLMSSl5+XKiXOuwGkTQCkLaM0D24oLNFcYpSVEuZlZGB
-	gEOIpSC3KzSxBlX/FKM7BqCTM+3U+0BSezLwSuN2vgM5iAjrr/MZQkLNKEhFSUg2M9RP9Zbs3
-	++35FVjRmc4Qfa9puVH0gWz14yby1cJO7v84t7hPfR/Vk5X+2dpX+cq2eH0/m4pPG49lum3M8
-	Pev3n/4zS2207GBOcvZJGadWlp2/duiP7oPRdc5nQ9ojZsuV1e17cDv23cNp5+1LTq285zgX8
-	tLazwMT7bG/7h+vZdtH2/h3FoLJZbijERDLeai4kQAh4t/xS8DAAA=
-X-Env-Sender: Jose.DiazdeGrenu@digi.com
-X-Msg-Ref: server-16.tower-200.messagelabs.com!1515758044!46315898!1
-X-Originating-IP: [66.77.174.16]
-X-StarScan-Received: 
-X-StarScan-Version: 9.4.45; banners=-,-,-
-X-VirusChecked: Checked
-Received: (qmail 10992 invoked from network); 12 Jan 2018 11:54:04 -0000
-Received: from owa.digi.com (HELO MCL-VMS-XCH01.digi.com) (66.77.174.16)
-	by server-16.tower-200.messagelabs.com with SMTP;
-	12 Jan 2018 11:54:04 -0000
-Received: from MTK-SMS-XCH04.digi.com (10.10.8.198) by MCL-VMS-XCH01.digi.com
-	(10.5.8.49) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Fri, 12 Jan 2018 05:54:00 -0600
-Received: from DOR-VMS-XCH01.digi.com (10.49.8.98) by MTK-SMS-XCH04.digi.com
-	(10.10.8.198) with Microsoft SMTP Server (TLS) id 14.3.361.1;
-	Fri, 12 Jan 2018 05:54:01 -0600
-Received: from DOR-SMS-XCH01.digi.com ([fe80::894b:3bdc:74ae:6efc]) by
-	DOR-VMS-XCH01.digi.com ([::1]) with mapi id 14.03.0361.001;
-	Fri, 12 Jan 2018 12:53:57 +0100
-From: "Diaz de Grenu, Jose" <Jose.DiazdeGrenu@digi.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Thread-Topic: [meta-qt5] enviornment-setup.d conflict nativesdk-cmake and
-	nativesedk-qtbase-tools
-Thread-Index: AdOLmXcvphQ3vSc3R9SSIGCDrK7mWg==
-Date: Fri, 12 Jan 2018 11:53:56 +0000
-Message-ID: <0B2EBCD48D33654381E736352034C70C01B6F7F7@dor-sms-xch01.digi.com>
-Accept-Language: es-ES, en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-originating-ip: [10.101.2.93]
+	Fri, 12 Jan 2018 12:29:43 +0000 (UTC)
+Received: by mail-wm0-f67.google.com with SMTP id r78so11604506wme.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 12 Jan 2018 04:29:45 -0800 (PST)
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=1e100.net; s=20161025;
+	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
+	:content-transfer-encoding;
+	bh=87sUCZcdmQPsQClROMsY4L6SOusMvNDhRYBHqZrO1hM=;
+	b=ntKcGoA9CdQlJCLszNY6xh0q0eCs9aRdSKpDaLb9Juj4Zc9zZZsh9oF+gYKHH5rSxa
+	8hGwvP+bnDvT6JJdr5SGflXYDh+aOFNtPEZWhKFVVuGqsDYfqyTHdvgMyx/BRXvDjx6M
+	0gF+NXErKy/2vNOJ3KPbwWIC+3zSM/wudsV6tHM4CTPxtOn+0G35s9mObkbAwV4O5JQf
+	s9kT3OwwUMtIDuS+ErI4IJsqj/2TlmTkqWxBI2LnpIKH0HzOAhAxQNPp27RbQZTYLwzo
+	YB3/EyJoUPpUZq9fncJK6zuXbIv4T+V9Wy/Jyem9Z5DTCnufhnj53zU5XDn//HtRlyIf
+	GTcA==
+X-Gm-Message-State: AKwxytcKvAT/4MgCzrkOyMEHPrVc8fNjNcNKHoaXhg/1VuKO0Vgi0drS
+	R2MtgI3mZjiZuymzqJ5dZs0McjW3
+X-Google-Smtp-Source: ACJfBovw0xo3XvbkwD63vUqg2NNyS7ORsIskbCLVtQgcPMZwvr4/anijKwA61+s+EnOd2/vRF5Nv8g==
+X-Received: by 10.80.146.211 with SMTP id l19mr1889316eda.152.1515760184235;
+	Fri, 12 Jan 2018 04:29:44 -0800 (PST)
+Received: from tfsielt31850.tycofs.com ([77.107.218.170])
+	by smtp.gmail.com with ESMTPSA id
+	s14sm12631318eds.78.2018.01.12.04.29.43
+	for <openembedded-devel@lists.openembedded.org>
+	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+	Fri, 12 Jan 2018 04:29:43 -0800 (PST)
+From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 12 Jan 2018 12:29:41 +0000
+Message-Id: <20180112122942.22396-1-git@andred.net>
+X-Mailer: git-send-email 2.15.1
 MIME-Version: 1.0
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Subject: [meta-qt5] enviornment-setup.d conflict nativesdk-cmake and nativesedk-qtbase-tools
+Subject: [meta-oe][PATCH 1/2] uthash: update to v2.0.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -67,52 +47,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 12 Jan 2018 11:54:04 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 12 Jan 2018 12:29:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+From: André Draszik <andre.draszik@jci.com>
 
-I am using Yocto 2.4 Rocko and  trying to populate_sdk my image that includ=
-e the meta-qt5 layer. Unfortunately I get the following error while creatin=
-g the SDK:
+- the license has changed to BSD-1-Clause
+- the main package is empty (as this only provides
+  header files), so the -dev package must not depend
+  on the main package
 
-file (...)/sysroots/x86_64-deysdk-linux/environment-setup.d conflicts betwe=
-en attempted installs of nativesdk-cmake-3.8.2-r0.0.x86_64_nativesdk and na=
-tivesdk-qtbase-tools-5.9.3+git0+73573fce29-r0.0.
-x86_64_nativesdk
+Signed-off-by: André Draszik <andre.draszik@jci.com>
+---
+ meta-oe/recipes-support/uthash/uthash_1.9.7.bb | 16 --------------
+ meta-oe/recipes-support/uthash/uthash_2.0.2.bb | 30 ++++++++++++++++++++++++++
+ 2 files changed, 30 insertions(+), 16 deletions(-)
+ delete mode 100644 meta-oe/recipes-support/uthash/uthash_1.9.7.bb
+ create mode 100644 meta-oe/recipes-support/uthash/uthash_2.0.2.bb
 
-I had a look at those recipies and this is what I find:
+diff --git a/meta-oe/recipes-support/uthash/uthash_1.9.7.bb b/meta-oe/recipes-support/uthash/uthash_1.9.7.bb
+deleted file mode 100644
+index 82a9f2a6a..000000000
+--- a/meta-oe/recipes-support/uthash/uthash_1.9.7.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-SUMMARY = "Hash table for C structures"
+-SECTION = "base"
+-LICENSE = "GPLv2"
+-LIC_FILES_CHKSUM = "file://LICENSE;md5=564f9c44927f6247dc810bf557e2b240"
+-
+-SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.bz2"
+-
+-SRC_URI[md5sum] = "1f14bbee7ee73ed0ceb3549f8cf378b4"
+-SRC_URI[sha256sum] = "956f5c99798349c413275fe4c9ff128d72e280655dadbe4365f8e9fbda91393f"
+-
+-do_install () {
+-    install -dm755 ${D}${includedir}
+-    install -m 0644 ${S}/src/*.h ${D}${includedir}
+-}
+-
+-BBCLASSEXTEND = "native"
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.0.2.bb b/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
+new file mode 100644
+index 000000000..8a6887ef0
+--- /dev/null
++++ b/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
+@@ -0,0 +1,30 @@
++SUMMARY = "Hash table and linked list for C structures"
++DESCRIPTION = " uthash-dev provides a hash table implementation using C preprocessor macros.\n\
++ This package also includes:\n\
++  * utlist.h provides linked list macros for C structures\n\
++  * utarray.h implements dynamic arrays using macros\n\
++  * utstring.h implements a basic dynamic string\n\
++"
++HOMEPAGE = "https://troydhanson.github.io/uthash/"
++SECTION = "base"
++LICENSE = "BSD-1-Clause"
++LIC_FILES_CHKSUM = "file://LICENSE;md5=5cc1f1e4c71f19f580458586756c02b4"
++
++SRC_URI = "https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
++UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
++
++SRC_URI[md5sum] = "d08632a58674274c9cd87e2930f5696a"
++SRC_URI[sha256sum] = "34a31d51dd7a839819cecd6f46049b4ffe031d7f3147d9a042f5504fdb1348d1"
++
++do_compile[noexec] = "1"
++
++do_install () {
++    install -dm755 ${D}${includedir}
++    install -m0644 src/*.h ${D}${includedir}
++}
++
++# The main package is empty and non-existent, so -dev
++# should not depend on it...
++RDEPENDS_${PN}-dev = ""
++
++BBCLASSEXTEND = "native"
+-- 
+2.15.1
 
-cmake_3.8.2 (from poky, rocko)
-
-do_install_append_class-nativesdk() {
-    mkdir -p ${D}${datadir}/cmake
-    install -m 644 ${WORKDIR}/OEToolchainConfig.cmake ${D}${datadir}/cmake/
-
-    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d
-    install -m 644 ${WORKDIR}/environment.d-cmake.sh ${D}${SDKPATHNATIVE}/e=
-nvironment-setup.d/cmake.sh
-}
-
-
-nativesdk-qtbase_git.bb (from meta-qt5, rocko):
-
-fakeroot do_generate_qt_environment_file() {
-    mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
-    script=3D${D}${SDKPATHNATIVE}/environment-setup.d/qt5.sh
-(...)
-}
-
-Both recipes are installing the directory ${D}${SDKPATHNATIVE}/environment-=
-setup.d/. Not sure why that is a conflict. Could it be because qtbase is ru=
-nning that as fakeroot?
-
-I checked that in Yocto 2.2 Morty, the recipes do the same but I don't get =
-the error. I am not sure if this is because Yocto 2.4 is more strict.
-
-Does this mean this is broken upstream then, or am I missing something?
-
-Thanks.
 
