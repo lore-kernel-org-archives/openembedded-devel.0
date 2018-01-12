@@ -1,40 +1,42 @@
 Return-Path: <andre.draszik@gmail.com>
-Received: from mail-wm0-f67.google.com (mail-wm0-f67.google.com [74.125.82.67])
-	by mail.openembedded.org (Postfix) with ESMTP id D345277BC5
+Received: from mail-wm0-f53.google.com (mail-wm0-f53.google.com [74.125.82.53])
+	by mail.openembedded.org (Postfix) with ESMTP id BA5DD77BC5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jan 2018 12:29:43 +0000 (UTC)
-Received: by mail-wm0-f67.google.com with SMTP id r78so11604506wme.0
+	Fri, 12 Jan 2018 12:29:44 +0000 (UTC)
+Received: by mail-wm0-f53.google.com with SMTP id g1so11737948wmg.2
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jan 2018 04:29:45 -0800 (PST)
+	Fri, 12 Jan 2018 04:29:46 -0800 (PST)
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:subject:date:message-id:mime-version
-	:content-transfer-encoding;
-	bh=87sUCZcdmQPsQClROMsY4L6SOusMvNDhRYBHqZrO1hM=;
-	b=ntKcGoA9CdQlJCLszNY6xh0q0eCs9aRdSKpDaLb9Juj4Zc9zZZsh9oF+gYKHH5rSxa
-	8hGwvP+bnDvT6JJdr5SGflXYDh+aOFNtPEZWhKFVVuGqsDYfqyTHdvgMyx/BRXvDjx6M
-	0gF+NXErKy/2vNOJ3KPbwWIC+3zSM/wudsV6tHM4CTPxtOn+0G35s9mObkbAwV4O5JQf
-	s9kT3OwwUMtIDuS+ErI4IJsqj/2TlmTkqWxBI2LnpIKH0HzOAhAxQNPp27RbQZTYLwzo
-	YB3/EyJoUPpUZq9fncJK6zuXbIv4T+V9Wy/Jyem9Z5DTCnufhnj53zU5XDn//HtRlyIf
-	GTcA==
-X-Gm-Message-State: AKwxytcKvAT/4MgCzrkOyMEHPrVc8fNjNcNKHoaXhg/1VuKO0Vgi0drS
-	R2MtgI3mZjiZuymzqJ5dZs0McjW3
-X-Google-Smtp-Source: ACJfBovw0xo3XvbkwD63vUqg2NNyS7ORsIskbCLVtQgcPMZwvr4/anijKwA61+s+EnOd2/vRF5Nv8g==
-X-Received: by 10.80.146.211 with SMTP id l19mr1889316eda.152.1515760184235;
-	Fri, 12 Jan 2018 04:29:44 -0800 (PST)
+	h=x-gm-message-state:from:to:subject:date:message-id:in-reply-to
+	:references:mime-version:content-transfer-encoding;
+	bh=bHK9yI1+H8a0cteC9IOsYSUbKOQHaeUHbMFk/A1BTjE=;
+	b=cGawzysZCH/ORSWIjC/1Wn/0q01/ZTUKAQY+NnPufAX2BuoUdlr6cO5a5IFM6ARVnX
+	5uu9gi7spg/Xx389gjSC+tUWJGqTTdBbB0pX/ehU00DLbsM4KyQb4+G3I5TnSVZ8+e/e
+	xe/M3ZT2BZ3af72czucRGBFibWY8KPJTxkZbwcR/fsQth0uS44o1kU/JxxPghrWrCY4s
+	Hp71n+9yKkRKLebinpJhNQAFauvmOK5j/4JZGUwWt7YaVdCmtbbudxBYuJQzhCkuKa6z
+	VR3uRji5dYMOFBzdsD4zsYErP8pHkOAj66eoU6OmmT2qK8p5Rqikvwqr+Up62dw0TNVt
+	7Scg==
+X-Gm-Message-State: AKGB3mK51gRnAuJRpPM57iJMkyMyeJIB9q1lgOkY/Fc/3OuC+f9DD7QI
+	H+tSagQ13c7g9sIlIOM3FakDfQeP
+X-Google-Smtp-Source: ACJfBov6soy0UUSqwsnmYGiYQbbu2akLDOvAaw5RQt3nw8W5ZzVismbFgMQNOqeyc81S4CfDdsasYQ==
+X-Received: by 10.80.214.136 with SMTP id r8mr35192198edi.288.1515760185262;
+	Fri, 12 Jan 2018 04:29:45 -0800 (PST)
 Received: from tfsielt31850.tycofs.com ([77.107.218.170])
 	by smtp.gmail.com with ESMTPSA id
-	s14sm12631318eds.78.2018.01.12.04.29.43
+	s14sm12631318eds.78.2018.01.12.04.29.44
 	for <openembedded-devel@lists.openembedded.org>
 	(version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
-	Fri, 12 Jan 2018 04:29:43 -0800 (PST)
+	Fri, 12 Jan 2018 04:29:44 -0800 (PST)
 From: =?UTF-8?q?Andr=C3=A9=20Draszik?= <git@andred.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 12 Jan 2018 12:29:41 +0000
-Message-Id: <20180112122942.22396-1-git@andred.net>
+Date: Fri, 12 Jan 2018 12:29:42 +0000
+Message-Id: <20180112122942.22396-2-git@andred.net>
 X-Mailer: git-send-email 2.15.1
+In-Reply-To: <20180112122942.22396-1-git@andred.net>
+References: <20180112122942.22396-1-git@andred.net>
 MIME-Version: 1.0
-Subject: [meta-oe][PATCH 1/2] uthash: update to v2.0.2
+Subject: [meta-oe][PATCH 2/2] uthash: add ptest support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,77 +55,70 @@ Content-Transfer-Encoding: 8bit
 
 From: André Draszik <andre.draszik@jci.com>
 
-- the license has changed to BSD-1-Clause
-- the main package is empty (as this only provides
-  header files), so the -dev package must not depend
-  on the main package
-
 Signed-off-by: André Draszik <andre.draszik@jci.com>
 ---
- meta-oe/recipes-support/uthash/uthash_1.9.7.bb | 16 --------------
- meta-oe/recipes-support/uthash/uthash_2.0.2.bb | 30 ++++++++++++++++++++++++++
- 2 files changed, 30 insertions(+), 16 deletions(-)
- delete mode 100644 meta-oe/recipes-support/uthash/uthash_1.9.7.bb
- create mode 100644 meta-oe/recipes-support/uthash/uthash_2.0.2.bb
+ meta-oe/recipes-support/uthash/uthash/run-ptest | 10 ++++++++++
+ meta-oe/recipes-support/uthash/uthash_2.0.2.bb  | 18 +++++++++++++++++-
+ 2 files changed, 27 insertions(+), 1 deletion(-)
+ create mode 100755 meta-oe/recipes-support/uthash/uthash/run-ptest
 
-diff --git a/meta-oe/recipes-support/uthash/uthash_1.9.7.bb b/meta-oe/recipes-support/uthash/uthash_1.9.7.bb
-deleted file mode 100644
-index 82a9f2a6a..000000000
---- a/meta-oe/recipes-support/uthash/uthash_1.9.7.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--SUMMARY = "Hash table for C structures"
--SECTION = "base"
--LICENSE = "GPLv2"
--LIC_FILES_CHKSUM = "file://LICENSE;md5=564f9c44927f6247dc810bf557e2b240"
--
--SRC_URI = "${SOURCEFORGE_MIRROR}/${BPN}/${BP}.tar.bz2"
--
--SRC_URI[md5sum] = "1f14bbee7ee73ed0ceb3549f8cf378b4"
--SRC_URI[sha256sum] = "956f5c99798349c413275fe4c9ff128d72e280655dadbe4365f8e9fbda91393f"
--
--do_install () {
--    install -dm755 ${D}${includedir}
--    install -m 0644 ${S}/src/*.h ${D}${includedir}
--}
--
--BBCLASSEXTEND = "native"
-diff --git a/meta-oe/recipes-support/uthash/uthash_2.0.2.bb b/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
-new file mode 100644
-index 000000000..8a6887ef0
+diff --git a/meta-oe/recipes-support/uthash/uthash/run-ptest b/meta-oe/recipes-support/uthash/uthash/run-ptest
+new file mode 100755
+index 000000000..14071a649
 --- /dev/null
++++ b/meta-oe/recipes-support/uthash/uthash/run-ptest
+@@ -0,0 +1,10 @@
++#!/bin/sh
++
++cd tests
++for i in test*[0-9] ; do
++    if ./${i} | cmp -s "${i}.ans" - ; then
++        echo "PASS: ${i}"
++    else
++        echo "FAIL: ${i}"
++    fi
++done
+diff --git a/meta-oe/recipes-support/uthash/uthash_2.0.2.bb b/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
+index 8a6887ef0..ccdd13b32 100644
+--- a/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
 +++ b/meta-oe/recipes-support/uthash/uthash_2.0.2.bb
-@@ -0,0 +1,30 @@
-+SUMMARY = "Hash table and linked list for C structures"
-+DESCRIPTION = " uthash-dev provides a hash table implementation using C preprocessor macros.\n\
-+ This package also includes:\n\
-+  * utlist.h provides linked list macros for C structures\n\
-+  * utarray.h implements dynamic arrays using macros\n\
-+  * utstring.h implements a basic dynamic string\n\
+@@ -10,19 +10,35 @@ SECTION = "base"
+ LICENSE = "BSD-1-Clause"
+ LIC_FILES_CHKSUM = "file://LICENSE;md5=5cc1f1e4c71f19f580458586756c02b4"
+ 
+-SRC_URI = "https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
++SRC_URI = "\
++    https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz \
++    file://run-ptest \
 +"
-+HOMEPAGE = "https://troydhanson.github.io/uthash/"
-+SECTION = "base"
-+LICENSE = "BSD-1-Clause"
-+LIC_FILES_CHKSUM = "file://LICENSE;md5=5cc1f1e4c71f19f580458586756c02b4"
+ UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
+ 
+ SRC_URI[md5sum] = "d08632a58674274c9cd87e2930f5696a"
+ SRC_URI[sha256sum] = "34a31d51dd7a839819cecd6f46049b4ffe031d7f3147d9a042f5504fdb1348d1"
+ 
++inherit ptest
 +
-+SRC_URI = "https://github.com/troydhanson/${BPN}/archive/v${PV}.tar.gz;downloadfilename=${BP}.tar.gz"
-+UPSTREAM_CHECK_URI = "https://github.com/troydhanson/${BPN}/releases"
-+
-+SRC_URI[md5sum] = "d08632a58674274c9cd87e2930f5696a"
-+SRC_URI[sha256sum] = "34a31d51dd7a839819cecd6f46049b4ffe031d7f3147d9a042f5504fdb1348d1"
-+
-+do_compile[noexec] = "1"
-+
-+do_install () {
-+    install -dm755 ${D}${includedir}
-+    install -m0644 src/*.h ${D}${includedir}
+ do_compile[noexec] = "1"
+ 
++do_compile_ptest() {
++    oe_runmake -C tests tests_only TEST_TARGET=
 +}
 +
-+# The main package is empty and non-existent, so -dev
-+# should not depend on it...
-+RDEPENDS_${PN}-dev = ""
+ do_install () {
+     install -dm755 ${D}${includedir}
+     install -m0644 src/*.h ${D}${includedir}
+ }
+ 
++do_install_ptest() {
++    install -dm755 ${D}${PTEST_PATH}/tests
++    install -m0755 tests/test*[0-9] ${D}${PTEST_PATH}/tests
++    install -m0644 tests/test*[0-9].ans ${D}${PTEST_PATH}/tests
++    install -m0644 tests/test*[0-9].dat ${D}${PTEST_PATH}/tests
++}
 +
-+BBCLASSEXTEND = "native"
+ # The main package is empty and non-existent, so -dev
+ # should not depend on it...
+ RDEPENDS_${PN}-dev = ""
 -- 
 2.15.1
 
