@@ -1,49 +1,43 @@
-Return-Path: <liu.ming50@gmail.com>
-Received: from mail-qk0-f196.google.com (mail-qk0-f196.google.com
-	[209.85.220.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 30BB371C0F
+Return-Path: <nickaein.i@gmail.com>
+Received: from mail-qt0-f177.google.com (mail-qt0-f177.google.com
+	[209.85.216.177])
+	by mail.openembedded.org (Postfix) with ESMTP id 4E31A786BD
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 13 Jan 2018 01:37:20 +0000 (UTC)
-Received: by mail-qk0-f196.google.com with SMTP id l64so10870571qke.13
+	Sat, 13 Jan 2018 16:31:59 +0000 (UTC)
+Received: by mail-qt0-f177.google.com with SMTP id d4so9620574qtj.5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 12 Jan 2018 17:37:21 -0800 (PST)
+	Sat, 13 Jan 2018 08:32:01 -0800 (PST)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc; bh=RNqs0wstLHT1yNYG+N+pupm5k3PEFkNjVDZ7JTwIjYE=;
-	b=Pxh0PT/2Jt1u40yNkf8lewMCrjCG9f0ZlsFwISu0QyE/KexbqnT/0gdH8JUkEgyvrp
-	0d71uetv2holNdvD0HLIh/m//HZb4XjJy4rlzfKyk0D5DzVqOSACM+u9v5LfOVjI0+gu
-	PVIzWfGHYQEobfKqLepcbdjXJBzkrPcepgcb6hO4f67Ha8/jyEvLjHLk83GV5s+aKSfV
-	DkcfkCON4XaZ0auYVbQOPVgH85nf3Dn6HbSUj2qiCiDX5AOEPg4yhMydSiPcAiB4N8n3
-	7EAeWEAUih+3WpD5d692qhWyHf1oyz30m3upuXCMHpDUDAhIt7tQ2Bvdw0FGJS4ysv/c
-	LYgw==
+	h=mime-version:from:date:message-id:subject:to;
+	bh=DbbpnM5dOxT6vTFaQM2/ZogxmQ6SDzFWHIrABX5j64w=;
+	b=YNduyrVJZz3NQsiPcWSFNlCEp+A6/WPxwZZvvINUazADDv3JtZTykesH6Ej9NqIIor
+	vEyH03mMHMmm+fLqLsYwdzLBzPfi5aSxV2hrlofWC7Rw54r7D/9tZ9KZwX3kJQ+/1qy2
+	umn8kJ+/YLlBIwWukakub7A/EmgF/qC13QW/W1Qml/9nBqQ2jkKoB6xyL5qqH2h6Jr+O
+	mpBQrSZBSct48tlnk2hQHqynmOEvR5EivTu75pGWW1yKenIibtpaDBX6ZFxlkBPPlIol
+	kM/sE+KKJTIuyf+0+S2aKjS+r/buI5rOFSkjQ7LZqzDsfDz9KW+6DdR70rVMW8Faox1b
+	dd9g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
-	:message-id:subject:to:cc;
-	bh=RNqs0wstLHT1yNYG+N+pupm5k3PEFkNjVDZ7JTwIjYE=;
-	b=UD5yLkrrTTNrrQNGohAZGo8jYsZwQZV82Mlqqy2S7RoTeqMeWRToMTQ3tOAAfDm+yB
-	HmJDMxWyp9rNues3A0Dch0WZkf5vXl78G1Re7KYCeY5uXo6MyLmXYOTqk2ZbYgW+bZQ/
-	NRrV4gBfb7BZ4Zo5Tmt0ZnCiSS/rUortqMuHIOFrm/7fVp5INTh01grjyL+pBGL6XAKp
-	vN7nwatUyMMGazG/AcS1Ywy9AknlaC/6h8P0M/VPMWIR4CbaLm5FWORM8GSPqP7YrsMa
-	YJhR+7RtYT5cVzVu0f24CR/acivcEMDD5T9nsYkaqLZxhjS9ll5cFL6dnkoOuH+/1e7p
-	lSug==
-X-Gm-Message-State: AKwxytditL1EkIC0yfVaoDJuPKw2F79+9Td6KLTil0b6keaInsifRk19
-	Qii20t6tPW8oqzAL+/lp+8VPaRZhFYYP6m/1v3kKDQ==
-X-Google-Smtp-Source: ACJfBosv9jCbc15YecPuKNHElMO5TyP0hSc8OSAec8oCNVkFdZd1ShmLQMd1jUl26XqzhxlInS6QYrvHmQBfhLIlcik=
-X-Received: by 10.55.78.143 with SMTP id c137mr41303073qkb.122.1515807441391; 
-	Fri, 12 Jan 2018 17:37:21 -0800 (PST)
+	h=x-gm-message-state:mime-version:from:date:message-id:subject:to;
+	bh=DbbpnM5dOxT6vTFaQM2/ZogxmQ6SDzFWHIrABX5j64w=;
+	b=O7sVpnGcKvBTf0mrrkKQ0Ur2g62RrmrwQqKi1dkHk5S1O33WLCJpwXPozofSfBQVAL
+	qO05TO1vDwwhYhaiy2rqRvMMJ1Go8S4CYb6fnhxj0FCMOPNvJYb4ZdQbdZzkt7UqfWx0
+	aS3oC+nV7ClTLanfcqlzvPhf3e/whIATJSC8VCn3HtZ06s7chziU7LBuu51rXVZw272f
+	xphqdhxG/XtrWru8AC6C/VAzIh9CkJThpi/b67TKRHovnAAYGyAtqzjpCkivuq2ucC2i
+	EtN4hghtNY0ziFGT+m65ATXilS56bulOykls/Frq8cCofEsCZpza8kS4WafqRc7XZS4F
+	AAMg==
+X-Gm-Message-State: AKwxytebdfGQHNmjPPOirSaPpHmv6dydGyTwxGSyof2OQL5hH0fSd1px
+	bEiSKy1v5msGRrtgAZd+5oo/09ay/TxaJPAXEtDu8g==
+X-Google-Smtp-Source: ACJfBosvUUTVIk79zEC0i2oFp8cepL3STF42mOtMlqCSysxIscP3GTkar6YleBeBeRpqyqoS5ZvRPIXZgt6ijNcoiKw=
+X-Received: by 10.237.45.165 with SMTP id i34mr40639912qtd.112.1515861120961; 
+	Sat, 13 Jan 2018 08:32:00 -0800 (PST)
 MIME-Version: 1.0
-Received: by 10.200.42.86 with HTTP; Fri, 12 Jan 2018 17:37:20 -0800 (PST)
-In-Reply-To: <1515807236-28679-1-git-send-email-liu.ming50@gmail.com>
-References: <1515807236-28679-1-git-send-email-liu.ming50@gmail.com>
-From: Ming Liu <liu.ming50@gmail.com>
-Date: Sat, 13 Jan 2018 02:37:20 +0100
-Message-ID: <CALatG=5Xygg2uf2uPksYkbWOQ3ZAY6zaqiR23X0DHA-Eox=W2A@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>,
-	Jose.DiazdeGrenu@digi.com
-X-Content-Filtered-By: Mailman/MimeDel 2.1.12
-Cc: Ming Liu <liu.ming50@gmail.com>
-Subject: Re: [meta-qt5] [PATCH] nativesdk-qtbase: drop fakeroot task do_generate_qt_environment_file
+Received: by 10.12.214.82 with HTTP; Sat, 13 Jan 2018 08:31:30 -0800 (PST)
+From: Isaac Nickaein <nickaein.i@gmail.com>
+Date: Sat, 13 Jan 2018 20:01:30 +0330
+Message-ID: <CA+NJmkdfNKmdi=6RZDtBt2tiZfp3nqZ=Nd5jy=+fGPXKGNODHw@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Subject: [meta-qt5] [rocko] qtbase fails at do_compile for i.MX7
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -56,57 +50,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 13 Jan 2018 01:37:20 -0000
+X-List-Received-Date: Sat, 13 Jan 2018 16:32:00 -0000
 Content-Type: text/plain; charset="UTF-8"
 
-Hi, Jose:
+Hi,
 
-I encountered a same environment-setup.d conflict issue, it could be fixed
-by this patch per my test.
+I've been trying to build the qt5 using meta-qt5 layer for Colibri
+i.MX7 modules.
+I've cloned meta-oe and related layers on rocko branch and also
+meta-qt5. The list of all layers are mentioned down below.
 
-//Ming Liu
+The compile error I am getting is apparently related to
+mis-configuration of recipes that don't exactly know the i.MX7
+hardware. For instance:
+
+/opt/yocto/rocko-poky/poky/build-saba/tmp/work/cortexa9hf-neon-mx6qdl-poky-linux-gnueabi/qtbase/5.9.3+gitAUTOINC+4d8ae444c2-r0/recipe-sysroot/usr/include/EGL/eglplatform.h:146:10:
+fatal error: X11/Xlib.h: No such file or directory
+ #include <X11/Xlib.h>
+          ^~~~~~~~~~~~
+compilation terminated.
+Makefile:621: recipe for target '.obj/qeglstreamconvenience.o' failed
+
+
+Apparently something is wrong with Qt 5 configuration which tries to
+use X11 while I have removed it.
+
+I've tried various settings in my setup but none of them help to
+resolve the issue.
+I think there is a problem either in meta-oe or meta-qt5 that
+mis-configures the qt build.
+
+Here is the conf/local.conf:
+
+MACHINE = "colibri-imx6"
+DISTRO = "poky"
+
+PACKAGECONFIG_remove = " x11 wayland wifi 3g bluetooth irda nfc ipv6
+largefile pam pci pcmcia ppp smbfs"
+
+DISTRO_FEATURES_remove = " x11 wayland wifi 3g bluetooth irda nfc ipv6
+largefile pam pci pcmcia ppp smbfs"
+
+PACKAGECONFIG_append_pn-qtbase = " gles2 eglfs linuxfb "
+
+DISTRO_FEATURES_append = " opengles2 egl"
 
 
 
-2018-01-13 2:33 GMT+01:00 <liu.ming50@gmail.com>:
+Here is the bblayers.conf:
 
-> From: Ming Liu <liu.ming50@gmail.com>
->
-> Move the implementation to do_install, this fixes a following issue:
-> | Error: Transaction check error:
-> | file ..environment-setup.d conflicts between attempted installs of
-> | nativesdk-cmake-3.7.2-r0.x86_64_nativesdk and
-> | nativesdk-qtbase-tools-5.8.0+git0+49dc9aa409-r0.x86_64_nativesdk
->
-> Signed-off-by: Ming Liu <liu.ming50@gmail.com>
-> ---
->  recipes-qt/qt5/nativesdk-qtbase_git.bb | 4 ----
->  1 file changed, 4 deletions(-)
->
-> diff --git a/recipes-qt/qt5/nativesdk-qtbase_git.bb b/recipes-qt/qt5/
-> nativesdk-qtbase_git.bb
-> index 33be99e..98e35cc 100644
-> --- a/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> +++ b/recipes-qt/qt5/nativesdk-qtbase_git.bb
-> @@ -169,9 +169,7 @@ do_install() {
->      # Fix up absolute paths in scripts
->      grep -lr /usr/bin/python ${D}${OE_QMAKE_PATH_QT_ARCHDATA}/ | \
->          xargs -r sed -i -e '1s,#!.*python,#! ${USRBINPATH}/env python,'
-> -}
->
-> -fakeroot do_generate_qt_environment_file() {
->      mkdir -p ${D}${SDKPATHNATIVE}/environment-setup.d/
->      script=${D}${SDKPATHNATIVE}/environment-setup.d/qt5.sh
->
-> @@ -200,6 +198,4 @@ fakeroot do_generate_qt_environment_file() {
->      sed -i -e 's:${SDKPATHNATIVE}:$OECORE_NATIVE_SYSROOT:g' $script
->  }
->
-> -addtask generate_qt_environment_file after do_install before do_package
-> -
->  SRCREV = "50117d738af526cbfbd5afa50b9a501acb0fb9ce"
-> --
-> 2.7.4
->
->
+
+BBLAYERS ?= " \
+  ${BSPDIR}/meta \
+  ${BSPDIR}/meta-poky \
+  ${BSPDIR}/meta-openembedded/meta-oe \
+  ${BSPDIR}/meta-openembedded/meta-python \
+  ${BSPDIR}/meta-openembedded/meta-networking \
+  ${BSPDIR}/meta-openembedded/meta-webserver \
+  ${BSPDIR}/meta-freescale \
+  ${BSPDIR}/meta-freescale-3rdparty \
+  ${BSPDIR}/meta-freescale-distro \
+  ${BSPDIR}/meta-toradex-bsp-common \
+  ${BSPDIR}/meta-toradex-nxp \
+  ${BSPDIR}/meta-swupdate \
+  ${BSPDIR}/meta-qt5 \
+"
+
+
+qtbase configuration log:
+https://pastebin.com/GLv04BAZ
+
+qtbase compile log (with errors):
+https://pastebin.com/JxnRx6nT
+
+Here is the env variables (outptut of bitbake -e qtbase):
+http://www.pastebin.xyz/p?q=eEIyNW8
 
