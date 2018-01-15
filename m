@@ -1,46 +1,50 @@
-Return-Path: <otavio.salvador@gmail.com>
-Received: from mail-qt0-f196.google.com (mail-qt0-f196.google.com
-	[209.85.216.196])
-	by mail.openembedded.org (Postfix) with ESMTP id 9C195786C0
+Return-Path: <martin.jansa@gmail.com>
+Received: from mail-wr0-f177.google.com (mail-wr0-f177.google.com
+	[209.85.128.177])
+	by mail.openembedded.org (Postfix) with ESMTP id EA6D9786CC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 12:40:30 +0000 (UTC)
-Received: by mail-qt0-f196.google.com with SMTP id d4so13952558qtj.5
+	Mon, 15 Jan 2018 18:00:08 +0000 (UTC)
+Received: by mail-wr0-f177.google.com with SMTP id d9so12611797wre.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 15 Jan 2018 04:40:32 -0800 (PST)
+	Mon, 15 Jan 2018 10:00:10 -0800 (PST)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=20161025;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc; bh=Mds0+5UauhH7BKimIEQ3QslB+p8VNVg5Isj8wBQM2Cg=;
+	b=rgfzOVbpp2ctYJJtbMw+24G9hIoStmKlBdu4dmT/Xg8nt+nSiPRogWqWyC+dclufVA
+	9WAB11AGxJhfUxCd79C3JjMlw0v9czMSg10IEMNzoJj+lqhmDUBjqVGjJnTYBvN1OuWC
+	Gi/ILaEFTdqAulr2acQALM9DBfCv12DUlRC9h9HZVOGz8xL9d1IiHxRn/RYspU1fzvUI
+	mZFDB9olZ4sHNh2/QSFW9qyVtviQgu1U1nh0sY5gQoKTGQRtCGtdMVDPaaOz09jw74vu
+	Dcgc3pXCNuwbtAIXa1uY2lXxLuhVYHFxfdAtt+F2XdfgL/MNcHnYFh4y2m1+gz7yy3Hv
+	mg3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
 	d=1e100.net; s=20161025;
-	h=x-gm-message-state:from:to:cc:subject:date:message-id:in-reply-to
-	:references:organization;
-	bh=7mFKW9Kg+iNZdP49NrZ8aHlxJi9Tda8QgmLGAz7YpjM=;
-	b=UmW1leV3i0+Q0iBydaGawskhZj24b9RDToONhfZkCjkff9q0jwpKem4LeHAKzv3SYZ
-	51p1LeG3ASvbVi1oJ4D4JeLQ6n2JEqr+R3rjJhN+qz2P320XrRcxeyDLu1702FFvxKmg
-	tIl16tww+EsZXLU8OxyeGs5mp1QYdQUTbWyquYMq3EbR6dZ1EKKA/Yl2dHO0vsV1P4NT
-	R/V8WsphLD8sbdA+PSO+NxV/8PRqqBugtnqGPNo7aI8w9oKsMLzixXXuqrzR4rOBnvlx
-	AzqPWzOWG+VdmB1VHo5BmN4OSv/3RUwd4Rfp8Zsw29AsBARN7rcGWp4h6ojvvXQM1Nn9
-	bpPw==
-X-Gm-Message-State: AKwxyte+qiyUei2lmEblzp4hxrKInInmJepvZFVElbY8mFAOnXiQzfT+
-	KftULbB7+qOo5w9wPM6rq13toA==
-X-Google-Smtp-Source: ACJfBotf2qPq9JVWAqWKj6ewyAKQbcnEYHC67y2Q7vPgnEuZ3c/Wo5D+rG3ESrpKYuB3PnL4lSyK1g==
-X-Received: by 10.200.8.19 with SMTP id u19mr31860947qth.315.1516020031319;
-	Mon, 15 Jan 2018 04:40:31 -0800 (PST)
-Received: from localhost.localdomain ([181.220.79.73])
-	by smtp.gmail.com with ESMTPSA id
-	j49sm8363200qtc.61.2018.01.15.04.40.28
-	(version=TLS1_2 cipher=ECDHE-RSA-CHACHA20-POLY1305 bits=256/256);
-	Mon, 15 Jan 2018 04:40:30 -0800 (PST)
-Received: by localhost.localdomain (sSMTP sendmail emulation);
-	Mon, 15 Jan 2018 10:40:26 -0200
-From: Otavio Salvador <otavio@ossystems.com.br>
-To: Meta-OpenEmbedded Mailing listing
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 15 Jan 2018 10:40:18 -0200
-Message-Id: <20180115124018.26546-2-otavio@ossystems.com.br>
-X-Mailer: git-send-email 2.15.1
-In-Reply-To: <20180115124018.26546-1-otavio@ossystems.com.br>
-References: <20180115124018.26546-1-otavio@ossystems.com.br>
-Organization: O.S. Systems Software LTDA.
-Cc: Otavio Salvador <otavio@ossystems.com.br>
-Subject: [PATCH 2/2] haveged: Add sysvinit support
+	h=x-gm-message-state:mime-version:in-reply-to:references:from:date
+	:message-id:subject:to:cc;
+	bh=Mds0+5UauhH7BKimIEQ3QslB+p8VNVg5Isj8wBQM2Cg=;
+	b=nENniHWHTeyz9xcyW4WDRn9HNwoB1kuAInWtu/Np/okS8tdRDYYqz9Mfw4K4KXjZqJ
+	NiJbooJ97iMgY9J7wCDdV2YwGJs42laIqWpqsoLQVm/OiAxbu0HmJW1GoT4FRBkUQRSl
+	QUyAe21epsJQMa94L8rL2Fm1q8/i9If0LlccSYlesmKOhJxvgUp4rKVfuMPqPc2Rbz1Q
+	HYuAR0KyXdC8tIendisohdfxcfwRgUm1ezBr7PCjCqHc6nj+Pe4tJsPT7TylQ43oG1Xa
+	x7OTKnXcHGIlDBWMWOxpHM05HF5PXEXalblqUXYbqhsrsdsHb0lHSkRrEfXtqJ6jLf1i
+	JV0Q==
+X-Gm-Message-State: AKwxytdkgKwRvQs6fQo7un9Y5V0a4w4Ab/rRhim7F/AZhR8UyoOYh/tG
+	fjKZUoPpHnaCcll4snEG8fLmmlhSs6N2em5rhiQ=
+X-Google-Smtp-Source: ACJfBou2fbvNzI4I7PZtpuPXWNS3ywYF3aKZtMAad3455hamYURt86PT9VbqxHxEkSpF6WAqxMAuyVEM9HtLJrSUqx0=
+X-Received: by 10.223.150.37 with SMTP id b34mr4883725wra.68.1516039209727;
+	Mon, 15 Jan 2018 10:00:09 -0800 (PST)
+MIME-Version: 1.0
+Received: by 10.28.122.19 with HTTP; Mon, 15 Jan 2018 10:00:09 -0800 (PST)
+In-Reply-To: <1515635126-19293-1-git-send-email-denis@denix.org>
+References: <1515635126-19293-1-git-send-email-denis@denix.org>
+From: Martin Jansa <martin.jansa@gmail.com>
+Date: Mon, 15 Jan 2018 19:00:09 +0100
+Message-ID: <CA+chaQcvM9dwu665hiJdV3EYaOYpFa21xB5+G91T5msNvmYi9w@mail.gmail.com>
+To: Denys Dmytriyenko <denis@denix.org>,
+	Jose Lamego <jose.a.lamego@linux.intel.com>
+X-Content-Filtered-By: Mailman/MimeDel 2.1.12
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>,
+	Denys Dmytriyenko <denys@ti.com>
+Subject: Re: [meta-qt5][rocko][PATCH] qtwebengine: explicitly depend on bison-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.12
 Precedence: list
@@ -53,103 +57,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.openembedded.org/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 15 Jan 2018 12:40:30 -0000
+X-List-Received-Date: Mon, 15 Jan 2018 18:00:09 -0000
+Content-Type: text/plain; charset="UTF-8"
 
-The haveged daemon is also useful on sysvinit-based systems, so we add
-a init script for this use-case.
+Using the same e-mail thread for both patches for master and rocko, caused
+the one for master being automatically marked as superseded by the rocko
+one, see:
+https://patchwork.openembedded.org/patch/147192/
 
-Signed-off-by: Otavio Salvador <otavio@ossystems.com.br>
----
+This is a system generated Comment: Patch 147192 was automatically
+marked as superseded by patch 147193.
 
-Changes in v3:
- - rebase on top of master-next
+I don't know if there is something we can change in patchwork to be
+less stupid (other than replacing it with something more clever like
+gerrit). This time I've noticed that there was patch for master as
+well in the e-mail client, but looking just on patchwork I wouldn't
+have noticed at all, not sure how many other patches are lost like
+this.
 
-Changes in v2:
- - rebase on top of master
 
- .../haveged/haveged/haveged.sysvinit               | 35 ++++++++++++++++++++++
- meta-oe/recipes-extended/haveged/haveged_1.9.1.bb  |  9 +++++-
- 2 files changed, 43 insertions(+), 1 deletion(-)
- create mode 100755 meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
+On Thu, Jan 11, 2018 at 2:45 AM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-diff --git a/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit b/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
-new file mode 100755
-index 000000000..98b8857e7
---- /dev/null
-+++ b/meta-oe/recipes-extended/haveged/haveged/haveged.sysvinit
-@@ -0,0 +1,35 @@
-+#!/bin/sh
-+
-+PATH=/bin:/usr/bin:/sbin:/usr/sbin
-+
-+pidfile=/var/run/haveged.pid
-+
-+# source function library
-+. /etc/init.d/functions
-+
-+case "$1" in
-+    start)
-+    echo -n "Starting havege entropy daemon... "
-+    start-stop-daemon --start --quiet --pidfile $pidfile --name haveged --startas haveged --  -w 1024 -v 0 && success || failure
-+    echo
-+    ;;
-+    stop)
-+    echo -n "Stopping havege entropy daemon... "
-+    start-stop-daemon --stop --quiet --pidfile $pidfile --name haveged
-+    success
-+    echo
-+    ;;
-+    restart)
-+    $0 stop
-+    sleep 1
-+    $0 start
-+    ;;
-+    status)
-+    status haveged
-+    ;;
-+    *)
-+    echo "Usage: /etc/init.d/haveged {start|stop|restart|status}"
-+    exit 1
-+esac
-+
-+exit 0
-diff --git a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb b/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
-index bb44c4138..419c85f51 100644
---- a/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
-+++ b/meta-oe/recipes-extended/haveged/haveged_1.9.1.bb
-@@ -7,12 +7,13 @@ LIC_FILES_CHKSUM="file://COPYING;md5=d32239bcb673463ab874e80d47fae504"
- 
- SRC_URI = "http://www.issihosts.com/haveged/haveged-${PV}.tar.gz \
-     file://remove-systemd-unit-503.patch \
-+    file://haveged.sysvinit \
- "
- 
- SRC_URI[md5sum] = "015ff58cd10607db0e0de60aeca2f5f8"
- SRC_URI[sha256sum] = "9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1ac4ad50d21ced3715"
- 
--inherit autotools systemd
-+inherit autotools update-rc.d systemd
- 
- EXTRA_OECONF = "\
-     --enable-init=service.redhat \
-@@ -21,10 +22,16 @@ EXTRA_OECONF = "\
-     --enable-threads=no \
- "
- 
-+INITSCRIPT_PACKAGES = "${PN}"
-+INITSCRIPT_NAME = "haveged"
-+INITSCRIPT_PARAMS_${PN} = "defaults 9"
-+
- SYSTEMD_PACKAGES = "${PN}"
- SYSTEMD_SERVICE_${PN} = "haveged.service"
- 
- do_install_append() {
-+    install -D -m 755 ${WORKDIR}/haveged.sysvinit ${D}${sysconfdir}/init.d/haveged
-+
-     mkdir -p ${D}${systemd_unitdir}/system
-     install -p -m644 ${B}/init.d/haveged.service ${D}${systemd_unitdir}/system
- }
--- 
-2.15.1
-
+> From: Denys Dmytriyenko <denys@ti.com>
+>
+> QtWebEngine uses bison during the build. While normally bison-native gets
+> staged into sysroot indirectly by the toolchain via binutils-cross, it's
+> better to have the dependency listed explicitly for deterministic builds.
+> Otherwise, when using an external toolchain, it fails like this:
+>
+> | FAILED: gen/blink/core/XPathGrammar.cpp gen/blink/core/XPathGrammar.h
+> | .../qtwebengine/5.9.3+...-r0/recipe-sysroot-native/usr/bin/
+> python-native/python2
+> |    ../../../../git/src/3rdparty/chromium/third_party/WebKit/
+> Source/build/scripts/rule_bison.py
+> |    ../../../../git/src/3rdparty/chromium/third_party/WebKit/Source/core/xml/XPathGrammar.y
+> gen/blink/core bison
+> | Traceback (most recent call last):
+> |   File "../../../../git/src/3rdparty/chromium/third_party/WebKit/
+> Source/build/scripts/rule_bison.py", line 83, in <module>
+> |     returnCode = subprocess.call([bisonExe, '-d', '-p', prefix,
+> inputFile, '-o', outputCpp])
+> |   File ".../qtwebengine/5.9.3+...-r0/recipe-sysroot-native/usr/lib/python2.7/subprocess.py",
+> line 168, in call
+> |     return Popen(*popenargs, **kwargs).wait()
+> |   File ".../qtwebengine/5.9.3+...-r0/recipe-sysroot-native/usr/lib/python2.7/subprocess.py",
+> line 390, in __init__
+> |     errread, errwrite)
+> |   File ".../qtwebengine/5.9.3+...-r0/recipe-sysroot-native/usr/lib/python2.7/subprocess.py",
+> line 1024, in _execute_child
+> |     raise child_exception
+> | OSError: [Errno 2] No such file or directory
+>
+> Signed-off-by: Denys Dmytriyenko <denys@ti.com>
+> ---
+>  recipes-qt/qt5/qtwebengine_git.bb | 1 +
+>  1 file changed, 1 insertion(+)
+>
+> diff --git a/recipes-qt/qt5/qtwebengine_git.bb b/recipes-qt/qt5/
+> qtwebengine_git.bb
+> index 1f53e4a..ed179de 100644
+> --- a/recipes-qt/qt5/qtwebengine_git.bb
+> +++ b/recipes-qt/qt5/qtwebengine_git.bb
+> @@ -15,6 +15,7 @@ LIC_FILES_CHKSUM = " \
+>  DEPENDS += " \
+>      ninja-native \
+>      yasm-native \
+> +    bison-native \
+>      qtwebchannel \
+>      qtbase qtdeclarative qtxmlpatterns qtquickcontrols qtquickcontrols2 \
+>      qtlocation \
+> --
+> 2.7.4
+>
+> --
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.openembedded.org/mailman/listinfo/openembedded-devel
+>
 
